@@ -51,8 +51,14 @@ database.default.password = castopod
 > _NB._ You can tweak your environment by setting more environment variables. See the `./src/env` for examples or the [CodeIgniter4 User Guide](https://codeigniter.com/user_guide/index.html) for more info.
 
 3. Add the repository you've cloned to docker desktop's `Settings` > `Resources` > `File Sharing`.
+4. Install castopod's php dependencies
+   - The project's dependencies aren't included in the repository, you have to download them using the composer service defined in `docker-compose.yml`
 
-### Start dev docker containers
+```bash
+docker-compose run --rm composer install --ignore-platform-reqs
+```
+
+### Start docker containers
 
 Go to project's root folder and run:
 
@@ -60,31 +66,21 @@ Go to project's root folder and run:
 # starts all services declared in docker-compose.yml file
 # -d option starts the containers in the background
 docker-compose up -d
+
+# See all running processes (you should see 3 processes running)
+docker ps
+
+# Alternatively, you can check all processes (you should see composer with an Exited status)
+docker ps -a
 ```
 
-> The command will boot 3 containers in the background:
+> The `docker-compose up -d` command will boot 3 containers in the background:
 >
 > - `castopod_app`: a php based container with codeigniter requirements installed
 > - `castopod_mariadb`: a [mariadb](https://mariadb.org/) server for persistent data
 > - `castopod_phpmyadmin`: a phpmyadmin server to visualize the mariadb database
 >
 > _NB._ `./mariadb`, `./phpmyadmin` folders will be mounted in the project's root directory to persist data and logs.
-
-### Install / update app dependencies using the `composer` service
-
-The project's dependencies aren't included in the repository, you have to download them using the composer service defined in `docker-compose.yml`
-
-```bash
-docker-compose run --rm composer install --ignore-platform-reqs
-```
-
-Similarly, you can update the project's dependencies using the same service:
-
-```bash
-docker-compose run --rm composer update --ignore-platform-reqs
-```
-
-> _NB._ Both commands look for the `composer.json` file to find castopod's php dependencies, all of which live in the `./src/vendor` folder. For more info, check out [Composer documentation](https://getcomposer.org/doc/).
 
 ### Start hacking
 
@@ -97,3 +93,38 @@ To see your changes, go to:
 
   - **Username**: podlibre
   - **Password**: castopod
+
+---
+
+### Going Further during development
+
+#### Update app dependencies
+
+You can update the project's dependencies using the `composer` service:
+
+```bash
+docker-compose run --rm composer update --ignore-platform-reqs
+```
+
+> _NB._ Composer commands look for the `composer.json` file to find castopod's php dependencies, all of which live in the `./src/vendor` folder. For more info, check out [Composer documentation](https://getcomposer.org/doc/).
+
+#### Useful docker / docker-compose commands
+
+```bash
+# monitor the app container
+docker logs --tail 50 --follow --timestamps castopod_app
+
+# monitor the mariadb container
+docker logs --tail 50 --follow --timestamps castopod_mariadb
+
+# monitor the phpmyadmin container
+docker logs --tail 50 --follow --timestamps castopod_phpmyadmin
+
+# restart docker containers
+docker-compose restart
+
+# Destroy all containers, opposite of `up` command
+docker-compose down
+```
+
+Check [docker](https://docs.docker.com/engine/reference/commandline/docker/) and [docker-compose](https://docs.docker.com/compose/reference/) documentations for more insights.
