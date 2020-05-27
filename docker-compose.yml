@@ -1,0 +1,63 @@
+version: "3"
+
+networks:
+  castopod:
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: "castopod_app"
+    command: ["php", "spark", "serve", "--host", "0.0.0.0"]
+    ports:
+      - 8080:8080
+    volumes:
+      - ./src:/castopod
+    depends_on:
+      - mariadb
+    networks:
+      - castopod
+
+  mariadb:
+    image: mariadb:latest
+    container_name: "castopod_mariadb"
+    ports:
+      - 3306:3306
+    volumes:
+      - mariadb:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: castopod
+      MYSQL_USER: podlibre
+      MYSQL_PASSWORD: castopod
+    networks:
+      - castopod
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: "castopod_phpmyadmin"
+    environment:
+      PMA_HOST: mariadb
+      PMA_PORT: 3306
+    ports:
+      - 8888:80
+    volumes:
+      - phpmyadmin:/sessions
+    depends_on:
+      - mariadb
+    networks:
+      - castopod
+
+  composer:
+    image: composer:latest
+    container_name: composer
+    volumes:
+      - ./src:/var/www/html
+    working_dir: /var/www/html
+    networks:
+      - castopod
+
+volumes:
+  mariadb:
+  phpmyadmin:
