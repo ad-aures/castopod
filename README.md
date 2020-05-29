@@ -82,6 +82,23 @@ docker ps -a
 >
 > _NB._ `./mariadb`, `./phpmyadmin` folders will be mounted in the project's root directory to persist data and logs.
 
+
+### Initialize and populate database
+
+Build the database with the migrate command:
+
+```bash
+# loads the database schema during first migration
+docker-compose run --rm app php spark migrate
+```
+
+Populate the database with the required data:
+
+```bash
+# Populates all categories
+docker-compose run --rm app php spark db:seed CategorySeeder
+```
+
 ### Start hacking
 
 You're all set! Start working your magic by updating the project's files! Help yourself to the [CodeIgniter4 User Guide](https://codeigniter.com/user_guide/index.html) for more insights.
