@@ -128,3 +128,24 @@ docker-compose down
 ```
 
 Check [docker](https://docs.docker.com/engine/reference/commandline/docker/) and [docker-compose](https://docs.docker.com/compose/reference/) documentations for more insights.
+
+### Developing inside a Container
+
+If you're working in VSCode, you can take advantage of the `./.devcontainer/` folder. It defines a development container with preinstalled VSCode extensions so you don't have to worry about them. The container will be loaded with php, composer and git:
+
+1. Install the VSCode extension [Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+2. `Ctrl/Cmd + Shift + P` > `Open in container`
+
+The VSCode window will reload inside the dev container.
+
+You can check that the required packages are running in the console (`Terminal` > `New Terminal`):
+
+```bash
+php -v
+
+composer -V
+
+git version
+```
+
+For more info, see [VSCode Remote Containers](https://code.visualstudio.com/docs/remote/containers)

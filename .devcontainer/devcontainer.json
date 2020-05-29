@@ -1,0 +1,16 @@
+// For format details, see https://aka.ms/vscode-remote/devcontainer.json or this file's README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.117.1/containers/docker-existing-dockerfile
+{
+	"name": "Existing Dockerfile",
+	"dockerFile": "./Dockerfile",
+	"settings": {
+		"terminal.integrated.shell.linux": null
+	},
+	"extensions": [
+		"mikestead.dotenv",
+		"bmewburn.vscode-intelephense-client",
+		"streetsidesoftware.code-spell-checker",
+		"naumovs.color-highlight",
+		"heybourn.headwind"
+	]
+}
