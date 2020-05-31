@@ -9,3 +9,4 @@ Castopod uses the following components:
 - [Rollup](https://github.com/rollup/rollup) ([MIT license](https://github.com/rollup/rollup/blob/master/LICENSE.md))
 - [Svelte](https://github.com/sveltejs/svelte) ([MIT license](https://github.com/sveltejs/svelte/blob/master/LICENSE))
 - [User agent list](https://github.com/opawg/user-agents) ([by Open Podcast Analytics Working Group](https://github.com/opawg)) ([MIT license](https://github.com/opawg/user-agents/blob/master/LICENSE))
+- [MaxMind DB Reader PHP API](https://github.com/maxmind/MaxMind-DB-Reader-php) ([Apache License 2.0](https://github.com/maxmind/MaxMind-DB-Reader-php/blob/master/LICENSE))
