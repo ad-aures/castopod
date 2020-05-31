@@ -4,16 +4,16 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class CategoryModel extends Model
+class LanguageModel extends Model
 {
-    protected $table = 'categories';
+    protected $table = 'languages';
     protected $primaryKey = 'id';
 
     protected $allowedFields = [
-        'apple_category', 'google_category',
+        'code',
     ];
 
-    protected $returnType = 'App\Entities\Category';
+    protected $returnType = 'App\Entities\Language';
     protected $useSoftDeletes = false;
 
     protected $useTimestamps = false;

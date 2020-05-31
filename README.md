@@ -97,6 +97,7 @@ Populate the database with the required data:
 ```bash
 # Populates all categories
 docker-compose run --rm app php spark db:seed CategorySeeder
+docker-compose run --rm app php spark db:seed LanguageSeeder
 ```
 
 ### Start hacking
