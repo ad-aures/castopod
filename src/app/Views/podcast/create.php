@@ -1,5 +1,5 @@
 <?=helper('form')?>
-<?=$this->extend('layouts\default')?>
+<?=$this->extend('layouts/default')?>
 
 <?=$this->section('content')?>
 
