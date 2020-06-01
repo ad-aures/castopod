@@ -1,4 +1,3 @@
-<?=helper('form')?>
 <?=$this->extend('layouts/default')?>
 
 <?=$this->section('content')?>
@@ -9,7 +8,7 @@
     <?=\Config\Services::validation()->listErrors()?>
 </div>
 
-<?=form_open_multipart('/podcast/create', ["method" => "post", "class" => "flex flex-col max-w-md"])?>
+<?=form_open_multipart('podcasts/create', ["method" => "post", "class" => "flex flex-col max-w-md"])?>
     <?=csrf_field()?>
 
     <div class="flex flex-col mb-4">

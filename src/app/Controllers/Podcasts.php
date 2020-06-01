@@ -5,7 +5,7 @@ use App\Models\LanguageModel;
 use App\Models\PodcastModel;
 use RuntimeException;
 
-class Podcast extends BaseController
+class Podcasts extends BaseController
 {
     public function index()
     {
@@ -15,10 +15,11 @@ class Podcast extends BaseController
     public function create()
     {
         $model = new PodcastModel();
+        helper(['form', 'url']);
 
         if (!$this->validate([
             'title' => 'required',
-            'name' => 'required|alpha_dash',
+            'name' => 'required|regex_match[^[a-z0-9\_]{1,191}$]',
             'description' => 'required|max_length[4000]',
             'image' => 'uploaded[image]|is_image[image]|ext_in[image,jpg,png]|max_dims[image,3000,3000]',
             'owner_email' => 'required|valid_email|permit_empty',
@@ -38,20 +39,23 @@ class Podcast extends BaseController
                 'browser_lang' => $browser_lang,
             ];
 
-            echo view('podcast/create', $data);
+            echo view('podcasts/create', $data);
         } else {
             $image = $this->request->getFile('image');
             if (!$image->isValid()) {
                 throw new RuntimeException($image->getErrorString() . '(' . $image->getError() . ')');
             }
-            $image_path = $image->store();
+            $podcast_name = $this->request->getVar('name');
+            $image_name = 'cover.' . $image->getExtension();
+            $image_storage_folder = 'media/' . $podcast_name . '/';
+            $image->move($image_storage_folder, $image_name);
 
             $model->save([
                 'title' => $this->request->getVar('title'),
-                'name' => $this->request->getVar('name'),
+                'name' => $podcast_name,
                 'description' => $this->request->getVar('description'),
                 'episode_description_footer' => $this->request->getVar('episode_description_footer'),
-                'image' => $image_path,
+                'image' => $image_storage_folder . $image_name,
                 'language' => $this->request->getVar('language'),
                 'category' => $this->request->getVar('category'),
                 'explicit' => $this->request->getVar('explicit') or false,
@@ -65,7 +69,18 @@ class Podcast extends BaseController
                 'custom_html_head' => $this->request->getVar('custom_html_head'),
             ]);
 
-            echo view('podcast/success');
+            return redirect()->to(base_url('/@' . $podcast_name));
         }
+    }
+
+    public function podcastByHandle($handle)
+    {
+        $model = new PodcastModel();
+
+        $podcast_name = substr($handle, 1);
+
+        $data['podcast'] = $model->where('name', $podcast_name)->first();
+
+        return view('podcasts/view.php', $data);
     }
 }
