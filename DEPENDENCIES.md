@@ -10,5 +10,4 @@ Castopod uses the following components:
 - [Svelte](https://github.com/sveltejs/svelte) ([MIT license](https://github.com/sveltejs/svelte/blob/master/LICENSE))
 - [User agent list](https://github.com/opawg/user-agents) ([by Open Podcast Analytics Working Group](https://github.com/opawg)) ([MIT license](https://github.com/opawg/user-agents/blob/master/LICENSE))
 - [WhichBrowser/Parser-PHP](https://github.com/WhichBrowser/Parser-PHP) ([MIT License](https://github.com/WhichBrowser/Parser-PHP/blob/master/LICENSE))
-- [TinyMCE](https://github.com/tinymce/tinymce) ([GNU Lesser General Public License v2.1](https://github.com/tinymce/tinymce/blob/develop/LICENSE.TXT))
-
+- [Quill Rich Text Editor](https://github.com/quilljs/quill) ([BSD 3-Clause "New" or "Revised" License](https://github.com/quilljs/quill/blob/develop/LICENSE))
