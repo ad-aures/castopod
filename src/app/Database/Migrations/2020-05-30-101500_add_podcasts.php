@@ -34,10 +34,6 @@ class AddPodcasts extends Migration
                 'comment' => 'The show description. Where description is text containing one or more sentences describing your podcast to potential listeners. The maximum amount of text allowed for this tag is 4000 characters. To include links in your description or rich HTML, adhere to the following technical guidelines: enclose all portions of your XML that contain embedded HTML in a CDATA section to prevent formatting issues, and to ensure proper link functionality.',
                 'null' => true,
             ],
-            'episode_description_footer' => [
-                'type' => 'TEXT',
-                'null' => true,
-            ],
             'image' => [
                 'type' => 'VARCHAR',
                 'constraint' => 1024,
@@ -102,8 +98,14 @@ class AddPodcasts extends Migration
                 'default' => 0,
                 'comment' => 'The podcast update status.  If you will never publish another episode to your show, use this tag.  Specifying the <itunes:complete> tag with a Yes value indicates that a podcast is complete and you will not post any more episodes in the future.  Specifying any value other than Yes has no effect.',
             ],
+            'episode_description_footer' => [
+                'type' => 'TEXT',
+                'comment' => 'The text that will be added in every episode description (show notes).',
+                'null' => true,
+            ],
             'custom_html_head' => [
                 'type' => 'TEXT',
+                'comment' => 'The HTML code that will be added to evey page for this podcast. (You could add Google Analytics tracking code here for instance.)',
                 'null' => true,
             ],
             'created_at' => [
