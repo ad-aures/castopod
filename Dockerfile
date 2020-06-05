@@ -1,6 +1,6 @@
 FROM php:latest
 
-COPY ./src /castopod
+COPY . /castopod
 WORKDIR /castopod
 
 ### Install CodeIgniter's server requirements

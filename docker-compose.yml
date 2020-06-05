@@ -13,7 +13,7 @@ services:
     ports:
       - 8080:8080
     volumes:
-      - ./src:/castopod
+      - .:/castopod
     depends_on:
       - mariadb
     networks:
@@ -21,7 +21,7 @@ services:
 
   mariadb:
     image: mariadb:latest
-    container_name: "castopod_mariadb"
+    container_name: castopod_mariadb
     ports:
       - 3306:3306
     volumes:
@@ -36,7 +36,7 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
-    container_name: "castopod_phpmyadmin"
+    container_name: castopod_phpmyadmin
     environment:
       PMA_HOST: mariadb
       PMA_PORT: 3306
@@ -51,10 +51,19 @@ services:
 
   composer:
     image: composer:latest
-    container_name: composer
+    container_name: castopod_composer
     volumes:
-      - ./src:/var/www/html
+      - .:/var/www/html
     working_dir: /var/www/html
+    networks:
+      - castopod
+
+  node:
+    image: node:lts
+    container_name: castopod_node
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
     networks:
       - castopod
 

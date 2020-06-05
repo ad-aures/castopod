@@ -1,0 +1,35 @@
+{
+  "name": "castopod",
+  "version": "0.0.0-development",
+  "description": "Castopod is an open-source hosting platform made for podcasters who want engage and interact with their audience.",
+  "private": true,
+  "license": "AGPL-3.0-or-later",
+  "repository": {
+    "type": "git",
+    "url": "https://code.podlibre.org/podlibre/castopod.git"
+  },
+  "scripts": {
+    "build:css": "postcss app/Javascript/assets/styles/index.css -o app/Views/index.css",
+    "watch:css": "postcss app/Javascript/assets/styles/index.css -o app/Views/index.css -w",
+    "commit": "git-cz"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@tailwindcss/custom-forms": "^0.2.1",
+    "cz-conventional-changelog": "^3.2.0",
+    "husky": "^4.2.5",
+    "postcss-cli": "^7.1.1",
+    "tailwindcss": "^1.4.6"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  }
+}
