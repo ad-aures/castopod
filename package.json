@@ -9,8 +9,8 @@
     "url": "https://code.podlibre.org/podlibre/castopod.git"
   },
   "scripts": {
-    "build:css": "postcss app/Javascript/assets/styles/index.css -o app/Views/index.css",
-    "watch:css": "postcss app/Javascript/assets/styles/index.css -o app/Views/index.css -w",
+    "build:css": "postcss app/Javascript/assets/styles/index.css -o public/index.css",
+    "watch:css": "postcss app/Javascript/assets/styles/index.css -o public/index.css -w",
     "commit": "git-cz"
   },
   "devDependencies": {
