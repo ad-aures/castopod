@@ -38,7 +38,6 @@ class AddPodcasts extends Migration
             ],
             'description' => [
                 'type' => 'TEXT',
-                'null' => true,
                 'comment' =>
                     'The show description. Where description is text containing one or more sentences describing your podcast to potential listeners. The maximum amount of text allowed for this tag is 4000 characters. To include links in your description or rich HTML, adhere to the following technical guidelines: enclose all portions of your XML that contain embedded HTML in a CDATA section to prevent formatting issues, and to ensure proper link functionality.',
             ],
@@ -126,7 +125,7 @@ class AddPodcasts extends Migration
             'custom_html_head' => [
                 'type' => 'TEXT',
                 'comment' =>
-                    'The HTML code that will be added to evey page for this podcast. (You could add Google Analytics tracking code here for instance.)',
+                    'The HTML code that will be added to every page for this podcast. (You could add Google Analytics tracking code here for instance.)',
                 'null' => true,
             ],
             'created_at' => [

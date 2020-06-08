@@ -30,6 +30,7 @@ class AddCategories extends Migration
             'code' => [
                 'type' => 'VARCHAR',
                 'constraint' => 1024,
+                'unique' => true,
             ],
             'apple_category' => [
                 'type' => 'VARCHAR',
