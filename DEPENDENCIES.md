@@ -10,5 +10,6 @@ Castopod uses the following components:
 - [Svelte](https://github.com/sveltejs/svelte) ([MIT license](https://github.com/sveltejs/svelte/blob/master/LICENSE))
 - [User agent list](https://github.com/opawg/user-agents) ([by Open Podcast Analytics Working Group](https://github.com/opawg)) ([MIT license](https://github.com/opawg/user-agents/blob/master/LICENSE))
 - [WhichBrowser/Parser-PHP](https://github.com/WhichBrowser/Parser-PHP) ([MIT License](https://github.com/WhichBrowser/Parser-PHP/blob/master/LICENSE))
+- [GeoIP2 PHP API](https://github.com/maxmind/GeoIP2-php) ([Apache License 2.0](https://github.com/maxmind/GeoIP2-php/blob/master/LICENSE))
 - [Quill Rich Text Editor](https://github.com/quilljs/quill) ([BSD 3-Clause "New" or "Revised" License](https://github.com/quilljs/quill/blob/develop/LICENSE))
 - [getID3](https://github.com/JamesHeinrich/getID3) ([GNU General Public License v3](https://github.com/JamesHeinrich/getID3/blob/2.0/licenses/license.gpl-30.txt))
