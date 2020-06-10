@@ -2,18 +2,18 @@
 /**
  * Class AddPlatforms
  * Creates platforms table in database
- * @author     Benjamin Bellamy <ben@podlibre.org>
+ *
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
  */
+
 namespace App\Database\Migrations;
 
-use \CodeIgniter\Database\Migration;
+use CodeIgniter\Database\Migration;
 
 class AddPlatforms extends Migration
 {
-
     public function up()
     {
         $this->forge->addField([
@@ -62,7 +62,8 @@ class AddPlatforms extends Migration
                 'type' => 'TINYINT',
                 'constraint' => 1,
                 'default' => 0,
-                'comment' => 'True if the platform link should be displayed by default.',
+                'comment' =>
+                    'True if the platform link should be displayed by default.',
             ],
             'ios_deeplink' => [
                 'type' => 'TINYINT',
@@ -74,7 +75,8 @@ class AddPlatforms extends Migration
                 'type' => 'TINYINT',
                 'constraint' => 1,
                 'default' => 0,
-                'comment' => 'Android deeplinking for this platform: 0=No, 1=Manual, 2=Automatic.',
+                'comment' =>
+                    'Android deeplinking for this platform: 0=No, 1=Manual, 2=Automatic.',
             ],
             'logo_file_name' => [
                 'type' => 'VARCHAR',

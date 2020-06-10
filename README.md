@@ -23,7 +23,6 @@ Moreover Podcasters can choose to publish on Castopod while keeping their existi
 
 You can check castopod's documentation for [setting up a development environment](./docs/setup-development.md).
 
-
 ## Support
 
-[Castopod](https://nlnet.nl/project/Castopod/) was funded through the [NGI0 Discovery](https://nlnet.nl/discovery/) Fund, a fund established by NLnet with financial support from the European Commission's [Next Generation Internet](https://www.ngi.eu/) programme, under the aegis of DG Communications Networks, Content and Technology under grant agreement No 825322. 
+[Castopod](https://nlnet.nl/project/Castopod/) was funded through the [NGI0 Discovery](https://nlnet.nl/discovery/) Fund, a fund established by NLnet with financial support from the European Commission's [Next Generation Internet](https://www.ngi.eu/) programme, under the aegis of DG Communications Networks, Content and Technology under grant agreement No 825322.

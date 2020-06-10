@@ -4,7 +4,7 @@ use CodeIgniter\Config\BaseConfig;
 
 class Cache extends BaseConfig
 {
-	/*
+    /*
 	|--------------------------------------------------------------------------
 	| Primary Handler
 	|--------------------------------------------------------------------------
@@ -13,9 +13,9 @@ class Cache extends BaseConfig
 	| it is not available, the $backupHandler will be used in its place.
 	|
 	*/
-	public $handler = 'file';
+    public $handler = 'file';
 
-	/*
+    /*
 	|--------------------------------------------------------------------------
 	| Backup Handler
 	|--------------------------------------------------------------------------
@@ -25,9 +25,9 @@ class Cache extends BaseConfig
 	| always available, though that's not always practical for the app.
 	|
 	*/
-	public $backupHandler = 'dummy';
+    public $backupHandler = 'dummy';
 
-	/*
+    /*
 	|--------------------------------------------------------------------------
 	| Cache Directory Path
 	|--------------------------------------------------------------------------
@@ -36,9 +36,9 @@ class Cache extends BaseConfig
 	| system.
 	|
 	*/
-	public $storePath = WRITEPATH . 'cache/';
+    public $storePath = WRITEPATH . 'cache/';
 
-	/*
+    /*
 	|--------------------------------------------------------------------------
 	| Cache Include Query String
 	|--------------------------------------------------------------------------
@@ -54,9 +54,9 @@ class Cache extends BaseConfig
 	|	             of query parameters.
 	|
 	*/
-	public $cacheQueryString = false;
+    public $cacheQueryString = false;
 
-	/*
+    /*
 	|--------------------------------------------------------------------------
 	| Key Prefix
 	|--------------------------------------------------------------------------
@@ -65,9 +65,9 @@ class Cache extends BaseConfig
 	| if you run multiple applications with the same cache engine.
 	|
 	*/
-	public $prefix = '';
+    public $prefix = '';
 
-	/*
+    /*
 	| -------------------------------------------------------------------------
 	| Memcached settings
 	| -------------------------------------------------------------------------
@@ -77,14 +77,14 @@ class Cache extends BaseConfig
 	|	See: https://codeigniter.com/user_guide/libraries/caching.html#memcached
 	|
 	*/
-	public $memcached = [
-		'host'   => '127.0.0.1',
-		'port'   => 11211,
-		'weight' => 1,
-		'raw'    => false,
-	];
+    public $memcached = [
+        'host' => '127.0.0.1',
+        'port' => 11211,
+        'weight' => 1,
+        'raw' => false,
+    ];
 
-	/*
+    /*
 	| -------------------------------------------------------------------------
 	| Redis settings
 	| -------------------------------------------------------------------------
@@ -92,15 +92,15 @@ class Cache extends BaseConfig
 	| the Redis or Predis drivers.
 	|
 	*/
-	public $redis = [
-		'host'     => '127.0.0.1',
-		'password' => null,
-		'port'     => 6379,
-		'timeout'  => 0,
-		'database' => 0,
-	];
+    public $redis = [
+        'host' => '127.0.0.1',
+        'password' => null,
+        'port' => 6379,
+        'timeout' => 0,
+        'database' => 0,
+    ];
 
-	/*
+    /*
 	|--------------------------------------------------------------------------
 	| Available Cache Handlers
 	|--------------------------------------------------------------------------
@@ -109,12 +109,12 @@ class Cache extends BaseConfig
 	| that are listed here are allowed to be used.
 	|
 	*/
-	public $validHandlers = [
-		'dummy'     => \CodeIgniter\Cache\Handlers\DummyHandler::class,
-		'file'      => \CodeIgniter\Cache\Handlers\FileHandler::class,
-		'memcached' => \CodeIgniter\Cache\Handlers\MemcachedHandler::class,
-		'predis'    => \CodeIgniter\Cache\Handlers\PredisHandler::class,
-		'redis'     => \CodeIgniter\Cache\Handlers\RedisHandler::class,
-		'wincache'  => \CodeIgniter\Cache\Handlers\WincacheHandler::class,
-	];
+    public $validHandlers = [
+        'dummy' => \CodeIgniter\Cache\Handlers\DummyHandler::class,
+        'file' => \CodeIgniter\Cache\Handlers\FileHandler::class,
+        'memcached' => \CodeIgniter\Cache\Handlers\MemcachedHandler::class,
+        'predis' => \CodeIgniter\Cache\Handlers\PredisHandler::class,
+        'redis' => \CodeIgniter\Cache\Handlers\RedisHandler::class,
+        'wincache' => \CodeIgniter\Cache\Handlers\WincacheHandler::class,
+    ];
 }

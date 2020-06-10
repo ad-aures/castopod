@@ -4,7 +4,7 @@ use CodeIgniter\Config\BaseConfig;
 
 class Logger extends BaseConfig
 {
-	/*
+    /*
 	|--------------------------------------------------------------------------
 	| Error Logging Threshold
 	|--------------------------------------------------------------------------
@@ -32,9 +32,9 @@ class Logger extends BaseConfig
 	| your log files will fill up very fast.
 	|
 	*/
-	public $threshold = 3;
+    public $threshold = 3;
 
-	/*
+    /*
 	|--------------------------------------------------------------------------
 	| Date Format for Logs
 	|--------------------------------------------------------------------------
@@ -43,9 +43,9 @@ class Logger extends BaseConfig
 	| codes to set your own date formatting
 	|
 	*/
-	public $dateFormat = 'Y-m-d H:i:s';
+    public $dateFormat = 'Y-m-d H:i:s';
 
-	/*
+    /*
 	|--------------------------------------------------------------------------
 	| Log Handlers
 	|--------------------------------------------------------------------------
@@ -69,64 +69,62 @@ class Logger extends BaseConfig
 	| the handler on top and continuing down.
 	|
 	*/
-	public $handlers = [
+    public $handlers = [
+        //--------------------------------------------------------------------
+        // File Handler
+        //--------------------------------------------------------------------
 
-		//--------------------------------------------------------------------
-		// File Handler
-		//--------------------------------------------------------------------
+        'CodeIgniter\Log\Handlers\FileHandler' => [
+            /*
+             * The log levels that this handler will handle.
+             */
+            'handles' => [
+                'critical',
+                'alert',
+                'emergency',
+                'debug',
+                'error',
+                'info',
+                'notice',
+                'warning',
+            ],
 
-		'CodeIgniter\Log\Handlers\FileHandler' => [
+            /*
+             * The default filename extension for log files.
+             * An extension of 'php' allows for protecting the log files via basic
+             * scripting, when they are to be stored under a publicly accessible directory.
+             *
+             * Note: Leaving it blank will default to 'log'.
+             */
+            'fileExtension' => '',
 
-			/*
-			 * The log levels that this handler will handle.
-			 */
-			'handles'         => [
-				'critical',
-				'alert',
-				'emergency',
-				'debug',
-				'error',
-				'info',
-				'notice',
-				'warning',
-			],
+            /*
+             * The file system permissions to be applied on newly created log files.
+             *
+             * IMPORTANT: This MUST be an integer (no quotes) and you MUST use octal
+             * integer notation (i.e. 0700, 0644, etc.)
+             */
+            'filePermissions' => 0644,
 
-			/*
-			 * The default filename extension for log files.
-			 * An extension of 'php' allows for protecting the log files via basic
-			 * scripting, when they are to be stored under a publicly accessible directory.
-			 *
-			 * Note: Leaving it blank will default to 'log'.
-			 */
-			'fileExtension'   => '',
+            /*
+             * Logging Directory Path
+             *
+             * By default, logs are written to WRITEPATH . 'logs/'
+             * Specify a different destination here, if desired.
+             */
+            'path' => '',
+        ],
 
-			/*
-			 * The file system permissions to be applied on newly created log files.
-			 *
-			 * IMPORTANT: This MUST be an integer (no quotes) and you MUST use octal
-			 * integer notation (i.e. 0700, 0644, etc.)
-			 */
-			'filePermissions' => 0644,
-
-			/*
-			 * Logging Directory Path
-			 *
-			 * By default, logs are written to WRITEPATH . 'logs/'
-			 * Specify a different destination here, if desired.
-			 */
-			'path'            => '',
-		],
-
-		/**
-		 * The ChromeLoggerHandler requires the use of the Chrome web browser
-		 * and the ChromeLogger extension. Uncomment this block to use it.
-		 */
-		//      'CodeIgniter\Log\Handlers\ChromeLoggerHandler' => [
-		//          /*
-		//           * The log levels that this handler will handle.
-		//           */
-		//          'handles' => ['critical', 'alert', 'emergency', 'debug',
-		//                        'error', 'info', 'notice', 'warning'],
-		//      ]
-	];
+        /**
+         * The ChromeLoggerHandler requires the use of the Chrome web browser
+         * and the ChromeLogger extension. Uncomment this block to use it.
+         */
+        //      'CodeIgniter\Log\Handlers\ChromeLoggerHandler' => [
+        //          /*
+        //           * The log levels that this handler will handle.
+        //           */
+        //          'handles' => ['critical', 'alert', 'emergency', 'debug',
+        //                        'error', 'info', 'notice', 'warning'],
+        //      ]
+    ];
 }

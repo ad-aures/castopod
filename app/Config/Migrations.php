@@ -4,7 +4,7 @@ use CodeIgniter\Config\BaseConfig;
 
 class Migrations extends BaseConfig
 {
-	/*
+    /*
 	|--------------------------------------------------------------------------
 	| Enable/Disable Migrations
 	|--------------------------------------------------------------------------
@@ -14,9 +14,9 @@ class Migrations extends BaseConfig
 	| and disable it back when you're done.
 	|
 	*/
-	public $enabled = true;
+    public $enabled = true;
 
-	/*
+    /*
 	|--------------------------------------------------------------------------
 	| Migrations table
 	|--------------------------------------------------------------------------
@@ -28,9 +28,9 @@ class Migrations extends BaseConfig
 	| will migrate up. This must be set.
 	|
 	*/
-	public $table = 'migrations';
+    public $table = 'migrations';
 
-	/*
+    /*
 	|--------------------------------------------------------------------------
 	| Timestamp Format
 	|--------------------------------------------------------------------------
@@ -45,6 +45,5 @@ class Migrations extends BaseConfig
 	|   Y_m_d_His_
 	|
 	*/
-	public $timestampFormat = 'Y-m-d-His_';
-
+    public $timestampFormat = 'Y-m-d-His_';
 }

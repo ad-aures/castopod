@@ -1,0 +1,13 @@
+{
+  "trailingComma": "es5",
+  "overrides": [
+    {
+      "files": "*.php",
+      "options": {
+        "phpVersion": "7.2",
+        "singleQuote": true,
+        "trailingCommaPHP": true
+      }
+    }
+  ]
+}

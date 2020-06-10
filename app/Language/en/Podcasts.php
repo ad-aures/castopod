@@ -1,8 +1,8 @@
 <?
 
 return [
-    "create" => "Create a Podcast",
-    "form" => [
+    'create' => 'Create a Podcast',
+    'form' => [
         'title' => 'Title',
         'name' => 'Name',
         'description' => 'Description',
@@ -138,4 +138,6 @@ return [
         'film_reviews' => 'Film Reviews',
         'tv_reviews' => 'TV Reviews',
     ],
+    'list_of_episodes' => 'List of episodes',
+    'no_episode' => 'No episode found' 
 ];

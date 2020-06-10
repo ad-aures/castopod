@@ -1,4 +1,6 @@
-<?php namespace Config;
+<?php
+
+namespace Config;
 
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
@@ -20,7 +22,8 @@ $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
 $routes->setAutoRoute(false);
-$routes->addPlaceholder('podcastName', '^@[a-z0-9\_]{1,191}$');
+$routes->addPlaceholder('podcastSlug', '@[a-z0-9\_]{1,191}');
+$routes->addPlaceholder('episodeSlug', '[a-z0-9\-]{1,191}');
 
 /**
  * --------------------------------------------------------------------
@@ -30,9 +33,18 @@ $routes->addPlaceholder('podcastName', '^@[a-z0-9\_]{1,191}$');
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
-$routes->add('/podcasts/create', 'Podcasts::create');
-$routes->add('/(:podcastName)', 'Podcasts::podcastByHandle/$1');
+$routes->get('/', 'Home::index', ['as' => 'home']);
+$routes->add('new-podcast', 'Podcasts::create', ['as' => 'podcasts_create']);
+
+$routes->group('(:podcastSlug)', function ($routes) {
+    $routes->add('/', 'Podcasts::view/$1', ['as' => 'podcasts_view']);
+    $routes->add('new-episode', 'Episodes::create/$1', [
+        'as' => 'episodes_create',
+    ]);
+    $routes->add('(:episodeSlug)', 'Episodes::view/$1/$2', [
+        'as' => 'episodes_view',
+    ]);
+});
 
 /**
  * --------------------------------------------------------------------

@@ -1,12 +1,19 @@
 <?php
+/**
+ * Class AddCategories
+ * Creates categories table in database
+ *
+ * @copyright  2020 Podlibre
+ * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
+ * @link       https://castopod.org/
+ */
 
 namespace App\Database\Migrations;
 
-use \CodeIgniter\Database\Migration;
+use CodeIgniter\Database\Migration;
 
 class AddCategories extends Migration
 {
-
     public function up()
     {
         $this->forge->addField([

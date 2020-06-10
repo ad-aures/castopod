@@ -1,31 +1,32 @@
 {
-	"name": "codeigniter4/appstarter",
-	"type": "project",
-	"description": "CodeIgniter4 starter app",
-	"homepage": "https://codeigniter.com",
-	"license": "MIT",
-	"require": {
-		"php": ">=7.2",
-		"codeigniter4/framework": "^4"
-	},
-	"require-dev": {
-		"mikey179/vfsstream": "1.6.*",
-		"phpunit/phpunit": "8.5.*"
-	},
-	"autoload-dev": {
-		"psr-4": {
-			"Tests\\Support\\": "tests/_support"
-		}
-	},
-	"scripts": {
-		"test": "phpunit",
-		"post-update-cmd": [
-			"@composer dump-autoload"
-		]
-	},
-	"support": {
-		"forum": "http://forum.codeigniter.com/",
-		"source": "https://github.com/codeigniter4/CodeIgniter4",
-		"slack": "https://codeigniterchat.slack.com"
-	}
+  "name": "podlibre/castopod",
+  "type": "project",
+  "description": "Castopod is an open-source hosting platform made for podcasters who want engage and interact with their audience.",
+  "homepage": "https://castopod.org",
+  "license": "AGPL-3.0-or-later",
+  "require": {
+    "php": ">=7.2",
+    "codeigniter4/framework": "^4",
+    "james-heinrich/getid3": "~2.0.0-dev"
+  },
+  "require-dev": {
+    "mikey179/vfsstream": "1.6.*",
+    "phpunit/phpunit": "8.5.*"
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\Support\\": "tests/_support"
+    }
+  },
+  "scripts": {
+    "test": "phpunit",
+    "post-update-cmd": [
+      "@composer dump-autoload"
+    ]
+  },
+  "support": {
+    "forum": "http://forum.codeigniter.com/",
+    "source": "https://github.com/codeigniter4/CodeIgniter4",
+    "slack": "https://codeigniterchat.slack.com"
+  }
 }

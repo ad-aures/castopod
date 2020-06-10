@@ -2,7 +2,7 @@
 /**
  * Class PlatformModel
  * Model for platforms table in database
- * @author     Benjamin Bellamy <ben@podlibre.org>
+ *
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/

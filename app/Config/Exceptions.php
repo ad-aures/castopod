@@ -8,7 +8,7 @@
 
 class Exceptions
 {
-	/*
+    /*
 	 |--------------------------------------------------------------------------
 	 | LOG EXCEPTIONS?
 	 |--------------------------------------------------------------------------
@@ -17,18 +17,18 @@ class Exceptions
 	 |
 	 | Default: true
 	 */
-	public $log = true;
+    public $log = true;
 
-	/*
+    /*
 	 |--------------------------------------------------------------------------
 	 | DO NOT LOG STATUS CODES
 	 |--------------------------------------------------------------------------
 	 | Any status codes here will NOT be logged if logging is turned on.
 	 | By default, only 404 (Page Not Found) exceptions are ignored.
 	 */
-	public $ignoreCodes = [ 404 ];
+    public $ignoreCodes = [404];
 
-	/*
+    /*
 	|--------------------------------------------------------------------------
 	| Error Views Path
 	|--------------------------------------------------------------------------
@@ -37,5 +37,5 @@ class Exceptions
 	|
 	| Default: APPPATH.'Views/errors'
 	*/
-	public $errorViewPath = APPPATH . 'Views/errors';
+    public $errorViewPath = APPPATH . 'Views/errors';
 }

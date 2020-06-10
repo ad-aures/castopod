@@ -1,61 +1,68 @@
-<?php namespace App\Controllers;
+<?php
+/**
+ * @copyright  2020 Podlibre
+ * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
+ * @link       https://castopod.org/
+ */
+
+namespace App\Controllers;
 
 use App\Models\CategoryModel;
+use App\Models\EpisodeModel;
 use App\Models\LanguageModel;
 use App\Models\PodcastModel;
-use RuntimeException;
 
 class Podcasts extends BaseController
 {
-    public function index()
-    {
-        return view('podcast/index.php');
-    }
-
     public function create()
     {
-        $model = new PodcastModel();
-        helper(['form', 'url']);
+        helper(['form', 'database', 'file', 'misc']);
+        $podcast_model = new PodcastModel();
 
-        if (!$this->validate([
-            'title' => 'required',
-            'name' => 'required|regex_match[^[a-z0-9\_]{1,191}$]',
-            'description' => 'required|max_length[4000]',
-            'image' => 'uploaded[image]|is_image[image]|ext_in[image,jpg,png]|max_dims[image,3000,3000]',
-            'owner_email' => 'required|valid_email|permit_empty',
-            'type' => 'required',
-        ])) {
-            $langs = explode(',', $this->request->getServer('HTTP_ACCEPT_LANGUAGE'));
-            $browser_lang = '';
-            if (!empty($langs)) {
-                $browser_lang = substr($langs[0], 0, 2);
-            }
-
+        if (
+            !$this->validate([
+                'title' => 'required',
+                'name' => 'required|regex_match[^[a-z0-9\_]{1,191}$]',
+                'description' => 'required|max_length[4000]',
+                'image' =>
+                    'uploaded[image]|is_image[image]|ext_in[image,jpg,png]|max_dims[image,3000,3000]',
+                'owner_email' => 'required|valid_email|permit_empty',
+                'type' => 'required',
+            ])
+        ) {
             $languageModel = new LanguageModel();
             $categoryModel = new CategoryModel();
             $data = [
                 'languages' => $languageModel->findAll(),
                 'categories' => $categoryModel->findAll(),
-                'browser_lang' => $browser_lang,
+                'browser_lang' => get_browser_language(
+                    $this->request->getServer('HTTP_ACCEPT_LANGUAGE')
+                ),
+                'podcast_types' => field_enums(
+                    $podcast_model->prefixTable('podcasts'),
+                    'type'
+                ),
             ];
 
             echo view('podcasts/create', $data);
         } else {
             $image = $this->request->getFile('image');
-            if (!$image->isValid()) {
-                throw new RuntimeException($image->getErrorString() . '(' . $image->getError() . ')');
-            }
             $podcast_name = $this->request->getVar('name');
             $image_name = 'cover.' . $image->getExtension();
-            $image_storage_folder = 'media/' . $podcast_name . '/';
-            $image->move($image_storage_folder, $image_name);
+            $image_path = save_podcast_media(
+                $image,
+                $podcast_name,
+                $image_name
+            );
 
-            $model->save([
+            $podcast_model->save([
                 'title' => $this->request->getVar('title'),
                 'name' => $podcast_name,
                 'description' => $this->request->getVar('description'),
-                'episode_description_footer' => $this->request->getVar('episode_description_footer'),
-                'image' => $image_storage_folder . $image_name,
+                'episode_description_footer' => $this->request->getVar(
+                    'episode_description_footer'
+                ),
+                'image' => $image_path,
                 'language' => $this->request->getVar('language'),
                 'category' => $this->request->getVar('category'),
                 'explicit' => $this->request->getVar('explicit') or false,
@@ -66,21 +73,32 @@ class Podcasts extends BaseController
                 'copyright' => $this->request->getVar('copyright'),
                 'block' => $this->request->getVar('block') or false,
                 'complete' => $this->request->getVar('complete') or false,
-                'custom_html_head' => $this->request->getVar('custom_html_head'),
+                'custom_html_head' => $this->request->getVar(
+                    'custom_html_head'
+                ),
             ]);
 
-            return redirect()->to(base_url('/@' . $podcast_name));
+            return redirect()->to(
+                base_url(route_to('podcasts_view', '@' . $podcast_name))
+            );
         }
     }
 
-    public function podcastByHandle($handle)
+    public function view($slug)
     {
-        $model = new PodcastModel();
+        $podcast_model = new PodcastModel();
+        $episode_model = new EpisodeModel();
 
-        $podcast_name = substr($handle, 1);
+        $podcast_name = substr($slug, 1);
 
-        $data['podcast'] = $model->where('name', $podcast_name)->first();
+        $podcast = $podcast_model->where('name', $podcast_name)->first();
+        $data = [
+            'podcast' => $podcast,
+            'episodes' => $episode_model
+                ->where('podcast_id', $podcast->id)
+                ->findAll(),
+        ];
 
-        return view('podcasts/view.php', $data);
+        return view('podcasts/view', $data);
     }
 }

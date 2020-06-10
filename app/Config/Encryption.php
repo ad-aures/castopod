@@ -11,7 +11,7 @@ use CodeIgniter\Config\BaseConfig;
  */
 class Encryption extends BaseConfig
 {
-	/*
+    /*
 	  |--------------------------------------------------------------------------
 	  | Encryption Key Starter
 	  |--------------------------------------------------------------------------
@@ -21,9 +21,9 @@ class Encryption extends BaseConfig
 	  | See the user guide for more info.
 	 */
 
-	public $key = '';
+    public $key = '';
 
-	/*
+    /*
 	  |--------------------------------------------------------------------------
 	  | Encryption driver to use
 	  |--------------------------------------------------------------------------
@@ -31,6 +31,5 @@ class Encryption extends BaseConfig
 	  | One of the supported drivers, eg 'OpenSSL' or 'Sodium'.
 	  | The default driver, if you don't specify one, is 'OpenSSL'.
 	 */
-	public $driver = 'OpenSSL';
-
+    public $driver = 'OpenSSL';
 }

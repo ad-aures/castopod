@@ -12,7 +12,8 @@
     "streetsidesoftware.code-spell-checker",
     "naumovs.color-highlight",
     "heybourn.headwind",
-    "anish-m.ci-snippets2",
-    "wayou.vscode-todo-highlight"
+    "wayou.vscode-todo-highlight",
+    "esbenp.prettier-vscode",
+    "bradlc.vscode-tailwindcss"
   ]
 }

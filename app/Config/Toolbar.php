@@ -4,7 +4,7 @@ use CodeIgniter\Config\BaseConfig;
 
 class Toolbar extends BaseConfig
 {
-	/*
+    /*
 	|--------------------------------------------------------------------------
 	| Debug Toolbar
 	|--------------------------------------------------------------------------
@@ -16,18 +16,18 @@ class Toolbar extends BaseConfig
 	| toolbarMaxHistory = Number of history files, 0 for none or -1 for unlimited
 	|
 	*/
-	public $collectors = [
-		\CodeIgniter\Debug\Toolbar\Collectors\Timers::class,
-		\CodeIgniter\Debug\Toolbar\Collectors\Database::class,
-		\CodeIgniter\Debug\Toolbar\Collectors\Logs::class,
-		\CodeIgniter\Debug\Toolbar\Collectors\Views::class,
-		// \CodeIgniter\Debug\Toolbar\Collectors\Cache::class,
-		\CodeIgniter\Debug\Toolbar\Collectors\Files::class,
-		\CodeIgniter\Debug\Toolbar\Collectors\Routes::class,
-		\CodeIgniter\Debug\Toolbar\Collectors\Events::class,
-	];
+    public $collectors = [
+        \CodeIgniter\Debug\Toolbar\Collectors\Timers::class,
+        \CodeIgniter\Debug\Toolbar\Collectors\Database::class,
+        \CodeIgniter\Debug\Toolbar\Collectors\Logs::class,
+        \CodeIgniter\Debug\Toolbar\Collectors\Views::class,
+        // \CodeIgniter\Debug\Toolbar\Collectors\Cache::class,
+        \CodeIgniter\Debug\Toolbar\Collectors\Files::class,
+        \CodeIgniter\Debug\Toolbar\Collectors\Routes::class,
+        \CodeIgniter\Debug\Toolbar\Collectors\Events::class,
+    ];
 
-	/*
+    /*
 	|--------------------------------------------------------------------------
 	| Max History
 	|--------------------------------------------------------------------------
@@ -40,9 +40,9 @@ class Toolbar extends BaseConfig
 	| 0 (zero) to not have any history stored, or -1 for unlimited history.
 	|
 	*/
-	public $maxHistory = 20;
+    public $maxHistory = 20;
 
-	/*
+    /*
 	|--------------------------------------------------------------------------
 	| Toolbar Views Path
 	|--------------------------------------------------------------------------
@@ -50,9 +50,9 @@ class Toolbar extends BaseConfig
 	| MUST have a trailing slash.
 	|
 	*/
-	public $viewsPath = SYSTEMPATH . 'Debug/Toolbar/Views/';
+    public $viewsPath = SYSTEMPATH . 'Debug/Toolbar/Views/';
 
-	/*
+    /*
 	|--------------------------------------------------------------------------
 	| Max Queries
 	|--------------------------------------------------------------------------
@@ -64,5 +64,5 @@ class Toolbar extends BaseConfig
 	| $maxQueries defines the maximum amount of queries that will be stored.
 	|
 	*/
-	public $maxQueries = 100;
+    public $maxQueries = 100;
 }

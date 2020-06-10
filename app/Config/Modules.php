@@ -3,7 +3,7 @@
 // Cannot extend BaseConfig or looping resources occurs.
 class Modules
 {
-	/*
+    /*
 	 |--------------------------------------------------------------------------
 	 | Auto-Discovery Enabled?
 	 |--------------------------------------------------------------------------
@@ -12,9 +12,9 @@ class Modules
 	 | $activeExplorers below. If false, no auto-discovery will happen at all,
 	 | giving a slight performance boost.
 	 */
-	public $enabled = true;
+    public $enabled = true;
 
-	/*
+    /*
 	 |--------------------------------------------------------------------------
 	 | Auto-Discovery Within Composer Packages Enabled?
 	 |--------------------------------------------------------------------------
@@ -22,9 +22,9 @@ class Modules
 	 | If true, then auto-discovery will happen across all namespaces loaded
 	 | by Composer, as well as the namespaces configured locally.
 	 */
-	public $discoverInComposer = true;
+    public $discoverInComposer = true;
 
-	/*
+    /*
 	|--------------------------------------------------------------------------
 	| Auto-discover Rules
 	|--------------------------------------------------------------------------
@@ -33,35 +33,29 @@ class Modules
 	| and used during the current application request. If it is not
 	| listed here, only the base application elements will be used.
 	*/
-	public $activeExplorers = [
-		'events',
-		'registrars',
-		'routes',
-		'services',
-	];
+    public $activeExplorers = ['events', 'registrars', 'routes', 'services'];
 
-	/**
-	 * Should the application auto-discover the requested resources.
-	 *
-	 * Valid values are:
-	 *  - events
-	 *  - registrars
-	 *  - routes
-	 *  - services
-	 *
-	 * @param string $alias
-	 *
-	 * @return boolean
-	 */
-	public function shouldDiscover(string $alias)
-	{
-		if (! $this->enabled)
-		{
-			return false;
-		}
+    /**
+     * Should the application auto-discover the requested resources.
+     *
+     * Valid values are:
+     *  - events
+     *  - registrars
+     *  - routes
+     *  - services
+     *
+     * @param string $alias
+     *
+     * @return boolean
+     */
+    public function shouldDiscover(string $alias)
+    {
+        if (!$this->enabled) {
+            return false;
+        }
 
-		$alias = strtolower($alias);
+        $alias = strtolower($alias);
 
-		return in_array($alias, $this->activeExplorers);
-	}
+        return in_array($alias, $this->activeExplorers);
+    }
 }

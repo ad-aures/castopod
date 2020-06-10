@@ -1,4 +1,9 @@
 <?php
+/**
+ * @copyright  2020 Podlibre
+ * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
+ * @link       https://castopod.org/
+ */
 
 namespace App\Models;
 
@@ -10,6 +15,7 @@ class PodcastModel extends Model
     protected $primaryKey = 'id';
 
     protected $allowedFields = [
+        'id',
         'title',
         'name',
         'description',

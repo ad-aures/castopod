@@ -2,5 +2,4 @@
 
 class ForeignCharacters extends \CodeIgniter\Config\ForeignCharacters
 {
-
 }

@@ -1,4 +1,12 @@
 <?php
+/**
+ * Class AddEpisodes
+ * Creates episodes table in database
+ *
+ * @copyright  2020 Podlibre
+ * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
+ * @link       https://castopod.org/
+ */
 
 namespace App\Database\Migrations;
 
@@ -31,7 +39,6 @@ class AddEpisodes extends Migration
             'slug' => [
                 'type' => 'VARCHAR',
                 'constraint' => 191,
-                'unique' => true,
                 'comment' => 'Episode slug for URLs',
             ],
             'enclosure_url' => [
@@ -94,6 +101,7 @@ class AddEpisodes extends Migration
                 'type' => 'INT',
                 'constraint' => 10,
                 'unsigned' => true,
+                'null' => true,
                 'comment' =>
                     'An episode number. If all your episodes have numbers and you would like them to be ordered based on them use this tag for each one. Episode numbers are optional for <itunes:type> episodic shows, but are mandatory for serial shows. Where episode is a non-zero integer (1, 2, 3, etc.) representing your episode number.',
             ],
@@ -127,7 +135,6 @@ class AddEpisodes extends Migration
             ],
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->addKey('podcast_id', true);
         $this->forge->addUniqueKey(['podcast_id', 'slug']);
         $this->forge->addForeignKey('podcast_id', 'podcasts', 'id');
         $this->forge->createTable('episodes');

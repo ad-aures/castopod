@@ -125,15 +125,16 @@ nb-configuration.xml
 /phpunit*.xml
 /.phpunit.*.cache
 
-# Media files
-public/media/*
-
 # npm
 yarn.lock
 node_modules
 
-# potcss generated file
-public/index.css
+# public folder
+public/*
+!public/.htaccess
+!public/favicon.ico
+!public/index.php
+!public/robots.txt
 
 #-------------------------
 # Docker volumes
