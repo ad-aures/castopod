@@ -96,6 +96,7 @@ class Podcasts extends BaseController
                 ->where('podcast_id', $podcast->id)
                 ->findAll(),
         ];
+        self::stats($podcast->id);
 
         return view('podcasts/view', $data);
     }

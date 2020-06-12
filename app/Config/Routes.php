@@ -46,6 +46,13 @@ $routes->group('(:podcastSlug)', function ($routes) {
     ]);
 });
 
+// Route for podcast audio file analytics (/stats/podcast_id/episode_id/podcast_folder/filename.mp3)
+$routes->add('/stats/(:num)/(:num)/(:any)', 'Analytics::hit/$1/$2/$3');
+
+// Show the Unknown UserAgents
+$routes->add('/.well-known/unknown-useragents', 'UnknownUserAgents');
+$routes->add('/.well-known/unknown-useragents/(:num)', 'UnknownUserAgents/$1');
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing

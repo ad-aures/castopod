@@ -125,6 +125,7 @@ class Episodes extends BaseController
                 ->first(),
             'episode' => $episode_model->where('slug', $episode_slug)->first(),
         ];
+        self::stats($data['podcast']->id);
 
         return view('episodes/view.php', $data);
     }
