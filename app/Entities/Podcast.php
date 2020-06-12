@@ -12,13 +12,13 @@ use CodeIgniter\Entity;
 class Podcast extends Entity
 {
     protected $casts = [
+        'id' => 'integer',
         'title' => 'string',
         'name' => 'string',
         'description' => 'string',
-        'episode_description_footer' => '?string',
         'image' => 'string',
         'language' => 'string',
-        'category' => 'array',
+        'category' => 'string',
         'explicit' => 'boolean',
         'author' => '?string',
         'owner_name' => '?string',
@@ -27,6 +27,7 @@ class Podcast extends Entity
         'copyright' => '?string',
         'block' => 'boolean',
         'complete' => 'boolean',
+        'episode_description_footer' => '?string',
         'custom_html_head' => '?string',
     ];
 }

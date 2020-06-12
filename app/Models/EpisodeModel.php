@@ -27,7 +27,7 @@ class EpisodeModel extends Model
         'duration',
         'image',
         'explicit',
-        'episode_number',
+        'number',
         'season_number',
         'type',
         'block',

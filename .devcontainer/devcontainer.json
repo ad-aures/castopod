@@ -4,7 +4,15 @@
   "name": "Existing Dockerfile",
   "dockerFile": "./Dockerfile",
   "settings": {
-    "terminal.integrated.shell.linux": null
+    "terminal.integrated.shell.linux": "/bin/bash",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    },
+    "[php]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "color-highlight.markerType": "dot-before"
   },
   "extensions": [
     "mikestead.dotenv",

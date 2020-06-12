@@ -14,7 +14,7 @@ class Episodes extends BaseController
 {
     public function create($podcast_slug)
     {
-        helper(['form', 'database', 'file']);
+        helper(['form', 'database', 'media', 'id3']);
 
         $episode_model = new EpisodeModel();
         $podcast_model = new PodcastModel();
@@ -28,6 +28,7 @@ class Episodes extends BaseController
                 'title' => 'required',
                 'slug' => 'required',
                 'description' => 'required',
+                'type' => 'required',
             ])
         ) {
             $data = [
@@ -43,27 +44,40 @@ class Episodes extends BaseController
             $episode_slug = $this->request->getVar('slug');
 
             $episode_file = $this->request->getFile('episode_file');
-            $episode_file_metadata = get_file_metadata($episode_file);
-            $episode_file_name =
-                $episode_slug . '.' . $episode_file->getExtension();
-            $episode_path = save_podcast_media(
-                $episode_file,
-                $podcast_name,
-                $episode_file_name
-            );
+            $episode_file_metadata = get_file_tags($episode_file);
 
             $image = $this->request->getFile('image');
-            $image_path = '';
+
+            // By default, the episode's image path is set to the podcast's
+            $image_path = $podcast->image;
+
+            // check whether the user has inputted an image and store it
             if ($image->isValid()) {
-                $image_name = $episode_slug . '.' . $image->getExtension();
                 $image_path = save_podcast_media(
                     $image,
                     $podcast_name,
-                    $image_name
+                    $episode_slug
+                );
+            } elseif ($APICdata = $episode_file_metadata['attached_picture']) {
+                // if the user didn't input an image,
+                // check if the uploaded audio file has an attached cover and store it
+                $cover_image = new \CodeIgniter\Files\File('episode_cover');
+                file_put_contents($cover_image, $APICdata);
+
+                $image_path = save_podcast_media(
+                    $cover_image,
+                    $podcast_name,
+                    $episode_slug
                 );
             }
 
-            $episode_model->save([
+            $episode_path = save_podcast_media(
+                $episode_file,
+                $podcast_name,
+                $episode_slug
+            );
+
+            $episode = new \App\Entities\Episode([
                 'podcast_id' => $podcast->id,
                 'title' => $this->request->getVar('title'),
                 'slug' => $episode_slug,
@@ -76,13 +90,17 @@ class Episodes extends BaseController
                 'duration' => $episode_file_metadata['playtime_seconds'],
                 'image' => $image_path,
                 'explicit' => $this->request->getVar('explicit') or false,
-                'episode_number' =>
-                    $this->request->getVar('episode_number') or null,
-                'season_number' =>
-                    $this->request->getVar('season_number') or null,
+                'number' => $this->request->getVar('episode_number'),
+                'season_number' => $this->request->getVar('season_number')
+                    ? $this->request->getVar('season_number')
+                    : null,
                 'type' => $this->request->getVar('type'),
                 'block' => $this->request->getVar('block') or false,
             ]);
+
+            $episode_model->save($episode);
+
+            $episode_file = write_file_tags($podcast, $episode);
 
             return redirect()->to(
                 base_url(

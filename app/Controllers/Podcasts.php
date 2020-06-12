@@ -7,6 +7,7 @@
 
 namespace App\Controllers;
 
+use App\Entities\Podcast;
 use App\Models\CategoryModel;
 use App\Models\EpisodeModel;
 use App\Models\LanguageModel;
@@ -16,7 +17,7 @@ class Podcasts extends BaseController
 {
     public function create()
     {
-        helper(['form', 'database', 'file', 'misc']);
+        helper(['form', 'database', 'media', 'misc']);
         $podcast_model = new PodcastModel();
 
         if (
@@ -48,14 +49,9 @@ class Podcasts extends BaseController
         } else {
             $image = $this->request->getFile('image');
             $podcast_name = $this->request->getVar('name');
-            $image_name = 'cover.' . $image->getExtension();
-            $image_path = save_podcast_media(
-                $image,
-                $podcast_name,
-                $image_name
-            );
+            $image_path = save_podcast_media($image, $podcast_name, 'cover');
 
-            $podcast_model->save([
+            $podcast = new Podcast([
                 'title' => $this->request->getVar('title'),
                 'name' => $podcast_name,
                 'description' => $this->request->getVar('description'),
@@ -77,6 +73,8 @@ class Podcasts extends BaseController
                     'custom_html_head'
                 ),
             ]);
+
+            $podcast_model->save($podcast);
 
             return redirect()->to(
                 base_url(route_to('podcasts_view', '@' . $podcast_name))

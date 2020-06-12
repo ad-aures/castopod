@@ -97,11 +97,10 @@ class AddEpisodes extends Migration
                 'comment' =>
                     'The episode parental advisory information. Where the explicit value can be one of the following: true. If you specify true, indicating the presence of explicit content, Apple Podcasts displays an Explicit parental advisory graphic for your episode.     Episodes containing explicit material aren’t available in some Apple Podcasts territories.     false. If you specify false, indicating that the episode does not contain explicit language or adult content, Apple Podcasts displays a Clean parental advisory graphic for your episode.',
             ],
-            'episode_number' => [
+            'number' => [
                 'type' => 'INT',
                 'constraint' => 10,
                 'unsigned' => true,
-                'null' => true,
                 'comment' =>
                     'An episode number. If all your episodes have numbers and you would like them to be ordered based on them use this tag for each one. Episode numbers are optional for <itunes:type> episodic shows, but are mandatory for serial shows. Where episode is a non-zero integer (1, 2, 3, etc.) representing your episode number.',
             ],
@@ -136,6 +135,11 @@ class AddEpisodes extends Migration
         ]);
         $this->forge->addKey('id', true);
         $this->forge->addUniqueKey(['podcast_id', 'slug']);
+
+        // FIXME: as season_number can be null, the unique key constraint is useless when it is
+        // the majority of RDBMS behave that way
+        // possible solution: remove the null constraint on the season_number and set a default
+        $this->forge->addUniqueKey(['podcast_id', 'season_number', 'number']);
         $this->forge->addForeignKey('podcast_id', 'podcasts', 'id');
         $this->forge->createTable('episodes');
     }

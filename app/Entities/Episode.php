@@ -23,7 +23,7 @@ class Episode extends Entity
         'duration' => 'integer',
         'image' => 'string',
         'explicit' => 'boolean',
-        'episode_number' => 'integer',
+        'number' => 'integer',
         'season_number' => '?integer',
         'type' => 'string',
         'block' => 'boolean',

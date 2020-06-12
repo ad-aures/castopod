@@ -50,8 +50,7 @@
     <label for="episode_number"><?= lang(
         'Episodes.form.episode_number'
     ) ?></label>
-    <input type="number" class="form-input" id="episode_number" name="episode_number"
-    <?= $podcast->type == 'serial' ? 'required' : '' ?> />
+    <input type="number" class="form-input" id="episode_number" name="episode_number" required />
 </div>
 
 <div class="flex flex-col mb-4">
