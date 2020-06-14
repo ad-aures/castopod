@@ -34,8 +34,11 @@
                         </h3>
                         <p><?= $episode->description ?></p>
                     </a>
-                    <audio controls class="mt-auto">
-                        <source src="<?= media_url(
+                    <audio controls class="mt-auto" preload="none">
+                        <source src="<?= podcast_url(
+                            $episode->podcast_id,
+                            $episode->id,
+                            $podcast->name,
                             $episode->enclosure_url
                         ) ?>" type="<?= $episode->enclosure_type ?>">
                         Your browser does not support the audio tag.
@@ -49,4 +52,5 @@
 </section>
 
 
-<?= $this->endSection() ?>
+<?= $this->endSection()
+?>

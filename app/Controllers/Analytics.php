@@ -11,103 +11,40 @@ use CodeIgniter\Controller;
 
 class Analytics extends Controller
 {
-    function __construct()
-    {
-        $session = \Config\Services::session();
-        $session->start();
-        $db = \Config\Database::connect();
-        $country = 'N/A';
+    /**
+     * An array of helpers to be loaded automatically upon
+     * class instantiation. These helpers will be available
+     * to all other controllers that extend Analytics.
+     *
+     * @var array
+     */
+    protected $helpers = ['analytics'];
 
-        // Finds country:
-        if (!$session->has('country')) {
-            try {
-                $reader = new \GeoIp2\Database\Reader(
-                    WRITEPATH . 'uploads/GeoLite2-Country/GeoLite2-Country.mmdb'
-                );
-                $geoip = $reader->country($_SERVER['REMOTE_ADDR']);
-                $country = $geoip->country->isoCode;
-            } catch (\Exception $e) {
-                // If things go wrong the show must go on and the user must be able to download the file
-            }
-            $session->set('country', $country);
-        }
+    /**
+     * Constructor.
+     */
+    public function initController(
+        \CodeIgniter\HTTP\RequestInterface $request,
+        \CodeIgniter\HTTP\ResponseInterface $response,
+        \Psr\Log\LoggerInterface $logger
+    ) {
+        // Do Not Edit This Line
+        parent::initController($request, $response, $logger);
 
-        // Finds player:
-        if (!$session->has('player')) {
-            $playerName = '-unknown-';
-            $error = '';
+        //--------------------------------------------------------------------
+        // Preload any models, libraries, etc, here.
+        //--------------------------------------------------------------------
+        // E.g.:
+        // $this->session = \Config\Services::session();
 
-            try {
-                $useragent = $_SERVER['HTTP_USER_AGENT'];
-                $jsonUserAgents = json_decode(
-                    file_get_contents(
-                        WRITEPATH . 'uploads/user-agents/src/user-agents.json'
-                    ),
-                    true
-                );
-
-                //Search for current HTTP_USER_AGENT in json file:
-                foreach ($jsonUserAgents as $player) {
-                    foreach ($player['user_agents'] as $useragentsRegexp) {
-                        //Does the HTTP_USER_AGENT match this regexp:
-                        if (preg_match("#{$useragentsRegexp}#", $useragent)) {
-                            if (isset($player['bot'])) {
-                                //It’s a bot!
-                                $playerName = '-bot-';
-                            } else {
-                                //It isn’t a bot, we store device/os/app:
-                                $playerName =
-                                    (isset($player['device'])
-                                        ? $player['device'] . '/'
-                                        : '') .
-                                    (isset($player['os'])
-                                        ? $player['os'] . '/'
-                                        : '') .
-                                    (isset($player['app'])
-                                        ? $player['app']
-                                        : '?');
-                            }
-                            //We found it!
-                            break 2;
-                        }
-                    }
-                }
-            } catch (\Exception $e) {
-                // If things go wrong the show must go on and the user must be able to download the file
-            }
-            if ($playerName == '-unknown-') {
-                // Add to unknown list
-                try {
-                    $procedureNameAUU = $db->prefixTable(
-                        'analytics_unknown_useragents'
-                    );
-                    $db->query("CALL $procedureNameAUU(?)", [$useragent]);
-                } catch (\Exception $e) {
-                    // If things go wrong the show must go on and the user must be able to download the file
-                }
-            }
-            $session->set('player', $playerName);
-        }
+        set_user_session_country();
+        set_user_session_player();
     }
 
     // Add one hit to this episode:
     public function hit($p_podcast_id, $p_episode_id, ...$filename)
     {
-        $session = \Config\Services::session();
-        $db = \Config\Database::connect();
-        $procedureName = $db->prefixTable('analytics_podcasts');
-        $p_country_code = $session->get('country');
-        $p_player = $session->get('player');
-        try {
-            $db->query("CALL $procedureName(?,?,?,?);", [
-                $p_podcast_id,
-                $p_episode_id,
-                $p_country_code,
-                $p_player,
-            ]);
-        } catch (\Exception $e) {
-            // If things go wrong the show must go on and the user must be able to download the file
-        }
+        podcast_hit($p_podcast_id, $p_episode_id);
         return redirect()->to(media_url(implode('/', $filename)));
     }
 }

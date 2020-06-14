@@ -6,11 +6,15 @@
 <img src="<?= media_url(
     $episode->image ? $episode->image : $podcast->image
 ) ?>" alt="Episode cover"  class="object-cover w-40 h-40 mb-6" />
-<audio controls>
-  <source src="<?= media_url(
+<audio controls preload="none">
+  <source src="<?= podcast_url(
+      $episode->podcast_id,
+      $episode->id,
+      $podcast->name,
       $episode->enclosure_url
   ) ?>" type="<?= $episode->enclosure_type ?>">
   Your browser does not support the audio tag.
 </audio>
 
-<?= $this->endSection() ?>
+<?= $this->endSection()
+?>
