@@ -1,6 +1,7 @@
 <?
 
 return [
+    'back_to_podcast' => 'Go back to podcast',
     'create' => 'Add an episode',
     'form' => [
         'file' => 'Audio file',
@@ -10,6 +11,8 @@ return [
         'pub_date' => 'Publication date',
         'image' => 'Image',
         'explicit' => 'Explicit',
+        'author_name' => 'Author name',
+        'author_email' => 'Author email',
         'type' => [
             'label' => 'Type',
             'full' => 'Full',

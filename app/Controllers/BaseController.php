@@ -50,7 +50,7 @@ class BaseController extends Controller
         set_user_session_referer();
     }
 
-    protected function stats($postcast_id)
+    protected static function triggerWebpageHit($postcast_id)
     {
         webpage_hit($postcast_id);
     }

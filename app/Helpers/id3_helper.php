@@ -44,20 +44,20 @@ function write_file_tags($podcast, $episode)
 
     // Initialize getID3 tag-writing module
     $tagwriter = new WriteTags();
-    $tagwriter->filename = media_path($episode->enclosure_url);
+    $tagwriter->filename = $episode->enclosure_media_path;
 
     // set various options (optional)
     $tagwriter->tagformats = ['id3v2.4'];
     $tagwriter->tag_encoding = $TextEncoding;
 
-    $cover = new \CodeIgniter\Files\File(media_path($episode->image));
+    $cover = new \CodeIgniter\Files\File($episode->image_media_path);
 
     $APICdata = file_get_contents($cover->getRealPath());
 
     // TODO: variables used for podcast specific tags
-    // $podcast_url = base_url('@' . $podcast->name);
-    // $podcast_feed_url = base_url('@' . $podcast->name . '/feed.xml');
-    // $episode_media_url = media_url($podcast->name . '/' . $episode->slug);
+    // $podcast_url = $podcast->link;
+    // $podcast_feed_url = $podcast->feed_url;
+    // $episode_media_url = $episode->link;
 
     // populate data array
     $TagData = [

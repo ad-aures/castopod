@@ -41,7 +41,7 @@ class AddPodcasts extends Migration
                 'comment' =>
                     'The show description. Where description is text containing one or more sentences describing your podcast to potential listeners. The maximum amount of text allowed for this tag is 4000 characters. To include links in your description or rich HTML, adhere to the following technical guidelines: enclose all portions of your XML that contain embedded HTML in a CDATA section to prevent formatting issues, and to ensure proper link functionality.',
             ],
-            'image' => [
+            'image_uri' => [
                 'type' => 'VARCHAR',
                 'constraint' => 1024,
                 'comment' =>
@@ -67,11 +67,18 @@ class AddPodcasts extends Migration
                 'comment' =>
                     'The podcast parental advisory information.  The explicit value can be one of the following:      True: If you specify true, indicating the presence of explicit content, Apple Podcasts displays an Explicit parental advisory graphic for your podcast.      Podcasts containing explicit material aren’t available in some Apple Podcasts territories.      False: If you specify false, indicating that your podcast doesn’t contain explicit language or adult content, Apple Podcasts displays a Clean parental advisory graphic for your podcast.',
             ],
-            'author' => [
+            'author_name' => [
                 'type' => 'VARCHAR',
                 'constraint' => 1024,
                 'comment' =>
-                    'The group responsible for creating the show.  Show author most often refers to the parent company or network of a podcast, but it can also be used to identify the host(s) if none exists.  Author information is especially useful if a company or organization publishes multiple podcasts. Providing this information will allow listeners to see all shows created by the same entity.',
+                    'Name of the group responsible for creating the show.  Show author most often refers to the parent company or network of a podcast, but it can also be used to identify the host(s) if none exists.  Author information is especially useful if a company or organization publishes multiple podcasts. Providing this information will allow listeners to see all shows created by the same entity.',
+                'null' => true,
+            ],
+            'author_email' => [
+                'type' => 'VARCHAR',
+                'constraint' => 1024,
+                'owner_email' =>
+                    'Email of the group responsible for creating the show.  Show author most often refers to the parent company or network of a podcast, but it can also be used to identify the host(s) if none exists.  Author information is especially useful if a company or organization publishes multiple podcasts. Providing this information will allow listeners to see all shows created by the same entity.',
                 'null' => true,
             ],
             'owner_name' => [

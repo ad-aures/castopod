@@ -21,7 +21,7 @@ class Toolbar extends BaseConfig
         \CodeIgniter\Debug\Toolbar\Collectors\Database::class,
         \CodeIgniter\Debug\Toolbar\Collectors\Logs::class,
         \CodeIgniter\Debug\Toolbar\Collectors\Views::class,
-        // \CodeIgniter\Debug\Toolbar\Collectors\Cache::class,
+        \CodeIgniter\Debug\Toolbar\Collectors\Cache::class,
         \CodeIgniter\Debug\Toolbar\Collectors\Files::class,
         \CodeIgniter\Debug\Toolbar\Collectors\Routes::class,
         \CodeIgniter\Debug\Toolbar\Collectors\Events::class,

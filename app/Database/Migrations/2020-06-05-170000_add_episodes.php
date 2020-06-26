@@ -41,11 +41,11 @@ class AddEpisodes extends Migration
                 'constraint' => 191,
                 'comment' => 'Episode slug for URLs',
             ],
-            'enclosure_url' => [
+            'enclosure_uri' => [
                 'type' => 'VARCHAR',
                 'constraint' => 1024,
                 'comment' =>
-                    'The URL attribute points to your podcast media file. The file extension specified within the URL attribute determines whether or not content appears in the podcast directory. Supported file formats include M4A, MP3, MOV, MP4, M4V, and PDF.',
+                    'The URI attribute points to your podcast media file. The file extension specified within the URI attribute determines whether or not content appears in the podcast directory. Supported file formats include M4A, MP3, MOV, MP4, M4V, and PDF.',
             ],
             'enclosure_length' => [
                 'type' => 'INT',
@@ -69,7 +69,7 @@ class AddEpisodes extends Migration
             'pub_date' => [
                 'type' => 'DATETIME',
                 'comment' =>
-                    'The date and time when an episode was released. Format the date using the RFC 2822 specifications. For example: Wed, 15 Jun 2019 19:00:00 GMT.',
+                    'The date and time when an episode was released. Format the date using the RFC 2822 specifications. For example: Wed, 15 Jun 2019 19:00:00 UTC.',
             ],
             'description' => [
                 'type' => 'TEXT',
@@ -84,7 +84,7 @@ class AddEpisodes extends Migration
                 'comment' =>
                     'The duration of an episode. Different duration formats are accepted however it is recommended to convert the length of the episode into seconds.',
             ],
-            'image' => [
+            'image_uri' => [
                 'type' => 'VARCHAR',
                 'constraint' => 1024,
                 'comment' =>
@@ -111,6 +111,20 @@ class AddEpisodes extends Migration
                 'null' => true,
                 'comment' =>
                     'The episode season number. If an episode is within a season use this tag. Where season is a non-zero integer (1, 2, 3, etc.) representing your season number. To allow the season feature for shows containing a single season, if only one season exists in the RSS feed, Apple Podcasts doesn’t display a season number. When you add a second season to the RSS feed, Apple Podcasts displays the season numbers.',
+            ],
+            'author_name' => [
+                'type' => 'VARCHAR',
+                'constraint' => 1024,
+                'comment' =>
+                    'Name of the group responsible for creating the episode.  Episode author most often refers to the parent company or network of a podcast, but it can also be used to identify the host(s) if none exists.  Author information is especially useful if a company or organization publishes multiple podcasts. Providing this information will allow listeners to see all episodes created by the same entity.',
+                'null' => true,
+            ],
+            'author_email' => [
+                'type' => 'VARCHAR',
+                'constraint' => 1024,
+                'owner_email' =>
+                    'Email of the group responsible for creating the episode.  Episode author most often refers to the parent company or network of a podcast, but it can also be used to identify the host(s) if none exists.  Author information is especially useful if a company or organization publishes multiple podcasts. Providing this information will allow listeners to see all episodes created by the same entity.',
+                'null' => true,
             ],
             'type' => [
                 'type' => 'ENUM',

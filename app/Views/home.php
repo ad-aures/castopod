@@ -8,13 +8,9 @@
 <section class="flex flex-wrap">
     <?php if ($podcasts): ?>
         <?php foreach ($podcasts as $podcast): ?>
-            <a href="<?= route_to('podcasts_view', '@' . $podcast->name) ?>">
+            <a href="<?= route_to('podcast_view', $podcast->name) ?>">
                 <article class="w-48 p-2 mb-4 mr-4 border shadow-sm hover:bg-gray-100 hover:shadow">
-                    <img alt="<?= $podcast->title ?>"
-                        src="<?= media_url(
-                            $podcast->image
-                        ) ?>" class="object-cover w-full h-40 mb-2"
-                    />
+                    <img alt="<?= $podcast->title ?>" src="<?= $podcast->image_url ?>" class="object-cover w-full h-40 mb-2" />
                     <h2 class="font-semibold leading-tight"><?= $podcast->title ?></h2>
                     <p class="text-gray-600">@<?= $podcast->name ?></p>
                 </article>

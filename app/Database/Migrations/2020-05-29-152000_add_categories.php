@@ -29,8 +29,7 @@ class AddCategories extends Migration
             ],
             'code' => [
                 'type' => 'VARCHAR',
-                'constraint' => 1024,
-                'unique' => true,
+                'constraint' => 191,
             ],
             'apple_category' => [
                 'type' => 'VARCHAR',
@@ -42,6 +41,7 @@ class AddCategories extends Migration
             ],
         ]);
         $this->forge->addKey('id', true);
+        $this->forge->addUniqueKey('code');
         $this->forge->addForeignKey('parent_id', 'categories', 'id');
         $this->forge->createTable('categories');
     }

@@ -117,7 +117,7 @@ You can install / update the project's dependencies using both `composer` and `n
 
 ```bash
 # install php dependencies
-docker-compose run --rm composer update --ignore-platform-reqs
+docker-compose run --rm composer install --ignore-platform-reqs
 
 # update php dependencies
 docker-compose run --rm composer update --ignore-platform-reqs

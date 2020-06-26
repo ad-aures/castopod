@@ -4,16 +4,14 @@
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
  */
-
 namespace App\Controllers;
 
-use App\Entities\Podcast;
 use App\Models\CategoryModel;
 use App\Models\EpisodeModel;
 use App\Models\LanguageModel;
 use App\Models\PodcastModel;
 
-class Podcasts extends BaseController
+class Podcast extends BaseController
 {
     public function create()
     {
@@ -39,30 +37,27 @@ class Podcasts extends BaseController
                 'browser_lang' => get_browser_language(
                     $this->request->getServer('HTTP_ACCEPT_LANGUAGE')
                 ),
-                'podcast_types' => field_enums(
-                    $podcast_model->prefixTable('podcasts'),
-                    'type'
-                ),
             ];
 
-            echo view('podcasts/create', $data);
+            echo view('podcast/create', $data);
         } else {
             $image = $this->request->getFile('image');
             $podcast_name = $this->request->getVar('name');
             $image_path = save_podcast_media($image, $podcast_name, 'cover');
 
-            $podcast = new Podcast([
+            $podcast = new \App\Entities\Podcast([
                 'title' => $this->request->getVar('title'),
                 'name' => $podcast_name,
                 'description' => $this->request->getVar('description'),
                 'episode_description_footer' => $this->request->getVar(
                     'episode_description_footer'
                 ),
-                'image' => $image_path,
+                'image_uri' => $image_path,
                 'language' => $this->request->getVar('language'),
                 'category' => $this->request->getVar('category'),
                 'explicit' => $this->request->getVar('explicit') or false,
-                'author' => $this->request->getVar('author'),
+                'author_name' => $this->request->getVar('author_name'),
+                'author_email' => $this->request->getVar('author_email'),
                 'owner_name' => $this->request->getVar('owner_name'),
                 'owner_email' => $this->request->getVar('owner_email'),
                 'type' => $this->request->getVar('type'),
@@ -77,17 +72,15 @@ class Podcasts extends BaseController
             $podcast_model->save($podcast);
 
             return redirect()->to(
-                base_url(route_to('podcasts_view', '@' . $podcast_name))
+                base_url(route_to('podcast_view', $podcast->name))
             );
         }
     }
 
-    public function view($slug)
+    public function view($podcast_name)
     {
         $podcast_model = new PodcastModel();
         $episode_model = new EpisodeModel();
-
-        $podcast_name = substr($slug, 1);
 
         $podcast = $podcast_model->where('name', $podcast_name)->first();
         $data = [
@@ -96,8 +89,8 @@ class Podcasts extends BaseController
                 ->where('podcast_id', $podcast->id)
                 ->findAll(),
         ];
-        self::stats($podcast->id);
+        self::triggerWebpageHit($podcast->id);
 
-        return view('podcasts/view', $data);
+        return view('podcast/view', $data);
     }
 }

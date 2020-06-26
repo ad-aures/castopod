@@ -11,7 +11,8 @@ return [
         'language' => 'Language',
         'category' => 'Category',
         'explicit' => 'Explicit',
-        'author' => 'Author',
+        'author_name' => 'Author name',
+        'author_email' => 'Author email',
         'owner_name' => 'Owner name',
         'owner_email' => 'Owner email',
         'type' => [
@@ -64,7 +65,7 @@ return [
         'courses' => 'Courses',
         'how_to' => 'How To',
         'language_learning' => 'Language Learning',
-        'self-improvement' => 'Self-Improvement',
+        'self_improvement' => 'Self-Improvement',
         'comedy_fiction' => 'Comedy Fiction',
         'drama' => 'Drama',
         'science_fiction' => 'Science Fiction',

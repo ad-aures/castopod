@@ -12,7 +12,7 @@
  * @param string $podcast_name
  * @param string $file_name
  *
- * @return string The absolute path of the file in media root
+ * @return string The episode's file path in media root
  */
 function save_podcast_media($file, $podcast_name, $media_name)
 {

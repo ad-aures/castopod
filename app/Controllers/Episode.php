@@ -10,15 +10,17 @@ namespace App\Controllers;
 use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
 
-class Episodes extends BaseController
+helper('podcast');
+
+class Episode extends BaseController
 {
-    public function create($podcast_slug)
+    public function create($podcast_name)
     {
         helper(['form', 'database', 'media', 'id3']);
 
         $episode_model = new EpisodeModel();
         $podcast_model = new PodcastModel();
-        $podcast_name = substr($podcast_slug, 1);
+
         $podcast = $podcast_model->where('name', $podcast_name)->first();
 
         if (
@@ -33,13 +35,9 @@ class Episodes extends BaseController
         ) {
             $data = [
                 'podcast' => $podcast,
-                'episode_types' => field_enums(
-                    $episode_model->prefixTable('episodes'),
-                    'type'
-                ),
             ];
 
-            echo view('episodes/create', $data);
+            echo view('episode/create', $data);
         } else {
             $episode_slug = $this->request->getVar('slug');
 
@@ -49,7 +47,7 @@ class Episodes extends BaseController
             $image = $this->request->getFile('image');
 
             // By default, the episode's image path is set to the podcast's
-            $image_path = $podcast->image;
+            $image_path = $podcast->image_uri;
 
             // check whether the user has inputted an image and store it
             if ($image->isValid()) {
@@ -81,20 +79,21 @@ class Episodes extends BaseController
                 'podcast_id' => $podcast->id,
                 'title' => $this->request->getVar('title'),
                 'slug' => $episode_slug,
-                'enclosure_url' => $episode_path,
+                'enclosure_uri' => $episode_path,
                 'enclosure_length' => $episode_file->getSize(),
                 'enclosure_type' => $episode_file_metadata['mime_type'],
-                'guid' => $podcast_slug . '/' . $episode_slug,
                 'pub_date' => $this->request->getVar('pub_date'),
                 'description' => $this->request->getVar('description'),
                 'duration' => $episode_file_metadata['playtime_seconds'],
-                'image' => $image_path,
+                'image_uri' => $image_path,
                 'explicit' => $this->request->getVar('explicit') or false,
                 'number' => $this->request->getVar('episode_number'),
                 'season_number' => $this->request->getVar('season_number')
                     ? $this->request->getVar('season_number')
                     : null,
                 'type' => $this->request->getVar('type'),
+                'author_name' => $this->request->getVar('author_name'),
+                'author_email' => $this->request->getVar('author_email'),
                 'block' => $this->request->getVar('block') or false,
             ]);
 
@@ -103,30 +102,25 @@ class Episodes extends BaseController
             $episode_file = write_file_tags($podcast, $episode);
 
             return redirect()->to(
-                base_url(
-                    route_to(
-                        'episodes_view',
-                        '/@' . $podcast_name,
-                        $episode_slug
-                    )
-                )
+                base_url(route_to('episode_view', $podcast_name, $episode_slug))
             );
         }
     }
 
-    public function view($podcast_slug, $episode_slug)
+    public function view($podcast_name, $episode_slug)
     {
         $podcast_model = new PodcastModel();
         $episode_model = new EpisodeModel();
 
-        $data = [
-            'podcast' => $podcast_model
-                ->where('name', substr($podcast_slug, 1))
-                ->first(),
-            'episode' => $episode_model->where('slug', $episode_slug)->first(),
-        ];
-        self::stats($data['podcast']->id);
+        $podcast = $podcast_model->where('name', $podcast_name)->first();
+        $episode = $episode_model->where('slug', $episode_slug)->first();
 
-        return view('episodes/view.php', $data);
+        $data = [
+            'podcast' => $podcast,
+            'episode' => $episode,
+        ];
+        self::triggerWebpageHit($data['podcast']->id);
+
+        return view('episode/view.php', $data);
     }
 }

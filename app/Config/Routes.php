@@ -22,7 +22,7 @@ $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
 $routes->setAutoRoute(false);
-$routes->addPlaceholder('podcastSlug', '@[a-z0-9\_]{1,191}');
+$routes->addPlaceholder('podcastName', '[a-z0-9\_]{1,191}');
 $routes->addPlaceholder('episodeSlug', '[a-z0-9\-]{1,191}');
 
 /**
@@ -34,24 +34,27 @@ $routes->addPlaceholder('episodeSlug', '[a-z0-9\-]{1,191}');
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index', ['as' => 'home']);
-$routes->add('new-podcast', 'Podcasts::create', ['as' => 'podcasts_create']);
+$routes->add('new-podcast', 'Podcast::create', ['as' => 'podcast_create']);
 
-$routes->group('(:podcastSlug)', function ($routes) {
-    $routes->add('/', 'Podcasts::view/$1', ['as' => 'podcasts_view']);
-    $routes->add('new-episode', 'Episodes::create/$1', [
-        'as' => 'episodes_create',
+$routes->group('@(:podcastName)', function ($routes) {
+    $routes->add('/', 'Podcast::view/$1', ['as' => 'podcast_view']);
+    $routes->add('feed.xml', 'Feed/$1', ['as' => 'podcast_feed']);
+    $routes->add('new-episode', 'Episode::create/$1', [
+        'as' => 'episode_create',
     ]);
-    $routes->add('(:episodeSlug)', 'Episodes::view/$1/$2', [
-        'as' => 'episodes_view',
+    $routes->add('episodes/(:episodeSlug)', 'Episode::view/$1/$2', [
+        'as' => 'episode_view',
     ]);
 });
 
 // Route for podcast audio file analytics (/stats/podcast_id/episode_id/podcast_folder/filename.mp3)
-$routes->add('/stats/(:num)/(:num)/(:any)', 'Analytics::hit/$1/$2/$3');
+$routes->add('stats/(:num)/(:num)/(:any)', 'Analytics::hit/$1/$2/$3', [
+    'as' => 'analytics_hit',
+]);
 
 // Show the Unknown UserAgents
-$routes->add('/.well-known/unknown-useragents', 'UnknownUserAgents');
-$routes->add('/.well-known/unknown-useragents/(:num)', 'UnknownUserAgents/$1');
+$routes->add('.well-known/unknown-useragents', 'UnknownUserAgents');
+$routes->add('.well-known/unknown-useragents/(:num)', 'UnknownUserAgents/$1');
 
 /**
  * --------------------------------------------------------------------

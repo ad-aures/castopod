@@ -16,7 +16,7 @@
 			<a href="<?= route_to('home') ?>" class="text-2xl">Castopod</a>
 			<nav>
 				<a class="px-4 py-2 border hover:bg-gray-100" href="<?= route_to(
-        'podcasts_create'
+        'podcast_create'
     ) ?>">New podcast</a>
 			</nav>
 		</div>

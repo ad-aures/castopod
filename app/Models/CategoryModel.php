@@ -14,7 +14,12 @@ class CategoryModel extends Model
     protected $table = 'categories';
     protected $primaryKey = 'id';
 
-    protected $allowedFields = ['apple_category', 'google_category'];
+    protected $allowedFields = [
+        'parent_id',
+        'code',
+        'apple_category',
+        'google_category',
+    ];
 
     protected $returnType = 'App\Entities\Category';
     protected $useSoftDeletes = false;
