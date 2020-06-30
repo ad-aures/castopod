@@ -2,6 +2,10 @@
 
 return [
     'create' => 'Create a Podcast',
+    'new_episode' => 'New Episode',
+    'feed' => 'RSS feed',
+    'edit' => 'Edit',
+    'delete' => 'Delete',
     'form' => [
         'title' => 'Title',
         'name' => 'Name',
@@ -24,7 +28,8 @@ return [
         'block' => 'Block',
         'complete' => 'Complete',
         'custom_html_head' => 'Custom HTML code in <head/>',
-        'submit' => 'Create podcast',
+        'submit_create' => 'Create podcast',
+        'submit_edit' => 'Save podcast',
     ],
     'category_options' => [
         'uncategorized' => 'uncategorized',

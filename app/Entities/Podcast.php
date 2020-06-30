@@ -13,6 +13,8 @@ use CodeIgniter\Entity;
 class Podcast extends Entity
 {
     protected $link;
+    protected \CodeIgniter\Files\File $image;
+    protected $image_media_path;
     protected $image_url;
     protected $episodes;
 
@@ -36,6 +38,31 @@ class Podcast extends Entity
         'episode_description_footer' => '?string',
         'custom_html_head' => '?string',
     ];
+
+    public function setImage(\CodeIgniter\HTTP\Files\UploadedFile $image = null)
+    {
+        if ($image) {
+            helper('media');
+
+            $this->attributes['image_uri'] = save_podcast_media(
+                $image,
+                $this->attributes['name'],
+                'cover'
+            );
+
+            return $this;
+        }
+    }
+
+    public function getImage()
+    {
+        return new \CodeIgniter\Files\File($this->getImageMediaPath());
+    }
+
+    public function getImageMediaPath()
+    {
+        return media_path($this->attributes['image_uri']);
+    }
 
     public function getImageUrl()
     {

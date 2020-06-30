@@ -35,7 +35,40 @@ class EpisodeModel extends Model
     ];
 
     protected $returnType = 'App\Entities\Episode';
-    protected $useSoftDeletes = false;
 
+    protected $useSoftDeletes = true;
     protected $useTimestamps = true;
+
+    protected $afterInsert = [
+        'writeEnclosureMetadata',
+        'clearPodcastFeedCache',
+    ];
+    protected $afterUpdate = [
+        'writeEnclosureMetadata',
+        'clearPodcastFeedCache',
+    ];
+
+    protected function writeEnclosureMetadata(array $data)
+    {
+        helper('id3');
+
+        $episode = $this->find(
+            is_array($data['id']) ? $data['id'][0] : $data['id']
+        );
+
+        write_enclosure_tags($episode);
+
+        return $data;
+    }
+
+    protected function clearPodcastFeedCache(array $data)
+    {
+        $episode = $this->find(
+            is_array($data['id']) ? $data['id'][0] : $data['id']
+        );
+
+        $cache = \Config\Services::cache();
+
+        $cache->delete(md5($episode->podcast->feed_url));
+    }
 }

@@ -38,12 +38,24 @@ $routes->add('new-podcast', 'Podcast::create', ['as' => 'podcast_create']);
 
 $routes->group('@(:podcastName)', function ($routes) {
     $routes->add('/', 'Podcast::view/$1', ['as' => 'podcast_view']);
+    $routes->add('edit', 'Podcast::edit/$1', [
+        'as' => 'podcast_edit',
+    ]);
+    $routes->add('delete', 'Podcast::delete/$1', [
+        'as' => 'podcast_delete',
+    ]);
     $routes->add('feed.xml', 'Feed/$1', ['as' => 'podcast_feed']);
     $routes->add('new-episode', 'Episode::create/$1', [
         'as' => 'episode_create',
     ]);
     $routes->add('episodes/(:episodeSlug)', 'Episode::view/$1/$2', [
         'as' => 'episode_view',
+    ]);
+    $routes->add('episodes/(:episodeSlug)/edit', 'Episode::edit/$1/$2', [
+        'as' => 'episode_edit',
+    ]);
+    $routes->add('episodes/(:episodeSlug)/delete', 'Episode::delete/$1/$2', [
+        'as' => 'episode_delete',
     ]);
 });
 

@@ -3,15 +3,23 @@
 <?= $this->section('content') ?>
 <header class="py-4 border-b">
     <h1 class="text-2xl"><?= $podcast->title ?></h1>
-    <img src="<?= $podcast->image_url ?>" alt="Podcast cover" class="w-40 h-40 mb-6" />
+    <img src="<?= $podcast->image_url ?>" alt="Podcast cover" class="object-cover w-40 h-40 mb-6" />
 <a class="inline-flex px-4 py-2 border hover:bg-gray-100" href="<?= route_to(
     'episode_create',
     $podcast->name
-) ?>">New Episode</a>
+) ?>"><?= lang('Podcast.new_episode') ?></a>
 <a class="inline-flex px-4 py-2 bg-orange-500 hover:bg-orange-600" href="<?= route_to(
     'podcast_feed',
     $podcast->name
-) ?>">RSS feed</a>
+) ?>"><?= lang('Podcast.feed') ?></a>
+<a class="inline-flex px-4 py-2 text-white bg-teal-700 hover:bg-teal-800" href="<?= route_to(
+    'podcast_edit',
+    $podcast->name
+) ?>"><?= lang('Podcast.edit') ?></a>
+<a class="inline-flex px-4 py-2 text-white bg-red-700 hover:bg-red-800" href="<?= route_to(
+    'podcast_delete',
+    $podcast->name
+) ?>"><?= lang('Podcast.delete') ?></a>
 </header>
 
 <section class="flex flex-col py-4">

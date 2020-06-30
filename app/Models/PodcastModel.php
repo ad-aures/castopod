@@ -36,7 +36,21 @@ class PodcastModel extends Model
     ];
 
     protected $returnType = 'App\Entities\Podcast';
-    protected $useSoftDeletes = false;
+    protected $useSoftDeletes = true;
 
     protected $useTimestamps = true;
+
+    protected $afterInsert = ['clearPodcastFeedCache'];
+    protected $afterUpdate = ['clearPodcastFeedCache'];
+
+    protected function clearPodcastFeedCache(array $data)
+    {
+        $podcast = $this->find(
+            is_array($data['id']) ? $data['id'][0] : $data['id']
+        );
+
+        $cache = \Config\Services::cache();
+
+        $cache->delete(md5($podcast->feed_url));
+    }
 }

@@ -142,7 +142,7 @@ function set_user_session_referer()
     }
 }
 
-function webpage_hit($postcast_id)
+function webpage_hit($podcast_id)
 {
     $session = \Config\Services::session();
     $session->start();
@@ -150,7 +150,7 @@ function webpage_hit($postcast_id)
 
     $procedureName = $db->prefixTable('analytics_website');
     $db->query("call $procedureName(?,?,?,?)", [
-        $postcast_id,
+        $podcast_id,
         $session->get('country'),
         $session->get('browser'),
         $session->get('referer'),

@@ -33,12 +33,11 @@ function get_file_tags($file)
 /**
  * Write audio file metadata / ID3 tags
  *
- * @param App\Entities\Podcast $podcast
  * @param App\Entities\Episode $episode
  *
  * @return UploadedFile
  */
-function write_file_tags($podcast, $episode)
+function write_enclosure_tags($episode)
 {
     $TextEncoding = 'UTF-8';
 
@@ -55,20 +54,20 @@ function write_file_tags($podcast, $episode)
     $APICdata = file_get_contents($cover->getRealPath());
 
     // TODO: variables used for podcast specific tags
-    // $podcast_url = $podcast->link;
-    // $podcast_feed_url = $podcast->feed_url;
+    // $podcast_url = $episode->podcast->link;
+    // $podcast_feed_url = $episode->podcast->feed_url;
     // $episode_media_url = $episode->link;
 
     // populate data array
     $TagData = [
         'title' => [$episode->title],
-        'artist' => [$podcast->author],
-        'album' => [$podcast->title],
+        'artist' => [$episode->podcast->author],
+        'album' => [$episode->podcast->title],
         'year' => [$episode->pub_date->format('Y')],
         'genre' => ['Podcast'],
         'comment' => [$episode->description],
         'track_number' => [strval($episode->number)],
-        'copyright_message' => [$podcast->copyright],
+        'copyright_message' => [$episode->podcast->copyright],
         'publisher' => ['Podlibre'],
         'encoded_by' => ['Castopod'],
 

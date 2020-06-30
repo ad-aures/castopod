@@ -10,23 +10,44 @@ namespace App\Controllers;
 use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
 
-helper('podcast');
-
 class Episode extends BaseController
 {
-    public function create($podcast_name)
-    {
-        helper(['form', 'database', 'media', 'id3']);
+    protected \App\Entities\Podcast $podcast;
+    protected ?\App\Entities\Episode $episode;
 
-        $episode_model = new EpisodeModel();
+    public function _remap($method, ...$params)
+    {
         $podcast_model = new PodcastModel();
 
-        $podcast = $podcast_model->where('name', $podcast_name)->first();
+        $this->podcast = $podcast_model->where('name', $params[0])->first();
+
+        if (count($params) > 1) {
+            $episode_model = new EpisodeModel();
+            if (
+                !($episode = $episode_model
+                    ->where([
+                        'podcast_id' => $this->podcast->id,
+                        'slug' => $params[1],
+                    ])
+                    ->first())
+            ) {
+                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+            }
+            $this->episode = $episode;
+        }
+
+        return $this->$method();
+    }
+
+    public function create()
+    {
+        helper(['form']);
 
         if (
             !$this->validate([
-                'episode_file' =>
-                    'uploaded[episode_file]|ext_in[episode_file,mp3,m4a]',
+                'enclosure' => 'uploaded[enclosure]|ext_in[enclosure,mp3,m4a]',
+                'image' =>
+                    'uploaded[image]|is_image[image]|ext_in[image,jpg,png]|permit_empty',
                 'title' => 'required',
                 'slug' => 'required',
                 'description' => 'required',
@@ -34,58 +55,19 @@ class Episode extends BaseController
             ])
         ) {
             $data = [
-                'podcast' => $podcast,
+                'podcast' => $this->podcast,
             ];
 
             echo view('episode/create', $data);
         } else {
-            $episode_slug = $this->request->getVar('slug');
-
-            $episode_file = $this->request->getFile('episode_file');
-            $episode_file_metadata = get_file_tags($episode_file);
-
-            $image = $this->request->getFile('image');
-
-            // By default, the episode's image path is set to the podcast's
-            $image_path = $podcast->image_uri;
-
-            // check whether the user has inputted an image and store it
-            if ($image->isValid()) {
-                $image_path = save_podcast_media(
-                    $image,
-                    $podcast_name,
-                    $episode_slug
-                );
-            } elseif ($APICdata = $episode_file_metadata['attached_picture']) {
-                // if the user didn't input an image,
-                // check if the uploaded audio file has an attached cover and store it
-                $cover_image = new \CodeIgniter\Files\File('episode_cover');
-                file_put_contents($cover_image, $APICdata);
-
-                $image_path = save_podcast_media(
-                    $cover_image,
-                    $podcast_name,
-                    $episode_slug
-                );
-            }
-
-            $episode_path = save_podcast_media(
-                $episode_file,
-                $podcast_name,
-                $episode_slug
-            );
-
-            $episode = new \App\Entities\Episode([
-                'podcast_id' => $podcast->id,
+            $new_episode = new \App\Entities\Episode([
+                'podcast_id' => $this->podcast->id,
                 'title' => $this->request->getVar('title'),
-                'slug' => $episode_slug,
-                'enclosure_uri' => $episode_path,
-                'enclosure_length' => $episode_file->getSize(),
-                'enclosure_type' => $episode_file_metadata['mime_type'],
+                'slug' => $this->request->getVar('slug'),
+                'enclosure' => $this->request->getFile('enclosure'),
                 'pub_date' => $this->request->getVar('pub_date'),
                 'description' => $this->request->getVar('description'),
-                'duration' => $episode_file_metadata['playtime_seconds'],
-                'image_uri' => $image_path,
+                'image' => $this->request->getFile('image'),
                 'explicit' => $this->request->getVar('explicit') or false,
                 'number' => $this->request->getVar('episode_number'),
                 'season_number' => $this->request->getVar('season_number')
@@ -97,30 +79,107 @@ class Episode extends BaseController
                 'block' => $this->request->getVar('block') or false,
             ]);
 
-            $episode_model->save($episode);
-
-            $episode_file = write_file_tags($podcast, $episode);
+            $episode_model = new EpisodeModel();
+            $episode_model->save($new_episode);
 
             return redirect()->to(
-                base_url(route_to('episode_view', $podcast_name, $episode_slug))
+                base_url(
+                    route_to(
+                        'episode_view',
+                        $this->podcast->name,
+                        $new_episode->slug
+                    )
+                )
             );
         }
     }
 
-    public function view($podcast_name, $episode_slug)
+    public function edit()
     {
-        $podcast_model = new PodcastModel();
-        $episode_model = new EpisodeModel();
+        helper(['form']);
 
-        $podcast = $podcast_model->where('name', $podcast_name)->first();
-        $episode = $episode_model->where('slug', $episode_slug)->first();
+        if (
+            !$this->validate([
+                'enclosure' =>
+                    'uploaded[enclosure]|ext_in[enclosure,mp3,m4a]|permit_empty',
+                'image' =>
+                    'uploaded[image]|is_image[image]|ext_in[image,jpg,png]|permit_empty',
+                'title' => 'required',
+                'slug' => 'required',
+                'description' => 'required',
+                'type' => 'required',
+            ])
+        ) {
+            $data = [
+                'podcast' => $this->podcast,
+                'episode' => $this->episode,
+            ];
+
+            echo view('episode/edit', $data);
+        } else {
+            $this->episode->title = $this->request->getVar('title');
+            $this->episode->slug = $this->request->getVar('slug');
+            $this->episode->pub_date = $this->request->getVar('pub_date');
+            $this->episode->description = $this->request->getVar('description');
+            $this->episode->explicit =
+                ($this->request->getVar('explicit') or false);
+            $this->episode->number = $this->request->getVar('episode_number');
+            $this->episode->season_number = $this->request->getVar(
+                'season_number'
+            )
+                ? $this->request->getVar('season_number')
+                : null;
+            $this->episode->type = $this->request->getVar('type');
+            $this->episode->author_name = $this->request->getVar('author_name');
+            $this->episode->author_email = $this->request->getVar(
+                'author_email'
+            );
+            $this->episode->block = ($this->request->getVar('block') or false);
+
+            $enclosure = $this->request->getFile('enclosure');
+            if ($enclosure->isValid()) {
+                $this->episode->enclosure = $this->request->getFile(
+                    'enclosure'
+                );
+            }
+            $image = $this->request->getFile('image');
+            if ($image) {
+                $this->episode->image = $this->request->getFile('image');
+            }
+
+            $episode_model = new EpisodeModel();
+            $episode_model->save($this->episode);
+
+            return redirect()->to(
+                base_url(
+                    route_to(
+                        'episode_view',
+                        $this->podcast->name,
+                        $this->episode->slug
+                    )
+                )
+            );
+        }
+    }
+
+    public function view()
+    {
+        self::triggerWebpageHit($this->podcast->id);
 
         $data = [
-            'podcast' => $podcast,
-            'episode' => $episode,
+            'podcast' => $this->podcast,
+            'episode' => $this->episode,
         ];
-        self::triggerWebpageHit($data['podcast']->id);
+        return view('episode/view', $data);
+    }
 
-        return view('episode/view.php', $data);
+    public function delete()
+    {
+        $episode_model = new EpisodeModel();
+        $episode_model->delete($this->episode->id);
+
+        return redirect()->to(
+            base_url(route_to('podcast_view', $this->podcast->name))
+        );
     }
 }

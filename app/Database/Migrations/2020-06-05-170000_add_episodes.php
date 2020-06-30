@@ -47,25 +47,6 @@ class AddEpisodes extends Migration
                 'comment' =>
                     'The URI attribute points to your podcast media file. The file extension specified within the URI attribute determines whether or not content appears in the podcast directory. Supported file formats include M4A, MP3, MOV, MP4, M4V, and PDF.',
             ],
-            'enclosure_length' => [
-                'type' => 'INT',
-                'constraint' => 10,
-                'unsigned' => true,
-                'comment' =>
-                    'The length attribute is the file size in bytes. You can find this information in the properties of your podcast file (on a Mac, choose File > Get Info and refer to the size field).',
-            ],
-            'enclosure_type' => [
-                'type' => 'VARCHAR',
-                'constraint' => 1024,
-                'comment' =>
-                    'The type attribute provides the correct category for the type of file you are using. The type values for the supported file formats are: audio/x-m4a, audio/mpeg, video/quicktime, video/mp4, video/x-m4v, and application/pdf.',
-            ],
-            'guid' => [
-                'type' => 'VARCHAR',
-                'constraint' => 1024,
-                'comment' =>
-                    'The episode’s globally unique identifier (GUID). It is very important that each episode have a unique GUID and that it never changes, even if an episode’s metadata, like title or enclosure URL, do change. Globally unique identifiers (GUID) are case-sensitive strings. If a GUID is not provided an episode’s enclosure URL will be used instead. If a GUID is not provided, make sure that an episode’s enclosure URL is unique and never changes. Failing to comply with these guidelines may result in duplicate episodes being shown to listeners, inaccurate data in Podcast Analytics, and can cause issues with your podcasts’s listing and chart placement in Apple Podcasts.',
-            ],
             'pub_date' => [
                 'type' => 'DATETIME',
                 'comment' =>
@@ -87,6 +68,7 @@ class AddEpisodes extends Migration
             'image_uri' => [
                 'type' => 'VARCHAR',
                 'constraint' => 1024,
+                'null' => true,
                 'comment' =>
                     'The artwork for the show. Specify your show artwork by providing a URL linking to it. Depending on their device, subscribers see your podcast artwork in varying sizes. Therefore, make sure your design is effective at both its original size and at thumbnail size. You should include a show title, brand, or source name as part of your podcast artwork. Artwork must be a minimum size of 1400 x 1400 pixels and a maximum size of 3000 x 3000 pixels, in JPEG or PNG format, 72 dpi, with appropriate file extensions (.jpg, .png), and in the RGB colorspace.',
             ],
@@ -145,6 +127,10 @@ class AddEpisodes extends Migration
             ],
             'updated_at' => [
                 'type' => 'TIMESTAMP',
+            ],
+            'deleted_at' => [
+                'type' => 'DATETIME',
+                'null' => true,
             ],
         ]);
         $this->forge->addKey('id', true);

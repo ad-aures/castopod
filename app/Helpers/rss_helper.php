@@ -116,14 +116,20 @@ function get_rss_feed($podcast)
         $item = $channel->addChild('item');
         $item->addChild('title', $episode->title);
         $enclosure = $item->addChild('enclosure');
+
+        $enclosure_metadata = $episode->enclosure_metadata;
         $enclosure->addAttribute('url', $episode->enclosure_url);
-        $enclosure->addAttribute('length', $episode->enclosure_length);
-        $enclosure->addAttribute('type', $episode->enclosure_type);
+        $enclosure->addAttribute('length', $enclosure_metadata['filesize']);
+        $enclosure->addAttribute('type', $enclosure_metadata['mime_type']);
 
         $item->addChild('guid', $episode->guid);
         $item->addChild('pubDate', $episode->pub_date->format(DATE_RFC1123));
         $item->addChildWithCDATA('description', $episode->description);
-        $item->addChild('duration', $episode->duration, $itunes_namespace);
+        $item->addChild(
+            'duration',
+            $enclosure_metadata['playtime_seconds'],
+            $itunes_namespace
+        );
         $item->addChild('link', $episode->link);
         $episode_itunes_image = $item->addChild(
             'image',

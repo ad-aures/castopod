@@ -2,6 +2,8 @@
 
 return [
     'back_to_podcast' => 'Go back to podcast',
+    'edit' => 'Edit',
+    'delete' => 'Delete',
     'create' => 'Add an episode',
     'form' => [
         'file' => 'Audio file',
@@ -22,6 +24,7 @@ return [
         'episode_number' => 'Episode number',
         'season_number' => 'Season number',
         'block' => 'Block',
-        'submit' => 'Create episode',
+        'submit_create' => 'Create episode',
+        'submit_edit' => 'Save episode',
     ]
 ];
