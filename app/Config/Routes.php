@@ -22,8 +22,8 @@ $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
 $routes->setAutoRoute(false);
-$routes->addPlaceholder('podcastName', '[a-z0-9\_]{1,191}');
-$routes->addPlaceholder('episodeSlug', '[a-z0-9\-]{1,191}');
+$routes->addPlaceholder('podcastName', '[a-zA-Z0-9\_]{1,191}');
+$routes->addPlaceholder('episodeSlug', '[a-zA-Z0-9\-]{1,191}');
 
 /**
  * --------------------------------------------------------------------

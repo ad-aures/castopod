@@ -16,8 +16,8 @@ class UnknownUserAgentsModel extends Model
 
     protected $allowedFields = [];
 
-    public function getUserAgents($p_id = 0)
+    public function getUserAgents($last_known_id = 0)
     {
-        return $this->where('id>', $p_id)->findAll();
+        return $this->where('id>', $last_known_id)->findAll();
     }
 }

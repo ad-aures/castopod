@@ -40,10 +40,10 @@ class PodcastModel extends Model
 
     protected $useTimestamps = true;
 
-    protected $afterInsert = ['clearPodcastFeedCache'];
-    protected $afterUpdate = ['clearPodcastFeedCache'];
+    protected $afterInsert = ['clearCache'];
+    protected $afterUpdate = ['clearCache'];
 
-    protected function clearPodcastFeedCache(array $data)
+    protected function clearCache(array $data)
     {
         $podcast = $this->find(
             is_array($data['id']) ? $data['id'][0] : $data['id']
@@ -51,6 +51,12 @@ class PodcastModel extends Model
 
         $cache = \Config\Services::cache();
 
+        // delete cache for rss feed and podcast pages
         $cache->delete(md5($podcast->feed_url));
+        $cache->delete(md5($podcast->link));
+        // TODO: clear cache for every podcast's episode page?
+        // foreach ($podcast->episodes as $episode) {
+        //     $cache->delete(md5($episode->link));
+        // }
     }
 }

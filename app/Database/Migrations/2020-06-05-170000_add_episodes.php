@@ -58,13 +58,6 @@ class AddEpisodes extends Migration
                 'comment' =>
                     'An episode description. Description is text containing one or more sentences describing your episode to potential listeners. You can specify up to 4000 characters. You can use rich text formatting and some HTML (<p>, <ol>, <ul>, <li>, <a>) if wrapped in the <CDATA> tag. To include links in your description or rich HTML, adhere to the following technical guidelines: enclose all portions of your XML that contain embedded HTML in a CDATA section to prevent formatting issues, and to ensure proper link functionality.',
             ],
-            'duration' => [
-                'type' => 'INT',
-                'constraint' => 10,
-                'unsigned' => true,
-                'comment' =>
-                    'The duration of an episode. Different duration formats are accepted however it is recommended to convert the length of the episode into seconds.',
-            ],
             'image_uri' => [
                 'type' => 'VARCHAR',
                 'constraint' => 1024,
@@ -90,7 +83,7 @@ class AddEpisodes extends Migration
                 'type' => 'INT',
                 'constraint' => 10,
                 'unsigned' => true,
-                'null' => true,
+                'default' => 1,
                 'comment' =>
                     'The episode season number. If an episode is within a season use this tag. Where season is a non-zero integer (1, 2, 3, etc.) representing your season number. To allow the season feature for shows containing a single season, if only one season exists in the RSS feed, Apple Podcasts doesn’t display a season number. When you add a second season to the RSS feed, Apple Podcasts displays the season numbers.',
             ],
@@ -136,9 +129,6 @@ class AddEpisodes extends Migration
         $this->forge->addKey('id', true);
         $this->forge->addUniqueKey(['podcast_id', 'slug']);
 
-        // FIXME: as season_number can be null, the unique key constraint is useless when it is
-        // the majority of RDBMS behave that way
-        // possible solution: remove the null constraint on the season_number and set a default
         $this->forge->addUniqueKey(['podcast_id', 'season_number', 'number']);
         $this->forge->addForeignKey('podcast_id', 'podcasts', 'id');
         $this->forge->createTable('episodes');

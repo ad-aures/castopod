@@ -49,7 +49,7 @@ class Episode extends BaseController
                 'image' =>
                     'uploaded[image]|is_image[image]|ext_in[image,jpg,png]|permit_empty',
                 'title' => 'required',
-                'slug' => 'required',
+                'slug' => 'required|regex_match[[a-zA-Z0-9\-]{1,191}]',
                 'description' => 'required',
                 'type' => 'required',
             ])
@@ -105,7 +105,7 @@ class Episode extends BaseController
                 'image' =>
                     'uploaded[image]|is_image[image]|ext_in[image,jpg,png]|permit_empty',
                 'title' => 'required',
-                'slug' => 'required',
+                'slug' => 'required|regex_match[[a-zA-Z0-9\-]{1,191}]',
                 'description' => 'required',
                 'type' => 'required',
             ])
@@ -164,6 +164,9 @@ class Episode extends BaseController
 
     public function view()
     {
+        // The page cache is set to a decade so it is deleted manually upon podcast update
+        $this->cachePage(DECADE);
+
         self::triggerWebpageHit($this->podcast->id);
 
         $data = [

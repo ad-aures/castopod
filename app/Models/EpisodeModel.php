@@ -39,14 +39,8 @@ class EpisodeModel extends Model
     protected $useSoftDeletes = true;
     protected $useTimestamps = true;
 
-    protected $afterInsert = [
-        'writeEnclosureMetadata',
-        'clearPodcastFeedCache',
-    ];
-    protected $afterUpdate = [
-        'writeEnclosureMetadata',
-        'clearPodcastFeedCache',
-    ];
+    protected $afterInsert = ['writeEnclosureMetadata', 'clearCache'];
+    protected $afterUpdate = ['writeEnclosureMetadata', 'clearCache'];
 
     protected function writeEnclosureMetadata(array $data)
     {
@@ -61,7 +55,7 @@ class EpisodeModel extends Model
         return $data;
     }
 
-    protected function clearPodcastFeedCache(array $data)
+    protected function clearCache(array $data)
     {
         $episode = $this->find(
             is_array($data['id']) ? $data['id'][0] : $data['id']
@@ -69,6 +63,9 @@ class EpisodeModel extends Model
 
         $cache = \Config\Services::cache();
 
+        // delete cache for rss feed, podcast and episode pages
         $cache->delete(md5($episode->podcast->feed_url));
+        $cache->delete(md5($episode->podcast->link));
+        $cache->delete(md5($episode->link));
     }
 }

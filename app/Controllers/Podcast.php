@@ -18,7 +18,12 @@ class Podcast extends BaseController
     {
         if (count($params) > 0) {
             $podcast_model = new PodcastModel();
-            $this->podcast = $podcast_model->where('name', $params[0])->first();
+            if (
+                !($podcast = $podcast_model->where('name', $params[0])->first())
+            ) {
+                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+            }
+            $this->podcast = $podcast;
         }
 
         return $this->$method();
@@ -32,7 +37,7 @@ class Podcast extends BaseController
         if (
             !$this->validate([
                 'title' => 'required',
-                'name' => 'required|regex_match[^[a-z0-9\_]{1,191}$]',
+                'name' => 'required|regex_match[[a-zA-Z0-9\_]{1,191}]',
                 'description' => 'required|max_length[4000]',
                 'image' =>
                     'uploaded[image]|is_image[image]|ext_in[image,jpg,png]',
@@ -91,7 +96,7 @@ class Podcast extends BaseController
         if (
             !$this->validate([
                 'title' => 'required',
-                'name' => 'required|regex_match[^[a-z0-9\_]{1,191}$]',
+                'name' => 'required|regex_match[[a-zA-Z0-9\_]{1,191}]',
                 'description' => 'required|max_length[4000]',
                 'image' =>
                     'uploaded[image]|is_image[image]|ext_in[image,jpg,png]|permit_empty',
@@ -150,6 +155,9 @@ class Podcast extends BaseController
 
     public function view()
     {
+        // The page cache is set to a decade so it is deleted manually upon podcast update
+        $this->cachePage(DECADE);
+
         self::triggerWebpageHit($this->podcast->id);
 
         $data = [
