@@ -135,7 +135,7 @@ class Episode extends Entity
     {
         return base_url(
             route_to(
-                'episode_view',
+                'episode',
                 $this->getPodcast()->name,
                 $this->attributes['slug']
             )

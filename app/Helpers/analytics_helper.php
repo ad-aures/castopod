@@ -13,7 +13,6 @@ function set_user_session_country()
 {
     $session = \Config\Services::session();
     $session->start();
-    $db = \Config\Database::connect();
 
     $country = 'N/A';
 

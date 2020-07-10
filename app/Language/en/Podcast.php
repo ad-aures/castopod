@@ -1,11 +1,21 @@
 <?
+/**
+ * @copyright  2020 Podlibre
+ * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
+ * @link       https://castopod.org/
+ */
 
 return [
+    'all_podcasts' => 'All podcasts',
+    'no_podcast' => 'No podcast found!',
+    'create_one' => 'Add a new one',
     'create' => 'Create a Podcast',
     'new_episode' => 'New Episode',
     'feed' => 'RSS feed',
     'edit' => 'Edit',
     'delete' => 'Delete',
+    'see_episodes' => 'See episodes',
+    'goto_page' => 'Go to page',
     'form' => [
         'title' => 'Title',
         'name' => 'Name',

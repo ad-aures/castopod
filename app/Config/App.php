@@ -274,4 +274,20 @@ class App extends BaseConfig
 	| Defines the root folder for media files storage
 	*/
     public $mediaRoot = 'media';
+
+    /*
+	|--------------------------------------------------------------------------
+	| Admin gateway
+	|--------------------------------------------------------------------------
+	| Defines a base route for all admin pages
+	*/
+    public $adminGateway = 'admin';
+
+    /*
+	|--------------------------------------------------------------------------
+	| Auth gateway
+	|--------------------------------------------------------------------------
+	| Defines a base route for all authentication related pages
+	*/
+    public $authGateway = 'auth';
 }

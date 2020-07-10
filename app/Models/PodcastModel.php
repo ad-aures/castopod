@@ -49,11 +49,9 @@ class PodcastModel extends Model
             is_array($data['id']) ? $data['id'][0] : $data['id']
         );
 
-        $cache = \Config\Services::cache();
-
         // delete cache for rss feed and podcast pages
-        $cache->delete(md5($podcast->feed_url));
-        $cache->delete(md5($podcast->link));
+        cache()->delete(md5($podcast->feed_url));
+        cache()->delete(md5($podcast->link));
         // TODO: clear cache for every podcast's episode page?
         // foreach ($podcast->episodes as $episode) {
         //     $cache->delete(md5($episode->link));

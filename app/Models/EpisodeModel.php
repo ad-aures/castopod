@@ -61,11 +61,30 @@ class EpisodeModel extends Model
             is_array($data['id']) ? $data['id'][0] : $data['id']
         );
 
-        $cache = \Config\Services::cache();
-
         // delete cache for rss feed, podcast and episode pages
-        $cache->delete(md5($episode->podcast->feed_url));
-        $cache->delete(md5($episode->podcast->link));
-        $cache->delete(md5($episode->link));
+        cache()->delete(md5($episode->podcast->feed_url));
+        cache()->delete(md5($episode->podcast->link));
+        cache()->delete(md5($episode->link));
+
+        // delete model requests cache
+        cache()->delete("{$episode->podcast_id}_episodes");
+    }
+
+    /**
+     * Gets all episodes for a podcast
+     *
+     * @param int $podcastId
+     *
+     * @return \App\Entities\Episode[]
+     */
+    public function getPodcastEpisodes(int $podcastId): array
+    {
+        if (!($found = cache("{$podcastId}_episodes"))) {
+            $found = $this->where('podcast_id', $podcastId)->findAll();
+
+            cache()->save("{$podcastId}_episodes", $found, 300);
+        }
+
+        return $found;
     }
 }

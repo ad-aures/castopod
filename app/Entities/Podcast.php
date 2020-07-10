@@ -71,7 +71,7 @@ class Podcast extends Entity
 
     public function getLink()
     {
-        return base_url(route_to('podcast_view', $this->attributes['name']));
+        return base_url(route_to('podcast', $this->attributes['name']));
     }
 
     public function getFeedUrl()
@@ -79,12 +79,25 @@ class Podcast extends Entity
         return base_url(route_to('podcast_feed', $this->attributes['name']));
     }
 
+    /**
+     * Returns the podcast's episodes
+     *
+     * @return \App\Entities\Episode[]
+     */
     public function getEpisodes()
     {
-        $episode_model = new EpisodeModel();
+        if (empty($this->id)) {
+            throw new \RuntimeException(
+                'Podcast must be created before getting episodes.'
+            );
+        }
 
-        return $episode_model
-            ->where('podcast_id', $this->attributes['id'])
-            ->findAll();
+        if (empty($this->permissions)) {
+            $this->episodes = (new EpisodeModel())->getPodcastEpisodes(
+                $this->id
+            );
+        }
+
+        return $this->episodes;
     }
 }

@@ -25,6 +25,7 @@ class Toolbar extends BaseConfig
         \CodeIgniter\Debug\Toolbar\Collectors\Files::class,
         \CodeIgniter\Debug\Toolbar\Collectors\Routes::class,
         \CodeIgniter\Debug\Toolbar\Collectors\Events::class,
+        \Myth\Auth\Collectors\Auth::class,
     ];
 
     /*

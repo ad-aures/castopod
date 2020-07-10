@@ -98,7 +98,7 @@ Build the database with the migrate command:
 
 ```bash
 # loads the database schema during first migration
-docker-compose run --rm app php spark migrate
+docker-compose run --rm app php spark migrate -all
 ```
 
 Populate the database with the required data:

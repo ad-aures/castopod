@@ -14,17 +14,12 @@
 	<header class="border-b">
 		<div class="container flex items-center justify-between px-2 py-4 mx-auto">
 			<a href="<?= route_to('home') ?>" class="text-2xl">Castopod</a>
-			<nav>
-				<a class="px-4 py-2 border hover:bg-gray-100" href="<?= route_to(
-        'podcast_create'
-    ) ?>">New podcast</a>
-			</nav>
 		</div>
 	</header>
 	<main class="container flex-1 px-4 py-10 mx-auto">
 		<?= $this->renderSection('content') ?>
 	</main>
 	<footer class="container px-2 py-4 mx-auto text-sm text-right border-t">
-		Powered by <a class="underline hover:no-underline" href="https://castopod.org">Castopod</a>, a <a class="underline hover:no-underline" href="https://podlibre.org/">Podlibre</a> initiative.
+		Powered by <a class="underline hover:no-underline" href="https://castopod.org" target="_blank" rel="noreferrer noopener">Castopod</a>, a <a class="underline hover:no-underline" href="https://podlibre.org/" target="_blank" rel="noreferrer noopener">Podlibre</a> initiative.
 	</footer>
 </body>

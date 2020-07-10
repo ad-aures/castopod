@@ -8,7 +8,7 @@
 /**
  * Saves a file to the corresponding podcast folder in `public/media`
  *
- * @param UploadedFile $file
+ * @param \CodeIgniter\HTTP\Files\UploadedFile $file
  * @param string $podcast_name
  * @param string $file_name
  *
