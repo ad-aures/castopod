@@ -7,5 +7,6 @@
 
 return [
     'passwordChangeSuccess' => 'Password has been successfully changed!',
-    'changePassword' => 'Change my password'
+    'changePassword' => 'Change my password',
+    'info' => 'My account info'
 ];

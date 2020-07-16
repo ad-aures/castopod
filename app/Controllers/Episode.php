@@ -24,7 +24,7 @@ class Episode extends BaseController
         if (count($params) > 1) {
             $episode_model = new EpisodeModel();
             if (
-                !($episode = $episode_model
+                !($this->episode = $episode_model
                     ->where([
                         'podcast_id' => $this->podcast->id,
                         'slug' => $params[1],
@@ -33,7 +33,6 @@ class Episode extends BaseController
             ) {
                 throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
             }
-            $this->episode = $episode;
         }
 
         return $this->$method();

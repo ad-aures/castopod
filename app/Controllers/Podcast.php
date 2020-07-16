@@ -17,11 +17,12 @@ class Podcast extends BaseController
         if (count($params) > 0) {
             $podcast_model = new PodcastModel();
             if (
-                !($podcast = $podcast_model->where('name', $params[0])->first())
+                !($this->podcast = $podcast_model
+                    ->where('name', $params[0])
+                    ->first())
             ) {
                 throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
             }
-            $this->podcast = $podcast;
         }
 
         return $this->$method();

@@ -8,13 +8,13 @@
 return [
     'all_podcasts' => 'All podcasts',
     'no_podcast' => 'No podcast found!',
-    'create_one' => 'Add a new one',
     'create' => 'Create a Podcast',
     'new_episode' => 'New Episode',
     'feed' => 'RSS feed',
     'edit' => 'Edit',
     'delete' => 'Delete',
     'see_episodes' => 'See episodes',
+    'see_contributors' => 'See contributors',
     'goto_page' => 'Go to page',
     'form' => [
         'title' => 'Title',

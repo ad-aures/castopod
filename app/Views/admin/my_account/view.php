@@ -1,5 +1,10 @@
 <?= $this->extend('admin/_layout') ?>
 
+<?= $this->section('title') ?>
+<?= lang('MyAccount.info') ?>
+<?= $this->endSection() ?>
+
+
 <?= $this->section('content') ?>
 
 <div class="px-4 py-5 bg-gray-50 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">

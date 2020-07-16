@@ -1,14 +1,13 @@
 <?= $this->extend('admin/_layout') ?>
 
+<?= $this->section('title') ?>
+<?= lang('Podcast.edit') ?>
+<?= $this->endSection() ?>
+
+
 <?= $this->section('content') ?>
 
-<h1 class="mb-6 text-xl"><?= lang('Podcast.edit') ?></h1>
-
-<div class="mb-8">
-     <?= \Config\Services::validation()->listErrors() ?>
-</div>
-
-<?= form_open_multipart(base_url(route_to('podcast_edit', $podcast->name)), [
+<?= form_open_multipart(route_to('podcast_edit', $podcast->id), [
     'method' => 'post',
     'class' => 'flex flex-col max-w-md',
 ]) ?>
@@ -70,7 +69,9 @@
 </div>
 
 <div class="inline-flex items-center mb-4">
-    <input type="checkbox" id="explicit" name="explicit" class="form-checkbox" checked="<?= $podcast->explicit ?>" />
+    <input type="checkbox" id="explicit" name="explicit" class="form-checkbox" <?= $podcast->explicit
+        ? 'checked'
+        : '' ?> />
     <label for="explicit" class="pl-2"><?= lang(
         'Podcast.form.explicit'
     ) ?></label>
@@ -123,7 +124,7 @@
 
 <div class="inline-flex items-center mb-4">
     <input type="checkbox" id="complete" name="complete" class="form-checkbox"
-    <?= $podcast->block ? 'checked' : '' ?> />
+    <?= $podcast->complete ? 'checked' : '' ?> />
     <label for="complete" class="pl-2"><?= lang(
         'Podcast.form.complete'
     ) ?></label>

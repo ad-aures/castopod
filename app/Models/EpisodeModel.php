@@ -19,11 +19,8 @@ class EpisodeModel extends Model
         'title',
         'slug',
         'enclosure_uri',
-        'enclosure_length',
-        'enclosure_type',
         'pub_date',
         'description',
-        'duration',
         'image_uri',
         'explicit',
         'number',
@@ -38,6 +35,21 @@ class EpisodeModel extends Model
 
     protected $useSoftDeletes = true;
     protected $useTimestamps = true;
+
+    protected $validationRules = [
+        'podcast_id' => 'required',
+        'title' => 'required',
+        'slug' => 'required|regex_match[/^[a-zA-Z0-9\-]{1,191}$/]',
+        'enclosure_uri' => 'required',
+        'pub_date' => 'required|valid_date',
+        'description' => 'required',
+        'image_uri' => 'required',
+        'number' => 'required',
+        'season_number' => 'required',
+        'author_email' => 'valid_email|permit_empty',
+        'type' => 'required',
+    ];
+    protected $validationMessages = [];
 
     protected $afterInsert = ['writeEnclosureMetadata', 'clearCache'];
     protected $afterUpdate = ['writeEnclosureMetadata', 'clearCache'];

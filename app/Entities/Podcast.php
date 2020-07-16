@@ -9,6 +9,7 @@ namespace App\Entities;
 
 use App\Models\EpisodeModel;
 use CodeIgniter\Entity;
+use Myth\Auth\Models\UserModel;
 
 class Podcast extends Entity
 {
@@ -17,6 +18,8 @@ class Podcast extends Entity
     protected $image_media_path;
     protected $image_url;
     protected $episodes;
+    protected $owner;
+    protected $contributors;
 
     protected $casts = [
         'id' => 'integer',
@@ -29,6 +32,7 @@ class Podcast extends Entity
         'explicit' => 'boolean',
         'author_name' => '?string',
         'author_email' => '?string',
+        'owner_id' => 'integer',
         'owner_name' => '?string',
         'owner_email' => '?string',
         'type' => 'string',
@@ -92,12 +96,48 @@ class Podcast extends Entity
             );
         }
 
-        if (empty($this->permissions)) {
+        if (empty($this->episodes)) {
             $this->episodes = (new EpisodeModel())->getPodcastEpisodes(
                 $this->id
             );
         }
 
         return $this->episodes;
+    }
+
+    /**
+     * Returns the podcast owner
+     *
+     * @return \Myth\Auth\Entities\User
+     */
+    public function getOwner()
+    {
+        if (empty($this->id)) {
+            throw new \RuntimeException(
+                'Podcast must be created before getting owner.'
+            );
+        }
+
+        if (empty($this->owner)) {
+            $this->owner = (new UserModel())->find($this->owner_id);
+        }
+
+        return $this->owner;
+    }
+
+    public function setOwner(\Myth\Auth\Entities\User $user)
+    {
+        $this->attributes['owner_id'] = $user->id;
+
+        return $this;
+    }
+
+    public function getContributors()
+    {
+        return (new UserModel())
+            ->select('users.*')
+            ->join('users_podcasts', 'users_podcasts.user_id = users.id')
+            ->where('users_podcasts.podcast_id', $this->attributes['id'])
+            ->findAll();
     }
 }

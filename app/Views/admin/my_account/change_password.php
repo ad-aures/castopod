@@ -1,8 +1,11 @@
 <?= $this->extend('admin/_layout') ?>
 
-<?= $this->section('content') ?>
+<?= $this->section('title') ?>
+<?= lang('MyAccount.changePassword') ?>
+<?= $this->endSection() ?>
 
-<h1 class="mb-6 text-xl"><?= lang('MyAccount.changePassword') ?></h1>
+
+<?= $this->section('content') ?>
 
 <form action="<?= route_to(
     'myAccount_changePassword'

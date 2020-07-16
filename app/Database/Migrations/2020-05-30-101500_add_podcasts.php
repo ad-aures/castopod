@@ -81,17 +81,23 @@ class AddPodcasts extends Migration
                     'Email of the group responsible for creating the show.  Show author most often refers to the parent company or network of a podcast, but it can also be used to identify the host(s) if none exists.  Author information is especially useful if a company or organization publishes multiple podcasts. Providing this information will allow listeners to see all shows created by the same entity.',
                 'null' => true,
             ],
+            'owner_id' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'comment' => 'The podcast owner.',
+            ],
             'owner_name' => [
                 'type' => 'VARCHAR',
                 'constraint' => 1024,
-                'owner_name' =>
+                'comment' =>
                     'The podcast owner name.  Note: The owner information is for administrative communication about the podcast and isn’t displayed in Apple Podcasts.',
                 'null' => true,
             ],
             'owner_email' => [
                 'type' => 'VARCHAR',
                 'constraint' => 1024,
-                'owner_email' =>
+                'comment' =>
                     'The podcast owner email address.  Note: The owner information is for administrative communication about the podcast and isn’t displayed in Apple Podcasts. Please make sure the email address is active and monitored.',
                 'null' => true,
             ],
@@ -147,6 +153,7 @@ class AddPodcasts extends Migration
             ],
         ]);
         $this->forge->addKey('id', true);
+        $this->forge->addForeignKey('owner_id', 'users', 'id');
         $this->forge->createTable('podcasts');
     }
 

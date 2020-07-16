@@ -17,9 +17,7 @@
 ) ?></a>
 	</header>
 	<main class="w-full max-w-md px-6 py-4 mx-auto bg-white rounded-lg shadow">
-		<div class="mb-4">
-			<?= view('_message_block') ?>
-		</div>
+		<?= view('_message_block') ?>
 		<?= $this->renderSection('content') ?>
 	</main>
 	<footer class="flex flex-col text-sm">

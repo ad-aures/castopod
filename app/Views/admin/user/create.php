@@ -1,12 +1,11 @@
 <?= $this->extend('admin/_layout') ?>
 
+<?= $this->section('title') ?>
+<?= lang('User.create') ?>
+<?= $this->endSection() ?>
+
+
 <?= $this->section('content') ?>
-
-<h1 class="mb-6 text-xl"><?= lang('User.create') ?></h1>
-
-<div class="mb-8">
-     <?= \Config\Services::validation()->listErrors() ?>
-</div>
 
 <form action="<?= route_to(
     'user_create'

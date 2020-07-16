@@ -17,12 +17,6 @@ class AddUsersPodcasts extends Migration
     public function up()
     {
         $this->forge->addField([
-            'id' => [
-                'type' => 'BIGINT',
-                'constraint' => 20,
-                'unsigned' => true,
-                'auto_increment' => true,
-            ],
             'user_id' => [
                 'type' => 'INT',
                 'constraint' => 11,
@@ -34,8 +28,7 @@ class AddUsersPodcasts extends Migration
                 'unsigned' => true,
             ],
         ]);
-        $this->forge->addPrimaryKey('id');
-        $this->forge->addUniqueKey(['user_id', 'podcast_id']);
+        $this->forge->addPrimaryKey(['user_id', 'podcast_id']);
         $this->forge->addForeignKey('user_id', 'users', 'id');
         $this->forge->addForeignKey('podcast_id', 'podcasts', 'id');
         $this->forge->createTable('users_podcasts');

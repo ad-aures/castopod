@@ -10,6 +10,11 @@
             <ul>
                 <li>
                     <a class="block px-2 py-1 -mx-2 text-gray-600 transition duration-200 ease-in-out hover:text-gray-900" href="<?= route_to(
+                        'my_podcasts'
+                    ) ?>">My podcasts</a>
+                </li>
+                <li>
+                    <a class="block px-2 py-1 -mx-2 text-gray-600 transition duration-200 ease-in-out hover:text-gray-900" href="<?= route_to(
                         'podcast_list'
                     ) ?>">All podcasts</a>
                 </li>

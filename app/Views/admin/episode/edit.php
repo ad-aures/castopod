@@ -1,20 +1,16 @@
 <?= $this->extend('admin/_layout') ?>
 
+<?= $this->section('title') ?>
+<?= lang('Episode.edit') ?>
+<?= $this->endSection() ?>
+
+
 <?= $this->section('content') ?>
 
-<h1 class="mb-6 text-xl"><?= lang('Episode.edit') ?></h1>
-
-<div class="mb-8">
-    <?= \Config\Services::validation()->listErrors() ?>
-</div>
-
-<?= form_open_multipart(
-    route_to('episode_edit', $podcast->name, $episode->slug),
-    [
-        'method' => 'post',
-        'class' => 'flex flex-col max-w-md',
-    ]
-) ?>
+<?= form_open_multipart(route_to('episode_edit', $podcast->id, $episode->id), [
+    'method' => 'post',
+    'class' => 'flex flex-col max-w-md',
+]) ?>
 <?= csrf_field() ?>
 
 <div class="flex flex-col mb-4">

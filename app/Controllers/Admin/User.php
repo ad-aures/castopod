@@ -17,12 +17,9 @@ class User extends BaseController
     {
         if (count($params) > 0) {
             $user_model = new UserModel();
-            if (
-                !($user = $user_model->where('username', $params[0])->first())
-            ) {
+            if (!($this->user = $user_model->find($params[0]))) {
                 throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
             }
-            $this->user = $user;
         }
 
         return $this->$method();
@@ -39,6 +36,11 @@ class User extends BaseController
 
     public function create()
     {
+        echo view('admin/user/create');
+    }
+
+    public function attemptCreate()
+    {
         $user_model = new UserModel();
 
         // Validate here first, since some things,
@@ -53,30 +55,33 @@ class User extends BaseController
         );
 
         if (!$this->validate($rules)) {
-            echo view('admin/user/create');
-        } else {
-            // Save the user
-            $user = new \Myth\Auth\Entities\User($this->request->getPost());
-
-            // Activate user
-            $user->activate();
-
-            // Force user to reset his password on first connection
-            $user->force_pass_reset = true;
-            $user->generateResetHash();
-
-            if (!$user_model->save($user)) {
-                return redirect()
-                    ->back()
-                    ->withInput()
-                    ->with('errors', $user_model->errors());
-            }
-
-            // Success!
             return redirect()
-                ->route('user_list')
-                ->with('message', lang('User.createSuccess'));
+                ->back()
+                ->withInput()
+                ->with('errors', $this->validator->getErrors());
         }
+
+        // Save the user
+        $user = new \Myth\Auth\Entities\User($this->request->getPost());
+
+        // Activate user
+        $user->activate();
+
+        // Force user to reset his password on first connection
+        $user->force_pass_reset = true;
+        $user->generateResetHash();
+
+        if (!$user_model->save($user)) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $user_model->errors());
+        }
+
+        // Success!
+        return redirect()
+            ->route('user_list')
+            ->with('message', lang('User.createSuccess'));
     }
 
     public function forcePassReset()

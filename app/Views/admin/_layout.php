@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Castopod</title>
+	<title>Castopod Admin</title>
 	<meta name="description" content="Castopod is an open-source hosting platform made for podcasters who want engage and interact with their audience.">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="shortcut icon" type="image/png" href="/favicon.ico" />
@@ -12,9 +12,12 @@
 
 <body class="flex flex-col min-h-screen mx-auto">
 	<header class="text-white bg-gray-900 border-b">
-		<div class="flex items-center justify-between px-4 py-4 mx-auto">
-			<a href="<?= route_to('home') ?>" class="text-xl">Castopod Admin</a>
-			<nav>
+		<div class="flex items-center px-4 py-4 mx-auto">
+			<a href="<?= route_to('admin') ?>" class="text-xl">Castopod Admin</a>
+			<a href="<?= route_to(
+       'home'
+   ) ?>" class="ml-4 text-sm underline hover:no-underline">Go to website</a>
+			<nav class="ml-auto">
 				<span class="mr-2">Welcome, <?= user()->username ?></span>
 				<a class="px-4 py-2 border hover:bg-gray-800" href="<?= route_to(
         'logout'
@@ -25,9 +28,8 @@
 	<div class="flex flex-1">
 		<?= view('admin/_sidenav') ?>
 		<main class="container flex-1 px-4 py-6 mx-auto">
-			<div class="mb-4">
-				<?= view('_message_block') ?>
-			</div>
+			<h1 class="mb-4 text-2xl"><?= $this->renderSection('title') ?></h1>
+			<?= view('_message_block') ?>
 			<?= $this->renderSection('content') ?>
 		</main>
 	</div>

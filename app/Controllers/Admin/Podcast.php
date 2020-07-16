@@ -6,7 +6,6 @@
  */
 namespace App\Controllers\Admin;
 
-use App\Entities\UserPodcast;
 use App\Models\CategoryModel;
 use App\Models\LanguageModel;
 use App\Models\PodcastModel;
@@ -18,16 +17,57 @@ class Podcast extends BaseController
     public function _remap($method, ...$params)
     {
         if (count($params) > 0) {
+            switch ($method) {
+                case 'edit':
+                    if (
+                        !has_permission('podcasts-edit') ||
+                        !has_permission("podcasts:$params[0]-edit")
+                    ) {
+                        throw new \RuntimeException(
+                            lang('Auth.notEnoughPrivilege')
+                        );
+                    }
+                case 'delete':
+                    if (
+                        !has_permission('podcasts-delete') ||
+                        !has_permission("podcasts:$params[0]-delete")
+                    ) {
+                        throw new \RuntimeException(
+                            lang('Auth.notEnoughPrivilege')
+                        );
+                    }
+                case 'listContributors':
+                case 'addContributor':
+                case 'editContributor':
+                case 'deleteContributor':
+                    if (
+                        !has_permission('podcasts-manage_contributors') ||
+                        !has_permission(
+                            "podcasts:$params[0]-manage_contributors"
+                        )
+                    ) {
+                        throw new \RuntimeException(
+                            lang('Auth.notEnoughPrivilege')
+                        );
+                    }
+            }
+
             $podcast_model = new PodcastModel();
-            if (
-                !($podcast = $podcast_model->where('name', $params[0])->first())
-            ) {
+            if (!($this->podcast = $podcast_model->find($params[0]))) {
                 throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
             }
-            $this->podcast = $podcast;
         }
 
         return $this->$method();
+    }
+
+    public function myPodcasts()
+    {
+        $data = [
+            'all_podcasts' => (new PodcastModel())->getUserPodcasts(user()->id),
+        ];
+
+        return view('admin/podcast/list', $data);
     }
 
     public function list()
@@ -42,133 +82,141 @@ class Podcast extends BaseController
     public function create()
     {
         helper(['form', 'misc']);
-        $podcast_model = new PodcastModel();
 
-        if (
-            !$this->validate([
-                'title' => 'required',
-                'name' => 'required|regex_match[[a-zA-Z0-9\_]{1,191}]',
-                'description' => 'required|max_length[4000]',
-                'image' =>
-                    'uploaded[image]|is_image[image]|ext_in[image,jpg,png]',
-                'owner_email' => 'required|valid_email',
-                'type' => 'required',
-            ])
-        ) {
-            $languageModel = new LanguageModel();
-            $categoryModel = new CategoryModel();
-            $data = [
-                'languages' => $languageModel->findAll(),
-                'categories' => $categoryModel->findAll(),
-                'browser_lang' => get_browser_language(
-                    $this->request->getServer('HTTP_ACCEPT_LANGUAGE')
-                ),
-            ];
+        $languageModel = new LanguageModel();
+        $categoryModel = new CategoryModel();
+        $data = [
+            'languages' => $languageModel->findAll(),
+            'categories' => $categoryModel->findAll(),
+            'browser_lang' => get_browser_language(
+                $this->request->getServer('HTTP_ACCEPT_LANGUAGE')
+            ),
+        ];
 
-            echo view('admin/podcast/create', $data);
-        } else {
-            $podcast = new \App\Entities\Podcast([
-                'title' => $this->request->getVar('title'),
-                'name' => $this->request->getVar('name'),
-                'description' => $this->request->getVar('description'),
-                'episode_description_footer' => $this->request->getVar(
-                    'episode_description_footer'
-                ),
-                'image' => $this->request->getFile('image'),
-                'language' => $this->request->getVar('language'),
-                'category' => $this->request->getVar('category'),
-                'explicit' => $this->request->getVar('explicit') or false,
-                'author_name' => $this->request->getVar('author_name'),
-                'author_email' => $this->request->getVar('author_email'),
-                'owner_name' => $this->request->getVar('owner_name'),
-                'owner_email' => $this->request->getVar('owner_email'),
-                'type' => $this->request->getVar('type'),
-                'copyright' => $this->request->getVar('copyright'),
-                'block' => $this->request->getVar('block') or false,
-                'complete' => $this->request->getVar('complete') or false,
-                'custom_html_head' => $this->request->getVar(
-                    'custom_html_head'
-                ),
-            ]);
+        echo view('admin/podcast/create', $data);
+    }
 
-            $db = \Config\Database::connect();
+    public function attemptCreate()
+    {
+        $rules = [
+            'image' => 'uploaded[image]|is_image[image]|ext_in[image,jpg,png]',
+        ];
 
-            $db->transStart();
-
-            $new_podcast_id = $podcast_model->insert($podcast, true);
-
-            $user_podcast_model = new \App\Models\UserPodcastModel();
-            $user_podcast_model->save([
-                'user_id' => user()->id,
-                'podcast_id' => $new_podcast_id,
-            ]);
-
-            $db->transComplete();
-
-            return redirect()->route('podcast_list', [$podcast->name]);
+        if (!$this->validate($rules)) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $this->validator->getErrors());
         }
+
+        $podcast = new \App\Entities\Podcast([
+            'title' => $this->request->getPost('title'),
+            'name' => $this->request->getPost('name'),
+            'description' => $this->request->getPost('description'),
+            'episode_description_footer' => $this->request->getPost(
+                'episode_description_footer'
+            ),
+            'image' => $this->request->getFile('image'),
+            'language' => $this->request->getPost('language'),
+            'category' => $this->request->getPost('category'),
+            'explicit' => (bool) $this->request->getPost('explicit'),
+            'author_name' => $this->request->getPost('author_name'),
+            'author_email' => $this->request->getPost('author_email'),
+            'owner' => user(),
+            'owner_name' => $this->request->getPost('owner_name'),
+            'owner_email' => $this->request->getPost('owner_email'),
+            'type' => $this->request->getPost('type'),
+            'copyright' => $this->request->getPost('copyright'),
+            'block' => (bool) $this->request->getPost('block'),
+            'complete' => (bool) $this->request->getPost('complete'),
+            'custom_html_head' => $this->request->getPost('custom_html_head'),
+        ]);
+
+        $podcast_model = new PodcastModel();
+        $db = \Config\Database::connect();
+
+        $db->transStart();
+
+        if (!($new_podcast_id = $podcast_model->insert($podcast, true))) {
+            $db->transComplete();
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $podcast_model->errors());
+        }
+
+        $podcast_model->addContributorToPodcast(user()->id, $new_podcast_id);
+
+        $db->transComplete();
+
+        return redirect()->route('podcast_list');
     }
 
     public function edit()
     {
-        helper(['form', 'misc']);
+        helper('form');
 
-        if (
-            !$this->validate([
-                'title' => 'required',
-                'name' => 'required|regex_match[[a-zA-Z0-9\_]{1,191}]',
-                'description' => 'required|max_length[4000]',
-                'image' =>
-                    'uploaded[image]|is_image[image]|ext_in[image,jpg,png]|permit_empty',
-                'owner_email' => 'required|valid_email',
-                'type' => 'required',
-            ])
-        ) {
-            $languageModel = new LanguageModel();
-            $categoryModel = new CategoryModel();
-            $data = [
-                'podcast' => $this->podcast,
-                'languages' => $languageModel->findAll(),
-                'categories' => $categoryModel->findAll(),
-            ];
+        $languageModel = new LanguageModel();
+        $categoryModel = new CategoryModel();
+        $data = [
+            'podcast' => $this->podcast,
+            'languages' => $languageModel->findAll(),
+            'categories' => $categoryModel->findAll(),
+        ];
 
-            echo view('admin/podcast/edit', $data);
-        } else {
-            $this->podcast->title = $this->request->getVar('title');
-            $this->podcast->name = $this->request->getVar('name');
-            $this->podcast->description = $this->request->getVar('description');
-            $this->podcast->episode_description_footer = $this->request->getVar(
-                'episode_description_footer'
-            );
+        echo view('admin/podcast/edit', $data);
+    }
 
-            $image = $this->request->getFile('image');
-            if ($image->isValid()) {
-                $this->podcast->image = $this->request->getFile('image');
-            }
-            $this->podcast->language = $this->request->getVar('language');
-            $this->podcast->category = $this->request->getVar('category');
-            $this->podcast->explicit =
-                ($this->request->getVar('explicit') or false);
-            $this->podcast->author_name = $this->request->getVar('author_name');
-            $this->podcast->author_email = $this->request->getVar(
-                'author_email'
-            );
-            $this->podcast->owner_name = $this->request->getVar('owner_name');
-            $this->podcast->owner_email = $this->request->getVar('owner_email');
-            $this->podcast->type = $this->request->getVar('type');
-            $this->podcast->copyright = $this->request->getVar('copyright');
-            $this->podcast->block = ($this->request->getVar('block') or false);
-            $this->podcast->complete =
-                ($this->request->getVar('complete') or false);
-            $this->podcast->custom_html_head = $this->request->getVar(
-                'custom_html_head'
-            );
+    public function attemptEdit()
+    {
+        $rules = [
+            'image' =>
+                'uploaded[image]|is_image[image]|ext_in[image,jpg,png]|permit_empty',
+        ];
 
-            $podcast_model = new PodcastModel();
-            $podcast_model->save($this->podcast);
-
-            return redirect()->route('podcast_list', [$this->podcast->name]);
+        if (!$this->validate($rules)) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $this->validator->getErrors());
         }
+
+        $this->podcast->title = $this->request->getPost('title');
+        $this->podcast->name = $this->request->getPost('name');
+        $this->podcast->description = $this->request->getPost('description');
+        $this->podcast->episode_description_footer = $this->request->getPost(
+            'episode_description_footer'
+        );
+
+        $image = $this->request->getFile('image');
+        if ($image->isValid()) {
+            $this->podcast->image = $image;
+        }
+        $this->podcast->language = $this->request->getPost('language');
+        $this->podcast->category = $this->request->getPost('category');
+        $this->podcast->explicit = (bool) $this->request->getPost('explicit');
+        $this->podcast->author_name = $this->request->getPost('author_name');
+        $this->podcast->author_email = $this->request->getPost('author_email');
+        $this->podcast->owner_name = $this->request->getPost('owner_name');
+        $this->podcast->owner_email = $this->request->getPost('owner_email');
+        $this->podcast->type = $this->request->getPost('type');
+        $this->podcast->copyright = $this->request->getPost('copyright');
+        $this->podcast->block = (bool) $this->request->getPost('block');
+        $this->podcast->complete = (bool) $this->request->getPost('complete');
+        $this->podcast->custom_html_head = $this->request->getPost(
+            'custom_html_head'
+        );
+
+        $podcast_model = new PodcastModel();
+
+        if (!$podcast_model->save($this->podcast)) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $podcast_model->errors());
+        }
+
+        return redirect()->route('podcast_list');
     }
 
     public function delete()
