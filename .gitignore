@@ -129,6 +129,9 @@ nb-configuration.xml
 yarn.lock
 node_modules
 
+# JS
+.cache
+
 # public folder
 public/*
 !public/.htaccess

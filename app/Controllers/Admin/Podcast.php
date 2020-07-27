@@ -18,6 +18,15 @@ class Podcast extends BaseController
     {
         if (count($params) > 0) {
             switch ($method) {
+                case 'view':
+                    if (
+                        !has_permission('podcasts-view') ||
+                        !has_permission("podcasts:$params[0]-view")
+                    ) {
+                        throw new \RuntimeException(
+                            lang('Auth.notEnoughPrivilege')
+                        );
+                    }
                 case 'edit':
                     if (
                         !has_permission('podcasts-edit') ||
@@ -36,20 +45,6 @@ class Podcast extends BaseController
                             lang('Auth.notEnoughPrivilege')
                         );
                     }
-                case 'listContributors':
-                case 'addContributor':
-                case 'editContributor':
-                case 'deleteContributor':
-                    if (
-                        !has_permission('podcasts-manage_contributors') ||
-                        !has_permission(
-                            "podcasts:$params[0]-manage_contributors"
-                        )
-                    ) {
-                        throw new \RuntimeException(
-                            lang('Auth.notEnoughPrivilege')
-                        );
-                    }
             }
 
             $podcast_model = new PodcastModel();
@@ -61,22 +56,27 @@ class Podcast extends BaseController
         return $this->$method();
     }
 
-    public function myPodcasts()
-    {
-        $data = [
-            'all_podcasts' => (new PodcastModel())->getUserPodcasts(user()->id),
-        ];
-
-        return view('admin/podcast/list', $data);
-    }
-
     public function list()
     {
         $podcast_model = new PodcastModel();
 
-        $data = ['all_podcasts' => $podcast_model->findAll()];
+        $all_podcasts = [];
+        if (has_permission('podcasts-list')) {
+            $all_podcasts = $podcast_model->findAll();
+        } else {
+            $all_podcasts = $podcast_model->getUserPodcasts(user()->id);
+        }
+
+        $data = ['all_podcasts' => $all_podcasts];
 
         return view('admin/podcast/list', $data);
+    }
+
+    public function view()
+    {
+        $data = ['podcast' => $this->podcast];
+
+        return view('admin/podcast/view', $data);
     }
 
     public function create()

@@ -2,12 +2,12 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
+	<meta charset="UTF-8"/>
 	<title>Castopod Auth</title>
-	<meta name="description" content="Castopod is an open-source hosting platform made for podcasters who want engage and interact with their audience.">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Castopod is an open-source hosting platform made for podcasters who want engage and interact with their audience."/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<link rel="shortcut icon" type="image/png" href="/favicon.ico" />
-	<link rel="stylesheet" href="/index.css">
+	<link rel="stylesheet" href="/assets/index.css"/>
 </head>
 
 <body class="flex flex-col items-center justify-center min-h-screen mx-auto bg-gray-100">

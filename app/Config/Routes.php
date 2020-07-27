@@ -61,12 +61,9 @@ $routes->group(
     ['namespace' => 'App\Controllers\Admin'],
     function ($routes) {
         $routes->get('/', 'Home', [
-            'as' => 'admin',
+            'as' => 'admin_home',
         ]);
 
-        $routes->get('my-podcasts', 'Podcast::myPodcasts', [
-            'as' => 'my_podcasts',
-        ]);
         $routes->get('podcasts', 'Podcast::list', [
             'as' => 'podcast_list',
             'filter' => 'permission:podcasts-list',
@@ -81,6 +78,9 @@ $routes->group(
 
         // Use ids in admin area to help permission and group lookups
         $routes->group('podcasts/(:num)', function ($routes) {
+            $routes->get('/', 'Podcast::view/$1', [
+                'as' => 'podcast_view',
+            ]);
             $routes->get('edit', 'Podcast::edit/$1', [
                 'as' => 'podcast_edit',
             ]);
@@ -98,6 +98,9 @@ $routes->group(
             ]);
             $routes->post('new-episode', 'Episode::attemptCreate/$1');
 
+            $routes->get('episodes/(:num)', 'Episode::view/$1/$2', [
+                'as' => 'episode_view',
+            ]);
             $routes->get('episodes/(:num)/edit', 'Episode::edit/$1/$2', [
                 'as' => 'episode_edit',
             ]);

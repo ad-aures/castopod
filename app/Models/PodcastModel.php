@@ -126,6 +126,10 @@ class PodcastModel extends Model
         $podcast_permissions = [
             'podcasts:' . $podcast->id => [
                 [
+                    'name' => 'View',
+                    'description' => "View the $podcast->name podcast",
+                ],
+                [
                     'name' => 'edit',
                     'description' => "Edit the $podcast->name podcast",
                 ],

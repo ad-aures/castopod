@@ -1,15 +1,19 @@
+<?php helper('html'); ?>
+
 <?= $this->extend('admin/_layout') ?>
 
 <?= $this->section('title') ?>
 <?= lang('Contributor.podcast_contributors') ?>
+<a class="inline-flex items-center px-2 py-1 mb-2 ml-2 text-sm text-white bg-green-500 rounded shadow-xs outline-none hover:bg-green-600 focus:shadow-outline" href="<?= route_to(
+    'contributor_add',
+    $podcast->id
+) ?>">
+<?= icon('add', 'mr-2') ?>
+<?= lang('Contributor.add') ?></a>
 <?= $this->endSection() ?>
 
 
 <?= $this->section('content') ?>
-<a class="inline-block px-4 py-2 mb-2 border hover:bg-gray-100" href="<?= route_to(
-    'contributor_add',
-    $podcast->id
-) ?>"><?= lang('Contributor.add') ?></a>
 
 <table class="table-auto">
     <thead>

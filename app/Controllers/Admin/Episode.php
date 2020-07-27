@@ -77,6 +77,13 @@ class Episode extends BaseController
         return view('admin/episode/list', $data);
     }
 
+    public function view()
+    {
+        $data = ['episode' => $this->episode];
+
+        return view('admin/episode/view', $data);
+    }
+
     public function create()
     {
         helper(['form']);

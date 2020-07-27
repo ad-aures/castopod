@@ -25,14 +25,14 @@
 
 <div class="flex flex-col mb-4">
     <label for="description"><?= lang('Podcast.form.description') ?></label>
-    <textarea class="form-textarea" id="description" name="description" required><?= $podcast->description ?></textarea>
+    <textarea class="form-textarea" id="description" name="description" required data-editor="markdown"><?= $podcast->description ?></textarea>
 </div>
 
 <div class="flex flex-col mb-4">
     <label for="episode_description_footer"><?= lang(
         'Podcast.form.episode_description_footer'
     ) ?></label>
-    <textarea class="form-textarea" id="episode_description_footer" name="episode_description_footer"><?= $podcast->episode_description_footer ?></textarea>
+    <textarea class="form-textarea" id="episode_description_footer" name="episode_description_footer" data-editor="markdown"><?= $podcast->episode_description_footer ?></textarea>
 </div>
 
 <div class="flex flex-col mb-4">
@@ -134,7 +134,7 @@
     <label for="custom_html_head"><?= esc(
         lang('Podcast.form.custom_html_head')
     ) ?></label>
-    <textarea class="form-textarea" id="custom_html_head" name="custom_html_head"><?= $podcast->custom_html_head ?></textarea>
+    <textarea class="form-textarea" id="custom_html_head" name="custom_html_head" data-editor="html"><?= $podcast->custom_html_head ?></textarea>
 </div>
 
 <button type="submit" name="submit" class="self-end px-4 py-2 bg-gray-200"><?= lang(

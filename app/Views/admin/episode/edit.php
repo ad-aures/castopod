@@ -20,17 +20,17 @@
 
 <div class="flex flex-col mb-4">
     <label for="title"><?= lang('Episode.form.title') ?></label>
-    <input type="text" class="form-input" id="title" name="title" value="<?= $episode->title ?>" required />
+    <input type="text" class="form-input" id="title" name="title" data-slugify="title" value="<?= $episode->title ?>" required />
 </div>
 
 <div class="flex flex-col mb-4">
     <label for="slug"><?= lang('Episode.form.slug') ?></label>
-    <input type="text" class="form-input" id="slug" name="slug" value="<?= $episode->slug ?>" required />
+    <input type="text" class="form-input" id="slug" name="slug" data-slugify="slug" value="<?= $episode->slug ?>" required />
 </div>
 
 <div class="flex flex-col mb-4">
     <label for="description"><?= lang('Episode.form.description') ?></label>
-    <textarea class="form-textarea" id="description" name="description" required><?= $episode->description ?></textarea>
+    <textarea class="form-textarea" id="description" name="description" required data-editor="markdown"><?= $episode->description ?></textarea>
 </div>
 
 <div class="flex flex-col mb-4">

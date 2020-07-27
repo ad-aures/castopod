@@ -9,6 +9,8 @@ namespace App\Entities;
 
 use App\Models\PodcastModel;
 use CodeIgniter\Entity;
+use League\CommonMark\CommonMarkConverter;
+use Parsedown;
 
 class Episode extends Entity
 {
@@ -22,6 +24,7 @@ class Episode extends Entity
     protected string $enclosure_media_path;
     protected string $enclosure_url;
     protected array $enclosure_metadata;
+    protected string $description_html;
 
     protected $casts = [
         'slug' => 'string',
@@ -152,5 +155,27 @@ class Episode extends Entity
         $podcast_model = new PodcastModel();
 
         return $podcast_model->find($this->attributes['podcast_id']);
+    }
+
+    public function getDescriptionHtml()
+    {
+        $converter = new CommonMarkConverter([
+            'html_input' => 'strip',
+            'allow_unsafe_links' => false,
+            'renderer' => [
+                'soft_break' => '<br>',
+            ],
+        ]);
+
+        if (
+            $description_footer = $this->getPodcast()
+                ->episode_description_footer
+        ) {
+            return $converter->convertToHtml(
+                $this->attributes['description'] . '---'
+            ) . $converter->convertToHtml($description_footer);
+        }
+
+        return $converter->convertToHtml($this->attributes['description']);
     }
 }

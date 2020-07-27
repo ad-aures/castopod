@@ -1,8 +1,13 @@
+/* eslint-disable */
+
 module.exports = {
-  purge: [],
+  purge: ["./app/Views/**/*.php", "./app/Views/**/*.js"],
   theme: {
     extend: {},
   },
   variants: {},
-  plugins: [require("@tailwindcss/custom-forms")],
+  plugins: [
+    require("@tailwindcss/custom-forms"),
+    require("@tailwindcss/typography"),
+  ],
 };

@@ -20,23 +20,25 @@
 
 <div class="flex flex-col mb-4">
     <label for="title"><?= lang('Episode.form.title') ?></label>
-    <input type="text" class="form-input" id="title" name="title" required value="<?= old(
+    <input type="text" class="form-input" id="title" name="title" data-slugify="title" required value="<?= old(
         'title'
     ) ?>" />
 </div>
 
 <div class="flex flex-col mb-4">
     <label for="slug"><?= lang('Episode.form.slug') ?></label>
-    <input type="text" class="form-input" id="slug" name="slug" required value="<?= old(
+    <input type="text" class="form-input" id="slug" name="slug" data-slugify="slug" required value="<?= old(
         'slug'
     ) ?>" />
 </div>
 
 <div class="flex flex-col mb-4">
     <label for="description"><?= lang('Episode.form.description') ?></label>
-    <textarea class="form-textarea" id="description" name="description" required><?= old(
+    <textarea class="hidden form-textarea" id="description" name="description" required data-editor="markdown"><?= old(
         'description'
     ) ?></textarea>
+    <button type="button" data-editor-view="markdown">Markdown</button>
+    <button type="button" data-editor-view="wysiwyg">WYSIWYG</button>
 </div>
 
 <div class="flex flex-col mb-4">

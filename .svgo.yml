@@ -1,0 +1,8 @@
+plugins:
+  - removeXMLNS: true
+  - removeDimensions: true
+  - addAttributesToSVGElement:
+      attributes:
+        - width: "1em"
+        - height: "1em"
+  - sortAttrs: true

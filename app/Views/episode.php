@@ -13,5 +13,13 @@
   Your browser does not support the audio tag.
 </audio>
 
+<<<<<<< HEAD
 <?= $this->endSection()
 ?>
+=======
+<section class="prose">
+<?= $episode->description_html ?>
+</section>
+
+<?= $this->endSection() ?>
+>>>>>>> 240f1d4... feat: enhance ui using javascript in admin area

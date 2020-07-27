@@ -65,6 +65,7 @@ class AuthSeeder extends Seeder
                     'name' => 'list',
                     'description' => 'List all podcasts and their episodes',
                 ],
+                ['name' => 'view', 'description' => 'View any podcast'],
                 ['name' => 'edit', 'description' => 'Edit any podcast'],
                 [
                     'name' => 'manage_contributors',

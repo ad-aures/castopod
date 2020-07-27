@@ -1,0 +1,21 @@
+.holy-grail-grid {
+  @apply grid;
+  grid-template: auto 1fr auto / auto 1fr auto;
+
+  & .holy-grail-header {
+    grid-column: 1 / 4;
+  }
+
+  & .holy-grail-sidenav {
+    grid-column: 1 / 2;
+    grid-row: 2 / 4;
+  }
+
+  & .holy-grail-main {
+    grid-column: 2 / 4;
+  }
+
+  & .holy-grail-footer {
+    grid-column: 2 / 4;
+  }
+}
