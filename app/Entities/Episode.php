@@ -159,23 +159,19 @@ class Episode extends Entity
 
     public function getDescriptionHtml()
     {
-        $converter = new CommonMarkConverter([
-            'html_input' => 'strip',
-            'allow_unsafe_links' => false,
-            'renderer' => [
-                'soft_break' => '<br>',
-            ],
-        ]);
+        $converter = new Parsedown();
+        $converter->setBreaksEnabled(true);
 
         if (
             $description_footer = $this->getPodcast()
                 ->episode_description_footer
         ) {
-            return $converter->convertToHtml(
-                $this->attributes['description'] . '---'
-            ) . $converter->convertToHtml($description_footer);
+            return $converter->text($this->attributes['description']) .
+                '<footer>' .
+                $converter->text($description_footer) .
+                '</footer>';
         }
 
-        return $converter->convertToHtml($this->attributes['description']);
+        return $converter->text($this->attributes['description']);
     }
 }

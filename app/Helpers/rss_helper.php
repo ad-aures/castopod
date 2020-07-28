@@ -53,7 +53,7 @@ function get_rss_feed($podcast)
     $channel->addChild('docs', 'https://cyber.harvard.edu/rss/rss.html');
 
     $channel->addChild('title', $podcast->title);
-    $channel->addChildWithCDATA('description', $podcast->description);
+    $channel->addChildWithCDATA('description', $podcast->description_html);
     $itunes_image = $channel->addChild('image', null, $itunes_namespace);
     $itunes_image->addAttribute('href', $podcast->image_url);
     $channel->addChild('language', $podcast->language);
@@ -124,7 +124,7 @@ function get_rss_feed($podcast)
 
         $item->addChild('guid', $episode->guid);
         $item->addChild('pubDate', $episode->pub_date->format(DATE_RFC1123));
-        $item->addChildWithCDATA('description', $episode->description);
+        $item->addChildWithCDATA('description', $episode->description_html);
         $item->addChild(
             'duration',
             $enclosure_metadata['playtime_seconds'],

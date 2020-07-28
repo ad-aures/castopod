@@ -1,12 +1,12 @@
 // Original code from: https://gist.github.com/hagemann/382adfc57adbd5af078dc93feef01fe1
-const slugify = (string) => {
+const slugify = (text: string) => {
   const a =
     "àáâäæãåāăąçćčđďèéêëēėęěğǵḧîïíīįìłḿñńǹňôöòóœøōõőṕŕřßśšşșťțûüùúūǘůűųẃẍÿýžźż·/_,:;";
   const b =
     "aaaaaaaaaacccddeeeeeeeegghiiiiiilmnnnnoooooooooprrsssssttuuuuuuuuuwxyyzzz------";
   const p = new RegExp(a.split("").join("|"), "g");
 
-  return string
+  return text
     .toString()
     .toLowerCase()
     .replace(/\s+/g, "-") // Replace spaces with -
@@ -18,9 +18,13 @@ const slugify = (string) => {
     .replace(/-+$/, ""); // Trim - from end of text
 };
 
-const Slugify = () => {
-  const title = document.querySelector("input[data-slugify='title']");
-  const slug = document.querySelector("input[data-slugify='slug']");
+const Slugify = (): void => {
+  const title: HTMLInputElement | null = document.querySelector(
+    "input[data-slugify='title']"
+  );
+  const slug: HTMLInputElement | null = document.querySelector(
+    "input[data-slugify='slug']"
+  );
 
   if (title && slug) {
     title.addEventListener("input", () => {

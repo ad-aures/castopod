@@ -8,6 +8,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<link rel="shortcut icon" type="image/png" href="/favicon.ico" />
 	<link rel="stylesheet" href="/assets/index.css"/>
+	<?php if (isset($podcast)): ?>
+		<?= $podcast->custom_html_head ?>
+	<?php endif; ?>
 </head>
 
 <body class="flex flex-col min-h-screen mx-auto">

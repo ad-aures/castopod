@@ -10,16 +10,18 @@ namespace App\Entities;
 use App\Models\EpisodeModel;
 use CodeIgniter\Entity;
 use Myth\Auth\Models\UserModel;
+use Parsedown;
 
 class Podcast extends Entity
 {
-    protected $link;
+    protected string $link;
     protected \CodeIgniter\Files\File $image;
-    protected $image_media_path;
-    protected $image_url;
+    protected string $image_media_path;
+    protected string $image_url;
     protected $episodes;
-    protected $owner;
+    protected \Myth\Auth\Entities\User $owner;
     protected $contributors;
+    protected string $description_html;
 
     protected $casts = [
         'id' => 'integer',
@@ -132,6 +134,11 @@ class Podcast extends Entity
         return $this;
     }
 
+    /**
+     * Returns all podcast contributors
+     *
+     * @return \Myth\Auth\Entities\User[]
+     */
     public function getContributors()
     {
         return (new UserModel())
@@ -139,5 +146,13 @@ class Podcast extends Entity
             ->join('users_podcasts', 'users_podcasts.user_id = users.id')
             ->where('users_podcasts.podcast_id', $this->attributes['id'])
             ->findAll();
+    }
+
+    public function getDescriptionHtml()
+    {
+        $converter = new Parsedown();
+        $converter->setBreaksEnabled(true);
+
+        return $converter->text($this->attributes['description']);
     }
 }

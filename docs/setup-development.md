@@ -60,12 +60,15 @@ docker-compose run --rm composer install --ignore-platform-reqs
 docker-compose run --rm node npm install
 ```
 
-6. Build styles using postcss
+6. Build assets: javascript, styles, icons and svg images
 
-> To generate the `public/index.css` file, you must run the following command.
+> To generate public assets, you must run the following commands.
 
 ```bash
+docker-compose run --rm node npm run build:js
 docker-compose run --rm node npm run build:css
+docker-compose run --rm node npm run build:icons
+docker-compose run --rm node npm run build:svg
 ```
 
 ## Start docker containers

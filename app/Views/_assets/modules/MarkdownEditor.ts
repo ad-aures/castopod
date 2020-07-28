@@ -11,7 +11,9 @@ import { EditorView } from "prosemirror-view";
 import "prosemirror-view/style/prosemirror.css";
 
 class MarkdownView {
-  constructor(target) {
+  textarea: HTMLTextAreaElement;
+
+  constructor(target: HTMLTextAreaElement) {
     this.textarea = target;
     this.textarea.classList.add("w-full", "h-full");
   }
@@ -31,16 +33,20 @@ class MarkdownView {
 }
 
 class ProseMirrorView {
-  constructor(target, content) {
+  editorContainer: HTMLDivElement;
+  view: EditorView;
+
+  constructor(target: HTMLTextAreaElement, content: string) {
     this.editorContainer = document.createElement("div");
     this.editorContainer.classList.add(
       "bg-white",
       "border",
       "px-2",
-      "min-h-full"
+      "min-h-full",
+      "prose-sm"
     );
     this.editorContainer.style.minHeight = "200px";
-    const editor = target.parentNode.insertBefore(
+    const editor = target.parentNode?.insertBefore(
       this.editorContainer,
       target.nextSibling
     );
@@ -51,7 +57,7 @@ class ProseMirrorView {
         plugins: exampleSetup({ schema }),
       }),
       dispatchTransaction: (transaction) => {
-        let newState = this.view.state.apply(transaction);
+        const newState = this.view.state.apply(transaction);
         this.view.updateState(newState);
 
         if (transaction.docChanged) {
@@ -75,16 +81,18 @@ class ProseMirrorView {
   }
 }
 
-const MarkdownEditor = () => {
-  const targets = document.querySelectorAll("textarea[data-editor='markdown']");
-  const activeClass = ["font-bold"];
+const MarkdownEditor = (): void => {
+  const targets: NodeListOf<HTMLTextAreaElement> = document.querySelectorAll(
+    "textarea[data-editor='markdown']"
+  );
+  const activeClass = "font-bold";
 
   for (let i = 0; i < targets.length; i++) {
     const target = targets[i];
 
     const wysiwygBtn = document.createElement("button");
     wysiwygBtn.classList.add(
-      ...activeClass,
+      activeClass,
       "py-1",
       "px-2",
       "bg-white",
@@ -112,7 +120,7 @@ const MarkdownEditor = () => {
     const markdownEditorContainer = document.createElement("div");
     markdownEditorContainer.classList.add("relative");
     markdownEditorContainer.style.minHeight = "200px";
-    target.parentNode.appendChild(markdownEditorContainer);
+    target.parentNode?.appendChild(markdownEditorContainer);
     markdownEditorContainer.appendChild(target);
 
     // show WYSIWYG editor by default
@@ -123,17 +131,17 @@ const MarkdownEditor = () => {
     markdownEditorContainer.appendChild(viewButtons);
 
     markdownBtn.addEventListener("click", () => {
-      if (markdownBtn.classList.contains(...activeClass)) return;
-      markdownBtn.classList.add(...activeClass);
-      wysiwygBtn.classList.remove(...activeClass);
+      if (markdownBtn.classList.contains(activeClass)) return;
+      markdownBtn.classList.add(activeClass);
+      wysiwygBtn.classList.remove(activeClass);
       wysiwygView.hide();
       markdownView.show();
     });
 
     wysiwygBtn.addEventListener("click", () => {
-      if (wysiwygBtn.classList.contains(...activeClass)) return;
-      wysiwygBtn.classList.add(...activeClass);
-      markdownBtn.classList.remove(...activeClass);
+      if (wysiwygBtn.classList.contains(activeClass)) return;
+      wysiwygBtn.classList.add(activeClass);
+      markdownBtn.classList.remove(activeClass);
       markdownView.hide();
       wysiwygView.show();
     });

@@ -1,8 +1,8 @@
 import CodeMirror from "codemirror";
 import "codemirror/lib/codemirror.css";
 
-const HTMLEditor = () => {
-  const allHTMLEditors = document.querySelectorAll(
+const HTMLEditor = (): void => {
+  const allHTMLEditors: NodeListOf<HTMLTextAreaElement> = document.querySelectorAll(
     "textarea[data-editor='html']"
   );
 
