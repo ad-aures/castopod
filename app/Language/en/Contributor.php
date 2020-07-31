@@ -6,6 +6,9 @@
  */
 
 return [
+    'removeOwnerContributorError' => 'You can\'t remove the podcast owner!',
+    'removeContributorSuccess' => 'You have successfully removed {username} from {podcastTitle}',
+    'alreadyAddedError' => 'The contributor you\'re trying to add has already been added!',
     'podcast_contributors' => 'Podcast contributors',
     'add' => 'Add contributor',
     'add_contributor' => 'Add a contributor for {0}',

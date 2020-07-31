@@ -10,6 +10,7 @@
      'podcasts' => 'Podcasts',
      'users' => 'Users',
      'admin_home' => 'Home',
+     'my_podcasts' => 'My podcasts',
      'podcast_list' => 'All podcasts',
      'podcast_create' => 'New podcast',
      'user_list' => 'All users',

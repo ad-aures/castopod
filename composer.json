@@ -6,12 +6,12 @@
   "license": "AGPL-3.0-or-later",
   "require": {
     "php": ">=7.2",
-    "codeigniter4/framework": "4.0.3",
     "james-heinrich/getid3": "~2.0.0-dev",
     "whichbrowser/parser": "^2.0",
     "geoip2/geoip2": "~2.0",
-    "myth/auth": "1.0-beta.2",
-    "erusev/parsedown": "^1.7"
+    "myth/auth": "dev-develop",
+    "erusev/parsedown": "^1.7",
+    "codeigniter4/codeigniter4": "dev-develop"
   },
   "require-dev": {
     "mikey179/vfsstream": "1.6.*",
@@ -32,5 +32,13 @@
     "forum": "http://forum.codeigniter.com/",
     "source": "https://github.com/codeigniter4/CodeIgniter4",
     "slack": "https://codeigniterchat.slack.com"
-  }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/codeigniter4/codeigniter4"
+    }
+  ]
 }

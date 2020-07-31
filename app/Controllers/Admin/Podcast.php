@@ -9,6 +9,7 @@ namespace App\Controllers\Admin;
 use App\Models\CategoryModel;
 use App\Models\LanguageModel;
 use App\Models\PodcastModel;
+use Config\Services;
 
 class Podcast extends BaseController
 {
@@ -17,38 +18,7 @@ class Podcast extends BaseController
     public function _remap($method, ...$params)
     {
         if (count($params) > 0) {
-            switch ($method) {
-                case 'view':
-                    if (
-                        !has_permission('podcasts-view') ||
-                        !has_permission("podcasts:$params[0]-view")
-                    ) {
-                        throw new \RuntimeException(
-                            lang('Auth.notEnoughPrivilege')
-                        );
-                    }
-                case 'edit':
-                    if (
-                        !has_permission('podcasts-edit') ||
-                        !has_permission("podcasts:$params[0]-edit")
-                    ) {
-                        throw new \RuntimeException(
-                            lang('Auth.notEnoughPrivilege')
-                        );
-                    }
-                case 'delete':
-                    if (
-                        !has_permission('podcasts-delete') ||
-                        !has_permission("podcasts:$params[0]-delete")
-                    ) {
-                        throw new \RuntimeException(
-                            lang('Auth.notEnoughPrivilege')
-                        );
-                    }
-            }
-
-            $podcast_model = new PodcastModel();
-            if (!($this->podcast = $podcast_model->find($params[0]))) {
+            if (!($this->podcast = (new PodcastModel())->find($params[0]))) {
                 throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
             }
         }
@@ -56,18 +26,22 @@ class Podcast extends BaseController
         return $this->$method();
     }
 
+    public function myPodcasts()
+    {
+        $data = [
+            'all_podcasts' => (new PodcastModel())->getUserPodcasts(user()->id),
+        ];
+
+        return view('admin/podcast/list', $data);
+    }
+
     public function list()
     {
-        $podcast_model = new PodcastModel();
-
-        $all_podcasts = [];
-        if (has_permission('podcasts-list')) {
-            $all_podcasts = $podcast_model->findAll();
-        } else {
-            $all_podcasts = $podcast_model->getUserPodcasts(user()->id);
+        if (!has_permission('podcasts-list')) {
+            return redirect()->route('my_podcasts');
         }
 
-        $data = ['all_podcasts' => $all_podcasts];
+        $data = ['all_podcasts' => (new PodcastModel())->findAll()];
 
         return view('admin/podcast/list', $data);
     }
@@ -145,7 +119,14 @@ class Podcast extends BaseController
                 ->with('errors', $podcast_model->errors());
         }
 
-        $podcast_model->addContributorToPodcast(user()->id, $new_podcast_id);
+        $authorize = Services::authorization();
+        $podcast_admin_group = $authorize->group('podcast_admin');
+
+        $podcast_model->addPodcastContributor(
+            user()->id,
+            $new_podcast_id,
+            $podcast_admin_group->id
+        );
 
         $db->transComplete();
 

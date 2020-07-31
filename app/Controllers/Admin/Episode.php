@@ -17,39 +17,7 @@ class Episode extends BaseController
 
     public function _remap($method, ...$params)
     {
-        switch ($method) {
-            case 'list':
-                if (
-                    !has_permission('episodes-list') ||
-                    !has_permission("podcasts:$params[0]:episodes-list")
-                ) {
-                    throw new \RuntimeException(
-                        lang('Auth.notEnoughPrivilege')
-                    );
-                }
-            case 'edit':
-                if (
-                    !has_permission('episodes-edit') ||
-                    !has_permission("podcasts:$params[0]:episodes-edit")
-                ) {
-                    throw new \RuntimeException(
-                        lang('Auth.notEnoughPrivilege')
-                    );
-                }
-            case 'delete':
-                if (
-                    !has_permission('episodes-delete') ||
-                    !has_permission("podcasts:$params[0]:episodes-delete")
-                ) {
-                    throw new \RuntimeException(
-                        lang('Auth.notEnoughPrivilege')
-                    );
-                }
-        }
-
-        $podcast_model = new PodcastModel();
-
-        $this->podcast = $podcast_model->find($params[0]);
+        $this->podcast = (new PodcastModel())->find($params[0]);
 
         if (count($params) > 1) {
             $episode_model = new EpisodeModel();

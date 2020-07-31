@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3656eaed72238d7b46af985ec86f6533",
+    "content-hash": "b483083efa09cc772800d5df7d339d02",
     "packages": [
         {
-            "name": "codeigniter4/framework",
-            "version": "v4.0.3",
+            "name": "codeigniter4/codeigniter4",
+            "version": "dev-develop",
             "source": {
                 "type": "git",
-                "url": "https://github.com/codeigniter4/framework.git",
-                "reference": "edd88b18483e309bab1411651d846aace255ab36"
+                "url": "https://github.com/codeigniter4/CodeIgniter4.git",
+                "reference": "81c08a5ddd70d2243c0842dfcc22c93dd044bc42"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codeigniter4/framework/zipball/edd88b18483e309bab1411651d846aace255ab36",
-                "reference": "edd88b18483e309bab1411651d846aace255ab36",
+                "url": "https://api.github.com/repos/codeigniter4/CodeIgniter4/zipball/81c08a5ddd70d2243c0842dfcc22c93dd044bc42",
+                "reference": "81c08a5ddd70d2243c0842dfcc22c93dd044bc42",
                 "shasum": ""
             },
             "require": {
@@ -32,8 +32,10 @@
             },
             "require-dev": {
                 "codeigniter4/codeigniter4-standard": "^1.0",
+                "fzaninotto/faker": "^1.9@dev",
                 "mikey179/vfsstream": "1.6.*",
                 "phpunit/phpunit": "^8.5",
+                "predis/predis": "^1.1",
                 "squizlabs/php_codesniffer": "^3.3"
             },
             "type": "project",
@@ -42,13 +44,28 @@
                     "CodeIgniter\\": "system/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "scripts": {
+                "post-update-cmd": [
+                    "@composer dump-autoload",
+                    "CodeIgniter\\ComposerScripts::postUpdate",
+                    "bash admin/setup.sh"
+                ],
+                "test": [
+                    "phpunit"
+                ]
+            },
             "license": [
                 "MIT"
             ],
             "description": "The CodeIgniter framework v4",
             "homepage": "https://codeigniter.com",
-            "time": "2020-05-01T05:01:20+00:00"
+            "support": {
+                "forum": "http://forum.codeigniter.com/",
+                "source": "https://github.com/codeigniter4/CodeIgniter4",
+                "slack": "https://codeigniterchat.slack.com",
+                "issues": "https://github.com/codeigniter4/CodeIgniter4/issues"
+            },
+            "time": "2020-07-29T03:07:26+00:00"
         },
         {
             "name": "composer/ca-bundle",
@@ -217,16 +234,16 @@
         },
         {
             "name": "james-heinrich/getid3",
-            "version": "2.0.x-dev",
+            "version": "v2.0.0-beta3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/JamesHeinrich/getID3.git",
-                "reference": "8cf765ec4c42ed732993a9aa60b638ee398df154"
+                "reference": "5515a2d24667c3c0ff49fdcbdadc405c0880c7a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JamesHeinrich/getID3/zipball/8cf765ec4c42ed732993a9aa60b638ee398df154",
-                "reference": "8cf765ec4c42ed732993a9aa60b638ee398df154",
+                "url": "https://api.github.com/repos/JamesHeinrich/getID3/zipball/5515a2d24667c3c0ff49fdcbdadc405c0880c7a2",
+                "reference": "5515a2d24667c3c0ff49fdcbdadc405c0880c7a2",
                 "shasum": ""
             },
             "require": {
@@ -294,7 +311,7 @@
                 "tags",
                 "video"
             ],
-            "time": "2019-07-22T12:33:16+00:00"
+            "time": "2020-07-21T08:15:44+00:00"
         },
         {
             "name": "kint-php/kint",
@@ -581,16 +598,16 @@
         },
         {
             "name": "myth/auth",
-            "version": "1.0-beta.2",
+            "version": "dev-develop",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lonnieezell/myth-auth.git",
-                "reference": "b110088785ba22a82264e1df444621f3e1618f95"
+                "reference": "d9c9b0e4a8bea9ba6c847dcfefc6645bf1e1d694"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lonnieezell/myth-auth/zipball/b110088785ba22a82264e1df444621f3e1618f95",
-                "reference": "b110088785ba22a82264e1df444621f3e1618f95",
+                "url": "https://api.github.com/repos/lonnieezell/myth-auth/zipball/d9c9b0e4a8bea9ba6c847dcfefc6645bf1e1d694",
+                "reference": "d9c9b0e4a8bea9ba6c847dcfefc6645bf1e1d694",
                 "shasum": ""
             },
             "require": {
@@ -600,7 +617,7 @@
                 "codeigniter4/codeigniter4": "dev-develop",
                 "fzaninotto/faker": "^1.9@dev",
                 "mockery/mockery": "^1.0",
-                "phpunit/phpunit": "^7.0"
+                "phpunit/phpunit": "8.5.*"
             },
             "type": "library",
             "autoload": {
@@ -627,7 +644,17 @@
                 "authorization",
                 "codeigniter"
             ],
-            "time": "2019-12-12T05:12:25+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/lonnieezell",
+                    "type": "github"
+                },
+                {
+                    "url": "https://www.patreon.com/lonnieezell",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2020-07-16T14:00:14+00:00"
         },
         {
             "name": "psr/cache",
@@ -1106,28 +1133,27 @@
         },
         {
             "name": "phpdocumentor/reflection-docblock",
-            "version": "5.1.0",
+            "version": "5.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "cd72d394ca794d3466a3b2fc09d5a6c1dc86b47e"
+                "reference": "3170448f5769fe19f456173d833734e0ff1b84df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/cd72d394ca794d3466a3b2fc09d5a6c1dc86b47e",
-                "reference": "cd72d394ca794d3466a3b2fc09d5a6c1dc86b47e",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/3170448f5769fe19f456173d833734e0ff1b84df",
+                "reference": "3170448f5769fe19f456173d833734e0ff1b84df",
                 "shasum": ""
             },
             "require": {
-                "ext-filter": "^7.1",
-                "php": "^7.2",
-                "phpdocumentor/reflection-common": "^2.0",
-                "phpdocumentor/type-resolver": "^1.0",
-                "webmozart/assert": "^1"
+                "ext-filter": "*",
+                "php": "^7.2 || ^8.0",
+                "phpdocumentor/reflection-common": "^2.2",
+                "phpdocumentor/type-resolver": "^1.3",
+                "webmozart/assert": "^1.9.1"
             },
             "require-dev": {
-                "doctrine/instantiator": "^1",
-                "mockery/mockery": "^1"
+                "mockery/mockery": "~1.3.2"
             },
             "type": "library",
             "extra": {
@@ -1155,7 +1181,7 @@
                 }
             ],
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
-            "time": "2020-02-22T12:28:44+00:00"
+            "time": "2020-07-20T20:05:34+00:00"
         },
         {
             "name": "phpdocumentor/type-resolver",
@@ -2398,12 +2424,13 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": {
         "james-heinrich/getid3": 20,
-        "myth/auth": 10
+        "myth/auth": 20,
+        "codeigniter4/codeigniter4": 20
     },
-    "prefer-stable": false,
+    "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": ">=7.2"

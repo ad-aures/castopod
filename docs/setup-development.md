@@ -97,20 +97,33 @@ docker ps -a
 
 ## Initialize and populate database
 
-Build the database with the migrate command:
+1. Build the database with the migrate command:
 
 ```bash
 # loads the database schema during first migration
 docker-compose run --rm app php spark migrate -all
 ```
 
-Populate the database with the required data:
+2. Populate the database with the required data:
 
 ```bash
 # Populates all categories
 docker-compose run --rm app php spark db:seed CategorySeeder
 docker-compose run --rm app php spark db:seed LanguageSeeder
+docker-compose run --rm app php spark db:seed PlatformSeeder
+docker-compose run --rm app php spark db:seed AuthSeeder
 ```
+
+3. (optionnal) Populate the database with test data:
+
+```bash
+docker-compose run --rm app php spark db:seed TestSeeder
+```
+
+This will add an active superadmin user with the following credentials:
+
+- username: **admin**
+- password: **AGUehL3P**
 
 ## Install/Update app dependencies
 

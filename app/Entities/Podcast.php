@@ -9,7 +9,7 @@ namespace App\Entities;
 
 use App\Models\EpisodeModel;
 use CodeIgniter\Entity;
-use Myth\Auth\Models\UserModel;
+use App\Models\UserModel;
 use Parsedown;
 
 class Podcast extends Entity
@@ -19,7 +19,7 @@ class Podcast extends Entity
     protected string $image_media_path;
     protected string $image_url;
     protected $episodes;
-    protected \Myth\Auth\Entities\User $owner;
+    protected \App\Entities\User $owner;
     protected $contributors;
     protected string $description_html;
 
@@ -110,7 +110,7 @@ class Podcast extends Entity
     /**
      * Returns the podcast owner
      *
-     * @return \Myth\Auth\Entities\User
+     * @return \App\Entities\User
      */
     public function getOwner()
     {
@@ -127,7 +127,7 @@ class Podcast extends Entity
         return $this->owner;
     }
 
-    public function setOwner(\Myth\Auth\Entities\User $user)
+    public function setOwner(\App\Entities\User $user)
     {
         $this->attributes['owner_id'] = $user->id;
 
@@ -137,15 +137,23 @@ class Podcast extends Entity
     /**
      * Returns all podcast contributors
      *
-     * @return \Myth\Auth\Entities\User[]
+     * @return \App\Entities\User[]
      */
     public function getContributors()
     {
-        return (new UserModel())
-            ->select('users.*')
-            ->join('users_podcasts', 'users_podcasts.user_id = users.id')
-            ->where('users_podcasts.podcast_id', $this->attributes['id'])
-            ->findAll();
+        if (empty($this->id)) {
+            throw new \RuntimeException(
+                'Podcasts must be created before getting contributors.'
+            );
+        }
+
+        if (empty($this->contributors)) {
+            $this->contributors = (new UserModel())->getPodcastContributors(
+                $this->id
+            );
+        }
+
+        return $this->contributors;
     }
 
     public function getDescriptionHtml()

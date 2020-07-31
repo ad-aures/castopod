@@ -27,10 +27,16 @@ class AddUsersPodcasts extends Migration
                 'constraint' => 20,
                 'unsigned' => true,
             ],
+            'group_id' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+            ],
         ]);
         $this->forge->addPrimaryKey(['user_id', 'podcast_id']);
         $this->forge->addForeignKey('user_id', 'users', 'id');
         $this->forge->addForeignKey('podcast_id', 'podcasts', 'id');
+        $this->forge->addForeignKey('group_id', 'auth_groups', 'id');
         $this->forge->createTable('users_podcasts');
     }
 

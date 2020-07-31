@@ -16,7 +16,7 @@
         ) ?>" data-toggle="tooltip" data-placement="bottom" title="<?= lang(
     'Podcast.edit'
 ) ?>"><?= icon('edit') ?></a>
-        <a class="inline-flex p-2 bg-gray-100 rounded-full shadow-xs text-teal-gray hover:bg-gray-200" href="<?= route_to(
+        <a class="inline-flex p-2 text-gray-700 bg-gray-100 rounded-full shadow-xs hover:bg-gray-200" href="<?= route_to(
             'podcast_view',
             $podcast->id
         ) ?>" data-toggle="tooltip" data-placement="bottom" title="<?= lang(

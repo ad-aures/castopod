@@ -19,7 +19,7 @@
     <thead>
         <tr>
             <th class="px-4 py-2">Username</th>
-            <th class="px-4 py-2">Permissions</th>
+            <th class="px-4 py-2">Role</th>
             <th class="px-4 py-2">Actions</th>
         </tr>
     </thead>
@@ -27,10 +27,7 @@
         <?php foreach ($podcast->contributors as $contributor): ?>
         <tr>
             <td class="px-4 py-2 border"><?= $contributor->username ?></td>
-            <td class="px-4 py-2 border">[<?= implode(
-                ', ',
-                $contributor->permissions
-            ) ?>]</td>
+            <td class="px-4 py-2 border"><?= $contributor->podcast_role ?></td>
             <td class="px-4 py-2 border">
                 <a class="inline-flex px-2 py-1 mb-2 text-sm text-white bg-teal-700 hover:bg-teal-800" href="<?= route_to(
                     'contributor_edit',

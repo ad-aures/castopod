@@ -21,3 +21,16 @@ function get_browser_language($http_accept_language)
 
     return null;
 }
+
+/**
+ * Check if a string starts with some characters
+ *
+ * @param string $string
+ * @param string $query
+ *
+ * @return bool
+ */
+function startsWith($string, $query)
+{
+    return substr($string, 0, strlen($query)) === $query;
+}

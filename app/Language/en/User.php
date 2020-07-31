@@ -6,11 +6,15 @@
  */
 
 return [
-    'createSuccess' => 'User created successfully! The new user will be prompted with a password reset during his first login attempt.',
-    'forcePassResetSuccess' => 'The user will be prompted with a password reset during his next login attempt.',
-    'banSuccess' => 'User has been banned.',
-    'unbanSuccess' => 'User has been unbanned.',
-    'deleteSuccess' => 'User has been deleted.',
+    'createSuccess' => 'User created successfully! {username} will be prompted with a password reset upon first authentication.',
+    'rolesEditSuccess' => '{username}\'s roles have been successfully updated.',
+    'forcePassResetSuccess' => '{username} will be prompted with a password reset upon next visit.',
+    'banSuccess' => '{username} has been banned.',
+    'unbanSuccess' => '{username} has been unbanned.',
+    'banSuperAdminError' => '{username} is a superadmin, one does not simply ban a superadmin…',
+    'deleteSuperAdminError' => '{username} is a superadmin, one does not simply delete a superadmin…',
+    'deleteSuccess' => '{username} has been deleted.',
+    'edit_roles' => 'Edit {username}\'s roles',
     'forcePassReset' => 'Force pass reset',
     'ban' => 'Ban',
     'unban' => 'Unban',
@@ -24,6 +28,7 @@ return [
         'new_password' => 'New Password',
         'repeat_password' => 'Repeat password',
         'repeat_new_password' => 'Repeat new password',
+        'roles' => 'Roles',
         'submit_create' => 'Create user',
         'submit_edit' => 'Save',
     ]

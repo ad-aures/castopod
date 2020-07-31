@@ -7,8 +7,8 @@
 
 namespace App\Controllers\Admin;
 
-use Myth\Auth\Config\Services;
-use Myth\Auth\Models\UserModel;
+use Config\Services;
+use App\Models\UserModel;
 
 class Myaccount extends BaseController
 {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit bootstrap="vendor/codeigniter4/framework/system/Test/bootstrap.php"
+<phpunit bootstrap="vendor/codeigniter4/codeigniter4/system/Test/bootstrap.php"
 		backupGlobals="false"
 		colors="true"
 		convertErrorsToExceptions="true"

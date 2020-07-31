@@ -37,8 +37,6 @@
     <textarea class="hidden form-textarea" id="description" name="description" required data-editor="markdown"><?= old(
         'description'
     ) ?></textarea>
-    <button type="button" data-editor-view="markdown">Markdown</button>
-    <button type="button" data-editor-view="wysiwyg">WYSIWYG</button>
 </div>
 
 <div class="flex flex-col mb-4">

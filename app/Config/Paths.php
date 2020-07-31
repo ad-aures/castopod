@@ -21,7 +21,7 @@ class Paths
      * as this file.
      */
     public $systemDirectory =
-        __DIR__ . '/../../vendor/codeigniter4/framework/system';
+        __DIR__ . '/../../vendor/codeigniter4/codeigniter4/system';
 
     /*
      *---------------------------------------------------------------

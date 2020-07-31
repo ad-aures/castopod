@@ -9,7 +9,6 @@ namespace App\Entities;
 
 use App\Models\PodcastModel;
 use CodeIgniter\Entity;
-use League\CommonMark\CommonMarkConverter;
 use Parsedown;
 
 class Episode extends Entity

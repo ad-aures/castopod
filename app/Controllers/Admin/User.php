@@ -7,11 +7,13 @@
 
 namespace App\Controllers\Admin;
 
-use Myth\Auth\Models\UserModel;
+use App\Authorization\GroupModel;
+use App\Models\UserModel;
+use Config\Services;
 
 class User extends BaseController
 {
-    protected ?\Myth\Auth\Entities\User $user;
+    protected ?\App\Entities\User $user;
 
     public function _remap($method, ...$params)
     {
@@ -27,16 +29,18 @@ class User extends BaseController
 
     public function list()
     {
-        $user_model = new UserModel();
-
-        $data = ['all_users' => $user_model->findAll()];
+        $data = ['all_users' => (new UserModel())->findAll()];
 
         return view('admin/user/list', $data);
     }
 
     public function create()
     {
-        echo view('admin/user/create');
+        $data = [
+            'roles' => (new GroupModel())->getUserRoles(),
+        ];
+
+        echo view('admin/user/create', $data);
     }
 
     public function attemptCreate()
@@ -62,14 +66,13 @@ class User extends BaseController
         }
 
         // Save the user
-        $user = new \Myth\Auth\Entities\User($this->request->getPost());
+        $user = new \App\Entities\User($this->request->getPost());
 
         // Activate user
         $user->activate();
 
         // Force user to reset his password on first connection
-        $user->force_pass_reset = true;
-        $user->generateResetHash();
+        $user->forcePasswordReset();
 
         if (!$user_model->save($user)) {
             return redirect()
@@ -81,15 +84,46 @@ class User extends BaseController
         // Success!
         return redirect()
             ->route('user_list')
-            ->with('message', lang('User.createSuccess'));
+            ->with(
+                'message',
+                lang('User.createSuccess', [
+                    'username' => $user->username,
+                ])
+            );
+    }
+
+    public function edit()
+    {
+        $data = [
+            'user' => $this->user,
+            'roles' => (new GroupModel())->getUserRoles(),
+        ];
+
+        echo view('admin/user/edit', $data);
+    }
+
+    public function attemptEdit()
+    {
+        $authorize = Services::authorization();
+
+        $roles = $this->request->getPost('roles');
+        $authorize->setUserGroups($this->user->id, $roles);
+
+        // Success!
+        return redirect()
+            ->route('user_list')
+            ->with(
+                'message',
+                lang('User.rolesEditSuccess', [
+                    'username' => $this->user->username,
+                ])
+            );
     }
 
     public function forcePassReset()
     {
         $user_model = new UserModel();
-
-        $this->user->force_pass_reset = true;
-        $this->user->generateResetHash();
+        $this->user->forcePasswordReset();
 
         if (!$user_model->save($this->user)) {
             return redirect()
@@ -100,12 +134,29 @@ class User extends BaseController
         // Success!
         return redirect()
             ->route('user_list')
-            ->with('message', lang('User.forcePassResetSuccess'));
+            ->with(
+                'message',
+                lang('User.forcePassResetSuccess', [
+                    'username' => $this->user->username,
+                ])
+            );
     }
 
     public function ban()
     {
+        $authorize = Services::authorization();
+        if ($authorize->inGroup('superadmin', $this->user->id)) {
+            return redirect()
+                ->back()
+                ->with('errors', [
+                    lang('User.banSuperAdminError', [
+                        'username' => $this->user->username,
+                    ]),
+                ]);
+        }
+
         $user_model = new UserModel();
+        // TODO: add ban reason?
         $this->user->ban('');
 
         if (!$user_model->save($this->user)) {
@@ -116,7 +167,12 @@ class User extends BaseController
 
         return redirect()
             ->route('user_list')
-            ->with('message', lang('User.banSuccess'));
+            ->with(
+                'message',
+                lang('User.banSuccess', [
+                    'username' => $this->user->username,
+                ])
+            );
     }
 
     public function unBan()
@@ -132,16 +188,37 @@ class User extends BaseController
 
         return redirect()
             ->route('user_list')
-            ->with('message', lang('User.unbanSuccess'));
+            ->with(
+                'message',
+                lang('User.unbanSuccess', [
+                    'username' => $this->user->username,
+                ])
+            );
     }
 
     public function delete()
     {
+        $authorize = Services::authorization();
+        if ($authorize->inGroup('superadmin', $this->user->id)) {
+            return redirect()
+                ->back()
+                ->with('errors', [
+                    lang('User.deleteSuperAdminError', [
+                        'username' => $this->user->username,
+                    ]),
+                ]);
+        }
+
         $user_model = new UserModel();
         $user_model->delete($this->user->id);
 
         return redirect()
-            ->route('user_list')
-            ->with('message', lang('User.deleteSuccess'));
+            ->back()
+            ->with(
+                'message',
+                lang('User.deleteSuccess', [
+                    'username' => $this->user->username,
+                ])
+            );
     }
 }

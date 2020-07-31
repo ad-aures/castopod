@@ -22,6 +22,13 @@ $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
 $routes->setAutoRoute(false);
+
+/**
+ * --------------------------------------------------------------------
+ * Placeholder definitions
+ * --------------------------------------------------------------------
+ */
+
 $routes->addPlaceholder('podcastName', '[a-zA-Z0-9\_]{1,191}');
 $routes->addPlaceholder('episodeSlug', '[a-zA-Z0-9\-]{1,191}');
 $routes->addPlaceholder('username', '[a-zA-Z0-9 ]{3,}');
@@ -64,9 +71,11 @@ $routes->group(
             'as' => 'admin_home',
         ]);
 
+        $routes->get('my-podcasts', 'Podcast::myPodcasts', [
+            'as' => 'my_podcasts',
+        ]);
         $routes->get('podcasts', 'Podcast::list', [
             'as' => 'podcast_list',
-            'filter' => 'permission:podcasts-list',
         ]);
         $routes->get('new-podcast', 'Podcast::create', [
             'as' => 'podcast_create',
@@ -80,58 +89,97 @@ $routes->group(
         $routes->group('podcasts/(:num)', function ($routes) {
             $routes->get('/', 'Podcast::view/$1', [
                 'as' => 'podcast_view',
+                'filter' => 'permission:podcasts-view,podcast-view',
             ]);
             $routes->get('edit', 'Podcast::edit/$1', [
                 'as' => 'podcast_edit',
+                'filter' => 'permission:podcasts-edit,podcast-edit',
             ]);
-            $routes->post('edit', 'Podcast::attemptEdit/$1');
+            $routes->post('edit', 'Podcast::attemptEdit/$1', [
+                'filter' => 'permission:podcasts-edit,podcast-edit',
+            ]);
             $routes->add('delete', 'Podcast::delete/$1', [
                 'as' => 'podcast_delete',
+                'filter' => 'permission:podcasts-edit,podcast-delete',
             ]);
 
             // Podcast episodes
             $routes->get('episodes', 'Episode::list/$1', [
                 'as' => 'episode_list',
+                'filter' => 'permission:podcasts-view,podcast-view',
             ]);
             $routes->get('new-episode', 'Episode::create/$1', [
                 'as' => 'episode_create',
+                'filter' =>
+                    'permission:episodes-create,podcast_episodes-create',
             ]);
-            $routes->post('new-episode', 'Episode::attemptCreate/$1');
+            $routes->post('new-episode', 'Episode::attemptCreate/$1', [
+                'filter' =>
+                    'permission:episodes-create,podcast_episodes-create',
+            ]);
 
             $routes->get('episodes/(:num)', 'Episode::view/$1/$2', [
                 'as' => 'episode_view',
+                'filter' => 'permission:episodes-list,podcast_episodes-list',
             ]);
             $routes->get('episodes/(:num)/edit', 'Episode::edit/$1/$2', [
                 'as' => 'episode_edit',
+                'filter' => 'permission:episodes-edit,podcast_episodes-edit',
             ]);
-            $routes->post('episodes/(:num)/edit', 'Episode::attemptEdit/$1/$2');
+            $routes->post(
+                'episodes/(:num)/edit',
+                'Episode::attemptEdit/$1/$2',
+                [
+                    'filter' =>
+                        'permission:episodes-edit,podcast_episodes-edit',
+                ]
+            );
             $routes->add('episodes/(:num)/delete', 'Episode::delete/$1/$2', [
                 'as' => 'episode_delete',
+                'filter' =>
+                    'permission:episodes-delete,podcast_episodes-delete',
             ]);
 
             // Podcast contributors
             $routes->get('contributors', 'Contributor::list/$1', [
                 'as' => 'contributor_list',
+                'filter' =>
+                    'permission:podcasts-manage_contributors,podcast-manage_contributors',
             ]);
             $routes->get('add-contributor', 'Contributor::add/$1', [
                 'as' => 'contributor_add',
+                'filter' =>
+                    'permission:podcasts-manage_contributors,podcast-manage_contributors',
             ]);
-            $routes->post('add-contributor', 'Contributor::attemptAdd/$1');
+            $routes->post('add-contributor', 'Contributor::attemptAdd/$1', [
+                'filter' =>
+                    'permission:podcasts-manage_contributors,podcast-manage_contributors',
+            ]);
             $routes->get(
                 'contributors/(:num)/edit',
                 'Contributor::edit/$1/$2',
                 [
                     'as' => 'contributor_edit',
+                    'filter' =>
+                        'permission:podcasts-manage_contributors,podcast-manage_contributors',
                 ]
             );
             $routes->post(
                 'contributors/(:num)/edit',
-                'Contributor::attemptEdit/$1/$2'
+                'Contributor::attemptEdit/$1/$2',
+                [
+                    'filter' =>
+                        'permission:podcasts-manage_contributors,podcast-manage_contributors',
+                ]
             );
             $routes->add(
                 'contributors/(:num)/remove',
                 'Contributor::remove/$1/$2',
-                ['as' => 'contributor_remove']
+                [
+                    'as' => 'contributor_remove',
+                    'filter' =>
+                        'permission:podcasts-manage_contributors,podcast-manage_contributors',
+                ]
             );
         });
 
@@ -146,6 +194,13 @@ $routes->group(
         ]);
         $routes->post('new-user', 'User::attemptCreate', [
             'filter' => 'permission:users-create',
+        ]);
+        $routes->get('users/(:num)/edit', 'User::edit/$1', [
+            'as' => 'user_edit',
+            'filter' => 'permission:users-manage_authorizations',
+        ]);
+        $routes->post('users/(:num)/edit', 'User::attemptEdit/$1', [
+            'filter' => 'permission:users-manage_authorizations',
         ]);
 
         $routes->add('users/(:num)/ban', 'User::ban/$1', [
@@ -194,40 +249,44 @@ $routes->group(
 /**
  * Overwriting Myth:auth routes file
  */
-$routes->group(config('App')->authGateway, function ($routes) {
-    // Login/out
-    $routes->get('login', 'Auth::login', ['as' => 'login']);
-    $routes->post('login', 'Auth::attemptLogin');
-    $routes->get('logout', 'Auth::logout', ['as' => 'logout']);
+$routes->group(
+    config('App')->authGateway,
+    ['namespace' => 'Myth\Auth\Controllers'],
+    function ($routes) {
+        // Login/out
+        $routes->get('login', 'AuthController::login', ['as' => 'login']);
+        $routes->post('login', 'AuthController::attemptLogin');
+        $routes->get('logout', 'AuthController::logout', ['as' => 'logout']);
 
-    // Registration
-    $routes->get('register', 'Auth::register', [
-        'as' => 'register',
-    ]);
-    $routes->post('register', 'Auth::attemptRegister');
+        // Registration
+        $routes->get('register', 'AuthController::register', [
+            'as' => 'register',
+        ]);
+        $routes->post('register', 'AuthController::attemptRegister');
 
-    // Activation
-    $routes->get('activate-account', 'Auth::activateAccount', [
-        'as' => 'activate-account',
-    ]);
-    $routes->get('resend-activate-account', 'Auth::resendActivateAccount', [
-        'as' => 'resend-activate-account',
-    ]);
+        // Activation
+        $routes->get('activate-account', 'AuthController::activateAccount', [
+            'as' => 'activate-account',
+        ]);
+        $routes->get(
+            'resend-activate-account',
+            'AuthController::resendActivateAccount',
+            [
+                'as' => 'resend-activate-account',
+            ]
+        );
 
-    // Forgot/Resets
-    $routes->get('forgot', 'Auth::forgotPassword', [
-        'as' => 'forgot',
-    ]);
-    $routes->post('forgot', 'Auth::attemptForgot');
-    $routes->get('reset-password', 'Auth::resetPassword', [
-        'as' => 'reset-password',
-    ]);
-    $routes->post('reset-password', 'Auth::attemptReset');
-    $routes->get('change-password', 'Auth::changePassword', [
-        'as' => 'change_pass',
-    ]);
-    $routes->post('change-password', 'Auth::attemptChange');
-});
+        // Forgot/Resets
+        $routes->get('forgot', 'AuthController::forgotPassword', [
+            'as' => 'forgot',
+        ]);
+        $routes->post('forgot', 'Auth::attemptForgot');
+        $routes->get('reset-password', 'AuthController::resetPassword', [
+            'as' => 'reset-password',
+        ]);
+        $routes->post('reset-password', 'AuthController::attemptReset');
+    }
+);
 
 /**
  * --------------------------------------------------------------------
