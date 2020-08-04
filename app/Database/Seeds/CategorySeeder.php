@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Class CategorySeeder
  * Inserts values in categories table in database

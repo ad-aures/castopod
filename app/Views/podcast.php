@@ -24,7 +24,6 @@
                             <span class="mr-1 underline hover:no-underline"><?= $episode->title ?></span>
                             <span class="text-base font-bold text-gray-600">#<?= $episode->number ?></span>
                         </h3>
-                        <p><?= $episode->description ?></p>
                     </a>
                     <audio controls class="mt-auto" preload="none">
                         <source src="<?= $episode->enclosure_url ?>" type="<?= $episode->enclosure_type ?>">

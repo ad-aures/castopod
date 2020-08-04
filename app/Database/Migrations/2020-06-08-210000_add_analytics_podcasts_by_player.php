@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Class AddAnalyticsPodcastsByPlayer
  * Creates analytics_podcasts_by_player table in database
@@ -6,6 +7,7 @@
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
  */
+
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;

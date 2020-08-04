@@ -10,7 +10,7 @@ PHP Dependencies:
 - [GeoIP2 PHP API](https://github.com/maxmind/GeoIP2-php) ([Apache License 2.0](https://github.com/maxmind/GeoIP2-php/blob/master/LICENSE))
 - [getID3](https://github.com/JamesHeinrich/getID3) ([GNU General Public License v3](https://github.com/JamesHeinrich/getID3/blob/2.0/licenses/license.gpl-30.txt))
 - [myth-auth](https://github.com/lonnieezell/myth-auth) ([MIT license](https://github.com/lonnieezell/myth-auth/blob/develop/LICENSE.md))
-- [parsedown](https://github.com/erusev/parsedown) ([MIT license](https://github.com/erusev/parsedown/blob/master/LICENSE.txt))
+- [commonmark](https://commonmark.thephpleague.com/) ([BSD 3-Clause "New" or "Revised" License](https://github.com/thephpleague/commonmark/blob/latest/LICENSE))
 
 Javascript dependencies:
 

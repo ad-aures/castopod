@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -17,22 +18,20 @@ class Episode extends BaseController
 
     public function _remap($method, ...$params)
     {
-        $podcast_model = new PodcastModel();
+        $this->podcast = (new PodcastModel())
+            ->where('name', $params[0])
+            ->first();
 
-        $this->podcast = $podcast_model->where('name', $params[0])->first();
-
-        if (count($params) > 1) {
-            $episode_model = new EpisodeModel();
-            if (
-                !($this->episode = $episode_model
-                    ->where([
-                        'podcast_id' => $this->podcast->id,
-                        'slug' => $params[1],
-                    ])
-                    ->first())
-            ) {
-                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-            }
+        if (
+            count($params) > 1 &&
+            !($this->episode = (new EpisodeModel())
+                ->where([
+                    'podcast_id' => $this->podcast->id,
+                    'slug' => $params[1],
+                ])
+                ->first())
+        ) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
 
         return $this->$method();

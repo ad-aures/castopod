@@ -17,7 +17,7 @@ $navigation = [
         </button>
         <ul>
             <?php foreach ($data['items'] as $item): ?>
-            <?php $isActive = base_url(route_to($item)) == current_url(); ?>
+                <?php $isActive = base_url(route_to($item)) == current_url(); ?>
             <li>
                 <a class="block py-1 pl-10 pr-2 text-sm text-gray-600 outline-none hover:text-gray-900 focus:shadow-outline <?= $isActive
                     ? 'font-semibold text-gray-900'

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Class LanguageSeeder
  * Inserts values in languages table in database

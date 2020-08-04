@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Class Analytics
  * Creates Analytics controller
@@ -44,9 +45,9 @@ class Analytics extends Controller
     }
 
     // Add one hit to this episode:
-    public function hit($p_podcast_id, $p_episode_id, ...$filename)
+    public function hit($p_podcastId, $p_episodeId, ...$filename)
     {
-        podcast_hit($p_podcast_id, $p_episode_id);
+        podcast_hit($p_podcastId, $p_episodeId);
         return redirect()->to(media_url(implode('/', $filename)));
     }
 }

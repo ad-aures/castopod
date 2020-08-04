@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -20,9 +21,8 @@ class Episode extends BaseController
         $this->podcast = (new PodcastModel())->find($params[0]);
 
         if (count($params) > 1) {
-            $episode_model = new EpisodeModel();
             if (
-                !($this->episode = $episode_model
+                !($this->episode = (new EpisodeModel())
                     ->where([
                         'id' => $params[1],
                         'podcast_id' => $params[0],
@@ -78,7 +78,7 @@ class Episode extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $new_episode = new \App\Entities\Episode([
+        $newEpisode = new \App\Entities\Episode([
             'podcast_id' => $this->podcast->id,
             'title' => $this->request->getPost('title'),
             'slug' => $this->request->getPost('slug'),
@@ -95,13 +95,13 @@ class Episode extends BaseController
             'block' => (bool) $this->request->getPost('block'),
         ]);
 
-        $episode_model = new EpisodeModel();
+        $episodeModel = new EpisodeModel();
 
-        if (!$episode_model->save($new_episode)) {
+        if (!$episodeModel->save($newEpisode)) {
             return redirect()
                 ->back()
                 ->withInput()
-                ->with('errors', $episode_model->errors());
+                ->with('errors', $episodeModel->errors());
         }
 
         return redirect()->route('episode_list', [$this->podcast->id]);
@@ -112,7 +112,6 @@ class Episode extends BaseController
         helper(['form']);
 
         $data = [
-            'podcast' => $this->podcast,
             'episode' => $this->episode,
         ];
 
@@ -158,13 +157,13 @@ class Episode extends BaseController
             $this->episode->image = $image;
         }
 
-        $episode_model = new EpisodeModel();
+        $episodeModel = new EpisodeModel();
 
-        if (!$episode_model->save($this->episode)) {
+        if (!$episodeModel->save($this->episode)) {
             return redirect()
                 ->back()
                 ->withInput()
-                ->with('errors', $episode_model->errors());
+                ->with('errors', $episodeModel->errors());
         }
 
         return redirect()->route('episode_list', [$this->podcast->id]);
@@ -172,8 +171,7 @@ class Episode extends BaseController
 
     public function delete()
     {
-        $episode_model = new EpisodeModel();
-        $episode_model->delete($this->episode->id);
+        (new EpisodeModel())->delete($this->episode->id);
 
         return redirect()->route('episode_list', [$this->podcast->id]);
     }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Class AddPlatformsLinks
  * Creates platform_links table in database

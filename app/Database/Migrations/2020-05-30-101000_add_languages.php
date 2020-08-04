@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Class AddLanguages
  * Creates languages table in database

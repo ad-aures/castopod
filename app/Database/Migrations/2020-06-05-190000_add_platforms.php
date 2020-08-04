@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Class AddPlatforms
  * Creates platforms table in database

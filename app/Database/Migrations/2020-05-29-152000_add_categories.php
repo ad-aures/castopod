@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Class AddCategories
  * Creates categories table in database

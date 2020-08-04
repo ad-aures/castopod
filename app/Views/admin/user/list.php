@@ -3,7 +3,7 @@
 <?= $this->extend('admin/_layout') ?>
 
 <?= $this->section('title') ?>
-<?= lang('User.all_users') ?> (<?= count($all_users) ?>)
+<?= lang('User.all_users') ?> (<?= count($users) ?>)
 <?= $this->endSection() ?>
 
 
@@ -20,7 +20,7 @@
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($all_users as $user): ?>
+        <?php foreach ($users as $user): ?>
         <tr>
             <td class="px-4 py-2 border"><?= $user->username ?></td>
             <td class="px-4 py-2 border"><?= $user->email ?></td>

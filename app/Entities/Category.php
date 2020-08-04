@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -23,11 +24,10 @@ class Category extends Entity
 
     public function getParent()
     {
-        $category_model = new CategoryModel();
-        $parent_id = $this->attributes['parent_id'];
+        $parentId = $this->attributes['parent_id'];
 
-        return $parent_id != 0
-            ? $category_model->find($this->attributes['parent_id'])
+        return $parentId != 0
+            ? (new CategoryModel())->findParent($parentId)
             : null;
     }
 }

@@ -1,10 +1,10 @@
-<?php namespace App\Models;
+<?php
 
-use App\Entities\User;
+namespace App\Models;
 
 class UserModel extends \Myth\Auth\Models\UserModel
 {
-    protected $returnType = User::class;
+    protected $returnType = \App\Entities\User::class;
 
     public function getPodcastContributors($podcast_id)
     {

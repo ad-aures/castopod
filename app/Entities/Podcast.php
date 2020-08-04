@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -10,7 +11,7 @@ namespace App\Entities;
 use App\Models\EpisodeModel;
 use CodeIgniter\Entity;
 use App\Models\UserModel;
-use Parsedown;
+use League\CommonMark\CommonMarkConverter;
 
 class Podcast extends Entity
 {
@@ -158,9 +159,11 @@ class Podcast extends Entity
 
     public function getDescriptionHtml()
     {
-        $converter = new Parsedown();
-        $converter->setBreaksEnabled(true);
+        $converter = new CommonMarkConverter([
+            'html_input' => 'strip',
+            'allow_unsafe_links' => false,
+        ]);
 
-        return $converter->text($this->attributes['description']);
+        return $converter->convertToHtml($this->attributes['description']);
     }
 }

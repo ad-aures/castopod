@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Class TestSeeder
  * Inserts a superadmin user in the database
@@ -23,7 +24,7 @@ class TestSeeder extends Seeder
         $this->db->table('users')->insert([
             'id' => 1,
             'username' => 'admin',
-            'email' => 'admin@castopod.com',
+            'email' => 'admin@example.com',
             'password_hash' =>
                 '$2y$10$TXJEHX/djW8jtzgpDVf7dOOCGo5rv1uqtAYWdwwwkttQcDkAeB2.6',
             'active' => 1,

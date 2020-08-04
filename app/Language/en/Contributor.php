@@ -1,4 +1,5 @@
-<?
+<?php
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -6,9 +7,6 @@
  */
 
 return [
-    'removeOwnerContributorError' => 'You can\'t remove the podcast owner!',
-    'removeContributorSuccess' => 'You have successfully removed {username} from {podcastTitle}',
-    'alreadyAddedError' => 'The contributor you\'re trying to add has already been added!',
     'podcast_contributors' => 'Podcast contributors',
     'add' => 'Add contributor',
     'add_contributor' => 'Add a contributor for {0}',
@@ -19,6 +17,13 @@ return [
         'user' => 'User',
         'role' => 'Role',
         'submit_add' => 'Add contributor',
-        'submit_edit' => 'Update role'
-    ]
+        'submit_edit' => 'Update role',
+    ],
+    'messages' => [
+        'removeOwnerContributorError' => 'You can\'t remove the podcast owner!',
+        'removeContributorSuccess' =>
+            'You have successfully removed {username} from {podcastTitle}',
+        'alreadyAddedError' =>
+            'The contributor you\'re trying to add has already been added!',
+    ],
 ];

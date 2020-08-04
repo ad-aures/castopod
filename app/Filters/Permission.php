@@ -1,4 +1,6 @@
-<?php namespace App\Filters;
+<?php
+
+namespace App\Filters;
 
 use App\Models\PodcastModel;
 use Config\Services;
@@ -57,14 +59,12 @@ class Permission implements FilterInterface
                 count($routerParams) > 0
             ) {
                 if (
-                    $group_id = (new PodcastModel())->getContributorGroupId(
+                    $groupId = (new PodcastModel())->getContributorGroupId(
                         $authenticate->id(),
                         $routerParams[0]
                     )
                 ) {
-                    if (
-                        $authorize->groupHasPermission($permission, $group_id)
-                    ) {
+                    if ($authorize->groupHasPermission($permission, $groupId)) {
                         $result = true;
                         break;
                     }

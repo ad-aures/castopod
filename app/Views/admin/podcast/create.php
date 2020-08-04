@@ -58,7 +58,7 @@
             ): ?> selected <?php endif; ?>
             <?php if (
                 !old('language') &&
-                $language->code == $browser_lang
+                $language->code == $browserLang
             ): ?> selected <?php endif; ?>
                 >
                 <?= $language->native_name ?>

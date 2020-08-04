@@ -1,4 +1,5 @@
-<?
+<?php
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -6,7 +7,9 @@
  */
 
 return [
-    'passwordChangeSuccess' => 'Password has been successfully changed!',
-    'changePassword' => 'Change my password',
-    'info' => 'My account info'
+    'info' => 'My account info',
+    'messages' => [
+        'passwordChangeSuccess' => 'Password has been successfully changed!',
+        'changePassword' => 'Change my password',
+    ],
 ];

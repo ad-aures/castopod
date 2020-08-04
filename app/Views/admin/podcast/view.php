@@ -1,4 +1,6 @@
-<?php helper('html'); ?>
+<?php
+
+helper('html'); ?>
 
 <?= $this->extend('admin/_layout') ?>
 
@@ -28,7 +30,7 @@
     <a class="inline-flex px-2 py-1 text-white bg-gray-700 hover:bg-gray-800" href="<?= route_to(
         'podcast',
         $podcast->name
-    ) ?>"><?= lang('Podcast.goto_page') ?></a>
+    ) ?>"><?= lang('Podcast.go_to_page') ?></a>
     <a class="inline-flex px-2 py-1 text-white bg-red-700 hover:bg-red-800" href="<?= route_to(
         'podcast_delete',
         $podcast->id

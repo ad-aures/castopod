@@ -10,12 +10,13 @@
     "whichbrowser/parser": "^2.0",
     "geoip2/geoip2": "~2.0",
     "myth/auth": "dev-develop",
-    "erusev/parsedown": "^1.7",
-    "codeigniter4/codeigniter4": "dev-develop"
+    "codeigniter4/codeigniter4": "dev-develop",
+    "league/commonmark": "^1.5"
   },
   "require-dev": {
     "mikey179/vfsstream": "1.6.*",
-    "phpunit/phpunit": "8.5.*"
+    "phpunit/phpunit": "8.5.*",
+    "squizlabs/php_codesniffer": "3.*"
   },
   "autoload-dev": {
     "psr-4": {

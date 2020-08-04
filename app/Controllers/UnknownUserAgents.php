@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -6,14 +7,15 @@
  */
 
 namespace App\Controllers;
+
 use CodeIgniter\Controller;
 
 class UnknownUserAgents extends Controller
 {
-    public function index($last_known_id = 0)
+    public function index($lastKnownId = 0)
     {
         $model = new \App\Models\UnknownUserAgentsModel();
 
-        return $this->response->setJSON($model->getUserAgents($last_known_id));
+        return $this->response->setJSON($model->getUserAgents($lastKnownId));
     }
 }

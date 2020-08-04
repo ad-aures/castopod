@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Class AddEpisodes
  * Creates episodes table in database

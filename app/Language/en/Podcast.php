@@ -1,4 +1,5 @@
-<?
+<?php
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -16,7 +17,7 @@ return [
     'delete' => 'Delete podcast',
     'see_episodes' => 'See episodes',
     'see_contributors' => 'See contributors',
-    'goto_page' => 'Go to page',
+    'go_to_page' => 'Go to page',
     'form' => [
         'title' => 'Title',
         'name' => 'Name',
@@ -156,5 +157,5 @@ return [
         'tv_reviews' => 'TV Reviews',
     ],
     'list_of_episodes' => 'List of episodes',
-    'no_episode' => 'No episode found' 
+    'no_episode' => 'No episode found',
 ];

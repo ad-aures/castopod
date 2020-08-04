@@ -1,4 +1,5 @@
-<?
+<?php
+
 /**
  * ISO 3166 country codes
  * @copyright  2020 Podlibre
@@ -6,7 +7,8 @@
  * @link       https://castopod.org/
  */
 
-return ['AF ' => 'Afghanistan',
+return [
+    'AF ' => 'Afghanistan',
     'ZA ' => 'Afrique Du Sud',
     'AX ' => 'Åland, Îles',
     'AL ' => 'Albanie',

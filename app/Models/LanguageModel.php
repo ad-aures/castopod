@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -16,7 +17,7 @@ class LanguageModel extends Model
 
     protected $allowedFields = ['code', 'native_name'];
 
-    protected $returnType = 'App\Entities\Language';
+    protected $returnType = \App\Entities\Language::class;
     protected $useSoftDeletes = false;
 
     protected $useTimestamps = false;

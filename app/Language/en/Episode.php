@@ -1,4 +1,5 @@
-<?
+<?php
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -10,7 +11,7 @@ return [
     'back_to_podcast' => 'Go back to podcast',
     'edit' => 'Edit',
     'delete' => 'Delete',
-    'goto_page' => 'Go to page',
+    'go_to_page' => 'Go to page',
     'create' => 'Add an episode',
     'form' => [
         'file' => 'Audio file',
@@ -33,5 +34,5 @@ return [
         'block' => 'Block',
         'submit_create' => 'Create episode',
         'submit_edit' => 'Save episode',
-    ]
+    ],
 ];

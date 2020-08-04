@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -9,7 +10,7 @@ namespace App\Entities;
 
 use App\Models\PodcastModel;
 use CodeIgniter\Entity;
-use Parsedown;
+use League\CommonMark\CommonMarkConverter;
 
 class Episode extends Entity
 {
@@ -43,7 +44,7 @@ class Episode extends Entity
 
     public function setImage(?\CodeIgniter\HTTP\Files\UploadedFile $image)
     {
-        if ($image->isValid()) {
+        if (!empty($image) && $image->isValid()) {
             // check whether the user has inputted an image and store it
             $this->attributes['image_uri'] = save_podcast_media(
                 $image,
@@ -68,17 +69,17 @@ class Episode extends Entity
         return $this;
     }
 
-    public function getImage()
+    public function getImage(): \CodeIgniter\Files\File
     {
         return new \CodeIgniter\Files\File($this->getImageMediaPath());
     }
 
-    public function getImageMediaPath()
+    public function getImageMediaPath(): string
     {
         return media_path($this->attributes['image_uri']);
     }
 
-    public function getImageUrl()
+    public function getImageUrl(): string
     {
         if ($image_uri = $this->attributes['image_uri']) {
             return media_url($image_uri);
@@ -89,7 +90,7 @@ class Episode extends Entity
     public function setEnclosure(
         \CodeIgniter\HTTP\Files\UploadedFile $enclosure = null
     ) {
-        if ($enclosure->isValid()) {
+        if (!empty($enclosure) && $enclosure->isValid()) {
             helper('media');
 
             $this->attributes['enclosure_uri'] = save_podcast_media(
@@ -151,26 +152,25 @@ class Episode extends Entity
 
     public function getPodcast()
     {
-        $podcast_model = new PodcastModel();
-
-        return $podcast_model->find($this->attributes['podcast_id']);
+        return (new PodcastModel())->find($this->attributes['podcast_id']);
     }
 
     public function getDescriptionHtml()
     {
-        $converter = new Parsedown();
-        $converter->setBreaksEnabled(true);
+        $converter = new CommonMarkConverter([
+            'html_input' => 'strip',
+            'allow_unsafe_links' => false,
+        ]);
 
         if (
-            $description_footer = $this->getPodcast()
-                ->episode_description_footer
+            $descriptionFooter = $this->getPodcast()->episode_description_footer
         ) {
-            return $converter->text($this->attributes['description']) .
+            return $converter->convertToHtml($this->attributes['description']) .
                 '<footer>' .
-                $converter->text($description_footer) .
+                $converter->convertToHtml($descriptionFooter) .
                 '</footer>';
         }
 
-        return $converter->text($this->attributes['description']);
+        return $converter->convertToHtml($this->attributes['description']);
     }
 }

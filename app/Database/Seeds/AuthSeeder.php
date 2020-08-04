@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Class PermissionSeeder
  * Inserts permissions
@@ -224,9 +225,9 @@ class AuthSeeder extends Seeder
         ],
     ];
 
-    static function getGroupIdByName($name, $data_groups)
+    static function getGroupIdByName($name, $dataGroups)
     {
-        foreach ($data_groups as $group) {
+        foreach ($dataGroups as $group) {
             if ($group['name'] === $name) {
                 return $group['id'];
             }
@@ -236,45 +237,45 @@ class AuthSeeder extends Seeder
 
     public function run()
     {
-        $group_id = 0;
-        $data_groups = [];
+        $groupId = 0;
+        $dataGroups = [];
         foreach ($this->groups as $group) {
-            array_push($data_groups, [
-                'id' => ++$group_id,
+            array_push($dataGroups, [
+                'id' => ++$groupId,
                 'name' => $group['name'],
                 'description' => $group['description'],
             ]);
         }
 
         // Map permissions to a format the `auth_permissions` table expects
-        $data_permissions = [];
-        $data_groups_permissions = [];
-        $permission_id = 0;
+        $dataPermissions = [];
+        $dataGroupsPermissions = [];
+        $permissionId = 0;
         foreach ($this->permissions as $context => $actions) {
             foreach ($actions as $action) {
-                array_push($data_permissions, [
-                    'id' => ++$permission_id,
+                array_push($dataPermissions, [
+                    'id' => ++$permissionId,
                     'name' => $context . '-' . $action['name'],
                     'description' => $action['description'],
                 ]);
 
                 foreach ($action['has_permission'] as $role) {
                     // link permission to specified groups
-                    array_push($data_groups_permissions, [
+                    array_push($dataGroupsPermissions, [
                         'group_id' => $this->getGroupIdByName(
                             $role,
-                            $data_groups
+                            $dataGroups
                         ),
-                        'permission_id' => $permission_id,
+                        'permission_id' => $permissionId,
                     ]);
                 }
             }
         }
 
-        $this->db->table('auth_permissions')->insertBatch($data_permissions);
-        $this->db->table('auth_groups')->insertBatch($data_groups);
+        $this->db->table('auth_permissions')->insertBatch($dataPermissions);
+        $this->db->table('auth_groups')->insertBatch($dataGroups);
         $this->db
             ->table('auth_groups_permissions')
-            ->insertBatch($data_groups_permissions);
+            ->insertBatch($dataGroupsPermissions);
     }
 }

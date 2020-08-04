@@ -1,5 +1,5 @@
-
 <?php
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -187,4 +187,3 @@ function podcast_hit($p_podcast_id, $p_episode_id)
         }
     }
 }
-

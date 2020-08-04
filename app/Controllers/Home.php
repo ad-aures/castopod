@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -15,15 +16,15 @@ class Home extends BaseController
     {
         $model = new PodcastModel();
 
-        $all_podcasts = $model->findAll();
+        $allPodcasts = $model->findAll();
 
         // check if there's only one podcast to redirect user to it
-        if (count($all_podcasts) == 1) {
-            return redirect()->route('podcast', [$all_podcasts[0]->name]);
+        if (count($allPodcasts) == 1) {
+            return redirect()->route('podcast', [$allPodcasts[0]->name]);
         }
 
         // default behavior: list all podcasts on home page
-        $data = ['podcasts' => $all_podcasts];
+        $data = ['podcasts' => $allPodcasts];
         return view('home', $data);
     }
 }

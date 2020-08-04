@@ -1,4 +1,5 @@
-<?
+<?php
+
 /**
  * ISO 3166 country codes
  * @copyright  2020 Podlibre

@@ -7,10 +7,13 @@
 
 <?= $this->section('content') ?>
 
-<?= form_open_multipart(route_to('episode_edit', $podcast->id, $episode->id), [
-    'method' => 'post',
-    'class' => 'flex flex-col max-w-md',
-]) ?>
+<?= form_open_multipart(
+    route_to('episode_edit', $episode->podcast->id, $episode->id),
+    [
+        'method' => 'post',
+        'class' => 'flex flex-col max-w-md',
+    ]
+) ?>
 <?= csrf_field() ?>
 
 <div class="flex flex-col mb-4">

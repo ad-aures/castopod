@@ -1,9 +1,11 @@
 <?php
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
  */
+
 namespace App\Controllers;
 
 use App\Models\PodcastModel;
@@ -15,9 +17,8 @@ class Podcast extends BaseController
     public function _remap($method, ...$params)
     {
         if (count($params) > 0) {
-            $podcast_model = new PodcastModel();
             if (
-                !($this->podcast = $podcast_model
+                !($this->podcast = (new PodcastModel())
                     ->where('name', $params[0])
                     ->first())
             ) {

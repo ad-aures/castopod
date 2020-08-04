@@ -1,4 +1,6 @@
-<?php namespace App\Entities;
+<?php
+
+namespace App\Entities;
 
 use App\Models\PodcastModel;
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -25,7 +26,7 @@ class Myaccount extends BaseController
     public function attemptChange()
     {
         $auth = Services::authentication();
-        $user_model = new UserModel();
+        $userModel = new UserModel();
 
         // Validate here first, since some things,
         // like the password, can only be validated properly here.
@@ -40,7 +41,7 @@ class Myaccount extends BaseController
             return redirect()
                 ->back()
                 ->withInput()
-                ->with('errors', $user_model->errors());
+                ->with('errors', $userModel->errors());
         }
 
         $credentials = [
@@ -52,22 +53,22 @@ class Myaccount extends BaseController
             return redirect()
                 ->back()
                 ->withInput()
-                ->with('errors', $user_model->errors());
+                ->with('errors', $userModel->errors());
         }
 
         user()->password = $this->request->getPost('new_password');
-        $user_model->save(user());
+        $userModel->save(user());
 
-        if (!$user_model->save(user())) {
+        if (!$userModel->save(user())) {
             return redirect()
                 ->back()
                 ->withInput()
-                ->with('errors', $user_model->errors());
+                ->with('errors', $userModel->errors());
         }
 
         // Success!
         return redirect()
             ->route('myAccount')
-            ->with('message', lang('MyAccount.passwordChangeSuccess'));
+            ->with('message', lang('MyAccount.messages.passwordChangeSuccess'));
     }
 }

@@ -6,14 +6,18 @@ Filename: <?= $exception->getFile(), "\n" ?>
 Line Number: <?= $exception->getLine() ?>
 
 <?php if (defined('SHOW_DEBUG_BACKTRACE') && SHOW_DEBUG_BACKTRACE === true): ?>
-
-	Backtrace:
-	<?php foreach ($exception->getTrace() as $error): ?>
-		<?php if (isset($error['file'])): ?>
-			<?= trim(
-       '-' . $error['line'] . ' - ' . $error['file'] . '::' . $error['function']
-   ) . "\n" ?>
-		<?php endif; ?>
-	<?php endforeach; ?>
+    Backtrace:
+    <?php foreach ($exception->getTrace() as $error): ?>
+        <?php if (isset($error['file'])): ?>
+            <?= trim(
+                '-' .
+                    $error['line'] .
+                    ' - ' .
+                    $error['file'] .
+                    '::' .
+                    $error['function']
+            ) . "\n" ?>
+        <?php endif; ?>
+    <?php endforeach; ?>
 
 <?php endif; ?>

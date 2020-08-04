@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -18,8 +19,7 @@ class User extends BaseController
     public function _remap($method, ...$params)
     {
         if (count($params) > 0) {
-            $user_model = new UserModel();
-            if (!($this->user = $user_model->find($params[0]))) {
+            if (!($this->user = (new UserModel())->find($params[0]))) {
                 throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
             }
         }
@@ -29,7 +29,7 @@ class User extends BaseController
 
     public function list()
     {
-        $data = ['all_users' => (new UserModel())->findAll()];
+        $data = ['users' => (new UserModel())->findAll()];
 
         return view('admin/user/list', $data);
     }
@@ -45,12 +45,12 @@ class User extends BaseController
 
     public function attemptCreate()
     {
-        $user_model = new UserModel();
+        $userModel = new UserModel();
 
         // Validate here first, since some things,
         // like the password, can only be validated properly here.
         $rules = array_merge(
-            $user_model->getValidationRules(['only' => ['username']]),
+            $userModel->getValidationRules(['only' => ['username']]),
             [
                 'email' => 'required|valid_email|is_unique[users.email]',
                 'password' => 'required|strong_password',
@@ -74,11 +74,11 @@ class User extends BaseController
         // Force user to reset his password on first connection
         $user->forcePasswordReset();
 
-        if (!$user_model->save($user)) {
+        if (!$userModel->save($user)) {
             return redirect()
                 ->back()
                 ->withInput()
-                ->with('errors', $user_model->errors());
+                ->with('errors', $userModel->errors());
         }
 
         // Success!
@@ -86,7 +86,7 @@ class User extends BaseController
             ->route('user_list')
             ->with(
                 'message',
-                lang('User.createSuccess', [
+                lang('User.messages.createSuccess', [
                     'username' => $user->username,
                 ])
             );
@@ -114,7 +114,7 @@ class User extends BaseController
             ->route('user_list')
             ->with(
                 'message',
-                lang('User.rolesEditSuccess', [
+                lang('User.messages.rolesEditSuccess', [
                     'username' => $this->user->username,
                 ])
             );
@@ -122,13 +122,13 @@ class User extends BaseController
 
     public function forcePassReset()
     {
-        $user_model = new UserModel();
+        $userModel = new UserModel();
         $this->user->forcePasswordReset();
 
-        if (!$user_model->save($this->user)) {
+        if (!$userModel->save($this->user)) {
             return redirect()
                 ->back()
-                ->with('errors', $user_model->errors());
+                ->with('errors', $userModel->errors());
         }
 
         // Success!
@@ -136,7 +136,7 @@ class User extends BaseController
             ->route('user_list')
             ->with(
                 'message',
-                lang('User.forcePassResetSuccess', [
+                lang('User.messages.forcePassResetSuccess', [
                     'username' => $this->user->username,
                 ])
             );
@@ -149,27 +149,27 @@ class User extends BaseController
             return redirect()
                 ->back()
                 ->with('errors', [
-                    lang('User.banSuperAdminError', [
+                    lang('User.messages.banSuperAdminError', [
                         'username' => $this->user->username,
                     ]),
                 ]);
         }
 
-        $user_model = new UserModel();
+        $userModel = new UserModel();
         // TODO: add ban reason?
         $this->user->ban('');
 
-        if (!$user_model->save($this->user)) {
+        if (!$userModel->save($this->user)) {
             return redirect()
                 ->back()
-                ->with('errors', $user_model->errors());
+                ->with('errors', $userModel->errors());
         }
 
         return redirect()
             ->route('user_list')
             ->with(
                 'message',
-                lang('User.banSuccess', [
+                lang('User.messages.banSuccess', [
                     'username' => $this->user->username,
                 ])
             );
@@ -177,20 +177,20 @@ class User extends BaseController
 
     public function unBan()
     {
-        $user_model = new UserModel();
+        $userModel = new UserModel();
         $this->user->unBan();
 
-        if (!$user_model->save($this->user)) {
+        if (!$userModel->save($this->user)) {
             return redirect()
                 ->back()
-                ->with('errors', $user_model->errors());
+                ->with('errors', $userModel->errors());
         }
 
         return redirect()
             ->route('user_list')
             ->with(
                 'message',
-                lang('User.unbanSuccess', [
+                lang('User.messages.unbanSuccess', [
                     'username' => $this->user->username,
                 ])
             );
@@ -203,20 +203,19 @@ class User extends BaseController
             return redirect()
                 ->back()
                 ->with('errors', [
-                    lang('User.deleteSuperAdminError', [
+                    lang('User.messages.deleteSuperAdminError', [
                         'username' => $this->user->username,
                     ]),
                 ]);
         }
 
-        $user_model = new UserModel();
-        $user_model->delete($this->user->id);
+        (new UserModel())->delete($this->user->id);
 
         return redirect()
             ->back()
             ->with(
                 'message',
-                lang('User.deleteSuccess', [
+                lang('User.messages.deleteSuccess', [
                     'username' => $this->user->username,
                 ])
             );

@@ -97,19 +97,19 @@
             !old('type') ||
             old('type') == 'full'
         ): ?> checked <?php endif; ?> />
-        <span class="ml-2"><?= lang('Episode.form.type.full') ?></span>  
+        <span class="ml-2"><?= lang('Episode.form.type.full') ?></span>
     </label>
     <label for="trailer" class="inline-flex items-center">
         <input type="radio" class="form-radio" value="trailer" id="trailer" name="type" required <?php if (
             old('type') == 'trailer'
         ): ?> checked <?php endif; ?> />
-        <span class="ml-2"><?= lang('Episode.form.type.trailer') ?></span>  
+        <span class="ml-2"><?= lang('Episode.form.type.trailer') ?></span>
     </label>
     <label for="bonus" class="inline-flex items-center">
         <input type="radio" class="form-radio" value="bonus" id="bonus" name="type" required <?php if (
             old('type') == 'bonus'
         ): ?> checked <?php endif; ?> />
-        <span class="ml-2"><?= lang('Episode.form.type.bonus') ?></span>  
+        <span class="ml-2"><?= lang('Episode.form.type.bonus') ?></span>
     </label>
 </fieldset>
 

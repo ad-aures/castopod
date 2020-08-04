@@ -9,6 +9,7 @@
     "[php]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
+    "phpSniffer.autoDetect": true,
     "color-highlight.markerType": "dot-before"
   },
   "extensions": [
@@ -22,6 +23,7 @@
     "bradlc.vscode-tailwindcss",
     "jamesbirtles.svelte-vscode",
     "dbaeumer.vscode-eslint",
-    "stylelint.vscode-stylelint"
+    "stylelint.vscode-stylelint",
+    "wongjn.php-sniffer"
   ]
 }

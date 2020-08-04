@@ -1,4 +1,6 @@
-<?php namespace App\Authorization;
+<?php
+
+namespace App\Authorization;
 
 class GroupModel extends \Myth\Auth\Authorization\GroupModel
 {

@@ -1,4 +1,6 @@
-<?php namespace App\Authorization;
+<?php
+
+namespace App\Authorization;
 
 class PermissionModel extends \Myth\Auth\Authorization\PermissionModel
 {

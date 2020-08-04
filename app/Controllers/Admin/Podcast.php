@@ -1,9 +1,11 @@
 <?php
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
  */
+
 namespace App\Controllers\Admin;
 
 use App\Models\CategoryModel;
@@ -29,7 +31,7 @@ class Podcast extends BaseController
     public function myPodcasts()
     {
         $data = [
-            'all_podcasts' => (new PodcastModel())->getUserPodcasts(user()->id),
+            'podcasts' => (new PodcastModel())->getUserPodcasts(user()->id),
         ];
 
         return view('admin/podcast/list', $data);
@@ -41,7 +43,7 @@ class Podcast extends BaseController
             return redirect()->route('my_podcasts');
         }
 
-        $data = ['all_podcasts' => (new PodcastModel())->findAll()];
+        $data = ['podcasts' => (new PodcastModel())->findAll()];
 
         return view('admin/podcast/list', $data);
     }
@@ -62,7 +64,7 @@ class Podcast extends BaseController
         $data = [
             'languages' => $languageModel->findAll(),
             'categories' => $categoryModel->findAll(),
-            'browser_lang' => get_browser_language(
+            'browserLang' => get_browser_language(
                 $this->request->getServer('HTTP_ACCEPT_LANGUAGE')
             ),
         ];
@@ -106,26 +108,26 @@ class Podcast extends BaseController
             'custom_html_head' => $this->request->getPost('custom_html_head'),
         ]);
 
-        $podcast_model = new PodcastModel();
+        $podcastModel = new PodcastModel();
         $db = \Config\Database::connect();
 
         $db->transStart();
 
-        if (!($new_podcast_id = $podcast_model->insert($podcast, true))) {
+        if (!($newPodcastId = $podcastModel->insert($podcast, true))) {
             $db->transComplete();
             return redirect()
                 ->back()
                 ->withInput()
-                ->with('errors', $podcast_model->errors());
+                ->with('errors', $podcastModel->errors());
         }
 
         $authorize = Services::authorization();
-        $podcast_admin_group = $authorize->group('podcast_admin');
+        $podcastAdminGroup = $authorize->group('podcast_admin');
 
-        $podcast_model->addPodcastContributor(
+        $podcastModel->addPodcastContributor(
             user()->id,
-            $new_podcast_id,
-            $podcast_admin_group->id
+            $newPodcastId,
+            $podcastAdminGroup->id
         );
 
         $db->transComplete();
@@ -137,12 +139,10 @@ class Podcast extends BaseController
     {
         helper('form');
 
-        $languageModel = new LanguageModel();
-        $categoryModel = new CategoryModel();
         $data = [
             'podcast' => $this->podcast,
-            'languages' => $languageModel->findAll(),
-            'categories' => $categoryModel->findAll(),
+            'languages' => (new LanguageModel())->findAll(),
+            'categories' => (new CategoryModel())->findAll(),
         ];
 
         echo view('admin/podcast/edit', $data);
@@ -188,13 +188,13 @@ class Podcast extends BaseController
             'custom_html_head'
         );
 
-        $podcast_model = new PodcastModel();
+        $podcastModel = new PodcastModel();
 
-        if (!$podcast_model->save($this->podcast)) {
+        if (!$podcastModel->save($this->podcast)) {
             return redirect()
                 ->back()
                 ->withInput()
-                ->with('errors', $podcast_model->errors());
+                ->with('errors', $podcastModel->errors());
         }
 
         return redirect()->route('podcast_list');
@@ -202,8 +202,7 @@ class Podcast extends BaseController
 
     public function delete()
     {
-        $podcast_model = new PodcastModel();
-        $podcast_model->delete($this->podcast->id);
+        (new PodcastModel())->delete($this->podcast->id);
 
         return redirect()->route('podcast_list');
     }

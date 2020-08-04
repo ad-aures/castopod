@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Class class AnalyticsWebsiteByReferer
  * Entity for AnalyticsWebsiteByReferer
@@ -6,6 +7,7 @@
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
  */
+
 namespace App\Entities;
 
 use CodeIgniter\Entity;

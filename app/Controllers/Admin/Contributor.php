@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -66,7 +67,9 @@ class Contributor extends BaseController
             return redirect()
                 ->back()
                 ->withInput()
-                ->with('errors', [lang('Contributor.alreadyAddedError')]);
+                ->with('errors', [
+                    lang('Contributor.messages.alreadyAddedError'),
+                ]);
         }
 
         return redirect()->route('contributor_list', [$this->podcast->id]);
@@ -77,7 +80,7 @@ class Contributor extends BaseController
         $data = [
             'podcast' => $this->podcast,
             'user' => $this->user,
-            'contributor_group_id' => (new PodcastModel())->getContributorGroupId(
+            'contributorGroupId' => (new PodcastModel())->getContributorGroupId(
                 $this->user->id,
                 $this->podcast->id
             ),
@@ -104,27 +107,27 @@ class Contributor extends BaseController
             return redirect()
                 ->back()
                 ->with('errors', [
-                    lang('Contributor.removeOwnerContributorError'),
+                    lang('Contributor.messages.removeOwnerContributorError'),
                 ]);
         }
 
-        $podcast_model = new PodcastModel();
+        $podcastModel = new PodcastModel();
         if (
-            !$podcast_model->removePodcastContributor(
+            !$podcastModel->removePodcastContributor(
                 $this->user->id,
                 $this->podcast->id
             )
         ) {
             return redirect()
                 ->back()
-                ->with('errors', $podcast_model->errors());
+                ->with('errors', $podcastModel->errors());
         }
 
         return redirect()
             ->back()
             ->with(
                 'message',
-                lang('Contributor.removeContributorSuccess', [
+                lang('Contributor.messages.removeContributorSuccess', [
                     'username' => $this->user->username,
                     'podcastTitle' => $this->podcast->title,
                 ])

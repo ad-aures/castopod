@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Class PlatformsSeeder
  * Inserts values in platforms table in database

@@ -1,4 +1,6 @@
-<?php namespace App\Authorization;
+<?php
+
+namespace App\Authorization;
 
 class FlatAuthorization extends \Myth\Auth\Authorization\FlatAuthorization
 {
@@ -49,26 +51,26 @@ class FlatAuthorization extends \Myth\Auth\Authorization\FlatAuthorization
     /**
      * Makes a member a part of multiple groups.
      *
-     * @param $user_id
+     * @param $userId
      * @param array|null $groups // Either collection of ID or names
      *
      * @return bool
      */
-    public function setUserGroups(int $user_id, $groups)
+    public function setUserGroups(int $userId, $groups)
     {
-        if (empty($user_id) || !is_numeric($user_id)) {
+        if (empty($userId) || !is_numeric($userId)) {
             return null;
         }
 
         // remove user from all groups before resetting it in new groups
-        $this->groupModel->removeUserFromAllGroups($user_id);
+        $this->groupModel->removeUserFromAllGroups($userId);
 
         if (empty($groups)) {
             return true;
         }
 
         foreach ($groups as $group) {
-            $this->addUserToGroup($user_id, $group);
+            $this->addUserToGroup($userId, $group);
         }
 
         return true;

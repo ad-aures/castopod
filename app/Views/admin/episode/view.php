@@ -20,10 +20,10 @@
 ) ?>"><?= lang('Episode.edit') ?></a>
     <a href="<?= route_to(
         'episode',
-        $episode->podcast->id,
+        $episode->podcast->name,
         $episode->slug
     ) ?>" class="inline-flex px-4 py-2 text-white bg-gray-700 hover:bg-gray-800"><?= lang(
-    'Episode.goto_page'
+    'Episode.go_to_page'
 ) ?></a>
     <a href="<?= route_to(
         'episode_delete',

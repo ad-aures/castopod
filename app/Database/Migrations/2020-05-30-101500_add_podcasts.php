@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Class AddPodcasts
  * Creates podcasts table in database

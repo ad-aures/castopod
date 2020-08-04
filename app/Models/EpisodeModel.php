@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -31,7 +32,7 @@ class EpisodeModel extends Model
         'block',
     ];
 
-    protected $returnType = 'App\Entities\Episode';
+    protected $returnType = \App\Entities\Episode::class;
 
     protected $useSoftDeletes = true;
     protected $useTimestamps = true;
@@ -53,12 +54,13 @@ class EpisodeModel extends Model
 
     protected $afterInsert = ['writeEnclosureMetadata', 'clearCache'];
     protected $afterUpdate = ['writeEnclosureMetadata', 'clearCache'];
+    protected $beforeDelete = ['clearCache'];
 
     protected function writeEnclosureMetadata(array $data)
     {
         helper('id3');
 
-        $episode = $this->find(
+        $episode = (new EpisodeModel())->find(
             is_array($data['id']) ? $data['id'][0] : $data['id']
         );
 
@@ -69,7 +71,7 @@ class EpisodeModel extends Model
 
     protected function clearCache(array $data)
     {
-        $episode = $this->find(
+        $episode = (new EpisodeModel())->find(
             is_array($data['id']) ? $data['id'][0] : $data['id']
         );
 
@@ -80,6 +82,8 @@ class EpisodeModel extends Model
 
         // delete model requests cache
         cache()->delete("{$episode->podcast_id}_episodes");
+
+        return $data;
     }
 
     /**

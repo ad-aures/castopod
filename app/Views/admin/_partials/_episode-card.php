@@ -1,4 +1,6 @@
-<?php helper('html'); ?>
+<?php
+
+helper('html'); ?>
 
 <article class="flex w-full max-w-lg mb-4 bg-white border rounded shadow">
     <img src="<?= $episode->image_url ?>" alt="<?= $episode->title ?>" class="object-cover w-32 h-32 rounded-l" />
@@ -27,7 +29,7 @@
                         'episode',
                         $episode->podcast->id,
                         $episode->slug
-                    ) ?>"><?= lang('Episode.goto_page') ?></a>
+                    ) ?>"><?= lang('Episode.go_to_page') ?></a>
                     <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
                         'episode_delete',
                         $episode->podcast->id,

@@ -19,7 +19,7 @@
             <?php foreach ($roles as $role): ?>
                 <option value="<?= $role->id ?>"
                 <?php if (
-                    old('role') == $role->id
+                    $contributorGroupId == $role->id
                 ): ?> selected <?php endif; ?>>
                     <?= $role->name ?>
                 </option>
