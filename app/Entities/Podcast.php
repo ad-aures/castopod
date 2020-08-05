@@ -15,14 +15,45 @@ use League\CommonMark\CommonMarkConverter;
 
 class Podcast extends Entity
 {
-    protected string $link;
-    protected \CodeIgniter\Files\File $image;
-    protected string $image_media_path;
-    protected string $image_url;
+    /**
+     * @var string
+     */
+    protected $link;
+
+    /**
+     * @var \CodeIgniter\Files\File
+     */
+    protected $image;
+
+    /**
+     * @var string
+     */
+    protected $image_media_path;
+
+    /**
+     * @var string
+     */
+    protected $image_url;
+
+    /**
+     * @var \App\Entities\Episode[]
+     */
     protected $episodes;
-    protected \App\Entities\User $owner;
+
+    /**
+     * @var
+     */
+    protected $owner;
+
+    /**
+     * @var \App\Entities\User[]
+     */
     protected $contributors;
-    protected string $description_html;
+
+    /**
+     * @var string
+     */
+    protected $description_html;
 
     protected $casts = [
         'id' => 'integer',

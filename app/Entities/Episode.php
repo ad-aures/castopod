@@ -14,17 +14,60 @@ use League\CommonMark\CommonMarkConverter;
 
 class Episode extends Entity
 {
-    protected \App\Entities\Podcast $podcast;
-    protected string $GUID;
-    protected string $link;
-    protected \CodeIgniter\Files\File $image;
-    protected string $image_media_path;
-    protected string $image_url;
-    protected \CodeIgniter\Files\File $enclosure;
-    protected string $enclosure_media_path;
-    protected string $enclosure_url;
-    protected array $enclosure_metadata;
-    protected string $description_html;
+    /**
+     * @var \App\Entities\Podcast
+     */
+    protected $podcast;
+
+    /**
+     * @var string
+     */
+    protected $GUID;
+
+    /**
+     * @var string
+     */
+    protected $link;
+
+    /**
+     * @var \CodeIgniter\Files\File
+     */
+    protected $image;
+
+    /**
+     * @var string
+     */
+    protected $image_media_path;
+
+    /**
+     * @var string
+     */
+    protected $image_url;
+
+    /**
+     * @var \CodeIgniter\Files\File
+     */
+    protected $enclosure;
+
+    /**
+     * @var string
+     */
+    protected $enclosure_media_path;
+
+    /**
+     * @var string
+     */
+    protected $enclosure_url;
+
+    /**
+     * @var array
+     */
+    protected $enclosure_metadata;
+
+    /**
+     * @var string
+     */
+    protected $description_html;
 
     protected $casts = [
         'slug' => 'string',

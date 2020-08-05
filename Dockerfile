@@ -1,4 +1,4 @@
-FROM php:latest
+FROM php:7.2-fpm
 
 COPY . /castopod
 WORKDIR /castopod

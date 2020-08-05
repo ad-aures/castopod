@@ -13,10 +13,10 @@ class User extends \Myth\Auth\Entities\User
     protected $podcasts = [];
 
     /**
-     * The podcast user is contributing to
-     * @var \App\Entities\Podcast
+     * The podcast the user is contributing to
+     * @var \App\Entities\Podcast|null
      */
-    protected $podcast;
+    protected $podcast = null;
 
     /**
      * Array of field names and the type of value to cast them as
@@ -49,6 +49,11 @@ class User extends \Myth\Auth\Entities\User
         return $this->podcasts;
     }
 
+    /**
+     * Returns a podcast the user is contributing to
+     *
+     * @return \App\Entities\Podcast
+     */
     public function getPodcast()
     {
         if (empty($this->podcast_id)) {

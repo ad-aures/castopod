@@ -14,7 +14,10 @@ use Config\Services;
 
 class User extends BaseController
 {
-    protected ?\App\Entities\User $user;
+    /**
+     * @var \App\Entities\User|null
+     */
+    protected $user;
 
     public function _remap($method, ...$params)
     {

@@ -287,7 +287,7 @@ $routes->group(
         $routes->get('forgot', 'AuthController::forgotPassword', [
             'as' => 'forgot',
         ]);
-        $routes->post('forgot', 'Auth::attemptForgot');
+        $routes->post('forgot', 'AuthController::attemptForgot');
         $routes->get('reset-password', 'AuthController::resetPassword', [
             'as' => 'reset-password',
         ]);

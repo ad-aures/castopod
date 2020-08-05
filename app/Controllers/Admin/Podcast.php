@@ -15,7 +15,10 @@ use Config\Services;
 
 class Podcast extends BaseController
 {
-    protected ?\App\Entities\Podcast $podcast;
+    /**
+     * @var \App\Entities\Podcast|null
+     */
+    protected $podcast;
 
     public function _remap($method, ...$params)
     {

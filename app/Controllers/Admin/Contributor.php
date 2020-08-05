@@ -14,8 +14,15 @@ use App\Models\UserModel;
 
 class Contributor extends BaseController
 {
-    protected \App\Entities\Podcast $podcast;
-    protected ?\App\Entities\User $user;
+    /**
+     * @var \App\Entities\Podcast
+     */
+    protected $podcast;
+
+    /**
+     * @var \App\Entities\User|null
+     */
+    protected $user;
 
     public function _remap($method, ...$params)
     {

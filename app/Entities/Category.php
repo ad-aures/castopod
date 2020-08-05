@@ -13,6 +13,9 @@ use CodeIgniter\Entity;
 
 class Category extends Entity
 {
+    /**
+     * @var \App\Entity\Category|null
+     */
     protected $parent;
 
     protected $casts = [

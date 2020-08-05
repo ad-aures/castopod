@@ -13,8 +13,15 @@ use App\Models\PodcastModel;
 
 class Episode extends BaseController
 {
-    protected \App\Entities\Podcast $podcast;
-    protected ?\App\Entities\Episode $episode;
+    /**
+     * @var \App\Entities\Podcast
+     */
+    protected $podcast;
+
+    /**
+     * @var \App\Entities\Episode|null
+     */
+    protected $episode;
 
     public function _remap($method, ...$params)
     {
