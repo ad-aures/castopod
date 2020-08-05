@@ -7,6 +7,7 @@ use CodeIgniter\Model;
 use App\Authorization\FlatAuthorization;
 use App\Authorization\PermissionModel;
 use App\Authorization\GroupModel;
+use App\Libraries\Breadcrumb;
 use App\Models\UserModel;
 use Myth\Auth\Models\LoginModel;
 
@@ -90,5 +91,14 @@ class Services extends CoreServices
         }
 
         return $instance->setUserModel($userModel);
+    }
+
+    public static function breadcrumb(bool $getShared = true)
+    {
+        if ($getShared) {
+            return self::getSharedInstance('breadcrumb');
+        }
+
+        return new Breadcrumb();
     }
 }

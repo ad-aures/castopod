@@ -11,7 +11,7 @@ $navigation = [
 <nav class="<?= $class ?>">
     <?php foreach ($navigation as $section => $data): ?>
     <div class="mb-4">
-        <button class="inline-flex items-center w-full px-4 py-1 outline-none focus:shadow-outline" type="button">
+        <button class="inline-flex items-center w-full px-6 py-1 outline-none focus:shadow-outline" type="button">
             <?= icon($data['icon'], 'text-gray-500') ?>
             <span class="ml-2"><?= lang('AdminNavigation.' . $section) ?></span>
         </button>

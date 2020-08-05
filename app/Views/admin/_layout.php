@@ -1,7 +1,3 @@
-<?php
-
-helper('html'); ?>
-
 <!DOCTYPE html>
 <html lang="en">
 

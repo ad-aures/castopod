@@ -51,6 +51,11 @@ class AuthSeeder extends Seeder
                 'has_permission' => ['superadmin'],
             ],
             [
+                'name' => 'view',
+                'description' => 'View any user info',
+                'has_permission' => ['superadmin'],
+            ],
+            [
                 'name' => 'manage_authorizations',
                 'description' => 'Add or remove roles/permissions to a user',
                 'has_permission' => ['superadmin'],
@@ -129,6 +134,11 @@ class AuthSeeder extends Seeder
                 'has_permission' => ['superadmin'],
             ],
             [
+                'name' => 'view',
+                'description' => 'View any episode of any podcast',
+                'has_permission' => ['superadmin'],
+            ],
+            [
                 'name' => 'create',
                 'description' => 'Add a new episode to any podcast',
                 'has_permission' => ['superadmin'],
@@ -193,6 +203,11 @@ class AuthSeeder extends Seeder
             [
                 'name' => 'list',
                 'description' => 'List all episodes of a podcast',
+                'has_permission' => ['podcast_admin'],
+            ],
+            [
+                'name' => 'view',
+                'description' => 'View any episode of a podcast',
                 'has_permission' => ['podcast_admin'],
             ],
             [

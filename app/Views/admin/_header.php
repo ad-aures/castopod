@@ -1,10 +1,13 @@
 <header class="<?= $class ?>">
-    <a href="<?= route_to(
-        'admin_home'
-    ) ?>" class="inline-flex items-center text-xl">
-        <?= svg('logo-castopod', 'text-3xl mr-2 -ml-2') ?>
-        Admin
-    </a>
+    <div class="w-64">
+        <a href="<?= route_to(
+            'admin_home'
+        ) ?>" class="inline-flex items-center text-xl">
+            <?= svg('logo-castopod', 'text-3xl mr-2') ?>
+            Admin
+        </a>
+    </div>
+    <?= render_breadcrumb() ?>
     <div class="relative ml-auto" data-toggle="dropdown">
         <button type="button" class="inline-flex items-center px-2 py-1 outline-none focus:shadow-outline" id="myAccountDropdown" data-popper="button" aria-haspopup="true" aria-expanded="false">
             Hey <?= user()->username ?>

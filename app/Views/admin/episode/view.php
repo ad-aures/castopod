@@ -1,12 +1,11 @@
 <?= $this->extend('admin/_layout') ?>
 
+<?= $this->section('title') ?>
+<?= $episode->title ?>
+<?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
 
-<a class="underline hover:no-underline" href="<?= route_to(
-    'podcast_view',
-    $episode->podcast->id
-) ?>">< <?= lang('Episode.back_to_podcast') ?></a>
-<h1 class="text-2xl font-semibold"><?= $episode->title ?></h1>
 <img src="<?= $episode->image_url ?>" alt="Episode cover"  class="object-cover w-40 h-40 mb-6" />
 <audio controls preload="none" class="mb-12">
   <source src="<?= $episode->enclosure_url ?>" type="<?= $episode->enclosure_type ?>">

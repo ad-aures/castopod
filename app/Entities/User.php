@@ -13,6 +13,12 @@ class User extends \Myth\Auth\Entities\User
     protected $podcasts = [];
 
     /**
+     * The podcast user is contributing to
+     * @var \App\Entities\Podcast
+     */
+    protected $podcast;
+
+    /**
      * Array of field names and the type of value to cast them as
      * when they are accessed.
      */
@@ -20,6 +26,7 @@ class User extends \Myth\Auth\Entities\User
         'active' => 'boolean',
         'force_pass_reset' => 'boolean',
         'podcast_role' => '?string',
+        'podcast_id' => '?integer',
     ];
 
     /**
@@ -40,5 +47,20 @@ class User extends \Myth\Auth\Entities\User
         }
 
         return $this->podcasts;
+    }
+
+    public function getPodcast()
+    {
+        if (empty($this->podcast_id)) {
+            throw new \RuntimeException(
+                'Podcast_id must be set before getting podcast.'
+            );
+        }
+
+        if (empty($this->podcast)) {
+            $this->podcast = (new PodcastModel())->find($this->podcast_id);
+        }
+
+        return $this->podcast;
     }
 }

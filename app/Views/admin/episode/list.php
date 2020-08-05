@@ -3,16 +3,17 @@
 <?= $this->section('title') ?>
 
 <?= lang('Episode.all_podcast_episodes') ?> (<?= count($podcast->episodes) ?>)
+<a class="inline-flex items-center px-2 py-1 mb-2 ml-2 text-sm text-white bg-green-500 rounded shadow-xs outline-none hover:bg-green-600 focus:shadow-outline" href="<?= route_to(
+    'episode_create',
+    $podcast->id
+) ?>">
+<?= icon('add', 'mr-2') ?>
+<?= lang('Episode.create') ?></a>
 
 <?= $this->endSection() ?>
 
 
 <?= $this->section('content') ?>
-
-<a class="inline-block px-4 py-2 mb-2 border hover:bg-gray-100" href="<?= route_to(
-    'episode_create',
-    $podcast->id
-) ?>"><?= lang('Episode.create') ?></a>
 
 <?= view('admin/_partials/_episode-list.php', [
     'episodes' => $podcast->episodes,

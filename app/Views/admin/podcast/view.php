@@ -1,7 +1,3 @@
-<?php
-
-helper('html'); ?>
-
 <?= $this->extend('admin/_layout') ?>
 
 <?= $this->section('title') ?>

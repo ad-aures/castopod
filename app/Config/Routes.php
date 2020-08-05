@@ -77,11 +77,11 @@ $routes->group(
         $routes->get('podcasts', 'Podcast::list', [
             'as' => 'podcast_list',
         ]);
-        $routes->get('new-podcast', 'Podcast::create', [
+        $routes->get('podcasts/new', 'Podcast::create', [
             'as' => 'podcast_create',
             'filter' => 'permission:podcasts-create',
         ]);
-        $routes->post('new-podcast', 'Podcast::attemptCreate', [
+        $routes->post('podcasts/new', 'Podcast::attemptCreate', [
             'filter' => 'permission:podcasts-create',
         ]);
 
@@ -108,19 +108,19 @@ $routes->group(
                 'as' => 'episode_list',
                 'filter' => 'permission:podcasts-view,podcast-view',
             ]);
-            $routes->get('new-episode', 'Episode::create/$1', [
+            $routes->get('episodes/new', 'Episode::create/$1', [
                 'as' => 'episode_create',
                 'filter' =>
                     'permission:episodes-create,podcast_episodes-create',
             ]);
-            $routes->post('new-episode', 'Episode::attemptCreate/$1', [
+            $routes->post('episodes/new', 'Episode::attemptCreate/$1', [
                 'filter' =>
                     'permission:episodes-create,podcast_episodes-create',
             ]);
 
             $routes->get('episodes/(:num)', 'Episode::view/$1/$2', [
                 'as' => 'episode_view',
-                'filter' => 'permission:episodes-list,podcast_episodes-list',
+                'filter' => 'permission:episodes-view,podcast_episodes-view',
             ]);
             $routes->get('episodes/(:num)/edit', 'Episode::edit/$1/$2', [
                 'as' => 'episode_edit',
@@ -146,14 +146,17 @@ $routes->group(
                 'filter' =>
                     'permission:podcasts-manage_contributors,podcast-manage_contributors',
             ]);
-            $routes->get('add-contributor', 'Contributor::add/$1', [
+            $routes->get('contributors/add', 'Contributor::add/$1', [
                 'as' => 'contributor_add',
                 'filter' =>
                     'permission:podcasts-manage_contributors,podcast-manage_contributors',
             ]);
-            $routes->post('add-contributor', 'Contributor::attemptAdd/$1', [
+            $routes->post('contributors/add', 'Contributor::attemptAdd/$1', [
                 'filter' =>
                     'permission:podcasts-manage_contributors,podcast-manage_contributors',
+            ]);
+            $routes->get('contributors/(:num)', 'Contributor::view/$1/$2', [
+                'as' => 'contributor_view',
             ]);
             $routes->get(
                 'contributors/(:num)/edit',
@@ -188,11 +191,15 @@ $routes->group(
             'as' => 'user_list',
             'filter' => 'permission:users-list',
         ]);
-        $routes->get('new-user', 'User::create', [
+        $routes->get('users/new', 'User::create', [
             'as' => 'user_create',
             'filter' => 'permission:users-create',
         ]);
-        $routes->post('new-user', 'User::attemptCreate', [
+        $routes->get('users/(:num)', 'User::view/$1', [
+            'as' => 'user_view',
+            'filter' => 'permission:users-view',
+        ]);
+        $routes->post('users/new', 'User::attemptCreate', [
             'filter' => 'permission:users-create',
         ]);
         $routes->get('users/(:num)/edit', 'User::edit/$1', [

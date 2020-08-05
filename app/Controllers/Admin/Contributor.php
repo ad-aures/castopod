@@ -41,7 +41,24 @@ class Contributor extends BaseController
             'podcast' => $this->podcast,
         ];
 
-        echo view('admin/contributor/list', $data);
+        replace_breadcrumb_params([0 => $this->podcast->title]);
+        return view('admin/contributor/list', $data);
+    }
+
+    public function view()
+    {
+        $data = [
+            'contributor' => (new UserModel())->getPodcastContributor(
+                $this->user->id,
+                $this->podcast->id
+            ),
+        ];
+
+        replace_breadcrumb_params([
+            0 => $this->podcast->title,
+            1 => $this->user->username,
+        ]);
+        return view('admin/contributor/view', $data);
     }
 
     public function add()
@@ -52,7 +69,8 @@ class Contributor extends BaseController
             'roles' => (new GroupModel())->getContributorRoles(),
         ];
 
-        echo view('admin/contributor/add', $data);
+        replace_breadcrumb_params([0 => $this->podcast->title]);
+        return view('admin/contributor/add', $data);
     }
 
     public function attemptAdd()
@@ -87,7 +105,11 @@ class Contributor extends BaseController
             'roles' => (new GroupModel())->getContributorRoles(),
         ];
 
-        echo view('admin/contributor/edit', $data);
+        replace_breadcrumb_params([
+            0 => $this->podcast->title,
+            1 => $this->user->username,
+        ]);
+        return view('admin/contributor/edit', $data);
     }
 
     public function attemptEdit()

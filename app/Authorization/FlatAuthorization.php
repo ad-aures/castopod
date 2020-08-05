@@ -49,7 +49,7 @@ class FlatAuthorization extends \Myth\Auth\Authorization\FlatAuthorization
     }
 
     /**
-     * Makes a member a part of multiple groups.
+     * Makes user part of given groups.
      *
      * @param $userId
      * @param array|null $groups // Either collection of ID or names

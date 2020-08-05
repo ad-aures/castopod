@@ -42,6 +42,9 @@ class Episode extends BaseController
             'podcast' => $this->podcast,
         ];
 
+        replace_breadcrumb_params([
+            0 => $this->podcast->title,
+        ]);
         return view('admin/episode/list', $data);
     }
 
@@ -49,6 +52,10 @@ class Episode extends BaseController
     {
         $data = ['episode' => $this->episode];
 
+        replace_breadcrumb_params([
+            0 => $this->podcast->title,
+            1 => $this->episode->title,
+        ]);
         return view('admin/episode/view', $data);
     }
 
@@ -60,7 +67,10 @@ class Episode extends BaseController
             'podcast' => $this->podcast,
         ];
 
-        echo view('admin/episode/create', $data);
+        replace_breadcrumb_params([
+            0 => $this->podcast->title,
+        ]);
+        return view('admin/episode/create', $data);
     }
 
     public function attemptCreate()
@@ -115,7 +125,11 @@ class Episode extends BaseController
             'episode' => $this->episode,
         ];
 
-        echo view('admin/episode/edit', $data);
+        replace_breadcrumb_params([
+            0 => $this->podcast->title,
+            1 => $this->episode->title,
+        ]);
+        return view('admin/episode/edit', $data);
     }
 
     public function attemptEdit()

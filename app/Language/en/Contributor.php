@@ -8,6 +8,7 @@
 
 return [
     'podcast_contributors' => 'Podcast contributors',
+    'view' => '{username}\'s contribution to {podcastName}',
     'add' => 'Add contributor',
     'add_contributor' => 'Add a contributor for {0}',
     'edit_role' => 'Update role for {0}',

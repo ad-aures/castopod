@@ -34,13 +34,21 @@ class User extends BaseController
         return view('admin/user/list', $data);
     }
 
+    public function view()
+    {
+        $data = ['user' => $this->user];
+
+        replace_breadcrumb_params([0 => $this->user->username]);
+        return view('admin/user/view', $data);
+    }
+
     public function create()
     {
         $data = [
             'roles' => (new GroupModel())->getUserRoles(),
         ];
 
-        echo view('admin/user/create', $data);
+        return view('admin/user/create', $data);
     }
 
     public function attemptCreate()
@@ -99,7 +107,8 @@ class User extends BaseController
             'roles' => (new GroupModel())->getUserRoles(),
         ];
 
-        echo view('admin/user/edit', $data);
+        replace_breadcrumb_params([0 => $this->user->username]);
+        return view('admin/user/edit', $data);
     }
 
     public function attemptEdit()

@@ -52,6 +52,7 @@ class Podcast extends BaseController
     {
         $data = ['podcast' => $this->podcast];
 
+        replace_breadcrumb_params([0 => $this->podcast->title]);
         return view('admin/podcast/view', $data);
     }
 
@@ -69,7 +70,7 @@ class Podcast extends BaseController
             ),
         ];
 
-        echo view('admin/podcast/create', $data);
+        return view('admin/podcast/create', $data);
     }
 
     public function attemptCreate()
@@ -145,7 +146,8 @@ class Podcast extends BaseController
             'categories' => (new CategoryModel())->findAll(),
         ];
 
-        echo view('admin/podcast/edit', $data);
+        replace_breadcrumb_params([0 => $this->podcast->title]);
+        return view('admin/podcast/edit', $data);
     }
 
     public function attemptEdit()

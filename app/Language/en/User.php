@@ -13,6 +13,7 @@ return [
     'unban' => 'Unban',
     'delete' => 'Delete',
     'create' => 'Create a user',
+    'view' => '{username}\'s info',
     'all_users' => 'All users',
     'form' => [
         'email' => 'Email',

@@ -1,0 +1,20 @@
+.breadcrumb {
+  @apply inline-flex flex-wrap px-1 py-2 text-sm text-gray-800;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  @apply inline-block px-1 text-gray-500;
+  content: "/";
+}
+
+.breadcrumb-item a {
+  @apply no-underline;
+
+  &:hover {
+    @apply underline;
+  }
+}
+
+.breadcrumb-item.active {
+  @apply font-semibold;
+}

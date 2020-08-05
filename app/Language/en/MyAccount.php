@@ -8,8 +8,8 @@
 
 return [
     'info' => 'My account info',
+    'changePassword' => 'Change my password',
     'messages' => [
         'passwordChangeSuccess' => 'Password has been successfully changed!',
-        'changePassword' => 'Change my password',
     ],
 ];
