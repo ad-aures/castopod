@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>Castopod</title>
+    <meta name="description" content="Castopod is an open-source hosting platform made for podcasters who want engage and interact with their audience."/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
+    <link rel="stylesheet" href="/assets/index.css"/>
+</head>
+
+<body class="flex flex-col min-h-screen mx-auto">
+    <header class="border-b">
+        <div class="container flex items-center justify-between px-2 py-4 mx-auto">
+            Castopod installer
+        </div>
+    </header>
+    <main class="container flex-1 px-4 py-10 mx-auto">
+        <?= view('_message_block') ?>
+        <?= $this->renderSection('content') ?>
+    </main>
+    <footer class="container px-2 py-4 mx-auto text-sm text-right border-t">
+        Powered by <a class="underline hover:no-underline" href="https://castopod.org" target="_blank" rel="noreferrer noopener">Castopod</a>, a <a class="underline hover:no-underline" href="https://podlibre.org/" target="_blank" rel="noreferrer noopener">Podlibre</a> initiative.
+    </footer>
+</body>

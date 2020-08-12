@@ -31,7 +31,6 @@ $routes->setAutoRoute(false);
 
 $routes->addPlaceholder('podcastName', '[a-zA-Z0-9\_]{1,191}');
 $routes->addPlaceholder('episodeSlug', '[a-zA-Z0-9\-]{1,191}');
-$routes->addPlaceholder('username', '[a-zA-Z0-9 ]{3,}');
 
 /**
  * --------------------------------------------------------------------
@@ -42,6 +41,17 @@ $routes->addPlaceholder('username', '[a-zA-Z0-9 ]{3,}');
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index', ['as' => 'home']);
+
+// Install Wizard route
+$routes->group('cp-install', function ($routes) {
+    $routes->get('/', 'Install', ['as' => 'install']);
+    $routes->post('generate-env', 'Install::attemptCreateEnv', [
+        'as' => 'install_generate_env',
+    ]);
+    $routes->post('create-superadmin', 'Install::attemptCreateSuperAdmin', [
+        'as' => 'install_create_superadmin',
+    ]);
+});
 
 // Public routes
 $routes->group('@(:podcastName)', function ($routes) {
@@ -68,7 +78,7 @@ $routes->group(
     ['namespace' => 'App\Controllers\Admin'],
     function ($routes) {
         $routes->get('/', 'Home', [
-            'as' => 'admin_home',
+            'as' => 'admin',
         ]);
 
         $routes->get('my-podcasts', 'Podcast::myPodcasts', [

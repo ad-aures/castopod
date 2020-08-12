@@ -11,6 +11,7 @@ PHP Dependencies:
 - [getID3](https://github.com/JamesHeinrich/getID3) ([GNU General Public License v3](https://github.com/JamesHeinrich/getID3/blob/2.0/licenses/license.gpl-30.txt))
 - [myth-auth](https://github.com/lonnieezell/myth-auth) ([MIT license](https://github.com/lonnieezell/myth-auth/blob/develop/LICENSE.md))
 - [commonmark](https://commonmark.thephpleague.com/) ([BSD 3-Clause "New" or "Revised" License](https://github.com/thephpleague/commonmark/blob/latest/LICENSE))
+- [phpdotenv](https://github.com/vlucas/phpdotenv) ([ BSD-3-Clause License ](https://github.com/vlucas/phpdotenv/blob/master/LICENSE))
 
 Javascript dependencies:
 

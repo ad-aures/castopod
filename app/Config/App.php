@@ -34,7 +34,7 @@ class App extends BaseConfig
     | variable so that it is blank.
     |
     */
-    public $indexPage = 'index.php';
+    public $indexPage = '';
 
     /*
     |--------------------------------------------------------------------------
@@ -281,7 +281,7 @@ class App extends BaseConfig
     |--------------------------------------------------------------------------
     | Defines a base route for all admin pages
     */
-    public $adminGateway = 'admin';
+    public $adminGateway = 'cp-admin';
 
     /*
     |--------------------------------------------------------------------------
@@ -289,5 +289,5 @@ class App extends BaseConfig
     |--------------------------------------------------------------------------
     | Defines a base route for all authentication related pages
     */
-    public $authGateway = 'auth';
+    public $authGateway = 'cp-auth';
 }

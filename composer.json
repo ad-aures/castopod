@@ -11,7 +11,8 @@
     "geoip2/geoip2": "~2.0",
     "myth/auth": "dev-develop",
     "codeigniter4/codeigniter4": "dev-develop",
-    "league/commonmark": "^1.5"
+    "league/commonmark": "^1.5",
+    "vlucas/phpdotenv": "^5.1"
   },
   "require-dev": {
     "mikey179/vfsstream": "1.6.*",

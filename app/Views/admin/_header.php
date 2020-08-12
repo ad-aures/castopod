@@ -1,7 +1,7 @@
 <header class="<?= $class ?>">
     <div class="w-64">
         <a href="<?= route_to(
-            'admin_home'
+            'admin'
         ) ?>" class="inline-flex items-center text-xl">
             <?= svg('logo-castopod', 'text-3xl mr-2') ?>
             Admin

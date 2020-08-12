@@ -10,7 +10,7 @@ return [
     'dashboard' => 'Dashboard',
     'podcasts' => 'Podcasts',
     'users' => 'Users',
-    'admin_home' => 'Home',
+    'admin' => 'Home',
     'my_podcasts' => 'My podcasts',
     'podcast_list' => 'All podcasts',
     'podcast_create' => 'New podcast',
