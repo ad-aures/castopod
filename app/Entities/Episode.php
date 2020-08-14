@@ -69,20 +69,26 @@ class Episode extends Entity
      */
     protected $description_html;
 
+    protected $dates = [
+        'published_at',
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
+
     protected $casts = [
         'slug' => 'string',
         'title' => 'string',
         'enclosure_uri' => 'string',
-        'pub_date' => 'datetime',
         'description' => 'string',
         'image_uri' => '?string',
-        'author_name' => '?string',
-        'author_email' => '?string',
         'explicit' => 'boolean',
         'number' => 'integer',
         'season_number' => '?integer',
         'type' => 'string',
         'block' => 'boolean',
+        'created_by' => 'integer',
+        'updated_by' => 'integer',
     ];
 
     public function setImage(?\CodeIgniter\HTTP\Files\UploadedFile $image)
@@ -215,5 +221,30 @@ class Episode extends Entity
         }
 
         return $converter->convertToHtml($this->attributes['description']);
+    }
+
+    public function setPublishedAt($date, $time)
+    {
+        if (empty($date)) {
+            $this->attributes['published_at'] = null;
+        } else {
+            $this->attributes['published_at'] = $date . ' ' . $time;
+        }
+
+        return $this;
+    }
+
+    public function setCreatedBy(\App\Entities\User $user)
+    {
+        $this->attributes['created_by'] = $user->id;
+
+        return $this;
+    }
+
+    public function setUpdatedBy(\App\Entities\User $user)
+    {
+        $this->attributes['updated_by'] = $user->id;
+
+        return $this;
     }
 }

@@ -2,9 +2,10 @@
 
 <?= $this->section('content') ?>
 
-<?= form_open(route_to('install_generate_env'), [
+<?= form_open(route_to('generate-env'), [
     'class' => 'flex flex-col max-w-sm mx-auto',
 ]) ?>
+<?= csrf_field() ?>
 
 <?= form_fieldset('', ['class' => 'flex flex-col mb-6']) ?>
     <legend class="mb-4 text-xl"><?= lang(
@@ -16,6 +17,7 @@
         'name' => 'hostname',
         'class' => 'form-input mb-4',
         'value' => config('App')->baseURL,
+        'required' => 'required',
     ]) ?>
 
     <?= form_label(lang('Install.form.admin_gateway'), 'admin_gateway') ?>
@@ -24,6 +26,7 @@
         'name' => 'admin_gateway',
         'class' => 'form-input mb-4',
         'value' => config('App')->adminGateway,
+        'required' => 'required',
     ]) ?>
 
     <?= form_label(lang('Install.form.auth_gateway'), 'auth_gateway') ?>
@@ -32,6 +35,7 @@
         'name' => 'auth_gateway',
         'class' => 'form-input',
         'value' => config('App')->authGateway,
+        'required' => 'required',
     ]) ?>
 <?= form_fieldset_close() ?>
 
@@ -43,6 +47,7 @@
         'name' => 'db_hostname',
         'class' => 'form-input mb-4',
         'value' => config('Database')->default['hostname'],
+        'required' => 'required',
     ]) ?>
 
     <?= form_label(lang('Install.form.db_name'), 'db_name') ?>
@@ -51,6 +56,7 @@
         'name' => 'db_name',
         'class' => 'form-input mb-4',
         'value' => config('Database')->default['database'],
+        'required' => 'required',
     ]) ?>
 
     <?= form_label(lang('Install.form.db_username'), 'db_username') ?>
@@ -59,6 +65,7 @@
         'name' => 'db_username',
         'class' => 'form-input mb-4',
         'value' => config('Database')->default['username'],
+        'required' => 'required',
     ]) ?>
 
     <?= form_label(lang('Install.form.db_password'), 'db_password') ?>
@@ -67,6 +74,7 @@
         'name' => 'db_password',
         'class' => 'form-input mb-4',
         'value' => config('Database')->default['password'],
+        'required' => 'required',
     ]) ?>
 
     <?= form_label(lang('Install.form.db_prefix'), 'db_prefix') ?>

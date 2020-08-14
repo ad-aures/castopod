@@ -290,4 +290,12 @@ class App extends BaseConfig
     | Defines a base route for all authentication related pages
     */
     public $authGateway = 'cp-auth';
+
+    /*
+    |--------------------------------------------------------------------------
+    | Install gateway
+    |--------------------------------------------------------------------------
+    | Defines a base route for instance installation
+    */
+    public $installGateway = 'cp-install';
 }

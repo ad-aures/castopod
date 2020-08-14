@@ -25,9 +25,7 @@ class PodcastModel extends Model
         'language',
         'category',
         'explicit',
-        'author_name',
-        'author_email',
-        'owner_id',
+        'author',
         'owner_name',
         'owner_email',
         'type',
@@ -35,6 +33,8 @@ class PodcastModel extends Model
         'block',
         'complete',
         'custom_html_head',
+        'created_by',
+        'updated_by',
     ];
 
     protected $returnType = \App\Entities\Podcast::class;
@@ -50,21 +50,16 @@ class PodcastModel extends Model
         'image_uri' => 'required',
         'language' => 'required',
         'category' => 'required',
-        'author_email' => 'valid_email|permit_empty',
-        'owner_id' => 'required',
         'owner_email' => 'required|valid_email',
         'type' => 'required',
+        'created_by' => 'required',
+        'updated_by' => 'required',
     ];
     protected $validationMessages = [];
 
     protected $afterInsert = ['clearCache'];
     protected $afterUpdate = ['clearCache'];
     protected $beforeDelete = ['clearCache'];
-
-    public function hello(array $data)
-    {
-        return $data;
-    }
 
     /**
      *  Gets all the podcasts a given user is contributing to

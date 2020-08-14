@@ -2,7 +2,7 @@
     <img alt="<?= $podcast->title ?>" src="<?= $podcast->image_url ?>" class="object-cover w-full h-40" />
     <div class="p-2">
         <a href="<?= route_to(
-            'podcast_view',
+            'podcast-view',
             $podcast->id
         ) ?>" class="hover:underline">
             <h2 class="font-semibold"><?= $podcast->title ?></h2>
@@ -11,13 +11,13 @@
     </div>
     <footer class="flex items-center justify-end p-2">
         <a class="inline-flex p-2 mr-2 text-teal-700 bg-teal-100 rounded-full shadow-xs hover:bg-teal-200" href="<?= route_to(
-            'podcast_edit',
+            'podcast-edit',
             $podcast->id
         ) ?>" data-toggle="tooltip" data-placement="bottom" title="<?= lang(
     'Podcast.edit'
 ) ?>"><?= icon('edit') ?></a>
         <a class="inline-flex p-2 text-gray-700 bg-gray-100 rounded-full shadow-xs hover:bg-gray-200" href="<?= route_to(
-            'podcast_view',
+            'podcast-view',
             $podcast->id
         ) ?>" data-toggle="tooltip" data-placement="bottom" title="<?= lang(
     'Podcast.view'

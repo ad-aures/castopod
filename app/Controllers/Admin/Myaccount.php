@@ -20,6 +20,8 @@ class Myaccount extends BaseController
 
     public function changePassword()
     {
+        helper('form');
+
         return view('admin/my_account/change_password');
     }
 
@@ -31,10 +33,8 @@ class Myaccount extends BaseController
         // Validate here first, since some things,
         // like the password, can only be validated properly here.
         $rules = [
-            'email' => 'required|valid_email',
             'password' => 'required',
-            'new_password' => 'required|strong_password',
-            'new_pass_confirm' => 'required|matches[new_password]',
+            'new_password' => 'required|strong_password|differs[password]',
         ];
 
         if (!$this->validate($rules)) {
@@ -53,7 +53,7 @@ class Myaccount extends BaseController
             return redirect()
                 ->back()
                 ->withInput()
-                ->with('errors', $userModel->errors());
+                ->with('error', lang('MyAccount.messages.wrongPasswordError'));
         }
 
         user()->password = $this->request->getPost('new_password');
@@ -68,7 +68,7 @@ class Myaccount extends BaseController
 
         // Success!
         return redirect()
-            ->route('myAccount')
+            ->back()
             ->with('message', lang('MyAccount.messages.passwordChangeSuccess'));
     }
 }

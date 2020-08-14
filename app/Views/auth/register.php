@@ -1,3 +1,4 @@
+<?= helper('form') ?>
 <?= $this->extend($config->viewLayout) ?>
 
 <?= $this->section('title') ?>
@@ -7,36 +8,49 @@
 
 <?= $this->section('content') ?>
 
-<form action="<?= route_to('register') ?>" method="post" class="flex flex-col">
-    <?= csrf_field() ?>
+<?= form_open(route_to('register'), ['class' => 'flex flex-col']) ?>
+<?= csrf_field() ?>
 
-    <label for="email"><?= lang('Auth.email') ?></label>
-    <input type="email" class="mb-4 form-input" name="email" aria-describedby="emailHelp" placeholder="<?= lang(
-        'Auth.email'
-    ) ?>" value="<?= old('email') ?>">
-    <small id="emailHelp" class="mb-4">
-        <?= lang('Auth.weNeverShare') ?>
-    </small>
+<?= form_label(lang('Auth.email'), 'email') ?>
+<?= form_input([
+    'id' => 'email',
+    'name' => 'email',
+    'class' => 'form-input',
+    'value' => old('email'),
+    'type' => 'email',
+    'required' => 'required',
+    'aria-describedby' => 'emailHelp',
+]) ?>
+<small id="emailHelp" class="mb-4 text-gray-700">
+    <?= lang('Auth.weNeverShare') ?>
+</small>
 
-    <label for="username"><?= lang('Auth.username') ?></label>
-    <input type="text" class="mb-4 form-input" name="username" placeholder="<?= lang(
-        'Auth.username'
-    ) ?>" value="<?= old('username') ?>">
+<?= form_label(lang('Auth.username'), 'username') ?>
+<?= form_input([
+    'id' => 'username',
+    'name' => 'username',
+    'class' => 'form-input mb-4',
+    'value' => old('username'),
+    'required' => 'required',
+]) ?>
 
-    <label for="password"><?= lang('Auth.password') ?></label>
-    <input type="password" name="password" class="mb-4 form-input" placeholder="<?= lang(
-        'Auth.password'
-    ) ?>" autocomplete="off">
+<?= form_label(lang('Auth.password'), 'password') ?>
+<?= form_input([
+    'id' => 'password',
+    'name' => 'password',
+    'class' => 'form-input mb-4',
+    'type' => 'password',
+    'required' => 'required',
+    'autocomplete' => 'new-password',
+]) ?>
 
-    <label for="pass_confirm"><?= lang('Auth.repeatPassword') ?></label>
-    <input type="password" name="pass_confirm" class="mb-6 form-input" placeholder="<?= lang(
-        'Auth.repeatPassword'
-    ) ?>" autocomplete="off">
+<?= form_button([
+    'content' => lang('Auth.register'),
+    'class' => 'px-4 py-2 ml-auto border',
+    'type' => 'submit',
+]) ?>
 
-    <button type="submit" class="px-4 py-2 ml-auto border">
-        <?= lang('Auth.register') ?>
-    </button>
-</form>
+<?= form_close() ?>
 
 <?= $this->endSection() ?>
 

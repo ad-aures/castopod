@@ -1,3 +1,4 @@
+<?= helper('svg') ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,11 +13,15 @@
 
 <body class="flex flex-col items-center justify-center min-h-screen mx-auto bg-gray-100">
 	<header class="mb-4">
-		<a href="<?= route_to('home') ?>" class="text-2xl"><?= $this->renderSection(
-    'title'
-) ?></a>
+		<a href="<?= route_to('home') ?>" class="inline-flex items-center">
+			<?= svg(
+       'logo-castopod',
+       'text-3xl mr-2'
+   ) ?><span class="text-xl">Castopod</span>
+		</a>
 	</header>
 	<main class="w-full max-w-md px-6 py-4 mx-auto bg-white rounded-lg shadow">
+		<h1 class="mb-2 text-2xl text-center"><?= $this->renderSection('title') ?></h1>
 		<?= view('_message_block') ?>
 		<?= $this->renderSection('content') ?>
 	</main>

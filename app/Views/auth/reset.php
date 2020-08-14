@@ -1,3 +1,4 @@
+<?= helper('form') ?>
 <?= $this->extend($config->viewLayout) ?>
 
 <?= $this->section('title') ?>
@@ -9,30 +10,44 @@
 
 <p class="mb-4"><?= lang('Auth.enterCodeEmailPassword') ?></p>
 
-<form action="<?= route_to(
-    'reset-password'
-) ?>" method="post" class="flex flex-col">
-    <?= csrf_field() ?>
+<?= form_open(route_to('reset-password'), ['class' => 'flex flex-col']) ?>
+<?= csrf_field() ?>
 
-    <label for="token"><?= lang('Auth.token') ?></label>
-    <input type="text" class="mb-4 form-input" name="token" placeholder="<?= lang(
-        'Auth.token'
-    ) ?>" value="<?= old('token', $token ?? '') ?>">
+<?= form_label(lang('Auth.token'), 'token') ?>
+<?= form_input([
+    'id' => 'token',
+    'name' => 'token',
+    'class' => 'form-input mb-4',
+    'value' => old('token', $token ?? ''),
+    'required' => 'required',
+]) ?>
 
-    <label for="email"><?= lang('Auth.email') ?></label>
-    <input type="email" class="mb-4 form-input" name="email" placeholder="<?= lang(
-        'Auth.email'
-    ) ?>" value="<?= old('email') ?>">
+<?= form_label(lang('Auth.email'), 'email') ?>
+<?= form_input([
+    'id' => 'email',
+    'name' => 'email',
+    'class' => 'form-input mb-4',
+    'value' => old('email'),
+    'required' => 'required',
+    'type' => 'email',
+]) ?>
 
-    <label for="password"><?= lang('Auth.newPassword') ?></label>
-    <input type="password" class="mb-4 form-input" name="password">
+<?= form_label(lang('Auth.newPassword'), 'password') ?>
+<?= form_input([
+    'id' => 'password',
+    'name' => 'password',
+    'class' => 'form-input mb-4',
+    'type' => 'password',
+    'required' => 'required',
+    'autocomplete' => 'new-password',
+]) ?>
 
-    <label for="pass_confirm"><?= lang('Auth.newPasswordRepeat') ?></label>
-    <input type="password" class="mb-6 form-input" name="pass_confirm">
+<?= form_button([
+    'content' => lang('Auth.resetPassword'),
+    'class' => 'px-4 py-2 ml-auto border',
+    'type' => 'submit',
+]) ?>
 
-    <button type="submit" class="px-4 py-2 ml-auto border">
-        <?= lang('Auth.resetPassword') ?>
-    </button>
-</form>
+<?= form_close() ?>
 
 <?= $this->endSection() ?>

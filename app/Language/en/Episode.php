@@ -14,7 +14,7 @@ return [
     'go_to_page' => 'Go to page',
     'create' => 'Add an episode',
     'form' => [
-        'file' => 'Audio file',
+        'enclosure' => 'Audio file',
         'title' => 'Title',
         'title_help' =>
             'This episode title. It should contain a clear, concise name for your episode. Don’t specify the episode number or season number here.',
@@ -24,17 +24,19 @@ return [
         'description' => 'Description',
         'description_help' =>
             'This is where you type the episode show notes. You may add rich text, links, images…',
-        'pub_date' => 'Publication date',
-        'pub_date_help' =>
-            'The date and time when this episode was released. It can be in the past or in the future.',
         'image' => 'Image',
         'image_help' =>
             'This episode image. If an image is already in the audio file, you don’t need to add one here. If you add no image to this episode, the podcast image will be used instead.',
-        'author_name' => 'Author name',
-        'author_email' => 'Author email',
         'explicit' => 'Explicit',
         'explicit_help' =>
             'The episode parental advisory information for this episode.',
+        'published_at' => [
+            'label' => 'Publication date',
+            'date' => 'Publication date',
+            'time' => 'Publication time',
+        ],
+        'published_at_help' =>
+            'The date and time when this episode was released. It can be in the past or in the future.',
         'type' => [
             'label' => 'Type',
             'full' => 'Full',

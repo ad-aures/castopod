@@ -6,30 +6,25 @@
 
 
 <?= $this->section('content') ?>
-<form action="<?= route_to(
-    'contributor_edit',
-    $podcast->id,
-    $user->id
-) ?>" method="post" class="flex flex-col max-w-lg">
-    <?= csrf_field() ?>
 
-    <div class="flex flex-col mb-4">
-        <label for="category"><?= lang('Contributor.form.role') ?></label>
-        <select id="role" name="role" autocomplete="off" class="form-select" required>
-            <?php foreach ($roles as $role): ?>
-                <option value="<?= $role->id ?>"
-                <?php if (
-                    $contributorGroupId == $role->id
-                ): ?> selected <?php endif; ?>>
-                    <?= $role->name ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
-    </div>
+<?= form_open(route_to('contributor-edit', $podcast->id, $user->id), [
+    'class' => 'flex flex-col max-w-sm',
+]) ?>
+<?= csrf_field() ?>
 
-    <button type="submit" name="submit" class="self-end px-4 py-2 bg-gray-200"><?= lang(
-        'Contributor.form.submit_edit'
-    ) ?></button>
+<?= form_label(lang('Contributor.form.role'), 'role') ?>
+<?= form_dropdown('role', $roleOptions, old('role', $contributorGroupId), [
+    'id' => 'role',
+    'class' => 'form-select mb-4',
+    'required' => 'required',
+]) ?>
 
-</form>
+<?= form_button([
+    'content' => lang('Contributor.form.submit_edit'),
+    'type' => 'submit',
+    'class' => 'self-end px-4 py-2 bg-gray-200',
+]) ?>
+
+<?= form_close() ?>
+
 <?= $this->endSection() ?>

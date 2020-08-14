@@ -10,6 +10,8 @@ return [
     'info' => 'My account info',
     'changePassword' => 'Change my password',
     'messages' => [
+        'wrongPasswordError' =>
+            'You\'ve entered the wrong password, try again.',
         'passwordChangeSuccess' => 'Password has been successfully changed!',
     ],
 ];

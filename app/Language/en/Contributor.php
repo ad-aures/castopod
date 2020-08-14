@@ -20,6 +20,9 @@ return [
         'submit_add' => 'Add contributor',
         'submit_edit' => 'Update role',
     ],
+    'roles' => [
+        'podcast_admin' => 'Podcast admin',
+    ],
     'messages' => [
         'removeOwnerContributorError' => 'You can\'t remove the podcast owner!',
         'removeContributorSuccess' =>

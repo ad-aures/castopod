@@ -91,8 +91,8 @@ function get_rss_feed($podcast)
         $itunes_namespace
     );
 
-    $podcast->author_name &&
-        $channel->addChild('author', $podcast->author_name, $itunes_namespace);
+    $podcast->author &&
+        $channel->addChild('author', $podcast->author, $itunes_namespace);
     $channel->addChild('link', $podcast->link);
 
     if ($podcast->owner_name || $podcast->owner_email) {
@@ -125,7 +125,10 @@ function get_rss_feed($podcast)
         $enclosure->addAttribute('type', $enclosure_metadata['mime_type']);
 
         $item->addChild('guid', $episode->guid);
-        $item->addChild('pubDate', $episode->pub_date->format(DATE_RFC1123));
+        $item->addChild(
+            'pubDate',
+            $episode->published_at->format(DATE_RFC1123)
+        );
         $item->addChildWithCDATA('description', $episode->description_html);
         $item->addChild(
             'duration',
@@ -144,18 +147,6 @@ function get_rss_feed($podcast)
             $episode->explicit ? 'true' : 'false',
             $itunes_namespace
         );
-
-        if ($episode->author_email || $episode->author_name) {
-            $item->addChild(
-                'author',
-                $episode->author_name
-                    ? $episode->author_email .
-                        ' (' .
-                        $episode->author_name .
-                        ')'
-                    : $episode->author_email
-            );
-        }
 
         $item->addChild('episode', $episode->number, $itunes_namespace);
         $episode->season_number &&

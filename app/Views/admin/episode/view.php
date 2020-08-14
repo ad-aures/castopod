@@ -13,7 +13,7 @@
 </audio>
 
 <a class="inline-flex px-4 py-2 text-white bg-teal-700 hover:bg-teal-800" href="<?= route_to(
-    'episode_edit',
+    'episode-edit',
     $episode->podcast->id,
     $episode->id
 ) ?>"><?= lang('Episode.edit') ?></a>
@@ -25,7 +25,7 @@
     'Episode.go_to_page'
 ) ?></a>
     <a href="<?= route_to(
-        'episode_delete',
+        'episode-delete',
         $episode->podcast->id,
         $episode->id
     ) ?>" class="inline-flex px-4 py-2 text-white bg-red-700 hover:bg-red-800"><?= lang(

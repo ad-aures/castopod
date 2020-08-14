@@ -3,9 +3,9 @@ $navigation = [
     'dashboard' => ['icon' => 'dashboard', 'items' => ['admin']],
     'podcasts' => [
         'icon' => 'mic',
-        'items' => ['my_podcasts', 'podcast_list', 'podcast_create'],
+        'items' => ['my-podcasts', 'podcast-list', 'podcast-create'],
     ],
-    'users' => ['icon' => 'group', 'items' => ['user_list', 'user_create']],
+    'users' => ['icon' => 'group', 'items' => ['user-list', 'user-create']],
 ]; ?>
 
 <nav class="<?= $class ?>">
@@ -19,7 +19,7 @@ $navigation = [
             <?php foreach ($data['items'] as $item): ?>
                 <?php $isActive = base_url(route_to($item)) == current_url(); ?>
             <li>
-                <a class="block py-1 pl-10 pr-2 text-sm text-gray-600 outline-none hover:text-gray-900 focus:shadow-outline <?= $isActive
+                <a class="block py-1 pl-12 pr-2 text-sm text-gray-600 outline-none hover:text-gray-900 focus:shadow-outline <?= $isActive
                     ? 'font-semibold text-gray-900'
                     : '' ?>" href="<?= route_to($item) ?>"><?= lang(
     'AdminNavigation.' . $item

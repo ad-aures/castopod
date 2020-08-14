@@ -7,27 +7,23 @@
 
 <?= $this->section('content') ?>
 
-<form action="<?= route_to(
-    'user_edit',
-    $user->id
-) ?>" method="post" class="flex flex-col max-w-lg">
-    <?= csrf_field() ?>
+<?= form_open(route_to('user-edit', $user->id), [
+    'class' => 'flex flex-col max-w-sm',
+]) ?>
+<?= csrf_field() ?>
 
-    <label for="roles"><?= lang('User.form.roles') ?></label>
-    <select id="roles" name="roles[]" autocomplete="off" class="mb-6 form-multiselect" multiple>
-        <?php foreach ($roles as $role): ?>
-            <option value="<?= $role->id ?>"
-            <?php if (
-                in_array($role->name, $user->roles)
-            ): ?> selected <?php endif; ?>>
-                <?= $role->name ?>
-            </option>
-        <?php endforeach; ?>
-    </select>
+<?= form_label(lang('User.form.roles'), 'roles') ?>
+<?= form_multiselect('roles[]', $roleOptions, $user->roles, [
+    'id' => 'roles',
+    'class' => 'form-multiselect mb-4',
+]) ?>
 
-    <button type="submit" class="px-4 py-2 ml-auto border">
-        <?= lang('User.form.submit_edit') ?>
-    </button>
-</form>
+<?= form_button([
+    'content' => lang('User.form.submit_edit'),
+    'type' => 'submit',
+    'class' => 'self-end px-4 py-2 bg-gray-200',
+]) ?>
+
+<?= form_close() ?>
 
 <?= $this->endSection() ?>

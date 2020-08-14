@@ -7,28 +7,37 @@
 
 <?= $this->section('content') ?>
 
-<form action="<?= route_to(
-    'myAccount_changePassword'
-) ?>" method="post" class="flex flex-col max-w-lg">
-    <?= csrf_field() ?>
+<?= form_open(route_to('change-password'), [
+    'class' => 'flex flex-col max-w-sm',
+]) ?>
+<?= csrf_field() ?>
 
-    <input type="hidden" name="email" value="<?= user()->email ?>">
+<?= form_label(lang('User.form.password'), 'password') ?>
+<?= form_input([
+    'id' => 'password',
+    'name' => 'password',
+    'class' => 'form-input mb-4',
+    'required' => 'required',
+    'type' => 'password',
+]) ?>
 
-    <label for="password"><?= lang('User.form.password') ?></label>
-    <input type="password" name="password" class="mb-4 form-input" id="password" autocomplete="off">
+<?= form_label(lang('User.form.new_password'), 'new_password') ?>
+<?= form_input([
+    'id' => 'new_password',
+    'name' => 'new_password',
+    'class' => 'form-input mb-4',
+    'required' => 'required',
+    'type' => 'password',
+    'autocomplete' => 'new-password',
+]) ?>
 
-    <label for="new_password"><?= lang('User.form.new_password') ?></label>
-    <input type="password" name="new_password" class="mb-4 form-input" id="new_password" autocomplete="off">
+<?= form_button([
+    'content' => lang('User.form.submit_password_change'),
+    'type' => 'submit',
+    'class' => 'self-end px-4 py-2 bg-gray-200',
+]) ?>
 
-    <label for="pass_confirm"><?= lang(
-        'User.form.repeat_new_password'
-    ) ?></label>
-    <input type="password" name="new_pass_confirm" class="mb-6 form-input" id="new_pass_confirm" autocomplete="off">
-
-    <button type="submit" class="px-4 py-2 ml-auto border">
-        <?= lang('User.form.submit_edit') ?>
-    </button>
-</form>
+<?= form_close() ?>
 
 <?= $this->endSection()
 ?>

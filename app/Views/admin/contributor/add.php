@@ -6,43 +6,32 @@
 
 
 <?= $this->section('content') ?>
-<form action="<?= route_to(
-    'contributor_add',
-    $podcast->id
-) ?>" method="post" class="flex flex-col max-w-lg">
-    <?= csrf_field() ?>
+
+<?= form_open(route_to('contributor-add', $podcast->id), [
+    'class' => 'flex flex-col max-w-sm',
+]) ?>
+<?= csrf_field() ?>
     
-    <div class="flex flex-col mb-4">
-        <label for="user"><?= lang('Contributor.form.user') ?></label>
-        <select id="user" name="user" autocomplete="off" class="form-select" required>
-            <?php foreach ($users as $user): ?>
-                <option value="<?= $user->id ?>"
-                <?php if (
-                    old('user') == $user->id
-                ): ?> selected <?php endif; ?>>
-                    <?= $user->username ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
-    </div>
+<?= form_label(lang('Contributor.form.user'), 'user') ?>
+<?= form_dropdown('user', $userOptions, old('user'), [
+    'id' => 'user',
+    'class' => 'form-select mb-4',
+    'required' => 'required',
+]) ?>
 
-    <div class="flex flex-col mb-4">
-        <label for="role"><?= lang('Contributor.form.role') ?></label>
-        <select id="role" name="role" autocomplete="off" class="form-select" required>
-            <?php foreach ($roles as $role): ?>
-                <option value="<?= $role->id ?>"
-                <?php if (
-                    old('role') == $role->id
-                ): ?> selected <?php endif; ?>>
-                    <?= $role->name ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
-    </div>
+<?= form_label(lang('Contributor.form.role'), 'role') ?>
+<?= form_dropdown('role', $roleOptions, old('role'), [
+    'id' => 'role',
+    'class' => 'form-select mb-4',
+    'required' => 'required',
+]) ?>
 
-    <button type="submit" name="submit" class="self-end px-4 py-2 bg-gray-200"><?= lang(
-        'Contributor.form.submit_add'
-    ) ?></button>
-</form>
+<?= form_button([
+    'content' => lang('Contributor.form.submit_add'),
+    'type' => 'submit',
+    'class' => 'self-end px-4 py-2 bg-gray-200',
+]) ?>
+
+<?= form_close() ?>
 
 <?= $this->endSection() ?>

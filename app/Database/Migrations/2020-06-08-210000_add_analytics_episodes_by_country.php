@@ -22,34 +22,28 @@ class AddAnalyticsEpisodesByCountry extends Migration
                 'constraint' => 20,
                 'unsigned' => true,
                 'auto_increment' => true,
-                'comment' => 'The line ID',
             ],
             'podcast_id' => [
                 'type' => 'BIGINT',
                 'constraint' => 20,
                 'unsigned' => true,
-                'comment' => 'The podcast ID',
             ],
             'episode_id' => [
                 'type' => 'BIGINT',
                 'constraint' => 20,
                 'unsigned' => true,
-                'comment' => 'The episode ID',
             ],
             'country_code' => [
                 'type' => 'VARCHAR',
                 'constraint' => 3,
-                'comment' => 'ISO 3166-1 code.',
             ],
             'date' => [
                 'type' => 'date',
-                'comment' => 'Line date.',
             ],
             'hits' => [
                 'type' => 'INT',
                 'constraint' => 10,
                 'default' => 1,
-                'comment' => 'Number of hits.',
             ],
         ]);
         $this->forge->addKey('id', true);

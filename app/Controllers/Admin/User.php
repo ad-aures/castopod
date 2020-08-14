@@ -47,6 +47,8 @@ class User extends BaseController
 
     public function create()
     {
+        helper('form');
+
         $data = [
             'roles' => (new GroupModel())->getUserRoles(),
         ];
@@ -65,7 +67,6 @@ class User extends BaseController
             [
                 'email' => 'required|valid_email|is_unique[users.email]',
                 'password' => 'required|strong_password',
-                'pass_confirm' => 'required|matches[password]',
             ]
         );
 
@@ -94,7 +95,7 @@ class User extends BaseController
 
         // Success!
         return redirect()
-            ->route('user_list')
+            ->route('user-list')
             ->with(
                 'message',
                 lang('User.messages.createSuccess', [
@@ -105,9 +106,21 @@ class User extends BaseController
 
     public function edit()
     {
+        helper('form');
+
+        $roles = (new GroupModel())->getUserRoles();
+        $roleOptions = array_reduce(
+            $roles,
+            function ($result, $role) {
+                $result[$role->name] = lang('User.roles.' . $role->name);
+                return $result;
+            },
+            []
+        );
+
         $data = [
             'user' => $this->user,
-            'roles' => (new GroupModel())->getUserRoles(),
+            'roleOptions' => $roleOptions,
         ];
 
         replace_breadcrumb_params([0 => $this->user->username]);
@@ -123,7 +136,7 @@ class User extends BaseController
 
         // Success!
         return redirect()
-            ->route('user_list')
+            ->route('user-list')
             ->with(
                 'message',
                 lang('User.messages.rolesEditSuccess', [
@@ -145,7 +158,7 @@ class User extends BaseController
 
         // Success!
         return redirect()
-            ->route('user_list')
+            ->route('user-list')
             ->with(
                 'message',
                 lang('User.messages.forcePassResetSuccess', [
@@ -178,7 +191,7 @@ class User extends BaseController
         }
 
         return redirect()
-            ->route('user_list')
+            ->route('user-list')
             ->with(
                 'message',
                 lang('User.messages.banSuccess', [
@@ -199,7 +212,7 @@ class User extends BaseController
         }
 
         return redirect()
-            ->route('user_list')
+            ->route('user-list')
             ->with(
                 'message',
                 lang('User.messages.unbanSuccess', [

@@ -1,3 +1,4 @@
+<?= helper('form') ?>
 <?= $this->extend($config->viewLayout) ?>
 
 <?= $this->section('title') ?>
@@ -7,23 +8,33 @@
 
 <?= $this->section('content') ?>
 
-<form action="<?= route_to('login') ?>" method="post" class="flex flex-col">
-    <?= csrf_field() ?>
+<?= form_open(route_to('login'), ['class' => 'flex flex-col']) ?>
+<?= csrf_field() ?>
 
-    <label for="login"><?= lang('Auth.emailOrUsername') ?></label>
-    <input type="text" name="login" class="mb-4 form-input" placeholder="<?= lang(
-        'Auth.emailOrUsername'
-    ) ?>">
+<?= form_label(lang('Auth.emailOrUsername'), 'login') ?>
+<?= form_input([
+    'id' => 'login',
+    'name' => 'login',
+    'class' => 'form-input mb-4',
+    'required' => 'required',
+]) ?>
 
-    <label for="password"><?= lang('Auth.password') ?></label>
-    <input type="password" name="password" class="mb-6 form-input" placeholder="<?= lang(
-        'Auth.password'
-    ) ?>">
+<?= form_label(lang('Auth.password'), 'password') ?>
+<?= form_input([
+    'id' => 'password',
+    'name' => 'password',
+    'class' => 'form-input mb-4',
+    'type' => 'password',
+    'required' => 'required',
+]) ?>
 
-    <button type="submit" class="px-4 py-2 ml-auto border">
-        <?= lang('Auth.loginAction') ?>
-    </button>
-</form>
+<?= form_button([
+    'content' => lang('Auth.loginAction'),
+    'class' => 'px-4 py-2 ml-auto border',
+    'type' => 'submit',
+]) ?>
+
+<?= form_close() ?>
 
 <?= $this->endSection() ?>
 

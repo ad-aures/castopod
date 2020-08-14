@@ -20,16 +20,16 @@ class EpisodeModel extends Model
         'title',
         'slug',
         'enclosure_uri',
-        'pub_date',
         'description',
         'image_uri',
         'explicit',
         'number',
         'season_number',
-        'author_name',
-        'author_email',
         'type',
         'block',
+        'published_at',
+        'created_by',
+        'updated_by',
     ];
 
     protected $returnType = \App\Entities\Episode::class;
@@ -42,13 +42,14 @@ class EpisodeModel extends Model
         'title' => 'required',
         'slug' => 'required|regex_match[/^[a-zA-Z0-9\-]{1,191}$/]',
         'enclosure_uri' => 'required',
-        'pub_date' => 'required|valid_date',
         'description' => 'required',
         'image_uri' => 'required',
-        'number' => 'required',
-        'season_number' => 'required',
-        'author_email' => 'valid_email|permit_empty',
+        'number' => 'required|is_natural_no_zero',
+        'season_number' => 'required|is_natural_no_zero',
         'type' => 'required',
+        'published_at' => 'valid_date|permit_empty',
+        'created_by' => 'required',
+        'updated_by' => 'required',
     ];
     protected $validationMessages = [];
 

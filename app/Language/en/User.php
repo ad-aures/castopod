@@ -20,11 +20,13 @@ return [
         'username' => 'Username',
         'password' => 'Password',
         'new_password' => 'New Password',
-        'repeat_password' => 'Repeat password',
-        'repeat_new_password' => 'Repeat new password',
         'roles' => 'Roles',
         'submit_create' => 'Create user',
         'submit_edit' => 'Save',
+        'submit_password_change' => 'Change!',
+    ],
+    'roles' => [
+        'superadmin' => 'Super admin',
     ],
     'messages' => [
         'createSuccess' =>

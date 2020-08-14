@@ -30,7 +30,6 @@ class AddLanguages extends Migration
             ],
             'native_name' => [
                 'type' => 'VARCHAR',
-                'comment' => 'Native language name.',
                 'constraint' => 191,
             ],
         ]);

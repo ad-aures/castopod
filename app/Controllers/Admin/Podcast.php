@@ -43,7 +43,7 @@ class Podcast extends BaseController
     public function list()
     {
         if (!has_permission('podcasts-list')) {
-            return redirect()->route('my_podcasts');
+            return redirect()->route('my-podcasts');
         }
 
         $data = ['podcasts' => (new PodcastModel())->findAll()];
@@ -63,11 +63,30 @@ class Podcast extends BaseController
     {
         helper(['form', 'misc']);
 
-        $languageModel = new LanguageModel();
-        $categoryModel = new CategoryModel();
+        $categories = (new CategoryModel())->findAll();
+        $languages = (new LanguageModel())->findAll();
+        $languageOptions = array_reduce(
+            $languages,
+            function ($result, $language) {
+                $result[$language->code] = $language->native_name;
+                return $result;
+            },
+            []
+        );
+        $categoryOptions = array_reduce(
+            $categories,
+            function ($result, $category) {
+                $result[$category->code] = lang(
+                    'Podcast.category_options.' . $category->code
+                );
+                return $result;
+            },
+            []
+        );
+
         $data = [
-            'languages' => $languageModel->findAll(),
-            'categories' => $categoryModel->findAll(),
+            'languageOptions' => $languageOptions,
+            'categoryOptions' => $categoryOptions,
             'browserLang' => get_browser_language(
                 $this->request->getServer('HTTP_ACCEPT_LANGUAGE')
             ),
@@ -99,17 +118,17 @@ class Podcast extends BaseController
             'image' => $this->request->getFile('image'),
             'language' => $this->request->getPost('language'),
             'category' => $this->request->getPost('category'),
-            'explicit' => (bool) $this->request->getPost('explicit'),
-            'author_name' => $this->request->getPost('author_name'),
-            'author_email' => $this->request->getPost('author_email'),
-            'owner' => user(),
+            'explicit' => $this->request->getPost('explicit') == 'yes',
+            'author' => $this->request->getPost('author'),
             'owner_name' => $this->request->getPost('owner_name'),
             'owner_email' => $this->request->getPost('owner_email'),
             'type' => $this->request->getPost('type'),
             'copyright' => $this->request->getPost('copyright'),
-            'block' => (bool) $this->request->getPost('block'),
-            'complete' => (bool) $this->request->getPost('complete'),
+            'block' => $this->request->getPost('block') == 'yes',
+            'complete' => $this->request->getPost('complete') == 'yes',
             'custom_html_head' => $this->request->getPost('custom_html_head'),
+            'created_by' => user(),
+            'updated_by' => user(),
         ]);
 
         $podcastModel = new PodcastModel();
@@ -136,17 +155,38 @@ class Podcast extends BaseController
 
         $db->transComplete();
 
-        return redirect()->route('podcast_list');
+        return redirect()->route('podcast-list');
     }
 
     public function edit()
     {
         helper('form');
 
+        $categories = (new CategoryModel())->findAll();
+        $languages = (new LanguageModel())->findAll();
+        $languageOptions = array_reduce(
+            $languages,
+            function ($result, $language) {
+                $result[$language->code] = $language->native_name;
+                return $result;
+            },
+            []
+        );
+        $categoryOptions = array_reduce(
+            $categories,
+            function ($result, $category) {
+                $result[$category->code] = lang(
+                    'Podcast.category_options.' . $category->code
+                );
+                return $result;
+            },
+            []
+        );
+
         $data = [
             'podcast' => $this->podcast,
-            'languages' => (new LanguageModel())->findAll(),
-            'categories' => (new CategoryModel())->findAll(),
+            'languageOptions' => $languageOptions,
+            'categoryOptions' => $categoryOptions,
         ];
 
         replace_breadcrumb_params([0 => $this->podcast->title]);
@@ -180,18 +220,18 @@ class Podcast extends BaseController
         }
         $this->podcast->language = $this->request->getPost('language');
         $this->podcast->category = $this->request->getPost('category');
-        $this->podcast->explicit = (bool) $this->request->getPost('explicit');
-        $this->podcast->author_name = $this->request->getPost('author_name');
-        $this->podcast->author_email = $this->request->getPost('author_email');
+        $this->podcast->explicit = $this->request->getPost('explicit') == 'yes';
+        $this->podcast->author = $this->request->getPost('author');
         $this->podcast->owner_name = $this->request->getPost('owner_name');
         $this->podcast->owner_email = $this->request->getPost('owner_email');
         $this->podcast->type = $this->request->getPost('type');
         $this->podcast->copyright = $this->request->getPost('copyright');
-        $this->podcast->block = (bool) $this->request->getPost('block');
-        $this->podcast->complete = (bool) $this->request->getPost('complete');
+        $this->podcast->block = $this->request->getPost('block') == 'yes';
+        $this->podcast->complete = $this->request->getPost('complete') == 'yes';
         $this->podcast->custom_html_head = $this->request->getPost(
             'custom_html_head'
         );
+        $this->updated_by = user();
 
         $podcastModel = new PodcastModel();
 
@@ -202,13 +242,13 @@ class Podcast extends BaseController
                 ->with('errors', $podcastModel->errors());
         }
 
-        return redirect()->route('podcast_list');
+        return redirect()->route('podcast-list');
     }
 
     public function delete()
     {
         (new PodcastModel())->delete($this->podcast->id);
 
-        return redirect()->route('podcast_list');
+        return redirect()->route('podcast-list');
     }
 }

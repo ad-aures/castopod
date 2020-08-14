@@ -7,31 +7,44 @@
 
 <?= $this->section('content') ?>
 
-<form action="<?= route_to(
-    'user_create'
-) ?>" method="post" class="flex flex-col max-w-lg">
-    <?= csrf_field() ?>
+<?= form_open(route_to('user-create'), [
+    'class' => 'flex flex-col max-w-sm',
+]) ?>
+<?= csrf_field() ?>
 
-    <label for="email"><?= lang('User.form.email') ?></label>
-    <input type="email" class="mb-4 form-input" name="email" id="email" value="<?= old(
-        'email'
-    ) ?>">
+<?= form_label(lang('User.form.email'), 'email') ?>
+<?= form_input([
+    'id' => 'email',
+    'name' => 'email',
+    'class' => 'form-input mb-4',
+    'value' => old('email'),
+    'type' => 'email',
+]) ?>
 
-    <label for="username"><?= lang('User.form.username') ?></label>
-    <input type="text" class="mb-4 form-input" name="username" id="username" value="<?= old(
-        'username'
-    ) ?>">
+<?= form_label(lang('User.form.username'), 'username') ?>
+<?= form_input([
+    'id' => 'username',
+    'name' => 'username',
+    'class' => 'form-input mb-4',
+    'value' => old('username'),
+]) ?>
 
-    <label for="password"><?= lang('User.form.password') ?></label>
-    <input type="password" name="password" class="mb-4 form-input" id="password" autocomplete="off">
+<?= form_label(lang('User.form.password'), 'password') ?>
+<?= form_input([
+    'id' => 'password',
+    'name' => 'password',
+    'class' => 'form-input mb-4',
+    'type' => 'password',
+    'autocomplete' => 'new-password',
+]) ?>
 
-    <label for="pass_confirm"><?= lang('User.form.repeat_password') ?></label>
-    <input type="password" name="pass_confirm" class="mb-6 form-input" id="pass_confirm" autocomplete="off">
+<?= form_button([
+    'content' => lang('User.form.submit_create'),
+    'type' => 'submit',
+    'class' => 'self-end px-4 py-2 bg-gray-200',
+]) ?>
 
-    <button type="submit" class="px-4 py-2 ml-auto border">
-        <?= lang('User.form.submit_create') ?>
-    </button>
-</form>
+<?= form_close() ?>
 
 <?= $this->endSection()
 ?>

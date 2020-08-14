@@ -7,122 +7,167 @@
 
 <?= $this->section('content') ?>
 
-<?= form_open_multipart(route_to('episode_create', $podcast->id), [
+<?= form_open_multipart(route_to('episode-create', $podcast->id), [
     'method' => 'post',
     'class' => 'flex flex-col max-w-md',
 ]) ?>
 <?= csrf_field() ?>
 
-<div class="flex flex-col mb-4">
-    <label for="enclosure"><?= lang('Episode.form.file') ?></label>
-    <input type="file" class="form-input" id="enclosure" name="enclosure" required accept=".mp3,.m4a" />
+<?= form_label(lang('Episode.form.enclosure'), 'enclosure') ?>
+<?= form_input([
+    'id' => 'enclosure',
+    'name' => 'enclosure',
+    'class' => 'form-input mb-4',
+    'required' => 'required',
+    'type' => 'file',
+    'accept' => '.mp3,.m4a',
+]) ?>
+
+<?= form_label(lang('Episode.form.title'), 'title') ?>
+<?= form_input([
+    'id' => 'title',
+    'name' => 'title',
+    'class' => 'form-input mb-4',
+    'value' => old('title'),
+    'required' => 'required',
+    'data-slugify' => 'title',
+]) ?>
+
+<?= form_label(lang('Episode.form.slug'), 'slug') ?>
+<?= form_input([
+    'id' => 'slug',
+    'name' => 'slug',
+    'class' => 'form-input mb-4',
+    'value' => old('slug'),
+    'required' => 'required',
+    'data-slugify' => 'slug',
+]) ?>
+
+<div class="mb-4">
+    <?= form_label(lang('Episode.form.description'), 'description') ?>
+    <?= form_textarea(
+        [
+            'id' => 'description',
+            'name' => 'description',
+            'class' => 'form-textarea',
+            'required' => 'required',
+        ],
+        old('description', '', false),
+        'data-editor="markdown"'
+    ) ?>
 </div>
 
-<div class="flex flex-col mb-4">
-    <label for="title"><?= lang('Episode.form.title') ?></label>
-    <input type="text" class="form-input" id="title" name="title" data-slugify="title" required value="<?= old(
-        'title'
-    ) ?>" />
+<?= form_fieldset('', ['class' => 'flex mb-4']) ?>
+<legend><?= lang('Episode.form.published_at.label') ?></legend>
+<div class="flex flex-col flex-1">
+    <?= form_label(lang('Episode.form.publication_date'), 'publication_date', [
+        'class' => 'sr-only',
+    ]) ?>
+    <?= form_input([
+        'id' => 'publication_date',
+        'name' => 'publication_date',
+        'class' => 'form-input',
+        'value' => old('publication_date', date('Y-m-d')),
+        'type' => 'date',
+    ]) ?>
 </div>
 
-<div class="flex flex-col mb-4">
-    <label for="slug"><?= lang('Episode.form.slug') ?></label>
-    <input type="text" class="form-input" id="slug" name="slug" data-slugify="slug" required value="<?= old(
-        'slug'
-    ) ?>" />
+<div class="flex flex-col flex-1">
+    <?= form_label(lang('Episode.form.publication_time'), 'publication_time', [
+        'class' => 'sr-only',
+    ]) ?>
+    <?= form_input([
+        'id' => 'publication_time',
+        'name' => 'publication_time',
+        'class' => 'form-input',
+        'value' => old('publication_time', date('H:i')),
+        'placeholder' => '--:--',
+        'type' => 'time',
+    ]) ?>
 </div>
+<?= form_fieldset_close() ?>
 
-<div class="flex flex-col mb-4">
-    <label for="description"><?= lang('Episode.form.description') ?></label>
-    <textarea class="hidden form-textarea" id="description" name="description" required data-editor="markdown"><?= old(
-        'description'
-    ) ?></textarea>
-</div>
 
-<div class="flex flex-col mb-4">
-    <label for="pub_date"><?= lang('Episode.form.pub_date') ?></label>
-    <input type="date" class="form-input" id="pub_date" name="pub_date" value="<?= old(
-        'pub_date'
-    ) || date('Y-m-d') ?>" />
-</div>
+<?= form_label(lang('Episode.form.image'), 'image') ?>
+<?= form_input([
+    'id' => 'image',
+    'name' => 'image',
+    'class' => 'form-input mb-4',
+    'type' => 'file',
+    'accept' => '.jpg,.jpeg,.png',
+]) ?>
 
-<div class="flex flex-col mb-4">
-    <label for="image"><?= lang('Episode.form.image') ?></label>
-    <input type="file" class="form-input" id="image" name="image" accept=".jpg,.jpeg,.png" />
-</div>
+<?= form_label(lang('Episode.form.season_number'), 'season_number') ?>
+<?= form_input([
+    'id' => 'season_number',
+    'name' => 'season_number',
+    'class' => 'form-input mb-4',
+    'value' => old('season_number'),
+    'type' => 'number',
+]) ?>
 
-<div class="flex flex-col mb-4">
-    <label for="episode_number"><?= lang(
-        'Episode.form.episode_number'
-    ) ?></label>
-    <input type="number" class="form-input" id="episode_number" name="episode_number" required value="<?= old(
-        'episode_number'
-    ) ?>" />
-</div>
+<?= form_label(lang('Episode.form.episode_number'), 'episode_number') ?>
+<?= form_input([
+    'id' => 'episode_number',
+    'name' => 'episode_number',
+    'class' => 'form-input mb-4',
+    'value' => old('episode_number'),
+    'required' => 'required',
+    'type' => 'number',
+]) ?>
 
-<div class="flex flex-col mb-4">
-    <label for="season_number"><?= lang('Episode.form.season_number') ?></label>
-    <input type="number" class="form-input" id="season_number" name="season_number" value="<?= old(
-        'season_number'
-    ) ?>" />
-</div>
+<label class="inline-flex items-center mb-4">
+    <?= form_checkbox(
+        ['id' => 'explicit', 'name' => 'explicit', 'class' => 'form-checkbox'],
+        'yes',
+        old('explicit', false)
+    ) ?>
+    <span class="ml-2"><?= lang('Episode.form.explicit') ?></span>
+</label>
 
-<div class="inline-flex items-center mb-4">
-    <input type="checkbox" id="explicit" name="explicit" class="form-checkbox" <?php if (
-        old('explicit')
-    ): ?> checked <?php endif; ?> />
-    <label for="explicit" class="pl-2"><?= lang(
-        'Episode.form.explicit'
-    ) ?></label>
-</div>
-
-<div class="flex flex-col mb-4">
-    <label for="author_name"><?= lang('Podcast.form.author_name') ?></label>
-    <input type="text" class="form-input" id="author_name" name="author_name" value="<?= old(
-        'author_name'
-    ) ?>" />
-</div>
-
-<div class="flex flex-col mb-4">
-    <label for="author_email"><?= lang('Podcast.form.author_email') ?></label>
-    <input type="email" class="form-input" id="author_email" name="author_email" value="<?= old(
-        'author_email'
-    ) ?>" />
-</div>
-
-<fieldset class="flex flex-col mb-4">
+<?= form_fieldset('', ['class' => 'flex flex-col mb-4']) ?>
     <legend><?= lang('Episode.form.type.label') ?></legend>
     <label for="full" class="inline-flex items-center">
-        <input type="radio" class="form-radio" value="full" id="full" name="type" required <?php if (
-            !old('type') ||
-            old('type') == 'full'
-        ): ?> checked <?php endif; ?> />
+        <?= form_radio(
+            ['id' => 'full', 'name' => 'type', 'class' => 'form-radio'],
+            'full',
+            old('type') ? old('type') == 'full' : true
+        ) ?>
         <span class="ml-2"><?= lang('Episode.form.type.full') ?></span>
     </label>
     <label for="trailer" class="inline-flex items-center">
-        <input type="radio" class="form-radio" value="trailer" id="trailer" name="type" required <?php if (
-            old('type') == 'trailer'
-        ): ?> checked <?php endif; ?> />
+        <?= form_radio(
+            ['id' => 'trailer', 'name' => 'type', 'class' => 'form-radio'],
+            'trailer',
+            old('type') ? old('type') == 'trailer' : false
+        ) ?>
         <span class="ml-2"><?= lang('Episode.form.type.trailer') ?></span>
     </label>
     <label for="bonus" class="inline-flex items-center">
-        <input type="radio" class="form-radio" value="bonus" id="bonus" name="type" required <?php if (
-            old('type') == 'bonus'
-        ): ?> checked <?php endif; ?> />
+        <?= form_radio(
+            ['id' => 'bonus', 'name' => 'type', 'class' => 'form-radio'],
+            'bonus',
+            old('type') ? old('type') == 'bonus' : false
+        ) ?>
         <span class="ml-2"><?= lang('Episode.form.type.bonus') ?></span>
     </label>
-</fieldset>
+<?= form_fieldset_close() ?>
 
-<div class="inline-flex items-center mb-4">
-    <input type="checkbox" id="block" name="block" class="form-checkbox" <?php if (
-        old('block')
-    ): ?> checked <?php endif; ?> />
-    <label for="block" class="pl-2"><?= lang('Episode.form.block') ?></label>
-</div>
+<label class="inline-flex items-center mb-4">
+    <?= form_checkbox(
+        ['id' => 'block', 'name' => 'block', 'class' => 'form-checkbox'],
+        'yes',
+        old('block', false)
+    ) ?>
+    <span class="ml-2"><?= lang('Episode.form.block') ?></span>
+</label>
 
-<button type="submit" name="submit" class="self-end px-4 py-2 bg-gray-200"><?= lang(
-    'Episode.form.submit_create'
-) ?></button>
+<?= form_button([
+    'content' => lang('Episode.form.submit_create'),
+    'type' => 'submit',
+    'class' => 'self-end px-4 py-2 bg-gray-200',
+]) ?>
+
 <?= form_close() ?>
 
 

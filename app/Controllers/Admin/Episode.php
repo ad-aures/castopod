@@ -86,6 +86,9 @@ class Episode extends BaseController
             'enclosure' => 'uploaded[enclosure]|ext_in[enclosure,mp3,m4a]',
             'image' =>
                 'uploaded[image]|is_image[image]|ext_in[image,jpg,png]|permit_empty',
+            'publication_date' => 'valid_date[Y-m-d]|permit_empty',
+            'publication_time' =>
+                'regex_match[/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/]|permit_empty',
         ];
 
         if (!$this->validate($rules)) {
@@ -100,17 +103,20 @@ class Episode extends BaseController
             'title' => $this->request->getPost('title'),
             'slug' => $this->request->getPost('slug'),
             'enclosure' => $this->request->getFile('enclosure'),
-            'pub_date' => $this->request->getPost('pub_date'),
             'description' => $this->request->getPost('description'),
             'image' => $this->request->getFile('image'),
-            'explicit' => (bool) $this->request->getPost('explicit'),
+            'explicit' => $this->request->getPost('explicit') == 'yes',
             'number' => $this->request->getPost('episode_number'),
             'season_number' => $this->request->getPost('season_number'),
             'type' => $this->request->getPost('type'),
-            'author_name' => $this->request->getPost('author_name'),
-            'author_email' => $this->request->getPost('author_email'),
-            'block' => (bool) $this->request->getPost('block'),
+            'block' => $this->request->getPost('block') == 'yes',
+            'created_by' => user(),
+            'updated_by' => user(),
         ]);
+        $newEpisode->setPublishedAt(
+            $this->request->getPost('publication_date'),
+            $this->request->getPost('publication_time')
+        );
 
         $episodeModel = new EpisodeModel();
 
@@ -121,7 +127,7 @@ class Episode extends BaseController
                 ->with('errors', $episodeModel->errors());
         }
 
-        return redirect()->route('episode_list', [$this->podcast->id]);
+        return redirect()->route('episode-list', [$this->podcast->id]);
     }
 
     public function edit()
@@ -146,6 +152,9 @@ class Episode extends BaseController
                 'uploaded[enclosure]|ext_in[enclosure,mp3,m4a]|permit_empty',
             'image' =>
                 'uploaded[image]|is_image[image]|ext_in[image,jpg,png]|permit_empty',
+            'publication_date' => 'valid_date[Y-m-d]|permit_empty',
+            'publication_time' =>
+                'regex_match[/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/]|permit_empty',
         ];
 
         if (!$this->validate($rules)) {
@@ -157,17 +166,19 @@ class Episode extends BaseController
 
         $this->episode->title = $this->request->getPost('title');
         $this->episode->slug = $this->request->getPost('slug');
-        $this->episode->pub_date = $this->request->getPost('pub_date');
         $this->episode->description = $this->request->getPost('description');
-        $this->episode->explicit = (bool) $this->request->getPost('explicit');
+        $this->episode->explicit = $this->request->getPost('explicit') == 'yes';
         $this->episode->number = $this->request->getPost('episode_number');
         $this->episode->season_number = $this->request->getPost('season_number')
             ? $this->request->getPost('season_number')
             : null;
         $this->episode->type = $this->request->getPost('type');
-        $this->episode->author_name = $this->request->getPost('author_name');
-        $this->episode->author_email = $this->request->getPost('author_email');
-        $this->episode->block = (bool) $this->request->getPost('block');
+        $this->episode->block = $this->request->getPost('block') == 'yes';
+        $this->episode->setPublishedAt(
+            $this->request->getPost('publication_date'),
+            $this->request->getPost('publication_time')
+        );
+        $this->episode->updated_by = user();
 
         $enclosure = $this->request->getFile('enclosure');
         if ($enclosure->isValid()) {
@@ -187,13 +198,13 @@ class Episode extends BaseController
                 ->with('errors', $episodeModel->errors());
         }
 
-        return redirect()->route('episode_list', [$this->podcast->id]);
+        return redirect()->route('episode-list', [$this->podcast->id]);
     }
 
     public function delete()
     {
         (new EpisodeModel())->delete($this->episode->id);
 
-        return redirect()->route('episode_list', [$this->podcast->id]);
+        return redirect()->route('episode-list', [$this->podcast->id]);
     }
 }

@@ -22,13 +22,11 @@ class AddAnalyticsWebsiteByCountry extends Migration
                 'constraint' => 20,
                 'unsigned' => true,
                 'auto_increment' => true,
-                'comment' => 'The line ID',
             ],
             'podcast_id' => [
                 'type' => 'BIGINT',
                 'constraint' => 20,
                 'unsigned' => true,
-                'comment' => 'The podcast ID',
             ],
             'country_code' => [
                 'type' => 'VARCHAR',
@@ -37,13 +35,11 @@ class AddAnalyticsWebsiteByCountry extends Migration
             ],
             'date' => [
                 'type' => 'date',
-                'comment' => 'Line date.',
             ],
             'hits' => [
                 'type' => 'INT',
                 'constraint' => 10,
                 'default' => 1,
-                'comment' => 'Number of hits.',
             ],
         ]);
         $this->forge->addKey('id', true);

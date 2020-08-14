@@ -22,19 +22,16 @@ class AddAnalyticsUnknownUseragents extends Migration
                 'constraint' => 20,
                 'unsigned' => true,
                 'auto_increment' => true,
-                'comment' => 'The line ID',
             ],
             'useragent' => [
                 'type' => 'VARCHAR',
                 'constraint' => 191,
                 'unique' => true,
-                'comment' => 'The unknown user-agent.',
             ],
             'hits' => [
                 'type' => 'INT',
                 'constraint' => 10,
                 'default' => 1,
-                'comment' => 'Number of hits.',
             ],
         ]);
         $this->forge->addKey('id', true);

@@ -70,10 +70,32 @@ class Contributor extends BaseController
 
     public function add()
     {
+        helper('form');
+
+        $users = (new UserModel())->findAll();
+        $userOptions = array_reduce(
+            $users,
+            function ($result, $user) {
+                $result[$user->id] = $user->username;
+                return $result;
+            },
+            []
+        );
+
+        $roles = (new GroupModel())->getContributorRoles();
+        $roleOptions = array_reduce(
+            $roles,
+            function ($result, $role) {
+                $result[$role->id] = lang('Contributor.roles.' . $role->name);
+                return $result;
+            },
+            []
+        );
+
         $data = [
             'podcast' => $this->podcast,
-            'users' => (new UserModel())->findAll(),
-            'roles' => (new GroupModel())->getContributorRoles(),
+            'userOptions' => $userOptions,
+            'roleOptions' => $roleOptions,
         ];
 
         replace_breadcrumb_params([0 => $this->podcast->title]);
@@ -97,11 +119,23 @@ class Contributor extends BaseController
                 ]);
         }
 
-        return redirect()->route('contributor_list', [$this->podcast->id]);
+        return redirect()->route('contributor-list', [$this->podcast->id]);
     }
 
     public function edit()
     {
+        helper('form');
+
+        $roles = (new GroupModel())->getContributorRoles();
+        $roleOptions = array_reduce(
+            $roles,
+            function ($result, $role) {
+                $result[$role->id] = lang('Contributor.roles.' . $role->name);
+                return $result;
+            },
+            []
+        );
+
         $data = [
             'podcast' => $this->podcast,
             'user' => $this->user,
@@ -109,7 +143,7 @@ class Contributor extends BaseController
                 $this->user->id,
                 $this->podcast->id
             ),
-            'roles' => (new GroupModel())->getContributorRoles(),
+            'roleOptions' => $roleOptions,
         ];
 
         replace_breadcrumb_params([
@@ -127,7 +161,7 @@ class Contributor extends BaseController
             $this->request->getPost('role')
         );
 
-        return redirect()->route('contributor_list', [$this->podcast->id]);
+        return redirect()->route('contributor-list', [$this->podcast->id]);
     }
 
     public function remove()

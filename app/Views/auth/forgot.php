@@ -1,3 +1,4 @@
+<?= helper('form') ?>
 <?= $this->extend($config->viewLayout) ?>
 
 <?= $this->section('title') ?>
@@ -7,19 +8,26 @@
 
 <?= $this->section('content') ?>
 
-<p class="mb-4"><?= lang('Auth.enterEmailForInstructions') ?></p>
+<p class="mb-4 text-gray-600"><?= lang('Auth.enterEmailForInstructions') ?></p>
 
-<form action="<?= route_to('forgot') ?>" method="post" class="flex flex-col">
-    <?= csrf_field() ?>
+<?= form_open(route_to('forgot'), ['class' => 'flex flex-col']) ?>
+<?= csrf_field() ?>
 
-    <label for="email"><?= lang('Auth.emailAddress') ?></label>
-    <input type="email" class="mb-6 form-input" name="email" placeholder="<?= lang(
-        'Auth.email'
-    ) ?>">
+<?= form_label(lang('Auth.emailAddress'), 'email') ?>
+<?= form_input([
+    'id' => 'email',
+    'name' => 'email',
+    'class' => 'form-input mb-4',
+    'type' => 'email',
+    'required' => 'required',
+]) ?>
 
-    <button type="submit" class="px-4 py-2 ml-auto border">
-        <?= lang('Auth.sendInstructions') ?>
-    </button>
-</form>
+<?= form_button([
+    'content' => lang('Auth.sendInstructions'),
+    'type' => 'submit',
+    'class' => 'px-4 py-2 ml-auto border',
+]) ?>
+
+<?= form_close() ?>
 
 <?= $this->endSection() ?>

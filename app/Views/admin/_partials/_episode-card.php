@@ -2,7 +2,7 @@
     <img src="<?= $episode->image_url ?>" alt="<?= $episode->title ?>" class="object-cover w-32 h-32 rounded-l" />
     <div class="flex flex-col flex-1 px-4 py-2">
         <a href="<?= route_to(
-            'episode_view',
+            'episode-view',
             $episode->podcast->id,
             $episode->id
         ) ?>">
@@ -17,17 +17,17 @@
             </button>
             <nav class="absolute z-10 flex-col hidden py-2 text-black whitespace-no-wrap bg-white border rounded shadow" aria-labelledby="moreDropdown" data-popper="menu" data-popper-placement="bottom-start" data-popper-offset-x="0" data-popper-offset-y="0" >
                     <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
-                        'episode_edit',
+                        'episode-edit',
                         $episode->podcast->id,
                         $episode->id
                     ) ?>"><?= lang('Episode.edit') ?></a>
                     <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
                         'episode',
-                        $episode->podcast->id,
+                        $episode->podcast->name,
                         $episode->slug
                     ) ?>"><?= lang('Episode.go_to_page') ?></a>
                     <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
-                        'episode_delete',
+                        'episode-delete',
                         $episode->podcast->id,
                         $episode->id
                     ) ?>"><?= lang('Episode.delete') ?></a>

@@ -64,7 +64,9 @@ function write_enclosure_tags($episode)
         'title' => [$episode->title],
         'artist' => [$episode->podcast->author],
         'album' => [$episode->podcast->title],
-        'year' => [$episode->pub_date->format('Y')],
+        'year' => [
+            $episode->published_at ? $episode->published_at->format('Y') : '',
+        ],
         'genre' => ['Podcast'],
         'comment' => [$episode->description],
         'track_number' => [strval($episode->number)],

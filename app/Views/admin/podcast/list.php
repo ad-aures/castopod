@@ -3,7 +3,7 @@
 <?= $this->section('title') ?>
 <?= lang('Podcast.all_podcasts') ?> (<?= count($podcasts) ?>)
 <a class="inline-flex items-center px-2 py-1 mb-2 ml-4 text-sm text-white bg-green-500 rounded shadow-xs outline-none hover:bg-green-600 focus:shadow-outline" href="<?= route_to(
-    'podcast_create'
+    'podcast-create'
 ) ?>">
 <?= icon('add', 'mr-2') ?>
 <?= lang('Podcast.create') ?></a>

@@ -41,11 +41,6 @@ class Podcast extends Entity
     protected $episodes;
 
     /**
-     * @var
-     */
-    protected $owner;
-
-    /**
      * @var \App\Entities\User[]
      */
     protected $contributors;
@@ -64,9 +59,7 @@ class Podcast extends Entity
         'language' => 'string',
         'category' => 'string',
         'explicit' => 'boolean',
-        'author_name' => '?string',
-        'author_email' => '?string',
-        'owner_id' => 'integer',
+        'author' => '?string',
         'owner_name' => '?string',
         'owner_email' => '?string',
         'type' => 'string',
@@ -75,6 +68,8 @@ class Podcast extends Entity
         'complete' => 'boolean',
         'episode_description_footer' => '?string',
         'custom_html_head' => '?string',
+        'created_by' => 'integer',
+        'updated_by' => 'integer',
     ];
 
     public function setImage(\CodeIgniter\HTTP\Files\UploadedFile $image = null)
@@ -140,33 +135,6 @@ class Podcast extends Entity
     }
 
     /**
-     * Returns the podcast owner
-     *
-     * @return \App\Entities\User
-     */
-    public function getOwner()
-    {
-        if (empty($this->id)) {
-            throw new \RuntimeException(
-                'Podcast must be created before getting owner.'
-            );
-        }
-
-        if (empty($this->owner)) {
-            $this->owner = (new UserModel())->find($this->owner_id);
-        }
-
-        return $this->owner;
-    }
-
-    public function setOwner(\App\Entities\User $user)
-    {
-        $this->attributes['owner_id'] = $user->id;
-
-        return $this;
-    }
-
-    /**
      * Returns all podcast contributors
      *
      * @return \App\Entities\User[]
@@ -196,5 +164,19 @@ class Podcast extends Entity
         ]);
 
         return $converter->convertToHtml($this->attributes['description']);
+    }
+
+    public function setCreatedBy(\App\Entities\User $user)
+    {
+        $this->attributes['created_by'] = $user->id;
+
+        return $this;
+    }
+
+    public function setUpdatedBy(\App\Entities\User $user)
+    {
+        $this->attributes['updated_by'] = $user->id;
+
+        return $this;
     }
 }
