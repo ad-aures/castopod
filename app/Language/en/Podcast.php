@@ -20,26 +20,59 @@ return [
     'go_to_page' => 'Go to page',
     'form' => [
         'title' => 'Title',
+        'title_help' =>
+            'This podcast title. It will be shown on all podcasts platforms (such as Apple Podcasts) and players (such as Podcast Addict).',
         'name' => 'Name',
+        'name_help' =>
+            'This podcast name. It will be used in the URL address. It will be used as a Fedivers actor name, (for instance, it will be the podcast Mastodon’s name).',
         'description' => 'Description',
+        'description_help' =>
+            'It will be shown on all podcasts platforms (such as Apple Podcasts) and players (such as Podcast Addict).',
         'episode_description_footer' => 'Episode description footer',
+        'episode_description_footer_help' =>
+            'This text will be automatically added at the end of each episode description, so that you don’t have to copy/paste it a gazillion times.',
         'image' => 'Image',
+        'image_help' =>
+            'This podcast image. It should be square, JPEG or PNG, minimum 1400 x 1400 pixels and maximum 3000 x 3000 pixels.',
         'language' => 'Language',
+        'language_help' => 'The language spoken on the podcast.',
         'category' => 'Category',
+        'category_help' =>
+            'This podcast category. Because no one uses subcategories, Castopod does not allow you te use one.',
         'explicit' => 'Explicit',
-        'author_name' => 'Author name',
+        'explicit_help' =>
+            'The podcast parental advisory information. Does it contain explicit content?',
+        'author_name' => 'Publisher',
+        'author_name_help' =>
+            'The group responsible for creating the show. Show author most often refers to the parent company or network of a podcast. This field is sometimes labeled as ’Author’.',
         'author_email' => 'Author email',
         'owner_name' => 'Owner name',
+        'owner_name_help' =>
+            'The podcast owner contact name. For administrative use only. It will not be shown on podcasts platforms (such as Apple Podcasts) nor players (such as Podcast Addict) but it is visible in the public RSS feed.',
         'owner_email' => 'Owner email',
+        'owner_email_help' =>
+            'The podcast owner contact e-mail. For administrative use only. It will mostly be used by some platforms to verify this podcast ownerhip. It will not be shown on podcasts platforms (such as Apple Podcasts) nor players (such as Podcast Addict) but it is visible in the public RSS feed.',
         'type' => [
             'label' => 'Type',
             'episodic' => 'Episodic',
+            'episodic_help' =>
+                'Specify episodic when episodes are intended to be consumed without any specific order. The newest episodes will be presented first.',
             'serial' => 'Serial',
+            'serial_help' =>
+                'Specify serial when episodes are intended to be consumed in sequential order. The oldest episodes will be presented first.',
         ],
         'copyright' => 'Copyright',
+        'copyright_help' =>
+            'The podcast copyright details, such as "2020 (cc)(by-nc-sa)" or "©2020".',
         'block' => 'Block',
+        'block_help' =>
+            'If you want your show removed from all platforms, use this tag.',
         'complete' => 'Complete',
+        'complete_help' =>
+            'Check this if you will never publish another episode to your podcast.',
         'custom_html_head' => 'Custom HTML code in <head/>',
+        'custom_html_head_help' =>
+            'Add here any HTML code that you would like to see on all this podcast pages within the <head/> tag.',
         'submit_create' => 'Create podcast',
         'submit_edit' => 'Save podcast',
     ],
