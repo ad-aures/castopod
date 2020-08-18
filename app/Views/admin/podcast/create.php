@@ -54,6 +54,7 @@
         [
             'id' => 'episode_description_footer',
             'name' => 'episode_description_footer',
+
             'class' => 'form-textarea',
         ],
         old('episode_description_footer', '', false),
@@ -94,20 +95,13 @@
     <span class="ml-2"><?= lang('Podcast.form.explicit') ?></span>
 </label>
 
-<?= form_label(lang('Podcast.form.author'), 'author') ?>
-<?= form_input([
-    'id' => 'author',
-    'name' => 'author',
-    'class' => 'form-input mb-4',
-    'value' => old('author'),
-]) ?>
-
 <?= form_label(lang('Podcast.form.owner_name'), 'owner_name') ?>
 <?= form_input([
     'id' => 'owner_name',
     'name' => 'owner_name',
     'class' => 'form-input mb-4',
     'value' => old('owner_name'),
+    'required' => 'required',
 ]) ?>
 
 <?= form_label(lang('Podcast.form.owner_email'), 'owner_email') ?>
@@ -120,9 +114,15 @@
     'required' => 'required',
 ]) ?>
 
-<?= form_fieldset('', [
-    'class' => 'flex flex-col mb-4',
+<?= form_label(lang('Podcast.form.author'), 'author') ?>
+<?= form_input([
+    'id' => 'author',
+    'name' => 'author',
+    'class' => 'form-input mb-4',
+    'value' => old('author'),
 ]) ?>
+
+<?= form_fieldset('', ['class' => 'flex flex-col mb-4']) ?>
     <legend><?= lang('Podcast.form.type.label') ?></legend>
     <label for="episodic" class="inline-flex items-center">
         <?= form_radio(

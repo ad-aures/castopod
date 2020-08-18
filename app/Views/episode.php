@@ -1,5 +1,9 @@
 <?= $this->extend('_layout') ?>
 
+<?= $this->section('title') ?>
+<?= $episode->title ?>
+<?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
 
 <a class="underline hover:no-underline" href="<?= route_to(

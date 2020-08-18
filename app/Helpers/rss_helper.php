@@ -95,13 +95,9 @@ function get_rss_feed($podcast)
         $channel->addChild('author', $podcast->author, $itunes_namespace);
     $channel->addChild('link', $podcast->link);
 
-    if ($podcast->owner_name || $podcast->owner_email) {
-        $owner = $channel->addChild('owner', null, $itunes_namespace);
-        $podcast->owner_name &&
-            $owner->addChild('name', $podcast->owner_name, $itunes_namespace);
-        $podcast->owner_email &&
-            $owner->addChild('email', $podcast->owner_email, $itunes_namespace);
-    }
+    $owner = $channel->addChild('owner', null, $itunes_namespace);
+    $owner->addChild('name', $podcast->owner_name, $itunes_namespace);
+    $owner->addChild('email', $podcast->owner_email, $itunes_namespace);
 
     $channel->addChild('type', $podcast->type, $itunes_namespace);
     $podcast->copyright && $channel->addChild('copyright', $podcast->copyright);

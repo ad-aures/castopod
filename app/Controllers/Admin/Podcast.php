@@ -31,22 +31,15 @@ class Podcast extends BaseController
         return $this->$method();
     }
 
-    public function myPodcasts()
-    {
-        $data = [
-            'podcasts' => (new PodcastModel())->getUserPodcasts(user()->id),
-        ];
-
-        return view('admin/podcast/list', $data);
-    }
-
     public function list()
     {
         if (!has_permission('podcasts-list')) {
-            return redirect()->route('my-podcasts');
+            $data = [
+                'podcasts' => (new PodcastModel())->getUserPodcasts(user()->id),
+            ];
+        } else {
+            $data = ['podcasts' => (new PodcastModel())->findAll()];
         }
-
-        $data = ['podcasts' => (new PodcastModel())->findAll()];
 
         return view('admin/podcast/list', $data);
     }
@@ -155,7 +148,7 @@ class Podcast extends BaseController
 
         $db->transComplete();
 
-        return redirect()->route('podcast-list');
+        return redirect()->route('podcast-view', [$newPodcastId]);
     }
 
     public function edit()

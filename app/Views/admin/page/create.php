@@ -1,0 +1,57 @@
+<?= $this->extend('admin/_layout') ?>
+
+<?= $this->section('title') ?>
+<?= lang('Page.create') ?>
+<?= $this->endSection() ?>
+
+
+<?= $this->section('content') ?>
+
+<?= form_open(route_to('page-create'), [
+    'class' => 'flex flex-col max-w-3xl',
+]) ?>
+<?= csrf_field() ?>
+
+<?= form_label(lang('Page.form.title'), 'title', ['class' => 'max-w-sm']) ?>
+<?= form_input([
+    'id' => 'title',
+    'name' => 'title',
+    'class' => 'form-input mb-4 max-w-sm',
+    'value' => old('title'),
+    'required' => 'required',
+    'data-slugify' => 'title',
+]) ?>
+
+<?= form_label(lang('Page.form.slug'), 'slug', ['class' => 'max-w-sm']) ?>
+<?= form_input([
+    'id' => 'slug',
+    'name' => 'slug',
+    'class' => 'form-input mb-4 max-w-sm',
+    'value' => old('slug'),
+    'required' => 'required',
+    'data-slugify' => 'slug',
+]) ?>
+
+<div class="mb-4">
+    <?= form_label(lang('Page.form.content'), 'content') ?>
+    <?= form_textarea(
+        [
+            'id' => 'content',
+            'name' => 'content',
+            'class' => 'form-textarea',
+            'required' => 'required',
+        ],
+        old('content', '', false),
+        'data-editor="markdown"'
+    ) ?>
+</div>
+
+<?= form_button([
+    'content' => lang('Page.form.submit_create'),
+    'type' => 'submit',
+    'class' => 'self-end px-4 py-2 bg-gray-200',
+]) ?>
+
+<?= form_close() ?>
+
+<?= $this->endSection() ?>

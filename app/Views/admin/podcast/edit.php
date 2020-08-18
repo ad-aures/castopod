@@ -109,20 +109,13 @@
     <span class="ml-2"><?= lang('Podcast.form.explicit') ?></span>
 </label>
 
-<?= form_label(lang('Podcast.form.author'), 'author') ?>
-<?= form_input([
-    'id' => 'author',
-    'name' => 'author',
-    'class' => 'form-input mb-4',
-    'value' => old('author', $podcast->author),
-]) ?>
-
 <?= form_label(lang('Podcast.form.owner_name'), 'owner_name') ?>
 <?= form_input([
     'id' => 'owner_name',
     'name' => 'owner_name',
     'class' => 'form-input mb-4',
     'value' => old('owner_name', $podcast->owner_name),
+    'required' => 'required',
 ]) ?>
 
 <?= form_label(lang('Podcast.form.owner_email'), 'owner_email') ?>
@@ -133,6 +126,14 @@
     'value' => old('owner_email', $podcast->owner_email),
     'type' => 'email',
     'required' => 'required',
+]) ?>
+
+<?= form_label(lang('Podcast.form.author'), 'author') ?>
+<?= form_input([
+    'id' => 'author',
+    'name' => 'author',
+    'class' => 'form-input mb-4',
+    'value' => old('author', $podcast->author),
 ]) ?>
 
 <?= form_fieldset('', ['class' => 'flex flex-col mb-4']) ?>

@@ -42,15 +42,15 @@ return [
         'explicit' => 'Explicit',
         'explicit_help' =>
             'The podcast parental advisory information. Does it contain explicit content?',
-        'author' => 'Author',
-        'author_help' =>
-            'The group responsible for creating the show. Show author most often refers to the parent company or network of a podcast. This field is sometimes labeled as ’Author’.',
         'owner_name' => 'Owner name',
         'owner_name_help' =>
             'The podcast owner contact name. For administrative use only. It will not be shown on podcasts platforms (such as Apple Podcasts) nor players (such as Podcast Addict) but it is visible in the public RSS feed.',
         'owner_email' => 'Owner email',
         'owner_email_help' =>
             'The podcast owner contact e-mail. For administrative use only. It will mostly be used by some platforms to verify this podcast ownerhip. It will not be shown on podcasts platforms (such as Apple Podcasts) nor players (such as Podcast Addict) but it is visible in the public RSS feed.',
+        'author' => 'Author',
+        'author_help' =>
+            'The group responsible for creating the show. Show author most often refers to the parent company or network of a podcast. This field is sometimes labeled as ’Author’.',
         'type' => [
             'label' => 'Type',
             'episodic' => 'Episodic',

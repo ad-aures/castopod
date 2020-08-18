@@ -38,13 +38,7 @@ class ProseMirrorView {
 
   constructor(target: HTMLTextAreaElement, content: string) {
     this.editorContainer = document.createElement("div");
-    this.editorContainer.classList.add(
-      "bg-white",
-      "border",
-      "px-2",
-      "min-h-full",
-      "prose-sm"
-    );
+    this.editorContainer.classList.add("bg-white", "border");
     this.editorContainer.style.minHeight = "200px";
     const editor = target.parentNode?.insertBefore(
       this.editorContainer,
@@ -63,6 +57,10 @@ class ProseMirrorView {
         if (transaction.docChanged) {
           target.innerHTML = this.content;
         }
+      },
+      attributes: {
+        class: "prose-sm px-3 py-2 overflow-y-auto",
+        style: "min-height: 200px; max-height: 500px",
       },
     });
   }

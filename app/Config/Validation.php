@@ -19,6 +19,7 @@ class Validation
         \CodeIgniter\Validation\FormatRules::class,
         \CodeIgniter\Validation\FileRules::class,
         \CodeIgniter\Validation\CreditCardRules::class,
+        \App\Validation\Rules::class,
         \Myth\Auth\Authentication\Passwords\ValidationRules::class,
     ];
 

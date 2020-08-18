@@ -25,9 +25,9 @@ class PodcastModel extends Model
         'language',
         'category',
         'explicit',
-        'author',
         'owner_name',
         'owner_email',
+        'author',
         'type',
         'copyright',
         'block',
@@ -50,6 +50,7 @@ class PodcastModel extends Model
         'image_uri' => 'required',
         'language' => 'required',
         'category' => 'required',
+        'owner_name' => 'required',
         'owner_email' => 'required|valid_email',
         'type' => 'required',
         'created_by' => 'required',
@@ -57,8 +58,8 @@ class PodcastModel extends Model
     ];
     protected $validationMessages = [];
 
-    protected $afterInsert = ['clearCache'];
-    protected $afterUpdate = ['clearCache'];
+    // clear cache before update if by any chance, the podcast name changes, and so will the podcast link
+    protected $beforeUpdate = ['clearCache'];
     protected $beforeDelete = ['clearCache'];
 
     /**

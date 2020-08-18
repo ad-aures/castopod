@@ -41,7 +41,6 @@ class AddEpisodes extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 1024,
             ],
-
             'description' => [
                 'type' => 'TEXT',
                 'null' => true,

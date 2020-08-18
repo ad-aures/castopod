@@ -54,17 +54,15 @@ class AddPodcasts extends Migration
                 'constraint' => 1,
                 'default' => 0,
             ],
-            'author' => [
-                'type' => 'VARCHAR',
-                'constraint' => 1024,
-                'null' => true,
-            ],
             'owner_name' => [
                 'type' => 'VARCHAR',
                 'constraint' => 1024,
-                'null' => true,
             ],
             'owner_email' => [
+                'type' => 'VARCHAR',
+                'constraint' => 1024,
+            ],
+            'author' => [
                 'type' => 'VARCHAR',
                 'constraint' => 1024,
                 'null' => true,

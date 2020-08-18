@@ -53,8 +53,10 @@ class EpisodeModel extends Model
     ];
     protected $validationMessages = [];
 
-    protected $afterInsert = ['writeEnclosureMetadata', 'clearCache'];
-    protected $afterUpdate = ['writeEnclosureMetadata', 'clearCache'];
+    protected $afterInsert = ['writeEnclosureMetadata'];
+    // clear cache beforeUpdate because if slug changes, so will the episode link
+    protected $beforeUpdate = ['clearCache'];
+    protected $afterUpdate = ['writeEnclosureMetadata'];
     protected $beforeDelete = ['clearCache'];
 
     protected function writeEnclosureMetadata(array $data)

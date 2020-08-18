@@ -1,5 +1,9 @@
 <?= $this->extend('_layout') ?>
 
+<?= $this->section('title') ?>
+<?= $podcast->title ?>
+<?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
 <header class="py-4 border-b">
     <h1 class="text-2xl"><?= $podcast->title ?></h1>

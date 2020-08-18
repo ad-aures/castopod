@@ -1,5 +1,7 @@
 <?= $this->extend('_layout') ?>
 
+<?= $this->section('title') ?>Castopod<?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
 
 <h1 class="mb-2 text-xl"><?= lang('Home.all_podcasts') ?> (<?= count(

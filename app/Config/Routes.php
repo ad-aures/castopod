@@ -30,7 +30,7 @@ $routes->setAutoRoute(false);
  */
 
 $routes->addPlaceholder('podcastName', '[a-zA-Z0-9\_]{1,191}');
-$routes->addPlaceholder('episodeSlug', '[a-zA-Z0-9\-]{1,191}');
+$routes->addPlaceholder('slug', '[a-zA-Z0-9\-]{1,191}');
 
 /**
  * --------------------------------------------------------------------
@@ -53,15 +53,6 @@ $routes->group(config('App')->installGateway, function ($routes) {
     ]);
 });
 
-// Public routes
-$routes->group('@(:podcastName)', function ($routes) {
-    $routes->get('/', 'Podcast/$1', ['as' => 'podcast']);
-    $routes->get('(:episodeSlug)', 'Episode/$1/$2', [
-        'as' => 'episode',
-    ]);
-    $routes->get('feed.xml', 'Feed/$1', ['as' => 'podcast_feed']);
-});
-
 // Route for podcast audio file analytics (/stats/podcast_id/episode_id/podcast_folder/filename.mp3)
 $routes->add('stats/(:num)/(:num)/(:any)', 'Analytics::hit/$1/$2/$3', [
     'as' => 'analytics_hit',
@@ -78,10 +69,6 @@ $routes->group(
     function ($routes) {
         $routes->get('/', 'Home', [
             'as' => 'admin',
-        ]);
-
-        $routes->get('my-podcasts', 'Podcast::myPodcasts', [
-            'as' => 'my-podcasts',
         ]);
 
         // Podcasts
@@ -201,6 +188,27 @@ $routes->group(
             });
         });
 
+        // Pages
+        $routes->group('pages', function ($routes) {
+            $routes->get('/', 'Page::list', ['as' => 'page-list']);
+            $routes->get('new', 'Page::create', [
+                'as' => 'page-create',
+            ]);
+            $routes->post('new', 'Page::attemptCreate');
+
+            $routes->group('(:num)', function ($routes) {
+                $routes->get('/', 'Page::view/$1', ['as' => 'page-view']);
+                $routes->get('edit', 'Page::edit/$1', [
+                    'as' => 'page-edit',
+                ]);
+                $routes->post('edit', 'Page::attemptEdit/$1');
+
+                $routes->add('delete', 'Page::delete/$1', [
+                    'as' => 'page-delete',
+                ]);
+            });
+        });
+
         // Users
         $routes->group('users', function ($routes) {
             $routes->get('/', 'User::list', [
@@ -293,6 +301,16 @@ $routes->group(config('App')->authGateway, function ($routes) {
     ]);
     $routes->post('reset-password', 'Auth::attemptReset');
 });
+
+// Public routes
+$routes->group('@(:podcastName)', function ($routes) {
+    $routes->get('/', 'Podcast/$1', ['as' => 'podcast']);
+    $routes->get('(:slug)', 'Episode/$1/$2', [
+        'as' => 'episode',
+    ]);
+    $routes->get('feed.xml', 'Feed/$1', ['as' => 'podcast_feed']);
+});
+$routes->get('/(:slug)', 'Page/$1', ['as' => 'page']);
 
 /**
  * --------------------------------------------------------------------

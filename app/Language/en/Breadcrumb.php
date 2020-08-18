@@ -9,10 +9,10 @@
 return [
     'label' => 'breadcrumb',
     config('App')->adminGateway => 'Home',
-    'my-podcasts' => 'my podcasts',
     'podcasts' => 'podcasts',
     'episodes' => 'episodes',
     'contributors' => 'contributors',
+    'pages' => 'pages',
     'add' => 'add',
     'new' => 'new',
     'edit' => 'edit',
