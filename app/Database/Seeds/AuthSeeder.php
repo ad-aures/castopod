@@ -91,6 +91,11 @@ class AuthSeeder extends Seeder
                 'has_permission' => ['superadmin'],
             ],
             [
+                'name' => 'import',
+                'description' => 'Import a new podcast from an external feed',
+                'has_permission' => ['superadmin'],
+            ],
+            [
                 'name' => 'list',
                 'description' => 'List all podcasts and their episodes',
                 'has_permission' => ['superadmin'],

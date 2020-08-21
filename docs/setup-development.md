@@ -107,11 +107,23 @@ docker-compose run --rm app php spark migrate -all
 2. Populate the database with the required data:
 
 ```bash
+# Populates all required data
+docker-compose run --rm app php spark db:seed AppSeeder
+```
+
+You may also add only data you chose:
+
+```bash
 # Populates all categories
 docker-compose run --rm app php spark db:seed CategorySeeder
+# Populates all Languages
 docker-compose run --rm app php spark db:seed LanguageSeeder
+# Populates all podcasts platforms
 docker-compose run --rm app php spark db:seed PlatformSeeder
+# Populates all Authentication data (roles definition…)
 docker-compose run --rm app php spark db:seed AuthSeeder
+# Populates test data (login: admin / password: AGUehL3P)
+docker-compose run --rm app php spark db:seed TestSeeder
 ```
 
 3. (optionnal) Populate the database with test data:

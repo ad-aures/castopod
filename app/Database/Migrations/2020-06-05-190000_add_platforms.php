@@ -66,6 +66,8 @@ class AddPlatforms extends Migration
                 'type' => 'TINYINT',
                 'constraint' => 1,
                 'default' => 0,
+                'comment' =>
+                    'Android deeplinking for this platform: 0=No, 1=Manual, 2=Automatic.',
             ],
             'logo_file_name' => [
                 'type' => 'VARCHAR',

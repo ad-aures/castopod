@@ -23,7 +23,7 @@ class PodcastModel extends Model
         'episode_description_footer',
         'image_uri',
         'language',
-        'category',
+        'category_id',
         'explicit',
         'owner_name',
         'owner_email',
@@ -35,6 +35,7 @@ class PodcastModel extends Model
         'custom_html_head',
         'created_by',
         'updated_by',
+        'imported_feed_url',
     ];
 
     protected $returnType = \App\Entities\Podcast::class;
@@ -49,8 +50,7 @@ class PodcastModel extends Model
         'description' => 'required',
         'image_uri' => 'required',
         'language' => 'required',
-        'category' => 'required',
-        'owner_name' => 'required',
+        'category_id' => 'required',
         'owner_email' => 'required|valid_email',
         'type' => 'required',
         'created_by' => 'required',

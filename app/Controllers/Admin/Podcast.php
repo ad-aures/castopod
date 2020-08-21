@@ -11,7 +11,9 @@ namespace App\Controllers\Admin;
 use App\Models\CategoryModel;
 use App\Models\LanguageModel;
 use App\Models\PodcastModel;
+use App\Models\EpisodeModel;
 use Config\Services;
+use League\HTMLToMarkdown\HtmlConverter;
 
 class Podcast extends BaseController
 {
@@ -69,7 +71,7 @@ class Podcast extends BaseController
         $categoryOptions = array_reduce(
             $categories,
             function ($result, $category) {
-                $result[$category->code] = lang(
+                $result[$category->id] = lang(
                     'Podcast.category_options.' . $category->code
                 );
                 return $result;
@@ -110,7 +112,7 @@ class Podcast extends BaseController
             ),
             'image' => $this->request->getFile('image'),
             'language' => $this->request->getPost('language'),
-            'category' => $this->request->getPost('category'),
+            'category_id' => $this->request->getPost('category'),
             'explicit' => $this->request->getPost('explicit') == 'yes',
             'author' => $this->request->getPost('author'),
             'owner_name' => $this->request->getPost('owner_name'),
@@ -151,6 +153,222 @@ class Podcast extends BaseController
         return redirect()->route('podcast-view', [$newPodcastId]);
     }
 
+    public function import()
+    {
+        helper(['form', 'misc']);
+
+        $categories = (new CategoryModel())->findAll();
+        $languages = (new LanguageModel())->findAll();
+        $languageOptions = array_reduce(
+            $languages,
+            function ($result, $language) {
+                $result[$language->code] = $language->native_name;
+                return $result;
+            },
+            []
+        );
+        $categoryOptions = array_reduce(
+            $categories,
+            function ($result, $category) {
+                $result[$category->id] = lang(
+                    'Podcast.category_options.' . $category->code
+                );
+                return $result;
+            },
+            []
+        );
+
+        $data = [
+            'languageOptions' => $languageOptions,
+            'categoryOptions' => $categoryOptions,
+            'browserLang' => get_browser_language(
+                $this->request->getServer('HTTP_ACCEPT_LANGUAGE')
+            ),
+        ];
+
+        return view('admin/podcast/import', $data);
+    }
+
+    public function attemptImport()
+    {
+        helper(['media', 'misc']);
+
+        $rules = [
+            'name' => 'required',
+            'imported_feed_url' => 'required',
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $this->validator->getErrors());
+        }
+        try {
+            $feed = simplexml_load_file(
+                $this->request->getPost('imported_feed_url')
+            );
+        } catch (\ErrorException $ex) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', [
+                    $ex->getMessage() .
+                    ': <a href="' .
+                    $this->request->getPost('imported_feed_url') .
+                    '" rel="noreferrer noopener" target="_blank">' .
+                    $this->request->getPost('imported_feed_url') .
+                    ' ⎋</a>',
+                ]);
+        }
+
+        $nsItunes = $feed->channel[0]->children(
+            'http://www.itunes.com/dtds/podcast-1.0.dtd'
+        );
+
+        $podcast = new \App\Entities\Podcast([
+            'name' => $this->request->getPost('name'),
+            'imported_feed_url' => $this->request->getPost('imported_feed_url'),
+
+            'title' => $feed->channel[0]->title,
+            'description' => $feed->channel[0]->description,
+            'image' => download_file($nsItunes->image->attributes()),
+            'language' => $this->request->getPost('language'),
+            'category_id' => $this->request->getPost('category'),
+            'explicit' => empty($nsItunes->explicit)
+                ? false
+                : $nsItunes->explicit == 'yes',
+            'author' => $nsItunes->author,
+            'owner_name' => $nsItunes->owner->name,
+            'owner_email' => $nsItunes->owner->email,
+            'type' => empty($nsItunes->type) ? 'episodic' : $nsItunes->type,
+            'copyright' => $feed->channel[0]->copyright,
+            'block' => empty($nsItunes->block)
+                ? false
+                : $nsItunes->block == 'yes',
+            'complete' => empty($nsItunes->complete)
+                ? false
+                : $nsItunes->complete == 'yes',
+            'episode_description_footer' => '',
+            'custom_html_head' => '',
+            'created_by' => user(),
+            'updated_by' => user(),
+        ]);
+
+        $podcastModel = new PodcastModel();
+        $db = \Config\Database::connect();
+
+        $db->transStart();
+
+        if (!($newPodcastId = $podcastModel->insert($podcast, true))) {
+            $db->transComplete();
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $podcastModel->errors());
+        }
+
+        $authorize = Services::authorization();
+        $podcastAdminGroup = $authorize->group('podcast_admin');
+
+        $podcastModel->addPodcastContributor(
+            user()->id,
+            $newPodcastId,
+            $podcastAdminGroup->id
+        );
+
+        $converter = new HtmlConverter();
+
+        $numberItems = $feed->channel[0]->item->count();
+        $lastItem =
+            !empty($this->request->getPost('max_episodes')) &&
+            $this->request->getPost('max_episodes') < $numberItems
+                ? $this->request->getPost('max_episodes')
+                : $numberItems;
+
+        $slugs = [];
+
+        // For each Episode:
+        for ($itemNumber = 1; $itemNumber <= $lastItem; $itemNumber++) {
+            $item = $feed->channel[0]->item[$numberItems - $itemNumber];
+
+            $nsItunes = $item->children(
+                'http://www.itunes.com/dtds/podcast-1.0.dtd'
+            );
+
+            $slug = slugify(
+                $this->request->getPost('slug_field') == 'title'
+                    ? $item->title
+                    : basename($item->link)
+            );
+            if (in_array($slug, $slugs)) {
+                $slugNumber = 2;
+                while (in_array($slug . '-' . $slugNumber, $slugs)) {
+                    $slugNumber++;
+                }
+                $slug = $slug . '-' . $slugNumber;
+            }
+            $slugs[] = $slug;
+
+            $newEpisode = new \App\Entities\Episode([
+                'podcast_id' => $newPodcastId,
+                'guid' => empty($item->guid) ? null : $item->guid,
+                'title' => $item->title,
+                'slug' => $slug,
+                'enclosure' => download_file($item->enclosure->attributes()),
+                'description' => $converter->convert(
+                    $this->request->getPost('description_field') == 'summary'
+                        ? $nsItunes->summary
+                        : ($this->request->getPost('description_field') ==
+                        'subtitle_summary'
+                            ? '<h3>' .
+                                $nsItunes->subtitle .
+                                "</h3>\n" .
+                                $nsItunes->summary
+                            : $item->description)
+                ),
+                'image' => empty($nsItunes->image->attributes())
+                    ? null
+                    : download_file($nsItunes->image->attributes()),
+                'explicit' => $nsItunes->explicit == 'yes',
+                'number' => $this->request->getPost('force_renumber')
+                    ? $itemNumber
+                    : $nsItunes->episode,
+                'season_number' => empty(
+                    $this->request->getPost('season_number')
+                )
+                    ? $nsItunes->season
+                    : $this->request->getPost('season_number'),
+                'type' => empty($nsItunes->episodeType)
+                    ? 'full'
+                    : $nsItunes->episodeType,
+                'block' => empty($nsItunes->block)
+                    ? false
+                    : $nsItunes->block == 'yes',
+                'created_by' => user(),
+                'updated_by' => user(),
+            ]);
+            $newEpisode->setPublishedAt(
+                date('Y-m-d', strtotime($item->pubDate)),
+                date('H:i:s', strtotime($item->pubDate))
+            );
+
+            $episodeModel = new EpisodeModel();
+
+            if (!$episodeModel->save($newEpisode)) {
+                // FIX: What shall we do?
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->with('errors', $episodeModel->errors());
+            }
+        }
+
+        $db->transComplete();
+
+        return redirect()->route('podcast-list');
+    }
+
     public function edit()
     {
         helper('form');
@@ -168,7 +386,7 @@ class Podcast extends BaseController
         $categoryOptions = array_reduce(
             $categories,
             function ($result, $category) {
-                $result[$category->code] = lang(
+                $result[$category->id] = lang(
                     'Podcast.category_options.' . $category->code
                 );
                 return $result;
@@ -212,7 +430,7 @@ class Podcast extends BaseController
             $this->podcast->image = $image;
         }
         $this->podcast->language = $this->request->getPost('language');
-        $this->podcast->category = $this->request->getPost('category');
+        $this->podcast->category_id = $this->request->getPost('category');
         $this->podcast->explicit = $this->request->getPost('explicit') == 'yes';
         $this->podcast->author = $this->request->getPost('author');
         $this->podcast->owner_name = $this->request->getPost('owner_name');

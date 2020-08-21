@@ -17,6 +17,7 @@ class EpisodeModel extends Model
 
     protected $allowedFields = [
         'podcast_id',
+        'guid',
         'title',
         'slug',
         'enclosure_uri',
@@ -44,8 +45,8 @@ class EpisodeModel extends Model
         'enclosure_uri' => 'required',
         'description' => 'required',
         'image_uri' => 'required',
-        'number' => 'required|is_natural_no_zero',
-        'season_number' => 'required|is_natural_no_zero',
+        'number' => 'is_natural_no_zero|permit_empty',
+        'season_number' => 'is_natural_no_zero|permit_empty',
         'type' => 'required',
         'published_at' => 'valid_date|permit_empty',
         'created_by' => 'required',

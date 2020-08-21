@@ -10,6 +10,7 @@ return [
     'all_podcasts' => 'All podcasts',
     'no_podcast' => 'No podcast found!',
     'create' => 'Create a Podcast',
+    'import' => 'Create and Import a Podcast from an existing Feed',
     'new_episode' => 'New Episode',
     'feed' => 'RSS feed',
     'view' => 'View podcast',
@@ -21,10 +22,10 @@ return [
     'form' => [
         'title' => 'Title',
         'title_help' =>
-            'This podcast title. It will be shown on all podcasts platforms (such as Apple Podcasts) and players (such as Podcast Addict).',
+            'The podcast title will be shown on all podcasts platforms (such as Apple Podcasts) and players (such as Podcast Addict).',
         'name' => 'Name',
         'name_help' =>
-            'This podcast name. It will be used in the URL address. It will be used as a Fedivers actor name, (for instance, it will be the podcast Mastodon’s name).',
+            'The podcast will be used in the URL address. It will be used as a Fediverse actor name, (for instance, it will be the podcast Mastodon’s name).',
         'description' => 'Description',
         'description_help' =>
             'It will be shown on all podcasts platforms (such as Apple Podcasts) and players (such as Podcast Addict).',
@@ -33,7 +34,7 @@ return [
             'This text will be automatically added at the end of each episode description, so that you don’t have to copy/paste it a gazillion times.',
         'image' => 'Image',
         'image_help' =>
-            'This podcast image. It should be square, JPEG or PNG, minimum 1400 x 1400 pixels and maximum 3000 x 3000 pixels.',
+            'This podcast image. It must be square, JPEG or PNG, minimum 1400 x 1400 pixels and maximum 3000 x 3000 pixels.',
         'language' => 'Language',
         'language_help' => 'The language spoken on the podcast.',
         'category' => 'Category',
@@ -44,10 +45,10 @@ return [
             'The podcast parental advisory information. Does it contain explicit content?',
         'owner_name' => 'Owner name',
         'owner_name_help' =>
-            'The podcast owner contact name. For administrative use only. It will not be shown on podcasts platforms (such as Apple Podcasts) nor players (such as Podcast Addict) but it is visible in the public RSS feed.',
+            'For administrative use only. It will not be shown on podcasts platforms (such as Apple Podcasts) nor players (such as Podcast Addict) but it is visible in the public RSS feed.',
         'owner_email' => 'Owner email',
         'owner_email_help' =>
-            'The podcast owner contact e-mail. For administrative use only. It will mostly be used by some platforms to verify this podcast ownerhip. It will not be shown on podcasts platforms (such as Apple Podcasts) nor players (such as Podcast Addict) but it is visible in the public RSS feed.',
+            'It will be used by most platforms to verify this podcast ownership. It will not be shown on podcasts platforms (such as Apple Podcasts) nor players (such as Podcast Addict) but it is visible in the public RSS feed.',
         'author' => 'Author',
         'author_help' =>
             'The group responsible for creating the show. Show author most often refers to the parent company or network of a podcast. This field is sometimes labeled as ’Author’.',
@@ -74,6 +75,36 @@ return [
             'Add here any HTML code that you would like to see on all this podcast pages within the <head/> tag.',
         'submit_create' => 'Create podcast',
         'submit_edit' => 'Save podcast',
+    ],
+    'form_import' => [
+        'name' => 'Name',
+        'name_help' =>
+            'This podcast name. It will be used in the URL address. It will be used as a Fediverse actor name, (for instance, it will be the podcast Mastodon’s name).',
+        'imported_feed_url' => 'Feed URL',
+        'imported_feed_url_help' =>
+            'Make sure you are legally allowed to copy that podcast.',
+        'force_renumber' => 'Force episodes renumbering',
+        'force_renumber_help' =>
+            'Use this if your old podcast does not have number but you want some on your new one.',
+        'season_number' => 'Season number',
+        'season_number_help' =>
+            'Use this if your old podcast does not have season number but you want one on your new one. Leave blank otherwise.',
+        'slug_field' => [
+            'label' => 'Which field should be used to calculate episode slug',
+            'link' => '&lt;link&gt;',
+            'title' => '&lt;title&gt;',
+        ],
+        'description_field' => [
+            'label' => 'Source field used for episode description / show notes',
+            'description' => '&lt;description&gt;',
+            'summary' => '&lt;itunes:summary&gt;',
+            'subtitle_summary' =>
+                '&lt;itunes:subtitle&gt; &lt;itunes:summary&gt;',
+        ],
+        'max_episodes' => 'Maximum number of episodes to import',
+        'max_episodes_helper' => 'Leave blank to import all episodes',
+        'submit_import' => 'Import podcast',
+        'submit_importing' => 'Importing podcast, this could take a while…',
     ],
     'category_options' => [
         'uncategorized' => 'uncategorized',

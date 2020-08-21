@@ -9,7 +9,7 @@
 /**
  * Saves a file to the corresponding podcast folder in `public/media`
  *
- * @param \CodeIgniter\HTTP\Files\UploadedFile $file
+ * @param \CodeIgniter\HTTP\Files\UploadedFile|\CodeIgniter\Files\File $file
  * @param string $podcast_name
  * @param string $file_name
  *
@@ -17,7 +17,12 @@
  */
 function save_podcast_media($file, $podcast_name, $media_name)
 {
-    $file_name = $media_name . '.' . $file->guessExtension();
+    $file_name = $media_name . '.' . $file->getExtension();
+
+    if (!file_exists(config('App')->mediaRoot . '/' . $podcast_name)) {
+        mkdir(config('App')->mediaRoot . '/' . $podcast_name, 0777, true);
+        touch(config('App')->mediaRoot . '/' . $podcast_name . '/index.html');
+    }
 
     // move to media folder and overwrite file if already existing
     $file->move(
@@ -27,6 +32,20 @@ function save_podcast_media($file, $podcast_name, $media_name)
     );
 
     return $podcast_name . '/' . $file_name;
+}
+
+function download_file($fileUrl)
+{
+    $tmpFilename =
+        time() .
+        '_' .
+        bin2hex(random_bytes(10)) .
+        '.' .
+        pathinfo($fileUrl, PATHINFO_EXTENSION);
+    $tmpFilePath = WRITEPATH . 'uploads/' . $tmpFilename;
+    file_put_contents($tmpFilePath, file_get_contents($fileUrl));
+
+    return new \CodeIgniter\Files\File($tmpFilePath);
 }
 
 /**

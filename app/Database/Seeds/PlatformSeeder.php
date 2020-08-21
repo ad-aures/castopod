@@ -210,6 +210,19 @@ class PlatformSeeder extends Seeder
                 'logo_file_name' => 'Podbean.png',
             ],
             [
+                'name' => 'Podcast Addict',
+                'home_url' => 'https://podcastaddict.com/',
+                'submit_url' => 'https://podcastaddict.com/submit',
+                'iosapp_url' => '',
+                'androidapp_url' =>
+                    'https://play.google.com/store/apps/details?id=com.bambuna.podcastaddict',
+                'comment' => '',
+                'display_by_default' => 0,
+                'ios_deeplink' => 0,
+                'android_deeplink' => 2,
+                'logo_file_name' => 'podcastaddict.svg',
+            ],
+            [
                 'name' => 'Podcastland',
                 'home_url' => 'https://podcastland.com/',
                 'submit_url' => '',

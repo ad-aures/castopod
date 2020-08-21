@@ -22,11 +22,6 @@ class Episode extends Entity
     /**
      * @var string
      */
-    protected $GUID;
-
-    /**
-     * @var string
-     */
     protected $link;
 
     /**
@@ -77,13 +72,14 @@ class Episode extends Entity
     ];
 
     protected $casts = [
+        'guid' => 'string',
         'slug' => 'string',
         'title' => 'string',
         'enclosure_uri' => 'string',
         'description' => 'string',
         'image_uri' => '?string',
         'explicit' => 'boolean',
-        'number' => 'integer',
+        'number' => '?integer',
         'season_number' => '?integer',
         'type' => 'string',
         'block' => 'boolean',
@@ -91,9 +87,19 @@ class Episode extends Entity
         'updated_by' => 'integer',
     ];
 
-    public function setImage(?\CodeIgniter\HTTP\Files\UploadedFile $image)
+    /**
+     * Saves an episode image
+     *
+     * @param \CodeIgniter\HTTP\Files\UploadedFile|\CodeIgniter\Files\File $image
+     *
+     */
+    public function setImage($image)
     {
-        if (!empty($image) && $image->isValid()) {
+        if (
+            !empty($image) &&
+            (!($image instanceof \CodeIgniter\HTTP\Files\UploadedFile) ||
+                $image->isValid())
+        ) {
             // check whether the user has inputted an image and store it
             $this->attributes['image_uri'] = save_podcast_media(
                 $image,
@@ -136,10 +142,19 @@ class Episode extends Entity
         return $this->getPodcast()->image_url;
     }
 
-    public function setEnclosure(
-        \CodeIgniter\HTTP\Files\UploadedFile $enclosure = null
-    ) {
-        if (!empty($enclosure) && $enclosure->isValid()) {
+    /**
+     * Saves an enclosure
+     *
+     * @param \CodeIgniter\HTTP\Files\UploadedFile|\CodeIgniter\Files\File $enclosure
+     *
+     */
+    public function setEnclosure($enclosure = null)
+    {
+        if (
+            !empty($enclosure) &&
+            (!($enclosure instanceof \CodeIgniter\HTTP\Files\UploadedFile) ||
+                $enclosure->isValid())
+        ) {
             helper('media');
 
             $this->attributes['enclosure_uri'] = save_podcast_media(
@@ -194,9 +209,11 @@ class Episode extends Entity
         );
     }
 
-    public function getGUID()
+    public function setGuid($guid = null)
     {
-        return $this->getLink();
+        return $this->attributes['guid'] = empty($guid)
+            ? $this->getLink()
+            : $guid;
     }
 
     public function getPodcast()

@@ -23,7 +23,7 @@ function get_rss_feed($podcast)
     $episodes = $podcast->episodes;
 
     $podcast_category = $category_model
-        ->where('code', $podcast->category)
+        ->where('id', $podcast->category_id)
         ->first();
 
     $itunes_namespace = 'http://www.itunes.com/dtds/podcast-1.0.dtd';
@@ -50,7 +50,7 @@ function get_rss_feed($podcast)
     );
     $channel->addChild(
         'generator',
-        'Castopod 0.0.0-development - https://castopod.org'
+        'Castopod 0.0.0-development - https://castopod.org/'
     );
     $channel->addChild('docs', 'https://cyber.harvard.edu/rss/rss.html');
 

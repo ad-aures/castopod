@@ -57,7 +57,7 @@ class Podcast extends Entity
         'description' => 'string',
         'image_uri' => 'string',
         'language' => 'string',
-        'category' => 'string',
+        'category_id' => 'integer',
         'explicit' => 'boolean',
         'author' => '?string',
         'owner_name' => '?string',
@@ -70,9 +70,16 @@ class Podcast extends Entity
         'custom_html_head' => '?string',
         'created_by' => 'integer',
         'updated_by' => 'integer',
+        'imported_feed_url' => '?string',
     ];
 
-    public function setImage(\CodeIgniter\HTTP\Files\UploadedFile $image = null)
+    /**
+     * Saves a cover image to the corresponding podcast folder in `public/media/podcast_name/`
+     *
+     * @param \CodeIgniter\HTTP\Files\UploadedFile|\CodeIgniter\Files\File $image
+     *
+     */
+    public function setImage($image = null)
     {
         if ($image) {
             helper('media');

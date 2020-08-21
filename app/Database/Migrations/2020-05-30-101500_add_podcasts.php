@@ -44,10 +44,11 @@ class AddPodcasts extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 2,
             ],
-            'category' => [
-                'type' => 'VARCHAR',
-                'constraint' => 1024,
-                'null' => true,
+            'category_id' => [
+                'type' => 'INT',
+                'constraint' => 10,
+                'unsigned' => true,
+                'default' => 0,
             ],
             'explicit' => [
                 'type' => 'TINYINT',
@@ -105,6 +106,13 @@ class AddPodcasts extends Migration
                 'constraint' => 11,
                 'unsigned' => true,
             ],
+            'imported_feed_url' => [
+                'type' => 'VARCHAR',
+                'constraint' => 1024,
+                'comment' =>
+                    'The RSS feed URL if this podcast was imported, NULL otherwise.',
+                'null' => true,
+            ],
             'created_at' => [
                 'type' => 'TIMESTAMP',
             ],
@@ -117,6 +125,7 @@ class AddPodcasts extends Migration
             ],
         ]);
         $this->forge->addKey('id', true);
+        $this->forge->addForeignKey('category_id', 'categories', 'id');
         $this->forge->addForeignKey('created_by', 'users', 'id');
         $this->forge->addForeignKey('updated_by', 'users', 'id');
         $this->forge->createTable('podcasts');

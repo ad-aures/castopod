@@ -71,6 +71,10 @@ $routes->group(
             'as' => 'admin',
         ]);
 
+        $routes->get('my-podcasts', 'Podcast::myPodcasts', [
+            'as' => 'my-podcasts',
+        ]);
+
         // Podcasts
         $routes->group('podcasts', function ($routes) {
             $routes->get('/', 'Podcast::list', [
@@ -82,6 +86,13 @@ $routes->group(
             ]);
             $routes->post('new', 'Podcast::attemptCreate', [
                 'filter' => 'permission:podcasts-create',
+            ]);
+            $routes->get('import', 'Podcast::import', [
+                'as' => 'podcast-import',
+                'filter' => 'permission:podcasts-import',
+            ]);
+            $routes->post('import', 'Podcast::attemptImport', [
+                'filter' => 'permission:podcasts-import',
             ]);
 
             // Podcast

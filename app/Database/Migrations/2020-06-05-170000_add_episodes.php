@@ -29,6 +29,10 @@ class AddEpisodes extends Migration
                 'constraint' => 20,
                 'unsigned' => true,
             ],
+            'guid' => [
+                'type' => 'VARCHAR',
+                'constraint' => 191,
+            ],
             'title' => [
                 'type' => 'VARCHAR',
                 'constraint' => 1024,
@@ -59,16 +63,17 @@ class AddEpisodes extends Migration
                 'type' => 'INT',
                 'constraint' => 10,
                 'unsigned' => true,
+                'null' => true,
             ],
             'season_number' => [
                 'type' => 'INT',
                 'constraint' => 10,
                 'unsigned' => true,
-                'default' => 1,
+                'null' => true,
             ],
             'type' => [
                 'type' => 'ENUM',
-                'constraint' => ['full', 'trailer', 'bonus'],
+                'constraint' => ['trailer', 'full', 'bonus'],
                 'default' => 'full',
             ],
             'block' => [
@@ -103,8 +108,6 @@ class AddEpisodes extends Migration
         ]);
         $this->forge->addKey('id', true);
         $this->forge->addUniqueKey(['podcast_id', 'slug']);
-
-        $this->forge->addUniqueKey(['podcast_id', 'season_number', 'number']);
         $this->forge->addForeignKey('podcast_id', 'podcasts', 'id');
         $this->forge->addForeignKey('created_by', 'users', 'id');
         $this->forge->addForeignKey('updated_by', 'users', 'id');

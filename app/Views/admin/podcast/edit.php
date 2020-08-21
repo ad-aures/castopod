@@ -92,7 +92,7 @@
 <?= form_dropdown(
     'category',
     $categoryOptions,
-    old('category', $podcast->category),
+    old('category', $podcast->category_id),
     [
         'id' => 'category',
         'class' => 'form-select mb-4',

@@ -12,7 +12,8 @@
     "myth/auth": "dev-develop",
     "codeigniter4/codeigniter4": "dev-develop",
     "league/commonmark": "^1.5",
-    "vlucas/phpdotenv": "^5.1"
+    "vlucas/phpdotenv": "^5.1",
+    "league/html-to-markdown": "^4.10"
   },
   "require-dev": {
     "mikey179/vfsstream": "1.6.*",
