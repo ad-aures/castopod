@@ -11,7 +11,7 @@ namespace App\Controllers\Admin;
 use Config\Services;
 use App\Models\UserModel;
 
-class Myaccount extends BaseController
+class MyAccount extends BaseController
 {
     public function index()
     {

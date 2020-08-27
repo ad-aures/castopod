@@ -84,6 +84,13 @@ class AuthSeeder extends Seeder
                 'has_permission' => ['superadmin'],
             ],
         ],
+        'pages' => [
+            [
+                'name' => 'manage',
+                'description' => 'List / create / edit / delete pages',
+                'has_permission' => ['superadmin'],
+            ],
+        ],
         'podcasts' => [
             [
                 'name' => 'create',
@@ -102,22 +109,7 @@ class AuthSeeder extends Seeder
             ],
             [
                 'name' => 'view',
-                'description' => 'View any podcast',
-                'has_permission' => ['superadmin'],
-            ],
-            [
-                'name' => 'edit',
-                'description' => 'Edit any podcast',
-                'has_permission' => ['superadmin'],
-            ],
-            [
-                'name' => 'manage_contributors',
-                'description' => 'Add / remove contributors to a podcast',
-                'has_permission' => ['superadmin'],
-            ],
-            [
-                'name' => 'manage_publication',
-                'description' => 'Publish / unpublish a podcast',
+                'description' => 'View any podcast and their contributors list',
                 'has_permission' => ['superadmin'],
             ],
             [
@@ -143,32 +135,6 @@ class AuthSeeder extends Seeder
                 'description' => 'View any episode of any podcast',
                 'has_permission' => ['superadmin'],
             ],
-            [
-                'name' => 'create',
-                'description' => 'Add a new episode to any podcast',
-                'has_permission' => ['superadmin'],
-            ],
-            [
-                'name' => 'edit',
-                'description' => 'Edit any podcast episode',
-                'has_permission' => ['superadmin'],
-            ],
-            [
-                'name' => 'manage_publications',
-                'description' => 'Publish / unpublish any podcast episode',
-                'has_permission' => ['superadmin'],
-            ],
-            [
-                'name' => 'delete',
-                'description' =>
-                    'Delete any podcast episode without removing it from database',
-                'has_permission' => ['superadmin'],
-            ],
-            [
-                'name' => 'delete_permanently',
-                'description' => 'Delete any podcast episode from database',
-                'has_permission' => ['superadmin'],
-            ],
         ],
         'podcast' => [
             [
@@ -182,25 +148,9 @@ class AuthSeeder extends Seeder
                 'has_permission' => ['podcast_admin'],
             ],
             [
-                'name' => 'delete',
-                'description' =>
-                    'Delete a podcast without removing it from the database',
-                'has_permission' => ['podcast_admin'],
-            ],
-            [
-                'name' => 'delete_permanently',
-                'description' => 'Delete a podcast from the database',
-                'has_permission' => ['podcast_admin'],
-            ],
-            [
                 'name' => 'manage_contributors',
                 'description' =>
                     'Add / remove contributors to a podcast and edit their roles',
-                'has_permission' => ['podcast_admin'],
-            ],
-            [
-                'name' => 'manage_publication',
-                'description' => 'Publish / unpublish a podcast',
                 'has_permission' => ['podcast_admin'],
             ],
             [

@@ -104,30 +104,29 @@ $routes->group(
                 ]);
                 $routes->get('edit', 'Podcast::edit/$1', [
                     'as' => 'podcast-edit',
-                    'filter' => 'permission:podcasts-edit,podcast-edit',
+                    'filter' => 'permission:podcast-edit',
                 ]);
                 $routes->post('edit', 'Podcast::attemptEdit/$1', [
-                    'filter' => 'permission:podcasts-edit,podcast-edit',
+                    'filter' => 'permission:podcast-edit',
                 ]);
                 $routes->add('delete', 'Podcast::delete/$1', [
                     'as' => 'podcast-delete',
-                    'filter' => 'permission:podcasts-edit,podcast-delete',
+                    'filter' => 'permission:podcasts-delete',
                 ]);
 
                 // Podcast episodes
                 $routes->group('episodes', function ($routes) {
                     $routes->get('/', 'Episode::list/$1', [
                         'as' => 'episode-list',
-                        'filter' => 'permission:podcasts-view,podcast-view',
+                        'filter' =>
+                            'permission:episodes-list,podcast_episodes-list',
                     ]);
                     $routes->get('new', 'Episode::create/$1', [
                         'as' => 'episode-create',
-                        'filter' =>
-                            'permission:episodes-create,podcast_episodes-create',
+                        'filter' => 'permission:podcast_episodes-create',
                     ]);
                     $routes->post('new', 'Episode::attemptCreate/$1', [
-                        'filter' =>
-                            'permission:episodes-create,podcast_episodes-create',
+                        'filter' => 'permission:podcast_episodes-create',
                     ]);
 
                     // Episode
@@ -139,17 +138,14 @@ $routes->group(
                         ]);
                         $routes->get('edit', 'Episode::edit/$1/$2', [
                             'as' => 'episode-edit',
-                            'filter' =>
-                                'permission:episodes-edit,podcast_episodes-edit',
+                            'filter' => 'permission:podcast_episodes-edit',
                         ]);
                         $routes->post('edit', 'Episode::attemptEdit/$1/$2', [
-                            'filter' =>
-                                'permission:episodes-edit,podcast_episodes-edit',
+                            'filter' => 'permission:podcast_episodes-edit',
                         ]);
                         $routes->add('delete', 'Episode::delete/$1/$2', [
                             'as' => 'episode-delete',
-                            'filter' =>
-                                'permission:episodes-delete,podcast_episodes-delete',
+                            'filter' => 'permission:podcast_episodes-delete',
                         ]);
                     });
                 });
@@ -159,40 +155,40 @@ $routes->group(
                     $routes->get('/', 'Contributor::list/$1', [
                         'as' => 'contributor-list',
                         'filter' =>
-                            'permission:podcasts-manage_contributors,podcast-manage_contributors',
+                            'permission:podcasts-view,podcast-manage_contributors',
                     ]);
                     $routes->get('add', 'Contributor::add/$1', [
                         'as' => 'contributor-add',
-                        'filter' =>
-                            'permission:podcasts-manage_contributors,podcast-manage_contributors',
+                        'filter' => 'permission:podcast-manage_contributors',
                     ]);
                     $routes->post('add', 'Contributor::attemptAdd/$1', [
-                        'filter' =>
-                            'permission:podcasts-manage_contributors,podcast-manage_contributors',
+                        'filter' => 'permission:podcast-manage_contributors',
                     ]);
 
                     // Contributor
                     $routes->group('(:num)', function ($routes) {
                         $routes->get('/', 'Contributor::view/$1/$2', [
                             'as' => 'contributor-view',
+                            'filter' =>
+                                'permission:podcast-manage_contributors',
                         ]);
                         $routes->get('edit', 'Contributor::edit/$1/$2', [
                             'as' => 'contributor-edit',
                             'filter' =>
-                                'permission:podcasts-manage_contributors,podcast-manage_contributors',
+                                'permission:podcast-manage_contributors',
                         ]);
                         $routes->post(
                             'edit',
                             'Contributor::attemptEdit/$1/$2',
                             [
                                 'filter' =>
-                                    'permission:podcasts-manage_contributors,podcast-manage_contributors',
+                                    'permission:podcast-manage_contributors',
                             ]
                         );
                         $routes->add('remove', 'Contributor::remove/$1/$2', [
                             'as' => 'contributor-remove',
                             'filter' =>
-                                'permission:podcasts-manage_contributors,podcast-manage_contributors',
+                                'permission:podcast-manage_contributors',
                         ]);
                     });
                 });
@@ -211,7 +207,7 @@ $routes->group(
                         ['filter' => 'permission:podcast-manage_platforms']
                     );
 
-                    $routes->get(
+                    $routes->add(
                         'platforms/(:num)/remove-link',
                         'PodcastSettings::removePlatformLink/$1/$2',
                         [
@@ -228,18 +224,25 @@ $routes->group(
             $routes->get('/', 'Page::list', ['as' => 'page-list']);
             $routes->get('new', 'Page::create', [
                 'as' => 'page-create',
+                'filter' => 'permission:pages-manage',
             ]);
-            $routes->post('new', 'Page::attemptCreate');
+            $routes->post('new', 'Page::attemptCreate', [
+                'filter' => 'permission:pages-manage',
+            ]);
 
             $routes->group('(:num)', function ($routes) {
                 $routes->get('/', 'Page::view/$1', ['as' => 'page-view']);
                 $routes->get('edit', 'Page::edit/$1', [
                     'as' => 'page-edit',
+                    'filter' => 'permission:pages-manage',
                 ]);
-                $routes->post('edit', 'Page::attemptEdit/$1');
+                $routes->post('edit', 'Page::attemptEdit/$1', [
+                    'filter' => 'permission:pages-manage',
+                ]);
 
                 $routes->add('delete', 'Page::delete/$1', [
                     'as' => 'page-delete',
+                    'filter' => 'permission:pages-manage',
                 ]);
             });
         });
@@ -292,13 +295,13 @@ $routes->group(
 
         // My account
         $routes->group('my-account', function ($routes) {
-            $routes->get('/', 'Myaccount', [
+            $routes->get('/', 'MyAccount', [
                 'as' => 'my-account',
             ]);
-            $routes->get('change-password', 'Myaccount::changePassword/$1', [
+            $routes->get('change-password', 'MyAccount::changePassword/$1', [
                 'as' => 'change-password',
             ]);
-            $routes->post('change-password', 'Myaccount::attemptChange/$1');
+            $routes->post('change-password', 'MyAccount::attemptChange/$1');
         });
     }
 );
