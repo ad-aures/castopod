@@ -196,6 +196,30 @@ $routes->group(
                         ]);
                     });
                 });
+
+                $routes->group('settings', function ($routes) {
+                    $routes->get('/', 'PodcastSettings/$1', [
+                        'as' => 'podcast-settings',
+                    ]);
+                    $routes->get('platforms', 'PodcastSettings::platforms/$1', [
+                        'as' => 'platforms',
+                        'filter' => 'permission:podcast-manage_platforms',
+                    ]);
+                    $routes->post(
+                        'platforms',
+                        'PodcastSettings::attemptPlatformsUpdate/$1',
+                        ['filter' => 'permission:podcast-manage_platforms']
+                    );
+
+                    $routes->get(
+                        'platforms/(:num)/remove-link',
+                        'PodcastSettings::removePlatformLink/$1/$2',
+                        [
+                            'as' => 'platforms-remove',
+                            'filter' => 'permission:podcast-manage_platforms',
+                        ]
+                    );
+                });
             });
         });
 

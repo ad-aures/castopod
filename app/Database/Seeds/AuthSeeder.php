@@ -203,6 +203,11 @@ class AuthSeeder extends Seeder
                 'description' => 'Publish / unpublish a podcast',
                 'has_permission' => ['podcast_admin'],
             ],
+            [
+                'name' => 'manage_platforms',
+                'description' => 'Set / remove platform links of a podcast',
+                'has_permission' => ['podcast_admin'],
+            ],
         ],
         'podcast_episodes' => [
             [

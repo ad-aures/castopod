@@ -3,7 +3,7 @@ $navigation = [
     'dashboard' => ['icon' => 'dashboard', 'items' => ['admin']],
     'podcasts' => [
         'icon' => 'mic',
-        'items' => ['podcast-list', 'podcast-create'],
+        'items' => ['podcast-list', 'podcast-create', 'podcast-import'],
     ],
     'users' => ['icon' => 'group', 'items' => ['user-list', 'user-create']],
     'pages' => ['icon' => 'pages', 'items' => ['page-list', 'page-create']],

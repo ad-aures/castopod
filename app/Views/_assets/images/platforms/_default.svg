@@ -1,0 +1,7 @@
+<svg id="default" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+  <rect width="300" height="300" rx="67" fill="#ebfaeb"/>
+  <path id="phylactery" d="M195,112.36H105a40,40,0,0,0,0,80h36.65a6.67,6.67,0,0,0,0-13.33H105a26.67,26.67,0,0,1,0-53.34h90A26.67,26.67,0,0,1,195,179h-6.37A34,34,0,0,0,155.31,213a6.67,6.67,0,1,0,13.33,0,20.64,20.64,0,0,1,20.61-20.61H195a40,40,0,0,0,0-80" fill="#37c837"/>
+  <circle id="leftdot" cx="123.62" cy="152.5" r="6.81" fill="#37c837"/>
+  <circle id="middledot" cx="150.01" cy="152.5" r="6.81" fill="#37c837"/>
+  <circle id="rightdot" cx="176.39" cy="152.5" r="6.81" fill="#37c837"/>
+</svg>

@@ -18,12 +18,6 @@ class AddPlatformLinks extends Migration
     public function up()
     {
         $this->forge->addField([
-            'id' => [
-                'type' => 'BIGINT',
-                'constraint' => 20,
-                'unsigned' => true,
-                'auto_increment' => true,
-            ],
             'podcast_id' => [
                 'type' => 'BIGINT',
                 'constraint' => 20,
@@ -38,11 +32,6 @@ class AddPlatformLinks extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 191,
             ],
-            'comment' => [
-                'type' => 'TEXT',
-                'comment' => 'Comment.',
-                'null' => true,
-            ],
             'visible' => [
                 'type' => 'TINYINT',
                 'constraint' => 1,
@@ -55,7 +44,7 @@ class AddPlatformLinks extends Migration
                 'type' => 'TIMESTAMP',
             ],
         ]);
-        $this->forge->addKey('id', true);
+        $this->forge->addPrimaryKey(['podcast_id', 'platform_id']);
         $this->forge->addForeignKey('podcast_id', 'podcasts', 'id');
         $this->forge->addForeignKey('platform_id', 'platforms', 'id');
         $this->forge->createTable('platform_links');

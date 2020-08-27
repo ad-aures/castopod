@@ -3,7 +3,7 @@
         <a href="<?= route_to(
             'admin'
         ) ?>" class="inline-flex items-center text-xl">
-            <?= svg('logo-castopod', 'text-3xl mr-2') ?>
+            <?= svg('logo-castopod', 'h-10 mr-2') ?>
             Admin
         </a>
     </div>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+  <g id="podchaser">
+    <rect width="300" height="300" rx="67" fill="#293b65"/>
+    <circle id="Outer-Pink" cx="150" cy="150" r="85" fill="#f70664"/>
+    <circle id="Outer-White" cx="150" cy="150.14" r="73.19" fill="#fff"/>
+    <path d="M150,97.25a54.32,54.32,0,0,0-54.31,54.31v47.69a79.45,79.45,0,0,0,30.7,20.31V200.47A54.31,54.31,0,1,0,150,97.25Z" fill="#293b65"/>
+  </g>
+</svg>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 300 300">
+  <defs>
+    <linearGradient id="castro" x1="150" x2="150" y2="300" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#00ccbf"/>
+      <stop offset="1" stop-color="#00b265"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient" x1="-678.11" y1="574.88" x2="-678.11" y2="580.63" gradientTransform="translate(20211.11 -16925.38) scale(29.58 29.55)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#151515"/>
+      <stop offset="1" stop-color="#353535"/>
+    </linearGradient>
+  </defs>
+  <g id="castro-2" data-name="castro">
+    <rect width="300" height="300" rx="67" fill="url(#castro)"/>
+    <path id="path-2" d="M150,65a85,85,0,1,1-85,85A84.95,84.95,0,0,1,150,65Z" fill-rule="evenodd" fill="url(#linear-gradient)"/>
+    <path id="path-3" d="M185.42,198.64l-14.17-19.83a36.13,36.13,0,1,0-42,0l-14.16,19.83a60.49,60.49,0,1,1,95.86-49.11A62.82,62.82,0,0,1,185.42,198.64ZM150,134.89a14.64,14.64,0,1,1-14.64,14.64A14.71,14.71,0,0,1,150,134.89Z" fill="#fff" fill-rule="evenodd"/>
+  </g>
+</svg>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+  <g id="pocketcasts">
+    <rect width="300" height="300" rx="67" fill="#f43e37"/>
+    <path d="M65,150a85,85,0,0,1,170,0H213.75A63.75,63.75,0,1,0,150,213.75V235A85.25,85.25,0,0,1,65,150Zm85,51a51,51,0,1,1,51-51H182.58A32.58,32.58,0,1,0,150,182.58Z" fill="#fff" fill-rule="evenodd"/>
+  </g>
+</svg>

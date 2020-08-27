@@ -20,4 +20,6 @@ return [
     'my-account' => 'my account',
     'change-password' => 'change password',
     'import' => 'feed import',
+    'settings' => 'settings',
+    'platforms' => 'platforms',
 ];

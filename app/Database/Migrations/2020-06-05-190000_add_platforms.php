@@ -29,6 +29,10 @@ class AddPlatforms extends Migration
                 'constraint' => 191,
                 'unique' => true,
             ],
+            'label' => [
+                'type' => 'VARCHAR',
+                'constraint' => 191,
+            ],
             'home_url' => [
                 'type' => 'VARCHAR',
                 'constraint' => 191,
@@ -37,39 +41,9 @@ class AddPlatforms extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 191,
                 'null' => true,
+                'default' => null,
             ],
-            'iosapp_url' => [
-                'type' => 'VARCHAR',
-                'constraint' => 191,
-                'null' => true,
-            ],
-            'androidapp_url' => [
-                'type' => 'VARCHAR',
-                'constraint' => 191,
-                'null' => true,
-            ],
-            'comment' => [
-                'type' => 'TEXT',
-                'null' => true,
-            ],
-            'display_by_default' => [
-                'type' => 'TINYINT',
-                'constraint' => 1,
-                'default' => 0,
-            ],
-            'ios_deeplink' => [
-                'type' => 'TINYINT',
-                'constraint' => 1,
-                'default' => 0,
-            ],
-            'android_deeplink' => [
-                'type' => 'TINYINT',
-                'constraint' => 1,
-                'default' => 0,
-                'comment' =>
-                    'Android deeplinking for this platform: 0=No, 1=Manual, 2=Automatic.',
-            ],
-            'logo_file_name' => [
+            'icon_filename' => [
                 'type' => 'VARCHAR',
                 'constraint' => 1024,
             ],

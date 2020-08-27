@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+  <g id="stitcher">
+    <rect width="300" height="300" rx="67" fill="#fff"/>
+    <path d="M168.94,114.31h31V178.8h-31Z" fill="#eb8923"/>
+    <path d="M134.5,123.39h31v62.3h-31v-62.3Z" fill="#fac712"/>
+    <path d="M99.75,118.38h31V178.8h-31Z" fill="#612268"/>
+    <path d="M65,127.77H96.31v55.1H65Z" fill="#3199cd"/>
+    <path d="M203.69,125.58H235v48.84H203.69V125.58Z" fill="#c33626"/>
+  </g>
+</svg>

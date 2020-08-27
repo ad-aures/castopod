@@ -14,10 +14,7 @@
 <body class="flex flex-col items-center justify-center min-h-screen mx-auto bg-gray-100">
 	<header class="mb-4">
 		<a href="<?= route_to('home') ?>" class="inline-flex items-center">
-			<?= svg(
-       'logo-castopod',
-       'text-3xl mr-2'
-   ) ?><span class="text-xl">Castopod</span>
+			<?= svg('logo-castopod', 'h-10 mr-2') ?><span class="text-xl">Castopod</span>
 		</a>
 	</header>
 	<main class="w-full max-w-md px-6 py-4 mx-auto bg-white rounded-lg shadow">

@@ -14,6 +14,7 @@ return [
     'admin' => 'Home',
     'podcast-list' => 'All podcasts',
     'podcast-create' => 'New podcast',
+    'podcast-import' => 'Import a podcast',
     'user-list' => 'All users',
     'user-create' => 'New user',
     'page-list' => 'All pages',

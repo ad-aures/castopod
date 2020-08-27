@@ -23,6 +23,10 @@
         'contributor-list',
         $podcast->id
     ) ?>"><?= lang('Podcast.see_contributors') ?></a>
+    <a class="inline-flex px-2 py-1 mb-2 text-white bg-indigo-700 hover:bg-indigo-800" href="<?= route_to(
+        'platforms',
+        $podcast->id
+    ) ?>"><?= lang('Platforms.title') ?></a>
     <a class="inline-flex px-2 py-1 text-white bg-gray-700 hover:bg-gray-800" href="<?= route_to(
         'podcast',
         $podcast->name

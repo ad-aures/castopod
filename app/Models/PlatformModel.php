@@ -35,4 +35,55 @@ class PlatformModel extends Model
     protected $useSoftDeletes = false;
 
     protected $useTimestamps = true;
+
+    public function getPlatformsWithLinks()
+    {
+        return $this->select(
+            'platforms.*, platform_links.link_url, platform_links.visible'
+        )
+            ->join(
+                'platform_links',
+                'platform_links.platform_id = platforms.id',
+                'left'
+            )
+            ->findAll();
+    }
+
+    public function savePlatformLinks($podcastId, $platformLinksData)
+    {
+        // Remove already previously set platforms to overwrite them
+        $this->db
+            ->table('platform_links')
+            ->delete(['podcast_id' => $podcastId]);
+
+        // Set platformLinks
+        return $this->db
+            ->table('platform_links')
+            ->insertBatch($platformLinksData);
+    }
+
+    public function getPlatformId($platform)
+    {
+        if (is_numeric($platform)) {
+            return (int) $platform;
+        }
+
+        $p = $this->where('name', $platform)->first();
+
+        if (!$p) {
+            $this->error = lang('Platform.platformNotFound', [$platform]);
+
+            return false;
+        }
+
+        return (int) $p->id;
+    }
+
+    public function removePlatformLink($podcastId, $platformId)
+    {
+        return $this->db->table('platform_links')->delete([
+            'podcast_id' => $podcastId,
+            'platform_id' => $platformId,
+        ]);
+    }
 }

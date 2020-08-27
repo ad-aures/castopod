@@ -15,7 +15,7 @@
     "watch:css": "postcss app/Views/_assets/styles/index.css -o public/assets/index.css -w",
     "build:css": "postcss app/Views/_assets/styles/index.css -o public/assets/index.css",
     "build:icons": "svgo -f app/Views/_assets/icons -o public/assets/icons --config=./.svgo.icons.yml",
-    "build:svg": "svgo -f app/Views/_assets/images -o public/assets/images --config=./.svgo.yml",
+    "build:svg": "svgo -f app/Views/_assets/images -o public/assets/images -r --config=./.svgo.yml",
     "lint": "eslint --ext js,ts app/Views/_assets",
     "lint:fix": "eslint --ext js,ts app/Views/_assets --fix",
     "lint:css": "stylelint \"app/Views/_assets/**/*.css\"",
