@@ -25,9 +25,6 @@ function get_file_tags($file)
         'filesize' => $FileInfo['filesize'],
         'mime_type' => $FileInfo['mime_type'],
         'playtime_seconds' => $FileInfo['playtime_seconds'],
-        'attached_picture' => array_key_exists('comments', $FileInfo)
-            ? $FileInfo['comments']['picture'][0]['data']
-            : null,
     ];
 }
 

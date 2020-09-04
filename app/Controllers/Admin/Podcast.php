@@ -25,7 +25,11 @@ class Podcast extends BaseController
     public function _remap($method, ...$params)
     {
         if (count($params) > 0) {
-            if (!($this->podcast = (new PodcastModel())->find($params[0]))) {
+            if (
+                !($this->podcast = (new PodcastModel())->getPodcastById(
+                    $params[0]
+                ))
+            ) {
                 throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
             }
         }
@@ -58,26 +62,8 @@ class Podcast extends BaseController
     {
         helper(['form', 'misc']);
 
-        $categories = (new CategoryModel())->findAll();
-        $languages = (new LanguageModel())->findAll();
-        $languageOptions = array_reduce(
-            $languages,
-            function ($result, $language) {
-                $result[$language->code] = $language->native_name;
-                return $result;
-            },
-            []
-        );
-        $categoryOptions = array_reduce(
-            $categories,
-            function ($result, $category) {
-                $result[$category->id] = lang(
-                    'Podcast.category_options.' . $category->code
-                );
-                return $result;
-            },
-            []
-        );
+        $languageOptions = (new LanguageModel())->getLanguageOptions();
+        $categoryOptions = (new CategoryModel())->getCategoryOptions();
 
         $data = [
             'languageOptions' => $languageOptions,
@@ -157,26 +143,8 @@ class Podcast extends BaseController
     {
         helper(['form', 'misc']);
 
-        $categories = (new CategoryModel())->findAll();
-        $languages = (new LanguageModel())->findAll();
-        $languageOptions = array_reduce(
-            $languages,
-            function ($result, $language) {
-                $result[$language->code] = $language->native_name;
-                return $result;
-            },
-            []
-        );
-        $categoryOptions = array_reduce(
-            $categories,
-            function ($result, $category) {
-                $result[$category->id] = lang(
-                    'Podcast.category_options.' . $category->code
-                );
-                return $result;
-            },
-            []
-        );
+        $languageOptions = (new LanguageModel())->getLanguageOptions();
+        $categoryOptions = (new CategoryModel())->getCategoryOptions();
 
         $data = [
             'languageOptions' => $languageOptions,
@@ -373,26 +341,8 @@ class Podcast extends BaseController
     {
         helper('form');
 
-        $categories = (new CategoryModel())->findAll();
-        $languages = (new LanguageModel())->findAll();
-        $languageOptions = array_reduce(
-            $languages,
-            function ($result, $language) {
-                $result[$language->code] = $language->native_name;
-                return $result;
-            },
-            []
-        );
-        $categoryOptions = array_reduce(
-            $categories,
-            function ($result, $category) {
-                $result[$category->id] = lang(
-                    'Podcast.category_options.' . $category->code
-                );
-                return $result;
-            },
-            []
-        );
+        $languageOptions = (new LanguageModel())->getLanguageOptions();
+        $categoryOptions = (new CategoryModel())->getCategoryOptions();
 
         $data = [
             'podcast' => $this->podcast,

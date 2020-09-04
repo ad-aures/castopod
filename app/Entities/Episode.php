@@ -55,11 +55,6 @@ class Episode extends Entity
     protected $enclosure_url;
 
     /**
-     * @var array
-     */
-    protected $enclosure_metadata;
-
-    /**
      * @var string
      */
     protected $description_html;
@@ -76,6 +71,9 @@ class Episode extends Entity
         'slug' => 'string',
         'title' => 'string',
         'enclosure_uri' => 'string',
+        'enclosure_duration' => 'integer',
+        'enclosure_mimetype' => 'string',
+        'enclosure_filesize' => 'integer',
         'description' => 'string',
         'image_uri' => '?string',
         'explicit' => 'boolean',
@@ -103,19 +101,6 @@ class Episode extends Entity
             // check whether the user has inputted an image and store it
             $this->attributes['image_uri'] = save_podcast_media(
                 $image,
-                $this->getPodcast()->name,
-                $this->attributes['slug']
-            );
-        } elseif (
-            $APICdata = $this->getEnclosureMetadata()['attached_picture']
-        ) {
-            // if the user didn't input an image,
-            // check if the uploaded audio file has an attached cover and store it
-            $cover_image = new \CodeIgniter\Files\File('episode_cover');
-            file_put_contents($cover_image, $APICdata);
-
-            $this->attributes['image_uri'] = save_podcast_media(
-                $cover_image,
                 $this->getPodcast()->name,
                 $this->attributes['slug']
             );
@@ -155,13 +140,22 @@ class Episode extends Entity
             (!($enclosure instanceof \CodeIgniter\HTTP\Files\UploadedFile) ||
                 $enclosure->isValid())
         ) {
-            helper('media');
+            helper(['media', 'id3']);
+
+            $enclosure_metadata = get_file_tags($enclosure);
 
             $this->attributes['enclosure_uri'] = save_podcast_media(
                 $enclosure,
                 $this->getPodcast()->name,
                 $this->attributes['slug']
             );
+            $this->attributes['enclosure_duration'] = round(
+                $enclosure_metadata['playtime_seconds']
+            );
+            $this->attributes['enclosure_mimetype'] =
+                $enclosure_metadata['mime_type'];
+            $this->attributes['enclosure_filesize'] =
+                $enclosure_metadata['filesize'];
 
             return $this;
         }
@@ -191,13 +185,6 @@ class Episode extends Entity
         );
     }
 
-    public function getEnclosureMetadata()
-    {
-        helper('id3');
-
-        return get_file_tags($this->getEnclosure());
-    }
-
     public function getLink()
     {
         return base_url(
@@ -218,7 +205,9 @@ class Episode extends Entity
 
     public function getPodcast()
     {
-        return (new PodcastModel())->find($this->attributes['podcast_id']);
+        return (new PodcastModel())->getPodcastById(
+            $this->attributes['podcast_id']
+        );
     }
 
     public function getDescriptionHtml()

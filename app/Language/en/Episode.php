@@ -7,6 +7,12 @@
  */
 
 return [
+    'previous_episode' => 'Previous episode',
+    'previous_season' => 'Previous season',
+    'next_episode' => 'Next episode',
+    'next_season' => 'Next season',
+    'season' => 'Season {seasonNumber}',
+    'number' => 'Episode {episodeNumber}',
     'all_podcast_episodes' => 'All podcast episodes',
     'back_to_podcast' => 'Go back to podcast',
     'edit' => 'Edit',

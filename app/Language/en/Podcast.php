@@ -219,6 +219,11 @@ return [
         'film_reviews' => 'Film Reviews',
         'tv_reviews' => 'TV Reviews',
     ],
-    'list_of_episodes' => 'List of episodes',
-    'no_episode' => 'No episode found',
+    'by' => 'By {author}',
+    'season' => 'Season {seasonNumber}',
+    'list_of_episodes_year' => '{year} episodes',
+    'list_of_episodes_season' => 'Season {seasonNumber} episodes',
+    'no_episode' => 'No episode found!',
+    'no_episode_hint' =>
+        'Navigate the podcast episodes with the navigation bar above.',
 ];

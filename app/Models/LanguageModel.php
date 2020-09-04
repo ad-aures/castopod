@@ -21,4 +21,24 @@ class LanguageModel extends Model
     protected $useSoftDeletes = false;
 
     protected $useTimestamps = false;
+
+    public function getLanguageOptions()
+    {
+        if (!($options = cache('language_options'))) {
+            $languages = $this->findAll();
+
+            $options = array_reduce(
+                $languages,
+                function ($result, $language) {
+                    $result[$language->code] = $language->native_name;
+                    return $result;
+                },
+                []
+            );
+
+            cache()->save('language_options', $options, DECADE);
+        }
+
+        return $options;
+    }
 }

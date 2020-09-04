@@ -115,10 +115,9 @@ function get_rss_feed($podcast)
         $item->addChild('title', $episode->title);
         $enclosure = $item->addChild('enclosure');
 
-        $enclosure_metadata = $episode->enclosure_metadata;
         $enclosure->addAttribute('url', $episode->enclosure_url);
-        $enclosure->addAttribute('length', $enclosure_metadata['filesize']);
-        $enclosure->addAttribute('type', $enclosure_metadata['mime_type']);
+        $enclosure->addAttribute('length', $episode->enclosure_filesize);
+        $enclosure->addAttribute('type', $episode->enclosure_mimetype);
 
         $item->addChild('guid', $episode->guid);
         $item->addChild(
@@ -128,7 +127,7 @@ function get_rss_feed($podcast)
         $item->addChildWithCDATA('description', $episode->description_html);
         $item->addChild(
             'duration',
-            $enclosure_metadata['playtime_seconds'],
+            $episode->enclosure_duration,
             $itunes_namespace
         );
         $item->addChild('link', $episode->link);

@@ -11,17 +11,20 @@ use App\Models\PageModel;
 /**
  * Returns instance pages as links inside nav tag
  *
+ * @param string $class
  * @return string html pages navigation
  */
-function render_page_links()
+function render_page_links($class = null)
 {
     $pages = (new PageModel())->findAll();
-    $links = '';
+    $links = anchor(route_to('home'), lang('Common.home'), [
+        'class' => 'px-2 underline hover:no-underline',
+    ]);
     foreach ($pages as $page) {
         $links .= anchor($page->link, $page->title, [
             'class' => 'px-2 underline hover:no-underline',
         ]);
     }
 
-    return '<nav class="inline-flex">' . $links . '</nav>';
+    return '<nav class="' . $class . '">' . $links . '</nav>';
 }

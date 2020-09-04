@@ -25,18 +25,14 @@ class Episode extends BaseController
 
     public function _remap($method, ...$params)
     {
-        $this->podcast = (new PodcastModel())
-            ->where('name', $params[0])
-            ->first();
+        $this->podcast = (new PodcastModel())->getPodcastByName($params[0]);
 
         if (
             count($params) > 1 &&
-            !($this->episode = (new EpisodeModel())
-                ->where([
-                    'podcast_id' => $this->podcast->id,
-                    'slug' => $params[1],
-                ])
-                ->first())
+            !($this->episode = (new EpisodeModel())->getEpisodeBySlug(
+                $this->podcast->id,
+                $params[1]
+            ))
         ) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
@@ -46,15 +42,31 @@ class Episode extends BaseController
 
     public function index()
     {
-        // The page cache is set to a decade so it is deleted manually upon podcast update
-        $this->cachePage(DECADE);
+        self::triggerWebpageHit($this->episode->podcast_id);
 
-        self::triggerWebpageHit($this->podcast->id);
+        if (
+            !($cachedView = cache(
+                "page_podcast{$this->episode->podcast_id}_episode{$this->episode->id}"
+            ))
+        ) {
+            $previousNextEpisodes = (new EpisodeModel())->getPreviousNextEpisodes(
+                $this->episode,
+                $this->podcast->type
+            );
 
-        $data = [
-            'podcast' => $this->podcast,
-            'episode' => $this->episode,
-        ];
-        return view('episode', $data);
+            $data = [
+                'previousEpisode' => $previousNextEpisodes['previous'],
+                'nextEpisode' => $previousNextEpisodes['next'],
+                'episode' => $this->episode,
+            ];
+
+            // The page cache is set to a decade so it is deleted manually upon podcast update
+            return view('episode', $data, [
+                'cache' => DECADE,
+                'cache_name' => "page_podcast{$this->episode->podcast_id}_episode{$this->episode->id}",
+            ]);
+        }
+
+        return $cachedView;
     }
 }

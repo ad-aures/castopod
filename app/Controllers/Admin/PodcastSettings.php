@@ -21,7 +21,9 @@ class PodcastSettings extends BaseController
 
     public function _remap($method, ...$params)
     {
-        if (!($this->podcast = (new PodcastModel())->find($params[0]))) {
+        if (
+            !($this->podcast = (new PodcastModel())->getPodcastById($params[0]))
+        ) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
         unset($params[0]);
@@ -40,7 +42,9 @@ class PodcastSettings extends BaseController
 
         $data = [
             'podcast' => $this->podcast,
-            'platforms' => (new PlatformModel())->getPlatformsWithLinks(),
+            'platforms' => (new PlatformModel())->getPlatformsWithLinks(
+                $this->podcast->id
+            ),
         ];
 
         replace_breadcrumb_params([0 => $this->podcast->title]);

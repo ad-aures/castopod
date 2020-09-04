@@ -5,7 +5,9 @@ module.exports = {
   theme: {
     extend: {},
   },
-  variants: {},
+  variants: {
+    textDecoration: ["responsive", "hover", "focus", "group-hover"],
+  },
   plugins: [
     require("@tailwindcss/custom-forms"),
     require("@tailwindcss/typography"),

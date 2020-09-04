@@ -26,7 +26,7 @@ class Contributor extends BaseController
 
     public function _remap($method, ...$params)
     {
-        $this->podcast = (new PodcastModel())->find($params[0]);
+        $this->podcast = (new PodcastModel())->getPodcastById($params[0]);
 
         if (count($params) > 1) {
             if (

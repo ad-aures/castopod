@@ -36,6 +36,7 @@ class AddAnalyticsEpisodesByCountry extends Migration
             'country_code' => [
                 'type' => 'VARCHAR',
                 'constraint' => 3,
+                'comment' => 'ISO 3166-1 code.',
             ],
             'date' => [
                 'type' => 'date',

@@ -45,6 +45,22 @@ class AddEpisodes extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 1024,
             ],
+            'enclosure_duration' => [
+                'type' => 'INT',
+                'constraint' => 10,
+                'unsigned' => true,
+                'comment' => 'Playtime in seconds',
+            ],
+            'enclosure_mimetype' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+            ],
+            'enclosure_filesize' => [
+                'type' => 'INT',
+                'constraint' => 10,
+                'unsigned' => true,
+                'comment' => 'File size in bytes',
+            ],
             'description' => [
                 'type' => 'TEXT',
                 'null' => true,

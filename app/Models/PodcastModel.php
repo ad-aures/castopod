@@ -62,63 +62,99 @@ class PodcastModel extends Model
     protected $beforeUpdate = ['clearCache'];
     protected $beforeDelete = ['clearCache'];
 
+    public function getPodcastByName($podcastName)
+    {
+        if (!($found = cache("podcast@{$podcastName}"))) {
+            $found = $this->where('name', $podcastName)->first();
+
+            cache()->save("podcast@{$podcastName}", $found, DECADE);
+        }
+
+        return $found;
+    }
+
+    public function getPodcastById($podcastId)
+    {
+        if (!($found = cache("podcast{$podcastId}"))) {
+            $found = $this->find($podcastId);
+
+            cache()->save("podcast{$podcastId}", $found, DECADE);
+        }
+
+        return $found;
+    }
+
     /**
      *  Gets all the podcasts a given user is contributing to
      *
-     * @param int $user_id
+     * @param int $userId
      *
      * @return \App\Entities\Podcast[] podcasts
      */
-    public function getUserPodcasts($user_id)
+    public function getUserPodcasts($userId)
     {
-        return $this->select('podcasts.*')
-            ->join('users_podcasts', 'users_podcasts.podcast_id = podcasts.id')
-            ->where('users_podcasts.user_id', $user_id)
-            ->findAll();
+        if (!($found = cache("user{$userId}_podcasts"))) {
+            $found = $this->select('podcasts.*')
+                ->join(
+                    'users_podcasts',
+                    'users_podcasts.podcast_id = podcasts.id'
+                )
+                ->where('users_podcasts.user_id', $userId)
+                ->findAll();
+
+            cache()->save("user{$userId}_podcasts", $found, DECADE);
+        }
+
+        return $found;
     }
 
-    public function addPodcastContributor($user_id, $podcast_id, $group_id)
+    public function addPodcastContributor($userId, $podcastId, $groupId)
     {
+        cache()->delete("podcast{$podcastId}_contributors");
+
         $data = [
-            'user_id' => (int) $user_id,
-            'podcast_id' => (int) $podcast_id,
-            'group_id' => (int) $group_id,
+            'user_id' => (int) $userId,
+            'podcast_id' => (int) $podcastId,
+            'group_id' => (int) $groupId,
         ];
 
         return $this->db->table('users_podcasts')->insert($data);
     }
 
-    public function updatePodcastContributor($user_id, $podcast_id, $group_id)
+    public function updatePodcastContributor($userId, $podcastId, $groupId)
     {
+        cache()->delete("podcast{$podcastId}_contributors");
+
         return $this->db
             ->table('users_podcasts')
             ->where([
-                'user_id' => (int) $user_id,
-                'podcast_id' => (int) $podcast_id,
+                'user_id' => (int) $userId,
+                'podcast_id' => (int) $podcastId,
             ])
-            ->update(['group_id' => $group_id]);
+            ->update(['group_id' => $groupId]);
     }
 
-    public function removePodcastContributor($user_id, $podcast_id)
+    public function removePodcastContributor($userId, $podcastId)
     {
+        cache()->delete("podcast{$podcastId}_contributors");
+
         return $this->db
             ->table('users_podcasts')
             ->where([
-                'user_id' => $user_id,
-                'podcast_id' => $podcast_id,
+                'user_id' => $userId,
+                'podcast_id' => $podcastId,
             ])
             ->delete();
     }
 
-    public function getContributorGroupId($user_id, $podcast_id)
+    public function getContributorGroupId($userId, $podcastId)
     {
-        // TODO: return only the group id
         $user_podcast = $this->db
             ->table('users_podcasts')
             ->select('group_id')
             ->where([
-                'user_id' => $user_id,
-                'podcast_id' => $podcast_id,
+                'user_id' => $userId,
+                'podcast_id' => $podcastId,
             ])
             ->get()
             ->getResultObject();
@@ -130,7 +166,7 @@ class PodcastModel extends Model
 
     protected function clearCache(array $data)
     {
-        $podcast = (new PodcastModel())->find(
+        $podcast = (new PodcastModel())->getPodcastById(
             is_array($data['id']) ? $data['id'][0] : $data['id']
         );
 
@@ -142,6 +178,10 @@ class PodcastModel extends Model
         foreach ($podcast->episodes as $episode) {
             cache()->delete(md5($episode->link));
         }
+
+        // delete model requests cache
+        cache()->delete("podcast{$podcast->id}");
+        cache()->delete("podcast@{$podcast->name}");
 
         return $data;
     }

@@ -63,7 +63,9 @@ class User extends \Myth\Auth\Entities\User
         }
 
         if (empty($this->podcast)) {
-            $this->podcast = (new PodcastModel())->find($this->podcast_id);
+            $this->podcast = (new PodcastModel())->getPodcastById(
+                $this->podcast_id
+            );
         }
 
         return $this->podcast;

@@ -8,7 +8,9 @@
 
 namespace App\Entities;
 
+use App\Models\CategoryModel;
 use App\Models\EpisodeModel;
+use App\Models\PlatformModel;
 use CodeIgniter\Entity;
 use App\Models\UserModel;
 use League\CommonMark\CommonMarkConverter;
@@ -41,6 +43,11 @@ class Podcast extends Entity
     protected $episodes;
 
     /**
+     * @var \App\Entities\Category
+     */
+    protected $category;
+
+    /**
      * @var \App\Entities\User[]
      */
     protected $contributors;
@@ -49,6 +56,11 @@ class Podcast extends Entity
      * @var string
      */
     protected $description_html;
+
+    /**
+     * @var \App\Entities\Platform
+     */
+    protected $platforms;
 
     protected $casts = [
         'id' => 'integer',
@@ -134,11 +146,32 @@ class Podcast extends Entity
 
         if (empty($this->episodes)) {
             $this->episodes = (new EpisodeModel())->getPodcastEpisodes(
-                $this->id
+                $this->id,
+                $this->type
             );
         }
 
         return $this->episodes;
+    }
+
+    /**
+     * Returns the podcast category entity
+     *
+     * @return \App\Entities\Category
+     */
+    public function getCategory()
+    {
+        if (empty($this->id)) {
+            throw new \RuntimeException(
+                'Podcast must be created before getting category.'
+            );
+        }
+
+        if (empty($this->category)) {
+            $this->category = (new CategoryModel())->find($this->category_id);
+        }
+
+        return $this->category;
     }
 
     /**
@@ -185,5 +218,27 @@ class Podcast extends Entity
         $this->attributes['updated_by'] = $user->id;
 
         return $this;
+    }
+
+    /**
+     * Returns the podcast's platform links
+     *
+     * @return \App\Entities\Platform[]
+     */
+    public function getPlatforms()
+    {
+        if (empty($this->id)) {
+            throw new \RuntimeException(
+                'Podcast must be created before getting platform links.'
+            );
+        }
+
+        if (empty($this->platforms)) {
+            $this->platforms = (new PlatformModel())->getPodcastPlatformLinks(
+                $this->id
+            );
+        }
+
+        return $this->platforms;
     }
 }

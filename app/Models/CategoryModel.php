@@ -31,4 +31,26 @@ class CategoryModel extends Model
     {
         return $this->find($parentId);
     }
+
+    public function getCategoryOptions()
+    {
+        if (!($options = cache('category_options'))) {
+            $categories = $this->findAll();
+
+            $options = array_reduce(
+                $categories,
+                function ($result, $category) {
+                    $result[$category->id] = lang(
+                        'Podcast.category_options.' . $category->code
+                    );
+                    return $result;
+                },
+                []
+            );
+
+            cache()->save('category_options', $options, DECADE);
+        }
+
+        return $options;
+    }
 }
