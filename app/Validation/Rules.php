@@ -27,4 +27,6 @@ class Rules
         ];
         return !in_array($value, $protectedSlugs, true);
     }
+
+    //--------------------------------------------------------------------
 }

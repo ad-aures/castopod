@@ -47,6 +47,8 @@ class Analytics extends Controller
     // Add one hit to this episode:
     public function hit($p_podcastId, $p_episodeId, ...$filename)
     {
+        helper('media');
+
         podcast_hit($p_podcastId, $p_episodeId);
         return redirect()->to(media_url(implode('/', $filename)));
     }

@@ -19,17 +19,15 @@ function save_podcast_media($file, $podcast_name, $media_name)
 {
     $file_name = $media_name . '.' . $file->getExtension();
 
-    if (!file_exists(config('App')->mediaRoot . '/' . $podcast_name)) {
-        mkdir(config('App')->mediaRoot . '/' . $podcast_name, 0777, true);
-        touch(config('App')->mediaRoot . '/' . $podcast_name . '/index.html');
+    $mediaRoot = config('App')->mediaRoot;
+
+    if (!file_exists($mediaRoot . '/' . $podcast_name)) {
+        mkdir($mediaRoot . '/' . $podcast_name, 0777, true);
+        touch($mediaRoot . '/' . $podcast_name . '/index.html');
     }
 
     // move to media folder and overwrite file if already existing
-    $file->move(
-        config('App')->mediaRoot . '/' . $podcast_name . '/',
-        $file_name,
-        true
-    );
+    $file->move($mediaRoot . '/' . $podcast_name . '/', $file_name, true);
 
     return $podcast_name . '/' . $file_name;
 }
@@ -63,4 +61,16 @@ function media_path($uri = ''): string
     $uri = trim($uri, '/');
 
     return config('App')->mediaRoot . '/' . $uri;
+}
+
+/**
+ * Return the media base URL to use in views
+ *
+ * @param  mixed  $uri      URI string or array of URI segments
+ * @param  string $protocol
+ * @return string
+ */
+function media_url($uri = '', string $protocol = null): string
+{
+    return base_url(config('App')->mediaRoot . '/' . $uri, $protocol);
 }

@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/codeigniter4/CodeIgniter4.git",
-                "reference": "9a7e826138bf8940ef8c7a25d59d67b1aebfe0ee"
+                "reference": "9b6eda2729d4a8912ccfe8f8c20587b21ff92ac4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codeigniter4/CodeIgniter4/zipball/9a7e826138bf8940ef8c7a25d59d67b1aebfe0ee",
-                "reference": "9a7e826138bf8940ef8c7a25d59d67b1aebfe0ee",
+                "url": "https://api.github.com/repos/codeigniter4/CodeIgniter4/zipball/9b6eda2729d4a8912ccfe8f8c20587b21ff92ac4",
+                "reference": "9b6eda2729d4a8912ccfe8f8c20587b21ff92ac4",
                 "shasum": ""
             },
             "require": {
@@ -34,7 +34,7 @@
                 "codeigniter4/codeigniter4-standard": "^1.0",
                 "fzaninotto/faker": "^1.9@dev",
                 "mikey179/vfsstream": "1.6.*",
-                "phpstan/phpstan": "^0.12.37",
+                "phpstan/phpstan": "^0.12",
                 "phpunit/phpunit": "^8.5",
                 "predis/predis": "^1.1",
                 "squizlabs/php_codesniffer": "^3.3"
@@ -66,20 +66,20 @@
                 "slack": "https://codeigniterchat.slack.com",
                 "issues": "https://github.com/codeigniter4/CodeIgniter4/issues"
             },
-            "time": "2020-08-17T14:11:23+00:00"
+            "time": "2020-09-07T16:29:38+00:00"
         },
         {
             "name": "composer/ca-bundle",
-            "version": "1.2.7",
+            "version": "1.2.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/ca-bundle.git",
-                "reference": "95c63ab2117a72f48f5a55da9740a3273d45b7fd"
+                "reference": "8a7ecad675253e4654ea05505233285377405215"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/ca-bundle/zipball/95c63ab2117a72f48f5a55da9740a3273d45b7fd",
-                "reference": "95c63ab2117a72f48f5a55da9740a3273d45b7fd",
+                "url": "https://api.github.com/repos/composer/ca-bundle/zipball/8a7ecad675253e4654ea05505233285377405215",
+                "reference": "8a7ecad675253e4654ea05505233285377405215",
                 "shasum": ""
             },
             "require": {
@@ -128,11 +128,15 @@
                     "type": "custom"
                 },
                 {
+                    "url": "https://github.com/composer",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/composer/composer",
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-04-08T08:27:21+00:00"
+            "time": "2020-08-23T12:54:47+00:00"
         },
         {
             "name": "geoip2/geoip2",
@@ -451,23 +455,23 @@
         },
         {
             "name": "laminas/laminas-zendframework-bridge",
-            "version": "1.0.4",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-zendframework-bridge.git",
-                "reference": "fcd87520e4943d968557803919523772475e8ea3"
+                "reference": "4939c81f63a8a4968c108c440275c94955753b19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-zendframework-bridge/zipball/fcd87520e4943d968557803919523772475e8ea3",
-                "reference": "fcd87520e4943d968557803919523772475e8ea3",
+                "url": "https://api.github.com/repos/laminas/laminas-zendframework-bridge/zipball/4939c81f63a8a4968c108c440275c94955753b19",
+                "reference": "4939c81f63a8a4968c108c440275c94955753b19",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.6 || ^7.0"
+                "php": "^5.6 || ^7.0 || ^8.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^5.7 || ^6.5 || ^7.5 || ^8.1",
+                "phpunit/phpunit": "^5.7 || ^6.5 || ^7.5 || ^8.1 || ^9.3",
                 "squizlabs/php_codesniffer": "^3.5"
             },
             "type": "library",
@@ -505,20 +509,20 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2020-05-20T16:45:56+00:00"
+            "time": "2020-08-18T16:34:51+00:00"
         },
         {
             "name": "league/commonmark",
-            "version": "1.5.3",
+            "version": "1.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/commonmark.git",
-                "reference": "2574454b97e4103dc4e36917bd783b25624aefcd"
+                "reference": "21819c989e69bab07e933866ad30c7e3f32984ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/2574454b97e4103dc4e36917bd783b25624aefcd",
-                "reference": "2574454b97e4103dc4e36917bd783b25624aefcd",
+                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/21819c989e69bab07e933866ad30c7e3f32984ba",
+                "reference": "21819c989e69bab07e933866ad30c7e3f32984ba",
                 "shasum": ""
             },
             "require": {
@@ -600,7 +604,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-07-19T22:47:30+00:00"
+            "time": "2020-08-18T01:19:12+00:00"
         },
         {
             "name": "league/html-to-markdown",
@@ -796,12 +800,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/lonnieezell/myth-auth.git",
-                "reference": "d9c9b0e4a8bea9ba6c847dcfefc6645bf1e1d694"
+                "reference": "e838cb8de6ffa118caf2b9909e71776a866c8973"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lonnieezell/myth-auth/zipball/d9c9b0e4a8bea9ba6c847dcfefc6645bf1e1d694",
-                "reference": "d9c9b0e4a8bea9ba6c847dcfefc6645bf1e1d694",
+                "url": "https://api.github.com/repos/lonnieezell/myth-auth/zipball/e838cb8de6ffa118caf2b9909e71776a866c8973",
+                "reference": "e838cb8de6ffa118caf2b9909e71776a866c8973",
                 "shasum": ""
             },
             "require": {
@@ -848,7 +852,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2020-07-16T14:00:14+00:00"
+            "time": "2020-09-07T03:37:26+00:00"
         },
         {
             "name": "phpoption/phpoption",

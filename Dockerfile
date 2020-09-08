@@ -10,8 +10,12 @@ WORKDIR /castopod
 RUN apt-get update && apt-get install -y \
     libicu-dev \
     libpng-dev \
+    libjpeg-dev \
     zlib1g-dev \
-    && docker-php-ext-install intl gd
+    && docker-php-ext-install intl
+
+RUN docker-php-ext-configure gd --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-install gd
 
 RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
 
@@ -19,4 +23,5 @@ RUN echo "file_uploads = On\n" \
          "memory_limit = 100M\n" \
          "upload_max_filesize = 100M\n" \
          "post_max_size = 120M\n" \
+         "max_execution_time = 300\n" \
          > /usr/local/etc/php/conf.d/uploads.ini

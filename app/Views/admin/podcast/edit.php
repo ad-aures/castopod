@@ -13,6 +13,22 @@
 ]) ?>
 <?= csrf_field() ?>
 
+<?= form_label(lang('Podcast.form.image'), 'image') ?>
+<img
+    src="<?= $podcast->image->thumbnail_url ?>"
+    alt="<?= $podcast->title ?>"
+    class="object-cover w-32 h-32"
+/>
+<?= form_input([
+    'id' => 'image',
+    'name' => 'image',
+    'class' => 'form-input',
+    'type' => 'file',
+    'accept' => '.jpg,.jpeg,.png',
+]) ?>
+<small class="mb-4 text-gray-600"><?= lang(
+    'Common.forms.image_size_hint'
+) ?></small>
 
 <?= form_label(lang('Podcast.form.title'), 'title') ?>
 <?= form_input([
@@ -65,16 +81,6 @@
         'data-editor="markdown"'
     ) ?>
 </div>
-
-<?= form_label(lang('Podcast.form.image'), 'image') ?>
-<img src="<?= $podcast->image_url ?>" alt="<?= $podcast->title ?>" class="object-cover w-32 h-32" />
-<?= form_input([
-    'id' => 'image',
-    'name' => 'image',
-    'class' => 'form-input mb-4',
-    'type' => 'file',
-    'accept' => '.jpg,.jpeg,.png',
-]) ?>
 
 <?= form_label(lang('Podcast.form.language'), 'language') ?>
 <?= form_dropdown(

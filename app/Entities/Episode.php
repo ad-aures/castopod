@@ -25,19 +25,9 @@ class Episode extends Entity
     protected $link;
 
     /**
-     * @var \CodeIgniter\Files\File
+     * @var \App\Entities\Image
      */
     protected $image;
-
-    /**
-     * @var string
-     */
-    protected $image_media_path;
-
-    /**
-     * @var string
-     */
-    protected $image_url;
 
     /**
      * @var \CodeIgniter\Files\File
@@ -98,33 +88,30 @@ class Episode extends Entity
             (!($image instanceof \CodeIgniter\HTTP\Files\UploadedFile) ||
                 $image->isValid())
         ) {
+            helper('media');
+
             // check whether the user has inputted an image and store it
             $this->attributes['image_uri'] = save_podcast_media(
                 $image,
                 $this->getPodcast()->name,
                 $this->attributes['slug']
             );
+
+            $this->image = new \App\Entities\Image(
+                $this->attributes['image_uri']
+            );
+            $this->image->saveSizes();
         }
 
         return $this;
     }
 
-    public function getImage(): \CodeIgniter\Files\File
-    {
-        return new \CodeIgniter\Files\File($this->getImageMediaPath());
-    }
-
-    public function getImageMediaPath(): string
-    {
-        return media_path($this->attributes['image_uri']);
-    }
-
-    public function getImageUrl(): string
+    public function getImage(): \App\Entities\Image
     {
         if ($image_uri = $this->attributes['image_uri']) {
-            return media_url($image_uri);
+            return new \App\Entities\Image($image_uri);
         }
-        return $this->getPodcast()->image_url;
+        return $this->getPodcast()->image;
     }
 
     /**

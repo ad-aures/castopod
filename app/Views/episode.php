@@ -1,6 +1,6 @@
 <?= helper('page') ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?= $episode->podcast->language ?>">
 
 <head>
     <meta charset="UTF-8"/>
@@ -14,14 +14,15 @@
 <body class="flex flex-col min-h-screen mx-auto">
     <header class="border-b bg-gradient-to-tr from-gray-900 to-gray-800">
         <div class="container flex items-start px-2 py-2 mx-auto">
-          <img class="w-12 h-12 mr-2 rounded cover" src="<?= $episode->podcast
-              ->image_url ?>" alt="<?= $episode->podcast->title ?>" />
-          <a href="<?= route_to(
-              'podcast',
-              $episode->podcast->name
-          ) ?>" class="flex flex-col text-lg leading-tight text-white" title="<?= lang(
-    'Episode.back_to_podcast'
-) ?>">
+          <img
+            class="w-12 h-12 mr-2 rounded cover"
+            src="<?= $episode->podcast->image->thumbnail_url ?>"
+            alt="<?= $episode->podcast->title ?>"
+          />
+          <a
+            href="<?= route_to('podcast', $episode->podcast->name) ?>"
+            class="flex flex-col text-lg leading-tight text-white"
+            title="<?= lang('Episode.back_to_podcast') ?>">
             <?= $episode->podcast->title ?>
             <span class="text-sm text-gray-300">
                 @<?= $episode->podcast->name ?>
@@ -57,7 +58,8 @@
             <?php endif; ?>
       </nav>
       <header class="flex flex-col items-center px-4 md:items-stretch md:justify-center md:flex-row">
-        <img src="<?= $episode->image_url ?>" alt="<?= $episode->title ?>" class="object-cover w-full max-w-xs mb-2 rounded-lg md:mb-0 md:mr-4" />
+        <img src="<?= $episode->image->medium_url ?>"
+        alt="<?= $episode->title ?>" class="object-cover w-full max-w-xs mb-2 rounded-lg md:mb-0 md:mr-4" />
         <div class="flex flex-col w-full max-w-sm">
           <h1 class="text-lg font-semibold md:text-2xl"><?= $episode->title ?></h1>
           <?php if ($episode->number): ?>

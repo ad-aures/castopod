@@ -57,7 +57,7 @@ function get_rss_feed($podcast)
     $channel->addChild('title', $podcast->title);
     $channel->addChildWithCDATA('description', $podcast->description_html);
     $itunes_image = $channel->addChild('image', null, $itunes_namespace);
-    $itunes_image->addAttribute('href', $podcast->image_url);
+    $itunes_image->addAttribute('href', $podcast->image->url);
     $channel->addChild('language', $podcast->language);
 
     $itunes_category = $channel->addChild('category', null, $itunes_namespace);
@@ -106,7 +106,7 @@ function get_rss_feed($podcast)
         $channel->addChild('complete', 'Yes', $itunes_namespace);
 
     $image = $channel->addChild('image');
-    $image->addChild('url', $podcast->image_url);
+    $image->addChild('url', $podcast->image->feed_url);
     $image->addChild('title', $podcast->title);
     $image->addChild('link', $podcast->link);
 
@@ -136,7 +136,7 @@ function get_rss_feed($podcast)
             null,
             $itunes_namespace
         );
-        $episode_itunes_image->addAttribute('href', $episode->image_url);
+        $episode_itunes_image->addAttribute('href', $episode->image->feed_url);
         $item->addChild(
             'explicit',
             $episode->explicit ? 'true' : 'false',

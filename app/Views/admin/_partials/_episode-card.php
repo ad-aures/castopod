@@ -1,5 +1,8 @@
 <article class="flex w-full max-w-lg mb-4 bg-white border rounded shadow">
-    <img src="<?= $episode->image_url ?>" alt="<?= $episode->title ?>" class="object-cover w-32 h-32 rounded-l" />
+    <img
+    loading="lazy"
+    src="<?= $episode->image->thumbnail_url ?>"
+    alt="<?= $episode->title ?>" class="object-cover w-32 h-32 rounded-l" />
     <div class="flex flex-col flex-1 px-4 py-2">
         <a href="<?= route_to(
             'episode-view',

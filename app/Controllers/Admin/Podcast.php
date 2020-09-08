@@ -79,7 +79,8 @@ class Podcast extends BaseController
     public function attemptCreate()
     {
         $rules = [
-            'image' => 'uploaded[image]|is_image[image]|ext_in[image,jpg,png]',
+            'image' =>
+                'uploaded[image]|is_image[image]|ext_in[image,jpg,png]|min_dims[image,1400,1400]|is_image_squared[image]',
         ];
 
         if (!$this->validate($rules)) {
@@ -162,8 +163,9 @@ class Podcast extends BaseController
         helper(['media', 'misc']);
 
         $rules = [
-            'name' => 'required',
-            'imported_feed_url' => 'required',
+            'imported_feed_url' => 'required|valid_url',
+            'season_number' => 'is_natural_no_zero|permit_empty',
+            'max_episodes' => 'is_natural_no_zero|permit_empty',
         ];
 
         if (!$this->validate($rules)) {
@@ -217,8 +219,6 @@ class Podcast extends BaseController
             'complete' => empty($nsItunes->complete)
                 ? false
                 : $nsItunes->complete == 'yes',
-            'episode_description_footer' => '',
-            'custom_html_head' => '',
             'created_by' => user(),
             'updated_by' => user(),
         ]);
@@ -299,9 +299,10 @@ class Podcast extends BaseController
                     ? null
                     : download_file($nsItunes->image->attributes()),
                 'explicit' => $nsItunes->explicit == 'yes',
-                'number' => $this->request->getPost('force_renumber')
-                    ? $itemNumber
-                    : $nsItunes->episode,
+                'number' =>
+                    $this->request->getPost('force_renumber') == 'yes'
+                        ? $itemNumber
+                        : $nsItunes->episode,
                 'season_number' => empty(
                     $this->request->getPost('season_number')
                 )
@@ -358,7 +359,7 @@ class Podcast extends BaseController
     {
         $rules = [
             'image' =>
-                'uploaded[image]|is_image[image]|ext_in[image,jpg,png]|permit_empty',
+                'is_image[image]|ext_in[image,jpg,png]|min_dims[image,1400,1400]|is_image_squared[image]',
         ];
 
         if (!$this->validate($rules)) {

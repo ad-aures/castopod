@@ -17,9 +17,9 @@ class Validation
     public $ruleSets = [
         \CodeIgniter\Validation\Rules::class,
         \CodeIgniter\Validation\FormatRules::class,
-        \CodeIgniter\Validation\FileRules::class,
         \CodeIgniter\Validation\CreditCardRules::class,
         \App\Validation\Rules::class,
+        \App\Validation\FileRules::class,
         \Myth\Auth\Authentication\Passwords\ValidationRules::class,
     ];
 

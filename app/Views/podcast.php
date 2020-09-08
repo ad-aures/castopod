@@ -17,7 +17,8 @@
     <main class="flex-1 bg-gray-200">
         <header class="border-b bg-gradient-to-tr from-gray-900 to-gray-800">
             <div class="flex flex-col items-center justify-center md:items-stretch md:mx-auto md:container md:py-12 md:flex-row ">
-                <img src="<?= $podcast->image_url ?>" alt="Podcast cover" class="object-cover w-full max-w-xs m-4 rounded-lg shadow-xl" />
+                <img src="<?= $podcast->image->medium_url ?>"
+                alt="<?= $podcast->title ?>" class="object-cover w-full max-w-xs m-4 rounded-lg shadow-xl" />
                 <div class="w-full p-4 bg-white md:w-auto md:text-white md:bg-transparent">
                     <h1 class="text-2xl font-semibold leading-tight"><?= $podcast->title ?> <span class="text-lg font-normal opacity-75">@<?= $podcast->name ?></span></h1>
                     <div class="flex items-center mb-4">
@@ -99,7 +100,10 @@
                     </h1>
                     <?php foreach ($episodes as $episode): ?>
                         <article class="flex w-full max-w-lg p-4 mx-auto">
-                            <img loading="lazy" src="<?= $episode->image_url ?>" alt="<?= $episode->title ?>" class="object-cover w-20 h-20 mr-2 rounded-lg" />
+                            <img
+                            loading="lazy"
+                            src="<?= $episode->image->thumbnail_url ?>"
+                            alt="<?= $episode->title ?>" class="object-cover w-20 h-20 mr-2 rounded-lg" />
                             <div class="flex flex-col flex-1">
                                 <a class="text-sm hover:underline" href="<?= $episode->link ?>">
                                     <h2 class="inline-flex justify-between w-full font-bold leading-none group">

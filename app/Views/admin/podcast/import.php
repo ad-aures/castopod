@@ -7,28 +7,33 @@
 
 <?= $this->section('content') ?>
 
-<?= form_open_multipart(route_to('podcast_import'), [
+<?= form_open_multipart(route_to('rzqr'), [
     'method' => 'post',
     'class' => 'flex flex-col max-w-md',
 ]) ?>
 <?= csrf_field() ?>
 
+<?= form_label(lang('Podcast.form_import.name'), 'name') ?>
+<?= form_input([
+    'id' => 'name',
+    'name' => 'name',
+    'class' => 'form-input mb-4',
+    'value' => old('name'),
+    'required' => 'required',
+]) ?>
 
-<div class="flex flex-col mb-4">
-    <label for="name"><?= lang('Podcast.form_import.name') ?></label>
-    <input type="text" class="form-input" id="name" name="name" value="<?= old(
-        'name'
-    ) ?>" required />
-</div>
-
-<div class="flex flex-col mb-4">
-    <label for="name"><?= lang(
-        'Podcast.form_import.imported_feed_url'
-    ) ?></label>
-    <input type="text" class="form-input" id="imported_feed_url" name="imported_feed_url" value="<?= old(
-        'imported_feed_url'
-    ) ?>" required />
-</div>
+<?= form_label(
+    lang('Podcast.form_import.imported_feed_url'),
+    'imported_feed_url'
+) ?>
+<?= form_input([
+    'id' => 'imported_feed_url',
+    'name' => 'imported_feed_url',
+    'class' => 'form-input mb-4',
+    'value' => old('imported_feed_url'),
+    'type' => 'url',
+    'required' => 'required',
+]) ?>
 
 <?= form_label(lang('Podcast.form.language'), 'language') ?>
 <?= form_dropdown('language', $languageOptions, old('language', $browserLang), [
@@ -44,9 +49,8 @@
     'required' => 'required',
 ]) ?>
 
-<?= form_fieldset(lang('Podcast.form_import.slug_field.label'), [
-    'class' => 'flex flex-col mb-4',
-]) ?>
+<?= form_fieldset('', ['class' => 'flex flex-col mb-4']) ?>
+    <legend><?= lang('Podcast.form_import.slug_field.label') ?></legend>
     <label for="link" class="inline-flex items-center">
         <?= form_radio(
             ['id' => 'link', 'name' => 'slug_field', 'class' => 'form-radio'],
@@ -69,9 +73,8 @@
     </label>
 <?= form_fieldset_close() ?>
 
-<?= form_fieldset(lang('Podcast.form_import.description_field.label'), [
-    'class' => 'flex flex-col mb-4',
-]) ?>
+<?= form_fieldset('', ['class' => 'flex flex-col mb-4']) ?>
+    <legend><?= lang('Podcast.form_import.description_field.label') ?></legend>
     <label for="description" class="inline-flex items-center">
         <?= form_radio(
             [
@@ -88,7 +91,7 @@
             'Podcast.form_import.description_field.description'
         ) ?></span>
     </label>
-    <label for="subtitle_summary" class="inline-flex items-center">
+    <label for="summary" class="inline-flex items-center">
         <?= form_radio(
             [
                 'id' => 'summary',
@@ -136,27 +139,30 @@
     <span class="ml-2"><?= lang('Podcast.form_import.force_renumber') ?></span>
 </label>
 
-<div class="flex flex-col mb-4">
-    <label for="name"><?= lang('Podcast.form_import.season_number') ?></label>
-    <input type="text" class="form-input" id="season_number" name="season_number" value="<?= old(
-        'season_number'
-    ) ?>" />
-</div>
+<?= form_label(lang('Podcast.form_import.season_number'), 'season_number') ?>
+<?= form_input([
+    'id' => 'season_number',
+    'name' => 'season_number',
+    'class' => 'form-input mb-4',
+    'value' => old('season_number'),
+    'type' => 'number',
+]) ?>
 
-<div class="flex flex-col mb-4">
-    <label for="max_episodes"><?= lang(
-        'Podcast.form_import.max_episodes'
-    ) ?></label>
-    <input type="text" class="form-input" id="max_episodes" name="max_episodes" value="<?= old(
-        'max_episodes'
-    ) ?>" />
-</div>
+<?= form_label(lang('Podcast.form_import.max_episodes'), 'max_episodes') ?>
+<?= form_input([
+    'id' => 'max_episodes',
+    'name' => 'max_episodes',
+    'class' => 'form-input mb-4',
+    'value' => old('max_episodes'),
+    'type' => 'number',
+]) ?>
 
-<button type="submit" name="submit"  onsubmit="this.disabled=true; this.value='<?= lang(
-    'Podcast.form_import.submit_importing'
-) ?>';" class="self-end px-4 py-2 bg-gray-200"><?= lang(
-    'Podcast.form_import.submit_import'
-) ?></button>
+<?= form_button([
+    'content' => lang('Podcast.form_import.submit_import'),
+    'type' => 'submit',
+    'class' => 'self-end px-4 py-2 bg-gray-200',
+]) ?>
+
 <?= form_close() ?>
 
 

@@ -85,7 +85,7 @@ class Episode extends BaseController
         $rules = [
             'enclosure' => 'uploaded[enclosure]|ext_in[enclosure,mp3,m4a]',
             'image' =>
-                'uploaded[image]|is_image[image]|ext_in[image,jpg,png]|permit_empty',
+                'is_image[image]|ext_in[image,jpg,png]|min_dims[image,1400,1400]|is_image_squared[image]',
             'publication_date' => 'valid_date[Y-m-d]|permit_empty',
             'publication_time' =>
                 'regex_match[/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/]|permit_empty',
@@ -151,7 +151,7 @@ class Episode extends BaseController
             'enclosure' =>
                 'uploaded[enclosure]|ext_in[enclosure,mp3,m4a]|permit_empty',
             'image' =>
-                'uploaded[image]|is_image[image]|ext_in[image,jpg,png]|permit_empty',
+                'is_image[image]|ext_in[image,jpg,png]|min_dims[image,1400,1400]|is_image_squared[image]',
             'publication_date' => 'valid_date[Y-m-d]|permit_empty',
             'publication_time' =>
                 'regex_match[/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/]|permit_empty',

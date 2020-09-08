@@ -47,7 +47,7 @@ function write_enclosure_tags($episode)
     $tagwriter->tagformats = ['id3v2.4'];
     $tagwriter->tag_encoding = $TextEncoding;
 
-    $cover = new \CodeIgniter\Files\File($episode->image_media_path);
+    $cover = new \CodeIgniter\Files\File($episode->image->id3_path);
 
     $APICdata = file_get_contents($cover->getRealPath());
 

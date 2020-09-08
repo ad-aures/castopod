@@ -18,7 +18,11 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-    <img class="w-64 mb-4" src="<?= $podcast->image_url ?>" alt="<?= $podcast->title ?>" />
+    <img
+        class="w-64 mb-4"
+        src="<?= $podcast->image->medium_url ?>"
+        alt="<?= $podcast->title ?>"
+    />
     <a class="inline-flex px-2 py-1 mb-2 text-white bg-yellow-700 hover:bg-yellow-800" href="<?= route_to(
         'contributor-list',
         $podcast->id

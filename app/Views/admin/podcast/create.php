@@ -13,6 +13,19 @@
 ]) ?>
 <?= csrf_field() ?>
 
+<?= form_label(lang('Podcast.form.image'), 'image') ?>
+<?= form_input([
+    'id' => 'image',
+    'name' => 'image',
+    'class' => 'form-input',
+    'required' => 'required',
+    'type' => 'file',
+    'accept' => '.jpg,.jpeg,.png',
+]) ?>
+<small class="mb-4 text-gray-600"><?= lang(
+    'Common.forms.image_size_hint'
+) ?></small>
+
 <?= form_label(lang('Podcast.form.title'), 'title') ?>
 <?= form_input([
     'id' => 'title',
@@ -54,23 +67,12 @@
         [
             'id' => 'episode_description_footer',
             'name' => 'episode_description_footer',
-
             'class' => 'form-textarea',
         ],
         old('episode_description_footer', '', false),
         'data-editor="markdown"'
     ) ?>
 </div>
-
-<?= form_label(lang('Podcast.form.image'), 'image') ?>
-<?= form_input([
-    'id' => 'image',
-    'name' => 'image',
-    'class' => 'form-input mb-4',
-    'required' => 'required',
-    'type' => 'file',
-    'accept' => '.jpg,.jpeg,.png',
-]) ?>
 
 <?= form_label(lang('Podcast.form.language'), 'language') ?>
 <?= form_dropdown('language', $languageOptions, old('language', $browserLang), [
@@ -122,7 +124,9 @@
     'value' => old('author'),
 ]) ?>
 
-<?= form_fieldset('', ['class' => 'flex flex-col mb-4']) ?>
+<?= form_fieldset('', [
+    'class' => 'flex flex-col mb-4',
+]) ?>
     <legend><?= lang('Podcast.form.type.label') ?></legend>
     <label for="episodic" class="inline-flex items-center">
         <?= form_radio(

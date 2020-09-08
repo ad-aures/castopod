@@ -1,5 +1,8 @@
 <article class="w-48 h-full mb-4 mr-4 overflow-hidden bg-white border rounded shadow">
-    <img alt="<?= $podcast->title ?>" src="<?= $podcast->image_url ?>" class="object-cover w-full h-40" />
+    <img
+    alt="<?= $podcast->title ?>"
+    src="<?= $podcast->image
+        ->thumbnail_url ?>" class="object-cover w-full h-40" />
     <div class="p-2">
         <a href="<?= route_to(
             'podcast-view',

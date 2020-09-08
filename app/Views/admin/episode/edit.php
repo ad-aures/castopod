@@ -22,6 +22,23 @@
     'accept' => '.mp3,.m4a',
 ]) ?>
 
+<?= form_label(lang('Episode.form.image'), 'image') ?>
+<img
+    src="<?= $episode->image->thumbnail_url ?>"
+    alt="<?= $episode->title ?>"
+    class="object-cover w-32 h-32"
+/>
+<?= form_input([
+    'id' => 'image',
+    'name' => 'image',
+    'class' => 'form-input',
+    'type' => 'file',
+    'accept' => '.jpg,.jpeg,.png',
+]) ?>
+<small class="mb-4 text-gray-600"><?= lang(
+    'Common.forms.image_size_hint'
+) ?></small>
+
 <?= form_label(lang('Episode.form.title'), 'title') ?>
 <?= form_input([
     'id' => 'title',
@@ -93,16 +110,6 @@
     ]) ?>
 </div>
 <?= form_fieldset_close() ?>
-
-<?= form_label(lang('Episode.form.image'), 'image') ?>
-<img src="<?= $episode->image_url ?>" alt="<?= $episode->title ?>" class="object-cover w-32 h-32" />
-<?= form_input([
-    'id' => 'image',
-    'name' => 'image',
-    'class' => 'form-input mb-4',
-    'type' => 'file',
-    'accept' => '.jpg,.jpeg,.png',
-]) ?>
 
 <?= form_label(lang('Episode.form.season_number'), 'season_number') ?>
 <?= form_input([
