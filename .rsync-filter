@@ -1,0 +1,11 @@
+# rsync filter rules to copy required files for Castopod's bundle
+
+- app/Views/_assets/
++ app/***
++ public/***
++ vendor/***
++ writable/***
++ DEPENDENCIES.md
++ LICENSE
++ README.md
+- **

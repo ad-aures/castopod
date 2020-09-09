@@ -1,0 +1,55 @@
+image: php:7.2-fpm
+
+stages:
+  - bundle
+
+cache:
+  paths:
+    - vendor/
+    - node_modules/
+
+before_script:
+  - apt-get update -y
+
+  # Install git (the php image doesn't have it) which is required by composer
+  - apt-get install git -y
+
+  # install rsync for file transfers
+  - apt-get install rsync -y
+
+  # install wget to download archives
+  - apt-get install wget
+
+  # Install composer
+  - apt-get install zip unzip
+  - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+  - php composer-setup.php
+  - php -r "unlink('composer-setup.php');"
+
+  # Install NodeJS for NPM
+  - curl -sL https://deb.nodesource.com/setup_12.x | bash -
+  - apt-get update && apt-get install -y nodejs
+
+  # Install php and js dependencies
+  - php composer.phar install --no-dev --ignore-platform-reqs
+  - npm install
+
+bundle_app:
+  stage: bundle
+  script:
+    # build all assets for views
+    - npm run build
+    # download GeoLite2-Country and opawg/user-agents archives and extract them to writable/uploads
+    - wget -c "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Country&license_key=$MAXMIND_LICENCE_KEY&suffix=tar.gz" -O - | tar -xz -C ./writable/uploads/
+    - wget -c "https://github.com/opawg/user-agents/archive/master.tar.gz" -O - | tar -xz -C ./writable/uploads/
+
+    # rename extracted archives' folders
+    - mv ./writable/uploads/GeoLite2-Country* ./writable/uploads/GeoLite2-Country
+    - mv ./writable/uploads/user-agents* ./writable/uploads/user-agents
+
+    # create bundle folder: uses .rsync-filter (-F) file to copy only needed files
+    - rsync -avF --progress . ./bundle
+  artifacts:
+    name: "castopod-${CI_COMMIT_REF_SLUG}_${CI_COMMIT_SHORT_SHA}"
+    paths:
+      - bundle

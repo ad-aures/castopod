@@ -146,3 +146,6 @@ public/*
 mariadb
 phpmyadmin
 sessions
+
+# Castopod bundle
+bundle/
