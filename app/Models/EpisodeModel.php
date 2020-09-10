@@ -270,7 +270,7 @@ class EpisodeModel extends Model
         $sortNumberField =
             $podcastType == 'serial'
                 ? 'if(isnull(season_number),0,season_number)*1000+number'
-                : 'UNIX_TIMESTAMP(published_at)';
+                : 'published_at';
         $sortNumberValue =
             $podcastType == 'serial'
                 ? (empty($episode->season_number)
@@ -278,7 +278,7 @@ class EpisodeModel extends Model
                         : $episode->season_number) *
                         1000 +
                     $episode->number
-                : strtotime($episode->published_at);
+                : $episode->published_at;
 
         $previousData = $this->orderBy('(' . $sortNumberField . ') DESC')
             ->where([
