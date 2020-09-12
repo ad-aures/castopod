@@ -279,9 +279,8 @@ class EpisodeModel extends Model
                         1000 +
                     $episode->number
                 : (empty($episode->season_number)
-                        ? 0
-                        : $episode->season_number) *
-                        100000000000000 +
+                        ? ''
+                        : $episode->season_number) .
                     date('YmdHis', strtotime($episode->published_at));
 
         $previousData = $this->orderBy('(' . $sortNumberField . ') DESC')
