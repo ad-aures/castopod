@@ -57,6 +57,7 @@ class Episode extends BaseController
             $data = [
                 'previousEpisode' => $previousNextEpisodes['previous'],
                 'nextEpisode' => $previousNextEpisodes['next'],
+                'podcast' => $this->podcast,
                 'episode' => $this->episode,
             ];
 

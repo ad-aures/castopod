@@ -50,10 +50,11 @@ class AddPodcasts extends Migration
                 'unsigned' => true,
                 'default' => 0,
             ],
-            'explicit' => [
-                'type' => 'TINYINT',
-                'constraint' => 1,
-                'default' => 0,
+            'parental_advisory' => [
+                'type' => 'ENUM',
+                'constraint' => ['clean', 'explicit'],
+                'null' => true,
+                'default' => null,
             ],
             'owner_name' => [
                 'type' => 'VARCHAR',
@@ -63,7 +64,7 @@ class AddPodcasts extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 1024,
             ],
-            'author' => [
+            'publisher' => [
                 'type' => 'VARCHAR',
                 'constraint' => 1024,
                 'null' => true,
@@ -89,10 +90,6 @@ class AddPodcasts extends Migration
                 'default' => 0,
             ],
             'episode_description_footer' => [
-                'type' => 'TEXT',
-                'null' => true,
-            ],
-            'custom_html_head' => [
                 'type' => 'TEXT',
                 'null' => true,
             ],

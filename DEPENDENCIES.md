@@ -17,9 +17,9 @@ Javascript dependencies:
 
 - [rollup](https://rollupjs.org/) ([MIT License](https://github.com/rollup/rollup/blob/master/LICENSE.md))
 - [tailwindcss](https://tailwindcss.com/) ([MIT License](https://github.com/tailwindcss/tailwindcss/blob/master/LICENSE))
-- [CodeMirror](https://github.com/codemirror/CodeMirror) ([MIT License](https://github.com/codemirror/CodeMirror/blob/master/LICENSE))
 - [ProseMirror](https://prosemirror.net/) ([MIT License](https://github.com/ProseMirror/prosemirror/blob/master/LICENSE))
 - [D3: Data-Driven Documents](https://d3js.org) ([BSD 3-Clause "New" or "Revised" License](https://github.com/d3/d3/blob/master/LICENSE))
+- [Choices.js](https://joshuajohnson.co.uk/Choices/) ([MIT License](https://github.com/jshjohnson/Choices/blob/master/LICENSE))
 
 Other:
 

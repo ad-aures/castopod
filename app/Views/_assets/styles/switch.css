@@ -1,0 +1,26 @@
+.form-switch {
+  @apply absolute w-0 h-0 opacity-0;
+
+  &:checked + .form-switch-slider {
+    @apply bg-green-500;
+  }
+
+  &:focus + .form-switch-slider {
+    @apply shadow-outline;
+  }
+
+  &:checked + .form-switch-slider::before {
+    @apply transform translate-x-5;
+  }
+}
+
+.form-switch-slider {
+  @apply relative inset-0 flex-shrink-0 w-10 h-5 transition duration-200 bg-gray-400 rounded-full cursor-pointer;
+
+  &::before {
+    @apply absolute w-4 h-4 transition duration-200 bg-white rounded-full shadow-xs;
+    content: "";
+    left: 2px;
+    bottom: 2px;
+  }
+}

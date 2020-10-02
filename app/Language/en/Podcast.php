@@ -9,8 +9,8 @@
 return [
     'all_podcasts' => 'All podcasts',
     'no_podcast' => 'No podcast found!',
-    'create' => 'Create a Podcast',
-    'import' => 'Create and Import a Podcast from an existing Feed',
+    'create' => 'Create a podcast',
+    'import' => 'Import a podcast',
     'new_episode' => 'New Episode',
     'feed' => 'RSS feed',
     'view' => 'View podcast',
@@ -19,92 +19,54 @@ return [
     'see_episodes' => 'See episodes',
     'see_contributors' => 'See contributors',
     'go_to_page' => 'Go to page',
+    'latest_episodes' => 'Latest episodes',
+    'see_all_episodes' => 'See all episodes',
     'form' => [
+        'identity_section_title' => 'Podcast identity',
+        'identity_section_subtitle' => 'These fields allow you to get noticed.',
+        'image' => 'Cover image',
         'title' => 'Title',
-        'title_help' =>
-            'The podcast title will be shown on all podcasts platforms (such as Apple Podcasts) and players (such as Podcast Addict).',
         'name' => 'Name',
-        'name_help' =>
-            'The podcast will be used in the URL address. It will be used as a Fediverse actor name, (for instance, it will be the podcast Mastodon’s name).',
-        'description' => 'Description',
-        'description_help' =>
-            'It will be shown on all podcasts platforms (such as Apple Podcasts) and players (such as Podcast Addict).',
-        'episode_description_footer' => 'Episode description footer',
-        'episode_description_footer_help' =>
-            'This text will be automatically added at the end of each episode description, so that you don’t have to copy/paste it a gazillion times.',
-        'image' => 'Image',
-        'image_help' =>
-            'This podcast image. It must be square, JPEG or PNG, minimum 1400 x 1400 pixels and maximum 3000 x 3000 pixels.',
-        'language' => 'Language',
-        'language_help' => 'The language spoken on the podcast.',
-        'category' => 'Category',
-        'category_help' =>
-            'This podcast category. Because no one uses subcategories, Castopod does not allow you te use one.',
-        'explicit' => 'Explicit',
-        'explicit_help' =>
-            'The podcast parental advisory information. Does it contain explicit content?',
-        'owner_name' => 'Owner name',
-        'owner_name_help' =>
-            'For administrative use only. It will not be shown on podcasts platforms (such as Apple Podcasts) nor players (such as Podcast Addict) but it is visible in the public RSS feed.',
-        'owner_email' => 'Owner email',
-        'owner_email_help' =>
-            'It will be used by most platforms to verify this podcast ownership. It will not be shown on podcasts platforms (such as Apple Podcasts) nor players (such as Podcast Addict) but it is visible in the public RSS feed.',
-        'author' => 'Author',
-        'author_help' =>
-            'The group responsible for creating the show. Show author most often refers to the parent company or network of a podcast. This field is sometimes labeled as ’Author’.',
+        'name_hint' => 'Used for generating the podcast URL.',
         'type' => [
             'label' => 'Type',
+            'hint' =>
+                '- <strong>episodic</strong>: if episodes are intended to be consumed without any specific order. Newest episodes will be presented first.<br/>- <strong>serial</strong>: if episodes are intended to be consumed in sequential order. The oldest episodes will be presented first.',
             'episodic' => 'Episodic',
-            'episodic_help' =>
-                'Specify episodic when episodes are intended to be consumed without any specific order. The newest episodes will be presented first.',
             'serial' => 'Serial',
-            'serial_help' =>
-                'Specify serial when episodes are intended to be consumed in sequential order. The oldest episodes will be presented first.',
         ],
+        'description' => 'Description',
+        'classification_section_title' => 'Classification',
+        'classification_section_subtitle' =>
+            'These fields will impact your audience and competition.',
+        'language' => 'Language',
+        'category' => 'Category',
+        'other_categories' => 'Other categories',
+        'parental_advisory' => [
+            'label' => 'Parental advisory',
+            'hint' => 'Does it contain explicit content?',
+            'undefined' => 'undefined',
+            'clean' => 'Clean',
+            'explicit' => 'Explicit',
+        ],
+        'author_section_title' => 'Author',
+        'author_section_subtitle' => 'Who is managing the podcast?',
+        'owner_name' => 'Owner name',
+        'owner_name_hint' =>
+            'For administrative use only. Visible in the public RSS feed.',
+        'owner_email' => 'Owner email',
+        'owner_email_hint' =>
+            'Will be used by most platforms to verify the podcast ownership. Visible in the public RSS feed.',
+        'publisher' => 'Publisher',
+        'publisher_hint' =>
+            'The group responsible for creating the show. Often refers to the parent company or network of a podcast. This field is sometimes labeled as ’Author’.',
         'copyright' => 'Copyright',
-        'copyright_help' =>
-            'The podcast copyright details, such as "2020 (cc)(by-nc-sa)" or "©2020".',
-        'block' => 'Block',
-        'block_help' =>
-            'If you want your show removed from all platforms, use this tag.',
-        'complete' => 'Complete',
-        'complete_help' =>
-            'Check this if you will never publish another episode to your podcast.',
-        'custom_html_head' => 'Custom HTML code in <head/>',
-        'custom_html_head_help' =>
-            'Add here any HTML code that you would like to see on all this podcast pages within the <head/> tag.',
+        'status_section_title' => 'Status',
+        'status_section_subtitle' => 'Dead or alive?',
+        'block' => 'Podcast should be hidden from all platforms',
+        'complete' => 'Podcast will not be having new episodes',
         'submit_create' => 'Create podcast',
         'submit_edit' => 'Save podcast',
-    ],
-    'form_import' => [
-        'name' => 'Name',
-        'name_help' =>
-            'This podcast name. It will be used in the URL address. It will be used as a Fediverse actor name, (for instance, it will be the podcast Mastodon’s name).',
-        'imported_feed_url' => 'Feed URL',
-        'imported_feed_url_help' =>
-            'Make sure you are legally allowed to copy that podcast.',
-        'force_renumber' => 'Force episodes renumbering',
-        'force_renumber_help' =>
-            'Use this if your old podcast does not have number but you want some on your new one.',
-        'season_number' => 'Season number',
-        'season_number_help' =>
-            'Use this if your old podcast does not have season number but you want one on your new one. Leave blank otherwise.',
-        'slug_field' => [
-            'label' => 'Which field should be used to calculate episode slug',
-            'link' => '&lt;link&gt;',
-            'title' => '&lt;title&gt;',
-        ],
-        'description_field' => [
-            'label' => 'Source field used for episode description / show notes',
-            'description' => '&lt;description&gt;',
-            'summary' => '&lt;itunes:summary&gt;',
-            'subtitle_summary' =>
-                '&lt;itunes:subtitle&gt; &lt;itunes:summary&gt;',
-        ],
-        'max_episodes' => 'Maximum number of episodes to import',
-        'max_episodes_helper' => 'Leave blank to import all episodes',
-        'submit_import' => 'Import podcast',
-        'submit_importing' => 'Importing podcast, this could take a while…',
     ],
     'category_options' => [
         'uncategorized' => 'uncategorized',
@@ -219,7 +181,7 @@ return [
         'film_reviews' => 'Film Reviews',
         'tv_reviews' => 'TV Reviews',
     ],
-    'by' => 'By {author}',
+    'by' => 'By {publisher}',
     'season' => 'Season {seasonNumber}',
     'list_of_episodes_year' => '{year} episodes',
     'list_of_episodes_season' => 'Season {seasonNumber} episodes',

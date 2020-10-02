@@ -13,6 +13,14 @@ use App\Entities\User;
 class Auth extends \Myth\Auth\Controllers\AuthController
 {
     /**
+     * An array of helpers to be automatically loaded
+     * upon class instantiation.
+     *
+     * @var array
+     */
+    protected $helpers = ['components'];
+
+    /**
      * Attempt to register a new user.
      */
     public function attemptRegister()

@@ -59,7 +59,7 @@ class Page extends BaseController
 
         $pageModel = new PageModel();
 
-        if (!$pageModel->save($page)) {
+        if (!$pageModel->insert($page)) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -92,7 +92,7 @@ class Page extends BaseController
 
         $pageModel = new PageModel();
 
-        if (!$pageModel->save($this->page)) {
+        if (!$pageModel->update($this->page->id, $this->page)) {
             return redirect()
                 ->back()
                 ->withInput()

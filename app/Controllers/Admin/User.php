@@ -86,7 +86,7 @@ class User extends BaseController
         // Force user to reset his password on first connection
         $user->forcePasswordReset();
 
-        if (!$userModel->save($user)) {
+        if (!$userModel->insert($user)) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -150,7 +150,7 @@ class User extends BaseController
         $userModel = new UserModel();
         $this->user->forcePasswordReset();
 
-        if (!$userModel->save($this->user)) {
+        if (!$userModel->update($this->user->id, $this->user)) {
             return redirect()
                 ->back()
                 ->with('errors', $userModel->errors());
@@ -184,7 +184,7 @@ class User extends BaseController
         // TODO: add ban reason?
         $this->user->ban('');
 
-        if (!$userModel->save($this->user)) {
+        if (!$userModel->update($this->user->id, $this->user)) {
             return redirect()
                 ->back()
                 ->with('errors', $userModel->errors());
@@ -205,7 +205,7 @@ class User extends BaseController
         $userModel = new UserModel();
         $this->user->unBan();
 
-        if (!$userModel->save($this->user)) {
+        if (!$userModel->update($this->user->id, $this->user)) {
             return redirect()
                 ->back()
                 ->with('errors', $userModel->errors());

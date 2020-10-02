@@ -4,6 +4,10 @@
 <?= lang('Platforms.title') ?>
 <?= $this->endSection() ?>
 
+<?= $this->section('pageTitle') ?>
+<?= lang('Platforms.title') ?>
+<?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
 
 <?= form_open(route_to('platforms', $podcast->id), [
@@ -88,11 +92,12 @@
 
 <?php endforeach; ?>
 
-<?= form_button([
-    'content' => lang('Platforms.submit'),
-    'type' => 'submit',
-    'class' => 'self-end px-4 py-2 bg-gray-200',
-]) ?>
+<?= button(
+    lang('Platforms.submit'),
+    null,
+    ['variant' => 'primary'],
+    ['type' => 'submit', 'class' => 'self-end']
+) ?>
 
 <?= form_close() ?>
 

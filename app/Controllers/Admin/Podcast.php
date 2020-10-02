@@ -94,21 +94,20 @@ class Podcast extends BaseController
             'title' => $this->request->getPost('title'),
             'name' => $this->request->getPost('name'),
             'description' => $this->request->getPost('description'),
-            'episode_description_footer' => $this->request->getPost(
-                'episode_description_footer'
-            ),
             'image' => $this->request->getFile('image'),
             'language' => $this->request->getPost('language'),
             'category_id' => $this->request->getPost('category'),
-            'explicit' => $this->request->getPost('explicit') == 'yes',
-            'author' => $this->request->getPost('author'),
+            'parental_advisory' =>
+                $this->request->getPost('parental_advisory') !== 'undefined'
+                    ? $this->request->getPost('parental_advisory')
+                    : null,
             'owner_name' => $this->request->getPost('owner_name'),
             'owner_email' => $this->request->getPost('owner_email'),
+            'publisher' => $this->request->getPost('publisher'),
             'type' => $this->request->getPost('type'),
             'copyright' => $this->request->getPost('copyright'),
-            'block' => $this->request->getPost('block') == 'yes',
-            'complete' => $this->request->getPost('complete') == 'yes',
-            'custom_html_head' => $this->request->getPost('custom_html_head'),
+            'block' => $this->request->getPost('block') === 'yes',
+            'complete' => $this->request->getPost('complete') === 'yes',
             'created_by' => user(),
             'updated_by' => user(),
         ]);
@@ -119,7 +118,7 @@ class Podcast extends BaseController
         $db->transStart();
 
         if (!($newPodcastId = $podcastModel->insert($podcast, true))) {
-            $db->transComplete();
+            $db->transRollback();
             return redirect()
                 ->back()
                 ->withInput()
@@ -133,6 +132,12 @@ class Podcast extends BaseController
             user()->id,
             $newPodcastId,
             $podcastAdminGroup->id
+        );
+
+        // set Podcast categories
+        (new CategoryModel())->setPodcastCategories(
+            $newPodcastId,
+            $this->request->getPost('other_categories')
         );
 
         $db->transComplete();
@@ -205,20 +210,22 @@ class Podcast extends BaseController
             'image' => download_file($nsItunes->image->attributes()),
             'language' => $this->request->getPost('language'),
             'category_id' => $this->request->getPost('category'),
-            'explicit' => empty($nsItunes->explicit)
-                ? false
-                : $nsItunes->explicit == 'yes',
-            'author' => $nsItunes->author,
+            'parental_advisory' => empty($nsItunes->explicit)
+                ? null
+                : (in_array($nsItunes->explicit, ['yes', 'true'])
+                    ? 'explicit'
+                    : null),
             'owner_name' => $nsItunes->owner->name,
             'owner_email' => $nsItunes->owner->email,
+            'publisher' => $nsItunes->author,
             'type' => empty($nsItunes->type) ? 'episodic' : $nsItunes->type,
             'copyright' => $feed->channel[0]->copyright,
             'block' => empty($nsItunes->block)
                 ? false
-                : $nsItunes->block == 'yes',
+                : $nsItunes->block === 'yes',
             'complete' => empty($nsItunes->complete)
                 ? false
-                : $nsItunes->complete == 'yes',
+                : $nsItunes->complete === 'yes',
             'created_by' => user(),
             'updated_by' => user(),
         ]);
@@ -229,7 +236,7 @@ class Podcast extends BaseController
         $db->transStart();
 
         if (!($newPodcastId = $podcastModel->insert($podcast, true))) {
-            $db->transComplete();
+            $db->transRollback();
             return redirect()
                 ->back()
                 ->withInput()
@@ -265,7 +272,7 @@ class Podcast extends BaseController
             );
 
             $slug = slugify(
-                $this->request->getPost('slug_field') == 'title'
+                $this->request->getPost('slug_field') === 'title'
                     ? $item->title
                     : basename($item->link)
             );
@@ -285,22 +292,23 @@ class Podcast extends BaseController
                 'slug' => $slug,
                 'enclosure' => download_file($item->enclosure->attributes()),
                 'description' => $converter->convert(
-                    $this->request->getPost('description_field') == 'summary'
+                    $this->request->getPost('description_field') === 'summary'
                         ? $nsItunes->summary
-                        : ($this->request->getPost('description_field') ==
+                        : ($this->request->getPost('description_field') ===
                         'subtitle_summary'
-                            ? '<h3>' .
-                                $nsItunes->subtitle .
-                                "</h3>\n" .
-                                $nsItunes->summary
+                            ? $nsItunes->subtitle . "\n" . $nsItunes->summary
                             : $item->description)
                 ),
                 'image' => empty($nsItunes->image->attributes())
                     ? null
                     : download_file($nsItunes->image->attributes()),
-                'explicit' => $nsItunes->explicit == 'yes',
+                'explicit' => $nsItunes->explicit
+                    ? (in_array($nsItunes->explicit, ['yes', 'true'])
+                        ? 'explicit'
+                        : null)
+                    : null,
                 'number' =>
-                    $this->request->getPost('force_renumber') == 'yes'
+                    $this->request->getPost('force_renumber') === 'yes'
                         ? $itemNumber
                         : $nsItunes->episode,
                 'season_number' => empty(
@@ -313,7 +321,7 @@ class Podcast extends BaseController
                     : $nsItunes->episodeType,
                 'block' => empty($nsItunes->block)
                     ? false
-                    : $nsItunes->block == 'yes',
+                    : $nsItunes->block === 'yes',
                 'created_by' => user(),
                 'updated_by' => user(),
             ]);
@@ -324,8 +332,8 @@ class Podcast extends BaseController
 
             $episodeModel = new EpisodeModel();
 
-            if (!$episodeModel->save($newEpisode)) {
-                // FIX: What shall we do?
+            if (!$episodeModel->insert($newEpisode)) {
+                // FIXME: What shall we do?
                 return redirect()
                     ->back()
                     ->withInput()
@@ -335,7 +343,7 @@ class Podcast extends BaseController
 
         $db->transComplete();
 
-        return redirect()->route('podcast-list');
+        return redirect()->route('podcast-view', [$newPodcastId]);
     }
 
     public function edit()
@@ -372,9 +380,6 @@ class Podcast extends BaseController
         $this->podcast->title = $this->request->getPost('title');
         $this->podcast->name = $this->request->getPost('name');
         $this->podcast->description = $this->request->getPost('description');
-        $this->podcast->episode_description_footer = $this->request->getPost(
-            'episode_description_footer'
-        );
 
         $image = $this->request->getFile('image');
         if ($image->isValid()) {
@@ -382,29 +387,50 @@ class Podcast extends BaseController
         }
         $this->podcast->language = $this->request->getPost('language');
         $this->podcast->category_id = $this->request->getPost('category');
-        $this->podcast->explicit = $this->request->getPost('explicit') == 'yes';
-        $this->podcast->author = $this->request->getPost('author');
+        $this->podcast->parental_advisory =
+            $this->request->getPost('parental_advisory') !== 'undefined'
+                ? $this->request->getPost('parental_advisory')
+                : null;
+        $this->podcast->publisher = $this->request->getPost('publisher');
         $this->podcast->owner_name = $this->request->getPost('owner_name');
         $this->podcast->owner_email = $this->request->getPost('owner_email');
         $this->podcast->type = $this->request->getPost('type');
         $this->podcast->copyright = $this->request->getPost('copyright');
-        $this->podcast->block = $this->request->getPost('block') == 'yes';
-        $this->podcast->complete = $this->request->getPost('complete') == 'yes';
-        $this->podcast->custom_html_head = $this->request->getPost(
-            'custom_html_head'
-        );
+        $this->podcast->block = $this->request->getPost('block') === 'yes';
+        $this->podcast->complete =
+            $this->request->getPost('complete') === 'yes';
         $this->updated_by = user();
 
-        $podcastModel = new PodcastModel();
+        $db = \Config\Database::connect();
+        $db->transStart();
 
-        if (!$podcastModel->save($this->podcast)) {
+        $podcastModel = new PodcastModel();
+        if (!$podcastModel->update($this->podcast->id, $this->podcast)) {
+            $db->transRollback();
             return redirect()
                 ->back()
                 ->withInput()
                 ->with('errors', $podcastModel->errors());
         }
 
-        return redirect()->route('podcast-list');
+        // set Podcast categories
+        (new CategoryModel())->setPodcastCategories(
+            $this->podcast->id,
+            $this->request->getPost('other_categories')
+        );
+
+        $db->transComplete();
+
+        return redirect()->route('podcast-view', [$this->podcast->id]);
+    }
+
+    public function latestEpisodes(int $limit)
+    {
+        $episodes = (new EpisodeModel())
+            ->orderBy('created_at', 'desc')
+            ->findAll($limit);
+
+        return view('admin/podcast/latest_episodes', ['episodes' => $episodes]);
     }
 
     public function delete()

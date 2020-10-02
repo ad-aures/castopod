@@ -9,16 +9,15 @@
 use Config\Services;
 
 /**
- * Returns the inline svg icon
+ * Renders the breadcrumb navigation through the Breadcrumb service
  *
- * @param  string $name name of the icon file without the .svg extension
- * @param  string $class to be added to the svg string
+ * @param  string $class to be added to the breadcrumb nav
  * @return string html breadcrumb
  */
-function render_breadcrumb()
+function render_breadcrumb($class = null)
 {
     $breadcrumb = Services::breadcrumb();
-    return $breadcrumb->render();
+    return $breadcrumb->render($class);
 }
 
 function replace_breadcrumb_params($newParams)

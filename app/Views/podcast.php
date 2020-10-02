@@ -1,7 +1,7 @@
 <?= helper('page') ?>
 
 <!DOCTYPE html>
-<html lang="<?= $podcast->language ?>">
+<html lang="<?= service('request')->getLocale() ?>">
 
 <head>
     <meta charset="UTF-8"/>
@@ -10,7 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
     <link rel="stylesheet" href="/assets/index.css"/>
-    <?= $podcast->custom_html_head ?>
 </head>
 
 <body class="flex flex-col min-h-screen">
@@ -24,10 +23,10 @@
                     <div class="flex items-center mb-4">
                         <address>
                             <?= lang('Podcast.by', [
-                                'author' => $podcast->author,
+                                'publisher' => $podcast->publisher,
                             ]) ?>
                         </address>
-                        <?= $podcast->explicit
+                        <?= $podcast->parental_advisory === 'explicit'
                             ? '<span class="px-1 ml-2 text-xs font-semibold leading-tight tracking-wider uppercase border-2 border-gray-700 rounded md:border-white">' .
                                 lang('Common.explicit') .
                                 '</span>'
@@ -48,15 +47,26 @@
                         </a>
                         <?php endforeach; ?>
                     </div>
-                        <div class="mb-2 opacity-75">
+                    <div class="mb-2 opacity-75">
                         <?= $podcast->description_html ?>
                     </div>
-                    <span class="px-2 py-1 text-sm text-gray-700 bg-gray-200 rounded">
+                    <span class="px-2 py-1 mb-2 mr-2 text-sm text-gray-700 bg-gray-200 rounded">
                         <?= lang(
                             'Podcast.category_options.' .
                                 $podcast->category->code
                         ) ?>
                     </span>
+                    <?php foreach (
+                        $podcast->other_categories
+                        as $other_category
+                    ): ?>
+                        <span class="px-2 py-1 mb-2 mr-2 text-sm text-gray-700 bg-gray-200 rounded">
+                            <?= lang(
+                                'Podcast.category_options.' .
+                                    $other_category->code
+                            ) ?>
+                        </span>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </header>

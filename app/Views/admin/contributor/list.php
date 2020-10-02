@@ -2,47 +2,67 @@
 
 <?= $this->section('title') ?>
 <?= lang('Contributor.podcast_contributors') ?>
-<a class="inline-flex items-center px-2 py-1 mb-2 ml-2 text-sm text-white bg-green-500 rounded shadow-xs outline-none hover:bg-green-600 focus:shadow-outline" href="<?= route_to(
-    'contributor-add',
-    $podcast->id
-) ?>">
-<?= icon('add', 'mr-2') ?>
-<?= lang('Contributor.add') ?></a>
+<?= $this->endSection() ?>
+
+<?= $this->section('pageTitle') ?>
+<?= lang('Contributor.podcast_contributors') ?>
+<?= $this->endSection() ?>
+
+<?= $this->section('headerRight') ?>
+<?= button(lang('Contributor.add'), route_to('contributor-add', $podcast->id), [
+    'variant' => 'primary',
+    'iconLeft' => 'add',
+]) ?>
 <?= $this->endSection() ?>
 
 
 <?= $this->section('content') ?>
 
-<table class="table-auto">
-    <thead>
-        <tr>
-            <th class="px-4 py-2">Username</th>
-            <th class="px-4 py-2">Role</th>
-            <th class="px-4 py-2">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach ($podcast->contributors as $contributor): ?>
-        <tr>
-            <td class="px-4 py-2 border"><?= $contributor->username ?></td>
-            <td class="px-4 py-2 border"><?= lang(
-                'Contributor.roles.' . $contributor->podcast_role
-            ) ?></td>
-            <td class="px-4 py-2 border">
-                <a class="inline-flex px-2 py-1 mb-2 text-sm text-white bg-teal-700 hover:bg-teal-800" href="<?= route_to(
-                    'contributor-edit',
-                    $podcast->id,
-                    $contributor->id
-                ) ?>"><?= lang('Contributor.edit') ?></a>
-                <a class="inline-flex px-2 py-1 text-sm text-white bg-red-700 hover:bg-red-800" href="<?= route_to(
-                    'contributor-remove',
-                    $podcast->id,
-                    $contributor->id
-                ) ?>"><?= lang('Contributor.remove') ?></a>
-            </td>
-        </tr>
-        <?php endforeach; ?>
-    </tbody>
-</table>
+<?= data_table(
+    [
+        [
+            'header' => lang('Contributor.list.username'),
+            'cell' => function ($contributor) {
+                return $contributor->username;
+            },
+        ],
+        [
+            'header' => lang('Contributor.list.role'),
+            'cell' => function ($contributor) {
+                return lang('Contributor.roles.' . $contributor->podcast_role);
+            },
+        ],
+        [
+            'header' => lang('Common.actions'),
+            'cell' => function ($contributor, $podcast) {
+                return button(
+                    lang('Contributor.edit'),
+                    route_to(
+                        'contributor-edit',
+                        $podcast->id,
+                        $contributor->id
+                    ),
+                    [
+                        'variant' => 'info',
+                        'size' => 'small',
+                    ],
+                    ['class' => 'mr-2']
+                ) .
+                    button(
+                        lang('Contributor.remove'),
+                        route_to(
+                            'contributor-remove',
+                            $podcast->id,
+                            $contributor->id
+                        ),
+                        ['variant' => 'danger', 'size' => 'small'],
+                        ['class' => 'mr-2']
+                    );
+            },
+        ],
+    ],
+    $podcast->contributors,
+    $podcast
+) ?>
 
 <?= $this->endSection() ?>

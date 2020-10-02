@@ -70,10 +70,11 @@ class AddEpisodes extends Migration
                 'constraint' => 1024,
                 'null' => true,
             ],
-            'explicit' => [
-                'type' => 'TINYINT',
-                'constraint' => 1,
-                'default' => 0,
+            'parental_advisory' => [
+                'type' => 'ENUM',
+                'constraint' => ['clean', 'explicit'],
+                'null' => true,
+                'default' => null,
             ],
             'number' => [
                 'type' => 'INT',

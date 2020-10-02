@@ -45,8 +45,14 @@ class Episode extends BaseController
 
     public function list()
     {
+        $episodes = (new EpisodeModel())
+            ->where('podcast_id', $this->podcast->id)
+            ->orderBy('created_at', 'desc');
+
         $data = [
             'podcast' => $this->podcast,
+            'episodes' => $episodes->paginate(10),
+            'pager' => $episodes->pager,
         ];
 
         replace_breadcrumb_params([
@@ -57,7 +63,10 @@ class Episode extends BaseController
 
     public function view()
     {
-        $data = ['episode' => $this->episode];
+        $data = [
+            'podcast' => $this->podcast,
+            'episode' => $this->episode,
+        ];
 
         replace_breadcrumb_params([
             0 => $this->podcast->title,
@@ -105,7 +114,10 @@ class Episode extends BaseController
             'enclosure' => $this->request->getFile('enclosure'),
             'description' => $this->request->getPost('description'),
             'image' => $this->request->getFile('image'),
-            'explicit' => $this->request->getPost('explicit') == 'yes',
+            'parental_advisory' =>
+                $this->request->getPost('parental_advisory') !== 'undefined'
+                    ? $this->request->getPost('parental_advisory')
+                    : null,
             'number' => $this->request->getPost('episode_number'),
             'season_number' => $this->request->getPost('season_number'),
             'type' => $this->request->getPost('type'),
@@ -120,14 +132,33 @@ class Episode extends BaseController
 
         $episodeModel = new EpisodeModel();
 
-        if (!$episodeModel->save($newEpisode)) {
+        if (!($newEpisodeId = $episodeModel->insert($newEpisode, true))) {
             return redirect()
                 ->back()
                 ->withInput()
                 ->with('errors', $episodeModel->errors());
         }
 
-        return redirect()->route('episode-list', [$this->podcast->id]);
+        // update podcast's episode_description_footer if changed
+        $podcastModel = new PodcastModel();
+
+        if ($this->podcast->hasChanged('episode_description_footer')) {
+            $this->podcast->episode_description_footer = $this->request->getPost(
+                'description_footer'
+            );
+
+            if (!$podcastModel->update($this->podcast->id, $this->podcast)) {
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->with('errors', $podcastModel->errors());
+            }
+        }
+
+        return redirect()->route('episode-view', [
+            $this->podcast->id,
+            $newEpisodeId,
+        ]);
     }
 
     public function edit()
@@ -135,6 +166,7 @@ class Episode extends BaseController
         helper(['form']);
 
         $data = [
+            'podcast' => $this->podcast,
             'episode' => $this->episode,
         ];
 
@@ -167,7 +199,10 @@ class Episode extends BaseController
         $this->episode->title = $this->request->getPost('title');
         $this->episode->slug = $this->request->getPost('slug');
         $this->episode->description = $this->request->getPost('description');
-        $this->episode->explicit = $this->request->getPost('explicit') == 'yes';
+        $this->episode->parental_advisory =
+            $this->request->getPost('parental_advisory') !== 'undefined'
+                ? $this->request->getPost('parental_advisory')
+                : null;
         $this->episode->number = $this->request->getPost('episode_number');
         $this->episode->season_number = $this->request->getPost('season_number')
             ? $this->request->getPost('season_number')
@@ -191,14 +226,32 @@ class Episode extends BaseController
 
         $episodeModel = new EpisodeModel();
 
-        if (!$episodeModel->save($this->episode)) {
+        if (!$episodeModel->update($this->episode->id, $this->episode)) {
             return redirect()
                 ->back()
                 ->withInput()
                 ->with('errors', $episodeModel->errors());
         }
 
-        return redirect()->route('episode-list', [$this->podcast->id]);
+        // update podcast's episode_description_footer if changed
+        $this->podcast->episode_description_footer = $this->request->getPost(
+            'description_footer'
+        );
+
+        if ($this->podcast->hasChanged('episode_description_footer')) {
+            $podcastModel = new PodcastModel();
+            if (!$podcastModel->update($this->podcast->id, $this->podcast)) {
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->with('errors', $podcastModel->errors());
+            }
+        }
+
+        return redirect()->route('episode-view', [
+            $this->podcast->id,
+            $this->episode->id,
+        ]);
     }
 
     public function delete()

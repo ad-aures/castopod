@@ -4,6 +4,10 @@
 <?= lang('Contributor.add_contributor', [$podcast->title]) ?>
 <?= $this->endSection() ?>
 
+<?= $this->section('pageTitle') ?>
+<?= lang('Contributor.add_contributor', [$podcast->title]) ?>
+<?= $this->endSection() ?>
+
 
 <?= $this->section('content') ?>
 
@@ -26,11 +30,12 @@
     'required' => 'required',
 ]) ?>
 
-<?= form_button([
-    'content' => lang('Contributor.form.submit_add'),
-    'type' => 'submit',
-    'class' => 'self-end px-4 py-2 bg-gray-200',
-]) ?>
+<?= button(
+    lang('Contributor.form.submit_add'),
+    null,
+    ['variant' => 'primary'],
+    ['type' => 'submit', 'class' => 'self-end']
+) ?>
 
 <?= form_close() ?>
 

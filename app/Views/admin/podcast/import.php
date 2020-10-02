@@ -4,34 +4,58 @@
 <?= lang('Podcast.import') ?>
 <?= $this->endSection() ?>
 
+<?= $this->section('pageTitle') ?>
+<?= lang('Podcast.import') ?>
+<?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
 
-<?= form_open_multipart(route_to('rzqr'), [
+<?= form_open_multipart(route_to('podcast-import'), [
     'method' => 'post',
-    'class' => 'flex flex-col max-w-md',
+    'class' => 'flex flex-col items-start',
 ]) ?>
 <?= csrf_field() ?>
 
-<?= form_label(lang('Podcast.form_import.name'), 'name') ?>
+<?= form_section(
+    lang('PodcastImport.old_podcast_section_title'),
+    lang('PodcastImport.old_podcast_section_subtitle')
+) ?>
+
+<?= form_label(
+    lang('PodcastImport.imported_feed_url'),
+    'imported_feed_url',
+    [],
+    lang('PodcastImport.imported_feed_url_hint')
+) ?>
+<?= form_input([
+    'id' => 'imported_feed_url',
+    'name' => 'imported_feed_url',
+    'class' => 'form-input',
+    'value' => old('imported_feed_url'),
+    'placeholder' => 'https://...',
+    'type' => 'url',
+    'required' => 'required',
+]) ?>
+
+<?= form_section_close() ?>
+
+
+<?= form_section(
+    lang('PodcastImport.new_podcast_section_title'),
+    lang('PodcastImport.new_podcast_section_subtitle')
+) ?>
+
+<?= form_label(
+    lang('PodcastImport.name'),
+    'name',
+    [],
+    lang('PodcastImport.name_hint')
+) ?>
 <?= form_input([
     'id' => 'name',
     'name' => 'name',
     'class' => 'form-input mb-4',
     'value' => old('name'),
-    'required' => 'required',
-]) ?>
-
-<?= form_label(
-    lang('Podcast.form_import.imported_feed_url'),
-    'imported_feed_url'
-) ?>
-<?= form_input([
-    'id' => 'imported_feed_url',
-    'name' => 'imported_feed_url',
-    'class' => 'form-input mb-4',
-    'value' => old('imported_feed_url'),
-    'type' => 'url',
     'required' => 'required',
 ]) ?>
 
@@ -49,38 +73,50 @@
     'required' => 'required',
 ]) ?>
 
+<?= form_section_close() ?>
+
+
+<?= form_section(
+    lang('PodcastImport.advanced_params_section_title'),
+    lang('PodcastImport.advanced_params_section_subtitle')
+) ?>
+
 <?= form_fieldset('', ['class' => 'flex flex-col mb-4']) ?>
-    <legend><?= lang('Podcast.form_import.slug_field.label') ?></legend>
+    <legend><?= lang('PodcastImport.slug_field.label') ?></legend>
     <label for="link" class="inline-flex items-center">
         <?= form_radio(
-            ['id' => 'link', 'name' => 'slug_field', 'class' => 'form-radio'],
+            [
+                'id' => 'link',
+                'name' => 'slug_field',
+                'class' => 'form-radio text-green-500',
+            ],
             'link',
             old('slug_field') ? old('slug_field') == 'link' : true
         ) ?>
-        <span class="ml-2"><?= lang(
-            'Podcast.form_import.slug_field.link'
-        ) ?></span>
+        <span class="ml-2"><?= lang('PodcastImport.slug_field.link') ?></span>
     </label>
     <label for="title" class="inline-flex items-center">
         <?= form_radio(
-            ['id' => 'title', 'name' => 'slug_field', 'class' => 'form-radio'],
+            [
+                'id' => 'title',
+                'name' => 'slug_field',
+                'class' => 'form-radio text-green-500',
+            ],
             'title',
             old('slug_field') ? old('slug_field') == 'title' : false
         ) ?>
-        <span class="ml-2"><?= lang(
-            'Podcast.form_import.slug_field.title'
-        ) ?></span>
+        <span class="ml-2"><?= lang('PodcastImport.slug_field.title') ?></span>
     </label>
 <?= form_fieldset_close() ?>
 
 <?= form_fieldset('', ['class' => 'flex flex-col mb-4']) ?>
-    <legend><?= lang('Podcast.form_import.description_field.label') ?></legend>
+    <legend><?= lang('PodcastImport.description_field.label') ?></legend>
     <label for="description" class="inline-flex items-center">
         <?= form_radio(
             [
                 'id' => 'description',
                 'name' => 'description_field',
-                'class' => 'form-radio',
+                'class' => 'form-radio text-green-500',
             ],
             'description',
             old('description_field')
@@ -88,7 +124,7 @@
                 : true
         ) ?>
         <span class="ml-2"><?= lang(
-            'Podcast.form_import.description_field.description'
+            'PodcastImport.description_field.description'
         ) ?></span>
     </label>
     <label for="summary" class="inline-flex items-center">
@@ -96,7 +132,7 @@
             [
                 'id' => 'summary',
                 'name' => 'description_field',
-                'class' => 'form-radio',
+                'class' => 'form-radio text-green-500',
             ],
             'summary',
             old('description_field')
@@ -104,7 +140,7 @@
                 : false
         ) ?>
         <span class="ml-2"><?= lang(
-            'Podcast.form_import.description_field.summary'
+            'PodcastImport.description_field.summary'
         ) ?></span>
     </label>
     <label for="subtitle_summary" class="inline-flex items-center">
@@ -112,7 +148,7 @@
             [
                 'id' => 'subtitle_summary',
                 'name' => 'description_field',
-                'class' => 'form-radio',
+                'class' => 'form-radio text-green-500',
             ],
             'subtitle_summary',
             old('description_field')
@@ -120,7 +156,7 @@
                 : false
         ) ?>
         <span class="ml-2"><?= lang(
-            'Podcast.form_import.description_field.subtitle_summary'
+            'PodcastImport.description_field.subtitle_summary'
         ) ?></span>
     </label>
 <?= form_fieldset_close() ?>
@@ -131,15 +167,21 @@
         [
             'id' => 'force_renumber',
             'name' => 'force_renumber',
-            'class' => 'form-checkbox',
+            'class' => 'form-checkbox text-green-500',
         ],
         'yes',
         old('force_renumber', false)
     ) ?>
-    <span class="ml-2"><?= lang('Podcast.form_import.force_renumber') ?></span>
+    <span class="ml-2"><?= lang('PodcastImport.force_renumber') ?></span>
+    <?= hint_tooltip(lang('PodcastImport.force_renumber_hint'), 'ml-1') ?>
 </label>
 
-<?= form_label(lang('Podcast.form_import.season_number'), 'season_number') ?>
+<?= form_label(
+    lang('PodcastImport.season_number'),
+    'season_number',
+    [],
+    lang('PodcastImport.season_number_hint')
+) ?>
 <?= form_input([
     'id' => 'season_number',
     'name' => 'season_number',
@@ -148,7 +190,12 @@
     'type' => 'number',
 ]) ?>
 
-<?= form_label(lang('Podcast.form_import.max_episodes'), 'max_episodes') ?>
+<?= form_label(
+    lang('PodcastImport.max_episodes'),
+    'max_episodes',
+    [],
+    lang('PodcastImport.max_episodes_hint')
+) ?>
 <?= form_input([
     'id' => 'max_episodes',
     'name' => 'max_episodes',
@@ -157,11 +204,14 @@
     'type' => 'number',
 ]) ?>
 
-<?= form_button([
-    'content' => lang('Podcast.form_import.submit_import'),
-    'type' => 'submit',
-    'class' => 'self-end px-4 py-2 bg-gray-200',
-]) ?>
+<?= form_section_close() ?>
+
+<?= button(
+    lang('PodcastImport.submit'),
+    null,
+    ['variant' => 'primary'],
+    ['type' => 'submit', 'class' => 'self-end']
+) ?>
 
 <?= form_close() ?>
 

@@ -75,7 +75,7 @@ class Breadcrumb
      *
      * @return string
      */
-    public function render()
+    public function render($class = null)
     {
         $listItems = '';
         $keys = array_keys($this->links);
@@ -97,7 +97,9 @@ class Breadcrumb
 
         return '<nav aria-label="' .
             lang('Breadcrumb.label') .
-            '"><ol class="breadcrumb">' .
+            '"><ol class="breadcrumb ' .
+            $class .
+            '">' .
             $listItems .
             '</ol></nav>';
     }

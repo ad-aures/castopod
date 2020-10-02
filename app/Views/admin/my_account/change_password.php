@@ -31,11 +31,12 @@
     'autocomplete' => 'new-password',
 ]) ?>
 
-<?= form_button([
-    'content' => lang('User.form.submit_password_change'),
-    'type' => 'submit',
-    'class' => 'self-end px-4 py-2 bg-gray-200',
-]) ?>
+<?= button(
+    lang('User.form.submit_password_change'),
+    null,
+    ['variant' => 'primary'],
+    ['type' => 'submit', 'class' => 'self-end']
+) ?>
 
 <?= form_close() ?>
 

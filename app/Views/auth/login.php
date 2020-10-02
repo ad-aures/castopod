@@ -28,11 +28,13 @@
     'required' => 'required',
 ]) ?>
 
-<?= form_button([
-    'content' => lang('Auth.loginAction'),
-    'class' => 'px-4 py-2 ml-auto border',
-    'type' => 'submit',
-]) ?>
+
+<?= button(
+    lang('Auth.loginAction'),
+    null,
+    ['variant' => 'primary'],
+    ['type' => 'submit', 'class' => 'self-end']
+) ?>
 
 <?= form_close() ?>
 

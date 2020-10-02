@@ -14,6 +14,10 @@ return [
     'edit_role' => 'Update role for {0}',
     'edit' => 'Edit',
     'remove' => 'Remove',
+    'list' => [
+        'username' => 'Username',
+        'role' => 'Role',
+    ],
     'form' => [
         'user' => 'User',
         'role' => 'Role',

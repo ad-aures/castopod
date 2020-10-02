@@ -7,6 +7,7 @@
  */
 
 return [
+    'page' => 'Page',
     'all_pages' => 'All pages',
     'create' => 'New page',
     'go_to_page' => 'Go to page',

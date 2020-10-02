@@ -7,17 +7,17 @@
  */
 
 return [
+    'go_to_website' => 'Go to website',
     'dashboard' => 'Dashboard',
-    'podcasts' => 'Podcasts',
-    'users' => 'Users',
-    'pages' => 'Pages',
     'admin' => 'Home',
+    'podcasts' => 'Podcasts',
     'podcast-list' => 'All podcasts',
     'podcast-create' => 'New podcast',
     'podcast-import' => 'Import a podcast',
+    'users' => 'Users',
     'user-list' => 'All users',
     'user-create' => 'New user',
+    'pages' => 'Pages',
     'page-list' => 'All pages',
     'page-create' => 'New Page',
-    'go_to_website' => 'Go to website',
 ];

@@ -21,6 +21,9 @@
         <?= $this->renderSection('content') ?>
     </main>
     <footer class="container px-2 py-4 mx-auto text-sm text-right border-t">
-        Powered by <a class="underline hover:no-underline" href="https://castopod.org" target="_blank" rel="noreferrer noopener">Castopod</a>, a <a class="underline hover:no-underline" href="https://podlibre.org/" target="_blank" rel="noreferrer noopener">Podlibre</a> initiative.
+        <small><?= lang('Common.powered_by', [
+            'castopod' =>
+                '<a class="underline hover:no-underline" href="https://castopod.org" target="_blank" rel="noreferrer noopener">Castopod</a>',
+        ]) ?></small>
     </footer>
 </body>

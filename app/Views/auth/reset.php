@@ -42,11 +42,12 @@
     'autocomplete' => 'new-password',
 ]) ?>
 
-<?= form_button([
-    'content' => lang('Auth.resetPassword'),
-    'class' => 'px-4 py-2 ml-auto border',
-    'type' => 'submit',
-]) ?>
+<?= button(
+    lang('Auth.resetPassword'),
+    null,
+    ['variant' => 'primary'],
+    ['type' => 'submit', 'class' => 'self-end']
+) ?>
 
 <?= form_close() ?>
 

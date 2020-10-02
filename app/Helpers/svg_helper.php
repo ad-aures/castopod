@@ -13,16 +13,17 @@
  * @param  string $class to be added to the svg string
  * @return string svg contents
  */
-function icon($name, $class = null)
+function icon(string $name, string $class = '')
 {
     $svg_contents = file_get_contents('assets/icons/' . $name . '.svg');
-    if ($class) {
+    if ($class !== '') {
         $svg_contents = str_replace(
             '<svg',
             '<svg class="' . $class . '"',
             $svg_contents
         );
     }
+
     return $svg_contents;
 }
 

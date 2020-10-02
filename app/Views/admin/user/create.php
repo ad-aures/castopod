@@ -4,12 +4,14 @@
 <?= lang('User.create') ?>
 <?= $this->endSection() ?>
 
+<?= $this->section('pageTitle') ?>
+<?= lang('User.create') ?>
+<?= $this->endSection() ?>
+
 
 <?= $this->section('content') ?>
 
-<?= form_open(route_to('user-create'), [
-    'class' => 'flex flex-col max-w-sm',
-]) ?>
+<?= form_open(route_to('user-create'), ['class' => 'flex flex-col max-w-sm']) ?>
 <?= csrf_field() ?>
 
 <?= form_label(lang('User.form.email'), 'email') ?>
@@ -33,16 +35,18 @@
 <?= form_input([
     'id' => 'password',
     'name' => 'password',
+
     'class' => 'form-input mb-4',
     'type' => 'password',
     'autocomplete' => 'new-password',
 ]) ?>
 
-<?= form_button([
-    'content' => lang('User.form.submit_create'),
-    'type' => 'submit',
-    'class' => 'self-end px-4 py-2 bg-gray-200',
-]) ?>
+<?= button(
+    lang('User.form.submit_create'),
+    null,
+    ['variant' => 'primary'],
+    ['type' => 'submit', 'class' => 'self-end']
+) ?>
 
 <?= form_close() ?>
 

@@ -59,7 +59,7 @@ class ProseMirrorView {
         }
       },
       attributes: {
-        class: "prose-sm px-3 py-2 overflow-y-auto",
+        class: "prose-sm px-3 py-2 overflow-y-auto focus:shadow-outline",
         style: "min-height: 200px; max-height: 500px",
       },
     });
@@ -95,12 +95,22 @@ const MarkdownEditor = (): void => {
       "px-2",
       "bg-white",
       "border",
-      "text-xs"
+      "text-xs",
+      "outline-none",
+      "focus:shadow-outline"
     );
     wysiwygBtn.setAttribute("type", "button");
     wysiwygBtn.innerHTML = "Wysiwyg";
     const markdownBtn = document.createElement("button");
-    markdownBtn.classList.add("py-1", "px-2", "bg-white", "border", "text-xs");
+    markdownBtn.classList.add(
+      "py-1",
+      "px-2",
+      "bg-white",
+      "border",
+      "text-xs",
+      "outline-none",
+      "focus:shadow-outline"
+    );
     markdownBtn.setAttribute("type", "button");
     markdownBtn.innerHTML = "Markdown";
 

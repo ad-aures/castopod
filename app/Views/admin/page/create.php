@@ -4,6 +4,10 @@
 <?= lang('Page.create') ?>
 <?= $this->endSection() ?>
 
+<?= $this->section('pageTitle') ?>
+<?= lang('Page.create') ?>
+<?= $this->endSection() ?>
+
 
 <?= $this->section('content') ?>
 
@@ -46,11 +50,13 @@
     ) ?>
 </div>
 
-<?= form_button([
-    'content' => lang('Page.form.submit_create'),
-    'type' => 'submit',
-    'class' => 'self-end px-4 py-2 bg-gray-200',
-]) ?>
+
+<?= button(
+    lang('Page.form.submit_create'),
+    null,
+    ['variant' => 'primary'],
+    ['type' => 'submit', 'class' => 'self-end']
+) ?>
 
 <?= form_close() ?>
 

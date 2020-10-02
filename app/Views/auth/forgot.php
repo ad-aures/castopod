@@ -22,11 +22,12 @@
     'required' => 'required',
 ]) ?>
 
-<?= form_button([
-    'content' => lang('Auth.sendInstructions'),
-    'type' => 'submit',
-    'class' => 'px-4 py-2 ml-auto border',
-]) ?>
+<?= button(
+    lang('Auth.sendInstructions'),
+    null,
+    ['variant' => 'primary'],
+    ['type' => 'submit', 'class' => 'self-end']
+) ?>
 
 <?= form_close() ?>
 

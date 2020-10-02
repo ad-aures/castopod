@@ -7,7 +7,6 @@
  */
 
 use App\Libraries\SimpleRSSElement;
-use App\Models\CategoryModel;
 use CodeIgniter\I18n\Time;
 
 /**
@@ -18,13 +17,7 @@ use CodeIgniter\I18n\Time;
  */
 function get_rss_feed($podcast)
 {
-    $category_model = new CategoryModel();
-
     $episodes = $podcast->episodes;
-
-    $podcast_category = $category_model
-        ->where('id', $podcast->category_id)
-        ->first();
 
     $itunes_namespace = 'http://www.itunes.com/dtds/podcast-1.0.dtd';
 
@@ -60,39 +53,20 @@ function get_rss_feed($podcast)
     $itunes_image->addAttribute('href', $podcast->image->url);
     $channel->addChild('language', $podcast->language);
 
-    $itunes_category = $channel->addChild('category', null, $itunes_namespace);
-    $itunes_category->addAttribute(
-        'text',
-        $podcast_category->parent
-            ? $podcast_category->parent->apple_category
-            : $podcast_category->apple_category
-    );
-
-    if ($podcast_category->parent) {
-        $itunes_category_child = $itunes_category->addChild(
-            'category',
-            null,
-            $itunes_namespace
-        );
-        $itunes_category_child->addAttribute(
-            'text',
-            $podcast_category->apple_category
-        );
-        $channel->addChild(
-            'category',
-            $podcast_category->parent->apple_category
-        );
+    // set main category first, then other categories as apple
+    add_category_tag($channel, $podcast->category);
+    foreach ($podcast->other_categories as $other_category) {
+        add_category_tag($channel, $other_category);
     }
-    $channel->addChild('category', $podcast_category->apple_category);
 
     $channel->addChild(
         'explicit',
-        $podcast->explicit ? 'true' : 'false',
+        $podcast->parental_advisory === 'explicit' ? 'true' : 'false',
         $itunes_namespace
     );
 
-    $podcast->author &&
-        $channel->addChild('author', $podcast->author, $itunes_namespace);
+    $podcast->publisher &&
+        $channel->addChild('author', $podcast->publisher, $itunes_namespace);
     $channel->addChild('link', $podcast->link);
 
     $owner = $channel->addChild('owner', null, $itunes_namespace);
@@ -137,11 +111,13 @@ function get_rss_feed($podcast)
             $itunes_namespace
         );
         $episode_itunes_image->addAttribute('href', $episode->image->feed_url);
-        $item->addChild(
-            'explicit',
-            $episode->explicit ? 'true' : 'false',
-            $itunes_namespace
-        );
+
+        $episode->parental_advisory &&
+            $item->addChild(
+                'explicit',
+                $episode->parental_advisory === 'explicit' ? 'true' : 'false',
+                $itunes_namespace
+            );
 
         $item->addChild('episode', $episode->number, $itunes_namespace);
         $episode->season_number &&
@@ -156,4 +132,36 @@ function get_rss_feed($podcast)
     }
 
     return $rss->asXML();
+}
+
+/**
+ * Adds <itunes:category> and <category> tags to node for a given category
+ *
+ * @param \SimpleXMLElement $node
+ * @param \App\Entities\Category $category
+ *
+ * @return void
+ */
+function add_category_tag($node, $category)
+{
+    $itunes_namespace = 'http://www.itunes.com/dtds/podcast-1.0.dtd';
+
+    $itunes_category = $node->addChild('category', null, $itunes_namespace);
+    $itunes_category->addAttribute(
+        'text',
+        $category->parent
+            ? $category->parent->apple_category
+            : $category->apple_category
+    );
+
+    if ($category->parent) {
+        $itunes_category_child = $itunes_category->addChild(
+            'category',
+            null,
+            $itunes_namespace
+        );
+        $itunes_category_child->addAttribute('text', $category->apple_category);
+        $node->addChild('category', $category->parent->apple_category);
+    }
+    $node->addChild('category', $category->apple_category);
 }

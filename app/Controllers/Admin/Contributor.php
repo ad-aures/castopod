@@ -166,7 +166,7 @@ class Contributor extends BaseController
 
     public function remove()
     {
-        if ($this->podcast->owner_id == $this->user->id) {
+        if ($this->podcast->created_by == $this->user->id) {
             return redirect()
                 ->back()
                 ->with('errors', [

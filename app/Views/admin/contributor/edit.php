@@ -4,6 +4,10 @@
 <?= lang('Contributor.edit_role', [$user->username]) ?>
 <?= $this->endSection() ?>
 
+<?= $this->section('pageTitle') ?>
+<?= lang('Contributor.edit_role', [$user->username]) ?>
+<?= $this->endSection() ?>
+
 
 <?= $this->section('content') ?>
 
@@ -19,11 +23,12 @@
     'required' => 'required',
 ]) ?>
 
-<?= form_button([
-    'content' => lang('Contributor.form.submit_edit'),
-    'type' => 'submit',
-    'class' => 'self-end px-4 py-2 bg-gray-200',
-]) ?>
+<?= button(
+    lang('Contributor.form.submit_edit'),
+    null,
+    ['variant' => 'primary'],
+    ['type' => 'submit', 'class' => 'self-end']
+) ?>
 
 <?= form_close() ?>
 

@@ -66,7 +66,7 @@ class Episode extends Entity
         'enclosure_filesize' => 'integer',
         'description' => 'string',
         'image_uri' => '?string',
-        'explicit' => 'boolean',
+        'parental_advisory' => '?string',
         'number' => '?integer',
         'season_number' => '?integer',
         'type' => 'string',

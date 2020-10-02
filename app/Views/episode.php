@@ -1,6 +1,6 @@
 <?= helper('page') ?>
 <!DOCTYPE html>
-<html lang="<?= $episode->podcast->language ?>">
+<html lang="<?= service('request')->getLocale() ?>">
 
 <head>
     <meta charset="UTF-8"/>
@@ -16,16 +16,16 @@
         <div class="container flex items-start px-2 py-2 mx-auto">
           <img
             class="w-12 h-12 mr-2 rounded cover"
-            src="<?= $episode->podcast->image->thumbnail_url ?>"
-            alt="<?= $episode->podcast->title ?>"
+            src="<?= $podcast->image->thumbnail_url ?>"
+            alt="<?= $podcast->title ?>"
           />
           <a
-            href="<?= route_to('podcast', $episode->podcast->name) ?>"
+            href="<?= route_to('podcast', $podcast->name) ?>"
             class="flex flex-col text-lg leading-tight text-white"
             title="<?= lang('Episode.back_to_podcast') ?>">
-            <?= $episode->podcast->title ?>
+            <?= $podcast->title ?>
             <span class="text-sm text-gray-300">
-                @<?= $episode->podcast->name ?>
+                @<?= $podcast->name ?>
             </span>
           </a>
         </div>
@@ -34,7 +34,7 @@
       <nav class="flex items-center px-2 py-4">
             <?php if ($previousEpisode): ?>
                 <a class="flex items-center text-xs leading-snug text-gray-600 hover:text-gray-900" href="<?= $previousEpisode->link ?>" title="<?= $previousEpisode->title ?>">
-                    <?= icon('arrow-left', 'mr-2') ?>
+                    <?= icon('chevron-left', 'mr-2') ?>
                     <div class="flex flex-col">
                         <?= $previousEpisode->season_number ==
                         $episode->season_number
@@ -53,7 +53,7 @@
                             : lang('Episode.next_season') ?>
                         <span class="w-40 font-semibold truncate"><?= $nextEpisode->title ?></span>
                     </div>
-                    <?= icon('arrow-right', 'ml-2') ?>
+                    <?= icon('chevron-right', 'ml-2') ?>
                 </a>
             <?php endif; ?>
       </nav>
@@ -67,7 +67,7 @@
                 <?php if ($episode->season_number): ?>
                     <a class="mr-1 underline hover:no-underline" href="<?= route_to(
                         'podcast',
-                        $episode->podcast->name
+                        $podcast->name
                     ) .
                         '?season=' .
                         $episode->season_number ?>">
@@ -130,7 +130,7 @@
         <div class="container flex flex-col items-center justify-between mx-auto text-sm md:flex-row ">
             <?= render_page_links('inline-flex mb-4 md:mb-0') ?>
             <div class="flex flex-col items-end text-xs">
-                <p><?= $episode->podcast->copyright ?></p>
+                <p><?= $podcast->copyright ?></p>
                 <p><?= lang('Common.powered_by', [
                     'castopod' =>
                         '<a class="underline hover:no-underline" href="https://castopod.org" target="_blank" rel="noreferrer noopener">Castopod</a>',

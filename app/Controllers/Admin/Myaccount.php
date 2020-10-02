@@ -57,9 +57,8 @@ class MyAccount extends BaseController
         }
 
         user()->password = $this->request->getPost('new_password');
-        $userModel->save(user());
 
-        if (!$userModel->save(user())) {
+        if (!$userModel->update(user()->id, user())) {
             return redirect()
                 ->back()
                 ->withInput()

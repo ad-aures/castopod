@@ -38,6 +38,16 @@ class Podcast extends Entity
     protected $category;
 
     /**
+     * @var \App\Entities\Category[]
+     */
+    protected $other_categories;
+
+    /**
+     * @var integer[]
+     */
+    protected $other_categories_ids;
+
+    /**
      * @var \App\Entities\User[]
      */
     protected $contributors;
@@ -60,8 +70,8 @@ class Podcast extends Entity
         'image_uri' => 'string',
         'language' => 'string',
         'category_id' => 'integer',
-        'explicit' => 'boolean',
-        'author' => '?string',
+        'parental_advisory' => '?string',
+        'publisher' => '?string',
         'owner_name' => '?string',
         'owner_email' => '?string',
         'type' => 'string',
@@ -69,7 +79,6 @@ class Podcast extends Entity
         'block' => 'boolean',
         'complete' => 'boolean',
         'episode_description_footer' => '?string',
-        'custom_html_head' => '?string',
         'created_by' => 'integer',
         'updated_by' => 'integer',
         'imported_feed_url' => '?string',
@@ -224,5 +233,34 @@ class Podcast extends Entity
         }
 
         return $this->platforms;
+    }
+
+    public function getOtherCategories()
+    {
+        if (empty($this->id)) {
+            throw new \RuntimeException(
+                'Podcast must be created before getting other categories.'
+            );
+        }
+
+        if (empty($this->other_categories)) {
+            $this->other_categories = (new CategoryModel())->getPodcastCategories(
+                $this->id
+            );
+        }
+
+        return $this->other_categories;
+    }
+
+    public function getOtherCategoriesIds()
+    {
+        if (empty($this->other_categories_ids)) {
+            $this->other_categories_ids = array_column(
+                $this->getOtherCategories(),
+                'id'
+            );
+        }
+
+        return $this->other_categories_ids;
     }
 }

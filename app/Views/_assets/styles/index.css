@@ -1,3 +1,7 @@
 @import "./tailwind.css";
 @import "./layout.css";
 @import "./breadcrumb.css";
+@import "./multiSelect.css";
+@import "./radioBtn.css";
+@import "./switch.css";
+@import "./enclosureInput.css";

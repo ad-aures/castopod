@@ -10,10 +10,10 @@ const Tooltip = (): void => {
     const tooltipContent = tooltipReference.title;
 
     const tooltip = document.createElement("div");
-    tooltip.setAttribute("id", "tooltip");
+    tooltip.setAttribute("id", "tooltip" + i);
     tooltip.setAttribute(
       "class",
-      "px-2 py-1 text-sm bg-gray-900 text-white rounded"
+      "px-2 py-1 text-sm bg-gray-900 text-white rounded max-w-xs z-50"
     );
     tooltip.innerHTML = tooltipContent;
 
@@ -31,13 +31,13 @@ const Tooltip = (): void => {
 
     const show = () => {
       tooltipReference.removeAttribute("title");
-      tooltipReference.setAttribute("aria-describedby", "tooltip");
+      tooltipReference.setAttribute("aria-describedby", "tooltip" + i);
       document.body.appendChild(tooltip);
       popper.update();
     };
 
     const hide = () => {
-      const element = document.getElementById("tooltip");
+      const element = document.getElementById("tooltip" + i);
       tooltipReference.removeAttribute("aria-describedby");
       tooltipReference.setAttribute("title", tooltipContent);
       if (element) {

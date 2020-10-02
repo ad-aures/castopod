@@ -1,0 +1,24 @@
+.form-radio-btn {
+  @apply absolute opacity-0;
+}
+
+.form-radio-btn:focus + label {
+  @apply shadow-outline;
+}
+
+.form-radio-btn + label {
+  @apply px-2 py-1 text-sm text-black bg-white border rounded cursor-pointer;
+
+  &:hover {
+    @apply bg-green-100;
+  }
+}
+
+.form-radio-btn:checked + label {
+  @apply text-white bg-green-500;
+
+  &::before {
+    @apply mr-2 text-green-200;
+    content: "✓";
+  }
+}
