@@ -424,9 +424,10 @@ class Podcast extends BaseController
         return redirect()->route('podcast-view', [$this->podcast->id]);
     }
 
-    public function latestEpisodes(int $limit)
+    public function latestEpisodes(int $limit, int $podcast_id)
     {
         $episodes = (new EpisodeModel())
+            ->where('podcast_id', $podcast_id)
             ->orderBy('created_at', 'desc')
             ->findAll($limit);
 

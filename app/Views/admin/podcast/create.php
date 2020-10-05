@@ -27,7 +27,6 @@
     'id' => 'image',
     'name' => 'image',
     'class' => 'form-input',
-
     'required' => 'required',
     'type' => 'file',
     'accept' => '.jpg,.jpeg,.png',
@@ -65,21 +64,13 @@
         hint_tooltip(lang('Podcast.form.type.hint'), 'ml-1') ?>
     </legend>
     <?= form_radio(
-        [
-            'id' => 'episodic',
-            'name' => 'type',
-            'class' => 'form-radio-btn',
-        ],
+        ['id' => 'episodic', 'name' => 'type', 'class' => 'form-radio-btn'],
         'episodic',
         old('type') ? old('type') == 'episodic' : true
     ) ?>
     <label for="episodic"><?= lang('Podcast.form.type.episodic') ?></label>
     <?= form_radio(
-        [
-            'id' => 'serial',
-            'name' => 'type',
-            'class' => 'form-radio-btn',
-        ],
+        ['id' => 'serial', 'name' => 'type', 'class' => 'form-radio-btn'],
         'serial',
         old('type') ? old('type') == 'serial' : false
     ) ?>
@@ -124,7 +115,6 @@
 
 <?= form_label(
     lang('Podcast.form.other_categories'),
-
     'other_categories',
     [],
     '',
@@ -137,7 +127,6 @@
     [
         'id' => 'other_categories',
         'class' => 'mb-4',
-        'required' => 'required',
         'data-max-item-count' => '2',
     ]
 ) ?>
