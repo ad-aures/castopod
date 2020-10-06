@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/codeigniter4/CodeIgniter4.git",
-                "reference": "ccf68e1d7fc44bfe5abacc39bf16edae45794a83"
+                "reference": "f5545aa7274575c397efae4ebcf6c18779dcf895"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codeigniter4/CodeIgniter4/zipball/ccf68e1d7fc44bfe5abacc39bf16edae45794a83",
-                "reference": "ccf68e1d7fc44bfe5abacc39bf16edae45794a83",
+                "url": "https://api.github.com/repos/codeigniter4/CodeIgniter4/zipball/f5545aa7274575c397efae4ebcf6c18779dcf895",
+                "reference": "f5545aa7274575c397efae4ebcf6c18779dcf895",
                 "shasum": ""
             },
             "require": {
@@ -75,7 +75,7 @@
                 "slack": "https://codeigniterchat.slack.com",
                 "issues": "https://github.com/codeigniter4/CodeIgniter4/issues"
             },
-            "time": "2020-10-04T20:15:33+00:00"
+            "time": "2020-10-06T06:38:58+00:00"
         },
         {
             "name": "composer/ca-bundle",
