@@ -82,6 +82,7 @@ class Podcast extends Entity
         'created_by' => 'integer',
         'updated_by' => 'integer',
         'imported_feed_url' => '?string',
+        'new_feed_url' => '?string',
     ];
 
     /**

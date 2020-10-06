@@ -1,86 +1,40 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   inkscape:version="1.0beta1 (ee59332, 2019-11-28)"
-   sodipodi:docname="castopod.svg"
-   id="svg839"
-   version="1.1"
-   viewBox="0 0 64 63.999998"
-   height="64"
-   width="64">
-  <metadata
-     id="metadata845">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <defs
-     id="defs843" />
-  <sodipodi:namedview
-     inkscape:current-layer="svg839"
-     inkscape:window-maximized="0"
-     inkscape:window-y="23"
-     inkscape:window-x="0"
-     inkscape:cy="33.560512"
-     inkscape:cx="32"
-     inkscape:zoom="8.9714173"
-     showgrid="false"
-     id="namedview841"
-     inkscape:window-height="1035"
-     inkscape:window-width="1920"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0"
-     guidetolerance="10"
-     gridtolerance="10"
-     objecttolerance="10"
-     borderopacity="1"
-     inkscape:document-rotation="0"
-     bordercolor="#666666"
-     pagecolor="#ffffff" />
-  <circle
-     id="greencircle"
-     fill="#37c837"
-     cx="32"
-     cy="32"
-     r="31.684" />
-  <g
-     id="speak">
-    <path
-       d="M45.21 20.22H18.79c-6.473 0-11.74 5.266-11.74 11.74S12.317 43.7 18.79 43.7h10.756c1.08 0 1.957-.875 1.957-1.956 0-1.08-.877-1.957-1.957-1.957H18.79c-4.315 0-7.826-3.51-7.826-7.827 0-4.316 3.51-7.828 7.827-7.828h26.42c4.315 0 7.826 3.512 7.826 7.828 0 4.316-3.51 7.827-7.827 7.827H43.34v.002c-5.41.096-9.783 4.527-9.783 9.96 0 1.08.875 1.957 1.956 1.957 1.08 0 1.956-.876 1.956-1.957 0-3.336 2.714-6.05 6.05-6.05h1.687c6.473 0 11.74-5.266 11.74-11.74s-5.267-11.74-11.74-11.74"
-       fill="#fff"
-       id="phylactery" />
-    <g
-       id="threedots">
-      <circle
-         r="2"
-         cy="32"
-         cx="24.256159"
-         id="leftdot"
-         style="fill:#ffffff;fill-opacity:1;stroke:none;" />
-      <circle
-         style="fill:#ffffff;fill-opacity:1;stroke:none;"
-         id="middledot"
-         cx="32"
-         cy="32"
-         r="2" />
-      <circle
-         r="2"
-         cy="32"
-         cx="39.743839"
-         id="rightdot"
-         style="fill:#ffffff;fill-opacity:1;stroke:none;" />
-    </g>
-  </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 202.4 137.8" style="enable-background:new 0 0 202.4 137.8;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#009486;}
+	.st1{fill:#E7F9E4;}
+	.st2{fill:none;}
+	.st3{fill:#E7FFE3;}
+</style>
+<g>
+	<path id="dark_greeen_19_" class="st0" d="M181.9,131.7h-32.5c0,0-1.2-2.5-2.5-4.9c-1.3-2.4-4.4-2.3-4.4-2.3H59.7
+		c0,0-3-0.4-4.5,2.3c-1.6,2.7-2.6,4.9-2.6,4.9H20.6c-6.9,0-12.6-5.6-12.6-12.5V20.3c0-6.9,5.6-12.6,12.5-12.6h161.3
+		c6.9,0,12.6,5.6,12.6,12.5v98.9C194.5,126,188.8,131.7,181.9,131.7z"/>
+	<path class="st1" d="M143.7,34.5H58.6c-14.6,0-26.5,12-26.5,26.6c0,14.6,11.9,26.5,26.5,26.5h85.1c14.6,0,26.5-11.9,26.5-26.5
+		C170.3,46.3,158.4,34.4,143.7,34.5z M68.3,68.7c0,0-3.9-2.9-9.4-2.9c-4.1,0-8.9,2.5-8.9,2.5c-1.3-1.9-2.1-4.1-2.1-6.6
+		c0-6.3,5.1-11.4,11.4-11.4s11.4,5.1,11.4,11.4C70.7,64.4,69.8,66.8,68.3,68.7z M101.2,75.3c-12.5,0-12-9.6-12-9.6
+		c-0.2-1.8,2.1-2.4,2.9-1.3c0.4,0.6,0.4,0.6,0.7,1.7c1.7,5.9,8.4,5.6,8.4,5.6s6.7,0.4,8.4-5.6c0.3-1,0.3-1.1,0.7-1.7
+		c0.8-1,3.1-0.5,2.9,1.3C113.2,65.7,113.7,75.3,101.2,75.3z M152.3,68.4c0,0-4.8-2.5-8.9-2.5c-5.5,0-9.4,2.9-9.4,2.9
+		c-1.5-1.9-2.4-4.3-2.4-7c0-6.3,5.1-11.4,11.4-11.4s11.4,5.1,11.4,11.4C154.5,64.2,153.7,66.5,152.3,68.4z"/>
+	<path class="st2" d="M110.3,64.3c-0.4,0.6-0.4,0.6-0.7,1.7c-1.7,5.9-8.4,5.6-8.4,5.6s-6.7,0.4-8.4-5.6c-0.3-1-0.3-1.1-0.7-1.7
+		c-0.8-1-3.1-0.5-2.9,1.3c0,0-0.5,9.6,12,9.6c12.5,0,12-9.6,12-9.6C113.4,63.9,111.1,63.3,110.3,64.3z"/>
+	<path class="st2" d="M143.1,50.4c-6.3,0-11.4,5.1-11.4,11.4c0,2.6,0.9,5,2.4,7c0,0,3.9-2.9,9.4-2.9c4.1,0,8.9,2.5,8.9,2.5
+		c1.3-1.9,2.1-4.1,2.1-6.6C154.5,55.5,149.4,50.4,143.1,50.4z"/>
+	<path class="st2" d="M59.3,50.4c-6.3,0-11.4,5.1-11.4,11.4c0,2.5,0.8,4.7,2.1,6.6c0,0,4.8-2.5,8.9-2.5c5.5,0,9.4,2.9,9.4,2.9
+		c1.5-1.9,2.4-4.3,2.4-7C70.7,55.5,65.6,50.4,59.3,50.4z"/>
+	<g>
+		<g>
+			<path class="st3" d="M47.1,23.3c-6.3-1.7-11.7,2.1-14.7,7.3c-0.7,1.2-0.2,2.2,0.5,2.6c1,0.3,1.7,0.1,2.8-1.5
+				c2.2-3.9,5.9-6.1,10.1-5.3c0,0,2.9,0.9,3.3-1C49.4,24.2,48.3,23.6,47.1,23.3z"/>
+		</g>
+	</g>
+	<g>
+		<g>
+			<path class="st3" d="M159.9,27.3c-0.1,1.9,2.9,1.9,2.9,1.9c4.2,0.4,6.8,2.3,7.8,6.7c0.6,1.9,1.2,2.2,2.3,2.2
+				c0.8-0.1,1.6-1,1.2-2.4c-1.4-5.8-5.1-9.8-11.7-9.9C161.2,25.7,160,26,159.9,27.3z"/>
+		</g>
+	</g>
+</g>
 </svg>

@@ -12,7 +12,7 @@ return [
     'create' => 'Create a podcast',
     'import' => 'Import a podcast',
     'new_episode' => 'New Episode',
-    'feed' => 'RSS feed',
+    'feed' => 'RSS',
     'view' => 'View podcast',
     'edit' => 'Edit podcast',
     'delete' => 'Delete podcast',

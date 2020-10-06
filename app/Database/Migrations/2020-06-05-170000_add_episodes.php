@@ -61,6 +61,12 @@ class AddEpisodes extends Migration
                 'unsigned' => true,
                 'comment' => 'File size in bytes',
             ],
+            'enclosure_headersize' => [
+                'type' => 'INT',
+                'constraint' => 10,
+                'unsigned' => true,
+                'comment' => 'Header size in bytes',
+            ],
             'description' => [
                 'type' => 'TEXT',
                 'null' => true,

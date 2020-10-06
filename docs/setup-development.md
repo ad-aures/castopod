@@ -104,6 +104,13 @@ docker ps -a
 docker-compose run --rm app php spark migrate -all
 ```
 
+In case you need to roll back, use this command:
+
+```
+# rolls back database schema loading (deletes all tables and their content)
+docker-compose run --rm app php spark migrate:rollback
+```
+
 2. Populate the database with the required data:
 
 ```bash

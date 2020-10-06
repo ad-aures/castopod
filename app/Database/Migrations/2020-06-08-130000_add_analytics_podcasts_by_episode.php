@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Class AddAnalyticsWebsiteByBrowser
- * Creates analytics_website_by_browser table in database
+ * Class AddAnalyticsEpisodesByCountry
+ * Creates analytics_episodes_by_country table in database
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
@@ -12,28 +12,28 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class AddAnalyticsWebsiteByBrowser extends Migration
+class AddAnalyticsPodcastsByEpisode extends Migration
 {
     public function up()
     {
         $this->forge->addField([
-            'id' => [
-                'type' => 'BIGINT',
-                'constraint' => 20,
-                'unsigned' => true,
-                'auto_increment' => true,
-            ],
             'podcast_id' => [
                 'type' => 'BIGINT',
                 'constraint' => 20,
                 'unsigned' => true,
             ],
-            'browser' => [
-                'type' => 'VARCHAR',
-                'constraint' => 191,
-            ],
             'date' => [
                 'type' => 'date',
+            ],
+            'episode_id' => [
+                'type' => 'BIGINT',
+                'constraint' => 20,
+                'unsigned' => true,
+            ],
+            'age' => [
+                'type' => 'INT',
+                'constraint' => 10,
+                'unsigned' => true,
             ],
             'hits' => [
                 'type' => 'INT',
@@ -41,8 +41,7 @@ class AddAnalyticsWebsiteByBrowser extends Migration
                 'default' => 1,
             ],
         ]);
-        $this->forge->addKey('id', true);
-        $this->forge->addUniqueKey(['podcast_id', 'browser', 'date']);
+        $this->forge->addPrimaryKey(['podcast_id', 'episode_id', 'date']);
         $this->forge->addField(
             '`created_at` timestamp NOT NULL DEFAULT current_timestamp()'
         );
@@ -50,11 +49,12 @@ class AddAnalyticsWebsiteByBrowser extends Migration
             '`updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()'
         );
         $this->forge->addForeignKey('podcast_id', 'podcasts', 'id');
-        $this->forge->createTable('analytics_website_by_browser');
+        $this->forge->addForeignKey('episode_id', 'episodes', 'id');
+        $this->forge->createTable('analytics_podcasts_by_episode');
     }
 
     public function down()
     {
-        $this->forge->dropTable('analytics_website_by_browser');
+        $this->forge->dropTable('analytics_podcasts_by_episode');
     }
 }

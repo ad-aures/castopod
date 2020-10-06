@@ -13,7 +13,9 @@
     "codeigniter4/codeigniter4": "dev-develop",
     "league/commonmark": "^1.5",
     "vlucas/phpdotenv": "^5.2",
-    "league/html-to-markdown": "^4.10"
+    "league/html-to-markdown": "^4.10",
+    "podlibre/user-agents-php": "*",
+    "podlibre/ipcat": "*"
   },
   "require-dev": {
     "mikey179/vfsstream": "1.6.*",
@@ -27,8 +29,14 @@
   },
   "scripts": {
     "test": "phpunit",
+    "post-install-cmd": [
+      "@php vendor/podlibre/user-agents-php/src/UserAgentsGenerate.php >  vendor/podlibre/user-agents-php/src/UserAgents.php",
+      "@php vendor/podlibre/ipcat/IpDbGenerate.php >  vendor/podlibre/ipcat/IpDb.php"
+    ],
     "post-update-cmd": [
-      "@composer dump-autoload"
+      "@composer dump-autoload",
+      "@php vendor/podlibre/user-agents-php/src/UserAgentsGenerate.php >  vendor/podlibre/user-agents-php/src/UserAgents.php",
+      "@php vendor/podlibre/ipcat/IpDbGenerate.php >  vendor/podlibre/ipcat/IpDb.php"
     ]
   },
   "support": {

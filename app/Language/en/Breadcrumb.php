@@ -22,4 +22,5 @@ return [
     'import' => 'feed import',
     'settings' => 'settings',
     'platforms' => 'platforms',
+    'analytics' => 'Analytics',
 ];

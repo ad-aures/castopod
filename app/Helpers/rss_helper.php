@@ -36,6 +36,14 @@ function get_rss_feed($podcast)
     $atom_link->addAttribute('rel', 'self');
     $atom_link->addAttribute('type', 'application/rss+xml');
 
+    if (!empty($podcast->new_feed_url)) {
+        $channel->addChild(
+            'new-feed-url',
+            $podcast->new_feed_url,
+            $itunes_namespace
+        );
+    }
+
     // the last build date corresponds to the creation of the feed.xml cache
     $channel->addChild(
         'lastBuildDate',
@@ -50,7 +58,7 @@ function get_rss_feed($podcast)
     $channel->addChild('title', $podcast->title);
     $channel->addChildWithCDATA('description', $podcast->description_html);
     $itunes_image = $channel->addChild('image', null, $itunes_namespace);
-    $itunes_image->addAttribute('href', $podcast->image->url);
+    $itunes_image->addAttribute('href', $podcast->image->original_url);
     $channel->addChild('language', $podcast->language);
 
     // set main category first, then other categories as apple

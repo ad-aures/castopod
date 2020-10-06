@@ -24,6 +24,7 @@ class EpisodeModel extends Model
         'enclosure_duration',
         'enclosure_mimetype',
         'enclosure_filesize',
+        'enclosure_headersize',
         'description',
         'image_uri',
         'parental_advisory',

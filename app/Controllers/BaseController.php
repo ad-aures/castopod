@@ -45,9 +45,10 @@ class BaseController extends Controller
         // E.g.:
         // $this->session = \Config\Services::session();
 
-        set_user_session_country();
+        set_user_session_deny_list_ip();
         set_user_session_browser();
         set_user_session_referer();
+        set_user_session_entry_page();
     }
 
     protected static function triggerWebpageHit($podcastId)

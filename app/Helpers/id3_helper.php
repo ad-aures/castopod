@@ -24,6 +24,7 @@ function get_file_tags($file)
     return [
         'filesize' => $FileInfo['filesize'],
         'mime_type' => $FileInfo['mime_type'],
+        'avdataoffset' => $FileInfo['avdataoffset'],
         'playtime_seconds' => $FileInfo['playtime_seconds'],
     ];
 }
@@ -68,7 +69,11 @@ function write_enclosure_tags($episode)
         'comment' => [$episode->description],
         'track_number' => [strval($episode->number)],
         'copyright_message' => [$episode->podcast->copyright],
-        'publisher' => ['Podlibre'],
+        'publisher' => [
+            empty($episode->podcast->publisher)
+                ? $episode->podcast->owner_name
+                : $episode->podcast->publisher,
+        ],
         'encoded_by' => ['Castopod'],
 
         // TODO: find a way to add the remaining tags for podcasts as the library doesn't seem to allow it

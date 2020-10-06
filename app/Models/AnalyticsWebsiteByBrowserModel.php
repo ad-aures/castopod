@@ -15,7 +15,6 @@ use CodeIgniter\Model;
 class AnalyticsWebsiteByBrowserModel extends Model
 {
     protected $table = 'analytics_website_by_browser';
-    protected $primaryKey = 'id';
 
     protected $allowedFields = [];
 

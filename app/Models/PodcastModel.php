@@ -35,6 +35,7 @@ class PodcastModel extends Model
         'created_by',
         'updated_by',
         'imported_feed_url',
+        'new_feed_url',
     ];
 
     protected $returnType = \App\Entities\Podcast::class;

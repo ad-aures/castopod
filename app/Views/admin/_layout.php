@@ -9,7 +9,7 @@
     <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
     <link rel="stylesheet" href="/assets/admin.css"/>
     <link rel="stylesheet" href="/assets/index.css"/>
-    <script src="/assets/admin.js" defer></script>
+    <script src="/assets/admin.js" type="module" defer></script>
 </head>
 
 <body class="relative bg-gray-100 holy-grail-grid">
@@ -43,12 +43,12 @@
     <footer class="px-2 py-2 mx-auto text-xs text-right holy-grail-footer">
         <small><?= lang('Common.powered_by', [
             'castopod' =>
-                '<a class="underline hover:no-underline" href="https://castopod.org" target="_blank" rel="noreferrer noopener">Castopod</a>',
+                '<a class="underline hover:no-underline" href="https://castopod.org/" target="_blank" rel="noreferrer noopener">Castopod</a>',
         ]) ?></small>
     </footer>
     <button
         type="button"
         id="sidebar-toggler"
-        class="fixed bottom-0 left-0 z-50 p-3 mb-3 ml-3 text-xl transition duration-300 ease-in-out bg-white border-2 rounded-full shadow-lg  focus:outline-none md:hidden hover:bg-gray-100 focus:shadow-outline"
+        class="fixed bottom-0 left-0 z-50 p-3 mb-3 ml-3 text-xl transition duration-300 ease-in-out bg-white border-2 rounded-full shadow-lg focus:outline-none md:hidden hover:bg-gray-100 focus:shadow-outline"
         style="transform: translateX(0px);"><?= icon('menu') ?></button>
 </body>

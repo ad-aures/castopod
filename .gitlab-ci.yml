@@ -39,13 +39,11 @@ bundle_app:
   script:
     # build all assets for views
     - npm run build
-    # download GeoLite2-Country and opawg/user-agents archives and extract them to writable/uploads
-    - wget -c "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Country&license_key=$MAXMIND_LICENCE_KEY&suffix=tar.gz" -O - | tar -xz -C ./writable/uploads/
-    - wget -c "https://github.com/opawg/user-agents/archive/master.tar.gz" -O - | tar -xz -C ./writable/uploads/
+    # download GeoLite2-City archive and extract it to writable/uploads
+    - wget -c "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=$MAXMIND_LICENCE_KEY&suffix=tar.gz" -O - | tar -xz -C ./writable/uploads/
 
     # rename extracted archives' folders
-    - mv ./writable/uploads/GeoLite2-Country* ./writable/uploads/GeoLite2-Country
-    - mv ./writable/uploads/user-agents* ./writable/uploads/user-agents
+    - mv ./writable/uploads/GeoLite2-City* ./writable/uploads/GeoLite2-City
 
     # create bundle folder: uses .rsync-filter (-F) file to copy only needed files
     - rsync -avF --progress . ./bundle

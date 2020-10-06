@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Class AddAnalyticsEpisodesByPlayer
- * Creates analytics_episodes_by_player table in database
+ * Class AddAnalyticsWebsiteByReferer
+ * Creates analytics_website_by_referer table in database
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
@@ -12,33 +12,33 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class AddAnalyticsEpisodesByPlayer extends Migration
+class AddAnalyticsWebsiteByReferer extends Migration
 {
     public function up()
     {
         $this->forge->addField([
-            'id' => [
-                'type' => 'BIGINT',
-                'constraint' => 20,
-                'unsigned' => true,
-                'auto_increment' => true,
-            ],
             'podcast_id' => [
                 'type' => 'BIGINT',
                 'constraint' => 20,
                 'unsigned' => true,
             ],
-            'episode_id' => [
-                'type' => 'BIGINT',
-                'constraint' => 20,
-                'unsigned' => true,
-            ],
-            'player' => [
-                'type' => 'VARCHAR',
-                'constraint' => 191,
-            ],
             'date' => [
                 'type' => 'date',
+            ],
+            'referer' => [
+                'type' => 'VARCHAR',
+                'constraint' => 512,
+                'comment' => 'Referer URL.',
+            ],
+            'domain' => [
+                'type' => 'VARCHAR',
+                'constraint' => 128,
+                'null' => true,
+            ],
+            'keywords' => [
+                'type' => 'VARCHAR',
+                'constraint' => 384,
+                'null' => true,
             ],
             'hits' => [
                 'type' => 'INT',
@@ -46,13 +46,7 @@ class AddAnalyticsEpisodesByPlayer extends Migration
                 'default' => 1,
             ],
         ]);
-        $this->forge->addKey('id', true);
-        $this->forge->addUniqueKey([
-            'podcast_id',
-            'episode_id',
-            'player',
-            'date',
-        ]);
+        $this->forge->addPrimaryKey(['podcast_id', 'referer', 'date']);
         $this->forge->addField(
             '`created_at` timestamp NOT NULL DEFAULT current_timestamp()'
         );
@@ -60,12 +54,11 @@ class AddAnalyticsEpisodesByPlayer extends Migration
             '`updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()'
         );
         $this->forge->addForeignKey('podcast_id', 'podcasts', 'id');
-        $this->forge->addForeignKey('episode_id', 'episodes', 'id');
-        $this->forge->createTable('analytics_episodes_by_player');
+        $this->forge->createTable('analytics_website_by_referer');
     }
 
     public function down()
     {
-        $this->forge->dropTable('analytics_episodes_by_player');
+        $this->forge->dropTable('analytics_website_by_referer');
     }
 }

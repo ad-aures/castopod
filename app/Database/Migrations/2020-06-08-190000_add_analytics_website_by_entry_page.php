@@ -12,29 +12,23 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class AddAnalyticsWebsiteByReferer extends Migration
+class AddAnalyticsWebsiteByEntryPage extends Migration
 {
     public function up()
     {
         $this->forge->addField([
-            'id' => [
-                'type' => 'BIGINT',
-                'constraint' => 20,
-                'unsigned' => true,
-                'auto_increment' => true,
-            ],
             'podcast_id' => [
                 'type' => 'BIGINT',
                 'constraint' => 20,
                 'unsigned' => true,
             ],
-            'referer' => [
-                'type' => 'VARCHAR',
-                'constraint' => 191,
-                'comment' => 'Referer URL.',
-            ],
             'date' => [
                 'type' => 'date',
+            ],
+            'entry_page' => [
+                'type' => 'VARCHAR',
+                'constraint' => 512,
+                'comment' => 'Entry page URL.',
             ],
             'hits' => [
                 'type' => 'INT',
@@ -42,8 +36,7 @@ class AddAnalyticsWebsiteByReferer extends Migration
                 'default' => 1,
             ],
         ]);
-        $this->forge->addKey('id', true);
-        $this->forge->addUniqueKey(['podcast_id', 'referer', 'date']);
+        $this->forge->addPrimaryKey(['podcast_id', 'entry_page', 'date']);
         $this->forge->addField(
             '`created_at` timestamp NOT NULL DEFAULT current_timestamp()'
         );
@@ -51,11 +44,11 @@ class AddAnalyticsWebsiteByReferer extends Migration
             '`updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()'
         );
         $this->forge->addForeignKey('podcast_id', 'podcasts', 'id');
-        $this->forge->createTable('analytics_website_by_referer');
+        $this->forge->createTable('analytics_website_by_entry_page');
     }
 
     public function down()
     {
-        $this->forge->dropTable('analytics_website_by_referer');
+        $this->forge->dropTable('analytics_website_by_entry_page');
     }
 }

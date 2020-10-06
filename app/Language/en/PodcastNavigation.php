@@ -20,4 +20,5 @@ return [
     'contributor-add' => 'Add contributor',
     'settings' => 'Settings',
     'platforms' => 'Podcast platforms',
+    'podcast-analytics' => 'Audiences Overview',
 ];

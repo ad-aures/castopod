@@ -58,6 +58,14 @@ class Podcast extends BaseController
         return view('admin/podcast/view', $data);
     }
 
+    public function analytics()
+    {
+        $data = ['podcast' => $this->podcast];
+
+        replace_breadcrumb_params([0 => $this->podcast->title]);
+        return view('admin/podcast/analytics', $data);
+    }
+
     public function create()
     {
         helper(['form', 'misc']);
@@ -204,7 +212,9 @@ class Podcast extends BaseController
         $podcast = new \App\Entities\Podcast([
             'name' => $this->request->getPost('name'),
             'imported_feed_url' => $this->request->getPost('imported_feed_url'),
-
+            'new_feed_url' => base_url(
+                route_to('podcast_feed', $this->request->getPost('name'))
+            ),
             'title' => $feed->channel[0]->title,
             'description' => $feed->channel[0]->description,
             'image' => download_file($nsItunes->image->attributes()),
@@ -214,7 +224,9 @@ class Podcast extends BaseController
                 ? null
                 : (in_array($nsItunes->explicit, ['yes', 'true'])
                     ? 'explicit'
-                    : null),
+                    : (in_array($nsItunes->explicit, ['no', 'false'])
+                        ? 'clean'
+                        : null)),
             'owner_name' => $nsItunes->owner->name,
             'owner_email' => $nsItunes->owner->email,
             'publisher' => $nsItunes->author,
@@ -302,11 +314,13 @@ class Podcast extends BaseController
                 'image' => empty($nsItunes->image->attributes())
                     ? null
                     : download_file($nsItunes->image->attributes()),
-                'explicit' => $nsItunes->explicit
-                    ? (in_array($nsItunes->explicit, ['yes', 'true'])
+                'parental_advisory' => empty($nsItunes->explicit)
+                    ? null
+                    : (in_array($nsItunes->explicit, ['yes', 'true'])
                         ? 'explicit'
-                        : null)
-                    : null,
+                        : (in_array($nsItunes->explicit, ['no', 'false'])
+                            ? 'clean'
+                            : null)),
                 'number' =>
                     $this->request->getPost('force_renumber') === 'yes'
                         ? $itemNumber

@@ -64,6 +64,7 @@ class Episode extends Entity
         'enclosure_duration' => 'integer',
         'enclosure_mimetype' => 'string',
         'enclosure_filesize' => 'integer',
+        'enclosure_headersize' => 'integer',
         'description' => 'string',
         'image_uri' => '?string',
         'parental_advisory' => '?string',
@@ -143,6 +144,8 @@ class Episode extends Entity
                 $enclosure_metadata['mime_type'];
             $this->attributes['enclosure_filesize'] =
                 $enclosure_metadata['filesize'];
+            $this->attributes['enclosure_headersize'] =
+                $enclosure_metadata['avdataoffset'];
 
             return $this;
         }
@@ -167,6 +170,19 @@ class Episode extends Entity
                 'analytics_hit',
                 $this->attributes['podcast_id'],
                 $this->attributes['id'],
+                // bytes_threshold: number of bytes that must be downloaded for an episode to be counted in download analytics
+                // - if file is shorter than 60sec, then it's enclosure_filesize
+                // - if file is longer than 60 seconds then it's enclosure_headersize + 60 seconds
+                $this->attributes['enclosure_duration'] <= 60
+                    ? $this->attributes['enclosure_filesize']
+                    : $this->attributes['enclosure_headersize'] +
+                        floor(
+                            (($this->attributes['enclosure_filesize'] -
+                                $this->attributes['enclosure_headersize']) /
+                                $this->attributes['enclosure_duration']) *
+                                60
+                        ),
+                $this->attributes['enclosure_filesize'],
                 $this->attributes['enclosure_uri']
             )
         );

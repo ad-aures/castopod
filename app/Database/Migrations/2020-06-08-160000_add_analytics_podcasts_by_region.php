@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Class AddAnalyticsPodcastsByCountry
- * Creates analytics_podcasts_by_country table in database
+ * Class AddAnalyticsPodcastsByRegion
+ * Creates analytics_podcasts_by_region table in database
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
@@ -12,29 +12,36 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class AddAnalyticsPodcastsByCountry extends Migration
+class AddAnalyticsPodcastsByRegion extends Migration
 {
     public function up()
     {
         $this->forge->addField([
-            'id' => [
-                'type' => 'BIGINT',
-                'constraint' => 20,
-                'unsigned' => true,
-                'auto_increment' => true,
-            ],
             'podcast_id' => [
                 'type' => 'BIGINT',
                 'constraint' => 20,
                 'unsigned' => true,
+            ],
+            'date' => [
+                'type' => 'date',
             ],
             'country_code' => [
                 'type' => 'VARCHAR',
                 'constraint' => 3,
                 'comment' => 'ISO 3166-1 code.',
             ],
-            'date' => [
-                'type' => 'date',
+            'region_code' => [
+                'type' => 'VARCHAR',
+                'constraint' => 3,
+                'comment' => 'ISO 3166-2 code.',
+            ],
+            'latitude' => [
+                'type' => 'FLOAT',
+                'null' => true,
+            ],
+            'longitude' => [
+                'type' => 'FLOAT',
+                'null' => true,
             ],
             'hits' => [
                 'type' => 'INT',
@@ -42,8 +49,12 @@ class AddAnalyticsPodcastsByCountry extends Migration
                 'default' => 1,
             ],
         ]);
-        $this->forge->addKey('id', true);
-        $this->forge->addUniqueKey(['podcast_id', 'country_code', 'date']);
+        $this->forge->addPrimaryKey([
+            'podcast_id',
+            'country_code',
+            'region_code',
+            'date',
+        ]);
         $this->forge->addField(
             '`created_at` timestamp NOT NULL DEFAULT current_timestamp()'
         );
@@ -51,11 +62,11 @@ class AddAnalyticsPodcastsByCountry extends Migration
             '`updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()'
         );
         $this->forge->addForeignKey('podcast_id', 'podcasts', 'id');
-        $this->forge->createTable('analytics_podcasts_by_country');
+        $this->forge->createTable('analytics_podcasts_by_region');
     }
 
     public function down()
     {
-        $this->forge->dropTable('analytics_podcasts_by_country');
+        $this->forge->dropTable('analytics_podcasts_by_region');
     }
 }

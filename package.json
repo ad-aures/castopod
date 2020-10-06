@@ -24,6 +24,8 @@
     "commit": "git-cz"
   },
   "dependencies": {
+    "@amcharts/amcharts4": "^4.9.37",
+    "@amcharts/amcharts4-geodata": "^4.1.17",
     "@popperjs/core": "^2.5.3",
     "choices.js": "^9.0.1",
     "prosemirror-example-setup": "^1.1.2",

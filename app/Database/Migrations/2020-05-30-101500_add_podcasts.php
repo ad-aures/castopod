@@ -110,6 +110,13 @@ class AddPodcasts extends Migration
                     'The RSS feed URL if this podcast was imported, NULL otherwise.',
                 'null' => true,
             ],
+            'new_feed_url' => [
+                'type' => 'VARCHAR',
+                'constraint' => 1024,
+                'comment' =>
+                    'The RSS new feed URL if this podcast is moving out, NULL otherwise.',
+                'null' => true,
+            ],
             'created_at' => [
                 'type' => 'TIMESTAMP',
             ],

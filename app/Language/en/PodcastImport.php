@@ -7,6 +7,12 @@
  */
 
 return [
+    'legal_dislaimer_title' => 'Legal Disclaimer',
+    'legal_dislaimer_content' =>
+        'Make sure you own the rights for this podcast before importing it.<br/>Copying and broadcasting a podcast without the proper rights is piracy and is liable to prosecution.',
+    'warning_title' => 'Warning',
+    'warning_content' =>
+        'This procedure may take a long time.<br/>The current version does not show any progress while it runs. You will not see anything updated until it is done.<br/>In case of timeout error, increase max_execution_time value.',
     'old_podcast_section_title' => 'The podcast to import',
     'old_podcast_section_subtitle' => '',
     'imported_feed_url' => 'Feed URL',

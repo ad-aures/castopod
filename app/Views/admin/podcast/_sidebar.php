@@ -10,7 +10,7 @@ $podcastNavigation = [
     ],
     'analytics' => [
         'icon' => 'line-chart',
-        'items' => [],
+        'items' => ['podcast-analytics'],
     ],
     'contributors' => [
         'icon' => 'group',

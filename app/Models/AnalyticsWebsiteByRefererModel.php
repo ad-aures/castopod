@@ -15,7 +15,6 @@ use CodeIgniter\Model;
 class AnalyticsWebsiteByRefererModel extends Model
 {
     protected $table = 'analytics_website_by_referer';
-    protected $primaryKey = 'id';
 
     protected $allowedFields = [];
 

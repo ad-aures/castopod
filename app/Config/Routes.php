@@ -53,10 +53,14 @@ $routes->group(config('App')->installGateway, function ($routes) {
     ]);
 });
 
-// Route for podcast audio file analytics (/stats/podcast_id/episode_id/podcast_folder/filename.mp3)
-$routes->add('stats/(:num)/(:num)/(:any)', 'Analytics::hit/$1/$2/$3', [
-    'as' => 'analytics_hit',
-]);
+// Route for podcast audio file analytics (/audio/podcast_id/episode_id/bytes_threshold/filesize/podcast_folder/filename.mp3)
+$routes->add(
+    'audio/(:num)/(:num)/(:num)/(:num)/(:any)',
+    'Analytics::hit/$1/$2/$3/$4/$5',
+    [
+        'as' => 'analytics_hit',
+    ]
+);
 
 // Show the Unknown UserAgents
 $routes->get('.well-known/unknown-useragents', 'UnknownUserAgents');
@@ -113,6 +117,26 @@ $routes->group(
                     'as' => 'podcast-delete',
                     'filter' => 'permission:podcasts-delete',
                 ]);
+                $routes->get('analytics', 'Podcast::analytics/$1', [
+                    'as' => 'podcast-analytics',
+                    'filter' => 'permission:podcasts-view,podcast-view',
+                ]);
+                $routes->get(
+                    'analytics-data/(:segment)/(:segment)',
+                    'AnalyticsData::getData/$1/$2/$3',
+                    [
+                        'as' => 'analytics-data',
+                        'filter' => 'permission:podcasts-view,podcast-view',
+                    ]
+                );
+                $routes->get(
+                    'analytics-data/(:segment)/(:segment)/(:num)',
+                    'AnalyticsData::getData/$1/$2/$3/$4',
+                    [
+                        'as' => 'analytics-filtered-data',
+                        'filter' => 'permission:podcasts-view,podcast-view',
+                    ]
+                );
 
                 // Podcast episodes
                 $routes->group('episodes', function ($routes) {

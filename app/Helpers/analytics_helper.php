@@ -33,25 +33,56 @@ if (!function_exists('getallheaders')) {
 /**
  * Set user country in session variable, for analytics purpose
  */
-function set_user_session_country()
+function set_user_session_deny_list_ip()
 {
     $session = \Config\Services::session();
     $session->start();
 
-    $country = 'N/A';
+    if (!$session->has('denyListIp')) {
+        $session->set(
+            'denyListIp',
+            \Podlibre\Ipcat\IpDb::find($_SERVER['REMOTE_ADDR']) != null
+        );
+    }
+}
 
-    // Finds country:
-    if (!$session->has('country')) {
+/**
+ * Set user country in session variable, for analytics purpose
+ */
+function set_user_session_location()
+{
+    $session = \Config\Services::session();
+    $session->start();
+
+    $location = [
+        'countryCode' => 'N/A',
+        'regionCode' => 'N/A',
+        'latitude' => null,
+        'longitude' => null,
+    ];
+
+    // Finds location:
+    if (!$session->has('location')) {
         try {
-            $reader = new \GeoIp2\Database\Reader(
-                WRITEPATH . 'uploads/GeoLite2-Country/GeoLite2-Country.mmdb'
+            $cityReader = new \GeoIp2\Database\Reader(
+                WRITEPATH . 'uploads/GeoLite2-City/GeoLite2-City.mmdb'
             );
-            $geoip = $reader->country($_SERVER['REMOTE_ADDR']);
-            $country = $geoip->country->isoCode;
+            $city = $cityReader->city($_SERVER['REMOTE_ADDR']);
+
+            $location = [
+                'countryCode' => empty($city->country->isoCode)
+                    ? 'N/A'
+                    : $city->country->isoCode,
+                'regionCode' => empty($city->subdivisions[0]->isoCode)
+                    ? 'N/A'
+                    : $city->subdivisions[0]->isoCode,
+                'latitude' => round($city->location->latitude, 3),
+                'longitude' => round($city->location->longitude, 3),
+            ];
         } catch (\Exception $e) {
             // If things go wrong the show must go on and the user must be able to download the file
         }
-        $session->set('country', $country);
+        $session->set('location', $location);
     }
 }
 
@@ -67,58 +98,36 @@ function set_user_session_player()
         $session = \Config\Services::session();
         $session->start();
 
-        $playerName = '- Unknown Player -';
-
-        $useragent = $_SERVER['HTTP_USER_AGENT'];
+        $playerFound = null;
+        $userAgent = $_SERVER['HTTP_USER_AGENT'];
 
         try {
-            $jsonUserAgents = json_decode(
-                file_get_contents(
-                    WRITEPATH . 'uploads/user-agents/src/user-agents.json'
-                ),
-                true
-            );
-
-            //Search for current HTTP_USER_AGENT in json file:
-            foreach ($jsonUserAgents as $player) {
-                foreach ($player['user_agents'] as $useragentsRegexp) {
-                    //Does the HTTP_USER_AGENT match this regexp:
-                    if (preg_match("#{$useragentsRegexp}#", $useragent)) {
-                        if (isset($player['bot'])) {
-                            //It’s a bot!
-                            $playerName = '- Bot -';
-                        } else {
-                            //It isn’t a bot, we store device/os/app:
-                            $playerName =
-                                (isset($player['device'])
-                                    ? $player['device'] . '/'
-                                    : '') .
-                                (isset($player['os'])
-                                    ? $player['os'] . '/'
-                                    : '') .
-                                (isset($player['app']) ? $player['app'] : '?');
-                        }
-                        //We found it!
-                        break 2;
-                    }
-                }
-            }
+            $playerFound = \Podlibre\UserAgentsPhp\UserAgents::find($userAgent);
         } catch (\Exception $e) {
             // If things go wrong the show must go on and the user must be able to download the file
         }
-        if ($playerName == '- Unknown Player -') {
+        if ($playerFound) {
+            $session->set('player', $playerFound);
+        } else {
+            $session->set('player', [
+                'app' => '- unknown -',
+                'device' => '',
+                'os' => '',
+                'bot' => 0,
+            ]);
             // Add to unknown list
             try {
                 $db = \Config\Database::connect();
-                $procedureNameAUU = $db->prefixTable(
+                $procedureNameAnalyticsUnknownUseragents = $db->prefixTable(
                     'analytics_unknown_useragents'
                 );
-                $db->query("CALL $procedureNameAUU(?)", [$useragent]);
+                $db->query("CALL $procedureNameAnalyticsUnknownUseragents(?)", [
+                    $userAgent,
+                ]);
             } catch (\Exception $e) {
                 // If things go wrong the show must go on and the user must be able to download the file
             }
         }
-        $session->set('player', $playerName);
     }
 }
 
@@ -165,49 +174,149 @@ function set_user_session_referer()
     }
 }
 
+/**
+ * Set user entry page in session variable, for analytics purpose
+ */
+function set_user_session_entry_page()
+{
+    $session = \Config\Services::session();
+    $session->start();
+
+    $entryPage = $_SERVER['REQUEST_URI'];
+    if (!$session->has('entryPage')) {
+        $session->set('entryPage', $entryPage);
+    }
+}
+
 function webpage_hit($podcast_id)
 {
     $session = \Config\Services::session();
     $session->start();
-    $db = \Config\Database::connect();
 
-    $procedureName = $db->prefixTable('analytics_website');
-    $db->query("call $procedureName(?,?,?,?)", [
-        $podcast_id,
-        $session->get('country'),
-        $session->get('browser'),
-        $session->get('referer'),
-    ]);
+    if (!$session->get('denyListIp')) {
+        $db = \Config\Database::connect();
+
+        $referer = $session->get('referer');
+        $domain = empty(parse_url($referer, PHP_URL_HOST))
+            ? null
+            : parse_url($referer, PHP_URL_HOST);
+        parse_str(parse_url($referer, PHP_URL_QUERY), $queries);
+        $keywords = empty($queries['q']) ? null : $queries['q'];
+
+        $procedureName = $db->prefixTable('analytics_website');
+        $db->query("call $procedureName(?,?,?,?,?,?)", [
+            $podcast_id,
+            $session->get('browser'),
+            $session->get('entryPage'),
+            $referer,
+            $domain,
+            $keywords,
+        ]);
+    }
 }
 
-function podcast_hit($p_podcast_id, $p_episode_id)
+/**
+ * Counting podcast episode downloads for analytics purposes
+ * ✅ No IP address is ever stored on the server.
+ * ✅ Only aggregate data is stored in the database.
+ * We follow IAB Podcast Measurement Technical Guidelines Version 2.0:
+ *   https://iabtechlab.com/standards/podcast-measurement-guidelines/
+ *   https://iabtechlab.com/wp-content/uploads/2017/12/Podcast_Measurement_v2-Dec-20-2017.pdf
+ *   ✅ Rolling 24-hour window
+ *   ✅ Castopod does not do pre-load
+ *   ✅ IP deny list https://github.com/client9/ipcat
+ *   ✅ User-agent Filtering https://github.com/opawg/user-agents
+ *   ✅ Ignores 2 bytes range "Range: 0-1"  (performed by official Apple iOS Podcast app)
+ *   ✅ In case of partial content, adds up all requests to check >1mn was downloaded
+ *   ✅ Identifying Uniques is done with a combination of IP Address and User Agent
+ * @param int $podcastId The podcast ID
+ * @param int $episodeId The Episode ID
+ * @param int $bytesThreshold The minimum total number of bytes that must be downloaded so that an episode is counted (>1mn)
+ * @param int $fileSize The podcast complete file size
+ *
+ * @return void
+ */
+function podcast_hit($podcastId, $episodeId, $bytesThreshold, $fileSize)
 {
     $session = \Config\Services::session();
     $session->start();
-    $first_time_for_this_episode = true;
 
-    if ($session->has('episodes')) {
-        if (in_array($p_episode_id, $session->get('episodes'))) {
-            $first_time_for_this_episode = false;
+    // We try to count (but if things went wrong the show should go on and the user should be able to download the file):
+    try {
+        // If the user IP is denied it's probably a bot:
+        if ($session->get('denyListIp')) {
+            $session->get('player')['bot'] = true;
+        }
+        $httpRange = $_SERVER['HTTP_RANGE'];
+        // We create a sha1 hash for this IP_Address+User_Agent+Episode_ID:
+        $hashID =
+            '_IpUaEp_' .
+            sha1(
+                $_SERVER['REMOTE_ADDR'] .
+                    '_' .
+                    $_SERVER['HTTP_USER_AGENT'] .
+                    '_' .
+                    $episodeId
+            );
+        // Was this episode downloaded in the past 24h:
+        $downloadedBytes = cache($hashID);
+        // Rolling window is 24 hours (86400 seconds):
+        $ttl = 86400;
+        if ($downloadedBytes) {
+            // In case it was already downloaded, TTL should be adjusted (rolling window is 24h since 1st download):
+            $ttl = cache()->getMetadata($hashID)['expire'] - time();
         } else {
-            $session->push('episodes', [$p_episode_id]);
+            // If it was never downloaded that means that zero byte were downloaded:
+            $downloadedBytes = 0;
         }
-    } else {
-        $session->set('episodes', [$p_episode_id]);
-    }
+        // If the number of downloaded bytes was previously below the 1mn threshold we go on:
+        // (Otherwise it means that this was already counted, therefore we don't do anything)
+        if ($downloadedBytes < $bytesThreshold) {
+            // If HTTP_RANGE is null we are downloading the complete file:
+            if (!isset($httpRange)) {
+                $downloadedBytes = $fileSize;
+            } else {
+                // [0-1] bytes range requests are used (by Apple) to check that file exists and that 206 partial content is working.
+                // We don't count these requests:
+                if ($httpRange != 'bytes=0-1') {
+                    // We calculate how many bytes are being downloaded based on HTTP_RANGE values:
+                    $ranges = explode(',', substr($httpRange, 6));
+                    foreach ($ranges as $range) {
+                        $parts = explode('-', $range);
+                        $downloadedBytes += empty($parts[1])
+                            ? $fileSize
+                            : $parts[1] - (empty($parts[0]) ? 0 : $parts[0]);
+                    }
+                }
+            }
+            // We save the number of downloaded bytes for this user and this episode:
+            cache()->save($hashID, $downloadedBytes, $ttl);
 
-    if ($first_time_for_this_episode) {
-        $db = \Config\Database::connect();
-        $procedureName = $db->prefixTable('analytics_podcasts');
-        try {
-            $db->query("CALL $procedureName(?,?,?,?);", [
-                $p_podcast_id,
-                $p_episode_id,
-                $session->get('country'),
-                $session->get('player'),
-            ]);
-        } catch (\Exception $e) {
-            // If things go wrong the show must go on and the user must be able to download the file
+            // If more that 1mn was downloaded, we send that to the database:
+            if ($downloadedBytes >= $bytesThreshold) {
+                $db = \Config\Database::connect();
+                $procedureName = $db->prefixTable('analytics_podcasts');
+
+                $app = $session->get('player')['app'];
+                $device = $session->get('player')['device'];
+                $os = $session->get('player')['os'];
+                $bot = $session->get('player')['bot'];
+
+                $db->query("CALL $procedureName(?,?,?,?,?,?,?,?,?,?);", [
+                    $podcastId,
+                    $episodeId,
+                    $session->get('location')['countryCode'],
+                    $session->get('location')['regionCode'],
+                    $session->get('location')['latitude'],
+                    $session->get('location')['longitude'],
+                    $app == null ? '' : $app,
+                    $device == null ? '' : $device,
+                    $os == null ? '' : $os,
+                    $bot == null ? 0 : $bot,
+                ]);
+            }
         }
+    } catch (\Exception $e) {
+        // If things go wrong the show must go on and the user must be able to download the file
     }
 }

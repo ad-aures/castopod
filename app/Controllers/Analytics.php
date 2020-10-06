@@ -40,16 +40,22 @@ class Analytics extends Controller
         // E.g.:
         // $this->session = \Config\Services::session();
 
-        set_user_session_country();
+        set_user_session_deny_list_ip();
+        set_user_session_location();
         set_user_session_player();
     }
 
     // Add one hit to this episode:
-    public function hit($p_podcastId, $p_episodeId, ...$filename)
-    {
+    public function hit(
+        $podcastId,
+        $episodeId,
+        $bytesThreshold,
+        $fileSize,
+        ...$filename
+    ) {
         helper('media');
 
-        podcast_hit($p_podcastId, $p_episodeId);
+        podcast_hit($podcastId, $episodeId, $bytesThreshold, $fileSize);
         return redirect()->to(media_url(implode('/', $filename)));
     }
 }
