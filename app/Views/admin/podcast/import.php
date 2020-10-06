@@ -16,9 +16,13 @@
 ]) ?>
 <?= csrf_field() ?>
 
+
 <?= form_section(
     lang('PodcastImport.old_podcast_section_title'),
-    lang('PodcastImport.old_podcast_section_subtitle')
+    icon('scales', 'mr-2 text-lg flex-shrink-0') .
+        lang('PodcastImport.old_podcast_section_subtitle'),
+    [],
+    'inline-flex text-xs p-2 text-teal-800 font-semibold bg-teal-100 border border-teal-300 rounded'
 ) ?>
 
 <?= form_label(
@@ -40,10 +44,7 @@
 <?= form_section_close() ?>
 
 
-<?= form_section(
-    lang('PodcastImport.new_podcast_section_title'),
-    lang('PodcastImport.new_podcast_section_subtitle')
-) ?>
+<?= form_section(lang('PodcastImport.new_podcast_section_title'), '') ?>
 
 <?= form_label(
     lang('PodcastImport.name'),
@@ -205,6 +206,11 @@
 ]) ?>
 
 <?= form_section_close() ?>
+
+<div class="inline-flex w-full p-2 mb-4 text-sm font-semibold text-yellow-800 bg-orange-100 border border-orange-300 rounded" role="alert">
+  <?= icon('alert', 'mr-2 text-lg flex-shrink-0') .
+      lang('PodcastImport.warning') ?>
+</div>
 
 <?= button(
     lang('PodcastImport.submit'),

@@ -21,8 +21,14 @@ if (!function_exists('form_section')) {
     function form_section(
         string $title = '',
         string $subtitle = '',
-        array $attributes = []
+        array $attributes = [],
+        string $customSubtitleClass = ''
     ): string {
+        $subtitleClass = 'text-sm text-gray-600';
+        if ($customSubtitleClass !== '') {
+            $subtitleClass = $customSubtitleClass;
+        }
+
         $section =
             '<div class="flex flex-wrap w-full gap-6 mb-8"' .
             stringify_attributes($attributes) .
@@ -31,7 +37,9 @@ if (!function_exists('form_section')) {
         $info =
             '<div class="w-full max-w-xs"><h2 class="text-lg font-semibold">' .
             $title .
-            '</h2><p class="text-sm text-gray-600">' .
+            '</h2><p class="' .
+            $subtitleClass .
+            '">' .
             $subtitle .
             '</p></div>';
 
