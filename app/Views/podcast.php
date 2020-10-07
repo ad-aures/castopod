@@ -43,10 +43,15 @@
                             ]
                         ) ?>
                     <?php foreach ($podcast->platforms as $platform): ?>
-                        <a href="<?= $platform->link_url ?>" title="<?= $platform->label ?>" target="_blank" rel="noopener noreferrer" class="ml-2">
-                        <?= platform_icon($platform->icon_filename, 'h-8') ?>
-                        </a>
-                        <?php endforeach; ?>
+                        <?php if ($platform->visible): ?>
+                            <a href="<?= $platform->link_url ?>" title="<?= $platform->label ?>" target="_blank" rel="noopener noreferrer" class="ml-2">
+                            <?= platform_icon(
+                                $platform->icon_filename,
+                                'h-8'
+                            ) ?>
+                            </a>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
                     </div>
                     <div class="mb-2 opacity-75">
                         <?= $podcast->description_html ?>
