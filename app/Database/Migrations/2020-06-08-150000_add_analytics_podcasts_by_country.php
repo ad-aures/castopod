@@ -36,7 +36,7 @@ class AddAnalyticsPodcastsByCountry extends Migration
                 'default' => 1,
             ],
         ]);
-        $this->forge->addPrimaryKey(['podcast_id', 'country_code', 'date']);
+        $this->forge->addPrimaryKey(['podcast_id', 'date', 'country_code']);
         $this->forge->addField(
             '`created_at` timestamp NOT NULL DEFAULT current_timestamp()'
         );

@@ -46,7 +46,7 @@ class AddAnalyticsWebsiteByReferer extends Migration
                 'default' => 1,
             ],
         ]);
-        $this->forge->addPrimaryKey(['podcast_id', 'referer', 'date']);
+        $this->forge->addPrimaryKey(['podcast_id', 'date', 'referer']);
         $this->forge->addField(
             '`created_at` timestamp NOT NULL DEFAULT current_timestamp()'
         );

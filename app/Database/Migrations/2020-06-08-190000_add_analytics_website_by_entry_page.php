@@ -36,7 +36,7 @@ class AddAnalyticsWebsiteByEntryPage extends Migration
                 'default' => 1,
             ],
         ]);
-        $this->forge->addPrimaryKey(['podcast_id', 'entry_page', 'date']);
+        $this->forge->addPrimaryKey(['podcast_id', 'date', 'entry_page']);
         $this->forge->addField(
             '`created_at` timestamp NOT NULL DEFAULT current_timestamp()'
         );

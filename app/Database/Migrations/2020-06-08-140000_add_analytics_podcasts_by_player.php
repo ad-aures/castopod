@@ -50,11 +50,11 @@ class AddAnalyticsPodcastsByPlayer extends Migration
         ]);
         $this->forge->addPrimaryKey([
             'podcast_id',
+            'date',
             'app',
             'device',
             'os',
             'bot',
-            'date',
         ]);
         $this->forge->addField(
             '`created_at` timestamp NOT NULL DEFAULT current_timestamp()'

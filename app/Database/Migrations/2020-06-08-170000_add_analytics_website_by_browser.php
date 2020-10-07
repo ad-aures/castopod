@@ -36,7 +36,7 @@ class AddAnalyticsWebsiteByBrowser extends Migration
                 'default' => 1,
             ],
         ]);
-        $this->forge->addPrimaryKey(['podcast_id', 'browser', 'date']);
+        $this->forge->addPrimaryKey(['podcast_id', 'date', 'browser']);
         $this->forge->addField(
             '`created_at` timestamp NOT NULL DEFAULT current_timestamp()'
         );

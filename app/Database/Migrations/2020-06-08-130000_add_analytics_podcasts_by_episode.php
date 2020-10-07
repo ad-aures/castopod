@@ -41,7 +41,7 @@ class AddAnalyticsPodcastsByEpisode extends Migration
                 'default' => 1,
             ],
         ]);
-        $this->forge->addPrimaryKey(['podcast_id', 'episode_id', 'date']);
+        $this->forge->addPrimaryKey(['podcast_id', 'date', 'episode_id']);
         $this->forge->addField(
             '`created_at` timestamp NOT NULL DEFAULT current_timestamp()'
         );
