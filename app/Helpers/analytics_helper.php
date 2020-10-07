@@ -163,10 +163,11 @@ function set_user_session_referer()
     $session->start();
 
     $newreferer = isset($_SERVER['HTTP_REFERER'])
-        ? parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST)
+        ? $_SERVER['HTTP_REFERER']
         : '- Direct -';
     $newreferer =
-        $newreferer == parse_url(current_url(false), PHP_URL_HOST)
+        parse_url($newreferer, PHP_URL_HOST) ==
+        parse_url(current_url(false), PHP_URL_HOST)
             ? '- Direct -'
             : $newreferer;
     if (!$session->has('referer') or $newreferer != '- Direct -') {
