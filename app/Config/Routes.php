@@ -45,8 +45,14 @@ $routes->get('/', 'Home::index', ['as' => 'home']);
 // Install Wizard route
 $routes->group(config('App')->installGateway, function ($routes) {
     $routes->get('/', 'Install', ['as' => 'install']);
-    $routes->post('generate-env', 'Install::attemptCreateEnv', [
-        'as' => 'generate-env',
+    $routes->post('instance-config', 'Install::attemptInstanceConfig', [
+        'as' => 'instance-config',
+    ]);
+    $routes->post('database-config', 'Install::attemptDatabaseConfig', [
+        'as' => 'database-config',
+    ]);
+    $routes->post('cache-config', 'Install::attemptCacheConfig', [
+        'as' => 'cache-config',
     ]);
     $routes->post('create-superadmin', 'Install::attemptCreateSuperAdmin', [
         'as' => 'create-superadmin',

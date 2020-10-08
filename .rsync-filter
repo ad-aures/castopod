@@ -5,7 +5,9 @@
 + public/***
 + vendor/***
 + writable/***
++ .env.example
 + DEPENDENCIES.md
 + LICENSE
 + README.md
++ INSTALL.md
 - **

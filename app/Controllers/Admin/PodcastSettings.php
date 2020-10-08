@@ -64,7 +64,7 @@ class PodcastSettings extends BaseController
             $platformLinkUrl = $platformLink['url'];
             if (
                 !empty($platformLinkUrl) &&
-                $validation->check($platformLinkUrl, 'valid_url')
+                $validation->check($platformLinkUrl, 'validate_url')
             ) {
                 $platformId = $platformModel->getPlatformId($platformName);
                 array_push($platformLinksData, [

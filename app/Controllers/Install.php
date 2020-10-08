@@ -9,12 +9,26 @@
 namespace App\Controllers;
 
 use App\Models\UserModel;
+use CodeIgniter\Controller;
 use Config\Services;
 use Dotenv\Dotenv;
-use Exception;
 
-class Install extends BaseController
+class Install extends Controller
 {
+    protected $helpers = ['form', 'components', 'svg'];
+
+    /**
+     * Constructor.
+     */
+    public function initController(
+        \CodeIgniter\HTTP\RequestInterface $request,
+        \CodeIgniter\HTTP\ResponseInterface $response,
+        \Psr\Log\LoggerInterface $logger
+    ) {
+        // Do Not Edit This Line
+        parent::initController($request, $response, $logger);
+    }
+
     /**
      * Every operation goes through this method to handle
      * the install logic.
@@ -26,25 +40,61 @@ class Install extends BaseController
     {
         try {
             // Check if .env is created and has all required fields
-            $dotenv = Dotenv::createImmutable(ROOTPATH);
+            $dotenv = Dotenv::createUnsafeImmutable(ROOTPATH);
 
             $dotenv->load();
-            $dotenv->required([
-                'app.baseURL',
-                'app.adminGateway',
-                'app.authGateway',
-                'database.default.hostname',
-                'database.default.database',
-                'database.default.username',
-                'database.default.password',
-                'database.default.DBPrefix',
-            ]);
         } catch (\Throwable $e) {
-            // Invalid .env file
             return $this->createEnv();
         }
 
-        // Check if database configuration is ok
+        // Check if the created .env file is writable to continue install process
+        if (is_writable(ROOTPATH . '.env')) {
+            try {
+                $dotenv->required([
+                    'app.baseURL',
+                    'app.adminGateway',
+                    'app.authGateway',
+                ]);
+            } catch (\Dotenv\Exception\ValidationException $e) {
+                // form to input instance configuration
+                return $this->instanceConfig();
+            }
+
+            try {
+                $dotenv->required([
+                    'database.default.hostname',
+                    'database.default.database',
+                    'database.default.username',
+                    'database.default.password',
+                    'database.default.DBPrefix',
+                ]);
+            } catch (\Dotenv\Exception\ValidationException $e) {
+                return $this->databaseConfig();
+            }
+
+            try {
+                $dotenv->required('cache.handler');
+            } catch (\Dotenv\Exception\ValidationException $e) {
+                return $this->cacheConfig();
+            }
+        } else {
+            try {
+                $dotenv->required([
+                    'app.baseURL',
+                    'app.adminGateway',
+                    'app.authGateway',
+                    'database.default.hostname',
+                    'database.default.database',
+                    'database.default.username',
+                    'database.default.password',
+                    'database.default.DBPrefix',
+                    'cache.handler',
+                ]);
+            } catch (\Dotenv\Exception\ValidationException $e) {
+                return view('install/manual_config');
+            }
+        }
+
         try {
             $db = db_connect();
 
@@ -57,10 +107,14 @@ class Install extends BaseController
                 throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
             }
         } catch (\CodeIgniter\Database\Exceptions\DatabaseException $e) {
-            // return an error view to
-            return view('install/error', [
-                'error' => lang('Install.messages.databaseConnectError'),
-            ]);
+            // Could not connect to the database
+            // show database config view to fix value
+            session()->setFlashdata(
+                'error',
+                lang('Install.messages.databaseConnectError')
+            );
+
+            return view('install/database_config');
         }
 
         // migrate if no user has been created
@@ -77,92 +131,108 @@ class Install extends BaseController
      */
     public function createEnv()
     {
-        helper('form');
+        // create empty .env file
+        try {
+            $envFile = fopen(ROOTPATH . '.env', 'w');
+            fclose($envFile);
+        } catch (\Throwable $e) {
+            // Could not create the .env file, redirect to a view with manual instructions on how to add it
+            return view('install/manual_config');
+        }
 
-        return view('install/env');
+        return redirect()->back();
     }
 
-    /**
-     * Verifies that all fields have been submitted correctly and
-     * creates the .env file after user submits the install form.
-     */
-    public function attemptCreateEnv()
+    public function instanceConfig()
     {
-        if (
-            !$this->validate([
-                'hostname' => 'required|valid_url',
-                'admin_gateway' => 'required|differs[auth_gateway]',
-                'auth_gateway' => 'required|differs[admin_gateway]',
-                'db_hostname' => 'required',
-                'db_name' => 'required',
-                'db_username' => 'required',
-                'db_password' => 'required',
-            ])
-        ) {
+        return view('install/instance_config');
+    }
+
+    public function attemptInstanceConfig()
+    {
+        $rules = [
+            'hostname' => 'required|validate_url',
+            'admin_gateway' => 'required',
+            'auth_gateway' => 'required|differs[admin_gateway]',
+        ];
+
+        if (!$this->validate($rules)) {
             return redirect()
                 ->back()
+                ->withInput()
                 ->with('errors', $this->validator->getErrors());
         }
 
-        // Create .env file with post data
-        try {
-            $envFile = fopen(ROOTPATH . '.env', 'w');
-            if (!$envFile) {
-                throw new Exception('File open failed.');
-            }
+        self::writeEnv([
+            'app.baseURL' => $this->request->getPost('hostname'),
+            'app.adminGateway' => $this->request->getPost('admin_gateway'),
+            'app.authGateway' => $this->request->getPost('auth_gateway'),
+        ]);
 
-            $envMapping = [
-                [
-                    'key' => 'app.baseURL',
-                    'value' => $this->request->getPost('hostname'),
-                ],
-                [
-                    'key' => 'app.adminGateway',
-                    'value' => $this->request->getPost('admin_gateway'),
-                ],
-                [
-                    'key' => 'app.authGateway',
-                    'value' => $this->request->getPost('auth_gateway'),
-                ],
-                [
-                    'key' => 'database.default.hostname',
-                    'value' => $this->request->getPost('db_hostname'),
-                ],
-                [
-                    'key' => 'database.default.database',
-                    'value' => $this->request->getPost('db_name'),
-                ],
-                [
-                    'key' => 'database.default.username',
-                    'value' => $this->request->getPost('db_username'),
-                ],
-                [
-                    'key' => 'database.default.password',
-                    'value' => $this->request->getPost('db_password'),
-                ],
-                [
-                    'key' => 'database.default.DBPrefix',
-                    'value' => $this->request->getPost('db_prefix'),
-                ],
-            ];
+        return redirect()->back();
+    }
 
-            foreach ($envMapping as $envVar) {
-                if ($envVar['value']) {
-                    fwrite(
-                        $envFile,
-                        $envVar['key'] . '="' . $envVar['value'] . '"' . PHP_EOL
-                    );
-                }
-            }
+    public function databaseConfig()
+    {
+        return view('install/database_config');
+    }
 
-            return redirect()->back();
-        } catch (\Throwable $e) {
+    public function attemptDatabaseConfig()
+    {
+        $rules = [
+            'db_hostname' => 'required',
+            'db_name' => 'required',
+            'db_username' => 'required',
+            'db_password' => 'required',
+        ];
+
+        if (!$this->validate($rules)) {
             return redirect()
                 ->back()
-                ->with('error', $e->getMessage());
-        } finally {
-            fclose($envFile);
+                ->withInput()
+                ->with('errors', $this->validator->getErrors());
         }
+
+        self::writeEnv([
+            'database.default.hostname' => $this->request->getPost(
+                'db_hostname'
+            ),
+            'database.default.database' => $this->request->getPost('db_name'),
+            'database.default.username' => $this->request->getPost(
+                'db_username'
+            ),
+            'database.default.password' => $this->request->getPost(
+                'db_password'
+            ),
+            'database.default.DBPrefix' => $this->request->getPost('db_prefix'),
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function cacheConfig()
+    {
+        return view('install/cache_config');
+    }
+
+    public function attemptCacheConfig()
+    {
+        $rules = [
+            'cache_handler' => 'required',
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $this->validator->getErrors());
+        }
+
+        self::writeEnv([
+            'cache.handler' => $this->request->getPost('cache_handler'),
+        ]);
+
+        return redirect()->back();
     }
 
     /**
@@ -172,14 +242,8 @@ class Install extends BaseController
     {
         $migrations = \Config\Services::migrations();
 
-        if (
-            !$migrations->setNamespace('Myth\Auth')->latest() or
-            !$migrations->setNamespace(APP_NAMESPACE)->latest()
-        ) {
-            return view('install/error', [
-                'error' => lang('Install.messages.migrationError'),
-            ]);
-        }
+        !$migrations->setNamespace('Myth\Auth')->latest();
+        !$migrations->setNamespace(APP_NAMESPACE)->latest();
     }
 
     /**
@@ -187,16 +251,10 @@ class Install extends BaseController
      */
     public function seed()
     {
-        try {
-            $seeder = \Config\Database::seeder();
+        $seeder = \Config\Database::seeder();
 
-            // Seed database
-            $seeder->call('AppSeeder');
-        } catch (\Throwable $e) {
-            return view('install/error', [
-                'error' => lang('Install.messages.seedError'),
-            ]);
-        }
+        // Seed database
+        $seeder->call('AppSeeder');
     }
 
     /**
@@ -204,9 +262,7 @@ class Install extends BaseController
      */
     public function createSuperAdmin()
     {
-        helper('form');
-
-        return view('install/superadmin');
+        return view('install/create_superadmin');
     }
 
     /**
@@ -245,7 +301,7 @@ class Install extends BaseController
 
         $db->transStart();
         if (!($userId = $userModel->insert($user, true))) {
-            $db->transComplete();
+            $db->transRollback();
 
             return redirect()
                 ->back()
@@ -260,11 +316,47 @@ class Install extends BaseController
         $db->transComplete();
 
         // Success!
-        // set redirect url to admin page after being redirected to login page
-        $_SESSION['redirect_url'] = route_to('admin');
+        // set redirect_url session as admin area to go to after login
+        session()->set('redirect_url', route_to('admin'));
 
         return redirect()
             ->route('login')
             ->with('message', lang('Install.messages.createSuperAdminSuccess'));
+    }
+
+    /**
+     * writes config values in .env file
+     * overwrites any existing key and appends new ones
+     *
+     * @param array $data key/value config pairs
+     *
+     * @return void
+     */
+    public static function writeEnv($configData)
+    {
+        $envData = file(ROOTPATH . '.env'); // reads an array of lines
+
+        foreach ($configData as $key => $value) {
+            $replaced = false;
+            $keyVal = $key . '="' . $value . '"' . PHP_EOL;
+            $envData = array_map(function ($line) use (
+                $key,
+                $keyVal,
+                &$replaced
+            ) {
+                if (strpos($line, $key) === 0) {
+                    $replaced = true;
+                    return $keyVal;
+                }
+                return $line;
+            },
+            $envData);
+
+            if (!$replaced) {
+                array_push($envData, $keyVal);
+            }
+        }
+
+        file_put_contents(ROOTPATH . '.env', implode('', $envData));
     }
 }

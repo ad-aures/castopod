@@ -13,4 +13,6 @@ return [
         '{field} is either not an image, or it is not wide or tall enough.',
     'is_image_squared' =>
         '{field} is either not an image, or it is not squared (width and height differ).',
+    'validate_url' =>
+        'The {field} field must be a valid URL (eg. https://example.com/).',
 ];

@@ -163,6 +163,9 @@ class PlatformSeeder extends Seeder
                 'icon_filename' => 'tunein.svg',
             ],
         ];
-        $this->db->table('platforms')->insertBatch($data);
+        $this->db
+            ->table('platforms')
+            ->ignore(true)
+            ->insertBatch($data);
     }
 }

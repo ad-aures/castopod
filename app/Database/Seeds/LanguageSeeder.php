@@ -633,6 +633,9 @@ class LanguageSeeder extends Seeder
             ['code' => 'zu', 'name' => 'Zulu', 'native_name' => 'isiZulu'],
         ];
 
-        $this->db->table('languages')->insertBatch($data);
+        $this->db
+            ->table('languages')
+            ->ignore(true)
+            ->insertBatch($data);
     }
 }

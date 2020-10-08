@@ -7,18 +7,39 @@
  */
 
 return [
+    'manual_config' => 'Manual configuration',
+    'manual_config_subtitle' =>
+        'Create a `.env` file with your settings and refresh the page to continue installation.',
     'form' => [
-        'castopod_config' => 'Castopod configuration',
+        'instance_config' => 'Instance configuration',
         'hostname' => 'Hostname',
         'admin_gateway' => 'Admin gateway',
+        'admin_gateway_hint' =>
+            'The route to access the admin area (eg. https://example.com/cp-admin). It is set by default as cp-admin, we recommend you change it for security reasons.',
         'auth_gateway' => 'Auth gateway',
-        'db_config' => 'Database configuration',
+        'auth_gateway_hint' =>
+            'The route to access the authentication pages (eg. https://example.com/cp-auth). It is set by default as cp-auth, we recommend you change it for security reasons.',
+        'database_config' => 'Database configuration',
+        'database_config_hint' =>
+            'Castopod needs to connect to your MySQL (or MariaDB) database. If you do not have these required info, please contact your server administrator.',
         'db_hostname' => 'Database hostname',
         'db_name' => 'Database name',
         'db_username' => 'Database username',
         'db_password' => 'Database password',
         'db_prefix' => 'Database prefix',
-        'submit_install' => 'Install!',
+        'db_prefix_hint' =>
+            'The prefix of the Castopod table names, leave as is if you don\'t know what it means.',
+        'cache_config' => 'Cache configuration',
+        'cache_config_hint' =>
+            'Choose your preferred cache handler. Leave it as the default value if you have no clue what it means.',
+        'cache_handler' => 'Cache handler',
+        'cacheHandlerOptions' => [
+            'file' => 'File',
+            'redis' => 'Redis',
+            'memcached' => 'Memcached',
+        ],
+        'next' => 'Next',
+        'submit' => 'Finish install',
         'create_superadmin' => 'Create your superadmin account',
         'email' => 'Email',
         'username' => 'Username',
@@ -26,17 +47,11 @@ return [
         'submit_create_superadmin' => 'Create superadmin!',
     ],
     'messages' => [
-        'migrateSuccess' =>
-            'Database has been created successfully, and all required data have been stored!',
         'createSuperAdminSuccess' =>
-            'Your superadmin account has been created successfully. Let\'s login to the admin area!',
+            'Your superadmin account has been created successfully. Login to start podcasting!',
         'databaseConnectError' =>
-            'Unable to connect to the database. Make sure the values in .env are correct. If not, edit them and refresh the page or delete the .env file to restart install.',
-        'migrationError' =>
-            'There was an issue during migration. Make sure the values in .env are correct. If not, edit them and refresh the page or delete the .env file to restart install.',
-        'seedError' =>
-            'There was an issue when seeding the database. Make sure the values in .env are correct. If not, edit them and refresh the page or delete the .env file to restart install.',
-        'error' =>
-            '<strong>An error occurred during install</strong><br/> {message}',
+            'Castopod could not connect to your database. Edit your database configuration and try again.',
+        'writeError' =>
+            'Couldn\'t create/write the `.env` file. You must create it manually by following the `.env.example` file template in the Castopod package.',
     ],
 ];

@@ -29,4 +29,22 @@ class Rules
     }
 
     //--------------------------------------------------------------------
+
+    /**
+     * Checks a URL to ensure it's formed correctly.
+     *
+     * @param string $str
+     *
+     * @return boolean
+     */
+    public function validate_url(string $str = null): bool
+    {
+        if (empty($str)) {
+            return false;
+        }
+
+        return filter_var($str, FILTER_VALIDATE_URL) !== false;
+    }
+
+    //--------------------------------------------------------------------
 }

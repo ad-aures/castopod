@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
     <link rel="stylesheet" href="/assets/index.css"/>
+    <script src="/assets/install.js" type="module" defer></script>
 </head>
 
 <body class="flex flex-col min-h-screen mx-auto">
@@ -16,7 +17,7 @@
             Castopod installer
         </div>
     </header>
-    <main class="container flex-1 px-4 py-10 mx-auto">
+    <main class="container flex flex-col items-center justify-center flex-1 px-4 py-10 mx-auto">
         <?= view('_message_block') ?>
         <?= $this->renderSection('content') ?>
     </main>

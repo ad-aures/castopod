@@ -176,7 +176,7 @@ class Podcast extends BaseController
         helper(['media', 'misc']);
 
         $rules = [
-            'imported_feed_url' => 'required|valid_url',
+            'imported_feed_url' => 'required|validate_url',
             'season_number' => 'is_natural_no_zero|permit_empty',
             'max_episodes' => 'is_natural_no_zero|permit_empty',
         ];
