@@ -22,4 +22,62 @@ class AnalyticsWebsiteByRefererModel extends Model
     protected $useSoftDeletes = false;
 
     protected $useTimestamps = false;
+
+    /**
+     * Gets referer data for a podcast
+     *
+     * @param int $podcastId
+     *
+     * @return array
+     */
+    public function getData(int $podcastId): array
+    {
+        if (!($found = cache("{$podcastId}_analytics_website_by_referer"))) {
+            $found = $this->select('`referer` as `labels`')
+                ->selectSum('`hits`', '`values`')
+                ->groupBy('`referer`')
+                ->where([
+                    '`podcast_id`' => $podcastId,
+                    '`date` >' => date('Y-m-d', strtotime('-1 week')),
+                ])
+                ->orderBy('`referer`', 'ASC')
+                ->findAll();
+
+            cache()->save(
+                "{$podcastId}_analytics_website_by_referer",
+                $found,
+                600
+            );
+        }
+        return $found;
+    }
+
+    /**
+     * Gets domain data for a podcast
+     *
+     * @param int $podcastId
+     *
+     * @return array
+     */
+    public function getDataByDomain(int $podcastId): array
+    {
+        if (!($found = cache("{$podcastId}_analytics_website_by_domain"))) {
+            $found = $this->select('`domain` as `labels`')
+                ->selectSum('`hits`', '`values`')
+                ->groupBy('`domain`')
+                ->where([
+                    '`podcast_id`' => $podcastId,
+                    '`date` >' => date('Y-m-d', strtotime('-1 week')),
+                ])
+                ->orderBy('`domain`', 'ASC')
+                ->findAll();
+
+            cache()->save(
+                "{$podcastId}_analytics_website_by_domain",
+                $found,
+                600
+            );
+        }
+        return $found;
+    }
 }

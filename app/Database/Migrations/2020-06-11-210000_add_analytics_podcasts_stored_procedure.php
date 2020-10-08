@@ -17,7 +17,7 @@ class AddAnalyticsPodcastsStoredProcedure extends Migration
     public function up()
     {
         // Creates Stored Procedure for data insertion
-        // Example: CALL analytics_podcasts(1,2,'FR','phone/android/Deezer');
+        // Example: CALL analytics_podcasts(1, 2, 'FR', 'IDF', 48.853, 2.349, PodcastAddict, 'phone', 'android', 0, 1);
         $prefix = $this->db->getPrefix();
 
         $createQuery = <<<EOD
@@ -31,7 +31,8 @@ CREATE PROCEDURE `{$prefix}analytics_podcasts` (
     IN `p_app` VARCHAR(128) CHARSET utf8mb4,
     IN `p_device` VARCHAR(32) CHARSET utf8mb4,
     IN `p_os` VARCHAR(32) CHARSET utf8mb4,
-    IN `p_bot` TINYINT(1) UNSIGNED
+    IN `p_bot` TINYINT(1) UNSIGNED,
+    IN `p_new_listener` TINYINT(1) UNSIGNED
     )  MODIFIES SQL DATA
 DETERMINISTIC
 SQL SECURITY INVOKER
@@ -40,7 +41,7 @@ BEGIN
 IF NOT `p_bot` THEN
     INSERT INTO `{$prefix}analytics_podcasts`(`podcast_id`, `date`) 
         VALUES (p_podcast_id, DATE(NOW())) 
-        ON DUPLICATE KEY UPDATE `hits`=`hits`+1;
+        ON DUPLICATE KEY UPDATE `hits`=`hits`+1, `unique_listeners`=`unique_listeners`+`p_new_listener`;
     INSERT INTO `{$prefix}analytics_podcasts_by_episode`(`podcast_id`, `episode_id`, `date`, `age`) 
     SELECT p_podcast_id, p_episode_id, DATE(NOW()), datediff(now(),`published_at`) FROM `{$prefix}episodes` WHERE `id`= p_episode_id
         ON DUPLICATE KEY UPDATE `hits`=`hits`+1;

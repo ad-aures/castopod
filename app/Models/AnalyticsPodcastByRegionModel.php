@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Class AnalyticsWebsiteByBrowserModel
- * Model for analytics_website_by_browser table in database
+ * Class AnalyticsPodcastByRegionModel
+ * Model for analytics_podcasts_by_region table in database
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
@@ -12,19 +12,19 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class AnalyticsWebsiteByBrowserModel extends Model
+class AnalyticsPodcastByRegionModel extends Model
 {
-    protected $table = 'analytics_website_by_browser';
+    protected $table = 'analytics_podcasts_by_region';
 
     protected $allowedFields = [];
 
-    protected $returnType = \App\Entities\AnalyticsWebsiteByBrowser::class;
+    protected $returnType = \App\Entities\AnalyticsPodcastsByRegion::class;
     protected $useSoftDeletes = false;
 
     protected $useTimestamps = false;
 
     /**
-     * Gets browser data for a podcast
+     * Gets region data for a podcast
      *
      * @param int $podcastId
      *
@@ -32,19 +32,23 @@ class AnalyticsWebsiteByBrowserModel extends Model
      */
     public function getData(int $podcastId): array
     {
-        if (!($found = cache("{$podcastId}_analytics_website_by_browser"))) {
-            $found = $this->select('`browser` as `labels`')
+        if (!($found = cache("{$podcastId}_analytics_podcast_by_region"))) {
+            $found = $this->select(
+                '`country_code`, `region_code`, `latitude`, `longitude`'
+            )
                 ->selectSum('`hits`', '`values`')
-                ->groupBy('`browser`')
+                ->groupBy(
+                    '`country_code`, `region_code`, `latitude`, `longitude`'
+                )
                 ->where([
                     '`podcast_id`' => $podcastId,
                     '`date` >' => date('Y-m-d', strtotime('-1 week')),
                 ])
-                ->orderBy('`browser`', 'ASC')
+                ->orderBy('`country_code`, `region_code`', 'ASC')
                 ->findAll();
 
             cache()->save(
-                "{$podcastId}_analytics_website_by_browser",
+                "{$podcastId}_analytics_podcast_by_region",
                 $found,
                 600
             );

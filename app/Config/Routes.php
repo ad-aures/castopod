@@ -122,6 +122,14 @@ $routes->group(
                     'filter' => 'permission:podcasts-view,podcast-view',
                 ]);
                 $routes->get(
+                    'analytics-data/(:segment)',
+                    'AnalyticsData::getData/$1/$2',
+                    [
+                        'as' => 'analytics-full-data',
+                        'filter' => 'permission:podcasts-view,podcast-view',
+                    ]
+                );
+                $routes->get(
                     'analytics-data/(:segment)/(:segment)',
                     'AnalyticsData::getData/$1/$2/$3',
                     [

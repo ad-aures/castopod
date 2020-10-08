@@ -199,7 +199,7 @@ function webpage_hit($podcast_id)
 
         $referer = $session->get('referer');
         $domain = empty(parse_url($referer, PHP_URL_HOST))
-            ? null
+            ? '- Direct -'
             : parse_url($referer, PHP_URL_HOST);
         parse_str(parse_url($referer, PHP_URL_QUERY), $queries);
         $keywords = empty($queries['q']) ? null : $queries['q'];
@@ -248,9 +248,13 @@ function podcast_hit($podcastId, $episodeId, $bytesThreshold, $fileSize)
         if ($session->get('denyListIp')) {
             $session->get('player')['bot'] = true;
         }
-        $httpRange = $_SERVER['HTTP_RANGE'];
-        // We create a sha1 hash for this IP_Address+User_Agent+Episode_ID:
-        $hashID =
+        //We get the HTTP header field `Range`:
+        $httpRange = isset($_SERVER['HTTP_RANGE'])
+            ? $_SERVER['HTTP_RANGE']
+            : null;
+
+        // We create a sha1 hash for this IP_Address+User_Agent+Episode_ID (used to count only once multiple episode downloads):
+        $episodeHashId =
             '_IpUaEp_' .
             sha1(
                 $_SERVER['REMOTE_ADDR'] .
@@ -260,12 +264,13 @@ function podcast_hit($podcastId, $episodeId, $bytesThreshold, $fileSize)
                     $episodeId
             );
         // Was this episode downloaded in the past 24h:
-        $downloadedBytes = cache($hashID);
+        $downloadedBytes = cache($episodeHashId);
         // Rolling window is 24 hours (86400 seconds):
-        $ttl = 86400;
+        $rollingTTL = 86400;
         if ($downloadedBytes) {
             // In case it was already downloaded, TTL should be adjusted (rolling window is 24h since 1st download):
-            $ttl = cache()->getMetadata($hashID)['expire'] - time();
+            $rollingTTL =
+                cache()->getMetadata($episodeHashId)['expire'] - time();
         } else {
             // If it was never downloaded that means that zero byte were downloaded:
             $downloadedBytes = 0;
@@ -274,7 +279,7 @@ function podcast_hit($podcastId, $episodeId, $bytesThreshold, $fileSize)
         // (Otherwise it means that this was already counted, therefore we don't do anything)
         if ($downloadedBytes < $bytesThreshold) {
             // If HTTP_RANGE is null we are downloading the complete file:
-            if (!isset($httpRange)) {
+            if (!$httpRange) {
                 $downloadedBytes = $fileSize;
             } else {
                 // [0-1] bytes range requests are used (by Apple) to check that file exists and that 206 partial content is working.
@@ -291,19 +296,44 @@ function podcast_hit($podcastId, $episodeId, $bytesThreshold, $fileSize)
                 }
             }
             // We save the number of downloaded bytes for this user and this episode:
-            cache()->save($hashID, $downloadedBytes, $ttl);
+            cache()->save($episodeHashId, $downloadedBytes, $rollingTTL);
 
-            // If more that 1mn was downloaded, we send that to the database:
+            // If more that 1mn was downloaded, that's a hit, we send that to the database:
             if ($downloadedBytes >= $bytesThreshold) {
                 $db = \Config\Database::connect();
                 $procedureName = $db->prefixTable('analytics_podcasts');
+
+                // We create a sha1 hash for this IP_Address+User_Agent+Podcast_ID (used to count unique listeners):
+                $listenerHashId =
+                    '_IpUaPo_' .
+                    sha1(
+                        $_SERVER['REMOTE_ADDR'] .
+                            '_' .
+                            $_SERVER['HTTP_USER_AGENT'] .
+                            '_' .
+                            $podcastId
+                    );
+                $newListener = 1;
+                // Has this listener already downloaded an episode today:
+                $downloadsByUser = cache($listenerHashId);
+                // We add one download
+                if ($downloadsByUser) {
+                    $newListener = 0;
+                    $downloadsByUser++;
+                } else {
+                    $downloadsByUser = 1;
+                }
+                // Listener count is calculated from 00h00 to 23h59:
+                $midnightTTL = strtotime('tomorrow') - time();
+                // We save the download count for this user until midnight:
+                cache()->save($listenerHashId, $downloadsByUser, $midnightTTL);
 
                 $app = $session->get('player')['app'];
                 $device = $session->get('player')['device'];
                 $os = $session->get('player')['os'];
                 $bot = $session->get('player')['bot'];
 
-                $db->query("CALL $procedureName(?,?,?,?,?,?,?,?,?,?);", [
+                $db->query("CALL $procedureName(?,?,?,?,?,?,?,?,?,?,?);", [
                     $podcastId,
                     $episodeId,
                     $session->get('location')['countryCode'],
@@ -314,10 +344,12 @@ function podcast_hit($podcastId, $episodeId, $bytesThreshold, $fileSize)
                     $device == null ? '' : $device,
                     $os == null ? '' : $os,
                     $bot == null ? 0 : $bot,
+                    $newListener,
                 ]);
             }
         }
     } catch (\Exception $e) {
         // If things go wrong the show must go on and the user must be able to download the file
+        log_message('critical', $e);
     }
 }

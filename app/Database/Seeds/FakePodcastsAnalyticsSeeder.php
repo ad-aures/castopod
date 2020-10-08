@@ -114,6 +114,7 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                             'podcast_id' => $podcast->id,
                             'date' => date('Y-m-d', $date),
                             'hits' => $hits,
+                            'unique_listeners' => $hits,
                         ];
                         $analytics_podcasts_by_country[] = [
                             'podcast_id' => $podcast->id,

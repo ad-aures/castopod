@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class AnalyticsPodcastsByPlayerModel
+ * Class AnalyticsPodcastByPlayerModel
  * Model for analytics_podcasts_by_player table in database
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -12,7 +12,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class AnalyticsPodcastsByPlayerModel extends Model
+class AnalyticsPodcastByPlayerModel extends Model
 {
     protected $table = 'analytics_podcasts_by_player';
 
@@ -24,7 +24,7 @@ class AnalyticsPodcastsByPlayerModel extends Model
     protected $useTimestamps = false;
 
     /**
-     * Gets all data for a podcast
+     * Gets player data for a podcast
      *
      * @param int $podcastId
      *
@@ -41,18 +41,18 @@ class AnalyticsPodcastsByPlayerModel extends Model
                 ->selectSum('`hits`', '`values`')
                 ->where([
                     '`podcast_id`' => $podcastId,
-                    '`app` !=' => null,
+                    '`app` !=' => '',
                     '`bot`' => 0,
                     '`date` >' => date('Y-m-d', strtotime('-1 week')),
                 ])
                 ->groupBy('`labels`')
-                ->orderBy('`values``', 'DESC')
+                ->orderBy('`values`', 'DESC')
                 ->findAll(10);
 
             cache()->save(
                 "{$podcastId}_analytics_podcasts_by_player_by_app",
                 $found,
-                14400
+                600
             );
         }
 
@@ -60,7 +60,7 @@ class AnalyticsPodcastsByPlayerModel extends Model
     }
 
     /**
-     * Gets all data for a podcast
+     * Gets device data for a podcast
      *
      * @param int $podcastId
      *
@@ -84,7 +84,7 @@ class AnalyticsPodcastsByPlayerModel extends Model
                     '`date` >' => date('Y-m-d', strtotime('-1 week')),
                 ])
                 ->groupBy('`ids`')
-                ->orderBy('`values``', 'DESC')
+                ->orderBy('`values`', 'DESC')
                 ->findAll();
 
             $foundOs = $this->select(
@@ -98,7 +98,7 @@ class AnalyticsPodcastsByPlayerModel extends Model
                     '`date` >' => date('Y-m-d', strtotime('-1 week')),
                 ])
                 ->groupBy('`ids`')
-                ->orderBy('`values``', 'DESC')
+                ->orderBy('`values`', 'DESC')
                 ->findAll();
 
             $foundDevice = $this->select(
@@ -112,7 +112,7 @@ class AnalyticsPodcastsByPlayerModel extends Model
                     '`date` >' => date('Y-m-d', strtotime('-1 week')),
                 ])
                 ->groupBy('`ids`')
-                ->orderBy('`values``', 'DESC')
+                ->orderBy('`values`', 'DESC')
                 ->findAll();
 
             $foundBot = $this->select(
@@ -125,14 +125,14 @@ class AnalyticsPodcastsByPlayerModel extends Model
                     '`date` >' => date('Y-m-d', strtotime('-1 week')),
                 ])
                 ->groupBy('`ids`')
-                ->orderBy('`values``', 'DESC')
+                ->orderBy('`values`', 'DESC')
                 ->findAll();
 
             $found = array_merge($foundApp, $foundOs, $foundDevice, $foundBot);
             cache()->save(
                 "{$podcastId}_analytics_podcasts_by_player_by_device",
                 $found,
-                14400
+                600
             );
         }
 

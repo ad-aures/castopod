@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Class AddAnalyticsEpisodesByCountry
- * Creates analytics_episodes_by_country table in database
+ * Class AddAnalyticsPodcastsByEpisode
+ * Creates analytics_episodes_by_episode table in database
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/

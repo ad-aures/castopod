@@ -22,4 +22,33 @@ class AnalyticsWebsiteByEntryPageModel extends Model
     protected $useSoftDeletes = false;
 
     protected $useTimestamps = false;
+
+    /**
+     * Gets entry pages data for a podcast
+     *
+     * @param int $podcastId
+     *
+     * @return array
+     */
+    public function getData(int $podcastId): array
+    {
+        if (!($found = cache("{$podcastId}_analytics_website_by_entry_page"))) {
+            $found = $this->select('`entry_page` as `labels`')
+                ->selectSum('`hits`', '`values`')
+                ->groupBy('`entry_page`')
+                ->where([
+                    '`podcast_id`' => $podcastId,
+                    '`date` >' => date('Y-m-d', strtotime('-1 week')),
+                ])
+                ->orderBy('`entry_page`', 'ASC')
+                ->findAll();
+
+            cache()->save(
+                "{$podcastId}_analytics_website_by_entry_page",
+                $found,
+                600
+            );
+        }
+        return $found;
+    }
 }

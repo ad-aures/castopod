@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class AnalyticsPodcastsByEpisodeModel
+ * Class AnalyticsPodcastByEpisodeModel
  * Model for analytics_podcasts_by_episodes table in database
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -12,7 +12,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class AnalyticsPodcastsByEpisodeModel extends Model
+class AnalyticsPodcastByEpisodeModel extends Model
 {
     protected $table = 'analytics_podcasts_by_episode';
 
@@ -81,7 +81,7 @@ class AnalyticsPodcastsByEpisodeModel extends Model
                 cache()->save(
                     "{$podcastId}_analytics_podcast_by_episode_by_day",
                     $found,
-                    14400
+                    600
                 );
             }
             return $found;
@@ -104,7 +104,7 @@ class AnalyticsPodcastsByEpisodeModel extends Model
                 cache()->save(
                     "{$podcastId}_{$episodeId}_analytics_podcast_by_episode_by_day",
                     $found,
-                    14400
+                    600
                 );
             }
             return $found;

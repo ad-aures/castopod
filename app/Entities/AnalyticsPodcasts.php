@@ -18,5 +18,6 @@ class AnalyticsPodcasts extends Entity
         'podcast_id' => 'integer',
         'date' => 'datetime',
         'hits' => 'integer',
+        'unique_listeners' => 'integer',
     ];
 }

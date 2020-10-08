@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Class AddAnalyticsPodcastsByCountry
- * Creates analytics_podcasts_by_country table in database
+ * Class AddAnalyticsPodcasts
+ * Creates analytics_podcasts table in database
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
@@ -26,6 +26,11 @@ class AddAnalyticsPodcasts extends Migration
                 'type' => 'date',
             ],
             'hits' => [
+                'type' => 'INT',
+                'constraint' => 10,
+                'default' => 1,
+            ],
+            'unique_listeners' => [
                 'type' => 'INT',
                 'constraint' => 10,
                 'default' => 1,

@@ -23,14 +23,15 @@ class AnalyticsData extends BaseController
 
     public function _remap($method, ...$params)
     {
-        if (count($params) > 2) {
+        if (count($params) > 1) {
             if (!($this->podcast = (new PodcastModel())->find($params[0]))) {
                 throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound(
                     'Podcast not found: ' . $params[0]
                 );
             }
             $this->className = '\App\Models\Analytics' . $params[1] . 'Model';
-            $this->methodName = 'getData' . $params[2];
+            $this->methodName =
+                'getData' . (empty($params[2]) ? '' : $params[2]);
             if (count($params) > 3) {
                 if (
                     !($this->episode = (new EpisodeModel())

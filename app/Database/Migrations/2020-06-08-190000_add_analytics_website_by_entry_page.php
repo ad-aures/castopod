@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Class AddAnalyticsWebsiteByReferer
- * Creates analytics_website_by_referer table in database
+ * Class AddAnalyticsWebsiteByEntryPage
+ * Creates analytics_website_by_entry_page table in database
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
