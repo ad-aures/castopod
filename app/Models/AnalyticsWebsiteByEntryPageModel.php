@@ -40,7 +40,8 @@ class AnalyticsWebsiteByEntryPageModel extends Model
                     '`podcast_id`' => $podcastId,
                     '`date` >' => date('Y-m-d', strtotime('-1 week')),
                 ])
-                ->orderBy('`entry_page`', 'ASC')
+                ->orderBy('`values`', 'DESC')
+                ->limit(10)
                 ->findAll();
 
             cache()->save(

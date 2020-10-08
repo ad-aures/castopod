@@ -40,7 +40,7 @@ class AnalyticsPodcastByCountryModel extends Model
                     '`podcast_id`' => $podcastId,
                     '`date` >' => date('Y-m-d', strtotime('-1 week')),
                 ])
-                ->orderBy('`labels`', 'ASC')
+                ->orderBy('`values`', 'DESC')
                 ->findAll();
 
             cache()->save(

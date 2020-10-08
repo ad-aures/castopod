@@ -40,7 +40,7 @@ class AnalyticsWebsiteByBrowserModel extends Model
                     '`podcast_id`' => $podcastId,
                     '`date` >' => date('Y-m-d', strtotime('-1 week')),
                 ])
-                ->orderBy('`browser`', 'ASC')
+                ->orderBy('`values`', 'DESC')
                 ->findAll();
 
             cache()->save(

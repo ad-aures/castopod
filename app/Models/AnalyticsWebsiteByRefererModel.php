@@ -40,7 +40,8 @@ class AnalyticsWebsiteByRefererModel extends Model
                     '`podcast_id`' => $podcastId,
                     '`date` >' => date('Y-m-d', strtotime('-1 week')),
                 ])
-                ->orderBy('`referer`', 'ASC')
+                ->orderBy('`values`', 'DESC')
+                ->limit(10)
                 ->findAll();
 
             cache()->save(
@@ -69,7 +70,8 @@ class AnalyticsWebsiteByRefererModel extends Model
                     '`podcast_id`' => $podcastId,
                     '`date` >' => date('Y-m-d', strtotime('-1 week')),
                 ])
-                ->orderBy('`domain`', 'ASC')
+                ->orderBy('`values`', 'DESC')
+                ->limit(10)
                 ->findAll();
 
             cache()->save(

@@ -44,7 +44,7 @@ class AnalyticsPodcastByRegionModel extends Model
                     '`podcast_id`' => $podcastId,
                     '`date` >' => date('Y-m-d', strtotime('-1 week')),
                 ])
-                ->orderBy('`country_code`, `region_code`', 'ASC')
+                ->orderBy('`values`', 'DESC')
                 ->findAll();
 
             cache()->save(
