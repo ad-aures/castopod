@@ -56,9 +56,7 @@ class AnalyticsPodcastModel extends Model
     public function getDataByMonth(int $podcastId): array
     {
         if (!($found = cache("{$podcastId}_analytics_podcast_by_month"))) {
-            $found = $this->select(
-                'concat(year(`date`),"-",month(`date`),"-01") as `labels`'
-            )
+            $found = $this->select('DATE_FORMAT(`date`,"%Y-%m-01") as `labels`')
                 ->selectSum('`hits`', '`values`')
                 ->where([
                     '`podcast_id`' => $podcastId,
@@ -124,9 +122,7 @@ class AnalyticsPodcastModel extends Model
                 "{$podcastId}_analytics_podcast_unique_listeners_by_month"
             ))
         ) {
-            $found = $this->select(
-                'concat(year(`date`),"-",month(`date`),"-01") as `labels`'
-            )
+            $found = $this->select('DATE_FORMAT(`date`,"%Y-%m-01") as `labels`')
                 ->selectSum('`unique_listeners`', '`values`')
                 ->where([
                     '`podcast_id`' => $podcastId,

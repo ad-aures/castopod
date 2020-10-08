@@ -35,13 +35,13 @@ class AnalyticsWebsiteByBrowserModel extends Model
         if (!($found = cache("{$podcastId}_analytics_website_by_browser"))) {
             $found = $this->select('`browser` as `labels`')
                 ->selectSum('`hits`', '`values`')
-                ->groupBy('`browser`')
                 ->where([
                     '`podcast_id`' => $podcastId,
                     '`date` >' => date('Y-m-d', strtotime('-1 week')),
                 ])
+                ->groupBy('`labels`')
                 ->orderBy('`values`', 'DESC')
-                ->findAll();
+                ->findAll(10);
 
             cache()->save(
                 "{$podcastId}_analytics_website_by_browser",

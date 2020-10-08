@@ -35,13 +35,13 @@ class AnalyticsPodcastByCountryModel extends Model
         if (!($found = cache("{$podcastId}_analytics_podcast_by_country"))) {
             $found = $this->select('`country_code` as `labels`')
                 ->selectSum('`hits`', '`values`')
-                ->groupBy('`country_code`')
                 ->where([
                     '`podcast_id`' => $podcastId,
                     '`date` >' => date('Y-m-d', strtotime('-1 week')),
                 ])
+                ->groupBy('`labels`')
                 ->orderBy('`values`', 'DESC')
-                ->findAll();
+                ->findAll(10);
 
             cache()->save(
                 "{$podcastId}_analytics_podcast_by_country",

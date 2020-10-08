@@ -35,14 +35,13 @@ class AnalyticsWebsiteByEntryPageModel extends Model
         if (!($found = cache("{$podcastId}_analytics_website_by_entry_page"))) {
             $found = $this->select('`entry_page` as `labels`')
                 ->selectSum('`hits`', '`values`')
-                ->groupBy('`entry_page`')
                 ->where([
                     '`podcast_id`' => $podcastId,
                     '`date` >' => date('Y-m-d', strtotime('-1 week')),
                 ])
+                ->groupBy('`labels`')
                 ->orderBy('`values`', 'DESC')
-                ->limit(10)
-                ->findAll();
+                ->findAll(10);
 
             cache()->save(
                 "{$podcastId}_analytics_website_by_entry_page",
