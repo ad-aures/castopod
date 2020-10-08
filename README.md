@@ -15,7 +15,7 @@ Castopod is a part of Fediverse (Mastodon, Pleroma, PixelFed, PeerTube…). Podc
 Castopod is compatible with all Podcasts players and platforms (it can automatically generate an RSS feed).
 Moreover Podcasters can choose to publish on Castopod while keeping their existing hosting solution (it can automatically generate posts from an existing RSS feed).
 
-![Castopod Users](https://podlibre.org/img/Business-31.svg)
+![Castopod Users](https://podlibre.org/static/images/Business-31.svg)
 
 ---
 
