@@ -64,8 +64,8 @@ class AnalyticsPodcastModel extends Model
                     '`podcast_id`' => $podcastId,
                     '`date` >' => date('Y-m-d', strtotime('-1 year')),
                 ])
-                ->orderBy('`date`', 'ASC')
-                ->groupBy('concat(month(`date`),"-",year(`date`))')
+                ->groupBy('`labels`')
+                ->orderBy('`labels`', 'ASC')
                 ->findAll();
 
             cache()->save(
@@ -131,8 +131,8 @@ class AnalyticsPodcastModel extends Model
                 ->where([
                     '`podcast_id`' => $podcastId,
                 ])
-                ->groupBy('concat(month(`date`),"-",year(`date`))')
-                ->orderBy('`date`', 'ASC')
+                ->groupBy('`labels`')
+                ->orderBy('`labels`', 'ASC')
                 ->findAll();
 
             cache()->save(
