@@ -163,13 +163,21 @@ class Install extends Controller
                 ->with('errors', $this->validator->getErrors());
         }
 
+        $baseUrl = $this->request->getPost('hostname');
         self::writeEnv([
-            'app.baseURL' => $this->request->getPost('hostname'),
+            'app.baseURL' => $baseUrl,
             'app.adminGateway' => $this->request->getPost('admin_gateway'),
             'app.authGateway' => $this->request->getPost('auth_gateway'),
         ]);
 
-        return redirect()->back();
+        helper('text');
+
+        // redirect to full install url with new baseUrl input
+        return redirect(0)->to(
+            reduce_double_slashes(
+                $baseUrl . '/' . config('App')->installGateway
+            )
+        );
     }
 
     public function databaseConfig()
