@@ -111,6 +111,7 @@ class Episode extends BaseController
             'podcast_id' => $this->podcast->id,
             'title' => $this->request->getPost('title'),
             'slug' => $this->request->getPost('slug'),
+            'guid' => '',
             'enclosure' => $this->request->getFile('enclosure'),
             'description' => $this->request->getPost('description'),
             'image' => $this->request->getFile('image'),

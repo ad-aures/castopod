@@ -199,7 +199,7 @@ class Episode extends Entity
         );
     }
 
-    public function setGuid($guid = null)
+    public function setGuid(string $guid)
     {
         return $this->attributes['guid'] = empty($guid)
             ? $this->getLink()
