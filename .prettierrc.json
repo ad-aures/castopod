@@ -7,6 +7,12 @@
         "phpVersion": "7.2",
         "singleQuote": true
       }
+    },
+    {
+      "files": "*.md",
+      "options": {
+        "proseWrap": "always"
+      }
     }
   ]
 }
