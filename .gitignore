@@ -134,10 +134,15 @@ node_modules
 
 # public folder
 public/*
+!public/media
 !public/.htaccess
 !public/favicon.ico
 !public/index.php
 !public/robots.txt
+
+# public media folder
+public/media/*
+!public/media/index.html
 
 #-------------------------
 # Docker volumes
