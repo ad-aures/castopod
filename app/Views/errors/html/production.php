@@ -1,3 +1,4 @@
+<?= helper(['components', 'svg']) ?>
 <!doctype html>
 <html>
 
@@ -6,21 +7,13 @@
 	<meta name="robots" content="noindex">
 
 	<title>Whoops!</title>
-
-	<style type="text/css">
-		<?= preg_replace(
-      '#[\r\n\t ]+#',
-      ' ',
-      file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'debug.css')
-  ) ?>
-	</style>
+    <link rel="stylesheet" href="/assets/index.css"/>
 </head>
 
-<body>
-	<div class="container text-center">
-		<h1 class="headline">Whoops!</h1>
-		<p class="lead">We seem to have hit a snag. Please try again later...</p>
-	</div>
+<body class="flex flex-col items-center justify-center min-h-screen px-2 text-center bg-gray-100">
+	<?= svg('castopod-mascot_confused', 'h-64') ?>
+	<h1 class="text-3xl font-bold md:text-4xl lg:text-5xl">Whoops!</h1>
+	<p class="mb-6 text-lg text-gray-600 md:text-xl lg:text-2xl">We seem to have hit a snag. Please try again later...</p>
 </body>
 
 </html>
