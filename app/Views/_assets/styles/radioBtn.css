@@ -7,7 +7,7 @@
 }
 
 .form-radio-btn + label {
-  @apply px-2 py-1 text-sm text-black bg-white border rounded cursor-pointer;
+  @apply inline-block px-2 py-1 text-sm text-black bg-white border rounded cursor-pointer;
 
   &:hover {
     @apply bg-green-100;

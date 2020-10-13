@@ -4,6 +4,10 @@
 <?= lang('MyAccount.changePassword') ?>
 <?= $this->endSection() ?>
 
+<?= $this->section('pageTitle') ?>
+<?= lang('MyAccount.changePassword') ?>
+<?= $this->endSection() ?>
+
 
 <?= $this->section('content') ?>
 

@@ -30,7 +30,7 @@
                         'pageTitle'
                     ) ?></h1>
                 </div>
-                <div class="flex flex-wrap gap-y-2"><?= $this->renderSection(
+                <div class="flex flex-wrap"><?= $this->renderSection(
                     'headerRight'
                 ) ?></div>
             </div>

@@ -20,4 +20,9 @@ return [
     'pages' => 'Pages',
     'page-list' => 'All pages',
     'page-create' => 'New Page',
+    'account' => [
+        'my-account' => 'My account',
+        'change-password' => 'Change password',
+        'logout' => 'Logout',
+    ],
 ];

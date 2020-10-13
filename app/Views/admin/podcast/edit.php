@@ -61,7 +61,7 @@
     'required' => 'required',
 ]) ?>
 
-<?= form_fieldset('', ['class' => 'flex mb-4 gap-1']) ?>
+<?= form_fieldset('', ['class' => 'mb-4']) ?>
     <legend><?= lang('Podcast.form.type.label') .
         hint_tooltip(lang('Podcast.form.type.hint'), 'ml-1') ?>
     </legend>
@@ -143,7 +143,7 @@
     ]
 ) ?>
 
-<?= form_fieldset('', ['class' => 'flex mb-4 gap-1']) ?>
+<?= form_fieldset('', ['class' => 'mb-4']) ?>
     <legend><?= lang('Podcast.form.parental_advisory.label') .
         hint_tooltip(lang('Podcast.form.parental_advisory.hint'), 'ml-1') ?>
     </legend>

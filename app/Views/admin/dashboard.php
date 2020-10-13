@@ -2,13 +2,13 @@
 <?= $this->extend('admin/_layout') ?>
 
 <?= $this->section('title') ?>
-Dashboard
+<?= lang('Admin.dashboard') ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('pageTitle') ?>
-Admin dashboard
+<?= lang('Admin.dashboard') ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-Welcome to the admin area!
+<?= lang('Admin.welcome_message') ?>
 <?= $this->endsection() ?>

@@ -4,6 +4,10 @@
 <?= lang('MyAccount.info') ?>
 <?= $this->endSection() ?>
 
+<?= $this->section('pageTitle') ?>
+<?= lang('MyAccount.info') ?>
+<?= $this->endSection() ?>
+
 
 <?= $this->section('content') ?>
 

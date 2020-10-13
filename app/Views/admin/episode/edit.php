@@ -233,7 +233,7 @@
 <?= form_fieldset_close() ?>
 
 
-<?= form_fieldset('', ['class' => 'flex mb-6 gap-1']) ?>
+<?= form_fieldset('', ['class' => 'mb-6']) ?>
     <legend>
     <?= lang('Episode.form.parental_advisory.label') .
         hint_tooltip(lang('Episode.form.type.hint'), 'ml-1') ?>
@@ -287,11 +287,7 @@
         hint_tooltip(lang('Episode.form.block_hint'), 'ml-1'),
     ['id' => 'block', 'name' => 'block'],
     'yes',
-    old(
-        'block',
-
-        $episode->block
-    )
+    old('block', $episode->block)
 ) ?>
 
 <?= form_section_close() ?>

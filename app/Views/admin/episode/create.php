@@ -108,7 +108,7 @@
 </div>
 
 
-<?= form_fieldset('', ['class' => 'flex mb-4 gap-1']) ?>
+<?= form_fieldset('', ['class' => 'mb-4']) ?>
     <legend>
     <?= lang('Episode.form.type.label') .
         hint_tooltip(lang('Episode.form.type.hint'), 'ml-1') ?>

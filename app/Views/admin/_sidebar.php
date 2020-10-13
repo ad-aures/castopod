@@ -52,13 +52,12 @@ $navigation = [
     <nav class="absolute z-50 flex-col hidden py-2 text-black whitespace-no-wrap bg-white border rounded shadow" aria-labelledby="my-accountDropdown" data-popper="menu" data-popper-placement="right-end">
         <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
             'my-account'
-        ) ?>">My Account</a>
+        ) ?>"><?= lang('AdminNavigation.account.my-account') ?></a>
         <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
             'change-password'
-        ) ?>">Change password</a>
+        ) ?>"><?= lang('AdminNavigation.account.change-password') ?></a>
         <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
             'logout'
-        ) ?>">Logout</a>
+        ) ?>"><?= lang('AdminNavigation.account.logout') ?></a>
     </nav>
 </div>
-
