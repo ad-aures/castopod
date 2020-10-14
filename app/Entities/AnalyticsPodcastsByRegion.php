@@ -23,4 +23,9 @@ class AnalyticsPodcastsByRegion extends Entity
         'date' => 'datetime',
         'hits' => 'integer',
     ];
+
+    public function getCountryCode()
+    {
+        return lang('Countries.' . $this->attributes['country_code']);
+    }
 }

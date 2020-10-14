@@ -30,9 +30,14 @@ class AnalyticsPodcastByCountryModel extends Model
      *
      * @return array
      */
-    public function getData(int $podcastId): array
+    public function getDataWeekly(int $podcastId): array
     {
-        if (!($found = cache("{$podcastId}_analytics_podcast_by_country"))) {
+        $locale = service('request')->getLocale();
+        if (
+            !($found = cache(
+                "{$podcastId}_analytics_podcast_by_country_weekly_{$locale}"
+            ))
+        ) {
             $found = $this->select('`country_code` as `labels`')
                 ->selectSum('`hits`', '`values`')
                 ->where([
@@ -44,7 +49,41 @@ class AnalyticsPodcastByCountryModel extends Model
                 ->findAll(10);
 
             cache()->save(
-                "{$podcastId}_analytics_podcast_by_country",
+                "{$podcastId}_analytics_podcast_by_country_weekly_{$locale}",
+                $found,
+                600
+            );
+        }
+        return $found;
+    }
+
+    /**
+     * Gets country data for a podcast
+     *
+     * @param int $podcastId
+     *
+     * @return array
+     */
+    public function getDataYearly(int $podcastId): array
+    {
+        $locale = service('request')->getLocale();
+        if (
+            !($found = cache(
+                "{$podcastId}_analytics_podcast_by_country_yearly_{$locale}"
+            ))
+        ) {
+            $found = $this->select('`country_code` as `labels`')
+                ->selectSum('`hits`', '`values`')
+                ->where([
+                    '`podcast_id`' => $podcastId,
+                    '`date` >' => date('Y-m-d', strtotime('-1 year')),
+                ])
+                ->groupBy('`labels`')
+                ->orderBy('`values`', 'DESC')
+                ->findAll(10);
+
+            cache()->save(
+                "{$podcastId}_analytics_podcast_by_country_yearly_{$locale}",
                 $found,
                 600
             );

@@ -20,7 +20,7 @@ return [
     'unique_daily_listeners' => 'Auditeurs uniques quotidiens',
     'unique_monthly_listeners' => 'Auditeurs uniques mensuels',
     'by_browser' =>
-        'Fréquentation du site par navigateur (sur la dernière semaine)',
+        'Fréquentation des pages web par navigateur (sur la dernière semaine)',
     'podcast_by_day' => 'Téléchargements quotidiens de podcasts',
     'podcast_by_month' => 'Téléchargements mensuels de podcasts',
     'episode_by_day' =>
@@ -33,10 +33,10 @@ return [
     'by_country_yearly' =>
         'Téléchargement de podcasts par pays (sur la dernière année)',
     'by_domain_weekly' =>
-        'Fréquentation du site par origine (sur la dernière semaine)',
+        'Fréquentation des pages web par origine (sur la dernière semaine)',
     'by_domain_yearly' =>
-        'Fréquentation du site par origine (sur la dernière année)',
+        'Fréquentation des pages web par origine (sur la dernière année)',
     'by_entry_page' =>
-        'Fréquentation du site par page d’entrée (sur la dernière semaine)',
+        'Fréquentation des pages web par page d’entrée (sur la dernière semaine)',
     'podcast_bots' => 'Robots (bots)',
 ];

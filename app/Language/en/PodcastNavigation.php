@@ -20,5 +20,9 @@ return [
     'contributor-add' => 'Add contributor',
     'settings' => 'Settings',
     'platforms' => 'Podcast platforms',
-    'podcast-analytics' => 'Audiences Overview',
+    'podcast-analytics' => 'Audience overview',
+    'podcast-analytics-webpages' => 'Web pages visits',
+    'podcast-analytics-locations' => 'Locations',
+    'podcast-analytics-unique-listeners' => 'Unique listeners',
+    'podcast-analytics-players' => 'Players',
 ];

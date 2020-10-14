@@ -59,9 +59,11 @@ class AnalyticsWebsiteByRefererModel extends Model
      *
      * @return array
      */
-    public function getDataByDomain(int $podcastId): array
+    public function getDataByDomainWeekly(int $podcastId): array
     {
-        if (!($found = cache("{$podcastId}_analytics_website_by_domain"))) {
+        if (
+            !($found = cache("{$podcastId}_analytics_website_by_domain_weekly"))
+        ) {
             $found = $this->select('`domain` as `labels`')
                 ->selectSum('`hits`', '`values`')
                 ->where([
@@ -73,7 +75,38 @@ class AnalyticsWebsiteByRefererModel extends Model
                 ->findAll(10);
 
             cache()->save(
-                "{$podcastId}_analytics_website_by_domain",
+                "{$podcastId}_analytics_website_by_domain_weekly",
+                $found,
+                600
+            );
+        }
+        return $found;
+    }
+
+    /**
+     * Gets domain data for a podcast
+     *
+     * @param int $podcastId
+     *
+     * @return array
+     */
+    public function getDataByDomainYearly(int $podcastId): array
+    {
+        if (
+            !($found = cache("{$podcastId}_analytics_website_by_domain_yearly"))
+        ) {
+            $found = $this->select('`domain` as `labels`')
+                ->selectSum('`hits`', '`values`')
+                ->where([
+                    '`podcast_id`' => $podcastId,
+                    '`date` >' => date('Y-m-d', strtotime('-1 year')),
+                ])
+                ->groupBy('`labels`')
+                ->orderBy('`values`', 'DESC')
+                ->findAll(10);
+
+            cache()->save(
+                "{$podcastId}_analytics_website_by_domain_yearly",
                 $found,
                 600
             );

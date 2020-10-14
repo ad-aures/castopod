@@ -9,7 +9,7 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-
+   
 <div class="flex flex-wrap">
     <div class="w-full max-w-sm mb-6 md:mr-4">
         <img
@@ -46,4 +46,29 @@
     </section>
 </div>
 
+
+    <div class="mb-12 text-center">
+    <h2><?= lang('Charts.episode_by_day') ?></h2>
+    <div class="chart-xy" id="by-day-graph" data-chart-type="xy-chart" data-chart-url="<?= route_to(
+        'analytics-filtered-data',
+        $podcast->id,
+        'PodcastByEpisode',
+        'ByDay',
+        $episode->id
+    ) ?>"></div>
+    </div>
+    
+    <div class="mb-12 text-center">
+    <h2><?= lang('Charts.episode_by_month') ?></h2>
+    <div class="chart-xy" id="by-month-graph" data-chart-type="xy-chart" data-chart-url="<?= route_to(
+        'analytics-filtered-data',
+        $podcast->id,
+        'PodcastByEpisode',
+        'ByMonth',
+        $episode->id
+    ) ?>"></div>
+    </div>
+
+
+<script src="/assets/charts.js" type="module"></script>
 <?= $this->endSection() ?>

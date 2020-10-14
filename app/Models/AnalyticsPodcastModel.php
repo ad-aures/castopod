@@ -36,7 +36,7 @@ class AnalyticsPodcastModel extends Model
             $found = $this->select('`date` as `labels`, `hits` as `values`')
                 ->where([
                     '`podcast_id`' => $podcastId,
-                    '`date` >' => date('Y-m-d', strtotime('-1 year')),
+                    '`date` >' => date('Y-m-d', strtotime('-60 days')),
                 ])
                 ->orderBy('`labels`', 'ASC')
                 ->findAll();
@@ -60,7 +60,6 @@ class AnalyticsPodcastModel extends Model
                 ->selectSum('`hits`', '`values`')
                 ->where([
                     '`podcast_id`' => $podcastId,
-                    '`date` >' => date('Y-m-d', strtotime('-1 year')),
                 ])
                 ->groupBy('`labels`')
                 ->orderBy('`labels`', 'ASC')
@@ -94,7 +93,7 @@ class AnalyticsPodcastModel extends Model
             )
                 ->where([
                     '`podcast_id`' => $podcastId,
-                    '`date` >' => date('Y-m-d', strtotime('-1 year')),
+                    '`date` >' => date('Y-m-d', strtotime('-60 days')),
                 ])
                 ->orderBy('`labels`', 'ASC')
                 ->findAll();

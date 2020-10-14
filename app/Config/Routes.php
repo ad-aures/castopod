@@ -123,10 +123,46 @@ $routes->group(
                     'as' => 'podcast-delete',
                     'filter' => 'permission:podcasts-delete',
                 ]);
-                $routes->get('analytics', 'Podcast::analytics/$1', [
-                    'as' => 'podcast-analytics',
-                    'filter' => 'permission:podcasts-view,podcast-view',
-                ]);
+
+                $routes->group('analytics', function ($routes) {
+                    $routes->get('/', 'Podcast::viewAnalytics/$1', [
+                        'as' => 'podcast-analytics',
+                        'filter' => 'permission:podcasts-view,podcast-view',
+                    ]);
+                    $routes->get(
+                        'webpages',
+                        'Podcast::viewAnalyticsWebpages/$1',
+                        [
+                            'as' => 'podcast-analytics-webpages',
+                            'filter' => 'permission:podcasts-view,podcast-view',
+                        ]
+                    );
+                    $routes->get(
+                        'locations',
+                        'Podcast::viewAnalyticsLocations/$1',
+                        [
+                            'as' => 'podcast-analytics-locations',
+                            'filter' => 'permission:podcasts-view,podcast-view',
+                        ]
+                    );
+                    $routes->get(
+                        'unique-listeners',
+                        'Podcast::viewAnalyticsUniqueListeners/$1',
+                        [
+                            'as' => 'podcast-analytics-unique-listeners',
+                            'filter' => 'permission:podcasts-view,podcast-view',
+                        ]
+                    );
+                    $routes->get(
+                        'players',
+                        'Podcast::viewAnalyticsPlayers/$1',
+                        [
+                            'as' => 'podcast-analytics-players',
+                            'filter' => 'permission:podcasts-view,podcast-view',
+                        ]
+                    );
+                });
+
                 $routes->get(
                     'analytics-data/(:segment)',
                     'AnalyticsData::getData/$1/$2',

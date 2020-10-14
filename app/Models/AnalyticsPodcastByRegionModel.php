@@ -32,11 +32,16 @@ class AnalyticsPodcastByRegionModel extends Model
      */
     public function getData(int $podcastId): array
     {
-        if (!($found = cache("{$podcastId}_analytics_podcast_by_region"))) {
+        $locale = service('request')->getLocale();
+        if (
+            !($found = cache(
+                "{$podcastId}_analytics_podcast_by_region_{$locale}"
+            ))
+        ) {
             $found = $this->select(
                 '`country_code`, `region_code`, `latitude`, `longitude`'
             )
-                ->selectSum('`hits`', '`values`')
+                ->selectSum('`hits`', '`value`')
                 ->groupBy(
                     '`country_code`, `region_code`, `latitude`, `longitude`'
                 )
@@ -44,11 +49,11 @@ class AnalyticsPodcastByRegionModel extends Model
                     '`podcast_id`' => $podcastId,
                     '`date` >' => date('Y-m-d', strtotime('-1 week')),
                 ])
-                ->orderBy('`values`', 'DESC')
+                ->orderBy('`value`', 'DESC')
                 ->findAll();
 
             cache()->save(
-                "{$podcastId}_analytics_podcast_by_region",
+                "{$podcastId}_analytics_podcast_by_region_{$locale}",
                 $found,
                 600
             );

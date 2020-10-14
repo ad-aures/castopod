@@ -58,12 +58,44 @@ class Podcast extends BaseController
         return view('admin/podcast/view', $data);
     }
 
-    public function analytics()
+    public function viewAnalytics()
     {
         $data = ['podcast' => $this->podcast];
 
         replace_breadcrumb_params([0 => $this->podcast->title]);
-        return view('admin/podcast/analytics', $data);
+        return view('admin/podcast/analytics/index', $data);
+    }
+
+    public function viewAnalyticsWebpages()
+    {
+        $data = ['podcast' => $this->podcast];
+
+        replace_breadcrumb_params([0 => $this->podcast->title]);
+        return view('admin/podcast/analytics/webpages', $data);
+    }
+
+    public function viewAnalyticsLocations()
+    {
+        $data = ['podcast' => $this->podcast];
+
+        replace_breadcrumb_params([0 => $this->podcast->title]);
+        return view('admin/podcast/analytics/locations', $data);
+    }
+
+    public function viewAnalyticsUniqueListeners()
+    {
+        $data = ['podcast' => $this->podcast];
+
+        replace_breadcrumb_params([0 => $this->podcast->title]);
+        return view('admin/podcast/analytics/unique_listeners', $data);
+    }
+
+    public function viewAnalyticsPlayers()
+    {
+        $data = ['podcast' => $this->podcast];
+
+        replace_breadcrumb_params([0 => $this->podcast->title]);
+        return view('admin/podcast/analytics/players', $data);
     }
 
     public function create()

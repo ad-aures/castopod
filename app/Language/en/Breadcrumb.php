@@ -23,4 +23,8 @@ return [
     'settings' => 'settings',
     'platforms' => 'platforms',
     'analytics' => 'Analytics',
+    'locations' => 'Locations',
+    'website' => 'Website',
+    'unique-listeners' => 'Unique listeners',
+    'players' => 'Players',
 ];

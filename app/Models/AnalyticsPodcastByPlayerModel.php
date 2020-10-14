@@ -30,11 +30,11 @@ class AnalyticsPodcastByPlayerModel extends Model
      *
      * @return array
      */
-    public function getDataByApp(int $podcastId): array
+    public function getDataByAppWeekly(int $podcastId): array
     {
         if (
             !($found = cache(
-                "{$podcastId}_analytics_podcasts_by_player_by_app"
+                "{$podcastId}_analytics_podcasts_by_player_by_app_weekly"
             ))
         ) {
             $found = $this->select('`app` as `labels`')
@@ -50,92 +50,148 @@ class AnalyticsPodcastByPlayerModel extends Model
                 ->findAll(10);
 
             cache()->save(
-                "{$podcastId}_analytics_podcasts_by_player_by_app",
+                "{$podcastId}_analytics_podcasts_by_player_by_app_weekly",
                 $found,
                 600
             );
         }
-
         return $found;
     }
 
     /**
-     * Gets device data for a podcast
+     * Gets player data for a podcast
      *
      * @param int $podcastId
      *
      * @return array
      */
-    public function getDataByDevice(int $podcastId): array
+    public function getDataByAppYearly(int $podcastId): array
     {
         if (
             !($found = cache(
-                "{$podcastId}_analytics_podcasts_by_player_by_device"
+                "{$podcastId}_analytics_podcasts_by_player_by_app_yearly"
             ))
         ) {
-            $foundApp = $this->select(
-                'CONCAT_WS("/", `device`, `os`, `app`) as `ids`, `app` as `labels`, CONCAT_WS("/", `device`, `os`) as `parents`'
-            )
+            $found = $this->select('`app` as `labels`')
                 ->selectSum('`hits`', '`values`')
                 ->where([
                     '`podcast_id`' => $podcastId,
-                    '`app` !=' => null,
+                    '`app` !=' => '',
                     '`bot`' => 0,
-                    '`date` >' => date('Y-m-d', strtotime('-1 week')),
+                    '`date` >' => date('Y-m-d', strtotime('-1 year')),
                 ])
-                ->groupBy('`ids`')
+                ->groupBy('`labels`')
                 ->orderBy('`values`', 'DESC')
-                ->findAll();
+                ->findAll(10);
 
-            $foundOs = $this->select(
-                'CONCAT_WS("/", `device`, `os`) as `ids`, `os` as `labels`, `device` as `parents`'
-            )
-                ->selectSum('`hits`', '`values`')
-                ->where([
-                    '`podcast_id`' => $podcastId,
-                    '`os` !=' => null,
-                    '`bot`' => 0,
-                    '`date` >' => date('Y-m-d', strtotime('-1 week')),
-                ])
-                ->groupBy('`ids`')
-                ->orderBy('`values`', 'DESC')
-                ->findAll();
-
-            $foundDevice = $this->select(
-                '`device` as `ids`, `device` as `labels`, "" as `parents`'
-            )
-                ->selectSum('`hits`', '`values`')
-                ->where([
-                    '`podcast_id`' => $podcastId,
-                    '`device` !=' => null,
-                    '`bot`' => 0,
-                    '`date` >' => date('Y-m-d', strtotime('-1 week')),
-                ])
-                ->groupBy('`ids`')
-                ->orderBy('`values`', 'DESC')
-                ->findAll();
-
-            $foundBot = $this->select(
-                '"bots" as `ids`, "Bots" as `labels`, "" as `parents`'
-            )
-                ->selectSum('`hits`', '`values`')
-                ->where([
-                    '`podcast_id`' => $podcastId,
-                    '`bot`' => 1,
-                    '`date` >' => date('Y-m-d', strtotime('-1 week')),
-                ])
-                ->groupBy('`ids`')
-                ->orderBy('`values`', 'DESC')
-                ->findAll();
-
-            $found = array_merge($foundApp, $foundOs, $foundDevice, $foundBot);
             cache()->save(
-                "{$podcastId}_analytics_podcasts_by_player_by_device",
+                "{$podcastId}_analytics_podcasts_by_player_by_app_yearly",
                 $found,
                 600
             );
         }
+        return $found;
+    }
 
+    /**
+     * Gets os data for a podcast
+     *
+     * @param int $podcastId
+     *
+     * @return array
+     */
+    public function getDataByOsWeekly(int $podcastId): array
+    {
+        if (
+            !($found = cache(
+                "{$podcastId}_analytics_podcasts_by_player_by_os_weekly"
+            ))
+        ) {
+            $found = $this->select('`os` as `labels`')
+                ->selectSum('`hits`', '`values`')
+                ->where([
+                    '`podcast_id`' => $podcastId,
+                    '`app` !=' => '',
+                    '`bot`' => 0,
+                    '`date` >' => date('Y-m-d', strtotime('-1 week')),
+                ])
+                ->groupBy('`labels`')
+                ->orderBy('`values`', 'DESC')
+                ->findAll(10);
+
+            cache()->save(
+                "{$podcastId}_analytics_podcasts_by_player_by_os_weekly",
+                $found,
+                600
+            );
+        }
+        return $found;
+    }
+
+    /**
+     * Gets player data for a podcast
+     *
+     * @param int $podcastId
+     *
+     * @return array
+     */
+    public function getDataByDeviceWeekly(int $podcastId): array
+    {
+        if (
+            !($found = cache(
+                "{$podcastId}_analytics_podcasts_by_player_by_device_weekly"
+            ))
+        ) {
+            $found = $this->select('`device` as `labels`')
+                ->selectSum('`hits`', '`values`')
+                ->where([
+                    '`podcast_id`' => $podcastId,
+                    '`device` !=' => '',
+                    '`bot`' => 0,
+                    '`date` >' => date('Y-m-d', strtotime('-1 week')),
+                ])
+                ->groupBy('`labels`')
+                ->orderBy('`values`', 'DESC')
+                ->findAll(10);
+
+            cache()->save(
+                "{$podcastId}_analytics_podcasts_by_player_by_device_weekly",
+                $found,
+                600
+            );
+        }
+        return $found;
+    }
+
+    /**
+     * Gets bots data for a podcast
+     *
+     * @param int $podcastId
+     *
+     * @return array
+     */
+    public function getDataBots(int $podcastId): array
+    {
+        if (
+            !($found = cache("{$podcastId}_analytics_podcasts_by_player_bots"))
+        ) {
+            $found = $this->select('DATE_FORMAT(`date`,"%Y-%m-01") as `labels`')
+                ->selectSum('`hits`', '`values`')
+                ->where([
+                    '`podcast_id`' => $podcastId,
+                    '`bot`' => 1,
+                    '`date` >' => date('Y-m-d', strtotime('-1 year')),
+                ])
+                ->groupBy('`labels`')
+                ->orderBy('`labels`', 'ASC')
+                ->findAll(10);
+
+            cache()->save(
+                "{$podcastId}_analytics_podcasts_by_player_bots",
+                $found,
+                600
+            );
+        }
         return $found;
     }
 }

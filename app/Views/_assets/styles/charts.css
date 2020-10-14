@@ -1,0 +1,15 @@
+.chart-map {
+  height: 800px;
+  border: solid 10px #eee;
+}
+.chart-pie {
+  height: 400px;
+  width: 100%;
+  border: solid 1px #eee;
+}
+.chart-xy {
+  height: 500px;
+  width: 100%;
+  border: solid 1px #eee;
+  border: solid 3px #eee;
+}

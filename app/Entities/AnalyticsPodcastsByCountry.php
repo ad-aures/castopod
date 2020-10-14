@@ -20,4 +20,9 @@ class AnalyticsPodcastsByCountry extends Entity
         'date' => 'datetime',
         'hits' => 'integer',
     ];
+
+    public function getLabels()
+    {
+        return lang('Countries.' . $this->attributes['labels']);
+    }
 }
