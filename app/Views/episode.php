@@ -91,7 +91,11 @@
               </time>
               <span class="mx-1">•</span>
               <time datetime="PT<?= $episode->enclosure_duration ?>S">
-                  <?= lang('Common.duration', [$episode->enclosure_duration]) ?>
+                  <?= lang(
+                      'Common.duration',
+                      [$episode->enclosure_duration],
+                      'en'
+                  ) ?>
               </time>
           </div>
           <audio controls preload="none" class="w-full mt-auto">

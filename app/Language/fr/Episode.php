@@ -67,7 +67,7 @@ return [
         ],
         'block' => 'L’épisode doit être masqué de toutes les plateformes',
         'block_hint' =>
-            'La visibilité de l’épisode. Si vous souhaitez retirer cet épisode de l’index Apple, activez ce champs.',
+            'La visibilité de l’épisode. Si vous souhaitez retirer cet épisode de l’index Apple, activez ce champ.',
         'submit_create' => 'Créer l’épisode',
         'submit_edit' => 'Enregistrer l’épisode',
     ],
