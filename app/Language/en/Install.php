@@ -44,7 +44,6 @@ return [
         'email' => 'Email',
         'username' => 'Username',
         'password' => 'Password',
-        'submit_create_superadmin' => 'Create superadmin!',
     ],
     'messages' => [
         'createSuperAdminSuccess' =>

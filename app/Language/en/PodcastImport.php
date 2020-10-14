@@ -13,7 +13,7 @@ return [
     'old_podcast_section_subtitle' =>
         'Make sure you own the rights for this podcast before importing it. Copying and broadcasting a podcast without the proper rights is piracy and is liable to prosecution.',
     'imported_feed_url' => 'Feed URL',
-    'imported_feed_url_hint' => 'The feed must be in `.xml` format.',
+    'imported_feed_url_hint' => 'The feed must be in xml or rss format.',
     'new_podcast_section_title' => 'The new podcast',
     'name' => 'Name',
     'name_hint' => 'Used for generating the podcast URL.',
