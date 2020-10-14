@@ -39,14 +39,14 @@ $podcastNavigation = [
     <img
     src="<?= $podcast->image->thumbnail_url ?>"
     alt="<?= $podcast->title ?>"
-    class="object-cover w-16 h-16 mr-2"
+    class="object-cover w-16 h-16"
     />
-    <div class="flex flex-col items-start flex-1">
-        <span class="font-semibold truncate"><?= $podcast->title ?></span>
+    <div class="flex flex-col items-start flex-1 w-48 px-2">
+        <span class="w-40 text-sm font-semibold truncate" title="<?= $podcast->title ?>"><?= $podcast->title ?></span>
         <a href="<?= route_to(
             'podcast',
             $podcast->name
-        ) ?>" class="inline-flex items-center text-sm underline outline-none hover:no-underline focus:shadow-outline"
+        ) ?>" class="inline-flex items-center text-xs underline outline-none hover:no-underline focus:shadow-outline"
         data-toggle="tooltip" data-placement="bottom" title="<?= lang(
             'PodcastNavigation.go_to_page'
         ) ?>">@<?= $podcast->name ?>

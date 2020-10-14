@@ -1,11 +1,7 @@
 /* eslint-disable */
 
 module.exports = {
-  purge: [
-    "./app/Views/**/*.php",
-    "./app/Views/**/*.ts",
-    "/app/Helpers/**/*.php",
-  ],
+  purge: ["./app/Views/**/*.php", "./app/Views/**/*.ts", "./app/Helpers/*.php"],
   theme: {},
   variants: {
     textDecoration: ["responsive", "hover", "focus", "group-hover"],
@@ -17,5 +13,7 @@ module.exports = {
   future: {
     removeDeprecatedGapUtilities: true,
     purgeLayersByDefault: true,
+    defaultLineHeights: true,
+    standardFontWeights: true,
   },
 };
