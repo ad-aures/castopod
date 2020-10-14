@@ -45,7 +45,7 @@ class PageModel extends Model
 
         // Clear the cache of all podcast and episode pages
         // TODO: change the logic of page caching to prevent clearing all cache every time
-        cache()->clean();
+        // cache()->clean();
 
         return $data;
     }
