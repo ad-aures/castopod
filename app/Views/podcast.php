@@ -79,11 +79,6 @@
             </div>
         </header>
 
-<<<<<<< HEAD
-
-<?= $this->endSection()
-?>
-=======
         <section class="flex flex-col">
             <nav class="inline-flex justify-center px-4 bg-gray-100 border-b">
                 <?php foreach ($episodesNav as $link): ?>
@@ -176,4 +171,3 @@
         </div>
     </footer>
 </body>
->>>>>>> ecc68b2... feat(public-ui): adapt wireframes to public podcast and episode pages
