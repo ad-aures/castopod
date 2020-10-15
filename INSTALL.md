@@ -76,10 +76,18 @@ Castopod is built on top of Codeigniter, a PHP framework that encourages
 [good security practices](https://codeigniter.com/user_guide/concepts/security.html).
 
 To maximize your instance safety and prevent any malicious attack, we recommend
-you update all your Castopod files permissions:
+you update all your Castopod files permissions (after installation to avoid any
+permission error):
 
 - `writable/` folder must be **readable** and **writable**.
 - `public/media/` folder must be **readable** and **writable**.
 - any other file must be set to **readonly**.
 
-// TODO: add instructions on how to set file permissions.
+For instance, if you are using Apache or NGINX with Ubuntu you may do the
+following:
+
+```bash
+sudo chown -R root:root /path/to/castopod
+sudo chown -R www-data:www-data /path/to/castopod/writable
+sudo chown -R www-data:www-data /path/to/castopod/public/media
+```

@@ -24,7 +24,7 @@ return [
     'platforms' => 'plateformes',
     'analytics' => 'Mesures d’audience',
     'locations' => 'Localisations',
-    'website' => 'Site web',
+    'webpages' => 'Pages web',
     'unique-listeners' => 'Auditeurs uniques',
     'players' => 'Lecteurs',
 ];

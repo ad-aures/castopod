@@ -24,7 +24,7 @@ return [
     'platforms' => 'platforms',
     'analytics' => 'Analytics',
     'locations' => 'Locations',
-    'website' => 'Website',
+    'webpages' => 'Web pages',
     'unique-listeners' => 'Unique listeners',
     'players' => 'Players',
 ];
