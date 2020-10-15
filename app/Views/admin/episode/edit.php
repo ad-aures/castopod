@@ -17,22 +17,24 @@
 ]) ?>
 <?= csrf_field() ?>
 
-<div class="flex w-full mb-6">
-    <?= form_input([
-        'id' => 'enclosure',
-        'name' => 'enclosure',
-        'class' => 'form-enclosure-input',
-        'type' => 'file',
-        'accept' => '.mp3,.m4a',
-    ]) ?>
-    <label for="enclosure"><?= icon('upload', 'mr-2 text-') ?>
-        <span><?= lang('Episode.form.enclosure') ?></span></label>
-</div>
-
 <?= form_section(
     lang('Episode.form.info_section_title'),
     lang('Episode.form.info_section_subtitle')
 ) ?>
+
+<?= form_label(
+    lang('Episode.form.enclosure'),
+    'enclosure',
+    [],
+    lang('Episode.form.enclosure_hint')
+) ?>
+<?= form_input([
+    'id' => 'enclosure',
+    'name' => 'enclosure',
+    'class' => 'form-input mb-4',
+    'type' => 'file',
+    'accept' => '.mp3,.m4a',
+]) ?>
 
 <?= form_label(
     lang('Episode.form.image'),
@@ -134,6 +136,7 @@
     </label>
     <?= form_radio(
         ['id' => 'bonus', 'name' => 'type', 'class' => 'form-radio-btn'],
+
         'bonus',
         old('type') ? old('type') === 'bonus' : $episode->type === 'bonus'
     ) ?>

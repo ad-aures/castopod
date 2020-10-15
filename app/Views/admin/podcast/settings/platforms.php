@@ -72,21 +72,19 @@
             'type' => 'url',
             'placeholder' => 'https://...',
         ]) ?>
-        <label class="inline-flex items-center mb-4 text-sm">
-            <?= form_checkbox(
-                [
-                    'id' => $platform->name . '_visible',
-                    'name' => 'platforms[' . $platform->name . '][visible]',
-                    'class' => 'form-checkbox',
-                ],
-                'yes',
-                old(
-                    $platform->name . '_visible',
-                    $platform->visible ? $platform->visible : false
-                )
-            ) ?>
-            <span class="ml-2"><?= lang('Platforms.visible') ?></span>
-        </label>
+        <?= form_switch(
+            lang('Platforms.visible'),
+            [
+                'id' => $platform->name . '_visible',
+                'name' => 'platforms[' . $platform->name . '][visible]',
+            ],
+            'yes',
+            old(
+                $platform->name . '_visible',
+                $platform->visible ? $platform->visible : false
+            ),
+            'text-sm'
+        ) ?>
     </div>
 </div>
 

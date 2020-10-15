@@ -1,5 +1,4 @@
 import Dropdown from "./modules/Dropdown";
-import EnclosureInput from "./modules/EnclosureInput";
 import MarkdownEditor from "./modules/MarkdownEditor";
 import MultiSelect from "./modules/MultiSelect";
 import SidebarToggler from "./modules/SidebarToggler";
@@ -12,4 +11,3 @@ MarkdownEditor();
 MultiSelect();
 Slugify();
 SidebarToggler();
-EnclosureInput();

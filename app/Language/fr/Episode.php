@@ -23,7 +23,8 @@ return [
     'go_to_page' => 'Voir',
     'create' => 'Ajouter un épisode',
     'form' => [
-        'enclosure' => 'Sélectionnez un fichier audio .mp3 ou .m4a…',
+        'enclosure' => 'Fichier audio',
+        'enclosure_hint' => 'Sélectionnez un fichier audio .mp3 ou .m4a.',
         'info_section_title' => 'Informations épisode',
         'info_section_subtitle' => '',
         'image' => 'Image de couverture',
