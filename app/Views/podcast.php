@@ -21,7 +21,7 @@
             <div class="flex flex-col items-center justify-center md:items-stretch md:mx-auto md:container md:py-12 md:flex-row ">
                 <img src="<?= $podcast->image->medium_url ?>"
                 alt="<?= $podcast->title ?>" class="object-cover w-full max-w-xs m-4 rounded-lg shadow-xl" />
-                <div class="w-full p-4 bg-white md:w-auto md:text-white md:bg-transparent">
+                <div class="bg-white w-fullp-4 md:max-w-md md:text-white md:bg-transparent">
                     <h1 class="text-2xl font-semibold leading-tight"><?= $podcast->title ?> <span class="text-lg font-normal opacity-75">@<?= $podcast->name ?></span></h1>
                     <div class="flex items-center mb-4">
                         <address>

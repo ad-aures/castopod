@@ -199,7 +199,11 @@ class EpisodeModel extends Model
             $found = $this->select(
                 'YEAR(published_at) as year, count(*) as number_of_episodes'
             )
-                ->where(['podcast_id' => $podcastId, 'season_number' => null])
+                ->where([
+                    'podcast_id' => $podcastId,
+                    'season_number' => null,
+                    $this->deletedField => null,
+                ])
                 ->groupBy('year')
                 ->orderBy('year', 'DESC')
                 ->get()
@@ -220,6 +224,7 @@ class EpisodeModel extends Model
                 ->where([
                     'podcast_id' => $podcastId,
                     'season_number is not' => null,
+                    $this->deletedField => null,
                 ])
                 ->groupBy('season_number')
                 ->orderBy('season_number', 'ASC')
