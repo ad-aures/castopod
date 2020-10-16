@@ -2,6 +2,7 @@ image: php:7.2-fpm
 
 stages:
   - bundle
+  - release
 
 cache:
   paths:
@@ -34,11 +35,12 @@ before_script:
   - php composer.phar install --no-dev --ignore-platform-reqs
   - npm install
 
+  # build all UI assets
+  - npm run build
+
 bundle_app:
   stage: bundle
   script:
-    # build all assets for views
-    - npm run build
     # download GeoLite2-City archive and extract it to writable/uploads
     - wget -c "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=$MAXMIND_LICENCE_KEY&suffix=tar.gz" -O - | tar -xz -C ./writable/uploads/
 
@@ -46,8 +48,32 @@ bundle_app:
     - mv ./writable/uploads/GeoLite2-City* ./writable/uploads/GeoLite2-City
 
     # create bundle folder: uses .rsync-filter (-F) file to copy only needed files
-    - rsync -avF --progress . ./bundle
+    - rsync -aF --progress . ./castopod
   artifacts:
     name: "castopod-${CI_COMMIT_REF_SLUG}_${CI_COMMIT_SHORT_SHA}"
     paths:
-      - bundle
+      - castopod
+  except:
+    - main
+    - beta
+    - alpha
+
+release_app:
+  stage: release
+  script:
+    # install required packages for prepare-release.sh script
+    - apt-get install jq -y
+    - apt-get install zip -y
+
+    # make prepare-release.sh executable
+    - chmod +x ./prepare-release.sh
+
+    # run semantic-release script (configured in `.releaserc.json` file)
+    - npm run release
+
+    # IMPORTANT: delete local git tags after release to prevent eventual script failure (ie. tag already exists)
+    - git tag | xargs git tag -d
+  only:
+    - main
+    - alpha
+    - beta

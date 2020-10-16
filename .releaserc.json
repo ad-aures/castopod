@@ -1,0 +1,46 @@
+{
+  "branches": [
+    "main",
+    { "name": "alpha", "prerelease": true },
+    { "name": "beta", "prerelease": true }
+  ],
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/changelog",
+    [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "./prepare-release.sh ${nextRelease.version}"
+      }
+    ],
+    "@semantic-release/npm",
+    [
+      "@semantic-release/git",
+      {
+        "assets": [
+          "composer.json",
+          "package.json",
+          "package-lock.json",
+          "CHANGELOG.md"
+        ]
+      }
+    ],
+    [
+      "@semantic-release/gitlab",
+      {
+        "gitlabUrl": "https://code.podlibre.org/",
+        "assets": [
+          {
+            "path": "castopod-*.zip",
+            "label": "Castopod Package (zip)"
+          },
+          {
+            "path": "castopod-*.tar.gz",
+            "label": "Castopod Package (tar.gz)"
+          }
+        ]
+      }
+    ]
+  ]
+}
