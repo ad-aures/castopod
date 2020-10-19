@@ -32,10 +32,9 @@ class AnalyticsPodcastByCountryModel extends Model
      */
     public function getDataWeekly(int $podcastId): array
     {
-        $locale = service('request')->getLocale();
         if (
             !($found = cache(
-                "{$podcastId}_analytics_podcast_by_country_weekly_{$locale}"
+                "{$podcastId}_analytics_podcast_by_country_weekly"
             ))
         ) {
             $found = $this->select('`country_code` as `labels`')
@@ -49,7 +48,7 @@ class AnalyticsPodcastByCountryModel extends Model
                 ->findAll(10);
 
             cache()->save(
-                "{$podcastId}_analytics_podcast_by_country_weekly_{$locale}",
+                "{$podcastId}_analytics_podcast_by_country_weekly",
                 $found,
                 600
             );
@@ -66,10 +65,9 @@ class AnalyticsPodcastByCountryModel extends Model
      */
     public function getDataYearly(int $podcastId): array
     {
-        $locale = service('request')->getLocale();
         if (
             !($found = cache(
-                "{$podcastId}_analytics_podcast_by_country_yearly_{$locale}"
+                "{$podcastId}_analytics_podcast_by_country_yearly"
             ))
         ) {
             $found = $this->select('`country_code` as `labels`')
@@ -83,7 +81,7 @@ class AnalyticsPodcastByCountryModel extends Model
                 ->findAll(10);
 
             cache()->save(
-                "{$podcastId}_analytics_podcast_by_country_yearly_{$locale}",
+                "{$podcastId}_analytics_podcast_by_country_yearly",
                 $found,
                 600
             );

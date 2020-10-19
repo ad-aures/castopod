@@ -44,7 +44,7 @@ class Install extends Controller
 
             $dotenv->load();
         } catch (\Throwable $e) {
-            return $this->createEnv();
+            $this->createEnv();
         }
 
         // Check if the created .env file is writable to continue install process
@@ -139,8 +139,6 @@ class Install extends Controller
             // Could not create the .env file, redirect to a view with manual instructions on how to add it
             return view('install/manual_config');
         }
-
-        return redirect()->back();
     }
 
     public function instanceConfig()

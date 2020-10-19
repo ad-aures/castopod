@@ -112,6 +112,7 @@ class AnalyticsPodcastByPlayerModel extends Model
                 ->where([
                     '`podcast_id`' => $podcastId,
                     '`app` !=' => '',
+                    '`os` !=' => '',
                     '`bot`' => 0,
                     '`date` >' => date('Y-m-d', strtotime('-1 week')),
                 ])

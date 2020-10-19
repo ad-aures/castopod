@@ -20,10 +20,4 @@ class AnalyticsWebsiteByEntryPage extends Entity
         'date' => 'datetime',
         'hits' => 'integer',
     ];
-
-    public function getLabels()
-    {
-        $split = explode('/', $this->attributes['labels']);
-        return $split[count($split) - 1];
-    }
 }

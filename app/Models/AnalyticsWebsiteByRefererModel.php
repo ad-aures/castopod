@@ -64,7 +64,9 @@ class AnalyticsWebsiteByRefererModel extends Model
         if (
             !($found = cache("{$podcastId}_analytics_website_by_domain_weekly"))
         ) {
-            $found = $this->select('`domain` as `labels`')
+            $found = $this->select(
+                'SUBSTRING_INDEX(`domain`, \'.\', -2) as `labels`'
+            )
                 ->selectSum('`hits`', '`values`')
                 ->where([
                     '`podcast_id`' => $podcastId,
@@ -95,7 +97,9 @@ class AnalyticsWebsiteByRefererModel extends Model
         if (
             !($found = cache("{$podcastId}_analytics_website_by_domain_yearly"))
         ) {
-            $found = $this->select('`domain` as `labels`')
+            $found = $this->select(
+                'SUBSTRING_INDEX(`domain`, \'.\', -2) as `labels`'
+            )
                 ->selectSum('`hits`', '`values`')
                 ->where([
                     '`podcast_id`' => $podcastId,
