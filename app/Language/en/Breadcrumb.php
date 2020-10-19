@@ -27,4 +27,5 @@ return [
     'webpages' => 'Web pages',
     'unique-listeners' => 'Unique listeners',
     'players' => 'Players',
+    'listening-time' => 'Listening time',
 ];

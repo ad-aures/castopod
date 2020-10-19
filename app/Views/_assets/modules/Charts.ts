@@ -62,6 +62,41 @@ const drawXYChart = (chartDivId: string, dataUrl: string | null): void => {
   chart.scrollbarX = new am4core.Scrollbar();
 };
 
+const drawXYDurationChart = (chartDivId: string, dataUrl: string | null): void => {
+  // Create chart instance
+  const chart = am4core.create(chartDivId, am4charts.XYChart);
+  am4core.percent(100);
+  // Set theme
+  am4core.useTheme(am4themes_material);
+  // Create axes
+  const dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+  dateAxis.renderer.minGridDistance = 60;
+  const yAxis = chart.yAxes.push(new am4charts.DurationAxis());
+  yAxis.baseUnit = "second";
+  chart.durationFormatter.durationFormat = "hh'h,' mm'mn'";
+  // Add data
+  chart.dataSource.url = dataUrl || "";
+  chart.dataSource.parser.options.emptyAs = 0;
+  // Create series
+  const series = chart.series.push(new am4charts.LineSeries());
+  series.dataFields.valueY = "values";
+  series.dataFields.dateX = "labels";
+  series.tooltipText = "{valueY.formatDuration()}";
+  series.strokeWidth = 2;
+  // Make bullets grow on hover
+  const bullet = series.bullets.push(new am4charts.CircleBullet());
+  bullet.circle.strokeWidth = 2;
+  bullet.circle.radius = 4;
+  bullet.circle.fill = am4core.color("#fff");
+  const bullethover = bullet.states.create("hover");
+  bullethover.properties.scale = 1.3;
+  series.tooltip.pointerOrientation = "vertical";
+  chart.cursor = new am4charts.XYCursor();
+  chart.cursor.snapToSeries = series;
+  chart.cursor.xAxis = dateAxis;
+  chart.scrollbarX = new am4core.Scrollbar();
+};
+
 const drawXYSeriesChart = (
   chartDivId: string,
   dataUrl: string | null
@@ -151,6 +186,9 @@ const DrawCharts = (): void => {
         break;
       case "xy-chart":
         drawXYChart(chartDiv.id, chartDiv.getAttribute("data-chart-url"));
+        break;
+      case "xy-duration-chart":
+        drawXYDurationChart(chartDiv.id, chartDiv.getAttribute("data-chart-url"));
         break;
       case "xy-series-chart":
         drawXYSeriesChart(chartDiv.id, chartDiv.getAttribute("data-chart-url"));

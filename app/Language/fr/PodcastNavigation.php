@@ -25,4 +25,5 @@ return [
     'podcast-analytics-locations' => 'Localisations',
     'podcast-analytics-unique-listeners' => 'Auditeurs uniques',
     'podcast-analytics-players' => 'Lecteurs',
+    'podcast-analytics-listening-time' => 'Durée d’écoute',
 ];

@@ -39,4 +39,6 @@ return [
     'by_entry_page' =>
         'Fréquentation des pages web par page d’entrée (sur la dernière semaine)',
     'podcast_bots' => 'Robots (bots)',
+    'daily_listening_time' => 'Durée quotidienne d’écoute cumulée',
+    'monthly_listening_time' => 'Durée mensuelle d’écoute cumulée',
 ];

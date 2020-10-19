@@ -13,6 +13,7 @@ $podcastNavigation = [
         'items' => [
             'podcast-analytics',
             'podcast-analytics-unique-listeners',
+            'podcast-analytics-listening-time',
             'podcast-analytics-players',
             'podcast-analytics-locations',
             'podcast-analytics-webpages',

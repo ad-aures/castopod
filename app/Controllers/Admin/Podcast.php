@@ -90,6 +90,14 @@ class Podcast extends BaseController
         return view('admin/podcast/analytics/unique_listeners', $data);
     }
 
+    public function viewAnalyticsListeningTime()
+    {
+        $data = ['podcast' => $this->podcast];
+
+        replace_breadcrumb_params([0 => $this->podcast->title]);
+        return view('admin/podcast/analytics/listening-time', $data);
+    }
+
     public function viewAnalyticsPlayers()
     {
         $data = ['podcast' => $this->podcast];

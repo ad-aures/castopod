@@ -27,4 +27,6 @@ return [
     'by_domain_yearly' => 'Web pages visits by source (for the past year)',
     'by_entry_page' => 'Web pages visits by landing page (for the past week)',
     'podcast_bots' => 'Bots (crawlers)',
+    'daily_listening_time' => 'Daily cumulative listening time',
+    'monthly_listening_time' => 'Monthly cumulative listening time',
 ];

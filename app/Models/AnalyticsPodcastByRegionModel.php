@@ -38,13 +38,11 @@ class AnalyticsPodcastByRegionModel extends Model
                 "{$podcastId}_analytics_podcast_by_region_{$locale}"
             ))
         ) {
-            $found = $this->select(
-                '`country_code`, `region_code`, `latitude`, `longitude`'
-            )
+            $found = $this->select('`country_code`, `region_code`')
                 ->selectSum('`hits`', '`value`')
-                ->groupBy(
-                    '`country_code`, `region_code`, `latitude`, `longitude`'
-                )
+                ->selectAvg('`latitude`')
+                ->selectAvg('`longitude`')
+                ->groupBy('`country_code`, `region_code`')
                 ->where([
                     '`podcast_id`' => $podcastId,
                     '`date` >' => date('Y-m-d', strtotime('-1 week')),

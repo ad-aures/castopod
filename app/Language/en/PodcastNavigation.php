@@ -25,4 +25,5 @@ return [
     'podcast-analytics-locations' => 'Locations',
     'podcast-analytics-unique-listeners' => 'Unique listeners',
     'podcast-analytics-players' => 'Players',
+    'podcast-analytics-listening-time' => 'Listening time',
 ];

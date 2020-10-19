@@ -27,4 +27,5 @@ return [
     'webpages' => 'Pages web',
     'unique-listeners' => 'Auditeurs uniques',
     'players' => 'Lecteurs',
+    'listening-time' => 'Durée d’écoute',
 ];
