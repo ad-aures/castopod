@@ -1,3 +1,10 @@
+# [1.0.0-alpha.3](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2020-10-19)
+
+
+### Bug Fixes
+
+* **analytics:** remove charts empty values + remove useless language cache ([1678794](https://code.podlibre.org/podlibre/castopod/commit/16787941539ba4014281a366789ea896a9cd2afc))
+
 # [1.0.0-alpha.2](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2020-10-19)
 
 
