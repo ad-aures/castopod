@@ -1,3 +1,10 @@
+# [1.0.0-alpha.2](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2020-10-19)
+
+
+### Features
+
+* add cumulative listening time charts ([588b4d2](https://code.podlibre.org/podlibre/castopod/commit/588b4d28da00bc12d02126e23181690f54d81716))
+
 # 1.0.0-alpha.1 (2020-10-16)
 
 
