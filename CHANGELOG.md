@@ -1,3 +1,10 @@
+# [1.0.0-alpha.6](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.5...v1.0.0-alpha.6) (2020-10-20)
+
+
+### Bug Fixes
+
+* **cache:** add locale for podcast and episode pages + clear some persisting cache in models ([9cec8a8](https://code.podlibre.org/podlibre/castopod/commit/9cec8a81ccbb7239402fe6633dbc31979272302a)), closes [#42](https://code.podlibre.org/podlibre/castopod/issues/42) [#61](https://code.podlibre.org/podlibre/castopod/issues/61)
+
 # [1.0.0-alpha.5](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2020-10-20)
 
 
