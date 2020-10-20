@@ -269,7 +269,16 @@
     lang('Podcast.form.complete'),
     ['id' => 'complete', 'name' => 'complete'],
     'yes',
-    old('complete', $podcast->complete)
+    old('complete', $podcast->complete),
+    'mb-2'
+) ?>
+
+<?= form_switch(
+    lang('Podcast.form.lock') .
+        hint_tooltip(lang('Podcast.form.lock_hint'), 'ml-1'),
+    ['id' => 'lock', 'name' => 'lock'],
+    'yes',
+    old('lock', $podcast->lock)
 ) ?>
 
 <?= form_section_close() ?>

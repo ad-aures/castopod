@@ -79,6 +79,10 @@ class AddPodcasts extends Migration
                 'constraint' => 1024,
                 'null' => true,
             ],
+            'episode_description_footer' => [
+                'type' => 'TEXT',
+                'null' => true,
+            ],
             'block' => [
                 'type' => 'TINYINT',
                 'constraint' => 1,
@@ -89,19 +93,12 @@ class AddPodcasts extends Migration
                 'constraint' => 1,
                 'default' => 0,
             ],
-            'episode_description_footer' => [
-                'type' => 'TEXT',
-                'null' => true,
-            ],
-            'created_by' => [
-                'type' => 'INT',
-                'constraint' => 11,
-                'unsigned' => true,
-            ],
-            'updated_by' => [
-                'type' => 'INT',
-                'constraint' => 11,
-                'unsigned' => true,
+            'lock' => [
+                'type' => 'TINYINT',
+                'constraint' => 1,
+                'comment' =>
+                    'This tells other podcast platforms whether they are allowed to import this feed.',
+                'default' => 1,
             ],
             'imported_feed_url' => [
                 'type' => 'VARCHAR',
@@ -116,6 +113,16 @@ class AddPodcasts extends Migration
                 'comment' =>
                     'The RSS new feed URL if this podcast is moving out, NULL otherwise.',
                 'null' => true,
+            ],
+            'created_by' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+            ],
+            'updated_by' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
             ],
             'created_at' => [
                 'type' => 'TIMESTAMP',

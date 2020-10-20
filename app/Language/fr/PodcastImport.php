@@ -41,5 +41,7 @@ return [
         'Utilisez ceci si le podcast à importer ne contient pas de numéros de saison mais que vous souhaitez en définir un. Laissez vide sinon.',
     'max_episodes' => 'Nombre maximum d’épisodes à importer',
     'max_episodes_hint' => 'Laissez vide pour importer tous les épisodes',
+    'lock_import' =>
+        'Ce flux est protégé. Vous ne pouvez pas l’importer. Si en vous êtes le propriétaire, déprotégez-le sur la plate-forme d’origine.',
     'submit' => 'Importer le podcast',
 ];

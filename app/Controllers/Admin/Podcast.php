@@ -156,6 +156,7 @@ class Podcast extends BaseController
             'copyright' => $this->request->getPost('copyright'),
             'block' => $this->request->getPost('block') === 'yes',
             'complete' => $this->request->getPost('complete') === 'yes',
+            'lock' => $this->request->getPost('lock') === 'yes',
             'created_by' => user(),
             'updated_by' => user(),
         ]);
@@ -244,10 +245,19 @@ class Podcast extends BaseController
                     ' ⎋</a>',
                 ]);
         }
-
         $nsItunes = $feed->channel[0]->children(
             'http://www.itunes.com/dtds/podcast-1.0.dtd'
         );
+        $nsPodcast = $feed->channel[0]->children(
+            'https://github.com/Podcastindex-org/podcast-namespace/blob/main/docs/1.0.md'
+        );
+
+        if ((string) $nsPodcast->locked === 'yes') {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', [lang('PodcastImport.lock_import')]);
+        }
 
         $podcast = new \App\Entities\Podcast([
             'name' => $this->request->getPost('name'),
@@ -453,6 +463,7 @@ class Podcast extends BaseController
         $this->podcast->block = $this->request->getPost('block') === 'yes';
         $this->podcast->complete =
             $this->request->getPost('complete') === 'yes';
+        $this->podcast->lock = $this->request->getPost('lock') === 'yes';
         $this->updated_by = user();
 
         $db = \Config\Database::connect();

@@ -66,6 +66,9 @@ return [
         'status_section_subtitle' => 'Vivant ou mort ?',
         'block' => 'Le podcast doit être masqué sur toutes les plateformes',
         'complete' => 'Le podcast n’aura plus de nouveaux épisodes.',
+        'lock' => 'Le podcast est fermé à l’export',
+        'lock_hint' =>
+            'Le but est d’indiquer aux autres plates-formes de podcast si elles sont autorisées à importer ce flux. La valeur « oui » signifie que toute tentative d’importation de ce flux dans une nouvelle plateforme doit être rejetée.',
         'submit_create' => 'Créer le podcast',
         'submit_edit' => 'Enregistrer le podcast',
     ],

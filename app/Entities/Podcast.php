@@ -76,13 +76,14 @@ class Podcast extends Entity
         'owner_email' => '?string',
         'type' => 'string',
         'copyright' => '?string',
+        'episode_description_footer' => '?string',
         'block' => 'boolean',
         'complete' => 'boolean',
-        'episode_description_footer' => '?string',
-        'created_by' => 'integer',
-        'updated_by' => 'integer',
+        'lock' => 'boolean',
         'imported_feed_url' => '?string',
         'new_feed_url' => '?string',
+        'created_by' => 'integer',
+        'updated_by' => 'integer',
     ];
 
     /**

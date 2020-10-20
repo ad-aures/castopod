@@ -32,6 +32,7 @@ class PodcastModel extends Model
         'copyright',
         'block',
         'complete',
+        'lock',
         'created_by',
         'updated_by',
         'imported_feed_url',

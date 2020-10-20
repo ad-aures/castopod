@@ -262,6 +262,13 @@
     old('complete', false)
 ) ?>
 
+<?= form_switch(
+    lang('Podcast.form.lock'),
+    ['id' => 'lock', 'name' => 'lock'],
+    'yes',
+    old('lock', $podcast->lock)
+) ?>
+
 <?= form_section_close() ?>
 
 

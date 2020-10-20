@@ -21,8 +21,11 @@ function get_rss_feed($podcast)
 
     $itunes_namespace = 'http://www.itunes.com/dtds/podcast-1.0.dtd';
 
+    $podcast_namespace =
+        'https://github.com/Podcastindex-org/podcast-namespace/blob/main/docs/1.0.md';
+
     $rss = new SimpleRSSElement(
-        "<?xml version='1.0' encoding='utf-8'?><rss version='2.0' xmlns:itunes='$itunes_namespace' xmlns:content='http://purl.org/rss/1.0/modules/content/'></rss>"
+        "<?xml version='1.0' encoding='utf-8'?><rss version='2.0' xmlns:itunes='$itunes_namespace' xmlns:podcast='$podcast_namespace' xmlns:content='http://purl.org/rss/1.0/modules/content/'></rss>"
     );
 
     $channel = $rss->addChild('channel');
@@ -60,7 +63,9 @@ function get_rss_feed($podcast)
     $itunes_image = $channel->addChild('image', null, $itunes_namespace);
     $itunes_image->addAttribute('href', $podcast->image->original_url);
     $channel->addChild('language', $podcast->language);
-
+    $channel
+        ->addChild('locked', $podcast->lock ? 'yes' : 'no', $podcast_namespace)
+        ->addAttribute('owner', $podcast->owner_email);
     // set main category first, then other categories as apple
     add_category_tag($channel, $podcast->category);
     foreach ($podcast->other_categories as $other_category) {

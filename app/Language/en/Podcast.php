@@ -65,6 +65,9 @@ return [
         'status_section_subtitle' => 'Dead or alive?',
         'block' => 'Podcast should be hidden from all platforms',
         'complete' => 'Podcast will not be having new episodes',
+        'lock' => 'Podcast is locked for export',
+        'lock_hint' =>
+            'The purpose is to tell other podcast platforms whether they are allowed to import this feed. A value of yes means that any attempt to import this feed into a new platform should be rejected.',
         'submit_create' => 'Create podcast',
         'submit_edit' => 'Save podcast',
     ],

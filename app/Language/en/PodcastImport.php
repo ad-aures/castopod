@@ -40,5 +40,7 @@ return [
         'Use this if your podcast does not have a season number but wish to set one during import. Leave blank otherwise.',
     'max_episodes' => 'Maximum number of episodes to import',
     'max_episodes_hint' => 'Leave blank to import all episodes',
+    'lock_import' =>
+        'This feed is protected. You cannot import it. If you are the owner, unprotect it on the origin platform.',
     'submit' => 'Import podcast',
 ];
