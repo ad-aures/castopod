@@ -1,3 +1,10 @@
+# [1.0.0-alpha.5](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2020-10-20)
+
+
+### Features
+
+* add lock podcast according to the Podcastindex podcast-namespace to prevent unauthozized import ([72b3012](https://code.podlibre.org/podlibre/castopod/commit/72b301272e0b70ded3e2b237391909e3f152ad0b))
+
 # [1.0.0-alpha.4](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2020-10-20)
 
 
