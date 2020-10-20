@@ -1,3 +1,10 @@
+# [1.0.0-alpha.4](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2020-10-20)
+
+
+### Features
+
+* **analytics:** add charts and data export ([78625c4](https://code.podlibre.org/podlibre/castopod/commit/78625c471b4f03a09bd42f72b82217e1f2d01cef))
+
 # [1.0.0-alpha.3](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2020-10-19)
 
 
