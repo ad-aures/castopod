@@ -9,6 +9,9 @@ const drawPieChart = (chartDivId: string, dataUrl: string | null): void => {
   // Create chart instance
   const chart = am4core.create(chartDivId, am4charts.PieChart);
   am4core.percent(100);
+  chart.exporting.menu = new am4core.ExportMenu();
+  chart.exporting.menu.align = "left";
+  chart.exporting.menu.verticalAlign = "top";
   // Set theme
   am4core.useTheme(am4themes_material);
   chart.innerRadius = am4core.percent(10);
@@ -33,6 +36,9 @@ const drawXYChart = (chartDivId: string, dataUrl: string | null): void => {
   // Create chart instance
   const chart = am4core.create(chartDivId, am4charts.XYChart);
   am4core.percent(100);
+  chart.exporting.menu = new am4core.ExportMenu();
+  chart.exporting.menu.align = "right";
+  chart.exporting.menu.verticalAlign = "bottom";
   // Set theme
   am4core.useTheme(am4themes_material);
   // Create axes
@@ -66,6 +72,9 @@ const drawXYDurationChart = (chartDivId: string, dataUrl: string | null): void =
   // Create chart instance
   const chart = am4core.create(chartDivId, am4charts.XYChart);
   am4core.percent(100);
+  chart.exporting.menu = new am4core.ExportMenu();
+  chart.exporting.menu.align = "right";
+  chart.exporting.menu.verticalAlign = "bottom";
   // Set theme
   am4core.useTheme(am4themes_material);
   // Create axes
@@ -104,6 +113,9 @@ const drawXYSeriesChart = (
   // Create chart instance
   const chart = am4core.create(chartDivId, am4charts.XYChart);
   am4core.percent(100);
+  chart.exporting.menu = new am4core.ExportMenu();
+  chart.exporting.menu.align = "right";
+  chart.exporting.menu.verticalAlign = "bottom";
   // Set theme
   am4core.useTheme(am4themes_material);
   // Create axes
@@ -134,6 +146,9 @@ const drawMapChart = (chartDivId: string, dataUrl: string | null): void => {
   // Create map instance
   const chart = am4core.create(chartDivId, am4maps.MapChart);
   am4core.percent(100);
+  chart.exporting.menu = new am4core.ExportMenu();
+  chart.exporting.menu.align = "left";
+  chart.exporting.menu.verticalAlign = "top";
   // Set theme
   am4core.useTheme(am4themes_material);
   // Set map definition
