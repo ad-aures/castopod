@@ -170,19 +170,53 @@ class PodcastModel extends Model
         $podcast = (new PodcastModel())->getPodcastById(
             is_array($data['id']) ? $data['id'][0] : $data['id']
         );
+        $supportedLocales = config('App')->supportedLocales;
 
         // delete cache for rss feed and podcast pages
         cache()->delete(md5($podcast->feed_url));
-        cache()->delete(md5($podcast->link));
-
-        // clear cache for every podcast's episode page?
-        foreach ($podcast->episodes as $episode) {
-            cache()->delete(md5($episode->link));
-        }
 
         // delete model requests cache
         cache()->delete("podcast{$podcast->id}");
         cache()->delete("podcast@{$podcast->name}");
+
+        // clear cache for every localized podcast episode page
+        foreach ($podcast->episodes as $episode) {
+            foreach ($supportedLocales as $locale) {
+                cache()->delete(
+                    "page_podcast{$podcast->id}_episode{$episode->id}_{$locale}"
+                );
+            }
+        }
+
+        // delete episode lists cache per year / season
+        // and localized pages
+        $episodeModel = new EpisodeModel();
+        $years = $episodeModel->getYears($podcast->id);
+        $seasons = $episodeModel->getSeasons($podcast->id);
+
+        foreach ($years as $year) {
+            cache()->delete("podcast{$podcast->id}_{$year['year']}_episodes");
+            foreach ($supportedLocales as $locale) {
+                cache()->delete(
+                    "page_podcast{$podcast->id}_{$year['year']}_{$locale}"
+                );
+            }
+        }
+        foreach ($seasons as $season) {
+            cache()->delete(
+                "podcast{$podcast->id}_season{$season['season_number']}_episodes"
+            );
+            foreach ($supportedLocales as $locale) {
+                cache()->delete(
+                    "page_podcast{$podcast->id}_season{$season['season_number']}_{$locale}"
+                );
+            }
+        }
+
+        // delete query cache
+        cache()->delete("podcast{$podcast->id}_defaultQuery");
+        cache()->delete("podcast{$podcast->id}_years");
+        cache()->delete("podcast{$podcast->id}_seasons");
 
         return $data;
     }

@@ -76,8 +76,7 @@ class PlatformModel extends Model
 
     public function savePlatformLinks($podcastId, $platformLinksData)
     {
-        cache()->delete("podcast{$podcastId}_platforms");
-        cache()->delete("podcast{$podcastId}_platformLinks");
+        $this->clearCache($podcastId);
 
         // Remove already previously set platforms to overwrite them
         $this->db
@@ -109,12 +108,39 @@ class PlatformModel extends Model
 
     public function removePlatformLink($podcastId, $platformId)
     {
-        cache()->delete("podcast{$podcastId}_platforms");
-        cache()->delete("podcast{$podcastId}_platformLinks");
+        $this->clearCache($podcastId);
 
         return $this->db->table('platform_links')->delete([
             'podcast_id' => $podcastId,
             'platform_id' => $platformId,
         ]);
+    }
+
+    public function clearCache($podcastId)
+    {
+        cache()->delete("podcast{$podcastId}_platforms");
+        cache()->delete("podcast{$podcastId}_platformLinks");
+
+        // delete localized podcast page cache
+        $episodeModel = new EpisodeModel();
+        $years = $episodeModel->getYears($podcastId);
+        $seasons = $episodeModel->getSeasons($podcastId);
+        $supportedLocales = config('App')->supportedLocales;
+
+        foreach ($years as $year) {
+            foreach ($supportedLocales as $locale) {
+                cache()->delete(
+                    "page_podcast{$podcastId}_{$year['year']}_{$locale}"
+                );
+            }
+        }
+
+        foreach ($seasons as $season) {
+            foreach ($supportedLocales as $locale) {
+                cache()->delete(
+                    "page_podcast{$podcastId}_season{$season['season_number']}_{$locale}"
+                );
+            }
+        }
     }
 }

@@ -58,15 +58,13 @@ class Podcast extends BaseController
                 "podcast{$this->podcast->id}",
                 $yearQuery,
                 $seasonQuery ? 'season' . $seasonQuery : null,
+                service('request')->getLocale(),
             ])
         );
 
         if (!($found = cache($cacheName))) {
-            // The page cache is set to a decade so it is deleted manually upon podcast update
-            // $this->cachePage(DECADE);
-            $episodeModel = new EpisodeModel();
-
             // Build navigation array
+            $episodeModel = new EpisodeModel();
             $years = $episodeModel->getYears($this->podcast->id);
             $seasons = $episodeModel->getSeasons($this->podcast->id);
 

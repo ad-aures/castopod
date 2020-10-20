@@ -44,11 +44,10 @@ class Episode extends BaseController
     {
         self::triggerWebpageHit($this->episode->podcast_id);
 
-        if (
-            !($cachedView = cache(
-                "page_podcast{$this->episode->podcast_id}_episode{$this->episode->id}"
-            ))
-        ) {
+        $locale = service('request')->getLocale();
+        $cacheName = "page_podcast{$this->episode->podcast_id}_episode{$this->episode->id}_{$locale}";
+
+        if (!($cachedView = cache($cacheName))) {
             $previousNextEpisodes = (new EpisodeModel())->getPreviousNextEpisodes(
                 $this->episode,
                 $this->podcast->type
@@ -64,7 +63,7 @@ class Episode extends BaseController
             // The page cache is set to a decade so it is deleted manually upon podcast update
             return view('episode', $data, [
                 'cache' => DECADE,
-                'cache_name' => "page_podcast{$this->episode->podcast_id}_episode{$this->episode->id}",
+                'cache_name' => $cacheName,
             ]);
         }
 

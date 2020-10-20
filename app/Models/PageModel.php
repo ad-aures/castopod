@@ -30,7 +30,8 @@ class PageModel extends Model
     ];
     protected $validationMessages = [];
 
-    // Before update because slug might change
+    // Before update because slug or title might change
+    protected $afterInsert = ['clearCache'];
     protected $beforeUpdate = ['clearCache'];
     protected $beforeDelete = ['clearCache'];
 
@@ -44,8 +45,38 @@ class PageModel extends Model
         cache()->delete(md5($page->link));
 
         // Clear the cache of all podcast and episode pages
-        // TODO: change the logic of page caching to prevent clearing all cache every time
-        // cache()->clean();
+        $allPodcasts = (new PodcastModel())->findAll();
+
+        foreach ($allPodcasts as $podcast) {
+            // delete localized podcast and episode page cache
+            $episodeModel = new EpisodeModel();
+            $years = $episodeModel->getYears($podcast->id);
+            $seasons = $episodeModel->getSeasons($podcast->id);
+            $supportedLocales = config('App')->supportedLocales;
+
+            foreach ($years as $year) {
+                foreach ($supportedLocales as $locale) {
+                    cache()->delete(
+                        "page_podcast{$podcast->id}_{$year['year']}_{$locale}"
+                    );
+                }
+            }
+            foreach ($seasons as $season) {
+                foreach ($supportedLocales as $locale) {
+                    cache()->delete(
+                        "page_podcast{$podcast->id}_season{$season['season_number']}_{$locale}"
+                    );
+                }
+            }
+
+            foreach ($podcast->episodes as $episode) {
+                foreach ($supportedLocales as $locale) {
+                    cache()->delete(
+                        "page_podcast{$podcast->id}_episode{$episode->id}_{$locale}"
+                    );
+                }
+            }
+        }
 
         return $data;
     }
