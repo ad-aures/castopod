@@ -1,3 +1,15 @@
+# [1.0.0-alpha.7](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.6...v1.0.0-alpha.7) (2020-10-21)
+
+
+### Features
+
+* **analytics:** add service name from rss user-agent ([7202b98](https://code.podlibre.org/podlibre/castopod/commit/7202b9867bd59aafa8c338a4230fb5e5c55b24c6))
+
+
+### BREAKING CHANGES
+
+* **analytics:** analytics_podcasts_by_player table and analytics_podcasts procedure were updated
+
 # [1.0.0-alpha.6](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.5...v1.0.0-alpha.6) (2020-10-20)
 
 
