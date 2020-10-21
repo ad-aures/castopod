@@ -21,14 +21,13 @@
         ) ?>"></div>
     </div>
 
-    
     <div class="mb-12 mr-6 text-center">
-        <h2><?= lang('Charts.by_player_yearly') ?></h2>
-        <div class="chart-pie" id="by-app-yearly-pie" data-chart-type="pie-chart" data-chart-url="<?= route_to(
+        <h2><?= lang('Charts.by_service_weekly') ?></h2>
+        <div class="chart-pie" id="by-service-weekly-pie" data-chart-type="pie-chart" data-chart-url="<?= route_to(
             'analytics-data',
             $podcast->id,
             'PodcastByPlayer',
-            'ByAppYearly'
+            'ByServiceWeekly'
         ) ?>"></div>
     </div>
 

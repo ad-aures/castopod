@@ -13,9 +13,10 @@ use CodeIgniter\I18n\Time;
  * Generates the rss feed for a given podcast entity
  *
  * @param App\Entities\Podcast $podcast
+ * @param string $service The name of the service that fetches the RSS feed for future reference when the audio file is eventually downloaded
  * @return string rss feed as xml
  */
-function get_rss_feed($podcast)
+function get_rss_feed($podcast, $serviceName = '')
 {
     $episodes = $podcast->episodes;
 
@@ -102,7 +103,7 @@ function get_rss_feed($podcast)
         $item->addChild('title', $episode->title);
         $enclosure = $item->addChild('enclosure');
 
-        $enclosure->addAttribute('url', $episode->enclosure_url);
+        $enclosure->addAttribute('url', $episode->enclosure_url . $serviceName);
         $enclosure->addAttribute('length', $episode->enclosure_filesize);
         $enclosure->addAttribute('type', $episode->enclosure_mimetype);
 

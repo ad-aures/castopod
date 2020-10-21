@@ -28,6 +28,7 @@ CREATE PROCEDURE `{$prefix}analytics_podcasts` (
     IN `p_region_code` VARCHAR(3) CHARSET utf8mb4,
     IN `p_latitude` FLOAT,
     IN `p_longitude` FLOAT,
+    IN `p_service` VARCHAR(128) CHARSET utf8mb4,
     IN `p_app` VARCHAR(128) CHARSET utf8mb4,
     IN `p_device` VARCHAR(32) CHARSET utf8mb4,
     IN `p_os` VARCHAR(32) CHARSET utf8mb4,
@@ -52,8 +53,8 @@ IF NOT `p_bot` THEN
         VALUES (p_podcast_id, p_country_code, p_region_code, p_latitude, p_longitude, DATE(NOW())) 
         ON DUPLICATE KEY UPDATE `hits`=`hits`+1;
 END IF;
-INSERT INTO `{$prefix}analytics_podcasts_by_player`(`podcast_id`, `app`, `device`, `os`, `bot`, `date`) 
-    VALUES (p_podcast_id, p_app, p_device, p_os, p_bot, DATE(NOW())) 
+INSERT INTO `{$prefix}analytics_podcasts_by_player`(`podcast_id`, `service`, `app`, `device`, `os`, `bot`, `date`) 
+    VALUES (p_podcast_id, p_service, p_app, p_device, p_os, p_bot, DATE(NOW())) 
     ON DUPLICATE KEY UPDATE `hits`=`hits`+1;
 END
 EOD;

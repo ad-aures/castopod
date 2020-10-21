@@ -25,6 +25,10 @@ class AddAnalyticsPodcastsByPlayer extends Migration
             'date' => [
                 'type' => 'date',
             ],
+            'service' => [
+                'type' => 'VARCHAR',
+                'constraint' => 128,
+            ],
             'app' => [
                 'type' => 'VARCHAR',
                 'constraint' => 128,
@@ -51,6 +55,7 @@ class AddAnalyticsPodcastsByPlayer extends Migration
         $this->forge->addPrimaryKey([
             'podcast_id',
             'date',
+            'service',
             'app',
             'device',
             'os',

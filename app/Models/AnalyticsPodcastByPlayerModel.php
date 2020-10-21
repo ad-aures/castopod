@@ -24,6 +24,41 @@ class AnalyticsPodcastByPlayerModel extends Model
     protected $useTimestamps = false;
 
     /**
+     * Gets service data for a podcast
+     *
+     * @param int $podcastId
+     *
+     * @return array
+     */
+    public function getDataByServiceWeekly(int $podcastId): array
+    {
+        if (
+            !($found = cache(
+                "{$podcastId}_analytics_podcasts_by_player_by_service_weekly"
+            ))
+        ) {
+            $found = $this->select('`service` as `labels`')
+                ->selectSum('`hits`', '`values`')
+                ->where([
+                    '`podcast_id`' => $podcastId,
+                    '`service` !=' => '',
+                    '`bot`' => 0,
+                    '`date` >' => date('Y-m-d', strtotime('-1 week')),
+                ])
+                ->groupBy('`labels`')
+                ->orderBy('`values`', 'DESC')
+                ->findAll(10);
+
+            cache()->save(
+                "{$podcastId}_analytics_podcasts_by_player_by_service_weekly",
+                $found,
+                600
+            );
+        }
+        return $found;
+    }
+
+    /**
      * Gets player data for a podcast
      *
      * @param int $podcastId

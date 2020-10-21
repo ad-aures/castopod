@@ -102,7 +102,7 @@ function set_user_session_player()
         $userAgent = $_SERVER['HTTP_USER_AGENT'];
 
         try {
-            $playerFound = \Podlibre\UserAgentsPhp\UserAgents::find($userAgent);
+            $playerFound = \Opawg\UserAgentsPhp\UserAgents::find($userAgent);
         } catch (\Exception $e) {
             // If things go wrong the show must go on and the user must be able to download the file
         }
@@ -227,6 +227,7 @@ function webpage_hit($podcast_id)
  *   ✅ Castopod does not do pre-load
  *   ✅ IP deny list https://github.com/client9/ipcat
  *   ✅ User-agent Filtering https://github.com/opawg/user-agents
+ *   ✅ RSS User-agent https://github.com/opawg/podcast-rss-useragents
  *   ✅ Ignores 2 bytes range "Range: 0-1"  (performed by official Apple iOS Podcast app)
  *   ✅ In case of partial content, adds up all requests to check >1mn was downloaded
  *   ✅ Identifying Uniques is done with a combination of IP Address and User Agent
@@ -234,11 +235,17 @@ function webpage_hit($podcast_id)
  * @param int $episodeId The Episode ID
  * @param int $bytesThreshold The minimum total number of bytes that must be downloaded so that an episode is counted (>1mn)
  * @param int $fileSize The podcast complete file size
+ * @param string $serviceName The name of the service that had fetched the RSS feed
  *
  * @return void
  */
-function podcast_hit($podcastId, $episodeId, $bytesThreshold, $fileSize)
-{
+function podcast_hit(
+    $podcastId,
+    $episodeId,
+    $bytesThreshold,
+    $fileSize,
+    $serviceName
+) {
     $session = \Config\Services::session();
     $session->start();
 
@@ -328,22 +335,18 @@ function podcast_hit($podcastId, $episodeId, $bytesThreshold, $fileSize)
                 // We save the download count for this user until midnight:
                 cache()->save($listenerHashId, $downloadsByUser, $midnightTTL);
 
-                $app = $session->get('player')['app'];
-                $device = $session->get('player')['device'];
-                $os = $session->get('player')['os'];
-                $bot = $session->get('player')['bot'];
-
-                $db->query("CALL $procedureName(?,?,?,?,?,?,?,?,?,?,?);", [
+                $db->query("CALL $procedureName(?,?,?,?,?,?,?,?,?,?,?,?);", [
                     $podcastId,
                     $episodeId,
                     $session->get('location')['countryCode'],
                     $session->get('location')['regionCode'],
                     $session->get('location')['latitude'],
                     $session->get('location')['longitude'],
-                    $app == null ? '' : $app,
-                    $device == null ? '' : $device,
-                    $os == null ? '' : $os,
-                    $bot == null ? 0 : $bot,
+                    $serviceName,
+                    $session->get('player')['app'],
+                    $session->get('player')['device'],
+                    $session->get('player')['os'],
+                    $session->get('player')['bot'],
                     $newListener,
                 ]);
             }

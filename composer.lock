@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "47b9f628f03f8c494a9339b054359ec8",
+    "content-hash": "37551523e4097a9341bc00dd317f573d",
     "packages": [
         {
             "name": "codeigniter4/codeigniter4",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/codeigniter4/CodeIgniter4.git",
-                "reference": "f5545aa7274575c397efae4ebcf6c18779dcf895"
+                "reference": "13ff147fa4cd9db15888b041ef35bc22ed94252a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codeigniter4/CodeIgniter4/zipball/f5545aa7274575c397efae4ebcf6c18779dcf895",
-                "reference": "f5545aa7274575c397efae4ebcf6c18779dcf895",
+                "url": "https://api.github.com/repos/codeigniter4/CodeIgniter4/zipball/13ff147fa4cd9db15888b041ef35bc22ed94252a",
+                "reference": "13ff147fa4cd9db15888b041ef35bc22ed94252a",
                 "shasum": ""
             },
             "require": {
@@ -75,7 +75,7 @@
                 "slack": "https://codeigniterchat.slack.com",
                 "issues": "https://github.com/codeigniter4/CodeIgniter4/issues"
             },
-            "time": "2020-10-06T06:38:58+00:00"
+            "time": "2020-10-20T18:13:11+00:00"
         },
         {
             "name": "composer/ca-bundle",
@@ -518,16 +518,16 @@
         },
         {
             "name": "league/commonmark",
-            "version": "1.5.5",
+            "version": "1.5.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/commonmark.git",
-                "reference": "45832dfed6007b984c0d40addfac48d403dc6432"
+                "reference": "a56e91e0fa1f6d0049153a9c34f63488f6b7ce61"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/45832dfed6007b984c0d40addfac48d403dc6432",
-                "reference": "45832dfed6007b984c0d40addfac48d403dc6432",
+                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/a56e91e0fa1f6d0049153a9c34f63488f6b7ce61",
+                "reference": "a56e91e0fa1f6d0049153a9c34f63488f6b7ce61",
                 "shasum": ""
             },
             "require": {
@@ -609,7 +609,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-09-13T14:44:46+00:00"
+            "time": "2020-10-17T21:33:03+00:00"
         },
         {
             "name": "league/html-to-markdown",
@@ -805,12 +805,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/lonnieezell/myth-auth.git",
-                "reference": "e838cb8de6ffa118caf2b9909e71776a866c8973"
+                "reference": "e9d6a2f557bd275158e0b84624534b2abeeb539c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lonnieezell/myth-auth/zipball/e838cb8de6ffa118caf2b9909e71776a866c8973",
-                "reference": "e838cb8de6ffa118caf2b9909e71776a866c8973",
+                "url": "https://api.github.com/repos/lonnieezell/myth-auth/zipball/e9d6a2f557bd275158e0b84624534b2abeeb539c",
+                "reference": "e9d6a2f557bd275158e0b84624534b2abeeb539c",
                 "shasum": ""
             },
             "require": {
@@ -818,9 +818,12 @@
             },
             "require-dev": {
                 "codeigniter4/codeigniter4": "dev-develop",
+                "codeigniter4/codeigniter4-standard": "^1.0",
                 "fzaninotto/faker": "^1.9@dev",
                 "mockery/mockery": "^1.0",
-                "phpunit/phpunit": "8.5.*"
+                "phpstan/phpstan": "^0.12",
+                "phpunit/phpunit": "^8.5",
+                "squizlabs/php_codesniffer": "^3.5"
             },
             "type": "library",
             "autoload": {
@@ -857,7 +860,42 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2020-09-07T03:37:26+00:00"
+            "time": "2020-10-16T18:51:37+00:00"
+        },
+        {
+            "name": "opawg/user-agents-php",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/opawg/user-agents-php.git",
+                "reference": "3b71eeed2c3216f1c1c361c62d4d3a7002be0481"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/opawg/user-agents-php/zipball/3b71eeed2c3216f1c1c361c62d4d3a7002be0481",
+                "reference": "3b71eeed2c3216f1c1c361c62d4d3a7002be0481",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Opawg\\UserAgentsPhp\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Benjamin Bellamy",
+                    "email": "ben@podlibre.org",
+                    "homepage": "https://podlibre.org/"
+                }
+            ],
+            "description": "PHP implementation for opawg/user-agents.",
+            "homepage": "https://github.com/opawg/user-agents-php",
+            "time": "2020-10-20T23:22:20+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -958,41 +996,6 @@
             "description": "Categorization of IP Addresses forked from https://github.com/client9/ipcat",
             "homepage": "https://github.com/podlibre/ipcat",
             "time": "2020-10-05T17:15:07+00:00"
-        },
-        {
-            "name": "podlibre/user-agents-php",
-            "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/podlibre/user-agents-php.git",
-                "reference": "891066bae6b4881a8b7a57eb72a67fca1fcf67c0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/podlibre/user-agents-php/zipball/891066bae6b4881a8b7a57eb72a67fca1fcf67c0",
-                "reference": "891066bae6b4881a8b7a57eb72a67fca1fcf67c0",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Podlibre\\UserAgentsPhp\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Benjamin Bellamy",
-                    "email": "ben@podlibre.org",
-                    "homepage": "https://podlibre.org/"
-                }
-            ],
-            "description": "PHP implementation for opawg/user-agents.",
-            "homepage": "https://github.com/podlibre/user-agents-php",
-            "time": "2020-10-05T16:58:13+00:00"
         },
         {
             "name": "psr/cache",

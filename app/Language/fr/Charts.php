@@ -7,31 +7,33 @@
  */
 
 return [
+    'by_service_weekly' =>
+        'Téléchargements d’épisodes par service (sur la dernière semaine)',
     'by_player_weekly' =>
-        'Téléchargements de Podcast par lecteur (sur la dernière semaine)',
+        'Téléchargements d’épisodes par lecteur (sur la dernière semaine)',
     'by_player_yearly' =>
-        'Téléchargements de Podcast par lecteur (sur la dernière année)',
+        'Téléchargements d’épisodes par lecteur (sur la dernière année)',
     'by_device_weekly' =>
-        'Téléchargements de Podcast par appareil (sur la dernière semaine)',
+        'Téléchargements d’épisodes par appareil (sur la dernière semaine)',
     'by_os_weekly' =>
-        'Téléchargements de Podcast par OS (sur la dernière semaine)',
+        'Téléchargements d’épisodes par OS (sur la dernière semaine)',
     'podcast_by_region' =>
-        'Téléchargements de Podcast par région (sur la dernière semaine)',
+        'Téléchargements d’épisodes par région (sur la dernière semaine)',
     'unique_daily_listeners' => 'Auditeurs uniques quotidiens',
     'unique_monthly_listeners' => 'Auditeurs uniques mensuels',
     'by_browser' =>
         'Fréquentation des pages web par navigateur (sur la dernière semaine)',
-    'podcast_by_day' => 'Téléchargements quotidiens de podcasts',
-    'podcast_by_month' => 'Téléchargements mensuels de podcasts',
+    'podcast_by_day' => 'Téléchargements quotidiens d’épisodes',
+    'podcast_by_month' => 'Téléchargements mensuels d’épisodes',
     'episode_by_day' =>
         'Téléchargements quotidiens de l’épisode (sur les 60 premiers jours)',
     'episode_by_month' => 'Téléchargements mensuels de l’épisode',
     'episodes_by_day' =>
         'Téléchargements des 5 derniers épisodes (sur les 60 premiers jours)',
     'by_country_weekly' =>
-        'Téléchargement de podcasts par pays (sur la dernière semaine)',
+        'Téléchargement d’épisodes par pays (sur la dernière semaine)',
     'by_country_yearly' =>
-        'Téléchargement de podcasts par pays (sur la dernière année)',
+        'Téléchargement d’épisodes par pays (sur la dernière année)',
     'by_domain_weekly' =>
         'Fréquentation des pages web par origine (sur la dernière semaine)',
     'by_domain_yearly' =>

@@ -272,7 +272,12 @@ class EpisodeModel extends Model
         );
 
         // delete cache for rss feed
-        cache()->delete(md5($episode->podcast->feed_url));
+        cache()->delete("podcast{$episode->podcast_id}_feed");
+        foreach (\Opawg\UserAgentsPhp\UserAgentsRSS::$db as $service) {
+            cache()->delete(
+                "podcast{$episode->podcast_id}_feed_{$service['slug']}"
+            );
+        }
 
         // delete model requests cache
         cache()->delete("podcast{$episode->podcast_id}_episodes");

@@ -173,7 +173,10 @@ class PodcastModel extends Model
         $supportedLocales = config('App')->supportedLocales;
 
         // delete cache for rss feed and podcast pages
-        cache()->delete(md5($podcast->feed_url));
+        cache()->delete("podcast{$podcast->id}_feed");
+        foreach (\Opawg\UserAgentsPhp\UserAgentsRSS::$db as $service) {
+            cache()->delete("podcast{$podcast->id}_feed_{$service['slug']}");
+        }
 
         // delete model requests cache
         cache()->delete("podcast{$podcast->id}");

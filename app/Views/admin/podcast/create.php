@@ -27,6 +27,7 @@
     'id' => 'image',
     'name' => 'image',
     'class' => 'form-input',
+
     'required' => 'required',
     'type' => 'file',
     'accept' => '.jpg,.jpeg,.png',
@@ -58,21 +59,27 @@
     'required' => 'required',
 ]) ?>
 
-<?= form_fieldset('', [
-    'class' => 'mb-4',
-]) ?>
+<?= form_fieldset('', ['class' => 'mb-4']) ?>
     <legend>
     <?= lang('Podcast.form.type.label') .
         hint_tooltip(lang('Podcast.form.type.hint'), 'ml-1') ?>
     </legend>
     <?= form_radio(
-        ['id' => 'episodic', 'name' => 'type', 'class' => 'form-radio-btn'],
+        [
+            'id' => 'episodic',
+            'name' => 'type',
+            'class' => 'form-radio-btn',
+        ],
         'episodic',
         old('type') ? old('type') == 'episodic' : true
     ) ?>
     <label for="episodic"><?= lang('Podcast.form.type.episodic') ?></label>
     <?= form_radio(
-        ['id' => 'serial', 'name' => 'type', 'class' => 'form-radio-btn'],
+        [
+            'id' => 'serial',
+            'name' => 'type',
+            'class' => 'form-radio-btn',
+        ],
         'serial',
         old('type') ? old('type') == 'serial' : false
     ) ?>
@@ -252,6 +259,7 @@
     ['id' => 'block', 'name' => 'block'],
     'yes',
     old('block', false),
+
     'mb-2'
 ) ?>
 
@@ -266,7 +274,7 @@
     lang('Podcast.form.lock'),
     ['id' => 'lock', 'name' => 'lock'],
     'yes',
-    old('lock', $podcast->lock)
+    old('lock', true)
 ) ?>
 
 <?= form_section_close() ?>

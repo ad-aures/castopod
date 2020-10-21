@@ -15,13 +15,32 @@ class Feed extends Controller
 {
     public function index($podcastName)
     {
-        // The page cache is set to a decade so it is deleted manually upon podcast update
-        $this->cachePage(DECADE);
-
         helper('rss');
 
         $podcast = (new PodcastModel())->where('name', $podcastName)->first();
+        if (!$podcast) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
 
-        return $this->response->setXML(get_rss_feed($podcast));
+        $service = null;
+        try {
+            $service = \Opawg\UserAgentsPhp\UserAgentsRSS::find(
+                $_SERVER['HTTP_USER_AGENT']
+            );
+        } catch (\Exception $e) {
+            // If things go wrong the show must go on and the user must be able to download the file
+            log_message('critical', $e);
+        }
+        $cacheName =
+            "podcast{$podcast->id}_feed" .
+            ($service ? "_{$service['slug']}" : '');
+        if (!($found = cache($cacheName))) {
+            $found = get_rss_feed(
+                $podcast,
+                $service ? '?s=' . urlencode($service['name']) : ''
+            );
+            cache()->save($cacheName, $found, DECADE);
+        }
+        return $this->response->setXML($found);
     }
 }
