@@ -1,3 +1,10 @@
+# [1.0.0-alpha.8](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.7...v1.0.0-alpha.8) (2020-10-22)
+
+
+### Features
+
+* **episodes:** schedule episode with future publication_date by using cache expiration time ([4f1e773](https://code.podlibre.org/podlibre/castopod/commit/4f1e773c0f9e4c2597f6c1b0a4773dfb34b2f203)), closes [#47](https://code.podlibre.org/podlibre/castopod/issues/47)
+
 # [1.0.0-alpha.7](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.6...v1.0.0-alpha.7) (2020-10-21)
 
 
