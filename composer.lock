@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "37551523e4097a9341bc00dd317f573d",
+    "content-hash": "58e59ff661eaa3553d3f9f9f88b9d274",
     "packages": [
         {
             "name": "codeigniter4/codeigniter4",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/codeigniter4/CodeIgniter4.git",
-                "reference": "13ff147fa4cd9db15888b041ef35bc22ed94252a"
+                "reference": "58993fbbab54a2523be25e8230337b855f465a7a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codeigniter4/CodeIgniter4/zipball/13ff147fa4cd9db15888b041ef35bc22ed94252a",
-                "reference": "13ff147fa4cd9db15888b041ef35bc22ed94252a",
+                "url": "https://api.github.com/repos/codeigniter4/CodeIgniter4/zipball/58993fbbab54a2523be25e8230337b855f465a7a",
+                "reference": "58993fbbab54a2523be25e8230337b855f465a7a",
                 "shasum": ""
             },
             "require": {
@@ -53,7 +53,6 @@
             },
             "scripts": {
                 "post-update-cmd": [
-                    "@composer dump-autoload",
                     "CodeIgniter\\ComposerScripts::postUpdate",
                     "bash admin/setup.sh"
                 ],
@@ -75,7 +74,7 @@
                 "slack": "https://codeigniterchat.slack.com",
                 "issues": "https://github.com/codeigniter4/CodeIgniter4/issues"
             },
-            "time": "2020-10-20T18:13:11+00:00"
+            "time": "2020-10-21T16:26:19+00:00"
         },
         {
             "name": "composer/ca-bundle",
@@ -805,12 +804,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/lonnieezell/myth-auth.git",
-                "reference": "e9d6a2f557bd275158e0b84624534b2abeeb539c"
+                "reference": "fe9739e1a410d9a30292faee9e8b6369667241e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lonnieezell/myth-auth/zipball/e9d6a2f557bd275158e0b84624534b2abeeb539c",
-                "reference": "e9d6a2f557bd275158e0b84624534b2abeeb539c",
+                "url": "https://api.github.com/repos/lonnieezell/myth-auth/zipball/fe9739e1a410d9a30292faee9e8b6369667241e8",
+                "reference": "fe9739e1a410d9a30292faee9e8b6369667241e8",
                 "shasum": ""
             },
             "require": {
@@ -860,7 +859,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2020-10-16T18:51:37+00:00"
+            "time": "2020-10-22T03:25:47+00:00"
         },
         {
             "name": "opawg/user-agents-php",

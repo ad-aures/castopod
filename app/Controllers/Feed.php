@@ -8,6 +8,7 @@
 
 namespace App\Controllers;
 
+use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
 use CodeIgniter\Controller;
 
@@ -31,15 +32,29 @@ class Feed extends Controller
             // If things go wrong the show must go on and the user must be able to download the file
             log_message('critical', $e);
         }
+
         $cacheName =
             "podcast{$podcast->id}_feed" .
             ($service ? "_{$service['slug']}" : '');
+
         if (!($found = cache($cacheName))) {
             $found = get_rss_feed(
                 $podcast,
                 $service ? '?s=' . urlencode($service['name']) : ''
             );
-            cache()->save($cacheName, $found, DECADE);
+
+            // The page cache is set to expire after next episode publication or a decade by default so it is deleted manually upon podcast update
+            $secondsToNextUnpublishedEpisode = (new EpisodeModel())->getSecondsToNextUnpublishedEpisode(
+                $podcast->id
+            );
+
+            cache()->save(
+                $cacheName,
+                $found,
+                $secondsToNextUnpublishedEpisode
+                    ? $secondsToNextUnpublishedEpisode
+                    : DECADE
+            );
         }
         return $this->response->setXML($found);
     }

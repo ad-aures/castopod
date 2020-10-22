@@ -37,6 +37,8 @@ Javascript dependencies:
   ([Free amCharts license](https://github.com/amcharts/amcharts4/blob/master/dist/script/LICENSE))
 - [Choices.js](https://joshuajohnson.co.uk/Choices/)
   ([MIT License](https://github.com/jshjohnson/Choices/blob/master/LICENSE))
+- [flatpickr](https://flatpickr.js.org/)
+  ([MIT License](https://github.com/flatpickr/flatpickr/blob/master/LICENSE.md))
 
 Other:
 

@@ -5,7 +5,12 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('pageTitle') ?>
-<?= $episode->title ?>
+<?= $episode->title .
+    publication_pill(
+        $episode->published_at,
+        $episode->is_published,
+        'text-sm ml-2 align-middle'
+    ) ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>

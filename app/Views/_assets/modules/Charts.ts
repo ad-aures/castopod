@@ -68,7 +68,10 @@ const drawXYChart = (chartDivId: string, dataUrl: string | null): void => {
   chart.scrollbarX = new am4core.Scrollbar();
 };
 
-const drawXYDurationChart = (chartDivId: string, dataUrl: string | null): void => {
+const drawXYDurationChart = (
+  chartDivId: string,
+  dataUrl: string | null
+): void => {
   // Create chart instance
   const chart = am4core.create(chartDivId, am4charts.XYChart);
   am4core.percent(100);
@@ -203,7 +206,10 @@ const DrawCharts = (): void => {
         drawXYChart(chartDiv.id, chartDiv.getAttribute("data-chart-url"));
         break;
       case "xy-duration-chart":
-        drawXYDurationChart(chartDiv.id, chartDiv.getAttribute("data-chart-url"));
+        drawXYDurationChart(
+          chartDiv.id,
+          chartDiv.getAttribute("data-chart-url")
+        );
         break;
       case "xy-series-chart":
         drawXYSeriesChart(chartDiv.id, chartDiv.getAttribute("data-chart-url"));

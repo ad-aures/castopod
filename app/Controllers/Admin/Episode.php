@@ -10,6 +10,7 @@ namespace App\Controllers\Admin;
 
 use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
+use CodeIgniter\I18n\Time;
 
 class Episode extends BaseController
 {
@@ -95,9 +96,7 @@ class Episode extends BaseController
             'enclosure' => 'uploaded[enclosure]|ext_in[enclosure,mp3,m4a]',
             'image' =>
                 'is_image[image]|ext_in[image,jpg,png]|min_dims[image,1400,1400]|is_image_squared[image]',
-            'publication_date' => 'valid_date[Y-m-d]|permit_empty',
-            'publication_time' =>
-                'regex_match[/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/]|permit_empty',
+            'publication_date' => 'valid_date[Y-m-d H:i]|permit_empty',
         ];
 
         if (!$this->validate($rules)) {
@@ -125,11 +124,12 @@ class Episode extends BaseController
             'block' => $this->request->getPost('block') == 'yes',
             'created_by' => user(),
             'updated_by' => user(),
+            'published_at' => Time::createFromFormat(
+                'Y-m-d H:i',
+                $this->request->getPost('publication_date'),
+                $this->request->getPost('client_timezone')
+            )->setTimezone('UTC'),
         ]);
-        $newEpisode->setPublishedAt(
-            $this->request->getPost('publication_date'),
-            $this->request->getPost('publication_time')
-        );
 
         $episodeModel = new EpisodeModel();
 
@@ -185,9 +185,7 @@ class Episode extends BaseController
                 'uploaded[enclosure]|ext_in[enclosure,mp3,m4a]|permit_empty',
             'image' =>
                 'is_image[image]|ext_in[image,jpg,png]|min_dims[image,1400,1400]|is_image_squared[image]',
-            'publication_date' => 'valid_date[Y-m-d]|permit_empty',
-            'publication_time' =>
-                'regex_match[/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/]|permit_empty',
+            'publication_date' => 'valid_date[Y-m-d H:i]|permit_empty',
         ];
 
         if (!$this->validate($rules)) {
@@ -210,10 +208,11 @@ class Episode extends BaseController
             : null;
         $this->episode->type = $this->request->getPost('type');
         $this->episode->block = $this->request->getPost('block') == 'yes';
-        $this->episode->setPublishedAt(
+        $this->episode->published_at = Time::createFromFormat(
+            'Y-m-d H:i',
             $this->request->getPost('publication_date'),
-            $this->request->getPost('publication_time')
-        );
+            $this->request->getPost('client_timezone')
+        )->setTimezone('UTC');
         $this->episode->updated_by = user();
 
         $enclosure = $this->request->getFile('enclosure');

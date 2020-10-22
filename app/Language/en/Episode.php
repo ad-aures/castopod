@@ -22,6 +22,8 @@ return [
     'delete' => 'Delete',
     'go_to_page' => 'Go to page',
     'create' => 'Add an episode',
+    'published' => 'Published on {0}',
+    'scheduled' => 'Scheduled for {0}',
     'form' => [
         'enclosure' => 'Audio file',
         'enclosure_hint' => 'Choose an .mp3 or .m4a audio file.',
@@ -54,11 +56,9 @@ return [
             'This text is added at the end of each episode description, it is a good place to input your social links for example.',
         'publication_section_title' => 'Publication info',
         'publication_section_subtitle' => '',
-        'published_at' => [
-            'label' => 'Publication date',
-            'date' => 'Date',
-            'time' => 'Time',
-        ],
+        'publication_date' => 'Publication date',
+        'publication_date_hint' =>
+            'You can schedule the episode release by setting a future publication date. This field must be formatted as YYYY-MM-DD HH:mm',
         'parental_advisory' => [
             'label' => 'Parental advisory',
             'hint' => 'Does the episode contain explicit content?',

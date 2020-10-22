@@ -14,7 +14,6 @@ return [
     'home' => 'Accueil',
     'explicit' => 'Explicite',
     'mediumDate' => '{0,date,medium}',
-    'duration' => '{0,duration}',
     'powered_by' => 'Propulsé par {castopod}.',
     'actions' => 'Actions',
     'pageInfo' => 'Page {currentPage} sur {pageCount}',

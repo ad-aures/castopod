@@ -59,7 +59,7 @@ class PodcastModel extends Model
     ];
     protected $validationMessages = [];
 
-    // clear cache before update if by any chance, the podcast name changes, and so will the podcast link
+    // clear cache before update if by any chance, the podcast name changes, so will the podcast link
     protected $beforeUpdate = ['clearCache'];
     protected $beforeDelete = ['clearCache'];
 

@@ -22,6 +22,8 @@ return [
     'delete' => 'Supprimer',
     'go_to_page' => 'Voir',
     'create' => 'Ajouter un épisode',
+    'published' => 'Publié le {0}',
+    'scheduled' => 'Planifié pour le {0}',
     'form' => [
         'enclosure' => 'Fichier audio',
         'enclosure_hint' => 'Sélectionnez un fichier audio .mp3 ou .m4a.',
@@ -54,11 +56,9 @@ return [
             'Ce texte est ajouté à la fin de chaque description d’épisode, c’est un bon endroit pour placer vos liens sociaux par exemple.',
         'publication_section_title' => 'Information de publication',
         'publication_section_subtitle' => '',
-        'published_at' => [
-            'label' => 'Date de publication',
-            'date' => 'Date',
-            'time' => 'Heure',
-        ],
+        'publication_date' => 'Date de publication',
+        'publication_date_hint' =>
+            'Vous pouvez planifier la sortie de l’épisode en saisissant une date de publication future. Ce champ doit être au format YYYY-MM-DD HH:mm',
         'parental_advisory' => [
             'label' => 'Avertissement parental',
             'hint' => 'L’épisode contient-il un contenu explicite ?',

@@ -256,3 +256,51 @@ if (!function_exists('data_table')) {
 }
 
 // ------------------------------------------------------------------------
+
+if (!function_exists('publication_pill')) {
+    /**
+     * Data table component
+     *
+     * Creates a stylized table.
+     *
+     * @param \CodeIgniter\I18n\Time    $publicationDate publication datetime of the episode
+     * @param boolean                   $isPublished whether or not the episode has been published
+     * @param string                   $customClass css class to add to the component
+     *
+     * @return string
+     */
+    function publication_pill(
+        $publicationDate,
+        $isPublished,
+        $customClass = ''
+    ): string {
+        $class = $isPublished
+            ? 'text-green-500 border-green-500'
+            : 'text-orange-600 border-orange-600';
+
+        $label = lang(
+            $isPublished ? 'Episode.published' : 'Episode.scheduled',
+            [
+                '<time
+                pubdate
+                datetime="' .
+                $publicationDate->format(DateTime::ATOM) .
+                '"
+                title="' .
+                $publicationDate .
+                '">' .
+                lang('Common.mediumDate', [$publicationDate]) .
+                '</time>',
+            ]
+        );
+
+        return '<span class="px-1 border ' .
+            $class .
+            ' ' .
+            $customClass .
+            '">' .
+            $label .
+            '</span>';
+    }
+}
+// ------------------------------------------------------------------------

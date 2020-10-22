@@ -16,6 +16,7 @@
     'class' => 'flex flex-col',
 ]) ?>
 <?= csrf_field() ?>
+<?= form_hidden('client_timezone', 'UTC') ?>
 
 <?= form_section(
     lang('Episode.form.info_section_title'),
@@ -193,35 +194,19 @@
     lang('Episode.form.publication_section_subtitle')
 ) ?>
 
-<?= form_fieldset('', ['class' => 'flex mb-4']) ?>
-<legend><?= lang('Episode.form.published_at.label') ?></legend>
-<div class="flex flex-col flex-1">
-    <?= form_label(lang('Episode.form.publication_date'), 'publication_date', [
-        'class' => 'sr-only',
-    ]) ?>
-    <?= form_input([
-        'id' => 'publication_date',
-        'name' => 'publication_date',
-        'class' => 'form-input',
-        'value' => old('publication_date', date('Y-m-d')),
-        'type' => 'date',
-    ]) ?>
-</div>
-
-<div class="flex flex-col flex-1">
-    <?= form_label(lang('Episode.form.publication_time'), 'publication_time', [
-        'class' => 'sr-only',
-    ]) ?>
-    <?= form_input([
-        'id' => 'publication_time',
-        'name' => 'publication_time',
-        'class' => 'form-input',
-        'value' => old('publication_time', date('H:i')),
-        'placeholder' => '--:--',
-        'type' => 'time',
-    ]) ?>
-</div>
-<?= form_fieldset_close() ?>
+<?= form_label(
+    lang('Episode.form.publication_date'),
+    'publication_date',
+    [],
+    lang('Episode.form.publication_date_hint')
+) ?>
+<?= form_input([
+    'id' => 'publication_date',
+    'name' => 'publication_date',
+    'class' => 'form-input mb-4',
+    'value' => old('publication_date', date('Y-m-d H:i')),
+    'data-picker' => 'datetime',
+]) ?>
 
 <?= form_fieldset('', ['class' => 'flex mb-6 gap-1']) ?>
     <legend>

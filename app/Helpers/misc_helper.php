@@ -143,3 +143,27 @@ function slugify($text)
 
     return $text;
 }
+
+//--------------------------------------------------------------------
+
+if (!function_exists('format_duration')) {
+    /**
+     * Formats duration in seconds to an hh:mm:ss string
+     *
+     * @param int $seconds seconds to format
+     * @param string $separator
+     *
+     * @return string
+     */
+    function format_duration($seconds, $separator = ':')
+    {
+        return sprintf(
+            '%02d%s%02d%s%02d',
+            floor($seconds / 3600),
+            $separator,
+            ($seconds / 60) % 60,
+            $separator,
+            $seconds % 60
+        );
+    }
+}

@@ -26,7 +26,7 @@
             <div class="container flex flex-wrap items-end justify-between px-2 py-10 mx-auto md:px-12 gap-y-6 gap-x-6">
                 <div class="flex flex-col">
                     <?= render_breadcrumb('text-gray-300') ?>
-                    <h1 class="text-3xl leading-none"><?= $this->renderSection(
+                    <h1 class="text-3xl"><?= $this->renderSection(
                         'pageTitle'
                     ) ?></h1>
                 </div>

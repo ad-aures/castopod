@@ -44,5 +44,4 @@
 
 <?= form_close() ?>
 
-<?= $this->endSection()
-?>
+<?= $this->endSection() ?>

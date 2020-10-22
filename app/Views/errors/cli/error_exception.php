@@ -20,4 +20,5 @@ Line Number: <?= $exception->getLine() ?>
         <?php endif; ?>
     <?php endforeach; ?>
 
-<?php endif; ?>
+<?php endif;
+?>

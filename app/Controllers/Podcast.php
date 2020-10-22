@@ -113,7 +113,7 @@ class Podcast extends BaseController
                 'podcast' => $this->podcast,
                 'episodesNav' => $episodesNavigation,
                 'activeQuery' => $activeQuery,
-                'episodes' => (new EpisodeModel())->getPodcastEpisodes(
+                'episodes' => $episodeModel->getPodcastEpisodes(
                     $this->podcast->id,
                     $this->podcast->type,
                     $yearQuery,
@@ -121,8 +121,14 @@ class Podcast extends BaseController
                 ),
             ];
 
+            $secondsToNextUnpublishedEpisode = $episodeModel->getSecondsToNextUnpublishedEpisode(
+                $this->podcast->id
+            );
+
             return view('podcast', $data, [
-                'cache' => DECADE,
+                'cache' => $secondsToNextUnpublishedEpisode
+                    ? $secondsToNextUnpublishedEpisode
+                    : DECADE,
                 'cache_name' => $cacheName,
             ]);
         }

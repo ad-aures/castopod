@@ -48,7 +48,7 @@ class Install extends Controller
         }
 
         // Check if the created .env file is writable to continue install process
-        if (is_writable(ROOTPATH . '.env')) {
+        if (is_really_writable(ROOTPATH . '.env')) {
             try {
                 $dotenv->required([
                     'app.baseURL',

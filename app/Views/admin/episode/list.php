@@ -97,19 +97,13 @@
                         </div>
                     </div>
                     <div class="mb-2 text-xs">
-                        <time
-                        pubdate
-                        datetime="<?= $episode->published_at->toDateTimeString() ?>"
-                        title="<?= $episode->published_at ?>">
-                        <?= lang('Common.mediumDate', [
+                        <?= publication_pill(
                             $episode->published_at,
-                        ]) ?>
-                        </time>
+                            $episode->is_published
+                        ) ?>
                         <span class="mx-1">•</span>
                         <time datetime="PT<?= $episode->enclosure_duration ?>S">
-                            <?= lang('Common.duration', [
-                                $episode->enclosure_duration,
-                            ]) ?>
+                            <?= format_duration($episode->enclosure_duration) ?>
                         </time>
                     </div>
                     <audio controls preload="none" class="w-full mt-auto">
@@ -126,5 +120,4 @@
 
 <?= $pager->links() ?>
 
-<?= $this->endSection()
-?>
+<?= $this->endSection() ?>

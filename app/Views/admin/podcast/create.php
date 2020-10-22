@@ -238,7 +238,14 @@
     'value' => old('publisher'),
 ]) ?>
 
-<?= form_label(lang('Podcast.form.copyright'), 'copyright', [], '', true) ?>
+<?= form_label(
+    lang('Podcast.form.copyright'),
+    'copyright',
+    [],
+
+    '',
+    true
+) ?>
 <?= form_input([
     'id' => 'copyright',
     'name' => 'copyright',

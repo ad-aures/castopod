@@ -57,24 +57,11 @@ class EpisodeModel extends Model
     ];
     protected $validationMessages = [];
 
-    protected $afterInsert = ['writeEnclosureMetadata'];
+    protected $afterInsert = ['writeEnclosureMetadata', 'clearCache'];
     // clear cache beforeUpdate because if slug changes, so will the episode link
     protected $beforeUpdate = ['clearCache'];
     protected $afterUpdate = ['writeEnclosureMetadata'];
     protected $beforeDelete = ['clearCache'];
-
-    protected function writeEnclosureMetadata(array $data)
-    {
-        helper('id3');
-
-        $episode = (new EpisodeModel())->find(
-            is_array($data['id']) ? $data['id'][0] : $data['id']
-        );
-
-        write_enclosure_tags($episode);
-
-        return $data;
-    }
 
     public function getEpisodeBySlug($podcastId, $episodeSlug)
     {
@@ -82,7 +69,9 @@ class EpisodeModel extends Model
             $found = $this->where([
                 'podcast_id' => $podcastId,
                 'slug' => $episodeSlug,
-            ])->first();
+            ])
+                ->where('`published_at` <= NOW()', null, false)
+                ->first();
 
             cache()->save(
                 "podcast{$podcastId}_episode@{$episodeSlug}",
@@ -120,6 +109,7 @@ class EpisodeModel extends Model
                 'podcast_id' => $episode->podcast_id,
                 $sortNumberField . ' <' => $sortNumberValue,
             ])
+            ->where('`published_at` <= NOW()', null, false)
             ->first();
 
         $nextData = $this->orderBy('(' . $sortNumberField . ') ASC')
@@ -127,6 +117,7 @@ class EpisodeModel extends Model
                 'podcast_id' => $episode->podcast_id,
                 $sortNumberField . ' >' => $sortNumberValue,
             ])
+            ->where('`published_at` <= NOW()', null, false)
             ->first();
 
         return [
@@ -160,7 +151,9 @@ class EpisodeModel extends Model
         );
 
         if (!($found = cache($cacheName))) {
-            $where = ['podcast_id' => $podcastId];
+            $where = [
+                'podcast_id' => $podcastId,
+            ];
             if ($year) {
                 $where['YEAR(published_at)'] = $year;
                 $where['season_number'] = null;
@@ -172,15 +165,27 @@ class EpisodeModel extends Model
             if ($podcastType == 'serial') {
                 // podcast is serial
                 $found = $this->where($where)
+                    ->where('`published_at` <= NOW()', null, false)
                     ->orderBy('season_number DESC, number ASC')
                     ->findAll();
             } else {
                 $found = $this->where($where)
+                    ->where('`published_at` <= NOW()', null, false)
                     ->orderBy('published_at', 'DESC')
                     ->findAll();
             }
 
-            cache()->save($cacheName, $found, DECADE);
+            $secondsToNextUnpublishedEpisode = $this->getSecondsToNextUnpublishedEpisode(
+                $podcastId
+            );
+
+            cache()->save(
+                $cacheName,
+                $found,
+                $secondsToNextUnpublishedEpisode
+                    ? $secondsToNextUnpublishedEpisode
+                    : DECADE
+            );
         }
 
         return $found;
@@ -197,12 +202,23 @@ class EpisodeModel extends Model
                     'season_number' => null,
                     $this->deletedField => null,
                 ])
+                ->where('`published_at` <= NOW()', null, false)
                 ->groupBy('year')
                 ->orderBy('year', 'DESC')
                 ->get()
                 ->getResultArray();
 
-            cache()->save("podcast{$podcastId}_years", $found, DECADE);
+            $secondsToNextUnpublishedEpisode = $this->getSecondsToNextUnpublishedEpisode(
+                $podcastId
+            );
+
+            cache()->save(
+                "podcast{$podcastId}_years",
+                $found,
+                $secondsToNextUnpublishedEpisode
+                    ? $secondsToNextUnpublishedEpisode
+                    : DECADE
+            );
         }
 
         return $found;
@@ -219,12 +235,23 @@ class EpisodeModel extends Model
                     'season_number is not' => null,
                     $this->deletedField => null,
                 ])
+                ->where('`published_at` <= NOW()', null, false)
                 ->groupBy('season_number')
                 ->orderBy('season_number', 'ASC')
                 ->get()
                 ->getResultArray();
 
-            cache()->save("podcast{$podcastId}_seasons", $found, DECADE);
+            $secondsToNextUnpublishedEpisode = $this->getSecondsToNextUnpublishedEpisode(
+                $podcastId
+            );
+
+            cache()->save(
+                "podcast{$podcastId}_seasons",
+                $found,
+                $secondsToNextUnpublishedEpisode
+                    ? $secondsToNextUnpublishedEpisode
+                    : DECADE
+            );
         }
 
         return $found;
@@ -262,6 +289,43 @@ class EpisodeModel extends Model
             );
         }
         return $defaultQuery;
+    }
+
+    /**
+     * Returns the timestamp difference in seconds between the next episode to publish and the current timestamp
+     * Returns false if there's no episode to publish
+     *
+     * @param int $podcastId
+     *
+     * @return int|false seconds
+     */
+    public function getSecondsToNextUnpublishedEpisode(int $podcastId)
+    {
+        $result = $this->select(
+            'TIMESTAMPDIFF(SECOND, NOW(), `published_at`) as timestamp_diff'
+        )
+            ->where([
+                'podcast_id' => $podcastId,
+            ])
+            ->where('`published_at` > NOW()', null, false)
+            ->orderBy('published_at', 'asc')
+            ->get()
+            ->getResultArray();
+
+        return (int) $result ? $result[0]['timestamp_diff'] : false;
+    }
+
+    protected function writeEnclosureMetadata(array $data)
+    {
+        helper('id3');
+
+        $episode = (new EpisodeModel())->find(
+            is_array($data['id']) ? $data['id'][0] : $data['id']
+        );
+
+        write_enclosure_tags($episode);
+
+        return $data;
     }
 
     protected function clearCache(array $data)

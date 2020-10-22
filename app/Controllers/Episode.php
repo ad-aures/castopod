@@ -48,7 +48,8 @@ class Episode extends BaseController
         $cacheName = "page_podcast{$this->episode->podcast_id}_episode{$this->episode->id}_{$locale}";
 
         if (!($cachedView = cache($cacheName))) {
-            $previousNextEpisodes = (new EpisodeModel())->getPreviousNextEpisodes(
+            $episodeModel = new EpisodeModel();
+            $previousNextEpisodes = $episodeModel->getPreviousNextEpisodes(
                 $this->episode,
                 $this->podcast->type
             );
@@ -60,9 +61,15 @@ class Episode extends BaseController
                 'episode' => $this->episode,
             ];
 
+            $secondsToNextUnpublishedEpisode = $episodeModel->getSecondsToNextUnpublishedEpisode(
+                $this->podcast->id
+            );
+
             // The page cache is set to a decade so it is deleted manually upon podcast update
             return view('episode', $data, [
-                'cache' => DECADE,
+                'cache' => $secondsToNextUnpublishedEpisode
+                    ? $secondsToNextUnpublishedEpisode
+                    : DECADE,
                 'cache_name' => $cacheName,
             ]);
         }

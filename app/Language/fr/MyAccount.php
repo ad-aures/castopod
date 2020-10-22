@@ -12,6 +12,7 @@ return [
     'messages' => [
         'wrongPasswordError' =>
             'Le mot de passe que vous avez saisi est invalide.',
-        'passwordChangeSuccess' => 'Le mot de passe a été modifié avec succès !',
+        'passwordChangeSuccess' =>
+            'Le mot de passe a été modifié avec succès !',
     ],
 ];

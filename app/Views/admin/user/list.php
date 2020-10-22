@@ -85,5 +85,4 @@
     $users
 ) ?>
 
-<?= $this->endSection()
-?>
+<?= $this->endSection() ?>

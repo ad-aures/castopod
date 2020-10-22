@@ -10,6 +10,7 @@ namespace App\Entities;
 
 use App\Models\PodcastModel;
 use CodeIgniter\Entity;
+use CodeIgniter\I18n\Time;
 use League\CommonMark\CommonMarkConverter;
 
 class Episode extends Entity
@@ -48,6 +49,11 @@ class Episode extends Entity
      * @var string
      */
     protected $description_html;
+
+    /**
+     * @var boolean
+     */
+    protected $is_published;
 
     protected $dates = [
         'published_at',
@@ -232,17 +238,6 @@ class Episode extends Entity
         return $converter->convertToHtml($this->attributes['description']);
     }
 
-    public function setPublishedAt($date, $time)
-    {
-        if (empty($date)) {
-            $this->attributes['published_at'] = null;
-        } else {
-            $this->attributes['published_at'] = $date . ' ' . $time;
-        }
-
-        return $this;
-    }
-
     public function setCreatedBy(\App\Entities\User $user)
     {
         $this->attributes['created_by'] = $user->id;
@@ -255,5 +250,18 @@ class Episode extends Entity
         $this->attributes['updated_by'] = $user->id;
 
         return $this;
+    }
+
+    public function getIsPublished()
+    {
+        if ($this->is_published) {
+            return $this->is_published;
+        }
+
+        helper('date');
+
+        $this->is_published = $this->published_at->isBefore(Time::now());
+
+        return $this->is_published;
     }
 }

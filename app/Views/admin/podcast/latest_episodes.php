@@ -10,9 +10,9 @@
         </a>
     </header>
     <?php if ($episodes): ?>
-        <div class="flex justify-between gap-4 overflow-x-auto">
+        <div class="flex p-2 space-x-4 overflow-x-auto">
         <?php foreach ($episodes as $episode): ?>
-            <article class="flex flex-col w-56 mb-4 bg-white border rounded shadow" style="min-width: 12rem;">
+            <article class="flex flex-col w-56 bg-white border rounded shadow" style="min-width: 12rem;">
                 <img
                 src="<?= $episode->image->thumbnail_url ?>"
                 alt="<?= $episode->title ?>" class="object-cover" />
@@ -61,7 +61,9 @@
                             <span class="mx-1">•</span>
                             <time
                             pubdate
-                            datetime="<?= $episode->published_at->toDateTimeString() ?>"
+                            datetime="<?= $episode->published_at->format(
+                                DateTime::ATOM
+                            ) ?>"
                             title="<?= $episode->published_at ?>">
                             <?= lang('Common.mediumDate', [
                                 $episode->published_at,

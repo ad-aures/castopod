@@ -13,6 +13,7 @@
     <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
     <link rel="stylesheet" href="/assets/index.css"/>
     <link type="application/rss+xml" rel="alternate" title="<?= $podcast->title ?>" href="<?= $podcast->feed_url ?>"/>
+    <script src="/assets/podcast.js" type="module" defer></script>
 </head>
 
 <body class="flex flex-col min-h-screen">
@@ -127,7 +128,9 @@
                                 <div class="mb-2 text-xs">
                                     <time
                                     pubdate
-                                    datetime="<?= $episode->published_at->toDateTimeString() ?>"
+                                    datetime="<?= $episode->published_at->format(
+                                        DateTime::ATOM
+                                    ) ?>"
                                     title="<?= $episode->published_at ?>">
                                     <?= lang('Common.mediumDate', [
                                         $episode->published_at,
@@ -135,9 +138,9 @@
                                     </time>
                                     <span class="mx-1">•</span>
                                     <time datetime="PT<?= $episode->enclosure_duration ?>S">
-                                        <?= lang('Common.duration', [
-                                            $episode->enclosure_duration,
-                                        ]) ?>
+                                        <?= format_duration(
+                                            $episode->enclosure_duration
+                                        ) ?>
                                     </time>
                                 </div>
                                 <audio controls preload="none" class="w-full mt-auto">
@@ -159,9 +162,9 @@
         </section>
     </main>
     <footer class="px-2 py-4 border-t ">
-        <div class="container flex flex-col items-center justify-between mx-auto text-sm md:flex-row ">
+        <div class="container flex flex-col items-center justify-between mx-auto text-xs md:flex-row ">
             <?= render_page_links('inline-flex mb-4 md:mb-0') ?>
-            <div class="flex flex-col items-center text-xs md:items-end">
+            <div class="flex flex-col items-center md:items-end">
                 <p><?= $podcast->copyright ?></p>
                 <p><?= lang('Common.powered_by', [
                     'castopod' =>

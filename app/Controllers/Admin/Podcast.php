@@ -388,11 +388,8 @@ class Podcast extends BaseController
                     : $nsItunes->block === 'yes',
                 'created_by' => user(),
                 'updated_by' => user(),
+                'published_at' => strtotime($item->pubDate),
             ]);
-            $newEpisode->setPublishedAt(
-                date('Y-m-d', strtotime($item->pubDate)),
-                date('H:i:s', strtotime($item->pubDate))
-            );
 
             $episodeModel = new EpisodeModel();
 
