@@ -1,3 +1,10 @@
+# [1.0.0-alpha.10](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.9...v1.0.0-alpha.10) (2020-10-26)
+
+
+### Bug Fixes
+
+* **install:** redirect to host_url install route on instanceConfig validation error ([99250b1](https://code.podlibre.org/podlibre/castopod/commit/99250b1868657c249a447399c7ebc69e00d43d1a))
+
 # [1.0.0-alpha.9](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.8...v1.0.0-alpha.9) (2020-10-26)
 
 
