@@ -10,7 +10,7 @@
 
 <?= $this->section('content') ?>
 
-<div class="grid grid-cols-2 divide-x">
+<div class="lg:divide-x lg:grid lg:grid-cols-2">
     
     <div class="mb-12 mr-6 text-center">
         <h2><?= lang('Charts.by_domain_weekly') ?></h2>

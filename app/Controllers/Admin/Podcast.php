@@ -361,9 +361,10 @@ class Podcast extends BaseController
                             ? $nsItunes->subtitle . "\n" . $nsItunes->summary
                             : $item->description)
                 ),
-                'image' => empty($nsItunes->image->attributes())
-                    ? null
-                    : download_file($nsItunes->image->attributes()),
+                'image' =>
+                    !$nsItunes->image || empty($nsItunes->image->attributes())
+                        ? null
+                        : download_file($nsItunes->image->attributes()),
                 'parental_advisory' => empty($nsItunes->explicit)
                     ? null
                     : (in_array($nsItunes->explicit, ['yes', 'true'])

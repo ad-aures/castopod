@@ -22,6 +22,21 @@
     'required' => 'required',
 ]) ?>
 
+
+<?= form_label(
+    lang('Install.form.media_base_url'),
+    'media_base_url',
+    [],
+    lang('Install.form.media_base_url_hint'),
+    true
+) ?>
+<?= form_input([
+    'id' => 'media_base_url',
+    'name' => 'media_base_url',
+    'class' => 'form-input mb-4',
+    'value' => old('media_base_url', ''),
+]) ?>
+
 <?= form_label(
     lang('Install.form.admin_gateway'),
     'admin_gateway',
@@ -51,7 +66,12 @@
 ]) ?>
 
 <?= button(
-    lang('Install.form.next') . icon('arrow-right', 'ml-2'),
+    lang('Install.form.next') .
+        icon(
+            'arrow-right',
+
+            'ml-2'
+        ),
     null,
     ['variant' => 'primary'],
     ['type' => 'submit', 'class' => 'self-end']

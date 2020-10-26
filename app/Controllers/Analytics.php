@@ -55,7 +55,7 @@ class Analytics extends Controller
     ) {
         helper('media');
 
-        $serviceName = isset($_GET['s']) ? $_GET['s'] : '';
+        $serviceName = isset($_GET['_from']) ? $_GET['_from'] : '';
 
         podcast_hit(
             $podcastId,
@@ -64,6 +64,6 @@ class Analytics extends Controller
             $fileSize,
             $serviceName
         );
-        return redirect()->to(media_url(implode('/', $filename)));
+        return redirect()->to(media_base_url($filename));
     }
 }

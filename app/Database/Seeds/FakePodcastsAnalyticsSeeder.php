@@ -28,6 +28,13 @@ class FakePodcastsAnalyticsSeeder extends Seeder
             true
         );
 
+        $jsonRSSUserAgents = json_decode(
+            file_get_contents(
+                'https://raw.githubusercontent.com/opawg/podcast-rss-useragents/master/src/rss-ua.json'
+            ),
+            true
+        );
+
         if ($podcast) {
             $firstEpisode = (new EpisodeModel())
                 ->selectMin('published_at')
@@ -67,6 +74,10 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                             $jsonUserAgents[
                                 rand(1, count($jsonUserAgents) - 1)
                             ];
+                        $service =
+                            $jsonRSSUserAgents[
+                                rand(1, count($jsonRSSUserAgents) - 1)
+                            ]['name'];
                         $app = isset($player['app']) ? $player['app'] : '';
                         $device = isset($player['device'])
                             ? $player['device']
@@ -132,6 +143,7 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                         $analytics_podcasts_by_player[] = [
                             'podcast_id' => $podcast->id,
                             'date' => date('Y-m-d', $date),
+                            'service'=> $service,
                             'app' => $app,
                             'device' => $device,
                             'os' => $os,

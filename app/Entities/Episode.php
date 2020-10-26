@@ -48,6 +48,11 @@ class Episode extends Entity
     /**
      * @var string
      */
+    protected $enclosure_web_url;
+
+    /**
+     * @var string
+     */
     protected $description_html;
 
     /**
@@ -192,6 +197,11 @@ class Episode extends Entity
                 $this->attributes['enclosure_uri']
             )
         );
+    }
+
+    public function getWebEnclosureUrl()
+    {
+        return $this->getEnclosureUrl() . '?_from=-+Website+-';
     }
 
     public function getLink()

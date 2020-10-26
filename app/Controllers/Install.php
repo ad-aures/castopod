@@ -150,6 +150,7 @@ class Install extends Controller
     {
         $rules = [
             'hostname' => 'required|validate_url',
+            'media_base_url' => 'permit_empty|validate_url',
             'admin_gateway' => 'required',
             'auth_gateway' => 'required|differs[admin_gateway]',
         ];
@@ -165,8 +166,12 @@ class Install extends Controller
         }
 
         $baseUrl = $this->request->getPost('hostname');
+        $mediaBaseUrl = $this->request->getPost('media_base_url');
         self::writeEnv([
             'app.baseURL' => $baseUrl,
+            'app.mediaBaseURL' => empty($mediaBaseUrl)
+                ? $baseUrl
+                : $mediaBaseUrl,
             'app.adminGateway' => $this->request->getPost('admin_gateway'),
             'app.authGateway' => $this->request->getPost('auth_gateway'),
         ]);

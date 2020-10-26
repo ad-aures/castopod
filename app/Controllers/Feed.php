@@ -38,10 +38,7 @@ class Feed extends Controller
             ($service ? "_{$service['slug']}" : '');
 
         if (!($found = cache($cacheName))) {
-            $found = get_rss_feed(
-                $podcast,
-                $service ? '?s=' . urlencode($service['name']) : ''
-            );
+            $found = get_rss_feed($podcast, $service ? $service['name'] : '');
 
             // The page cache is set to expire after next episode publication or a decade by default so it is deleted manually upon podcast update
             $secondsToNextUnpublishedEpisode = (new EpisodeModel())->getSecondsToNextUnpublishedEpisode(

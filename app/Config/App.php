@@ -22,7 +22,20 @@ class App extends BaseConfig
     | environments.
     |
     */
-    public $baseURL = 'http://localhost:8080/';
+    public $baseURL = 'http://127.0.0.1:8080/';
+
+    /*
+    |--------------------------------------------------------------------------
+    | Media Base URL
+    |--------------------------------------------------------------------------
+    |
+    | URL to your media root. Typically this will be your base URL,
+    | WITH a trailing slash:
+    |
+    |   http://cdn.example.com/
+    |
+    */
+    public $mediaBaseURL = 'http://127.0.0.2:8080/';
 
     /*
     |--------------------------------------------------------------------------

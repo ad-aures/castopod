@@ -74,3 +74,18 @@ function media_url($uri = '', string $protocol = null): string
 {
     return base_url(config('App')->mediaRoot . '/' . $uri, $protocol);
 }
+
+function media_base_url($uri = '')
+{
+    // convert segment array to string
+    if (is_array($uri)) {
+        $uri = implode('/', $uri);
+    }
+    $uri = trim($uri, '/');
+
+    return rtrim(config('App')->mediaBaseURL, '/') .
+        '/' .
+        config('App')->mediaRoot .
+        '/' .
+        $uri;
+}

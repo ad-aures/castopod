@@ -14,7 +14,9 @@
 <body class="flex flex-col min-h-screen mx-auto">
     <header class="border-b">
         <div class="container flex items-center justify-between px-2 py-4 mx-auto">
-            <a href="<?= route_to('home') ?>" class="text-2xl">Castopod</a>
+            <a href="<?= route_to('home') ?>" class="text-2xl"><?= isset($page)
+    ? $page->title
+    : 'Castopod' ?></a>
         </div>
     </header>
     <main class="container flex-1 px-4 py-10 mx-auto">

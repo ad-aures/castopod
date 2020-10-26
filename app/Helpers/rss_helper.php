@@ -103,7 +103,11 @@ function get_rss_feed($podcast, $serviceName = '')
         $item->addChild('title', $episode->title);
         $enclosure = $item->addChild('enclosure');
 
-        $enclosure->addAttribute('url', $episode->enclosure_url . $serviceName);
+        $enclosure->addAttribute(
+            'url',
+            $episode->enclosure_url .
+                (empty($serviceName) ? '' : '?_from=' . urlencode($serviceName))
+        );
         $enclosure->addAttribute('length', $episode->enclosure_filesize);
         $enclosure->addAttribute('type', $episode->enclosure_mimetype);
 

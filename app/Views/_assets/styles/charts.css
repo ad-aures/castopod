@@ -1,9 +1,9 @@
 .chart-map {
-  height: 800px;
+  height: 600px;
   border: solid 10px #eee;
 }
 .chart-pie {
-  height: 400px;
+  height: 450px;
   width: 100%;
   border: solid 1px #eee;
 }

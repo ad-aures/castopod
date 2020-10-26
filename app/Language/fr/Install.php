@@ -13,6 +13,9 @@ return [
     'form' => [
         'instance_config' => 'Paramètres de l’instance',
         'hostname' => 'Nom d’hôte',
+        'media_base_url' => 'Adresse racine des médias',
+        'media_base_url_hint' =>
+            'Si vous utilisez un CDN et/ou un service de mesure d’audience externe, vous pouvez les définir ici.',
         'admin_gateway' => 'Adresse d’administration',
         'admin_gateway_hint' =>
             'Le chemin pour accéder à l’administration (par exemple https://example.com/cp-admin). Il est défini par défaut à cp-admin, nous vous recommandons de le changer par mesure de sécurité.',

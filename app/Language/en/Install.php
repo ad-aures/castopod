@@ -13,6 +13,9 @@ return [
     'form' => [
         'instance_config' => 'Instance configuration',
         'hostname' => 'Hostname',
+        'media_base_url' => 'Media base URL',
+        'media_base_url_hint' =>
+            'If you use a CDN and/or an external analytics service, you may set them here.',
         'admin_gateway' => 'Admin gateway',
         'admin_gateway_hint' =>
             'The route to access the admin area (eg. https://example.com/cp-admin). It is set by default as cp-admin, we recommend you change it for security reasons.',
