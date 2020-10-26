@@ -1,3 +1,10 @@
+# [1.0.0-alpha.12](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.11...v1.0.0-alpha.12) (2020-10-26)
+
+
+### Bug Fixes
+
+* replace getWebEnclosureUrl with getEnclosureWebUrl ([8122cea](https://code.podlibre.org/podlibre/castopod/commit/8122ceaf8a70050f14b3078f28b024e7d7cdb9ac))
+
 # [1.0.0-alpha.11](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.10...v1.0.0-alpha.11) (2020-10-26)
 
 
