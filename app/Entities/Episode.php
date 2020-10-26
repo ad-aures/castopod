@@ -199,7 +199,7 @@ class Episode extends Entity
         );
     }
 
-    public function getWebEnclosureUrl()
+    public function getEnclosureWebUrl()
     {
         return $this->getEnclosureUrl() . '?_from=-+Website+-';
     }
