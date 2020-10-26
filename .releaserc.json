@@ -19,6 +19,7 @@
       "@semantic-release/git",
       {
         "assets": [
+          "app/Config/Constants.php",
           "composer.json",
           "package.json",
           "package-lock.json",

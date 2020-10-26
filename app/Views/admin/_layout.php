@@ -41,10 +41,11 @@
         </div>
     </main>
     <footer class="px-2 py-2 mx-auto text-xs text-right holy-grail-footer">
-        <small><?= lang('Common.powered_by', [
+        <?= lang('Common.powered_by', [
             'castopod' =>
-                '<a class="underline hover:no-underline" href="https://castopod.org/" target="_blank" rel="noreferrer noopener">Castopod</a>',
-        ]) ?></small>
+                '<a class="underline hover:no-underline" href="https://castopod.org/" target="_blank" rel="noreferrer noopener">Castopod</a> v' .
+                CP_VERSION,
+        ]) ?>
     </footer>
     <button
         type="button"
