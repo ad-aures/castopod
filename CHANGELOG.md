@@ -1,3 +1,10 @@
+# [1.0.0-alpha.11](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.10...v1.0.0-alpha.11) (2020-10-26)
+
+
+### Features
+
+* add CDN url ([972bcbf](https://code.podlibre.org/podlibre/castopod/commit/972bcbf65ee119b8641ca3c4e5c0e8cf9ca8dd4f)), closes [#37](https://code.podlibre.org/podlibre/castopod/issues/37)
+
 # [1.0.0-alpha.10](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.9...v1.0.0-alpha.10) (2020-10-26)
 
 
