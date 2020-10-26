@@ -1,3 +1,10 @@
+# [1.0.0-alpha.9](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.8...v1.0.0-alpha.9) (2020-10-26)
+
+
+### Features
+
+* display castopod version in admin footer ([9f2574e](https://code.podlibre.org/podlibre/castopod/commit/9f2574e6fbb61dac4e1a4252dff30017685da5f0)), closes [#68](https://code.podlibre.org/podlibre/castopod/issues/68)
+
 # [1.0.0-alpha.8](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.7...v1.0.0-alpha.8) (2020-10-22)
 
 
