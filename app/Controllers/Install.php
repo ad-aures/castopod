@@ -156,7 +156,10 @@ class Install extends Controller
 
         if (!$this->validate($rules)) {
             return redirect()
-                ->back()
+                ->to(
+                    (empty(host_url()) ? config('App')->baseURL : host_url()) .
+                        config('App')->installGateway
+                )
                 ->withInput()
                 ->with('errors', $this->validator->getErrors());
         }
