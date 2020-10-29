@@ -18,18 +18,7 @@ class PlatformModel extends Model
     protected $table = 'platforms';
     protected $primaryKey = 'id';
 
-    protected $allowedFields = [
-        'name',
-        'home_url',
-        'submit_url',
-        'iosapp_url',
-        'androidapp_url',
-        'comment',
-        'display_by_default',
-        'ios_deeplink',
-        'android_deeplink',
-        'logo_file_name',
-    ];
+    protected $allowedFields = ['name', 'label', 'home_url', 'submit_url'];
 
     protected $returnType = \App\Entities\Platform::class;
     protected $useSoftDeletes = false;
@@ -40,7 +29,7 @@ class PlatformModel extends Model
     {
         if (!($found = cache("podcast{$podcastId}_platforms"))) {
             $found = $this->select(
-                'platforms.*, platform_links.link_url, platform_links.visible'
+                'platforms.*, platform_links.link_url, platform_links.is_visible'
             )
                 ->join(
                     'platform_links',
@@ -55,11 +44,11 @@ class PlatformModel extends Model
         return $found;
     }
 
-    public function getPodcastPlatformLinks($podcastId)
+    public function getPodcastPlatforms($podcastId)
     {
-        if (!($found = cache("podcast{$podcastId}_platformLinks"))) {
+        if (!($found = cache("podcast{$podcastId}_podcastPlatforms"))) {
             $found = $this->select(
-                'platforms.*, platform_links.link_url, platform_links.visible'
+                'platforms.*, platform_links.link_url, platform_links.is_visible'
             )
                 ->join(
                     'platform_links',
@@ -68,13 +57,17 @@ class PlatformModel extends Model
                 ->where('platform_links.podcast_id', $podcastId)
                 ->findAll();
 
-            cache()->save("podcast{$podcastId}_platformLinks", $found, DECADE);
+            cache()->save(
+                "podcast{$podcastId}_podcastPlatforms",
+                $found,
+                DECADE
+            );
         }
 
         return $found;
     }
 
-    public function savePlatformLinks($podcastId, $platformLinksData)
+    public function savePodcastPlatforms($podcastId, $platformLinksData)
     {
         $this->clearCache($podcastId);
 
@@ -83,22 +76,18 @@ class PlatformModel extends Model
             ->table('platform_links')
             ->delete(['podcast_id' => $podcastId]);
 
-        // Set platformLinks
+        // Set podcastPlatforms
         return $this->db
             ->table('platform_links')
             ->insertBatch($platformLinksData);
     }
 
-    public function getPlatformId($platform)
+    public function getPlatformId(string $platformName)
     {
-        if (is_numeric($platform)) {
-            return (int) $platform;
-        }
-
-        $p = $this->where('name', $platform)->first();
+        $p = $this->where('name', $platformName)->first();
 
         if (!$p) {
-            $this->error = lang('Platform.platformNotFound', [$platform]);
+            $this->error = lang('Platform.platformNotFound', [$platformName]);
 
             return false;
         }
@@ -106,7 +95,7 @@ class PlatformModel extends Model
         return (int) $p->id;
     }
 
-    public function removePlatformLink($podcastId, $platformId)
+    public function removePodcastPlatform($podcastId, $platformId)
     {
         $this->clearCache($podcastId);
 
@@ -119,7 +108,7 @@ class PlatformModel extends Model
     public function clearCache($podcastId)
     {
         cache()->delete("podcast{$podcastId}_platforms");
-        cache()->delete("podcast{$podcastId}_platformLinks");
+        cache()->delete("podcast{$podcastId}_podcastPlatforms");
 
         // delete localized podcast page cache
         $episodeModel = new EpisodeModel();

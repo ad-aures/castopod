@@ -34,7 +34,7 @@ class AnalyticsWebsiteByEntryPageModel extends Model
     {
         if (!($found = cache("{$podcastId}_analytics_website_by_entry_page"))) {
             $found = $this->select(
-                'IF(`entry_page`=\'/\',\'/\',SUBSTRING_INDEX(`entry_page`,\'/\',-1)) as `labels`'
+                'IF(`entry_page_url`=\'/\',\'/\',SUBSTRING_INDEX(`entry_page_url`,\'/\',-1)) as `labels`'
             )
                 ->selectSum('`hits`', '`values`')
                 ->where([

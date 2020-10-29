@@ -63,9 +63,13 @@ function get_rss_feed($podcast, $serviceName = '')
     $channel->addChildWithCDATA('description', $podcast->description_html);
     $itunes_image = $channel->addChild('image', null, $itunes_namespace);
     $itunes_image->addAttribute('href', $podcast->image->original_url);
-    $channel->addChild('language', $podcast->language);
+    $channel->addChild('language', $podcast->language_code);
     $channel
-        ->addChild('locked', $podcast->lock ? 'yes' : 'no', $podcast_namespace)
+        ->addChild(
+            'locked',
+            $podcast->is_locked ? 'yes' : 'no',
+            $podcast_namespace
+        )
         ->addAttribute('owner', $podcast->owner_email);
     // set main category first, then other categories as apple
     add_category_tag($channel, $podcast->category);
@@ -89,8 +93,9 @@ function get_rss_feed($podcast, $serviceName = '')
 
     $channel->addChild('type', $podcast->type, $itunes_namespace);
     $podcast->copyright && $channel->addChild('copyright', $podcast->copyright);
-    $podcast->block && $channel->addChild('block', 'Yes', $itunes_namespace);
-    $podcast->complete &&
+    $podcast->is_blocked &&
+        $channel->addChild('block', 'Yes', $itunes_namespace);
+    $podcast->is_completed &&
         $channel->addChild('complete', 'Yes', $itunes_namespace);
 
     $image = $channel->addChild('image');
@@ -146,7 +151,8 @@ function get_rss_feed($podcast, $serviceName = '')
             );
         $item->addChild('episodeType', $episode->type, $itunes_namespace);
 
-        $episode->block && $item->addChild('block', 'Yes', $itunes_namespace);
+        $episode->is_blocked &&
+            $item->addChild('block', 'Yes', $itunes_namespace);
     }
 
     return $rss->asXML();

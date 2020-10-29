@@ -33,7 +33,7 @@ class AnalyticsWebsiteByRefererModel extends Model
     public function getData(int $podcastId): array
     {
         if (!($found = cache("{$podcastId}_analytics_website_by_referer"))) {
-            $found = $this->select('`referer` as `labels`')
+            $found = $this->select('`referer_url` as `labels`')
                 ->selectSum('`hits`', '`values`')
                 ->where([
                     '`podcast_id`' => $podcastId,

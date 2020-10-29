@@ -19,6 +19,6 @@ class Platform extends Entity
         'home_url' => 'string',
         'submit_url' => '?string',
         'link_url' => '?string',
-        'visible' => '?boolean',
+        'is_visible' => '?boolean',
     ];
 }

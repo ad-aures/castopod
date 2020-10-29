@@ -71,14 +71,14 @@ class PodcastSettings extends BaseController
                     'platform_id' => $platformId,
                     'podcast_id' => $this->podcast->id,
                     'link_url' => $platformLinkUrl,
-                    'visible' => array_key_exists('visible', $platformLink)
+                    'is_visible' => array_key_exists('visible', $platformLink)
                         ? $platformLink['visible'] == 'yes'
                         : false,
                 ]);
             }
         }
 
-        $platformModel->savePlatformLinks(
+        $platformModel->savePodcastPlatforms(
             $this->podcast->id,
             $platformLinksData
         );

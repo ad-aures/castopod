@@ -60,13 +60,17 @@ function write_enclosure_tags($episode)
     // populate data array
     $TagData = [
         'title' => [$episode->title],
-        'artist' => [$episode->podcast->author],
+        'artist' => [
+            empty($episode->podcast->publisher)
+                ? $episode->podcast->owner_name
+                : $episode->podcast->publisher,
+        ],
         'album' => [$episode->podcast->title],
         'year' => [
             $episode->published_at ? $episode->published_at->format('Y') : '',
         ],
         'genre' => ['Podcast'],
-        'comment' => [$episode->description],
+        'comment' => [$episode->description_html],
         'track_number' => [strval($episode->number)],
         'copyright_message' => [$episode->podcast->copyright],
         'publisher' => [
@@ -81,7 +85,7 @@ function write_enclosure_tags($episode)
         // 'podcast' => [],
         // 'podcast_identifier' => [$episode_media_url],
         // 'podcast_feed' => [$podcast_feed_url],
-        // 'podcast_description' => [$podcast->description],
+        // 'podcast_description' => [$podcast->description_markdown],
     ];
 
     $TagData['attached_picture'][] = [

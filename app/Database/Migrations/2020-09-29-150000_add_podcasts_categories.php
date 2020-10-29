@@ -19,13 +19,11 @@ class AddPodcastsCategories extends Migration
     {
         $this->forge->addField([
             'podcast_id' => [
-                'type' => 'BIGINT',
-                'constraint' => 20,
+                'type' => 'INT',
                 'unsigned' => true,
             ],
             'category_id' => [
                 'type' => 'INT',
-                'constraint' => 10,
                 'unsigned' => true,
             ],
         ]);

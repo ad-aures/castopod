@@ -18,25 +18,23 @@ class AddAnalyticsWebsiteByEntryPage extends Migration
     {
         $this->forge->addField([
             'podcast_id' => [
-                'type' => 'BIGINT',
-                'constraint' => 20,
+                'type' => 'INT',
                 'unsigned' => true,
             ],
             'date' => [
-                'type' => 'date',
+                'type' => 'DATE',
             ],
-            'entry_page' => [
+            'entry_page_url' => [
                 'type' => 'VARCHAR',
                 'constraint' => 512,
-                'comment' => 'Entry page URL.',
             ],
             'hits' => [
                 'type' => 'INT',
-                'constraint' => 10,
+                'unsigned' => true,
                 'default' => 1,
             ],
         ]);
-        $this->forge->addPrimaryKey(['podcast_id', 'date', 'entry_page']);
+        $this->forge->addPrimaryKey(['podcast_id', 'date', 'entry_page_url']);
         $this->forge->addField(
             '`created_at` timestamp NOT NULL DEFAULT current_timestamp()'
         );

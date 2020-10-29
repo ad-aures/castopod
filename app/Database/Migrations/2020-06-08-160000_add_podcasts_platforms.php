@@ -13,37 +13,36 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class AddPlatformLinks extends Migration
+class AddPodcastsPlatforms extends Migration
 {
     public function up()
     {
         $this->forge->addField([
             'podcast_id' => [
-                'type' => 'BIGINT',
-                'constraint' => 20,
+                'type' => 'INT',
                 'unsigned' => true,
             ],
             'platform_id' => [
-                'type' => 'BIGINT',
-                'constraint' => 20,
+                'type' => 'INT',
                 'unsigned' => true,
             ],
             'link_url' => [
                 'type' => 'VARCHAR',
-                'constraint' => 191,
+                'constraint' => 512,
             ],
-            'visible' => [
+            'is_visible' => [
                 'type' => 'TINYINT',
                 'constraint' => 1,
                 'default' => 0,
             ],
             'created_at' => [
-                'type' => 'TIMESTAMP',
+                'type' => 'DATETIME',
             ],
             'updated_at' => [
-                'type' => 'TIMESTAMP',
+                'type' => 'DATETIME',
             ],
         ]);
+
         $this->forge->addPrimaryKey(['podcast_id', 'platform_id']);
         $this->forge->addForeignKey('podcast_id', 'podcasts', 'id');
         $this->forge->addForeignKey('platform_id', 'platforms', 'id');

@@ -59,10 +59,10 @@ $routes->group(config('App')->installGateway, function ($routes) {
     ]);
 });
 
-// Route for podcast audio file analytics (/audio/podcast_id/episode_id/bytes_threshold/filesize/podcast_folder/filename.mp3)
+// Route for podcast audio file analytics (/audio/podcast_id/episode_id/bytes_threshold/filesize/duration/podcast_folder/filename.mp3)
 $routes->add(
-    'audio/(:num)/(:num)/(:num)/(:num)/(:any)',
-    'Analytics::hit/$1/$2/$3/$4/$5',
+    'audio/(:num)/(:num)/(:num)/(:num)/(:num)/(:any)',
+    'Analytics::hit/$1/$2/$3/$4/$5/$6',
     [
         'as' => 'analytics_hit',
     ]

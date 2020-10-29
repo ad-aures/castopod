@@ -18,21 +18,28 @@ class AddAnalyticsPodcasts extends Migration
     {
         $this->forge->addField([
             'podcast_id' => [
-                'type' => 'BIGINT',
-                'constraint' => 20,
+                'type' => 'INT',
                 'unsigned' => true,
             ],
             'date' => [
-                'type' => 'date',
+                'type' => 'DATE',
             ],
-            'hits' => [
+            'duration' => [
                 'type' => 'INT',
-                'constraint' => 10,
-                'default' => 1,
+                'unsigned' => true,
+            ],
+            'bandwidth' => [
+                'type' => 'BIGINT',
+                'unsigned' => true,
             ],
             'unique_listeners' => [
                 'type' => 'INT',
-                'constraint' => 10,
+                'unsigned' => true,
+                'default' => 1,
+            ],
+            'hits' => [
+                'type' => 'INT',
+                'unsigned' => true,
                 'default' => 1,
             ],
         ]);

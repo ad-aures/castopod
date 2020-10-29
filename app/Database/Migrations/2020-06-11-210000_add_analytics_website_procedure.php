@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class AddAnalyticsWebsiteStoredProcedure
+ * Class AddAnalyticsWebsiteProcedure
  * Creates analytics_website stored procedure in database
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -12,27 +12,30 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class AddAnalyticsWebsiteStoredProcedure extends Migration
+class AddAnalyticsWebsiteProcedure extends Migration
 {
     public function up()
     {
-        // Creates Stored Procedure for data insertion
+        // Creates Procedure for data insertion
         // Example: CALL analytics_website(1,'FR','Firefox');
         $procedureName = $this->db->prefixTable('analytics_website');
         $createQuery = <<<EOD
-CREATE PROCEDURE `$procedureName` (IN `p_podcast_id` BIGINT(20) UNSIGNED, IN `p_browser` VARCHAR(191) CHARSET utf8mb4, IN `p_entry_page` VARCHAR(512) CHARSET utf8mb4, IN `p_referer` VARCHAR(512) CHARSET utf8mb4, IN `p_domain` VARCHAR(128) CHARSET utf8mb4, IN `p_keywords` VARCHAR(384) CHARSET utf8mb4)  MODIFIES SQL DATA
+CREATE PROCEDURE `$procedureName` (IN `p_podcast_id` INT UNSIGNED, IN `p_browser` VARCHAR(191) CHARSET utf8mb4, IN `p_entry_page` VARCHAR(512) CHARSET utf8mb4, IN `p_referer_url` VARCHAR(512) CHARSET utf8mb4, IN `p_domain` VARCHAR(128) CHARSET utf8mb4, IN `p_keywords` VARCHAR(384) CHARSET utf8mb4)  MODIFIES SQL DATA
 DETERMINISTIC
 SQL SECURITY INVOKER
 COMMENT 'Add one hit in website logs tables.'
 BEGIN
+
+SET @current_date = DATE(NOW());
+
 INSERT INTO {$procedureName}_by_browser(`podcast_id`, `browser`, `date`) 
-    VALUES (p_podcast_id, p_browser, DATE(NOW())) 
+    VALUES (p_podcast_id, p_browser, @current_date) 
     ON DUPLICATE KEY UPDATE `hits`=`hits`+1;
-INSERT INTO {$procedureName}_by_referer(`podcast_id`, `referer`, `domain`, `keywords`, `date`) 
-    VALUES (p_podcast_id, p_referer, p_domain, p_keywords, DATE(NOW())) 
+INSERT INTO {$procedureName}_by_referer(`podcast_id`, `referer_url`, `domain`, `keywords`, `date`) 
+    VALUES (p_podcast_id, p_referer_url, p_domain, p_keywords, @current_date) 
     ON DUPLICATE KEY UPDATE `hits`=`hits`+1;
-INSERT INTO {$procedureName}_by_entry_page(`podcast_id`, `entry_page`, `date`) 
-    VALUES (p_podcast_id, p_entry_page, DATE(NOW())) 
+INSERT INTO {$procedureName}_by_entry_page(`podcast_id`, `entry_page_url`, `date`) 
+    VALUES (p_podcast_id, p_entry_page, @current_date) 
     ON DUPLICATE KEY UPDATE `hits`=`hits`+1;
 END
 EOD;

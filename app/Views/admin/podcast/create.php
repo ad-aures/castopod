@@ -27,7 +27,6 @@
     'id' => 'image',
     'name' => 'image',
     'class' => 'form-input',
-
     'required' => 'required',
     'type' => 'file',
     'accept' => '.jpg,.jpeg,.png',
@@ -59,27 +58,21 @@
     'required' => 'required',
 ]) ?>
 
-<?= form_fieldset('', ['class' => 'mb-4']) ?>
+<?= form_fieldset('', [
+    'class' => 'mb-4',
+]) ?>
     <legend>
     <?= lang('Podcast.form.type.label') .
         hint_tooltip(lang('Podcast.form.type.hint'), 'ml-1') ?>
     </legend>
     <?= form_radio(
-        [
-            'id' => 'episodic',
-            'name' => 'type',
-            'class' => 'form-radio-btn',
-        ],
+        ['id' => 'episodic', 'name' => 'type', 'class' => 'form-radio-btn'],
         'episodic',
         old('type') ? old('type') == 'episodic' : true
     ) ?>
     <label for="episodic"><?= lang('Podcast.form.type.episodic') ?></label>
     <?= form_radio(
-        [
-            'id' => 'serial',
-            'name' => 'type',
-            'class' => 'form-radio-btn',
-        ],
+        ['id' => 'serial', 'name' => 'type', 'class' => 'form-radio-btn'],
         'serial',
         old('type') ? old('type') == 'serial' : false
     ) ?>
@@ -238,14 +231,7 @@
     'value' => old('publisher'),
 ]) ?>
 
-<?= form_label(
-    lang('Podcast.form.copyright'),
-    'copyright',
-    [],
-
-    '',
-    true
-) ?>
+<?= form_label(lang('Podcast.form.copyright'), 'copyright', [], '', true) ?>
 <?= form_input([
     'id' => 'copyright',
     'name' => 'copyright',
@@ -263,22 +249,29 @@
 
 <?= form_switch(
     lang('Podcast.form.block'),
-    ['id' => 'block', 'name' => 'block'],
+    [
+        'id' => 'block',
+        'name' => 'block',
+    ],
     'yes',
     old('block', false),
-
     'mb-2'
 ) ?>
 
 <?= form_switch(
     lang('Podcast.form.complete'),
-    ['id' => 'complete', 'name' => 'complete'],
+    [
+        'id' => 'complete',
+        'name' => 'complete',
+    ],
     'yes',
-    old('complete', false)
+    old('complete', false),
+    'mb-2'
 ) ?>
 
 <?= form_switch(
-    lang('Podcast.form.lock'),
+    lang('Podcast.form.lock') .
+        hint_tooltip(lang('Podcast.form.lock_hint'), 'ml-1'),
     ['id' => 'lock', 'name' => 'lock'],
     'yes',
     old('lock', true)

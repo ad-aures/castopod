@@ -19,7 +19,7 @@ class AnalyticsPodcastsByPlayer extends Entity
         'app' => '?string',
         'device' => '?string',
         'os' => '?string',
-        'bot' => 'boolean',
+        'is_bot' => 'boolean',
         'date' => 'datetime',
         'hits' => 'integer',
     ];

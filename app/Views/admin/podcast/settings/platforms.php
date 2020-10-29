@@ -19,7 +19,7 @@
 
 <div class="relative flex items-start mb-4">
     <div class="flex flex-col w-12 mr-4">
-        <?= platform_icon($platform->icon_filename, 'w-full mb-1') ?>
+        <?= platform_icon($platform->name, 'w-full mb-1') ?>
         <div class="inline-flex bg-gray-200">
             <?= anchor($platform->home_url, icon('external-link', 'mx-auto'), [
                 'class' => 'flex-1 text-gray-600 hover:text-gray-900',
@@ -81,7 +81,7 @@
             'yes',
             old(
                 $platform->name . '_visible',
-                $platform->visible ? $platform->visible : false
+                $platform->is_visible ? $platform->is_visible : false
             ),
             'text-sm'
         ) ?>

@@ -6,9 +6,7 @@
 <head>
     <meta charset="UTF-8"/>
     <title><?= $podcast->title ?></title>
-    <meta name="description" content="<?= trim(
-        preg_replace('/\s+/', ' ', strip_tags($podcast->description_html))
-    ) ?>"/>
+    <meta name="description" content="<?= $podcast->description ?>"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
     <link rel="stylesheet" href="/assets/index.css"/>
@@ -46,12 +44,9 @@
                             ]
                         ) ?>
                     <?php foreach ($podcast->platforms as $platform): ?>
-                        <?php if ($platform->visible): ?>
+                        <?php if ($platform->is_visible): ?>
                             <a href="<?= $platform->link_url ?>" title="<?= $platform->label ?>" target="_blank" rel="noopener noreferrer" class="ml-2">
-                            <?= platform_icon(
-                                $platform->icon_filename,
-                                'h-8'
-                            ) ?>
+                            <?= platform_icon($platform->name, 'h-8') ?>
                             </a>
                         <?php endif; ?>
                     <?php endforeach; ?>

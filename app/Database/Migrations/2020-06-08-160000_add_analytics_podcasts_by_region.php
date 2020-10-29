@@ -18,12 +18,11 @@ class AddAnalyticsPodcastsByRegion extends Migration
     {
         $this->forge->addField([
             'podcast_id' => [
-                'type' => 'BIGINT',
-                'constraint' => 20,
+                'type' => 'INT',
                 'unsigned' => true,
             ],
             'date' => [
-                'type' => 'date',
+                'type' => 'DATE',
             ],
             'country_code' => [
                 'type' => 'VARCHAR',
@@ -45,7 +44,7 @@ class AddAnalyticsPodcastsByRegion extends Migration
             ],
             'hits' => [
                 'type' => 'INT',
-                'constraint' => 10,
+                'unsigned' => true,
                 'default' => 1,
             ],
         ]);

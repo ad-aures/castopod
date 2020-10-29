@@ -19,34 +19,35 @@ class AddPodcasts extends Migration
     {
         $this->forge->addField([
             'id' => [
-                'type' => 'BIGINT',
-                'constraint' => 20,
+                'type' => 'INT',
                 'unsigned' => true,
                 'auto_increment' => true,
             ],
             'title' => [
                 'type' => 'VARCHAR',
-                'constraint' => 1024,
+                'constraint' => 128,
             ],
             'name' => [
                 'type' => 'VARCHAR',
-                'constraint' => 191,
+                'constraint' => 32,
                 'unique' => true,
             ],
-            'description' => [
+            'description_markdown' => [
+                'type' => 'TEXT',
+            ],
+            'description_html' => [
                 'type' => 'TEXT',
             ],
             'image_uri' => [
                 'type' => 'VARCHAR',
-                'constraint' => 1024,
+                'constraint' => 255,
             ],
-            'language' => [
+            'language_code' => [
                 'type' => 'VARCHAR',
                 'constraint' => 2,
             ],
             'category_id' => [
                 'type' => 'INT',
-                'constraint' => 10,
                 'unsigned' => true,
                 'default' => 0,
             ],
@@ -58,15 +59,15 @@ class AddPodcasts extends Migration
             ],
             'owner_name' => [
                 'type' => 'VARCHAR',
-                'constraint' => 1024,
+                'constraint' => 128,
             ],
             'owner_email' => [
                 'type' => 'VARCHAR',
-                'constraint' => 1024,
+                'constraint' => 255,
             ],
             'publisher' => [
                 'type' => 'VARCHAR',
-                'constraint' => 1024,
+                'constraint' => 128,
                 'null' => true,
             ],
             'type' => [
@@ -76,67 +77,69 @@ class AddPodcasts extends Migration
             ],
             'copyright' => [
                 'type' => 'VARCHAR',
-                'constraint' => 1024,
+                'constraint' => 128,
                 'null' => true,
             ],
-            'episode_description_footer' => [
+            'episode_description_footer_markdown' => [
                 'type' => 'TEXT',
                 'null' => true,
             ],
-            'block' => [
+            'episode_description_footer_html' => [
+                'type' => 'TEXT',
+                'null' => true,
+            ],
+            'is_blocked' => [
                 'type' => 'TINYINT',
                 'constraint' => 1,
                 'default' => 0,
             ],
-            'complete' => [
+            'is_completed' => [
                 'type' => 'TINYINT',
                 'constraint' => 1,
                 'default' => 0,
             ],
-            'lock' => [
+            'is_locked' => [
                 'type' => 'TINYINT',
                 'constraint' => 1,
-                'comment' =>
-                    'This tells other podcast platforms whether they are allowed to import this feed.',
                 'default' => 1,
             ],
             'imported_feed_url' => [
                 'type' => 'VARCHAR',
-                'constraint' => 1024,
+                'constraint' => 512,
                 'comment' =>
                     'The RSS feed URL if this podcast was imported, NULL otherwise.',
                 'null' => true,
             ],
             'new_feed_url' => [
                 'type' => 'VARCHAR',
-                'constraint' => 1024,
+                'constraint' => 512,
                 'comment' =>
                     'The RSS new feed URL if this podcast is moving out, NULL otherwise.',
                 'null' => true,
             ],
             'created_by' => [
                 'type' => 'INT',
-                'constraint' => 11,
                 'unsigned' => true,
             ],
             'updated_by' => [
                 'type' => 'INT',
-                'constraint' => 11,
                 'unsigned' => true,
             ],
             'created_at' => [
-                'type' => 'TIMESTAMP',
+                'type' => 'DATETIME',
             ],
             'updated_at' => [
-                'type' => 'TIMESTAMP',
+                'type' => 'DATETIME',
             ],
             'deleted_at' => [
                 'type' => 'DATETIME',
                 'null' => true,
             ],
         ]);
+
         $this->forge->addKey('id', true);
         $this->forge->addForeignKey('category_id', 'categories', 'id');
+        $this->forge->addForeignKey('language_code', 'languages', 'code');
         $this->forge->addForeignKey('created_by', 'users', 'id');
         $this->forge->addForeignKey('updated_by', 'users', 'id');
         $this->forge->createTable('podcasts');

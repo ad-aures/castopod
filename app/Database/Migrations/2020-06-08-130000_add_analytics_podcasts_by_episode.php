@@ -18,26 +18,24 @@ class AddAnalyticsPodcastsByEpisode extends Migration
     {
         $this->forge->addField([
             'podcast_id' => [
-                'type' => 'BIGINT',
-                'constraint' => 20,
+                'type' => 'INT',
                 'unsigned' => true,
             ],
             'date' => [
-                'type' => 'date',
+                'type' => 'DATE',
             ],
             'episode_id' => [
-                'type' => 'BIGINT',
-                'constraint' => 20,
+                'type' => 'INT',
                 'unsigned' => true,
             ],
             'age' => [
                 'type' => 'INT',
-                'constraint' => 10,
+                'comment' => 'Days since episode publication date',
                 'unsigned' => true,
             ],
             'hits' => [
                 'type' => 'INT',
-                'constraint' => 10,
+                'unsigned' => true,
                 'default' => 1,
             ],
         ]);

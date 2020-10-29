@@ -10,7 +10,7 @@ echo "$( jq '.version = "'$COMPOSER_VERSION'"' composer.json )" > composer.json
 sed -i "s/^defined('CP_VERSION').*/defined('CP_VERSION') || define('CP_VERSION', '$VERSION');/" ./app/Config/Constants.php
 
 # download GeoLite2-City archive and extract it to writable/uploads
-wget -c "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=v3PguJMcmZMb9Ld0&suffix=tar.gz" -O - | tar -xz -C ./writable/uploads/
+wget -c "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=$MAXMIND_LICENCE_KEY&suffix=tar.gz" -O - | tar -xz -C ./writable/uploads/
 
 # rename extracted archives' folders
 mv ./writable/uploads/GeoLite2-City* ./writable/uploads/GeoLite2-City

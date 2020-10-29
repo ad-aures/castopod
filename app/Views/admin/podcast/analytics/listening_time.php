@@ -15,7 +15,7 @@
 <div class="chart-xy" id="by-day-listening-time-graph" data-chart-type="xy-duration-chart" data-chart-url="<?= route_to(
     'analytics-data',
     $podcast->id,
-    'PodcastByEpisode',
+    'Podcast',
     'TotalListeningTimeByDay'
 ) ?>"></div>
 </div>
@@ -25,7 +25,7 @@
 <div class="chart-xy" id="by-month-listening-time-graph" data-chart-type="xy-duration-chart" data-chart-url="<?= route_to(
     'analytics-data',
     $podcast->id,
-    'PodcastByEpisode',
+    'Podcast',
     'TotalListeningTimeByMonth'
 ) ?>"></div>
 </div>

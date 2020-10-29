@@ -163,7 +163,7 @@
             'class' => 'form-textarea',
             'required' => 'required',
         ],
-        old('description', $episode->description, false),
+        old('description', $episode->description_markdown, false),
         'data-editor="markdown"'
     ) ?>
 </div>
@@ -183,7 +183,7 @@
         ],
         old(
             'description_footer',
-            $podcast->episode_description_footer ?? '',
+            $podcast->episode_description_footer_markdown ?? '',
             false
         ),
         'data-editor="markdown"'
@@ -269,10 +269,9 @@
 <?= form_switch(
     lang('Episode.form.block') .
         hint_tooltip(lang('Episode.form.block_hint'), 'ml-1'),
-
     ['id' => 'block', 'name' => 'block'],
     'yes',
-    old('block', $episode->block)
+    old('block', $episode->is_blocked)
 ) ?>
 
 <?= form_section_close() ?>

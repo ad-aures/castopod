@@ -20,17 +20,12 @@ class AddLanguages extends Migration
         $this->forge->addField([
             'code' => [
                 'type' => 'VARCHAR',
-                'comment' => 'ISO 639-1 language code.',
+                'comment' => 'ISO 639-1 language code',
                 'constraint' => 2,
-            ],
-            'name' => [
-                'type' => 'VARCHAR',
-                'comment' => 'English language name.',
-                'constraint' => 191,
             ],
             'native_name' => [
                 'type' => 'VARCHAR',
-                'constraint' => 191,
+                'constraint' => 128,
             ],
         ]);
         $this->forge->addKey('code', true);

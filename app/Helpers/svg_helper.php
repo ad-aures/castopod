@@ -57,7 +57,9 @@ function svg($name, $class = null)
 function platform_icon($name, $class = null)
 {
     try {
-        $svg_contents = file_get_contents('assets/images/platforms/' . $name);
+        $svg_contents = file_get_contents(
+            'assets/images/platforms/' . $name . '.svg'
+        );
     } catch (\Exception $e) {
         $svg_contents = file_get_contents(
             'assets/images/platforms/_default.svg'

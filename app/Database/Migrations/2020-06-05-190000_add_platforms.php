@@ -19,39 +19,34 @@ class AddPlatforms extends Migration
     {
         $this->forge->addField([
             'id' => [
-                'type' => 'BIGINT',
-                'constraint' => 20,
+                'type' => 'INT',
                 'unsigned' => true,
                 'auto_increment' => true,
             ],
             'name' => [
                 'type' => 'VARCHAR',
-                'constraint' => 191,
+                'constraint' => 32,
                 'unique' => true,
             ],
             'label' => [
                 'type' => 'VARCHAR',
-                'constraint' => 191,
+                'constraint' => 32,
             ],
             'home_url' => [
                 'type' => 'VARCHAR',
-                'constraint' => 191,
+                'constraint' => 255,
             ],
             'submit_url' => [
                 'type' => 'VARCHAR',
-                'constraint' => 191,
+                'constraint' => 512,
                 'null' => true,
                 'default' => null,
             ],
-            'icon_filename' => [
-                'type' => 'VARCHAR',
-                'constraint' => 1024,
-            ],
             'created_at' => [
-                'type' => 'TIMESTAMP',
+                'type' => 'DATETIME',
             ],
             'updated_at' => [
-                'type' => 'TIMESTAMP',
+                'type' => 'DATETIME',
             ],
         ]);
         $this->forge->addKey('id', true);

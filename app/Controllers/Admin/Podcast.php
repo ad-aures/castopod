@@ -95,7 +95,7 @@ class Podcast extends BaseController
         $data = ['podcast' => $this->podcast];
 
         replace_breadcrumb_params([0 => $this->podcast->title]);
-        return view('admin/podcast/analytics/listening-time', $data);
+        return view('admin/podcast/analytics/listening_time', $data);
     }
 
     public function viewAnalyticsPlayers()
@@ -141,9 +141,9 @@ class Podcast extends BaseController
         $podcast = new \App\Entities\Podcast([
             'title' => $this->request->getPost('title'),
             'name' => $this->request->getPost('name'),
-            'description' => $this->request->getPost('description'),
+            'description_markdown' => $this->request->getPost('description'),
             'image' => $this->request->getFile('image'),
-            'language' => $this->request->getPost('language'),
+            'language_code' => $this->request->getPost('language'),
             'category_id' => $this->request->getPost('category'),
             'parental_advisory' =>
                 $this->request->getPost('parental_advisory') !== 'undefined'
@@ -154,9 +154,9 @@ class Podcast extends BaseController
             'publisher' => $this->request->getPost('publisher'),
             'type' => $this->request->getPost('type'),
             'copyright' => $this->request->getPost('copyright'),
-            'block' => $this->request->getPost('block') === 'yes',
-            'complete' => $this->request->getPost('complete') === 'yes',
-            'lock' => $this->request->getPost('lock') === 'yes',
+            'is_blocked' => $this->request->getPost('is_blocked') === 'yes',
+            'is_completed' => $this->request->getPost('complete') === 'yes',
+            'is_locked' => $this->request->getPost('lock') === 'yes',
             'created_by' => user(),
             'updated_by' => user(),
         ]);
@@ -259,6 +259,10 @@ class Podcast extends BaseController
                 ->with('errors', [lang('PodcastImport.lock_import')]);
         }
 
+        $converter = new HtmlConverter();
+
+        $channelDescriptionHtml = $feed->channel[0]->description;
+
         $podcast = new \App\Entities\Podcast([
             'name' => $this->request->getPost('name'),
             'imported_feed_url' => $this->request->getPost('imported_feed_url'),
@@ -266,9 +270,12 @@ class Podcast extends BaseController
                 route_to('podcast_feed', $this->request->getPost('name'))
             ),
             'title' => $feed->channel[0]->title,
-            'description' => $feed->channel[0]->description,
+            'description_markdown' => $converter->convert(
+                $channelDescriptionHtml
+            ),
+            'description_html' => $channelDescriptionHtml,
             'image' => download_file($nsItunes->image->attributes()),
-            'language' => $this->request->getPost('language'),
+            'language_code' => $this->request->getPost('language'),
             'category_id' => $this->request->getPost('category'),
             'parental_advisory' => empty($nsItunes->explicit)
                 ? null
@@ -282,10 +289,10 @@ class Podcast extends BaseController
             'publisher' => $nsItunes->author,
             'type' => empty($nsItunes->type) ? 'episodic' : $nsItunes->type,
             'copyright' => $feed->channel[0]->copyright,
-            'block' => empty($nsItunes->block)
+            'is_blocked' => empty($nsItunes->block)
                 ? false
                 : $nsItunes->block === 'yes',
-            'complete' => empty($nsItunes->complete)
+            'is_completed' => empty($nsItunes->complete)
                 ? false
                 : $nsItunes->complete === 'yes',
             'created_by' => user(),
@@ -313,8 +320,6 @@ class Podcast extends BaseController
             $newPodcastId,
             $podcastAdminGroup->id
         );
-
-        $converter = new HtmlConverter();
 
         $numberItems = $feed->channel[0]->item->count();
         $lastItem =
@@ -347,20 +352,24 @@ class Podcast extends BaseController
             }
             $slugs[] = $slug;
 
+            $itemDescriptionHtml =
+                $this->request->getPost('description_field') === 'summary'
+                    ? $nsItunes->summary
+                    : ($this->request->getPost('description_field') ===
+                    'subtitle_summary'
+                        ? $nsItunes->subtitle . '<br/>' . $nsItunes->summary
+                        : $item->description);
+
             $newEpisode = new \App\Entities\Episode([
                 'podcast_id' => $newPodcastId,
                 'guid' => empty($item->guid) ? null : $item->guid,
                 'title' => $item->title,
                 'slug' => $slug,
                 'enclosure' => download_file($item->enclosure->attributes()),
-                'description' => $converter->convert(
-                    $this->request->getPost('description_field') === 'summary'
-                        ? $nsItunes->summary
-                        : ($this->request->getPost('description_field') ===
-                        'subtitle_summary'
-                            ? $nsItunes->subtitle . "\n" . $nsItunes->summary
-                            : $item->description)
+                'description_markdown' => $converter->convert(
+                    $itemDescriptionHtml
                 ),
+                'description_html' => $itemDescriptionHtml,
                 'image' =>
                     !$nsItunes->image || empty($nsItunes->image->attributes())
                         ? null
@@ -379,12 +388,14 @@ class Podcast extends BaseController
                 'season_number' => empty(
                     $this->request->getPost('season_number')
                 )
-                    ? $nsItunes->season
+                    ? (!empty($nsItunes->season)
+                        ? $nsItunes->season
+                        : null)
                     : $this->request->getPost('season_number'),
                 'type' => empty($nsItunes->episodeType)
                     ? 'full'
                     : $nsItunes->episodeType,
-                'block' => empty($nsItunes->block)
+                'is_blocked' => empty($nsItunes->block)
                     ? false
                     : $nsItunes->block === 'yes',
                 'created_by' => user(),
@@ -441,13 +452,15 @@ class Podcast extends BaseController
 
         $this->podcast->title = $this->request->getPost('title');
         $this->podcast->name = $this->request->getPost('name');
-        $this->podcast->description = $this->request->getPost('description');
+        $this->podcast->description_markdown = $this->request->getPost(
+            'description'
+        );
 
         $image = $this->request->getFile('image');
         if ($image->isValid()) {
             $this->podcast->image = $image;
         }
-        $this->podcast->language = $this->request->getPost('language');
+        $this->podcast->language_code = $this->request->getPost('language');
         $this->podcast->category_id = $this->request->getPost('category');
         $this->podcast->parental_advisory =
             $this->request->getPost('parental_advisory') !== 'undefined'
@@ -458,10 +471,11 @@ class Podcast extends BaseController
         $this->podcast->owner_email = $this->request->getPost('owner_email');
         $this->podcast->type = $this->request->getPost('type');
         $this->podcast->copyright = $this->request->getPost('copyright');
-        $this->podcast->block = $this->request->getPost('block') === 'yes';
-        $this->podcast->complete =
+        $this->podcast->is_blocked =
+            $this->request->getPost('is_blocked') === 'yes';
+        $this->podcast->is_completed =
             $this->request->getPost('complete') === 'yes';
-        $this->podcast->lock = $this->request->getPost('lock') === 'yes';
+        $this->podcast->is_lock = $this->request->getPost('lock') === 'yes';
         $this->updated_by = user();
 
         $db = \Config\Database::connect();

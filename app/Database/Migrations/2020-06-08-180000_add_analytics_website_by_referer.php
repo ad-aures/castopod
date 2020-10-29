@@ -18,17 +18,15 @@ class AddAnalyticsWebsiteByReferer extends Migration
     {
         $this->forge->addField([
             'podcast_id' => [
-                'type' => 'BIGINT',
-                'constraint' => 20,
+                'type' => 'INT',
                 'unsigned' => true,
             ],
             'date' => [
-                'type' => 'date',
+                'type' => 'DATE',
             ],
-            'referer' => [
+            'referer_url' => [
                 'type' => 'VARCHAR',
                 'constraint' => 512,
-                'comment' => 'Referer URL.',
             ],
             'domain' => [
                 'type' => 'VARCHAR',
@@ -37,16 +35,16 @@ class AddAnalyticsWebsiteByReferer extends Migration
             ],
             'keywords' => [
                 'type' => 'VARCHAR',
-                'constraint' => 384,
+                'constraint' => 384, // length of referer_url (512) - domain (128)
                 'null' => true,
             ],
             'hits' => [
                 'type' => 'INT',
-                'constraint' => 10,
+                'unsigned' => true,
                 'default' => 1,
             ],
         ]);
-        $this->forge->addPrimaryKey(['podcast_id', 'date', 'referer']);
+        $this->forge->addPrimaryKey(['podcast_id', 'date', 'referer_url']);
         $this->forge->addField(
             '`created_at` timestamp NOT NULL DEFAULT current_timestamp()'
         );

@@ -46,6 +46,7 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                 $date = strtotime(date('Y-m-d', $date) . ' +1 day')
             ) {
                 $analytics_podcasts = [];
+                $analytics_podcasts_by_hour = [];
                 $analytics_podcasts_by_country = [];
                 $analytics_podcasts_by_episode = [];
                 $analytics_podcasts_by_player = [];
@@ -83,7 +84,7 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                             ? $player['device']
                             : '';
                         $os = isset($player['os']) ? $player['os'] : '';
-                        $bot = isset($player['bot']) ? $player['bot'] : 0;
+                        $isBot = isset($player['bot']) ? $player['bot'] : 0;
 
                         $fakeIp =
                             rand(0, 255) .
@@ -124,8 +125,16 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                         $analytics_podcasts[] = [
                             'podcast_id' => $podcast->id,
                             'date' => date('Y-m-d', $date),
+                            'duration' => rand(60, 3600),
+                            'bandwidth' => rand(1000000, 10000000),
                             'hits' => $hits,
                             'unique_listeners' => $hits,
+                        ];
+                        $analytics_podcasts_by_hour[] = [
+                            'podcast_id' => $podcast->id,
+                            'date' => date('Y-m-d', $date),
+                            'hour' => rand(0, 23),
+                            'hits' => $hits,
                         ];
                         $analytics_podcasts_by_country[] = [
                             'podcast_id' => $podcast->id,
@@ -143,11 +152,11 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                         $analytics_podcasts_by_player[] = [
                             'podcast_id' => $podcast->id,
                             'date' => date('Y-m-d', $date),
-                            'service'=> $service,
+                            'service' => $service,
                             'app' => $app,
                             'device' => $device,
                             'os' => $os,
-                            'bot' => $bot,
+                            'is_bot' => $isBot,
                             'hits' => $hits,
                         ];
                         $analytics_podcasts_by_region[] = [
@@ -165,6 +174,10 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                     ->table('analytics_podcasts')
                     ->ignore(true)
                     ->insertBatch($analytics_podcasts);
+                $this->db
+                    ->table('analytics_podcasts_by_hour')
+                    ->ignore(true)
+                    ->insertBatch($analytics_podcasts_by_hour);
                 $this->db
                     ->table('analytics_podcasts_by_country')
                     ->ignore(true)

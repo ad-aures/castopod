@@ -18,12 +18,11 @@ class AddAnalyticsPodcastsByPlayer extends Migration
     {
         $this->forge->addField([
             'podcast_id' => [
-                'type' => 'BIGINT',
-                'constraint' => 20,
+                'type' => 'INT',
                 'unsigned' => true,
             ],
             'date' => [
-                'type' => 'date',
+                'type' => 'DATE',
             ],
             'service' => [
                 'type' => 'VARCHAR',
@@ -41,14 +40,14 @@ class AddAnalyticsPodcastsByPlayer extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 32,
             ],
-            'bot' => [
+            'is_bot' => [
                 'type' => 'TINYINT',
                 'constraint' => 1,
                 'default' => 0,
             ],
             'hits' => [
                 'type' => 'INT',
-                'constraint' => 10,
+                'unsigned' => true,
                 'default' => 1,
             ],
         ]);
@@ -59,7 +58,7 @@ class AddAnalyticsPodcastsByPlayer extends Migration
             'app',
             'device',
             'os',
-            'bot',
+            'is_bot',
         ]);
         $this->forge->addField(
             '`created_at` timestamp NOT NULL DEFAULT current_timestamp()'

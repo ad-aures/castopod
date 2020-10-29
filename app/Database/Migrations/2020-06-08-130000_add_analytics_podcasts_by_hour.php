@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Class AddAnalyticsUnknownUseragents
- * Creates analytics_unknown_useragents table in database
+ * Class AddAnalyticsPodcastsByHour
+ * Creates analytics_podcasts_by_hour table in database
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
@@ -12,20 +12,21 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class AddAnalyticsUnknownUseragents extends Migration
+class AddAnalyticsPodcastsByHour extends Migration
 {
     public function up()
     {
         $this->forge->addField([
-            'id' => [
+            'podcast_id' => [
                 'type' => 'INT',
                 'unsigned' => true,
-                'auto_increment' => true,
             ],
-            'useragent' => [
-                'type' => 'VARCHAR',
-                'constraint' => 191,
-                'unique' => true,
+            'date' => [
+                'type' => 'DATE',
+            ],
+            'hour' => [
+                'type' => 'INT',
+                'unsigned' => true,
             ],
             'hits' => [
                 'type' => 'INT',
@@ -33,19 +34,19 @@ class AddAnalyticsUnknownUseragents extends Migration
                 'default' => 1,
             ],
         ]);
-        $this->forge->addKey('id', true);
-        // `created_at` and `updated_at` are created with SQL because Model class won’t be used for insertion (Procedure will be used instead)
+        $this->forge->addPrimaryKey(['podcast_id', 'date', 'hour']);
         $this->forge->addField(
             '`created_at` timestamp NOT NULL DEFAULT current_timestamp()'
         );
         $this->forge->addField(
             '`updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()'
         );
-        $this->forge->createTable('analytics_unknown_useragents');
+        $this->forge->addForeignKey('podcast_id', 'podcasts', 'id');
+        $this->forge->createTable('analytics_podcasts_by_hour');
     }
 
     public function down()
     {
-        $this->forge->dropTable('analytics_unknown_useragents');
+        $this->forge->dropTable('analytics_podcasts_by_hour');
     }
 }

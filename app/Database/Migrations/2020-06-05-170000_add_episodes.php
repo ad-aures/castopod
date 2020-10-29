@@ -19,23 +19,21 @@ class AddEpisodes extends Migration
     {
         $this->forge->addField([
             'id' => [
-                'type' => 'BIGINT',
-                'constraint' => 20,
+                'type' => 'INT',
                 'unsigned' => true,
                 'auto_increment' => true,
             ],
             'podcast_id' => [
-                'type' => 'BIGINT',
-                'constraint' => 20,
+                'type' => 'INT',
                 'unsigned' => true,
             ],
             'guid' => [
                 'type' => 'VARCHAR',
-                'constraint' => 191,
+                'constraint' => 255,
             ],
             'title' => [
                 'type' => 'VARCHAR',
-                'constraint' => 1024,
+                'constraint' => 128,
             ],
             'slug' => [
                 'type' => 'VARCHAR',
@@ -43,11 +41,10 @@ class AddEpisodes extends Migration
             ],
             'enclosure_uri' => [
                 'type' => 'VARCHAR',
-                'constraint' => 1024,
+                'constraint' => 255,
             ],
             'enclosure_duration' => [
                 'type' => 'INT',
-                'constraint' => 10,
                 'unsigned' => true,
                 'comment' => 'Playtime in seconds',
             ],
@@ -57,23 +54,25 @@ class AddEpisodes extends Migration
             ],
             'enclosure_filesize' => [
                 'type' => 'INT',
-                'constraint' => 10,
                 'unsigned' => true,
                 'comment' => 'File size in bytes',
             ],
             'enclosure_headersize' => [
                 'type' => 'INT',
-                'constraint' => 10,
                 'unsigned' => true,
                 'comment' => 'Header size in bytes',
             ],
-            'description' => [
+            'description_markdown' => [
+                'type' => 'TEXT',
+                'null' => true,
+            ],
+            'description_html' => [
                 'type' => 'TEXT',
                 'null' => true,
             ],
             'image_uri' => [
                 'type' => 'VARCHAR',
-                'constraint' => 1024,
+                'constraint' => 255,
                 'null' => true,
             ],
             'parental_advisory' => [
@@ -84,13 +83,11 @@ class AddEpisodes extends Migration
             ],
             'number' => [
                 'type' => 'INT',
-                'constraint' => 10,
                 'unsigned' => true,
                 'null' => true,
             ],
             'season_number' => [
                 'type' => 'INT',
-                'constraint' => 10,
                 'unsigned' => true,
                 'null' => true,
             ],
@@ -99,19 +96,17 @@ class AddEpisodes extends Migration
                 'constraint' => ['trailer', 'full', 'bonus'],
                 'default' => 'full',
             ],
-            'block' => [
+            'is_blocked' => [
                 'type' => 'TINYINT',
                 'constraint' => 1,
                 'default' => 0,
             ],
             'created_by' => [
                 'type' => 'INT',
-                'constraint' => 11,
                 'unsigned' => true,
             ],
             'updated_by' => [
                 'type' => 'INT',
-                'constraint' => 11,
                 'unsigned' => true,
             ],
             'published_at' => [
@@ -119,10 +114,10 @@ class AddEpisodes extends Migration
                 'null' => true,
             ],
             'created_at' => [
-                'type' => 'TIMESTAMP',
+                'type' => 'DATETIME',
             ],
             'updated_at' => [
-                'type' => 'TIMESTAMP',
+                'type' => 'DATETIME',
             ],
             'deleted_at' => [
                 'type' => 'DATETIME',

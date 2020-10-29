@@ -53,33 +53,37 @@ class Podcast extends Entity
     protected $contributors;
 
     /**
-     * @var string
-     */
-    protected $description_html;
-
-    /**
      * @var \App\Entities\Platform
      */
     protected $platforms;
+
+    /**
+     * Holds text only description, striped of any markdown or html special characters
+     *
+     * @var string
+     */
+    protected $description;
 
     protected $casts = [
         'id' => 'integer',
         'title' => 'string',
         'name' => 'string',
-        'description' => 'string',
+        'description_markdown' => 'string',
+        'description_html' => 'string',
         'image_uri' => 'string',
-        'language' => 'string',
+        'language_code' => 'string',
         'category_id' => 'integer',
         'parental_advisory' => '?string',
         'publisher' => '?string',
-        'owner_name' => '?string',
-        'owner_email' => '?string',
+        'owner_name' => 'string',
+        'owner_email' => 'string',
         'type' => 'string',
         'copyright' => '?string',
-        'episode_description_footer' => '?string',
-        'block' => 'boolean',
-        'complete' => 'boolean',
-        'lock' => 'boolean',
+        'episode_description_footer_markdown' => '?string',
+        'episode_description_footer_html' => '?string',
+        'is_blocked' => 'boolean',
+        'is_completed' => 'boolean',
+        'is_locked' => 'boolean',
         'imported_feed_url' => '?string',
         'new_feed_url' => '?string',
         'created_by' => 'integer',
@@ -191,14 +195,54 @@ class Podcast extends Entity
         return $this->contributors;
     }
 
-    public function getDescriptionHtml()
+    public function setDescriptionMarkdown(string $descriptionMarkdown)
     {
         $converter = new CommonMarkConverter([
             'html_input' => 'strip',
             'allow_unsafe_links' => false,
         ]);
 
-        return $converter->convertToHtml($this->attributes['description']);
+        $this->attributes['description_markdown'] = $descriptionMarkdown;
+        $this->attributes['description_html'] = $converter->convertToHtml(
+            $descriptionMarkdown
+        );
+
+        return $this;
+    }
+
+    public function setEpisodeDescriptionFooterMarkdown(
+        string $episodeDescriptionFooterMarkdown = null
+    ) {
+        if ($episodeDescriptionFooterMarkdown) {
+            $converter = new CommonMarkConverter([
+                'html_input' => 'strip',
+                'allow_unsafe_links' => false,
+            ]);
+
+            $this->attributes[
+                'episode_description_footer_markdown'
+            ] = $episodeDescriptionFooterMarkdown;
+            $this->attributes[
+                'episode_description_footer_html'
+            ] = $converter->convertToHtml($episodeDescriptionFooterMarkdown);
+        }
+
+        return $this;
+    }
+
+    public function getDescription()
+    {
+        if ($this->description) {
+            return $this->description;
+        }
+
+        return trim(
+            preg_replace(
+                '/\s+/',
+                ' ',
+                strip_tags($this->attributes['description_html'])
+            )
+        );
     }
 
     public function setCreatedBy(\App\Entities\User $user)
@@ -229,7 +273,7 @@ class Podcast extends Entity
         }
 
         if (empty($this->platforms)) {
-            $this->platforms = (new PlatformModel())->getPodcastPlatformLinks(
+            $this->platforms = (new PlatformModel())->getPodcastPlatforms(
                 $this->id
             );
         }

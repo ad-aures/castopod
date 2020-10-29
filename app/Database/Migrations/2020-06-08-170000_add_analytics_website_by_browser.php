@@ -18,12 +18,11 @@ class AddAnalyticsWebsiteByBrowser extends Migration
     {
         $this->forge->addField([
             'podcast_id' => [
-                'type' => 'BIGINT',
-                'constraint' => 20,
+                'type' => 'INT',
                 'unsigned' => true,
             ],
             'date' => [
-                'type' => 'date',
+                'type' => 'DATE',
             ],
             'browser' => [
                 'type' => 'VARCHAR',
@@ -32,10 +31,11 @@ class AddAnalyticsWebsiteByBrowser extends Migration
 
             'hits' => [
                 'type' => 'INT',
-                'constraint' => 10,
+                'unsigned' => true,
                 'default' => 1,
             ],
         ]);
+
         $this->forge->addPrimaryKey(['podcast_id', 'date', 'browser']);
         $this->forge->addField(
             '`created_at` timestamp NOT NULL DEFAULT current_timestamp()'

@@ -20,13 +20,12 @@ class AddPages extends Migration
         $this->forge->addField([
             'id' => [
                 'type' => 'INT',
-                'constraint' => 11,
                 'unsigned' => true,
                 'auto_increment' => true,
             ],
             'title' => [
                 'type' => 'VARCHAR',
-                'constraint' => 1024,
+                'constraint' => 255,
             ],
             'slug' => [
                 'type' => 'VARCHAR',
@@ -37,10 +36,10 @@ class AddPages extends Migration
                 'type' => 'TEXT',
             ],
             'created_at' => [
-                'type' => 'TIMESTAMP',
+                'type' => 'DATETIME',
             ],
             'updated_at' => [
-                'type' => 'TIMESTAMP',
+                'type' => 'DATETIME',
             ],
             'deleted_at' => [
                 'type' => 'DATETIME',

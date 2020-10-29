@@ -17,7 +17,9 @@ class AnalyticsPodcasts extends Entity
     protected $casts = [
         'podcast_id' => 'integer',
         'date' => 'datetime',
-        'hits' => 'integer',
+        'duration' => 'integer',
+        'bandwidth' => 'integer',
         'unique_listeners' => 'integer',
+        'hits' => 'integer',
     ];
 }

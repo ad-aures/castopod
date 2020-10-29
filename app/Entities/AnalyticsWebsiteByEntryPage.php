@@ -16,7 +16,7 @@ class AnalyticsWebsiteByEntryPage extends Entity
 {
     protected $casts = [
         'podcast_id' => 'integer',
-        'entry_page' => '?string',
+        'entry_page_url' => 'string',
         'date' => 'datetime',
         'hits' => 'integer',
     ];

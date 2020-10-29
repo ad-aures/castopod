@@ -244,6 +244,7 @@ function podcast_hit(
     $episodeId,
     $bytesThreshold,
     $fileSize,
+    $duration,
     $serviceName
 ) {
     $session = \Config\Services::session();
@@ -335,20 +336,25 @@ function podcast_hit(
                 // We save the download count for this user until midnight:
                 cache()->save($listenerHashId, $downloadsByUser, $midnightTTL);
 
-                $db->query("CALL $procedureName(?,?,?,?,?,?,?,?,?,?,?,?);", [
-                    $podcastId,
-                    $episodeId,
-                    $session->get('location')['countryCode'],
-                    $session->get('location')['regionCode'],
-                    $session->get('location')['latitude'],
-                    $session->get('location')['longitude'],
-                    $serviceName,
-                    $session->get('player')['app'],
-                    $session->get('player')['device'],
-                    $session->get('player')['os'],
-                    $session->get('player')['bot'],
-                    $newListener,
-                ]);
+                $db->query(
+                    "CALL $procedureName(?,?,?,?,?,?,?,?,?,?,?,?,?,?);",
+                    [
+                        $podcastId,
+                        $episodeId,
+                        $session->get('location')['countryCode'],
+                        $session->get('location')['regionCode'],
+                        $session->get('location')['latitude'],
+                        $session->get('location')['longitude'],
+                        $serviceName,
+                        $session->get('player')['app'],
+                        $session->get('player')['device'],
+                        $session->get('player')['os'],
+                        $session->get('player')['bot'],
+                        $fileSize,
+                        $duration,
+                        $newListener,
+                    ]
+                );
             }
         }
     } catch (\Exception $e) {

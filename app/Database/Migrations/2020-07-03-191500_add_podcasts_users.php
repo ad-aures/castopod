@@ -13,24 +13,21 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class AddUsersPodcasts extends Migration
+class AddPodcastsUsers extends Migration
 {
     public function up()
     {
         $this->forge->addField([
-            'user_id' => [
+            'podcast_id' => [
                 'type' => 'INT',
-                'constraint' => 11,
                 'unsigned' => true,
             ],
-            'podcast_id' => [
-                'type' => 'BIGINT',
-                'constraint' => 20,
+            'user_id' => [
+                'type' => 'INT',
                 'unsigned' => true,
             ],
             'group_id' => [
                 'type' => 'INT',
-                'constraint' => 11,
                 'unsigned' => true,
             ],
         ]);
@@ -38,11 +35,11 @@ class AddUsersPodcasts extends Migration
         $this->forge->addForeignKey('user_id', 'users', 'id');
         $this->forge->addForeignKey('podcast_id', 'podcasts', 'id');
         $this->forge->addForeignKey('group_id', 'auth_groups', 'id');
-        $this->forge->createTable('users_podcasts');
+        $this->forge->createTable('podcasts_users');
     }
 
     public function down()
     {
-        $this->forge->dropTable('users_podcasts');
+        $this->forge->dropTable('podcasts_users');
     }
 }

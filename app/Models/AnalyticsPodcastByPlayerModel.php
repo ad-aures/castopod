@@ -42,7 +42,7 @@ class AnalyticsPodcastByPlayerModel extends Model
                 ->where([
                     '`podcast_id`' => $podcastId,
                     '`service` !=' => '',
-                    '`bot`' => 0,
+                    '`is_bot`' => 0,
                     '`date` >' => date('Y-m-d', strtotime('-1 week')),
                 ])
                 ->groupBy('`labels`')
@@ -77,7 +77,7 @@ class AnalyticsPodcastByPlayerModel extends Model
                 ->where([
                     '`podcast_id`' => $podcastId,
                     '`app` !=' => '',
-                    '`bot`' => 0,
+                    '`is_bot`' => 0,
                     '`date` >' => date('Y-m-d', strtotime('-1 week')),
                 ])
                 ->groupBy('`labels`')
@@ -112,7 +112,7 @@ class AnalyticsPodcastByPlayerModel extends Model
                 ->where([
                     '`podcast_id`' => $podcastId,
                     '`app` !=' => '',
-                    '`bot`' => 0,
+                    '`is_bot`' => 0,
                     '`date` >' => date('Y-m-d', strtotime('-1 year')),
                 ])
                 ->groupBy('`labels`')
@@ -148,7 +148,7 @@ class AnalyticsPodcastByPlayerModel extends Model
                     '`podcast_id`' => $podcastId,
                     '`app` !=' => '',
                     '`os` !=' => '',
-                    '`bot`' => 0,
+                    '`is_bot`' => 0,
                     '`date` >' => date('Y-m-d', strtotime('-1 week')),
                 ])
                 ->groupBy('`labels`')
@@ -183,7 +183,7 @@ class AnalyticsPodcastByPlayerModel extends Model
                 ->where([
                     '`podcast_id`' => $podcastId,
                     '`device` !=' => '',
-                    '`bot`' => 0,
+                    '`is_bot`' => 0,
                     '`date` >' => date('Y-m-d', strtotime('-1 week')),
                 ])
                 ->groupBy('`labels`')
@@ -215,7 +215,7 @@ class AnalyticsPodcastByPlayerModel extends Model
                 ->selectSum('`hits`', '`values`')
                 ->where([
                     '`podcast_id`' => $podcastId,
-                    '`bot`' => 1,
+                    '`is_bot`' => 1,
                     '`date` >' => date('Y-m-d', strtotime('-1 year')),
                 ])
                 ->groupBy('`labels`')

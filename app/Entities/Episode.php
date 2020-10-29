@@ -51,9 +51,11 @@ class Episode extends Entity
     protected $enclosure_web_url;
 
     /**
+     * Holds text only description, striped of any markdown or html special characters
+     *
      * @var string
      */
-    protected $description_html;
+    protected $description;
 
     /**
      * @var boolean
@@ -76,13 +78,14 @@ class Episode extends Entity
         'enclosure_mimetype' => 'string',
         'enclosure_filesize' => 'integer',
         'enclosure_headersize' => 'integer',
-        'description' => 'string',
+        'description_markdown' => 'string',
+        'description_html' => 'string',
         'image_uri' => '?string',
         'parental_advisory' => '?string',
         'number' => '?integer',
         'season_number' => '?integer',
         'type' => 'string',
-        'block' => 'boolean',
+        'is_blocked' => 'boolean',
         'created_by' => 'integer',
         'updated_by' => 'integer',
     ];
@@ -194,6 +197,7 @@ class Episode extends Entity
                                 60
                         ),
                 $this->attributes['enclosure_filesize'],
+                $this->attributes['enclosure_duration'],
                 $this->attributes['enclosure_uri']
             )
         );
@@ -229,23 +233,49 @@ class Episode extends Entity
         );
     }
 
-    public function getDescriptionHtml()
+    public function setDescriptionMarkdown(string $descriptionMarkdown)
     {
         $converter = new CommonMarkConverter([
             'html_input' => 'strip',
             'allow_unsafe_links' => false,
         ]);
 
+        $this->attributes['description_markdown'] = $descriptionMarkdown;
+        $this->attributes['description_html'] = $converter->convertToHtml(
+            $descriptionMarkdown
+        );
+
+        return $this;
+    }
+
+    public function getDescriptionHtml()
+    {
         if (
-            $descriptionFooter = $this->getPodcast()->episode_description_footer
+            $descriptionFooter = $this->getPodcast()
+                ->episode_description_footer_html
         ) {
-            return $converter->convertToHtml($this->attributes['description']) .
+            return $this->attributes['description_html'] .
                 '<footer>' .
-                $converter->convertToHtml($descriptionFooter) .
+                $descriptionFooter .
                 '</footer>';
         }
 
-        return $converter->convertToHtml($this->attributes['description']);
+        return $this->attributes['description_html'];
+    }
+
+    public function getDescription()
+    {
+        if ($this->description) {
+            return $this->description;
+        }
+
+        return trim(
+            preg_replace(
+                '/\s+/',
+                ' ',
+                strip_tags($this->attributes['description_html'])
+            )
+        );
     }
 
     public function setCreatedBy(\App\Entities\User $user)

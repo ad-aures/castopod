@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Class AddAnalyticsUnknownUseragentsStoredProcedure
- * Creates analytics_unknown_useragents stored procedure in database
+ * Class AddAnalyticsUnknownUseragentsProcedure
+ * Creates analytics_unknown_useragents procedure in database
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
@@ -12,11 +12,11 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class AddAnalyticsUnknownUseragentsStoredProcedure extends Migration
+class AddAnalyticsUnknownUseragentsProcedure extends Migration
 {
     public function up()
     {
-        // Creates Stored Procedure for data insertion
+        // Creates Procedure for data insertion
         // Example: CALL analytics_unknown_useragents('Podcasts/1430.46 CFNetwork/1125.2 Darwin/19.4.0');
         $procedureName = $this->db->prefixTable('analytics_unknown_useragents');
         $createQuery = <<<EOD

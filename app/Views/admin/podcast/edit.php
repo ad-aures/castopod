@@ -88,7 +88,7 @@
             'class' => 'form-textarea',
             'required' => 'required',
         ],
-        old('description', $podcast->description, false),
+        old('description', $podcast->description_markdown, false),
         'data-editor="markdown"'
     ) ?>
 </div>
@@ -105,7 +105,7 @@
 <?= form_dropdown(
     'language',
     $languageOptions,
-    old('language', $podcast->language),
+    old('language', $podcast->language_code),
     [
         'id' => 'language',
         'class' => 'form-select mb-4',
@@ -261,7 +261,7 @@
     lang('Podcast.form.block'),
     ['id' => 'block', 'name' => 'block'],
     'yes',
-    old('block', $podcast->block),
+    old('block', $podcast->is_blocked),
     'mb-2'
 ) ?>
 
@@ -269,7 +269,7 @@
     lang('Podcast.form.complete'),
     ['id' => 'complete', 'name' => 'complete'],
     'yes',
-    old('complete', $podcast->complete),
+    old('complete', $podcast->is_completed),
     'mb-2'
 ) ?>
 
@@ -278,7 +278,7 @@
         hint_tooltip(lang('Podcast.form.lock_hint'), 'ml-1'),
     ['id' => 'lock', 'name' => 'lock'],
     'yes',
-    old('lock', $podcast->lock)
+    old('lock', $podcast->is_locked)
 ) ?>
 
 <?= form_section_close() ?>

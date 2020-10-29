@@ -16,12 +16,12 @@ class UserModel extends \Myth\Auth\Models\UserModel
     {
         if (!($found = cache("podcast{$podcastId}_contributors"))) {
             $found = $this->select('users.*, auth_groups.name as podcast_role')
-                ->join('users_podcasts', 'users_podcasts.user_id = users.id')
+                ->join('podcasts_users', 'podcasts_users.user_id = users.id')
                 ->join(
                     'auth_groups',
-                    'auth_groups.id = users_podcasts.group_id'
+                    'auth_groups.id = podcasts_users.group_id'
                 )
-                ->where('users_podcasts.podcast_id', $podcastId)
+                ->where('podcasts_users.podcast_id', $podcastId)
                 ->findAll();
 
             cache()->save("podcast{$podcastId}_contributors", $found, DECADE);
@@ -33,10 +33,10 @@ class UserModel extends \Myth\Auth\Models\UserModel
     public function getPodcastContributor($user_id, $podcast_id)
     {
         return $this->select(
-            'users.*, users_podcasts.podcast_id as podcast_id, auth_groups.name as podcast_role'
+            'users.*, podcasts_users.podcast_id as podcast_id, auth_groups.name as podcast_role'
         )
-            ->join('users_podcasts', 'users_podcasts.user_id = users.id')
-            ->join('auth_groups', 'auth_groups.id = users_podcasts.group_id')
+            ->join('podcasts_users', 'podcasts_users.user_id = users.id')
+            ->join('auth_groups', 'auth_groups.id = podcasts_users.group_id')
             ->where([
                 'users.id' => $user_id,
                 'podcast_id' => $podcast_id,

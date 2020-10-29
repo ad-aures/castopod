@@ -179,7 +179,7 @@
         ],
         old(
             'description_footer',
-            $podcast->episode_description_footer ?? '',
+            $podcast->episode_description_footer_markdown ?? '',
             false
         ),
         'data-editor="markdown"'

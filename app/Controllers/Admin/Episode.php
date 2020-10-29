@@ -112,7 +112,7 @@ class Episode extends BaseController
             'slug' => $this->request->getPost('slug'),
             'guid' => '',
             'enclosure' => $this->request->getFile('enclosure'),
-            'description' => $this->request->getPost('description'),
+            'description_markdown' => $this->request->getPost('description'),
             'image' => $this->request->getFile('image'),
             'parental_advisory' =>
                 $this->request->getPost('parental_advisory') !== 'undefined'
@@ -121,7 +121,7 @@ class Episode extends BaseController
             'number' => $this->request->getPost('episode_number'),
             'season_number' => $this->request->getPost('season_number'),
             'type' => $this->request->getPost('type'),
-            'block' => $this->request->getPost('block') == 'yes',
+            'is_blocked' => $this->request->getPost('block') == 'yes',
             'created_by' => user(),
             'updated_by' => user(),
             'published_at' => Time::createFromFormat(
@@ -140,11 +140,11 @@ class Episode extends BaseController
                 ->with('errors', $episodeModel->errors());
         }
 
-        // update podcast's episode_description_footer if changed
+        // update podcast's episode_description_footer_markdown if changed
         $podcastModel = new PodcastModel();
 
-        if ($this->podcast->hasChanged('episode_description_footer')) {
-            $this->podcast->episode_description_footer = $this->request->getPost(
+        if ($this->podcast->hasChanged('episode_description_footer_markdown')) {
+            $this->podcast->episode_description_footer_markdown = $this->request->getPost(
                 'description_footer'
             );
 
@@ -197,7 +197,9 @@ class Episode extends BaseController
 
         $this->episode->title = $this->request->getPost('title');
         $this->episode->slug = $this->request->getPost('slug');
-        $this->episode->description = $this->request->getPost('description');
+        $this->episode->description_markdown = $this->request->getPost(
+            'description'
+        );
         $this->episode->parental_advisory =
             $this->request->getPost('parental_advisory') !== 'undefined'
                 ? $this->request->getPost('parental_advisory')
@@ -207,7 +209,7 @@ class Episode extends BaseController
             ? $this->request->getPost('season_number')
             : null;
         $this->episode->type = $this->request->getPost('type');
-        $this->episode->block = $this->request->getPost('block') == 'yes';
+        $this->episode->is_blocked = $this->request->getPost('block') == 'yes';
         $this->episode->published_at = Time::createFromFormat(
             'Y-m-d H:i',
             $this->request->getPost('publication_date'),
@@ -233,12 +235,12 @@ class Episode extends BaseController
                 ->with('errors', $episodeModel->errors());
         }
 
-        // update podcast's episode_description_footer if changed
-        $this->podcast->episode_description_footer = $this->request->getPost(
+        // update podcast's episode_description_footer_markdown if changed
+        $this->podcast->episode_description_footer_markdown = $this->request->getPost(
             'description_footer'
         );
 
-        if ($this->podcast->hasChanged('episode_description_footer')) {
+        if ($this->podcast->hasChanged('episode_description_footer_markdown')) {
             $podcastModel = new PodcastModel();
             if (!$podcastModel->update($this->podcast->id, $this->podcast)) {
                 return redirect()

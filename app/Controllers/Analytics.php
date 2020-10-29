@@ -51,6 +51,7 @@ class Analytics extends Controller
         $episodeId,
         $bytesThreshold,
         $fileSize,
+        $duration,
         ...$filename
     ) {
         helper('media');
@@ -62,6 +63,7 @@ class Analytics extends Controller
             $episodeId,
             $bytesThreshold,
             $fileSize,
+            $duration,
             $serviceName
         );
         return redirect()->to(media_base_url($filename));

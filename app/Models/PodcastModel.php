@@ -19,10 +19,12 @@ class PodcastModel extends Model
         'id',
         'title',
         'name',
-        'description',
-        'episode_description_footer',
+        'description_markdown',
+        'description_html',
+        'episode_description_footer_markdown',
+        'episode_description_footer_html',
         'image_uri',
-        'language',
+        'language_code',
         'category_id',
         'parental_advisory',
         'owner_name',
@@ -30,13 +32,13 @@ class PodcastModel extends Model
         'publisher',
         'type',
         'copyright',
-        'block',
-        'complete',
-        'lock',
-        'created_by',
-        'updated_by',
         'imported_feed_url',
         'new_feed_url',
+        'is_blocked',
+        'is_completed',
+        'is_locked',
+        'created_by',
+        'updated_by',
     ];
 
     protected $returnType = \App\Entities\Podcast::class;
@@ -48,9 +50,9 @@ class PodcastModel extends Model
         'title' => 'required',
         'name' =>
             'required|regex_match[/^[a-zA-Z0-9\_]{1,191}$/]|is_unique[podcasts.name,id,{id}]',
-        'description' => 'required',
+        'description_markdown' => 'required',
         'image_uri' => 'required',
-        'language' => 'required',
+        'language_code' => 'required',
         'category_id' => 'required',
         'owner_email' => 'required|valid_email',
         'type' => 'required',
@@ -97,10 +99,10 @@ class PodcastModel extends Model
         if (!($found = cache("user{$userId}_podcasts"))) {
             $found = $this->select('podcasts.*')
                 ->join(
-                    'users_podcasts',
-                    'users_podcasts.podcast_id = podcasts.id'
+                    'podcasts_users',
+                    'podcasts_users.podcast_id = podcasts.id'
                 )
-                ->where('users_podcasts.user_id', $userId)
+                ->where('podcasts_users.user_id', $userId)
                 ->findAll();
 
             cache()->save("user{$userId}_podcasts", $found, DECADE);
@@ -119,7 +121,7 @@ class PodcastModel extends Model
             'group_id' => (int) $groupId,
         ];
 
-        return $this->db->table('users_podcasts')->insert($data);
+        return $this->db->table('podcasts_users')->insert($data);
     }
 
     public function updatePodcastContributor($userId, $podcastId, $groupId)
@@ -127,7 +129,7 @@ class PodcastModel extends Model
         cache()->delete("podcast{$podcastId}_contributors");
 
         return $this->db
-            ->table('users_podcasts')
+            ->table('podcasts_users')
             ->where([
                 'user_id' => (int) $userId,
                 'podcast_id' => (int) $podcastId,
@@ -140,7 +142,7 @@ class PodcastModel extends Model
         cache()->delete("podcast{$podcastId}_contributors");
 
         return $this->db
-            ->table('users_podcasts')
+            ->table('podcasts_users')
             ->where([
                 'user_id' => $userId,
                 'podcast_id' => $podcastId,
@@ -151,7 +153,7 @@ class PodcastModel extends Model
     public function getContributorGroupId($userId, $podcastId)
     {
         $user_podcast = $this->db
-            ->table('users_podcasts')
+            ->table('podcasts_users')
             ->select('group_id')
             ->where([
                 'user_id' => $userId,
