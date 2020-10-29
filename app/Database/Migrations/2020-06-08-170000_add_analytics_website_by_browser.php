@@ -28,7 +28,6 @@ class AddAnalyticsWebsiteByBrowser extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 191,
             ],
-
             'hits' => [
                 'type' => 'INT',
                 'unsigned' => true,

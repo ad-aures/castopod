@@ -64,11 +64,9 @@ class AddEpisodes extends Migration
             ],
             'description_markdown' => [
                 'type' => 'TEXT',
-                'null' => true,
             ],
             'description_html' => [
                 'type' => 'TEXT',
-                'null' => true,
             ],
             'image_uri' => [
                 'type' => 'VARCHAR',
