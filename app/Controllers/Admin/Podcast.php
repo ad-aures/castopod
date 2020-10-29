@@ -384,7 +384,9 @@ class Podcast extends BaseController
                 'number' =>
                     $this->request->getPost('force_renumber') === 'yes'
                         ? $itemNumber
-                        : $nsItunes->episode,
+                        : (!empty($nsItunes->episode)
+                            ? $nsItunes->episode
+                            : null),
                 'season_number' => empty(
                     $this->request->getPost('season_number')
                 )

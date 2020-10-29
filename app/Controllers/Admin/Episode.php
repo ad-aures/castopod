@@ -118,8 +118,12 @@ class Episode extends BaseController
                 $this->request->getPost('parental_advisory') !== 'undefined'
                     ? $this->request->getPost('parental_advisory')
                     : null,
-            'number' => $this->request->getPost('episode_number'),
-            'season_number' => $this->request->getPost('season_number'),
+            'number' => $this->request->getPost('episode_number')
+                ? $this->request->getPost('episode_number')
+                : null,
+            'season_number' => $this->request->getPost('season_number')
+                ? $this->request->getPost('season_number')
+                : null,
             'type' => $this->request->getPost('type'),
             'is_blocked' => $this->request->getPost('block') == 'yes',
             'created_by' => user(),
@@ -204,7 +208,9 @@ class Episode extends BaseController
             $this->request->getPost('parental_advisory') !== 'undefined'
                 ? $this->request->getPost('parental_advisory')
                 : null;
-        $this->episode->number = $this->request->getPost('episode_number');
+        $this->episode->number = $this->request->getPost('episode_number')
+            ? $this->request->getPost('episode_number')
+            : null;
         $this->episode->season_number = $this->request->getPost('season_number')
             ? $this->request->getPost('season_number')
             : null;

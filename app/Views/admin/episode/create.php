@@ -104,7 +104,6 @@
             'name' => 'episode_number',
             'class' => 'form-input w-full',
             'value' => old('episode_number'),
-            'required' => 'required',
             'type' => 'number',
         ]) ?>
     </div>

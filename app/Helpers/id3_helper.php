@@ -70,7 +70,7 @@ function write_enclosure_tags($episode)
             $episode->published_at ? $episode->published_at->format('Y') : '',
         ],
         'genre' => ['Podcast'],
-        'comment' => [$episode->description_html],
+        'comment' => [$episode->description],
         'track_number' => [strval($episode->number)],
         'copyright_message' => [$episode->podcast->copyright],
         'publisher' => [

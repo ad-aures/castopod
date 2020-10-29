@@ -27,37 +27,12 @@
                         ><?= $episode->title ?>
                         </a>
                         <div class="text-xs">
-                            <?php if (
-                                $episode->season_number &&
-                                $episode->number
-                            ): ?>
-                                    <abbr class="font-bold text-gray-600" title="<?= lang(
-                                        'Episode.season_episode',
-                                        [
-                                            'seasonNumber' =>
-                                                $episode->season_number,
-                                            'episodeNumber' => $episode->number,
-                                        ]
-                                    ) ?>"><?= lang(
-    'Episode.season_episode_abbr',
-    [
-        'seasonNumber' => $episode->season_number,
-        'episodeNumber' => $episode->number,
-    ]
-) ?></abbr>
-                            <?php elseif (
-                                !$episode->season_number &&
-                                $episode->number
-                            ): ?>
-                                <abbr class="font-bold text-gray-600" title="<?= lang(
-                                    'Episode.number',
-                                    [
-                                        'episodeNumber' => $episode->number,
-                                    ]
-                                ) ?>"><?= lang('Episode.number_abbr', [
-    'episodeNumber' => $episode->number,
-]) ?></abbr>
-                            <?php endif; ?>
+                            <?= episode_numbering(
+                                $episode->number,
+                                $episode->season_number,
+                                'font-bold text-gray-600',
+                                true
+                            ) ?>
                             <span class="mx-1">•</span>
                             <time
                             pubdate

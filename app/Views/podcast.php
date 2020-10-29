@@ -117,7 +117,12 @@
                                 <a class="text-sm hover:underline" href="<?= $episode->link ?>">
                                     <h2 class="inline-flex justify-between w-full font-bold leading-none group">
                                         <span class="mr-1 group-hover:underline"><?= $episode->title ?></span>
-                                        <span class="font-bold text-gray-600">#<?= $episode->number ?></span>
+                                        <?= episode_numbering(
+                                            $episode->number,
+                                            $episode->season_number,
+                                            'text-xs font-bold text-gray-600',
+                                            true
+                                        ) ?>
                                     </h2>
                                 </a>
                                 <div class="mb-2 text-xs">

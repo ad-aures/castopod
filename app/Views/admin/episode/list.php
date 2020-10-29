@@ -11,12 +11,10 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
-<?= button(
-    lang('Episode.create'),
-    route_to('episode-create', $podcast->id),
-
-    ['variant' => 'primary', 'iconLeft' => 'add']
-) ?>
+<?= button(lang('Episode.create'), route_to('episode-create', $podcast->id), [
+    'variant' => 'primary',
+    'iconLeft' => 'add',
+]) ?>
 <?= $this->endSection() ?>
 
 
@@ -43,34 +41,12 @@
                         ) ?>">
                             <h2 class="inline-flex justify-between w-full font-bold leading-none group">
                                 <span class="mr-1 group-hover:underline"><?= $episode->title ?></span>
-                                <?php if (
-                                    $episode->season_number &&
-                                    $episode->number
-                                ): ?>
-                                <abbr class="text-xs font-bold text-gray-600" title="<?= lang(
-                                    'Episode.season_episode',
-                                    [
-                                        'seasonNumber' =>
-                                            $episode->season_number,
-                                        'episodeNumber' => $episode->number,
-                                    ]
-                                ) ?>"><?= lang('Episode.season_episode_abbr', [
-    'seasonNumber' => $episode->season_number,
-    'episodeNumber' => $episode->number,
-]) ?></abbr>
-                                <?php elseif (
-                                    !$episode->season_number &&
-                                    $episode->number
-                                ): ?>
-                                    <abbr class="text-xs font-bold text-gray-600" title="<?= lang(
-                                        'Episode.number',
-                                        [
-                                            'episodeNumber' => $episode->number,
-                                        ]
-                                    ) ?>"><?= lang('Episode.number_abbr', [
-    'episodeNumber' => $episode->number,
-]) ?></abbr>
-                                <?php endif; ?>
+                                <?= episode_numbering(
+                                    $episode->number,
+                                    $episode->season_number,
+                                    'text-xs font-bold text-gray-600',
+                                    true
+                                ) ?>
                             </h2>
                         </a>
                         <div class="relative" data-toggle="dropdown">

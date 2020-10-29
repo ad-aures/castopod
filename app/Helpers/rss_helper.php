@@ -142,7 +142,8 @@ function get_rss_feed($podcast, $serviceName = '')
                 $itunes_namespace
             );
 
-        $item->addChild('episode', $episode->number, $itunes_namespace);
+        $episode->number &&
+            $item->addChild('episode', $episode->number, $itunes_namespace);
         $episode->season_number &&
             $item->addChild(
                 'season',

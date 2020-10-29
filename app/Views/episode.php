@@ -63,24 +63,11 @@
         alt="<?= $episode->title ?>" class="object-cover w-full max-w-xs mb-2 rounded-lg md:mb-0 md:mr-4" />
         <div class="flex flex-col w-full max-w-sm">
           <h1 class="text-lg font-semibold md:text-2xl"><?= $episode->title ?></h1>
-          <?php if ($episode->number): ?>
-            <p class="text-gray-600">
-                <?php if ($episode->season_number): ?>
-                    <a class="mr-1 underline hover:no-underline" href="<?= route_to(
-                        'podcast',
-                        $podcast->name
-                    ) .
-                        '?season=' .
-                        $episode->season_number ?>">
-                        <?= lang('Episode.season', [
-                            'seasonNumber' => $episode->season_number,
-                        ]) ?></a>
-                <?php endif; ?>
-                <?= lang('Episode.number', [
-                    'episodeNumber' => $episode->number,
-                ]) ?>
-            </p>
-          <?php endif; ?>
+          <?= episode_numbering(
+              $episode->number,
+              $episode->season_number,
+              'text-gray-600'
+          ) ?>
           <div class="text-sm">
               <time
               pubdate

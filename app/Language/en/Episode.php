@@ -12,6 +12,7 @@ return [
     'next_episode' => 'Next episode',
     'next_season' => 'Next season',
     'season' => 'Season {seasonNumber}',
+    'season_abbr' => 'S{seasonNumber}',
     'number' => 'Episode {episodeNumber}',
     'number_abbr' => 'Ep. {episodeNumber}',
     'season_episode' => 'Season {seasonNumber} episode {episodeNumber}',

@@ -259,9 +259,9 @@ if (!function_exists('data_table')) {
 
 if (!function_exists('publication_pill')) {
     /**
-     * Data table component
+     * Publication pill component
      *
-     * Creates a stylized table.
+     * Shows the stylized publication datetime in regards to current datetime.
      *
      * @param \CodeIgniter\I18n\Time    $publicationDate publication datetime of the episode
      * @param boolean                   $isPublished whether or not the episode has been published
@@ -303,4 +303,66 @@ if (!function_exists('publication_pill')) {
             '</span>';
     }
 }
+
+// ------------------------------------------------------------------------
+
+if (!function_exists('episode_numbering')) {
+    /**
+     * Returns relevant translated episode numbering.
+     *
+     * @param int|null  $episodeNumber
+     * @param int|null  $seasonNumber
+     * @param string    $class styling classes
+     * @param string    $is_abbr component will show abbreviated numbering if true
+     *
+     * @return string
+     */
+    function episode_numbering(
+        $episodeNumber = null,
+        $seasonNumber = null,
+        $class = '',
+        $isAbbr = false
+    ): string {
+        if (!$episodeNumber && !$seasonNumber) {
+            return '';
+        }
+
+        $transKey = '';
+        $args = [];
+        if ($episodeNumber && $seasonNumber) {
+            $transKey = 'Episode.season_episode';
+            $args = [
+                'seasonNumber' => $seasonNumber,
+                'episodeNumber' => $episodeNumber,
+            ];
+        } elseif ($episodeNumber && !$seasonNumber) {
+            $transKey = 'Episode.number';
+            $args = [
+                'episodeNumber' => $episodeNumber,
+            ];
+        } elseif (!$episodeNumber && $seasonNumber) {
+            $transKey = 'Episode.season';
+            $args = [
+                'seasonNumber' => $seasonNumber,
+            ];
+        }
+
+        if ($isAbbr) {
+            return '<abbr class="' .
+                $class .
+                '" title="' .
+                lang($transKey, $args) .
+                '">' .
+                lang($transKey . '_abbr', $args) .
+                '</abbr>';
+        }
+
+        return '<span class="' .
+            $class .
+            '">' .
+            lang($transKey, $args) .
+            '</span>';
+    }
+}
+
 // ------------------------------------------------------------------------
