@@ -179,25 +179,37 @@ class Episode extends Entity
 
     public function getEnclosureUrl()
     {
+        helper('analytics');
+
         return base_url(
             route_to(
                 'analytics_hit',
-                $this->attributes['podcast_id'],
-                $this->attributes['id'],
-                // bytes_threshold: number of bytes that must be downloaded for an episode to be counted in download analytics
-                // - if file is shorter than 60sec, then it's enclosure_filesize
-                // - if file is longer than 60 seconds then it's enclosure_headersize + 60 seconds
-                $this->attributes['enclosure_duration'] <= 60
-                    ? $this->attributes['enclosure_filesize']
-                    : $this->attributes['enclosure_headersize'] +
-                        floor(
-                            (($this->attributes['enclosure_filesize'] -
-                                $this->attributes['enclosure_headersize']) /
-                                $this->attributes['enclosure_duration']) *
-                                60
-                        ),
-                $this->attributes['enclosure_filesize'],
-                $this->attributes['enclosure_duration'],
+                base64_url_encode(
+                    pack(
+                        'I*',
+                        $this->attributes['podcast_id'],
+                        $this->attributes['id'],
+                        // bytes_threshold: number of bytes that must be downloaded for an episode to be counted in download analytics
+                        // - if file is shorter than 60sec, then it's enclosure_filesize
+                        // - if file is longer than 60 seconds then it's enclosure_headersize + 60 seconds
+                        $this->attributes['enclosure_duration'] <= 60
+                            ? $this->attributes['enclosure_filesize']
+                            : $this->attributes['enclosure_headersize'] +
+                                floor(
+                                    (($this->attributes['enclosure_filesize'] -
+                                        $this->attributes[
+                                            'enclosure_headersize'
+                                        ]) /
+                                        $this->attributes[
+                                            'enclosure_duration'
+                                        ]) *
+                                        60
+                                ),
+                        $this->attributes['enclosure_filesize'],
+                        $this->attributes['enclosure_duration'],
+                        strtotime($this->attributes['published_at'])
+                    )
+                ),
                 $this->attributes['enclosure_uri']
             )
         );

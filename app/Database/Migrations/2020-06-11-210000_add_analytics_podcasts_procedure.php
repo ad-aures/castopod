@@ -35,6 +35,7 @@ CREATE PROCEDURE `{$prefix}analytics_podcasts` (
     IN `p_bot` TINYINT(1) UNSIGNED,
     IN `p_filesize` INT UNSIGNED,
     IN `p_duration` INT UNSIGNED,
+    IN `p_age` INT UNSIGNED,
     IN `p_new_listener` TINYINT(1) UNSIGNED
     )  MODIFIES SQL DATA
 DETERMINISTIC
@@ -57,8 +58,8 @@ IF NOT `p_bot` THEN
     INSERT INTO `{$prefix}analytics_podcasts_by_hour`(`podcast_id`, `date`, `hour`)
         VALUES (p_podcast_id, @current_date, @current_hour)
         ON DUPLICATE KEY UPDATE `hits`=`hits`+1;
-    INSERT INTO `{$prefix}analytics_podcasts_by_episode`(`podcast_id`, `episode_id`, `date`, `age`)
-    SELECT p_podcast_id, p_episode_id, @current_date, datediff(@current_datetime,`published_at`) FROM `{$prefix}episodes` WHERE `id`= p_episode_id
+    INSERT INTO `{$prefix}analytics_podcasts_by_episode`(`podcast_id`, `episode_id`, `date`, `age`) 
+        VALUES (p_podcast_id, p_episode_id, @current_date, p_age)
         ON DUPLICATE KEY UPDATE `hits`=`hits`+1;
     INSERT INTO `{$prefix}analytics_podcasts_by_country`(`podcast_id`, `country_code`, `date`) 
         VALUES (p_podcast_id, p_country_code, @current_date) 

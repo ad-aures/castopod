@@ -31,6 +31,22 @@ if (!function_exists('getallheaders')) {
 }
 
 /**
+ * Encode Base64 for URLs
+ */
+function base64_url_encode($input)
+{
+    return strtr(base64_encode($input), '+/=', '._-');
+}
+
+/**
+ * Decode Base64 from URL
+ */
+function base64_url_decode($input)
+{
+    return base64_decode(strtr($input, '._-', '+/='));
+}
+
+/**
  * Set user country in session variable, for analytics purpose
  */
 function set_user_session_deny_list_ip()
@@ -245,6 +261,7 @@ function podcast_hit(
     $bytesThreshold,
     $fileSize,
     $duration,
+    $publicationDate,
     $serviceName
 ) {
     $session = \Config\Services::session();
@@ -311,6 +328,8 @@ function podcast_hit(
                 $db = \Config\Database::connect();
                 $procedureName = $db->prefixTable('analytics_podcasts');
 
+                $age = intdiv(time() - $publicationDate, 86400);
+
                 // We create a sha1 hash for this IP_Address+User_Agent+Podcast_ID (used to count unique listeners):
                 $listenerHashId =
                     '_IpUaPo_' .
@@ -337,7 +356,7 @@ function podcast_hit(
                 cache()->save($listenerHashId, $downloadsByUser, $midnightTTL);
 
                 $db->query(
-                    "CALL $procedureName(?,?,?,?,?,?,?,?,?,?,?,?,?,?);",
+                    "CALL $procedureName(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",
                     [
                         $podcastId,
                         $episodeId,
@@ -352,6 +371,7 @@ function podcast_hit(
                         $session->get('player')['bot'],
                         $fileSize,
                         $duration,
+                        $age,
                         $newListener,
                     ]
                 );

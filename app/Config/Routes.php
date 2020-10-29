@@ -31,6 +31,7 @@ $routes->setAutoRoute(false);
 
 $routes->addPlaceholder('podcastName', '[a-zA-Z0-9\_]{1,191}');
 $routes->addPlaceholder('slug', '[a-zA-Z0-9\-]{1,191}');
+$routes->addPlaceholder('base64', '[A-Za-z0-9\.\_]+\-{0,2}');
 
 /**
  * --------------------------------------------------------------------
@@ -59,14 +60,10 @@ $routes->group(config('App')->installGateway, function ($routes) {
     ]);
 });
 
-// Route for podcast audio file analytics (/audio/podcast_id/episode_id/bytes_threshold/filesize/duration/podcast_folder/filename.mp3)
-$routes->add(
-    'audio/(:num)/(:num)/(:num)/(:num)/(:num)/(:any)',
-    'Analytics::hit/$1/$2/$3/$4/$5/$6',
-    [
-        'as' => 'analytics_hit',
-    ]
-);
+// Route for podcast audio file analytics (/audio/pack(podcast_id,episode_id,bytes_threshold,filesize,duration,date)/podcast_folder/filename.mp3)
+$routes->add('audio/(:base64)/(:any)', 'Analytics::hit/$1/$2', [
+    'as' => 'analytics_hit',
+]);
 
 // Show the Unknown UserAgents
 $routes->get('.well-known/unknown-useragents', 'UnknownUserAgents');

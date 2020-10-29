@@ -46,24 +46,24 @@ class Analytics extends Controller
     }
 
     // Add one hit to this episode:
-    public function hit(
-        $podcastId,
-        $episodeId,
-        $bytesThreshold,
-        $fileSize,
-        $duration,
-        ...$filename
-    ) {
-        helper('media');
+    public function hit($base64EpisodeData, ...$filename)
+    {
+        helper('media', 'analytics');
 
         $serviceName = isset($_GET['_from']) ? $_GET['_from'] : '';
 
+        $episodeData = unpack(
+            'IpodcastId/IepisodeId/IbytesThreshold/IfileSize/Iduration/IpublicationDate',
+            base64_url_decode($base64EpisodeData)
+        );
+
         podcast_hit(
-            $podcastId,
-            $episodeId,
-            $bytesThreshold,
-            $fileSize,
-            $duration,
+            $episodeData['podcastId'],
+            $episodeData['episodeId'],
+            $episodeData['bytesThreshold'],
+            $episodeData['fileSize'],
+            $episodeData['duration'],
+            $episodeData['publicationDate'],
             $serviceName
         );
         return redirect()->to(media_base_url($filename));
