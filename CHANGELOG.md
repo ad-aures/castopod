@@ -1,3 +1,16 @@
+# [1.0.0-alpha.13](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.12...v1.0.0-alpha.13) (2020-10-29)
+
+
+### Bug Fixes
+
+* **episodes-table:** set descriptions to be not null ([6774ec1](https://code.podlibre.org/podlibre/castopod/commit/6774ec10fa78527be6b7548ca1dc34ad0ada090c))
+
+
+### Features
+
+* add episode_numbering() component helper to display episode and season numbers ([3f4a6bd](https://code.podlibre.org/podlibre/castopod/commit/3f4a6bd0b9f870f16107a41b102b6bf734868198))
+* **episodes:** replace all audio file URL parameters with base64 encoded data ([e1f65cd](https://code.podlibre.org/podlibre/castopod/commit/e1f65cd3b53353a30d4ab6eb5312393cf04a1676))
+
 # [1.0.0-alpha.12](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.11...v1.0.0-alpha.12) (2020-10-26)
 
 
