@@ -1,3 +1,10 @@
+# [1.0.0-alpha.14](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.13...v1.0.0-alpha.14) (2020-11-02)
+
+
+### Features
+
+* **analytics:** add weekday and hour bar charts ([8ab3132](https://code.podlibre.org/podlibre/castopod/commit/8ab313296bb4a254ab05e90b17d896039839b784))
+
 # [1.0.0-alpha.13](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.12...v1.0.0-alpha.13) (2020-10-29)
 
 
