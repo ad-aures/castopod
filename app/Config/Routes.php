@@ -159,6 +159,14 @@ $routes->group(
                         ]
                     );
                     $routes->get(
+                        'time-periods',
+                        'Podcast::viewAnalyticsTimePeriods/$1',
+                        [
+                            'as' => 'podcast-analytics-time-periods',
+                            'filter' => 'permission:podcasts-view,podcast-view',
+                        ]
+                    );
+                    $routes->get(
                         'players',
                         'Podcast::viewAnalyticsPlayers/$1',
                         [

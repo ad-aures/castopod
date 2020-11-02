@@ -28,4 +28,5 @@ return [
     'unique-listeners' => 'Auditeurs uniques',
     'players' => 'Lecteurs',
     'listening-time' => 'Durée d’écoute',
+    'time-periods' => 'Périodes',
 ];

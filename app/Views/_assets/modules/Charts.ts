@@ -52,7 +52,7 @@ const drawXYChart = (chartDivId: string, dataUrl: string | null): void => {
   const series = chart.series.push(new am4charts.LineSeries());
   series.dataFields.valueY = "values";
   series.dataFields.dateX = "labels";
-  series.tooltipText = "{valueY} hits";
+  series.tooltipText = "{valueY}";
   series.strokeWidth = 2;
   // Make bullets grow on hover
   const bullet = series.bullets.push(new am4charts.CircleBullet());
@@ -67,6 +67,35 @@ const drawXYChart = (chartDivId: string, dataUrl: string | null): void => {
   chart.cursor.xAxis = dateAxis;
   chart.scrollbarX = new am4core.Scrollbar();
 };
+
+const drawBarChart = (chartDivId: string, dataUrl: string | null): void => {
+  // Create chart instance
+  const chart = am4core.create(chartDivId, am4charts.XYChart);
+  am4core.percent(100);
+  chart.exporting.menu = new am4core.ExportMenu();
+  chart.exporting.menu.align = "right";
+  chart.exporting.menu.verticalAlign = "bottom";
+  // Set theme
+  am4core.useTheme(am4themes_material);
+  chart.dataSource.url = dataUrl || "";
+  chart.dataSource.parser.options.emptyAs = 0;
+  const categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+  categoryAxis.dataFields.category = "labels";
+  categoryAxis.renderer.grid.template.location = 0;
+  categoryAxis.renderer.minGridDistance = 30;
+  chart.yAxes.push(new am4charts.ValueAxis());
+  // Create series
+  const series = chart.series.push(new am4charts.ColumnSeries());
+  series.dataFields.valueY = "values";
+  series.dataFields.categoryX = "labels";
+  series.name = "Hits";
+  series.columns.template.tooltipText = "{valueY} hits";
+  series.columns.template.fillOpacity = .8;
+  const columnTemplate = series.columns.template;
+  columnTemplate.strokeWidth = 2;
+  columnTemplate.strokeOpacity = 1;
+};
+
 
 const drawXYDurationChart = (
   chartDivId: string,
@@ -204,6 +233,9 @@ const DrawCharts = (): void => {
         break;
       case "xy-chart":
         drawXYChart(chartDiv.id, chartDiv.getAttribute("data-chart-url"));
+        break;
+      case "bar-chart":
+        drawBarChart(chartDiv.id, chartDiv.getAttribute("data-chart-url"));
         break;
       case "xy-duration-chart":
         drawXYDurationChart(

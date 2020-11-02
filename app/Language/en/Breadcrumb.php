@@ -28,4 +28,5 @@ return [
     'unique-listeners' => 'Unique listeners',
     'players' => 'Players',
     'listening-time' => 'Listening time',
+    'time-periods' => 'Time periods',
 ];

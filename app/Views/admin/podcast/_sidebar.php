@@ -16,6 +16,7 @@ $podcastNavigation = [
             'podcast-analytics-listening-time',
             'podcast-analytics-players',
             'podcast-analytics-locations',
+            'podcast-analytics-time-periods',
             'podcast-analytics-webpages',
         ],
     ],

@@ -26,4 +26,5 @@ return [
     'podcast-analytics-unique-listeners' => 'Unique listeners',
     'podcast-analytics-players' => 'Players',
     'podcast-analytics-listening-time' => 'Listening time',
+    'podcast-analytics-time-periods' => 'Time periods',
 ];

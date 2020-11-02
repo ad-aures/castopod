@@ -98,6 +98,14 @@ class Podcast extends BaseController
         return view('admin/podcast/analytics/listening_time', $data);
     }
 
+    public function viewAnalyticsTimePeriods()
+    {
+        $data = ['podcast' => $this->podcast];
+
+        replace_breadcrumb_params([0 => $this->podcast->title]);
+        return view('admin/podcast/analytics/time_periods', $data);
+    }
+
     public function viewAnalyticsPlayers()
     {
         $data = ['podcast' => $this->podcast];

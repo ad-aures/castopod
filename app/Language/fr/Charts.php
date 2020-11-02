@@ -43,4 +43,7 @@ return [
     'podcast_bots' => 'Robots (bots)',
     'daily_listening_time' => 'Durée quotidienne d’écoute cumulée',
     'monthly_listening_time' => 'Durée mensuelle d’écoute cumulée',
+    'by_weekday' => 'Par jour de la semaine (sur les 60 derniers jours)',
+    'by_hour' => 'Par heure de la journée (sur les 60 derniers jours)',
+    'podcast_by_bandwidth' => 'Bande passante quotidienne consommée (en Mo)',
 ];

@@ -30,6 +30,16 @@
 </div>
 
 <div class="mb-12 text-center">
+<h2><?= lang('Charts.podcast_by_bandwidth') ?></h2>
+<div class="chart-xy" id="by-bandwidth-graph" data-chart-type="xy-chart" data-chart-url="<?= route_to(
+    'analytics-data',
+    $podcast->id,
+    'Podcast',
+    'BandwidthByDay'
+) ?>"></div>
+</div>
+
+<div class="mb-12 text-center">
 <h2><?= lang('Charts.episodes_by_day') ?></h2>
 <div class="chart-xy" id="by-age-graph" data-chart-type="xy-series-chart" data-chart-url="<?= route_to(
     'analytics-data',

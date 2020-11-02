@@ -30,4 +30,7 @@ return [
     'podcast_bots' => 'Bots (crawlers)',
     'daily_listening_time' => 'Daily cumulative listening time',
     'monthly_listening_time' => 'Monthly cumulative listening time',
+    'by_weekday' => 'By week day (for the past 60 days)',
+    'by_hour' => 'By time of day (for the past 60 days)',
+    'podcast_by_bandwidth' => 'Daily used bandwidth (in MB)',
 ];
