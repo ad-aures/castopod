@@ -1,3 +1,10 @@
+# [1.0.0-alpha.15](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.14...v1.0.0-alpha.15) (2020-11-03)
+
+
+### Features
+
+* **analytics:** add 'other' group to pie charts in order to display more accurate data ([73acef9](https://code.podlibre.org/podlibre/castopod/commit/73acef933ff3485987afc5157de022910876fc12))
+
 # [1.0.0-alpha.14](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.13...v1.0.0-alpha.14) (2020-11-02)
 
 
