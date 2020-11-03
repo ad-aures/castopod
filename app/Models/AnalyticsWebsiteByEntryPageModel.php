@@ -33,18 +33,18 @@ class AnalyticsWebsiteByEntryPageModel extends Model
     public function getData(int $podcastId): array
     {
         if (!($found = cache("{$podcastId}_analytics_website_by_entry_page"))) {
+            $oneWeekAgo = date('Y-m-d', strtotime('-1 week'));
             $found = $this->select(
                 'IF(`entry_page_url`=\'/\',\'/\',SUBSTRING_INDEX(`entry_page_url`,\'/\',-1)) as `labels`'
             )
                 ->selectSum('`hits`', '`values`')
                 ->where([
                     '`podcast_id`' => $podcastId,
-                    '`date` >' => date('Y-m-d', strtotime('-1 week')),
+                    '`date` >' => $oneWeekAgo,
                 ])
                 ->groupBy('`labels`')
                 ->orderBy('`values`', 'DESC')
-                ->findAll(10);
-
+                ->findAll();
             cache()->save(
                 "{$podcastId}_analytics_website_by_entry_page",
                 $found,

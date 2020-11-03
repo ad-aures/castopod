@@ -33,7 +33,9 @@ class AnalyticsPodcastByHourModel extends Model
     public function getData(int $podcastId): array
     {
         if (!($found = cache("{$podcastId}_analytics_podcasts_by_hour"))) {
-            $found = $this->select('`hour` as `labels`')
+            $found = $this->select(
+                'right(concat(\'0\',`hour`,\'h\'),3) as `labels`'
+            )
                 ->selectSum('`hits`', '`values`')
                 ->where([
                     '`podcast_id`' => $podcastId,
@@ -51,9 +53,4 @@ class AnalyticsPodcastByHourModel extends Model
         }
         return $found;
     }
-
-
-
-
-    
 }

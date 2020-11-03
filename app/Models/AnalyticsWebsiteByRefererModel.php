@@ -33,16 +33,16 @@ class AnalyticsWebsiteByRefererModel extends Model
     public function getData(int $podcastId): array
     {
         if (!($found = cache("{$podcastId}_analytics_website_by_referer"))) {
+            $oneWeekAgo = date('Y-m-d', strtotime('-1 week'));
             $found = $this->select('`referer_url` as `labels`')
                 ->selectSum('`hits`', '`values`')
                 ->where([
                     '`podcast_id`' => $podcastId,
-                    '`date` >' => date('Y-m-d', strtotime('-1 week')),
+                    '`date` >' => $oneWeekAgo,
                 ])
                 ->groupBy('`labels`')
                 ->orderBy('`values`', 'DESC')
-                ->findAll(10);
-
+                ->findAll();
             cache()->save(
                 "{$podcastId}_analytics_website_by_referer",
                 $found,
@@ -64,18 +64,18 @@ class AnalyticsWebsiteByRefererModel extends Model
         if (
             !($found = cache("{$podcastId}_analytics_website_by_domain_weekly"))
         ) {
+            $oneWeekAgo = date('Y-m-d', strtotime('-1 week'));
             $found = $this->select(
                 'SUBSTRING_INDEX(`domain`, \'.\', -2) as `labels`'
             )
                 ->selectSum('`hits`', '`values`')
                 ->where([
                     '`podcast_id`' => $podcastId,
-                    '`date` >' => date('Y-m-d', strtotime('-1 week')),
+                    '`date` >' => $oneWeekAgo,
                 ])
                 ->groupBy('`labels`')
                 ->orderBy('`values`', 'DESC')
-                ->findAll(10);
-
+                ->findAll();
             cache()->save(
                 "{$podcastId}_analytics_website_by_domain_weekly",
                 $found,
@@ -97,18 +97,18 @@ class AnalyticsWebsiteByRefererModel extends Model
         if (
             !($found = cache("{$podcastId}_analytics_website_by_domain_yearly"))
         ) {
+            $oneYearAgo = date('Y-m-d', strtotime('-1 year'));
             $found = $this->select(
                 'SUBSTRING_INDEX(`domain`, \'.\', -2) as `labels`'
             )
                 ->selectSum('`hits`', '`values`')
                 ->where([
                     '`podcast_id`' => $podcastId,
-                    '`date` >' => date('Y-m-d', strtotime('-1 year')),
+                    '`date` >' => $oneYearAgo,
                 ])
                 ->groupBy('`labels`')
                 ->orderBy('`values`', 'DESC')
-                ->findAll(10);
-
+                ->findAll();
             cache()->save(
                 "{$podcastId}_analytics_website_by_domain_yearly",
                 $found,

@@ -37,7 +37,7 @@ class AnalyticsPodcastByCountryModel extends Model
                 "{$podcastId}_analytics_podcast_by_country_weekly"
             ))
         ) {
-            $oneWeekAgo=date('Y-m-d', strtotime('-1 week'));
+            $oneWeekAgo = date('Y-m-d', strtotime('-1 week'));
             $found = $this->select('`country_code` as `labels`')
                 ->selectSum('`hits`', '`values`')
                 ->where([
@@ -46,24 +46,7 @@ class AnalyticsPodcastByCountryModel extends Model
                 ])
                 ->groupBy('`labels`')
                 ->orderBy('`values`', 'DESC')
-                ->findAll(9);
-
-            $found[] = $this->db
-                ->query(
-                    "SELECT
-                        \"Other\" AS `labels`,
-                        SUM(`others`.`values`) AS `values`
-                    FROM
-                        (SELECT SUM(`hits`) AS `values`
-                            FROM {$this->db->prefixTable($this->table)}
-                            WHERE `date` > $oneWeekAgo
-                            GROUP BY `country_code`
-                            ORDER BY `values` DESC
-                            LIMIT 18446744073709551610 OFFSET 9
-                        ) AS `others`
-                    GROUP BY `labels`"
-                )
-                ->getRow(0);
+                ->findAll();
 
             cache()->save(
                 "{$podcastId}_analytics_podcast_by_country_weekly",
@@ -97,24 +80,7 @@ class AnalyticsPodcastByCountryModel extends Model
                 ])
                 ->groupBy('`labels`')
                 ->orderBy('`values`', 'DESC')
-                ->findAll(10);
-
-            $found[] = $this->db
-                ->query(
-                    "SELECT
-                        \"Other\" AS `labels`,
-                        SUM(`others`.`values`) AS `values`
-                    FROM
-                        (SELECT SUM(`hits`) AS `values`
-                            FROM {$this->db->prefixTable($this->table)}
-                            WHERE `date` > $oneyearago
-                            GROUP BY `country_code`
-                            ORDER BY `values` DESC
-                            LIMIT 18446744073709551610 OFFSET 9
-                        ) AS `others`
-                    GROUP BY `labels`"
-                )
-                ->getRow(0);
+                ->findAll();
 
             cache()->save(
                 "{$podcastId}_analytics_podcast_by_country_yearly",
