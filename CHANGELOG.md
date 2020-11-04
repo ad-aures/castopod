@@ -1,3 +1,10 @@
+# [1.0.0-alpha.16](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.15...v1.0.0-alpha.16) (2020-11-04)
+
+
+### Features
+
+* add Open Graph and Twitter meta tags ([af970b8](https://code.podlibre.org/podlibre/castopod/commit/af970b8bac949e4c63047e04aca1b7403a4e8deb)), closes [#41](https://code.podlibre.org/podlibre/castopod/issues/41)
+
 # [1.0.0-alpha.15](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.14...v1.0.0-alpha.15) (2020-11-03)
 
 
