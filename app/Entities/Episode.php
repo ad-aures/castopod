@@ -51,6 +51,11 @@ class Episode extends Entity
     protected $enclosure_web_url;
 
     /**
+     * @var string
+     */
+    protected $enclosure_opengraph_url;
+
+    /**
      * Holds text only description, striped of any markdown or html special characters
      *
      * @var string
@@ -218,6 +223,11 @@ class Episode extends Entity
     public function getEnclosureWebUrl()
     {
         return $this->getEnclosureUrl() . '?_from=-+Website+-';
+    }
+
+    public function getEnclosureOpengraphUrl()
+    {
+        return $this->getEnclosureUrl() . '?_from=-+Open+Graph+-';
     }
 
     public function getLink()

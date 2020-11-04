@@ -9,7 +9,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
     <link rel="stylesheet" href="/assets/index.css"/>
+    <link rel="canonical" href="<?= current_url() ?>" />
     <script src="/assets/podcast.js" type="module" defer></script>
+    <meta property="og:title" content="<?= $episode->title ?>" />
+    <meta property="og:locale" content="<?= $podcast->language_code ?>" />
+    <meta property="og:site_name" content="<?= $podcast->title ?>" />
+    <meta property="og:url" content="<?= current_url() ?>" />
+    <meta property="article:published_time" content="<?= $episode->published_at ?>" />
+    <meta property="article:modified_time" content="<?= $episode->updated_at ?>" />
+    <meta property="og:image" content="<?= $episode->image->large_url ?>" />
+    <meta property="og:image:width" content="<?= config('Images')
+        ->largeSize ?>" />
+    <meta property="og:image:height" content="<?= config('Images')
+        ->largeSize ?>" />
+    <meta property="og:audio" content="<?= $episode->enclosure_opengraph_url ?>" />
+    <meta property="og:audio:type" content="<?= $episode->enclosure_mimetype ?>" />
+    <meta property="og:description" content="<?= $episode->description ?>" />
+    <meta name="twitter:card" content="summary_large_image" />
 </head>
 
 <body class="flex flex-col min-h-screen mx-auto">
