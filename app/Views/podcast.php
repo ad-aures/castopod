@@ -22,7 +22,7 @@
         ->largeSize ?>" />
     <meta property="og:image:height" content="<?= config('Images')
         ->largeSize ?>" />
-    <meta property="og:description" content="<?= $episode->description ?>" />
+    <meta property="og:description" content="<?= $podcast->description ?>" />
     <meta name="twitter:card" content="summary_large_image" />
 </head>
 
