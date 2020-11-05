@@ -1,3 +1,10 @@
+# [1.0.0-alpha.17](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.16...v1.0.0-alpha.17) (2020-11-05)
+
+
+### Bug Fixes
+
+* **open-graph:** replace non existant episode description to podcast description in podcast page ([b02584e](https://code.podlibre.org/podlibre/castopod/commit/b02584ee609af1ad1b5680cc28208d113eb0410b))
+
 # [1.0.0-alpha.16](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.15...v1.0.0-alpha.16) (2020-11-04)
 
 
