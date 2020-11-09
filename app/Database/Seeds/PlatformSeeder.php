@@ -100,6 +100,12 @@ class PlatformSeeder extends Seeder
                 'submit_url' => 'https://podcastaddict.com/submit',
             ],
             [
+                'name' => 'podcast-index',
+                'label' => 'Podcast Index',
+                'home_url' => 'https://podcastindex.org/',
+                'submit_url' => 'https://api.podcastindex.org/signup',
+            ],
+            [
                 'name' => 'podchaser',
                 'label' => 'Podchaser',
                 'home_url' => 'https://www.podchaser.com/',
