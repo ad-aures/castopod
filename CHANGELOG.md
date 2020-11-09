@@ -1,3 +1,10 @@
+# [1.0.0-alpha.18](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.17...v1.0.0-alpha.18) (2020-11-09)
+
+
+### Features
+
+* **platforms:** add Podcast Index ([ad52b1c](https://code.podlibre.org/podlibre/castopod/commit/ad52b1cc2b7d0bc844970214d205961a7196b4a9))
+
 # [1.0.0-alpha.17](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.16...v1.0.0-alpha.17) (2020-11-05)
 
 
