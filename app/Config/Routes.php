@@ -433,6 +433,7 @@ $routes->group('@(:podcastName)', function ($routes) {
     $routes->get('(:slug)', 'Episode/$1/$2', [
         'as' => 'episode',
     ]);
+    $routes->head('feed.xml', 'Feed/$1', ['as' => 'podcast_feed']);
     $routes->get('feed.xml', 'Feed/$1', ['as' => 'podcast_feed']);
 });
 $routes->get('/(:slug)', 'Page/$1', ['as' => 'page']);
