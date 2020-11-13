@@ -1,3 +1,10 @@
+# [1.0.0-alpha.19](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.18...v1.0.0-alpha.19) (2020-11-13)
+
+
+### Bug Fixes
+
+* handle HEAD requests on podcast_feed route ([74b2640](https://code.podlibre.org/podlibre/castopod/commit/74b2640f2a25c4cd6fd8835fc492c2a6893d4950)), closes [#79](https://code.podlibre.org/podlibre/castopod/issues/79)
+
 # [1.0.0-alpha.18](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.17...v1.0.0-alpha.18) (2020-11-09)
 
 
