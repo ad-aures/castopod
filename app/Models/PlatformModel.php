@@ -18,47 +18,63 @@ class PlatformModel extends Model
     protected $table = 'platforms';
     protected $primaryKey = 'id';
 
-    protected $allowedFields = ['name', 'label', 'home_url', 'submit_url'];
+    protected $allowedFields = ['slug', 'label', 'home_url', 'submit_url'];
 
     protected $returnType = \App\Entities\Platform::class;
     protected $useSoftDeletes = false;
 
     protected $useTimestamps = true;
 
-    public function getPlatformsWithLinks($podcastId)
+    public function getPlatforms()
     {
-        if (!($found = cache("podcast{$podcastId}_platforms"))) {
+        if (!($found = cache('platforms'))) {
+            $baseUrl = rtrim(config('app')->baseURL, '/');
             $found = $this->select(
-                'platforms.*, platform_links.link_url, platform_links.is_visible'
-            )
-                ->join(
-                    'platform_links',
-                    "platform_links.platform_id = platforms.id AND platform_links.podcast_id = $podcastId",
-                    'left'
-                )
-                ->findAll();
-
-            cache()->save("podcast{$podcastId}_platforms", $found, DECADE);
+                "*, CONCAT('{$baseUrl}/assets/images/platforms/',`type`,'/',`slug`,'.svg') as icon"
+            )->findAll();
+            cache()->save('platforms', $found, DECADE);
         }
-
         return $found;
     }
 
-    public function getPodcastPlatforms($podcastId)
+    public function getOrCreatePlatform($slug, $platformType)
     {
-        if (!($found = cache("podcast{$podcastId}_podcastPlatforms"))) {
+        if (!($found = cache("platforms_$slug"))) {
+            $found = $this->where('slug', $slug)->first();
+            if (!$found) {
+                $data = [
+                    'slug' => $slug,
+                    'type' => $platformType,
+                    'label' => $slug,
+                    'home_url' => '',
+                    'submit_url' => null,
+                ];
+                $this->insert($data);
+                $found = $this->where('slug', $slug)->first();
+            }
+            cache()->save("platforms_$slug", $found, DECADE);
+        }
+        return $found;
+    }
+
+    public function getPlatformsWithLinks($podcastId, $platformType)
+    {
+        if (
+            !($found = cache("podcast{$podcastId}_platforms_{$platformType}"))
+        ) {
             $found = $this->select(
-                'platforms.*, platform_links.link_url, platform_links.is_visible'
+                'platforms.*, podcasts_platforms.link_url, podcasts_platforms.link_content, podcasts_platforms.is_visible'
             )
                 ->join(
-                    'platform_links',
-                    'platform_links.platform_id = platforms.id'
+                    'podcasts_platforms',
+                    "podcasts_platforms.platform_slug = platforms.slug AND podcasts_platforms.podcast_id = $podcastId",
+                    'left'
                 )
-                ->where('platform_links.podcast_id', $podcastId)
+                ->where('platforms.type', $platformType)
                 ->findAll();
 
             cache()->save(
-                "podcast{$podcastId}_podcastPlatforms",
+                "podcast{$podcastId}_platforms_{$platformType}",
                 $found,
                 DECADE
             );
@@ -67,49 +83,85 @@ class PlatformModel extends Model
         return $found;
     }
 
-    public function savePodcastPlatforms($podcastId, $platformLinksData)
+    public function getPodcastPlatforms($podcastId, $platformType)
     {
+        if (
+            !($found = cache(
+                "podcast{$podcastId}_podcastPlatforms_{$platformType}"
+            ))
+        ) {
+            $found = $this->select(
+                'platforms.*, podcasts_platforms.link_url, podcasts_platforms.link_content, podcasts_platforms.is_visible'
+            )
+                ->join(
+                    'podcasts_platforms',
+                    'podcasts_platforms.platform_slug = platforms.slug'
+                )
+                ->where('podcasts_platforms.podcast_id', $podcastId)
+                ->where('platforms.type', $platformType)
+                ->findAll();
+
+            cache()->save(
+                "podcast{$podcastId}_podcastPlatforms_{$platformType}",
+                $found,
+                DECADE
+            );
+        }
+
+        return $found;
+    }
+
+    public function savePodcastPlatforms(
+        $podcastId,
+        $platformType,
+        $podcastsPlatformsData
+    ) {
         $this->clearCache($podcastId);
 
-        // Remove already previously set platforms to overwrite them
-        $this->db
-            ->table('platform_links')
-            ->delete(['podcast_id' => $podcastId]);
+        $podcastsPlatformsTable = $this->db->prefixTable('podcasts_platforms');
+        $platformsTable = $this->db->prefixTable('platforms');
+        $deleteJoinQuery = <<<EOD
+DELETE $podcastsPlatformsTable
+FROM $podcastsPlatformsTable
+INNER JOIN $platformsTable ON $platformsTable.slug = $podcastsPlatformsTable.platform_slug
+WHERE `podcast_id` = ? AND `type` = ?
+EOD;
+        $this->db->query($deleteJoinQuery, [$podcastId, $platformType]);
 
         // Set podcastPlatforms
         return $this->db
-            ->table('platform_links')
-            ->insertBatch($platformLinksData);
+            ->table('podcasts_platforms')
+            ->insertBatch($podcastsPlatformsData);
     }
 
-    public function getPlatformId(string $platformName)
-    {
-        $p = $this->where('name', $platformName)->first();
-
-        if (!$p) {
-            $this->error = lang('Platform.platformNotFound', [$platformName]);
-
-            return false;
-        }
-
-        return (int) $p->id;
-    }
-
-    public function removePodcastPlatform($podcastId, $platformId)
+    public function createPodcastPlatforms($podcastId, $podcastsPlatformsData)
     {
         $this->clearCache($podcastId);
 
-        return $this->db->table('platform_links')->delete([
+        // Set podcastPlatforms
+        return $this->db
+            ->table('podcasts_platforms')
+            ->insertBatch($podcastsPlatformsData);
+    }
+
+    public function removePodcastPlatform($podcastId, $platformSlug)
+    {
+        $this->clearCache($podcastId);
+
+        return $this->db->table('podcasts_platforms')->delete([
             'podcast_id' => $podcastId,
-            'platform_id' => $platformId,
+            'platform_slug' => $platformSlug,
         ]);
     }
 
     public function clearCache($podcastId)
     {
-        cache()->delete("podcast{$podcastId}_platforms");
-        cache()->delete("podcast{$podcastId}_podcastPlatforms");
-
+        foreach (['podcasting', 'social', 'funding'] as $platformType) {
+            cache()->delete("podcast{$podcastId}_platforms_{$platformType}");
+            cache()->delete(
+                "podcast{$podcastId}_podcastPlatforms_{$platformType}"
+            );
+        }
         // delete localized podcast page cache
         $episodeModel = new EpisodeModel();
         $years = $episodeModel->getYears($podcastId);

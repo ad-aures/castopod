@@ -19,4 +19,9 @@ return [
         'removeLinkError' =>
             'Le lien n’a pas pu être supprimé. Merci d’essayer à nouveau.',
     ],
+    'description' => [
+        'podcasting' => 'L’identifiant du podcast sur cette plate-forme',
+        'social' => 'L’identifiant du compte du podcast sur cette plate-forme',
+        'funding' => 'Message d’incitation à l’action',
+    ],
 ];

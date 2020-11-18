@@ -32,6 +32,7 @@ $routes->setAutoRoute(false);
 $routes->addPlaceholder('podcastName', '[a-zA-Z0-9\_]{1,191}');
 $routes->addPlaceholder('slug', '[a-zA-Z0-9\-]{1,191}');
 $routes->addPlaceholder('base64', '[A-Za-z0-9\.\_]+\-{0,2}');
+$routes->addPlaceholder('platformType', '\bpodcasting|\bsocial|\bfunding');
 
 /**
  * --------------------------------------------------------------------
@@ -69,6 +70,8 @@ $routes->add('audio/(:base64)/(:any)', 'Analytics::hit/$1/$2', [
 $routes->get('.well-known/unknown-useragents', 'UnknownUserAgents');
 $routes->get('.well-known/unknown-useragents/(:num)', 'UnknownUserAgents/$1');
 
+$routes->get('.well-known/platforms', 'Platform');
+
 // Admin area
 $routes->group(
     config('App')->adminGateway,
@@ -94,11 +97,11 @@ $routes->group(
             $routes->post('new', 'Podcast::attemptCreate', [
                 'filter' => 'permission:podcasts-create',
             ]);
-            $routes->get('import', 'Podcast::import', [
+            $routes->get('import', 'PodcastImport', [
                 'as' => 'podcast-import',
                 'filter' => 'permission:podcasts-import',
             ]);
-            $routes->post('import', 'Podcast::attemptImport', [
+            $routes->post('import', 'PodcastImport::attemptImport', [
                 'filter' => 'permission:podcasts-import',
             ]);
 
@@ -280,25 +283,44 @@ $routes->group(
                     });
                 });
 
-                $routes->group('settings', function ($routes) {
-                    $routes->get('/', 'PodcastSettings/$1', [
-                        'as' => 'podcast-settings',
-                    ]);
-                    $routes->get('platforms', 'PodcastSettings::platforms/$1', [
-                        'as' => 'platforms',
-                        'filter' => 'permission:podcast-manage_platforms',
-                    ]);
-                    $routes->post(
-                        'platforms',
-                        'PodcastSettings::attemptPlatformsUpdate/$1',
-                        ['filter' => 'permission:podcast-manage_platforms']
-                    );
-
-                    $routes->add(
-                        'platforms/(:num)/remove-link',
-                        'PodcastSettings::removePlatformLink/$1/$2',
+                $routes->group('platforms', function ($routes) {
+                    $routes->get(
+                        '/',
+                        'PodcastPlatform::platforms/$1/podcasting',
                         [
-                            'as' => 'platforms-remove',
+                            'as' => 'platforms-podcasting',
+                            'filter' => 'permission:podcast-manage_platforms',
+                        ]
+                    );
+                    $routes->get(
+                        'social',
+                        'PodcastPlatform::platforms/$1/social',
+                        [
+                            'as' => 'platforms-social',
+                            'filter' => 'permission:podcast-manage_platforms',
+                        ]
+                    );
+                    $routes->get(
+                        'funding',
+                        'PodcastPlatform::platforms/$1/funding',
+                        [
+                            'as' => 'platforms-funding',
+                            'filter' => 'permission:podcast-manage_platforms',
+                        ]
+                    );
+                    $routes->post(
+                        'save/(:platformType)',
+                        'PodcastPlatform::attemptPlatformsUpdate/$1/$2',
+                        [
+                            'as' => 'platforms-save',
+                            'filter' => 'permission:podcast-manage_platforms',
+                        ]
+                    );
+                    $routes->add(
+                        '(:slug)/podcast-platform-remove',
+                        'PodcastPlatform::removePodcastPlatform/$1/$2',
+                        [
+                            'as' => 'podcast-platform-remove',
                             'filter' => 'permission:podcast-manage_platforms',
                         ]
                     );

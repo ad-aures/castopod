@@ -10,7 +10,7 @@
 
 <?= $this->section('content') ?>
 
-<?= form_open(route_to('platforms', $podcast->id), [
+<?= form_open(route_to('platforms-save', $podcast->id, $platformType), [
     'class' => 'flex flex-col max-w-md',
 ]) ?>
 <?= csrf_field() ?>
@@ -19,7 +19,11 @@
 
 <div class="relative flex items-start mb-4">
     <div class="flex flex-col w-12 mr-4">
-        <?= platform_icon($platform->name, 'w-full mb-1') ?>
+        <?= platform_icon(
+            $platform->type,
+            $platform->slug,
+            'w-full mb-1 text-gray-800'
+        ) ?>
         <div class="inline-flex bg-gray-200">
             <?= anchor($platform->home_url, icon('external-link', 'mx-auto'), [
                 'class' => 'flex-1 text-gray-600 hover:text-gray-900',
@@ -32,7 +36,7 @@
                 ]),
             ]) ?>
             <?= $platform->submit_url
-                ? anchor($platform->submit_url, icon('upload', 'mx-auto'), [
+                ? anchor($platform->submit_url, icon('add-box', 'mx-auto'), [
                     'class' => 'flex-1 text-gray-600 hover:text-gray-900',
                     'target' => '_blank',
                     'rel' => 'noopener noreferrer',
@@ -48,7 +52,11 @@
     <div class="flex flex-col flex-1">
         <?= $platform->link_url
             ? anchor(
-                route_to('platforms-remove', $podcast->id, $platform->id),
+                route_to(
+                    'podcast-platform-remove',
+                    $podcast->id,
+                    $platform->slug
+                ),
                 icon('delete-bin', 'mx-auto'),
                 [
                     'class' =>
@@ -61,26 +69,37 @@
                 ]
             )
             : '' ?>
-        <?= form_label($platform->label, $platform->name, [
+        <?= form_label($platform->label, $platform->slug, [
             'class' => 'font-semibold mb-2',
         ]) ?>
         <?= form_input([
-            'id' => $platform->name,
-            'name' => 'platforms[' . $platform->name . '][url]',
+            'id' => $platform->slug . '_link_url',
+            'name' => 'platforms[' . $platform->slug . '][url]',
             'class' => 'form-input mb-1 w-full',
-            'value' => old($platform->name, $platform->link_url),
+            'value' => old($platform->slug . '_link_url', $platform->link_url),
             'type' => 'url',
             'placeholder' => 'https://...',
+        ]) ?>
+        <?= form_input([
+            'id' => $platform->slug . '_link_content',
+            'name' => 'platforms[' . $platform->slug . '][content]',
+            'class' => 'form-input mb-1 w-full',
+            'value' => old(
+                $platform->slug . '_link_content',
+                $platform->link_content
+            ),
+            'type' => 'text',
+            'placeholder' => lang("Platforms.description.{$platform->type}"),
         ]) ?>
         <?= form_switch(
             lang('Platforms.visible'),
             [
-                'id' => $platform->name . '_visible',
-                'name' => 'platforms[' . $platform->name . '][visible]',
+                'id' => $platform->slug . '_visible',
+                'name' => 'platforms[' . $platform->slug . '][visible]',
             ],
             'yes',
             old(
-                $platform->name . '_visible',
+                $platform->slug . '_visible',
                 $platform->is_visible ? $platform->is_visible : false
             ),
             'text-sm'

@@ -19,4 +19,9 @@ return [
         'removeLinkError' =>
             'The platform link could not be removed. Try again.',
     ],
+    'description' => [
+        'podcasting' => 'The podcast ID on this platform',
+        'social' => 'The podcast account ID on this platform',
+        'funding' => 'Call to action message',
+    ],
 ];

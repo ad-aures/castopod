@@ -55,7 +55,17 @@ class Podcast extends Entity
     /**
      * @var \App\Entities\Platform
      */
-    protected $platforms;
+    protected $podcastingPlatforms;
+
+    /**
+     * @var \App\Entities\Platform
+     */
+    protected $socialPlatforms;
+
+    /**
+     * @var \App\Entities\Platform
+     */
+    protected $fundingPlatforms;
 
     /**
      * Holds text only description, striped of any markdown or html special characters
@@ -260,25 +270,72 @@ class Podcast extends Entity
     }
 
     /**
-     * Returns the podcast's platform links
+     * Returns the podcast's podcasting platform links
      *
      * @return \App\Entities\Platform[]
      */
-    public function getPlatforms()
+    public function getPodcastingPlatforms()
     {
         if (empty($this->id)) {
             throw new \RuntimeException(
-                'Podcast must be created before getting platform links.'
+                'Podcast must be created before getting podcasting platform links.'
             );
         }
 
-        if (empty($this->platforms)) {
-            $this->platforms = (new PlatformModel())->getPodcastPlatforms(
-                $this->id
+        if (empty($this->podcastingPlatforms)) {
+            $this->podcastingPlatforms = (new PlatformModel())->getPodcastPlatforms(
+                $this->id,
+                'podcasting'
             );
         }
 
-        return $this->platforms;
+        return $this->podcastingPlatforms;
+    }
+
+    /**
+     * Returns the podcast's social platform links
+     *
+     * @return \App\Entities\Platform[]
+     */
+    public function getSocialPlatforms()
+    {
+        if (empty($this->id)) {
+            throw new \RuntimeException(
+                'Podcast must be created before getting social platform links.'
+            );
+        }
+
+        if (empty($this->socialPlatforms)) {
+            $this->socialPlatforms = (new PlatformModel())->getPodcastPlatforms(
+                $this->id,
+                'social'
+            );
+        }
+
+        return $this->socialPlatforms;
+    }
+
+    /**
+     * Returns the podcast's funding platform links
+     *
+     * @return \App\Entities\Platform[]
+     */
+    public function getFundingPlatforms()
+    {
+        if (empty($this->id)) {
+            throw new \RuntimeException(
+                'Podcast must be created before getting funding platform links.'
+            );
+        }
+
+        if (empty($this->fundingPlatforms)) {
+            $this->fundingPlatforms = (new PlatformModel())->getPodcastPlatforms(
+                $this->id,
+                'funding'
+            );
+        }
+
+        return $this->fundingPlatforms;
     }
 
     public function getOtherCategories()

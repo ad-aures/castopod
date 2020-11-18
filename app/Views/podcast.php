@@ -32,7 +32,7 @@
             <div class="flex flex-col items-center justify-center md:items-stretch md:mx-auto md:container md:py-12 md:flex-row ">
                 <img src="<?= $podcast->image->medium_url ?>"
                 alt="<?= $podcast->title ?>" class="object-cover w-full max-w-xs m-4 rounded-lg shadow-xl" />
-                <div class="bg-white w-fullp-4 md:max-w-md md:text-white md:bg-transparent">
+                <div class="w-full p-4 bg-white md:max-w-md md:text-white md:bg-transparent">
                     <h1 class="text-2xl font-semibold leading-tight"><?= $podcast->title ?> <span class="text-lg font-normal opacity-75">@<?= $podcast->name ?></span></h1>
                     <div class="flex items-center mb-4">
                         <address>
@@ -46,23 +46,65 @@
                                 '</span>'
                             : '' ?>
                     </div>
-                    <div class="inline-flex">
+                    <div class="flex mb-2 space-x-2">
                         <?= anchor(
                             route_to('podcast_feed', $podcast->name),
                             icon('rss', 'mr-2') . lang('Podcast.feed'),
                             [
                                 'class' =>
-                                    'text-white bg-gradient-to-r from-orange-400 to-red-500 hover:to-orange-500 hover:bg-orange-500 inline-flex items-center px-2 py-1 mb-2 font-semibold rounded-lg shadow-md hover:bg-orange-600',
+                                    'text-white bg-gradient-to-r from-orange-400 to-red-500 hover:to-orange-500 hover:bg-orange-500 inline-flex items-center px-2 py-1 font-semibold rounded-lg shadow-md hover:bg-orange-600',
                             ]
                         ) ?>
-                    <?php foreach ($podcast->platforms as $platform): ?>
-                        <?php if ($platform->is_visible): ?>
-                            <a href="<?= $platform->link_url ?>" title="<?= $platform->label ?>" target="_blank" rel="noopener noreferrer" class="ml-2">
-                            <?= platform_icon($platform->name, 'h-8') ?>
+                    <?php foreach (
+                        $podcast->podcastingPlatforms
+                        as $podcastingPlatform
+                    ): ?>
+                        <?php if ($podcastingPlatform->is_visible): ?>
+                            <a href="<?= $podcastingPlatform->link_url ?>" title="<?= $podcastingPlatform->label ?>" target="_blank" rel="noopener noreferrer">
+                            <?= platform_icon(
+                                $podcastingPlatform->type,
+                                $podcastingPlatform->slug,
+                                'h-8'
+                            ) ?>
                             </a>
                         <?php endif; ?>
                     <?php endforeach; ?>
                     </div>
+                               
+                    <div class="flex mb-2 space-x-2">
+                    <?php foreach (
+                        $podcast->socialPlatforms
+                        as $socialPlatform
+                    ): ?>
+                        <?php if ($socialPlatform->is_visible): ?>
+                            <a href="<?= $socialPlatform->link_url ?>" title="<?= $socialPlatform->label ?>" target="_blank" rel="noopener noreferrer">
+                            <?= platform_icon(
+                                $socialPlatform->type,
+                                $socialPlatform->slug,
+                                'h-8 text-black md:text-white'
+                            ) ?>
+                            </a>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                    </div>
+               
+                    <div class="flex mb-2 space-x-2">
+                    <?php foreach (
+                        $podcast->fundingPlatforms
+                        as $fundingPlatform
+                    ): ?>
+                        <?php if ($fundingPlatform->is_visible): ?>
+                            <a href="<?= $fundingPlatform->link_url ?>" title="<?= $fundingPlatform->link_content ?>" target="_blank" rel="noopener noreferrer">
+                            <?= platform_icon(
+                                $fundingPlatform->type,
+                                $fundingPlatform->slug,
+                                'h-8'
+                            ) ?>
+                            </a>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                    </div>
+                    
                     <div class="mb-2 opacity-75">
                         <?= $podcast->description_html ?>
                     </div>

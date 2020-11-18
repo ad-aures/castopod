@@ -71,6 +71,71 @@ function get_rss_feed($podcast, $serviceName = '')
             $podcast_namespace
         )
         ->addAttribute('owner', $podcast->owner_email);
+    if (!empty($podcast->imported_feed_url)) {
+        $channel->addChildWithCDATA(
+            'previousUrl',
+            $podcast->imported_feed_url,
+            $podcast_namespace
+        );
+    }
+
+    foreach ($podcast->podcastingPlatforms as $podcastingPlatform) {
+        $podcastingPlatformElement = $channel->addChild(
+            'id',
+            null,
+            $podcast_namespace
+        );
+        $podcastingPlatformElement->addAttribute(
+            'platform',
+            $podcastingPlatform->slug
+        );
+        if (!empty($podcastingPlatform->link_content)) {
+            $podcastingPlatformElement->addAttribute(
+                'id',
+                $podcastingPlatform->link_content
+            );
+        }
+        if (!empty($podcastingPlatform->link_url)) {
+            $podcastingPlatformElement->addAttribute(
+                'url',
+                htmlspecialchars($podcastingPlatform->link_url)
+            );
+        }
+    }
+
+    foreach ($podcast->socialPlatforms as $socialPlatform) {
+        $socialPlatformElement = $channel->addChild(
+            'social',
+            $socialPlatform->link_content,
+            $podcast_namespace
+        );
+        $socialPlatformElement->addAttribute('platform', $socialPlatform->slug);
+        if (!empty($socialPlatform->link_url)) {
+            $socialPlatformElement->addAttribute(
+                'url',
+                htmlspecialchars($socialPlatform->link_url)
+            );
+        }
+    }
+
+    foreach ($podcast->fundingPlatforms as $fundingPlatform) {
+        $fundingPlatformElement = $channel->addChild(
+            'funding',
+            $fundingPlatform->link_content,
+            $podcast_namespace
+        );
+        $fundingPlatformElement->addAttribute(
+            'platform',
+            $fundingPlatform->slug
+        );
+        if (!empty($socialPlatform->link_url)) {
+            $fundingPlatformElement->addAttribute(
+                'url',
+                htmlspecialchars($fundingPlatform->link_url)
+            );
+        }
+    }
+
     // set main category first, then other categories as apple
     add_category_tag($channel, $podcast->category);
     foreach ($podcast->other_categories as $other_category) {

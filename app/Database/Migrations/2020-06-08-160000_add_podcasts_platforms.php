@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Class AddPlatformsLinks
- * Creates platform_links table in database
+ * Class AddAddPodcastsPlatforms
+ * Creates podcasts_platforms table in database
  *
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -22,13 +22,18 @@ class AddPodcastsPlatforms extends Migration
                 'type' => 'INT',
                 'unsigned' => true,
             ],
-            'platform_id' => [
-                'type' => 'INT',
-                'unsigned' => true,
+            'platform_slug' => [
+                'type' => 'VARCHAR',
+                'constraint' => 32,
             ],
             'link_url' => [
                 'type' => 'VARCHAR',
                 'constraint' => 512,
+            ],
+            'link_content' => [
+                'type' => 'VARCHAR',
+                'constraint' => 128,
+                'null' => true,
             ],
             'is_visible' => [
                 'type' => 'TINYINT',
@@ -43,14 +48,14 @@ class AddPodcastsPlatforms extends Migration
             ],
         ]);
 
-        $this->forge->addPrimaryKey(['podcast_id', 'platform_id']);
+        $this->forge->addPrimaryKey(['podcast_id', 'platform_slug']);
         $this->forge->addForeignKey('podcast_id', 'podcasts', 'id');
-        $this->forge->addForeignKey('platform_id', 'platforms', 'id');
-        $this->forge->createTable('platform_links');
+        $this->forge->addForeignKey('platform_slug', 'platforms', 'slug');
+        $this->forge->createTable('podcasts_platforms');
     }
 
     public function down()
     {
-        $this->forge->dropTable('platform_links');
+        $this->forge->dropTable('podcasts_platforms');
     }
 }

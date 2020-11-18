@@ -24,9 +24,13 @@ $podcastNavigation = [
         'icon' => 'group',
         'items' => ['contributor-list', 'contributor-add'],
     ],
-    'settings' => [
-        'icon' => 'settings',
-        'items' => ['platforms'],
+    'platforms' => [
+        'icon' => 'links',
+        'items' => [
+            'platforms-podcasting',
+            'platforms-social',
+            'platforms-funding',
+        ],
     ],
 ]; ?>
 

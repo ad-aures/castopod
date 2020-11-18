@@ -54,11 +54,11 @@ function svg($name, $class = null)
  * @param  string $class to be added to the svg string
  * @return string svg contents
  */
-function platform_icon($name, $class = null)
+function platform_icon($type, $name, $class = null)
 {
     try {
         $svg_contents = file_get_contents(
-            'assets/images/platforms/' . $name . '.svg'
+            'assets/images/platforms/' . $type . '/' . $name . '.svg'
         );
     } catch (\Exception $e) {
         $svg_contents = file_get_contents(

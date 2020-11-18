@@ -69,7 +69,6 @@ class PodcastModel extends Model
     {
         if (!($found = cache("podcast@{$podcastName}"))) {
             $found = $this->where('name', $podcastName)->first();
-
             cache()->save("podcast@{$podcastName}", $found, DECADE);
         }
 

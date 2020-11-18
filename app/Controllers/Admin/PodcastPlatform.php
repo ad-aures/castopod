@@ -12,7 +12,7 @@ use App\Models\PlatformModel;
 use App\Models\PodcastModel;
 use Config\Services;
 
-class PodcastSettings extends BaseController
+class PodcastPlatform extends BaseController
 {
     /**
      * @var \App\Entities\Podcast|null
@@ -33,46 +33,53 @@ class PodcastSettings extends BaseController
 
     public function index()
     {
-        return view('admin/podcast/settings/dashboard');
+        return view('admin/podcast/platforms/dashboard');
     }
 
-    public function platforms()
+    public function platforms($platformType)
     {
         helper('form');
 
         $data = [
             'podcast' => $this->podcast,
+            'platformType' => $platformType,
             'platforms' => (new PlatformModel())->getPlatformsWithLinks(
-                $this->podcast->id
+                $this->podcast->id,
+                $platformType
             ),
         ];
 
         replace_breadcrumb_params([0 => $this->podcast->title]);
-        return view('admin/podcast/settings/platforms', $data);
+        return view('admin/podcast/platforms', $data);
     }
 
-    public function attemptPlatformsUpdate()
+    public function attemptPlatformsUpdate($platformType)
     {
         $platformModel = new PlatformModel();
         $validation = Services::validation();
 
-        $platformLinksData = [];
+        $podcastsPlatformsData = [];
+
         foreach (
             $this->request->getPost('platforms')
-            as $platformName => $platformLink
+            as $platformSlug => $podcastPlatform
         ) {
-            $platformLinkUrl = $platformLink['url'];
+            $podcastPlatformUrl = $podcastPlatform['url'];
+
             if (
-                !empty($platformLinkUrl) &&
-                $validation->check($platformLinkUrl, 'validate_url')
+                !empty($podcastPlatformUrl) &&
+                $validation->check($podcastPlatformUrl, 'validate_url')
             ) {
-                $platformId = $platformModel->getPlatformId($platformName);
-                array_push($platformLinksData, [
-                    'platform_id' => $platformId,
+                array_push($podcastsPlatformsData, [
+                    'platform_slug' => $platformSlug,
                     'podcast_id' => $this->podcast->id,
-                    'link_url' => $platformLinkUrl,
-                    'is_visible' => array_key_exists('visible', $platformLink)
-                        ? $platformLink['visible'] == 'yes'
+                    'link_url' => $podcastPlatformUrl,
+                    'link_content' => $podcastPlatform['content'],
+                    'is_visible' => array_key_exists(
+                        'visible',
+                        $podcastPlatform
+                    )
+                        ? $podcastPlatform['visible'] == 'yes'
                         : false,
                 ]);
             }
@@ -80,7 +87,8 @@ class PodcastSettings extends BaseController
 
         $platformModel->savePodcastPlatforms(
             $this->podcast->id,
-            $platformLinksData
+            $platformType,
+            $podcastsPlatformsData
         );
 
         return redirect()
@@ -88,11 +96,11 @@ class PodcastSettings extends BaseController
             ->with('message', lang('Platforms.messages.updateSuccess'));
     }
 
-    public function removePlatformLink($platformId)
+    public function removePodcastPlatform($platformSlug)
     {
-        (new PlatformModel())->removePlatformLink(
+        (new PlatformModel())->removePodcastPlatform(
             $this->podcast->id,
-            $platformId
+            $platformSlug
         );
 
         return redirect()

@@ -13,12 +13,13 @@ use CodeIgniter\Entity;
 class Platform extends Entity
 {
     protected $casts = [
-        'id' => 'integer',
-        'name' => 'string',
+        'slug' => 'string',
+        'type' => 'string',
         'label' => 'string',
         'home_url' => 'string',
         'submit_url' => '?string',
         'link_url' => '?string',
+        'link_content' => '?string',
         'is_visible' => '?boolean',
     ];
 }
