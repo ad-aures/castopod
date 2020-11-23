@@ -107,41 +107,61 @@ class PodcastImport extends BaseController
 
         $channelDescriptionHtml = $feed->channel[0]->description;
 
-        $podcast = new \App\Entities\Podcast([
-            'name' => $this->request->getPost('name'),
-            'imported_feed_url' => $this->request->getPost('imported_feed_url'),
-            'new_feed_url' => base_url(
-                route_to('podcast_feed', $this->request->getPost('name'))
-            ),
-            'title' => $feed->channel[0]->title,
-            'description_markdown' => $converter->convert(
-                $channelDescriptionHtml
-            ),
-            'description_html' => $channelDescriptionHtml,
-            'image' => download_file($nsItunes->image->attributes()),
-            'language_code' => $this->request->getPost('language'),
-            'category_id' => $this->request->getPost('category'),
-            'parental_advisory' => empty($nsItunes->explicit)
-                ? null
-                : (in_array($nsItunes->explicit, ['yes', 'true'])
-                    ? 'explicit'
-                    : (in_array($nsItunes->explicit, ['no', 'false'])
-                        ? 'clean'
-                        : null)),
-            'owner_name' => $nsItunes->owner->name,
-            'owner_email' => $nsItunes->owner->email,
-            'publisher' => $nsItunes->author,
-            'type' => empty($nsItunes->type) ? 'episodic' : $nsItunes->type,
-            'copyright' => $feed->channel[0]->copyright,
-            'is_blocked' => empty($nsItunes->block)
-                ? false
-                : $nsItunes->block === 'yes',
-            'is_completed' => empty($nsItunes->complete)
-                ? false
-                : $nsItunes->complete === 'yes',
-            'created_by' => user(),
-            'updated_by' => user(),
-        ]);
+        try {
+            $podcast = new \App\Entities\Podcast([
+                'name' => $this->request->getPost('name'),
+                'imported_feed_url' => $this->request->getPost(
+                    'imported_feed_url'
+                ),
+                'new_feed_url' => base_url(
+                    route_to('podcast_feed', $this->request->getPost('name'))
+                ),
+                'title' => $feed->channel[0]->title,
+                'description_markdown' => $converter->convert(
+                    $channelDescriptionHtml
+                ),
+                'description_html' => $channelDescriptionHtml,
+                'image' => $nsItunes->image && !empty($nsItunes->image->attributes())
+                    ? download_file($nsItunes->image->attributes())
+                    : ($feed->channel[0]->image && !empty($feed->channel[0]->image->url)
+                        ? download_file($feed->channel[0]->image->url)
+                        : null),
+                'language_code' => $this->request->getPost('language'),
+                'category_id' => $this->request->getPost('category'),
+                'parental_advisory' => empty($nsItunes->explicit)
+                    ? null
+                    : (in_array($nsItunes->explicit, ['yes', 'true'])
+                        ? 'explicit'
+                        : (in_array($nsItunes->explicit, ['no', 'false'])
+                            ? 'clean'
+                            : null)),
+                'owner_name' => $nsItunes->owner->name,
+                'owner_email' => $nsItunes->owner->email,
+                'publisher' => $nsItunes->author,
+                'type' => empty($nsItunes->type) ? 'episodic' : $nsItunes->type,
+                'copyright' => $feed->channel[0]->copyright,
+                'is_blocked' => empty($nsItunes->block)
+                    ? false
+                    : $nsItunes->block === 'yes',
+                'is_completed' => empty($nsItunes->complete)
+                    ? false
+                    : $nsItunes->complete === 'yes',
+                'created_by' => user(),
+                'updated_by' => user(),
+            ]);
+        } catch (\ErrorException $ex) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', [
+                    $ex->getMessage() .
+                    ': <a href="' .
+                    $this->request->getPost('imported_feed_url') .
+                    '" rel="noreferrer noopener" target="_blank">' .
+                    $this->request->getPost('imported_feed_url') .
+                    ' ⎋</a>',
+                ]);
+        }
 
         $podcastModel = new PodcastModel();
         $db = \Config\Database::connect();
@@ -200,10 +220,12 @@ class PodcastImport extends BaseController
                 'is_visible' => false,
             ]);
         }
-        $platformModel->createPodcastPlatforms(
-            $newPodcastId,
-            $podcastsPlatformsData
-        );
+        if (count($podcastsPlatformsData) > 1) {
+            $platformModel->createPodcastPlatforms(
+                $newPodcastId,
+                $podcastsPlatformsData
+            );
+        }
 
         $numberItems = $feed->channel[0]->item->count();
         $lastItem =
