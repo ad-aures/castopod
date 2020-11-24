@@ -68,11 +68,11 @@ release_app:
     # make prepare-release.sh executable
     - chmod +x ./prepare-release.sh
 
+    # IMPORTANT: delete local git tags before release to prevent eventual script failure (ie. tag already exists)
+    - git tag | xargs git tag -d
+
     # run semantic-release script (configured in `.releaserc.json` file)
     - npm run release
-
-    # IMPORTANT: delete local git tags after release to prevent eventual script failure (ie. tag already exists)
-    - git tag | xargs git tag -d
   only:
     - main
     - alpha
