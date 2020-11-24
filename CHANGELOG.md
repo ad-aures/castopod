@@ -1,3 +1,10 @@
+# [1.0.0-alpha.23](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.22...v1.0.0-alpha.23) (2020-11-24)
+
+
+### Bug Fixes
+
+* define podcastNamespaceLink value ([0d744d2](https://code.podlibre.org/podlibre/castopod/commit/0d744d212df0d070ceea185068eaf2746e1ccd48))
+
 # [1.0.0-alpha.22](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.21...v1.0.0-alpha.22) (2020-11-24)
 
 
