@@ -73,6 +73,16 @@ class AddEpisodes extends Migration
                 'constraint' => 255,
                 'null' => true,
             ],
+            'transcript_uri' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => true,
+            ],
+            'chapters_uri' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => true,
+            ],
             'parental_advisory' => [
                 'type' => 'ENUM',
                 'constraint' => ['clean', 'explicit'],

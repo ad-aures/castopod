@@ -36,6 +36,16 @@ class Episode extends Entity
     protected $enclosure;
 
     /**
+     * @var \CodeIgniter\Files\File
+     */
+    protected $transcript;
+
+    /**
+     * @var \CodeIgniter\Files\File
+     */
+    protected $chapters;
+
+    /**
      * @var string
      */
     protected $enclosure_media_path;
@@ -54,6 +64,16 @@ class Episode extends Entity
      * @var string
      */
     protected $enclosure_opengraph_url;
+
+    /**
+     * @var string
+     */
+    protected $transcript_url;
+
+    /**
+     * @var string
+     */
+    protected $chapters_url;
 
     /**
      * Holds text only description, striped of any markdown or html special characters
@@ -86,6 +106,8 @@ class Episode extends Entity
         'description_markdown' => 'string',
         'description_html' => 'string',
         'image_uri' => '?string',
+        'transcript_uri' => '?string',
+        'chapters_uri' => '?string',
         'parental_advisory' => '?string',
         'number' => '?integer',
         'season_number' => '?integer',
@@ -170,9 +192,73 @@ class Episode extends Entity
         }
     }
 
+    /**
+     * Saves an episode transcript
+     *
+     * @param \CodeIgniter\HTTP\Files\UploadedFile|\CodeIgniter\Files\File $transcript
+     *
+     */
+    public function setTranscript($transcript)
+    {
+        if (
+            !empty($transcript) &&
+            (!($transcript instanceof \CodeIgniter\HTTP\Files\UploadedFile) ||
+                $transcript->isValid())
+        ) {
+            helper('media');
+
+            $this->attributes['transcript_uri'] = save_podcast_media(
+                $transcript,
+                $this->getPodcast()->name,
+                $this->attributes['slug'] . '-transcript'
+            );
+        }
+
+        return $this;
+    }
+
+    /**
+     * Saves an episode chapters
+     *
+     * @param \CodeIgniter\HTTP\Files\UploadedFile|\CodeIgniter\Files\File $chapters
+     *
+     */
+    public function setChapters($chapters)
+    {
+        if (
+            !empty($chapters) &&
+            (!($chapters instanceof \CodeIgniter\HTTP\Files\UploadedFile) ||
+                $chapters->isValid())
+        ) {
+            helper('media');
+
+            $this->attributes['chapters_uri'] = save_podcast_media(
+                $chapters,
+                $this->getPodcast()->name,
+                $this->attributes['slug'] . '-chapters'
+            );
+        }
+
+        return $this;
+    }
+
     public function getEnclosure()
     {
         return new \CodeIgniter\Files\File($this->getEnclosureMediaPath());
+    }
+
+    public function getTranscript()
+    {
+        return $this->attributes['transcript_uri']
+            ? new \CodeIgniter\Files\File($this->getTranscriptMediaPath())
+            : null;
+    }
+
+    public function getChapters()
+    {
+        return $this->attributes['chapters_uri']
+            ? new \CodeIgniter\Files\File($this->getChaptersMediaPath())
+            : null;
     }
 
     public function getEnclosureMediaPath()
@@ -180,6 +266,24 @@ class Episode extends Entity
         helper('media');
 
         return media_path($this->attributes['enclosure_uri']);
+    }
+
+    public function getTranscriptMediaPath()
+    {
+        helper('media');
+
+        return $this->attributes['transcript_uri']
+            ? media_path($this->attributes['transcript_uri'])
+            : null;
+    }
+
+    public function getChaptersMediaPath()
+    {
+        helper('media');
+
+        return $this->attributes['chapters_uri']
+            ? media_path($this->attributes['chapters_uri'])
+            : null;
     }
 
     public function getEnclosureUrl()
@@ -228,6 +332,20 @@ class Episode extends Entity
     public function getEnclosureOpengraphUrl()
     {
         return $this->getEnclosureUrl() . '?_from=-+Open+Graph+-';
+    }
+
+    public function getTranscriptUrl()
+    {
+        return $this->attributes['transcript_uri']
+            ? base_url($this->getTranscriptMediaPath())
+            : null;
+    }
+
+    public function getChaptersUrl()
+    {
+        return $this->attributes['chapters_uri']
+            ? base_url($this->getChaptersMediaPath())
+            : null;
     }
 
     public function getLink()

@@ -70,6 +70,16 @@ return [
         'block' => 'L’épisode doit être masqué de toutes les plateformes',
         'block_hint' =>
             'La visibilité de l’épisode. Si vous souhaitez retirer cet épisode de l’index Apple, activez ce champ.',
+        'additional_files_section_title' => 'Fichiers additionels',
+        'additional_files_section_subtitle' =>
+            'Ces fichiers pourront être utilisées par d’autres plate-formes pour procurer une meilleure expérience à vos auditeurs.<br />Consulter le {podcastNamespaceLink} pour plus d’informations.',
+        'transcript' => 'Transcription ou sous-titrage',
+        'transcript_hint' =>
+            'Les formats autorisés sont txt, html, srt ou json.',
+        'transcript_delete' => 'Supprimer la transcription',
+        'chapters' => 'Chapitrage',
+        'chapters_hint' => 'Le fichier doit être en "JSON Chapters Format".',
+        'chapters_delete' => 'Supprimer le chaptrage',
         'submit_create' => 'Créer l’épisode',
         'submit_edit' => 'Enregistrer l’épisode',
     ],

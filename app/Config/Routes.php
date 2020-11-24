@@ -237,6 +237,22 @@ $routes->group(
                             'as' => 'episode-delete',
                             'filter' => 'permission:podcast_episodes-delete',
                         ]);
+                        $routes->get(
+                            'transcript-delete',
+                            'Episode::transcriptDelete/$1/$2',
+                            [
+                                'as' => 'transcript-delete',
+                                'filter' => 'permission:podcast_episodes-edit',
+                            ]
+                        );
+                        $routes->get(
+                            'chapters-delete',
+                            'Episode::chaptersDelete/$1/$2',
+                            [
+                                'as' => 'chapters-delete',
+                                'filter' => 'permission:podcast_episodes-edit',
+                            ]
+                        );
                     });
                 });
 

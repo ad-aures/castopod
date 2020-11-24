@@ -28,6 +28,8 @@ class EpisodeModel extends Model
         'description_markdown',
         'description_html',
         'image_uri',
+        'transcript_uri',
+        'chapters_uri',
         'parental_advisory',
         'number',
         'season_number',

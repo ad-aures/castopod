@@ -8,6 +8,7 @@
 
 use App\Libraries\SimpleRSSElement;
 use CodeIgniter\I18n\Time;
+use Config\Mimes;
 
 /**
  * Generates the rss feed for a given podcast entity
@@ -216,6 +217,35 @@ function get_rss_feed($podcast, $serviceName = '')
                 $itunes_namespace
             );
         $item->addChild('episodeType', $episode->type, $itunes_namespace);
+
+        if ($episode->transcript) {
+            $transcriptElement = $item->addChild(
+                'transcript',
+                null,
+                $podcast_namespace
+            );
+            $transcriptElement->addAttribute('url', $episode->transcriptUrl);
+            $transcriptElement->addAttribute(
+                'type',
+                Mimes::guessTypeFromExtension(
+                    pathinfo($episode->transcript_uri, PATHINFO_EXTENSION)
+                )
+            );
+            $transcriptElement->addAttribute(
+                'language',
+                $podcast->language_code
+            );
+        }
+
+        if ($episode->chapters) {
+            $chaptersElement = $item->addChild(
+                'chapters',
+                null,
+                $podcast_namespace
+            );
+            $chaptersElement->addAttribute('url', $episode->chaptersUrl);
+            $chaptersElement->addAttribute('type', 'application/json+chapters');
+        }
 
         $episode->is_blocked &&
             $item->addChild('block', 'Yes', $itunes_namespace);

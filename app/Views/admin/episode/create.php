@@ -264,6 +264,40 @@
 
 <?= form_section_close() ?>
 
+<?= form_section(
+    lang('Episode.form.additional_files_section_title'),
+    lang('Episode.form.additional_files_section_subtitle')
+) ?>
+<?= form_label(
+    lang('Episode.form.transcript'),
+    'transcript',
+    [],
+    lang('Episode.form.transcript_hint'),
+    true
+) ?>
+<?= form_input([
+    'id' => 'transcript',
+    'name' => 'transcript',
+    'class' => 'form-input mb-4',
+    'type' => 'file',
+    'accept' => '.txt,.html,.srt,.json',
+]) ?>
+<?= form_label(
+    lang('Episode.form.chapters'),
+    'chapters',
+    [],
+    lang('Episode.form.chapters_hint'),
+    true
+) ?>
+<?= form_input([
+    'id' => 'chapters',
+    'name' => 'chapters',
+    'class' => 'form-input mb-4',
+    'type' => 'file',
+    'accept' => '.json',
+]) ?>
+<?= form_section_close() ?>
+
 <?= button(
     lang('Episode.form.submit_create'),
     null,

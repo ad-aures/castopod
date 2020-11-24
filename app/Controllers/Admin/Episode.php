@@ -96,6 +96,8 @@ class Episode extends BaseController
             'enclosure' => 'uploaded[enclosure]|ext_in[enclosure,mp3,m4a]',
             'image' =>
                 'is_image[image]|ext_in[image,jpg,png]|min_dims[image,1400,1400]|is_image_squared[image]',
+            'transcript' => 'ext_in[transcript,txt,html,srt,json]',
+            'chapters' => 'ext_in[chapters,json]',
             'publication_date' => 'valid_date[Y-m-d H:i]|permit_empty',
         ];
 
@@ -114,6 +116,8 @@ class Episode extends BaseController
             'enclosure' => $this->request->getFile('enclosure'),
             'description_markdown' => $this->request->getPost('description'),
             'image' => $this->request->getFile('image'),
+            'transcript' => $this->request->getFile('transcript'),
+            'chapters' => $this->request->getFile('chapters'),
             'parental_advisory' =>
                 $this->request->getPost('parental_advisory') !== 'undefined'
                     ? $this->request->getPost('parental_advisory')
@@ -189,6 +193,8 @@ class Episode extends BaseController
                 'uploaded[enclosure]|ext_in[enclosure,mp3,m4a]|permit_empty',
             'image' =>
                 'is_image[image]|ext_in[image,jpg,png]|min_dims[image,1400,1400]|is_image_squared[image]',
+            'transcript' => 'ext_in[transcript,txt,html,srt,json]',
+            'chapters' => 'ext_in[chapters,json]',
             'publication_date' => 'valid_date[Y-m-d H:i]|permit_empty',
         ];
 
@@ -231,6 +237,14 @@ class Episode extends BaseController
         if ($image) {
             $this->episode->image = $image;
         }
+        $transcript = $this->request->getFile('transcript');
+        if ($transcript->isValid()) {
+            $this->episode->transcript = $transcript;
+        }
+        $chapters = $this->request->getFile('chapters');
+        if ($chapters->isValid()) {
+            $this->episode->chapters = $chapters;
+        }
 
         $episodeModel = new EpisodeModel();
 
@@ -260,6 +274,40 @@ class Episode extends BaseController
             $this->podcast->id,
             $this->episode->id,
         ]);
+    }
+
+    public function transcriptDelete()
+    {
+        unlink($this->episode->transcript);
+        $this->episode->transcript_uri = null;
+
+        $episodeModel = new EpisodeModel();
+
+        if (!$episodeModel->update($this->episode->id, $this->episode)) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $episodeModel->errors());
+        }
+
+        return redirect()->back();
+    }
+
+    public function chaptersDelete()
+    {
+        unlink($this->episode->chapters);
+        $this->episode->chapters_uri = null;
+
+        $episodeModel = new EpisodeModel();
+
+        if (!$episodeModel->update($this->episode->id, $this->episode)) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $episodeModel->errors());
+        }
+
+        return redirect()->back();
     }
 
     public function delete()

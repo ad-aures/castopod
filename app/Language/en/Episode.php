@@ -70,6 +70,15 @@ return [
         'block' => 'Episode should be hidden from all platforms',
         'block_hint' =>
             'The episode show or hide status. If you want this episode removed from the Apple directory, toggle this on.',
+        'additional_files_section_title' => 'Additional files',
+        'additional_files_section_subtitle' =>
+            'These files may be used by other platforms to provide better experience to your audience.<br />See the {podcastNamespaceLink} for more information.',
+        'transcript' => 'Transcript or closed captions',
+        'transcript_hint' => 'Allowed formats are txt, html, srt or json.',
+        'transcript_delete' => 'Delete transcript',
+        'chapters' => 'Chapters',
+        'chapters_hint' => 'File should be in JSON Chapters Format.',
+        'chapters_delete' => 'Delete chapters',
         'submit_create' => 'Create episode',
         'submit_edit' => 'Save episode',
     ],

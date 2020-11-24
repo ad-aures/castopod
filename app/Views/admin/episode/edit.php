@@ -136,7 +136,6 @@
     </label>
     <?= form_radio(
         ['id' => 'bonus', 'name' => 'type', 'class' => 'form-radio-btn'],
-
         'bonus',
         old('type') ? old('type') === 'bonus' : $episode->type === 'bonus'
     ) ?>
@@ -273,6 +272,91 @@
     old('block', $episode->is_blocked)
 ) ?>
 
+<?= form_section_close() ?>
+<?= form_section(
+    lang('Episode.form.additional_files_section_title'),
+    lang('Episode.form.additional_files_section_subtitle')
+) ?>
+<div class="flex flex-col flex-1">
+<?= form_label(
+    lang('Episode.form.transcript'),
+    'transcript',
+    [],
+    lang('Episode.form.transcript_hint'),
+    true
+) ?>
+<?php if ($episode->transcript): ?>
+    <div class="flex justify-between">
+        <?= anchor(
+            $episode->transcriptUrl,
+            icon('file', 'mr-2') . $episode->transcript,
+            [
+                'class' => 'inline-flex items-center text-xs',
+                'target' => '_blank',
+                'rel' => 'noreferrer noopener',
+            ]
+        ) .
+            anchor(
+                route_to('transcript-delete', $podcast->id, $episode->id),
+                icon('delete-bin', 'mx-auto'),
+                [
+                    'class' =>
+                        'p-1 bg-red-200 rounded-full text-red-700 hover:text-red-900',
+                    'data-toggle' => 'tooltip',
+                    'data-placement' => 'bottom',
+                    'title' => lang('Episode.form.transcript_delete'),
+                ]
+            ) ?>
+    </div>
+<?php endif; ?>
+<?= form_input([
+    'id' => 'transcript',
+    'name' => 'transcript',
+    'class' => 'form-input mb-4',
+    'type' => 'file',
+    'accept' => '.txt,.html,.srt,.json',
+]) ?>
+</div>
+<div class="flex flex-col flex-1">
+<?= form_label(
+    lang('Episode.form.chapters'),
+    'chapters',
+    [],
+    lang('Episode.form.chapters_hint'),
+    true
+) ?>
+<?php if ($episode->chapters): ?>
+    <div class="flex justify-between">
+        <?= anchor(
+            $episode->chaptersUrl,
+            icon('file', 'mr-2') . $episode->chapters,
+            [
+                'class' => 'inline-flex items-center text-xs',
+                'target' => '_blank',
+                'rel' => 'noreferrer noopener',
+            ]
+        ) .
+            anchor(
+                route_to('chapters-delete', $podcast->id, $episode->id),
+                icon('delete-bin', 'mx-auto'),
+                [
+                    'class' =>
+                        'p-1 bg-red-200 rounded-full text-red-700 hover:text-red-900',
+                    'data-toggle' => 'tooltip',
+                    'data-placement' => 'bottom',
+                    'title' => lang('Episode.form.chapters_delete'),
+                ]
+            ) ?>
+    </div>
+<?php endif; ?>
+<?= form_input([
+    'id' => 'chapters',
+    'name' => 'chapters',
+    'class' => 'form-input mb-4',
+    'type' => 'file',
+    'accept' => '.json',
+]) ?>
+</div>
 <?= form_section_close() ?>
 
 <?= button(

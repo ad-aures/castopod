@@ -307,7 +307,7 @@ class Mimes
         ],
         'svg' => ['image/svg+xml', 'application/xml', 'text/xml'],
         'vcf' => 'text/x-vcard',
-        'srt' => ['text/srt', 'text/plain'],
+        'srt' => ['text/srt', 'text/plain', 'application/octet-stream'],
         'vtt' => ['text/vtt', 'text/plain'],
         'ico' => ['image/x-icon', 'image/x-ico', 'image/vnd.microsoft.icon'],
     ];
