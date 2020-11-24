@@ -275,7 +275,10 @@
 <?= form_section_close() ?>
 <?= form_section(
     lang('Episode.form.additional_files_section_title'),
-    lang('Episode.form.additional_files_section_subtitle')
+    lang('Episode.form.additional_files_section_subtitle', [
+        'podcastNamespaceLink' =>
+            '“<a href="https://github.com/Podcastindex-org/podcast-namespace" target="_blank" rel="noreferrer noopener" style="text-decoration: underline;">podcast namespace</a>”',
+    ])
 ) ?>
 <div class="flex flex-col flex-1">
 <?= form_label(
