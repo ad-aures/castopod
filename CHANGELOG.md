@@ -1,3 +1,10 @@
+# [1.0.0-alpha.22](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.21...v1.0.0-alpha.22) (2020-11-24)
+
+
+### Features
+
+* **rss:** add transcript and chapters support ([e769d83](https://code.podlibre.org/podlibre/castopod/commit/e769d83a932c169e52a630a17cd4dd8ac5cebaf6)), closes [#72](https://code.podlibre.org/podlibre/castopod/issues/72) [#82](https://code.podlibre.org/podlibre/castopod/issues/82)
+
 # [1.0.0-alpha.21](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.20...v1.0.0-alpha.21) (2020-11-24)
 
 
