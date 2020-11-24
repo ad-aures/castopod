@@ -1,3 +1,10 @@
+# [1.0.0-alpha.21](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.20...v1.0.0-alpha.21) (2020-11-24)
+
+
+### Features
+
+* **platforms:** add Fediverse and some funding platforms, add link on logo ([afc3d50](https://code.podlibre.org/podlibre/castopod/commit/afc3d50289bb4173e0697d109ffe72f6814b93d1))
+
 # [1.0.0-alpha.20](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.19...v1.0.0-alpha.20) (2020-11-24)
 
 
