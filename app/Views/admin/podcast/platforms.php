@@ -17,12 +17,25 @@
 
 <?php foreach ($platforms as $platform): ?>
 
-<div class="relative flex items-start mb-4">
+<div class="relative flex items-start mb-8">
     <div class="flex flex-col w-12 mr-4">
-        <?= platform_icon(
-            $platform->type,
-            $platform->slug,
-            'w-full mb-1 text-gray-800'
+        <?= anchor(
+            $platform->submit_url,
+            platform_icon(
+                $platform->type,
+                $platform->slug,
+                $platform->type == 'social' ? 'text-gray-800' : null
+            ),
+            [
+                'class' => 'mb-1 text-gray-600 hover:text-gray-900',
+                'target' => '_blank',
+                'rel' => 'noopener noreferrer',
+                'data-toggle' => 'tooltip',
+                'data-placement' => 'bottom',
+                'title' => lang('Platforms.submit_url', [
+                    'platformName' => $platform->label,
+                ]),
+            ]
         ) ?>
         <div class="inline-flex bg-gray-200">
             <?= anchor($platform->home_url, icon('external-link', 'mx-auto'), [

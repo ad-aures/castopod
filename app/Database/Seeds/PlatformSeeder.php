@@ -49,6 +49,13 @@ class PlatformSeeder extends Seeder
                     'https://helpcenter.castbox.fm/portal/kb/articles/submit-my-podcast',
             ],
             [
+                'slug' => 'castopod',
+                'type' => 'podcasting',
+                'label' => 'Castopod',
+                'home_url' => 'https://castopod.org/',
+                'submit_url' => 'https://castopod.org/instances',
+            ],
+            [
                 'slug' => 'castro',
                 'type' => 'podcasting',
                 'label' => 'Castro',
@@ -222,6 +229,36 @@ class PlatformSeeder extends Seeder
                 'home_url' => 'https://www.paypal.com/',
                 'submit_url' => 'https://www.paypal.com/paypalme/my/grab',
             ],
+
+            [
+                'slug' => 'gofundme',
+                'type' => 'funding',
+                'label' => 'GoFundMe',
+                'home_url' => 'https://www.gofundme.com/',
+                'submit_url' => 'https://www.gofundme.com/sign-up',
+            ],
+            [
+                'slug' => 'indiegogo',
+                'type' => 'funding',
+                'label' => 'Indiegogo',
+                'home_url' => 'https://www.indiegogo.com/',
+                'submit_url' => 'https://www.indiegogo.com/start-a-campaign#/',
+            ],
+            [
+                'slug' => 'kickstarter',
+                'type' => 'funding',
+                'label' => 'Kickstarter',
+                'home_url' => 'https://www.kickstarter.com/',
+                'submit_url' => 'https://www.kickstarter.com/learn',
+            ],
+            [
+                'slug' => 'kisskissbankbank',
+                'type' => 'funding',
+                'label' => 'KissKissBankBank',
+                'home_url' => 'https://www.kisskissbankbank.com/',
+                'submit_url' =>
+                    'https://www.kisskissbankbank.com/en/financer-mon-projet',
+            ],
             [
                 'slug' => 'liberapay',
                 'type' => 'funding',
@@ -243,6 +280,13 @@ class PlatformSeeder extends Seeder
                 'home_url' => 'https://tipeee.com/',
                 'submit_url' => 'https://tipeee.com/register/',
             ],
+            [
+                'slug' => 'ulule',
+                'type' => 'funding',
+                'label' => 'Ulule',
+                'home_url' => 'https://www.ulule.com/',
+                'submit_url' => 'https://www.ulule.com/projects/create/#/',
+            ],
 
             [
                 'slug' => 'discord',
@@ -258,6 +302,13 @@ class PlatformSeeder extends Seeder
                 'home_url' => 'https://www.facebook.com/',
                 'submit_url' =>
                     'https://www.facebook.com/pages/creation/?ref_type=comet_home',
+            ],
+            [
+                'slug' => 'funkwhale',
+                'type' => 'social',
+                'label' => 'Funkwhale',
+                'home_url' => 'https://funkwhale.audio/',
+                'submit_url' => 'https://network.funkwhale.audio/dashboards/',
             ],
             [
                 'slug' => 'instagram',
@@ -282,11 +333,32 @@ class PlatformSeeder extends Seeder
                 'submit_url' => 'https://joinmastodon.org/communities',
             ],
             [
+                'slug' => 'mobilizon',
+                'type' => 'social',
+                'label' => 'Mobilizon',
+                'home_url' => 'https://joinmobilizon.org/',
+                'submit_url' => 'https://instances.joinmobilizon.org/instances',
+            ],
+            [
+                'slug' => 'peertube',
+                'type' => 'social',
+                'label' => 'PeerTube',
+                'home_url' => 'https://joinpeertube.org/',
+                'submit_url' => 'https://joinpeertube.org/instances',
+            ],
+            [
                 'slug' => 'pixelfed',
                 'type' => 'social',
                 'label' => 'Pixelfed',
                 'home_url' => 'https://pixelfed.org/',
                 'submit_url' => 'https://beta.joinpixelfed.org/',
+            ],
+            [
+                'slug' => 'plume',
+                'type' => 'social',
+                'label' => 'Plume',
+                'home_url' => 'https://joinplu.me/',
+                'submit_url' => 'https://joinplu.me/#instances',
             ],
             [
                 'slug' => 'slack',
@@ -308,6 +380,13 @@ class PlatformSeeder extends Seeder
                 'label' => 'Twitter',
                 'home_url' => 'https://twitter.com/',
                 'submit_url' => 'https://twitter.com/i/flow/signup',
+            ],
+            [
+                'slug' => 'writefreely',
+                'type' => 'social',
+                'label' => 'WriteFreely',
+                'home_url' => 'https://writefreely.org/',
+                'submit_url' => 'https://writefreely.org/instances',
             ],
             [
                 'slug' => 'youtube',
