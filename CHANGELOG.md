@@ -1,3 +1,15 @@
+# [1.0.0-alpha.20](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.19...v1.0.0-alpha.20) (2020-11-24)
+
+
+### Bug Fixes
+
+* **import:** use <image><url> tag when no <itunes:image> is present ([20e607a](https://code.podlibre.org/podlibre/castopod/commit/20e607afb755bc75056041738fa7cbf6723d754c))
+
+
+### Features
+
+* **rss:** add podcast-namespace tags for platforms + previousUrl tag ([dbba8dc](https://code.podlibre.org/podlibre/castopod/commit/dbba8dc58133967c778514268cbfed8098ed1dbc)), closes [#73](https://code.podlibre.org/podlibre/castopod/issues/73) [#75](https://code.podlibre.org/podlibre/castopod/issues/75) [#76](https://code.podlibre.org/podlibre/castopod/issues/76) [#80](https://code.podlibre.org/podlibre/castopod/issues/80)
+
 # [1.0.0-alpha.19](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.18...v1.0.0-alpha.19) (2020-11-13)
 
 
