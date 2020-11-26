@@ -8,6 +8,10 @@
     <title><?= $podcast->title ?></title>
     <meta name="description" content="<?= $podcast->description ?>"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<?php if (
+    !empty($podcast->payment_pointer)
+): ?>    <meta name="monetization" content="<?= $podcast->payment_pointer ?>">                    
+<?php endif; ?>
     <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
     <link rel="stylesheet" href="/assets/index.css"/>
     <link rel="canonical" href="<?= current_season_url() ?>" />

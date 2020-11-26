@@ -96,6 +96,7 @@ class Podcast extends Entity
         'is_locked' => 'boolean',
         'imported_feed_url' => '?string',
         'new_feed_url' => '?string',
+        'payment_pointer' => '?string',
         'created_by' => 'integer',
         'updated_by' => 'integer',
     ];

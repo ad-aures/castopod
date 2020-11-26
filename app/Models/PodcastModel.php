@@ -37,6 +37,7 @@ class PodcastModel extends Model
         'is_blocked',
         'is_completed',
         'is_locked',
+        'payment_pointer',
         'created_by',
         'updated_by',
     ];

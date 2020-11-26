@@ -62,6 +62,13 @@ return [
         'publisher_hint' =>
             'Le groupe responsable de la création du podcast. Fait souvent référence à la société mère ou au réseau d’un podcast. Ce champ est parfois appelé « Auteur ».',
         'copyright' => 'Droit d’auteur',
+        'monetization_section_title' => 'Monétisation',
+        'monetization_section_subtitle' =>
+            'Gagnez de l’argent grâce à votre audience.',
+        'payment_pointer' =>
+            'Adresse de paiement (Payment Pointer) pour Web Monetization',
+        'payment_pointer_hint' =>
+            'L’adresse où vous recevrez de l’argent grâce à Web Monetization',
         'status_section_title' => 'Statut',
         'status_section_subtitle' => 'Vivant ou mort ?',
         'block' => 'Le podcast doit être masqué sur toutes les plateformes',

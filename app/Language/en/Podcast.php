@@ -61,6 +61,12 @@ return [
         'publisher_hint' =>
             'The group responsible for creating the show. Often refers to the parent company or network of a podcast. This field is sometimes labeled as ’Author’.',
         'copyright' => 'Copyright',
+        'monetization_section_title' => 'Monetization',
+        'monetization_section_subtitle' =>
+            'Earn money thanks to your audience.',
+        'payment_pointer' => 'Payment Pointer for Web Monetization',
+        'payment_pointer_hint' =>
+            'This is your where you will receive money thanks to Web Monetization',
         'status_section_title' => 'Status',
         'status_section_subtitle' => 'Dead or alive?',
         'block' => 'Podcast should be hidden from all platforms',

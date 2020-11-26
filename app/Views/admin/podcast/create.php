@@ -241,6 +241,24 @@
 
 <?= form_section_close() ?>
 
+<?= form_section(
+    lang('Podcast.form.monetization_section_title'),
+    lang('Podcast.form.monetization_section_subtitle')
+) ?>
+
+<?= form_label(
+    lang('Podcast.form.payment_pointer'),
+    'payment_pointer',
+    [],
+    lang('Podcast.form.payment_pointer_hint')
+) ?>
+<?= form_input([
+    'id' => 'payment_pointer',
+    'name' => 'payment_pointer',
+    'class' => 'form-input mb-4',
+    'value' => old('payment_pointer'),
+]) ?>
+<?= form_section_close() ?>
 
 <?= form_section(
     lang('Podcast.form.status_section_title'),
@@ -249,10 +267,7 @@
 
 <?= form_switch(
     lang('Podcast.form.block'),
-    [
-        'id' => 'block',
-        'name' => 'block',
-    ],
+    ['id' => 'block', 'name' => 'block'],
     'yes',
     old('block', false),
     'mb-2'
@@ -260,10 +275,7 @@
 
 <?= form_switch(
     lang('Podcast.form.complete'),
-    [
-        'id' => 'complete',
-        'name' => 'complete',
-    ],
+    ['id' => 'complete', 'name' => 'complete'],
     'yes',
     old('complete', false),
     'mb-2'
@@ -278,7 +290,6 @@
 ) ?>
 
 <?= form_section_close() ?>
-
 
 <?= button(
     lang('Podcast.form.submit_create'),

@@ -251,6 +251,24 @@
 
 <?= form_section_close() ?>
 
+<?= form_section(
+    lang('Podcast.form.monetization_section_title'),
+    lang('Podcast.form.monetization_section_subtitle')
+) ?>
+
+<?= form_label(
+    lang('Podcast.form.payment_pointer'),
+    'payment_pointer',
+    [],
+    lang('Podcast.form.payment_pointer_hint')
+) ?>
+<?= form_input([
+    'id' => 'payment_pointer',
+    'name' => 'payment_pointer',
+    'class' => 'form-input mb-4',
+    'value' => old('payment_pointer', $podcast->payment_pointer),
+]) ?>
+<?= form_section_close() ?>
 
 <?= form_section(
     lang('Podcast.form.status_section_title'),

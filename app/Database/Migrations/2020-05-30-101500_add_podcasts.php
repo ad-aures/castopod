@@ -117,6 +117,12 @@ class AddPodcasts extends Migration
                     'The RSS new feed URL if this podcast is moving out, NULL otherwise.',
                 'null' => true,
             ],
+            'payment_pointer' => [
+                'type' => 'VARCHAR',
+                'constraint' => 128,
+                'comment' => 'Wallet address for Web Monetization payments',
+                'null' => true,
+            ],
             'created_by' => [
                 'type' => 'INT',
                 'unsigned' => true,

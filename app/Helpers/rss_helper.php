@@ -65,6 +65,14 @@ function get_rss_feed($podcast, $serviceName = '')
     $itunes_image = $channel->addChild('image', null, $itunes_namespace);
     $itunes_image->addAttribute('href', $podcast->image->original_url);
     $channel->addChild('language', $podcast->language_code);
+
+    if (!empty($podcast->payment_pointer)) {
+        $channel->addChild(
+            'monetization',
+            $podcast->payment_pointer,
+            $podcast_namespace
+        );
+    }
     $channel
         ->addChild(
             'locked',
