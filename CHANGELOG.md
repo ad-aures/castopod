@@ -1,3 +1,10 @@
+# [1.0.0-alpha.24](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.23...v1.0.0-alpha.24) (2020-11-26)
+
+
+### Features
+
+* **monetization:** add Web Monetization support ([96a6026](https://code.podlibre.org/podlibre/castopod/commit/96a6026f1db452085360f5fe248de82a2ec06468))
+
 # [1.0.0-alpha.23](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.22...v1.0.0-alpha.23) (2020-11-24)
 
 
