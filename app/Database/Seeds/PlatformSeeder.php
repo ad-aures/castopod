@@ -178,6 +178,13 @@ class PlatformSeeder extends Seeder
                 'submit_url' => 'https://podtail.com/about/faq/',
             ],
             [
+                'slug' => 'podfriend',
+                'type' => 'podcasting',
+                'label' => 'Podfriend',
+                'home_url' => 'https://www.podfriend.com/',
+                'submit_url' => 'https://api.podcastindex.org/signup',
+            ],
+            [
                 'slug' => 'podverse',
                 'type' => 'podcasting',
                 'label' => 'Podverse',
