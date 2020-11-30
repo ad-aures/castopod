@@ -1,3 +1,10 @@
+# [1.0.0-alpha.26](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.25...v1.0.0-alpha.26) (2020-11-30)
+
+
+### Bug Fixes
+
+* **analytics:** update service management so that it works with new OPAWG slug values ([7fe9d42](https://code.podlibre.org/podlibre/castopod/commit/7fe9d42500ade2c6fa3ff4365b4affc475af0e51))
+
 # [1.0.0-alpha.25](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.24...v1.0.0-alpha.25) (2020-11-30)
 
 
