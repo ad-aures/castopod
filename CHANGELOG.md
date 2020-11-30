@@ -1,3 +1,10 @@
+# [1.0.0-alpha.25](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.24...v1.0.0-alpha.25) (2020-11-30)
+
+
+### Features
+
+* **platforms:** add podfriend ([9fdc8d3](https://code.podlibre.org/podlibre/castopod/commit/9fdc8d32930234c7ffd2be6892be57febcef1086))
+
 # [1.0.0-alpha.24](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.23...v1.0.0-alpha.24) (2020-11-26)
 
 
