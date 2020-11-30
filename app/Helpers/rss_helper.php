@@ -17,7 +17,7 @@ use Config\Mimes;
  * @param string $service The name of the service that fetches the RSS feed for future reference when the audio file is eventually downloaded
  * @return string rss feed as xml
  */
-function get_rss_feed($podcast, $serviceName = '')
+function get_rss_feed($podcast, $serviceSlug = '')
 {
     $episodes = $podcast->episodes;
 
@@ -185,7 +185,7 @@ function get_rss_feed($podcast, $serviceName = '')
         $enclosure->addAttribute(
             'url',
             $episode->enclosure_url .
-                (empty($serviceName) ? '' : '?_from=' . urlencode($serviceName))
+                (empty($serviceSlug) ? '' : '?_from=' . urlencode($serviceSlug))
         );
         $enclosure->addAttribute('length', $episode->enclosure_filesize);
         $enclosure->addAttribute('type', $episode->enclosure_mimetype);

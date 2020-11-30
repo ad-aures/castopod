@@ -15,8 +15,8 @@
     "league/commonmark": "^1.5",
     "vlucas/phpdotenv": "^5.2",
     "league/html-to-markdown": "^4.10",
-    "opawg/user-agents-php": "*",
-    "podlibre/ipcat": "*"
+    "opawg/user-agents-php": "^1.0",
+    "podlibre/ipcat": "^1.0"
   },
   "require-dev": {
     "mikey179/vfsstream": "1.6.*",

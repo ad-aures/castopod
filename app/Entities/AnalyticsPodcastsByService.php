@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Class AnalyticsPodcastsByCountry
- * Entity for AnalyticsPodcastsByCountry
+ * Class AnalyticsPodcastsByService
+ * Entity for AnalyticsPodcastsByService
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
@@ -12,7 +12,7 @@ namespace App\Entities;
 
 use CodeIgniter\Entity;
 
-class AnalyticsPodcastsByCountry extends Entity
+class AnalyticsPodcastsByService extends Entity
 {
     /**
      * @var string
@@ -21,13 +21,18 @@ class AnalyticsPodcastsByCountry extends Entity
 
     protected $casts = [
         'podcast_id' => 'integer',
-        'country_code' => 'string',
+        'app' => '?string',
+        'device' => '?string',
+        'os' => '?string',
+        'is_bot' => 'boolean',
         'date' => 'datetime',
         'hits' => 'integer',
     ];
 
     public function getLabels()
     {
-        return lang('Countries.' . $this->attributes['labels']);
+        return \Opawg\UserAgentsPhp\UserAgentsRSS::getName(
+            $this->attributes['labels']
+        ) ?? $this->attributes['labels'];
     }
 }

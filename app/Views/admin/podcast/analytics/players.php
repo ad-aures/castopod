@@ -26,7 +26,7 @@
         <div class="chart-pie" id="by-service-weekly-pie" data-chart-type="pie-chart" data-chart-url="<?= route_to(
             'analytics-data',
             $podcast->id,
-            'PodcastByPlayer',
+            'PodcastByService',
             'ByServiceWeekly'
         ) ?>"></div>
     </div>

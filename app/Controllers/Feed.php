@@ -23,22 +23,24 @@ class Feed extends Controller
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
 
-        $service = null;
+        $serviceSlug = '';
         try {
             $service = \Opawg\UserAgentsPhp\UserAgentsRSS::find(
                 $_SERVER['HTTP_USER_AGENT']
             );
+            if ($service) {
+                $serviceSlug = $service['slug'];
+            }
         } catch (\Exception $e) {
             // If things go wrong the show must go on and the user must be able to download the file
             log_message('critical', $e);
         }
 
         $cacheName =
-            "podcast{$podcast->id}_feed" .
-            ($service ? "_{$service['slug']}" : '');
+            "podcast{$podcast->id}_feed" . ($service ? "_{$serviceSlug}" : '');
 
         if (!($found = cache($cacheName))) {
-            $found = get_rss_feed($podcast, $service ? $service['name'] : '');
+            $found = get_rss_feed($podcast, $serviceSlug);
 
             // The page cache is set to expire after next episode publication or a decade by default so it is deleted manually upon podcast update
             $secondsToNextUnpublishedEpisode = (new EpisodeModel())->getSecondsToNextUnpublishedEpisode(

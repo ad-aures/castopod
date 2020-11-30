@@ -78,7 +78,7 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                         $service =
                             $jsonRSSUserAgents[
                                 rand(1, count($jsonRSSUserAgents) - 1)
-                            ]['name'];
+                            ]['slug'];
                         $app = isset($player['app']) ? $player['app'] : '';
                         $device = isset($player['device'])
                             ? $player['device']
