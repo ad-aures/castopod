@@ -1,3 +1,10 @@
+# [1.0.0-alpha.27](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.26...v1.0.0-alpha.27) (2020-12-07)
+
+
+### Features
+
+* **platforms:** add AntennaPod ([53e9cfd](https://code.podlibre.org/podlibre/castopod/commit/53e9cfd61c794b1539e9d4691d3c4e73c4b7aaa7))
+
 # [1.0.0-alpha.26](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.25...v1.0.0-alpha.26) (2020-11-30)
 
 
