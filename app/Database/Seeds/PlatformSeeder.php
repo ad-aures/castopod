@@ -26,6 +26,13 @@ class PlatformSeeder extends Seeder
                 'submit_url' => 'http://amazon.com/podcasters',
             ],
             [
+                'slug' => 'antennapod',
+                'type' => 'podcasting',
+                'label' => 'AntennaPod',
+                'home_url' => 'https://antennapod.org/',
+                'submit_url' => 'https://api.podcastindex.org/signup',
+            ],
+            [
                 'slug' => 'apple',
                 'type' => 'podcasting',
                 'label' => 'Apple Podcasts',
