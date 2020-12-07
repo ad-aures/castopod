@@ -30,4 +30,5 @@ return [
     'players' => 'players',
     'listening-time' => 'listening time',
     'time-periods' => 'time periods',
+    'soundbites' => 'soundbites',
 ];

@@ -255,6 +255,19 @@ function get_rss_feed($podcast, $serviceSlug = '')
             $chaptersElement->addAttribute('type', 'application/json+chapters');
         }
 
+        foreach ($episode->soundbites as $soundbite) {
+            $soundbiteElement = $item->addChild(
+                'soundbite',
+                empty($soundbite->label) ? null : $soundbite->label,
+                $podcast_namespace
+            );
+            $soundbiteElement->addAttribute(
+                'start_time',
+                $soundbite->start_time
+            );
+            $soundbiteElement->addAttribute('duration', $soundbite->duration);
+        }
+
         $episode->is_blocked &&
             $item->addChild('block', 'Yes', $itunes_namespace);
     }

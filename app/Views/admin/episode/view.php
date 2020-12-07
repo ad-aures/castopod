@@ -22,7 +22,7 @@
             alt="Episode cover"
             class="object-cover w-full"
         />
-        <audio controls preload="none" class="w-full mb-6">
+        <audio controls preload="auto" class="w-full mb-6">
         <source src="/<?= $episode->enclosure_media_path ?>" type="<?= $episode->enclosure_type ?>">
         Your browser does not support the audio tag.
         </audio>
@@ -51,6 +51,57 @@
     </section>
 </div>
 
+    <div class="mb-12">
+    <?= button(
+        lang('Episode.soundbites_form.title'),
+        route_to('soundbites-edit', $podcast->id, $episode->id),
+        ['variant' => 'info', 'iconLeft' => 'edit'],
+        ['class' => 'mb-4']
+    ) ?>
+    <?php if (count($episode->soundbites) > 0): ?>
+    <?= data_table(
+        [
+            [
+                'header' => 'Play',
+                'cell' => function ($soundbite) {
+                    return icon_button(
+                        'play',
+                        lang('Episode.soundbites_form.play'),
+                        null,
+                        ['variant' => 'primary'],
+                        [
+                            'class' => 'mb-1 mr-1',
+                            'data-type' => 'play-soundbite',
+                            'data-soundbite-start-time' =>
+                                $soundbite->start_time,
+                            'data-soundbite-duration' => $soundbite->duration,
+                        ]
+                    );
+                },
+            ],
+            [
+                'header' => lang('Episode.soundbites_form.start_time'),
+                'cell' => function ($soundbite) {
+                    return format_duration($soundbite->start_time);
+                },
+            ],
+            [
+                'header' => lang('Episode.soundbites_form.duration'),
+                'cell' => function ($soundbite) {
+                    return format_duration($soundbite->duration);
+                },
+            ],
+            [
+                'header' => lang('Episode.soundbites_form.label'),
+                'cell' => function ($soundbite) {
+                    return $soundbite->label;
+                },
+            ],
+        ],
+        $episode->soundbites
+    ) ?>
+    <?php endif; ?>
+    </div>
 
     <div class="mb-12 text-center">
     <h2><?= lang('Charts.episode_by_day') ?></h2>

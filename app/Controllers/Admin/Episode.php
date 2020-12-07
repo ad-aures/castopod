@@ -10,6 +10,7 @@ namespace App\Controllers\Admin;
 
 use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
+use App\Models\SoundbiteModel;
 use CodeIgniter\I18n\Time;
 
 class Episode extends BaseController
@@ -23,6 +24,11 @@ class Episode extends BaseController
      * @var \App\Entities\Episode|null
      */
     protected $episode;
+
+    /**
+     * @var \App\Entities\Soundbite|null
+     */
+    protected $soundbites;
 
     public function _remap($method, ...$params)
     {
@@ -39,9 +45,12 @@ class Episode extends BaseController
             ) {
                 throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
             }
+
+            unset($params[1]);
+            unset($params[0]);
         }
 
-        return $this->$method();
+        return $this->$method(...$params);
     }
 
     public function list()
@@ -315,5 +324,90 @@ class Episode extends BaseController
         (new EpisodeModel())->delete($this->episode->id);
 
         return redirect()->route('episode-list', [$this->podcast->id]);
+    }
+
+    public function soundbitesEdit()
+    {
+        helper(['form']);
+
+        $data = [
+            'podcast' => $this->podcast,
+            'episode' => $this->episode,
+        ];
+
+        replace_breadcrumb_params([
+            0 => $this->podcast->title,
+            1 => $this->episode->title,
+        ]);
+        return view('admin/episode/soundbites', $data);
+    }
+
+    public function soundbitesAttemptEdit()
+    {
+        $soundbites_array = $this->request->getPost('soundbites_array');
+        $rules = [
+            'soundbites_array.0.start_time' =>
+                'permit_empty|required_with[soundbites_array.0.duration]|decimal|greater_than_equal_to[0]',
+            'soundbites_array.0.duration' =>
+                'permit_empty|required_with[soundbites_array.0.start_time]|decimal|greater_than_equal_to[0]',
+        ];
+        foreach ($soundbites_array as $soundbite_id => $soundbite) {
+            $rules += [
+                "soundbites_array.{$soundbite_id}.start_time" => 'required|decimal|greater_than_equal_to[0]',
+                "soundbites_array.{$soundbite_id}.duration" => 'required|decimal|greater_than_equal_to[0]',
+            ];
+        }
+        if (!$this->validate($rules)) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $this->validator->getErrors());
+        }
+
+        foreach ($soundbites_array as $soundbite_id => $soundbite) {
+            if (
+                !empty($soundbite['start_time']) &&
+                !empty($soundbite['duration'])
+            ) {
+                $data = [
+                    'podcast_id' => $this->podcast->id,
+                    'episode_id' => $this->episode->id,
+                    'start_time' => $soundbite['start_time'],
+                    'duration' => $soundbite['duration'],
+                    'label' => $soundbite['label'],
+                    'updated_by' => user()->id,
+                ];
+                if ($soundbite_id == 0) {
+                    $data += ['created_by' => user()->id];
+                } else {
+                    $data += ['id' => $soundbite_id];
+                }
+                $soundbiteModel = new SoundbiteModel();
+                if (!$soundbiteModel->save($data)) {
+                    return redirect()
+                        ->back()
+                        ->withInput()
+                        ->with('errors', $soundbiteModel->errors());
+                }
+            }
+        }
+        return redirect()->route('soundbites-edit', [
+            $this->podcast->id,
+            $this->episode->id,
+        ]);
+    }
+
+    public function soundbiteDelete($soundbiteId)
+    {
+        (new SoundbiteModel())->deleteSoundbite(
+            $this->podcast->id,
+            $this->episode->id,
+            $soundbiteId
+        );
+
+        return redirect()->route('soundbites-edit', [
+            $this->podcast->id,
+            $this->episode->id,
+        ]);
     }
 }

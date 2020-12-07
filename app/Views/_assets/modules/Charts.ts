@@ -3,7 +3,7 @@ import am4geodata_worldLow from "@amcharts/amcharts4-geodata/worldLow";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4maps from "@amcharts/amcharts4/maps";
-import * as am4plugins_sliceGrouper from "@amcharts/amcharts4/plugins/sliceGrouper"; 
+import * as am4plugins_sliceGrouper from "@amcharts/amcharts4/plugins/sliceGrouper";
 import am4themes_material from "@amcharts/amcharts4/themes/material";
 
 const drawPieChart = (chartDivId: string, dataUrl: string | null): void => {
@@ -21,7 +21,9 @@ const drawPieChart = (chartDivId: string, dataUrl: string | null): void => {
   chart.dataSource.parser.options.emptyAs = 0;
   // Add and configure Series
   const pieSeries = chart.series.push(new am4charts.PieSeries());
-  const grouper = pieSeries.plugins.push(new am4plugins_sliceGrouper.SliceGrouper());
+  const grouper = pieSeries.plugins.push(
+    new am4plugins_sliceGrouper.SliceGrouper()
+  );
   grouper.limit = 9;
   grouper.groupName = "- Other -";
   grouper.clickBehavior = "break";
@@ -95,12 +97,11 @@ const drawBarChart = (chartDivId: string, dataUrl: string | null): void => {
   series.dataFields.categoryX = "labels";
   series.name = "Hits";
   series.columns.template.tooltipText = "{valueY} hits";
-  series.columns.template.fillOpacity = .8;
+  series.columns.template.fillOpacity = 0.8;
   const columnTemplate = series.columns.template;
   columnTemplate.strokeWidth = 2;
   columnTemplate.strokeOpacity = 1;
 };
-
 
 const drawXYDurationChart = (
   chartDivId: string,

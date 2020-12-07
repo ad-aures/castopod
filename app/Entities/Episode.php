@@ -9,6 +9,7 @@
 namespace App\Entities;
 
 use App\Models\PodcastModel;
+use App\Models\SoundbiteModel;
 use CodeIgniter\Entity;
 use CodeIgniter\I18n\Time;
 use League\CommonMark\CommonMarkConverter;
@@ -76,6 +77,11 @@ class Episode extends Entity
     protected $chapters_url;
 
     /**
+     * @var \App\Entities\Soundbite[]
+     */
+    protected $soundbites;
+
+    /**
      * Holds text only description, striped of any markdown or html special characters
      *
      * @var string
@@ -95,6 +101,7 @@ class Episode extends Entity
     ];
 
     protected $casts = [
+        'id' => 'integer',
         'guid' => 'string',
         'slug' => 'string',
         'title' => 'string',
@@ -346,6 +353,29 @@ class Episode extends Entity
         return $this->attributes['chapters_uri']
             ? base_url($this->getChaptersMediaPath())
             : null;
+    }
+
+    /**
+     * Returns the episode’s soundbites
+     *
+     * @return \App\Entities\Episode[]
+     */
+    public function getSoundbites()
+    {
+        if (empty($this->id)) {
+            throw new \RuntimeException(
+                'Episode must be created before getting soundbites.'
+            );
+        }
+
+        if (empty($this->soundbites)) {
+            $this->soundbites = (new SoundbiteModel())->getEpisodeSoundbites(
+                $this->getPodcast()->id,
+                $this->id
+            );
+        }
+
+        return $this->soundbites;
     }
 
     public function getLink()

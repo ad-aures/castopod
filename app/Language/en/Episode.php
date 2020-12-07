@@ -82,4 +82,23 @@ return [
         'submit_create' => 'Create episode',
         'submit_edit' => 'Save episode',
     ],
+    'soundbites' => 'Soundbites',
+    'soundbites_form' => [
+        'title' => 'Edit soundbites',
+        'info_section_title' => 'Episode soundbites',
+        'info_section_subtitle' => 'Add, edit or delete soundbites',
+        'start_time' => 'Start',
+        'start_time_hint' =>
+            'The first second of the soundbite, it can be a decimal number.',
+        'duration' => 'Duration',
+        'duration_hint' =>
+            'The duration of the soundbite (in seconds), it can be a decimal number.',
+        'label' => 'Label',
+        'label_hint' => 'Text that will be displayed.',
+        'play' => 'Play soundbite',
+        'delete' => 'Delete soundbite',
+        'bookmark' =>
+            'Click while playing to get current position, click again to get duration.',
+        'submit_edit' => 'Save all soundbites',
+    ],
 ];

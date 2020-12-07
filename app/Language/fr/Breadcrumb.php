@@ -30,4 +30,5 @@ return [
     'players' => 'lecteurs',
     'listening-time' => 'drée d’écoute',
     'time-periods' => 'périodes',
+    'soundbites' => 'extraits sonores',
 ];

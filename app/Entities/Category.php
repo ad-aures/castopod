@@ -19,6 +19,7 @@ class Category extends Entity
     protected $parent;
 
     protected $casts = [
+        'id' => 'integer',
         'parent_id' => 'integer',
         'code' => 'string',
         'apple_category' => 'string',

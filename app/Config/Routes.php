@@ -253,6 +253,29 @@ $routes->group(
                                 'filter' => 'permission:podcast_episodes-edit',
                             ]
                         );
+                        $routes->get(
+                            'soundbites',
+                            'Episode::soundbitesEdit/$1/$2',
+                            [
+                                'as' => 'soundbites-edit',
+                                'filter' => 'permission:podcast_episodes-edit',
+                            ]
+                        );
+                        $routes->post(
+                            'soundbites',
+                            'Episode::soundbitesAttemptEdit/$1/$2',
+                            [
+                                'filter' => 'permission:podcast_episodes-edit',
+                            ]
+                        );
+                        $routes->add(
+                            'soundbites/(:num)/delete',
+                            'Episode::soundbiteDelete/$1/$2/$3',
+                            [
+                                'as' => 'soundbite-delete',
+                                'filter' => 'permission:podcast_episodes-edit',
+                            ]
+                        );
                     });
                 });
 
