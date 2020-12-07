@@ -1,3 +1,10 @@
+# [1.0.0-alpha.28](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.27...v1.0.0-alpha.28) (2020-12-07)
+
+
+### Features
+
+* **rss:** add soundbites according to the podcastindex specs ([6b34617](https://code.podlibre.org/podlibre/castopod/commit/6b34617d07c70522cb941e96d91d9987493413eb)), closes [#83](https://code.podlibre.org/podlibre/castopod/issues/83)
+
 # [1.0.0-alpha.27](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.26...v1.0.0-alpha.27) (2020-12-07)
 
 
