@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="/assets/index.css"/>
     <link rel="canonical" href="<?= current_url() ?>" />
     <script src="/assets/podcast.js" type="module" defer></script>
-    <script src="/assets/soundbites.js" type="module" defer></script>
     <meta property="og:title" content="<?= $episode->title ?>" />
     <meta property="og:locale" content="<?= $podcast->language_code ?>" />
     <meta property="og:site_name" content="<?= $podcast->title ?>" />
@@ -106,54 +105,7 @@
             Your browser does not support the audio tag.
           </audio>
         </div>
-      </header>
-
-    <?php if (count($episode->soundbites) > 0): ?>
-        <div class="w-full max-w-3xl px-2 py-6 mx-auto md:px-6">
-    <?= data_table(
-        [
-            [
-                'header' => lang('Episode.soundbites'),
-                'cell' => function ($soundbite) {
-                    return icon_button(
-                        'play',
-                        lang('Episode.soundbites_form.play'),
-                        null,
-                        ['variant' => 'primary'],
-                        [
-                            'class' => 'mb-1 mr-1',
-                            'data-type' => 'play-soundbite',
-                            'data-soundbite-start-time' =>
-                                $soundbite->start_time,
-                            'data-soundbite-duration' => $soundbite->duration,
-                        ]
-                    );
-                },
-            ],
-            [
-                'header' => lang('Episode.soundbites_form.start_time'),
-                'cell' => function ($soundbite) {
-                    return format_duration($soundbite->start_time);
-                },
-            ],
-            [
-                'header' => lang('Episode.soundbites_form.duration'),
-                'cell' => function ($soundbite) {
-                    return format_duration($soundbite->duration);
-                },
-            ],
-            [
-                'header' => lang('Episode.soundbites_form.label'),
-                'cell' => function ($soundbite) {
-                    return $soundbite->label;
-                },
-            ],
-        ],
-        $episode->soundbites
-    ) ?>
-    </div>
-<?php endif; ?>
-      
+      </header>      
       <section class="w-full max-w-3xl px-2 py-6 mx-auto prose md:px-6">
       <?= $episode->description_html ?>
       </section>

@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="/assets/admin.css"/>
     <link rel="stylesheet" href="/assets/index.css"/>
     <script src="/assets/admin.js" type="module" defer></script>
-    <script src="/assets/soundbites.js" type="module" defer></script>
 </head>
 
 <body class="relative bg-gray-100 holy-grail-grid">
