@@ -23,8 +23,11 @@ return [
     'delete' => 'Supprimer',
     'go_to_page' => 'Voir',
     'create' => 'Ajouter un épisode',
-    'published' => 'Publié le {0}',
-    'scheduled' => 'Planifié pour le {0}',
+    'publication_status' => [
+        'published' => 'Publié le {0}',
+        'scheduled' => 'Planifié pour le {0}',
+        'not_published' => 'Non publié',
+    ],
     'form' => [
         'enclosure' => 'Fichier audio',
         'enclosure_hint' => 'Sélectionnez un fichier audio .mp3 ou .m4a.',
@@ -58,6 +61,7 @@ return [
         'publication_section_title' => 'Information de publication',
         'publication_section_subtitle' => '',
         'publication_date' => 'Date de publication',
+        'publication_date_clear' => 'Effacer la date de publication',
         'publication_date_hint' =>
             'Vous pouvez planifier la sortie de l’épisode en saisissant une date de publication future. Ce champ doit être au format YYYY-MM-DD HH:mm',
         'parental_advisory' => [

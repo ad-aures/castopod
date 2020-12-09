@@ -117,6 +117,7 @@ class Episode extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
+        $publicationDate = $this->request->getPost('publication_date');
         $newEpisode = new \App\Entities\Episode([
             'podcast_id' => $this->podcast->id,
             'title' => $this->request->getPost('title'),
@@ -141,11 +142,13 @@ class Episode extends BaseController
             'is_blocked' => $this->request->getPost('block') == 'yes',
             'created_by' => user(),
             'updated_by' => user(),
-            'published_at' => Time::createFromFormat(
-                'Y-m-d H:i',
-                $this->request->getPost('publication_date'),
-                $this->request->getPost('client_timezone')
-            )->setTimezone('UTC'),
+            'published_at' => $publicationDate
+                ? Time::createFromFormat(
+                    'Y-m-d H:i',
+                    $publicationDate,
+                    $this->request->getPost('client_timezone')
+                )->setTimezone('UTC')
+                : null,
         ]);
 
         $episodeModel = new EpisodeModel();
@@ -231,11 +234,16 @@ class Episode extends BaseController
             : null;
         $this->episode->type = $this->request->getPost('type');
         $this->episode->is_blocked = $this->request->getPost('block') == 'yes';
-        $this->episode->published_at = Time::createFromFormat(
-            'Y-m-d H:i',
-            $this->request->getPost('publication_date'),
-            $this->request->getPost('client_timezone')
-        )->setTimezone('UTC');
+
+        $publicationDate = $this->request->getPost('publication_date');
+        $this->episode->published_at = $publicationDate
+            ? Time::createFromFormat(
+                'Y-m-d H:i',
+                $publicationDate,
+                $this->request->getPost('client_timezone')
+            )->setTimezone('UTC')
+            : null;
+
         $this->episode->updated_by = user();
 
         $enclosure = $this->request->getFile('enclosure');

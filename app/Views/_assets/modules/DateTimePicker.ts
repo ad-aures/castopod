@@ -11,30 +11,36 @@ const isBrowserLocale24h = () =>
     .match(/AM/);
 
 const DateTimePicker = (): void => {
-  const dateTimeContainers: NodeListOf<HTMLInputElement> = document.querySelectorAll(
-    "input[data-picker='datetime']"
+  const dateTimeContainers: NodeListOf<HTMLDivElement> = document.querySelectorAll(
+    "div[data-picker='datetime']"
   );
 
   for (let i = 0; i < dateTimeContainers.length; i++) {
     const dateTimeContainer = dateTimeContainers[i];
-
-    const flatpickrInstance = flatpickr(dateTimeContainer, {
-      enableTime: true,
-      time_24hr: isBrowserLocale24h(),
-    });
-
-    // convert container UTC date value to user timezone
-    const dateTime = new Date(dateTimeContainer.value);
-    const dateUTC = Date.UTC(
-      dateTime.getFullYear(),
-      dateTime.getMonth(),
-      dateTime.getDate(),
-      dateTime.getHours(),
-      dateTime.getMinutes()
+    const dateTimeInput: HTMLInputElement | null = dateTimeContainer.querySelector(
+      "input[data-input]"
     );
 
-    // set converted date as field value
-    flatpickrInstance.setDate(new Date(dateUTC));
+    if (dateTimeInput) {
+      const flatpickrInstance = flatpickr(dateTimeContainer, {
+        enableTime: true,
+        time_24hr: isBrowserLocale24h(),
+        wrap: true,
+      });
+
+      // convert container UTC date value to user timezone
+      const dateTime = new Date(dateTimeInput.value);
+      const dateUTC = Date.UTC(
+        dateTime.getFullYear(),
+        dateTime.getMonth(),
+        dateTime.getDate(),
+        dateTime.getHours(),
+        dateTime.getMinutes()
+      );
+
+      // set converted date as field value
+      flatpickrInstance.setDate(new Date(dateUTC));
+    }
   }
 };
 

@@ -8,7 +8,7 @@
 <?= $episode->title .
     publication_pill(
         $episode->published_at,
-        $episode->is_published,
+        $episode->publication_status,
         'text-sm ml-2 align-middle'
     ) ?>
 <?= $this->endSection() ?>

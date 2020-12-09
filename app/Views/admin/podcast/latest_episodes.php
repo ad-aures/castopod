@@ -33,17 +33,19 @@
                                 'font-bold text-gray-600',
                                 true
                             ) ?>
-                            <span class="mx-1">•</span>
-                            <time
-                            pubdate
-                            datetime="<?= $episode->published_at->format(
-                                DateTime::ATOM
-                            ) ?>"
-                            title="<?= $episode->published_at ?>">
-                            <?= lang('Common.mediumDate', [
-                                $episode->published_at,
-                            ]) ?>
-                            </time>
+                            <?php if ($episode->published_at): ?>
+                                <span class="mx-1">•</span>
+                                <time
+                                pubdate
+                                datetime="<?= $episode->published_at->format(
+                                    DateTime::ATOM
+                                ) ?>"
+                                title="<?= $episode->published_at ?>">
+                                <?= lang('Common.mediumDate', [
+                                    $episode->published_at,
+                                ]) ?>
+                                </time>
+                            <?php endif; ?>
                         </div>
                     </div>
                     <div class="relative" data-toggle="dropdown">

@@ -3,8 +3,6 @@ const Time = (): void => {
     "time"
   );
 
-  console.log(timeElements);
-
   for (let i = 0; i < timeElements.length; i++) {
     const timeElement = timeElements[i];
 

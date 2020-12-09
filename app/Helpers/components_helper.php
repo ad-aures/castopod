@@ -271,27 +271,30 @@ if (!function_exists('publication_pill')) {
      */
     function publication_pill(
         $publicationDate,
-        $isPublished,
+        $publicationStatus,
         $customClass = ''
     ): string {
-        $class = $isPublished
-            ? 'text-green-500 border-green-500'
-            : 'text-orange-600 border-orange-600';
+        $class =
+            $publicationStatus === 'published'
+                ? 'text-green-500 border-green-500'
+                : 'text-orange-600 border-orange-600';
 
-        $label = lang(
-            $isPublished ? 'Episode.published' : 'Episode.scheduled',
-            [
-                '<time
-                pubdate
-                datetime="' .
+        $transParam = [];
+        if ($publicationDate) {
+            $transParam = [
+                '<time pubdate datetime="' .
                 $publicationDate->format(DateTime::ATOM) .
-                '"
-                title="' .
+                '" title="' .
                 $publicationDate .
                 '">' .
                 lang('Common.mediumDate', [$publicationDate]) .
                 '</time>',
-            ]
+            ];
+        }
+
+        $label = lang(
+            'Episode.publication_status.' . $publicationStatus,
+            $transParam
         );
 
         return '<span class="px-1 border ' .

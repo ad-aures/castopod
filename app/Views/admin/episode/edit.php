@@ -202,18 +202,25 @@
     [],
     lang('Episode.form.publication_date_hint')
 ) ?>
-<?= form_input([
-    'id' => 'publication_date',
-    'name' => 'publication_date',
-    'class' => 'form-input mb-4',
-    'value' => old(
-        'publication_date',
-        $episode->published_at
-            ? $episode->published_at->format('Y-m-d H:i')
-            : ''
-    ),
-    'data-picker' => 'datetime',
-]) ?>
+<div class="flex mb-4" data-picker="datetime">
+    <?= form_input([
+        'id' => 'publication_date',
+        'name' => 'publication_date',
+        'class' => 'form-input rounded-r-none flex-1',
+        'value' => old(
+            'publication_date',
+            $episode->published_at
+                ? $episode->published_at->format('Y-m-d H:i')
+                : ''
+        ),
+        'data-input' => '',
+    ]) ?>
+    <button
+        class="p-3 bg-green-100 border border-l-0 focus:outline-none rounded-r-md hover:bg-green-200 focus:shadow-outline"
+        type="button"
+        title="<?= lang('Episode.form.publication_date_clear') ?>"
+        data-clear=""><?= icon('close') ?></button>
+</div>
 
 <?= form_fieldset('', ['class' => 'mb-6']) ?>
     <legend>

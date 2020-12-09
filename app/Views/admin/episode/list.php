@@ -65,9 +65,7 @@
                                         'soundbites-edit',
                                         $podcast->id,
                                         $episode->id
-                                    ) ?>"><?= lang(
-    'Episode.soundbites'
-) ?></a>
+                                    ) ?>"><?= lang('Episode.soundbites') ?></a>
                                     <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
                                         'episode',
                                         $podcast->name,
@@ -84,7 +82,7 @@
                     <div class="mb-2 text-xs">
                         <?= publication_pill(
                             $episode->published_at,
-                            $episode->is_published
+                            $episode->publication_status
                         ) ?>
                         <span class="mx-1">•</span>
                         <time datetime="PT<?= $episode->enclosure_duration ?>S">

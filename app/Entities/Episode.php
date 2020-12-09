@@ -89,9 +89,9 @@ class Episode extends Entity
     protected $description;
 
     /**
-     * @var boolean
+     * @var string
      */
-    protected $is_published;
+    protected $publication_status;
 
     protected $dates = [
         'published_at',
@@ -462,16 +462,21 @@ class Episode extends Entity
         return $this;
     }
 
-    public function getIsPublished()
+    public function getPublicationStatus()
     {
-        if ($this->is_published) {
-            return $this->is_published;
+        if ($this->publication_status) {
+            return $this->publication_status;
+        }
+
+        if (!$this->published_at) {
+            return 'not_published';
         }
 
         helper('date');
+        if ($this->published_at->isBefore(Time::now())) {
+            return 'published';
+        }
 
-        $this->is_published = $this->published_at->isBefore(Time::now());
-
-        return $this->is_published;
+        return 'scheduled';
     }
 }
