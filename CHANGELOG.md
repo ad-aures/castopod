@@ -1,3 +1,15 @@
+# [1.0.0-alpha.29](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.28...v1.0.0-alpha.29) (2020-12-10)
+
+
+### Bug Fixes
+
+* **episodes:** add publication status + set publication date to null when none has been set ([d882981](https://code.podlibre.org/podlibre/castopod/commit/d882981b3a86c81921ce6b07d4cf61fc13983689)), closes [#70](https://code.podlibre.org/podlibre/castopod/issues/70)
+
+
+### Reverts
+
+* **soundbites:** remove soundbite table from episode's public page ([5dc0f19](https://code.podlibre.org/podlibre/castopod/commit/5dc0f19656de0d764f627d6ae78a9e306c901835))
+
 # [1.0.0-alpha.28](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.27...v1.0.0-alpha.28) (2020-12-07)
 
 
