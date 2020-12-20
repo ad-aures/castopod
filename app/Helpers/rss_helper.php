@@ -67,11 +67,19 @@ function get_rss_feed($podcast, $serviceSlug = '')
     $channel->addChild('language', $podcast->language_code);
 
     if (!empty($podcast->payment_pointer)) {
-        $channel->addChild(
-            'monetization',
-            $podcast->payment_pointer,
+        $valueElement = $channel->addChild('value', null, $podcast_namespace);
+        $valueElement->addAttribute('type', 'webmonetization');
+        $valueElement->addAttribute('method', '');
+        $valueElement->addAttribute('suggested', '');
+        $recipientElement = $valueElement->addChild(
+            'valueRecipient',
+            null,
             $podcast_namespace
         );
+        $recipientElement->addAttribute('name', $podcast->owner_name);
+        $recipientElement->addAttribute('type', 'ILP');
+        $recipientElement->addAttribute('address', $podcast->payment_pointer);
+        $recipientElement->addAttribute('split', 100);
     }
     $channel
         ->addChild(
