@@ -1,3 +1,10 @@
+# [1.0.0-alpha.30](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.29...v1.0.0-alpha.30) (2020-12-21)
+
+
+### Features
+
+* **rss:** update monetization tag so that it meets PodcastIndex requirements ([4c7ecbe](https://code.podlibre.org/podlibre/castopod/commit/4c7ecbee83950e5f9f2482cedaab18a1ac9bfc9e))
+
 # [1.0.0-alpha.29](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.28...v1.0.0-alpha.29) (2020-12-10)
 
 

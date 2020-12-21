@@ -7,7 +7,7 @@
 //
 // NOTE: this constant is updated upon release with Continuous Integration.
 //
-defined('CP_VERSION') || define('CP_VERSION', '1.0.0-alpha.29');
+defined('CP_VERSION') || define('CP_VERSION', '1.0.0-alpha.30');
 
 //--------------------------------------------------------------------
 // App Namespace
