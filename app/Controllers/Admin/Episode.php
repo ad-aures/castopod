@@ -126,6 +126,7 @@ class Episode extends BaseController
             'enclosure' => $this->request->getFile('enclosure'),
             'description_markdown' => $this->request->getPost('description'),
             'image' => $this->request->getFile('image'),
+            'location' => $this->request->getPost('location_name'),
             'transcript' => $this->request->getFile('transcript'),
             'chapters' => $this->request->getFile('chapters'),
             'parental_advisory' =>
@@ -222,6 +223,7 @@ class Episode extends BaseController
         $this->episode->description_markdown = $this->request->getPost(
             'description'
         );
+        $this->episode->location = $this->request->getPost('location_name');
         $this->episode->parental_advisory =
             $this->request->getPost('parental_advisory') !== 'undefined'
                 ? $this->request->getPost('parental_advisory')

@@ -65,7 +65,23 @@ function get_rss_feed($podcast, $serviceSlug = '')
     $itunes_image = $channel->addChild('image', null, $itunes_namespace);
     $itunes_image->addAttribute('href', $podcast->image->original_url);
     $channel->addChild('language', $podcast->language_code);
-
+    if (!empty($podcast->location_name)) {
+        $locationElement = $channel->addChild(
+            'location',
+            null,
+            $podcast_namespace
+        );
+        $locationElement->addAttribute(
+            'name',
+            htmlspecialchars($podcast->location_name)
+        );
+        if (!empty($podcast->location_geo)) {
+            $locationElement->addAttribute('geo', $podcast->location_geo);
+        }
+        if (!empty($podcast->location_osmid)) {
+            $locationElement->addAttribute('osmid', $podcast->location_osmid);
+        }
+    }
     if (!empty($podcast->payment_pointer)) {
         $valueElement = $channel->addChild('value', null, $podcast_namespace);
         $valueElement->addAttribute('type', 'webmonetization');
@@ -203,6 +219,26 @@ function get_rss_feed($podcast, $serviceSlug = '')
             'pubDate',
             $episode->published_at->format(DATE_RFC1123)
         );
+        if (!empty($episode->location_name)) {
+            $locationElement = $item->addChild(
+                'location',
+                null,
+                $podcast_namespace
+            );
+            $locationElement->addAttribute(
+                'name',
+                htmlspecialchars($episode->location_name)
+            );
+            if (!empty($episode->location_geo)) {
+                $locationElement->addAttribute('geo', $episode->location_geo);
+            }
+            if (!empty($episode->location_osmid)) {
+                $locationElement->addAttribute(
+                    'osmid',
+                    $episode->location_osmid
+                );
+            }
+        }
         $item->addChildWithCDATA('description', $episode->description_html);
         $item->addChild(
             'duration',

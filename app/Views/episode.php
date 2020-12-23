@@ -100,6 +100,12 @@
                 <?= format_duration($episode->enclosure_duration) ?>
               </time>
           </div>
+          <?= location_link(
+              $episode->location_name,
+              $episode->location_geo,
+              $episode->location_osmid,
+              'self-start mt-2'
+          ) ?>
           <audio controls preload="none" class="w-full mt-auto">
             <source src="<?= $episode->enclosure_web_url ?>" type="<?= $episode->enclosure_type ?>">
             Your browser does not support the audio tag.

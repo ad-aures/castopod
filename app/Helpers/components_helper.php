@@ -318,7 +318,7 @@ if (!function_exists('episode_numbering')) {
      * @param string    $class styling classes
      * @param string    $is_abbr component will show abbreviated numbering if true
      *
-     * @return string
+     * @return string|null
      */
     function episode_numbering(
         $episodeNumber = null,
@@ -365,6 +365,63 @@ if (!function_exists('episode_numbering')) {
             '">' .
             lang($transKey, $args) .
             '</span>';
+    }
+}
+
+if (!function_exists('location_link')) {
+    /**
+     * Returns link to display from location info
+     *
+     * @param string $locationName
+     * @param string $locationGeo
+     * @param string $locationOsmid
+     *
+     * @return string
+     */
+    function location_link(
+        $locationName,
+        $locationGeo,
+        $locationOsmid,
+        $class = ''
+    ) {
+        $link = null;
+        if (!empty($locationName)) {
+            $uri = '';
+            if (!empty($locationOsmid)) {
+                $uri =
+                    'https://www.openstreetmap.org/' .
+                    ['N' => 'node', 'W' => 'way', 'R' => 'relation'][
+                        substr($locationOsmid, 0, 1)
+                    ] .
+                    '/' .
+                    substr($locationOsmid, 1);
+            } elseif (!empty($locationGeo)) {
+                $uri =
+                    'https://www.openstreetmap.org/#map=17/' .
+                    str_replace(',', '/', substr($locationGeo, 4));
+            } else {
+                $uri =
+                    'https://www.openstreetmap.org/search?query=' .
+                    urlencode($locationName);
+            }
+            $link = button(
+                $locationName,
+                $uri,
+                [
+                    'variant' => 'default',
+                    'size' => 'small',
+                    'isRoundedFull' => true,
+                    'iconLeft' => 'map-pin',
+                ],
+                [
+                    'class' =>
+                        'text-gray-800' . (empty($class) ? '' : " $class"),
+                    'target' => '_blank',
+                    'rel' => 'noreferrer noopener',
+                ]
+            );
+        }
+        return $link;
     }
 }
 

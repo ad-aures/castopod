@@ -120,6 +120,9 @@ class Episode extends Entity
         'season_number' => '?integer',
         'type' => 'string',
         'is_blocked' => 'boolean',
+        'location_name' => '?string',
+        'location_geo' => '?string',
+        'location_osmid' => '?string',
         'created_by' => 'integer',
         'updated_by' => 'integer',
     ];
@@ -478,5 +481,33 @@ class Episode extends Entity
         }
 
         return 'scheduled';
+    }
+
+    /**
+     * Saves the location name and fetches OpenStreetMap info
+     *
+     * @param string $locationName
+     *
+     */
+    public function setLocation($locationName = null)
+    {
+        helper('location');
+
+        if (
+            $locationName &&
+            (empty($this->attributes['location_name']) ||
+                $this->attributes['location_name'] != $locationName)
+        ) {
+            $this->attributes['location_name'] = $locationName;
+            if ($location = fetch_osm_location($locationName)) {
+                $this->attributes['location_geo'] = $location['geo'];
+                $this->attributes['location_osmid'] = $location['osmid'];
+            }
+        } elseif (empty($locationName)) {
+            $this->attributes['location_name'] = null;
+            $this->attributes['location_geo'] = null;
+            $this->attributes['location_osmid'] = null;
+        }
+        return $this;
     }
 }

@@ -96,6 +96,9 @@ class Podcast extends Entity
         'is_locked' => 'boolean',
         'imported_feed_url' => '?string',
         'new_feed_url' => '?string',
+        'location_name' => '?string',
+        'location_geo' => '?string',
+        'location_osmid' => '?string',
         'payment_pointer' => '?string',
         'created_by' => 'integer',
         'updated_by' => 'integer',
@@ -366,5 +369,33 @@ class Podcast extends Entity
         }
 
         return $this->other_categories_ids;
+    }
+
+    /**
+     * Saves the location name and fetches OpenStreetMap info
+     *
+     * @param string $locationName
+     *
+     */
+    public function setLocation($locationName = null)
+    {
+        helper('location');
+
+        if (
+            $locationName &&
+            (empty($this->attributes['location_name']) ||
+                $this->attributes['location_name'] != $locationName)
+        ) {
+            $this->attributes['location_name'] = $locationName;
+            if ($location = fetch_osm_location($locationName)) {
+                $this->attributes['location_geo'] = $location['geo'];
+                $this->attributes['location_osmid'] = $location['osmid'];
+            }
+        } elseif (empty($locationName)) {
+            $this->attributes['location_name'] = null;
+            $this->attributes['location_geo'] = null;
+            $this->attributes['location_osmid'] = null;
+        }
+        return $this;
     }
 }

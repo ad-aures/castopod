@@ -62,6 +62,10 @@ return [
         'publisher_hint' =>
             'Le groupe responsable de la création du podcast. Fait souvent référence à la société mère ou au réseau d’un podcast. Ce champ est parfois appelé « Auteur ».',
         'copyright' => 'Droit d’auteur',
+        'location_section_title' => 'Localisation',
+        'location_section_subtitle' => 'De quel lieu ce podcast parle-t-il ?',
+        'location_name' => 'Nom ou adresse du lieu',
+        'location_name_hint' => 'Ce lieu peut être réel ou fictif',
         'monetization_section_title' => 'Monétisation',
         'monetization_section_subtitle' =>
             'Gagnez de l’argent grâce à votre audience.',

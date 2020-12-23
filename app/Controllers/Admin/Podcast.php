@@ -161,6 +161,7 @@ class Podcast extends BaseController
             'publisher' => $this->request->getPost('publisher'),
             'type' => $this->request->getPost('type'),
             'copyright' => $this->request->getPost('copyright'),
+            'location' => $this->request->getPost('location_name'),
             'payment_pointer' => $this->request->getPost('payment_pointer'),
             'is_blocked' => $this->request->getPost('is_blocked') === 'yes',
             'is_completed' => $this->request->getPost('complete') === 'yes',
@@ -254,6 +255,7 @@ class Podcast extends BaseController
         $this->podcast->owner_email = $this->request->getPost('owner_email');
         $this->podcast->type = $this->request->getPost('type');
         $this->podcast->copyright = $this->request->getPost('copyright');
+        $this->podcast->location = $this->request->getPost('location_name');
         $this->podcast->payment_pointer = $this->request->getPost(
             'payment_pointer'
         );

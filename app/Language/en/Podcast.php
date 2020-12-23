@@ -61,6 +61,10 @@ return [
         'publisher_hint' =>
             'The group responsible for creating the show. Often refers to the parent company or network of a podcast. This field is sometimes labeled as ’Author’.',
         'copyright' => 'Copyright',
+        'location_section_title' => 'Location',
+        'location_section_subtitle' => 'What place is this podcast about?',
+        'location_name' => 'Location name or address',
+        'location_name_hint' => 'This can be a real place or fictional',
         'monetization_section_title' => 'Monetization',
         'monetization_section_subtitle' =>
             'Earn money thanks to your audience.',

@@ -109,6 +109,21 @@ class AddEpisodes extends Migration
                 'constraint' => 1,
                 'default' => 0,
             ],
+            'location_name' => [
+                'type' => 'VARCHAR',
+                'constraint' => 128,
+                'null' => true,
+            ],
+            'location_geo' => [
+                'type' => 'VARCHAR',
+                'constraint' => 32,
+                'null' => true,
+            ],
+            'location_osmid' => [
+                'type' => 'VARCHAR',
+                'constraint' => 12,
+                'null' => true,
+            ],
             'created_by' => [
                 'type' => 'INT',
                 'unsigned' => true,

@@ -11,6 +11,12 @@
         $episode->publication_status,
         'text-sm ml-2 align-middle'
     ) ?>
+    <?= location_link(
+        $episode->location_name,
+        $episode->location_geo,
+        $episode->location_osmid,
+        'ml-2'
+    ) ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>

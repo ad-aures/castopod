@@ -121,11 +121,13 @@ class PodcastImport extends BaseController
                     $channelDescriptionHtml
                 ),
                 'description_html' => $channelDescriptionHtml,
-                'image' => $nsItunes->image && !empty($nsItunes->image->attributes())
-                    ? download_file($nsItunes->image->attributes())
-                    : ($feed->channel[0]->image && !empty($feed->channel[0]->image->url)
-                        ? download_file($feed->channel[0]->image->url)
-                        : null),
+                'image' =>
+                    $nsItunes->image && !empty($nsItunes->image->attributes())
+                        ? download_file($nsItunes->image->attributes())
+                        : ($feed->channel[0]->image &&
+                        !empty($feed->channel[0]->image->url)
+                            ? download_file($feed->channel[0]->image->url)
+                            : null),
                 'language_code' => $this->request->getPost('language'),
                 'category_id' => $this->request->getPost('category'),
                 'parental_advisory' => empty($nsItunes->explicit)
@@ -146,6 +148,19 @@ class PodcastImport extends BaseController
                 'is_completed' => empty($nsItunes->complete)
                     ? false
                     : $nsItunes->complete === 'yes',
+                'location_name' => !$nsPodcast->location
+                    ? null
+                    : $nsPodcast->location->attributes()['name'],
+                'location_geo' =>
+                    !$nsPodcast->location ||
+                    empty($nsPodcast->location->attributes()['geo'])
+                        ? null
+                        : $nsPodcast->location->attributes()['geo'],
+                'location_osmid' =>
+                    !$nsPodcast->location ||
+                    empty($nsPodcast->location->attributes()['osmid'])
+                        ? null
+                        : $nsPodcast->location->attributes()['osmid'],
                 'created_by' => user(),
                 'updated_by' => user(),
             ]);
@@ -243,6 +258,9 @@ class PodcastImport extends BaseController
             $nsItunes = $item->children(
                 'http://www.itunes.com/dtds/podcast-1.0.dtd'
             );
+            $nsPodcast = $item->children(
+                'https://github.com/Podcastindex-org/podcast-namespace/blob/main/docs/1.0.md'
+            );
 
             $slug = slugify(
                 $this->request->getPost('slug_field') === 'title'
@@ -306,6 +324,19 @@ class PodcastImport extends BaseController
                 'is_blocked' => empty($nsItunes->block)
                     ? false
                     : $nsItunes->block === 'yes',
+                'location_name' => !$nsPodcast->location
+                    ? null
+                    : $nsPodcast->location->attributes()['name'],
+                'location_geo' =>
+                    !$nsPodcast->location ||
+                    empty($nsPodcast->location->attributes()['geo'])
+                        ? null
+                        : $nsPodcast->location->attributes()['geo'],
+                'location_osmid' =>
+                    !$nsPodcast->location ||
+                    empty($nsPodcast->location->attributes()['osmid'])
+                        ? null
+                        : $nsPodcast->location->attributes()['osmid'],
                 'created_by' => user(),
                 'updated_by' => user(),
                 'published_at' => strtotime($item->pubDate),

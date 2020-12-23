@@ -6,6 +6,12 @@
 
 <?= $this->section('pageTitle') ?>
 <?= $podcast->title ?>
+<?= location_link(
+    $podcast->location_name,
+    $podcast->location_geo,
+    $podcast->location_osmid,
+    'ml-4'
+) ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>

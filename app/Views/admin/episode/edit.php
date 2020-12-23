@@ -190,6 +190,25 @@
 
 <?= form_section_close() ?>
 
+<?= form_section(
+    lang('Episode.form.location_section_title'),
+    lang('Episode.form.location_section_subtitle')
+) ?>
+
+<?= form_label(
+    lang('Episode.form.location_name'),
+    'location_name',
+    [],
+    lang('Episode.form.location_name_hint'),
+    true
+) ?>
+<?= form_input([
+    'id' => 'location_name',
+    'name' => 'location_name',
+    'class' => 'form-input mb-4',
+    'value' => old('location_name', $episode->location_name),
+]) ?>
+<?= form_section_close() ?>
 
 <?= form_section(
     lang('Episode.form.publication_section_title'),

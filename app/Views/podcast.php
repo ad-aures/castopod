@@ -49,6 +49,12 @@
                                 lang('Common.explicit') .
                                 '</span>'
                             : '' ?>
+                        <?= location_link(
+                            $podcast->location_name,
+                            $podcast->location_geo,
+                            $podcast->location_osmid,
+                            'ml-4'
+                        ) ?>
                     </div>
                     <div class="flex mb-2 space-x-2">
                         <?= anchor(

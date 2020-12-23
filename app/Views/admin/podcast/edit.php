@@ -252,6 +252,26 @@
 <?= form_section_close() ?>
 
 <?= form_section(
+    lang('Podcast.form.location_section_title'),
+    lang('Podcast.form.location_section_subtitle')
+) ?>
+
+<?= form_label(
+    lang('Podcast.form.location_name'),
+    'location_name',
+    [],
+    lang('Podcast.form.location_name_hint'),
+    true
+) ?>
+<?= form_input([
+    'id' => 'location_name',
+    'name' => 'location_name',
+    'class' => 'form-input mb-4',
+    'value' => old('location_name', $podcast->location_name),
+]) ?>
+<?= form_section_close() ?>
+
+<?= form_section(
     lang('Podcast.form.monetization_section_title'),
     lang('Podcast.form.monetization_section_subtitle')
 ) ?>
@@ -260,7 +280,8 @@
     lang('Podcast.form.payment_pointer'),
     'payment_pointer',
     [],
-    lang('Podcast.form.payment_pointer_hint')
+    lang('Podcast.form.payment_pointer_hint'),
+    true
 ) ?>
 <?= form_input([
     'id' => 'payment_pointer',
