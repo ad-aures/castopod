@@ -1,3 +1,10 @@
+# [1.0.0-alpha.31](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.30...v1.0.0-alpha.31) (2020-12-23)
+
+
+### Features
+
+* **rss:** add podcast:location tag ([c0a2282](https://code.podlibre.org/podlibre/castopod/commit/c0a22829bd87d48535a86e60c6cd7280e44683a2))
+
 # [1.0.0-alpha.30](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.29...v1.0.0-alpha.30) (2020-12-21)
 
 
