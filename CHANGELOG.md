@@ -1,3 +1,10 @@
+# [1.0.0-alpha.32](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.31...v1.0.0-alpha.32) (2021-02-10)
+
+
+### Features
+
+* **person:** add podcastindex.org namespace person tag ([8acd011](https://code.podlibre.org/podlibre/castopod/commit/8acd011f13e99492ef4b44b327685bb006fe5f8f))
+
 # [1.0.0-alpha.31](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.30...v1.0.0-alpha.31) (2020-12-23)
 
 
