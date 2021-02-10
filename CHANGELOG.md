@@ -1,3 +1,10 @@
+# [1.0.0-alpha.33](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.32...v1.0.0-alpha.33) (2021-02-10)
+
+
+### Features
+
+* **platforms:** add helloasso ([16cb993](https://code.podlibre.org/podlibre/castopod/commit/16cb993ee6e28987a840fc27a9c2c73794c67697))
+
 # [1.0.0-alpha.32](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.31...v1.0.0-alpha.32) (2021-02-10)
 
 
