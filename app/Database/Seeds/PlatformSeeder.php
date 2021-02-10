@@ -259,6 +259,13 @@ class PlatformSeeder extends Seeder
                 'submit_url' => 'https://www.gofundme.com/sign-up',
             ],
             [
+                'slug' => 'helloasso',
+                'type' => 'funding',
+                'label' => 'helloasso',
+                'home_url' => 'https://www.helloasso.com/',
+                'submit_url' => 'https://auth.helloasso.com/inscription',
+            ],
+            [
                 'slug' => 'indiegogo',
                 'type' => 'funding',
                 'label' => 'Indiegogo',
