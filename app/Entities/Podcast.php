@@ -11,6 +11,7 @@ namespace App\Entities;
 use App\Models\CategoryModel;
 use App\Models\EpisodeModel;
 use App\Models\PlatformModel;
+use App\Models\PodcastPersonModel;
 use CodeIgniter\Entity;
 use App\Models\UserModel;
 use League\CommonMark\CommonMarkConverter;
@@ -31,6 +32,11 @@ class Podcast extends Entity
      * @var \App\Entities\Episode[]
      */
     protected $episodes;
+
+    /**
+     * @var \App\Entities\PodcastPerson[]
+     */
+    protected $podcast_persons;
 
     /**
      * @var \App\Entities\Category
@@ -165,6 +171,28 @@ class Podcast extends Entity
         }
 
         return $this->episodes;
+    }
+
+    /**
+     * Returns the podcast's persons
+     *
+     * @return \App\Entities\PodcastPerson[]
+     */
+    public function getPodcastPersons()
+    {
+        if (empty($this->id)) {
+            throw new \RuntimeException(
+                'Podcast must be created before getting persons.'
+            );
+        }
+
+        if (empty($this->podcast_persons)) {
+            $this->podcast_persons = (new PodcastPersonModel())->getPersonsByPodcastId(
+                $this->id
+            );
+        }
+
+        return $this->podcast_persons;
     }
 
     /**

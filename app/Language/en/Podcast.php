@@ -27,7 +27,8 @@ return [
         'image' => 'Cover image',
         'title' => 'Title',
         'name' => 'Name',
-        'name_hint' => 'Used for generating the podcast URL.',
+        'name_hint' =>
+            'Used for generating the podcast URL. Uppercase, lowercase, numbers and underscores are accepted.',
         'type' => [
             'label' => 'Type',
             'hint' =>

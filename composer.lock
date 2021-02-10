@@ -1072,6 +1072,35 @@
             "time": "2020-10-05T17:15:07+00:00"
         },
         {
+            "name": "podlibre/podcast-namespace",
+            "version": "v1.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://code.podlibre.org/podlibre/podcastnamespace",
+                "reference": "4525c06ee9dd95bb745ee875d55b64a053c74cd6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Podlibre\\PodcastNamespace\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Benjamin Bellamy",
+                    "email": "ben@podlibre.org",
+                    "homepage": "https://podlibre.org/"
+                }
+            ],
+            "description": "PHP implementation for the Podcast Namespace.",
+            "homepage": "https://code.podlibre.org/podlibre/podcastnamespace",
+            "time": "2021-01-14T15:47:06+00:00"
+        },
+        {
             "name": "psr/cache",
             "version": "1.0.1",
             "source": {

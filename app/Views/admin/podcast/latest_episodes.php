@@ -59,6 +59,16 @@
                                     $episode->id
                                 ) ?>"><?= lang('Episode.edit') ?></a>
                                 <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
+                                    'episode-person-manage',
+                                    $podcast->id,
+                                    $episode->id
+                                ) ?>"><?= lang('Person.persons') ?></a>
+                                    <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
+                                        'soundbites-edit',
+                                        $podcast->id,
+                                        $episode->id
+                                    ) ?>"><?= lang('Episode.soundbites') ?></a>
+                                <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
                                     'episode',
                                     $podcast->name,
                                     $episode->slug

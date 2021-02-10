@@ -5,6 +5,10 @@ $navigation = [
         'icon' => 'mic',
         'items' => ['podcast-list', 'podcast-create', 'podcast-import'],
     ],
+    'persons' => [
+        'icon' => 'folder-user',
+        'items' => ['person-list', 'person-create'],
+    ],
     'users' => ['icon' => 'group', 'items' => ['user-list', 'user-create']],
     'pages' => ['icon' => 'pages', 'items' => ['page-list', 'page-create']],
 ]; ?>

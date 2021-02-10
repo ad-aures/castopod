@@ -15,6 +15,8 @@ return [
     'episode-list' => 'All episodes',
     'episode-create' => 'New episode',
     'analytics' => 'Analytics',
+    'persons' => 'Persons',
+    'podcast-person-manage' => 'Manage persons',
     'contributors' => 'Contributors',
     'contributor-list' => 'All contributors',
     'contributor-add' => 'Add contributor',

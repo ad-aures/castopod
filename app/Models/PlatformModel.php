@@ -16,14 +16,20 @@ use CodeIgniter\Model;
 class PlatformModel extends Model
 {
     protected $table = 'platforms';
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'slug';
 
-    protected $allowedFields = ['slug', 'label', 'home_url', 'submit_url'];
+    protected $allowedFields = [
+        'slug',
+        'type',
+        'label',
+        'home_url',
+        'submit_url',
+    ];
 
     protected $returnType = \App\Entities\Platform::class;
     protected $useSoftDeletes = false;
 
-    protected $useTimestamps = true;
+    protected $useTimestamps = false;
 
     public function getPlatforms()
     {
@@ -37,24 +43,30 @@ class PlatformModel extends Model
         return $found;
     }
 
-    public function getOrCreatePlatform($slug, $platformType)
+    public function getPlatform($slug)
     {
-        if (!($found = cache("platforms_$slug"))) {
+        if (!($found = cache("platform_$slug"))) {
             $found = $this->where('slug', $slug)->first();
-            if (!$found) {
-                $data = [
-                    'slug' => $slug,
-                    'type' => $platformType,
-                    'label' => $slug,
-                    'home_url' => '',
-                    'submit_url' => null,
-                ];
-                $this->insert($data);
-                $found = $this->where('slug', $slug)->first();
-            }
-            cache()->save("platforms_$slug", $found, DECADE);
+            cache()->save("platform_$slug", $found, DECADE);
         }
         return $found;
+    }
+
+    public function createPlatform(
+        $slug,
+        $type,
+        $label,
+        $homeUrl,
+        $submitUrl = null
+    ) {
+        $data = [
+            'slug' => $slug,
+            'type' => $type,
+            'label' => $label,
+            'home_url' => $homeUrl,
+            'submit_url' => $submitUrl,
+        ];
+        return $this->insert($data, false);
     }
 
     public function getPlatformsWithLinks($podcastId, $platformType)

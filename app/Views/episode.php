@@ -100,11 +100,28 @@
                 <?= format_duration($episode->enclosure_duration) ?>
               </time>
           </div>
+          <div class="flex mt-2 mb-1 space-x-2">
+            <?php foreach ($persons as $person): ?>
+                <?php if (!empty($person['information_url'])): ?>
+                    <a href="<?= $person[
+                        'information_url'
+                    ] ?>" target="_blank" rel="noreferrer noopener">
+                <?php endif; ?>
+                <img src="<?= $person['thumbnail_url'] ?>" alt="<?= $person[
+    'full_name'
+] ?>" title="[<?= $person['full_name'] ?>] <?= $person[
+    'roles'
+] ?>" class="object-cover w-12 h-12 rounded-full" />
+                <?php if (!empty($person['information_url'])): ?>
+                    </a>
+                <?php endif; ?>
+            <?php endforeach; ?>
+          </div>
           <?= location_link(
               $episode->location_name,
               $episode->location_geo,
               $episode->location_osmid,
-              'self-start mt-2'
+              'self-start mt-2 mb-2'
           ) ?>
           <audio controls preload="none" class="w-full mt-auto">
             <source src="<?= $episode->enclosure_web_url ?>" type="<?= $episode->enclosure_type ?>">

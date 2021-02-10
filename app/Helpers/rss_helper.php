@@ -68,18 +68,14 @@ function get_rss_feed($podcast, $serviceSlug = '')
     if (!empty($podcast->location_name)) {
         $locationElement = $channel->addChild(
             'location',
-            null,
+            htmlspecialchars($podcast->location_name),
             $podcast_namespace
-        );
-        $locationElement->addAttribute(
-            'name',
-            htmlspecialchars($podcast->location_name)
         );
         if (!empty($podcast->location_geo)) {
             $locationElement->addAttribute('geo', $podcast->location_geo);
         }
         if (!empty($podcast->location_osmid)) {
-            $locationElement->addAttribute('osmid', $podcast->location_osmid);
+            $locationElement->addAttribute('osm', $podcast->location_osmid);
         }
     }
     if (!empty($podcast->payment_pointer)) {
@@ -105,7 +101,7 @@ function get_rss_feed($podcast, $serviceSlug = '')
         )
         ->addAttribute('owner', $podcast->owner_email);
     if (!empty($podcast->imported_feed_url)) {
-        $channel->addChildWithCDATA(
+        $channel->addChild(
             'previousUrl',
             $podcast->imported_feed_url,
             $podcast_namespace
@@ -169,6 +165,51 @@ function get_rss_feed($podcast, $serviceSlug = '')
         }
     }
 
+    foreach ($podcast->podcast_persons as $podcastPerson) {
+        $podcastPersonElement = $channel->addChild(
+            'person',
+            htmlspecialchars($podcastPerson->person->full_name),
+            $podcast_namespace
+        );
+        if (
+            !empty($podcastPerson->person_role) &&
+            !empty($podcastPerson->person_group)
+        ) {
+            $podcastPersonElement->addAttribute(
+                'role',
+                htmlspecialchars(
+                    lang(
+                        "PersonsTaxonomy.persons.{$podcastPerson->person_group}.roles.{$podcastPerson->person_role}.label",
+                        [],
+                        'en'
+                    )
+                )
+            );
+        }
+        if (!empty($podcastPerson->person_group)) {
+            $podcastPersonElement->addAttribute(
+                'group',
+                htmlspecialchars(
+                    lang(
+                        "PersonsTaxonomy.persons.{$podcastPerson->person_group}.label",
+                        [],
+                        'en'
+                    )
+                )
+            );
+        }
+        $podcastPersonElement->addAttribute(
+            'img',
+            $podcastPerson->person->image->large_url
+        );
+        if (!empty($podcastPerson->person->information_url)) {
+            $podcastPersonElement->addAttribute(
+                'href',
+                $podcastPerson->person->information_url
+            );
+        }
+    }
+
     // set main category first, then other categories as apple
     add_category_tag($channel, $podcast->category);
     foreach ($podcast->other_categories as $other_category) {
@@ -222,21 +263,14 @@ function get_rss_feed($podcast, $serviceSlug = '')
         if (!empty($episode->location_name)) {
             $locationElement = $item->addChild(
                 'location',
-                null,
+                htmlspecialchars($episode->location_name),
                 $podcast_namespace
-            );
-            $locationElement->addAttribute(
-                'name',
-                htmlspecialchars($episode->location_name)
             );
             if (!empty($episode->location_geo)) {
                 $locationElement->addAttribute('geo', $episode->location_geo);
             }
             if (!empty($episode->location_osmid)) {
-                $locationElement->addAttribute(
-                    'osmid',
-                    $episode->location_osmid
-                );
+                $locationElement->addAttribute('osm', $episode->location_osmid);
             }
         }
         $item->addChildWithCDATA('description', $episode->description_html);
@@ -310,6 +344,51 @@ function get_rss_feed($podcast, $serviceSlug = '')
                 $soundbite->start_time
             );
             $soundbiteElement->addAttribute('duration', $soundbite->duration);
+        }
+
+        foreach ($episode->episode_persons as $episodePerson) {
+            $episodePersonElement = $item->addChild(
+                'person',
+                htmlspecialchars($episodePerson->person->full_name),
+                $podcast_namespace
+            );
+            if (
+                !empty($episodePerson->person_role) &&
+                !empty($episodePerson->person_group)
+            ) {
+                $episodePersonElement->addAttribute(
+                    'role',
+                    htmlspecialchars(
+                        lang(
+                            "PersonsTaxonomy.persons.{$episodePerson->person_group}.roles.{$episodePerson->person_role}.label",
+                            [],
+                            'en'
+                        )
+                    )
+                );
+            }
+            if (!empty($episodePerson->person_group)) {
+                $episodePersonElement->addAttribute(
+                    'group',
+                    htmlspecialchars(
+                        lang(
+                            "PersonsTaxonomy.persons.{$episodePerson->person_group}.label",
+                            [],
+                            'en'
+                        )
+                    )
+                );
+            }
+            $episodePersonElement->addAttribute(
+                'img',
+                $episodePerson->person->image->large_url
+            );
+            if (!empty($episodePerson->person->information_url)) {
+                $episodePersonElement->addAttribute(
+                    'href',
+                    $episodePerson->person->information_url
+                );
+            }
         }
 
         $episode->is_blocked &&

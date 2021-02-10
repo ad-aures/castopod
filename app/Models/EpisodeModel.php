@@ -89,6 +89,26 @@ class EpisodeModel extends Model
         return $found;
     }
 
+    public function getEpisodeById($podcastId, $episodeId)
+    {
+        if (!($found = cache("podcast{$podcastId}_episode{$episodeId}"))) {
+            $found = $this->where([
+                'podcast_id' => $podcastId,
+                'id' => $episodeId,
+            ])
+                ->where('published_at <=', 'NOW()')
+                ->first();
+
+            cache()->save(
+                "podcast{$podcastId}_episode{$episodeId}",
+                $found,
+                DECADE
+            );
+        }
+
+        return $found;
+    }
+
     /**
      * Returns the previous episode based on episode ordering
      */
@@ -334,7 +354,7 @@ class EpisodeModel extends Model
         return $data;
     }
 
-    protected function clearCache(array $data)
+    public function clearCache(array $data)
     {
         $episodeModel = new EpisodeModel();
         $episode = (new EpisodeModel())->find(
@@ -366,6 +386,7 @@ class EpisodeModel extends Model
             cache()->delete(
                 "page_podcast{$episode->podcast->id}_episode{$episode->id}_{$locale}"
             );
+            cache()->delete("credits_{$locale}");
         }
 
         foreach ($years as $year) {

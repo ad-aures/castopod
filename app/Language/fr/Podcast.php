@@ -28,7 +28,8 @@ return [
         'image' => 'Image de couverture',
         'title' => 'Titre',
         'name' => 'Nom',
-        'name_hint' => 'Utilisé pour l’adresse du podcast.',
+        'name_hint' =>
+            'Utilisé pour l’adresse du podcast. Les majuscules, les minuscules, les chiffres et le caractère souligné « _ » sont acceptés.',
         'type' => [
             'label' => 'Type',
             'hint' =>

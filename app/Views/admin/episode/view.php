@@ -64,6 +64,12 @@
         ['variant' => 'info', 'iconLeft' => 'edit'],
         ['class' => 'mb-4']
     ) ?>
+    <?= button(
+        lang('Person.episode_form.title'),
+        route_to('episode-person-manage', $podcast->id, $episode->id),
+        ['variant' => 'info', 'iconLeft' => 'folder-user'],
+        ['class' => 'mb-4']
+    ) ?>
     <?php if (count($episode->soundbites) > 0): ?>
     <?= data_table(
         [

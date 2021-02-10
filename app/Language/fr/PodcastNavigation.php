@@ -15,6 +15,8 @@ return [
     'episode-list' => 'Tous les épisodes',
     'episode-create' => 'Créer un épisode',
     'analytics' => 'Mesures d’audience',
+    'persons' => 'Intervenants',
+    'podcast-person-manage' => 'Gestion des intervenants',
     'contributors' => 'Contributeurs',
     'contributor-list' => 'Tous les contributeurs',
     'contributor-add' => 'Ajouter un contributeur',

@@ -85,6 +85,37 @@ $routes->group(
             'as' => 'my-podcasts',
         ]);
 
+        $routes->group('persons', function ($routes) {
+            $routes->get('/', 'Person', [
+                'as' => 'person-list',
+                'filter' => 'permission:person-list',
+            ]);
+            $routes->get('new', 'Person::create', [
+                'as' => 'person-create',
+                'filter' => 'permission:person-create',
+            ]);
+            $routes->post('new', 'Person::attemptCreate', [
+                'filter' => 'permission:person-create',
+            ]);
+            $routes->group('(:num)', function ($routes) {
+                $routes->get('/', 'Person::view/$1', [
+                    'as' => 'person-view',
+                    'filter' => 'permission:person-view',
+                ]);
+                $routes->get('edit', 'Person::edit/$1', [
+                    'as' => 'person-edit',
+                    'filter' => 'permission:person-edit',
+                ]);
+                $routes->post('edit', 'Person::attemptEdit/$1', [
+                    'filter' => 'permission:person-edit',
+                ]);
+                $routes->add('delete', 'Person::delete/$1', [
+                    'as' => 'person-delete',
+                    'filter' => 'permission:person-delete',
+                ]);
+            });
+        });
+
         // Podcasts
         $routes->group('podcasts', function ($routes) {
             $routes->get('/', 'Podcast::list', [
@@ -123,6 +154,25 @@ $routes->group(
                     'as' => 'podcast-delete',
                     'filter' => 'permission:podcasts-delete',
                 ]);
+
+                $routes->group('persons', function ($routes) {
+                    $routes->get('/', 'PodcastPerson/$1', [
+                        'as' => 'podcast-person-manage',
+                        'filter' => 'permission:podcast-edit',
+                    ]);
+                    $routes->post('/', 'PodcastPerson::attemptAdd/$1', [
+                        'filter' => 'permission:podcast-edit',
+                    ]);
+
+                    $routes->get(
+                        '(:num)/remove',
+                        'PodcastPerson::remove/$1/$2',
+                        [
+                            'as' => 'podcast-person-remove',
+                            'filter' => 'permission:podcast-edit',
+                        ]
+                    );
+                });
 
                 $routes->group('analytics', function ($routes) {
                     $routes->get('/', 'Podcast::viewAnalytics/$1', [
@@ -276,6 +326,30 @@ $routes->group(
                                 'filter' => 'permission:podcast_episodes-edit',
                             ]
                         );
+
+                        $routes->group('persons', function ($routes) {
+                            $routes->get('/', 'EpisodePerson/$1/$2', [
+                                'as' => 'episode-person-manage',
+                                'filter' => 'permission:podcast_episodes-edit',
+                            ]);
+                            $routes->post(
+                                '/',
+                                'EpisodePerson::attemptAdd/$1/$2',
+                                [
+                                    'filter' =>
+                                        'permission:podcast_episodes-edit',
+                                ]
+                            );
+                            $routes->get(
+                                '(:num)/remove',
+                                'EpisodePerson::remove/$1/$2/$3',
+                                [
+                                    'as' => 'episode-person-remove',
+                                    'filter' =>
+                                        'permission:podcast_episodes-edit',
+                                ]
+                            );
+                        });
                     });
                 });
 
@@ -497,6 +571,7 @@ $routes->group('@(:podcastName)', function ($routes) {
     $routes->head('feed.xml', 'Feed/$1', ['as' => 'podcast_feed']);
     $routes->get('feed.xml', 'Feed/$1', ['as' => 'podcast_feed']);
 });
+$routes->get('/credits', 'Page::credits', ['as' => 'credits']);
 $routes->get('/(:slug)', 'Page/$1', ['as' => 'page']);
 
 /**

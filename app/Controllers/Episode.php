@@ -54,11 +54,55 @@ class Episode extends BaseController
                 $this->podcast->type
             );
 
+            $persons = [];
+            foreach ($this->episode->episode_persons as $episodePerson) {
+                if (array_key_exists($episodePerson->person->id, $persons)) {
+                    $persons[$episodePerson->person->id]['roles'] .=
+                        empty($episodePerson->person_group) ||
+                        empty($episodePerson->person_role)
+                            ? ''
+                            : (empty(
+                                    $persons[$episodePerson->person->id][
+                                        'roles'
+                                    ]
+                                )
+                                    ? ''
+                                    : ', ') .
+                                lang(
+                                    'PersonsTaxonomy.persons.' .
+                                        $episodePerson->person_group .
+                                        '.roles.' .
+                                        $episodePerson->person_role .
+                                        '.label'
+                                );
+                } else {
+                    $persons[$episodePerson->person->id] = [
+                        'full_name' => $episodePerson->person->full_name,
+                        'information_url' =>
+                            $episodePerson->person->information_url,
+                        'thumbnail_url' =>
+                            $episodePerson->person->image->thumbnail_url,
+                        'roles' =>
+                            empty($episodePerson->person_group) ||
+                            empty($episodePerson->person_role)
+                                ? ''
+                                : lang(
+                                    'PersonsTaxonomy.persons.' .
+                                        $episodePerson->person_group .
+                                        '.roles.' .
+                                        $episodePerson->person_role .
+                                        '.label'
+                                ),
+                    ];
+                }
+            }
+
             $data = [
                 'previousEpisode' => $previousNextEpisodes['previous'],
                 'nextEpisode' => $previousNextEpisodes['next'],
                 'podcast' => $this->podcast,
                 'episode' => $this->episode,
+                'persons' => $persons,
             ];
 
             $secondsToNextUnpublishedEpisode = $episodeModel->getSecondsToNextUnpublishedEpisode(

@@ -10,6 +10,7 @@ namespace App\Entities;
 
 use App\Models\PodcastModel;
 use App\Models\SoundbiteModel;
+use App\Models\EpisodePersonModel;
 use CodeIgniter\Entity;
 use CodeIgniter\I18n\Time;
 use League\CommonMark\CommonMarkConverter;
@@ -75,6 +76,11 @@ class Episode extends Entity
      * @var string
      */
     protected $chapters_url;
+
+    /**
+     * @var \App\Entities\EpisodePerson[]
+     */
+    protected $episode_persons;
 
     /**
      * @var \App\Entities\Soundbite[]
@@ -356,6 +362,29 @@ class Episode extends Entity
         return $this->attributes['chapters_uri']
             ? base_url($this->getChaptersMediaPath())
             : null;
+    }
+
+    /**
+     * Returns the episode's persons
+     *
+     * @return \App\Entities\EpisodePerson[]
+     */
+    public function getEpisodePersons()
+    {
+        if (empty($this->id)) {
+            throw new \RuntimeException(
+                'Episode must be created before getting persons.'
+            );
+        }
+
+        if (empty($this->episode_persons)) {
+            $this->episode_persons = (new EpisodePersonModel())->getPersonsByEpisodeId(
+                $this->podcast_id,
+                $this->id
+            );
+        }
+
+        return $this->episode_persons;
     }
 
     /**

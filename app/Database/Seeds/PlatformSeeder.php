@@ -48,6 +48,13 @@ class PlatformSeeder extends Seeder
                 'submit_url' => 'https://www.blubrry.com/addpodcast.php',
             ],
             [
+                'slug' => 'breaker',
+                'type' => 'podcasting',
+                'label' => 'Breaker',
+                'home_url' => 'https://www.breaker.audio/',
+                'submit_url' => 'https://podcasters.breaker.audio/',
+            ],
+            [
                 'slug' => 'castbox',
                 'type' => 'podcasting',
                 'label' => 'Castbox',

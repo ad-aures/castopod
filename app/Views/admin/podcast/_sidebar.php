@@ -8,6 +8,10 @@ $podcastNavigation = [
         'icon' => 'mic',
         'items' => ['episode-list', 'episode-create'],
     ],
+    'persons' => [
+        'icon' => 'folder-user',
+        'items' => ['podcast-person-manage'],
+    ],
     'analytics' => [
         'icon' => 'line-chart',
         'items' => [

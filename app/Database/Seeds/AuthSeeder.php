@@ -198,6 +198,33 @@ class AuthSeeder extends Seeder
                 'has_permission' => ['podcast_admin'],
             ],
         ],
+        'person' => [
+            [
+                'name' => 'create',
+                'description' => 'Add a new person',
+                'has_permission' => ['superadmin'],
+            ],
+            [
+                'name' => 'list',
+                'description' => 'List all persons',
+                'has_permission' => ['superadmin'],
+            ],
+            [
+                'name' => 'view',
+                'description' => 'View any person',
+                'has_permission' => ['superadmin'],
+            ],
+            [
+                'name' => 'edit',
+                'description' => 'Edit a person',
+                'has_permission' => ['superadmin'],
+            ],
+            [
+                'name' => 'delete_permanently',
+                'description' => 'Delete any person from the database',
+                'has_permission' => ['superadmin'],
+            ],
+        ],
     ];
 
     static function getGroupIdByName($name, $dataGroups)

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright  2020 Podlibre
+ * @copyright  2021 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
  */
@@ -170,7 +170,7 @@ class PodcastModel extends Model
             : false;
     }
 
-    protected function clearCache(array $data)
+    public function clearCache(array $data)
     {
         $podcast = (new PodcastModel())->getPodcastById(
             is_array($data['id']) ? $data['id'][0] : $data['id']
@@ -194,6 +194,10 @@ class PodcastModel extends Model
                     "page_podcast{$podcast->id}_episode{$episode->id}_{$locale}"
                 );
             }
+        }
+        // clear cache for every credit page
+        foreach ($supportedLocales as $locale) {
+            cache()->delete("credits_{$locale}");
         }
 
         // delete episode lists cache per year / season

@@ -9,6 +9,8 @@
 namespace App\Controllers;
 
 use App\Models\PageModel;
+use App\Models\CreditModel;
+use App\Models\PodcastModel;
 
 class Page extends BaseController
 {
@@ -41,5 +43,138 @@ class Page extends BaseController
             'page' => $this->page,
         ];
         return view('page', $data);
+    }
+
+    public function credits()
+    {
+        $locale = service('request')->getLocale();
+        $model = new PodcastModel();
+        $allPodcasts = $model->findAll();
+
+        if (!($found = cache("credits_{$locale}"))) {
+            $page = new \App\Entities\Page([
+                'title' => lang('Person.credits', [], $locale),
+                'slug' => 'credits',
+                'content' => '',
+            ]);
+
+            $creditModel = (new CreditModel())->findAll();
+
+            // Unlike the carpenter, we make a tree from a table:
+
+            $person_group = null;
+            $person_id = null;
+            $person_role = null;
+            $credits = [];
+            foreach ($creditModel as $credit) {
+                if ($person_group !== $credit->person_group) {
+                    $person_group = $credit->person_group;
+                    $person_id = $credit->person_id;
+                    $person_role = $credit->person_role;
+                    $credits[$person_group] = [
+                        'group_label' => $credit->group_label,
+                        'persons' => [
+                            $person_id => [
+                                'full_name' => $credit->person->full_name,
+                                'thumbnail_url' =>
+                                    $credit->person->image->thumbnail_url,
+                                'information_url' =>
+                                    $credit->person->information_url,
+                                'roles' => [
+                                    $person_role => [
+                                        'role_label' => $credit->role_label,
+                                        'is_in' => [
+                                            [
+                                                'link' => $credit->episode
+                                                    ? $credit->episode->link
+                                                    : $credit->podcast->link,
+                                                'title' => $credit->episode
+                                                    ? (count($allPodcasts) > 1
+                                                            ? "{$credit->podcast->title} ▸ "
+                                                            : '') .
+                                                        "(S{$credit->episode->season_number}E{$credit->episode->number}) {$credit->episode->title}"
+                                                    : $credit->podcast->title,
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ];
+                } elseif ($person_id !== $credit->person_id) {
+                    $person_id = $credit->person_id;
+                    $person_role = $credit->person_role;
+                    $credits[$person_group]['persons'][$person_id] = [
+                        'full_name' => $credit->person->full_name,
+                        'thumbnail_url' =>
+                            $credit->person->image->thumbnail_url,
+                        'information_url' => $credit->person->information_url,
+                        'roles' => [
+                            $person_role => [
+                                'role_label' => $credit->role_label,
+                                'is_in' => [
+                                    [
+                                        'link' => $credit->episode
+                                            ? $credit->episode->link
+                                            : $credit->podcast->link,
+                                        'title' => $credit->episode
+                                            ? (count($allPodcasts) > 1
+                                                    ? "{$credit->podcast->title} ▸ "
+                                                    : '') .
+                                                "(S{$credit->episode->season_number}E{$credit->episode->number}) {$credit->episode->title}"
+                                            : $credit->podcast->title,
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ];
+                } elseif ($person_role !== $credit->person_role) {
+                    $person_role = $credit->person_role;
+                    $credits[$person_group]['persons'][$person_id]['roles'][
+                        $person_role
+                    ] = [
+                        'role_label' => $credit->role_label,
+                        'is_in' => [
+                            [
+                                'link' => $credit->episode
+                                    ? $credit->episode->link
+                                    : $credit->podcast->link,
+                                'title' => $credit->episode
+                                    ? (count($allPodcasts) > 1
+                                            ? "{$credit->podcast->title} ▸ "
+                                            : '') .
+                                        "(S{$credit->episode->season_number}E{$credit->episode->number}) {$credit->episode->title}"
+                                    : $credit->podcast->title,
+                            ],
+                        ],
+                    ];
+                } else {
+                    $credits[$person_group]['persons'][$person_id]['roles'][
+                        $person_role
+                    ]['is_in'][] = [
+                        'link' => $credit->episode
+                            ? $credit->episode->link
+                            : $credit->podcast->link,
+                        'title' => $credit->episode
+                            ? (count($allPodcasts) > 1
+                                    ? "{$credit->podcast->title} ▸ "
+                                    : '') .
+                                "(S{$credit->episode->season_number}E{$credit->episode->number}) {$credit->episode->title}"
+                            : $credit->podcast->title,
+                    ];
+                }
+            }
+
+            $data = [
+                'page' => $page,
+                'credits' => $credits,
+            ];
+
+            $found = view('credits', $data);
+
+            cache()->save("credits_{$locale}", $found, DECADE);
+        }
+
+        return $found;
     }
 }

@@ -13,6 +13,9 @@ use App\Models\LanguageModel;
 use App\Models\PodcastModel;
 use App\Models\EpisodeModel;
 use App\Models\PlatformModel;
+use App\Models\PersonModel;
+use App\Models\PodcastPersonModel;
+use App\Models\EpisodePersonModel;
 use Config\Services;
 use League\HTMLToMarkdown\HtmlConverter;
 
@@ -150,7 +153,7 @@ class PodcastImport extends BaseController
                     : $nsItunes->complete === 'yes',
                 'location_name' => !$nsPodcast->location
                     ? null
-                    : $nsPodcast->location->attributes()['name'],
+                    : $nsPodcast->location,
                 'location_geo' =>
                     !$nsPodcast->location ||
                     empty($nsPodcast->location->attributes()['geo'])
@@ -158,9 +161,9 @@ class PodcastImport extends BaseController
                         : $nsPodcast->location->attributes()['geo'],
                 'location_osmid' =>
                     !$nsPodcast->location ||
-                    empty($nsPodcast->location->attributes()['osmid'])
+                    empty($nsPodcast->location->attributes()['osm'])
                         ? null
-                        : $nsPodcast->location->attributes()['osmid'],
+                        : $nsPodcast->location->attributes()['osm'],
                 'created_by' => user(),
                 'updated_by' => user(),
             ]);
@@ -200,46 +203,94 @@ class PodcastImport extends BaseController
             $podcastAdminGroup->id
         );
 
-        $platformModel = new PlatformModel();
         $podcastsPlatformsData = [];
-        foreach ($nsPodcast->id as $podcastingPlatform) {
-            $slug = $podcastingPlatform->attributes()['platform'];
-            $platformModel->getOrCreatePlatform($slug, 'podcasting');
-            array_push($podcastsPlatformsData, [
-                'platform_slug' => $slug,
-                'podcast_id' => $newPodcastId,
-                'link_url' => $podcastingPlatform->attributes()['url'],
-                'link_content' => $podcastingPlatform->attributes()['id'],
-                'is_visible' => false,
-            ]);
-        }
-        foreach ($nsPodcast->social as $socialPlatform) {
-            $slug = $socialPlatform->attributes()['platform'];
-            $platformModel->getOrCreatePlatform($slug, 'social');
-            array_push($podcastsPlatformsData, [
-                'platform_slug' => $socialPlatform->attributes()['platform'],
-                'podcast_id' => $newPodcastId,
-                'link_url' => $socialPlatform->attributes()['url'],
-                'link_content' => $socialPlatform,
-                'is_visible' => false,
-            ]);
-        }
-        foreach ($nsPodcast->funding as $fundingPlatform) {
-            $slug = $fundingPlatform->attributes()['platform'];
-            $platformModel->getOrCreatePlatform($slug, 'funding');
-            array_push($podcastsPlatformsData, [
-                'platform_slug' => $fundingPlatform->attributes()['platform'],
-                'podcast_id' => $newPodcastId,
-                'link_url' => $fundingPlatform->attributes()['url'],
-                'link_content' => $fundingPlatform->attributes()['id'],
-                'is_visible' => false,
-            ]);
+        $platformTypes = [
+            ['name' => 'podcasting', 'elements' => $nsPodcast->id],
+            ['name' => 'social', 'elements' => $nsPodcast->social],
+            ['name' => 'funding', 'elements' => $nsPodcast->funding],
+        ];
+        $platformModel = new PlatformModel();
+        foreach ($platformTypes as $platformType) {
+            foreach ($platformType['elements'] as $platform) {
+                $platformLabel = $platform->attributes()['platform'];
+                $platformSlug = slugify($platformLabel);
+                if (!$platformModel->getPlatform($platformSlug)) {
+                    if (
+                        !$platformModel->createPlatform(
+                            $platformSlug,
+                            $platformType['name'],
+                            $platformLabel,
+                            ''
+                        )
+                    ) {
+                        return redirect()
+                            ->back()
+                            ->withInput()
+                            ->with('errors', $platformModel->errors());
+                    }
+                }
+                array_push($podcastsPlatformsData, [
+                    'platform_slug' => $platformSlug,
+                    'podcast_id' => $newPodcastId,
+                    'link_url' => $platform->attributes()['url'],
+                    'link_content' => $platform->attributes()['id'],
+                    'is_visible' => false,
+                ]);
+            }
         }
         if (count($podcastsPlatformsData) > 1) {
             $platformModel->createPodcastPlatforms(
                 $newPodcastId,
                 $podcastsPlatformsData
             );
+        }
+
+        foreach ($nsPodcast->person as $podcastPerson) {
+            $personModel = new PersonModel();
+            $newPersonId = null;
+            if ($newPerson = $personModel->getPerson($podcastPerson)) {
+                $newPersonId = $newPerson->id;
+            } else {
+                if (
+                    !($newPersonId = $personModel->createPerson(
+                        $podcastPerson,
+                        $podcastPerson->attributes()['href'],
+                        $podcastPerson->attributes()['img']
+                    ))
+                ) {
+                    return redirect()
+                        ->back()
+                        ->withInput()
+                        ->with('errors', $personModel->errors());
+                }
+            }
+
+            $personGroup = empty($podcastPerson->attributes()['group'])
+                ? ['slug' => '']
+                : \Podlibre\PodcastNamespace\ReversedTaxonomy::$taxonomy[
+                    (string) $podcastPerson->attributes()['group']
+                ];
+            $personRole =
+                empty($podcastPerson->attributes()['role']) ||
+                empty($personGroup)
+                    ? ['slug' => '']
+                    : $personGroup['roles'][
+                        strval($podcastPerson->attributes()['role'])
+                    ];
+            $newPodcastPerson = new \App\Entities\PodcastPerson([
+                'podcast_id' => $newPodcastId,
+                'person_id' => $newPersonId,
+                'person_group' => $personGroup['slug'],
+                'person_role' => $personRole['slug'],
+            ]);
+            $podcastPersonModel = new PodcastPersonModel();
+
+            if (!$podcastPersonModel->insert($newPodcastPerson)) {
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->with('errors', $podcastPersonModel->errors());
+            }
         }
 
         $numberItems = $feed->channel[0]->item->count();
@@ -251,6 +302,7 @@ class PodcastImport extends BaseController
 
         $slugs = [];
 
+        //////////////////////////////////////////////////////////////////
         // For each Episode:
         for ($itemNumber = 1; $itemNumber <= $lastItem; $itemNumber++) {
             $item = $feed->channel[0]->item[$numberItems - $itemNumber];
@@ -326,7 +378,7 @@ class PodcastImport extends BaseController
                     : $nsItunes->block === 'yes',
                 'location_name' => !$nsPodcast->location
                     ? null
-                    : $nsPodcast->location->attributes()['name'],
+                    : $nsPodcast->location,
                 'location_geo' =>
                     !$nsPodcast->location ||
                     empty($nsPodcast->location->attributes()['geo'])
@@ -334,9 +386,9 @@ class PodcastImport extends BaseController
                         : $nsPodcast->location->attributes()['geo'],
                 'location_osmid' =>
                     !$nsPodcast->location ||
-                    empty($nsPodcast->location->attributes()['osmid'])
+                    empty($nsPodcast->location->attributes()['osm'])
                         ? null
-                        : $nsPodcast->location->attributes()['osmid'],
+                        : $nsPodcast->location->attributes()['osm'],
                 'created_by' => user(),
                 'updated_by' => user(),
                 'published_at' => strtotime($item->pubDate),
@@ -344,12 +396,61 @@ class PodcastImport extends BaseController
 
             $episodeModel = new EpisodeModel();
 
-            if (!$episodeModel->insert($newEpisode)) {
+            if (!($newEpisodeId = $episodeModel->insert($newEpisode, true))) {
                 // FIXME: What shall we do?
                 return redirect()
                     ->back()
                     ->withInput()
                     ->with('errors', $episodeModel->errors());
+            }
+
+            foreach ($nsPodcast->person as $episodePerson) {
+                $personModel = new PersonModel();
+                $newPersonId = null;
+                if ($newPerson = $personModel->getPerson($episodePerson)) {
+                    $newPersonId = $newPerson->id;
+                } else {
+                    if (
+                        !($newPersonId = $personModel->createPerson(
+                            $episodePerson,
+                            $episodePerson->attributes()['href'],
+                            $episodePerson->attributes()['img']
+                        ))
+                    ) {
+                        return redirect()
+                            ->back()
+                            ->withInput()
+                            ->with('errors', $personModel->errors());
+                    }
+                }
+
+                $personGroup = empty($episodePerson->attributes()['group'])
+                    ? ['slug' => '']
+                    : \Podlibre\PodcastNamespace\ReversedTaxonomy::$taxonomy[
+                        strval($episodePerson->attributes()['group'])
+                    ];
+                $personRole =
+                    empty($episodePerson->attributes()['role']) ||
+                    empty($personGroup)
+                        ? ['slug' => '']
+                        : $personGroup['roles'][
+                            strval($episodePerson->attributes()['role'])
+                        ];
+                $newEpisodePerson = new \App\Entities\PodcastPerson([
+                    'podcast_id' => $newPodcastId,
+                    'episode_id' => $newEpisodeId,
+                    'person_id' => $newPersonId,
+                    'person_group' => $personGroup['slug'],
+                    'person_role' => $personRole['slug'],
+                ]);
+                $episodePersonModel = new EpisodePersonModel();
+
+                if (!$episodePersonModel->insert($newEpisodePerson)) {
+                    return redirect()
+                        ->back()
+                        ->withInput()
+                        ->with('errors', $episodePersonModel->errors());
+                }
             }
         }
 

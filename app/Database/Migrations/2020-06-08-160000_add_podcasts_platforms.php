@@ -40,12 +40,6 @@ class AddPodcastsPlatforms extends Migration
                 'constraint' => 1,
                 'default' => 0,
             ],
-            'created_at' => [
-                'type' => 'DATETIME',
-            ],
-            'updated_at' => [
-                'type' => 'DATETIME',
-            ],
         ]);
 
         $this->forge->addPrimaryKey(['podcast_id', 'platform_slug']);

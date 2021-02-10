@@ -16,6 +16,7 @@ return [
     'add' => 'ajouter',
     'new' => 'créer',
     'edit' => 'modifier',
+    'persons' => 'intervenants',
     'users' => 'utilisateurs',
     'my-account' => 'mon compte',
     'change-password' => 'changer le mot de passe',

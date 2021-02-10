@@ -20,6 +20,9 @@ function render_page_links($class = null)
     $links = anchor(route_to('home'), lang('Common.home'), [
         'class' => 'px-2 underline hover:no-underline',
     ]);
+    $links .= anchor(route_to('credits'), lang('Person.credits'), [
+        'class' => 'px-2 underline hover:no-underline',
+    ]);
     foreach ($pages as $page) {
         $links .= anchor($page->link, $page->title, [
             'class' => 'px-2 underline hover:no-underline',

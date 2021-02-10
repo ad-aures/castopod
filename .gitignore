@@ -30,6 +30,9 @@ $RECYCLE.BIN/
 # Linux
 *~
 
+# vim
+*.swp
+
 # KDE directory preferences
 .directory
 
@@ -135,6 +138,7 @@ node_modules
 # public folder
 public/*
 !public/media
+!public/media/~person
 !public/.htaccess
 !public/favicon.ico
 !public/index.php
@@ -143,6 +147,14 @@ public/*
 # public media folder
 public/media/*
 !public/media/index.html
+
+# public person folder
+public/media/~person/*
+!public/media/~person/index.html
+
+# Generated files
+app/Language/en/PersonsTaxonomy.php
+app/Language/fr/PersonsTaxonomy.php
 
 #-------------------------
 # Docker volumes

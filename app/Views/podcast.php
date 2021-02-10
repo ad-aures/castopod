@@ -114,6 +114,26 @@
                         <?php endif; ?>
                     <?php endforeach; ?>
                     </div>
+
+                    <div class="flex mb-2 space-x-2">
+                    <?php foreach ($personArray as $person): ?>
+                        <?php if (!empty($person['information_url'])): ?>
+                            <a href="<?= $person[
+                                'information_url'
+                            ] ?>" target="_blank" rel="noreferrer noopener">
+                        <?php endif; ?>
+                        <img src="<?= $person[
+                            'thumbnail_url'
+                        ] ?>" alt="<?= $person[
+    'full_name'
+] ?>" title="[<?= $person['full_name'] ?>] <?= $person[
+    'roles'
+] ?>" class="object-cover w-12 h-12 rounded-full" />
+                        <?php if (!empty($person['information_url'])): ?>
+                            </a>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                    </div>
                     
                     <div class="mb-2 opacity-75">
                         <?= $podcast->description_html ?>
