@@ -111,7 +111,7 @@
 <?= form_fieldset_close() ?>
 
 <?= form_fieldset('', ['class' => 'flex flex-col mb-4']) ?>
-    <legend><?= lang('PodcastImport.description_field.label') ?></legend>
+    <legend><?= lang('PodcastImport.description_field') ?></legend>
     <label for="description" class="inline-flex items-center">
         <?= form_radio(
             [
@@ -124,9 +124,7 @@
                 ? old('description_field') == 'description'
                 : true
         ) ?>
-        <span class="ml-2"><?= lang(
-            'PodcastImport.description_field.description'
-        ) ?></span>
+        <span class="ml-2">&lt;description&gt;</span>
     </label>
     <label for="summary" class="inline-flex items-center">
         <?= form_radio(
@@ -140,9 +138,7 @@
                 ? old('description_field') == 'summary'
                 : false
         ) ?>
-        <span class="ml-2"><?= lang(
-            'PodcastImport.description_field.summary'
-        ) ?></span>
+        <span class="ml-2">&lt;itunes:summary&gt;</span>
     </label>
     <label for="subtitle_summary" class="inline-flex items-center">
         <?= form_radio(
@@ -156,9 +152,21 @@
                 ? old('description_field') == 'subtitle_summary'
                 : false
         ) ?>
-        <span class="ml-2"><?= lang(
-            'PodcastImport.description_field.subtitle_summary'
-        ) ?></span>
+        <span class="ml-2">&lt;itunes:subtitle&gt; + &lt;itunes:summary&gt;</span>
+    </label>
+    <label for="content" class="inline-flex items-center">
+        <?= form_radio(
+            [
+                'id' => 'content',
+                'name' => 'description_field',
+                'class' => 'form-radio text-green-500',
+            ],
+            'content',
+            old('description_field')
+                ? old('description_field') == 'content'
+                : false
+        ) ?>
+        <span class="ml-2">&lt;content:encoded&gt;</span>
     </label>
 <?= form_fieldset_close() ?>
 

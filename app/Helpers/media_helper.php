@@ -6,6 +6,8 @@
  * @link       https://castopod.org/
  */
 
+use CodeIgniter\HTTP\ResponseInterface;
+
 /**
  * Saves a file to the corresponding podcast folder in `public/media`
  *
@@ -34,14 +36,50 @@ function save_podcast_media($file, $podcast_name, $media_name)
 
 function download_file($fileUrl)
 {
+    $client = \Config\Services::curlrequest();
+    $uri = new \CodeIgniter\HTTP\URI($fileUrl);
+
+    $response = $client->get($uri, [
+        'headers' => [
+            'User-Agent' => 'Castopod/' . CP_VERSION,
+        ],
+    ]);
+
+    // redirect to new file location
+    $newFileUrl = $fileUrl;
+    while (
+        in_array(
+            $response->getStatusCode(),
+            [
+                ResponseInterface::HTTP_MOVED_PERMANENTLY,
+                ResponseInterface::HTTP_FOUND,
+                ResponseInterface::HTTP_SEE_OTHER,
+                ResponseInterface::HTTP_NOT_MODIFIED,
+                ResponseInterface::HTTP_TEMPORARY_REDIRECT,
+                ResponseInterface::HTTP_PERMANENT_REDIRECT,
+            ],
+            true
+        )
+    ) {
+        $newFileUrl = (string) trim(
+            $response->getHeader('location')->getValue()
+        );
+        $newLocation = new \CodeIgniter\HTTP\URI($newFileUrl);
+        $response = $client->get($newLocation, [
+            'headers' => [
+                'User-Agent' => 'Castopod/' . CP_VERSION,
+            ],
+            'http_errors' => false,
+        ]);
+    }
     $tmpFilename =
         time() .
         '_' .
         bin2hex(random_bytes(10)) .
         '.' .
-        pathinfo($fileUrl, PATHINFO_EXTENSION);
+        pathinfo($newFileUrl, PATHINFO_EXTENSION);
     $tmpFilePath = WRITEPATH . 'uploads/' . $tmpFilename;
-    file_put_contents($tmpFilePath, file_get_contents($fileUrl));
+    file_put_contents($tmpFilePath, $response->getBody());
 
     return new \CodeIgniter\Files\File($tmpFilePath);
 }

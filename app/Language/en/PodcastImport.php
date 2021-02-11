@@ -25,13 +25,8 @@ return [
         'link' => '&lt;link&gt;',
         'title' => '&lt;title&gt;',
     ],
-    'description_field' => [
-        'label' => 'Source field used for episode description / show notes',
-        'description' => '&lt;description&gt;',
-        'summary' => '&lt;itunes:summary&gt;',
-        'subtitle_summary' =>
-            '&lt;itunes:subtitle&gt; + &lt;itunes:summary&gt;',
-    ],
+    'description_field' =>
+        'Source field used for episode description / show notes',
     'force_renumber' => 'Force episodes renumbering',
     'force_renumber_hint' =>
         'Use this if your podcast does not have episode numbers but wish to set them during import.',

@@ -76,6 +76,7 @@ class PodcastImport extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
         try {
+            ini_set('user_agent', 'Castopod/' . CP_VERSION);
             $feed = simplexml_load_file(
                 $this->request->getPost('imported_feed_url')
             );
@@ -97,6 +98,9 @@ class PodcastImport extends BaseController
         );
         $nsPodcast = $feed->channel[0]->children(
             'https://github.com/Podcastindex-org/podcast-namespace/blob/main/docs/1.0.md'
+        );
+        $nsContent = $feed->channel[0]->children(
+            'http://purl.org/rss/1.0/modules/content/'
         );
 
         if ((string) $nsPodcast->locked === 'yes') {
@@ -313,6 +317,9 @@ class PodcastImport extends BaseController
             $nsPodcast = $item->children(
                 'https://github.com/Podcastindex-org/podcast-namespace/blob/main/docs/1.0.md'
             );
+            $nsContent = $item->children(
+                'http://purl.org/rss/1.0/modules/content/'
+            );
 
             $slug = slugify(
                 $this->request->getPost('slug_field') === 'title'
@@ -328,13 +335,21 @@ class PodcastImport extends BaseController
             }
             $slugs[] = $slug;
 
-            $itemDescriptionHtml =
-                $this->request->getPost('description_field') === 'summary'
-                    ? $nsItunes->summary
-                    : ($this->request->getPost('description_field') ===
-                    'subtitle_summary'
-                        ? $nsItunes->subtitle . '<br/>' . $nsItunes->summary
-                        : $item->description);
+            $itemDescriptionHtml = null;
+            switch ($this->request->getPost('description_field')) {
+                case 'content':
+                    $itemDescriptionHtml = $nsContent->encoded;
+                    break;
+                case 'summary':
+                    $itemDescriptionHtml = $nsItunes->summary;
+                    break;
+                case 'subtitle_summary':
+                    $itemDescriptionHtml =
+                        $nsItunes->subtitle . '<br/>' . $nsItunes->summary;
+                    break;
+                default:
+                    $itemDescriptionHtml = $item->description;
+            }
 
             $newEpisode = new \App\Entities\Episode([
                 'podcast_id' => $newPodcastId,

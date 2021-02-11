@@ -26,13 +26,7 @@ return [
         'link' => '&lt;link&gt; (adresse)',
         'title' => '&lt;title&gt; (titre)',
     ],
-    'description_field' => [
-        'label' => 'Champs pour la description des épisodes',
-        'description' => '&lt;description&gt;',
-        'summary' => '&lt;itunes:summary&gt;',
-        'subtitle_summary' =>
-            '&lt;itunes:subtitle&gt; + &lt;itunes:summary&gt;',
-    ],
+    'description_field' => 'Champs pour la description des épisodes',
     'force_renumber' => 'Forcer la re-numérotation des épisodes',
     'force_renumber_hint' =>
         'Utilisez ceci si le podcast à importer ne contient pas de numéros d’épisodes mais que vous souhaitez en ajouter pendant l’import.',
