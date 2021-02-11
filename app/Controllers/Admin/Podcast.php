@@ -163,7 +163,7 @@ class Podcast extends BaseController
             'copyright' => $this->request->getPost('copyright'),
             'location' => $this->request->getPost('location_name'),
             'payment_pointer' => $this->request->getPost('payment_pointer'),
-            'is_blocked' => $this->request->getPost('is_blocked') === 'yes',
+            'is_blocked' => $this->request->getPost('block') === 'yes',
             'is_completed' => $this->request->getPost('complete') === 'yes',
             'is_locked' => $this->request->getPost('lock') === 'yes',
             'created_by' => user(),
@@ -259,11 +259,10 @@ class Podcast extends BaseController
         $this->podcast->payment_pointer = $this->request->getPost(
             'payment_pointer'
         );
-        $this->podcast->is_blocked =
-            $this->request->getPost('is_blocked') === 'yes';
+        $this->podcast->is_blocked = $this->request->getPost('block') === 'yes';
         $this->podcast->is_completed =
             $this->request->getPost('complete') === 'yes';
-        $this->podcast->is_lock = $this->request->getPost('lock') === 'yes';
+        $this->podcast->is_locked = $this->request->getPost('lock') === 'yes';
         $this->updated_by = user();
 
         $db = \Config\Database::connect();
