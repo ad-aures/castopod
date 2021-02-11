@@ -1,3 +1,10 @@
+# [1.0.0-alpha.34](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.33...v1.0.0-alpha.34) (2021-02-11)
+
+
+### Bug Fixes
+
+* **rss-import:** add Castopod user-agent, handle redirects for downloaded files, add Content namespace ([214243b](https://code.podlibre.org/podlibre/castopod/commit/214243b3fec4937e45ef1ceaba1149004cdf3b44))
+
 # [1.0.0-alpha.33](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.32...v1.0.0-alpha.33) (2021-02-10)
 
 
