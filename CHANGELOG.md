@@ -1,3 +1,10 @@
+# [1.0.0-alpha.35](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.34...v1.0.0-alpha.35) (2021-02-12)
+
+
+### Bug Fixes
+
+* **admin:** save block and lock switches ([b66c0af](https://code.podlibre.org/podlibre/castopod/commit/b66c0afc8fab2e338402a9a4f8105e5f5459e208))
+
 # [1.0.0-alpha.34](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.33...v1.0.0-alpha.34) (2021-02-11)
 
 
