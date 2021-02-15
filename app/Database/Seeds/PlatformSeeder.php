@@ -185,6 +185,13 @@ class PlatformSeeder extends Seeder
                 'submit_url' => 'https://www.podinstall.com/claim.html',
             ],
             [
+                'slug' => 'podlink',
+                'type' => 'podcasting',
+                'label' => 'pod.link',
+                'home_url' => 'https://pod.link/',
+                'submit_url' => 'https://pod.link',
+            ],
+            [
                 'slug' => 'podtail',
                 'type' => 'podcasting',
                 'label' => 'Podtail',
