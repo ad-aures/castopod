@@ -1,3 +1,10 @@
+# [1.0.0-alpha.36](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.35...v1.0.0-alpha.36) (2021-02-16)
+
+
+### Features
+
+* **platforms:** add pod.link ([3d7a232](https://code.podlibre.org/podlibre/castopod/commit/3d7a2320ddd116e4a311605421126aff57243219))
+
 # [1.0.0-alpha.35](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.34...v1.0.0-alpha.35) (2021-02-12)
 
 
