@@ -77,7 +77,7 @@ function download_file($fileUrl)
         '_' .
         bin2hex(random_bytes(10)) .
         '.' .
-        pathinfo($newFileUrl, PATHINFO_EXTENSION);
+        pathinfo(parse_url($newFileUrl, PHP_URL_PATH), PATHINFO_EXTENSION);
     $tmpFilePath = WRITEPATH . 'uploads/' . $tmpFilename;
     file_put_contents($tmpFilePath, $response->getBody());
 
