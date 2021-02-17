@@ -1,3 +1,10 @@
+# [1.0.0-alpha.37](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.36...v1.0.0-alpha.37) (2021-02-17)
+
+
+### Bug Fixes
+
+* **import:** remove query string from files url ([109c4aa](https://code.podlibre.org/podlibre/castopod/commit/109c4aa1afb72dd8b99c0302d74a7fef5a38638e))
+
 # [1.0.0-alpha.36](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.35...v1.0.0-alpha.36) (2021-02-16)
 
 
