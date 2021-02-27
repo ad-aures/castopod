@@ -81,6 +81,12 @@ class PodcastPlatform extends BaseController
                     )
                         ? $podcastPlatform['visible'] == 'yes'
                         : false,
+                    'is_on_embeddable_player' => array_key_exists(
+                        'on_embeddable_player',
+                        $podcastPlatform
+                    )
+                        ? $podcastPlatform['on_embeddable_player'] == 'yes'
+                        : false,
                 ]);
             }
         }

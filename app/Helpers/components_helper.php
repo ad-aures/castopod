@@ -384,29 +384,12 @@ if (!function_exists('location_link')) {
         $locationOsmid,
         $class = ''
     ) {
-        $link = null;
+        $link = '';
+
         if (!empty($locationName)) {
-            $uri = '';
-            if (!empty($locationOsmid)) {
-                $uri =
-                    'https://www.openstreetmap.org/' .
-                    ['N' => 'node', 'W' => 'way', 'R' => 'relation'][
-                        substr($locationOsmid, 0, 1)
-                    ] .
-                    '/' .
-                    substr($locationOsmid, 1);
-            } elseif (!empty($locationGeo)) {
-                $uri =
-                    'https://www.openstreetmap.org/#map=17/' .
-                    str_replace(',', '/', substr($locationGeo, 4));
-            } else {
-                $uri =
-                    'https://www.openstreetmap.org/search?query=' .
-                    urlencode($locationName);
-            }
             $link = button(
                 $locationName,
-                $uri,
+                location_url($locationName, $locationGeo, $locationOsmid),
                 [
                     'variant' => 'default',
                     'size' => 'small',
@@ -421,6 +404,7 @@ if (!function_exists('location_link')) {
                 ]
             );
         }
+
         return $link;
     }
 }

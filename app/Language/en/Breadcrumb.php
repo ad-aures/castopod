@@ -32,4 +32,5 @@ return [
     'listening-time' => 'listening time',
     'time-periods' => 'time periods',
     'soundbites' => 'soundbites',
+    'embeddable-player' => 'embeddable player',
 ];

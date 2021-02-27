@@ -38,3 +38,39 @@ if (!function_exists('current_season_url')) {
         return current_url() . $season_query_string;
     }
 }
+
+if (!function_exists('location_url')) {
+    /**
+     * Returns URL to display from location info
+     *
+     * @param string $locationName
+     * @param string $locationGeo
+     * @param string $locationOsmid
+     *
+     * @return string
+     */
+    function location_url($locationName, $locationGeo, $locationOsmid)
+    {
+        $uri = '';
+
+        if (!empty($locationOsmid)) {
+            $uri =
+                'https://www.openstreetmap.org/' .
+                ['N' => 'node', 'W' => 'way', 'R' => 'relation'][
+                    substr($locationOsmid, 0, 1)
+                ] .
+                '/' .
+                substr($locationOsmid, 1);
+        } elseif (!empty($locationGeo)) {
+            $uri =
+                'https://www.openstreetmap.org/#map=17/' .
+                str_replace(',', '/', substr($locationGeo, 4));
+        } elseif (!empty($locationName)) {
+            $uri =
+                'https://www.openstreetmap.org/search?query=' .
+                urlencode($locationName);
+        }
+
+        return $uri;
+    }
+}

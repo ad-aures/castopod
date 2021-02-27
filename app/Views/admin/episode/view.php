@@ -59,6 +59,12 @@
 
     <div class="mb-12">
     <?= button(
+        lang('Episode.embeddable_player.add'),
+        route_to('embeddable-player-add', $podcast->id, $episode->id),
+        ['variant' => 'info', 'iconLeft' => 'movie'],
+        ['class' => 'mb-4']
+    ) ?>
+    <?= button(
         lang('Episode.soundbites_form.title'),
         route_to('soundbites-edit', $podcast->id, $episode->id),
         ['variant' => 'info', 'iconLeft' => 'edit'],

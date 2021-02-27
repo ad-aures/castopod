@@ -111,4 +111,16 @@ return [
             'Cliquez pour récupérer la position actuelle, cliquez à nouveau pour récupérer la durée.',
         'submit_edit' => 'Enregistrer tous les extraits sonores',
     ],
+    'embeddable_player' => [
+        'add' => 'Ajouter un lecteur intégré',
+        'title' => 'Lecteur intégré',
+        'label' =>
+            'Sélectionnez une couleur de thème, copiez le code dans le presse-papier, puis collez-le sur votre site internet.',
+        'clipboard_iframe' => 'Copier le lecteur dans le presse papier',
+        'clipboard_url' => 'Copier l’adresse dans le presse papier',
+        'dark' => 'Sombre',
+        'dark-transparent' => 'Sombre transparent',
+        'light' => 'Clair',
+        'light-transparent' => 'Clair transparent',
+    ],
 ];

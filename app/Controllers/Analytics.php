@@ -49,8 +49,16 @@ class Analytics extends Controller
     public function hit($base64EpisodeData, ...$filename)
     {
         helper('media', 'analytics');
-
-        $serviceName = isset($_GET['_from']) ? $_GET['_from'] : '';
+        $session = \Config\Services::session();
+        $session->start();
+        $serviceName = '';
+        if (isset($_GET['_from'])) {
+            $serviceName = $_GET['_from'];
+        } elseif (!empty($session->get('embeddable_player_domain'))) {
+            $serviceName = $session->get('embeddable_player_domain');
+        } elseif ($session->get('referer') !== '- Direct -') {
+            $serviceName = parse_url($session->get('referer'), PHP_URL_HOST);
+        }
 
         $episodeData = unpack(
             'IpodcastId/IepisodeId/IbytesThreshold/IfileSize/Iduration/IpublicationDate',

@@ -21,5 +21,6 @@ class Platform extends Entity
         'link_url' => '?string',
         'link_content' => '?string',
         'is_visible' => '?boolean',
+        'is_on_embeddable_player' => '?boolean',
     ];
 }

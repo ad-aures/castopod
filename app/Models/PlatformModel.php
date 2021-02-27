@@ -75,7 +75,7 @@ class PlatformModel extends Model
             !($found = cache("podcast{$podcastId}_platforms_{$platformType}"))
         ) {
             $found = $this->select(
-                'platforms.*, podcasts_platforms.link_url, podcasts_platforms.link_content, podcasts_platforms.is_visible'
+                'platforms.*, podcasts_platforms.link_url, podcasts_platforms.link_content, podcasts_platforms.is_visible, podcasts_platforms.is_on_embeddable_player'
             )
                 ->join(
                     'podcasts_platforms',
@@ -103,7 +103,7 @@ class PlatformModel extends Model
             ))
         ) {
             $found = $this->select(
-                'platforms.*, podcasts_platforms.link_url, podcasts_platforms.link_content, podcasts_platforms.is_visible'
+                'platforms.*, podcasts_platforms.link_url, podcasts_platforms.link_content, podcasts_platforms.is_visible, podcasts_platforms.is_on_embeddable_player'
             )
                 ->join(
                     'podcasts_platforms',
@@ -168,6 +168,8 @@ EOD;
 
     public function clearCache($podcastId)
     {
+        $podcast = (new PodcastModel())->getPodcastById($podcastId);
+
         foreach (['podcasting', 'social', 'funding'] as $platformType) {
             cache()->delete("podcast{$podcastId}_platforms_{$platformType}");
             cache()->delete(
@@ -193,6 +195,23 @@ EOD;
                 cache()->delete(
                     "page_podcast{$podcastId}_season{$season['season_number']}_{$locale}"
                 );
+            }
+        }
+
+        // clear cache for every localized podcast episode page
+        foreach ($podcast->episodes as $episode) {
+            foreach ($supportedLocales as $locale) {
+                cache()->delete(
+                    "page_podcast{$podcast->id}_episode{$episode->id}_{$locale}"
+                );
+                foreach (
+                    array_keys(\App\Models\EpisodeModel::$themes)
+                    as $themeKey
+                ) {
+                    cache()->delete(
+                        "page_podcast{$podcast->id}_episode{$episode->id}_embeddable_player_{$themeKey}_{$locale}"
+                    );
+                }
             }
         }
     }

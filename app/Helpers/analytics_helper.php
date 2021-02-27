@@ -111,9 +111,6 @@ function set_user_session_player()
     $session->start();
 
     if (!$session->has('player')) {
-        $session = \Config\Services::session();
-        $session->start();
-
         $playerFound = null;
         $userAgent = $_SERVER['HTTP_USER_AGENT'];
 

@@ -11,6 +11,7 @@ return [
     'home_url' => 'Aller au site {platformName}',
     'submit_url' => 'Soumettez votre podcast sur {platformName}',
     'visible' => 'Afficher sur la page d’accueil du podcast ?',
+    'on_embeddable_player' => 'Afficher sur le lecteur intégré ?',
     'remove' => 'Supprimer {platformName}',
     'submit' => 'Enregistrer',
     'messages' => [

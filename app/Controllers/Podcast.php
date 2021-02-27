@@ -109,48 +109,12 @@ class Podcast extends BaseController
                 ]);
             }
 
+            helper(['persons']);
             $persons = [];
-            foreach ($this->podcast->podcast_persons as $podcastPerson) {
-                if (array_key_exists($podcastPerson->person->id, $persons)) {
-                    $persons[$podcastPerson->person->id]['roles'] .=
-                        empty($podcastPerson->person_group) ||
-                        empty($podcastPerson->person_role)
-                            ? ''
-                            : (empty(
-                                    $persons[$podcastPerson->person->id][
-                                        'roles'
-                                    ]
-                                )
-                                    ? ''
-                                    : ', ') .
-                                lang(
-                                    'PersonsTaxonomy.persons.' .
-                                        $podcastPerson->person_group .
-                                        '.roles.' .
-                                        $podcastPerson->person_role .
-                                        '.label'
-                                );
-                } else {
-                    $persons[$podcastPerson->person->id] = [
-                        'full_name' => $podcastPerson->person->full_name,
-                        'information_url' =>
-                            $podcastPerson->person->information_url,
-                        'thumbnail_url' =>
-                            $podcastPerson->person->image->thumbnail_url,
-                        'roles' =>
-                            empty($podcastPerson->person_group) ||
-                            empty($podcastPerson->person_role)
-                                ? ''
-                                : lang(
-                                    'PersonsTaxonomy.persons.' .
-                                        $podcastPerson->person_group .
-                                        '.roles.' .
-                                        $podcastPerson->person_role .
-                                        '.label'
-                                ),
-                    ];
-                }
-            }
+            constructs_podcast_person_array(
+                $this->podcast->podcast_persons,
+                $persons
+            );
 
             $data = [
                 'podcast' => $this->podcast,

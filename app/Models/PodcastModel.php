@@ -193,6 +193,14 @@ class PodcastModel extends Model
                 cache()->delete(
                     "page_podcast{$podcast->id}_episode{$episode->id}_{$locale}"
                 );
+                foreach (
+                    array_keys(\App\Models\EpisodeModel::$themes)
+                    as $themeKey
+                ) {
+                    cache()->delete(
+                        "page_podcast{$podcast->id}_episode{$episode->id}_embeddable_player_{$themeKey}_{$locale}"
+                    );
+                }
             }
         }
         // clear cache for every credit page

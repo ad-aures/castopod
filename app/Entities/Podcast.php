@@ -325,6 +325,24 @@ class Podcast extends Entity
     }
 
     /**
+     * Returns true if the podcast has podcasting platform links
+     */
+    public function getHasPodcastingPlatforms()
+    {
+        if (empty($this->id)) {
+            throw new \RuntimeException(
+                'Podcast must be created before getting podcasting platform.'
+            );
+        }
+        foreach ($this->getPodcastingPlatforms() as $podcastingPlatform) {
+            if ($podcastingPlatform->is_on_embeddable_player) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Returns the podcast's social platform links
      *
      * @return \App\Entities\Platform[]
@@ -348,6 +366,24 @@ class Podcast extends Entity
     }
 
     /**
+     * Returns true if the podcast has social platform links
+     */
+    public function getHasSocialPlatforms()
+    {
+        if (empty($this->id)) {
+            throw new \RuntimeException(
+                'Podcast must be created before getting social platform.'
+            );
+        }
+        foreach ($this->getSocialPlatforms() as $socialPlatform) {
+            if ($socialPlatform->is_on_embeddable_player) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Returns the podcast's funding platform links
      *
      * @return \App\Entities\Platform[]
@@ -368,6 +404,24 @@ class Podcast extends Entity
         }
 
         return $this->fundingPlatforms;
+    }
+
+    /**
+     * Returns true if the podcast has social platform links
+     */
+    public function getHasFundingPlatforms()
+    {
+        if (empty($this->id)) {
+            throw new \RuntimeException(
+                'Podcast must be created before getting Funding platform.'
+            );
+        }
+        foreach ($this->getFundingPlatforms() as $fundingPlatform) {
+            if ($fundingPlatform->is_on_embeddable_player) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public function getOtherCategories()

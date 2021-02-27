@@ -32,4 +32,5 @@ return [
     'listening-time' => 'drée d’écoute',
     'time-periods' => 'périodes',
     'soundbites' => 'extraits sonores',
+    'embeddable-player' => 'lecteur intégré',
 ];

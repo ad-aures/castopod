@@ -1,4 +1,6 @@
 import ClientTimezone from "./modules/ClientTimezone";
+import Clipboard from "./modules/Clipboard";
+import ThemePicker from "./modules/ThemePicker";
 import DateTimePicker from "./modules/DateTimePicker";
 import Dropdown from "./modules/Dropdown";
 import MarkdownEditor from "./modules/MarkdownEditor";
@@ -19,3 +21,5 @@ ClientTimezone();
 DateTimePicker();
 Time();
 Soundbites();
+Clipboard();
+ThemePicker();

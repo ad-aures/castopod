@@ -69,6 +69,35 @@ class EpisodeModel extends Model
     protected $afterUpdate = ['writeEnclosureMetadata'];
     protected $beforeDelete = ['clearCache'];
 
+    public static $themes = [
+        'light-transparent' => [
+            'style' =>
+                'background-color: #fff; background-image: linear-gradient(45deg, #ccc 12.5%, transparent 12.5%, transparent 50%, #ccc 50%, #ccc 62.5%, transparent 62.5%, transparent 100%); background-size: 5.66px 5.66px;',
+            'background' => 'transparent',
+            'text' => '#000',
+            'inverted' => '#fff',
+        ],
+        'light' => [
+            'style' => 'background-color: #fff;',
+            'background' => '#fff',
+            'text' => '#000',
+            'inverted' => '#fff',
+        ],
+        'dark-transparent' => [
+            'style' =>
+                'background-color: #001f1a; background-image: linear-gradient(45deg, #888 12.5%, transparent 12.5%, transparent 50%, #888 50%, #888 62.5%, transparent 62.5%, transparent 100%); background-size: 5.66px 5.66px;',
+            'background' => 'transparent',
+            'text' => '#fff',
+            'inverted' => '#000',
+        ],
+        'dark' => [
+            'style' => 'background-color: #001f1a;',
+            'background' => '#001f1a',
+            'text' => '#fff',
+            'inverted' => '#000',
+        ],
+    ];
+
     public function getEpisodeBySlug($podcastId, $episodeSlug)
     {
         if (!($found = cache("podcast{$podcastId}_episode@{$episodeSlug}"))) {
@@ -407,6 +436,14 @@ class EpisodeModel extends Model
             foreach ($supportedLocales as $locale) {
                 cache()->delete(
                     "page_podcast{$episode->podcast_id}_season{$season['season_number']}_{$locale}"
+                );
+            }
+        }
+
+        foreach (array_keys(self::$themes) as $themeKey) {
+            foreach ($supportedLocales as $locale) {
+                cache()->delete(
+                    "page_podcast{$episode->podcast_id}_episode{$episode->id}_embeddable_player_{$themeKey}_{$locale}"
                 );
             }
         }

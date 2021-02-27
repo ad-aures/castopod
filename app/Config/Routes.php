@@ -326,6 +326,14 @@ $routes->group(
                                 'filter' => 'permission:podcast_episodes-edit',
                             ]
                         );
+                        $routes->get(
+                            'embeddable-player',
+                            'Episode::embeddablePlayer/$1/$2',
+                            [
+                                'as' => 'embeddable-player-add',
+                                'filter' => 'permission:podcast_episodes-edit',
+                            ]
+                        );
 
                         $routes->group('persons', function ($routes) {
                             $routes->get('/', 'EpisodePerson/$1/$2', [
@@ -565,9 +573,19 @@ $routes->group(config('App')->authGateway, function ($routes) {
 // Public routes
 $routes->group('@(:podcastName)', function ($routes) {
     $routes->get('/', 'Podcast/$1', ['as' => 'podcast']);
-    $routes->get('(:slug)', 'Episode/$1/$2', [
-        'as' => 'episode',
-    ]);
+    $routes->group('(:slug)', function ($routes) {
+        $routes->get('/', 'Episode/$1/$2', [
+            'as' => 'episode',
+        ]);
+        $routes->group('embeddable-player', function ($routes) {
+            $routes->get('/', 'Episode::embeddablePlayer/$1/$2', [
+                'as' => 'embeddable-player',
+            ]);
+            $routes->get('(:slug)', 'Episode::embeddablePlayer/$1/$2/$3', [
+                'as' => 'embeddable-player-theme',
+            ]);
+        });
+    });
     $routes->head('feed.xml', 'Feed/$1', ['as' => 'podcast_feed']);
     $routes->get('feed.xml', 'Feed/$1', ['as' => 'podcast_feed']);
 });

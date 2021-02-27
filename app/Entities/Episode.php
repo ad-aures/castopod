@@ -95,6 +95,13 @@ class Episode extends Entity
     protected $description;
 
     /**
+     * The embeddable player URL
+     *
+     * @var string
+     */
+    protected $embeddable_player;
+
+    /**
      * @var string
      */
     protected $publication_status;
@@ -418,6 +425,24 @@ class Episode extends Entity
                 $this->getPodcast()->name,
                 $this->attributes['slug']
             )
+        );
+    }
+
+    public function getEmbeddablePlayer($theme = null)
+    {
+        return base_url(
+            $theme
+                ? route_to(
+                    'embeddable-player-theme',
+                    $this->getPodcast()->name,
+                    $this->attributes['slug'],
+                    $theme
+                )
+                : route_to(
+                    'embeddable-player',
+                    $this->getPodcast()->name,
+                    $this->attributes['slug']
+                )
         );
     }
 

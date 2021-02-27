@@ -115,6 +115,22 @@
                 $platform->slug . '_visible',
                 $platform->is_visible ? $platform->is_visible : false
             ),
+            'text-sm mb-1'
+        ) ?>
+        <?= form_switch(
+            lang('Platforms.on_embeddable_player'),
+            [
+                'id' => $platform->slug . '_on_embeddable_player',
+                'name' =>
+                    'platforms[' . $platform->slug . '][on_embeddable_player]',
+            ],
+            'yes',
+            old(
+                $platform->slug . '_on_embeddable_player',
+                $platform->is_on_embeddable_player
+                    ? $platform->is_on_embeddable_player
+                    : false
+            ),
             'text-sm'
         ) ?>
     </div>

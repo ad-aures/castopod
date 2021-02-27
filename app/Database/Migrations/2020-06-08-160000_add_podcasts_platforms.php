@@ -40,6 +40,11 @@ class AddPodcastsPlatforms extends Migration
                 'constraint' => 1,
                 'default' => 0,
             ],
+            'is_on_embeddable_player' => [
+                'type' => 'TINYINT',
+                'constraint' => 1,
+                'default' => 0,
+            ],
         ]);
 
         $this->forge->addPrimaryKey(['podcast_id', 'platform_slug']);

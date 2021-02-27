@@ -420,4 +420,21 @@ class Episode extends BaseController
             $this->episode->id,
         ]);
     }
+
+    public function embeddablePlayer()
+    {
+        helper(['form']);
+
+        $data = [
+            'podcast' => $this->podcast,
+            'episode' => $this->episode,
+            'themes' => EpisodeModel::$themes,
+        ];
+
+        replace_breadcrumb_params([
+            0 => $this->podcast->title,
+            1 => $this->episode->title,
+        ]);
+        return view('admin/episode/embeddable_player', $data);
+    }
 }

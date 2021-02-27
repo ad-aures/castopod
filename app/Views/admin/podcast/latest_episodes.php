@@ -59,6 +59,13 @@
                                     $episode->id
                                 ) ?>"><?= lang('Episode.edit') ?></a>
                                 <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
+                                    'embeddable-player-add',
+                                    $podcast->id,
+                                    $episode->id
+                                ) ?>"><?= lang(
+    'Episode.embeddable_player.add'
+) ?></a>
+                                <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
                                     'episode-person-manage',
                                     $podcast->id,
                                     $episode->id

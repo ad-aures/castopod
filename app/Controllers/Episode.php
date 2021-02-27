@@ -36,8 +36,9 @@ class Episode extends BaseController
         ) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
-
-        return $this->$method();
+        unset($params[1]);
+        unset($params[0]);
+        return $this->$method(...$params);
     }
 
     public function index()
@@ -54,48 +55,12 @@ class Episode extends BaseController
                 $this->podcast->type
             );
 
+            helper(['persons']);
             $persons = [];
-            foreach ($this->episode->episode_persons as $episodePerson) {
-                if (array_key_exists($episodePerson->person->id, $persons)) {
-                    $persons[$episodePerson->person->id]['roles'] .=
-                        empty($episodePerson->person_group) ||
-                        empty($episodePerson->person_role)
-                            ? ''
-                            : (empty(
-                                    $persons[$episodePerson->person->id][
-                                        'roles'
-                                    ]
-                                )
-                                    ? ''
-                                    : ', ') .
-                                lang(
-                                    'PersonsTaxonomy.persons.' .
-                                        $episodePerson->person_group .
-                                        '.roles.' .
-                                        $episodePerson->person_role .
-                                        '.label'
-                                );
-                } else {
-                    $persons[$episodePerson->person->id] = [
-                        'full_name' => $episodePerson->person->full_name,
-                        'information_url' =>
-                            $episodePerson->person->information_url,
-                        'thumbnail_url' =>
-                            $episodePerson->person->image->thumbnail_url,
-                        'roles' =>
-                            empty($episodePerson->person_group) ||
-                            empty($episodePerson->person_role)
-                                ? ''
-                                : lang(
-                                    'PersonsTaxonomy.persons.' .
-                                        $episodePerson->person_group .
-                                        '.roles.' .
-                                        $episodePerson->person_role .
-                                        '.label'
-                                ),
-                    ];
-                }
-            }
+            construct_episode_person_array(
+                $this->episode->episode_persons,
+                $persons
+            );
 
             $data = [
                 'previousEpisode' => $previousNextEpisodes['previous'],
@@ -111,6 +76,60 @@ class Episode extends BaseController
 
             // The page cache is set to a decade so it is deleted manually upon podcast update
             return view('episode', $data, [
+                'cache' => $secondsToNextUnpublishedEpisode
+                    ? $secondsToNextUnpublishedEpisode
+                    : DECADE,
+                'cache_name' => $cacheName,
+            ]);
+        }
+
+        return $cachedView;
+    }
+
+    public function embeddablePlayer($theme = 'light-transparent')
+    {
+        self::triggerWebpageHit($this->episode->podcast_id);
+
+        $session = \Config\Services::session();
+        $session->start();
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            $session->set(
+                'embeddable_player_domain',
+                parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST)
+            );
+        }
+
+        $locale = service('request')->getLocale();
+
+        $cacheName = "page_podcast{$this->episode->podcast_id}_episode{$this->episode->id}_embeddable_player_{$theme}_{$locale}";
+
+        if (!($cachedView = cache($cacheName))) {
+            $episodeModel = new EpisodeModel();
+            $theme = EpisodeModel::$themes[$theme];
+            helper(['persons']);
+            $persons = [];
+            construct_episode_person_array(
+                $this->episode->episode_persons,
+                $persons
+            );
+            constructs_podcast_person_array(
+                $this->podcast->podcast_persons,
+                $persons
+            );
+
+            $data = [
+                'podcast' => $this->podcast,
+                'episode' => $this->episode,
+                'persons' => $persons,
+                'theme' => $theme,
+            ];
+
+            $secondsToNextUnpublishedEpisode = $episodeModel->getSecondsToNextUnpublishedEpisode(
+                $this->podcast->id
+            );
+
+            // The page cache is set to a decade so it is deleted manually upon podcast update
+            return view('embeddable_player', $data, [
                 'cache' => $secondsToNextUnpublishedEpisode
                     ? $secondsToNextUnpublishedEpisode
                     : DECADE,
