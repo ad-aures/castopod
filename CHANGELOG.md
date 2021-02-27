@@ -1,3 +1,10 @@
+# [1.0.0-alpha.38](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.37...v1.0.0-alpha.38) (2021-02-27)
+
+
+### Features
+
+* **embeddable-player:**  add embeddable player widget ([141788f](https://code.podlibre.org/podlibre/castopod/commit/141788fa089f9dedc8956c64ca515a4a4625f904))
+
 # [1.0.0-alpha.37](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.36...v1.0.0-alpha.37) (2021-02-17)
 
 
