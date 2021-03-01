@@ -88,6 +88,8 @@ class Episode extends BaseController
 
     public function embeddablePlayer($theme = 'light-transparent')
     {
+        header('Content-Security-Policy: frame-ancestors https://* http://*');
+
         self::triggerWebpageHit($this->episode->podcast_id);
 
         $session = \Config\Services::session();
