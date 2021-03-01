@@ -1,3 +1,10 @@
+# [1.0.0-alpha.39](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.38...v1.0.0-alpha.39) (2021-03-01)
+
+
+### Bug Fixes
+
+* **embeddable-player:** enable any ancestor when X-Frame-Options is set on server ([44a4962](https://code.podlibre.org/podlibre/castopod/commit/44a4962e0b7e3ed87e9914b4e7792a0d52330ff8))
+
 # [1.0.0-alpha.38](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.37...v1.0.0-alpha.38) (2021-02-27)
 
 
