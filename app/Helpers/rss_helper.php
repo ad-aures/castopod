@@ -242,6 +242,15 @@ function get_rss_feed($podcast, $serviceSlug = '')
     $image->addChild('title', $podcast->title);
     $image->addChild('link', $podcast->link);
 
+    if (!empty($podcast->custom_rss)) {
+        array_to_rss(
+            [
+                'elements' => $podcast->custom_rss,
+            ],
+            $channel
+        );
+    }
+
     foreach ($episodes as $episode) {
         $item = $channel->addChild('item');
         $item->addChild('title', $episode->title);
@@ -393,6 +402,15 @@ function get_rss_feed($podcast, $serviceSlug = '')
 
         $episode->is_blocked &&
             $item->addChild('block', 'Yes', $itunes_namespace);
+
+        if (!empty($episode->custom_rss)) {
+            array_to_rss(
+                [
+                    'elements' => $episode->custom_rss,
+                ],
+                $item
+            );
+        }
     }
 
     return $rss->asXML();
@@ -428,4 +446,72 @@ function add_category_tag($node, $category)
         $node->addChild('category', $category->parent->apple_category);
     }
     $node->addChild('category', $category->apple_category);
+}
+
+/**
+ * Converts XML to array
+ *
+ * @param \SimpleRSSElement $xmlNode
+ *
+ * @return array
+ */
+function rss_to_array($xmlNode)
+{
+    $nameSpaces = [
+        '',
+        'http://www.itunes.com/dtds/podcast-1.0.dtd',
+        'https://github.com/Podcastindex-org/podcast-namespace/blob/main/docs/1.0.md',
+    ];
+    $arrayNode = [];
+    $arrayNode['name'] = $xmlNode->getName();
+    $arrayNode['namespace'] = $xmlNode->getNamespaces(false);
+    if (count($xmlNode->attributes()) > 0) {
+        foreach ($xmlNode->attributes() as $key => $value) {
+            $arrayNode['attributes'][$key] = (string) $value;
+        }
+    }
+    $textcontent = trim((string) $xmlNode);
+    if (strlen($textcontent) > 0) {
+        $arrayNode['content'] = $textcontent;
+    }
+    foreach ($nameSpaces as $currentNameSpace) {
+        foreach ($xmlNode->children($currentNameSpace) as $childXmlNode) {
+            $arrayNode['elements'][] = rss_to_array($childXmlNode);
+        }
+    }
+    return $arrayNode;
+}
+
+/**
+ * Inserts array (converted to XML node) in XML node
+ *
+ * @param array $arrayNode
+ * @param \SimpleRSSElement $xmlNode The XML parent node where this arrayNode should be attached
+ *
+ */
+function array_to_rss($arrayNode, &$xmlNode)
+{
+    if (array_key_exists('elements', $arrayNode)) {
+        foreach ($arrayNode['elements'] as $childArrayNode) {
+            $childXmlNode = $xmlNode->addChild(
+                $childArrayNode['name'],
+                array_key_exists('content', $childArrayNode)
+                    ? $childArrayNode['content']
+                    : null,
+                empty($childArrayNode['namespace'])
+                    ? null
+                    : current($childArrayNode['namespace'])
+            );
+            if (array_key_exists('attributes', $childArrayNode)) {
+                foreach (
+                    $childArrayNode['attributes']
+                    as $attributeKey => $attributeValue
+                ) {
+                    $childXmlNode->addAttribute($attributeKey, $attributeValue);
+                }
+            }
+            array_to_rss($childArrayNode, $childXmlNode);
+        }
+    }
+    return $xmlNode;
 }

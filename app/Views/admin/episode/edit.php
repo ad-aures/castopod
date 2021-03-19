@@ -388,6 +388,25 @@
 </div>
 <?= form_section_close() ?>
 
+<?= form_section(
+    lang('Episode.form.advanced_section_title'),
+    lang('Episode.form.advanced_section_subtitle')
+) ?>
+<?= form_label(
+    lang('Episode.form.custom_rss'),
+    'custom_rss',
+    [],
+    lang('Episode.form.custom_rss_hint'),
+    true
+) ?>
+<?= form_textarea([
+    'id' => 'custom_rss',
+    'name' => 'custom_rss',
+    'class' => 'form-textarea',
+    'value' => old('custom_rss', $episode->custom_rss_string),
+]) ?>
+<?= form_section_close() ?>
+
 <?= button(
     lang('Episode.form.submit_edit'),
     null,

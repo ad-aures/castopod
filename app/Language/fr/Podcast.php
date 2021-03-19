@@ -74,6 +74,11 @@ return [
             'Adresse de paiement (Payment Pointer) pour Web Monetization',
         'payment_pointer_hint' =>
             'L’adresse où vous recevrez de l’argent grâce à Web Monetization',
+        'advanced_section_title' => 'Paramètres avancés',
+        'advanced_section_subtitle' =>
+            'Si vous avez besoin d’une balise que nous n’avons pas couverte, définissez-la ici.',
+        'custom_rss' => 'Balises RSS personnalisées pour le podcast',
+        'custom_rss_hint' => 'Ceci sera injecté dans la balise ❬channel❭.',
         'status_section_title' => 'Statut',
         'status_section_subtitle' => 'Vivant ou mort ?',
         'block' => 'Le podcast doit être masqué sur toutes les plateformes',

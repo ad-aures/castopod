@@ -87,6 +87,11 @@ return [
         'location_section_subtitle' => 'What place is this episode about?',
         'location_name' => 'Location name or address',
         'location_name_hint' => 'This can be a real place or fictional',
+        'advanced_section_title' => 'Advanced Parameters',
+        'advanced_section_subtitle' =>
+            'If you need RSS tags that Castopod does not handle, set them here.',
+        'custom_rss' => 'Custom RSS tags for the episode',
+        'custom_rss_hint' => 'This will be injected within the ❬item❭ tag.',
         'submit_create' => 'Create episode',
         'submit_edit' => 'Save episode',
     ],

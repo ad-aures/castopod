@@ -141,6 +141,7 @@ class Episode extends BaseController
                 : null,
             'type' => $this->request->getPost('type'),
             'is_blocked' => $this->request->getPost('block') == 'yes',
+            'custom_rss_string' => $this->request->getPost('custom_rss'),
             'created_by' => user(),
             'updated_by' => user(),
             'published_at' => $publicationDate
@@ -236,6 +237,9 @@ class Episode extends BaseController
             : null;
         $this->episode->type = $this->request->getPost('type');
         $this->episode->is_blocked = $this->request->getPost('block') == 'yes';
+        $this->episode->custom_rss_string = $this->request->getPost(
+            'custom_rss'
+        );
 
         $publicationDate = $this->request->getPost('publication_date');
         $this->episode->published_at = $publicationDate

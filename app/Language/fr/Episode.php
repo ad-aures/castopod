@@ -88,6 +88,11 @@ return [
         'location_section_subtitle' => 'De quel lieu cet épisode parle-t-il ?',
         'location_name' => 'Nom ou adresse du lieu',
         'location_name_hint' => 'Ce lieu peut être réel ou fictif',
+        'advanced_section_title' => 'Paramètres avancés',
+        'advanced_section_subtitle' =>
+            'Si vous avez besoin d’une balise que nous n’avons pas couverte, définissez-la ici.',
+        'custom_rss' => 'Balises RSS personnalisées pour l’épisode',
+        'custom_rss_hint' => 'Ceci sera injecté dans la balise ❬item❭.',
         'submit_create' => 'Créer l’épisode',
         'submit_edit' => 'Enregistrer l’épisode',
     ],

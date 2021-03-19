@@ -27,7 +27,6 @@
     'id' => 'image',
     'name' => 'image',
     'class' => 'form-input',
-
     'required' => 'required',
     'type' => 'file',
     'accept' => '.jpg,.jpeg,.png',
@@ -59,27 +58,21 @@
     'required' => 'required',
 ]) ?>
 
-<?= form_fieldset('', ['class' => 'mb-4']) ?>
+<?= form_fieldset('', [
+    'class' => 'mb-4',
+]) ?>
     <legend>
     <?= lang('Podcast.form.type.label') .
         hint_tooltip(lang('Podcast.form.type.hint'), 'ml-1') ?>
     </legend>
     <?= form_radio(
-        [
-            'id' => 'episodic',
-            'name' => 'type',
-            'class' => 'form-radio-btn',
-        ],
+        ['id' => 'episodic', 'name' => 'type', 'class' => 'form-radio-btn'],
         'episodic',
         old('type') ? old('type') == 'episodic' : true
     ) ?>
     <label for="episodic"><?= lang('Podcast.form.type.episodic') ?></label>
     <?= form_radio(
-        [
-            'id' => 'serial',
-            'name' => 'type',
-            'class' => 'form-radio-btn',
-        ],
+        ['id' => 'serial', 'name' => 'type', 'class' => 'form-radio-btn'],
         'serial',
         old('type') ? old('type') == 'serial' : false
     ) ?>
@@ -285,6 +278,25 @@
     'name' => 'payment_pointer',
     'class' => 'form-input mb-4',
     'value' => old('payment_pointer'),
+]) ?>
+<?= form_section_close() ?>
+
+<?= form_section(
+    lang('Podcast.form.advanced_section_title'),
+    lang('Podcast.form.advanced_section_subtitle')
+) ?>
+<?= form_label(
+    lang('Podcast.form.custom_rss'),
+    'custom_rss',
+    [],
+    lang('Podcast.form.custom_rss_hint'),
+    true
+) ?>
+<?= form_textarea([
+    'id' => 'custom_rss',
+    'name' => 'custom_rss',
+    'class' => 'form-textarea',
+    'value' => old('custom_rss'),
 ]) ?>
 <?= form_section_close() ?>
 

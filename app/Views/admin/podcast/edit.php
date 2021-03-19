@@ -292,6 +292,25 @@
 <?= form_section_close() ?>
 
 <?= form_section(
+    lang('Podcast.form.advanced_section_title'),
+    lang('Podcast.form.advanced_section_subtitle')
+) ?>
+<?= form_label(
+    lang('Podcast.form.custom_rss'),
+    'custom_rss',
+    [],
+    lang('Podcast.form.custom_rss_hint'),
+    true
+) ?>
+<?= form_textarea([
+    'id' => 'custom_rss',
+    'name' => 'custom_rss',
+    'class' => 'form-textarea',
+    'value' => old('custom_rss', $podcast->custom_rss_string),
+]) ?>
+<?= form_section_close() ?>
+
+<?= form_section(
     lang('Podcast.form.status_section_title'),
     lang('Podcast.form.status_section_subtitle')
 ) ?>

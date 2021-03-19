@@ -163,6 +163,7 @@ class Podcast extends BaseController
             'copyright' => $this->request->getPost('copyright'),
             'location' => $this->request->getPost('location_name'),
             'payment_pointer' => $this->request->getPost('payment_pointer'),
+            'custom_rss_string' => $this->request->getPost('custom_rss'),
             'is_blocked' => $this->request->getPost('block') === 'yes',
             'is_completed' => $this->request->getPost('complete') === 'yes',
             'is_locked' => $this->request->getPost('lock') === 'yes',
@@ -258,6 +259,9 @@ class Podcast extends BaseController
         $this->podcast->location = $this->request->getPost('location_name');
         $this->podcast->payment_pointer = $this->request->getPost(
             'payment_pointer'
+        );
+        $this->podcast->custom_rss_string = $this->request->getPost(
+            'custom_rss'
         );
         $this->podcast->is_blocked = $this->request->getPost('block') === 'yes';
         $this->podcast->is_completed =

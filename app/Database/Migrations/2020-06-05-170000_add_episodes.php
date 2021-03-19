@@ -124,6 +124,10 @@ class AddEpisodes extends Migration
                 'constraint' => 12,
                 'null' => true,
             ],
+            'custom_rss' => [
+                'type' => 'JSON',
+                'null' => true,
+            ],
             'created_by' => [
                 'type' => 'INT',
                 'unsigned' => true,

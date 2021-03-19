@@ -41,6 +41,7 @@ class PodcastModel extends Model
         'location_geo',
         'location_osmid',
         'payment_pointer',
+        'custom_rss',
         'created_by',
         'updated_by',
     ];

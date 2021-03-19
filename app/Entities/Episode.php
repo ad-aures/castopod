@@ -106,6 +106,13 @@ class Episode extends Entity
      */
     protected $publication_status;
 
+    /**
+     * Return custom rss as string
+     *
+     * @var string
+     */
+    protected $custom_rss_string;
+
     protected $dates = [
         'published_at',
         'created_at',
@@ -136,6 +143,7 @@ class Episode extends Entity
         'location_name' => '?string',
         'location_geo' => '?string',
         'location_osmid' => '?string',
+        'custom_rss' => '?json-array',
         'created_by' => 'integer',
         'updated_by' => 'integer',
     ];
@@ -563,5 +571,57 @@ class Episode extends Entity
             $this->attributes['location_osmid'] = null;
         }
         return $this;
+    }
+
+    /**
+     * Get custom rss tag as XML String
+     *
+     * @return string
+     *
+     */
+    function getCustomRssString()
+    {
+        helper('rss');
+        if (empty($this->attributes['custom_rss'])) {
+            return '';
+        } else {
+            $xmlNode = (new \App\Libraries\SimpleRSSElement(
+                '<?xml version="1.0" encoding="utf-8"?><rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:podcast="https://github.com/Podcastindex-org/podcast-namespace/blob/main/docs/1.0.md" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"/>'
+            ))
+                ->addChild('channel')
+                ->addChild('item');
+            array_to_rss(
+                [
+                    'elements' => $this->custom_rss,
+                ],
+                $xmlNode
+            );
+            return str_replace(['<item>', '</item>'], '', $xmlNode->asXML());
+        }
+    }
+
+    /**
+     * Saves custom rss tag into json
+     *
+     * @param string $customRssString
+     *
+     */
+    function setCustomRssString($customRssString)
+    {
+        helper('rss');
+        $customRssArray = rss_to_array(
+            simplexml_load_string(
+                '<?xml version="1.0" encoding="utf-8"?><rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:podcast="https://github.com/Podcastindex-org/podcast-namespace/blob/main/docs/1.0.md" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><item>' .
+                    $customRssString .
+                    '</item></channel></rss>'
+            )
+        )['elements'][0]['elements'][0];
+        if (array_key_exists('elements', $customRssArray)) {
+            $this->attributes['custom_rss'] = json_encode(
+                $customRssArray['elements']
+            );
+        } else {
+            $this->attributes['custom_rss'] = null;
+        }
     }
 }

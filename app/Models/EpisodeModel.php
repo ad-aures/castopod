@@ -38,6 +38,7 @@ class EpisodeModel extends Model
         'location_name',
         'location_geo',
         'location_osmid',
+        'custom_rss',
         'published_at',
         'created_by',
         'updated_by',

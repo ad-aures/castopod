@@ -72,6 +72,11 @@ return [
         'payment_pointer' => 'Payment Pointer for Web Monetization',
         'payment_pointer_hint' =>
             'This is your where you will receive money thanks to Web Monetization',
+        'advanced_section_title' => 'Advanced Parameters',
+        'advanced_section_subtitle' =>
+            'If you need RSS tags that Castopod does not handle, set them here.',
+        'custom_rss' => 'Custom RSS tags for the podcast',
+        'custom_rss_hint' => 'This will be injected within the ❬channel❭ tag.',
         'status_section_title' => 'Status',
         'status_section_subtitle' => 'Dead or alive?',
         'block' => 'Podcast should be hidden from all platforms',
