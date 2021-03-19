@@ -1,3 +1,10 @@
+# [1.0.0-alpha.40](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.39...v1.0.0-alpha.40) (2021-03-19)
+
+
+### Features
+
+* **custom-rss:** add custom xml tag injection in rss feed for ❬channel❭ and ❬item❭ ([6ecdaad](https://code.podlibre.org/podlibre/castopod/commit/6ecdaad911d06b7f7a2b7d24710968c7eb9118f6))
+
 # [1.0.0-alpha.39](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.38...v1.0.0-alpha.39) (2021-03-01)
 
 
