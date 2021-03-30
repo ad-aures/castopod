@@ -1,3 +1,10 @@
+# [1.0.0-alpha.41](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.40...v1.0.0-alpha.41) (2021-03-30)
+
+
+### Features
+
+* **partner:** add link and image in episode description ([ad07bb9](https://code.podlibre.org/podlibre/castopod/commit/ad07bb9330dc9493813368e969e1f3a3def44614))
+
 # [1.0.0-alpha.40](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.39...v1.0.0-alpha.40) (2021-03-19)
 
 
