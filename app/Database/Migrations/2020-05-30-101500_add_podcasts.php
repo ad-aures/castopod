@@ -140,6 +140,20 @@ class AddPodcasts extends Migration
             ],
             'custom_rss' => [
                 'type' => 'JSON',
+            ],
+            'partner_id' => [
+                'type' => 'VARCHAR',
+                'constraint' => 32,
+                'null' => true,
+            ],
+            'partner_link_url' => [
+                'type' => 'VARCHAR',
+                'constraint' => 512,
+                'null' => true,
+            ],
+            'partner_image_url' => [
+                'type' => 'VARCHAR',
+                'constraint' => 512,
                 'null' => true,
             ],
             'created_by' => [

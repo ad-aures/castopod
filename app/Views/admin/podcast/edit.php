@@ -289,6 +289,55 @@
     'class' => 'form-input mb-4',
     'value' => old('payment_pointer', $podcast->payment_pointer),
 ]) ?>
+
+<?= form_label(lang('Podcast.form.partnership')) ?>
+<div class="flex flex-col mb-4 gap-x-2 gap-y-4 md:flex-row">
+    <div class="flex flex-col flex-shrink w-32">
+        <?= form_label(
+            lang('Podcast.form.partner_id'),
+            'partner_id',
+            [],
+            lang('Podcast.form.partner_id_hint'),
+            true
+        ) ?>
+        <?= form_input([
+            'id' => 'partner_id',
+            'name' => 'partner_id',
+            'class' => 'form-input w-full',
+            'value' => old('partner_id', $podcast->partner_id),
+        ]) ?>
+    </div>
+    <div class="flex flex-col flex-1">
+        <?= form_label(
+            lang('Podcast.form.partner_link_url'),
+            'partner_link_url',
+            [],
+            lang('Podcast.form.partner_link_url_hint'),
+            true
+        ) ?>
+        <?= form_input([
+            'id' => 'partner_link_url',
+            'name' => 'partner_link_url',
+            'class' => 'form-input w-full',
+            'value' => old('partner_link_url', $podcast->partner_link_url),
+        ]) ?>
+    </div>
+    <div class="flex flex-col flex-1">
+        <?= form_label(
+            lang('Podcast.form.partner_image_url'),
+            'partner_image_url',
+            [],
+            lang('Podcast.form.partner_image_url_hint'),
+            true
+        ) ?>
+        <?= form_input([
+            'id' => 'partner_image_url',
+            'name' => 'partner_image_url',
+            'class' => 'form-input w-full',
+            'value' => old('partner_image_url', $podcast->partner_image_url),
+        ]) ?>
+    </div>
+</div>
 <?= form_section_close() ?>
 
 <?= form_section(

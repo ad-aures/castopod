@@ -483,19 +483,21 @@ class Episode extends Entity
         return $this;
     }
 
-    public function getDescriptionHtml()
+    public function getDescriptionHtml($serviceSlug = null)
     {
-        if (
-            $descriptionFooter = $this->getPodcast()
-                ->episode_description_footer_html
-        ) {
-            return $this->attributes['description_html'] .
-                '<footer>' .
-                $descriptionFooter .
-                '</footer>';
-        }
-
-        return $this->attributes['description_html'];
+        return (empty($this->getPodcast()->partner_id) ||
+        empty($this->getPodcast()->partner_link_url) ||
+        empty($this->getPodcast()->partner_image_url)
+            ? ''
+            : "<div><a href=\"{$this->getPartnerLink(
+                $serviceSlug
+            )}\" rel=\"sponsored noopener noreferrer\" target=\"_blank\"><img src=\"{$this->getPartnerImage(
+                $serviceSlug
+            )}\" alt=\"Partner image\" /></a></div>") .
+            $this->attributes['description_html'] .
+            (empty($this->getPodcast()->episode_description_footer_html)
+                ? ''
+                : "<footer>{$this->getPodcast()->episode_description_footer_html}</footer>");
     }
 
     public function getDescription()
@@ -623,5 +625,25 @@ class Episode extends Entity
         } else {
             $this->attributes['custom_rss'] = null;
         }
+    }
+
+    function getPartnerLink($serviceSlug = null)
+    {
+        return rtrim($this->getPodcast()->partner_link_url, '/') .
+            '?pid=' .
+            $this->getPodcast()->partner_id .
+            '&guid=' .
+            urlencode($this->attributes['guid']) .
+            (empty($serviceSlug) ? '' : '&_from=' . $serviceSlug);
+    }
+
+    function getPartnerImage($serviceSlug = null)
+    {
+        return rtrim($this->getPodcast()->partner_image_url, '/') .
+            '?pid=' .
+            $this->getPodcast()->partner_id .
+            '&guid=' .
+            urlencode($this->attributes['guid']) .
+            (empty($serviceSlug) ? '' : '&_from=' . $serviceSlug);
     }
 }

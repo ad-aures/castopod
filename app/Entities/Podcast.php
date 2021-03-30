@@ -114,6 +114,9 @@ class Podcast extends Entity
         'location_osmid' => '?string',
         'payment_pointer' => '?string',
         'custom_rss' => '?json-array',
+        'partner_id' => '?string',
+        'partner_link_url' => '?string',
+        'partner_image_url' => '?string',
         'created_by' => 'integer',
         'updated_by' => 'integer',
     ];

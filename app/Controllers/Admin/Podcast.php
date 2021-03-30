@@ -164,6 +164,9 @@ class Podcast extends BaseController
             'location' => $this->request->getPost('location_name'),
             'payment_pointer' => $this->request->getPost('payment_pointer'),
             'custom_rss_string' => $this->request->getPost('custom_rss'),
+            'partner_id' => $this->request->getPost('partner_id'),
+            'partner_link_url' => $this->request->getPost('partner_link_url'),
+            'partner_image_url' => $this->request->getPost('partner_image_url'),
             'is_blocked' => $this->request->getPost('block') === 'yes',
             'is_completed' => $this->request->getPost('complete') === 'yes',
             'is_locked' => $this->request->getPost('lock') === 'yes',
@@ -262,6 +265,13 @@ class Podcast extends BaseController
         );
         $this->podcast->custom_rss_string = $this->request->getPost(
             'custom_rss'
+        );
+        $this->podcast->partner_id = $this->request->getPost('partner_id');
+        $this->podcast->partner_link_url = $this->request->getPost(
+            'partner_link_url'
+        );
+        $this->podcast->partner_image_url = $this->request->getPost(
+            'partner_image_url'
         );
         $this->podcast->is_blocked = $this->request->getPost('block') === 'yes';
         $this->podcast->is_completed =

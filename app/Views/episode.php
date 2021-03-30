@@ -131,7 +131,7 @@
         </div>
       </header>      
       <section class="w-full max-w-3xl px-2 py-6 mx-auto prose md:px-6">
-      <?= $episode->description_html ?>
+      <?= $episode->getDescriptionHtml('-+Website+-') ?>
       </section>
     </main>
     <footer class="px-2 py-4 border-t ">

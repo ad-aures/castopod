@@ -282,7 +282,10 @@ function get_rss_feed($podcast, $serviceSlug = '')
                 $locationElement->addAttribute('osm', $episode->location_osmid);
             }
         }
-        $item->addChildWithCDATA('description', $episode->description_html);
+        $item->addChildWithCDATA(
+            'description',
+            $episode->getDescriptionHtml($serviceSlug)
+        );
         $item->addChild(
             'duration',
             $episode->enclosure_duration,

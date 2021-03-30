@@ -42,6 +42,9 @@ class PodcastModel extends Model
         'location_osmid',
         'payment_pointer',
         'custom_rss',
+        'partner_id',
+        'partner_link_url',
+        'partner_image_url',
         'created_by',
         'updated_by',
     ];
