@@ -2,16 +2,19 @@
 
 namespace Config;
 
-use CodeIgniter\Config\Services as CoreServices;
+use CodeIgniter\Config\BaseService;
 use CodeIgniter\Model;
 use App\Authorization\FlatAuthorization;
 use App\Authorization\PermissionModel;
 use App\Authorization\GroupModel;
 use App\Libraries\Breadcrumb;
+use App\Libraries\Negotiate;
+use App\Libraries\Router;
 use App\Models\UserModel;
+use CodeIgniter\HTTP\Request;
+use CodeIgniter\HTTP\RequestInterface;
+use CodeIgniter\Router\RouteCollectionInterface;
 use Myth\Auth\Models\LoginModel;
-
-require_once SYSTEMPATH . 'Config/Services.php';
 
 /**
  * Services Configuration file.
@@ -26,8 +29,56 @@ require_once SYSTEMPATH . 'Config/Services.php';
  * method format you should use for your service methods. For more examples,
  * see the core Services file at system/Config/Services.php.
  */
-class Services extends CoreServices
+class Services extends BaseService
 {
+    /**
+     * The Router class uses a RouteCollection's array of routes, and determines
+     * the correct Controller and Method to execute.
+     *
+     * @param RouteCollectionInterface|null $routes
+     * @param Request|null                  $request
+     * @param boolean                       $getShared
+     *
+     * @return Router
+     */
+    public static function router(
+        RouteCollectionInterface $routes = null,
+        Request $request = null,
+        bool $getShared = true
+    ) {
+        if ($getShared) {
+            return static::getSharedInstance('router', $routes, $request);
+        }
+
+        $routes = $routes ?? static::routes();
+        $request = $request ?? static::request();
+
+        return new Router($routes, $request);
+    }
+
+    /**
+     * The Negotiate class provides the content negotiation features for
+     * working the request to determine correct language, encoding, charset,
+     * and more.
+     *
+     * @param RequestInterface|null $request
+     * @param boolean               $getShared
+     *
+     * @return Negotiate
+     */
+    public static function negotiator(
+        RequestInterface $request = null,
+        bool $getShared = true
+    ) {
+        if ($getShared) {
+            return static::getSharedInstance('negotiator', $request);
+        }
+
+        $request = $request ?? static::request();
+
+        return new Negotiate($request);
+    }
+
     public static function authentication(
         string $lib = 'local',
         Model $userModel = null,
@@ -39,7 +90,7 @@ class Services extends CoreServices
                 'authentication',
                 $lib,
                 $userModel,
-                $loginModel
+                $loginModel,
             );
         }
 
@@ -72,7 +123,7 @@ class Services extends CoreServices
                 'authorization',
                 $groupModel,
                 $permissionModel,
-                $userModel
+                $userModel,
             );
         }
 

@@ -1,9 +1,10 @@
+/* Admin layout */
 .holy-grail-grid {
   @apply grid min-h-screen overflow-y-auto;
   grid-template: 1fr auto / auto 1fr;
 
   & .holy-grail-sidebar {
-    @apply w-64 col-start-1 col-end-2 row-start-1 row-end-3;
+    @apply col-start-1 col-end-2 row-start-1 row-end-3 w-80;
   }
 
   & .holy-grail-main {

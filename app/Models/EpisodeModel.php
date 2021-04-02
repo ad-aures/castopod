@@ -16,6 +16,7 @@ class EpisodeModel extends Model
     protected $primaryKey = 'id';
 
     protected $allowedFields = [
+        'id',
         'podcast_id',
         'guid',
         'title',
@@ -28,6 +29,7 @@ class EpisodeModel extends Model
         'description_markdown',
         'description_html',
         'image_uri',
+        'image_mimetype',
         'transcript_uri',
         'chapters_uri',
         'parental_advisory',
@@ -39,6 +41,9 @@ class EpisodeModel extends Model
         'location_geo',
         'location_osmid',
         'custom_rss',
+        'favourites_total',
+        'reblogs_total',
+        'notes_total',
         'published_at',
         'created_by',
         'updated_by',
@@ -70,6 +75,7 @@ class EpisodeModel extends Model
     protected $afterUpdate = ['writeEnclosureMetadata'];
     protected $beforeDelete = ['clearCache'];
 
+    // TODO: remove
     public static $themes = [
         'light-transparent' => [
             'style' =>
@@ -99,87 +105,77 @@ class EpisodeModel extends Model
         ],
     ];
 
+    /**
+     *
+     * @param int|string $podcastId Podcast Id or name
+     * @param mixed $episodeSlug
+     * @return mixed
+     */
     public function getEpisodeBySlug($podcastId, $episodeSlug)
     {
-        if (!($found = cache("podcast{$podcastId}_episode@{$episodeSlug}"))) {
-            $found = $this->where([
-                'podcast_id' => $podcastId,
-                'slug' => $episodeSlug,
-            ])
-                ->where('`published_at` <= NOW()', null, false)
-                ->first();
+        if (!($found = cache("podcast@{$podcastId}_episode@{$episodeSlug}"))) {
+            $builder = $this->select('episodes.*')
+                ->where('slug', $episodeSlug)
+                ->where('`published_at` <= NOW()', null, false);
+
+            if (is_numeric($podcastId)) {
+                // passed argument is the podcast id
+                $builder->where('podcast_id', $podcastId);
+            } else {
+                // passed argument is the podcast name, must perform join
+                $builder
+                    ->join('podcasts', 'podcasts.id = episodes.podcast_id')
+                    ->where('podcasts.name', $podcastId);
+            }
+
+            $found = $builder->first();
 
             cache()->save(
                 "podcast{$podcastId}_episode@{$episodeSlug}",
                 $found,
-                DECADE
+                DECADE,
             );
         }
 
         return $found;
     }
 
-    public function getEpisodeById($podcastId, $episodeId)
+    public function getEpisodeById($episodeId)
+    {
+        if (!($found = cache("podcast_episode{$episodeId}"))) {
+            $builder = $this->where([
+                'id' => $episodeId,
+            ]);
+
+            $found = $builder->first();
+
+            cache()->save("podcast_episode{$episodeId}", $found, DECADE);
+        }
+
+        return $found;
+    }
+
+    public function getPublishedEpisodeById($episodeId, $podcastId = null)
     {
         if (!($found = cache("podcast{$podcastId}_episode{$episodeId}"))) {
-            $found = $this->where([
-                'podcast_id' => $podcastId,
+            $builder = $this->where([
                 'id' => $episodeId,
-            ])
-                ->where('published_at <=', 'NOW()')
-                ->first();
+            ])->where('`published_at` <= NOW()', null, false);
+
+            if ($podcastId) {
+                $builder->where('podcast_id', $podcastId);
+            }
+
+            $found = $builder->first();
 
             cache()->save(
                 "podcast{$podcastId}_episode{$episodeId}",
                 $found,
-                DECADE
+                DECADE,
             );
         }
 
         return $found;
-    }
-
-    /**
-     * Returns the previous episode based on episode ordering
-     */
-    public function getPreviousNextEpisodes($episode, $podcastType)
-    {
-        $sortNumberField =
-            $podcastType == 'serial'
-                ? 'if(isnull(season_number),0,season_number)*1000+number'
-                : 'if(isnull(season_number),0,season_number)*100000000000000+published_at';
-        $sortNumberValue =
-            $podcastType == 'serial'
-                ? (empty($episode->season_number)
-                        ? 0
-                        : $episode->season_number) *
-                        1000 +
-                    $episode->number
-                : (empty($episode->season_number)
-                        ? ''
-                        : $episode->season_number) .
-                    date('YmdHis', strtotime($episode->published_at));
-
-        $previousData = $this->orderBy('(' . $sortNumberField . ') DESC')
-            ->where([
-                'podcast_id' => $episode->podcast_id,
-                $sortNumberField . ' <' => $sortNumberValue,
-            ])
-            ->where('`published_at` <= NOW()', null, false)
-            ->first();
-
-        $nextData = $this->orderBy('(' . $sortNumberField . ') ASC')
-            ->where([
-                'podcast_id' => $episode->podcast_id,
-                $sortNumberField . ' >' => $sortNumberValue,
-            ])
-            ->where('`published_at` <= NOW()', null, false)
-            ->first();
-
-        return [
-            'previous' => $previousData,
-            'next' => $nextData,
-        ];
     }
 
     /**
@@ -203,7 +199,7 @@ class EpisodeModel extends Model
                 $year,
                 $season ? 'season' . $season : null,
                 'episodes',
-            ])
+            ]),
         );
 
         if (!($found = cache($cacheName))) {
@@ -232,7 +228,7 @@ class EpisodeModel extends Model
             }
 
             $secondsToNextUnpublishedEpisode = $this->getSecondsToNextUnpublishedEpisode(
-                $podcastId
+                $podcastId,
             );
 
             cache()->save(
@@ -240,7 +236,7 @@ class EpisodeModel extends Model
                 $found,
                 $secondsToNextUnpublishedEpisode
                     ? $secondsToNextUnpublishedEpisode
-                    : DECADE
+                    : DECADE,
             );
         }
 
@@ -251,7 +247,7 @@ class EpisodeModel extends Model
     {
         if (!($found = cache("podcast{$podcastId}_years"))) {
             $found = $this->select(
-                'YEAR(published_at) as year, count(*) as number_of_episodes'
+                'YEAR(published_at) as year, count(*) as number_of_episodes',
             )
                 ->where([
                     'podcast_id' => $podcastId,
@@ -265,7 +261,7 @@ class EpisodeModel extends Model
                 ->getResultArray();
 
             $secondsToNextUnpublishedEpisode = $this->getSecondsToNextUnpublishedEpisode(
-                $podcastId
+                $podcastId,
             );
 
             cache()->save(
@@ -273,7 +269,7 @@ class EpisodeModel extends Model
                 $found,
                 $secondsToNextUnpublishedEpisode
                     ? $secondsToNextUnpublishedEpisode
-                    : DECADE
+                    : DECADE,
             );
         }
 
@@ -284,7 +280,7 @@ class EpisodeModel extends Model
     {
         if (!($found = cache("podcast{$podcastId}_seasons"))) {
             $found = $this->select(
-                'season_number, count(*) as number_of_episodes'
+                'season_number, count(*) as number_of_episodes',
             )
                 ->where([
                     'podcast_id' => $podcastId,
@@ -298,7 +294,7 @@ class EpisodeModel extends Model
                 ->getResultArray();
 
             $secondsToNextUnpublishedEpisode = $this->getSecondsToNextUnpublishedEpisode(
-                $podcastId
+                $podcastId,
             );
 
             cache()->save(
@@ -306,7 +302,7 @@ class EpisodeModel extends Model
                 $found,
                 $secondsToNextUnpublishedEpisode
                     ? $secondsToNextUnpublishedEpisode
-                    : DECADE
+                    : DECADE,
             );
         }
 
@@ -341,7 +337,7 @@ class EpisodeModel extends Model
             cache()->save(
                 "podcast{$podcastId}_defaultQuery",
                 $defaultQuery,
-                DECADE
+                DECADE,
             );
         }
         return $defaultQuery;
@@ -358,7 +354,7 @@ class EpisodeModel extends Model
     public function getSecondsToNextUnpublishedEpisode(int $podcastId)
     {
         $result = $this->select(
-            'TIMESTAMPDIFF(SECOND, NOW(), `published_at`) as timestamp_diff'
+            'TIMESTAMPDIFF(SECOND, NOW(), `published_at`) as timestamp_diff',
         )
             ->where([
                 'podcast_id' => $podcastId,
@@ -376,7 +372,7 @@ class EpisodeModel extends Model
         helper('id3');
 
         $episode = (new EpisodeModel())->find(
-            is_array($data['id']) ? $data['id'][0] : $data['id']
+            is_array($data['id']) ? $data['id'][0] : $data['id'],
         );
 
         write_enclosure_tags($episode);
@@ -386,16 +382,15 @@ class EpisodeModel extends Model
 
     public function clearCache(array $data)
     {
-        $episodeModel = new EpisodeModel();
         $episode = (new EpisodeModel())->find(
-            is_array($data['id']) ? $data['id'][0] : $data['id']
+            is_array($data['id']) ? $data['id'][0] : $data['id'],
         );
 
         // delete cache for rss feed
         cache()->delete("podcast{$episode->podcast_id}_feed");
         foreach (\Opawg\UserAgentsPhp\UserAgentsRSS::$db as $service) {
             cache()->delete(
-                "podcast{$episode->podcast_id}_feed_{$service['slug']}"
+                "podcast{$episode->podcast_id}_feed_{$service['slug']}",
             );
         }
 
@@ -403,40 +398,43 @@ class EpisodeModel extends Model
         cache()->delete("podcast{$episode->podcast_id}_episodes");
 
         cache()->delete(
-            "podcast{$episode->podcast_id}_episode@{$episode->slug}"
+            "podcast{$episode->podcast_id}_episode@{$episode->slug}",
         );
+
+        cache()->delete("podcast_episode{$episode->id}");
 
         // delete episode lists cache per year / season for a podcast
         // and localized pages
+        $episodeModel = new EpisodeModel();
         $years = $episodeModel->getYears($episode->podcast_id);
         $seasons = $episodeModel->getSeasons($episode->podcast_id);
         $supportedLocales = config('App')->supportedLocales;
 
         foreach ($supportedLocales as $locale) {
             cache()->delete(
-                "page_podcast{$episode->podcast->id}_episode{$episode->id}_{$locale}"
+                "page_podcast{$episode->podcast->id}_episode{$episode->id}_{$locale}",
             );
             cache()->delete("credits_{$locale}");
         }
 
         foreach ($years as $year) {
             cache()->delete(
-                "podcast{$episode->podcast_id}_{$year['year']}_episodes"
+                "podcast{$episode->podcast_id}_{$year['year']}_episodes",
             );
             foreach ($supportedLocales as $locale) {
                 cache()->delete(
-                    "page_podcast{$episode->podcast_id}_{$year['year']}_{$locale}"
+                    "page_podcast{$episode->podcast_id}_{$year['year']}_{$locale}",
                 );
             }
         }
 
         foreach ($seasons as $season) {
             cache()->delete(
-                "podcast{$episode->podcast_id}_season{$season['season_number']}_episodes"
+                "podcast{$episode->podcast_id}_season{$season['season_number']}_episodes",
             );
             foreach ($supportedLocales as $locale) {
                 cache()->delete(
-                    "page_podcast{$episode->podcast_id}_season{$season['season_number']}_{$locale}"
+                    "page_podcast{$episode->podcast_id}_season{$season['season_number']}_{$locale}",
                 );
             }
         }
@@ -444,7 +442,7 @@ class EpisodeModel extends Model
         foreach (array_keys(self::$themes) as $themeKey) {
             foreach ($supportedLocales as $locale) {
                 cache()->delete(
-                    "page_podcast{$episode->podcast_id}_episode{$episode->id}_embeddable_player_{$themeKey}_{$locale}"
+                    "page_podcast{$episode->podcast_id}_episode{$episode->id}_embeddable_player_{$themeKey}_{$locale}",
                 );
             }
         }

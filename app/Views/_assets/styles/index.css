@@ -1,7 +1,12 @@
 @import "./tailwind.css";
+@import "./fonts.css";
 @import "./layout.css";
 @import "./breadcrumb.css";
+@import "./dropdown.css";
 @import "./multiSelect.css";
 @import "./radioBtn.css";
 @import "./switch.css";
 @import "./charts.css";
+@import "./note.css";
+@import "./tabs.css";
+@import "./radioToggler.css";

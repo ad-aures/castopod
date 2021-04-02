@@ -11,6 +11,7 @@
 - [Going Further](#going-further)
   - [Useful docker / docker-compose commands](#useful-docker--docker-compose-commands)
 - [Developing inside a Container](#developing-inside-a-container)
+- [Known issues](#known-issues)
 
 ## Introduction
 
@@ -38,12 +39,12 @@ git clone https://code.podlibre.org/podlibre/castopod.git
    the database:
 
 ```ini
-CI_ENVIRONMENT = development
+CI_ENVIRONMENT="development"
 
-database.default.hostname = mariadb
-database.default.database = castopod
-database.default.username = podlibre
-database.default.password = castopod
+database.default.hostname="mariadb"
+database.default.database="castopod"
+database.default.username="podlibre"
+database.default.password="castopod"
 ```
 
 > _NB._ You can tweak your environment by setting more environment variables in
@@ -80,6 +81,8 @@ docker-compose run --rm node npm run build:js
 docker-compose run --rm node npm run build:css
 docker-compose run --rm node npm run build:icons
 docker-compose run --rm node npm run build:svg
+docker-compose run --rm node npm run copy:images
+docker-compose run --rm node npm run copy:fonts
 ```
 
 ## Start docker containers
@@ -258,3 +261,10 @@ git version
 
 For more info, see
 [VSCode Remote Containers](https://code.visualstudio.com/docs/remote/containers)
+
+## Known issues
+
+- `Allocation failed - JavaScript heap out of memory` when running `npm install`
+
+  👉 By default, docker might not have access to enough RAM. Allocate more
+  memory and run `npm install` again.

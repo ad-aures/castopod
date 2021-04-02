@@ -34,19 +34,20 @@ class AnalyticsWebsiteByBrowserModel extends Model
     {
         if (!($found = cache("{$podcastId}_analytics_website_by_browser"))) {
             $oneWeekAgo = date('Y-m-d', strtotime('-1 week'));
-            $found = $this->select('`browser` as `labels`')
-                ->selectSum('`hits`', '`values`')
+            $found = $this->select('browser as labels')
+                ->selectSum('hits', 'values')
                 ->where([
-                    '`podcast_id`' => $podcastId,
-                    '`date` >' => $oneWeekAgo,
+                    'podcast_id' => $podcastId,
+                    'date >' => $oneWeekAgo,
                 ])
-                ->groupBy('`labels`')
-                ->orderBy('`values`', 'DESC')
+                ->groupBy('labels')
+                ->orderBy('values', 'DESC')
                 ->findAll();
+
             cache()->save(
                 "{$podcastId}_analytics_website_by_browser",
                 $found,
-                600
+                600,
             );
         }
         return $found;

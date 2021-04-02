@@ -3,12 +3,12 @@
 Castopod is an open-source podcast hosting solution for everyone.\
 Whether you are a beginner, an amateur or a professional, you will get everything
 you need:\
-Create, upload, publish, and get comprehensive audience measurement that respects your
-listeners privacy.
+Create, upload, publish, and get comprehensive audience measurement that
+respects your listeners privacy.
 
 Castopod is a free and open-source solution (AGPL v3).\
-Whether you choose to install it on your own server or have it hosted by a
-professional, all your data and analytics belong to you and you only.
+Whether you choose to install it on your own server or have it hosted by a professional,
+all your data and analytics belong to you and you only.
 
 ![Castopod Logo](https://podlibre.org/static/images/Castopod-Mascot-Server.svg)
 
@@ -18,7 +18,9 @@ Castopod can be hosted on any PHP/MySQL server:\
 Unzip it and you are ready to broadcast.
 
 To install Castopod on your server:
-- Download [Castopod latest Package (zip or tar.gz)](https://code.podlibre.org/podlibre/castopod/-/releases),
+
+- Download
+  [Castopod latest Package (zip or tar.gz)](https://code.podlibre.org/podlibre/castopod/-/releases),
 - Follow the procedure “[How to install Castopod](./INSTALL.md)”.
 
 ## Documentation

@@ -33,12 +33,12 @@ class AnalyticsPodcastModel extends Model
     public function getDataByDay(int $podcastId): array
     {
         if (!($found = cache("{$podcastId}_analytics_podcast_by_day"))) {
-            $found = $this->select('`date` as `labels`, `hits` as `values`')
+            $found = $this->select('date as labels, hits as values')
                 ->where([
-                    '`podcast_id`' => $podcastId,
-                    '`date` >' => date('Y-m-d', strtotime('-60 days')),
+                    'podcast_id' => $podcastId,
+                    'date >' => date('Y-m-d', strtotime('-60 days')),
                 ])
-                ->orderBy('`labels`', 'ASC')
+                ->orderBy('labels', 'ASC')
                 ->findAll();
 
             cache()->save("{$podcastId}_analytics_podcast_by_day", $found, 600);
@@ -57,21 +57,21 @@ class AnalyticsPodcastModel extends Model
     {
         if (!($found = cache("{$podcastId}_analytics_podcasts_by_weekday"))) {
             $found = $this->select(
-                'LEFT(DAYNAME(`date`),3) as `labels`, WEEKDAY(`date`) as `sort_labels`'
+                'LEFT(DAYNAME(date),3) as labels, WEEKDAY(date) as sort_labels',
             )
-                ->selectSum('`hits`', '`values`')
+                ->selectSum('hits', 'values')
                 ->where([
-                    '`podcast_id`' => $podcastId,
-                    '`date` >' => date('Y-m-d', strtotime('-60 days')),
+                    'podcast_id' => $podcastId,
+                    'date >' => date('Y-m-d', strtotime('-60 days')),
                 ])
-                ->groupBy('`labels`, `sort_labels`')
-                ->orderBy('`sort_labels`', 'ASC')
+                ->groupBy('labels, sort_labels')
+                ->orderBy('sort_labels', 'ASC')
                 ->findAll();
 
             cache()->save(
                 "{$podcastId}_analytics_podcasts_by_weekday",
                 $found,
-                600
+                600,
             );
         }
         return $found;
@@ -88,19 +88,19 @@ class AnalyticsPodcastModel extends Model
     {
         if (!($found = cache("{$podcastId}_analytics_podcast_by_bandwidth"))) {
             $found = $this->select(
-                '`date` as `labels`, round(`bandwidth` / 1048576, 1) as `values`'
+                'date as labels, round(bandwidth / 1048576, 1) as `values`',
             )
                 ->where([
-                    '`podcast_id`' => $podcastId,
-                    '`date` >' => date('Y-m-d', strtotime('-60 days')),
+                    'podcast_id' => $podcastId,
+                    'date >' => date('Y-m-d', strtotime('-60 days')),
                 ])
-                ->orderBy('`labels`', 'ASC')
+                ->orderBy('labels', 'ASC')
                 ->findAll();
 
             cache()->save(
                 "{$podcastId}_analytics_podcast_by_bandwidth",
                 $found,
-                600
+                600,
             );
         }
         return $found;
@@ -116,19 +116,19 @@ class AnalyticsPodcastModel extends Model
     public function getDataByMonth(int $podcastId): array
     {
         if (!($found = cache("{$podcastId}_analytics_podcast_by_month"))) {
-            $found = $this->select('DATE_FORMAT(`date`,"%Y-%m-01") as `labels`')
-                ->selectSum('`hits`', '`values`')
+            $found = $this->select('DATE_FORMAT(date,"%Y-%m-01") as labels')
+                ->selectSum('hits', 'values')
                 ->where([
-                    '`podcast_id`' => $podcastId,
+                    'podcast_id' => $podcastId,
                 ])
-                ->groupBy('`labels`')
-                ->orderBy('`labels`', 'ASC')
+                ->groupBy('labels')
+                ->orderBy('labels', 'ASC')
                 ->findAll();
 
             cache()->save(
                 "{$podcastId}_analytics_podcast_by_month",
                 $found,
-                600
+                600,
             );
         }
         return $found;
@@ -145,23 +145,21 @@ class AnalyticsPodcastModel extends Model
     {
         if (
             !($found = cache(
-                "{$podcastId}_analytics_podcast_unique_listeners_by_day"
+                "{$podcastId}_analytics_podcast_unique_listeners_by_day",
             ))
         ) {
-            $found = $this->select(
-                '`date` as `labels`, `unique_listeners` as `values`'
-            )
+            $found = $this->select('date as labels, unique_listeners as values')
                 ->where([
-                    '`podcast_id`' => $podcastId,
-                    '`date` >' => date('Y-m-d', strtotime('-60 days')),
+                    'podcast_id' => $podcastId,
+                    'date >' => date('Y-m-d', strtotime('-60 days')),
                 ])
-                ->orderBy('`labels`', 'ASC')
+                ->orderBy('labels', 'ASC')
                 ->findAll();
 
             cache()->save(
                 "{$podcastId}_analytics_podcast_unique_listeners_by_day",
                 $found,
-                600
+                600,
             );
         }
         return $found;
@@ -178,22 +176,22 @@ class AnalyticsPodcastModel extends Model
     {
         if (
             !($found = cache(
-                "{$podcastId}_analytics_podcast_unique_listeners_by_month"
+                "{$podcastId}_analytics_podcast_unique_listeners_by_month",
             ))
         ) {
-            $found = $this->select('DATE_FORMAT(`date`,"%Y-%m-01") as `labels`')
-                ->selectSum('`unique_listeners`', '`values`')
+            $found = $this->select('DATE_FORMAT(date,"%Y-%m-01") as labels')
+                ->selectSum('unique_listeners', 'values')
                 ->where([
-                    '`podcast_id`' => $podcastId,
+                    'podcast_id' => $podcastId,
                 ])
-                ->groupBy('`labels`')
-                ->orderBy('`labels`', 'ASC')
+                ->groupBy('labels')
+                ->orderBy('labels', 'ASC')
                 ->findAll();
 
             cache()->save(
                 "{$podcastId}_analytics_podcast_unique_listeners_by_month",
                 $found,
-                600
+                600,
             );
         }
         return $found;
@@ -210,7 +208,7 @@ class AnalyticsPodcastModel extends Model
     {
         if (
             !($found = cache(
-                "{$podcastId}_analytics_podcast_listening_time_by_day"
+                "{$podcastId}_analytics_podcast_listening_time_by_day",
             ))
         ) {
             $found = $this->select('date as labels')
@@ -226,7 +224,7 @@ class AnalyticsPodcastModel extends Model
             cache()->save(
                 "{$podcastId}_analytics_podcast_listening_time_by_day",
                 $found,
-                600
+                600,
             );
         }
         return $found;
@@ -243,22 +241,22 @@ class AnalyticsPodcastModel extends Model
     {
         if (
             !($found = cache(
-                "{$podcastId}_analytics_podcast_listening_time_by_month"
+                "{$podcastId}_analytics_podcast_listening_time_by_month",
             ))
         ) {
-            $found = $this->select('DATE_FORMAT(`date`,"%Y-%m-01") as `labels`')
+            $found = $this->select('DATE_FORMAT(date,"%Y-%m-01") as labels')
                 ->selectSum('duration', 'values')
                 ->where([
                     $this->table . '.podcast_id' => $podcastId,
                 ])
-                ->groupBy('`labels`')
-                ->orderBy('`labels`', 'ASC')
+                ->groupBy('labels')
+                ->orderBy('labels', 'ASC')
                 ->findAll();
 
             cache()->save(
                 "{$podcastId}_analytics_podcast_listening_time_by_month",
                 $found,
-                600
+                600,
             );
         }
         return $found;

@@ -22,14 +22,14 @@
     icon('scales', 'mr-2 text-lg flex-shrink-0') .
         lang('PodcastImport.old_podcast_section_subtitle'),
     [],
-    'inline-flex text-xs p-2 text-teal-800 font-semibold bg-teal-100 border border-teal-300 rounded'
+    'inline-flex text-xs p-2 text-blue-800 font-semibold bg-blue-100 border border-blue-300 rounded',
 ) ?>
 
 <?= form_label(
     lang('PodcastImport.imported_feed_url'),
     'imported_feed_url',
     [],
-    lang('PodcastImport.imported_feed_url_hint')
+    lang('PodcastImport.imported_feed_url_hint'),
 ) ?>
 <?= form_input([
     'id' => 'imported_feed_url',
@@ -50,7 +50,7 @@
     lang('PodcastImport.name'),
     'name',
     [],
-    lang('PodcastImport.name_hint')
+    lang('PodcastImport.name_hint'),
 ) ?>
 <?= form_input([
     'id' => 'name',
@@ -79,7 +79,7 @@
 
 <?= form_section(
     lang('PodcastImport.advanced_params_section_title'),
-    lang('PodcastImport.advanced_params_section_subtitle')
+    lang('PodcastImport.advanced_params_section_subtitle'),
 ) ?>
 
 <?= form_fieldset('', ['class' => 'flex flex-col mb-4']) ?>
@@ -89,10 +89,10 @@
             [
                 'id' => 'link',
                 'name' => 'slug_field',
-                'class' => 'form-radio text-green-500',
+                'class' => 'form-radio text-pine-700',
             ],
             'link',
-            old('slug_field') ? old('slug_field') == 'link' : true
+            old('slug_field') ? old('slug_field') == 'link' : true,
         ) ?>
         <span class="ml-2"><?= lang('PodcastImport.slug_field.link') ?></span>
     </label>
@@ -101,10 +101,10 @@
             [
                 'id' => 'title',
                 'name' => 'slug_field',
-                'class' => 'form-radio text-green-500',
+                'class' => 'form-radio text-pine-700',
             ],
             'title',
-            old('slug_field') ? old('slug_field') == 'title' : false
+            old('slug_field') ? old('slug_field') == 'title' : false,
         ) ?>
         <span class="ml-2"><?= lang('PodcastImport.slug_field.title') ?></span>
     </label>
@@ -117,12 +117,12 @@
             [
                 'id' => 'description',
                 'name' => 'description_field',
-                'class' => 'form-radio text-green-500',
+                'class' => 'form-radio text-pine-700',
             ],
             'description',
             old('description_field')
                 ? old('description_field') == 'description'
-                : true
+                : true,
         ) ?>
         <span class="ml-2">&lt;description&gt;</span>
     </label>
@@ -131,12 +131,12 @@
             [
                 'id' => 'summary',
                 'name' => 'description_field',
-                'class' => 'form-radio text-green-500',
+                'class' => 'form-radio text-pine-600',
             ],
             'summary',
             old('description_field')
                 ? old('description_field') == 'summary'
-                : false
+                : false,
         ) ?>
         <span class="ml-2">&lt;itunes:summary&gt;</span>
     </label>
@@ -145,12 +145,12 @@
             [
                 'id' => 'subtitle_summary',
                 'name' => 'description_field',
-                'class' => 'form-radio text-green-500',
+                'class' => 'form-radio text-pine-700',
             ],
             'subtitle_summary',
             old('description_field')
                 ? old('description_field') == 'subtitle_summary'
-                : false
+                : false,
         ) ?>
         <span class="ml-2">&lt;itunes:subtitle&gt; + &lt;itunes:summary&gt;</span>
     </label>
@@ -159,12 +159,12 @@
             [
                 'id' => 'content',
                 'name' => 'description_field',
-                'class' => 'form-radio text-green-500',
+                'class' => 'form-radio text-pine-700',
             ],
             'content',
             old('description_field')
                 ? old('description_field') == 'content'
-                : false
+                : false,
         ) ?>
         <span class="ml-2">&lt;content:encoded&gt;</span>
     </label>
@@ -176,10 +176,10 @@
         [
             'id' => 'force_renumber',
             'name' => 'force_renumber',
-            'class' => 'form-checkbox text-green-500',
+            'class' => 'form-checkbox text-pine-700',
         ],
         'yes',
-        old('force_renumber', false)
+        old('force_renumber', false),
     ) ?>
     <span class="ml-2"><?= lang('PodcastImport.force_renumber') ?></span>
     <?= hint_tooltip(lang('PodcastImport.force_renumber_hint'), 'ml-1') ?>
@@ -189,7 +189,7 @@
     lang('PodcastImport.season_number'),
     'season_number',
     [],
-    lang('PodcastImport.season_number_hint')
+    lang('PodcastImport.season_number_hint'),
 ) ?>
 <?= form_input([
     'id' => 'season_number',
@@ -203,7 +203,7 @@
     lang('PodcastImport.max_episodes'),
     'max_episodes',
     [],
-    lang('PodcastImport.max_episodes_hint')
+    lang('PodcastImport.max_episodes_hint'),
 ) ?>
 <?= form_input([
     'id' => 'max_episodes',
@@ -215,7 +215,7 @@
 
 <?= form_section_close() ?>
 
-<div class="inline-flex w-full p-2 mb-4 text-sm font-semibold text-yellow-800 bg-orange-100 border border-orange-300 rounded" role="alert">
+<div class="inline-flex w-full p-2 mb-4 text-sm font-semibold text-yellow-800 bg-red-100 border border-red-300 rounded" role="alert">
   <?= icon('alert', 'mr-2 text-lg flex-shrink-0') .
       lang('PodcastImport.warning') ?>
 </div>
@@ -224,7 +224,7 @@
     lang('PodcastImport.submit'),
     null,
     ['variant' => 'primary'],
-    ['type' => 'submit', 'class' => 'self-end']
+    ['type' => 'submit', 'class' => 'self-end'],
 ) ?>
 
 <?= form_close() ?>

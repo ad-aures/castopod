@@ -11,12 +11,10 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
-<?= button(
-    lang('Episode.create'),
-    route_to('episode-create', $podcast->id),
-
-    ['variant' => 'primary', 'iconLeft' => 'add']
-) ?>
+<?= button(lang('Episode.create'), route_to('episode-create', $podcast->id), [
+    'variant' => 'accent',
+    'iconLeft' => 'add',
+]) ?>
 <?= $this->endSection() ?>
 
 
@@ -39,62 +37,74 @@
                         <a class="flex-1 text-sm hover:underline" href="<?= route_to(
                             'episode-view',
                             $podcast->id,
-                            $episode->id
+                            $episode->id,
                         ) ?>">
-                            <h2 class="inline-flex justify-between w-full font-bold leading-none group">
+                            <h2 class="inline-flex justify-between w-full font-semibold leading-none group">
                                 <span class="mr-1 group-hover:underline"><?= $episode->title ?></span>
                                 <?= episode_numbering(
                                     $episode->number,
                                     $episode->season_number,
-                                    'text-xs font-bold text-gray-600',
-                                    true
+                                    'text-xs font-semibold text-gray-600',
+                                    true,
                                 ) ?>
                             </h2>
                         </a>
-                        <div class="relative" data-toggle="dropdown">
-                            <button type="button" class="inline-flex items-center p-1 outline-none focus:shadow-outline" id="moreDropdown" data-popper="button" aria-haspopup="true" aria-expanded="false">
-                                <?= icon('more') ?>
-                            </button>
-                            <nav class="absolute z-10 flex-col hidden py-2 text-black whitespace-no-wrap bg-white border rounded shadow" aria-labelledby="moreDropdown" data-popper="menu" data-popper-placement="bottom-end" data-popper-offset-x="0" data-popper-offset-y="-24" >
-                                    <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
-                                        'episode-edit',
-                                        $podcast->id,
-                                        $episode->id
-                                    ) ?>"><?= lang('Episode.edit') ?></a>
-                                    <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
-                                        'embeddable-player-add',
-                                        $podcast->id,
-                                        $episode->id
-                                    ) ?>"><?= lang(
-    'Episode.embeddable_player.add'
+                        <button
+                        id="more-dropdown-<?= $episode->id ?>"
+                        type="button"
+                        class="inline-flex items-center p-1 outline-none focus:ring"
+                        data-dropdown="button"
+                        data-dropdown-target="more-dropdown-<?= $episode->id ?>-menu"
+                        aria-haspopup="true"
+                        aria-expanded="false">
+                            <?= icon('more') ?>
+                        </button>
+                        <nav
+                            id="more-dropdown-<?= $episode->id ?>-menu"
+                            class="flex flex-col py-2 text-black whitespace-no-wrap bg-white border rounded shadow"
+                            aria-labelledby="more-dropdown-<?= $episode->id ?>"
+                            data-dropdown="menu"
+                            data-dropdown-placement="bottom-start"
+                            data-dropdown-offset-x="0"
+                            data-dropdown-offset-y="-24">
+                                <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
+                                    'episode-edit',
+                                    $podcast->id,
+                                    $episode->id,
+                                ) ?>"><?= lang('Episode.edit') ?></a>
+                                <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
+                                    'embeddable-player-add',
+                                    $podcast->id,
+                                    $episode->id,
+                                ) ?>"><?= lang(
+    'Episode.embeddable_player.add',
 ) ?></a>
-                                    <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
-                                        'episode-person-manage',
-                                        $podcast->id,
-                                        $episode->id
-                                    ) ?>"><?= lang('Person.persons') ?></a>
-                                    <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
-                                        'soundbites-edit',
-                                        $podcast->id,
-                                        $episode->id
-                                    ) ?>"><?= lang('Episode.soundbites') ?></a>
-                                    <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
-                                        'episode',
-                                        $podcast->name,
-                                        $episode->slug
-                                    ) ?>"><?= lang('Episode.go_to_page') ?></a>
-                                    <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
-                                        'episode-delete',
-                                        $podcast->id,
-                                        $episode->id
-                                    ) ?>"><?= lang('Episode.delete') ?></a>
-                            </nav>
-                        </div>
+                                <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
+                                    'episode-person-manage',
+                                    $podcast->id,
+                                    $episode->id,
+                                ) ?>"><?= lang('Person.persons') ?></a>
+                                <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
+                                    'soundbites-edit',
+                                    $podcast->id,
+                                    $episode->id,
+                                ) ?>"><?= lang('Episode.soundbites') ?></a>
+                                <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
+                                    'episode',
+                                    $podcast->name,
+                                    $episode->slug,
+                                ) ?>"><?= lang('Episode.go_to_page') ?></a>
+                                <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
+                                    'episode-delete',
+                                    $podcast->id,
+                                    $episode->id,
+                                ) ?>"><?= lang('Episode.delete') ?></a>
+                        </nav>
                     </div>
                     <div class="mb-2 text-xs">
                         <?= publication_pill(
                             $episode->published_at,
-                            $episode->publication_status
+                            $episode->publication_status,
                         ) ?>
                         <span class="mx-1">•</span>
                         <time datetime="PT<?= $episode->enclosure_duration ?>S">

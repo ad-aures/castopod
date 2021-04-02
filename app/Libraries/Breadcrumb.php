@@ -3,7 +3,7 @@
 /**
  * Generates and renders a breadcrumb based on the current url segments
  *
- * @copyright  2020 Podlibre
+ * @copyright  2021 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
  */

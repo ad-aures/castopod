@@ -2,6 +2,14 @@
 
 namespace Config;
 
+use App\Validation\FileRules as AppFileRules;
+use App\Validation\Rules as AppRules;
+use CodeIgniter\Validation\CreditCardRules;
+use CodeIgniter\Validation\FileRules;
+use CodeIgniter\Validation\FormatRules;
+use CodeIgniter\Validation\Rules;
+use Myth\Auth\Authentication\Passwords\ValidationRules as PasswordRules;
+
 class Validation
 {
     //--------------------------------------------------------------------
@@ -12,22 +20,23 @@ class Validation
      * Stores the classes that contain the
      * rules that are available.
      *
-     * @var array
+     * @var string[]
      */
     public $ruleSets = [
-        \CodeIgniter\Validation\Rules::class,
-        \CodeIgniter\Validation\FormatRules::class,
-        \CodeIgniter\Validation\CreditCardRules::class,
-        \App\Validation\Rules::class,
-        \App\Validation\FileRules::class,
-        \Myth\Auth\Authentication\Passwords\ValidationRules::class,
+        Rules::class,
+        FormatRules::class,
+        FileRules::class,
+        CreditCardRules::class,
+        AppRules::class,
+        AppFileRules::class,
+        PasswordRules::class,
     ];
 
     /**
      * Specifies the views that are used to display the
      * errors.
      *
-     * @var array
+     * @var array<string, string>
      */
     public $templates = [
         'list' => 'CodeIgniter\Validation\Views\list',

@@ -2,14 +2,13 @@
 
 namespace Config;
 
-/**
- * DocTypes
- *
- * @package Config
- */
-
 class DocTypes
 {
+    /**
+     * List of valid document types.
+     *
+     * @var array<string, string>
+     */
     public $list = [
         'xhtml11' =>
             '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">',

@@ -2,62 +2,46 @@
 
 namespace Config;
 
-// Cannot extend BaseConfig or looping resources occurs.
-class Modules
+use CodeIgniter\Modules\Modules as BaseModules;
+
+class Modules extends BaseModules
 {
-    /*
-     |--------------------------------------------------------------------------
-     | Auto-Discovery Enabled?
-     |--------------------------------------------------------------------------
-     |
-     | If true, then auto-discovery will happen across all elements listed in
-     | $activeExplorers below. If false, no auto-discovery will happen at all,
-     | giving a slight performance boost.
+    /**
+     * --------------------------------------------------------------------------
+     * Enable Auto-Discovery?
+     * --------------------------------------------------------------------------
+     *
+     * If true, then auto-discovery will happen across all elements listed in
+     * $activeExplorers below. If false, no auto-discovery will happen at all,
+     * giving a slight performance boost.
+     *
+     * @var boolean
      */
     public $enabled = true;
 
-    /*
-     |--------------------------------------------------------------------------
-     | Auto-Discovery Within Composer Packages Enabled?
-     |--------------------------------------------------------------------------
-     |
-     | If true, then auto-discovery will happen across all namespaces loaded
-     | by Composer, as well as the namespaces configured locally.
+    /**
+     * --------------------------------------------------------------------------
+     * Enable Auto-Discovery Within Composer Packages?
+     * --------------------------------------------------------------------------
+     *
+     * If true, then auto-discovery will happen across all namespaces loaded
+     * by Composer, as well as the namespaces configured locally.
+     *
+     * @var boolean
      */
     public $discoverInComposer = true;
 
-    /*
-    |--------------------------------------------------------------------------
-    | Auto-discover Rules
-    |--------------------------------------------------------------------------
-    |
-    | Lists the aliases of all discovery classes that will be active
-    | and used during the current application request. If it is not
-    | listed here, only the base application elements will be used.
-    */
-    public $activeExplorers = ['events', 'registrars', 'routes', 'services'];
-
     /**
-     * Should the application auto-discover the requested resources.
+     * --------------------------------------------------------------------------
+     * Auto-Discovery Rules
+     * --------------------------------------------------------------------------
      *
-     * Valid values are:
-     *  - events
-     *  - registrars
-     *  - routes
-     *  - services
+     * Aliases list of all discovery classes that will be active and used during
+     * the current application request.
      *
-     * @param string $alias
+     * If it is not listed, only the base application elements will be used.
      *
-     * @return boolean
+     * @var string[]
      */
-    public function shouldDiscover(string $alias)
-    {
-        if (!$this->enabled) {
-            return false;
-        }
-
-        $alias = strtolower($alias);
-
-        return in_array($alias, $this->activeExplorers);
-    }
+    public $aliases = ['events', 'filters', 'registrars', 'routes', 'services'];
 }

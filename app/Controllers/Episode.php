@@ -10,6 +10,7 @@ namespace App\Controllers;
 
 use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
+use SimpleXMLElement;
 
 class Episode extends BaseController
 {
@@ -31,7 +32,7 @@ class Episode extends BaseController
             count($params) > 1 &&
             !($this->episode = (new EpisodeModel())->getEpisodeBySlug(
                 $this->podcast->id,
-                $params[1]
+                $params[1],
             ))
         ) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
@@ -43,44 +44,49 @@ class Episode extends BaseController
 
     public function index()
     {
-        self::triggerWebpageHit($this->episode->podcast_id);
+        $episodeModel = new EpisodeModel();
+
+        self::triggerWebpageHit($this->podcast->id);
 
         $locale = service('request')->getLocale();
         $cacheName = "page_podcast{$this->episode->podcast_id}_episode{$this->episode->id}_{$locale}";
 
         if (!($cachedView = cache($cacheName))) {
-            $episodeModel = new EpisodeModel();
-            $previousNextEpisodes = $episodeModel->getPreviousNextEpisodes(
-                $this->episode,
-                $this->podcast->type
-            );
-
-            helper(['persons']);
-            $persons = [];
-            construct_episode_person_array(
-                $this->episode->episode_persons,
-                $persons
-            );
+            helper('persons');
+            $episodePersons = [];
+            construct_person_array($this->episode->persons, $episodePersons);
+            $podcastPersons = [];
+            construct_person_array($this->podcast->persons, $podcastPersons);
 
             $data = [
-                'previousEpisode' => $previousNextEpisodes['previous'],
-                'nextEpisode' => $previousNextEpisodes['next'],
                 'podcast' => $this->podcast,
                 'episode' => $this->episode,
-                'persons' => $persons,
+                'episodePersons' => $episodePersons,
+                'persons' => $podcastPersons,
             ];
 
             $secondsToNextUnpublishedEpisode = $episodeModel->getSecondsToNextUnpublishedEpisode(
-                $this->podcast->id
+                $this->podcast->id,
             );
 
-            // The page cache is set to a decade so it is deleted manually upon podcast update
-            return view('episode', $data, [
-                'cache' => $secondsToNextUnpublishedEpisode
-                    ? $secondsToNextUnpublishedEpisode
-                    : DECADE,
-                'cache_name' => $cacheName,
-            ]);
+            if (can_user_interact()) {
+                helper('form');
+                // The page cache is set to a decade so it is deleted manually upon podcast update
+                return view('podcast/episode_authenticated', $data, [
+                    'cache' => $secondsToNextUnpublishedEpisode
+                        ? $secondsToNextUnpublishedEpisode
+                        : DECADE,
+                    'cache_name' => $cacheName . '_authenticated',
+                ]);
+            } else {
+                // The page cache is set to a decade so it is deleted manually upon podcast update
+                return view('podcast/episode', $data, [
+                    'cache' => $secondsToNextUnpublishedEpisode
+                        ? $secondsToNextUnpublishedEpisode
+                        : DECADE,
+                    'cache_name' => $cacheName,
+                ]);
+            }
         }
 
         return $cachedView;
@@ -97,7 +103,7 @@ class Episode extends BaseController
         if (isset($_SERVER['HTTP_REFERER'])) {
             $session->set(
                 'embeddable_player_domain',
-                parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST)
+                parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST),
             );
         }
 
@@ -108,26 +114,15 @@ class Episode extends BaseController
         if (!($cachedView = cache($cacheName))) {
             $episodeModel = new EpisodeModel();
             $theme = EpisodeModel::$themes[$theme];
-            helper(['persons']);
-            $persons = [];
-            construct_episode_person_array(
-                $this->episode->episode_persons,
-                $persons
-            );
-            constructs_podcast_person_array(
-                $this->podcast->podcast_persons,
-                $persons
-            );
 
             $data = [
                 'podcast' => $this->podcast,
                 'episode' => $this->episode,
-                'persons' => $persons,
                 'theme' => $theme,
             ];
 
             $secondsToNextUnpublishedEpisode = $episodeModel->getSecondsToNextUnpublishedEpisode(
-                $this->podcast->id
+                $this->podcast->id,
             );
 
             // The page cache is set to a decade so it is deleted manually upon podcast update
@@ -140,5 +135,57 @@ class Episode extends BaseController
         }
 
         return $cachedView;
+    }
+
+    public function oembedJSON()
+    {
+        return $this->response->setJSON([
+            'type' => 'rich',
+            'version' => '1.0',
+            'title' => $this->episode->title,
+            'provider_name' => $this->podcast->title,
+            'provider_url' => $this->podcast->link,
+            'author_name' => $this->podcast->title,
+            'author_url' => $this->podcast->link,
+            'html' =>
+                '<iframe src="' .
+                $this->episode->embeddable_player .
+                '" width="100%" height="200" frameborder="0" scrolling="no"></iframe>',
+            'width' => 600,
+            'height' => 200,
+            'thumbnail_url' => $this->episode->image->large_url,
+            'thumbnail_width' => config('Images')->largeSize,
+            'thumbnail_height' => config('Images')->largeSize,
+        ]);
+    }
+
+    public function oembedXML()
+    {
+        $oembed = new SimpleXMLElement(
+            "<?xml version='1.0' encoding='utf-8' standalone='yes'?><oembed></oembed>",
+        );
+
+        $oembed->addChild('type', 'rich');
+        $oembed->addChild('version', '1.0');
+        $oembed->addChild('title', $this->episode->title);
+        $oembed->addChild('provider_name', $this->podcast->title);
+        $oembed->addChild('provider_url', $this->podcast->link);
+        $oembed->addChild('author_name', $this->podcast->title);
+        $oembed->addChild('author_url', $this->podcast->link);
+        $oembed->addChild('thumbnail', $this->episode->image->large_url);
+        $oembed->addChild('thumbnail_width', config('Images')->largeSize);
+        $oembed->addChild('thumbnail_height', config('Images')->largeSize);
+        $oembed->addChild(
+            'html',
+            htmlentities(
+                '<iframe src="' .
+                    $this->episode->embeddable_player .
+                    '" width="100%" height="200" frameborder="0" scrolling="no"></iframe>',
+            ),
+        );
+        $oembed->addChild('width', 600);
+        $oembed->addChild('height', 200);
+
+        return $this->response->setXML($oembed);
     }
 }

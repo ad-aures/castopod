@@ -34,25 +34,25 @@ class AnalyticsPodcastByPlayerModel extends Model
     {
         if (
             !($found = cache(
-                "{$podcastId}_analytics_podcasts_by_player_by_app_weekly"
+                "{$podcastId}_analytics_podcasts_by_player_by_app_weekly",
             ))
         ) {
             $oneWeekAgo = date('Y-m-d', strtotime('-1 week'));
-            $found = $this->select('`app` as `labels`')
-                ->selectSum('`hits`', '`values`')
+            $found = $this->select('app as labels')
+                ->selectSum('hits', 'values')
                 ->where([
-                    '`podcast_id`' => $podcastId,
-                    '`app` !=' => '',
-                    '`is_bot`' => 0,
-                    '`date` >' => $oneWeekAgo,
+                    'podcast_id' => $podcastId,
+                    'app !=' => '',
+                    'is_bot' => 0,
+                    'date >' => $oneWeekAgo,
                 ])
-                ->groupBy('`labels`')
-                ->orderBy('`values`', 'DESC')
+                ->groupBy('labels')
+                ->orderBy('values', 'DESC')
                 ->findAll();
             cache()->save(
                 "{$podcastId}_analytics_podcasts_by_player_by_app_weekly",
                 $found,
-                600
+                600,
             );
         }
         return $found;
@@ -69,25 +69,25 @@ class AnalyticsPodcastByPlayerModel extends Model
     {
         if (
             !($found = cache(
-                "{$podcastId}_analytics_podcasts_by_player_by_app_yearly"
+                "{$podcastId}_analytics_podcasts_by_player_by_app_yearly",
             ))
         ) {
             $oneYearAgo = date('Y-m-d', strtotime('-1 year'));
-            $found = $this->select('`app` as `labels`')
-                ->selectSum('`hits`', '`values`')
+            $found = $this->select('app as labels')
+                ->selectSum('hits', 'values')
                 ->where([
-                    '`podcast_id`' => $podcastId,
-                    '`app` !=' => '',
-                    '`is_bot`' => 0,
-                    '`date` >' => $oneYearAgo,
+                    'podcast_id' => $podcastId,
+                    'app !=' => '',
+                    'is_bot' => 0,
+                    'date >' => $oneYearAgo,
                 ])
-                ->groupBy('`labels`')
-                ->orderBy('`values`', 'DESC')
+                ->groupBy('labels')
+                ->orderBy('values', 'DESC')
                 ->findAll();
             cache()->save(
                 "{$podcastId}_analytics_podcasts_by_player_by_app_yearly",
                 $found,
-                600
+                600,
             );
         }
         return $found;
@@ -104,26 +104,26 @@ class AnalyticsPodcastByPlayerModel extends Model
     {
         if (
             !($found = cache(
-                "{$podcastId}_analytics_podcasts_by_player_by_os_weekly"
+                "{$podcastId}_analytics_podcasts_by_player_by_os_weekly",
             ))
         ) {
             $oneWeekAgo = date('Y-m-d', strtotime('-1 week'));
-            $found = $this->select('`os` as `labels`')
-                ->selectSum('`hits`', '`values`')
+            $found = $this->select('os as labels')
+                ->selectSum('hits', 'values')
                 ->where([
-                    '`podcast_id`' => $podcastId,
-                    '`app` !=' => '',
-                    '`os` !=' => '',
-                    '`is_bot`' => 0,
-                    '`date` >' => $oneWeekAgo,
+                    'podcast_id' => $podcastId,
+                    'app !=' => '',
+                    'os !=' => '',
+                    'is_bot' => 0,
+                    'date >' => $oneWeekAgo,
                 ])
-                ->groupBy('`labels`')
-                ->orderBy('`values`', 'DESC')
+                ->groupBy('labels')
+                ->orderBy('values', 'DESC')
                 ->findAll();
             cache()->save(
                 "{$podcastId}_analytics_podcasts_by_player_by_os_weekly",
                 $found,
-                600
+                600,
             );
         }
         return $found;
@@ -140,25 +140,25 @@ class AnalyticsPodcastByPlayerModel extends Model
     {
         if (
             !($found = cache(
-                "{$podcastId}_analytics_podcasts_by_player_by_device_weekly"
+                "{$podcastId}_analytics_podcasts_by_player_by_device_weekly",
             ))
         ) {
             $oneWeekAgo = date('Y-m-d', strtotime('-1 week'));
-            $found = $this->select('`device` as `labels`')
-                ->selectSum('`hits`', '`values`')
+            $found = $this->select('device as labels')
+                ->selectSum('hits', 'values')
                 ->where([
-                    '`podcast_id`' => $podcastId,
-                    '`device` !=' => '',
-                    '`is_bot`' => 0,
-                    '`date` >' => $oneWeekAgo,
+                    'podcast_id' => $podcastId,
+                    'device !=' => '',
+                    'is_bot' => 0,
+                    'date >' => $oneWeekAgo,
                 ])
-                ->groupBy('`labels`')
-                ->orderBy('`values`', 'DESC')
+                ->groupBy('labels')
+                ->orderBy('values', 'DESC')
                 ->findAll();
             cache()->save(
                 "{$podcastId}_analytics_podcasts_by_player_by_device_weekly",
                 $found,
-                600
+                600,
             );
         }
         return $found;
@@ -177,21 +177,21 @@ class AnalyticsPodcastByPlayerModel extends Model
             !($found = cache("{$podcastId}_analytics_podcasts_by_player_bots"))
         ) {
             $oneYearAgo = date('Y-m-d', strtotime('-1 year'));
-            $found = $this->select('DATE_FORMAT(`date`,"%Y-%m-01") as `labels`')
-                ->selectSum('`hits`', '`values`')
+            $found = $this->select('DATE_FORMAT(date,"%Y-%m-01") as labels')
+                ->selectSum('hits', 'values')
                 ->where([
-                    '`podcast_id`' => $podcastId,
-                    '`is_bot`' => 1,
-                    '`date` >' => $oneYearAgo,
+                    'podcast_id' => $podcastId,
+                    'is_bot' => 1,
+                    'date >' => $oneYearAgo,
                 ])
-                ->groupBy('`labels`')
-                ->orderBy('`labels`', 'ASC')
+                ->groupBy('labels')
+                ->orderBy('labels', 'ASC')
                 ->findAll();
 
             cache()->save(
                 "{$podcastId}_analytics_podcasts_by_player_bots",
                 $found,
-                600
+                600,
             );
         }
         return $found;

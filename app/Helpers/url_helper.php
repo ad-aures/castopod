@@ -74,3 +74,34 @@ if (!function_exists('location_url')) {
         return $uri;
     }
 }
+//--------------------------------------------------------------------
+
+if (!function_exists('extract_params_from_episode_uri')) {
+    /**
+     * Returns podcast name and episode slug from episode string uri
+     *
+     * @param URI $episodeUri
+     * @return string|null
+     */
+    function extract_params_from_episode_uri($episodeUri)
+    {
+        preg_match(
+            '/@(?P<podcastName>[a-zA-Z0-9\_]{1,32})\/episodes\/(?P<episodeSlug>[a-zA-Z0-9\-]{1,191})/',
+            $episodeUri->getPath(),
+            $matches
+        );
+
+        if (
+            $matches &&
+            array_key_exists('podcastName', $matches) &&
+            array_key_exists('episodeSlug', $matches)
+        ) {
+            return [
+                'podcastName' => $matches['podcastName'],
+                'episodeSlug' => $matches['episodeSlug'],
+            ];
+        }
+
+        return null;
+    }
+}

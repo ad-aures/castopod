@@ -55,7 +55,7 @@ class Auth extends \Myth\Auth\Controllers\AuthController
         $allowedPostFields = array_merge(
             ['password'],
             $this->config->validFields,
-            $this->config->personalFields
+            $this->config->personalFields,
         );
         $user = new User($this->request->getPost($allowedPostFields));
 
@@ -85,7 +85,7 @@ class Auth extends \Myth\Auth\Controllers\AuthController
                     ->withInput()
                     ->with(
                         'error',
-                        $activator->error() ?? lang('Auth.unknownError')
+                        $activator->error() ?? lang('Auth.unknownError'),
                     );
             }
 
@@ -122,7 +122,7 @@ class Auth extends \Myth\Auth\Controllers\AuthController
             $this->request->getPost('email'),
             $this->request->getPost('token'),
             $this->request->getIPAddress(),
-            (string) $this->request->getUserAgent()
+            (string) $this->request->getUserAgent(),
         );
 
         $rules = [
@@ -171,5 +171,25 @@ class Auth extends \Myth\Auth\Controllers\AuthController
         return redirect()
             ->route('login')
             ->with('message', lang('Auth.resetSuccess'));
+    }
+
+    public function attemptInteractAsActor()
+    {
+        $rules = [
+            'actor_id' => 'required|numeric',
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', service('validation')->getErrors());
+        }
+
+        helper('auth');
+
+        set_interact_as_actor($this->request->getPost('actor_id'));
+
+        return redirect()->back();
     }
 }

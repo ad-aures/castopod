@@ -45,7 +45,7 @@ class AddPlatforms extends Migration
         $this->forge->addField(
             '`updated_at` timestamp NOT NULL DEFAULT NOW() ON UPDATE NOW()'
         );
-        $this->forge->addKey('slug', true);
+        $this->forge->addPrimaryKey('slug');
         $this->forge->createTable('platforms');
     }
 

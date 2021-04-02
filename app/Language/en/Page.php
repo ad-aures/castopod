@@ -7,6 +7,7 @@
  */
 
 return [
+    'back_to_home' => 'Back to home',
     'page' => 'Page',
     'all_pages' => 'All pages',
     'create' => 'New page',
@@ -21,6 +22,6 @@ return [
         'submit_edit' => 'Save',
     ],
     'messages' => [
-        'createSuccess' => 'The {pageTitle} page was created successfully!',
+        'createSuccess' => 'The page "{pageTitle}" was created successfully!',
     ],
 ];

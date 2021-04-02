@@ -23,13 +23,6 @@ class Soundbite extends Entity
         'updated_by' => 'integer',
     ];
 
-    public function setCreatedBy(\App\Entities\User $user)
-    {
-        $this->attributes['created_by'] = $user->id;
-
-        return $this;
-    }
-
     public function setUpdatedBy(\App\Entities\User $user)
     {
         $this->attributes['updated_by'] = $user->id;

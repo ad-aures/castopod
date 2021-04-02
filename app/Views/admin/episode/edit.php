@@ -16,7 +16,6 @@
     'class' => 'flex flex-col',
 ]) ?>
 <?= csrf_field() ?>
-<?= form_hidden('client_timezone', 'UTC') ?>
 
 <?= form_section(
     lang('Episode.form.info_section_title'),
@@ -144,6 +143,55 @@
     </label>
 <?= form_fieldset_close() ?>
 
+<?= form_fieldset('', ['class' => 'mb-6']) ?>
+    <legend>
+    <?= lang('Episode.form.parental_advisory.label') .
+        hint_tooltip(lang('Episode.form.parental_advisory.hint'), 'ml-1') ?>
+    </legend>
+    <?= form_radio(
+        [
+            'id' => 'undefined',
+            'name' => 'parental_advisory',
+            'class' => 'form-radio-btn',
+        ],
+        'undefined',
+        old('parental_advisory')
+            ? old('parental_advisory') === 'undefined'
+            : $episode->parental_advisory === null
+    ) ?>
+    <label for="undefined"><?= lang(
+        'Episode.form.parental_advisory.undefined'
+    ) ?></label>
+    <?= form_radio(
+        [
+            'id' => 'clean',
+            'name' => 'parental_advisory',
+            'class' => 'form-radio-btn',
+        ],
+        'clean',
+        old('parental_advisory')
+            ? old('parental_advisory') === 'clean'
+            : $episode->parental_advisory === 'clean'
+    ) ?>
+    <label for="clean"><?= lang(
+        'Episode.form.parental_advisory.clean'
+    ) ?></label>
+    <?= form_radio(
+        [
+            'id' => 'explicit',
+            'name' => 'parental_advisory',
+            'class' => 'form-radio-btn',
+        ],
+        'explicit',
+        old('parental_advisory')
+            ? old('parental_advisory') === 'explicit'
+            : $episode->parental_advisory === 'explicit'
+    ) ?>
+    <label for="explicit"><?= lang(
+        'Episode.form.parental_advisory.explicit'
+    ) ?></label>
+<?= form_fieldset_close() ?>
+
 <?= form_section_close() ?>
 
 
@@ -210,95 +258,7 @@
 ]) ?>
 <?= form_section_close() ?>
 
-<?= form_section(
-    lang('Episode.form.publication_section_title'),
-    lang('Episode.form.publication_section_subtitle')
-) ?>
 
-<?= form_label(
-    lang('Episode.form.publication_date'),
-    'publication_date',
-    [],
-    lang('Episode.form.publication_date_hint')
-) ?>
-<div class="flex mb-4" data-picker="datetime">
-    <?= form_input([
-        'id' => 'publication_date',
-        'name' => 'publication_date',
-        'class' => 'form-input rounded-r-none flex-1',
-        'value' => old(
-            'publication_date',
-            $episode->published_at
-                ? $episode->published_at->format('Y-m-d H:i')
-                : ''
-        ),
-        'data-input' => '',
-    ]) ?>
-    <button
-        class="p-3 bg-green-100 border border-l-0 focus:outline-none rounded-r-md hover:bg-green-200 focus:shadow-outline"
-        type="button"
-        title="<?= lang('Episode.form.publication_date_clear') ?>"
-        data-clear=""><?= icon('close') ?></button>
-</div>
-
-<?= form_fieldset('', ['class' => 'mb-6']) ?>
-    <legend>
-    <?= lang('Episode.form.parental_advisory.label') .
-        hint_tooltip(lang('Episode.form.type.hint'), 'ml-1') ?>
-    </legend>
-    <?= form_radio(
-        [
-            'id' => 'undefined',
-            'name' => 'parental_advisory',
-            'class' => 'form-radio-btn',
-        ],
-        'undefined',
-        old('parental_advisory')
-            ? old('parental_advisory') === 'undefined'
-            : $episode->parental_advisory === null
-    ) ?>
-    <label for="undefined"><?= lang(
-        'Episode.form.parental_advisory.undefined'
-    ) ?></label>
-    <?= form_radio(
-        [
-            'id' => 'clean',
-            'name' => 'parental_advisory',
-            'class' => 'form-radio-btn',
-        ],
-        'clean',
-        old('parental_advisory')
-            ? old('parental_advisory') === 'clean'
-            : $episode->parental_advisory === 'clean'
-    ) ?>
-    <label for="clean"><?= lang(
-        'Episode.form.parental_advisory.clean'
-    ) ?></label>
-    <?= form_radio(
-        [
-            'id' => 'explicit',
-            'name' => 'parental_advisory',
-            'class' => 'form-radio-btn',
-        ],
-        'explicit',
-        old('parental_advisory')
-            ? old('parental_advisory') === 'explicit'
-            : $episode->parental_advisory === 'explicit'
-    ) ?>
-    <label for="explicit"><?= lang(
-        'Episode.form.parental_advisory.explicit'
-    ) ?></label>
-<?= form_fieldset_close() ?>
-
-<?= form_switch(
-    lang('Episode.form.block') .
-        hint_tooltip(lang('Episode.form.block_hint'), 'ml-1'),
-    ['id' => 'block', 'name' => 'block'],
-    'yes',
-    old('block', $episode->is_blocked)
-) ?>
-
-<?= form_section_close() ?>
 <?= form_section(
     lang('Episode.form.additional_files_section_title'),
     lang('Episode.form.additional_files_section_subtitle', [
@@ -406,6 +366,14 @@
     'value' => old('custom_rss', $episode->custom_rss_string),
 ]) ?>
 <?= form_section_close() ?>
+
+<?= form_switch(
+    lang('Episode.form.block') .
+        hint_tooltip(lang('Episode.form.block_hint'), 'ml-1'),
+    ['id' => 'block', 'name' => 'block'],
+    'yes',
+    old('block', $episode->is_blocked)
+) ?>
 
 <?= button(
     lang('Episode.form.submit_edit'),

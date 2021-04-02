@@ -10,7 +10,7 @@
 
 <?= $this->section('headerRight') ?>
 <?= button(lang('Page.create'), route_to('page-create'), [
-    'variant' => 'primary',
+    'variant' => 'accent',
     'iconLeft' => 'add',
 ]) ?>
 <?= $this->endSection() ?>

@@ -12,8 +12,8 @@
 <?= button(
     lang('Podcast.create'),
     route_to('podcast-create'),
-    ['variant' => 'primary', 'iconLeft' => 'add'],
-    ['class' => 'mr-2']
+    ['variant' => 'accent', 'iconLeft' => 'add'],
+    ['class' => 'mr-2'],
 ) ?>
 <?= button(lang('Podcast.import'), route_to('podcast-import'), [
     'variant' => 'primary',
@@ -24,35 +24,33 @@
 
 <?= $this->section('content') ?>
 
-<div class="flex flex-wrap">
+<div class="grid gap-4 grid-cols-podcasts">
     <?php if (!empty($podcasts)): ?>
         <?php foreach ($podcasts as $podcast): ?>
-            <article class="w-48 h-full mb-4 mr-4 overflow-hidden bg-white border rounded shadow">
+            <article class="h-full overflow-hidden bg-white border shadow rounded-xl">
             <img
             alt="<?= $podcast->title ?>"
             src="<?= $podcast->image
-                ->thumbnail_url ?>" class="object-cover w-full h-40" />
-            <div class="p-2">
-                <a href="<?= route_to(
-                    'podcast-view',
-                    $podcast->id
-                ) ?>" class="hover:underline">
-                    <h2 class="font-semibold"><?= $podcast->title ?></h2>
-                </a>
+                ->medium_url ?>" class="object-cover w-full h-48" />
+            <a href="<?= route_to(
+                'podcast-view',
+                $podcast->id,
+            ) ?>" class="flex flex-col p-2 hover:underline">
+                <h2 class="font-semibold truncate"><?= $podcast->title ?></h2>
                 <p class="text-gray-600">@<?= $podcast->name ?></p>
-            </div>
+            </a>
             <footer class="flex items-center justify-end p-2">
-                <a class="inline-flex p-2 mr-2 text-teal-700 bg-teal-100 rounded-full shadow-xs hover:bg-teal-200" href="<?= route_to(
+                <a class="inline-flex p-2 mr-2 text-blue-700 bg-blue-100 rounded-full shadow-xs hover:bg-blue-200" href="<?= route_to(
                     'podcast-edit',
-                    $podcast->id
+                    $podcast->id,
                 ) ?>" data-toggle="tooltip" data-placement="bottom" title="<?= lang(
-    'Podcast.edit'
+    'Podcast.edit',
 ) ?>"><?= icon('edit') ?></a>
                 <a class="inline-flex p-2 text-gray-700 bg-gray-100 rounded-full shadow-xs hover:bg-gray-200" href="<?= route_to(
                     'podcast-view',
-                    $podcast->id
+                    $podcast->id,
                 ) ?>" data-toggle="tooltip" data-placement="bottom" title="<?= lang(
-    'Podcast.view'
+    'Podcast.view',
 ) ?>"><?= icon('eye') ?></a>
             </footer>
         </article>

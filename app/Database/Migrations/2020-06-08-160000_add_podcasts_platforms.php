@@ -48,8 +48,6 @@ class AddPodcastsPlatforms extends Migration
         ]);
 
         $this->forge->addPrimaryKey(['podcast_id', 'platform_slug']);
-        $this->forge->addForeignKey('podcast_id', 'podcasts', 'id');
-        $this->forge->addForeignKey('platform_slug', 'platforms', 'slug');
         $this->forge->createTable('podcasts_platforms');
     }
 

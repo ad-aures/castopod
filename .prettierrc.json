@@ -4,7 +4,7 @@
     {
       "files": "*.php",
       "options": {
-        "phpVersion": "7.2",
+        "phpVersion": "7.3",
         "singleQuote": true
       }
     },

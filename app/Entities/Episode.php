@@ -11,6 +11,7 @@ namespace App\Entities;
 use App\Models\PodcastModel;
 use App\Models\SoundbiteModel;
 use App\Models\EpisodePersonModel;
+use App\Models\NoteModel;
 use CodeIgniter\Entity;
 use CodeIgniter\I18n\Time;
 use League\CommonMark\CommonMarkConverter;
@@ -28,7 +29,7 @@ class Episode extends Entity
     protected $link;
 
     /**
-     * @var \App\Entities\Image
+     * @var \App\Libraries\Image
      */
     protected $image;
 
@@ -80,12 +81,17 @@ class Episode extends Entity
     /**
      * @var \App\Entities\EpisodePerson[]
      */
-    protected $episode_persons;
+    protected $persons;
 
     /**
      * @var \App\Entities\Soundbite[]
      */
     protected $soundbites;
+
+    /**
+     * @var \App\Entities\Note[]
+     */
+    protected $notes;
 
     /**
      * Holds text only description, striped of any markdown or html special characters
@@ -122,6 +128,7 @@ class Episode extends Entity
 
     protected $casts = [
         'id' => 'integer',
+        'podcast_id' => 'integer',
         'guid' => 'string',
         'slug' => 'string',
         'title' => 'string',
@@ -133,6 +140,7 @@ class Episode extends Entity
         'description_markdown' => 'string',
         'description_html' => 'string',
         'image_uri' => '?string',
+        'image_mimetype' => '?string',
         'transcript_uri' => '?string',
         'chapters_uri' => '?string',
         'parental_advisory' => '?string',
@@ -144,6 +152,9 @@ class Episode extends Entity
         'location_geo' => '?string',
         'location_osmid' => '?string',
         'custom_rss' => '?json-array',
+        'favourites_total' => 'integer',
+        'reblogs_total' => 'integer',
+        'notes_total' => 'integer',
         'created_by' => 'integer',
         'updated_by' => 'integer',
     ];
@@ -163,15 +174,16 @@ class Episode extends Entity
         ) {
             helper('media');
 
-            // check whether the user has inputted an image and store it
-            $this->attributes['image_uri'] = save_podcast_media(
+            // check whether the user has inputted an image and store
+            $this->attributes['image_mimetype'] = $image->getMimeType();
+            $this->attributes['image_uri'] = save_media(
                 $image,
-                $this->getPodcast()->name,
-                $this->attributes['slug']
+                'podcasts/' . $this->getPodcast()->name,
+                $this->attributes['slug'],
             );
-
-            $this->image = new \App\Entities\Image(
-                $this->attributes['image_uri']
+            $this->image = new \App\Libraries\Image(
+                $this->attributes['image_uri'],
+                $this->attributes['image_mimetype'],
             );
             $this->image->saveSizes();
         }
@@ -179,10 +191,13 @@ class Episode extends Entity
         return $this;
     }
 
-    public function getImage(): \App\Entities\Image
+    public function getImage(): \App\Libraries\Image
     {
         if ($image_uri = $this->attributes['image_uri']) {
-            return new \App\Entities\Image($image_uri);
+            return new \App\Libraries\Image(
+                $image_uri,
+                $this->attributes['image_mimetype'],
+            );
         }
         return $this->getPodcast()->image;
     }
@@ -204,13 +219,13 @@ class Episode extends Entity
 
             $enclosure_metadata = get_file_tags($enclosure);
 
-            $this->attributes['enclosure_uri'] = save_podcast_media(
+            $this->attributes['enclosure_uri'] = save_media(
                 $enclosure,
-                $this->getPodcast()->name,
-                $this->attributes['slug']
+                'podcasts/' . $this->getPodcast()->name,
+                $this->attributes['slug'],
             );
             $this->attributes['enclosure_duration'] = round(
-                $enclosure_metadata['playtime_seconds']
+                $enclosure_metadata['playtime_seconds'],
             );
             $this->attributes['enclosure_mimetype'] =
                 $enclosure_metadata['mime_type'];
@@ -238,10 +253,10 @@ class Episode extends Entity
         ) {
             helper('media');
 
-            $this->attributes['transcript_uri'] = save_podcast_media(
+            $this->attributes['transcript_uri'] = save_media(
                 $transcript,
                 $this->getPodcast()->name,
-                $this->attributes['slug'] . '-transcript'
+                $this->attributes['slug'] . '-transcript',
             );
         }
 
@@ -263,10 +278,10 @@ class Episode extends Entity
         ) {
             helper('media');
 
-            $this->attributes['chapters_uri'] = save_podcast_media(
+            $this->attributes['chapters_uri'] = save_media(
                 $chapters,
                 $this->getPodcast()->name,
-                $this->attributes['slug'] . '-chapters'
+                $this->attributes['slug'] . '-chapters',
             );
         }
 
@@ -343,15 +358,15 @@ class Episode extends Entity
                                         $this->attributes[
                                             'enclosure_duration'
                                         ]) *
-                                        60
+                                        60,
                                 ),
                         $this->attributes['enclosure_filesize'],
                         $this->attributes['enclosure_duration'],
-                        strtotime($this->attributes['published_at'])
-                    )
+                        strtotime($this->attributes['published_at']),
+                    ),
                 ),
-                $this->attributes['enclosure_uri']
-            )
+                $this->attributes['enclosure_uri'],
+            ),
         );
     }
 
@@ -384,22 +399,22 @@ class Episode extends Entity
      *
      * @return \App\Entities\EpisodePerson[]
      */
-    public function getEpisodePersons()
+    public function getPersons()
     {
         if (empty($this->id)) {
             throw new \RuntimeException(
-                'Episode must be created before getting persons.'
+                'Episode must be created before getting persons.',
             );
         }
 
-        if (empty($this->episode_persons)) {
-            $this->episode_persons = (new EpisodePersonModel())->getPersonsByEpisodeId(
+        if (empty($this->persons)) {
+            $this->persons = (new EpisodePersonModel())->getPersonsByEpisodeId(
                 $this->podcast_id,
-                $this->id
+                $this->id,
             );
         }
 
-        return $this->episode_persons;
+        return $this->persons;
     }
 
     /**
@@ -411,18 +426,33 @@ class Episode extends Entity
     {
         if (empty($this->id)) {
             throw new \RuntimeException(
-                'Episode must be created before getting soundbites.'
+                'Episode must be created before getting soundbites.',
             );
         }
 
         if (empty($this->soundbites)) {
             $this->soundbites = (new SoundbiteModel())->getEpisodeSoundbites(
                 $this->getPodcast()->id,
-                $this->id
+                $this->id,
             );
         }
 
         return $this->soundbites;
+    }
+
+    public function getNotes()
+    {
+        if (empty($this->id)) {
+            throw new \RuntimeException(
+                'Episode must be created before getting soundbites.',
+            );
+        }
+
+        if (empty($this->notes)) {
+            $this->notes = (new NoteModel())->getEpisodeNotes($this->id);
+        }
+
+        return $this->notes;
     }
 
     public function getLink()
@@ -431,8 +461,8 @@ class Episode extends Entity
             route_to(
                 'episode',
                 $this->getPodcast()->name,
-                $this->attributes['slug']
-            )
+                $this->attributes['slug'],
+            ),
         );
     }
 
@@ -444,13 +474,13 @@ class Episode extends Entity
                     'embeddable-player-theme',
                     $this->getPodcast()->name,
                     $this->attributes['slug'],
-                    $theme
+                    $theme,
                 )
                 : route_to(
                     'embeddable-player',
                     $this->getPodcast()->name,
-                    $this->attributes['slug']
-                )
+                    $this->attributes['slug'],
+                ),
         );
     }
 
@@ -464,7 +494,7 @@ class Episode extends Entity
     public function getPodcast()
     {
         return (new PodcastModel())->getPodcastById(
-            $this->attributes['podcast_id']
+            $this->attributes['podcast_id'],
         );
     }
 
@@ -477,7 +507,7 @@ class Episode extends Entity
 
         $this->attributes['description_markdown'] = $descriptionMarkdown;
         $this->attributes['description_html'] = $converter->convertToHtml(
-            $descriptionMarkdown
+            $descriptionMarkdown,
         );
 
         return $this;
@@ -510,23 +540,9 @@ class Episode extends Entity
             preg_replace(
                 '/\s+/',
                 ' ',
-                strip_tags($this->attributes['description_html'])
-            )
+                strip_tags($this->attributes['description_html']),
+            ),
         );
-    }
-
-    public function setCreatedBy(\App\Entities\User $user)
-    {
-        $this->attributes['created_by'] = $user->id;
-
-        return $this;
-    }
-
-    public function setUpdatedBy(\App\Entities\User $user)
-    {
-        $this->attributes['updated_by'] = $user->id;
-
-        return $this;
     }
 
     public function getPublicationStatus()
@@ -588,7 +604,7 @@ class Episode extends Entity
             return '';
         } else {
             $xmlNode = (new \App\Libraries\SimpleRSSElement(
-                '<?xml version="1.0" encoding="utf-8"?><rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:podcast="https://github.com/Podcastindex-org/podcast-namespace/blob/main/docs/1.0.md" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"/>'
+                '<?xml version="1.0" encoding="utf-8"?><rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:podcast="https://github.com/Podcastindex-org/podcast-namespace/blob/main/docs/1.0.md" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"/>',
             ))
                 ->addChild('channel')
                 ->addChild('item');
@@ -596,7 +612,7 @@ class Episode extends Entity
                 [
                     'elements' => $this->custom_rss,
                 ],
-                $xmlNode
+                $xmlNode,
             );
             return str_replace(['<item>', '</item>'], '', $xmlNode->asXML());
         }
@@ -615,12 +631,12 @@ class Episode extends Entity
             simplexml_load_string(
                 '<?xml version="1.0" encoding="utf-8"?><rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:podcast="https://github.com/Podcastindex-org/podcast-namespace/blob/main/docs/1.0.md" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><item>' .
                     $customRssString .
-                    '</item></channel></rss>'
-            )
+                    '</item></channel></rss>',
+            ),
         )['elements'][0]['elements'][0];
         if (array_key_exists('elements', $customRssArray)) {
             $this->attributes['custom_rss'] = json_encode(
-                $customRssArray['elements']
+                $customRssArray['elements'],
             );
         } else {
             $this->attributes['custom_rss'] = null;

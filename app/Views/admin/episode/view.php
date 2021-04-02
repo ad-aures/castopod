@@ -5,19 +5,29 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('pageTitle') ?>
-<?= $episode->title .
-    publication_pill(
-        $episode->published_at,
-        $episode->publication_status,
-        'text-sm ml-2 align-middle'
-    ) ?>
-    <?= location_link(
-        $episode->location_name,
-        $episode->location_geo,
-        $episode->location_osmid,
-        'ml-2'
-    ) ?>
+<?= $episode->title ?>    
 <?= $this->endSection() ?>
+
+<?= $this->section('headerLeft') ?>
+<?= publication_pill(
+    $episode->published_at,
+    $episode->publication_status,
+    'text-sm ml-2 align-middle',
+) ?>
+<?= $this->endSection() ?>
+
+<?= $this->section('headerRight') ?>
+<?= publication_button(
+    $podcast->id,
+    $episode->id,
+    $episode->publication_status,
+    lang('Episode.publish'),
+    route_to('episode-publish', $podcast->id, $episode->id),
+    ['variant' => 'accent', 'iconLeft' => 'upload'],
+    ['class' => 'mr-2'],
+) ?>
+<?= $this->endSection() ?>
+
 
 <?= $this->section('content') ?>
    
@@ -37,22 +47,28 @@
         <?= button(
             lang('Episode.edit'),
             route_to('episode-edit', $podcast->id, $episode->id),
-            ['variant' => 'info', 'iconLeft' => 'edit']
+            ['variant' => 'info', 'iconLeft' => 'edit'],
         ) ?>
         <?= button(
             lang('Episode.go_to_page'),
             route_to('episode', $podcast->name, $episode->slug),
-            ['variant' => 'secondary', 'iconLeft' => 'external-link']
+            ['variant' => 'secondary', 'iconLeft' => 'external-link'],
         ) ?>
         <?= button(
             lang('Episode.delete'),
             route_to('episode-delete', $podcast->id, $episode->id),
-            ['variant' => 'danger', 'iconLeft' => 'delete-bin']
+            ['variant' => 'danger', 'iconLeft' => 'delete-bin'],
         ) ?>
         </div>
     </div>
 
     <section class="w-full max-w-sm prose">
+    <?= location_link(
+        $episode->location_name,
+        $episode->location_geo,
+        $episode->location_osmid,
+        'text-sm',
+    ) ?>
     <?= $episode->description_html ?>
     </section>
 </div>
@@ -62,19 +78,19 @@
         lang('Episode.embeddable_player.add'),
         route_to('embeddable-player-add', $podcast->id, $episode->id),
         ['variant' => 'info', 'iconLeft' => 'movie'],
-        ['class' => 'mb-4']
+        ['class' => 'mb-4'],
     ) ?>
     <?= button(
         lang('Episode.soundbites_form.title'),
         route_to('soundbites-edit', $podcast->id, $episode->id),
         ['variant' => 'info', 'iconLeft' => 'edit'],
-        ['class' => 'mb-4']
+        ['class' => 'mb-4'],
     ) ?>
     <?= button(
         lang('Person.episode_form.title'),
         route_to('episode-person-manage', $podcast->id, $episode->id),
         ['variant' => 'info', 'iconLeft' => 'folder-user'],
-        ['class' => 'mb-4']
+        ['class' => 'mb-4'],
     ) ?>
     <?php if (count($episode->soundbites) > 0): ?>
     <?= data_table(
@@ -93,7 +109,7 @@
                             'data-soundbite-start-time' =>
                                 $soundbite->start_time,
                             'data-soundbite-duration' => $soundbite->duration,
-                        ]
+                        ],
                     );
                 },
             ],
@@ -116,7 +132,7 @@
                 },
             ],
         ],
-        $episode->soundbites
+        $episode->soundbites,
     ) ?>
     <?php endif; ?>
     </div>
@@ -128,7 +144,7 @@
         $podcast->id,
         'PodcastByEpisode',
         'ByDay',
-        $episode->id
+        $episode->id,
     ) ?>"></div>
     </div>
     
@@ -139,7 +155,7 @@
         $podcast->id,
         'PodcastByEpisode',
         'ByMonth',
-        $episode->id
+        $episode->id,
     ) ?>"></div>
     </div>
 

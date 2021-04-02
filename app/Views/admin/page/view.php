@@ -10,7 +10,7 @@
 
 <?= $this->section('headerRight') ?>
 <?= button(lang('Page.edit'), route_to('page-edit', $page->id), [
-    'variant' => 'primary',
+    'variant' => 'accent',
     'iconLeft' => 'add',
 ]) ?>
 <?= $this->endSection() ?>

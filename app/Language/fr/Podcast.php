@@ -211,9 +211,26 @@ return [
     ],
     'by' => 'Par {publisher}',
     'season' => 'Saison {seasonNumber}',
-    'list_of_episodes_year' => 'épisodes {year}',
-    'list_of_episodes_season' => 'Épisodes de la saison {seasonNumber}',
+    'list_of_episodes_year' => 'Épisodes de {year} (episodeCount)',
+    'list_of_episodes_season' =>
+        'Épisodes de la saison {seasonNumber} (episodeCount)',
     'no_episode' => 'Aucun épisode trouvé !',
     'no_episode_hint' =>
         'Naviguez au sein des épisodes du podcast episodes grâce à la barre de navigation ci-dessus.',
+    'follow' => 'Suivre',
+    'followers' => '{numberOfFollowers, plural,
+        one {<span class="font-semibold">#</span> abonné·e}
+        other {<span class="font-semibold">#</span> abonné·e·s}
+    }',
+    'notes' => '{numberOfNotes, plural,
+        one {<span class="font-semibold">#</span> note}
+        other {<span class="font-semibold">#</span> notes}
+    }',
+    'activity' => 'Activité',
+    'episodes' => 'Épisodes',
+    'sponsor_title' => 'Vous aimez le podcast ?',
+    'sponsor' => 'Soutenez-nous',
+    'funding_links' => 'Liens de financement pour {podcastTitle}',
+    'find_on' => 'Trouvez {podcastTitle} sur',
+    'listen_on' => 'Écoutez sur',
 ];

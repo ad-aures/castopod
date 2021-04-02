@@ -7,19 +7,33 @@
  */
 
 return [
-    'previous_episode' => 'Épisode précédent',
-    'previous_season' => 'Saison précédente',
-    'next_episode' => 'Épisode suivant',
-    'next_season' => 'Saison suivante',
     'season' => 'Saison {seasonNumber}',
     'season_abbr' => 'S{seasonNumber}',
     'number' => 'Épisode {episodeNumber}',
     'number_abbr' => 'Ep. {episodeNumber}',
     'season_episode' => 'Saison {seasonNumber} épisode {episodeNumber}',
     'season_episode_abbr' => 'S{seasonNumber}E{episodeNumber}',
+    'back_to_episodes' => 'Retour aux épisodes de {podcast}',
+    'activity' => 'Activité',
+    'description' => 'Description',
+    'total_favourites' => '{numberOfTotalFavourites, plural,
+        one {# favori en tout}
+        other {# favoris en tout}
+    }',
+    'total_reblogs' => '{numberOfTotalReblogs, plural,
+        one {# partage en tout}
+        other {# partages en tout}
+    }',
+    'total_notes' => '{numberOfTotalNotes, plural,
+        one {# note}
+        other {# notes}
+    }',
     'all_podcast_episodes' => 'Tous les épisodes du podcast',
     'back_to_podcast' => 'Revenir au podcast',
     'edit' => 'Modifier',
+    'publish' => 'Publier',
+    'publish_edit' => 'Modifier la publication',
+    'unpublish' => 'Dépublier',
     'delete' => 'Supprimer',
     'go_to_page' => 'Voir',
     'create' => 'Ajouter un épisode',
@@ -51,19 +65,6 @@ return [
             'trailer' => 'Bande-annonce',
             'bonus' => 'Bonus',
         ],
-        'show_notes_section_title' => 'Notes d’épisode (Show Notes)',
-        'show_notes_section_subtitle' =>
-            'Jusque 4000 caractères, soyez clairs et concis. Les notes d’épisode aident les auditeurs potentiels à le trouver.',
-        'description' => 'Description',
-        'description_footer' => 'Pied de description',
-        'description_footer_hint' =>
-            'Ce texte est ajouté à la fin de chaque description d’épisode, c’est un bon endroit pour placer vos liens sociaux par exemple.',
-        'publication_section_title' => 'Information de publication',
-        'publication_section_subtitle' => '',
-        'publication_date' => 'Date de publication',
-        'publication_date_clear' => 'Effacer la date de publication',
-        'publication_date_hint' =>
-            'Vous pouvez planifier la sortie de l’épisode en saisissant une date de publication future. Ce champ doit être au format YYYY-MM-DD HH:mm',
         'parental_advisory' => [
             'label' => 'Avertissement parental',
             'hint' => 'L’épisode contient-il un contenu explicite ?',
@@ -71,12 +72,20 @@ return [
             'clean' => 'Convenable',
             'explicit' => 'Explicite',
         ],
-        'block' => 'L’épisode doit être masqué de toutes les plateformes',
-        'block_hint' =>
-            'La visibilité de l’épisode. Si vous souhaitez retirer cet épisode de l’index Apple, activez ce champ.',
+        'show_notes_section_title' => 'Notes d’épisode (Show Notes)',
+        'show_notes_section_subtitle' =>
+            'Jusque 4000 caractères, soyez clairs et concis. Les notes d’épisode aident les auditeurs potentiels à le trouver.',
+        'description' => 'Description',
+        'description_footer' => 'Pied de description',
+        'description_footer_hint' =>
+            'Ce texte est ajouté à la fin de chaque description d’épisode, c’est un bon endroit pour placer vos liens sociaux par exemple.',
         'additional_files_section_title' => 'Fichiers additionels',
         'additional_files_section_subtitle' =>
             'Ces fichiers pourront être utilisées par d’autres plate-formes pour procurer une meilleure expérience à vos auditeurs.<br />Consulter le {podcastNamespaceLink} pour plus d’informations.',
+        'location_section_title' => 'Localisation',
+        'location_section_subtitle' => 'De quel lieu cet épisode parle-t-il ?',
+        'location_name' => 'Nom ou adresse du lieu',
+        'location_name_hint' => 'Ce lieu peut être réel ou fictif',
         'transcript' => 'Transcription ou sous-titrage',
         'transcript_hint' =>
             'Les formats autorisés sont txt, html, srt ou json.',
@@ -84,17 +93,38 @@ return [
         'chapters' => 'Chapitrage',
         'chapters_hint' => 'Le fichier doit être en "JSON Chapters Format".',
         'chapters_delete' => 'Supprimer le chapitrage',
-        'location_section_title' => 'Localisation',
-        'location_section_subtitle' => 'De quel lieu cet épisode parle-t-il ?',
-        'location_name' => 'Nom ou adresse du lieu',
-        'location_name_hint' => 'Ce lieu peut être réel ou fictif',
         'advanced_section_title' => 'Paramètres avancés',
         'advanced_section_subtitle' =>
-            'Si vous avez besoin d’une balise que nous n’avons pas couverte, définissez-la ici.',
+            'Si vous avez besoin d’une balise que Castopod ne couvre pas, définissez-la ici.',
         'custom_rss' => 'Balises RSS personnalisées pour l’épisode',
         'custom_rss_hint' => 'Ceci sera injecté dans la balise ❬item❭.',
+        'block' => 'L’épisode doit être masqué de toutes les plateformes',
+        'block_hint' =>
+            'La visibilité de l’épisode. Si vous souhaitez retirer cet épisode de l’index Apple, activez ce champ.',
         'submit_create' => 'Créer l’épisode',
         'submit_edit' => 'Enregistrer l’épisode',
+    ],
+    'publish_form' => [
+        'publication_date' => 'Date de publication',
+        'publication_date_clear' => 'Effacer la date de publication',
+        'publication_date_hint' =>
+            'Vous pouvez planifier la sortie de l’épisode en saisissant une date de publication future. Ce champ doit être au format YYYY-MM-DD HH:mm',
+    ],
+    'publish_form' => [
+        'note' => 'Votre note',
+        'note_hint' =>
+            'Le message que vous écrirez sera diffusé à toutes les personnes qui vous suivent dans le fédiverse.',
+        'publication_date' => 'Date de publication',
+        'publication_method' => [
+            'now' => 'Maintenant',
+            'schedule' => 'Planifier',
+        ],
+        'scheduled_publication_date' => 'Date de publication programmée',
+        'scheduled_publication_date_clear' => 'Effacer la date de publication',
+        'scheduled_publication_date_hint' =>
+            'Vous pouvez planifier la sortie de l’épisode en saisissant une date de publication future. Ce champ doit être au format YYYY-MM-DD HH:mm',
+        'submit' => 'Publier',
+        'submit_edit' => 'Modifier la publication',
     ],
     'soundbites' => 'Extraits sonores',
     'soundbites_form' => [

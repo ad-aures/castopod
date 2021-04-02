@@ -10,7 +10,7 @@
 
 <?= $this->section('headerRight') ?>
 <?= button(lang('Contributor.add'), route_to('contributor-add', $podcast->id), [
-    'variant' => 'primary',
+    'variant' => 'accent',
     'iconLeft' => 'add',
 ]) ?>
 <?= $this->endSection() ?>

@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Class AddLanguages
- * Creates languages table in database
+ * Class AddPages
+ * Creates pages table in database
  *
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -46,7 +46,7 @@ class AddPages extends Migration
                 'null' => true,
             ],
         ]);
-        $this->forge->addKey('id', true);
+        $this->forge->addPrimaryKey('id');
         $this->forge->createTable('pages');
     }
 

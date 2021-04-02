@@ -35,25 +35,25 @@ class AnalyticsPodcastByRegionModel extends Model
         $locale = service('request')->getLocale();
         if (
             !($found = cache(
-                "{$podcastId}_analytics_podcast_by_region_{$locale}"
+                "{$podcastId}_analytics_podcast_by_region_{$locale}",
             ))
         ) {
-            $found = $this->select('`country_code`, `region_code`')
-                ->selectSum('`hits`', '`value`')
-                ->selectAvg('`latitude`')
-                ->selectAvg('`longitude`')
-                ->groupBy('`country_code`, `region_code`')
+            $found = $this->select('country_code, region_code')
+                ->selectSum('hits', 'value')
+                ->selectAvg('latitude')
+                ->selectAvg('longitude')
+                ->groupBy('country_code, region_code')
                 ->where([
-                    '`podcast_id`' => $podcastId,
-                    '`date` >' => date('Y-m-d', strtotime('-1 week')),
+                    'podcast_id' => $podcastId,
+                    'date >' => date('Y-m-d', strtotime('-1 week')),
                 ])
-                ->orderBy('`value`', 'DESC')
+                ->orderBy('value', 'DESC')
                 ->findAll();
 
             cache()->save(
                 "{$podcastId}_analytics_podcast_by_region_{$locale}",
                 $found,
-                600
+                600,
             );
         }
         return $found;

@@ -3,6 +3,7 @@
 /**
  * Class AddAnalyticsUnknownUseragentsProcedure
  * Creates analytics_unknown_useragents procedure in database
+ *
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
@@ -20,14 +21,14 @@ class AddAnalyticsUnknownUseragentsProcedure extends Migration
         // Example: CALL analytics_unknown_useragents('Podcasts/1430.46 CFNetwork/1125.2 Darwin/19.4.0');
         $procedureName = $this->db->prefixTable('analytics_unknown_useragents');
         $createQuery = <<<EOD
-CREATE PROCEDURE `$procedureName` (IN `p_useragent` VARCHAR(191) CHARSET utf8mb4)  MODIFIES SQL DATA
-DETERMINISTIC
-SQL SECURITY INVOKER
-COMMENT 'Add an unknown useragent to table $procedureName.'
-INSERT INTO `$procedureName`(`useragent`) 
-VALUES (p_useragent) 
-ON DUPLICATE KEY UPDATE `hits`=`hits`+1
-EOD;
+        CREATE PROCEDURE `$procedureName` (IN `p_useragent` VARCHAR(191) CHARSET utf8mb4)  MODIFIES SQL DATA
+        DETERMINISTIC
+        SQL SECURITY INVOKER
+        COMMENT 'Add an unknown useragent to table $procedureName.'
+        INSERT INTO `$procedureName`(`useragent`)
+        VALUES (p_useragent)
+        ON DUPLICATE KEY UPDATE `hits`=`hits`+1
+        EOD;
         $this->db->query($createQuery);
     }
 

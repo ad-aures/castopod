@@ -59,7 +59,7 @@ class ProseMirrorView {
         }
       },
       attributes: {
-        class: "prose-sm px-3 py-2 overflow-y-auto focus:shadow-outline",
+        class: "prose-sm px-3 py-2 overflow-y-auto focus:ring",
         style: "min-height: 200px; max-height: 500px",
       },
     });
@@ -83,7 +83,7 @@ const MarkdownEditor = (): void => {
   const targets: NodeListOf<HTMLTextAreaElement> = document.querySelectorAll(
     "textarea[data-editor='markdown']"
   );
-  const activeClass = "font-bold";
+  const activeClass = "font-semibold";
 
   for (let i = 0; i < targets.length; i++) {
     const target = targets[i];
@@ -97,7 +97,7 @@ const MarkdownEditor = (): void => {
       "border",
       "text-xs",
       "outline-none",
-      "focus:shadow-outline"
+      "focus:ring"
     );
     wysiwygBtn.setAttribute("type", "button");
     wysiwygBtn.innerHTML = "Wysiwyg";
@@ -109,7 +109,7 @@ const MarkdownEditor = (): void => {
       "border",
       "text-xs",
       "outline-none",
-      "focus:shadow-outline"
+      "focus:ring"
     );
     markdownBtn.setAttribute("type", "button");
     markdownBtn.innerHTML = "Markdown";

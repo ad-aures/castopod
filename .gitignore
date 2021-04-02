@@ -138,7 +138,6 @@ node_modules
 # public folder
 public/*
 !public/media
-!public/media/~person
 !public/.htaccess
 !public/favicon.ico
 !public/index.php
@@ -147,10 +146,14 @@ public/*
 # public media folder
 public/media/*
 !public/media/index.html
+!public/media/podcasts
+!public/media/persons
 
-# public person folder
-public/media/~person/*
-!public/media/~person/index.html
+public/media/podcasts/*
+!public/media/podcasts/index.html
+
+public/media/persons/*
+!public/media/persons/index.html
 
 # Generated files
 app/Language/en/PersonsTaxonomy.php

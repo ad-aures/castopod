@@ -1,0 +1,8 @@
+@layer base {
+  [data-dropdown="menu"] {
+    @apply z-50;
+  }
+  [data-dropdown="menu"]:not([data-show]) {
+    @apply absolute top-0 left-0 invisible pointer-events-none;
+  }
+}

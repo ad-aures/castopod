@@ -209,9 +209,26 @@ return [
     ],
     'by' => 'By {publisher}',
     'season' => 'Season {seasonNumber}',
-    'list_of_episodes_year' => '{year} episodes',
-    'list_of_episodes_season' => 'Season {seasonNumber} episodes',
+    'list_of_episodes_year' => '{year} episodes ({episodeCount})',
+    'list_of_episodes_season' =>
+        'Season {seasonNumber} episodes ({episodeCount})',
     'no_episode' => 'No episode found!',
     'no_episode_hint' =>
         'Navigate the podcast episodes with the navigation bar above.',
+    'follow' => 'Follow',
+    'followers' => '{numberOfFollowers, plural,
+        one {<span class="font-semibold">#</span> follower}
+        other {<span class="font-semibold">#</span> followers}
+    }',
+    'notes' => '{numberOfNotes, plural,
+        one {<span class="font-semibold">#</span> note}
+        other {<span class="font-semibold">#</span> notes}
+    }',
+    'activity' => 'Activity',
+    'episodes' => 'Episodes',
+    'sponsor_title' => 'Enjoying the show?',
+    'sponsor' => 'Sponsor',
+    'funding_links' => 'Funding links for {podcastTitle}',
+    'find_on' => 'Find {podcastTitle} on',
+    'listen_on' => 'Listen on',
 ];

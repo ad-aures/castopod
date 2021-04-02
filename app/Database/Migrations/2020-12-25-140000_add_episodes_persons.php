@@ -52,9 +52,27 @@ class AddEpisodesPersons extends Migration
             'person_group',
             'person_role',
         ]);
-        $this->forge->addForeignKey('podcast_id', 'podcasts', 'id');
-        $this->forge->addForeignKey('episode_id', 'episodes', 'id');
-        $this->forge->addForeignKey('person_id', 'persons', 'id');
+        $this->forge->addForeignKey(
+            'podcast_id',
+            'podcasts',
+            'id',
+            false,
+            'CASCADE',
+        );
+        $this->forge->addForeignKey(
+            'episode_id',
+            'episodes',
+            'id',
+            false,
+            'CASCADE',
+        );
+        $this->forge->addForeignKey(
+            'person_id',
+            'persons',
+            'id',
+            false,
+            'CASCADE',
+        );
         $this->forge->createTable('episodes_persons');
     }
 

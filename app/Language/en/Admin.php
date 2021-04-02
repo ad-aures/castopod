@@ -9,4 +9,5 @@
 return [
     'dashboard' => 'Admin dashboard',
     'welcome_message' => 'Welcome to the admin area!',
+    'choose_interact' => 'Choose how to interact',
 ];

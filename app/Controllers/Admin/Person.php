@@ -125,7 +125,7 @@ class Person extends BaseController
             $this->person->image = $image;
         }
 
-        $this->updated_by = user();
+        $this->updated_by = user()->id;
 
         $personModel = new PersonModel();
         if (!$personModel->update($this->person->id, $this->person)) {

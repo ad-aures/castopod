@@ -158,6 +158,18 @@ class AuthSeeder extends Seeder
                 'description' => 'Set / remove platform links of a podcast',
                 'has_permission' => ['podcast_admin'],
             ],
+            [
+                'name' => 'manage_publications',
+                'description' =>
+                    'Publish / unpublish episodes & notes of a podcast',
+                'has_permission' => ['podcast_admin'],
+            ],
+            [
+                'name' => 'interact_as',
+                'description' =>
+                    'Interact as the podcast to favourite / share or reply to notes.',
+                'has_permission' => ['podcast_admin'],
+            ],
         ],
         'podcast_episodes' => [
             [
@@ -192,11 +204,6 @@ class AuthSeeder extends Seeder
                     'Delete all occurrences of an episode of a podcast from the database',
                 'has_permission' => ['podcast_admin'],
             ],
-            [
-                'name' => 'manage_publications',
-                'description' => 'Publish / unpublish episodes of a podcast',
-                'has_permission' => ['podcast_admin'],
-            ],
         ],
         'person' => [
             [
@@ -220,8 +227,23 @@ class AuthSeeder extends Seeder
                 'has_permission' => ['superadmin'],
             ],
             [
-                'name' => 'delete_permanently',
-                'description' => 'Delete any person from the database',
+                'name' => 'delete',
+                'description' =>
+                    'Delete permanently any person from the database',
+                'has_permission' => ['superadmin'],
+            ],
+        ],
+        'fediverse' => [
+            [
+                'name' => 'block_actors',
+                'description' =>
+                    'Block an activitypub actors from interacting with the instance.',
+                'has_permission' => ['superadmin'],
+            ],
+            [
+                'name' => 'block_domains',
+                'description' =>
+                    'Block an activitypub domains from interacting with the instance.',
                 'has_permission' => ['superadmin'],
             ],
         ],
@@ -266,7 +288,7 @@ class AuthSeeder extends Seeder
                     array_push($dataGroupsPermissions, [
                         'group_id' => $this->getGroupIdByName(
                             $role,
-                            $dataGroups
+                            $dataGroups,
                         ),
                         'permission_id' => $permissionId,
                     ]);

@@ -9,12 +9,12 @@
     <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
     <link rel="stylesheet" href="/assets/admin.css"/>
     <link rel="stylesheet" href="/assets/index.css"/>
-    <script src="/assets/admin.js" type="module" defer></script>
+    <script src="/assets/admin.js" type="module"></script>
 </head>
 
 <body class="relative bg-gray-100 holy-grail-grid">
     <div id="sidebar-backdrop" role="button" tabIndex="0" aria-label="Close" class="fixed z-50 hidden w-full h-full bg-gray-900 bg-opacity-50 md:hidden"></div>
-    <aside id="admin-sidebar" class="sticky top-0 z-50 flex flex-col w-64 max-h-screen transition duration-200 ease-in-out transform -translate-x-full bg-white border-r holy-grail-sidebar md:translate-x-0">
+    <aside id="admin-sidebar" class="sticky top-0 z-50 flex flex-col max-h-screen transition duration-200 ease-in-out transform -translate-x-full bg-white border-r w-80 holy-grail-sidebar md:translate-x-0">
         <?php if (isset($podcast)): ?>
             <?= $this->include('admin/podcast/_sidebar') ?>
         <?php else: ?>
@@ -22,16 +22,19 @@
         <?php endif; ?>
     </aside>
     <main class="overflow-hidden holy-grail-main">
-        <header class="text-white bg-gradient-to-tr from-gray-900 to-gray-800">
+        <header class="text-white bg-pine-900">
             <div class="container flex flex-wrap items-end justify-between px-2 py-10 mx-auto md:px-12 gap-y-6 gap-x-6">
                 <div class="flex flex-col">
                     <?= render_breadcrumb('text-gray-300') ?>
-                    <h1 class="text-3xl"><?= $this->renderSection(
-                        'pageTitle'
-                    ) ?></h1>
+                    <div class="flex flex-wrap items-center">
+                        <h1 class="text-3xl font-bold font-display"><?= $this->renderSection(
+                            'pageTitle',
+                        ) ?></h1>
+                        <?= $this->renderSection('headerLeft') ?>
+                    </div>
                 </div>
                 <div class="flex flex-wrap"><?= $this->renderSection(
-                    'headerRight'
+                    'headerRight',
                 ) ?></div>
             </div>
         </header>
@@ -50,6 +53,6 @@
     <button
         type="button"
         id="sidebar-toggler"
-        class="fixed bottom-0 left-0 z-50 p-3 mb-3 ml-3 text-xl transition duration-300 ease-in-out bg-white border-2 rounded-full shadow-lg focus:outline-none md:hidden hover:bg-gray-100 focus:shadow-outline"
+        class="fixed bottom-0 left-0 z-50 p-3 mb-3 ml-3 text-xl transition duration-300 ease-in-out bg-white border-2 rounded-full shadow-lg focus:outline-none md:hidden hover:bg-gray-100 focus:ring"
         style="transform: translateX(0px);"><?= icon('menu') ?></button>
 </body>

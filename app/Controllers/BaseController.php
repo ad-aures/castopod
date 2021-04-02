@@ -1,5 +1,12 @@
 <?php
 
+namespace App\Controllers;
+
+use CodeIgniter\Controller;
+use CodeIgniter\HTTP\RequestInterface;
+use CodeIgniter\HTTP\ResponseInterface;
+use Psr\Log\LoggerInterface;
+
 /**
  * Class BaseController
  *
@@ -9,14 +16,7 @@
  *     class Home extends BaseController
  *
  * For security be sure to declare any new methods as protected or private.
- *
- * @package CodeIgniter
  */
-
-namespace App\Controllers;
-
-use CodeIgniter\Controller;
-
 class BaseController extends Controller
 {
     /**
@@ -26,15 +26,19 @@ class BaseController extends Controller
      *
      * @var array
      */
-    protected $helpers = ['analytics', 'svg', 'components', 'misc'];
+    protected $helpers = ['auth', 'analytics', 'svg', 'components', 'misc'];
 
     /**
      * Constructor.
+     *
+     * @param RequestInterface  $request
+     * @param ResponseInterface $response
+     * @param LoggerInterface   $logger
      */
     public function initController(
-        \CodeIgniter\HTTP\RequestInterface $request,
-        \CodeIgniter\HTTP\ResponseInterface $response,
-        \Psr\Log\LoggerInterface $logger
+        RequestInterface $request,
+        ResponseInterface $response,
+        LoggerInterface $logger
     ) {
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
@@ -42,8 +46,7 @@ class BaseController extends Controller
         //--------------------------------------------------------------------
         // Preload any models, libraries, etc, here.
         //--------------------------------------------------------------------
-        // E.g.:
-        // $this->session = \Config\Services::session();
+        // E.g.: $this->session = \Config\Services::session();
 
         set_user_session_deny_list_ip();
         set_user_session_browser();

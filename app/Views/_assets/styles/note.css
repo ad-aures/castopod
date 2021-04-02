@@ -1,0 +1,22 @@
+@layer components {
+  .note-content {
+    & a {
+      @apply text-sm font-semibold text-pine-600 hover:underline;
+    }
+  }
+
+  .note-replies > * {
+    @apply relative;
+
+    & img {
+      @apply z-20;
+    }
+
+    &:not(:last-child)::before {
+      @apply absolute z-10 h-full bg-gray-300 top-8;
+      content: "";
+      left: 3rem;
+      width: 2px;
+    }
+  }
+}

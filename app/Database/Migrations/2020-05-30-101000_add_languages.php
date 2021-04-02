@@ -28,7 +28,7 @@ class AddLanguages extends Migration
                 'constraint' => 128,
             ],
         ]);
-        $this->forge->addKey('code', true);
+        $this->forge->addPrimaryKey('code');
         $this->forge->createTable('languages');
     }
 

@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
     <link rel="stylesheet" href="/assets/index.css"/>
-    <script src="/assets/install.js" type="module" defer></script>
+    <script src="/assets/install.js" type="module"></script>
 </head>
 
 <body class="flex flex-col min-h-screen mx-auto">

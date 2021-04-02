@@ -7,6 +7,7 @@
  */
 
 return [
+    'back_to_home' => 'Retour à l’accueil',
     'page' => 'Page',
     'all_pages' => 'Toutes les pages',
     'create' => 'Créer une page',

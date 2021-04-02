@@ -4,7 +4,7 @@ Castopod uses the following components:
 
 PHP Dependencies:
 
-- [Code Igniter 4](https://codeigniter.com)
+- [CodeIgniter 4](https://codeigniter.com)
   ([MIT License](https://codeigniter.com/user_guide/license.html))
 - [WhichBrowser/Parser-PHP](https://github.com/WhichBrowser/Parser-PHP)
   ([MIT License](https://github.com/WhichBrowser/Parser-PHP/blob/master/LICENSE))
@@ -24,6 +24,14 @@ PHP Dependencies:
   ([MIT License](https://github.com/podlibre/user-agents-php/blob/main/LICENSE))
 - [podlibre/ipcat](https://github.com/podlibre/ipcat)
   ([GNU General Public License v3.0](https://github.com/podlibre/ipcat/blob/master/LICENSE))
+- [podlibre/podcast-namespace](https://code.podlibre.org/podlibre/podcastnamespace)
+  ([MIT License](https://code.podlibre.org/podlibre/podcastnamespace/-/blob/master/LICENSE))
+- [phpseclib](https://phpseclib.com/)
+  ([MIT License](https://github.com/phpseclib/phpseclib/blob/master/LICENSE))
+- [codeigniter4-uuid](https://github.com/michalsn/codeigniter4-uuid)
+  ([MIT License](https://github.com/michalsn/codeigniter4-uuid/blob/develop/LICENSE))
+- [essence](https://github.com/essence/essence)
+  ([The FreeBSD License](https://github.com/essence/essence/blob/master/LICENSE.txt))
 
 Javascript dependencies:
 
@@ -39,9 +47,15 @@ Javascript dependencies:
   ([MIT License](https://github.com/jshjohnson/Choices/blob/master/LICENSE))
 - [flatpickr](https://flatpickr.js.org/)
   ([MIT License](https://github.com/flatpickr/flatpickr/blob/master/LICENSE.md))
+- [popperjs](https://popper.js.org/)
+  ([MIT License](https://github.com/popperjs/popper-core/blob/master/LICENSE.md))
 
 Other:
 
+- [Kumbh Sans](https://fonts.google.com/specimen/Kumbh+Sans)
+  ([Open Font License](https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL))
+- [Montserrat](https://fonts.google.com/specimen/Montserrat)
+  ([Open Font License](https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL))
 - [RemixIcon](https://remixicon.com/)
   ([Apache License 2.0](https://github.com/Remix-Design/RemixIcon/blob/master/License))
 - [OPAWG/User agent list](https://github.com/opawg/user-agents)

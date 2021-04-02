@@ -6,11 +6,14 @@
 
 <?= $this->section('pageTitle') ?>
 <?= $podcast->title ?>
+<?= $this->endSection() ?>
+
+<?= $this->section('headerLeft') ?>
 <?= location_link(
     $podcast->location_name,
     $podcast->location_geo,
     $podcast->location_osmid,
-    'ml-4'
+    'ml-4 text-sm',
 ) ?>
 <?= $this->endSection() ?>
 
@@ -18,11 +21,11 @@
 <?= button(
     lang('Podcast.edit'),
     route_to('podcast-edit', $podcast->id),
-    ['variant' => 'secondary', 'iconLeft' => 'edit'],
-    ['class' => 'mr-2']
+    ['variant' => 'primary', 'iconLeft' => 'edit'],
+    ['class' => 'mr-2'],
 ) ?>
 <?= button(lang('Episode.create'), route_to('episode-create', $podcast->id), [
-    'variant' => 'primary',
+    'variant' => 'accent',
     'iconLeft' => 'add',
 ]) ?>
 <?= $this->endSection() ?>

@@ -26,7 +26,7 @@ class Podcast extends BaseController
         if (count($params) > 0) {
             if (
                 !($this->podcast = (new PodcastModel())->getPodcastById(
-                    $params[0]
+                    $params[0],
                 ))
             ) {
                 throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
@@ -124,7 +124,7 @@ class Podcast extends BaseController
             'languageOptions' => $languageOptions,
             'categoryOptions' => $categoryOptions,
             'browserLang' => get_browser_language(
-                $this->request->getServer('HTTP_ACCEPT_LANGUAGE')
+                $this->request->getServer('HTTP_ACCEPT_LANGUAGE'),
             ),
         ];
 
@@ -170,8 +170,8 @@ class Podcast extends BaseController
             'is_blocked' => $this->request->getPost('block') === 'yes',
             'is_completed' => $this->request->getPost('complete') === 'yes',
             'is_locked' => $this->request->getPost('lock') === 'yes',
-            'created_by' => user(),
-            'updated_by' => user(),
+            'created_by' => user()->id,
+            'updated_by' => user()->id,
         ]);
 
         $podcastModel = new PodcastModel();
@@ -193,14 +193,18 @@ class Podcast extends BaseController
         $podcastModel->addPodcastContributor(
             user()->id,
             $newPodcastId,
-            $podcastAdminGroup->id
+            $podcastAdminGroup->id,
         );
 
         // set Podcast categories
         (new CategoryModel())->setPodcastCategories(
             $newPodcastId,
-            $this->request->getPost('other_categories')
+            $this->request->getPost('other_categories'),
         );
+
+        // set interact as the newly created podcast actor
+        $createdPodcast = (new PodcastModel())->getPodcastById($newPodcastId);
+        set_interact_as_actor($createdPodcast->actor_id);
 
         $db->transComplete();
 
@@ -239,9 +243,8 @@ class Podcast extends BaseController
         }
 
         $this->podcast->title = $this->request->getPost('title');
-        $this->podcast->name = $this->request->getPost('name');
         $this->podcast->description_markdown = $this->request->getPost(
-            'description'
+            'description',
         );
 
         $image = $this->request->getFile('image');
@@ -261,10 +264,10 @@ class Podcast extends BaseController
         $this->podcast->copyright = $this->request->getPost('copyright');
         $this->podcast->location = $this->request->getPost('location_name');
         $this->podcast->payment_pointer = $this->request->getPost(
-            'payment_pointer'
+            'payment_pointer',
         );
         $this->podcast->custom_rss_string = $this->request->getPost(
-            'custom_rss'
+            'custom_rss',
         );
         $this->podcast->partner_id = $this->request->getPost('partner_id');
         $this->podcast->partner_link_url = $this->request->getPost(
@@ -277,7 +280,7 @@ class Podcast extends BaseController
         $this->podcast->is_completed =
             $this->request->getPost('complete') === 'yes';
         $this->podcast->is_locked = $this->request->getPost('lock') === 'yes';
-        $this->updated_by = user();
+        $this->updated_by = user()->id;
 
         $db = \Config\Database::connect();
         $db->transStart();
@@ -294,7 +297,7 @@ class Podcast extends BaseController
         // set Podcast categories
         (new CategoryModel())->setPodcastCategories(
             $this->podcast->id,
-            $this->request->getPost('other_categories')
+            $this->request->getPost('other_categories'),
         );
 
         $db->transComplete();

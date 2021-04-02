@@ -7,30 +7,6 @@
  */
 
 /**
- * For compatibility with PHP-FPM v7.2 and below:
- */
-if (!function_exists('getallheaders')) {
-    function getallheaders()
-    {
-        $headers = [];
-        foreach ($_SERVER as $name => $value) {
-            if (substr($name, 0, 5) == 'HTTP_') {
-                $headers[
-                    str_replace(
-                        ' ',
-                        '-',
-                        ucwords(
-                            strtolower(str_replace('_', ' ', substr($name, 5)))
-                        )
-                    )
-                ] = $value;
-            }
-        }
-        return $headers;
-    }
-}
-
-/**
  * Encode Base64 for URLs
  */
 function base64_url_encode($input)
@@ -57,7 +33,7 @@ function set_user_session_deny_list_ip()
     if (!$session->has('denyListIp')) {
         $session->set(
             'denyListIp',
-            \Podlibre\Ipcat\IpDb::find($_SERVER['REMOTE_ADDR']) != null
+            \Podlibre\Ipcat\IpDb::find($_SERVER['REMOTE_ADDR']) != null,
         );
     }
 }
@@ -81,7 +57,7 @@ function set_user_session_location()
     if (!$session->has('location')) {
         try {
             $cityReader = new \GeoIp2\Database\Reader(
-                WRITEPATH . 'uploads/GeoLite2-City/GeoLite2-City.mmdb'
+                WRITEPATH . 'uploads/GeoLite2-City/GeoLite2-City.mmdb',
             );
             $city = $cityReader->city($_SERVER['REMOTE_ADDR']);
 
@@ -132,7 +108,7 @@ function set_user_session_player()
             try {
                 $db = \Config\Database::connect();
                 $procedureNameAnalyticsUnknownUseragents = $db->prefixTable(
-                    'analytics_unknown_useragents'
+                    'analytics_unknown_useragents',
                 );
                 $db->query("CALL $procedureNameAnalyticsUnknownUseragents(?)", [
                     $userAgent,
@@ -283,7 +259,7 @@ function podcast_hit(
                     '_' .
                     $_SERVER['HTTP_USER_AGENT'] .
                     '_' .
-                    $episodeId
+                    $episodeId,
             );
         // Was this episode downloaded in the past 24h:
         $downloadedBytes = cache($episodeHashId);
@@ -335,7 +311,7 @@ function podcast_hit(
                             '_' .
                             $_SERVER['HTTP_USER_AGENT'] .
                             '_' .
-                            $podcastId
+                            $podcastId,
                     );
                 $newListener = 1;
                 // Has this listener already downloaded an episode today:
@@ -370,7 +346,7 @@ function podcast_hit(
                         $duration,
                         $age,
                         $newListener,
-                    ]
+                    ],
                 );
             }
         }

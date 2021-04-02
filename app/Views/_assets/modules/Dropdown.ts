@@ -1,62 +1,81 @@
-import { createPopper, Placement } from "@popperjs/core";
+import { createPopper, Instance, Placement } from "@popperjs/core";
 
 const Dropdown = (): void => {
-  const dropdownContainers: NodeListOf<HTMLElement> = document.querySelectorAll(
-    "[data-toggle='dropdown']"
+  const dropdownButtons: NodeListOf<HTMLButtonElement> = document.querySelectorAll(
+    "[data-dropdown='button']"
   );
 
-  for (let i = 0; i < dropdownContainers.length; i++) {
-    const dropdownContainer = dropdownContainers[i];
+  for (let i = 0; i < dropdownButtons.length; i++) {
+    const button = dropdownButtons[i];
 
-    const button: HTMLElement | null = dropdownContainer.querySelector(
-      "[data-popper='button']"
-    );
-    const menu: HTMLElement | null = dropdownContainer.querySelector(
-      "[data-popper='menu']"
-    );
+    if (button.dataset.dropdownTarget) {
+      const menu: HTMLElement | null = document.getElementById(
+        button.dataset?.dropdownTarget
+      );
 
-    if (button && menu) {
-      const popper = createPopper(button, menu, {
-        placement: menu.dataset.popperPlacement as Placement,
-        modifiers: [
-          {
-            name: "offset",
-            options: {
-              offset: [menu.dataset.popperOffsetX, menu.dataset.popperOffsetY],
-            },
-          },
-        ],
-      });
+      if (menu) {
+        // place the menu at then end of the body to prevent any overflow cuts
+        document.body.appendChild(menu);
 
-      const dropdownToggle = () => {
-        const isExpanded = !menu.classList.contains("hidden");
+        let popperInstance: Instance | null = null;
 
-        if (isExpanded) {
-          menu.classList.add("hidden");
-          menu.classList.remove("flex");
-        } else {
-          menu.classList.add("flex");
-          menu.classList.remove("hidden");
-        }
+        const create = () => {
+          const offsetX = menu.dataset.dropdownOffsetX
+            ? parseInt(menu.dataset.dropdownOffsetX)
+            : 0;
+          const offsetY = menu.dataset.dropdownOffsetY
+            ? parseInt(menu.dataset.dropdownOffsetY)
+            : 0;
+          popperInstance = createPopper(button, menu, {
+            placement: menu.dataset.dropdownPlacement as Placement,
+            // strategy: "fixed",
+            modifiers: [
+              {
+                name: "offset",
+                options: {
+                  offset: [offsetX, offsetY],
+                },
+              },
+            ],
+          });
+        };
 
-        button.setAttribute("aria-expanded", isExpanded.toString());
-        popper.update();
-      };
+        const destroy = () => {
+          if (popperInstance) {
+            popperInstance.destroy();
+            popperInstance = null;
+          }
+        };
 
-      // Toggle dropdown menu on button click event
-      button.addEventListener("click", dropdownToggle);
+        const dropdownToggle = () => {
+          const isExpanded = menu.hasAttribute("data-show");
 
-      // Toggle off when clicking outside of dropdown
-      document.addEventListener("click", function (event) {
-        const isExpanded = !menu.classList.contains("hidden");
-        const isClickOutside = !dropdownContainer.contains(
-          event.target as Node
-        );
+          if (isExpanded) {
+            menu.removeAttribute("data-show");
+            button.setAttribute("aria-expanded", "false");
+            destroy();
+          } else {
+            menu.setAttribute("data-show", "");
+            button.setAttribute("aria-expanded", "true");
+            create();
+          }
+        };
 
-        if (isExpanded && isClickOutside) {
-          dropdownToggle();
-        }
-      });
+        // Toggle dropdown menu on button click event
+        button.addEventListener("click", dropdownToggle);
+
+        // Toggle off when clicking outside of dropdown
+        document.addEventListener("click", function (event) {
+          const isExpanded = menu.hasAttribute("data-show");
+          const isClickOutside =
+            !menu.contains(event.target as Node) &&
+            !button.contains(event.target as Node);
+
+          if (isExpanded && isClickOutside) {
+            dropdownToggle();
+          }
+        });
+      }
     }
   }
 };

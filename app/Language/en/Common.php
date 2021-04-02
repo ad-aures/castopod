@@ -9,14 +9,18 @@
 return [
     'yes' => 'Yes',
     'no' => 'No',
+    'cancel' => 'Cancel',
     'optional' => 'Optional',
+    'more' => 'More',
     'no_data' => 'No data found!',
+    'close' => 'Close',
     'home' => 'Home',
     'explicit' => 'Explicit',
     'mediumDate' => '{0,date,medium}',
     'powered_by' => 'Powered by {castopod}.',
     'actions' => 'Actions',
     'pageInfo' => 'Page {currentPage} out of {pageCount}',
+    'go_back' => 'Go back',
     'forms' => [
         'multiSelect' => [
             'selectText' => 'Press to select',

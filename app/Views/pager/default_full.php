@@ -34,7 +34,7 @@ $pager->setSurroundCount(2); ?>
         <?php foreach ($pager->links() as $link): ?>
             <li>
                 <?php if ($link['active']): ?>
-                    <span class="block px-4 py-2 font-semibold text-white bg-green-500 rounded-full">
+                    <span class="block px-4 py-2 font-semibold text-white rounded-full bg-pine-600">
                         <?= $link['title'] ?>
                     </span>
                 <?php else: ?>

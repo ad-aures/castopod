@@ -34,24 +34,24 @@ class AnalyticsPodcastByCountryModel extends Model
     {
         if (
             !($found = cache(
-                "{$podcastId}_analytics_podcast_by_country_weekly"
+                "{$podcastId}_analytics_podcast_by_country_weekly",
             ))
         ) {
             $oneWeekAgo = date('Y-m-d', strtotime('-1 week'));
-            $found = $this->select('`country_code` as `labels`')
-                ->selectSum('`hits`', '`values`')
+            $found = $this->select('country_code as labels')
+                ->selectSum('hits', 'values')
                 ->where([
-                    '`podcast_id`' => $podcastId,
-                    '`date` >' => $oneWeekAgo,
+                    'podcast_id' => $podcastId,
+                    'date >' => $oneWeekAgo,
                 ])
-                ->groupBy('`labels`')
-                ->orderBy('`values`', 'DESC')
+                ->groupBy('labels')
+                ->orderBy('values', 'DESC')
                 ->findAll();
 
             cache()->save(
                 "{$podcastId}_analytics_podcast_by_country_weekly",
                 $found,
-                600
+                600,
             );
         }
         return $found;
@@ -68,24 +68,24 @@ class AnalyticsPodcastByCountryModel extends Model
     {
         if (
             !($found = cache(
-                "{$podcastId}_analytics_podcast_by_country_yearly"
+                "{$podcastId}_analytics_podcast_by_country_yearly",
             ))
         ) {
             $oneYearAgo = date('Y-m-d', strtotime('-1 year'));
-            $found = $this->select('`country_code` as `labels`')
-                ->selectSum('`hits`', '`values`')
+            $found = $this->select('country_code as labels')
+                ->selectSum('hits', 'values')
                 ->where([
-                    '`podcast_id`' => $podcastId,
-                    '`date` >' => $oneYearAgo,
+                    'podcast_id' => $podcastId,
+                    'date >' => $oneYearAgo,
                 ])
-                ->groupBy('`labels`')
-                ->orderBy('`values`', 'DESC')
+                ->groupBy('labels')
+                ->orderBy('values', 'DESC')
                 ->findAll();
 
             cache()->save(
                 "{$podcastId}_analytics_podcast_by_country_yearly",
                 $found,
-                600
+                600,
             );
         }
         return $found;

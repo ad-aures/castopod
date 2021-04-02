@@ -73,6 +73,13 @@ class AddEpisodes extends Migration
                 'constraint' => 255,
                 'null' => true,
             ],
+            // constraint is 13 because the longest safe mimetype for images is image/svg+xml,
+            // see https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types#image_types
+            'image_mimetype' => [
+                'type' => 'VARCHAR',
+                'constraint' => 13,
+                'null' => true,
+            ],
             'transcript_uri' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
@@ -128,6 +135,21 @@ class AddEpisodes extends Migration
                 'type' => 'JSON',
                 'null' => true,
             ],
+            'favourites_total' => [
+                'type' => 'INT',
+                'unsigned' => true,
+                'default' => 0,
+            ],
+            'reblogs_total' => [
+                'type' => 'INT',
+                'unsigned' => true,
+                'default' => 0,
+            ],
+            'notes_total' => [
+                'type' => 'INT',
+                'unsigned' => true,
+                'default' => 0,
+            ],
             'created_by' => [
                 'type' => 'INT',
                 'unsigned' => true,
@@ -151,9 +173,15 @@ class AddEpisodes extends Migration
                 'null' => true,
             ],
         ]);
-        $this->forge->addKey('id', true);
+        $this->forge->addPrimaryKey('id');
         $this->forge->addUniqueKey(['podcast_id', 'slug']);
-        $this->forge->addForeignKey('podcast_id', 'podcasts', 'id');
+        $this->forge->addForeignKey(
+            'podcast_id',
+            'podcasts',
+            'id',
+            false,
+            'CASCADE',
+        );
         $this->forge->addForeignKey('created_by', 'users', 'id');
         $this->forge->addForeignKey('updated_by', 'users', 'id');
         $this->forge->createTable('episodes');

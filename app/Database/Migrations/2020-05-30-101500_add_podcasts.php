@@ -23,14 +23,17 @@ class AddPodcasts extends Migration
                 'unsigned' => true,
                 'auto_increment' => true,
             ],
-            'title' => [
-                'type' => 'VARCHAR',
-                'constraint' => 128,
+            'actor_id' => [
+                'type' => 'INT',
+                'unsigned' => true,
             ],
             'name' => [
                 'type' => 'VARCHAR',
                 'constraint' => 32,
-                'unique' => true,
+            ],
+            'title' => [
+                'type' => 'VARCHAR',
+                'constraint' => 128,
             ],
             'description_markdown' => [
                 'type' => 'TEXT',
@@ -41,6 +44,12 @@ class AddPodcasts extends Migration
             'image_uri' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
+            ],
+            // constraint is 13 because the longest safe mimetype for images is image/svg+xml,
+            // see https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types#image_types
+            'image_mimetype' => [
+                'type' => 'VARCHAR',
+                'constraint' => 13,
             ],
             'language_code' => [
                 'type' => 'VARCHAR',
@@ -140,6 +149,7 @@ class AddPodcasts extends Migration
             ],
             'custom_rss' => [
                 'type' => 'JSON',
+                'null' => true,
             ],
             'partner_id' => [
                 'type' => 'VARCHAR',
@@ -176,7 +186,15 @@ class AddPodcasts extends Migration
             ],
         ]);
 
-        $this->forge->addKey('id', true);
+        $this->forge->addPrimaryKey('id');
+        $this->forge->addUniqueKey('name');
+        $this->forge->addForeignKey(
+            'actor_id',
+            'activitypub_actors',
+            'id',
+            false,
+            'CASCADE',
+        );
         $this->forge->addForeignKey('category_id', 'categories', 'id');
         $this->forge->addForeignKey('language_code', 'languages', 'code');
         $this->forge->addForeignKey('created_by', 'users', 'id');

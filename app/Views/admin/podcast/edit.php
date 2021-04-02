@@ -18,7 +18,7 @@
 
 <?= form_section(
     lang('Podcast.form.identity_section_title'),
-    lang('Podcast.form.identity_section_subtitle')
+    lang('Podcast.form.identity_section_subtitle'),
 ) ?>
 
 <?= form_label(lang('Podcast.form.image'), 'image') ?>
@@ -35,31 +35,18 @@
     'accept' => '.jpg,.jpeg,.png',
 ]) ?>
 <small class="mb-4 text-gray-600"><?= lang(
-    'Common.forms.image_size_hint'
+    'Common.forms.image_size_hint',
 ) ?></small>
 
 <?= form_label(lang('Podcast.form.title'), 'title') ?>
 <?= form_input([
     'id' => 'title',
     'name' => 'title',
-    'class' => 'form-input mb-4',
+    'class' => 'form-input mb-1',
     'value' => old('title', $podcast->title),
     'required' => 'required',
 ]) ?>
-
-<?= form_label(
-    lang('Podcast.form.name'),
-    'name',
-    [],
-    lang('Podcast.form.name_hint')
-) ?>
-<?= form_input([
-    'id' => 'name',
-    'name' => 'name',
-    'class' => 'form-input mb-4',
-    'value' => old('name', $podcast->name),
-    'required' => 'required',
-]) ?>
+<span class="mb-4 text-sm"><?= $podcast->link ?></span>
 
 <?= form_fieldset('', ['class' => 'mb-4']) ?>
     <legend><?= lang('Podcast.form.type.label') .
@@ -68,13 +55,13 @@
     <?= form_radio(
         ['id' => 'episodic', 'name' => 'type', 'class' => 'form-radio-btn'],
         'episodic',
-        old('type') ? old('type') == 'episodic' : $podcast->type == 'episodic'
+        old('type') ? old('type') == 'episodic' : $podcast->type == 'episodic',
     ) ?>
     <label for="episodic"><?= lang('Podcast.form.type.episodic') ?></label>
     <?= form_radio(
         ['id' => 'serial', 'name' => 'type', 'class' => 'form-radio-btn'],
         'serial',
-        old('type') ? old('type') == 'serial' : $podcast->type == 'serial'
+        old('type') ? old('type') == 'serial' : $podcast->type == 'serial',
     ) ?>
     <label for="serial"><?= lang('Podcast.form.type.serial') ?></label>
 <?= form_fieldset_close() ?>
@@ -89,7 +76,7 @@
             'required' => 'required',
         ],
         old('description', $podcast->description_markdown, false),
-        'data-editor="markdown"'
+        'data-editor="markdown"',
     ) ?>
 </div>
 
@@ -98,7 +85,7 @@
 
 <?= form_section(
     lang('Podcast.form.classification_section_title'),
-    lang('Podcast.form.classification_section_subtitle')
+    lang('Podcast.form.classification_section_subtitle'),
 ) ?>
 
 <?= form_label(lang('Podcast.form.language'), 'language') ?>
@@ -110,7 +97,7 @@
         'id' => 'language',
         'class' => 'form-select mb-4',
         'required' => 'required',
-    ]
+    ],
 ) ?>
 
 <?= form_label(lang('Podcast.form.category'), 'category') ?>
@@ -122,7 +109,7 @@
         'id' => 'category',
         'class' => 'form-select mb-4',
         'required' => 'required',
-    ]
+    ],
 ) ?>
 
 <?= form_label(
@@ -130,7 +117,7 @@
     'other_categories',
     [],
     '',
-    true
+    true,
 ) ?>
 <?= form_multiselect(
     'other_categories[]',
@@ -140,7 +127,7 @@
         'id' => 'other_categories',
         'class' => 'mb-4',
         'data-max-item-count' => '2',
-    ]
+    ],
 ) ?>
 
 <?= form_fieldset('', ['class' => 'mb-4']) ?>
@@ -156,10 +143,10 @@
         'undefined',
         old('parental_advisory')
             ? old('parental_advisory') === 'undefined'
-            : $podcast->parental_advisory === null
+            : $podcast->parental_advisory === null,
     ) ?>
     <label for="undefined"><?= lang(
-        'Podcast.form.parental_advisory.undefined'
+        'Podcast.form.parental_advisory.undefined',
     ) ?></label>
     <?= form_radio(
         [
@@ -170,10 +157,10 @@
         'clean',
         old('parental_advisory')
             ? old('parental_advisory') === 'clean'
-            : $podcast->parental_advisory === 'clean'
+            : $podcast->parental_advisory === 'clean',
     ) ?>
     <label for="clean"><?= lang(
-        'Podcast.form.parental_advisory.clean'
+        'Podcast.form.parental_advisory.clean',
     ) ?></label>
     <?= form_radio(
         [
@@ -184,10 +171,10 @@
         'explicit',
         old('parental_advisory')
             ? old('parental_advisory') === 'explicit'
-            : $podcast->parental_advisory === 'explicit'
+            : $podcast->parental_advisory === 'explicit',
     ) ?>
     <label for="explicit"><?= lang(
-        'Podcast.form.parental_advisory.explicit'
+        'Podcast.form.parental_advisory.explicit',
     ) ?></label>
 <?= form_fieldset_close() ?>
 
@@ -195,14 +182,14 @@
 
 <?= form_section(
     lang('Podcast.form.author_section_title'),
-    lang('Podcast.form.author_section_subtitle')
+    lang('Podcast.form.author_section_subtitle'),
 ) ?>
 
 <?= form_label(
     lang('Podcast.form.owner_name'),
     'owner_name',
     [],
-    lang('Podcast.form.owner_name_hint')
+    lang('Podcast.form.owner_name_hint'),
 ) ?>
 <?= form_input([
     'id' => 'owner_name',
@@ -216,7 +203,7 @@
     lang('Podcast.form.owner_email'),
     'owner_email',
     [],
-    lang('Podcast.form.owner_email_hint')
+    lang('Podcast.form.owner_email_hint'),
 ) ?>
 <?= form_input([
     'id' => 'owner_email',
@@ -232,7 +219,7 @@
     'publisher',
     [],
     lang('Podcast.form.publisher_hint'),
-    true
+    true,
 ) ?>
 <?= form_input([
     'id' => 'publisher',
@@ -253,7 +240,7 @@
 
 <?= form_section(
     lang('Podcast.form.location_section_title'),
-    lang('Podcast.form.location_section_subtitle')
+    lang('Podcast.form.location_section_subtitle'),
 ) ?>
 
 <?= form_label(
@@ -261,7 +248,7 @@
     'location_name',
     [],
     lang('Podcast.form.location_name_hint'),
-    true
+    true,
 ) ?>
 <?= form_input([
     'id' => 'location_name',
@@ -273,7 +260,7 @@
 
 <?= form_section(
     lang('Podcast.form.monetization_section_title'),
-    lang('Podcast.form.monetization_section_subtitle')
+    lang('Podcast.form.monetization_section_subtitle'),
 ) ?>
 
 <?= form_label(
@@ -281,7 +268,7 @@
     'payment_pointer',
     [],
     lang('Podcast.form.payment_pointer_hint'),
-    true
+    true,
 ) ?>
 <?= form_input([
     'id' => 'payment_pointer',
@@ -298,7 +285,7 @@
             'partner_id',
             [],
             lang('Podcast.form.partner_id_hint'),
-            true
+            true,
         ) ?>
         <?= form_input([
             'id' => 'partner_id',
@@ -313,7 +300,7 @@
             'partner_link_url',
             [],
             lang('Podcast.form.partner_link_url_hint'),
-            true
+            true,
         ) ?>
         <?= form_input([
             'id' => 'partner_link_url',
@@ -328,7 +315,7 @@
             'partner_image_url',
             [],
             lang('Podcast.form.partner_image_url_hint'),
-            true
+            true,
         ) ?>
         <?= form_input([
             'id' => 'partner_image_url',
@@ -342,14 +329,14 @@
 
 <?= form_section(
     lang('Podcast.form.advanced_section_title'),
-    lang('Podcast.form.advanced_section_subtitle')
+    lang('Podcast.form.advanced_section_subtitle'),
 ) ?>
 <?= form_label(
     lang('Podcast.form.custom_rss'),
     'custom_rss',
     [],
     lang('Podcast.form.custom_rss_hint'),
-    true
+    true,
 ) ?>
 <?= form_textarea([
     'id' => 'custom_rss',
@@ -361,7 +348,7 @@
 
 <?= form_section(
     lang('Podcast.form.status_section_title'),
-    lang('Podcast.form.status_section_subtitle')
+    lang('Podcast.form.status_section_subtitle'),
 ) ?>
 
 <?= form_switch(
@@ -369,7 +356,7 @@
     ['id' => 'block', 'name' => 'block'],
     'yes',
     old('block', $podcast->is_blocked),
-    'mb-2'
+    'mb-2',
 ) ?>
 
 <?= form_switch(
@@ -377,7 +364,7 @@
     ['id' => 'complete', 'name' => 'complete'],
     'yes',
     old('complete', $podcast->is_completed),
-    'mb-2'
+    'mb-2',
 ) ?>
 
 <?= form_switch(
@@ -385,7 +372,7 @@
         hint_tooltip(lang('Podcast.form.lock_hint'), 'ml-1'),
     ['id' => 'lock', 'name' => 'lock'],
     'yes',
-    old('lock', $podcast->is_locked)
+    old('lock', $podcast->is_locked),
 ) ?>
 
 <?= form_section_close() ?>
@@ -394,7 +381,7 @@
     lang('Podcast.form.submit_edit'),
     null,
     ['variant' => 'primary'],
-    ['type' => 'submit', 'class' => 'self-end']
+    ['type' => 'submit', 'class' => 'self-end'],
 ) ?>
 
 <?= form_close() ?>

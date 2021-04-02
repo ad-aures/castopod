@@ -45,6 +45,12 @@ class AddPersons extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
+            // constraint is 13 because the longest safe mimetype for images is image/svg+xml,
+            // see https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types#image_types
+            'image_mimetype' => [
+                'type' => 'VARCHAR',
+                'constraint' => 13,
+            ],
             'created_by' => [
                 'type' => 'INT',
                 'unsigned' => true,

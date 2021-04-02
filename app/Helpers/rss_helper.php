@@ -165,7 +165,7 @@ function get_rss_feed($podcast, $serviceSlug = '')
         }
     }
 
-    foreach ($podcast->podcast_persons as $podcastPerson) {
+    foreach ($podcast->persons as $podcastPerson) {
         $podcastPersonElement = $channel->addChild(
             'person',
             htmlspecialchars($podcastPerson->person->full_name),
@@ -358,7 +358,7 @@ function get_rss_feed($podcast, $serviceSlug = '')
             $soundbiteElement->addAttribute('duration', $soundbite->duration);
         }
 
-        foreach ($episode->episode_persons as $episodePerson) {
+        foreach ($episode->persons as $episodePerson) {
             $episodePersonElement = $item->addChild(
                 'person',
                 htmlspecialchars($episodePerson->person->full_name),

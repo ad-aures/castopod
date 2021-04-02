@@ -1,5 +1,0 @@
-plugins:
-  - removeXMLNS: true
-  - removeDimensions: true
-  - sortAttrs: true
-  - prefixIds: true

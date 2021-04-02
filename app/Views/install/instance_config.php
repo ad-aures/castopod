@@ -7,8 +7,8 @@
     '/instance-config' ?>" class="flex flex-col w-full max-w-sm" method="post" accept-charset="utf-8">
 <?= csrf_field() ?>
 
-<h1 class="mb-4 text-xl"><span class="inline-flex items-center justify-center w-12 h-12 mr-2 text-sm font-semibold tracking-wider text-green-700 border-4 border-green-500 rounded-full">1/4</span><?= lang(
-    'Install.form.instance_config'
+<h1 class="mb-4 text-xl font-bold font-display"><span class="inline-flex items-center justify-center w-12 h-12 mr-2 text-sm font-semibold tracking-wider border-4 rounded-full text-pine-700 border-pine-700 font-body">1/4</span><?= lang(
+    'Install.form.instance_config',
 ) ?></h1>
 <?= form_label(lang('Install.form.hostname'), 'hostname') ?>
 <?= form_input([
@@ -17,7 +17,7 @@
     'class' => 'form-input mb-4',
     'value' => old(
         'hostname',
-        empty(host_url()) ? config('App')->baseURL : host_url()
+        empty(host_url()) ? config('App')->baseURL : host_url(),
     ),
     'required' => 'required',
 ]) ?>
@@ -28,7 +28,7 @@
     'media_base_url',
     [],
     lang('Install.form.media_base_url_hint'),
-    true
+    true,
 ) ?>
 <?= form_input([
     'id' => 'media_base_url',
@@ -41,7 +41,7 @@
     lang('Install.form.admin_gateway'),
     'admin_gateway',
     [],
-    lang('Install.form.admin_gateway_hint')
+    lang('Install.form.admin_gateway_hint'),
 ) ?>
 <?= form_input([
     'id' => 'admin_gateway',
@@ -55,7 +55,7 @@
     lang('Install.form.auth_gateway'),
     'auth_gateway',
     [],
-    lang('Install.form.auth_gateway_hint')
+    lang('Install.form.auth_gateway_hint'),
 ) ?>
 <?= form_input([
     'id' => 'auth_gateway',
@@ -66,15 +66,10 @@
 ]) ?>
 
 <?= button(
-    lang('Install.form.next') .
-        icon(
-            'arrow-right',
-
-            'ml-2'
-        ),
+    lang('Install.form.next') . icon('arrow-right', 'ml-2'),
     null,
     ['variant' => 'primary'],
-    ['type' => 'submit', 'class' => 'self-end']
+    ['type' => 'submit', 'class' => 'self-end'],
 ) ?>
 
 <?= form_close() ?>

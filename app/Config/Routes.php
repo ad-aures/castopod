@@ -29,10 +29,19 @@ $routes->setAutoRoute(false);
  * --------------------------------------------------------------------
  */
 
-$routes->addPlaceholder('podcastName', '[a-zA-Z0-9\_]{1,191}');
+$routes->addPlaceholder('podcastName', '[a-zA-Z0-9\_]{1,32}');
 $routes->addPlaceholder('slug', '[a-zA-Z0-9\-]{1,191}');
 $routes->addPlaceholder('base64', '[A-Za-z0-9\.\_]+\-{0,2}');
 $routes->addPlaceholder('platformType', '\bpodcasting|\bsocial|\bfunding');
+$routes->addPlaceholder('noteAction', '\bfavourite|\breblog|\breply');
+$routes->addPlaceholder(
+    'embeddablePlayerTheme',
+    '\blight|\bdark|\blight-transparent|\bdark-transparent',
+);
+$routes->addPlaceholder(
+    'uuid',
+    '[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}',
+);
 
 /**
  * --------------------------------------------------------------------
@@ -62,7 +71,7 @@ $routes->group(config('App')->installGateway, function ($routes) {
 });
 
 // Route for podcast audio file analytics (/audio/pack(podcast_id,episode_id,bytes_threshold,filesize,duration,date)/podcast_folder/filename.mp3)
-$routes->add('audio/(:base64)/(:any)', 'Analytics::hit/$1/$2', [
+$routes->get('audio/(:base64)/(:any)', 'Analytics::hit/$1/$2', [
     'as' => 'analytics_hit',
 ]);
 
@@ -150,7 +159,7 @@ $routes->group(
                 $routes->post('edit', 'Podcast::attemptEdit/$1', [
                     'filter' => 'permission:podcast-edit',
                 ]);
-                $routes->add('delete', 'Podcast::delete/$1', [
+                $routes->get('delete', 'Podcast::delete/$1', [
                     'as' => 'podcast-delete',
                     'filter' => 'permission:podcasts-delete',
                 ]);
@@ -170,7 +179,7 @@ $routes->group(
                         [
                             'as' => 'podcast-person-remove',
                             'filter' => 'permission:podcast-edit',
-                        ]
+                        ],
                     );
                 });
 
@@ -185,7 +194,7 @@ $routes->group(
                         [
                             'as' => 'podcast-analytics-webpages',
                             'filter' => 'permission:podcasts-view,podcast-view',
-                        ]
+                        ],
                     );
                     $routes->get(
                         'locations',
@@ -193,7 +202,7 @@ $routes->group(
                         [
                             'as' => 'podcast-analytics-locations',
                             'filter' => 'permission:podcasts-view,podcast-view',
-                        ]
+                        ],
                     );
                     $routes->get(
                         'unique-listeners',
@@ -201,7 +210,7 @@ $routes->group(
                         [
                             'as' => 'podcast-analytics-unique-listeners',
                             'filter' => 'permission:podcasts-view,podcast-view',
-                        ]
+                        ],
                     );
                     $routes->get(
                         'listening-time',
@@ -209,7 +218,7 @@ $routes->group(
                         [
                             'as' => 'podcast-analytics-listening-time',
                             'filter' => 'permission:podcasts-view,podcast-view',
-                        ]
+                        ],
                     );
                     $routes->get(
                         'time-periods',
@@ -217,7 +226,7 @@ $routes->group(
                         [
                             'as' => 'podcast-analytics-time-periods',
                             'filter' => 'permission:podcasts-view,podcast-view',
-                        ]
+                        ],
                     );
                     $routes->get(
                         'players',
@@ -225,7 +234,7 @@ $routes->group(
                         [
                             'as' => 'podcast-analytics-players',
                             'filter' => 'permission:podcasts-view,podcast-view',
-                        ]
+                        ],
                     );
                 });
 
@@ -235,7 +244,7 @@ $routes->group(
                     [
                         'as' => 'analytics-full-data',
                         'filter' => 'permission:podcasts-view,podcast-view',
-                    ]
+                    ],
                 );
                 $routes->get(
                     'analytics-data/(:segment)/(:segment)',
@@ -243,7 +252,7 @@ $routes->group(
                     [
                         'as' => 'analytics-data',
                         'filter' => 'permission:podcasts-view,podcast-view',
-                    ]
+                    ],
                 );
                 $routes->get(
                     'analytics-data/(:segment)/(:segment)/(:num)',
@@ -251,7 +260,7 @@ $routes->group(
                     [
                         'as' => 'analytics-filtered-data',
                         'filter' => 'permission:podcasts-view,podcast-view',
-                    ]
+                    ],
                 );
 
                 // Podcast episodes
@@ -283,7 +292,50 @@ $routes->group(
                         $routes->post('edit', 'Episode::attemptEdit/$1/$2', [
                             'filter' => 'permission:podcast_episodes-edit',
                         ]);
-                        $routes->add('delete', 'Episode::delete/$1/$2', [
+                        $routes->get('publish', 'Episode::publish/$1/$2', [
+                            'as' => 'episode-publish',
+                            'filter' =>
+                                'permission:podcast-manage_publications',
+                        ]);
+                        $routes->post(
+                            'publish',
+                            'Episode::attemptPublish/$1/$2',
+                            [
+                                'filter' =>
+                                    'permission:podcast-manage_publications',
+                            ],
+                        );
+                        $routes->get(
+                            'publish-edit',
+                            'Episode::publishEdit/$1/$2',
+                            [
+                                'as' => 'episode-publish_edit',
+                                'filter' =>
+                                    'permission:podcast-manage_publications',
+                            ],
+                        );
+                        $routes->post(
+                            'publish-edit',
+                            'Episode::attemptPublishEdit/$1/$2',
+                            [
+                                'filter' =>
+                                    'permission:podcast-manage_publications',
+                            ],
+                        );
+                        $routes->get('unpublish', 'Episode::unpublish/$1/$2', [
+                            'as' => 'episode-unpublish',
+                            'filter' =>
+                                'permission:podcast-manage_publications',
+                        ]);
+                        $routes->post(
+                            'unpublish',
+                            'Episode::attemptUnpublish/$1/$2',
+                            [
+                                'filter' =>
+                                    'permission:podcast-manage_publications',
+                            ],
+                        );
+                        $routes->get('delete', 'Episode::delete/$1/$2', [
                             'as' => 'episode-delete',
                             'filter' => 'permission:podcast_episodes-delete',
                         ]);
@@ -293,7 +345,7 @@ $routes->group(
                             [
                                 'as' => 'transcript-delete',
                                 'filter' => 'permission:podcast_episodes-edit',
-                            ]
+                            ],
                         );
                         $routes->get(
                             'chapters-delete',
@@ -301,7 +353,7 @@ $routes->group(
                             [
                                 'as' => 'chapters-delete',
                                 'filter' => 'permission:podcast_episodes-edit',
-                            ]
+                            ],
                         );
                         $routes->get(
                             'soundbites',
@@ -309,22 +361,22 @@ $routes->group(
                             [
                                 'as' => 'soundbites-edit',
                                 'filter' => 'permission:podcast_episodes-edit',
-                            ]
+                            ],
                         );
                         $routes->post(
                             'soundbites',
                             'Episode::soundbitesAttemptEdit/$1/$2',
                             [
                                 'filter' => 'permission:podcast_episodes-edit',
-                            ]
+                            ],
                         );
-                        $routes->add(
+                        $routes->get(
                             'soundbites/(:num)/delete',
                             'Episode::soundbiteDelete/$1/$2/$3',
                             [
                                 'as' => 'soundbite-delete',
                                 'filter' => 'permission:podcast_episodes-edit',
-                            ]
+                            ],
                         );
                         $routes->get(
                             'embeddable-player',
@@ -332,7 +384,7 @@ $routes->group(
                             [
                                 'as' => 'embeddable-player-add',
                                 'filter' => 'permission:podcast_episodes-edit',
-                            ]
+                            ],
                         );
 
                         $routes->group('persons', function ($routes) {
@@ -346,7 +398,7 @@ $routes->group(
                                 [
                                     'filter' =>
                                         'permission:podcast_episodes-edit',
-                                ]
+                                ],
                             );
                             $routes->get(
                                 '(:num)/remove',
@@ -355,7 +407,7 @@ $routes->group(
                                     'as' => 'episode-person-remove',
                                     'filter' =>
                                         'permission:podcast_episodes-edit',
-                                ]
+                                ],
                             );
                         });
                     });
@@ -394,9 +446,9 @@ $routes->group(
                             [
                                 'filter' =>
                                     'permission:podcast-manage_contributors',
-                            ]
+                            ],
                         );
-                        $routes->add('remove', 'Contributor::remove/$1/$2', [
+                        $routes->get('remove', 'Contributor::remove/$1/$2', [
                             'as' => 'contributor-remove',
                             'filter' =>
                                 'permission:podcast-manage_contributors',
@@ -411,7 +463,7 @@ $routes->group(
                         [
                             'as' => 'platforms-podcasting',
                             'filter' => 'permission:podcast-manage_platforms',
-                        ]
+                        ],
                     );
                     $routes->get(
                         'social',
@@ -419,7 +471,7 @@ $routes->group(
                         [
                             'as' => 'platforms-social',
                             'filter' => 'permission:podcast-manage_platforms',
-                        ]
+                        ],
                     );
                     $routes->get(
                         'funding',
@@ -427,7 +479,7 @@ $routes->group(
                         [
                             'as' => 'platforms-funding',
                             'filter' => 'permission:podcast-manage_platforms',
-                        ]
+                        ],
                     );
                     $routes->post(
                         'save/(:platformType)',
@@ -435,18 +487,33 @@ $routes->group(
                         [
                             'as' => 'platforms-save',
                             'filter' => 'permission:podcast-manage_platforms',
-                        ]
+                        ],
                     );
-                    $routes->add(
+                    $routes->get(
                         '(:slug)/podcast-platform-remove',
                         'PodcastPlatform::removePodcastPlatform/$1/$2',
                         [
                             'as' => 'podcast-platform-remove',
                             'filter' => 'permission:podcast-manage_platforms',
-                        ]
+                        ],
                     );
                 });
             });
+        });
+
+        // Instance wide Fediverse config
+        $routes->group('fediverse', function ($routes) {
+            $routes->get('/', 'Fediverse::dashboard', [
+                'as' => 'fediverse-dashboard',
+            ]);
+            $routes->get('blocked-actors', 'Fediverse::blockedActors', [
+                'as' => 'fediverse-blocked-actors',
+                'filter' => 'permission:fediverse-block_actors',
+            ]);
+            $routes->get('blocked-domains', 'Fediverse::blockedDomains', [
+                'as' => 'fediverse-blocked-domains',
+                'filter' => 'permission:fediverse-block_domains',
+            ]);
         });
 
         // Pages
@@ -470,7 +537,7 @@ $routes->group(
                     'filter' => 'permission:pages-manage',
                 ]);
 
-                $routes->add('delete', 'Page::delete/$1', [
+                $routes->get('delete', 'Page::delete/$1', [
                     'as' => 'page-delete',
                     'filter' => 'permission:pages-manage',
                 ]);
@@ -504,19 +571,19 @@ $routes->group(
                 $routes->post('edit', 'User::attemptEdit/$1', [
                     'filter' => 'permission:users-manage_authorizations',
                 ]);
-                $routes->add('ban', 'User::ban/$1', [
+                $routes->get('ban', 'User::ban/$1', [
                     'as' => 'user-ban',
                     'filter' => 'permission:users-manage_bans',
                 ]);
-                $routes->add('unban', 'User::unBan/$1', [
+                $routes->get('unban', 'User::unBan/$1', [
                     'as' => 'user-unban',
                     'filter' => 'permission:users-manage_bans',
                 ]);
-                $routes->add('force-pass-reset', 'User::forcePassReset/$1', [
+                $routes->get('force-pass-reset', 'User::forcePassReset/$1', [
                     'as' => 'user-force_pass_reset',
                     'filter' => 'permission:users-force_pass_reset',
                 ]);
-                $routes->add('delete', 'User::delete/$1', [
+                $routes->get('delete', 'User::delete/$1', [
                     'as' => 'user-delete',
                     'filter' => 'permission:users-delete',
                 ]);
@@ -533,7 +600,7 @@ $routes->group(
             ]);
             $routes->post('change-password', 'MyAccount::attemptChange/$1');
         });
-    }
+    },
 );
 
 /**
@@ -570,35 +637,142 @@ $routes->group(config('App')->authGateway, function ($routes) {
     $routes->post('reset-password', 'Auth::attemptReset');
 });
 
-// Public routes
+// Podcast's Public routes
 $routes->group('@(:podcastName)', function ($routes) {
-    $routes->get('/', 'Podcast/$1', ['as' => 'podcast']);
-    $routes->group('(:slug)', function ($routes) {
+    $routes->get('/', 'Podcast::activity/$1', [
+        'as' => 'podcast-activity',
+    ]);
+    // override default ActivityPub Library's actor route
+    $routes->get('/', 'Podcast::activity/$1', [
+        'as' => 'actor',
+        'alternate-content' => [
+            'application/activity+json' => [
+                'namespace' => 'ActivityPub\Controllers',
+                'controller-method' => 'ActorController/$1',
+            ],
+            'application/ld+json; profile="https://www.w3.org/ns/activitystreams' => [
+                'namespace' => 'ActivityPub\Controllers',
+                'controller-method' => 'ActorController/$1',
+            ],
+        ],
+    ]);
+    $routes->get('episodes', 'Podcast::episodes/$1', [
+        'as' => 'podcast-episodes',
+    ]);
+    $routes->group('episodes/(:slug)', function ($routes) {
         $routes->get('/', 'Episode/$1/$2', [
             'as' => 'episode',
+        ]);
+        $routes->get('oembed.json', 'Episode::oembedJSON/$1/$2', [
+            'as' => 'episode-oembed-json',
+        ]);
+        $routes->get('oembed.xml', 'Episode::oembedXML/$1/$2', [
+            'as' => 'episode-oembed-xml',
         ]);
         $routes->group('embeddable-player', function ($routes) {
             $routes->get('/', 'Episode::embeddablePlayer/$1/$2', [
                 'as' => 'embeddable-player',
             ]);
-            $routes->get('(:slug)', 'Episode::embeddablePlayer/$1/$2/$3', [
-                'as' => 'embeddable-player-theme',
-            ]);
+            $routes->get(
+                '(:embeddablePlayerTheme)',
+                'Episode::embeddablePlayer/$1/$2/$3',
+                [
+                    'as' => 'embeddable-player-theme',
+                ],
+            );
         });
     });
+
     $routes->head('feed.xml', 'Feed/$1', ['as' => 'podcast_feed']);
     $routes->get('feed.xml', 'Feed/$1', ['as' => 'podcast_feed']);
 });
+
+// Other pages
 $routes->get('/credits', 'Page::credits', ['as' => 'credits']);
 $routes->get('/(:slug)', 'Page/$1', ['as' => 'page']);
 
+// interacting as an actor
+$routes->post('interact-as-actor', 'Auth::attemptInteractAsActor', [
+    'as' => 'interact-as-actor',
+]);
+
 /**
+ * Overwriting ActivityPub routes file
+ */
+$routes->group('@(:podcastName)', function ($routes) {
+    $routes->post('notes/new', 'Note::attemptCreate/$1', [
+        'as' => 'note-attempt-create',
+        'filter' => 'permission:podcast-manage_publications',
+    ]);
+    // Note
+    $routes->group('notes/(:uuid)', function ($routes) {
+        $routes->get('/', 'Note/$1/$2', [
+            'as' => 'note',
+            'alternate-content' => [
+                'application/activity+json' => [
+                    'namespace' => 'ActivityPub\Controllers',
+                    'controller-method' => 'NoteController/$2',
+                ],
+                'application/ld+json; profile="https://www.w3.org/ns/activitystreams' => [
+                    'namespace' => 'ActivityPub\Controllers',
+                    'controller-method' => 'NoteController/$2',
+                ],
+            ],
+        ]);
+        $routes->get('replies', 'Note/$1/$2', [
+            'as' => 'note-replies',
+            'alternate-content' => [
+                'application/activity+json' => [
+                    'namespace' => 'ActivityPub\Controllers',
+                    'controller-method' => 'NoteController::replies/$2',
+                ],
+                'application/ld+json; profile="https://www.w3.org/ns/activitystreams' => [
+                    'namespace' => 'ActivityPub\Controllers',
+                    'controller-method' => 'NoteController::replies/$2',
+                ],
+            ],
+        ]);
+
+        // Actions
+        $routes->post('action', 'Note::attemptAction/$1/$2', [
+            'as' => 'note-attempt-action',
+            'filter' => 'permission:podcast-interact_as',
+        ]);
+
+        $routes->post('block-actor', 'Note::attemptBlockActor/$1/$2', [
+            'as' => 'note-attempt-block-actor',
+            'filter' => 'permission:fediverse-block_actors',
+        ]);
+        $routes->post('block-domain', 'Note::attemptBlockDomain/$1/$2', [
+            'as' => 'note-attempt-block-domain',
+            'filter' => 'permission:fediverse-block_domains',
+        ]);
+        $routes->post('delete', 'Note::attemptDelete/$1/$2', [
+            'as' => 'note-attempt-delete',
+            'filter' => 'permission:podcast-manage_publications',
+        ]);
+
+        $routes->get('remote/(:noteAction)', 'Note::remoteAction/$1/$2/$3', [
+            'as' => 'note-remote-action',
+        ]);
+    });
+
+    $routes->get('follow', 'Actor::follow/$1', [
+        'as' => 'follow',
+    ]);
+    $routes->get('outbox', 'Actor::outbox/$1', [
+        'as' => 'outbox',
+        'filter' => 'activity-pub:verify-activitystream',
+    ]);
+});
+
+/*
  * --------------------------------------------------------------------
  * Additional Routing
  * --------------------------------------------------------------------
  *
  * There will often be times that you need additional routing and you
- * need to it be able to override any defaults in this file. Environment
+ * need it to be able to override any defaults in this file. Environment
  * based routes is one such time. require() additional route files here
  * to make that happen.
  *

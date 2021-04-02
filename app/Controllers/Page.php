@@ -85,14 +85,23 @@ class Page extends BaseController
                                         'role_label' => $credit->role_label,
                                         'is_in' => [
                                             [
-                                                'link' => $credit->episode
+                                                'link' => $credit->episode_id
                                                     ? $credit->episode->link
                                                     : $credit->podcast->link,
-                                                'title' => $credit->episode
+                                                'title' => $credit->episode_id
                                                     ? (count($allPodcasts) > 1
                                                             ? "{$credit->podcast->title} ▸ "
                                                             : '') .
-                                                        "(S{$credit->episode->season_number}E{$credit->episode->number}) {$credit->episode->title}"
+                                                        $credit->episode
+                                                            ->title .
+                                                        episode_numbering(
+                                                            $credit->episode
+                                                                ->number,
+                                                            $credit->episode
+                                                                ->season_number,
+                                                            'text-xs ml-2',
+                                                            true,
+                                                        )
                                                     : $credit->podcast->title,
                                             ],
                                         ],
@@ -114,14 +123,21 @@ class Page extends BaseController
                                 'role_label' => $credit->role_label,
                                 'is_in' => [
                                     [
-                                        'link' => $credit->episode
+                                        'link' => $credit->episode_id
                                             ? $credit->episode->link
                                             : $credit->podcast->link,
-                                        'title' => $credit->episode
+                                        'title' => $credit->episode_id
                                             ? (count($allPodcasts) > 1
                                                     ? "{$credit->podcast->title} ▸ "
                                                     : '') .
-                                                "(S{$credit->episode->season_number}E{$credit->episode->number}) {$credit->episode->title}"
+                                                $credit->episode->title .
+                                                episode_numbering(
+                                                    $credit->episode->number,
+                                                    $credit->episode
+                                                        ->season_number,
+                                                    'text-xs ml-2',
+                                                    true,
+                                                )
                                             : $credit->podcast->title,
                                     ],
                                 ],
@@ -143,7 +159,13 @@ class Page extends BaseController
                                     ? (count($allPodcasts) > 1
                                             ? "{$credit->podcast->title} ▸ "
                                             : '') .
-                                        "(S{$credit->episode->season_number}E{$credit->episode->number}) {$credit->episode->title}"
+                                        $credit->episode->title .
+                                        episode_numbering(
+                                            $credit->episode->number,
+                                            $credit->episode->season_number,
+                                            'text-xs ml-2',
+                                            true,
+                                        )
                                     : $credit->podcast->title,
                             ],
                         ],
@@ -159,7 +181,13 @@ class Page extends BaseController
                             ? (count($allPodcasts) > 1
                                     ? "{$credit->podcast->title} ▸ "
                                     : '') .
-                                "(S{$credit->episode->season_number}E{$credit->episode->number}) {$credit->episode->title}"
+                                $credit->episode->title .
+                                episode_numbering(
+                                    $credit->episode->number,
+                                    $credit->episode->season_number,
+                                    'text-xs ml-2',
+                                    true,
+                                )
                             : $credit->podcast->title,
                     ];
                 }

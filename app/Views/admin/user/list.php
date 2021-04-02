@@ -10,7 +10,7 @@
 
 <?= $this->section('headerRight') ?>
 <?= button(lang('User.create'), route_to('user-create'), [
-    'variant' => 'primary',
+    'variant' => 'accent',
     'iconLeft' => 'user-add',
 ]) ?>
 <?= $this->endSection() ?>

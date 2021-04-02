@@ -9,37 +9,40 @@ $navigation = [
         'icon' => 'folder-user',
         'items' => ['person-list', 'person-create'],
     ],
+    'fediverse' => [
+        'icon' => 'star-smile',
+        'items' => ['fediverse-blocked-actors', 'fediverse-blocked-domains'],
+    ],
     'users' => ['icon' => 'group', 'items' => ['user-list', 'user-create']],
     'pages' => ['icon' => 'pages', 'items' => ['page-list', 'page-create']],
 ]; ?>
 
 <a href="<?= route_to(
-    'admin'
-) ?>" class="inline-flex items-center px-4 py-2 mb-2 text-xl">
-    <?= svg('logo-castopod', 'h-8 mr-2') ?>
-    Castopod
+    'admin',
+) ?>" class="inline-flex items-baseline px-6 py-2 mb-2 text-2xl font-semibold font-display text-pine-700">
+    <?= 'castopod' . svg('castopod-logo', 'h-5 ml-1') ?>
 </a>
 <a href="<?= route_to(
-    'home'
-) ?>" class="inline-flex items-center px-6 py-2 mb-2 text-sm underline outline-none hover:no-underline focus:shadow-outline">
+    'home',
+) ?>" class="inline-flex items-center px-6 py-2 mb-2 text-sm underline outline-none hover:no-underline focus:ring">
         <?= lang('AdminNavigation.go_to_website') ?>
         <?= icon('external-link', 'ml-2 text-gray-500') ?>
 </a>
 <nav class="flex flex-col flex-1 overflow-y-auto">
     <?php foreach ($navigation as $section => $data): ?>
     <div class="mb-4">
-        <button class="inline-flex items-center w-full px-6 py-1 outline-none focus:shadow-outline" type="button">
-            <?= icon($data['icon'], 'text-gray-500') ?>
-            <span class="ml-2"><?= lang('AdminNavigation.' . $section) ?></span>
+        <button class="inline-flex items-center w-full px-6 py-1 font-semibold text-gray-600 outline-none focus:ring" type="button">
+            <?= icon($data['icon'], 'text-gray-400 text-xl mr-3') ?>
+            <?= lang('AdminNavigation.' . $section) ?>
         </button>
-        <ul>
+        <ul class="flex flex-col">
             <?php foreach ($data['items'] as $item): ?>
-                <?php $isActive = base_url(route_to($item)) == current_url(); ?>
-            <li>
-                <a class="block py-1 pl-12 pr-2 text-sm text-gray-600 outline-none hover:text-gray-900 focus:shadow-outline <?= $isActive
+                <?php $isActive = url_is(route_to($item)); ?>
+            <li class="inline-flex">
+                <a class="w-full py-1 pl-14 pr-2 text-sm text-gray-600 outline-none hover:text-gray-900 focus:ring <?= $isActive
                     ? 'font-semibold text-gray-900'
                     : '' ?>" href="<?= route_to($item) ?>"><?= lang(
-    'AdminNavigation.' . $item
+    'AdminNavigation.' . $item,
 ) ?></a>
             </li>
             <?php endforeach; ?>
@@ -47,21 +50,31 @@ $navigation = [
     </div>
     <?php endforeach; ?>
 </nav>
-<div class="w-full mt-auto border-t" data-toggle="dropdown">
-    <button type="button" class="inline-flex items-center w-full px-6 py-2 outline-none focus:shadow-outline" id="my-accountDropdown" data-popper="button" aria-haspopup="true" aria-expanded="false">
-        <?= icon('user', 'text-gray-500 mr-2') ?>
-        <?= user()->username ?>
-        <?= icon('caret-right', 'ml-auto') ?>
-    </button>
-    <nav class="absolute z-50 flex-col hidden py-2 text-black whitespace-no-wrap bg-white border rounded shadow" aria-labelledby="my-accountDropdown" data-popper="menu" data-popper-placement="right-end">
-        <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
-            'my-account'
-        ) ?>"><?= lang('AdminNavigation.account.my-account') ?></a>
-        <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
-            'change-password'
-        ) ?>"><?= lang('AdminNavigation.account.change-password') ?></a>
-        <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
-            'logout'
-        ) ?>"><?= lang('AdminNavigation.account.logout') ?></a>
-    </nav>
-</div>
+<button
+type="button"
+class="inline-flex items-center w-full px-6 py-2 mt-auto border-t outline-none focus:ring"
+id="my-account-dropdown"
+data-dropdown="button"
+data-dropdown-target="my-account-dropdown-menu"
+aria-haspopup="true"
+aria-expanded="false">
+    <?= icon('user', 'text-gray-500 mr-2') ?>
+    <?= user()->username ?>
+    <?= icon('caret-right', 'ml-auto') ?>
+</button>
+<nav
+id="my-account-dropdown-menu"
+class="absolute z-50 flex flex-col py-2 text-black whitespace-no-wrap bg-white border rounded shadow"
+aria-labelledby="my-accountDropdown"
+data-dropdown="menu"
+data-dropdown-placement="right-end">
+    <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
+        'my-account',
+    ) ?>"><?= lang('AdminNavigation.account.my-account') ?></a>
+    <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
+        'change-password',
+    ) ?>"><?= lang('AdminNavigation.account.change-password') ?></a>
+    <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
+        'logout',
+    ) ?>"><?= lang('AdminNavigation.account.logout') ?></a>
+</nav>

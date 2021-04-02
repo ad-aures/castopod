@@ -8,12 +8,12 @@
 ]) ?>
 <?= csrf_field() ?>
 
-<h1 class="mb-2 text-xl"><span class="inline-flex items-center justify-center w-12 h-12 mr-2 text-sm font-semibold tracking-wider text-green-700 border-4 border-green-500 rounded-full">2/4</span><?= lang(
-    'Install.form.database_config'
+<h1 class="mb-2 text-xl font-bold font-display"><span class="inline-flex items-center justify-center w-12 h-12 mr-2 text-sm font-semibold tracking-wider border-4 rounded-full text-pine-700 border-pine-700 font-body">2/4</span><?= lang(
+    'Install.form.database_config',
 ) ?></h1>
 
 <p class="mb-4 text-sm text-gray-600"><?= lang(
-    'Install.form.database_config_hint'
+    'Install.form.database_config_hint',
 ) ?></p>
 
 <?= form_label(lang('Install.form.db_hostname'), 'db_hostname') ?>
@@ -59,7 +59,7 @@
     lang('Install.form.db_prefix'),
     'db_prefix',
     [],
-    lang('Install.form.db_prefix_hint')
+    lang('Install.form.db_prefix_hint'),
 ) ?>
 <?= form_input([
     'id' => 'db_prefix',
@@ -72,7 +72,7 @@
     lang('Install.form.next') . icon('arrow-right', 'ml-2'),
     null,
     ['variant' => 'primary'],
-    ['type' => 'submit', 'class' => 'self-end']
+    ['type' => 'submit', 'class' => 'self-end'],
 ) ?>
 
 <?= form_close() ?>

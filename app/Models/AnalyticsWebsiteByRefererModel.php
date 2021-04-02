@@ -34,19 +34,19 @@ class AnalyticsWebsiteByRefererModel extends Model
     {
         if (!($found = cache("{$podcastId}_analytics_website_by_referer"))) {
             $oneWeekAgo = date('Y-m-d', strtotime('-1 week'));
-            $found = $this->select('`referer_url` as `labels`')
-                ->selectSum('`hits`', '`values`')
+            $found = $this->select('referer_url as labels')
+                ->selectSum('hits', 'values')
                 ->where([
-                    '`podcast_id`' => $podcastId,
-                    '`date` >' => $oneWeekAgo,
+                    'podcast_id' => $podcastId,
+                    'date >' => $oneWeekAgo,
                 ])
-                ->groupBy('`labels`')
-                ->orderBy('`values`', 'DESC')
+                ->groupBy('labels')
+                ->orderBy('values', 'DESC')
                 ->findAll();
             cache()->save(
                 "{$podcastId}_analytics_website_by_referer",
                 $found,
-                600
+                600,
             );
         }
         return $found;
@@ -66,20 +66,20 @@ class AnalyticsWebsiteByRefererModel extends Model
         ) {
             $oneWeekAgo = date('Y-m-d', strtotime('-1 week'));
             $found = $this->select(
-                'SUBSTRING_INDEX(`domain`, \'.\', -2) as `labels`'
+                'SUBSTRING_INDEX(domain, \'.\', -2) as labels',
             )
-                ->selectSum('`hits`', '`values`')
+                ->selectSum('hits', 'values')
                 ->where([
-                    '`podcast_id`' => $podcastId,
-                    '`date` >' => $oneWeekAgo,
+                    'podcast_id' => $podcastId,
+                    'date >' => $oneWeekAgo,
                 ])
-                ->groupBy('`labels`')
-                ->orderBy('`values`', 'DESC')
+                ->groupBy('labels')
+                ->orderBy('values', 'DESC')
                 ->findAll();
             cache()->save(
                 "{$podcastId}_analytics_website_by_domain_weekly",
                 $found,
-                600
+                600,
             );
         }
         return $found;
@@ -99,20 +99,20 @@ class AnalyticsWebsiteByRefererModel extends Model
         ) {
             $oneYearAgo = date('Y-m-d', strtotime('-1 year'));
             $found = $this->select(
-                'SUBSTRING_INDEX(`domain`, \'.\', -2) as `labels`'
+                'SUBSTRING_INDEX(domain, \'.\', -2) as labels',
             )
-                ->selectSum('`hits`', '`values`')
+                ->selectSum('hits', 'values')
                 ->where([
-                    '`podcast_id`' => $podcastId,
-                    '`date` >' => $oneYearAgo,
+                    'podcast_id' => $podcastId,
+                    'date >' => $oneYearAgo,
                 ])
-                ->groupBy('`labels`')
-                ->orderBy('`values`', 'DESC')
+                ->groupBy('labels')
+                ->orderBy('values', 'DESC')
                 ->findAll();
             cache()->save(
                 "{$podcastId}_analytics_website_by_domain_yearly",
                 $found,
-                600
+                600,
             );
         }
         return $found;

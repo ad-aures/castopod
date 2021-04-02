@@ -18,13 +18,12 @@
 <?php foreach ($platforms as $platform): ?>
 
 <div class="relative flex items-start mb-8">
-    <div class="flex flex-col w-12 mr-4">
+    <div class="flex flex-col items-center w-12 mr-4">
         <?= anchor(
             $platform->submit_url,
-            platform_icon(
-                $platform->type,
-                $platform->slug,
-                $platform->type == 'social' ? 'text-gray-800' : null
+            icon(
+                $platform->type . '/' . $platform->slug,
+                'text-gray-600 text-4xl',
             ),
             [
                 'class' => 'mb-1 text-gray-600 hover:text-gray-900',
@@ -35,7 +34,7 @@
                 'title' => lang('Platforms.submit_url', [
                     'platformName' => $platform->label,
                 ]),
-            ]
+            ],
         ) ?>
         <div class="inline-flex bg-gray-200">
             <?= anchor($platform->home_url, icon('external-link', 'mx-auto'), [
@@ -49,7 +48,7 @@
                 ]),
             ]) ?>
             <?= $platform->submit_url
-                ? anchor($platform->submit_url, icon('add-box', 'mx-auto'), [
+                ? anchor($platform->submit_url, icon('add', 'mx-auto'), [
                     'class' => 'flex-1 text-gray-600 hover:text-gray-900',
                     'target' => '_blank',
                     'rel' => 'noopener noreferrer',
@@ -68,7 +67,7 @@
                 route_to(
                     'podcast-platform-remove',
                     $podcast->id,
-                    $platform->slug
+                    $platform->slug,
                 ),
                 icon('delete-bin', 'mx-auto'),
                 [
@@ -79,7 +78,7 @@
                     'title' => lang('Platforms.remove', [
                         'platformName' => $platform->label,
                     ]),
-                ]
+                ],
             )
             : '' ?>
         <?= form_label($platform->label, $platform->slug, [
@@ -99,7 +98,7 @@
             'class' => 'form-input mb-1 w-full',
             'value' => old(
                 $platform->slug . '_link_content',
-                $platform->link_content
+                $platform->link_content,
             ),
             'type' => 'text',
             'placeholder' => lang("Platforms.description.{$platform->type}"),
@@ -113,9 +112,9 @@
             'yes',
             old(
                 $platform->slug . '_visible',
-                $platform->is_visible ? $platform->is_visible : false
+                $platform->is_visible ? $platform->is_visible : false,
             ),
-            'text-sm mb-1'
+            'text-sm mb-1',
         ) ?>
         <?= form_switch(
             lang('Platforms.on_embeddable_player'),
@@ -129,9 +128,9 @@
                 $platform->slug . '_on_embeddable_player',
                 $platform->is_on_embeddable_player
                     ? $platform->is_on_embeddable_player
-                    : false
+                    : false,
             ),
-            'text-sm'
+            'text-sm',
         ) ?>
     </div>
 </div>
@@ -142,7 +141,7 @@
     lang('Platforms.submit'),
     null,
     ['variant' => 'primary'],
-    ['type' => 'submit', 'class' => 'self-end']
+    ['type' => 'submit', 'class' => 'self-end'],
 ) ?>
 
 <?= form_close() ?>

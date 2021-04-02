@@ -39,7 +39,7 @@ class AddCategories extends Migration
                 'constraint' => 32,
             ],
         ]);
-        $this->forge->addKey('id', true);
+        $this->forge->addPrimaryKey('id');
         $this->forge->addUniqueKey('code');
         $this->forge->addForeignKey('parent_id', 'categories', 'id');
         $this->forge->createTable('categories');

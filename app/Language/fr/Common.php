@@ -9,14 +9,18 @@
 return [
     'yes' => 'Oui',
     'no' => 'Non',
+    'cancel' => 'Annuler',
     'optional' => 'Optionnel',
+    'more' => 'Plus',
     'no_data' => 'Aucune donnée trouvée !',
+    'close' => 'Fermer',
     'home' => 'Accueil',
     'explicit' => 'Explicite',
     'mediumDate' => '{0,date,medium}',
     'powered_by' => 'Propulsé par {castopod}.',
     'actions' => 'Actions',
     'pageInfo' => 'Page {currentPage} sur {pageCount}',
+    'go_back' => 'Retour en arrière',
     'forms' => [
         'multiSelect' => [
             'selectText' => 'Cliquez pour selectionner',

@@ -14,6 +14,8 @@ return [
     'episodes' => 'Épisodes',
     'episode-list' => 'Tous les épisodes',
     'episode-create' => 'Créer un épisode',
+    'fediverse' => 'Fédiverse',
+    'fediverse-block_lists' => 'Listes de blocage',
     'analytics' => 'Mesures d’audience',
     'persons' => 'Intervenants',
     'podcast-person-manage' => 'Gestion des intervenants',

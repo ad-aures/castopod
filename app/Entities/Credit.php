@@ -27,7 +27,7 @@ class Credit extends Entity
     protected $podcast;
 
     /**
-     * @var \App\Entities\Episode
+     * @var \App\Entities\Episode|null
      */
     protected $episode;
 
@@ -44,50 +44,61 @@ class Credit extends Entity
     public function getPodcast()
     {
         return (new PodcastModel())->getPodcastById(
-            $this->attributes['podcast_id']
+            $this->attributes['podcast_id'],
         );
     }
 
     public function getEpisode()
     {
-        if (empty($this->attributes['episode_id'])) {
-            return null;
-        } else {
-            return (new EpisodeModel())->getEpisodeById(
-                $this->attributes['podcast_id'],
-                $this->attributes['episode_id']
+        if (empty($this->episode_id)) {
+            throw new \RuntimeException(
+                'Credit must have episode_id before getting episode.',
             );
         }
+
+        if (empty($this->episode)) {
+            $this->episode = (new EpisodeModel())->getPublishedEpisodeById(
+                $this->episode_id,
+                $this->podcast_id,
+            );
+        }
+
+        return $this->episode;
     }
 
     public function getPerson()
     {
-        return (new PersonModel())->getPersonById(
-            $this->attributes['person_id']
-        );
+        if (empty($this->person_id)) {
+            throw new \RuntimeException(
+                'Credit must have person_id before getting person.',
+            );
+        }
+
+        if (empty($this->person)) {
+            $this->person = (new PersonModel())->getPersonById(
+                $this->person_id,
+            );
+        }
+
+        return $this->person;
     }
 
     public function getGroupLabel()
     {
-        if (empty($this->attributes['person_group'])) {
+        if (empty($this->person_group)) {
             return null;
         } else {
-            return lang(
-                "PersonsTaxonomy.persons.{$this->attributes['person_group']}.label"
-            );
+            return lang("PersonsTaxonomy.persons.{$this->person_group}.label");
         }
     }
 
     public function getRoleLabel()
     {
-        if (
-            empty($this->attributes['person_group']) ||
-            empty($this->attributes['person_role'])
-        ) {
+        if (empty($this->person_group) || empty($this->person_role)) {
             return null;
         } else {
             return lang(
-                "PersonsTaxonomy.persons.{$this->attributes['person_group']}.roles.{$this->attributes['person_role']}.label"
+                "PersonsTaxonomy.persons.{$this->person_group}.roles.{$this->person_role}.label",
             );
         }
     }

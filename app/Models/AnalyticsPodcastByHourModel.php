@@ -34,21 +34,21 @@ class AnalyticsPodcastByHourModel extends Model
     {
         if (!($found = cache("{$podcastId}_analytics_podcasts_by_hour"))) {
             $found = $this->select(
-                'right(concat(\'0\',`hour`,\'h\'),3) as `labels`'
+                'right(concat(\'0\',hour,\'h\'),3) as labels',
             )
-                ->selectSum('`hits`', '`values`')
+                ->selectSum('hits', 'values')
                 ->where([
-                    '`podcast_id`' => $podcastId,
-                    '`date` >' => date('Y-m-d', strtotime('-60 days')),
+                    'podcast_id' => $podcastId,
+                    'date >' => date('Y-m-d', strtotime('-60 days')),
                 ])
-                ->groupBy('`labels`')
-                ->orderBy('`labels`', 'ASC')
+                ->groupBy('labels')
+                ->orderBy('labels', 'ASC')
                 ->findAll();
 
             cache()->save(
                 "{$podcastId}_analytics_podcasts_by_hour",
                 $found,
-                600
+                600,
             );
         }
         return $found;

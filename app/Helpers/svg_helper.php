@@ -20,7 +20,7 @@ function icon(string $name, string $class = '')
         $svg_contents = str_replace(
             '<svg',
             '<svg class="' . $class . '"',
-            $svg_contents
+            $svg_contents,
         );
     }
 
@@ -41,36 +41,7 @@ function svg($name, $class = null)
         $svg_contents = str_replace(
             '<svg',
             '<svg class="' . $class . '"',
-            $svg_contents
-        );
-    }
-    return $svg_contents;
-}
-
-/**
- * Returns the inline svg platform icon. Returns the default icon if not found.
- *
- * @param  string $name name of the image file without the .svg extension
- * @param  string $class to be added to the svg string
- * @return string svg contents
- */
-function platform_icon($type, $name, $class = null)
-{
-    try {
-        $svg_contents = file_get_contents(
-            'assets/images/platforms/' . $type . '/' . $name . '.svg'
-        );
-    } catch (\Exception $e) {
-        $svg_contents = file_get_contents(
-            'assets/images/platforms/_default.svg'
-        );
-    }
-
-    if ($class) {
-        $svg_contents = str_replace(
-            '<svg',
-            '<svg class="' . $class . '"',
-            $svg_contents
+            $svg_contents,
         );
     }
     return $svg_contents;

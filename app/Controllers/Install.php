@@ -257,6 +257,7 @@ class Install extends Controller
         $migrations = \Config\Services::migrations();
 
         !$migrations->setNamespace('Myth\Auth')->latest();
+        !$migrations->setNamespace('ActivityPub')->latest();
         !$migrations->setNamespace(APP_NAMESPACE)->latest();
     }
 

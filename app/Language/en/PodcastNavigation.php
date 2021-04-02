@@ -14,6 +14,8 @@ return [
     'episodes' => 'Episodes',
     'episode-list' => 'All episodes',
     'episode-create' => 'New episode',
+    'fediverse' => 'Fediverse',
+    'fediverse-block_lists' => 'Block lists',
     'analytics' => 'Analytics',
     'persons' => 'Persons',
     'podcast-person-manage' => 'Manage persons',

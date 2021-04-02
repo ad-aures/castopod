@@ -19,7 +19,7 @@ class UserModel extends \Myth\Auth\Models\UserModel
                 ->join('podcasts_users', 'podcasts_users.user_id = users.id')
                 ->join(
                     'auth_groups',
-                    'auth_groups.id = podcasts_users.group_id'
+                    'auth_groups.id = podcasts_users.group_id',
                 )
                 ->where('podcasts_users.podcast_id', $podcastId)
                 ->findAll();
@@ -33,7 +33,7 @@ class UserModel extends \Myth\Auth\Models\UserModel
     public function getPodcastContributor($user_id, $podcast_id)
     {
         return $this->select(
-            'users.*, podcasts_users.podcast_id as podcast_id, auth_groups.name as podcast_role'
+            'users.*, podcasts_users.podcast_id as podcast_id, auth_groups.name as podcast_role',
         )
             ->join('podcasts_users', 'podcasts_users.user_id = users.id')
             ->join('auth_groups', 'auth_groups.id = podcasts_users.group_id')

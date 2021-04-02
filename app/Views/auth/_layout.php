@@ -13,12 +13,16 @@
 
 <body class="flex flex-col items-center justify-center min-h-screen mx-auto bg-gray-100">
 	<header class="mb-4">
-		<a href="<?= route_to('home') ?>" class="inline-flex items-center">
-			<?= svg('logo-castopod', 'h-10 mr-2') ?><span class="text-xl">Castopod</span>
+		<a href="<?= route_to(
+      'home',
+  ) ?>" class="inline-flex items-baseline text-4xl font-bold font-display text-pine-700">
+			<?= 'castopod' . svg('castopod-logo', 'h-8 ml-2') ?>
 		</a>
 	</header>
 	<main class="w-full max-w-md px-6 py-4 mx-auto bg-white rounded-lg shadow">
-		<h1 class="mb-2 text-2xl text-center"><?= $this->renderSection('title') ?></h1>
+		<h1 class="mb-6 text-2xl font-bold text-center font-display"><?= $this->renderSection(
+      'title',
+  ) ?></h1>
 		<?= view('_message_block') ?>
 		<?= $this->renderSection('content') ?>
 	</main>

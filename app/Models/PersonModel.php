@@ -21,6 +21,7 @@ class PersonModel extends Model
         'unique_name',
         'information_url',
         'image_uri',
+        'image_mimetype',
         'created_by',
         'updated_by',
     ];
@@ -86,7 +87,7 @@ class PersonModel extends Model
                     $result[$person->id] = $person->full_name;
                     return $result;
                 },
-                []
+                [],
             );
             cache()->save('person_options', $options, DECADE);
         }
@@ -116,7 +117,7 @@ class PersonModel extends Model
     protected function clearCache(array $data)
     {
         $person = (new PersonModel())->getPersonById(
-            is_array($data['id']) ? $data['id'][0] : $data['id']
+            is_array($data['id']) ? $data['id'][0] : $data['id'],
         );
 
         cache()->delete('person_options');

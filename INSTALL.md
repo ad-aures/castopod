@@ -1,13 +1,16 @@
-# How to install Castopod
+# How to install Castopod <!-- omit in toc -->
 
 Castopod was thought to be easy to install. Whether using dedicated or shared
 hosting, you can install it on most PHP-MySQL compatible web servers.
 
+## Table of contents <!-- omit in toc -->
+
 - [Install instructions](#install-instructions)
   - [(optional) Manual configuration](#optional-manual-configuration)
 - [Web Server Requirements](#web-server-requirements)
-  - [PHP v7.2 or higher](#php-v72-or-higher)
+  - [PHP v7.3 or higher](#php-v73-or-higher)
   - [MySQL compatible database](#mysql-compatible-database)
+    - [Privileges](#privileges)
   - [(Optional) Other recommendations](#optional-other-recommendations)
 - [Security concerns](#security-concerns)
 
@@ -19,9 +22,16 @@ hosting, you can install it on most PHP-MySQL compatible web servers.
 1. Download and unzip the Castopod package onto the web server if you haven’t
    already.
    - ⚠️ Set the web server document root to the `public/` sub-folder.
-2. Run the Castopod install script by going to the install wizard page
+2. ⚠️ For broadcasting social activities to the fediverse, add a cron task on
+   your web server to run every minute (replace the paths accordingly):
+
+   ```php
+      * * * * * /path/to/php /path/to/castopod/public/index.php scheduled-activities
+   ```
+
+3. Run the Castopod install script by going to the install wizard page
    (`https://your_domain_name.com/cp-install`) in your favorite web browser.
-3. Follow the instructions on your screen.
+4. Follow the instructions on your screen.
 
 All done, start podcasting!
 
@@ -36,13 +46,12 @@ Before uploading Castopod files to your web server:
 
 ## Web Server Requirements
 
-### PHP v7.2 or higher
+### PHP v7.3 or higher
 
-PHP version 7.2 or higher is required, with the following extensions installed:
+PHP version 7.3 or higher is required, with the following extensions installed:
 
 - [intl](http://php.net/manual/en/intl.requirements.php)
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use
-  the HTTP\CURLRequest library
+- [libcurl](http://php.net/manual/en/curl.requirements.php)
 - [mbstring](http://php.net/manual/en/mbstring.installation.php)
 
 Additionally, make sure that the following extensions are enabled in your PHP:

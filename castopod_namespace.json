@@ -1,0 +1,31 @@
+{
+  "@context": {
+    "id": "@id",
+    "type": "@type",
+    "as": "https://www.w3.org/ns/activitystreams#",
+    "schema": "http://schema.org#",
+    "cp": "https://castopod.org/ns#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Podcast": "cp:Podcast",
+    "Episode": "cp:Episode",
+    "size": {
+      "@id": "cp:size",
+      "@type": "xsd:nonNegativeInteger"
+    },
+    "season": {
+      "@id": "cp:season",
+      "@type": "xsd:nonNegativeInteger"
+    },
+    "episode": {
+      "@id": "cp:episode",
+      "@type": "xsd:nonNegativeInteger"
+    },
+    "cover": {
+      "@id": "cp:cover",
+      "@type": "as:Link"
+    },
+    "copyright": "cp:copyright",
+    "category": "sc:category",
+    "language": "sc:inLanguage"
+  }
+}

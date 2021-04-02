@@ -1,0 +1,37 @@
+@layer components {
+  .tabset {
+    @apply grid grid-cols-2;
+  }
+
+  .tabset > input[type="radio"] {
+    @apply absolute -left-full;
+  }
+
+  .tab-panel {
+    @apply hidden;
+  }
+
+  /* Logic for 2 tabs at most */
+  .tabset > input:first-child:checked ~ .tab-panels > .tab-panel:first-child,
+  .tabset > input:nth-child(3):checked ~ .tab-panels > .tab-panel:nth-child(2) {
+    @apply block;
+  }
+
+  /* Styling */
+  .tabset > label {
+    @apply relative inline-block w-full px-4 py-3 text-center cursor-pointer opacity-70 hover:opacity-100;
+  }
+
+  .tabset > input:checked + label::after {
+    @apply absolute inset-x-0 bottom-0 w-1/2 h-1 mx-auto bg-pine-700;
+    content: "";
+  }
+
+  .tabset > input:checked + label {
+    @apply font-semibold opacity-100 text-pine-700;
+  }
+
+  .tab-panels {
+    @apply col-span-2 p-6;
+  }
+}

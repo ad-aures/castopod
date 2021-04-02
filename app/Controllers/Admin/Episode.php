@@ -8,7 +8,9 @@
 
 namespace App\Controllers\Admin;
 
+use App\Entities\Note;
 use App\Models\EpisodeModel;
+use App\Models\NoteModel;
 use App\Models\PodcastModel;
 use App\Models\SoundbiteModel;
 use CodeIgniter\I18n\Time;
@@ -32,7 +34,11 @@ class Episode extends BaseController
 
     public function _remap($method, ...$params)
     {
-        $this->podcast = (new PodcastModel())->getPodcastById($params[0]);
+        if (
+            !($this->podcast = (new PodcastModel())->getPodcastById($params[0]))
+        ) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
 
         if (count($params) > 1) {
             if (
@@ -107,7 +113,6 @@ class Episode extends BaseController
                 'is_image[image]|ext_in[image,jpg,png]|min_dims[image,1400,1400]|is_image_squared[image]',
             'transcript' => 'ext_in[transcript,txt,html,srt,json]',
             'chapters' => 'ext_in[chapters,json]',
-            'publication_date' => 'valid_date[Y-m-d H:i]|permit_empty',
         ];
 
         if (!$this->validate($rules)) {
@@ -117,7 +122,6 @@ class Episode extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $publicationDate = $this->request->getPost('publication_date');
         $newEpisode = new \App\Entities\Episode([
             'podcast_id' => $this->podcast->id,
             'title' => $this->request->getPost('title'),
@@ -142,15 +146,9 @@ class Episode extends BaseController
             'type' => $this->request->getPost('type'),
             'is_blocked' => $this->request->getPost('block') == 'yes',
             'custom_rss_string' => $this->request->getPost('custom_rss'),
-            'created_by' => user(),
-            'updated_by' => user(),
-            'published_at' => $publicationDate
-                ? Time::createFromFormat(
-                    'Y-m-d H:i',
-                    $publicationDate,
-                    $this->request->getPost('client_timezone')
-                )->setTimezone('UTC')
-                : null,
+            'created_by' => user()->id,
+            'updated_by' => user()->id,
+            'published_at' => null,
         ]);
 
         $episodeModel = new EpisodeModel();
@@ -167,7 +165,7 @@ class Episode extends BaseController
 
         if ($this->podcast->hasChanged('episode_description_footer_markdown')) {
             $this->podcast->episode_description_footer_markdown = $this->request->getPost(
-                'description_footer'
+                'description_footer',
             );
 
             if (!$podcastModel->update($this->podcast->id, $this->podcast)) {
@@ -209,7 +207,6 @@ class Episode extends BaseController
                 'is_image[image]|ext_in[image,jpg,png]|min_dims[image,1400,1400]|is_image_squared[image]',
             'transcript' => 'ext_in[transcript,txt,html,srt,json]',
             'chapters' => 'ext_in[chapters,json]',
-            'publication_date' => 'valid_date[Y-m-d H:i]|permit_empty',
         ];
 
         if (!$this->validate($rules)) {
@@ -222,7 +219,7 @@ class Episode extends BaseController
         $this->episode->title = $this->request->getPost('title');
         $this->episode->slug = $this->request->getPost('slug');
         $this->episode->description_markdown = $this->request->getPost(
-            'description'
+            'description',
         );
         $this->episode->location = $this->request->getPost('location_name');
         $this->episode->parental_advisory =
@@ -238,19 +235,10 @@ class Episode extends BaseController
         $this->episode->type = $this->request->getPost('type');
         $this->episode->is_blocked = $this->request->getPost('block') == 'yes';
         $this->episode->custom_rss_string = $this->request->getPost(
-            'custom_rss'
+            'custom_rss',
         );
 
-        $publicationDate = $this->request->getPost('publication_date');
-        $this->episode->published_at = $publicationDate
-            ? Time::createFromFormat(
-                'Y-m-d H:i',
-                $publicationDate,
-                $this->request->getPost('client_timezone')
-            )->setTimezone('UTC')
-            : null;
-
-        $this->episode->updated_by = user();
+        $this->episode->updated_by = user()->id;
 
         $enclosure = $this->request->getFile('enclosure');
         if ($enclosure->isValid()) {
@@ -280,7 +268,7 @@ class Episode extends BaseController
 
         // update podcast's episode_description_footer_markdown if changed
         $this->podcast->episode_description_footer_markdown = $this->request->getPost(
-            'description_footer'
+            'description_footer',
         );
 
         if ($this->podcast->hasChanged('episode_description_footer_markdown')) {
@@ -331,6 +319,271 @@ class Episode extends BaseController
         }
 
         return redirect()->back();
+    }
+
+    public function publish()
+    {
+        if ($this->episode->publication_status === 'not_published') {
+            helper(['form']);
+
+            $data = [
+                'podcast' => $this->podcast,
+                'episode' => $this->episode,
+            ];
+
+            replace_breadcrumb_params([
+                0 => $this->podcast->title,
+                1 => $this->episode->title,
+            ]);
+            return view('admin/episode/publish', $data);
+        } else {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+    }
+
+    public function attemptPublish()
+    {
+        $rules = [
+            'publication_method' => 'required',
+            'scheduled_publication_date' =>
+                'valid_date[Y-m-d H:i]|permit_empty',
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $this->validator->getErrors());
+        }
+
+        $db = \Config\Database::connect();
+        $db->transStart();
+
+        $newNote = new Note([
+            'actor_id' => $this->podcast->actor_id,
+            'episode_id' => $this->episode->id,
+            'message' => $this->request->getPost('message'),
+            'created_by' => user_id(),
+        ]);
+
+        $publishMethod = $this->request->getPost('publication_method');
+        if ($publishMethod === 'schedule') {
+            $scheduledPublicationDate = $this->request->getPost(
+                'scheduled_publication_date',
+            );
+            if ($scheduledPublicationDate) {
+                $scheduledDateUTC = Time::createFromFormat(
+                    'Y-m-d H:i',
+                    $scheduledPublicationDate,
+                    $this->request->getPost('client_timezone'),
+                )->setTimezone('UTC');
+                $this->episode->published_at = $scheduledDateUTC;
+                $newNote->published_at = $scheduledDateUTC;
+            } else {
+                $db->transRollback();
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->with('error', 'Schedule date must be set!');
+            }
+        } else {
+            $dateNow = Time::now();
+            $this->episode->published_at = $dateNow;
+            $newNote->published_at = $dateNow;
+        }
+
+        $noteModel = new NoteModel();
+        if (!$noteModel->addNote($newNote)) {
+            $db->transRollback();
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $noteModel->errors());
+        }
+
+        $episodeModel = new EpisodeModel();
+        if (!$episodeModel->update($this->episode->id, $this->episode)) {
+            $db->transRollback();
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $episodeModel->errors());
+        }
+
+        $db->transComplete();
+
+        return redirect()->route('episode-view', [
+            $this->podcast->id,
+            $this->episode->id,
+        ]);
+    }
+
+    public function publishEdit()
+    {
+        if ($this->episode->publication_status === 'scheduled') {
+            helper(['form']);
+
+            $data = [
+                'podcast' => $this->podcast,
+                'episode' => $this->episode,
+                'note' => (new NoteModel())
+                    ->where([
+                        'actor_id' => $this->podcast->actor_id,
+                        'episode_id' => $this->episode->id,
+                    ])
+                    ->first(),
+            ];
+
+            replace_breadcrumb_params([
+                0 => $this->podcast->title,
+                1 => $this->episode->title,
+            ]);
+            return view('admin/episode/publish_edit', $data);
+        } else {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+    }
+
+    public function attemptPublishEdit()
+    {
+        $rules = [
+            'note_id' => 'required',
+            'publication_method' => 'required',
+            'scheduled_publication_date' =>
+                'valid_date[Y-m-d H:i]|permit_empty',
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $this->validator->getErrors());
+        }
+
+        $db = \Config\Database::connect();
+        $db->transStart();
+
+        $note = (new NoteModel())->getNoteById(
+            $this->request->getPost('note_id'),
+        );
+        $note->message = $this->request->getPost('message');
+
+        $publishMethod = $this->request->getPost('publication_method');
+        if ($publishMethod === 'schedule') {
+            $scheduledPublicationDate = $this->request->getPost(
+                'scheduled_publication_date',
+            );
+            if ($scheduledPublicationDate) {
+                $scheduledDateUTC = Time::createFromFormat(
+                    'Y-m-d H:i',
+                    $scheduledPublicationDate,
+                    $this->request->getPost('client_timezone'),
+                )->setTimezone('UTC');
+                $this->episode->published_at = $scheduledDateUTC;
+                $note->published_at = $scheduledDateUTC;
+            } else {
+                $db->transRollback();
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->with('error', 'Schedule date must be set!');
+            }
+        } else {
+            $dateNow = Time::now();
+            $this->episode->published_at = $dateNow;
+            $note->published_at = $dateNow;
+        }
+
+        $noteModel = new NoteModel();
+        if (!$noteModel->editNote($note)) {
+            $db->transRollback();
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $noteModel->errors());
+        }
+
+        $episodeModel = new EpisodeModel();
+        if (!$episodeModel->update($this->episode->id, $this->episode)) {
+            $db->transRollback();
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $episodeModel->errors());
+        }
+
+        $db->transComplete();
+
+        return redirect()->route('episode-view', [
+            $this->podcast->id,
+            $this->episode->id,
+        ]);
+    }
+
+    public function unpublish()
+    {
+        if ($this->episode->publication_status === 'published') {
+            helper(['form']);
+
+            $data = [
+                'podcast' => $this->podcast,
+                'episode' => $this->episode,
+            ];
+
+            replace_breadcrumb_params([
+                0 => $this->podcast->title,
+                1 => $this->episode->title,
+            ]);
+            return view('admin/episode/unpublish', $data);
+        } else {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+    }
+
+    public function attemptUnpublish()
+    {
+        $rules = [
+            'understand' => 'required',
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $this->validator->getErrors());
+        }
+
+        $db = \Config\Database::connect();
+
+        $db->transStart();
+
+        $allNotesLinkedToEpisode = (new NoteModel())
+            ->where([
+                'episode_id' => $this->episode->id,
+            ])
+            ->findAll();
+        foreach ($allNotesLinkedToEpisode as $note) {
+            (new NoteModel())->removeNote($note);
+        }
+
+        // set episode published_at to null to unpublish
+        $this->episode->published_at = null;
+
+        $episodeModel = new EpisodeModel();
+        if (!$episodeModel->update($this->episode->id, $this->episode)) {
+            $db->transRollback();
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $episodeModel->errors());
+        }
+
+        $db->transComplete();
+
+        return redirect()->route('episode-view', [
+            $this->podcast->id,
+            $this->episode->id,
+        ]);
     }
 
     public function delete()
@@ -416,7 +669,7 @@ class Episode extends BaseController
         (new SoundbiteModel())->deleteSoundbite(
             $this->podcast->id,
             $this->episode->id,
-            $soundbiteId
+            $soundbiteId,
         );
 
         return redirect()->route('soundbites-edit', [

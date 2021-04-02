@@ -7,19 +7,33 @@
  */
 
 return [
-    'previous_episode' => 'Previous episode',
-    'previous_season' => 'Previous season',
-    'next_episode' => 'Next episode',
-    'next_season' => 'Next season',
     'season' => 'Season {seasonNumber}',
     'season_abbr' => 'S{seasonNumber}',
     'number' => 'Episode {episodeNumber}',
     'number_abbr' => 'Ep. {episodeNumber}',
     'season_episode' => 'Season {seasonNumber} episode {episodeNumber}',
     'season_episode_abbr' => 'S{seasonNumber}E{episodeNumber}',
+    'back_to_episodes' => 'Back to episodes of {podcast}',
+    'activity' => 'Activity',
+    'description' => 'Description',
+    'total_favourites' => '{numberOfTotalFavourites, plural,
+        one {# total favourite}
+        other {# total favourites}
+    }',
+    'total_reblogs' => '{numberOfTotalReblogs, plural,
+        one {# total share}
+        other {# total shares}
+    }',
+    'total_notes' => '{numberOfTotalNotes, plural,
+        one {# note}
+        other {# total notes}
+    }',
     'all_podcast_episodes' => 'All podcast episodes',
     'back_to_podcast' => 'Go back to podcast',
     'edit' => 'Edit',
+    'publish' => 'Publish',
+    'publish_edit' => 'Edit publication',
+    'unpublish' => 'Unpublish',
     'delete' => 'Delete',
     'go_to_page' => 'Go to page',
     'create' => 'Add an episode',
@@ -51,19 +65,6 @@ return [
             'trailer' => 'Trailer',
             'bonus' => 'Bonus',
         ],
-        'show_notes_section_title' => 'Show notes',
-        'show_notes_section_subtitle' =>
-            'Up to 4000 characters, be clear and concise. Show notes help potential listeners in finding the episode.',
-        'description' => 'Description',
-        'description_footer' => 'Description footer',
-        'description_footer_hint' =>
-            'This text is added at the end of each episode description, it is a good place to input your social links for example.',
-        'publication_section_title' => 'Publication info',
-        'publication_section_subtitle' => '',
-        'publication_date' => 'Publication date',
-        'publication_date_clear' => 'Clear publication date',
-        'publication_date_hint' =>
-            'You can schedule the episode release by setting a future publication date. This field must be formatted as YYYY-MM-DD HH:mm',
         'parental_advisory' => [
             'label' => 'Parental advisory',
             'hint' => 'Does the episode contain explicit content?',
@@ -71,29 +72,58 @@ return [
             'clean' => 'Clean',
             'explicit' => 'Explicit',
         ],
-        'block' => 'Episode should be hidden from all platforms',
-        'block_hint' =>
-            'The episode show or hide status. If you want this episode removed from the Apple directory, toggle this on.',
+        'show_notes_section_title' => 'Show notes',
+        'show_notes_section_subtitle' =>
+            'Up to 4000 characters, be clear and concise. Show notes help potential listeners in finding the episode.',
+        'description' => 'Description',
+        'description_footer' => 'Description footer',
+        'description_footer_hint' =>
+            'This text is added at the end of each episode description, it is a good place to input your social links for example.',
         'additional_files_section_title' => 'Additional files',
         'additional_files_section_subtitle' =>
             'These files may be used by other platforms to provide better experience to your audience.<br />See the {podcastNamespaceLink} for more information.',
+        'location_section_title' => 'Location',
+        'location_section_subtitle' => 'What place is this episode about?',
+        'location_name' => 'Location name or address',
+        'location_name_hint' => 'This can be a real or fictional location',
         'transcript' => 'Transcript or closed captions',
         'transcript_hint' => 'Allowed formats are txt, html, srt or json.',
         'transcript_delete' => 'Delete transcript',
         'chapters' => 'Chapters',
         'chapters_hint' => 'File should be in JSON Chapters Format.',
         'chapters_delete' => 'Delete chapters',
-        'location_section_title' => 'Location',
-        'location_section_subtitle' => 'What place is this episode about?',
-        'location_name' => 'Location name or address',
-        'location_name_hint' => 'This can be a real place or fictional',
         'advanced_section_title' => 'Advanced Parameters',
         'advanced_section_subtitle' =>
             'If you need RSS tags that Castopod does not handle, set them here.',
         'custom_rss' => 'Custom RSS tags for the episode',
         'custom_rss_hint' => 'This will be injected within the ❬item❭ tag.',
+        'block' => 'Episode should be hidden from all platforms',
+        'block_hint' =>
+            'The episode show or hide status. If you want this episode removed from the Apple directory, toggle this on.',
         'submit_create' => 'Create episode',
         'submit_edit' => 'Save episode',
+    ],
+    'publish_form' => [
+        'note' => 'Your note',
+        'note_hint' =>
+            'The message you write will be broadcasted to all your followers in the fediverse.',
+        'publication_date' => 'Publication date',
+        'publication_method' => [
+            'now' => 'Now',
+            'schedule' => 'Schedule',
+        ],
+        'scheduled_publication_date' => 'Scheduled publication date',
+        'scheduled_publication_date_clear' => 'Clear publication date',
+        'scheduled_publication_date_hint' =>
+            'You can schedule the episode release by setting a future publication date. This field must be formatted as YYYY-MM-DD HH:mm',
+        'submit' => 'Publish',
+        'submit_edit' => 'Edit publication',
+    ],
+    'unpublish_form' => [
+        'disclaimer' =>
+            'Unpublishing the episode will delete all the notes associated with the episode and remove it from the podcast\'s RSS feed.',
+        'understand' => 'I understand, I want to unpublish the episode',
+        'submit' => 'Unpublish',
     ],
     'soundbites' => 'Soundbites',
     'soundbites_form' => [

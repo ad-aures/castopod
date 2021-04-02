@@ -6,6 +6,8 @@
  * @link       https://castopod.org/
  */
 
+use CodeIgniter\Files\File;
+use CodeIgniter\HTTP\Exceptions\HTTPException;
 use CodeIgniter\HTTP\ResponseInterface;
 
 /**
@@ -17,25 +19,31 @@ use CodeIgniter\HTTP\ResponseInterface;
  *
  * @return string The episode's file path in media root
  */
-function save_podcast_media($file, $podcast_name, $media_name)
+function save_media($file, $folder, $mediaName)
 {
-    $file_name = $media_name . '.' . $file->getExtension();
+    $file_name = $mediaName . '.' . $file->getExtension();
 
-    $mediaRoot = config('App')->mediaRoot;
+    $mediaRoot = config('App')->mediaRoot . '/' . $folder;
 
-    if (!file_exists($mediaRoot . '/' . $podcast_name)) {
-        mkdir($mediaRoot . '/' . $podcast_name, 0777, true);
-        touch($mediaRoot . '/' . $podcast_name . '/index.html');
+    if (!file_exists($mediaRoot)) {
+        mkdir($mediaRoot, 0777, true);
+        touch($mediaRoot . '/index.html');
     }
 
     // move to media folder and overwrite file if already existing
-    $file->move($mediaRoot . '/' . $podcast_name . '/', $file_name, true);
+    $file->move($mediaRoot . '/', $file_name, true);
 
-    return $podcast_name . '/' . $file_name;
+    return $folder . '/' . $file_name;
 }
 
+/**
+ * @param string $fileUrl
+ * @return File
+ */
 function download_file($fileUrl)
 {
+    var_dump($fileUrl);
+
     $client = \Config\Services::curlrequest();
     $uri = new \CodeIgniter\HTTP\URI($fileUrl);
 
@@ -58,11 +66,11 @@ function download_file($fileUrl)
                 ResponseInterface::HTTP_TEMPORARY_REDIRECT,
                 ResponseInterface::HTTP_PERMANENT_REDIRECT,
             ],
-            true
+            true,
         )
     ) {
         $newFileUrl = (string) trim(
-            $response->getHeader('location')->getValue()
+            $response->getHeader('location')->getValue(),
         );
         $newLocation = new \CodeIgniter\HTTP\URI($newFileUrl);
         $response = $client->get($newLocation, [

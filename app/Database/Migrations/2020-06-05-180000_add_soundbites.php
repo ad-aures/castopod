@@ -63,8 +63,20 @@ class AddSoundbites extends Migration
         ]);
         $this->forge->addKey('id', true);
         $this->forge->addUniqueKey(['episode_id', 'start_time', 'duration']);
-        $this->forge->addForeignKey('podcast_id', 'podcasts', 'id');
-        $this->forge->addForeignKey('episode_id', 'episodes', 'id');
+        $this->forge->addForeignKey(
+            'podcast_id',
+            'podcasts',
+            'id',
+            false,
+            'CASCADE',
+        );
+        $this->forge->addForeignKey(
+            'episode_id',
+            'episodes',
+            'id',
+            false,
+            'CASCADE',
+        );
         $this->forge->addForeignKey('created_by', 'users', 'id');
         $this->forge->addForeignKey('updated_by', 'users', 'id');
         $this->forge->createTable('soundbites');

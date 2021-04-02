@@ -98,7 +98,6 @@ class PlatformSeeder extends Seeder
                 'home_url' => 'https://fyyd.de/',
                 'submit_url' => 'https://fyyd.de/add-feed',
             ],
-
             [
                 'slug' => 'google',
                 'type' => 'podcasting',
@@ -249,7 +248,6 @@ class PlatformSeeder extends Seeder
                 'submit_url' =>
                     'https://help.tunein.com/contact/add-podcast-S19TR3Sdf',
             ],
-
             [
                 'slug' => 'paypal',
                 'type' => 'funding',
@@ -257,7 +255,6 @@ class PlatformSeeder extends Seeder
                 'home_url' => 'https://www.paypal.com/',
                 'submit_url' => 'https://www.paypal.com/paypalme/my/grab',
             ],
-
             [
                 'slug' => 'gofundme',
                 'type' => 'funding',
@@ -322,7 +319,6 @@ class PlatformSeeder extends Seeder
                 'home_url' => 'https://www.ulule.com/',
                 'submit_url' => 'https://www.ulule.com/projects/create/#/',
             ],
-
             [
                 'slug' => 'discord',
                 'type' => 'social',
@@ -431,6 +427,7 @@ class PlatformSeeder extends Seeder
                 'submit_url' => 'https://creatoracademy.youtube.com/page/home',
             ],
         ];
+
         $this->db
             ->table('platforms')
             ->ignore(true)

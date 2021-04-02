@@ -1,4 +1,4 @@
-FROM php:7.2-fpm
+FROM php:7.3-fpm
 
 COPY . /castopod
 WORKDIR /castopod
@@ -25,3 +25,9 @@ RUN echo "file_uploads = On\n" \
          "post_max_size = 120M\n" \
          "max_execution_time = 300\n" \
          > /usr/local/etc/php/conf.d/uploads.ini
+
+# install cron
+RUN apt-get update && \
+    apt-get install -y cron
+
+RUN crontab /castopod/crontab

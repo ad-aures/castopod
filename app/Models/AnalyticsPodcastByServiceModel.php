@@ -34,25 +34,25 @@ class AnalyticsPodcastByServiceModel extends Model
     {
         if (
             !($found = cache(
-                "{$podcastId}_analytics_podcasts_by_service_weekly"
+                "{$podcastId}_analytics_podcasts_by_service_weekly",
             ))
         ) {
             $oneWeekAgo = date('Y-m-d', strtotime('-1 week'));
-            $found = $this->select('`service` as `labels`')
-                ->selectSum('`hits`', '`values`')
+            $found = $this->select('service as labels')
+                ->selectSum('hits', 'values')
                 ->where([
-                    '`podcast_id`' => $podcastId,
-                    '`service` !=' => '',
-                    '`is_bot`' => 0,
-                    '`date` >' => $oneWeekAgo,
+                    'podcast_id' => $podcastId,
+                    'service !=' => '',
+                    'is_bot' => 0,
+                    'date >' => $oneWeekAgo,
                 ])
-                ->groupBy('`labels`')
-                ->orderBy('`values`', 'DESC')
+                ->groupBy('labels')
+                ->orderBy('values', 'DESC')
                 ->findAll();
             cache()->save(
                 "{$podcastId}_analytics_podcasts_by_service_weekly",
                 $found,
-                600
+                600,
             );
         }
         return $found;

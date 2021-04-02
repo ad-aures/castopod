@@ -1,5 +1,15 @@
 #!/usr/bin/env php
 <?php
+// Valid PHP Version?
+$minPHPVersion = "7.3";
+if (version_compare(PHP_VERSION, $minPHPVersion, "<")) {
+    die(
+        "Your PHP version must be {$minPHPVersion} or higher to run CodeIgniter. Current version: " .
+            PHP_VERSION
+    );
+}
+unset($minPHPVersion);
+
 /*
  * --------------------------------------------------------------------
  * CodeIgniter command-line tools
@@ -11,7 +21,7 @@
  * this class mainly acts as a passthru to the framework itself.
  */
 
-define('SPARKED', true);
+define("SPARKED", true);
 
 /*
  *---------------------------------------------------------------
@@ -23,17 +33,20 @@ define('SPARKED', true);
  */
 
 // Refuse to run when called from php-cgi
-if (substr(php_sapi_name(), 0, 3) === 'cgi') {
+if (strpos(PHP_SAPI, "cgi") === 0) {
     die(
         "The cli tool is not supported when running php-cgi. It needs php-cli to function!\n\n"
     );
 }
 
 // Path to the front controller
-define('FCPATH', __DIR__ . '/public' . DIRECTORY_SEPARATOR);
+define(
+    "FCPATH",
+    __DIR__ . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR
+);
 
 // Load our paths config file
-require 'app/Config/Paths.php';
+require realpath("app/Config/Paths.php") ?: "app/Config/Paths.php";
 // ^^^ Change this line if you move your application folder
 
 $paths = new Config\Paths();
@@ -41,14 +54,18 @@ $paths = new Config\Paths();
 // Ensure the current directory is pointing to the front controller's directory
 chdir(FCPATH);
 
-$app = require rtrim($paths->systemDirectory, '/ ') . '/bootstrap.php';
+$bootstrap =
+    rtrim($paths->systemDirectory, "\\/ ") .
+    DIRECTORY_SEPARATOR .
+    "bootstrap.php";
+$app = require realpath($bootstrap) ?: $bootstrap;
 
 // Grab our Console
-$console = new \CodeIgniter\CLI\Console($app);
+$console = new CodeIgniter\CLI\Console($app);
 
 // We want errors to be shown when using it from the CLI.
 error_reporting(-1);
-ini_set('display_errors', 1);
+ini_set("display_errors", "1");
 
 // Show basic information before we do anything else.
 $console->showHeader();

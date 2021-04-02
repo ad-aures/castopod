@@ -6,23 +6,35 @@
   "homepage": "https://castopod.org",
   "license": "AGPL-3.0-or-later",
   "require": {
-    "php": ">=7.2",
+    "php": "^7.3||^8.0",
     "james-heinrich/getid3": "~2.0.0-dev",
-    "whichbrowser/parser": "^2.0",
-    "geoip2/geoip2": "~2.0",
+    "whichbrowser/parser": "^v2.1.1",
+    "geoip2/geoip2": "^v2.11.0",
     "myth/auth": "dev-develop",
     "codeigniter4/codeigniter4": "dev-develop",
-    "league/commonmark": "^1.5",
-    "vlucas/phpdotenv": "^5.2",
+    "league/commonmark": "^1.5.7",
+    "vlucas/phpdotenv": "^v5.3.0",
     "league/html-to-markdown": "^4.10",
-    "opawg/user-agents-php": "^1.0",
-    "podlibre/ipcat": "^1.0",
-    "podlibre/podcast-namespace": "^1.0.6"
+    "opawg/user-agents-php": "^v1.0",
+    "podlibre/ipcat": "^v1.0",
+    "podlibre/podcast-namespace": "^v1.0.6",
+    "phpseclib/phpseclib": "~2.0.30",
+    "michalsn/codeigniter4-uuid": "^1.0@beta",
+    "essence/essence": "^3.5.4"
   },
   "require-dev": {
-    "mikey179/vfsstream": "1.6.*",
-    "phpunit/phpunit": "8.5.*",
-    "squizlabs/php_codesniffer": "3.*"
+    "mikey179/vfsstream": "^v1.6.8",
+    "phpunit/phpunit": "^9.5.1",
+    "squizlabs/php_codesniffer": "3.5.8"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "app",
+      "Config\\": "app/Config"
+    },
+    "exclude-from-classmap": [
+      "**/Database/Migrations/**"
+    ]
   },
   "autoload-dev": {
     "psr-4": {

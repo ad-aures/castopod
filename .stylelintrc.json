@@ -9,7 +9,8 @@
           "apply",
           "responsive",
           "variants",
-          "screen"
+          "screen",
+          "layer"
         ]
       }
     ],

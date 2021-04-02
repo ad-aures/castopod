@@ -3,6 +3,8 @@
 namespace Config;
 
 use CodeIgniter\Config\BaseConfig;
+use CodeIgniter\Images\Handlers\GDHandler;
+use CodeIgniter\Images\Handlers\ImageMagickHandler;
 
 class Images extends BaseConfig
 {
@@ -24,20 +26,20 @@ class Images extends BaseConfig
     /**
      * The available handler classes.
      *
-     * @var array
+     * @var array<string, string>
      */
     public $handlers = [
-        'gd' => \CodeIgniter\Images\Handlers\GDHandler::class,
-        'imagick' => \CodeIgniter\Images\Handlers\ImageMagickHandler::class,
+        'gd' => GDHandler::class,
+        'imagick' => ImageMagickHandler::class,
     ];
 
-    /**
-     * --------------------------------------------------------------------------
-     * Uploaded images resizing sizes (in px)
-     * --------------------------------------------------------------------------
-     * The sizes listed below determine the resizing of images when uploaded.
-     * All uploaded images are of 1:1 ratio (width and height are the same).
-     */
+    /*
+	|--------------------------------------------------------------------------
+	| Uploaded images resizing sizes (in px)
+    |--------------------------------------------------------------------------
+    | The sizes listed below determine the resizing of images when uploaded.
+    | All uploaded images are of 1:1 ratio (width and height are the same).
+	*/
 
     /**
      * @var integer
@@ -68,12 +70,12 @@ class Images extends BaseConfig
      */
     public $id3Size = 500;
 
-    /**
-     * --------------------------------------------------------------------------
-     * Uploaded images naming extensions
-     * --------------------------------------------------------------------------
-     * The properties listed below set the name extensions for the resized images
-     */
+    /*
+	|--------------------------------------------------------------------------
+	| Uploaded images naming extensions
+    |--------------------------------------------------------------------------
+    | The properties listed below set the name extensions for the resized images
+	*/
 
     /**
      * @var string

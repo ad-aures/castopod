@@ -13,7 +13,7 @@ use CodeIgniter\Entity;
 class Person extends Entity
 {
     /**
-     * @var \App\Entities\Image
+     * @var \App\Libraries\Image
      */
     protected $image;
 
@@ -23,12 +23,13 @@ class Person extends Entity
         'unique_name' => 'string',
         'information_url' => '?string',
         'image_uri' => 'string',
+        'image_mimetype' => 'string',
         'created_by' => 'integer',
         'updated_by' => 'integer',
     ];
 
     /**
-     * Saves a picture in `public/media/~person/`
+     * Saves a picture in `public/media/persons/`
      *
      * @param \CodeIgniter\HTTP\Files\UploadedFile|\CodeIgniter\Files\File $image
      *
@@ -38,13 +39,15 @@ class Person extends Entity
         if ($image) {
             helper('media');
 
-            $this->attributes['image_uri'] = save_podcast_media(
+            $this->attributes['image_mimetype'] = $image->getMimeType();
+            $this->attributes['image_uri'] = save_media(
                 $image,
-                '~person',
-                $this->attributes['unique_name']
+                'persons',
+                $this->attributes['unique_name'],
             );
-            $this->image = new \App\Entities\Image(
-                $this->attributes['image_uri']
+            $this->image = new \App\Libraries\Image(
+                $this->attributes['image_uri'],
+                $this->attributes['image_mimetype'],
             );
             $this->image->saveSizes();
         }
@@ -54,6 +57,9 @@ class Person extends Entity
 
     public function getImage()
     {
-        return new \App\Entities\Image($this->attributes['image_uri']);
+        return new \App\Libraries\Image(
+            $this->attributes['image_uri'],
+            $this->attributes['image_mimetype'],
+        );
     }
 }
