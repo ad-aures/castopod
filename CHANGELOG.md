@@ -1,3 +1,10 @@
+# [1.0.0-alpha.42](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.41...v1.0.0-alpha.42) (2021-04-02)
+
+
+### Features
+
+* **fediverse:** implement activitypub protocols + update user interface ([2f525c0](https://code.podlibre.org/podlibre/castopod/commit/2f525c0f6e44d320bff16e22c223481923ba683e)), closes [#69](https://code.podlibre.org/podlibre/castopod/issues/69) [#65](https://code.podlibre.org/podlibre/castopod/issues/65) [#85](https://code.podlibre.org/podlibre/castopod/issues/85) [#51](https://code.podlibre.org/podlibre/castopod/issues/51) [#91](https://code.podlibre.org/podlibre/castopod/issues/91) [#92](https://code.podlibre.org/podlibre/castopod/issues/92) [#88](https://code.podlibre.org/podlibre/castopod/issues/88)
+
 # [1.0.0-alpha.41](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.40...v1.0.0-alpha.41) (2021-03-30)
 
 
