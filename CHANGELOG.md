@@ -1,3 +1,10 @@
+# [1.0.0-alpha.44](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.43...v1.0.0-alpha.44) (2021-04-08)
+
+
+### Bug Fixes
+
+* **rss:** set ❬itunes:author❭ tag to owner_name if publisher not specified ([2271c14](https://code.podlibre.org/podlibre/castopod/commit/2271c1445b1ded12bc53b5d23b5e59d12b17c71a)), closes [#96](https://code.podlibre.org/podlibre/castopod/issues/96)
+
 # [1.0.0-alpha.43](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.42...v1.0.0-alpha.43) (2021-04-08)
 
 
