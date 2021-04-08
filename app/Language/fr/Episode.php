@@ -43,6 +43,8 @@ return [
         'not_published' => 'Non publié',
     ],
     'form' => [
+        'warning' =>
+            'En cas d’erreur fatale, essayez d’augmenter les valeurs de `memory_limit`, `upload_max_filesize` et `post_max_size` dans votre fichier de configuration php puis redémarrez votre serveur web.<br />Les valeurs doivent être plus grandes que le fichier audio que vous souhaitez téléverser.',
         'enclosure' => 'Fichier audio',
         'enclosure_hint' => 'Sélectionnez un fichier audio .mp3 ou .m4a.',
         'info_section_title' => 'Informations épisode',

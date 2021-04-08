@@ -111,8 +111,8 @@ class Episode extends BaseController
             'enclosure' => 'uploaded[enclosure]|ext_in[enclosure,mp3,m4a]',
             'image' =>
                 'is_image[image]|ext_in[image,jpg,png]|min_dims[image,1400,1400]|is_image_squared[image]',
-            'transcript' => 'ext_in[transcript,txt,html,srt,json]',
-            'chapters' => 'ext_in[chapters,json]',
+            'transcript' => 'ext_in[transcript,txt,html,srt,json]|permit_empty',
+            'chapters' => 'ext_in[chapters,json]|permit_empty',
         ];
 
         if (!$this->validate($rules)) {
@@ -205,8 +205,8 @@ class Episode extends BaseController
                 'uploaded[enclosure]|ext_in[enclosure,mp3,m4a]|permit_empty',
             'image' =>
                 'is_image[image]|ext_in[image,jpg,png]|min_dims[image,1400,1400]|is_image_squared[image]',
-            'transcript' => 'ext_in[transcript,txt,html,srt,json]',
-            'chapters' => 'ext_in[chapters,json]',
+            'transcript' => 'ext_in[transcript,txt,html,srt,json]|permit_empty',
+            'chapters' => 'ext_in[chapters,json]|permit_empty',
         ];
 
         if (!$this->validate($rules)) {

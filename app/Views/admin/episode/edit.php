@@ -17,16 +17,21 @@
 ]) ?>
 <?= csrf_field() ?>
 
+<div class="inline-flex w-full p-2 mb-4 text-sm font-semibold text-yellow-800 bg-red-100 border border-red-300 rounded" role="alert">
+  <?= icon('alert', 'mr-2 text-lg flex-shrink-0') .
+      lang('Episode.form.warning') ?>
+</div>
+
 <?= form_section(
     lang('Episode.form.info_section_title'),
-    lang('Episode.form.info_section_subtitle')
+    lang('Episode.form.info_section_subtitle'),
 ) ?>
 
 <?= form_label(
     lang('Episode.form.enclosure'),
     'enclosure',
     [],
-    lang('Episode.form.enclosure_hint')
+    lang('Episode.form.enclosure_hint'),
 ) ?>
 <?= form_input([
     'id' => 'enclosure',
@@ -41,7 +46,7 @@
     'image',
     [],
     lang('Episode.form.image_hint'),
-    true
+    true,
 ) ?>
 <img
     src="<?= $episode->image->thumbnail_url ?>"
@@ -51,19 +56,20 @@
 <?= form_input([
     'id' => 'image',
     'name' => 'image',
+
     'class' => 'form-input',
     'type' => 'file',
     'accept' => '.jpg,.jpeg,.png',
 ]) ?>
 <small class="mb-4 text-gray-600"><?= lang(
-    'Common.forms.image_size_hint'
+    'Common.forms.image_size_hint',
 ) ?></small>
 
 <?= form_label(
     lang('Episode.form.title'),
     'title',
     [],
-    lang('Episode.form.title_hint')
+    lang('Episode.form.title_hint'),
 ) ?>
 <?= form_input([
     'id' => 'title',
@@ -78,7 +84,7 @@
     lang('Episode.form.slug'),
     'slug',
     [],
-    lang('Episode.form.slug_hint')
+    lang('Episode.form.slug_hint'),
 ) ?>
 <?= form_input([
     'id' => 'slug',
@@ -120,7 +126,7 @@
     <?= form_radio(
         ['id' => 'full', 'name' => 'type', 'class' => 'form-radio-btn'],
         'full',
-        old('type') ? old('type') === 'full' : $episode->type === 'full'
+        old('type') ? old('type') === 'full' : $episode->type === 'full',
     ) ?>
     <label for="full" class="inline-flex items-center">
         <?= lang('Episode.form.type.full') ?>
@@ -128,7 +134,7 @@
     <?= form_radio(
         ['id' => 'trailer', 'name' => 'type', 'class' => 'form-radio-btn'],
         'trailer',
-        old('type') ? old('type') === 'trailer' : $episode->type === 'trailer'
+        old('type') ? old('type') === 'trailer' : $episode->type === 'trailer',
     ) ?>
     <label for="trailer" class="inline-flex items-center">
         <?= lang('Episode.form.type.trailer') ?>
@@ -136,7 +142,7 @@
     <?= form_radio(
         ['id' => 'bonus', 'name' => 'type', 'class' => 'form-radio-btn'],
         'bonus',
-        old('type') ? old('type') === 'bonus' : $episode->type === 'bonus'
+        old('type') ? old('type') === 'bonus' : $episode->type === 'bonus',
     ) ?>
     <label for="bonus" class="inline-flex items-center">
         <?= lang('Episode.form.type.bonus') ?>
@@ -157,10 +163,10 @@
         'undefined',
         old('parental_advisory')
             ? old('parental_advisory') === 'undefined'
-            : $episode->parental_advisory === null
+            : $episode->parental_advisory === null,
     ) ?>
     <label for="undefined"><?= lang(
-        'Episode.form.parental_advisory.undefined'
+        'Episode.form.parental_advisory.undefined',
     ) ?></label>
     <?= form_radio(
         [
@@ -171,10 +177,10 @@
         'clean',
         old('parental_advisory')
             ? old('parental_advisory') === 'clean'
-            : $episode->parental_advisory === 'clean'
+            : $episode->parental_advisory === 'clean',
     ) ?>
     <label for="clean"><?= lang(
-        'Episode.form.parental_advisory.clean'
+        'Episode.form.parental_advisory.clean',
     ) ?></label>
     <?= form_radio(
         [
@@ -185,10 +191,10 @@
         'explicit',
         old('parental_advisory')
             ? old('parental_advisory') === 'explicit'
-            : $episode->parental_advisory === 'explicit'
+            : $episode->parental_advisory === 'explicit',
     ) ?>
     <label for="explicit"><?= lang(
-        'Episode.form.parental_advisory.explicit'
+        'Episode.form.parental_advisory.explicit',
     ) ?></label>
 <?= form_fieldset_close() ?>
 
@@ -197,7 +203,7 @@
 
 <?= form_section(
     lang('Episode.form.show_notes_section_title'),
-    lang('Episode.form.show_notes_section_subtitle')
+    lang('Episode.form.show_notes_section_subtitle'),
 ) ?>
 
 <div class="mb-4">
@@ -210,7 +216,7 @@
             'required' => 'required',
         ],
         old('description', $episode->description_markdown, false),
-        'data-editor="markdown"'
+        'data-editor="markdown"',
     ) ?>
 </div>
 
@@ -219,7 +225,7 @@
         lang('Episode.form.description_footer'),
         'description_footer',
         [],
-        lang('Episode.form.description_footer_hint')
+        lang('Episode.form.description_footer_hint'),
     ) ?>
     <?= form_textarea(
         [
@@ -230,9 +236,9 @@
         old(
             'description_footer',
             $podcast->episode_description_footer_markdown ?? '',
-            false
+            false,
         ),
-        'data-editor="markdown"'
+        'data-editor="markdown"',
     ) ?>
 </div>
 
@@ -240,7 +246,7 @@
 
 <?= form_section(
     lang('Episode.form.location_section_title'),
-    lang('Episode.form.location_section_subtitle')
+    lang('Episode.form.location_section_subtitle'),
 ) ?>
 
 <?= form_label(
@@ -248,7 +254,7 @@
     'location_name',
     [],
     lang('Episode.form.location_name_hint'),
-    true
+    true,
 ) ?>
 <?= form_input([
     'id' => 'location_name',
@@ -264,7 +270,7 @@
     lang('Episode.form.additional_files_section_subtitle', [
         'podcastNamespaceLink' =>
             '“<a href="https://github.com/Podcastindex-org/podcast-namespace" target="_blank" rel="noreferrer noopener" style="text-decoration: underline;">podcast namespace</a>”',
-    ])
+    ]),
 ) ?>
 <div class="flex flex-col flex-1">
 <?= form_label(
@@ -272,7 +278,7 @@
     'transcript',
     [],
     lang('Episode.form.transcript_hint'),
-    true
+    true,
 ) ?>
 <?php if ($episode->transcript): ?>
     <div class="flex justify-between">
@@ -283,7 +289,7 @@
                 'class' => 'inline-flex items-center text-xs',
                 'target' => '_blank',
                 'rel' => 'noreferrer noopener',
-            ]
+            ],
         ) .
             anchor(
                 route_to('transcript-delete', $podcast->id, $episode->id),
@@ -294,7 +300,7 @@
                     'data-toggle' => 'tooltip',
                     'data-placement' => 'bottom',
                     'title' => lang('Episode.form.transcript_delete'),
-                ]
+                ],
             ) ?>
     </div>
 <?php endif; ?>
@@ -312,7 +318,7 @@
     'chapters',
     [],
     lang('Episode.form.chapters_hint'),
-    true
+    true,
 ) ?>
 <?php if ($episode->chapters): ?>
     <div class="flex justify-between">
@@ -323,7 +329,7 @@
                 'class' => 'inline-flex items-center text-xs',
                 'target' => '_blank',
                 'rel' => 'noreferrer noopener',
-            ]
+            ],
         ) .
             anchor(
                 route_to('chapters-delete', $podcast->id, $episode->id),
@@ -334,7 +340,7 @@
                     'data-toggle' => 'tooltip',
                     'data-placement' => 'bottom',
                     'title' => lang('Episode.form.chapters_delete'),
-                ]
+                ],
             ) ?>
     </div>
 <?php endif; ?>
@@ -350,14 +356,14 @@
 
 <?= form_section(
     lang('Episode.form.advanced_section_title'),
-    lang('Episode.form.advanced_section_subtitle')
+    lang('Episode.form.advanced_section_subtitle'),
 ) ?>
 <?= form_label(
     lang('Episode.form.custom_rss'),
     'custom_rss',
     [],
     lang('Episode.form.custom_rss_hint'),
-    true
+    true,
 ) ?>
 <?= form_textarea([
     'id' => 'custom_rss',
@@ -372,14 +378,14 @@
         hint_tooltip(lang('Episode.form.block_hint'), 'ml-1'),
     ['id' => 'block', 'name' => 'block'],
     'yes',
-    old('block', $episode->is_blocked)
+    old('block', $episode->is_blocked),
 ) ?>
 
 <?= button(
     lang('Episode.form.submit_edit'),
     null,
     ['variant' => 'primary'],
-    ['type' => 'submit', 'class' => 'self-end']
+    ['type' => 'submit', 'class' => 'self-end'],
 ) ?>
 
 <?= form_close() ?>

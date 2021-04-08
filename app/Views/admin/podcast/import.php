@@ -16,6 +16,10 @@
 ]) ?>
 <?= csrf_field() ?>
 
+<div class="inline-flex w-full p-2 mb-6 text-sm font-semibold text-yellow-800 bg-red-100 border border-red-300 rounded" role="alert">
+  <?= icon('alert', 'mr-2 text-lg flex-shrink-0') .
+      lang('PodcastImport.warning') ?>
+</div>
 
 <?= form_section(
     lang('PodcastImport.old_podcast_section_title'),
@@ -214,11 +218,6 @@
 ]) ?>
 
 <?= form_section_close() ?>
-
-<div class="inline-flex w-full p-2 mb-4 text-sm font-semibold text-yellow-800 bg-red-100 border border-red-300 rounded" role="alert">
-  <?= icon('alert', 'mr-2 text-lg flex-shrink-0') .
-      lang('PodcastImport.warning') ?>
-</div>
 
 <?= button(
     lang('PodcastImport.submit'),

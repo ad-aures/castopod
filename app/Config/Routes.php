@@ -90,10 +90,6 @@ $routes->group(
             'as' => 'admin',
         ]);
 
-        $routes->get('my-podcasts', 'Podcast::myPodcasts', [
-            'as' => 'my-podcasts',
-        ]);
-
         $routes->group('persons', function ($routes) {
             $routes->get('/', 'Person', [
                 'as' => 'person-list',

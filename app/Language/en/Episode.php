@@ -43,6 +43,8 @@ return [
         'not_published' => 'Not published',
     ],
     'form' => [
+        'warning' =>
+            'In case of fatal error, try increasing the `memory_limit`, `upload_max_filesize` and `post_max_size` values in your php configuration file then restart your web server.<br />These values must be higher than the audio file you wish to upload.',
         'enclosure' => 'Audio file',
         'enclosure_hint' => 'Choose an .mp3 or .m4a audio file.',
         'info_section_title' => 'Episode info',
