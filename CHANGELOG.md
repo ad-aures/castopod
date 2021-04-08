@@ -1,3 +1,10 @@
+# [1.0.0-alpha.45](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.44...v1.0.0-alpha.45) (2021-04-08)
+
+
+### Bug Fixes
+
+* add head request to analytics_hit route ([f0a2f0b](https://code.podlibre.org/podlibre/castopod/commit/f0a2f0bea491ca91976b351bb79837e95c9d094b))
+
 # [1.0.0-alpha.44](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.43...v1.0.0-alpha.44) (2021-04-08)
 
 
