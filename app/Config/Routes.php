@@ -71,6 +71,9 @@ $routes->group(config('App')->installGateway, function ($routes) {
 });
 
 // Route for podcast audio file analytics (/audio/pack(podcast_id,episode_id,bytes_threshold,filesize,duration,date)/podcast_folder/filename.mp3)
+$routes->head('audio/(:base64)/(:any)', 'Analytics::hit/$1/$2', [
+    'as' => 'analytics_hit',
+]);
 $routes->get('audio/(:base64)/(:any)', 'Analytics::hit/$1/$2', [
     'as' => 'analytics_hit',
 ]);
