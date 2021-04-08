@@ -1,3 +1,10 @@
+# [1.0.0-alpha.43](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.42...v1.0.0-alpha.43) (2021-04-08)
+
+
+### Bug Fixes
+
+* **episode-form:** show warning to set `memory_limit`, `upload_max_filesize` & `post_max_size` ([3b3c218](https://code.podlibre.org/podlibre/castopod/commit/3b3c218b9c868e9f12c54d7670e69d84c9ee79c0)), closes [#5](https://code.podlibre.org/podlibre/castopod/issues/5) [#86](https://code.podlibre.org/podlibre/castopod/issues/86)
+
 # [1.0.0-alpha.42](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.41...v1.0.0-alpha.42) (2021-04-02)
 
 
