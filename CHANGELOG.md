@@ -1,3 +1,10 @@
+# [1.0.0-alpha.46](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.45...v1.0.0-alpha.46) (2021-04-09)
+
+
+### Bug Fixes
+
+* **episodes-page:** handle defaultQuery being null when no podcast episodes ([15183b7](https://code.podlibre.org/podlibre/castopod/commit/15183b7eab57dac007bcdfa8c3651239de1ae05a)), closes [#100](https://code.podlibre.org/podlibre/castopod/issues/100)
+
 # [1.0.0-alpha.45](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.44...v1.0.0-alpha.45) (2021-04-08)
 
 
