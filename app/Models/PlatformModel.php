@@ -36,7 +36,7 @@ class PlatformModel extends Model
         if (!($found = cache('platforms'))) {
             $baseUrl = rtrim(config('app')->baseURL, '/');
             $found = $this->select(
-                "*, CONCAT('{$baseUrl}/assets/images/platforms/',`type`,'/',`slug`,'.svg') as icon"
+                "*, CONCAT('{$baseUrl}/assets/images/platforms/',`type`,'/',`slug`,'.svg') as icon",
             )->findAll();
             cache()->save('platforms', $found, DECADE);
         }
@@ -75,12 +75,12 @@ class PlatformModel extends Model
             !($found = cache("podcast{$podcastId}_platforms_{$platformType}"))
         ) {
             $found = $this->select(
-                'platforms.*, podcasts_platforms.link_url, podcasts_platforms.link_content, podcasts_platforms.is_visible, podcasts_platforms.is_on_embeddable_player'
+                'platforms.*, podcasts_platforms.link_url, podcasts_platforms.link_content, podcasts_platforms.is_visible, podcasts_platforms.is_on_embeddable_player',
             )
                 ->join(
                     'podcasts_platforms',
                     "podcasts_platforms.platform_slug = platforms.slug AND podcasts_platforms.podcast_id = $podcastId",
-                    'left'
+                    'left',
                 )
                 ->where('platforms.type', $platformType)
                 ->findAll();
@@ -88,7 +88,7 @@ class PlatformModel extends Model
             cache()->save(
                 "podcast{$podcastId}_platforms_{$platformType}",
                 $found,
-                DECADE
+                DECADE,
             );
         }
 
@@ -99,15 +99,15 @@ class PlatformModel extends Model
     {
         if (
             !($found = cache(
-                "podcast{$podcastId}_podcastPlatforms_{$platformType}"
+                "podcast{$podcastId}_podcastPlatforms_{$platformType}",
             ))
         ) {
             $found = $this->select(
-                'platforms.*, podcasts_platforms.link_url, podcasts_platforms.link_content, podcasts_platforms.is_visible, podcasts_platforms.is_on_embeddable_player'
+                'platforms.*, podcasts_platforms.link_url, podcasts_platforms.link_content, podcasts_platforms.is_visible, podcasts_platforms.is_on_embeddable_player',
             )
                 ->join(
                     'podcasts_platforms',
-                    'podcasts_platforms.platform_slug = platforms.slug'
+                    'podcasts_platforms.platform_slug = platforms.slug',
                 )
                 ->where('podcasts_platforms.podcast_id', $podcastId)
                 ->where('platforms.type', $platformType)
@@ -116,7 +116,7 @@ class PlatformModel extends Model
             cache()->save(
                 "podcast{$podcastId}_podcastPlatforms_{$platformType}",
                 $found,
-                DECADE
+                DECADE,
             );
         }
 
@@ -133,11 +133,11 @@ class PlatformModel extends Model
         $podcastsPlatformsTable = $this->db->prefixTable('podcasts_platforms');
         $platformsTable = $this->db->prefixTable('platforms');
         $deleteJoinQuery = <<<EOD
-DELETE $podcastsPlatformsTable
-FROM $podcastsPlatformsTable
-INNER JOIN $platformsTable ON $platformsTable.slug = $podcastsPlatformsTable.platform_slug
-WHERE `podcast_id` = ? AND `type` = ?
-EOD;
+        DELETE $podcastsPlatformsTable
+        FROM $podcastsPlatformsTable
+        INNER JOIN $platformsTable ON $platformsTable.slug = $podcastsPlatformsTable.platform_slug
+        WHERE `podcast_id` = ? AND `type` = ?
+        EOD;
         $this->db->query($deleteJoinQuery, [$podcastId, $platformType]);
 
         // Set podcastPlatforms
@@ -173,7 +173,7 @@ EOD;
         foreach (['podcasting', 'social', 'funding'] as $platformType) {
             cache()->delete("podcast{$podcastId}_platforms_{$platformType}");
             cache()->delete(
-                "podcast{$podcastId}_podcastPlatforms_{$platformType}"
+                "podcast{$podcastId}_podcastPlatforms_{$platformType}",
             );
         }
         // delete localized podcast page cache
@@ -185,7 +185,7 @@ EOD;
         foreach ($years as $year) {
             foreach ($supportedLocales as $locale) {
                 cache()->delete(
-                    "page_podcast{$podcastId}_{$year['year']}_{$locale}"
+                    "page_podcast{$podcastId}_year{$year['year']}_{$locale}",
                 );
             }
         }
@@ -193,7 +193,7 @@ EOD;
         foreach ($seasons as $season) {
             foreach ($supportedLocales as $locale) {
                 cache()->delete(
-                    "page_podcast{$podcastId}_season{$season['season_number']}_{$locale}"
+                    "page_podcast{$podcastId}_season{$season['season_number']}_{$locale}",
                 );
             }
         }
@@ -202,14 +202,14 @@ EOD;
         foreach ($podcast->episodes as $episode) {
             foreach ($supportedLocales as $locale) {
                 cache()->delete(
-                    "page_podcast{$podcast->id}_episode{$episode->id}_{$locale}"
+                    "page_podcast{$podcast->id}_episode{$episode->id}_{$locale}",
                 );
                 foreach (
                     array_keys(\App\Models\EpisodeModel::$themes)
                     as $themeKey
                 ) {
                     cache()->delete(
-                        "page_podcast{$podcast->id}_episode{$episode->id}_embeddable_player_{$themeKey}_{$locale}"
+                        "page_podcast{$podcast->id}_episode{$episode->id}_embeddable_player_{$themeKey}_{$locale}",
                     );
                 }
             }

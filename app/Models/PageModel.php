@@ -38,7 +38,7 @@ class PageModel extends Model
     protected function clearCache(array $data)
     {
         $page = (new PageModel())->find(
-            is_array($data['id']) ? $data['id'][0] : $data['id']
+            is_array($data['id']) ? $data['id'][0] : $data['id'],
         );
 
         // delete page cache
@@ -57,14 +57,14 @@ class PageModel extends Model
             foreach ($years as $year) {
                 foreach ($supportedLocales as $locale) {
                     cache()->delete(
-                        "page_podcast{$podcast->id}_{$year['year']}_{$locale}"
+                        "page_podcast{$podcast->id}_year{$year['year']}_{$locale}",
                     );
                 }
             }
             foreach ($seasons as $season) {
                 foreach ($supportedLocales as $locale) {
                     cache()->delete(
-                        "page_podcast{$podcast->id}_season{$season['season_number']}_{$locale}"
+                        "page_podcast{$podcast->id}_season{$season['season_number']}_{$locale}",
                     );
                 }
             }
@@ -72,7 +72,7 @@ class PageModel extends Model
             foreach ($podcast->episodes as $episode) {
                 foreach ($supportedLocales as $locale) {
                     cache()->delete(
-                        "page_podcast{$podcast->id}_episode{$episode->id}_{$locale}"
+                        "page_podcast{$podcast->id}_episode{$episode->id}_{$locale}",
                     );
                 }
             }

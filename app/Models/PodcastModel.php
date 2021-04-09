@@ -241,10 +241,12 @@ class PodcastModel extends Model
         $seasons = $episodeModel->getSeasons($podcast->id);
 
         foreach ($years as $year) {
-            cache()->delete("podcast{$podcast->id}_{$year['year']}_episodes");
+            cache()->delete(
+                "podcast{$podcast->id}_year{$year['year']}_episodes",
+            );
             foreach ($supportedLocales as $locale) {
                 cache()->delete(
-                    "page_podcast{$podcast->id}_{$year['year']}_{$locale}",
+                    "page_podcast{$podcast->id}_year{$year['year']}_{$locale}",
                 );
             }
         }

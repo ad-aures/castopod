@@ -314,7 +314,7 @@ class EpisodeModel extends Model
      *
      * @param int $podcastId
      *
-     * @return array
+     * @return array|null
      */
     public function getDefaultQuery(int $podcastId)
     {
@@ -419,11 +419,11 @@ class EpisodeModel extends Model
 
         foreach ($years as $year) {
             cache()->delete(
-                "podcast{$episode->podcast_id}_{$year['year']}_episodes",
+                "podcast{$episode->podcast_id}_year{$year['year']}_episodes",
             );
             foreach ($supportedLocales as $locale) {
                 cache()->delete(
-                    "page_podcast{$episode->podcast_id}_{$year['year']}_{$locale}",
+                    "page_podcast{$episode->podcast_id}_year{$year['year']}_{$locale}",
                 );
             }
         }

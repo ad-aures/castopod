@@ -69,10 +69,12 @@ class Podcast extends BaseController
             $defaultQuery = (new EpisodeModel())->getDefaultQuery(
                 $this->podcast->id,
             );
-            if ($defaultQuery['type'] == 'season') {
-                $seasonQuery = $defaultQuery['data']['season_number'];
-            } elseif ($defaultQuery['type'] == 'year') {
-                $yearQuery = $defaultQuery['data']['year'];
+            if ($defaultQuery) {
+                if ($defaultQuery['type'] == 'season') {
+                    $seasonQuery = $defaultQuery['data']['season_number'];
+                } elseif ($defaultQuery['type'] == 'year') {
+                    $yearQuery = $defaultQuery['data']['year'];
+                }
             }
         }
 
@@ -81,7 +83,7 @@ class Podcast extends BaseController
             array_filter([
                 'page',
                 "podcast{$this->podcast->id}",
-                $yearQuery,
+                $yearQuery ? 'year' . $yearQuery : null,
                 $seasonQuery ? 'season' . $seasonQuery : null,
                 service('request')->getLocale(),
             ]),
