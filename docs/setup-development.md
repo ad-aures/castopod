@@ -36,15 +36,29 @@ git clone https://code.podlibre.org/podlibre/castopod.git
 ```
 
 2. Create a `.env` file with the minimum required config to connect the app to
-   the database:
+   the database and use redis as a cache handler:
 
 ```ini
 CI_ENVIRONMENT="development"
+
+app.baseURL="http://localhost:8080/"
+app.mediaBaseURL="http://localhost:8080/"
+
+app.adminGateway="cp-admin"
+app.authGateway="cp-auth"
 
 database.default.hostname="mariadb"
 database.default.database="castopod"
 database.default.username="podlibre"
 database.default.password="castopod"
+
+cache.handler="redis"
+cache.redis.host = "redis"
+
+# You may not want to use redis as your cache handler
+# Comment/remove the two lines above and uncomment
+# the next line for file caching.
+#cache.handler="file"
 ```
 
 > _NB._ You can tweak your environment by setting more environment variables in
@@ -99,18 +113,19 @@ docker-compose ps
 
 # Alternatively, you can check all docker processes (you should see composer and npm with an Exited status)
 docker ps -a
+
 ```
 
-> The `docker-compose up -d` command will boot 3 containers in the background:
+> The `docker-compose up -d` command will boot 4 containers in the background:
 >
-> - `castopod_app`: a php based container with codeigniter requirements
+> - `castopod_app`: a php based container with CodeIgniter4 requirements
 >   installed
+> - `castopod_redis`: a [redis](https://redis.io/) database to handle queries
+>   and pages caching
 > - `castopod_mariadb`: a [mariadb](https://mariadb.org/) server for persistent
 >   data
-> - `castopod_phpmyadmin`: a phpmyadmin server to visualize the mariadb database
->
-> _NB._ `./mariadb`, `./phpmyadmin` folders will be mounted in the project's
-> root directory to persist data and logs.
+> - `castopod_phpmyadmin`: a phpmyadmin server to visualize the mariadb
+>   database.
 
 ## Initialize and populate database
 
@@ -220,6 +235,12 @@ To see your changes, go to:
 ```bash
 # monitor the app container
 docker-compose logs --tail 50 --follow --timestamps app
+
+# interact with redis server using included redis-cli command
+docker exec -it castopod_redis redis-cli
+
+# monitor the redis container
+docker-compose logs --tail 50 --follow --timestamps redis
 
 # monitor the mariadb container
 docker-compose logs --tail 50 --follow --timestamps mariadb

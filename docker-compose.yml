@@ -16,7 +16,18 @@ services:
     volumes:
       - .:/castopod
     depends_on:
+      - redis
       - mariadb
+    networks:
+      - castopod
+
+  redis:
+    image: "redis:alpine"
+    container_name: "castopod_redis"
+    ports:
+      - 6379:6379
+    volumes:
+      - redis:/data
     networks:
       - castopod
 
@@ -69,5 +80,6 @@ services:
       - castopod
 
 volumes:
+  redis:
   mariadb:
   phpmyadmin:
