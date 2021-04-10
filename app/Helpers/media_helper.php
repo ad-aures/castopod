@@ -45,9 +45,8 @@ function download_file($fileUrl)
     var_dump($fileUrl);
 
     $client = \Config\Services::curlrequest();
-    $uri = new \CodeIgniter\HTTP\URI($fileUrl);
 
-    $response = $client->get($uri, [
+    $response = $client->get($fileUrl, [
         'headers' => [
             'User-Agent' => 'Castopod/' . CP_VERSION,
         ],
@@ -72,8 +71,7 @@ function download_file($fileUrl)
         $newFileUrl = (string) trim(
             $response->getHeader('location')->getValue(),
         );
-        $newLocation = new \CodeIgniter\HTTP\URI($newFileUrl);
-        $response = $client->get($newLocation, [
+        $response = $client->get($newFileUrl, [
             'headers' => [
                 'User-Agent' => 'Castopod/' . CP_VERSION,
             ],
