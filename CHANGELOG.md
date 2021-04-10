@@ -1,3 +1,10 @@
+# [1.0.0-alpha.47](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.46...v1.0.0-alpha.47) (2021-04-10)
+
+
+### Bug Fixes
+
+* **episodeCount:** add missing brackets to French language file ([c1b4112](https://code.podlibre.org/podlibre/castopod/commit/c1b411265ad9b06e95a8b097ecf73445b88dcb45))
+
 # [1.0.0-alpha.46](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.45...v1.0.0-alpha.46) (2021-04-09)
 
 
