@@ -1,3 +1,10 @@
+# [1.0.0-alpha.48](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.47...v1.0.0-alpha.48) (2021-04-10)
+
+
+### Bug Fixes
+
+* **import-with-escaped-characters:** remove \CodeIgniter\HTTP\URI in download_file, closes [#103](https://code.podlibre.org/podlibre/castopod/issues/103) ([35b5be0](https://code.podlibre.org/podlibre/castopod/commit/35b5be095ff54d27acec1610a846ec0cdbdf1d65))
+
 # [1.0.0-alpha.47](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.46...v1.0.0-alpha.47) (2021-04-10)
 
 

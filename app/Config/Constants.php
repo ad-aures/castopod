@@ -9,7 +9,7 @@
  |
  | NOTE: this constant is updated upon release with Continuous Integration.
  */
-defined('CP_VERSION') || define('CP_VERSION', '1.0.0-alpha.47');
+defined('CP_VERSION') || define('CP_VERSION', '1.0.0-alpha.48');
 
 /*
  | --------------------------------------------------------------------
