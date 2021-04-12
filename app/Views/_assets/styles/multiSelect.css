@@ -1,7 +1,8 @@
-@layer components {
-  /*===============================
+/*===============================
 =          MultiSelect          =
 ===============================*/
+
+@layer components {
   .multiselect {
     @apply relative;
 
@@ -177,6 +178,6 @@
   .multiselect__placeholder {
     @apply opacity-50;
   }
-
-  /*=====  End of Choices  ======*/
 }
+
+/*=====  End of Multiselect  ======*/
