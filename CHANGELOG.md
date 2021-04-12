@@ -1,3 +1,10 @@
+# [1.0.0-alpha.49](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.48...v1.0.0-alpha.49) (2021-04-12)
+
+
+### Bug Fixes
+
+* **multiselect:** add missing class names in choices options for purge to work properly ([719538d](https://code.podlibre.org/podlibre/castopod/commit/719538d0ccb28af3c3c5e1a4b6468d4b772fe819))
+
 # [1.0.0-alpha.48](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.47...v1.0.0-alpha.48) (2021-04-10)
 
 
