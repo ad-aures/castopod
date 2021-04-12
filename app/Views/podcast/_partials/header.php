@@ -54,16 +54,18 @@
             <?php endforeach; ?>
         </div>
         <?php if (!empty($persons)): ?>
-        <div class="flex mb-6 space-x-2">
+        <div class="flex w-full mb-6 space-x-2 overflow-y-auto">
             <?php foreach ($persons as $person): ?>
                 <?php if ($person['information_url']): ?>
                     <a href="<?= $person[
                         'information_url'
-                    ] ?>" target="_blank" rel="noreferrer noopener">
+                    ] ?>" target="_blank" rel="noreferrer noopener" class="flex-shrink-0">
                         <img
                         src="<?= $person['thumbnail_url'] ?>"
                         alt="<?= $person['full_name'] ?>"
                         class="object-cover w-12 h-12 rounded-full"
+                        data-toggle="tooltip"
+                        data-placement="bottom"
                         title="[<?= $person['full_name'] ?>] <?= $person[
     'roles'
 ] ?>" />
@@ -73,6 +75,8 @@
                     src="<?= $person['thumbnail_url'] ?>"
                     alt="<?= $person['full_name'] ?>"
                     class="object-cover w-12 h-12 rounded-full"
+                    data-toggle="tooltip"
+                    data-placement="bottom"
                     title="[<?= $person['full_name'] ?>] <?= $person[
     'roles'
 ] ?>" />

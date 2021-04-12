@@ -120,27 +120,29 @@
                     ) ?>
                 <?php endif; ?>
                 <?php if ($episodePersons): ?>
-                    <div class="flex space-x-2">
+                    <div class="flex w-full space-x-2 overflow-y-auto">
                         <?php foreach ($episodePersons as $person): ?>
                             <?php if ($person['information_url']): ?>
                                 <a href="<?= $person[
                                     'information_url'
-                                ] ?>" target="_blank" rel="noreferrer noopener">
+                                ] ?>" target="_blank" rel="noreferrer noopener" class="flex-shrink-0">
                                     <img src="<?= $person[
                                         'thumbnail_url'
                                     ] ?>" alt="<?= $person[
     'full_name'
-] ?>" class="object-cover w-12 h-12 rounded-full" title="[<?= $person[
-    'full_name'
-] ?>] <?= $person['roles'] ?>" /></a>
+] ?>" class="object-cover w-12 h-12 rounded-full" data-toggle="tooltip"
+data-placement="bottom" title="[<?= $person['full_name'] ?>] <?= $person[
+    'roles'
+] ?>" /></a>
                             <?php else: ?>
                                 <img src="<?= $person[
                                     'thumbnail_url'
                                 ] ?>" alt="<?= $person[
     'full_name'
-] ?>" class="object-cover w-12 h-12 rounded-full" title="[<?= $person[
-    'full_name'
-] ?>] <?= $person['roles'] ?>" />
+] ?>" class="object-cover w-12 h-12 rounded-full" data-toggle="tooltip"
+data-placement="bottom" title="[<?= $person['full_name'] ?>] <?= $person[
+    'roles'
+] ?>" />
                             <?php endif; ?>
                         <?php endforeach; ?>
                     </div>
