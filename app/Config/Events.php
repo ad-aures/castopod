@@ -58,7 +58,7 @@ Events::on('login', function ($user) {
     // set interact_as_actor_id value
     $userPodcasts = $user->podcasts;
     if ($userPodcasts = $user->podcasts) {
-        set_interact_as_actor($userPodcasts[0]->id);
+        set_interact_as_actor($userPodcasts[0]->actor_id);
     }
 });
 
@@ -66,7 +66,7 @@ Events::on('logout', function ($user) {
     helper('auth');
 
     // remove user's interact_as_actor session
-    remove_interact_as_actor($user->id);
+    remove_interact_as_actor();
 });
 
 /*
