@@ -336,37 +336,14 @@ class Episode extends Entity
     {
         helper('analytics');
 
-        return base_url(
-            route_to(
-                'analytics_hit',
-                base64_url_encode(
-                    pack(
-                        'I*',
-                        $this->attributes['podcast_id'],
-                        $this->attributes['id'],
-                        // bytes_threshold: number of bytes that must be downloaded for an episode to be counted in download analytics
-                        // - if file is shorter than 60sec, then it's enclosure_filesize
-                        // - if file is longer than 60 seconds then it's enclosure_headersize + 60 seconds
-                        $this->attributes['enclosure_duration'] <= 60
-                            ? $this->attributes['enclosure_filesize']
-                            : $this->attributes['enclosure_headersize'] +
-                                floor(
-                                    (($this->attributes['enclosure_filesize'] -
-                                        $this->attributes[
-                                            'enclosure_headersize'
-                                        ]) /
-                                        $this->attributes[
-                                            'enclosure_duration'
-                                        ]) *
-                                        60,
-                                ),
-                        $this->attributes['enclosure_filesize'],
-                        $this->attributes['enclosure_duration'],
-                        strtotime($this->attributes['published_at']),
-                    ),
-                ),
-                $this->attributes['enclosure_uri'],
-            ),
+        return generate_episode_analytics_url(
+            $this->podcast_id,
+            $this->id,
+            $this->enclosure_uri,
+            $this->enclosure_duration,
+            $this->enclosure_filesize,
+            $this->enclosure_headersize,
+            $this->published_at,
         );
     }
 
@@ -520,9 +497,9 @@ class Episode extends Entity
         empty($this->getPodcast()->partner_image_url)
             ? ''
             : "<div><a href=\"{$this->getPartnerLink(
-                $serviceSlug
+                $serviceSlug,
             )}\" rel=\"sponsored noopener noreferrer\" target=\"_blank\"><img src=\"{$this->getPartnerImage(
-                $serviceSlug
+                $serviceSlug,
             )}\" alt=\"Partner image\" /></a></div>") .
             $this->attributes['description_html'] .
             (empty($this->getPodcast()->episode_description_footer_html)

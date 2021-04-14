@@ -95,9 +95,9 @@ Go to project's root folder and run:
 docker-compose up -d
 
 # See all running processes (you should see 3 processes running)
-docker ps
+docker-compose ps
 
-# Alternatively, you can check all processes (you should see composer with an Exited status)
+# Alternatively, you can check all docker processes (you should see composer and npm with an Exited status)
 docker ps -a
 ```
 
@@ -146,17 +146,20 @@ docker-compose run --rm app php spark db:seed LanguageSeeder
 docker-compose run --rm app php spark db:seed PlatformSeeder
 # Populates all Authentication data (roles definition…)
 docker-compose run --rm app php spark db:seed AuthSeeder
-# Populates test data (login: admin / password: AGUehL3P)
-docker-compose run --rm app php spark db:seed TestSeeder
 ```
 
 3. (optionnal) Populate the database with test data:
 
 ```bash
+# Populates test data (login: admin / password: AGUehL3P)
 docker-compose run --rm app php spark db:seed TestSeeder
+# Populates with fake podcast analytics
+docker-compose run --rm app php spark db:seed FakePodcastsAnalyticsSeeder
+# Populates with fake website analytics
+docker-compose run --rm app php spark db:seed FakeWebsiteAnalyticsSeeder
 ```
 
-This will add an active superadmin user with the following credentials:
+TestSeeder will add an active superadmin user with the following credentials:
 
 - username: **admin**
 - password: **AGUehL3P**
@@ -205,8 +208,8 @@ To see your changes, go to:
 - [localhost:8080](http://localhost:8080/) for the castopod app
 - [localhost:8888](http://localhost:8888/) for the phpmyadmin interface:
 
-  - **Username**: podlibre
-  - **Password**: castopod
+  - username: **podlibre**
+  - password: **castopod**
 
 ---
 
@@ -216,19 +219,22 @@ To see your changes, go to:
 
 ```bash
 # monitor the app container
-docker logs --tail 50 --follow --timestamps castopod_app
+docker-compose logs --tail 50 --follow --timestamps app
 
 # monitor the mariadb container
-docker logs --tail 50 --follow --timestamps castopod_mariadb
+docker-compose logs --tail 50 --follow --timestamps mariadb
 
 # monitor the phpmyadmin container
-docker logs --tail 50 --follow --timestamps castopod_phpmyadmin
+docker-compose logs --tail 50 --follow --timestamps phpmyadmin
 
 # restart docker containers
 docker-compose restart
 
 # Destroy all containers, opposite of `up` command
 docker-compose down
+
+# Rebuild app container
+docker-compose build app
 ```
 
 Check [docker](https://docs.docker.com/engine/reference/commandline/docker/) and

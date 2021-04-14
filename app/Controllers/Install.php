@@ -111,7 +111,7 @@ class Install extends Controller
             // show database config view to fix value
             session()->setFlashdata(
                 'error',
-                lang('Install.messages.databaseConnectError')
+                lang('Install.messages.databaseConnectError'),
             );
 
             return view('install/database_config');
@@ -159,7 +159,7 @@ class Install extends Controller
             return redirect()
                 ->to(
                     (empty(host_url()) ? config('App')->baseURL : host_url()) .
-                        config('App')->installGateway
+                        config('App')->installGateway,
                 )
                 ->withInput()
                 ->with('errors', $this->validator->getErrors());
@@ -181,8 +181,8 @@ class Install extends Controller
         // redirect to full install url with new baseUrl input
         return redirect(0)->to(
             reduce_double_slashes(
-                $baseUrl . '/' . config('App')->installGateway
-            )
+                $baseUrl . '/' . config('App')->installGateway,
+            ),
         );
     }
 
@@ -209,14 +209,14 @@ class Install extends Controller
 
         self::writeEnv([
             'database.default.hostname' => $this->request->getPost(
-                'db_hostname'
+                'db_hostname',
             ),
             'database.default.database' => $this->request->getPost('db_name'),
             'database.default.username' => $this->request->getPost(
-                'db_username'
+                'db_username',
             ),
             'database.default.password' => $this->request->getPost(
-                'db_password'
+                'db_password',
             ),
             'database.default.DBPrefix' => $this->request->getPost('db_prefix'),
         ]);
@@ -258,6 +258,7 @@ class Install extends Controller
 
         !$migrations->setNamespace('Myth\Auth')->latest();
         !$migrations->setNamespace('ActivityPub')->latest();
+        !$migrations->setNamespace('Analytics')->latest();
         !$migrations->setNamespace(APP_NAMESPACE)->latest();
     }
 
@@ -296,7 +297,7 @@ class Install extends Controller
             [
                 'email' => 'required|valid_email|is_unique[users.email]',
                 'password' => 'required|strong_password',
-            ]
+            ],
         );
 
         if (!$this->validate($rules)) {

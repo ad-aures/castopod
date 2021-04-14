@@ -44,8 +44,6 @@ class Episode extends BaseController
 
     public function index()
     {
-        $episodeModel = new EpisodeModel();
-
         self::triggerWebpageHit($this->podcast->id);
 
         $locale = service('request')->getLocale();
@@ -65,7 +63,7 @@ class Episode extends BaseController
                 'persons' => $podcastPersons,
             ];
 
-            $secondsToNextUnpublishedEpisode = $episodeModel->getSecondsToNextUnpublishedEpisode(
+            $secondsToNextUnpublishedEpisode = (new EpisodeModel())->getSecondsToNextUnpublishedEpisode(
                 $this->podcast->id,
             );
 
@@ -112,7 +110,6 @@ class Episode extends BaseController
         $cacheName = "page_podcast{$this->episode->podcast_id}_episode{$this->episode->id}_embeddable_player_{$theme}_{$locale}";
 
         if (!($cachedView = cache($cacheName))) {
-            $episodeModel = new EpisodeModel();
             $theme = EpisodeModel::$themes[$theme];
 
             $data = [
@@ -121,7 +118,7 @@ class Episode extends BaseController
                 'theme' => $theme,
             ];
 
-            $secondsToNextUnpublishedEpisode = $episodeModel->getSecondsToNextUnpublishedEpisode(
+            $secondsToNextUnpublishedEpisode = (new EpisodeModel())->getSecondsToNextUnpublishedEpisode(
                 $this->podcast->id,
             );
 

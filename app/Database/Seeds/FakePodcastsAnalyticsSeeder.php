@@ -10,6 +10,7 @@
  */
 
 namespace App\Database\Seeds;
+
 use App\Models\PodcastModel;
 use App\Models\EpisodeModel;
 
@@ -23,16 +24,16 @@ class FakePodcastsAnalyticsSeeder extends Seeder
 
         $jsonUserAgents = json_decode(
             file_get_contents(
-                'https://raw.githubusercontent.com/opawg/user-agents/master/src/user-agents.json'
+                'https://raw.githubusercontent.com/opawg/user-agents/master/src/user-agents.json',
             ),
-            true
+            true,
         );
 
         $jsonRSSUserAgents = json_decode(
             file_get_contents(
-                'https://raw.githubusercontent.com/opawg/podcast-rss-useragents/master/src/rss-ua.json'
+                'https://raw.githubusercontent.com/opawg/podcast-rss-useragents/master/src/rss-ua.json',
             ),
-            true
+            true,
         );
 
         if ($podcast) {
@@ -60,7 +61,7 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                     ->findAll();
                 foreach ($episodes as $episode) {
                     $age = floor(
-                        ($date - strtotime($episode->published_at)) / 86400
+                        ($date - strtotime($episode->published_at)) / 86400,
                     );
                     $proba1 = floor(exp(3 - $age / 40)) + 1;
 
@@ -97,7 +98,7 @@ class FakePodcastsAnalyticsSeeder extends Seeder
 
                         $cityReader = new \GeoIp2\Database\Reader(
                             WRITEPATH .
-                                'uploads/GeoLite2-City/GeoLite2-City.mmdb'
+                                'uploads/GeoLite2-City/GeoLite2-City.mmdb',
                         );
 
                         $countryCode = 'N/A';
@@ -196,7 +197,7 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                     ->insertBatch($analytics_podcasts_by_region);
             }
         } else {
-            echo "Create one podcast and some episodes first.\n";
+            echo "COULD NOT POPULATE DATABASE:\n\tCreate a podcast with episodes first.\n";
         }
     }
 }

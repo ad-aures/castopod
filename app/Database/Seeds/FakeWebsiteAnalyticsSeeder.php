@@ -10,6 +10,7 @@
  */
 
 namespace App\Database\Seeds;
+
 use App\Models\PodcastModel;
 use App\Models\EpisodeModel;
 
@@ -193,7 +194,7 @@ class FakeWebsiteAnalyticsSeeder extends Seeder
                     ->findAll();
                 foreach ($episodes as $episode) {
                     $age = floor(
-                        ($date - strtotime($episode->published_at)) / 86400
+                        ($date - strtotime($episode->published_at)) / 86400,
                     );
                     $proba1 = floor(exp(3 - $age / 40)) + 1;
 
@@ -254,7 +255,7 @@ class FakeWebsiteAnalyticsSeeder extends Seeder
                     ->insertBatch($website_by_referer);
             }
         } else {
-            echo "Create one podcast and some episodes first.\n";
+            echo "COULD NOT POPULATE DATABASE:\n\tCreate a podcast with episodes first.\n";
         }
     }
 }

@@ -15,7 +15,7 @@
     'analytics-data',
     $podcast->id,
     'Podcast',
-    'ByDay'
+    'ByDay',
 ) ?>"></div>
 </div>
 
@@ -25,7 +25,7 @@
     'analytics-data',
     $podcast->id,
     'Podcast',
-    'ByMonth'
+    'ByMonth',
 ) ?>"></div>
 </div>
 
@@ -35,17 +35,7 @@
     'analytics-data',
     $podcast->id,
     'Podcast',
-    'BandwidthByDay'
-) ?>"></div>
-</div>
-
-<div class="mb-12 text-center">
-<h2><?= lang('Charts.episodes_by_day') ?></h2>
-<div class="chart-xy" id="by-age-graph" data-chart-type="xy-series-chart" data-chart-url="<?= route_to(
-    'analytics-data',
-    $podcast->id,
-    'PodcastByEpisode',
-    'ByDay'
+    'BandwidthByDay',
 ) ?>"></div>
 </div>
 

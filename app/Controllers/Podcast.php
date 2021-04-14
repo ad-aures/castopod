@@ -37,6 +37,8 @@ class Podcast extends BaseController
 
     public function activity()
     {
+        self::triggerWebpageHit($this->podcast->id);
+
         helper('persons');
         $persons = [];
         construct_person_array($this->podcast->persons, $persons);

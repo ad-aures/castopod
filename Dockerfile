@@ -20,9 +20,9 @@ RUN docker-php-ext-configure gd --with-jpeg-dir=/usr/include/ \
 RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
 
 RUN echo "file_uploads = On\n" \
-         "memory_limit = 100M\n" \
-         "upload_max_filesize = 100M\n" \
-         "post_max_size = 120M\n" \
+         "memory_limit = 512M\n" \
+         "upload_max_filesize = 500M\n" \
+         "post_max_size = 512M\n" \
          "max_execution_time = 300\n" \
          > /usr/local/etc/php/conf.d/uploads.ini
 
