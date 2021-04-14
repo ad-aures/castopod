@@ -1,3 +1,10 @@
+# [1.0.0-alpha.50](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.49...v1.0.0-alpha.50) (2021-04-14)
+
+
+### Bug Fixes
+
+* **persons:** prevent overflow of persons list by adding horizontal scroll ([9e8995d](https://code.podlibre.org/podlibre/castopod/commit/9e8995dc6e039032cc65f87895cf770f99e8b244))
+
 # [1.0.0-alpha.49](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.48...v1.0.0-alpha.49) (2021-04-12)
 
 
