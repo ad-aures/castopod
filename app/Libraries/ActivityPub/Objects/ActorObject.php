@@ -91,13 +91,12 @@ class ActorObject extends ObjectType
         $this->outbox = $actor->outbox_url;
         $this->followers = $actor->followers_url;
 
-        if ($actor->cover_image_url) {
-            $this->image = [
-                'type' => 'Image',
-                'mediaType' => $actor->cover_image_mimetype,
-                'url' => $actor->cover_image_url,
-            ];
-        }
+        $this->image = [
+            'type' => 'Image',
+            'mediaType' => $actor->cover_image_mimetype,
+            'url' => $actor->cover_image_url,
+        ];
+
         $this->icon = [
             'type' => 'Image',
             'mediaType' => $actor->avatar_image_mimetype,

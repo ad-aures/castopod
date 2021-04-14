@@ -54,12 +54,14 @@ class AddActors extends Migration
             'avatar_image_url' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
+                'null' => true,
             ],
             // constraint is 13 because the longest safe mimetype for images is image/svg+xml,
             // see https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types#image_types
             'avatar_image_mimetype' => [
                 'type' => 'VARCHAR',
                 'constraint' => 13,
+                'null' => true,
             ],
             'cover_image_url' => [
                 'type' => 'VARCHAR',

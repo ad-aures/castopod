@@ -297,12 +297,6 @@ class PodcastModel extends Model
                 'public_key' => $publickey,
                 'display_name' => $data['data']['title'],
                 'summary' => $data['data']['description_html'],
-                'avatar_image_url' => '',
-                'avatar_image_mimetype' => '',
-                'cover_image_url' => base_url(
-                    'assets/images/castopod-cover-default.jpg',
-                ),
-                'cover_image_mimetype' => 'image/jpeg',
                 'inbox_url' => url_to('inbox', $username),
                 'outbox_url' => url_to('outbox', $username),
                 'followers_url' => url_to('followers', $username),
@@ -342,6 +336,7 @@ class PodcastModel extends Model
         $actor->display_name = $podcast->title;
         $actor->summary = $podcast->description_html;
         $actor->avatar_image_url = $podcast->image->thumbnail_url;
+        $actor->avatar_image_mimetype = $podcast->image_mimetype;
 
         if ($actor->hasChanged()) {
             $actorModel->update($actor->id, $actor);

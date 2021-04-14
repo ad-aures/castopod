@@ -19,4 +19,15 @@ class ActivityPub extends BaseConfig
      */
     public $actorObject = 'ActivityPub\Objects\ActorObject';
     public $noteObject = 'ActivityPub\Objects\NoteObject';
+
+    /**
+     * --------------------------------------------------------------------
+     * Default avatar and cover images
+     * --------------------------------------------------------------------
+     */
+    public $defaultAvatarImagePath = 'assets/images/avatar-default.jpg';
+    public $defaultAvatarImageMimetype = 'image/jpeg';
+
+    public $defaultCoverImagePath = 'assets/images/cover-default.jpg';
+    public $defaultCoverImageMimetype = 'image/jpeg';
 }

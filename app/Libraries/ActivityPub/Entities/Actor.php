@@ -36,8 +36,8 @@ class Actor extends Entity
         'summary' => '?string',
         'private_key' => '?string',
         'public_key' => '?string',
-        'avatar_image_url' => 'string',
-        'avatar_image_mimetype' => 'string',
+        'avatar_image_url' => '?string',
+        'avatar_image_mimetype' => '?string',
         'cover_image_url' => '?string',
         'cover_image_mimetype' => '?string',
         'inbox_url' => 'string',
@@ -80,5 +80,41 @@ class Actor extends Entity
         }
 
         return $this->followers;
+    }
+
+    public function getAvatarImageUrl()
+    {
+        if (empty($this->attributes['avatar_image_url'])) {
+            return base_url(config('ActivityPub')->defaultAvatarImagePath);
+        }
+
+        return $this->attributes['avatar_image_url'];
+    }
+
+    public function getAvatarImageMimetype()
+    {
+        if (empty($this->attributes['avatar_image_mimetype'])) {
+            return config('ActivityPub')->defaultAvatarImageMimetype;
+        }
+
+        return $this->attributes['avatar_image_mimetype'];
+    }
+
+    public function getCoverImageUrl()
+    {
+        if (empty($this->attributes['cover_image_url'])) {
+            return base_url(config('ActivityPub')->defaultCoverImagePath);
+        }
+
+        return $this->attributes['cover_image_url'];
+    }
+
+    public function getCoverImageMimetype()
+    {
+        if (empty($this->attributes['cover_image_mimetype'])) {
+            return config('ActivityPub')->defaultCoverImageMimetype;
+        }
+
+        return $this->attributes['cover_image_mimetype'];
     }
 }

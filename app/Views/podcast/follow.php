@@ -31,11 +31,7 @@
             'ActivityPub.follow.subtitle',
         ) ?></h1>
         <div class="flex flex-col w-full max-w-xs -mt-24 overflow-hidden bg-white shadow rounded-xl">
-            <?php if ($actor->cover_image_url): ?>
             <img src="<?= $actor->cover_image_url ?>" alt="" class="object-cover w-full h-32 bg-pine-800" />
-            <?php else: ?>
-            <div class="w-full h-32 bg-pine-800"></div>
-            <?php endif; ?>
             <div class="flex px-4 py-2">
                 <img src="<?= $actor->avatar_image_url ?>" alt="<?= $actor->display_name ?>"
                     class="w-16 h-16 mr-4 -mt-8 rounded-full shadow-xl ring-2 ring-white" />
