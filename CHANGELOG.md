@@ -1,3 +1,10 @@
+# [1.0.0-alpha.51](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.50...v1.0.0-alpha.51) (2021-04-15)
+
+
+### Bug Fixes
+
+* **interact-as:** set actor_id instead of podcast id upon login event ([5dfade7](https://code.podlibre.org/podlibre/castopod/commit/5dfade7cf37f339c56d2e577c679b88a1b1d9336)), closes [#104](https://code.podlibre.org/podlibre/castopod/issues/104)
+
 # [1.0.0-alpha.50](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.49...v1.0.0-alpha.50) (2021-04-14)
 
 
