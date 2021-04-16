@@ -27,14 +27,13 @@
         </div>
     </header>
     <div class="px-6 mb-4 note-content"><?= $note->message_html ?></div>
-    <?php if ($note->preview_card): ?>
-            <?= view('podcast/_partials/preview_card', [
-                'preview_card' => $note->preview_card,
-            ]) ?>
-    <?php endif; ?>
     <?php if ($note->episode_id): ?>
         <?= view('podcast/_partials/episode_card', [
             'episode' => $note->episode,
+        ]) ?>
+    <?php elseif ($note->preview_card_id): ?>
+        <?= view('podcast/_partials/preview_card', [
+            'preview_card' => $note->preview_card,
         ]) ?>
     <?php endif; ?>
     <?= $this->include('podcast/_partials/note_actions_authenticated') ?>

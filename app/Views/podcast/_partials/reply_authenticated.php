@@ -19,7 +19,7 @@
             ><?= lang('Common.mediumDate', [$reply->created_at]) ?></time>
         </header>
         <p class="mb-2 note-content"><?= $reply->message_html ?></p>
-        <?php if ($reply->preview_card): ?>
+        <?php if ($reply->preview_card_id): ?>
             <?= view('podcast/_partials/preview_card', [
                 'preview_card' => $reply->preview_card,
             ]) ?>
