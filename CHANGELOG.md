@@ -1,3 +1,10 @@
+# [1.0.0-alpha.53](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.52...v1.0.0-alpha.53) (2021-04-16)
+
+
+### Bug Fixes
+
+* check that note has a preview_card_id before displaying it ([acb8b3a](https://code.podlibre.org/podlibre/castopod/commit/acb8b3a40172ccb184ffe544760601d756692e6c)), closes [#114](https://code.podlibre.org/podlibre/castopod/issues/114)
+
 # [1.0.0-alpha.52](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.51...v1.0.0-alpha.52) (2021-04-16)
 
 
