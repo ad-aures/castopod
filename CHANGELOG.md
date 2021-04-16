@@ -1,3 +1,10 @@
+# [1.0.0-alpha.52](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.51...v1.0.0-alpha.52) (2021-04-16)
+
+
+### Bug Fixes
+
+* **avatar:** use default avatar when no avatar url has been set ([9d23c7e](https://code.podlibre.org/podlibre/castopod/commit/9d23c7e7e142c6cf1a1418e37e41d711064593c4)), closes [#111](https://code.podlibre.org/podlibre/castopod/issues/111)
+
 # [1.0.0-alpha.51](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.50...v1.0.0-alpha.51) (2021-04-15)
 
 
