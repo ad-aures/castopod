@@ -11,7 +11,7 @@ return [
     'page' => 'Strona',
     'all_pages' => 'Wszystkie strony',
     'create' => 'Przejdź na stronę',
-    'go_to_page' => 'Go to page',
+    'go_to_page' => 'Przejdź na stronę',
     'edit' => 'Edytuj stronę',
     'delete' => 'Usuń stronę',
     'form' => [

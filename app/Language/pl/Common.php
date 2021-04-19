@@ -12,7 +12,7 @@ return [
     'cancel' => 'Anuluj',
     'optional' => 'Nieobowiązkowe',
     'more' => 'Więcej',
-    'no_data' => 'No data found!',
+    'no_data' => 'Nie znaleziono danych!',
     'close' => 'Zamknij',
     'home' => 'Strona główna',
     'explicit' => 'Explicit',

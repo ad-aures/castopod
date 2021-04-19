@@ -20,16 +20,22 @@ return [
         'submit_reply' => 'Odpowiedz',
     ],
     'favourites' => '{numberOfFavourites, plural,
-        one {# favourite}
-        other {# favourites}
+        one {# polubienie}
+        few {# polubienia}
+        many {# polubień}
+        other {# polubienia}
     }',
     'reblogs' => '{numberOfReblogs, plural,
-        one {# share}
-        other {# shares}
+        one {# udostępnienie}
+        few {# udostępnienia}
+        many {# udostępnień}
+        other {# udostępnienia}
     }',
     'replies' => '{numberOfReplies, plural,
-        one {# reply}
-        other {# replies}
+        one {# odpowiedź}
+        few {# odpowiedzi}
+        many {# odpowiedzi}
+        other {# odpowiedzi}
     }',
     'expand' => 'Rozszerz wpis',
     'block_actor' => 'Zablokuj użytkownika @{actorUsername}',
