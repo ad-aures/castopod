@@ -31,10 +31,10 @@ return [
         'db_password' => 'Hasło bazy danych',
         'db_prefix' => 'Prefiks bazy danych',
         'db_prefix_hint' =>
-            'Prefiks nazw tabeli Castopod, pozostaw obecny jeśli nie wiesz co to znaczy.',
+            'Prefiks nazw tabeli Castopod, pozostaw obecny, jeżeli nie wiesz co to znaczy.',
         'cache_config' => 'Konfiguracja pamięci podręcznej',
         'cache_config_hint' =>
-            'Choose your preferred cache handler. Leave it as the default value if you have no clue what it means.',
+            'Wybierz preferowaną metodę obsługę pamięci podręcznej. Pozostaw domyślną wartość, jeżeli nie wiesz co to znaczy.',
         'cache_handler' => 'Obsługa pamięci podręcznej',
         'cacheHandlerOptions' => [
             'file' => 'Plik',

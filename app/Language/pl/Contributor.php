@@ -11,26 +11,26 @@ return [
     'view' => '{username}\'s contribution to {podcastName}',
     'add' => 'Add contributor',
     'add_contributor' => 'Add a contributor for {0}',
-    'edit_role' => 'Update role for {0}',
-    'edit' => 'Edit',
-    'remove' => 'Remove',
+    'edit_role' => 'Zaktualizowano rolę {0}',
+    'edit' => 'Edytuj',
+    'remove' => 'Usuń',
     'list' => [
-        'username' => 'Username',
-        'role' => 'Role',
+        'username' => 'Nazwa użytkownika',
+        'role' => 'Rola',
     ],
     'form' => [
-        'user' => 'User',
-        'role' => 'Role',
+        'user' => 'Użytkownik',
+        'role' => 'Rola',
         'submit_add' => 'Add contributor',
-        'submit_edit' => 'Update role',
+        'submit_edit' => 'Aktualizuj rolę',
     ],
     'roles' => [
-        'podcast_admin' => 'Podcast admin',
+        'podcast_admin' => 'Administrator podcastu',
     ],
     'messages' => [
-        'removeOwnerContributorError' => 'You can\'t remove the podcast owner!',
+        'removeOwnerContributorError' => 'Nie możesz usunąć właściciela podcastu!',
         'removeContributorSuccess' =>
-            'You have successfully removed {username} from {podcastTitle}',
+            'Pomyślnie usunięto {username} z {podcastTitle}',
         'alreadyAddedError' =>
             'The contributor you\'re trying to add has already been added!',
     ],

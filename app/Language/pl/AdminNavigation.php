@@ -9,7 +9,7 @@
 return [
     'go_to_website' => 'Przejdź na stronę',
     'dashboard' => 'Panel administracyjny',
-    'admin' => 'Home',
+    'admin' => 'Strona główna',
     'podcasts' => 'Podcasty',
     'podcast-list' => 'Wszystkie podcasty',
     'podcast-create' => 'Nowy podcast',

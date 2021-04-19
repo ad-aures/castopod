@@ -83,8 +83,8 @@ return [
         'show_notes_section_title' => 'Show notes',
         'show_notes_section_subtitle' =>
             'Up to 4000 characters, be clear and concise. Show notes help potential listeners in finding the episode.',
-        'description' => 'Description',
-        'description_footer' => 'Description footer',
+        'description' => 'Opis',
+        'description_footer' => 'Stopka opisu',
         'description_footer_hint' =>
             'This text is added at the end of each episode description, it is a good place to input your social links for example.',
         'additional_files_section_title' => 'Additional files',
@@ -98,14 +98,14 @@ return [
         'transcript_hint' => 'Dozwolone formaty to txt, html, srt i json.',
         'transcript_delete' => 'Usuń transkrypcję',
         'chapters' => 'Rozdziały',
-        'chapters_hint' => 'File should be in JSON Chapters Format.',
+        'chapters_hint' => 'Plik powinien być w formacie JSON Chapters.',
         'chapters_delete' => 'Usuń rozdziały',
         'advanced_section_title' => 'Zaawansowane parametry',
         'advanced_section_subtitle' =>
             'If you need RSS tags that Castopod does not handle, set them here.',
-        'custom_rss' => 'Custom RSS tags for the episode',
+        'custom_rss' => 'Niestandardowe tagi RSS dla odcinka',
         'custom_rss_hint' => 'This will be injected within the ❬item❭ tag.',
-        'block' => 'Episode should be hidden from all platforms',
+        'block' => 'Odcinek będzie ukryty na wszystkich platformach',
         'block_hint' =>
             'The episode show or hide status. If you want this episode removed from the Apple directory, toggle this on.',
         'submit_create' => 'Utwórz odcinek',
@@ -114,7 +114,7 @@ return [
     'publish_form' => [
         'note' => 'Twój wpis',
         'note_hint' =>
-            'The message you write will be broadcasted to all your followers in the fediverse.',
+            'Wiadomość którą napiszesz zostanie wysłana wszystkim obserwującym w Fediwersum.',
         'publication_date' => 'Data publikacji',
         'publication_method' => [
             'now' => 'Teraz',
@@ -130,7 +130,7 @@ return [
     'unpublish_form' => [
         'disclaimer' =>
             'Unpublishing the episode will delete all the notes associated with the episode and remove it from the podcast\'s RSS feed.',
-        'understand' => 'I understand, I want to unpublish the episode',
+        'understand' => 'Rozumiem, chcę cofnąć publikację tego odcinka',
         'submit' => 'Cofnij publikację',
     ],
     'soundbites' => 'Soundbites',
@@ -138,14 +138,14 @@ return [
         'title' => 'Edit soundbites',
         'info_section_title' => 'Episode soundbites',
         'info_section_subtitle' => 'Add, edit or delete soundbites',
-        'start_time' => 'Start',
+        'start_time' => 'Początek',
         'start_time_hint' =>
             'The first second of the soundbite, it can be a decimal number.',
-        'duration' => 'Duration',
+        'duration' => 'Czas trwania',
         'duration_hint' =>
             'The duration of the soundbite (in seconds), it can be a decimal number.',
-        'label' => 'Label',
-        'label_hint' => 'Text that will be displayed.',
+        'label' => 'Podpis',
+        'label_hint' => 'Tekst, który będzie wyświetlany.',
         'play' => 'Play soundbite',
         'delete' => 'Delete soundbite',
         'bookmark' =>

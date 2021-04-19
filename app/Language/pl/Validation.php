@@ -8,7 +8,7 @@
 
 return [
     'not_in_protected_slugs' =>
-        'The {field} field conflicts with one of the gateway routes (admin, auth or install).',
+        'Pole {field} konfliktuje z jednym z adresów (administracja, autoryzacja lub instalacja).',
     'min_dims' =>
         '{field} nie jest obrazem, lub nie jest wystarczająco wysoki lub szeroki.',
     'is_image_squared' =>
