@@ -14,7 +14,7 @@ return [
     'season_episode' => 'Sezon {seasonNumber}, odcinek {episodeNumber}',
     'season_episode_abbr' => 'S{seasonNumber}E{episodeNumber}',
     'back_to_episodes' => 'Wróć do odcinków {podcast}',
-    'activity' => 'Activity',
+    'activity' => 'Aktywność',
     'description' => 'Opis',
     'total_favourites' => '{numberOfTotalFavourites, plural,
         one {# polubienie łącznie}
@@ -50,7 +50,7 @@ return [
     ],
     'form' => [
         'warning' =>
-            'In case of fatal error, try increasing the `memory_limit`, `upload_max_filesize` and `post_max_size` values in your php configuration file then restart your web server.<br />These values must be higher than the audio file you wish to upload.',
+            'W przypadku błędu krytycznego, spróbuj zwiększyć wartości `memory_limit`, `upload_max_filesize` i `post_max_size` w pliku konfiguracji php, a następnie zrestartować serwer.<br />Wartości te muszą być większe niż rozmiar pliku, który chcesz wysłać.',
         'enclosure' => 'Plik dźwiękowy',
         'enclosure_hint' => 'Wybierz plik dźwiękowy .mp3 lub .m4a.',
         'info_section_title' => 'Informacje o odcinku',
@@ -60,7 +60,7 @@ return [
             'Jeżeli nie ustawiono obrazu, zostanie wykorzystana okładka podcastu.',
         'title' => 'Tytuł',
         'title_hint' =>
-            'Should contain a clear and concise episode name. Do not specify the episode or season numbers here.',
+            'Powinien zawierać prostą i zwięzłą nazwę odcinka. Nie określaj tu numerów odcinka ani sezonu.',
         'slug' => 'Slug',
         'slug_hint' => 'Wykorzystywany do generowania adresu URL odcinka.',
         'season_number' => 'Sezon',
@@ -68,7 +68,7 @@ return [
         'type' => [
             'label' => 'Rodzaj',
             'hint' =>
-                '- <strong>full</strong>: complete content the episode.<br/>- <strong>trailer</strong>: short, promotional piece of content that represents a preview of the current show.<br/>- <strong>bonus</strong>: extra content for the show (for example, behind the scenes info or interviews with the cast) or cross-promotional content for another show.',
+                '- <strong>pełny</strong>: cała zawartość odcinka.<br/>- <strong>zapowiedź</strong>: krótki, promocyjny materiał przedstawiający podgląd całego odcinka.<br/>- <strong>bonus</strong>: dodatkowa zawartość (np. informacje zza kulis lub wywiady z obsadą) lub materiały promujące inny podcast.',
             'full' => 'Pełny',
             'trailer' => 'Zapowiedź',
             'bonus' => 'Bonus',
@@ -76,17 +76,17 @@ return [
         'parental_advisory' => [
             'label' => 'Parental advisory',
             'hint' => 'Does the episode contain explicit content?',
-            'undefined' => 'undefined',
+            'undefined' => 'nie określono',
             'clean' => 'Clean',
             'explicit' => 'Explicit',
         ],
-        'show_notes_section_title' => 'Show notes',
+        'show_notes_section_title' => 'Informacje o odcinku',
         'show_notes_section_subtitle' =>
-            'Up to 4000 characters, be clear and concise. Show notes help potential listeners in finding the episode.',
+            'Do 4000 znaków, w prostych i przejrzystych słowach. Te informacje pomagają potencjalnym słuchaczom znaleźć odcinek.',
         'description' => 'Opis',
         'description_footer' => 'Stopka opisu',
         'description_footer_hint' =>
-            'This text is added at the end of each episode description, it is a good place to input your social links for example.',
+            'Tekst jest dodawany na koniec opisu każdego odcinka, to dobre miejsce na przykład na odnośniki do mediów społecznościowych.',
         'additional_files_section_title' => 'Dodatkowe pliki',
         'additional_files_section_subtitle' =>
             'These files may be used by other platforms to provide better experience to your audience.<br />See the {podcastNamespaceLink} for more information.',
@@ -149,7 +149,7 @@ return [
         'play' => 'Play soundbite',
         'delete' => 'Delete soundbite',
         'bookmark' =>
-            'Click while playing to get current position, click again to get duration.',
+            'Naciśnij podczas odtwarzania aby uzyskać obecną pozycję i naciśnij ponownie aby uzyskać długość.',
         'submit_edit' => 'Save all soundbites',
     ],
     'embeddable_player' => [

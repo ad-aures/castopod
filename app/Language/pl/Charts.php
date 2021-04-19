@@ -8,8 +8,8 @@
 
 return [
     'by_service_weekly' => 'Pobrania odcinka według usługi (w minionym tygodniu)',
-    'by_player_weekly' => 'Pobrania odcinka według słuchających (w minionym tygodniu)',
-    'by_player_yearly' => 'Pobrania odcinka według słuchających (w minionym roku)',
+    'by_player_weekly' => 'Pobrania odcinka według odtwarzacza (w minionym tygodniu)',
+    'by_player_yearly' => 'Pobrania odcinka według odtwarzacza (w minionym roku)',
     'by_device_weekly' => 'Pobrania odcinka według urządzenia (w minionym tygodniu)',
     'by_os_weekly' => 'Pobrania odcinka według systemu (w minionym tygodniu)',
     'podcast_by_region' => 'Pobrania odcinka według regionu (w minionym tygodniu)',

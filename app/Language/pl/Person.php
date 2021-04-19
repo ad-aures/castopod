@@ -60,5 +60,5 @@ return [
         'submit_add' => 'Dodaj ludzi',
         'remove' => 'Usuń',
     ],
-    'credits' => 'Credits',
+    'credits' => 'Autorzy',
 ];

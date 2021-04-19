@@ -33,7 +33,7 @@ return [
     'locations' => 'miejsca',
     'webpages' => 'strony internetowe',
     'unique-listeners' => 'unikatowi słuchacze',
-    'players' => 'słuchający',
+    'players' => 'odtwarzacze',
     'listening-time' => 'czas słuchania',
     'time-periods' => 'okresy czasu',
     'soundbites' => 'soundbites',
