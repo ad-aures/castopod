@@ -30,7 +30,7 @@ return [
     'podcast-analytics-webpages' => 'Odwiedziny strony',
     'podcast-analytics-locations' => 'Lokalizacja',
     'podcast-analytics-unique-listeners' => 'Unikalni słuchający',
-    'podcast-analytics-players' => 'Odtwarzacze',
+    'podcast-analytics-players' => 'Słuchający',
     'podcast-analytics-listening-time' => 'Czas odtwarzania',
     'podcast-analytics-time-periods' => 'Okresy czasowe',
 ];

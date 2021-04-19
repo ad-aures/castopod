@@ -7,10 +7,10 @@
  */
 
 return [
-    'podcast_contributors' => 'Podcast contributors',
-    'view' => '{username}\'s contribution to {podcastName}',
-    'add' => 'Add contributor',
-    'add_contributor' => 'Add a contributor for {0}',
+    'podcast_contributors' => 'Twórcy podcastu',
+    'view' => 'Wkład {username} w {podcastName}',
+    'add' => 'Dodaj twórcę',
+    'add_contributor' => 'Dodaj twórcę dla {0}',
     'edit_role' => 'Zaktualizowano rolę {0}',
     'edit' => 'Edytuj',
     'remove' => 'Usuń',
@@ -21,7 +21,7 @@ return [
     'form' => [
         'user' => 'Użytkownik',
         'role' => 'Rola',
-        'submit_add' => 'Add contributor',
+        'submit_add' => 'Dodaj twórcę',
         'submit_edit' => 'Aktualizuj rolę',
     ],
     'roles' => [
@@ -32,6 +32,6 @@ return [
         'removeContributorSuccess' =>
             'Pomyślnie usunięto {username} z {podcastTitle}',
         'alreadyAddedError' =>
-            'The contributor you\'re trying to add has already been added!',
+            'Twórca którego chcesz dodać już został dodany!',
     ],
 ];
