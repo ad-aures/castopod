@@ -87,7 +87,7 @@ return [
         'description_footer' => 'Stopka opisu',
         'description_footer_hint' =>
             'This text is added at the end of each episode description, it is a good place to input your social links for example.',
-        'additional_files_section_title' => 'Additional files',
+        'additional_files_section_title' => 'Dodatkowe pliki',
         'additional_files_section_subtitle' =>
             'These files may be used by other platforms to provide better experience to your audience.<br />See the {podcastNamespaceLink} for more information.',
         'location_section_title' => 'Miejsce',
@@ -102,9 +102,9 @@ return [
         'chapters_delete' => 'Usuń rozdziały',
         'advanced_section_title' => 'Zaawansowane parametry',
         'advanced_section_subtitle' =>
-            'If you need RSS tags that Castopod does not handle, set them here.',
+            'Jeżeli potrzebujesz tagów RSS nieobsługiwanych przez Castopod, ustaw je tutaj.',
         'custom_rss' => 'Niestandardowe tagi RSS dla odcinka',
-        'custom_rss_hint' => 'This will be injected within the ❬item❭ tag.',
+        'custom_rss_hint' => 'Zostanie to umieszczone wewnątrz tagu ❬channel❭.',
         'block' => 'Odcinek będzie ukryty na wszystkich platformach',
         'block_hint' =>
             'The episode show or hide status. If you want this episode removed from the Apple directory, toggle this on.',
@@ -156,7 +156,7 @@ return [
         'add' => 'Dodaj zagnieżdżany odtwarzacz',
         'title' => 'Zagnieżdżany odtwarzacz',
         'label' =>
-            'Pick a theme color, copy the embeddable player to clipboard, then paste it on your website.',
+            'Wybierz kolor motywu, skopiuj zagnieżdżany odtwarzaczc do schowka i wklej go na swojej stronie.',
         'clipboard_iframe' => 'Skopiuj zagnieżdżany odtwarzacz do schowka',
         'clipboard_url' => 'Skopiuj adres do schowka',
         'dark' => 'Ciemny',

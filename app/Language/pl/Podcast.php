@@ -8,7 +8,7 @@
 
 return [
     'all_podcasts' => 'Wszystkie podcasty',
-    'no_podcast' => 'Nie znaleziono podcastu!',
+    'no_podcast' => 'Nie znaleziono żadnego podcastu!',
     'create' => 'Utwórz podcast',
     'import' => 'Importuj podcast',
     'new_episode' => 'Nowy odcinek',
@@ -57,26 +57,25 @@ return [
             'For administrative use only. Visible in the public RSS feed.',
         'owner_email' => 'Adres e-mail właściciela',
         'owner_email_hint' =>
-            'Will be used by most platforms to verify the podcast ownership. Visible in the public RSS feed.',
+            'Będzie wykorzystywany przez większość platform do weryfikacji własności podcastu. Widoczny w publicznym kanale RSS.',
         'publisher' => 'Wydawca',
         'publisher_hint' =>
             'Grupa odpowiedzialna za tworzenie podcastu. Zwykle jest to firma lub sieć, która stoi za podcastem. Pole to czasem jest podpisywane jako „Autor”.',
-        'copyright' => 'Prawa autorskie',
-        'location_section_title' => 'Location',
-        'location_section_subtitle' => 'What place is this podcast about?',
-        'location_name' => 'Location name or address',
-        'location_name_hint' => 'This can be a real place or fictional',
+        'location_section_title' => 'Miejsce',
+        'location_section_subtitle' => 'Jakiego miejsca dotyczy ten poddcast?',
+        'location_name' => 'Nazwa lub adres lokalizacji',
+        'location_name_hint' => 'Może to być rzeczywiste lub fikcyjne miejsce',
         'monetization_section_title' => 'Monetyzacja',
         'monetization_section_subtitle' =>
             'Zarabiaj pieniądze dzięki swoim odbiorcom.',
-        'payment_pointer' => 'Payment Pointer for Web Monetization',
+        'payment_pointer' => 'Wskaźnik płatnośći dla Web Monetization',
         'payment_pointer_hint' =>
-            'This is your where you will receive money thanks to Web Monetization',
+            'To tutaj otrzymasz pieniądze dzięki Web Monetization',
         'advanced_section_title' => 'Zaawansowane parametry',
         'advanced_section_subtitle' =>
-            'If you need RSS tags that Castopod does not handle, set them here.',
+            'Jeżeli potrzebujesz tagów RSS nieobsługiwanych przez Castopod, ustaw je tutaj.',
         'custom_rss' => 'Niestandardowe tagi RSS dla podcastu',
-        'custom_rss_hint' => 'This will be injected within the ❬channel❭ tag.',
+        'custom_rss_hint' => 'Zostanie to umieszczone wewnątrz tagu ❬channel❭.',
         'partnership' => 'Partnerstwo',
         'partner_id' => 'ID',
         'partner_link_url' => 'Link URL',
@@ -212,7 +211,7 @@ return [
     'list_of_episodes_year' => '{year} odcinki ({episodeCount})',
     'list_of_episodes_season' =>
         'Season {seasonNumber} episodes ({episodeCount})',
-    'no_episode' => 'Nie znaleziono o episode found!',
+    'no_episode' => 'Nie znaleziono żadnego odcinka!',
     'no_episode_hint' =>
         'Navigate the podcast episodes with the navigation bar above.',
     'follow' => 'Obserwuj',
