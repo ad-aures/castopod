@@ -55,9 +55,9 @@ return [
         'enclosure_hint' => 'Wybierz plik dźwiękowy .mp3 lub .m4a.',
         'info_section_title' => 'Informacje o odcinku',
         'info_section_subtitle' => '',
-        'image' => 'Cover image',
+        'image' => 'Obraz okładki',
         'image_hint' =>
-            'If you do not set an image, the podcast cover will be used instead.',
+            'Jeżeli nie ustawiono obrazu, zostanie wykorzystana okładka podcastu.',
         'title' => 'Tytuł',
         'title_hint' =>
             'Should contain a clear and concise episode name. Do not specify the episode or season numbers here.',

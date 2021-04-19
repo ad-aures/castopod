@@ -10,7 +10,7 @@ return [
     'back_to_home' => 'Wróć na stronę główną',
     'page' => 'Strona',
     'all_pages' => 'Wszystkie strony',
-    'create' => 'Przejdź na stronę',
+    'create' => 'Nowa strona',
     'go_to_page' => 'Przejdź na stronę',
     'edit' => 'Edytuj stronę',
     'delete' => 'Usuń stronę',
