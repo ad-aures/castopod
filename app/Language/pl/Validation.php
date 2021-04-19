@@ -10,9 +10,9 @@ return [
     'not_in_protected_slugs' =>
         'The {field} field conflicts with one of the gateway routes (admin, auth or install).',
     'min_dims' =>
-        '{field} is either not an image, or it is not wide or tall enough.',
+        '{field} nie jest obrazem, lub nie jest wystarczająco wysoki lub szeroki.',
     'is_image_squared' =>
-        '{field} is either not an image, or it is not squared (width and height differ).',
+        '{field} nie jest obrazem, lub nie jest kwadratowy (wysokość i szerokość różnią się).',
     'validate_url' =>
-        'The {field} field must be a valid URL (eg. https://example.com/).',
+        '{field} musi być prawidłowym adresem URL (np. https://example.com/).',
 ];

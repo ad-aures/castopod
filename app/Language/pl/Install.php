@@ -13,18 +13,18 @@ return [
     'form' => [
         'instance_config' => 'Kondiguracja instancji',
         'hostname' => 'Nazwa hosta',
-        'media_base_url' => 'Media base URL',
+        'media_base_url' => 'Bazowy URL mediów',
         'media_base_url_hint' =>
-            'If you use a CDN and/or an external analytics service, you may set them here.',
-        'admin_gateway' => 'Admin gateway',
+            'Jeżeli korzystasz z CDN-a i/lub zewnętrznej usługi analitycznej, możesz je ustawić tutaj.',
+        'admin_gateway' => 'Bramka administratora',
         'admin_gateway_hint' =>
-            'The route to access the admin area (eg. https://example.com/cp-admin). It is set by default as cp-admin, we recommend you change it for security reasons.',
-        'auth_gateway' => 'Auth gateway',
+            'Adres pozwalający na dostęp do strefy administracyjnej (np. https://example.com/cp-admin). Domyślnie jest ustawiony na cp-admin, ale zalecamy go zmienić z przyczyn bezpieczeństwa.',
+        'auth_gateway' => 'Bramka autoryzacji',
         'auth_gateway_hint' =>
-            'The route to access the authentication pages (eg. https://example.com/cp-auth). It is set by default as cp-auth, we recommend you change it for security reasons.',
+            'Adres pozwalający na dostęp do stron uwierzytelniania (np. https://example.com/cp-auth). Domyślnie jest ustawiony na cp-admin, ale zalecamy go zmienić z przyczyn bezpieczeństwa.',
         'database_config' => 'Konfiguracja bazy danych',
         'database_config_hint' =>
-            'Castopod needs to connect to your MySQL (or MariaDB) database. If you do not have these required info, please contact your server administrator.',
+            'Castopod wymaga połączenia z bazą danych MySQL (lub MariaDB). Jeżeli nie masz wymaganych informacji, skontaktuj się z administratorem serwera.',
         'db_hostname' => 'Nazwa hosta bazy danych',
         'db_name' => 'Nazwa bazy danych',
         'db_username' => 'Nazwa użytkownika bazy danych',
@@ -35,7 +35,7 @@ return [
         'cache_config' => 'Konfiguracja pamięci podręcznej',
         'cache_config_hint' =>
             'Choose your preferred cache handler. Leave it as the default value if you have no clue what it means.',
-        'cache_handler' => 'Cache handler',
+        'cache_handler' => 'Obsługa pamięci podręcznej',
         'cacheHandlerOptions' => [
             'file' => 'Plik',
             'redis' => 'Redis',
@@ -50,10 +50,10 @@ return [
     ],
     'messages' => [
         'createSuperAdminSuccess' =>
-            'Your superadmin account has been created successfully. Login to start podcasting!',
+            'Twoje konto super administratora zostało pomyślnie utworzone. Zaloguj się, aby rozpocząć podcastowanie!',
         'databaseConnectError' =>
-            'Castopod could not connect to your database. Edit your database configuration and try again.',
+            'Castopod nie mógł połączyć się z bazą danych. Edytuj konfigurację bazy danych i spróbuj ponownie.',
         'writeError' =>
-            'Couldn\'t create/write the `.env` file. You must create it manually by following the `.env.example` file template in the Castopod package.',
+            'Nie udało się utworzyć pliku `.env`. Musisz utworzyć go ręcznie tak, jak w pliku `.env.example` w pakiecie Castopod.',
     ],
 ];

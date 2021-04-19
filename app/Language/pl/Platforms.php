@@ -16,13 +16,13 @@ return [
     'submit' => 'Zapisz',
     'messages' => [
         'updateSuccess' => 'Pomyslnie zaktualizowano linki do platform.',
-        'removeLinkSuccess' => 'Usunieto link do platformy.',
+        'removeLinkSuccess' => 'Usunięto link do platformy.',
         'removeLinkError' =>
             'Link do platformy nie mógł zostać zapisany. Spróbuj ponownie.',
     ],
     'description' => [
         'podcasting' => 'ID podcastu na platformie',
         'social' => 'ID konta podcastu na platformie',
-        'funding' => 'Call to action message',
+        'funding' => 'Wiadomość zachęcająca do działania',
     ],
 ];

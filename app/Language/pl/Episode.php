@@ -17,23 +17,27 @@ return [
     'activity' => 'Activity',
     'description' => 'Opis',
     'total_favourites' => '{numberOfTotalFavourites, plural,
-        one {# łącznie polubienie}
-        few {# łącznie polubienia}
-        many {# lacznie polubień}
-        other {# łącznie polubienia}
+        one {# polubienie łącznie}
+        few {# polubienia łącznie}
+        many {# polubień łącznie}
+        other {# polubienia łącznie}
     }',
     'total_reblogs' => '{numberOfTotalReblogs, plural,
-        one {# total share}
-        other {# total shares}
+        one {# udostępnienie łącznie}
+        few {# udostępnienia łącznie}
+        many {# udostępnień łącznie}
+        other {# udostępnienia łącznie}
     }',
     'total_notes' => '{numberOfTotalNotes, plural,
-        one {# note}
-        other {# total notes}
+        one {# wpis}
+        few {# wpisy łącznie}
+        many {# wpisów łącznie}
+        other {# wpisy łącznie}
     }',
     'all_podcast_episodes' => 'Wszystkie odcinki podcastu',
     'back_to_podcast' => 'Wróć do podcastu',
     'edit' => 'Edytuj',
-    'publish' => 'Puvlikuj',
+    'publish' => 'Publikuj',
     'publish_edit' => 'Edytuj publikację',
     'unpublish' => 'Cofnij publikację',
     'delete' => 'Usuń',
@@ -86,17 +90,17 @@ return [
         'additional_files_section_title' => 'Additional files',
         'additional_files_section_subtitle' =>
             'These files may be used by other platforms to provide better experience to your audience.<br />See the {podcastNamespaceLink} for more information.',
-        'location_section_title' => 'Location',
-        'location_section_subtitle' => 'What place is this episode about?',
-        'location_name' => 'Location name or address',
-        'location_name_hint' => 'This can be a real or fictional location',
-        'transcript' => 'Transcript or closed captions',
-        'transcript_hint' => 'Allowed formats are txt, html, srt or json.',
-        'transcript_delete' => 'Delete transcript',
-        'chapters' => 'Chapters',
+        'location_section_title' => 'Miejsce',
+        'location_section_subtitle' => 'Jakiego miejsca dotyczy ten odcinek?',
+        'location_name' => 'Nazwa lub adres lokalizacji',
+        'location_name_hint' => 'Może to być rzeczywiste lub fikcyjne miejsce',
+        'transcript' => 'Transkrypcja lub napisy',
+        'transcript_hint' => 'Dozwolone formaty to txt, html, srt i json.',
+        'transcript_delete' => 'Usuń transkrypcję',
+        'chapters' => 'Rozdziały',
         'chapters_hint' => 'File should be in JSON Chapters Format.',
-        'chapters_delete' => 'Delete chapters',
-        'advanced_section_title' => 'Advanced Parameters',
+        'chapters_delete' => 'Usuń rozdziały',
+        'advanced_section_title' => 'Zaawansowane parametry',
         'advanced_section_subtitle' =>
             'If you need RSS tags that Castopod does not handle, set them here.',
         'custom_rss' => 'Custom RSS tags for the episode',
@@ -153,7 +157,7 @@ return [
         'title' => 'Zagnieżdżany odtwarzacz',
         'label' =>
             'Pick a theme color, copy the embeddable player to clipboard, then paste it on your website.',
-        'clipboard_iframe' => 'Copy embeddable player to clipboard',
+        'clipboard_iframe' => 'Skopiuj zagnieżdżany odtwarzacz do schowka',
         'clipboard_url' => 'Skopiuj adres do schowka',
         'dark' => 'Ciemny',
         'dark-transparent' => 'Ciemny przezroczysty',

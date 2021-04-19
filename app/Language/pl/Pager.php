@@ -13,7 +13,7 @@ return [
     'next' => 'Następna',
     'last' => 'Ostatnia',
     'older' => 'Starsze',
-    'newer' => 'Nowszs',
+    'newer' => 'Nowsze',
     'invalidTemplate' => '{0} is not a valid Pager template.',
     'invalidPaginationGroup' => '{0} is not a valid Pagination group.',
 ];
