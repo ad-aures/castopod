@@ -50,15 +50,16 @@ Before uploading Castopod files to your web server:
 
 PHP version 7.3 or higher is required, with the following extensions installed:
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [libcurl](http://php.net/manual/en/curl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+- [intl](https://php.net/manual/en/intl.requirements.php)
+- [libcurl](https://php.net/manual/en/curl.requirements.php)
+- [mbstring](https://php.net/manual/en/mbstring.installation.php)
+- [gd](https://www.php.net/manual/en/image.installation.php)
 
 Additionally, make sure that the following extensions are enabled in your PHP:
 
 - json (enabled by default - don't turn it off)
 - xml (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php)
+- [mysqlnd](https://php.net/manual/en/mysqlnd.install.php)
 
 ### MySQL compatible database
 

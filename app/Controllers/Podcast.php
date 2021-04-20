@@ -68,7 +68,7 @@ class Podcast extends BaseController
         $seasonQuery = $this->request->getGet('season');
 
         if (!$yearQuery and !$seasonQuery) {
-            $defaultQuery = (new EpisodeModel())->getDefaultQuery(
+            $defaultQuery = (new PodcastModel())->getDefaultQuery(
                 $this->podcast->id,
             );
             if ($defaultQuery) {
@@ -84,18 +84,19 @@ class Podcast extends BaseController
             '_',
             array_filter([
                 'page',
-                "podcast{$this->podcast->id}",
+                "podcast#{$this->podcast->id}",
                 $yearQuery ? 'year' . $yearQuery : null,
                 $seasonQuery ? 'season' . $seasonQuery : null,
                 service('request')->getLocale(),
+                can_user_interact() ? '_interact' : '',
             ]),
         );
 
         if (!($found = cache($cacheName))) {
             // Build navigation array
-            $episodeModel = new EpisodeModel();
-            $years = $episodeModel->getYears($this->podcast->id);
-            $seasons = $episodeModel->getSeasons($this->podcast->id);
+            $podcastModel = new PodcastModel();
+            $years = $podcastModel->getYears($this->podcast->id);
+            $seasons = $podcastModel->getSeasons($this->podcast->id);
 
             $episodesNavigation = [];
             $activeQuery = null;
@@ -155,7 +156,7 @@ class Podcast extends BaseController
                 'podcast' => $this->podcast,
                 'episodesNav' => $episodesNavigation,
                 'activeQuery' => $activeQuery,
-                'episodes' => $episodeModel->getPodcastEpisodes(
+                'episodes' => (new EpisodeModel())->getPodcastEpisodes(
                     $this->podcast->id,
                     $this->podcast->type,
                     $yearQuery,
@@ -164,20 +165,20 @@ class Podcast extends BaseController
                 'persons' => $persons,
             ];
 
-            $secondsToNextUnpublishedEpisode = $episodeModel->getSecondsToNextUnpublishedEpisode(
+            $secondsToNextUnpublishedEpisode = (new EpisodeModel())->getSecondsToNextUnpublishedEpisode(
                 $this->podcast->id,
             );
 
             // if user is logged in then send to the authenticated episodes view
             if (can_user_interact()) {
-                return view('podcast/episodes_authenticated', $data, [
+                $found = view('podcast/episodes_authenticated', $data, [
                     'cache' => $secondsToNextUnpublishedEpisode
                         ? $secondsToNextUnpublishedEpisode
                         : DECADE,
-                    'cache_name' => $cacheName . '_authenticated',
+                    'cache_name' => $cacheName,
                 ]);
             } else {
-                return view('podcast/episodes', $data, [
+                $found = view('podcast/episodes', $data, [
                     'cache' => $secondsToNextUnpublishedEpisode
                         ? $secondsToNextUnpublishedEpisode
                         : DECADE,

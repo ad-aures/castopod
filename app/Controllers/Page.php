@@ -36,37 +36,42 @@ class Page extends BaseController
 
     public function index()
     {
-        // The page cache is set to a decade so it is deleted manually upon page update
-        $this->cachePage(DECADE);
+        $cacheName = "page@{$this->page->slug}";
+        if (!($found = cache($cacheName))) {
+            $data = [
+                'page' => $this->page,
+            ];
 
-        $data = [
-            'page' => $this->page,
-        ];
-        return view('page', $data);
+            $found = view('page', $data);
+
+            // The page cache is set to a decade so it is deleted manually upon page update
+            cache()->save($cacheName, $found, DECADE);
+        }
+
+        return $found;
     }
 
     public function credits()
     {
         $locale = service('request')->getLocale();
-        $model = new PodcastModel();
-        $allPodcasts = $model->findAll();
+        $allPodcasts = (new PodcastModel())->findAll();
 
-        if (!($found = cache("credits_{$locale}"))) {
+        $cacheName = "paĝe_credits_{$locale}";
+        if (!($found = cache($cacheName))) {
             $page = new \App\Entities\Page([
                 'title' => lang('Person.credits', [], $locale),
                 'slug' => 'credits',
                 'content' => '',
             ]);
 
-            $creditModel = (new CreditModel())->findAll();
+            $allCredits = (new CreditModel())->findAll();
 
             // Unlike the carpenter, we make a tree from a table:
-
             $person_group = null;
             $person_id = null;
             $person_role = null;
             $credits = [];
-            foreach ($creditModel as $credit) {
+            foreach ($allCredits as $credit) {
                 if ($person_group !== $credit->person_group) {
                     $person_group = $credit->person_group;
                     $person_id = $credit->person_id;
@@ -200,7 +205,7 @@ class Page extends BaseController
 
             $found = view('credits', $data);
 
-            cache()->save("credits_{$locale}", $found, DECADE);
+            cache()->save($cacheName, $found, DECADE);
         }
 
         return $found;

@@ -21,7 +21,7 @@
     [
         'file' => lang('Install.form.cacheHandlerOptions.file'),
         'redis' => lang('Install.form.cacheHandlerOptions.redis'),
-        'memcached' => lang('Install.form.cacheHandlerOptions.memcached'),
+        'predis' => lang('Install.form.cacheHandlerOptions.predis'),
     ],
     old('cache_handler', 'file'),
     [

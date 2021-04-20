@@ -651,7 +651,7 @@ $routes->group('@(:podcastName)', function ($routes) {
 
 // Other pages
 $routes->get('/credits', 'Page::credits', ['as' => 'credits']);
-$routes->get('/(:slug)', 'Page/$1', ['as' => 'page']);
+$routes->get('/pages/(:slug)', 'Page/$1', ['as' => 'page']);
 
 // interacting as an actor
 $routes->post('interact-as-actor', 'Auth::attemptInteractAsActor', [

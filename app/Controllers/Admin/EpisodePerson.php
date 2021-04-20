@@ -30,7 +30,7 @@ class EpisodePerson extends BaseController
         if (count($params) > 1) {
             if (
                 !($this->podcast = (new PodcastModel())->getPodcastById(
-                    $params[0]
+                    $params[0],
                 ))
             ) {
                 throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
@@ -61,9 +61,9 @@ class EpisodePerson extends BaseController
         $data = [
             'episode' => $this->episode,
             'podcast' => $this->podcast,
-            'episodePersons' => (new EpisodePersonModel())->getPersonsByEpisodeId(
+            'episodePersons' => (new EpisodePersonModel())->getEpisodePersons(
                 $this->podcast->id,
-                $this->episode->id
+                $this->episode->id,
             ),
             'personOptions' => (new PersonModel())->getPersonOptions(),
             'taxonomyOptions' => (new PersonModel())->getTaxonomyOptions(),
@@ -92,7 +92,7 @@ class EpisodePerson extends BaseController
             $this->podcast->id,
             $this->episode->id,
             $this->request->getPost('person'),
-            $this->request->getPost('person_group_role')
+            $this->request->getPost('person_group_role'),
         );
 
         return redirect()->back();
@@ -103,7 +103,7 @@ class EpisodePerson extends BaseController
         (new EpisodePersonModel())->removeEpisodePersons(
             $this->podcast->id,
             $this->episode->id,
-            $episodePersonId
+            $episodePersonId,
         );
 
         return redirect()->back();

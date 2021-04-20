@@ -14,7 +14,8 @@ class UserModel extends \Myth\Auth\Models\UserModel
 
     public function getPodcastContributors($podcastId)
     {
-        if (!($found = cache("podcast{$podcastId}_contributors"))) {
+        $cacheName = "podcast#{$podcastId}_contributors";
+        if (!($found = cache($cacheName))) {
             $found = $this->select('users.*, auth_groups.name as podcast_role')
                 ->join('podcasts_users', 'podcasts_users.user_id = users.id')
                 ->join(
@@ -24,7 +25,7 @@ class UserModel extends \Myth\Auth\Models\UserModel
                 ->where('podcasts_users.podcast_id', $podcastId)
                 ->findAll();
 
-            cache()->save("podcast{$podcastId}_contributors", $found, DECADE);
+            cache()->save($cacheName, $found, DECADE);
         }
 
         return $found;

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0d419d654c43fa6e14f8a96b42258a91",
+    "content-hash": "b5d726bdc7252c80c0fd5a6f53de1948",
     "packages": [
         {
             "name": "brick/math",
@@ -68,12 +68,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/codeigniter4/CodeIgniter4.git",
-                "reference": "425bca14c840c08b935d730c73da372f3d4bdef8"
+                "reference": "dfbc85af9ef408a6654cce6a462c8fdde3ee2446"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codeigniter4/CodeIgniter4/zipball/425bca14c840c08b935d730c73da372f3d4bdef8",
-                "reference": "425bca14c840c08b935d730c73da372f3d4bdef8",
+                "url": "https://api.github.com/repos/codeigniter4/CodeIgniter4/zipball/dfbc85af9ef408a6654cce6a462c8fdde3ee2446",
+                "reference": "dfbc85af9ef408a6654cce6a462c8fdde3ee2446",
                 "shasum": ""
             },
             "require": {
@@ -83,18 +83,18 @@
                 "ext-mbstring": "*",
                 "kint-php/kint": "^3.3",
                 "laminas/laminas-escaper": "^2.6",
-                "php": "^7.3||^8.0",
+                "php": "^7.3 || ^8.0",
                 "psr/log": "^1.1"
             },
             "require-dev": {
                 "codeigniter4/codeigniter4-standard": "^1.0",
                 "fakerphp/faker": "^1.9",
-                "johnkary/phpunit-speedtrap": "^3.3",
                 "mikey179/vfsstream": "^1.6",
-                "phpstan/phpstan": "0.12.82",
+                "nexusphp/tachycardia": "^1.0",
+                "phpstan/phpstan": "0.12.84",
                 "phpunit/phpunit": "^9.1",
                 "predis/predis": "^1.1",
-                "rector/rector": "^0.10",
+                "rector/rector": "0.10.6",
                 "squizlabs/php_codesniffer": "^3.3"
             },
             "suggest": {
@@ -139,7 +139,7 @@
                 "slack": "https://codeigniterchat.slack.com",
                 "issues": "https://github.com/codeigniter4/CodeIgniter4/issues"
             },
-            "time": "2021-03-25T19:47:47+00:00"
+            "time": "2021-04-20T08:40:30+00:00"
         },
         {
             "name": "composer/ca-bundle",
@@ -823,16 +823,16 @@
         },
         {
             "name": "league/commonmark",
-            "version": "1.5.7",
+            "version": "1.5.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/commonmark.git",
-                "reference": "11df9b36fd4f1d2b727a73bf14931d81373b9a54"
+                "reference": "08fa59b8e4e34ea8a773d55139ae9ac0e0aecbaf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/11df9b36fd4f1d2b727a73bf14931d81373b9a54",
-                "reference": "11df9b36fd4f1d2b727a73bf14931d81373b9a54",
+                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/08fa59b8e4e34ea8a773d55139ae9ac0e0aecbaf",
+                "reference": "08fa59b8e4e34ea8a773d55139ae9ac0e0aecbaf",
                 "shasum": ""
             },
             "require": {
@@ -920,7 +920,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-10-31T13:49:32+00:00"
+            "time": "2021-03-28T18:51:39+00:00"
         },
         {
             "name": "league/html-to-markdown",
@@ -1010,23 +1010,23 @@
         },
         {
             "name": "maxmind-db/reader",
-            "version": "v1.10.0",
+            "version": "v1.10.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/maxmind/MaxMind-DB-Reader-php.git",
-                "reference": "07f84d969cfc527ce49388558a366ad376f1f35c"
+                "reference": "569bd44d97d30a4ec12c7793a33004a76d4caf18"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/maxmind/MaxMind-DB-Reader-php/zipball/07f84d969cfc527ce49388558a366ad376f1f35c",
-                "reference": "07f84d969cfc527ce49388558a366ad376f1f35c",
+                "url": "https://api.github.com/repos/maxmind/MaxMind-DB-Reader-php/zipball/569bd44d97d30a4ec12c7793a33004a76d4caf18",
+                "reference": "569bd44d97d30a4ec12c7793a33004a76d4caf18",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2"
             },
             "conflict": {
-                "ext-maxminddb": "<1.10.0,>=2.0.0"
+                "ext-maxminddb": "<1.10.1,>=2.0.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "*",
@@ -1069,9 +1069,9 @@
             ],
             "support": {
                 "issues": "https://github.com/maxmind/MaxMind-DB-Reader-php/issues",
-                "source": "https://github.com/maxmind/MaxMind-DB-Reader-php/tree/v1.10.0"
+                "source": "https://github.com/maxmind/MaxMind-DB-Reader-php/tree/v1.10.1"
             },
-            "time": "2021-02-09T17:52:47+00:00"
+            "time": "2021-04-14T17:49:35+00:00"
         },
         {
             "name": "maxmind/web-service-common",
@@ -1125,20 +1125,20 @@
         },
         {
             "name": "michalsn/codeigniter4-uuid",
-            "version": "v1.0.0-beta2",
+            "version": "v1.0.0-beta3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/michalsn/codeigniter4-uuid.git",
-                "reference": "a5f9751570a3b27e81deaa7548eef507499be888"
+                "reference": "568aba8f315199b6cc87e76b8441cd03a2bba5b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/michalsn/codeigniter4-uuid/zipball/a5f9751570a3b27e81deaa7548eef507499be888",
-                "reference": "a5f9751570a3b27e81deaa7548eef507499be888",
+                "url": "https://api.github.com/repos/michalsn/codeigniter4-uuid/zipball/568aba8f315199b6cc87e76b8441cd03a2bba5b4",
+                "reference": "568aba8f315199b6cc87e76b8441cd03a2bba5b4",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.2",
+                "php": ">=7.3",
                 "ramsey/uuid": "^4.0"
             },
             "require-dev": {
@@ -1172,9 +1172,9 @@
             ],
             "support": {
                 "issues": "https://github.com/michalsn/codeigniter4-uuid/issues",
-                "source": "https://github.com/michalsn/codeigniter4-uuid/tree/develop"
+                "source": "https://github.com/michalsn/codeigniter4-uuid/tree/v1.0.0-beta3"
             },
-            "time": "2020-08-16T07:56:20+00:00"
+            "time": "2021-04-02T11:08:18+00:00"
         },
         {
             "name": "myth/auth",
@@ -1182,12 +1182,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/lonnieezell/myth-auth.git",
-                "reference": "a11dc6369177c932add936f1be3844c30fe45ed4"
+                "reference": "eff9805d7f1d27326f14875b53ff4b3d2a6b72ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lonnieezell/myth-auth/zipball/a11dc6369177c932add936f1be3844c30fe45ed4",
-                "reference": "a11dc6369177c932add936f1be3844c30fe45ed4",
+                "url": "https://api.github.com/repos/lonnieezell/myth-auth/zipball/eff9805d7f1d27326f14875b53ff4b3d2a6b72ee",
+                "reference": "eff9805d7f1d27326f14875b53ff4b3d2a6b72ee",
                 "shasum": ""
             },
             "require": {
@@ -1248,7 +1248,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2021-03-23T03:55:24+00:00"
+            "time": "2021-04-12T22:34:12+00:00"
         },
         {
             "name": "opawg/user-agents-php",
@@ -1359,16 +1359,16 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "2.0.30",
+            "version": "2.0.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "136b9ca7eebef78be14abf90d65c5e57b6bc5d36"
+                "reference": "233a920cb38636a43b18d428f9a8db1f0a1a08f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/136b9ca7eebef78be14abf90d65c5e57b6bc5d36",
-                "reference": "136b9ca7eebef78be14abf90d65c5e57b6bc5d36",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/233a920cb38636a43b18d428f9a8db1f0a1a08f4",
+                "reference": "233a920cb38636a43b18d428f9a8db1f0a1a08f4",
                 "shasum": ""
             },
             "require": {
@@ -1448,7 +1448,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phpseclib/phpseclib/issues",
-                "source": "https://github.com/phpseclib/phpseclib/tree/2.0.30"
+                "source": "https://github.com/phpseclib/phpseclib/tree/2.0.31"
             },
             "funding": [
                 {
@@ -1464,7 +1464,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-12-17T05:42:04+00:00"
+            "time": "2021-04-06T13:56:45+00:00"
         },
         {
             "name": "podlibre/ipcat",
@@ -2761,16 +2761,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "9.2.5",
+            "version": "9.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "f3e026641cc91909d421802dd3ac7827ebfd97e1"
+                "reference": "f6293e1b30a2354e8428e004689671b83871edde"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/f3e026641cc91909d421802dd3ac7827ebfd97e1",
-                "reference": "f3e026641cc91909d421802dd3ac7827ebfd97e1",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/f6293e1b30a2354e8428e004689671b83871edde",
+                "reference": "f6293e1b30a2354e8428e004689671b83871edde",
                 "shasum": ""
             },
             "require": {
@@ -2826,7 +2826,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.5"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.6"
             },
             "funding": [
                 {
@@ -2834,7 +2834,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-11-28T06:44:49+00:00"
+            "time": "2021-03-28T07:26:59+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",

@@ -47,7 +47,7 @@ class Episode extends BaseController
         self::triggerWebpageHit($this->podcast->id);
 
         $locale = service('request')->getLocale();
-        $cacheName = "page_podcast{$this->episode->podcast_id}_episode{$this->episode->id}_{$locale}";
+        $cacheName = "page_podcast#{$this->podcast->id}_episode{$this->episode->id}_{$locale}";
 
         if (!($cachedView = cache($cacheName))) {
             helper('persons');
@@ -107,7 +107,7 @@ class Episode extends BaseController
 
         $locale = service('request')->getLocale();
 
-        $cacheName = "page_podcast{$this->episode->podcast_id}_episode{$this->episode->id}_embeddable_player_{$theme}_{$locale}";
+        $cacheName = "page_podcast#{$this->podcast->id}_episode{$this->episode->id}_embeddable_player_{$theme}_{$locale}";
 
         if (!($cachedView = cache($cacheName))) {
             $theme = EpisodeModel::$themes[$theme];

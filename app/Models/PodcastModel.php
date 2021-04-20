@@ -83,7 +83,8 @@ class PodcastModel extends Model
 
     public function getPodcastByName($podcastName)
     {
-        if (!($found = cache("podcast@{$podcastName}"))) {
+        $cacheName = "podcast@{$podcastName}";
+        if (!($found = cache($cacheName))) {
             $found = $this->where('name', $podcastName)->first();
             cache()->save("podcast@{$podcastName}", $found, DECADE);
         }
@@ -93,10 +94,11 @@ class PodcastModel extends Model
 
     public function getPodcastById($podcastId)
     {
-        if (!($found = cache("podcast{$podcastId}"))) {
+        $cacheName = "podcast#{$podcastId}";
+        if (!($found = cache($cacheName))) {
             $found = $this->find($podcastId);
 
-            cache()->save("podcast{$podcastId}", $found, DECADE);
+            cache()->save($cacheName, $found, DECADE);
         }
 
         return $found;
@@ -111,7 +113,8 @@ class PodcastModel extends Model
      */
     public function getUserPodcasts($userId)
     {
-        if (!($found = cache("user{$userId}_podcasts"))) {
+        $cacheName = "user{$userId}_podcasts";
+        if (!($found = cache($cacheName))) {
             $found = $this->select('podcasts.*')
                 ->join(
                     'podcasts_users',
@@ -120,7 +123,7 @@ class PodcastModel extends Model
                 ->where('podcasts_users.user_id', $userId)
                 ->findAll();
 
-            cache()->save("user{$userId}_podcasts", $found, DECADE);
+            cache()->save($cacheName, $found, DECADE);
         }
 
         return $found;
@@ -128,7 +131,7 @@ class PodcastModel extends Model
 
     public function addPodcastContributor($userId, $podcastId, $groupId)
     {
-        cache()->delete("podcast{$podcastId}_contributors");
+        cache()->delete("podcast#{$podcastId}_contributors");
 
         $data = [
             'user_id' => (int) $userId,
@@ -141,7 +144,7 @@ class PodcastModel extends Model
 
     public function updatePodcastContributor($userId, $podcastId, $groupId)
     {
-        cache()->delete("podcast{$podcastId}_contributors");
+        cache()->delete("podcast#{$podcastId}_contributors");
 
         return $this->db
             ->table('podcasts_users')
@@ -154,7 +157,7 @@ class PodcastModel extends Model
 
     public function removePodcastContributor($userId, $podcastId)
     {
-        cache()->delete("podcast{$podcastId}_contributors");
+        cache()->delete("podcast#{$podcastId}_contributors");
 
         return $this->db
             ->table('podcasts_users')
@@ -196,75 +199,122 @@ class PodcastModel extends Model
             : false;
     }
 
+    public function getYears(int $podcastId): array
+    {
+        $cacheName = "podcast#{$podcastId}_years";
+        if (!($found = cache($cacheName))) {
+            $episodeModel = new EpisodeModel();
+            $found = $episodeModel
+                ->select(
+                    'YEAR(published_at) as year, count(*) as number_of_episodes',
+                )
+                ->where([
+                    'podcast_id' => $podcastId,
+                    'season_number' => null,
+                    $episodeModel->deletedField => null,
+                ])
+                ->where('`published_at` <= NOW()', null, false)
+                ->groupBy('year')
+                ->orderBy('year', 'DESC')
+                ->get()
+                ->getResultArray();
+
+            $secondsToNextUnpublishedEpisode = $episodeModel->getSecondsToNextUnpublishedEpisode(
+                $podcastId,
+            );
+
+            cache()->save(
+                $cacheName,
+                $found,
+                $secondsToNextUnpublishedEpisode
+                    ? $secondsToNextUnpublishedEpisode
+                    : DECADE,
+            );
+        }
+
+        return $found;
+    }
+
+    public function getSeasons(int $podcastId): array
+    {
+        $cacheName = "podcast#{$podcastId}_seasons";
+        if (!($found = cache($cacheName))) {
+            $episodeModel = new EpisodeModel();
+            $found = $episodeModel
+                ->select('season_number, count(*) as number_of_episodes')
+                ->where([
+                    'podcast_id' => $podcastId,
+                    'season_number is not' => null,
+                    $episodeModel->deletedField => null,
+                ])
+                ->where('`published_at` <= NOW()', null, false)
+                ->groupBy('season_number')
+                ->orderBy('season_number', 'ASC')
+                ->get()
+                ->getResultArray();
+
+            $secondsToNextUnpublishedEpisode = $episodeModel->getSecondsToNextUnpublishedEpisode(
+                $podcastId,
+            );
+
+            cache()->save(
+                $cacheName,
+                $found,
+                $secondsToNextUnpublishedEpisode
+                    ? $secondsToNextUnpublishedEpisode
+                    : DECADE,
+            );
+        }
+
+        return $found;
+    }
+
+    /**
+     * Returns the default query for displaying the episode list on the podcast page
+     *
+     * @param int $podcastId
+     *
+     * @return array|null
+     */
+    public function getDefaultQuery(int $podcastId)
+    {
+        $cacheName = "podcast#{$podcastId}_defaultQuery";
+        if (!($defaultQuery = cache($cacheName))) {
+            $seasons = $this->getSeasons($podcastId);
+
+            if (!empty($seasons)) {
+                // get latest season
+                $defaultQuery = ['type' => 'season', 'data' => end($seasons)];
+            } else {
+                $years = $this->getYears($podcastId);
+                if (!empty($years)) {
+                    // get most recent year
+                    $defaultQuery = ['type' => 'year', 'data' => $years[0]];
+                } else {
+                    $defaultQuery = null;
+                }
+            }
+
+            cache()->save($cacheName, $defaultQuery, DECADE);
+        }
+        return $defaultQuery;
+    }
+
     public function clearCache(array $data)
     {
         $podcast = (new PodcastModel())->getPodcastById(
             is_array($data['id']) ? $data['id'][0] : $data['id'],
         );
-        $supportedLocales = config('App')->supportedLocales;
 
-        // delete cache for rss feed and podcast pages
-        cache()->delete("podcast{$podcast->id}_feed");
-        foreach (\Opawg\UserAgentsPhp\UserAgentsRSS::$db as $service) {
-            cache()->delete("podcast{$podcast->id}_feed_{$service['slug']}");
-        }
+        // delete cache all podcast pages
+        cache()->deleteMatching("page_podcast#{$podcast->id}_*");
 
-        // delete model requests cache
-        cache()->delete("podcast{$podcast->id}");
+        // delete model requests cache, includes feed / query / episode lists, etc.
+        cache()->deleteMatching("podcast#{$podcast->id}*");
         cache()->delete("podcast@{$podcast->name}");
 
-        // clear cache for every localized podcast episode page
-        foreach ($podcast->episodes as $episode) {
-            foreach ($supportedLocales as $locale) {
-                cache()->delete(
-                    "page_podcast{$podcast->id}_episode{$episode->id}_{$locale}",
-                );
-                foreach (
-                    array_keys(\App\Models\EpisodeModel::$themes)
-                    as $themeKey
-                ) {
-                    cache()->delete(
-                        "page_podcast{$podcast->id}_episode{$episode->id}_embeddable_player_{$themeKey}_{$locale}",
-                    );
-                }
-            }
-        }
         // clear cache for every credit page
-        foreach ($supportedLocales as $locale) {
-            cache()->delete("credits_{$locale}");
-        }
-
-        // delete episode lists cache per year / season
-        // and localized pages
-        $episodeModel = new EpisodeModel();
-        $years = $episodeModel->getYears($podcast->id);
-        $seasons = $episodeModel->getSeasons($podcast->id);
-
-        foreach ($years as $year) {
-            cache()->delete(
-                "podcast{$podcast->id}_year{$year['year']}_episodes",
-            );
-            foreach ($supportedLocales as $locale) {
-                cache()->delete(
-                    "page_podcast{$podcast->id}_year{$year['year']}_{$locale}",
-                );
-            }
-        }
-        foreach ($seasons as $season) {
-            cache()->delete(
-                "podcast{$podcast->id}_season{$season['season_number']}_episodes",
-            );
-            foreach ($supportedLocales as $locale) {
-                cache()->delete(
-                    "page_podcast{$podcast->id}_season{$season['season_number']}_{$locale}",
-                );
-            }
-        }
-
-        // delete query cache
-        cache()->delete("podcast{$podcast->id}_defaultQuery");
-        cache()->delete("podcast{$podcast->id}_years");
-        cache()->delete("podcast{$podcast->id}_seasons");
+        cache()->deleteMatching('page_credits_*');
 
         return $data;
     }

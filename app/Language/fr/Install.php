@@ -39,7 +39,7 @@ return [
         'cacheHandlerOptions' => [
             'file' => 'Fichiers',
             'redis' => 'Redis',
-            'memcached' => 'Memcached',
+            'predis' => 'Predis',
         ],
         'next' => 'Suivant',
         'submit' => 'Terminer l’installation',

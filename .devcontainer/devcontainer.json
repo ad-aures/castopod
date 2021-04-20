@@ -13,17 +13,18 @@
     "color-highlight.markerType": "dot-before"
   },
   "extensions": [
-    "mikestead.dotenv",
-    "bmewburn.vscode-intelephense-client",
-    "streetsidesoftware.code-spell-checker",
-    "naumovs.color-highlight",
-    "heybourn.headwind",
-    "wayou.vscode-todo-highlight",
-    "esbenp.prettier-vscode",
-    "bradlc.vscode-tailwindcss",
-    "jamesbirtles.svelte-vscode",
-    "dbaeumer.vscode-eslint",
-    "stylelint.vscode-stylelint",
-    "wongjn.php-sniffer"
-  ]
+	"mikestead.dotenv",
+	"bmewburn.vscode-intelephense-client",
+	"streetsidesoftware.code-spell-checker",
+	"naumovs.color-highlight",
+	"heybourn.headwind",
+	"wayou.vscode-todo-highlight",
+	"esbenp.prettier-vscode",
+	"bradlc.vscode-tailwindcss",
+	"jamesbirtles.svelte-vscode",
+	"dbaeumer.vscode-eslint",
+	"stylelint.vscode-stylelint",
+	"wongjn.php-sniffer",
+	"eamodio.gitlens"
+]
 }

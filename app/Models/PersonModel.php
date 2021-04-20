@@ -48,9 +48,11 @@ class PersonModel extends Model
 
     public function getPersonById($personId)
     {
-        if (!($found = cache("person{$personId}"))) {
+        $cacheName = "person#{$personId}";
+        if (!($found = cache($cacheName))) {
             $found = $this->find($personId);
-            cache()->save("person{$personId}", $found, DECADE);
+
+            cache()->save($cacheName, $found, DECADE);
         }
 
         return $found;
@@ -99,7 +101,8 @@ class PersonModel extends Model
     {
         $options = [];
         $locale = service('request')->getLocale();
-        if (!($options = cache("taxonomy_options_{$locale}"))) {
+        $cacheName = "taxonomy_options_{$locale}";
+        if (!($options = cache($cacheName))) {
             foreach (lang('PersonsTaxonomy.persons') as $group_key => $group) {
                 foreach ($group['roles'] as $role_key => $role) {
                     $options[
@@ -108,7 +111,7 @@ class PersonModel extends Model
                 }
             }
 
-            cache()->save("taxonomy_options_{$locale}", $options, DECADE);
+            cache()->save($cacheName, $options, DECADE);
         }
 
         return $options;
@@ -116,19 +119,15 @@ class PersonModel extends Model
 
     protected function clearCache(array $data)
     {
-        $person = (new PersonModel())->getPersonById(
+        $person = (new PersonModel())->find(
             is_array($data['id']) ? $data['id'][0] : $data['id'],
         );
 
         cache()->delete('person_options');
-        cache()->delete("person{$person->id}");
-        cache()->delete("user{$person->created_by}_persons");
+        cache()->delete("person#{$person->id}");
 
-        $supportedLocales = config('App')->supportedLocales;
-        // clear cache for every credit page
-        foreach ($supportedLocales as $locale) {
-            cache()->delete("credit_{$locale}");
-        }
+        // clear cache for every credits page
+        cache()->deleteMatching('page_credits_*');
 
         return $data;
     }

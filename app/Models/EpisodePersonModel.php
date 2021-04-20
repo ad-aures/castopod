@@ -38,27 +38,17 @@ class EpisodePersonModel extends Model
     protected $afterInsert = ['clearCache'];
     protected $beforeDelete = ['clearCache'];
 
-    public function getPersonsByEpisodeId($podcastId, $episodeId)
+    public function getEpisodePersons($episodeId)
     {
-        if (
-            !($found = cache(
-                "podcast{$podcastId}_episodes{$episodeId}_persons"
-            ))
-        ) {
+        $cacheName = "podcast_episode#{$episodeId}_persons";
+        if (!($found = cache($cacheName))) {
             $found = $this->select('episodes_persons.*')
                 ->where('episode_id', $episodeId)
-                ->join(
-                    'persons',
-                    'person_id=persons.id'
-                )
+                ->join('persons', 'person_id=persons.id')
                 ->orderby('full_name')
                 ->findAll();
 
-            cache()->save(
-                "podcast{$podcastId}_episodes{$episodeId}_persons",
-                $found,
-                DECADE
-            );
+            cache()->save($cacheName, $found, DECADE);
         }
         return $found;
     }
@@ -81,11 +71,9 @@ class EpisodePersonModel extends Model
     ) {
         if (!empty($persons)) {
             $this->clearCache([
-                'id' => [
-                    'podcast_id' => $podcastId,
-                    'episode_id' => $episodeId,
-                ],
+                'episode_id' => $episodeId,
             ]);
+
             $data = [];
             foreach ($persons as $person) {
                 if ($groups_roles) {
@@ -126,23 +114,17 @@ class EpisodePersonModel extends Model
 
     protected function clearCache(array $data)
     {
-        $podcastId = null;
         $episodeId = null;
-        if (
-            isset($data['id']['podcast_id']) &&
-            isset($data['id']['episode_id'])
-        ) {
-            $podcastId = $data['id']['podcast_id'];
-            $episodeId = $data['id']['episode_id'];
+        if (isset($data['episode_id'])) {
+            $episodeId = $data['episode_id'];
         } else {
-            $episodePerson = (new EpisodePersonModel())->find(
-                is_array($data['id']) ? $data['id']['id'] : $data['id']
+            $person = (new EpisodePersonModel())->find(
+                is_array($data['id']) ? $data['id']['id'] : $data['id'],
             );
-            $podcastId = $episodePerson->podcast_id;
-            $episodeId = $episodePerson->episode_id;
+            $episodeId = $person->episode_id;
         }
 
-        cache()->delete("podcast{$podcastId}_episodes{$episodeId}_persons");
+        cache()->delete("podcast_episode#{$episodeId}_persons");
         (new EpisodeModel())->clearCache(['id' => $episodeId]);
 
         return $data;

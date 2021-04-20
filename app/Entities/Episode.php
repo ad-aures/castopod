@@ -385,7 +385,7 @@ class Episode extends Entity
         }
 
         if (empty($this->persons)) {
-            $this->persons = (new EpisodePersonModel())->getPersonsByEpisodeId(
+            $this->persons = (new EpisodePersonModel())->getEpisodePersons(
                 $this->podcast_id,
                 $this->id,
             );

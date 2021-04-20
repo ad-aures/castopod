@@ -56,14 +56,15 @@ class SoundbiteModel extends Model
      */
     public function getEpisodeSoundbites(int $podcastId, int $episodeId): array
     {
-        if (!($found = cache("episode{$episodeId}_soundbites"))) {
+        $cacheName = "podcast_episode#{$episodeId}_soundbites";
+        if (!($found = cache($cacheName))) {
             $found = $this->where([
                 'episode_id' => $episodeId,
                 'podcast_id' => $podcastId,
             ])
                 ->orderBy('start_time')
                 ->findAll();
-            cache()->save("episode{$episodeId}_soundbites", $found, DECADE);
+            cache()->save($cacheName, $found, DECADE);
         }
         return $found;
     }
@@ -73,25 +74,18 @@ class SoundbiteModel extends Model
         $episode = (new EpisodeModel())->find(
             isset($data['data'])
                 ? $data['data']['episode_id']
-                : $data['id']['episode_id']
+                : $data['id']['episode_id'],
         );
 
-        cache()->delete("episode{$episode->id}_soundbites");
+        cache()->delete("podcast_episode#{$episode->id}_soundbites");
 
         // delete cache for rss feed
-        cache()->delete("podcast{$episode->id}_feed");
-        foreach (\Opawg\UserAgentsPhp\UserAgentsRSS::$db as $service) {
-            cache()->delete(
-                "podcast{$episode->podcast->id}_feed_{$service['slug']}"
-            );
-        }
+        cache()->deleteMatching("podcast#{$episode->podcast_id}_feed*");
 
-        $supportedLocales = config('App')->supportedLocales;
-        foreach ($supportedLocales as $locale) {
-            cache()->delete(
-                "page_podcast{$episode->podcast->id}_episode{$episode->id}_{$locale}"
-            );
-        }
+        cache()->deleteMatching(
+            "page_podcast#{$episode->podcast_id}_episode#{$episode->id}_*",
+        );
+
         return $data;
     }
 }

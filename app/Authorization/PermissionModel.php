@@ -39,14 +39,15 @@ class PermissionModel extends \Myth\Auth\Authorization\PermissionModel
      */
     public function getPermissionsForGroup(int $groupId): array
     {
-        if (!($found = cache("group{$groupId}_permissions"))) {
+        $cacheName = "group{$groupId}_permissions";
+        if (!($found = cache($cacheName))) {
             $groupPermissions = $this->db
                 ->table('auth_groups_permissions')
                 ->select('id, auth_permissions.name')
                 ->join(
                     'auth_permissions',
                     'auth_permissions.id = permission_id',
-                    'inner'
+                    'inner',
                 )
                 ->where('group_id', $groupId)
                 ->get()
@@ -57,7 +58,7 @@ class PermissionModel extends \Myth\Auth\Authorization\PermissionModel
                 $found[$row->id] = strtolower($row->name);
             }
 
-            cache()->save("group{$groupId}_permissions", $found, 300);
+            cache()->save($cacheName, $found, 300);
         }
 
         return $found;

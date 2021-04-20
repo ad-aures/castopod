@@ -37,20 +37,19 @@ class PodcastPersonModel extends Model
     protected $afterInsert = ['clearCache'];
     protected $beforeDelete = ['clearCache'];
 
-    public function getPersonsByPodcastId($podcastId)
+    public function getPodcastPersons($podcastId)
     {
-        if (!($found = cache("podcast{$podcastId}_persons"))) {
+        $cacheName = "podcast#{$podcastId}_persons";
+        if (!($found = cache($cacheName))) {
             $found = $this->select('podcasts_persons.*')
                 ->where('podcast_id', $podcastId)
-                ->join(
-                    'persons',
-                    'person_id=persons.id'
-                )
+                ->join('persons', 'person_id=persons.id')
                 ->orderby('full_name')
                 ->findAll();
 
-            cache()->save("podcast{$podcastId}_persons", $found, DECADE);
+            cache()->save($cacheName, $found, DECADE);
         }
+
         return $found;
     }
 
@@ -66,7 +65,7 @@ class PodcastPersonModel extends Model
     public function addPodcastPersons($podcastId, $persons, $groups_roles)
     {
         if (!empty($persons)) {
-            $this->clearCache(['id' => ['podcast_id' => $podcastId]]);
+            $this->clearCache(['podcast_id' => $podcastId]);
             $data = [];
             foreach ($persons as $person) {
                 if ($groups_roles) {
@@ -102,16 +101,16 @@ class PodcastPersonModel extends Model
     protected function clearCache(array $data)
     {
         $podcastId = null;
-        if (isset($data['id']['podcast_id'])) {
-            $podcastId = $data['id']['podcast_id'];
+        if (isset($data['podcast_id'])) {
+            $podcastId = $data['podcast_id'];
         } else {
             $person = (new PodcastPersonModel())->find(
-                is_array($data['id']) ? $data['id']['id'] : $data['id']
+                is_array($data['id']) ? $data['id']['id'] : $data['id'],
             );
             $podcastId = $person->podcast_id;
         }
 
-        cache()->delete("podcast{$podcastId}_persons");
+        cache()->delete("podcast#{$podcastId}_persons");
         (new PodcastModel())->clearCache(['id' => $podcastId]);
 
         return $data;

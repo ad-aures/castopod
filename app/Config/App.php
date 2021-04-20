@@ -253,6 +253,8 @@ class App extends BaseConfig
      * Set a cookie name prefix if you need to avoid collisions.
      *
      * @var string
+     *
+     * @deprecated use Config\Cookie::$prefix property instead.
      */
     public $cookiePrefix = '';
 
@@ -264,6 +266,8 @@ class App extends BaseConfig
      * Set to `.your-domain.com` for site-wide cookies.
      *
      * @var string
+     *
+     * @deprecated use Config\Cookie::$domain property instead.
      */
     public $cookieDomain = '';
 
@@ -275,6 +279,8 @@ class App extends BaseConfig
      * Typically will be a forward slash.
      *
      * @var string
+     *
+     * @deprecated use Config\Cookie::$path property instead.
      */
     public $cookiePath = '/';
 
@@ -286,19 +292,23 @@ class App extends BaseConfig
      * Cookie will only be set if a secure HTTPS connection exists.
      *
      * @var boolean
+     *
+     * @deprecated use Config\Cookie::$secure property instead.
      */
     public $cookieSecure = false;
 
     /**
      * --------------------------------------------------------------------------
-     * Cookie HTTP Only
+     * Cookie HttpOnly
      * --------------------------------------------------------------------------
      *
      * Cookie will only be accessible via HTTP(S) (no JavaScript).
      *
      * @var boolean
+     *
+     * @deprecated use Config\Cookie::$httponly property instead.
      */
-    public $cookieHTTPOnly = false;
+    public $cookieHTTPOnly = true;
 
     /**
      * --------------------------------------------------------------------------
@@ -311,11 +321,18 @@ class App extends BaseConfig
      * - Strict
      * - ''
      *
-     * Defaults to `Lax` for compatibility with modern browsers. Setting `''`
-     * (empty string) means no SameSite attribute will be set on cookies. If
-     * set to `None`, `$cookieSecure` must also be set.
+     * Alternatively, you can use the constant names:
+     * - `Cookie::SAMESITE_NONE`
+     * - `Cookie::SAMESITE_LAX`
+     * - `Cookie::SAMESITE_STRICT`
      *
-     * @var string 'Lax'|'None'|'Strict'
+     * Defaults to `Lax` for compatibility with modern browsers. Setting `''`
+     * (empty string) means default SameSite attribute set by browsers (`Lax`)
+     * will be set on cookies. If set to `None`, `$cookieSecure` must also be set.
+     *
+     * @var string
+     *
+     * @deprecated use Config\Cookie::$samesite property instead.
      */
     public $cookieSameSite = 'Lax';
 

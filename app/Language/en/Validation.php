@@ -7,8 +7,6 @@
  */
 
 return [
-    'not_in_protected_slugs' =>
-        'The {field} field conflicts with one of the gateway routes (admin, auth or install).',
     'min_dims' =>
         '{field} is either not an image, or it is not wide or tall enough.',
     'is_image_squared' =>

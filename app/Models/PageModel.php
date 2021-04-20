@@ -25,7 +25,7 @@ class PageModel extends Model
     protected $validationRules = [
         'title' => 'required',
         'slug' =>
-            'required|regex_match[/^[a-zA-Z0-9\-]{1,191}$/]|is_unique[pages.slug,id,{id}]|not_in_protected_slugs',
+            'required|regex_match[/^[a-zA-Z0-9\-]{1,191}$/]|is_unique[pages.slug,id,{id}]',
         'content' => 'required',
     ];
     protected $validationMessages = [];
@@ -37,46 +37,8 @@ class PageModel extends Model
 
     protected function clearCache(array $data)
     {
-        $page = (new PageModel())->find(
-            is_array($data['id']) ? $data['id'][0] : $data['id'],
-        );
-
-        // delete page cache
-        cache()->delete(md5($page->link));
-
-        // Clear the cache of all podcast and episode pages
-        $allPodcasts = (new PodcastModel())->findAll();
-
-        foreach ($allPodcasts as $podcast) {
-            // delete localized podcast and episode page cache
-            $episodeModel = new EpisodeModel();
-            $years = $episodeModel->getYears($podcast->id);
-            $seasons = $episodeModel->getSeasons($podcast->id);
-            $supportedLocales = config('App')->supportedLocales;
-
-            foreach ($years as $year) {
-                foreach ($supportedLocales as $locale) {
-                    cache()->delete(
-                        "page_podcast{$podcast->id}_year{$year['year']}_{$locale}",
-                    );
-                }
-            }
-            foreach ($seasons as $season) {
-                foreach ($supportedLocales as $locale) {
-                    cache()->delete(
-                        "page_podcast{$podcast->id}_season{$season['season_number']}_{$locale}",
-                    );
-                }
-            }
-
-            foreach ($podcast->episodes as $episode) {
-                foreach ($supportedLocales as $locale) {
-                    cache()->delete(
-                        "page_podcast{$podcast->id}_episode{$episode->id}_{$locale}",
-                    );
-                }
-            }
-        }
+        // Clear the cache of all pages
+        cache()->deleteMatching('page*');
 
         return $data;
     }

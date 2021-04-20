@@ -26,7 +26,7 @@ class Feed extends Controller
         $serviceSlug = '';
         try {
             $service = \Opawg\UserAgentsPhp\UserAgentsRSS::find(
-                $_SERVER['HTTP_USER_AGENT']
+                $_SERVER['HTTP_USER_AGENT'],
             );
             if ($service) {
                 $serviceSlug = $service['slug'];
@@ -37,14 +37,14 @@ class Feed extends Controller
         }
 
         $cacheName =
-            "podcast{$podcast->id}_feed" . ($service ? "_{$serviceSlug}" : '');
+            "podcast#{$podcast->id}_feed" . ($service ? "_{$serviceSlug}" : '');
 
         if (!($found = cache($cacheName))) {
             $found = get_rss_feed($podcast, $serviceSlug);
 
             // The page cache is set to expire after next episode publication or a decade by default so it is deleted manually upon podcast update
             $secondsToNextUnpublishedEpisode = (new EpisodeModel())->getSecondsToNextUnpublishedEpisode(
-                $podcast->id
+                $podcast->id,
             );
 
             cache()->save(
@@ -52,7 +52,7 @@ class Feed extends Controller
                 $found,
                 $secondsToNextUnpublishedEpisode
                     ? $secondsToNextUnpublishedEpisode
-                    : DECADE
+                    : DECADE,
             );
         }
         return $this->response->setXML($found);

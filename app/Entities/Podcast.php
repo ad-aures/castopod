@@ -232,7 +232,7 @@ class Podcast extends Entity
         }
 
         if (empty($this->persons)) {
-            $this->persons = (new PodcastPersonModel())->getPersonsByPodcastId(
+            $this->persons = (new PodcastPersonModel())->getPodcastPersons(
                 $this->id,
             );
         }

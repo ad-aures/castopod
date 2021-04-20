@@ -34,21 +34,24 @@ class CategoryModel extends Model
 
     public function getCategoryOptions()
     {
-        if (!($options = cache('category_options'))) {
+        $locale = service('request')->getLocale();
+        $cacheName = "category_options_{$locale}";
+
+        if (!($options = cache($cacheName))) {
             $categories = $this->findAll();
 
             $options = array_reduce(
                 $categories,
                 function ($result, $category) {
                     $result[$category->id] = lang(
-                        'Podcast.category_options.' . $category->code
+                        'Podcast.category_options.' . $category->code,
                     );
                     return $result;
                 },
-                []
+                [],
             );
 
-            cache()->save('category_options', $options, DECADE);
+            cache()->save($cacheName, $options, DECADE);
         }
 
         return $options;
@@ -64,7 +67,7 @@ class CategoryModel extends Model
      */
     public function setPodcastCategories($podcastId, $categories)
     {
-        cache()->delete("podcasts{$podcastId}_categories");
+        cache()->delete("podcast#{$podcastId}_categories");
 
         // Remove already previously set categories to overwrite them
         $this->db
@@ -83,7 +86,7 @@ class CategoryModel extends Model
 
                     return $result;
                 },
-                []
+                [],
             );
 
             // Set podcast categories
@@ -103,20 +106,17 @@ class CategoryModel extends Model
      */
     public function getPodcastCategories($podcastId)
     {
-        if (!($categories = cache("podcasts{$podcastId}_categories"))) {
+        $cacheName = "podcast#{$podcastId}_categories";
+        if (!($categories = cache($cacheName))) {
             $categories = $this->select('categories.*')
                 ->join(
                     'podcasts_categories',
-                    'podcasts_categories.category_id = categories.id'
+                    'podcasts_categories.category_id = categories.id',
                 )
                 ->where('podcasts_categories.podcast_id', $podcastId)
                 ->findAll();
 
-            cache()->save(
-                "podcasts{$podcastId}_categories",
-                $categories,
-                DECADE
-            );
+            cache()->save($cacheName, $categories, DECADE);
         }
 
         return $categories;
