@@ -27,9 +27,8 @@ class FollowModel extends Model
     protected $updatedField = null;
 
     /**
-     *
-     * @param \ActivityPub\Entities\Actor $actor
-     * @param \ActivityPub\Entities\Actor $targetActor
+     * @param \ActivityPub\Entities\Actor $actor Actor that is following
+     * @param \ActivityPub\Entities\Actor $targetActor Actor that is being followed
      * @param bool $registerActivity
      * @return void
      * @throws DatabaseException
@@ -48,6 +47,14 @@ class FollowModel extends Model
             model('ActorModel')
                 ->where('id', $targetActor->id)
                 ->increment('followers_count');
+
+            cache()->delete(
+                config('ActivityPub')->cachePrefix . "actor#{$targetActor->id}",
+            );
+            cache()->delete(
+                config('ActivityPub')->cachePrefix .
+                    "actor#{$targetActor->id}_followers",
+            );
 
             if ($registerActivity) {
                 $followActivity = new FollowActivity();
@@ -85,8 +92,8 @@ class FollowModel extends Model
     }
 
     /**
-     * @param \ActivityPub\Entities\Actor $actor
-     * @param \ActivityPub\Entities\Actor $targetActor
+     * @param \ActivityPub\Entities\Actor $actor Actor that is unfollowing
+     * @param \ActivityPub\Entities\Actor $targetActor Actor that is being unfollowed
      * @return void
      * @throws InvalidArgumentException
      * @throws DatabaseException
@@ -107,6 +114,14 @@ class FollowModel extends Model
         model('ActorModel')
             ->where('id', $targetActor->id)
             ->decrement('followers_count');
+
+        cache()->delete(
+            config('ActivityPub')->cachePrefix . "actor#{$targetActor->id}",
+        );
+        cache()->delete(
+            config('ActivityPub')->cachePrefix .
+                "actor#{$targetActor->id}_followers",
+        );
 
         if ($registerActivity) {
             $undoActivity = new UndoActivity();

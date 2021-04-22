@@ -8,6 +8,7 @@
 
 namespace App\Controllers;
 
+use Analytics\AnalyticsTrait;
 use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
 use CodeIgniter\HTTP\URI;
@@ -15,6 +16,8 @@ use CodeIgniter\I18n\Time;
 
 class Note extends \ActivityPub\Controllers\NoteController
 {
+    use AnalyticsTrait;
+
     /**
      * @var \App\Entities\Podcast
      */
@@ -47,24 +50,46 @@ class Note extends \ActivityPub\Controllers\NoteController
 
     public function index()
     {
-        helper('persons');
-        $persons = [];
-        construct_person_array($this->podcast->persons, $persons);
-
-        $data = [
-            'podcast' => $this->podcast,
-            'actor' => $this->actor,
-            'note' => $this->note,
-            'persons' => $persons,
-        ];
-
-        // if user is logged in then send to the authenticated activity view
-        if (can_user_interact()) {
-            helper('form');
-            return view('podcast/note_authenticated', $data);
-        } else {
-            return view('podcast/note', $data);
+        // Prevent analytics hit when authenticated
+        if (!can_user_interact()) {
+            $this->registerPodcastWebpageHit($this->podcast->id);
         }
+
+        $cacheName = implode(
+            '_',
+            array_filter([
+                'page',
+                "note#{$this->note->id}",
+                service('request')->getLocale(),
+                can_user_interact() ? '_authenticated' : null,
+            ]),
+        );
+
+        if (!($cachedView = cache($cacheName))) {
+            helper('persons');
+            $persons = [];
+            construct_person_array($this->podcast->persons, $persons);
+
+            $data = [
+                'podcast' => $this->podcast,
+                'actor' => $this->actor,
+                'note' => $this->note,
+                'persons' => $persons,
+            ];
+
+            // if user is logged in then send to the authenticated activity view
+            if (can_user_interact()) {
+                helper('form');
+                return view('podcast/note_authenticated', $data);
+            } else {
+                return view('podcast/note', $data, [
+                    'cache' => DECADE,
+                    'cache_name' => $cacheName,
+                ]);
+            }
+        }
+
+        return $cachedView;
     }
 
     public function attemptCreate()
@@ -198,15 +223,37 @@ class Note extends \ActivityPub\Controllers\NoteController
 
     public function remoteAction($action)
     {
-        $data = [
-            'podcast' => $this->podcast,
-            'actor' => $this->actor,
-            'note' => $this->note,
-            'action' => $action,
-        ];
+        // Prevent analytics hit when authenticated
+        if (!can_user_interact()) {
+            $this->registerPodcastWebpageHit($this->podcast->id);
+        }
 
-        helper('form');
+        $cacheName = implode(
+            '_',
+            array_filter([
+                'page',
+                "note#{$this->note->id}",
+                "remote_{$action}",
+                service('request')->getLocale(),
+            ]),
+        );
 
-        return view('podcast/note_remote_action', $data);
+        if (!($cachedView = cache($cacheName))) {
+            $data = [
+                'podcast' => $this->podcast,
+                'actor' => $this->actor,
+                'note' => $this->note,
+                'action' => $action,
+            ];
+
+            helper('form');
+
+            return view('podcast/note_remote_action', $data, [
+                'cache' => DECADE,
+                'cache_name' => $cacheName,
+            ]);
+        }
+
+        return $cachedView;
     }
 }

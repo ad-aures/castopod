@@ -38,9 +38,9 @@ class EpisodePersonModel extends Model
     protected $afterInsert = ['clearCache'];
     protected $beforeDelete = ['clearCache'];
 
-    public function getEpisodePersons($episodeId)
+    public function getEpisodePersons($podcastId, $episodeId)
     {
-        $cacheName = "podcast_episode#{$episodeId}_persons";
+        $cacheName = "podcast#{$podcastId}_episode#{$episodeId}_persons";
         if (!($found = cache($cacheName))) {
             $found = $this->select('episodes_persons.*')
                 ->where('episode_id', $episodeId)
@@ -124,7 +124,6 @@ class EpisodePersonModel extends Model
             $episodeId = $person->episode_id;
         }
 
-        cache()->delete("podcast_episode#{$episodeId}_persons");
         (new EpisodeModel())->clearCache(['id' => $episodeId]);
 
         return $data;

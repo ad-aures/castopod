@@ -38,7 +38,7 @@
         <?= view('podcast/_partials/episode_card', [
             'episode' => $note->episode,
         ]) ?>
-    <?php elseif ($note->preview_card_id): ?>
+    <?php elseif ($note->has_preview_card): ?>
         <?= view('podcast/_partials/preview_card', [
             'preview_card' => $note->preview_card,
         ]) ?>

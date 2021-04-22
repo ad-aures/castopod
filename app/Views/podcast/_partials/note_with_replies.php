@@ -15,7 +15,9 @@
 </div>
 
 
-<?php foreach ($note->replies as $reply): ?>
-    <?= view('podcast/_partials/reply', ['reply' => $reply]) ?>
-<?php endforeach; ?>
+<?php if ($note->has_replies): ?>
+    <?php foreach ($note->replies as $reply): ?>
+        <?= view('podcast/_partials/reply', ['reply' => $reply]) ?>
+    <?php endforeach; ?>
+<?php endif; ?>
 </div>

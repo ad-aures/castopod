@@ -8,7 +8,6 @@
 
 namespace App\Models;
 
-use ActivityPub\Models\ActorModel;
 use CodeIgniter\HTTP\URI;
 use CodeIgniter\Model;
 use phpseclib\Crypt\RSA;
@@ -74,7 +73,7 @@ class PodcastModel extends Model
     protected $validationMessages = [];
 
     protected $beforeInsert = ['createPodcastActor'];
-    protected $afterInsert = ['setAvatarImageUrl'];
+    protected $afterInsert = ['setActorAvatar'];
     protected $afterUpdate = ['updatePodcastActor'];
 
     // clear cache before update if by any chance, the podcast name changes, so will the podcast link
@@ -97,6 +96,18 @@ class PodcastModel extends Model
         $cacheName = "podcast#{$podcastId}";
         if (!($found = cache($cacheName))) {
             $found = $this->find($podcastId);
+
+            cache()->save($cacheName, $found, DECADE);
+        }
+
+        return $found;
+    }
+
+    public function getPodcastByActorId($actorId)
+    {
+        $cacheName = "podcast_actor#{$actorId}";
+        if (!($found = cache($cacheName))) {
+            $found = $this->where('actor_id', $actorId)->first();
 
             cache()->save($cacheName, $found, DECADE);
         }
@@ -300,25 +311,6 @@ class PodcastModel extends Model
         return $defaultQuery;
     }
 
-    public function clearCache(array $data)
-    {
-        $podcast = (new PodcastModel())->getPodcastById(
-            is_array($data['id']) ? $data['id'][0] : $data['id'],
-        );
-
-        // delete cache all podcast pages
-        cache()->deleteMatching("page_podcast#{$podcast->id}_*");
-
-        // delete model requests cache, includes feed / query / episode lists, etc.
-        cache()->deleteMatching("podcast#{$podcast->id}*");
-        cache()->delete("podcast@{$podcast->name}");
-
-        // clear cache for every credit page
-        cache()->deleteMatching('page_credits_*');
-
-        return $data;
-    }
-
     /**
      * Creates an actor linked to the podcast
      * (Triggered before insert)
@@ -359,16 +351,18 @@ class PodcastModel extends Model
         return $data;
     }
 
-    protected function setAvatarImageUrl($data)
+    protected function setActorAvatar($data)
     {
         $podcast = (new PodcastModel())->getPodcastById(
             is_array($data['id']) ? $data['id'][0] : $data['id'],
         );
 
-        $podcast->actor->avatar_image_url = $podcast->image->thumbnail_url;
-        $podcast->actor->avatar_image_mimetype = $podcast->image_mimetype;
+        $podcastActor = (new ActorModel())->find($podcast->actor_id);
 
-        (new ActorModel())->update($podcast->actor->id, $podcast->actor);
+        $podcastActor->avatar_image_url = $podcast->image->thumbnail_url;
+        $podcastActor->avatar_image_mimetype = $podcast->image_mimetype;
+
+        (new ActorModel())->update($podcast->actor_id, $podcastActor);
 
         return $data;
     }
@@ -380,7 +374,7 @@ class PodcastModel extends Model
         );
 
         $actorModel = new ActorModel();
-        $actor = $actorModel->find($podcast->actor_id);
+        $actor = $actorModel->getActorById($podcast->actor_id);
 
         // update values
         $actor->display_name = $podcast->title;
@@ -391,6 +385,30 @@ class PodcastModel extends Model
         if ($actor->hasChanged()) {
             $actorModel->update($actor->id, $actor);
         }
+
+        return $data;
+    }
+
+    public function clearCache(array $data)
+    {
+        $podcast = (new PodcastModel())->getPodcastById(
+            is_array($data['id']) ? $data['id'][0] : $data['id'],
+        );
+
+        // delete cache all podcast pages
+        cache()->deleteMatching("page_podcast#{$podcast->id}*");
+
+        // delete all cache for podcast actor
+        cache()->deleteMatching(
+            config('ActivityPub')->cachePrefix . "actor#{$podcast->actor_id}*",
+        );
+
+        // delete model requests cache, includes feed / query / episode lists, etc.
+        cache()->deleteMatching("podcast#{$podcast->id}*");
+        cache()->delete("podcast@{$podcast->name}");
+
+        // clear cache for every credit page
+        cache()->deleteMatching('page_credits_*');
 
         return $data;
     }

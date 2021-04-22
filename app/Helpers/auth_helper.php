@@ -6,7 +6,6 @@
  * @link       https://castopod.org/
  */
 
-use ActivityPub\Models\ActorModel;
 use CodeIgniter\Database\Exceptions\DataException;
 use Config\Services;
 
@@ -68,7 +67,7 @@ if (!function_exists('interact_as_actor')) {
 
         $session = session();
         if ($session->has('interact_as_actor_id')) {
-            return (new ActorModel())->getActorById(
+            return model('ActorModel')->getActorById(
                 $session->get('interact_as_actor_id'),
             );
         }

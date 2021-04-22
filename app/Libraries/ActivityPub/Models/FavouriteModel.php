@@ -11,6 +11,7 @@ namespace ActivityPub\Models;
 use ActivityPub\Activities\LikeActivity;
 use ActivityPub\Activities\UndoActivity;
 use CodeIgniter\Events\Events;
+use Michalsn\Uuid\UuidModel;
 
 class FavouriteModel extends UuidModel
 {
@@ -48,6 +49,19 @@ class FavouriteModel extends UuidModel
                     ->getBytes(),
             )
             ->increment('favourites_count');
+
+        $prefix = config('ActivityPub')->cachePrefix;
+        $hashedNoteUri = md5($note->uri);
+        cache()->delete($prefix . "note#{$note->id}");
+        cache()->delete($prefix . "note@{$hashedNoteUri}");
+        cache()->delete($prefix . "actor#{$actor->id}_published_notes");
+
+        if ($note->in_reply_to_id) {
+            cache()->delete($prefix . "note#{$note->in_reply_to_id}_replies");
+            cache()->delete(
+                $prefix . "note#{$note->in_reply_to_id}_replies_withBlocked",
+            );
+        }
 
         Events::trigger('on_note_favourite', $actor, $note);
 
@@ -90,6 +104,19 @@ class FavouriteModel extends UuidModel
                     ->getBytes(),
             )
             ->decrement('favourites_count');
+
+        $prefix = config('ActivityPub')->cachePrefix;
+        $hashedNoteUri = md5($note->uri);
+        cache()->delete($prefix . "note#{$note->id}");
+        cache()->delete($prefix . "note@{$hashedNoteUri}");
+        cache()->delete($prefix . "actor#{$actor->id}_published_notes");
+
+        if ($note->in_reply_to_id) {
+            cache()->delete($prefix . "note#{$note->in_reply_to_id}_replies");
+            cache()->delete(
+                $prefix . "note#{$note->in_reply_to_id}_replies_withBlocked",
+            );
+        }
 
         $this->table('activitypub_favourites')
             ->where([

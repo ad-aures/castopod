@@ -8,6 +8,8 @@
 
 namespace ActivityPub\Models;
 
+use Michalsn\Uuid\UuidModel;
+
 class ActivityModel extends UuidModel
 {
     protected $table = 'activitypub_activities';
@@ -34,7 +36,15 @@ class ActivityModel extends UuidModel
 
     public function getActivityById($activityId)
     {
-        return $this->find($activityId);
+        $cacheName =
+            config('ActivityPub')->cachePrefix . "activity#{$activityId}";
+        if (!($found = cache($cacheName))) {
+            $found = $this->find($activityId);
+
+            cache()->save($cacheName, $found, DECADE);
+        }
+
+        return $found;
     }
 
     /**

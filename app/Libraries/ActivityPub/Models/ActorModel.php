@@ -8,6 +8,7 @@
 
 namespace ActivityPub\Models;
 
+use CodeIgniter\Events\Events;
 use CodeIgniter\Model;
 
 class ActorModel extends Model
@@ -42,7 +43,14 @@ class ActorModel extends Model
 
     public function getActorById($id)
     {
-        return $this->find($id);
+        $cacheName = config('ActivityPub')->cachePrefix . "actor#{$id}";
+        if (!($found = cache($cacheName))) {
+            $found = $this->find($id);
+
+            cache()->save($cacheName, $found, DECADE);
+        }
+
+        return $found;
     }
 
     /**
@@ -76,31 +84,51 @@ class ActorModel extends Model
 
     public function getActorByUri($actorUri)
     {
-        return $this->where('uri', $actorUri)->first();
+        $hashedActorUri = md5($actorUri);
+        $cacheName =
+            config('ActivityPub')->cachePrefix . "actor@{$hashedActorUri}";
+        if (!($found = cache($cacheName))) {
+            $found = $this->where('uri', $actorUri)->first();
+
+            cache()->save($cacheName, $found, DECADE);
+        }
+
+        return $found;
     }
 
     public function getFollowers($actorId)
     {
-        return $this->join(
-            'activitypub_follows',
-            'activitypub_follows.actor_id = id',
-            'inner',
-        )
-            ->where('activitypub_follows.target_actor_id', $actorId)
-            ->findAll();
+        $cacheName =
+            config('ActivityPub')->cachePrefix . "actor#{$actorId}_followers";
+        if (!($found = cache($cacheName))) {
+            $found = $this->join(
+                'activitypub_follows',
+                'activitypub_follows.actor_id = id',
+                'inner',
+            )
+                ->where('activitypub_follows.target_actor_id', $actorId)
+                ->findAll();
+
+            cache()->save($cacheName, $found, DECADE);
+        }
+
+        return $found;
     }
 
     /**
-     * Check if an actor is blocked using its uri
+     * Check if an existing actor is blocked using its uri.
+     * Returns FALSE if the actor doesn't exist
      *
      * @param mixed $actorUri
      * @return boolean
      */
     public function isActorBlocked($actorUri)
     {
-        return $this->where(['uri' => $actorUri, 'is_blocked' => true])->first()
-            ? true
-            : false;
+        if ($actor = $this->getActorByUri($actorUri)) {
+            return $actor->is_blocked;
+        }
+
+        return false;
     }
 
     /**
@@ -110,16 +138,35 @@ class ActorModel extends Model
      */
     public function getBlockedActors()
     {
-        return $this->where('is_blocked', 1)->findAll();
+        $cacheName = config('ActivityPub')->cachePrefix . 'blocked_actors';
+        if (!($found = cache($cacheName))) {
+            $found = $this->where('is_blocked', 1)->findAll();
+
+            cache()->save($cacheName, $found, DECADE);
+        }
+
+        return $found;
     }
 
     public function blockActor($actorId)
     {
+        $prefix = config('ActivityPub')->cachePrefix;
+        cache()->delete($prefix . 'blocked_actors');
+        cache()->deleteMatching($prefix . '*replies');
+
+        Events::trigger('on_block_actor', $actorId);
+
         $this->update($actorId, ['is_blocked' => 1]);
     }
 
     public function unblockActor($actorId)
     {
+        $prefix = config('ActivityPub')->cachePrefix;
+        cache()->delete($prefix . 'blocked_actors');
+        cache()->deleteMatching($prefix . '*replies');
+
+        Events::trigger('on_unblock_actor', $actorId);
+
         $this->update($actorId, ['is_blocked' => 0]);
     }
 }

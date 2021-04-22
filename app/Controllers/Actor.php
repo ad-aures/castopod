@@ -8,15 +8,32 @@
 
 namespace App\Controllers;
 
+use Analytics\AnalyticsTrait;
+
 class Actor extends \ActivityPub\Controllers\ActorController
 {
+    use AnalyticsTrait;
+
     public function follow()
     {
-        helper(['form', 'components', 'svg']);
-        $data = [
-            'actor' => $this->actor,
-        ];
+        // Prevent analytics hit when authenticated
+        if (!can_user_interact()) {
+            $this->registerPodcastWebpageHit($this->actor->podcast->id);
+        }
 
-        return view('podcast/follow', $data);
+        $cacheName = "page_podcast@{$this->actor->username}_follow";
+        if (!($cachedView = cache($cacheName))) {
+            helper(['form', 'components', 'svg']);
+            $data = [
+                'actor' => $this->actor,
+            ];
+
+            return view('podcast/follow', $data, [
+                'cache' => DECADE,
+                'cache_name' => $cacheName,
+            ]);
+        }
+
+        return $cachedView;
     }
 }

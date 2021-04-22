@@ -35,22 +35,50 @@ class PreviewCardModel extends Model
 
     public function getPreviewCardFromUrl($url)
     {
-        return $this->where('url', $url)->first();
+        $hashedPreviewCardUrl = md5($url);
+        $cacheName =
+            config('ActivityPub')->cachePrefix .
+            "preview_card@{$hashedPreviewCardUrl}";
+        if (!($found = cache($cacheName))) {
+            $found = $this->where('url', $url)->first();
+            cache()->save($cacheName, $found, DECADE);
+        }
+
+        return $found;
     }
 
     public function getNotePreviewCard($noteId)
     {
-        return $this->join(
-            'activitypub_notes_preview_cards',
-            'activitypub_notes_preview_cards.preview_card_id = id',
-            'inner',
-        )
-            ->where(
-                'note_id',
-                service('uuid')
-                    ->fromString($noteId)
-                    ->getBytes(),
+        $cacheName =
+            config('ActivityPub')->cachePrefix . "note#{$noteId}_preview_card";
+        if (!($found = cache($cacheName))) {
+            $found = $this->join(
+                'activitypub_notes_preview_cards',
+                'activitypub_notes_preview_cards.preview_card_id = id',
+                'inner',
             )
-            ->first();
+                ->where(
+                    'note_id',
+                    service('uuid')
+                        ->fromString($noteId)
+                        ->getBytes(),
+                )
+                ->first();
+
+            cache()->save($cacheName, $found, DECADE);
+        }
+
+        return $found;
+    }
+
+    public function deletePreviewCard($id, $url)
+    {
+        $hashedPreviewCardUrl = md5($url);
+        cache()->delete(
+            config('ActivityPub')->cachePrefix .
+                "preview_card@{$hashedPreviewCardUrl}",
+        );
+
+        return $this->delete($id);
     }
 }

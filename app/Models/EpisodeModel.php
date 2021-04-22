@@ -139,6 +139,7 @@ class EpisodeModel extends Model
 
     public function getEpisodeById($episodeId)
     {
+        // TODO: episode id should be a composite key. The cache should include podcast_id.
         $cacheName = "podcast_episode#{$episodeId}";
         if (!($found = cache($cacheName))) {
             $builder = $this->where([
@@ -153,19 +154,16 @@ class EpisodeModel extends Model
         return $found;
     }
 
-    public function getPublishedEpisodeById($episodeId, $podcastId = null)
+    public function getPublishedEpisodeById($podcastId, $episodeId)
     {
-        $cacheName = "podcast_episode#{$episodeId}_published";
+        $cacheName = "podcast#{$podcastId}_episode#{$episodeId}_published";
         if (!($found = cache($cacheName))) {
-            $builder = $this->where([
+            $found = $this->where([
                 'id' => $episodeId,
-            ])->where('`published_at` <= NOW()', null, false);
-
-            if ($podcastId) {
-                $builder->where('podcast_id', $podcastId);
-            }
-
-            $found = $builder->first();
+            ])
+                ->where('podcast_id', $podcastId)
+                ->where('`published_at` <= NOW()', null, false)
+                ->first();
 
             cache()->save($cacheName, $found, DECADE);
         }
@@ -287,11 +285,17 @@ class EpisodeModel extends Model
         // delete model requests cache
         cache()->delete("podcast#{$episode->podcast_id}_episodes");
 
-        cache()->deleteMatching("podcast_episode#{$episode->id}*");
+        cache()->delete("podcast_episode#{$episode->id}");
+        cache()->deleteMatching(
+            "podcast#{$episode->podcast_id}_episode#{$episode->id}*",
+        );
         cache()->delete(
             "podcast#{$episode->podcast_id}_episode@{$episode->slug}",
         );
 
+        cache()->deleteMatching(
+            "page_podcast#{$episode->podcast_id}_activity*",
+        );
         cache()->deleteMatching(
             "page_podcast#{$episode->podcast_id}_episode#{$episode->id}_*",
         );
@@ -300,12 +304,12 @@ class EpisodeModel extends Model
         if ($episode->season_number) {
             cache()->deleteMatching("podcast#{$episode->podcast_id}_season*");
             cache()->deleteMatching(
-                "page_podcast#{$episode->podcast_id}_season*",
+                "page_podcast#{$episode->podcast_id}_episodes_season*",
             );
         } else {
             cache()->deleteMatching("podcast#{$episode->podcast_id}_year*");
             cache()->deleteMatching(
-                "page_podcast#{$episode->podcast_id}_year*",
+                "page_podcast#{$episode->podcast_id}_episodes_year*",
             );
         }
 

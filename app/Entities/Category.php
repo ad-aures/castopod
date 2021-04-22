@@ -31,7 +31,7 @@ class Category extends Entity
         $parentId = $this->attributes['parent_id'];
 
         return $parentId != 0
-            ? (new CategoryModel())->findParent($parentId)
+            ? (new CategoryModel())->getCategoryById($parentId)
             : null;
     }
 }

@@ -39,7 +39,11 @@
 </div>
 <?= form_close() ?>
 
-<?php foreach ($note->replies as $reply): ?>
-    <?= view('podcast/_partials/reply_authenticated', ['reply' => $reply]) ?>
-<?php endforeach; ?>
+<?php if ($note->has_replies): ?>
+    <?php foreach ($note->replies as $reply): ?>
+        <?= view('podcast/_partials/reply_authenticated', [
+            'reply' => $reply,
+        ]) ?>
+    <?php endforeach; ?>
+<?php endif; ?>
 </div>

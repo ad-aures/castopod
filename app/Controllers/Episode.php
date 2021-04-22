@@ -8,12 +8,15 @@
 
 namespace App\Controllers;
 
+use Analytics\AnalyticsTrait;
 use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
 use SimpleXMLElement;
 
 class Episode extends BaseController
 {
+    use AnalyticsTrait;
+
     /**
      * @var \App\Entities\Podcast
      */
@@ -44,10 +47,15 @@ class Episode extends BaseController
 
     public function index()
     {
-        self::triggerWebpageHit($this->podcast->id);
+        // Prevent analytics hit when authenticated
+        if (!can_user_interact()) {
+            $this->registerPodcastWebpageHit($this->episode->podcast_id);
+        }
 
         $locale = service('request')->getLocale();
-        $cacheName = "page_podcast#{$this->podcast->id}_episode{$this->episode->id}_{$locale}";
+        $cacheName =
+            "page_podcast#{$this->podcast->id}_episode#{$this->episode->id}_{$locale}" .
+            (can_user_interact() ? '_authenticated' : '');
 
         if (!($cachedView = cache($cacheName))) {
             helper('persons');
@@ -69,13 +77,7 @@ class Episode extends BaseController
 
             if (can_user_interact()) {
                 helper('form');
-                // The page cache is set to a decade so it is deleted manually upon podcast update
-                return view('podcast/episode_authenticated', $data, [
-                    'cache' => $secondsToNextUnpublishedEpisode
-                        ? $secondsToNextUnpublishedEpisode
-                        : DECADE,
-                    'cache_name' => $cacheName . '_authenticated',
-                ]);
+                return view('podcast/episode_authenticated', $data);
             } else {
                 // The page cache is set to a decade so it is deleted manually upon podcast update
                 return view('podcast/episode', $data, [
@@ -94,7 +96,10 @@ class Episode extends BaseController
     {
         header('Content-Security-Policy: frame-ancestors https://* http://*');
 
-        self::triggerWebpageHit($this->episode->podcast_id);
+        // Prevent analytics hit when authenticated
+        if (!can_user_interact()) {
+            $this->registerPodcastWebpageHit($this->episode->podcast_id);
+        }
 
         $session = \Config\Services::session();
         $session->start();
@@ -107,7 +112,7 @@ class Episode extends BaseController
 
         $locale = service('request')->getLocale();
 
-        $cacheName = "page_podcast#{$this->podcast->id}_episode{$this->episode->id}_embeddable_player_{$theme}_{$locale}";
+        $cacheName = "page_podcast#{$this->podcast->id}_episode#{$this->episode->id}_embeddable_player_{$theme}_{$locale}";
 
         if (!($cachedView = cache($cacheName))) {
             $theme = EpisodeModel::$themes[$theme];

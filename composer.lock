@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b5d726bdc7252c80c0fd5a6f53de1948",
+    "content-hash": "f370b196462e2ca2ff3e2df9627f2ba4",
     "packages": [
         {
             "name": "brick/math",
@@ -68,12 +68,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/codeigniter4/CodeIgniter4.git",
-                "reference": "dfbc85af9ef408a6654cce6a462c8fdde3ee2446"
+                "reference": "8b2e7c29043977fac378c37690cc951a715c2bd5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codeigniter4/CodeIgniter4/zipball/dfbc85af9ef408a6654cce6a462c8fdde3ee2446",
-                "reference": "dfbc85af9ef408a6654cce6a462c8fdde3ee2446",
+                "url": "https://api.github.com/repos/codeigniter4/CodeIgniter4/zipball/8b2e7c29043977fac378c37690cc951a715c2bd5",
+                "reference": "8b2e7c29043977fac378c37690cc951a715c2bd5",
                 "shasum": ""
             },
             "require": {
@@ -91,10 +91,10 @@
                 "fakerphp/faker": "^1.9",
                 "mikey179/vfsstream": "^1.6",
                 "nexusphp/tachycardia": "^1.0",
-                "phpstan/phpstan": "0.12.84",
+                "phpstan/phpstan": "0.12.85",
                 "phpunit/phpunit": "^9.1",
                 "predis/predis": "^1.1",
-                "rector/rector": "0.10.6",
+                "rector/rector": "0.10.17",
                 "squizlabs/php_codesniffer": "^3.3"
             },
             "suggest": {
@@ -139,7 +139,7 @@
                 "slack": "https://codeigniterchat.slack.com",
                 "issues": "https://github.com/codeigniter4/CodeIgniter4/issues"
             },
-            "time": "2021-04-20T08:40:30+00:00"
+            "time": "2021-05-03T08:32:21+00:00"
         },
         {
             "name": "composer/ca-bundle",
@@ -823,16 +823,16 @@
         },
         {
             "name": "league/commonmark",
-            "version": "1.5.8",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/commonmark.git",
-                "reference": "08fa59b8e4e34ea8a773d55139ae9ac0e0aecbaf"
+                "reference": "19a9673b833cc37770439097b381d86cd125bfe8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/08fa59b8e4e34ea8a773d55139ae9ac0e0aecbaf",
-                "reference": "08fa59b8e4e34ea8a773d55139ae9ac0e0aecbaf",
+                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/19a9673b833cc37770439097b381d86cd125bfe8",
+                "reference": "19a9673b833cc37770439097b381d86cd125bfe8",
                 "shasum": ""
             },
             "require": {
@@ -920,7 +920,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-03-28T18:51:39+00:00"
+            "time": "2021-05-01T19:00:49+00:00"
         },
         {
             "name": "league/html-to-markdown",
@@ -1125,16 +1125,16 @@
         },
         {
             "name": "michalsn/codeigniter4-uuid",
-            "version": "v1.0.0-beta3",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/michalsn/codeigniter4-uuid.git",
-                "reference": "568aba8f315199b6cc87e76b8441cd03a2bba5b4"
+                "reference": "c8bbd961401015307bc72f6f6aa93509ffac1d5f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/michalsn/codeigniter4-uuid/zipball/568aba8f315199b6cc87e76b8441cd03a2bba5b4",
-                "reference": "568aba8f315199b6cc87e76b8441cd03a2bba5b4",
+                "url": "https://api.github.com/repos/michalsn/codeigniter4-uuid/zipball/c8bbd961401015307bc72f6f6aa93509ffac1d5f",
+                "reference": "c8bbd961401015307bc72f6f6aa93509ffac1d5f",
                 "shasum": ""
             },
             "require": {
@@ -1172,9 +1172,9 @@
             ],
             "support": {
                 "issues": "https://github.com/michalsn/codeigniter4-uuid/issues",
-                "source": "https://github.com/michalsn/codeigniter4-uuid/tree/v1.0.0-beta3"
+                "source": "https://github.com/michalsn/codeigniter4-uuid/tree/v1.0.1"
             },
-            "time": "2021-04-02T11:08:18+00:00"
+            "time": "2021-05-03T12:47:44+00:00"
         },
         {
             "name": "myth/auth",
@@ -1182,12 +1182,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/lonnieezell/myth-auth.git",
-                "reference": "eff9805d7f1d27326f14875b53ff4b3d2a6b72ee"
+                "reference": "2b42da1884745eec22ac10f7941a4f9350576a86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lonnieezell/myth-auth/zipball/eff9805d7f1d27326f14875b53ff4b3d2a6b72ee",
-                "reference": "eff9805d7f1d27326f14875b53ff4b3d2a6b72ee",
+                "url": "https://api.github.com/repos/lonnieezell/myth-auth/zipball/2b42da1884745eec22ac10f7941a4f9350576a86",
+                "reference": "2b42da1884745eec22ac10f7941a4f9350576a86",
                 "shasum": ""
             },
             "require": {
@@ -1248,7 +1248,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2021-04-12T22:34:12+00:00"
+            "time": "2021-05-02T05:32:03+00:00"
         },
         {
             "name": "opawg/user-agents-php",
@@ -1584,16 +1584,16 @@
         },
         {
             "name": "psr/log",
-            "version": "1.1.3",
+            "version": "1.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "0f73288fd15629204f9d42b7055f72dacbe811fc"
+                "reference": "d49695b909c3b7628b6289db5479a1c204601f11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/0f73288fd15629204f9d42b7055f72dacbe811fc",
-                "reference": "0f73288fd15629204f9d42b7055f72dacbe811fc",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/d49695b909c3b7628b6289db5479a1c204601f11",
+                "reference": "d49695b909c3b7628b6289db5479a1c204601f11",
                 "shasum": ""
             },
             "require": {
@@ -1617,7 +1617,7 @@
             "authors": [
                 {
                     "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
+                    "homepage": "https://www.php-fig.org/"
                 }
             ],
             "description": "Common interface for logging libraries",
@@ -1628,9 +1628,9 @@
                 "psr-3"
             ],
             "support": {
-                "source": "https://github.com/php-fig/log/tree/1.1.3"
+                "source": "https://github.com/php-fig/log/tree/1.1.4"
             },
-            "time": "2020-03-23T09:12:05+00:00"
+            "time": "2021-05-03T11:20:27+00:00"
         },
         {
             "name": "ramsey/collection",
@@ -4314,8 +4314,7 @@
     "stability-flags": {
         "james-heinrich/getid3": 20,
         "myth/auth": 20,
-        "codeigniter4/codeigniter4": 20,
-        "michalsn/codeigniter4-uuid": 10
+        "codeigniter4/codeigniter4": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

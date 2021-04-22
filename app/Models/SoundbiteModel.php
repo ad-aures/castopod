@@ -56,7 +56,7 @@ class SoundbiteModel extends Model
      */
     public function getEpisodeSoundbites(int $podcastId, int $episodeId): array
     {
-        $cacheName = "podcast_episode#{$episodeId}_soundbites";
+        $cacheName = "podcast#{$podcastId}_episode#{$episodeId}_soundbites";
         if (!($found = cache($cacheName))) {
             $found = $this->where([
                 'episode_id' => $episodeId,
@@ -77,7 +77,9 @@ class SoundbiteModel extends Model
                 : $data['id']['episode_id'],
         );
 
-        cache()->delete("podcast_episode#{$episode->id}_soundbites");
+        cache()->delete(
+            "podcast#{$episode->podcast_id}_episode#{$episode->id}_soundbites",
+        );
 
         // delete cache for rss feed
         cache()->deleteMatching("podcast#{$episode->podcast_id}_feed*");

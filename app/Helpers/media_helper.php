@@ -7,7 +7,6 @@
  */
 
 use CodeIgniter\Files\File;
-use CodeIgniter\HTTP\Exceptions\HTTPException;
 use CodeIgniter\HTTP\ResponseInterface;
 
 /**
@@ -42,8 +41,6 @@ function save_media($file, $folder, $mediaName)
  */
 function download_file($fileUrl)
 {
-    var_dump($fileUrl);
-
     $client = \Config\Services::curlrequest();
 
     $response = $client->get($fileUrl, [

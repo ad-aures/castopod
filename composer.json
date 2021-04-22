@@ -12,14 +12,14 @@
     "geoip2/geoip2": "^v2.11.0",
     "myth/auth": "dev-develop",
     "codeigniter4/codeigniter4": "dev-develop",
-    "league/commonmark": "^1.5.7",
+    "league/commonmark": "^1.6.0",
     "vlucas/phpdotenv": "^v5.3.0",
     "league/html-to-markdown": "^4.10",
     "opawg/user-agents-php": "^v1.0",
     "podlibre/ipcat": "^v1.0",
     "podlibre/podcast-namespace": "^v1.0.6",
     "phpseclib/phpseclib": "~2.0.30",
-    "michalsn/codeigniter4-uuid": "^1.0@beta",
+    "michalsn/codeigniter4-uuid": "^v1.0.0",
     "essence/essence": "^3.5.4"
   },
   "require-dev": {

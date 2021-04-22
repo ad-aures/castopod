@@ -8,12 +8,15 @@
 
 namespace App\Controllers;
 
+use Analytics\AnalyticsTrait;
 use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
 use App\Models\NoteModel;
 
 class Podcast extends BaseController
 {
+    use AnalyticsTrait;
+
     /**
      * @var \App\Entities\Podcast|null
      */
@@ -37,32 +40,56 @@ class Podcast extends BaseController
 
     public function activity()
     {
-        self::triggerWebpageHit($this->podcast->id);
-
-        helper('persons');
-        $persons = [];
-        construct_person_array($this->podcast->persons, $persons);
-
-        $data = [
-            'podcast' => $this->podcast,
-            'notes' => (new NoteModel())->getActorNotes(
-                $this->podcast->actor_id,
-            ),
-            'persons' => $persons,
-        ];
-
-        // if user is logged in then send to the authenticated activity view
-        if (can_user_interact()) {
-            helper('form');
-            return view('podcast/activity_authenticated', $data);
-        } else {
-            return view('podcast/activity', $data);
+        // Prevent analytics hit when authenticated
+        if (!can_user_interact()) {
+            $this->registerPodcastWebpageHit($this->podcast->id);
         }
+
+        $cacheName = implode(
+            '_',
+            array_filter([
+                'page',
+                "podcast#{$this->podcast->id}",
+                'activity',
+                service('request')->getLocale(),
+                can_user_interact() ? '_authenticated' : null,
+            ]),
+        );
+
+        if (!($cachedView = cache($cacheName))) {
+            helper('persons');
+            $persons = [];
+            construct_person_array($this->podcast->persons, $persons);
+
+            $data = [
+                'podcast' => $this->podcast,
+                'notes' => (new NoteModel())->getActorPublishedNotes(
+                    $this->podcast->actor_id,
+                ),
+                'persons' => $persons,
+            ];
+
+            // if user is logged in then send to the authenticated activity view
+            if (can_user_interact()) {
+                helper('form');
+                return view('podcast/activity_authenticated', $data);
+            } else {
+                return view('podcast/activity', $data, [
+                    'cache' => DECADE,
+                    'cache_name' => $cacheName,
+                ]);
+            }
+        }
+
+        return $cachedView;
     }
 
     public function episodes()
     {
-        self::triggerWebpageHit($this->podcast->id);
+        // Prevent analytics hit when authenticated
+        if (!can_user_interact()) {
+            $this->registerPodcastWebpageHit($this->podcast->id);
+        }
 
         $yearQuery = $this->request->getGet('year');
         $seasonQuery = $this->request->getGet('season');
@@ -85,14 +112,15 @@ class Podcast extends BaseController
             array_filter([
                 'page',
                 "podcast#{$this->podcast->id}",
+                'episodes',
                 $yearQuery ? 'year' . $yearQuery : null,
                 $seasonQuery ? 'season' . $seasonQuery : null,
                 service('request')->getLocale(),
-                can_user_interact() ? '_interact' : '',
+                can_user_interact() ? '_authenticated' : null,
             ]),
         );
 
-        if (!($found = cache($cacheName))) {
+        if (!($cachedView = cache($cacheName))) {
             // Build navigation array
             $podcastModel = new PodcastModel();
             $years = $podcastModel->getYears($this->podcast->id);
@@ -171,14 +199,9 @@ class Podcast extends BaseController
 
             // if user is logged in then send to the authenticated episodes view
             if (can_user_interact()) {
-                $found = view('podcast/episodes_authenticated', $data, [
-                    'cache' => $secondsToNextUnpublishedEpisode
-                        ? $secondsToNextUnpublishedEpisode
-                        : DECADE,
-                    'cache_name' => $cacheName,
-                ]);
+                return view('podcast/episodes_authenticated', $data);
             } else {
-                $found = view('podcast/episodes', $data, [
+                return view('podcast/episodes', $data, [
                     'cache' => $secondsToNextUnpublishedEpisode
                         ? $secondsToNextUnpublishedEpisode
                         : DECADE,
@@ -187,6 +210,6 @@ class Podcast extends BaseController
             }
         }
 
-        return $found;
+        return $cachedView;
     }
 }

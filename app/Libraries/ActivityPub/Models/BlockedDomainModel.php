@@ -8,6 +8,7 @@
 
 namespace ActivityPub\Models;
 
+use CodeIgniter\Events\Events;
 use CodeIgniter\Model;
 
 class BlockedDomainModel extends Model
@@ -30,20 +31,41 @@ class BlockedDomainModel extends Model
      */
     public function getBlockedDomains()
     {
-        return $this->findAll();
+        $cacheName = config('ActivityPub')->cachePrefix . 'blocked_domains';
+        if (!($found = cache($cacheName))) {
+            $found = $this->findAll();
+
+            cache()->save($cacheName, $found, DECADE);
+        }
+        return $found;
     }
 
     public function isDomainBlocked($domain)
     {
-        if ($this->find($domain)) {
-            return true;
+        $hashedDomain = md5($domain);
+        $cacheName =
+            config('ActivityPub')->cachePrefix .
+            "domain#{$hashedDomain}_isBlocked";
+        if (!($found = cache($cacheName))) {
+            $found = $this->find($domain) ? true : false;
+
+            cache()->save($cacheName, $found, DECADE);
         }
 
-        return false;
+        return $found;
     }
 
     public function blockDomain($name)
     {
+        $hashedDomain = md5($name);
+        $prefix = config('ActivityPub')->cachePrefix;
+        cache()->delete($prefix . "domain#{$hashedDomain}_isBlocked");
+        cache()->delete($prefix . 'blocked_domains');
+
+        cache()->deleteMatching($prefix . '*replies');
+
+        Events::trigger('on_block_domain', $name);
+
         $this->db->transStart();
 
         // set all actors from the domain as blocked
@@ -63,6 +85,15 @@ class BlockedDomainModel extends Model
 
     public function unblockDomain($name)
     {
+        $hashedDomain = md5($name);
+        $prefix = config('ActivityPub')->cachePrefix;
+        cache()->delete($prefix . "domain#{$hashedDomain}_isBlocked");
+        cache()->delete($prefix . 'blocked_domains');
+
+        cache()->deleteMatching($prefix . '*replies');
+
+        Events::trigger('on_unblock_domain', $name);
+
         $this->db->transStart();
         // unblock all actors from the domain
         model('ActorModel')

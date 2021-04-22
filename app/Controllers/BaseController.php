@@ -26,7 +26,7 @@ class BaseController extends Controller
      *
      * @var array
      */
-    protected $helpers = ['auth', 'analytics', 'svg', 'components', 'misc'];
+    protected $helpers = ['auth', 'svg', 'components', 'misc'];
 
     /**
      * Constructor.
@@ -47,15 +47,5 @@ class BaseController extends Controller
         // Preload any models, libraries, etc, here.
         //--------------------------------------------------------------------
         // E.g.: $this->session = \Config\Services::session();
-
-        set_user_session_deny_list_ip();
-        set_user_session_browser();
-        set_user_session_referer();
-        set_user_session_entry_page();
-    }
-
-    protected static function triggerWebpageHit($podcastId)
-    {
-        webpage_hit($podcastId);
     }
 }

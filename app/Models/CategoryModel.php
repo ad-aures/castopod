@@ -27,9 +27,9 @@ class CategoryModel extends Model
 
     protected $useTimestamps = false;
 
-    public function findParent($parentId)
+    public function getCategoryById($id)
     {
-        return $this->find($parentId);
+        return $this->find($id);
     }
 
     public function getCategoryOptions()

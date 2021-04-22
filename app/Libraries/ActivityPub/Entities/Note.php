@@ -45,9 +45,19 @@ class Note extends UuidEntity
     protected $preview_card;
 
     /**
+     * @var boolean
+     */
+    protected $has_preview_card;
+
+    /**
      * @var \ActivityPub\Entities\Note[]
      */
     protected $replies;
+
+    /**
+     * @var boolean
+     */
+    protected $has_replies;
 
     /**
      * @var \ActivityPub\Entities\Note[]
@@ -106,6 +116,18 @@ class Note extends UuidEntity
         return $this->preview_card;
     }
 
+    public function getHasPreviewCard()
+    {
+        return !empty($this->getPreviewCard()) ? true : false;
+    }
+
+    public function getIsReply()
+    {
+        $this->is_reply = $this->in_reply_to_id !== null;
+
+        return $this->is_reply;
+    }
+
     public function getReplies()
     {
         if (empty($this->id)) {
@@ -121,11 +143,9 @@ class Note extends UuidEntity
         return $this->replies;
     }
 
-    public function getIsReply()
+    public function getHasReplies()
     {
-        $this->is_reply = $this->in_reply_to_id !== null;
-
-        return $this->is_reply;
+        return !empty($this->getReplies()) ? true : false;
     }
 
     public function getReplyToNote()
@@ -152,11 +172,7 @@ class Note extends UuidEntity
         }
 
         if (empty($this->reblogs)) {
-            $this->reblogs = model('NoteModel')->getNoteReblogs(
-                service('uuid')
-                    ->fromString($this->id)
-                    ->getBytes(),
-            );
+            $this->reblogs = model('NoteModel')->getNoteReblogs($this->id);
         }
 
         return $this->reblogs;

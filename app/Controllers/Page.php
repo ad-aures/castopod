@@ -56,7 +56,7 @@ class Page extends BaseController
         $locale = service('request')->getLocale();
         $allPodcasts = (new PodcastModel())->findAll();
 
-        $cacheName = "paĝe_credits_{$locale}";
+        $cacheName = "page_credits_{$locale}";
         if (!($found = cache($cacheName))) {
             $page = new \App\Entities\Page([
                 'title' => lang('Person.credits', [], $locale),

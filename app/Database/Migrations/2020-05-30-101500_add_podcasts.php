@@ -187,7 +187,9 @@ class AddPodcasts extends Migration
         ]);
 
         $this->forge->addPrimaryKey('id');
+        // TODO: remove name in favor of username from actor
         $this->forge->addUniqueKey('name');
+        $this->forge->addUniqueKey('actor_id');
         $this->forge->addForeignKey(
             'actor_id',
             'activitypub_actors',

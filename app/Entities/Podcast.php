@@ -143,7 +143,7 @@ class Podcast extends Entity
         }
 
         if (empty($this->actor)) {
-            $this->actor = (new ActorModel())->getActorById($this->actor_id);
+            $this->actor = model('ActorModel')->getActorById($this->actor_id);
         }
 
         return $this->actor;
@@ -254,7 +254,9 @@ class Podcast extends Entity
         }
 
         if (empty($this->category)) {
-            $this->category = (new CategoryModel())->find($this->category_id);
+            $this->category = (new CategoryModel())->getCategoryById(
+                $this->category_id,
+            );
         }
 
         return $this->category;

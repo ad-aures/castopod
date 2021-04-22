@@ -30,4 +30,11 @@ class ActivityPub extends BaseConfig
 
     public $defaultCoverImagePath = 'assets/images/cover-default.jpg';
     public $defaultCoverImageMimetype = 'image/jpeg';
+
+    /**
+     * --------------------------------------------------------------------
+     * Cache options
+     * --------------------------------------------------------------------
+     */
+    public $cachePrefix = 'ap_';
 }
