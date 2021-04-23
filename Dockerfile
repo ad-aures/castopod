@@ -1,7 +1,7 @@
 FROM php:7.3-fpm
 
-COPY . /castopod
-WORKDIR /castopod
+COPY . /castopod-host
+WORKDIR /castopod-host
 
 ### Install CodeIgniter's server requirements
 #-- https://github.com/codeigniter4/appstarter#server-requirements
@@ -34,4 +34,4 @@ RUN echo "file_uploads = On\n" \
 RUN apt-get update && \
     apt-get install -y cron
 
-RUN crontab /castopod/crontab
+RUN crontab /castopod-host/crontab

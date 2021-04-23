@@ -8,13 +8,13 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: "castopod_app"
+    container_name: "castopod_host"
     command: >
       sh -c "cron && php spark serve --host 0.0.0.0"
     ports:
       - 8080:8080
     volumes:
-      - .:/castopod
+      - .:/castopod-host
     depends_on:
       - redis
       - mariadb

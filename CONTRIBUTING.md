@@ -1,6 +1,6 @@
-# Contributing to Castopod
+# Contributing to Castopod Host
 
-Love Castopod and want to help? Thanks so much, there's something to do for
+Love Castopod Host and want to help? Thanks so much, there's something to do for
 everybody!
 
 Please take a moment to review this document in order to make the contribution
@@ -11,10 +11,14 @@ developers managing and developing this open source project. In return, they
 should reciprocate that respect in addressing your issue or assessing patches
 and features.
 
+⚠️ Note that **any** contribution made on a repository other than
+[the original repository](https://code.podlibre.org/podlibre/castopod-host) will
+not be accepted.
+
 ## Using the issue tracker
 
-The [issue tracker](https://code.podlibre.org/podlibre/castopod/-/issues) is the
-preferred channel for [bug reports](#bug-reports),
+The [issue tracker](https://code.podlibre.org/podlibre/castopod-host/-/issues)
+is the preferred channel for [bug reports](#bug-reports),
 [features requests](#feature-requests) and
 [submitting pull requests](#pull-requests).
 
@@ -73,13 +77,13 @@ the project:
 
 ```bash
 # Clone your fork of the repo into the current directory
-git clone https://code.podlibre.org/<your-username>/castopod.git
+git clone https://code.podlibre.org/<your-username>/castopod-host.git
 
 # Navigate to the newly cloned directory
-cd castopod
+cd castopod-host
 
 # Assign the original repo to a remote called "upstream"
-git remote add upstream https://code.podlibre.org/podlibre/castopod.git
+git remote add upstream https://code.podlibre.org/podlibre/castopod-host.git
 ```
 
 2. If you cloned a while ago, get the latest changes from upstream:
@@ -119,7 +123,7 @@ git push origin <topic-branch-name>
 
 **IMPORTANT**: By submitting a patch, you agree to allow the project owners to
 license your work under the terms of the
-[GNU AGPLv3](https://code.podlibre.org/podlibre/castopod/-/blob/main/LICENSE).
+[GNU AGPLv3](https://code.podlibre.org/podlibre/castopod-host/-/blob/main/LICENSE).
 
 ## Collaborating guidelines
 

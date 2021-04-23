@@ -1,12 +1,12 @@
 {
-  "name": "castopod",
+  "name": "castopod-host",
   "version": "1.0.0-alpha.53",
-  "description": "Castopod is an open-source hosting platform made for podcasters who want engage and interact with their audience.",
+  "description": "Castopod Host is an open-source hosting platform made for podcasters who want engage and interact with their audience.",
   "private": true,
   "license": "AGPL-3.0-or-later",
   "repository": {
     "type": "git",
-    "url": "https://code.podlibre.org/podlibre/castopod.git"
+    "url": "https://code.podlibre.org/podlibre/castopod-host.git"
   },
   "scripts": {
     "build": "npm run build:js && cross-env NODE_ENV=production npm run build:css && npm run build:icons && npm run build:svg && npm run copy:images && npm run copy:fonts",

@@ -1,6 +1,6 @@
-# Castopod dependencies
+# Castopod Host dependencies
 
-Castopod uses the following components:
+Castopod Host uses the following components:
 
 PHP Dependencies:
 

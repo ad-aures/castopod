@@ -167,7 +167,7 @@ mariadb
 phpmyadmin
 sessions
 
-# Castopod bundle & packages
-castopod/
-castopod-*.zip
-castopod-*.tar.gz
+# Castopod Host bundle & packages
+castopod-host/
+castopod-host-*.zip
+castopod-host-*.tar.gz

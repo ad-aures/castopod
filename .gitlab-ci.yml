@@ -48,11 +48,11 @@ bundle_app:
     - mv ./writable/uploads/GeoLite2-City* ./writable/uploads/GeoLite2-City
 
     # create bundle folder: uses .rsync-filter (-F) file to copy only needed files
-    - rsync -aF --progress . ./castopod
+    - rsync -aF --progress . ./castopod-host
   artifacts:
-    name: "castopod-${CI_COMMIT_REF_SLUG}_${CI_COMMIT_SHORT_SHA}"
+    name: "castopod-host-${CI_COMMIT_REF_SLUG}_${CI_COMMIT_SHORT_SHA}"
     paths:
-      - castopod
+      - castopod-host
   except:
     - main
     - beta

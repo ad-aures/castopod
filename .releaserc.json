@@ -33,12 +33,12 @@
         "gitlabUrl": "https://code.podlibre.org/",
         "assets": [
           {
-            "path": "castopod-*.zip",
-            "label": "Castopod Package (zip)"
+            "path": "castopod-host-*.zip",
+            "label": "Castopod Host Package (zip)"
           },
           {
-            "path": "castopod-*.tar.gz",
-            "label": "Castopod Package (tar.gz)"
+            "path": "castopod-host-*.tar.gz",
+            "label": "Castopod Host Package (tar.gz)"
           }
         ]
       }

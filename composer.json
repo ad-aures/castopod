@@ -1,8 +1,8 @@
 {
-  "name": "podlibre/castopod",
+  "name": "podlibre/castopod-host",
   "version": "1.0.0-alpha53",
   "type": "project",
-  "description": "Castopod is an open-source hosting platform made for podcasters who want engage and interact with their audience.",
+  "description": "Castopod Host is an open-source hosting platform made for podcasters who want engage and interact with their audience.",
   "homepage": "https://castopod.org",
   "license": "AGPL-3.0-or-later",
   "require": {
@@ -62,16 +62,15 @@
     ]
   },
   "support": {
-    "forum": "http://forum.codeigniter.com/",
-    "source": "https://github.com/codeigniter4/CodeIgniter4",
-    "slack": "https://codeigniterchat.slack.com"
+    "source": "https://code.podlibre.org/podlibre/castopod-host.git",
+    "discord": "https://castopod.org/discord"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
   "repositories": [
     {
       "type": "vcs",
-      "url": "https://github.com/codeigniter4/codeigniter4"
+      "url": "https://code.podlibre.org/podlibre/castopod-host.git"
     }
   ]
 }

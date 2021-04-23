@@ -1,37 +1,64 @@
-# ![Castopod Logo](https://podlibre.org/static/images/Castopod-Title.svg)
+# ![Castopod Host](https://podlibre.org/static/images/Castopod-Title.svg)
 
-Castopod is an open-source podcast hosting solution for everyone.\
-Whether you are a beginner, an amateur or a professional, you will get everything
-you need:\
-Create, upload, publish, and get comprehensive audience measurement that
-respects your listeners privacy.
+_Castopod Host_ is a free and open-source podcast hosting solution made for
+podcasters who want engage and interact with their audience.
 
-Castopod is a free and open-source solution (AGPL v3).\
-Whether you choose to install it on your own server or have it hosted by a professional,
-all your data and analytics belong to you and you only.
+Create, upload, publish, interact with your followers and get comprehensive
+audience measurements that respect your listeners privacy.
 
-![Castopod Logo](https://podlibre.org/static/images/Castopod-Mascot-Server.svg)
+Whether you choose to install it on your own server or have it hosted by a
+professional, all your data and analytics belong to you and you only!
+
+![Castopod Mascot](https://podlibre.org/static/images/Castopod-Mascot-Server.svg)
+
+You may find Castopod Host's source code on the
+[original repository](https://code.podlibre.org/podlibre/castopod-host) or,
+alternatively, on the
+[github repository (mirror)](https://github.com/podlibre/castopod-host).
 
 ## Installation
 
-Castopod can be hosted on any PHP/MySQL server:\
-Unzip it and you are ready to broadcast.
-
-To install Castopod on your server:
+To install Castopod Host on your PHP/MySQL server:
 
 - Download
-  [Castopod latest Package (zip or tar.gz)](https://code.podlibre.org/podlibre/castopod/-/releases),
-- Follow the procedure “[How to install Castopod](./INSTALL.md)”.
+  [Castopod Host's latest Package (zip or tar.gz)](https://code.podlibre.org/podlibre/castopod-host/-/releases),
+- Follow the procedure on “[How to install Castopod Host](./INSTALL.md)”.
 
 ## Documentation
 
-You can check castopod's documentation for
+You can check Castopod Host's documentation for
 [setting up a development environment](./docs/setup-development.md).
+
+## Contributing
+
+Love Castopod Host and would like to help? Check out the
+[contribution guidelines](./CONTRIBUTING.md) for this project, everything should
+be there!
+
+⚠️ Note that **any** contribution made on a repository other than
+[the original repository](https://code.podlibre.org/podlibre/castopod-host) will
+not be accepted.
 
 ## Support
 
+You may reach us for help or ask any question you have on:
+
+- [Discord](https://castopod.org/discord) (for direct interaction with
+  developers and the community)
+
+Alternatively, you can follow us on social media platforms to get news about
+Castopod:
+
+- [podlibre.social](https://podlibre.social/@Castopod) (Mastodon instance)
+- [Twitter](https://twitter.com/castopod)
+- [Facebook](https://www.facebook.com/castopod)
+
+## Sponsors
+
 [Castopod](https://nlnet.nl/project/Castopod/) was funded through the
-[NGI0 Discovery](https://nlnet.nl/discovery/) Fund, a fund established by NLnet
-with financial support from the European Commission's
-[Next Generation Internet](https://www.ngi.eu/) programme, under the aegis of DG
-Communications Networks, Content and Technology under grant agreement No 825322.
+[NGI0 Discovery](https://nlnet.nl/discovery/) Fund under grant agreement
+Nº 825322.
+
+The fund was established by NLnet with financial support from the European
+Commission's [Next Generation Internet](https://www.ngi.eu/) programme, under
+the aegis of DG Communications Networks, Content and Technology.

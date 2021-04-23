@@ -15,9 +15,9 @@ wget -c "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Cit
 # rename extracted archives' folders
 mv ./writable/uploads/GeoLite2-City* ./writable/uploads/GeoLite2-City
 
-# create castopod folder bundle: uses .rsync-filter (-F) file to copy only needed files
-rsync -aF --progress . ./castopod
+# create castopo-host folder bundle: uses .rsync-filter (-F) file to copy only needed files
+rsync -aF --progress . ./castopod-host
 
 # create zip and tar.gz packages for release upload
-zip -r castopod-$VERSION.zip castopod
-tar -zcvf castopod-$VERSION.tar.gz castopod
+zip -r castopod-host-$VERSION.zip castopod-host
+tar -zcvf castopod-host-$VERSION.tar.gz castopod-host
