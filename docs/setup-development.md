@@ -25,7 +25,7 @@ to help you kickstart your contribution.
 > Know that you don't need any prior knowledge of Docker to follow the next
 > steps. However, if you wish to use your own environment, feel free to do so!
 
-## Prerequisites
+## Pre-requisites
 
 0. Install [docker desktop](https://www.docker.com/products/docker-desktop).
 
@@ -40,6 +40,11 @@ git clone https://code.podlibre.org/podlibre/castopod.git
 
 ```ini
 CI_ENVIRONMENT="development"
+
+# By default, this is set to true in the app config.
+# For development, this must be set to false as it is
+# on a local environment
+app.forceGlobalSecureRequests=false
 
 app.baseURL="http://localhost:8080/"
 app.mediaBaseURL="http://localhost:8080/"

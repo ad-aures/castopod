@@ -6,7 +6,9 @@ or shared hosting, you can install it on most PHP-MySQL compatible web servers.
 ## Table of contents <!-- omit in toc -->
 
 - [Install instructions](#install-instructions)
-  - [(optional) Manual configuration](#optional-manual-configuration)
+  - [0. Pre-requisites](#0-pre-requisites)
+  - [1. Install Wizard](#1-install-wizard)
+  - [1-alt Manual configuration](#1-alt-manual-configuration)
 - [Web Server Requirements](#web-server-requirements)
   - [PHP v7.3 or higher](#php-v73-or-higher)
   - [MySQL compatible database](#mysql-compatible-database)
@@ -16,34 +18,44 @@ or shared hosting, you can install it on most PHP-MySQL compatible web servers.
 
 ## Install instructions
 
-0. Create a MySQL database for Castopod Host with a user having access and
+### 0. Pre-requisites
+
+0. Get a Web Server with requirements installed
+1. Create a MySQL database for Castopod Host with a user having access and
    modification privileges (for more info, see
    [Web Server Requirements](#web-server-requirements)).
-1. Download and unzip the latest
+2. Activate HTTPS on your domain with an _SSL certificate_.
+3. Download and unzip the latest
    [Castopod Host Package](https://code.podlibre.org/podlibre/castopod-host/-/releases)
    onto the web server if you haven’t already.
    - ⚠️ Set the web server document root to the `public/` sub-folder.
-2. For broadcasting social activities to the fediverse, add a cron task on your
-   web server to run every minute (replace the paths accordingly):
+4. Add a cron task on your web server to run every minute (replace the paths
+   accordingly):
 
    ```php
       * * * * * /path/to/php /path/to/castopod-host/public/index.php scheduled-activities
    ```
 
-3. Run the Castopod Host install script by going to the install wizard page
+   > ⚠️ Social features will not work properly if you do not set the task. It is
+   > used to broadcast social activities to the fediverse.
+
+### 1. Install Wizard
+
+1. Run the Castopod Host install script by going to the install wizard page
    (`https://your_domain_name.com/cp-install`) in your favorite web browser.
-4. Follow the instructions on your screen.
+2. Follow the instructions on your screen.
+3. Start podcasting!
 
-All done, start podcasting!
+### 1-alt Manual configuration
 
-### (optional) Manual configuration
-
-Before uploading Castopod Host files to your web server:
+The install script writes a `.env` file in the package root. If you cannot go
+through the install wizard, you can create and update the `.env` file yourself:
 
 1. Rename the `.env.example` file to `.env` and update the default values with
    your own.
-2. Upload the Castopod Host files with `.env`
+2. Upload the `.env` file to the Castopod Host Package root on your server.
 3. Go to `/cp-install` to finish the install process.
+4. Start podcasting!
 
 ## Web Server Requirements
 
@@ -64,11 +76,15 @@ Additionally, make sure that the following extensions are enabled in your PHP:
 
 ### MySQL compatible database
 
-> We recommend using [MariaDB](https://mariadb.org)
+> We recommend using [MariaDB](https://mariadb.org).
 
 You will need the server hostname, database name, username and password to
 complete the installation process. If you do not have these, please contact your
 server administrator.
+
+> NB. Castopod Host only works with supported MySQL compatible databases. It
+> will break with MySQL v5.6 for example as its end of life was on February
+> 5, 2021.
 
 #### Privileges
 
@@ -78,7 +94,7 @@ work: `ALTER`, `DELETE`, `EXECUTE`, `INDEX`, `INSERT`, `SELECT`, `UPDATE`.
 ### (Optional) Other recommendations
 
 - Redis for better cache performances.
-- CDN for better performances.
+- CDN for static files caching and better performances.
 - e-mail gateway for lost passwords.
 
 ## Security concerns

@@ -148,7 +148,7 @@ class App extends BaseConfig
      *
      * @var boolean
      */
-    public $forceGlobalSecureRequests = false;
+    public $forceGlobalSecureRequests = true;
 
     /**
      * --------------------------------------------------------------------------
