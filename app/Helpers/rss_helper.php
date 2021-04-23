@@ -54,10 +54,7 @@ function get_rss_feed($podcast, $serviceSlug = '')
         'lastBuildDate',
         (new Time('now'))->format(DATE_RFC1123),
     );
-    $channel->addChild(
-        'generator',
-        'Castopod 0.0.0-development - https://castopod.org/',
-    );
+    $channel->addChild('generator', 'Castopod Host - https://castopod.org/');
     $channel->addChild('docs', 'https://cyber.harvard.edu/rss/rss.html');
 
     $channel->addChild('title', $podcast->title);

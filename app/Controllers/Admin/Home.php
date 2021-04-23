@@ -12,6 +12,7 @@ class Home extends BaseController
 {
     public function index()
     {
-        return view('admin/dashboard');
+        session()->keepFlashdata('message');
+        return redirect()->route('podcast-list');
     }
 }

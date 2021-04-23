@@ -1,6 +1,5 @@
 <?php
 $navigation = [
-    'dashboard' => ['icon' => 'dashboard', 'items' => ['admin']],
     'podcasts' => [
         'icon' => 'mic',
         'items' => ['podcast-list', 'podcast-create', 'podcast-import'],
