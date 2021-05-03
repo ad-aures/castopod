@@ -45,8 +45,8 @@ return [
     'form' => [
         'warning' =>
             'En cas d’erreur fatale, essayez d’augmenter les valeurs de `memory_limit`, `upload_max_filesize` et `post_max_size` dans votre fichier de configuration php puis redémarrez votre serveur web.<br />Les valeurs doivent être plus grandes que le fichier audio que vous souhaitez téléverser.',
-        'enclosure' => 'Fichier audio',
-        'enclosure_hint' => 'Sélectionnez un fichier audio .mp3 ou .m4a.',
+        'audio_file' => 'Fichier audio',
+        'audio_file_hint' => 'Sélectionnez un fichier audio .mp3 ou .m4a.',
         'info_section_title' => 'Informations épisode',
         'info_section_subtitle' => '',
         'image' => 'Image de couverture',
@@ -91,10 +91,16 @@ return [
         'transcript' => 'Transcription ou sous-titrage',
         'transcript_hint' =>
             'Les formats autorisés sont txt, html, srt ou json.',
-        'transcript_delete' => 'Supprimer la transcription',
+        'transcript_file' => 'Fichier de transcription',
+        'transcript_file_remote_url' =>
+            'URL distante pour le fichier de transcription',
+        'transcript_file_delete' => 'Supprimer le fichier de transcription',
         'chapters' => 'Chapitrage',
-        'chapters_hint' => 'Le fichier doit être en "JSON Chapters Format".',
-        'chapters_delete' => 'Supprimer le chapitrage',
+        'chapters_hint' => 'Le fichier doit être en format “JSON Chapters”.',
+        'chapters_file' => 'Fichier de chapitrage',
+        'chapters_file_remote_url' =>
+            'URL distante pour le fichier de chapitrage',
+        'chapters_file_delete' => 'Supprimer le fichier de chapitrage',
         'advanced_section_title' => 'Paramètres avancés',
         'advanced_section_subtitle' =>
             'Si vous avez besoin d’une balise que Castopod ne couvre pas, définissez-la ici.',

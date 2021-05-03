@@ -50,11 +50,11 @@
             ) ?>
         </a>
         <audio controls preload="none" class="flex w-full mt-auto">
-            <source src="<?= $episode->enclosure_url .
+            <source src="<?= $episode->audio_file_analytics_url .
                 (isset($_SERVER['HTTP_REFERER'])
                     ? '?_from=' .
                         parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST)
-                    : '') ?>" type="<?= $episode->enclosure_type ?>" />
+                    : '') ?>" type="<?= $episode->audio_file_mimetype ?>" />
             Your browser does not support the audio tag.
         </audio>
     </div>

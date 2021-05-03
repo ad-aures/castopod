@@ -20,7 +20,7 @@ class PersonModel extends Model
         'full_name',
         'unique_name',
         'information_url',
-        'image_uri',
+        'image_path',
         'image_mimetype',
         'created_by',
         'updated_by',
@@ -35,7 +35,7 @@ class PersonModel extends Model
         'full_name' => 'required',
         'unique_name' =>
             'required|regex_match[/^[a-z0-9\-]{1,191}$/]|is_unique[persons.unique_name,id,{id}]',
-        'image_uri' => 'required',
+        'image_path' => 'required',
         'created_by' => 'required',
         'updated_by' => 'required',
     ];

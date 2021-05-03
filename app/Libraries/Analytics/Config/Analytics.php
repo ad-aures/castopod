@@ -26,13 +26,13 @@ class Analytics extends BaseConfig
     ];
 
     /**
-     * get the full enclosure url
+     * get the full audio file url
      *
      * @param string $filename
      * @return string
      */
-    public function getEnclosureUrl(string $enclosureUri)
+    public function getAudioFileUrl(string $audioFilePath)
     {
-        return base_url($enclosureUri);
+        return base_url($audioFilePath);
     }
 }

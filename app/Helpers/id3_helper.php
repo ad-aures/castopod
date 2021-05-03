@@ -36,13 +36,15 @@ function get_file_tags($file)
  *
  * @return UploadedFile
  */
-function write_enclosure_tags($episode)
+function write_audio_file_tags($episode)
 {
+    helper('media');
+
     $TextEncoding = 'UTF-8';
 
     // Initialize getID3 tag-writing module
     $tagwriter = new WriteTags();
-    $tagwriter->filename = $episode->enclosure_media_path;
+    $tagwriter->filename = media_path($episode->audio_file_path);
 
     // set various options (optional)
     $tagwriter->tagformats = ['id3v2.4'];

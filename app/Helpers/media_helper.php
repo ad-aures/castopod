@@ -12,15 +12,15 @@ use CodeIgniter\HTTP\ResponseInterface;
 /**
  * Saves a file to the corresponding podcast folder in `public/media`
  *
- * @param \CodeIgniter\HTTP\Files\UploadedFile|\CodeIgniter\Files\File $file
- * @param string $podcast_name
- * @param string $file_name
+ * @param \CodeIgniter\HTTP\Files\UploadedFile|\CodeIgniter\Files\File $filePath
+ * @param string $folder
+ * @param string $fileName
  *
  * @return string The episode's file path in media root
  */
-function save_media($file, $folder, $mediaName)
+function save_media($filePath, $folder, $mediaName)
 {
-    $file_name = $mediaName . '.' . $file->getExtension();
+    $fileName = $mediaName . '.' . $filePath->getExtension();
 
     $mediaRoot = config('App')->mediaRoot . '/' . $folder;
 
@@ -30,9 +30,9 @@ function save_media($file, $folder, $mediaName)
     }
 
     // move to media folder and overwrite file if already existing
-    $file->move($mediaRoot . '/', $file_name, true);
+    $filePath->move($mediaRoot . '/', $fileName, true);
 
-    return $folder . '/' . $file_name;
+    return $folder . '/' . $fileName;
 }
 
 /**

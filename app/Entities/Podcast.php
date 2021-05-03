@@ -100,7 +100,7 @@ class Podcast extends Entity
         'title' => 'string',
         'description_markdown' => 'string',
         'description_html' => 'string',
-        'image_uri' => 'string',
+        'image_path' => 'string',
         'image_mimetype' => 'string',
         'language_code' => 'string',
         'category_id' => 'integer',
@@ -161,14 +161,14 @@ class Podcast extends Entity
             helper('media');
 
             $this->attributes['image_mimetype'] = $image->getMimeType();
-            $this->attributes['image_uri'] = save_media(
+            $this->attributes['image_path'] = save_media(
                 $image,
                 'podcasts/' . $this->attributes['name'],
                 'cover',
             );
 
             $this->image = new \App\Libraries\Image(
-                $this->attributes['image_uri'],
+                $this->attributes['image_path'],
                 $this->attributes['image_mimetype'],
             );
             $this->image->saveSizes();
@@ -180,7 +180,7 @@ class Podcast extends Entity
     public function getImage()
     {
         return new \App\Libraries\Image(
-            $this->attributes['image_uri'],
+            $this->attributes['image_path'],
             $this->attributes['image_mimetype'],
         );
     }

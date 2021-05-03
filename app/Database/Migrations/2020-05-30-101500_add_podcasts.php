@@ -41,7 +41,7 @@ class AddPodcasts extends Migration
             'description_html' => [
                 'type' => 'TEXT',
             ],
-            'image_uri' => [
+            'image_path' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],

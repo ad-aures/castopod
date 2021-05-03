@@ -22,7 +22,7 @@ class Person extends Entity
         'full_name' => 'string',
         'unique_name' => 'string',
         'information_url' => '?string',
-        'image_uri' => 'string',
+        'image_path' => 'string',
         'image_mimetype' => 'string',
         'created_by' => 'integer',
         'updated_by' => 'integer',
@@ -40,13 +40,13 @@ class Person extends Entity
             helper('media');
 
             $this->attributes['image_mimetype'] = $image->getMimeType();
-            $this->attributes['image_uri'] = save_media(
+            $this->attributes['image_path'] = save_media(
                 $image,
                 'persons',
                 $this->attributes['unique_name'],
             );
             $this->image = new \App\Libraries\Image(
-                $this->attributes['image_uri'],
+                $this->attributes['image_path'],
                 $this->attributes['image_mimetype'],
             );
             $this->image->saveSizes();
@@ -58,7 +58,7 @@ class Person extends Entity
     public function getImage()
     {
         return new \App\Libraries\Image(
-            $this->attributes['image_uri'],
+            $this->attributes['image_path'],
             $this->attributes['image_mimetype'],
         );
     }

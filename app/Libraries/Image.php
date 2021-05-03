@@ -70,17 +70,17 @@ class Image
      */
     public $id3_path;
 
-    public function __construct($originalUri, $mimetype)
+    public function __construct($originalPath, $mimetype)
     {
         helper('media');
 
-        $originalPath = media_path($originalUri);
+        $originalMediaPath = media_path($originalPath);
 
         [
             'filename' => $filename,
             'dirname' => $dirname,
             'extension' => $extension,
-        ] = pathinfo($originalPath);
+        ] = pathinfo($originalMediaPath);
 
         // load images extensions from config
         $this->config = config('Images');
@@ -100,8 +100,8 @@ class Image
         $feed = $dirname . '/' . $filename . $feedExtension . '.' . $extension;
         $id3 = $dirname . '/' . $filename . $id3Extension . '.' . $extension;
 
-        $this->original_path = $originalPath;
-        $this->original_url = media_url($originalUri);
+        $this->original_path = $originalMediaPath;
+        $this->original_url = media_url($originalMediaPath);
         $this->thumbnail_path = $thumbnail;
         $this->thumbnail_url = base_url($thumbnail);
         $this->medium_path = $medium;

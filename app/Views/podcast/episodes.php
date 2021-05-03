@@ -105,14 +105,14 @@
                                 ]) ?>
                             </time>
                             <span class="mx-1">•</span>
-                            <time datetime="PT<?= $episode->enclosure_duration ?>S">
+                            <time datetime="PT<?= $episode->audio_file_duration ?>S">
                                 <?= format_duration(
-                                    $episode->enclosure_duration,
+                                    $episode->audio_file_duration,
                                 ) ?>
                             </time>
                         </div>
                         <audio controls preload="none" class="w-full mt-auto">
-                            <source src="<?= $episode->enclosure_web_url ?>" type="<?= $episode->enclosure_mimetype ?>">
+                            <source src="<?= $episode->audio_file_web_url ?>" type="<?= $episode->audio_file_mimetype ?>">
                             Your browser does not support the audio tag.
                         </audio>
                     </div>
@@ -168,4 +168,5 @@
     <?php endif; ?>
 </section>
 
-<?= $this->endSection() ?>
+<?= $this->endSection()
+?>

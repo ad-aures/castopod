@@ -22,6 +22,6 @@ return [
         'submit_edit' => 'Save',
     ],
     'messages' => [
-        'createSuccess' => 'The page "{pageTitle}" was created successfully!',
+        'createSuccess' => 'The page “{pageTitle}” was created successfully!',
     ],
 ];

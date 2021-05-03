@@ -13,6 +13,8 @@ use App\Models\SoundbiteModel;
 use App\Models\EpisodePersonModel;
 use App\Models\NoteModel;
 use CodeIgniter\Entity;
+use CodeIgniter\Files\Exceptions\FileNotFoundException;
+use CodeIgniter\HTTP\Exceptions\HTTPException;
 use CodeIgniter\I18n\Time;
 use League\CommonMark\CommonMarkConverter;
 
@@ -36,47 +38,37 @@ class Episode extends Entity
     /**
      * @var \CodeIgniter\Files\File
      */
-    protected $enclosure;
+    protected $audioFile;
 
     /**
      * @var \CodeIgniter\Files\File
      */
-    protected $transcript;
+    protected $transcript_file;
 
     /**
      * @var \CodeIgniter\Files\File
      */
-    protected $chapters;
+    protected $chapters_file;
 
     /**
      * @var string
      */
-    protected $enclosure_media_path;
+    protected $audio_file_url;
 
     /**
      * @var string
      */
-    protected $enclosure_url;
+    protected $audio_file_analytics_url;
 
     /**
      * @var string
      */
-    protected $enclosure_web_url;
+    protected $audio_file_web_url;
 
     /**
      * @var string
      */
-    protected $enclosure_opengraph_url;
-
-    /**
-     * @var string
-     */
-    protected $transcript_url;
-
-    /**
-     * @var string
-     */
-    protected $chapters_url;
+    protected $audio_file_opengraph_url;
 
     /**
      * @var \App\Entities\EpisodePerson[]
@@ -132,17 +124,19 @@ class Episode extends Entity
         'guid' => 'string',
         'slug' => 'string',
         'title' => 'string',
-        'enclosure_uri' => 'string',
-        'enclosure_duration' => 'integer',
-        'enclosure_mimetype' => 'string',
-        'enclosure_filesize' => 'integer',
-        'enclosure_headersize' => 'integer',
+        'audio_file_path' => 'string',
+        'audio_file_duration' => 'integer',
+        'audio_file_mimetype' => 'string',
+        'audio_file_size' => 'integer',
+        'audio_file_header_size' => 'integer',
         'description_markdown' => 'string',
         'description_html' => 'string',
-        'image_uri' => '?string',
+        'image_path' => '?string',
         'image_mimetype' => '?string',
-        'transcript_uri' => '?string',
-        'chapters_uri' => '?string',
+        'transcript_file_path' => '?string',
+        'transcript_file_remote_url' => '?string',
+        'chapters_file_path' => '?string',
+        'chapters_file_remote_url' => '?string',
         'parental_advisory' => '?string',
         'number' => '?integer',
         'season_number' => '?integer',
@@ -176,13 +170,13 @@ class Episode extends Entity
 
             // check whether the user has inputted an image and store
             $this->attributes['image_mimetype'] = $image->getMimeType();
-            $this->attributes['image_uri'] = save_media(
+            $this->attributes['image_path'] = save_media(
                 $image,
                 'podcasts/' . $this->getPodcast()->name,
                 $this->attributes['slug'],
             );
             $this->image = new \App\Libraries\Image(
-                $this->attributes['image_uri'],
+                $this->attributes['image_path'],
                 $this->attributes['image_mimetype'],
             );
             $this->image->saveSizes();
@@ -193,9 +187,9 @@ class Episode extends Entity
 
     public function getImage(): \App\Libraries\Image
     {
-        if ($image_uri = $this->attributes['image_uri']) {
+        if ($imagePath = $this->attributes['image_path']) {
             return new \App\Libraries\Image(
-                $image_uri,
+                $imagePath,
                 $this->attributes['image_mimetype'],
             );
         }
@@ -203,58 +197,59 @@ class Episode extends Entity
     }
 
     /**
-     * Saves an enclosure
+     * Saves an audio file
      *
-     * @param \CodeIgniter\HTTP\Files\UploadedFile|\CodeIgniter\Files\File $enclosure
+     * @param \CodeIgniter\HTTP\Files\UploadedFile|\CodeIgniter\Files\File $audioFile
      *
      */
-    public function setEnclosure($enclosure = null)
+    public function setAudioFile($audioFile = null)
     {
         if (
-            !empty($enclosure) &&
-            (!($enclosure instanceof \CodeIgniter\HTTP\Files\UploadedFile) ||
-                $enclosure->isValid())
+            !empty($audioFile) &&
+            (!($audioFile instanceof \CodeIgniter\HTTP\Files\UploadedFile) ||
+                $audioFile->isValid())
         ) {
             helper(['media', 'id3']);
 
-            $enclosure_metadata = get_file_tags($enclosure);
+            $audio_metadata = get_file_tags($audioFile);
 
-            $this->attributes['enclosure_uri'] = save_media(
-                $enclosure,
+            $this->attributes['audio_file_path'] = save_media(
+                $audioFile,
                 'podcasts/' . $this->getPodcast()->name,
                 $this->attributes['slug'],
             );
-            $this->attributes['enclosure_duration'] = round(
-                $enclosure_metadata['playtime_seconds'],
+            $this->attributes['audio_file_duration'] = round(
+                $audio_metadata['playtime_seconds'],
             );
-            $this->attributes['enclosure_mimetype'] =
-                $enclosure_metadata['mime_type'];
-            $this->attributes['enclosure_filesize'] =
-                $enclosure_metadata['filesize'];
-            $this->attributes['enclosure_headersize'] =
-                $enclosure_metadata['avdataoffset'];
+            $this->attributes['audio_file_mimetype'] =
+                $audio_metadata['mime_type'];
+            $this->attributes['audio_file_size'] = $audio_metadata['filesize'];
+            $this->attributes['audio_file_header_size'] =
+                $audio_metadata['avdataoffset'];
 
             return $this;
         }
     }
 
     /**
-     * Saves an episode transcript
+     * Saves an episode transcript file
      *
-     * @param \CodeIgniter\HTTP\Files\UploadedFile|\CodeIgniter\Files\File $transcript
+     * @param \CodeIgniter\HTTP\Files\UploadedFile|\CodeIgniter\Files\File $transcriptFile
      *
      */
-    public function setTranscript($transcript)
+    public function setTranscriptFile($transcriptFile)
     {
         if (
-            !empty($transcript) &&
-            (!($transcript instanceof \CodeIgniter\HTTP\Files\UploadedFile) ||
-                $transcript->isValid())
+            !empty($transcriptFile) &&
+            (!(
+                $transcriptFile instanceof \CodeIgniter\HTTP\Files\UploadedFile
+            ) ||
+                $transcriptFile->isValid())
         ) {
             helper('media');
 
-            $this->attributes['transcript_uri'] = save_media(
-                $transcript,
+            $this->attributes['transcript_file_path'] = save_media(
+                $transcriptFile,
                 $this->getPodcast()->name,
                 $this->attributes['slug'] . '-transcript',
             );
@@ -264,22 +259,22 @@ class Episode extends Entity
     }
 
     /**
-     * Saves an episode chapters
+     * Saves an episode chapters file
      *
-     * @param \CodeIgniter\HTTP\Files\UploadedFile|\CodeIgniter\Files\File $chapters
+     * @param \CodeIgniter\HTTP\Files\UploadedFile|\CodeIgniter\Files\File $chaptersFile
      *
      */
-    public function setChapters($chapters)
+    public function setChaptersFile($chaptersFile)
     {
         if (
-            !empty($chapters) &&
-            (!($chapters instanceof \CodeIgniter\HTTP\Files\UploadedFile) ||
-                $chapters->isValid())
+            !empty($chaptersFile) &&
+            (!($chaptersFile instanceof \CodeIgniter\HTTP\Files\UploadedFile) ||
+                $chaptersFile->isValid())
         ) {
             helper('media');
 
-            $this->attributes['chapters_uri'] = save_media(
-                $chapters,
+            $this->attributes['chapters_file_path'] = save_media(
+                $chaptersFile,
                 $this->getPodcast()->name,
                 $this->attributes['slug'] . '-chapters',
             );
@@ -288,87 +283,102 @@ class Episode extends Entity
         return $this;
     }
 
-    public function getEnclosure()
-    {
-        return new \CodeIgniter\Files\File($this->getEnclosureMediaPath());
-    }
-
-    public function getTranscript()
-    {
-        return $this->attributes['transcript_uri']
-            ? new \CodeIgniter\Files\File($this->getTranscriptMediaPath())
-            : null;
-    }
-
-    public function getChapters()
-    {
-        return $this->attributes['chapters_uri']
-            ? new \CodeIgniter\Files\File($this->getChaptersMediaPath())
-            : null;
-    }
-
-    public function getEnclosureMediaPath()
+    public function getAudioFile()
     {
         helper('media');
 
-        return media_path($this->attributes['enclosure_uri']);
+        return new \CodeIgniter\Files\File(media_path($this->audio_file_path));
     }
 
-    public function getTranscriptMediaPath()
+    public function getTranscriptFile()
+    {
+        if ($this->attributes['transcript_file_path']) {
+            helper('media');
+
+            return new \CodeIgniter\Files\File(
+                media_path($this->attributes['transcript_file_path']),
+            );
+        }
+
+        return null;
+    }
+
+    public function getChaptersFile()
+    {
+        if ($this->attributes['chapters_file_path']) {
+            helper('media');
+
+            return new \CodeIgniter\Files\File(
+                media_path($this->attributes['chapters_file_path']),
+            );
+        }
+
+        return null;
+    }
+
+    public function getAudioFileUrl()
     {
         helper('media');
 
-        return $this->attributes['transcript_uri']
-            ? media_path($this->attributes['transcript_uri'])
-            : null;
+        return media_url($this->audio_file_path);
     }
 
-    public function getChaptersMediaPath()
-    {
-        helper('media');
-
-        return $this->attributes['chapters_uri']
-            ? media_path($this->attributes['chapters_uri'])
-            : null;
-    }
-
-    public function getEnclosureUrl()
+    public function getAudioFileAnalyticsUrl()
     {
         helper('analytics');
 
         return generate_episode_analytics_url(
             $this->podcast_id,
             $this->id,
-            $this->enclosure_uri,
-            $this->enclosure_duration,
-            $this->enclosure_filesize,
-            $this->enclosure_headersize,
+            $this->audio_file_path,
+            $this->audio_file_duration,
+            $this->audio_file_size,
+            $this->audio_file_header_size,
             $this->published_at,
         );
     }
 
-    public function getEnclosureWebUrl()
+    public function getAudioFileWebUrl()
     {
-        return $this->getEnclosureUrl() . '?_from=-+Website+-';
+        return $this->getAudioFileAnalyticsUrl() . '?_from=-+Website+-';
     }
 
-    public function getEnclosureOpengraphUrl()
+    public function getAudioFileOpengraphUrl()
     {
-        return $this->getEnclosureUrl() . '?_from=-+Open+Graph+-';
+        return $this->getAudioFileAnalyticsUrl() . '?_from=-+Open+Graph+-';
     }
 
-    public function getTranscriptUrl()
+    /**
+     * Gets transcript url from transcript file uri if it exists
+     * or returns the transcript_file_remote_url which can be null.
+     *
+     * @return string|null
+     * @throws FileNotFoundException
+     * @throws HTTPException
+     */
+    public function getTranscriptFileUrl()
     {
-        return $this->attributes['transcript_uri']
-            ? base_url($this->getTranscriptMediaPath())
-            : null;
+        if ($this->attributes['transcript_file_path']) {
+            return media_url($this->attributes['transcript_file_path']);
+        } else {
+            return $this->attributes['transcript_file_remote_url'];
+        }
     }
 
-    public function getChaptersUrl()
+    /**
+     * Gets chapters file url from chapters file uri if it exists
+     * or returns the chapters_file_remote_url which can be null.
+     *
+     * @return mixed
+     * @throws HTTPException
+     */
+    public function getChaptersFileUrl()
     {
-        return $this->attributes['chapters_uri']
-            ? base_url($this->getChaptersMediaPath())
-            : null;
+        if ($this->attributes['chapters_file_path']) {
+            return media_url($this->attributes['chapters_file_path']);
+        } else {
+            return $this->attributes['chapters_file_remote_url'];
+        }
     }
 
     /**

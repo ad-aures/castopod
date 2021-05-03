@@ -13,13 +13,13 @@
 
 <?= form_open_multipart(
     route_to('episode-soundbites-edit', $podcast->id, $episode->id),
-    ['method' => 'post', 'class' => 'flex flex-col']
+    ['method' => 'post', 'class' => 'flex flex-col'],
 ) ?>
 <?= csrf_field() ?>
 
 <?= form_section(
     lang('Episode.soundbites_form.info_section_title'),
-    lang('Episode.soundbites_form.info_section_subtitle')
+    lang('Episode.soundbites_form.info_section_subtitle'),
 ) ?>
 
     <table class="w-full table-fixed">
@@ -30,20 +30,20 @@
                 lang('Episode.soundbites_form.start_time'),
                 'start_time',
                 [],
-                lang('Episode.soundbites_form.start_time_hint')
+                lang('Episode.soundbites_form.start_time_hint'),
             ) ?></th>
             <th class="w-3/12 px-1 py-2"><?= form_label(
                 lang('Episode.soundbites_form.duration'),
                 'duration',
                 [],
-                lang('Episode.soundbites_form.duration_hint')
+                lang('Episode.soundbites_form.duration_hint'),
             ) ?></th>
             <th class="w-7/12 px-1 py-2"><?= form_label(
                 lang('Episode.soundbites_form.label'),
                 'label',
                 [],
                 lang('Episode.soundbites_form.label_hint'),
-                true
+                true,
             ) ?></th>
             <th class="w-1/12 px-1 py-2"></th>
             </tr>
@@ -62,7 +62,7 @@
                     'data-soundbite-id' => $soundbite->id,
                     'required' => 'required',
                     'min' => '0',
-                ]
+                ],
             ) ?></td>
             <td class="px-1 py-2 font-medium bg-white border border-light-blue-500"><?= form_input(
                 [
@@ -75,7 +75,7 @@
                     'data-soundbite-id' => $soundbite->id,
                     'required' => 'required',
                     'min' => '0',
-                ]
+                ],
             ) ?></td>
             <td class="px-1 py-2 font-medium bg-white border border-light-blue-500"><?= form_input(
                 [
@@ -83,7 +83,7 @@
                     'name' => "soundbites_array[{$soundbite->id}][label]",
                     'class' => 'form-input w-full border-none',
                     'value' => $soundbite->label,
-                ]
+                ],
             ) ?></td>
             <td class="px-4 py-2"><?= icon_button(
                 'play',
@@ -96,7 +96,7 @@
                     'data-soundbite-id' => $soundbite->id,
                     'data-soundbite-start-time' => $soundbite->start_time,
                     'data-soundbite-duration' => $soundbite->duration,
-                ]
+                ],
             ) ?>
             <?= icon_button(
                 'delete-bin',
@@ -105,10 +105,10 @@
                     'soundbite-delete',
                     $podcast->id,
                     $episode->id,
-                    $soundbite->id
+                    $soundbite->id,
                 ),
                 ['variant' => 'danger'],
-                []
+                [],
             ) ?>    
             </td>
         </tr>
@@ -124,7 +124,7 @@
                 'data-type' => 'soundbite-field',
                 'data-field-type' => 'start-time',
                 'min' => '0',
-            ]
+            ],
         ) ?></td>
         <td class="px-1 py-4 font-medium bg-white border border-light-blue-500"><?= form_input(
             [
@@ -136,7 +136,7 @@
                 'data-type' => 'soundbite-field',
                 'data-field-type' => 'duration',
                 'min' => '0',
-            ]
+            ],
         ) ?></td>
         <td class="px-1 py-4 font-medium bg-white border border-light-blue-500"><?= form_input(
             [
@@ -144,7 +144,7 @@
                 'name' => 'soundbites_array[0][label]',
                 'class' => 'form-input w-full border-none',
                 'value' => old('label'),
-            ]
+            ],
         ) ?></td>
         <td class="px-4 py-2"><?= icon_button(
             'play',
@@ -156,7 +156,7 @@
                 'data-soundbite-id' => 0,
                 'data-soundbite-start-time' => 0,
                 'data-soundbite-duration' => 0,
-            ]
+            ],
         ) ?>
             
                     
@@ -164,7 +164,7 @@
         </tr>
         <tr><td colspan="3">
             <audio controls preload="auto" class="w-full">
-                <source src="/<?= $episode->enclosure_media_path ?>" type="<?= $episode->enclosure_type ?>">
+                <source src="<?= $episode->audio_file_url ?>" type="<?= $episode->audio_file_mimetype ?>">
         Your browser does not support the audio tag.
             </audio>
         </td><td class="px-4 py-2"><?= icon_button(
@@ -177,7 +177,7 @@
                 'data-start-time-field-name' =>
                     'soundbites_array[0][start_time]',
                 'data-duration-field-name' => 'soundbites_array[0][duration]',
-            ]
+            ],
         ) ?></td></tr>
     </tbody>
     </table>
@@ -189,7 +189,7 @@
     lang('Episode.soundbites_form.submit_edit'),
     null,
     ['variant' => 'primary'],
-    ['type' => 'submit', 'class' => 'self-end']
+    ['type' => 'submit', 'class' => 'self-end'],
 ) ?>
 
 <?= form_close() ?>

@@ -31,5 +31,7 @@ return [
         ],
         'image_size_hint' =>
             'L’image doit être carrée, avec au minimum 1400px de long et de large.',
+        'upload_file' => 'Téléversez un fichier',
+        'remote_url' => 'URL distante',
     ],
 ];

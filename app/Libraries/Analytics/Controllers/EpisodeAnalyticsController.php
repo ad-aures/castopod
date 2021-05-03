@@ -50,7 +50,7 @@ class EpisodeAnalyticsController extends Controller
     }
 
     // Add one hit to this episode:
-    public function hit($base64EpisodeData, ...$enclosureUri)
+    public function hit($base64EpisodeData, ...$audioFilePath)
     {
         $session = \Config\Services::session();
         $session->start();
@@ -78,6 +78,6 @@ class EpisodeAnalyticsController extends Controller
             $serviceName,
         );
 
-        return redirect()->to($this->config->getEnclosureUrl($enclosureUri));
+        return redirect()->to($this->config->getAudioFileUrl($audioFilePath));
     }
 }

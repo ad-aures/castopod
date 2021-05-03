@@ -41,7 +41,7 @@ class AddPersons extends Migration
                     'The url to a relevant resource of information about the person, such as a homepage or third-party profile platform.',
                 'null' => true,
             ],
-            'image_uri' => [
+            'image_path' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],

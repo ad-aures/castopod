@@ -45,8 +45,8 @@ return [
     'form' => [
         'warning' =>
             'In case of fatal error, try increasing the `memory_limit`, `upload_max_filesize` and `post_max_size` values in your php configuration file then restart your web server.<br />These values must be higher than the audio file you wish to upload.',
-        'enclosure' => 'Audio file',
-        'enclosure_hint' => 'Choose an .mp3 or .m4a audio file.',
+        'audio_file' => 'Audio file',
+        'audio_file_hint' => 'Choose an .mp3 or .m4a audio file.',
         'info_section_title' => 'Episode info',
         'info_section_subtitle' => '',
         'image' => 'Cover image',
@@ -90,10 +90,14 @@ return [
         'location_name_hint' => 'This can be a real or fictional location',
         'transcript' => 'Transcript or closed captions',
         'transcript_hint' => 'Allowed formats are txt, html, srt or json.',
-        'transcript_delete' => 'Delete transcript',
+        'transcript_file' => 'Transcript file',
+        'transcript_file_remote_url' => 'Remote url for transcript',
+        'transcript_file_delete' => 'Delete transcript file',
         'chapters' => 'Chapters',
-        'chapters_hint' => 'File should be in JSON Chapters Format.',
-        'chapters_delete' => 'Delete chapters',
+        'chapters_hint' => 'File must be in JSON Chapters format.',
+        'chapters_file' => 'Chapters file',
+        'chapters_file_remote_url' => 'Remote url for chapters file',
+        'chapters_file_delete' => 'Delete chapters file',
         'advanced_section_title' => 'Advanced Parameters',
         'advanced_section_subtitle' =>
             'If you need RSS tags that Castopod does not handle, set them here.',

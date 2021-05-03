@@ -24,18 +24,26 @@
 
 <?= form_section(
     lang('Episode.form.info_section_title'),
-    lang('Episode.form.info_section_subtitle'),
+    '<img
+    src="' .
+        $episode->image->medium_url .
+        '"
+    alt="' .
+        $episode->title .
+        '"
+    class="w-48"
+/>',
 ) ?>
 
 <?= form_label(
-    lang('Episode.form.enclosure'),
-    'enclosure',
+    lang('Episode.form.audio_file'),
+    'audio_file',
     [],
-    lang('Episode.form.enclosure_hint'),
+    lang('Episode.form.audio_file_hint'),
 ) ?>
 <?= form_input([
-    'id' => 'enclosure',
-    'name' => 'enclosure',
+    'id' => 'audio_file',
+    'name' => 'audio_file',
     'class' => 'form-input mb-4',
     'type' => 'file',
     'accept' => '.mp3,.m4a',
@@ -48,11 +56,7 @@
     lang('Episode.form.image_hint'),
     true,
 ) ?>
-<img
-    src="<?= $episode->image->thumbnail_url ?>"
-    alt="<?= $episode->title ?>"
-    class="object-cover w-32 h-32"
-/>
+
 <?= form_input([
     'id' => 'image',
     'name' => 'image',
@@ -272,86 +276,192 @@
             '“<a href="https://github.com/Podcastindex-org/podcast-namespace" target="_blank" rel="noreferrer noopener" style="text-decoration: underline;">podcast namespace</a>”',
     ]),
 ) ?>
-<div class="flex flex-col flex-1">
-<?= form_label(
-    lang('Episode.form.transcript'),
-    'transcript',
-    [],
-    lang('Episode.form.transcript_hint'),
-    true,
-) ?>
-<?php if ($episode->transcript): ?>
-    <div class="flex justify-between">
-        <?= anchor(
-            $episode->transcriptUrl,
-            icon('file', 'mr-2') . $episode->transcript,
-            [
-                'class' => 'inline-flex items-center text-xs',
-                'target' => '_blank',
-                'rel' => 'noreferrer noopener',
-            ],
-        ) .
-            anchor(
-                route_to('transcript-delete', $podcast->id, $episode->id),
-                icon('delete-bin', 'mx-auto'),
-                [
-                    'class' =>
-                        'p-1 bg-red-200 rounded-full text-red-700 hover:text-red-900',
-                    'data-toggle' => 'tooltip',
-                    'data-placement' => 'bottom',
-                    'title' => lang('Episode.form.transcript_delete'),
-                ],
+
+<?= form_fieldset('', ['class' => 'flex flex-col mb-4']) ?>
+    <legend><?= lang('Episode.form.transcript') .
+        '<small class="ml-1 lowercase">(' .
+        lang('Common.optional') .
+        ')</small>' .
+        hint_tooltip(lang('Episode.form.transcript_hint'), 'ml-1') ?></legend>
+    <div class="mb-4 form-input-tabs">
+        <input type="radio" name="transcript-choice" id="transcript-file-upload-choice" aria-controls="transcript-file-upload-choice" value="upload-file" <?= !$episode->transcript_file_remote_url
+            ? 'checked'
+            : '' ?> />
+        <label for="transcript-file-upload-choice"><?= lang(
+            'Common.forms.upload_file',
+        ) ?></label>
+
+        <input type="radio" name="transcript-choice" id="transcript-file-remote-url-choice" aria-controls="transcript-file-remote-url-choice" value="remote-url" <?= $episode->transcript_file_remote_url
+            ? 'checked'
+            : '' ?> />
+        <label for="transcript-file-remote-url-choice"><?= lang(
+            'Common.forms.remote_url',
+        ) ?></label>
+
+        <div class="py-2 tab-panels">
+            <section id="transcript-file-upload" class="flex items-center tab-panel">
+            <?php if ($episode->transcript_file): ?>
+                <div class="flex justify-between">
+                    <?= anchor(
+                        $episode->transcript_file_url,
+                        icon('file', 'mr-2 text-gray-500') .
+                            $episode->transcript_file,
+                        [
+                            'class' => 'inline-flex items-center text-xs',
+                            'target' => '_blank',
+                            'rel' => 'noreferrer noopener',
+                        ],
+                    ) .
+                        anchor(
+                            route_to(
+                                'transcript-delete',
+                                $podcast->id,
+                                $episode->id,
+                            ),
+                            icon('delete-bin', 'mx-auto'),
+                            [
+                                'class' =>
+                                    'p-1 bg-red-200 rounded-full text-red-700 hover:text-red-900',
+                                'data-toggle' => 'tooltip',
+                                'data-placement' => 'bottom',
+                                'title' => lang(
+                                    'Episode.form.transcript_file_delete',
+                                ),
+                            ],
+                        ) ?>
+                </div>
+            <?php endif; ?>
+            <?= form_label(
+                lang('Episode.form.transcript_file'),
+                'transcript_file',
+                ['class' => 'sr-only'],
+                lang('Episode.form.transcript_file'),
+                true,
             ) ?>
-    </div>
-<?php endif; ?>
-<?= form_input([
-    'id' => 'transcript',
-    'name' => 'transcript',
-    'class' => 'form-input mb-4',
-    'type' => 'file',
-    'accept' => '.txt,.html,.srt,.json',
-]) ?>
-</div>
-<div class="flex flex-col flex-1">
-<?= form_label(
-    lang('Episode.form.chapters'),
-    'chapters',
-    [],
-    lang('Episode.form.chapters_hint'),
-    true,
-) ?>
-<?php if ($episode->chapters): ?>
-    <div class="flex justify-between">
-        <?= anchor(
-            $episode->chaptersUrl,
-            icon('file', 'mr-2') . $episode->chapters,
-            [
-                'class' => 'inline-flex items-center text-xs',
-                'target' => '_blank',
-                'rel' => 'noreferrer noopener',
-            ],
-        ) .
-            anchor(
-                route_to('chapters-delete', $podcast->id, $episode->id),
-                icon('delete-bin', 'mx-auto'),
-                [
-                    'class' =>
-                        'p-1 bg-red-200 rounded-full text-red-700 hover:text-red-900',
-                    'data-toggle' => 'tooltip',
-                    'data-placement' => 'bottom',
-                    'title' => lang('Episode.form.chapters_delete'),
-                ],
+            <?= form_input([
+                'id' => 'transcript_file',
+                'name' => 'transcript_file',
+                'class' => 'form-input',
+                'type' => 'file',
+                'accept' => '.txt,.html,.srt,.json',
+            ]) ?>
+            </section>
+            <section id="transcript-file-remote-url" class="tab-panel">
+            <?= form_label(
+                lang('Episode.form.transcript_file_remote_url'),
+                'transcript_file_remote_url',
+                ['class' => 'sr-only'],
+                lang('Episode.form.transcript_file_remote_url'),
+                true,
             ) ?>
+            <?= form_input([
+                'id' => 'transcript_file_remote_url',
+                'name' => 'transcript_file_remote_url',
+                'class' => 'form-input w-full',
+                'type' => 'url',
+                'placeholder' => 'https://...',
+                'value' => old(
+                    'transcript_file_remote_url',
+                    $episode->transcript_file_remote_url,
+                ),
+            ]) ?>
+            </section>
+        </div>
     </div>
-<?php endif; ?>
-<?= form_input([
-    'id' => 'chapters',
-    'name' => 'chapters',
-    'class' => 'form-input mb-4',
-    'type' => 'file',
-    'accept' => '.json',
-]) ?>
-</div>
+<?= form_fieldset_close() ?>
+
+<?= form_fieldset('', ['class' => 'flex flex-col mb-4']) ?>
+    <legend><?= lang('Episode.form.chapters') .
+        '<small class="ml-1 lowercase">(' .
+        lang('Common.optional') .
+        ')</small>' .
+        hint_tooltip(lang('Episode.form.chapters_hint'), 'ml-1') ?></legend>
+    <div class="mb-4 form-input-tabs">
+        <input type="radio" name="chapters-choice" id="chapters-file-upload-choice" aria-controls="chapters-file-upload-choice" value="upload-file" <?= !$episode->chapters_file_remote_url
+            ? 'checked'
+            : '' ?> />
+        <label for="chapters-file-upload-choice"><?= lang(
+            'Common.forms.upload_file',
+        ) ?></label>
+
+        <input type="radio" name="chapters-choice" id="chapters-file-remote-url-choice" aria-controls="chapters-file-remote-url-choice" value="remote-url" <?= $episode->chapters_file_remote_url
+            ? 'checked'
+            : '' ?> />
+        <label for="chapters-file-remote-url-choice"><?= lang(
+            'Common.forms.remote_url',
+        ) ?></label>
+
+        <div class="py-2 tab-panels">
+            <section id="chapters-file-upload" class="flex items-center tab-panel">
+            <?php if ($episode->chapters_file): ?>
+                <div class="flex justify-between">
+                    <?= anchor(
+                        $episode->chapters_file_url,
+                        icon('file', 'mr-2') . $episode->chapters_file,
+                        [
+                            'class' => 'inline-flex items-center text-xs',
+                            'target' => '_blank',
+                            'rel' => 'noreferrer noopener',
+                        ],
+                    ) .
+                        anchor(
+                            route_to(
+                                'chapters-delete',
+                                $podcast->id,
+                                $episode->id,
+                            ),
+                            icon('delete-bin', 'mx-auto'),
+                            [
+                                'class' =>
+                                    'p-1 bg-red-200 rounded-full text-red-700 hover:text-red-900',
+                                'data-toggle' => 'tooltip',
+                                'data-placement' => 'bottom',
+                                'title' => lang(
+                                    'Episode.form.chapters_file_delete',
+                                ),
+                            ],
+                        ) ?>
+                </div>
+            <?php endif; ?>
+            <?= form_label(
+                lang('Episode.form.chapters_file'),
+                'chapters_file',
+                ['class' => 'sr-only'],
+                lang('Episode.form.chapters_file'),
+                true,
+            ) ?>
+            <?= form_input([
+                'id' => 'chapters_file',
+                'name' => 'chapters_file',
+                'class' => 'form-input',
+                'type' => 'file',
+                'accept' => '.json',
+            ]) ?>
+            </section>
+            <section id="chapters-file-remote-url" class="tab-panel">
+            <?= form_label(
+                lang('Episode.form.chapters_file_remote_url'),
+                'chapters_file_remote_url',
+                ['class' => 'sr-only'],
+                lang('Episode.form.chapters_file_remote_url'),
+                true,
+            ) ?>
+            <?= form_input([
+                'id' => 'chapters_file_remote_url',
+                'name' => 'chapters_file_remote_url',
+                'class' => 'form-input w-full',
+                'type' => 'url',
+                'placeholder' => 'https://...',
+                'value' => old(
+                    'chapters_file_remote_url',
+                    $episode->chapters_file_remote_url,
+                ),
+            ]) ?>
+            </section>
+        </div>
+    </div>
+<?= form_fieldset_close() ?>
+
 <?= form_section_close() ?>
 
 <?= form_section(

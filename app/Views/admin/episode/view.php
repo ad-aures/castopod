@@ -39,7 +39,7 @@
             class="object-cover w-full"
         />
         <audio controls preload="auto" class="w-full mb-6">
-        <source src="/<?= $episode->enclosure_media_path ?>" type="<?= $episode->enclosure_type ?>">
+        <source src="<?= $episode->audio_file_url ?>" type="<?= $episode->audio_file_mimetype ?>">
         Your browser does not support the audio tag.
         </audio>
 

@@ -7,7 +7,7 @@
     @apply absolute -left-full;
   }
 
-  .tab-panel {
+  .tabset .tab-panel {
     @apply hidden;
   }
 
@@ -31,7 +31,7 @@
     @apply font-semibold opacity-100 text-pine-700;
   }
 
-  .tab-panels {
+  .tabset .tab-panels {
     @apply col-span-2 p-6;
   }
 }

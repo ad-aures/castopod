@@ -258,13 +258,13 @@ function get_rss_feed($podcast, $serviceSlug = '')
 
         $enclosure->addAttribute(
             'url',
-            $episode->enclosure_url .
+            $episode->audio_file_analytics_url .
                 (empty($serviceSlug)
                     ? ''
                     : '?_from=' . urlencode($serviceSlug)),
         );
-        $enclosure->addAttribute('length', $episode->enclosure_filesize);
-        $enclosure->addAttribute('type', $episode->enclosure_mimetype);
+        $enclosure->addAttribute('length', $episode->audio_file_size);
+        $enclosure->addAttribute('type', $episode->audio_file_mimetype);
 
         $item->addChild('guid', $episode->guid);
         $item->addChild(
@@ -290,7 +290,7 @@ function get_rss_feed($podcast, $serviceSlug = '')
         );
         $item->addChild(
             'duration',
-            $episode->enclosure_duration,
+            $episode->audio_file_duration,
             $itunes_namespace,
         );
         $item->addChild('link', $episode->link);
@@ -318,17 +318,20 @@ function get_rss_feed($podcast, $serviceSlug = '')
             );
         $item->addChild('episodeType', $episode->type, $itunes_namespace);
 
-        if ($episode->transcript) {
+        if ($episode->transcript_file_url) {
             $transcriptElement = $item->addChild(
                 'transcript',
                 null,
                 $podcast_namespace,
             );
-            $transcriptElement->addAttribute('url', $episode->transcriptUrl);
+            $transcriptElement->addAttribute(
+                'url',
+                $episode->transcript_file_url,
+            );
             $transcriptElement->addAttribute(
                 'type',
                 Mimes::guessTypeFromExtension(
-                    pathinfo($episode->transcript_uri, PATHINFO_EXTENSION),
+                    pathinfo($episode->transcript_file_url, PATHINFO_EXTENSION),
                 ),
             );
             $transcriptElement->addAttribute(
@@ -337,13 +340,13 @@ function get_rss_feed($podcast, $serviceSlug = '')
             );
         }
 
-        if ($episode->chapters) {
+        if ($episode->chapters_file_url) {
             $chaptersElement = $item->addChild(
                 'chapters',
                 null,
                 $podcast_namespace,
             );
-            $chaptersElement->addAttribute('url', $episode->chaptersUrl);
+            $chaptersElement->addAttribute('url', $episode->chapters_file_url);
             $chaptersElement->addAttribute('type', 'application/json+chapters');
         }
 

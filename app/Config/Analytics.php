@@ -26,10 +26,10 @@ class Analytics extends AnalyticsBase
         $this->gateway = config('App')->adminGateway . '/analytics';
     }
 
-    public function getEnclosureUrl($enclosureUri)
+    public function getAudioFileUrl($audioFilePath)
     {
         helper('media');
 
-        return media_base_url($enclosureUri);
+        return media_base_url($audioFilePath);
     }
 }

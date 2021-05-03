@@ -108,11 +108,12 @@ class Episode extends BaseController
     public function attemptCreate()
     {
         $rules = [
-            'enclosure' => 'uploaded[enclosure]|ext_in[enclosure,mp3,m4a]',
+            'audio_file' => 'uploaded[audio_file]|ext_in[audio_file,mp3,m4a]',
             'image' =>
                 'is_image[image]|ext_in[image,jpg,png]|min_dims[image,1400,1400]|is_image_squared[image]',
-            'transcript' => 'ext_in[transcript,txt,html,srt,json]|permit_empty',
-            'chapters' => 'ext_in[chapters,json]|permit_empty',
+            'transcript_file' =>
+                'ext_in[transcript,txt,html,srt,json]|permit_empty',
+            'chapters_file' => 'ext_in[chapters,json]|permit_empty',
         ];
 
         if (!$this->validate($rules)) {
@@ -127,7 +128,7 @@ class Episode extends BaseController
             'title' => $this->request->getPost('title'),
             'slug' => $this->request->getPost('slug'),
             'guid' => '',
-            'enclosure' => $this->request->getFile('enclosure'),
+            'audio_file' => $this->request->getFile('audio_file'),
             'description_markdown' => $this->request->getPost('description'),
             'image' => $this->request->getFile('image'),
             'location' => $this->request->getPost('location_name'),
@@ -150,6 +151,30 @@ class Episode extends BaseController
             'updated_by' => user()->id,
             'published_at' => null,
         ]);
+
+        $transcriptChoice = $this->request->getPost('transcript-choice');
+        if (
+            $transcriptChoice === 'upload-file' &&
+            ($transcriptFile = $this->request->getFile('transcript_file'))
+        ) {
+            $newEpisode->transcript_file = $transcriptFile;
+        } elseif ($transcriptChoice === 'remote-url') {
+            $newEpisode->transcript_file_remote_url = $this->request->getPost(
+                'transcript_file_remote_url',
+            );
+        }
+
+        $chaptersChoice = $this->request->getPost('chapters-choice');
+        if (
+            $chaptersChoice === 'upload-file' &&
+            ($chaptersFile = $this->request->getFile('chapters_file'))
+        ) {
+            $newEpisode->chapters_file = $chaptersFile;
+        } elseif ($chaptersChoice === 'remote-url') {
+            $newEpisode->chapters_file_remote_url = $this->request->getPost(
+                'chapters_file_remote_url',
+            );
+        }
 
         $episodeModel = new EpisodeModel();
 
@@ -201,12 +226,13 @@ class Episode extends BaseController
     public function attemptEdit()
     {
         $rules = [
-            'enclosure' =>
-                'uploaded[enclosure]|ext_in[enclosure,mp3,m4a]|permit_empty',
+            'audio_file' =>
+                'uploaded[audio_file]|ext_in[audio_file,mp3,m4a]|permit_empty',
             'image' =>
                 'is_image[image]|ext_in[image,jpg,png]|min_dims[image,1400,1400]|is_image_squared[image]',
-            'transcript' => 'ext_in[transcript,txt,html,srt,json]|permit_empty',
-            'chapters' => 'ext_in[chapters,json]|permit_empty',
+            'transcript_file' =>
+                'ext_in[transcript_file,txt,html,srt,json]|permit_empty',
+            'chapters_file' => 'ext_in[chapters_file,json]|permit_empty',
         ];
 
         if (!$this->validate($rules)) {
@@ -240,21 +266,61 @@ class Episode extends BaseController
 
         $this->episode->updated_by = user()->id;
 
-        $enclosure = $this->request->getFile('enclosure');
-        if ($enclosure->isValid()) {
-            $this->episode->enclosure = $enclosure;
+        $audioFile = $this->request->getFile('audio_file');
+        if ($audioFile) {
+            $this->episode->audio_file = $audioFile;
         }
         $image = $this->request->getFile('image');
         if ($image) {
             $this->episode->image = $image;
         }
-        $transcript = $this->request->getFile('transcript');
-        if ($transcript->isValid()) {
-            $this->episode->transcript = $transcript;
+
+        $transcriptChoice = $this->request->getPost('transcript-choice');
+        if ($transcriptChoice === 'upload-file') {
+            $transcriptFile = $this->request->getFile('transcript_file');
+            if ($transcriptFile->isValid()) {
+                $this->episode->transcript_file = $transcriptFile;
+                $this->episode->transcript_file_remote_url = null;
+            }
+        } elseif ($transcriptChoice === 'remote-url') {
+            if (
+                $transcriptFileRemoteUrl = $this->request->getPost(
+                    'transcript_file_remote_url',
+                )
+            ) {
+                if (
+                    ($transcriptFile = $this->episode->transcript_file) &&
+                    !empty($transcriptFile)
+                ) {
+                    unlink($transcriptFile);
+                    $this->episode->transcript_file_path = null;
+                }
+            }
+            $this->episode->transcript_file_remote_url = $transcriptFileRemoteUrl;
         }
-        $chapters = $this->request->getFile('chapters');
-        if ($chapters->isValid()) {
-            $this->episode->chapters = $chapters;
+
+        $chaptersChoice = $this->request->getPost('chapters-choice');
+        if ($chaptersChoice === 'upload-file') {
+            $chaptersFile = $this->request->getFile('chapters_file');
+            if ($chaptersFile->isValid()) {
+                $this->episode->chapters_file = $chaptersFile;
+                $this->episode->chapters_file_remote_url = null;
+            }
+        } elseif ($chaptersChoice === 'remote-url') {
+            if (
+                $chaptersFileRemoteUrl = $this->request->getPost(
+                    'chapters_file_remote_url',
+                )
+            ) {
+                if (
+                    ($chaptersFile = $this->episode->chapters_file) &&
+                    !empty($chaptersFile)
+                ) {
+                    unlink($chaptersFile);
+                    $this->episode->chapters_file_path = null;
+                }
+            }
+            $this->episode->chapters_file_remote_url = $chaptersFileRemoteUrl;
         }
 
         $episodeModel = new EpisodeModel();
@@ -289,8 +355,8 @@ class Episode extends BaseController
 
     public function transcriptDelete()
     {
-        unlink($this->episode->transcript);
-        $this->episode->transcript_uri = null;
+        unlink($this->episode->transcript_file);
+        $this->episode->transcript_file_path = null;
 
         $episodeModel = new EpisodeModel();
 
@@ -306,8 +372,8 @@ class Episode extends BaseController
 
     public function chaptersDelete()
     {
-        unlink($this->episode->chapters);
-        $this->episode->chapters_uri = null;
+        unlink($this->episode->chapters_file);
+        $this->episode->chapters_file_path = null;
 
         $episodeModel = new EpisodeModel();
 

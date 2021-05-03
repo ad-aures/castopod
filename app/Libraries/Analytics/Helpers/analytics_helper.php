@@ -30,15 +30,15 @@ if (!function_exists('base64_url_decode')) {
 
 if (!function_exists('generate_episode_analytics_url')) {
     /**
-     * Builds the episode analytics url that redirects to the enclosure url
+     * Builds the episode analytics url that redirects to the audio file url
      * after analytics hit.
      *
      * @param int $podcastId
      * @param int $episodeId
-     * @param string $enclosureUri
-     * @param int $enclosureDuration
-     * @param int $enclosureFilesize
-     * @param int $enclosureHeadersize
+     * @param string $audioFilePath
+     * @param int $audioFileDuration
+     * @param int $audioFileSize
+     * @param int $audioFileHeaderSize
      * @param \CodeIgniter\I18n\Time $publicationDate
      *
      * @return string
@@ -47,10 +47,10 @@ if (!function_exists('generate_episode_analytics_url')) {
     function generate_episode_analytics_url(
         $podcastId,
         $episodeId,
-        $enclosureUri,
-        $enclosureDuration,
-        $enclosureFilesize,
-        $enclosureHeadersize,
+        $audioFilePath,
+        $audioFileDuration,
+        $audioFileFilesize,
+        $audioFileHeaderSize,
         $publicationDate
     ) {
         return url_to(
@@ -61,22 +61,22 @@ if (!function_exists('generate_episode_analytics_url')) {
                     $podcastId,
                     $episodeId,
                     // bytes_threshold: number of bytes that must be downloaded for an episode to be counted in download analytics
-                    // - if file is shorter than 60sec, then it's enclosure_filesize
-                    // - if file is longer than 60 seconds then it's enclosure_headersize + 60 seconds
-                    $enclosureDuration <= 60
-                        ? $enclosureFilesize
-                        : $enclosureHeadersize +
+                    // - if file is shorter than 60sec, then it's audio_file_size
+                    // - if file is longer than 60 seconds then it's audio_file_header_size + 60 seconds
+                    $audioFileDuration <= 60
+                        ? $audioFileFilesize
+                        : $audioFileHeaderSize +
                             floor(
-                                (($enclosureFilesize - $enclosureHeadersize) /
-                                    $enclosureDuration) *
+                                (($audioFileFilesize - $audioFileHeaderSize) /
+                                    $audioFileDuration) *
                                     60,
                             ),
-                    $enclosureFilesize,
-                    $enclosureDuration,
+                    $audioFileFilesize,
+                    $audioFileDuration,
                     strtotime($publicationDate),
                 ),
             ),
-            $enclosureUri,
+            $audioFilePath,
         );
     }
 }

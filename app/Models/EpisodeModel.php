@@ -21,17 +21,19 @@ class EpisodeModel extends Model
         'guid',
         'title',
         'slug',
-        'enclosure_uri',
-        'enclosure_duration',
-        'enclosure_mimetype',
-        'enclosure_filesize',
-        'enclosure_headersize',
+        'audio_file_path',
+        'audio_file_duration',
+        'audio_file_mimetype',
+        'audio_file_size',
+        'audio_file_header_size',
         'description_markdown',
         'description_html',
-        'image_uri',
+        'image_path',
         'image_mimetype',
-        'transcript_uri',
-        'chapters_uri',
+        'transcript_file_path',
+        'transcript_file_remote_url',
+        'chapters_file_path',
+        'chapters_file_remote_url',
         'parental_advisory',
         'number',
         'season_number',
@@ -58,11 +60,13 @@ class EpisodeModel extends Model
         'podcast_id' => 'required',
         'title' => 'required',
         'slug' => 'required|regex_match[/^[a-zA-Z0-9\-]{1,191}$/]',
-        'enclosure_uri' => 'required',
+        'audio_file_path' => 'required',
         'description_markdown' => 'required',
         'number' => 'is_natural_no_zero|permit_empty',
         'season_number' => 'is_natural_no_zero|permit_empty',
         'type' => 'required',
+        'transcript_file_remote_url' => 'valid_url|permit_empty',
+        'chapters_file_remote_url' => 'valid_url|permit_empty',
         'published_at' => 'valid_date|permit_empty',
         'created_by' => 'required',
         'updated_by' => 'required',
@@ -268,7 +272,7 @@ class EpisodeModel extends Model
             is_array($data['id']) ? $data['id'][0] : $data['id'],
         );
 
-        write_enclosure_tags($episode);
+        write_audio_file_tags($episode);
 
         return $data;
     }

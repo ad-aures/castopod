@@ -1,4 +1,4 @@
-image: php:7.2-fpm
+image: php:7.3-fpm
 
 stages:
   - bundle

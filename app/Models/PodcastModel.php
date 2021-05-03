@@ -25,7 +25,7 @@ class PodcastModel extends Model
         'description_html',
         'episode_description_footer_markdown',
         'episode_description_footer_html',
-        'image_uri',
+        'image_path',
         'image_mimetype',
         'language_code',
         'category_id',
@@ -62,7 +62,7 @@ class PodcastModel extends Model
         'name' =>
             'required|regex_match[/^[a-zA-Z0-9\_]{1,191}$/]|is_unique[podcasts.name,id,{id}]',
         'description_markdown' => 'required',
-        'image_uri' => 'required',
+        'image_path' => 'required',
         'language_code' => 'required',
         'category_id' => 'required',
         'owner_email' => 'required|valid_email',

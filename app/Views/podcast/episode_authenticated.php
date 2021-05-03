@@ -17,8 +17,8 @@
 <meta property="og:description" content="$description" />
 <meta property="article:published_time" content="<?= $episode->published_at ?>" />
 <meta property="article:modified_time" content="<?= $episode->updated_at ?>" />
-<meta property="og:audio" content="<?= $episode->enclosure_opengraph_url ?>" />
-<meta property="og:audio:type" content="<?= $episode->enclosure_mimetype ?>" />
+<meta property="og:audio" content="<?= $episode->audio_file_opengraph_url ?>" />
+<meta property="og:audio:type" content="<?= $episode->audio_file_mimetype ?>" />
 <link rel="alternate" type="application/json+oembed" href="<?= base_url(
     route_to('episode-oembed-json', $podcast->name, $episode->slug),
 ) ?>" title="<?= $episode->title ?> oEmbed json" />
@@ -67,8 +67,8 @@
                         ]) ?>
                     </time>
                     <span class="mx-1">•</span>
-                    <time datetime="PT<?= $episode->enclosure_duration ?>S">
-                        <?= format_duration($episode->enclosure_duration) ?>
+                    <time datetime="PT<?= $episode->audio_file_duration ?>S">
+                        <?= format_duration($episode->audio_file_duration) ?>
                     </time>
                 </div>
                 <div class="mb-2 space-x-4 text-sm">
@@ -148,7 +148,7 @@
             </div>
         </div>
         <audio controls preload="none" class="w-full mt-auto">
-            <source src="<?= $episode->enclosure_web_url ?>" type="<?= $episode->enclosure_type ?>">
+            <source src="<?= $episode->audio_file_web_url ?>" type="<?= $episode->audio_file_mimetype ?>">
             Your browser does not support the audio tag.
         </audio>
     </header>

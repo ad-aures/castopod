@@ -39,25 +39,25 @@ class AddEpisodes extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 191,
             ],
-            'enclosure_uri' => [
+            'audio_file_path' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
-            'enclosure_duration' => [
+            'audio_file_duration' => [
                 'type' => 'INT',
                 'unsigned' => true,
                 'comment' => 'Playtime in seconds',
             ],
-            'enclosure_mimetype' => [
+            'audio_file_mimetype' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
-            'enclosure_filesize' => [
+            'audio_file_size' => [
                 'type' => 'INT',
                 'unsigned' => true,
                 'comment' => 'File size in bytes',
             ],
-            'enclosure_headersize' => [
+            'audio_file_header_size' => [
                 'type' => 'INT',
                 'unsigned' => true,
                 'comment' => 'Header size in bytes',
@@ -68,7 +68,7 @@ class AddEpisodes extends Migration
             'description_html' => [
                 'type' => 'TEXT',
             ],
-            'image_uri' => [
+            'image_path' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
                 'null' => true,
@@ -80,14 +80,24 @@ class AddEpisodes extends Migration
                 'constraint' => 13,
                 'null' => true,
             ],
-            'transcript_uri' => [
+            'transcript_file_path' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
                 'null' => true,
             ],
-            'chapters_uri' => [
+            'transcript_file_remote_url' => [
+                'type' => 'VARCHAR',
+                'constraint' => 512,
+                'null' => true,
+            ],
+            'chapters_file_path' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
+                'null' => true,
+            ],
+            'chapters_file_remote_url' => [
+                'type' => 'VARCHAR',
+                'constraint' => 512,
                 'null' => true,
             ],
             'parental_advisory' => [

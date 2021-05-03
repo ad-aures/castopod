@@ -107,12 +107,14 @@
                             $episode->publication_status,
                         ) ?>
                         <span class="mx-1">•</span>
-                        <time datetime="PT<?= $episode->enclosure_duration ?>S">
-                            <?= format_duration($episode->enclosure_duration) ?>
+                        <time datetime="PT<?= $episode->audio_file_duration ?>S">
+                            <?= format_duration(
+                                $episode->audio_file_duration,
+                            ) ?>
                         </time>
                     </div>
                     <audio controls preload="none" class="w-full mt-auto">
-                        <source src="/<?= $episode->enclosure_media_path ?>" type="<?= $episode->enclosure_type ?>">
+                        <source src="<?= $episode->audio_file_url ?>" type="<?= $episode->audio_file_mimetype ?>">
                         Your browser does not support the audio tag.
                     </audio>
                 </div>

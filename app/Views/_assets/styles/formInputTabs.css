@@ -1,0 +1,36 @@
+@layer components {
+  .form-input-tabs > input[type="radio"] {
+    @apply absolute -left-full;
+  }
+
+  .form-input-tabs .tab-panel {
+    @apply hidden;
+  }
+
+  /* Logic for 2 tabs at most */
+  .form-input-tabs
+    > input:first-child:checked
+    ~ .tab-panels
+    > .tab-panel:first-child,
+  .form-input-tabs
+    > input:nth-child(3):checked
+    ~ .tab-panels
+    > .tab-panel:nth-child(2) {
+    @apply block;
+  }
+
+  /* Styling */
+  .form-input-tabs > label {
+    @apply relative inline-block px-1 py-2 text-xs text-center cursor-pointer opacity-70 hover:opacity-100;
+  }
+
+  .form-input-tabs > input:checked + label::after {
+    @apply absolute inset-x-0 bottom-0 w-full mx-auto bg-pine-700;
+    content: "";
+    height: 0.2rem;
+  }
+
+  .form-input-tabs > input:checked + label {
+    @apply font-semibold opacity-100 text-pine-700;
+  }
+}
