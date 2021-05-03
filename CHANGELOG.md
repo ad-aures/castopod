@@ -1,3 +1,18 @@
+# [1.0.0-alpha.54](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.53...v1.0.0-alpha.54) (2021-05-03)
+
+
+### Features
+
+* set app parameter forceGlobalSecureRequests = true forcing requests to go through https ([d9dff1b](https://code.podlibre.org/podlibre/castopod-host/commit/d9dff1b8bf89c8b526ad6cb89f98a1f160d49117))
+* **ux:** remove admin dashboard and redirect directly to podcast list ([27c48b8](https://code.podlibre.org/podlibre/castopod-host/commit/27c48b8fa930b33e5e15f0c8685e468e857ca9cd))
+* add cache to ActivityPub sql queries + cache activity and note pages ([2d297f4](https://code.podlibre.org/podlibre/castopod-host/commit/2d297f45b3d7ef6e8711875a0b9b908e878115fa))
+
+
+### Performance Improvements
+
+* **cache:** update CI4 to use cache's deleteMatching method ([54b84f9](https://code.podlibre.org/podlibre/castopod-host/commit/54b84f96843af13f579fea49102c8c2ef81b0a54))
+* **docker:** add redis caching service for development ([05ace8c](https://code.podlibre.org/podlibre/castopod-host/commit/05ace8cff2ef02d19abd40097ac5546dca6a54ca))
+
 # [1.0.0-alpha.53](https://code.podlibre.org/podlibre/castopod/compare/v1.0.0-alpha.52...v1.0.0-alpha.53) (2021-04-16)
 
 
