@@ -1,3 +1,10 @@
+# [1.0.0-alpha.55](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.54...v1.0.0-alpha.55) (2021-05-03)
+
+
+### Features
+
+* add remote_url alternative for transcript and chapters files ([3143c9a](https://code.podlibre.org/podlibre/castopod-host/commit/3143c9ad36e4cf1364205cf2be39c0c96f80fdd2))
+
 # [1.0.0-alpha.54](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.53...v1.0.0-alpha.54) (2021-05-03)
 
 
