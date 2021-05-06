@@ -8,6 +8,11 @@
 
 namespace ActivityPub\Controllers;
 
+use CodeIgniter\HTTP\RedirectResponse;
+use CodeIgniter\HTTP\ResponseInterface;
+use CodeIgniter\Exceptions\PageNotFoundException;
+use ActivityPub\Entities\Note;
+use CodeIgniter\HTTP\Exceptions\HTTPException;
 use ActivityPub\Config\ActivityPub;
 use ActivityPub\Objects\OrderedCollectionObject;
 use ActivityPub\Objects\OrderedCollectionPage;
@@ -16,15 +21,18 @@ use CodeIgniter\I18n\Time;
 
 class NoteController extends Controller
 {
+    /**
+     * @var string[]
+     */
     protected $helpers = ['activitypub'];
 
     /**
-     * @var \ActivityPub\Entities\Note|null
+     * @var Note|null
      */
     protected $note;
 
     /**
-     * @var \ActivityPub\Config\ActivityPub
+     * @var ActivityPub
      */
     protected $config;
 
@@ -36,14 +44,14 @@ class NoteController extends Controller
     public function _remap($method, ...$params)
     {
         if (!($this->note = model('NoteModel')->getNoteById($params[0]))) {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+            throw PageNotFoundException::forPageNotFound();
         }
         unset($params[0]);
 
         return $this->$method(...$params);
     }
 
-    public function index()
+    public function index(): RedirectResponse
     {
         $noteObjectClass = $this->config->noteObject;
         $noteObject = new $noteObjectClass($this->note);
@@ -53,7 +61,7 @@ class NoteController extends Controller
             ->setBody($noteObject->toJSON());
     }
 
-    public function replies()
+    public function replies(): RedirectResponse
     {
         // get note replies
         $noteReplies = model('NoteModel')
@@ -84,7 +92,7 @@ class NoteController extends Controller
             $noteObjectClass = $this->config->noteObject;
             foreach ($paginatedReplies as $reply) {
                 $replyObject = new $noteObjectClass($reply);
-                array_push($orderedItems, $replyObject->toJSON());
+                $orderedItems[] = $replyObject->toJSON();
             }
             $collection = new OrderedCollectionPage($pager, $orderedItems);
         }
@@ -108,7 +116,7 @@ class NoteController extends Controller
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $newNote = new \ActivityPub\Entities\Note([
+        $newNote = new Note([
             'actor_id' => $this->request->getPost('actor_id'),
             'message' => $this->request->getPost('message'),
             'published_at' => Time::now(),
@@ -119,7 +127,7 @@ class NoteController extends Controller
                 ->back()
                 ->withInput()
                 // TODO: translate
-                ->with('error', 'Couldn\'t create Note');
+                ->with('error', "Couldn't create Note");
         }
 
         // Note without preview card has been successfully created
@@ -184,7 +192,7 @@ class NoteController extends Controller
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $newReplyNote = new \ActivityPub\Entities\Note([
+        $newReplyNote = new Note([
             'actor_id' => $this->request->getPost('actor_id'),
             'in_reply_to_id' => $this->note->id,
             'message' => $this->request->getPost('message'),
@@ -196,14 +204,17 @@ class NoteController extends Controller
                 ->back()
                 ->withInput()
                 // TODO: translate
-                ->with('error', 'Couldn\'t create Reply');
+                ->with('error', "Couldn't create Reply");
         }
 
         // Reply note without preview card has been successfully created
         return redirect()->back();
     }
 
-    public function attemptRemoteAction($action)
+    /**
+     * @return mixed|ResponseInterface
+     */
+    public function attemptRemoteAction(string $action)
     {
         $rules = [
             'handle' =>
@@ -228,7 +239,7 @@ class NoteController extends Controller
 
                 $data = get_webfinger_data($username, $domain);
             }
-        } catch (\CodeIgniter\HTTP\Exceptions\HTTPException $e) {
+        } catch (HTTPException $httpException) {
             return redirect()
                 ->back()
                 ->withInput()

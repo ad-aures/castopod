@@ -8,12 +8,20 @@
 
 namespace ActivityPub\Models;
 
+use CodeIgniter\Database\BaseResult;
+use ActivityPub\Entities\PreviewCard;
 use CodeIgniter\Model;
 
 class PreviewCardModel extends Model
 {
+    /**
+     * @var string
+     */
     protected $table = 'activitypub_preview_cards';
 
+    /**
+     * @var string[]
+     */
     protected $allowedFields = [
         'id',
         'url',
@@ -28,9 +36,19 @@ class PreviewCardModel extends Model
         'html',
     ];
 
-    protected $returnType = \ActivityPub\Entities\PreviewCard::class;
+    /**
+     * @var string
+     */
+    protected $returnType = PreviewCard::class;
+
+    /**
+     * @var bool
+     */
     protected $useSoftDeletes = false;
 
+    /**
+     * @var bool
+     */
     protected $useTimestamps = true;
 
     public function getPreviewCardFromUrl($url)
@@ -38,7 +56,7 @@ class PreviewCardModel extends Model
         $hashedPreviewCardUrl = md5($url);
         $cacheName =
             config('ActivityPub')->cachePrefix .
-            "preview_card@{$hashedPreviewCardUrl}";
+            "preview_card-{$hashedPreviewCardUrl}";
         if (!($found = cache($cacheName))) {
             $found = $this->where('url', $url)->first();
             cache()->save($cacheName, $found, DECADE);
@@ -71,12 +89,15 @@ class PreviewCardModel extends Model
         return $found;
     }
 
+    /**
+     * @return bool|BaseResult
+     */
     public function deletePreviewCard($id, $url)
     {
         $hashedPreviewCardUrl = md5($url);
         cache()->delete(
             config('ActivityPub')->cachePrefix .
-                "preview_card@{$hashedPreviewCardUrl}",
+                "preview_card-{$hashedPreviewCardUrl}",
         );
 
         return $this->delete($id);

@@ -8,6 +8,8 @@
 
 namespace App\Controllers;
 
+use App\Entities\Page as PageEntity;
+use CodeIgniter\Exceptions\PageNotFoundException;
 use App\Models\PageModel;
 use App\Models\CreditModel;
 use App\Models\PodcastModel;
@@ -15,28 +17,28 @@ use App\Models\PodcastModel;
 class Page extends BaseController
 {
     /**
-     * @var \App\Entities\Page|null
+     * @var Page|null
      */
     protected $page;
 
     public function _remap($method, ...$params)
     {
-        if (count($params) > 0) {
-            if (
-                !($this->page = (new PageModel())
-                    ->where('slug', $params[0])
-                    ->first())
-            ) {
-                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-            }
+        if (count($params) === 0) {
+            return $this->$method();
         }
 
-        return $this->$method();
+        if (
+            $this->page = (new PageModel())->where('slug', $params[0])->first()
+        ) {
+            return $this->$method();
+        }
+
+        throw PageNotFoundException::forPageNotFound();
     }
 
     public function index()
     {
-        $cacheName = "page@{$this->page->slug}";
+        $cacheName = "page-{$this->page->slug}";
         if (!($found = cache($cacheName))) {
             $data = [
                 'page' => $this->page,
@@ -58,7 +60,7 @@ class Page extends BaseController
 
         $cacheName = "page_credits_{$locale}";
         if (!($found = cache($cacheName))) {
-            $page = new \App\Entities\Page([
+            $page = new PageEntity([
                 'title' => lang('Person.credits', [], $locale),
                 'slug' => 'credits',
                 'content' => '',
@@ -157,10 +159,10 @@ class Page extends BaseController
                         'role_label' => $credit->role_label,
                         'is_in' => [
                             [
-                                'link' => $credit->episode
+                                'link' => $credit->episode_id
                                     ? $credit->episode->link
                                     : $credit->podcast->link,
-                                'title' => $credit->episode
+                                'title' => $credit->episode_id
                                     ? (count($allPodcasts) > 1
                                             ? "{$credit->podcast->title} ▸ "
                                             : '') .
@@ -179,10 +181,10 @@ class Page extends BaseController
                     $credits[$person_group]['persons'][$person_id]['roles'][
                         $person_role
                     ]['is_in'][] = [
-                        'link' => $credit->episode
+                        'link' => $credit->episode_id
                             ? $credit->episode->link
                             : $credit->podcast->link,
-                        'title' => $credit->episode
+                        'title' => $credit->episode_id
                             ? (count($allPodcasts) > 1
                                     ? "{$credit->podcast->title} ▸ "
                                     : '') .

@@ -10,10 +10,14 @@
 
 namespace Analytics\Entities;
 
-use CodeIgniter\Entity;
+use datetime;
+use CodeIgniter\Entity\Entity;
 
 class AnalyticsWebsiteByBrowser extends Entity
 {
+    /**
+     * @var array<string, string>
+     */
     protected $casts = [
         'podcast_id' => 'integer',
         'browser' => 'string',

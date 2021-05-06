@@ -8,18 +8,37 @@
 
 namespace App\Models;
 
+use App\Entities\Language;
 use CodeIgniter\Model;
 
 class LanguageModel extends Model
 {
+    /**
+     * @var string
+     */
     protected $table = 'languages';
+    /**
+     * @var string
+     */
     protected $primaryKey = 'id';
 
+    /**
+     * @var string[]
+     */
     protected $allowedFields = ['code', 'native_name'];
 
-    protected $returnType = \App\Entities\Language::class;
+    /**
+     * @var string
+     */
+    protected $returnType = Language::class;
+    /**
+     * @var bool
+     */
     protected $useSoftDeletes = false;
 
+    /**
+     * @var bool
+     */
     protected $useTimestamps = false;
 
     public function getLanguageOptions()
@@ -33,7 +52,7 @@ class LanguageModel extends Model
                     $result[$language->code] = $language->native_name;
                     return $result;
                 },
-                []
+                [],
             );
 
             cache()->save('language_options', $options, DECADE);

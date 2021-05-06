@@ -26,7 +26,6 @@ return [
     'platforms-podcasting' => 'Podcasts',
     'platforms-social' => 'Réseaux Sociaux',
     'platforms-funding' => 'Financement',
-    'platforms' => 'Plateformes du podcast',
     'podcast-analytics' => 'Vue d’ensemble',
     'podcast-analytics-webpages' => 'Visites des pages web',
     'podcast-analytics-locations' => 'Localisations',

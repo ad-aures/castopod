@@ -13,6 +13,7 @@
 
 namespace ActivityPub\Objects;
 
+use ActivityPub\Entities\Note;
 use ActivityPub\Core\ObjectType;
 
 class NoteObject extends ObjectType
@@ -35,10 +36,10 @@ class NoteObject extends ObjectType
     /**
      * @var array
      */
-    protected $replies;
+    protected $replies = [];
 
     /**
-     * @param \ActivityPub\Entities\Note $note
+     * @param Note $note
      */
     public function __construct($note)
     {

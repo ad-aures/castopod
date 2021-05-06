@@ -46,9 +46,9 @@
 
 <?= button(
     lang('Auth.register'),
-    null,
+    '',
     ['variant' => 'primary'],
-    ['type' => 'submit', 'class' => 'self-end']
+    ['type' => 'submit', 'class' => 'self-end'],
 ) ?>
 
 <?= form_close() ?>
@@ -60,9 +60,9 @@
 
 <p class="py-4 text-sm text-center">
     <?= lang(
-        'Auth.alreadyRegistered'
+        'Auth.alreadyRegistered',
     ) ?> <a class="underline hover:no-underline" href="<?= route_to(
-     'login'
+     'login',
  ) ?>"><?= lang('Auth.signIn') ?></a>
 </p>
 

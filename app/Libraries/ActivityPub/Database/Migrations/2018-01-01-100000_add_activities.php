@@ -15,7 +15,7 @@ use CodeIgniter\Database\Migration;
 
 class AddActivities extends Migration
 {
-    public function up()
+    public function up(): void
     {
         $this->forge->addField([
             'id' => [
@@ -83,7 +83,7 @@ class AddActivities extends Migration
         $this->forge->createTable('activitypub_activities');
     }
 
-    public function down()
+    public function down(): void
     {
         $this->forge->dropTable('activitypub_activities');
     }

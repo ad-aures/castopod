@@ -32,9 +32,9 @@
 
 <?= button(
     lang('Contributor.form.submit_add'),
-    null,
+    '',
     ['variant' => 'primary'],
-    ['type' => 'submit', 'class' => 'self-end']
+    ['type' => 'submit', 'class' => 'self-end'],
 ) ?>
 
 <?= form_close() ?>

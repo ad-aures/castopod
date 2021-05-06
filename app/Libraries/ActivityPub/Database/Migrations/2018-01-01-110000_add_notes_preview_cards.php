@@ -15,7 +15,7 @@ use CodeIgniter\Database\Migration;
 
 class AddNotesPreviewCards extends Migration
 {
-    public function up()
+    public function up(): void
     {
         $this->forge->addField([
             'note_id' => [
@@ -46,7 +46,7 @@ class AddNotesPreviewCards extends Migration
         $this->forge->createTable('activitypub_notes_preview_cards');
     }
 
-    public function down()
+    public function down(): void
     {
         $this->forge->dropTable('activitypub_notes_preview_cards');
     }

@@ -12,6 +12,9 @@ use CodeIgniter\Controller;
 
 class BlockController extends Controller
 {
+    /**
+     * @var string[]
+     */
     protected $helpers = ['activitypub'];
 
     public function attemptBlockActor()
@@ -32,7 +35,7 @@ class BlockController extends Controller
         if ($parts = split_handle($handle)) {
             extract($parts);
 
-            if (!($actor = get_or_create_actor($username, $domain))) {
+            if (($actor = get_or_create_actor($username, $domain)) === null) {
                 return redirect()
                     ->back()
                     ->withInput()

@@ -15,7 +15,7 @@ use CodeIgniter\Database\Migration;
 
 class AddAnalyticsPodcastsByCountry extends Migration
 {
-    public function up()
+    public function up(): void
     {
         $this->forge->addField([
             'podcast_id' => [
@@ -46,7 +46,7 @@ class AddAnalyticsPodcastsByCountry extends Migration
         $this->forge->createTable('analytics_podcasts_by_country');
     }
 
-    public function down()
+    public function down(): void
     {
         $this->forge->dropTable('analytics_podcasts_by_country');
     }

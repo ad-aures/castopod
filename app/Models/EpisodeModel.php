@@ -8,13 +8,55 @@
 
 namespace App\Models;
 
+use App\Entities\Episode;
 use CodeIgniter\Model;
 
 class EpisodeModel extends Model
 {
+    // TODO: remove
+    /**
+     * @var array<string, array<string, string>>
+     */
+    public static $themes = [
+        'light-transparent' => [
+            'style' =>
+                'background-color: #fff; background-image: linear-gradient(45deg, #ccc 12.5%, transparent 12.5%, transparent 50%, #ccc 50%, #ccc 62.5%, transparent 62.5%, transparent 100%); background-size: 5.66px 5.66px;',
+            'background' => 'transparent',
+            'text' => '#000',
+            'inverted' => '#fff',
+        ],
+        'light' => [
+            'style' => 'background-color: #fff;',
+            'background' => '#fff',
+            'text' => '#000',
+            'inverted' => '#fff',
+        ],
+        'dark-transparent' => [
+            'style' =>
+                'background-color: #001f1a; background-image: linear-gradient(45deg, #888 12.5%, transparent 12.5%, transparent 50%, #888 50%, #888 62.5%, transparent 62.5%, transparent 100%); background-size: 5.66px 5.66px;',
+            'background' => 'transparent',
+            'text' => '#fff',
+            'inverted' => '#000',
+        ],
+        'dark' => [
+            'style' => 'background-color: #001f1a;',
+            'background' => '#001f1a',
+            'text' => '#fff',
+            'inverted' => '#000',
+        ],
+    ];
+    /**
+     * @var string
+     */
     protected $table = 'episodes';
+    /**
+     * @var string
+     */
     protected $primaryKey = 'id';
 
+    /**
+     * @var string[]
+     */
     protected $allowedFields = [
         'id',
         'podcast_id',
@@ -51,11 +93,23 @@ class EpisodeModel extends Model
         'updated_by',
     ];
 
-    protected $returnType = \App\Entities\Episode::class;
+    /**
+     * @var string
+     */
+    protected $returnType = Episode::class;
 
+    /**
+     * @var bool
+     */
     protected $useSoftDeletes = true;
+    /**
+     * @var bool
+     */
     protected $useTimestamps = true;
 
+    /**
+     * @var array<string, string>
+     */
     protected $validationRules = [
         'podcast_id' => 'required',
         'title' => 'required',
@@ -71,53 +125,32 @@ class EpisodeModel extends Model
         'created_by' => 'required',
         'updated_by' => 'required',
     ];
-    protected $validationMessages = [];
-
-    protected $afterInsert = ['writeEnclosureMetadata', 'clearCache'];
-    // clear cache beforeUpdate because if slug changes, so will the episode link
-    protected $beforeUpdate = ['clearCache'];
-    protected $afterUpdate = ['writeEnclosureMetadata'];
-    protected $beforeDelete = ['clearCache'];
-
-    // TODO: remove
-    public static $themes = [
-        'light-transparent' => [
-            'style' =>
-                'background-color: #fff; background-image: linear-gradient(45deg, #ccc 12.5%, transparent 12.5%, transparent 50%, #ccc 50%, #ccc 62.5%, transparent 62.5%, transparent 100%); background-size: 5.66px 5.66px;',
-            'background' => 'transparent',
-            'text' => '#000',
-            'inverted' => '#fff',
-        ],
-        'light' => [
-            'style' => 'background-color: #fff;',
-            'background' => '#fff',
-            'text' => '#000',
-            'inverted' => '#fff',
-        ],
-        'dark-transparent' => [
-            'style' =>
-                'background-color: #001f1a; background-image: linear-gradient(45deg, #888 12.5%, transparent 12.5%, transparent 50%, #888 50%, #888 62.5%, transparent 62.5%, transparent 100%); background-size: 5.66px 5.66px;',
-            'background' => 'transparent',
-            'text' => '#fff',
-            'inverted' => '#000',
-        ],
-        'dark' => [
-            'style' => 'background-color: #001f1a;',
-            'background' => '#001f1a',
-            'text' => '#fff',
-            'inverted' => '#000',
-        ],
-    ];
 
     /**
-     *
-     * @param int|string $podcastId Podcast Id or name
-     * @param mixed $episodeSlug
-     * @return mixed
+     * @var string[]
      */
-    public function getEpisodeBySlug($podcastId, $episodeSlug)
-    {
-        $cacheName = "podcast#{$podcastId}_episode@{$episodeSlug}";
+    protected $afterInsert = ['writeEnclosureMetadata', 'clearCache'];
+    // clear cache beforeUpdate because if slug changes, so will the episode link
+    /**
+     * @var string[]
+     */
+    protected $beforeUpdate = ['clearCache'];
+
+    /**
+     * @var string[]
+     */
+    protected $afterUpdate = ['writeEnclosureMetadata'];
+
+    /**
+     * @var string[]
+     */
+    protected $beforeDelete = ['clearCache'];
+
+    public function getEpisodeBySlug(
+        int $podcastId,
+        string $episodeSlug
+    ): ?Episode {
+        $cacheName = "podcast#{$podcastId}_episode-{$episodeSlug}";
         if (!($found = cache($cacheName))) {
             $builder = $this->select('episodes.*')
                 ->where('slug', $episodeSlug)
@@ -179,9 +212,7 @@ class EpisodeModel extends Model
      * Gets all episodes for a podcast ordered according to podcast type
      * Filtered depending on year or season
      *
-     * @param int $podcastId
-     *
-     * @return \App\Entities\Episode[]
+     * @return Episode[]
      */
     public function getPodcastEpisodes(
         int $podcastId,
@@ -244,8 +275,6 @@ class EpisodeModel extends Model
      * Returns the timestamp difference in seconds between the next episode to publish and the current timestamp
      * Returns false if there's no episode to publish
      *
-     * @param int $podcastId
-     *
      * @return int|false seconds
      */
     public function getSecondsToNextUnpublishedEpisode(int $podcastId)
@@ -261,23 +290,13 @@ class EpisodeModel extends Model
             ->get()
             ->getResultArray();
 
-        return (int) $result ? $result[0]['timestamp_diff'] : false;
+        return (int) $result !== 0 ? $result[0]['timestamp_diff'] : false;
     }
 
-    protected function writeEnclosureMetadata(array $data)
-    {
-        helper('id3');
-
-        $episode = (new EpisodeModel())->find(
-            is_array($data['id']) ? $data['id'][0] : $data['id'],
-        );
-
-        write_audio_file_tags($episode);
-
-        return $data;
-    }
-
-    public function clearCache(array $data)
+    /**
+     * @return array<string, array<string|int, mixed>>
+     */
+    public function clearCache($data): array
     {
         $episode = (new EpisodeModel())->find(
             is_array($data['id']) ? $data['id'][0] : $data['id'],
@@ -294,7 +313,7 @@ class EpisodeModel extends Model
             "podcast#{$episode->podcast_id}_episode#{$episode->id}*",
         );
         cache()->delete(
-            "podcast#{$episode->podcast_id}_episode@{$episode->slug}",
+            "podcast#{$episode->podcast_id}_episode-{$episode->slug}",
         );
 
         cache()->deleteMatching(
@@ -321,6 +340,22 @@ class EpisodeModel extends Model
         cache()->delete("podcast#{$episode->podcast_id}_defaultQuery");
         cache()->delete("podcast#{$episode->podcast_id}_years");
         cache()->delete("podcast#{$episode->podcast_id}_seasons");
+
+        return $data;
+    }
+
+    /**
+     * @return array<string, array<string|int, mixed>>
+     */
+    protected function writeEnclosureMetadata(array $data): array
+    {
+        helper('id3');
+
+        $episode = (new EpisodeModel())->find(
+            is_array($data['id']) ? $data['id'][0] : $data['id'],
+        );
+
+        write_audio_file_tags($episode);
 
         return $data;
     }

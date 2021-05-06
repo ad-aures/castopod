@@ -21,10 +21,6 @@
     $podcast->id,
     $episode->id,
     $episode->publication_status,
-    lang('Episode.publish'),
-    route_to('episode-publish', $podcast->id, $episode->id),
-    ['variant' => 'accent', 'iconLeft' => 'upload'],
-    ['class' => 'mr-2'],
 ) ?>
 <?= $this->endSection() ?>
 
@@ -97,11 +93,11 @@
         [
             [
                 'header' => 'Play',
-                'cell' => function ($soundbite) {
+                'cell' => function ($soundbite): string {
                     return icon_button(
                         'play',
                         lang('Episode.soundbites_form.play'),
-                        null,
+                        '',
                         ['variant' => 'primary'],
                         [
                             'class' => 'mb-1 mr-1',
@@ -115,13 +111,13 @@
             ],
             [
                 'header' => lang('Episode.soundbites_form.start_time'),
-                'cell' => function ($soundbite) {
+                'cell' => function ($soundbite): string {
                     return format_duration($soundbite->start_time);
                 },
             ],
             [
                 'header' => lang('Episode.soundbites_form.duration'),
-                'cell' => function ($soundbite) {
+                'cell' => function ($soundbite): string {
                     return format_duration($soundbite->duration);
                 },
             ],

@@ -31,9 +31,9 @@
 
 <?= button(
     lang('Auth.loginAction'),
-    null,
+    '',
     ['variant' => 'primary'],
-    ['type' => 'submit', 'class' => 'self-end']
+    ['type' => 'submit', 'class' => 'self-end'],
 ) ?>
 
 <?= form_close() ?>
@@ -46,11 +46,11 @@
 <div class="flex flex-col items-center py-4 text-sm text-center">
     <?php if ($config->allowRegistration): ?>
         <a class="underline hover:no-underline" href="<?= route_to(
-            'register'
+            'register',
         ) ?>"><?= lang('Auth.needAnAccount') ?></a>
     <?php endif; ?>
     <a class="underline hover:no-underline" href="<?= route_to(
-        'forgot'
+        'forgot',
     ) ?>"><?= lang('Auth.forgotYourPassword') ?></a>
 </div>
 

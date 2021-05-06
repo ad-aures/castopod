@@ -54,7 +54,7 @@ $routes->addPlaceholder(
 $routes->get('/', 'Home::index', ['as' => 'home']);
 
 // Install Wizard route
-$routes->group(config('App')->installGateway, function ($routes) {
+$routes->group(config('App')->installGateway, function ($routes): void {
     $routes->get('/', 'Install', ['as' => 'install']);
     $routes->post('instance-config', 'Install::attemptInstanceConfig', [
         'as' => 'instance-config',
@@ -76,12 +76,12 @@ $routes->get('.well-known/platforms', 'Platform');
 $routes->group(
     config('App')->adminGateway,
     ['namespace' => 'App\Controllers\Admin'],
-    function ($routes) {
+    function ($routes): void {
         $routes->get('/', 'Home', [
             'as' => 'admin',
         ]);
 
-        $routes->group('persons', function ($routes) {
+        $routes->group('persons', function ($routes): void {
             $routes->get('/', 'Person', [
                 'as' => 'person-list',
                 'filter' => 'permission:person-list',
@@ -93,7 +93,7 @@ $routes->group(
             $routes->post('new', 'Person::attemptCreate', [
                 'filter' => 'permission:person-create',
             ]);
-            $routes->group('(:num)', function ($routes) {
+            $routes->group('(:num)', function ($routes): void {
                 $routes->get('/', 'Person::view/$1', [
                     'as' => 'person-view',
                     'filter' => 'permission:person-view',
@@ -113,7 +113,7 @@ $routes->group(
         });
 
         // Podcasts
-        $routes->group('podcasts', function ($routes) {
+        $routes->group('podcasts', function ($routes): void {
             $routes->get('/', 'Podcast::list', [
                 'as' => 'podcast-list',
             ]);
@@ -134,7 +134,7 @@ $routes->group(
 
             // Podcast
             // Use ids in admin area to help permission and group lookups
-            $routes->group('(:num)', function ($routes) {
+            $routes->group('(:num)', function ($routes): void {
                 $routes->get('/', 'Podcast::view/$1', [
                     'as' => 'podcast-view',
                     'filter' => 'permission:podcasts-view,podcast-view',
@@ -151,7 +151,7 @@ $routes->group(
                     'filter' => 'permission:podcasts-delete',
                 ]);
 
-                $routes->group('persons', function ($routes) {
+                $routes->group('persons', function ($routes): void {
                     $routes->get('/', 'PodcastPerson/$1', [
                         'as' => 'podcast-person-manage',
                         'filter' => 'permission:podcast-edit',
@@ -170,7 +170,7 @@ $routes->group(
                     );
                 });
 
-                $routes->group('analytics', function ($routes) {
+                $routes->group('analytics', function ($routes): void {
                     $routes->get('/', 'Podcast::viewAnalytics/$1', [
                         'as' => 'podcast-analytics',
                         'filter' => 'permission:podcasts-view,podcast-view',
@@ -226,7 +226,7 @@ $routes->group(
                 });
 
                 // Podcast episodes
-                $routes->group('episodes', function ($routes) {
+                $routes->group('episodes', function ($routes): void {
                     $routes->get('/', 'Episode::list/$1', [
                         'as' => 'episode-list',
                         'filter' =>
@@ -241,7 +241,7 @@ $routes->group(
                     ]);
 
                     // Episode
-                    $routes->group('(:num)', function ($routes) {
+                    $routes->group('(:num)', function ($routes): void {
                         $routes->get('/', 'Episode::view/$1/$2', [
                             'as' => 'episode-view',
                             'filter' =>
@@ -349,7 +349,7 @@ $routes->group(
                             ],
                         );
 
-                        $routes->group('persons', function ($routes) {
+                        $routes->group('persons', function ($routes): void {
                             $routes->get('/', 'EpisodePerson/$1/$2', [
                                 'as' => 'episode-person-manage',
                                 'filter' => 'permission:podcast_episodes-edit',
@@ -376,7 +376,7 @@ $routes->group(
                 });
 
                 // Podcast contributors
-                $routes->group('contributors', function ($routes) {
+                $routes->group('contributors', function ($routes): void {
                     $routes->get('/', 'Contributor::list/$1', [
                         'as' => 'contributor-list',
                         'filter' =>
@@ -391,7 +391,7 @@ $routes->group(
                     ]);
 
                     // Contributor
-                    $routes->group('(:num)', function ($routes) {
+                    $routes->group('(:num)', function ($routes): void {
                         $routes->get('/', 'Contributor::view/$1/$2', [
                             'as' => 'contributor-view',
                             'filter' =>
@@ -418,7 +418,7 @@ $routes->group(
                     });
                 });
 
-                $routes->group('platforms', function ($routes) {
+                $routes->group('platforms', function ($routes): void {
                     $routes->get(
                         '/',
                         'PodcastPlatform::platforms/$1/podcasting',
@@ -464,7 +464,7 @@ $routes->group(
         });
 
         // Instance wide Fediverse config
-        $routes->group('fediverse', function ($routes) {
+        $routes->group('fediverse', function ($routes): void {
             $routes->get('/', 'Fediverse::dashboard', [
                 'as' => 'fediverse-dashboard',
             ]);
@@ -479,7 +479,7 @@ $routes->group(
         });
 
         // Pages
-        $routes->group('pages', function ($routes) {
+        $routes->group('pages', function ($routes): void {
             $routes->get('/', 'Page::list', ['as' => 'page-list']);
             $routes->get('new', 'Page::create', [
                 'as' => 'page-create',
@@ -489,7 +489,7 @@ $routes->group(
                 'filter' => 'permission:pages-manage',
             ]);
 
-            $routes->group('(:num)', function ($routes) {
+            $routes->group('(:num)', function ($routes): void {
                 $routes->get('/', 'Page::view/$1', ['as' => 'page-view']);
                 $routes->get('edit', 'Page::edit/$1', [
                     'as' => 'page-edit',
@@ -507,7 +507,7 @@ $routes->group(
         });
 
         // Users
-        $routes->group('users', function ($routes) {
+        $routes->group('users', function ($routes): void {
             $routes->get('/', 'User::list', [
                 'as' => 'user-list',
                 'filter' => 'permission:users-list',
@@ -521,7 +521,7 @@ $routes->group(
             ]);
 
             // User
-            $routes->group('(:num)', function ($routes) {
+            $routes->group('(:num)', function ($routes): void {
                 $routes->get('/', 'User::view/$1', [
                     'as' => 'user-view',
                     'filter' => 'permission:users-view',
@@ -553,7 +553,7 @@ $routes->group(
         });
 
         // My account
-        $routes->group('my-account', function ($routes) {
+        $routes->group('my-account', function ($routes): void {
             $routes->get('/', 'MyAccount', [
                 'as' => 'my-account',
             ]);
@@ -568,7 +568,7 @@ $routes->group(
 /**
  * Overwriting Myth:auth routes file
  */
-$routes->group(config('App')->authGateway, function ($routes) {
+$routes->group(config('App')->authGateway, function ($routes): void {
     // Login/out
     $routes->get('login', 'Auth::login', ['as' => 'login']);
     $routes->post('login', 'Auth::attemptLogin');
@@ -600,7 +600,7 @@ $routes->group(config('App')->authGateway, function ($routes) {
 });
 
 // Podcast's Public routes
-$routes->group('@(:podcastName)', function ($routes) {
+$routes->group('@(:podcastName)', function ($routes): void {
     $routes->get('/', 'Podcast::activity/$1', [
         'as' => 'podcast-activity',
     ]);
@@ -621,7 +621,7 @@ $routes->group('@(:podcastName)', function ($routes) {
     $routes->get('episodes', 'Podcast::episodes/$1', [
         'as' => 'podcast-episodes',
     ]);
-    $routes->group('episodes/(:slug)', function ($routes) {
+    $routes->group('episodes/(:slug)', function ($routes): void {
         $routes->get('/', 'Episode/$1/$2', [
             'as' => 'episode',
         ]);
@@ -631,7 +631,7 @@ $routes->group('@(:podcastName)', function ($routes) {
         $routes->get('oembed.xml', 'Episode::oembedXML/$1/$2', [
             'as' => 'episode-oembed-xml',
         ]);
-        $routes->group('embeddable-player', function ($routes) {
+        $routes->group('embeddable-player', function ($routes): void {
             $routes->get('/', 'Episode::embeddablePlayer/$1/$2', [
                 'as' => 'embeddable-player',
             ]);
@@ -661,13 +661,13 @@ $routes->post('interact-as-actor', 'Auth::attemptInteractAsActor', [
 /**
  * Overwriting ActivityPub routes file
  */
-$routes->group('@(:podcastName)', function ($routes) {
+$routes->group('@(:podcastName)', function ($routes): void {
     $routes->post('notes/new', 'Note::attemptCreate/$1', [
         'as' => 'note-attempt-create',
         'filter' => 'permission:podcast-manage_publications',
     ]);
     // Note
-    $routes->group('notes/(:uuid)', function ($routes) {
+    $routes->group('notes/(:uuid)', function ($routes): void {
         $routes->get('/', 'Note/$1/$2', [
             'as' => 'note',
             'alternate-content' => [

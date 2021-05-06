@@ -8,10 +8,13 @@
 
 namespace ActivityPub\Entities;
 
-use CodeIgniter\Entity;
+use CodeIgniter\Entity\Entity;
 
 class PreviewCard extends Entity
 {
+    /**
+     * @var array<string, string>
+     */
     protected $casts = [
         'id' => 'integer',
         'note_id' => 'string',

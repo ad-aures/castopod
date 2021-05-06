@@ -30,16 +30,12 @@ class BaseController extends Controller
 
     /**
      * Constructor.
-     *
-     * @param RequestInterface  $request
-     * @param ResponseInterface $response
-     * @param LoggerInterface   $logger
      */
     public function initController(
         RequestInterface $request,
         ResponseInterface $response,
         LoggerInterface $logger
-    ) {
+    ): void {
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
 

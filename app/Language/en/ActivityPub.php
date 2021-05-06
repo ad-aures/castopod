@@ -17,17 +17,17 @@ return [
         'submit' => 'Proceed to follow',
     ],
     'favourite' => [
-        'title' => 'Favourite {actorDisplayName}\'s note',
+        'title' => "Favourite {actorDisplayName}'s note",
         'subtitle' => 'You are going to favourite:',
         'submit' => 'Proceed to favourite',
     ],
     'reblog' => [
-        'title' => 'Share {actorDisplayName}\'s note',
+        'title' => "Share {actorDisplayName}'s note",
         'subtitle' => 'You are going to share:',
         'submit' => 'Proceed to share',
     ],
     'reply' => [
-        'title' => 'Reply to {actorDisplayName}\'s note',
+        'title' => "Reply to {actorDisplayName}'s note",
         'subtitle' => 'You are going to reply to:',
         'submit' => 'Proceed to reply',
     ],

@@ -12,12 +12,20 @@ use Exception;
 
 class WebFinger
 {
+    /**
+     * @var string
+     */
     const RESOURCE_PATTERN = '/^acct:(?P<username>([\w_]+))@(?P<domain>([\w\-\.]+[\w]+)(:[\d]+)?)$/x';
 
     /**
      * @var string
      */
     protected $username;
+
+    /**
+     * @var string
+     */
+    protected $domain;
 
     /**
      * @var string
@@ -37,12 +45,12 @@ class WebFinger
     /**
      * @var array
      */
-    protected $aliases;
+    protected $aliases = [];
 
     /**
-     * @var string
+     * @var array
      */
-    protected $links;
+    protected $links = [];
 
     /**
      * @param string $resource
@@ -95,10 +103,22 @@ class WebFinger
     }
 
     /**
+     * Get WebFinger response as an array
+     *
+     * @return array<string, array|string>
+     */
+    public function toArray(): array
+    {
+        return [
+            'subject' => $this->subject,
+            'aliases' => $this->aliases,
+            'links' => $this->links,
+        ];
+    }
+    /**
      * Split resource into its parts (username, domain)
      *
-     * @param string $resource
-     * @return bool|array
+     * @return bool|mixed
      */
     private function splitResource(string $resource)
     {
@@ -108,19 +128,5 @@ class WebFinger
         }
 
         return $matches;
-    }
-
-    /**
-     * Get WebFinger response as an array
-     *
-     * @return array
-     */
-    public function toArray()
-    {
-        return [
-            'subject' => $this->subject,
-            'aliases' => $this->aliases,
-            'links' => $this->links,
-        ];
     }
 }

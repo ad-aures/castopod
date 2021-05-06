@@ -108,7 +108,7 @@
                 'class' => 'form-radio text-pine-700',
             ],
             'title',
-            old('slug_field') ? old('slug_field') == 'title' : false,
+            old('slug_field') && old('slug_field') == 'title',
         ) ?>
         <span class="ml-2"><?= lang('PodcastImport.slug_field.title') ?></span>
     </label>
@@ -138,9 +138,7 @@
                 'class' => 'form-radio text-pine-600',
             ],
             'summary',
-            old('description_field')
-                ? old('description_field') == 'summary'
-                : false,
+            old('description_field') && old('description_field') == 'summary',
         ) ?>
         <span class="ml-2">&lt;itunes:summary&gt;</span>
     </label>
@@ -152,9 +150,8 @@
                 'class' => 'form-radio text-pine-700',
             ],
             'subtitle_summary',
-            old('description_field')
-                ? old('description_field') == 'subtitle_summary'
-                : false,
+            old('description_field') &&
+                old('description_field') == 'subtitle_summary',
         ) ?>
         <span class="ml-2">&lt;itunes:subtitle&gt; + &lt;itunes:summary&gt;</span>
     </label>
@@ -166,9 +163,7 @@
                 'class' => 'form-radio text-pine-700',
             ],
             'content',
-            old('description_field')
-                ? old('description_field') == 'content'
-                : false,
+            old('description_field') && old('description_field') == 'content',
         ) ?>
         <span class="ml-2">&lt;content:encoded&gt;</span>
     </label>
@@ -221,7 +216,7 @@
 
 <?= button(
     lang('PodcastImport.submit'),
-    null,
+    '',
     ['variant' => 'primary'],
     ['type' => 'submit', 'class' => 'self-end'],
 ) ?>

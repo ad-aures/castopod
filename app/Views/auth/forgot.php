@@ -24,9 +24,9 @@
 
 <?= button(
     lang('Auth.sendInstructions'),
-    null,
+    '',
     ['variant' => 'primary'],
-    ['type' => 'submit', 'class' => 'self-end']
+    ['type' => 'submit', 'class' => 'self-end'],
 ) ?>
 
 <?= form_close() ?>

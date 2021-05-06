@@ -8,13 +8,24 @@
 
 namespace App\Models;
 
+use CodeIgniter\Database\BaseResult;
+use App\Entities\PodcastPerson;
 use CodeIgniter\Model;
 
 class PodcastPersonModel extends Model
 {
+    /**
+     * @var string
+     */
     protected $table = 'podcasts_persons';
+    /**
+     * @var string
+     */
     protected $primaryKey = 'id';
 
+    /**
+     * @var string[]
+     */
     protected $allowedFields = [
         'id',
         'podcast_id',
@@ -23,18 +34,36 @@ class PodcastPersonModel extends Model
         'person_role',
     ];
 
-    protected $returnType = \App\Entities\PodcastPerson::class;
+    /**
+     * @var string
+     */
+    protected $returnType = PodcastPerson::class;
+    /**
+     * @var bool
+     */
     protected $useSoftDeletes = false;
 
+    /**
+     * @var bool
+     */
     protected $useTimestamps = false;
 
+    /**
+     * @var array<string, string>
+     */
     protected $validationRules = [
         'podcast_id' => 'required',
         'person_id' => 'required',
     ];
-    protected $validationMessages = [];
 
+    /**
+     * @var string[]
+     */
     protected $afterInsert = ['clearCache'];
+
+    /**
+     * @var string[]
+     */
     protected $beforeDelete = ['clearCache'];
 
     public function getPodcastPersons($podcastId)
@@ -56,19 +85,18 @@ class PodcastPersonModel extends Model
     /**
      * Add persons to podcast
      *
-     * @param int $podcastId
-     * @param array $persons
-     * @param array $groups_roles
-     *
-     * @return integer Number of rows inserted or FALSE on failure
+     * @return bool|int Number of rows inserted or FALSE on failure
      */
-    public function addPodcastPersons($podcastId, $persons, $groups_roles)
-    {
+    public function addPodcastPersons(
+        int $podcastId,
+        array $persons,
+        array $groups_roles
+    ) {
         if (!empty($persons)) {
             $this->clearCache(['podcast_id' => $podcastId]);
             $data = [];
             foreach ($persons as $person) {
-                if ($groups_roles) {
+                if ($groups_roles !== []) {
                     foreach ($groups_roles as $group_role) {
                         $group_role = explode(',', $group_role);
                         $data[] = [
@@ -90,6 +118,9 @@ class PodcastPersonModel extends Model
         return 0;
     }
 
+    /**
+     * @return bool|BaseResult
+     */
     public function removePodcastPersons($podcastId, $podcastPersonId)
     {
         return $this->delete([
@@ -98,9 +129,11 @@ class PodcastPersonModel extends Model
         ]);
     }
 
-    protected function clearCache(array $data)
+    /**
+     * @return array<string, array<string|int, mixed>>
+     */
+    protected function clearCache(array $data): array
     {
-        $podcastId = null;
         if (isset($data['podcast_id'])) {
             $podcastId = $data['podcast_id'];
         } else {

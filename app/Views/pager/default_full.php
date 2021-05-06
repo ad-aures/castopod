@@ -1,31 +1,32 @@
 <?php
 
+use CodeIgniter\Pager\PagerRenderer;
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
  *
- * @var \CodeIgniter\Pager\PagerRenderer $pager
+ * @var PagerRenderer $pager
  */
-
-$pager->setSurroundCount(2); ?>
+$pager->setSurroundCount(2);
+?>
 
 <nav aria-label="<?= lang('Pager.pageNavigation') ?>">
     <ul class="flex justify-center">
         <?php if ($pager->hasPreviousPage()): ?>
             <li>
                 <a href="<?= $pager->getFirst() ?>" aria-label="<?= lang(
-    'Pager.first'
+    'Pager.first',
 ) ?>"  class="block px-3 py-2 text-gray-700 hover:bg-gray-200 hover:text-black">
                     <span aria-hidden="true"><?= lang('Pager.first') ?></span>
                 </a>
             </li>
             <li>
                 <a href="<?= $pager->getPreviousPage() ?>" aria-label="<?= lang(
-    'Pager.previous'
+    'Pager.previous',
 ) ?>" class="block px-3 py-2 text-gray-700 hover:bg-gray-200 hover:text-black">
                     <span aria-hidden="true"><?= lang(
-                        'Pager.previous'
+                        'Pager.previous',
                     ) ?></span>
                 </a>
             </li>
@@ -50,14 +51,14 @@ $pager->setSurroundCount(2); ?>
         <?php if ($pager->hasNextPage()): ?>
             <li>
                 <a href="<?= $pager->getNextPage() ?>" aria-label="<?= lang(
-    'Pager.next'
+    'Pager.next',
 ) ?>" class="block px-3 py-2 text-gray-700 hover:bg-gray-200 hover:text-black">
                     <span aria-hidden="true"><?= lang('Pager.next') ?></span>
                 </a>
             </li>
             <li>
                 <a href="<?= $pager->getLast() ?>" aria-label="<?= lang(
-    'Pager.last'
+    'Pager.last',
 ) ?>" class="block px-3 py-2 text-gray-700 hover:bg-gray-200 hover:text-black">
                     <span aria-hidden="true"><?= lang('Pager.last') ?></span>
                 </a>

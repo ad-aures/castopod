@@ -8,16 +8,19 @@
 
 namespace App\Entities;
 
-use CodeIgniter\Entity;
+use CodeIgniter\Entity\Entity;
 use App\Models\PersonModel;
 
 class EpisodePerson extends Entity
 {
     /**
-     * @var \App\Entities\Person
+     * @var Person
      */
     protected $person;
 
+    /**
+     * @var array<string, string>
+     */
     protected $casts = [
         'id' => 'integer',
         'podcast_id' => 'integer',
@@ -30,7 +33,7 @@ class EpisodePerson extends Entity
     public function getPerson()
     {
         return (new PersonModel())->getPersonById(
-            $this->attributes['person_id']
+            $this->attributes['person_id'],
         );
     }
 }

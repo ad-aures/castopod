@@ -8,6 +8,13 @@
 
 namespace App\Controllers\Admin;
 
+use App\Entities\Podcast;
+use CodeIgniter\Exceptions\PageNotFoundException;
+use ErrorException;
+use Config\Database;
+use Podlibre\PodcastNamespace\ReversedTaxonomy;
+use App\Entities\PodcastPerson;
+use App\Entities\Episode;
 use App\Models\CategoryModel;
 use App\Models\LanguageModel;
 use App\Models\PodcastModel;
@@ -22,23 +29,21 @@ use League\HTMLToMarkdown\HtmlConverter;
 class PodcastImport extends BaseController
 {
     /**
-     * @var \App\Entities\Podcast|null
+     * @var Podcast|null
      */
     protected $podcast;
 
     public function _remap($method, ...$params)
     {
-        if (count($params) > 0) {
-            if (
-                !($this->podcast = (new PodcastModel())->getPodcastById(
-                    $params[0],
-                ))
-            ) {
-                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-            }
+        if (count($params) === 0) {
+            return $this->$method();
         }
 
-        return $this->$method();
+        if ($this->podcast = (new PodcastModel())->getPodcastById($params[0])) {
+            return $this->$method();
+        }
+
+        throw PageNotFoundException::forPageNotFound();
     }
 
     public function index()
@@ -80,12 +85,12 @@ class PodcastImport extends BaseController
             $feed = simplexml_load_file(
                 $this->request->getPost('imported_feed_url'),
             );
-        } catch (\ErrorException $ex) {
+        } catch (ErrorException $errorException) {
             return redirect()
                 ->back()
                 ->withInput()
                 ->with('errors', [
-                    $ex->getMessage() .
+                    $errorException->getMessage() .
                     ': <a href="' .
                     $this->request->getPost('imported_feed_url') .
                     '" rel="noreferrer noopener" target="_blank">' .
@@ -115,7 +120,7 @@ class PodcastImport extends BaseController
         $channelDescriptionHtml = (string) $feed->channel[0]->description;
 
         try {
-            $podcast = new \App\Entities\Podcast([
+            $podcast = new Podcast([
                 'name' => $this->request->getPost('name'),
                 'imported_feed_url' => $this->request->getPost(
                     'imported_feed_url',
@@ -157,9 +162,9 @@ class PodcastImport extends BaseController
                 'is_completed' => empty($nsItunes->complete)
                     ? false
                     : $nsItunes->complete === 'yes',
-                'location_name' => !$nsPodcast->location
-                    ? null
-                    : (string) $nsPodcast->location,
+                'location_name' => $nsPodcast->location
+                    ? (string) $nsPodcast->location
+                    : null,
                 'location_geo' =>
                     !$nsPodcast->location ||
                     empty($nsPodcast->location->attributes()['geo'])
@@ -173,7 +178,7 @@ class PodcastImport extends BaseController
                 'created_by' => user()->id,
                 'updated_by' => user()->id,
             ]);
-        } catch (\ErrorException $ex) {
+        } catch (ErrorException $ex) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -188,7 +193,7 @@ class PodcastImport extends BaseController
         }
 
         $podcastModel = new PodcastModel();
-        $db = \Config\Database::connect();
+        $db = Database::connect();
 
         $db->transStart();
 
@@ -221,13 +226,13 @@ class PodcastImport extends BaseController
                 $platformLabel = $platform->attributes()['platform'];
                 $platformSlug = slugify($platformLabel);
                 if ($platformModel->getPlatform($platformSlug)) {
-                    array_push($podcastsPlatformsData, [
+                    $podcastsPlatformsData[] = [
                         'platform_slug' => $platformSlug,
                         'podcast_id' => $newPodcastId,
                         'link_url' => $platform->attributes()['url'],
                         'link_content' => $platform->attributes()['id'],
                         'is_visible' => false,
-                    ]);
+                    ];
                 }
             }
         }
@@ -243,24 +248,22 @@ class PodcastImport extends BaseController
             $newPersonId = null;
             if ($newPerson = $personModel->getPerson($podcastPerson)) {
                 $newPersonId = $newPerson->id;
-            } else {
-                if (
-                    !($newPersonId = $personModel->createPerson(
-                        $podcastPerson,
-                        $podcastPerson->attributes()['href'],
-                        $podcastPerson->attributes()['img'],
-                    ))
-                ) {
-                    return redirect()
-                        ->back()
-                        ->withInput()
-                        ->with('errors', $personModel->errors());
-                }
+            } elseif (
+                !($newPersonId = $personModel->createPerson(
+                    $podcastPerson,
+                    $podcastPerson->attributes()['href'],
+                    $podcastPerson->attributes()['img'],
+                ))
+            ) {
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->with('errors', $personModel->errors());
             }
 
             $personGroup = empty($podcastPerson->attributes()['group'])
                 ? ['slug' => '']
-                : \Podlibre\PodcastNamespace\ReversedTaxonomy::$taxonomy[
+                : ReversedTaxonomy::$taxonomy[
                     (string) $podcastPerson->attributes()['group']
                 ];
             $personRole =
@@ -270,7 +273,7 @@ class PodcastImport extends BaseController
                     : $personGroup['roles'][
                         strval($podcastPerson->attributes()['role'])
                     ];
-            $newPodcastPerson = new \App\Entities\PodcastPerson([
+            $newPodcastPerson = new PodcastPerson([
                 'podcast_id' => $newPodcastId,
                 'person_id' => $newPersonId,
                 'person_group' => $personGroup['slug'],
@@ -297,7 +300,7 @@ class PodcastImport extends BaseController
 
         //////////////////////////////////////////////////////////////////
         // For each Episode:
-        for ($itemNumber = 1; $itemNumber <= $lastItem; $itemNumber++) {
+        for ($itemNumber = 1; $itemNumber <= $lastItem; ++$itemNumber) {
             $item = $feed->channel[0]->item[$numberItems - $itemNumber];
 
             $nsItunes = $item->children(
@@ -318,7 +321,7 @@ class PodcastImport extends BaseController
             if (in_array($slug, $slugs)) {
                 $slugNumber = 2;
                 while (in_array($slug . '-' . $slugNumber, $slugs)) {
-                    $slugNumber++;
+                    ++$slugNumber;
                 }
                 $slug = $slug . '-' . $slugNumber;
             }
@@ -340,7 +343,7 @@ class PodcastImport extends BaseController
                     $itemDescriptionHtml = $item->description;
             }
 
-            $newEpisode = new \App\Entities\Episode([
+            $newEpisode = new Episode([
                 'podcast_id' => $newPodcastId,
                 'guid' => empty($item->guid) ? null : $item->guid,
                 'title' => $item->title,
@@ -366,15 +369,15 @@ class PodcastImport extends BaseController
                 'number' =>
                     $this->request->getPost('force_renumber') === 'yes'
                         ? $itemNumber
-                        : (!empty($nsItunes->episode)
-                            ? $nsItunes->episode
-                            : null),
+                        : (empty($nsItunes->episode)
+                            ? null
+                            : $nsItunes->episode),
                 'season_number' => empty(
                     $this->request->getPost('season_number')
                 )
-                    ? (!empty($nsItunes->season)
-                        ? $nsItunes->season
-                        : null)
+                    ? (empty($nsItunes->season)
+                        ? null
+                        : $nsItunes->season)
                     : $this->request->getPost('season_number'),
                 'type' => empty($nsItunes->episodeType)
                     ? 'full'
@@ -382,9 +385,9 @@ class PodcastImport extends BaseController
                 'is_blocked' => empty($nsItunes->block)
                     ? false
                     : $nsItunes->block === 'yes',
-                'location_name' => !$nsPodcast->location
-                    ? null
-                    : $nsPodcast->location,
+                'location_name' => $nsPodcast->location
+                    ? $nsPodcast->location
+                    : null,
                 'location_geo' =>
                     !$nsPodcast->location ||
                     empty($nsPodcast->location->attributes()['geo'])
@@ -415,24 +418,22 @@ class PodcastImport extends BaseController
                 $newPersonId = null;
                 if ($newPerson = $personModel->getPerson($episodePerson)) {
                     $newPersonId = $newPerson->id;
-                } else {
-                    if (
-                        !($newPersonId = $personModel->createPerson(
-                            $episodePerson,
-                            $episodePerson->attributes()['href'],
-                            $episodePerson->attributes()['img'],
-                        ))
-                    ) {
-                        return redirect()
-                            ->back()
-                            ->withInput()
-                            ->with('errors', $personModel->errors());
-                    }
+                } elseif (
+                    !($newPersonId = $personModel->createPerson(
+                        $episodePerson,
+                        $episodePerson->attributes()['href'],
+                        $episodePerson->attributes()['img'],
+                    ))
+                ) {
+                    return redirect()
+                        ->back()
+                        ->withInput()
+                        ->with('errors', $personModel->errors());
                 }
 
                 $personGroup = empty($episodePerson->attributes()['group'])
                     ? ['slug' => '']
-                    : \Podlibre\PodcastNamespace\ReversedTaxonomy::$taxonomy[
+                    : ReversedTaxonomy::$taxonomy[
                         strval($episodePerson->attributes()['group'])
                     ];
                 $personRole =
@@ -442,7 +443,7 @@ class PodcastImport extends BaseController
                         : $personGroup['roles'][
                             strval($episodePerson->attributes()['role'])
                         ];
-                $newEpisodePerson = new \App\Entities\PodcastPerson([
+                $newEpisodePerson = new PodcastPerson([
                     'podcast_id' => $newPodcastId,
                     'episode_id' => $newEpisodeId,
                     'person_id' => $newPersonId,

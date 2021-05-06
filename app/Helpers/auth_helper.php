@@ -6,16 +6,15 @@
  * @link       https://castopod.org/
  */
 
+use ActivityPub\Entities\Actor;
 use CodeIgniter\Database\Exceptions\DataException;
 use Config\Services;
 
 if (!function_exists('set_interact_as_actor')) {
     /**
      * Sets the actor id of which the user is acting as
-     *
-     * @return void
      */
-    function set_interact_as_actor($actorId)
+    function set_interact_as_actor($actorId): void
     {
         $authenticate = Services::authentication();
         $authenticate->check();
@@ -28,10 +27,8 @@ if (!function_exists('set_interact_as_actor')) {
 if (!function_exists('remove_interact_as_actor')) {
     /**
      * Removes the actor id of which the user is acting as
-     *
-     * @return void
      */
-    function remove_interact_as_actor()
+    function remove_interact_as_actor(): void
     {
         $session = session();
         $session->remove('interact_as_actor_id');
@@ -41,10 +38,8 @@ if (!function_exists('remove_interact_as_actor')) {
 if (!function_exists('interact_as_actor_id')) {
     /**
      * Sets the podcast id of which the user is acting as
-     *
-     * @return integer
      */
-    function interact_as_actor_id()
+    function interact_as_actor_id(): int
     {
         $authenticate = Services::authentication();
         $authenticate->check();
@@ -58,7 +53,7 @@ if (!function_exists('interact_as_actor')) {
     /**
      * Get the actor the user is currently interacting as
      *
-     * @return \ActivityPub\Entities\Actor|false
+     * @return Actor|false
      */
     function interact_as_actor()
     {
@@ -78,11 +73,10 @@ if (!function_exists('interact_as_actor')) {
 
 if (!function_exists('can_user_interact')) {
     /**
-     * @return bool
      * @throws DataException
      */
-    function can_user_interact()
+    function can_user_interact(): bool
     {
-        return interact_as_actor() ? true : false;
+        return (bool) interact_as_actor();
     }
 }

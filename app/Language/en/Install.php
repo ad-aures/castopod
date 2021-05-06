@@ -31,7 +31,7 @@ return [
         'db_password' => 'Database password',
         'db_prefix' => 'Database prefix',
         'db_prefix_hint' =>
-            'The prefix of the Castopod table names, leave as is if you don\'t know what it means.',
+            "The prefix of the Castopod table names, leave as is if you don't know what it means.",
         'cache_config' => 'Cache configuration',
         'cache_config_hint' =>
             'Choose your preferred cache handler. Leave it as the default value if you have no clue what it means.',
@@ -54,6 +54,6 @@ return [
         'databaseConnectError' =>
             'Castopod could not connect to your database. Edit your database configuration and try again.',
         'writeError' =>
-            'Couldn\'t create/write the `.env` file. You must create it manually by following the `.env.example` file template in the Castopod package.',
+            "Couldn't create/write the `.env` file. You must create it manually by following the `.env.example` file template in the Castopod package.",
     ],
 ];

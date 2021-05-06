@@ -21,10 +21,10 @@ $routes->addPlaceholder(
 
 $routes->group('', ['namespace' => 'Analytics\Controllers'], function (
     $routes
-) {
+): void {
     $routes->group(config('Analytics')->gateway . '/(:num)/(:class)', function (
         $routes
-    ) {
+    ): void {
         $routes->get('/', 'AnalyticsController::getData/$1/$2', [
             'as' => 'analytics-full-data',
             'filter' => config('Analytics')->routeFilters[

@@ -10,25 +10,34 @@
 
 namespace Analytics\Models;
 
+use Analytics\Entities\AnalyticsPodcastsByCountry;
 use CodeIgniter\Model;
 
 class AnalyticsPodcastByCountryModel extends Model
 {
+    /**
+     * @var string
+     */
     protected $table = 'analytics_podcasts_by_country';
 
-    protected $allowedFields = [];
-
-    protected $returnType = \Analytics\Entities\AnalyticsPodcastsByCountry::class;
+    /**
+     * @var string
+     */
+    protected $returnType = AnalyticsPodcastsByCountry::class;
+    /**
+     * @var bool
+     */
     protected $useSoftDeletes = false;
 
+    /**
+     * @var bool
+     */
     protected $useTimestamps = false;
 
     /**
      * Gets country data for a podcast
      *
-     * @param int $podcastId
-     *
-     * @return array
+     * @return AnalyticsPodcastsByCountry[]
      */
     public function getDataWeekly(int $podcastId): array
     {
@@ -54,15 +63,14 @@ class AnalyticsPodcastByCountryModel extends Model
                 600,
             );
         }
+
         return $found;
     }
 
     /**
      * Gets country data for a podcast
      *
-     * @param int $podcastId
-     *
-     * @return array
+     * @return AnalyticsPodcastsByCountry[]
      */
     public function getDataYearly(int $podcastId): array
     {

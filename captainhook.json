@@ -1,0 +1,37 @@
+{
+  "pre-commit": {
+    "enabled": true,
+    "actions": [
+      {
+        "action": "\\CaptainHook\\App\\Hook\\PHP\\Action\\Linting",
+        "options": [],
+        "conditions": []
+      },
+      {
+        "action": "composer phpcs -- {$STAGED_FILES|of-type:php}",
+        "options": [],
+        "conditions": [
+          {
+            "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\OfType",
+            "args": ["php"]
+          }
+        ]
+      }
+    ]
+  },
+  "pre-push": {
+    "enabled": true,
+    "actions": [
+      {
+        "action": "composer test -- --no-coverage",
+        "options": [],
+        "conditions": []
+      },
+      {
+        "action": "composer rector",
+        "options": [],
+        "conditions": []
+      }
+    ]
+  }
+}

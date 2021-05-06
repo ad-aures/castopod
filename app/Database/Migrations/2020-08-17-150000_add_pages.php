@@ -15,7 +15,7 @@ use CodeIgniter\Database\Migration;
 
 class AddPages extends Migration
 {
-    public function up()
+    public function up(): void
     {
         $this->forge->addField([
             'id' => [
@@ -50,7 +50,7 @@ class AddPages extends Migration
         $this->forge->createTable('pages');
     }
 
-    public function down()
+    public function down(): void
     {
         $this->forge->dropTable('pages');
     }

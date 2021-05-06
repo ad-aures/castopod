@@ -8,15 +8,30 @@
 
 namespace ActivityPub\Models;
 
+use ActivityPub\Entities\Activity;
+use CodeIgniter\I18n\Time;
+use DateTimeInterface;
 use Michalsn\Uuid\UuidModel;
 
 class ActivityModel extends UuidModel
 {
+    /**
+     * @var string
+     */
     protected $table = 'activitypub_activities';
+    /**
+     * @var string
+     */
     protected $primaryKey = 'id';
 
+    /**
+     * @var string[]
+     */
     protected $uuidFields = ['id', 'note_id'];
 
+    /**
+     * @var string[]
+     */
     protected $allowedFields = [
         'id',
         'actor_id',
@@ -28,11 +43,20 @@ class ActivityModel extends UuidModel
         'scheduled_at',
     ];
 
-    protected $returnType = \ActivityPub\Entities\Activity::class;
+    /**
+     * @var string
+     */
+    protected $returnType = Activity::class;
+    /**
+     * @var bool
+     */
     protected $useSoftDeletes = false;
 
+    /**
+     * @var bool
+     */
     protected $useTimestamps = true;
-    protected $updatedField = null;
+    protected $updatedField;
 
     public function getActivityById($activityId)
     {
@@ -50,24 +74,18 @@ class ActivityModel extends UuidModel
     /**
      * Inserts a new activity record in the database
      *
-     * @param string $type
-     * @param integer $actorId
-     * @param integer $targetActorId
-     * @param integer $noteId
-     * @param string $payload
-     * @param \CodeIgniter\I18n\Time $scheduledAt
-     * @param string $status
+     * @param Time $scheduledAt
      *
      * @return Michalsn\Uuid\BaseResult|int|string|false
      */
     public function newActivity(
-        $type,
-        $actorId,
-        $targetActorId,
-        $noteId,
-        $payload,
-        $scheduledAt = null,
-        $status = null
+        string $type,
+        int $actorId,
+        ?int $targetActorId,
+        ?string $noteId,
+        string $payload,
+        DateTimeInterface $scheduledAt = null,
+        ?string $status = null
     ) {
         return $this->insert(
             [

@@ -4,17 +4,17 @@
             ->avatar_image_url ?>" alt="<?= $note->display_name ?>" class="w-12 h-12 mr-4 rounded-full" />
         <div class="flex flex-col min-w-0">
             <a href="<?= $note->actor
-                ->uri ?>" class="flex items-baseline hover:underline" <?= !$note
+                ->uri ?>" class="flex items-baseline hover:underline" <?= $note
     ->actor->is_local
-    ? 'target="_blank" rel="noopener noreferrer"'
-    : '' ?>>
+    ? ''
+    : 'target="_blank" rel="noopener noreferrer"' ?>>
                 <span class="mr-2 font-semibold truncate"><?= $note->actor
                     ->display_name ?></span>
                 <span class="text-sm text-gray-500 truncate">@<?= $note->actor
                     ->username .
-                    (!$note->actor->is_local
-                        ? '@' . $note->actor->domain
-                        : '') ?></span>
+                    ($note->actor->is_local
+                        ? ''
+                        : '@' . $note->actor->domain) ?></span>
             </a>
             <a href="<?= route_to('note', $podcast->name, $note->id) ?>"
             class="text-xs text-gray-500">

@@ -41,7 +41,7 @@
                         ]),
                         route_to('user-edit', $user->id),
                         ['variant' => 'info'],
-                        ['class' => 'ml-2']
+                        ['class' => 'ml-2'],
                     );
             },
         ],
@@ -63,26 +63,26 @@
                         'variant' => 'secondary',
                         'size' => 'small',
                     ],
-                    ['class' => 'mr-2']
+                    ['class' => 'mr-2'],
                 ) .
                     button(
                         lang('User.' . ($user->isBanned() ? 'unban' : 'ban')),
                         route_to(
                             $user->isBanned() ? 'user-unban' : 'user-ban',
-                            $user->id
+                            $user->id,
                         ),
                         ['variant' => 'warning', 'size' => 'small'],
-                        ['class' => 'mr-2']
+                        ['class' => 'mr-2'],
                     ) .
                     button(
                         lang('User.delete'),
                         route_to('user-delete', $user->id),
-                        ['variant' => 'danger', 'size' => 'small']
+                        ['variant' => 'danger', 'size' => 'small'],
                     );
             },
         ],
     ],
-    $users
+    $users,
 ) ?>
 
 <?= $this->endSection() ?>

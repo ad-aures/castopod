@@ -15,7 +15,7 @@ use CodeIgniter\Database\Migration;
 
 class AddPodcastsUsers extends Migration
 {
-    public function up()
+    public function up(): void
     {
         $this->forge->addField([
             'podcast_id' => [
@@ -50,7 +50,7 @@ class AddPodcastsUsers extends Migration
         $this->forge->createTable('podcasts_users');
     }
 
-    public function down()
+    public function down(): void
     {
         $this->forge->dropTable('podcasts_users');
     }

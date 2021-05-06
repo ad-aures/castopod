@@ -10,24 +10,32 @@
 
 namespace Analytics\Models;
 
+use Analytics\Entities\AnalyticsPodcastsByEpisode;
 use CodeIgniter\Model;
 
 class AnalyticsPodcastByEpisodeModel extends Model
 {
+    /**
+     * @var string
+     */
     protected $table = 'analytics_podcasts_by_episode';
 
-    protected $allowedFields = [];
-
-    protected $returnType = \Analytics\Entities\AnalyticsPodcastsByEpisode::class;
+    /**
+     * @var string
+     */
+    protected $returnType = AnalyticsPodcastsByEpisode::class;
+    /**
+     * @var bool
+     */
     protected $useSoftDeletes = false;
 
+    /**
+     * @var bool
+     */
     protected $useTimestamps = false;
 
     /**
-     * @param int $podcastId
-     * @param int $episodeId
-     *
-     * @return array
+     * @return AnalyticsPodcastsByEpisode[]
      */
     public function getDataByDay(int $podcastId, int $episodeId): array
     {
@@ -53,14 +61,12 @@ class AnalyticsPodcastByEpisodeModel extends Model
                 600,
             );
         }
+
         return $found;
     }
 
     /**
-     * @param int $podcastId
-     * @param int $episodeId
-     *
-     * @return array
+     * @return AnalyticsPodcastsByEpisode[]
      */
     public function getDataByMonth(int $podcastId, int $episodeId = null): array
     {
@@ -85,6 +91,7 @@ class AnalyticsPodcastByEpisodeModel extends Model
                 600,
             );
         }
+
         return $found;
     }
 }

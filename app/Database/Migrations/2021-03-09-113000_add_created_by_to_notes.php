@@ -15,19 +15,19 @@ use CodeIgniter\Database\Migration;
 
 class AddCreatedByToNotes extends Migration
 {
-    public function up()
+    public function up(): void
     {
         $prefix = $this->db->getPrefix();
 
         $createQuery = <<<SQL
-            ALTER TABLE ${prefix}activitypub_notes
+            ALTER TABLE {$prefix}activitypub_notes
             ADD COLUMN `created_by` INT UNSIGNED AFTER `episode_id`,
-            ADD FOREIGN KEY ${prefix}activitypub_notes_created_by_foreign(created_by) REFERENCES ${prefix}users(id) ON DELETE CASCADE;
+            ADD FOREIGN KEY {$prefix}activitypub_notes_created_by_foreign(created_by) REFERENCES {$prefix}users(id) ON DELETE CASCADE;
         SQL;
         $this->db->query($createQuery);
     }
 
-    public function down()
+    public function down(): void
     {
         $this->forge->dropForeignKey(
             'activitypub_notes',

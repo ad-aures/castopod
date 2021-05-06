@@ -17,9 +17,7 @@ class FileRules extends ValidationFileRules
      * a specified allowable dimension.
      *
      * @param string|null $blank
-     * @param string      $params
      *
-     * @return boolean
      */
     public function min_dims(string $blank = null, string $params): bool
     {
@@ -59,14 +57,11 @@ class FileRules extends ValidationFileRules
     }
 
     //--------------------------------------------------------------------
-
     /**
      * Checks an uploaded file to verify that the image ratio is of 1:1
      *
      * @param string|null $blank
-     * @param string      $params
      *
-     * @return boolean
      */
     public function is_image_squared(string $blank = null, string $params): bool
     {

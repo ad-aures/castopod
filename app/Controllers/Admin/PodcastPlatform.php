@@ -8,6 +8,8 @@
 
 namespace App\Controllers\Admin;
 
+use App\Entities\Podcast;
+use CodeIgniter\Exceptions\PageNotFoundException;
 use App\Models\PlatformModel;
 use App\Models\PodcastModel;
 use Config\Services;
@@ -15,20 +17,22 @@ use Config\Services;
 class PodcastPlatform extends BaseController
 {
     /**
-     * @var \App\Entities\Podcast|null
+     * @var Podcast|null
      */
     protected $podcast;
 
     public function _remap($method, ...$params)
     {
-        if (
-            !($this->podcast = (new PodcastModel())->getPodcastById($params[0]))
-        ) {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        if (count($params) === 0) {
+            return $this->$method();
         }
-        unset($params[0]);
 
-        return $this->$method(...$params);
+        if ($this->podcast = (new PodcastModel())->getPodcastById($params[0])) {
+            unset($params[0]);
+            return $this->$method(...$params);
+        }
+
+        throw PageNotFoundException::forPageNotFound();
     }
 
     public function index()
@@ -45,7 +49,7 @@ class PodcastPlatform extends BaseController
             'platformType' => $platformType,
             'platforms' => (new PlatformModel())->getPlatformsWithLinks(
                 $this->podcast->id,
-                $platformType
+                $platformType,
             ),
         ];
 
@@ -65,36 +69,35 @@ class PodcastPlatform extends BaseController
             as $platformSlug => $podcastPlatform
         ) {
             $podcastPlatformUrl = $podcastPlatform['url'];
-
-            if (
-                !empty($podcastPlatformUrl) &&
-                $validation->check($podcastPlatformUrl, 'validate_url')
-            ) {
-                array_push($podcastsPlatformsData, [
-                    'platform_slug' => $platformSlug,
-                    'podcast_id' => $this->podcast->id,
-                    'link_url' => $podcastPlatformUrl,
-                    'link_content' => $podcastPlatform['content'],
-                    'is_visible' => array_key_exists(
-                        'visible',
-                        $podcastPlatform
-                    )
-                        ? $podcastPlatform['visible'] == 'yes'
-                        : false,
-                    'is_on_embeddable_player' => array_key_exists(
-                        'on_embeddable_player',
-                        $podcastPlatform
-                    )
-                        ? $podcastPlatform['on_embeddable_player'] == 'yes'
-                        : false,
-                ]);
+            if (empty($podcastPlatformUrl)) {
+                continue;
             }
+            if (!$validation->check($podcastPlatformUrl, 'validate_url')) {
+                continue;
+            }
+            $podcastsPlatformsData[] = [
+                'platform_slug' => $platformSlug,
+                'podcast_id' => $this->podcast->id,
+                'link_url' => $podcastPlatformUrl,
+                'link_content' => $podcastPlatform['content'],
+                'is_visible' =>
+                    array_key_exists('visible', $podcastPlatform) &&
+                    $podcastPlatform['visible'] == 'yes',
+                'is_on_embeddable_player' =>
+                    array_key_exists(
+                        'on_embeddable_player',
+                        $podcastPlatform,
+                    ) && $podcastPlatform['on_embeddable_player'] == 'yes',
+            ];
+            return redirect()
+                ->back()
+                ->with('message', lang('Platforms.messages.updateSuccess'));
         }
 
         $platformModel->savePodcastPlatforms(
             $this->podcast->id,
             $platformType,
-            $podcastsPlatformsData
+            $podcastsPlatformsData,
         );
 
         return redirect()
@@ -106,7 +109,7 @@ class PodcastPlatform extends BaseController
     {
         (new PlatformModel())->removePodcastPlatform(
             $this->podcast->id,
-            $platformSlug
+            $platformSlug,
         );
 
         return redirect()

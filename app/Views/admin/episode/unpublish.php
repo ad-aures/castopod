@@ -41,7 +41,7 @@
 
 <?= button(
     lang('Episode.unpublish_form.submit'),
-    null,
+    '',
     ['variant' => 'danger'],
     ['type' => 'submit'],
 ) ?>

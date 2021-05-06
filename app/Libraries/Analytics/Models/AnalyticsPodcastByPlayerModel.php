@@ -10,25 +10,34 @@
 
 namespace Analytics\Models;
 
+use Analytics\Entities\AnalyticsPodcastsByPlayer;
 use CodeIgniter\Model;
 
 class AnalyticsPodcastByPlayerModel extends Model
 {
+    /**
+     * @var string
+     */
     protected $table = 'analytics_podcasts_by_player';
 
-    protected $allowedFields = [];
-
-    protected $returnType = \Analytics\Entities\AnalyticsPodcastsByPlayer::class;
+    /**
+     * @var string
+     */
+    protected $returnType = AnalyticsPodcastsByPlayer::class;
+    /**
+     * @var bool
+     */
     protected $useSoftDeletes = false;
 
+    /**
+     * @var bool
+     */
     protected $useTimestamps = false;
 
     /**
      * Gets player data for a podcast
      *
-     * @param int $podcastId
-     *
-     * @return array
+     * @return AnalyticsPodcastsByPlayer[]
      */
     public function getDataByAppWeekly(int $podcastId): array
     {
@@ -61,9 +70,7 @@ class AnalyticsPodcastByPlayerModel extends Model
     /**
      * Gets player data for a podcast
      *
-     * @param int $podcastId
-     *
-     * @return array
+     * @return AnalyticsPodcastsByPlayer[]
      */
     public function getDataByAppYearly(int $podcastId): array
     {
@@ -96,9 +103,7 @@ class AnalyticsPodcastByPlayerModel extends Model
     /**
      * Gets os data for a podcast
      *
-     * @param int $podcastId
-     *
-     * @return array
+     * @return AnalyticsPodcastsByPlayer[]
      */
     public function getDataByOsWeekly(int $podcastId): array
     {
@@ -132,9 +137,7 @@ class AnalyticsPodcastByPlayerModel extends Model
     /**
      * Gets player data for a podcast
      *
-     * @param int $podcastId
-     *
-     * @return array
+     * @return AnalyticsPodcastsByPlayer[]
      */
     public function getDataByDeviceWeekly(int $podcastId): array
     {
@@ -167,9 +170,7 @@ class AnalyticsPodcastByPlayerModel extends Model
     /**
      * Gets bots data for a podcast
      *
-     * @param int $podcastId
-     *
-     * @return array
+     * @return AnalyticsPodcastsByPlayer[]
      */
     public function getDataBots(int $podcastId): array
     {

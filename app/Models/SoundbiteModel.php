@@ -11,13 +11,24 @@
 
 namespace App\Models;
 
+use CodeIgniter\Database\BaseResult;
+use App\Entities\Soundbite;
 use CodeIgniter\Model;
 
 class SoundbiteModel extends Model
 {
+    /**
+     * @var string
+     */
     protected $table = 'soundbites';
+    /**
+     * @var string
+     */
     protected $primaryKey = 'id';
 
+    /**
+     * @var string[]
+     */
     protected $allowedFields = [
         'podcast_id',
         'episode_id',
@@ -28,15 +39,36 @@ class SoundbiteModel extends Model
         'updated_by',
     ];
 
-    protected $returnType = \App\Entities\Soundbite::class;
+    /**
+     * @var string
+     */
+    protected $returnType = Soundbite::class;
+    /**
+     * @var bool
+     */
     protected $useSoftDeletes = false;
 
+    /**
+     * @var bool
+     */
     protected $useTimestamps = true;
 
+    /**
+     * @var string[]
+     */
     protected $afterInsert = ['clearCache'];
+    /**
+     * @var string[]
+     */
     protected $afterUpdate = ['clearCache'];
+    /**
+     * @var string[]
+     */
     protected $beforeDelete = ['clearCache'];
 
+    /**
+     * @return bool|BaseResult
+     */
     public function deleteSoundbite($podcastId, $episodeId, $soundbiteId)
     {
         return $this->delete([
@@ -49,10 +81,7 @@ class SoundbiteModel extends Model
     /**
      * Gets all soundbites for an episode
      *
-     * @param int $podcastId
-     * @param int $episodeId
-     *
-     * @return \App\Entities\Soundbite[]
+     * @return Soundbite[]
      */
     public function getEpisodeSoundbites(int $podcastId, int $episodeId): array
     {
@@ -69,7 +98,10 @@ class SoundbiteModel extends Model
         return $found;
     }
 
-    public function clearCache(array $data)
+    /**
+     * @return array<string, array<string|int, mixed>>
+     */
+    public function clearCache(array $data): array
     {
         $episode = (new EpisodeModel())->find(
             isset($data['data'])

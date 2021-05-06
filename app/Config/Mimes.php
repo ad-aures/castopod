@@ -22,7 +22,7 @@ class Mimes
     /**
      * Map of extensions to mime types.
      *
-     * @var array
+     * @var array<string, string>
      */
     public static $mimes = [
         'hqx' => [
@@ -321,11 +321,9 @@ class Mimes
     /**
      * Attempts to determine the best mime type for the given file extension.
      *
-     * @param string $extension
-     *
      * @return string|null The mime type found, or none if unable to determine.
      */
-    public static function guessTypeFromExtension(string $extension)
+    public static function guessTypeFromExtension(string $extension): ?string
     {
         $extension = trim(strtolower($extension), '. ');
 
@@ -341,15 +339,13 @@ class Mimes
     /**
      * Attempts to determine the best file extension for a given mime type.
      *
-     * @param string      $type
      * @param string|null $proposedExtension - default extension (in case there is more than one with the same mime type)
-     *
      * @return string|null The extension determined, or null if unable to match.
      */
     public static function guessExtensionFromType(
         string $type,
         string $proposedExtension = null
-    ) {
+    ): ?string {
         $type = trim(strtolower($type), '. ');
 
         $proposedExtension = trim(strtolower($proposedExtension));

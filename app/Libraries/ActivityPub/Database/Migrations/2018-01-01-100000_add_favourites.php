@@ -15,7 +15,7 @@ use CodeIgniter\Database\Migration;
 
 class AddFavourites extends Migration
 {
-    public function up()
+    public function up(): void
     {
         $this->forge->addField([
             'actor_id' => [
@@ -48,7 +48,7 @@ class AddFavourites extends Migration
         $this->forge->createTable('activitypub_favourites');
     }
 
-    public function down()
+    public function down(): void
     {
         $this->forge->dropTable('activitypub_favourites');
     }

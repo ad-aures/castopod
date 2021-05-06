@@ -10,25 +10,34 @@
 
 namespace Analytics\Models;
 
+use Analytics\Entities\AnalyticsWebsiteByBrowser;
 use CodeIgniter\Model;
 
 class AnalyticsWebsiteByBrowserModel extends Model
 {
+    /**
+     * @var string
+     */
     protected $table = 'analytics_website_by_browser';
 
-    protected $allowedFields = [];
-
-    protected $returnType = \Analytics\Entities\AnalyticsWebsiteByBrowser::class;
+    /**
+     * @var string
+     */
+    protected $returnType = AnalyticsWebsiteByBrowser::class;
+    /**
+     * @var bool
+     */
     protected $useSoftDeletes = false;
 
+    /**
+     * @var bool
+     */
     protected $useTimestamps = false;
 
     /**
      * Gets browser data for a podcast
      *
-     * @param int $podcastId
-     *
-     * @return array
+     * @return AnalyticsWebsiteByBrowser[]
      */
     public function getData(int $podcastId): array
     {

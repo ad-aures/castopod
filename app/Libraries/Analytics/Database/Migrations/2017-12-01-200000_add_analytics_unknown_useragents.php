@@ -15,7 +15,7 @@ use CodeIgniter\Database\Migration;
 
 class AddAnalyticsUnknownUseragents extends Migration
 {
-    public function up()
+    public function up(): void
     {
         $this->forge->addField([
             'id' => [
@@ -46,7 +46,7 @@ class AddAnalyticsUnknownUseragents extends Migration
         $this->forge->createTable('analytics_unknown_useragents');
     }
 
-    public function down()
+    public function down(): void
     {
         $this->forge->dropTable('analytics_unknown_useragents');
     }

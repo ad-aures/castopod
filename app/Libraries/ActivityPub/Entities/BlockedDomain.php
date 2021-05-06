@@ -8,10 +8,13 @@
 
 namespace ActivityPub\Entities;
 
-use CodeIgniter\Entity;
+use CodeIgniter\Entity\Entity;
 
 class BlockedDomain extends Entity
 {
+    /**
+     * @var array<string, string>
+     */
     protected $casts = [
         'name' => 'string',
     ];

@@ -8,23 +8,28 @@
 
 namespace ActivityPub;
 
+use CodeIgniter\HTTP\ResponseInterface;
+use CodeIgniter\HTTP\CURLRequest;
+use CodeIgniter\HTTP\URI;
+use ActivityPub\Core\Activity;
+use Config\Services;
 use CodeIgniter\I18n\Time;
 use phpseclib\Crypt\RSA;
 
 class ActivityRequest
 {
     /**
-     * @var \CodeIgniter\HTTP\CURLRequest
+     * @var CURLRequest
      */
     protected $request;
 
     /**
-     * @var \CodeIgniter\HTTP\URI
+     * @var URI
      */
     protected $uri;
 
     /**
-     * @var \ActivityPub\Core\Activity|null
+     * @var Activity|null
      */
     protected $activity;
 
@@ -44,33 +49,33 @@ class ActivityRequest
      */
     public function __construct($uri, $activityPayload = null)
     {
-        $this->request = \Config\Services::curlrequest();
+        $this->request = Services::curlrequest();
 
         if ($activityPayload) {
             $this->request->setBody($activityPayload);
         }
 
-        $this->uri = new \CodeIgniter\HTTP\URI($uri);
+        $this->uri = new URI($uri);
     }
 
-    public function post()
+    public function post(): void
     {
         // send Message to Fediverse instance
         $this->request->post($this->uri, $this->options);
     }
 
-    public function get()
+    public function get(): ResponseInterface
     {
         return $this->request->get($this->uri, $this->options);
     }
 
-    public function getDomain()
+    public function getDomain(): string
     {
         return $this->uri->getHost() .
             ($this->uri->getPort() ? ':' . $this->uri->getPort() : '');
     }
 
-    public function sign($keyId, $privateKey)
+    public function sign($keyId, $privateKey): void
     {
         $rsa = new RSA();
         $rsa->loadKey($privateKey); // private key
@@ -79,7 +84,7 @@ class ActivityRequest
 
         $path =
             $this->uri->getPath() .
-            ($this->uri->getQuery() ? "?{$this->uri->getQuery()}" : '');
+            ($this->uri->getQuery() !== '' ? "?{$this->uri->getQuery()}" : '');
         $host = $this->uri->getHost();
         $date = Time::now('GMT')->format('D, d M Y H:i:s T');
         $digest = 'SHA-256=' . base64_encode($this->getBodyDigest());
@@ -87,7 +92,7 @@ class ActivityRequest
         $contentLength = strval(strlen($this->request->getBody()));
         $userAgent = 'Castopod';
 
-        $plainText = "(request-target): post $path\nhost: $host\ndate: $date\ndigest: $digest\ncontent-type: $contentType\ncontent-length: $contentLength\nuser-agent: $userAgent";
+        $plainText = "(request-target): post {$path}\nhost: {$host}\ndate: {$date}\ndigest: {$digest}\ncontent-type: {$contentType}\ncontent-length: {$contentLength}\nuser-agent: {$userAgent}";
 
         $signature = $rsa->sign($plainText);
 
@@ -102,7 +107,7 @@ class ActivityRequest
             'headers' => [
                 'Content-Type' => $contentType,
                 'Content-Length' => $contentLength,
-                'Authorization' => "Signature $signatureHeader",
+                'Authorization' => "Signature {$signatureHeader}",
                 'Signature' => $signatureHeader,
                 'Host' => $host,
                 'Date' => $date,
@@ -112,7 +117,7 @@ class ActivityRequest
         ];
     }
 
-    protected function getBodyDigest()
+    protected function getBodyDigest(): string
     {
         return hash('sha256', $this->request->getBody(), true);
     }

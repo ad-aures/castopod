@@ -8,6 +8,7 @@
 
 namespace App\Libraries;
 
+use ActivityPub\Entities\Actor;
 use App\Models\PodcastModel;
 
 class PodcastActor extends \ActivityPub\Objects\ActorObject
@@ -17,10 +18,7 @@ class PodcastActor extends \ActivityPub\Objects\ActorObject
      */
     protected $rss;
 
-    /**
-     * @param \App\Entities\Actor $actor
-     */
-    public function __construct($actor)
+    public function __construct(Actor $actor)
     {
         parent::__construct($actor);
 

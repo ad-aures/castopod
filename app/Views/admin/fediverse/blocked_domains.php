@@ -33,7 +33,7 @@
 
 <?= button(
     lang('Fediverse.block_lists_form.submit'),
-    null,
+    '',
     ['variant' => 'primary'],
     ['type' => 'submit', 'class' => 'self-end'],
 ) ?>

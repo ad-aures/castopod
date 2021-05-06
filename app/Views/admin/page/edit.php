@@ -46,15 +46,15 @@
             'required' => 'required',
         ],
         old('content', $page->content, false),
-        'data-editor="markdown"'
+        'data-editor="markdown"',
     ) ?>
 </div>
 
 <?= button(
     lang('Page.form.submit_edit'),
-    null,
+    '',
     ['variant' => 'primary'],
-    ['type' => 'submit', 'class' => 'self-end']
+    ['type' => 'submit', 'class' => 'self-end'],
 ) ?>
 
 <?= form_close() ?>

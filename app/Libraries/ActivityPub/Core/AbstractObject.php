@@ -15,14 +15,17 @@ namespace ActivityPub\Core;
 
 abstract class AbstractObject
 {
-    public function set($property, $value)
+    public function set($property, $value): self
     {
         $this->$property = $value;
 
         return $this;
     }
 
-    public function toArray()
+    /**
+     * @return array<string, string|int|bool|array>
+     */
+    public function toArray(): array
     {
         $objectVars = get_object_vars($this);
         $array = [];
@@ -30,19 +33,22 @@ abstract class AbstractObject
             if ($key === 'context') {
                 $key = '@context';
             }
-            if (is_object($value) && $value instanceof self) {
-                $array[$key] = $value->toArray();
-            } else {
-                $array[$key] = $value;
-            }
+
+            $array[$key] =
+                is_object($value) && $value instanceof self
+                    ? $value->toArray()
+                    : $value;
         }
 
         // removes all NULL, FALSE and Empty Strings but leaves 0 (zero) values
-        return array_filter($array, function ($value) {
+        return array_filter($array, function ($value): bool {
             return $value !== null && $value !== false && $value !== '';
         });
     }
 
+    /**
+     * @return string|bool
+     */
     public function toJSON()
     {
         return json_encode($this->toArray(), JSON_UNESCAPED_UNICODE);

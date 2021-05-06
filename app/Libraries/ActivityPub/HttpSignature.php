@@ -24,6 +24,9 @@ use phpseclib\Crypt\RSA;
  */
 class HttpSignature
 {
+    /**
+     * @var string
+     */
     const SIGNATURE_PATTERN = '/^
         keyId="(?P<keyId>
             (https?:\/\/[\w\-\.]+[\w]+)
@@ -31,18 +34,15 @@ class HttpSignature
             ([\w\-\.#\/@]+)
         )",
         algorithm="(?P<algorithm>[\w\-]+)",
-        (headers="\(request-target\) (?P<headers>[\w\-\s]+)",)?
+        (headers="\(request-target\) (?P<headers>[\w\\-\s]+)",)?
         signature="(?P<signature>[\w+\/]+={0,2})"
     /x';
 
     /**
-     * @var \CodeIgniter\HTTP\IncomingRequest
+     * @var IncomingRequest
      */
     protected $request;
 
-    /**
-     * @param \CodeIgniter\HTTP\IncomingRequest $request
-     */
     public function __construct(IncomingRequest $request = null)
     {
         if (is_null($request)) {
@@ -57,7 +57,7 @@ class HttpSignature
      *
      * @return bool True if signature has been verified. Otherwise false
      */
-    public function verify()
+    public function verify(): bool
     {
         if (!($dateHeader = $this->request->header('date'))) {
             throw new Exception('Request must include a date header.');
@@ -87,7 +87,7 @@ class HttpSignature
         }
 
         // read the Signature header
-        if (!($signature = $this->request->getHeaderLine('signature'))) {
+        if (($signature = $this->request->getHeaderLine('signature')) === '') {
             // Signature header not found
             throw new Exception('Request must include a signature header');
         }
@@ -103,7 +103,12 @@ class HttpSignature
         // Fetch the public key linked from keyId
         $actorRequest = new ActivityRequest($keyId);
         $actorResponse = $actorRequest->get();
-        $actor = json_decode($actorResponse->getBody());
+        $actor = json_decode(
+            $actorResponse->getBody(),
+            null,
+            512,
+            JSON_THROW_ON_ERROR,
+        );
 
         $publicKeyPem = $actor->publicKey->publicKeyPem;
 
@@ -123,8 +128,7 @@ class HttpSignature
     /**
      * Split HTTP signature into its parts (keyId, headers and signature)
      *
-     * @param string $signature
-     * @return bool|array
+     * @return bool|mixed
      */
     private function splitSignature(string $signature)
     {
@@ -145,23 +149,22 @@ class HttpSignature
      * Get plain text that has been originally signed
      *
      * @param  array $headers HTTP header keys
-     * @return string
      */
-    private function getPlainText(array $headers)
+    private function getPlainText(array $headers): string
     {
         $strings = [];
         $strings[] = sprintf(
             '(request-target): %s %s%s',
             $this->request->getMethod(),
             '/' . $this->request->uri->getPath(),
-            $this->request->uri->getQuery()
+            $this->request->uri->getQuery() !== ''
                 ? '?' . $this->request->uri->getQuery()
                 : '',
         );
 
         foreach ($headers as $key) {
             if ($this->request->hasHeader($key)) {
-                $strings[] = "$key: {$this->request->getHeaderLine($key)}";
+                $strings[] = "{$key}: {$this->request->getHeaderLine($key)}";
             }
         }
 

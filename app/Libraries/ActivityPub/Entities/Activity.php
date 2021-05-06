@@ -8,29 +8,39 @@
 
 namespace ActivityPub\Entities;
 
+use RuntimeException;
 use Michalsn\Uuid\UuidEntity;
 
 class Activity extends UuidEntity
 {
+    /**
+     * @var string[]
+     */
     protected $uuids = ['id', 'note_id'];
 
     /**
-     * @var \ActivityPub\Entities\Actor
+     * @var Actor
      */
     protected $actor;
 
     /**
-     * @var \ActivityPub\Entities\Actor
+     * @var Actor
      */
     protected $target_actor;
 
     /**
-     * @var \ActivityPub\Entities\Note
+     * @var Note
      */
     protected $note;
 
+    /**
+     * @var string[]
+     */
     protected $dates = ['scheduled_at', 'created_at'];
 
+    /**
+     * @var array<string, string>
+     */
     protected $casts = [
         'id' => 'string',
         'actor_id' => 'integer',
@@ -41,13 +51,10 @@ class Activity extends UuidEntity
         'status' => '?string',
     ];
 
-    /**
-     * @return \ActivityPub\Entities\Actor
-     */
-    public function getActor()
+    public function getActor(): Actor
     {
         if (empty($this->actor_id)) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 'Activity must have an actor_id before getting the actor.',
             );
         }
@@ -59,13 +66,10 @@ class Activity extends UuidEntity
         return $this->actor;
     }
 
-    /**
-     * @return \ActivityPub\Entities\Actor
-     */
-    public function getTargetActor()
+    public function getTargetActor(): Actor
     {
         if (empty($this->target_actor_id)) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 'Activity must have a target_actor_id before getting the target actor.',
             );
         }
@@ -79,13 +83,10 @@ class Activity extends UuidEntity
         return $this->target_actor;
     }
 
-    /**
-     * @return \ActivityPub\Entities\Note
-     */
-    public function getNote()
+    public function getNote(): Note
     {
         if (empty($this->note_id)) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 'Activity must have a note_id before getting note.',
             );
         }

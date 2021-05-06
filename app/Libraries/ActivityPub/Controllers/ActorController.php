@@ -8,6 +8,13 @@
 
 namespace ActivityPub\Controllers;
 
+use ActivityPub\Entities\Actor;
+use ActivityPub\Config\ActivityPub;
+use CodeIgniter\HTTP\RedirectResponse;
+use CodeIgniter\HTTP\ResponseInterface;
+use CodeIgniter\Exceptions\PageNotFoundException;
+use ActivityPub\Entities\Note;
+use CodeIgniter\HTTP\Exceptions\HTTPException;
 use ActivityPub\Objects\OrderedCollectionObject;
 use ActivityPub\Objects\OrderedCollectionPage;
 use CodeIgniter\Controller;
@@ -15,15 +22,18 @@ use CodeIgniter\I18n\Time;
 
 class ActorController extends Controller
 {
+    /**
+     * @var string[]
+     */
     protected $helpers = ['activitypub'];
 
     /**
-     * @var \ActivityPub\Entities\Actor
+     * @var Actor
      */
     protected $actor;
 
     /**
-     * @var \ActivityPub\Config\ActivityPub
+     * @var ActivityPub
      */
     protected $config;
 
@@ -34,21 +44,20 @@ class ActorController extends Controller
 
     public function _remap($method, ...$params)
     {
-        if (count($params) > 0) {
-            if (
-                !($this->actor = model('ActorModel')->getActorByUsername(
-                    $params[0],
-                ))
-            ) {
-                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-            }
+        if (
+            count($params) > 0 &&
+            !($this->actor = model('ActorModel')->getActorByUsername(
+                $params[0],
+            ))
+        ) {
+            throw PageNotFoundException::forPageNotFound();
         }
         unset($params[0]);
 
         return $this->$method(...$params);
     }
 
-    public function index()
+    public function index(): RedirectResponse
     {
         $actorObjectClass = $this->config->actorObject;
         $actorObject = new $actorObjectClass($this->actor);
@@ -61,7 +70,7 @@ class ActorController extends Controller
     /**
      * Handles incoming requests from fediverse servers
      */
-    public function inbox()
+    public function inbox(): ResponseInterface
     {
         // get json body and parse it
         $payload = $this->request->getJSON();
@@ -75,56 +84,41 @@ class ActorController extends Controller
             $payloadActor->id,
             $this->actor->id,
             null,
-            json_encode($payload),
+            json_encode($payload, JSON_THROW_ON_ERROR),
         );
 
         // switch/case on activity type
         switch ($payload->type) {
             case 'Create':
-                switch ($payload->object->type) {
-                    case 'Note':
-                        if (!$payload->object->inReplyTo) {
-                            return $this->response
-                                ->setStatusCode(501)
-                                ->setJSON([]);
-                        }
-
-                        $replyToNote = model('NoteModel')->getNoteByUri(
-                            $payload->object->inReplyTo,
-                        );
-
-                        // TODO: strip content from html to retrieve message
-                        // remove all html tags and reconstruct message with mentions?
-                        extract_text_from_html($payload->object->content);
-
-                        $reply = new \ActivityPub\Entities\Note([
-                            'uri' => $payload->object->id,
-                            'actor_id' => $payloadActor->id,
-                            'in_reply_to_id' => $replyToNote->id,
-                            'message' => $payload->object->content,
-                            'published_at' => Time::parse(
-                                $payload->object->published,
-                            ),
-                        ]);
-
-                        $noteId = model('NoteModel')->addReply(
-                            $reply,
-                            true,
-                            false,
-                        );
-
-                        model('ActivityModel')->update($activityId, [
-                            'note_id' => service('uuid')
-                                ->fromBytes($noteId)
-                                ->getString(),
-                        ]);
-
-                        return $this->response->setStatusCode(200)->setJSON([]);
-                    default:
-                        // return not handled undo error (501 = not implemented)
+                if ($payload->object->type == 'Note') {
+                    if (!$payload->object->inReplyTo) {
                         return $this->response->setStatusCode(501)->setJSON([]);
+                    }
+                    $replyToNote = model('NoteModel')->getNoteByUri(
+                        $payload->object->inReplyTo,
+                    );
+                    // TODO: strip content from html to retrieve message
+                    // remove all html tags and reconstruct message with mentions?
+                    extract_text_from_html($payload->object->content);
+                    $reply = new Note([
+                        'uri' => $payload->object->id,
+                        'actor_id' => $payloadActor->id,
+                        'in_reply_to_id' => $replyToNote->id,
+                        'message' => $payload->object->content,
+                        'published_at' => Time::parse(
+                            $payload->object->published,
+                        ),
+                    ]);
+                    $noteId = model('NoteModel')->addReply($reply, true, false);
+                    model('ActivityModel')->update($activityId, [
+                        'note_id' => service('uuid')
+                            ->fromBytes($noteId)
+                            ->getString(),
+                    ]);
+                    return $this->response->setStatusCode(200)->setJSON([]);
                 }
-                break;
+                // return not handled undo error (501 = not implemented)
+                return $this->response->setStatusCode(501)->setJSON([]);
             case 'Delete':
                 $noteToDelete = model('NoteModel')->getNoteByUri(
                     $payload->object->id,
@@ -234,7 +228,7 @@ class ActorController extends Controller
         }
     }
 
-    public function outbox()
+    public function outbox(): RedirectResponse
     {
         // get published activities by publication date
         $actorActivity = model('ActivityModel')
@@ -257,7 +251,7 @@ class ActorController extends Controller
             $pager = $actorActivity->pager;
             $orderedItems = [];
             foreach ($paginatedActivity as $activity) {
-                array_push($orderedItems, $activity->payload);
+                $orderedItems[] = $activity->payload;
             }
             $collection = new OrderedCollectionPage($pager, $orderedItems);
         }
@@ -267,7 +261,7 @@ class ActorController extends Controller
             ->setBody($collection->toJSON());
     }
 
-    public function followers()
+    public function followers(): RedirectResponse
     {
         // get followers for a specific actor
         $followers = model('ActorModel')
@@ -295,7 +289,7 @@ class ActorController extends Controller
 
             $orderedItems = [];
             foreach ($paginatedFollowers as $follower) {
-                array_push($orderedItems, $follower->uri);
+                $orderedItems[] = $follower->uri;
             }
             $followersCollection = new OrderedCollectionPage(
                 $pager,
@@ -308,6 +302,9 @@ class ActorController extends Controller
             ->setBody($followersCollection->toJSON());
     }
 
+    /**
+     * @return mixed|ResponseInterface
+     */
     public function attemptFollow()
     {
         $rules = [
@@ -334,7 +331,7 @@ class ActorController extends Controller
 
                 $data = get_webfinger_data($username, $domain);
             }
-        } catch (\CodeIgniter\HTTP\Exceptions\HTTPException $e) {
+        } catch (HTTPException $httpException) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -361,16 +358,16 @@ class ActorController extends Controller
         );
     }
 
-    public function activity($activityId)
+    public function activity($activityId): RedirectResponse
     {
         if (
             !($activity = model('ActivityModel')->getActivityById($activityId))
         ) {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+            throw PageNotFoundException::forPageNotFound();
         }
 
         return $this->response
             ->setContentType('application/activity+json')
-            ->setBody(json_encode($activity->payload));
+            ->setBody(json_encode($activity->payload, JSON_THROW_ON_ERROR));
     }
 }

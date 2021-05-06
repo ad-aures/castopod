@@ -10,6 +10,7 @@
   },
   "scripts": {
     "build": "npm run build:js && cross-env NODE_ENV=production npm run build:css && npm run build:icons && npm run build:svg && npm run copy:images && npm run copy:fonts",
+    "build:dev": "npm run build:js && npm run build:css && npm run build:icons && npm run build:svg && npm run copy:images && npm run copy:fonts",
     "watch:js": "rollup --config --watch",
     "build:js": "rollup --config",
     "watch:css": "postcss app/Views/_assets/styles/index.css -o public/assets/index.css -w",

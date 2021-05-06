@@ -48,5 +48,5 @@ class ObjectType extends AbstractObject
     /**
      * @var array
      */
-    protected $cc;
+    protected $cc = [];
 }

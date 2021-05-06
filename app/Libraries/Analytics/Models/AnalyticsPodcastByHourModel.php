@@ -10,32 +10,39 @@
 
 namespace Analytics\Models;
 
+use Analytics\Entities\AnalyticsPodcastsByHour;
 use CodeIgniter\Model;
 
 class AnalyticsPodcastByHourModel extends Model
 {
+    /**
+     * @var string
+     */
     protected $table = 'analytics_podcasts_by_hour';
 
-    protected $allowedFields = [];
-
-    protected $returnType = \Analytics\Entities\AnalyticsPodcastsByHour::class;
+    /**
+     * @var string
+     */
+    protected $returnType = AnalyticsPodcastsByHour::class;
+    /**
+     * @var bool
+     */
     protected $useSoftDeletes = false;
 
+    /**
+     * @var bool
+     */
     protected $useTimestamps = false;
 
     /**
      * Gets hits data for a podcast
      *
-     * @param int $podcastId
-     *
-     * @return array
+     * @return AnalyticsPodcastsByHour[]
      */
     public function getData(int $podcastId): array
     {
         if (!($found = cache("{$podcastId}_analytics_podcasts_by_hour"))) {
-            $found = $this->select(
-                'right(concat(\'0\',hour,\'h\'),3) as labels',
-            )
+            $found = $this->select("right(concat('0',hour,'h'),3) as labels")
                 ->selectSum('hits', 'values')
                 ->where([
                     'podcast_id' => $podcastId,
@@ -51,6 +58,7 @@ class AnalyticsPodcastByHourModel extends Model
                 600,
             );
         }
+
         return $found;
     }
 }

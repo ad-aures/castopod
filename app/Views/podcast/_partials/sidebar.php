@@ -1,9 +1,6 @@
 <aside id="main-sidebar" class="fixed top-0 right-0 flex flex-col items-start flex-shrink-0 w-64 h-screen px-6 py-4 overflow-y-auto transform translate-x-full lg:sticky lg:translate-x-0">
     <?php if (
-        array_search(
-            true,
-            array_column($podcast->fundingPlatforms, 'is_visible'),
-        ) !== false
+        in_array(true, array_column($podcast->fundingPlatforms, 'is_visible'))
     ): ?>
     <h2 class="mb-2 text-sm font-semibold"><?= lang(
         'Podcast.sponsor_title',
@@ -16,10 +13,7 @@
     <?php endif; ?>
 
     <?php if (
-        array_search(
-            true,
-            array_column($podcast->socialPlatforms, 'is_visible'),
-        ) !== false
+        in_array(true, array_column($podcast->socialPlatforms, 'is_visible'))
     ): ?>
     <h2 class="mb-2 text-sm font-semibold"> <?= lang('Podcast.find_on', [
         'podcastTitle' => $podcast->title,

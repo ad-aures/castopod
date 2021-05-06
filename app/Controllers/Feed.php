@@ -8,32 +8,34 @@
 
 namespace App\Controllers;
 
+use CodeIgniter\HTTP\ResponseInterface;
+use CodeIgniter\Exceptions\PageNotFoundException;
+use Opawg\UserAgentsPhp\UserAgentsRSS;
+use Exception;
 use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
 use CodeIgniter\Controller;
 
 class Feed extends Controller
 {
-    public function index($podcastName)
+    public function index($podcastName): ResponseInterface
     {
         helper('rss');
 
         $podcast = (new PodcastModel())->where('name', $podcastName)->first();
         if (!$podcast) {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+            throw PageNotFoundException::forPageNotFound();
         }
 
         $serviceSlug = '';
         try {
-            $service = \Opawg\UserAgentsPhp\UserAgentsRSS::find(
-                $_SERVER['HTTP_USER_AGENT'],
-            );
+            $service = UserAgentsRSS::find($_SERVER['HTTP_USER_AGENT']);
             if ($service) {
                 $serviceSlug = $service['slug'];
             }
-        } catch (\Exception $e) {
+        } catch (Exception $exception) {
             // If things go wrong the show must go on and the user must be able to download the file
-            log_message('critical', $e);
+            log_message('critical', $exception);
         }
 
         $cacheName =

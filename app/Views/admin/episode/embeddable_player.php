@@ -38,7 +38,7 @@
     <?= icon_button(
         'file-copy',
         lang('Episode.embeddable_player.clipboard_iframe'),
-        null,
+        '',
         ['variant' => 'default'],
         ['data-type' => 'clipboard-copy', 'data-clipboard-target' => 'iframe'],
     ) ?>
@@ -56,7 +56,7 @@
     <?= icon_button(
         'file-copy',
         lang('Episode.embeddable_player.clipboard_url'),
-        null,
+        '',
         ['variant' => 'default'],
         ['data-type' => 'clipboard-copy', 'data-clipboard-target' => 'url'],
     ) ?>

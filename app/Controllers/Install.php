@@ -8,6 +8,15 @@
 
 namespace App\Controllers;
 
+use CodeIgniter\HTTP\RequestInterface;
+use CodeIgniter\HTTP\ResponseInterface;
+use Psr\Log\LoggerInterface;
+use Throwable;
+use Dotenv\Exception\ValidationException;
+use CodeIgniter\Exceptions\PageNotFoundException;
+use CodeIgniter\Database\Exceptions\DatabaseException;
+use Config\Database;
+use App\Entities\User;
 use App\Models\UserModel;
 use CodeIgniter\Controller;
 use Config\Services;
@@ -15,16 +24,19 @@ use Dotenv\Dotenv;
 
 class Install extends Controller
 {
+    /**
+     * @var string[]
+     */
     protected $helpers = ['form', 'components', 'svg'];
 
     /**
      * Constructor.
      */
     public function initController(
-        \CodeIgniter\HTTP\RequestInterface $request,
-        \CodeIgniter\HTTP\ResponseInterface $response,
-        \Psr\Log\LoggerInterface $logger
-    ) {
+        RequestInterface $request,
+        ResponseInterface $response,
+        LoggerInterface $logger
+    ): void {
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
     }
@@ -36,14 +48,14 @@ class Install extends Controller
      * If all required actions have already been performed,
      * the install route will show a 404 page.
      */
-    public function index()
+    public function index(): string
     {
         try {
             // Check if .env is created and has all required fields
             $dotenv = Dotenv::createUnsafeImmutable(ROOTPATH);
 
             $dotenv->load();
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $this->createEnv();
         }
 
@@ -55,7 +67,7 @@ class Install extends Controller
                     'app.adminGateway',
                     'app.authGateway',
                 ]);
-            } catch (\Dotenv\Exception\ValidationException $e) {
+            } catch (ValidationException $e) {
                 // form to input instance configuration
                 return $this->instanceConfig();
             }
@@ -68,13 +80,13 @@ class Install extends Controller
                     'database.default.password',
                     'database.default.DBPrefix',
                 ]);
-            } catch (\Dotenv\Exception\ValidationException $e) {
+            } catch (ValidationException $validationException) {
                 return $this->databaseConfig();
             }
 
             try {
                 $dotenv->required('cache.handler');
-            } catch (\Dotenv\Exception\ValidationException $e) {
+            } catch (ValidationException $validationException) {
                 return $this->cacheConfig();
             }
         } else {
@@ -90,7 +102,7 @@ class Install extends Controller
                     'database.default.DBPrefix',
                     'cache.handler',
                 ]);
-            } catch (\Dotenv\Exception\ValidationException $e) {
+            } catch (ValidationException $e) {
                 return view('install/manual_config');
             }
         }
@@ -104,9 +116,9 @@ class Install extends Controller
                 (new UserModel())->countAll() > 0
             ) {
                 // if so, show a 404 page
-                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+                throw PageNotFoundException::forPageNotFound();
             }
-        } catch (\CodeIgniter\Database\Exceptions\DatabaseException $e) {
+        } catch (DatabaseException $databaseException) {
             // Could not connect to the database
             // show database config view to fix value
             session()->setFlashdata(
@@ -128,6 +140,7 @@ class Install extends Controller
 
     /**
      * Returns the form to generate the .env config file for the instance.
+     * @return mixed|void
      */
     public function createEnv()
     {
@@ -135,7 +148,7 @@ class Install extends Controller
         try {
             $envFile = fopen(ROOTPATH . '.env', 'w');
             fclose($envFile);
-        } catch (\Throwable $e) {
+        } catch (Throwable $throwable) {
             // Could not create the .env file, redirect to a view with manual instructions on how to add it
             return view('install/manual_config');
         }
@@ -252,22 +265,22 @@ class Install extends Controller
     /**
      * Runs all database migrations required for instance.
      */
-    public function migrate()
+    public function migrate(): void
     {
-        $migrations = \Config\Services::migrations();
+        $migrations = Services::migrations();
 
-        !$migrations->setNamespace('Myth\Auth')->latest();
-        !$migrations->setNamespace('ActivityPub')->latest();
-        !$migrations->setNamespace('Analytics')->latest();
-        !$migrations->setNamespace(APP_NAMESPACE)->latest();
+        $migrations->setNamespace('Myth\Auth')->latest();
+        $migrations->setNamespace('ActivityPub')->latest();
+        $migrations->setNamespace('Analytics')->latest();
+        $migrations->setNamespace(APP_NAMESPACE)->latest();
     }
 
     /**
      * Runs all database seeds required for instance.
      */
-    public function seed()
+    public function seed(): void
     {
-        $seeder = \Config\Database::seeder();
+        $seeder = Database::seeder();
 
         // Seed database
         $seeder->call('AppSeeder');
@@ -308,12 +321,12 @@ class Install extends Controller
         }
 
         // Save the user
-        $user = new \App\Entities\User($this->request->getPost());
+        $user = new User($this->request->getPost());
 
         // Activate user
         $user->activate();
 
-        $db = \Config\Database::connect();
+        $db = Database::connect();
 
         $db->transStart();
         if (!($userId = $userModel->insert($user, true))) {
@@ -345,10 +358,8 @@ class Install extends Controller
      * overwrites any existing key and appends new ones
      *
      * @param array $data key/value config pairs
-     *
-     * @return void
      */
-    public static function writeEnv($configData)
+    public static function writeEnv($configData): void
     {
         $envData = file(ROOTPATH . '.env'); // reads an array of lines
 
@@ -360,7 +371,7 @@ class Install extends Controller
                 $keyVal,
                 &$replaced
             ) {
-                if (strpos($line, $key) === 0) {
+                if (strpos($line, (string) $key) === 0) {
                     $replaced = true;
                     return $keyVal;
                 }
@@ -369,7 +380,7 @@ class Install extends Controller
             $envData);
 
             if (!$replaced) {
-                array_push($envData, $keyVal);
+                $envData[] = $keyVal;
             }
         }
 

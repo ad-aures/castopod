@@ -8,6 +8,9 @@
 
 namespace ActivityPub\Models;
 
+use ActivityPub\Entities\Actor;
+use ActivityPub\Entities\Note;
+use ActivityPub\Entities\Favourite;
 use ActivityPub\Activities\LikeActivity;
 use ActivityPub\Activities\UndoActivity;
 use CodeIgniter\Events\Events;
@@ -15,25 +18,38 @@ use Michalsn\Uuid\UuidModel;
 
 class FavouriteModel extends UuidModel
 {
+    /**
+     * @var string
+     */
     protected $table = 'activitypub_favourites';
-    protected $uuidFields = ['note_id'];
-
-    protected $allowedFields = ['actor_id', 'note_id'];
-
-    protected $returnType = \ActivityPub\Entities\Favourite::class;
-
-    protected $useTimestamps = true;
-    protected $updatedField = null;
 
     /**
-     *
-     * @param \ActivityPub\Entities\Actor $actor
-     * @param \ActivityPub\Entities\Note $note
-     * @param bool $registerActivity
-     * @return void
+     * @var string[]
      */
-    public function addFavourite($actor, $note, $registerActivity = true)
-    {
+    protected $uuidFields = ['note_id'];
+
+    /**
+     * @var string[]
+     */
+    protected $allowedFields = ['actor_id', 'note_id'];
+
+    /**
+     * @var string
+     */
+    protected $returnType = Favourite::class;
+
+    /**
+     * @var bool
+     */
+    protected $useTimestamps = true;
+
+    protected $updatedField;
+
+    public function addFavourite(
+        Actor $actor,
+        Note $note,
+        bool $registerActivity = true
+    ): void {
         $this->db->transStart();
 
         $this->insert([
@@ -53,7 +69,7 @@ class FavouriteModel extends UuidModel
         $prefix = config('ActivityPub')->cachePrefix;
         $hashedNoteUri = md5($note->uri);
         cache()->delete($prefix . "note#{$note->id}");
-        cache()->delete($prefix . "note@{$hashedNoteUri}");
+        cache()->delete($prefix . "note-{$hashedNoteUri}");
         cache()->delete($prefix . "actor#{$actor->id}_published_notes");
 
         if ($note->in_reply_to_id) {
@@ -92,8 +108,11 @@ class FavouriteModel extends UuidModel
         $this->db->transComplete();
     }
 
-    public function removeFavourite($actor, $note, $registerActivity = true)
-    {
+    public function removeFavourite(
+        $actor,
+        $note,
+        $registerActivity = true
+    ): void {
         $this->db->transStart();
 
         model('NoteModel')
@@ -108,7 +127,7 @@ class FavouriteModel extends UuidModel
         $prefix = config('ActivityPub')->cachePrefix;
         $hashedNoteUri = md5($note->uri);
         cache()->delete($prefix . "note#{$note->id}");
-        cache()->delete($prefix . "note@{$hashedNoteUri}");
+        cache()->delete($prefix . "note-{$hashedNoteUri}");
         cache()->delete($prefix . "actor#{$actor->id}_published_notes");
 
         if ($note->in_reply_to_id) {
@@ -182,12 +201,8 @@ class FavouriteModel extends UuidModel
 
     /**
      * Adds or removes favourite from database and increments count
-     *
-     * @param \ActivityPub\Entities\Actor $actor
-     * @param \ActivityPub\Entities\Note $note
-     * @return void
      */
-    public function toggleFavourite($actor, $note)
+    public function toggleFavourite(Actor $actor, Note $note): void
     {
         if (
             $this->where([

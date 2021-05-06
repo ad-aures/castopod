@@ -15,13 +15,13 @@ use CodeIgniter\Database\Migration;
 
 class AddAnalyticsWebsiteProcedure extends Migration
 {
-    public function up()
+    public function up(): void
     {
         // Creates Procedure for data insertion
         // Example: CALL analytics_website(1,'FR','Firefox');
         $procedureName = $this->db->prefixTable('analytics_website');
         $createQuery = <<<EOD
-        CREATE PROCEDURE `$procedureName` (IN `p_podcast_id` INT UNSIGNED, IN `p_browser` VARCHAR(191) CHARSET utf8mb4, IN `p_entry_page` VARCHAR(512) CHARSET utf8mb4, IN `p_referer_url` VARCHAR(512) CHARSET utf8mb4, IN `p_domain` VARCHAR(128) CHARSET utf8mb4, IN `p_keywords` VARCHAR(384) CHARSET utf8mb4)  MODIFIES SQL DATA
+        CREATE PROCEDURE `{$procedureName}` (IN `p_podcast_id` INT UNSIGNED, IN `p_browser` VARCHAR(191) CHARSET utf8mb4, IN `p_entry_page` VARCHAR(512) CHARSET utf8mb4, IN `p_referer_url` VARCHAR(512) CHARSET utf8mb4, IN `p_domain` VARCHAR(128) CHARSET utf8mb4, IN `p_keywords` VARCHAR(384) CHARSET utf8mb4)  MODIFIES SQL DATA
         DETERMINISTIC
         SQL SECURITY INVOKER
         COMMENT 'Add one hit in website logs tables.'
@@ -43,9 +43,9 @@ class AddAnalyticsWebsiteProcedure extends Migration
         $this->db->query($createQuery);
     }
 
-    public function down()
+    public function down(): void
     {
         $procedureName = $this->db->prefixTable('analytics_website');
-        $this->db->query("DROP PROCEDURE IF EXISTS `$procedureName`");
+        $this->db->query("DROP PROCEDURE IF EXISTS `{$procedureName}`");
     }
 }

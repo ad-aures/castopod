@@ -11,6 +11,7 @@ namespace App\Controllers;
 use Analytics\AnalyticsTrait;
 use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
+use CodeIgniter\Exceptions\PageNotFoundException;
 use SimpleXMLElement;
 
 class Episode extends BaseController
@@ -18,31 +19,41 @@ class Episode extends BaseController
     use AnalyticsTrait;
 
     /**
-     * @var \App\Entities\Podcast
+     * @var Podcast
      */
     protected $podcast;
 
     /**
-     * @var \App\Entities\Episode|null
+     * @var Episode
      */
     protected $episode;
 
     public function _remap($method, ...$params)
     {
-        $this->podcast = (new PodcastModel())->getPodcastByName($params[0]);
+        if (count($params) < 2) {
+            throw PageNotFoundException::forPageNotFound();
+        }
 
         if (
-            count($params) > 1 &&
-            !($this->episode = (new EpisodeModel())->getEpisodeBySlug(
-                $this->podcast->id,
-                $params[1],
+            !($this->podcast = (new PodcastModel())->getPodcastByName(
+                $params[0],
             ))
         ) {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+            throw PageNotFoundException::forPageNotFound();
         }
-        unset($params[1]);
-        unset($params[0]);
-        return $this->$method(...$params);
+
+        if (
+            $this->episode = (new EpisodeModel())->getEpisodeBySlug(
+                $this->podcast->id,
+                $params[1],
+            )
+        ) {
+            unset($params[1]);
+            unset($params[0]);
+            return $this->$method(...$params);
+        }
+
+        throw PageNotFoundException::forPageNotFound();
     }
 
     public function index()

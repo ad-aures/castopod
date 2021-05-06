@@ -12,8 +12,8 @@ CLI::write(
     'at ' .
         CLI::color(
             clean_path($exception->getFile()) . ':' . $exception->getLine(),
-            'green'
-        )
+            'green',
+        ),
 );
 CLI::newLine();
 
@@ -36,7 +36,7 @@ if (defined('SHOW_DEBUG_BACKTRACE') && SHOW_DEBUG_BACKTRACE) {
             CLI::write($c . $padFile . CLI::color($filepath, 'yellow'));
         } else {
             CLI::write(
-                $c . $padFile . CLI::color('[internal function]', 'yellow')
+                $c . $padFile . CLI::color('[internal function]', 'yellow'),
             );
         }
 
@@ -60,13 +60,13 @@ if (defined('SHOW_DEBUG_BACKTRACE') && SHOW_DEBUG_BACKTRACE) {
                     case is_object($value):
                         return 'Object(' . get_class($value) . ')';
                     case is_array($value):
-                        return count($value) ? '[...]' : '[]';
+                        return count($value) > 0 ? '[...]' : '[]';
                     case is_null($value):
                         return 'null'; // return the lowercased version
                     default:
                         return var_export($value, true);
                 }
-            }, array_values($error['args'] ?? []))
+            }, array_values($error['args'] ?? [])),
         );
 
         $function .= '(' . $args . ')';

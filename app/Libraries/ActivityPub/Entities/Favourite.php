@@ -12,8 +12,14 @@ use Michalsn\Uuid\UuidEntity;
 
 class Favourite extends UuidEntity
 {
+    /**
+     * @var string[]
+     */
     protected $uuids = ['note_id'];
 
+    /**
+     * @var array<string, string>
+     */
     protected $casts = [
         'actor_id' => 'integer',
         'note_id' => 'integer',

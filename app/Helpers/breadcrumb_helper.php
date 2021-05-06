@@ -8,20 +8,24 @@
 
 use Config\Services;
 
-/**
- * Renders the breadcrumb navigation through the Breadcrumb service
- *
- * @param  string $class to be added to the breadcrumb nav
- * @return string html breadcrumb
- */
-function render_breadcrumb($class = null)
-{
-    $breadcrumb = Services::breadcrumb();
-    return $breadcrumb->render($class);
+if (!function_exists('render_breadcrumb')) {
+    /**
+     * Renders the breadcrumb navigation through the Breadcrumb service
+     *
+     * @param  string $class to be added to the breadcrumb nav
+     * @return string html breadcrumb
+     */
+    function render_breadcrumb(string $class = null): string
+    {
+        $breadcrumb = Services::breadcrumb();
+        return $breadcrumb->render($class);
+    }
 }
 
-function replace_breadcrumb_params($newParams)
-{
-    $breadcrumb = Services::breadcrumb();
-    $breadcrumb->replaceParams($newParams);
+if (!function_exists('replace_breadcrumb_params')) {
+    function replace_breadcrumb_params($newParams): void
+    {
+        $breadcrumb = Services::breadcrumb();
+        $breadcrumb->replaceParams($newParams);
+    }
 }

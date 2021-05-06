@@ -18,6 +18,7 @@ class Analytics extends BaseConfig
      * --------------------------------------------------------------------
      * Route filters options
      * --------------------------------------------------------------------
+     * @var array<string, string>
      */
     public $routeFilters = [
         'analytics-full-data' => '',
@@ -27,11 +28,8 @@ class Analytics extends BaseConfig
 
     /**
      * get the full audio file url
-     *
-     * @param string $filename
-     * @return string
      */
-    public function getAudioFileUrl(string $audioFilePath)
+    public function getAudioFileUrl(string $audioFilePath): string
     {
         return base_url($audioFilePath);
     }

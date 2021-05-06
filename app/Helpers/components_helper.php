@@ -6,24 +6,25 @@
  * @link       https://castopod.org/
  */
 
+use CodeIgniter\View\Table;
+use CodeIgniter\I18n\Time;
+
 if (!function_exists('button')) {
     /**
      * Button component
      *
      * Creates a stylized button or button like anchor tag if the URL is defined.
      *
-     * @param string           $label The button label
-     * @param mixed|null       $uri URI string or array of URI segments
-     * @param array            $customOptions button options: variant, size, iconLeft, iconRight
-     * @param array            $customAttributes Additional attributes
+     * @param array  $customOptions button options: variant, size, iconLeft, iconRight
+     * @param array  $customAttributes Additional attributes
      *
      * @return string
      */
     function button(
         string $label = '',
-        $uri = null,
-        $customOptions = [],
-        $customAttributes = []
+        string $uri = '',
+        array $customOptions = [],
+        array $customAttributes = []
     ): string {
         $defaultOptions = [
             'variant' => 'default',
@@ -90,7 +91,7 @@ if (!function_exists('button')) {
             $label .= icon($options['iconRight'], 'ml-2');
         }
 
-        if ($uri) {
+        if ($uri !== '') {
             return anchor(
                 $uri,
                 $label,
@@ -111,8 +112,8 @@ if (!function_exists('button')) {
         );
 
         return <<<HTML
-            <button class="$buttonClass" $attributes>
-            $label
+            <button class="{$buttonClass}" {$attributes}>
+            {$label}
             </button>
         HTML;
     }
@@ -126,19 +127,19 @@ if (!function_exists('icon_button')) {
      *
      * Abstracts the `button()` helper to create a stylized icon button
      *
-     * @param string           $label The button label
-     * @param mixed|null       $uri URI string or array of URI segments
-     * @param array            $customOptions button options: variant, size, iconLeft, iconRight
-     * @param array            $customAttributes Additional attributes
+     * @param string $label The button label
+     * @param string  $uri URI string or array of URI segments
+     * @param array  $customOptions button options: variant, size, iconLeft, iconRight
+     * @param array  $customAttributes Additional attributes
      *
      * @return string
      */
     function icon_button(
         string $icon,
         string $title,
-        $uri = null,
-        $customOptions = [],
-        $customAttributes = []
+        string $uri = '',
+        array $customOptions = [],
+        array $customAttributes = []
     ): string {
         $defaultOptions = [
             'isSquared' => true,
@@ -197,9 +198,9 @@ if (!function_exists('data_table')) {
      *
      * @return string
      */
-    function data_table($columns, $data = [], ...$rest): string
+    function data_table(array $columns, array $data = [], ...$rest): string
     {
-        $table = new \CodeIgniter\View\Table();
+        $table = new Table();
 
         $template = [
             'table_open' => '<table class="w-full whitespace-no-wrap">',
@@ -219,17 +220,17 @@ if (!function_exists('data_table')) {
 
         $tableHeaders = [];
         foreach ($columns as $column) {
-            array_push($tableHeaders, $column['header']);
+            $tableHeaders[] = $column['header'];
         }
 
         $table->setHeading($tableHeaders);
 
-        if ($dataCount = count($data)) {
-            for ($i = 0; $i < $dataCount; $i++) {
+        if (($dataCount = count($data)) !== 0) {
+            for ($i = 0; $i < $dataCount; ++$i) {
                 $row = $data[$i];
                 $rowData = [];
                 foreach ($columns as $column) {
-                    array_push($rowData, $column['cell']($row, ...$rest));
+                    $rowData[] = $column['cell']($row, ...$rest);
                 }
                 $table->addRow($rowData);
             }
@@ -251,38 +252,39 @@ if (!function_exists('publication_pill')) {
      *
      * Shows the stylized publication datetime in regards to current datetime.
      *
-     * @param \CodeIgniter\I18n\Time    $publicationDate publication datetime of the episode
+     * @param Time $publicationDate publication datetime of the episode
      * @param boolean                   $isPublished whether or not the episode has been published
      * @param string                   $customClass css class to add to the component
      *
      * @return string
      */
     function publication_pill(
-        $publicationDate,
+        ?Time $publicationDate,
         $publicationStatus,
-        $customClass = ''
+        string $customClass = ''
     ): string {
+        if ($publicationDate === null) {
+            return '';
+        }
+
         $class =
             $publicationStatus === 'published'
                 ? 'text-pine-500 border-pine-500'
                 : 'text-red-600 border-red-600';
 
-        $transParam = [];
-        if ($publicationDate) {
-            $transParam = [
-                '<time pubdate datetime="' .
-                $publicationDate->format(DateTime::ATOM) .
-                '" title="' .
-                $publicationDate .
-                '">' .
-                lang('Common.mediumDate', [$publicationDate]) .
-                '</time>',
-            ];
-        }
+        $langOptions = [
+            '<time pubdate datetime="' .
+            $publicationDate->format(DateTime::ATOM) .
+            '" title="' .
+            $publicationDate .
+            '">' .
+            lang('Common.mediumDate', [$publicationDate]) .
+            '</time>',
+        ];
 
         $label = lang(
             'Episode.publication_status.' . $publicationStatus,
-            $transParam,
+            $langOptions,
         );
 
         return '<span class="px-1 font-semibold border ' .
@@ -303,15 +305,13 @@ if (!function_exists('publication_button')) {
      *
      * Displays the appropriate publication button depending on the publication status.
      *
-     * @param integer   $podcastId
-     * @param integer   $episodeId
      * @param boolean   $publicationStatus the episode's publication status     *
      * @return string
      */
     function publication_button(
-        $podcastId,
-        $episodeId,
-        $publicationStatus
+        int $podcastId,
+        int $episodeId,
+        bool $publicationStatus
     ): string {
         switch ($publicationStatus) {
             case 'not_published':
@@ -351,17 +351,15 @@ if (!function_exists('episode_numbering')) {
     /**
      * Returns relevant translated episode numbering.
      *
-     * @param int|null  $episodeNumber
-     * @param int|null  $seasonNumber
      * @param string    $class styling classes
      * @param string    $is_abbr component will show abbreviated numbering if true
      *
      * @return string|null
      */
     function episode_numbering(
-        $episodeNumber = null,
-        $seasonNumber = null,
-        $class = '',
+        ?int $episodeNumber = null,
+        ?int $seasonNumber = null,
+        string $class = '',
         $isAbbr = false
     ): string {
         if (!$episodeNumber && !$seasonNumber) {
@@ -409,36 +407,28 @@ if (!function_exists('episode_numbering')) {
 if (!function_exists('location_link')) {
     /**
      * Returns link to display from location info
-     *
-     * @param string $locationName
-     * @param string $locationGeo
-     * @param string $locationOsmid
-     *
-     * @return string
      */
     function location_link(
-        $locationName,
-        $locationGeo,
-        $locationOsmid,
+        ?string $locationName,
+        ?string $locationGeo,
+        ?string $locationOsmid,
         $class = ''
-    ) {
-        $link = '';
-
-        if (!empty($locationName)) {
-            $link = anchor(
-                location_url($locationName, $locationGeo, $locationOsmid),
-                icon('map-pin', 'mr-2') . $locationName,
-                [
-                    'class' =>
-                        'inline-flex items-baseline hover:underline' .
-                        (empty($class) ? '' : " $class"),
-                    'target' => '_blank',
-                    'rel' => 'noreferrer noopener',
-                ],
-            );
+    ): string {
+        if (empty($locationName)) {
+            return '';
         }
 
-        return $link;
+        return anchor(
+            location_url($locationName, $locationGeo, $locationOsmid),
+            icon('map-pin', 'mr-2') . $locationName,
+            [
+                'class' =>
+                    'inline-flex items-baseline hover:underline' .
+                    (empty($class) ? '' : " {$class}"),
+                'target' => '_blank',
+                'rel' => 'noreferrer noopener',
+            ],
+        );
     }
 }
 

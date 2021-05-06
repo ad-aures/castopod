@@ -13,9 +13,6 @@ class Rules
     /**
      * Checks a URL to ensure it's formed correctly.
      *
-     * @param string $str
-     *
-     * @return boolean
      */
     public function validate_url(string $str = null): bool
     {

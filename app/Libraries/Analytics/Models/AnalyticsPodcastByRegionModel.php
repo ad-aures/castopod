@@ -10,25 +10,34 @@
 
 namespace Analytics\Models;
 
+use Analytics\Entities\AnalyticsPodcastsByRegion;
 use CodeIgniter\Model;
 
 class AnalyticsPodcastByRegionModel extends Model
 {
+    /**
+     * @var string
+     */
     protected $table = 'analytics_podcasts_by_region';
 
-    protected $allowedFields = [];
-
-    protected $returnType = \Analytics\Entities\AnalyticsPodcastsByRegion::class;
+    /**
+     * @var string
+     */
+    protected $returnType = AnalyticsPodcastsByRegion::class;
+    /**
+     * @var bool
+     */
     protected $useSoftDeletes = false;
 
+    /**
+     * @var bool
+     */
     protected $useTimestamps = false;
 
     /**
      * Gets region data for a podcast
      *
-     * @param int $podcastId
-     *
-     * @return array
+     * @return AnalyticsPodcastsByRegion[]
      */
     public function getData(int $podcastId): array
     {

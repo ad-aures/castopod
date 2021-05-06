@@ -15,7 +15,7 @@ use CodeIgniter\Database\Migration;
 
 class AddFollowers extends Migration
 {
-    public function up()
+    public function up(): void
     {
         $this->forge->addField([
             'actor_id' => [
@@ -50,7 +50,7 @@ class AddFollowers extends Migration
         $this->forge->createTable('activitypub_follows');
     }
 
-    public function down()
+    public function down(): void
     {
         $this->forge->dropTable('activitypub_follows');
     }

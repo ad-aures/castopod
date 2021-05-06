@@ -15,19 +15,19 @@ use CodeIgniter\Database\Migration;
 
 class AddEpisodeIdToNotes extends Migration
 {
-    public function up()
+    public function up(): void
     {
         $prefix = $this->db->getPrefix();
 
         $createQuery = <<<SQL
-            ALTER TABLE ${prefix}activitypub_notes
+            ALTER TABLE {$prefix}activitypub_notes
             ADD COLUMN `episode_id` INT UNSIGNED NULL AFTER `replies_count`,
-            ADD FOREIGN KEY ${prefix}activitypub_notes_episode_id_foreign(episode_id) REFERENCES ${prefix}episodes(id) ON DELETE CASCADE;
+            ADD FOREIGN KEY {$prefix}activitypub_notes_episode_id_foreign(episode_id) REFERENCES {$prefix}episodes(id) ON DELETE CASCADE;
         SQL;
         $this->db->query($createQuery);
     }
 
-    public function down()
+    public function down(): void
     {
         $this->forge->dropForeignKey(
             'activitypub_notes',

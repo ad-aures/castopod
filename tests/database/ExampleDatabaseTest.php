@@ -1,8 +1,11 @@
 <?php
 
+namespace Tests\Database;
+
+use Tests\Support\DatabaseTestCase;
 use Tests\Support\Models\ExampleModel;
 
-class ExampleDatabaseTest extends \Tests\Support\DatabaseTestCase
+class ExampleDatabaseTest extends DatabaseTestCase
 {
     public function setUp(): void
     {
@@ -11,7 +14,7 @@ class ExampleDatabaseTest extends \Tests\Support\DatabaseTestCase
         // Extra code to run before each test
     }
 
-    public function testModelFindAll()
+    public function testModelFindAll(): void
     {
         $model = new ExampleModel();
 
@@ -22,7 +25,7 @@ class ExampleDatabaseTest extends \Tests\Support\DatabaseTestCase
         $this->assertCount(3, $objects);
     }
 
-    public function testSoftDeleteLeavesRow()
+    public function testSoftDeleteLeavesRow(): void
     {
         $model = new ExampleModel();
         $this->setPrivateProperty($model, 'useSoftDeletes', true);

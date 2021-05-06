@@ -9,11 +9,12 @@
 namespace App\Entities;
 
 use App\Models\EpisodeModel;
+use RuntimeException;
 
 class Note extends \ActivityPub\Entities\Note
 {
     /**
-     * @var \App\Entities\Episode|null
+     * @var Episode|null
      */
     protected $episode;
 
@@ -40,7 +41,7 @@ class Note extends \ActivityPub\Entities\Note
     public function getEpisode()
     {
         if (empty($this->episode_id)) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 'Note must have an episode_id before getting episode.',
             );
         }

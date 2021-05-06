@@ -8,6 +8,7 @@
 
 namespace ActivityPub\Objects;
 
+use ActivityPub\Entities\Actor;
 use ActivityPub\Core\ObjectType;
 
 class ActorObject extends ObjectType
@@ -68,17 +69,14 @@ class ActorObject extends ObjectType
     /**
      * @var array
      */
-    protected $icon;
+    protected $icon = [];
 
     /**
      * @var object
      */
     protected $publicKey;
 
-    /**
-     * @param \ActivityPub\Entities\Actor $podcast
-     */
-    public function __construct($actor)
+    public function __construct(Actor $actor)
     {
         $this->id = $actor->uri;
 

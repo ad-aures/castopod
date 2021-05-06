@@ -6,6 +6,11 @@
  * @link       https://castopod.org/
  */
 
+use CodeIgniter\HTTP\URI;
+use Config\Database;
+use Essence\Essence;
+use ActivityPub\Entities\PreviewCard;
+use ActivityPub\Entities\Actor;
 use ActivityPub\Activities\AcceptActivity;
 use ActivityPub\ActivityRequest;
 use CodeIgniter\HTTP\Exceptions\HTTPException;
@@ -14,15 +19,11 @@ if (!function_exists('get_webfinger_data')) {
     /**
      * Retrieve actor webfinger data from username and domain
      *
-     * @param string $username
-     * @param string $domain
-     * @return mixed
-     * @throws HTTPException
-     * @throws InvalidArgumentException
+     * @return object|null
      */
-    function get_webfinger_data($username, $domain)
+    function get_webfinger_data(string $username, string $domain): ?object
     {
-        $webfingerUri = new \CodeIgniter\HTTP\URI();
+        $webfingerUri = new URI();
         $webfingerUri->setScheme('https');
         $webfingerUri->setHost($domain);
         isset($port) && $webfingerUri->setPort((int) $port);
@@ -32,7 +33,12 @@ if (!function_exists('get_webfinger_data')) {
         $webfingerRequest = new ActivityRequest($webfingerUri);
         $webfingerResponse = $webfingerRequest->get();
 
-        return json_decode($webfingerResponse->getBody());
+        return json_decode(
+            $webfingerResponse->getBody(),
+            null,
+            512,
+            JSON_THROW_ON_ERROR,
+        );
     }
 }
 
@@ -47,7 +53,7 @@ if (!function_exists('split_handle')) {
     {
         if (
             !preg_match(
-                '/^@?(?P<username>[\w\.\-]+)@(?P<domain>[\w\.\-]+)(?P<port>:[\d]+)?$/',
+                '~^@?(?P<username>[\w\.\-]+)@(?P<domain>[\w\.\-]+)(?P<port>:[\d]+)?$~',
                 $handle,
                 $matches,
             )
@@ -63,17 +69,18 @@ if (!function_exists('accept_follow')) {
     /**
      * Sends an accept activity to the targetActor's inbox
      *
-     * @param \ActivityPub\Entities\Actor $actor Actor which accepts the follow
-     * @param \ActivityPub\Entities\Actor $targetActor Actor which receives the accept follow
-     * @param string $objectId
-     * @return void
+     * @param Actor $actor Actor which accepts the follow
+     * @param Actor $targetActor Actor which receives the accept follow
      */
-    function accept_follow($actor, $targetActor, $objectId)
-    {
+    function accept_follow(
+        Actor $actor,
+        Actor $targetActor,
+        string $objectId
+    ): void {
         $acceptActivity = new AcceptActivity();
         $acceptActivity->set('actor', $actor->uri)->set('object', $objectId);
 
-        $db = \Config\Database::connect();
+        $db = Database::connect();
         $db->transStart();
 
         $activityModel = model('ActivityModel');
@@ -101,7 +108,7 @@ if (!function_exists('accept_follow')) {
             );
             $acceptRequest->sign($actor->key_id, $actor->private_key);
             $acceptRequest->post();
-        } catch (\Exception $e) {
+        } catch (Exception $exception) {
             $db->transRollback();
         }
 
@@ -113,11 +120,9 @@ if (!function_exists('send_activity_to_followers')) {
     /**
      * Sends an activity to all actor followers
      *
-     * @param \ActivityPub\Entities\Actor $actor
      * @param string $activity
-     * @return void
      */
-    function send_activity_to_followers($actor, $activityPayload)
+    function send_activity_to_followers(Actor $actor, $activityPayload): void
     {
         foreach ($actor->followers as $follower) {
             try {
@@ -127,7 +132,7 @@ if (!function_exists('send_activity_to_followers')) {
                 );
                 $acceptRequest->sign($actor->key_id, $actor->private_key);
                 $acceptRequest->post();
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 // log error
                 log_message('critical', $e);
             }
@@ -139,10 +144,9 @@ if (!function_exists('extract_urls_from_message')) {
     /**
      * Returns an array of all urls from a string
      *
-     * @param mixed $message
      * @return string[]
      */
-    function extract_urls_from_message($message)
+    function extract_urls_from_message(string $message): array
     {
         preg_match_all(
             '~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i',
@@ -158,12 +162,11 @@ if (!function_exists('create_preview_card_from_url')) {
     /**
      * Extract open graph metadata from given url and create preview card
      *
-     * @param \CodeIgniter\HTTP\URI $url
-     * @return \ActivityPub\Entities\PreviewCard|null
+     * @return PreviewCard|null
      */
-    function create_preview_card_from_url($url)
+    function create_preview_card_from_url(URI $url): ?PreviewCard
     {
-        $essence = new \Essence\Essence([
+        $essence = new Essence([
             'filters' => [
                 'OEmbedProvider' => '//',
                 'OpenGraphProvider' => '//',
@@ -182,7 +185,7 @@ if (!function_exists('create_preview_card_from_url')) {
 
             // Check that, at least, the url and title are set
             if ($media->url && $media->title) {
-                $preview_card = new \ActivityPub\Entities\PreviewCard([
+                $preview_card = new PreviewCard([
                     'url' => (string) $url,
                     'title' => $media->title,
                     'description' => $media->description,
@@ -219,10 +222,9 @@ if (!function_exists('get_or_create_preview_card_from_url')) {
     /**
      * Extract open graph metadata from given url and create preview card
      *
-     * @param \CodeIgniter\HTTP\URI $url
-     * @return \ActivityPub\Entities\PreviewCard|null
+     * @return PreviewCard|null
      */
-    function get_or_create_preview_card_from_url($url)
+    function get_or_create_preview_card_from_url(URI $url): ?PreviewCard
     {
         // check if preview card has already been generated
         if (
@@ -243,10 +245,9 @@ if (!function_exists('get_or_create_actor_from_uri')) {
      * Retrieves actor from database using the actor uri
      * If Actor is not present, it creates the record in the database and returns it.
      *
-     * @param string $actorUri
-     * @return \ActivityPub\Entities\Actor|null
+     * @return Actor|null
      */
-    function get_or_create_actor_from_uri($actorUri)
+    function get_or_create_actor_from_uri(string $actorUri): ?Actor
     {
         // check if actor exists in database already and return it
         if ($actor = model('ActorModel')->getActorByUri($actorUri)) {
@@ -263,11 +264,9 @@ if (!function_exists('get_or_create_actor')) {
      * Retrieves actor from database using the actor username and domain
      * If actor is not present, it creates the record in the database and returns it.
      *
-     * @param string $username
-     * @param string $domain
-     * @return \ActivityPub\Entities\Actor|null
+     * @return Actor|null
      */
-    function get_or_create_actor($username, $domain)
+    function get_or_create_actor(string $username, string $domain): ?Actor
     {
         // check if actor exists in database already and return it
         if (
@@ -292,16 +291,20 @@ if (!function_exists('create_actor_from_uri')) {
      * Creates actor record in database using
      * the info gathered from the actorUri parameter
      *
-     * @param string $actorUri
-     * @return \ActivityPub\Entities\Actor|null
+     * @return Actor|null
      */
-    function create_actor_from_uri($actorUri)
+    function create_actor_from_uri(string $actorUri): ?Actor
     {
         $activityRequest = new ActivityRequest($actorUri);
         $actorResponse = $activityRequest->get();
-        $actorPayload = json_decode($actorResponse->getBody());
+        $actorPayload = json_decode(
+            $actorResponse->getBody(),
+            null,
+            512,
+            JSON_THROW_ON_ERROR,
+        );
 
-        $newActor = new \ActivityPub\Entities\Actor();
+        $newActor = new Actor();
         $newActor->uri = $actorUri;
         $newActor->username = $actorPayload->preferredUsername;
         $newActor->domain = $activityRequest->getDomain();
@@ -335,10 +338,9 @@ if (!function_exists('get_current_domain')) {
     /**
      * Returns instance's domain name
      *
-     * @return string
      * @throws HTTPException
      */
-    function get_current_domain()
+    function get_current_domain(): string
     {
         $uri = current_url(true);
         return $uri->getHost() . ($uri->getPort() ? ':' . $uri->getPort() : '');
@@ -349,12 +351,11 @@ if (!function_exists('extract_text_from_html')) {
     /**
      * Extracts the text from html content
      *
-     * @param mixed $content
      * @return string|string[]|null
      */
-    function extract_text_from_html($content)
+    function extract_text_from_html(string $content)
     {
-        return preg_replace('/\s+/', ' ', strip_tags($content));
+        return preg_replace('~\s+~', ' ', strip_tags($content));
     }
 }
 
@@ -366,14 +367,13 @@ if (!function_exists('linkify')) {
      * @param string $value
      * @param array  $protocols  http/https, ftp, mail, twitter
      * @param array  $attributes
-     * @return string
      */
-    function linkify($text, $protocols = ['http', 'handle'])
+    function linkify($text, array $protocols = ['http', 'handle']): string
     {
         $links = [];
 
         // Extract text links for each protocol
-        foreach ((array) $protocols as $protocol) {
+        foreach ($protocols as $protocol) {
             switch ($protocol) {
                 case 'http':
                 case 'https':
@@ -388,7 +388,7 @@ if (!function_exists('linkify')) {
                             helper('text');
 
                             $link = preg_replace(
-                                '#^www\.(.+\.)#i',
+                                '~^www\.(.+\.)~i',
                                 '$1',
                                 $link,
                             );
@@ -397,7 +397,7 @@ if (!function_exists('linkify')) {
                                 array_push(
                                     $links,
                                     anchor(
-                                        "$protocol://$link",
+                                        "{$protocol}://{$link}",
                                         ellipsize(rtrim($link, '/'), 30),
                                         [
                                             'target' => '_blank',
@@ -434,28 +434,27 @@ if (!function_exists('linkify')) {
                                             ]),
                                         ) .
                                         '>';
-                                } else {
-                                    try {
-                                        $actor = get_or_create_actor(
-                                            $match['username'],
-                                            $match['domain'],
-                                        );
-                                        return '<' .
-                                            array_push(
-                                                $links,
-                                                anchor($actor->uri, $match[0], [
-                                                    'target' => '_blank',
-                                                    'rel' =>
-                                                        'noopener noreferrer',
-                                                ]),
-                                            ) .
-                                            '>';
-                                    } catch (\CodeIgniter\HTTP\Exceptions\HTTPException $e) {
-                                        // Couldn't retrieve actor, do not wrap the text in link
-                                        return '<' .
-                                            array_push($links, $match[0]) .
-                                            '>';
-                                    }
+                                }
+
+                                try {
+                                    $actor = get_or_create_actor(
+                                        $match['username'],
+                                        $match['domain'],
+                                    );
+                                    return '<' .
+                                        array_push(
+                                            $links,
+                                            anchor($actor->uri, $match[0], [
+                                                'target' => '_blank',
+                                                'rel' => 'noopener noreferrer',
+                                            ]),
+                                        ) .
+                                        '>';
+                                } catch (\CodeIgniter\HTTP\Exceptions\HTTPException $httpException) {
+                                    // Couldn't retrieve actor, do not wrap the text in link
+                                    return '<' .
+                                        array_push($links, $match[0]) .
+                                        '>';
                                 }
                             } else {
                                 if (
@@ -488,10 +487,14 @@ if (!function_exists('linkify')) {
                             return '<' .
                                 array_push(
                                     $links,
-                                    anchor("$protocol://$match[1]", $match[1], [
-                                        'target' => '_blank',
-                                        'rel' => 'noopener noreferrer',
-                                    ]),
+                                    anchor(
+                                        "{$protocol}://$match[1]",
+                                        $match[1],
+                                        [
+                                            'target' => '_blank',
+                                            'rel' => 'noopener noreferrer',
+                                        ],
+                                    ),
                                 ) .
                                 '>';
                         },
@@ -503,7 +506,7 @@ if (!function_exists('linkify')) {
 
         // Insert all links
         return preg_replace_callback(
-            '/<(\d+)>/',
+            '~<(\d+)>~',
             function ($match) use (&$links) {
                 return $links[$match[1] - 1];
             },

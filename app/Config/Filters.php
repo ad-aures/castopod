@@ -2,6 +2,10 @@
 
 namespace Config;
 
+use Myth\Auth\Filters\LoginFilter;
+use Myth\Auth\Filters\RoleFilter;
+use App\Filters\PermissionFilter;
+use ActivityPub\Filters\ActivityPubFilter;
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Filters\CSRF;
 use CodeIgniter\Filters\DebugToolbar;
@@ -19,10 +23,10 @@ class Filters extends BaseConfig
         'csrf' => CSRF::class,
         'toolbar' => DebugToolbar::class,
         'honeypot' => Honeypot::class,
-        'login' => \Myth\Auth\Filters\LoginFilter::class,
-        'role' => \Myth\Auth\Filters\RoleFilter::class,
-        'permission' => \App\Filters\PermissionFilter::class,
-        'activity-pub' => \ActivityPub\Filters\ActivityPubFilter::class,
+        'login' => LoginFilter::class,
+        'role' => RoleFilter::class,
+        'permission' => PermissionFilter::class,
+        'activity-pub' => ActivityPubFilter::class,
     ];
 
     /**

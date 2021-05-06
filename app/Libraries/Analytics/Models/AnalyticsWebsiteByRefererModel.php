@@ -10,25 +10,34 @@
 
 namespace Analytics\Models;
 
+use Analytics\Entities\AnalyticsWebsiteByReferer;
 use CodeIgniter\Model;
 
 class AnalyticsWebsiteByRefererModel extends Model
 {
+    /**
+     * @var string
+     */
     protected $table = 'analytics_website_by_referer';
 
-    protected $allowedFields = [];
-
-    protected $returnType = \Analytics\Entities\AnalyticsWebsiteByReferer::class;
+    /**
+     * @var string
+     */
+    protected $returnType = AnalyticsWebsiteByReferer::class;
+    /**
+     * @var bool
+     */
     protected $useSoftDeletes = false;
 
+    /**
+     * @var bool
+     */
     protected $useTimestamps = false;
 
     /**
      * Gets referer data for a podcast
      *
-     * @param int $podcastId
-     *
-     * @return array
+     * @return AnalyticsWebsiteByReferer[]
      */
     public function getData(int $podcastId): array
     {
@@ -55,9 +64,7 @@ class AnalyticsWebsiteByRefererModel extends Model
     /**
      * Gets domain data for a podcast
      *
-     * @param int $podcastId
-     *
-     * @return array
+     * @return AnalyticsWebsiteByReferer[]
      */
     public function getDataByDomainWeekly(int $podcastId): array
     {
@@ -65,9 +72,7 @@ class AnalyticsWebsiteByRefererModel extends Model
             !($found = cache("{$podcastId}_analytics_website_by_domain_weekly"))
         ) {
             $oneWeekAgo = date('Y-m-d', strtotime('-1 week'));
-            $found = $this->select(
-                'SUBSTRING_INDEX(domain, \'.\', -2) as labels',
-            )
+            $found = $this->select("SUBSTRING_INDEX(domain, '.', -2) as labels")
                 ->selectSum('hits', 'values')
                 ->where([
                     'podcast_id' => $podcastId,
@@ -88,9 +93,7 @@ class AnalyticsWebsiteByRefererModel extends Model
     /**
      * Gets domain data for a podcast
      *
-     * @param int $podcastId
-     *
-     * @return array
+     * @return AnalyticsWebsiteByReferer[]
      */
     public function getDataByDomainYearly(int $podcastId): array
     {
@@ -98,9 +101,7 @@ class AnalyticsWebsiteByRefererModel extends Model
             !($found = cache("{$podcastId}_analytics_website_by_domain_yearly"))
         ) {
             $oneYearAgo = date('Y-m-d', strtotime('-1 year'));
-            $found = $this->select(
-                'SUBSTRING_INDEX(domain, \'.\', -2) as labels',
-            )
+            $found = $this->select("SUBSTRING_INDEX(domain, '.', -2) as labels")
                 ->selectSum('hits', 'values')
                 ->where([
                     'podcast_id' => $podcastId,

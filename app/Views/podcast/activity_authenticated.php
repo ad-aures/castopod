@@ -75,7 +75,7 @@
 
         <?= button(
             lang('Note.form.submit'),
-            null,
+            '',
             ['variant' => 'primary', 'size' => 'small'],
             ['type' => 'submit', 'class' => 'self-end'],
         ) ?>

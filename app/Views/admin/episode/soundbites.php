@@ -88,7 +88,7 @@
             <td class="px-4 py-2"><?= icon_button(
                 'play',
                 lang('Episode.soundbites_form.play'),
-                null,
+                '',
                 ['variant' => 'primary'],
                 [
                     'class' => 'mb-1 mr-1',
@@ -187,7 +187,7 @@
 
 <?= button(
     lang('Episode.soundbites_form.submit_edit'),
-    null,
+    '',
     ['variant' => 'primary'],
     ['type' => 'submit', 'class' => 'self-end'],
 ) ?>

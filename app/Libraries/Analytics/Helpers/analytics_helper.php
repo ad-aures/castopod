@@ -1,5 +1,11 @@
 <?php
 
+use Config\Services;
+use Podlibre\Ipcat\IpDb;
+use GeoIp2\Database\Reader;
+use Opawg\UserAgentsPhp\UserAgents;
+use Config\Database;
+use WhichBrowser\Parser;
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -33,26 +39,17 @@ if (!function_exists('generate_episode_analytics_url')) {
      * Builds the episode analytics url that redirects to the audio file url
      * after analytics hit.
      *
-     * @param int $podcastId
-     * @param int $episodeId
-     * @param string $audioFilePath
-     * @param int $audioFileDuration
-     * @param int $audioFileSize
-     * @param int $audioFileHeaderSize
-     * @param \CodeIgniter\I18n\Time $publicationDate
-     *
-     * @return string
      * @throws RouterException
      */
     function generate_episode_analytics_url(
-        $podcastId,
-        $episodeId,
-        $audioFilePath,
-        $audioFileDuration,
-        $audioFileFilesize,
-        $audioFileHeaderSize,
-        $publicationDate
-    ) {
+        int $podcastId,
+        int $episodeId,
+        string $audioFilePath,
+        int $audioFileDuration,
+        int $audioFileSize,
+        int $audioFileHeaderSize,
+        \CodeIgniter\I18n\Time $publicationDate
+    ): string {
         return url_to(
             'episode-analytics-hit',
             base64_url_encode(
@@ -64,14 +61,14 @@ if (!function_exists('generate_episode_analytics_url')) {
                     // - if file is shorter than 60sec, then it's audio_file_size
                     // - if file is longer than 60 seconds then it's audio_file_header_size + 60 seconds
                     $audioFileDuration <= 60
-                        ? $audioFileFilesize
+                        ? $audioFileSize
                         : $audioFileHeaderSize +
                             floor(
-                                (($audioFileFilesize - $audioFileHeaderSize) /
+                                (($audioFileSize - $audioFileHeaderSize) /
                                     $audioFileDuration) *
                                     60,
                             ),
-                    $audioFileFilesize,
+                    $audioFileSize,
                     $audioFileDuration,
                     strtotime($publicationDate),
                 ),
@@ -85,15 +82,15 @@ if (!function_exists('set_user_session_deny_list_ip')) {
     /**
      * Set user country in session variable, for analytic purposes
      */
-    function set_user_session_deny_list_ip()
+    function set_user_session_deny_list_ip(): void
     {
-        $session = \Config\Services::session();
+        $session = Services::session();
         $session->start();
 
         if (!$session->has('denyListIp')) {
             $session->set(
                 'denyListIp',
-                \Podlibre\Ipcat\IpDb::find($_SERVER['REMOTE_ADDR']) != null,
+                IpDb::find($_SERVER['REMOTE_ADDR']) != null,
             );
         }
     }
@@ -103,9 +100,9 @@ if (!function_exists('set_user_session_location')) {
     /**
      * Set user country in session variable, for analytic purposes
      */
-    function set_user_session_location()
+    function set_user_session_location(): void
     {
-        $session = \Config\Services::session();
+        $session = Services::session();
         $session->start();
 
         $location = [
@@ -118,7 +115,7 @@ if (!function_exists('set_user_session_location')) {
         // Finds location:
         if (!$session->has('location')) {
             try {
-                $cityReader = new \GeoIp2\Database\Reader(
+                $cityReader = new Reader(
                     WRITEPATH . 'uploads/GeoLite2-City/GeoLite2-City.mmdb',
                 );
                 $city = $cityReader->city($_SERVER['REMOTE_ADDR']);
@@ -133,8 +130,8 @@ if (!function_exists('set_user_session_location')) {
                     'latitude' => round($city->location->latitude, 3),
                     'longitude' => round($city->location->longitude, 3),
                 ];
-            } catch (\Exception $e) {
                 // If things go wrong the show must go on and the user must be able to download the file
+            } catch (Exception $exception) {
             }
             $session->set('location', $location);
         }
@@ -145,9 +142,9 @@ if (!function_exists('set_user_session_player')) {
     /**
      * Set user player in session variable, for analytic purposes
      */
-    function set_user_session_player()
+    function set_user_session_player(): void
     {
-        $session = \Config\Services::session();
+        $session = Services::session();
         $session->start();
 
         if (!$session->has('player')) {
@@ -155,11 +152,9 @@ if (!function_exists('set_user_session_player')) {
             $userAgent = $_SERVER['HTTP_USER_AGENT'];
 
             try {
-                $playerFound = \Opawg\UserAgentsPhp\UserAgents::find(
-                    $userAgent,
-                );
-            } catch (\Exception $e) {
+                $playerFound = UserAgents::find($userAgent);
                 // If things go wrong the show must go on and the user must be able to download the file
+            } catch (Exception $exception) {
             }
             if ($playerFound) {
                 $session->set('player', $playerFound);
@@ -172,16 +167,16 @@ if (!function_exists('set_user_session_player')) {
                 ]);
                 // Add to unknown list
                 try {
-                    $db = \Config\Database::connect();
+                    $db = Database::connect();
                     $procedureNameAnalyticsUnknownUseragents = $db->prefixTable(
                         'analytics_unknown_useragents',
                     );
                     $db->query(
-                        "CALL $procedureNameAnalyticsUnknownUseragents(?)",
+                        "CALL {$procedureNameAnalyticsUnknownUseragents}(?)",
                         [$userAgent],
                     );
-                } catch (\Exception $e) {
                     // If things go wrong the show must go on and the user must be able to download the file
+                } catch (Exception $exception) {
                 }
             }
         }
@@ -191,20 +186,18 @@ if (!function_exists('set_user_session_player')) {
 if (!function_exists('set_user_session_browser')) {
     /**
      * Set user browser in session variable, for analytic purposes
-     *
-     * @return void
      */
-    function set_user_session_browser()
+    function set_user_session_browser(): void
     {
-        $session = \Config\Services::session();
+        $session = Services::session();
         $session->start();
 
         if (!$session->has('browser')) {
             $browserName = '- Other -';
             try {
-                $whichbrowser = new \WhichBrowser\Parser(getallheaders());
+                $whichbrowser = new Parser(getallheaders());
                 $browserName = $whichbrowser->browser->name;
-            } catch (\Exception $e) {
+            } catch (Exception $exception) {
                 $browserName = '- Could not get browser name -';
             }
             if ($browserName == null) {
@@ -218,23 +211,21 @@ if (!function_exists('set_user_session_browser')) {
 if (!function_exists('set_user_session_referer')) {
     /**
      * Set user referer in session variable, for analytic purposes
-     *
-     * @return void
      */
-    function set_user_session_referer()
+    function set_user_session_referer(): void
     {
-        $session = \Config\Services::session();
+        $session = Services::session();
         $session->start();
 
         $newreferer = isset($_SERVER['HTTP_REFERER'])
             ? $_SERVER['HTTP_REFERER']
             : '- Direct -';
         $newreferer =
-            parse_url($newreferer, PHP_URL_HOST) ==
+            parse_url($newreferer, PHP_URL_HOST) ===
             parse_url(current_url(false), PHP_URL_HOST)
                 ? '- Direct -'
                 : $newreferer;
-        if (!$session->has('referer') or $newreferer != '- Direct -') {
+        if (!$session->has('referer') || $newreferer != '- Direct -') {
             $session->set('referer', $newreferer);
         }
     }
@@ -243,12 +234,10 @@ if (!function_exists('set_user_session_referer')) {
 if (!function_exists('set_user_session_entry_page')) {
     /**
      * Set user entry page in session variable, for analytic purposes
-     *
-     * @return void
      */
-    function set_user_session_entry_page()
+    function set_user_session_entry_page(): void
     {
-        $session = \Config\Services::session();
+        $session = Services::session();
         $session->start();
 
         $entryPage = $_SERVER['REQUEST_URI'];
@@ -279,19 +268,17 @@ if (!function_exists('podcast_hit')) {
      * @param integer $bytesThreshold The minimum total number of bytes that must be downloaded so that an episode is counted (>1mn)
      * @param integer $fileSize The podcast complete file size
      * @param string $serviceName The name of the service that had fetched the RSS feed
-     *
-     * @return void
      */
     function podcast_hit(
-        $podcastId,
-        $episodeId,
-        $bytesThreshold,
-        $fileSize,
+        int $podcastId,
+        int $episodeId,
+        int $bytesThreshold,
+        int $fileSize,
         $duration,
         $publicationDate,
-        $serviceName
-    ) {
-        $session = \Config\Services::session();
+        string $serviceName
+    ): void {
+        $session = Services::session();
         $session->start();
 
         // We try to count (but if things went wrong the show should go on and the user should be able to download the file):
@@ -333,19 +320,16 @@ if (!function_exists('podcast_hit')) {
                 // If HTTP_RANGE is null we are downloading the complete file:
                 if (!$httpRange) {
                     $downloadedBytes = $fileSize;
-                } else {
+                } elseif ($httpRange != 'bytes=0-1') {
                     // [0-1] bytes range requests are used (by Apple) to check that file exists and that 206 partial content is working.
-                    // We don't count these requests:
-                    if ($httpRange != 'bytes=0-1') {
-                        // We calculate how many bytes are being downloaded based on HTTP_RANGE values:
-                        $ranges = explode(',', substr($httpRange, 6));
-                        foreach ($ranges as $range) {
-                            $parts = explode('-', $range);
-                            $downloadedBytes += empty($parts[1])
-                                ? $fileSize
-                                : $parts[1] -
-                                    (empty($parts[0]) ? 0 : $parts[0]);
-                        }
+                    // We don't count these requests.
+                    // We calculate how many bytes are being downloaded based on HTTP_RANGE values:
+                    $ranges = explode(',', substr($httpRange, 6));
+                    foreach ($ranges as $range) {
+                        $parts = explode('-', $range);
+                        $downloadedBytes += empty($parts[1])
+                            ? $fileSize
+                            : $parts[1] - (empty($parts[0]) ? 0 : $parts[0]);
                     }
                 }
                 // We save the number of downloaded bytes for this user and this episode:
@@ -353,7 +337,7 @@ if (!function_exists('podcast_hit')) {
 
                 // If more that 1mn was downloaded, that's a hit, we send that to the database:
                 if ($downloadedBytes >= $bytesThreshold) {
-                    $db = \Config\Database::connect();
+                    $db = Database::connect();
                     $procedureName = $db->prefixTable('analytics_podcasts');
 
                     $age = intdiv(time() - $publicationDate, 86400);
@@ -374,7 +358,7 @@ if (!function_exists('podcast_hit')) {
                     // We add one download
                     if ($downloadsByUser) {
                         $newListener = 0;
-                        $downloadsByUser++;
+                        ++$downloadsByUser;
                     } else {
                         $downloadsByUser = 1;
                     }
@@ -388,7 +372,7 @@ if (!function_exists('podcast_hit')) {
                     );
 
                     $db->query(
-                        "CALL $procedureName(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",
+                        "CALL {$procedureName}(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",
                         [
                             $podcastId,
                             $episodeId,
@@ -409,9 +393,9 @@ if (!function_exists('podcast_hit')) {
                     );
                 }
             }
-        } catch (\Exception $e) {
+        } catch (Exception $exception) {
             // If things go wrong the show must go on and the user must be able to download the file
-            log_message('critical', $e);
+            log_message('critical', $exception);
         }
     }
 }

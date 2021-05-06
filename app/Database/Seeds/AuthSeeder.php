@@ -15,6 +15,9 @@ use CodeIgniter\Database\Seeder;
 
 class AuthSeeder extends Seeder
 {
+    /**
+     * @var array<string, string>[]
+     */
     protected $groups = [
         [
             'name' => 'superadmin',
@@ -37,6 +40,8 @@ class AuthSeeder extends Seeder
      *      ...
      * ]
      * ```
+     *
+     * @var array<string, array<string, string|array>[]>
      */
     protected $permissions = [
         'users' => [
@@ -249,26 +254,16 @@ class AuthSeeder extends Seeder
         ],
     ];
 
-    static function getGroupIdByName($name, $dataGroups)
-    {
-        foreach ($dataGroups as $group) {
-            if ($group['name'] === $name) {
-                return $group['id'];
-            }
-        }
-        return null;
-    }
-
-    public function run()
+    public function run(): void
     {
         $groupId = 0;
         $dataGroups = [];
         foreach ($this->groups as $group) {
-            array_push($dataGroups, [
+            $dataGroups[] = [
                 'id' => ++$groupId,
                 'name' => $group['name'],
                 'description' => $group['description'],
-            ]);
+            ];
         }
 
         // Map permissions to a format the `auth_permissions` table expects
@@ -277,21 +272,21 @@ class AuthSeeder extends Seeder
         $permissionId = 0;
         foreach ($this->permissions as $context => $actions) {
             foreach ($actions as $action) {
-                array_push($dataPermissions, [
+                $dataPermissions[] = [
                     'id' => ++$permissionId,
                     'name' => $context . '-' . $action['name'],
                     'description' => $action['description'],
-                ]);
+                ];
 
                 foreach ($action['has_permission'] as $role) {
                     // link permission to specified groups
-                    array_push($dataGroupsPermissions, [
+                    $dataGroupsPermissions[] = [
                         'group_id' => $this->getGroupIdByName(
                             $role,
                             $dataGroups,
                         ),
                         'permission_id' => $permissionId,
-                    ]);
+                    ];
                 }
             }
         }
@@ -308,5 +303,17 @@ class AuthSeeder extends Seeder
             ->table('auth_groups_permissions')
             ->ignore(true)
             ->insertBatch($dataGroupsPermissions);
+    }
+    /**
+     * @param array<string, string|int>[] $dataGroups
+     */
+    static function getGroupIdByName(string $name, array $dataGroups): int
+    {
+        foreach ($dataGroups as $group) {
+            if ($group['name'] === $name) {
+                return $group['id'];
+            }
+        }
+        return null;
     }
 }

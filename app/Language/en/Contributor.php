@@ -8,7 +8,7 @@
 
 return [
     'podcast_contributors' => 'Podcast contributors',
-    'view' => '{username}\'s contribution to {podcastName}',
+    'view' => "{username}'s contribution to {podcastName}",
     'add' => 'Add contributor',
     'add_contributor' => 'Add a contributor for {0}',
     'edit_role' => 'Update role for {0}',
@@ -28,10 +28,10 @@ return [
         'podcast_admin' => 'Podcast admin',
     ],
     'messages' => [
-        'removeOwnerContributorError' => 'You can\'t remove the podcast owner!',
+        'removeOwnerContributorError' => "You can't remove the podcast owner!",
         'removeContributorSuccess' =>
             'You have successfully removed {username} from {podcastTitle}',
         'alreadyAddedError' =>
-            'The contributor you\'re trying to add has already been added!',
+            "The contributor you're trying to add has already been added!",
     ],
 ];

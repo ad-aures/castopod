@@ -13,7 +13,7 @@
     lang('Person.create'),
     route_to('person-create'),
     ['variant' => 'primary', 'iconLeft' => 'add'],
-    ['class' => 'mr-2']
+    ['class' => 'mr-2'],
 ) ?>
 <?= $this->endSection() ?>
 
@@ -29,7 +29,7 @@
 
 <?= form_section(
     lang('Person.episode_form.manage_section_title'),
-    lang('Person.episode_form.manage_section_subtitle')
+    lang('Person.episode_form.manage_section_subtitle'),
 ) ?>
 
 
@@ -47,11 +47,11 @@
                     ($episodePerson->person_group && $episodePerson->person_role
                         ? '<span class="text-sm text-gray-600">' .
                             lang(
-                                "PersonsTaxonomy.persons.{$episodePerson->person_group}.label"
+                                "PersonsTaxonomy.persons.{$episodePerson->person_group}.label",
                             ) .
                             ' ▸ ' .
                             lang(
-                                "PersonsTaxonomy.persons.{$episodePerson->person_group}.roles.{$episodePerson->person_role}.label"
+                                "PersonsTaxonomy.persons.{$episodePerson->person_group}.roles.{$episodePerson->person_role}.label",
                             ) .
                             '</span>'
                         : '') .
@@ -65,21 +65,24 @@
         ],
         [
             'header' => lang('Common.actions'),
-            'cell' => function ($episodePerson) {
+            'cell' => function ($episodePerson): string {
                 return button(
                     lang('Person.episode_form.remove'),
                     route_to(
                         'episode-person-remove',
                         $episodePerson->podcast_id,
                         $episodePerson->episode_id,
-                        $episodePerson->id
+                        $episodePerson->id,
                     ),
-                    ['variant' => 'danger', 'size' => 'small']
+                    [
+                        'variant' => 'danger',
+                        'size' => 'small',
+                    ],
                 );
             },
         ],
     ],
-    $episodePersons
+    $episodePersons,
 ) ?>
 
 <?= form_section_close() ?>
@@ -88,14 +91,14 @@
 
 <?= form_section(
     lang('Person.episode_form.add_section_title'),
-    lang('Person.episode_form.add_section_subtitle')
+    lang('Person.episode_form.add_section_subtitle'),
 ) ?>
 
 <?= form_label(
     lang('Person.episode_form.person'),
     'person',
     [],
-    lang('Person.episode_form.person_hint')
+    lang('Person.episode_form.person_hint'),
 ) ?>
 <?= form_multiselect('person[]', $personOptions, old('person', []), [
     'id' => 'person',
@@ -107,24 +110,26 @@
     lang('Person.episode_form.group_role'),
     'group_role',
     [],
-
     lang('Person.episode_form.group_role_hint'),
-    true
+    true,
 ) ?>
 <?= form_multiselect(
     'person_group_role[]',
     $taxonomyOptions,
     old('person_group_role', []),
-    ['id' => 'person_group_role', 'class' => 'form-select mb-4']
+    [
+        'id' => 'person_group_role',
+        'class' => 'form-select mb-4',
+    ],
 ) ?>
         
     
 <?= form_section_close() ?>
 <?= button(
     lang('Person.episode_form.submit_add'),
-    null,
+    '',
     ['variant' => 'primary'],
-    ['type' => 'submit', 'class' => 'self-end']
+    ['type' => 'submit', 'class' => 'self-end'],
 ) ?> 
 <?= form_close() ?>
 

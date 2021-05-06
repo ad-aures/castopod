@@ -26,7 +26,7 @@ class Activity extends ObjectType
     protected $actor;
 
     /**
-     * @var string|\ActivityPub\Core\ObjectType
+     * @var string|ObjectType
      */
     protected $object;
 }

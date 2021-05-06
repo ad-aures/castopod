@@ -10,17 +10,31 @@
 
 namespace Analytics\Models;
 
+use Analytics\Entities\AnalyticsUnknownUseragents;
 use CodeIgniter\Model;
 
 class AnalyticsUnknownUseragentsModel extends Model
 {
+    /**
+     * @var string
+     */
     protected $table = 'analytics_unknown_useragents';
+    /**
+     * @var string
+     */
     protected $primaryKey = 'id';
 
-    protected $allowedFields = [];
-
-    protected $returnType = \Analytics\Entities\AnalyticsUnknownUseragents::class;
+    /**
+     * @var string
+     */
+    protected $returnType = AnalyticsUnknownUseragents::class;
+    /**
+     * @var bool
+     */
     protected $useSoftDeletes = false;
 
+    /**
+     * @var bool
+     */
     protected $useTimestamps = false;
 }

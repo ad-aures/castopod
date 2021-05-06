@@ -8,18 +8,10 @@
 
 namespace App\Libraries;
 
+use Config\Images;
+use Config\Services;
 class Image
 {
-    /**
-     * @var \Config\Images
-     */
-    protected $config;
-
-    /**
-     * @var string
-     */
-    protected $original_path;
-
     /**
      * @var string
      */
@@ -28,7 +20,7 @@ class Image
     /**
      * @var string
      */
-    protected $thumbnail_path;
+    public $mimetype;
 
     /**
      * @var string
@@ -38,17 +30,7 @@ class Image
     /**
      * @var string
      */
-    protected $medium_path;
-
-    /**
-     * @var string
-     */
     public $medium_url;
-
-    /**
-     * @var string
-     */
-    protected $large_path;
 
     /**
      * @var string
@@ -69,6 +51,26 @@ class Image
      * @var string
      */
     public $id3_path;
+    /**
+     * @var Images
+     */
+    protected $config;
+    /**
+     * @var string
+     */
+    protected $original_path;
+    /**
+     * @var string
+     */
+    protected $thumbnail_path;
+    /**
+     * @var string
+     */
+    protected $medium_path;
+    /**
+     * @var string
+     */
+    protected $large_path;
 
     public function __construct($originalPath, $mimetype)
     {
@@ -115,7 +117,7 @@ class Image
         $this->mimetype = $mimetype;
     }
 
-    public function saveSizes()
+    public function saveSizes(): void
     {
         $thumbnailSize = $this->config->thumbnailSize;
         $mediumSize = $this->config->mediumSize;
@@ -123,7 +125,7 @@ class Image
         $feedSize = $this->config->feedSize;
         $id3Size = $this->config->id3Size;
 
-        $imageService = \Config\Services::image();
+        $imageService = Services::image();
 
         $imageService
             ->withFile($this->original_path)

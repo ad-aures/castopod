@@ -15,7 +15,7 @@ use CodeIgniter\Database\Migration;
 
 class AddEpisodesPersons extends Migration
 {
-    public function up()
+    public function up(): void
     {
         $this->forge->addField([
             'id' => [
@@ -76,7 +76,7 @@ class AddEpisodesPersons extends Migration
         $this->forge->createTable('episodes_persons');
     }
 
-    public function down()
+    public function down(): void
     {
         $this->forge->dropTable('episodes_persons');
     }

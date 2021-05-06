@@ -16,7 +16,7 @@
             <a href="<?= route_to('home') ?>"
             class="inline-flex items-center mb-2"><?= icon(
                 'arrow-left',
-                'mr-2'
+                'mr-2',
             ) . lang('Page.back_to_home') ?></a>
             <h1 class="text-3xl font-semibold"><?= $page->title ?></h1>
         </div>

@@ -21,7 +21,7 @@ use CodeIgniter\Database\Seeder;
 
 class LanguageSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
         $data = [
             ['code' => 'aa', 'native_name' => 'Afaraf'],
@@ -163,7 +163,7 @@ class LanguageSeeder extends Seeder
                 'native_name' => 'Gàidhlig',
             ],
             ['code' => 'gl', 'native_name' => 'Galego'],
-            ['code' => 'gn', 'native_name' => 'Avañe\'ẽ'],
+            ['code' => 'gn', 'native_name' => "Avañe'ẽ"],
             ['code' => 'gu', 'native_name' => 'ગુજરાતી'],
             [
                 'code' => 'gv',
@@ -436,7 +436,7 @@ class LanguageSeeder extends Seeder
             ],
             [
                 'code' => 'sm',
-                'native_name' => 'gagana fa\'a Samoa',
+                'native_name' => "gagana fa'a Samoa",
             ],
             ['code' => 'sn', 'native_name' => 'chiShona'],
             [

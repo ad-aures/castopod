@@ -34,7 +34,7 @@
 
 <?= button(
     lang('Install.form.next') . icon('arrow-right', 'ml-2'),
-    null,
+    '',
     ['variant' => 'primary'],
     ['type' => 'submit', 'class' => 'self-end'],
 ) ?>

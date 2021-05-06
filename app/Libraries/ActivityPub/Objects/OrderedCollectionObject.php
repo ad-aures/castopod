@@ -11,10 +11,15 @@
 
 namespace ActivityPub\Objects;
 
+use ActivityPub\Core\Activity;
+use CodeIgniter\Pager\Pager;
 use ActivityPub\Core\ObjectType;
 
 class OrderedCollectionObject extends ObjectType
 {
+    /**
+     * @var string
+     */
     protected $type = 'OrderedCollection';
 
     /**
@@ -43,18 +48,19 @@ class OrderedCollectionObject extends ObjectType
     protected $orderedItems;
 
     /**
-     * @param \ActivityPub\Libraries\ActivityPub\Activity[] $orderedItems
-     * @param \CodeIgniter\Pager\Pager $pager
+     * @param array $orderedItems
      */
-    public function __construct($orderedItems, $pager = null)
-    {
+    public function __construct(
+        ?array $orderedItems = null,
+        ?Pager $pager = null
+    ) {
         $this->id = current_url();
 
-        if ($pager) {
+        if ($pager !== null) {
             $totalItems = $pager->getTotal();
             $this->totalItems = $totalItems;
 
-            if ($totalItems) {
+            if ($totalItems !== 0) {
                 $this->first = $pager->getPageURI($pager->getFirstPage());
                 $this->current = $pager->getPageURI();
                 $this->last = $pager->getPageURI($pager->getLastPage());

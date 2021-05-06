@@ -8,13 +8,20 @@
 
 namespace ActivityPub\Models;
 
+use ActivityPub\Entities\Actor;
 use CodeIgniter\Events\Events;
 use CodeIgniter\Model;
 
 class ActorModel extends Model
 {
+    /**
+     * @var string
+     */
     protected $table = 'activitypub_actors';
 
+    /**
+     * @var string[]
+     */
     protected $allowedFields = [
         'id',
         'uri',
@@ -36,9 +43,18 @@ class ActorModel extends Model
         'is_blocked',
     ];
 
-    protected $returnType = \ActivityPub\Entities\Actor::class;
+    /**
+     * @var string
+     */
+    protected $returnType = Actor::class;
+    /**
+     * @var bool
+     */
     protected $useSoftDeletes = false;
 
+    /**
+     * @var bool
+     */
     protected $useTimestamps = true;
 
     public function getActorById($id)
@@ -56,13 +72,11 @@ class ActorModel extends Model
     /**
      * Looks for actor with username and domain,
      * if no domain has been specified, the current host will be used
-     *
-     * @param mixed $username
-     * @param mixed|null $domain
-     * @return mixed
      */
-    public function getActorByUsername($username, $domain = null)
-    {
+    public function getActorByUsername(
+        string $username,
+        ?string $domain = null
+    ): ?Actor {
         // TODO: is there a better way?
         helper('activitypub');
 
@@ -70,13 +84,14 @@ class ActorModel extends Model
             $domain = get_current_domain();
         }
 
-        if (!($found = cache("actor@{$username}@{$domain}"))) {
+        $cacheName = "actor-{$username}-{$domain}";
+        if (!($found = cache($cacheName))) {
             $found = $this->where([
                 'username' => $username,
                 'domain' => $domain,
             ])->first();
 
-            cache()->save("actor@{$username}@{$domain}", $found, DECADE);
+            cache()->save($cacheName, $found, DECADE);
         }
 
         return $found;
@@ -86,7 +101,7 @@ class ActorModel extends Model
     {
         $hashedActorUri = md5($actorUri);
         $cacheName =
-            config('ActivityPub')->cachePrefix . "actor@{$hashedActorUri}";
+            config('ActivityPub')->cachePrefix . "actor-{$hashedActorUri}";
         if (!($found = cache($cacheName))) {
             $found = $this->where('uri', $actorUri)->first();
 
@@ -118,11 +133,8 @@ class ActorModel extends Model
     /**
      * Check if an existing actor is blocked using its uri.
      * Returns FALSE if the actor doesn't exist
-     *
-     * @param mixed $actorUri
-     * @return boolean
      */
-    public function isActorBlocked($actorUri)
+    public function isActorBlocked(string $actorUri): bool
     {
         if ($actor = $this->getActorByUri($actorUri)) {
             return $actor->is_blocked;
@@ -134,9 +146,9 @@ class ActorModel extends Model
     /**
      * Retrieves all blocked actors.
      *
-     * @return \ActivityPub\Entities\Actor[]
+     * @return Actor[]
      */
-    public function getBlockedActors()
+    public function getBlockedActors(): array
     {
         $cacheName = config('ActivityPub')->cachePrefix . 'blocked_actors';
         if (!($found = cache($cacheName))) {
@@ -148,7 +160,7 @@ class ActorModel extends Model
         return $found;
     }
 
-    public function blockActor($actorId)
+    public function blockActor($actorId): void
     {
         $prefix = config('ActivityPub')->cachePrefix;
         cache()->delete($prefix . 'blocked_actors');
@@ -159,7 +171,7 @@ class ActorModel extends Model
         $this->update($actorId, ['is_blocked' => 1]);
     }
 
-    public function unblockActor($actorId)
+    public function unblockActor($actorId): void
     {
         $prefix = config('ActivityPub')->cachePrefix;
         cache()->delete($prefix . 'blocked_actors');

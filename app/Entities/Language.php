@@ -8,10 +8,13 @@
 
 namespace App\Entities;
 
-use CodeIgniter\Entity;
+use CodeIgniter\Entity\Entity;
 
 class Language extends Entity
 {
+    /**
+     * @var array<string, string>
+     */
     protected $casts = [
         'code' => 'string',
         'native_name' => 'string',

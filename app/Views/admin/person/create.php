@@ -19,14 +19,14 @@
 
 <?= form_section(
     lang('Person.form.identity_section_title'),
-    lang('Person.form.identity_section_subtitle')
+    lang('Person.form.identity_section_subtitle'),
 ) ?>
 
 <?= form_label(
     lang('Person.form.full_name'),
     'full_name',
     [],
-    lang('Person.form.full_name_hint')
+    lang('Person.form.full_name_hint'),
 ) ?>
 <?= form_input([
     'id' => 'full_name',
@@ -41,7 +41,7 @@
     lang('Person.form.unique_name'),
     'unique_name',
     [],
-    lang('Person.form.unique_name_hint')
+    lang('Person.form.unique_name_hint'),
 ) ?>
 <?= form_input([
     'id' => 'unique_name',
@@ -57,7 +57,7 @@
     'information_url',
     [],
     lang('Person.form.information_url_hint'),
-    true
+    true,
 ) ?>
 <?= form_input([
     'id' => 'information_url',
@@ -76,16 +76,16 @@
     'accept' => '.jpg,.jpeg,.png',
 ]) ?>
 <small class="mb-4 text-gray-600"><?= lang(
-    'Person.form.image_size_hint'
+    'Person.form.image_size_hint',
 ) ?></small>
 
 <?= form_section_close() ?>
 
 <?= button(
     lang('Person.form.submit_create'),
-    null,
+    '',
     ['variant' => 'primary'],
-    ['type' => 'submit', 'class' => 'self-end']
+    ['type' => 'submit', 'class' => 'self-end'],
 ) ?>
 
 

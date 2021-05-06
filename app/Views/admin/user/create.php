@@ -35,7 +35,6 @@
 <?= form_input([
     'id' => 'password',
     'name' => 'password',
-
     'class' => 'form-input mb-4',
     'type' => 'password',
     'autocomplete' => 'new-password',
@@ -43,9 +42,9 @@
 
 <?= button(
     lang('User.form.submit_create'),
-    null,
+    '',
     ['variant' => 'primary'],
-    ['type' => 'submit', 'class' => 'self-end']
+    ['type' => 'submit', 'class' => 'self-end'],
 ) ?>
 
 <?= form_close() ?>

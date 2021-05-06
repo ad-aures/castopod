@@ -8,6 +8,8 @@
 
 namespace App\Controllers;
 
+use CodeIgniter\HTTP\ResponseInterface;
+use App\Models\PlatformModel;
 use CodeIgniter\Controller;
 
 /*
@@ -15,9 +17,9 @@ use CodeIgniter\Controller;
  */
 class Platform extends Controller
 {
-    public function index()
+    public function index(): ResponseInterface
     {
-        $model = new \App\Models\PlatformModel();
+        $model = new PlatformModel();
 
         return $this->response->setJSON($model->getPlatforms());
     }

@@ -15,7 +15,7 @@ use CodeIgniter\Database\Migration;
 
 class AddLanguages extends Migration
 {
-    public function up()
+    public function up(): void
     {
         $this->forge->addField([
             'code' => [
@@ -32,7 +32,7 @@ class AddLanguages extends Migration
         $this->forge->createTable('languages');
     }
 
-    public function down()
+    public function down(): void
     {
         $this->forge->dropTable('languages');
     }

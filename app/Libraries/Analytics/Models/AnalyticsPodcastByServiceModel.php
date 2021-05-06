@@ -10,25 +10,34 @@
 
 namespace Analytics\Models;
 
+use Analytics\Entities\AnalyticsPodcastsByService;
 use CodeIgniter\Model;
 
 class AnalyticsPodcastByServiceModel extends Model
 {
+    /**
+     * @var string
+     */
     protected $table = 'analytics_podcasts_by_player';
 
-    protected $allowedFields = [];
-
-    protected $returnType = \Analytics\Entities\AnalyticsPodcastsByService::class;
+    /**
+     * @var string
+     */
+    protected $returnType = AnalyticsPodcastsByService::class;
+    /**
+     * @var bool
+     */
     protected $useSoftDeletes = false;
 
+    /**
+     * @var bool
+     */
     protected $useTimestamps = false;
 
     /**
      * Gets service data for a podcast
      *
-     * @param int $podcastId
-     *
-     * @return array
+     * @return AnalyticsPodcastsByService[]
      */
     public function getDataByServiceWeekly(int $podcastId): array
     {

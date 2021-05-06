@@ -6,9 +6,12 @@ use CodeIgniter\Database\Migration;
 
 class ExampleMigration extends Migration
 {
+    /**
+     * @var string
+     */
     protected $DBGroup = 'tests';
 
-    public function up()
+    public function up(): void
     {
         $fields = [
             'name' => [
@@ -56,7 +59,7 @@ class ExampleMigration extends Migration
         $this->forge->createTable('factories');
     }
 
-    public function down()
+    public function down(): void
     {
         $this->forge->dropTable('factories');
     }

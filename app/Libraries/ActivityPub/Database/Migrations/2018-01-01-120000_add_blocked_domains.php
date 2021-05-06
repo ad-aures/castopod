@@ -15,7 +15,7 @@ use CodeIgniter\Database\Migration;
 
 class AddBlockedDomains extends Migration
 {
-    public function up()
+    public function up(): void
     {
         $this->forge->addField([
             'name' => [
@@ -30,7 +30,7 @@ class AddBlockedDomains extends Migration
         $this->forge->createTable('activitypub_blocked_domains');
     }
 
-    public function down()
+    public function down(): void
     {
         $this->forge->dropTable('activitypub_blocked_domains');
     }

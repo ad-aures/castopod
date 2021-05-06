@@ -11,6 +11,8 @@
 
 namespace App\Database\Seeds;
 
+use GeoIp2\Database\Reader;
+use GeoIp2\Exception\AddressNotFoundException;
 use App\Models\PodcastModel;
 use App\Models\EpisodeModel;
 
@@ -18,7 +20,7 @@ use CodeIgniter\Database\Seeder;
 
 class FakePodcastsAnalyticsSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
         $podcast = (new PodcastModel())->first();
 
@@ -27,6 +29,8 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                 'https://raw.githubusercontent.com/opawg/user-agents/master/src/user-agents.json',
             ),
             true,
+            512,
+            JSON_THROW_ON_ERROR,
         );
 
         $jsonRSSUserAgents = json_decode(
@@ -34,6 +38,8 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                 'https://raw.githubusercontent.com/opawg/podcast-rss-useragents/master/src/rss-ua.json',
             ),
             true,
+            512,
+            JSON_THROW_ON_ERROR,
         );
 
         if ($podcast) {
@@ -68,7 +74,7 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                     for (
                         $num_line = 0;
                         $num_line < rand(1, $proba1);
-                        $num_line++
+                        ++$num_line
                     ) {
                         $proba2 = floor(exp(6 - $age / 20)) + 10;
 
@@ -96,7 +102,7 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                             '.' .
                             rand(0, 255);
 
-                        $cityReader = new \GeoIp2\Database\Reader(
+                        $cityReader = new Reader(
                             WRITEPATH .
                                 'uploads/GeoLite2-City/GeoLite2-City.mmdb',
                         );
@@ -117,7 +123,7 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                                 : $city->subdivisions[0]->isoCode;
                             $latitude = round($city->location->latitude, 3);
                             $longitude = round($city->location->longitude, 3);
-                        } catch (\GeoIp2\Exception\AddressNotFoundException $ex) {
+                        } catch (AddressNotFoundException $addressNotFoundException) {
                             //Bad luck, bad IP, nothing to do.
                         }
 

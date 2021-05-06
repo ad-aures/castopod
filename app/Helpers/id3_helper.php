@@ -6,108 +6,112 @@
  * @link       https://castopod.org/
  */
 
+use App\Entities\Episode;
+use CodeIgniter\Files\File;
 use JamesHeinrich\GetID3\GetID3;
 use JamesHeinrich\GetID3\WriteTags;
 
-/**
- * Gets audio file metadata and ID3 info
- *
- * @param UploadedFile $file
- *
- * @return array
- */
-function get_file_tags($file)
-{
-    $getID3 = new GetID3();
-    $FileInfo = $getID3->analyze($file);
+if (!function_exists('get_file_tags')) {
+    /**
+     * Gets audio file metadata and ID3 info
+     *
+     * @param UploadedFile $file
+     */
+    function get_file_tags($file): array
+    {
+        $getID3 = new GetID3();
+        $FileInfo = $getID3->analyze($file);
 
-    return [
-        'filesize' => $FileInfo['filesize'],
-        'mime_type' => $FileInfo['mime_type'],
-        'avdataoffset' => $FileInfo['avdataoffset'],
-        'playtime_seconds' => $FileInfo['playtime_seconds'],
-    ];
+        return [
+            'filesize' => $FileInfo['filesize'],
+            'mime_type' => $FileInfo['mime_type'],
+            'avdataoffset' => $FileInfo['avdataoffset'],
+            'playtime_seconds' => $FileInfo['playtime_seconds'],
+        ];
+    }
 }
 
-/**
- * Write audio file metadata / ID3 tags
- *
- * @param App\Entities\Episode $episode
- *
- * @return UploadedFile
- */
-function write_audio_file_tags($episode)
-{
-    helper('media');
+if (!function_exists('write_audio_file_tags')) {
+    /**
+     * Write audio file metadata / ID3 tags
+     *
+     * @return UploadedFile
+     */
+    function write_audio_file_tags(Episode $episode): void
+    {
+        helper('media');
 
-    $TextEncoding = 'UTF-8';
+        $TextEncoding = 'UTF-8';
 
-    // Initialize getID3 tag-writing module
-    $tagwriter = new WriteTags();
-    $tagwriter->filename = media_path($episode->audio_file_path);
+        // Initialize getID3 tag-writing module
+        $tagwriter = new WriteTags();
+        $tagwriter->filename = media_path($episode->audio_file_path);
 
-    // set various options (optional)
-    $tagwriter->tagformats = ['id3v2.4'];
-    $tagwriter->tag_encoding = $TextEncoding;
+        // set various options (optional)
+        $tagwriter->tagformats = ['id3v2.4'];
+        $tagwriter->tag_encoding = $TextEncoding;
 
-    $cover = new \CodeIgniter\Files\File($episode->image->id3_path);
+        $cover = new File($episode->image->id3_path);
 
-    $APICdata = file_get_contents($cover->getRealPath());
+        $APICdata = file_get_contents($cover->getRealPath());
 
-    // TODO: variables used for podcast specific tags
-    // $podcast_url = $episode->podcast->link;
-    // $podcast_feed_url = $episode->podcast->feed_url;
-    // $episode_media_url = $episode->link;
+        // TODO: variables used for podcast specific tags
+        // $podcast_url = $episode->podcast->link;
+        // $podcast_feed_url = $episode->podcast->feed_url;
+        // $episode_media_url = $episode->link;
 
-    // populate data array
-    $TagData = [
-        'title' => [$episode->title],
-        'artist' => [
-            empty($episode->podcast->publisher)
-                ? $episode->podcast->owner_name
-                : $episode->podcast->publisher,
-        ],
-        'album' => [$episode->podcast->title],
-        'year' => [
-            $episode->published_at ? $episode->published_at->format('Y') : '',
-        ],
-        'genre' => ['Podcast'],
-        'comment' => [$episode->description],
-        'track_number' => [strval($episode->number)],
-        'copyright_message' => [$episode->podcast->copyright],
-        'publisher' => [
-            empty($episode->podcast->publisher)
-                ? $episode->podcast->owner_name
-                : $episode->podcast->publisher,
-        ],
-        'encoded_by' => ['Castopod'],
+        // populate data array
+        $TagData = [
+            'title' => [$episode->title],
+            'artist' => [
+                empty($episode->podcast->publisher)
+                    ? $episode->podcast->owner_name
+                    : $episode->podcast->publisher,
+            ],
+            'album' => [$episode->podcast->title],
+            'year' => [
+                $episode->published_at
+                    ? $episode->published_at->format('Y')
+                    : '',
+            ],
+            'genre' => ['Podcast'],
+            'comment' => [$episode->description],
+            'track_number' => [strval($episode->number)],
+            'copyright_message' => [$episode->podcast->copyright],
+            'publisher' => [
+                empty($episode->podcast->publisher)
+                    ? $episode->podcast->owner_name
+                    : $episode->podcast->publisher,
+            ],
+            'encoded_by' => ['Castopod'],
 
-        // TODO: find a way to add the remaining tags for podcasts as the library doesn't seem to allow it
-        // 'website' => [$podcast_url],
-        // 'podcast' => [],
-        // 'podcast_identifier' => [$episode_media_url],
-        // 'podcast_feed' => [$podcast_feed_url],
-        // 'podcast_description' => [$podcast->description_markdown],
-    ];
+            // TODO: find a way to add the remaining tags for podcasts as the library doesn't seem to allow it
+            // 'website' => [$podcast_url],
+            // 'podcast' => [],
+            // 'podcast_identifier' => [$episode_media_url],
+            // 'podcast_feed' => [$podcast_feed_url],
+            // 'podcast_description' => [$podcast->description_markdown],
+        ];
 
-    $TagData['attached_picture'][] = [
-        'picturetypeid' => 2, // Cover. More: module.tag.id3v2.php
-        'data' => $APICdata,
-        'description' => 'cover',
-        'mime' => $cover->getMimeType(),
-    ];
+        $TagData['attached_picture'][] = [
+            'picturetypeid' => 2, // Cover. More: module.tag.id3v2.php
+            'data' => $APICdata,
+            'description' => 'cover',
+            'mime' => $cover->getMimeType(),
+        ];
 
-    $tagwriter->tag_data = $TagData;
+        $tagwriter->tag_data = $TagData;
 
-    // write tags
-    if ($tagwriter->WriteTags()) {
-        echo 'Successfully wrote tags<br>';
-        if (!empty($tagwriter->warnings)) {
-            echo 'There were some warnings:<br>' .
-                implode('<br><br>', $tagwriter->warnings);
+        // write tags
+        if ($tagwriter->WriteTags()) {
+            echo 'Successfully wrote tags<br>';
+            if (!empty($tagwriter->warnings)) {
+                echo 'There were some warnings:<br>' .
+                    implode('<br><br>', $tagwriter->warnings);
+            }
+        } else {
+            echo 'Failed to write tags!<br>' .
+                implode('<br><br>', $tagwriter->errors);
         }
-    } else {
-        echo 'Failed to write tags!<br>' .
-            implode('<br><br>', $tagwriter->errors);
     }
 }

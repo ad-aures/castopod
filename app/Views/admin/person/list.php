@@ -13,7 +13,7 @@
     lang('Person.create'),
     route_to('person-create'),
     ['variant' => 'primary', 'iconLeft' => 'add'],
-    ['class' => 'mr-2']
+    ['class' => 'mr-2'],
 ) ?>
 <?= $this->endSection() ?>
 
@@ -26,11 +26,11 @@
             <img
             alt="<?= $person->full_name ?>"
             src="<?= $person->image
-                ->thumbnail_url ?>" class="object-cover w-40 w-full" />
+                ->thumbnail_url ?>" class="object-cover w-full" />
             <div class="p-2">
                 <a href="<?= route_to(
                     'person-view',
-                    $person->id
+                    $person->id,
                 ) ?>" class="hover:underline">
                     <h2 class="font-semibold"><?= $person->full_name ?></h2>
                 </a>
@@ -38,21 +38,21 @@
             <footer class="flex items-center justify-end p-2">
                 <a class="inline-flex p-2 mr-2 text-teal-700 bg-teal-100 rounded-full shadow-xs hover:bg-teal-200" href="<?= route_to(
                     'person-edit',
-                    $person->id
+                    $person->id,
                 ) ?>" data-toggle="tooltip" data-placement="bottom" title="<?= lang(
-    'Person.edit'
+    'Person.edit',
 ) ?>"><?= icon('edit') ?></a>
                 <a class="inline-flex p-2 mr-2 text-gray-700 bg-red-100 rounded-full shadow-xs hover:bg-gray-200" href="<?= route_to(
                     'person-delete',
-                    $person->id
+                    $person->id,
                 ) ?>" data-toggle="tooltip" data-placement="bottom" title="<?= lang(
-    'Person.delete'
+    'Person.delete',
 ) ?>"><?= icon('delete-bin') ?></a>
                 <a class="inline-flex p-2 text-gray-700 bg-gray-100 rounded-full shadow-xs hover:bg-gray-200" href="<?= route_to(
                     'person-view',
-                    $person->id
+                    $person->id,
                 ) ?>" data-toggle="tooltip" data-placement="bottom" title="<?= lang(
-    'Person.view'
+    'Person.view',
 ) ?>"><?= icon('eye') ?></a>
             </footer>
         </article>

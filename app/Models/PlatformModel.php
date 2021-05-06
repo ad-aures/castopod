@@ -11,13 +11,23 @@
 
 namespace App\Models;
 
+use App\Entities\Platform;
 use CodeIgniter\Model;
 
 class PlatformModel extends Model
 {
+    /**
+     * @var string
+     */
     protected $table = 'platforms';
+    /**
+     * @var string
+     */
     protected $primaryKey = 'slug';
 
+    /**
+     * @var string[]
+     */
     protected $allowedFields = [
         'slug',
         'type',
@@ -26,9 +36,18 @@ class PlatformModel extends Model
         'submit_url',
     ];
 
-    protected $returnType = \App\Entities\Platform::class;
+    /**
+     * @var string
+     */
+    protected $returnType = Platform::class;
+    /**
+     * @var bool
+     */
     protected $useSoftDeletes = false;
 
+    /**
+     * @var bool
+     */
     protected $useTimestamps = false;
 
     public function getPlatforms()
@@ -45,7 +64,7 @@ class PlatformModel extends Model
 
     public function getPlatform($slug)
     {
-        $cacheName = "platform@{$slug}";
+        $cacheName = "platform-{$slug}";
         if (!($found = cache($cacheName))) {
             $found = $this->where('slug', $slug)->first();
             cache()->save($cacheName, $found, DECADE);
@@ -82,7 +101,7 @@ class PlatformModel extends Model
             )
                 ->join(
                     'podcasts_platforms',
-                    "podcasts_platforms.platform_slug = platforms.slug AND podcasts_platforms.podcast_id = $podcastId",
+                    "podcasts_platforms.platform_slug = platforms.slug AND podcasts_platforms.podcast_id = {$podcastId}",
                     'left',
                 )
                 ->where('platforms.type', $platformType)
@@ -119,6 +138,9 @@ class PlatformModel extends Model
         return $found;
     }
 
+    /**
+     * @return int|bool
+     */
     public function savePodcastPlatforms(
         $podcastId,
         $platformType,
@@ -130,9 +152,9 @@ class PlatformModel extends Model
         $platformsTable = $this->db->prefixTable('platforms');
 
         $deleteJoinQuery = <<<SQL
-        DELETE $podcastsPlatformsTable
-        FROM $podcastsPlatformsTable
-        INNER JOIN $platformsTable ON $platformsTable.slug = $podcastsPlatformsTable.platform_slug
+        DELETE {$podcastsPlatformsTable}
+        FROM {$podcastsPlatformsTable}
+        INNER JOIN {$platformsTable} ON {$platformsTable}.slug = {$podcastsPlatformsTable}.platform_slug
         WHERE `podcast_id` = ? AND `type` = ?
         SQL;
 
@@ -144,6 +166,9 @@ class PlatformModel extends Model
             ->insertBatch($podcastsPlatformsData);
     }
 
+    /**
+     * @return int|bool
+     */
     public function createPodcastPlatforms($podcastId, $podcastsPlatformsData)
     {
         $this->clearCache($podcastId);
@@ -154,6 +179,9 @@ class PlatformModel extends Model
             ->insertBatch($podcastsPlatformsData);
     }
 
+    /**
+     * @return bool|string
+     */
     public function removePodcastPlatform($podcastId, $platformSlug)
     {
         $this->clearCache($podcastId);
@@ -164,7 +192,7 @@ class PlatformModel extends Model
         ]);
     }
 
-    public function clearCache($podcastId)
+    public function clearCache($podcastId): void
     {
         cache()->deleteMatching("podcast#{$podcastId}_platforms_*");
 

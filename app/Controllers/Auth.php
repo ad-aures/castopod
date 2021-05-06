@@ -8,9 +8,11 @@
 
 namespace App\Controllers;
 
+use Myth\Auth\Controllers\AuthController;
 use App\Entities\User;
+use CodeIgniter\HTTP\RedirectResponse;
 
-class Auth extends \Myth\Auth\Controllers\AuthController
+class Auth extends AuthController
 {
     /**
      * An array of helpers to be automatically loaded
@@ -104,10 +106,8 @@ class Auth extends \Myth\Auth\Controllers\AuthController
     /**
      * Verifies the code with the email and saves the new password,
      * if they all pass validation.
-     *
-     * @return mixed
      */
-    public function attemptReset()
+    public function attemptReset(): RedirectResponse
     {
         if ($this->config->activeResetter === false) {
             return redirect()

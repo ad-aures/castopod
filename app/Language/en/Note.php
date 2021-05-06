@@ -7,7 +7,7 @@
  */
 
 return [
-    'title' => '{actorDisplayName}\'s Note',
+    'title' => "{actorDisplayName}'s Note",
     'back_to_actor_notes' => 'Back to {actor} notes',
     'actor_shared' => '{actor} shared',
     'reply_to' => 'Reply to @{actorUsername}',

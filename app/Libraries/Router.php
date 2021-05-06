@@ -29,6 +29,7 @@ class Router extends \CodeIgniter\Router\Router
      */
     protected function checkRoutes(string $uri): bool
     {
+        /** @noRector RemoveExtraParametersRector */
         $routes = $this->collection->getRoutes(
             $this->collection->getHTTPVerb(),
         );
@@ -54,7 +55,7 @@ class Router extends \CodeIgniter\Router\Router
                 $localeSegment = array_search(
                     '{locale}',
                     preg_split(
-                        '/[\/]*((^[a-zA-Z0-9])|\(([^()]*)\))*[\/]+/m',
+                        '~[\/]*((^[a-zA-Z0-9])|\(([^()]*)\))*[\/]+~m',
                         $key,
                     ),
                     true,

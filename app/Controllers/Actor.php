@@ -23,7 +23,7 @@ class Actor extends \ActivityPub\Controllers\ActorController
             $this->registerPodcastWebpageHit($this->actor->podcast->id);
         }
 
-        $cacheName = "page_podcast@{$this->actor->username}_follow";
+        $cacheName = "page_podcast-{$this->actor->username}_follow";
         if (!($cachedView = cache($cacheName))) {
             helper(['form', 'components', 'svg']);
             $data = [

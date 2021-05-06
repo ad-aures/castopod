@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -71,20 +72,15 @@ if (!function_exists('form_switch')) {
      *
      * Abstracts form_label to stylize it as a switch toggle
      *
-     * @param array   $data
-     * @param string  $value
-     * @param boolean $checked
-     * @param mixed   $extra
-     *
      * @return string
      */
     function form_switch(
         $label = '',
-        $data = '',
+        array $data = [],
         string $value = '',
         bool $checked = false,
-        $class = '',
-        $extra = ''
+        string $class = '',
+        array $extra = []
     ): string {
         $data['class'] = 'form-switch';
 
@@ -155,31 +151,26 @@ if (!function_exists('form_multiselect')) {
     /**
      * Multi-select menu
      *
-     * @param string $name
-     * @param array  $options
-     * @param array  $selected
-     * @param mixed  $extra
-     *
      * @return string
      */
     function form_multiselect(
         string $name = '',
         array $options = [],
         array $selected = [],
-        $customExtra = ''
+        array $customExtra = []
     ): string {
         $defaultExtra = [
             'data-class' => $customExtra['class'],
             'data-select-text' => lang('Common.forms.multiSelect.selectText'),
             'data-loading-text' => lang('Common.forms.multiSelect.loadingText'),
             'data-no-results-text' => lang(
-                'Common.forms.multiSelect.noResultsText'
+                'Common.forms.multiSelect.noResultsText',
             ),
             'data-no-choices-text' => lang(
-                'Common.forms.multiSelect.noChoicesText'
+                'Common.forms.multiSelect.noChoicesText',
             ),
             'data-max-item-text' => lang(
-                'Common.forms.multiSelect.maxItemText'
+                'Common.forms.multiSelect.maxItemText',
             ),
         ];
         $extra = stringify_attributes(array_merge($defaultExtra, $customExtra));

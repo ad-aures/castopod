@@ -12,9 +12,12 @@ use CodeIgniter\Controller;
 
 class SchedulerController extends Controller
 {
+    /**
+     * @var string[]
+     */
     protected $helpers = ['activitypub'];
 
-    public function activity()
+    public function activity(): void
     {
         // retrieve scheduled activities from database
         $scheduledActivities = model('ActivityModel')->getScheduledActivities();
@@ -24,7 +27,7 @@ class SchedulerController extends Controller
             // send activity to all actor followers
             send_activity_to_followers(
                 $scheduledActivity->actor,
-                json_encode($scheduledActivity->payload),
+                json_encode($scheduledActivity->payload, JSON_THROW_ON_ERROR),
             );
 
             // set activity status to delivered

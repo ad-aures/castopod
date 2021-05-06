@@ -15,7 +15,7 @@ use CodeIgniter\Database\Seeder;
 
 class CategorySeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
         $data = [
             [

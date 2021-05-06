@@ -16,7 +16,7 @@
     'analytics-data',
     $podcast->id,
     'Podcast',
-    'TotalListeningTimeByDay'
+    'TotalListeningTimeByDay',
 ) ?>"></div>
 </div>
 
@@ -26,7 +26,7 @@
     'analytics-data',
     $podcast->id,
     'Podcast',
-    'TotalListeningTimeByMonth'
+    'TotalListeningTimeByMonth',
 ) ?>"></div>
 </div>
 

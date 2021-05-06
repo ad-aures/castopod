@@ -8,18 +8,22 @@
 
 namespace App\Controllers;
 
+use ActivityPub\Controllers\NoteController;
+use ActivityPub\Entities\Note as ActivityPubNote;
 use Analytics\AnalyticsTrait;
+use App\Entities\Note as CastopodNote;
 use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
+use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\URI;
 use CodeIgniter\I18n\Time;
 
-class Note extends \ActivityPub\Controllers\NoteController
+class Note extends NoteController
 {
     use AnalyticsTrait;
 
     /**
-     * @var \App\Entities\Podcast
+     * @var Podcast
      */
     protected $podcast;
 
@@ -48,7 +52,7 @@ class Note extends \ActivityPub\Controllers\NoteController
         return $this->$method(...$params);
     }
 
-    public function index()
+    public function index(): RedirectResponse
     {
         // Prevent analytics hit when authenticated
         if (!can_user_interact()) {
@@ -108,7 +112,7 @@ class Note extends \ActivityPub\Controllers\NoteController
 
         $message = $this->request->getPost('message');
 
-        $newNote = new \App\Entities\Note([
+        $newNote = new CastopodNote([
             'actor_id' => interact_as_actor_id(),
             'published_at' => Time::now(),
             'created_by' => user_id(),
@@ -162,7 +166,7 @@ class Note extends \ActivityPub\Controllers\NoteController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $newNote = new \ActivityPub\Entities\Note([
+        $newNote = new ActivityPubNote([
             'actor_id' => interact_as_actor_id(),
             'in_reply_to_id' => $this->note->id,
             'message' => $this->request->getPost('message'),

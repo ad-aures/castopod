@@ -139,7 +139,7 @@
 
 <?= button(
     lang('Platforms.submit'),
-    null,
+    '',
     ['variant' => 'primary'],
     ['type' => 'submit', 'class' => 'self-end'],
 ) ?>

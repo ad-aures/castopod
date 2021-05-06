@@ -8,13 +8,23 @@
 
 namespace App\Models;
 
+use App\Entities\Category;
 use CodeIgniter\Model;
 
 class CategoryModel extends Model
 {
+    /**
+     * @var string
+     */
     protected $table = 'categories';
+    /**
+     * @var string
+     */
     protected $primaryKey = 'id';
 
+    /**
+     * @var string[]
+     */
     protected $allowedFields = [
         'parent_id',
         'code',
@@ -22,12 +32,21 @@ class CategoryModel extends Model
         'google_category',
     ];
 
-    protected $returnType = \App\Entities\Category::class;
+    /**
+     * @var string
+     */
+    protected $returnType = Category::class;
+    /**
+     * @var bool
+     */
     protected $useSoftDeletes = false;
 
+    /**
+     * @var bool
+     */
     protected $useTimestamps = false;
 
-    public function getCategoryById($id)
+    public function getCategoryById($id): ?Category
     {
         return $this->find($id);
     }
@@ -60,12 +79,9 @@ class CategoryModel extends Model
     /**
      * Sets categories for a given podcast
      *
-     * @param int $podcastId
-     * @param array $categories
-     *
-     * @return integer|false Number of rows inserted or FALSE on failure
+     * @return int|bool Number of rows inserted or FALSE on failure
      */
-    public function setPodcastCategories($podcastId, $categories)
+    public function setPodcastCategories(int $podcastId, ?array $categories)
     {
         cache()->delete("podcast#{$podcastId}_categories");
 
@@ -74,37 +90,35 @@ class CategoryModel extends Model
             ->table('podcasts_categories')
             ->delete(['podcast_id' => $podcastId]);
 
-        if (!empty($categories)) {
-            // prepare data for `podcasts_categories` table
-            $data = array_reduce(
-                $categories,
-                function ($result, $categoryId) use ($podcastId) {
-                    $result[] = [
-                        'podcast_id' => $podcastId,
-                        'category_id' => $categoryId,
-                    ];
-
-                    return $result;
-                },
-                [],
-            );
-
-            // Set podcast categories
-            return $this->db->table('podcasts_categories')->insertBatch($data);
+        if (empty($categories)) {
+            // no row has been inserted after deletion
+            return 0;
         }
 
-        // no row has been inserted after deletion
-        return 0;
+        // prepare data for `podcasts_categories` table
+        $data = array_reduce(
+            $categories,
+            function ($result, $categoryId) use ($podcastId) {
+                $result[] = [
+                    'podcast_id' => $podcastId,
+                    'category_id' => $categoryId,
+                ];
+
+                return $result;
+            },
+            [],
+        );
+
+        // Set podcast categories
+        return $this->db->table('podcasts_categories')->insertBatch($data);
     }
 
     /**
      * Gets all the podcast categories
      *
-     * @param int $podcastId
-     *
-     * @return \App\Entities\Category[]
+     * @return Category[]
      */
-    public function getPodcastCategories($podcastId)
+    public function getPodcastCategories(int $podcastId): array
     {
         $cacheName = "podcast#{$podcastId}_categories";
         if (!($categories = cache($cacheName))) {

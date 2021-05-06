@@ -8,11 +8,12 @@
 
 namespace Analytics\Controllers;
 
+use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Controller;
 
 class UnknownUserAgentsController extends Controller
 {
-    public function index($lastKnownId = 0)
+    public function index($lastKnownId = 0): ResponseInterface
     {
         $model = model('UnknownUserAgentsModel');
 

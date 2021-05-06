@@ -1,13 +1,16 @@
 <?php
 
-class ExampleSessionTest extends \Tests\Support\SessionTestCase
+namespace Tests\Session;
+
+use Tests\Support\SessionTestCase;
+class ExampleSessionTest extends SessionTestCase
 {
     public function setUp(): void
     {
         parent::setUp();
     }
 
-    public function testSessionSimple()
+    public function testSessionSimple(): void
     {
         $this->session->set('logged_in', 123);
 

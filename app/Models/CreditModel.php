@@ -8,13 +8,18 @@
 
 namespace App\Models;
 
+use App\Entities\Credit;
 use CodeIgniter\Model;
 
 class CreditModel extends Model
 {
+    /**
+     * @var string
+     */
     protected $table = 'credits';
 
-    protected $allowedFields = [];
-
-    protected $returnType = \App\Entities\Credit::class;
+    /**
+     * @var string
+     */
+    protected $returnType = Credit::class;
 }

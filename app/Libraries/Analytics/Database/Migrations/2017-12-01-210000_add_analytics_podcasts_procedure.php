@@ -15,7 +15,7 @@ use CodeIgniter\Database\Migration;
 
 class AddAnalyticsPodcastsProcedure extends Migration
 {
-    public function up()
+    public function up(): void
     {
         // Creates Procedure for data insertion
         // Example: CALL analytics_podcasts(1, 2, 'FR', 'IDF', 48.853, 2.349, PodcastAddict, 'phone', 'android', 0, 1);
@@ -77,7 +77,7 @@ class AddAnalyticsPodcastsProcedure extends Migration
         $this->db->query($createQuery);
     }
 
-    public function down()
+    public function down(): void
     {
         $prefix = $this->db->getPrefix();
         $this->db->query(

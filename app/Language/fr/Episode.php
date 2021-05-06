@@ -113,16 +113,13 @@ return [
         'submit_edit' => 'Enregistrer l’épisode',
     ],
     'publish_form' => [
-        'publication_date' => 'Date de publication',
-        'publication_date_clear' => 'Effacer la date de publication',
-        'publication_date_hint' =>
-            'Vous pouvez planifier la sortie de l’épisode en saisissant une date de publication future. Ce champ doit être au format YYYY-MM-DD HH:mm',
-    ],
-    'publish_form' => [
         'note' => 'Votre note',
         'note_hint' =>
             'Le message que vous écrirez sera diffusé à toutes les personnes qui vous suivent dans le fédiverse.',
         'publication_date' => 'Date de publication',
+        'publication_date_clear' => 'Effacer la date de publication',
+        'publication_date_hint' =>
+            'Vous pouvez planifier la sortie de l’épisode en saisissant une date de publication future. Ce champ doit être au format YYYY-MM-DD HH:mm',
         'publication_method' => [
             'now' => 'Maintenant',
             'schedule' => 'Planifier',

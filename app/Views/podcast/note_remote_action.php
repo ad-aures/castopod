@@ -60,7 +60,7 @@
 
         <?= button(
             lang('ActivityPub.' . $action . '.submit'),
-            null,
+            '',
             ['variant' => 'primary'],
             ['type' => 'submit', 'class' => 'self-end'],
         ) ?>

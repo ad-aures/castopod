@@ -8,26 +8,26 @@
 
 namespace App\Entities;
 
+use RuntimeException;
 use App\Models\PersonModel;
 use App\Models\PodcastModel;
 use App\Models\EpisodeModel;
-
-use CodeIgniter\Entity;
+use CodeIgniter\Entity\Entity;
 
 class Credit extends Entity
 {
     /**
-     * @var \App\Entities\Person
+     * @var Person
      */
     protected $person;
 
     /**
-     * @var \App\Entities\Podcast
+     * @var Podcast
      */
     protected $podcast;
 
     /**
-     * @var \App\Entities\Episode|null
+     * @var Episode|null
      */
     protected $episode;
 
@@ -41,35 +41,47 @@ class Credit extends Entity
      */
     protected $role_label;
 
-    public function getPodcast()
+    /**
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'person_group' => 'string',
+        'person_role' => 'string',
+        'person_id' => 'integer',
+        'full_name' => 'integer',
+        'podcast_id' => 'integer',
+        'episode_id' => '?integer',
+    ];
+
+    public function getPodcast(): Podcast
     {
         return (new PodcastModel())->getPodcastById(
             $this->attributes['podcast_id'],
         );
     }
 
-    public function getEpisode()
+    public function getEpisode(): ?Episode
     {
         if (empty($this->episode_id)) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 'Credit must have episode_id before getting episode.',
             );
         }
 
         if (empty($this->episode)) {
             $this->episode = (new EpisodeModel())->getPublishedEpisodeById(
-                $this->episode_id,
                 $this->podcast_id,
+                $this->episode_id,
             );
         }
 
         return $this->episode;
     }
 
-    public function getPerson()
+    public function getPerson(): Person
     {
         if (empty($this->person_id)) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 'Credit must have person_id before getting person.',
             );
         }
@@ -83,23 +95,27 @@ class Credit extends Entity
         return $this->person;
     }
 
-    public function getGroupLabel()
+    public function getGroupLabel(): ?string
     {
         if (empty($this->person_group)) {
             return null;
-        } else {
-            return lang("PersonsTaxonomy.persons.{$this->person_group}.label");
         }
+
+        return lang("PersonsTaxonomy.persons.{$this->person_group}.label");
     }
 
-    public function getRoleLabel()
+    public function getRoleLabel(): ?string
     {
-        if (empty($this->person_group) || empty($this->person_role)) {
+        if (empty($this->person_group)) {
             return null;
-        } else {
-            return lang(
-                "PersonsTaxonomy.persons.{$this->person_group}.roles.{$this->person_role}.label",
-            );
         }
+
+        if (empty($this->person_role)) {
+            return null;
+        }
+
+        return lang(
+            "PersonsTaxonomy.persons.{$this->person_group}.roles.{$this->person_role}.label",
+        );
     }
 }

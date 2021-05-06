@@ -8,6 +8,9 @@
 
 namespace App\Controllers\Admin;
 
+use App\Entities\Podcast;
+use App\Entities\Episode;
+use CodeIgniter\Exceptions\PageNotFoundException;
 use App\Models\EpisodePersonModel;
 use App\Models\PodcastModel;
 use App\Models\EpisodeModel;
@@ -16,42 +19,39 @@ use App\Models\PersonModel;
 class EpisodePerson extends BaseController
 {
     /**
-     * @var \App\Entities\Podcast
+     * @var Podcast
      */
     protected $podcast;
 
     /**
-     * @var \App\Entities\Episode
+     * @var Episode
      */
     protected $episode;
 
     public function _remap($method, ...$params)
     {
-        if (count($params) > 1) {
-            if (
-                !($this->podcast = (new PodcastModel())->getPodcastById(
-                    $params[0],
-                ))
-            ) {
-                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-            }
-            if (
-                !($this->episode = (new EpisodeModel())
-                    ->where([
-                        'id' => $params[1],
-                        'podcast_id' => $params[0],
-                    ])
-                    ->first())
-            ) {
-                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-            }
-        } else {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        if (count($params) <= 2) {
+            throw PageNotFoundException::forPageNotFound();
         }
-        unset($params[1]);
-        unset($params[0]);
 
-        return $this->$method(...$params);
+        if (
+            ($this->podcast = (new PodcastModel())->getPodcastById(
+                $params[0],
+            )) &&
+            ($this->episode = (new EpisodeModel())
+                ->where([
+                    'id' => $params[1],
+                    'podcast_id' => $params[0],
+                ])
+                ->first())
+        ) {
+            unset($params[1]);
+            unset($params[0]);
+
+            return $this->$method(...$params);
+        }
+
+        throw PageNotFoundException::forPageNotFound();
     }
 
     public function index()

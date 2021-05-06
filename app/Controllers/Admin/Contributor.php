@@ -8,6 +8,10 @@
 
 namespace App\Controllers\Admin;
 
+use App\Entities\Podcast;
+use App\Entities\User;
+use CodeIgniter\Exceptions\PageNotFoundException;
+use Exception;
 use App\Authorization\GroupModel;
 use App\Models\PodcastModel;
 use App\Models\UserModel;
@@ -15,12 +19,12 @@ use App\Models\UserModel;
 class Contributor extends BaseController
 {
     /**
-     * @var \App\Entities\Podcast
+     * @var Podcast
      */
     protected $podcast;
 
     /**
-     * @var \App\Entities\User|null
+     * @var User|null
      */
     protected $user;
 
@@ -28,18 +32,20 @@ class Contributor extends BaseController
     {
         $this->podcast = (new PodcastModel())->getPodcastById($params[0]);
 
-        if (count($params) > 1) {
-            if (
-                !($this->user = (new UserModel())->getPodcastContributor(
-                    $params[1],
-                    $params[0]
-                ))
-            ) {
-                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-            }
+        if (count($params) <= 1) {
+            return $this->$method();
         }
 
-        return $this->$method();
+        if (
+            $this->user = (new UserModel())->getPodcastContributor(
+                $params[1],
+                $params[0],
+            )
+        ) {
+            return $this->$method();
+        }
+
+        throw PageNotFoundException::forPageNotFound();
     }
 
     public function list()
@@ -57,7 +63,7 @@ class Contributor extends BaseController
         $data = [
             'contributor' => (new UserModel())->getPodcastContributor(
                 $this->user->id,
-                $this->podcast->id
+                $this->podcast->id,
             ),
         ];
 
@@ -79,7 +85,7 @@ class Contributor extends BaseController
                 $result[$user->id] = $user->username;
                 return $result;
             },
-            []
+            [],
         );
 
         $roles = (new GroupModel())->getContributorRoles();
@@ -89,7 +95,7 @@ class Contributor extends BaseController
                 $result[$role->id] = lang('Contributor.roles.' . $role->name);
                 return $result;
             },
-            []
+            [],
         );
 
         $data = [
@@ -108,9 +114,9 @@ class Contributor extends BaseController
             (new PodcastModel())->addPodcastContributor(
                 $this->request->getPost('user'),
                 $this->podcast->id,
-                $this->request->getPost('role')
+                $this->request->getPost('role'),
             );
-        } catch (\Exception $e) {
+        } catch (Exception $exception) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -133,7 +139,7 @@ class Contributor extends BaseController
                 $result[$role->id] = lang('Contributor.roles.' . $role->name);
                 return $result;
             },
-            []
+            [],
         );
 
         $data = [
@@ -141,7 +147,7 @@ class Contributor extends BaseController
             'user' => $this->user,
             'contributorGroupId' => (new PodcastModel())->getContributorGroupId(
                 $this->user->id,
-                $this->podcast->id
+                $this->podcast->id,
             ),
             'roleOptions' => $roleOptions,
         ];
@@ -158,7 +164,7 @@ class Contributor extends BaseController
         (new PodcastModel())->updatePodcastContributor(
             $this->user->id,
             $this->podcast->id,
-            $this->request->getPost('role')
+            $this->request->getPost('role'),
         );
 
         return redirect()->route('contributor-list', [$this->podcast->id]);
@@ -178,7 +184,7 @@ class Contributor extends BaseController
         if (
             !$podcastModel->removePodcastContributor(
                 $this->user->id,
-                $this->podcast->id
+                $this->podcast->id,
             )
         ) {
             return redirect()
@@ -193,7 +199,7 @@ class Contributor extends BaseController
                 lang('Contributor.messages.removeContributorSuccess', [
                     'username' => $this->user->username,
                     'podcastTitle' => $this->podcast->title,
-                ])
+                ]),
             );
     }
 }

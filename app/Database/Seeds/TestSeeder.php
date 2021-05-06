@@ -15,7 +15,7 @@ use CodeIgniter\Database\Seeder;
 
 class TestSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
         /** Inserts an active user with the following credentials:
          *      username: admin
@@ -29,6 +29,7 @@ class TestSeeder extends Seeder
                 '$2y$10$TXJEHX/djW8jtzgpDVf7dOOCGo5rv1uqtAYWdwwwkttQcDkAeB2.6',
             'active' => 1,
         ]);
+
         $this->db
             ->table('auth_groups_users')
             ->insert(['group_id' => 1, 'user_id' => 1]);

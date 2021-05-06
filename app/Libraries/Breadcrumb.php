@@ -32,12 +32,12 @@ class Breadcrumb
         $uri = '';
         foreach (current_url(true)->getSegments() as $segment) {
             $uri .= '/' . $segment;
-            array_push($this->links, [
+            $this->links[] = [
                 'text' => is_numeric($segment)
                     ? $segment
                     : lang('Breadcrumb.' . $segment),
                 'href' => base_url($uri),
-            ]);
+            ];
         }
     }
 
@@ -57,10 +57,8 @@ class Breadcrumb
      * replaceParams($newParams);
      *
      * The breadcrumb is now `Home / podcasts / foo / episodes / bar`
-     *
-     * @param array $newParams
      */
-    public function replaceParams($newParams)
+    public function replaceParams(array $newParams): void
     {
         foreach ($this->links as $key => $link) {
             if (is_numeric($link['text'])) {
@@ -72,10 +70,8 @@ class Breadcrumb
 
     /**
      * Renders the breadcrumb object as an accessible html breadcrumb nav
-     *
-     * @return string
      */
-    public function render($class = null)
+    public function render($class = null): string
     {
         $listItems = '';
         $keys = array_keys($this->links);

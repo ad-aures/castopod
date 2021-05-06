@@ -27,7 +27,7 @@
 ) ?>
 <?= button(
     lang('Note.form.submit_reply'),
-    null,
+    '',
     ['variant' => 'primary', 'size' => 'small'],
     [
         'type' => 'submit',

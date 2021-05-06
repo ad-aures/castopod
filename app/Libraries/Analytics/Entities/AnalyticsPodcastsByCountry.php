@@ -10,7 +10,8 @@
 
 namespace Analytics\Entities;
 
-use CodeIgniter\Entity;
+use datetime;
+use CodeIgniter\Entity\Entity;
 
 class AnalyticsPodcastsByCountry extends Entity
 {
@@ -19,6 +20,9 @@ class AnalyticsPodcastsByCountry extends Entity
      */
     protected $labels;
 
+    /**
+     * @var array<string, string>
+     */
     protected $casts = [
         'podcast_id' => 'integer',
         'country_code' => 'string',

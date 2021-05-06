@@ -15,7 +15,7 @@ use CodeIgniter\Database\Migration;
 
 class AddAnalyticsWebsiteByEntryPage extends Migration
 {
-    public function up()
+    public function up(): void
     {
         $this->forge->addField([
             'podcast_id' => [
@@ -45,7 +45,7 @@ class AddAnalyticsWebsiteByEntryPage extends Migration
         $this->forge->createTable('analytics_website_by_entry_page');
     }
 
-    public function down()
+    public function down(): void
     {
         $this->forge->dropTable('analytics_website_by_entry_page');
     }

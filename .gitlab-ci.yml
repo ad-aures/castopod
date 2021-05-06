@@ -1,6 +1,7 @@
 image: php:7.3-fpm
 
 stages:
+  - quality
   - bundle
   - release
 
@@ -31,16 +32,30 @@ before_script:
   - curl -sL https://deb.nodesource.com/setup_12.x | bash -
   - apt-get update && apt-get install -y nodejs
 
-  # Install php and js dependencies
-  - php composer.phar install --no-dev --ignore-platform-reqs
+  # Install all php and js dependencies
+  - php composer.phar install --prefer-dist --no-ansi --no-interaction --no-progress --ignore-platform-reqs
   - npm install
 
-  # build all UI assets
-  - npm run build
+tests:
+  stage: quality
+  script:
+    - vendor/bin/phpunit
+
+code-review:
+  stage: quality
+  script:
+    # run rector
+    - vendor/bin/rector process --dry-run
 
 bundle_app:
   stage: bundle
   script:
+    # remove dev dependencies using the --no-dev option
+    - php composer.phar install --no-dev --prefer-dist --no-ansi --no-interaction --no-progress --ignore-platform-reqs
+
+    # build all UI assets
+    - npm run build
+
     # download GeoLite2-City archive and extract it to writable/uploads
     - wget -c "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=$MAXMIND_LICENCE_KEY&suffix=tar.gz" -O - | tar -xz -C ./writable/uploads/
 
@@ -65,8 +80,8 @@ release_app:
     - apt-get install jq -y
     - apt-get install zip -y
 
-    # make prepare-release.sh executable
-    - chmod +x ./prepare-release.sh
+    # make scripts/prepare-release.sh executable
+    - chmod +x ./scripts/prepare-release.sh
 
     # IMPORTANT: delete local git tags before release to prevent eventual script failure (ie. tag already exists)
     - git tag | xargs git tag -d

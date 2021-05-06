@@ -8,6 +8,11 @@
 
 namespace Analytics\Controllers;
 
+use Analytics\Config\Analytics;
+use CodeIgniter\HTTP\RequestInterface;
+use CodeIgniter\HTTP\ResponseInterface;
+use Psr\Log\LoggerInterface;
+use Config\Services;
 use CodeIgniter\Controller;
 
 class EpisodeAnalyticsController extends Controller
@@ -22,17 +27,17 @@ class EpisodeAnalyticsController extends Controller
     protected $helpers = ['analytics'];
 
     /**
-     * @var \Analytics\Config\Analytics
+     * @var Analytics
      */
     protected $config;
     /**
      * Constructor.
      */
     public function initController(
-        \CodeIgniter\HTTP\RequestInterface $request,
-        \CodeIgniter\HTTP\ResponseInterface $response,
-        \Psr\Log\LoggerInterface $logger
-    ) {
+        RequestInterface $request,
+        ResponseInterface $response,
+        LoggerInterface $logger
+    ): void {
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
 
@@ -52,8 +57,9 @@ class EpisodeAnalyticsController extends Controller
     // Add one hit to this episode:
     public function hit($base64EpisodeData, ...$audioFilePath)
     {
-        $session = \Config\Services::session();
+        $session = Services::session();
         $session->start();
+
         $serviceName = '';
         if (isset($_GET['_from'])) {
             $serviceName = $_GET['_from'];

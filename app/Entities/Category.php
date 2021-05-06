@@ -9,15 +9,18 @@
 namespace App\Entities;
 
 use App\Models\CategoryModel;
-use CodeIgniter\Entity;
+use CodeIgniter\Entity\Entity;
 
 class Category extends Entity
 {
     /**
-     * @var \App\Entity\Category|null
+     * @var Category|null
      */
     protected $parent;
 
+    /**
+     * @var array<string, string>
+     */
     protected $casts = [
         'id' => 'integer',
         'parent_id' => 'integer',
@@ -26,12 +29,12 @@ class Category extends Entity
         'google_category' => 'string',
     ];
 
-    public function getParent()
+    public function getParent(): ?Category
     {
-        $parentId = $this->attributes['parent_id'];
+        if (empty($this->parent_id)) {
+            return null;
+        }
 
-        return $parentId != 0
-            ? (new CategoryModel())->getCategoryById($parentId)
-            : null;
+        return (new CategoryModel())->getCategoryById($this->parent_id);
     }
 }

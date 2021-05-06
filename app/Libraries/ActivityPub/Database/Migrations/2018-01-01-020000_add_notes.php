@@ -15,7 +15,7 @@ use CodeIgniter\Database\Migration;
 
 class AddNotes extends Migration
 {
-    public function up()
+    public function up(): void
     {
         $this->forge->addField([
             'id' => [
@@ -101,7 +101,7 @@ class AddNotes extends Migration
         $this->forge->createTable('activitypub_notes');
     }
 
-    public function down()
+    public function down(): void
     {
         $this->forge->dropTable('activitypub_notes');
     }

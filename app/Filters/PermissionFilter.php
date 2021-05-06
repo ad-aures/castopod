@@ -21,10 +21,8 @@ class PermissionFilter implements FilterInterface
      * sent back to the client, allowing for error pages,
      * redirects, etc.
      *
-     * @param \CodeIgniter\HTTP\RequestInterface $request
      * @param array|null                         $params
-     *
-     * @return mixed
+     * @return void|mixed
      */
     public function before(RequestInterface $request, $params = null)
     {
@@ -59,15 +57,14 @@ class PermissionFilter implements FilterInterface
                 count($routerParams) > 0
             ) {
                 if (
-                    $groupId = (new PodcastModel())->getContributorGroupId(
+                    ($groupId = (new PodcastModel())->getContributorGroupId(
                         $authenticate->id(),
-                        $routerParams[0]
-                    )
+                        $routerParams[0],
+                    )) &&
+                    $authorize->groupHasPermission($permission, $groupId)
                 ) {
-                    if ($authorize->groupHasPermission($permission, $groupId)) {
-                        $result = true;
-                        break;
-                    }
+                    $result = true;
+                    break;
                 }
             } elseif (
                 $authorize->hasPermission($permission, $authenticate->id())
@@ -84,31 +81,25 @@ class PermissionFilter implements FilterInterface
                 return redirect()
                     ->to($redirectURL)
                     ->with('error', lang('Auth.notEnoughPrivilege'));
-            } else {
-                throw new PermissionException(lang('Auth.notEnoughPrivilege'));
             }
+            throw new PermissionException(lang('Auth.notEnoughPrivilege'));
         }
     }
 
     //--------------------------------------------------------------------
-
     /**
      * Allows After filters to inspect and modify the response
      * object as needed. This method does not allow any way
      * to stop execution of other after filters, short of
      * throwing an Exception or Error.
      *
-     * @param \CodeIgniter\HTTP\RequestInterface  $request
-     * @param \CodeIgniter\HTTP\ResponseInterface $response
      * @param array|null                          $arguments
-     *
-     * @return void
      */
     public function after(
         RequestInterface $request,
         ResponseInterface $response,
         $arguments = null
-    ) {
+    ): void {
     }
 
     //--------------------------------------------------------------------

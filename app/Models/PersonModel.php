@@ -8,13 +8,23 @@
 
 namespace App\Models;
 
+use App\Entities\Person;
 use CodeIgniter\Model;
 
 class PersonModel extends Model
 {
+    /**
+     * @var string
+     */
     protected $table = 'persons';
+    /**
+     * @var string
+     */
     protected $primaryKey = 'id';
 
+    /**
+     * @var string[]
+     */
     protected $allowedFields = [
         'id',
         'full_name',
@@ -26,11 +36,23 @@ class PersonModel extends Model
         'updated_by',
     ];
 
-    protected $returnType = \App\Entities\Person::class;
+    /**
+     * @var string
+     */
+    protected $returnType = Person::class;
+    /**
+     * @var bool
+     */
     protected $useSoftDeletes = false;
 
+    /**
+     * @var bool
+     */
     protected $useTimestamps = true;
 
+    /**
+     * @var array<string, string>
+     */
     protected $validationRules = [
         'full_name' => 'required',
         'unique_name' =>
@@ -39,11 +61,22 @@ class PersonModel extends Model
         'created_by' => 'required',
         'updated_by' => 'required',
     ];
-    protected $validationMessages = [];
 
-    // clear cache before update if by any chance, the person name changes, so will the person link
+    /**
+     * @var string[]
+     */
     protected $afterInsert = ['clearCache'];
+
+    /**
+     * clear cache before update if by any chance, the person name changes, so will the person link
+     *
+     * @var string[]
+     */
     protected $beforeUpdate = ['clearCache'];
+
+    /**
+     * @var string[]
+     */
     protected $beforeDelete = ['clearCache'];
 
     public function getPersonById($personId)
@@ -65,7 +98,7 @@ class PersonModel extends Model
 
     public function createPerson($fullName, $informationUrl, $image)
     {
-        $person = new \App\Entities\Person([
+        $person = new Person([
             'full_name' => $fullName,
             'unique_name' => slugify($fullName),
             'information_url' => $informationUrl,
@@ -103,10 +136,13 @@ class PersonModel extends Model
         $locale = service('request')->getLocale();
         $cacheName = "taxonomy_options_{$locale}";
         if (!($options = cache($cacheName))) {
-            foreach (lang('PersonsTaxonomy.persons') as $group_key => $group) {
+            foreach (
+                (array) lang('PersonsTaxonomy.persons')
+                as $group_key => $group
+            ) {
                 foreach ($group['roles'] as $role_key => $role) {
                     $options[
-                        "$group_key,$role_key"
+                        "{$group_key},{$role_key}"
                     ] = "{$group['label']}  ▸  {$role['label']}";
                 }
             }
@@ -117,7 +153,10 @@ class PersonModel extends Model
         return $options;
     }
 
-    protected function clearCache(array $data)
+    /**
+     * @return array<string, array<string|int, mixed>>
+     */
+    protected function clearCache(array $data): array
     {
         $person = (new PersonModel())->find(
             is_array($data['id']) ? $data['id'][0] : $data['id'],

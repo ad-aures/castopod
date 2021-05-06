@@ -1,3 +1,6 @@
+/**
+ * TODO: refactor file
+ */
 let timeout: number | null = null;
 
 const playSoundbite = (

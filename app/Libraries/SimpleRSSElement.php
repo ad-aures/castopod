@@ -16,11 +16,16 @@ class SimpleRSSElement extends SimpleXMLElement
      * Adds a child with $value inside CDATA
      *
      * @param string $name — The name of the child element to add.
-     * @param string $value — [optional] If specified, the value of the child element.
-     * @param string $namespace [optional] If specified, the namespace to which the child element belongs.
+     * @param string|null $value — [optional] If specified, the value of the child element.
+     * @param string|null $namespace [optional] If specified, the namespace to which the child element belongs.
+     *
+     * @return $this
      */
-    public function addChildWithCDATA($name, $value = null, $namespace = null)
-    {
+    public function addChildWithCDATA(
+        string $name,
+        ?string $value = null,
+        ?string $namespace = null
+    ) {
         $new_child = parent::addChild($name, null, $namespace);
 
         if ($new_child !== null) {
@@ -39,6 +44,7 @@ class SimpleRSSElement extends SimpleXMLElement
      * @param string $name — The name of the child element to add.
      * @param string $value — [optional] If specified, the value of the child element.
      * @param string $namespace [optional] If specified, the namespace to which the child element belongs.
+     * @return $this
      */
     public function addChild($name, $value = null, $namespace = null)
     {

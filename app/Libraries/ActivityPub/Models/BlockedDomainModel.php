@@ -8,21 +8,44 @@
 
 namespace ActivityPub\Models;
 
+use CodeIgniter\Database\BaseResult;
+use ActivityPub\Entities\BlockedDomain;
 use CodeIgniter\Events\Events;
 use CodeIgniter\Model;
 
 class BlockedDomainModel extends Model
 {
+    /**
+     * @var string
+     */
     protected $table = 'activitypub_blocked_domains';
+
+    /**
+     * @var string
+     */
     protected $primaryKey = 'name';
 
+    /**
+     * @var string[]
+     */
     protected $allowedFields = ['name'];
 
-    protected $returnType = \ActivityPub\Entities\BlockedDomain::class;
+    /**
+     * @var string
+     */
+    protected $returnType = BlockedDomain::class;
+
+    /**
+     * @var bool
+     */
     protected $useSoftDeletes = false;
 
+    /**
+     * @var bool
+     */
     protected $useTimestamps = true;
-    protected $updatedField = null;
+
+    protected $updatedField;
 
     /**
      * Retrieves instance or podcast domain blocks depending on whether or not $podcastId param is set.
@@ -47,7 +70,7 @@ class BlockedDomainModel extends Model
             config('ActivityPub')->cachePrefix .
             "domain#{$hashedDomain}_isBlocked";
         if (!($found = cache($cacheName))) {
-            $found = $this->find($domain) ? true : false;
+            $found = (bool) $this->find($domain);
 
             cache()->save($cacheName, $found, DECADE);
         }
@@ -83,6 +106,9 @@ class BlockedDomainModel extends Model
         return $result;
     }
 
+    /**
+     * @return bool|BaseResult
+     */
     public function unblockDomain($name)
     {
         $hashedDomain = md5($name);

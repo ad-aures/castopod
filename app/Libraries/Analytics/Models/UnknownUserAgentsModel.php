@@ -14,9 +14,10 @@ use CodeIgniter\Model;
 
 class UnknownUserAgentsModel extends Model
 {
+    /**
+     * @var string
+     */
     protected $table = 'analytics_unknown_useragents';
-
-    protected $allowedFields = [];
 
     public function getUserAgents($last_known_id = 0)
     {

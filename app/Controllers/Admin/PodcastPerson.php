@@ -8,6 +8,8 @@
 
 namespace App\Controllers\Admin;
 
+use App\Entities\Podcast;
+use CodeIgniter\Exceptions\PageNotFoundException;
 use App\Models\PodcastPersonModel;
 use App\Models\PodcastModel;
 use App\Models\PersonModel;
@@ -15,26 +17,22 @@ use App\Models\PersonModel;
 class PodcastPerson extends BaseController
 {
     /**
-     * @var \App\Entities\Podcast
+     * @var Podcast
      */
     protected $podcast;
 
     public function _remap($method, ...$params)
     {
-        if (count($params) > 0) {
-            if (
-                !($this->podcast = (new PodcastModel())->getPodcastById(
-                    $params[0],
-                ))
-            ) {
-                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-            }
-        } else {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        if (count($params) === 0) {
+            throw PageNotFoundException::forPageNotFound();
         }
-        unset($params[0]);
 
-        return $this->$method(...$params);
+        if ($this->podcast = (new PodcastModel())->getPodcastById($params[0])) {
+            unset($params[0]);
+            return $this->$method(...$params);
+        }
+
+        throw PageNotFoundException::forPageNotFound();
     }
 
     public function index()

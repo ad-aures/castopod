@@ -9,6 +9,7 @@
 namespace App\Entities;
 
 use App\Models\PodcastModel;
+use RuntimeException;
 
 class Actor extends \ActivityPub\Entities\Actor
 {
@@ -30,7 +31,7 @@ class Actor extends \ActivityPub\Entities\Actor
     public function getPodcast()
     {
         if (empty($this->id)) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 'Actor must be created before getting associated podcast.',
             );
         }

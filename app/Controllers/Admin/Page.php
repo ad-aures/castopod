@@ -8,24 +8,28 @@
 
 namespace App\Controllers\Admin;
 
+use App\Entities\Page as EntitiesPage;
+use CodeIgniter\Exceptions\PageNotFoundException;
 use App\Models\PageModel;
 
 class Page extends BaseController
 {
     /**
-     * @var \App\Entities\Page|null
+     * @var Page|null
      */
     protected $page;
 
     public function _remap($method, ...$params)
     {
-        if (count($params) > 0) {
-            if (!($this->page = (new PageModel())->find($params[0]))) {
-                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-            }
+        if (count($params) === 0) {
+            return $this->$method();
         }
 
-        return $this->$method();
+        if ($this->page = (new PageModel())->find($params[0])) {
+            return $this->$method();
+        }
+
+        throw PageNotFoundException::forPageNotFound();
     }
 
     function list()
@@ -51,7 +55,7 @@ class Page extends BaseController
 
     function attemptCreate()
     {
-        $page = new \App\Entities\Page([
+        $page = new EntitiesPage([
             'title' => $this->request->getPost('title'),
             'slug' => $this->request->getPost('slug'),
             'content' => $this->request->getPost('content'),
@@ -72,7 +76,7 @@ class Page extends BaseController
                 'message',
                 lang('Page.messages.createSuccess', [
                     'pageTitle' => $page->title,
-                ])
+                ]),
             );
     }
 

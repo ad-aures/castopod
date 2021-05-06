@@ -14,7 +14,7 @@
     lang('Person.edit'),
     route_to('person-edit', $person->id),
     ['variant' => 'secondary', 'iconLeft' => 'edit'],
-    ['class' => 'mr-2']
+    ['class' => 'mr-2'],
 ) ?>
 <?= $this->endSection() ?>
 

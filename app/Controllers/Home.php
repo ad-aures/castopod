@@ -12,6 +12,9 @@ use App\Models\PodcastModel;
 
 class Home extends BaseController
 {
+    /**
+     * @return mixed
+     */
     public function index()
     {
         $model = new PodcastModel();

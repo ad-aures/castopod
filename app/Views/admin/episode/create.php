@@ -131,7 +131,7 @@
     <?= form_radio(
         ['id' => 'trailer', 'name' => 'type', 'class' => 'form-radio-btn'],
         'trailer',
-        old('type') ? old('type') == 'trailer' : false,
+        old('type') && old('type') == 'trailer',
     ) ?>
     <label for="trailer" class="inline-flex items-center">
         <?= lang('Episode.form.type.trailer') ?>
@@ -139,7 +139,7 @@
     <?= form_radio(
         ['id' => 'bonus', 'name' => 'type', 'class' => 'form-radio-btn'],
         'bonus',
-        old('type') ? old('type') == 'bonus' : false,
+        old('type') && old('type') == 'bonus',
     ) ?>
     <label for="bonus" class="inline-flex items-center">
         <?= lang('Episode.form.type.bonus') ?>
@@ -172,7 +172,7 @@
             'class' => 'form-radio-btn',
         ],
         'clean',
-        old('parental_advisory') ? old('parental_advisory') === 'clean' : false,
+        old('parental_advisory') && old('parental_advisory') === 'clean',
     ) ?>
     <label for="clean"><?= lang(
         'Episode.form.parental_advisory.clean',
@@ -184,9 +184,7 @@
             'class' => 'form-radio-btn',
         ],
         'explicit',
-        old('parental_advisory')
-            ? old('parental_advisory') === 'explicit'
-            : false,
+        old('parental_advisory') && old('parental_advisory') === 'explicit',
     ) ?>
     <label for="explicit"><?= lang(
         'Episode.form.parental_advisory.explicit',
@@ -421,7 +419,7 @@
 
 <?= button(
     lang('Episode.form.submit_create'),
-    null,
+    '',
     ['variant' => 'primary'],
     ['type' => 'submit', 'class' => 'self-end'],
 ) ?>

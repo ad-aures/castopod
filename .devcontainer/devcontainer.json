@@ -1,8 +1,11 @@
 // For format details, see https://aka.ms/vscode-remote/devcontainer.json or this file's README at:
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.117.1/containers/docker-existing-dockerfile
 {
-  "name": "Existing Dockerfile",
-  "dockerFile": "./Dockerfile",
+  "name": "Castopod Host dev",
+  "dockerComposeFile": ["../docker-compose.yml"],
+  "service": "app",
+  "workspaceFolder": "/castopod-host",
+  "postCreateCommand": "cron && php spark serve --host 0.0.0.0",
   "settings": {
     "terminal.integrated.shell.linux": "/bin/bash",
     "editor.formatOnSave": true,
@@ -13,18 +16,18 @@
     "color-highlight.markerType": "dot-before"
   },
   "extensions": [
-	"mikestead.dotenv",
-	"bmewburn.vscode-intelephense-client",
-	"streetsidesoftware.code-spell-checker",
-	"naumovs.color-highlight",
-	"heybourn.headwind",
-	"wayou.vscode-todo-highlight",
-	"esbenp.prettier-vscode",
-	"bradlc.vscode-tailwindcss",
-	"jamesbirtles.svelte-vscode",
-	"dbaeumer.vscode-eslint",
-	"stylelint.vscode-stylelint",
-	"wongjn.php-sniffer",
-	"eamodio.gitlens"
-]
+    "mikestead.dotenv",
+    "bmewburn.vscode-intelephense-client",
+    "streetsidesoftware.code-spell-checker",
+    "naumovs.color-highlight",
+    "heybourn.headwind",
+    "wayou.vscode-todo-highlight",
+    "esbenp.prettier-vscode",
+    "bradlc.vscode-tailwindcss",
+    "jamesbirtles.svelte-vscode",
+    "dbaeumer.vscode-eslint",
+    "stylelint.vscode-stylelint",
+    "wongjn.php-sniffer",
+    "eamodio.gitlens"
+  ]
 }

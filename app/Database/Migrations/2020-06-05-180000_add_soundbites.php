@@ -15,7 +15,7 @@ use CodeIgniter\Database\Migration;
 
 class AddSoundbites extends Migration
 {
-    public function up()
+    public function up(): void
     {
         $this->forge->addField([
             'id' => [
@@ -82,7 +82,7 @@ class AddSoundbites extends Migration
         $this->forge->createTable('soundbites');
     }
 
-    public function down()
+    public function down(): void
     {
         $this->forge->dropTable('soundbites');
     }

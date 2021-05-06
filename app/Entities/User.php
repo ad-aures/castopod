@@ -8,25 +8,29 @@
 
 namespace App\Entities;
 
+use RuntimeException;
 use App\Models\PodcastModel;
 
 class User extends \Myth\Auth\Entities\User
 {
     /**
      * Per-user podcasts
-     * @var \App\Entities\Podcast[]
+     * @var Podcast[]
      */
     protected $podcasts = [];
 
     /**
      * The podcast the user is contributing to
-     * @var \App\Entities\Podcast|null
+     *
+     * @var Podcast|null
      */
-    protected $podcast = null;
+    protected $podcast;
 
     /**
      * Array of field names and the type of value to cast them as
      * when they are accessed.
+     *
+     * @var array<string, string>
      */
     protected $casts = [
         'id' => 'integer',
@@ -39,13 +43,13 @@ class User extends \Myth\Auth\Entities\User
     /**
      * Returns the podcasts the user is contributing to
      *
-     * @return \App\Entities\Podcast[]
+     * @return Podcast[]
      */
-    public function getPodcasts()
+    public function getPodcasts(): array
     {
         if (empty($this->id)) {
-            throw new \RuntimeException(
-                'Users must be created before getting podcasts.'
+            throw new RuntimeException(
+                'Users must be created before getting podcasts.',
             );
         }
 
@@ -58,20 +62,18 @@ class User extends \Myth\Auth\Entities\User
 
     /**
      * Returns a podcast the user is contributing to
-     *
-     * @return \App\Entities\Podcast
      */
-    public function getPodcast()
+    public function getPodcast(): Podcast
     {
         if (empty($this->podcast_id)) {
-            throw new \RuntimeException(
-                'Podcast_id must be set before getting podcast.'
+            throw new RuntimeException(
+                'Podcast_id must be set before getting podcast.',
             );
         }
 
         if (empty($this->podcast)) {
             $this->podcast = (new PodcastModel())->getPodcastById(
-                $this->podcast_id
+                $this->podcast_id,
             );
         }
 

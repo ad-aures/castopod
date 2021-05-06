@@ -60,7 +60,6 @@
 <?= form_input([
     'id' => 'image',
     'name' => 'image',
-
     'class' => 'form-input',
     'type' => 'file',
     'accept' => '.jpg,.jpeg,.png',
@@ -284,9 +283,9 @@
         ')</small>' .
         hint_tooltip(lang('Episode.form.transcript_hint'), 'ml-1') ?></legend>
     <div class="mb-4 form-input-tabs">
-        <input type="radio" name="transcript-choice" id="transcript-file-upload-choice" aria-controls="transcript-file-upload-choice" value="upload-file" <?= !$episode->transcript_file_remote_url
-            ? 'checked'
-            : '' ?> />
+        <input type="radio" name="transcript-choice" id="transcript-file-upload-choice" aria-controls="transcript-file-upload-choice" value="upload-file" <?= $episode->transcript_file_remote_url
+            ? ''
+            : 'checked' ?> />
         <label for="transcript-file-upload-choice"><?= lang(
             'Common.forms.upload_file',
         ) ?></label>
@@ -377,9 +376,9 @@
         ')</small>' .
         hint_tooltip(lang('Episode.form.chapters_hint'), 'ml-1') ?></legend>
     <div class="mb-4 form-input-tabs">
-        <input type="radio" name="chapters-choice" id="chapters-file-upload-choice" aria-controls="chapters-file-upload-choice" value="upload-file" <?= !$episode->chapters_file_remote_url
-            ? 'checked'
-            : '' ?> />
+        <input type="radio" name="chapters-choice" id="chapters-file-upload-choice" aria-controls="chapters-file-upload-choice" value="upload-file" <?= $episode->chapters_file_remote_url
+            ? ''
+            : 'checked' ?> />
         <label for="chapters-file-upload-choice"><?= lang(
             'Common.forms.upload_file',
         ) ?></label>
@@ -493,7 +492,7 @@
 
 <?= button(
     lang('Episode.form.submit_edit'),
-    null,
+    '',
     ['variant' => 'primary'],
     ['type' => 'submit', 'class' => 'self-end'],
 ) ?>

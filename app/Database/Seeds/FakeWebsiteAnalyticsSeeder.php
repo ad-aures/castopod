@@ -18,6 +18,9 @@ use CodeIgniter\Database\Seeder;
 
 class FakeWebsiteAnalyticsSeeder extends Seeder
 {
+    /**
+     * @var string[]
+     */
     protected $keywords = [
         'all the smoke podcast',
         'apple podcast',
@@ -70,6 +73,10 @@ class FakeWebsiteAnalyticsSeeder extends Seeder
         'wind of change podcast',
         'your own backyard podcast',
     ];
+
+    /**
+     * @var string[]
+     */
     protected $domains = [
         '360.cn ',
         'adobe.com ',
@@ -123,6 +130,9 @@ class FakeWebsiteAnalyticsSeeder extends Seeder
         'zoom.us ',
     ];
 
+    /**
+     * @var string[]
+     */
     protected $browsers = [
         'Android Browser',
         'Avast Secure Browser',
@@ -168,7 +178,7 @@ class FakeWebsiteAnalyticsSeeder extends Seeder
         'WOSBrowser',
     ];
 
-    public function run()
+    public function run(): void
     {
         $podcast = (new PodcastModel())->first();
 
@@ -201,7 +211,7 @@ class FakeWebsiteAnalyticsSeeder extends Seeder
                     for (
                         $num_line = 0;
                         $num_line < rand(1, $proba1);
-                        $num_line++
+                        ++$num_line
                     ) {
                         $proba2 = floor(exp(6 - $age / 20)) + 10;
 

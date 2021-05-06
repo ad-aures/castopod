@@ -15,7 +15,7 @@ use CodeIgniter\Database\Migration;
 
 class AddActors extends Migration
 {
-    public function up()
+    public function up(): void
     {
         $this->forge->addField([
             'id' => [
@@ -115,7 +115,7 @@ class AddActors extends Migration
         $this->forge->createTable('activitypub_actors');
     }
 
-    public function down()
+    public function down(): void
     {
         $this->forge->dropTable('activitypub_actors');
     }

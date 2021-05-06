@@ -4,31 +4,13 @@ namespace App\Authorization;
 
 class FlatAuthorization extends \Myth\Auth\Authorization\FlatAuthorization
 {
-    //--------------------------------------------------------------------
-    // Actions
-    //--------------------------------------------------------------------
-
     /**
      * Checks a group to see if they have the specified permission.
      *
      * @param int|string $permission
-     * @param int        $groupId
-     *
-     * @return mixed
      */
-    public function groupHasPermission($permission, int $groupId)
+    public function groupHasPermission($permission, int $groupId): bool
     {
-        if (
-            empty($permission) ||
-            (!is_string($permission) && !is_numeric($permission))
-        ) {
-            return null;
-        }
-
-        if (empty($groupId) || !is_numeric($groupId)) {
-            return null;
-        }
-
         // Get the Permission ID
         $permissionId = $this->getPermissionID($permission);
 
@@ -36,36 +18,23 @@ class FlatAuthorization extends \Myth\Auth\Authorization\FlatAuthorization
             return false;
         }
 
-        if (
-            $this->permissionModel->doesGroupHavePermission(
-                $groupId,
-                (int) $permissionId
-            )
-        ) {
-            return true;
-        }
-
-        return false;
+        return (bool) $this->permissionModel->doesGroupHavePermission(
+            $groupId,
+            $permissionId,
+        );
     }
 
     /**
      * Makes user part of given groups.
      *
-     * @param $userId
-     * @param array|null $groups // Either collection of ID or names
-     *
-     * @return bool
+     * @param array $groups Either collection of ID or names
      */
-    public function setUserGroups(int $userId, $groups)
+    public function setUserGroups(int $userId, array $groups = []): bool
     {
-        if (empty($userId) || !is_numeric($userId)) {
-            return null;
-        }
-
         // remove user from all groups before resetting it in new groups
         $this->groupModel->removeUserFromAllGroups($userId);
 
-        if (empty($groups)) {
+        if ($groups = []) {
             return true;
         }
 

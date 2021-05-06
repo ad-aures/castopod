@@ -18,7 +18,7 @@
             'analytics-data',
             $podcast->id,
             'WebsiteByReferer',
-            'ByDomainWeekly'
+            'ByDomainWeekly',
         ) ?>"></div>
     </div>
 
@@ -29,7 +29,7 @@
             'analytics-data',
             $podcast->id,
             'WebsiteByReferer',
-            'ByDomainYearly'
+            'ByDomainYearly',
         ) ?>"></div>
     </div>
 
@@ -39,7 +39,7 @@
         <div class="chart-pie" id="by-entry-page-pie" data-chart-type="pie-chart" data-chart-url="<?= route_to(
             'analytics-full-data',
             $podcast->id,
-            'WebsiteByEntryPage'
+            'WebsiteByEntryPage',
         ) ?>"></div>
     </div>
 
@@ -49,7 +49,7 @@
         <div class="chart-pie" id="by-browser-pie" data-chart-type="pie-chart" data-chart-url="<?= route_to(
             'analytics-full-data',
             $podcast->id,
-            'WebsiteByBrowser'
+            'WebsiteByBrowser',
         ) ?>"></div>
     </div>
     

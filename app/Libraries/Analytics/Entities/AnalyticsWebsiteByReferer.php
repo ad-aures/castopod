@@ -10,10 +10,14 @@
 
 namespace Analytics\Entities;
 
-use CodeIgniter\Entity;
+use datetime;
+use CodeIgniter\Entity\Entity;
 
 class AnalyticsWebsiteByReferer extends Entity
 {
+    /**
+     * @var array<string, string>
+     */
     protected $casts = [
         'podcast_id' => 'integer',
         'referer_url' => 'string',

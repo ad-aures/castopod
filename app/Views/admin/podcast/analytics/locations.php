@@ -17,7 +17,7 @@
             'analytics-data',
             $podcast->id,
             'PodcastByCountry',
-            'Weekly'
+            'Weekly',
         ) ?>"></div>
     </div>
 
@@ -27,7 +27,7 @@
             'analytics-data',
             $podcast->id,
             'PodcastByCountry',
-            'Yearly'
+            'Yearly',
         ) ?>"></div>
     </div>
 </div>
@@ -37,7 +37,7 @@
 <div class="chart-map" id="by-region-map" data-chart-type="map-chart" data-chart-url="<?= route_to(
     'analytics-full-data',
     $podcast->id,
-    'PodcastByRegion'
+    'PodcastByRegion',
 ) ?>"></div>
 </div>
 

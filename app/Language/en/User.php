@@ -7,13 +7,13 @@
  */
 
 return [
-    'edit_roles' => 'Edit {username}\'s roles',
+    'edit_roles' => "Edit {username}'s roles",
     'forcePassReset' => 'Force pass reset',
     'ban' => 'Ban',
     'unban' => 'Unban',
     'delete' => 'Delete',
     'create' => 'New user',
-    'view' => '{username}\'s info',
+    'view' => "{username}'s info",
     'all_users' => 'All users',
     'list' => [
         'user' => 'User',
@@ -38,7 +38,7 @@ return [
         'createSuccess' =>
             'User created successfully! {username} will be prompted with a password reset upon first authentication.',
         'rolesEditSuccess' =>
-            '{username}\'s roles have been successfully updated.',
+            "{username}'s roles have been successfully updated.",
         'forcePassResetSuccess' =>
             '{username} will be prompted with a password reset upon next visit.',
         'banSuccess' => '{username} has been banned.',

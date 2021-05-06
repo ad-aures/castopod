@@ -15,7 +15,7 @@ use CodeIgniter\Database\Migration;
 
 class AddPlatforms extends Migration
 {
-    public function up()
+    public function up(): void
     {
         $this->forge->addField([
             'slug' => [
@@ -43,13 +43,13 @@ class AddPlatforms extends Migration
         ]);
         $this->forge->addField('`created_at` timestamp NOT NULL DEFAULT NOW()');
         $this->forge->addField(
-            '`updated_at` timestamp NOT NULL DEFAULT NOW() ON UPDATE NOW()'
+            '`updated_at` timestamp NOT NULL DEFAULT NOW() ON UPDATE NOW()',
         );
         $this->forge->addPrimaryKey('slug');
         $this->forge->createTable('platforms');
     }
 
-    public function down()
+    public function down(): void
     {
         $this->forge->dropTable('platforms');
     }

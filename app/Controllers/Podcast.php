@@ -18,24 +18,24 @@ class Podcast extends BaseController
     use AnalyticsTrait;
 
     /**
-     * @var \App\Entities\Podcast|null
+     * @var Podcast
      */
     protected $podcast;
 
     public function _remap($method, ...$params)
     {
-        if (count($params) > 0) {
-            if (
-                !($this->podcast = (new PodcastModel())->getPodcastByName(
-                    $params[0],
-                ))
-            ) {
-                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-            }
-            unset($params[0]);
+        if (count($params) === 0) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
 
-        return $this->$method(...$params);
+        if (
+            $this->podcast = (new PodcastModel())->getPodcastByName($params[0])
+        ) {
+            unset($params[0]);
+            return $this->$method(...$params);
+        }
+
+        throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
     }
 
     public function activity()

@@ -8,7 +8,8 @@
 
 namespace ActivityPub\Entities;
 
-use CodeIgniter\Entity;
+use RuntimeException;
+use CodeIgniter\Entity\Entity;
 
 class Actor extends Entity
 {
@@ -18,15 +19,18 @@ class Actor extends Entity
     protected $key_id;
 
     /**
-     * @var \ActivityPub\Entities\Actor[]
+     * @var Actor[]
      */
-    protected $followers;
+    protected $followers = [];
 
     /**
      * @var boolean
      */
-    protected $is_local;
+    protected $is_local = false;
 
+    /**
+     * @var array<string, string>
+     */
     protected $casts = [
         'id' => 'integer',
         'uri' => 'string',
@@ -48,12 +52,12 @@ class Actor extends Entity
         'is_blocked' => 'boolean',
     ];
 
-    public function getKeyId()
+    public function getKeyId(): string
     {
         return $this->uri . '#main-key';
     }
 
-    public function getIsLocal()
+    public function getIsLocal(): bool
     {
         if (!$this->is_local) {
             $uri = current_url(true);
@@ -67,22 +71,27 @@ class Actor extends Entity
         return $this->is_local;
     }
 
-    public function getFollowers()
+    /**
+     * @return Follower[]
+     */
+    public function getFollowers(): array
     {
         if (empty($this->id)) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 'Actor must be created before getting followers.',
             );
         }
 
         if (empty($this->followers)) {
-            $this->followers = model('ActorModel')->getFollowers($this->id);
+            $this->followers = (array) model('ActorModel')->getFollowers(
+                $this->id,
+            );
         }
 
         return $this->followers;
     }
 
-    public function getAvatarImageUrl()
+    public function getAvatarImageUrl(): string
     {
         if (empty($this->attributes['avatar_image_url'])) {
             return base_url(config('ActivityPub')->defaultAvatarImagePath);
@@ -91,7 +100,7 @@ class Actor extends Entity
         return $this->attributes['avatar_image_url'];
     }
 
-    public function getAvatarImageMimetype()
+    public function getAvatarImageMimetype(): string
     {
         if (empty($this->attributes['avatar_image_mimetype'])) {
             return config('ActivityPub')->defaultAvatarImageMimetype;
@@ -100,7 +109,7 @@ class Actor extends Entity
         return $this->attributes['avatar_image_mimetype'];
     }
 
-    public function getCoverImageUrl()
+    public function getCoverImageUrl(): string
     {
         if (empty($this->attributes['cover_image_url'])) {
             return base_url(config('ActivityPub')->defaultCoverImagePath);
@@ -109,7 +118,7 @@ class Actor extends Entity
         return $this->attributes['cover_image_url'];
     }
 
-    public function getCoverImageMimetype()
+    public function getCoverImageMimetype(): string
     {
         if (empty($this->attributes['cover_image_mimetype'])) {
             return config('ActivityPub')->defaultCoverImageMimetype;

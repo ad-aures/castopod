@@ -17,7 +17,7 @@
             'analytics-data',
             $podcast->id,
             'Podcast',
-            'ByWeekday'
+            'ByWeekday',
         ) ?>"></div>
     </div>
 
@@ -26,7 +26,7 @@
         <div class="chart-xy" id="by-hour-barchart" data-chart-type="bar-chart" data-chart-url="<?= route_to(
             'analytics-full-data',
             $podcast->id,
-            'PodcastByHour'
+            'PodcastByHour',
         ) ?>"></div>
     </div>
 

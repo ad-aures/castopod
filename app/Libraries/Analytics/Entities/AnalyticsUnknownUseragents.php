@@ -10,10 +10,13 @@
 
 namespace Analytics\Entities;
 
-use CodeIgniter\Entity;
+use CodeIgniter\Entity\Entity;
 
 class AnalyticsUnknownUseragents extends Entity
 {
+    /**
+     * @var array<string, string>
+     */
     protected $casts = [
         'useragent' => 'integer',
         'hits' => 'integer',

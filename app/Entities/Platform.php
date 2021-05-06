@@ -8,10 +8,13 @@
 
 namespace App\Entities;
 
-use CodeIgniter\Entity;
+use CodeIgniter\Entity\Entity;
 
 class Platform extends Entity
 {
+    /**
+     * @var array<string, string>
+     */
     protected $casts = [
         'slug' => 'string',
         'type' => 'string',

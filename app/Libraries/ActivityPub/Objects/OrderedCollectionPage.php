@@ -11,6 +11,7 @@
 
 namespace ActivityPub\Objects;
 
+use CodeIgniter\Pager\Pager;
 class OrderedCollectionPage extends OrderedCollectionObject
 {
     /**
@@ -33,18 +34,18 @@ class OrderedCollectionPage extends OrderedCollectionObject
      */
     protected $next;
 
-    /**
-     * @param \CodeIgniter\Pager\Pager $pager
-     * @param \ActivityPub\Libraries\ActivityPub\Activity[] $orderedItems
-     */
-    public function __construct($pager, $orderedItems)
+    public function __construct(Pager $pager, ?array $orderedItems = null)
     {
         parent::__construct($orderedItems, $pager);
 
         $isFirstPage = $pager->getCurrentPage() === $pager->getFirstPage();
         $isLastPage = $pager->getCurrentPage() === $pager->getLastPage();
-        $isFirstPage && ($this->first = null);
-        $isLastPage && ($this->last = null);
+        if ($isFirstPage) {
+            $this->first = null;
+        }
+        if ($isLastPage) {
+            $this->last = null;
+        }
 
         $this->id = $pager->getPageURI($pager->getCurrentPage());
         $this->partOf = $pager->getPageURI();

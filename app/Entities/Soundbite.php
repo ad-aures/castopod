@@ -8,10 +8,13 @@
 
 namespace App\Entities;
 
-use CodeIgniter\Entity;
+use CodeIgniter\Entity\Entity;
 
 class Soundbite extends Entity
 {
+    /**
+     * @var array<string, string>
+     */
     protected $casts = [
         'id' => 'integer',
         'podcast_id' => 'integer',
@@ -23,7 +26,7 @@ class Soundbite extends Entity
         'updated_by' => 'integer',
     ];
 
-    public function setUpdatedBy(\App\Entities\User $user)
+    public function setUpdatedBy(User $user): self
     {
         $this->attributes['updated_by'] = $user->id;
 

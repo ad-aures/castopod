@@ -17,7 +17,7 @@
             'analytics-data',
             $podcast->id,
             'PodcastByPlayer',
-            'ByAppWeekly'
+            'ByAppWeekly',
         ) ?>"></div>
     </div>
 
@@ -27,7 +27,7 @@
             'analytics-data',
             $podcast->id,
             'PodcastByService',
-            'ByServiceWeekly'
+            'ByServiceWeekly',
         ) ?>"></div>
     </div>
 
@@ -37,7 +37,7 @@
             'analytics-data',
             $podcast->id,
             'PodcastByPlayer',
-            'ByDeviceWeekly'
+            'ByDeviceWeekly',
         ) ?>"></div>
     </div>
 
@@ -47,7 +47,7 @@
             'analytics-data',
             $podcast->id,
             'PodcastByPlayer',
-            'ByOsWeekly'
+            'ByOsWeekly',
         ) ?>"></div>
     </div>
 </div>
@@ -58,7 +58,7 @@
         'analytics-data',
         $podcast->id,
         'PodcastByPlayer',
-        'Bots'
+        'Bots',
     ) ?>"></div>
 </div>
 

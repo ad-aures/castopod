@@ -10,32 +10,41 @@
 
 namespace Analytics\Models;
 
+use Analytics\Entities\AnalyticsWebsiteByEntryPage;
 use CodeIgniter\Model;
 
 class AnalyticsWebsiteByEntryPageModel extends Model
 {
+    /**
+     * @var string
+     */
     protected $table = 'analytics_website_by_entry_page';
 
-    protected $allowedFields = [];
-
-    protected $returnType = \Analytics\Entities\AnalyticsWebsiteByEntryPage::class;
+    /**
+     * @var string
+     */
+    protected $returnType = AnalyticsWebsiteByEntryPage::class;
+    /**
+     * @var bool
+     */
     protected $useSoftDeletes = false;
 
+    /**
+     * @var bool
+     */
     protected $useTimestamps = false;
 
     /**
      * Gets entry pages data for a podcast
      *
-     * @param int $podcastId
-     *
-     * @return array
+     * @return AnalyticsWebsiteByEntryPage[]
      */
     public function getData(int $podcastId): array
     {
         if (!($found = cache("{$podcastId}_analytics_website_by_entry_page"))) {
             $oneWeekAgo = date('Y-m-d', strtotime('-1 week'));
             $found = $this->select(
-                'IF(entry_page_url=\'/\',\'/\',SUBSTRING_INDEX(entry_page_url,\'/\',-1)) as labels',
+                "IF(entry_page_url='/','/',SUBSTRING_INDEX(entry_page_url,'/',-1)) as labels",
             )
                 ->selectSum('hits', 'values')
                 ->where([

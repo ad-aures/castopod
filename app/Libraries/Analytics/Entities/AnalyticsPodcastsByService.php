@@ -10,7 +10,9 @@
 
 namespace Analytics\Entities;
 
-use CodeIgniter\Entity;
+use datetime;
+use Opawg\UserAgentsPhp\UserAgentsRSS;
+use CodeIgniter\Entity\Entity;
 
 class AnalyticsPodcastsByService extends Entity
 {
@@ -19,6 +21,9 @@ class AnalyticsPodcastsByService extends Entity
      */
     protected $labels;
 
+    /**
+     * @var array<string, string>
+     */
     protected $casts = [
         'podcast_id' => 'integer',
         'app' => '?string',
@@ -31,8 +36,7 @@ class AnalyticsPodcastsByService extends Entity
 
     public function getLabels()
     {
-        return \Opawg\UserAgentsPhp\UserAgentsRSS::getName(
-            $this->attributes['labels'],
-        ) ?? $this->attributes['labels'];
+        return UserAgentsRSS::getName($this->attributes['labels']) ??
+            $this->attributes['labels'];
     }
 }

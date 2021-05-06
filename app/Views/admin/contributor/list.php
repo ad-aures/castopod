@@ -40,29 +40,32 @@
                     route_to(
                         'contributor-edit',
                         $podcast->id,
-                        $contributor->id
+                        $contributor->id,
                     ),
                     [
                         'variant' => 'info',
                         'size' => 'small',
                     ],
-                    ['class' => 'mr-2']
+                    ['class' => 'mr-2'],
                 ) .
                     button(
                         lang('Contributor.remove'),
                         route_to(
                             'contributor-remove',
                             $podcast->id,
-                            $contributor->id
+                            $contributor->id,
                         ),
-                        ['variant' => 'danger', 'size' => 'small'],
-                        ['class' => 'mr-2']
+                        [
+                            'variant' => 'danger',
+                            'size' => 'small',
+                        ],
+                        ['class' => 'mr-2'],
                     );
             },
         ],
     ],
     $podcast->contributors,
-    $podcast
+    $podcast,
 ) ?>
 
 <?= $this->endSection() ?>

@@ -379,7 +379,7 @@
 
 <?= button(
     lang('Podcast.form.submit_edit'),
-    null,
+    '',
     ['variant' => 'primary'],
     ['type' => 'submit', 'class' => 'self-end'],
 ) ?>

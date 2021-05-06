@@ -1,7 +1,30 @@
+####################################################
+# Castopod Host development Docker file
+####################################################
+# NOT optimized for production
+# should be used only for development purposes
+####################################################
+
 FROM php:7.3-fpm
+
+LABEL maintainer="Yassine Doghri<yassine@podlibre.org>"
 
 COPY . /castopod-host
 WORKDIR /castopod-host
+
+# Install composer
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+
+# Install npm
+RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash -
+
+RUN apt-get update && \
+    apt-get install -y nodejs
+
+# Install git + vim
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y git vim
 
 ### Install CodeIgniter's server requirements
 #-- https://github.com/codeigniter4/appstarter#server-requirements

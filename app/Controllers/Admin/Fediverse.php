@@ -8,8 +8,6 @@
 
 namespace App\Controllers\Admin;
 
-use ActivityPub\Models\BlockedDomainModel;
-
 class Fediverse extends BaseController
 {
     public function dashboard()

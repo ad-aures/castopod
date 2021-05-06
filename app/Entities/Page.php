@@ -8,7 +8,7 @@
 
 namespace App\Entities;
 
-use CodeIgniter\Entity;
+use CodeIgniter\Entity\Entity;
 use League\CommonMark\CommonMarkConverter;
 
 class Page extends Entity
@@ -23,6 +23,9 @@ class Page extends Entity
      */
     protected $content_html;
 
+    /**
+     * @var array<string, string>
+     */
     protected $casts = [
         'id' => 'integer',
         'title' => 'string',
@@ -32,10 +35,10 @@ class Page extends Entity
 
     public function getLink()
     {
-        return base_url($this->attributes['slug']);
+        return url_to('page', $this->attributes['slug']);
     }
 
-    public function getContentHtml()
+    public function getContentHtml(): string
     {
         $converter = new CommonMarkConverter([
             'html_input' => 'strip',

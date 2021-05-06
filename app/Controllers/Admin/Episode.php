@@ -8,6 +8,7 @@
 
 namespace App\Controllers\Admin;
 
+use App\Entities\Episode as EpisodeEntity;
 use App\Entities\Note;
 use App\Models\EpisodeModel;
 use App\Models\NoteModel;
@@ -18,17 +19,17 @@ use CodeIgniter\I18n\Time;
 class Episode extends BaseController
 {
     /**
-     * @var \App\Entities\Podcast
+     * @var Podcast
      */
     protected $podcast;
 
     /**
-     * @var \App\Entities\Episode|null
+     * @var Episode|null
      */
     protected $episode;
 
     /**
-     * @var \App\Entities\Soundbite|null
+     * @var Soundbite|null
      */
     protected $soundbites;
 
@@ -123,7 +124,7 @@ class Episode extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $newEpisode = new \App\Entities\Episode([
+        $newEpisode = new EpisodeEntity([
             'podcast_id' => $this->podcast->id,
             'title' => $this->request->getPost('title'),
             'slug' => $this->request->getPost('slug'),

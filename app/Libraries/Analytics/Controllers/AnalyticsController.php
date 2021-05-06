@@ -8,6 +8,8 @@
 
 namespace Analytics\Controllers;
 
+use CodeIgniter\HTTP\ResponseInterface;
+use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\Controller;
 
 class AnalyticsController extends Controller
@@ -25,7 +27,7 @@ class AnalyticsController extends Controller
     public function _remap($method, ...$params)
     {
         if (!isset($params[1])) {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+            throw PageNotFoundException::forPageNotFound();
         }
 
         $this->className = model('Analytics' . $params[1] . 'Model');
@@ -37,7 +39,7 @@ class AnalyticsController extends Controller
         );
     }
 
-    public function getData($podcastId, $episodeId)
+    public function getData($podcastId, $episodeId): ResponseInterface
     {
         $analytics_model = new $this->className();
         $methodName = $this->methodName;
@@ -45,10 +47,10 @@ class AnalyticsController extends Controller
             return $this->response->setJSON(
                 $analytics_model->$methodName($podcastId, $episodeId),
             );
-        } else {
-            return $this->response->setJSON(
-                $analytics_model->$methodName($podcastId),
-            );
         }
+
+        return $this->response->setJSON(
+            $analytics_model->$methodName($podcastId),
+        );
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Config;
 
+use CodeIgniter\Session\Handlers\FileHandler;
 use CodeIgniter\Config\BaseConfig;
 
 class App extends BaseConfig
@@ -34,6 +35,8 @@ class App extends BaseConfig
      * WITH a trailing slash:
      *
      *    http://cdn.example.com/
+     *
+     * @var string
      */
     public $mediaBaseURL = 'http://127.0.0.2:8080/';
 
@@ -163,7 +166,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $sessionDriver = 'CodeIgniter\Session\Handlers\FileHandler';
+    public $sessionDriver = FileHandler::class;
 
     /**
      * --------------------------------------------------------------------------
@@ -480,6 +483,8 @@ class App extends BaseConfig
      * Media root folder
      * --------------------------------------------------------------------------
      * Defines the root folder for media files storage
+     *
+     * @var string
      */
     public $mediaRoot = 'media';
 
@@ -488,6 +493,8 @@ class App extends BaseConfig
      * Admin gateway
      * --------------------------------------------------------------------------
      * Defines a base route for all admin pages
+     *
+     * @var string
      */
     public $adminGateway = 'cp-admin';
 
@@ -496,6 +503,8 @@ class App extends BaseConfig
      * Auth gateway
      * --------------------------------------------------------------------------
      * Defines a base route for all authentication related pages
+     *
+     * @var string
      */
     public $authGateway = 'cp-auth';
 
@@ -504,6 +513,8 @@ class App extends BaseConfig
      * Install gateway
      * --------------------------------------------------------------------------
      * Defines a base route for instance installation
+     *
+     * @var string
      */
     public $installGateway = 'cp-install';
 }

@@ -11,7 +11,7 @@ namespace App\Libraries;
 class NoteObject extends \ActivityPub\Objects\NoteObject
 {
     /**
-     * @param \App\Entities\Note $note
+     * @param Note $note
      */
     public function __construct($note)
     {

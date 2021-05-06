@@ -8,6 +8,9 @@
 
 namespace ActivityPub\Models;
 
+use ActivityPub\Entities\Actor;
+use ActivityPub\Entities\Follow;
+use Exception;
 use ActivityPub\Activities\FollowActivity;
 use ActivityPub\Activities\UndoActivity;
 use CodeIgniter\Database\Exceptions\DatabaseException;
@@ -17,24 +20,38 @@ use InvalidArgumentException;
 
 class FollowModel extends Model
 {
+    /**
+     * @var string
+     */
     protected $table = 'activitypub_follows';
 
+    /**
+     * @var string[]
+     */
     protected $allowedFields = ['actor_id', 'target_actor_id'];
 
-    protected $returnType = \ActivityPub\Entities\Follow::class;
-
-    protected $useTimestamps = true;
-    protected $updatedField = null;
+    /**
+     * @var string
+     */
+    protected $returnType = Follow::class;
 
     /**
-     * @param \ActivityPub\Entities\Actor $actor Actor that is following
-     * @param \ActivityPub\Entities\Actor $targetActor Actor that is being followed
-     * @param bool $registerActivity
-     * @return void
+     * @var bool
+     */
+    protected $useTimestamps = true;
+
+    protected $updatedField;
+
+    /**
+     * @param Actor $actor Actor that is following
+     * @param Actor $targetActor Actor that is being followed
      * @throws DatabaseException
      */
-    public function addFollower($actor, $targetActor, $registerActivity = true)
-    {
+    public function addFollower(
+        Actor $actor,
+        Actor $targetActor,
+        bool $registerActivity = true
+    ): void {
         try {
             $this->db->transStart();
 
@@ -86,23 +103,22 @@ class FollowModel extends Model
             }
 
             $this->db->transComplete();
-        } catch (\Exception $e) {
+        } catch (Exception $exception) {
             // follow already exists, do nothing
         }
     }
 
     /**
-     * @param \ActivityPub\Entities\Actor $actor Actor that is unfollowing
-     * @param \ActivityPub\Entities\Actor $targetActor Actor that is being unfollowed
-     * @return void
+     * @param Actor $actor Actor that is unfollowing
+     * @param Actor $targetActor Actor that is being unfollowed
      * @throws InvalidArgumentException
      * @throws DatabaseException
      */
     public function removeFollower(
-        $actor,
-        $targetActor,
+        Actor $actor,
+        Actor $targetActor,
         $registerActivity = true
-    ) {
+    ): void {
         $this->db->transStart();
 
         $this->where([

@@ -117,9 +117,8 @@
                 'class' => 'text-pine-700',
             ],
             'schedule',
-            old('publication_method')
-                ? old('publication_method') === 'schedule'
-                : false,
+            old('publication_method') &&
+                old('publication_method') === 'schedule',
         ) ?>
         <label for="schedule" class="ml-2"><?= lang(
             'Episode.publish_form.publication_method.schedule',
@@ -160,7 +159,7 @@
 
 <?= button(
     lang('Episode.publish_form.submit'),
-    null,
+    '',
     ['variant' => 'primary'],
     ['type' => 'submit'],
 ) ?>

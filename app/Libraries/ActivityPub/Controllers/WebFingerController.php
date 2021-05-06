@@ -8,19 +8,21 @@
 
 namespace ActivityPub\Controllers;
 
+use CodeIgniter\HTTP\ResponseInterface;
+use CodeIgniter\Exceptions\PageNotFoundException;
 use ActivityPub\WebFinger;
 use CodeIgniter\Controller;
 use Exception;
 
 class WebFingerController extends Controller
 {
-    public function index()
+    public function index(): ResponseInterface
     {
         try {
             $webfinger = new WebFinger($this->request->getGet('resource'));
-        } catch (Exception $e) {
+        } catch (Exception $exception) {
             // return 404, actor not found
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+            throw PageNotFoundException::forPageNotFound();
         }
 
         return $this->response->setJSON($webfinger->toArray());

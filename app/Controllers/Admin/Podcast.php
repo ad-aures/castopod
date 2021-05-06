@@ -8,6 +8,9 @@
 
 namespace App\Controllers\Admin;
 
+use App\Entities\Podcast as EntitiesPodcast;
+use CodeIgniter\Exceptions\PageNotFoundException;
+use Config\Database;
 use App\Models\CategoryModel;
 use App\Models\LanguageModel;
 use App\Models\PodcastModel;
@@ -17,23 +20,21 @@ use Config\Services;
 class Podcast extends BaseController
 {
     /**
-     * @var \App\Entities\Podcast|null
+     * @var Podcast|null
      */
     protected $podcast;
 
     public function _remap($method, ...$params)
     {
-        if (count($params) > 0) {
-            if (
-                !($this->podcast = (new PodcastModel())->getPodcastById(
-                    $params[0],
-                ))
-            ) {
-                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-            }
+        if (count($params) === 0) {
+            return $this->$method();
         }
 
-        return $this->$method();
+        if ($this->podcast = (new PodcastModel())->getPodcastById($params[0])) {
+            return $this->$method();
+        }
+
+        throw PageNotFoundException::forPageNotFound();
     }
 
     public function list()
@@ -145,7 +146,7 @@ class Podcast extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $podcast = new \App\Entities\Podcast([
+        $podcast = new EntitiesPodcast([
             'title' => $this->request->getPost('title'),
             'name' => $this->request->getPost('name'),
             'description_markdown' => $this->request->getPost('description'),
@@ -175,7 +176,7 @@ class Podcast extends BaseController
         ]);
 
         $podcastModel = new PodcastModel();
-        $db = \Config\Database::connect();
+        $db = Database::connect();
 
         $db->transStart();
 
@@ -271,18 +272,18 @@ class Podcast extends BaseController
         );
         $this->podcast->partner_id = $this->request->getPost('partner_id');
         $this->podcast->partner_link_url = $this->request->getPost(
-            'partner_link_url'
+            'partner_link_url',
         );
         $this->podcast->partner_image_url = $this->request->getPost(
-            'partner_image_url'
+            'partner_image_url',
         );
         $this->podcast->is_blocked = $this->request->getPost('block') === 'yes';
         $this->podcast->is_completed =
             $this->request->getPost('complete') === 'yes';
         $this->podcast->is_locked = $this->request->getPost('lock') === 'yes';
-        $this->updated_by = user()->id;
+        $this->podcast->updated_by = user()->id;
 
-        $db = \Config\Database::connect();
+        $db = Database::connect();
         $db->transStart();
 
         $podcastModel = new PodcastModel();

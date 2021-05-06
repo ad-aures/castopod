@@ -8,64 +8,74 @@
 
 namespace ActivityPub\Entities;
 
+use RuntimeException;
 use Michalsn\Uuid\UuidEntity;
 
 class Note extends UuidEntity
 {
+    /**
+     * @var string[]
+     */
     protected $uuids = ['id', 'in_reply_to_id', 'reblog_of_id'];
 
     /**
-     * @var \ActivityPub\Entities\Actor
+     * @var Actor
      */
     protected $actor;
 
     /**
      * @var boolean
      */
-    protected $is_reply;
+    protected $is_reply = false;
 
     /**
-     * @var \ActivityPub\Entities\Note
+     * @var Note
      */
     protected $reply_to_note;
 
     /**
      * @var boolean
      */
-    protected $is_reblog;
+    protected $is_reblog = false;
 
     /**
-     * @var \ActivityPub\Entities\Note
+     * @var Note
      */
     protected $reblog_of_note;
 
     /**
-     * @var \ActivityPub\Entities\PreviewCard
+     * @var PreviewCard|null
      */
     protected $preview_card;
 
     /**
      * @var boolean
      */
-    protected $has_preview_card;
+    protected $has_preview_card = false;
 
     /**
-     * @var \ActivityPub\Entities\Note[]
+     * @var Note[]
      */
-    protected $replies;
+    protected $replies = [];
 
     /**
      * @var boolean
      */
-    protected $has_replies;
+    protected $has_replies = false;
 
     /**
-     * @var \ActivityPub\Entities\Note[]
+     * @var Note[]
      */
-    protected $reblogs;
+    protected $reblogs = [];
 
+    /**
+     * @var string[]
+     */
     protected $dates = ['published_at', 'created_at'];
 
+    /**
+     * @var array<string, string>
+     */
     protected $casts = [
         'id' => 'string',
         'uri' => 'string',
@@ -81,13 +91,11 @@ class Note extends UuidEntity
 
     /**
      * Returns the note's actor
-     *
-     * @return \ActivityPub\Entities\Actor
      */
-    public function getActor()
+    public function getActor(): Actor
     {
         if (empty($this->actor_id)) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 'Note must have an actor_id before getting actor.',
             );
         }
@@ -99,10 +107,10 @@ class Note extends UuidEntity
         return $this->actor;
     }
 
-    public function getPreviewCard()
+    public function getPreviewCard(): ?PreviewCard
     {
         if (empty($this->id)) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 'Note must be created before getting preview_card.',
             );
         }
@@ -116,42 +124,47 @@ class Note extends UuidEntity
         return $this->preview_card;
     }
 
-    public function getHasPreviewCard()
+    public function getHasPreviewCard(): bool
     {
-        return !empty($this->getPreviewCard()) ? true : false;
+        return !empty($this->getPreviewCard());
     }
 
-    public function getIsReply()
+    public function getIsReply(): bool
     {
         $this->is_reply = $this->in_reply_to_id !== null;
 
         return $this->is_reply;
     }
 
-    public function getReplies()
+    /**
+     * @return Note[]
+     */
+    public function getReplies(): array
     {
         if (empty($this->id)) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 'Note must be created before getting replies.',
             );
         }
 
         if (empty($this->replies)) {
-            $this->replies = model('NoteModel')->getNoteReplies($this->id);
+            $this->replies = (array) model('NoteModel')->getNoteReplies(
+                $this->id,
+            );
         }
 
         return $this->replies;
     }
 
-    public function getHasReplies()
+    public function getHasReplies(): bool
     {
-        return !empty($this->getReplies()) ? true : false;
+        return !empty($this->getReplies());
     }
 
-    public function getReplyToNote()
+    public function getReplyToNote(): Note
     {
         if (empty($this->in_reply_to_id)) {
-            throw new \RuntimeException('Note is not a reply.');
+            throw new RuntimeException('Note is not a reply.');
         }
 
         if (empty($this->reply_to_note)) {
@@ -163,30 +176,35 @@ class Note extends UuidEntity
         return $this->reply_to_note;
     }
 
-    public function getReblogs()
+    /**
+     * @return Note[]
+     */
+    public function getReblogs(): array
     {
         if (empty($this->id)) {
-            throw new \RuntimeException(
+            throw new RuntimeException(
                 'Note must be created before getting reblogs.',
             );
         }
 
         if (empty($this->reblogs)) {
-            $this->reblogs = model('NoteModel')->getNoteReblogs($this->id);
+            $this->reblogs = (array) model('NoteModel')->getNoteReblogs(
+                $this->id,
+            );
         }
 
         return $this->reblogs;
     }
 
-    public function getIsReblog()
+    public function getIsReblog(): bool
     {
         return $this->reblog_of_id != null;
     }
 
-    public function getReblogOfNote()
+    public function getReblogOfNote(): Note
     {
         if (empty($this->reblog_of_id)) {
-            throw new \RuntimeException('Note is not a reblog.');
+            throw new RuntimeException('Note is not a reblog.');
         }
 
         if (empty($this->reblog_of_note)) {
@@ -198,7 +216,7 @@ class Note extends UuidEntity
         return $this->reblog_of_note;
     }
 
-    public function setMessage(string $message)
+    public function setMessage(string $message): self
     {
         helper('activitypub');
 

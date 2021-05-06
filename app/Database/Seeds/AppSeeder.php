@@ -15,7 +15,7 @@ use CodeIgniter\Database\Seeder;
 
 class AppSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
         $this->call('AuthSeeder');
         $this->call('CategorySeeder');

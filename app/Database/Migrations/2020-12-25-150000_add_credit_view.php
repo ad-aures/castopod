@@ -14,30 +14,34 @@ use CodeIgniter\Database\Migration;
 
 class AddCreditView extends Migration
 {
-    public function up()
+    public function up(): void
     {
         // Creates View for credit UNION query
         $viewName = $this->db->prefixTable('credits');
-        $personTable = $this->db->prefixTable('persons');
-        $podcastPersonTable = $this->db->prefixTable('podcasts_persons');
-        $episodePersonTable = $this->db->prefixTable('episodes_persons');
+        $personsTable = $this->db->prefixTable('persons');
+        $podcastPersonsTable = $this->db->prefixTable('podcasts_persons');
+        $episodePersonsTable = $this->db->prefixTable('episodes_persons');
+        $episodesTable = $this->db->prefixTable('episodes');
         $createQuery = <<<EOD
-        CREATE VIEW `$viewName` AS
-            SELECT `person_group`, `person_id`, `full_name`, `person_role`, `podcast_id`, NULL AS `episode_id` FROM `$podcastPersonTable`
-                INNER JOIN `$personTable`
-                    ON (`person_id`=`$personTable`.`id`)
+        CREATE VIEW `{$viewName}` AS
+            SELECT `person_group`, `person_id`, `full_name`, `person_role`, `podcast_id`, NULL AS `episode_id` FROM `{$podcastPersonsTable}`
+                INNER JOIN `{$personsTable}`
+                    ON (`person_id`=`{$personsTable}`.`id`)
             UNION
-            SELECT `person_group`, `person_id`, `full_name`, `person_role`, `podcast_id`, `episode_id` FROM `$episodePersonTable`
-                INNER JOIN `$personTable`
-                    ON (`person_id`=`$personTable`.`id`)
+            SELECT `person_group`, `person_id`, `full_name`, `person_role`, {$episodePersonsTable}.`podcast_id`, `episode_id` FROM `{$episodePersonsTable}`
+                INNER JOIN `{$personsTable}`
+                    ON (`person_id`=`{$personsTable}`.`id`)
+                INNER JOIN `{$episodesTable}`
+                    ON (`episode_id`=`{$episodesTable}`.`id`)
+            WHERE `{$episodesTable}`.published_at <= NOW()
             ORDER BY `person_group`, `full_name`, `person_role`, `podcast_id`, `episode_id`;
         EOD;
         $this->db->query($createQuery);
     }
 
-    public function down()
+    public function down(): void
     {
         $viewName = $this->db->prefixTable('credits');
-        $this->db->query("DROP VIEW IF EXISTS `$viewName`");
+        $this->db->query("DROP VIEW IF EXISTS `{$viewName}`");
     }
 }

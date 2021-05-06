@@ -8,28 +8,28 @@
 
 namespace App\Controllers\Admin;
 
+use App\Entities\Person as EntitiesPerson;
+use CodeIgniter\Exceptions\PageNotFoundException;
 use App\Models\PersonModel;
 
 class Person extends BaseController
 {
     /**
-     * @var \App\Entities\Person|null
+     * @var Person|null
      */
     protected $person;
 
     public function _remap($method, ...$params)
     {
-        if (count($params) > 0) {
-            if (
-                !($this->person = (new PersonModel())->getPersonById(
-                    $params[0]
-                ))
-            ) {
-                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-            }
+        if (count($params) === 0) {
+            return $this->$method();
         }
 
-        return $this->$method();
+        if ($this->person = (new PersonModel())->getPersonById($params[0])) {
+            return $this->$method();
+        }
+
+        throw PageNotFoundException::forPageNotFound();
     }
 
     public function index()
@@ -68,7 +68,7 @@ class Person extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $person = new \App\Entities\Person([
+        $person = new EntitiesPerson([
             'full_name' => $this->request->getPost('full_name'),
             'unique_name' => $this->request->getPost('unique_name'),
             'information_url' => $this->request->getPost('information_url'),
@@ -118,14 +118,14 @@ class Person extends BaseController
         $this->person->full_name = $this->request->getPost('full_name');
         $this->person->unique_name = $this->request->getPost('unique_name');
         $this->person->information_url = $this->request->getPost(
-            'information_url'
+            'information_url',
         );
         $image = $this->request->getFile('image');
         if ($image->isValid()) {
             $this->person->image = $image;
         }
 
-        $this->updated_by = user()->id;
+        $this->person->updated_by = user()->id;
 
         $personModel = new PersonModel();
         if (!$personModel->update($this->person->id, $this->person)) {

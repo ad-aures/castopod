@@ -42,7 +42,7 @@
 
 <?= button(
     icon('check', 'mr-2') . lang('Install.form.submit'),
-    null,
+    '',
     ['variant' => 'primary'],
     ['type' => 'submit', 'class' => 'self-end'],
 ) ?>

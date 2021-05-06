@@ -117,7 +117,7 @@
             'class' => 'text-pine-700',
         ],
         'now',
-        old('publication_method') ? old('publish') === 'now' : false,
+        old('publication_method') && old('publish') === 'now',
     ) ?>
     <span class="ml-2"><?= lang(
         'Episode.publish_form.publication_method.now',
@@ -175,7 +175,7 @@
 
     <?= button(
         lang('Episode.publish_form.submit_edit'),
-        null,
+        '',
         ['variant' => 'primary'],
         ['type' => 'submit'],
     ) ?>

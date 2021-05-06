@@ -19,14 +19,14 @@ $routes->addPlaceholder('noteAction', '\bfavourite|\breblog|\breply');
 
 $routes->group('', ['namespace' => 'ActivityPub\Controllers'], function (
     $routes
-) {
+): void {
     // webfinger
     $routes->get('.well-known/webfinger', 'WebFingerController', [
         'as' => 'webfinger',
     ]);
 
     // Actor
-    $routes->group('@(:actorUsername)', function ($routes) {
+    $routes->group('@(:actorUsername)', function ($routes): void {
         // Actor
         $routes->get('/', 'ActorController/$1', [
             'as' => 'actor',

@@ -10,25 +10,34 @@
 
 namespace Analytics\Models;
 
+use Analytics\Entities\AnalyticsPodcasts;
 use CodeIgniter\Model;
 
 class AnalyticsPodcastModel extends Model
 {
+    /**
+     * @var string
+     */
     protected $table = 'analytics_podcasts';
 
-    protected $allowedFields = [];
-
-    protected $returnType = \Analytics\Entities\AnalyticsPodcasts::class;
+    /**
+     * @var string
+     */
+    protected $returnType = AnalyticsPodcasts::class;
+    /**
+     * @var bool
+     */
     protected $useSoftDeletes = false;
 
+    /**
+     * @var bool
+     */
     protected $useTimestamps = false;
 
     /**
      * Gets hits data for a podcast
      *
-     * @param int $podcastId
-     *
-     * @return array
+     * @return AnalyticsPodcasts[]
      */
     public function getDataByDay(int $podcastId): array
     {
@@ -49,9 +58,7 @@ class AnalyticsPodcastModel extends Model
     /**
      * Gets hits data for a podcast
      *
-     * @param int $podcastId
-     *
-     * @return array
+     * @return AnalyticsPodcasts[]
      */
     public function getDataByWeekday(int $podcastId): array
     {
@@ -80,9 +87,7 @@ class AnalyticsPodcastModel extends Model
     /**
      * Gets bandwidth data for a podcast
      *
-     * @param int $podcastId
-     *
-     * @return array
+     * @return AnalyticsPodcasts[]
      */
     public function getDataBandwidthByDay(int $podcastId): array
     {
@@ -109,9 +114,7 @@ class AnalyticsPodcastModel extends Model
     /**
      * Gets hits data for a podcast
      *
-     * @param int $podcastId
-     *
-     * @return array
+     * @return AnalyticsPodcasts[]
      */
     public function getDataByMonth(int $podcastId): array
     {
@@ -137,9 +140,7 @@ class AnalyticsPodcastModel extends Model
     /**
      * Gets unique listeners data for a podcast
      *
-     * @param int $podcastId
-     *
-     * @return array
+     * @return AnalyticsPodcasts[]
      */
     public function getDataUniqueListenersByDay(int $podcastId): array
     {
@@ -168,9 +169,7 @@ class AnalyticsPodcastModel extends Model
     /**
      * Gets unique listeners data for a podcast
      *
-     * @param int $podcastId
-     *
-     * @return array
+     * @return AnalyticsPodcasts[]
      */
     public function getDataUniqueListenersByMonth(int $podcastId): array
     {
@@ -200,9 +199,7 @@ class AnalyticsPodcastModel extends Model
     /**
      * Gets listening-time data for a podcast
      *
-     * @param int $podcastId
-     *
-     * @return array
+     * @return AnalyticsPodcasts[]
      */
     public function getDataTotalListeningTimeByDay(int $podcastId): array
     {
@@ -233,9 +230,7 @@ class AnalyticsPodcastModel extends Model
     /**
      * Gets listening-time data for a podcast
      *
-     * @param int $podcastId
-     *
-     * @return array
+     * @return AnalyticsPodcasts[]
      */
     public function getDataTotalListeningTimeByMonth(int $podcastId): array
     {

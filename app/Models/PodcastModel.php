@@ -82,10 +82,10 @@ class PodcastModel extends Model
 
     public function getPodcastByName($podcastName)
     {
-        $cacheName = "podcast@{$podcastName}";
+        $cacheName = "podcast-{$podcastName}";
         if (!($found = cache($cacheName))) {
             $found = $this->where('name', $podcastName)->first();
-            cache()->save("podcast@{$podcastName}", $found, DECADE);
+            cache()->save("podcast-{$podcastName}", $found, DECADE);
         }
 
         return $found;
@@ -405,7 +405,7 @@ class PodcastModel extends Model
 
         // delete model requests cache, includes feed / query / episode lists, etc.
         cache()->deleteMatching("podcast#{$podcast->id}*");
-        cache()->delete("podcast@{$podcast->name}");
+        cache()->delete("podcast-{$podcast->name}");
 
         // clear cache for every credit page
         cache()->deleteMatching('page_credits_*');

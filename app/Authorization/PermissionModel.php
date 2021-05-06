@@ -7,11 +7,6 @@ class PermissionModel extends \Myth\Auth\Authorization\PermissionModel
     /**
      * Checks to see if a user, or one of their groups,
      * has a specific permission.
-     *
-     * @param $userId
-     * @param $permissionId
-     *
-     * @return bool
      */
     public function doesGroupHavePermission(
         int $groupId,
@@ -33,9 +28,7 @@ class PermissionModel extends \Myth\Auth\Authorization\PermissionModel
      *  id => name
      * ]
      *
-     * @param int $groupId
-     *
-     * @return array
+     * @return array<int, string>
      */
     public function getPermissionsForGroup(int $groupId): array
     {

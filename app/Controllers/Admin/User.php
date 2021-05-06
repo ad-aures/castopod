@@ -8,26 +8,30 @@
 
 namespace App\Controllers\Admin;
 
+use CodeIgniter\Exceptions\PageNotFoundException;
 use App\Authorization\GroupModel;
+use App\Entities\User as EntitiesUser;
 use App\Models\UserModel;
 use Config\Services;
 
 class User extends BaseController
 {
     /**
-     * @var \App\Entities\User|null
+     * @var User|null
      */
     protected $user;
 
     public function _remap($method, ...$params)
     {
-        if (count($params) > 0) {
-            if (!($this->user = (new UserModel())->find($params[0]))) {
-                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-            }
+        if (count($params) === 0) {
+            return $this->$method();
         }
 
-        return $this->$method();
+        if ($this->user = (new UserModel())->find($params[0])) {
+            return $this->$method();
+        }
+
+        throw PageNotFoundException::forPageNotFound();
     }
 
     public function list()
@@ -67,7 +71,7 @@ class User extends BaseController
             [
                 'email' => 'required|valid_email|is_unique[users.email]',
                 'password' => 'required|strong_password',
-            ]
+            ],
         );
 
         if (!$this->validate($rules)) {
@@ -78,7 +82,7 @@ class User extends BaseController
         }
 
         // Save the user
-        $user = new \App\Entities\User($this->request->getPost());
+        $user = new EntitiesUser($this->request->getPost());
 
         // Activate user
         $user->activate();
@@ -100,7 +104,7 @@ class User extends BaseController
                 'message',
                 lang('User.messages.createSuccess', [
                     'username' => $user->username,
-                ])
+                ]),
             );
     }
 
@@ -115,7 +119,7 @@ class User extends BaseController
                 $result[$role->name] = lang('User.roles.' . $role->name);
                 return $result;
             },
-            []
+            [],
         );
 
         $data = [
@@ -141,7 +145,7 @@ class User extends BaseController
                 'message',
                 lang('User.messages.rolesEditSuccess', [
                     'username' => $this->user->username,
-                ])
+                ]),
             );
     }
 
@@ -163,7 +167,7 @@ class User extends BaseController
                 'message',
                 lang('User.messages.forcePassResetSuccess', [
                     'username' => $this->user->username,
-                ])
+                ]),
             );
     }
 
@@ -196,7 +200,7 @@ class User extends BaseController
                 'message',
                 lang('User.messages.banSuccess', [
                     'username' => $this->user->username,
-                ])
+                ]),
             );
     }
 
@@ -217,7 +221,7 @@ class User extends BaseController
                 'message',
                 lang('User.messages.unbanSuccess', [
                     'username' => $this->user->username,
-                ])
+                ]),
             );
     }
 
@@ -242,7 +246,7 @@ class User extends BaseController
                 'message',
                 lang('User.messages.deleteSuccess', [
                     'username' => $this->user->username,
-                ])
+                ]),
             );
     }
 }
