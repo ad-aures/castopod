@@ -16,6 +16,11 @@ before_script:
   # Install git (the php image doesn't have it) which is required by composer
   - apt-get install git -y
 
+  - apt-get install -y libicu-dev
+
+  # Install intl PHP extension
+  - docker-php-ext-install intl
+
   # install rsync for file transfers
   - apt-get install rsync -y
 
