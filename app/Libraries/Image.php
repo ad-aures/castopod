@@ -101,7 +101,7 @@ class Image
         $id3 = $dirname . '/' . $filename . $id3Extension . '.' . $extension;
 
         $this->original_path = $originalMediaPath;
-        $this->original_url = media_url($originalMediaPath);
+        $this->original_url = media_url($originalPath);
         $this->thumbnail_path = $thumbnail;
         $this->thumbnail_url = base_url($thumbnail);
         $this->medium_path = $medium;
