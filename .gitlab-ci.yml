@@ -41,6 +41,11 @@ before_script:
   - php composer.phar install --prefer-dist --no-ansi --no-interaction --no-progress --ignore-platform-reqs
   - npm install
 
+commit-message:
+  stage: init
+  script:
+    - npx commitlint CI_COMMIT_MESSAGE
+
 tests:
   stage: quality
   script:
@@ -55,6 +60,9 @@ code-review:
 bundle_app:
   stage: bundle
   script:
+    # delete installed git hooks because captainhooks (dev dependency) will be removed
+    - rm -rf ./.git/hooks
+
     # remove dev dependencies using the --no-dev option
     - php composer.phar install --no-dev --prefer-dist --no-ansi --no-interaction --no-progress --ignore-platform-reqs
 
@@ -90,9 +98,6 @@ release_app:
 
     # IMPORTANT: delete local git tags before release to prevent eventual script failure (ie. tag already exists)
     - git tag | xargs git tag -d
-
-    # IMPORTANT: no need to run git hooks, just remove them
-    - rm -rf ./.git/hooks
 
     # run semantic-release script (configured in `.releaserc.json` file)
     - npm run release

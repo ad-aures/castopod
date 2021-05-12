@@ -13,7 +13,7 @@ use App\Models\PodcastModel;
 class HomeController extends BaseController
 {
     /**
-     * @return mixed
+     * @return RedirectResponse|string
      */
     public function index()
     {
