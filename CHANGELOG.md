@@ -1,3 +1,10 @@
+# [1.0.0-alpha.56](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.55...v1.0.0-alpha.56) (2021-05-12)
+
+
+### Bug Fixes
+
+* **rss:** use originalPath instead of originalMediaPath in Image library ([b4012b7](https://code.podlibre.org/podlibre/castopod-host/commit/b4012b7d2ed6b34b69ad767570dd33f0dc7db920))
+
 # [1.0.0-alpha.55](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.54...v1.0.0-alpha.55) (2021-05-03)
 
 
