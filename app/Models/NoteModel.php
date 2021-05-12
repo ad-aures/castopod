@@ -8,7 +8,9 @@
 
 namespace App\Models;
 
-class NoteModel extends \ActivityPub\Models\NoteModel
+use ActivityPub\Models\NoteModel as ActivityPubNoteModel;
+
+class NoteModel extends ActivityPubNoteModel
 {
     protected $returnType = \App\Entities\Note::class;
 

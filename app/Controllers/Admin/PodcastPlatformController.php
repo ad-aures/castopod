@@ -14,7 +14,7 @@ use App\Models\PlatformModel;
 use App\Models\PodcastModel;
 use Config\Services;
 
-class PodcastPlatform extends BaseController
+class PodcastPlatformController extends BaseController
 {
     /**
      * @var Podcast|null
@@ -69,7 +69,7 @@ class PodcastPlatform extends BaseController
             as $platformSlug => $podcastPlatform
         ) {
             $podcastPlatformUrl = $podcastPlatform['url'];
-            if (empty($podcastPlatformUrl)) {
+            if ($podcastPlatformUrl === null) {
                 continue;
             }
             if (!$validation->check($podcastPlatformUrl, 'validate_url')) {

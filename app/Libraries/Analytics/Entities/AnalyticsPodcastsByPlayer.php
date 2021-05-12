@@ -10,11 +10,26 @@
 
 namespace Analytics\Entities;
 
-use datetime;
 use CodeIgniter\Entity\Entity;
 
+/**
+ * @property int $podcast_id
+ * @property string|null $app
+ * @property string|null $device
+ * @property string|null $os
+ * @property bool $is_bot
+ * @property Time $date
+ * @property int $hits
+ * @property Time $created_at
+ * @property Time $updated_at
+ */
 class AnalyticsPodcastsByPlayer extends Entity
 {
+    /**
+     * @var string[]
+     */
+    protected $dates = ['date', 'created_at', 'updated_at'];
+
     /**
      * @var array<string, string>
      */
@@ -24,7 +39,6 @@ class AnalyticsPodcastsByPlayer extends Entity
         'device' => '?string',
         'os' => '?string',
         'is_bot' => 'boolean',
-        'date' => 'datetime',
         'hits' => 'integer',
     ];
 }

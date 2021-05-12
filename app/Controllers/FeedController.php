@@ -16,9 +16,9 @@ use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
 use CodeIgniter\Controller;
 
-class Feed extends Controller
+class FeedController extends Controller
 {
-    public function index($podcastName): ResponseInterface
+    public function index(string $podcastName): ResponseInterface
     {
         helper('rss');
 
@@ -27,15 +27,17 @@ class Feed extends Controller
             throw PageNotFoundException::forPageNotFound();
         }
 
-        $serviceSlug = '';
+        $service = null;
         try {
             $service = UserAgentsRSS::find($_SERVER['HTTP_USER_AGENT']);
-            if ($service) {
-                $serviceSlug = $service['slug'];
-            }
         } catch (Exception $exception) {
             // If things go wrong the show must go on and the user must be able to download the file
             log_message('critical', $exception);
+        }
+
+        $serviceSlug = null;
+        if ($service) {
+            $serviceSlug = $service['slug'];
         }
 
         $cacheName =
@@ -57,6 +59,7 @@ class Feed extends Controller
                     : DECADE,
             );
         }
+
         return $this->response->setXML($found);
     }
 }

@@ -8,15 +8,16 @@
 
 namespace App\Controllers\Admin;
 
-use App\Entities\Episode as EpisodeEntity;
+use App\Entities\Episode;
 use App\Entities\Note;
+use App\Entities\Podcast;
 use App\Models\EpisodeModel;
 use App\Models\NoteModel;
 use App\Models\PodcastModel;
 use App\Models\SoundbiteModel;
 use CodeIgniter\I18n\Time;
 
-class Episode extends BaseController
+class EpisodeController extends BaseController
 {
     /**
      * @var Podcast
@@ -28,12 +29,7 @@ class Episode extends BaseController
      */
     protected $episode;
 
-    /**
-     * @var Soundbite|null
-     */
-    protected $soundbites;
-
-    public function _remap($method, ...$params)
+    public function _remap(string $method, ...$params)
     {
         if (
             !($this->podcast = (new PodcastModel())->getPodcastById($params[0]))
@@ -124,7 +120,7 @@ class Episode extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $newEpisode = new EpisodeEntity([
+        $newEpisode = new Episode([
             'podcast_id' => $this->podcast->id,
             'title' => $this->request->getPost('title'),
             'slug' => $this->request->getPost('slug'),
@@ -148,8 +144,8 @@ class Episode extends BaseController
             'type' => $this->request->getPost('type'),
             'is_blocked' => $this->request->getPost('block') == 'yes',
             'custom_rss_string' => $this->request->getPost('custom_rss'),
-            'created_by' => user()->id,
-            'updated_by' => user()->id,
+            'created_by' => user_id(),
+            'updated_by' => user_id(),
             'published_at' => null,
         ]);
 
@@ -265,14 +261,15 @@ class Episode extends BaseController
             'custom_rss',
         );
 
-        $this->episode->updated_by = user()->id;
+        $this->episode->updated_by = user_id();
 
         $audioFile = $this->request->getFile('audio_file');
-        if ($audioFile) {
+        if ($audioFile !== null && $audioFile->isValid()) {
             $this->episode->audio_file = $audioFile;
         }
+
         $image = $this->request->getFile('image');
-        if ($image) {
+        if ($image !== null && $image->isValid()) {
             $this->episode->image = $image;
         }
 
@@ -291,7 +288,7 @@ class Episode extends BaseController
             ) {
                 if (
                     ($transcriptFile = $this->episode->transcript_file) &&
-                    !empty($transcriptFile)
+                    $transcriptFile !== null
                 ) {
                     unlink($transcriptFile);
                     $this->episode->transcript_file_path = null;
@@ -315,7 +312,7 @@ class Episode extends BaseController
             ) {
                 if (
                     ($chaptersFile = $this->episode->chapters_file) &&
-                    !empty($chaptersFile)
+                    $chaptersFile !== null
                 ) {
                     unlink($chaptersFile);
                     $this->episode->chapters_file_path = null;
@@ -700,8 +697,8 @@ class Episode extends BaseController
 
         foreach ($soundbites_array as $soundbite_id => $soundbite) {
             if (
-                !empty($soundbite['start_time']) &&
-                !empty($soundbite['duration'])
+                $soundbite['start_time'] !== null &&
+                $soundbite['duration'] !== null
             ) {
                 $data = [
                     'podcast_id' => $this->podcast->id,
@@ -709,10 +706,10 @@ class Episode extends BaseController
                     'start_time' => $soundbite['start_time'],
                     'duration' => $soundbite['duration'],
                     'label' => $soundbite['label'],
-                    'updated_by' => user()->id,
+                    'updated_by' => user_id(),
                 ];
                 if ($soundbite_id == 0) {
-                    $data += ['created_by' => user()->id];
+                    $data += ['created_by' => user_id()];
                 } else {
                     $data += ['id' => $soundbite_id];
                 }

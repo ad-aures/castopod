@@ -10,11 +10,26 @@
 
 namespace Analytics\Entities;
 
-use datetime;
 use CodeIgniter\Entity\Entity;
 
+/**
+ * @property int $podcast_id
+ * @property string $country_code
+ * @property string|null $region_code
+ * @property double|null $latitude
+ * @property double|null $longitude
+ * @property Time $date
+ * @property int $hits
+ * @property Time $created_at
+ * @property Time $updated_at
+ */
 class AnalyticsPodcastsByRegion extends Entity
 {
+    /**
+     * @var string[]
+     */
+    protected $dates = ['date', 'created_at', 'updated_at'];
+
     /**
      * @var array<string, string>
      */
@@ -22,9 +37,8 @@ class AnalyticsPodcastsByRegion extends Entity
         'podcast_id' => 'integer',
         'country_code' => 'string',
         'region_code' => '?string',
-        'latitude' => '?float',
-        'longitude' => '?float',
-        'date' => 'datetime',
+        'latitude' => '?double',
+        'longitude' => '?double',
         'hits' => 'integer',
     ];
 

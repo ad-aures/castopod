@@ -17,6 +17,9 @@ class PodcastModel extends Model
     protected $table = 'podcasts';
     protected $primaryKey = 'id';
 
+    /**
+     * @var string[]
+     */
     protected $allowedFields = [
         'id',
         'title',
@@ -42,7 +45,7 @@ class PodcastModel extends Model
         'is_locked',
         'location_name',
         'location_geo',
-        'location_osmid',
+        'location_osm_id',
         'payment_pointer',
         'custom_rss',
         'partner_id',
@@ -185,7 +188,7 @@ class PodcastModel extends Model
             // identifier is the podcast name, request must be a join
             $user_podcast = $this->db
                 ->table('podcasts_users')
-                ->select('group_id', 'user_id')
+                ->select('group_id, user_id')
                 ->join('podcasts', 'podcasts.id = podcasts_users.podcast_id')
                 ->where([
                     'user_id' => $userId,
@@ -323,7 +326,9 @@ class PodcastModel extends Model
         $rsa->setHash('sha256');
 
         // extracts $privatekey and $publickey variables
-        extract($rsa->createKey(2048));
+        $rsaKey = $rsa->createKey(2048);
+        $privatekey = $rsaKey['privatekey'];
+        $publickey = $rsaKey['publickey'];
 
         $url = new URI(base_url());
         $username = $data['data']['name'];

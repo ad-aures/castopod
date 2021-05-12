@@ -8,7 +8,7 @@
 
 namespace App\Controllers\Admin;
 
-class Home extends BaseController
+class HomeController extends BaseController
 {
     public function index()
     {

@@ -9,9 +9,10 @@
 namespace App\Libraries;
 
 use ActivityPub\Entities\Actor;
+use ActivityPub\Objects\ActorObject;
 use App\Models\PodcastModel;
 
-class PodcastActor extends \ActivityPub\Objects\ActorObject
+class PodcastActor extends ActorObject
 {
     /**
      * @var string

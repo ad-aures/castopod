@@ -16,7 +16,7 @@ class Rules
      */
     public function validate_url(string $str = null): bool
     {
-        if (empty($str)) {
+        if ($str === null) {
             return false;
         }
 

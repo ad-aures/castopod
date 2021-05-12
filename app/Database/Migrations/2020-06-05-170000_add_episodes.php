@@ -44,7 +44,8 @@ class AddEpisodes extends Migration
                 'constraint' => 255,
             ],
             'audio_file_duration' => [
-                'type' => 'INT',
+                // exact value for duration with max 99999,999 ~ 27.7 hours
+                'type' => 'DECIMAL(8,3)',
                 'unsigned' => true,
                 'comment' => 'Playtime in seconds',
             ],
@@ -136,7 +137,7 @@ class AddEpisodes extends Migration
                 'constraint' => 32,
                 'null' => true,
             ],
-            'location_osmid' => [
+            'location_osm_id' => [
                 'type' => 'VARCHAR',
                 'constraint' => 12,
                 'null' => true,
@@ -189,7 +190,7 @@ class AddEpisodes extends Migration
             'podcast_id',
             'podcasts',
             'id',
-            false,
+            '',
             'CASCADE',
         );
         $this->forge->addForeignKey('created_by', 'users', 'id');

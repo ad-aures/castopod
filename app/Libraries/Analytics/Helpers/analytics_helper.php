@@ -45,7 +45,7 @@ if (!function_exists('generate_episode_analytics_url')) {
         int $podcastId,
         int $episodeId,
         string $audioFilePath,
-        int $audioFileDuration,
+        float $audioFileDuration,
         int $audioFileSize,
         int $audioFileHeaderSize,
         \CodeIgniter\I18n\Time $publicationDate
@@ -329,7 +329,8 @@ if (!function_exists('podcast_hit')) {
                         $parts = explode('-', $range);
                         $downloadedBytes += empty($parts[1])
                             ? $fileSize
-                            : $parts[1] - (empty($parts[0]) ? 0 : $parts[0]);
+                            : (int) $parts[1] -
+                                (empty($parts[0]) ? 0 : (int) $parts[0]);
                     }
                 }
                 // We save the number of downloaded bytes for this user and this episode:

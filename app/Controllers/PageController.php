@@ -8,13 +8,13 @@
 
 namespace App\Controllers;
 
-use App\Entities\Page as PageEntity;
+use App\Entities\Page;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use App\Models\PageModel;
 use App\Models\CreditModel;
 use App\Models\PodcastModel;
 
-class Page extends BaseController
+class PageController extends BaseController
 {
     /**
      * @var Page|null
@@ -60,10 +60,10 @@ class Page extends BaseController
 
         $cacheName = "page_credits_{$locale}";
         if (!($found = cache($cacheName))) {
-            $page = new PageEntity([
+            $page = new Page([
                 'title' => lang('Person.credits', [], $locale),
                 'slug' => 'credits',
-                'content' => '',
+                'content_markdown' => '',
             ]);
 
             $allCredits = (new CreditModel())->findAll();

@@ -28,6 +28,11 @@
         "conditions": []
       },
       {
+        "action": "composer analyse",
+        "options": [],
+        "conditions": []
+      },
+      {
         "action": "composer rector",
         "options": [],
         "conditions": []

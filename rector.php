@@ -25,16 +25,14 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ]);
 
     // Define what rule sets will be applied
-    $parameters->set(Option::SETS, [
-        SetList::PHP_73,
-        SetList::TYPE_DECLARATION,
-        SetList::TYPE_DECLARATION_STRICT,
-        SetList::CODE_QUALITY,
-        SetList::CODING_STYLE,
-        SetList::EARLY_RETURN,
-        SetList::DEAD_CODE,
-        SetList::ORDER,
-    ]);
+    $containerConfigurator->import(SetList::PHP_73);
+    $containerConfigurator->import(SetList::TYPE_DECLARATION);
+    $containerConfigurator->import(SetList::TYPE_DECLARATION_STRICT);
+    $containerConfigurator->import(SetList::CODE_QUALITY);
+    $containerConfigurator->import(SetList::CODING_STYLE);
+    $containerConfigurator->import(SetList::EARLY_RETURN);
+    $containerConfigurator->import(SetList::DEAD_CODE);
+    $containerConfigurator->import(SetList::ORDER);
 
     // auto import fully qualified class names
     $parameters->set(Option::AUTO_IMPORT_NAMES, true);

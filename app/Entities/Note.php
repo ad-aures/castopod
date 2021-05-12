@@ -8,10 +8,16 @@
 
 namespace App\Entities;
 
+use ActivityPub\Entities\Note as ActivityPubNote;
+use App\Models\ActorModel;
 use App\Models\EpisodeModel;
 use RuntimeException;
 
-class Note extends \ActivityPub\Entities\Note
+/**
+ * @property int|null $episode_id
+ * @property Episode|null $episode
+ */
+class Note extends ActivityPubNote
 {
     /**
      * @var Episode|null
@@ -40,13 +46,13 @@ class Note extends \ActivityPub\Entities\Note
      */
     public function getEpisode()
     {
-        if (empty($this->episode_id)) {
+        if ($this->episode_id === null) {
             throw new RuntimeException(
                 'Note must have an episode_id before getting episode.',
             );
         }
 
-        if (empty($this->episode)) {
+        if ($this->episode === null) {
             $this->episode = (new EpisodeModel())->getEpisodeById(
                 $this->episode_id,
             );

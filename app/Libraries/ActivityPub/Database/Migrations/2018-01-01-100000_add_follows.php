@@ -37,14 +37,14 @@ class AddFollowers extends Migration
             'actor_id',
             'activitypub_actors',
             'id',
-            false,
+            '',
             'CASCADE',
         );
         $this->forge->addForeignKey(
             'target_actor_id',
             'activitypub_actors',
             'id',
-            false,
+            '',
             'CASCADE',
         );
         $this->forge->createTable('activitypub_follows');

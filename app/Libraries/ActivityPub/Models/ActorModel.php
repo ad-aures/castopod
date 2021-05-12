@@ -9,6 +9,7 @@
 namespace ActivityPub\Models;
 
 use ActivityPub\Entities\Actor;
+use CodeIgniter\Database\Exceptions\DataException;
 use CodeIgniter\Events\Events;
 use CodeIgniter\Model;
 
@@ -57,7 +58,7 @@ class ActorModel extends Model
      */
     protected $useTimestamps = true;
 
-    public function getActorById($id)
+    public function getActorById($id): Actor
     {
         $cacheName = config('ActivityPub')->cachePrefix . "actor#{$id}";
         if (!($found = cache($cacheName))) {

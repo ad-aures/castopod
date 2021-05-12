@@ -6,6 +6,9 @@ use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\Mock\MockSession;
 use Config\Services;
 
+/**
+ * @phpstan-ignore-next-line
+ */
 class SessionTestCase extends CIUnitTestCase
 {
     /**

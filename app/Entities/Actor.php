@@ -8,13 +8,18 @@
 
 namespace App\Entities;
 
+use ActivityPub\Entities\Actor as ActivityPubActor;
 use App\Models\PodcastModel;
 use RuntimeException;
 
-class Actor extends \ActivityPub\Entities\Actor
+/**
+ * @property Podcast|null $podcast
+ * @property boolean $is_podcast
+ */
+class Actor extends ActivityPubActor
 {
     /**
-     * @var App\Entities\Podcast|null
+     * @var Podcast|null
      */
     protected $podcast;
 
@@ -23,20 +28,20 @@ class Actor extends \ActivityPub\Entities\Actor
      */
     protected $is_podcast;
 
-    public function getIsPodcast()
+    public function getIsPodcast(): bool
     {
-        return !empty($this->podcast);
+        return $this->podcast !== null;
     }
 
-    public function getPodcast()
+    public function getPodcast(): ?Podcast
     {
-        if (empty($this->id)) {
+        if ($this->id === null) {
             throw new RuntimeException(
-                'Actor must be created before getting associated podcast.',
+                'Podcast id must be set before getting associated podcast.',
             );
         }
 
-        if (empty($this->podcast)) {
+        if ($this->podcast === null) {
             $this->podcast = (new PodcastModel())->getPodcastByActorId(
                 $this->id,
             );

@@ -2,7 +2,9 @@
 
 namespace App\Libraries;
 
-class Negotiate extends \CodeIgniter\HTTP\Negotiate
+use CodeIgniter\HTTP\Negotiate as CodeIgniterHTTPNegotiate;
+
+class Negotiate extends CodeIgniterHTTPNegotiate
 {
     public function callMatch(
         array $acceptable,

@@ -14,8 +14,9 @@ namespace App\Libraries;
 
 use Config\Services;
 use CodeIgniter\Router\Exceptions\RedirectException;
+use CodeIgniter\Router\Router as CodeIgniterRouter;
 
-class Router extends \CodeIgniter\Router\Router
+class Router extends CodeIgniterRouter
 {
     /**
      * Compares the uri string against the routes that the

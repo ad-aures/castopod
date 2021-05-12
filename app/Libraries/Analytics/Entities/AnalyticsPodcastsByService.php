@@ -10,16 +10,27 @@
 
 namespace Analytics\Entities;
 
-use datetime;
 use Opawg\UserAgentsPhp\UserAgentsRSS;
 use CodeIgniter\Entity\Entity;
 
+/**
+ * @property int $podcast_id
+ * @property string $app
+ * @property string|null $device
+ * @property string|null $os
+ * @property bool $is_bot
+ * @property Time $date
+ * @property int $hits
+ * @property string $labels
+ * @property Time $created_at
+ * @property Time $updated_at
+ */
 class AnalyticsPodcastsByService extends Entity
 {
     /**
-     * @var string
+     * @var string[]
      */
-    protected $labels;
+    protected $dates = ['date', 'created_at', 'updated_at'];
 
     /**
      * @var array<string, string>
@@ -30,7 +41,6 @@ class AnalyticsPodcastsByService extends Entity
         'device' => '?string',
         'os' => '?string',
         'is_bot' => 'boolean',
-        'date' => 'datetime',
         'hits' => 'integer',
     ];
 

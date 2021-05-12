@@ -33,14 +33,14 @@ class AddNotesPreviewCards extends Migration
             'note_id',
             'activitypub_notes',
             'id',
-            false,
+            '',
             'CASCADE',
         );
         $this->forge->addForeignKey(
             'preview_card_id',
             'activitypub_preview_cards',
             'id',
-            false,
+            '',
             'CASCADE',
         );
         $this->forge->createTable('activitypub_notes_preview_cards');

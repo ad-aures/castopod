@@ -16,7 +16,7 @@ use App\Models\PodcastModel;
 use App\Models\EpisodeModel;
 use App\Models\PersonModel;
 
-class EpisodePerson extends BaseController
+class EpisodePersonController extends BaseController
 {
     /**
      * @var Podcast

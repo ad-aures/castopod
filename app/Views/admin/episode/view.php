@@ -59,12 +59,7 @@
     </div>
 
     <section class="w-full max-w-sm prose">
-    <?= location_link(
-        $episode->location_name,
-        $episode->location_geo,
-        $episode->location_osmid,
-        'text-sm',
-    ) ?>
+    <?= location_link($episode->location, 'text-sm') ?>
     <?= $episode->description_html ?>
     </section>
 </div>

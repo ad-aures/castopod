@@ -11,6 +11,14 @@ namespace App\Entities;
 use CodeIgniter\Entity\Entity;
 use App\Models\PersonModel;
 
+/**
+ * @property int $id
+ * @property int $podcast_id
+ * @property int $person_id
+ * @property Person $person
+ * @property string|null $person_group
+ * @property string|null $person_role
+ */
 class PodcastPerson extends Entity
 {
     /**
@@ -29,7 +37,7 @@ class PodcastPerson extends Entity
         'person_role' => '?string',
     ];
 
-    public function getPerson()
+    public function getPerson(): ?Person
     {
         return (new PersonModel())->getPersonById(
             $this->attributes['person_id'],

@@ -15,7 +15,10 @@ namespace ActivityPub\Core;
 
 abstract class AbstractObject
 {
-    public function set($property, $value): self
+    /**
+     * @param mixed $value
+     */
+    public function set(string $property, $value): self
     {
         $this->$property = $value;
 
@@ -35,7 +38,7 @@ abstract class AbstractObject
             }
 
             $array[$key] =
-                is_object($value) && $value instanceof self
+                is_object($value) && is_subclass_of($value, self::class)
                     ? $value->toArray()
                     : $value;
         }

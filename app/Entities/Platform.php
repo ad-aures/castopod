@@ -10,6 +10,17 @@ namespace App\Entities;
 
 use CodeIgniter\Entity\Entity;
 
+/**
+ * @property string $slug
+ * @property string $type
+ * @property string $label
+ * @property string $home_url
+ * @property string|null $submit_url
+ * @property string|null $link_url
+ * @property string|null $link_content
+ * @property bool|null $is_visible
+ * @property bool|null $is_on_embeddable_player
+ */
 class Platform extends Entity
 {
     /**

@@ -14,6 +14,7 @@ use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use Config\Services;
 use CodeIgniter\Controller;
+use CodeIgniter\HTTP\RedirectResponse;
 
 class EpisodeAnalyticsController extends Controller
 {
@@ -54,9 +55,10 @@ class EpisodeAnalyticsController extends Controller
         $this->config = config('Analytics');
     }
 
-    // Add one hit to this episode:
-    public function hit($base64EpisodeData, ...$audioFilePath)
-    {
+    public function hit(
+        string $base64EpisodeData,
+        string ...$audioFilePath
+    ): RedirectResponse {
         $session = Services::session();
         $session->start();
 

@@ -33,9 +33,12 @@ class BlockController extends Controller
         $handle = $this->request->getPost('handle');
 
         if ($parts = split_handle($handle)) {
-            extract($parts);
-
-            if (($actor = get_or_create_actor($username, $domain)) === null) {
+            if (
+                ($actor = get_or_create_actor(
+                    $parts['username'],
+                    $parts['domain'],
+                )) === null
+            ) {
                 return redirect()
                     ->back()
                     ->withInput()

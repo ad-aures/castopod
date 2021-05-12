@@ -66,7 +66,10 @@ class PodcastPersonModel extends Model
      */
     protected $beforeDelete = ['clearCache'];
 
-    public function getPodcastPersons($podcastId)
+    /**
+     * @return PodcastPerson[]
+     */
+    public function getPodcastPersons(int $podcastId): array
     {
         $cacheName = "podcast#{$podcastId}_persons";
         if (!($found = cache($cacheName))) {
@@ -85,37 +88,42 @@ class PodcastPersonModel extends Model
     /**
      * Add persons to podcast
      *
+     * @param array<string> $persons
+     * @param array<string, string> $groupsRoles
+     *
      * @return bool|int Number of rows inserted or FALSE on failure
      */
     public function addPodcastPersons(
         int $podcastId,
-        array $persons,
-        array $groups_roles
+        array $persons = [],
+        array $groupsRoles = []
     ) {
-        if (!empty($persons)) {
-            $this->clearCache(['podcast_id' => $podcastId]);
-            $data = [];
-            foreach ($persons as $person) {
-                if ($groups_roles !== []) {
-                    foreach ($groups_roles as $group_role) {
-                        $group_role = explode(',', $group_role);
-                        $data[] = [
-                            'podcast_id' => $podcastId,
-                            'person_id' => $person,
-                            'person_group' => $group_role[0],
-                            'person_role' => $group_role[1],
-                        ];
-                    }
-                } else {
-                    $data[] = [
-                        'podcast_id' => $podcastId,
-                        'person_id' => $person,
-                    ];
-                }
-            }
-            return $this->insertBatch($data);
+        if ($persons === []) {
+            return 0;
         }
-        return 0;
+
+        $this->clearCache(['podcast_id' => $podcastId]);
+        $data = [];
+        foreach ($persons as $person) {
+            if ($groupsRoles === []) {
+                $data[] = [
+                    'podcast_id' => $podcastId,
+                    'person_id' => $person,
+                ];
+            }
+
+            foreach ($groupsRoles as $group_role) {
+                $group_role = explode(',', $group_role);
+                $data[] = [
+                    'podcast_id' => $podcastId,
+                    'person_id' => $person,
+                    'person_group' => $group_role[0],
+                    'person_role' => $group_role[1],
+                ];
+            }
+        }
+
+        return $this->insertBatch($data);
     }
 
     /**

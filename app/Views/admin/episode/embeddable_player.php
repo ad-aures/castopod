@@ -18,13 +18,13 @@
             'style'
         ] ?>" class="w-12 h-12 mr-1 border-2 border-gray-400 rounded-lg hover:border-white" title="<?= lang(
     "Episode.embeddable_player.{$themeKey}",
-) ?>" data-type="theme-picker" data-url="<?= $episode->getEmbeddablePlayer(
+) ?>" data-type="theme-picker" data-url="<?= $episode->getEmbeddablePlayerUrl(
     $themeKey,
 ) ?>"></button>
     <?php endforeach; ?>
 </div>
 
-<iframe name="embeddable_player" id="embeddable_player" class="w-full h-48 max-w-xl" frameborder="0" scrolling="no" style="width: 100%;  overflow: hidden;" src="<?= $episode->embeddable_player ?>"></iframe>
+<iframe name="embeddable_player" id="embeddable_player" class="w-full h-48 max-w-xl" frameborder="0" scrolling="no" style="width: 100%;  overflow: hidden;" src="<?= $episode->embeddable_player_url ?>"></iframe>
 
 <div class="flex items-center w-full mt-8">
     <?= form_textarea(
@@ -33,7 +33,7 @@
             'name' => 'iframe',
             'class' => 'form-textarea w-full h-20 mr-2',
         ],
-        "<iframe width=\"100%\" height=\"280\" frameborder=\"0\" scrolling=\"no\" style=\"width: 100%; height: 280px; overflow: hidden;\" src=\"{$episode->embeddable_player}\"></iframe>",
+        "<iframe width=\"100%\" height=\"280\" frameborder=\"0\" scrolling=\"no\" style=\"width: 100%; height: 280px; overflow: hidden;\" src=\"{$episode->embeddable_player_url}\"></iframe>",
     ) ?>
     <?= icon_button(
         'file-copy',
@@ -51,7 +51,7 @@
             'name' => 'url',
             'class' => 'form-textarea w-full h-10 mr-2',
         ],
-        $episode->embeddable_player,
+        $episode->embeddable_player_url,
     ) ?>
     <?= icon_button(
         'file-copy',

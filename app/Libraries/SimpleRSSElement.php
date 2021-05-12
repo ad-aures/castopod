@@ -16,17 +16,17 @@ class SimpleRSSElement extends SimpleXMLElement
      * Adds a child with $value inside CDATA
      *
      * @param string $name — The name of the child element to add.
-     * @param string|null $value — [optional] If specified, the value of the child element.
+     * @param string $value — [optional] If specified, the value of the child element.
      * @param string|null $namespace [optional] If specified, the namespace to which the child element belongs.
      *
-     * @return $this
+     * @return static The addChild method returns a SimpleXMLElement object representing the child added to the XML node.
      */
     public function addChildWithCDATA(
         string $name,
-        ?string $value = null,
+        string $value = '',
         ?string $namespace = null
     ) {
-        $new_child = parent::addChild($name, null, $namespace);
+        $new_child = parent::addChild($name, '', $namespace);
 
         if ($new_child !== null) {
             $node = dom_import_simplexml($new_child);
@@ -44,11 +44,12 @@ class SimpleRSSElement extends SimpleXMLElement
      * @param string $name — The name of the child element to add.
      * @param string $value — [optional] If specified, the value of the child element.
      * @param string $namespace [optional] If specified, the namespace to which the child element belongs.
-     * @return $this
+     *
+     * @return static The addChild method returns a SimpleXMLElement object representing the child added to the XML node.
      */
     public function addChild($name, $value = null, $namespace = null)
     {
-        $new_child = parent::addChild($name, null, $namespace);
+        $new_child = parent::addChild($name, '', $namespace);
 
         if ($new_child !== null) {
             $node = dom_import_simplexml($new_child);

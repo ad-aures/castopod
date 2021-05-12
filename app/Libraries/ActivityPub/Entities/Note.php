@@ -8,16 +8,38 @@
 
 namespace ActivityPub\Entities;
 
+use CodeIgniter\I18n\Time;
 use RuntimeException;
 use Michalsn\Uuid\UuidEntity;
 
+/**
+ * @property string $id
+ * @property string $uri
+ * @property int $actor_id
+ * @property Actor $actor
+ * @property string|null $in_reply_to_id
+ * @property bool $is_reply
+ * @property Note|null $reply_to_note
+ * @property string|null $reblog_of_id
+ * @property bool $is_reblog
+ * @property Note|null $reblog_of_note
+ * @property string $message
+ * @property string $message_html
+ * @property int $favourites_count
+ * @property int $reblogs_count
+ * @property int $replies_count
+ * @property Time $published_at
+ * @property Time $created_at
+ *
+ * @property bool $has_preview_card
+ * @property PreviewCard|null $preview_card
+ *
+ * @property bool $has_replies
+ * @property Note[] $replies
+ * @property Note[] $reblogs
+ */
 class Note extends UuidEntity
 {
-    /**
-     * @var string[]
-     */
-    protected $uuids = ['id', 'in_reply_to_id', 'reblog_of_id'];
-
     /**
      * @var Actor
      */
@@ -67,6 +89,11 @@ class Note extends UuidEntity
      * @var Note[]
      */
     protected $reblogs = [];
+
+    /**
+     * @var string[]
+     */
+    protected $uuids = ['id', 'in_reply_to_id', 'reblog_of_id'];
 
     /**
      * @var string[]

@@ -8,9 +8,10 @@
 
 namespace App\Controllers;
 
+use ActivityPub\Controllers\ActorController as ActivityPubActorController;
 use Analytics\AnalyticsTrait;
 
-class Actor extends \ActivityPub\Controllers\ActorController
+class ActorController extends ActivityPubActorController
 {
     use AnalyticsTrait;
 

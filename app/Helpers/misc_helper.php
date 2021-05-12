@@ -127,7 +127,7 @@ if (!function_exists('slugify')) {
         $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
 
         // remove unwanted characters
-        $text = preg_replace('~[^\\-\w]+~', '', $text);
+        $text = preg_replace('~[^\-\w]+~', '', $text);
 
         // trim
         $text = trim($text, '-');

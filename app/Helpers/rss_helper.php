@@ -16,10 +16,10 @@ if (!function_exists('get_rss_feed')) {
     /**
      * Generates the rss feed for a given podcast entity
      *
-     * @param string $service The name of the service that fetches the RSS feed for future reference when the audio file is eventually downloaded
+     * @param string $serviceSlug The name of the service that fetches the RSS feed for future reference when the audio file is eventually downloaded
      * @return string rss feed as xml
      */
-    function get_rss_feed(Podcast $podcast, $serviceSlug = ''): string
+    function get_rss_feed(Podcast $podcast, ?string $serviceSlug = null): string
     {
         $episodes = $podcast->episodes;
 
@@ -43,7 +43,7 @@ if (!function_exists('get_rss_feed')) {
         $atom_link->addAttribute('rel', 'self');
         $atom_link->addAttribute('type', 'application/rss+xml');
 
-        if (!empty($podcast->new_feed_url)) {
+        if ($podcast->new_feed_url !== null) {
             $channel->addChild(
                 'new-feed-url',
                 $podcast->new_feed_url,
@@ -67,23 +67,27 @@ if (!function_exists('get_rss_feed')) {
 
         $itunes_image = $channel->addChild('image', null, $itunes_namespace);
 
-        $itunes_image->addAttribute('href', $podcast->image->original_url);
+        // FIXME: This should be downsized to 1400x1400
+        $itunes_image->addAttribute('href', $podcast->image->url);
 
         $channel->addChild('language', $podcast->language_code);
-        if (!empty($podcast->location_name)) {
+        if ($podcast->location !== null) {
             $locationElement = $channel->addChild(
                 'location',
-                htmlspecialchars($podcast->location_name),
+                htmlspecialchars($podcast->location->name),
                 $podcast_namespace,
             );
-            if (!empty($podcast->location_geo)) {
-                $locationElement->addAttribute('geo', $podcast->location_geo);
+            if ($podcast->location->geo !== null) {
+                $locationElement->addAttribute('geo', $podcast->location->geo);
             }
-            if (!empty($podcast->location_osmid)) {
-                $locationElement->addAttribute('osm', $podcast->location_osmid);
+            if ($podcast->location->osm_id !== null) {
+                $locationElement->addAttribute(
+                    'osm',
+                    $podcast->location->osm_id,
+                );
             }
         }
-        if (!empty($podcast->payment_pointer)) {
+        if ($podcast->payment_pointer !== null) {
             $valueElement = $channel->addChild(
                 'value',
                 null,
@@ -103,7 +107,7 @@ if (!function_exists('get_rss_feed')) {
                 'address',
                 $podcast->payment_pointer,
             );
-            $recipientElement->addAttribute('split', 100);
+            $recipientElement->addAttribute('split', '100');
         }
         $channel
             ->addChild(
@@ -112,7 +116,7 @@ if (!function_exists('get_rss_feed')) {
                 $podcast_namespace,
             )
             ->addAttribute('owner', $podcast->owner_email);
-        if (!empty($podcast->imported_feed_url)) {
+        if ($podcast->imported_feed_url !== null) {
             $channel->addChild(
                 'previousUrl',
                 $podcast->imported_feed_url,
@@ -120,7 +124,7 @@ if (!function_exists('get_rss_feed')) {
             );
         }
 
-        foreach ($podcast->podcastingPlatforms as $podcastingPlatform) {
+        foreach ($podcast->podcasting_platforms as $podcastingPlatform) {
             $podcastingPlatformElement = $channel->addChild(
                 'id',
                 null,
@@ -130,13 +134,13 @@ if (!function_exists('get_rss_feed')) {
                 'platform',
                 $podcastingPlatform->slug,
             );
-            if (!empty($podcastingPlatform->link_content)) {
+            if ($podcastingPlatform->link_content !== null) {
                 $podcastingPlatformElement->addAttribute(
                     'id',
                     $podcastingPlatform->link_content,
                 );
             }
-            if (!empty($podcastingPlatform->link_url)) {
+            if ($podcastingPlatform->link_url !== null) {
                 $podcastingPlatformElement->addAttribute(
                     'url',
                     htmlspecialchars($podcastingPlatform->link_url),
@@ -144,7 +148,7 @@ if (!function_exists('get_rss_feed')) {
             }
         }
 
-        foreach ($podcast->socialPlatforms as $socialPlatform) {
+        foreach ($podcast->social_platforms as $socialPlatform) {
             $socialPlatformElement = $channel->addChild(
                 'social',
                 $socialPlatform->link_content,
@@ -154,7 +158,7 @@ if (!function_exists('get_rss_feed')) {
                 'platform',
                 $socialPlatform->slug,
             );
-            if (!empty($socialPlatform->link_url)) {
+            if ($socialPlatform->link_url !== null) {
                 $socialPlatformElement->addAttribute(
                     'url',
                     htmlspecialchars($socialPlatform->link_url),
@@ -162,7 +166,7 @@ if (!function_exists('get_rss_feed')) {
             }
         }
 
-        foreach ($podcast->fundingPlatforms as $fundingPlatform) {
+        foreach ($podcast->funding_platforms as $fundingPlatform) {
             $fundingPlatformElement = $channel->addChild(
                 'funding',
                 $fundingPlatform->link_content,
@@ -172,7 +176,7 @@ if (!function_exists('get_rss_feed')) {
                 'platform',
                 $fundingPlatform->slug,
             );
-            if (!empty($socialPlatform->link_url)) {
+            if ($fundingPlatform->link_url !== null) {
                 $fundingPlatformElement->addAttribute(
                     'url',
                     htmlspecialchars($fundingPlatform->link_url),
@@ -186,9 +190,10 @@ if (!function_exists('get_rss_feed')) {
                 htmlspecialchars($podcastPerson->person->full_name),
                 $podcast_namespace,
             );
+
             if (
-                !empty($podcastPerson->person_role) &&
-                !empty($podcastPerson->person_group)
+                $podcastPerson->person_role !== null &&
+                $podcastPerson->person_group !== null
             ) {
                 $podcastPersonElement->addAttribute(
                     'role',
@@ -201,7 +206,8 @@ if (!function_exists('get_rss_feed')) {
                     ),
                 );
             }
-            if (!empty($podcastPerson->person_group)) {
+
+            if ($podcastPerson->person_group !== null) {
                 $podcastPersonElement->addAttribute(
                     'group',
                     htmlspecialchars(
@@ -217,7 +223,8 @@ if (!function_exists('get_rss_feed')) {
                 'img',
                 $podcastPerson->person->image->large_url,
             );
-            if (!empty($podcastPerson->person->information_url)) {
+
+            if ($podcastPerson->person->information_url !== null) {
                 $podcastPersonElement->addAttribute(
                     'href',
                     $podcastPerson->person->information_url,
@@ -263,7 +270,7 @@ if (!function_exists('get_rss_feed')) {
         $image->addChild('title', $podcast->title);
         $image->addChild('link', $podcast->link);
 
-        if (!empty($podcast->custom_rss)) {
+        if ($podcast->custom_rss !== null) {
             array_to_rss(
                 [
                     'elements' => $podcast->custom_rss,
@@ -280,7 +287,7 @@ if (!function_exists('get_rss_feed')) {
             $enclosure->addAttribute(
                 'url',
                 $episode->audio_file_analytics_url .
-                    (empty($serviceSlug)
+                    ($serviceSlug === ''
                         ? ''
                         : '?_from=' . urlencode($serviceSlug)),
             );
@@ -292,22 +299,22 @@ if (!function_exists('get_rss_feed')) {
                 'pubDate',
                 $episode->published_at->format(DATE_RFC1123),
             );
-            if (!empty($episode->location_name)) {
+            if ($episode->location !== null) {
                 $locationElement = $item->addChild(
                     'location',
-                    htmlspecialchars($episode->location_name),
+                    htmlspecialchars($episode->location->name),
                     $podcast_namespace,
                 );
-                if (!empty($episode->location_geo)) {
+                if ($episode->location->geo !== null) {
                     $locationElement->addAttribute(
                         'geo',
-                        $episode->location_geo,
+                        $episode->location->geo,
                     );
                 }
-                if (!empty($episode->location_osmid)) {
+                if ($episode->location->osm_id !== null) {
                     $locationElement->addAttribute(
                         'osm',
-                        $episode->location_osmid,
+                        $episode->location->osm_id,
                     );
                 }
             }
@@ -477,7 +484,7 @@ if (!function_exists('add_category_tag')) {
     {
         $itunes_namespace = 'http://www.itunes.com/dtds/podcast-1.0.dtd';
 
-        $itunes_category = $node->addChild('category', null, $itunes_namespace);
+        $itunes_category = $node->addChild('category', '', $itunes_namespace);
         $itunes_category->addAttribute(
             'text',
             $category->parent !== null
@@ -488,7 +495,7 @@ if (!function_exists('add_category_tag')) {
         if ($category->parent !== null) {
             $itunes_category_child = $itunes_category->addChild(
                 'category',
-                null,
+                '',
                 $itunes_namespace,
             );
             $itunes_category_child->addAttribute(

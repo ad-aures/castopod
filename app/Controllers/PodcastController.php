@@ -9,11 +9,12 @@
 namespace App\Controllers;
 
 use Analytics\AnalyticsTrait;
+use App\Entities\Podcast;
 use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
 use App\Models\NoteModel;
 
-class Podcast extends BaseController
+class PodcastController extends BaseController
 {
     use AnalyticsTrait;
 

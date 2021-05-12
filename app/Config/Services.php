@@ -101,11 +101,11 @@ class Services extends BaseService
 
         $instance = new $class($config);
 
-        if (empty($userModel)) {
+        if ($userModel === null) {
             $userModel = new UserModel();
         }
 
-        if (empty($loginModel)) {
+        if ($loginModel === null) {
             $loginModel = new LoginModel();
         }
 

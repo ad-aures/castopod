@@ -43,15 +43,11 @@ class ActivityRequest
         ],
     ];
 
-    /**
-     * @param string $uri
-     * @param string $activityPayload
-     */
-    public function __construct($uri, $activityPayload = null)
+    public function __construct(string $uri, ?string $activityPayload = null)
     {
         $this->request = Services::curlrequest();
 
-        if ($activityPayload) {
+        if ($activityPayload !== null) {
             $this->request->setBody($activityPayload);
         }
 

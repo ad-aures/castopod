@@ -26,9 +26,7 @@ class PermissionFilter implements FilterInterface
      */
     public function before(RequestInterface $request, $params = null)
     {
-        if (!function_exists('logged_in')) {
-            helper('auth');
-        }
+        helper('auth');
 
         if (empty($params)) {
             return;

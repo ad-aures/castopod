@@ -34,9 +34,9 @@ class NoteObject extends ObjectType
     protected $inReplyTo;
 
     /**
-     * @var array
+     * @var string
      */
-    protected $replies = [];
+    protected $replies;
 
     /**
      * @param Note $note

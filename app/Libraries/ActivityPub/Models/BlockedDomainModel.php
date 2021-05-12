@@ -49,8 +49,6 @@ class BlockedDomainModel extends Model
 
     /**
      * Retrieves instance or podcast domain blocks depending on whether or not $podcastId param is set.
-     *
-     * @param integer|null $podcastId
      */
     public function getBlockedDomains()
     {

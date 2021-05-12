@@ -1,0 +1,41 @@
+parameters:
+    tmpDir: build/phpstan
+    level: 5
+    paths:
+        - app
+        - tests
+    bootstrapFiles:
+        - vendor/codeigniter4/codeigniter4/system/Test/bootstrap.php
+    scanDirectories:
+        - app/Helpers
+        - vendor/codeigniter4/codeigniter4/system/Helpers
+        - vendor/myth/auth/src/Helpers
+    excludes_analyse:
+        - app/Config/Routes.php
+        - app/Libraries/Router.php
+        - app/Libraries/ActivityPub/Config/Routes.php
+        - app/Libraries/Analytics/Config/Routes.php
+        - app/Views/*
+    ignoreErrors:
+        - '#Access to property [\$a-zA-Z]+ on an unknown class Myth\\Auth.*#' # TODO: remove when https://github.com/lonnieezell/myth-auth/pull/347 is merged 
+        - '#Call to method [\a-zA-Z]+\(\) on an unknown class Myth\\Auth.*#' # to remove as well
+        - '#^Access to an undefined property ActivityPub\\Entities\\Actor#'
+        - '#^Access to an undefined property ActivityPub\\Entities\\Note#'
+        - '#.* is forbidden to use#'
+        - '#^Cognitive complexity for#'
+        - '#^Class cognitive complexity is#'
+        - '#Do not use chained method calls. Put each on separated lines.#'
+        - '#Do not inherit from abstract class, better use composition#'
+        - '#Cannot access property [\$a-z_]+ on ((array\|)?object)#'
+        - '#^Call to an undefined method CodeIgniter\\Database\\BaseBuilder#'
+        - '#^Call to an undefined method CodeIgniter\\Database\\ConnectionInterface#'
+        - '#Access to an undefined property CodeIgniter\\Database\\BaseBuilder::\$pager#'
+        -
+            message: '#Function "function_exists\(\)" cannot be used/left in the code#'
+            paths:
+                - app/Helpers
+                - app/Libraries/ActivityPub/Helpers
+                - app/Libraries/Analytics/Helpers
+        -
+            message: '#Function "property_exists\(\)" cannot be used/left in the code#'
+            path: app/Libraries/ActivityPub/Helpers

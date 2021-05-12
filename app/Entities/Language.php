@@ -10,6 +10,10 @@ namespace App\Entities;
 
 use CodeIgniter\Entity\Entity;
 
+/**
+ * @property string $code
+ * @property string $native_name
+ */
 class Language extends Entity
 {
     /**

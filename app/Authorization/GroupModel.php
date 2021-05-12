@@ -2,7 +2,9 @@
 
 namespace App\Authorization;
 
-class GroupModel extends \Myth\Auth\Authorization\GroupModel
+use Myth\Auth\Authorization\GroupModel as MythAuthGroupModel;
+
+class GroupModel extends MythAuthGroupModel
 {
     /**
      * @return mixed[]

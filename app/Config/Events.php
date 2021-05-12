@@ -2,6 +2,9 @@
 
 namespace Config;
 
+use App\Entities\Actor;
+use App\Entities\Note;
+use App\Entities\User;
 use CodeIgniter\Events\Events;
 use CodeIgniter\Exceptions\FrameworkException;
 
@@ -23,6 +26,7 @@ use CodeIgniter\Exceptions\FrameworkException;
  */
 
 Events::on('pre_system', function () {
+    // @phpstan-ignore-next-line
     if (ENVIRONMENT !== 'testing') {
         if (ini_get('zlib.output_compression')) {
             throw FrameworkException::forEnabledZlibOutputCompression();
@@ -42,6 +46,8 @@ Events::on('pre_system', function () {
      * Debug Toolbar Listeners.
      * --------------------------------------------------------------------
      * If you delete, they will no longer be collected.
+     *
+     * @phpstan-ignore-next-line
      */
     if (CI_DEBUG) {
         Events::on(
@@ -52,7 +58,7 @@ Events::on('pre_system', function () {
     }
 });
 
-Events::on('login', function ($user): void {
+Events::on('login', function (User $user): void {
     helper('auth');
 
     // set interact_as_actor_id value
@@ -62,7 +68,7 @@ Events::on('login', function ($user): void {
     }
 });
 
-Events::on('logout', function ($user): void {
+Events::on('logout', function (User $user): void {
     helper('auth');
 
     // remove user's interact_as_actor session
@@ -75,7 +81,7 @@ Events::on('logout', function ($user): void {
  * --------------------------------------------------------------------
  * Update episode metadata counts
  */
-Events::on('on_note_add', function ($note): void {
+Events::on('on_note_add', function (Note $note): void {
     if ($note->episode_id) {
         model('EpisodeModel')
             ->where('id', $note->episode_id)
@@ -87,7 +93,7 @@ Events::on('on_note_add', function ($note): void {
     cache()->deleteMatching("page_podcast#{$note->actor->podcast->id}*");
 });
 
-Events::on('on_note_remove', function ($note): void {
+Events::on('on_note_remove', function (Note $note): void {
     if ($note->episode_id) {
         model('EpisodeModel')
             ->where('id', $note->episode_id)
@@ -106,7 +112,7 @@ Events::on('on_note_remove', function ($note): void {
     cache()->deleteMatching("page_note#{$note->id}*");
 });
 
-Events::on('on_note_reblog', function ($actor, $note): void {
+Events::on('on_note_reblog', function (Actor $actor, Note $note): void {
     if ($episodeId = $note->episode_id) {
         model('EpisodeModel')
             ->where('id', $episodeId)
@@ -125,7 +131,7 @@ Events::on('on_note_reblog', function ($actor, $note): void {
     }
 });
 
-Events::on('on_note_undo_reblog', function ($reblogNote): void {
+Events::on('on_note_undo_reblog', function (Note $reblogNote): void {
     $note = $reblogNote->reblog_of_note;
     if ($episodeId = $note->episode_id) {
         model('EpisodeModel')
@@ -147,21 +153,21 @@ Events::on('on_note_undo_reblog', function ($reblogNote): void {
     }
 });
 
-Events::on('on_note_reply', function ($reply): void {
+Events::on('on_note_reply', function (Note $reply): void {
     $note = $reply->reply_to_note;
 
     cache()->deleteMatching("page_podcast#{$note->actor->podcast->id}*");
     cache()->deleteMatching("page_note#{$note->id}*");
 });
 
-Events::on('on_reply_remove', function ($reply): void {
+Events::on('on_reply_remove', function (Note $reply): void {
     $note = $reply->reply_to_note;
 
     cache()->deleteMatching("page_podcast#{$note->actor->podcast->id}*");
     cache()->deleteMatching("page_note#{$note->id}*");
 });
 
-Events::on('on_note_favourite', function ($actor, $note): void {
+Events::on('on_note_favourite', function (Actor $actor, Note $note): void {
     if ($note->episode_id) {
         model('EpisodeModel')
             ->where('id', $note->episode_id)
@@ -176,7 +182,7 @@ Events::on('on_note_favourite', function ($actor, $note): void {
     }
 });
 
-Events::on('on_note_undo_favourite', function ($actor, $note): void {
+Events::on('on_note_undo_favourite', function (Actor $actor, Note $note): void {
     if ($note->episode_id) {
         model('EpisodeModel')
             ->where('id', $note->episode_id)
@@ -191,22 +197,22 @@ Events::on('on_note_undo_favourite', function ($actor, $note): void {
     }
 });
 
-Events::on('on_block_actor', function ($actorId): void {
+Events::on('on_block_actor', function (int $actorId): void {
     cache()->deleteMatching('page_podcast*');
     cache()->deleteMatching('page_note*');
 });
 
-Events::on('on_unblock_actor', function ($actorId): void {
+Events::on('on_unblock_actor', function (int $actorId): void {
     cache()->deleteMatching('page_podcast*');
     cache()->deleteMatching('page_note*');
 });
 
-Events::on('on_block_domain', function ($domainName): void {
+Events::on('on_block_domain', function (string $domainName): void {
     cache()->deleteMatching('page_podcast*');
     cache()->deleteMatching('page_note*');
 });
 
-Events::on('on_unblock_domain', function ($domainName): void {
+Events::on('on_unblock_domain', function (string $domainName): void {
     cache()->deleteMatching('page_podcast*');
     cache()->deleteMatching('page_note*');
 });

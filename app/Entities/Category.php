@@ -11,6 +11,14 @@ namespace App\Entities;
 use App\Models\CategoryModel;
 use CodeIgniter\Entity\Entity;
 
+/**
+ * @property int $id
+ * @property int $parent_id
+ * @property Category|null $parent
+ * @property string $code
+ * @property string $apple_category
+ * @property string $google_category
+ */
 class Category extends Entity
 {
     /**
@@ -23,7 +31,7 @@ class Category extends Entity
      */
     protected $casts = [
         'id' => 'integer',
-        'parent_id' => 'integer',
+        'parent_id' => '?integer',
         'code' => 'string',
         'apple_category' => 'string',
         'google_category' => 'string',

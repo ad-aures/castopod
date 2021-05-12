@@ -11,12 +11,36 @@ namespace ActivityPub\Entities;
 use RuntimeException;
 use CodeIgniter\Entity\Entity;
 
+/**
+ * @property int $id
+ * @property string $uri
+ * @property string $username
+ * @property string $domain
+ * @property string $display_name
+ * @property string|null $summary
+ * @property string|null $private_key
+ * @property string|null $public_key
+ * @property string|null $public_key_id
+ * @property string|null $avatar_image_url
+ * @property string|null $avatar_image_mimetype
+ * @property string|null $cover_image_url
+ * @property string|null $cover_image_mimetype
+ * @property string $inbox_url
+ * @property string|null $outbox_url
+ * @property string|null $followers_url
+ * @property int $followers_count
+ * @property int $notes_count
+ * @property bool $is_blocked
+ *
+ * @property Actor[] $followers
+ * @property bool $is_local
+ */
 class Actor extends Entity
 {
     /**
      * @var string
      */
-    protected $key_id;
+    protected $public_key_id;
 
     /**
      * @var Actor[]
@@ -52,7 +76,7 @@ class Actor extends Entity
         'is_blocked' => 'boolean',
     ];
 
-    public function getKeyId(): string
+    public function getPublicKeyId(): string
     {
         return $this->uri . '#main-key';
     }
@@ -72,7 +96,7 @@ class Actor extends Entity
     }
 
     /**
-     * @return Follower[]
+     * @return Actor[]
      */
     public function getFollowers(): array
     {

@@ -10,6 +10,20 @@ namespace ActivityPub\Entities;
 
 use CodeIgniter\Entity\Entity;
 
+/**
+ * @property int $id
+ * @property string $note_id
+ * @property string $url
+ * @property string $title
+ * @property string $description
+ * @property string $type
+ * @property string|null $author_name
+ * @property string|null $author_url
+ * @property string|null $provider_name
+ * @property string|null $provider_url
+ * @property string|null $image
+ * @property string|null $html
+ */
 class PreviewCard extends Entity
 {
     /**

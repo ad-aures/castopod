@@ -10,15 +10,23 @@
 
 namespace Analytics\Entities;
 
-use datetime;
 use CodeIgniter\Entity\Entity;
 
+/**
+ * @property int $podcast_id
+ * @property string $country_code
+ * @property string $labels
+ * @property Time $date
+ * @property int $hits
+ * @property Time $created_at
+ * @property Time $updated_at
+ */
 class AnalyticsPodcastsByCountry extends Entity
 {
     /**
-     * @var string
+     * @var string[]
      */
-    protected $labels;
+    protected $dates = ['date', 'created_at', 'updated_at'];
 
     /**
      * @var array<string, string>
@@ -26,7 +34,6 @@ class AnalyticsPodcastsByCountry extends Entity
     protected $casts = [
         'podcast_id' => 'integer',
         'country_code' => 'string',
-        'date' => 'datetime',
         'hits' => 'integer',
     ];
 

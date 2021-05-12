@@ -6,6 +6,7 @@
  * @link       https://castopod.org/
  */
 
+use App\Entities\Location;
 use CodeIgniter\View\Table;
 use CodeIgniter\I18n\Time;
 
@@ -127,8 +128,8 @@ if (!function_exists('icon_button')) {
      *
      * Abstracts the `button()` helper to create a stylized icon button
      *
-     * @param string $label The button label
-     * @param string  $uri URI string or array of URI segments
+     * @param string $icon The button icon
+     * @param string $title The button label
      * @param array  $customOptions button options: variant, size, iconLeft, iconRight
      * @param array  $customAttributes Additional attributes
      *
@@ -252,15 +253,11 @@ if (!function_exists('publication_pill')) {
      *
      * Shows the stylized publication datetime in regards to current datetime.
      *
-     * @param Time $publicationDate publication datetime of the episode
-     * @param boolean                   $isPublished whether or not the episode has been published
-     * @param string                   $customClass css class to add to the component
-     *
      * @return string
      */
     function publication_pill(
         ?Time $publicationDate,
-        $publicationStatus,
+        string $publicationStatus,
         string $customClass = ''
     ): string {
         if ($publicationDate === null) {
@@ -336,6 +333,12 @@ if (!function_exists('publication_button')) {
                 $variant = 'danger';
                 $iconLeft = 'cloud-off';
                 break;
+            default:
+                $label = '';
+                $route = '';
+                $variant = '';
+                $iconLeft = '';
+                break;
         }
 
         return button($label, $route, [
@@ -351,16 +354,13 @@ if (!function_exists('episode_numbering')) {
     /**
      * Returns relevant translated episode numbering.
      *
-     * @param string    $class styling classes
-     * @param string    $is_abbr component will show abbreviated numbering if true
-     *
-     * @return string|null
+     * @param bool $isAbbr component will show abbreviated numbering if true
      */
     function episode_numbering(
         ?int $episodeNumber = null,
         ?int $seasonNumber = null,
         string $class = '',
-        $isAbbr = false
+        bool $isAbbr = false
     ): string {
         if (!$episodeNumber && !$seasonNumber) {
             return '';
@@ -368,22 +368,20 @@ if (!function_exists('episode_numbering')) {
 
         $transKey = '';
         $args = [];
-        if ($episodeNumber && $seasonNumber) {
+        if ($episodeNumber !== null) {
+            $args['episodeNumber'] = $episodeNumber;
+        }
+
+        if ($seasonNumber !== null) {
+            $args['seasonNumber'] = $seasonNumber;
+        }
+
+        if ($episodeNumber !== null && $seasonNumber !== null) {
             $transKey = 'Episode.season_episode';
-            $args = [
-                'seasonNumber' => $seasonNumber,
-                'episodeNumber' => $episodeNumber,
-            ];
-        } elseif ($episodeNumber && !$seasonNumber) {
+        } elseif ($episodeNumber !== null && $seasonNumber === null) {
             $transKey = 'Episode.number';
-            $args = [
-                'episodeNumber' => $episodeNumber,
-            ];
-        } elseif (!$episodeNumber && $seasonNumber) {
+        } elseif ($episodeNumber === null && $seasonNumber !== null) {
             $transKey = 'Episode.season';
-            $args = [
-                'seasonNumber' => $seasonNumber,
-            ];
         }
 
         if ($isAbbr) {
@@ -408,19 +406,15 @@ if (!function_exists('location_link')) {
     /**
      * Returns link to display from location info
      */
-    function location_link(
-        ?string $locationName,
-        ?string $locationGeo,
-        ?string $locationOsmid,
-        $class = ''
-    ): string {
-        if (empty($locationName)) {
+    function location_link(?Location $location, string $class = ''): string
+    {
+        if ($location === null) {
             return '';
         }
 
         return anchor(
-            location_url($locationName, $locationGeo, $locationOsmid),
-            icon('map-pin', 'mr-2') . $locationName,
+            $location->url,
+            icon('map-pin', 'mr-2') . $location->name,
             [
                 'class' =>
                     'inline-flex items-baseline hover:underline' .

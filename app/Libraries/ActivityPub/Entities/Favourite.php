@@ -10,6 +10,10 @@ namespace ActivityPub\Entities;
 
 use Michalsn\Uuid\UuidEntity;
 
+/**
+ * @property int $actor_id
+ * @property string $note_id
+ */
 class Favourite extends UuidEntity
 {
     /**
@@ -22,6 +26,6 @@ class Favourite extends UuidEntity
      */
     protected $casts = [
         'actor_id' => 'integer',
-        'note_id' => 'integer',
+        'note_id' => 'string',
     ];
 }

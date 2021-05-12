@@ -137,7 +137,8 @@ class FavouriteModel extends UuidModel
             );
         }
 
-        $this->table('activitypub_favourites')
+        $this->db
+            ->table('activitypub_favourites')
             ->where([
                 'actor_id' => $actor->id,
                 'note_id' => service('uuid')

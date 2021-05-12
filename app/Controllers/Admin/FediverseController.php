@@ -8,7 +8,7 @@
 
 namespace App\Controllers\Admin;
 
-class Fediverse extends BaseController
+class FediverseController extends BaseController
 {
     public function dashboard()
     {

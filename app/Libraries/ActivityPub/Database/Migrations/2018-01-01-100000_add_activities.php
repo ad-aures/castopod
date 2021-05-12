@@ -63,21 +63,21 @@ class AddActivities extends Migration
             'actor_id',
             'activitypub_actors',
             'id',
-            false,
+            '',
             'CASCADE',
         );
         $this->forge->addForeignKey(
             'target_actor_id',
             'activitypub_actors',
             'id',
-            false,
+            '',
             'CASCADE',
         );
         $this->forge->addForeignKey(
             'note_id',
             'activitypub_notes',
             'id',
-            false,
+            '',
             'CASCADE',
         );
         $this->forge->createTable('activitypub_activities');

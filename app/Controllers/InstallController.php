@@ -22,7 +22,7 @@ use CodeIgniter\Controller;
 use Config\Services;
 use Dotenv\Dotenv;
 
-class Install extends Controller
+class InstallController extends Controller
 {
     /**
      * @var string[]
@@ -50,14 +50,13 @@ class Install extends Controller
      */
     public function index(): string
     {
-        try {
-            // Check if .env is created and has all required fields
-            $dotenv = Dotenv::createUnsafeImmutable(ROOTPATH);
-
-            $dotenv->load();
-        } catch (Throwable $e) {
+        if (!file_exists(ROOTPATH . '.env')) {
             $this->createEnv();
         }
+
+        // Check if .env has all required fields
+        $dotenv = Dotenv::createUnsafeImmutable(ROOTPATH);
+        $dotenv->load();
 
         // Check if the created .env file is writable to continue install process
         if (is_really_writable(ROOTPATH . '.env')) {
@@ -171,8 +170,9 @@ class Install extends Controller
         if (!$this->validate($rules)) {
             return redirect()
                 ->to(
-                    (empty(host_url()) ? config('App')->baseURL : host_url()) .
-                        config('App')->installGateway,
+                    (host_url() === null
+                        ? config('App')->baseURL
+                        : host_url()) . config('App')->installGateway,
                 )
                 ->withInput()
                 ->with('errors', $this->validator->getErrors());
@@ -182,9 +182,8 @@ class Install extends Controller
         $mediaBaseUrl = $this->request->getPost('media_base_url');
         self::writeEnv([
             'app.baseURL' => $baseUrl,
-            'app.mediaBaseURL' => empty($mediaBaseUrl)
-                ? $baseUrl
-                : $mediaBaseUrl,
+            'app.mediaBaseURL' =>
+                $mediaBaseUrl === null ? $baseUrl : $mediaBaseUrl,
             'app.adminGateway' => $this->request->getPost('admin_gateway'),
             'app.authGateway' => $this->request->getPost('auth_gateway'),
         ]);
@@ -192,7 +191,7 @@ class Install extends Controller
         helper('text');
 
         // redirect to full install url with new baseUrl input
-        return redirect(0)->to(
+        return redirect()->to(
             reduce_double_slashes(
                 $baseUrl . '/' . config('App')->installGateway,
             ),
@@ -357,9 +356,9 @@ class Install extends Controller
      * writes config values in .env file
      * overwrites any existing key and appends new ones
      *
-     * @param array $data key/value config pairs
+     * @param array $configData key/value config pairs
      */
-    public static function writeEnv($configData): void
+    public static function writeEnv(array $configData): void
     {
         $envData = file(ROOTPATH . '.env'); // reads an array of lines
 

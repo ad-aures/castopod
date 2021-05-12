@@ -10,6 +10,16 @@ namespace App\Entities;
 
 use CodeIgniter\Entity\Entity;
 
+/**
+ * @property int $id
+ * @property int $podcast_id
+ * @property int $episode_id
+ * @property double $start_time
+ * @property double $duration
+ * @property string|null $label
+ * @property int $created_by
+ * @property int $updated_by
+ */
 class Soundbite extends Entity
 {
     /**
@@ -19,17 +29,10 @@ class Soundbite extends Entity
         'id' => 'integer',
         'podcast_id' => 'integer',
         'episode_id' => 'integer',
-        'start_time' => 'float',
-        'duration' => 'float',
+        'start_time' => 'double',
+        'duration' => 'double',
         'label' => '?string',
         'created_by' => 'integer',
         'updated_by' => 'integer',
     ];
-
-    public function setUpdatedBy(User $user): self
-    {
-        $this->attributes['updated_by'] = $user->id;
-
-        return $this;
-    }
 }

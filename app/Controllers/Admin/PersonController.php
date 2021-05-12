@@ -8,11 +8,11 @@
 
 namespace App\Controllers\Admin;
 
-use App\Entities\Person as EntitiesPerson;
+use App\Entities\Person;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use App\Models\PersonModel;
 
-class Person extends BaseController
+class PersonController extends BaseController
 {
     /**
      * @var Person|null
@@ -68,13 +68,13 @@ class Person extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $person = new EntitiesPerson([
+        $person = new Person([
             'full_name' => $this->request->getPost('full_name'),
             'unique_name' => $this->request->getPost('unique_name'),
             'information_url' => $this->request->getPost('information_url'),
             'image' => $this->request->getFile('image'),
-            'created_by' => user()->id,
-            'updated_by' => user()->id,
+            'created_by' => user_id(),
+            'updated_by' => user_id(),
         ]);
 
         $personModel = new PersonModel();
@@ -125,7 +125,7 @@ class Person extends BaseController
             $this->person->image = $image;
         }
 
-        $this->person->updated_by = user()->id;
+        $this->person->updated_by = user_id();
 
         $personModel = new PersonModel();
         if (!$personModel->update($this->person->id, $this->person)) {

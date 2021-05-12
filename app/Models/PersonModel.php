@@ -8,6 +8,7 @@
 
 namespace App\Models;
 
+use App\Entities\Image;
 use App\Entities\Person;
 use CodeIgniter\Model;
 
@@ -102,9 +103,9 @@ class PersonModel extends Model
             'full_name' => $fullName,
             'unique_name' => slugify($fullName),
             'information_url' => $informationUrl,
-            'image' => download_file($image),
-            'created_by' => user()->id,
-            'updated_by' => user()->id,
+            'image' => new Image(download_file($image)),
+            'created_by' => user_id(),
+            'updated_by' => user_id(),
         ]);
         return $this->insert($person);
     }
@@ -135,11 +136,12 @@ class PersonModel extends Model
         $options = [];
         $locale = service('request')->getLocale();
         $cacheName = "taxonomy_options_{$locale}";
+
+        /** @var array<string, array> */
+        $personsTaxonomy = lang('PersonsTaxonomy.persons');
+
         if (!($options = cache($cacheName))) {
-            foreach (
-                (array) lang('PersonsTaxonomy.persons')
-                as $group_key => $group
-            ) {
+            foreach ($personsTaxonomy as $group_key => $group) {
                 foreach ($group['roles'] as $role_key => $role) {
                     $options[
                         "{$group_key},{$role_key}"

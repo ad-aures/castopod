@@ -8,12 +8,12 @@
 
 namespace App\Libraries;
 
-class NoteObject extends \ActivityPub\Objects\NoteObject
+use ActivityPub\Objects\NoteObject as ActivityPubNoteObject;
+use App\Entities\Note;
+
+class NoteObject extends ActivityPubNoteObject
 {
-    /**
-     * @param Note $note
-     */
-    public function __construct($note)
+    public function __construct(Note $note)
     {
         parent::__construct($note);
 

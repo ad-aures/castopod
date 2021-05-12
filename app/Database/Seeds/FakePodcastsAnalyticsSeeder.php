@@ -69,14 +69,14 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                     $age = floor(
                         ($date - strtotime($episode->published_at)) / 86400,
                     );
-                    $proba1 = floor(exp(3 - $age / 40)) + 1;
+                    $probability1 = (int) floor(exp(3 - $age / 40)) + 1;
 
                     for (
                         $num_line = 0;
-                        $num_line < rand(1, $proba1);
+                        $num_line < rand(1, $probability1);
                         ++$num_line
                     ) {
-                        $proba2 = floor(exp(6 - $age / 20)) + 10;
+                        $probability2 = (int) floor(exp(6 - $age / 20)) + 10;
 
                         $player =
                             $jsonUserAgents[
@@ -127,7 +127,7 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                             //Bad luck, bad IP, nothing to do.
                         }
 
-                        $hits = rand(0, $proba2);
+                        $hits = rand(0, $probability2);
 
                         $analytics_podcasts[] = [
                             'podcast_id' => $podcast->id,

@@ -10,6 +10,10 @@ namespace ActivityPub\Entities;
 
 use CodeIgniter\Entity\Entity;
 
+/**
+ * @property int $actor_id
+ * @property int $target_actor_id
+ */
 class Follow extends Entity
 {
     /**

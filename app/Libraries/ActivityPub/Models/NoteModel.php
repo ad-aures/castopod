@@ -17,6 +17,7 @@ use ActivityPub\Activities\CreateActivity;
 use ActivityPub\Activities\DeleteActivity;
 use ActivityPub\Activities\UndoActivity;
 use ActivityPub\Objects\TombstoneObject;
+use CodeIgniter\Database\BaseResult;
 use CodeIgniter\Events\Events;
 use CodeIgniter\HTTP\URI;
 use CodeIgniter\I18n\Time;
@@ -489,7 +490,7 @@ class NoteModel extends UuidModel
     }
 
     /**
-     * @return ActivityPub\Models\BaseResult|int|string|false
+     * @return BaseResult|int|string|false
      */
     public function reblog(Actor $actor, Note $note, $registerActivity = true)
     {

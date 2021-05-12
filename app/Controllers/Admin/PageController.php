@@ -8,11 +8,11 @@
 
 namespace App\Controllers\Admin;
 
-use App\Entities\Page as EntitiesPage;
+use App\Entities\Page;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use App\Models\PageModel;
 
-class Page extends BaseController
+class PageController extends BaseController
 {
     /**
      * @var Page|null
@@ -55,10 +55,10 @@ class Page extends BaseController
 
     function attemptCreate()
     {
-        $page = new EntitiesPage([
+        $page = new Page([
             'title' => $this->request->getPost('title'),
             'slug' => $this->request->getPost('slug'),
-            'content' => $this->request->getPost('content'),
+            'content_markdown' => $this->request->getPost('content'),
         ]);
 
         $pageModel = new PageModel();
@@ -92,7 +92,7 @@ class Page extends BaseController
     {
         $this->page->title = $this->request->getPost('title');
         $this->page->slug = $this->request->getPost('slug');
-        $this->page->content = $this->request->getPost('content');
+        $this->page->content_markdown = $this->request->getPost('content');
 
         $pageModel = new PageModel();
 

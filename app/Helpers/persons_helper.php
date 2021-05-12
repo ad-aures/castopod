@@ -6,20 +6,24 @@
  * @link       https://castopod.org/
  */
 
+use App\Entities\Person;
+use App\Entities\EpisodePerson;
+use App\Entities\PodcastPerson;
+
 if (!function_exists('construct_person_array')) {
     /**
      * Fetches persons from an episode
      *
-     * @param array    &$personsArray
+     * @param Person[]|PodcastPerson[]|EpisodePerson[] $persons
      */
-    function construct_person_array(array $persons, &$personsArray): void
+    function construct_person_array(array $persons, array &$personsArray): void
     {
         foreach ($persons as $person) {
-            if (array_key_exists($person->person->id, $personsArray)) {
-                $personsArray[$person->person->id]['roles'] .=
+            if (array_key_exists($person->id, $personsArray)) {
+                $personsArray[$person->id]['roles'] .=
                     empty($person->person_group) || empty($person->person_role)
                         ? ''
-                        : (empty($personsArray[$person->person->id]['roles'])
+                        : (empty($personsArray[$person->id]['roles'])
                                 ? ''
                                 : ', ') .
                             lang(

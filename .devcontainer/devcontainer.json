@@ -7,13 +7,17 @@
   "workspaceFolder": "/castopod-host",
   "postCreateCommand": "cron && php spark serve --host 0.0.0.0",
   "settings": {
-    "terminal.integrated.shell.linux": "/bin/bash",
+    "terminal.integrated.defaultProfile.linux": "/bin/bash",
     "editor.formatOnSave": true,
     "[php]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "phpSniffer.autoDetect": true,
-    "color-highlight.markerType": "dot-before"
+    "color-highlight.markerType": "dot-before",
+    "files.associations": {
+      "*.xml.dist": "xml",
+      "spark": "php"
+    }
   },
   "extensions": [
     "mikestead.dotenv",
@@ -28,6 +32,8 @@
     "dbaeumer.vscode-eslint",
     "stylelint.vscode-stylelint",
     "wongjn.php-sniffer",
-    "eamodio.gitlens"
+    "eamodio.gitlens",
+    "breezelin.phpstan",
+    "kasik96.latte"
   ]
 }

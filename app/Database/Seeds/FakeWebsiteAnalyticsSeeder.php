@@ -206,14 +206,14 @@ class FakeWebsiteAnalyticsSeeder extends Seeder
                     $age = floor(
                         ($date - strtotime($episode->published_at)) / 86400,
                     );
-                    $proba1 = floor(exp(3 - $age / 40)) + 1;
+                    $probability1 = (int) floor(exp(3 - $age / 40)) + 1;
 
                     for (
                         $num_line = 0;
-                        $num_line < rand(1, $proba1);
+                        $num_line < rand(1, $probability1);
                         ++$num_line
                     ) {
-                        $proba2 = floor(exp(6 - $age / 20)) + 10;
+                        $probability2 = (int) floor(exp(6 - $age / 20)) + 10;
 
                         $domain =
                             $this->domains[rand(0, count($this->domains) - 1)];
@@ -226,7 +226,7 @@ class FakeWebsiteAnalyticsSeeder extends Seeder
                                 rand(0, count($this->browsers) - 1)
                             ];
 
-                        $hits = rand(0, $proba2);
+                        $hits = rand(0, $probability2);
 
                         $website_by_browser[] = [
                             'podcast_id' => $podcast->id,

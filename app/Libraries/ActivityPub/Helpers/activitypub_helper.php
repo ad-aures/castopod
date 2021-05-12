@@ -26,7 +26,6 @@ if (!function_exists('get_webfinger_data')) {
         $webfingerUri = new URI();
         $webfingerUri->setScheme('https');
         $webfingerUri->setHost($domain);
-        isset($port) && $webfingerUri->setPort((int) $port);
         $webfingerUri->setPath('/.well-known/webfinger');
         $webfingerUri->setQuery("resource=acct:{$username}@{$domain}");
 
@@ -35,7 +34,7 @@ if (!function_exists('get_webfinger_data')) {
 
         return json_decode(
             $webfingerResponse->getBody(),
-            null,
+            false,
             512,
             JSON_THROW_ON_ERROR,
         );
@@ -106,7 +105,7 @@ if (!function_exists('accept_follow')) {
                 $targetActor->inbox_url,
                 $acceptActivity->toJSON(),
             );
-            $acceptRequest->sign($actor->key_id, $actor->private_key);
+            $acceptRequest->sign($actor->public_key_id, $actor->private_key);
             $acceptRequest->post();
         } catch (Exception $exception) {
             $db->transRollback();
@@ -119,18 +118,21 @@ if (!function_exists('accept_follow')) {
 if (!function_exists('send_activity_to_followers')) {
     /**
      * Sends an activity to all actor followers
-     *
-     * @param string $activity
      */
-    function send_activity_to_followers(Actor $actor, $activityPayload): void
-    {
+    function send_activity_to_followers(
+        Actor $actor,
+        string $activityPayload
+    ): void {
         foreach ($actor->followers as $follower) {
             try {
                 $acceptRequest = new ActivityRequest(
                     $follower->inbox_url,
                     $activityPayload,
                 );
-                $acceptRequest->sign($actor->key_id, $actor->private_key);
+                $acceptRequest->sign(
+                    $actor->public_key_id,
+                    $actor->private_key,
+                );
                 $acceptRequest->post();
             } catch (Exception $e) {
                 // log error
@@ -299,7 +301,7 @@ if (!function_exists('create_actor_from_uri')) {
         $actorResponse = $activityRequest->get();
         $actorPayload = json_decode(
             $actorResponse->getBody(),
-            null,
+            false,
             512,
             JSON_THROW_ON_ERROR,
         );
@@ -351,9 +353,9 @@ if (!function_exists('extract_text_from_html')) {
     /**
      * Extracts the text from html content
      *
-     * @return string|string[]|null
+     * @return string|null
      */
-    function extract_text_from_html(string $content)
+    function extract_text_from_html(string $content): ?string
     {
         return preg_replace('~\s+~', ' ', strip_tags($content));
     }
@@ -364,12 +366,12 @@ if (!function_exists('linkify')) {
      * Turn all link elements in clickable links.
      * Transforms urls and handles
      *
-     * @param string $value
-     * @param array  $protocols  http/https, ftp, mail, twitter
-     * @param array  $attributes
+     * @param string[] $protocols http/https, twitter
      */
-    function linkify($text, array $protocols = ['http', 'handle']): string
-    {
+    function linkify(
+        string $text,
+        array $protocols = ['http', 'handle']
+    ): string {
         $links = [];
 
         // Extract text links for each protocol

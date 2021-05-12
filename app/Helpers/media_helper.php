@@ -15,14 +15,16 @@ if (!function_exists('save_media')) {
     /**
      * Saves a file to the corresponding podcast folder in `public/media`
      *
-     * @param File|UploadedFile $filePath
+     * @param File|UploadedFile $file
      */
     function save_media(
-        File $filePath,
-        string $folder,
-        string $mediaName
+        File $file,
+        string $folder = '',
+        string $filename
     ): string {
-        $fileName = $mediaName . '.' . $filePath->getExtension();
+        if (($extension = $file->getExtension()) !== '') {
+            $filename = $filename . '.' . $extension;
+        }
 
         $mediaRoot = config('App')->mediaRoot . '/' . $folder;
 
@@ -31,10 +33,10 @@ if (!function_exists('save_media')) {
             touch($mediaRoot . '/index.html');
         }
 
-        // move to media folder and overwrite file if already existing
-        $filePath->move($mediaRoot . '/', $fileName, true);
+        // move to media folder, overwrite file if already existing
+        $file->move($mediaRoot . '/', $filename, true);
 
-        return $folder . '/' . $fileName;
+        return $folder . '/' . $filename;
     }
 }
 
@@ -107,8 +109,7 @@ if (!function_exists('media_base_url')) {
     /**
      * Return the media base URL to use in views
      *
-     * @param  string|array $uri      URI string or array of URI segments
-     * @param  string $protocol
+     * @param  string|string[] $uri      URI string or array of URI segments
      */
     function media_base_url($uri = ''): string
     {

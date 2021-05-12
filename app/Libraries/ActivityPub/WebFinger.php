@@ -64,7 +64,9 @@ class WebFinger
         if (!$parts) {
             throw new Exception('Wrong WebFinger resource pattern.');
         }
-        extract($parts);
+
+        $username = $parts['username'];
+        $domain = $parts['domain'];
 
         $this->username = $username;
         $this->domain = $domain;

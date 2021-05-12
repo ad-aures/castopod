@@ -11,7 +11,7 @@ namespace App\Controllers\Admin;
 use Config\Services;
 use App\Models\UserModel;
 
-class MyAccount extends BaseController
+class MyAccountController extends BaseController
 {
     public function index()
     {
@@ -58,7 +58,7 @@ class MyAccount extends BaseController
 
         user()->password = $this->request->getPost('new_password');
 
-        if (!$userModel->update(user()->id, user())) {
+        if (!$userModel->update(user_id(), user())) {
             return redirect()
                 ->back()
                 ->withInput()

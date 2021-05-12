@@ -36,11 +36,11 @@ class AddAnalyticsPodcastsByRegion extends Migration
                 'comment' => 'ISO 3166-2 code.',
             ],
             'latitude' => [
-                'type' => 'FLOAT',
+                'type' => 'DECIMAL',
                 'null' => true,
             ],
             'longitude' => [
-                'type' => 'FLOAT',
+                'type' => 'DECIMAL',
                 'null' => true,
             ],
             'hits' => [

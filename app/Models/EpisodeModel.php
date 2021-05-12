@@ -83,7 +83,7 @@ class EpisodeModel extends Model
         'is_blocked',
         'location_name',
         'location_geo',
-        'location_osmid',
+        'location_osm_id',
         'custom_rss',
         'favourites_total',
         'reblogs_total',
@@ -146,10 +146,11 @@ class EpisodeModel extends Model
      */
     protected $beforeDelete = ['clearCache'];
 
-    public function getEpisodeBySlug(
-        int $podcastId,
-        string $episodeSlug
-    ): ?Episode {
+    /**
+     * @param int|string $podcastId may be the id or podcast name
+     */
+    public function getEpisodeBySlug($podcastId, string $episodeSlug): ?Episode
+    {
         $cacheName = "podcast#{$podcastId}_episode-{$episodeSlug}";
         if (!($found = cache($cacheName))) {
             $builder = $this->select('episodes.*')
@@ -275,7 +276,7 @@ class EpisodeModel extends Model
      * Returns the timestamp difference in seconds between the next episode to publish and the current timestamp
      * Returns false if there's no episode to publish
      *
-     * @return int|false seconds
+     * @return int|bool seconds
      */
     public function getSecondsToNextUnpublishedEpisode(int $podcastId)
     {
@@ -290,7 +291,9 @@ class EpisodeModel extends Model
             ->get()
             ->getResultArray();
 
-        return (int) $result !== 0 ? $result[0]['timestamp_diff'] : false;
+        return count($result) !== 0
+            ? (int) $result[0]['timestamp_diff']
+            : false;
     }
 
     /**

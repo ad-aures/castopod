@@ -8,17 +8,19 @@
 
 namespace App\Controllers;
 
-use ActivityPub\Controllers\NoteController;
+use ActivityPub\Controllers\NoteController as ActivityPubNoteController;
 use ActivityPub\Entities\Note as ActivityPubNote;
 use Analytics\AnalyticsTrait;
+use App\Entities\Actor;
 use App\Entities\Note as CastopodNote;
+use App\Entities\Podcast;
 use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\URI;
 use CodeIgniter\I18n\Time;
 
-class Note extends NoteController
+class NoteController extends ActivityPubNoteController
 {
     use AnalyticsTrait;
 
@@ -26,6 +28,11 @@ class Note extends NoteController
      * @var Podcast
      */
     protected $podcast;
+
+    /**
+     * @var Actor
+     */
+    protected $actor;
 
     protected $helpers = ['auth', 'activitypub', 'svg', 'components', 'misc'];
 
@@ -52,7 +59,7 @@ class Note extends NoteController
         return $this->$method(...$params);
     }
 
-    public function index(): RedirectResponse
+    public function view(): string
     {
         // Prevent analytics hit when authenticated
         if (!can_user_interact()) {
@@ -96,7 +103,7 @@ class Note extends NoteController
         return $cachedView;
     }
 
-    public function attemptCreate()
+    public function attemptCreate(): RedirectResponse
     {
         $rules = [
             'message' => 'required|max_length[500]',
@@ -153,7 +160,7 @@ class Note extends NoteController
         return redirect()->back();
     }
 
-    public function attemptReply()
+    public function attemptReply(): RedirectResponse
     {
         $rules = [
             'message' => 'required|max_length[500]',
@@ -185,7 +192,7 @@ class Note extends NoteController
         return redirect()->back();
     }
 
-    public function attemptFavourite()
+    public function attemptFavourite(): RedirectResponse
     {
         model('FavouriteModel')->toggleFavourite(
             interact_as_actor(),
@@ -195,14 +202,14 @@ class Note extends NoteController
         return redirect()->back();
     }
 
-    public function attemptReblog()
+    public function attemptReblog(): RedirectResponse
     {
         model('NoteModel')->toggleReblog(interact_as_actor(), $this->note);
 
         return redirect()->back();
     }
 
-    public function attemptAction()
+    public function attemptAction(): RedirectResponse
     {
         $rules = [
             'action' => 'required|in_list[favourite,reblog,reply]',
@@ -215,17 +222,23 @@ class Note extends NoteController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        switch ($this->request->getPost('action')) {
+        $action = $this->request->getPost('action');
+        switch ($action) {
             case 'favourite':
                 return $this->attemptFavourite();
             case 'reblog':
                 return $this->attemptReblog();
             case 'reply':
                 return $this->attemptReply();
+            default:
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->with('errors', 'error');
         }
     }
 
-    public function remoteAction($action)
+    public function remoteAction(string $action): string
     {
         // Prevent analytics hit when authenticated
         if (!can_user_interact()) {
@@ -258,6 +271,6 @@ class Note extends NoteController
             ]);
         }
 
-        return $cachedView;
+        return (string) $cachedView;
     }
 }

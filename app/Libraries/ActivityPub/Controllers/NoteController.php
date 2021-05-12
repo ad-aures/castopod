@@ -12,8 +12,8 @@ use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use ActivityPub\Entities\Note;
-use CodeIgniter\HTTP\Exceptions\HTTPException;
 use ActivityPub\Config\ActivityPub;
+use ActivityPub\Models\NoteModel;
 use ActivityPub\Objects\OrderedCollectionObject;
 use ActivityPub\Objects\OrderedCollectionPage;
 use CodeIgniter\Controller;
@@ -27,7 +27,7 @@ class NoteController extends Controller
     protected $helpers = ['activitypub'];
 
     /**
-     * @var Note|null
+     * @var Note
      */
     protected $note;
 
@@ -41,7 +41,7 @@ class NoteController extends Controller
         $this->config = config('ActivityPub');
     }
 
-    public function _remap($method, ...$params)
+    public function _remap(string $method, string ...$params)
     {
         if (!($this->note = model('NoteModel')->getNoteById($params[0]))) {
             throw PageNotFoundException::forPageNotFound();
@@ -63,7 +63,8 @@ class NoteController extends Controller
 
     public function replies(): RedirectResponse
     {
-        // get note replies
+        /** get note replies
+         * @var NoteModel */
         $noteReplies = model('NoteModel')
             ->where(
                 'in_reply_to_id',
@@ -90,10 +91,14 @@ class NoteController extends Controller
 
             $orderedItems = [];
             $noteObjectClass = $this->config->noteObject;
-            foreach ($paginatedReplies as $reply) {
-                $replyObject = new $noteObjectClass($reply);
-                $orderedItems[] = $replyObject->toJSON();
+
+            if ($paginatedReplies !== null) {
+                foreach ($paginatedReplies as $reply) {
+                    $replyObject = new $noteObjectClass($reply);
+                    $orderedItems[] = $replyObject->toJSON();
+                }
             }
+
             $collection = new OrderedCollectionPage($pager, $orderedItems);
         }
 
@@ -102,7 +107,7 @@ class NoteController extends Controller
             ->setBody($collection->toJSON());
     }
 
-    public function attemptCreate()
+    public function attemptCreate(): RedirectResponse
     {
         $rules = [
             'actor_id' => 'required|is_natural_no_zero',
@@ -134,7 +139,7 @@ class NoteController extends Controller
         return redirect()->back();
     }
 
-    public function attemptFavourite()
+    public function attemptFavourite(): RedirectResponse
     {
         $rules = [
             'actor_id' => 'required|is_natural_no_zero',
@@ -156,7 +161,7 @@ class NoteController extends Controller
         return redirect()->back();
     }
 
-    public function attemptReblog()
+    public function attemptReblog(): RedirectResponse
     {
         $rules = [
             'actor_id' => 'required|is_natural_no_zero',
@@ -178,7 +183,7 @@ class NoteController extends Controller
         return redirect()->back();
     }
 
-    public function attemptReply()
+    public function attemptReply(): RedirectResponse
     {
         $rules = [
             'actor_id' => 'required|is_natural_no_zero',
@@ -233,13 +238,10 @@ class NoteController extends Controller
         // get webfinger data from actor
         // parse activityPub id to get actor and domain
         // check if actor and domain exist
-        try {
-            if ($parts = split_handle($this->request->getPost('handle'))) {
-                extract($parts);
-
-                $data = get_webfinger_data($username, $domain);
-            }
-        } catch (HTTPException $httpException) {
+        if (
+            !($parts = split_handle($this->request->getPost('handle'))) ||
+            !($data = get_webfinger_data($parts['username'], $parts['domain']))
+        ) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -266,21 +268,21 @@ class NoteController extends Controller
         );
     }
 
-    public function attemptBlockActor()
+    public function attemptBlockActor(): RedirectResponse
     {
         model('ActorModel')->blockActor($this->note->actor->id);
 
         return redirect()->back();
     }
 
-    public function attemptBlockDomain()
+    public function attemptBlockDomain(): RedirectResponse
     {
         model('BlockedDomainModel')->blockDomain($this->note->actor->domain);
 
         return redirect()->back();
     }
 
-    public function attemptDelete()
+    public function attemptDelete(): RedirectResponse
     {
         model('NoteModel', false)->removeNote($this->note);
 

@@ -7,8 +7,21 @@
  */
 
 use ActivityPub\Entities\Actor;
+use App\Entities\User;
 use CodeIgniter\Database\Exceptions\DataException;
 use Config\Services;
+
+if (!function_exists('user')) {
+    /**
+     * Returns the User instance for the current logged in user.
+     */
+    function user(): ?User
+    {
+        $authenticate = Services::authentication();
+        $authenticate->check();
+        return $authenticate->user();
+    }
+}
 
 if (!function_exists('set_interact_as_actor')) {
     /**

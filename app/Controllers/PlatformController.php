@@ -15,7 +15,7 @@ use CodeIgniter\Controller;
 /*
  * Provide public access to all platforms so that they can be exported
  */
-class Platform extends Controller
+class PlatformController extends Controller
 {
     public function index(): ResponseInterface
     {

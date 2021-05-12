@@ -72,9 +72,9 @@ class ActorObject extends ObjectType
     protected $icon = [];
 
     /**
-     * @var object
+     * @var array<string, string>
      */
-    protected $publicKey;
+    protected $publicKey = [];
 
     public function __construct(Actor $actor)
     {
@@ -101,10 +101,12 @@ class ActorObject extends ObjectType
             'url' => $actor->avatar_image_url,
         ];
 
-        $this->publicKey = [
-            'id' => $actor->key_id,
-            'owner' => $actor->uri,
-            'publicKeyPem' => $actor->public_key,
-        ];
+        if ($actor->public_key !== null) {
+            $this->publicKey = [
+                'id' => $actor->public_key_id,
+                'owner' => $actor->uri,
+                'publicKeyPem' => $actor->public_key,
+            ];
+        }
     }
 }

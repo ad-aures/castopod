@@ -28,8 +28,10 @@ class Analytics extends AnalyticsBase
 
     /**
      * get the full audio file url
+     *
+     * @param string|string[] $audioFilePath
      */
-    public function getAudioFileUrl(string $audioFilePath): string
+    public function getAudioFileUrl($audioFilePath): string
     {
         helper('media');
 

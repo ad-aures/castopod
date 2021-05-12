@@ -56,21 +56,21 @@ class AddEpisodesPersons extends Migration
             'podcast_id',
             'podcasts',
             'id',
-            false,
+            '',
             'CASCADE',
         );
         $this->forge->addForeignKey(
             'episode_id',
             'episodes',
             'id',
-            false,
+            '',
             'CASCADE',
         );
         $this->forge->addForeignKey(
             'person_id',
             'persons',
             'id',
-            false,
+            '',
             'CASCADE',
         );
         $this->forge->createTable('episodes_persons');

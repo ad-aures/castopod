@@ -31,7 +31,7 @@
 <meta name="twitter:card" content="player" />
 <meta property="twitter:audio:partner" content="<?= $podcast->publisher ?>" />
 <meta property="twitter:audio:artist_name" content="<?= $podcast->owner_name ?>" />
-<meta name="twitter:player" content="<?= $episode->getEmbeddablePlayer(
+<meta name="twitter:player" content="<?= $episode->getEmbeddablePlayerUrl(
     'light',
 ) ?>" />
 <meta name="twitter:player:width" content="600" />
@@ -111,13 +111,8 @@
                         ],
                     ) ?>
                 </div>
-                <?php if ($episode->location_name): ?>
-                    <?= location_link(
-                        $episode->location_name,
-                        $episode->location_geo,
-                        $episode->location_osmid,
-                        'text-sm mb-4',
-                    ) ?>
+                <?php if ($episode->location !== null): ?>
+                    <?= location_link($episode->location, 'text-sm mb-4') ?>
                 <?php endif; ?>
                 <?php if ($episodePersons): ?>
                     <div class="flex w-full space-x-2 overflow-y-auto">

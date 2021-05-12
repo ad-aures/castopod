@@ -19,15 +19,19 @@
     "podlibre/ipcat": "^v1.0",
     "podlibre/podcast-namespace": "^v1.0.6",
     "phpseclib/phpseclib": "~2.0.30",
-    "michalsn/codeigniter4-uuid": "^v1.0.0",
+    "michalsn/codeigniter4-uuid": "dev-develop",
     "essence/essence": "^3.5.4"
   },
   "require-dev": {
     "mikey179/vfsstream": "^v1.6.8",
     "phpunit/phpunit": "^9.5.1",
-    "squizlabs/php_codesniffer": "3.5.8",
+    "squizlabs/php_codesniffer": "^3.6.0",
     "rector/rector": "^0.10.17",
-    "captainhook/captainhook": "^5.9"
+    "captainhook/captainhook": "^5.9",
+    "captainhook/plugin-composer": "^5.2",
+    "phpstan/phpstan": "^0.12.85",
+    "phpstan/extension-installer": "^1.1",
+    "rector/rector-phpstan-rules": "^0.2.1"
   },
   "autoload": {
     "psr-4": {
@@ -45,6 +49,7 @@
   },
   "scripts": {
     "test": "vendor/bin/phpunit",
+    "analyse": "vendor/bin/phpstan analyse",
     "rector": "vendor/bin/rector process --dry-run --ansi",
     "rector:fix": "vendor/bin/rector process --ansi",
     "phpcs": "vendor/bin/phpcbf --standard=.phpcs.xml --encoding=utf-8 -n -p",
@@ -64,8 +69,12 @@
       "@php vendor/podlibre/podcast-namespace/src/TaxonomyGenerate.php https://raw.githubusercontent.com/Podcastindex-org/podcast-namespace/main/taxonomy-en.json >  app/Language/en/PersonsTaxonomy.php",
       "@php vendor/podlibre/podcast-namespace/src/TaxonomyGenerate.php https://raw.githubusercontent.com/Podcastindex-org/podcast-namespace/main/taxonomy-fr.json >  app/Language/fr/PersonsTaxonomy.php",
       "@php vendor/podlibre/podcast-namespace/src/ReversedTaxonomyGenerate.php https://raw.githubusercontent.com/Podcastindex-org/podcast-namespace/main/taxonomy-en.json >  vendor/podlibre/podcast-namespace/src/ReversedTaxonomy.php"
-    ],
-    "post-autoload-dump": "vendor/bin/captainhook install -f -s"
+    ]
+  },
+  "extra": {
+    "captainhook": {
+      "force-install": true
+    }
   },
   "support": {
     "source": "https://code.podlibre.org/podlibre/castopod-host.git",

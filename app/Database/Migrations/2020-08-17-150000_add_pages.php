@@ -32,7 +32,10 @@ class AddPages extends Migration
                 'constraint' => 191,
                 'unique' => true,
             ],
-            'content' => [
+            'content_markdown' => [
+                'type' => 'TEXT',
+            ],
+            'content_html' => [
                 'type' => 'TEXT',
             ],
             'created_at' => [

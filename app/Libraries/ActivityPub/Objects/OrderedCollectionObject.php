@@ -11,7 +11,6 @@
 
 namespace ActivityPub\Objects;
 
-use ActivityPub\Core\Activity;
 use CodeIgniter\Pager\Pager;
 use ActivityPub\Core\ObjectType;
 
@@ -28,17 +27,17 @@ class OrderedCollectionObject extends ObjectType
     protected $totalItems;
 
     /**
-     * @var integer|null
+     * @var string|null
      */
     protected $first;
 
     /**
-     * @var integer|null
+     * @var string|null
      */
     protected $current;
 
     /**
-     * @var integer|null
+     * @var string|null
      */
     protected $last;
 

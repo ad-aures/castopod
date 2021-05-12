@@ -10,6 +10,9 @@ namespace ActivityPub\Entities;
 
 use CodeIgniter\Entity\Entity;
 
+/**
+ * @property string $name
+ */
 class BlockedDomain extends Entity
 {
     /**

@@ -8,7 +8,10 @@
 
 namespace App\Models;
 
-class ActorModel extends \ActivityPub\Models\ActorModel
+use ActivityPub\Models\ActorModel as ActivityPubActorModel;
+use App\Entities\Actor;
+
+class ActorModel extends ActivityPubActorModel
 {
-    protected $returnType = \App\Entities\Actor::class;
+    protected $returnType = Actor::class;
 }

@@ -16,7 +16,7 @@ use App\Authorization\GroupModel;
 use App\Models\PodcastModel;
 use App\Models\UserModel;
 
-class Contributor extends BaseController
+class ContributorController extends BaseController
 {
     /**
      * @var Podcast
@@ -172,7 +172,7 @@ class Contributor extends BaseController
 
     public function remove()
     {
-        if ($this->podcast->created_by == $this->user->id) {
+        if ($this->podcast->created_by === $this->user->id) {
             return redirect()
                 ->back()
                 ->with('errors', [

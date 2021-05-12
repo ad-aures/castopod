@@ -32,10 +32,10 @@ class AddSoundbites extends Migration
                 'unsigned' => true,
             ],
             'start_time' => [
-                'type' => 'FLOAT',
+                'type' => 'DECIMAL(8,3)',
             ],
             'duration' => [
-                'type' => 'FLOAT',
+                'type' => 'DECIMAL(8,3)',
             ],
             'label' => [
                 'type' => 'VARCHAR',
@@ -67,14 +67,14 @@ class AddSoundbites extends Migration
             'podcast_id',
             'podcasts',
             'id',
-            false,
+            '',
             'CASCADE',
         );
         $this->forge->addForeignKey(
             'episode_id',
             'episodes',
             'id',
-            false,
+            '',
             'CASCADE',
         );
         $this->forge->addForeignKey('created_by', 'users', 'id');

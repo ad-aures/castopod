@@ -254,7 +254,7 @@
     'id' => 'location_name',
     'name' => 'location_name',
     'class' => 'form-input mb-4',
-    'value' => old('location_name', $podcast->location_name),
+    'value' => old('location_name', $podcast->location->name),
 ]) ?>
 <?= form_section_close() ?>
 

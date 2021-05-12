@@ -15,9 +15,9 @@ if (!function_exists('get_file_tags')) {
     /**
      * Gets audio file metadata and ID3 info
      *
-     * @param UploadedFile $file
+     * @return array<string, string|double|int>
      */
-    function get_file_tags($file): array
+    function get_file_tags(File $file): array
     {
         $getID3 = new GetID3();
         $FileInfo = $getID3->analyze($file);
@@ -34,8 +34,6 @@ if (!function_exists('get_file_tags')) {
 if (!function_exists('write_audio_file_tags')) {
     /**
      * Write audio file metadata / ID3 tags
-     *
-     * @return UploadedFile
      */
     function write_audio_file_tags(Episode $episode): void
     {
@@ -51,7 +49,7 @@ if (!function_exists('write_audio_file_tags')) {
         $tagwriter->tagformats = ['id3v2.4'];
         $tagwriter->tag_encoding = $TextEncoding;
 
-        $cover = new File($episode->image->id3_path);
+        $cover = new File(media_path($episode->image->id3_path));
 
         $APICdata = file_get_contents($cover->getRealPath());
 

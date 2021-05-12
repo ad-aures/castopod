@@ -27,14 +27,7 @@
                 : '') ?></h1>
         <p class="mb-4 font-semibold text-gray-600">@<?= $podcast->name ?></p>
         <div class="mb-2"><?= $podcast->description_html ?></div>
-        <?php if ($podcast->location_name): ?>
-            <?= location_link(
-                $podcast->location_name,
-                $podcast->location_geo,
-                $podcast->location_osmid,
-                'text-sm mb-4',
-            ) ?>
-        <?php endif; ?>
+        <?= location_link($podcast->location, 'text-sm mb-4') ?>
         <div class="mb-6 space-x-4">
             <span class="px-2 py-1 text-sm text-gray-800 bg-gray-200">
                 <?= lang(

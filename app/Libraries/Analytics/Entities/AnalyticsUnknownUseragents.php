@@ -12,6 +12,12 @@ namespace Analytics\Entities;
 
 use CodeIgniter\Entity\Entity;
 
+/**
+ * @property int $useragent
+ * @property int $hits
+ * @property Time $created_at
+ * @property Time $updated_at
+ */
 class AnalyticsUnknownUseragents extends Entity
 {
     /**

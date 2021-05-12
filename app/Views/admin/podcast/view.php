@@ -9,12 +9,7 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('headerLeft') ?>
-<?= location_link(
-    $podcast->location_name,
-    $podcast->location_geo,
-    $podcast->location_osmid,
-    'ml-4 text-sm',
-) ?>
+<?= location_link($podcast->location, 'ml-4 text-sm') ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
@@ -32,7 +27,7 @@
 
 <?= $this->section('content') ?>
 
-<?= view_cell('\App\Controllers\Admin\Podcast::latestEpisodes', [
+<?= view_cell('\App\Controllers\Admin\PodcastController::latestEpisodes', [
     'limit' => 5,
     'podcast_id' => $podcast->id,
 ]) ?>

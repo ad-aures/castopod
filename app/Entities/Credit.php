@@ -14,6 +14,19 @@ use App\Models\PodcastModel;
 use App\Models\EpisodeModel;
 use CodeIgniter\Entity\Entity;
 
+/**
+ * @property int $podcast_id
+ * @property Podcast $podcast
+ * @property int|null $episode_id
+ * @property Episode|null $episode
+ * @property string $full_name
+ * @property string $person_group
+ * @property string $group_label
+ * @property string $person_role
+ * @property string $role_label
+ * @property int $person_id
+ * @property Person $person
+ */
 class Credit extends Entity
 {
     /**
@@ -45,30 +58,57 @@ class Credit extends Entity
      * @var array<string, string>
      */
     protected $casts = [
-        'person_group' => 'string',
-        'person_role' => 'string',
-        'person_id' => 'integer',
-        'full_name' => 'integer',
         'podcast_id' => 'integer',
         'episode_id' => '?integer',
+        'person_id' => 'integer',
+        'full_name' => 'string',
+        'person_group' => 'string',
+        'person_role' => 'string',
     ];
+
+    public function getPerson(): Person
+    {
+        if ($this->person_id === null) {
+            throw new RuntimeException(
+                'Credit must have person_id before getting person.',
+            );
+        }
+
+        if ($this->person === null) {
+            $this->person = (new PersonModel())->getPersonById(
+                $this->person_id,
+            );
+        }
+
+        return $this->person;
+    }
 
     public function getPodcast(): Podcast
     {
-        return (new PodcastModel())->getPodcastById(
-            $this->attributes['podcast_id'],
-        );
+        if ($this->podcast_id === null) {
+            throw new RuntimeException(
+                'Credit must have podcast_id before getting podcast.',
+            );
+        }
+
+        if ($this->podcast === null) {
+            $this->podcast = (new PodcastModel())->getPodcastById(
+                $this->podcast_id,
+            );
+        }
+
+        return $this->podcast;
     }
 
     public function getEpisode(): ?Episode
     {
-        if (empty($this->episode_id)) {
+        if ($this->episode_id === null) {
             throw new RuntimeException(
                 'Credit must have episode_id before getting episode.',
             );
         }
 
-        if (empty($this->episode)) {
+        if ($this->episode === null) {
             $this->episode = (new EpisodeModel())->getPublishedEpisodeById(
                 $this->podcast_id,
                 $this->episode_id,
@@ -78,40 +118,23 @@ class Credit extends Entity
         return $this->episode;
     }
 
-    public function getPerson(): Person
+    public function getGroupLabel(): string
     {
-        if (empty($this->person_id)) {
-            throw new RuntimeException(
-                'Credit must have person_id before getting person.',
-            );
-        }
-
-        if (empty($this->person)) {
-            $this->person = (new PersonModel())->getPersonById(
-                $this->person_id,
-            );
-        }
-
-        return $this->person;
-    }
-
-    public function getGroupLabel(): ?string
-    {
-        if (empty($this->person_group)) {
-            return null;
+        if ($this->person_group === null) {
+            return '';
         }
 
         return lang("PersonsTaxonomy.persons.{$this->person_group}.label");
     }
 
-    public function getRoleLabel(): ?string
+    public function getRoleLabel(): string
     {
-        if (empty($this->person_group)) {
-            return null;
+        if ($this->person_group === '') {
+            return '';
         }
 
-        if (empty($this->person_role)) {
-            return null;
+        if ($this->person_role === '') {
+            return '';
         }
 
         return lang(

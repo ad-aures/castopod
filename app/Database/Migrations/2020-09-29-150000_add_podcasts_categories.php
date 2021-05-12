@@ -32,14 +32,14 @@ class AddPodcastsCategories extends Migration
             'podcast_id',
             'podcasts',
             'id',
-            false,
+            '',
             'CASCADE',
         );
         $this->forge->addForeignKey(
             'category_id',
             'categories',
             'id',
-            false,
+            '',
             'CASCADE',
         );
         $this->forge->createTable('podcasts_categories');

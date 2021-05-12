@@ -10,21 +10,26 @@ namespace App\Entities;
 
 use RuntimeException;
 use App\Models\PodcastModel;
+use Myth\Auth\Entities\User as MythAuthUser;
 
-class User extends \Myth\Auth\Entities\User
+/**
+ * @property int $id
+ * @property string $username
+ * @property string $email
+ * @property string $password
+ * @property bool $active
+ * @property bool $force_pass_reset
+ * @property int|null $podcast_id
+ * @property string|null $podcast_role
+ *
+ * @property Podcast[] $podcasts All podcasts the user is contributing to
+ */
+class User extends MythAuthUser
 {
     /**
-     * Per-user podcasts
      * @var Podcast[]
      */
     protected $podcasts = [];
-
-    /**
-     * The podcast the user is contributing to
-     *
-     * @var Podcast|null
-     */
-    protected $podcast;
 
     /**
      * Array of field names and the type of value to cast them as
@@ -36,8 +41,8 @@ class User extends \Myth\Auth\Entities\User
         'id' => 'integer',
         'active' => 'boolean',
         'force_pass_reset' => 'boolean',
-        'podcast_role' => '?string',
         'podcast_id' => '?integer',
+        'podcast_role' => '?string',
     ];
 
     /**
@@ -47,36 +52,16 @@ class User extends \Myth\Auth\Entities\User
      */
     public function getPodcasts(): array
     {
-        if (empty($this->id)) {
+        if ($this->id === null) {
             throw new RuntimeException(
                 'Users must be created before getting podcasts.',
             );
         }
 
-        if (empty($this->podcasts)) {
+        if ($this->podcasts === null) {
             $this->podcasts = (new PodcastModel())->getUserPodcasts($this->id);
         }
 
         return $this->podcasts;
-    }
-
-    /**
-     * Returns a podcast the user is contributing to
-     */
-    public function getPodcast(): Podcast
-    {
-        if (empty($this->podcast_id)) {
-            throw new RuntimeException(
-                'Podcast_id must be set before getting podcast.',
-            );
-        }
-
-        if (empty($this->podcast)) {
-            $this->podcast = (new PodcastModel())->getPodcastById(
-                $this->podcast_id,
-            );
-        }
-
-        return $this->podcast;
     }
 }

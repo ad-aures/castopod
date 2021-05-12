@@ -6,13 +6,13 @@
  * @link       https://castopod.org/
  */
 
+use CodeIgniter\HTTP\URI;
+
 if (!function_exists('host_url')) {
     /**
      * Return the host URL to use in views
-     *
-     * @return string|false
      */
-    function host_url()
+    function host_url(): ?string
     {
         if (isset($_SERVER['HTTP_HOST'])) {
             $protocol =
@@ -23,7 +23,7 @@ if (!function_exists('host_url')) {
             return $protocol . $_SERVER['HTTP_HOST'] . '/';
         }
 
-        return false;
+        return null;
     }
 }
 
@@ -43,41 +43,13 @@ if (!function_exists('current_season_url')) {
     }
 }
 
-if (!function_exists('location_url')) {
-    /**
-     * Returns URL to display from location info
-     */
-    function location_url(
-        string $locationName,
-        ?string $locationGeo = null,
-        ?string $locationOsmid = null
-    ): string {
-        if (!empty($locationOsmid)) {
-            return 'https://www.openstreetmap.org/' .
-                ['N' => 'node', 'W' => 'way', 'R' => 'relation'][
-                    substr($locationOsmid, 0, 1)
-                ] .
-                '/' .
-                substr($locationOsmid, 1);
-        }
-        if (!empty($locationGeo)) {
-            return 'https://www.openstreetmap.org/#map=17/' .
-                str_replace(',', '/', substr($locationGeo, 4));
-        }
-
-        return 'https://www.openstreetmap.org/search?query=' .
-            urlencode($locationName);
-    }
-}
 //--------------------------------------------------------------------
 
 if (!function_exists('extract_params_from_episode_uri')) {
     /**
      * Returns podcast name and episode slug from episode string uri
-     *
-     * @param URI $episodeUri
      */
-    function extract_params_from_episode_uri($episodeUri): ?array
+    function extract_params_from_episode_uri(URI $episodeUri): ?array
     {
         preg_match(
             '~@(?P<podcastName>[a-zA-Z0-9\_]{1,32})\/episodes\/(?P<episodeSlug>[a-zA-Z0-9\-]{1,191})~',

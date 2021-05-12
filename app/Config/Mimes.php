@@ -22,7 +22,7 @@ class Mimes
     /**
      * Map of extensions to mime types.
      *
-     * @var array<string, string>
+     * @var array<string, string|string[]>
      */
     public static $mimes = [
         'hqx' => [
@@ -350,23 +350,23 @@ class Mimes
 
         $proposedExtension = trim(strtolower($proposedExtension));
 
-        if ($proposedExtension !== '') {
-            if (
-                array_key_exists($proposedExtension, static::$mimes) &&
-                in_array(
-                    $type,
-                    is_string(static::$mimes[$proposedExtension])
-                        ? [static::$mimes[$proposedExtension]]
-                        : static::$mimes[$proposedExtension],
-                    true,
-                )
-            ) {
-                // The detected mime type matches with the proposed extension.
-                return $proposedExtension;
-            }
-
+        if ($proposedExtension === '') {
             // An extension was proposed, but the media type does not match the mime type list.
             return null;
+        }
+
+        if (
+            array_key_exists($proposedExtension, static::$mimes) &&
+            in_array(
+                $type,
+                is_string(static::$mimes[$proposedExtension])
+                    ? [static::$mimes[$proposedExtension]]
+                    : static::$mimes[$proposedExtension],
+                true,
+            )
+        ) {
+            // The detected mime type matches with the proposed extension.
+            return $proposedExtension;
         }
 
         // Reverse check the mime type list if no extension was proposed.

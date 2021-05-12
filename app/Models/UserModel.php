@@ -9,7 +9,9 @@
 namespace App\Models;
 
 use App\Entities\User;
-class UserModel extends \Myth\Auth\Models\UserModel
+use Myth\Auth\Models\UserModel as MythAuthUserModel;
+
+class UserModel extends MythAuthUserModel
 {
     /**
      * @var string

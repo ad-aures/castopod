@@ -8,11 +8,19 @@
 
 namespace App\Entities;
 
-use App\Libraries\Image;
-use CodeIgniter\HTTP\Files\UploadedFile;
-use CodeIgniter\Files\File;
 use CodeIgniter\Entity\Entity;
 
+/**
+ * @property int $id
+ * @property string $full_name
+ * @property string $unique_name
+ * @property string|null $information_url
+ * @property Image $image
+ * @property string $image_path
+ * @property string $image_mimetype
+ * @property int $created_by
+ * @property int $updated_by
+ */
 class Person extends Entity
 {
     /**
@@ -36,26 +44,16 @@ class Person extends Entity
 
     /**
      * Saves a picture in `public/media/persons/`
-     *
-     * @param UploadedFile|File|null $image
      */
-    public function setImage($image = null): self
+    public function setImage(Image $image): self
     {
-        if ($image !== null) {
-            helper('media');
+        helper('media');
 
-            $this->attributes['image_mimetype'] = $image->getMimeType();
-            $this->attributes['image_path'] = save_media(
-                $image,
-                'persons',
-                $this->attributes['unique_name'],
-            );
-            $this->image = new Image(
-                $this->attributes['image_path'],
-                $this->attributes['image_mimetype'],
-            );
-            $this->image->saveSizes();
-        }
+        // Save image
+        $image->saveImage('persons', $this->attributes['unique_name']);
+
+        $this->attributes['image_mimetype'] = $image->mimetype;
+        $this->attributes['image_path'] = $image->path;
 
         return $this;
     }
@@ -63,6 +61,7 @@ class Person extends Entity
     public function getImage(): Image
     {
         return new Image(
+            null,
             $this->attributes['image_path'],
             $this->attributes['image_mimetype'],
         );

@@ -25,12 +25,12 @@ class OrderedCollectionPage extends OrderedCollectionObject
     protected $partOf;
 
     /**
-     * @var integer
+     * @var string|null
      */
     protected $prev;
 
     /**
-     * @var integer
+     * @var string|null
      */
     protected $next;
 

@@ -80,25 +80,25 @@ class Images extends BaseConfig
     /**
      * @var string
      */
-    public $thumbnailExtension = '_thumbnail';
+    public $thumbnailSuffix = '_thumbnail';
 
     /**
      * @var string
      */
-    public $mediumExtension = '_medium';
+    public $mediumSuffix = '_medium';
 
     /**
      * @var string
      */
-    public $largeExtension = '_large';
+    public $largeSuffix = '_large';
 
     /**
      * @var string
      */
-    public $feedExtension = '_feed';
+    public $feedSuffix = '_feed';
 
     /**
      * @var string
      */
-    public $id3Extension = '_id3';
+    public $id3Suffix = '_id3';
 }

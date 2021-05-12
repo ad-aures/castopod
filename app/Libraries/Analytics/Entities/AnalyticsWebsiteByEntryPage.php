@@ -10,18 +10,29 @@
 
 namespace Analytics\Entities;
 
-use datetime;
 use CodeIgniter\Entity\Entity;
 
+/**
+ * @property int $podcast_id
+ * @property string $entry_page_url
+ * @property Time $date
+ * @property int $hits
+ * @property Time $created_at
+ * @property Time $updated_at
+ */
 class AnalyticsWebsiteByEntryPage extends Entity
 {
+    /**
+     * @var string[]
+     */
+    protected $dates = ['date', 'created_at', 'updated_at'];
+
     /**
      * @var array<string, string>
      */
     protected $casts = [
         'podcast_id' => 'integer',
         'entry_page_url' => 'string',
-        'date' => 'datetime',
         'hits' => 'integer',
     ];
 }

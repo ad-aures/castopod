@@ -2,7 +2,9 @@
 
 namespace App\Authorization;
 
-class PermissionModel extends \Myth\Auth\Authorization\PermissionModel
+use Myth\Auth\Authorization\PermissionModel as MythAuthPermissionModel;
+
+class PermissionModel extends MythAuthPermissionModel
 {
     /**
      * Checks to see if a user, or one of their groups,

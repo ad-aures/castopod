@@ -81,21 +81,21 @@ class AddNotes extends Migration
             'actor_id',
             'activitypub_actors',
             'id',
-            false,
+            '',
             'CASCADE',
         );
         $this->forge->addForeignKey(
             'in_reply_to_id',
             'activitypub_notes',
             'id',
-            false,
+            '',
             'CASCADE',
         );
         $this->forge->addForeignKey(
             'reblog_of_id',
             'activitypub_notes',
             'id',
-            false,
+            '',
             'CASCADE',
         );
         $this->forge->createTable('activitypub_notes');

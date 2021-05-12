@@ -97,15 +97,17 @@ class HttpSignature
             throw new Exception('Malformed signature string.');
         }
 
-        // extract parts as $keyId, $headers and $signature variables
-        extract($parts);
+        // set $keyId, $headers and $signature variables
+        $keyId = $parts['keyId'];
+        $headers = $parts['headers'];
+        $signature = $parts['signature'];
 
         // Fetch the public key linked from keyId
         $actorRequest = new ActivityRequest($keyId);
         $actorResponse = $actorRequest->get();
         $actor = json_decode(
             $actorResponse->getBody(),
-            null,
+            false,
             512,
             JSON_THROW_ON_ERROR,
         );

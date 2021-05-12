@@ -9,6 +9,7 @@
 namespace ActivityPub\Models;
 
 use ActivityPub\Entities\Activity;
+use CodeIgniter\Database\BaseResult;
 use CodeIgniter\I18n\Time;
 use DateTimeInterface;
 use Michalsn\Uuid\UuidModel;
@@ -76,7 +77,7 @@ class ActivityModel extends UuidModel
      *
      * @param Time $scheduledAt
      *
-     * @return Michalsn\Uuid\BaseResult|int|string|false
+     * @return BaseResult|int|string|false
      */
     public function newActivity(
         string $type,

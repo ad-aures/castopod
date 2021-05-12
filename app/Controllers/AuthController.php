@@ -8,11 +8,11 @@
 
 namespace App\Controllers;
 
-use Myth\Auth\Controllers\AuthController;
+use Myth\Auth\Controllers\AuthController as MythAuthController;
 use App\Entities\User;
 use CodeIgniter\HTTP\RedirectResponse;
 
-class Auth extends AuthController
+class AuthController extends MythAuthController
 {
     /**
      * An array of helpers to be automatically loaded
@@ -66,7 +66,7 @@ class Auth extends AuthController
             : $user->activate();
 
         // Ensure default group gets assigned if set
-        if (!empty($this->config->defaultUserGroup)) {
+        if ($this->config->defaultUserGroup !== null) {
             $users = $users->withGroup($this->config->defaultUserGroup);
         }
 
@@ -151,7 +151,7 @@ class Auth extends AuthController
 
         // Reset token still valid?
         if (
-            !empty($user->reset_expires) &&
+            $user->reset_expires !== null &&
             time() > $user->reset_expires->getTimestamp()
         ) {
             return redirect()

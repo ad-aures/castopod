@@ -10,7 +10,7 @@ namespace App\Controllers;
 
 use App\Models\PodcastModel;
 
-class Home extends BaseController
+class HomeController extends BaseController
 {
     /**
      * @return mixed

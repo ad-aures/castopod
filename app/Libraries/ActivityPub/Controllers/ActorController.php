@@ -8,15 +8,14 @@
 
 namespace ActivityPub\Controllers;
 
-use ActivityPub\Entities\Actor;
 use ActivityPub\Config\ActivityPub;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use ActivityPub\Entities\Note;
-use CodeIgniter\HTTP\Exceptions\HTTPException;
 use ActivityPub\Objects\OrderedCollectionObject;
 use ActivityPub\Objects\OrderedCollectionPage;
+use App\Entities\Actor;
 use CodeIgniter\Controller;
 use CodeIgniter\I18n\Time;
 
@@ -325,13 +324,10 @@ class ActorController extends Controller
         // parse activityPub id to get actor and domain
         // check if actor and domain exist
 
-        try {
-            if ($parts = split_handle($this->request->getPost('handle'))) {
-                extract($parts);
-
-                $data = get_webfinger_data($username, $domain);
-            }
-        } catch (HTTPException $httpException) {
+        if (
+            !($parts = split_handle($this->request->getPost('handle'))) ||
+            !($data = get_webfinger_data($parts['username'], $parts['domain']))
+        ) {
             return redirect()
                 ->back()
                 ->withInput()

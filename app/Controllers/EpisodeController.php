@@ -9,12 +9,14 @@
 namespace App\Controllers;
 
 use Analytics\AnalyticsTrait;
+use App\Entities\Episode;
+use App\Entities\Podcast;
 use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use SimpleXMLElement;
 
-class Episode extends BaseController
+class EpisodeController extends BaseController
 {
     use AnalyticsTrait;
 
@@ -162,7 +164,7 @@ class Episode extends BaseController
             'author_url' => $this->podcast->link,
             'html' =>
                 '<iframe src="' .
-                $this->episode->embeddable_player .
+                $this->episode->embeddable_player_url .
                 '" width="100%" height="200" frameborder="0" scrolling="no"></iframe>',
             'width' => 600,
             'height' => 200,
@@ -192,12 +194,12 @@ class Episode extends BaseController
             'html',
             htmlentities(
                 '<iframe src="' .
-                    $this->episode->embeddable_player .
+                    $this->episode->embeddable_player_url .
                     '" width="100%" height="200" frameborder="0" scrolling="no"></iframe>',
             ),
         );
-        $oembed->addChild('width', 600);
-        $oembed->addChild('height', 200);
+        $oembed->addChild('width', '600');
+        $oembed->addChild('height', '200');
 
         return $this->response->setXML($oembed);
     }

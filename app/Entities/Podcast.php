@@ -8,7 +8,6 @@
 
 namespace App\Entities;
 
-use App\Libraries\Image;
 use App\Libraries\SimpleRSSElement;
 use App\Models\CategoryModel;
 use App\Models\EpisodeModel;
@@ -16,11 +15,66 @@ use App\Models\PlatformModel;
 use App\Models\PodcastPersonModel;
 use CodeIgniter\Entity\Entity;
 use App\Models\UserModel;
-use CodeIgniter\Files\File;
-use CodeIgniter\HTTP\Files\UploadedFile;
+use CodeIgniter\I18n\Time;
 use League\CommonMark\CommonMarkConverter;
 use RuntimeException;
 
+/**
+ * @property int $id
+ * @property int $actor_id
+ * @property Actor $actor
+ * @property string $name
+ * @property string $link
+ * @property string $feed_url
+ * @property string $title
+ * @property string $description Holds text only description, striped of any markdown or html special characters
+ * @property string $description_markdown
+ * @property  string $description_html
+ * @property Image $image
+ * @property string $image_path
+ * @property string $image_mimetype
+ * @property string $language_code
+ * @property int $category_id
+ * @property Category $category
+ * @property int[] $other_categories_ids
+ * @property Category[] $other_categories
+ * @property string|null $parental_advisory
+ * @property string|null $publisher
+ * @property string $owner_name
+ * @property string $owner_email
+ * @property string $type
+ * @property string|null $copyright
+ * @property string|null $episode_description_footer_markdown
+ * @property string|null $episode_description_footer_html
+ * @property bool $is_blocked
+ * @property bool $is_completed
+ * @property bool $is_locked
+ * @property string|null $imported_feed_url
+ * @property string|null $new_feed_url
+ * @property Location $location
+ * @property string|null $location_name
+ * @property string|null $location_geo
+ * @property string|null $location_osm_id
+ * @property string|null $payment_pointer
+ * @property array|null $custom_rss
+ * @property string $custom_rss_string
+ * @property string|null $partner_id
+ * @property string|null $partner_link_url
+ * @property string|null $partner_image_url
+ * @property int $created_by
+ * @property int $updated_by
+ * @property Time $created_at;
+ * @property Time $updated_at;
+ * @property Time|null $deleted_at;
+ *
+ * @property Episode[] $episodes
+ * @property PodcastPerson[] $persons
+ * @property User[] $contributors
+ * @property Platform[] $podcasting_platforms
+ * @property Platform[] $social_platforms
+ * @property Platform[] $funding_platforms
+ *
+ */
 class Podcast extends Entity
 {
     /**
@@ -39,14 +93,9 @@ class Podcast extends Entity
     protected $image;
 
     /**
-     * @var Episode[]
+     * @var string
      */
-    protected $episodes;
-
-    /**
-     * @var PodcastPerson[]
-     */
-    protected $persons;
+    protected $description;
 
     /**
      * @var Category
@@ -59,9 +108,19 @@ class Podcast extends Entity
     protected $other_categories;
 
     /**
-     * @var integer[]
+     * @var string[]
      */
     protected $other_categories_ids;
+
+    /**
+     * @var Episode[]
+     */
+    protected $episodes;
+
+    /**
+     * @var PodcastPerson[]
+     */
+    protected $persons;
 
     /**
      * @var User[]
@@ -69,34 +128,33 @@ class Podcast extends Entity
     protected $contributors;
 
     /**
-     * @var Platform
+     * @var Platform[]
      */
-    protected $podcastingPlatforms;
+    protected $podcasting_platforms;
 
     /**
-     * @var Platform
+     * @var Platform[]
      */
-    protected $socialPlatforms;
+    protected $social_platforms;
 
     /**
-     * @var Platform
+     * @var Platform[]
      */
-    protected $fundingPlatforms;
+    protected $funding_platforms;
 
     /**
-     * Holds text only description, striped of any markdown or html special characters
-     *
-     * @var string
+     * @var Location|null
      */
-    protected $description;
+    protected $location;
 
     /**
-     * Return custom rss as string
-     *
      * @var string
      */
     protected $custom_rss_string;
 
+    /**
+     * @var array<string, string>
+     */
     protected $casts = [
         'id' => 'integer',
         'actor_id' => 'integer',
@@ -123,7 +181,7 @@ class Podcast extends Entity
         'new_feed_url' => '?string',
         'location_name' => '?string',
         'location_geo' => '?string',
-        'location_osmid' => '?string',
+        'location_osm_id' => '?string',
         'payment_pointer' => '?string',
         'custom_rss' => '?json-array',
         'partner_id' => '?string',
@@ -133,20 +191,15 @@ class Podcast extends Entity
         'updated_by' => 'integer',
     ];
 
-    /**
-     * Returns the podcast actor
-     *
-     * @return Actor
-     */
     public function getActor(): Actor
     {
-        if (!$this->attributes['actor_id']) {
+        if (!$this->actor_id) {
             throw new RuntimeException(
                 'Podcast must have an actor_id before getting actor.',
             );
         }
 
-        if (empty($this->actor)) {
+        if ($this->actor === null) {
             $this->actor = model('ActorModel')->getActorById($this->actor_id);
         }
 
@@ -156,36 +209,22 @@ class Podcast extends Entity
     /**
      * Saves a cover image to the corresponding podcast folder in `public/media/podcast_name/`
      *
-     * @param UploadedFile|File $image
+     * @param Image $image
      */
-    public function setImage($image = null): self
+    public function setImage($image): self
     {
-        if ($image) {
-            helper('media');
+        // Save image
+        $image->saveImage('podcasts/' . $this->attributes['name'], 'cover');
 
-            $this->attributes['image_mimetype'] = $image->getMimeType();
-            $this->attributes['image_path'] = save_media(
-                $image,
-                'podcasts/' . $this->attributes['name'],
-                'cover',
-            );
-
-            $this->image = new Image(
-                $this->attributes['image_path'],
-                $this->attributes['image_mimetype'],
-            );
-            $this->image->saveSizes();
-        }
+        $this->attributes['image_mimetype'] = $image->mimetype;
+        $this->attributes['image_path'] = $image->path;
 
         return $this;
     }
 
     public function getImage(): Image
     {
-        return new Image(
-            $this->attributes['image_path'],
-            $this->attributes['image_mimetype'],
-        );
+        return new Image(null, $this->image_path, $this->image_mimetype);
     }
 
     public function getLink(): string
@@ -350,14 +389,14 @@ class Podcast extends Entity
             );
         }
 
-        if (empty($this->podcastingPlatforms)) {
-            $this->podcastingPlatforms = (new PlatformModel())->getPodcastPlatforms(
+        if (empty($this->podcasting_platforms)) {
+            $this->podcasting_platforms = (new PlatformModel())->getPodcastPlatforms(
                 $this->id,
                 'podcasting',
             );
         }
 
-        return $this->podcastingPlatforms;
+        return $this->podcasting_platforms;
     }
 
     /**
@@ -373,14 +412,14 @@ class Podcast extends Entity
             );
         }
 
-        if (empty($this->socialPlatforms)) {
-            $this->socialPlatforms = (new PlatformModel())->getPodcastPlatforms(
+        if (empty($this->social_platforms)) {
+            $this->social_platforms = (new PlatformModel())->getPodcastPlatforms(
                 $this->id,
                 'social',
             );
         }
 
-        return $this->socialPlatforms;
+        return $this->social_platforms;
     }
 
     /**
@@ -396,14 +435,14 @@ class Podcast extends Entity
             );
         }
 
-        if (empty($this->fundingPlatforms)) {
-            $this->fundingPlatforms = (new PlatformModel())->getPodcastPlatforms(
+        if (empty($this->funding_platforms)) {
+            $this->funding_platforms = (new PlatformModel())->getPodcastPlatforms(
                 $this->id,
                 'funding',
             );
         }
 
-        return $this->fundingPlatforms;
+        return $this->funding_platforms;
     }
 
     /**
@@ -444,27 +483,48 @@ class Podcast extends Entity
     /**
      * Saves the location name and fetches OpenStreetMap info
      */
-    public function setLocation(?string $locationName = null): self
+    public function setLocation(?string $newLocationName = null)
     {
-        helper('location');
-
-        if (
-            $locationName &&
-            (empty($this->attributes['location_name']) ||
-                $this->attributes['location_name'] != $locationName)
-        ) {
-            $this->attributes['location_name'] = $locationName;
-            if ($location = fetch_osm_location($locationName)) {
-                $this->attributes['location_geo'] = $location['geo'];
-                $this->attributes['location_osmid'] = $location['osmid'];
-            }
-        } elseif (empty($locationName)) {
+        if ($newLocationName === null) {
             $this->attributes['location_name'] = null;
             $this->attributes['location_geo'] = null;
-            $this->attributes['location_osmid'] = null;
+            $this->attributes['location_osm_id'] = null;
+        }
+
+        helper('location');
+
+        $oldLocationName = $this->attributes['location_name'];
+
+        if (
+            $oldLocationName === null ||
+            $oldLocationName !== $newLocationName
+        ) {
+            $this->attributes['location_name'] = $newLocationName;
+
+            if ($location = fetch_osm_location($newLocationName)) {
+                $this->attributes['location_geo'] = $location['geo'];
+                $this->attributes['location_osm_id'] = $location['osm_id'];
+            }
         }
 
         return $this;
+    }
+
+    public function getLocation(): ?Location
+    {
+        if ($this->location_name === null) {
+            return null;
+        }
+
+        if ($this->location === null) {
+            $this->location = new Location([
+                'name' => $this->location_name,
+                'geo' => $this->location_geo,
+                'osm_id' => $this->location_osm_id,
+            ]);
+        }
+
+        return $this->location;
     }
 
     /**

@@ -9,8 +9,20 @@
 namespace App\Entities;
 
 use CodeIgniter\Entity\Entity;
+use CodeIgniter\I18n\Time;
 use League\CommonMark\CommonMarkConverter;
 
+/**
+ * @property int $id
+ * @property string $title
+ * @property string $link
+ * @property string $slug
+ * @property string $content_markdown
+ * @property string $content_html
+ * @property Time $created_at
+ * @property Time $updated_at
+ * @property Time|null $delete_at
+ */
 class Page extends Entity
 {
     /**
@@ -30,21 +42,27 @@ class Page extends Entity
         'id' => 'integer',
         'title' => 'string',
         'slug' => 'string',
-        'content' => 'string',
+        'content_markdown' => 'string',
+        'content_html' => 'string',
     ];
 
-    public function getLink()
+    public function getLink(): string
     {
         return url_to('page', $this->attributes['slug']);
     }
 
-    public function getContentHtml(): string
+    public function setContentMarkdown(string $contentMarkdown): self
     {
         $converter = new CommonMarkConverter([
             'html_input' => 'strip',
             'allow_unsafe_links' => false,
         ]);
 
-        return $converter->convertToHtml($this->attributes['content']);
+        $this->attributes['content_markdown'] = $contentMarkdown;
+        $this->attributes['content_html'] = $converter->convertToHtml(
+            $contentMarkdown,
+        );
+
+        return $this;
     }
 }

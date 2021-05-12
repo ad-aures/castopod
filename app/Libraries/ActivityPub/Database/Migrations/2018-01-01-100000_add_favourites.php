@@ -35,14 +35,14 @@ class AddFavourites extends Migration
             'actor_id',
             'activitypub_actors',
             'id',
-            false,
+            '',
             'CASCADE',
         );
         $this->forge->addForeignKey(
             'note_id',
             'activitypub_notes',
             'id',
-            false,
+            '',
             'CASCADE',
         );
         $this->forge->createTable('activitypub_favourites');

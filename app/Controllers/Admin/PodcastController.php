@@ -8,23 +8,30 @@
 
 namespace App\Controllers\Admin;
 
-use App\Entities\Podcast as EntitiesPodcast;
+use App\Entities\Image;
+use App\Entities\Podcast;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use Config\Database;
 use App\Models\CategoryModel;
 use App\Models\LanguageModel;
 use App\Models\PodcastModel;
 use App\Models\EpisodeModel;
+use CodeIgniter\HTTP\RedirectResponse;
 use Config\Services;
 
-class Podcast extends BaseController
+class PodcastController extends BaseController
 {
     /**
-     * @var Podcast|null
+     * @var Podcast
      */
     protected $podcast;
 
-    public function _remap($method, ...$params)
+    /**
+     *
+     * @param array<string> $params
+     * @return static|string
+     */
+    public function _remap(string $method, ...$params)
     {
         if (count($params) === 0) {
             return $this->$method();
@@ -37,11 +44,13 @@ class Podcast extends BaseController
         throw PageNotFoundException::forPageNotFound();
     }
 
-    public function list()
+    public function list(): string
     {
         if (!has_permission('podcasts-list')) {
             $data = [
-                'podcasts' => (new PodcastModel())->getUserPodcasts(user()->id),
+                'podcasts' => (new PodcastModel())->getUserPodcasts(
+                    (int) user_id(),
+                ),
             ];
         } else {
             $data = ['podcasts' => (new PodcastModel())->findAll()];
@@ -50,7 +59,7 @@ class Podcast extends BaseController
         return view('admin/podcast/list', $data);
     }
 
-    public function view()
+    public function view(): string
     {
         $data = ['podcast' => $this->podcast];
 
@@ -58,7 +67,7 @@ class Podcast extends BaseController
         return view('admin/podcast/view', $data);
     }
 
-    public function viewAnalytics()
+    public function viewAnalytics(): string
     {
         $data = ['podcast' => $this->podcast];
 
@@ -66,7 +75,7 @@ class Podcast extends BaseController
         return view('admin/podcast/analytics/index', $data);
     }
 
-    public function viewAnalyticsWebpages()
+    public function viewAnalyticsWebpages(): string
     {
         $data = ['podcast' => $this->podcast];
 
@@ -74,7 +83,7 @@ class Podcast extends BaseController
         return view('admin/podcast/analytics/webpages', $data);
     }
 
-    public function viewAnalyticsLocations()
+    public function viewAnalyticsLocations(): string
     {
         $data = ['podcast' => $this->podcast];
 
@@ -82,7 +91,7 @@ class Podcast extends BaseController
         return view('admin/podcast/analytics/locations', $data);
     }
 
-    public function viewAnalyticsUniqueListeners()
+    public function viewAnalyticsUniqueListeners(): string
     {
         $data = ['podcast' => $this->podcast];
 
@@ -90,7 +99,7 @@ class Podcast extends BaseController
         return view('admin/podcast/analytics/unique_listeners', $data);
     }
 
-    public function viewAnalyticsListeningTime()
+    public function viewAnalyticsListeningTime(): string
     {
         $data = ['podcast' => $this->podcast];
 
@@ -98,7 +107,7 @@ class Podcast extends BaseController
         return view('admin/podcast/analytics/listening_time', $data);
     }
 
-    public function viewAnalyticsTimePeriods()
+    public function viewAnalyticsTimePeriods(): string
     {
         $data = ['podcast' => $this->podcast];
 
@@ -106,7 +115,7 @@ class Podcast extends BaseController
         return view('admin/podcast/analytics/time_periods', $data);
     }
 
-    public function viewAnalyticsPlayers()
+    public function viewAnalyticsPlayers(): string
     {
         $data = ['podcast' => $this->podcast];
 
@@ -114,7 +123,7 @@ class Podcast extends BaseController
         return view('admin/podcast/analytics/players', $data);
     }
 
-    public function create()
+    public function create(): string
     {
         helper(['form', 'misc']);
 
@@ -132,7 +141,7 @@ class Podcast extends BaseController
         return view('admin/podcast/create', $data);
     }
 
-    public function attemptCreate()
+    public function attemptCreate(): RedirectResponse
     {
         $rules = [
             'image' =>
@@ -146,11 +155,11 @@ class Podcast extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $podcast = new EntitiesPodcast([
+        $podcast = new Podcast([
             'title' => $this->request->getPost('title'),
             'name' => $this->request->getPost('name'),
             'description_markdown' => $this->request->getPost('description'),
-            'image' => $this->request->getFile('image'),
+            'image' => new Image($this->request->getFile('image')),
             'language_code' => $this->request->getPost('language'),
             'category_id' => $this->request->getPost('category'),
             'parental_advisory' =>
@@ -171,8 +180,8 @@ class Podcast extends BaseController
             'is_blocked' => $this->request->getPost('block') === 'yes',
             'is_completed' => $this->request->getPost('complete') === 'yes',
             'is_locked' => $this->request->getPost('lock') === 'yes',
-            'created_by' => user()->id,
-            'updated_by' => user()->id,
+            'created_by' => user_id(),
+            'updated_by' => user_id(),
         ]);
 
         $podcastModel = new PodcastModel();
@@ -192,14 +201,14 @@ class Podcast extends BaseController
         $podcastAdminGroup = $authorize->group('podcast_admin');
 
         $podcastModel->addPodcastContributor(
-            user()->id,
+            user_id(),
             $newPodcastId,
             $podcastAdminGroup->id,
         );
 
         // set Podcast categories
         (new CategoryModel())->setPodcastCategories(
-            $newPodcastId,
+            (int) $newPodcastId,
             $this->request->getPost('other_categories'),
         );
 
@@ -212,7 +221,7 @@ class Podcast extends BaseController
         return redirect()->route('podcast-view', [$newPodcastId]);
     }
 
-    public function edit()
+    public function edit(): string
     {
         helper('form');
 
@@ -229,7 +238,7 @@ class Podcast extends BaseController
         return view('admin/podcast/edit', $data);
     }
 
-    public function attemptEdit()
+    public function attemptEdit(): RedirectResponse
     {
         $rules = [
             'image' =>
@@ -249,8 +258,8 @@ class Podcast extends BaseController
         );
 
         $image = $this->request->getFile('image');
-        if ($image->isValid()) {
-            $this->podcast->image = $image;
+        if ($image !== null && $image->isValid()) {
+            $this->podcast->image = new Image($image);
         }
         $this->podcast->language_code = $this->request->getPost('language');
         $this->podcast->category_id = $this->request->getPost('category');
@@ -281,7 +290,7 @@ class Podcast extends BaseController
         $this->podcast->is_completed =
             $this->request->getPost('complete') === 'yes';
         $this->podcast->is_locked = $this->request->getPost('lock') === 'yes';
-        $this->podcast->updated_by = user()->id;
+        $this->podcast->updated_by = (int) user_id();
 
         $db = Database::connect();
         $db->transStart();
@@ -306,7 +315,7 @@ class Podcast extends BaseController
         return redirect()->route('podcast-view', [$this->podcast->id]);
     }
 
-    public function latestEpisodes(int $limit, int $podcast_id)
+    public function latestEpisodes(int $limit, int $podcast_id): string
     {
         $episodes = (new EpisodeModel())
             ->where('podcast_id', $podcast_id)
@@ -316,7 +325,7 @@ class Podcast extends BaseController
         return view('admin/podcast/latest_episodes', ['episodes' => $episodes]);
     }
 
-    public function delete()
+    public function delete(): RedirectResponse
     {
         (new PodcastModel())->delete($this->podcast->id);
 

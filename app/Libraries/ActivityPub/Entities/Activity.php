@@ -11,27 +11,41 @@ namespace ActivityPub\Entities;
 use RuntimeException;
 use Michalsn\Uuid\UuidEntity;
 
+/**
+ * @property string $id
+ * @property int $actor_id
+ * @property Actor $actor
+ * @property int|null $target_actor_id
+ * @property Actor|null $target_actor
+ * @property string|null $note_id
+ * @property Note|null $note
+ * @property string $type
+ * @property object $payload
+ * @property string|null $status
+ * @property Time|null $scheduled_at
+ * @property Time $created_at
+ */
 class Activity extends UuidEntity
 {
-    /**
-     * @var string[]
-     */
-    protected $uuids = ['id', 'note_id'];
-
     /**
      * @var Actor
      */
     protected $actor;
 
     /**
-     * @var Actor
+     * @var Actor|null
      */
     protected $target_actor;
 
     /**
-     * @var Note
+     * @var Note|null
      */
     protected $note;
+
+    /**
+     * @var string[]
+     */
+    protected $uuids = ['id', 'note_id'];
 
     /**
      * @var string[]

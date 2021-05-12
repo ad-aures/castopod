@@ -84,12 +84,10 @@ class EpisodePersonModel extends Model
     /**
      * Add persons to episode
      *
-     * @param int podcastId
-     *
      * @return bool|int Number of rows inserted or FALSE on failure
      */
     public function addEpisodePersons(
-        $podcastId,
+        int $podcastId,
         int $episodeId,
         array $persons,
         array $groups_roles

@@ -142,7 +142,7 @@ class AddPodcasts extends Migration
                 'constraint' => 32,
                 'null' => true,
             ],
-            'location_osmid' => [
+            'location_osm_id' => [
                 'type' => 'VARCHAR',
                 'constraint' => 12,
                 'null' => true,
@@ -194,7 +194,7 @@ class AddPodcasts extends Migration
             'actor_id',
             'activitypub_actors',
             'id',
-            false,
+            '',
             'CASCADE',
         );
         $this->forge->addForeignKey('category_id', 'categories', 'id');

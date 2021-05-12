@@ -10,11 +10,11 @@ namespace App\Controllers\Admin;
 
 use CodeIgniter\Exceptions\PageNotFoundException;
 use App\Authorization\GroupModel;
-use App\Entities\User as EntitiesUser;
+use App\Entities\User;
 use App\Models\UserModel;
 use Config\Services;
 
-class User extends BaseController
+class UserController extends BaseController
 {
     /**
      * @var User|null
@@ -82,7 +82,7 @@ class User extends BaseController
         }
 
         // Save the user
-        $user = new EntitiesUser($this->request->getPost());
+        $user = new User($this->request->getPost());
 
         // Activate user
         $user->activate();

@@ -307,13 +307,14 @@ class AuthSeeder extends Seeder
     /**
      * @param array<string, string|int>[] $dataGroups
      */
-    static function getGroupIdByName(string $name, array $dataGroups): int
+    static function getGroupIdByName(string $name, array $dataGroups): ?int
     {
         foreach ($dataGroups as $group) {
             if ($group['name'] === $name) {
                 return $group['id'];
             }
         }
+
         return null;
     }
 }

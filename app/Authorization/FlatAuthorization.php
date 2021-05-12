@@ -2,8 +2,19 @@
 
 namespace App\Authorization;
 
-class FlatAuthorization extends \Myth\Auth\Authorization\FlatAuthorization
+use Myth\Auth\Authorization\FlatAuthorization as MythAuthFlatAuthorization;
+
+class FlatAuthorization extends MythAuthFlatAuthorization
 {
+    /**
+     * The group model to use. Usually the class noted
+     * below (or an extension thereof) but can be any
+     * compatible CodeIgniter Model.
+     *
+     * @var PermissionModel
+     */
+    protected $permissionModel;
+
     /**
      * Checks a group to see if they have the specified permission.
      *
@@ -18,7 +29,7 @@ class FlatAuthorization extends \Myth\Auth\Authorization\FlatAuthorization
             return false;
         }
 
-        return (bool) $this->permissionModel->doesGroupHavePermission(
+        return $this->permissionModel->doesGroupHavePermission(
             $groupId,
             $permissionId,
         );
@@ -27,14 +38,14 @@ class FlatAuthorization extends \Myth\Auth\Authorization\FlatAuthorization
     /**
      * Makes user part of given groups.
      *
-     * @param array $groups Either collection of ID or names
+     * @param array<string, string> $groups Either collection of ID or names
      */
     public function setUserGroups(int $userId, array $groups = []): bool
     {
         // remove user from all groups before resetting it in new groups
         $this->groupModel->removeUserFromAllGroups($userId);
 
-        if ($groups = []) {
+        if ($groups === []) {
             return true;
         }
 
