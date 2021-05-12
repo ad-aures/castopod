@@ -41,11 +41,6 @@ before_script:
   - php composer.phar install --prefer-dist --no-ansi --no-interaction --no-progress --ignore-platform-reqs
   - npm install
 
-commit-message:
-  stage: init
-  script:
-    - npx commitlint CI_COMMIT_MESSAGE
-
 tests:
   stage: quality
   script:
