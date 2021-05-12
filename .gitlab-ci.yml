@@ -71,6 +71,9 @@ release_app:
     # IMPORTANT: delete local git tags before release to prevent eventual script failure (ie. tag already exists)
     - git tag | xargs git tag -d
 
+    # IMPORTANT: no need to run git hooks, just remove them
+    - rm -rf ./.git/hooks
+
     # run semantic-release script (configured in `.releaserc.json` file)
     - npm run release
   only:
