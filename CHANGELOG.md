@@ -1,3 +1,10 @@
+# [1.0.0-alpha.57](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.56...v1.0.0-alpha.57) (2021-05-12)
+
+
+### Bug Fixes
+
+* **follow:** add missing helpers to Actor controller ([ee53a73](https://code.podlibre.org/podlibre/castopod-host/commit/ee53a732dc12ebbf5706e14969749a12cfd9d559))
+
 # [1.0.0-alpha.56](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.55...v1.0.0-alpha.56) (2021-05-12)
 
 
