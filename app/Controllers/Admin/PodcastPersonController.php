@@ -8,9 +8,9 @@
 
 namespace App\Controllers\Admin;
 
+use CodeIgniter\HTTP\RedirectResponse;
 use App\Entities\Podcast;
 use CodeIgniter\Exceptions\PageNotFoundException;
-use App\Models\PodcastPersonModel;
 use App\Models\PodcastModel;
 use App\Models\PersonModel;
 
@@ -21,13 +21,17 @@ class PodcastPersonController extends BaseController
      */
     protected $podcast;
 
-    public function _remap($method, ...$params)
+    public function _remap(string $method, string ...$params): mixed
     {
         if (count($params) === 0) {
             throw PageNotFoundException::forPageNotFound();
         }
 
-        if ($this->podcast = (new PodcastModel())->getPodcastById($params[0])) {
+        if (
+            ($this->podcast = (new PodcastModel())->getPodcastById(
+                (int) $params[0],
+            )) !== null
+        ) {
             unset($params[0]);
             return $this->$method(...$params);
         }
@@ -35,13 +39,13 @@ class PodcastPersonController extends BaseController
         throw PageNotFoundException::forPageNotFound();
     }
 
-    public function index()
+    public function index(): string
     {
         helper('form');
 
         $data = [
             'podcast' => $this->podcast,
-            'podcastPersons' => (new PodcastPersonModel())->getPodcastPersons(
+            'podcastPersons' => (new PersonModel())->getPodcastPersons(
                 $this->podcast->id,
             ),
             'personOptions' => (new PersonModel())->getPersonOptions(),
@@ -53,7 +57,7 @@ class PodcastPersonController extends BaseController
         return view('admin/podcast/person', $data);
     }
 
-    public function attemptAdd()
+    public function attemptAdd(): RedirectResponse
     {
         $rules = [
             'person' => 'required',
@@ -66,7 +70,7 @@ class PodcastPersonController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        (new PodcastPersonModel())->addPodcastPersons(
+        (new PersonModel())->addPodcastPersons(
             $this->podcast->id,
             $this->request->getPost('person'),
             $this->request->getPost('person_group_role'),
@@ -75,9 +79,9 @@ class PodcastPersonController extends BaseController
         return redirect()->back();
     }
 
-    public function remove($podcastPersonId)
+    public function remove(int $podcastPersonId): RedirectResponse
     {
-        (new PodcastPersonModel())->removePodcastPersons(
+        (new PersonModel())->removePodcastPersons(
             $this->podcast->id,
             $podcastPersonId,
         );

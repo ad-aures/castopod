@@ -9,6 +9,7 @@
 namespace App\Models;
 
 use App\Entities\Category;
+use CodeIgniter\Database\Exceptions\DataException;
 use CodeIgniter\Model;
 
 class CategoryModel extends Model
@@ -46,12 +47,15 @@ class CategoryModel extends Model
      */
     protected $useTimestamps = false;
 
-    public function getCategoryById($id): ?Category
+    public function getCategoryById(int $id): ?Category
     {
         return $this->find($id);
     }
 
-    public function getCategoryOptions()
+    /**
+     * @return array<int, string>
+     */
+    public function getCategoryOptions(): array
     {
         $locale = service('request')->getLocale();
         $cacheName = "category_options_{$locale}";
@@ -61,7 +65,7 @@ class CategoryModel extends Model
 
             $options = array_reduce(
                 $categories,
-                function ($result, $category) {
+                function (array $result, Category $category): array {
                     $result[$category->id] = lang(
                         'Podcast.category_options.' . $category->code,
                     );
@@ -79,9 +83,11 @@ class CategoryModel extends Model
     /**
      * Sets categories for a given podcast
      *
-     * @return int|bool Number of rows inserted or FALSE on failure
+     * @param int[] $categories
+     * 
+     * @return int|false Number of rows inserted or FALSE on failure
      */
-    public function setPodcastCategories(int $podcastId, ?array $categories)
+    public function setPodcastCategories(int $podcastId, array $categories): int|false
     {
         cache()->delete("podcast#{$podcastId}_categories");
 
@@ -98,7 +104,7 @@ class CategoryModel extends Model
         // prepare data for `podcasts_categories` table
         $data = array_reduce(
             $categories,
-            function ($result, $categoryId) use ($podcastId) {
+            function (array $result, int $categoryId) use ($podcastId): array {
                 $result[] = [
                     'podcast_id' => $podcastId,
                     'category_id' => $categoryId,

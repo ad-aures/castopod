@@ -38,10 +38,7 @@ class NoteObject extends ObjectType
      */
     protected $replies;
 
-    /**
-     * @param Note $note
-     */
-    public function __construct($note)
+    public function __construct(Note $note)
     {
         $this->id = $note->uri;
 

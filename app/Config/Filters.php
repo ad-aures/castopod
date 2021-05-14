@@ -17,7 +17,7 @@ class Filters extends BaseConfig
      * Configures aliases for Filter classes to
      * make reading things nicer and simpler.
      *
-     * @var array
+     * @var array<string, string>
      */
     public $aliases = [
         'csrf' => CSRF::class,
@@ -33,7 +33,7 @@ class Filters extends BaseConfig
      * List of filter aliases that are always
      * applied before and after every request.
      *
-     * @var array
+     * @var array<string, string[]>
      */
     public $globals = [
         'before' => [
@@ -53,7 +53,7 @@ class Filters extends BaseConfig
      * Example:
      * 'post' => ['csrf', 'throttle']
      *
-     * @var array
+     * @var array<string, string[]>
      */
     public $methods = [];
 
@@ -64,7 +64,7 @@ class Filters extends BaseConfig
      * Example:
      * 'isLoggedIn' => ['before' => ['account/*', 'profiles/*']]
      *
-     * @var array
+     * @var array<string, array<string, string[]>>
      */
     public $filters = [];
 

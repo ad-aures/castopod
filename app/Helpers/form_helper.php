@@ -15,9 +15,7 @@ if (!function_exists('form_section')) {
      *
      * @param string $title The section title
      * @param string $subtitle The section subtitle
-     * @param array  $attributes  Additional attributes
-     *
-     * @return string
+     * @param array<string, string>  $attributes  Additional attributes
      */
     function form_section(
         string $title = '',
@@ -54,9 +52,7 @@ if (!function_exists('form_section_close')) {
     /**
      * Form Section close Tag
      *
-     * @param string $extra
      *
-     * @return string
      */
     function form_section_close(string $extra = ''): string
     {
@@ -72,10 +68,11 @@ if (!function_exists('form_switch')) {
      *
      * Abstracts form_label to stylize it as a switch toggle
      *
-     * @return string
+     * @param mixed[] $data
+     * @param mixed[] $extra
      */
     function form_switch(
-        $label = '',
+        string $label = '',
         array $data = [],
         string $value = '',
         bool $checked = false,
@@ -104,11 +101,9 @@ if (!function_exists('form_label')) {
      *
      * @param string $label_text The text to appear onscreen
      * @param string $id         The id the label applies to
-     * @param array  $attributes Additional attributes
+     * @param array<string, string>  $attributes Additional attributes
      * @param string  $hintText Hint text to add next to the label
      * @param boolean  $isOptional adds an optional text if true
-     *
-     * @return string
      */
     function form_label(
         string $label_text = '',
@@ -151,7 +146,9 @@ if (!function_exists('form_multiselect')) {
     /**
      * Multi-select menu
      *
-     * @return string
+     * @param array<string, string> $options
+     * @param string[] $selected
+     * @param array<string, string> $customExtra
      */
     function form_multiselect(
         string $name = '',

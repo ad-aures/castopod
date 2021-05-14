@@ -34,18 +34,12 @@ class Services extends BaseService
     /**
      * The Router class uses a RouteCollection's array of routes, and determines
      * the correct Controller and Method to execute.
-     *
-     * @param RouteCollectionInterface|null $routes
-     * @param Request|null                  $request
-     * @param boolean                       $getShared
-     *
-     * @return Router
      */
     public static function router(
-        RouteCollectionInterface $routes = null,
-        Request $request = null,
+        ?RouteCollectionInterface $routes = null,
+        ?Request $request = null,
         bool $getShared = true
-    ) {
+    ): Router {
         if ($getShared) {
             return static::getSharedInstance('router', $routes, $request);
         }
@@ -60,16 +54,11 @@ class Services extends BaseService
      * The Negotiate class provides the content negotiation features for
      * working the request to determine correct language, encoding, charset,
      * and more.
-     *
-     * @param RequestInterface|null $request
-     * @param boolean               $getShared
-     *
-     * @return Negotiate
      */
     public static function negotiator(
-        RequestInterface $request = null,
+        ?RequestInterface $request = null,
         bool $getShared = true
-    ) {
+    ): Negotiate {
         if ($getShared) {
             return static::getSharedInstance('negotiator', $request);
         }
@@ -79,6 +68,9 @@ class Services extends BaseService
         return new Negotiate($request);
     }
 
+    /**
+     * @return mixed
+     */
     public static function authentication(
         string $lib = 'local',
         Model $userModel = null,
@@ -112,6 +104,9 @@ class Services extends BaseService
         return $instance->setUserModel($userModel)->setLoginModel($loginModel);
     }
 
+    /**
+     * @return mixed
+     */
     public static function authorization(
         Model $groupModel = null,
         Model $permissionModel = null,
@@ -144,7 +139,7 @@ class Services extends BaseService
         return $instance->setUserModel($userModel);
     }
 
-    public static function breadcrumb(bool $getShared = true)
+    public static function breadcrumb(bool $getShared = true): Breadcrumb
     {
         if ($getShared) {
             return self::getSharedInstance('breadcrumb');

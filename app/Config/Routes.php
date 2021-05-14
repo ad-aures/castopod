@@ -164,13 +164,13 @@ $routes->group(
                 ]);
 
                 $routes->group('persons', function ($routes): void {
-                    $routes->get('/', 'PodcastPersonController/$1', [
+                    $routes->get('/', 'PodcastPodcastController/$1', [
                         'as' => 'podcast-person-manage',
                         'filter' => 'permission:podcast-edit',
                     ]);
                     $routes->post(
                         '/',
-                        'PodcastPersonController::attemptAdd/$1',
+                        'PodcastPodcastController::attemptAdd/$1',
                         [
                             'filter' => 'permission:podcast-edit',
                         ],
@@ -178,7 +178,7 @@ $routes->group(
 
                     $routes->get(
                         '(:num)/remove',
-                        'PodcastPersonController::remove/$1/$2',
+                        'PodcastPodcastController::remove/$1/$2',
                         [
                             'as' => 'podcast-person-remove',
                             'filter' => 'permission:podcast-edit',

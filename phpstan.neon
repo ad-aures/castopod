@@ -1,9 +1,9 @@
 parameters:
     tmpDir: build/phpstan
-    level: 5
+    level: 6
     paths:
         - app
-        - tests
+        # - tests
     bootstrapFiles:
         - vendor/codeigniter4/codeigniter4/system/Test/bootstrap.php
     scanDirectories:
@@ -17,10 +17,8 @@ parameters:
         - app/Libraries/Analytics/Config/Routes.php
         - app/Views/*
     ignoreErrors:
-        - '#Access to property [\$a-zA-Z]+ on an unknown class Myth\\Auth.*#' # TODO: remove when https://github.com/lonnieezell/myth-auth/pull/347 is merged 
-        - '#Call to method [\a-zA-Z]+\(\) on an unknown class Myth\\Auth.*#' # to remove as well
-        - '#^Access to an undefined property ActivityPub\\Entities\\Actor#'
-        - '#^Access to an undefined property ActivityPub\\Entities\\Note#'
+        - '#This property type might be inlined to PHP. Do you have confidence it is correct\? Put it here#'
+        - '#Function \"preg_.*\(\)\" cannot be used/left in the code#'
         - '#.* is forbidden to use#'
         - '#^Cognitive complexity for#'
         - '#^Class cognitive complexity is#'

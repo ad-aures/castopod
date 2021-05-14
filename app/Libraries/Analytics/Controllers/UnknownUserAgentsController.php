@@ -13,9 +13,9 @@ use CodeIgniter\Controller;
 
 class UnknownUserAgentsController extends Controller
 {
-    public function index($lastKnownId = 0): ResponseInterface
+    public function index(int $lastKnownId = 0): ResponseInterface
     {
-        $model = model('UnknownUserAgentsModel');
+        $model = model('AnalyticsUnknownUserAgentsModel');
 
         return $this->response->setJSON($model->getUserAgents($lastKnownId));
     }

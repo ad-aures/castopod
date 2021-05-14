@@ -1,5 +1,6 @@
 <?php
 
+use CodeIgniter\I18n\Time;
 use Config\Services;
 use Podlibre\Ipcat\IpDb;
 use GeoIp2\Database\Reader;
@@ -18,7 +19,7 @@ if (!function_exists('base64_url_encode')) {
     /**
      * Encode Base64 for URLs
      */
-    function base64_url_encode($input)
+    function base64_url_encode(string $input): string
     {
         return strtr(base64_encode($input), '+/=', '._-');
     }
@@ -28,7 +29,7 @@ if (!function_exists('base64_url_decode')) {
     /**
      * Decode Base64 from URL
      */
-    function base64_url_decode($input)
+    function base64_url_decode(string $input): string
     {
         return base64_decode(strtr($input, '._-', '+/='));
     }
@@ -131,7 +132,7 @@ if (!function_exists('set_user_session_location')) {
                     'longitude' => round($city->location->longitude, 3),
                 ];
                 // If things go wrong the show must go on and the user must be able to download the file
-            } catch (Exception $exception) {
+            } catch (Exception) {
             }
             $session->set('location', $location);
         }
@@ -154,7 +155,7 @@ if (!function_exists('set_user_session_player')) {
             try {
                 $playerFound = UserAgents::find($userAgent);
                 // If things go wrong the show must go on and the user must be able to download the file
-            } catch (Exception $exception) {
+            } catch (Exception) {
             }
             if ($playerFound) {
                 $session->set('player', $playerFound);
@@ -176,7 +177,7 @@ if (!function_exists('set_user_session_player')) {
                         [$userAgent],
                     );
                     // If things go wrong the show must go on and the user must be able to download the file
-                } catch (Exception $exception) {
+                } catch (Exception) {
                 }
             }
         }
@@ -197,7 +198,7 @@ if (!function_exists('set_user_session_browser')) {
             try {
                 $whichbrowser = new Parser(getallheaders());
                 $browserName = $whichbrowser->browser->name;
-            } catch (Exception $exception) {
+            } catch (Exception) {
                 $browserName = '- Could not get browser name -';
             }
             if ($browserName == null) {
@@ -267,6 +268,8 @@ if (!function_exists('podcast_hit')) {
      * @param integer $episodeId The Episode ID
      * @param integer $bytesThreshold The minimum total number of bytes that must be downloaded so that an episode is counted (>1mn)
      * @param integer $fileSize The podcast complete file size
+     * @param integer $duration The episode duration in seconds
+     * @param int $publicationTime The episode's publication time as a UNIX timestamp
      * @param string $serviceName The name of the service that had fetched the RSS feed
      */
     function podcast_hit(
@@ -274,8 +277,8 @@ if (!function_exists('podcast_hit')) {
         int $episodeId,
         int $bytesThreshold,
         int $fileSize,
-        $duration,
-        $publicationDate,
+        int $duration,
+        int $publicationTime,
         string $serviceName
     ): void {
         $session = Services::session();
@@ -341,7 +344,7 @@ if (!function_exists('podcast_hit')) {
                     $db = Database::connect();
                     $procedureName = $db->prefixTable('analytics_podcasts');
 
-                    $age = intdiv(time() - $publicationDate, 86400);
+                    $age = intdiv(time() - $publicationTime, 86400);
 
                     // We create a sha1 hash for this IP_Address+User_Agent+Podcast_ID (used to count unique listeners):
                     $listenerHashId =

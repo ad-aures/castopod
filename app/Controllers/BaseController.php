@@ -24,7 +24,7 @@ class BaseController extends Controller
      * class instantiation. These helpers will be available
      * to all other controllers that extend BaseController.
      *
-     * @var array
+     * @var string[]
      */
     protected $helpers = ['auth', 'svg', 'components', 'misc'];
 

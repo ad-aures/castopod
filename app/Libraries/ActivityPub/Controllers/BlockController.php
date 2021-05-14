@@ -8,6 +8,7 @@
 
 namespace ActivityPub\Controllers;
 
+use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\Controller;
 
 class BlockController extends Controller
@@ -17,7 +18,7 @@ class BlockController extends Controller
      */
     protected $helpers = ['activitypub'];
 
-    public function attemptBlockActor()
+    public function attemptBlockActor(): RedirectResponse
     {
         $rules = [
             'handle' => 'required',
@@ -51,7 +52,7 @@ class BlockController extends Controller
         return redirect()->back();
     }
 
-    function attemptBlockDomain()
+    function attemptBlockDomain(): RedirectResponse
     {
         $rules = [
             'domain' => 'required',
@@ -71,7 +72,7 @@ class BlockController extends Controller
         return redirect()->back();
     }
 
-    function attemptUnblockActor()
+    function attemptUnblockActor(): RedirectResponse
     {
         $rules = [
             'actor_id' => 'required',
@@ -89,7 +90,7 @@ class BlockController extends Controller
         return redirect()->back();
     }
 
-    function attemptUnblockDomain()
+    function attemptUnblockDomain(): RedirectResponse
     {
         $rules = [
             'domain' => 'required',

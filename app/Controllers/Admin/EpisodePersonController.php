@@ -8,27 +8,20 @@
 
 namespace App\Controllers\Admin;
 
+use CodeIgniter\HTTP\RedirectResponse;
 use App\Entities\Podcast;
 use App\Entities\Episode;
 use CodeIgniter\Exceptions\PageNotFoundException;
-use App\Models\EpisodePersonModel;
 use App\Models\PodcastModel;
 use App\Models\EpisodeModel;
 use App\Models\PersonModel;
 
 class EpisodePersonController extends BaseController
 {
-    /**
-     * @var Podcast
-     */
-    protected $podcast;
+    protected Podcast $podcast;
+    protected Episode $episode;
 
-    /**
-     * @var Episode
-     */
-    protected $episode;
-
-    public function _remap($method, ...$params)
+    public function _remap(string $method, string ...$params): mixed
     {
         if (count($params) <= 2) {
             throw PageNotFoundException::forPageNotFound();
@@ -36,7 +29,7 @@ class EpisodePersonController extends BaseController
 
         if (
             ($this->podcast = (new PodcastModel())->getPodcastById(
-                $params[0],
+                (int) $params[0],
             )) &&
             ($this->episode = (new EpisodeModel())
                 ->where([
@@ -54,14 +47,14 @@ class EpisodePersonController extends BaseController
         throw PageNotFoundException::forPageNotFound();
     }
 
-    public function index()
+    public function index(): string
     {
         helper('form');
 
         $data = [
             'episode' => $this->episode,
             'podcast' => $this->podcast,
-            'episodePersons' => (new EpisodePersonModel())->getEpisodePersons(
+            'episodePersons' => (new PersonModel())->getEpisodePersons(
                 $this->podcast->id,
                 $this->episode->id,
             ),
@@ -75,7 +68,7 @@ class EpisodePersonController extends BaseController
         return view('admin/episode/person', $data);
     }
 
-    public function attemptAdd()
+    public function attemptAdd(): RedirectResponse
     {
         $rules = [
             'person' => 'required',
@@ -88,7 +81,7 @@ class EpisodePersonController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        (new EpisodePersonModel())->addEpisodePersons(
+        (new PersonModel())->addEpisodePersons(
             $this->podcast->id,
             $this->episode->id,
             $this->request->getPost('person'),
@@ -98,9 +91,9 @@ class EpisodePersonController extends BaseController
         return redirect()->back();
     }
 
-    public function remove($episodePersonId)
+    public function remove(int $episodePersonId): RedirectResponse
     {
-        (new EpisodePersonModel())->removeEpisodePersons(
+        (new PersonModel())->removeEpisodePersons(
             $this->podcast->id,
             $this->episode->id,
             $episodePersonId,

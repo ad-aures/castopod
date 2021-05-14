@@ -26,18 +26,17 @@ class PodcastController extends BaseController
      */
     protected $podcast;
 
-    /**
-     *
-     * @param array<string> $params
-     * @return static|string
-     */
-    public function _remap(string $method, ...$params)
+    public function _remap(string $method, string ...$params): mixed
     {
         if (count($params) === 0) {
             return $this->$method();
         }
 
-        if ($this->podcast = (new PodcastModel())->getPodcastById($params[0])) {
+        if (
+            ($this->podcast = (new PodcastModel())->getPodcastById(
+                (int) $params[0],
+            )) !== null
+        ) {
             return $this->$method();
         }
 

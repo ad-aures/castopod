@@ -24,7 +24,7 @@ class AnalyticsController extends Controller
      */
     protected $methodName;
 
-    public function _remap($method, ...$params)
+    public function _remap(string $method, string ...$params): mixed
     {
         if (!isset($params[1])) {
             throw PageNotFoundException::forPageNotFound();
@@ -39,11 +39,11 @@ class AnalyticsController extends Controller
         );
     }
 
-    public function getData($podcastId, $episodeId): ResponseInterface
+    public function getData(int $podcastId, int $episodeId): ResponseInterface
     {
         $analytics_model = new $this->className();
         $methodName = $this->methodName;
-        if ($episodeId) {
+        if ($episodeId !== 0) {
             return $this->response->setJSON(
                 $analytics_model->$methodName($podcastId, $episodeId),
             );

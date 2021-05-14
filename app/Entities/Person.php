@@ -20,13 +20,16 @@ use CodeIgniter\Entity\Entity;
  * @property string $image_mimetype
  * @property int $created_by
  * @property int $updated_by
+ * @property string|null $group
+ * @property string|null $role
+ * @property Podcast|null $podcast
+ * @property Episode|null $episode
  */
 class Person extends Entity
 {
-    /**
-     * @var Image
-     */
-    protected $image;
+    protected Image $image;
+    protected ?Podcast $podcast;
+    protected ?Episode $episode;
 
     /**
      * @var array<string, string>
@@ -38,6 +41,10 @@ class Person extends Entity
         'information_url' => '?string',
         'image_path' => 'string',
         'image_mimetype' => 'string',
+        'podcast_id' => '?integer',
+        'episode_id' => '?integer',
+        'group' => '?string',
+        'role' => '?string',
         'created_by' => 'integer',
         'updated_by' => 'integer',
     ];
@@ -45,7 +52,7 @@ class Person extends Entity
     /**
      * Saves a picture in `public/media/persons/`
      */
-    public function setImage(Image $image): self
+    public function setImage(Image $image): static
     {
         helper('media');
 

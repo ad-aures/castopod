@@ -6,15 +6,15 @@
   "homepage": "https://castopod.org",
   "license": "AGPL-3.0-or-later",
   "require": {
-    "php": "^7.3||^8.0",
+    "php": "^8.0",
     "james-heinrich/getid3": "~2.0.0-dev",
     "whichbrowser/parser": "^v2.1.1",
     "geoip2/geoip2": "^v2.11.0",
     "myth/auth": "dev-develop",
     "codeigniter4/codeigniter4": "dev-develop",
-    "league/commonmark": "^1.6.0",
+    "league/commonmark": "^1.6.2",
     "vlucas/phpdotenv": "^v5.3.0",
-    "league/html-to-markdown": "^4.10",
+    "league/html-to-markdown": "^4.10.0",
     "opawg/user-agents-php": "^v1.0",
     "podlibre/ipcat": "^v1.0",
     "podlibre/podcast-namespace": "^v1.0.6",
@@ -24,14 +24,14 @@
   },
   "require-dev": {
     "mikey179/vfsstream": "^v1.6.8",
-    "phpunit/phpunit": "^9.5.1",
+    "phpunit/phpunit": "^9.5.4",
     "squizlabs/php_codesniffer": "^3.6.0",
     "rector/rector": "^0.10.17",
     "captainhook/captainhook": "^5.9",
     "captainhook/plugin-composer": "^5.2",
     "phpstan/phpstan": "^0.12.85",
-    "phpstan/extension-installer": "^1.1",
-    "rector/rector-phpstan-rules": "^0.2.1"
+    "phpstan/extension-installer": "^1.1.0",
+    "rector/rector-phpstan-rules": "^0.2.6"
   },
   "autoload": {
     "psr-4": {

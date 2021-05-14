@@ -23,23 +23,9 @@ if (!function_exists('get_browser_language')) {
     }
 }
 
-if (!function_exists('startsWith')) {
-    /**
-     * Check if a string starts with some characters
-     */
-    function startsWith(string $string, string $query): bool
-    {
-        return substr($string, 0, strlen($query)) === $query;
-    }
-}
-
 if (!function_exists('slugify')) {
-    function slugify($text)
+    function slugify(string $text): string
     {
-        if (empty($text)) {
-            return 'n-a';
-        }
-
         // replace non letter or digits by -
         $text = preg_replace('~[^\pL\d]+~u', '-', $text);
 

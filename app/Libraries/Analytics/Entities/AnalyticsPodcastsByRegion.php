@@ -42,7 +42,7 @@ class AnalyticsPodcastsByRegion extends Entity
         'hits' => 'integer',
     ];
 
-    public function getCountryCode()
+    public function getCountryCode(): string
     {
         return lang('Countries.' . $this->attributes['country_code']);
     }

@@ -10,6 +10,7 @@ namespace Analytics;
 
 use Config\Services;
 use Config\Database;
+
 trait AnalyticsTrait
 {
     protected function registerPodcastWebpageHit(int $podcastId): void

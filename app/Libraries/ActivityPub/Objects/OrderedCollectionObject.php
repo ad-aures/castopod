@@ -42,15 +42,10 @@ class OrderedCollectionObject extends ObjectType
     protected $last;
 
     /**
-     * @var array|null
-     */
-    protected $orderedItems;
-
-    /**
-     * @param array $orderedItems
+     * @param ObjectType[] $orderedItems
      */
     public function __construct(
-        ?array $orderedItems = null,
+        protected ?array $orderedItems = null,
         ?Pager $pager = null
     ) {
         $this->id = current_url();
@@ -65,7 +60,5 @@ class OrderedCollectionObject extends ObjectType
                 $this->last = $pager->getPageURI($pager->getLastPage());
             }
         }
-
-        $this->orderedItems = $orderedItems;
     }
 }

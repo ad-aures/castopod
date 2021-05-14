@@ -17,7 +17,7 @@ class FileRules extends ValidationFileRules
      * a specified allowable dimension.
      *
      * @param string|null $blank
-     *
+     * 
      */
     public function min_dims(string $blank = null, string $params): bool
     {

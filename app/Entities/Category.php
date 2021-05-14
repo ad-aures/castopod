@@ -21,10 +21,7 @@ use CodeIgniter\Entity\Entity;
  */
 class Category extends Entity
 {
-    /**
-     * @var Category|null
-     */
-    protected $parent;
+    protected ?Category $parent;
 
     /**
      * @var array<string, string>

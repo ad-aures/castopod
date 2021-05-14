@@ -8,6 +8,8 @@
 
 namespace ActivityPub\Config;
 
+use ActivityPub\Objects\ActorObject;
+use ActivityPub\Objects\NoteObject;
 use CodeIgniter\Config\BaseConfig;
 
 class ActivityPub extends BaseConfig
@@ -18,12 +20,12 @@ class ActivityPub extends BaseConfig
      * --------------------------------------------------------------------
      * @var string
      */
-    public $actorObject = 'ActivityPub\Objects\ActorObject';
+    public $actorObject = ActorObject::class;
 
     /**
      * @var string
      */
-    public $noteObject = 'ActivityPub\Objects\NoteObject';
+    public $noteObject = NoteObject::class;
 
     /**
      * --------------------------------------------------------------------

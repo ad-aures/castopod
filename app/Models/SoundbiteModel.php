@@ -66,10 +66,7 @@ class SoundbiteModel extends Model
      */
     protected $beforeDelete = ['clearCache'];
 
-    /**
-     * @return bool|BaseResult
-     */
-    public function deleteSoundbite($podcastId, $episodeId, $soundbiteId)
+    public function deleteSoundbite(int $podcastId, int $episodeId, int $soundbiteId): BaseResult|bool
     {
         return $this->delete([
             'podcast_id' => $podcastId,
@@ -99,6 +96,7 @@ class SoundbiteModel extends Model
     }
 
     /**
+     * @param array<string, array<string|int, mixed>> $data
      * @return array<string, array<string|int, mixed>>
      */
     public function clearCache(array $data): array

@@ -13,17 +13,24 @@ namespace Analytics\Entities;
 use CodeIgniter\Entity\Entity;
 
 /**
+ * @property int $id
  * @property int $useragent
  * @property int $hits
  * @property Time $created_at
  * @property Time $updated_at
  */
-class AnalyticsUnknownUseragents extends Entity
+class AnalyticsUnknownUserAgent extends Entity
 {
+    /**
+     * @var string[]
+     */
+    protected $dates = ['created_at', 'updated_at'];
+
     /**
      * @var array<string, string>
      */
     protected $casts = [
+        'id' => 'integer',
         'useragent' => 'integer',
         'hits' => 'integer',
     ];

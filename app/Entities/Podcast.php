@@ -11,8 +11,8 @@ namespace App\Entities;
 use App\Libraries\SimpleRSSElement;
 use App\Models\CategoryModel;
 use App\Models\EpisodeModel;
+use App\Models\PersonModel;
 use App\Models\PlatformModel;
-use App\Models\PodcastPersonModel;
 use CodeIgniter\Entity\Entity;
 use App\Models\UserModel;
 use CodeIgniter\I18n\Time;
@@ -22,7 +22,7 @@ use RuntimeException;
 /**
  * @property int $id
  * @property int $actor_id
- * @property Actor $actor
+ * @property Actor|null $actor
  * @property string $name
  * @property string $link
  * @property string $feed_url
@@ -35,7 +35,7 @@ use RuntimeException;
  * @property string $image_mimetype
  * @property string $language_code
  * @property int $category_id
- * @property Category $category
+ * @property Category|null $category
  * @property int[] $other_categories_ids
  * @property Category[] $other_categories
  * @property string|null $parental_advisory
@@ -68,7 +68,7 @@ use RuntimeException;
  * @property Time|null $deleted_at;
  *
  * @property Episode[] $episodes
- * @property PodcastPerson[] $persons
+ * @property Person[] $persons
  * @property User[] $contributors
  * @property Platform[] $podcasting_platforms
  * @property Platform[] $social_platforms
@@ -77,80 +77,54 @@ use RuntimeException;
  */
 class Podcast extends Entity
 {
-    /**
-     * @var string
-     */
-    protected $link;
-
-    /**
-     * @var Actor
-     */
-    protected $actor;
-
-    /**
-     * @var Image
-     */
-    protected $image;
-
-    /**
-     * @var string
-     */
-    protected $description;
-
-    /**
-     * @var Category
-     */
-    protected $category;
+    protected string $link;
+    protected ?Actor $actor;
+    protected Image $image;
+    protected string $description;
+    protected ?Category $category;
 
     /**
      * @var Category[]
      */
-    protected $other_categories;
+    protected $other_categories = [];
 
     /**
      * @var string[]
      */
-    protected $other_categories_ids;
+    protected $other_categories_ids = [];
 
     /**
      * @var Episode[]
      */
-    protected $episodes;
+    protected $episodes = [];
 
     /**
-     * @var PodcastPerson[]
+     * @var Person[]
      */
-    protected $persons;
+    protected $persons = [];
 
     /**
      * @var User[]
      */
-    protected $contributors;
+    protected $contributors = [];
 
     /**
      * @var Platform[]
      */
-    protected $podcasting_platforms;
+    protected $podcasting_platforms = [];
 
     /**
      * @var Platform[]
      */
-    protected $social_platforms;
+    protected $social_platforms = [];
 
     /**
      * @var Platform[]
      */
-    protected $funding_platforms;
+    protected $funding_platforms = [];
 
-    /**
-     * @var Location|null
-     */
-    protected $location;
-
-    /**
-     * @var string
-     */
-    protected $custom_rss_string;
+    protected ?Location $location;
+    protected string $custom_rss_string;
 
     /**
      * @var array<string, string>
@@ -193,7 +167,7 @@ class Podcast extends Entity
 
     public function getActor(): Actor
     {
-        if (!$this->actor_id) {
+        if ($this->actor_id === 0) {
             throw new RuntimeException(
                 'Podcast must have an actor_id before getting actor.',
             );
@@ -208,10 +182,8 @@ class Podcast extends Entity
 
     /**
      * Saves a cover image to the corresponding podcast folder in `public/media/podcast_name/`
-     *
-     * @param Image $image
      */
-    public function setImage($image): self
+    public function setImage(Image $image): static
     {
         // Save image
         $image->saveImage('podcasts/' . $this->attributes['name'], 'cover');
@@ -263,7 +235,7 @@ class Podcast extends Entity
     /**
      * Returns the podcast's persons
      *
-     * @return PodcastPerson[]
+     * @return Person[]
      */
     public function getPersons(): array
     {
@@ -274,9 +246,7 @@ class Podcast extends Entity
         }
 
         if (empty($this->persons)) {
-            $this->persons = (new PodcastPersonModel())->getPodcastPersons(
-                $this->id,
-            );
+            $this->persons = (new PersonModel())->getPodcastPersons($this->id);
         }
 
         return $this->persons;
@@ -284,18 +254,16 @@ class Podcast extends Entity
 
     /**
      * Returns the podcast category entity
-     *
-     * @return Category
      */
-    public function getCategory(): Category
+    public function getCategory(): ?Category
     {
-        if (empty($this->id)) {
+        if ($this->id === null) {
             throw new RuntimeException(
                 'Podcast must be created before getting category.',
             );
         }
 
-        if (empty($this->category)) {
+        if ($this->category === null) {
             $this->category = (new CategoryModel())->getCategoryById(
                 $this->category_id,
             );
@@ -326,7 +294,7 @@ class Podcast extends Entity
         return $this->contributors;
     }
 
-    public function setDescriptionMarkdown(string $descriptionMarkdown): self
+    public function setDescriptionMarkdown(string $descriptionMarkdown): static
     {
         $converter = new CommonMarkConverter([
             'html_input' => 'strip',
@@ -343,7 +311,7 @@ class Podcast extends Entity
 
     public function setEpisodeDescriptionFooterMarkdown(
         ?string $episodeDescriptionFooterMarkdown = null
-    ): self {
+    ): static {
         if ($episodeDescriptionFooterMarkdown) {
             $converter = new CommonMarkConverter([
                 'html_input' => 'strip',
@@ -363,13 +331,13 @@ class Podcast extends Entity
 
     public function getDescription(): string
     {
-        if ($this->description) {
+        if ($this->description !== '') {
             return $this->description;
         }
 
         return trim(
             preg_replace(
-                '/\s+/',
+                '~\s+~',
                 ' ',
                 strip_tags($this->attributes['description_html']),
             ),
@@ -483,7 +451,7 @@ class Podcast extends Entity
     /**
      * Saves the location name and fetches OpenStreetMap info
      */
-    public function setLocation(?string $newLocationName = null)
+    public function setLocation(?string $newLocationName = null): static
     {
         if ($newLocationName === null) {
             $this->attributes['location_name'] = null;
@@ -529,8 +497,6 @@ class Podcast extends Entity
 
     /**
      * Get custom rss tag as XML String
-     *
-     * @return string
      */
     function getCustomRssString(): string
     {
@@ -555,10 +521,8 @@ class Podcast extends Entity
 
     /**
      * Saves custom rss tag into json
-     *
-     * @param string $customRssString
      */
-    function setCustomRssString($customRssString): self
+    function setCustomRssString(string $customRssString): static
     {
         if (empty($customRssString)) {
             return $this;

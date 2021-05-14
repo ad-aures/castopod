@@ -10,6 +10,7 @@ namespace App\Models;
 
 use App\Entities\Image;
 use App\Entities\Person;
+use CodeIgniter\Database\BaseResult;
 use CodeIgniter\Model;
 
 class PersonModel extends Model
@@ -80,7 +81,7 @@ class PersonModel extends Model
      */
     protected $beforeDelete = ['clearCache'];
 
-    public function getPersonById($personId)
+    public function getPersonById(int $personId): ?Person
     {
         $cacheName = "person#{$personId}";
         if (!($found = cache($cacheName))) {
@@ -92,13 +93,16 @@ class PersonModel extends Model
         return $found;
     }
 
-    public function getPerson($fullName)
+    public function getPerson(string $fullName): ?Person
     {
         return $this->where('full_name', $fullName)->first();
     }
 
-    public function createPerson($fullName, $informationUrl, $image)
-    {
+    public function addPerson(
+        string $fullName,
+        ?string $informationUrl,
+        string $image
+    ): int|bool {
         $person = new Person([
             'full_name' => $fullName,
             'unique_name' => slugify($fullName),
@@ -107,10 +111,200 @@ class PersonModel extends Model
             'created_by' => user_id(),
             'updated_by' => user_id(),
         ]);
+
         return $this->insert($person);
     }
 
-    public function getPersonOptions()
+    /**
+     * @return Person[]
+     */
+    public function getEpisodePersons(int $podcastId, int $episodeId): array
+    {
+        $cacheName = "podcast#{$podcastId}_episode#{$episodeId}_persons";
+        if (!($found = cache($cacheName))) {
+            $found = $this->db
+                ->table('episodes_persons')
+                ->select('episodes_persons.*')
+                ->where('episode_id', $episodeId)
+                ->join('persons', 'person_id=persons.id')
+                ->orderby('full_name')
+                ->findAll();
+
+            cache()->save($cacheName, $found, DECADE);
+        }
+
+        return $found;
+    }
+
+    /**
+     * @return Person[]
+     */
+    public function getPodcastPersons(int $podcastId): array
+    {
+        $cacheName = "podcast#{$podcastId}_persons";
+        if (!($found = cache($cacheName))) {
+            $found = $this->db
+                ->table('podcasts_persons')
+                ->select('podcasts_persons.*')
+                ->where('podcast_id', $podcastId)
+                ->join('persons', 'person_id=persons.id')
+                ->orderby('full_name')
+                ->findAll();
+
+            cache()->save($cacheName, $found, DECADE);
+        }
+
+        return $found;
+    }
+
+    public function addEpisodePerson(
+        int $podcastId,
+        int $episodeId,
+        int $personId,
+        string $group,
+        string $role
+    ): int|bool {
+        return $this->db->table('episodes_persons')->insert([
+            'podcast_id' => $podcastId,
+            'episode_id' => $episodeId,
+            'person_id' => $personId,
+            'person_group' => $group,
+            'person_role' => $role,
+        ]);
+    }
+
+    public function addPodcastPerson(
+        int $podcastId,
+        int $personId,
+        string $group,
+        string $role
+    ): int|bool {
+        return $this->db->table('podcasts_persons')->insert([
+            'podcast_id' => $podcastId,
+            'person_id' => $personId,
+            'person_group' => $group,
+            'person_role' => $role,
+        ]);
+    }
+
+    /**
+     * Add persons to podcast
+     *
+     * @param array<string> $persons
+     * @param array<string, string> $groupsRoles
+     *
+     * @return bool|int Number of rows inserted or FALSE on failure
+     */
+    public function addPodcastPersons(
+        int $podcastId,
+        array $persons = [],
+        array $groupsRoles = []
+    ): int|bool {
+        if ($persons === []) {
+            return 0;
+        }
+
+        $this->clearCache(['podcast_id' => $podcastId]);
+        $data = [];
+        foreach ($persons as $person) {
+            if ($groupsRoles === []) {
+                $data[] = [
+                    'podcast_id' => $podcastId,
+                    'person_id' => $person,
+                ];
+            }
+
+            foreach ($groupsRoles as $group_role) {
+                $group_role = explode(',', $group_role);
+                $data[] = [
+                    'podcast_id' => $podcastId,
+                    'person_id' => $person,
+                    'person_group' => $group_role[0],
+                    'person_role' => $group_role[1],
+                ];
+            }
+        }
+
+        return $this->insertBatch($data);
+    }
+
+    /**
+     * Add persons to episode
+     *
+     * @return BaseResult|bool Number of rows inserted or FALSE on failure
+     */
+    public function removePodcastPersons(int $podcastId, int $personId): BaseResult|bool
+    {
+        return $this->delete([
+            'id' => $personId,
+            'podcast_id' => $podcastId,
+        ]);
+    }
+
+    /**
+     * Add persons to episode
+     *
+     * @param int[] $personIds
+     * @param string[] $groups_roles
+     * 
+     * @return bool|int Number of rows inserted or FALSE on failure
+     */
+    public function addEpisodePersons(
+        int $podcastId,
+        int $episodeId,
+        array $personIds,
+        array $groups_roles
+    ): bool|int {
+        if (!empty($personIds)) {
+            $this->clearCache([
+                'episode_id' => $episodeId,
+            ]);
+
+            $data = [];
+            foreach ($personIds as $personId) {
+                if ($groups_roles !== []) {
+                    foreach ($groups_roles as $group_role) {
+                        $group_role = explode(',', $group_role);
+                        $data[] = [
+                            'podcast_id' => $podcastId,
+                            'episode_id' => $episodeId,
+                            'person_id' => $personId,
+                            'person_group' => $group_role[0],
+                            'person_role' => $group_role[1],
+                        ];
+                    }
+                } else {
+                    $data[] = [
+                        'podcast_id' => $podcastId,
+                        'episode_id' => $episodeId,
+                        'person_id' => $personId,
+                    ];
+                }
+            }
+            return $this->insertBatch($data);
+        }
+        return 0;
+    }
+
+    /**
+     * @return BaseResult|bool
+     */
+    public function removeEpisodePersons(
+        int $podcastId,
+        int $episodeId,
+        int $personId
+    ): BaseResult|bool {
+        return $this->delete([
+            'podcast_id' => $podcastId,
+            'episode_id' => $episodeId,
+            'id' => $personId,
+        ]);
+    }
+
+    /**
+     * @return array<string, string> 
+     */
+    public function getPersonOptions(): array
     {
         $options = [];
 
@@ -131,7 +325,10 @@ class PersonModel extends Model
         return $options;
     }
 
-    public function getTaxonomyOptions()
+    /**
+     * @return array<string, string> 
+     */
+    public function getTaxonomyOptions(): array
     {
         $options = [];
         $locale = service('request')->getLocale();
@@ -156,6 +353,8 @@ class PersonModel extends Model
     }
 
     /**
+     * @param mixed[] $data
+     * 
      * @return array<string, array<string|int, mixed>>
      */
     protected function clearCache(array $data): array

@@ -34,7 +34,7 @@ class ActivityRequest
     protected $activity;
 
     /**
-     * @var array
+     * @var array<string, string[]>
      */
     protected $options = [
         'headers' => [
@@ -71,7 +71,7 @@ class ActivityRequest
             ($this->uri->getPort() ? ':' . $this->uri->getPort() : '');
     }
 
-    public function sign($keyId, $privateKey): void
+    public function sign(string $keyId, string $privateKey): void
     {
         $rsa = new RSA();
         $rsa->loadKey($privateKey); // private key

@@ -6,6 +6,9 @@ use CodeIgniter\HTTP\Negotiate as CodeIgniterHTTPNegotiate;
 
 class Negotiate extends CodeIgniterHTTPNegotiate
 {
+    /**
+     * @param mixed[] $acceptable
+     */
     public function callMatch(
         array $acceptable,
         string $supported,

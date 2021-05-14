@@ -12,8 +12,8 @@ use App\Entities\Location;
 use App\Libraries\SimpleRSSElement;
 use App\Models\PodcastModel;
 use App\Models\SoundbiteModel;
-use App\Models\EpisodePersonModel;
 use App\Models\NoteModel;
+use App\Models\PersonModel;
 use CodeIgniter\Entity\Entity;
 use CodeIgniter\Files\File;
 use CodeIgniter\HTTP\Files\UploadedFile;
@@ -39,7 +39,7 @@ use RuntimeException;
  * @property string $audio_file_mimetype
  * @property int $audio_file_size
  * @property int $audio_file_header_size
- * @property string $description Holds text only description, striped of any markdown or html special characters
+ * @property string|null $description Holds text only description, striped of any markdown or html special characters
  * @property string $description_markdown
  * @property string $description_html
  * @property Image $image
@@ -75,101 +75,43 @@ use RuntimeException;
  * @property Time $updated_at;
  * @property Time|null $deleted_at;
  *
- * @property EpisodePerson[] $persons;
+ * @property Person[] $persons;
  * @property Soundbite[] $soundbites;
  * @property string $embeddable_player_url;
  */
 class Episode extends Entity
 {
-    /**
-     * @var Podcast
-     */
-    protected $podcast;
+    protected Podcast $podcast;
+    protected string $link;
+    protected File $audio_file;
+    protected string $audio_file_url;
+    protected string $audio_file_analytics_url;
+    protected string $audio_file_web_url;
+    protected string $audio_file_opengraph_url;
+    protected string $embeddable_player_url;
+    protected Image $image;
+    protected ?string $description;
+    protected File $transcript_file;
+    protected File $chapters_file;
 
     /**
-     * @var string
+     * @var Person[]
      */
-    protected $link;
-
-    /**
-     * @var File
-     */
-    protected $audio_file;
-
-    /**
-     * @var string
-     */
-    protected $audio_file_url;
-
-    /**
-     * @var string
-     */
-    protected $audio_file_analytics_url;
-
-    /**
-     * @var string
-     */
-    protected $audio_file_web_url;
-
-    /**
-     * @var string
-     */
-    protected $audio_file_opengraph_url;
-
-    /**
-     * @var string
-     */
-    protected $embeddable_player_url;
-
-    /**
-     * @var Image
-     */
-    protected $image;
-
-    /**
-     * @var string
-     */
-    protected $description;
-
-    /**
-     * @var File
-     */
-    protected $transcript_file;
-
-    /**
-     * @var File
-     */
-    protected $chapters_file;
-
-    /**
-     * @var EpisodePerson[]
-     */
-    protected $persons;
+    protected $persons = [];
 
     /**
      * @var Soundbite[]
      */
-    protected $soundbites;
+    protected $soundbites = [];
 
     /**
      * @var Note[]
      */
-    protected $notes;
+    protected $notes = [];
 
-    /**
-     * @var Location|null
-     */
-    protected $location;
-
-    /**
-     * @var string
-     */
-    protected $custom_rss_string;
-
-    /**
-     * @var string
-     */
-    protected $publication_status;
+    protected ?Location $location;
+    protected string $custom_rss_string;
+    protected string $publication_status;
 
     /**
      * @var string[]
@@ -221,10 +163,8 @@ class Episode extends Entity
 
     /**
      * Saves an episode image
-     *
-     * @param Image|null $image
      */
-    public function setImage($image = null): self
+    public function setImage(?Image $image = null): static
     {
         if ($image === null) {
             return $this;
@@ -257,10 +197,8 @@ class Episode extends Entity
 
     /**
      * Saves an audio file
-     *
-     * @param UploadedFile|File $audioFile
      */
-    public function setAudioFile($audioFile)
+    public function setAudioFile(UploadedFile|File $audioFile): static
     {
         helper(['media', 'id3']);
 
@@ -283,10 +221,8 @@ class Episode extends Entity
 
     /**
      * Saves an episode transcript file
-     *
-     * @param UploadedFile|File $transcriptFile
      */
-    public function setTranscriptFile($transcriptFile)
+    public function setTranscriptFile(UploadedFile|File $transcriptFile): static
     {
         helper('media');
 
@@ -301,10 +237,8 @@ class Episode extends Entity
 
     /**
      * Saves an episode chapters file
-     *
-     * @param UploadedFile|File $chaptersFile
      */
-    public function setChaptersFile($chaptersFile)
+    public function setChaptersFile(UploadedFile|File $chaptersFile): static
     {
         helper('media');
 
@@ -390,9 +324,8 @@ class Episode extends Entity
     {
         if ($this->attributes['transcript_file_path']) {
             return media_base_url($this->attributes['transcript_file_path']);
-        } else {
-            return $this->attributes['transcript_file_remote_url'];
         }
+        return $this->attributes['transcript_file_remote_url'];
     }
 
     /**
@@ -411,7 +344,7 @@ class Episode extends Entity
     /**
      * Returns the episode's persons
      *
-     * @return EpisodePerson[]
+     * @return Person[]
      */
     public function getPersons(): array
     {
@@ -422,7 +355,7 @@ class Episode extends Entity
         }
 
         if (empty($this->persons)) {
-            $this->persons = (new EpisodePersonModel())->getEpisodePersons(
+            $this->persons = (new PersonModel())->getEpisodePersons(
                 $this->podcast_id,
                 $this->id,
             );
@@ -483,7 +416,7 @@ class Episode extends Entity
         );
     }
 
-    public function getEmbeddablePlayerUrl($theme = null): string
+    public function getEmbeddablePlayerUrl(string $theme = null): string
     {
         return base_url(
             $theme
@@ -501,25 +434,21 @@ class Episode extends Entity
         );
     }
 
-    public function setGuid(?string $guid = null)
+    public function setGuid(?string $guid = null): static
     {
-        if ($guid === null) {
-            $this->attributes['guid'] = $this->getLink();
-        } else {
-            $this->attributes['guid'] = $guid;
-        }
+        $this->attributes['guid'] = $guid === null ? $this->getLink() : $guid;
 
         return $this;
     }
 
-    public function getPodcast(): Podcast
+    public function getPodcast(): ?Podcast
     {
         return (new PodcastModel())->getPodcastById(
             $this->attributes['podcast_id'],
         );
     }
 
-    public function setDescriptionMarkdown(string $descriptionMarkdown)
+    public function setDescriptionMarkdown(string $descriptionMarkdown): static
     {
         $converter = new CommonMarkConverter([
             'html_input' => 'strip',
@@ -563,7 +492,7 @@ class Episode extends Entity
         if ($this->description === null) {
             $this->description = trim(
                 preg_replace(
-                    '/\s+/',
+                    '~\s+~',
                     ' ',
                     strip_tags($this->attributes['description_html']),
                 ),
@@ -575,11 +504,11 @@ class Episode extends Entity
 
     public function getPublicationStatus(): string
     {
-        if ($this->publication_status) {
+        if ($this->publication_status !== '') {
             return $this->publication_status;
         }
 
-        if (!$this->published_at) {
+        if ($this->published_at === null) {
             return 'not_published';
         }
 
@@ -594,7 +523,7 @@ class Episode extends Entity
     /**
      * Saves the location name and fetches OpenStreetMap info
      */
-    public function setLocation(?string $newLocationName = null)
+    public function setLocation(?string $newLocationName = null): static
     {
         if ($newLocationName === null) {
             $this->attributes['location_name'] = null;
@@ -667,7 +596,7 @@ class Episode extends Entity
     /**
      * Saves custom rss tag into json
      */
-    function setCustomRssString(?string $customRssString = null)
+    function setCustomRssString(?string $customRssString = null): static
     {
         if ($customRssString === null) {
             return $this;
@@ -709,19 +638,16 @@ class Episode extends Entity
         return $partnerLink;
     }
 
-    function getPartnerImageUrl($serviceSlug = null): string
+    function getPartnerImageUrl(string $serviceSlug = null): string
     {
-        $partnerImageUrl =
-            rtrim($this->getPodcast()->partner_image_url, '/') .
-            '?pid=' .
-            $this->getPodcast()->partner_id .
-            '&guid=' .
-            urlencode($this->attributes['guid']);
-
         if ($serviceSlug !== null) {
-            $partnerImageUrl = '&_from=' . $serviceSlug;
+            return '&_from=' . $serviceSlug;
         }
 
-        return $partnerImageUrl;
+        return rtrim($this->getPodcast()->partner_image_url, '/') .
+        '?pid=' .
+        $this->getPodcast()->partner_id .
+        '&guid=' .
+        urlencode($this->attributes['guid']);
     }
 }

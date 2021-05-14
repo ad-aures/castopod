@@ -8,6 +8,7 @@
 
 namespace App\Controllers;
 
+use CodeIgniter\Exceptions\PageNotFoundException;
 use ActivityPub\Controllers\NoteController as ActivityPubNoteController;
 use ActivityPub\Entities\Note as ActivityPubNote;
 use Analytics\AnalyticsTrait;
@@ -34,24 +35,28 @@ class NoteController extends ActivityPubNoteController
      */
     protected $actor;
 
+    /**
+     * @var string[]
+     */
     protected $helpers = ['auth', 'activitypub', 'svg', 'components', 'misc'];
 
-    public function _remap($method, ...$params)
+    public function _remap(string $method, string ...$params): mixed
     {
         if (
-            !($this->podcast = (new PodcastModel())->getPodcastByName(
+            ($this->podcast = (new PodcastModel())->getPodcastByName(
                 $params[0],
-            ))
+            )) === null
         ) {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+            throw PageNotFoundException::forPageNotFound();
         }
 
         $this->actor = $this->podcast->actor;
 
-        if (count($params) > 1) {
-            if (!($this->note = model('NoteModel')->getNoteById($params[1]))) {
-                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-            }
+        if (
+            count($params) > 1 &&
+            !($this->note = model('NoteModel')->getNoteById($params[1]))
+        ) {
+            throw PageNotFoundException::forPageNotFound();
         }
         unset($params[0]);
         unset($params[1]);
@@ -77,27 +82,21 @@ class NoteController extends ActivityPubNoteController
         );
 
         if (!($cachedView = cache($cacheName))) {
-            helper('persons');
-            $persons = [];
-            construct_person_array($this->podcast->persons, $persons);
-
             $data = [
                 'podcast' => $this->podcast,
                 'actor' => $this->actor,
                 'note' => $this->note,
-                'persons' => $persons,
             ];
 
             // if user is logged in then send to the authenticated activity view
             if (can_user_interact()) {
                 helper('form');
                 return view('podcast/note_authenticated', $data);
-            } else {
-                return view('podcast/note', $data, [
-                    'cache' => DECADE,
-                    'cache_name' => $cacheName,
-                ]);
             }
+            return view('podcast/note', $data, [
+                'cache' => DECADE,
+                'cache_name' => $cacheName,
+            ]);
         }
 
         return $cachedView;
@@ -129,16 +128,13 @@ class NoteController extends ActivityPubNoteController
         $episodeUri = $this->request->getPost('episode_url');
         if (
             $episodeUri &&
-            ($params = extract_params_from_episode_uri(new URI($episodeUri)))
+            ($params = extract_params_from_episode_uri(new URI($episodeUri))) &&
+            ($episode = (new EpisodeModel())->getEpisodeBySlug(
+                $params['podcastName'],
+                $params['episodeSlug'],
+            ))
         ) {
-            if (
-                $episode = (new EpisodeModel())->getEpisodeBySlug(
-                    $params['podcastName'],
-                    $params['episodeSlug'],
-                )
-            ) {
-                $newNote->episode_id = $episode->id;
-            }
+            $newNote->episode_id = $episode->id;
         }
 
         $newNote->message = $message;
@@ -146,7 +142,7 @@ class NoteController extends ActivityPubNoteController
         if (
             !model('NoteModel')->addNote(
                 $newNote,
-                $newNote->episode_id ? false : true,
+                !(bool) $newNote->episode_id,
                 true,
             )
         ) {

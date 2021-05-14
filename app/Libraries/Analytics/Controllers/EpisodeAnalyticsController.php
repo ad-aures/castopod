@@ -23,7 +23,7 @@ class EpisodeAnalyticsController extends Controller
      * class instantiation. These helpers will be available
      * to all other controllers that extend Analytics.
      *
-     * @var array
+     * @var string[]
      */
     protected $helpers = ['analytics'];
 

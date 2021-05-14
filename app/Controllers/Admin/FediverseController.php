@@ -10,12 +10,12 @@ namespace App\Controllers\Admin;
 
 class FediverseController extends BaseController
 {
-    public function dashboard()
+    public function dashboard(): string
     {
         return view('admin/fediverse/dashboard');
     }
 
-    public function blockedActors()
+    public function blockedActors(): string
     {
         helper(['form']);
 
@@ -26,7 +26,7 @@ class FediverseController extends BaseController
         ]);
     }
 
-    public function blockedDomains()
+    public function blockedDomains(): string
     {
         helper(['form']);
 

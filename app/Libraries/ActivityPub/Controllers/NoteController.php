@@ -41,7 +41,7 @@ class NoteController extends Controller
         $this->config = config('ActivityPub');
     }
 
-    public function _remap(string $method, string ...$params)
+    public function _remap(string $method, string ...$params): mixed
     {
         if (!($this->note = model('NoteModel')->getNoteById($params[0]))) {
             throw PageNotFoundException::forPageNotFound();
@@ -63,8 +63,7 @@ class NoteController extends Controller
 
     public function replies(): RedirectResponse
     {
-        /** get note replies
-         * @var NoteModel */
+        /** get note replies */
         $noteReplies = model('NoteModel')
             ->where(
                 'in_reply_to_id',
@@ -216,10 +215,7 @@ class NoteController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * @return mixed|ResponseInterface
-     */
-    public function attemptRemoteAction(string $action)
+    public function attemptRemoteAction(string $action): RedirectResponse|ResponseInterface
     {
         $rules = [
             'handle' =>

@@ -10,7 +10,7 @@ namespace App\Entities;
 
 use CodeIgniter\Entity\Entity;
 use CodeIgniter\Files\File;
-use Config\Images as ImagesConfig;
+use Config\Images;
 use Config\Services;
 use RuntimeException;
 
@@ -35,30 +35,11 @@ use RuntimeException;
  */
 class Image extends Entity
 {
-    /**
-     * @var ImagesConfig
-     */
-    protected $config;
-
-    /**
-     * @var null|File
-     */
-    protected $file;
-
-    /**
-     * @var string
-     */
-    protected $dirname;
-
-    /**
-     * @var string
-     */
-    protected $filename;
-
-    /**
-     * @var string
-     */
-    protected $extension;
+    protected Images $config;
+    protected ?File $file;
+    protected string $dirname;
+    protected string $filename;
+    protected string $extension;
 
     public function __construct(
         ?File $file,

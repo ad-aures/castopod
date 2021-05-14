@@ -44,7 +44,7 @@ class AnalyticsPodcastsByService extends Entity
         'hits' => 'integer',
     ];
 
-    public function getLabels()
+    public function getLabels(): string
     {
         return UserAgentsRSS::getName($this->attributes['labels']) ??
             $this->attributes['labels'];

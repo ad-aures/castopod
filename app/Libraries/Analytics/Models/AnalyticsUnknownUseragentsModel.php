@@ -10,24 +10,20 @@
 
 namespace Analytics\Models;
 
-use Analytics\Entities\AnalyticsUnknownUseragents;
+use Analytics\Entities\AnalyticsUnknownUserAgent;
 use CodeIgniter\Model;
 
-class AnalyticsUnknownUseragentsModel extends Model
+class AnalyticsUnknownUserAgentModel extends Model
 {
     /**
      * @var string
      */
     protected $table = 'analytics_unknown_useragents';
-    /**
-     * @var string
-     */
-    protected $primaryKey = 'id';
 
     /**
      * @var string
      */
-    protected $returnType = AnalyticsUnknownUseragents::class;
+    protected $returnType = AnalyticsUnknownUserAgent::class;
     /**
      * @var bool
      */
@@ -37,4 +33,12 @@ class AnalyticsUnknownUseragentsModel extends Model
      * @var bool
      */
     protected $useTimestamps = false;
+
+    /**
+     * @return mixed[]
+     */
+    public function getUserAgents(int $lastKnownId = 0): array
+    {
+        return $this->where('id >', $lastKnownId)->findAll();
+    }
 }

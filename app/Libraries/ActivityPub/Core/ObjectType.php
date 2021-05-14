@@ -16,7 +16,7 @@ namespace ActivityPub\Core;
 class ObjectType extends AbstractObject
 {
     /**
-     * @var array|string
+     * @var string|string[]
      */
     protected $context = 'https://www.w3.org/ns/activitystreams';
 
@@ -41,12 +41,12 @@ class ObjectType extends AbstractObject
     protected $published;
 
     /**
-     * @var array
+     * @var string[]
      */
     protected $to = ['https://www.w3.org/ns/activitystreams#Public'];
 
     /**
-     * @var array
+     * @var string[]
      */
     protected $cc = [];
 }

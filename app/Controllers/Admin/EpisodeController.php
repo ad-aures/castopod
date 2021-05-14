@@ -8,6 +8,9 @@
 
 namespace App\Controllers\Admin;
 
+use CodeIgniter\Exceptions\PageNotFoundException;
+use CodeIgniter\HTTP\RedirectResponse;
+use Config\Database;
 use App\Entities\Episode;
 use App\Entities\Note;
 use App\Entities\Podcast;
@@ -29,12 +32,14 @@ class EpisodeController extends BaseController
      */
     protected $episode;
 
-    public function _remap(string $method, ...$params)
+    public function _remap(string $method, string ...$params): mixed
     {
         if (
-            !($this->podcast = (new PodcastModel())->getPodcastById($params[0]))
+            ($this->podcast = (new PodcastModel())->getPodcastById(
+                (int) $params[0],
+            )) === null
         ) {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+            throw PageNotFoundException::forPageNotFound();
         }
 
         if (count($params) > 1) {
@@ -46,7 +51,7 @@ class EpisodeController extends BaseController
                     ])
                     ->first())
             ) {
-                throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+                throw PageNotFoundException::forPageNotFound();
             }
 
             unset($params[1]);
@@ -56,7 +61,7 @@ class EpisodeController extends BaseController
         return $this->$method(...$params);
     }
 
-    public function list()
+    public function list(): string
     {
         $episodes = (new EpisodeModel())
             ->where('podcast_id', $this->podcast->id)
@@ -74,7 +79,7 @@ class EpisodeController extends BaseController
         return view('admin/episode/list', $data);
     }
 
-    public function view()
+    public function view(): string
     {
         $data = [
             'podcast' => $this->podcast,
@@ -88,7 +93,7 @@ class EpisodeController extends BaseController
         return view('admin/episode/view', $data);
     }
 
-    public function create()
+    public function create(): string
     {
         helper(['form']);
 
@@ -102,7 +107,7 @@ class EpisodeController extends BaseController
         return view('admin/episode/create', $data);
     }
 
-    public function attemptCreate()
+    public function attemptCreate(): RedirectResponse
     {
         $rules = [
             'audio_file' => 'uploaded[audio_file]|ext_in[audio_file,mp3,m4a]',
@@ -204,7 +209,7 @@ class EpisodeController extends BaseController
         ]);
     }
 
-    public function edit()
+    public function edit(): string
     {
         helper(['form']);
 
@@ -220,7 +225,7 @@ class EpisodeController extends BaseController
         return view('admin/episode/edit', $data);
     }
 
-    public function attemptEdit()
+    public function attemptEdit(): RedirectResponse
     {
         $rules = [
             'audio_file' =>
@@ -282,17 +287,14 @@ class EpisodeController extends BaseController
             }
         } elseif ($transcriptChoice === 'remote-url') {
             if (
-                $transcriptFileRemoteUrl = $this->request->getPost(
+                ($transcriptFileRemoteUrl = $this->request->getPost(
                     'transcript_file_remote_url',
-                )
+                )) &&
+                (($transcriptFile = $this->episode->transcript_file) &&
+                    $transcriptFile !== null)
             ) {
-                if (
-                    ($transcriptFile = $this->episode->transcript_file) &&
-                    $transcriptFile !== null
-                ) {
-                    unlink($transcriptFile);
-                    $this->episode->transcript_file_path = null;
-                }
+                unlink($transcriptFile);
+                $this->episode->transcript_file_path = null;
             }
             $this->episode->transcript_file_remote_url = $transcriptFileRemoteUrl;
         }
@@ -306,17 +308,14 @@ class EpisodeController extends BaseController
             }
         } elseif ($chaptersChoice === 'remote-url') {
             if (
-                $chaptersFileRemoteUrl = $this->request->getPost(
+                ($chaptersFileRemoteUrl = $this->request->getPost(
                     'chapters_file_remote_url',
-                )
+                )) &&
+                (($chaptersFile = $this->episode->chapters_file) &&
+                    $chaptersFile !== null)
             ) {
-                if (
-                    ($chaptersFile = $this->episode->chapters_file) &&
-                    $chaptersFile !== null
-                ) {
-                    unlink($chaptersFile);
-                    $this->episode->chapters_file_path = null;
-                }
+                unlink($chaptersFile);
+                $this->episode->chapters_file_path = null;
             }
             $this->episode->chapters_file_remote_url = $chaptersFileRemoteUrl;
         }
@@ -351,7 +350,7 @@ class EpisodeController extends BaseController
         ]);
     }
 
-    public function transcriptDelete()
+    public function transcriptDelete(): RedirectResponse
     {
         unlink($this->episode->transcript_file);
         $this->episode->transcript_file_path = null;
@@ -368,7 +367,7 @@ class EpisodeController extends BaseController
         return redirect()->back();
     }
 
-    public function chaptersDelete()
+    public function chaptersDelete(): RedirectResponse
     {
         unlink($this->episode->chapters_file);
         $this->episode->chapters_file_path = null;
@@ -385,7 +384,7 @@ class EpisodeController extends BaseController
         return redirect()->back();
     }
 
-    public function publish()
+    public function publish(): string
     {
         if ($this->episode->publication_status === 'not_published') {
             helper(['form']);
@@ -400,12 +399,12 @@ class EpisodeController extends BaseController
                 1 => $this->episode->title,
             ]);
             return view('admin/episode/publish', $data);
-        } else {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
+
+        throw PageNotFoundException::forPageNotFound();
     }
 
-    public function attemptPublish()
+    public function attemptPublish(): RedirectResponse
     {
         $rules = [
             'publication_method' => 'required',
@@ -420,7 +419,7 @@ class EpisodeController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $db = \Config\Database::connect();
+        $db = Database::connect();
         $db->transStart();
 
         $newNote = new Note([
@@ -482,7 +481,7 @@ class EpisodeController extends BaseController
         ]);
     }
 
-    public function publishEdit()
+    public function publishEdit(): string
     {
         if ($this->episode->publication_status === 'scheduled') {
             helper(['form']);
@@ -503,12 +502,11 @@ class EpisodeController extends BaseController
                 1 => $this->episode->title,
             ]);
             return view('admin/episode/publish_edit', $data);
-        } else {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
+        throw PageNotFoundException::forPageNotFound();
     }
 
-    public function attemptPublishEdit()
+    public function attemptPublishEdit(): RedirectResponse
     {
         $rules = [
             'note_id' => 'required',
@@ -524,7 +522,7 @@ class EpisodeController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $db = \Config\Database::connect();
+        $db = Database::connect();
         $db->transStart();
 
         $note = (new NoteModel())->getNoteById(
@@ -584,7 +582,7 @@ class EpisodeController extends BaseController
         ]);
     }
 
-    public function unpublish()
+    public function unpublish(): string
     {
         if ($this->episode->publication_status === 'published') {
             helper(['form']);
@@ -599,12 +597,12 @@ class EpisodeController extends BaseController
                 1 => $this->episode->title,
             ]);
             return view('admin/episode/unpublish', $data);
-        } else {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
+
+        throw PageNotFoundException::forPageNotFound();
     }
 
-    public function attemptUnpublish()
+    public function attemptUnpublish(): RedirectResponse
     {
         $rules = [
             'understand' => 'required',
@@ -617,7 +615,7 @@ class EpisodeController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $db = \Config\Database::connect();
+        $db = Database::connect();
 
         $db->transStart();
 
@@ -650,14 +648,14 @@ class EpisodeController extends BaseController
         ]);
     }
 
-    public function delete()
+    public function delete(): RedirectResponse
     {
         (new EpisodeModel())->delete($this->episode->id);
 
         return redirect()->route('episode-list', [$this->podcast->id]);
     }
 
-    public function soundbitesEdit()
+    public function soundbitesEdit(): string
     {
         helper(['form']);
 
@@ -673,7 +671,7 @@ class EpisodeController extends BaseController
         return view('admin/episode/soundbites', $data);
     }
 
-    public function soundbitesAttemptEdit()
+    public function soundbitesAttemptEdit(): RedirectResponse
     {
         $soundbites_array = $this->request->getPost('soundbites_array');
         $rules = [
@@ -682,7 +680,7 @@ class EpisodeController extends BaseController
             'soundbites_array.0.duration' =>
                 'permit_empty|required_with[soundbites_array.0.start_time]|decimal|greater_than_equal_to[0]',
         ];
-        foreach ($soundbites_array as $soundbite_id => $soundbite) {
+        foreach (array_keys($soundbites_array) as $soundbite_id) {
             $rules += [
                 "soundbites_array.{$soundbite_id}.start_time" => 'required|decimal|greater_than_equal_to[0]',
                 "soundbites_array.{$soundbite_id}.duration" => 'required|decimal|greater_than_equal_to[0]',
@@ -728,7 +726,7 @@ class EpisodeController extends BaseController
         ]);
     }
 
-    public function soundbiteDelete($soundbiteId)
+    public function soundbiteDelete(int $soundbiteId): RedirectResponse
     {
         (new SoundbiteModel())->deleteSoundbite(
             $this->podcast->id,
@@ -742,7 +740,7 @@ class EpisodeController extends BaseController
         ]);
     }
 
-    public function embeddablePlayer()
+    public function embeddablePlayer(): string
     {
         helper(['form']);
 

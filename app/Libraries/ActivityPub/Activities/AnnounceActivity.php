@@ -14,6 +14,7 @@
 namespace ActivityPub\Activities;
 
 use ActivityPub\Core\Activity;
+use ActivityPub\Entities\Note;
 
 class AnnounceActivity extends Activity
 {
@@ -22,7 +23,7 @@ class AnnounceActivity extends Activity
      */
     protected $type = 'Announce';
 
-    public function __construct($reblogNote)
+    public function __construct(Note $reblogNote)
     {
         $this->actor = $reblogNote->actor->uri;
         $this->object = $reblogNote->reblog_of_note->uri;

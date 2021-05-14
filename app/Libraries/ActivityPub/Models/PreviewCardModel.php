@@ -51,7 +51,7 @@ class PreviewCardModel extends Model
      */
     protected $useTimestamps = true;
 
-    public function getPreviewCardFromUrl($url)
+    public function getPreviewCardFromUrl(string $url): ?PreviewCard
     {
         $hashedPreviewCardUrl = md5($url);
         $cacheName =
@@ -65,7 +65,7 @@ class PreviewCardModel extends Model
         return $found;
     }
 
-    public function getNotePreviewCard($noteId)
+    public function getNotePreviewCard(string $noteId): ?PreviewCard
     {
         $cacheName =
             config('ActivityPub')->cachePrefix . "note#{$noteId}_preview_card";
@@ -89,10 +89,7 @@ class PreviewCardModel extends Model
         return $found;
     }
 
-    /**
-     * @return bool|BaseResult
-     */
-    public function deletePreviewCard($id, $url)
+    public function deletePreviewCard(int $id, string $url): BaseResult|bool
     {
         $hashedPreviewCardUrl = md5($url);
         cache()->delete(

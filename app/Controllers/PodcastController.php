@@ -8,6 +8,7 @@
 
 namespace App\Controllers;
 
+use CodeIgniter\Exceptions\PageNotFoundException;
 use Analytics\AnalyticsTrait;
 use App\Entities\Podcast;
 use App\Models\EpisodeModel;
@@ -23,23 +24,25 @@ class PodcastController extends BaseController
      */
     protected $podcast;
 
-    public function _remap($method, ...$params)
+    public function _remap(string $method, string ...$params): mixed
     {
         if (count($params) === 0) {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+            throw PageNotFoundException::forPageNotFound();
         }
 
         if (
-            $this->podcast = (new PodcastModel())->getPodcastByName($params[0])
+            ($this->podcast = (new PodcastModel())->getPodcastByName(
+                $params[0],
+            )) !== null
         ) {
             unset($params[0]);
             return $this->$method(...$params);
         }
 
-        throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        throw PageNotFoundException::forPageNotFound();
     }
 
-    public function activity()
+    public function activity(): string
     {
         // Prevent analytics hit when authenticated
         if (!can_user_interact()) {
@@ -58,34 +61,28 @@ class PodcastController extends BaseController
         );
 
         if (!($cachedView = cache($cacheName))) {
-            helper('persons');
-            $persons = [];
-            construct_person_array($this->podcast->persons, $persons);
-
             $data = [
                 'podcast' => $this->podcast,
                 'notes' => (new NoteModel())->getActorPublishedNotes(
                     $this->podcast->actor_id,
                 ),
-                'persons' => $persons,
             ];
 
             // if user is logged in then send to the authenticated activity view
             if (can_user_interact()) {
                 helper('form');
                 return view('podcast/activity_authenticated', $data);
-            } else {
-                return view('podcast/activity', $data, [
-                    'cache' => DECADE,
-                    'cache_name' => $cacheName,
-                ]);
             }
+            return view('podcast/activity', $data, [
+                'cache' => DECADE,
+                'cache_name' => $cacheName,
+            ]);
         }
 
         return $cachedView;
     }
 
-    public function episodes()
+    public function episodes(): string
     {
         // Prevent analytics hit when authenticated
         if (!can_user_interact()) {
@@ -95,7 +92,7 @@ class PodcastController extends BaseController
         $yearQuery = $this->request->getGet('year');
         $seasonQuery = $this->request->getGet('season');
 
-        if (!$yearQuery and !$seasonQuery) {
+        if (!$yearQuery && !$seasonQuery) {
             $defaultQuery = (new PodcastModel())->getDefaultQuery(
                 $this->podcast->id,
             );
@@ -130,7 +127,7 @@ class PodcastController extends BaseController
             $episodesNavigation = [];
             $activeQuery = null;
             foreach ($years as $year) {
-                $isActive = $yearQuery == $year['year'];
+                $isActive = $yearQuery === $year['year'];
                 if ($isActive) {
                     $activeQuery = [
                         'type' => 'year',
@@ -140,7 +137,7 @@ class PodcastController extends BaseController
                     ];
                 }
 
-                array_push($episodesNavigation, [
+                $episodesNavigation[] = [
                     'label' => $year['year'],
                     'number_of_episodes' => $year['number_of_episodes'],
                     'route' =>
@@ -148,11 +145,11 @@ class PodcastController extends BaseController
                         '?year=' .
                         $year['year'],
                     'is_active' => $isActive,
-                ]);
+                ];
             }
 
             foreach ($seasons as $season) {
-                $isActive = $seasonQuery == $season['season_number'];
+                $isActive = $seasonQuery === $season['season_number'];
                 if ($isActive) {
                     $activeQuery = [
                         'type' => 'season',
@@ -164,7 +161,7 @@ class PodcastController extends BaseController
                     ];
                 }
 
-                array_push($episodesNavigation, [
+                $episodesNavigation[] = [
                     'label' => lang('Podcast.season', [
                         'seasonNumber' => $season['season_number'],
                     ]),
@@ -174,12 +171,8 @@ class PodcastController extends BaseController
                         '?season=' .
                         $season['season_number'],
                     'is_active' => $isActive,
-                ]);
+                ];
             }
-
-            helper('persons');
-            $persons = [];
-            construct_person_array($this->podcast->persons, $persons);
 
             $data = [
                 'podcast' => $this->podcast,
@@ -191,7 +184,6 @@ class PodcastController extends BaseController
                     $yearQuery,
                     $seasonQuery,
                 ),
-                'persons' => $persons,
             ];
 
             $secondsToNextUnpublishedEpisode = (new EpisodeModel())->getSecondsToNextUnpublishedEpisode(
@@ -201,14 +193,13 @@ class PodcastController extends BaseController
             // if user is logged in then send to the authenticated episodes view
             if (can_user_interact()) {
                 return view('podcast/episodes_authenticated', $data);
-            } else {
-                return view('podcast/episodes', $data, [
-                    'cache' => $secondsToNextUnpublishedEpisode
-                        ? $secondsToNextUnpublishedEpisode
-                        : DECADE,
-                    'cache_name' => $cacheName,
-                ]);
             }
+            return view('podcast/episodes', $data, [
+                'cache' => $secondsToNextUnpublishedEpisode
+                    ? $secondsToNextUnpublishedEpisode
+                    : DECADE,
+                'cache_name' => $cacheName,
+            ]);
         }
 
         return $cachedView;

@@ -16,10 +16,8 @@ if (!function_exists('button')) {
      *
      * Creates a stylized button or button like anchor tag if the URL is defined.
      *
-     * @param array  $customOptions button options: variant, size, iconLeft, iconRight
-     * @param array  $customAttributes Additional attributes
-     *
-     * @return string
+     * @param array<string, string|null|bool> $customOptions button options: variant, size, iconLeft, iconRight
+     * @param array<string, string> $customAttributes Additional attributes
      */
     function button(
         string $label = '',
@@ -130,10 +128,8 @@ if (!function_exists('icon_button')) {
      *
      * @param string $icon The button icon
      * @param string $title The button label
-     * @param array  $customOptions button options: variant, size, iconLeft, iconRight
-     * @param array  $customAttributes Additional attributes
-     *
-     * @return string
+     * @param array<string, string|null|bool>  $customOptions button options: variant, size, iconLeft, iconRight
+     * @param array<string, string>  $customAttributes Additional attributes
      */
     function icon_button(
         string $icon,
@@ -167,8 +163,6 @@ if (!function_exists('hint_tooltip')) {
      * Used to produce tooltip with a question mark icon for hint texts
      *
      * @param string $hintText The hint text
-     *
-     * @return string
      */
     function hint_tooltip(string $hintText = '', string $class = ''): string
     {
@@ -193,11 +187,9 @@ if (!function_exists('data_table')) {
      *
      * Creates a stylized table.
      *
-     * @param array     $columns array of associate arrays with `header` and `cell` keys where `cell` is a function with a row of $data as parameter
-     * @param array     $data data to loop through and display in rows
-     * @param array     ...$rest Any other argument to pass to the `cell` function
-     *
-     * @return string
+     * @param array<array<string, mixed>> $columns array of associate arrays with `header` and `cell` keys where `cell` is a function with a row of $data as parameter
+     * @param mixed[] $data data to loop through and display in rows
+     * @param mixed ...$rest Any other argument to pass to the `cell` function
      */
     function data_table(array $columns, array $data = [], ...$rest): string
     {
@@ -252,8 +244,6 @@ if (!function_exists('publication_pill')) {
      * Publication pill component
      *
      * Shows the stylized publication datetime in regards to current datetime.
-     *
-     * @return string
      */
     function publication_pill(
         ?Time $publicationDate,
@@ -303,7 +293,6 @@ if (!function_exists('publication_button')) {
      * Displays the appropriate publication button depending on the publication status.
      *
      * @param boolean   $publicationStatus the episode's publication status     *
-     * @return string
      */
     function publication_button(
         int $podcastId,

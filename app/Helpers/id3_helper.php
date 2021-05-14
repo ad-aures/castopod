@@ -68,7 +68,7 @@ if (!function_exists('write_audio_file_tags')) {
             ],
             'album' => [$episode->podcast->title],
             'year' => [
-                $episode->published_at
+                $episode->published_at !== null
                     ? $episode->published_at->format('Y')
                     : '',
             ],

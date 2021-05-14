@@ -21,7 +21,7 @@ class PermissionFilter implements FilterInterface
      * sent back to the client, allowing for error pages,
      * redirects, etc.
      *
-     * @param array|null                         $params
+     * @param string[]|null                         $params
      * @return void|mixed
      */
     public function before(RequestInterface $request, $params = null)
@@ -50,8 +50,8 @@ class PermissionFilter implements FilterInterface
         foreach ($params as $permission) {
             // check if permission is for a specific podcast
             if (
-                (startsWith($permission, 'podcast-') ||
-                    startsWith($permission, 'podcast_episodes-')) &&
+                (str_starts_with($permission, 'podcast-') ||
+                    str_starts_with($permission, 'podcast_episodes-')) &&
                 count($routerParams) > 0
             ) {
                 if (
@@ -91,7 +91,7 @@ class PermissionFilter implements FilterInterface
      * to stop execution of other after filters, short of
      * throwing an Exception or Error.
      *
-     * @param array|null                          $arguments
+     * @param string[]|null                          $arguments
      */
     public function after(
         RequestInterface $request,

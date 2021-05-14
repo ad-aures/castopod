@@ -69,6 +69,8 @@ class PageModel extends Model
     protected $beforeDelete = ['clearCache'];
 
     /**
+     * @param mixed[] $data
+     *
      * @return array<string, array<string|int, mixed>>
      */
     protected function clearCache(array $data): array

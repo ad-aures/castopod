@@ -8,9 +8,10 @@
 
 namespace App\Controllers\Admin;
 
+use CodeIgniter\HTTP\RedirectResponse;
 class HomeController extends BaseController
 {
-    public function index()
+    public function index(): RedirectResponse
     {
         session()->keepFlashdata('message');
         return redirect()->route('podcast-list');

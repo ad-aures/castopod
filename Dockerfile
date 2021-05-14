@@ -5,7 +5,7 @@
 # should be used only for development purposes
 ####################################################
 
-FROM php:7.3-fpm
+FROM php:8.0-fpm
 
 LABEL maintainer="Yassine Doghri<yassine@podlibre.org>"
 
@@ -37,8 +37,8 @@ RUN apt-get update && apt-get install -y \
     zlib1g-dev \
     && docker-php-ext-install intl
 
-RUN docker-php-ext-configure gd --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install gd
+RUN docker-php-ext-configure gd --with-jpeg \
+    && docker-php-ext-install gd    
 
 RUN pecl install -o -f redis \
     &&  rm -rf /tmp/pear \

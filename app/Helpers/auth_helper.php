@@ -27,7 +27,7 @@ if (!function_exists('set_interact_as_actor')) {
     /**
      * Sets the actor id of which the user is acting as
      */
-    function set_interact_as_actor($actorId): void
+    function set_interact_as_actor(int $actorId): void
     {
         $authenticate = Services::authentication();
         $authenticate->check();
@@ -65,10 +65,8 @@ if (!function_exists('interact_as_actor_id')) {
 if (!function_exists('interact_as_actor')) {
     /**
      * Get the actor the user is currently interacting as
-     *
-     * @return Actor|false
      */
-    function interact_as_actor()
+    function interact_as_actor(): Actor|false
     {
         $authenticate = Services::authentication();
         $authenticate->check();

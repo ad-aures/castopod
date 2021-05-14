@@ -49,8 +49,10 @@ class BlockedDomainModel extends Model
 
     /**
      * Retrieves instance or podcast domain blocks depending on whether or not $podcastId param is set.
+     * 
+     * @return BlockedDomain[]
      */
-    public function getBlockedDomains()
+    public function getBlockedDomains(): array
     {
         $cacheName = config('ActivityPub')->cachePrefix . 'blocked_domains';
         if (!($found = cache($cacheName))) {
@@ -61,14 +63,14 @@ class BlockedDomainModel extends Model
         return $found;
     }
 
-    public function isDomainBlocked($domain)
+    public function isDomainBlocked(string $name): bool
     {
-        $hashedDomain = md5($domain);
+        $hashedDomainName = md5($name);
         $cacheName =
             config('ActivityPub')->cachePrefix .
-            "domain#{$hashedDomain}_isBlocked";
+            "domain#{$hashedDomainName}_isBlocked";
         if (!($found = cache($cacheName))) {
-            $found = (bool) $this->find($domain);
+            $found = (bool) $this->find($name);
 
             cache()->save($cacheName, $found, DECADE);
         }
@@ -76,7 +78,7 @@ class BlockedDomainModel extends Model
         return $found;
     }
 
-    public function blockDomain($name)
+    public function blockDomain(string $name): int|bool
     {
         $hashedDomain = md5($name);
         $prefix = config('ActivityPub')->cachePrefix;
@@ -104,10 +106,7 @@ class BlockedDomainModel extends Model
         return $result;
     }
 
-    /**
-     * @return bool|BaseResult
-     */
-    public function unblockDomain($name)
+    public function unblockDomain(string $name): BaseResult|bool
     {
         $hashedDomain = md5($name);
         $prefix = config('ActivityPub')->cachePrefix;

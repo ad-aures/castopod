@@ -103,7 +103,7 @@ class FollowModel extends Model
             }
 
             $this->db->transComplete();
-        } catch (Exception $exception) {
+        } catch (Exception) {
             // follow already exists, do nothing
         }
     }
@@ -117,7 +117,7 @@ class FollowModel extends Model
     public function removeFollower(
         Actor $actor,
         Actor $targetActor,
-        $registerActivity = true
+        bool $registerActivity = true
     ): void {
         $this->db->transStart();
 

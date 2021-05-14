@@ -8,12 +8,19 @@
 
 namespace App\Models;
 
+use App\Entities\Note;
 use ActivityPub\Models\NoteModel as ActivityPubNoteModel;
 
 class NoteModel extends ActivityPubNoteModel
 {
-    protected $returnType = \App\Entities\Note::class;
+    /**
+     * @var string
+     */
+    protected $returnType = Note::class;
 
+    /**
+     * @var string[]
+     */
     protected $allowedFields = [
         'id',
         'uri',
@@ -33,9 +40,9 @@ class NoteModel extends ActivityPubNoteModel
     /**
      * Retrieves all published notes for a given episode ordered by publication date
      *
-     * @return \App\Entities\Note[]
+     * @return Note[]
      */
-    public function getEpisodeNotes($episodeId)
+    public function getEpisodeNotes(int $episodeId): array
     {
         return $this->where([
             'episode_id' => $episodeId,

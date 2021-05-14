@@ -9,21 +9,23 @@
 namespace App\Entities;
 
 use ActivityPub\Entities\Note as ActivityPubNote;
-use App\Models\ActorModel;
 use App\Models\EpisodeModel;
 use RuntimeException;
 
 /**
  * @property int|null $episode_id
  * @property Episode|null $episode
+ * @property Actor $actor
+ * @property Note $reblog_of_note
+ * @property Note $reply_to_note
  */
 class Note extends ActivityPubNote
 {
-    /**
-     * @var Episode|null
-     */
-    protected $episode;
+    protected ?Episode $episode;
 
+    /**
+     * @var array<string, string>
+     */
     protected $casts = [
         'id' => 'string',
         'uri' => 'string',
@@ -41,10 +43,8 @@ class Note extends ActivityPubNote
 
     /**
      * Returns the note's attached episode
-     *
-     * @return \App\Entities\Episode
      */
-    public function getEpisode()
+    public function getEpisode(): ?Episode
     {
         if ($this->episode_id === null) {
             throw new RuntimeException(

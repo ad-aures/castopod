@@ -14,7 +14,7 @@ use ActivityPub\Core\ObjectType;
 class ActorObject extends ObjectType
 {
     /**
-     * @var array|string
+     * @var string|string[]
      */
     protected $context = [
         'https://www.w3.org/ns/activitystreams',
@@ -62,12 +62,12 @@ class ActorObject extends ObjectType
     protected $url;
 
     /**
-     * @var array|null
+     * @var array<string, string>|null
      */
     protected $image;
 
     /**
-     * @var array
+     * @var array<string, string>
      */
     protected $icon = [];
 

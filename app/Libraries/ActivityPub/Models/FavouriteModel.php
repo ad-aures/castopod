@@ -109,9 +109,9 @@ class FavouriteModel extends UuidModel
     }
 
     public function removeFavourite(
-        $actor,
-        $note,
-        $registerActivity = true
+        Actor $actor,
+        Note $note,
+        bool $registerActivity = true
     ): void {
         $this->db->transStart();
 

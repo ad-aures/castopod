@@ -10,6 +10,7 @@ namespace ActivityPub\Models;
 
 use ActivityPub\Entities\Activity;
 use CodeIgniter\Database\BaseResult;
+use CodeIgniter\Database\Exceptions\DataException;
 use CodeIgniter\I18n\Time;
 use DateTimeInterface;
 use Michalsn\Uuid\UuidModel;
@@ -59,7 +60,7 @@ class ActivityModel extends UuidModel
     protected $useTimestamps = true;
     protected $updatedField;
 
-    public function getActivityById($activityId)
+    public function getActivityById(string $activityId): ?Activity
     {
         $cacheName =
             config('ActivityPub')->cachePrefix . "activity#{$activityId}";
@@ -76,8 +77,6 @@ class ActivityModel extends UuidModel
      * Inserts a new activity record in the database
      *
      * @param Time $scheduledAt
-     *
-     * @return BaseResult|int|string|false
      */
     public function newActivity(
         string $type,
@@ -87,7 +86,7 @@ class ActivityModel extends UuidModel
         string $payload,
         DateTimeInterface $scheduledAt = null,
         ?string $status = null
-    ) {
+    ): BaseResult|int|string|false {
         return $this->insert(
             [
                 'actor_id' => $actorId,
@@ -102,7 +101,10 @@ class ActivityModel extends UuidModel
         );
     }
 
-    public function getScheduledActivities()
+    /**
+     * @return Activity[] 
+     */
+    public function getScheduledActivities(): array
     {
         return $this->where('`scheduled_at` <= NOW()', null, false)
             ->where('status', 'queued')

@@ -23,7 +23,10 @@ if (!function_exists('render_breadcrumb')) {
 }
 
 if (!function_exists('replace_breadcrumb_params')) {
-    function replace_breadcrumb_params($newParams): void
+    /**
+     * @param string[] $newParams
+     */
+    function replace_breadcrumb_params(array $newParams): void
     {
         $breadcrumb = Services::breadcrumb();
         $breadcrumb->replaceParams($newParams);

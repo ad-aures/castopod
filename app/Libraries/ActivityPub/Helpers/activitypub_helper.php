@@ -18,8 +18,6 @@ use CodeIgniter\HTTP\Exceptions\HTTPException;
 if (!function_exists('get_webfinger_data')) {
     /**
      * Retrieve actor webfinger data from username and domain
-     *
-     * @return object|null
      */
     function get_webfinger_data(string $username, string $domain): ?object
     {
@@ -45,8 +43,7 @@ if (!function_exists('split_handle')) {
     /**
      * Splits handle into its parts (username, host and port)
      *
-     * @param  string $handle
-     * @return bool|array
+     * @return array<string, string>|false
      */
     function split_handle(string $handle)
     {
@@ -107,7 +104,7 @@ if (!function_exists('accept_follow')) {
             );
             $acceptRequest->sign($actor->public_key_id, $actor->private_key);
             $acceptRequest->post();
-        } catch (Exception $exception) {
+        } catch (Exception) {
             $db->transRollback();
         }
 
@@ -163,8 +160,6 @@ if (!function_exists('extract_urls_from_message')) {
 if (!function_exists('create_preview_card_from_url')) {
     /**
      * Extract open graph metadata from given url and create preview card
-     *
-     * @return PreviewCard|null
      */
     function create_preview_card_from_url(URI $url): ?PreviewCard
     {
@@ -223,8 +218,6 @@ if (!function_exists('create_preview_card_from_url')) {
 if (!function_exists('get_or_create_preview_card_from_url')) {
     /**
      * Extract open graph metadata from given url and create preview card
-     *
-     * @return PreviewCard|null
      */
     function get_or_create_preview_card_from_url(URI $url): ?PreviewCard
     {
@@ -246,8 +239,6 @@ if (!function_exists('get_or_create_actor_from_uri')) {
     /**
      * Retrieves actor from database using the actor uri
      * If Actor is not present, it creates the record in the database and returns it.
-     *
-     * @return Actor|null
      */
     function get_or_create_actor_from_uri(string $actorUri): ?Actor
     {
@@ -265,8 +256,6 @@ if (!function_exists('get_or_create_actor')) {
     /**
      * Retrieves actor from database using the actor username and domain
      * If actor is not present, it creates the record in the database and returns it.
-     *
-     * @return Actor|null
      */
     function get_or_create_actor(string $username, string $domain): ?Actor
     {
@@ -292,8 +281,6 @@ if (!function_exists('create_actor_from_uri')) {
     /**
      * Creates actor record in database using
      * the info gathered from the actorUri parameter
-     *
-     * @return Actor|null
      */
     function create_actor_from_uri(string $actorUri): ?Actor
     {
@@ -352,8 +339,6 @@ if (!function_exists('get_current_domain')) {
 if (!function_exists('extract_text_from_html')) {
     /**
      * Extracts the text from html content
-     *
-     * @return string|null
      */
     function extract_text_from_html(string $content): ?string
     {
@@ -381,7 +366,7 @@ if (!function_exists('linkify')) {
                 case 'https':
                     $text = preg_replace_callback(
                         '~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i',
-                        function ($match) use ($protocol, &$links) {
+                        function (array $match) use ($protocol, &$links) {
                             if ($match[1]) {
                                 $protocol = $match[1];
                             }
@@ -452,7 +437,7 @@ if (!function_exists('linkify')) {
                                             ]),
                                         ) .
                                         '>';
-                                } catch (\CodeIgniter\HTTP\Exceptions\HTTPException $httpException) {
+                                } catch (\CodeIgniter\HTTP\Exceptions\HTTPException) {
                                     // Couldn't retrieve actor, do not wrap the text in link
                                     return '<' .
                                         array_push($links, $match[0]) .
@@ -485,7 +470,7 @@ if (!function_exists('linkify')) {
                         '~' .
                             preg_quote($protocol, '~') .
                             '://([^\s<]+?)(?<![\.,:])~i',
-                        function ($match) use ($protocol, &$links) {
+                        function (array $match) use ($protocol, &$links) {
                             return '<' .
                                 array_push(
                                     $links,

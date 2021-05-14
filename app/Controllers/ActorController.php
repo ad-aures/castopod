@@ -15,9 +15,12 @@ class ActorController extends ActivityPubActorController
 {
     use AnalyticsTrait;
 
+    /**
+     * @var string[]
+     */
     protected $helpers = ['auth', 'svg', 'components', 'misc'];
 
-    public function follow()
+    public function follow(): string
     {
         // Prevent analytics hit when authenticated
         if (!can_user_interact()) {

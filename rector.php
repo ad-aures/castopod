@@ -11,6 +11,7 @@ use Rector\Core\ValueObject\PhpVersion;
 use Rector\EarlyReturn\Rector\If_\ChangeOrIfContinueToMultiContinueRector;
 use Rector\EarlyReturn\Rector\If_\ChangeOrIfReturnToEarlyReturnRector;
 use Rector\Php55\Rector\String_\StringClassNameToClassConstantRector;
+use Rector\Php80\Rector\ClassMethod\OptionalParametersAfterRequiredRector;
 use Rector\Set\ValueObject\SetList;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
@@ -24,8 +25,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         __DIR__ . '/public',
     ]);
 
+    // do you need to include constants, class aliases or custom autoloader? files listed will be executed
+    $parameters->set(Option::BOOTSTRAP_FILES, [
+        __DIR__ . '/vendor/codeigniter4/codeigniter4/system/Test/bootstrap.php',
+    ]);
+
     // Define what rule sets will be applied
-    $containerConfigurator->import(SetList::PHP_73);
+    $containerConfigurator->import(SetList::PHP_80);
     $containerConfigurator->import(SetList::TYPE_DECLARATION);
     $containerConfigurator->import(SetList::TYPE_DECLARATION_STRICT);
     $containerConfigurator->import(SetList::CODE_QUALITY);
@@ -36,8 +42,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     // auto import fully qualified class names
     $parameters->set(Option::AUTO_IMPORT_NAMES, true);
-    $parameters->set(Option::ENABLE_CACHE, true);
-    $parameters->set(Option::PHP_VERSION_FEATURES, PhpVersion::PHP_73);
+    // $parameters->set(Option::ENABLE_CACHE, true);
+    $parameters->set(Option::PHP_VERSION_FEATURES, PhpVersion::PHP_80);
 
     $parameters->set(Option::SKIP, [
         // skip specific generated files
@@ -54,7 +60,16 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         StringClassNameToClassConstantRector::class => [
             __DIR__ . '/app/Language/*',
         ],
+        OptionalParametersAfterRequiredRector::class => [
+            __DIR__ . '/app/Validation',
+        ],
     ]);
+
+    // Path to phpstan with extensions, that PHPSTan in Rector uses to determine types
+    $parameters->set(
+        Option::PHPSTAN_FOR_RECTOR_PATH,
+        __DIR__ . '/phpstan.neon',
+    );
 
     $services = $containerConfigurator->services();
     $services->set(ConsistentPregDelimiterRector::class)->call('configure', [

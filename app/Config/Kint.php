@@ -23,7 +23,10 @@ class Kint extends BaseConfig
 	|--------------------------------------------------------------------------
 	*/
 
-    public $plugins;
+    /**
+     * @var string[]
+     */
+    public $plugins = [];
 
     /**
      * @var int
@@ -60,9 +63,15 @@ class Kint extends BaseConfig
      */
     public $richSort = Renderer::SORT_FULL;
 
-    public $richObjectPlugins;
+    /**
+     * @var string[]
+     */
+    public $richObjectPlugins = [];
 
-    public $richTabPlugins;
+    /**
+     * @var string[]
+     */
+    public $richTabPlugins = [];
 
     /*
     |--------------------------------------------------------------------------

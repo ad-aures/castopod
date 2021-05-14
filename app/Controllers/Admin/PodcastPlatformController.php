@@ -8,6 +8,7 @@
 
 namespace App\Controllers\Admin;
 
+use CodeIgniter\HTTP\RedirectResponse;
 use App\Entities\Podcast;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use App\Models\PlatformModel;
@@ -21,13 +22,17 @@ class PodcastPlatformController extends BaseController
      */
     protected $podcast;
 
-    public function _remap($method, ...$params)
+    public function _remap(string $method, string ...$params): mixed
     {
         if (count($params) === 0) {
             return $this->$method();
         }
 
-        if ($this->podcast = (new PodcastModel())->getPodcastById($params[0])) {
+        if (
+            ($this->podcast = (new PodcastModel())->getPodcastById(
+                (int) $params[0],
+            )) !== null
+        ) {
             unset($params[0]);
             return $this->$method(...$params);
         }
@@ -35,12 +40,12 @@ class PodcastPlatformController extends BaseController
         throw PageNotFoundException::forPageNotFound();
     }
 
-    public function index()
+    public function index(): string
     {
         return view('admin/podcast/platforms/dashboard');
     }
 
-    public function platforms($platformType)
+    public function platforms(string $platformType): string
     {
         helper('form');
 
@@ -57,8 +62,9 @@ class PodcastPlatformController extends BaseController
         return view('admin/podcast/platforms', $data);
     }
 
-    public function attemptPlatformsUpdate($platformType)
-    {
+    public function attemptPlatformsUpdate(
+        string $platformType
+    ): RedirectResponse {
         $platformModel = new PlatformModel();
         $validation = Services::validation();
 
@@ -105,8 +111,9 @@ class PodcastPlatformController extends BaseController
             ->with('message', lang('Platforms.messages.updateSuccess'));
     }
 
-    public function removePodcastPlatform($platformSlug)
-    {
+    public function removePodcastPlatform(
+        string $platformSlug
+    ): RedirectResponse {
         (new PlatformModel())->removePodcastPlatform(
             $this->podcast->id,
             $platformSlug,

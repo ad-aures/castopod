@@ -19,6 +19,7 @@ use Config\Database;
 use App\Entities\User;
 use App\Models\UserModel;
 use CodeIgniter\Controller;
+use CodeIgniter\HTTP\RedirectResponse;
 use Config\Services;
 use Dotenv\Dotenv;
 
@@ -51,7 +52,14 @@ class InstallController extends Controller
     public function index(): string
     {
         if (!file_exists(ROOTPATH . '.env')) {
-            $this->createEnv();
+            // create empty .env file
+            try {
+                $envFile = fopen(ROOTPATH . '.env', 'w');
+                fclose($envFile);
+            } catch (Throwable) {
+                // Could not create the .env file, redirect to a view with instructions on how to add it manually
+                return view('install/manual_config');
+            }
         }
 
         // Check if .env has all required fields
@@ -85,7 +93,7 @@ class InstallController extends Controller
 
             try {
                 $dotenv->required('cache.handler');
-            } catch (ValidationException $validationException) {
+            } catch (ValidationException) {
                 return $this->cacheConfig();
             }
         } else {
@@ -101,7 +109,7 @@ class InstallController extends Controller
                     'database.default.DBPrefix',
                     'cache.handler',
                 ]);
-            } catch (ValidationException $e) {
+            } catch (ValidationException) {
                 return view('install/manual_config');
             }
         }
@@ -117,7 +125,7 @@ class InstallController extends Controller
                 // if so, show a 404 page
                 throw PageNotFoundException::forPageNotFound();
             }
-        } catch (DatabaseException $databaseException) {
+        } catch (DatabaseException) {
             // Could not connect to the database
             // show database config view to fix value
             session()->setFlashdata(
@@ -137,28 +145,12 @@ class InstallController extends Controller
         return $this->createSuperAdmin();
     }
 
-    /**
-     * Returns the form to generate the .env config file for the instance.
-     * @return mixed|void
-     */
-    public function createEnv()
-    {
-        // create empty .env file
-        try {
-            $envFile = fopen(ROOTPATH . '.env', 'w');
-            fclose($envFile);
-        } catch (Throwable $throwable) {
-            // Could not create the .env file, redirect to a view with manual instructions on how to add it
-            return view('install/manual_config');
-        }
-    }
-
-    public function instanceConfig()
+    public function instanceConfig(): string
     {
         return view('install/instance_config');
     }
 
-    public function attemptInstanceConfig()
+    public function attemptInstanceConfig(): RedirectResponse
     {
         $rules = [
             'hostname' => 'required|validate_url',
@@ -198,12 +190,12 @@ class InstallController extends Controller
         );
     }
 
-    public function databaseConfig()
+    public function databaseConfig(): string
     {
         return view('install/database_config');
     }
 
-    public function attemptDatabaseConfig()
+    public function attemptDatabaseConfig(): RedirectResponse
     {
         $rules = [
             'db_hostname' => 'required',
@@ -236,12 +228,12 @@ class InstallController extends Controller
         return redirect()->back();
     }
 
-    public function cacheConfig()
+    public function cacheConfig(): string
     {
         return view('install/cache_config');
     }
 
-    public function attemptCacheConfig()
+    public function attemptCacheConfig(): RedirectResponse
     {
         $rules = [
             'cache_handler' => 'required',
@@ -288,7 +280,7 @@ class InstallController extends Controller
     /**
      * Returns the form to create a the first superadmin user for the instance.
      */
-    public function createSuperAdmin()
+    public function createSuperAdmin(): string
     {
         return view('install/create_superadmin');
     }
@@ -298,7 +290,7 @@ class InstallController extends Controller
      *
      * After creation, user is redirected to login page to input its credentials.
      */
-    public function attemptCreateSuperAdmin()
+    public function attemptCreateSuperAdmin(): RedirectResponse
     {
         $userModel = new UserModel();
 
@@ -356,7 +348,7 @@ class InstallController extends Controller
      * writes config values in .env file
      * overwrites any existing key and appends new ones
      *
-     * @param array $configData key/value config pairs
+     * @param array<string, string> $configData key/value config pairs
      */
     public static function writeEnv(array $configData): void
     {
@@ -370,7 +362,7 @@ class InstallController extends Controller
                 $keyVal,
                 &$replaced
             ) {
-                if (strpos($line, (string) $key) === 0) {
+                if (str_starts_with($line, (string) $key)) {
                     $replaced = true;
                     return $keyVal;
                 }

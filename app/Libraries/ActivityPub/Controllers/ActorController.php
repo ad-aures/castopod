@@ -41,7 +41,7 @@ class ActorController extends Controller
         $this->config = config('ActivityPub');
     }
 
-    public function _remap($method, ...$params)
+    public function _remap(string $method, string ...$params): mixed
     {
         if (
             count($params) > 0 &&
@@ -301,10 +301,7 @@ class ActorController extends Controller
             ->setBody($followersCollection->toJSON());
     }
 
-    /**
-     * @return mixed|ResponseInterface
-     */
-    public function attemptFollow()
+    public function attemptFollow(): RedirectResponse|ResponseInterface
     {
         $rules = [
             'handle' =>
@@ -354,7 +351,7 @@ class ActorController extends Controller
         );
     }
 
-    public function activity($activityId): RedirectResponse
+    public function activity(string $activityId): RedirectResponse
     {
         if (
             !($activity = model('ActivityModel')->getActivityById($activityId))

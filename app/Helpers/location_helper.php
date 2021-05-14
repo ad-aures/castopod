@@ -11,6 +11,10 @@ use Config\Services;
 if (!function_exists('fetch_osm_location')) {
     /**
      * Fetches places from Nominatim OpenStreetMap
+     *
+     * TODO: move this to Location object?
+     *
+     * @return array<string, string>|null
      */
     function fetch_osm_location(string $locationName): ?array
     {

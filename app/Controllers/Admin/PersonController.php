@@ -8,6 +8,7 @@
 
 namespace App\Controllers\Admin;
 
+use CodeIgniter\HTTP\RedirectResponse;
 use App\Entities\Person;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use App\Models\PersonModel;
@@ -19,27 +20,31 @@ class PersonController extends BaseController
      */
     protected $person;
 
-    public function _remap($method, ...$params)
+    public function _remap(string $method, string ...$params): mixed
     {
         if (count($params) === 0) {
             return $this->$method();
         }
 
-        if ($this->person = (new PersonModel())->getPersonById($params[0])) {
+        if (
+            ($this->person = (new PersonModel())->getPersonById(
+                (int) $params[0],
+            )) !== null
+        ) {
             return $this->$method();
         }
 
         throw PageNotFoundException::forPageNotFound();
     }
 
-    public function index()
+    public function index(): string
     {
         $data = ['persons' => (new PersonModel())->findAll()];
 
         return view('admin/person/list', $data);
     }
 
-    public function view()
+    public function view(): string
     {
         $data = ['person' => $this->person];
 
@@ -47,14 +52,14 @@ class PersonController extends BaseController
         return view('admin/person/view', $data);
     }
 
-    public function create()
+    public function create(): string
     {
         helper(['form']);
 
         return view('admin/person/create');
     }
 
-    public function attemptCreate()
+    public function attemptCreate(): RedirectResponse
     {
         $rules = [
             'image' =>
@@ -89,7 +94,7 @@ class PersonController extends BaseController
         return redirect()->route('person-list');
     }
 
-    public function edit()
+    public function edit(): string
     {
         helper('form');
 
@@ -101,7 +106,7 @@ class PersonController extends BaseController
         return view('admin/person/edit', $data);
     }
 
-    public function attemptEdit()
+    public function attemptEdit(): RedirectResponse
     {
         $rules = [
             'image' =>
@@ -138,7 +143,7 @@ class PersonController extends BaseController
         return redirect()->route('person-view', [$this->person->id]);
     }
 
-    public function delete()
+    public function delete(): RedirectResponse
     {
         (new PersonModel())->delete($this->person->id);
 

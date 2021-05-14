@@ -1,4 +1,4 @@
-image: php:7.3-fpm
+image: php:8.0-fpm
 
 stages:
   - quality

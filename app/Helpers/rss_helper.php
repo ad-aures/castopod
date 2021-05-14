@@ -187,19 +187,19 @@ if (!function_exists('get_rss_feed')) {
         foreach ($podcast->persons as $podcastPerson) {
             $podcastPersonElement = $channel->addChild(
                 'person',
-                htmlspecialchars($podcastPerson->person->full_name),
+                htmlspecialchars($podcastPerson->full_name),
                 $podcast_namespace,
             );
 
             if (
-                $podcastPerson->person_role !== null &&
-                $podcastPerson->person_group !== null
+                $podcastPerson->role !== null &&
+                $podcastPerson->role !== null
             ) {
                 $podcastPersonElement->addAttribute(
                     'role',
                     htmlspecialchars(
                         lang(
-                            "PersonsTaxonomy.persons.{$podcastPerson->person_group}.roles.{$podcastPerson->person_role}.label",
+                            "PersonsTaxonomy.persons.{$podcastPerson->group}.roles.{$podcastPerson->role}.label",
                             [],
                             'en',
                         ),
@@ -207,27 +207,28 @@ if (!function_exists('get_rss_feed')) {
                 );
             }
 
-            if ($podcastPerson->person_group !== null) {
+            if ($podcastPerson->group !== null) {
                 $podcastPersonElement->addAttribute(
                     'group',
                     htmlspecialchars(
                         lang(
-                            "PersonsTaxonomy.persons.{$podcastPerson->person_group}.label",
+                            "PersonsTaxonomy.persons.{$podcastPerson->group}.label",
                             [],
                             'en',
                         ),
                     ),
                 );
             }
+
             $podcastPersonElement->addAttribute(
                 'img',
-                $podcastPerson->person->image->large_url,
+                $podcastPerson->image->large_url,
             );
 
-            if ($podcastPerson->person->information_url !== null) {
+            if ($podcastPerson->information_url !== null) {
                 $podcastPersonElement->addAttribute(
                     'href',
-                    $podcastPerson->person->information_url,
+                    $podcastPerson->information_url,
                 );
             }
         }
@@ -417,18 +418,18 @@ if (!function_exists('get_rss_feed')) {
             foreach ($episode->persons as $episodePerson) {
                 $episodePersonElement = $item->addChild(
                     'person',
-                    htmlspecialchars($episodePerson->person->full_name),
+                    htmlspecialchars($episodePerson->full_name),
                     $podcast_namespace,
                 );
                 if (
-                    !empty($episodePerson->person_role) &&
-                    !empty($episodePerson->person_group)
+                    !empty($episodePerson->role) &&
+                    !empty($episodePerson->group)
                 ) {
                     $episodePersonElement->addAttribute(
                         'role',
                         htmlspecialchars(
                             lang(
-                                "PersonsTaxonomy.persons.{$episodePerson->person_group}.roles.{$episodePerson->person_role}.label",
+                                "PersonsTaxonomy.persons.{$episodePerson->group}.roles.{$episodePerson->role}.label",
                                 [],
                                 'en',
                             ),
@@ -440,7 +441,7 @@ if (!function_exists('get_rss_feed')) {
                         'group',
                         htmlspecialchars(
                             lang(
-                                "PersonsTaxonomy.persons.{$episodePerson->person_group}.label",
+                                "PersonsTaxonomy.persons.{$episodePerson->group}.label",
                                 [],
                                 'en',
                             ),
@@ -449,12 +450,12 @@ if (!function_exists('get_rss_feed')) {
                 }
                 $episodePersonElement->addAttribute(
                     'img',
-                    $episodePerson->person->image->large_url,
+                    $episodePerson->image->large_url,
                 );
-                if (!empty($episodePerson->person->information_url)) {
+                if (!empty($episodePerson->information_url)) {
                     $episodePersonElement->addAttribute(
                         'href',
-                        $episodePerson->person->information_url,
+                        $episodePerson->information_url,
                     );
                 }
             }
@@ -512,10 +513,11 @@ if (!function_exists('rss_to_array')) {
     /**
      * Converts XML to array
      *
-     * FIXME: should be SimpleRSSElement
-     * @param SimpleXMLElement $xmlNode
+     * FIXME: param should be SimpleRSSElement
+     *
+     * @return array<string, mixed>
      */
-    function rss_to_array(SimpleXMLElement $xmlNode): array
+    function rss_to_array(SimpleXMLElement $rssNode): array
     {
         $nameSpaces = [
             '',
@@ -523,17 +525,17 @@ if (!function_exists('rss_to_array')) {
             'https://github.com/Podcastindex-org/podcast-namespace/blob/main/docs/1.0.md',
         ];
         $arrayNode = [];
-        $arrayNode['name'] = $xmlNode->getName();
-        $arrayNode['namespace'] = $xmlNode->getNamespaces(false);
-        foreach ($xmlNode->attributes() as $key => $value) {
+        $arrayNode['name'] = $rssNode->getName();
+        $arrayNode['namespace'] = $rssNode->getNamespaces(false);
+        foreach ($rssNode->attributes() as $key => $value) {
             $arrayNode['attributes'][$key] = (string) $value;
         }
-        $textcontent = trim((string) $xmlNode);
+        $textcontent = trim((string) $rssNode);
         if (strlen($textcontent) > 0) {
             $arrayNode['content'] = $textcontent;
         }
         foreach ($nameSpaces as $currentNameSpace) {
-            foreach ($xmlNode->children($currentNameSpace) as $childXmlNode) {
+            foreach ($rssNode->children($currentNameSpace) as $childXmlNode) {
                 $arrayNode['elements'][] = rss_to_array($childXmlNode);
             }
         }
@@ -546,10 +548,13 @@ if (!function_exists('array_to_rss')) {
     /**
      * Inserts array (converted to XML node) in XML node
      *
+     * @param array<string, mixed> $arrayNode
      * @param SimpleRSSElement $xmlNode The XML parent node where this arrayNode should be attached
      */
-    function array_to_rss(array $arrayNode, SimpleRSSElement &$xmlNode)
-    {
+    function array_to_rss(
+        array $arrayNode,
+        SimpleRSSElement &$xmlNode
+    ): SimpleRSSElement {
         if (array_key_exists('elements', $arrayNode)) {
             foreach ($arrayNode['elements'] as $childArrayNode) {
                 $childXmlNode = $xmlNode->addChild(

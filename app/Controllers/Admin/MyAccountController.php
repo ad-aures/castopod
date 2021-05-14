@@ -8,24 +8,25 @@
 
 namespace App\Controllers\Admin;
 
+use CodeIgniter\HTTP\RedirectResponse;
 use Config\Services;
 use App\Models\UserModel;
 
 class MyAccountController extends BaseController
 {
-    public function index()
+    public function index(): string
     {
         return view('admin/my_account/view');
     }
 
-    public function changePassword()
+    public function changePassword(): string
     {
         helper('form');
 
         return view('admin/my_account/change_password');
     }
 
-    public function attemptChange()
+    public function attemptChange(): RedirectResponse
     {
         $auth = Services::authentication();
         $userModel = new UserModel();

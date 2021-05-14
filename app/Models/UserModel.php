@@ -18,7 +18,10 @@ class UserModel extends MythAuthUserModel
      */
     protected $returnType = User::class;
 
-    public function getPodcastContributors($podcastId)
+    /**
+     * @return User[]
+     */
+    public function getPodcastContributors(int $podcastId): array
     {
         $cacheName = "podcast#{$podcastId}_contributors";
         if (!($found = cache($cacheName))) {
@@ -37,7 +40,7 @@ class UserModel extends MythAuthUserModel
         return $found;
     }
 
-    public function getPodcastContributor($user_id, $podcast_id)
+    public function getPodcastContributor(int $userId, int $podcastId): ?User
     {
         return $this->select(
             'users.*, podcasts_users.podcast_id as podcast_id, auth_groups.name as podcast_role',
@@ -45,8 +48,8 @@ class UserModel extends MythAuthUserModel
             ->join('podcasts_users', 'podcasts_users.user_id = users.id')
             ->join('auth_groups', 'auth_groups.id = podcasts_users.group_id')
             ->where([
-                'users.id' => $user_id,
-                'podcast_id' => $podcast_id,
+                'users.id' => $userId,
+                'podcast_id' => $podcastId,
             ])
             ->first();
     }

@@ -25,15 +25,8 @@ use League\CommonMark\CommonMarkConverter;
  */
 class Page extends Entity
 {
-    /**
-     * @var string
-     */
-    protected $link;
-
-    /**
-     * @var string
-     */
-    protected $content_html;
+    protected string $link;
+    protected string $content_html;
 
     /**
      * @var array<string, string>
@@ -51,7 +44,7 @@ class Page extends Entity
         return url_to('page', $this->attributes['slug']);
     }
 
-    public function setContentMarkdown(string $contentMarkdown): self
+    public function setContentMarkdown(string $contentMarkdown): static
     {
         $converter = new CommonMarkConverter([
             'html_input' => 'strip',

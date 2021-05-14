@@ -20,7 +20,7 @@ if (!function_exists('save_media')) {
     function save_media(
         File $file,
         string $folder = '',
-        string $filename
+        string $filename = ''
     ): string {
         if (($extension = $file->getExtension()) !== '') {
             $filename = $filename . '.' . $extension;
@@ -91,9 +91,9 @@ if (!function_exists('media_path')) {
     /**
      * Prefixes the root media path to a given uri
      *
-     * @param  string|array  $uri URI string or array of URI segments
+     * @param  string|string[] $uri URI string or array of URI segments
      */
-    function media_path($uri = ''): string
+    function media_path(string|array $uri = ''): string
     {
         // convert segment array to string
         if (is_array($uri)) {
@@ -109,9 +109,9 @@ if (!function_exists('media_base_url')) {
     /**
      * Return the media base URL to use in views
      *
-     * @param  string|string[] $uri      URI string or array of URI segments
+     * @param  string|string[] $uri URI string or array of URI segments
      */
-    function media_base_url($uri = ''): string
+    function media_base_url(string|array $uri = ''): string
     {
         // convert segment array to string
         if (is_array($uri)) {

@@ -243,7 +243,7 @@ class Note extends UuidEntity
         return $this->reblog_of_note;
     }
 
-    public function setMessage(string $message): self
+    public function setMessage(string $message): static
     {
         helper('activitypub');
 

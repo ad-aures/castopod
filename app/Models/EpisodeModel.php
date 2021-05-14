@@ -149,7 +149,7 @@ class EpisodeModel extends Model
     /**
      * @param int|string $podcastId may be the id or podcast name
      */
-    public function getEpisodeBySlug($podcastId, string $episodeSlug): ?Episode
+    public function getEpisodeBySlug(int|string $podcastId, string $episodeSlug): ?Episode
     {
         $cacheName = "podcast#{$podcastId}_episode-{$episodeSlug}";
         if (!($found = cache($cacheName))) {
@@ -175,7 +175,7 @@ class EpisodeModel extends Model
         return $found;
     }
 
-    public function getEpisodeById($episodeId)
+    public function getEpisodeById(int $episodeId): ?Episode
     {
         // TODO: episode id should be a composite key. The cache should include podcast_id.
         $cacheName = "podcast_episode#{$episodeId}";
@@ -192,7 +192,7 @@ class EpisodeModel extends Model
         return $found;
     }
 
-    public function getPublishedEpisodeById($podcastId, $episodeId)
+    public function getPublishedEpisodeById(int $podcastId, int $episodeId): ?Episode
     {
         $cacheName = "podcast#{$podcastId}_episode#{$episodeId}_published";
         if (!($found = cache($cacheName))) {
@@ -278,7 +278,7 @@ class EpisodeModel extends Model
      *
      * @return int|bool seconds
      */
-    public function getSecondsToNextUnpublishedEpisode(int $podcastId)
+    public function getSecondsToNextUnpublishedEpisode(int $podcastId): int|bool
     {
         $result = $this->select(
             'TIMESTAMPDIFF(SECOND, NOW(), `published_at`) as timestamp_diff',
@@ -297,9 +297,11 @@ class EpisodeModel extends Model
     }
 
     /**
+     * @param mixed[] $data
+     * 
      * @return array<string, array<string|int, mixed>>
      */
-    public function clearCache($data): array
+    public function clearCache(array $data): array
     {
         $episode = (new EpisodeModel())->find(
             is_array($data['id']) ? $data['id'][0] : $data['id'],
@@ -348,6 +350,8 @@ class EpisodeModel extends Model
     }
 
     /**
+     * @param mixed[] $data
+     * 
      * @return array<string, array<string|int, mixed>>
      */
     protected function writeEnclosureMetadata(array $data): array

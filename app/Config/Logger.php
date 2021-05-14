@@ -36,9 +36,9 @@ class Logger extends BaseConfig
      * For a live site you'll usually enable Critical or higher (3) to be logged otherwise
      * your log files will fill up very fast.
      *
-     * @var integer|array
+     * @var integer|int[]
      */
-    public $threshold = 4;
+    public int|array $threshold = 4;
 
     /**
      * --------------------------------------------------------------------------
@@ -50,7 +50,7 @@ class Logger extends BaseConfig
      *
      * @var string
      */
-    public $dateFormat = 'Y-m-d H:i:s';
+    public string $dateFormat = 'Y-m-d H:i:s';
 
     /**
      * --------------------------------------------------------------------------
@@ -75,9 +75,9 @@ class Logger extends BaseConfig
      * Handlers are executed in the order defined in this array, starting with
      * the handler on top and continuing down.
      *
-     * @var array
+     * @var array<string, string|int|array<string, string>>
      */
-    public $handlers = [
+    public array $handlers = [
         /*
          * --------------------------------------------------------------------
          * File Handler
@@ -125,9 +125,9 @@ class Logger extends BaseConfig
         ],
 
         /**
-         * The ChromeLoggerHandler requires the use of the Chrome web browser
-         * and the ChromeLogger extension. Uncomment this block to use it.
-         */
+     * The ChromeLoggerHandler requires the use of the Chrome web browser
+     * and the ChromeLogger extension. Uncomment this block to use it.
+     */
         //      'CodeIgniter\Log\Handlers\ChromeLoggerHandler' => [
         //          /*
         //           * The log levels that this handler will handle.

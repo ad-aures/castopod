@@ -52,7 +52,7 @@ class Router extends CodeIgniterRouter
             $matchedKey = $key;
 
             // Are we dealing with a locale?
-            if (strpos($key, '{locale}') !== false) {
+            if (str_contains($key, '{locale}')) {
                 $localeSegment = array_search(
                     '{locale}',
                     preg_split(
@@ -167,9 +167,9 @@ class Router extends CodeIgniterRouter
                 // Support resource route when function with subdirectory
                 // ex: $routes->resource('Admin/Admins');
                 if (
-                    strpos($val, '$') !== false &&
-                    strpos($key, '(') !== false &&
-                    strpos($key, '/') !== false
+                    str_contains($val, '$') &&
+                    str_contains($key, '(') &&
+                    str_contains($key, '/')
                 ) {
                     $replacekey = str_replace('/(.*)', '', $key);
                     $val = preg_replace('#^' . $key . '$#u', $val, $uri);
@@ -179,11 +179,11 @@ class Router extends CodeIgniterRouter
                         $val,
                     );
                 } elseif (
-                    strpos($val, '$') !== false &&
-                    strpos($key, '(') !== false
+                    str_contains($val, '$') &&
+                    str_contains($key, '(')
                 ) {
                     $val = preg_replace('#^' . $key . '$#u', $val, $uri);
-                } elseif (strpos($val, '/') !== false) {
+                } elseif (str_contains($val, '/')) {
                     [$controller, $method] = explode('::', $val);
 
                     // Only replace slashes in the controller, not in the method.

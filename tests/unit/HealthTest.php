@@ -2,11 +2,12 @@
 
 namespace Tests\Unit;
 
+use CodeIgniter\Test\CIUnitTestCase;
 use Config\App;
 use Config\Services;
 use Tests\Support\Libraries\ConfigReader;
 
-class HealthTest extends \CodeIgniter\Test\CIUnitTestCase
+class HealthTest extends CIUnitTestCase
 {
     public function setUp(): void
     {
@@ -28,7 +29,7 @@ class HealthTest extends \CodeIgniter\Test\CIUnitTestCase
         // Check the baseURL in .env
         if (is_file(HOMEPATH . '.env')) {
             $env = (bool) preg_grep(
-                '/^app\.baseURL = ./',
+                '~^app\.baseURL = .~',
                 file(HOMEPATH . '.env'),
             );
         }

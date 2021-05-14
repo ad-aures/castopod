@@ -16,7 +16,7 @@ use CodeIgniter\Entity\Entity;
 
 /**
  * @property int $podcast_id
- * @property Podcast $podcast
+ * @property Podcast|null $podcast
  * @property int|null $episode_id
  * @property Episode|null $episode
  * @property string $full_name
@@ -25,34 +25,15 @@ use CodeIgniter\Entity\Entity;
  * @property string $person_role
  * @property string $role_label
  * @property int $person_id
- * @property Person $person
+ * @property Person|null $person
  */
 class Credit extends Entity
 {
-    /**
-     * @var Person
-     */
-    protected $person;
-
-    /**
-     * @var Podcast
-     */
-    protected $podcast;
-
-    /**
-     * @var Episode|null
-     */
-    protected $episode;
-
-    /**
-     * @var string
-     */
-    protected $group_label;
-
-    /**
-     * @var string
-     */
-    protected $role_label;
+    protected ?Person $person;
+    protected ?Podcast $podcast;
+    protected ?Episode $episode;
+    protected string $group_label;
+    protected string $role_label;
 
     /**
      * @var array<string, string>
@@ -66,7 +47,7 @@ class Credit extends Entity
         'person_role' => 'string',
     ];
 
-    public function getPerson(): Person
+    public function getPerson(): ?Person
     {
         if ($this->person_id === null) {
             throw new RuntimeException(
@@ -83,7 +64,7 @@ class Credit extends Entity
         return $this->person;
     }
 
-    public function getPodcast(): Podcast
+    public function getPodcast(): ?Podcast
     {
         if ($this->podcast_id === null) {
             throw new RuntimeException(

@@ -18,14 +18,14 @@ class AuthController extends MythAuthController
      * An array of helpers to be automatically loaded
      * upon class instantiation.
      *
-     * @var array
+     * @var string[]
      */
     protected $helpers = ['components'];
 
     /**
      * Attempt to register a new user.
      */
-    public function attemptRegister()
+    public function attemptRegister(): RedirectResponse
     {
         // Check if registration is allowed
         if (!$this->config->allowRegistration) {
@@ -61,9 +61,9 @@ class AuthController extends MythAuthController
         );
         $user = new User($this->request->getPost($allowedPostFields));
 
-        $this->config->requireActivation !== false
-            ? $user->generateActivateHash()
-            : $user->activate();
+        $this->config->requireActivation === null
+            ? $user->activate()
+            : $user->generateActivateHash();
 
         // Ensure default group gets assigned if set
         if ($this->config->defaultUserGroup !== null) {
@@ -77,7 +77,7 @@ class AuthController extends MythAuthController
                 ->with('errors', $users->errors());
         }
 
-        if ($this->config->requireActivation !== false) {
+        if ($this->config->requireActivation !== null) {
             $activator = service('activator');
             $sent = $activator->send($user);
 
@@ -109,7 +109,7 @@ class AuthController extends MythAuthController
      */
     public function attemptReset(): RedirectResponse
     {
-        if ($this->config->activeResetter === false) {
+        if ($this->config->activeResetter === null) {
             return redirect()
                 ->route('login')
                 ->with('error', lang('Auth.forgotDisabled'));
@@ -173,7 +173,7 @@ class AuthController extends MythAuthController
             ->with('message', lang('Auth.resetSuccess'));
     }
 
-    public function attemptInteractAsActor()
+    public function attemptInteractAsActor(): RedirectResponse
     {
         $rules = [
             'actor_id' => 'required|numeric',

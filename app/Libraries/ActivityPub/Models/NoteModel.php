@@ -21,6 +21,8 @@ use CodeIgniter\Database\BaseResult;
 use CodeIgniter\Events\Events;
 use CodeIgniter\HTTP\URI;
 use CodeIgniter\I18n\Time;
+use CodeIgniter\Router\Exceptions\RouterException;
+use InvalidArgumentException;
 use Michalsn\Uuid\UuidModel;
 
 class NoteModel extends UuidModel
@@ -86,7 +88,7 @@ class NoteModel extends UuidModel
      */
     protected $beforeInsert = ['setNoteId'];
 
-    public function getNoteById($noteId)
+    public function getNoteById(string $noteId): ?Note
     {
         $cacheName = config('ActivityPub')->cachePrefix . "note#{$noteId}";
         if (!($found = cache($cacheName))) {
@@ -98,7 +100,7 @@ class NoteModel extends UuidModel
         return $found;
     }
 
-    public function getNoteByUri($noteUri)
+    public function getNoteByUri(string $noteUri): ?Note
     {
         $hashedNoteUri = md5($noteUri);
         $cacheName =
@@ -117,7 +119,7 @@ class NoteModel extends UuidModel
      *
      * @return Note[]
      */
-    public function getActorPublishedNotes($actorId): array
+    public function getActorPublishedNotes(int $actorId): array
     {
         $cacheName =
             config('ActivityPub')->cachePrefix .
@@ -179,8 +181,10 @@ class NoteModel extends UuidModel
 
     /**
      * Retrieves all published reblogs for a given note
+     * 
+     * @return Note[]
      */
-    public function getNoteReblogs($noteId)
+    public function getNoteReblogs(string $noteId): array
     {
         $cacheName =
             config('ActivityPub')->cachePrefix . "note#{$noteId}_reblogs";
@@ -200,10 +204,7 @@ class NoteModel extends UuidModel
         return $found;
     }
 
-    /**
-     * @return bool|Query
-     */
-    public function addPreviewCard($noteId, $previewCardId)
+    public function addPreviewCard(string $noteId, int $previewCardId): Query|bool
     {
         return $this->db->table('activitypub_notes_preview_cards')->insert([
             'note_id' => $this->uuid->fromString($noteId)->getBytes(),
@@ -220,7 +221,7 @@ class NoteModel extends UuidModel
         Note $note,
         bool $createPreviewCard = true,
         bool $registerActivity = true
-    ) {
+    ): string|false {
         helper('activitypub');
 
         $this->db->transStart();
@@ -301,7 +302,7 @@ class NoteModel extends UuidModel
         return $newNoteId;
     }
 
-    public function editNote($updatedNote): bool
+    public function editNote(Note $updatedNote): bool
     {
         $this->db->transStart();
 
@@ -341,10 +342,8 @@ class NoteModel extends UuidModel
 
     /**
      * Removes a note from the database and decrements meta data
-     *
-     * @return BaseResult|bool
      */
-    public function removeNote(Note $note, bool $registerActivity = true)
+    public function removeNote(Note $note, bool $registerActivity = true): BaseResult|bool
     {
         $this->db->transStart();
 
@@ -450,14 +449,11 @@ class NoteModel extends UuidModel
         return $result;
     }
 
-    /**
-     * @return string|bool
-     */
     public function addReply(
-        $reply,
-        $createPreviewCard = true,
-        $registerActivity = true
-    ) {
+        Note $reply,
+        bool $createPreviewCard = true,
+        bool $registerActivity = true
+    ): string|false {
         if (!$reply->in_reply_to_id) {
             throw new Exception('Passed note is not a reply!');
         }
@@ -489,10 +485,7 @@ class NoteModel extends UuidModel
         return $noteId;
     }
 
-    /**
-     * @return BaseResult|int|string|false
-     */
-    public function reblog(Actor $actor, Note $note, $registerActivity = true)
+    public function reblog(Actor $actor, Note $note, bool $registerActivity = true): string|false
     {
         $this->db->transStart();
 
@@ -503,7 +496,7 @@ class NoteModel extends UuidModel
         ]);
 
         // add reblog
-        $reblogId = $this->insert($reblog, true);
+        $reblogId = $this->insert($reblog);
 
         model('ActorModel')
             ->where('id', $actor->id)
@@ -554,10 +547,7 @@ class NoteModel extends UuidModel
         return $reblogId;
     }
 
-    /**
-     * @return BaseResult|bool
-     */
-    public function undoReblog(Note $reblogNote, bool $registerActivity = true)
+    public function undoReblog(Note $reblogNote, bool $registerActivity = true): BaseResult|bool
     {
         $this->db->transStart();
 
@@ -649,7 +639,7 @@ class NoteModel extends UuidModel
         return $result;
     }
 
-    public function toggleReblog($actor, $note): void
+    public function toggleReblog(Actor $actor, Note $note): void
     {
         if (
             !($reblogNote = $this->where([
@@ -665,7 +655,11 @@ class NoteModel extends UuidModel
         }
     }
 
-    protected function setNoteId($data)
+    /** 
+     * @param array<string, array<string|int, mixed>> $data
+     * @return array<string, array<string|int, mixed>>
+     */
+    protected function setNoteId(array $data): array
     {
         $uuid4 = $this->uuid->{$this->uuidVersion}();
         $data['data']['id'] = $uuid4->toString();

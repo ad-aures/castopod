@@ -1,7 +1,9 @@
 <?php
 
+use Config\Paths;
+
 // Valid PHP Version?
-$minPHPVersion = '7.3';
+$minPHPVersion = '8.0';
 if (version_compare(PHP_VERSION, $minPHPVersion, '<')) {
     die(
         "Your PHP version must be {$minPHPVersion} or higher to run CodeIgniter. Current version: " .
@@ -31,7 +33,7 @@ require realpath(FCPATH . '../app/Config/Paths.php') ?:
     FCPATH . '../app/Config/Paths.php';
 // ^^^ Change this if you move your application folder
 
-$paths = new Config\Paths();
+$paths = new Paths();
 
 // Location of the framework bootstrap file.
 $bootstrap =

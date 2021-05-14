@@ -10,7 +10,7 @@ or shared hosting, you can install it on most PHP-MySQL compatible web servers.
   - [1. Install Wizard](#1-install-wizard)
   - [1-alt Manual configuration](#1-alt-manual-configuration)
 - [Web Server Requirements](#web-server-requirements)
-  - [PHP v7.3 or higher](#php-v73-or-higher)
+  - [PHP v8.0 or higher](#php-v73-or-higher)
   - [MySQL compatible database](#mysql-compatible-database)
     - [Privileges](#privileges)
   - [(Optional) Other recommendations](#optional-other-recommendations)
@@ -59,9 +59,9 @@ through the install wizard, you can create and update the `.env` file yourself:
 
 ## Web Server Requirements
 
-### PHP v7.3 or higher
+### PHP v8.0 or higher
 
-PHP version 7.3 or higher is required, with the following extensions installed:
+PHP version 8.0 or higher is required, with the following extensions installed:
 
 - [intl](https://php.net/manual/en/intl.requirements.php)
 - [libcurl](https://php.net/manual/en/curl.requirements.php)

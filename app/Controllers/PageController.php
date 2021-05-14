@@ -21,7 +21,7 @@ class PageController extends BaseController
      */
     protected $page;
 
-    public function _remap($method, ...$params)
+    public function _remap(string $method, string ...$params): mixed
     {
         if (count($params) === 0) {
             return $this->$method();
@@ -36,7 +36,7 @@ class PageController extends BaseController
         throw PageNotFoundException::forPageNotFound();
     }
 
-    public function index()
+    public function index(): string
     {
         $cacheName = "page-{$this->page->slug}";
         if (!($found = cache($cacheName))) {
@@ -53,7 +53,7 @@ class PageController extends BaseController
         return $found;
     }
 
-    public function credits()
+    public function credits(): string
     {
         $locale = service('request')->getLocale();
         $allPodcasts = (new PodcastModel())->findAll();

@@ -47,7 +47,9 @@ if (!function_exists('current_season_url')) {
 
 if (!function_exists('extract_params_from_episode_uri')) {
     /**
-     * Returns podcast name and episode slug from episode string uri
+     * Returns podcast name and episode slug from episode string
+     *
+     * @return array<string, string>|null
      */
     function extract_params_from_episode_uri(URI $episodeUri): ?array
     {

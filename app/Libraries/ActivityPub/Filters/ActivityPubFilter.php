@@ -23,7 +23,7 @@ class ActivityPubFilter implements FilterInterface
      * sent back to the client, allowing for error pages,
      * redirects, etc.
      *
-     * @param array|null                         $params
+     * @param string[]|null                         $params
      * @return void|mixed
      */
     public function before(RequestInterface $request, $params = null)
@@ -67,7 +67,7 @@ class ActivityPubFilter implements FilterInterface
             try {
                 // securityCheck: check activity signature before handling it
                 (new HttpSignature())->verify();
-            } catch (Exception $exception) {
+            } catch (Exception) {
                 // Invalid HttpSignature (401 = unauthorized)
                 // TODO: show error message?
                 return service('response')->setStatusCode(401);
@@ -82,7 +82,7 @@ class ActivityPubFilter implements FilterInterface
      * to stop execution of other after filters, short of
      * throwing an Exception or Error.
      *
-     * @param array|null                          $arguments
+     * @param string[]|null                          $arguments
      */
     public function after(
         RequestInterface $request,

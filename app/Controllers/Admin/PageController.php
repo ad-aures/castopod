@@ -8,6 +8,7 @@
 
 namespace App\Controllers\Admin;
 
+use CodeIgniter\HTTP\RedirectResponse;
 use App\Entities\Page;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use App\Models\PageModel;
@@ -19,7 +20,7 @@ class PageController extends BaseController
      */
     protected $page;
 
-    public function _remap($method, ...$params)
+    public function _remap(string $method, string ...$params): mixed
     {
         if (count($params) === 0) {
             return $this->$method();
@@ -32,7 +33,7 @@ class PageController extends BaseController
         throw PageNotFoundException::forPageNotFound();
     }
 
-    function list()
+    function list(): string
     {
         $data = [
             'pages' => (new PageModel())->findAll(),
@@ -41,19 +42,19 @@ class PageController extends BaseController
         return view('admin/page/list', $data);
     }
 
-    function view()
+    function view(): string
     {
         return view('admin/page/view', ['page' => $this->page]);
     }
 
-    function create()
+    function create(): string
     {
         helper('form');
 
         return view('admin/page/create');
     }
 
-    function attemptCreate()
+    function attemptCreate(): RedirectResponse
     {
         $page = new Page([
             'title' => $this->request->getPost('title'),
@@ -80,7 +81,7 @@ class PageController extends BaseController
             );
     }
 
-    function edit()
+    function edit(): string
     {
         helper('form');
 
@@ -88,7 +89,7 @@ class PageController extends BaseController
         return view('admin/page/edit', ['page' => $this->page]);
     }
 
-    function attemptEdit()
+    function attemptEdit(): RedirectResponse
     {
         $this->page->title = $this->request->getPost('title');
         $this->page->slug = $this->request->getPost('slug');
@@ -106,7 +107,7 @@ class PageController extends BaseController
         return redirect()->route('page-list');
     }
 
-    public function delete()
+    public function delete(): RedirectResponse
     {
         (new PageModel())->delete($this->page->id);
 

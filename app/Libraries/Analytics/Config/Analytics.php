@@ -31,7 +31,7 @@ class Analytics extends BaseConfig
      *
      * @param string|string[] $audioFilePath
      */
-    public function getAudioFileUrl($audioFilePath): string
+    public function getAudioFileUrl(string|array $audioFilePath): string
     {
         return base_url($audioFilePath);
     }

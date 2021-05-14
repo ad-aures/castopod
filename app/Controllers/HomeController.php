@@ -9,20 +9,18 @@
 namespace App\Controllers;
 
 use App\Models\PodcastModel;
+use CodeIgniter\HTTP\RedirectResponse;
 
 class HomeController extends BaseController
 {
-    /**
-     * @return RedirectResponse|string
-     */
-    public function index()
+    public function index(): RedirectResponse|string
     {
         $model = new PodcastModel();
 
         $allPodcasts = $model->findAll();
 
         // check if there's only one podcast to redirect user to it
-        if (count($allPodcasts) == 1) {
+        if (count($allPodcasts) === 1) {
             return redirect()->route('podcast-activity', [
                 $allPodcasts[0]->name,
             ]);

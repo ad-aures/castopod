@@ -17,10 +17,8 @@ class FlatAuthorization extends MythAuthFlatAuthorization
 
     /**
      * Checks a group to see if they have the specified permission.
-     *
-     * @param int|string $permission
      */
-    public function groupHasPermission($permission, int $groupId): bool
+    public function groupHasPermission(int|string $permission, int $groupId): bool
     {
         // Get the Permission ID
         $permissionId = $this->getPermissionID($permission);

@@ -58,7 +58,7 @@ class ActorModel extends Model
      */
     protected $useTimestamps = true;
 
-    public function getActorById($id): Actor
+    public function getActorById(int $id): Actor
     {
         $cacheName = config('ActivityPub')->cachePrefix . "actor#{$id}";
         if (!($found = cache($cacheName))) {
@@ -98,7 +98,7 @@ class ActorModel extends Model
         return $found;
     }
 
-    public function getActorByUri($actorUri)
+    public function getActorByUri(string $actorUri): ?Actor
     {
         $hashedActorUri = md5($actorUri);
         $cacheName =
@@ -112,7 +112,10 @@ class ActorModel extends Model
         return $found;
     }
 
-    public function getFollowers($actorId)
+    /**
+     * @return Actor[]
+     */
+    public function getFollowers(int $actorId): array
     {
         $cacheName =
             config('ActivityPub')->cachePrefix . "actor#{$actorId}_followers";
@@ -137,7 +140,7 @@ class ActorModel extends Model
      */
     public function isActorBlocked(string $actorUri): bool
     {
-        if ($actor = $this->getActorByUri($actorUri)) {
+        if (($actor = $this->getActorByUri($actorUri)) !== null) {
             return $actor->is_blocked;
         }
 
@@ -161,7 +164,7 @@ class ActorModel extends Model
         return $found;
     }
 
-    public function blockActor($actorId): void
+    public function blockActor(int $actorId): void
     {
         $prefix = config('ActivityPub')->cachePrefix;
         cache()->delete($prefix . 'blocked_actors');
@@ -172,7 +175,7 @@ class ActorModel extends Model
         $this->update($actorId, ['is_blocked' => 1]);
     }
 
-    public function unblockActor($actorId): void
+    public function unblockActor(int $actorId): void
     {
         $prefix = config('ActivityPub')->cachePrefix;
         cache()->delete($prefix . 'blocked_actors');

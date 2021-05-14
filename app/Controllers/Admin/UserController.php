@@ -12,6 +12,7 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 use App\Authorization\GroupModel;
 use App\Entities\User;
 use App\Models\UserModel;
+use CodeIgniter\HTTP\RedirectResponse;
 use Config\Services;
 
 class UserController extends BaseController
@@ -21,7 +22,7 @@ class UserController extends BaseController
      */
     protected $user;
 
-    public function _remap($method, ...$params)
+    public function _remap(string $method, string ...$params): mixed
     {
         if (count($params) === 0) {
             return $this->$method();
@@ -34,14 +35,14 @@ class UserController extends BaseController
         throw PageNotFoundException::forPageNotFound();
     }
 
-    public function list()
+    public function list(): string
     {
         $data = ['users' => (new UserModel())->findAll()];
 
         return view('admin/user/list', $data);
     }
 
-    public function view()
+    public function view(): string
     {
         $data = ['user' => $this->user];
 
@@ -49,7 +50,7 @@ class UserController extends BaseController
         return view('admin/user/view', $data);
     }
 
-    public function create()
+    public function create(): string
     {
         helper('form');
 
@@ -60,7 +61,7 @@ class UserController extends BaseController
         return view('admin/user/create', $data);
     }
 
-    public function attemptCreate()
+    public function attemptCreate(): RedirectResponse
     {
         $userModel = new UserModel();
 
@@ -108,7 +109,7 @@ class UserController extends BaseController
             );
     }
 
-    public function edit()
+    public function edit(): string
     {
         helper('form');
 
@@ -131,7 +132,7 @@ class UserController extends BaseController
         return view('admin/user/edit', $data);
     }
 
-    public function attemptEdit()
+    public function attemptEdit(): RedirectResponse
     {
         $authorize = Services::authorization();
 
@@ -149,7 +150,7 @@ class UserController extends BaseController
             );
     }
 
-    public function forcePassReset()
+    public function forcePassReset(): RedirectResponse
     {
         $userModel = new UserModel();
         $this->user->forcePasswordReset();
@@ -171,7 +172,7 @@ class UserController extends BaseController
             );
     }
 
-    public function ban()
+    public function ban(): RedirectResponse
     {
         $authorize = Services::authorization();
         if ($authorize->inGroup('superadmin', $this->user->id)) {
@@ -204,7 +205,7 @@ class UserController extends BaseController
             );
     }
 
-    public function unBan()
+    public function unBan(): RedirectResponse
     {
         $userModel = new UserModel();
         $this->user->unBan();
@@ -225,7 +226,7 @@ class UserController extends BaseController
             );
     }
 
-    public function delete()
+    public function delete(): RedirectResponse
     {
         $authorize = Services::authorization();
         if ($authorize->inGroup('superadmin', $this->user->id)) {

@@ -13,5 +13,8 @@ use App\Entities\Actor;
 
 class ActorModel extends ActivityPubActorModel
 {
+    /**
+     * @var string
+     */
     protected $returnType = Actor::class;
 }

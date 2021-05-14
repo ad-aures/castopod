@@ -38,29 +38,19 @@ class WebFinger
     protected $port;
 
     /**
-     * @var string
-     */
-    protected $subject;
-
-    /**
-     * @var array
+     * @var string[]
      */
     protected $aliases = [];
 
     /**
-     * @var array
+     * @var array<array<string, string>>
      */
     protected $links = [];
 
-    /**
-     * @param string $resource
-     */
-    public function __construct($resource)
+    public function __construct(protected string $subject)
     {
-        $this->subject = $resource;
-
         // Split resource into its parts (username, domain)
-        $parts = $this->splitResource($resource);
+        $parts = $this->splitResource($subject);
         if (!$parts) {
             throw new Exception('Wrong WebFinger resource pattern.');
         }
@@ -120,9 +110,9 @@ class WebFinger
     /**
      * Split resource into its parts (username, domain)
      *
-     * @return bool|mixed
+     * @return array<string, string>|false
      */
-    private function splitResource(string $resource)
+    private function splitResource(string $resource): array|false
     {
         if (!preg_match(self::RESOURCE_PATTERN, $resource, $matches)) {
             // Resource pattern failed

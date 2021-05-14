@@ -15,6 +15,7 @@ use Exception;
 use App\Authorization\GroupModel;
 use App\Models\PodcastModel;
 use App\Models\UserModel;
+use CodeIgniter\HTTP\RedirectResponse;
 
 class ContributorController extends BaseController
 {
@@ -28,9 +29,9 @@ class ContributorController extends BaseController
      */
     protected $user;
 
-    public function _remap($method, ...$params)
+    public function _remap(string $method, string ...$params): mixed
     {
-        $this->podcast = (new PodcastModel())->getPodcastById($params[0]);
+        $this->podcast = (new PodcastModel())->getPodcastById((int) $params[0]);
 
         if (count($params) <= 1) {
             return $this->$method();
@@ -38,8 +39,8 @@ class ContributorController extends BaseController
 
         if (
             $this->user = (new UserModel())->getPodcastContributor(
-                $params[1],
-                $params[0],
+                (int) $params[1],
+                (int) $params[0],
             )
         ) {
             return $this->$method();
@@ -48,7 +49,7 @@ class ContributorController extends BaseController
         throw PageNotFoundException::forPageNotFound();
     }
 
-    public function list()
+    public function list(): string
     {
         $data = [
             'podcast' => $this->podcast,
@@ -58,7 +59,7 @@ class ContributorController extends BaseController
         return view('admin/contributor/list', $data);
     }
 
-    public function view()
+    public function view(): string
     {
         $data = [
             'contributor' => (new UserModel())->getPodcastContributor(
@@ -74,7 +75,7 @@ class ContributorController extends BaseController
         return view('admin/contributor/view', $data);
     }
 
-    public function add()
+    public function add(): string
     {
         helper('form');
 
@@ -108,7 +109,7 @@ class ContributorController extends BaseController
         return view('admin/contributor/add', $data);
     }
 
-    public function attemptAdd()
+    public function attemptAdd(): RedirectResponse
     {
         try {
             (new PodcastModel())->addPodcastContributor(
@@ -116,7 +117,7 @@ class ContributorController extends BaseController
                 $this->podcast->id,
                 $this->request->getPost('role'),
             );
-        } catch (Exception $exception) {
+        } catch (Exception) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -128,7 +129,7 @@ class ContributorController extends BaseController
         return redirect()->route('contributor-list', [$this->podcast->id]);
     }
 
-    public function edit()
+    public function edit(): string
     {
         helper('form');
 
@@ -159,7 +160,7 @@ class ContributorController extends BaseController
         return view('admin/contributor/edit', $data);
     }
 
-    public function attemptEdit()
+    public function attemptEdit(): RedirectResponse
     {
         (new PodcastModel())->updatePodcastContributor(
             $this->user->id,
@@ -170,7 +171,7 @@ class ContributorController extends BaseController
         return redirect()->route('contributor-list', [$this->podcast->id]);
     }
 
-    public function remove()
+    public function remove(): RedirectResponse
     {
         if ($this->podcast->created_by === $this->user->id) {
             return redirect()

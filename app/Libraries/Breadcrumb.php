@@ -15,11 +15,12 @@ class Breadcrumb
     /**
      * List of breadcrumb links.
      *
-     * @var array
      * $links = [
-     *  'text' => (string) the anchor text,
-     *  'href' => (string) the anchor href,
+     *  'text' => 'Example Link',
+     *  'href' => 'https://example.com/',
      * ]
+     *
+     * @var array<array<string, string>>
      */
     protected $links = [];
 
@@ -57,6 +58,8 @@ class Breadcrumb
      * replaceParams($newParams);
      *
      * The breadcrumb is now `Home / podcasts / foo / episodes / bar`
+     *
+     * @param string[] $newParams
      */
     public function replaceParams(array $newParams): void
     {
@@ -71,7 +74,7 @@ class Breadcrumb
     /**
      * Renders the breadcrumb object as an accessible html breadcrumb nav
      */
-    public function render($class = null): string
+    public function render(string $class = null): string
     {
         $listItems = '';
         $keys = array_keys($this->links);

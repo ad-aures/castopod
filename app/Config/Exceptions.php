@@ -29,7 +29,7 @@ class Exceptions extends BaseConfig
      * Any status codes here will NOT be logged if logging is turned on.
      * By default, only 404 (Page Not Found) exceptions are ignored.
      *
-     * @var array
+     * @var int[]
      */
     public $ignoreCodes = [404];
 

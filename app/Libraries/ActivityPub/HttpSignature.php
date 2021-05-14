@@ -41,7 +41,7 @@ class HttpSignature
     /**
      * @var IncomingRequest
      */
-    protected $request;
+    protected ?IncomingRequest $request;
 
     public function __construct(IncomingRequest $request = null)
     {
@@ -130,9 +130,9 @@ class HttpSignature
     /**
      * Split HTTP signature into its parts (keyId, headers and signature)
      *
-     * @return bool|mixed
+     * @return array<string, string>|false
      */
-    private function splitSignature(string $signature)
+    private function splitSignature(string $signature): array|false
     {
         if (!preg_match(self::SIGNATURE_PATTERN, $signature, $matches)) {
             // Signature pattern failed
@@ -150,7 +150,7 @@ class HttpSignature
     /**
      * Get plain text that has been originally signed
      *
-     * @param  array $headers HTTP header keys
+     * @param string[] $headers HTTP header keys
      */
     private function getPlainText(array $headers): string
     {
