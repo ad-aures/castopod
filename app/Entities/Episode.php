@@ -58,10 +58,10 @@ use RuntimeException;
  * @property int $season_number
  * @property string $type
  * @property bool $is_blocked
- * @property Location $location
+ * @property Location|null $location
  * @property string|null $location_name
  * @property string|null $location_geo
- * @property string|null $location_osm_id
+ * @property string|null $location_osm
  * @property array|null $custom_rss
  * @property string $custom_rss_string
  * @property int $favourites_total
@@ -90,7 +90,7 @@ class Episode extends Entity
     protected string $audio_file_opengraph_url;
     protected string $embeddable_player_url;
     protected Image $image;
-    protected ?string $description;
+    protected ?string $description = null;
     protected File $transcript_file;
     protected File $chapters_file;
 
@@ -109,9 +109,9 @@ class Episode extends Entity
      */
     protected $notes = [];
 
-    protected ?Location $location;
+    protected ?Location $location = null;
     protected string $custom_rss_string;
-    protected string $publication_status;
+    protected ?string $publication_status = null;
 
     /**
      * @var string[]
@@ -152,7 +152,7 @@ class Episode extends Entity
         'is_blocked' => 'boolean',
         'location_name' => '?string',
         'location_geo' => '?string',
-        'location_osm_id' => '?string',
+        'location_osm' => '?string',
         'custom_rss' => '?json-array',
         'favourites_total' => 'integer',
         'reblogs_total' => 'integer',
@@ -202,7 +202,7 @@ class Episode extends Entity
     {
         helper(['media', 'id3']);
 
-        $audio_metadata = get_file_tags($audioFile);
+        $audioMetadata = get_file_tags($audioFile);
 
         $this->attributes['audio_file_path'] = save_media(
             $audioFile,
@@ -210,11 +210,11 @@ class Episode extends Entity
             $this->attributes['slug'],
         );
         $this->attributes['audio_file_duration'] =
-            $audio_metadata['playtime_seconds'];
-        $this->attributes['audio_file_mimetype'] = $audio_metadata['mime_type'];
-        $this->attributes['audio_file_size'] = $audio_metadata['filesize'];
+            $audioMetadata['playtime_seconds'];
+        $this->attributes['audio_file_mimetype'] = $audioMetadata['mime_type'];
+        $this->attributes['audio_file_size'] = $audioMetadata['filesize'];
         $this->attributes['audio_file_header_size'] =
-            $audio_metadata['avdataoffset'];
+            $audioMetadata['avdataoffset'];
 
         return $this;
     }
@@ -471,10 +471,8 @@ class Episode extends Entity
             $this->getPodcast()->partner_link_url !== null &&
             $this->getPodcast()->partner_image_url !== null
         ) {
-            $descriptionHtml .= "<div><a href=\"{$this->getPartnerLink(
-                $serviceSlug,
-            )}\" rel=\"sponsored noopener noreferrer\" target=\"_blank\"><img src=\"{$this->getPartnerImageUrl(
-                $serviceSlug,
+            $descriptionHtml .= "<div><a href=\"{$this->getPartnerLink($serviceSlug,
+            )}\" rel=\"sponsored noopener noreferrer\" target=\"_blank\"><img src=\"{$this->getPartnerImageUrl($serviceSlug,
             )}\" alt=\"Partner image\" /></a></div>";
         }
 
@@ -504,47 +502,41 @@ class Episode extends Entity
 
     public function getPublicationStatus(): string
     {
-        if ($this->publication_status !== '') {
-            return $this->publication_status;
+        if ($this->publication_status === null) {
+            if ($this->published_at === null) {
+                $this->publication_status = 'not_published';
+            } elseif ($this->published_at->isBefore(Time::now())) {
+                $this->publication_status = 'published';
+            } else {
+                $this->publication_status = 'scheduled';
+            }
         }
 
-        if ($this->published_at === null) {
-            return 'not_published';
-        }
-
-        helper('date');
-        if ($this->published_at->isBefore(Time::now())) {
-            return 'published';
-        }
-
-        return 'scheduled';
+        return $this->publication_status;
     }
 
     /**
      * Saves the location name and fetches OpenStreetMap info
      */
-    public function setLocation(?string $newLocationName = null): static
+    public function setLocation(?Location $location = null): static
     {
-        if ($newLocationName === null) {
+        if ($location === null) {
             $this->attributes['location_name'] = null;
             $this->attributes['location_geo'] = null;
-            $this->attributes['location_osm_id'] = null;
+            $this->attributes['location_osm'] = null;
+
+            return $this;
         }
 
-        helper('location');
-
-        $oldLocationName = $this->attributes['location_name'];
-
         if (
-            $oldLocationName === null ||
-            $oldLocationName !== $newLocationName
+            !isset($this->attributes['location_name']) ||
+            $this->attributes['location_name'] !== $location->name
         ) {
-            $this->attributes['location_name'] = $newLocationName;
+            $location->fetchOsmLocation();
 
-            if ($location = fetch_osm_location($newLocationName)) {
-                $this->attributes['location_geo'] = $location['geo'];
-                $this->attributes['location_osm_id'] = $location['osm_id'];
-            }
+            $this->attributes['location_name'] = $location->name;
+            $this->attributes['location_geo'] = $location->geo;
+            $this->attributes['location_osm'] = $location->osm;
         }
 
         return $this;
@@ -557,11 +549,11 @@ class Episode extends Entity
         }
 
         if ($this->location === null) {
-            $this->location = new Location([
-                'name' => $this->location_name,
-                'geo' => $this->location_geo,
-                'osm_id' => $this->location_osm_id,
-            ]);
+            $this->location = new Location(
+                $this->location_name,
+                $this->location_geo,
+                $this->location_osm,
+            );
         }
 
         return $this->location;
@@ -645,9 +637,9 @@ class Episode extends Entity
         }
 
         return rtrim($this->getPodcast()->partner_image_url, '/') .
-        '?pid=' .
-        $this->getPodcast()->partner_id .
-        '&guid=' .
-        urlencode($this->attributes['guid']);
+            '?pid=' .
+            $this->getPodcast()->partner_id .
+            '&guid=' .
+            urlencode($this->attributes['guid']);
     }
 }

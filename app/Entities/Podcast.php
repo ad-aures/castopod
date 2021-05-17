@@ -27,7 +27,7 @@ use RuntimeException;
  * @property string $link
  * @property string $feed_url
  * @property string $title
- * @property string $description Holds text only description, striped of any markdown or html special characters
+ * @property string|null $description Holds text only description, striped of any markdown or html special characters
  * @property string $description_markdown
  * @property  string $description_html
  * @property Image $image
@@ -51,10 +51,10 @@ use RuntimeException;
  * @property bool $is_locked
  * @property string|null $imported_feed_url
  * @property string|null $new_feed_url
- * @property Location $location
+ * @property Location|null $location
  * @property string|null $location_name
  * @property string|null $location_geo
- * @property string|null $location_osm_id
+ * @property string|null $location_osm
  * @property string|null $payment_pointer
  * @property array|null $custom_rss
  * @property string $custom_rss_string
@@ -78,10 +78,10 @@ use RuntimeException;
 class Podcast extends Entity
 {
     protected string $link;
-    protected ?Actor $actor;
+    protected ?Actor $actor = null;
     protected Image $image;
-    protected string $description;
-    protected ?Category $category;
+    protected ?string $description = null;
+    protected ?Category $category = null;
 
     /**
      * @var Category[]
@@ -123,7 +123,7 @@ class Podcast extends Entity
      */
     protected $funding_platforms = [];
 
-    protected ?Location $location;
+    protected ?Location $location = null;
     protected string $custom_rss_string;
 
     /**
@@ -155,7 +155,7 @@ class Podcast extends Entity
         'new_feed_url' => '?string',
         'location_name' => '?string',
         'location_geo' => '?string',
-        'location_osm_id' => '?string',
+        'location_osm' => '?string',
         'payment_pointer' => '?string',
         'custom_rss' => '?json-array',
         'partner_id' => '?string',
@@ -331,17 +331,17 @@ class Podcast extends Entity
 
     public function getDescription(): string
     {
-        if ($this->description !== '') {
-            return $this->description;
+        if ($this->description === null) {
+            $this->description = trim(
+                (string) preg_replace(
+                    '~\s+~',
+                    ' ',
+                    strip_tags($this->attributes['description_html']),
+                ),
+            );
         }
 
-        return trim(
-            preg_replace(
-                '~\s+~',
-                ' ',
-                strip_tags($this->attributes['description_html']),
-            ),
-        );
+        return $this->description;
     }
 
     /**
@@ -451,28 +451,25 @@ class Podcast extends Entity
     /**
      * Saves the location name and fetches OpenStreetMap info
      */
-    public function setLocation(?string $newLocationName = null): static
+    public function setLocation(?Location $location = null): static
     {
-        if ($newLocationName === null) {
+        if ($location === null) {
             $this->attributes['location_name'] = null;
             $this->attributes['location_geo'] = null;
-            $this->attributes['location_osm_id'] = null;
+            $this->attributes['location_osm'] = null;
+
+            return $this;
         }
 
-        helper('location');
-
-        $oldLocationName = $this->attributes['location_name'];
-
         if (
-            $oldLocationName === null ||
-            $oldLocationName !== $newLocationName
+            !isset($this->attributes['location_name']) ||
+            $this->attributes['location_name'] !== $location->name
         ) {
-            $this->attributes['location_name'] = $newLocationName;
+            $location->fetchOsmLocation();
 
-            if ($location = fetch_osm_location($newLocationName)) {
-                $this->attributes['location_geo'] = $location['geo'];
-                $this->attributes['location_osm_id'] = $location['osm_id'];
-            }
+            $this->attributes['location_name'] = $location->name;
+            $this->attributes['location_geo'] = $location->geo;
+            $this->attributes['location_osm'] = $location->osm;
         }
 
         return $this;
@@ -485,11 +482,11 @@ class Podcast extends Entity
         }
 
         if ($this->location === null) {
-            $this->location = new Location([
-                'name' => $this->location_name,
-                'geo' => $this->location_geo,
-                'osm_id' => $this->location_osm_id,
-            ]);
+            $this->location = new Location(
+                $this->location_name,
+                $this->location_geo,
+                $this->location_osm,
+            );
         }
 
         return $this->location;

@@ -18,7 +18,7 @@ use RuntimeException;
  */
 class Actor extends ActivityPubActor
 {
-    protected ?Podcast $podcast;
+    protected ?Podcast $podcast = null;
     protected bool $is_podcast;
 
     public function getIsPodcast(): bool

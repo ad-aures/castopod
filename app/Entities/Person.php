@@ -8,7 +8,9 @@
 
 namespace App\Entities;
 
+use App\Models\PersonModel;
 use CodeIgniter\Entity\Entity;
+use RuntimeException;
 
 /**
  * @property int $id
@@ -20,16 +22,16 @@ use CodeIgniter\Entity\Entity;
  * @property string $image_mimetype
  * @property int $created_by
  * @property int $updated_by
- * @property string|null $group
- * @property string|null $role
- * @property Podcast|null $podcast
- * @property Episode|null $episode
+ * @property string[]|null $roles
  */
 class Person extends Entity
 {
     protected Image $image;
-    protected ?Podcast $podcast;
-    protected ?Episode $episode;
+
+    /**
+     * @var string[]|null
+     */
+    protected ?array $roles = null;
 
     /**
      * @var array<string, string>
@@ -43,8 +45,6 @@ class Person extends Entity
         'image_mimetype' => 'string',
         'podcast_id' => '?integer',
         'episode_id' => '?integer',
-        'group' => '?string',
-        'role' => '?string',
         'created_by' => 'integer',
         'updated_by' => 'integer',
     ];
@@ -72,5 +72,22 @@ class Person extends Entity
             $this->attributes['image_path'],
             $this->attributes['image_mimetype'],
         );
+    }
+
+    /**
+     * @return stdClass[]
+     */
+    public function getRoles(): array {
+        if ($this->podcast_id === null) {
+            throw new RuntimeException(
+                'Person must have a podcast_id before getting roles.',
+            );
+        }
+
+        if ($this->roles === null) {
+            $this->roles = (new PersonModel())->getPersonRoles($this->id, $this->podcast_id, $this->episode_id);
+        }
+
+        return $this->roles;
     }
 }

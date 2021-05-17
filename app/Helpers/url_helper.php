@@ -27,22 +27,6 @@ if (!function_exists('host_url')) {
     }
 }
 
-if (!function_exists('current_season_url')) {
-    /**
-     * Return the podcast URL with season number to use in views
-     */
-    function current_season_url(): string
-    {
-        $season_query_string = '';
-        if (isset($_GET['season'])) {
-            $season_query_string = '?season=' . $_GET['season'];
-        } elseif (isset($_GET['year'])) {
-            $season_query_string = '?year=' . $_GET['year'];
-        }
-        return current_url() . $season_query_string;
-    }
-}
-
 //--------------------------------------------------------------------
 
 if (!function_exists('extract_params_from_episode_uri')) {

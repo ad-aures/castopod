@@ -36,7 +36,7 @@ use RuntimeException;
 class Image extends Entity
 {
     protected Images $config;
-    protected ?File $file;
+    protected ?File $file = null;
     protected string $dirname;
     protected string $filename;
     protected string $extension;

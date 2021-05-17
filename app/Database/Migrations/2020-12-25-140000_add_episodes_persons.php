@@ -44,7 +44,7 @@ class AddEpisodesPersons extends Migration
                 'constraint' => 32,
             ],
         ]);
-        $this->forge->addKey('id', true);
+        $this->forge->addPrimaryKey('id', true);
         $this->forge->addUniqueKey([
             'podcast_id',
             'episode_id',

@@ -3,7 +3,7 @@
 use Config\Services;
 use CodeIgniter\CodeIgniter;
 
-$error_id = uniqid('error', true);
+$errorId = uniqid('error', true);
 ?>
 <!doctype html>
 <html>
@@ -103,12 +103,12 @@ $error_id = uniqid('error', true);
              $row['class'] . $row['type'] . $row['function'],
          ) ?>
 									<?php if (!empty($row['args'])): ?>
-										<?php $args_id = $error_id . 'args' . $index; ?>
+										<?php $argsId = $errorId . 'args' . $index; ?>
 										( <a href="#" onclick="return toggle('<?= esc(
-              $args_id,
+              $argsId,
               'attr',
           ) ?>');">arguments</a> )
-							<div class="args" id="<?= esc($args_id, 'attr') ?>">
+							<div class="args" id="<?= esc($argsId, 'attr') ?>">
 								<table cellspacing="0">
 
 									<?php

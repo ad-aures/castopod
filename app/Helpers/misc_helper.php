@@ -29,7 +29,7 @@ if (!function_exists('slugify')) {
         // replace non letter or digits by -
         $text = preg_replace('~[^\pL\d]+~u', '-', $text);
 
-        $unwanted_array = [
+        $unwanted = [
             'Š' => 'S',
             'š' => 's',
             'Đ' => 'Dj',
@@ -107,7 +107,7 @@ if (!function_exists('slugify')) {
             '/' => '-',
             ' ' => '-',
         ];
-        $text = strtr($text, $unwanted_array);
+        $text = strtr($text, $unwanted);
 
         // transliterate
         $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);

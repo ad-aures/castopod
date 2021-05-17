@@ -23,31 +23,31 @@ if (!function_exists('get_rss_feed')) {
     {
         $episodes = $podcast->episodes;
 
-        $itunes_namespace = 'http://www.itunes.com/dtds/podcast-1.0.dtd';
+        $itunesNamespace = 'http://www.itunes.com/dtds/podcast-1.0.dtd';
 
-        $podcast_namespace =
+        $podcastNamespace =
             'https://github.com/Podcastindex-org/podcast-namespace/blob/main/docs/1.0.md';
 
         $rss = new SimpleRSSElement(
-            "<?xml version='1.0' encoding='utf-8'?><rss version='2.0' xmlns:itunes='{$itunes_namespace}' xmlns:podcast='{$podcast_namespace}' xmlns:content='http://purl.org/rss/1.0/modules/content/'></rss>",
+            "<?xml version='1.0' encoding='utf-8'?><rss version='2.0' xmlns:itunes='{$itunesNamespace}' xmlns:podcast='{$podcastNamespace}' xmlns:content='http://purl.org/rss/1.0/modules/content/'></rss>",
         );
 
         $channel = $rss->addChild('channel');
 
-        $atom_link = $channel->addChild(
+        $atomLink = $channel->addChild(
             'atom:link',
             null,
             'http://www.w3.org/2005/Atom',
         );
-        $atom_link->addAttribute('href', $podcast->feed_url);
-        $atom_link->addAttribute('rel', 'self');
-        $atom_link->addAttribute('type', 'application/rss+xml');
+        $atomLink->addAttribute('href', $podcast->feed_url);
+        $atomLink->addAttribute('rel', 'self');
+        $atomLink->addAttribute('type', 'application/rss+xml');
 
         if ($podcast->new_feed_url !== null) {
             $channel->addChild(
                 'new-feed-url',
                 $podcast->new_feed_url,
-                $itunes_namespace,
+                $itunesNamespace,
             );
         }
 
@@ -65,33 +65,30 @@ if (!function_exists('get_rss_feed')) {
         $channel->addChild('title', $podcast->title);
         $channel->addChildWithCDATA('description', $podcast->description_html);
 
-        $itunes_image = $channel->addChild('image', null, $itunes_namespace);
+        $itunesImage = $channel->addChild('image', null, $itunesNamespace);
 
         // FIXME: This should be downsized to 1400x1400
-        $itunes_image->addAttribute('href', $podcast->image->url);
+        $itunesImage->addAttribute('href', $podcast->image->url);
 
         $channel->addChild('language', $podcast->language_code);
         if ($podcast->location !== null) {
             $locationElement = $channel->addChild(
                 'location',
                 htmlspecialchars($podcast->location->name),
-                $podcast_namespace,
+                $podcastNamespace,
             );
             if ($podcast->location->geo !== null) {
                 $locationElement->addAttribute('geo', $podcast->location->geo);
             }
-            if ($podcast->location->osm_id !== null) {
-                $locationElement->addAttribute(
-                    'osm',
-                    $podcast->location->osm_id,
-                );
+            if ($podcast->location->osm !== null) {
+                $locationElement->addAttribute('osm', $podcast->location->osm);
             }
         }
         if ($podcast->payment_pointer !== null) {
             $valueElement = $channel->addChild(
                 'value',
                 null,
-                $podcast_namespace,
+                $podcastNamespace,
             );
             $valueElement->addAttribute('type', 'webmonetization');
             $valueElement->addAttribute('method', '');
@@ -99,7 +96,7 @@ if (!function_exists('get_rss_feed')) {
             $recipientElement = $valueElement->addChild(
                 'valueRecipient',
                 null,
-                $podcast_namespace,
+                $podcastNamespace,
             );
             $recipientElement->addAttribute('name', $podcast->owner_name);
             $recipientElement->addAttribute('type', 'ILP');
@@ -113,14 +110,14 @@ if (!function_exists('get_rss_feed')) {
             ->addChild(
                 'locked',
                 $podcast->is_locked ? 'yes' : 'no',
-                $podcast_namespace,
+                $podcastNamespace,
             )
             ->addAttribute('owner', $podcast->owner_email);
         if ($podcast->imported_feed_url !== null) {
             $channel->addChild(
                 'previousUrl',
                 $podcast->imported_feed_url,
-                $podcast_namespace,
+                $podcastNamespace,
             );
         }
 
@@ -128,7 +125,7 @@ if (!function_exists('get_rss_feed')) {
             $podcastingPlatformElement = $channel->addChild(
                 'id',
                 null,
-                $podcast_namespace,
+                $podcastNamespace,
             );
             $podcastingPlatformElement->addAttribute(
                 'platform',
@@ -152,7 +149,7 @@ if (!function_exists('get_rss_feed')) {
             $socialPlatformElement = $channel->addChild(
                 'social',
                 $socialPlatform->link_content,
-                $podcast_namespace,
+                $podcastNamespace,
             );
             $socialPlatformElement->addAttribute(
                 'platform',
@@ -170,7 +167,7 @@ if (!function_exists('get_rss_feed')) {
             $fundingPlatformElement = $channel->addChild(
                 'funding',
                 $fundingPlatform->link_content,
-                $podcast_namespace,
+                $podcastNamespace,
             );
             $fundingPlatformElement->addAttribute(
                 'platform',
@@ -188,7 +185,7 @@ if (!function_exists('get_rss_feed')) {
             $podcastPersonElement = $channel->addChild(
                 'person',
                 htmlspecialchars($podcastPerson->full_name),
-                $podcast_namespace,
+                $podcastNamespace,
             );
 
             if (
@@ -242,29 +239,29 @@ if (!function_exists('get_rss_feed')) {
         $channel->addChild(
             'explicit',
             $podcast->parental_advisory === 'explicit' ? 'true' : 'false',
-            $itunes_namespace,
+            $itunesNamespace,
         );
 
         $channel->addChild(
             'author',
             $podcast->publisher ? $podcast->publisher : $podcast->owner_name,
-            $itunes_namespace,
+            $itunesNamespace,
         );
         $channel->addChild('link', $podcast->link);
 
-        $owner = $channel->addChild('owner', null, $itunes_namespace);
+        $owner = $channel->addChild('owner', null, $itunesNamespace);
 
-        $owner->addChild('name', $podcast->owner_name, $itunes_namespace);
+        $owner->addChild('name', $podcast->owner_name, $itunesNamespace);
 
-        $owner->addChild('email', $podcast->owner_email, $itunes_namespace);
+        $owner->addChild('email', $podcast->owner_email, $itunesNamespace);
 
-        $channel->addChild('type', $podcast->type, $itunes_namespace);
+        $channel->addChild('type', $podcast->type, $itunesNamespace);
         $podcast->copyright &&
             $channel->addChild('copyright', $podcast->copyright);
         $podcast->is_blocked &&
-            $channel->addChild('block', 'Yes', $itunes_namespace);
+            $channel->addChild('block', 'Yes', $itunesNamespace);
         $podcast->is_completed &&
-            $channel->addChild('complete', 'Yes', $itunes_namespace);
+            $channel->addChild('complete', 'Yes', $itunesNamespace);
 
         $image = $channel->addChild('image');
         $image->addChild('url', $podcast->image->feed_url);
@@ -304,7 +301,7 @@ if (!function_exists('get_rss_feed')) {
                 $locationElement = $item->addChild(
                     'location',
                     htmlspecialchars($episode->location->name),
-                    $podcast_namespace,
+                    $podcastNamespace,
                 );
                 if ($episode->location->geo !== null) {
                     $locationElement->addAttribute(
@@ -312,10 +309,10 @@ if (!function_exists('get_rss_feed')) {
                         $episode->location->geo,
                     );
                 }
-                if ($episode->location->osm_id !== null) {
+                if ($episode->location->osm !== null) {
                     $locationElement->addAttribute(
                         'osm',
-                        $episode->location->osm_id,
+                        $episode->location->osm,
                     );
                 }
             }
@@ -326,15 +323,15 @@ if (!function_exists('get_rss_feed')) {
             $item->addChild(
                 'duration',
                 $episode->audio_file_duration,
-                $itunes_namespace,
+                $itunesNamespace,
             );
             $item->addChild('link', $episode->link);
-            $episode_itunes_image = $item->addChild(
+            $episodeItunesImage = $item->addChild(
                 'image',
                 null,
-                $itunes_namespace,
+                $itunesNamespace,
             );
-            $episode_itunes_image->addAttribute(
+            $episodeItunesImage->addAttribute(
                 'href',
                 $episode->image->feed_url,
             );
@@ -345,24 +342,24 @@ if (!function_exists('get_rss_feed')) {
                     $episode->parental_advisory === 'explicit'
                         ? 'true'
                         : 'false',
-                    $itunes_namespace,
+                    $itunesNamespace,
                 );
 
             $episode->number &&
-                $item->addChild('episode', $episode->number, $itunes_namespace);
+                $item->addChild('episode', $episode->number, $itunesNamespace);
             $episode->season_number &&
                 $item->addChild(
                     'season',
                     $episode->season_number,
-                    $itunes_namespace,
+                    $itunesNamespace,
                 );
-            $item->addChild('episodeType', $episode->type, $itunes_namespace);
+            $item->addChild('episodeType', $episode->type, $itunesNamespace);
 
             if ($episode->transcript_file_url) {
                 $transcriptElement = $item->addChild(
                     'transcript',
                     null,
-                    $podcast_namespace,
+                    $podcastNamespace,
                 );
                 $transcriptElement->addAttribute(
                     'url',
@@ -387,7 +384,7 @@ if (!function_exists('get_rss_feed')) {
                 $chaptersElement = $item->addChild(
                     'chapters',
                     null,
-                    $podcast_namespace,
+                    $podcastNamespace,
                 );
                 $chaptersElement->addAttribute(
                     'url',
@@ -403,7 +400,7 @@ if (!function_exists('get_rss_feed')) {
                 $soundbiteElement = $item->addChild(
                     'soundbite',
                     empty($soundbite->label) ? null : $soundbite->label,
-                    $podcast_namespace,
+                    $podcastNamespace,
                 );
                 $soundbiteElement->addAttribute(
                     'start_time',
@@ -419,7 +416,7 @@ if (!function_exists('get_rss_feed')) {
                 $episodePersonElement = $item->addChild(
                     'person',
                     htmlspecialchars($episodePerson->full_name),
-                    $podcast_namespace,
+                    $podcastNamespace,
                 );
                 if (
                     !empty($episodePerson->role) &&
@@ -461,7 +458,7 @@ if (!function_exists('get_rss_feed')) {
             }
 
             $episode->is_blocked &&
-                $item->addChild('block', 'Yes', $itunes_namespace);
+                $item->addChild('block', 'Yes', $itunesNamespace);
 
             if (!empty($episode->custom_rss)) {
                 array_to_rss(
@@ -483,10 +480,10 @@ if (!function_exists('add_category_tag')) {
      */
     function add_category_tag(SimpleXMLElement $node, Category $category): void
     {
-        $itunes_namespace = 'http://www.itunes.com/dtds/podcast-1.0.dtd';
+        $itunesNamespace = 'http://www.itunes.com/dtds/podcast-1.0.dtd';
 
-        $itunes_category = $node->addChild('category', '', $itunes_namespace);
-        $itunes_category->addAttribute(
+        $itunesCategory = $node->addChild('category', '', $itunesNamespace);
+        $itunesCategory->addAttribute(
             'text',
             $category->parent !== null
                 ? $category->parent->apple_category
@@ -494,12 +491,12 @@ if (!function_exists('add_category_tag')) {
         );
 
         if ($category->parent !== null) {
-            $itunes_category_child = $itunes_category->addChild(
+            $itunesCategoryChild = $itunesCategory->addChild(
                 'category',
                 '',
-                $itunes_namespace,
+                $itunesNamespace,
             );
-            $itunes_category_child->addAttribute(
+            $itunesCategoryChild->addAttribute(
                 'text',
                 $category->apple_category,
             );

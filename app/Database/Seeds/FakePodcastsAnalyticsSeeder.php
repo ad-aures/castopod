@@ -52,12 +52,12 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                 $date < strtotime('now');
                 $date = strtotime(date('Y-m-d', $date) . ' +1 day')
             ) {
-                $analytics_podcasts = [];
-                $analytics_podcasts_by_hour = [];
-                $analytics_podcasts_by_country = [];
-                $analytics_podcasts_by_episode = [];
-                $analytics_podcasts_by_player = [];
-                $analytics_podcasts_by_region = [];
+                $analyticsPodcasts = [];
+                $analyticsPodcastsByHour = [];
+                $analyticsPodcastsByCountry = [];
+                $analyticsPodcastsByEpisode = [];
+                $analyticsPodcastsByPlayer = [];
+                $analyticsPodcastsByRegion = [];
 
                 $episodes = (new EpisodeModel())
                     ->where([
@@ -72,9 +72,9 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                     $probability1 = (int) floor(exp(3 - $age / 40)) + 1;
 
                     for (
-                        $num_line = 0;
-                        $num_line < rand(1, $probability1);
-                        ++$num_line
+                        $lineNumber = 0;
+                        $lineNumber < rand(1, $probability1);
+                        ++$lineNumber
                     ) {
                         $probability2 = (int) floor(exp(6 - $age / 20)) + 10;
 
@@ -129,7 +129,7 @@ class FakePodcastsAnalyticsSeeder extends Seeder
 
                         $hits = rand(0, $probability2);
 
-                        $analytics_podcasts[] = [
+                        $analyticsPodcasts[] = [
                             'podcast_id' => $podcast->id,
                             'date' => date('Y-m-d', $date),
                             'duration' => rand(60, 3600),
@@ -137,26 +137,26 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                             'hits' => $hits,
                             'unique_listeners' => $hits,
                         ];
-                        $analytics_podcasts_by_hour[] = [
+                        $analyticsPodcastsByHour[] = [
                             'podcast_id' => $podcast->id,
                             'date' => date('Y-m-d', $date),
                             'hour' => rand(0, 23),
                             'hits' => $hits,
                         ];
-                        $analytics_podcasts_by_country[] = [
+                        $analyticsPodcastsByCountry[] = [
                             'podcast_id' => $podcast->id,
                             'date' => date('Y-m-d', $date),
                             'country_code' => $countryCode,
                             'hits' => $hits,
                         ];
-                        $analytics_podcasts_by_episode[] = [
+                        $analyticsPodcastsByEpisode[] = [
                             'podcast_id' => $podcast->id,
                             'date' => date('Y-m-d', $date),
                             'episode_id' => $episode->id,
                             'age' => $age,
                             'hits' => $hits,
                         ];
-                        $analytics_podcasts_by_player[] = [
+                        $analyticsPodcastsByPlayer[] = [
                             'podcast_id' => $podcast->id,
                             'date' => date('Y-m-d', $date),
                             'service' => $service,
@@ -166,7 +166,7 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                             'is_bot' => $isBot,
                             'hits' => $hits,
                         ];
-                        $analytics_podcasts_by_region[] = [
+                        $analyticsPodcastsByRegion[] = [
                             'podcast_id' => $podcast->id,
                             'date' => date('Y-m-d', $date),
                             'country_code' => $countryCode,
@@ -180,27 +180,27 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                 $this->db
                     ->table('analytics_podcasts')
                     ->ignore(true)
-                    ->insertBatch($analytics_podcasts);
+                    ->insertBatch($analyticsPodcasts);
                 $this->db
                     ->table('analytics_podcasts_by_hour')
                     ->ignore(true)
-                    ->insertBatch($analytics_podcasts_by_hour);
+                    ->insertBatch($analyticsPodcastsByHour);
                 $this->db
                     ->table('analytics_podcasts_by_country')
                     ->ignore(true)
-                    ->insertBatch($analytics_podcasts_by_country);
+                    ->insertBatch($analyticsPodcastsByCountry);
                 $this->db
                     ->table('analytics_podcasts_by_episode')
                     ->ignore(true)
-                    ->insertBatch($analytics_podcasts_by_episode);
+                    ->insertBatch($analyticsPodcastsByEpisode);
                 $this->db
                     ->table('analytics_podcasts_by_player')
                     ->ignore(true)
-                    ->insertBatch($analytics_podcasts_by_player);
+                    ->insertBatch($analyticsPodcastsByPlayer);
                 $this->db
                     ->table('analytics_podcasts_by_region')
                     ->ignore(true)
-                    ->insertBatch($analytics_podcasts_by_region);
+                    ->insertBatch($analyticsPodcastsByRegion);
             }
         } else {
             echo "COULD NOT POPULATE DATABASE:\n\tCreate a podcast with episodes first.\n";

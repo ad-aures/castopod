@@ -12,6 +12,7 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
 use Config\Database;
 use App\Entities\Episode;
+use App\Entities\Location;
 use App\Entities\Note;
 use App\Entities\Podcast;
 use App\Models\EpisodeModel;
@@ -133,7 +134,9 @@ class EpisodeController extends BaseController
             'audio_file' => $this->request->getFile('audio_file'),
             'description_markdown' => $this->request->getPost('description'),
             'image' => $this->request->getFile('image'),
-            'location' => $this->request->getPost('location_name'),
+            'location' => new Location(
+                $this->request->getPost('location_name'),
+            ),
             'transcript' => $this->request->getFile('transcript'),
             'chapters' => $this->request->getFile('chapters'),
             'parental_advisory' =>
@@ -249,7 +252,9 @@ class EpisodeController extends BaseController
         $this->episode->description_markdown = $this->request->getPost(
             'description',
         );
-        $this->episode->location = $this->request->getPost('location_name');
+        $this->episode->location = new Location(
+            $this->request->getPost('location_name'),
+        );
         $this->episode->parental_advisory =
             $this->request->getPost('parental_advisory') !== 'undefined'
                 ? $this->request->getPost('parental_advisory')
@@ -673,17 +678,17 @@ class EpisodeController extends BaseController
 
     public function soundbitesAttemptEdit(): RedirectResponse
     {
-        $soundbites_array = $this->request->getPost('soundbites_array');
+        $soundbites = $this->request->getPost('soundbites');
         $rules = [
-            'soundbites_array.0.start_time' =>
-                'permit_empty|required_with[soundbites_array.0.duration]|decimal|greater_than_equal_to[0]',
-            'soundbites_array.0.duration' =>
-                'permit_empty|required_with[soundbites_array.0.start_time]|decimal|greater_than_equal_to[0]',
+            'soundbites.0.start_time' =>
+                'permit_empty|required_with[soundbites.0.duration]|decimal|greater_than_equal_to[0]',
+            'soundbites.0.duration' =>
+                'permit_empty|required_with[soundbites.0.start_time]|decimal|greater_than_equal_to[0]',
         ];
-        foreach (array_keys($soundbites_array) as $soundbite_id) {
+        foreach (array_keys($soundbites) as $soundbite_id) {
             $rules += [
-                "soundbites_array.{$soundbite_id}.start_time" => 'required|decimal|greater_than_equal_to[0]',
-                "soundbites_array.{$soundbite_id}.duration" => 'required|decimal|greater_than_equal_to[0]',
+                "soundbites.{$soundbite_id}.start_time" => 'required|decimal|greater_than_equal_to[0]',
+                "soundbites.{$soundbite_id}.duration" => 'required|decimal|greater_than_equal_to[0]',
             ];
         }
         if (!$this->validate($rules)) {
@@ -693,16 +698,13 @@ class EpisodeController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        foreach ($soundbites_array as $soundbite_id => $soundbite) {
-            if (
-                $soundbite['start_time'] !== null &&
-                $soundbite['duration'] !== null
-            ) {
+        foreach ($soundbites as $soundbite_id => $soundbite) {
+            if ((int) $soundbite['start_time'] < (int) $soundbite['duration']) {
                 $data = [
                     'podcast_id' => $this->podcast->id,
                     'episode_id' => $this->episode->id,
-                    'start_time' => $soundbite['start_time'],
-                    'duration' => $soundbite['duration'],
+                    'start_time' => (int) $soundbite['start_time'],
+                    'duration' => (int) $soundbite['duration'],
                     'label' => $soundbite['label'],
                     'updated_by' => user_id(),
                 ];
@@ -711,6 +713,7 @@ class EpisodeController extends BaseController
                 } else {
                     $data += ['id' => $soundbite_id];
                 }
+
                 $soundbiteModel = new SoundbiteModel();
                 if (!$soundbiteModel->save($data)) {
                     return redirect()

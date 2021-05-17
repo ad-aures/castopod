@@ -192,9 +192,9 @@ class FakeWebsiteAnalyticsSeeder extends Seeder
                 $date < strtotime('now');
                 $date = strtotime(date('Y-m-d', $date) . ' +1 day')
             ) {
-                $website_by_browser = [];
-                $website_by_entry_page = [];
-                $website_by_referer = [];
+                $websiteByBrowser = [];
+                $websiteByEntryPage = [];
+                $websiteByReferer = [];
 
                 $episodes = (new EpisodeModel())
                     ->where([
@@ -209,9 +209,9 @@ class FakeWebsiteAnalyticsSeeder extends Seeder
                     $probability1 = (int) floor(exp(3 - $age / 40)) + 1;
 
                     for (
-                        $num_line = 0;
-                        $num_line < rand(1, $probability1);
-                        ++$num_line
+                        $lineNumber = 0;
+                        $lineNumber < rand(1, $probability1);
+                        ++$lineNumber
                     ) {
                         $probability2 = (int) floor(exp(6 - $age / 20)) + 10;
 
@@ -228,19 +228,19 @@ class FakeWebsiteAnalyticsSeeder extends Seeder
 
                         $hits = rand(0, $probability2);
 
-                        $website_by_browser[] = [
+                        $websiteByBrowser[] = [
                             'podcast_id' => $podcast->id,
                             'date' => date('Y-m-d', $date),
                             'browser' => $browser,
                             'hits' => $hits,
                         ];
-                        $website_by_entry_page[] = [
+                        $websiteByEntryPage[] = [
                             'podcast_id' => $podcast->id,
                             'date' => date('Y-m-d', $date),
                             'entry_page_url' => $episode->link,
                             'hits' => $hits,
                         ];
-                        $website_by_referer[] = [
+                        $websiteByReferer[] = [
                             'podcast_id' => $podcast->id,
                             'date' => date('Y-m-d', $date),
                             'referer_url' =>
@@ -254,15 +254,15 @@ class FakeWebsiteAnalyticsSeeder extends Seeder
                 $this->db
                     ->table('analytics_website_by_browser')
                     ->ignore(true)
-                    ->insertBatch($website_by_browser);
+                    ->insertBatch($websiteByBrowser);
                 $this->db
                     ->table('analytics_website_by_entry_page')
                     ->ignore(true)
-                    ->insertBatch($website_by_entry_page);
+                    ->insertBatch($websiteByEntryPage);
                 $this->db
                     ->table('analytics_website_by_referer')
                     ->ignore(true)
-                    ->insertBatch($website_by_referer);
+                    ->insertBatch($websiteByReferer);
             }
         } else {
             echo "COULD NOT POPULATE DATABASE:\n\tCreate a podcast with episodes first.\n";

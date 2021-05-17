@@ -9,6 +9,7 @@
 namespace App\Controllers\Admin;
 
 use App\Entities\Image;
+use App\Entities\Location;
 use App\Entities\Podcast;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use Config\Database;
@@ -170,7 +171,9 @@ class PodcastController extends BaseController
             'publisher' => $this->request->getPost('publisher'),
             'type' => $this->request->getPost('type'),
             'copyright' => $this->request->getPost('copyright'),
-            'location' => $this->request->getPost('location_name'),
+            'location' => new Location(
+                $this->request->getPost('location_name'),
+            ),
             'payment_pointer' => $this->request->getPost('payment_pointer'),
             'custom_rss_string' => $this->request->getPost('custom_rss'),
             'partner_id' => $this->request->getPost('partner_id'),
@@ -271,7 +274,9 @@ class PodcastController extends BaseController
         $this->podcast->owner_email = $this->request->getPost('owner_email');
         $this->podcast->type = $this->request->getPost('type');
         $this->podcast->copyright = $this->request->getPost('copyright');
-        $this->podcast->location = $this->request->getPost('location_name');
+        $this->podcast->location = new Location(
+            $this->request->getPost('location_name'),
+        );
         $this->podcast->payment_pointer = $this->request->getPost(
             'payment_pointer',
         );

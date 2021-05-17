@@ -16,6 +16,7 @@ use Config\Database;
 use Podlibre\PodcastNamespace\ReversedTaxonomy;
 use App\Entities\Episode;
 use App\Entities\Image;
+use App\Entities\Location;
 use App\Entities\Person;
 use App\Models\CategoryModel;
 use App\Models\LanguageModel;
@@ -121,7 +122,7 @@ class PodcastImportController extends BaseController
 
         try {
             if (
-                $nsItunes->image !== null &&
+                isset($nsItunes->image) &&
                 $nsItunes->image->attributes()['href'] !== null
             ) {
                 $imageFile = download_file(
@@ -130,6 +131,15 @@ class PodcastImportController extends BaseController
             } else {
                 $imageFile = download_file(
                     (string) $feed->channel[0]->image->url,
+                );
+            }
+
+            $location = null;
+            if (isset($nsPodcast->location)) {
+                $location = new Location(
+                    (string) $nsPodcast->location,
+                    (string) $nsPodcast->location->attributes()['geo'],
+                    (string) $nsPodcast->location->attributes()['osm'],
                 );
             }
 
@@ -150,40 +160,27 @@ class PodcastImportController extends BaseController
                 'language_code' => $this->request->getPost('language'),
                 'category_id' => $this->request->getPost('category'),
                 'parental_advisory' =>
-                $nsItunes->explicit === null
-                    ? null
-                    : (in_array($nsItunes->explicit, ['yes', 'true'])
+                isset($nsItunes->explicit)
+                    ? (in_array((string) $nsItunes->explicit, ['yes', 'true'])
                         ? 'explicit'
-                        : (in_array($nsItunes->explicit, ['no', 'false'])
+                        : (in_array((string) $nsItunes->explicit, ['no', 'false'])
                             ? 'clean'
-                            : null)),
+                            : null))
+                    : null,
                 'owner_name' => (string) $nsItunes->owner->name,
                 'owner_email' => (string) $nsItunes->owner->email,
                 'publisher' => (string) $nsItunes->author,
-                'type' =>
-                $nsItunes->type === null ? 'episodic' : $nsItunes->type,
+                'type' => isset($nsItunes->type) ? (string) $nsItunes->type : 'episodic',
                 'copyright' => (string) $feed->channel[0]->copyright,
                 'is_blocked' =>
-                $nsItunes->block === null
-                    ? false
-                    : $nsItunes->block === 'yes',
+                isset($nsItunes->block)
+                    ? (string) $nsItunes->block === 'yes'
+                    : false,
                 'is_completed' =>
-                $nsItunes->complete === null
-                    ? false
-                    : $nsItunes->complete === 'yes',
-                'location_name' => $nsPodcast->location
-                    ? (string) $nsPodcast->location
-                    : null,
-                'location_geo' =>
-                !$nsPodcast->location ||
-                    $nsPodcast->location->attributes()['geo'] === null
-                    ? null
-                    : (string) $nsPodcast->location->attributes()['geo'],
-                'location_osm_id' =>
-                !$nsPodcast->location ||
-                    $nsPodcast->location->attributes()['osm'] === null
-                    ? null
-                    : (string) $nsPodcast->location->attributes()['osm'],
+                isset($nsItunes->complete)
+                    ? (string) $nsItunes->complete === 'yes'
+                    : false,
+                'location' => $location,
                 'created_by' => user_id(),
                 'updated_by' => user_id(),
             ]);
@@ -277,18 +274,17 @@ class PodcastImportController extends BaseController
                 }
             }
 
-            $personGroup =
-                isset($podcastPerson->attributes()['group'])
-                ? ['slug' => '']
-                : ReversedTaxonomy::$taxonomy[(string) $podcastPerson->attributes()['group']];
-            $personRole =
-                isset($podcastPerson->attributes()['role']) ||
-                $personGroup === null
-                ? ['slug' => '']
-                : $personGroup['roles'][strval($podcastPerson->attributes()['role'])];
+            // TODO: these checks should be in the taxonomy as default values
+            $podcastPersonGroup = $podcastPerson->attributes()['group'] ?? "Cast";
+            $podcastPersonRole = $podcastPerson->attributes()['role'] ?? "Host";
+
+            $personGroup = ReversedTaxonomy::$taxonomy[(string) $podcastPersonGroup];
+
+            $personGroupSlug = $personGroup['slug'];
+            $personRoleSlug = $personGroup['roles'][(string) $podcastPersonRole]['slug'];
 
             $podcastPersonModel = new PersonModel();
-            if (!$podcastPersonModel->addPodcastPerson($newPodcastId, $newPersonId, $personGroup['slug'], $personRole['slug'])) {
+            if (!$podcastPersonModel->addPodcastPerson($newPodcastId, $newPersonId, $personGroupSlug, $personRoleSlug)) {
                 return redirect()
                     ->back()
                     ->withInput()
@@ -341,7 +337,7 @@ class PodcastImportController extends BaseController
             };
 
             if (
-                $nsItunes->image !== null &&
+                isset($nsItunes->image) &&
                 $nsItunes->image->attributes()['href'] !== null
             ) {
                 $episodeImage = new Image(
@@ -351,6 +347,15 @@ class PodcastImportController extends BaseController
                 );
             } else {
                 $episodeImage = null;
+            }
+
+            $location = null;
+            if (isset($nsPodcast->location)) {
+                $location = new Location(
+                    (string) $nsPodcast->location,
+                    (string) $nsPodcast->location->attributes()['geo'],
+                    (string) $nsPodcast->location->attributes()['osm'],
+                );
             }
 
             $newEpisode = new Episode([
@@ -367,13 +372,13 @@ class PodcastImportController extends BaseController
                 'description_html' => $itemDescriptionHtml,
                 'image' => $episodeImage,
                 'parental_advisory' =>
-                $nsItunes->explicit === null
-                    ? null
-                    : (in_array($nsItunes->explicit, ['yes', 'true'])
+                isset($nsItunes->explicit)
+                    ? (in_array((string) $nsItunes->explicit, ['yes', 'true'])
                         ? 'explicit'
-                        : (in_array($nsItunes->explicit, ['no', 'false'])
+                        : (in_array((string) $nsItunes->explicit, ['no', 'false'])
                             ? 'clean'
-                            : null)),
+                            : null))
+                    : null,
                 'number' =>
                 $this->request->getPost('force_renumber') === 'yes'
                     ? $itemNumber
@@ -382,27 +387,13 @@ class PodcastImportController extends BaseController
                 $this->request->getPost('season_number') === null
                     ? $nsItunes->season
                     : $this->request->getPost('season_number'),
-                'type' =>
-                $nsItunes->episodeType === null
-                    ? 'full'
-                    : $nsItunes->episodeType,
-                'is_blocked' =>
-                $nsItunes->block === null
-                    ? false
-                    : $nsItunes->block === 'yes',
-                'location_name' => $nsPodcast->location
-                    ? $nsPodcast->location
-                    : null,
-                'location_geo' =>
-                !$nsPodcast->location ||
-                    $nsPodcast->location->attributes()['geo'] === null
-                    ? null
-                    : $nsPodcast->location->attributes()['geo'],
-                'location_osm_id' =>
-                !$nsPodcast->location ||
-                    $nsPodcast->location->attributes()['osm'] === null
-                    ? null
-                    : $nsPodcast->location->attributes()['osm'],
+                'type' => isset($nsItunes->episodeType)
+                    ? (string) $nsItunes->episodeType
+                    : 'full',
+                'is_blocked' => isset($nsItunes->block)
+                    ? (string) $nsItunes->block === 'yes'
+                    : false,
+                'location' => $location,
                 'created_by' => user_id(),
                 'updated_by' => user_id(),
                 'published_at' => strtotime($item->pubDate),
@@ -425,14 +416,16 @@ class PodcastImportController extends BaseController
                 if (($newPerson = $personModel->getPerson($fullName)) !== null) {
                     $newPersonId = $newPerson->id;
                 } else {
-                    $newEpisodePerson = new Person([
+                    $newPerson = new Person([
                         'full_name' => $fullName,
-                        'slug' => slugify($fullName),
+                        'unique_name' => slugify($fullName),
                         'information_url' => $episodePerson->attributes()['href'],
-                        'image' => new Image(download_file($episodePerson->attributes()['img']))
+                        'image' => new Image(download_file($episodePerson->attributes()['img'])),
+                        'created_by' => user_id(),
+                        'updated_by' => user_id(),
                     ]);
 
-                    if (!($newPersonId = $personModel->insert($newEpisodePerson))) {
+                    if (!($newPersonId = $personModel->insert($newPerson))) {
                         return redirect()
                             ->back()
                             ->withInput()
@@ -440,19 +433,17 @@ class PodcastImportController extends BaseController
                     }
                 }
 
-                $personGroup =
-                    $episodePerson->attributes()['group'] === null
-                    ? ['slug' => '']
-                    : ReversedTaxonomy::$taxonomy[strval($episodePerson->attributes()['group'])];
-                $personRole =
-                    $episodePerson->attributes()['role'] === null ||
-                    $personGroup === null
-                    ? ['slug' => '']
-                    : $personGroup['roles'][strval($episodePerson->attributes()['role'])];
+                // TODO: these checks should be in the taxonomy as default values
+                $episodePersonGroup = $episodePerson->attributes()['group'] ?? "Cast";
+                $episodePersonRole = $episodePerson->attributes()['role'] ?? "Host";
 
+                $personGroup = ReversedTaxonomy::$taxonomy[(string) $episodePersonGroup];
+
+                $personGroupSlug = $personGroup['slug'];
+                $personRoleSlug = $personGroup['roles'][(string) $episodePersonRole]['slug'];
 
                 $episodePersonModel = new PersonModel();
-                if (!$episodePersonModel->addEpisodePerson($newPodcastId, $newEpisodeId, $newPersonId, $personGroup['slug'], $personRole['slug'])) {
+                if (!$episodePersonModel->addEpisodePerson($newPodcastId, $newEpisodeId, $newPersonId, $personGroupSlug, $personRoleSlug)) {
                     return redirect()
                         ->back()
                         ->withInput()

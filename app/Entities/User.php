@@ -27,9 +27,9 @@ use Myth\Auth\Entities\User as MythAuthUser;
 class User extends MythAuthUser
 {
     /**
-     * @var Podcast[]
+     * @var Podcast[]|null
      */
-    protected $podcasts = [];
+    protected ?array $podcasts = null;
 
     /**
      * Array of field names and the type of value to cast them as

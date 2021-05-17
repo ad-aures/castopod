@@ -111,37 +111,8 @@
                         ],
                     ) ?>
                 </div>
-                <?php if ($episode->location !== null): ?>
-                    <?= location_link($episode->location, 'text-sm mb-4') ?>
-                <?php endif; ?>
-                <?php if ($episodePersons): ?>
-                    <div class="flex w-full space-x-2 overflow-y-auto">
-                        <?php foreach ($episodePersons as $person): ?>
-                            <?php if ($person['information_url']): ?>
-                                <a href="<?= $person[
-                                    'information_url'
-                                ] ?>" target="_blank" rel="noreferrer noopener" class="flex-shrink-0">
-                                    <img src="<?= $person[
-                                        'thumbnail_url'
-                                    ] ?>" alt="<?= $person[
-    'full_name'
-] ?>" class="object-cover w-12 h-12 rounded-full" data-toggle="tooltip"
-data-placement="bottom" title="[<?= $person['full_name'] ?>] <?= $person[
-    'roles'
-] ?>" /></a>
-                            <?php else: ?>
-                                <img src="<?= $person[
-                                    'thumbnail_url'
-                                ] ?>" alt="<?= $person[
-    'full_name'
-] ?>" class="object-cover w-12 h-12 rounded-full" data-toggle="tooltip"
-data-placement="bottom" title="[<?= $person['full_name'] ?>] <?= $person[
-    'roles'
-] ?>" />
-                            <?php endif; ?>
-                        <?php endforeach; ?>
-                    </div>
-                <?php endif; ?>
+                <?= location_link($episode->location, 'text-sm mb-4') ?>
+                <?= person_list($episode->persons) ?>
             </div>
         </div>
         <audio controls preload="none" class="w-full mt-auto">

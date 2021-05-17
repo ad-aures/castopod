@@ -7,6 +7,7 @@
  */
 
 use App\Entities\Location;
+use App\Entities\Person;
 use CodeIgniter\View\Table;
 use CodeIgniter\I18n\Time;
 
@@ -291,13 +292,11 @@ if (!function_exists('publication_button')) {
      * Publication button component
      *
      * Displays the appropriate publication button depending on the publication status.
-     *
-     * @param boolean   $publicationStatus the episode's publication status     *
      */
     function publication_button(
         int $podcastId,
         int $episodeId,
-        bool $publicationStatus
+        string $publicationStatus
     ): string {
         switch ($publicationStatus) {
             case 'not_published':
@@ -412,6 +411,62 @@ if (!function_exists('location_link')) {
                 'rel' => 'noreferrer noopener',
             ],
         );
+    }
+}
+
+// ------------------------------------------------------------------------
+
+if (!function_exists('person_list')) {
+    /**
+     * Returns list of persons images
+     *
+     * @param Person[] $persons
+     */
+    function person_list(array $persons, string $class = ''): string
+    {
+        if ($persons === []) {
+            return '';
+        }
+
+        $personList = "<div class='flex w-full space-x-2 overflow-y-auto {$class}'>";
+
+        foreach ($persons as $person) {
+            $personList .= anchor(
+                $person->information_url ?? '#',
+                "<img
+                    src='{$person->image->thumbnail_url}'
+                    alt='$person->full_name'
+                    class='object-cover w-12 h-12 rounded-full' />",
+                [
+                    'class' =>
+                        'flex-shrink-0 focus:outline-none focus:ring focus:ring-inset',
+                    'target' => '_blank',
+                    'rel' => 'noreferrer noopener',
+                    'title' =>
+                        '<strong>' .
+                        $person->full_name .
+                        '</strong>' .
+                        implode(
+                            array_map(function ($role) {
+                                return '<br />' .
+                                    lang(
+                                        'PersonsTaxonomy.persons.' .
+                                            $role->group .
+                                            '.roles.' .
+                                            $role->role .
+                                            '.label',
+                                    );
+                            }, $person->roles),
+                        ),
+                    'data-toggle' => 'tooltip',
+                    'data-placement' => 'bottom',
+                ],
+            );
+        }
+
+        $personList .= '</div>';
+
+        return $personList;
     }
 }
 

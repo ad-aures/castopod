@@ -54,9 +54,9 @@ if (!function_exists('write_audio_file_tags')) {
         $APICdata = file_get_contents($cover->getRealPath());
 
         // TODO: variables used for podcast specific tags
-        // $podcast_url = $episode->podcast->link;
-        // $podcast_feed_url = $episode->podcast->feed_url;
-        // $episode_media_url = $episode->link;
+        // $podcastUrl = $episode->podcast->link;
+        // $podcastFeedUrl = $episode->podcast->feed_url;
+        // $episodeMediaUrl = $episode->link;
 
         // populate data array
         $TagData = [
@@ -74,7 +74,7 @@ if (!function_exists('write_audio_file_tags')) {
             ],
             'genre' => ['Podcast'],
             'comment' => [$episode->description],
-            'track_number' => [strval($episode->number)],
+            'track_number' => [(string) $episode->number],
             'copyright_message' => [$episode->podcast->copyright],
             'publisher' => [
                 empty($episode->podcast->publisher)

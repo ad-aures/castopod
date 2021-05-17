@@ -39,18 +39,21 @@ class AnalyticsController extends Controller
         );
     }
 
-    public function getData(int $podcastId, int $episodeId): ResponseInterface
-    {
-        $analytics_model = new $this->className();
+    public function getData(
+        int $podcastId,
+        ?int $episodeId = null
+    ): ResponseInterface {
+        $analyticsModel = new $this->className();
         $methodName = $this->methodName;
-        if ($episodeId !== 0) {
+
+        if ($episodeId === null) {
             return $this->response->setJSON(
-                $analytics_model->$methodName($podcastId, $episodeId),
+                $analyticsModel->$methodName($podcastId),
             );
         }
 
         return $this->response->setJSON(
-            $analytics_model->$methodName($podcastId),
+            $analyticsModel->$methodName($podcastId, $episodeId),
         );
     }
 }

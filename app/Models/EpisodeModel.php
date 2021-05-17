@@ -83,7 +83,7 @@ class EpisodeModel extends Model
         'is_blocked',
         'location_name',
         'location_geo',
-        'location_osm_id',
+        'location_osm',
         'custom_rss',
         'favourites_total',
         'reblogs_total',

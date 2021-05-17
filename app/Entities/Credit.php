@@ -29,9 +29,9 @@ use CodeIgniter\Entity\Entity;
  */
 class Credit extends Entity
 {
-    protected ?Person $person;
-    protected ?Podcast $podcast;
-    protected ?Episode $episode;
+    protected ?Person $person = null;
+    protected ?Podcast $podcast = null;
+    protected ?Episode $episode = null;
     protected string $group_label;
     protected string $role_label;
 

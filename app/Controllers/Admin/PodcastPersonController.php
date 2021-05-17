@@ -54,13 +54,13 @@ class PodcastPersonController extends BaseController
         replace_breadcrumb_params([
             0 => $this->podcast->title,
         ]);
-        return view('admin/podcast/person', $data);
+        return view('admin/podcast/persons', $data);
     }
 
     public function attemptAdd(): RedirectResponse
     {
         $rules = [
-            'person' => 'required',
+            'persons' => 'required',
         ];
 
         if (!$this->validate($rules)) {
@@ -72,18 +72,18 @@ class PodcastPersonController extends BaseController
 
         (new PersonModel())->addPodcastPersons(
             $this->podcast->id,
-            $this->request->getPost('person'),
-            $this->request->getPost('person_group_role'),
+            $this->request->getPost('persons'),
+            $this->request->getPost('roles') ?? [],
         );
 
         return redirect()->back();
     }
 
-    public function remove(int $podcastPersonId): RedirectResponse
+    public function remove(int $personId): RedirectResponse
     {
-        (new PersonModel())->removePodcastPersons(
+        (new PersonModel())->removePersonFromPodcast(
             $this->podcast->id,
-            $podcastPersonId,
+            $personId,
         );
 
         return redirect()->back();

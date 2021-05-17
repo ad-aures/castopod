@@ -21,7 +21,7 @@ use RuntimeException;
  */
 class Note extends ActivityPubNote
 {
-    protected ?Episode $episode;
+    protected ?Episode $episode = null;
 
     /**
      * @var array<string, string>

@@ -26,15 +26,15 @@ class SimpleRSSElement extends SimpleXMLElement
         string $value = '',
         ?string $namespace = null
     ) {
-        $new_child = parent::addChild($name, '', $namespace);
+        $newChild = parent::addChild($name, '', $namespace);
 
-        if ($new_child !== null) {
-            $node = dom_import_simplexml($new_child);
+        if ($newChild !== null) {
+            $node = dom_import_simplexml($newChild);
             $no = $node->ownerDocument;
             $node->appendChild($no->createCDATASection($value));
         }
 
-        return $new_child;
+        return $newChild;
     }
 
     /**
@@ -49,14 +49,14 @@ class SimpleRSSElement extends SimpleXMLElement
      */
     public function addChild($name, $value = null, $namespace = null)
     {
-        $new_child = parent::addChild($name, '', $namespace);
+        $newChild = parent::addChild($name, '', $namespace);
 
-        if ($new_child !== null) {
-            $node = dom_import_simplexml($new_child);
+        if ($newChild !== null) {
+            $node = dom_import_simplexml($newChild);
             $no = $node->ownerDocument;
             $node->appendChild($no->createTextNode(esc($value)));
         }
 
-        return $new_child;
+        return $newChild;
     }
 }

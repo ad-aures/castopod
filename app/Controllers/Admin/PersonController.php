@@ -8,6 +8,7 @@
 
 namespace App\Controllers\Admin;
 
+use App\Entities\Image;
 use CodeIgniter\HTTP\RedirectResponse;
 use App\Entities\Person;
 use CodeIgniter\Exceptions\PageNotFoundException;
@@ -77,7 +78,7 @@ class PersonController extends BaseController
             'full_name' => $this->request->getPost('full_name'),
             'unique_name' => $this->request->getPost('unique_name'),
             'information_url' => $this->request->getPost('information_url'),
-            'image' => $this->request->getFile('image'),
+            'image' => new Image($this->request->getFile('image')),
             'created_by' => user_id(),
             'updated_by' => user_id(),
         ]);
@@ -125,9 +126,9 @@ class PersonController extends BaseController
         $this->person->information_url = $this->request->getPost(
             'information_url',
         );
-        $image = $this->request->getFile('image');
-        if ($image->isValid()) {
-            $this->person->image = $image;
+        $imageFile = $this->request->getFile('image');
+        if ($imageFile !== null && $imageFile->isValid()) {
+            $this->person->image = new Image($imageFile);
         }
 
         $this->person->updated_by = user_id();

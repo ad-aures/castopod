@@ -85,7 +85,7 @@ class ActivityRequest
         $date = Time::now('GMT')->format('D, d M Y H:i:s T');
         $digest = 'SHA-256=' . base64_encode($this->getBodyDigest());
         $contentType = $this->options['headers']['Content-Type'];
-        $contentLength = strval(strlen($this->request->getBody()));
+        $contentLength = (string) strlen($this->request->getBody());
         $userAgent = 'Castopod';
 
         $plainText = "(request-target): post {$path}\nhost: {$host}\ndate: {$date}\ndigest: {$digest}\ncontent-type: {$contentType}\ncontent-length: {$contentLength}\nuser-agent: {$userAgent}";

@@ -53,7 +53,7 @@ class PodcastModel extends Model
         'is_locked',
         'location_name',
         'location_geo',
-        'location_osm_id',
+        'location_osm',
         'payment_pointer',
         'custom_rss',
         'partner_id',
@@ -218,11 +218,11 @@ class PodcastModel extends Model
             ->delete();
     }
 
-    public function getContributorGroupId(int $userId, int $podcastId): int|false
+    public function getContributorGroupId(int $userId, int|string $podcastId): int|false
     {
         if (!is_numeric($podcastId)) {
             // identifier is the podcast name, request must be a join
-            $user_podcast = $this->db
+            $userPodcast = $this->db
                 ->table('podcasts_users')
                 ->select('group_id, user_id')
                 ->join('podcasts', 'podcasts.id = podcasts_users.podcast_id')
@@ -233,7 +233,7 @@ class PodcastModel extends Model
                 ->get()
                 ->getResultObject();
         } else {
-            $user_podcast = $this->db
+            $userPodcast = $this->db
                 ->table('podcasts_users')
                 ->select('group_id')
                 ->where([
@@ -244,8 +244,8 @@ class PodcastModel extends Model
                 ->getResultObject();
         }
 
-        return count($user_podcast) > 0
-            ? $user_podcast[0]->group_id
+        return count($userPodcast) > 0
+            ? $userPodcast[0]->group_id
             : false;
     }
 
@@ -446,7 +446,7 @@ class PodcastModel extends Model
      *
      * @return mixed[]
      */
-    protected function clearCache(array $data): array
+    public function clearCache(array $data): array
     {
         $podcast = (new PodcastModel())->getPodcastById(
             is_array($data['id']) ? $data['id'][0] : $data['id'],

@@ -182,7 +182,7 @@ if (!function_exists('create_preview_card_from_url')) {
 
             // Check that, at least, the url and title are set
             if ($media->url && $media->title) {
-                $preview_card = new PreviewCard([
+                $newPreviewCard = new PreviewCard([
                     'url' => (string) $url,
                     'title' => $media->title,
                     'description' => $media->description,
@@ -199,15 +199,15 @@ if (!function_exists('create_preview_card_from_url')) {
 
                 if (
                     !($newPreviewCardId = model('PreviewCardModel')->insert(
-                        $preview_card,
+                        $newPreviewCard,
                         true,
                     ))
                 ) {
                     return null;
                 }
 
-                $preview_card->id = $newPreviewCardId;
-                return $preview_card;
+                $newPreviewCard->id = $newPreviewCardId;
+                return $newPreviewCard;
             }
         }
 

@@ -23,7 +23,7 @@ class EpisodePersonController extends BaseController
 
     public function _remap(string $method, string ...$params): mixed
     {
-        if (count($params) <= 2) {
+        if (count($params) < 2) {
             throw PageNotFoundException::forPageNotFound();
         }
 
@@ -54,10 +54,6 @@ class EpisodePersonController extends BaseController
         $data = [
             'episode' => $this->episode,
             'podcast' => $this->podcast,
-            'episodePersons' => (new PersonModel())->getEpisodePersons(
-                $this->podcast->id,
-                $this->episode->id,
-            ),
             'personOptions' => (new PersonModel())->getPersonOptions(),
             'taxonomyOptions' => (new PersonModel())->getTaxonomyOptions(),
         ];
@@ -65,7 +61,7 @@ class EpisodePersonController extends BaseController
             0 => $this->podcast->title,
             1 => $this->episode->title,
         ]);
-        return view('admin/episode/person', $data);
+        return view('admin/episode/persons', $data);
     }
 
     public function attemptAdd(): RedirectResponse
@@ -91,12 +87,12 @@ class EpisodePersonController extends BaseController
         return redirect()->back();
     }
 
-    public function remove(int $episodePersonId): RedirectResponse
+    public function remove(int $personId): RedirectResponse
     {
-        (new PersonModel())->removeEpisodePersons(
+        (new PersonModel())->removePersonFromEpisode(
             $this->podcast->id,
             $this->episode->id,
-            $episodePersonId,
+            $personId,
         );
 
         return redirect()->back();

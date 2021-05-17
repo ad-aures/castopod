@@ -99,14 +99,14 @@ if (!function_exists('form_label')) {
     /**
      * Form Label Tag
      *
-     * @param string $label_text The text to appear onscreen
+     * @param string $text The text to appear onscreen
      * @param string $id         The id the label applies to
      * @param array<string, string>  $attributes Additional attributes
      * @param string  $hintText Hint text to add next to the label
      * @param boolean  $isOptional adds an optional text if true
      */
     function form_label(
-        string $label_text = '',
+        string $text = '',
         string $id = '',
         array $attributes = [],
         string $hintText = '',
@@ -124,19 +124,19 @@ if (!function_exists('form_label')) {
             }
         }
 
-        $label_content = $label_text;
+        $labelContent = $text;
         if ($isOptional) {
-            $label_content .=
+            $labelContent .=
                 '<small class="ml-1 lowercase">(' .
                 lang('Common.optional') .
                 ')</small>';
         }
 
         if ($hintText !== '') {
-            $label_content .= hint_tooltip($hintText, 'ml-1');
+            $labelContent .= hint_tooltip($hintText, 'ml-1');
         }
 
-        return $label . '>' . $label_content . '</label>';
+        return $label . '>' . $labelContent . '</label>';
     }
 }
 

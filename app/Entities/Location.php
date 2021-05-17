@@ -9,12 +9,13 @@
 namespace App\Entities;
 
 use CodeIgniter\Entity\Entity;
+use Config\Services;
 
 /**
  * @property string $url
  * @property string $name
  * @property string|null $geo
- * @property string|null $osm_id
+ * @property string|null $osm
  */
 class Location extends Entity
 {
@@ -23,15 +24,30 @@ class Location extends Entity
      */
     const OSM_URL = 'https://www.openstreetmap.org/';
 
+    /**
+     * @var string
+     */
+    const NOMINATIM_URL = 'https://nominatim.openstreetmap.org/';
+
+    public function __construct(
+        protected string $name,
+        protected ?string $geo = null,
+        protected ?string $osm = null
+    ) {
+        parent::__construct([
+            'name' => $name,
+            'geo' => $geo,
+            'osm' => $osm
+        ]);
+    }
+
     public function getUrl(): string
     {
-        if ($this->osm_id !== null) {
+        if ($this->osm !== null) {
             return self::OSM_URL .
-                ['N' => 'node', 'W' => 'way', 'R' => 'relation'][
-                    substr($this->osm_id, 0, 1)
-                ] .
+                ['N' => 'node', 'W' => 'way', 'R' => 'relation'][substr($this->osm, 0, 1)] .
                 '/' .
-                substr($this->osm_id, 1);
+                substr($this->osm, 1);
         }
 
         if ($this->geo !== null) {
@@ -41,5 +57,50 @@ class Location extends Entity
         }
 
         return self::OSM_URL . 'search?query=' . urlencode($this->name);
+    }
+
+    /**
+     * Fetches places from Nominatim OpenStreetMap
+     *
+     * @return array<string, string>|null
+     */
+    public function fetchOsmLocation(): self
+    {
+        $client = Services::curlrequest();
+
+        $response = $client->request(
+            'GET',
+            self::NOMINATIM_URL .
+                'search.php?q=' .
+                urlencode($this->name) .
+                '&polygon_geojson=1&format=jsonv2',
+            [
+                'headers' => [
+                    'User-Agent' => 'Castopod/' . CP_VERSION,
+                    'Accept' => 'application/json',
+                ],
+            ],
+        );
+
+        $places = json_decode(
+            $response->getBody(),
+            false,
+            512,
+            JSON_THROW_ON_ERROR,
+        );
+
+        if ($places === []) {
+            return $this;
+        }
+
+        if (isset($places[0]->lat, $places[0]->lon)) {
+            $this->attributes['geo'] = "geo:{$places[0]->lat},{$places[0]->lon}";
+        }
+
+        if (isset($places[0]->osm_type, $places[0]->osm_id)) {
+            $this->attributes['osm'] = strtoupper(substr($places[0]->osm_type, 0, 1)) . $places[0]->osm_id;
+        }
+
+        return $this;
     }
 }

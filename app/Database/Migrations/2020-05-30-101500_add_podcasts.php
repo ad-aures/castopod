@@ -142,7 +142,7 @@ class AddPodcasts extends Migration
                 'constraint' => 32,
                 'null' => true,
             ],
-            'location_osm_id' => [
+            'location_osm' => [
                 'type' => 'VARCHAR',
                 'constraint' => 12,
                 'null' => true,

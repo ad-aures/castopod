@@ -16,16 +16,16 @@ if (!function_exists('icon')) {
      */
     function icon(string $name, string $class = ''): string
     {
-        $svg_contents = file_get_contents('assets/icons/' . $name . '.svg');
+        $svgContents = file_get_contents('assets/icons/' . $name . '.svg');
         if ($class !== '') {
-            $svg_contents = str_replace(
+            $svgContents = str_replace(
                 '<svg',
                 '<svg class="' . $class . '"',
-                $svg_contents,
+                $svgContents,
             );
         }
 
-        return $svg_contents;
+        return $svgContents;
     }
 }
 
@@ -39,14 +39,14 @@ if (!function_exists('svg')) {
      */
     function svg(string $name, ?string $class = null): string
     {
-        $svg_contents = file_get_contents('assets/images/' . $name . '.svg');
+        $svgContents = file_get_contents('assets/images/' . $name . '.svg');
         if ($class) {
-            $svg_contents = str_replace(
+            $svgContents = str_replace(
                 '<svg',
                 '<svg class="' . $class . '"',
-                $svg_contents,
+                $svgContents,
             );
         }
-        return $svg_contents;
+        return $svgContents;
     }
 }

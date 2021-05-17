@@ -27,7 +27,7 @@
                     'text-2xl inline-flex items-baseline font-bold font-display',
             ],
         ) ?>
-        <?php if (user()->podcasts): ?>
+        <?php if (user()->podcasts !== []): ?>
             <button type="button" class="inline-flex items-center px-6 py-2 mt-auto font-semibold outline-none focus:ring" id="interact-as-dropdown" data-dropdown="button" data-dropdown-target="interact-as-dropdown-menu" aria-haspopup="true" aria-expanded="false">
                 <img src="<?= interact_as_actor()
                     ->avatar_image_url ?>" class="w-8 h-8 mr-2 rounded-full" />

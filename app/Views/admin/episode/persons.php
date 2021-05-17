@@ -5,7 +5,7 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('pageTitle') ?>
-<?= lang('Person.episode_form.title') ?> (<?= count($episodePersons) ?>)
+<?= lang('Person.episode_form.title') ?> (<?= count($episode->persons) ?>)
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
@@ -25,7 +25,6 @@
 ]) ?>
 <?= csrf_field() ?>
 
-<?php if ($episodePersons): ?>
 
 <?= form_section(
     lang('Person.episode_form.manage_section_title'),
@@ -37,42 +36,45 @@
     [
         [
             'header' => lang('Person.episode_form.person'),
-            'cell' => function ($episodePerson) {
+            'cell' => function ($person) {
                 return '<div class="flex">' .
                     '<a href="' .
-                    route_to('person-view', $episodePerson->person->id) .
-                    "\"><img src=\"{$episodePerson->person->image->thumbnail_url}\" alt=\"{$episodePerson->person->full_name}\" class=\"object-cover w-16 h-16 rounded-full\" /></a>" .
+                    route_to('person-view', $person->id) .
+                    "\"><img src=\"{$person->image->thumbnail_url}\" alt=\"{$person->full_name}\" class=\"object-cover w-16 h-16 rounded-full\" /></a>" .
                     '<div class="flex flex-col ml-3">' .
-                    $episodePerson->person->full_name .
-                    ($episodePerson->person_group && $episodePerson->person_role
-                        ? '<span class="text-sm text-gray-600">' .
-                            lang(
-                                "PersonsTaxonomy.persons.{$episodePerson->person_group}.label",
-                            ) .
-                            ' ▸ ' .
-                            lang(
-                                "PersonsTaxonomy.persons.{$episodePerson->person_group}.roles.{$episodePerson->person_role}.label",
-                            ) .
-                            '</span>'
-                        : '') .
-                    (empty($episodePerson->person->information_url)
+                    $person->full_name .
+                    implode(
+                        '',
+                        array_map(function ($role) {
+                            return '<span class="text-sm text-gray-600">' .
+                                lang(
+                                    "PersonsTaxonomy.persons.{$role->group}.label",
+                                ) .
+                                ' › ' .
+                                lang(
+                                    "PersonsTaxonomy.persons.{$role->group}.roles.{$role->role}.label",
+                                ) .
+                                '</span>';
+                        }, $person->roles),
+                    ) .
+                    ($person->information_url === null
                         ? ''
-                        : "<a href=\"{$episodePerson->person->information_url}\" target=\"_blank\" rel=\"noreferrer noopener\" class=\"text-sm text-blue-800 hover:underline\">" .
-                            $episodePerson->person->information_url .
+                        : "<a href=\"{$person->information_url}\" target=\"_blank\" rel=\"noreferrer noopener\" class=\"text-sm text-blue-800 hover:underline\">" .
+                            $person->information_url .
                             '</a>') .
                     '</div></div>';
             },
         ],
         [
             'header' => lang('Common.actions'),
-            'cell' => function ($episodePerson): string {
+            'cell' => function ($person): string {
                 return button(
                     lang('Person.episode_form.remove'),
                     route_to(
                         'episode-person-remove',
-                        $episodePerson->podcast_id,
-                        $episodePerson->episode_id,
-                        $episodePerson->id,
+                        $person->podcast_id,
+                        $person->episode_id,
+                        $person->id,
                     ),
                     [
                         'variant' => 'danger',
@@ -82,11 +84,10 @@
             },
         ],
     ],
-    $episodePersons,
+    $episode->persons,
 ) ?>
 
 <?= form_section_close() ?>
-<?php endif; ?>
 
 
 <?= form_section(
@@ -117,10 +118,7 @@
     'person_group_role[]',
     $taxonomyOptions,
     old('person_group_role', []),
-    [
-        'id' => 'person_group_role',
-        'class' => 'form-select mb-4',
-    ],
+    ['id' => 'person_group_role', 'class' => 'form-select mb-4'],
 ) ?>
         
     
