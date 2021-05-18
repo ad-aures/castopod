@@ -28,7 +28,7 @@ class ActivityPubFilter implements FilterInterface
      */
     public function before(RequestInterface $request, $params = null)
     {
-        if (empty($params)) {
+        if ($params === null) {
             return;
         }
 
@@ -40,8 +40,7 @@ class ActivityPubFilter implements FilterInterface
                 'application/activity+json',
             ];
 
-            if (empty($negotiate->media($allowedContentTypes))) {
-                // return $this->response->setStatusCode(415)->setJSON([]);
+            if ($negotiate->media($allowedContentTypes) === '') {
                 throw PageNotFoundException::forPageNotFound();
             }
         }

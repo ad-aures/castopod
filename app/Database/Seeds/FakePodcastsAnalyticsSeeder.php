@@ -114,11 +114,11 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                         try {
                             $city = $cityReader->city($fakeIp);
 
-                            $countryCode = empty($city->country->isoCode)
+                            $countryCode = $city->country->isoCode === null
                                 ? 'N/A'
                                 : $city->country->isoCode;
 
-                            $regionCode = empty($city->subdivisions[0]->isoCode)
+                            $regionCode = $city->subdivisions[0]->isoCode === null
                                 ? 'N/A'
                                 : $city->subdivisions[0]->isoCode;
                             $latitude = round($city->location->latitude, 3);

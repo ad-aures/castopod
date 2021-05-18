@@ -19,15 +19,8 @@ use CodeIgniter\HTTP\RedirectResponse;
 
 class ContributorController extends BaseController
 {
-    /**
-     * @var Podcast
-     */
-    protected $podcast;
-
-    /**
-     * @var User|null
-     */
-    protected $user;
+    protected Podcast $podcast;
+    protected ?User $user;
 
     public function _remap(string $method, string ...$params): mixed
     {

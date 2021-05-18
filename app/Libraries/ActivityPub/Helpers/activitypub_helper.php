@@ -361,6 +361,7 @@ if (!function_exists('linkify')) {
 
         // Extract text links for each protocol
         foreach ($protocols as $protocol) {
+            /** @phpstan-ignore-next-line */
             switch ($protocol) {
                 case 'http':
                 case 'https':

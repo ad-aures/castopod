@@ -18,25 +18,10 @@ use ActivityPub\Core\ObjectType;
 
 class NoteObject extends ObjectType
 {
-    /**
-     * @var string
-     */
-    protected $type = 'Note';
-
-    /**
-     * @var string
-     */
-    protected $attributedTo;
-
-    /**
-     * @var string
-     */
-    protected $inReplyTo;
-
-    /**
-     * @var string
-     */
-    protected $replies;
+    protected string $type = 'Note';
+    protected string $attributedTo;
+    protected string $inReplyTo;
+    protected string $replies;
 
     public function __construct(Note $note)
     {

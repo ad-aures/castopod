@@ -95,19 +95,19 @@ class Episode extends Entity
     protected File $chapters_file;
 
     /**
-     * @var Person[]
+     * @var Person[]|null
      */
-    protected $persons = [];
+    protected ?array $persons = null;
 
     /**
-     * @var Soundbite[]
+     * @var Soundbite[]|null
      */
-    protected $soundbites = [];
+    protected ?array $soundbites = null;
 
     /**
-     * @var Note[]
+     * @var Note[]|null
      */
-    protected $notes = [];
+    protected ?array $notes = null;
 
     protected ?Location $location = null;
     protected string $custom_rss_string;
@@ -348,13 +348,13 @@ class Episode extends Entity
      */
     public function getPersons(): array
     {
-        if (empty($this->id)) {
+        if ($this->id === null) {
             throw new RuntimeException(
                 'Episode must be created before getting persons.',
             );
         }
 
-        if (empty($this->persons)) {
+        if ($this->persons === null) {
             $this->persons = (new PersonModel())->getEpisodePersons(
                 $this->podcast_id,
                 $this->id,
@@ -371,13 +371,13 @@ class Episode extends Entity
      */
     public function getSoundbites(): array
     {
-        if (empty($this->id)) {
+        if ($this->id === null) {
             throw new RuntimeException(
                 'Episode must be created before getting soundbites.',
             );
         }
 
-        if (empty($this->soundbites)) {
+        if ($this->soundbites === null) {
             $this->soundbites = (new SoundbiteModel())->getEpisodeSoundbites(
                 $this->getPodcast()->id,
                 $this->id,
@@ -392,13 +392,13 @@ class Episode extends Entity
      */
     public function getNotes(): array
     {
-        if (empty($this->id)) {
+        if ($this->id === null) {
             throw new RuntimeException(
                 'Episode must be created before getting soundbites.',
             );
         }
 
-        if (empty($this->notes)) {
+        if ($this->notes === null) {
             $this->notes = (new NoteModel())->getEpisodeNotes($this->id);
         }
 

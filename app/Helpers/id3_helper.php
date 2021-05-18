@@ -62,7 +62,7 @@ if (!function_exists('write_audio_file_tags')) {
         $TagData = [
             'title' => [$episode->title],
             'artist' => [
-                empty($episode->podcast->publisher)
+                $episode->podcast->publisher === null
                     ? $episode->podcast->owner_name
                     : $episode->podcast->publisher,
             ],
@@ -77,7 +77,7 @@ if (!function_exists('write_audio_file_tags')) {
             'track_number' => [(string) $episode->number],
             'copyright_message' => [$episode->podcast->copyright],
             'publisher' => [
-                empty($episode->podcast->publisher)
+                $episode->podcast->publisher === null
                     ? $episode->podcast->owner_name
                     : $episode->podcast->publisher,
             ],
@@ -103,7 +103,7 @@ if (!function_exists('write_audio_file_tags')) {
         // write tags
         if ($tagwriter->WriteTags()) {
             echo 'Successfully wrote tags<br>';
-            if (!empty($tagwriter->warnings)) {
+            if ($tagwriter->warnings !== []) {
                 echo 'There were some warnings:<br>' .
                     implode('<br><br>', $tagwriter->warnings);
             }

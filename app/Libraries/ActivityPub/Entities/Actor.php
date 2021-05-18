@@ -37,20 +37,13 @@ use CodeIgniter\Entity\Entity;
  */
 class Actor extends Entity
 {
-    /**
-     * @var string
-     */
-    protected $public_key_id;
+    protected string $public_key_id;
 
     /**
      * @var Actor[]
      */
-    protected $followers = [];
-
-    /**
-     * @var boolean
-     */
-    protected $is_local = false;
+    protected ?array $followers = null;
+    protected bool $is_local = false;
 
     /**
      * @var array<string, string>
@@ -100,13 +93,13 @@ class Actor extends Entity
      */
     public function getFollowers(): array
     {
-        if (empty($this->id)) {
+        if ($this->id === null) {
             throw new RuntimeException(
                 'Actor must be created before getting followers.',
             );
         }
 
-        if (empty($this->followers)) {
+        if ($this->followers === null) {
             $this->followers = (array) model('ActorModel')->getFollowers(
                 $this->id,
             );
@@ -117,7 +110,7 @@ class Actor extends Entity
 
     public function getAvatarImageUrl(): string
     {
-        if (empty($this->attributes['avatar_image_url'])) {
+        if ($this->attributes['avatar_image_url'] === null) {
             return base_url(config('ActivityPub')->defaultAvatarImagePath);
         }
 
@@ -126,7 +119,7 @@ class Actor extends Entity
 
     public function getAvatarImageMimetype(): string
     {
-        if (empty($this->attributes['avatar_image_mimetype'])) {
+        if ($this->attributes['avatar_image_mimetype'] === null) {
             return config('ActivityPub')->defaultAvatarImageMimetype;
         }
 
@@ -135,7 +128,7 @@ class Actor extends Entity
 
     public function getCoverImageUrl(): string
     {
-        if (empty($this->attributes['cover_image_url'])) {
+        if ($this->attributes['cover_image_url'] === null) {
             return base_url(config('ActivityPub')->defaultCoverImagePath);
         }
 
@@ -144,7 +137,7 @@ class Actor extends Entity
 
     public function getCoverImageMimetype(): string
     {
-        if (empty($this->attributes['cover_image_mimetype'])) {
+        if ($this->attributes['cover_image_mimetype'] === null) {
             return config('ActivityPub')->defaultCoverImageMimetype;
         }
 

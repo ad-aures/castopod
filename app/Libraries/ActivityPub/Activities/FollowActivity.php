@@ -17,8 +17,5 @@ use ActivityPub\Core\Activity;
 
 class FollowActivity extends Activity
 {
-    /**
-     * @var string
-     */
-    protected $type = 'Follow';
+    protected string $type = 'Follow';
 }

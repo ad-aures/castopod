@@ -22,7 +22,7 @@ class Validation
      *
      * @var string[]
      */
-    public $ruleSets = [
+    public array $ruleSets = [
         Rules::class,
         FormatRules::class,
         FileRules::class,
@@ -38,7 +38,7 @@ class Validation
      *
      * @var array<string, string>
      */
-    public $templates = [
+    public array $templates = [
         'list' => 'CodeIgniter\Validation\Views\list',
         'single' => 'CodeIgniter\Validation\Views\single',
     ];

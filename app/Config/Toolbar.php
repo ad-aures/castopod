@@ -33,7 +33,7 @@ class Toolbar extends BaseConfig
      *
      * @var string[]
      */
-    public $collectors = [
+    public array $collectors = [
         Timers::class,
         Database::class,
         Logs::class,
@@ -53,9 +53,8 @@ class Toolbar extends BaseConfig
      * helping to conserve file space used to store them. You can set it to
      * 0 (zero) to not have any history stored, or -1 for unlimited history.
      *
-     * @var integer
      */
-    public $maxHistory = 20;
+    public int $maxHistory = 20;
 
     /**
      * --------------------------------------------------------------------------
@@ -65,9 +64,8 @@ class Toolbar extends BaseConfig
      * The full path to the the views that are used by the toolbar.
      * This MUST have a trailing slash.
      *
-     * @var string
      */
-    public $viewsPath = SYSTEMPATH . 'Debug/Toolbar/Views/';
+    public string $viewsPath = SYSTEMPATH . 'Debug/Toolbar/Views/';
 
     /**
      * --------------------------------------------------------------------------
@@ -81,7 +79,6 @@ class Toolbar extends BaseConfig
      *
      * `$maxQueries` defines the maximum amount of queries that will be stored.
      *
-     * @var integer
      */
-    public $maxQueries = 100;
+    public int $maxQueries = 100;
 }

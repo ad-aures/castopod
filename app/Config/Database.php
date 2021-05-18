@@ -50,6 +50,8 @@ class Database extends Config
      * This database connection is used when
      * running PHPUnit database tests.
      *
+     * @noRector StringClassNameToClassConstantRector
+     *
      * @var array<string, string|bool|int|array>
      */
     public array $tests = [
@@ -58,7 +60,6 @@ class Database extends Config
         'username' => '',
         'password' => '',
         'database' => ':memory:',
-        /** @noRector StringClassNameToClassConstantRector */
         'DBDriver' => 'SQLite3',
         'DBPrefix' => 'db_', // Needed to ensure we're working correctly with prefixes live. DO NOT REMOVE FOR CI DEVS
         'pConnect' => false,

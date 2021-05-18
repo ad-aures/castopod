@@ -17,7 +17,7 @@
     'class' => 'form-input mb-4',
     'value' => old(
         'hostname',
-        empty(host_url()) ? config('App')->baseURL : host_url(),
+        host_url( === null) ? config('App')->baseURL : host_url(),
     ),
     'required' => 'required',
 ]) ?>

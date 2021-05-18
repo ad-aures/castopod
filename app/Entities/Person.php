@@ -22,14 +22,16 @@ use RuntimeException;
  * @property string $image_mimetype
  * @property int $created_by
  * @property int $updated_by
- * @property string[]|null $roles
+ * @property object[]|null $roles
  */
 class Person extends Entity
 {
     protected Image $image;
+    protected ?int $podcast_id = null;
+    protected ?int $episode_id = null;
 
     /**
-     * @var string[]|null
+     * @var object[]|null
      */
     protected ?array $roles = null;
 
@@ -75,17 +77,17 @@ class Person extends Entity
     }
 
     /**
-     * @return stdClass[]
+     * @return object[]
      */
     public function getRoles(): array {
-        if ($this->podcast_id === null) {
+        if ($this->attributes['podcast_id'] === null) {
             throw new RuntimeException(
                 'Person must have a podcast_id before getting roles.',
             );
         }
 
         if ($this->roles === null) {
-            $this->roles = (new PersonModel())->getPersonRoles($this->id, $this->podcast_id, $this->episode_id);
+            $this->roles = (new PersonModel())->getPersonRoles($this->id, $this->attributes['podcast_id'], $this->episode_id);
         }
 
         return $this->roles;

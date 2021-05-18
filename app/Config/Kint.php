@@ -26,52 +26,35 @@ class Kint extends BaseConfig
     /**
      * @var string[]
      */
-    public $plugins = [];
+    public array $plugins = [];
 
-    /**
-     * @var int
-     */
-    public $maxDepth = 6;
+    public int $maxDepth = 6;
 
-    /**
-     * @var bool
-     */
-    public $displayCalledFrom = true;
+    public bool $displayCalledFrom = true;
 
-    /**
-     * @var bool
-     */
-    public $expanded = false;
+    public bool $expanded = false;
 
     /*
     |--------------------------------------------------------------------------
     | RichRenderer Settings
     |--------------------------------------------------------------------------
     */
-    /**
-     * @var string
-     */
-    public $richTheme = 'aante-light.css';
 
-    /**
-     * @var bool
-     */
-    public $richFolder = false;
+    public string $richTheme = 'aante-light.css';
 
-    /**
-     * @var int
-     */
-    public $richSort = Renderer::SORT_FULL;
+    public bool $richFolder = false;
+
+    public int $richSort = Renderer::SORT_FULL;
 
     /**
      * @var string[]
      */
-    public $richObjectPlugins = [];
+    public array $richObjectPlugins = [];
 
     /**
      * @var string[]
      */
-    public $richTabPlugins = [];
+    public array $richTabPlugins = [];
 
     /*
     |--------------------------------------------------------------------------
@@ -79,23 +62,11 @@ class Kint extends BaseConfig
     |--------------------------------------------------------------------------
     */
 
-    /**
-     * @var bool
-     */
-    public $cliColors = true;
+    public bool $cliColors = true;
 
-    /**
-     * @var bool
-     */
-    public $cliForceUTF8 = false;
+    public bool $cliForceUTF8 = false;
 
-    /**
-     * @var bool
-     */
-    public $cliDetectWidth = true;
+    public bool $cliDetectWidth = true;
 
-    /**
-     * @var int
-     */
-    public $cliMinWidth = 40;
+    public int $cliMinWidth = 40;
 }

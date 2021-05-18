@@ -23,15 +23,8 @@ use CodeIgniter\I18n\Time;
 
 class EpisodeController extends BaseController
 {
-    /**
-     * @var Podcast
-     */
-    protected $podcast;
-
-    /**
-     * @var Episode|null
-     */
-    protected $episode;
+    protected Podcast $podcast;
+    protected ?Episode $episode;
 
     public function _remap(string $method, string ...$params): mixed
     {

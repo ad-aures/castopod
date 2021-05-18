@@ -17,10 +17,7 @@ use Config\Services;
 
 class UserController extends BaseController
 {
-    /**
-     * @var User|null
-     */
-    protected $user;
+    protected ?User $user;
 
     public function _remap(string $method, string ...$params): mixed
     {

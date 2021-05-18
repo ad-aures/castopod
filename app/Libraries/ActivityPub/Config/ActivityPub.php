@@ -18,43 +18,28 @@ class ActivityPub extends BaseConfig
      * --------------------------------------------------------------------
      * ActivityPub Objects
      * --------------------------------------------------------------------
-     * @var string
      */
-    public $actorObject = ActorObject::class;
+    public string $actorObject = ActorObject::class;
 
-    /**
-     * @var string
-     */
-    public $noteObject = NoteObject::class;
+    public string $noteObject = NoteObject::class;
 
     /**
      * --------------------------------------------------------------------
      * Default avatar and cover images
      * --------------------------------------------------------------------
-     * @var string
      */
-    public $defaultAvatarImagePath = 'assets/images/avatar-default.jpg';
+    public string $defaultAvatarImagePath = 'assets/images/avatar-default.jpg';
 
-    /**
-     * @var string
-     */
-    public $defaultAvatarImageMimetype = 'image/jpeg';
+    public string $defaultAvatarImageMimetype = 'image/jpeg';
 
-    /**
-     * @var string
-     */
-    public $defaultCoverImagePath = 'assets/images/cover-default.jpg';
+    public string $defaultCoverImagePath = 'assets/images/cover-default.jpg';
 
-    /**
-     * @var string
-     */
-    public $defaultCoverImageMimetype = 'image/jpeg';
+    public string $defaultCoverImageMimetype = 'image/jpeg';
 
     /**
      * --------------------------------------------------------------------
      * Cache options
      * --------------------------------------------------------------------
-     * @var string
      */
-    public $cachePrefix = 'ap_';
+    public string $cachePrefix = 'ap_';
 }

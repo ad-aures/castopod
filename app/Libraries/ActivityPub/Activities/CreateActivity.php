@@ -17,8 +17,5 @@ use ActivityPub\Core\Activity;
 
 class CreateActivity extends Activity
 {
-    /**
-     * @var string
-     */
-    protected $type = 'Create';
+    protected string $type = 'Create';
 }

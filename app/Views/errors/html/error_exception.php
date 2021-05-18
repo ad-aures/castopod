@@ -102,7 +102,7 @@ $errorId = uniqid('error', true);
 									&nbsp;&nbsp;&mdash;&nbsp;&nbsp;<?= esc(
              $row['class'] . $row['type'] . $row['function'],
          ) ?>
-									<?php if (!empty($row['args'])): ?>
+									<?php if (array_key_exists('args', $row)): ?>
 										<?php $argsId = $errorId . 'args' . $index; ?>
 										( <a href="#" onclick="return toggle('<?= esc(
               $argsId,
@@ -266,13 +266,9 @@ $errorId = uniqid('error', true);
 
 				<?php $empty = true; ?>
 				<?php foreach (['_GET', '_POST', '_COOKIE'] as $var): ?>
-
-					if (empty($GLOBALS[$var])) {
-					continue;
-					}
-					if (!is_array($GLOBALS[$var])) {
-					continue;
-					} ?>
+					<?php if (empty($GLOBALS[$var]) || !is_array($GLOBALS[$var])) {
+         continue;
+     } ?>
 
 					<?php $empty = false; ?>
 
@@ -358,7 +354,7 @@ $errorId = uniqid('error', true);
 				</table>
 
 				<?php $headers = $response->getHeaders(); ?>
-				<?php if (!empty($headers)): ?>
+				<?php if ($headers !== []): ?>
 					<?php natsort($headers); ?>
 
 					<h3>Headers</h3>

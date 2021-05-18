@@ -84,44 +84,44 @@ class Podcast extends Entity
     protected ?Category $category = null;
 
     /**
-     * @var Category[]
+     * @var Category[]|null
      */
-    protected $other_categories = [];
+    protected ?array $other_categories = null;
 
     /**
-     * @var string[]
+     * @var string[]|null
      */
-    protected $other_categories_ids = [];
+    protected ?array $other_categories_ids = null;
 
     /**
-     * @var Episode[]
+     * @var Episode[]|null
      */
-    protected $episodes = [];
+    protected ?array $episodes = null;
 
     /**
-     * @var Person[]
+     * @var Person[]|null
      */
-    protected $persons = [];
+    protected ?array $persons = null;
 
     /**
-     * @var User[]
+     * @var User[]|null
      */
-    protected $contributors = [];
+    protected ?array $contributors = null;
 
     /**
-     * @var Platform[]
+     * @var Platform[]|null
      */
-    protected $podcasting_platforms = [];
+    protected ?array $podcasting_platforms = null;
 
     /**
-     * @var Platform[]
+     * @var Platform[]|null
      */
-    protected $social_platforms = [];
+    protected ?array $social_platforms = null;
 
     /**
-     * @var Platform[]
+     * @var Platform[]|null
      */
-    protected $funding_platforms = [];
+    protected ?array $funding_platforms = null;
 
     protected ?Location $location = null;
     protected string $custom_rss_string;
@@ -216,13 +216,13 @@ class Podcast extends Entity
      */
     public function getEpisodes(): array
     {
-        if (empty($this->id)) {
+        if ($this->id === null) {
             throw new RuntimeException(
                 'Podcast must be created before getting episodes.',
             );
         }
 
-        if (empty($this->episodes)) {
+        if ($this->episodes === null) {
             $this->episodes = (new EpisodeModel())->getPodcastEpisodes(
                 $this->id,
                 $this->type,
@@ -239,13 +239,13 @@ class Podcast extends Entity
      */
     public function getPersons(): array
     {
-        if (empty($this->id)) {
+        if ($this->id === null) {
             throw new RuntimeException(
                 'Podcast must be created before getting persons.',
             );
         }
 
-        if (empty($this->persons)) {
+        if ($this->persons === null) {
             $this->persons = (new PersonModel())->getPodcastPersons($this->id);
         }
 
@@ -279,13 +279,13 @@ class Podcast extends Entity
      */
     public function getContributors(): array
     {
-        if (empty($this->id)) {
+        if ($this->id === null) {
             throw new RuntimeException(
                 'Podcasts must be created before getting contributors.',
             );
         }
 
-        if (empty($this->contributors)) {
+        if ($this->contributors === null) {
             $this->contributors = (new UserModel())->getPodcastContributors(
                 $this->id,
             );
@@ -351,13 +351,13 @@ class Podcast extends Entity
      */
     public function getPodcastingPlatforms(): array
     {
-        if (empty($this->id)) {
+        if ($this->id === null) {
             throw new RuntimeException(
                 'Podcast must be created before getting podcasting platform links.',
             );
         }
 
-        if (empty($this->podcasting_platforms)) {
+        if ($this->podcasting_platforms === null) {
             $this->podcasting_platforms = (new PlatformModel())->getPodcastPlatforms(
                 $this->id,
                 'podcasting',
@@ -374,13 +374,13 @@ class Podcast extends Entity
      */
     public function getSocialPlatforms(): array
     {
-        if (empty($this->id)) {
+        if ($this->id === null) {
             throw new RuntimeException(
                 'Podcast must be created before getting social platform links.',
             );
         }
 
-        if (empty($this->social_platforms)) {
+        if ($this->social_platforms === null) {
             $this->social_platforms = (new PlatformModel())->getPodcastPlatforms(
                 $this->id,
                 'social',
@@ -397,13 +397,13 @@ class Podcast extends Entity
      */
     public function getFundingPlatforms(): array
     {
-        if (empty($this->id)) {
+        if ($this->id === null) {
             throw new RuntimeException(
                 'Podcast must be created before getting funding platform links.',
             );
         }
 
-        if (empty($this->funding_platforms)) {
+        if ($this->funding_platforms === null) {
             $this->funding_platforms = (new PlatformModel())->getPodcastPlatforms(
                 $this->id,
                 'funding',
@@ -418,13 +418,13 @@ class Podcast extends Entity
      */
     public function getOtherCategories(): array
     {
-        if (empty($this->id)) {
+        if ($this->id === null) {
             throw new RuntimeException(
                 'Podcast must be created before getting other categories.',
             );
         }
 
-        if (empty($this->other_categories)) {
+        if ($this->other_categories === null) {
             $this->other_categories = (new CategoryModel())->getPodcastCategories(
                 $this->id,
             );
@@ -434,11 +434,11 @@ class Podcast extends Entity
     }
 
     /**
-     * @return array<int>
+     * @return int[]
      */
     public function getOtherCategoriesIds(): array
     {
-        if (empty($this->other_categories_ids)) {
+        if ($this->other_categories_ids === null) {
             $this->other_categories_ids = array_column(
                 $this->getOtherCategories(),
                 'id',
@@ -497,7 +497,7 @@ class Podcast extends Entity
      */
     function getCustomRssString(): string
     {
-        if (empty($this->attributes['custom_rss'])) {
+        if ($this->attributes['custom_rss'] === null) {
             return '';
         }
 
@@ -521,7 +521,7 @@ class Podcast extends Entity
      */
     function setCustomRssString(string $customRssString): static
     {
-        if (empty($customRssString)) {
+        if ($customRssString === '') {
             return $this;
         }
 

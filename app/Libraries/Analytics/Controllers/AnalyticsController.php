@@ -11,31 +11,25 @@ namespace Analytics\Controllers;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\Controller;
+use CodeIgniter\Model;
 
 class AnalyticsController extends Controller
 {
-    /**
-     * @var string
-     */
-    protected $className;
-
-    /**
-     * @var string
-     */
-    protected $methodName;
+    protected Model $analyticsModel;
+    protected string $methodName = '';
 
     public function _remap(string $method, string ...$params): mixed
     {
-        if (!isset($params[1])) {
+        if (count($params) < 2) {
             throw PageNotFoundException::forPageNotFound();
         }
 
-        $this->className = model('Analytics' . $params[1] . 'Model');
-        $this->methodName = 'getData' . (empty($params[2]) ? '' : $params[2]);
+        $this->analyticsModel = model('Analytics' . $params[1] . 'Model');
+        $this->methodName = 'getData' . (count($params) >= 3 ? $params[2] : '');
 
         return $this->$method(
             $params[0],
-            isset($params[3]) ? $params[3] : null,
+            count($params) >= 4 ? $params[3] : null,
         );
     }
 
@@ -43,17 +37,16 @@ class AnalyticsController extends Controller
         int $podcastId,
         ?int $episodeId = null
     ): ResponseInterface {
-        $analyticsModel = new $this->className();
         $methodName = $this->methodName;
 
         if ($episodeId === null) {
             return $this->response->setJSON(
-                $analyticsModel->$methodName($podcastId),
+                $this->analyticsModel->$methodName($podcastId),
             );
         }
 
         return $this->response->setJSON(
-            $analyticsModel->$methodName($podcastId, $episodeId),
+            $this->analyticsModel->$methodName($podcastId, $episodeId),
         );
     }
 }

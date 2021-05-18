@@ -22,7 +22,7 @@
                     <span class="text-lg font-semibold text-gray-700 md:text-xl">
                         <?= $persons['full_name'] ?>
                     </span>
-                    <?php if (!empty($persons['information_url'])): ?>
+                    <?php if ($persons['information_url'] !== null): ?>
                         <a href="<?= $persons[
                             'information_url'
                         ] ?>" class="text-sm text-blue-800 hover:underline" target="_blank" rel="noreferrer noopener"><?= $persons[

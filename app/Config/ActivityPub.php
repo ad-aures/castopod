@@ -10,32 +10,21 @@ class ActivityPub extends ActivityPubBase
      * --------------------------------------------------------------------
      * ActivityPub Objects
      * --------------------------------------------------------------------
-     * @var string
      */
-    public $actorObject = PodcastActor::class;
-    /**
-     * @var string
-     */
-    public $noteObject = NoteObject::class;
+    public string $actorObject = PodcastActor::class;
+
+    public string $noteObject = NoteObject::class;
 
     /**
      * --------------------------------------------------------------------
      * Default avatar and cover images
      * --------------------------------------------------------------------
-     * @var string
      */
-    public $defaultAvatarImagePath = 'assets/images/castopod-avatar-default.jpg';
-    /**
-     * @var string
-     */
-    public $defaultAvatarImageMimetype = 'image/jpeg';
+    public string $defaultAvatarImagePath = 'assets/images/castopod-avatar-default.jpg';
 
-    /**
-     * @var string
-     */
-    public $defaultCoverImagePath = 'assets/images/castopod-cover-default.jpg';
-    /**
-     * @var string
-     */
-    public $defaultCoverImageMimetype = 'image/jpeg';
+    public string $defaultAvatarImageMimetype = 'image/jpeg';
+
+    public string $defaultCoverImagePath = 'assets/images/castopod-cover-default.jpg';
+
+    public string $defaultCoverImageMimetype = 'image/jpeg';
 }

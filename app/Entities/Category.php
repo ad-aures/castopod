@@ -36,7 +36,7 @@ class Category extends Entity
 
     public function getParent(): ?Category
     {
-        if (empty($this->parent_id)) {
+        if ($this->parent_id === null) {
             return null;
         }
 

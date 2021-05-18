@@ -13,9 +13,8 @@ class Security extends BaseConfig
      *
      * Token name for Cross Site Request Forgery protection cookie.
      *
-     * @var string
      */
-    public $tokenName = 'csrf_test_name';
+    public string $tokenName = 'csrf_test_name';
 
     /**
      * --------------------------------------------------------------------------
@@ -24,9 +23,8 @@ class Security extends BaseConfig
      *
      * Token name for Cross Site Request Forgery protection cookie.
      *
-     * @var string
      */
-    public $headerName = 'X-CSRF-TOKEN';
+    public string $headerName = 'X-CSRF-TOKEN';
 
     /**
      * --------------------------------------------------------------------------
@@ -35,9 +33,8 @@ class Security extends BaseConfig
      *
      * Cookie name for Cross Site Request Forgery protection cookie.
      *
-     * @var string
      */
-    public $cookieName = 'csrf_cookie_name';
+    public string $cookieName = 'csrf_cookie_name';
 
     /**
      * --------------------------------------------------------------------------
@@ -48,9 +45,8 @@ class Security extends BaseConfig
      *
      * Defaults to two hours (in seconds).
      *
-     * @var integer
      */
-    public $expires = 7200;
+    public int $expires = 7200;
 
     /**
      * --------------------------------------------------------------------------
@@ -59,9 +55,8 @@ class Security extends BaseConfig
      *
      * Regenerate CSRF Token on every request.
      *
-     * @var boolean
      */
-    public $regenerate = true;
+    public bool $regenerate = true;
 
     /**
      * --------------------------------------------------------------------------
@@ -70,9 +65,8 @@ class Security extends BaseConfig
      *
      * Redirect to previous page with error on failure.
      *
-     * @var boolean
      */
-    public $redirect = true;
+    public bool $redirect = true;
 
     /**
      * --------------------------------------------------------------------------
@@ -88,5 +82,5 @@ class Security extends BaseConfig
      *
      * @var string 'Lax'|'None'|'Strict'
      */
-    public $samesite = 'Lax';
+    public string $samesite = 'Lax';
 }

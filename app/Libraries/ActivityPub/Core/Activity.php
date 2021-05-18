@@ -15,18 +15,7 @@ namespace ActivityPub\Core;
 
 class Activity extends ObjectType
 {
-    /**
-     * @var string
-     */
-    protected $type = 'Activity';
-
-    /**
-     * @var string
-     */
-    protected $actor;
-
-    /**
-     * @var string|ObjectType
-     */
-    protected $object;
+    protected string $type = 'Activity';
+    protected string $actor;
+    protected string|ObjectType $object;
 }

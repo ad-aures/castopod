@@ -11,24 +11,22 @@ class Images extends BaseConfig
     /**
      * Default handler used if no other handler is specified.
      *
-     * @var string
      */
-    public $defaultHandler = 'gd';
+    public string $defaultHandler = 'gd';
 
     /**
      * The path to the image library.
      * Required for ImageMagick, GraphicsMagick, or NetPBM.
      *
-     * @var string
      */
-    public $libraryPath = '/usr/local/bin/convert';
+    public string $libraryPath = '/usr/local/bin/convert';
 
     /**
      * The available handler classes.
      *
      * @var array<string, string>
      */
-    public $handlers = [
+    public array $handlers = [
         'gd' => GDHandler::class,
         'imagick' => ImageMagickHandler::class,
     ];
@@ -41,34 +39,19 @@ class Images extends BaseConfig
     | All uploaded images are of 1:1 ratio (width and height are the same).
 	*/
 
-    /**
-     * @var integer
-     */
-    public $thumbnailSize = 150;
-
-    /**
-     * @var integer
-     */
-    public $mediumSize = 320;
-
-    /**
-     * @var integer
-     */
-    public $largeSize = 1024;
+    public int $thumbnailSize = 150;
+    public int $mediumSize = 320;
+    public int $largeSize = 1024;
 
     /**
      * Size of images linked in the rss feed (should be between 1400 and 3000)
-     *
-     * @var integer
      */
-    public $feedSize = 1400;
+    public int $feedSize = 1400;
 
     /**
      * Size for ID3 tag cover art (should be between 300 and 800)
-     *
-     * @var integer
      */
-    public $id3Size = 500;
+    public int $id3Size = 500;
 
     /*
 	|--------------------------------------------------------------------------
@@ -77,28 +60,13 @@ class Images extends BaseConfig
     | The properties listed below set the name extensions for the resized images
 	*/
 
-    /**
-     * @var string
-     */
-    public $thumbnailSuffix = '_thumbnail';
+    public string $thumbnailSuffix = '_thumbnail';
 
-    /**
-     * @var string
-     */
-    public $mediumSuffix = '_medium';
+    public string $mediumSuffix = '_medium';
 
-    /**
-     * @var string
-     */
-    public $largeSuffix = '_large';
+    public string $largeSuffix = '_large';
 
-    /**
-     * @var string
-     */
-    public $feedSuffix = '_feed';
+    public string $feedSuffix = '_feed';
 
-    /**
-     * @var string
-     */
-    public $id3Suffix = '_id3';
+    public string $id3Suffix = '_id3';
 }

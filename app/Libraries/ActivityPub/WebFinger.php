@@ -17,35 +17,20 @@ class WebFinger
      */
     const RESOURCE_PATTERN = '/^acct:(?P<username>([\w_]+))@(?P<domain>([\w\-\.]+[\w]+)(:[\d]+)?)$/x';
 
-    /**
-     * @var string
-     */
-    protected $username;
-
-    /**
-     * @var string
-     */
-    protected $domain;
-
-    /**
-     * @var string
-     */
-    protected $host;
-
-    /**
-     * @var string
-     */
-    protected $port;
+    protected string $username;
+    protected string $domain;
+    protected string $host;
+    protected string $port;
 
     /**
      * @var string[]
      */
-    protected $aliases = [];
+    protected array $aliases = [];
 
     /**
      * @var array<array<string, string>>
      */
-    protected $links = [];
+    protected array $links = [];
 
     public function __construct(protected string $subject)
     {

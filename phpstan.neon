@@ -3,7 +3,7 @@ parameters:
     level: 6
     paths:
         - app
-        # - tests
+        - tests
     bootstrapFiles:
         - vendor/codeigniter4/codeigniter4/system/Test/bootstrap.php
     scanDirectories:
@@ -17,9 +17,8 @@ parameters:
         - app/Libraries/Analytics/Config/Routes.php
         - app/Views/*
     ignoreErrors:
+        - '#Access to property [\$a-zA-z]+ on an unknown class Myth\\Auth\\Controllers\\Auth.#'
         - '#This property type might be inlined to PHP. Do you have confidence it is correct\? Put it here#'
-        - '#Function \"preg_.*\(\)\" cannot be used/left in the code#'
-        - '#.* is forbidden to use#'
         - '#^Cognitive complexity for#'
         - '#^Class cognitive complexity is#'
         - '#Do not use chained method calls. Put each on separated lines.#'
@@ -28,12 +27,11 @@ parameters:
         - '#^Call to an undefined method CodeIgniter\\Database\\BaseBuilder#'
         - '#^Call to an undefined method CodeIgniter\\Database\\ConnectionInterface#'
         - '#Access to an undefined property CodeIgniter\\Database\\BaseBuilder::\$pager#'
+        - '#Function \"preg_.*\(\)\" cannot be used/left in the code#'
+        - '#Function "property_exists\(\)" cannot be used/left in the code#'
         -
             message: '#Function "function_exists\(\)" cannot be used/left in the code#'
             paths:
                 - app/Helpers
                 - app/Libraries/ActivityPub/Helpers
                 - app/Libraries/Analytics/Helpers
-        -
-            message: '#Function "property_exists\(\)" cannot be used/left in the code#'
-            path: app/Libraries/ActivityPub/Helpers

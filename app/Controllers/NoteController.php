@@ -25,15 +25,8 @@ class NoteController extends ActivityPubNoteController
 {
     use AnalyticsTrait;
 
-    /**
-     * @var Podcast
-     */
-    protected $podcast;
-
-    /**
-     * @var Actor
-     */
-    protected $actor;
+    protected Podcast $podcast;
+    protected Actor $actor;
 
     /**
      * @var string[]
@@ -219,6 +212,7 @@ class NoteController extends ActivityPubNoteController
         }
 
         $action = $this->request->getPost('action');
+        /** @phpstan-ignore-next-line */
         switch ($action) {
             case 'favourite':
                 return $this->attemptFavourite();

@@ -22,7 +22,7 @@ class Breadcrumb
      *
      * @var array<array<string, string>>
      */
-    protected $links = [];
+    protected array $links = [];
 
     /**
      * Initializes the Breadcrumb object using the segments from

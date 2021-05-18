@@ -28,7 +28,7 @@ class PermissionFilter implements FilterInterface
     {
         helper('auth');
 
-        if (empty($params)) {
+        if ($params === null) {
             return;
         }
 

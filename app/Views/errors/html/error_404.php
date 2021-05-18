@@ -13,7 +13,7 @@
     <h1 class="text-3xl font-bold font-display md:text-4xl lg:text-5xl">404 - File Not Found</h1>
 
     <p class="mb-6 text-lg text-gray-600 md:text-xl lg:text-2xl">
-        <?php if (!empty($message) && $message !== '(null)'): ?>
+        <?php if (isset($message) && $message !== '(null)'): ?>
             <?= esc($message) ?>
         <?php else: ?>
             Sorry! Cannot seem to find the page you were looking for.

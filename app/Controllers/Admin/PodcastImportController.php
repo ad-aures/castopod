@@ -32,7 +32,7 @@ class PodcastImportController extends BaseController
     /**
      * @var Podcast|null
      */
-    protected $podcast;
+    protected ?Podcast $podcast;
 
     public function _remap(string $method, string ...$params): mixed
     {
@@ -122,7 +122,7 @@ class PodcastImportController extends BaseController
 
         try {
             if (
-                isset($nsItunes->image) &&
+                property_exists($nsItunes, 'image') && $nsItunes->image !== null &&
                 $nsItunes->image->attributes()['href'] !== null
             ) {
                 $imageFile = download_file(
@@ -135,7 +135,7 @@ class PodcastImportController extends BaseController
             }
 
             $location = null;
-            if (isset($nsPodcast->location)) {
+            if (property_exists($nsPodcast, 'location') && $nsPodcast->location !== null) {
                 $location = new Location(
                     (string) $nsPodcast->location,
                     (string) $nsPodcast->location->attributes()['geo'],
@@ -160,7 +160,7 @@ class PodcastImportController extends BaseController
                 'language_code' => $this->request->getPost('language'),
                 'category_id' => $this->request->getPost('category'),
                 'parental_advisory' =>
-                isset($nsItunes->explicit)
+                property_exists($nsItunes, 'explicit') && $nsItunes->explicit !== null
                     ? (in_array((string) $nsItunes->explicit, ['yes', 'true'])
                         ? 'explicit'
                         : (in_array((string) $nsItunes->explicit, ['no', 'false'])
@@ -170,16 +170,12 @@ class PodcastImportController extends BaseController
                 'owner_name' => (string) $nsItunes->owner->name,
                 'owner_email' => (string) $nsItunes->owner->email,
                 'publisher' => (string) $nsItunes->author,
-                'type' => isset($nsItunes->type) ? (string) $nsItunes->type : 'episodic',
+                'type' => property_exists($nsItunes, 'type') && $nsItunes->type !== null ? (string) $nsItunes->type : 'episodic',
                 'copyright' => (string) $feed->channel[0]->copyright,
                 'is_blocked' =>
-                isset($nsItunes->block)
-                    ? (string) $nsItunes->block === 'yes'
-                    : false,
+                property_exists($nsItunes, 'block') && $nsItunes->block !== null && (string) $nsItunes->block === 'yes',
                 'is_completed' =>
-                isset($nsItunes->complete)
-                    ? (string) $nsItunes->complete === 'yes'
-                    : false,
+                property_exists($nsItunes, 'complete') && $nsItunes->complete !== null && (string) $nsItunes->complete === 'yes',
                 'location' => $location,
                 'created_by' => user_id(),
                 'updated_by' => user_id(),
@@ -337,7 +333,7 @@ class PodcastImportController extends BaseController
             };
 
             if (
-                isset($nsItunes->image) &&
+                property_exists($nsItunes, 'image') && $nsItunes->image !== null &&
                 $nsItunes->image->attributes()['href'] !== null
             ) {
                 $episodeImage = new Image(
@@ -350,7 +346,7 @@ class PodcastImportController extends BaseController
             }
 
             $location = null;
-            if (isset($nsPodcast->location)) {
+            if (property_exists($nsPodcast, 'location') && $nsPodcast->location !== null) {
                 $location = new Location(
                     (string) $nsPodcast->location,
                     (string) $nsPodcast->location->attributes()['geo'],
@@ -372,7 +368,7 @@ class PodcastImportController extends BaseController
                 'description_html' => $itemDescriptionHtml,
                 'image' => $episodeImage,
                 'parental_advisory' =>
-                isset($nsItunes->explicit)
+                property_exists($nsItunes, 'explicit') && $nsItunes->explicit !== null
                     ? (in_array((string) $nsItunes->explicit, ['yes', 'true'])
                         ? 'explicit'
                         : (in_array((string) $nsItunes->explicit, ['no', 'false'])
@@ -387,12 +383,10 @@ class PodcastImportController extends BaseController
                 $this->request->getPost('season_number') === null
                     ? $nsItunes->season
                     : $this->request->getPost('season_number'),
-                'type' => isset($nsItunes->episodeType)
+                'type' => property_exists($nsItunes, 'episodeType') && $nsItunes->episodeType !== null
                     ? (string) $nsItunes->episodeType
                     : 'full',
-                'is_blocked' => isset($nsItunes->block)
-                    ? (string) $nsItunes->block === 'yes'
-                    : false,
+                'is_blocked' => property_exists($nsItunes, 'block') && $nsItunes->block !== null && (string) $nsItunes->block === 'yes',
                 'location' => $location,
                 'created_by' => user_id(),
                 'updated_by' => user_id(),

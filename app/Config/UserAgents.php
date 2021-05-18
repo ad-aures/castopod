@@ -22,7 +22,7 @@ class UserAgents extends BaseConfig
      *
      * @var array<string, string>
      */
-    public $platforms = [
+    public array $platforms = [
         'windows nt 10.0' => 'Windows 10',
         'windows nt 6.3' => 'Windows 8.1',
         'windows nt 6.2' => 'Windows 8',
@@ -77,7 +77,7 @@ class UserAgents extends BaseConfig
      *
      * @var array<string, string>
      */
-    public $browsers = [
+    public array $browsers = [
         'OPR' => 'Opera',
         'Flock' => 'Flock',
         'Edge' => 'Spartan',
@@ -118,7 +118,7 @@ class UserAgents extends BaseConfig
      *
      * @var array<string, string>
      */
-    public $mobiles = [
+    public array $mobiles = [
         // legacy array, old values commented out
         'mobileexplorer' => 'Mobile Explorer',
         // 'openwave'             => 'Open Wave',
@@ -227,7 +227,7 @@ class UserAgents extends BaseConfig
      *
      * @var array<string, string>
      */
-    public $robots = [
+    public array $robots = [
         'googlebot' => 'Googlebot',
         'msnbot' => 'MSNBot',
         'baiduspider' => 'Baiduspider',

@@ -21,9 +21,8 @@ class Encryption extends BaseConfig
      * You need to ensure it is long enough for the cipher and mode you plan to use.
      * See the user guide for more info.
      *
-     * @var string
      */
-    public $key = '';
+    public string $key = '';
 
     /**
      * --------------------------------------------------------------------------
@@ -36,9 +35,8 @@ class Encryption extends BaseConfig
      * - OpenSSL
      * - Sodium
      *
-     * @var string
      */
-    public $driver = 'OpenSSL';
+    public string $driver = 'OpenSSL';
 
     /**
      * --------------------------------------------------------------------------
@@ -50,9 +48,8 @@ class Encryption extends BaseConfig
      *
      * See the user guide for more information on padding.
      *
-     * @var integer
      */
-    public $blockSize = 16;
+    public int $blockSize = 16;
 
     /**
      * --------------------------------------------------------------------------
@@ -61,7 +58,6 @@ class Encryption extends BaseConfig
      *
      * HMAC digest to use, e.g. 'SHA512' or 'SHA256'. Default value is 'SHA512'.
      *
-     * @var string
      */
-    public $digest = 'SHA512';
+    public string $digest = 'SHA512';
 }

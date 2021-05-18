@@ -22,7 +22,7 @@ class PodcastController extends BaseController
     /**
      * @var Podcast
      */
-    protected $podcast;
+    protected Podcast $podcast;
 
     public function _remap(string $method, string ...$params): mixed
     {

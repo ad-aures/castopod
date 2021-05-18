@@ -20,7 +20,7 @@
 <?= $this->section('content') ?>
 
 <div class="flex flex-wrap">
-    <?php if (!empty($persons)): ?>
+    <?php if ($persons !== null): ?>
         <?php foreach ($persons as $person): ?>
             <article class="w-48 h-full mb-4 mr-4 overflow-hidden bg-white border rounded shadow">
             <img

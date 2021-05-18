@@ -61,10 +61,8 @@ class Location extends Entity
 
     /**
      * Fetches places from Nominatim OpenStreetMap
-     *
-     * @return array<string, string>|null
      */
-    public function fetchOsmLocation(): self
+    public function fetchOsmLocation(): static
     {
         $client = Services::curlrequest();
 
@@ -93,11 +91,11 @@ class Location extends Entity
             return $this;
         }
 
-        if (isset($places[0]->lat, $places[0]->lon)) {
+        if (property_exists($places[0], 'lat') && $places[0]->lat !== null && (property_exists($places[0], 'lon') && $places[0]->lon !== null)) {
             $this->attributes['geo'] = "geo:{$places[0]->lat},{$places[0]->lon}";
         }
 
-        if (isset($places[0]->osm_type, $places[0]->osm_id)) {
+        if (property_exists($places[0], 'osm_type') && $places[0]->osm_type !== null && (property_exists($places[0], 'osm_id') && $places[0]->osm_id !== null)) {
             $this->attributes['osm'] = strtoupper(substr($places[0]->osm_type, 0, 1)) . $places[0]->osm_id;
         }
 

@@ -26,15 +26,8 @@ class ActorController extends Controller
      */
     protected $helpers = ['activitypub'];
 
-    /**
-     * @var Actor
-     */
-    protected $actor;
-
-    /**
-     * @var ActivityPub
-     */
-    protected $config;
+    protected Actor $actor;
+    protected ActivityPub $config;
 
     public function __construct()
     {
@@ -87,6 +80,7 @@ class ActorController extends Controller
         );
 
         // switch/case on activity type
+        /** @phpstan-ignore-next-line */
         switch ($payload->type) {
             case 'Create':
                 if ($payload->object->type == 'Note') {
@@ -168,6 +162,7 @@ class ActorController extends Controller
                 return $this->response->setStatusCode(200)->setJSON([]);
             case 'Undo':
                 // switch/case on the type of activity to undo
+                /** @phpstan-ignore-next-line */
                 switch ($payload->object->type) {
                     case 'Follow':
                         // revert side-effect by removing follow from database

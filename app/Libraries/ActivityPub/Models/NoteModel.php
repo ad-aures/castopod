@@ -238,7 +238,7 @@ class NoteModel extends UuidModel
             $messageUrls = extract_urls_from_message($note->message);
 
             if (
-                !empty($messageUrls) &&
+                $messageUrls !== [] &&
                 ($previewCard = get_or_create_preview_card_from_url(
                     new URI($messageUrls[0]),
                 )) &&

@@ -10,9 +10,8 @@ class Analytics extends AnalyticsBase
      * --------------------------------------------------------------------
      * Route filters options
      * --------------------------------------------------------------------
-     * @var array<string, string>
      */
-    public $routeFilters = [
+    public array $routeFilters = [
         'analytics-full-data' => 'permission:podcasts-view,podcast-view',
         'analytics-data' => 'permission:podcasts-view,podcast-view',
         'analytics-filtered-data' => 'permission:podcasts-view,podcast-view',

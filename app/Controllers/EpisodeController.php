@@ -22,15 +22,9 @@ class EpisodeController extends BaseController
 {
     use AnalyticsTrait;
 
-    /**
-     * @var Podcast
-     */
-    protected $podcast;
+    protected Podcast $podcast;
 
-    /**
-     * @var Episode
-     */
-    protected $episode;
+    protected Episode $episode;
 
     public function _remap(string $method, string ...$params): mixed
     {

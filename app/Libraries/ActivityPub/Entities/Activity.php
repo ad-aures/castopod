@@ -27,20 +27,9 @@ use Michalsn\Uuid\UuidEntity;
  */
 class Activity extends UuidEntity
 {
-    /**
-     * @var Actor
-     */
-    protected $actor;
-
-    /**
-     * @var Actor|null
-     */
-    protected $target_actor;
-
-    /**
-     * @var Note|null
-     */
-    protected $note;
+    protected ?Actor $actor;
+    protected ?Actor $target_actor;
+    protected ?Note $note;
 
     /**
      * @var string[]
@@ -67,13 +56,13 @@ class Activity extends UuidEntity
 
     public function getActor(): Actor
     {
-        if (empty($this->actor_id)) {
+        if ($this->actor_id === null) {
             throw new RuntimeException(
                 'Activity must have an actor_id before getting the actor.',
             );
         }
 
-        if (empty($this->actor)) {
+        if ($this->actor === null) {
             $this->actor = model('ActorModel')->getActorById($this->actor_id);
         }
 
@@ -82,13 +71,13 @@ class Activity extends UuidEntity
 
     public function getTargetActor(): Actor
     {
-        if (empty($this->target_actor_id)) {
+        if ($this->target_actor_id === null) {
             throw new RuntimeException(
                 'Activity must have a target_actor_id before getting the target actor.',
             );
         }
 
-        if (empty($this->target_actor)) {
+        if ($this->target_actor === null) {
             $this->target_actor = model('ActorModel')->getActorById(
                 $this->target_actor_id,
             );
@@ -99,13 +88,13 @@ class Activity extends UuidEntity
 
     public function getNote(): Note
     {
-        if (empty($this->note_id)) {
+        if ($this->note_id === null) {
             throw new RuntimeException(
                 'Activity must have a note_id before getting note.',
             );
         }
 
-        if (empty($this->note)) {
+        if ($this->note === null) {
             $this->note = model('NoteModel')->getNoteById($this->note_id);
         }
 

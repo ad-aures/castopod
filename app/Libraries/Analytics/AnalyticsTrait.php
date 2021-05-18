@@ -29,11 +29,12 @@ trait AnalyticsTrait
             $db = Database::connect();
 
             $referer = $session->get('referer');
-            $domain = empty(parse_url($referer, PHP_URL_HOST))
-                ? '- Direct -'
-                : parse_url($referer, PHP_URL_HOST);
+            $domain =
+                parse_url($referer, PHP_URL_HOST) === null
+                    ? '- Direct -'
+                    : parse_url($referer, PHP_URL_HOST);
             parse_str(parse_url($referer, PHP_URL_QUERY), $queries);
-            $keywords = empty($queries['q']) ? null : $queries['q'];
+            $keywords = array_key_exists('q', $queries) ? null : $queries['q'];
 
             $procedureName = $db->prefixTable('analytics_website');
             $db->query("call {$procedureName}(?,?,?,?,?,?)", [

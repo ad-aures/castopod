@@ -36,7 +36,7 @@ class Router extends CodeIgniterRouter
         );
 
         // Don't waste any time
-        if (empty($routes)) {
+        if ($routes === []) {
             return false;
         }
 
@@ -178,10 +178,7 @@ class Router extends CodeIgniterRouter
                         str_replace('/', '\\', $replacekey),
                         $val,
                     );
-                } elseif (
-                    str_contains($val, '$') &&
-                    str_contains($key, '(')
-                ) {
+                } elseif (str_contains($val, '$') && str_contains($key, '(')) {
                     $val = preg_replace('#^' . $key . '$#u', $val, $uri);
                 } elseif (str_contains($val, '/')) {
                     [$controller, $method] = explode('::', $val);

@@ -148,7 +148,6 @@
                 'data-soundbite-id' => '0',
                 'data-type' => 'soundbite-field',
                 'data-field-type' => 'duration',
-                'min' => '0',
             ],
         ) ?></td>
         <td class="px-1 py-4 font-medium bg-white border border-light-blue-500"><?= form_input(

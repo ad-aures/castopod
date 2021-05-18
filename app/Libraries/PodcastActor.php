@@ -14,10 +14,7 @@ use App\Models\PodcastModel;
 
 class PodcastActor extends ActorObject
 {
-    /**
-     * @var string
-     */
-    protected $rss;
+    protected string $rss;
 
     public function __construct(Actor $actor)
     {

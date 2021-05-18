@@ -18,10 +18,7 @@ use ActivityPub\Entities\Note;
 
 class AnnounceActivity extends Activity
 {
-    /**
-     * @var string
-     */
-    protected $type = 'Announce';
+    protected string $type = 'Announce';
 
     public function __construct(Note $reblogNote)
     {

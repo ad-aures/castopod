@@ -16,10 +16,7 @@ use App\Models\PodcastModel;
 
 class PageController extends BaseController
 {
-    /**
-     * @var Page|null
-     */
-    protected $page;
+    protected ?Page $page;
 
     public function _remap(string $method, string ...$params): mixed
     {

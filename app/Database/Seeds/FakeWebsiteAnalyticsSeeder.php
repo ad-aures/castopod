@@ -21,7 +21,7 @@ class FakeWebsiteAnalyticsSeeder extends Seeder
     /**
      * @var string[]
      */
-    protected $keywords = [
+    protected array $keywords = [
         'all the smoke podcast',
         'apple podcast',
         'bad friends podcast',
@@ -77,7 +77,7 @@ class FakeWebsiteAnalyticsSeeder extends Seeder
     /**
      * @var string[]
      */
-    protected $domains = [
+    protected array $domains = [
         '360.cn ',
         'adobe.com ',
         'aliexpress.com ',
@@ -133,7 +133,7 @@ class FakeWebsiteAnalyticsSeeder extends Seeder
     /**
      * @var string[]
      */
-    protected $browsers = [
+    protected array $browsers = [
         'Android Browser',
         'Avast Secure Browser',
         'BlackBerry Browser',

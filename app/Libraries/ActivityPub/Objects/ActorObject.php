@@ -16,65 +16,34 @@ class ActorObject extends ObjectType
     /**
      * @var string|string[]
      */
-    protected $context = [
+    protected string|array $context = [
         'https://www.w3.org/ns/activitystreams',
         'https://w3id.org/security/v1',
     ];
 
-    /**
-     * @var string
-     */
-    protected $type = 'Person';
-
-    /**
-     * @var string
-     */
-    protected $name;
-
-    /**
-     * @var string
-     */
-    protected $preferredUsername;
-
-    /**
-     * @var string
-     */
-    protected $summary;
-
-    /**
-     * @var string
-     */
-    protected $inbox;
-
-    /**
-     * @var string
-     */
-    protected $outbox;
-
-    /**
-     * @var string
-     */
-    protected $followers;
-
-    /**
-     * @var string
-     */
-    protected $url;
-
-    /**
-     * @var array<string, string>|null
-     */
-    protected $image;
+    protected string $type = 'Person';
+    protected string $name;
+    protected string $preferredUsername;
+    protected string $summary;
+    protected string $inbox;
+    protected string $outbox;
+    protected string $followers;
+    protected string $url;
 
     /**
      * @var array<string, string>
      */
-    protected $icon = [];
+    protected array $image = [];
 
     /**
      * @var array<string, string>
      */
-    protected $publicKey = [];
+    protected array $icon = [];
+
+    /**
+     * @var array<string, string>
+     */
+    protected array $publicKey = [];
 
     public function __construct(Actor $actor)
     {

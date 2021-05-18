@@ -100,7 +100,7 @@ class PersonModel extends Model
     }
 
     /**
-     * @return stdClass[]
+     * @return object[]
      */
     public function getPersonRoles(int $personId, int $podcastId, ?int $episodeId): array {
         if ($episodeId) {
@@ -276,7 +276,7 @@ class PersonModel extends Model
      * Add persons to podcast
      *
      * @param array<string> $persons
-     * @param array<string, string> $groupsRoles
+     * @param array<string, string> $roles
      *
      * @return bool|int Number of rows inserted or FALSE on failure
      */
@@ -342,7 +342,7 @@ class PersonModel extends Model
         array $personIds,
         array $groupsRoles
     ): bool|int {
-        if (!empty($personIds)) {
+        if ($personIds !== []) {
             (new EpisodeModel())->clearCache(['id' => $episodeId]);
 
             $data = [];

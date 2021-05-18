@@ -10,16 +10,13 @@ if (!function_exists('get_browser_language')) {
     /**
      * Gets the browser default language using the request header key `HTTP_ACCEPT_LANGUAGE`
      *
-     * @return string|null ISO 639-1 language code or null
+     * @return string ISO 639-1 language code
      */
-    function get_browser_language(string $httpAcceptLanguage): ?string
+    function get_browser_language(string $httpAcceptLanguage): string
     {
         $langs = explode(',', $httpAcceptLanguage);
-        if (!empty($langs)) {
-            return substr($langs[0], 0, 2);
-        }
 
-        return null;
+        return substr($langs[0], 0, 2);
     }
 }
 

@@ -83,11 +83,11 @@ class CategoryModel extends Model
     /**
      * Sets categories for a given podcast
      *
-     * @param int[] $categories
+     * @param int[] $categoriesIds
      * 
      * @return int|false Number of rows inserted or FALSE on failure
      */
-    public function setPodcastCategories(int $podcastId, array $categories): int|false
+    public function setPodcastCategories(int $podcastId, array $categoriesIds = []): int|false
     {
         cache()->delete("podcast#{$podcastId}_categories");
 
@@ -96,14 +96,14 @@ class CategoryModel extends Model
             ->table('podcasts_categories')
             ->delete(['podcast_id' => $podcastId]);
 
-        if (empty($categories)) {
+        if ($categoriesIds === []) {
             // no row has been inserted after deletion
             return 0;
         }
 
         // prepare data for `podcasts_categories` table
         $data = array_reduce(
-            $categories,
+            $categoriesIds,
             function (array $result, int $categoryId) use ($podcastId): array {
                 $result[] = [
                     'podcast_id' => $podcastId,

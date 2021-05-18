@@ -18,9 +18,8 @@ class Exceptions extends BaseConfig
      *
      * Default: true
      *
-     * @var boolean
      */
-    public $log = true;
+    public bool $log = true;
 
     /**
      * --------------------------------------------------------------------------
@@ -31,7 +30,7 @@ class Exceptions extends BaseConfig
      *
      * @var int[]
      */
-    public $ignoreCodes = [404];
+    public array $ignoreCodes = [404];
 
     /**
      * --------------------------------------------------------------------------
@@ -42,7 +41,6 @@ class Exceptions extends BaseConfig
      *
      * Default: APPPATH.'Views/errors'
      *
-     * @var string
      */
-    public $errorViewPath = APPPATH . 'Views/errors';
+    public string $errorViewPath = APPPATH . 'Views/errors';
 }

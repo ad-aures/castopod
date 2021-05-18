@@ -93,29 +93,29 @@ class PodcastModel extends Model
         'created_by' => 'required',
         'updated_by' => 'required',
     ];
-    /**
-     * @var mixed[]
-     */
-    protected $validationMessages = [];
 
     /**
      * @var string[]
      */
     protected $beforeInsert = ['createPodcastActor'];
+
     /**
      * @var string[]
      */
     protected $afterInsert = ['setActorAvatar'];
+
     /**
      * @var string[]
      */
     protected $afterUpdate = ['updatePodcastActor'];
 
-    // clear cache before update if by any chance, the podcast name changes, so will the podcast link
     /**
+     * clear cache before update if by any chance, the podcast name changes, so will the podcast link
+     * 
      * @var string[]
      */
     protected $beforeUpdate = ['clearCache'];
+
     /**
      * @var string[]
      */
@@ -336,7 +336,7 @@ class PodcastModel extends Model
         if (!($defaultQuery = cache($cacheName))) {
             $seasons = $this->getSeasons($podcastId);
 
-            if (!empty($seasons)) {
+            if ($seasons !== []) {
                 // get latest season
                 $defaultQuery = ['type' => 'season', 'data' => end($seasons)];
             } else {
@@ -347,6 +347,34 @@ class PodcastModel extends Model
             cache()->save($cacheName, $defaultQuery, DECADE);
         }
         return $defaultQuery;
+    }
+    /**
+     * @param mixed[] $data
+     *
+     * @return mixed[]
+     */
+    public function clearCache(array $data): array
+    {
+        $podcast = (new PodcastModel())->getPodcastById(
+            is_array($data['id']) ? $data['id'][0] : $data['id'],
+        );
+
+        // delete cache all podcast pages
+        cache()->deleteMatching("page_podcast#{$podcast->id}*");
+
+        // delete all cache for podcast actor
+        cache()->deleteMatching(
+            config('ActivityPub')->cachePrefix . "actor#{$podcast->actor_id}*",
+        );
+
+        // delete model requests cache, includes feed / query / episode lists, etc.
+        cache()->deleteMatching("podcast#{$podcast->id}*");
+        cache()->delete("podcast-{$podcast->name}");
+
+        // clear cache for every credit page
+        cache()->deleteMatching('page_credits_*');
+
+        return $data;
     }
 
     /**
@@ -437,35 +465,6 @@ class PodcastModel extends Model
         if ($actor->hasChanged()) {
             $actorModel->update($actor->id, $actor);
         }
-
-        return $data;
-    }
-
-    /**
-     * @param mixed[] $data
-     *
-     * @return mixed[]
-     */
-    public function clearCache(array $data): array
-    {
-        $podcast = (new PodcastModel())->getPodcastById(
-            is_array($data['id']) ? $data['id'][0] : $data['id'],
-        );
-
-        // delete cache all podcast pages
-        cache()->deleteMatching("page_podcast#{$podcast->id}*");
-
-        // delete all cache for podcast actor
-        cache()->deleteMatching(
-            config('ActivityPub')->cachePrefix . "actor#{$podcast->actor_id}*",
-        );
-
-        // delete model requests cache, includes feed / query / episode lists, etc.
-        cache()->deleteMatching("podcast#{$podcast->id}*");
-        cache()->delete("podcast-{$podcast->name}");
-
-        // clear cache for every credit page
-        cache()->deleteMatching('page_credits_*');
 
         return $data;
     }

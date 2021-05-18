@@ -1,6 +1,5 @@
 <?php
 
-use CodeIgniter\I18n\Time;
 use Config\Services;
 use Podlibre\Ipcat\IpDb;
 use GeoIp2\Database\Reader;
@@ -122,10 +121,10 @@ if (!function_exists('set_user_session_location')) {
                 $city = $cityReader->city($_SERVER['REMOTE_ADDR']);
 
                 $location = [
-                    'countryCode' => empty($city->country->isoCode)
+                    'countryCode' => $city->country->isoCode === null
                         ? 'N/A'
                         : $city->country->isoCode,
-                    'regionCode' => empty($city->subdivisions[0]->isoCode)
+                    'regionCode' => $city->subdivisions[0]->isoCode === null
                         ? 'N/A'
                         : $city->subdivisions[0]->isoCode,
                     'latitude' => round($city->location->latitude, 3),
@@ -330,10 +329,10 @@ if (!function_exists('podcast_hit')) {
                     $ranges = explode(',', substr($httpRange, 6));
                     foreach ($ranges as $range) {
                         $parts = explode('-', $range);
-                        $downloadedBytes += empty($parts[1])
+                        $downloadedBytes += array_key_exists(1, $parts)
                             ? $fileSize
                             : (int) $parts[1] -
-                                (empty($parts[0]) ? 0 : (int) $parts[0]);
+                                (array_key_exists(0, $parts) ? 0 : (int) $parts[0]);
                     }
                 }
                 // We save the number of downloaded bytes for this user and this episode:

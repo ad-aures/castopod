@@ -26,15 +26,8 @@ class NoteController extends Controller
      */
     protected $helpers = ['activitypub'];
 
-    /**
-     * @var Note
-     */
-    protected $note;
-
-    /**
-     * @var ActivityPub
-     */
-    protected $config;
+    protected Note $note;
+    protected ActivityPub $config;
 
     public function __construct()
     {

@@ -16,30 +16,11 @@ use ActivityPub\Core\ObjectType;
 
 class OrderedCollectionObject extends ObjectType
 {
-    /**
-     * @var string
-     */
-    protected $type = 'OrderedCollection';
-
-    /**
-     * @var integer
-     */
-    protected $totalItems;
-
-    /**
-     * @var string|null
-     */
-    protected $first;
-
-    /**
-     * @var string|null
-     */
-    protected $current;
-
-    /**
-     * @var string|null
-     */
-    protected $last;
+    protected string $type = 'OrderedCollection';
+    protected int $totalItems;
+    protected ?string $first;
+    protected ?string $current;
+    protected ?string $last;
 
     /**
      * @param ObjectType[] $orderedItems

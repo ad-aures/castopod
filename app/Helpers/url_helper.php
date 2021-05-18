@@ -16,7 +16,7 @@ if (!function_exists('host_url')) {
     {
         if (isset($_SERVER['HTTP_HOST'])) {
             $protocol =
-                (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ||
+                (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ||
                 $_SERVER['SERVER_PORT'] == 443
                     ? 'https://'
                     : 'http://';

@@ -9,10 +9,8 @@ class Analytics extends BaseConfig
     /**
      * Gateway to analytic routes.
      * By default, all analytics routes will be under `/analytics` path
-     *
-     * @var string
      */
-    public $gateway = 'analytics';
+    public string $gateway = 'analytics';
 
     /**
      * --------------------------------------------------------------------
@@ -20,7 +18,7 @@ class Analytics extends BaseConfig
      * --------------------------------------------------------------------
      * @var array<string, string>
      */
-    public $routeFilters = [
+    public array $routeFilters = [
         'analytics-full-data' => '',
         'analytics-data' => '',
         'analytics-filtered-data' => '',

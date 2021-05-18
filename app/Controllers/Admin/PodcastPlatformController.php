@@ -20,7 +20,7 @@ class PodcastPlatformController extends BaseController
     /**
      * @var Podcast|null
      */
-    protected $podcast;
+    protected ?Podcast $podcast;
 
     public function _remap(string $method, string ...$params): mixed
     {

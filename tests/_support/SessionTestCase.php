@@ -28,7 +28,7 @@ class SessionTestCase extends CIUnitTestCase
      *
      * @var string
      */
-    protected function mockSession()
+    protected function mockSession(): void
     {
         $config = config('App');
         $this->session = new MockSession(

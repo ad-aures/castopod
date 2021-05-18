@@ -25,7 +25,7 @@
 <?= $this->section('content') ?>
 
 <div class="grid gap-4 grid-cols-podcasts">
-    <?php if (!empty($podcasts)): ?>
+    <?php if ($podcasts !== null): ?>
         <?php foreach ($podcasts as $podcast): ?>
             <article class="h-full overflow-hidden bg-white border shadow rounded-xl">
             <img

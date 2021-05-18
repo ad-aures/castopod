@@ -14,25 +14,10 @@ namespace ActivityPub\Objects;
 use CodeIgniter\Pager\Pager;
 class OrderedCollectionPage extends OrderedCollectionObject
 {
-    /**
-     * @var string
-     */
-    protected $type = 'OrderedCollectionPage';
-
-    /**
-     * @var string
-     */
-    protected $partOf;
-
-    /**
-     * @var string|null
-     */
-    protected $prev;
-
-    /**
-     * @var string|null
-     */
-    protected $next;
+    protected string $type = 'OrderedCollectionPage';
+    protected string $partOf;
+    protected ?string $prev;
+    protected ?string $next;
 
     public function __construct(Pager $pager, ?array $orderedItems = null)
     {

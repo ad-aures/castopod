@@ -181,51 +181,43 @@ if (!function_exists('get_rss_feed')) {
             }
         }
 
-        foreach ($podcast->persons as $podcastPerson) {
-            $podcastPersonElement = $channel->addChild(
-                'person',
-                htmlspecialchars($podcastPerson->full_name),
-                $podcastNamespace,
-            );
+        foreach ($podcast->persons as $person) {
+            foreach ($person->roles as $role) {
+                $personElement = $channel->addChild(
+                    'person',
+                    htmlspecialchars($person->full_name),
+                    $podcastNamespace,
+                );
 
-            if (
-                $podcastPerson->role !== null &&
-                $podcastPerson->role !== null
-            ) {
-                $podcastPersonElement->addAttribute(
+                $personElement->addAttribute('img', $person->image->large_url);
+
+                if ($person->information_url !== null) {
+                    $personElement->addAttribute(
+                        'href',
+                        $person->information_url,
+                    );
+                }
+
+                $personElement->addAttribute(
                     'role',
                     htmlspecialchars(
                         lang(
-                            "PersonsTaxonomy.persons.{$podcastPerson->group}.roles.{$podcastPerson->role}.label",
+                            "PersonsTaxonomy.persons.{$role->group}.roles.{$role->role}.label",
                             [],
                             'en',
                         ),
                     ),
                 );
-            }
 
-            if ($podcastPerson->group !== null) {
-                $podcastPersonElement->addAttribute(
+                $personElement->addAttribute(
                     'group',
                     htmlspecialchars(
                         lang(
-                            "PersonsTaxonomy.persons.{$podcastPerson->group}.label",
+                            "PersonsTaxonomy.persons.{$role->group}.label",
                             [],
                             'en',
                         ),
                     ),
-                );
-            }
-
-            $podcastPersonElement->addAttribute(
-                'img',
-                $podcastPerson->image->large_url,
-            );
-
-            if ($podcastPerson->information_url !== null) {
-                $podcastPersonElement->addAttribute(
-                    'href',
-                    $podcastPerson->information_url,
                 );
             }
         }
@@ -399,7 +391,7 @@ if (!function_exists('get_rss_feed')) {
             foreach ($episode->soundbites as $soundbite) {
                 $soundbiteElement = $item->addChild(
                     'soundbite',
-                    empty($soundbite->label) ? null : $soundbite->label,
+                    $soundbite->label,
                     $podcastNamespace,
                 );
                 $soundbiteElement->addAttribute(
@@ -412,55 +404,54 @@ if (!function_exists('get_rss_feed')) {
                 );
             }
 
-            foreach ($episode->persons as $episodePerson) {
-                $episodePersonElement = $item->addChild(
-                    'person',
-                    htmlspecialchars($episodePerson->full_name),
-                    $podcastNamespace,
-                );
-                if (
-                    !empty($episodePerson->role) &&
-                    !empty($episodePerson->group)
-                ) {
-                    $episodePersonElement->addAttribute(
+            foreach ($episode->persons as $person) {
+                foreach ($person->roles as $role) {
+                    $personElement = $item->addChild(
+                        'person',
+                        htmlspecialchars($person->full_name),
+                        $podcastNamespace,
+                    );
+
+                    $personElement->addAttribute(
                         'role',
                         htmlspecialchars(
                             lang(
-                                "PersonsTaxonomy.persons.{$episodePerson->group}.roles.{$episodePerson->role}.label",
+                                "PersonsTaxonomy.persons.{$role->group}.roles.{$role->role}.label",
                                 [],
                                 'en',
                             ),
                         ),
                     );
-                }
-                if (!empty($episodePerson->person_group)) {
-                    $episodePersonElement->addAttribute(
+
+                    $personElement->addAttribute(
                         'group',
                         htmlspecialchars(
                             lang(
-                                "PersonsTaxonomy.persons.{$episodePerson->group}.label",
+                                "PersonsTaxonomy.persons.{$role->group}.label",
                                 [],
                                 'en',
                             ),
                         ),
                     );
-                }
-                $episodePersonElement->addAttribute(
-                    'img',
-                    $episodePerson->image->large_url,
-                );
-                if (!empty($episodePerson->information_url)) {
-                    $episodePersonElement->addAttribute(
-                        'href',
-                        $episodePerson->information_url,
+
+                    $personElement->addAttribute(
+                        'img',
+                        $person->image->large_url,
                     );
+
+                    if ($person->information_url !== null) {
+                        $personElement->addAttribute(
+                            'href',
+                            $person->information_url,
+                        );
+                    }
                 }
             }
 
             $episode->is_blocked &&
                 $item->addChild('block', 'Yes', $itunesNamespace);
 
-            if (!empty($episode->custom_rss)) {
+            if ($episode->custom_rss !== null) {
                 array_to_rss(
                     [
                         'elements' => $episode->custom_rss,
@@ -557,9 +548,9 @@ if (!function_exists('array_to_rss')) {
                 $childXmlNode = $xmlNode->addChild(
                     $childArrayNode['name'],
                     $childArrayNode['content'] ?? null,
-                    empty($childArrayNode['namespace'])
-                        ? null
-                        : current($childArrayNode['namespace']),
+                    array_key_exists('namespace', $childArrayNode)
+                        ? current($childArrayNode['namespace'])
+                        : null,
                 );
                 if (array_key_exists('attributes', $childArrayNode)) {
                     foreach (

@@ -16,10 +16,7 @@ use App\Models\PersonModel;
 
 class PersonController extends BaseController
 {
-    /**
-     * @var Person|null
-     */
-    protected $person;
+    protected ?Person $person;
 
     public function _remap(string $method, string ...$params): mixed
     {

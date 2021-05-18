@@ -18,25 +18,14 @@ use phpseclib\Crypt\RSA;
 
 class ActivityRequest
 {
-    /**
-     * @var CURLRequest
-     */
-    protected $request;
-
-    /**
-     * @var URI
-     */
-    protected $uri;
-
-    /**
-     * @var Activity|null
-     */
-    protected $activity;
+    protected CURLRequest $request;
+    protected URI $uri;
+    protected ?Activity $activity;
 
     /**
      * @var array<string, string[]>
      */
-    protected $options = [
+    protected array $options = [
         'headers' => [
             'Content-Type' => 'application/activity+json',
             'Accept' => 'application/activity+json', // TODO: outgoing and incoming requests

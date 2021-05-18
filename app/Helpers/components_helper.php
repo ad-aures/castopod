@@ -78,7 +78,7 @@ if (!function_exists('button')) {
             ' ' .
             $variantClass[$options['variant']];
 
-        if (!empty($customAttributes['class'])) {
+        if (array_key_exists('class', $customAttributes)) {
             $buttonClass .= ' ' . $customAttributes['class'];
             unset($customAttributes['class']);
         }
@@ -298,6 +298,7 @@ if (!function_exists('publication_button')) {
         int $episodeId,
         string $publicationStatus
     ): string {
+        /** @phpstan-ignore-next-line */
         switch ($publicationStatus) {
             case 'not_published':
                 $label = lang('Episode.publish');
@@ -406,7 +407,7 @@ if (!function_exists('location_link')) {
             [
                 'class' =>
                     'inline-flex items-baseline hover:underline' .
-                    (empty($class) ? '' : " {$class}"),
+                    ($class === '' ? '' : " {$class}"),
                 'target' => '_blank',
                 'rel' => 'noreferrer noopener',
             ],

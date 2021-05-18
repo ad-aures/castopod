@@ -18,35 +18,19 @@ class ObjectType extends AbstractObject
     /**
      * @var string|string[]
      */
-    protected $context = 'https://www.w3.org/ns/activitystreams';
-
-    /**
-     * @var string
-     */
-    protected $id;
-
-    /**
-     * @var string
-     */
-    protected $type = 'Object';
-
-    /**
-     * @var string
-     */
-    protected $content;
-
-    /**
-     * @var string
-     */
-    protected $published;
+    protected string|array $context = 'https://www.w3.org/ns/activitystreams';
+    protected string $id;
+    protected string $type = 'Object';
+    protected string $content;
+    protected string $published;
 
     /**
      * @var string[]
      */
-    protected $to = ['https://www.w3.org/ns/activitystreams#Public'];
+    protected array $to = ['https://www.w3.org/ns/activitystreams#Public'];
 
     /**
      * @var string[]
      */
-    protected $cc = [];
+    protected array $cc = [];
 }
