@@ -17,7 +17,6 @@ class Exceptions extends BaseConfig
      * through Services::Log.
      *
      * Default: true
-     *
      */
     public bool $log = true;
 
@@ -40,7 +39,6 @@ class Exceptions extends BaseConfig
      * directories that hold the views used to generate errors.
      *
      * Default: APPPATH.'Views/errors'
-     *
      */
     public string $errorViewPath = APPPATH . 'Views/errors';
 }

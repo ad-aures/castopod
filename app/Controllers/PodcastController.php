@@ -8,20 +8,17 @@
 
 namespace App\Controllers;
 
-use CodeIgniter\Exceptions\PageNotFoundException;
 use Analytics\AnalyticsTrait;
 use App\Entities\Podcast;
 use App\Models\EpisodeModel;
-use App\Models\PodcastModel;
 use App\Models\NoteModel;
+use App\Models\PodcastModel;
+use CodeIgniter\Exceptions\PageNotFoundException;
 
 class PodcastController extends BaseController
 {
     use AnalyticsTrait;
 
-    /**
-     * @var Podcast
-     */
     protected Podcast $podcast;
 
     public function _remap(string $method, string ...$params): mixed
@@ -31,12 +28,10 @@ class PodcastController extends BaseController
         }
 
         if (
-            ($this->podcast = (new PodcastModel())->getPodcastByName(
-                $params[0],
-            )) !== null
+            ($this->podcast = (new PodcastModel())->getPodcastByName($params[0],)) !== null
         ) {
             unset($params[0]);
-            return $this->$method(...$params);
+            return $this->{$method}(...$params);
         }
 
         throw PageNotFoundException::forPageNotFound();
@@ -45,7 +40,7 @@ class PodcastController extends BaseController
     public function activity(): string
     {
         // Prevent analytics hit when authenticated
-        if (!can_user_interact()) {
+        if (! can_user_interact()) {
             $this->registerPodcastWebpageHit($this->podcast->id);
         }
 
@@ -55,17 +50,16 @@ class PodcastController extends BaseController
                 'page',
                 "podcast#{$this->podcast->id}",
                 'activity',
-                service('request')->getLocale(),
+                service('request')
+                    ->getLocale(),
                 can_user_interact() ? '_authenticated' : null,
             ]),
         );
 
-        if (!($cachedView = cache($cacheName))) {
+        if (! ($cachedView = cache($cacheName))) {
             $data = [
                 'podcast' => $this->podcast,
-                'notes' => (new NoteModel())->getActorPublishedNotes(
-                    $this->podcast->actor_id,
-                ),
+                'notes' => (new NoteModel())->getActorPublishedNotes($this->podcast->actor_id,),
             ];
 
             // if user is logged in then send to the authenticated activity view
@@ -85,21 +79,19 @@ class PodcastController extends BaseController
     public function episodes(): string
     {
         // Prevent analytics hit when authenticated
-        if (!can_user_interact()) {
+        if (! can_user_interact()) {
             $this->registerPodcastWebpageHit($this->podcast->id);
         }
 
         $yearQuery = $this->request->getGet('year');
         $seasonQuery = $this->request->getGet('season');
 
-        if (!$yearQuery && !$seasonQuery) {
-            $defaultQuery = (new PodcastModel())->getDefaultQuery(
-                $this->podcast->id,
-            );
+        if (! $yearQuery && ! $seasonQuery) {
+            $defaultQuery = (new PodcastModel())->getDefaultQuery($this->podcast->id,);
             if ($defaultQuery) {
-                if ($defaultQuery['type'] == 'season') {
+                if ($defaultQuery['type'] === 'season') {
                     $seasonQuery = $defaultQuery['data']['season_number'];
-                } elseif ($defaultQuery['type'] == 'year') {
+                } elseif ($defaultQuery['type'] === 'year') {
                     $yearQuery = $defaultQuery['data']['year'];
                 }
             }
@@ -113,12 +105,13 @@ class PodcastController extends BaseController
                 'episodes',
                 $yearQuery ? 'year' . $yearQuery : null,
                 $seasonQuery ? 'season' . $seasonQuery : null,
-                service('request')->getLocale(),
+                service('request')
+                    ->getLocale(),
                 can_user_interact() ? '_authenticated' : null,
             ]),
         );
 
-        if (!($cachedView = cache($cacheName))) {
+        if (! ($cachedView = cache($cacheName))) {
             // Build navigation array
             $podcastModel = new PodcastModel();
             $years = $podcastModel->getYears($this->podcast->id);

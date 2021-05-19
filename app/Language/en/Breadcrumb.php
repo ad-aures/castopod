@@ -8,7 +8,8 @@
 
 return [
     'label' => 'breadcrumb',
-    config('App')->adminGateway => 'Home',
+    config('App')
+        ->adminGateway => 'Home',
     'podcasts' => 'podcasts',
     'episodes' => 'episodes',
     'contributors' => 'contributors',

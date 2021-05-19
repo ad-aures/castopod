@@ -1,8 +1,7 @@
 <?php
 
 /**
- * Class AddPodcastsCategories
- * Creates podcasts_categories table in database
+ * Class AddPodcastsCategories Creates podcasts_categories table in database
  *
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -28,20 +27,8 @@ class AddPodcastsCategories extends Migration
             ],
         ]);
         $this->forge->addPrimaryKey(['podcast_id', 'category_id']);
-        $this->forge->addForeignKey(
-            'podcast_id',
-            'podcasts',
-            'id',
-            '',
-            'CASCADE',
-        );
-        $this->forge->addForeignKey(
-            'category_id',
-            'categories',
-            'id',
-            '',
-            'CASCADE',
-        );
+        $this->forge->addForeignKey('podcast_id', 'podcasts', 'id', '', 'CASCADE',);
+        $this->forge->addForeignKey('category_id', 'categories', 'id', '', 'CASCADE',);
         $this->forge->createTable('podcasts_categories');
     }
 

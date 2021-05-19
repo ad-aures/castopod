@@ -25,14 +25,15 @@
   "require-dev": {
     "mikey179/vfsstream": "^v1.6.8",
     "phpunit/phpunit": "^9.5.4",
-    "squizlabs/php_codesniffer": "^3.6.0",
-    "rector/rector": "^0.10.17",
-    "captainhook/captainhook": "^5.9",
+    "rector/rector": "^0.10.22",
+    "captainhook/captainhook": "^5.10.0",
     "captainhook/plugin-composer": "^5.2",
     "phpstan/phpstan": "^0.12.85",
     "phpstan/extension-installer": "^1.1.0",
-    "rector/rector-phpstan-rules": "^0.2.6",
-    "symplify/phpstan-extensions": "^9.3"
+    "rector/rector-phpstan-rules": "^0.2.9",
+    "symplify/phpstan-extensions": "^v9.3.12",
+    "symplify/easy-coding-standard": "^v9.3.12",
+    "symplify/coding-standard": "^v9.3.12"
   },
   "autoload": {
     "psr-4": {
@@ -50,10 +51,11 @@
   },
   "scripts": {
     "test": "vendor/bin/phpunit",
-    "analyse": "vendor/bin/phpstan analyse",
+    "analyse": "vendor/bin/phpstan analyse --ansi",
     "rector": "vendor/bin/rector process --dry-run --ansi",
     "rector:fix": "vendor/bin/rector process --ansi",
-    "phpcs": "vendor/bin/phpcbf --standard=.phpcs.xml --encoding=utf-8 -n -p",
+    "style": "vendor/bin/ecs check --ansi",
+    "style:fix": "vendor/bin/ecs check --fix --ansi",
     "post-install-cmd": [
       "@php vendor/opawg/user-agents-php/src/UserAgentsGenerate.php >  vendor/opawg/user-agents-php/src/UserAgents.php",
       "@php vendor/opawg/user-agents-php/src/UserAgentsRSSGenerate.php >  vendor/opawg/user-agents-php/src/UserAgentsRSS.php",

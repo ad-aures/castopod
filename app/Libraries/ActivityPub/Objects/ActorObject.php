@@ -8,26 +8,30 @@
 
 namespace ActivityPub\Objects;
 
-use ActivityPub\Entities\Actor;
 use ActivityPub\Core\ObjectType;
+use ActivityPub\Entities\Actor;
 
 class ActorObject extends ObjectType
 {
     /**
      * @var string|string[]
      */
-    protected string|array $context = [
-        'https://www.w3.org/ns/activitystreams',
-        'https://w3id.org/security/v1',
-    ];
+    protected string | array $context = ['https://www.w3.org/ns/activitystreams', 'https://w3id.org/security/v1'];
 
     protected string $type = 'Person';
+
     protected string $name;
+
     protected string $preferredUsername;
+
     protected string $summary;
+
     protected string $inbox;
+
     protected string $outbox;
+
     protected string $followers;
+
     protected string $url;
 
     /**

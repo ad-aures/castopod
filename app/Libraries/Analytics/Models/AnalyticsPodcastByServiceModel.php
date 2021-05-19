@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Class AnalyticsPodcastByServiceModel
- * Model for analytics_podcasts_by_player table in database
+ * Class AnalyticsPodcastByServiceModel Model for analytics_podcasts_by_player table in database
+ *
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
@@ -24,6 +24,7 @@ class AnalyticsPodcastByServiceModel extends Model
      * @var string
      */
     protected $returnType = AnalyticsPodcastsByService::class;
+
     /**
      * @var bool
      */
@@ -42,9 +43,7 @@ class AnalyticsPodcastByServiceModel extends Model
     public function getDataByServiceWeekly(int $podcastId): array
     {
         if (
-            !($found = cache(
-                "{$podcastId}_analytics_podcasts_by_service_weekly",
-            ))
+            ! ($found = cache("{$podcastId}_analytics_podcasts_by_service_weekly",))
         ) {
             $oneWeekAgo = date('Y-m-d', strtotime('-1 week'));
             $found = $this->select('service as labels')
@@ -58,11 +57,8 @@ class AnalyticsPodcastByServiceModel extends Model
                 ->groupBy('labels')
                 ->orderBy('values', 'DESC')
                 ->findAll();
-            cache()->save(
-                "{$podcastId}_analytics_podcasts_by_service_weekly",
-                $found,
-                600,
-            );
+            cache()
+                ->save("{$podcastId}_analytics_podcasts_by_service_weekly", $found, 600,);
         }
         return $found;
     }

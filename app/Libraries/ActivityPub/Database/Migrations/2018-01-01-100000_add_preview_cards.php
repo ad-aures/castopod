@@ -1,8 +1,7 @@
 <?php
 
 /**
- * Class AddPreviewCards
- * Creates activitypub_preview_cards table in database
+ * Class AddPreviewCards Creates activitypub_preview_cards table in database
  *
  * @copyright  2021 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -31,7 +30,9 @@ class AddPreviewCards extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 128,
             ],
-            'description' => ['type' => 'TEXT'],
+            'description' => [
+                'type' => 'TEXT',
+            ],
             'type' => [
                 'type' => 'ENUM',
                 'constraint' => ['link', 'video', 'image', 'rich'],

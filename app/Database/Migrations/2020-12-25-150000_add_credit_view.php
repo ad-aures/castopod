@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Class AddCreditView
- * Creates Credit View in database
+ * Class AddCreditView Creates Credit View in database
+ *
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
@@ -22,7 +22,7 @@ class AddCreditView extends Migration
         $podcastPersonsTable = $this->db->prefixTable('podcasts_persons');
         $episodePersonsTable = $this->db->prefixTable('episodes_persons');
         $episodesTable = $this->db->prefixTable('episodes');
-        $createQuery = <<<EOD
+        $createQuery = <<<CODE_SAMPLE
         CREATE VIEW `{$viewName}` AS
             SELECT `person_group`, `person_id`, `full_name`, `person_role`, `podcast_id`, NULL AS `episode_id` FROM `{$podcastPersonsTable}`
                 INNER JOIN `{$personsTable}`
@@ -35,7 +35,7 @@ class AddCreditView extends Migration
                     ON (`episode_id`=`{$episodesTable}`.`id`)
             WHERE `{$episodesTable}`.published_at <= NOW()
             ORDER BY `person_group`, `full_name`, `person_role`, `podcast_id`, `episode_id`;
-        EOD;
+        CODE_SAMPLE;
         $this->db->query($createQuery);
     }
 

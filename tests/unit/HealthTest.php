@@ -9,7 +9,7 @@ use Tests\Support\Libraries\ConfigReader;
 
 class HealthTest extends CIUnitTestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
     }
@@ -28,10 +28,7 @@ class HealthTest extends CIUnitTestCase
 
         // Check the baseURL in .env
         if (is_file(HOMEPATH . '.env')) {
-            $env = (bool) preg_grep(
-                '~^app\.baseURL = .~',
-                file(HOMEPATH . '.env'),
-            );
+            $env = (bool) preg_grep('~^app\.baseURL = .~', file(HOMEPATH . '.env'),);
         }
 
         if ($env) {

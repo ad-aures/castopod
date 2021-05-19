@@ -11,34 +11,29 @@ namespace App\Controllers\Admin;
 use App\Entities\Image;
 use App\Entities\Location;
 use App\Entities\Podcast;
-use CodeIgniter\Exceptions\PageNotFoundException;
-use Config\Database;
 use App\Models\CategoryModel;
+use App\Models\EpisodeModel;
 use App\Models\LanguageModel;
 use App\Models\PodcastModel;
-use App\Models\EpisodeModel;
+use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
+use Config\Database;
 use Config\Services;
 
 class PodcastController extends BaseController
 {
-    /**
-     * @var Podcast
-     */
     protected Podcast $podcast;
 
     public function _remap(string $method, string ...$params): mixed
     {
         if (count($params) === 0) {
-            return $this->$method();
+            return $this->{$method}();
         }
 
         if (
-            ($this->podcast = (new PodcastModel())->getPodcastById(
-                (int) $params[0],
-            )) !== null
+            ($this->podcast = (new PodcastModel())->getPodcastById((int) $params[0],)) !== null
         ) {
-            return $this->$method();
+            return $this->{$method}();
         }
 
         throw PageNotFoundException::forPageNotFound();
@@ -46,14 +41,14 @@ class PodcastController extends BaseController
 
     public function list(): string
     {
-        if (!has_permission('podcasts-list')) {
+        if (! has_permission('podcasts-list')) {
             $data = [
-                'podcasts' => (new PodcastModel())->getUserPodcasts(
-                    (int) user_id(),
-                ),
+                'podcasts' => (new PodcastModel())->getUserPodcasts((int) user_id(),),
             ];
         } else {
-            $data = ['podcasts' => (new PodcastModel())->findAll()];
+            $data = [
+                'podcasts' => (new PodcastModel())->findAll(),
+            ];
         }
 
         return view('admin/podcast/list', $data);
@@ -61,65 +56,97 @@ class PodcastController extends BaseController
 
     public function view(): string
     {
-        $data = ['podcast' => $this->podcast];
+        $data = [
+            'podcast' => $this->podcast,
+        ];
 
-        replace_breadcrumb_params([0 => $this->podcast->title]);
+        replace_breadcrumb_params([
+            0 => $this->podcast->title,
+        ]);
         return view('admin/podcast/view', $data);
     }
 
     public function viewAnalytics(): string
     {
-        $data = ['podcast' => $this->podcast];
+        $data = [
+            'podcast' => $this->podcast,
+        ];
 
-        replace_breadcrumb_params([0 => $this->podcast->title]);
+        replace_breadcrumb_params([
+            0 => $this->podcast->title,
+        ]);
         return view('admin/podcast/analytics/index', $data);
     }
 
     public function viewAnalyticsWebpages(): string
     {
-        $data = ['podcast' => $this->podcast];
+        $data = [
+            'podcast' => $this->podcast,
+        ];
 
-        replace_breadcrumb_params([0 => $this->podcast->title]);
+        replace_breadcrumb_params([
+            0 => $this->podcast->title,
+        ]);
         return view('admin/podcast/analytics/webpages', $data);
     }
 
     public function viewAnalyticsLocations(): string
     {
-        $data = ['podcast' => $this->podcast];
+        $data = [
+            'podcast' => $this->podcast,
+        ];
 
-        replace_breadcrumb_params([0 => $this->podcast->title]);
+        replace_breadcrumb_params([
+            0 => $this->podcast->title,
+        ]);
         return view('admin/podcast/analytics/locations', $data);
     }
 
     public function viewAnalyticsUniqueListeners(): string
     {
-        $data = ['podcast' => $this->podcast];
+        $data = [
+            'podcast' => $this->podcast,
+        ];
 
-        replace_breadcrumb_params([0 => $this->podcast->title]);
+        replace_breadcrumb_params([
+            0 => $this->podcast->title,
+        ]);
         return view('admin/podcast/analytics/unique_listeners', $data);
     }
 
     public function viewAnalyticsListeningTime(): string
     {
-        $data = ['podcast' => $this->podcast];
+        $data = [
+            'podcast' => $this->podcast,
+        ];
 
-        replace_breadcrumb_params([0 => $this->podcast->title]);
+        replace_breadcrumb_params([
+            0 => $this->podcast->title,
+        ]);
         return view('admin/podcast/analytics/listening_time', $data);
     }
 
     public function viewAnalyticsTimePeriods(): string
     {
-        $data = ['podcast' => $this->podcast];
+        $data = [
+            'podcast' => $this->podcast,
+        ];
 
-        replace_breadcrumb_params([0 => $this->podcast->title]);
+        replace_breadcrumb_params([
+            0 => $this->podcast->title,
+        ]);
         return view('admin/podcast/analytics/time_periods', $data);
     }
 
     public function viewAnalyticsPlayers(): string
     {
-        $data = ['podcast' => $this->podcast];
+        $data = [
+            'podcast' => $this->podcast,
+        ];
 
-        replace_breadcrumb_params([0 => $this->podcast->title]);
+        replace_breadcrumb_params([
+            0 => $this->podcast->title,
+        ]);
         return view('admin/podcast/analytics/players', $data);
     }
 
@@ -133,9 +160,7 @@ class PodcastController extends BaseController
         $data = [
             'languageOptions' => $languageOptions,
             'categoryOptions' => $categoryOptions,
-            'browserLang' => get_browser_language(
-                $this->request->getServer('HTTP_ACCEPT_LANGUAGE'),
-            ),
+            'browserLang' => get_browser_language($this->request->getServer('HTTP_ACCEPT_LANGUAGE'),),
         ];
 
         return view('admin/podcast/create', $data);
@@ -148,7 +173,7 @@ class PodcastController extends BaseController
                 'uploaded[image]|is_image[image]|ext_in[image,jpg,png]|min_dims[image,1400,1400]|is_image_squared[image]',
         ];
 
-        if (!$this->validate($rules)) {
+        if (! $this->validate($rules)) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -171,9 +196,7 @@ class PodcastController extends BaseController
             'publisher' => $this->request->getPost('publisher'),
             'type' => $this->request->getPost('type'),
             'copyright' => $this->request->getPost('copyright'),
-            'location' => new Location(
-                $this->request->getPost('location_name'),
-            ),
+            'location' => new Location($this->request->getPost('location_name'),),
             'payment_pointer' => $this->request->getPost('payment_pointer'),
             'custom_rss_string' => $this->request->getPost('custom_rss'),
             'partner_id' => $this->request->getPost('partner_id'),
@@ -191,7 +214,7 @@ class PodcastController extends BaseController
 
         $db->transStart();
 
-        if (!($newPodcastId = $podcastModel->insert($podcast, true))) {
+        if (! ($newPodcastId = $podcastModel->insert($podcast, true))) {
             $db->transRollback();
             return redirect()
                 ->back()
@@ -202,11 +225,7 @@ class PodcastController extends BaseController
         $authorize = Services::authorization();
         $podcastAdminGroup = $authorize->group('podcast_admin');
 
-        $podcastModel->addPodcastContributor(
-            user_id(),
-            $newPodcastId,
-            $podcastAdminGroup->id,
-        );
+        $podcastModel->addPodcastContributor(user_id(), $newPodcastId, $podcastAdminGroup->id,);
 
         // set Podcast categories
         (new CategoryModel())->setPodcastCategories(
@@ -236,7 +255,9 @@ class PodcastController extends BaseController
             'categoryOptions' => $categoryOptions,
         ];
 
-        replace_breadcrumb_params([0 => $this->podcast->title]);
+        replace_breadcrumb_params([
+            0 => $this->podcast->title,
+        ]);
         return view('admin/podcast/edit', $data);
     }
 
@@ -247,7 +268,7 @@ class PodcastController extends BaseController
                 'is_image[image]|ext_in[image,jpg,png]|min_dims[image,1400,1400]|is_image_squared[image]',
         ];
 
-        if (!$this->validate($rules)) {
+        if (! $this->validate($rules)) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -255,9 +276,7 @@ class PodcastController extends BaseController
         }
 
         $this->podcast->title = $this->request->getPost('title');
-        $this->podcast->description_markdown = $this->request->getPost(
-            'description',
-        );
+        $this->podcast->description_markdown = $this->request->getPost('description',);
 
         $image = $this->request->getFile('image');
         if ($image !== null && $image->isValid()) {
@@ -274,22 +293,12 @@ class PodcastController extends BaseController
         $this->podcast->owner_email = $this->request->getPost('owner_email');
         $this->podcast->type = $this->request->getPost('type');
         $this->podcast->copyright = $this->request->getPost('copyright');
-        $this->podcast->location = new Location(
-            $this->request->getPost('location_name'),
-        );
-        $this->podcast->payment_pointer = $this->request->getPost(
-            'payment_pointer',
-        );
-        $this->podcast->custom_rss_string = $this->request->getPost(
-            'custom_rss',
-        );
+        $this->podcast->location = new Location($this->request->getPost('location_name'),);
+        $this->podcast->payment_pointer = $this->request->getPost('payment_pointer',);
+        $this->podcast->custom_rss_string = $this->request->getPost('custom_rss',);
         $this->podcast->partner_id = $this->request->getPost('partner_id');
-        $this->podcast->partner_link_url = $this->request->getPost(
-            'partner_link_url',
-        );
-        $this->podcast->partner_image_url = $this->request->getPost(
-            'partner_image_url',
-        );
+        $this->podcast->partner_link_url = $this->request->getPost('partner_link_url',);
+        $this->podcast->partner_image_url = $this->request->getPost('partner_image_url',);
         $this->podcast->is_blocked = $this->request->getPost('block') === 'yes';
         $this->podcast->is_completed =
             $this->request->getPost('complete') === 'yes';
@@ -300,7 +309,7 @@ class PodcastController extends BaseController
         $db->transStart();
 
         $podcastModel = new PodcastModel();
-        if (!$podcastModel->update($this->podcast->id, $this->podcast)) {
+        if (! $podcastModel->update($this->podcast->id, $this->podcast)) {
             $db->transRollback();
             return redirect()
                 ->back()
@@ -326,7 +335,9 @@ class PodcastController extends BaseController
             ->orderBy('created_at', 'desc')
             ->findAll($limit);
 
-        return view('admin/podcast/latest_episodes', ['episodes' => $episodes]);
+        return view('admin/podcast/latest_episodes', [
+            'episodes' => $episodes,
+        ]);
     }
 
     public function delete(): RedirectResponse

@@ -19,7 +19,8 @@ class FediverseController extends BaseController
     {
         helper(['form']);
 
-        $blockedActors = model('ActorModel')->getBlockedActors();
+        $blockedActors = model('ActorModel')
+            ->getBlockedActors();
 
         return view('admin/fediverse/blocked_actors', [
             'blockedActors' => $blockedActors,
@@ -30,7 +31,8 @@ class FediverseController extends BaseController
     {
         helper(['form']);
 
-        $blockedDomains = model('BlockedDomainModel')->getBlockedDomains();
+        $blockedDomains = model('BlockedDomainModel')
+            ->getBlockedDomains();
 
         return view('admin/fediverse/blocked_domains', [
             'blockedDomains' => $blockedDomains,

@@ -22,12 +22,12 @@ class Location extends Entity
     /**
      * @var string
      */
-    const OSM_URL = 'https://www.openstreetmap.org/';
+    private const OSM_URL = 'https://www.openstreetmap.org/';
 
     /**
      * @var string
      */
-    const NOMINATIM_URL = 'https://nominatim.openstreetmap.org/';
+    private const NOMINATIM_URL = 'https://nominatim.openstreetmap.org/';
 
     public function __construct(
         protected string $name,
@@ -37,7 +37,7 @@ class Location extends Entity
         parent::__construct([
             'name' => $name,
             'geo' => $geo,
-            'osm' => $osm
+            'osm' => $osm,
         ]);
     }
 
@@ -45,7 +45,11 @@ class Location extends Entity
     {
         if ($this->osm !== null) {
             return self::OSM_URL .
-                ['N' => 'node', 'W' => 'way', 'R' => 'relation'][substr($this->osm, 0, 1)] .
+                [
+                    'N' => 'node',
+                    'W' => 'way',
+                    'R' => 'relation',
+                ][substr($this->osm, 0, 1)] .
                 '/' .
                 substr($this->osm, 1);
         }
@@ -80,22 +84,23 @@ class Location extends Entity
             ],
         );
 
-        $places = json_decode(
-            $response->getBody(),
-            false,
-            512,
-            JSON_THROW_ON_ERROR,
-        );
+        $places = json_decode($response->getBody(), false, 512, JSON_THROW_ON_ERROR,);
 
         if ($places === []) {
             return $this;
         }
 
-        if (property_exists($places[0], 'lat') && $places[0]->lat !== null && (property_exists($places[0], 'lon') && $places[0]->lon !== null)) {
+        if (property_exists($places[0], 'lat') && $places[0]->lat !== null && (property_exists(
+            $places[0],
+            'lon'
+        ) && $places[0]->lon !== null)) {
             $this->attributes['geo'] = "geo:{$places[0]->lat},{$places[0]->lon}";
         }
 
-        if (property_exists($places[0], 'osm_type') && $places[0]->osm_type !== null && (property_exists($places[0], 'osm_id') && $places[0]->osm_id !== null)) {
+        if (property_exists($places[0], 'osm_type') && $places[0]->osm_type !== null && (property_exists(
+            $places[0],
+            'osm_id'
+        ) && $places[0]->osm_id !== null)) {
             $this->attributes['osm'] = strtoupper(substr($places[0]->osm_type, 0, 1)) . $places[0]->osm_id;
         }
 

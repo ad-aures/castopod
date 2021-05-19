@@ -21,11 +21,8 @@ class SimpleRSSElement extends SimpleXMLElement
      *
      * @return static The addChild method returns a SimpleXMLElement object representing the child added to the XML node.
      */
-    public function addChildWithCDATA(
-        string $name,
-        string $value = '',
-        ?string $namespace = null
-    ) {
+    public function addChildWithCDATA(string $name, string $value = '', ?string $namespace = null)
+    {
         $newChild = parent::addChild($name, '', $namespace);
 
         if ($newChild !== null) {
@@ -38,8 +35,8 @@ class SimpleRSSElement extends SimpleXMLElement
     }
 
     /**
-     * Adds a child element to the XML node with escaped $value if specified.
-     * Override of addChild method as SimpleXMLElement's addChild method doesn't escape ampersand
+     * Adds a child element to the XML node with escaped $value if specified. Override of addChild method as
+     * SimpleXMLElement's addChild method doesn't escape ampersand
      *
      * @param string $name — The name of the child element to add.
      * @param string $value — [optional] If specified, the value of the child element.

@@ -8,9 +8,9 @@
 
 namespace App\Controllers\Admin;
 
+use App\Models\UserModel;
 use CodeIgniter\HTTP\RedirectResponse;
 use Config\Services;
-use App\Models\UserModel;
 
 class MyAccountController extends BaseController
 {
@@ -38,7 +38,7 @@ class MyAccountController extends BaseController
             'new_password' => 'required|strong_password|differs[password]',
         ];
 
-        if (!$this->validate($rules)) {
+        if (! $this->validate($rules)) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -46,20 +46,22 @@ class MyAccountController extends BaseController
         }
 
         $credentials = [
-            'email' => user()->email,
+            'email' => user()
+                ->email,
             'password' => $this->request->getPost('password'),
         ];
 
-        if (!$auth->validate($credentials)) {
+        if (! $auth->validate($credentials)) {
             return redirect()
                 ->back()
                 ->withInput()
                 ->with('error', lang('MyAccount.messages.wrongPasswordError'));
         }
 
-        user()->password = $this->request->getPost('new_password');
+        user()
+            ->password = $this->request->getPost('new_password');
 
-        if (!$userModel->update(user_id(), user())) {
+        if (! $userModel->update(user_id(), user())) {
             return redirect()
                 ->back()
                 ->withInput()

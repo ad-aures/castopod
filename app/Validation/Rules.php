@@ -12,7 +12,6 @@ class Rules
 {
     /**
      * Checks a URL to ensure it's formed correctly.
-     *
      */
     public function validate_url(string $str = null): bool
     {

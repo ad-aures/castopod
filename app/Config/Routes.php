@@ -34,10 +34,7 @@ $routes->addPlaceholder('slug', '[a-zA-Z0-9\-]{1,191}');
 $routes->addPlaceholder('base64', '[A-Za-z0-9\.\_]+\-{0,2}');
 $routes->addPlaceholder('platformType', '\bpodcasting|\bsocial|\bfunding');
 $routes->addPlaceholder('noteAction', '\bfavourite|\breblog|\breply');
-$routes->addPlaceholder(
-    'embeddablePlayerTheme',
-    '\blight|\bdark|\blight-transparent|\bdark-transparent',
-);
+$routes->addPlaceholder('embeddablePlayerTheme', '\blight|\bdark|\blight-transparent|\bdark-transparent',);
 $routes->addPlaceholder(
     'uuid',
     '[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}',
@@ -51,25 +48,21 @@ $routes->addPlaceholder(
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'HomeController::index', ['as' => 'home']);
+$routes->get('/', 'HomeController::index', [
+    'as' => 'home',
+]);
 
 // Install Wizard route
 $routes->group(config('App')->installGateway, function ($routes): void {
-    $routes->get('/', 'InstallController', ['as' => 'install']);
-    $routes->post(
-        'instance-config',
-        'InstallController::attemptInstanceConfig',
-        [
-            'as' => 'instance-config',
-        ],
-    );
-    $routes->post(
-        'database-config',
-        'InstallController::attemptDatabaseConfig',
-        [
-            'as' => 'database-config',
-        ],
-    );
+    $routes->get('/', 'InstallController', [
+        'as' => 'install',
+    ]);
+    $routes->post('instance-config', 'InstallController::attemptInstanceConfig', [
+        'as' => 'instance-config',
+    ],);
+    $routes->post('database-config', 'InstallController::attemptDatabaseConfig', [
+        'as' => 'database-config',
+    ],);
     $routes->post('cache-config', 'InstallController::attemptCacheConfig', [
         'as' => 'cache-config',
     ]);
@@ -86,8 +79,11 @@ $routes->get('.well-known/platforms', 'Platform');
 
 // Admin area
 $routes->group(
-    config('App')->adminGateway,
-    ['namespace' => 'App\Controllers\Admin'],
+    config('App')
+        ->adminGateway,
+    [
+        'namespace' => 'App\Controllers\Admin',
+    ],
     function ($routes): void {
         $routes->get('/', 'HomeController', [
             'as' => 'admin',
@@ -538,7 +534,9 @@ $routes->group(
 
         // Pages
         $routes->group('pages', function ($routes): void {
-            $routes->get('/', 'PageController::list', ['as' => 'page-list']);
+            $routes->get('/', 'PageController::list', [
+                'as' => 'page-list',
+            ]);
             $routes->get('new', 'PageController::create', [
                 'as' => 'page-create',
                 'filter' => 'permission:pages-manage',
@@ -628,10 +626,7 @@ $routes->group(
                     'as' => 'change-password',
                 ],
             );
-            $routes->post(
-                'change-password',
-                'MyAccountController::attemptChange/$1',
-            );
+            $routes->post('change-password', 'MyAccountController::attemptChange/$1',);
         });
     },
 );
@@ -641,7 +636,9 @@ $routes->group(
  */
 $routes->group(config('App')->authGateway, function ($routes): void {
     // Login/out
-    $routes->get('login', 'AuthController::login', ['as' => 'login']);
+    $routes->get('login', 'AuthController::login', [
+        'as' => 'login',
+    ]);
     $routes->post('login', 'AuthController::attemptLogin');
     $routes->get('logout', 'AuthController::logout', [
         'as' => 'logout',
@@ -722,13 +719,21 @@ $routes->group('@(:podcastName)', function ($routes): void {
         });
     });
 
-    $routes->head('feed.xml', 'FeedController/$1', ['as' => 'podcast_feed']);
-    $routes->get('feed.xml', 'FeedController/$1', ['as' => 'podcast_feed']);
+    $routes->head('feed.xml', 'FeedController/$1', [
+        'as' => 'podcast_feed',
+    ]);
+    $routes->get('feed.xml', 'FeedController/$1', [
+        'as' => 'podcast_feed',
+    ]);
 });
 
 // Other pages
-$routes->get('/credits', 'PageController::credits', ['as' => 'credits']);
-$routes->get('/pages/(:slug)', 'Page/$1', ['as' => 'page']);
+$routes->get('/credits', 'CreditsController', [
+    'as' => 'credits',
+]);
+$routes->get('/pages/(:slug)', 'PageController/$1', [
+    'as' => 'page',
+]);
 
 // interacting as an actor
 $routes->post('interact-as-actor', 'AuthController::attemptInteractAsActor', [

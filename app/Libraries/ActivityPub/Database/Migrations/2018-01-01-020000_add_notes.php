@@ -1,8 +1,7 @@
 <?php
 
 /**
- * Class AddNotes
- * Creates activitypub_notes table in database
+ * Class AddNotes Creates activitypub_notes table in database
  *
  * @copyright  2021 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -77,27 +76,9 @@ class AddNotes extends Migration
         $this->forge->addUniqueKey('uri');
         // FIXME: an actor must reblog a note only once
         // $this->forge->addUniqueKey(['actor_id', 'reblog_of_id']);
-        $this->forge->addForeignKey(
-            'actor_id',
-            'activitypub_actors',
-            'id',
-            '',
-            'CASCADE',
-        );
-        $this->forge->addForeignKey(
-            'in_reply_to_id',
-            'activitypub_notes',
-            'id',
-            '',
-            'CASCADE',
-        );
-        $this->forge->addForeignKey(
-            'reblog_of_id',
-            'activitypub_notes',
-            'id',
-            '',
-            'CASCADE',
-        );
+        $this->forge->addForeignKey('actor_id', 'activitypub_actors', 'id', '', 'CASCADE',);
+        $this->forge->addForeignKey('in_reply_to_id', 'activitypub_notes', 'id', '', 'CASCADE',);
+        $this->forge->addForeignKey('reblog_of_id', 'activitypub_notes', 'id', '', 'CASCADE',);
         $this->forge->createTable('activitypub_notes');
     }
 

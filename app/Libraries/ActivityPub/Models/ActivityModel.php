@@ -10,7 +10,6 @@ namespace ActivityPub\Models;
 
 use ActivityPub\Entities\Activity;
 use CodeIgniter\Database\BaseResult;
-use CodeIgniter\Database\Exceptions\DataException;
 use CodeIgniter\I18n\Time;
 use DateTimeInterface;
 use Michalsn\Uuid\UuidModel;
@@ -21,6 +20,7 @@ class ActivityModel extends UuidModel
      * @var string
      */
     protected $table = 'activitypub_activities';
+
     /**
      * @var string
      */
@@ -49,6 +49,7 @@ class ActivityModel extends UuidModel
      * @var string
      */
     protected $returnType = Activity::class;
+
     /**
      * @var bool
      */
@@ -58,16 +59,19 @@ class ActivityModel extends UuidModel
      * @var bool
      */
     protected $useTimestamps = true;
+
     protected $updatedField;
 
     public function getActivityById(string $activityId): ?Activity
     {
         $cacheName =
-            config('ActivityPub')->cachePrefix . "activity#{$activityId}";
-        if (!($found = cache($cacheName))) {
+            config('ActivityPub')
+                ->cachePrefix . "activity#{$activityId}";
+        if (! ($found = cache($cacheName))) {
             $found = $this->find($activityId);
 
-            cache()->save($cacheName, $found, DECADE);
+            cache()
+                ->save($cacheName, $found, DECADE);
         }
 
         return $found;
@@ -86,7 +90,7 @@ class ActivityModel extends UuidModel
         string $payload,
         DateTimeInterface $scheduledAt = null,
         ?string $status = null
-    ): BaseResult|int|string|false {
+    ): BaseResult | int | string | false {
         return $this->insert(
             [
                 'actor_id' => $actorId,
@@ -102,7 +106,7 @@ class ActivityModel extends UuidModel
     }
 
     /**
-     * @return Activity[] 
+     * @return Activity[]
      */
     public function getScheduledActivities(): array
     {

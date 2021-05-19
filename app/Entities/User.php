@@ -8,9 +8,9 @@
 
 namespace App\Entities;
 
-use RuntimeException;
 use App\Models\PodcastModel;
 use Myth\Auth\Entities\User as MythAuthUser;
+use RuntimeException;
 
 /**
  * @property int $id
@@ -32,8 +32,7 @@ class User extends MythAuthUser
     protected ?array $podcasts = null;
 
     /**
-     * Array of field names and the type of value to cast them as
-     * when they are accessed.
+     * Array of field names and the type of value to cast them as when they are accessed.
      *
      * @var array<string, string>
      */
@@ -53,9 +52,7 @@ class User extends MythAuthUser
     public function getPodcasts(): array
     {
         if ($this->id === null) {
-            throw new RuntimeException(
-                'Users must be created before getting podcasts.',
-            );
+            throw new RuntimeException('Users must be created before getting podcasts.',);
         }
 
         if ($this->podcasts === null) {

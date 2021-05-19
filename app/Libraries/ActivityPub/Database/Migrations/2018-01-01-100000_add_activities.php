@@ -1,8 +1,7 @@
 <?php
 
 /**
- * Class AddActivities
- * Creates activitypub_activities table in database
+ * Class AddActivities Creates activitypub_activities table in database
  *
  * @copyright  2021 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -59,27 +58,9 @@ class AddActivities extends Migration
             ],
         ]);
         $this->forge->addPrimaryKey('id');
-        $this->forge->addForeignKey(
-            'actor_id',
-            'activitypub_actors',
-            'id',
-            '',
-            'CASCADE',
-        );
-        $this->forge->addForeignKey(
-            'target_actor_id',
-            'activitypub_actors',
-            'id',
-            '',
-            'CASCADE',
-        );
-        $this->forge->addForeignKey(
-            'note_id',
-            'activitypub_notes',
-            'id',
-            '',
-            'CASCADE',
-        );
+        $this->forge->addForeignKey('actor_id', 'activitypub_actors', 'id', '', 'CASCADE',);
+        $this->forge->addForeignKey('target_actor_id', 'activitypub_actors', 'id', '', 'CASCADE',);
+        $this->forge->addForeignKey('note_id', 'activitypub_notes', 'id', '', 'CASCADE',);
         $this->forge->createTable('activitypub_activities');
     }
 

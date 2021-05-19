@@ -9,10 +9,10 @@
 namespace App\Controllers\Admin;
 
 use App\Entities\Image;
-use CodeIgniter\HTTP\RedirectResponse;
 use App\Entities\Person;
-use CodeIgniter\Exceptions\PageNotFoundException;
 use App\Models\PersonModel;
+use CodeIgniter\Exceptions\PageNotFoundException;
+use CodeIgniter\HTTP\RedirectResponse;
 
 class PersonController extends BaseController
 {
@@ -21,15 +21,13 @@ class PersonController extends BaseController
     public function _remap(string $method, string ...$params): mixed
     {
         if (count($params) === 0) {
-            return $this->$method();
+            return $this->{$method}();
         }
 
         if (
-            ($this->person = (new PersonModel())->getPersonById(
-                (int) $params[0],
-            )) !== null
+            ($this->person = (new PersonModel())->getPersonById((int) $params[0],)) !== null
         ) {
-            return $this->$method();
+            return $this->{$method}();
         }
 
         throw PageNotFoundException::forPageNotFound();
@@ -37,16 +35,22 @@ class PersonController extends BaseController
 
     public function index(): string
     {
-        $data = ['persons' => (new PersonModel())->findAll()];
+        $data = [
+            'persons' => (new PersonModel())->findAll(),
+        ];
 
         return view('admin/person/list', $data);
     }
 
     public function view(): string
     {
-        $data = ['person' => $this->person];
+        $data = [
+            'person' => $this->person,
+        ];
 
-        replace_breadcrumb_params([0 => $this->person->full_name]);
+        replace_breadcrumb_params([
+            0 => $this->person->full_name,
+        ]);
         return view('admin/person/view', $data);
     }
 
@@ -64,7 +68,7 @@ class PersonController extends BaseController
                 'is_image[image]|ext_in[image,jpg,jpeg,png]|min_dims[image,400,400]|is_image_squared[image]',
         ];
 
-        if (!$this->validate($rules)) {
+        if (! $this->validate($rules)) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -82,7 +86,7 @@ class PersonController extends BaseController
 
         $personModel = new PersonModel();
 
-        if (!$personModel->insert($person)) {
+        if (! $personModel->insert($person)) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -100,7 +104,9 @@ class PersonController extends BaseController
             'person' => $this->person,
         ];
 
-        replace_breadcrumb_params([0 => $this->person->full_name]);
+        replace_breadcrumb_params([
+            0 => $this->person->full_name,
+        ]);
         return view('admin/person/edit', $data);
     }
 
@@ -111,7 +117,7 @@ class PersonController extends BaseController
                 'is_image[image]|ext_in[image,jpg,jpeg,png]|min_dims[image,400,400]|is_image_squared[image]',
         ];
 
-        if (!$this->validate($rules)) {
+        if (! $this->validate($rules)) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -120,9 +126,7 @@ class PersonController extends BaseController
 
         $this->person->full_name = $this->request->getPost('full_name');
         $this->person->unique_name = $this->request->getPost('unique_name');
-        $this->person->information_url = $this->request->getPost(
-            'information_url',
-        );
+        $this->person->information_url = $this->request->getPost('information_url',);
         $imageFile = $this->request->getFile('image');
         if ($imageFile !== null && $imageFile->isValid()) {
             $this->person->image = new Image($imageFile);
@@ -131,7 +135,7 @@ class PersonController extends BaseController
         $this->person->updated_by = user_id();
 
         $personModel = new PersonModel();
-        if (!$personModel->update($this->person->id, $this->person)) {
+        if (! $personModel->update($this->person->id, $this->person)) {
             return redirect()
                 ->back()
                 ->withInput()

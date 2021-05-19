@@ -17,9 +17,9 @@ $routes->addPlaceholder('noteAction', '\bfavourite|\breblog|\breply');
  * ActivityPub routes file
  */
 
-$routes->group('', ['namespace' => 'ActivityPub\Controllers'], function (
-    $routes
-): void {
+$routes->group('', [
+    'namespace' => 'ActivityPub\Controllers',
+], function ($routes): void {
     // webfinger
     $routes->get('.well-known/webfinger', 'WebFingerController', [
         'as' => 'webfinger',
@@ -77,13 +77,17 @@ $routes->group('', ['namespace' => 'ActivityPub\Controllers'], function (
     $routes->post(
         'fediverse-block-actor',
         'BlockController::attemptBlockActor',
-        ['as' => 'fediverse-attempt-block-actor'],
+        [
+            'as' => 'fediverse-attempt-block-actor',
+        ],
     );
 
     $routes->post(
         'fediverse-block-domain',
         'BlockController::attemptBlockDomain',
-        ['as' => 'fediverse-attempt-block-domain'],
+        [
+            'as' => 'fediverse-attempt-block-domain',
+        ],
     );
 
     $routes->post(

@@ -9,7 +9,6 @@
 namespace App\Models;
 
 use App\Entities\Language;
-use CodeIgniter\Database\Exceptions\DataException;
 use CodeIgniter\Model;
 
 class LanguageModel extends Model
@@ -18,6 +17,7 @@ class LanguageModel extends Model
      * @var string
      */
     protected $table = 'languages';
+
     /**
      * @var string
      */
@@ -32,6 +32,7 @@ class LanguageModel extends Model
      * @var string
      */
     protected $returnType = Language::class;
+
     /**
      * @var bool
      */
@@ -47,7 +48,7 @@ class LanguageModel extends Model
      */
     public function getLanguageOptions(): array
     {
-        if (!($options = cache('language_options'))) {
+        if (! ($options = cache('language_options'))) {
             $languages = $this->findAll();
 
             $options = array_reduce(
@@ -59,7 +60,8 @@ class LanguageModel extends Model
                 [],
             );
 
-            cache()->save('language_options', $options, DECADE);
+            cache()
+                ->save('language_options', $options, DECADE);
         }
 
         return $options;

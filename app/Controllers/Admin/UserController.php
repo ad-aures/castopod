@@ -8,10 +8,10 @@
 
 namespace App\Controllers\Admin;
 
-use CodeIgniter\Exceptions\PageNotFoundException;
 use App\Authorization\GroupModel;
 use App\Entities\User;
 use App\Models\UserModel;
+use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
 use Config\Services;
 
@@ -22,11 +22,11 @@ class UserController extends BaseController
     public function _remap(string $method, string ...$params): mixed
     {
         if (count($params) === 0) {
-            return $this->$method();
+            return $this->{$method}();
         }
 
         if ($this->user = (new UserModel())->find($params[0])) {
-            return $this->$method();
+            return $this->{$method}();
         }
 
         throw PageNotFoundException::forPageNotFound();
@@ -34,16 +34,22 @@ class UserController extends BaseController
 
     public function list(): string
     {
-        $data = ['users' => (new UserModel())->findAll()];
+        $data = [
+            'users' => (new UserModel())->findAll(),
+        ];
 
         return view('admin/user/list', $data);
     }
 
     public function view(): string
     {
-        $data = ['user' => $this->user];
+        $data = [
+            'user' => $this->user,
+        ];
 
-        replace_breadcrumb_params([0 => $this->user->username]);
+        replace_breadcrumb_params([
+            0 => $this->user->username,
+        ]);
         return view('admin/user/view', $data);
     }
 
@@ -65,14 +71,16 @@ class UserController extends BaseController
         // Validate here first, since some things,
         // like the password, can only be validated properly here.
         $rules = array_merge(
-            $userModel->getValidationRules(['only' => ['username']]),
+            $userModel->getValidationRules([
+                'only' => ['username'],
+            ]),
             [
                 'email' => 'required|valid_email|is_unique[users.email]',
                 'password' => 'required|strong_password',
             ],
         );
 
-        if (!$this->validate($rules)) {
+        if (! $this->validate($rules)) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -88,7 +96,7 @@ class UserController extends BaseController
         // Force user to reset his password on first connection
         $user->forcePasswordReset();
 
-        if (!$userModel->insert($user)) {
+        if (! $userModel->insert($user)) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -98,12 +106,9 @@ class UserController extends BaseController
         // Success!
         return redirect()
             ->route('user-list')
-            ->with(
-                'message',
-                lang('User.messages.createSuccess', [
-                    'username' => $user->username,
-                ]),
-            );
+            ->with('message', lang('User.messages.createSuccess', [
+                'username' => $user->username,
+            ]),);
     }
 
     public function edit(): string
@@ -125,7 +130,9 @@ class UserController extends BaseController
             'roleOptions' => $roleOptions,
         ];
 
-        replace_breadcrumb_params([0 => $this->user->username]);
+        replace_breadcrumb_params([
+            0 => $this->user->username,
+        ]);
         return view('admin/user/edit', $data);
     }
 
@@ -139,12 +146,9 @@ class UserController extends BaseController
         // Success!
         return redirect()
             ->route('user-list')
-            ->with(
-                'message',
-                lang('User.messages.rolesEditSuccess', [
-                    'username' => $this->user->username,
-                ]),
-            );
+            ->with('message', lang('User.messages.rolesEditSuccess', [
+                'username' => $this->user->username,
+            ]),);
     }
 
     public function forcePassReset(): RedirectResponse
@@ -152,7 +156,7 @@ class UserController extends BaseController
         $userModel = new UserModel();
         $this->user->forcePasswordReset();
 
-        if (!$userModel->update($this->user->id, $this->user)) {
+        if (! $userModel->update($this->user->id, $this->user)) {
             return redirect()
                 ->back()
                 ->with('errors', $userModel->errors());
@@ -186,7 +190,7 @@ class UserController extends BaseController
         // TODO: add ban reason?
         $this->user->ban('');
 
-        if (!$userModel->update($this->user->id, $this->user)) {
+        if (! $userModel->update($this->user->id, $this->user)) {
             return redirect()
                 ->back()
                 ->with('errors', $userModel->errors());
@@ -194,12 +198,9 @@ class UserController extends BaseController
 
         return redirect()
             ->route('user-list')
-            ->with(
-                'message',
-                lang('User.messages.banSuccess', [
-                    'username' => $this->user->username,
-                ]),
-            );
+            ->with('message', lang('User.messages.banSuccess', [
+                'username' => $this->user->username,
+            ]),);
     }
 
     public function unBan(): RedirectResponse
@@ -207,7 +208,7 @@ class UserController extends BaseController
         $userModel = new UserModel();
         $this->user->unBan();
 
-        if (!$userModel->update($this->user->id, $this->user)) {
+        if (! $userModel->update($this->user->id, $this->user)) {
             return redirect()
                 ->back()
                 ->with('errors', $userModel->errors());
@@ -215,12 +216,9 @@ class UserController extends BaseController
 
         return redirect()
             ->route('user-list')
-            ->with(
-                'message',
-                lang('User.messages.unbanSuccess', [
-                    'username' => $this->user->username,
-                ]),
-            );
+            ->with('message', lang('User.messages.unbanSuccess', [
+                'username' => $this->user->username,
+            ]),);
     }
 
     public function delete(): RedirectResponse
@@ -240,11 +238,8 @@ class UserController extends BaseController
 
         return redirect()
             ->back()
-            ->with(
-                'message',
-                lang('User.messages.deleteSuccess', [
-                    'username' => $this->user->username,
-                ]),
-            );
+            ->with('message', lang('User.messages.deleteSuccess', [
+                'username' => $this->user->username,
+            ]),);
     }
 }

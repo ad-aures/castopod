@@ -8,14 +8,14 @@
 
 namespace App\Controllers;
 
-use CodeIgniter\HTTP\ResponseInterface;
-use Config\Services;
 use Analytics\AnalyticsTrait;
 use App\Entities\Episode;
 use App\Entities\Podcast;
 use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
+use CodeIgniter\HTTP\ResponseInterface;
+use Config\Services;
 use SimpleXMLElement;
 
 class EpisodeController extends BaseController
@@ -23,6 +23,7 @@ class EpisodeController extends BaseController
     use AnalyticsTrait;
 
     protected Podcast $podcast;
+
     protected Episode $episode;
 
     public function _remap(string $method, string ...$params): mixed
@@ -32,22 +33,17 @@ class EpisodeController extends BaseController
         }
 
         if (
-            ($this->podcast = (new PodcastModel())->getPodcastByName(
-                $params[0],
-            )) === null
+            ($this->podcast = (new PodcastModel())->getPodcastByName($params[0],)) === null
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
 
         if (
-            ($this->episode = (new EpisodeModel())->getEpisodeBySlug(
-                $this->podcast->id,
-                $params[1],
-            )) !== null
+            ($this->episode = (new EpisodeModel())->getEpisodeBySlug($this->podcast->id, $params[1],)) !== null
         ) {
             unset($params[1]);
             unset($params[0]);
-            return $this->$method(...$params);
+            return $this->{$method}(...$params);
         }
 
         throw PageNotFoundException::forPageNotFound();
@@ -56,16 +52,17 @@ class EpisodeController extends BaseController
     public function index(): string
     {
         // Prevent analytics hit when authenticated
-        if (!can_user_interact()) {
+        if (! can_user_interact()) {
             $this->registerPodcastWebpageHit($this->episode->podcast_id);
         }
 
-        $locale = service('request')->getLocale();
+        $locale = service('request')
+            ->getLocale();
         $cacheName =
             "page_podcast#{$this->podcast->id}_episode#{$this->episode->id}_{$locale}" .
             (can_user_interact() ? '_authenticated' : '');
 
-        if (!($cachedView = cache($cacheName))) {
+        if (! ($cachedView = cache($cacheName))) {
             $data = [
                 'podcast' => $this->podcast,
                 'episode' => $this->episode,
@@ -91,30 +88,27 @@ class EpisodeController extends BaseController
         return $cachedView;
     }
 
-    public function embeddablePlayer(
-        string $theme = 'light-transparent'
-    ): string {
+    public function embeddablePlayer(string $theme = 'light-transparent'): string
+    {
         header('Content-Security-Policy: frame-ancestors https://* http://*');
 
         // Prevent analytics hit when authenticated
-        if (!can_user_interact()) {
+        if (! can_user_interact()) {
             $this->registerPodcastWebpageHit($this->episode->podcast_id);
         }
 
         $session = Services::session();
         $session->start();
         if (isset($_SERVER['HTTP_REFERER'])) {
-            $session->set(
-                'embeddable_player_domain',
-                parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST),
-            );
+            $session->set('embeddable_player_domain', parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST),);
         }
 
-        $locale = service('request')->getLocale();
+        $locale = service('request')
+            ->getLocale();
 
         $cacheName = "page_podcast#{$this->podcast->id}_episode#{$this->episode->id}_embeddable_player_{$theme}_{$locale}";
 
-        if (!($cachedView = cache($cacheName))) {
+        if (! ($cachedView = cache($cacheName))) {
             $theme = EpisodeModel::$themes[$theme];
 
             $data = [
@@ -156,16 +150,16 @@ class EpisodeController extends BaseController
             'width' => 600,
             'height' => 200,
             'thumbnail_url' => $this->episode->image->large_url,
-            'thumbnail_width' => config('Images')->largeSize,
-            'thumbnail_height' => config('Images')->largeSize,
+            'thumbnail_width' => config('Images')
+                ->largeSize,
+            'thumbnail_height' => config('Images')
+                ->largeSize,
         ]);
     }
 
     public function oembedXML(): ResponseInterface
     {
-        $oembed = new SimpleXMLElement(
-            "<?xml version='1.0' encoding='utf-8' standalone='yes'?><oembed></oembed>",
-        );
+        $oembed = new SimpleXMLElement("<?xml version='1.0' encoding='utf-8' standalone='yes'?><oembed></oembed>",);
 
         $oembed->addChild('type', 'rich');
         $oembed->addChild('version', '1.0');

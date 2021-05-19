@@ -8,8 +8,8 @@
 
 namespace ActivityPub\Models;
 
-use CodeIgniter\Database\BaseResult;
 use ActivityPub\Entities\BlockedDomain;
+use CodeIgniter\Database\BaseResult;
 use CodeIgniter\Events\Events;
 use CodeIgniter\Model;
 
@@ -49,16 +49,18 @@ class BlockedDomainModel extends Model
 
     /**
      * Retrieves instance or podcast domain blocks depending on whether or not $podcastId param is set.
-     * 
+     *
      * @return BlockedDomain[]
      */
     public function getBlockedDomains(): array
     {
-        $cacheName = config('ActivityPub')->cachePrefix . 'blocked_domains';
-        if (!($found = cache($cacheName))) {
+        $cacheName = config('ActivityPub')
+            ->cachePrefix . 'blocked_domains';
+        if (! ($found = cache($cacheName))) {
             $found = $this->findAll();
 
-            cache()->save($cacheName, $found, DECADE);
+            cache()
+                ->save($cacheName, $found, DECADE);
         }
         return $found;
     }
@@ -67,25 +69,31 @@ class BlockedDomainModel extends Model
     {
         $hashedDomainName = md5($name);
         $cacheName =
-            config('ActivityPub')->cachePrefix .
+            config('ActivityPub')
+                ->cachePrefix .
             "domain#{$hashedDomainName}_isBlocked";
-        if (!($found = cache($cacheName))) {
+        if (! ($found = cache($cacheName))) {
             $found = (bool) $this->find($name);
 
-            cache()->save($cacheName, $found, DECADE);
+            cache()
+                ->save($cacheName, $found, DECADE);
         }
 
         return $found;
     }
 
-    public function blockDomain(string $name): int|bool
+    public function blockDomain(string $name): int | bool
     {
         $hashedDomain = md5($name);
-        $prefix = config('ActivityPub')->cachePrefix;
-        cache()->delete($prefix . "domain#{$hashedDomain}_isBlocked");
-        cache()->delete($prefix . 'blocked_domains');
+        $prefix = config('ActivityPub')
+            ->cachePrefix;
+        cache()
+            ->delete($prefix . "domain#{$hashedDomain}_isBlocked");
+        cache()
+            ->delete($prefix . 'blocked_domains');
 
-        cache()->deleteMatching($prefix . '*replies');
+        cache()
+            ->deleteMatching($prefix . '*replies');
 
         Events::trigger('on_block_domain', $name);
 
@@ -106,14 +114,18 @@ class BlockedDomainModel extends Model
         return $result;
     }
 
-    public function unblockDomain(string $name): BaseResult|bool
+    public function unblockDomain(string $name): BaseResult | bool
     {
         $hashedDomain = md5($name);
-        $prefix = config('ActivityPub')->cachePrefix;
-        cache()->delete($prefix . "domain#{$hashedDomain}_isBlocked");
-        cache()->delete($prefix . 'blocked_domains');
+        $prefix = config('ActivityPub')
+            ->cachePrefix;
+        cache()
+            ->delete($prefix . "domain#{$hashedDomain}_isBlocked");
+        cache()
+            ->delete($prefix . 'blocked_domains');
 
-        cache()->deleteMatching($prefix . '*replies');
+        cache()
+            ->deleteMatching($prefix . '*replies');
 
         Events::trigger('on_unblock_domain', $name);
 

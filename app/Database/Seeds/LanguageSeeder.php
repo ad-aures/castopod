@@ -1,8 +1,7 @@
 <?php
 
 /**
- * Class LanguageSeeder
- * Inserts values in languages table in database
+ * Class LanguageSeeder Inserts values in languages table in database
  *
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -10,8 +9,7 @@
  */
 
 /**
- * From https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
- * (cc) Creative Commons Attribution-ShareAlike 3.0
+ * From https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes (cc) Creative Commons Attribution-ShareAlike 3.0
  * 2020-06-07
  */
 
@@ -24,29 +22,50 @@ class LanguageSeeder extends Seeder
     public function run(): void
     {
         $data = [
-            ['code' => 'aa', 'native_name' => 'Afaraf'],
+            [
+                'code' => 'aa',
+                'native_name' => 'Afaraf',
+            ],
             [
                 'code' => 'ab',
                 'native_name' => 'аҧсуа бызшәа, аҧсшәа',
             ],
-            ['code' => 'ae', 'native_name' => 'avesta'],
+            [
+                'code' => 'ae',
+                'native_name' => 'avesta',
+            ],
             [
                 'code' => 'af',
                 'native_name' => 'Afrikaans',
             ],
-            ['code' => 'ak', 'native_name' => 'Akan'],
-            ['code' => 'am', 'native_name' => 'አማርኛ'],
+            [
+                'code' => 'ak',
+                'native_name' => 'Akan',
+            ],
+            [
+                'code' => 'am',
+                'native_name' => 'አማርኛ',
+            ],
             [
                 'code' => 'an',
                 'native_name' => 'aragonés',
             ],
-            ['code' => 'ar', 'native_name' => 'العربية'],
-            ['code' => 'as', 'native_name' => 'অসমীয়া'],
+            [
+                'code' => 'ar',
+                'native_name' => 'العربية',
+            ],
+            [
+                'code' => 'as',
+                'native_name' => 'অসমীয়া',
+            ],
             [
                 'code' => 'av',
                 'native_name' => 'авар мацӀ, магӀарул мацӀ',
             ],
-            ['code' => 'ay', 'native_name' => 'aymar aru'],
+            [
+                'code' => 'ay',
+                'native_name' => 'aymar aru',
+            ],
             [
                 'code' => 'az',
                 'native_name' => 'azərbaycan dili',
@@ -67,14 +86,26 @@ class LanguageSeeder extends Seeder
                 'code' => 'bh',
                 'native_name' => 'भोजपुरी',
             ],
-            ['code' => 'bi', 'native_name' => 'Bislama'],
+            [
+                'code' => 'bi',
+                'native_name' => 'Bislama',
+            ],
             [
                 'code' => 'bm',
                 'native_name' => 'bamanankan',
             ],
-            ['code' => 'bn', 'native_name' => 'বাংলা'],
-            ['code' => 'bo', 'native_name' => 'བོད་ཡིག'],
-            ['code' => 'br', 'native_name' => 'brezhoneg'],
+            [
+                'code' => 'bn',
+                'native_name' => 'বাংলা',
+            ],
+            [
+                'code' => 'bo',
+                'native_name' => 'བོད་ཡིག',
+            ],
+            [
+                'code' => 'br',
+                'native_name' => 'brezhoneg',
+            ],
             [
                 'code' => 'bs',
                 'native_name' => 'bosanski jezik',
@@ -87,12 +118,18 @@ class LanguageSeeder extends Seeder
                 'code' => 'ce',
                 'native_name' => 'нохчийн мотт',
             ],
-            ['code' => 'ch', 'native_name' => 'Chamoru'],
+            [
+                'code' => 'ch',
+                'native_name' => 'Chamoru',
+            ],
             [
                 'code' => 'co',
                 'native_name' => 'corsu, lingua corsa',
             ],
-            ['code' => 'cr', 'native_name' => 'ᓀᐦᐃᔭᐍᐏᐣ'],
+            [
+                'code' => 'cr',
+                'native_name' => 'ᓀᐦᐃᔭᐍᐏᐣ',
+            ],
             [
                 'code' => 'cs',
                 'native_name' => 'čeština, český jazyk',
@@ -105,20 +142,38 @@ class LanguageSeeder extends Seeder
                 'code' => 'cv',
                 'native_name' => 'чӑваш чӗлхи',
             ],
-            ['code' => 'cy', 'native_name' => 'Cymraeg'],
-            ['code' => 'da', 'native_name' => 'dansk'],
-            ['code' => 'de', 'native_name' => 'Deutsch'],
+            [
+                'code' => 'cy',
+                'native_name' => 'Cymraeg',
+            ],
+            [
+                'code' => 'da',
+                'native_name' => 'dansk',
+            ],
+            [
+                'code' => 'de',
+                'native_name' => 'Deutsch',
+            ],
             [
                 'code' => 'dv',
                 'native_name' => 'ދިވެހި',
             ],
-            ['code' => 'dz', 'native_name' => 'རྫོང་ཁ'],
-            ['code' => 'ee', 'native_name' => 'Eʋegbe'],
+            [
+                'code' => 'dz',
+                'native_name' => 'རྫོང་ཁ',
+            ],
+            [
+                'code' => 'ee',
+                'native_name' => 'Eʋegbe',
+            ],
             [
                 'code' => 'el',
                 'native_name' => 'ελληνικά',
             ],
-            ['code' => 'en', 'native_name' => 'English'],
+            [
+                'code' => 'en',
+                'native_name' => 'English',
+            ],
             [
                 'code' => 'eo',
                 'native_name' => 'Esperanto',
@@ -135,7 +190,10 @@ class LanguageSeeder extends Seeder
                 'code' => 'eu',
                 'native_name' => 'euskara, euskera',
             ],
-            ['code' => 'fa', 'native_name' => 'فارسی'],
+            [
+                'code' => 'fa',
+                'native_name' => 'فارسی',
+            ],
             [
                 'code' => 'ff',
                 'native_name' => 'Fulfulde, Pulaar, Pular',
@@ -148,7 +206,10 @@ class LanguageSeeder extends Seeder
                 'code' => 'fj',
                 'native_name' => 'vosa Vakaviti',
             ],
-            ['code' => 'fo', 'native_name' => 'føroyskt'],
+            [
+                'code' => 'fo',
+                'native_name' => 'føroyskt',
+            ],
             [
                 'code' => 'fr',
                 'native_name' => 'français, langue française',
@@ -157,14 +218,26 @@ class LanguageSeeder extends Seeder
                 'code' => 'fy',
                 'native_name' => 'Frysk',
             ],
-            ['code' => 'ga', 'native_name' => 'Gaeilge'],
+            [
+                'code' => 'ga',
+                'native_name' => 'Gaeilge',
+            ],
             [
                 'code' => 'gd',
                 'native_name' => 'Gàidhlig',
             ],
-            ['code' => 'gl', 'native_name' => 'Galego'],
-            ['code' => 'gn', 'native_name' => "Avañe'ẽ"],
-            ['code' => 'gu', 'native_name' => 'ગુજરાતી'],
+            [
+                'code' => 'gl',
+                'native_name' => 'Galego',
+            ],
+            [
+                'code' => 'gn',
+                'native_name' => "Avañe'ẽ",
+            ],
+            [
+                'code' => 'gu',
+                'native_name' => 'ગુજરાતી',
+            ],
             [
                 'code' => 'gv',
                 'native_name' => 'Gaelg, Gailck',
@@ -173,7 +246,10 @@ class LanguageSeeder extends Seeder
                 'code' => 'ha',
                 'native_name' => '(Hausa) هَوُسَ',
             ],
-            ['code' => 'he', 'native_name' => 'עברית'],
+            [
+                'code' => 'he',
+                'native_name' => 'עברית',
+            ],
             [
                 'code' => 'hi',
                 'native_name' => 'हिन्दी, हिंदी',
@@ -190,9 +266,18 @@ class LanguageSeeder extends Seeder
                 'code' => 'ht',
                 'native_name' => 'Kreyòl ayisyen',
             ],
-            ['code' => 'hu', 'native_name' => 'magyar'],
-            ['code' => 'hy', 'native_name' => 'Հայերեն'],
-            ['code' => 'hz', 'native_name' => 'Otjiherero'],
+            [
+                'code' => 'hu',
+                'native_name' => 'magyar',
+            ],
+            [
+                'code' => 'hy',
+                'native_name' => 'Հայերեն',
+            ],
+            [
+                'code' => 'hz',
+                'native_name' => 'Otjiherero',
+            ],
             [
                 'code' => 'ia',
                 'native_name' => 'Interlingua',
@@ -206,7 +291,10 @@ class LanguageSeeder extends Seeder
                 'native_name' =>
                     '(originally:) Occidental, (after WWII:) Interlingue',
             ],
-            ['code' => 'ig', 'native_name' => 'Asụsụ Igbo'],
+            [
+                'code' => 'ig',
+                'native_name' => 'Asụsụ Igbo',
+            ],
             [
                 'code' => 'ii',
                 'native_name' => 'ꆈꌠ꒿ Nuosuhxop',
@@ -215,13 +303,22 @@ class LanguageSeeder extends Seeder
                 'code' => 'ik',
                 'native_name' => 'Iñupiaq, Iñupiatun',
             ],
-            ['code' => 'io', 'native_name' => 'Ido'],
+            [
+                'code' => 'io',
+                'native_name' => 'Ido',
+            ],
             [
                 'code' => 'is',
                 'native_name' => 'Íslenska',
             ],
-            ['code' => 'it', 'native_name' => 'Italiano'],
-            ['code' => 'iu', 'native_name' => 'ᐃᓄᒃᑎᑐᑦ'],
+            [
+                'code' => 'it',
+                'native_name' => 'Italiano',
+            ],
+            [
+                'code' => 'iu',
+                'native_name' => 'ᐃᓄᒃᑎᑐᑦ',
+            ],
             [
                 'code' => 'ja',
                 'native_name' => '日本語 (にほんご)',
@@ -230,8 +327,14 @@ class LanguageSeeder extends Seeder
                 'code' => 'jv',
                 'native_name' => 'ꦧꦱꦗꦮ, Basa Jawa',
             ],
-            ['code' => 'ka', 'native_name' => 'ქართული'],
-            ['code' => 'kg', 'native_name' => 'Kikongo'],
+            [
+                'code' => 'ka',
+                'native_name' => 'ქართული',
+            ],
+            [
+                'code' => 'kg',
+                'native_name' => 'Kikongo',
+            ],
             [
                 'code' => 'ki',
                 'native_name' => 'Gĩkũyũ',
@@ -240,7 +343,10 @@ class LanguageSeeder extends Seeder
                 'code' => 'kj',
                 'native_name' => 'Kuanyama',
             ],
-            ['code' => 'kk', 'native_name' => 'қазақ тілі'],
+            [
+                'code' => 'kk',
+                'native_name' => 'қазақ тілі',
+            ],
             [
                 'code' => 'kl',
                 'native_name' => 'kalaallisut, kalaallit oqaasii',
@@ -249,9 +355,18 @@ class LanguageSeeder extends Seeder
                 'code' => 'km',
                 'native_name' => 'ខ្មែរ, ខេមរភាសា, ភាសាខ្មែរ',
             ],
-            ['code' => 'kn', 'native_name' => 'ಕನ್ನಡ'],
-            ['code' => 'ko', 'native_name' => '한국어'],
-            ['code' => 'kr', 'native_name' => 'Kanuri'],
+            [
+                'code' => 'kn',
+                'native_name' => 'ಕನ್ನಡ',
+            ],
+            [
+                'code' => 'ko',
+                'native_name' => '한국어',
+            ],
+            [
+                'code' => 'kr',
+                'native_name' => 'Kanuri',
+            ],
             [
                 'code' => 'ks',
                 'native_name' => 'कश्मीरी, كشميري‎',
@@ -260,8 +375,14 @@ class LanguageSeeder extends Seeder
                 'code' => 'ku',
                 'native_name' => 'Kurdî, کوردی‎',
             ],
-            ['code' => 'kv', 'native_name' => 'коми кыв'],
-            ['code' => 'kw', 'native_name' => 'Kernewek'],
+            [
+                'code' => 'kv',
+                'native_name' => 'коми кыв',
+            ],
+            [
+                'code' => 'kw',
+                'native_name' => 'Kernewek',
+            ],
             [
                 'code' => 'ky',
                 'native_name' => 'Кыргызча, Кыргыз тили',
@@ -274,13 +395,22 @@ class LanguageSeeder extends Seeder
                 'code' => 'lb',
                 'native_name' => 'Lëtzebuergesch',
             ],
-            ['code' => 'lg', 'native_name' => 'Luganda'],
+            [
+                'code' => 'lg',
+                'native_name' => 'Luganda',
+            ],
             [
                 'code' => 'li',
                 'native_name' => 'Limburgs',
             ],
-            ['code' => 'ln', 'native_name' => 'Lingála'],
-            ['code' => 'lo', 'native_name' => 'ພາສາລາວ'],
+            [
+                'code' => 'ln',
+                'native_name' => 'Lingála',
+            ],
+            [
+                'code' => 'lo',
+                'native_name' => 'ພາສາລາວ',
+            ],
             [
                 'code' => 'lt',
                 'native_name' => 'lietuvių kalba',
@@ -309,18 +439,30 @@ class LanguageSeeder extends Seeder
                 'code' => 'mk',
                 'native_name' => 'македонски јазик',
             ],
-            ['code' => 'ml', 'native_name' => 'മലയാളം'],
+            [
+                'code' => 'ml',
+                'native_name' => 'മലയാളം',
+            ],
             [
                 'code' => 'mn',
                 'native_name' => 'Монгол хэл',
             ],
-            ['code' => 'mr', 'native_name' => 'मराठी'],
+            [
+                'code' => 'mr',
+                'native_name' => 'मराठी',
+            ],
             [
                 'code' => 'ms',
                 'native_name' => 'Bahasa Melayu, بهاس ملايو‎',
             ],
-            ['code' => 'mt', 'native_name' => 'Malti'],
-            ['code' => 'my', 'native_name' => 'ဗမာစာ'],
+            [
+                'code' => 'mt',
+                'native_name' => 'Malti',
+            ],
+            [
+                'code' => 'my',
+                'native_name' => 'ဗမာစာ',
+            ],
             [
                 'code' => 'na',
                 'native_name' => 'Dorerin Naoero',
@@ -333,8 +475,14 @@ class LanguageSeeder extends Seeder
                 'code' => 'nd',
                 'native_name' => 'isiNdebele',
             ],
-            ['code' => 'ne', 'native_name' => 'नेपाली'],
-            ['code' => 'ng', 'native_name' => 'Owambo'],
+            [
+                'code' => 'ne',
+                'native_name' => 'नेपाली',
+            ],
+            [
+                'code' => 'ng',
+                'native_name' => 'Owambo',
+            ],
             [
                 'code' => 'nl',
                 'native_name' => 'Nederlands, Vlaams',
@@ -343,7 +491,10 @@ class LanguageSeeder extends Seeder
                 'code' => 'nn',
                 'native_name' => 'Norsk Nynorsk',
             ],
-            ['code' => 'no', 'native_name' => 'Norsk'],
+            [
+                'code' => 'no',
+                'native_name' => 'Norsk',
+            ],
             [
                 'code' => 'nr',
                 'native_name' => 'isiNdebele',
@@ -360,12 +511,18 @@ class LanguageSeeder extends Seeder
                 'code' => 'oc',
                 'native_name' => 'occitan, lenga d’òc',
             ],
-            ['code' => 'oj', 'native_name' => 'ᐊᓂᔑᓈᐯᒧᐎᓐ'],
+            [
+                'code' => 'oj',
+                'native_name' => 'ᐊᓂᔑᓈᐯᒧᐎᓐ',
+            ],
             [
                 'code' => 'om',
                 'native_name' => 'Afaan Oromoo',
             ],
-            ['code' => 'or', 'native_name' => 'ଓଡ଼ିଆ'],
+            [
+                'code' => 'or',
+                'native_name' => 'ଓଡ଼ିଆ',
+            ],
             [
                 'code' => 'os',
                 'native_name' => 'ирон æвзаг',
@@ -374,7 +531,10 @@ class LanguageSeeder extends Seeder
                 'code' => 'pa',
                 'native_name' => 'ਪੰਜਾਬੀ, پنجابی‎',
             ],
-            ['code' => 'pi', 'native_name' => 'पालि, पाळि'],
+            [
+                'code' => 'pi',
+                'native_name' => 'पालि, पाळि',
+            ],
             [
                 'code' => 'pl',
                 'native_name' => 'język polski, polszczyzna',
@@ -395,12 +555,18 @@ class LanguageSeeder extends Seeder
                 'code' => 'rm',
                 'native_name' => 'Rumantsch Grischun',
             ],
-            ['code' => 'rn', 'native_name' => 'Ikirundi'],
+            [
+                'code' => 'rn',
+                'native_name' => 'Ikirundi',
+            ],
             [
                 'code' => 'ro',
                 'native_name' => 'Română',
             ],
-            ['code' => 'ru', 'native_name' => 'русский'],
+            [
+                'code' => 'ru',
+                'native_name' => 'русский',
+            ],
             [
                 'code' => 'rw',
                 'native_name' => 'Ikinyarwanda',
@@ -409,7 +575,10 @@ class LanguageSeeder extends Seeder
                 'code' => 'sa',
                 'native_name' => 'संस्कृतम्',
             ],
-            ['code' => 'sc', 'native_name' => 'sardu'],
+            [
+                'code' => 'sc',
+                'native_name' => 'sardu',
+            ],
             [
                 'code' => 'sd',
                 'native_name' => 'सिन्धी, سنڌي، سندھی‎',
@@ -438,17 +607,26 @@ class LanguageSeeder extends Seeder
                 'code' => 'sm',
                 'native_name' => "gagana fa'a Samoa",
             ],
-            ['code' => 'sn', 'native_name' => 'chiShona'],
+            [
+                'code' => 'sn',
+                'native_name' => 'chiShona',
+            ],
             [
                 'code' => 'so',
                 'native_name' => 'Soomaaliga, af Soomaali',
             ],
-            ['code' => 'sq', 'native_name' => 'Shqip'],
+            [
+                'code' => 'sq',
+                'native_name' => 'Shqip',
+            ],
             [
                 'code' => 'sr',
                 'native_name' => 'српски језик',
             ],
-            ['code' => 'ss', 'native_name' => 'SiSwati'],
+            [
+                'code' => 'ss',
+                'native_name' => 'SiSwati',
+            ],
             [
                 'code' => 'st',
                 'native_name' => 'Sesotho',
@@ -457,16 +635,34 @@ class LanguageSeeder extends Seeder
                 'code' => 'su',
                 'native_name' => 'Basa Sunda',
             ],
-            ['code' => 'sv', 'native_name' => 'Svenska'],
-            ['code' => 'sw', 'native_name' => 'Kiswahili'],
-            ['code' => 'ta', 'native_name' => 'தமிழ்'],
-            ['code' => 'te', 'native_name' => 'తెలుగు'],
+            [
+                'code' => 'sv',
+                'native_name' => 'Svenska',
+            ],
+            [
+                'code' => 'sw',
+                'native_name' => 'Kiswahili',
+            ],
+            [
+                'code' => 'ta',
+                'native_name' => 'தமிழ்',
+            ],
+            [
+                'code' => 'te',
+                'native_name' => 'తెలుగు',
+            ],
             [
                 'code' => 'tg',
                 'native_name' => 'тоҷикӣ, toçikī, تاجیکی‎',
             ],
-            ['code' => 'th', 'native_name' => 'ไทย'],
-            ['code' => 'ti', 'native_name' => 'ትግርኛ'],
+            [
+                'code' => 'th',
+                'native_name' => 'ไทย',
+            ],
+            [
+                'code' => 'ti',
+                'native_name' => 'ትግርኛ',
+            ],
             [
                 'code' => 'tk',
                 'native_name' => 'Türkmen, Түркмен',
@@ -475,18 +671,30 @@ class LanguageSeeder extends Seeder
                 'code' => 'tl',
                 'native_name' => 'Wikang Tagalog',
             ],
-            ['code' => 'tn', 'native_name' => 'Setswana'],
+            [
+                'code' => 'tn',
+                'native_name' => 'Setswana',
+            ],
             [
                 'code' => 'to',
                 'native_name' => 'Faka Tonga',
             ],
-            ['code' => 'tr', 'native_name' => 'Türkçe'],
-            ['code' => 'ts', 'native_name' => 'Xitsonga'],
+            [
+                'code' => 'tr',
+                'native_name' => 'Türkçe',
+            ],
+            [
+                'code' => 'ts',
+                'native_name' => 'Xitsonga',
+            ],
             [
                 'code' => 'tt',
                 'native_name' => 'татар теле, tatar tele',
             ],
-            ['code' => 'tw', 'native_name' => 'Twi'],
+            [
+                'code' => 'tw',
+                'native_name' => 'Twi',
+            ],
             [
                 'code' => 'ty',
                 'native_name' => 'Reo Tahiti',
@@ -499,22 +707,46 @@ class LanguageSeeder extends Seeder
                 'code' => 'uk',
                 'native_name' => 'Українська',
             ],
-            ['code' => 'ur', 'native_name' => 'اردو'],
+            [
+                'code' => 'ur',
+                'native_name' => 'اردو',
+            ],
             [
                 'code' => 'uz',
                 'native_name' => 'Oʻzbek, Ўзбек, أۇزبېك‎',
             ],
-            ['code' => 've', 'native_name' => 'Tshivenḓa'],
+            [
+                'code' => 've',
+                'native_name' => 'Tshivenḓa',
+            ],
             [
                 'code' => 'vi',
                 'native_name' => 'Tiếng Việt',
             ],
-            ['code' => 'vo', 'native_name' => 'Volapük'],
-            ['code' => 'wa', 'native_name' => 'Walon'],
-            ['code' => 'wo', 'native_name' => 'Wollof'],
-            ['code' => 'xh', 'native_name' => 'isiXhosa'],
-            ['code' => 'yi', 'native_name' => 'ייִדיש'],
-            ['code' => 'yo', 'native_name' => 'Yorùbá'],
+            [
+                'code' => 'vo',
+                'native_name' => 'Volapük',
+            ],
+            [
+                'code' => 'wa',
+                'native_name' => 'Walon',
+            ],
+            [
+                'code' => 'wo',
+                'native_name' => 'Wollof',
+            ],
+            [
+                'code' => 'xh',
+                'native_name' => 'isiXhosa',
+            ],
+            [
+                'code' => 'yi',
+                'native_name' => 'ייִדיש',
+            ],
+            [
+                'code' => 'yo',
+                'native_name' => 'Yorùbá',
+            ],
             [
                 'code' => 'za',
                 'native_name' => 'Saɯ cueŋƅ, Saw cuengh',
@@ -523,7 +755,10 @@ class LanguageSeeder extends Seeder
                 'code' => 'zh',
                 'native_name' => '中文 (Zhōngwén), 汉语, 漢語',
             ],
-            ['code' => 'zu', 'native_name' => 'isiZulu'],
+            [
+                'code' => 'zu',
+                'native_name' => 'isiZulu',
+            ],
         ];
 
         $this->db

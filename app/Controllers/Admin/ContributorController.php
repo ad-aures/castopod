@@ -8,18 +8,19 @@
 
 namespace App\Controllers\Admin;
 
+use App\Authorization\GroupModel;
 use App\Entities\Podcast;
 use App\Entities\User;
-use CodeIgniter\Exceptions\PageNotFoundException;
-use Exception;
-use App\Authorization\GroupModel;
 use App\Models\PodcastModel;
 use App\Models\UserModel;
+use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
+use Exception;
 
 class ContributorController extends BaseController
 {
     protected Podcast $podcast;
+
     protected ?User $user;
 
     public function _remap(string $method, string ...$params): mixed
@@ -27,16 +28,13 @@ class ContributorController extends BaseController
         $this->podcast = (new PodcastModel())->getPodcastById((int) $params[0]);
 
         if (count($params) <= 1) {
-            return $this->$method();
+            return $this->{$method}();
         }
 
         if (
-            $this->user = (new UserModel())->getPodcastContributor(
-                (int) $params[1],
-                (int) $params[0],
-            )
+            $this->user = (new UserModel())->getPodcastContributor((int) $params[1], (int) $params[0],)
         ) {
-            return $this->$method();
+            return $this->{$method}();
         }
 
         throw PageNotFoundException::forPageNotFound();
@@ -48,17 +46,16 @@ class ContributorController extends BaseController
             'podcast' => $this->podcast,
         ];
 
-        replace_breadcrumb_params([0 => $this->podcast->title]);
+        replace_breadcrumb_params([
+            0 => $this->podcast->title,
+        ]);
         return view('admin/contributor/list', $data);
     }
 
     public function view(): string
     {
         $data = [
-            'contributor' => (new UserModel())->getPodcastContributor(
-                $this->user->id,
-                $this->podcast->id,
-            ),
+            'contributor' => (new UserModel())->getPodcastContributor($this->user->id, $this->podcast->id,),
         ];
 
         replace_breadcrumb_params([
@@ -98,7 +95,9 @@ class ContributorController extends BaseController
             'roleOptions' => $roleOptions,
         ];
 
-        replace_breadcrumb_params([0 => $this->podcast->title]);
+        replace_breadcrumb_params([
+            0 => $this->podcast->title,
+        ]);
         return view('admin/contributor/add', $data);
     }
 
@@ -114,9 +113,7 @@ class ContributorController extends BaseController
             return redirect()
                 ->back()
                 ->withInput()
-                ->with('errors', [
-                    lang('Contributor.messages.alreadyAddedError'),
-                ]);
+                ->with('errors', [lang('Contributor.messages.alreadyAddedError')]);
         }
 
         return redirect()->route('contributor-list', [$this->podcast->id]);
@@ -169,17 +166,12 @@ class ContributorController extends BaseController
         if ($this->podcast->created_by === $this->user->id) {
             return redirect()
                 ->back()
-                ->with('errors', [
-                    lang('Contributor.messages.removeOwnerContributorError'),
-                ]);
+                ->with('errors', [lang('Contributor.messages.removeOwnerContributorError')]);
         }
 
         $podcastModel = new PodcastModel();
         if (
-            !$podcastModel->removePodcastContributor(
-                $this->user->id,
-                $this->podcast->id,
-            )
+            ! $podcastModel->removePodcastContributor($this->user->id, $this->podcast->id,)
         ) {
             return redirect()
                 ->back()

@@ -11,7 +11,7 @@ use CodeIgniter\Files\File;
 use JamesHeinrich\GetID3\GetID3;
 use JamesHeinrich\GetID3\WriteTags;
 
-if (!function_exists('get_file_tags')) {
+if (! function_exists('get_file_tags')) {
     /**
      * Gets audio file metadata and ID3 info
      *
@@ -31,7 +31,7 @@ if (!function_exists('get_file_tags')) {
     }
 }
 
-if (!function_exists('write_audio_file_tags')) {
+if (! function_exists('write_audio_file_tags')) {
     /**
      * Write audio file metadata / ID3 tags
      */
@@ -67,11 +67,7 @@ if (!function_exists('write_audio_file_tags')) {
                     : $episode->podcast->publisher,
             ],
             'album' => [$episode->podcast->title],
-            'year' => [
-                $episode->published_at !== null
-                    ? $episode->published_at->format('Y')
-                    : '',
-            ],
+            'year' => [$episode->published_at !== null ? $episode->published_at->format('Y') : ''],
             'genre' => ['Podcast'],
             'comment' => [$episode->description],
             'track_number' => [(string) $episode->number],
@@ -92,7 +88,8 @@ if (!function_exists('write_audio_file_tags')) {
         ];
 
         $TagData['attached_picture'][] = [
-            'picturetypeid' => 2, // Cover. More: module.tag.id3v2.php
+            // picturetypeid == Cover. More: module.tag.id3v2.php
+            'picturetypeid' => 2,
             'data' => $APICdata,
             'description' => 'cover',
             'mime' => $cover->getMimeType(),

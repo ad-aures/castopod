@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Class AnalyticsPodcastByPlayerModel
- * Model for analytics_podcasts_by_player table in database
+ * Class AnalyticsPodcastByPlayerModel Model for analytics_podcasts_by_player table in database
+ *
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
@@ -24,6 +24,7 @@ class AnalyticsPodcastByPlayerModel extends Model
      * @var string
      */
     protected $returnType = AnalyticsPodcastsByPlayer::class;
+
     /**
      * @var bool
      */
@@ -42,9 +43,7 @@ class AnalyticsPodcastByPlayerModel extends Model
     public function getDataByAppWeekly(int $podcastId): array
     {
         if (
-            !($found = cache(
-                "{$podcastId}_analytics_podcasts_by_player_by_app_weekly",
-            ))
+            ! ($found = cache("{$podcastId}_analytics_podcasts_by_player_by_app_weekly",))
         ) {
             $oneWeekAgo = date('Y-m-d', strtotime('-1 week'));
             $found = $this->select('app as labels')
@@ -58,11 +57,8 @@ class AnalyticsPodcastByPlayerModel extends Model
                 ->groupBy('labels')
                 ->orderBy('values', 'DESC')
                 ->findAll();
-            cache()->save(
-                "{$podcastId}_analytics_podcasts_by_player_by_app_weekly",
-                $found,
-                600,
-            );
+            cache()
+                ->save("{$podcastId}_analytics_podcasts_by_player_by_app_weekly", $found, 600,);
         }
         return $found;
     }
@@ -75,9 +71,7 @@ class AnalyticsPodcastByPlayerModel extends Model
     public function getDataByAppYearly(int $podcastId): array
     {
         if (
-            !($found = cache(
-                "{$podcastId}_analytics_podcasts_by_player_by_app_yearly",
-            ))
+            ! ($found = cache("{$podcastId}_analytics_podcasts_by_player_by_app_yearly",))
         ) {
             $oneYearAgo = date('Y-m-d', strtotime('-1 year'));
             $found = $this->select('app as labels')
@@ -91,11 +85,8 @@ class AnalyticsPodcastByPlayerModel extends Model
                 ->groupBy('labels')
                 ->orderBy('values', 'DESC')
                 ->findAll();
-            cache()->save(
-                "{$podcastId}_analytics_podcasts_by_player_by_app_yearly",
-                $found,
-                600,
-            );
+            cache()
+                ->save("{$podcastId}_analytics_podcasts_by_player_by_app_yearly", $found, 600,);
         }
         return $found;
     }
@@ -108,9 +99,7 @@ class AnalyticsPodcastByPlayerModel extends Model
     public function getDataByOsWeekly(int $podcastId): array
     {
         if (
-            !($found = cache(
-                "{$podcastId}_analytics_podcasts_by_player_by_os_weekly",
-            ))
+            ! ($found = cache("{$podcastId}_analytics_podcasts_by_player_by_os_weekly",))
         ) {
             $oneWeekAgo = date('Y-m-d', strtotime('-1 week'));
             $found = $this->select('os as labels')
@@ -125,11 +114,8 @@ class AnalyticsPodcastByPlayerModel extends Model
                 ->groupBy('labels')
                 ->orderBy('values', 'DESC')
                 ->findAll();
-            cache()->save(
-                "{$podcastId}_analytics_podcasts_by_player_by_os_weekly",
-                $found,
-                600,
-            );
+            cache()
+                ->save("{$podcastId}_analytics_podcasts_by_player_by_os_weekly", $found, 600,);
         }
         return $found;
     }
@@ -142,9 +128,7 @@ class AnalyticsPodcastByPlayerModel extends Model
     public function getDataByDeviceWeekly(int $podcastId): array
     {
         if (
-            !($found = cache(
-                "{$podcastId}_analytics_podcasts_by_player_by_device_weekly",
-            ))
+            ! ($found = cache("{$podcastId}_analytics_podcasts_by_player_by_device_weekly",))
         ) {
             $oneWeekAgo = date('Y-m-d', strtotime('-1 week'));
             $found = $this->select('device as labels')
@@ -158,11 +142,8 @@ class AnalyticsPodcastByPlayerModel extends Model
                 ->groupBy('labels')
                 ->orderBy('values', 'DESC')
                 ->findAll();
-            cache()->save(
-                "{$podcastId}_analytics_podcasts_by_player_by_device_weekly",
-                $found,
-                600,
-            );
+            cache()
+                ->save("{$podcastId}_analytics_podcasts_by_player_by_device_weekly", $found, 600,);
         }
         return $found;
     }
@@ -175,7 +156,7 @@ class AnalyticsPodcastByPlayerModel extends Model
     public function getDataBots(int $podcastId): array
     {
         if (
-            !($found = cache("{$podcastId}_analytics_podcasts_by_player_bots"))
+            ! ($found = cache("{$podcastId}_analytics_podcasts_by_player_bots"))
         ) {
             $oneYearAgo = date('Y-m-d', strtotime('-1 year'));
             $found = $this->select('DATE_FORMAT(date,"%Y-%m-01") as labels')
@@ -189,11 +170,8 @@ class AnalyticsPodcastByPlayerModel extends Model
                 ->orderBy('labels', 'ASC')
                 ->findAll();
 
-            cache()->save(
-                "{$podcastId}_analytics_podcasts_by_player_bots",
-                $found,
-                600,
-            );
+            cache()
+                ->save("{$podcastId}_analytics_podcasts_by_player_bots", $found, 600,);
         }
         return $found;
     }

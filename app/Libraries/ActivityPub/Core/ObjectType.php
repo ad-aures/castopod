@@ -1,8 +1,7 @@
 <?php
 
 /**
- * This class defines the Object which is the
- * primary base type for the Activity Streams vocabulary.
+ * This class defines the Object which is the primary base type for the Activity Streams vocabulary.
  *
  * Object is a reserved word in php, so the class is named ObjectType.
  *
@@ -18,10 +17,14 @@ class ObjectType extends AbstractObject
     /**
      * @var string|string[]
      */
-    protected string|array $context = 'https://www.w3.org/ns/activitystreams';
+    protected string | array $context = 'https://www.w3.org/ns/activitystreams';
+
     protected string $id;
+
     protected string $type = 'Object';
+
     protected string $content;
+
     protected string $published;
 
     /**

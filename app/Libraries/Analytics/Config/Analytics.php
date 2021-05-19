@@ -7,8 +7,7 @@ use CodeIgniter\Config\BaseConfig;
 class Analytics extends BaseConfig
 {
     /**
-     * Gateway to analytic routes.
-     * By default, all analytics routes will be under `/analytics` path
+     * Gateway to analytic routes. By default, all analytics routes will be under `/analytics` path
      */
     public string $gateway = 'analytics';
 
@@ -29,7 +28,7 @@ class Analytics extends BaseConfig
      *
      * @param string|string[] $audioFilePath
      */
-    public function getAudioFileUrl(string|array $audioFilePath): string
+    public function getAudioFileUrl(string | array $audioFilePath): string
     {
         return base_url($audioFilePath);
     }

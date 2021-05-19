@@ -8,7 +8,8 @@
 
 return [
     'label' => 'Fil d’Ariane',
-    config('App')->adminGateway => 'Accueil',
+    config('App')
+        ->adminGateway => 'Accueil',
     'podcasts' => 'podcasts',
     'episodes' => 'épisodes',
     'contributors' => 'contributeurs',

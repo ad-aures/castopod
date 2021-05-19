@@ -8,15 +8,14 @@
 
 namespace ActivityPub\Controllers;
 
-use CodeIgniter\HTTP\RedirectResponse;
-use CodeIgniter\HTTP\ResponseInterface;
-use CodeIgniter\Exceptions\PageNotFoundException;
-use ActivityPub\Entities\Note;
 use ActivityPub\Config\ActivityPub;
-use ActivityPub\Models\NoteModel;
+use ActivityPub\Entities\Note;
 use ActivityPub\Objects\OrderedCollectionObject;
 use ActivityPub\Objects\OrderedCollectionPage;
 use CodeIgniter\Controller;
+use CodeIgniter\Exceptions\PageNotFoundException;
+use CodeIgniter\HTTP\RedirectResponse;
+use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\I18n\Time;
 
 class NoteController extends Controller
@@ -27,6 +26,7 @@ class NoteController extends Controller
     protected $helpers = ['activitypub'];
 
     protected Note $note;
+
     protected ActivityPub $config;
 
     public function __construct()
@@ -36,12 +36,12 @@ class NoteController extends Controller
 
     public function _remap(string $method, string ...$params): mixed
     {
-        if (!($this->note = model('NoteModel')->getNoteById($params[0]))) {
+        if (! ($this->note = model('NoteModel')->getNoteById($params[0]))) {
             throw PageNotFoundException::forPageNotFound();
         }
         unset($params[0]);
 
-        return $this->$method(...$params);
+        return $this->{$method}(...$params);
     }
 
     public function index(): RedirectResponse
@@ -56,29 +56,22 @@ class NoteController extends Controller
 
     public function replies(): RedirectResponse
     {
-        /** get note replies */
+        /**
+         * get note replies
+         */
         $noteReplies = model('NoteModel')
-            ->where(
-                'in_reply_to_id',
-                service('uuid')
-                    ->fromString($this->note->id)
-                    ->getBytes(),
-            )
+            ->where('in_reply_to_id', service('uuid') ->fromString($this->note->id) ->getBytes(),)
             ->where('`published_at` <= NOW()', null, false)
             ->orderBy('published_at', 'ASC');
 
         $pageNumber = $this->request->getGet('page');
 
-        if (!isset($pageNumber)) {
+        if (! isset($pageNumber)) {
             $noteReplies->paginate(12);
             $pager = $noteReplies->pager;
             $collection = new OrderedCollectionObject(null, $pager);
         } else {
-            $paginatedReplies = $noteReplies->paginate(
-                12,
-                'default',
-                $pageNumber,
-            );
+            $paginatedReplies = $noteReplies->paginate(12, 'default', $pageNumber,);
             $pager = $noteReplies->pager;
 
             $orderedItems = [];
@@ -106,7 +99,7 @@ class NoteController extends Controller
             'message' => 'required|max_length[500]',
         ];
 
-        if (!$this->validate($rules)) {
+        if (! $this->validate($rules)) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -119,7 +112,7 @@ class NoteController extends Controller
             'published_at' => Time::now(),
         ]);
 
-        if (!model('NoteModel')->addNote($newNote)) {
+        if (! model('NoteModel')->addNote($newNote)) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -137,18 +130,18 @@ class NoteController extends Controller
             'actor_id' => 'required|is_natural_no_zero',
         ];
 
-        if (!$this->validate($rules)) {
+        if (! $this->validate($rules)) {
             return redirect()
                 ->back()
                 ->withInput()
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $actor = model('ActorModel')->getActorById(
-            $this->request->getPost('actor_id'),
-        );
+        $actor = model('ActorModel')
+            ->getActorById($this->request->getPost('actor_id'),);
 
-        model('FavouriteModel')->toggleFavourite($actor, $this->note->id);
+        model('FavouriteModel')
+            ->toggleFavourite($actor, $this->note->id);
 
         return redirect()->back();
     }
@@ -159,18 +152,18 @@ class NoteController extends Controller
             'actor_id' => 'required|is_natural_no_zero',
         ];
 
-        if (!$this->validate($rules)) {
+        if (! $this->validate($rules)) {
             return redirect()
                 ->back()
                 ->withInput()
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $actor = model('ActorModel')->getActorById(
-            $this->request->getPost('actor_id'),
-        );
+        $actor = model('ActorModel')
+            ->getActorById($this->request->getPost('actor_id'),);
 
-        model('NoteModel')->toggleReblog($actor, $this->note);
+        model('NoteModel')
+            ->toggleReblog($actor, $this->note);
 
         return redirect()->back();
     }
@@ -182,7 +175,7 @@ class NoteController extends Controller
             'message' => 'required|max_length[500]',
         ];
 
-        if (!$this->validate($rules)) {
+        if (! $this->validate($rules)) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -196,7 +189,7 @@ class NoteController extends Controller
             'published_at' => Time::now(),
         ]);
 
-        if (!model('NoteModel')->addReply($newReplyNote)) {
+        if (! model('NoteModel')->addReply($newReplyNote)) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -208,14 +201,14 @@ class NoteController extends Controller
         return redirect()->back();
     }
 
-    public function attemptRemoteAction(string $action): RedirectResponse|ResponseInterface
+    public function attemptRemoteAction(string $action): RedirectResponse | ResponseInterface
     {
         $rules = [
             'handle' =>
                 'regex_match[/^@?(?P<username>[\w\.\-]+)@(?P<host>[\w\.\-]+)(?P<port>:[\d]+)?$/]',
         ];
 
-        if (!$this->validate($rules)) {
+        if (! $this->validate($rules)) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -228,8 +221,8 @@ class NoteController extends Controller
         // parse activityPub id to get actor and domain
         // check if actor and domain exist
         if (
-            !($parts = split_handle($this->request->getPost('handle'))) ||
-            !($data = get_webfinger_data($parts['username'], $parts['domain']))
+            ! ($parts = split_handle($this->request->getPost('handle'))) ||
+            ! ($data = get_webfinger_data($parts['username'], $parts['domain']))
         ) {
             return redirect()
                 ->back()
@@ -240,20 +233,17 @@ class NoteController extends Controller
         $ostatusKey = array_search(
             'http://ostatus.org/schema/1.0/subscribe',
             array_column($data->links, 'rel'),
+            true,
         );
 
-        if (!$ostatusKey) {
+        if (! $ostatusKey) {
             // TODO: error, couldn't remote favourite/share/reply to note
             // The instance doesn't allow its users remote actions on notes
             return $this->response->setJSON([]);
         }
 
         return redirect()->to(
-            str_replace(
-                '{uri}',
-                urlencode($this->note->uri),
-                $data->links[$ostatusKey]->template,
-            ),
+            str_replace('{uri}', urlencode($this->note->uri), $data->links[$ostatusKey]->template,),
         );
     }
 

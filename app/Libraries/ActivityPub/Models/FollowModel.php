@@ -8,14 +8,14 @@
 
 namespace ActivityPub\Models;
 
-use ActivityPub\Entities\Actor;
-use ActivityPub\Entities\Follow;
-use Exception;
 use ActivityPub\Activities\FollowActivity;
 use ActivityPub\Activities\UndoActivity;
+use ActivityPub\Entities\Actor;
+use ActivityPub\Entities\Follow;
 use CodeIgniter\Database\Exceptions\DatabaseException;
 use CodeIgniter\I18n\Time;
 use CodeIgniter\Model;
+use Exception;
 use InvalidArgumentException;
 
 class FollowModel extends Model
@@ -47,11 +47,8 @@ class FollowModel extends Model
      * @param Actor $targetActor Actor that is being followed
      * @throws DatabaseException
      */
-    public function addFollower(
-        Actor $actor,
-        Actor $targetActor,
-        bool $registerActivity = true
-    ): void {
+    public function addFollower(Actor $actor, Actor $targetActor, bool $registerActivity = true): void
+    {
         try {
             $this->db->transStart();
 
@@ -65,13 +62,10 @@ class FollowModel extends Model
                 ->where('id', $targetActor->id)
                 ->increment('followers_count');
 
-            cache()->delete(
-                config('ActivityPub')->cachePrefix . "actor#{$targetActor->id}",
-            );
-            cache()->delete(
-                config('ActivityPub')->cachePrefix .
-                    "actor#{$targetActor->id}_followers",
-            );
+            cache()
+                ->delete(config('ActivityPub') ->cachePrefix . "actor#{$targetActor->id}",);
+            cache()
+                ->delete(config('ActivityPub') ->cachePrefix . "actor#{$targetActor->id}_followers",);
 
             if ($registerActivity) {
                 $followActivity = new FollowActivity();
@@ -80,26 +74,23 @@ class FollowModel extends Model
                     ->set('actor', $actor->uri)
                     ->set('object', $targetActor->uri);
 
-                $activityId = model('ActivityModel')->newActivity(
-                    'Follow',
-                    $actor->id,
-                    $targetActor->id,
-                    null,
-                    $followActivity->toJSON(),
-                    Time::now(),
-                    'queued',
-                );
+                $activityId = model('ActivityModel')
+                    ->newActivity(
+                        'Follow',
+                        $actor->id,
+                        $targetActor->id,
+                        null,
+                        $followActivity->toJSON(),
+                        Time::now(),
+                        'queued',
+                    );
 
-                $followActivity->set(
-                    'id',
-                    base_url(
-                        route_to('activity', $actor->username, $activityId),
-                    ),
-                );
+                $followActivity->set('id', base_url(route_to('activity', $actor->username, $activityId),),);
 
-                model('ActivityModel')->update($activityId, [
-                    'payload' => $followActivity->toJSON(),
-                ]);
+                model('ActivityModel')
+                    ->update($activityId, [
+                        'payload' => $followActivity->toJSON(),
+                    ]);
             }
 
             $this->db->transComplete();
@@ -114,11 +105,8 @@ class FollowModel extends Model
      * @throws InvalidArgumentException
      * @throws DatabaseException
      */
-    public function removeFollower(
-        Actor $actor,
-        Actor $targetActor,
-        bool $registerActivity = true
-    ): void {
+    public function removeFollower(Actor $actor, Actor $targetActor, bool $registerActivity = true): void
+    {
         $this->db->transStart();
 
         $this->where([
@@ -131,13 +119,10 @@ class FollowModel extends Model
             ->where('id', $targetActor->id)
             ->decrement('followers_count');
 
-        cache()->delete(
-            config('ActivityPub')->cachePrefix . "actor#{$targetActor->id}",
-        );
-        cache()->delete(
-            config('ActivityPub')->cachePrefix .
-                "actor#{$targetActor->id}_followers",
-        );
+        cache()
+            ->delete(config('ActivityPub') ->cachePrefix . "actor#{$targetActor->id}",);
+        cache()
+            ->delete(config('ActivityPub') ->cachePrefix . "actor#{$targetActor->id}_followers",);
 
         if ($registerActivity) {
             $undoActivity = new UndoActivity();
@@ -154,24 +139,23 @@ class FollowModel extends Model
                 ->set('actor', $actor->uri)
                 ->set('object', $followActivity->payload);
 
-            $activityId = model('ActivityModel')->newActivity(
-                'Undo',
-                $actor->id,
-                $targetActor->id,
-                null,
-                $undoActivity->toJSON(),
-                Time::now(),
-                'queued',
-            );
+            $activityId = model('ActivityModel')
+                ->newActivity(
+                    'Undo',
+                    $actor->id,
+                    $targetActor->id,
+                    null,
+                    $undoActivity->toJSON(),
+                    Time::now(),
+                    'queued',
+                );
 
-            $undoActivity->set(
-                'id',
-                url_to('activity', $actor->username, $activityId),
-            );
+            $undoActivity->set('id', url_to('activity', $actor->username, $activityId),);
 
-            model('ActivityModel')->update($activityId, [
-                'payload' => $undoActivity->toJSON(),
-            ]);
+            model('ActivityModel')
+                ->update($activityId, [
+                    'payload' => $undoActivity->toJSON(),
+                ]);
         }
 
         $this->db->transComplete();

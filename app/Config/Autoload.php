@@ -40,7 +40,7 @@ class Autoload extends AutoloadConfig
      * @var array<string, string>
      */
     public $psr4 = [
-        APP_NAMESPACE => APPPATH, // For custom app namespace
+        APP_NAMESPACE => APPPATH,
         'Config' => APPPATH . 'Config',
         'ActivityPub' => APPPATH . 'Libraries/ActivityPub',
         'Analytics' => APPPATH . 'Libraries/Analytics',

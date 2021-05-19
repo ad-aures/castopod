@@ -8,8 +8,8 @@
 
 namespace App\Models;
 
-use App\Entities\Note;
 use ActivityPub\Models\NoteModel as ActivityPubNoteModel;
+use App\Entities\Note;
 
 class NoteModel extends ActivityPubNoteModel
 {

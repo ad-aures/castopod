@@ -1,10 +1,8 @@
 <?php
 
 /**
- * Activity objects are specializations of the base Object type
- * that provide information about actions that have either
- * already occurred, are in the process of occurring,
- * or may occur in the future.
+ * Activity objects are specializations of the base Object type that provide information about actions that have either
+ * already occurred, are in the process of occurring, or may occur in the future.
  *
  * @copyright  2021 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -27,9 +25,6 @@ class AnnounceActivity extends Activity
 
         $this->published = $reblogNote->published_at->format(DATE_W3C);
 
-        $this->cc = [
-            $reblogNote->actor->uri,
-            $reblogNote->actor->followers_url,
-        ];
+        $this->cc = [$reblogNote->actor->uri, $reblogNote->actor->followers_url];
     }
 }

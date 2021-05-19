@@ -6,12 +6,11 @@
  * @link       https://castopod.org/
  */
 
-if (!function_exists('form_section')) {
+if (! function_exists('form_section')) {
     /**
      * Form section
      *
-     * Used to produce a responsive form section with a title and subtitle. To close section,
-     * use form_section_close()
+     * Used to produce a responsive form section with a title and subtitle. To close section, use form_section_close()
      *
      * @param string $title The section title
      * @param string $subtitle The section subtitle
@@ -48,11 +47,9 @@ if (!function_exists('form_section')) {
 
 //--------------------------------------------------------------------
 
-if (!function_exists('form_section_close')) {
+if (! function_exists('form_section_close')) {
     /**
      * Form Section close Tag
-     *
-     *
      */
     function form_section_close(string $extra = ''): string
     {
@@ -62,7 +59,7 @@ if (!function_exists('form_section_close')) {
 
 //--------------------------------------------------------------------
 
-if (!function_exists('form_switch')) {
+if (! function_exists('form_switch')) {
     /**
      * Form Checkbox Switch
      *
@@ -95,7 +92,7 @@ if (!function_exists('form_switch')) {
 
 //--------------------------------------------------------------------
 
-if (!function_exists('form_label')) {
+if (! function_exists('form_label')) {
     /**
      * Form Label Tag
      *
@@ -142,7 +139,7 @@ if (!function_exists('form_label')) {
 
 //--------------------------------------------------------------------
 
-if (!function_exists('form_multiselect')) {
+if (! function_exists('form_multiselect')) {
     /**
      * Multi-select menu
      *
@@ -160,15 +157,9 @@ if (!function_exists('form_multiselect')) {
             'data-class' => $customExtra['class'],
             'data-select-text' => lang('Common.forms.multiSelect.selectText'),
             'data-loading-text' => lang('Common.forms.multiSelect.loadingText'),
-            'data-no-results-text' => lang(
-                'Common.forms.multiSelect.noResultsText',
-            ),
-            'data-no-choices-text' => lang(
-                'Common.forms.multiSelect.noChoicesText',
-            ),
-            'data-max-item-text' => lang(
-                'Common.forms.multiSelect.maxItemText',
-            ),
+            'data-no-results-text' => lang('Common.forms.multiSelect.noResultsText',),
+            'data-no-choices-text' => lang('Common.forms.multiSelect.noChoicesText',),
+            'data-max-item-text' => lang('Common.forms.multiSelect.maxItemText',),
         ];
         $extra = stringify_attributes(array_merge($defaultExtra, $customExtra));
 

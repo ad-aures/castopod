@@ -8,7 +8,6 @@
 
 namespace App\Controllers;
 
-use CodeIgniter\Exceptions\PageNotFoundException;
 use ActivityPub\Controllers\NoteController as ActivityPubNoteController;
 use ActivityPub\Entities\Note as ActivityPubNote;
 use Analytics\AnalyticsTrait;
@@ -17,6 +16,7 @@ use App\Entities\Note as CastopodNote;
 use App\Entities\Podcast;
 use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
+use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\URI;
 use CodeIgniter\I18n\Time;
@@ -26,6 +26,7 @@ class NoteController extends ActivityPubNoteController
     use AnalyticsTrait;
 
     protected Podcast $podcast;
+
     protected Actor $actor;
 
     /**
@@ -36,9 +37,7 @@ class NoteController extends ActivityPubNoteController
     public function _remap(string $method, string ...$params): mixed
     {
         if (
-            ($this->podcast = (new PodcastModel())->getPodcastByName(
-                $params[0],
-            )) === null
+            ($this->podcast = (new PodcastModel())->getPodcastByName($params[0],)) === null
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
@@ -47,20 +46,20 @@ class NoteController extends ActivityPubNoteController
 
         if (
             count($params) > 1 &&
-            !($this->note = model('NoteModel')->getNoteById($params[1]))
+            ! ($this->note = model('NoteModel')->getNoteById($params[1]))
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
         unset($params[0]);
         unset($params[1]);
 
-        return $this->$method(...$params);
+        return $this->{$method}(...$params);
     }
 
     public function view(): string
     {
         // Prevent analytics hit when authenticated
-        if (!can_user_interact()) {
+        if (! can_user_interact()) {
             $this->registerPodcastWebpageHit($this->podcast->id);
         }
 
@@ -69,12 +68,13 @@ class NoteController extends ActivityPubNoteController
             array_filter([
                 'page',
                 "note#{$this->note->id}",
-                service('request')->getLocale(),
+                service('request')
+                    ->getLocale(),
                 can_user_interact() ? '_authenticated' : null,
             ]),
         );
 
-        if (!($cachedView = cache($cacheName))) {
+        if (! ($cachedView = cache($cacheName))) {
             $data = [
                 'podcast' => $this->podcast,
                 'actor' => $this->actor,
@@ -102,7 +102,7 @@ class NoteController extends ActivityPubNoteController
             'episode_url' => 'valid_url|permit_empty',
         ];
 
-        if (!$this->validate($rules)) {
+        if (! $this->validate($rules)) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -122,10 +122,7 @@ class NoteController extends ActivityPubNoteController
         if (
             $episodeUri &&
             ($params = extract_params_from_episode_uri(new URI($episodeUri))) &&
-            ($episode = (new EpisodeModel())->getEpisodeBySlug(
-                $params['podcastName'],
-                $params['episodeSlug'],
-            ))
+            ($episode = (new EpisodeModel())->getEpisodeBySlug($params['podcastName'], $params['episodeSlug'],))
         ) {
             $newNote->episode_id = $episode->id;
         }
@@ -133,11 +130,8 @@ class NoteController extends ActivityPubNoteController
         $newNote->message = $message;
 
         if (
-            !model('NoteModel')->addNote(
-                $newNote,
-                !(bool) $newNote->episode_id,
-                true,
-            )
+            ! model('NoteModel')
+                ->addNote($newNote, ! (bool) $newNote->episode_id, true,)
         ) {
             return redirect()
                 ->back()
@@ -155,7 +149,7 @@ class NoteController extends ActivityPubNoteController
             'message' => 'required|max_length[500]',
         ];
 
-        if (!$this->validate($rules)) {
+        if (! $this->validate($rules)) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -170,7 +164,7 @@ class NoteController extends ActivityPubNoteController
             'created_by' => user_id(),
         ]);
 
-        if (!model('NoteModel')->addReply($newNote)) {
+        if (! model('NoteModel')->addReply($newNote)) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -183,10 +177,7 @@ class NoteController extends ActivityPubNoteController
 
     public function attemptFavourite(): RedirectResponse
     {
-        model('FavouriteModel')->toggleFavourite(
-            interact_as_actor(),
-            $this->note,
-        );
+        model('FavouriteModel')->toggleFavourite(interact_as_actor(), $this->note,);
 
         return redirect()->back();
     }
@@ -204,7 +195,7 @@ class NoteController extends ActivityPubNoteController
             'action' => 'required|in_list[favourite,reblog,reply]',
         ];
 
-        if (!$this->validate($rules)) {
+        if (! $this->validate($rules)) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -231,21 +222,16 @@ class NoteController extends ActivityPubNoteController
     public function remoteAction(string $action): string
     {
         // Prevent analytics hit when authenticated
-        if (!can_user_interact()) {
+        if (! can_user_interact()) {
             $this->registerPodcastWebpageHit($this->podcast->id);
         }
 
         $cacheName = implode(
             '_',
-            array_filter([
-                'page',
-                "note#{$this->note->id}",
-                "remote_{$action}",
-                service('request')->getLocale(),
-            ]),
+            array_filter(['page', "note#{$this->note->id}", "remote_{$action}", service('request') ->getLocale()]),
         );
 
-        if (!($cachedView = cache($cacheName))) {
+        if (! ($cachedView = cache($cacheName))) {
             $data = [
                 'podcast' => $this->podcast,
                 'actor' => $this->actor,

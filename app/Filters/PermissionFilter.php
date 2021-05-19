@@ -3,23 +3,19 @@
 namespace App\Filters;
 
 use App\Models\PodcastModel;
-use Config\Services;
+use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
-use CodeIgniter\Filters\FilterInterface;
+use Config\Services;
 use Myth\Auth\Exceptions\PermissionException;
 
 class PermissionFilter implements FilterInterface
 {
     /**
-     * Do whatever processing this filter needs to do.
-     * By default it should not return anything during
-     * normal execution. However, when an abnormal state
-     * is found, it should return an instance of
-     * CodeIgniter\HTTP\Response. If it does, script
-     * execution will end and that Response will be
-     * sent back to the client, allowing for error pages,
-     * redirects, etc.
+     * Do whatever processing this filter needs to do. By default it should not return anything during normal execution.
+     * However, when an abnormal state is found, it should return an instance of CodeIgniter\HTTP\Response. If it does,
+     * script execution will end and that Response will be sent back to the client, allowing for error pages, redirects,
+     * etc.
      *
      * @param string[]|null                         $params
      * @return void|mixed
@@ -35,7 +31,7 @@ class PermissionFilter implements FilterInterface
         $authenticate = Services::authentication();
 
         // if no user is logged in then send to the login form
-        if (!$authenticate->check()) {
+        if (! $authenticate->check()) {
             session()->set('redirect_url', current_url());
             return redirect('login');
         }
@@ -72,7 +68,7 @@ class PermissionFilter implements FilterInterface
             }
         }
 
-        if (!$result) {
+        if (! $result) {
             if ($authenticate->silent()) {
                 $redirectURL = session('redirect_url') ?? '/';
                 unset($_SESSION['redirect_url']);
@@ -85,19 +81,15 @@ class PermissionFilter implements FilterInterface
     }
 
     //--------------------------------------------------------------------
+
     /**
-     * Allows After filters to inspect and modify the response
-     * object as needed. This method does not allow any way
-     * to stop execution of other after filters, short of
-     * throwing an Exception or Error.
+     * Allows After filters to inspect and modify the response object as needed. This method does not allow any way to
+     * stop execution of other after filters, short of throwing an Exception or Error.
      *
      * @param string[]|null                          $arguments
      */
-    public function after(
-        RequestInterface $request,
-        ResponseInterface $response,
-        $arguments = null
-    ): void {
+    public function after(RequestInterface $request, ResponseInterface $response, $arguments = null): void
+    {
     }
 
     //--------------------------------------------------------------------

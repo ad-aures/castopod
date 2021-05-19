@@ -1,8 +1,7 @@
 <?php
 
 /**
- * This class defines a Paginated OrderedCollection
- * based on CodeIgniter4 Pager to get the pagination metadata
+ * This class defines a Paginated OrderedCollection based on CodeIgniter4 Pager to get the pagination metadata
  *
  * @copyright  2021 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -11,15 +10,19 @@
 
 namespace ActivityPub\Objects;
 
-use CodeIgniter\Pager\Pager;
 use ActivityPub\Core\ObjectType;
+use CodeIgniter\Pager\Pager;
 
 class OrderedCollectionObject extends ObjectType
 {
     protected string $type = 'OrderedCollection';
+
     protected int $totalItems;
+
     protected ?string $first;
+
     protected ?string $current;
+
     protected ?string $last;
 
     /**

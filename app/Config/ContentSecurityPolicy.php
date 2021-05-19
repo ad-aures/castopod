@@ -5,9 +5,8 @@ namespace Config;
 use CodeIgniter\Config\BaseConfig;
 
 /**
- * Stores the default settings for the ContentSecurityPolicy, if you
- * choose to use it. The values here will be read in and set as defaults
- * for the site. If needed, they can be overridden on a page-by-page basis.
+ * Stores the default settings for the ContentSecurityPolicy, if you choose to use it. The values here will be read in
+ * and set as defaults for the site. If needed, they can be overridden on a page-by-page basis.
  *
  * Suggested reference for explanations:
  *
@@ -15,64 +14,49 @@ use CodeIgniter\Config\BaseConfig;
  */
 class ContentSecurityPolicy extends BaseConfig
 {
-    //-------------------------------------------------------------------------
-    // Broadbrush CSP management
-    //-------------------------------------------------------------------------
-
     /**
      * Default CSP report context
-     *
      */
     public bool $reportOnly = false;
 
     /**
-     * Specifies a URL where a browser will send reports
-     * when a content security policy is violated.
-     *
-     * @var string|null
+     * Specifies a URL where a browser will send reports when a content security policy is violated.
      */
     public ?string $reportURI = null;
 
     /**
-     * Instructs user agents to rewrite URL schemes, changing
-     * HTTP to HTTPS. This directive is for websites with
-     * large numbers of old URLs that need to be rewritten.
-     *
+     * Instructs user agents to rewrite URL schemes, changing HTTP to HTTPS. This directive is for websites with large
+     * numbers of old URLs that need to be rewritten.
      */
     public bool $upgradeInsecureRequests = false;
-
-    //-------------------------------------------------------------------------
-    // Sources allowed
-    // Note: once you set a policy to 'none', it cannot be further restricted
-    //-------------------------------------------------------------------------
 
     /**
      * Will default to self if not overridden
      *
      * @var string|string[]|null
      */
-    public string|array|null $defaultSrc;
+    public string | array | null $defaultSrc;
 
     /**
      * Lists allowed scripts' URLs.
      *
      * @var string|string[]
      */
-    public string|array $scriptSrc = 'self';
+    public string | array $scriptSrc = 'self';
 
     /**
      * Lists allowed stylesheets' URLs.
      *
      * @var string|string[]
      */
-    public string|array $styleSrc = 'self';
+    public string | array $styleSrc = 'self';
 
     /**
      * Defines the origins from which images can be loaded.
      *
      * @var string|string[]
      */
-    public string|array $imageSrc = 'self';
+    public string | array $imageSrc = 'self';
 
     /**
      * Restricts the URLs that can appear in a page's `<base>` element.
@@ -81,77 +65,75 @@ class ContentSecurityPolicy extends BaseConfig
      *
      * @var string|string[]|null
      */
-    public string|array|null $baseURI;
+    public string | array | null $baseURI;
 
     /**
      * Lists the URLs for workers and embedded frame contents
      *
      * @var string|string[]
      */
-    public string|array $childSrc = 'self';
+    public string | array $childSrc = 'self';
 
     /**
-     * Limits the origins that you can connect to (via XHR,
-     * WebSockets, and EventSource).
+     * Limits the origins that you can connect to (via XHR, WebSockets, and EventSource).
      *
      * @var string|string[]
      */
-    public string|array $connectSrc = 'self';
+    public string | array $connectSrc = 'self';
 
     /**
      * Specifies the origins that can serve web fonts.
      *
      * @var string|string[]
      */
-    public string|array $fontSrc;
+    public string | array $fontSrc;
 
     /**
      * Lists valid endpoints for submission from `<form>` tags.
      *
      * @var string|string[]
      */
-    public string|array $formAction = 'self';
+    public string | array $formAction = 'self';
 
     /**
-     * Specifies the sources that can embed the current page.
-     * This directive applies to `<frame>`, `<iframe>`, `<embed>`,
-     * and `<applet>` tags. This directive can't be used in
-     * `<meta>` tags and applies only to non-HTML resources.
+     * Specifies the sources that can embed the current page. This directive applies to `<frame>`, `<iframe>`,
+     * `<embed>`, and `<applet>` tags. This directive can't be used in `<meta>` tags and applies only to non-HTML
+     * resources.
      *
      * @var string|string[]|null
      */
-    public string|array|null $frameAncestors;
+    public string | array | null $frameAncestors;
 
     /**
      * Restricts the origins allowed to deliver video and audio.
      *
      * @var string|string[]|null
      */
-    public string|array|null $mediaSrc;
+    public string | array | null $mediaSrc;
 
     /**
      * Allows control over Flash and other plugins.
      *
      * @var string|string[]
      */
-    public string|array $objectSrc = 'self';
+    public string | array $objectSrc = 'self';
 
     /**
      * @var string|string[]|null
      */
-    public string|array|null $manifestSrc;
+    public string | array | null $manifestSrc;
 
     /**
      * Limits the kinds of plugins a page may invoke.
      *
      * @var string|string[]|null
      */
-    public string|array|null $pluginTypes;
+    public string | array | null $pluginTypes;
 
     /**
      * List of actions allowed.
      *
      * @var string|string[]|null
      */
-    public string|array|null $sandbox;
+    public string | array | null $sandbox;
 }

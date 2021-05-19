@@ -8,20 +8,20 @@
 
 namespace App\Controllers;
 
-use CodeIgniter\HTTP\RequestInterface;
-use CodeIgniter\HTTP\ResponseInterface;
-use Psr\Log\LoggerInterface;
-use Throwable;
-use Dotenv\Exception\ValidationException;
-use CodeIgniter\Exceptions\PageNotFoundException;
-use CodeIgniter\Database\Exceptions\DatabaseException;
-use Config\Database;
 use App\Entities\User;
 use App\Models\UserModel;
 use CodeIgniter\Controller;
+use CodeIgniter\Database\Exceptions\DatabaseException;
+use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
+use CodeIgniter\HTTP\RequestInterface;
+use CodeIgniter\HTTP\ResponseInterface;
+use Config\Database;
 use Config\Services;
 use Dotenv\Dotenv;
+use Dotenv\Exception\ValidationException;
+use Psr\Log\LoggerInterface;
+use Throwable;
 
 class InstallController extends Controller
 {
@@ -43,15 +43,13 @@ class InstallController extends Controller
     }
 
     /**
-     * Every operation goes through this method to handle
-     * the install logic.
+     * Every operation goes through this method to handle the install logic.
      *
-     * If all required actions have already been performed,
-     * the install route will show a 404 page.
+     * If all required actions have already been performed, the install route will show a 404 page.
      */
     public function index(): string
     {
-        if (!file_exists(ROOTPATH . '.env')) {
+        if (! file_exists(ROOTPATH . '.env')) {
             // create empty .env file
             try {
                 $envFile = fopen(ROOTPATH . '.env', 'w');
@@ -69,11 +67,7 @@ class InstallController extends Controller
         // Check if the created .env file is writable to continue install process
         if (is_really_writable(ROOTPATH . '.env')) {
             try {
-                $dotenv->required([
-                    'app.baseURL',
-                    'app.adminGateway',
-                    'app.authGateway',
-                ]);
+                $dotenv->required(['app.baseURL', 'app.adminGateway', 'app.authGateway']);
             } catch (ValidationException $e) {
                 // form to input instance configuration
                 return $this->instanceConfig();
@@ -128,10 +122,8 @@ class InstallController extends Controller
         } catch (DatabaseException) {
             // Could not connect to the database
             // show database config view to fix value
-            session()->setFlashdata(
-                'error',
-                lang('Install.messages.databaseConnectError'),
-            );
+            session()
+                ->setFlashdata('error', lang('Install.messages.databaseConnectError'),);
 
             return view('install/database_config');
         }
@@ -159,13 +151,9 @@ class InstallController extends Controller
             'auth_gateway' => 'required|differs[admin_gateway]',
         ];
 
-        if (!$this->validate($rules)) {
+        if (! $this->validate($rules)) {
             return redirect()
-                ->to(
-                    (host_url() === null
-                        ? config('App')->baseURL
-                        : host_url()) . config('App')->installGateway,
-                )
+                ->to((host_url() === null ? config('App') ->baseURL : host_url()) . config('App')->installGateway,)
                 ->withInput()
                 ->with('errors', $this->validator->getErrors());
         }
@@ -183,11 +171,7 @@ class InstallController extends Controller
         helper('text');
 
         // redirect to full install url with new baseUrl input
-        return redirect()->to(
-            reduce_double_slashes(
-                $baseUrl . '/' . config('App')->installGateway,
-            ),
-        );
+        return redirect()->to(reduce_double_slashes($baseUrl . '/' . config('App')->installGateway,),);
     }
 
     public function databaseConfig(): string
@@ -204,7 +188,7 @@ class InstallController extends Controller
             'db_password' => 'required',
         ];
 
-        if (!$this->validate($rules)) {
+        if (! $this->validate($rules)) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -212,16 +196,10 @@ class InstallController extends Controller
         }
 
         self::writeEnv([
-            'database.default.hostname' => $this->request->getPost(
-                'db_hostname',
-            ),
+            'database.default.hostname' => $this->request->getPost('db_hostname',),
             'database.default.database' => $this->request->getPost('db_name'),
-            'database.default.username' => $this->request->getPost(
-                'db_username',
-            ),
-            'database.default.password' => $this->request->getPost(
-                'db_password',
-            ),
+            'database.default.username' => $this->request->getPost('db_username',),
+            'database.default.password' => $this->request->getPost('db_password',),
             'database.default.DBPrefix' => $this->request->getPost('db_prefix'),
         ]);
 
@@ -239,7 +217,7 @@ class InstallController extends Controller
             'cache_handler' => 'required',
         ];
 
-        if (!$this->validate($rules)) {
+        if (! $this->validate($rules)) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -260,10 +238,14 @@ class InstallController extends Controller
     {
         $migrations = Services::migrations();
 
-        $migrations->setNamespace('Myth\Auth')->latest();
-        $migrations->setNamespace('ActivityPub')->latest();
-        $migrations->setNamespace('Analytics')->latest();
-        $migrations->setNamespace(APP_NAMESPACE)->latest();
+        $migrations->setNamespace('Myth\Auth')
+            ->latest();
+        $migrations->setNamespace('ActivityPub')
+            ->latest();
+        $migrations->setNamespace('Analytics')
+            ->latest();
+        $migrations->setNamespace(APP_NAMESPACE)
+            ->latest();
     }
 
     /**
@@ -297,14 +279,16 @@ class InstallController extends Controller
         // Validate here first, since some things,
         // like the password, can only be validated properly here.
         $rules = array_merge(
-            $userModel->getValidationRules(['only' => ['username']]),
+            $userModel->getValidationRules([
+                'only' => ['username'],
+            ]),
             [
                 'email' => 'required|valid_email|is_unique[users.email]',
                 'password' => 'required|strong_password',
             ],
         );
 
-        if (!$this->validate($rules)) {
+        if (! $this->validate($rules)) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -320,7 +304,7 @@ class InstallController extends Controller
         $db = Database::connect();
 
         $db->transStart();
-        if (!($userId = $userModel->insert($user, true))) {
+        if (! ($userId = $userModel->insert($user, true))) {
             $db->transRollback();
 
             return redirect()
@@ -337,7 +321,8 @@ class InstallController extends Controller
 
         // Success!
         // set redirect_url session as admin area to go to after login
-        session()->set('redirect_url', route_to('admin'));
+        session()
+            ->set('redirect_url', route_to('admin'));
 
         return redirect()
             ->route('login')
@@ -345,8 +330,7 @@ class InstallController extends Controller
     }
 
     /**
-     * writes config values in .env file
-     * overwrites any existing key and appends new ones
+     * writes config values in .env file overwrites any existing key and appends new ones
      *
      * @param array<string, string> $configData key/value config pairs
      */
@@ -357,20 +341,18 @@ class InstallController extends Controller
         foreach ($configData as $key => $value) {
             $replaced = false;
             $keyVal = $key . '="' . $value . '"' . PHP_EOL;
-            $envData = array_map(function ($line) use (
-                $key,
-                $keyVal,
-                &$replaced
-            ) {
-                if (str_starts_with($line, (string) $key)) {
-                    $replaced = true;
-                    return $keyVal;
-                }
-                return $line;
-            },
-            $envData);
+            $envData = array_map(
+                function ($line) use ($key, $keyVal, &$replaced) {
+                    if (str_starts_with($line, (string) $key)) {
+                        $replaced = true;
+                        return $keyVal;
+                    }
+                    return $line;
+                },
+                $envData
+            );
 
-            if (!$replaced) {
+            if (! $replaced) {
                 $envData[] = $keyVal;
             }
         }

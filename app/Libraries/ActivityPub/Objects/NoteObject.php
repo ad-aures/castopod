@@ -1,8 +1,7 @@
 <?php
 
 /**
- * This class defines the Object which is the
- * primary base type for the Activity Streams vocabulary.
+ * This class defines the Object which is the primary base type for the Activity Streams vocabulary.
  *
  * Object is a reserved word in php, so the class is named ObjectType.
  *
@@ -13,14 +12,17 @@
 
 namespace ActivityPub\Objects;
 
-use ActivityPub\Entities\Note;
 use ActivityPub\Core\ObjectType;
+use ActivityPub\Entities\Note;
 
 class NoteObject extends ObjectType
 {
     protected string $type = 'Note';
+
     protected string $attributedTo;
+
     protected string $inReplyTo;
+
     protected string $replies;
 
     public function __construct(Note $note)
@@ -35,9 +37,7 @@ class NoteObject extends ObjectType
             $this->inReplyTo = $note->reply_to_note->uri;
         }
 
-        $this->replies = base_url(
-            route_to('note-replies', $note->actor->username, $note->id),
-        );
+        $this->replies = base_url(route_to('note-replies', $note->actor->username, $note->id),);
 
         $this->cc = [$note->actor->followers_url];
     }

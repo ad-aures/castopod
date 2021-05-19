@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Class AnalyticsPodcastByHour
- * Model for analytics_podcasts_by_hour table in database
+ * Class AnalyticsPodcastByHour Model for analytics_podcasts_by_hour table in database
+ *
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
@@ -24,6 +24,7 @@ class AnalyticsPodcastByHourModel extends Model
      * @var string
      */
     protected $returnType = AnalyticsPodcastsByHour::class;
+
     /**
      * @var bool
      */
@@ -41,7 +42,7 @@ class AnalyticsPodcastByHourModel extends Model
      */
     public function getData(int $podcastId): array
     {
-        if (!($found = cache("{$podcastId}_analytics_podcasts_by_hour"))) {
+        if (! ($found = cache("{$podcastId}_analytics_podcasts_by_hour"))) {
             $found = $this->select("right(concat('0',hour,'h'),3) as labels")
                 ->selectSum('hits', 'values')
                 ->where([
@@ -52,11 +53,8 @@ class AnalyticsPodcastByHourModel extends Model
                 ->orderBy('labels', 'ASC')
                 ->findAll();
 
-            cache()->save(
-                "{$podcastId}_analytics_podcasts_by_hour",
-                $found,
-                600,
-            );
+            cache()
+                ->save("{$podcastId}_analytics_podcasts_by_hour", $found, 600,);
         }
 
         return $found;

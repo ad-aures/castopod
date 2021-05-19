@@ -26,6 +26,7 @@ use League\CommonMark\CommonMarkConverter;
 class Page extends Entity
 {
     protected string $link;
+
     protected string $content_html;
 
     /**
@@ -52,9 +53,7 @@ class Page extends Entity
         ]);
 
         $this->attributes['content_markdown'] = $contentMarkdown;
-        $this->attributes['content_html'] = $converter->convertToHtml(
-            $contentMarkdown,
-        );
+        $this->attributes['content_html'] = $converter->convertToHtml($contentMarkdown,);
 
         return $this;
     }

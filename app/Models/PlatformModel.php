@@ -1,8 +1,7 @@
 <?php
 
 /**
- * Class PlatformModel
- * Model for platforms table in database
+ * Class PlatformModel Model for platforms table in database
  *
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -12,7 +11,6 @@
 namespace App\Models;
 
 use App\Entities\Platform;
-use CodeIgniter\Database\Exceptions\DatabaseException;
 use CodeIgniter\Model;
 
 class PlatformModel extends Model
@@ -21,6 +19,7 @@ class PlatformModel extends Model
      * @var string
      */
     protected $table = 'platforms';
+
     /**
      * @var string
      */
@@ -29,18 +28,13 @@ class PlatformModel extends Model
     /**
      * @var string[]
      */
-    protected $allowedFields = [
-        'slug',
-        'type',
-        'label',
-        'home_url',
-        'submit_url',
-    ];
+    protected $allowedFields = ['slug', 'type', 'label', 'home_url', 'submit_url'];
 
     /**
      * @var string
      */
     protected $returnType = Platform::class;
+
     /**
      * @var bool
      */
@@ -56,12 +50,13 @@ class PlatformModel extends Model
      */
     public function getPlatforms(): array
     {
-        if (!($found = cache('platforms'))) {
+        if (! ($found = cache('platforms'))) {
             $baseUrl = rtrim(config('app')->baseURL, '/');
             $found = $this->select(
                 "*, CONCAT('{$baseUrl}/assets/images/platforms/',`type`,'/',`slug`,'.svg') as icon",
             )->findAll();
-            cache()->save('platforms', $found, DECADE);
+            cache()
+                ->save('platforms', $found, DECADE);
         }
         return $found;
     }
@@ -69,9 +64,11 @@ class PlatformModel extends Model
     public function getPlatform(string $slug): ?Platform
     {
         $cacheName = "platform-{$slug}";
-        if (!($found = cache($cacheName))) {
-            $found = $this->where('slug', $slug)->first();
-            cache()->save($cacheName, $found, DECADE);
+        if (! ($found = cache($cacheName))) {
+            $found = $this->where('slug', $slug)
+                ->first();
+            cache()
+                ->save($cacheName, $found, DECADE);
         }
         return $found;
     }
@@ -82,7 +79,7 @@ class PlatformModel extends Model
         string $label,
         string $homeUrl,
         string $submitUrl = null
-    ): int|false {
+    ): int | false {
         $data = [
             'slug' => $slug,
             'type' => $type,
@@ -95,14 +92,12 @@ class PlatformModel extends Model
     }
 
     /**
-     * @return Platform[] 
+     * @return Platform[]
      */
     public function getPlatformsWithLinks(int $podcastId, string $platformType): array
     {
         if (
-            !($found = cache(
-                "podcast#{$podcastId}_platforms_{$platformType}_withLinks",
-            ))
+            ! ($found = cache("podcast#{$podcastId}_platforms_{$platformType}_withLinks",))
         ) {
             $found = $this->select(
                 'platforms.*, podcasts_platforms.link_url, podcasts_platforms.link_content, podcasts_platforms.is_visible, podcasts_platforms.is_on_embeddable_player',
@@ -115,11 +110,8 @@ class PlatformModel extends Model
                 ->where('platforms.type', $platformType)
                 ->findAll();
 
-            cache()->save(
-                "podcast#{$podcastId}_platforms_{$platformType}_withLinks",
-                $found,
-                DECADE,
-            );
+            cache()
+                ->save("podcast#{$podcastId}_platforms_{$platformType}_withLinks", $found, DECADE,);
         }
 
         return $found;
@@ -131,47 +123,44 @@ class PlatformModel extends Model
     public function getPodcastPlatforms(int $podcastId, string $platformType): array
     {
         $cacheName = "podcast#{$podcastId}_platforms_{$platformType}";
-        if (!($found = cache($cacheName))) {
+        if (! ($found = cache($cacheName))) {
             $found = $this->select(
                 'platforms.*, podcasts_platforms.link_url, podcasts_platforms.link_content, podcasts_platforms.is_visible, podcasts_platforms.is_on_embeddable_player',
             )
-                ->join(
-                    'podcasts_platforms',
-                    'podcasts_platforms.platform_slug = platforms.slug',
-                )
+                ->join('podcasts_platforms', 'podcasts_platforms.platform_slug = platforms.slug',)
                 ->where('podcasts_platforms.podcast_id', $podcastId)
                 ->where('platforms.type', $platformType)
                 ->findAll();
 
-            cache()->save($cacheName, $found, DECADE);
+            cache()
+                ->save($cacheName, $found, DECADE);
         }
 
         return $found;
     }
 
     /**
-     * @param mixed[] $podcastsPlatformsData 
+     * @param mixed[] $podcastsPlatformsData
      */
     public function savePodcastPlatforms(
         int $podcastId,
         string $platformType,
         array $podcastsPlatformsData
-    ): int|false {
+    ): int | false {
         $this->clearCache($podcastId);
 
         $podcastsPlatformsTable = $this->db->prefixTable('podcasts_platforms');
         $platformsTable = $this->db->prefixTable('platforms');
 
-        $deleteJoinQuery = <<<SQL
+        $deleteJoinQuery = <<<CODE_SAMPLE
         DELETE {$podcastsPlatformsTable}
         FROM {$podcastsPlatformsTable}
         INNER JOIN {$platformsTable} ON {$platformsTable}.slug = {$podcastsPlatformsTable}.platform_slug
         WHERE `podcast_id` = ? AND `type` = ?
-        SQL;
+        CODE_SAMPLE;
 
         $this->db->query($deleteJoinQuery, [$podcastId, $platformType]);
 
-        // Set podcastPlatforms
         return $this->db
             ->table('podcasts_platforms')
             ->insertBatch($podcastsPlatformsData);
@@ -180,24 +169,24 @@ class PlatformModel extends Model
     /**
      * @param mixed[] $podcastsPlatformsData
      */
-    public function createPodcastPlatforms(int $podcastId, array $podcastsPlatformsData): int|false
+    public function createPodcastPlatforms(int $podcastId, array $podcastsPlatformsData): int | false
     {
         $this->clearCache($podcastId);
 
-        // Set podcastPlatforms
         return $this->db
             ->table('podcasts_platforms')
             ->insertBatch($podcastsPlatformsData);
     }
 
-    public function removePodcastPlatform(int $podcastId, string $platformSlug): bool|string
+    public function removePodcastPlatform(int $podcastId, string $platformSlug): bool | string
     {
         $this->clearCache($podcastId);
 
-        return $this->db->table('podcasts_platforms')->delete([
-            'podcast_id' => $podcastId,
-            'platform_slug' => $platformSlug,
-        ]);
+        return $this->db->table('podcasts_platforms')
+            ->delete([
+                'podcast_id' => $podcastId,
+                'platform_slug' => $platformSlug,
+            ]);
     }
 
     public function clearCache(int $podcastId): void
@@ -205,6 +194,7 @@ class PlatformModel extends Model
         cache()->deleteMatching("podcast#{$podcastId}_platforms_*");
 
         // delete localized podcast page cache
-        cache()->deleteMatching("page_podcast#{$podcastId}*");
+        cache()
+            ->deleteMatching("page_podcast#{$podcastId}*");
     }
 }

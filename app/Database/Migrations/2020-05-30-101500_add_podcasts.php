@@ -1,8 +1,7 @@
 <?php
 
 /**
- * Class AddPodcasts
- * Creates podcasts table in database
+ * Class AddPodcasts Creates podcasts table in database
  *
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -190,13 +189,7 @@ class AddPodcasts extends Migration
         // TODO: remove name in favor of username from actor
         $this->forge->addUniqueKey('name');
         $this->forge->addUniqueKey('actor_id');
-        $this->forge->addForeignKey(
-            'actor_id',
-            'activitypub_actors',
-            'id',
-            '',
-            'CASCADE',
-        );
+        $this->forge->addForeignKey('actor_id', 'activitypub_actors', 'id', '', 'CASCADE',);
         $this->forge->addForeignKey('category_id', 'categories', 'id');
         $this->forge->addForeignKey('language_code', 'languages', 'code');
         $this->forge->addForeignKey('created_by', 'users', 'id');

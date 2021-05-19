@@ -1,8 +1,7 @@
 <?php
 
 /**
- * Class AddAnalyticsWebsiteProcedure
- * Creates analytics_website stored procedure in database
+ * Class AddAnalyticsWebsiteProcedure Creates analytics_website stored procedure in database
  *
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -20,7 +19,7 @@ class AddAnalyticsWebsiteProcedure extends Migration
         // Creates Procedure for data insertion
         // Example: CALL analytics_website(1,'FR','Firefox');
         $procedureName = $this->db->prefixTable('analytics_website');
-        $createQuery = <<<EOD
+        $createQuery = <<<CODE_SAMPLE
         CREATE PROCEDURE `{$procedureName}` (IN `p_podcast_id` INT UNSIGNED, IN `p_browser` VARCHAR(191) CHARSET utf8mb4, IN `p_entry_page` VARCHAR(512) CHARSET utf8mb4, IN `p_referer_url` VARCHAR(512) CHARSET utf8mb4, IN `p_domain` VARCHAR(128) CHARSET utf8mb4, IN `p_keywords` VARCHAR(384) CHARSET utf8mb4)  MODIFIES SQL DATA
         DETERMINISTIC
         SQL SECURITY INVOKER
@@ -39,7 +38,7 @@ class AddAnalyticsWebsiteProcedure extends Migration
             VALUES (p_podcast_id, p_entry_page, @current_date)
             ON DUPLICATE KEY UPDATE `hits`=`hits`+1;
         END
-        EOD;
+        CODE_SAMPLE;
         $this->db->query($createQuery);
     }
 

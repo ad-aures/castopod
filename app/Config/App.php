@@ -2,8 +2,8 @@
 
 namespace Config;
 
-use CodeIgniter\Session\Handlers\FileHandler;
 use CodeIgniter\Config\BaseConfig;
+use CodeIgniter\Session\Handlers\FileHandler;
 
 class App extends BaseConfig
 {
@@ -21,7 +21,6 @@ class App extends BaseConfig
      * and path to your installation. However, you should always configure this
      * explicitly and never rely on auto-guessing, especially in production
      * environments.
-     *
      */
     public string $baseURL = 'http://localhost:8080/';
 
@@ -34,7 +33,6 @@ class App extends BaseConfig
      * WITH a trailing slash:
      *
      *    http://cdn.example.com/
-     *
      */
     public string $mediaBaseURL = 'http://127.0.0.2:8080/';
 
@@ -46,7 +44,6 @@ class App extends BaseConfig
      * Typically this will be your index.php file, unless you've renamed it to
      * something else. If you are using mod_rewrite to remove the page set this
      * variable so that it is blank.
-     *
      */
     public string $indexPage = '';
 
@@ -64,7 +61,6 @@ class App extends BaseConfig
      * 'PATH_INFO'      Uses $_SERVER['PATH_INFO']
      *
      * WARNING: If you set this to 'PATH_INFO', URIs will always be URL-decoded!
-     *
      */
     public string $uriProtocol = 'REQUEST_URI';
 
@@ -77,7 +73,6 @@ class App extends BaseConfig
      * is viewing the site from. It affects the language strings and other
      * strings (like currency markers, numbers, etc), that your program
      * should run under for this request.
-     *
      */
     public string $defaultLocale = 'en';
 
@@ -113,7 +108,6 @@ class App extends BaseConfig
      *
      * The default timezone that will be used in your application to display
      * dates with the date helper, and can be retrieved through app_timezone()
-     *
      */
     public string $appTimezone = 'UTC';
 
@@ -126,7 +120,6 @@ class App extends BaseConfig
      * that require a character set to be provided.
      *
      * @see http://php.net/htmlspecialchars for a list of supported charsets.
-     *
      */
     public string $charset = 'UTF-8';
 
@@ -139,7 +132,6 @@ class App extends BaseConfig
      * made via a secure connection (HTTPS). If the incoming request is not
      * secure, the user will be redirected to a secure version of the page
      * and the HTTP Strict Transport Security header will be set.
-     *
      */
     public bool $forceGlobalSecureRequests = true;
 
@@ -153,7 +145,6 @@ class App extends BaseConfig
      * - `CodeIgniter\Session\Handlers\DatabaseHandler`
      * - `CodeIgniter\Session\Handlers\MemcachedHandler`
      * - `CodeIgniter\Session\Handlers\RedisHandler`
-     *
      */
     public string $sessionDriver = FileHandler::class;
 
@@ -163,7 +154,6 @@ class App extends BaseConfig
      * --------------------------------------------------------------------------
      *
      * The session cookie name, must contain only [0-9a-z_-] characters
-     *
      */
     public string $sessionCookieName = 'ci_session';
 
@@ -174,7 +164,6 @@ class App extends BaseConfig
      *
      * The number of SECONDS you want the session to last.
      * Setting to 0 (zero) means expire when the browser is closed.
-     *
      */
     public int $sessionExpiration = 7200;
 
@@ -192,7 +181,6 @@ class App extends BaseConfig
      * Please read up the manual for the format with other session drivers.
      *
      * IMPORTANT: You are REQUIRED to set a valid save path!
-     *
      */
     public string $sessionSavePath = WRITEPATH . 'session';
 
@@ -205,7 +193,6 @@ class App extends BaseConfig
      *
      * WARNING: If you're using the database driver, don't forget to update
      *          your session table's PRIMARY KEY when changing this setting.
-     *
      */
     public bool $sessionMatchIP = false;
 
@@ -215,7 +202,6 @@ class App extends BaseConfig
      * --------------------------------------------------------------------------
      *
      * How many seconds between CI regenerating the session ID.
-     *
      */
     public int $sessionTimeToUpdate = 300;
 
@@ -227,7 +213,6 @@ class App extends BaseConfig
      * Whether to destroy session data associated with the old session ID
      * when auto-regenerating the session ID. When set to FALSE, the data
      * will be later deleted by the garbage collector.
-     *
      */
     public bool $sessionRegenerateDestroy = false;
 
@@ -237,8 +222,6 @@ class App extends BaseConfig
      * --------------------------------------------------------------------------
      *
      * Set a cookie name prefix if you need to avoid collisions.
-     *
-     * @var string
      *
      * @deprecated use Config\Cookie::$prefix property instead.
      */
@@ -251,8 +234,6 @@ class App extends BaseConfig
      *
      * Set to `.your-domain.com` for site-wide cookies.
      *
-     * @var string
-     *
      * @deprecated use Config\Cookie::$domain property instead.
      */
     public string $cookieDomain = '';
@@ -264,8 +245,6 @@ class App extends BaseConfig
      *
      * Typically will be a forward slash.
      *
-     * @var string
-     *
      * @deprecated use Config\Cookie::$path property instead.
      */
     public string $cookiePath = '/';
@@ -276,8 +255,6 @@ class App extends BaseConfig
      * --------------------------------------------------------------------------
      *
      * Cookie will only be set if a secure HTTPS connection exists.
-     *
-     * @var bool
      *
      * @deprecated use Config\Cookie::$secure property instead.
      */
@@ -316,8 +293,6 @@ class App extends BaseConfig
      * (empty string) means default SameSite attribute set by browsers (`Lax`)
      * will be set on cookies. If set to `None`, `$cookieSecure` must also be set.
      *
-     * @var string
-     *
      * @deprecated use Config\Cookie::$samesite property instead.
      */
     public string $cookieSameSite = 'Lax';
@@ -340,7 +315,7 @@ class App extends BaseConfig
      *
      * @var string|string[]
      */
-    public string|array $proxyIPs = '';
+    public string | array $proxyIPs = '';
 
     /**
      * --------------------------------------------------------------------------

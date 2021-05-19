@@ -6,16 +6,16 @@
  * @link       https://castopod.org/
  */
 
+use ActivityPub\Activities\AcceptActivity;
+use ActivityPub\ActivityRequest;
+use ActivityPub\Entities\Actor;
+use ActivityPub\Entities\PreviewCard;
+use CodeIgniter\HTTP\Exceptions\HTTPException;
 use CodeIgniter\HTTP\URI;
 use Config\Database;
 use Essence\Essence;
-use ActivityPub\Entities\PreviewCard;
-use ActivityPub\Entities\Actor;
-use ActivityPub\Activities\AcceptActivity;
-use ActivityPub\ActivityRequest;
-use CodeIgniter\HTTP\Exceptions\HTTPException;
 
-if (!function_exists('get_webfinger_data')) {
+if (! function_exists('get_webfinger_data')) {
     /**
      * Retrieve actor webfinger data from username and domain
      */
@@ -30,16 +30,11 @@ if (!function_exists('get_webfinger_data')) {
         $webfingerRequest = new ActivityRequest($webfingerUri);
         $webfingerResponse = $webfingerRequest->get();
 
-        return json_decode(
-            $webfingerResponse->getBody(),
-            false,
-            512,
-            JSON_THROW_ON_ERROR,
-        );
+        return json_decode($webfingerResponse->getBody(), false, 512, JSON_THROW_ON_ERROR,);
     }
 }
 
-if (!function_exists('split_handle')) {
+if (! function_exists('split_handle')) {
     /**
      * Splits handle into its parts (username, host and port)
      *
@@ -48,11 +43,7 @@ if (!function_exists('split_handle')) {
     function split_handle(string $handle)
     {
         if (
-            !preg_match(
-                '~^@?(?P<username>[\w\.\-]+)@(?P<domain>[\w\.\-]+)(?P<port>:[\d]+)?$~',
-                $handle,
-                $matches,
-            )
+            ! preg_match('~^@?(?P<username>[\w\.\-]+)@(?P<domain>[\w\.\-]+)(?P<port>:[\d]+)?$~', $handle, $matches,)
         ) {
             return false;
         }
@@ -61,20 +52,18 @@ if (!function_exists('split_handle')) {
     }
 }
 
-if (!function_exists('accept_follow')) {
+if (! function_exists('accept_follow')) {
     /**
      * Sends an accept activity to the targetActor's inbox
      *
      * @param Actor $actor Actor which accepts the follow
      * @param Actor $targetActor Actor which receives the accept follow
      */
-    function accept_follow(
-        Actor $actor,
-        Actor $targetActor,
-        string $objectId
-    ): void {
+    function accept_follow(Actor $actor, Actor $targetActor, string $objectId): void
+    {
         $acceptActivity = new AcceptActivity();
-        $acceptActivity->set('actor', $actor->uri)->set('object', $objectId);
+        $acceptActivity->set('actor', $actor->uri)
+            ->set('object', $objectId);
 
         $db = Database::connect();
         $db->transStart();
@@ -88,20 +77,14 @@ if (!function_exists('accept_follow')) {
             $acceptActivity->toJSON(),
         );
 
-        $acceptActivity->set(
-            'id',
-            url_to('activity', $actor->username, $activityId),
-        );
+        $acceptActivity->set('id', url_to('activity', $actor->username, $activityId),);
 
         $activityModel->update($activityId, [
             'payload' => $acceptActivity->toJSON(),
         ]);
 
         try {
-            $acceptRequest = new ActivityRequest(
-                $targetActor->inbox_url,
-                $acceptActivity->toJSON(),
-            );
+            $acceptRequest = new ActivityRequest($targetActor->inbox_url, $acceptActivity->toJSON(),);
             $acceptRequest->sign($actor->public_key_id, $actor->private_key);
             $acceptRequest->post();
         } catch (Exception) {
@@ -112,24 +95,16 @@ if (!function_exists('accept_follow')) {
     }
 }
 
-if (!function_exists('send_activity_to_followers')) {
+if (! function_exists('send_activity_to_followers')) {
     /**
      * Sends an activity to all actor followers
      */
-    function send_activity_to_followers(
-        Actor $actor,
-        string $activityPayload
-    ): void {
+    function send_activity_to_followers(Actor $actor, string $activityPayload): void
+    {
         foreach ($actor->followers as $follower) {
             try {
-                $acceptRequest = new ActivityRequest(
-                    $follower->inbox_url,
-                    $activityPayload,
-                );
-                $acceptRequest->sign(
-                    $actor->public_key_id,
-                    $actor->private_key,
-                );
+                $acceptRequest = new ActivityRequest($follower->inbox_url, $activityPayload,);
+                $acceptRequest->sign($actor->public_key_id, $actor->private_key,);
                 $acceptRequest->post();
             } catch (Exception $e) {
                 // log error
@@ -139,7 +114,7 @@ if (!function_exists('send_activity_to_followers')) {
     }
 }
 
-if (!function_exists('extract_urls_from_message')) {
+if (! function_exists('extract_urls_from_message')) {
     /**
      * Returns an array of all urls from a string
      *
@@ -147,17 +122,13 @@ if (!function_exists('extract_urls_from_message')) {
      */
     function extract_urls_from_message(string $message): array
     {
-        preg_match_all(
-            '~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i',
-            $message,
-            $match,
-        );
+        preg_match_all('~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i', $message, $match,);
 
         return $match[0];
     }
 }
 
-if (!function_exists('create_preview_card_from_url')) {
+if (! function_exists('create_preview_card_from_url')) {
     /**
      * Extract open graph metadata from given url and create preview card
      */
@@ -198,10 +169,7 @@ if (!function_exists('create_preview_card_from_url')) {
                 ]);
 
                 if (
-                    !($newPreviewCardId = model('PreviewCardModel')->insert(
-                        $newPreviewCard,
-                        true,
-                    ))
+                    ! ($newPreviewCardId = model('PreviewCardModel')->insert($newPreviewCard, true,))
                 ) {
                     return null;
                 }
@@ -215,7 +183,7 @@ if (!function_exists('create_preview_card_from_url')) {
     }
 }
 
-if (!function_exists('get_or_create_preview_card_from_url')) {
+if (! function_exists('get_or_create_preview_card_from_url')) {
     /**
      * Extract open graph metadata from given url and create preview card
      */
@@ -223,9 +191,8 @@ if (!function_exists('get_or_create_preview_card_from_url')) {
     {
         // check if preview card has already been generated
         if (
-            $previewCard = model('PreviewCardModel')->getPreviewCardFromUrl(
-                (string) $url,
-            )
+            $previewCard = model('PreviewCardModel')
+                ->getPreviewCardFromUrl((string) $url,)
         ) {
             return $previewCard;
         }
@@ -235,10 +202,10 @@ if (!function_exists('get_or_create_preview_card_from_url')) {
     }
 }
 
-if (!function_exists('get_or_create_actor_from_uri')) {
+if (! function_exists('get_or_create_actor_from_uri')) {
     /**
-     * Retrieves actor from database using the actor uri
-     * If Actor is not present, it creates the record in the database and returns it.
+     * Retrieves actor from database using the actor uri If Actor is not present, it creates the record in the database
+     * and returns it.
      */
     function get_or_create_actor_from_uri(string $actorUri): ?Actor
     {
@@ -252,46 +219,38 @@ if (!function_exists('get_or_create_actor_from_uri')) {
     }
 }
 
-if (!function_exists('get_or_create_actor')) {
+if (! function_exists('get_or_create_actor')) {
     /**
-     * Retrieves actor from database using the actor username and domain
-     * If actor is not present, it creates the record in the database and returns it.
+     * Retrieves actor from database using the actor username and domain If actor is not present, it creates the record
+     * in the database and returns it.
      */
     function get_or_create_actor(string $username, string $domain): ?Actor
     {
         // check if actor exists in database already and return it
         if (
-            $actor = model('ActorModel')->getActorByUsername($username, $domain)
+            $actor = model('ActorModel')
+                ->getActorByUsername($username, $domain)
         ) {
             return $actor;
         }
 
         // get actorUri with webfinger request
         $webfingerData = get_webfinger_data($username, $domain);
-        $actorUriKey = array_search(
-            'self',
-            array_column($webfingerData->links, 'rel'),
-        );
+        $actorUriKey = array_search('self', array_column($webfingerData->links, 'rel'), true,);
 
         return create_actor_from_uri($webfingerData->links[$actorUriKey]->href);
     }
 }
 
-if (!function_exists('create_actor_from_uri')) {
+if (! function_exists('create_actor_from_uri')) {
     /**
-     * Creates actor record in database using
-     * the info gathered from the actorUri parameter
+     * Creates actor record in database using the info gathered from the actorUri parameter
      */
     function create_actor_from_uri(string $actorUri): ?Actor
     {
         $activityRequest = new ActivityRequest($actorUri);
         $actorResponse = $activityRequest->get();
-        $actorPayload = json_decode(
-            $actorResponse->getBody(),
-            false,
-            512,
-            JSON_THROW_ON_ERROR,
-        );
+        $actorPayload = json_decode($actorResponse->getBody(), false, 512, JSON_THROW_ON_ERROR,);
 
         $newActor = new Actor();
         $newActor->uri = $actorUri;
@@ -314,7 +273,7 @@ if (!function_exists('create_actor_from_uri')) {
         $newActor->outbox_url = $actorPayload->outbox;
         $newActor->followers_url = $actorPayload->followers;
 
-        if (!($newActorId = model('ActorModel')->insert($newActor, true))) {
+        if (! ($newActorId = model('ActorModel')->insert($newActor, true))) {
             return null;
         }
 
@@ -323,7 +282,7 @@ if (!function_exists('create_actor_from_uri')) {
     }
 }
 
-if (!function_exists('get_current_domain')) {
+if (! function_exists('get_current_domain')) {
     /**
      * Returns instance's domain name
      *
@@ -336,7 +295,7 @@ if (!function_exists('get_current_domain')) {
     }
 }
 
-if (!function_exists('extract_text_from_html')) {
+if (! function_exists('extract_text_from_html')) {
     /**
      * Extracts the text from html content
      */
@@ -346,17 +305,14 @@ if (!function_exists('extract_text_from_html')) {
     }
 }
 
-if (!function_exists('linkify')) {
+if (! function_exists('linkify')) {
     /**
-     * Turn all link elements in clickable links.
-     * Transforms urls and handles
+     * Turn all link elements in clickable links. Transforms urls and handles
      *
      * @param string[] $protocols http/https, twitter
      */
-    function linkify(
-        string $text,
-        array $protocols = ['http', 'handle']
-    ): string {
+    function linkify(string $text, array $protocols = ['http', 'handle']): string
+    {
         $links = [];
 
         // Extract text links for each protocol
@@ -375,11 +331,7 @@ if (!function_exists('linkify')) {
 
                             helper('text');
 
-                            $link = preg_replace(
-                                '~^www\.(.+\.)~i',
-                                '$1',
-                                $link,
-                            );
+                            $link = preg_replace('~^www\.(.+\.)~i', '$1', $link,);
 
                             return '<' .
                                 array_push(
@@ -407,10 +359,7 @@ if (!function_exists('linkify')) {
                                 if (
                                     $actor = model(
                                         'ActorModel',
-                                    )->getActorByUsername(
-                                        $match['username'],
-                                        $match['domain'],
-                                    )
+                                    )->getActorByUsername($match['username'], $match['domain'],)
                                 ) {
                                     // TODO: check that host is local to remove target blank?
                                     return '<' .
@@ -425,10 +374,7 @@ if (!function_exists('linkify')) {
                                 }
 
                                 try {
-                                    $actor = get_or_create_actor(
-                                        $match['username'],
-                                        $match['domain'],
-                                    );
+                                    $actor = get_or_create_actor($match['username'], $match['domain'],);
                                     return '<' .
                                         array_push(
                                             $links,
@@ -446,15 +392,11 @@ if (!function_exists('linkify')) {
                                 }
                             } else {
                                 if (
-                                    $actor = model(
-                                        'ActorModel',
-                                    )->getActorByUsername($match['username'])
+                                    $actor = model('ActorModel',)
+                                        ->getActorByUsername($match['username'])
                                 ) {
                                     return '<' .
-                                        array_push(
-                                            $links,
-                                            anchor($actor->uri, $match[0]),
-                                        ) .
+                                        array_push($links, anchor($actor->uri, $match[0]),) .
                                         '>';
                                 }
 
@@ -476,7 +418,7 @@ if (!function_exists('linkify')) {
                                 array_push(
                                     $links,
                                     anchor(
-                                        "{$protocol}://$match[1]",
+                                        "{$protocol}://{$match[1]}",
                                         $match[1],
                                         [
                                             'target' => '_blank',

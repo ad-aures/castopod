@@ -19,7 +19,6 @@ class Cache extends BaseConfig
      *
      * The name of the preferred handler that should be used. If for some reason
      * it is not available, the $backupHandler will be used in its place.
-     *
      */
     public string $handler = 'file';
 
@@ -31,7 +30,6 @@ class Cache extends BaseConfig
      * The name of the handler that will be used in case the first one is
      * unreachable. Often, 'file' is used here since the filesystem is
      * always available, though that's not always practical for the app.
-     *
      */
     public string $backupHandler = 'dummy';
 
@@ -64,7 +62,7 @@ class Cache extends BaseConfig
      *
      * @var boolean|string[]
      */
-    public bool|array $cacheQueryString = false;
+    public bool | array $cacheQueryString = false;
 
     /**
      * --------------------------------------------------------------------------
@@ -73,7 +71,6 @@ class Cache extends BaseConfig
      *
      * This string is added to all cache item names to help avoid collisions
      * if you run multiple applications with the same cache engine.
-     *
      */
     public string $prefix = '';
 

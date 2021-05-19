@@ -1,8 +1,7 @@
 <?php
 
 /**
- * Class PermissionSeeder
- * Inserts permissions
+ * Class PermissionSeeder Inserts permissions
  *
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -31,15 +30,10 @@ class AuthSeeder extends Seeder
         ],
     ];
 
-    /** Build permissions array as a list of:
+    /**
+     * Build permissions array as a list of:
      *
-     * ```
-     * context => [
-     *      [action, description],
-     *      [action, description],
-     *      ...
-     * ]
-     * ```
+     * ``` context => [ [action, description], [action, description], ... ] ```
      *
      * @var array<string, array<string, string|array>[]>
      */
@@ -281,10 +275,7 @@ class AuthSeeder extends Seeder
                 foreach ($action['has_permission'] as $role) {
                     // link permission to specified groups
                     $dataGroupsPermissions[] = [
-                        'group_id' => $this->getGroupIdByName(
-                            $role,
-                            $dataGroups,
-                        ),
+                        'group_id' => $this->getGroupIdByName($role, $dataGroups,),
                         'permission_id' => $permissionId,
                     ];
                 }
@@ -304,10 +295,11 @@ class AuthSeeder extends Seeder
             ->ignore(true)
             ->insertBatch($dataGroupsPermissions);
     }
+
     /**
      * @param array<string, string|int>[] $dataGroups
      */
-    static function getGroupIdByName(string $name, array $dataGroups): ?int
+    public static function getGroupIdByName(string $name, array $dataGroups): ?int
     {
         foreach ($dataGroups as $group) {
             if ($group['name'] === $name) {

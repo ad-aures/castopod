@@ -8,17 +8,14 @@
 
 namespace App\Controllers\Admin;
 
-use CodeIgniter\HTTP\RedirectResponse;
 use App\Entities\Podcast;
-use CodeIgniter\Exceptions\PageNotFoundException;
-use App\Models\PodcastModel;
 use App\Models\PersonModel;
+use App\Models\PodcastModel;
+use CodeIgniter\Exceptions\PageNotFoundException;
+use CodeIgniter\HTTP\RedirectResponse;
 
 class PodcastPersonController extends BaseController
 {
-    /**
-     * @var Podcast
-     */
     protected Podcast $podcast;
 
     public function _remap(string $method, string ...$params): mixed
@@ -28,12 +25,10 @@ class PodcastPersonController extends BaseController
         }
 
         if (
-            ($this->podcast = (new PodcastModel())->getPodcastById(
-                (int) $params[0],
-            )) !== null
+            ($this->podcast = (new PodcastModel())->getPodcastById((int) $params[0],)) !== null
         ) {
             unset($params[0]);
-            return $this->$method(...$params);
+            return $this->{$method}(...$params);
         }
 
         throw PageNotFoundException::forPageNotFound();
@@ -45,9 +40,7 @@ class PodcastPersonController extends BaseController
 
         $data = [
             'podcast' => $this->podcast,
-            'podcastPersons' => (new PersonModel())->getPodcastPersons(
-                $this->podcast->id,
-            ),
+            'podcastPersons' => (new PersonModel())->getPodcastPersons($this->podcast->id,),
             'personOptions' => (new PersonModel())->getPersonOptions(),
             'taxonomyOptions' => (new PersonModel())->getTaxonomyOptions(),
         ];
@@ -63,7 +56,7 @@ class PodcastPersonController extends BaseController
             'persons' => 'required',
         ];
 
-        if (!$this->validate($rules)) {
+        if (! $this->validate($rules)) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -81,10 +74,7 @@ class PodcastPersonController extends BaseController
 
     public function remove(int $personId): RedirectResponse
     {
-        (new PersonModel())->removePersonFromPodcast(
-            $this->podcast->id,
-            $personId,
-        );
+        (new PersonModel())->removePersonFromPodcast($this->podcast->id, $personId,);
 
         return redirect()->back();
     }

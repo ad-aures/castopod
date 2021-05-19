@@ -15,11 +15,14 @@ class WebFinger
     /**
      * @var string
      */
-    const RESOURCE_PATTERN = '/^acct:(?P<username>([\w_]+))@(?P<domain>([\w\-\.]+[\w]+)(:[\d]+)?)$/x';
+    private const RESOURCE_PATTERN = '/^acct:(?P<username>([\w_]+))@(?P<domain>([\w\-\.]+[\w]+)(:[\d]+)?)$/x';
 
     protected string $username;
+
     protected string $domain;
+
     protected string $host;
+
     protected string $port;
 
     /**
@@ -32,11 +35,12 @@ class WebFinger
      */
     protected array $links = [];
 
-    public function __construct(protected string $subject)
-    {
+    public function __construct(
+        protected string $subject
+    ) {
         // Split resource into its parts (username, domain)
         $parts = $this->splitResource($subject);
-        if (!$parts) {
+        if (! $parts) {
             throw new Exception('Wrong WebFinger resource pattern.');
         }
 
@@ -56,10 +60,7 @@ class WebFinger
         }
 
         if (
-            !($actor = model('ActorModel')->getActorByUsername(
-                $username,
-                $domain,
-            ))
+            ! ($actor = model('ActorModel')->getActorByUsername($username, $domain,))
         ) {
             throw new Exception('Could not find actor');
         }
@@ -74,7 +75,8 @@ class WebFinger
             [
                 'rel' => 'http://webfinger.net/rel/profile-page',
                 'type' => 'text/html',
-                'href' => $actor->uri, # TODO: should there be 2 values? @actorUsername
+                'href' => $actor->uri,
+                # TODO: should there be 2 values? @actorUsername
             ],
         ];
     }
@@ -92,14 +94,15 @@ class WebFinger
             'links' => $this->links,
         ];
     }
+
     /**
      * Split resource into its parts (username, domain)
      *
      * @return array<string, string>|false
      */
-    private function splitResource(string $resource): array|false
+    private function splitResource(string $resource): array | false
     {
-        if (!preg_match(self::RESOURCE_PATTERN, $resource, $matches)) {
+        if (! preg_match(self::RESOURCE_PATTERN, $resource, $matches)) {
             // Resource pattern failed
             return false;
         }

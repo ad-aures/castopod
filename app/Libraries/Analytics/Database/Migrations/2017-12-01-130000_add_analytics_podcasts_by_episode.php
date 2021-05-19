@@ -1,8 +1,7 @@
 <?php
 
 /**
- * Class AddAnalyticsPodcastsByEpisode
- * Creates analytics_episodes_by_episode table in database
+ * Class AddAnalyticsPodcastsByEpisode Creates analytics_episodes_by_episode table in database
  *
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -41,9 +40,7 @@ class AddAnalyticsPodcastsByEpisode extends Migration
             ],
         ]);
         $this->forge->addPrimaryKey(['podcast_id', 'date', 'episode_id']);
-        $this->forge->addField(
-            '`created_at` timestamp NOT NULL DEFAULT current_timestamp()',
-        );
+        $this->forge->addField('`created_at` timestamp NOT NULL DEFAULT current_timestamp()',);
         $this->forge->addField(
             '`updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()',
         );

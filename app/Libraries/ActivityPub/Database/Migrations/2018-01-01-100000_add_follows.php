@@ -1,8 +1,7 @@
 <?php
 
 /**
- * Class AddFollowers
- * Creates activitypub_followers table in database
+ * Class AddFollowers Creates activitypub_followers table in database
  *
  * @copyright  2021 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -29,24 +28,10 @@ class AddFollowers extends Migration
                 'comment' => 'Actor that is followed',
             ],
         ]);
-        $this->forge->addField(
-            '`created_at` timestamp NOT NULL DEFAULT current_timestamp()',
-        );
+        $this->forge->addField('`created_at` timestamp NOT NULL DEFAULT current_timestamp()',);
         $this->forge->addPrimaryKey(['actor_id', 'target_actor_id']);
-        $this->forge->addForeignKey(
-            'actor_id',
-            'activitypub_actors',
-            'id',
-            '',
-            'CASCADE',
-        );
-        $this->forge->addForeignKey(
-            'target_actor_id',
-            'activitypub_actors',
-            'id',
-            '',
-            'CASCADE',
-        );
+        $this->forge->addForeignKey('actor_id', 'activitypub_actors', 'id', '', 'CASCADE',);
+        $this->forge->addForeignKey('target_actor_id', 'activitypub_actors', 'id', '', 'CASCADE',);
         $this->forge->createTable('activitypub_follows');
     }
 

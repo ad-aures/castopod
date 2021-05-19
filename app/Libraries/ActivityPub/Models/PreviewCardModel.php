@@ -8,8 +8,8 @@
 
 namespace ActivityPub\Models;
 
-use CodeIgniter\Database\BaseResult;
 use ActivityPub\Entities\PreviewCard;
+use CodeIgniter\Database\BaseResult;
 use CodeIgniter\Model;
 
 class PreviewCardModel extends Model
@@ -55,11 +55,14 @@ class PreviewCardModel extends Model
     {
         $hashedPreviewCardUrl = md5($url);
         $cacheName =
-            config('ActivityPub')->cachePrefix .
+            config('ActivityPub')
+                ->cachePrefix .
             "preview_card-{$hashedPreviewCardUrl}";
-        if (!($found = cache($cacheName))) {
-            $found = $this->where('url', $url)->first();
-            cache()->save($cacheName, $found, DECADE);
+        if (! ($found = cache($cacheName))) {
+            $found = $this->where('url', $url)
+                ->first();
+            cache()
+                ->save($cacheName, $found, DECADE);
         }
 
         return $found;
@@ -68,34 +71,29 @@ class PreviewCardModel extends Model
     public function getNotePreviewCard(string $noteId): ?PreviewCard
     {
         $cacheName =
-            config('ActivityPub')->cachePrefix . "note#{$noteId}_preview_card";
-        if (!($found = cache($cacheName))) {
+            config('ActivityPub')
+                ->cachePrefix . "note#{$noteId}_preview_card";
+        if (! ($found = cache($cacheName))) {
             $found = $this->join(
                 'activitypub_notes_preview_cards',
                 'activitypub_notes_preview_cards.preview_card_id = id',
                 'inner',
             )
-                ->where(
-                    'note_id',
-                    service('uuid')
-                        ->fromString($noteId)
-                        ->getBytes(),
-                )
+                ->where('note_id', service('uuid') ->fromString($noteId) ->getBytes(),)
                 ->first();
 
-            cache()->save($cacheName, $found, DECADE);
+            cache()
+                ->save($cacheName, $found, DECADE);
         }
 
         return $found;
     }
 
-    public function deletePreviewCard(int $id, string $url): BaseResult|bool
+    public function deletePreviewCard(int $id, string $url): BaseResult | bool
     {
         $hashedPreviewCardUrl = md5($url);
-        cache()->delete(
-            config('ActivityPub')->cachePrefix .
-                "preview_card-{$hashedPreviewCardUrl}",
-        );
+        cache()
+            ->delete(config('ActivityPub') ->cachePrefix . "preview_card-{$hashedPreviewCardUrl}",);
 
         return $this->delete($id);
     }

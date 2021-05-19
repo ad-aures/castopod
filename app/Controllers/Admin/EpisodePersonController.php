@@ -8,17 +8,18 @@
 
 namespace App\Controllers\Admin;
 
-use CodeIgniter\HTTP\RedirectResponse;
-use App\Entities\Podcast;
 use App\Entities\Episode;
-use CodeIgniter\Exceptions\PageNotFoundException;
-use App\Models\PodcastModel;
+use App\Entities\Podcast;
 use App\Models\EpisodeModel;
 use App\Models\PersonModel;
+use App\Models\PodcastModel;
+use CodeIgniter\Exceptions\PageNotFoundException;
+use CodeIgniter\HTTP\RedirectResponse;
 
 class EpisodePersonController extends BaseController
 {
     protected Podcast $podcast;
+
     protected Episode $episode;
 
     public function _remap(string $method, string ...$params): mixed
@@ -28,9 +29,7 @@ class EpisodePersonController extends BaseController
         }
 
         if (
-            ($this->podcast = (new PodcastModel())->getPodcastById(
-                (int) $params[0],
-            )) &&
+            ($this->podcast = (new PodcastModel())->getPodcastById((int) $params[0],)) &&
             ($this->episode = (new EpisodeModel())
                 ->where([
                     'id' => $params[1],
@@ -41,7 +40,7 @@ class EpisodePersonController extends BaseController
             unset($params[1]);
             unset($params[0]);
 
-            return $this->$method(...$params);
+            return $this->{$method}(...$params);
         }
 
         throw PageNotFoundException::forPageNotFound();
@@ -70,7 +69,7 @@ class EpisodePersonController extends BaseController
             'person' => 'required',
         ];
 
-        if (!$this->validate($rules)) {
+        if (! $this->validate($rules)) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -89,11 +88,7 @@ class EpisodePersonController extends BaseController
 
     public function remove(int $personId): RedirectResponse
     {
-        (new PersonModel())->removePersonFromEpisode(
-            $this->podcast->id,
-            $this->episode->id,
-            $personId,
-        );
+        (new PersonModel())->removePersonFromEpisode($this->podcast->id, $this->episode->id, $personId,);
 
         return redirect()->back();
     }

@@ -1,8 +1,7 @@
 <?php
 
 /**
- * Class AddSoundbites
- * Creates soundbites table in database
+ * Class AddSoundbites Creates soundbites table in database
  *
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -64,20 +63,8 @@ class AddSoundbites extends Migration
         ]);
         $this->forge->addKey('id', true);
         $this->forge->addUniqueKey(['episode_id', 'start_time', 'duration']);
-        $this->forge->addForeignKey(
-            'podcast_id',
-            'podcasts',
-            'id',
-            '',
-            'CASCADE',
-        );
-        $this->forge->addForeignKey(
-            'episode_id',
-            'episodes',
-            'id',
-            '',
-            'CASCADE',
-        );
+        $this->forge->addForeignKey('podcast_id', 'podcasts', 'id', '', 'CASCADE',);
+        $this->forge->addForeignKey('episode_id', 'episodes', 'id', '', 'CASCADE',);
         $this->forge->addForeignKey('created_by', 'users', 'id');
         $this->forge->addForeignKey('updated_by', 'users', 'id');
         $this->forge->createTable('soundbites');

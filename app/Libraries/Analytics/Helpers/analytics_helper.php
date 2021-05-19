@@ -1,20 +1,20 @@
 <?php
 
+use CodeIgniter\Router\Exceptions\RouterException;
+use Config\Database;
 use Config\Services;
-use Podlibre\Ipcat\IpDb;
 use GeoIp2\Database\Reader;
 use Opawg\UserAgentsPhp\UserAgents;
-use Config\Database;
-use WhichBrowser\Parser;
+use Podlibre\Ipcat\IpDb;
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
  */
 
-use CodeIgniter\Router\Exceptions\RouterException;
+use WhichBrowser\Parser;
 
-if (!function_exists('base64_url_encode')) {
+if (! function_exists('base64_url_encode')) {
     /**
      * Encode Base64 for URLs
      */
@@ -24,20 +24,19 @@ if (!function_exists('base64_url_encode')) {
     }
 }
 
-if (!function_exists('base64_url_decode')) {
+if (! function_exists('base64_url_decode')) {
     /**
      * Decode Base64 from URL
      */
     function base64_url_decode(string $input): string
     {
-        return base64_decode(strtr($input, '._-', '+/='));
+        return base64_decode(strtr($input, '._-', '+/='), true);
     }
 }
 
-if (!function_exists('generate_episode_analytics_url')) {
+if (! function_exists('generate_episode_analytics_url')) {
     /**
-     * Builds the episode analytics url that redirects to the audio file url
-     * after analytics hit.
+     * Builds the episode analytics url that redirects to the audio file url after analytics hit.
      *
      * @throws RouterException
      */
@@ -63,11 +62,7 @@ if (!function_exists('generate_episode_analytics_url')) {
                     $audioFileDuration <= 60
                         ? $audioFileSize
                         : $audioFileHeaderSize +
-                            floor(
-                                (($audioFileSize - $audioFileHeaderSize) /
-                                    $audioFileDuration) *
-                                    60,
-                            ),
+                            floor((($audioFileSize - $audioFileHeaderSize) / $audioFileDuration) * 60,),
                     $audioFileSize,
                     $audioFileDuration,
                     strtotime($publicationDate),
@@ -78,7 +73,7 @@ if (!function_exists('generate_episode_analytics_url')) {
     }
 }
 
-if (!function_exists('set_user_session_deny_list_ip')) {
+if (! function_exists('set_user_session_deny_list_ip')) {
     /**
      * Set user country in session variable, for analytic purposes
      */
@@ -87,16 +82,13 @@ if (!function_exists('set_user_session_deny_list_ip')) {
         $session = Services::session();
         $session->start();
 
-        if (!$session->has('denyListIp')) {
-            $session->set(
-                'denyListIp',
-                IpDb::find($_SERVER['REMOTE_ADDR']) != null,
-            );
+        if (! $session->has('denyListIp')) {
+            $session->set('denyListIp', IpDb::find($_SERVER['REMOTE_ADDR']) !== null,);
         }
     }
 }
 
-if (!function_exists('set_user_session_location')) {
+if (! function_exists('set_user_session_location')) {
     /**
      * Set user country in session variable, for analytic purposes
      */
@@ -113,11 +105,9 @@ if (!function_exists('set_user_session_location')) {
         ];
 
         // Finds location:
-        if (!$session->has('location')) {
+        if (! $session->has('location')) {
             try {
-                $cityReader = new Reader(
-                    WRITEPATH . 'uploads/GeoLite2-City/GeoLite2-City.mmdb',
-                );
+                $cityReader = new Reader(WRITEPATH . 'uploads/GeoLite2-City/GeoLite2-City.mmdb',);
                 $city = $cityReader->city($_SERVER['REMOTE_ADDR']);
 
                 $location = [
@@ -138,7 +128,7 @@ if (!function_exists('set_user_session_location')) {
     }
 }
 
-if (!function_exists('set_user_session_player')) {
+if (! function_exists('set_user_session_player')) {
     /**
      * Set user player in session variable, for analytic purposes
      */
@@ -147,7 +137,7 @@ if (!function_exists('set_user_session_player')) {
         $session = Services::session();
         $session->start();
 
-        if (!$session->has('player')) {
+        if (! $session->has('player')) {
             $playerFound = null;
             $userAgent = $_SERVER['HTTP_USER_AGENT'];
 
@@ -168,13 +158,8 @@ if (!function_exists('set_user_session_player')) {
                 // Add to unknown list
                 try {
                     $db = Database::connect();
-                    $procedureNameAnalyticsUnknownUseragents = $db->prefixTable(
-                        'analytics_unknown_useragents',
-                    );
-                    $db->query(
-                        "CALL {$procedureNameAnalyticsUnknownUseragents}(?)",
-                        [$userAgent],
-                    );
+                    $procedureNameAnalyticsUnknownUseragents = $db->prefixTable('analytics_unknown_useragents',);
+                    $db->query("CALL {$procedureNameAnalyticsUnknownUseragents}(?)", [$userAgent],);
                     // If things go wrong the show must go on and the user must be able to download the file
                 } catch (Exception) {
                 }
@@ -183,16 +168,18 @@ if (!function_exists('set_user_session_player')) {
     }
 }
 
-if (!function_exists('set_user_session_browser')) {
+if (! function_exists('set_user_session_browser')) {
     /**
      * Set user browser in session variable, for analytic purposes
+     *
+     * FIXME: session key should be null instead of "Could not get browser name"
      */
     function set_user_session_browser(): void
     {
         $session = Services::session();
         $session->start();
 
-        if (!$session->has('browser')) {
+        if (! $session->has('browser')) {
             $browserName = '- Other -';
             try {
                 $whichbrowser = new Parser(getallheaders());
@@ -200,7 +187,7 @@ if (!function_exists('set_user_session_browser')) {
             } catch (Exception) {
                 $browserName = '- Could not get browser name -';
             }
-            if ($browserName == null) {
+            if ($browserName === '') {
                 $browserName = '- Could not get browser name -';
             }
             $session->set('browser', $browserName);
@@ -208,7 +195,7 @@ if (!function_exists('set_user_session_browser')) {
     }
 }
 
-if (!function_exists('set_user_session_referer')) {
+if (! function_exists('set_user_session_referer')) {
     /**
      * Set user referer in session variable, for analytic purposes
      */
@@ -225,13 +212,13 @@ if (!function_exists('set_user_session_referer')) {
             parse_url(current_url(false), PHP_URL_HOST)
                 ? '- Direct -'
                 : $newreferer;
-        if (!$session->has('referer') || $newreferer != '- Direct -') {
+        if (! $session->has('referer') || $newreferer !== '- Direct -') {
             $session->set('referer', $newreferer);
         }
     }
 }
 
-if (!function_exists('set_user_session_entry_page')) {
+if (! function_exists('set_user_session_entry_page')) {
     /**
      * Set user entry page in session variable, for analytic purposes
      */
@@ -241,28 +228,24 @@ if (!function_exists('set_user_session_entry_page')) {
         $session->start();
 
         $entryPage = $_SERVER['REQUEST_URI'];
-        if (!$session->has('entryPage')) {
+        if (! $session->has('entryPage')) {
             $session->set('entryPage', $entryPage);
         }
     }
 }
 
-if (!function_exists('podcast_hit')) {
+if (! function_exists('podcast_hit')) {
     /**
-     * Counting podcast episode downloads for analytic purposes
-     * ✅ No IP address is ever stored on the server.
-     * ✅ Only aggregate data is stored in the database.
-     * We follow IAB Podcast Measurement Technical Guidelines Version 2.0:
-     *   https://iabtechlab.com/standards/podcast-measurement-guidelines/
-     *   https://iabtechlab.com/wp-content/uploads/2017/12/Podcast_Measurement_v2-Dec-20-2017.pdf
-     *   ✅ Rolling 24-hour window
-     *   ✅ Castopod does not do pre-load
-     *   ✅ IP deny list https://github.com/client9/ipcat
-     *   ✅ User-agent Filtering https://github.com/opawg/user-agents
-     *   ✅ RSS User-agent https://github.com/opawg/podcast-rss-useragents
-     *   ✅ Ignores 2 bytes range "Range: 0-1"  (performed by official Apple iOS Podcast app)
-     *   ✅ In case of partial content, adds up all requests to check >1mn was downloaded
-     *   ✅ Identifying Uniques is done with a combination of IP Address and User Agent
+     * Counting podcast episode downloads for analytic purposes ✅ No IP address is ever stored on the server. ✅ Only
+     * aggregate data is stored in the database. We follow IAB Podcast Measurement Technical Guidelines Version 2.0:
+     * https://iabtechlab.com/standards/podcast-measurement-guidelines/
+     * https://iabtechlab.com/wp-content/uploads/2017/12/Podcast_Measurement_v2-Dec-20-2017.pdf ✅ Rolling 24-hour
+     * window ✅ Castopod does not do pre-load ✅ IP deny list https://github.com/client9/ipcat ✅ User-agent
+     * Filtering https://github.com/opawg/user-agents ✅ RSS User-agent https://github.com/opawg/podcast-rss-useragents
+     * ✅ Ignores 2 bytes range "Range: 0-1"  (performed by official Apple iOS Podcast app) ✅ In case of partial
+     * content, adds up all requests to check >1mn was downloaded ✅ Identifying Uniques is done with a combination of
+     * IP Address and User Agent
+     *
      * @param integer $podcastId The podcast ID
      * @param integer $episodeId The Episode ID
      * @param integer $bytesThreshold The minimum total number of bytes that must be downloaded so that an episode is counted (>1mn)
@@ -297,13 +280,7 @@ if (!function_exists('podcast_hit')) {
             // We create a sha1 hash for this IP_Address+User_Agent+Episode_ID (used to count only once multiple episode downloads):
             $episodeHashId =
                 '_IpUaEp_' .
-                sha1(
-                    $_SERVER['REMOTE_ADDR'] .
-                        '_' .
-                        $_SERVER['HTTP_USER_AGENT'] .
-                        '_' .
-                        $episodeId,
-                );
+                sha1($_SERVER['REMOTE_ADDR'] . '_' . $_SERVER['HTTP_USER_AGENT'] . '_' . $episodeId,);
             // Was this episode downloaded in the past 24h:
             $downloadedBytes = cache($episodeHashId);
             // Rolling window is 24 hours (86400 seconds):
@@ -311,7 +288,8 @@ if (!function_exists('podcast_hit')) {
             if ($downloadedBytes) {
                 // In case it was already downloaded, TTL should be adjusted (rolling window is 24h since 1st download):
                 $rollingTTL =
-                    cache()->getMetadata($episodeHashId)['expire'] - time();
+                    cache()
+                        ->getMetadata($episodeHashId)['expire'] - time();
             } else {
                 // If it was never downloaded that means that zero byte were downloaded:
                 $downloadedBytes = 0;
@@ -320,9 +298,9 @@ if (!function_exists('podcast_hit')) {
             // (Otherwise it means that this was already counted, therefore we don't do anything)
             if ($downloadedBytes < $bytesThreshold) {
                 // If HTTP_RANGE is null we are downloading the complete file:
-                if (!$httpRange) {
+                if (! $httpRange) {
                     $downloadedBytes = $fileSize;
-                } elseif ($httpRange != 'bytes=0-1') {
+                } elseif ($httpRange !== 'bytes=0-1') {
                     // [0-1] bytes range requests are used (by Apple) to check that file exists and that 206 partial content is working.
                     // We don't count these requests.
                     // We calculate how many bytes are being downloaded based on HTTP_RANGE values:
@@ -336,7 +314,8 @@ if (!function_exists('podcast_hit')) {
                     }
                 }
                 // We save the number of downloaded bytes for this user and this episode:
-                cache()->save($episodeHashId, $downloadedBytes, $rollingTTL);
+                cache()
+                    ->save($episodeHashId, $downloadedBytes, $rollingTTL);
 
                 // If more that 1mn was downloaded, that's a hit, we send that to the database:
                 if ($downloadedBytes >= $bytesThreshold) {
@@ -348,13 +327,7 @@ if (!function_exists('podcast_hit')) {
                     // We create a sha1 hash for this IP_Address+User_Agent+Podcast_ID (used to count unique listeners):
                     $listenerHashId =
                         '_IpUaPo_' .
-                        sha1(
-                            $_SERVER['REMOTE_ADDR'] .
-                                '_' .
-                                $_SERVER['HTTP_USER_AGENT'] .
-                                '_' .
-                                $podcastId,
-                        );
+                        sha1($_SERVER['REMOTE_ADDR'] . '_' . $_SERVER['HTTP_USER_AGENT'] . '_' . $podcastId,);
                     $newListener = 1;
                     // Has this listener already downloaded an episode today:
                     $downloadsByUser = cache($listenerHashId);
@@ -368,11 +341,8 @@ if (!function_exists('podcast_hit')) {
                     // Listener count is calculated from 00h00 to 23h59:
                     $midnightTTL = strtotime('tomorrow') - time();
                     // We save the download count for this user until midnight:
-                    cache()->save(
-                        $listenerHashId,
-                        $downloadsByUser,
-                        $midnightTTL,
-                    );
+                    cache()
+                        ->save($listenerHashId, $downloadsByUser, $midnightTTL,);
 
                     $db->query(
                         "CALL {$procedureName}(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",

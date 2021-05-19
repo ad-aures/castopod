@@ -20,6 +20,7 @@ class PodcastModel extends Model
      * @var string
      */
     protected $table = 'podcasts';
+
     /**
      * @var string
      */
@@ -67,6 +68,7 @@ class PodcastModel extends Model
      * @var string
      */
     protected $returnType = Podcast::class;
+
     /**
      * @var bool
      */
@@ -111,7 +113,7 @@ class PodcastModel extends Model
 
     /**
      * clear cache before update if by any chance, the podcast name changes, so will the podcast link
-     * 
+     *
      * @var string[]
      */
     protected $beforeUpdate = ['clearCache'];
@@ -124,9 +126,11 @@ class PodcastModel extends Model
     public function getPodcastByName(string $podcastName): ?Podcast
     {
         $cacheName = "podcast-{$podcastName}";
-        if (!($found = cache($cacheName))) {
-            $found = $this->where('name', $podcastName)->first();
-            cache()->save("podcast-{$podcastName}", $found, DECADE);
+        if (! ($found = cache($cacheName))) {
+            $found = $this->where('name', $podcastName)
+                ->first();
+            cache()
+                ->save("podcast-{$podcastName}", $found, DECADE);
         }
 
         return $found;
@@ -135,10 +139,11 @@ class PodcastModel extends Model
     public function getPodcastById(int $podcastId): ?Podcast
     {
         $cacheName = "podcast#{$podcastId}";
-        if (!($found = cache($cacheName))) {
+        if (! ($found = cache($cacheName))) {
             $found = $this->find($podcastId);
 
-            cache()->save($cacheName, $found, DECADE);
+            cache()
+                ->save($cacheName, $found, DECADE);
         }
 
         return $found;
@@ -147,39 +152,39 @@ class PodcastModel extends Model
     public function getPodcastByActorId(int $actorId): ?Podcast
     {
         $cacheName = "podcast_actor#{$actorId}";
-        if (!($found = cache($cacheName))) {
-            $found = $this->where('actor_id', $actorId)->first();
+        if (! ($found = cache($cacheName))) {
+            $found = $this->where('actor_id', $actorId)
+                ->first();
 
-            cache()->save($cacheName, $found, DECADE);
+            cache()
+                ->save($cacheName, $found, DECADE);
         }
 
         return $found;
     }
 
     /**
-     *  Gets all the podcasts a given user is contributing to
+     * Gets all the podcasts a given user is contributing to
      *
      * @return Podcast[] podcasts
      */
     public function getUserPodcasts(int $userId): array
     {
         $cacheName = "user{$userId}_podcasts";
-        if (!($found = cache($cacheName))) {
+        if (! ($found = cache($cacheName))) {
             $found = $this->select('podcasts.*')
-                ->join(
-                    'podcasts_users',
-                    'podcasts_users.podcast_id = podcasts.id',
-                )
+                ->join('podcasts_users', 'podcasts_users.podcast_id = podcasts.id',)
                 ->where('podcasts_users.user_id', $userId)
                 ->findAll();
 
-            cache()->save($cacheName, $found, DECADE);
+            cache()
+                ->save($cacheName, $found, DECADE);
         }
 
         return $found;
     }
 
-    public function addPodcastContributor(int $userId, int $podcastId, int $groupId): Query|bool
+    public function addPodcastContributor(int $userId, int $podcastId, int $groupId): Query | bool
     {
         cache()->delete("podcast#{$podcastId}_contributors");
 
@@ -189,7 +194,8 @@ class PodcastModel extends Model
             'group_id' => $groupId,
         ];
 
-        return $this->db->table('podcasts_users')->insert($data);
+        return $this->db->table('podcasts_users')
+            ->insert($data);
     }
 
     public function updatePodcastContributor(int $userId, int $podcastId, int $groupId): bool
@@ -202,10 +208,12 @@ class PodcastModel extends Model
                 'user_id' => $userId,
                 'podcast_id' => $podcastId,
             ])
-            ->update(['group_id' => $groupId]);
+            ->update([
+                'group_id' => $groupId,
+            ]);
     }
 
-    public function removePodcastContributor(int $userId, int $podcastId): string|bool
+    public function removePodcastContributor(int $userId, int $podcastId): string | bool
     {
         cache()->delete("podcast#{$podcastId}_contributors");
 
@@ -218,9 +226,9 @@ class PodcastModel extends Model
             ->delete();
     }
 
-    public function getContributorGroupId(int $userId, int|string $podcastId): int|false
+    public function getContributorGroupId(int $userId, int | string $podcastId): int | false
     {
-        if (!is_numeric($podcastId)) {
+        if (! is_numeric($podcastId)) {
             // identifier is the podcast name, request must be a join
             $userPodcast = $this->db
                 ->table('podcasts_users')
@@ -255,12 +263,10 @@ class PodcastModel extends Model
     public function getYears(int $podcastId): array
     {
         $cacheName = "podcast#{$podcastId}_years";
-        if (!($found = cache($cacheName))) {
+        if (! ($found = cache($cacheName))) {
             $episodeModel = new EpisodeModel();
             $found = $episodeModel
-                ->select(
-                    'YEAR(published_at) as year, count(*) as number_of_episodes',
-                )
+                ->select('YEAR(published_at) as year, count(*) as number_of_episodes',)
                 ->where([
                     'podcast_id' => $podcastId,
                     'season_number' => null,
@@ -272,17 +278,16 @@ class PodcastModel extends Model
                 ->get()
                 ->getResultArray();
 
-            $secondsToNextUnpublishedEpisode = $episodeModel->getSecondsToNextUnpublishedEpisode(
-                $podcastId,
-            );
+            $secondsToNextUnpublishedEpisode = $episodeModel->getSecondsToNextUnpublishedEpisode($podcastId,);
 
-            cache()->save(
-                $cacheName,
-                $found,
-                $secondsToNextUnpublishedEpisode
+            cache()
+                ->save(
+                    $cacheName,
+                    $found,
+                    $secondsToNextUnpublishedEpisode
                     ? $secondsToNextUnpublishedEpisode
                     : DECADE,
-            );
+                );
         }
 
         return $found;
@@ -294,7 +299,7 @@ class PodcastModel extends Model
     public function getSeasons(int $podcastId): array
     {
         $cacheName = "podcast#{$podcastId}_seasons";
-        if (!($found = cache($cacheName))) {
+        if (! ($found = cache($cacheName))) {
             $episodeModel = new EpisodeModel();
             $found = $episodeModel
                 ->select('season_number, count(*) as number_of_episodes')
@@ -309,17 +314,16 @@ class PodcastModel extends Model
                 ->get()
                 ->getResultArray();
 
-            $secondsToNextUnpublishedEpisode = $episodeModel->getSecondsToNextUnpublishedEpisode(
-                $podcastId,
-            );
+            $secondsToNextUnpublishedEpisode = $episodeModel->getSecondsToNextUnpublishedEpisode($podcastId,);
 
-            cache()->save(
-                $cacheName,
-                $found,
-                $secondsToNextUnpublishedEpisode
+            cache()
+                ->save(
+                    $cacheName,
+                    $found,
+                    $secondsToNextUnpublishedEpisode
                     ? $secondsToNextUnpublishedEpisode
                     : DECADE,
-            );
+                );
         }
 
         return $found;
@@ -333,21 +337,29 @@ class PodcastModel extends Model
     public function getDefaultQuery(int $podcastId): ?array
     {
         $cacheName = "podcast#{$podcastId}_defaultQuery";
-        if (!($defaultQuery = cache($cacheName))) {
+        if (! ($defaultQuery = cache($cacheName))) {
             $seasons = $this->getSeasons($podcastId);
 
             if ($seasons !== []) {
                 // get latest season
-                $defaultQuery = ['type' => 'season', 'data' => end($seasons)];
+                $defaultQuery = [
+                    'type' => 'season',
+                    'data' => end($seasons),
+                ];
             } else {
                 $years = $this->getYears($podcastId);
-                $defaultQuery = $years === [] ? null : ['type' => 'year', 'data' => $years[0]];
+                $defaultQuery = $years === [] ? null : [
+                    'type' => 'year',
+                    'data' => $years[0],
+                ];
             }
 
-            cache()->save($cacheName, $defaultQuery, DECADE);
+            cache()
+                ->save($cacheName, $defaultQuery, DECADE);
         }
         return $defaultQuery;
     }
+
     /**
      * @param mixed[] $data
      *
@@ -355,34 +367,34 @@ class PodcastModel extends Model
      */
     public function clearCache(array $data): array
     {
-        $podcast = (new PodcastModel())->getPodcastById(
-            is_array($data['id']) ? $data['id'][0] : $data['id'],
-        );
+        $podcast = (new self())->getPodcastById(is_array($data['id']) ? $data['id'][0] : $data['id'],);
 
         // delete cache all podcast pages
-        cache()->deleteMatching("page_podcast#{$podcast->id}*");
+        cache()
+            ->deleteMatching("page_podcast#{$podcast->id}*");
 
         // delete all cache for podcast actor
-        cache()->deleteMatching(
-            config('ActivityPub')->cachePrefix . "actor#{$podcast->actor_id}*",
-        );
+        cache()
+            ->deleteMatching(config('ActivityPub') ->cachePrefix . "actor#{$podcast->actor_id}*",);
 
         // delete model requests cache, includes feed / query / episode lists, etc.
-        cache()->deleteMatching("podcast#{$podcast->id}*");
-        cache()->delete("podcast-{$podcast->name}");
+        cache()
+            ->deleteMatching("podcast#{$podcast->id}*");
+        cache()
+            ->delete("podcast-{$podcast->name}");
 
         // clear cache for every credit page
-        cache()->deleteMatching('page_credits_*');
+        cache()
+            ->deleteMatching('page_credits_*');
 
         return $data;
     }
 
     /**
-     * Creates an actor linked to the podcast
-     * (Triggered before insert)
+     * Creates an actor linked to the podcast (Triggered before insert)
      *
      * @param mixed[] $data
-     * 
+     *
      * @return mixed[]
      */
     protected function createPodcastActor(array $data): array
@@ -423,14 +435,12 @@ class PodcastModel extends Model
 
     /**
      * @param mixed[] $data
-     * 
+     *
      * @return mixed[]
      */
     protected function setActorAvatar(array $data): array
     {
-        $podcast = (new PodcastModel())->getPodcastById(
-            is_array($data['id']) ? $data['id'][0] : $data['id'],
-        );
+        $podcast = (new self())->getPodcastById(is_array($data['id']) ? $data['id'][0] : $data['id'],);
 
         $podcastActor = (new ActorModel())->find($podcast->actor_id);
 
@@ -444,14 +454,12 @@ class PodcastModel extends Model
 
     /**
      * @param mixed[] $data
-     * 
+     *
      * @return mixed[]
      */
     protected function updatePodcastActor(array $data): array
     {
-        $podcast = (new PodcastModel())->getPodcastById(
-            is_array($data['id']) ? $data['id'][0] : $data['id'],
-        );
+        $podcast = (new self())->getPodcastById(is_array($data['id']) ? $data['id'][0] : $data['id'],);
 
         $actorModel = new ActorModel();
         $actor = $actorModel->getActorById($podcast->actor_id);

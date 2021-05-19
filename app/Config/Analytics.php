@@ -23,7 +23,8 @@ class Analytics extends AnalyticsBase
 
         // set the analytics gateway behind the admin gateway.
         // Only logged in users should be able to view analytics
-        $this->gateway = config('App')->adminGateway . '/analytics';
+        $this->gateway = config('App')
+            ->adminGateway . '/analytics';
     }
 
     /**

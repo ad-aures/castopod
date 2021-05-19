@@ -5,16 +5,13 @@ namespace Config;
 /**
  * Mimes
  *
- * This file contains an array of mime types.  It is used by the
- * Upload class to help identify allowed file types.
+ * This file contains an array of mime types.  It is used by the Upload class to help identify allowed file types.
  *
- * When more than one variation for an extension exist (like jpg, jpeg, etc)
- * the most common one should be first in the array to aid the guess*
- * methods. The same applies when more than one mime-type exists for a
- * single extension.
+ * When more than one variation for an extension exist (like jpg, jpeg, etc) the most common one should be first in the
+ * array to aid the guess* methods. The same applies when more than one mime-type exists for a single extension.
  *
- * When working with mime types, please make sure you have the ´fileinfo´
- * extension enabled to reliably detect the media types.
+ * When working with mime types, please make sure you have the ´fileinfo´ extension enabled to reliably detect the
+ * media types.
  */
 
 class Mimes
@@ -61,11 +58,7 @@ class Mimes
         'sea' => 'application/octet-stream',
         'dll' => 'application/octet-stream',
         'oda' => 'application/oda',
-        'pdf' => [
-            'application/pdf',
-            'application/force-download',
-            'application/x-download',
-        ],
+        'pdf' => ['application/pdf', 'application/force-download', 'application/x-download'],
         'ai' => ['application/pdf', 'application/postscript'],
         'eps' => 'application/postscript',
         'ps' => 'application/postscript',
@@ -133,12 +126,7 @@ class Mimes
             'application/s-compressed',
             'multipart/x-zip',
         ],
-        'rar' => [
-            'application/vnd.rar',
-            'application/x-rar',
-            'application/rar',
-            'application/x-rar-compressed',
-        ],
+        'rar' => ['application/vnd.rar', 'application/x-rar', 'application/rar', 'application/x-rar-compressed'],
         'mid' => 'audio/midi',
         'midi' => 'audio/midi',
         'mpga' => 'audio/mpeg',
@@ -197,12 +185,7 @@ class Mimes
         'mpe' => 'video/mpeg',
         'qt' => 'video/quicktime',
         'mov' => 'video/quicktime',
-        'avi' => [
-            'video/x-msvideo',
-            'video/msvideo',
-            'video/avi',
-            'application/x-troff-msvideo',
-        ],
+        'avi' => ['video/x-msvideo', 'video/msvideo', 'video/avi', 'application/x-troff-msvideo'],
         'movie' => 'video/x-sgi-movie',
         'doc' => ['application/msword', 'application/vnd.ms-office'],
         'docx' => [
@@ -228,11 +211,7 @@ class Mimes
         'xl' => 'application/excel',
         'eml' => 'message/rfc822',
         'json' => ['application/json', 'text/json'],
-        'pem' => [
-            'application/x-x509-user-cert',
-            'application/x-pem-file',
-            'application/octet-stream',
-        ],
+        'pem' => ['application/x-x509-user-cert', 'application/x-pem-file', 'application/octet-stream'],
         'p10' => ['application/x-pkcs10', 'application/pkcs10'],
         'p12' => 'application/x-pkcs12',
         'p7a' => 'application/x-pkcs7-signature',
@@ -240,11 +219,7 @@ class Mimes
         'p7m' => ['application/pkcs7-mime', 'application/x-pkcs7-mime'],
         'p7r' => 'application/x-pkcs7-certreqresp',
         'p7s' => 'application/pkcs7-signature',
-        'crt' => [
-            'application/x-x509-ca-cert',
-            'application/x-x509-user-cert',
-            'application/pkix-cert',
-        ],
+        'crt' => ['application/x-x509-ca-cert', 'application/x-x509-user-cert', 'application/pkix-cert'],
         'crl' => ['application/pkix-crl', 'application/pkcs-crl'],
         'der' => 'application/x-x509-ca-cert',
         'kdb' => 'application/octet-stream',
@@ -271,16 +246,8 @@ class Mimes
         'ac3' => 'audio/ac3',
         'flac' => 'audio/x-flac',
         'ogg' => ['audio/ogg', 'video/ogg', 'application/ogg'],
-        'kmz' => [
-            'application/vnd.google-earth.kmz',
-            'application/zip',
-            'application/x-zip',
-        ],
-        'kml' => [
-            'application/vnd.google-earth.kml+xml',
-            'application/xml',
-            'text/xml',
-        ],
+        'kmz' => ['application/vnd.google-earth.kmz', 'application/zip', 'application/x-zip'],
+        'kml' => ['application/vnd.google-earth.kml+xml', 'application/xml', 'text/xml'],
         'ics' => 'text/calendar',
         'ical' => 'text/calendar',
         'zsh' => 'text/x-scriptzsh',
@@ -311,11 +278,7 @@ class Mimes
         'srt' => ['text/srt', 'text/plain', 'application/octet-stream'],
         'vtt' => ['text/vtt', 'text/plain'],
         'ico' => ['image/x-icon', 'image/x-ico', 'image/vnd.microsoft.icon'],
-        'stl' => [
-            'application/sla',
-            'application/vnd.ms-pki.stl',
-            'application/x-navistyle',
-        ],
+        'stl' => ['application/sla', 'application/vnd.ms-pki.stl', 'application/x-navistyle'],
     ];
 
     /**
@@ -327,7 +290,7 @@ class Mimes
     {
         $extension = trim(strtolower($extension), '. ');
 
-        if (!array_key_exists($extension, static::$mimes)) {
+        if (! array_key_exists($extension, static::$mimes)) {
             return null;
         }
 
@@ -342,10 +305,8 @@ class Mimes
      * @param string|null $proposedExtension - default extension (in case there is more than one with the same mime type)
      * @return string|null The extension determined, or null if unable to match.
      */
-    public static function guessExtensionFromType(
-        string $type,
-        string $proposedExtension = null
-    ): ?string {
+    public static function guessExtensionFromType(string $type, string $proposedExtension = null): ?string
+    {
         $type = trim(strtolower($type), '. ');
 
         $proposedExtension = trim(strtolower($proposedExtension));

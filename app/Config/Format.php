@@ -2,10 +2,10 @@
 
 namespace Config;
 
-use CodeIgniter\Format\JSONFormatter;
-use CodeIgniter\Format\XMLFormatter;
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Format\FormatterInterface;
+use CodeIgniter\Format\JSONFormatter;
+use CodeIgniter\Format\XMLFormatter;
 
 class Format extends BaseConfig
 {
@@ -64,6 +64,7 @@ class Format extends BaseConfig
     ];
 
     //--------------------------------------------------------------------
+
     /**
      * A Factory method to return the appropriate formatter for the given mime type.
      *

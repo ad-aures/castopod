@@ -6,7 +6,7 @@
  * @link       https://castopod.org/
  */
 
-if (!function_exists('icon')) {
+if (! function_exists('icon')) {
     /**
      * Returns the inline svg icon
      *
@@ -18,18 +18,14 @@ if (!function_exists('icon')) {
     {
         $svgContents = file_get_contents('assets/icons/' . $name . '.svg');
         if ($class !== '') {
-            $svgContents = str_replace(
-                '<svg',
-                '<svg class="' . $class . '"',
-                $svgContents,
-            );
+            $svgContents = str_replace('<svg', '<svg class="' . $class . '"', $svgContents,);
         }
 
         return $svgContents;
     }
 }
 
-if (!function_exists('svg')) {
+if (! function_exists('svg')) {
     /**
      * Returns the inline svg image
      *
@@ -41,11 +37,7 @@ if (!function_exists('svg')) {
     {
         $svgContents = file_get_contents('assets/images/' . $name . '.svg');
         if ($class) {
-            $svgContents = str_replace(
-                '<svg',
-                '<svg class="' . $class . '"',
-                $svgContents,
-            );
+            $svgContents = str_replace('<svg', '<svg class="' . $class . '"', $svgContents,);
         }
         return $svgContents;
     }

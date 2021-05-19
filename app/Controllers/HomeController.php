@@ -13,7 +13,7 @@ use CodeIgniter\HTTP\RedirectResponse;
 
 class HomeController extends BaseController
 {
-    public function index(): RedirectResponse|string
+    public function index(): RedirectResponse | string
     {
         $model = new PodcastModel();
 
@@ -21,13 +21,13 @@ class HomeController extends BaseController
 
         // check if there's only one podcast to redirect user to it
         if (count($allPodcasts) === 1) {
-            return redirect()->route('podcast-activity', [
-                $allPodcasts[0]->name,
-            ]);
+            return redirect()->route('podcast-activity', [$allPodcasts[0]->name]);
         }
 
         // default behavior: list all podcasts on home page
-        $data = ['podcasts' => $allPodcasts];
+        $data = [
+            'podcasts' => $allPodcasts,
+        ];
         return view('home', $data);
     }
 }

@@ -9,11 +9,8 @@ class Negotiate extends CodeIgniterHTTPNegotiate
     /**
      * @param mixed[] $acceptable
      */
-    public function callMatch(
-        array $acceptable,
-        string $supported,
-        bool $enforceTypes = false
-    ): bool {
+    public function callMatch(array $acceptable, string $supported, bool $enforceTypes = false): bool
+    {
         return $this->match($acceptable, $supported, $enforceTypes);
     }
 }

@@ -1,8 +1,7 @@
 <?php
 
 /**
- * Class FakePodcastsAnalyticsSeeder
- * Inserts Fake Analytics in the database
+ * Class FakePodcastsAnalyticsSeeder Inserts Fake Analytics in the database
  *
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -11,12 +10,12 @@
 
 namespace App\Database\Seeds;
 
-use GeoIp2\Database\Reader;
-use GeoIp2\Exception\AddressNotFoundException;
-use App\Models\PodcastModel;
 use App\Models\EpisodeModel;
-
+use App\Models\PodcastModel;
 use CodeIgniter\Database\Seeder;
+use GeoIp2\Database\Reader;
+
+use GeoIp2\Exception\AddressNotFoundException;
 
 class FakePodcastsAnalyticsSeeder extends Seeder
 {
@@ -25,9 +24,7 @@ class FakePodcastsAnalyticsSeeder extends Seeder
         $podcast = (new PodcastModel())->first();
 
         $jsonUserAgents = json_decode(
-            file_get_contents(
-                'https://raw.githubusercontent.com/opawg/user-agents/master/src/user-agents.json',
-            ),
+            file_get_contents('https://raw.githubusercontent.com/opawg/user-agents/master/src/user-agents.json',),
             true,
             512,
             JSON_THROW_ON_ERROR,
@@ -66,9 +63,7 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                     ])
                     ->findAll();
                 foreach ($episodes as $episode) {
-                    $age = floor(
-                        ($date - strtotime($episode->published_at)) / 86400,
-                    );
+                    $age = floor(($date - strtotime($episode->published_at)) / 86400,);
                     $probability1 = (int) floor(exp(3 - $age / 40)) + 1;
 
                     for (
@@ -102,10 +97,7 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                             '.' .
                             rand(0, 255);
 
-                        $cityReader = new Reader(
-                            WRITEPATH .
-                                'uploads/GeoLite2-City/GeoLite2-City.mmdb',
-                        );
+                        $cityReader = new Reader(WRITEPATH . 'uploads/GeoLite2-City/GeoLite2-City.mmdb',);
 
                         $countryCode = 'N/A';
                         $regionCode = 'N/A';

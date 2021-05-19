@@ -8,10 +8,10 @@
 
 namespace ActivityPub\Controllers;
 
-use CodeIgniter\HTTP\ResponseInterface;
-use CodeIgniter\Exceptions\PageNotFoundException;
 use ActivityPub\WebFinger;
 use CodeIgniter\Controller;
+use CodeIgniter\Exceptions\PageNotFoundException;
+use CodeIgniter\HTTP\ResponseInterface;
 use Exception;
 
 class WebFingerController extends Controller

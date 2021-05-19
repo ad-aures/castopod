@@ -8,7 +8,7 @@
 
 use CodeIgniter\HTTP\URI;
 
-if (!function_exists('host_url')) {
+if (! function_exists('host_url')) {
     /**
      * Return the host URL to use in views
      */
@@ -17,7 +17,7 @@ if (!function_exists('host_url')) {
         if (isset($_SERVER['HTTP_HOST'])) {
             $protocol =
                 (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ||
-                $_SERVER['SERVER_PORT'] == 443
+                $_SERVER['SERVER_PORT'] === 443
                     ? 'https://'
                     : 'http://';
             return $protocol . $_SERVER['HTTP_HOST'] . '/';
@@ -29,7 +29,7 @@ if (!function_exists('host_url')) {
 
 //--------------------------------------------------------------------
 
-if (!function_exists('extract_params_from_episode_uri')) {
+if (! function_exists('extract_params_from_episode_uri')) {
     /**
      * Returns podcast name and episode slug from episode string
      *
@@ -48,8 +48,8 @@ if (!function_exists('extract_params_from_episode_uri')) {
         }
 
         if (
-            !array_key_exists('podcastName', $matches) ||
-            !array_key_exists('episodeSlug', $matches)
+            ! array_key_exists('podcastName', $matches) ||
+            ! array_key_exists('episodeSlug', $matches)
         ) {
             return null;
         }

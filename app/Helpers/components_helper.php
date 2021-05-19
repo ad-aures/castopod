@@ -8,10 +8,10 @@
 
 use App\Entities\Location;
 use App\Entities\Person;
-use CodeIgniter\View\Table;
 use CodeIgniter\I18n\Time;
+use CodeIgniter\View\Table;
 
-if (!function_exists('button')) {
+if (! function_exists('button')) {
     /**
      * Button component
      *
@@ -92,36 +92,27 @@ if (!function_exists('button')) {
         }
 
         if ($uri !== '') {
-            return anchor(
-                $uri,
-                $label,
-                array_merge(
-                    [
-                        'class' => $buttonClass,
-                    ],
-                    $customAttributes,
-                ),
-            );
+            return anchor($uri, $label, array_merge([
+                'class' => $buttonClass,
+            ], $customAttributes,),);
         }
 
         $defaultButtonAttributes = [
             'type' => 'button',
         ];
-        $attributes = stringify_attributes(
-            array_merge($defaultButtonAttributes, $customAttributes),
-        );
+        $attributes = stringify_attributes(array_merge($defaultButtonAttributes, $customAttributes),);
 
-        return <<<HTML
+        return <<<CODE_SAMPLE
             <button class="{$buttonClass}" {$attributes}>
             {$label}
             </button>
-        HTML;
+        CODE_SAMPLE;
     }
 }
 
 // ------------------------------------------------------------------------
 
-if (!function_exists('icon_button')) {
+if (! function_exists('icon_button')) {
     /**
      * Icon Button component
      *
@@ -157,7 +148,7 @@ if (!function_exists('icon_button')) {
 
 // ------------------------------------------------------------------------
 
-if (!function_exists('hint_tooltip')) {
+if (! function_exists('hint_tooltip')) {
     /**
      * Hint component
      *
@@ -182,7 +173,7 @@ if (!function_exists('hint_tooltip')) {
 
 // ------------------------------------------------------------------------
 
-if (!function_exists('data_table')) {
+if (! function_exists('data_table')) {
     /**
      * Data table component
      *
@@ -240,17 +231,14 @@ if (!function_exists('data_table')) {
 
 // ------------------------------------------------------------------------
 
-if (!function_exists('publication_pill')) {
+if (! function_exists('publication_pill')) {
     /**
      * Publication pill component
      *
      * Shows the stylized publication datetime in regards to current datetime.
      */
-    function publication_pill(
-        ?Time $publicationDate,
-        string $publicationStatus,
-        string $customClass = ''
-    ): string {
+    function publication_pill(?Time $publicationDate, string $publicationStatus, string $customClass = ''): string
+    {
         if ($publicationDate === null) {
             return '';
         }
@@ -270,10 +258,7 @@ if (!function_exists('publication_pill')) {
             '</time>',
         ];
 
-        $label = lang(
-            'Episode.publication_status.' . $publicationStatus,
-            $langOptions,
-        );
+        $label = lang('Episode.publication_status.' . $publicationStatus, $langOptions,);
 
         return '<span class="px-1 font-semibold border ' .
             $class .
@@ -287,17 +272,14 @@ if (!function_exists('publication_pill')) {
 
 // ------------------------------------------------------------------------
 
-if (!function_exists('publication_button')) {
+if (! function_exists('publication_button')) {
     /**
      * Publication button component
      *
      * Displays the appropriate publication button depending on the publication status.
      */
-    function publication_button(
-        int $podcastId,
-        int $episodeId,
-        string $publicationStatus
-    ): string {
+    function publication_button(int $podcastId, int $episodeId, string $publicationStatus): string
+    {
         /** @phpstan-ignore-next-line */
         switch ($publicationStatus) {
             case 'not_published':
@@ -308,11 +290,7 @@ if (!function_exists('publication_button')) {
                 break;
             case 'scheduled':
                 $label = lang('Episode.publish_edit');
-                $route = route_to(
-                    'episode-publish_edit',
-                    $podcastId,
-                    $episodeId,
-                );
+                $route = route_to('episode-publish_edit', $podcastId, $episodeId,);
                 $variant = 'accent';
                 $iconLeft = 'upload-cloud';
                 break;
@@ -339,7 +317,7 @@ if (!function_exists('publication_button')) {
 
 // ------------------------------------------------------------------------
 
-if (!function_exists('episode_numbering')) {
+if (! function_exists('episode_numbering')) {
     /**
      * Returns relevant translated episode numbering.
      *
@@ -351,7 +329,7 @@ if (!function_exists('episode_numbering')) {
         string $class = '',
         bool $isAbbr = false
     ): string {
-        if (!$episodeNumber && !$seasonNumber) {
+        if (! $episodeNumber && ! $seasonNumber) {
             return '';
         }
 
@@ -391,7 +369,7 @@ if (!function_exists('episode_numbering')) {
     }
 }
 
-if (!function_exists('location_link')) {
+if (! function_exists('location_link')) {
     /**
      * Returns link to display from location info
      */
@@ -417,7 +395,7 @@ if (!function_exists('location_link')) {
 
 // ------------------------------------------------------------------------
 
-if (!function_exists('person_list')) {
+if (! function_exists('person_list')) {
     /**
      * Returns list of persons images
      *
@@ -436,7 +414,7 @@ if (!function_exists('person_list')) {
                 $person->information_url ?? '#',
                 "<img
                     src='{$person->image->thumbnail_url}'
-                    alt='$person->full_name'
+                    alt='{$person->full_name}'
                     class='object-cover w-12 h-12 rounded-full' />",
                 [
                     'class' =>

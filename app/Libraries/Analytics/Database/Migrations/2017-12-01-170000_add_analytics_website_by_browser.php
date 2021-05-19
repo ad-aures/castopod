@@ -1,8 +1,7 @@
 <?php
 
 /**
- * Class AddAnalyticsWebsiteByBrowser
- * Creates analytics_website_by_browser table in database
+ * Class AddAnalyticsWebsiteByBrowser Creates analytics_website_by_browser table in database
  *
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -37,9 +36,7 @@ class AddAnalyticsWebsiteByBrowser extends Migration
         ]);
 
         $this->forge->addPrimaryKey(['podcast_id', 'date', 'browser']);
-        $this->forge->addField(
-            '`created_at` timestamp NOT NULL DEFAULT current_timestamp()',
-        );
+        $this->forge->addField('`created_at` timestamp NOT NULL DEFAULT current_timestamp()',);
         $this->forge->addField(
             '`updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()',
         );

@@ -8,8 +8,8 @@
 
 namespace ActivityPub\Controllers;
 
-use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\Controller;
+use CodeIgniter\HTTP\RedirectResponse;
 
 class BlockController extends Controller
 {
@@ -24,7 +24,7 @@ class BlockController extends Controller
             'handle' => 'required',
         ];
 
-        if (!$this->validate($rules)) {
+        if (! $this->validate($rules)) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -35,10 +35,7 @@ class BlockController extends Controller
 
         if ($parts = split_handle($handle)) {
             if (
-                ($actor = get_or_create_actor(
-                    $parts['username'],
-                    $parts['domain'],
-                )) === null
+                ($actor = get_or_create_actor($parts['username'], $parts['domain'],)) === null
             ) {
                 return redirect()
                     ->back()
@@ -46,66 +43,66 @@ class BlockController extends Controller
                     ->with('error', 'Actor not found.');
             }
 
-            model('ActorModel')->blockActor($actor->id);
+            model('ActorModel')
+                ->blockActor($actor->id);
         }
 
         return redirect()->back();
     }
 
-    function attemptBlockDomain(): RedirectResponse
+    public function attemptBlockDomain(): RedirectResponse
     {
         $rules = [
             'domain' => 'required',
         ];
 
-        if (!$this->validate($rules)) {
+        if (! $this->validate($rules)) {
             return redirect()
                 ->back()
                 ->withInput()
                 ->with('errors', $this->validator->getErrors());
         }
 
-        model('BlockedDomainModel')->blockDomain(
-            $this->request->getPost('domain'),
-        );
+        model('BlockedDomainModel')
+            ->blockDomain($this->request->getPost('domain'),);
 
         return redirect()->back();
     }
 
-    function attemptUnblockActor(): RedirectResponse
+    public function attemptUnblockActor(): RedirectResponse
     {
         $rules = [
             'actor_id' => 'required',
         ];
 
-        if (!$this->validate($rules)) {
+        if (! $this->validate($rules)) {
             return redirect()
                 ->back()
                 ->withInput()
                 ->with('errors', $this->validator->getErrors());
         }
 
-        model('ActorModel')->unblockActor($this->request->getPost('actor_id'));
+        model('ActorModel')
+            ->unblockActor($this->request->getPost('actor_id'));
 
         return redirect()->back();
     }
 
-    function attemptUnblockDomain(): RedirectResponse
+    public function attemptUnblockDomain(): RedirectResponse
     {
         $rules = [
             'domain' => 'required',
         ];
 
-        if (!$this->validate($rules)) {
+        if (! $this->validate($rules)) {
             return redirect()
                 ->back()
                 ->withInput()
                 ->with('errors', $this->validator->getErrors());
         }
 
-        model('BlockedDomainModel')->unblockDomain(
-            $this->request->getPost('domain'),
-        );
+        model('BlockedDomainModel')
+            ->unblockDomain($this->request->getPost('domain'),);
 
         return redirect()->back();
     }

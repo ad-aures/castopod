@@ -1,4 +1,6 @@
-<?php namespace Tests\Support\Models;
+<?php
+
+namespace Tests\Support\Models;
 
 use CodeIgniter\Model;
 
@@ -8,6 +10,7 @@ class ExampleModel extends Model
      * @var string
      */
     protected $table = 'factories';
+
     /**
      * @var string
      */
@@ -17,6 +20,7 @@ class ExampleModel extends Model
      * @var string
      */
     protected $returnType = 'object';
+
     /**
      * @var bool
      */
@@ -36,10 +40,12 @@ class ExampleModel extends Model
      * @var mixed[]
      */
     protected $validationRules = [];
+
     /**
      * @var mixed[]
      */
     protected $validationMessages = [];
+
     /**
      * @var bool
      */

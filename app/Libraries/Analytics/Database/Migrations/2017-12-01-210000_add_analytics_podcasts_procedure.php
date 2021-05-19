@@ -1,8 +1,7 @@
 <?php
 
 /**
- * Class AddAnalyticsPodcastsProcedure
- * Creates analytics_podcasts procedure in database
+ * Class AddAnalyticsPodcastsProcedure Creates analytics_podcasts procedure in database
  *
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -21,7 +20,7 @@ class AddAnalyticsPodcastsProcedure extends Migration
         // Example: CALL analytics_podcasts(1, 2, 'FR', 'IDF', 48.853, 2.349, PodcastAddict, 'phone', 'android', 0, 1);
         $prefix = $this->db->getPrefix();
 
-        $createQuery = <<<EOD
+        $createQuery = <<<CODE_SAMPLE
         CREATE PROCEDURE `{$prefix}analytics_podcasts` (
             IN `p_podcast_id` INT UNSIGNED,
             IN `p_episode_id` INT UNSIGNED,
@@ -73,15 +72,13 @@ class AddAnalyticsPodcastsProcedure extends Migration
             VALUES (p_podcast_id, p_service, p_app, p_device, p_os, p_bot, @current_date)
             ON DUPLICATE KEY UPDATE `hits`=`hits`+1;
         END
-        EOD;
+        CODE_SAMPLE;
         $this->db->query($createQuery);
     }
 
     public function down(): void
     {
         $prefix = $this->db->getPrefix();
-        $this->db->query(
-            "DROP PROCEDURE IF EXISTS `{$prefix}analytics_podcasts`",
-        );
+        $this->db->query("DROP PROCEDURE IF EXISTS `{$prefix}analytics_podcasts`",);
     }
 }

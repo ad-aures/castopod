@@ -7,28 +7,26 @@
  */
 
 use CodeIgniter\Files\File;
-use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\HTTP\Files\UploadedFile;
+use CodeIgniter\HTTP\ResponseInterface;
 use Config\Services;
 
-if (!function_exists('save_media')) {
+if (! function_exists('save_media')) {
     /**
      * Saves a file to the corresponding podcast folder in `public/media`
      *
      * @param File|UploadedFile $file
      */
-    function save_media(
-        File $file,
-        string $folder = '',
-        string $filename = ''
-    ): string {
+    function save_media(File $file, string $folder = '', string $filename = ''): string
+    {
         if (($extension = $file->getExtension()) !== '') {
             $filename = $filename . '.' . $extension;
         }
 
-        $mediaRoot = config('App')->mediaRoot . '/' . $folder;
+        $mediaRoot = config('App')
+            ->mediaRoot . '/' . $folder;
 
-        if (!file_exists($mediaRoot)) {
+        if (! file_exists($mediaRoot)) {
             mkdir($mediaRoot, 0777, true);
             touch($mediaRoot . '/index.html');
         }
@@ -40,7 +38,7 @@ if (!function_exists('save_media')) {
     }
 }
 
-if (!function_exists('download_file')) {
+if (! function_exists('download_file')) {
     function download_file(string $fileUrl): File
     {
         $client = Services::curlrequest();
@@ -87,13 +85,13 @@ if (!function_exists('download_file')) {
         return new File($tmpFilePath);
     }
 }
-if (!function_exists('media_path')) {
+if (! function_exists('media_path')) {
     /**
      * Prefixes the root media path to a given uri
      *
      * @param  string|string[] $uri URI string or array of URI segments
      */
-    function media_path(string|array $uri = ''): string
+    function media_path(string | array $uri = ''): string
     {
         // convert segment array to string
         if (is_array($uri)) {
@@ -105,13 +103,13 @@ if (!function_exists('media_path')) {
     }
 }
 
-if (!function_exists('media_base_url')) {
+if (! function_exists('media_base_url')) {
     /**
      * Return the media base URL to use in views
      *
      * @param  string|string[] $uri URI string or array of URI segments
      */
-    function media_base_url(string|array $uri = ''): string
+    function media_base_url(string | array $uri = ''): string
     {
         // convert segment array to string
         if (is_array($uri)) {
@@ -121,7 +119,8 @@ if (!function_exists('media_base_url')) {
 
         return rtrim(config('App')->mediaBaseURL, '/') .
             '/' .
-            config('App')->mediaRoot .
+            config('App')
+                ->mediaRoot .
             '/' .
             $uri;
     }

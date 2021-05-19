@@ -1,8 +1,7 @@
 <?php
 
 /**
- * This class defines the Object which is the
- * primary base type for the Activity Streams vocabulary.
+ * This class defines the Object which is the primary base type for the Activity Streams vocabulary.
  *
  * Object is a reserved word in php, so the class is named ObjectType.
  *
@@ -20,7 +19,7 @@ abstract class AbstractObject
      */
     public function set(string $property, $value): static
     {
-        $this->$property = $value;
+        $this->{$property} = $value;
 
         return $this;
     }
@@ -49,7 +48,7 @@ abstract class AbstractObject
         });
     }
 
-    public function toJSON(): string|bool
+    public function toJSON(): string | bool
     {
         return json_encode($this->toArray(), JSON_UNESCAPED_UNICODE);
     }

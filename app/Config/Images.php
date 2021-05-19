@@ -10,14 +10,11 @@ class Images extends BaseConfig
 {
     /**
      * Default handler used if no other handler is specified.
-     *
      */
     public string $defaultHandler = 'gd';
 
     /**
-     * The path to the image library.
-     * Required for ImageMagick, GraphicsMagick, or NetPBM.
-     *
+     * The path to the image library. Required for ImageMagick, GraphicsMagick, or NetPBM.
      */
     public string $libraryPath = '/usr/local/bin/convert';
 
@@ -32,15 +29,17 @@ class Images extends BaseConfig
     ];
 
     /*
-	|--------------------------------------------------------------------------
-	| Uploaded images resizing sizes (in px)
+    |--------------------------------------------------------------------------
+    | Uploaded images resizing sizes (in px)
     |--------------------------------------------------------------------------
     | The sizes listed below determine the resizing of images when uploaded.
     | All uploaded images are of 1:1 ratio (width and height are the same).
-	*/
+    */
 
     public int $thumbnailSize = 150;
+
     public int $mediumSize = 320;
+
     public int $largeSize = 1024;
 
     /**
@@ -54,11 +53,11 @@ class Images extends BaseConfig
     public int $id3Size = 500;
 
     /*
-	|--------------------------------------------------------------------------
-	| Uploaded images naming extensions
+    |--------------------------------------------------------------------------
+    | Uploaded images naming extensions
     |--------------------------------------------------------------------------
     | The properties listed below set the name extensions for the resized images
-	*/
+    */
 
     public string $thumbnailSuffix = '_thumbnail';
 

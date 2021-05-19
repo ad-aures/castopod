@@ -8,7 +8,7 @@
 
 use Config\Services;
 
-if (!function_exists('render_breadcrumb')) {
+if (! function_exists('render_breadcrumb')) {
     /**
      * Renders the breadcrumb navigation through the Breadcrumb service
      *
@@ -22,7 +22,7 @@ if (!function_exists('render_breadcrumb')) {
     }
 }
 
-if (!function_exists('replace_breadcrumb_params')) {
+if (! function_exists('replace_breadcrumb_params')) {
     /**
      * @param string[] $newParams
      */

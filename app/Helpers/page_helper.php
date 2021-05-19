@@ -8,7 +8,7 @@
 
 use App\Models\PageModel;
 
-if (!function_exists('render_page_links')) {
+if (! function_exists('render_page_links')) {
     /**
      * Returns instance pages as links inside nav tag
      *

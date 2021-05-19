@@ -1,8 +1,7 @@
 <?php
 
 /**
- * Class AddNotePreviewCards
- * Creates activitypub_notes_preview_cards table in database
+ * Class AddNotePreviewCards Creates activitypub_notes_preview_cards table in database
  *
  * @copyright  2021 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -29,20 +28,8 @@ class AddNotesPreviewCards extends Migration
         ]);
 
         $this->forge->addPrimaryKey(['note_id', 'preview_card_id']);
-        $this->forge->addForeignKey(
-            'note_id',
-            'activitypub_notes',
-            'id',
-            '',
-            'CASCADE',
-        );
-        $this->forge->addForeignKey(
-            'preview_card_id',
-            'activitypub_preview_cards',
-            'id',
-            '',
-            'CASCADE',
-        );
+        $this->forge->addForeignKey('note_id', 'activitypub_notes', 'id', '', 'CASCADE',);
+        $this->forge->addForeignKey('preview_card_id', 'activitypub_preview_cards', 'id', '', 'CASCADE',);
         $this->forge->createTable('activitypub_notes_preview_cards');
     }
 

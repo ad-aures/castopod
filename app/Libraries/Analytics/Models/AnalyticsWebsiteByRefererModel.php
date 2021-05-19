@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Class AnalyticsWebsiteByRefererModel
- * Model for analytics_website_by_referer table in database
+ * Class AnalyticsWebsiteByRefererModel Model for analytics_website_by_referer table in database
+ *
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
@@ -24,6 +24,7 @@ class AnalyticsWebsiteByRefererModel extends Model
      * @var string
      */
     protected $returnType = AnalyticsWebsiteByReferer::class;
+
     /**
      * @var bool
      */
@@ -41,7 +42,7 @@ class AnalyticsWebsiteByRefererModel extends Model
      */
     public function getData(int $podcastId): array
     {
-        if (!($found = cache("{$podcastId}_analytics_website_by_referer"))) {
+        if (! ($found = cache("{$podcastId}_analytics_website_by_referer"))) {
             $oneWeekAgo = date('Y-m-d', strtotime('-1 week'));
             $found = $this->select('referer_url as labels')
                 ->selectSum('hits', 'values')
@@ -52,11 +53,8 @@ class AnalyticsWebsiteByRefererModel extends Model
                 ->groupBy('labels')
                 ->orderBy('values', 'DESC')
                 ->findAll();
-            cache()->save(
-                "{$podcastId}_analytics_website_by_referer",
-                $found,
-                600,
-            );
+            cache()
+                ->save("{$podcastId}_analytics_website_by_referer", $found, 600,);
         }
         return $found;
     }
@@ -69,7 +67,7 @@ class AnalyticsWebsiteByRefererModel extends Model
     public function getDataByDomainWeekly(int $podcastId): array
     {
         if (
-            !($found = cache("{$podcastId}_analytics_website_by_domain_weekly"))
+            ! ($found = cache("{$podcastId}_analytics_website_by_domain_weekly"))
         ) {
             $oneWeekAgo = date('Y-m-d', strtotime('-1 week'));
             $found = $this->select("SUBSTRING_INDEX(domain, '.', -2) as labels")
@@ -81,11 +79,8 @@ class AnalyticsWebsiteByRefererModel extends Model
                 ->groupBy('labels')
                 ->orderBy('values', 'DESC')
                 ->findAll();
-            cache()->save(
-                "{$podcastId}_analytics_website_by_domain_weekly",
-                $found,
-                600,
-            );
+            cache()
+                ->save("{$podcastId}_analytics_website_by_domain_weekly", $found, 600,);
         }
         return $found;
     }
@@ -98,7 +93,7 @@ class AnalyticsWebsiteByRefererModel extends Model
     public function getDataByDomainYearly(int $podcastId): array
     {
         if (
-            !($found = cache("{$podcastId}_analytics_website_by_domain_yearly"))
+            ! ($found = cache("{$podcastId}_analytics_website_by_domain_yearly"))
         ) {
             $oneYearAgo = date('Y-m-d', strtotime('-1 year'));
             $found = $this->select("SUBSTRING_INDEX(domain, '.', -2) as labels")
@@ -110,11 +105,8 @@ class AnalyticsWebsiteByRefererModel extends Model
                 ->groupBy('labels')
                 ->orderBy('values', 'DESC')
                 ->findAll();
-            cache()->save(
-                "{$podcastId}_analytics_website_by_domain_yearly",
-                $found,
-                600,
-            );
+            cache()
+                ->save("{$podcastId}_analytics_website_by_domain_yearly", $found, 600,);
         }
         return $found;
     }

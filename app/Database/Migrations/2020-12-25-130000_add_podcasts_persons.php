@@ -1,8 +1,7 @@
 <?php
 
 /**
- * Class AddPodcastsPersons
- * Creates podcasts_persons table in database
+ * Class AddPodcastsPersons Creates podcasts_persons table in database
  *
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -41,26 +40,9 @@ class AddPodcastsPersons extends Migration
             ],
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->addUniqueKey([
-            'podcast_id',
-            'person_id',
-            'person_group',
-            'person_role',
-        ]);
-        $this->forge->addForeignKey(
-            'podcast_id',
-            'podcasts',
-            'id',
-            '',
-            'CASCADE',
-        );
-        $this->forge->addForeignKey(
-            'person_id',
-            'persons',
-            'id',
-            '',
-            'CASCADE',
-        );
+        $this->forge->addUniqueKey(['podcast_id', 'person_id', 'person_group', 'person_role']);
+        $this->forge->addForeignKey('podcast_id', 'podcasts', 'id', '', 'CASCADE',);
+        $this->forge->addForeignKey('person_id', 'persons', 'id', '', 'CASCADE',);
         $this->forge->createTable('podcasts_persons');
     }
 

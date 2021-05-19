@@ -15,7 +15,6 @@ class Migrations extends BaseConfig
      *
      * You should enable migrations whenever you intend to do a schema migration
      * and disable it back when you're done.
-     *
      */
     public bool $enabled = true;
 
@@ -29,7 +28,6 @@ class Migrations extends BaseConfig
      * level the system is at. It then compares the migration level in this
      * table to the $config['migration_version'] if they are not the same it
      * will migrate up. This must be set.
-     *
      */
     public string $table = 'migrations';
 
@@ -46,7 +44,6 @@ class Migrations extends BaseConfig
      * - YmdHis_
      * - Y-m-d-His_
      * - Y_m_d_His_
-     *
      */
     public string $timestampFormat = 'Y-m-d-His_';
 }

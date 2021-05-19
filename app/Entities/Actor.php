@@ -19,6 +19,7 @@ use RuntimeException;
 class Actor extends ActivityPubActor
 {
     protected ?Podcast $podcast = null;
+
     protected bool $is_podcast;
 
     public function getIsPodcast(): bool
@@ -29,15 +30,11 @@ class Actor extends ActivityPubActor
     public function getPodcast(): ?Podcast
     {
         if ($this->id === null) {
-            throw new RuntimeException(
-                'Podcast id must be set before getting associated podcast.',
-            );
+            throw new RuntimeException('Podcast id must be set before getting associated podcast.',);
         }
 
         if ($this->podcast === null) {
-            $this->podcast = (new PodcastModel())->getPodcastByActorId(
-                $this->id,
-            );
+            $this->podcast = (new PodcastModel())->getPodcastByActorId($this->id,);
         }
 
         return $this->podcast;

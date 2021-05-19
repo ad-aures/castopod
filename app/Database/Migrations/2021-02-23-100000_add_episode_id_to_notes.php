@@ -1,8 +1,7 @@
 <?php
 
 /**
- * Class AddEpisodeIdToNotes
- * Adds episode_id field to activitypub_notes table in database
+ * Class AddEpisodeIdToNotes Adds episode_id field to activitypub_notes table in database
  *
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -19,20 +18,17 @@ class AddEpisodeIdToNotes extends Migration
     {
         $prefix = $this->db->getPrefix();
 
-        $createQuery = <<<SQL
+        $createQuery = <<<CODE_SAMPLE
             ALTER TABLE {$prefix}activitypub_notes
             ADD COLUMN `episode_id` INT UNSIGNED NULL AFTER `replies_count`,
             ADD FOREIGN KEY {$prefix}activitypub_notes_episode_id_foreign(episode_id) REFERENCES {$prefix}episodes(id) ON DELETE CASCADE;
-        SQL;
+        CODE_SAMPLE;
         $this->db->query($createQuery);
     }
 
     public function down(): void
     {
-        $this->forge->dropForeignKey(
-            'activitypub_notes',
-            'activitypub_notes_episode_id_foreign',
-        );
+        $this->forge->dropForeignKey('activitypub_notes', 'activitypub_notes_episode_id_foreign',);
         $this->forge->dropColumn('activitypub_notes', 'episode_id');
     }
 }

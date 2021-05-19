@@ -1,8 +1,7 @@
 <?php
 
 /**
- * Class AddAnalyticsPodcastsByPlayer
- * Creates analytics_podcasts_by_player table in database
+ * Class AddAnalyticsPodcastsByPlayer Creates analytics_podcasts_by_player table in database
  *
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -52,18 +51,8 @@ class AddAnalyticsPodcastsByPlayer extends Migration
                 'default' => 1,
             ],
         ]);
-        $this->forge->addPrimaryKey([
-            'podcast_id',
-            'date',
-            'service',
-            'app',
-            'device',
-            'os',
-            'is_bot',
-        ]);
-        $this->forge->addField(
-            '`created_at` timestamp NOT NULL DEFAULT current_timestamp()',
-        );
+        $this->forge->addPrimaryKey(['podcast_id', 'date', 'service', 'app', 'device', 'os', 'is_bot']);
+        $this->forge->addField('`created_at` timestamp NOT NULL DEFAULT current_timestamp()',);
         $this->forge->addField(
             '`updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()',
         );

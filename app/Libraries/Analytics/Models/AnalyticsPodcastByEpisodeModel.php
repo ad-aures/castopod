@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Class AnalyticsPodcastByEpisodeModel
- * Model for analytics_podcasts_by_episodes table in database
+ * Class AnalyticsPodcastByEpisodeModel Model for analytics_podcasts_by_episodes table in database
+ *
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
@@ -24,6 +24,7 @@ class AnalyticsPodcastByEpisodeModel extends Model
      * @var string
      */
     protected $returnType = AnalyticsPodcastsByEpisode::class;
+
     /**
      * @var bool
      */
@@ -40,9 +41,7 @@ class AnalyticsPodcastByEpisodeModel extends Model
     public function getDataByDay(int $podcastId, int $episodeId): array
     {
         if (
-            !($found = cache(
-                "{$podcastId}_{$episodeId}_analytics_podcast_by_episode_by_day",
-            ))
+            ! ($found = cache("{$podcastId}_{$episodeId}_analytics_podcast_by_episode_by_day",))
         ) {
             $found = $this->select('date as labels')
                 ->selectSum('hits', 'values')
@@ -55,11 +54,8 @@ class AnalyticsPodcastByEpisodeModel extends Model
                 ->orderBy('labels', 'ASC')
                 ->findAll();
 
-            cache()->save(
-                "{$podcastId}_{$episodeId}_analytics_podcast_by_episode_by_day",
-                $found,
-                600,
-            );
+            cache()
+                ->save("{$podcastId}_{$episodeId}_analytics_podcast_by_episode_by_day", $found, 600,);
         }
 
         return $found;
@@ -71,9 +67,7 @@ class AnalyticsPodcastByEpisodeModel extends Model
     public function getDataByMonth(int $podcastId, int $episodeId = null): array
     {
         if (
-            !($found = cache(
-                "{$podcastId}_{$episodeId}_analytics_podcast_by_episode_by_month",
-            ))
+            ! ($found = cache("{$podcastId}_{$episodeId}_analytics_podcast_by_episode_by_month",))
         ) {
             $found = $this->select('DATE_FORMAT(date,"%Y-%m-01") as labels')
                 ->selectSum('hits', 'values')
@@ -85,11 +79,8 @@ class AnalyticsPodcastByEpisodeModel extends Model
                 ->orderBy('labels', 'ASC')
                 ->findAll();
 
-            cache()->save(
-                "{$podcastId}_{$episodeId}_analytics_podcast_by_episode_by_month",
-                $found,
-                600,
-            );
+            cache()
+                ->save("{$podcastId}_{$episodeId}_analytics_podcast_by_episode_by_month", $found, 600,);
         }
 
         return $found;

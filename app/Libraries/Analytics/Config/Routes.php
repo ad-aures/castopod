@@ -19,22 +19,22 @@ $routes->addPlaceholder(
     '\bWeekly|\bYearly|\bByDay|\bByWeekday|\bByMonth|\bByAppWeekly|\bByAppYearly|\bByOsWeekly|\bByDeviceWeekly|\bBots|\bByServiceWeekly|\bBandwidthByDay|\bUniqueListenersByDay|\bUniqueListenersByMonth|\bTotalListeningTimeByDay|\bTotalListeningTimeByMonth|\bByDomainWeekly|\bByDomainYearly',
 );
 
-$routes->group('', ['namespace' => 'Analytics\Controllers'], function (
-    $routes
-): void {
-    $routes->group(config('Analytics')->gateway . '/(:num)/(:class)', function (
-        $routes
-    ): void {
+$routes->group('', [
+    'namespace' => 'Analytics\Controllers',
+], function ($routes): void {
+    $routes->group(config('Analytics')->gateway . '/(:num)/(:class)', function ($routes): void {
         $routes->get('/', 'AnalyticsController::getData/$1/$2', [
             'as' => 'analytics-full-data',
-            'filter' => config('Analytics')->routeFilters[
+            'filter' => config('Analytics')
+                ->routeFilters[
                 'analytics-full-data'
             ],
         ]);
 
         $routes->get('(:filter)', 'AnalyticsController::getData/$1/$2/$3', [
             'as' => 'analytics-data',
-            'filter' => config('Analytics')->routeFilters['analytics-data'],
+            'filter' => config('Analytics')
+                ->routeFilters['analytics-data'],
         ]);
 
         $routes->get(
@@ -42,7 +42,8 @@ $routes->group('', ['namespace' => 'Analytics\Controllers'], function (
             'AnalyticsController::getData/$1/$2/$3/$4',
             [
                 'as' => 'analytics-filtered-data',
-                'filter' => config('Analytics')->routeFilters[
+                'filter' => config('Analytics')
+                    ->routeFilters[
                     'analytics-filtered-data'
                 ],
             ],
@@ -68,7 +69,4 @@ $routes->group('', ['namespace' => 'Analytics\Controllers'], function (
 
 // Show the Unknown UserAgents
 $routes->get('.well-known/unknown-useragents', 'UnknownUserAgentsController');
-$routes->get(
-    '.well-known/unknown-useragents/(:num)',
-    'UnknownUserAgentsController/$1',
-);
+$routes->get('.well-known/unknown-useragents/(:num)', 'UnknownUserAgentsController/$1',);

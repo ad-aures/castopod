@@ -3,9 +3,10 @@
 namespace Tests\Session;
 
 use Tests\Support\SessionTestCase;
+
 class ExampleSessionTest extends SessionTestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
     }
@@ -16,6 +17,6 @@ class ExampleSessionTest extends SessionTestCase
 
         $value = $this->session->get('logged_in');
 
-        $this->assertEquals(123, $value);
+        $this->assertSame(123, $value);
     }
 }

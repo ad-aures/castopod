@@ -17,6 +17,7 @@ class PageModel extends Model
      * @var string
      */
     protected $table = 'pages';
+
     /**
      * @var string
      */
@@ -31,6 +32,7 @@ class PageModel extends Model
      * @var string
      */
     protected $returnType = Page::class;
+
     /**
      * @var bool
      */
@@ -76,7 +78,8 @@ class PageModel extends Model
     protected function clearCache(array $data): array
     {
         // Clear the cache of all pages
-        cache()->deleteMatching('page*');
+        cache()
+            ->deleteMatching('page*');
 
         return $data;
     }

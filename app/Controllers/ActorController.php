@@ -23,12 +23,12 @@ class ActorController extends ActivityPubActorController
     public function follow(): string
     {
         // Prevent analytics hit when authenticated
-        if (!can_user_interact()) {
+        if (! can_user_interact()) {
             $this->registerPodcastWebpageHit($this->actor->podcast->id);
         }
 
         $cacheName = "page_podcast-{$this->actor->username}_follow";
-        if (!($cachedView = cache($cacheName))) {
+        if (! ($cachedView = cache($cacheName))) {
             helper(['form', 'components', 'svg']);
             $data = [
                 'actor' => $this->actor,

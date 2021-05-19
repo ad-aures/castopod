@@ -8,8 +8,8 @@
 
 namespace ActivityPub\Entities;
 
-use RuntimeException;
 use CodeIgniter\Entity\Entity;
+use RuntimeException;
 
 /**
  * @property int $id
@@ -43,6 +43,7 @@ class Actor extends Entity
      * @var Actor[]
      */
     protected ?array $followers = null;
+
     protected bool $is_local = false;
 
     /**
@@ -76,7 +77,7 @@ class Actor extends Entity
 
     public function getIsLocal(): bool
     {
-        if (!$this->is_local) {
+        if (! $this->is_local) {
             $uri = current_url(true);
 
             $this->is_local =
@@ -94,15 +95,12 @@ class Actor extends Entity
     public function getFollowers(): array
     {
         if ($this->id === null) {
-            throw new RuntimeException(
-                'Actor must be created before getting followers.',
-            );
+            throw new RuntimeException('Actor must be created before getting followers.',);
         }
 
         if ($this->followers === null) {
-            $this->followers = (array) model('ActorModel')->getFollowers(
-                $this->id,
-            );
+            $this->followers = (array) model('ActorModel')
+                ->getFollowers($this->id,);
         }
 
         return $this->followers;

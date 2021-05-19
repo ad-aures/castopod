@@ -8,18 +8,20 @@
 
 namespace ActivityPub;
 
-use CodeIgniter\HTTP\ResponseInterface;
-use CodeIgniter\HTTP\CURLRequest;
-use CodeIgniter\HTTP\URI;
 use ActivityPub\Core\Activity;
-use Config\Services;
+use CodeIgniter\HTTP\CURLRequest;
+use CodeIgniter\HTTP\ResponseInterface;
+use CodeIgniter\HTTP\URI;
 use CodeIgniter\I18n\Time;
+use Config\Services;
 use phpseclib\Crypt\RSA;
 
 class ActivityRequest
 {
     protected CURLRequest $request;
+
     protected URI $uri;
+
     protected ?Activity $activity;
 
     /**
@@ -28,7 +30,8 @@ class ActivityRequest
     protected array $options = [
         'headers' => [
             'Content-Type' => 'application/activity+json',
-            'Accept' => 'application/activity+json', // TODO: outgoing and incoming requests
+            'Accept' => 'application/activity+json',
+            // TODO: outgoing and incoming requests
         ],
     ];
 
@@ -63,7 +66,7 @@ class ActivityRequest
     public function sign(string $keyId, string $privateKey): void
     {
         $rsa = new RSA();
-        $rsa->loadKey($privateKey); // private key
+        $rsa->loadKey($privateKey);
         $rsa->setHash('sha256');
         $rsa->setSignatureMode(RSA::SIGNATURE_PKCS1);
 

@@ -12,13 +12,8 @@ use Myth\Auth\Authentication\Passwords\ValidationRules as PasswordRules;
 
 class Validation
 {
-    //--------------------------------------------------------------------
-    // Setup
-    //--------------------------------------------------------------------
-
     /**
-     * Stores the classes that contain the
-     * rules that are available.
+     * Stores the classes that contain the rules that are available.
      *
      * @var string[]
      */
@@ -33,8 +28,7 @@ class Validation
     ];
 
     /**
-     * Specifies the views that are used to display the
-     * errors.
+     * Specifies the views that are used to display the errors.
      *
      * @var array<string, string>
      */
@@ -42,8 +36,4 @@ class Validation
         'list' => 'CodeIgniter\Validation\Views\list',
         'single' => 'CodeIgniter\Validation\Views\single',
     ];
-
-    //--------------------------------------------------------------------
-    // Rules
-    //--------------------------------------------------------------------
 }

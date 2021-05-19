@@ -1,8 +1,7 @@
 <?php
 
 /**
- * Class FakeWebsiteAnalyticsSeeder
- * Inserts Fake Analytics in the database
+ * Class FakeWebsiteAnalyticsSeeder Inserts Fake Analytics in the database
  *
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -11,8 +10,8 @@
 
 namespace App\Database\Seeds;
 
-use App\Models\PodcastModel;
 use App\Models\EpisodeModel;
+use App\Models\PodcastModel;
 
 use CodeIgniter\Database\Seeder;
 
@@ -203,9 +202,7 @@ class FakeWebsiteAnalyticsSeeder extends Seeder
                     ])
                     ->findAll();
                 foreach ($episodes as $episode) {
-                    $age = floor(
-                        ($date - strtotime($episode->published_at)) / 86400,
-                    );
+                    $age = floor(($date - strtotime($episode->published_at)) / 86400,);
                     $probability1 = (int) floor(exp(3 - $age / 40)) + 1;
 
                     for (

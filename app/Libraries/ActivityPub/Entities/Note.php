@@ -9,8 +9,8 @@
 namespace ActivityPub\Entities;
 
 use CodeIgniter\I18n\Time;
-use RuntimeException;
 use Michalsn\Uuid\UuidEntity;
+use RuntimeException;
 
 /**
  * @property string $id
@@ -41,11 +41,17 @@ use Michalsn\Uuid\UuidEntity;
 class Note extends UuidEntity
 {
     protected ?Actor $actor = null;
+
     protected bool $is_reply = false;
+
     protected ?Note $reply_to_note = null;
+
     protected bool $is_reblog = false;
+
     protected ?Note $reblog_of_note = null;
+
     protected ?PreviewCard $preview_card = null;
+
     protected bool $has_preview_card = false;
 
     /**
@@ -92,13 +98,12 @@ class Note extends UuidEntity
     public function getActor(): Actor
     {
         if ($this->actor_id === null) {
-            throw new RuntimeException(
-                'Note must have an actor_id before getting actor.',
-            );
+            throw new RuntimeException('Note must have an actor_id before getting actor.',);
         }
 
         if ($this->actor === null) {
-            $this->actor = model('ActorModel')->getActorById($this->actor_id);
+            $this->actor = model('ActorModel')
+                ->getActorById($this->actor_id);
         }
 
         return $this->actor;
@@ -107,15 +112,12 @@ class Note extends UuidEntity
     public function getPreviewCard(): ?PreviewCard
     {
         if ($this->id === null) {
-            throw new RuntimeException(
-                'Note must be created before getting preview_card.',
-            );
+            throw new RuntimeException('Note must be created before getting preview_card.',);
         }
 
         if ($this->preview_card === null) {
-            $this->preview_card = model('PreviewCardModel')->getNotePreviewCard(
-                $this->id,
-            );
+            $this->preview_card = model('PreviewCardModel')
+                ->getNotePreviewCard($this->id,);
         }
 
         return $this->preview_card;
@@ -139,15 +141,12 @@ class Note extends UuidEntity
     public function getReplies(): array
     {
         if ($this->id === null) {
-            throw new RuntimeException(
-                'Note must be created before getting replies.',
-            );
+            throw new RuntimeException('Note must be created before getting replies.',);
         }
 
         if ($this->replies === null) {
-            $this->replies = (array) model('NoteModel')->getNoteReplies(
-                $this->id,
-            );
+            $this->replies = (array) model('NoteModel')
+                ->getNoteReplies($this->id,);
         }
 
         return $this->replies;
@@ -158,16 +157,15 @@ class Note extends UuidEntity
         return $this->getReplies() !== null;
     }
 
-    public function getReplyToNote(): Note
+    public function getReplyToNote(): self
     {
         if ($this->in_reply_to_id === null) {
             throw new RuntimeException('Note is not a reply.');
         }
 
         if ($this->reply_to_note === null) {
-            $this->reply_to_note = model('NoteModel')->getNoteById(
-                $this->in_reply_to_id,
-            );
+            $this->reply_to_note = model('NoteModel')
+                ->getNoteById($this->in_reply_to_id,);
         }
 
         return $this->reply_to_note;
@@ -179,15 +177,12 @@ class Note extends UuidEntity
     public function getReblogs(): array
     {
         if ($this->id === null) {
-            throw new RuntimeException(
-                'Note must be created before getting reblogs.',
-            );
+            throw new RuntimeException('Note must be created before getting reblogs.',);
         }
 
         if ($this->reblogs === null) {
-            $this->reblogs = (array) model('NoteModel')->getNoteReblogs(
-                $this->id,
-            );
+            $this->reblogs = (array) model('NoteModel')
+                ->getNoteReblogs($this->id,);
         }
 
         return $this->reblogs;
@@ -195,19 +190,18 @@ class Note extends UuidEntity
 
     public function getIsReblog(): bool
     {
-        return $this->reblog_of_id != null;
+        return $this->reblog_of_id !== null;
     }
 
-    public function getReblogOfNote(): Note
+    public function getReblogOfNote(): self
     {
         if ($this->reblog_of_id === null) {
             throw new RuntimeException('Note is not a reblog.');
         }
 
         if ($this->reblog_of_note === null) {
-            $this->reblog_of_note = model('NoteModel')->getNoteById(
-                $this->reblog_of_id,
-            );
+            $this->reblog_of_note = model('NoteModel')
+                ->getNoteById($this->reblog_of_id,);
         }
 
         return $this->reblog_of_note;
@@ -220,11 +214,7 @@ class Note extends UuidEntity
         $messageWithoutTags = strip_tags($message);
 
         $this->attributes['message'] = $messageWithoutTags;
-        $this->attributes['message_html'] = str_replace(
-            "\n",
-            '<br />',
-            linkify($messageWithoutTags),
-        );
+        $this->attributes['message_html'] = str_replace("\n", '<br />', linkify($messageWithoutTags),);
 
         return $this;
     }

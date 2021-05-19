@@ -34,7 +34,7 @@ class Category extends Entity
         'google_category' => 'string',
     ];
 
-    public function getParent(): ?Category
+    public function getParent(): ?self
     {
         if ($this->parent_id === null) {
             return null;

@@ -8,13 +8,13 @@
 
 namespace App\Controllers;
 
-use CodeIgniter\HTTP\ResponseInterface;
-use CodeIgniter\Exceptions\PageNotFoundException;
-use Opawg\UserAgentsPhp\UserAgentsRSS;
-use Exception;
 use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
 use CodeIgniter\Controller;
+use CodeIgniter\Exceptions\PageNotFoundException;
+use CodeIgniter\HTTP\ResponseInterface;
+use Exception;
+use Opawg\UserAgentsPhp\UserAgentsRSS;
 
 class FeedController extends Controller
 {
@@ -22,8 +22,9 @@ class FeedController extends Controller
     {
         helper('rss');
 
-        $podcast = (new PodcastModel())->where('name', $podcastName)->first();
-        if (!$podcast) {
+        $podcast = (new PodcastModel())->where('name', $podcastName)
+            ->first();
+        if (! $podcast) {
             throw PageNotFoundException::forPageNotFound();
         }
 
@@ -43,7 +44,7 @@ class FeedController extends Controller
         $cacheName =
             "podcast#{$podcast->id}_feed" . ($service ? "_{$serviceSlug}" : '');
 
-        if (!($found = cache($cacheName))) {
+        if (! ($found = cache($cacheName))) {
             $found = get_rss_feed($podcast, $serviceSlug);
 
             // The page cache is set to expire after next episode publication or a decade by default so it is deleted manually upon podcast update
@@ -51,13 +52,14 @@ class FeedController extends Controller
                 $podcast->id,
             );
 
-            cache()->save(
-                $cacheName,
-                $found,
-                $secondsToNextUnpublishedEpisode
+            cache()
+                ->save(
+                    $cacheName,
+                    $found,
+                    $secondsToNextUnpublishedEpisode
                     ? $secondsToNextUnpublishedEpisode
                     : DECADE,
-            );
+                );
         }
 
         return $this->response->setXML($found);

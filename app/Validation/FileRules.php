@@ -13,11 +13,7 @@ use CodeIgniter\Validation\FileRules as ValidationFileRules;
 class FileRules extends ValidationFileRules
 {
     /**
-     * Checks an uploaded file to verify that the dimensions are within
-     * a specified allowable dimension.
-     *
-     * @param string|null $blank
-     * 
+     * Checks an uploaded file to verify that the dimensions are within a specified allowable dimension.
      */
     public function min_dims(string $blank = null, string $params): bool
     {
@@ -26,12 +22,12 @@ class FileRules extends ValidationFileRules
         $params = explode(',', $params);
         $name = array_shift($params);
 
-        if (!($files = $this->request->getFileMultiple($name))) {
+        if (! ($files = $this->request->getFileMultiple($name))) {
             $files = [$this->request->getFile($name)];
         }
 
         foreach ($files as $file) {
-            if (is_null($file)) {
+            if ($file === null) {
                 return false;
             }
 
@@ -57,11 +53,9 @@ class FileRules extends ValidationFileRules
     }
 
     //--------------------------------------------------------------------
+
     /**
      * Checks an uploaded file to verify that the image ratio is of 1:1
-     *
-     * @param string|null $blank
-     *
      */
     public function is_image_squared(string $blank = null, string $params): bool
     {
@@ -70,12 +64,12 @@ class FileRules extends ValidationFileRules
         $params = explode(',', $params);
         $name = array_shift($params);
 
-        if (!($files = $this->request->getFileMultiple($name))) {
+        if (! ($files = $this->request->getFileMultiple($name))) {
             $files = [$this->request->getFile($name)];
         }
 
         foreach ($files as $file) {
-            if (is_null($file)) {
+            if ($file === null) {
                 return false;
             }
 
@@ -88,7 +82,7 @@ class FileRules extends ValidationFileRules
             $fileWidth = $info[0];
             $fileHeight = $info[1];
 
-            if ($fileWidth != $fileHeight) {
+            if ($fileWidth !== $fileHeight) {
                 return false;
             }
         }

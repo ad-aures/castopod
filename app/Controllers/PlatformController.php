@@ -8,9 +8,9 @@
 
 namespace App\Controllers;
 
-use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\PlatformModel;
 use CodeIgniter\Controller;
+use CodeIgniter\HTTP\ResponseInterface;
 
 /*
  * Provide public access to all platforms so that they can be exported

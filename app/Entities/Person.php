@@ -27,7 +27,9 @@ use RuntimeException;
 class Person extends Entity
 {
     protected Image $image;
+
     protected ?int $podcast_id = null;
+
     protected ?int $episode_id = null;
 
     /**
@@ -69,25 +71,24 @@ class Person extends Entity
 
     public function getImage(): Image
     {
-        return new Image(
-            null,
-            $this->attributes['image_path'],
-            $this->attributes['image_mimetype'],
-        );
+        return new Image(null, $this->attributes['image_path'], $this->attributes['image_mimetype'],);
     }
 
     /**
      * @return object[]
      */
-    public function getRoles(): array {
+    public function getRoles(): array
+    {
         if ($this->attributes['podcast_id'] === null) {
-            throw new RuntimeException(
-                'Person must have a podcast_id before getting roles.',
-            );
+            throw new RuntimeException('Person must have a podcast_id before getting roles.',);
         }
 
         if ($this->roles === null) {
-            $this->roles = (new PersonModel())->getPersonRoles($this->id, $this->attributes['podcast_id'], $this->episode_id);
+            $this->roles = (new PersonModel())->getPersonRoles(
+                $this->id,
+                $this->attributes['podcast_id'],
+                $this->episode_id
+            );
         }
 
         return $this->roles;

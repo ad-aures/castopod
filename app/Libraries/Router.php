@@ -12,16 +12,15 @@
 
 namespace App\Libraries;
 
-use Config\Services;
 use CodeIgniter\Router\Exceptions\RedirectException;
 use CodeIgniter\Router\Router as CodeIgniterRouter;
+use Config\Services;
 
 class Router extends CodeIgniterRouter
 {
     /**
-     * Compares the uri string against the routes that the
-     * RouteCollection class defined for us, attempting to find a match.
-     * This method will modify $this->controller, etal as needed.
+     * Compares the uri string against the routes that the RouteCollection class defined for us, attempting to find a
+     * match. This method will modify $this->controller, etal as needed.
      *
      * @param string $uri The URI path to compare against the routes
      *
@@ -31,9 +30,7 @@ class Router extends CodeIgniterRouter
     protected function checkRoutes(string $uri): bool
     {
         /** @noRector RemoveExtraParametersRector */
-        $routes = $this->collection->getRoutes(
-            $this->collection->getHTTPVerb(),
-        );
+        $routes = $this->collection->getRoutes($this->collection->getHTTPVerb(),);
 
         // Don't waste any time
         if ($routes === []) {
@@ -55,10 +52,7 @@ class Router extends CodeIgniterRouter
             if (str_contains($key, '{locale}')) {
                 $localeSegment = array_search(
                     '{locale}',
-                    preg_split(
-                        '~[\/]*((^[a-zA-Z0-9])|\(([^()]*)\))*[\/]+~m',
-                        $key,
-                    ),
+                    preg_split('~[\/]*((^[a-zA-Z0-9])|\(([^()]*)\))*[\/]+~m', $key,),
                     true,
                 );
 
@@ -70,9 +64,7 @@ class Router extends CodeIgniterRouter
 
             // Does the RegEx match?
             if (preg_match('#^' . $key . '$#u', $uri, $matches)) {
-                $this->matchedRouteOptions = $this->collection->getRoutesOptions(
-                    $matchedKey,
-                );
+                $this->matchedRouteOptions = $this->collection->getRoutesOptions($matchedKey,);
 
                 // Is this route supposed to redirect to another?
                 if ($this->collection->isRedirect($key)) {
@@ -92,7 +84,7 @@ class Router extends CodeIgniterRouter
                 // Are we using Closures? If so, then we need
                 // to collect the params into an array
                 // so it can be passed to the controller method later.
-                if (!is_string($val) && is_callable($val)) {
+                if (! is_string($val) && is_callable($val)) {
                     $this->controller = $val;
 
                     // Remove the original string from the matches array
@@ -110,30 +102,22 @@ class Router extends CodeIgniterRouter
                 // check if the alternate-content has been requested in the accept
                 // header and overwrite the $val with the matching controller method
                 if (
-                    array_key_exists(
-                        'alternate-content',
-                        $this->matchedRouteOptions,
-                    ) &&
+                    array_key_exists('alternate-content', $this->matchedRouteOptions,) &&
                     is_array($this->matchedRouteOptions['alternate-content'])
                 ) {
                     $request = Services::request();
                     $negotiate = Services::negotiator();
 
-                    $acceptHeader = $request->getHeader('Accept')->getValue();
+                    $acceptHeader = $request->getHeader('Accept')
+                        ->getValue();
                     $parsedHeader = $negotiate->parseHeader($acceptHeader);
 
-                    $supported = array_keys(
-                        $this->matchedRouteOptions['alternate-content'],
-                    );
+                    $supported = array_keys($this->matchedRouteOptions['alternate-content'],);
 
                     $expectedContentType = $parsedHeader[0];
                     foreach ($supported as $available) {
                         if (
-                            $negotiate->callMatch(
-                                $expectedContentType,
-                                $available,
-                                true,
-                            )
+                            $negotiate->callMatch($expectedContentType, $available, true,)
                         ) {
                             if (
                                 array_key_exists(
@@ -173,11 +157,7 @@ class Router extends CodeIgniterRouter
                 ) {
                     $replacekey = str_replace('/(.*)', '', $key);
                     $val = preg_replace('#^' . $key . '$#u', $val, $uri);
-                    $val = str_replace(
-                        $replacekey,
-                        str_replace('/', '\\', $replacekey),
-                        $val,
-                    );
+                    $val = str_replace($replacekey, str_replace('/', '\\', $replacekey), $val,);
                 } elseif (str_contains($val, '$') && str_contains($key, '(')) {
                     $val = preg_replace('#^' . $key . '$#u', $val, $uri);
                 } elseif (str_contains($val, '/')) {

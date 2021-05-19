@@ -6,7 +6,7 @@
  * @link       https://castopod.org/
  */
 
-if (!function_exists('get_browser_language')) {
+if (! function_exists('get_browser_language')) {
     /**
      * Gets the browser default language using the request header key `HTTP_ACCEPT_LANGUAGE`
      *
@@ -20,7 +20,7 @@ if (!function_exists('get_browser_language')) {
     }
 }
 
-if (!function_exists('slugify')) {
+if (! function_exists('slugify')) {
     function slugify(string $text): string
     {
         // replace non letter or digits by -
@@ -127,7 +127,7 @@ if (!function_exists('slugify')) {
 
 //--------------------------------------------------------------------
 
-if (!function_exists('format_duration')) {
+if (! function_exists('format_duration')) {
     /**
      * Formats duration in seconds to an hh:mm:ss string
      *

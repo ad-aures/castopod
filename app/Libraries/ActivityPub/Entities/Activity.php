@@ -8,8 +8,8 @@
 
 namespace ActivityPub\Entities;
 
-use RuntimeException;
 use Michalsn\Uuid\UuidEntity;
+use RuntimeException;
 
 /**
  * @property string $id
@@ -28,7 +28,9 @@ use Michalsn\Uuid\UuidEntity;
 class Activity extends UuidEntity
 {
     protected ?Actor $actor;
+
     protected ?Actor $target_actor;
+
     protected ?Note $note;
 
     /**
@@ -57,13 +59,12 @@ class Activity extends UuidEntity
     public function getActor(): Actor
     {
         if ($this->actor_id === null) {
-            throw new RuntimeException(
-                'Activity must have an actor_id before getting the actor.',
-            );
+            throw new RuntimeException('Activity must have an actor_id before getting the actor.',);
         }
 
         if ($this->actor === null) {
-            $this->actor = model('ActorModel')->getActorById($this->actor_id);
+            $this->actor = model('ActorModel')
+                ->getActorById($this->actor_id);
         }
 
         return $this->actor;
@@ -72,15 +73,12 @@ class Activity extends UuidEntity
     public function getTargetActor(): Actor
     {
         if ($this->target_actor_id === null) {
-            throw new RuntimeException(
-                'Activity must have a target_actor_id before getting the target actor.',
-            );
+            throw new RuntimeException('Activity must have a target_actor_id before getting the target actor.',);
         }
 
         if ($this->target_actor === null) {
-            $this->target_actor = model('ActorModel')->getActorById(
-                $this->target_actor_id,
-            );
+            $this->target_actor = model('ActorModel')
+                ->getActorById($this->target_actor_id,);
         }
 
         return $this->target_actor;
@@ -89,13 +87,12 @@ class Activity extends UuidEntity
     public function getNote(): Note
     {
         if ($this->note_id === null) {
-            throw new RuntimeException(
-                'Activity must have a note_id before getting note.',
-            );
+            throw new RuntimeException('Activity must have a note_id before getting note.',);
         }
 
         if ($this->note === null) {
-            $this->note = model('NoteModel')->getNoteById($this->note_id);
+            $this->note = model('NoteModel')
+                ->getNoteById($this->note_id);
         }
 
         return $this->note;

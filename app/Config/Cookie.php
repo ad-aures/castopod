@@ -13,7 +13,6 @@ class Cookie extends BaseConfig
      * --------------------------------------------------------------------------
      *
      * Set a cookie name prefix if you need to avoid collisions.
-     *
      */
     public string $prefix = '';
 
@@ -25,9 +24,8 @@ class Cookie extends BaseConfig
      * Default expires timestamp for cookies. Setting this to `0` will mean the
      * cookie will not have the `Expires` attribute and will behave as a session
      * cookie.
-     *
      */
-    public DateTimeInterface|int|string $expires = 0;
+    public DateTimeInterface | int | string $expires = 0;
 
     /**
      * --------------------------------------------------------------------------
@@ -35,7 +33,6 @@ class Cookie extends BaseConfig
      * --------------------------------------------------------------------------
      *
      * Typically will be a forward slash.
-     *
      */
     public string $path = '/';
 
@@ -45,7 +42,6 @@ class Cookie extends BaseConfig
      * --------------------------------------------------------------------------
      *
      * Set to `.your-domain.com` for site-wide cookies.
-     *
      */
     public string $domain = '';
 
@@ -55,7 +51,6 @@ class Cookie extends BaseConfig
      * --------------------------------------------------------------------------
      *
      * Cookie will only be set if a secure HTTPS connection exists.
-     *
      */
     public bool $secure = false;
 
@@ -65,7 +60,6 @@ class Cookie extends BaseConfig
      * --------------------------------------------------------------------------
      *
      * Cookie will only be accessible via HTTP(S) (no JavaScript).
-     *
      */
     public bool $httponly = true;
 
@@ -88,7 +82,6 @@ class Cookie extends BaseConfig
      * Defaults to `Lax` for compatibility with modern browsers. Setting `''`
      * (empty string) means default SameSite attribute set by browsers (`Lax`)
      * will be set on cookies. If set to `None`, `$secure` must also be set.
-     *
      */
     public string $samesite = 'Lax';
 

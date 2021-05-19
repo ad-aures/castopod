@@ -8,15 +8,14 @@
 
 namespace App\Controllers;
 
-use Myth\Auth\Controllers\AuthController as MythAuthController;
 use App\Entities\User;
 use CodeIgniter\HTTP\RedirectResponse;
+use Myth\Auth\Controllers\AuthController as MythAuthController;
 
 class AuthController extends MythAuthController
 {
     /**
-     * An array of helpers to be automatically loaded
-     * upon class instantiation.
+     * An array of helpers to be automatically loaded upon class instantiation.
      *
      * @var string[]
      */
@@ -28,7 +27,7 @@ class AuthController extends MythAuthController
     public function attemptRegister(): RedirectResponse
     {
         // Check if registration is allowed
-        if (!$this->config->allowRegistration) {
+        if (! $this->config->allowRegistration) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -46,7 +45,7 @@ class AuthController extends MythAuthController
             'password' => 'required|strong_password',
         ];
 
-        if (!$this->validate($rules)) {
+        if (! $this->validate($rules)) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -54,11 +53,7 @@ class AuthController extends MythAuthController
         }
 
         // Save the user
-        $allowedPostFields = array_merge(
-            ['password'],
-            $this->config->validFields,
-            $this->config->personalFields,
-        );
+        $allowedPostFields = array_merge(['password'], $this->config->validFields, $this->config->personalFields,);
         $user = new User($this->request->getPost($allowedPostFields));
 
         $this->config->requireActivation === null
@@ -70,7 +65,7 @@ class AuthController extends MythAuthController
             $users = $users->withGroup($this->config->defaultUserGroup);
         }
 
-        if (!$users->save($user)) {
+        if (! $users->save($user)) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -81,14 +76,11 @@ class AuthController extends MythAuthController
             $activator = service('activator');
             $sent = $activator->send($user);
 
-            if (!$sent) {
+            if (! $sent) {
                 return redirect()
                     ->back()
                     ->withInput()
-                    ->with(
-                        'error',
-                        $activator->error() ?? lang('Auth.unknownError'),
-                    );
+                    ->with('error', $activator->error() ?? lang('Auth.unknownError'),);
             }
 
             // Success!
@@ -104,8 +96,7 @@ class AuthController extends MythAuthController
     }
 
     /**
-     * Verifies the code with the email and saves the new password,
-     * if they all pass validation.
+     * Verifies the code with the email and saves the new password, if they all pass validation.
      */
     public function attemptReset(): RedirectResponse
     {
@@ -131,7 +122,7 @@ class AuthController extends MythAuthController
             'password' => 'required|strong_password',
         ];
 
-        if (!$this->validate($rules)) {
+        if (! $this->validate($rules)) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -143,7 +134,7 @@ class AuthController extends MythAuthController
             ->where('reset_hash', $this->request->getPost('token'))
             ->first();
 
-        if (is_null($user)) {
+        if ($user === null) {
             return redirect()
                 ->back()
                 ->with('error', lang('Auth.forgotNoUser'));
@@ -179,7 +170,7 @@ class AuthController extends MythAuthController
             'actor_id' => 'required|numeric',
         ];
 
-        if (!$this->validate($rules)) {
+        if (! $this->validate($rules)) {
             return redirect()
                 ->back()
                 ->withInput()

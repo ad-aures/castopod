@@ -10,9 +10,9 @@
     "terminal.integrated.defaultProfile.linux": "/bin/bash",
     "editor.formatOnSave": true,
     "[php]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
+      "editor.defaultFormatter": "bmewburn.vscode-intelephense-client",
+      "editor.formatOnSave": false
     },
-    "phpSniffer.autoDetect": true,
     "color-highlight.markerType": "dot-before",
     "files.associations": {
       "*.xml.dist": "xml",
@@ -31,7 +31,6 @@
     "jamesbirtles.svelte-vscode",
     "dbaeumer.vscode-eslint",
     "stylelint.vscode-stylelint",
-    "wongjn.php-sniffer",
     "eamodio.gitlens",
     "breezelin.phpstan",
     "kasik96.latte"

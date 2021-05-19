@@ -8,11 +8,11 @@
 
 namespace ActivityPub\Models;
 
-use ActivityPub\Entities\Actor;
-use ActivityPub\Entities\Note;
-use ActivityPub\Entities\Favourite;
 use ActivityPub\Activities\LikeActivity;
 use ActivityPub\Activities\UndoActivity;
+use ActivityPub\Entities\Actor;
+use ActivityPub\Entities\Favourite;
+use ActivityPub\Entities\Note;
 use CodeIgniter\Events\Events;
 use Michalsn\Uuid\UuidModel;
 
@@ -45,11 +45,8 @@ class FavouriteModel extends UuidModel
 
     protected $updatedField;
 
-    public function addFavourite(
-        Actor $actor,
-        Note $note,
-        bool $registerActivity = true
-    ): void {
+    public function addFavourite(Actor $actor, Note $note, bool $registerActivity = true): void
+    {
         $this->db->transStart();
 
         $this->insert([
@@ -58,83 +55,76 @@ class FavouriteModel extends UuidModel
         ]);
 
         model('NoteModel')
-            ->where(
-                'id',
-                service('uuid')
-                    ->fromString($note->id)
-                    ->getBytes(),
-            )
+            ->where('id', service('uuid') ->fromString($note->id) ->getBytes(),)
             ->increment('favourites_count');
 
-        $prefix = config('ActivityPub')->cachePrefix;
+        $prefix = config('ActivityPub')
+            ->cachePrefix;
         $hashedNoteUri = md5($note->uri);
-        cache()->delete($prefix . "note#{$note->id}");
-        cache()->delete($prefix . "note-{$hashedNoteUri}");
-        cache()->delete($prefix . "actor#{$actor->id}_published_notes");
+        cache()
+            ->delete($prefix . "note#{$note->id}");
+        cache()
+            ->delete($prefix . "note-{$hashedNoteUri}");
+        cache()
+            ->delete($prefix . "actor#{$actor->id}_published_notes");
 
         if ($note->in_reply_to_id) {
             cache()->delete($prefix . "note#{$note->in_reply_to_id}_replies");
-            cache()->delete(
-                $prefix . "note#{$note->in_reply_to_id}_replies_withBlocked",
-            );
+            cache()
+                ->delete($prefix . "note#{$note->in_reply_to_id}_replies_withBlocked",);
         }
 
         Events::trigger('on_note_favourite', $actor, $note);
 
         if ($registerActivity) {
             $likeActivity = new LikeActivity();
-            $likeActivity->set('actor', $actor->uri)->set('object', $note->uri);
+            $likeActivity->set('actor', $actor->uri)
+                ->set('object', $note->uri);
 
-            $activityId = model('ActivityModel')->newActivity(
-                'Like',
-                $actor->id,
-                null,
-                $note->id,
-                $likeActivity->toJSON(),
-                $note->published_at,
-                'queued',
-            );
+            $activityId = model('ActivityModel')
+                ->newActivity(
+                    'Like',
+                    $actor->id,
+                    null,
+                    $note->id,
+                    $likeActivity->toJSON(),
+                    $note->published_at,
+                    'queued',
+                );
 
-            $likeActivity->set(
-                'id',
-                url_to('activity', $actor->username, $activityId),
-            );
+            $likeActivity->set('id', url_to('activity', $actor->username, $activityId),);
 
-            model('ActivityModel')->update($activityId, [
-                'payload' => $likeActivity->toJSON(),
-            ]);
+            model('ActivityModel')
+                ->update($activityId, [
+                    'payload' => $likeActivity->toJSON(),
+                ]);
         }
 
         $this->db->transComplete();
     }
 
-    public function removeFavourite(
-        Actor $actor,
-        Note $note,
-        bool $registerActivity = true
-    ): void {
+    public function removeFavourite(Actor $actor, Note $note, bool $registerActivity = true): void
+    {
         $this->db->transStart();
 
         model('NoteModel')
-            ->where(
-                'id',
-                service('uuid')
-                    ->fromString($note->id)
-                    ->getBytes(),
-            )
+            ->where('id', service('uuid') ->fromString($note->id) ->getBytes(),)
             ->decrement('favourites_count');
 
-        $prefix = config('ActivityPub')->cachePrefix;
+        $prefix = config('ActivityPub')
+            ->cachePrefix;
         $hashedNoteUri = md5($note->uri);
-        cache()->delete($prefix . "note#{$note->id}");
-        cache()->delete($prefix . "note-{$hashedNoteUri}");
-        cache()->delete($prefix . "actor#{$actor->id}_published_notes");
+        cache()
+            ->delete($prefix . "note#{$note->id}");
+        cache()
+            ->delete($prefix . "note-{$hashedNoteUri}");
+        cache()
+            ->delete($prefix . "actor#{$actor->id}_published_notes");
 
         if ($note->in_reply_to_id) {
             cache()->delete($prefix . "note#{$note->in_reply_to_id}_replies");
-            cache()->delete(
-                $prefix . "note#{$note->in_reply_to_id}_replies_withBlocked",
-            );
+            cache()
+                ->delete($prefix . "note#{$note->in_reply_to_id}_replies_withBlocked",);
         }
 
         $this->db
@@ -164,12 +154,7 @@ class FavouriteModel extends UuidModel
 
             $likeActivity = new LikeActivity();
             $likeActivity
-                ->set(
-                    'id',
-                    base_url(
-                        route_to('activity', $actor->username, $activity->id),
-                    ),
-                )
+                ->set('id', base_url(route_to('activity', $actor->username, $activity->id),),)
                 ->set('actor', $actor->uri)
                 ->set('object', $note->uri);
 
@@ -177,24 +162,23 @@ class FavouriteModel extends UuidModel
                 ->set('actor', $actor->uri)
                 ->set('object', $likeActivity);
 
-            $activityId = model('ActivityModel')->newActivity(
-                'Undo',
-                $actor->id,
-                null,
-                $note->id,
-                $undoActivity->toJSON(),
-                $note->published_at,
-                'queued',
-            );
+            $activityId = model('ActivityModel')
+                ->newActivity(
+                    'Undo',
+                    $actor->id,
+                    null,
+                    $note->id,
+                    $undoActivity->toJSON(),
+                    $note->published_at,
+                    'queued',
+                );
 
-            $undoActivity->set(
-                'id',
-                url_to('activity', $actor->username, $activityId),
-            );
+            $undoActivity->set('id', url_to('activity', $actor->username, $activityId),);
 
-            model('ActivityModel')->update($activityId, [
-                'payload' => $undoActivity->toJSON(),
-            ]);
+            model('ActivityModel')
+                ->update($activityId, [
+                    'payload' => $undoActivity->toJSON(),
+                ]);
         }
 
         $this->db->transComplete();

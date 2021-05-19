@@ -20,7 +20,8 @@ class PodcastActor extends ActorObject
     {
         parent::__construct($actor);
 
-        $podcast = (new PodcastModel())->where('actor_id', $actor->id)->first();
+        $podcast = (new PodcastModel())->where('actor_id', $actor->id)
+            ->first();
 
         $this->rss = $podcast->feed_url;
     }

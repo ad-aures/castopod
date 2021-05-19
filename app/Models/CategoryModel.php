@@ -9,7 +9,6 @@
 namespace App\Models;
 
 use App\Entities\Category;
-use CodeIgniter\Database\Exceptions\DataException;
 use CodeIgniter\Model;
 
 class CategoryModel extends Model
@@ -18,6 +17,7 @@ class CategoryModel extends Model
      * @var string
      */
     protected $table = 'categories';
+
     /**
      * @var string
      */
@@ -26,17 +26,13 @@ class CategoryModel extends Model
     /**
      * @var string[]
      */
-    protected $allowedFields = [
-        'parent_id',
-        'code',
-        'apple_category',
-        'google_category',
-    ];
+    protected $allowedFields = ['parent_id', 'code', 'apple_category', 'google_category'];
 
     /**
      * @var string
      */
     protected $returnType = Category::class;
+
     /**
      * @var bool
      */
@@ -57,24 +53,24 @@ class CategoryModel extends Model
      */
     public function getCategoryOptions(): array
     {
-        $locale = service('request')->getLocale();
+        $locale = service('request')
+            ->getLocale();
         $cacheName = "category_options_{$locale}";
 
-        if (!($options = cache($cacheName))) {
+        if (! ($options = cache($cacheName))) {
             $categories = $this->findAll();
 
             $options = array_reduce(
                 $categories,
                 function (array $result, Category $category): array {
-                    $result[$category->id] = lang(
-                        'Podcast.category_options.' . $category->code,
-                    );
+                    $result[$category->id] = lang('Podcast.category_options.' . $category->code,);
                     return $result;
                 },
                 [],
             );
 
-            cache()->save($cacheName, $options, DECADE);
+            cache()
+                ->save($cacheName, $options, DECADE);
         }
 
         return $options;
@@ -84,17 +80,19 @@ class CategoryModel extends Model
      * Sets categories for a given podcast
      *
      * @param int[] $categoriesIds
-     * 
+     *
      * @return int|false Number of rows inserted or FALSE on failure
      */
-    public function setPodcastCategories(int $podcastId, array $categoriesIds = []): int|false
+    public function setPodcastCategories(int $podcastId, array $categoriesIds = []): int | false
     {
         cache()->delete("podcast#{$podcastId}_categories");
 
         // Remove already previously set categories to overwrite them
         $this->db
             ->table('podcasts_categories')
-            ->delete(['podcast_id' => $podcastId]);
+            ->delete([
+                'podcast_id' => $podcastId,
+            ]);
 
         if ($categoriesIds === []) {
             // no row has been inserted after deletion
@@ -116,7 +114,8 @@ class CategoryModel extends Model
         );
 
         // Set podcast categories
-        return $this->db->table('podcasts_categories')->insertBatch($data);
+        return $this->db->table('podcasts_categories')
+            ->insertBatch($data);
     }
 
     /**
@@ -127,16 +126,14 @@ class CategoryModel extends Model
     public function getPodcastCategories(int $podcastId): array
     {
         $cacheName = "podcast#{$podcastId}_categories";
-        if (!($categories = cache($cacheName))) {
+        if (! ($categories = cache($cacheName))) {
             $categories = $this->select('categories.*')
-                ->join(
-                    'podcasts_categories',
-                    'podcasts_categories.category_id = categories.id',
-                )
+                ->join('podcasts_categories', 'podcasts_categories.category_id = categories.id',)
                 ->where('podcasts_categories.podcast_id', $podcastId)
                 ->findAll();
 
-            cache()->save($cacheName, $categories, DECADE);
+            cache()
+                ->save($cacheName, $categories, DECADE);
         }
 
         return $categories;

@@ -8,8 +8,8 @@
 
 namespace Analytics\Controllers;
 
-use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Controller;
+use CodeIgniter\HTTP\ResponseInterface;
 
 class UnknownUserAgentsController extends Controller
 {

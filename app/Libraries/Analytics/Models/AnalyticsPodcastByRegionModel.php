@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Class AnalyticsPodcastByRegionModel
- * Model for analytics_podcasts_by_region table in database
+ * Class AnalyticsPodcastByRegionModel Model for analytics_podcasts_by_region table in database
+ *
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
@@ -24,6 +24,7 @@ class AnalyticsPodcastByRegionModel extends Model
      * @var string
      */
     protected $returnType = AnalyticsPodcastsByRegion::class;
+
     /**
      * @var bool
      */
@@ -41,11 +42,10 @@ class AnalyticsPodcastByRegionModel extends Model
      */
     public function getData(int $podcastId): array
     {
-        $locale = service('request')->getLocale();
+        $locale = service('request')
+            ->getLocale();
         if (
-            !($found = cache(
-                "{$podcastId}_analytics_podcast_by_region_{$locale}",
-            ))
+            ! ($found = cache("{$podcastId}_analytics_podcast_by_region_{$locale}",))
         ) {
             $found = $this->select('country_code, region_code')
                 ->selectSum('hits', 'value')
@@ -59,11 +59,8 @@ class AnalyticsPodcastByRegionModel extends Model
                 ->orderBy('value', 'DESC')
                 ->findAll();
 
-            cache()->save(
-                "{$podcastId}_analytics_podcast_by_region_{$locale}",
-                $found,
-                600,
-            );
+            cache()
+                ->save("{$podcastId}_analytics_podcast_by_region_{$locale}", $found, 600,);
         }
         return $found;
     }

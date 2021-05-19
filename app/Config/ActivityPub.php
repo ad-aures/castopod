@@ -1,8 +1,10 @@
-<?php namespace Config;
+<?php
 
-use App\Libraries\PodcastActor;
-use App\Libraries\NoteObject;
+namespace Config;
+
 use ActivityPub\Config\ActivityPub as ActivityPubBase;
+use App\Libraries\NoteObject;
+use App\Libraries\PodcastActor;
 
 class ActivityPub extends ActivityPubBase
 {

@@ -1,8 +1,7 @@
 <?php
 
 /**
- * Class AddPlatforms
- * Creates platforms table in database
+ * Class AddPlatforms Creates platforms table in database
  *
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -42,9 +41,7 @@ class AddPlatforms extends Migration
             ],
         ]);
         $this->forge->addField('`created_at` timestamp NOT NULL DEFAULT NOW()');
-        $this->forge->addField(
-            '`updated_at` timestamp NOT NULL DEFAULT NOW() ON UPDATE NOW()',
-        );
+        $this->forge->addField('`updated_at` timestamp NOT NULL DEFAULT NOW() ON UPDATE NOW()',);
         $this->forge->addPrimaryKey('slug');
         $this->forge->createTable('platforms');
     }

@@ -13,8 +13,8 @@ use App\Models\CategoryModel;
 use App\Models\EpisodeModel;
 use App\Models\PersonModel;
 use App\Models\PlatformModel;
-use CodeIgniter\Entity\Entity;
 use App\Models\UserModel;
+use CodeIgniter\Entity\Entity;
 use CodeIgniter\I18n\Time;
 use League\CommonMark\CommonMarkConverter;
 use RuntimeException;
@@ -73,14 +73,17 @@ use RuntimeException;
  * @property Platform[] $podcasting_platforms
  * @property Platform[] $social_platforms
  * @property Platform[] $funding_platforms
- *
  */
 class Podcast extends Entity
 {
     protected string $link;
+
     protected ?Actor $actor = null;
+
     protected Image $image;
+
     protected ?string $description = null;
+
     protected ?Category $category = null;
 
     /**
@@ -124,6 +127,7 @@ class Podcast extends Entity
     protected ?array $funding_platforms = null;
 
     protected ?Location $location = null;
+
     protected string $custom_rss_string;
 
     /**
@@ -168,13 +172,12 @@ class Podcast extends Entity
     public function getActor(): Actor
     {
         if ($this->actor_id === 0) {
-            throw new RuntimeException(
-                'Podcast must have an actor_id before getting actor.',
-            );
+            throw new RuntimeException('Podcast must have an actor_id before getting actor.',);
         }
 
         if ($this->actor === null) {
-            $this->actor = model('ActorModel')->getActorById($this->actor_id);
+            $this->actor = model('ActorModel')
+                ->getActorById($this->actor_id);
         }
 
         return $this->actor;
@@ -217,16 +220,11 @@ class Podcast extends Entity
     public function getEpisodes(): array
     {
         if ($this->id === null) {
-            throw new RuntimeException(
-                'Podcast must be created before getting episodes.',
-            );
+            throw new RuntimeException('Podcast must be created before getting episodes.',);
         }
 
         if ($this->episodes === null) {
-            $this->episodes = (new EpisodeModel())->getPodcastEpisodes(
-                $this->id,
-                $this->type,
-            );
+            $this->episodes = (new EpisodeModel())->getPodcastEpisodes($this->id, $this->type,);
         }
 
         return $this->episodes;
@@ -240,9 +238,7 @@ class Podcast extends Entity
     public function getPersons(): array
     {
         if ($this->id === null) {
-            throw new RuntimeException(
-                'Podcast must be created before getting persons.',
-            );
+            throw new RuntimeException('Podcast must be created before getting persons.',);
         }
 
         if ($this->persons === null) {
@@ -258,15 +254,11 @@ class Podcast extends Entity
     public function getCategory(): ?Category
     {
         if ($this->id === null) {
-            throw new RuntimeException(
-                'Podcast must be created before getting category.',
-            );
+            throw new RuntimeException('Podcast must be created before getting category.',);
         }
 
         if ($this->category === null) {
-            $this->category = (new CategoryModel())->getCategoryById(
-                $this->category_id,
-            );
+            $this->category = (new CategoryModel())->getCategoryById($this->category_id,);
         }
 
         return $this->category;
@@ -280,15 +272,11 @@ class Podcast extends Entity
     public function getContributors(): array
     {
         if ($this->id === null) {
-            throw new RuntimeException(
-                'Podcasts must be created before getting contributors.',
-            );
+            throw new RuntimeException('Podcasts must be created before getting contributors.',);
         }
 
         if ($this->contributors === null) {
-            $this->contributors = (new UserModel())->getPodcastContributors(
-                $this->id,
-            );
+            $this->contributors = (new UserModel())->getPodcastContributors($this->id,);
         }
 
         return $this->contributors;
@@ -302,16 +290,13 @@ class Podcast extends Entity
         ]);
 
         $this->attributes['description_markdown'] = $descriptionMarkdown;
-        $this->attributes['description_html'] = $converter->convertToHtml(
-            $descriptionMarkdown,
-        );
+        $this->attributes['description_html'] = $converter->convertToHtml($descriptionMarkdown,);
 
         return $this;
     }
 
-    public function setEpisodeDescriptionFooterMarkdown(
-        ?string $episodeDescriptionFooterMarkdown = null
-    ): static {
+    public function setEpisodeDescriptionFooterMarkdown(?string $episodeDescriptionFooterMarkdown = null): static
+    {
         if ($episodeDescriptionFooterMarkdown) {
             $converter = new CommonMarkConverter([
                 'html_input' => 'strip',
@@ -333,11 +318,7 @@ class Podcast extends Entity
     {
         if ($this->description === null) {
             $this->description = trim(
-                (string) preg_replace(
-                    '~\s+~',
-                    ' ',
-                    strip_tags($this->attributes['description_html']),
-                ),
+                (string) preg_replace('~\s+~', ' ', strip_tags($this->attributes['description_html']),),
             );
         }
 
@@ -352,16 +333,11 @@ class Podcast extends Entity
     public function getPodcastingPlatforms(): array
     {
         if ($this->id === null) {
-            throw new RuntimeException(
-                'Podcast must be created before getting podcasting platform links.',
-            );
+            throw new RuntimeException('Podcast must be created before getting podcasting platform links.',);
         }
 
         if ($this->podcasting_platforms === null) {
-            $this->podcasting_platforms = (new PlatformModel())->getPodcastPlatforms(
-                $this->id,
-                'podcasting',
-            );
+            $this->podcasting_platforms = (new PlatformModel())->getPodcastPlatforms($this->id, 'podcasting',);
         }
 
         return $this->podcasting_platforms;
@@ -375,16 +351,11 @@ class Podcast extends Entity
     public function getSocialPlatforms(): array
     {
         if ($this->id === null) {
-            throw new RuntimeException(
-                'Podcast must be created before getting social platform links.',
-            );
+            throw new RuntimeException('Podcast must be created before getting social platform links.',);
         }
 
         if ($this->social_platforms === null) {
-            $this->social_platforms = (new PlatformModel())->getPodcastPlatforms(
-                $this->id,
-                'social',
-            );
+            $this->social_platforms = (new PlatformModel())->getPodcastPlatforms($this->id, 'social',);
         }
 
         return $this->social_platforms;
@@ -398,16 +369,11 @@ class Podcast extends Entity
     public function getFundingPlatforms(): array
     {
         if ($this->id === null) {
-            throw new RuntimeException(
-                'Podcast must be created before getting funding platform links.',
-            );
+            throw new RuntimeException('Podcast must be created before getting funding platform links.',);
         }
 
         if ($this->funding_platforms === null) {
-            $this->funding_platforms = (new PlatformModel())->getPodcastPlatforms(
-                $this->id,
-                'funding',
-            );
+            $this->funding_platforms = (new PlatformModel())->getPodcastPlatforms($this->id, 'funding',);
         }
 
         return $this->funding_platforms;
@@ -419,15 +385,11 @@ class Podcast extends Entity
     public function getOtherCategories(): array
     {
         if ($this->id === null) {
-            throw new RuntimeException(
-                'Podcast must be created before getting other categories.',
-            );
+            throw new RuntimeException('Podcast must be created before getting other categories.',);
         }
 
         if ($this->other_categories === null) {
-            $this->other_categories = (new CategoryModel())->getPodcastCategories(
-                $this->id,
-            );
+            $this->other_categories = (new CategoryModel())->getPodcastCategories($this->id,);
         }
 
         return $this->other_categories;
@@ -439,10 +401,7 @@ class Podcast extends Entity
     public function getOtherCategoriesIds(): array
     {
         if ($this->other_categories_ids === null) {
-            $this->other_categories_ids = array_column(
-                $this->getOtherCategories(),
-                'id',
-            );
+            $this->other_categories_ids = array_column($this->getOtherCategories(), 'id',);
         }
 
         return $this->other_categories_ids;
@@ -462,7 +421,7 @@ class Podcast extends Entity
         }
 
         if (
-            !isset($this->attributes['location_name']) ||
+            ! isset($this->attributes['location_name']) ||
             $this->attributes['location_name'] !== $location->name
         ) {
             $location->fetchOsmLocation();
@@ -482,11 +441,7 @@ class Podcast extends Entity
         }
 
         if ($this->location === null) {
-            $this->location = new Location(
-                $this->location_name,
-                $this->location_geo,
-                $this->location_osm,
-            );
+            $this->location = new Location($this->location_name, $this->location_geo, $this->location_osm,);
         }
 
         return $this->location;
@@ -495,7 +450,7 @@ class Podcast extends Entity
     /**
      * Get custom rss tag as XML String
      */
-    function getCustomRssString(): string
+    public function getCustomRssString(): string
     {
         if ($this->attributes['custom_rss'] === null) {
             return '';
@@ -506,12 +461,9 @@ class Podcast extends Entity
         $xmlNode = (new SimpleRSSElement(
             '<?xml version="1.0" encoding="utf-8"?><rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:podcast="https://github.com/Podcastindex-org/podcast-namespace/blob/main/docs/1.0.md" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"/>',
         ))->addChild('channel');
-        array_to_rss(
-            [
-                'elements' => $this->custom_rss,
-            ],
-            $xmlNode,
-        );
+        array_to_rss([
+            'elements' => $this->custom_rss,
+        ], $xmlNode,);
 
         return str_replace(['<channel>', '</channel>'], '', $xmlNode->asXML());
     }
@@ -519,7 +471,7 @@ class Podcast extends Entity
     /**
      * Saves custom rss tag into json
      */
-    function setCustomRssString(string $customRssString): static
+    public function setCustomRssString(string $customRssString): static
     {
         if ($customRssString === '') {
             return $this;
@@ -535,9 +487,7 @@ class Podcast extends Entity
         )['elements'][0];
 
         if (array_key_exists('elements', $customRssArray)) {
-            $this->attributes['custom_rss'] = json_encode(
-                $customRssArray['elements'],
-            );
+            $this->attributes['custom_rss'] = json_encode($customRssArray['elements'],);
         } else {
             $this->attributes['custom_rss'] = null;
         }

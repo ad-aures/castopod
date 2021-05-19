@@ -9,14 +9,14 @@
 namespace ActivityPub\Controllers;
 
 use ActivityPub\Config\ActivityPub;
-use CodeIgniter\HTTP\RedirectResponse;
-use CodeIgniter\HTTP\ResponseInterface;
-use CodeIgniter\Exceptions\PageNotFoundException;
 use ActivityPub\Entities\Note;
 use ActivityPub\Objects\OrderedCollectionObject;
 use ActivityPub\Objects\OrderedCollectionPage;
 use App\Entities\Actor;
 use CodeIgniter\Controller;
+use CodeIgniter\Exceptions\PageNotFoundException;
+use CodeIgniter\HTTP\RedirectResponse;
+use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\I18n\Time;
 
 class ActorController extends Controller
@@ -27,6 +27,7 @@ class ActorController extends Controller
     protected $helpers = ['activitypub'];
 
     protected Actor $actor;
+
     protected ActivityPub $config;
 
     public function __construct()
@@ -38,15 +39,13 @@ class ActorController extends Controller
     {
         if (
             count($params) > 0 &&
-            !($this->actor = model('ActorModel')->getActorByUsername(
-                $params[0],
-            ))
+            ! ($this->actor = model('ActorModel')->getActorByUsername($params[0],))
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
         unset($params[0]);
 
-        return $this->$method(...$params);
+        return $this->{$method}(...$params);
     }
 
     public function index(): RedirectResponse
@@ -71,25 +70,26 @@ class ActorController extends Controller
         $payloadActor = get_or_create_actor_from_uri($payload->actor);
 
         // store activity to database
-        $activityId = model('ActivityModel')->newActivity(
-            $payload->type,
-            $payloadActor->id,
-            $this->actor->id,
-            null,
-            json_encode($payload, JSON_THROW_ON_ERROR),
-        );
+        $activityId = model('ActivityModel')
+            ->newActivity(
+                $payload->type,
+                $payloadActor->id,
+                $this->actor->id,
+                null,
+                json_encode($payload, JSON_THROW_ON_ERROR),
+            );
 
         // switch/case on activity type
         /** @phpstan-ignore-next-line */
         switch ($payload->type) {
             case 'Create':
-                if ($payload->object->type == 'Note') {
-                    if (!$payload->object->inReplyTo) {
-                        return $this->response->setStatusCode(501)->setJSON([]);
+                if ($payload->object->type === 'Note') {
+                    if (! $payload->object->inReplyTo) {
+                        return $this->response->setStatusCode(501)
+                            ->setJSON([]);
                     }
-                    $replyToNote = model('NoteModel')->getNoteByUri(
-                        $payload->object->inReplyTo,
-                    );
+                    $replyToNote = model('NoteModel')
+                        ->getNoteByUri($payload->object->inReplyTo,);
                     // TODO: strip content from html to retrieve message
                     // remove all html tags and reconstruct message with mentions?
                     extract_text_from_html($payload->object->content);
@@ -98,103 +98,103 @@ class ActorController extends Controller
                         'actor_id' => $payloadActor->id,
                         'in_reply_to_id' => $replyToNote->id,
                         'message' => $payload->object->content,
-                        'published_at' => Time::parse(
-                            $payload->object->published,
-                        ),
+                        'published_at' => Time::parse($payload->object->published,),
                     ]);
-                    $noteId = model('NoteModel')->addReply($reply, true, false);
-                    model('ActivityModel')->update($activityId, [
-                        'note_id' => service('uuid')
-                            ->fromBytes($noteId)
-                            ->getString(),
-                    ]);
-                    return $this->response->setStatusCode(200)->setJSON([]);
+                    $noteId = model('NoteModel')
+                        ->addReply($reply, true, false);
+                    model('ActivityModel')
+                        ->update($activityId, [
+                            'note_id' => service('uuid')
+                                ->fromBytes($noteId)
+                                ->getString(),
+                        ]);
+                    return $this->response->setStatusCode(200)
+                        ->setJSON([]);
                 }
                 // return not handled undo error (501 = not implemented)
-                return $this->response->setStatusCode(501)->setJSON([]);
+                return $this->response->setStatusCode(501)
+                    ->setJSON([]);
             case 'Delete':
-                $noteToDelete = model('NoteModel')->getNoteByUri(
-                    $payload->object->id,
-                );
+                $noteToDelete = model('NoteModel')
+                    ->getNoteByUri($payload->object->id,);
 
-                model('NoteModel')->removeNote($noteToDelete, false);
+                model('NoteModel')
+                    ->removeNote($noteToDelete, false);
 
-                return $this->response->setStatusCode(200)->setJSON([]);
+                return $this->response->setStatusCode(200)
+                    ->setJSON([]);
             case 'Follow':
                 // add to followers table
-                model('FollowModel')->addFollower(
-                    $payloadActor,
-                    $this->actor,
-                    false,
-                );
+                model('FollowModel')
+                    ->addFollower($payloadActor, $this->actor, false,);
 
                 // Automatically accept follow by returning accept activity
                 accept_follow($this->actor, $payloadActor, $payload->id);
 
                 // TODO: return 202 (Accepted) followed!
-                return $this->response->setStatusCode(202)->setJSON([]);
+                return $this->response->setStatusCode(202)
+                    ->setJSON([]);
 
             case 'Like':
                 // get favourited note
-                $note = model('NoteModel')->getNoteByUri($payload->object);
+                $note = model('NoteModel')
+                    ->getNoteByUri($payload->object);
 
                 // Like side-effect
-                model('FavouriteModel')->addFavourite(
-                    $payloadActor,
-                    $note,
-                    false,
-                );
+                model('FavouriteModel')
+                    ->addFavourite($payloadActor, $note, false,);
 
-                model('ActivityModel')->update($activityId, [
-                    'note_id' => $note->id,
-                ]);
+                model('ActivityModel')
+                    ->update($activityId, [
+                        'note_id' => $note->id,
+                    ]);
 
-                return $this->response->setStatusCode(200)->setJSON([]);
+                return $this->response->setStatusCode(200)
+                    ->setJSON([]);
             case 'Announce':
-                $note = model('NoteModel')->getNoteByUri($payload->object);
+                $note = model('NoteModel')
+                    ->getNoteByUri($payload->object);
 
-                model('ActivityModel')->update($activityId, [
-                    'note_id' => $note->id,
-                ]);
+                model('ActivityModel')
+                    ->update($activityId, [
+                        'note_id' => $note->id,
+                    ]);
 
-                model('NoteModel')->reblog($payloadActor, $note, false);
+                model('NoteModel')
+                    ->reblog($payloadActor, $note, false);
 
-                return $this->response->setStatusCode(200)->setJSON([]);
+                return $this->response->setStatusCode(200)
+                    ->setJSON([]);
             case 'Undo':
                 // switch/case on the type of activity to undo
                 /** @phpstan-ignore-next-line */
                 switch ($payload->object->type) {
                     case 'Follow':
                         // revert side-effect by removing follow from database
-                        model('FollowModel')->removeFollower(
-                            $payloadActor,
-                            $this->actor,
-                            false,
-                        );
+                        model('FollowModel')
+                            ->removeFollower($payloadActor, $this->actor, false,);
 
                         // TODO: undo has been accepted! (202 - Accepted)
-                        return $this->response->setStatusCode(202)->setJSON([]);
+                        return $this->response->setStatusCode(202)
+                            ->setJSON([]);
                     case 'Like':
-                        $note = model('NoteModel')->getNoteByUri(
-                            $payload->object->object,
-                        );
+                        $note = model('NoteModel')
+                            ->getNoteByUri($payload->object->object,);
 
                         // revert side-effect by removing favourite from database
-                        model('FavouriteModel')->removeFavourite(
-                            $payloadActor,
-                            $note,
-                            false,
-                        );
+                        model('FavouriteModel')
+                            ->removeFavourite($payloadActor, $note, false,);
 
-                        model('ActivityModel')->update($activityId, [
-                            'note_id' => $note->id,
-                        ]);
+                        model('ActivityModel')
+                            ->update($activityId, [
+                                'note_id' => $note->id,
+                            ]);
 
-                        return $this->response->setStatusCode(200)->setJSON([]);
+                        return $this->response->setStatusCode(200)
+                            ->setJSON([]);
                     case 'Announce':
-                        $note = model('NoteModel')->getNoteByUri(
-                            $payload->object->object,
-                        );
+                        $note = model('NoteModel')
+                            ->getNoteByUri($payload->object->object,);
 
                         $reblogNote = model('NoteModel')
                             ->where([
@@ -205,20 +205,26 @@ class ActorController extends Controller
                             ])
                             ->first();
 
-                        model('NoteModel')->undoReblog($reblogNote, false);
+                        model('NoteModel')
+                            ->undoReblog($reblogNote, false);
 
-                        model('ActivityModel')->update($activityId, [
-                            'note_id' => $note->id,
-                        ]);
+                        model('ActivityModel')
+                            ->update($activityId, [
+                                'note_id' => $note->id,
+                            ]);
 
-                        return $this->response->setStatusCode(200)->setJSON([]);
+                        return $this->response->setStatusCode(200)
+                            ->setJSON([]);
                     default:
                         // return not handled undo error (501 = not implemented)
-                        return $this->response->setStatusCode(501)->setJSON([]);
+                        return $this->response->setStatusCode(501)
+                            ->setJSON([]);
                 }
+                // no break
             default:
                 // return not handled activity error (501 = not implemented)
-                return $this->response->setStatusCode(501)->setJSON([]);
+                return $this->response->setStatusCode(501)
+                    ->setJSON([]);
         }
     }
 
@@ -232,16 +238,12 @@ class ActorController extends Controller
 
         $pageNumber = $this->request->getGet('page');
 
-        if (!isset($pageNumber)) {
+        if (! isset($pageNumber)) {
             $actorActivity->paginate(12);
             $pager = $actorActivity->pager;
             $collection = new OrderedCollectionObject(null, $pager);
         } else {
-            $paginatedActivity = $actorActivity->paginate(
-                12,
-                'default',
-                $pageNumber,
-            );
+            $paginatedActivity = $actorActivity->paginate(12, 'default', $pageNumber,);
             $pager = $actorActivity->pager;
             $orderedItems = [];
             foreach ($paginatedActivity as $activity) {
@@ -259,36 +261,25 @@ class ActorController extends Controller
     {
         // get followers for a specific actor
         $followers = model('ActorModel')
-            ->join(
-                'activitypub_follows',
-                'activitypub_follows.actor_id = id',
-                'inner',
-            )
+            ->join('activitypub_follows', 'activitypub_follows.actor_id = id', 'inner',)
             ->where('activitypub_follows.target_actor_id', $this->actor->id)
             ->orderBy('activitypub_follows.created_at', 'DESC');
 
         $pageNumber = $this->request->getGet('page');
 
-        if (!isset($pageNumber)) {
+        if (! isset($pageNumber)) {
             $followers->paginate(12);
             $pager = $followers->pager;
             $followersCollection = new OrderedCollectionObject(null, $pager);
         } else {
-            $paginatedFollowers = $followers->paginate(
-                12,
-                'default',
-                $pageNumber,
-            );
+            $paginatedFollowers = $followers->paginate(12, 'default', $pageNumber,);
             $pager = $followers->pager;
 
             $orderedItems = [];
             foreach ($paginatedFollowers as $follower) {
                 $orderedItems[] = $follower->uri;
             }
-            $followersCollection = new OrderedCollectionPage(
-                $pager,
-                $orderedItems,
-            );
+            $followersCollection = new OrderedCollectionPage($pager, $orderedItems,);
         }
 
         return $this->response
@@ -296,14 +287,14 @@ class ActorController extends Controller
             ->setBody($followersCollection->toJSON());
     }
 
-    public function attemptFollow(): RedirectResponse|ResponseInterface
+    public function attemptFollow(): RedirectResponse | ResponseInterface
     {
         $rules = [
             'handle' =>
                 'regex_match[/^@?(?P<username>[\w\.\-]+)@(?P<host>[\w\.\-]+)(?P<port>:[\d]+)?$/]',
         ];
 
-        if (!$this->validate($rules)) {
+        if (! $this->validate($rules)) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -317,8 +308,8 @@ class ActorController extends Controller
         // check if actor and domain exist
 
         if (
-            !($parts = split_handle($this->request->getPost('handle'))) ||
-            !($data = get_webfinger_data($parts['username'], $parts['domain']))
+            ! ($parts = split_handle($this->request->getPost('handle'))) ||
+            ! ($data = get_webfinger_data($parts['username'], $parts['domain']))
         ) {
             return redirect()
                 ->back()
@@ -329,27 +320,24 @@ class ActorController extends Controller
         $ostatusKey = array_search(
             'http://ostatus.org/schema/1.0/subscribe',
             array_column($data->links, 'rel'),
+            true,
         );
 
-        if (!$ostatusKey) {
+        if (! $ostatusKey) {
             // TODO: error, couldn't subscribe to activitypub account
             // The instance doesn't allow its users to follow others
             return $this->response->setJSON([]);
         }
 
         return redirect()->to(
-            str_replace(
-                '{uri}',
-                urlencode($this->actor->uri),
-                $data->links[$ostatusKey]->template,
-            ),
+            str_replace('{uri}', urlencode($this->actor->uri), $data->links[$ostatusKey]->template,),
         );
     }
 
     public function activity(string $activityId): RedirectResponse
     {
         if (
-            !($activity = model('ActivityModel')->getActivityById($activityId))
+            ! ($activity = model('ActivityModel')->getActivityById($activityId))
         ) {
             throw PageNotFoundException::forPageNotFound();
         }

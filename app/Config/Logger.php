@@ -2,8 +2,8 @@
 
 namespace Config;
 
-use CodeIgniter\Log\Handlers\FileHandler;
 use CodeIgniter\Config\BaseConfig;
+use CodeIgniter\Log\Handlers\FileHandler;
 
 class Logger extends BaseConfig
 {
@@ -38,7 +38,7 @@ class Logger extends BaseConfig
      *
      * @var int|int[]
      */
-    public int|array $threshold = 4;
+    public int | array $threshold = 4;
 
     /**
      * --------------------------------------------------------------------------
@@ -47,8 +47,6 @@ class Logger extends BaseConfig
      *
      * Each item that is logged has an associated date. You can use PHP date
      * codes to set your own date formatting
-     *
-     * @var string
      */
     public string $dateFormat = 'Y-m-d H:i:s';
 
@@ -87,16 +85,7 @@ class Logger extends BaseConfig
             /*
              * The log levels that this handler will handle.
              */
-            'handles' => [
-                'critical',
-                'alert',
-                'emergency',
-                'debug',
-                'error',
-                'info',
-                'notice',
-                'warning',
-            ],
+            'handles' => ['critical', 'alert', 'emergency', 'debug', 'error', 'info', 'notice', 'warning'],
 
             /*
              * The default filename extension for log files.

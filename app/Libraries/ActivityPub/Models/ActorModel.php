@@ -9,7 +9,6 @@
 namespace ActivityPub\Models;
 
 use ActivityPub\Entities\Actor;
-use CodeIgniter\Database\Exceptions\DataException;
 use CodeIgniter\Events\Events;
 use CodeIgniter\Model;
 
@@ -48,6 +47,7 @@ class ActorModel extends Model
      * @var string
      */
     protected $returnType = Actor::class;
+
     /**
      * @var bool
      */
@@ -60,39 +60,39 @@ class ActorModel extends Model
 
     public function getActorById(int $id): Actor
     {
-        $cacheName = config('ActivityPub')->cachePrefix . "actor#{$id}";
-        if (!($found = cache($cacheName))) {
+        $cacheName = config('ActivityPub')
+            ->cachePrefix . "actor#{$id}";
+        if (! ($found = cache($cacheName))) {
             $found = $this->find($id);
 
-            cache()->save($cacheName, $found, DECADE);
+            cache()
+                ->save($cacheName, $found, DECADE);
         }
 
         return $found;
     }
 
     /**
-     * Looks for actor with username and domain,
-     * if no domain has been specified, the current host will be used
+     * Looks for actor with username and domain, if no domain has been specified, the current host will be used
      */
-    public function getActorByUsername(
-        string $username,
-        ?string $domain = null
-    ): ?Actor {
+    public function getActorByUsername(string $username, ?string $domain = null): ?Actor
+    {
         // TODO: is there a better way?
         helper('activitypub');
 
-        if (!$domain) {
+        if (! $domain) {
             $domain = get_current_domain();
         }
 
         $cacheName = "actor-{$username}-{$domain}";
-        if (!($found = cache($cacheName))) {
+        if (! ($found = cache($cacheName))) {
             $found = $this->where([
                 'username' => $username,
                 'domain' => $domain,
             ])->first();
 
-            cache()->save($cacheName, $found, DECADE);
+            cache()
+                ->save($cacheName, $found, DECADE);
         }
 
         return $found;
@@ -102,11 +102,14 @@ class ActorModel extends Model
     {
         $hashedActorUri = md5($actorUri);
         $cacheName =
-            config('ActivityPub')->cachePrefix . "actor-{$hashedActorUri}";
-        if (!($found = cache($cacheName))) {
-            $found = $this->where('uri', $actorUri)->first();
+            config('ActivityPub')
+                ->cachePrefix . "actor-{$hashedActorUri}";
+        if (! ($found = cache($cacheName))) {
+            $found = $this->where('uri', $actorUri)
+                ->first();
 
-            cache()->save($cacheName, $found, DECADE);
+            cache()
+                ->save($cacheName, $found, DECADE);
         }
 
         return $found;
@@ -118,25 +121,22 @@ class ActorModel extends Model
     public function getFollowers(int $actorId): array
     {
         $cacheName =
-            config('ActivityPub')->cachePrefix . "actor#{$actorId}_followers";
-        if (!($found = cache($cacheName))) {
-            $found = $this->join(
-                'activitypub_follows',
-                'activitypub_follows.actor_id = id',
-                'inner',
-            )
+            config('ActivityPub')
+                ->cachePrefix . "actor#{$actorId}_followers";
+        if (! ($found = cache($cacheName))) {
+            $found = $this->join('activitypub_follows', 'activitypub_follows.actor_id = id', 'inner',)
                 ->where('activitypub_follows.target_actor_id', $actorId)
                 ->findAll();
 
-            cache()->save($cacheName, $found, DECADE);
+            cache()
+                ->save($cacheName, $found, DECADE);
         }
 
         return $found;
     }
 
     /**
-     * Check if an existing actor is blocked using its uri.
-     * Returns FALSE if the actor doesn't exist
+     * Check if an existing actor is blocked using its uri. Returns FALSE if the actor doesn't exist
      */
     public function isActorBlocked(string $actorUri): bool
     {
@@ -154,11 +154,14 @@ class ActorModel extends Model
      */
     public function getBlockedActors(): array
     {
-        $cacheName = config('ActivityPub')->cachePrefix . 'blocked_actors';
-        if (!($found = cache($cacheName))) {
-            $found = $this->where('is_blocked', 1)->findAll();
+        $cacheName = config('ActivityPub')
+            ->cachePrefix . 'blocked_actors';
+        if (! ($found = cache($cacheName))) {
+            $found = $this->where('is_blocked', 1)
+                ->findAll();
 
-            cache()->save($cacheName, $found, DECADE);
+            cache()
+                ->save($cacheName, $found, DECADE);
         }
 
         return $found;
@@ -166,23 +169,33 @@ class ActorModel extends Model
 
     public function blockActor(int $actorId): void
     {
-        $prefix = config('ActivityPub')->cachePrefix;
-        cache()->delete($prefix . 'blocked_actors');
-        cache()->deleteMatching($prefix . '*replies');
+        $prefix = config('ActivityPub')
+            ->cachePrefix;
+        cache()
+            ->delete($prefix . 'blocked_actors');
+        cache()
+            ->deleteMatching($prefix . '*replies');
 
         Events::trigger('on_block_actor', $actorId);
 
-        $this->update($actorId, ['is_blocked' => 1]);
+        $this->update($actorId, [
+            'is_blocked' => 1,
+        ]);
     }
 
     public function unblockActor(int $actorId): void
     {
-        $prefix = config('ActivityPub')->cachePrefix;
-        cache()->delete($prefix . 'blocked_actors');
-        cache()->deleteMatching($prefix . '*replies');
+        $prefix = config('ActivityPub')
+            ->cachePrefix;
+        cache()
+            ->delete($prefix . 'blocked_actors');
+        cache()
+            ->deleteMatching($prefix . '*replies');
 
         Events::trigger('on_unblock_actor', $actorId);
 
-        $this->update($actorId, ['is_blocked' => 0]);
+        $this->update($actorId, [
+            'is_blocked' => 0,
+        ]);
     }
 }

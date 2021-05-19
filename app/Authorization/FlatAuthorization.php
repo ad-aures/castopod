@@ -7,9 +7,8 @@ use Myth\Auth\Authorization\FlatAuthorization as MythAuthFlatAuthorization;
 class FlatAuthorization extends MythAuthFlatAuthorization
 {
     /**
-     * The group model to use. Usually the class noted
-     * below (or an extension thereof) but can be any
-     * compatible CodeIgniter Model.
+     * The group model to use. Usually the class noted below (or an extension thereof) but can be any compatible
+     * CodeIgniter Model.
      *
      * @var PermissionModel
      */
@@ -18,19 +17,16 @@ class FlatAuthorization extends MythAuthFlatAuthorization
     /**
      * Checks a group to see if they have the specified permission.
      */
-    public function groupHasPermission(int|string $permission, int $groupId): bool
+    public function groupHasPermission(int | string $permission, int $groupId): bool
     {
         // Get the Permission ID
         $permissionId = $this->getPermissionID($permission);
 
-        if (!is_numeric($permissionId)) {
+        if (! is_numeric($permissionId)) {
             return false;
         }
 
-        return $this->permissionModel->doesGroupHavePermission(
-            $groupId,
-            $permissionId,
-        );
+        return $this->permissionModel->doesGroupHavePermission($groupId, $permissionId,);
     }
 
     /**

@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Class AnalyticsUnknownUseragentsModel
- * Model for analytics_unknown_useragents table in database
+ * Class AnalyticsUnknownUseragentsModel Model for analytics_unknown_useragents table in database
+ *
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
@@ -24,6 +24,7 @@ class AnalyticsUnknownUserAgentModel extends Model
      * @var string
      */
     protected $returnType = AnalyticsUnknownUserAgent::class;
+
     /**
      * @var bool
      */
@@ -39,6 +40,7 @@ class AnalyticsUnknownUserAgentModel extends Model
      */
     public function getUserAgents(int $lastKnownId = 0): array
     {
-        return $this->where('id >', $lastKnownId)->findAll();
+        return $this->where('id >', $lastKnownId)
+            ->findAll();
     }
 }

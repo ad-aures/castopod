@@ -15,18 +15,15 @@ class Breadcrumb
     /**
      * List of breadcrumb links.
      *
-     * $links = [
-     *  'text' => 'Example Link',
-     *  'href' => 'https://example.com/',
-     * ]
+     * $links = [ 'text' => 'Example Link', 'href' => 'https://example.com/', ]
      *
      * @var array<array<string, string>>
      */
     protected array $links = [];
 
     /**
-     * Initializes the Breadcrumb object using the segments from
-     * current_url by populating the $links property with text and href data
+     * Initializes the Breadcrumb object using the segments from current_url by populating the $links property with text
+     * and href data
      */
     public function __construct()
     {
@@ -43,19 +40,13 @@ class Breadcrumb
     }
 
     /**
-     * Replaces all numeric text in breadcrumb's $link property
-     * with new params at same position
+     * Replaces all numeric text in breadcrumb's $link property with new params at same position
      *
-     * Given a breadcrumb with numeric params, this function
-     * replaces them with the values provided in $newParams
+     * Given a breadcrumb with numeric params, this function replaces them with the values provided in $newParams
      *
      * Example with `Home / podcasts / 1 / episodes / 1`
      *
-     * $newParams = [
-     *  0 => 'foo',
-     *  1 => 'bar'
-     * ]
-     * replaceParams($newParams);
+     * $newParams = [ 0 => 'foo', 1 => 'bar' ] replaceParams($newParams);
      *
      * The breadcrumb is now `Home / podcasts / foo / episodes / bar`
      *
@@ -79,7 +70,7 @@ class Breadcrumb
         $listItems = '';
         $keys = array_keys($this->links);
         foreach ($this->links as $key => $link) {
-            if (end($keys) == $key) {
+            if (end($keys) === $key) {
                 $listItem =
                     '<li class="breadcrumb-item active" aria-current="page">' .
                     $link['text'] .

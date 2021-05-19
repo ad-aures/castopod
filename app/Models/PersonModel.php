@@ -43,6 +43,7 @@ class PersonModel extends Model
      * @var string
      */
     protected $returnType = Person::class;
+
     /**
      * @var bool
      */
@@ -85,10 +86,11 @@ class PersonModel extends Model
     public function getPersonById(int $personId): ?Person
     {
         $cacheName = "person#{$personId}";
-        if (!($found = cache($cacheName))) {
+        if (! ($found = cache($cacheName))) {
             $found = $this->find($personId);
 
-            cache()->save($cacheName, $found, DECADE);
+            cache()
+                ->save($cacheName, $found, DECADE);
         }
 
         return $found;
@@ -96,17 +98,19 @@ class PersonModel extends Model
 
     public function getPerson(string $fullName): ?Person
     {
-        return $this->where('full_name', $fullName)->first();
+        return $this->where('full_name', $fullName)
+            ->first();
     }
 
     /**
      * @return object[]
      */
-    public function getPersonRoles(int $personId, int $podcastId, ?int $episodeId): array {
+    public function getPersonRoles(int $personId, int $podcastId, ?int $episodeId): array
+    {
         if ($episodeId) {
             $cacheName = "podcast#{$podcastId}_episode#{$episodeId}_person#{$personId}_roles";
 
-            if (!($found = cache($cacheName))) {
+            if (! ($found = cache($cacheName))) {
                 $found = $this
                     ->select('episodes_persons.person_group as group, episodes_persons.person_role as role')
                     ->join('episodes_persons', 'persons.id = episodes_persons.person_id')
@@ -118,7 +122,7 @@ class PersonModel extends Model
         } else {
             $cacheName = "podcast#{$podcastId}_person#{$personId}_roles";
 
-            if (!($found = cache($cacheName))) {
+            if (! ($found = cache($cacheName))) {
                 $found = $this
                     ->select('podcasts_persons.person_group as group, podcasts_persons.person_role as role')
                     ->join('podcasts_persons', 'persons.id = podcasts_persons.person_id')
@@ -133,13 +137,13 @@ class PersonModel extends Model
     }
 
     /**
-     * @return array<string, string> 
+     * @return array<string, string>
      */
     public function getPersonOptions(): array
     {
         $options = [];
 
-        if (!($options = cache('person_options'))) {
+        if (! ($options = cache('person_options'))) {
             $options = array_reduce(
                 $this->select('`id`, `full_name`')
                     ->orderBy('`full_name`', 'ASC')
@@ -150,25 +154,27 @@ class PersonModel extends Model
                 },
                 [],
             );
-            cache()->save('person_options', $options, DECADE);
+            cache()
+                ->save('person_options', $options, DECADE);
         }
 
         return $options;
     }
 
     /**
-     * @return array<string, string> 
+     * @return array<string, string>
      */
     public function getTaxonomyOptions(): array
     {
         $options = [];
-        $locale = service('request')->getLocale();
+        $locale = service('request')
+            ->getLocale();
         $cacheName = "taxonomy_options_{$locale}";
 
         /** @var array<string, array> */
         $personsTaxonomy = lang('PersonsTaxonomy.persons');
 
-        if (!($options = cache($cacheName))) {
+        if (! ($options = cache($cacheName))) {
             foreach ($personsTaxonomy as $group_key => $group) {
                 foreach ($group['roles'] as $role_key => $role) {
                     $options[
@@ -177,17 +183,15 @@ class PersonModel extends Model
                 }
             }
 
-            cache()->save($cacheName, $options, DECADE);
+            cache()
+                ->save($cacheName, $options, DECADE);
         }
 
         return $options;
     }
 
-    public function addPerson(
-        string $fullName,
-        ?string $informationUrl,
-        string $image
-    ): int|bool {
+    public function addPerson(string $fullName, ?string $informationUrl, string $image): int | bool
+    {
         $person = new Person([
             'full_name' => $fullName,
             'unique_name' => slugify($fullName),
@@ -206,7 +210,7 @@ class PersonModel extends Model
     public function getEpisodePersons(int $podcastId, int $episodeId): array
     {
         $cacheName = "podcast#{$podcastId}_episode#{$episodeId}_persons";
-        if (!($found = cache($cacheName))) {
+        if (! ($found = cache($cacheName))) {
             $found = $this
                 ->select('persons.*, episodes_persons.podcast_id, episodes_persons.episode_id')
                 ->distinct()
@@ -215,7 +219,8 @@ class PersonModel extends Model
                 ->orderby('persons.full_name')
                 ->findAll();
 
-            cache()->save($cacheName, $found, DECADE);
+            cache()
+                ->save($cacheName, $found, DECADE);
         }
 
         return $found;
@@ -227,7 +232,7 @@ class PersonModel extends Model
     public function getPodcastPersons(int $podcastId): array
     {
         $cacheName = "podcast#{$podcastId}_persons";
-        if (!($found = cache($cacheName))) {
+        if (! ($found = cache($cacheName))) {
             $found = $this
                 ->select('persons.*, podcasts_persons.podcast_id as podcast_id')
                 ->distinct()
@@ -236,7 +241,8 @@ class PersonModel extends Model
                 ->orderby('persons.full_name')
                 ->findAll();
 
-            cache()->save($cacheName, $found, DECADE);
+            cache()
+                ->save($cacheName, $found, DECADE);
         }
 
         return $found;
@@ -248,14 +254,15 @@ class PersonModel extends Model
         int $personId,
         string $groupSlug,
         string $roleSlug
-    ): int|bool {
-        return $this->db->table('episodes_persons')->insert([
-            'podcast_id' => $podcastId,
-            'episode_id' => $episodeId,
-            'person_id' => $personId,
-            'person_group' => $groupSlug,
-            'person_role' => $roleSlug,
-        ]);
+    ): int | bool {
+        return $this->db->table('episodes_persons')
+            ->insert([
+                'podcast_id' => $podcastId,
+                'episode_id' => $episodeId,
+                'person_id' => $personId,
+                'person_group' => $groupSlug,
+                'person_role' => $roleSlug,
+            ]);
     }
 
     public function addPodcastPerson(
@@ -263,13 +270,14 @@ class PersonModel extends Model
         int $personId,
         string $groupSlug,
         string $roleSlug
-    ): int|bool {
-        return $this->db->table('podcasts_persons')->insert([
-            'podcast_id' => $podcastId,
-            'person_id' => $personId,
-            'person_group' => $groupSlug,
-            'person_role' => $roleSlug,
-        ]);
+    ): int | bool {
+        return $this->db->table('podcasts_persons')
+            ->insert([
+                'podcast_id' => $podcastId,
+                'person_id' => $personId,
+                'person_group' => $groupSlug,
+                'person_role' => $roleSlug,
+            ]);
     }
 
     /**
@@ -280,17 +288,17 @@ class PersonModel extends Model
      *
      * @return bool|int Number of rows inserted or FALSE on failure
      */
-    public function addPodcastPersons(
-        int $podcastId,
-        array $persons = [],
-        array $roles = []
-    ): int|bool {
+    public function addPodcastPersons(int $podcastId, array $persons = [], array $roles = []): int | bool
+    {
         if ($persons === []) {
             return 0;
         }
 
-        cache()->delete("podcast#{$podcastId}_persons");
-        (new PodcastModel())->clearCache(['id' => $podcastId]);
+        cache()
+            ->delete("podcast#{$podcastId}_persons");
+        (new PodcastModel())->clearCache([
+            'id' => $podcastId,
+        ]);
 
         $data = [];
         foreach ($persons as $person) {
@@ -312,7 +320,8 @@ class PersonModel extends Model
             }
         }
 
-        return $this->db->table('podcasts_persons')->insertBatch($data);
+        return $this->db->table('podcasts_persons')
+            ->insertBatch($data);
     }
 
     /**
@@ -320,12 +329,13 @@ class PersonModel extends Model
      *
      * @return BaseResult|bool Number of rows inserted or FALSE on failure
      */
-    public function removePersonFromPodcast(int $podcastId, int $personId): BaseResult|bool
+    public function removePersonFromPodcast(int $podcastId, int $personId): BaseResult | bool
     {
-        return $this->db->table('podcasts_persons')->delete([
-            'podcast_id' => $podcastId,
-            'person_id' => $personId,
-        ]);
+        return $this->db->table('podcasts_persons')
+            ->delete([
+                'podcast_id' => $podcastId,
+                'person_id' => $personId,
+            ]);
     }
 
     /**
@@ -333,7 +343,7 @@ class PersonModel extends Model
      *
      * @param int[] $personIds
      * @param string[] $groupsRoles
-     * 
+     *
      * @return bool|int Number of rows inserted or FALSE on failure
      */
     public function addEpisodePersons(
@@ -341,9 +351,11 @@ class PersonModel extends Model
         int $episodeId,
         array $personIds,
         array $groupsRoles
-    ): bool|int {
+    ): bool | int {
         if ($personIds !== []) {
-            (new EpisodeModel())->clearCache(['id' => $episodeId]);
+            (new EpisodeModel())->clearCache([
+                'id' => $episodeId,
+            ]);
 
             $data = [];
             foreach ($personIds as $personId) {
@@ -366,7 +378,8 @@ class PersonModel extends Model
                     ];
                 }
             }
-            return $this->db->table('episodes_persons')->insertBatch($data);
+            return $this->db->table('episodes_persons')
+                ->insertBatch($data);
         }
         return 0;
     }
@@ -374,32 +387,33 @@ class PersonModel extends Model
     /**
      * @return BaseResult|bool
      */
-    public function removePersonFromEpisode(
-        int $podcastId,
-        int $episodeId,
-        int $personId
-    ): BaseResult|bool {
-        return $this->db->table('episodes_persons')->delete([
-            'podcast_id' => $podcastId,
-            'episode_id' => $episodeId,
-            'person_id' => $personId,
-        ]);
+    public function removePersonFromEpisode(int $podcastId, int $episodeId, int $personId): BaseResult | bool
+    {
+        return $this->db->table('episodes_persons')
+            ->delete([
+                'podcast_id' => $podcastId,
+                'episode_id' => $episodeId,
+                'person_id' => $personId,
+            ]);
     }
 
     /**
      * @param mixed[] $data
-     * 
+     *
      * @return array<string, array<string|int, mixed>>
      */
     protected function clearCache(array $data): array
     {
         $personId = is_array($data['id']) ? $data['id']['id'] : $data['id'];
 
-        cache()->delete('person_options');
-        cache()->delete("person#{$personId}");
+        cache()
+            ->delete('person_options');
+        cache()
+            ->delete("person#{$personId}");
 
         // clear cache for every credits page
-        cache()->deleteMatching('page_credits_*');
+        cache()
+            ->deleteMatching('page_credits_*');
 
         return $data;
     }

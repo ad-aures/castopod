@@ -9,19 +9,18 @@
 namespace Analytics\Controllers;
 
 use Analytics\Config\Analytics;
-use CodeIgniter\HTTP\RequestInterface;
-use CodeIgniter\HTTP\ResponseInterface;
-use Psr\Log\LoggerInterface;
-use Config\Services;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\RedirectResponse;
+use CodeIgniter\HTTP\RequestInterface;
+use CodeIgniter\HTTP\ResponseInterface;
+use Config\Services;
+use Psr\Log\LoggerInterface;
 
 class EpisodeAnalyticsController extends Controller
 {
     /**
-     * An array of helpers to be loaded automatically upon
-     * class instantiation. These helpers will be available
-     * to all other controllers that extend Analytics.
+     * An array of helpers to be loaded automatically upon class instantiation. These helpers will be available to all
+     * other controllers that extend Analytics.
      *
      * @var string[]
      */
@@ -40,12 +39,6 @@ class EpisodeAnalyticsController extends Controller
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
 
-        //--------------------------------------------------------------------
-        // Preload any models, libraries, etc, here.
-        //--------------------------------------------------------------------
-        // E.g.:
-        // $this->session = \Config\Services::session();
-
         set_user_session_deny_list_ip();
         set_user_session_location();
         set_user_session_player();
@@ -53,10 +46,8 @@ class EpisodeAnalyticsController extends Controller
         $this->config = config('Analytics');
     }
 
-    public function hit(
-        string $base64EpisodeData,
-        string ...$audioFilePath
-    ): RedirectResponse {
+    public function hit(string $base64EpisodeData, string ...$audioFilePath): RedirectResponse
+    {
         $session = Services::session();
         $session->start();
 

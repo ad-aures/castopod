@@ -1,8 +1,7 @@
 <?php
 
 /**
- * Class CategorySeeder
- * Inserts values in categories table in database
+ * Class CategorySeeder Inserts values in categories table in database
  *
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3

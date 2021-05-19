@@ -1,4 +1,6 @@
-<?php namespace Tests\Support;
+<?php
+
+namespace Tests\Support;
 
 use CodeIgniter\Session\Handlers\ArrayHandler;
 use CodeIgniter\Session\SessionInterface;
@@ -16,7 +18,7 @@ class SessionTestCase extends CIUnitTestCase
      */
     protected $session;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -31,10 +33,7 @@ class SessionTestCase extends CIUnitTestCase
     protected function mockSession(): void
     {
         $config = config('App');
-        $this->session = new MockSession(
-            new ArrayHandler($config, '0.0.0.0'),
-            $config,
-        );
+        $this->session = new MockSession(new ArrayHandler($config, '0.0.0.0'), $config,);
         Services::injectMock('session', $this->session);
     }
 }

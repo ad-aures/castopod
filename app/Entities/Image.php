@@ -36,20 +36,19 @@ use RuntimeException;
 class Image extends Entity
 {
     protected Images $config;
+
     protected ?File $file = null;
+
     protected string $dirname;
+
     protected string $filename;
+
     protected string $extension;
 
-    public function __construct(
-        ?File $file,
-        string $path = '',
-        string $mimetype = ''
-    ) {
+    public function __construct(?File $file, string $path = '', string $mimetype = '')
+    {
         if ($file === null && $path === '') {
-            throw new RuntimeException(
-                'File or path must be set to create an Image.',
-            );
+            throw new RuntimeException('File or path must be set to create an Image.',);
         }
 
         $this->config = config('Images');
@@ -80,7 +79,7 @@ class Image extends Entity
         $this->mimetype = $mimetype;
     }
 
-    function getFile(): File
+    public function getFile(): File
     {
         if ($this->file === null) {
             $this->file = new File($this->path);
@@ -89,19 +88,19 @@ class Image extends Entity
         return $this->file;
     }
 
-    function getPath(): string
+    public function getPath(): string
     {
         return $this->dirname . '/' . $this->filename . '.' . $this->extension;
     }
 
-    function getUrl(): string
+    public function getUrl(): string
     {
         helper('media');
 
         return media_base_url($this->path);
     }
 
-    function getThumbnailPath(): string
+    public function getThumbnailPath(): string
     {
         return $this->dirname .
             '/' .
@@ -111,14 +110,14 @@ class Image extends Entity
             $this->extension;
     }
 
-    function getThumbnailUrl(): string
+    public function getThumbnailUrl(): string
     {
         helper('media');
 
         return media_base_url($this->thumbnail_path);
     }
 
-    function getMediumPath(): string
+    public function getMediumPath(): string
     {
         return $this->dirname .
             '/' .
@@ -128,14 +127,14 @@ class Image extends Entity
             $this->extension;
     }
 
-    function getMediumUrl(): string
+    public function getMediumUrl(): string
     {
         helper('media');
 
         return media_base_url($this->medium_path);
     }
 
-    function getLargePath(): string
+    public function getLargePath(): string
     {
         return $this->dirname .
             '/' .
@@ -145,14 +144,14 @@ class Image extends Entity
             $this->extension;
     }
 
-    function getLargeUrl(): string
+    public function getLargeUrl(): string
     {
         helper('media');
 
         return media_base_url($this->large_path);
     }
 
-    function getFeedPath(): string
+    public function getFeedPath(): string
     {
         return $this->dirname .
             '/' .
@@ -162,14 +161,14 @@ class Image extends Entity
             $this->extension;
     }
 
-    function getFeedUrl(): string
+    public function getFeedUrl(): string
     {
         helper('media');
 
         return media_base_url($this->feed_path);
     }
 
-    function getId3Path(): string
+    public function getId3Path(): string
     {
         return $this->dirname .
             '/' .
@@ -179,7 +178,7 @@ class Image extends Entity
             $this->extension;
     }
 
-    function getId3Url(): string
+    public function getId3Url(): string
     {
         helper('media');
 

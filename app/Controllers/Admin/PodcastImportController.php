@@ -8,40 +8,37 @@
 
 namespace App\Controllers\Admin;
 
-use CodeIgniter\HTTP\RedirectResponse;
-use App\Entities\Podcast;
-use CodeIgniter\Exceptions\PageNotFoundException;
-use ErrorException;
-use Config\Database;
-use Podlibre\PodcastNamespace\ReversedTaxonomy;
 use App\Entities\Episode;
 use App\Entities\Image;
 use App\Entities\Location;
 use App\Entities\Person;
+use App\Entities\Podcast;
 use App\Models\CategoryModel;
-use App\Models\LanguageModel;
-use App\Models\PodcastModel;
 use App\Models\EpisodeModel;
-use App\Models\PlatformModel;
+use App\Models\LanguageModel;
 use App\Models\PersonModel;
+use App\Models\PlatformModel;
+use App\Models\PodcastModel;
+use CodeIgniter\Exceptions\PageNotFoundException;
+use CodeIgniter\HTTP\RedirectResponse;
+use Config\Database;
 use Config\Services;
+use ErrorException;
 use League\HTMLToMarkdown\HtmlConverter;
+use Podlibre\PodcastNamespace\ReversedTaxonomy;
 
 class PodcastImportController extends BaseController
 {
-    /**
-     * @var Podcast|null
-     */
     protected ?Podcast $podcast;
 
     public function _remap(string $method, string ...$params): mixed
     {
         if (count($params) === 0) {
-            return $this->$method();
+            return $this->{$method}();
         }
 
         if (($this->podcast = (new PodcastModel())->getPodcastById((int) $params[0])) !== null) {
-            return $this->$method();
+            return $this->{$method}();
         }
 
         throw PageNotFoundException::forPageNotFound();
@@ -57,9 +54,7 @@ class PodcastImportController extends BaseController
         $data = [
             'languageOptions' => $languageOptions,
             'categoryOptions' => $categoryOptions,
-            'browserLang' => get_browser_language(
-                $this->request->getServer('HTTP_ACCEPT_LANGUAGE'),
-            ),
+            'browserLang' => get_browser_language($this->request->getServer('HTTP_ACCEPT_LANGUAGE'),),
         ];
 
         return view('admin/podcast/import', $data);
@@ -75,7 +70,7 @@ class PodcastImportController extends BaseController
             'max_episodes' => 'is_natural_no_zero|permit_empty',
         ];
 
-        if (!$this->validate($rules)) {
+        if (! $this->validate($rules)) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -83,9 +78,7 @@ class PodcastImportController extends BaseController
         }
         try {
             ini_set('user_agent', 'Castopod/' . CP_VERSION);
-            $feed = simplexml_load_file(
-                $this->request->getPost('imported_feed_url'),
-            );
+            $feed = simplexml_load_file($this->request->getPost('imported_feed_url'),);
         } catch (ErrorException $errorException) {
             return redirect()
                 ->back()
@@ -99,15 +92,11 @@ class PodcastImportController extends BaseController
                         ' ⎋</a>',
                 ]);
         }
-        $nsItunes = $feed->channel[0]->children(
-            'http://www.itunes.com/dtds/podcast-1.0.dtd',
-        );
+        $nsItunes = $feed->channel[0]->children('http://www.itunes.com/dtds/podcast-1.0.dtd',);
         $nsPodcast = $feed->channel[0]->children(
             'https://github.com/Podcastindex-org/podcast-namespace/blob/main/docs/1.0.md',
         );
-        $nsContent = $feed->channel[0]->children(
-            'http://purl.org/rss/1.0/modules/content/',
-        );
+        $nsContent = $feed->channel[0]->children('http://purl.org/rss/1.0/modules/content/',);
 
         if ((string) $nsPodcast->locked === 'yes') {
             return redirect()
@@ -125,13 +114,9 @@ class PodcastImportController extends BaseController
                 property_exists($nsItunes, 'image') && $nsItunes->image !== null &&
                 $nsItunes->image->attributes()['href'] !== null
             ) {
-                $imageFile = download_file(
-                    (string) $nsItunes->image->attributes()['href'],
-                );
+                $imageFile = download_file((string) $nsItunes->image->attributes()['href'],);
             } else {
-                $imageFile = download_file(
-                    (string) $feed->channel[0]->image->url,
-                );
+                $imageFile = download_file((string) $feed->channel[0]->image->url,);
             }
 
             $location = null;
@@ -145,37 +130,37 @@ class PodcastImportController extends BaseController
 
             $podcast = new Podcast([
                 'name' => $this->request->getPost('name'),
-                'imported_feed_url' => $this->request->getPost(
-                    'imported_feed_url',
-                ),
-                'new_feed_url' => base_url(
-                    route_to('podcast_feed', $this->request->getPost('name')),
-                ),
+                'imported_feed_url' => $this->request->getPost('imported_feed_url',),
+                'new_feed_url' => base_url(route_to('podcast_feed', $this->request->getPost('name')),),
                 'title' => (string) $feed->channel[0]->title,
-                'description_markdown' => $converter->convert(
-                    $channelDescriptionHtml,
-                ),
+                'description_markdown' => $converter->convert($channelDescriptionHtml,),
                 'description_html' => $channelDescriptionHtml,
                 'image' => new Image($imageFile),
                 'language_code' => $this->request->getPost('language'),
                 'category_id' => $this->request->getPost('category'),
                 'parental_advisory' =>
                 property_exists($nsItunes, 'explicit') && $nsItunes->explicit !== null
-                    ? (in_array((string) $nsItunes->explicit, ['yes', 'true'])
+                    ? (in_array((string) $nsItunes->explicit, ['yes', 'true'], true)
                         ? 'explicit'
-                        : (in_array((string) $nsItunes->explicit, ['no', 'false'])
+                        : (in_array((string) $nsItunes->explicit, ['no', 'false'], true)
                             ? 'clean'
                             : null))
                     : null,
                 'owner_name' => (string) $nsItunes->owner->name,
                 'owner_email' => (string) $nsItunes->owner->email,
                 'publisher' => (string) $nsItunes->author,
-                'type' => property_exists($nsItunes, 'type') && $nsItunes->type !== null ? (string) $nsItunes->type : 'episodic',
+                'type' => property_exists(
+                    $nsItunes,
+                    'type'
+                ) && $nsItunes->type !== null ? (string) $nsItunes->type : 'episodic',
                 'copyright' => (string) $feed->channel[0]->copyright,
                 'is_blocked' =>
                 property_exists($nsItunes, 'block') && $nsItunes->block !== null && (string) $nsItunes->block === 'yes',
                 'is_completed' =>
-                property_exists($nsItunes, 'complete') && $nsItunes->complete !== null && (string) $nsItunes->complete === 'yes',
+                property_exists(
+                    $nsItunes,
+                    'complete'
+                ) && $nsItunes->complete !== null && (string) $nsItunes->complete === 'yes',
                 'location' => $location,
                 'created_by' => user_id(),
                 'updated_by' => user_id(),
@@ -199,7 +184,7 @@ class PodcastImportController extends BaseController
 
         $db->transStart();
 
-        if (!($newPodcastId = $podcastModel->insert($podcast, true))) {
+        if (! ($newPodcastId = $podcastModel->insert($podcast, true))) {
             $db->transRollback();
             return redirect()
                 ->back()
@@ -210,17 +195,22 @@ class PodcastImportController extends BaseController
         $authorize = Services::authorization();
         $podcastAdminGroup = $authorize->group('podcast_admin');
 
-        $podcastModel->addPodcastContributor(
-            user_id(),
-            $newPodcastId,
-            $podcastAdminGroup->id,
-        );
+        $podcastModel->addPodcastContributor(user_id(), $newPodcastId, $podcastAdminGroup->id,);
 
         $podcastsPlatformsData = [];
         $platformTypes = [
-            ['name' => 'podcasting', 'elements' => $nsPodcast->id],
-            ['name' => 'social', 'elements' => $nsPodcast->social],
-            ['name' => 'funding', 'elements' => $nsPodcast->funding],
+            [
+                'name' => 'podcasting',
+                'elements' => $nsPodcast->id,
+            ],
+            [
+                'name' => 'social',
+                'elements' => $nsPodcast->social,
+            ],
+            [
+                'name' => 'funding',
+                'elements' => $nsPodcast->funding,
+            ],
         ];
         $platformModel = new PlatformModel();
         foreach ($platformTypes as $platformType) {
@@ -240,10 +230,7 @@ class PodcastImportController extends BaseController
         }
 
         if (count($podcastsPlatformsData) > 1) {
-            $platformModel->createPodcastPlatforms(
-                $newPodcastId,
-                $podcastsPlatformsData,
-            );
+            $platformModel->createPodcastPlatforms($newPodcastId, $podcastsPlatformsData,);
         }
 
         foreach ($nsPodcast->person as $podcastPerson) {
@@ -262,7 +249,7 @@ class PodcastImportController extends BaseController
                     'updated_by' => user_id(),
                 ]);
 
-                if (!$newPersonId = $personModel->insert($newPodcastPerson)) {
+                if (! $newPersonId = $personModel->insert($newPodcastPerson)) {
                     return redirect()
                         ->back()
                         ->withInput()
@@ -271,8 +258,8 @@ class PodcastImportController extends BaseController
             }
 
             // TODO: these checks should be in the taxonomy as default values
-            $podcastPersonGroup = $podcastPerson->attributes()['group'] ?? "Cast";
-            $podcastPersonRole = $podcastPerson->attributes()['role'] ?? "Host";
+            $podcastPersonGroup = $podcastPerson->attributes()['group'] ?? 'Cast';
+            $podcastPersonRole = $podcastPerson->attributes()['role'] ?? 'Host';
 
             $personGroup = ReversedTaxonomy::$taxonomy[(string) $podcastPersonGroup];
 
@@ -280,7 +267,12 @@ class PodcastImportController extends BaseController
             $personRoleSlug = $personGroup['roles'][(string) $podcastPersonRole]['slug'];
 
             $podcastPersonModel = new PersonModel();
-            if (!$podcastPersonModel->addPodcastPerson($newPodcastId, $newPersonId, $personGroupSlug, $personRoleSlug)) {
+            if (! $podcastPersonModel->addPodcastPerson(
+                $newPodcastId,
+                $newPersonId,
+                $personGroupSlug,
+                $personRoleSlug
+            )) {
                 return redirect()
                     ->back()
                     ->withInput()
@@ -296,30 +288,23 @@ class PodcastImportController extends BaseController
             : $numberItems;
 
         $slugs = [];
-
-        //////////////////////////////////////////////////////////////////
-        // For each Episode:
         for ($itemNumber = 1; $itemNumber <= $lastItem; ++$itemNumber) {
             $item = $feed->channel[0]->item[$numberItems - $itemNumber];
 
-            $nsItunes = $item->children(
-                'http://www.itunes.com/dtds/podcast-1.0.dtd',
-            );
+            $nsItunes = $item->children('http://www.itunes.com/dtds/podcast-1.0.dtd',);
             $nsPodcast = $item->children(
                 'https://github.com/Podcastindex-org/podcast-namespace/blob/main/docs/1.0.md',
             );
-            $nsContent = $item->children(
-                'http://purl.org/rss/1.0/modules/content/',
-            );
+            $nsContent = $item->children('http://purl.org/rss/1.0/modules/content/',);
 
             $slug = slugify(
                 $this->request->getPost('slug_field') === 'title'
                     ? $item->title
                     : basename($item->link),
             );
-            if (in_array($slug, $slugs)) {
+            if (in_array($slug, $slugs, true)) {
                 $slugNumber = 2;
-                while (in_array($slug . '-' . $slugNumber, $slugs)) {
+                while (in_array($slug . '-' . $slugNumber, $slugs, true)) {
                     ++$slugNumber;
                 }
                 $slug = $slug . '-' . $slugNumber;
@@ -336,11 +321,7 @@ class PodcastImportController extends BaseController
                 property_exists($nsItunes, 'image') && $nsItunes->image !== null &&
                 $nsItunes->image->attributes()['href'] !== null
             ) {
-                $episodeImage = new Image(
-                    download_file(
-                        (string) $nsItunes->image->attributes()['href'],
-                    ),
-                );
+                $episodeImage = new Image(download_file((string) $nsItunes->image->attributes()['href'],),);
             } else {
                 $episodeImage = null;
             }
@@ -359,19 +340,15 @@ class PodcastImportController extends BaseController
                 'guid' => $item->guid ?? null,
                 'title' => $item->title,
                 'slug' => $slug,
-                'audio_file' => download_file(
-                    $item->enclosure->attributes()['url'],
-                ),
-                'description_markdown' => $converter->convert(
-                    $itemDescriptionHtml,
-                ),
+                'audio_file' => download_file($item->enclosure->attributes()['url'],),
+                'description_markdown' => $converter->convert($itemDescriptionHtml,),
                 'description_html' => $itemDescriptionHtml,
                 'image' => $episodeImage,
                 'parental_advisory' =>
                 property_exists($nsItunes, 'explicit') && $nsItunes->explicit !== null
-                    ? (in_array((string) $nsItunes->explicit, ['yes', 'true'])
+                    ? (in_array((string) $nsItunes->explicit, ['yes', 'true'], true)
                         ? 'explicit'
-                        : (in_array((string) $nsItunes->explicit, ['no', 'false'])
+                        : (in_array((string) $nsItunes->explicit, ['no', 'false'], true)
                             ? 'clean'
                             : null))
                     : null,
@@ -386,7 +363,10 @@ class PodcastImportController extends BaseController
                 'type' => property_exists($nsItunes, 'episodeType') && $nsItunes->episodeType !== null
                     ? (string) $nsItunes->episodeType
                     : 'full',
-                'is_blocked' => property_exists($nsItunes, 'block') && $nsItunes->block !== null && (string) $nsItunes->block === 'yes',
+                'is_blocked' => property_exists(
+                    $nsItunes,
+                    'block'
+                ) && $nsItunes->block !== null && (string) $nsItunes->block === 'yes',
                 'location' => $location,
                 'created_by' => user_id(),
                 'updated_by' => user_id(),
@@ -395,7 +375,7 @@ class PodcastImportController extends BaseController
 
             $episodeModel = new EpisodeModel();
 
-            if (!($newEpisodeId = $episodeModel->insert($newEpisode, true))) {
+            if (! ($newEpisodeId = $episodeModel->insert($newEpisode, true))) {
                 // FIXME: What shall we do?
                 return redirect()
                     ->back()
@@ -419,7 +399,7 @@ class PodcastImportController extends BaseController
                         'updated_by' => user_id(),
                     ]);
 
-                    if (!($newPersonId = $personModel->insert($newPerson))) {
+                    if (! ($newPersonId = $personModel->insert($newPerson))) {
                         return redirect()
                             ->back()
                             ->withInput()
@@ -428,8 +408,8 @@ class PodcastImportController extends BaseController
                 }
 
                 // TODO: these checks should be in the taxonomy as default values
-                $episodePersonGroup = $episodePerson->attributes()['group'] ?? "Cast";
-                $episodePersonRole = $episodePerson->attributes()['role'] ?? "Host";
+                $episodePersonGroup = $episodePerson->attributes()['group'] ?? 'Cast';
+                $episodePersonRole = $episodePerson->attributes()['role'] ?? 'Host';
 
                 $personGroup = ReversedTaxonomy::$taxonomy[(string) $episodePersonGroup];
 
@@ -437,7 +417,13 @@ class PodcastImportController extends BaseController
                 $personRoleSlug = $personGroup['roles'][(string) $episodePersonRole]['slug'];
 
                 $episodePersonModel = new PersonModel();
-                if (!$episodePersonModel->addEpisodePerson($newPodcastId, $newEpisodeId, $newPersonId, $personGroupSlug, $personRoleSlug)) {
+                if (! $episodePersonModel->addEpisodePerson(
+                    $newPodcastId,
+                    $newEpisodeId,
+                    $newPersonId,
+                    $personGroupSlug,
+                    $personRoleSlug
+                )) {
                     return redirect()
                         ->back()
                         ->withInput()

@@ -8,12 +8,11 @@
 
 namespace App\Entities;
 
-use App\Entities\Location;
 use App\Libraries\SimpleRSSElement;
-use App\Models\PodcastModel;
-use App\Models\SoundbiteModel;
 use App\Models\NoteModel;
 use App\Models\PersonModel;
+use App\Models\PodcastModel;
+use App\Models\SoundbiteModel;
 use CodeIgniter\Entity\Entity;
 use CodeIgniter\Files\File;
 use CodeIgniter\HTTP\Files\UploadedFile;
@@ -82,16 +81,27 @@ use RuntimeException;
 class Episode extends Entity
 {
     protected Podcast $podcast;
+
     protected string $link;
+
     protected File $audio_file;
+
     protected string $audio_file_url;
+
     protected string $audio_file_analytics_url;
+
     protected string $audio_file_web_url;
+
     protected string $audio_file_opengraph_url;
+
     protected string $embeddable_player_url;
+
     protected Image $image;
+
     protected ?string $description = null;
+
     protected File $transcript_file;
+
     protected File $chapters_file;
 
     /**
@@ -110,18 +120,15 @@ class Episode extends Entity
     protected ?array $notes = null;
 
     protected ?Location $location = null;
+
     protected string $custom_rss_string;
+
     protected ?string $publication_status = null;
 
     /**
      * @var string[]
      */
-    protected $dates = [
-        'published_at',
-        'created_at',
-        'updated_at',
-        'deleted_at',
-    ];
+    protected $dates = ['published_at', 'created_at', 'updated_at', 'deleted_at'];
 
     /**
      * @var array<string, string>
@@ -171,10 +178,7 @@ class Episode extends Entity
         }
 
         // Save image
-        $image->saveImage(
-            'podcasts/' . $this->getPodcast()->name,
-            $this->attributes['slug'],
-        );
+        $image->saveImage('podcasts/' . $this->getPodcast()->name, $this->attributes['slug'],);
 
         $this->attributes['image_mimetype'] = $image->mimetype;
         $this->attributes['image_path'] = $image->path;
@@ -185,11 +189,7 @@ class Episode extends Entity
     public function getImage(): Image
     {
         if ($imagePath = $this->attributes['image_path']) {
-            return new Image(
-                null,
-                $imagePath,
-                $this->attributes['image_mimetype'],
-            );
+            return new Image(null, $imagePath, $this->attributes['image_mimetype'],);
         }
 
         return $this->podcast->image;
@@ -198,7 +198,7 @@ class Episode extends Entity
     /**
      * Saves an audio file
      */
-    public function setAudioFile(UploadedFile|File $audioFile): static
+    public function setAudioFile(UploadedFile | File $audioFile): static
     {
         helper(['media', 'id3']);
 
@@ -222,13 +222,14 @@ class Episode extends Entity
     /**
      * Saves an episode transcript file
      */
-    public function setTranscriptFile(UploadedFile|File $transcriptFile): static
+    public function setTranscriptFile(UploadedFile | File $transcriptFile): static
     {
         helper('media');
 
         $this->attributes['transcript_file_path'] = save_media(
             $transcriptFile,
-            $this->getPodcast()->name,
+            $this->getPodcast()
+                ->name,
             $this->attributes['slug'] . '-transcript',
         );
 
@@ -238,13 +239,14 @@ class Episode extends Entity
     /**
      * Saves an episode chapters file
      */
-    public function setChaptersFile(UploadedFile|File $chaptersFile): static
+    public function setChaptersFile(UploadedFile | File $chaptersFile): static
     {
         helper('media');
 
         $this->attributes['chapters_file_path'] = save_media(
             $chaptersFile,
-            $this->getPodcast()->name,
+            $this->getPodcast()
+                ->name,
             $this->attributes['slug'] . '-chapters',
         );
 
@@ -263,9 +265,7 @@ class Episode extends Entity
         if ($this->attributes['transcript_file_path']) {
             helper('media');
 
-            return new File(
-                media_path($this->attributes['transcript_file_path']),
-            );
+            return new File(media_path($this->attributes['transcript_file_path']),);
         }
 
         return null;
@@ -276,9 +276,7 @@ class Episode extends Entity
         if ($this->attributes['chapters_file_path']) {
             helper('media');
 
-            return new File(
-                media_path($this->attributes['chapters_file_path']),
-            );
+            return new File(media_path($this->attributes['chapters_file_path']),);
         }
 
         return null;
@@ -317,8 +315,8 @@ class Episode extends Entity
     }
 
     /**
-     * Gets transcript url from transcript file uri if it exists
-     * or returns the transcript_file_remote_url which can be null.
+     * Gets transcript url from transcript file uri if it exists or returns the transcript_file_remote_url which can be
+     * null.
      */
     public function getTranscriptFileUrl(): ?string
     {
@@ -329,8 +327,8 @@ class Episode extends Entity
     }
 
     /**
-     * Gets chapters file url from chapters file uri if it exists
-     * or returns the chapters_file_remote_url which can be null.
+     * Gets chapters file url from chapters file uri if it exists or returns the chapters_file_remote_url which can be
+     * null.
      */
     public function getChaptersFileUrl(): ?string
     {
@@ -349,16 +347,11 @@ class Episode extends Entity
     public function getPersons(): array
     {
         if ($this->id === null) {
-            throw new RuntimeException(
-                'Episode must be created before getting persons.',
-            );
+            throw new RuntimeException('Episode must be created before getting persons.',);
         }
 
         if ($this->persons === null) {
-            $this->persons = (new PersonModel())->getEpisodePersons(
-                $this->podcast_id,
-                $this->id,
-            );
+            $this->persons = (new PersonModel())->getEpisodePersons($this->podcast_id, $this->id,);
         }
 
         return $this->persons;
@@ -372,16 +365,11 @@ class Episode extends Entity
     public function getSoundbites(): array
     {
         if ($this->id === null) {
-            throw new RuntimeException(
-                'Episode must be created before getting soundbites.',
-            );
+            throw new RuntimeException('Episode must be created before getting soundbites.',);
         }
 
         if ($this->soundbites === null) {
-            $this->soundbites = (new SoundbiteModel())->getEpisodeSoundbites(
-                $this->getPodcast()->id,
-                $this->id,
-            );
+            $this->soundbites = (new SoundbiteModel())->getEpisodeSoundbites($this->getPodcast() ->id, $this->id,);
         }
 
         return $this->soundbites;
@@ -393,9 +381,7 @@ class Episode extends Entity
     public function getNotes(): array
     {
         if ($this->id === null) {
-            throw new RuntimeException(
-                'Episode must be created before getting soundbites.',
-            );
+            throw new RuntimeException('Episode must be created before getting soundbites.',);
         }
 
         if ($this->notes === null) {
@@ -407,13 +393,7 @@ class Episode extends Entity
 
     public function getLink(): string
     {
-        return base_url(
-            route_to(
-                'episode',
-                $this->getPodcast()->name,
-                $this->attributes['slug'],
-            ),
-        );
+        return base_url(route_to('episode', $this->getPodcast() ->name, $this->attributes['slug'],),);
     }
 
     public function getEmbeddablePlayerUrl(string $theme = null): string
@@ -422,15 +402,12 @@ class Episode extends Entity
             $theme
                 ? route_to(
                     'embeddable-player-theme',
-                    $this->getPodcast()->name,
+                    $this->getPodcast()
+                        ->name,
                     $this->attributes['slug'],
                     $theme,
                 )
-                : route_to(
-                    'embeddable-player',
-                    $this->getPodcast()->name,
-                    $this->attributes['slug'],
-                ),
+                : route_to('embeddable-player', $this->getPodcast() ->name, $this->attributes['slug'],),
         );
     }
 
@@ -443,9 +420,7 @@ class Episode extends Entity
 
     public function getPodcast(): ?Podcast
     {
-        return (new PodcastModel())->getPodcastById(
-            $this->attributes['podcast_id'],
-        );
+        return (new PodcastModel())->getPodcastById($this->attributes['podcast_id'],);
     }
 
     public function setDescriptionMarkdown(string $descriptionMarkdown): static
@@ -456,9 +431,7 @@ class Episode extends Entity
         ]);
 
         $this->attributes['description_markdown'] = $descriptionMarkdown;
-        $this->attributes['description_html'] = $converter->convertToHtml(
-            $descriptionMarkdown,
-        );
+        $this->attributes['description_html'] = $converter->convertToHtml($descriptionMarkdown,);
 
         return $this;
     }
@@ -467,19 +440,25 @@ class Episode extends Entity
     {
         $descriptionHtml = '';
         if (
-            $this->getPodcast()->partner_id !== null &&
-            $this->getPodcast()->partner_link_url !== null &&
-            $this->getPodcast()->partner_image_url !== null
+            $this->getPodcast()
+                ->partner_id !== null &&
+            $this->getPodcast()
+                ->partner_link_url !== null &&
+            $this->getPodcast()
+                ->partner_image_url !== null
         ) {
-            $descriptionHtml .= "<div><a href=\"{$this->getPartnerLink($serviceSlug,
-            )}\" rel=\"sponsored noopener noreferrer\" target=\"_blank\"><img src=\"{$this->getPartnerImageUrl($serviceSlug,
+            $descriptionHtml .= "<div><a href=\"{$this->getPartnerLink(
+                $serviceSlug,
+            )}\" rel=\"sponsored noopener noreferrer\" target=\"_blank\"><img src=\"{$this->getPartnerImageUrl(
+                $serviceSlug,
             )}\" alt=\"Partner image\" /></a></div>";
         }
 
         $descriptionHtml .= $this->attributes['description_html'];
 
         if ($this->getPodcast()->episode_description_footer_html) {
-            $descriptionHtml .= "<footer>{$this->getPodcast()->episode_description_footer_html}</footer>";
+            $descriptionHtml .= "<footer>{$this->getPodcast()
+                ->episode_description_footer_html}</footer>";
         }
 
         return $descriptionHtml;
@@ -489,11 +468,7 @@ class Episode extends Entity
     {
         if ($this->description === null) {
             $this->description = trim(
-                preg_replace(
-                    '~\s+~',
-                    ' ',
-                    strip_tags($this->attributes['description_html']),
-                ),
+                preg_replace('~\s+~', ' ', strip_tags($this->attributes['description_html']),),
             );
         }
 
@@ -529,7 +504,7 @@ class Episode extends Entity
         }
 
         if (
-            !isset($this->attributes['location_name']) ||
+            ! isset($this->attributes['location_name']) ||
             $this->attributes['location_name'] !== $location->name
         ) {
             $location->fetchOsmLocation();
@@ -549,11 +524,7 @@ class Episode extends Entity
         }
 
         if ($this->location === null) {
-            $this->location = new Location(
-                $this->location_name,
-                $this->location_geo,
-                $this->location_osm,
-            );
+            $this->location = new Location($this->location_name, $this->location_geo, $this->location_osm,);
         }
 
         return $this->location;
@@ -562,7 +533,7 @@ class Episode extends Entity
     /**
      * Get custom rss tag as XML String
      */
-    function getCustomRssString(): string
+    public function getCustomRssString(): string
     {
         if ($this->custom_rss === null) {
             return '';
@@ -575,12 +546,9 @@ class Episode extends Entity
         ))
             ->addChild('channel')
             ->addChild('item');
-        array_to_rss(
-            [
-                'elements' => $this->custom_rss,
-            ],
-            $xmlNode,
-        );
+        array_to_rss([
+            'elements' => $this->custom_rss,
+        ], $xmlNode,);
 
         return str_replace(['<item>', '</item>'], '', $xmlNode->asXML());
     }
@@ -588,7 +556,7 @@ class Episode extends Entity
     /**
      * Saves custom rss tag into json
      */
-    function setCustomRssString(?string $customRssString = null): static
+    public function setCustomRssString(?string $customRssString = null): static
     {
         if ($customRssString === null) {
             return $this;
@@ -604,9 +572,7 @@ class Episode extends Entity
         )['elements'][0]['elements'][0];
 
         if (array_key_exists('elements', $customRssArray)) {
-            $this->attributes['custom_rss'] = json_encode(
-                $customRssArray['elements'],
-            );
+            $this->attributes['custom_rss'] = json_encode($customRssArray['elements'],);
         } else {
             $this->attributes['custom_rss'] = null;
         }
@@ -614,12 +580,13 @@ class Episode extends Entity
         return $this;
     }
 
-    function getPartnerLink(?string $serviceSlug = null): string
+    public function getPartnerLink(?string $serviceSlug = null): string
     {
         $partnerLink =
             rtrim($this->getPodcast()->partner_link_url, '/') .
             '?pid=' .
-            $this->getPodcast()->partner_id .
+            $this->getPodcast()
+                ->partner_id .
             '&guid=' .
             urlencode($this->attributes['guid']);
 
@@ -630,7 +597,7 @@ class Episode extends Entity
         return $partnerLink;
     }
 
-    function getPartnerImageUrl(string $serviceSlug = null): string
+    public function getPartnerImageUrl(string $serviceSlug = null): string
     {
         if ($serviceSlug !== null) {
             return '&_from=' . $serviceSlug;
@@ -638,7 +605,8 @@ class Episode extends Entity
 
         return rtrim($this->getPodcast()->partner_image_url, '/') .
             '?pid=' .
-            $this->getPodcast()->partner_id .
+            $this->getPodcast()
+                ->partner_id .
             '&guid=' .
             urlencode($this->attributes['guid']);
     }

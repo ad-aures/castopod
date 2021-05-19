@@ -2,26 +2,22 @@
 
 namespace ActivityPub\Filters;
 
-use Config\Services;
-use CodeIgniter\Exceptions\PageNotFoundException;
-use Exception;
 use ActivityPub\HttpSignature;
+use CodeIgniter\Exceptions\PageNotFoundException;
+use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
-use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\URI;
+use Config\Services;
+use Exception;
 
 class ActivityPubFilter implements FilterInterface
 {
     /**
-     * Do whatever processing this filter needs to do.
-     * By default it should not return anything during
-     * normal execution. However, when an abnormal state
-     * is found, it should return an instance of
-     * CodeIgniter\HTTP\Response. If it does, script
-     * execution will end and that Response will be
-     * sent back to the client, allowing for error pages,
-     * redirects, etc.
+     * Do whatever processing this filter needs to do. By default it should not return anything during normal execution.
+     * However, when an abnormal state is found, it should return an instance of CodeIgniter\HTTP\Response. If it does,
+     * script execution will end and that Response will be sent back to the client, allowing for error pages, redirects,
+     * etc.
      *
      * @param string[]|null                         $params
      * @return void|mixed
@@ -32,7 +28,7 @@ class ActivityPubFilter implements FilterInterface
             return;
         }
 
-        if (in_array('verify-activitystream', $params)) {
+        if (in_array('verify-activitystream', $params, true)) {
             $negotiate = Services::negotiator();
 
             $allowedContentTypes = [
@@ -45,7 +41,7 @@ class ActivityPubFilter implements FilterInterface
             }
         }
 
-        if (in_array('verify-blocks', $params)) {
+        if (in_array('verify-blocks', $params, true)) {
             $payload = $request->getJSON();
 
             $actorUri = $payload->actor;
@@ -62,7 +58,7 @@ class ActivityPubFilter implements FilterInterface
             }
         }
 
-        if (in_array('verify-signature', $params)) {
+        if (in_array('verify-signature', $params, true)) {
             try {
                 // securityCheck: check activity signature before handling it
                 (new HttpSignature())->verify();
@@ -75,19 +71,15 @@ class ActivityPubFilter implements FilterInterface
     }
 
     //--------------------------------------------------------------------
+
     /**
-     * Allows After filters to inspect and modify the response
-     * object as needed. This method does not allow any way
-     * to stop execution of other after filters, short of
-     * throwing an Exception or Error.
+     * Allows After filters to inspect and modify the response object as needed. This method does not allow any way to
+     * stop execution of other after filters, short of throwing an Exception or Error.
      *
      * @param string[]|null                          $arguments
      */
-    public function after(
-        RequestInterface $request,
-        ResponseInterface $response,
-        $arguments = null
-    ): void {
+    public function after(RequestInterface $request, ResponseInterface $response, $arguments = null): void
+    {
     }
 
     //--------------------------------------------------------------------

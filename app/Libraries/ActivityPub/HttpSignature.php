@@ -1,8 +1,7 @@
 <?php
 
 /**
- * This file is based on the HttpSignature file from the ActivityPhp package.
- * It is adapted to work with CodeIgniter4
+ * This file is based on the HttpSignature file from the ActivityPhp package. It is adapted to work with CodeIgniter4
  *
  * More info: https://github.com/landrok/activitypub
  *
@@ -27,7 +26,7 @@ class HttpSignature
     /**
      * @var string
      */
-    const SIGNATURE_PATTERN = '/^
+    private const SIGNATURE_PATTERN = '/^
         keyId="(?P<keyId>
             (https?:\/\/[\w\-\.]+[\w]+)
             (:[\d]+)?
@@ -59,16 +58,13 @@ class HttpSignature
      */
     public function verify(): bool
     {
-        if (!($dateHeader = $this->request->header('date'))) {
+        if (! ($dateHeader = $this->request->header('date'))) {
             throw new Exception('Request must include a date header.');
         }
 
         // verify that request has been made within the last hour
         $currentTime = Time::now();
-        $requestTime = Time::createFromFormat(
-            'D, d M Y H:i:s T',
-            $dateHeader->getValue(),
-        );
+        $requestTime = Time::createFromFormat('D, d M Y H:i:s T', $dateHeader->getValue(),);
 
         $diff = $requestTime->difference($currentTime);
         if ($diff->getSeconds() > 3600) {
@@ -76,7 +72,7 @@ class HttpSignature
         }
 
         // check that digest header is set
-        if (!($digestHeader = $this->request->header('digest'))) {
+        if (! ($digestHeader = $this->request->header('digest'))) {
             throw new Exception('Request must include a digest header');
         }
         // compute body digest and compare with header digest
@@ -93,7 +89,7 @@ class HttpSignature
         }
 
         // Split it into its parts (keyId, headers and signature)
-        if (!($parts = $this->splitSignature($signature))) {
+        if (! ($parts = $this->splitSignature($signature))) {
             throw new Exception('Malformed signature string.');
         }
 
@@ -105,12 +101,7 @@ class HttpSignature
         // Fetch the public key linked from keyId
         $actorRequest = new ActivityRequest($keyId);
         $actorResponse = $actorRequest->get();
-        $actor = json_decode(
-            $actorResponse->getBody(),
-            false,
-            512,
-            JSON_THROW_ON_ERROR,
-        );
+        $actor = json_decode($actorResponse->getBody(), false, 512, JSON_THROW_ON_ERROR,);
 
         $publicKeyPem = $actor->publicKey->publicKeyPem;
 
@@ -132,15 +123,15 @@ class HttpSignature
      *
      * @return array<string, string>|false
      */
-    private function splitSignature(string $signature): array|false
+    private function splitSignature(string $signature): array | false
     {
-        if (!preg_match(self::SIGNATURE_PATTERN, $signature, $matches)) {
+        if (! preg_match(self::SIGNATURE_PATTERN, $signature, $matches)) {
             // Signature pattern failed
             return false;
         }
 
         // Headers are optional
-        if (!isset($matches['headers']) || $matches['headers'] == '') {
+        if (! isset($matches['headers']) || $matches['headers'] === '') {
             $matches['headers'] = 'date';
         }
 

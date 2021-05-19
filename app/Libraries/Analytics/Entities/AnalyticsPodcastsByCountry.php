@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Class AnalyticsPodcastsByCountry
- * Entity for AnalyticsPodcastsByCountry
+ * Class AnalyticsPodcastsByCountry Entity for AnalyticsPodcastsByCountry
+ *
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/

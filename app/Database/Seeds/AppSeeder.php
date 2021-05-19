@@ -1,8 +1,7 @@
 <?php
 
 /**
- * Class AppSeeder
- * Calls all required seeders for castopod to work properly
+ * Class AppSeeder Calls all required seeders for castopod to work properly
  *
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
