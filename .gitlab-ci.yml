@@ -54,7 +54,7 @@ static-analysis:
 code-review:
   stage: quality
   script:
-    - vendor/bin/rector process --dry-run --ansi
+    - vendor/bin/rector process --dry-run --ansi --verbose
 
 bundle_app:
   stage: bundle
