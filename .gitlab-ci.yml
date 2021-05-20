@@ -48,7 +48,8 @@ code-style:
 static-analysis:
   stage: quality
   script:
-    - vendor/bin/phpstan analyse --ansi
+    # increase memory limit to 1GB because of script failure
+    - php -d memory_limit=1G vendor/bin/phpstan analyse --ansi
 
 code-review:
   stage: quality
