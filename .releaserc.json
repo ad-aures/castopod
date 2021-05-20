@@ -11,7 +11,7 @@
     [
       "@semantic-release/exec",
       {
-        "prepareCmd": "./scripts/prepare-release.sh ${nextRelease.version}"
+        "prepareCmd": "./scripts/bundle.sh ${nextRelease.version} && ./scripts/package.sh"
       }
     ],
     "@semantic-release/npm",

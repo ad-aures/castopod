@@ -1,11 +1,8 @@
 <?php
 
 use CodeIgniter\Pager\PagerRenderer;
+
 /**
- * @copyright  2020 Podlibre
- * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
- * @link       https://castopod.org/
- *
  * @var PagerRenderer $pager
  */
 $pager->setSurroundCount(2);

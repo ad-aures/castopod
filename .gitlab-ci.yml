@@ -13,74 +13,62 @@ cache:
 before_script:
   - apt-get update -y
 
-  # Install git (the php image doesn't have it) which is required by composer
+  # Install git which is required by composer (the php image doesn't have it)
   - apt-get install git -y
 
   - apt-get install -y libicu-dev
 
-  # Install intl PHP extension
+  # Install intl PHP extension for tests
   - docker-php-ext-install intl
 
-  # install rsync for file transfers
-  - apt-get install rsync -y
-
-  # install wget to download archives
-  - apt-get install wget
-
   # Install composer
-  - apt-get install zip unzip
   - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
   - php composer-setup.php
   - php -r "unlink('composer-setup.php');"
 
   # Install NodeJS for NPM
-  - curl -sL https://deb.nodesource.com/setup_12.x | bash -
+  - curl -sL https://deb.nodesource.com/setup_lts.x | bash -
   - apt-get update && apt-get install -y nodejs
 
-  # Install all php and js dependencies
+  # Install all php dependencies
   - php composer.phar install --prefer-dist --no-ansi --no-interaction --no-progress --ignore-platform-reqs
-  - npm install
 
 tests:
   stage: quality
   script:
-    - composer test
+    # run phpunit without code coverage
+    # TODO: add code coverage
+    - vendor/bin/phpunit --no-coverage
 
-analysis:
+code-style:
   stage: quality
   script:
-    # run phpstan
-    - composer analyse
+    - vendor/bin/ecs check --ansi
+
+static-analysis:
+  stage: quality
+  script:
+    - vendor/bin/phpstan analyse --ansi
 
 code-review:
   stage: quality
   script:
-    - composer rector
+    - vendor/bin/rector process --dry-run --ansi
 
 bundle_app:
   stage: bundle
   script:
-    # delete installed git hooks because captainhooks (dev dependency) will be removed
-    - rm -rf ./.git/hooks
+    # make scripts/bundle.sh executable
+    - chmod +x ./scripts/bundle-prepare.sh
+    - chmod +x ./scripts/bundle.sh
 
-    # remove dev dependencies using the --no-dev option
-    - php composer.phar install --no-dev --prefer-dist --no-ansi --no-interaction --no-progress --ignore-platform-reqs
-
-    # build all UI assets
-    - npm run build
-
-    # download GeoLite2-City archive and extract it to writable/uploads
-    - wget -c "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=$MAXMIND_LICENCE_KEY&suffix=tar.gz" -O - | tar -xz -C ./writable/uploads/
-
-    # rename extracted archives' folders
-    - mv ./writable/uploads/GeoLite2-City* ./writable/uploads/GeoLite2-City
-
-    # create bundle folder: uses .rsync-filter (-F) file to copy only needed files
-    - rsync -aF --progress . ./castopod-host
+    # bundle castopod-host with commit ref as version
+    - ./scripts/bundle-prepare.sh
+    - ./scripts/bundle.sh ${CI_COMMIT_REF_SLUG}_${CI_COMMIT_SHORT_SHA}
   artifacts:
     name: "castopod-host-${CI_COMMIT_REF_SLUG}_${CI_COMMIT_SHORT_SHA}"
     paths:
-      - castopod-host
+      - castopod-host-${CI_COMMIT_REF_SLUG}_${CI_COMMIT_SHORT_SHA}
   except:
     - main
     - beta
@@ -89,12 +77,13 @@ bundle_app:
 release_app:
   stage: release
   script:
-    # install required packages for prepare-release.sh script
-    - apt-get install jq -y
-    - apt-get install zip -y
+    # make release scripts executable
+    - chmod +x ./scripts/bundle-prepare.sh
+    - chmod +x ./scripts/bundle.sh
+    - chmod +x ./scripts/package.sh
 
-    # make scripts/prepare-release.sh executable
-    - chmod +x ./scripts/prepare-release.sh
+    # prepare bundle before release, both bundle and package scripts will be run by semantic-release
+    - ./scripts/bundle-prepare.sh
 
     # IMPORTANT: delete local git tags before release to prevent eventual script failure (ie. tag already exists)
     - git tag | xargs git tag -d
