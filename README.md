@@ -1,4 +1,9 @@
-# ![Castopod Host](https://podlibre.org/static/images/Castopod-Title.svg)
+<h1 style="text-align: center">
+  <img src="https://podlibre.org/static/images/Castopod-Title.svg" alt="Castopod Host" />
+</h1>
+
+> ⚠️ **Castopod Host is in alpha version**. It is still under heavy development
+> and may not be 100% stable as new features are being worked on.
 
 _Castopod Host_ is a free and open-source podcast hosting solution made for
 podcasters who want engage and interact with their audience.
@@ -9,20 +14,26 @@ audience measurements that respect your listeners privacy.
 Whether you choose to install it on your own server or have it hosted by a
 professional, all your data and analytics belong to you and you only!
 
-![Castopod Mascot](https://podlibre.org/static/images/Castopod-Mascot-Server.svg)
+<div style="text-align: center">
+  <img src="https://podlibre.org/static/images/Castopod-Mascot-Server.svg" alt="Castopod Mascot" />
+</div>
 
 You may find Castopod Host's source code on the
 [original repository](https://code.podlibre.org/podlibre/castopod-host) or,
 alternatively, on the
 [github repository (mirror)](https://github.com/podlibre/castopod-host).
 
-## Installation
+## Install / Update
 
-To install Castopod Host on your PHP/MySQL server:
+To install or update Castopod Host on your PHP/MySQL server:
 
 - Download
-  [Castopod Host's latest Package (zip or tar.gz)](https://code.podlibre.org/podlibre/castopod-host/-/releases),
-- Follow the procedure on “[How to install Castopod Host](./INSTALL.md)”.
+  [Castopod Host's latest Package (zip or tar.gz)](https://code.podlibre.org/podlibre/castopod-host/-/releases):
+
+- Follow one of the procedures on:
+
+  - [“How to **install** Castopod Host”](./INSTALL.md)
+  - or [“How to **update** Castopod Host”](./UPDATE.md)
 
 ## Documentation
 
