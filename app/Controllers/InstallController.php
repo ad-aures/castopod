@@ -68,7 +68,7 @@ class InstallController extends Controller
         if (is_really_writable(ROOTPATH . '.env')) {
             try {
                 $dotenv->required(['app.baseURL', 'app.adminGateway', 'app.authGateway']);
-            } catch (ValidationException $e) {
+            } catch (ValidationException) {
                 // form to input instance configuration
                 return $this->instanceConfig();
             }
@@ -81,7 +81,7 @@ class InstallController extends Controller
                     'database.default.password',
                     'database.default.DBPrefix',
                 ]);
-            } catch (ValidationException $validationException) {
+            } catch (ValidationException) {
                 return $this->databaseConfig();
             }
 
@@ -343,7 +343,7 @@ class InstallController extends Controller
             $keyVal = $key . '="' . $value . '"' . PHP_EOL;
             $envData = array_map(
                 function ($line) use ($key, $keyVal, &$replaced) {
-                    if (str_starts_with($line, (string) $key)) {
+                    if (str_starts_with($line, $key)) {
                         $replaced = true;
                         return $keyVal;
                     }

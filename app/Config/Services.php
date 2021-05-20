@@ -31,6 +31,8 @@ class Services extends BaseService
     /**
      * The Router class uses a RouteCollection's array of routes, and determines the correct Controller and Method to
      * execute.
+     *
+     * @noRector PHPStan\Reflection\MissingMethodFromReflectionException
      */
     public static function router(
         ?RouteCollectionInterface $routes = null,
@@ -50,6 +52,8 @@ class Services extends BaseService
     /**
      * The Negotiate class provides the content negotiation features for working the request to determine correct
      * language, encoding, charset, and more.
+     *
+     * @noRector PHPStan\Reflection\MissingMethodFromReflectionException
      */
     public static function negotiator(?RequestInterface $request = null, bool $getShared = true): Negotiate
     {

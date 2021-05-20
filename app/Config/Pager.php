@@ -19,8 +19,10 @@ class Pager extends BaseConfig
      * and the desired group as $pagerGroup;
      *
      * @var array<string, string>
+     *
+     * @noRector Rector\Php55\Rector\String_\StringClassNameToClassConstantRector
      */
-    public array $templates = [
+    public $templates = [
         'default_full' => 'App\Views\pager\default_full',
         'default_simple' => 'CodeIgniter\Pager\Views\default_simple',
         'default_head' => 'CodeIgniter\Pager\Views\default_head',

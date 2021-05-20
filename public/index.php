@@ -3,10 +3,10 @@
 use Config\Paths;
 
 // Valid PHP Version?
-$minPHPVersion = '8.0';
-if (version_compare(PHP_VERSION, $minPHPVersion, '<')) {
+$minPHPVersionId = 80000; // 8.0
+if ($minPHPVersionId > PHP_VERSION_ID) {
     die(
-        "Your PHP version must be {$minPHPVersion} or higher to run CodeIgniter. Current version: " .
+        'Your PHP version must be 8.0 or higher to run Castopod Host. Current version: ' .
             PHP_VERSION
     );
 }

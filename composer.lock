@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "906f0d5a3cf8e20fa22205278198f8f3",
+    "content-hash": "f66c02dfe61b7fe87d93f4db5a1f9c26",
     "packages": [
         {
             "name": "brick/math",
@@ -3730,16 +3730,16 @@
         },
         {
             "name": "rector/rector",
-            "version": "dev-main",
+            "version": "0.11.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "feba977d4e85ffc9269b84f8fcaa37b7aecc3e05"
+                "reference": "270eaef34d0f34b49ad0fc3e44cff377b9aa04ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/feba977d4e85ffc9269b84f8fcaa37b7aecc3e05",
-                "reference": "feba977d4e85ffc9269b84f8fcaa37b7aecc3e05",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/270eaef34d0f34b49ad0fc3e44cff377b9aa04ce",
+                "reference": "270eaef34d0f34b49ad0fc3e44cff377b9aa04ce",
                 "shasum": ""
             },
             "require": {
@@ -3757,7 +3757,6 @@
                 "rector/rector-prefixed": "*",
                 "rector/rector-symfony": "*"
             },
-            "default-branch": true,
             "bin": [
                 "bin/rector"
             ],
@@ -3779,7 +3778,7 @@
             "description": "Prefixed and PHP 7.1 downgraded version of rector/rector",
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/main"
+                "source": "https://github.com/rectorphp/rector/tree/0.11.5"
             },
             "funding": [
                 {
@@ -3787,7 +3786,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-05-19T14:34:37+00:00"
+            "time": "2021-05-18T13:45:09+00:00"
         },
         {
             "name": "rector/rector-phpstan-rules",

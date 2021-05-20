@@ -40,7 +40,7 @@ if (! function_exists('split_handle')) {
      *
      * @return array<string, string>|false
      */
-    function split_handle(string $handle)
+    function split_handle(string $handle): array | false
     {
         if (
             ! preg_match('~^@?(?P<username>[\w\.\-]+)@(?P<domain>[\w\.\-]+)(?P<port>:[\d]+)?$~', $handle, $matches,)
@@ -106,9 +106,9 @@ if (! function_exists('send_activity_to_followers')) {
                 $acceptRequest = new ActivityRequest($follower->inbox_url, $activityPayload,);
                 $acceptRequest->sign($actor->public_key_id, $actor->private_key,);
                 $acceptRequest->post();
-            } catch (Exception $e) {
+            } catch (Exception $exception) {
                 // log error
-                log_message('critical', $e);
+                log_message('critical', $exception);
             }
         }
     }

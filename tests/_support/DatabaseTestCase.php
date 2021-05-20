@@ -4,6 +4,7 @@ namespace Tests\Support;
 
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\DatabaseTestTrait;
+use Tests\Support\Database\Seeds\ExampleSeeder;
 
 /**
  * @phpstan-ignore-next-line
@@ -24,7 +25,7 @@ class DatabaseTestCase extends CIUnitTestCase
      *
      * @var string|string[]
      */
-    protected $seed = 'Tests\Support\Database\Seeds\ExampleSeeder';
+    protected $seed = ExampleSeeder::class;
 
     /**
      * The path to the seeds directory. Allows overriding the default application directories.

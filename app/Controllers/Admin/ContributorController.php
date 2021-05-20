@@ -32,7 +32,7 @@ class ContributorController extends BaseController
         }
 
         if (
-            $this->user = (new UserModel())->getPodcastContributor((int) $params[1], (int) $params[0],)
+            ($this->user = (new UserModel())->getPodcastContributor((int) $params[1], (int) $params[0],)) !== null
         ) {
             return $this->{$method}();
         }

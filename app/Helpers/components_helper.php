@@ -426,6 +426,7 @@ if (! function_exists('person_list')) {
                         $person->full_name .
                         '</strong>' .
                         implode(
+                            '',
                             array_map(function ($role) {
                                 return '<br />' .
                                     lang(
@@ -443,9 +444,7 @@ if (! function_exists('person_list')) {
             );
         }
 
-        $personList .= '</div>';
-
-        return $personList;
+        return $personList . '</div>';
     }
 }
 

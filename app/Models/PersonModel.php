@@ -11,6 +11,7 @@ namespace App\Models;
 use App\Entities\Image;
 use App\Entities\Person;
 use CodeIgniter\Database\BaseResult;
+use CodeIgniter\Database\Query;
 use CodeIgniter\Model;
 
 class PersonModel extends Model
@@ -171,7 +172,6 @@ class PersonModel extends Model
             ->getLocale();
         $cacheName = "taxonomy_options_{$locale}";
 
-        /** @var array<string, array> */
         $personsTaxonomy = lang('PersonsTaxonomy.persons');
 
         if (! ($options = cache($cacheName))) {
@@ -254,7 +254,7 @@ class PersonModel extends Model
         int $personId,
         string $groupSlug,
         string $roleSlug
-    ): int | bool {
+    ): bool | Query {
         return $this->db->table('episodes_persons')
             ->insert([
                 'podcast_id' => $podcastId,
@@ -270,7 +270,7 @@ class PersonModel extends Model
         int $personId,
         string $groupSlug,
         string $roleSlug
-    ): int | bool {
+    ): bool | Query {
         return $this->db->table('podcasts_persons')
             ->insert([
                 'podcast_id' => $podcastId,
@@ -329,7 +329,7 @@ class PersonModel extends Model
      *
      * @return BaseResult|bool Number of rows inserted or FALSE on failure
      */
-    public function removePersonFromPodcast(int $podcastId, int $personId): BaseResult | bool
+    public function removePersonFromPodcast(int $podcastId, int $personId): bool | string
     {
         return $this->db->table('podcasts_persons')
             ->delete([
@@ -384,10 +384,7 @@ class PersonModel extends Model
         return 0;
     }
 
-    /**
-     * @return BaseResult|bool
-     */
-    public function removePersonFromEpisode(int $podcastId, int $episodeId, int $personId): BaseResult | bool
+    public function removePersonFromEpisode(int $podcastId, int $episodeId, int $personId): bool | string
     {
         return $this->db->table('episodes_persons')
             ->delete([
