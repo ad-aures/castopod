@@ -10,7 +10,6 @@ namespace App\Models;
 
 use App\Entities\Image;
 use App\Entities\Person;
-use CodeIgniter\Database\BaseResult;
 use CodeIgniter\Database\Query;
 use CodeIgniter\Model;
 
@@ -172,6 +171,7 @@ class PersonModel extends Model
             ->getLocale();
         $cacheName = "taxonomy_options_{$locale}";
 
+        /** @var array<string, array<string, string|array<string, array<string, string>>>> $personsTaxonomy */
         $personsTaxonomy = lang('PersonsTaxonomy.persons');
 
         if (! ($options = cache($cacheName))) {
@@ -327,9 +327,9 @@ class PersonModel extends Model
     /**
      * Add persons to episode
      *
-     * @return BaseResult|bool Number of rows inserted or FALSE on failure
+     * @return string|bool Number of rows inserted or FALSE on failure
      */
-    public function removePersonFromPodcast(int $podcastId, int $personId): bool | string
+    public function removePersonFromPodcast(int $podcastId, int $personId): string | bool
     {
         return $this->db->table('podcasts_persons')
             ->delete([
