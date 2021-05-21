@@ -15,14 +15,13 @@ WORKDIR /castopod-host
 # Install composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Install npm
-RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash -
-
+# Install latest npm
 RUN apt-get update && \
-    apt-get install -y nodejs
-
-# update npm to latest version
-RUN npm install --global npm
+    apt-get install -y --no-install-recommends gnupg && \
+    curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends nodejs && \
+    npm install --global npm
 
 # Install git + vim
 RUN apt-get update && \

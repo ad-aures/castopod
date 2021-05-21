@@ -26,9 +26,10 @@ before_script:
   - php composer-setup.php
   - php -r "unlink('composer-setup.php');"
 
-  # Install NodeJS for NPM
+  # Install latest npm
   - curl -sL https://deb.nodesource.com/setup_lts.x | bash -
   - apt-get update && apt-get install -y nodejs
+  - npm install --global npm
 
   # Install all php dependencies
   - php composer.phar install --prefer-dist --no-ansi --no-interaction --no-progress --ignore-platform-reqs
