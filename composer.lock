@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f66c02dfe61b7fe87d93f4db5a1f9c26",
+    "content-hash": "371c6aac9ca489338bf3b3fa06ffdb21",
     "packages": [
         {
             "name": "brick/math",
@@ -2280,61 +2280,6 @@
             "time": "2021-05-15T12:39:06+00:00"
         },
         {
-            "name": "captainhook/plugin-composer",
-            "version": "5.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/captainhookphp/plugin-composer.git",
-                "reference": "def8812945e0767a45fe0e4db5ed255b7093600a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/captainhookphp/plugin-composer/zipball/def8812945e0767a45fe0e4db5ed255b7093600a",
-                "reference": "def8812945e0767a45fe0e4db5ed255b7093600a",
-                "shasum": ""
-            },
-            "require": {
-                "captainhook/captainhook": "^5.0",
-                "composer-plugin-api": "^1.1|^2.0",
-                "php": ">=7.1"
-            },
-            "require-dev": {
-                "composer/composer": "*"
-            },
-            "type": "composer-plugin",
-            "extra": {
-                "class": "CaptainHook\\Plugin\\Composer\\ComposerPlugin",
-                "branch-alias": {
-                    "dev-fluffy_hedgehog": "5.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "CaptainHook\\Plugin\\Composer\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Andreas Heigl",
-                    "email": "andreas@heigl.org"
-                },
-                {
-                    "name": "Sebastian Feldmann",
-                    "email": "sf@sebastian-feldmann.info"
-                }
-            ],
-            "description": "Composer-Plugin handling your git-hooks",
-            "support": {
-                "issues": "https://github.com/captainhookphp/plugin-composer/issues",
-                "source": "https://github.com/captainhookphp/plugin-composer/tree/5.3.0"
-            },
-            "time": "2021-05-06T15:55:15+00:00"
-        },
-        {
             "name": "doctrine/instantiator",
             "version": "1.4.0",
             "source": {
@@ -3790,16 +3735,16 @@
         },
         {
             "name": "rector/rector-phpstan-rules",
-            "version": "0.2.9",
+            "version": "0.2.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/phpstan-rules.git",
-                "reference": "c53f5fad720fba2c13ab09d885f7be006523458f"
+                "reference": "84b2034aab951be7e86dc6cc7e141ee92a3d115b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/phpstan-rules/zipball/c53f5fad720fba2c13ab09d885f7be006523458f",
-                "reference": "c53f5fad720fba2c13ab09d885f7be006523458f",
+                "url": "https://api.github.com/repos/rectorphp/phpstan-rules/zipball/84b2034aab951be7e86dc6cc7e141ee92a3d115b",
+                "reference": "84b2034aab951be7e86dc6cc7e141ee92a3d115b",
                 "shasum": ""
             },
             "require": {
@@ -3834,9 +3779,9 @@
             "description": "PHPStan rules for Rector projects - with focus on static reflection, constant re-use and Rector design patterns",
             "support": {
                 "issues": "https://github.com/rectorphp/phpstan-rules/issues",
-                "source": "https://github.com/rectorphp/phpstan-rules/tree/0.2.9"
+                "source": "https://github.com/rectorphp/phpstan-rules/tree/0.2.12"
             },
-            "time": "2021-05-15T10:37:29+00:00"
+            "time": "2021-05-20T22:31:19+00:00"
         },
         {
             "name": "sebastian/cli-parser",

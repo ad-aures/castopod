@@ -1,0 +1,8 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# CaptainHook 5.10.0
+
+INTERACTIVE="--no-interaction"
+
+vendor/bin/captainhook $INTERACTIVE --configuration=captainhook.json --bootstrap=vendor/autoload.php hook:pre-push "$@" <&0

@@ -27,7 +27,6 @@
     "phpunit/phpunit": "^9.5.4",
     "rector/rector": "^0.11.5",
     "captainhook/captainhook": "^5.10.0",
-    "captainhook/plugin-composer": "^5.2",
     "phpstan/phpstan": "^0.12.85",
     "phpstan/extension-installer": "^1.1.0",
     "rector/rector-phpstan-rules": "^0.2.9",
@@ -73,11 +72,6 @@
       "@php vendor/podlibre/podcast-namespace/src/TaxonomyGenerate.php https://raw.githubusercontent.com/Podcastindex-org/podcast-namespace/main/taxonomy-fr.json >  app/Language/fr/PersonsTaxonomy.php",
       "@php vendor/podlibre/podcast-namespace/src/ReversedTaxonomyGenerate.php https://raw.githubusercontent.com/Podcastindex-org/podcast-namespace/main/taxonomy-en.json >  vendor/podlibre/podcast-namespace/src/ReversedTaxonomy.php"
     ]
-  },
-  "extra": {
-    "captainhook": {
-      "force-install": true
-    }
   },
   "support": {
     "source": "https://code.podlibre.org/podlibre/castopod-host.git",
