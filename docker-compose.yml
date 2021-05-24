@@ -8,9 +8,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: castopod_host
-    command: >
-      sh -c "cron && php spark serve --host 0.0.0.0"
+    container_name: castopod-host
+    command: /bin/sh -c "crontab ./crontab && cron && service cron reload && php spark serve --host 0.0.0.0"
     ports:
       - 8080:8080
     volumes:
@@ -23,7 +22,7 @@ services:
 
   redis:
     image: redis:alpine
-    container_name: castopod_host_redis
+    container_name: castopod-host_redis
     ports:
       - 6379:6379
     volumes:
@@ -33,7 +32,7 @@ services:
 
   mariadb:
     image: mariadb:latest
-    container_name: castopod_host_mariadb
+    container_name: castopod-host_mariadb
     ports:
       - 3306:3306
     volumes:
@@ -48,7 +47,7 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
-    container_name: castopod_host_phpmyadmin
+    container_name: castopod-host_phpmyadmin
     environment:
       PMA_HOST: mariadb
       PMA_PORT: 3306

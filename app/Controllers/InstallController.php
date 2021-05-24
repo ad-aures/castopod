@@ -163,7 +163,7 @@ class InstallController extends Controller
         self::writeEnv([
             'app.baseURL' => $baseUrl,
             'app.mediaBaseURL' =>
-                $mediaBaseUrl === null ? $baseUrl : $mediaBaseUrl,
+                $mediaBaseUrl === '' ? $baseUrl : $mediaBaseUrl,
             'app.adminGateway' => $this->request->getPost('admin_gateway'),
             'app.authGateway' => $this->request->getPost('auth_gateway'),
         ]);

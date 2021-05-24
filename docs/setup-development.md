@@ -12,6 +12,8 @@
 - [Going Further](#going-further)
   - [Useful docker / docker-compose commands](#useful-docker--docker-compose-commands)
 - [Known issues](#known-issues)
+  - [Allocation failed - JavaScript heap out of memory](#allocation-failed---javascript-heap-out-of-memory)
+  - [Files created inside container are attributed to root locally (Linux)](#files-created-inside-container-are-attributed-to-root-locally-linux)
 
 ## Introduction
 
@@ -74,7 +76,7 @@ to help you kickstart your contribution.
 3. (for docker desktop) Add the repository you've cloned to docker desktop's
    `Settings` > `Resources` > `File Sharing`
 
-### (recommended) Develop inside the app Container with VSCode
+## (recommended) Develop inside the app Container with VSCode
 
 If you're working in VSCode, you can take advantage of the `.devcontainer/`
 folder. It defines a development environment (dev container) with preinstalled
@@ -110,7 +112,7 @@ required services will be loaded automagically!
 For more info, see
 [VSCode Remote Containers](https://code.visualstudio.com/docs/remote/containers)
 
-### (not-recommended) Develop outside the app container
+## (not-recommended) Develop outside the app container
 
 You do not wish to use the VSCode devcontainer? No problem!
 
@@ -134,13 +136,13 @@ You do not wish to use the VSCode devcontainer? No problem!
    > The `docker-compose up -d` command will boot 4 containers in the
    > background:
    >
-   > - `castopod_host_app`: a php based container with CodeIgniter4 requirements
+   > - `castopod-host_app`: a php based container with CodeIgniter4 requirements
    >   installed
-   > - `castopod_host_redis`: a [redis](https://redis.io/) database to handle
+   > - `castopod-host_redis`: a [redis](https://redis.io/) database to handle
    >   queries and pages caching
-   > - `castopod_host_mariadb`: a [mariadb](https://mariadb.org/) server for
+   > - `castopod-host_mariadb`: a [mariadb](https://mariadb.org/) server for
    >   persistent data
-   > - `castopod_host_phpmyadmin`: a phpmyadmin server to visualize the mariadb
+   > - `castopod-host_phpmyadmin`: a phpmyadmin server to visualize the mariadb
    >   database.
 
 2. Run any command by prefixing them with `docker-compose run --rm app`:
@@ -292,7 +294,7 @@ To see your changes, go to:
 docker-compose logs --tail 50 --follow --timestamps app
 
 # interact with redis server using included redis-cli command
-docker exec -it castopod_host_redis redis-cli
+docker exec -it castopod-host_redis redis-cli
 
 # monitor the redis container
 docker-compose logs --tail 50 --follow --timestamps redis
@@ -319,7 +321,50 @@ more insights.
 
 ## Known issues
 
-- `Allocation failed - JavaScript heap out of memory` when running `npm install`
+### Allocation failed - JavaScript heap out of memory
 
-  👉 By default, docker might not have access to enough RAM. Allocate more
-  memory and run `npm install` again.
+This happens when running `npm install`.
+
+👉 By default, docker might not have access to enough RAM. Allocate more memory
+and run `npm install` again.
+
+### Files created inside container are attributed to root locally (Linux)
+
+You may use Linux user namespaces to fix this:
+
+> **Note:**
+>
+> Replace "username" with your local username
+
+1. Go to `/etc/docker/daemon.json` and add:
+
+   ```json
+   {
+     "userns-remap": "username"
+   }
+   ```
+
+2. Configure the subordinate uid/guid:
+
+   ```bash
+   username:1000:1
+   username:100000:65536
+   ```
+
+   ```bash
+   username:1000:1
+   username:100000:65536
+   ```
+
+3. Restart docker:
+
+   ```bash
+   sudo systemctl restart docker
+   ```
+
+4. That's it! Now, the root user in the container will be mapped to the user on
+   your local machine, no more permission problems! 🎉
+
+You can check
+[this great article](https://www.jujens.eu/posts/en/2017/Jul/02/docker-userns-remap/)
+to know more about how it works.

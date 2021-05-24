@@ -2,10 +2,13 @@
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.117.1/containers/docker-existing-dockerfile
 {
   "name": "Castopod Host dev",
-  "dockerComposeFile": ["../docker-compose.yml"],
+  "dockerComposeFile": ["../docker-compose.yml", "./docker-compose.yml"],
   "service": "app",
   "workspaceFolder": "/castopod-host",
-  "postCreateCommand": "cron && php spark serve --host 0.0.0.0",
+  "postCreateCommand": "composer install && npm install && npm run build:dev",
+  "postStartCommand": "crontab ./crontab && cron && php spark serve --host 0.0.0.0",
+  "postAttachCommand": "crontab ./crontab && service cron reload",
+  "shutdownAction": "stopCompose",
   "settings": {
     "terminal.integrated.defaultProfile.linux": "/bin/bash",
     "editor.formatOnSave": true,

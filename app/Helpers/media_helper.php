@@ -117,10 +117,12 @@ if (! function_exists('media_base_url')) {
         }
         $uri = trim($uri, '/');
 
-        return rtrim(config('App')->mediaBaseURL, '/') .
+        $appConfig = config('App');
+        $mediaBaseUrl = $appConfig->mediaBaseURL === '' ? $appConfig->baseURL : $appConfig->mediaBaseURL;
+
+        return rtrim($mediaBaseUrl, '/') .
             '/' .
-            config('App')
-                ->mediaRoot .
+            $appConfig->mediaRoot .
             '/' .
             $uri;
     }
