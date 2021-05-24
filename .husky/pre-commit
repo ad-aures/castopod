@@ -1,11 +1,11 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-npm run typecheck
-npx lint-staged
-
 # CaptainHook 5.10.0
 
 INTERACTIVE="--no-interaction"
 
 vendor/bin/captainhook $INTERACTIVE --configuration=captainhook.json --bootstrap=vendor/autoload.php hook:pre-commit "$@" <&0
+
+npm run typecheck
+npx lint-staged
