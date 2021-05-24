@@ -1,27 +1,15 @@
 image: code.podlibre.org:5050/podlibre/castopod-host:latest
 
 stages:
-  - prepare
   - quality
   - bundle
   - release
 
 cache:
+  key: ${CI_COMMIT_REF_SLUG}
   paths:
     - vendor/
-    - node_modules/
-
-php-dependencies:
-  stage: prepare
-  script:
-    # Install all php dependencies
-    - composer install --prefer-dist --no-ansi --no-interaction --no-progress --ignore-platform-reqs
-
-js-dependencies:
-  stage: prepare
-  script:
-    # Install all npm dependencies
-    - npm install
+    - .npm/
 
 lint-commit-msg:
   stage: quality
@@ -30,38 +18,36 @@ lint-commit-msg:
     # lint commit message
     - ./scripts/lint-commit.sh
 
+lint-php:
+  stage: quality
+  before_script:
+    # Install all php dependencies
+    - composer install --prefer-dist --no-ansi --no-interaction --no-progress --ignore-platform-reqs
+  script:
+    # check php code style
+    - vendor/bin/ecs check --ansi
+    # phpstan - increase memory limit to 1GB to prevent script failure
+    - php -d memory_limit=1G vendor/bin/phpstan analyse --ansi
+    # run rector to check for php errors
+    - vendor/bin/rector process --dry-run --ansi
+
+lint-js:
+  stage: quality
+  before_script:
+    # Install all npm dependencies
+    - npm ci --cache .npm --prefer-offline
+  script:
+    - npm run prettier
+    - npm run typecheck
+    - npm run eslint
+    - npm run stylelint
+
 tests:
   stage: quality
   script:
     # run phpunit without code coverage
     # TODO: add code coverage
     - vendor/bin/phpunit --no-coverage
-
-code-style:
-  stage: quality
-  script:
-    # check php code style
-    - vendor/bin/ecs check --ansi
-
-static-analysis:
-  stage: quality
-  script:
-    # phpstan - increase memory limit to 1GB to prevent script failure
-    - php -d memory_limit=1G vendor/bin/phpstan analyse --ansi
-
-code-review:
-  stage: quality
-  script:
-    # run rector to check for php errors
-    - vendor/bin/rector process --dry-run --ansi
-
-lint-js:
-  stage: quality
-  script:
-    - npm run prettier
-    - npm run typecheck
-    - npm run eslint
-    - npm run stylelint
 
 bundle:
   stage: bundle
