@@ -19,10 +19,10 @@ js-dependencies:
   stage: prepare
   script:
     # Install all npm dependencies
-    - npm ci --cache .npm --prefer-offline
+    - npm ci
   artifacts:
     paths:
-      - .npm/
+      - node_modules/
 
 lint-commit-msg:
   stage: quality
