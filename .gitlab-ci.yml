@@ -1,6 +1,7 @@
-image: php:8.0-fpm
+image: thecodingmachine/php:8.0-v4-fpm-node14
 
 stages:
+  - prepare
   - quality
   - bundle
   - release
@@ -10,32 +11,31 @@ cache:
     - vendor/
     - node_modules/
 
-before_script:
-  - apt-get update -y
+php-dependencies:
+  stage: prepare
+  script:
+    # Install all php dependencies
+    - php composer.phar install --prefer-dist --no-ansi --no-interaction --no-progress --ignore-platform-reqs
 
-  # Install git which is required by composer (the php image doesn't have it)
-  - apt-get install git -y
+js-dependencies:
+  stage: prepare
+  script:
+    # Install all npm dependencies
+    - npm install
 
-  - apt-get install -y libicu-dev
-
-  # Install intl PHP extension for tests
-  - docker-php-ext-install intl
-
-  # Install composer
-  - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-  - php composer-setup.php
-  - php -r "unlink('composer-setup.php');"
-
-  # Install latest npm
-  - curl -sL https://deb.nodesource.com/setup_lts.x | bash -
-  - apt-get update && apt-get install -y nodejs
-  - npm install --global npm
-
-  # Install all php dependencies
-  - php composer.phar install --prefer-dist --no-ansi --no-interaction --no-progress --ignore-platform-reqs
+lint-commit-msg:
+  stage: quality
+  script:
+    - chmod +x ./scripts/lint-commit.sh
+    # lint commit message
+    - ./scripts/lint-commit.sh
 
 tests:
   stage: quality
+  before_script:
+    # Install required intl PHP extension for tests
+    - apt-get install -y libicu-dev
+    - docker-php-ext-install intl
   script:
     # run phpunit without code coverage
     # TODO: add code coverage
@@ -44,20 +44,30 @@ tests:
 code-style:
   stage: quality
   script:
+    # check php code style
     - vendor/bin/ecs check --ansi
 
 static-analysis:
   stage: quality
   script:
-    # increase memory limit to 1GB because of script failure
+    # phpstan - increase memory limit to 1GB to prevent script failure
     - php -d memory_limit=1G vendor/bin/phpstan analyse --ansi
 
 code-review:
   stage: quality
   script:
+    # run rector to check for php errors
     - vendor/bin/rector process --dry-run --ansi
 
-bundle_app:
+lint-js:
+  stage: quality
+  script:
+    - npm run prettier
+    - npm run typecheck
+    - npm run eslint
+    - npm run stylelint
+
+bundle:
   stage: bundle
   script:
     # make scripts/bundle.sh executable
@@ -76,7 +86,7 @@ bundle_app:
     - beta
     - alpha
 
-release_app:
+release:
   stage: release
   script:
     # make release scripts executable
