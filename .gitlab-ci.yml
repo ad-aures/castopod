@@ -1,4 +1,4 @@
-image: thecodingmachine/php:8.0-v4-fpm-node14
+image: code.podlibre.org:5050/podlibre/castopod-host:latest
 
 stages:
   - prepare
@@ -32,10 +32,6 @@ lint-commit-msg:
 
 tests:
   stage: quality
-  before_script:
-    # Install required intl PHP extension for tests
-    - apt-get install -y libicu-dev
-    - docker-php-ext-install intl
   script:
     # run phpunit without code coverage
     # TODO: add code coverage
