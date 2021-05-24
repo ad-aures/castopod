@@ -1,6 +1,7 @@
 image: code.podlibre.org:5050/podlibre/castopod-host:latest
 
 stages:
+  - prepare
   - quality
   - bundle
   - release
@@ -11,6 +12,14 @@ cache:
     - vendor/
     - .npm/
 
+dependencies:
+  stage: prepare
+  script:
+    # Install all php dependencies
+    - composer install --prefer-dist --no-ansi --no-interaction --no-progress --ignore-platform-reqs
+    # Install all npm dependencies
+    - npm ci --cache .npm --prefer-offline
+
 lint-commit-msg:
   stage: quality
   script:
@@ -20,9 +29,6 @@ lint-commit-msg:
 
 lint-php:
   stage: quality
-  before_script:
-    # Install all php dependencies
-    - composer install --prefer-dist --no-ansi --no-interaction --no-progress --ignore-platform-reqs
   script:
     # check php code style
     - vendor/bin/ecs check --ansi
@@ -33,9 +39,6 @@ lint-php:
 
 lint-js:
   stage: quality
-  before_script:
-    # Install all npm dependencies
-    - npm ci --cache .npm --prefer-offline
   script:
     - npm run prettier
     - npm run typecheck
