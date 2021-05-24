@@ -14,6 +14,7 @@ php-dependencies:
   artifacts:
     paths:
       - vendor/
+    expire_in: 15 mins
 
 js-dependencies:
   stage: prepare
@@ -23,13 +24,14 @@ js-dependencies:
   artifacts:
     paths:
       - node_modules/
+    expire_in: 15 mins
 
 lint-commit-msg:
   stage: quality
   script:
-    - chmod +x ./scripts/lint-commit.sh
+    - chmod +x ./scripts/lint-commit-msg.sh
     # lint commit message
-    - ./scripts/lint-commit.
+    - ./scripts/lint-commit-msg.sh
   dependencies:
     - js-dependencies
 
