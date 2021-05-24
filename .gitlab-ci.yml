@@ -6,33 +6,35 @@ stages:
   - bundle
   - release
 
-cache:
-  key: ${CI_COMMIT_REF_SLUG}
-  paths:
-    - vendor/
-    - .npm/
-
-dependencies:
+php-dependencies:
   stage: prepare
   script:
     # Install all php dependencies
     - composer install --prefer-dist --no-ansi --no-interaction --no-progress --ignore-platform-reqs
+  artifacts:
+    paths:
+      - vendor/
+
+js-dependencies:
+  stage: prepare
+  script:
     # Install all npm dependencies
     - npm ci --cache .npm --prefer-offline
+  artifacts:
+    paths:
+      - .npm/
 
 lint-commit-msg:
   stage: quality
-  cache:
-    key: ${CI_COMMIT_REF_SLUG}
   script:
     - chmod +x ./scripts/lint-commit.sh
     # lint commit message
-    - ./scripts/lint-commit.sh
+    - ./scripts/lint-commit.
+  dependencies:
+    - js-dependencies
 
 lint-php:
   stage: quality
-  cache:
-    key: ${CI_COMMIT_REF_SLUG}
   script:
     # check php code style
     - vendor/bin/ecs check --ansi
@@ -40,30 +42,30 @@ lint-php:
     - php -d memory_limit=1G vendor/bin/phpstan analyse --ansi
     # run rector to check for php errors
     - vendor/bin/rector process --dry-run --ansi
+  dependencies:
+    - php-dependencies
 
 lint-js:
   stage: quality
-  cache:
-    key: ${CI_COMMIT_REF_SLUG}
   script:
     - npm run prettier
     - npm run typecheck
     - npm run eslint
     - npm run stylelint
+  dependencies:
+    - js-dependencies
 
 tests:
   stage: quality
-  cache:
-    key: ${CI_COMMIT_REF_SLUG}
   script:
     # run phpunit without code coverage
     # TODO: add code coverage
     - vendor/bin/phpunit --no-coverage
+  dependencies:
+    - php-dependencies
 
 bundle:
   stage: bundle
-  cache:
-    key: ${CI_COMMIT_REF_SLUG}
   script:
     # make scripts/bundle.sh executable
     - chmod +x ./scripts/bundle-prepare.sh
@@ -72,6 +74,9 @@ bundle:
     # bundle castopod-host with commit ref as version
     - ./scripts/bundle-prepare.sh
     - ./scripts/bundle.sh ${CI_COMMIT_REF_SLUG}_${CI_COMMIT_SHORT_SHA}
+  dependencies:
+    - php-dependencies
+    - js-dependencies
   artifacts:
     name: "castopod-host-${CI_COMMIT_REF_SLUG}_${CI_COMMIT_SHORT_SHA}"
     paths:
@@ -83,8 +88,6 @@ bundle:
 
 release:
   stage: release
-  cache:
-    key: ${CI_COMMIT_REF_SLUG}
   script:
     # make release scripts executable
     - chmod +x ./scripts/bundle-prepare.sh
@@ -99,6 +102,9 @@ release:
 
     # run semantic-release script (configured in `.releaserc.json` file)
     - npm run release
+  dependencies:
+    - php-dependencies
+    - js-dependencies
   only:
     - main
     - alpha
