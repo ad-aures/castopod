@@ -15,7 +15,7 @@ php-dependencies:
   stage: prepare
   script:
     # Install all php dependencies
-    - php composer.phar install --prefer-dist --no-ansi --no-interaction --no-progress --ignore-platform-reqs
+    - composer install --prefer-dist --no-ansi --no-interaction --no-progress --ignore-platform-reqs
 
 js-dependencies:
   stage: prepare
