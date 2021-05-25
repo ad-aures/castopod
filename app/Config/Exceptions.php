@@ -41,4 +41,16 @@ class Exceptions extends BaseConfig
      * Default: APPPATH.'Views/errors'
      */
     public string $errorViewPath = APPPATH . 'Views/errors';
+
+    /**
+     * --------------------------------------------------------------------------
+     * HIDE FROM DEBUG TRACE
+     * --------------------------------------------------------------------------
+     * Any data that you would like to hide from the debug trace.
+     * In order to specify 2 levels, use "/" to separate.
+     * ex. ['server', 'setup/password', 'secret_token']
+     *
+     * @var string[]
+     */
+    public array $sensitiveDataInTrace = [];
 }

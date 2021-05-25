@@ -35,7 +35,7 @@ class ContentSecurityPolicy extends BaseConfig
      *
      * @var string|string[]|null
      */
-    public string | array | null $defaultSrc;
+    public string | array | null $defaultSrc = null;
 
     /**
      * Lists allowed scripts' URLs.
@@ -65,7 +65,7 @@ class ContentSecurityPolicy extends BaseConfig
      *
      * @var string|string[]|null
      */
-    public string | array | null $baseURI;
+    public string | array | null $baseURI = null;
 
     /**
      * Lists the URLs for workers and embedded frame contents
@@ -102,14 +102,21 @@ class ContentSecurityPolicy extends BaseConfig
      *
      * @var string|string[]|null
      */
-    public string | array | null $frameAncestors;
+    public string | array | null $frameAncestors = null;
+
+    /**
+     * The frame-src directive restricts the URLs which may be loaded into nested browsing contexts.
+     *
+     * @var string[]|string|null
+     */
+    public string | array | null $frameSrc = null;
 
     /**
      * Restricts the origins allowed to deliver video and audio.
      *
      * @var string|string[]|null
      */
-    public string | array | null $mediaSrc;
+    public string | array | null $mediaSrc = null;
 
     /**
      * Allows control over Flash and other plugins.
@@ -121,19 +128,19 @@ class ContentSecurityPolicy extends BaseConfig
     /**
      * @var string|string[]|null
      */
-    public string | array | null $manifestSrc;
+    public string | array | null $manifestSrc = null;
 
     /**
      * Limits the kinds of plugins a page may invoke.
      *
      * @var string|string[]|null
      */
-    public string | array | null $pluginTypes;
+    public string | array | null $pluginTypes = null;
 
     /**
      * List of actions allowed.
      *
      * @var string|string[]|null
      */
-    public string | array | null $sandbox;
+    public string | array | null $sandbox = null;
 }

@@ -1,10 +1,9 @@
 <?php
 
-use Config\Services;
 use CodeIgniter\CodeIgniter;
+use Config\Services;
 
-$errorId = uniqid('error', true);
-?>
+$errorId = uniqid('error', true); ?>
 <!doctype html>
 <html>
 
@@ -14,11 +13,7 @@ $errorId = uniqid('error', true);
 
 	<title><?= esc($title) ?></title>
 	<style type="text/css">
-		<?= preg_replace(
-      '~[\r\n\t ]+~',
-      ' ',
-      file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'debug.css'),
-  ) ?>
+		<?= preg_replace('~[\r\n\t ]+~', ' ', file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'debug.css')) ?>
 	</style>
 
 	<script type="text/javascript">
@@ -31,28 +26,21 @@ $errorId = uniqid('error', true);
 	<!-- Header -->
 	<div class="header">
 		<div class="container">
-			<h1><?= esc($title),
-       esc($exception->getCode() ? ' #' . $exception->getCode() : '') ?></h1>
+			<h1><?= esc($title), esc($exception->getCode() ? ' #' . $exception->getCode() : '') ?></h1>
 			<p>
-				<?= esc($exception->getMessage()) ?>
-				<a href="https://www.google.com/search?q=<?= urlencode(
-        $title .
-            ' ' .
-            preg_replace('~\'.*\'|".*"~Us', '', $exception->getMessage()),
-    ) ?>" rel="noreferrer" target="_blank">search &rarr;</a>
+				<?= nl2br(esc($exception->getMessage())) ?>
+				<a href="https://www.duckduckgo.com/?q=<?= urlencode($title . ' ' . preg_replace('~\'.*\'|".*"~Us', '', $exception->getMessage())) ?>" rel="noreferrer" target="_blank">search &rarr;</a>
 			</p>
 		</div>
 	</div>
 
 	<!-- Source -->
 	<div class="container">
-		<p><b><?= esc(static::cleanPath($file, $line)) ?></b> at line <b><?= esc(
-    $line,
-) ?></b></p>
+		<p><b><?= esc(static::cleanPath($file, $line)) ?></b> at line <b><?= esc($line) ?></b></p>
 
 		<?php if (is_file($file)): ?>
 			<div class="source">
-				<?= static::highlightFile($file, $line, 15) ?>
+				<?= static::highlightFile($file, $line, 15); ?>
 			</div>
 		<?php endif; ?>
 	</div>
@@ -66,7 +54,6 @@ $errorId = uniqid('error', true);
 			<li><a href="#response">Response</a></li>
 			<li><a href="#files">Files</a></li>
 			<li><a href="#memory">Memory</a></li>
-			</li>
 		</ul>
 
 		<div class="tab-content">
@@ -81,56 +68,41 @@ $errorId = uniqid('error', true);
 							<p>
 								<!-- Trace info -->
 								<?php if (isset($row['file']) && is_file($row['file'])): ?>
-									<?php if (
-             isset($row['function']) &&
-             in_array(
-                 $row['function'],
-                 ['include', 'include_once', 'require', 'require_once'],
-                 true,
-             )
-         ) {
-             echo esc($row['function'] . ' ' . static::cleanPath($row['file']));
-         } else {
-             echo esc(static::cleanPath($row['file']) . ' : ' . $row['line']);
-         } ?>
+									<?php
+									if (isset($row['function']) && in_array($row['function'], ['include', 'include_once', 'require', 'require_once'], true)) {
+										echo esc($row['function'] . ' ' . static::cleanPath($row['file']));
+									} else {
+										echo esc(static::cleanPath($row['file']) . ' : ' . $row['line']);
+									}
+									?>
 								<?php else: ?>
 									{PHP internal code}
 								<?php endif; ?>
 
 								<!-- Class/Method -->
-								<?php if (isset($row['class'])): ?>
-									&nbsp;&nbsp;&mdash;&nbsp;&nbsp;<?= esc(
-             $row['class'] . $row['type'] . $row['function'],
-         ) ?>
-									<?php if (array_key_exists('args', $row)): ?>
-										<?php $argsId = $errorId . 'args' . $index; ?>
-										( <a href="#" onclick="return toggle('<?= esc(
-              $argsId,
-              'attr',
-          ) ?>');">arguments</a> )
-							<div class="args" id="<?= esc($argsId, 'attr') ?>">
+								<?php if (isset($row['class'])) : ?>
+									&nbsp;&nbsp;&mdash;&nbsp;&nbsp;<?= esc($row['class'] . $row['type'] . $row['function']) ?>
+									<?php if (!empty($row['args'])) : ?>
+										<?php $args_id = $errorId . 'args' . $index ?>
+										( <a href="#" onclick="return toggle('<?= esc($args_id, 'attr') ?>');">arguments</a> )
+							<div class="args" id="<?= esc($args_id, 'attr') ?>">
 								<table cellspacing="0">
 
 									<?php
-         $params = null;
-         // Reflection by name is not available for closure function
-         if (substr($row['function'], -1) !== '}') {
-             $mirror = isset($row['class'])
-                 ? new ReflectionMethod($row['class'], $row['function'])
-                 : new ReflectionFunction($row['function']);
-             $params = $mirror->getParameters();
-         }
-         foreach ($row['args'] as $key => $value): ?>
+										$params = null;
+										// Reflection by name is not available for closure function
+										if (substr($row['function'], -1) !== '}') {
+											$mirror = isset($row['class']) ? new ReflectionMethod($row['class'], $row['function']) : new ReflectionFunction($row['function']);
+											$params = $mirror->getParameters();
+										}
+										foreach ($row['args'] as $key => $value): ?>
 										<tr>
-											<td><code><?= esc(
-               isset($params[$key]) ? '$' . $params[$key]->name : "#{$key}",
-           ) ?></code></td>
+											<td><code><?= esc(isset($params[$key]) ? '$' . $params[$key]->name : "#{$key}") ?></code></td>
 											<td>
 												<pre><?= esc(print_r($value, true)) ?></pre>
 											</td>
 										</tr>
-									<?php endforeach;
-         ?>
+									<?php endforeach; ?>
 
 								</table>
 							</div>
@@ -145,11 +117,7 @@ $errorId = uniqid('error', true);
 					</p>
 
 					<!-- Source? -->
-					<?php if (
-         isset($row['file']) &&
-         is_file($row['file']) &&
-         isset($row['class'])
-     ): ?>
+					<?php if (isset($row['file']) && is_file($row['file']) && isset($row['class'])): ?>
 						<div class="source">
 							<?= static::highlightFile($row['file'], $row['line']) ?>
 						</div>
@@ -165,8 +133,8 @@ $errorId = uniqid('error', true);
 			<div class="content" id="server">
 				<?php foreach (['_SERVER', '_SESSION'] as $var): ?>
 					<?php if (empty($GLOBALS[$var]) || !is_array($GLOBALS[$var])) {
-         continue;
-     } ?>
+						continue;
+					} ?>
 
 					<h3>$<?= esc($var) ?></h3>
 
@@ -267,8 +235,8 @@ $errorId = uniqid('error', true);
 				<?php $empty = true; ?>
 				<?php foreach (['_GET', '_POST', '_COOKIE'] as $var): ?>
 					<?php if (empty($GLOBALS[$var]) || !is_array($GLOBALS[$var])) {
-         continue;
-     } ?>
+						continue;
+					} ?>
 
 					<?php $empty = false; ?>
 
@@ -322,12 +290,12 @@ $errorId = uniqid('error', true);
 						<tbody>
 							<?php foreach ($headers as $value): ?>
 								<?php if (empty($value)) {
-            continue;
-        } ?>
+									continue;
+								} ?>
 								<?php if (!is_array($value)) {
-            $value = [$value];
-        } ?>
-								<?php foreach ($value as $h): ?>
+									$value = [$value];
+								} ?>
+								<?php foreach ($value as $h) : ?>
 									<tr>
 										<td><?= esc($h->getName(), 'html') ?></td>
 										<td><?= esc($h->getValueLine(), 'html') ?></td>
@@ -342,9 +310,9 @@ $errorId = uniqid('error', true);
 
 			<!-- Response -->
 			<?php
-   $response = Services::response();
-   $response->setStatusCode(http_response_code());
-   ?>
+			$response = Services::response();
+			$response->setStatusCode(http_response_code());
+			?>
 			<div class="content" id="response">
 				<table>
 					<tr>

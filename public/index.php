@@ -2,16 +2,6 @@
 
 use Config\Paths;
 
-// Valid PHP Version?
-$minPHPVersionId = 80000; // 8.0
-if ($minPHPVersionId > PHP_VERSION_ID) {
-    die(
-        'Your PHP version must be 8.0 or higher to run Castopod Host. Current version: ' .
-            PHP_VERSION
-    );
-}
-unset($minPHPVersion);
-
 // Path to the front controller (this file)
 define('FCPATH', __DIR__ . DIRECTORY_SEPARATOR);
 
@@ -29,17 +19,12 @@ chdir(__DIR__);
 
 // Load our paths config file
 // This is the line that might need to be changed, depending on your folder structure.
-require realpath(FCPATH . '../app/Config/Paths.php') ?:
-    FCPATH . '../app/Config/Paths.php';
-// ^^^ Change this if you move your application folder
+require realpath(FCPATH . '../app/Config/Paths.php') ?: FCPATH . '../app/Config/Paths.php';
 
 $paths = new Paths();
 
 // Location of the framework bootstrap file.
-$bootstrap =
-    rtrim($paths->systemDirectory, '\\/ ') .
-    DIRECTORY_SEPARATOR .
-    'bootstrap.php';
+$bootstrap = rtrim($paths->systemDirectory, '\\/ ') . DIRECTORY_SEPARATOR . 'bootstrap.php';
 $app = require realpath($bootstrap) ?: $bootstrap;
 
 /*

@@ -61,20 +61,4 @@ class Security extends BaseConfig
      * Redirect to previous page with error on failure.
      */
     public bool $redirect = true;
-
-    /**
-     * --------------------------------------------------------------------------
-     * CSRF SameSite
-     * --------------------------------------------------------------------------
-     *
-     * Setting for CSRF SameSite cookie token.
-     *
-     * Allowed values are: None - Lax - Strict - ''.
-     *
-     * Defaults to `Lax` as recommended in this link:
-     * @see https://portswigger.net/web-security/csrf/samesite-cookies
-     *
-     * @var string 'Lax'|'None'|'Strict'
-     */
-    public string $samesite = 'Lax';
 }

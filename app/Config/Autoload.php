@@ -65,4 +65,22 @@ class Autoload extends AutoloadConfig
      * @var array<string, string>
      */
     public $classmap = [];
+
+    /**
+     * -------------------------------------------------------------------
+     * Files
+     * -------------------------------------------------------------------
+     * The files array provides a list of paths to __non-class__ files
+     * that will be autoloaded. This can be useful for bootstrap operations
+     * or for loading functions.
+     *
+     * Prototype:
+     * ```
+     *	  $files = [
+     *	 	   '/path/to/my/file.php',
+     *    ];
+     * ```
+     * @var array<int, string>
+     */
+    public $files = [];
 }

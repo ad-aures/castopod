@@ -34,7 +34,7 @@ class App extends BaseConfig
      *
      *    http://cdn.example.com/
      */
-    public string $mediaBaseURL = 'http://127.0.0.2:8080/';
+    public string $mediaBaseURL = 'http://localhost:8080/';
 
     /**
      * --------------------------------------------------------------------------
@@ -218,87 +218,6 @@ class App extends BaseConfig
 
     /**
      * --------------------------------------------------------------------------
-     * Cookie Prefix
-     * --------------------------------------------------------------------------
-     *
-     * Set a cookie name prefix if you need to avoid collisions.
-     *
-     * @deprecated use Config\Cookie::$prefix property instead.
-     */
-    public string $cookiePrefix = '';
-
-    /**
-     * --------------------------------------------------------------------------
-     * Cookie Domain
-     * --------------------------------------------------------------------------
-     *
-     * Set to `.your-domain.com` for site-wide cookies.
-     *
-     * @deprecated use Config\Cookie::$domain property instead.
-     */
-    public string $cookieDomain = '';
-
-    /**
-     * --------------------------------------------------------------------------
-     * Cookie Path
-     * --------------------------------------------------------------------------
-     *
-     * Typically will be a forward slash.
-     *
-     * @deprecated use Config\Cookie::$path property instead.
-     */
-    public string $cookiePath = '/';
-
-    /**
-     * --------------------------------------------------------------------------
-     * Cookie Secure
-     * --------------------------------------------------------------------------
-     *
-     * Cookie will only be set if a secure HTTPS connection exists.
-     *
-     * @deprecated use Config\Cookie::$secure property instead.
-     */
-    public bool $cookieSecure = false;
-
-    /**
-     * --------------------------------------------------------------------------
-     * Cookie HttpOnly
-     * --------------------------------------------------------------------------
-     *
-     * Cookie will only be accessible via HTTP(S) (no JavaScript).
-     *
-     * @var boolean
-     *
-     * @deprecated use Config\Cookie::$httponly property instead.
-     */
-    public bool $cookieHTTPOnly = true;
-
-    /**
-     * --------------------------------------------------------------------------
-     * Cookie SameSite
-     * --------------------------------------------------------------------------
-     *
-     * Configure cookie SameSite setting. Allowed values are:
-     * - None
-     * - Lax
-     * - Strict
-     * - ''
-     *
-     * Alternatively, you can use the constant names:
-     * - `Cookie::SAMESITE_NONE`
-     * - `Cookie::SAMESITE_LAX`
-     * - `Cookie::SAMESITE_STRICT`
-     *
-     * Defaults to `Lax` for compatibility with modern browsers. Setting `''`
-     * (empty string) means default SameSite attribute set by browsers (`Lax`)
-     * will be set on cookies. If set to `None`, `$cookieSecure` must also be set.
-     *
-     * @deprecated use Config\Cookie::$samesite property instead.
-     */
-    public string $cookieSameSite = 'Lax';
-
-    /**
-     * --------------------------------------------------------------------------
      * Reverse Proxy IPs
      * --------------------------------------------------------------------------
      *
@@ -316,91 +235,6 @@ class App extends BaseConfig
      * @var string|string[]
      */
     public string | array $proxyIPs = '';
-
-    /**
-     * --------------------------------------------------------------------------
-     * CSRF Token Name
-     * --------------------------------------------------------------------------
-     *
-     * The token name.
-     *
-     * @deprecated Use `Config\Security` $tokenName property instead of using this property.
-     */
-    public string $CSRFTokenName = 'csrf_test_name';
-
-    /**
-     * --------------------------------------------------------------------------
-     * CSRF Header Name
-     * --------------------------------------------------------------------------
-     *
-     * The header name.
-     *
-     * @deprecated Use `Config\Security` $headerName property instead of using this property.
-     */
-    public string $CSRFHeaderName = 'X-CSRF-TOKEN';
-
-    /**
-     * --------------------------------------------------------------------------
-     * CSRF Cookie Name
-     * --------------------------------------------------------------------------
-     *
-     * The cookie name.
-     *
-     * @deprecated Use `Config\Security` $cookieName property instead of using this property.
-     */
-    public string $CSRFCookieName = 'csrf_cookie_name';
-
-    /**
-     * --------------------------------------------------------------------------
-     * CSRF Expire
-     * --------------------------------------------------------------------------
-     *
-     * The number in seconds the token should expire.
-     *
-     * @deprecated Use `Config\Security` $expire property instead of using this property.
-     */
-    public int $CSRFExpire = 7200;
-
-    /**
-     * --------------------------------------------------------------------------
-     * CSRF Regenerate
-     * --------------------------------------------------------------------------
-     *
-     * Regenerate token on every submission?
-     *
-     * @deprecated Use `Config\Security` $regenerate property instead of using this property.
-     */
-    public bool $CSRFRegenerate = true;
-
-    /**
-     * --------------------------------------------------------------------------
-     * CSRF Redirect
-     * --------------------------------------------------------------------------
-     *
-     * Redirect to previous page with error on failure?
-     *
-     * @deprecated Use `Config\Security` $redirect property instead of using this property.
-     */
-    public bool $CSRFRedirect = true;
-
-    /**
-     * --------------------------------------------------------------------------
-     * CSRF SameSite
-     * --------------------------------------------------------------------------
-     *
-     * Setting for CSRF SameSite cookie token. Allowed values are:
-     * - None
-     * - Lax
-     * - Strict
-     * - ''
-     *
-     * Defaults to `Lax` as recommended in this link:
-     *
-     * @see https://portswigger.net/web-security/csrf/samesite-cookies
-     *
-     * @deprecated Use `Config\Security` $samesite property instead of using this property.
-     */
-    public string $CSRFSameSite = 'Lax';
 
     /**
      * --------------------------------------------------------------------------

@@ -49,7 +49,7 @@ Events::on('pre_system', function () {
      *
      * @phpstan-ignore-next-line
      */
-    if (CI_DEBUG) {
+    if (CI_DEBUG && ! is_cli()) {
         Events::on('DBQuery', 'CodeIgniter\Debug\Toolbar\Collectors\Database::collect',);
         Services::toolbar()->respond();
     }
