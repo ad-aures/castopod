@@ -138,11 +138,33 @@ class NoteModel extends UuidModel
                 ->orderBy('published_at', 'DESC')
                 ->findAll();
 
+            $secondsToNextUnpublishedNote = $this->getSecondsToNextUnpublishedNote($actorId,);
+
             cache()
-                ->save($cacheName, $found, DECADE);
+                ->save($cacheName, $found, $secondsToNextUnpublishedNote ? $secondsToNextUnpublishedNote : DECADE,);
         }
 
         return $found;
+    }
+
+    /**
+     * Returns the timestamp difference in seconds between the next note to publish and the current timestamp. Returns
+     * false if there's no note to publish
+     */
+    public function getSecondsToNextUnpublishedNote(int $actorId): int | false
+    {
+        $result = $this->select('TIMESTAMPDIFF(SECOND, NOW(), `published_at`) as timestamp_diff',)
+            ->where([
+                'actor_id' => $actorId,
+            ])
+            ->where('`published_at` > NOW()', null, false)
+            ->orderBy('published_at', 'asc')
+            ->get()
+            ->getResultArray();
+
+        return count($result) !== 0
+            ? (int) $result[0]['timestamp_diff']
+            : false;
     }
 
     /**

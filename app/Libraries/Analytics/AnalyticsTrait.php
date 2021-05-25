@@ -34,7 +34,7 @@ trait AnalyticsTrait
                     ? '- Direct -'
                     : parse_url($referer, PHP_URL_HOST);
             parse_str(parse_url($referer, PHP_URL_QUERY), $queries);
-            $keywords = array_key_exists('q', $queries) ? $queries['q'] : null;
+            $keywords = $queries['q'] ?? null;
 
             $procedureName = $db->prefixTable('analytics_website');
             $db->query("call {$procedureName}(?,?,?,?,?,?)", [

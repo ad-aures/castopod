@@ -316,12 +316,12 @@ class EpisodeModel extends Model
         cache()
             ->delete("podcast_episode#{$episode->id}");
         cache()
-            ->deleteMatching("podcast#{$episode->podcast_id}_episode#{$episode->id}*",);
+            ->deleteMatching("podcast#{$episode->podcast_id}_episode#{$episode->id}*");
         cache()
-            ->delete("podcast#{$episode->podcast_id}_episode-{$episode->slug}",);
+            ->delete("podcast#{$episode->podcast_id}_episode-{$episode->slug}");
 
         cache()
-            ->deleteMatching("page_podcast#{$episode->podcast_id}_activity*",);
+            ->deleteMatching("page_podcast#{$episode->podcast_id}_activity*");
         cache()
             ->deleteMatching("page_podcast#{$episode->podcast_id}_episode#{$episode->id}_*",);
         cache()

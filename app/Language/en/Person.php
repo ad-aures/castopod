@@ -36,12 +36,12 @@ return [
         'manage_section_subtitle' => 'Remove persons from this podcast',
         'add_section_title' => 'Add persons to this podcast',
         'add_section_subtitle' => 'You may pick several persons and roles.',
-        'person' => 'Persons',
-        'person_hint' =>
+        'persons' => 'Persons',
+        'persons_hint' =>
             'You may select one or several persons with the same roles. You need to create the persons first.',
-        'group_role' => 'Groups and roles',
-        'group_role_hint' =>
-            'You may select none, one or several groups and roles for a person.',
+        'roles' => 'Roles',
+        'roles_hint' =>
+            'You may select none, one or several roles for a person.',
         'submit_add' => 'Add person(s)',
         'remove' => 'Remove',
     ],
@@ -50,13 +50,13 @@ return [
         'manage_section_title' => 'Management',
         'manage_section_subtitle' => 'Remove persons from this episode',
         'add_section_title' => 'Add persons to this episode',
-        'add_section_subtitle' => 'You may pick several persons and roles',
-        'person' => 'Persons',
-        'person_hint' =>
+        'add_section_subtitle' => 'You may pick several persons and roles.',
+        'persons' => 'Persons',
+        'persons_hint' =>
             'You may select one or several persons with the same roles. You need to create the persons first.',
-        'group_role' => 'Groups and roles',
-        'group_role_hint' =>
-            'You may select none, one or several groups and roles for a person.',
+        'roles' => 'Roles',
+        'roles_hint' =>
+            'You may select none, one or several roles for a person.',
         'submit_add' => 'Add person(s)',
         'remove' => 'Remove',
     ],

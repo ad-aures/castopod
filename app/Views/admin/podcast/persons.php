@@ -94,10 +94,10 @@
 ) ?>
 
 <?= form_label(
-    lang('Person.podcast_form.person'),
-    'person',
+    lang('Person.podcast_form.persons'),
+    'persons',
     [],
-    lang('Person.podcast_form.person_hint'),
+    lang('Person.podcast_form.persons_hint'),
 ) ?>
 <?= form_multiselect('persons[]', $personOptions, old('persons', []), [
     'id' => 'persons',

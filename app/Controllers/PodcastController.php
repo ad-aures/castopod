@@ -67,8 +67,15 @@ class PodcastController extends BaseController
                 helper('form');
                 return view('podcast/activity_authenticated', $data);
             }
+
+            $secondsToNextUnpublishedEpisode = (new EpisodeModel())->getSecondsToNextUnpublishedEpisode(
+                $this->podcast->id,
+            );
+
             return view('podcast/activity', $data, [
-                'cache' => DECADE,
+                'cache' => $secondsToNextUnpublishedEpisode
+                    ? $secondsToNextUnpublishedEpisode
+                    : DECADE,
                 'cache_name' => $cacheName,
             ]);
         }

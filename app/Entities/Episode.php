@@ -192,7 +192,8 @@ class Episode extends Entity
             return new Image(null, $imagePath, $this->attributes['image_mimetype'],);
         }
 
-        return $this->podcast->image;
+        return $this->getPodcast()
+            ->image;
     }
 
     /**

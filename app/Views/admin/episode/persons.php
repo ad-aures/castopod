@@ -96,29 +96,29 @@
 ) ?>
 
 <?= form_label(
-    lang('Person.episode_form.person'),
-    'person',
+    lang('Person.episode_form.persons'),
+    'persons',
     [],
-    lang('Person.episode_form.person_hint'),
+    lang('Person.episode_form.persons_hint'),
 ) ?>
-<?= form_multiselect('person[]', $personOptions, old('person', []), [
-    'id' => 'person',
+<?= form_multiselect('persons[]', $personOptions, old('persons', []), [
+    'id' => 'persons',
     'class' => 'form-select mb-4',
     'required' => 'required',
 ]) ?>
 
 <?= form_label(
-    lang('Person.episode_form.group_role'),
-    'group_role',
+    lang('Person.episode_form.roles'),
+    'roles',
     [],
-    lang('Person.episode_form.group_role_hint'),
+    lang('Person.episode_form.roles_hint'),
     true,
 ) ?>
 <?= form_multiselect(
-    'person_group_role[]',
+    'roles[]',
     $taxonomyOptions,
-    old('person_group_role', []),
-    ['id' => 'person_group_role', 'class' => 'form-select mb-4'],
+    old('roles', []),
+    ['id' => 'roles', 'class' => 'form-select mb-4'],
 ) ?>
         
     

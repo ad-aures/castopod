@@ -87,7 +87,7 @@ class Person extends Entity
             $this->roles = (new PersonModel())->getPersonRoles(
                 $this->id,
                 $this->attributes['podcast_id'],
-                $this->episode_id
+                $this->attributes['episode_id'] ?? null
             );
         }
 

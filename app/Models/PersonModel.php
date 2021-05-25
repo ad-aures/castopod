@@ -107,7 +107,7 @@ class PersonModel extends Model
      */
     public function getPersonRoles(int $personId, int $podcastId, ?int $episodeId): array
     {
-        if ($episodeId) {
+        if ($episodeId !== null) {
             $cacheName = "podcast#{$podcastId}_episode#{$episodeId}_person#{$personId}_roles";
 
             if (! ($found = cache($cacheName))) {
@@ -212,7 +212,9 @@ class PersonModel extends Model
         $cacheName = "podcast#{$podcastId}_episode#{$episodeId}_persons";
         if (! ($found = cache($cacheName))) {
             $found = $this
-                ->select('persons.*, episodes_persons.podcast_id, episodes_persons.episode_id')
+                ->select(
+                    'persons.*, episodes_persons.podcast_id as podcast_id, episodes_persons.episode_id as episode_id'
+                )
                 ->distinct()
                 ->join('episodes_persons', 'persons.id = episodes_persons.person_id')
                 ->where('episodes_persons.episode_id', $episodeId)
@@ -321,6 +323,7 @@ class PersonModel extends Model
         }
 
         return $this->db->table('podcasts_persons')
+            ->ignore(true)
             ->insertBatch($data);
     }
 
@@ -331,6 +334,10 @@ class PersonModel extends Model
      */
     public function removePersonFromPodcast(int $podcastId, int $personId): string | bool
     {
+        cache()->deleteMatching("podcast#{$podcastId}_person#{$personId}*");
+        cache()
+            ->delete("podcast#{$podcastId}_persons");
+
         return $this->db->table('podcasts_persons')
             ->delete([
                 'podcast_id' => $podcastId,
@@ -353,6 +360,8 @@ class PersonModel extends Model
         array $groupsRoles
     ): bool | int {
         if ($personIds !== []) {
+            cache()
+                ->delete("podcast#{$podcastId}_episode#{$episodeId}_persons");
             (new EpisodeModel())->clearCache([
                 'id' => $episodeId,
             ]);
@@ -379,6 +388,7 @@ class PersonModel extends Model
                 }
             }
             return $this->db->table('episodes_persons')
+                ->ignore(true)
                 ->insertBatch($data);
         }
         return 0;
@@ -386,6 +396,10 @@ class PersonModel extends Model
 
     public function removePersonFromEpisode(int $podcastId, int $episodeId, int $personId): bool | string
     {
+        cache()->deleteMatching("podcast#{$podcastId}_episode#{$episodeId}_person#{$personId}*");
+        cache()
+            ->delete("podcast#{$podcastId}_episode#{$episodeId}_persons");
+
         return $this->db->table('episodes_persons')
             ->delete([
                 'podcast_id' => $podcastId,

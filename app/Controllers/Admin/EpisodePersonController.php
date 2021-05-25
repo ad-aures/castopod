@@ -66,7 +66,7 @@ class EpisodePersonController extends BaseController
     public function attemptAdd(): RedirectResponse
     {
         $rules = [
-            'person' => 'required',
+            'persons' => 'required',
         ];
 
         if (! $this->validate($rules)) {
@@ -79,8 +79,8 @@ class EpisodePersonController extends BaseController
         (new PersonModel())->addEpisodePersons(
             $this->podcast->id,
             $this->episode->id,
-            $this->request->getPost('person'),
-            $this->request->getPost('person_group_role'),
+            $this->request->getPost('persons'),
+            $this->request->getPost('roles') ?? [],
         );
 
         return redirect()->back();

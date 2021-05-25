@@ -89,6 +89,8 @@ Events::on('on_note_add', function (Note $note): void {
     // same for other events below
     cache()
         ->deleteMatching("page_podcast#{$note->actor->podcast->id}*");
+    cache()
+        ->deleteMatching("podcast#{$note->actor->podcast->id}*");
 });
 
 Events::on('on_note_remove', function (Note $note): void {
@@ -109,6 +111,8 @@ Events::on('on_note_remove', function (Note $note): void {
     cache()
         ->deleteMatching("page_podcast#{$note->actor->podcast->id}*");
     cache()
+        ->deleteMatching("podcast#{$note->actor->podcast->id}*");
+    cache()
         ->deleteMatching("page_note#{$note->id}*");
 });
 
@@ -125,6 +129,8 @@ Events::on('on_note_reblog', function (Actor $actor, Note $note): void {
 
     cache()
         ->deleteMatching("page_podcast#{$note->actor->podcast->id}*");
+    cache()
+        ->deleteMatching("podcast#{$note->actor->podcast->id}*");
     cache()
         ->deleteMatching("page_note#{$note->id}*");
 
@@ -148,6 +154,8 @@ Events::on('on_note_undo_reblog', function (Note $reblogNote): void {
     cache()
         ->deleteMatching("page_podcast#{$note->actor->podcast->id}*");
     cache()
+        ->deleteMatching("podcast#{$note->actor->podcast->id}*");
+    cache()
         ->deleteMatching("page_note#{$note->id}*");
 
     if ($reblogNote->actor->is_podcast) {
@@ -170,6 +178,8 @@ Events::on('on_reply_remove', function (Note $reply): void {
     cache()
         ->deleteMatching("page_podcast#{$note->actor->podcast->id}*");
     cache()
+        ->deleteMatching("podcast#{$note->actor->podcast->id}*");
+    cache()
         ->deleteMatching("page_note#{$note->id}*");
 });
 
@@ -182,6 +192,8 @@ Events::on('on_note_favourite', function (Actor $actor, Note $note): void {
 
     cache()
         ->deleteMatching("page_podcast#{$actor->podcast->id}*");
+    cache()
+        ->deleteMatching("podcast#{$actor->podcast->id}*");
     cache()
         ->deleteMatching("page_note#{$note->id}*");
 
@@ -200,6 +212,8 @@ Events::on('on_note_undo_favourite', function (Actor $actor, Note $note): void {
     cache()
         ->deleteMatching("page_podcast#{$actor->podcast->id}*");
     cache()
+        ->deleteMatching("podcast#{$actor->podcast->id}*");
+    cache()
         ->deleteMatching("page_note#{$note->id}*");
 
     if ($note->in_reply_to_id) {
@@ -210,11 +224,15 @@ Events::on('on_note_undo_favourite', function (Actor $actor, Note $note): void {
 Events::on('on_block_actor', function (int $actorId): void {
     cache()->deleteMatching('page_podcast*');
     cache()
+        ->deleteMatching('podcast*');
+    cache()
         ->deleteMatching('page_note*');
 });
 
 Events::on('on_unblock_actor', function (int $actorId): void {
     cache()->deleteMatching('page_podcast*');
+    cache()
+        ->deleteMatching('podcast*');
     cache()
         ->deleteMatching('page_note*');
 });
@@ -222,11 +240,15 @@ Events::on('on_unblock_actor', function (int $actorId): void {
 Events::on('on_block_domain', function (string $domainName): void {
     cache()->deleteMatching('page_podcast*');
     cache()
+        ->deleteMatching('podcast*');
+    cache()
         ->deleteMatching('page_note*');
 });
 
 Events::on('on_unblock_domain', function (string $domainName): void {
     cache()->deleteMatching('page_podcast*');
+    cache()
+        ->deleteMatching('podcast*');
     cache()
         ->deleteMatching('page_note*');
 });

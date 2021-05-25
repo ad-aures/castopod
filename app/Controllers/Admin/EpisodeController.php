@@ -9,6 +9,7 @@
 namespace App\Controllers\Admin;
 
 use App\Entities\Episode;
+use App\Entities\Image;
 use App\Entities\Location;
 use App\Entities\Note;
 use App\Entities\Podcast;
@@ -118,6 +119,12 @@ class EpisodeController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
+        $image = null;
+        $imageFile = $this->request->getFile('image');
+        if ($imageFile !== null && $imageFile->isValid()) {
+            $image = new Image($imageFile);
+        }
+
         $newEpisode = new Episode([
             'podcast_id' => $this->podcast->id,
             'title' => $this->request->getPost('title'),
@@ -125,7 +132,7 @@ class EpisodeController extends BaseController
             'guid' => '',
             'audio_file' => $this->request->getFile('audio_file'),
             'description_markdown' => $this->request->getPost('description'),
-            'image' => $this->request->getFile('image'),
+            'image' => $image,
             'location' => new Location($this->request->getPost('location_name'),),
             'transcript' => $this->request->getFile('transcript'),
             'chapters' => $this->request->getFile('chapters'),
@@ -253,9 +260,9 @@ class EpisodeController extends BaseController
             $this->episode->audio_file = $audioFile;
         }
 
-        $image = $this->request->getFile('image');
-        if ($image !== null && $image->isValid()) {
-            $this->episode->image = $image;
+        $imageFile = $this->request->getFile('image');
+        if ($imageFile !== null && $imageFile->isValid()) {
+            $this->episode->image = new Image($imageFile);
         }
 
         $transcriptChoice = $this->request->getPost('transcript-choice');

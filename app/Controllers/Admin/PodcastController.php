@@ -230,7 +230,7 @@ class PodcastController extends BaseController
         // set Podcast categories
         (new CategoryModel())->setPodcastCategories(
             (int) $newPodcastId,
-            $this->request->getPost('other_categories'),
+            $this->request->getPost('other_categories') ?? [],
         );
 
         // set interact as the newly created podcast actor
@@ -320,7 +320,7 @@ class PodcastController extends BaseController
         // set Podcast categories
         (new CategoryModel())->setPodcastCategories(
             $this->podcast->id,
-            $this->request->getPost('other_categories'),
+            $this->request->getPost('other_categories') ?? [],
         );
 
         $db->transComplete();
