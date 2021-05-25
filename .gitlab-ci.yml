@@ -14,7 +14,7 @@ php-dependencies:
   artifacts:
     paths:
       - vendor/
-    expire_in: 15 mins
+    expire_in: 30 mins
 
 js-dependencies:
   stage: prepare
@@ -24,7 +24,7 @@ js-dependencies:
   artifacts:
     paths:
       - node_modules/
-    expire_in: 15 mins
+    expire_in: 30 mins
 
 lint-commit-msg:
   stage: quality
@@ -68,13 +68,15 @@ tests:
 
 bundle:
   stage: bundle
+  before_script:
+    # prepare dependencies before bundling
+    - chmod +x ./scripts/bundle-prepare.sh
+    - ./scripts/bundle-prepare.sh
   script:
     # make scripts/bundle.sh executable
-    - chmod +x ./scripts/bundle-prepare.sh
     - chmod +x ./scripts/bundle.sh
 
     # bundle castopod-host with commit ref as version
-    - ./scripts/bundle-prepare.sh
     - ./scripts/bundle.sh ${CI_COMMIT_REF_SLUG}_${CI_COMMIT_SHORT_SHA}
   dependencies:
     - php-dependencies
@@ -90,17 +92,17 @@ bundle:
 
 release:
   stage: release
-  script:
-    # make release scripts executable
-    - chmod +x ./scripts/bundle-prepare.sh
-    - chmod +x ./scripts/bundle.sh
-    - chmod +x ./scripts/package.sh
-
-    # prepare bundle before release, both bundle and package scripts will be run by semantic-release
-    - ./scripts/bundle-prepare.sh
-
+  before_script:
     # IMPORTANT: delete local git tags before release to prevent eventual script failure (ie. tag already exists)
     - git tag | xargs git tag -d
+
+    # prepare dependencies before release, both bundle and package scripts will be run by semantic-release
+    - chmod +x ./scripts/bundle-prepare.sh
+    - ./scripts/bundle-prepare.sh
+  script:
+    # make release scripts executable
+    - chmod +x ./scripts/bundle.sh
+    - chmod +x ./scripts/package.sh
 
     # run semantic-release script (configured in `.releaserc.json` file)
     - npm run release
