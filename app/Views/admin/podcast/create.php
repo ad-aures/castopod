@@ -107,10 +107,11 @@
 ]) ?>
 
 <?= form_label(lang('Podcast.form.category'), 'category') ?>
-<?= form_dropdown('category', $categoryOptions, old('category'), [
+<?= form_dropdown('category', $categoryOptions, old('category', ''), [
     'id' => 'category',
     'class' => 'form-select mb-4',
     'required' => 'required',
+    'placeholder' => lang('Podcast.form.category_placeholder')
 ]) ?>
 
 <?= form_label(

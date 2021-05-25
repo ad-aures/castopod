@@ -24,6 +24,7 @@ class AddCategories extends Migration
             'parent_id' => [
                 'type' => 'INT',
                 'unsigned' => true,
+                'null' => true,
             ],
             'code' => [
                 'type' => 'VARCHAR',

@@ -172,3 +172,87 @@ if (! function_exists('form_multiselect')) {
 }
 
 //--------------------------------------------------------------------
+
+if (! function_exists('form_dropdown')) {
+    /**
+     * Drop-down Menu (based on html select tag)
+     *
+     * @param array<string, mixed>|string $data
+     * @param array<string, string> $options
+     * @param string|string[] $selected
+     * @param array<string, mixed>|string $extra
+     */
+    function form_dropdown(
+        string | array $data = '',
+        array $options = [],
+        string | array $selected = [],
+        string | array $extra = ''
+    ): string {
+        $defaults = [];
+        if (is_array($data)) {
+            if (isset($data['selected'])) {
+                $selected = $data['selected'];
+                unset($data['selected']); // select tags don't have a selected attribute
+            }
+            if (isset($data['options'])) {
+                $options = $data['options'];
+                unset($data['options']); // select tags don't use an options attribute
+            }
+        } else {
+            $defaults = [
+                'name' => $data,
+            ];
+        }
+
+        if (! is_array($selected)) {
+            $selected = [$selected];
+        }
+        if (! is_array($options)) {
+            $options = [$options];
+        }
+
+        // standardize selected as strings, like  the option keys will be.
+        foreach ($selected as $key => $item) {
+            $selected[$key] = (string) $item;
+        }
+
+        $placeholderOption = '';
+        if (isset($extra['placeholder'])) {
+            $placeholderOption = '<option value="" disabled="disabled" hidden="hidden"' . (in_array(
+                '',
+                $selected,
+                true
+            ) ? ' selected="selected"' : '') . '>' . $extra['placeholder'] . '</option>';
+            unset($extra['placeholder']);
+        }
+
+        $extra = stringify_attributes($extra);
+        $multiple = (count($selected) > 1 && stripos($extra, 'multiple') === false) ? ' multiple="multiple"' : '';
+        $form = '<select ' . rtrim(parse_form_attributes($data, $defaults)) . $extra . $multiple . ">\n";
+        $form .= $placeholderOption;
+
+        foreach ($options as $key => $val) {
+            $key = (string) $key;
+            if (is_array($val)) {
+                if ($val === []) {
+                    continue;
+                }
+                $form .= '<optgroup label="' . $key . "\">\n";
+                foreach ($val as $optgroupKey => $optgroupVal) {
+                    $sel = in_array($optgroupKey, $selected, true) ? ' selected="selected"' : '';
+                    $form .= '<option value="' . htmlspecialchars($optgroupKey) . '"' . $sel . '>'
+                            . $optgroupVal . "</option>\n";
+                }
+                $form .= "</optgroup>\n";
+            } else {
+                $form .= '<option value="' . htmlspecialchars($key) . '"'
+                        . (in_array($key, $selected, true) ? ' selected="selected"' : '') . '>'
+                        . $val . "</option>\n";
+            }
+        }
+
+        return $form . "</select>\n";
+    }
+}
+
+// ------------------------------------------------------------------------

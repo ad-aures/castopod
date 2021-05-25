@@ -42,6 +42,7 @@ return [
             'These fields will impact your audience and competition.',
         'language' => 'Language',
         'category' => 'Category',
+        'category_placeholder' => 'Select a category…',
         'other_categories' => 'Other categories',
         'parental_advisory' => [
             'label' => 'Parental advisory',

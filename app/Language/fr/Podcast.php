@@ -43,6 +43,7 @@ return [
             'Ces champs auront un impact sur votre audience et votre concurrence.',
         'language' => 'Langue',
         'category' => 'Catégorie',
+        'category_placeholder' => 'Sélectionner une catégorie…',
         'other_categories' => 'Autres catégories',
         'parental_advisory' => [
             'label' => 'Avertissement parental',
