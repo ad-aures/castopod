@@ -22,6 +22,7 @@
     "lint": "eslint --ext js,ts app/Views/_assets",
     "lint:fix": "eslint --ext js,ts app/Views/_assets --fix",
     "lint:css": "stylelint \"app/Views/_assets/**/*.css\"",
+    "lint:css:fix": "stylelint --fix \"app/Views/_assets/**/*.css\"",
     "prettier": "prettier --check --ignore-path .gitignore .",
     "prettier:fix": "prettier --write --ignore-path .gitignore .",
     "typecheck": "tsc",
