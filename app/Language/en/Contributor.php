@@ -20,7 +20,9 @@ return [
     ],
     'form' => [
         'user' => 'User',
+        'user_placeholder' => 'Select a user…',
         'role' => 'Role',
+        'role_placeholder' => 'Select its role…',
         'submit_add' => 'Add contributor',
         'submit_edit' => 'Update role',
     ],

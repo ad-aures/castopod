@@ -19,8 +19,10 @@ return [
         'role' => 'Rôle',
     ],
     'form' => [
-        'user' => 'Identifiant',
+        'user' => 'Utilisateur',
+        'user_placeholder' => 'Sélectionnez un utilisateur…',
         'role' => 'Rôle',
+        'role_placeholder' => 'Sélectionnez son rôle…',
         'submit_add' => 'Ajouter le contributeur',
         'submit_edit' => 'Mettre à jour le rôle',
     ],
