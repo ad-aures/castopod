@@ -48,7 +48,10 @@ class ActorController extends Controller
         return $this->{$method}(...$params);
     }
 
-    public function index(): RedirectResponse
+    /**
+     * @noRector ReturnTypeDeclarationRector
+     */
+    public function index(): ResponseInterface
     {
         $actorObjectClass = $this->config->actorObject;
         $actorObject = new $actorObjectClass($this->actor);
@@ -60,6 +63,8 @@ class ActorController extends Controller
 
     /**
      * Handles incoming requests from fediverse servers
+     *
+     * @noRector ReturnTypeDeclarationRector
      */
     public function inbox(): ResponseInterface
     {
@@ -228,7 +233,10 @@ class ActorController extends Controller
         }
     }
 
-    public function outbox(): RedirectResponse
+    /**
+     * @noRector ReturnTypeDeclarationRector
+     */
+    public function outbox(): ResponseInterface
     {
         // get published activities by publication date
         $actorActivity = model('ActivityModel')
@@ -257,7 +265,10 @@ class ActorController extends Controller
             ->setBody($collection->toJSON());
     }
 
-    public function followers(): RedirectResponse
+    /**
+     * @noRector ReturnTypeDeclarationRector
+     */
+    public function followers(): ResponseInterface
     {
         // get followers for a specific actor
         $followers = model('ActorModel')
@@ -334,7 +345,10 @@ class ActorController extends Controller
         );
     }
 
-    public function activity(string $activityId): RedirectResponse
+    /**
+     * @noRector ReturnTypeDeclarationRector
+     */
+    public function activity(string $activityId): ResponseInterface
     {
         if (
             ! ($activity = model('ActivityModel')->getActivityById($activityId))

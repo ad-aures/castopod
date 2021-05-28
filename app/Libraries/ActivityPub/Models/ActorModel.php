@@ -84,7 +84,10 @@ class ActorModel extends Model
             $domain = get_current_domain();
         }
 
-        $cacheName = "actor-{$username}-{$domain}";
+        // remove colons for port if set
+        $cacheDomain = str_replace(':', '', $domain);
+
+        $cacheName = "actor-{$username}-{$cacheDomain}";
         if (! ($found = cache($cacheName))) {
             $found = $this->where([
                 'username' => $username,

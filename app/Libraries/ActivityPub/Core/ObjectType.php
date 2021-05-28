@@ -33,7 +33,7 @@ class ObjectType extends AbstractObject
     protected array $to = ['https://www.w3.org/ns/activitystreams#Public'];
 
     /**
-     * @var string[]
+     * @var string[]|null
      */
-    protected array $cc = [];
+    protected ?array $cc = null;
 }
