@@ -13,9 +13,9 @@ use CodeIgniter\Model;
 
 class EpisodeModel extends Model
 {
-    // TODO: remove
-
     /**
+     * TODO: remove, shouldn't be here
+     *
      * @var array<string, array<string, string>>
      */
     public static $themes = [
@@ -135,45 +135,26 @@ class EpisodeModel extends Model
      */
     protected $afterInsert = ['writeEnclosureMetadata', 'clearCache'];
 
-    // clear cache beforeUpdate because if slug changes, so will the episode link
-
     /**
      * @var string[]
      */
-    protected $beforeUpdate = ['clearCache'];
-
-    /**
-     * @var string[]
-     */
-    protected $afterUpdate = ['writeEnclosureMetadata'];
+    protected $afterUpdate = ['clearCache', 'writeEnclosureMetadata'];
 
     /**
      * @var string[]
      */
     protected $beforeDelete = ['clearCache'];
 
-    /**
-     * @param int|string $podcastId may be the id or podcast name
-     */
-    public function getEpisodeBySlug(int | string $podcastId, string $episodeSlug): ?Episode
+    public function getEpisodeBySlug(string $podcastName, string $episodeSlug): ?Episode
     {
-        $cacheName = "podcast#{$podcastId}_episode-{$episodeSlug}";
+        $cacheName = "podcast-{$podcastName}_episode-{$episodeSlug}";
         if (! ($found = cache($cacheName))) {
-            $builder = $this->select('episodes.*')
+            $found = $this->select('episodes.*')
+                ->join('podcasts', 'podcasts.id = episodes.podcast_id')
                 ->where('slug', $episodeSlug)
-                ->where('`published_at` <= NOW()', null, false);
-
-            if (is_numeric($podcastId)) {
-                // passed argument is the podcast id
-                $builder->where('podcast_id', $podcastId);
-            } else {
-                // passed argument is the podcast name, must perform join
-                $builder
-                    ->join('podcasts', 'podcasts.id = episodes.podcast_id')
-                    ->where('podcasts.name', $podcastId);
-            }
-
-            $found = $builder->first();
+                ->where('podcasts.name', $podcastName)
+                ->where('`published_at` <= NOW()', null, false)
+                ->first();
 
             cache()
                 ->save($cacheName, $found, DECADE);
@@ -278,9 +259,9 @@ class EpisodeModel extends Model
      * Returns the timestamp difference in seconds between the next episode to publish and the current timestamp Returns
      * false if there's no episode to publish
      *
-     * @return int|bool seconds
+     * @return int|false seconds
      */
-    public function getSecondsToNextUnpublishedEpisode(int $podcastId): int | bool
+    public function getSecondsToNextUnpublishedEpisode(int $podcastId): int | false
     {
         $result = $this->select('TIMESTAMPDIFF(SECOND, NOW(), `published_at`) as timestamp_diff',)
             ->where([
@@ -291,7 +272,7 @@ class EpisodeModel extends Model
             ->get()
             ->getResultArray();
 
-        return count($result) !== 0
+        return $result !== []
             ? (int) $result[0]['timestamp_diff']
             : false;
     }
@@ -305,45 +286,17 @@ class EpisodeModel extends Model
     {
         $episode = (new self())->find(is_array($data['id']) ? $data['id'][0] : $data['id'],);
 
-        // delete cache for rss feed
+        // delete podcast cache
         cache()
-            ->deleteMatching("podcast#{$episode->podcast_id}_feed*");
-
-        // delete model requests cache
+            ->deleteMatching("podcast#{$episode->podcast_id}*");
         cache()
-            ->delete("podcast#{$episode->podcast_id}_episodes");
-
+            ->deleteMatching("podcast-{$episode->podcast->name}*");
         cache()
             ->delete("podcast_episode#{$episode->id}");
         cache()
-            ->deleteMatching("podcast#{$episode->podcast_id}_episode#{$episode->id}*");
-        cache()
-            ->delete("podcast#{$episode->podcast_id}_episode-{$episode->slug}");
-
-        cache()
-            ->deleteMatching("page_podcast#{$episode->podcast_id}_activity*");
-        cache()
-            ->deleteMatching("page_podcast#{$episode->podcast_id}_episode#{$episode->id}_*",);
+            ->deleteMatching("page_podcast#{$episode->podcast_id}*");
         cache()
             ->deleteMatching('page_credits_*');
-
-        if ($episode->season_number) {
-            cache()->deleteMatching("podcast#{$episode->podcast_id}_season*");
-            cache()
-                ->deleteMatching("page_podcast#{$episode->podcast_id}_episodes_season*",);
-        } else {
-            cache()->deleteMatching("podcast#{$episode->podcast_id}_year*");
-            cache()
-                ->deleteMatching("page_podcast#{$episode->podcast_id}_episodes_year*",);
-        }
-
-        // delete query cache
-        cache()
-            ->delete("podcast#{$episode->podcast_id}_defaultQuery");
-        cache()
-            ->delete("podcast#{$episode->podcast_id}_years");
-        cache()
-            ->delete("podcast#{$episode->podcast_id}_seasons");
 
         return $data;
     }

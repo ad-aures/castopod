@@ -171,7 +171,7 @@ class PersonModel extends Model
             ->getLocale();
         $cacheName = "taxonomy_options_{$locale}";
 
-        /** @var array<string, array<string, string|array<string, array<string, string>>>> $personsTaxonomy */
+        /** @var array<string, mixed> $personsTaxonomy */
         $personsTaxonomy = lang('PersonsTaxonomy.persons');
 
         if (! ($options = cache($cacheName))) {
@@ -285,14 +285,14 @@ class PersonModel extends Model
     /**
      * Add persons to podcast
      *
-     * @param array<string> $persons
+     * @param array<string> $personIds
      * @param array<string, string> $roles
      *
      * @return bool|int Number of rows inserted or FALSE on failure
      */
-    public function addPodcastPersons(int $podcastId, array $persons = [], array $roles = []): int | bool
+    public function addPodcastPersons(int $podcastId, array $personIds = [], array $roles = []): int | bool
     {
-        if ($persons === []) {
+        if ($personIds === []) {
             return 0;
         }
 
@@ -303,11 +303,11 @@ class PersonModel extends Model
         ]);
 
         $data = [];
-        foreach ($persons as $person) {
+        foreach ($personIds as $personId) {
             if ($roles === []) {
                 $data[] = [
                     'podcast_id' => $podcastId,
-                    'person_id' => $person,
+                    'person_id' => $personId,
                 ];
             }
 
@@ -315,7 +315,7 @@ class PersonModel extends Model
                 $groupRole = explode(',', $role);
                 $data[] = [
                     'podcast_id' => $podcastId,
-                    'person_id' => $person,
+                    'person_id' => $personId,
                     'person_group' => $groupRole[0],
                     'person_role' => $groupRole[1],
                 ];
@@ -337,6 +337,9 @@ class PersonModel extends Model
         cache()->deleteMatching("podcast#{$podcastId}_person#{$personId}*");
         cache()
             ->delete("podcast#{$podcastId}_persons");
+        (new PodcastModel())->clearCache([
+            'id' => $podcastId,
+        ]);
 
         return $this->db->table('podcasts_persons')
             ->delete([
@@ -399,6 +402,9 @@ class PersonModel extends Model
         cache()->deleteMatching("podcast#{$podcastId}_episode#{$episodeId}_person#{$personId}*");
         cache()
             ->delete("podcast#{$podcastId}_episode#{$episodeId}_persons");
+        (new EpisodeModel())->clearCache([
+            'id' => $episodeId,
+        ]);
 
         return $this->db->table('episodes_persons')
             ->delete([
@@ -424,7 +430,7 @@ class PersonModel extends Model
 
         // clear cache for every credits page
         cache()
-            ->deleteMatching('page_credits_*');
+            ->deleteMatching('page_credits*');
 
         return $data;
     }

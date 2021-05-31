@@ -26,7 +26,7 @@ class EpisodeController extends BaseController
 {
     protected Podcast $podcast;
 
-    protected ?Episode $episode;
+    protected Episode $episode;
 
     public function _remap(string $method, string ...$params): mixed
     {
@@ -253,7 +253,7 @@ class EpisodeController extends BaseController
         $this->episode->is_blocked = $this->request->getPost('block') === 'yes';
         $this->episode->custom_rss_string = $this->request->getPost('custom_rss',);
 
-        $this->episode->updated_by = user_id();
+        $this->episode->updated_by = (int) user_id();
 
         $audioFile = $this->request->getFile('audio_file');
         if ($audioFile !== null && $audioFile->isValid()) {
@@ -268,7 +268,7 @@ class EpisodeController extends BaseController
         $transcriptChoice = $this->request->getPost('transcript-choice');
         if ($transcriptChoice === 'upload-file') {
             $transcriptFile = $this->request->getFile('transcript_file');
-            if ($transcriptFile->isValid()) {
+            if ($transcriptFile !== null && $transcriptFile->isValid()) {
                 $this->episode->transcript_file = $transcriptFile;
                 $this->episode->transcript_file_remote_url = null;
             }
@@ -287,7 +287,7 @@ class EpisodeController extends BaseController
         $chaptersChoice = $this->request->getPost('chapters-choice');
         if ($chaptersChoice === 'upload-file') {
             $chaptersFile = $this->request->getFile('chapters_file');
-            if ($chaptersFile->isValid()) {
+            if ($chaptersFile !== null && $chaptersFile->isValid()) {
                 $this->episode->chapters_file = $chaptersFile;
                 $this->episode->chapters_file_remote_url = null;
             }
@@ -411,13 +411,11 @@ class EpisodeController extends BaseController
         if ($publishMethod === 'schedule') {
             $scheduledPublicationDate = $this->request->getPost('scheduled_publication_date',);
             if ($scheduledPublicationDate) {
-                $scheduledDateUTC = Time::createFromFormat(
+                $this->episode->published_at = Time::createFromFormat(
                     'Y-m-d H:i',
                     $scheduledPublicationDate,
                     $this->request->getPost('client_timezone'),
                 )->setTimezone('UTC');
-                $this->episode->published_at = $scheduledDateUTC;
-                $newNote->published_at = $scheduledDateUTC;
             } else {
                 $db->transRollback();
                 return redirect()
@@ -426,10 +424,10 @@ class EpisodeController extends BaseController
                     ->with('error', 'Schedule date must be set!');
             }
         } else {
-            $dateNow = Time::now();
-            $this->episode->published_at = $dateNow;
-            $newNote->published_at = $dateNow;
+            $this->episode->published_at = Time::now();
         }
+
+        $newNote->published_at = $this->episode->published_at;
 
         $noteModel = new NoteModel();
         if (! $noteModel->addNote($newNote)) {
@@ -498,20 +496,15 @@ class EpisodeController extends BaseController
         $db = Database::connect();
         $db->transStart();
 
-        $note = (new NoteModel())->getNoteById($this->request->getPost('note_id'),);
-        $note->message = $this->request->getPost('message');
-
         $publishMethod = $this->request->getPost('publication_method');
         if ($publishMethod === 'schedule') {
             $scheduledPublicationDate = $this->request->getPost('scheduled_publication_date',);
             if ($scheduledPublicationDate) {
-                $scheduledDateUTC = Time::createFromFormat(
+                $this->episode->published_at = Time::createFromFormat(
                     'Y-m-d H:i',
                     $scheduledPublicationDate,
                     $this->request->getPost('client_timezone'),
                 )->setTimezone('UTC');
-                $this->episode->published_at = $scheduledDateUTC;
-                $note->published_at = $scheduledDateUTC;
             } else {
                 $db->transRollback();
                 return redirect()
@@ -520,18 +513,23 @@ class EpisodeController extends BaseController
                     ->with('error', 'Schedule date must be set!');
             }
         } else {
-            $dateNow = Time::now();
-            $this->episode->published_at = $dateNow;
-            $note->published_at = $dateNow;
+            $this->episode->published_at = Time::now();
         }
 
-        $noteModel = new NoteModel();
-        if (! $noteModel->editNote($note)) {
-            $db->transRollback();
-            return redirect()
-                ->back()
-                ->withInput()
-                ->with('errors', $noteModel->errors());
+        $note = (new NoteModel())->getNoteById($this->request->getPost('note_id'),);
+
+        if ($note !== null) {
+            $note->message = $this->request->getPost('message');
+            $note->published_at = $this->episode->published_at;
+
+            $noteModel = new NoteModel();
+            if (! $noteModel->editNote($note)) {
+                $db->transRollback();
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->with('errors', $noteModel->errors());
+            }
         }
 
         $episodeModel = new EpisodeModel();

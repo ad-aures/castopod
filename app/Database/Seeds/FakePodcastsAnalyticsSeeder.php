@@ -57,10 +57,8 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                 $analyticsPodcastsByRegion = [];
 
                 $episodes = (new EpisodeModel())
-                    ->where([
-                        'podcast_id' => $podcast->id,
-                        'DATE(published_at) <=' => date('Y-m-d', $date),
-                    ])
+                    ->where('podcast_id', $podcast->id)
+                    ->where('`published_at` <= NOW()', null, false)
                     ->findAll();
                 foreach ($episodes as $episode) {
                     $age = floor(($date - strtotime($episode->published_at)) / 86400,);
@@ -110,7 +108,7 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                                 ? 'N/A'
                                 : $city->country->isoCode;
 
-                            $regionCode = $city->subdivisions[0]->isoCode === null
+                            $regionCode = $city->subdivisions === []
                                 ? 'N/A'
                                 : $city->subdivisions[0]->isoCode;
                             $latitude = round($city->location->latitude, 3);

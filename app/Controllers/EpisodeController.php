@@ -39,7 +39,7 @@ class EpisodeController extends BaseController
         }
 
         if (
-            ($this->episode = (new EpisodeModel())->getEpisodeBySlug($this->podcast->id, $params[1],)) !== null
+            ($this->episode = (new EpisodeModel())->getEpisodeBySlug($params[0], $params[1],)) !== null
         ) {
             unset($params[1]);
             unset($params[0]);

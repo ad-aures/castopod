@@ -196,10 +196,8 @@ class FakeWebsiteAnalyticsSeeder extends Seeder
                 $websiteByReferer = [];
 
                 $episodes = (new EpisodeModel())
-                    ->where([
-                        'podcast_id' => $podcast->id,
-                        'DATE(published_at) <=' => date('Y-m-d', $date),
-                    ])
+                    ->where('podcast_id', $podcast->id)
+                    ->where('`published_at` <= NOW()', null, false)
                     ->findAll();
                 foreach ($episodes as $episode) {
                     $age = floor(($date - strtotime($episode->published_at)) / 86400,);

@@ -20,9 +20,9 @@
             class="text-xs text-gray-500">
                 <time
                 itemprop="published"
-                datetime="<?= $note->created_at->format(DateTime::ATOM) ?>"
-                title="<?= $note->created_at ?>"
-                ><?= lang('Common.mediumDate', [$note->created_at]) ?></time>
+                datetime="<?= $note->published_at->format(DateTime::ATOM) ?>"
+                title="<?= $note->published_at ?>"
+                ><?= lang('Common.mediumDate', [$note->published_at]) ?></time>
             </a>
         </div>
     </header>

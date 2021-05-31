@@ -14,9 +14,9 @@
             <time
             class="flex-shrink-0 ml-auto text-xs text-gray-600"
             itemprop="published"
-            datetime="<?= $reply->created_at->format(DateTime::ATOM) ?>"
-            title="<?= $reply->created_at ?>"
-            ><?= lang('Common.mediumDate', [$reply->created_at]) ?></time>
+            datetime="<?= $reply->published_at->format(DateTime::ATOM) ?>"
+            title="<?= $reply->published_at ?>"
+            ><?= lang('Common.mediumDate', [$reply->published_at]) ?></time>
         </header>
         <p class="mb-2 note-content"><?= $reply->message_html ?></p>
         <?php if ($reply->has_preview_card): ?>
