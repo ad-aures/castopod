@@ -102,7 +102,7 @@ class BlockedDomainModel extends Model
         // set all actors from the domain as blocked
         model('ActorModel')
             ->where('domain', $name)
-            ->set('is_blocked', 1)
+            ->set('is_blocked', '1')
             ->update();
 
         $result = $this->insert([
@@ -133,7 +133,7 @@ class BlockedDomainModel extends Model
         // unblock all actors from the domain
         model('ActorModel')
             ->where('domain', $name)
-            ->set('is_blocked', 0)
+            ->set('is_blocked', '0')
             ->update();
 
         $result = $this->delete($name);

@@ -23,8 +23,6 @@ class FakePodcastsAnalyticsSeeder extends Seeder
 {
     public function run(): void
     {
-        $podcast = (new PodcastModel())->first();
-
         $jsonUserAgents = json_decode(
             file_get_contents('https://raw.githubusercontent.com/opawg/user-agents/master/src/user-agents.json',),
             true,
@@ -41,13 +39,15 @@ class FakePodcastsAnalyticsSeeder extends Seeder
             JSON_THROW_ON_ERROR,
         );
 
-        if ($podcast) {
+        $podcast = (new PodcastModel())->first();
+
+        if ($podcast !== null) {
             $firstEpisode = (new EpisodeModel())
                 ->selectMin('published_at')
                 ->first();
 
             for (
-                $date = strtotime($firstEpisode->published_at);
+                $date = strtotime((string) $firstEpisode->published_at);
                 $date < strtotime('now');
                 $date = strtotime(date('Y-m-d', $date) . ' +1 day')
             ) {
@@ -63,15 +63,15 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                     ->where('`published_at` <= NOW()', null, false)
                     ->findAll();
                 foreach ($episodes as $episode) {
-                    $age = floor(($date - strtotime($episode->published_at)) / 86400);
-                    $probability1 = (int) floor(exp(3 - $age / 40)) + 1;
+                    $age = floor(($date - strtotime((string) $episode->published_at)) / 86400,);
+                    $probability1 = floor(exp(3 - $age / 40)) + 1;
 
                     for (
                         $lineNumber = 0;
-                        $lineNumber < rand(1, $probability1);
+                        $lineNumber < rand(1, (int) $probability1);
                         ++$lineNumber
                     ) {
-                        $probability2 = (int) floor(exp(6 - $age / 20)) + 10;
+                        $probability2 = floor(exp(6 - $age / 20)) + 10;
 
                         $player =
                             $jsonUserAgents[
@@ -97,7 +97,7 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                             '.' .
                             rand(0, 255);
 
-                        $cityReader = new Reader(WRITEPATH . 'uploads/GeoLite2-City/GeoLite2-City.mmdb');
+                        $cityReader = new Reader(WRITEPATH . 'uploads/GeoLite2-City/GeoLite2-City.mmdb',);
 
                         $countryCode = 'N/A';
                         $regionCode = 'N/A';
@@ -113,13 +113,13 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                             $regionCode = $city->subdivisions === []
                                 ? 'N/A'
                                 : $city->subdivisions[0]->isoCode;
-                            $latitude = round($city->location->latitude, 3);
-                            $longitude = round($city->location->longitude, 3);
+                            $latitude = round((float) $city->location->latitude, 3);
+                            $longitude = round((float) $city->location->longitude, 3);
                         } catch (AddressNotFoundException) {
                             //Bad luck, bad IP, nothing to do.
                         }
 
-                        $hits = rand(0, $probability2);
+                        $hits = rand(0, (int) $probability2);
 
                         $analyticsPodcasts[] = [
                             'podcast_id' => $podcast->id,

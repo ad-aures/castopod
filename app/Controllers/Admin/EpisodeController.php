@@ -661,8 +661,8 @@ class EpisodeController extends BaseController
                 $data = [
                     'podcast_id' => $this->podcast->id,
                     'episode_id' => $this->episode->id,
-                    'start_time' => (int) $soundbite['start_time'],
-                    'duration' => (int) $soundbite['duration'],
+                    'start_time' => (float) $soundbite['start_time'],
+                    'duration' => (float) $soundbite['duration'],
                     'label' => $soundbite['label'],
                     'updated_by' => user_id(),
                 ];
@@ -688,9 +688,9 @@ class EpisodeController extends BaseController
         return redirect()->route('soundbites-edit', [$this->podcast->id, $this->episode->id]);
     }
 
-    public function soundbiteDelete(int $soundbiteId): RedirectResponse
+    public function soundbiteDelete(string $soundbiteId): RedirectResponse
     {
-        (new SoundbiteModel())->deleteSoundbite($this->podcast->id, $this->episode->id, $soundbiteId);
+        (new SoundbiteModel())->deleteSoundbite($this->podcast->id, $this->episode->id, (int) $soundbiteId);
 
         return redirect()->route('soundbites-edit', [$this->podcast->id, $this->episode->id]);
     }

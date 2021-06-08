@@ -28,7 +28,7 @@ class PageModel extends Model
     /**
      * @var string[]
      */
-    protected $allowedFields = ['id', 'title', 'slug', 'content'];
+    protected $allowedFields = ['id', 'title', 'slug', 'content_markdown', 'content_html'];
 
     /**
      * @var string
@@ -52,7 +52,7 @@ class PageModel extends Model
         'title' => 'required',
         'slug' =>
             'required|regex_match[/^[a-zA-Z0-9\-]{1,191}$/]|is_unique[pages.slug,id,{id}]',
-        'content' => 'required',
+        'content_markdown' => 'required',
     ];
 
     /**

@@ -90,9 +90,6 @@ class PodcastPlatformController extends BaseController
                         $podcastPlatform,
                     ) && $podcastPlatform['on_embeddable_player'] === 'yes',
             ];
-            return redirect()
-                ->back()
-                ->with('message', lang('Platforms.messages.updateSuccess'));
         }
 
         $platformModel->savePodcastPlatforms($this->podcast->id, $platformType, $podcastsPlatformsData);

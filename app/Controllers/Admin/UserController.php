@@ -143,7 +143,7 @@ class UserController extends BaseController
         $authorize = Services::authorization();
 
         $roles = $this->request->getPost('roles');
-        $authorize->setUserGroups($this->user->id, $roles);
+        $authorize->setUserGroups($this->user->id, $roles ?? []);
 
         // Success!
         return redirect()

@@ -88,9 +88,9 @@ class EpisodePersonController extends BaseController
         return redirect()->back();
     }
 
-    public function remove(int $personId): RedirectResponse
+    public function remove(string $personId): RedirectResponse
     {
-        (new PersonModel())->removePersonFromEpisode($this->podcast->id, $this->episode->id, $personId);
+        (new PersonModel())->removePersonFromEpisode($this->podcast->id, $this->episode->id, (int) $personId);
 
         return redirect()->back();
     }

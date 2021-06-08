@@ -189,7 +189,7 @@ class FakeWebsiteAnalyticsSeeder extends Seeder
                 ->first();
 
             for (
-                $date = strtotime($firstEpisode->published_at);
+                $date = strtotime((string) $firstEpisode->published_at);
                 $date < strtotime('now');
                 $date = strtotime(date('Y-m-d', $date) . ' +1 day')
             ) {
@@ -202,7 +202,7 @@ class FakeWebsiteAnalyticsSeeder extends Seeder
                     ->where('`published_at` <= NOW()', null, false)
                     ->findAll();
                 foreach ($episodes as $episode) {
-                    $age = floor(($date - strtotime($episode->published_at)) / 86400);
+                    $age = floor(($date - strtotime((string) $episode->published_at)) / 86400);
                     $probability1 = (int) floor(exp(3 - $age / 40)) + 1;
 
                     for (

@@ -182,6 +182,15 @@ class PodcastController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
+        if (
+            ($partnerId = $this->request->getPost('partner_id')) === '' ||
+            ($partnerLinkUrl = $this->request->getPost('partner_link_url')) === '' ||
+            ($partnerImageUrl = $this->request->getPost('partner_image_url')) === '') {
+            $partnerId = null;
+            $partnerLinkUrl = null;
+            $partnerImageUrl = null;
+        }
+
         $podcast = new Podcast([
             'title' => $this->request->getPost('title'),
             'name' => $this->request->getPost('name'),
@@ -199,11 +208,13 @@ class PodcastController extends BaseController
             'type' => $this->request->getPost('type'),
             'copyright' => $this->request->getPost('copyright'),
             'location' => new Location($this->request->getPost('location_name'),),
-            'payment_pointer' => $this->request->getPost('payment_pointer'),
+            'payment_pointer' => $this->request->getPost(
+                'payment_pointer'
+            ) === '' ? null : $this->request->getPost('payment_pointer'),
             'custom_rss_string' => $this->request->getPost('custom_rss'),
-            'partner_id' => $this->request->getPost('partner_id'),
-            'partner_link_url' => $this->request->getPost('partner_link_url'),
-            'partner_image_url' => $this->request->getPost('partner_image_url'),
+            'partner_id' => $partnerId,
+            'partner_link_url' => $partnerLinkUrl,
+            'partner_image_url' => $partnerImageUrl,
             'is_blocked' => $this->request->getPost('block') === 'yes',
             'is_completed' => $this->request->getPost('complete') === 'yes',
             'is_locked' => $this->request->getPost('lock') === 'yes',
@@ -227,7 +238,7 @@ class PodcastController extends BaseController
         $authorize = Services::authorization();
         $podcastAdminGroup = $authorize->group('podcast_admin');
 
-        $podcastModel->addPodcastContributor(user_id(), $newPodcastId, $podcastAdminGroup->id);
+        $podcastModel->addPodcastContributor(user_id(), $newPodcastId, (int) $podcastAdminGroup->id);
 
         // set Podcast categories
         (new CategoryModel())->setPodcastCategories(
@@ -277,6 +288,15 @@ class PodcastController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
+        if (
+            ($partnerId = $this->request->getPost('partner_id')) === '' ||
+            ($partnerLinkUrl = $this->request->getPost('partner_link_url')) === '' ||
+            ($partnerImageUrl = $this->request->getPost('partner_image_url')) === '') {
+            $partnerId = null;
+            $partnerLinkUrl = null;
+            $partnerImageUrl = null;
+        }
+
         $this->podcast->title = $this->request->getPost('title');
         $this->podcast->description_markdown = $this->request->getPost('description');
 
@@ -296,11 +316,13 @@ class PodcastController extends BaseController
         $this->podcast->type = $this->request->getPost('type');
         $this->podcast->copyright = $this->request->getPost('copyright');
         $this->podcast->location = new Location($this->request->getPost('location_name'));
-        $this->podcast->payment_pointer = $this->request->getPost('payment_pointer');
+        $this->podcast->payment_pointer = $this->request->getPost(
+            'payment_pointer'
+        ) === '' ? null : $this->request->getPost('payment_pointer');
         $this->podcast->custom_rss_string = $this->request->getPost('custom_rss');
-        $this->podcast->partner_id = $this->request->getPost('partner_id');
-        $this->podcast->partner_link_url = $this->request->getPost('partner_link_url');
-        $this->podcast->partner_image_url = $this->request->getPost('partner_image_url');
+        $this->podcast->partner_id = $partnerId;
+        $this->podcast->partner_link_url = $partnerLinkUrl;
+        $this->podcast->partner_image_url = $partnerImageUrl;
         $this->podcast->is_blocked = $this->request->getPost('block') === 'yes';
         $this->podcast->is_completed =
             $this->request->getPost('complete') === 'yes';

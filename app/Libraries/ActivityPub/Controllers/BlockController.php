@@ -52,6 +52,25 @@ class BlockController extends Controller
         return redirect()->back();
     }
 
+    public function attemptUnblockActor(): RedirectResponse
+    {
+        $rules = [
+            'actor_id' => 'required',
+        ];
+
+        if (! $this->validate($rules)) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $this->validator->getErrors());
+        }
+
+        model('ActorModel')
+            ->unblockActor((int) $this->request->getPost('actor_id'));
+
+        return redirect()->back();
+    }
+
     public function attemptBlockDomain(): RedirectResponse
     {
         $rules = [
@@ -67,25 +86,6 @@ class BlockController extends Controller
 
         model('BlockedDomainModel')
             ->blockDomain($this->request->getPost('domain'));
-
-        return redirect()->back();
-    }
-
-    public function attemptUnblockActor(): RedirectResponse
-    {
-        $rules = [
-            'actor_id' => 'required',
-        ];
-
-        if (! $this->validate($rules)) {
-            return redirect()
-                ->back()
-                ->withInput()
-                ->with('errors', $this->validator->getErrors());
-        }
-
-        model('ActorModel')
-            ->unblockActor($this->request->getPost('actor_id'));
 
         return redirect()->back();
     }

@@ -197,7 +197,7 @@ class PodcastImportController extends BaseController
         $authorize = Services::authorization();
         $podcastAdminGroup = $authorize->group('podcast_admin');
 
-        $podcastModel->addPodcastContributor(user_id(), $newPodcastId, $podcastAdminGroup->id);
+        $podcastModel->addPodcastContributor(user_id(), $newPodcastId, (int) $podcastAdminGroup->id);
 
         $podcastsPlatformsData = [];
         $platformTypes = [
@@ -218,7 +218,7 @@ class PodcastImportController extends BaseController
         foreach ($platformTypes as $platformType) {
             foreach ($platformType['elements'] as $platform) {
                 $platformLabel = $platform->attributes()['platform'];
-                $platformSlug = slugify($platformLabel);
+                $platformSlug = slugify((string) $platformLabel);
                 if ($platformModel->getPlatform($platformSlug) !== null) {
                     $podcastsPlatformsData[] = [
                         'platform_slug' => $platformSlug,
@@ -246,7 +246,7 @@ class PodcastImportController extends BaseController
                     'full_name' => $fullName,
                     'unique_name' => slugify($fullName),
                     'information_url' => $podcastPerson->attributes()['href'],
-                    'image' => new Image(download_file($podcastPerson->attributes()['img'])),
+                    'image' => new Image(download_file((string) $podcastPerson->attributes()['img'])),
                     'created_by' => user_id(),
                     'updated_by' => user_id(),
                 ]);
@@ -301,7 +301,7 @@ class PodcastImportController extends BaseController
 
             $slug = slugify(
                 $this->request->getPost('slug_field') === 'title'
-                    ? $item->title
+                    ? (string) $item->title
                     : basename($item->link),
             );
             if (in_array($slug, $slugs, true)) {
@@ -342,7 +342,7 @@ class PodcastImportController extends BaseController
                 'guid' => $item->guid ?? null,
                 'title' => $item->title,
                 'slug' => $slug,
-                'audio_file' => download_file($item->enclosure->attributes()['url'],),
+                'audio_file' => download_file((string) $item->enclosure->attributes()['url'],),
                 'description_markdown' => $converter->convert($itemDescriptionHtml,),
                 'description_html' => $itemDescriptionHtml,
                 'image' => $episodeImage,
@@ -372,7 +372,7 @@ class PodcastImportController extends BaseController
                 'location' => $location,
                 'created_by' => user_id(),
                 'updated_by' => user_id(),
-                'published_at' => strtotime($item->pubDate),
+                'published_at' => strtotime((string) $item->pubDate),
             ]);
 
             $episodeModel = new EpisodeModel();
@@ -396,7 +396,7 @@ class PodcastImportController extends BaseController
                         'full_name' => $fullName,
                         'unique_name' => slugify($fullName),
                         'information_url' => $episodePerson->attributes()['href'],
-                        'image' => new Image(download_file($episodePerson->attributes()['img'])),
+                        'image' => new Image(download_file((string) $episodePerson->attributes()['img'])),
                         'created_by' => user_id(),
                         'updated_by' => user_id(),
                     ]);

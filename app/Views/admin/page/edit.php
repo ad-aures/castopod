@@ -45,7 +45,7 @@
             'class' => 'form-textarea',
             'required' => 'required',
         ],
-        old('content', $page->content, false),
+        old('content', $page->content_markdown, false),
         'data-editor="markdown"',
     ) ?>
 </div>

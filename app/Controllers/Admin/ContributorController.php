@@ -107,9 +107,9 @@ class ContributorController extends BaseController
     {
         try {
             (new PodcastModel())->addPodcastContributor(
-                $this->request->getPost('user'),
+                (int) $this->request->getPost('user'),
                 $this->podcast->id,
-                $this->request->getPost('role'),
+                (int) $this->request->getPost('role'),
             );
         } catch (Exception) {
             return redirect()
@@ -157,7 +157,7 @@ class ContributorController extends BaseController
         (new PodcastModel())->updatePodcastContributor(
             $this->user->id,
             $this->podcast->id,
-            $this->request->getPost('role'),
+            (int) $this->request->getPost('role'),
         );
 
         return redirect()->route('contributor-list', [$this->podcast->id]);
