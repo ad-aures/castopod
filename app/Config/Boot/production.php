@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * --------------------------------------------------------------------------
  * ERROR DISPLAY
@@ -8,7 +10,7 @@
  * it and display a generic error message.
  */
 ini_set('display_errors', '0');
-error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT & ~E_USER_NOTICE & ~E_USER_DEPRECATED,);
+error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT & ~E_USER_NOTICE & ~E_USER_DEPRECATED);
 
 /**
  * --------------------------------------------------------------------------

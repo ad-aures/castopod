@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2021 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -71,7 +73,7 @@ class Person extends Entity
 
     public function getImage(): Image
     {
-        return new Image(null, $this->attributes['image_path'], $this->attributes['image_mimetype'],);
+        return new Image(null, $this->attributes['image_path'], $this->attributes['image_mimetype']);
     }
 
     /**
@@ -80,14 +82,14 @@ class Person extends Entity
     public function getRoles(): array
     {
         if ($this->attributes['podcast_id'] === null) {
-            throw new RuntimeException('Person must have a podcast_id before getting roles.',);
+            throw new RuntimeException('Person must have a podcast_id before getting roles.');
         }
 
         if ($this->roles === null) {
             $this->roles = (new PersonModel())->getPersonRoles(
                 $this->id,
-                $this->attributes['podcast_id'],
-                $this->attributes['episode_id'] ?? null
+                (int) $this->attributes['podcast_id'],
+                array_key_exists('episode_id', $this->attributes) ? (int) $this->attributes['episode_id'] : null
             );
         }
 

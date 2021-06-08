@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -20,7 +22,7 @@ if (! function_exists('get_file_tags')) {
     function get_file_tags(File $file): array
     {
         $getID3 = new GetID3();
-        $FileInfo = $getID3->analyze($file);
+        $FileInfo = $getID3->analyze((string) $file);
 
         return [
             'filesize' => $FileInfo['filesize'],

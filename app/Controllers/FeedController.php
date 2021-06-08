@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -33,10 +35,10 @@ class FeedController extends Controller
             $service = UserAgentsRSS::find($_SERVER['HTTP_USER_AGENT']);
         } catch (Exception $exception) {
             // If things go wrong the show must go on and the user must be able to download the file
-            log_message('critical', $exception);
+            log_message('critical', $exception->getMessage());
         }
 
-        $serviceSlug = null;
+        $serviceSlug = '';
         if ($service) {
             $serviceSlug = $service['slug'];
         }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -93,7 +95,7 @@ class PodcastPlatformController extends BaseController
                 ->with('message', lang('Platforms.messages.updateSuccess'));
         }
 
-        $platformModel->savePodcastPlatforms($this->podcast->id, $platformType, $podcastsPlatformsData,);
+        $platformModel->savePodcastPlatforms($this->podcast->id, $platformType, $podcastsPlatformsData);
 
         return redirect()
             ->back()
@@ -102,7 +104,7 @@ class PodcastPlatformController extends BaseController
 
     public function removePodcastPlatform(string $platformSlug): RedirectResponse
     {
-        (new PlatformModel())->removePodcastPlatform($this->podcast->id, $platformSlug,);
+        (new PlatformModel())->removePodcastPlatform($this->podcast->id, $platformSlug);
 
         return redirect()
             ->back()

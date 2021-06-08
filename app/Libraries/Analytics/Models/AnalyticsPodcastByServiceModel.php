@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Class AnalyticsPodcastByServiceModel Model for analytics_podcasts_by_player table in database
  *
@@ -58,7 +60,7 @@ class AnalyticsPodcastByServiceModel extends Model
                 ->orderBy('values', 'DESC')
                 ->findAll();
             cache()
-                ->save("{$podcastId}_analytics_podcasts_by_service_weekly", $found, 600,);
+                ->save("{$podcastId}_analytics_podcasts_by_service_weekly", $found, 600);
         }
         return $found;
     }

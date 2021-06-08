@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Class AddPreviewCards Creates activitypub_preview_cards table in database
  *

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Class AnalyticsPodcastByRegionModel Model for analytics_podcasts_by_region table in database
  *
@@ -60,7 +62,7 @@ class AnalyticsPodcastByRegionModel extends Model
                 ->findAll();
 
             cache()
-                ->save("{$podcastId}_analytics_podcast_by_region_{$locale}", $found, 600,);
+                ->save("{$podcastId}_analytics_podcast_by_region_{$locale}", $found, 600);
         }
         return $found;
     }

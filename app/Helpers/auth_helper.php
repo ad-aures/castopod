@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -73,7 +75,7 @@ if (! function_exists('interact_as_actor')) {
 
         $session = session();
         if ($session->has('interact_as_actor_id')) {
-            return model('ActorModel')->getActorById($session->get('interact_as_actor_id'),);
+            return model('ActorModel')->getActorById($session->get('interact_as_actor_id'));
         }
 
         return false;

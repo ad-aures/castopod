@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Class AddAnalyticsWebsiteProcedure Creates analytics_website stored procedure in database
  *

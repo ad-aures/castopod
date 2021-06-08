@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Config;
 
 use App\Entities\Actor;
@@ -50,7 +52,7 @@ Events::on('pre_system', function () {
      * @phpstan-ignore-next-line
      */
     if (CI_DEBUG && ! is_cli()) {
-        Events::on('DBQuery', 'CodeIgniter\Debug\Toolbar\Collectors\Database::collect',);
+        Events::on('DBQuery', 'CodeIgniter\Debug\Toolbar\Collectors\Database::collect');
         Services::toolbar()->respond();
     }
 });
@@ -76,47 +78,109 @@ Events::on('logout', function (User $user): void {
  * --------------------------------------------------------------------
  * ActivityPub events
  * --------------------------------------------------------------------
- * Update episode metadata counts
  */
-Events::on('on_note_add', function (Note $note): void {
+/**
+ * @param Actor $actor
+ * @param Actor $targetActor
+ */
+Events::on('on_follow', function ($actor, $targetActor): void {
+    if ($actor->is_podcast) {
+        cache()
+            ->deleteMatching("podcast#{$actor->podcast->id}*");
+        cache()
+            ->deleteMatching("page_podcast#{$actor->podcast->id}*");
+    }
+
+    if ($targetActor->is_podcast) {
+        cache()
+            ->deleteMatching("podcast#{$targetActor->podcast->id}*");
+        cache()
+            ->deleteMatching("page_podcast#{$targetActor->podcast->id}*");
+    }
+});
+
+/**
+ * @param Actor $actor
+ * @param Actor $targetActor
+ */
+Events::on('on_undo_follow', function ($actor, $targetActor): void {
+    if ($actor->is_podcast) {
+        cache()
+            ->deleteMatching("podcast#{$actor->podcast->id}*");
+        cache()
+            ->deleteMatching("page_podcast#{$actor->podcast->id}*");
+    }
+
+    if ($targetActor->is_podcast) {
+        cache()
+            ->deleteMatching("podcast#{$targetActor->podcast->id}*");
+        cache()
+            ->deleteMatching("page_podcast#{$targetActor->podcast->id}*");
+    }
+});
+
+/**
+ * @param Note $note
+ */
+Events::on('on_note_add', function ($note): void {
+    if ($note->is_reply) {
+        $note = $note->reply_to_note;
+    }
+
     if ($note->episode_id) {
         model('EpisodeModel')
             ->where('id', $note->episode_id)
             ->increment('notes_total');
     }
 
-    // Removing all of the podcast pages is a bit overkill, but works perfectly
-    // same for other events below
-    cache()
-        ->deleteMatching("page_podcast#{$note->actor->podcast->id}*");
-    cache()
-        ->deleteMatching("podcast#{$note->actor->podcast->id}*");
+    if ($note->actor->is_podcast) {
+        // Removing all of the podcast pages is a bit overkill, but works to avoid caching bugs
+        // same for other events below
+        cache()
+            ->deleteMatching("podcast#{$note->actor->podcast->id}*");
+        cache()
+            ->deleteMatching("page_podcast#{$note->actor->podcast->id}*");
+    }
 });
 
-Events::on('on_note_remove', function (Note $note): void {
-    if ($note->episode_id) {
+/**
+ * @param Note $note
+ */
+Events::on('on_note_remove', function ($note): void {
+    if ($note->is_reply) {
+        Events::trigger('on_note_remove', $note->reply_to_note);
+    }
+
+    if ($episodeId = $note->episode_id) {
         model('EpisodeModel')
-            ->where('id', $note->episode_id)
+            ->where('id', $episodeId)
             ->decrement('notes_total', 1 + $note->reblogs_count);
 
         model('EpisodeModel')
-            ->where('id', $note->episode_id)
+            ->where('id', $episodeId)
             ->decrement('reblogs_total', $note->reblogs_count);
 
         model('EpisodeModel')
-            ->where('id', $note->episode_id)
+            ->where('id', $episodeId)
             ->decrement('favourites_total', $note->favourites_count);
     }
 
-    cache()
-        ->deleteMatching("page_podcast#{$note->actor->podcast->id}*");
-    cache()
-        ->deleteMatching("podcast#{$note->actor->podcast->id}*");
+    if ($note->actor->is_podcast) {
+        cache()
+            ->deleteMatching("podcast#{$note->actor->podcast->id}*");
+        cache()
+            ->deleteMatching("page_podcast#{$note->actor->podcast->id}*");
+    }
+
     cache()
         ->deleteMatching("page_note#{$note->id}*");
 });
 
-Events::on('on_note_reblog', function (Actor $actor, Note $note): void {
+/**
+ * @param Actor $actor
+ * @param Note $note
+ */
+Events::on('on_note_reblog', function ($actor, $note): void {
     if ($episodeId = $note->episode_id) {
         model('EpisodeModel')
             ->where('id', $episodeId)
@@ -127,19 +191,31 @@ Events::on('on_note_reblog', function (Actor $actor, Note $note): void {
             ->increment('notes_total');
     }
 
-    cache()
-        ->deleteMatching("page_podcast#{$note->actor->podcast->id}*");
-    cache()
-        ->deleteMatching("podcast#{$note->actor->podcast->id}*");
+    if ($note->actor->is_podcast) {
+        cache()
+            ->deleteMatching("podcast#{$note->actor->podcast->id}*");
+        cache()
+            ->deleteMatching("page_podcast#{$note->actor->podcast->id}*");
+    }
+
+    if ($actor->is_podcast) {
+        cache()->deleteMatching("podcast#{$actor->podcast->id}*");
+        cache()
+            ->deleteMatching("page_podcast#{$actor->podcast->id}*");
+    }
+
     cache()
         ->deleteMatching("page_note#{$note->id}*");
 
-    if ($actor->is_podcast) {
-        cache()->deleteMatching("page_podcast#{$actor->podcast->id}*");
+    if ($note->is_reply) {
+        cache()->deleteMatching("page_note#{$note->in_reply_to_id}");
     }
 });
 
-Events::on('on_note_undo_reblog', function (Note $reblogNote): void {
+/**
+ * @param Note $reblogNote
+ */
+Events::on('on_note_undo_reblog', function ($reblogNote): void {
     $note = $reblogNote->reblog_of_note;
     if ($episodeId = $note->episode_id) {
         model('EpisodeModel')
@@ -151,73 +227,127 @@ Events::on('on_note_undo_reblog', function (Note $reblogNote): void {
             ->decrement('notes_total');
     }
 
-    cache()
-        ->deleteMatching("page_podcast#{$note->actor->podcast->id}*");
-    cache()
-        ->deleteMatching("podcast#{$note->actor->podcast->id}*");
+    if ($note->actor->is_podcast) {
+        cache()
+            ->deleteMatching("podcast#{$note->actor->podcast->id}*");
+        cache()
+            ->deleteMatching("page_podcast#{$note->actor->podcast->id}*");
+    }
+
     cache()
         ->deleteMatching("page_note#{$note->id}*");
+    cache()
+        ->deleteMatching("page_note#{$reblogNote->id}*");
+
+    if ($note->is_reply) {
+        cache()->deleteMatching("page_note#{$note->in_reply_to_id}");
+    }
 
     if ($reblogNote->actor->is_podcast) {
-        cache()->deleteMatching("page_podcast#{$reblogNote->actor->podcast->id}*",);
+        cache()
+            ->deleteMatching("podcast#{$reblogNote->actor->podcast->id}*");
+        cache()
+            ->deleteMatching("page_podcast#{$reblogNote->actor->podcast->id}*");
     }
 });
 
-Events::on('on_note_reply', function (Note $reply): void {
+/**
+ * @param Note $reply
+ */
+Events::on('on_note_reply', function ($reply): void {
     $note = $reply->reply_to_note;
 
-    cache()
-        ->deleteMatching("page_podcast#{$note->actor->podcast->id}*");
+    if ($note->actor->is_podcast) {
+        cache()
+            ->deleteMatching("podcast#{$note->actor->podcast->id}*");
+        cache()
+            ->deleteMatching("page_podcast#{$note->actor->podcast->id}*");
+    }
+
     cache()
         ->deleteMatching("page_note#{$note->id}*");
 });
 
-Events::on('on_reply_remove', function (Note $reply): void {
+/**
+ * @param Note $reply
+ */
+Events::on('on_reply_remove', function ($reply): void {
     $note = $reply->reply_to_note;
 
-    cache()
-        ->deleteMatching("page_podcast#{$note->actor->podcast->id}*");
-    cache()
-        ->deleteMatching("podcast#{$note->actor->podcast->id}*");
+    if ($note->actor->is_podcast) {
+        cache()
+            ->deleteMatching("page_podcast#{$note->actor->podcast->id}*");
+        cache()
+            ->deleteMatching("podcast#{$note->actor->podcast->id}*");
+    }
+
     cache()
         ->deleteMatching("page_note#{$note->id}*");
+    cache()
+        ->deleteMatching("page_note#{$reply->id}*");
 });
 
-Events::on('on_note_favourite', function (Actor $actor, Note $note): void {
+/**
+ * @param Actor $actor
+ * @param Note $note
+ */
+Events::on('on_note_favourite', function ($actor, $note): void {
     if ($note->episode_id) {
         model('EpisodeModel')
             ->where('id', $note->episode_id)
             ->increment('favourites_total');
     }
 
-    cache()
-        ->deleteMatching("page_podcast#{$actor->podcast->id}*");
-    cache()
-        ->deleteMatching("podcast#{$actor->podcast->id}*");
+    if ($note->actor->is_podcast) {
+        cache()
+            ->deleteMatching("podcast#{$note->actor->podcast->id}*");
+        cache()
+            ->deleteMatching("page_podcast#{$note->actor->podcast->id}*");
+    }
+
     cache()
         ->deleteMatching("page_note#{$note->id}*");
 
-    if ($note->in_reply_to_id) {
+    if ($note->is_reply) {
         cache()->deleteMatching("page_note#{$note->in_reply_to_id}*");
+    }
+
+    if ($actor->is_podcast) {
+        cache()->deleteMatching("podcast#{$actor->podcast->id}*");
+        cache()
+            ->deleteMatching("page_podcast#{$actor->podcast->id}*");
     }
 });
 
-Events::on('on_note_undo_favourite', function (Actor $actor, Note $note): void {
+/**
+ * @param Actor $actor
+ * @param Note $note
+ */
+Events::on('on_note_undo_favourite', function ($actor, $note): void {
     if ($note->episode_id) {
         model('EpisodeModel')
             ->where('id', $note->episode_id)
             ->decrement('favourites_total');
     }
 
-    cache()
-        ->deleteMatching("page_podcast#{$actor->podcast->id}*");
-    cache()
-        ->deleteMatching("podcast#{$actor->podcast->id}*");
+    if ($note->actor->is_podcast) {
+        cache()
+            ->deleteMatching("podcast#{$note->actor->podcast->id}*");
+        cache()
+            ->deleteMatching("page_podcast#{$note->actor->podcast->id}*");
+    }
+
     cache()
         ->deleteMatching("page_note#{$note->id}*");
 
-    if ($note->in_reply_to_id) {
+    if ($note->is_reply) {
         cache()->deleteMatching("page_note#{$note->in_reply_to_id}*");
+    }
+
+    if ($actor->is_podcast) {
+        cache()->deleteMatching("podcast#{$actor->podcast->id}*");
+        cache()
+            ->deleteMatching("page_podcast#{$actor->podcast->id}*");
     }
 });
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Class AddAnalyticsPodcasts Creates analytics_podcasts table in database
  *
@@ -44,7 +46,7 @@ class AddAnalyticsPodcasts extends Migration
             ],
         ]);
         $this->forge->addPrimaryKey(['podcast_id', 'date']);
-        $this->forge->addField('`created_at` timestamp NOT NULL DEFAULT current_timestamp()',);
+        $this->forge->addField('`created_at` timestamp NOT NULL DEFAULT current_timestamp()');
         $this->forge->addField(
             '`updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()',
         );

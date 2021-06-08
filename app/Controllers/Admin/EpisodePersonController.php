@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -88,7 +90,7 @@ class EpisodePersonController extends BaseController
 
     public function remove(int $personId): RedirectResponse
     {
-        (new PersonModel())->removePersonFromEpisode($this->podcast->id, $this->episode->id, $personId,);
+        (new PersonModel())->removePersonFromEpisode($this->podcast->id, $this->episode->id, $personId);
 
         return redirect()->back();
     }

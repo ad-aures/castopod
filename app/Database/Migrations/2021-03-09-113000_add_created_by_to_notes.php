@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Class AddCreatedByToNotes Adds created_by field to activitypub_notes table in database
  *
@@ -28,7 +30,7 @@ class AddCreatedByToNotes extends Migration
 
     public function down(): void
     {
-        $this->forge->dropForeignKey('activitypub_notes', 'activitypub_notes_created_by_foreign',);
+        $this->forge->dropForeignKey('activitypub_notes', 'activitypub_notes_created_by_foreign');
         $this->forge->dropColumn('activitypub_notes', 'created_by');
     }
 }

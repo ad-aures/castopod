@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -15,6 +17,7 @@ use App\Entities\Actor;
 use App\Entities\Note as CastopodNote;
 use App\Entities\Podcast;
 use App\Models\EpisodeModel;
+use App\Models\NoteModel;
 use App\Models\PodcastModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
@@ -46,7 +49,7 @@ class NoteController extends ActivityPubNoteController
 
         if (
             count($params) > 1 &&
-            ! ($this->note = model('NoteModel')->getNoteById($params[1]))
+            ! ($this->note = (new NoteModel())->getNoteById($params[1]))
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
@@ -129,14 +132,15 @@ class NoteController extends ActivityPubNoteController
 
         $newNote->message = $message;
 
+        $noteModel = new NoteModel();
         if (
-            ! model('NoteModel')
+            ! $noteModel
                 ->addNote($newNote, ! (bool) $newNote->episode_id, true,)
         ) {
             return redirect()
                 ->back()
                 ->withInput()
-                ->with('errors', model('NoteModel')->errors());
+                ->with('errors', $noteModel->errors());
         }
 
         // Note has been successfully created
@@ -164,11 +168,12 @@ class NoteController extends ActivityPubNoteController
             'created_by' => user_id(),
         ]);
 
-        if (! model('NoteModel')->addReply($newNote)) {
+        $noteModel = new NoteModel();
+        if (! $noteModel->addReply($newNote)) {
             return redirect()
                 ->back()
                 ->withInput()
-                ->with('errors', model('NoteModel')->errors());
+                ->with('errors', $noteModel->errors());
         }
 
         // Reply note without preview card has been successfully created
@@ -177,14 +182,14 @@ class NoteController extends ActivityPubNoteController
 
     public function attemptFavourite(): RedirectResponse
     {
-        model('FavouriteModel')->toggleFavourite(interact_as_actor(), $this->note,);
+        model('FavouriteModel')->toggleFavourite(interact_as_actor(), $this->note);
 
         return redirect()->back();
     }
 
     public function attemptReblog(): RedirectResponse
     {
-        model('NoteModel')->toggleReblog(interact_as_actor(), $this->note);
+        (new NoteModel())->toggleReblog(interact_as_actor(), $this->note);
 
         return redirect()->back();
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -18,7 +20,7 @@ if (! function_exists('icon')) {
     {
         $svgContents = file_get_contents('assets/icons/' . $name . '.svg');
         if ($class !== '') {
-            $svgContents = str_replace('<svg', '<svg class="' . $class . '"', $svgContents,);
+            $svgContents = str_replace('<svg', '<svg class="' . $class . '"', $svgContents);
         }
 
         return $svgContents;
@@ -37,7 +39,7 @@ if (! function_exists('svg')) {
     {
         $svgContents = file_get_contents('assets/images/' . $name . '.svg');
         if ($class) {
-            $svgContents = str_replace('<svg', '<svg class="' . $class . '"', $svgContents,);
+            $svgContents = str_replace('<svg', '<svg class="' . $class . '"', $svgContents);
         }
         return $svgContents;
     }

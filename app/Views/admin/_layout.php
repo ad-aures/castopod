@@ -46,7 +46,7 @@
     <footer class="px-2 py-2 mx-auto text-xs text-right holy-grail-footer">
         <?= lang('Common.powered_by', [
             'castopod' =>
-                '<a class="underline hover:no-underline" href="https://castopod.org/" target="_blank" rel="noreferrer noopener">Castopod</a> v' .
+                '<a class="underline hover:no-underline" href="https://castopod.org/" target="_blank" rel="noreferrer noopener">Castopod</a> ' .
                 CP_VERSION,
         ]) ?>
     </footer>

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Class AddPodcastUsers Creates podcast_users table in database
  *
@@ -32,8 +34,8 @@ class AddPodcastsUsers extends Migration
         ]);
         $this->forge->addPrimaryKey(['user_id', 'podcast_id']);
         $this->forge->addForeignKey('user_id', 'users', 'id', '', 'CASCADE');
-        $this->forge->addForeignKey('podcast_id', 'podcasts', 'id', '', 'CASCADE',);
-        $this->forge->addForeignKey('group_id', 'auth_groups', 'id', '', 'CASCADE',);
+        $this->forge->addForeignKey('podcast_id', 'podcasts', 'id', '', 'CASCADE');
+        $this->forge->addForeignKey('group_id', 'auth_groups', 'id', '', 'CASCADE');
         $this->forge->createTable('podcasts_users');
     }
 

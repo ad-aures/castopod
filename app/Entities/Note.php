@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -47,11 +49,11 @@ class Note extends ActivityPubNote
     public function getEpisode(): ?Episode
     {
         if ($this->episode_id === null) {
-            throw new RuntimeException('Note must have an episode_id before getting episode.',);
+            throw new RuntimeException('Note must have an episode_id before getting episode.');
         }
 
         if ($this->episode === null) {
-            $this->episode = (new EpisodeModel())->getEpisodeById($this->episode_id,);
+            $this->episode = (new EpisodeModel())->getEpisodeById($this->episode_id);
         }
 
         return $this->episode;

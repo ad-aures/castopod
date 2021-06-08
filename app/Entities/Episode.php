@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -178,7 +180,7 @@ class Episode extends Entity
         }
 
         // Save image
-        $image->saveImage('podcasts/' . $this->getPodcast()->name, $this->attributes['slug'],);
+        $image->saveImage('podcasts/' . $this->getPodcast()->name, $this->attributes['slug']);
 
         $this->attributes['image_mimetype'] = $image->mimetype;
         $this->attributes['image_path'] = $image->path;
@@ -189,7 +191,7 @@ class Episode extends Entity
     public function getImage(): Image
     {
         if ($imagePath = $this->attributes['image_path']) {
-            return new Image(null, $imagePath, $this->attributes['image_mimetype'],);
+            return new Image(null, $imagePath, $this->attributes['image_mimetype']);
         }
 
         return $this->getPodcast()
@@ -266,7 +268,7 @@ class Episode extends Entity
         if ($this->attributes['transcript_file_path']) {
             helper('media');
 
-            return new File(media_path($this->attributes['transcript_file_path']),);
+            return new File(media_path($this->attributes['transcript_file_path']));
         }
 
         return null;
@@ -277,7 +279,7 @@ class Episode extends Entity
         if ($this->attributes['chapters_file_path']) {
             helper('media');
 
-            return new File(media_path($this->attributes['chapters_file_path']),);
+            return new File(media_path($this->attributes['chapters_file_path']));
         }
 
         return null;
@@ -348,11 +350,11 @@ class Episode extends Entity
     public function getPersons(): array
     {
         if ($this->id === null) {
-            throw new RuntimeException('Episode must be created before getting persons.',);
+            throw new RuntimeException('Episode must be created before getting persons.');
         }
 
         if ($this->persons === null) {
-            $this->persons = (new PersonModel())->getEpisodePersons($this->podcast_id, $this->id,);
+            $this->persons = (new PersonModel())->getEpisodePersons($this->podcast_id, $this->id);
         }
 
         return $this->persons;
@@ -366,11 +368,11 @@ class Episode extends Entity
     public function getSoundbites(): array
     {
         if ($this->id === null) {
-            throw new RuntimeException('Episode must be created before getting soundbites.',);
+            throw new RuntimeException('Episode must be created before getting soundbites.');
         }
 
         if ($this->soundbites === null) {
-            $this->soundbites = (new SoundbiteModel())->getEpisodeSoundbites($this->getPodcast() ->id, $this->id,);
+            $this->soundbites = (new SoundbiteModel())->getEpisodeSoundbites($this->getPodcast() ->id, $this->id);
         }
 
         return $this->soundbites;
@@ -382,7 +384,7 @@ class Episode extends Entity
     public function getNotes(): array
     {
         if ($this->id === null) {
-            throw new RuntimeException('Episode must be created before getting soundbites.',);
+            throw new RuntimeException('Episode must be created before getting soundbites.');
         }
 
         if ($this->notes === null) {
@@ -394,7 +396,7 @@ class Episode extends Entity
 
     public function getLink(): string
     {
-        return base_url(route_to('episode', $this->getPodcast() ->name, $this->attributes['slug'],),);
+        return base_url(route_to('episode', $this->getPodcast() ->name, $this->attributes['slug'],));
     }
 
     public function getEmbeddablePlayerUrl(string $theme = null): string
@@ -421,7 +423,7 @@ class Episode extends Entity
 
     public function getPodcast(): ?Podcast
     {
-        return (new PodcastModel())->getPodcastById($this->attributes['podcast_id'],);
+        return (new PodcastModel())->getPodcastById($this->podcast_id);
     }
 
     public function setDescriptionMarkdown(string $descriptionMarkdown): static
@@ -432,7 +434,7 @@ class Episode extends Entity
         ]);
 
         $this->attributes['description_markdown'] = $descriptionMarkdown;
-        $this->attributes['description_html'] = $converter->convertToHtml($descriptionMarkdown,);
+        $this->attributes['description_html'] = $converter->convertToHtml($descriptionMarkdown);
 
         return $this;
     }
@@ -525,7 +527,7 @@ class Episode extends Entity
         }
 
         if ($this->location === null) {
-            $this->location = new Location($this->location_name, $this->location_geo, $this->location_osm,);
+            $this->location = new Location($this->location_name, $this->location_geo, $this->location_osm);
         }
 
         return $this->location;
@@ -549,7 +551,7 @@ class Episode extends Entity
             ->addChild('item');
         array_to_rss([
             'elements' => $this->custom_rss,
-        ], $xmlNode,);
+        ], $xmlNode);
 
         return str_replace(['<item>', '</item>'], '', $xmlNode->asXML());
     }
@@ -573,7 +575,7 @@ class Episode extends Entity
         )['elements'][0]['elements'][0];
 
         if (array_key_exists('elements', $customRssArray)) {
-            $this->attributes['custom_rss'] = json_encode($customRssArray['elements'],);
+            $this->attributes['custom_rss'] = json_encode($customRssArray['elements']);
         } else {
             $this->attributes['custom_rss'] = null;
         }

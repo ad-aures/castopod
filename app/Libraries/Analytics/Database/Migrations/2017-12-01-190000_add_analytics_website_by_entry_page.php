@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Class AddAnalyticsWebsiteByEntryPage Creates analytics_website_by_entry_page table in database
  *
@@ -35,7 +37,7 @@ class AddAnalyticsWebsiteByEntryPage extends Migration
             ],
         ]);
         $this->forge->addPrimaryKey(['podcast_id', 'date', 'entry_page_url']);
-        $this->forge->addField('`created_at` timestamp NOT NULL DEFAULT current_timestamp()',);
+        $this->forge->addField('`created_at` timestamp NOT NULL DEFAULT current_timestamp()');
         $this->forge->addField(
             '`updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()',
         );

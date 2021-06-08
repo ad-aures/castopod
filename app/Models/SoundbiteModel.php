@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Class SoundbiteModel Model for podcasts_soundbites table in database
  *
@@ -112,14 +114,14 @@ class SoundbiteModel extends Model
         );
 
         cache()
-            ->delete("podcast#{$episode->podcast_id}_episode#{$episode->id}_soundbites",);
+            ->delete("podcast#{$episode->podcast_id}_episode#{$episode->id}_soundbites");
 
         // delete cache for rss feed
         cache()
             ->deleteMatching("podcast#{$episode->podcast_id}_feed*");
 
         cache()
-            ->deleteMatching("page_podcast#{$episode->podcast_id}_episode#{$episode->id}_*",);
+            ->deleteMatching("page_podcast#{$episode->podcast_id}_episode#{$episode->id}_*");
 
         return $data;
     }

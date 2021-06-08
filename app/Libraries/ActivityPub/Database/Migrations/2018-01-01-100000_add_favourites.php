@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Class AddFavourites Creates activitypub_favourites table in database
  *
@@ -26,10 +28,10 @@ class AddFavourites extends Migration
                 'constraint' => 16,
             ],
         ]);
-        $this->forge->addField('`created_at` timestamp NOT NULL DEFAULT current_timestamp()',);
+        $this->forge->addField('`created_at` timestamp NOT NULL DEFAULT current_timestamp()');
         $this->forge->addPrimaryKey(['actor_id', 'note_id']);
-        $this->forge->addForeignKey('actor_id', 'activitypub_actors', 'id', '', 'CASCADE',);
-        $this->forge->addForeignKey('note_id', 'activitypub_notes', 'id', '', 'CASCADE',);
+        $this->forge->addForeignKey('actor_id', 'activitypub_actors', 'id', '', 'CASCADE');
+        $this->forge->addForeignKey('note_id', 'activitypub_notes', 'id', '', 'CASCADE');
         $this->forge->createTable('activitypub_favourites');
     }
 

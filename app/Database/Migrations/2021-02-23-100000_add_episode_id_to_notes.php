@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Class AddEpisodeIdToNotes Adds episode_id field to activitypub_notes table in database
  *
@@ -28,7 +30,7 @@ class AddEpisodeIdToNotes extends Migration
 
     public function down(): void
     {
-        $this->forge->dropForeignKey('activitypub_notes', 'activitypub_notes_episode_id_foreign',);
+        $this->forge->dropForeignKey('activitypub_notes', 'activitypub_notes_episode_id_foreign');
         $this->forge->dropColumn('activitypub_notes', 'episode_id');
     }
 }

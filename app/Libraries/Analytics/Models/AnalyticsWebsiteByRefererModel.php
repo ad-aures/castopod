@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Class AnalyticsWebsiteByRefererModel Model for analytics_website_by_referer table in database
  *
@@ -54,7 +56,7 @@ class AnalyticsWebsiteByRefererModel extends Model
                 ->orderBy('values', 'DESC')
                 ->findAll();
             cache()
-                ->save("{$podcastId}_analytics_website_by_referer", $found, 600,);
+                ->save("{$podcastId}_analytics_website_by_referer", $found, 600);
         }
         return $found;
     }
@@ -80,7 +82,7 @@ class AnalyticsWebsiteByRefererModel extends Model
                 ->orderBy('values', 'DESC')
                 ->findAll();
             cache()
-                ->save("{$podcastId}_analytics_website_by_domain_weekly", $found, 600,);
+                ->save("{$podcastId}_analytics_website_by_domain_weekly", $found, 600);
         }
         return $found;
     }
@@ -106,7 +108,7 @@ class AnalyticsWebsiteByRefererModel extends Model
                 ->orderBy('values', 'DESC')
                 ->findAll();
             cache()
-                ->save("{$podcastId}_analytics_website_by_domain_yearly", $found, 600,);
+                ->save("{$podcastId}_analytics_website_by_domain_yearly", $found, 600);
         }
         return $found;
     }

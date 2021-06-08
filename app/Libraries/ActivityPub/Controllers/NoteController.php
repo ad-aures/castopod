@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2021 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -15,6 +17,7 @@ use ActivityPub\Objects\OrderedCollectionPage;
 use CodeIgniter\Controller;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
+use CodeIgniter\HTTP\Response;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\I18n\Time;
 
@@ -44,7 +47,10 @@ class NoteController extends Controller
         return $this->{$method}(...$params);
     }
 
-    public function index(): RedirectResponse
+    /**
+     * @noRector ReturnTypeDeclarationRector
+     */
+    public function index(): Response
     {
         $noteObjectClass = $this->config->noteObject;
         $noteObject = new $noteObjectClass($this->note);
@@ -54,7 +60,10 @@ class NoteController extends Controller
             ->setBody($noteObject->toJSON());
     }
 
-    public function replies(): RedirectResponse
+    /**
+     * @noRector ReturnTypeDeclarationRector
+     */
+    public function replies(): Response
     {
         /**
          * get note replies
@@ -71,7 +80,7 @@ class NoteController extends Controller
             $pager = $noteReplies->pager;
             $collection = new OrderedCollectionObject(null, $pager);
         } else {
-            $paginatedReplies = $noteReplies->paginate(12, 'default', $pageNumber,);
+            $paginatedReplies = $noteReplies->paginate(12, 'default', $pageNumber);
             $pager = $noteReplies->pager;
 
             $orderedItems = [];
@@ -138,7 +147,7 @@ class NoteController extends Controller
         }
 
         $actor = model('ActorModel')
-            ->getActorById($this->request->getPost('actor_id'),);
+            ->getActorById($this->request->getPost('actor_id'));
 
         model('FavouriteModel')
             ->toggleFavourite($actor, $this->note->id);
@@ -160,7 +169,7 @@ class NoteController extends Controller
         }
 
         $actor = model('ActorModel')
-            ->getActorById($this->request->getPost('actor_id'),);
+            ->getActorById($this->request->getPost('actor_id'));
 
         model('NoteModel')
             ->toggleReblog($actor, $this->note);

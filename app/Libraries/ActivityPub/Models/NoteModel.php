@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2021 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -138,10 +140,10 @@ class NoteModel extends UuidModel
                 ->orderBy('published_at', 'DESC')
                 ->findAll();
 
-            $secondsToNextUnpublishedNote = $this->getSecondsToNextUnpublishedNote($actorId,);
+            $secondsToNextUnpublishedNote = $this->getSecondsToNextUnpublishedNote($actorId);
 
             cache()
-                ->save($cacheName, $found, $secondsToNextUnpublishedNote ? $secondsToNextUnpublishedNote : DECADE,);
+                ->save($cacheName, $found, $secondsToNextUnpublishedNote ? $secondsToNextUnpublishedNote : DECADE);
         }
 
         return $found;
@@ -273,19 +275,10 @@ class NoteModel extends UuidModel
             ->where('id', $note->actor_id)
             ->increment('notes_count');
 
-        $cachePrefix = config('ActivityPub')
-            ->cachePrefix;
-        cache()
-            ->delete($cachePrefix . "actor#{$note->actor_id}");
-        cache()
-            ->delete($cachePrefix . "actor#{$note->actor_id}_published_notes",);
-
-        Events::trigger('on_note_add', $note);
-
         if ($registerActivity) {
             // set note id and uri to construct NoteObject
             $note->id = $newNoteId;
-            $note->uri = base_url(route_to('note', $note->actor->username, $newNoteId),);
+            $note->uri = base_url(route_to('note', $note->actor->username, $newNoteId));
 
             $createActivity = new CreateActivity();
             $noteObjectClass = config('ActivityPub')
@@ -305,13 +298,17 @@ class NoteModel extends UuidModel
                     'queued',
                 );
 
-            $createActivity->set('id', base_url(route_to('activity', $note->actor->username, $activityId),),);
+            $createActivity->set('id', base_url(route_to('activity', $note->actor->username, $activityId),));
 
             model('ActivityModel')
                 ->update($activityId, [
                     'payload' => $createActivity->toJSON(),
                 ]);
         }
+
+        Events::trigger('on_note_add', $note);
+
+        $this->clearCache($note);
 
         $this->db->transComplete();
 
@@ -334,7 +331,7 @@ class NoteModel extends UuidModel
 
         // update published date in payload
         $newPayload = $scheduledActivity->payload;
-        $newPayload->object->published = $updatedNote->published_at->format(DATE_W3C,);
+        $newPayload->object->published = $updatedNote->published_at->format(DATE_W3C);
         model('ActivityModel')
             ->update($scheduledActivity->id, [
                 'payload' => json_encode($newPayload, JSON_THROW_ON_ERROR),
@@ -344,14 +341,9 @@ class NoteModel extends UuidModel
         // update note
         $updateResult = $this->update($updatedNote->id, $updatedNote);
 
-        // Clear note cache
-        $prefix = config('ActivityPub')
-            ->cachePrefix;
-        $hashedNoteUri = md5($updatedNote->uri);
-        cache()
-            ->delete($prefix . "note#{$updatedNote->id}");
-        cache()
-            ->delete($prefix . "note-{$hashedNoteUri}");
+        Events::trigger('on_note_edit', $updatedNote);
+
+        $this->clearCache($updatedNote);
 
         $this->db->transComplete();
 
@@ -365,32 +357,15 @@ class NoteModel extends UuidModel
     {
         $this->db->transStart();
 
-        $cachePrefix = config('ActivityPub')
-            ->cachePrefix;
-
         model('ActorModel')
             ->where('id', $note->actor_id)
             ->decrement('notes_count');
-        cache()
-            ->delete($cachePrefix . "actor#{$note->actor_id}");
-        cache()
-            ->delete($cachePrefix . "actor#{$note->actor_id}_published_notes",);
 
-        if ($note->in_reply_to_id) {
+        if ($note->is_reply) {
             // Note to remove is a reply
             model('NoteModel')
                 ->where('id', $this->uuid->fromString($note->in_reply_to_id) ->getBytes(),)
                 ->decrement('replies_count');
-
-            $replyToNote = $note->reply_to_note;
-            cache()
-                ->delete($cachePrefix . "note#{$replyToNote->id}");
-            cache()
-                ->delete($cachePrefix . "note-{$replyToNote->uri}");
-            cache()
-                ->delete($cachePrefix . "note#{$replyToNote->id}_replies");
-            cache()
-                ->delete($cachePrefix . "note#{$replyToNote->id}_replies_withBlocked",);
 
             Events::trigger('on_reply_remove', $note);
         }
@@ -405,7 +380,7 @@ class NoteModel extends UuidModel
             $this->removeNote($reply);
         }
 
-        // check that preview card in no longer used elsewhere before deleting it
+        // check that preview card is no longer used elsewhere before deleting it
         if (
             $note->preview_card &&
             $this->db
@@ -413,10 +388,8 @@ class NoteModel extends UuidModel
                 ->where('preview_card_id', $note->preview_card->id)
                 ->countAll() <= 1
         ) {
-            model('PreviewCardModel')->deletePreviewCard($note->preview_card->id, $note->preview_card->url,);
+            model('PreviewCardModel')->deletePreviewCard($note->preview_card->id, $note->preview_card->url);
         }
-
-        Events::trigger('on_note_remove', $note);
 
         if ($registerActivity) {
             $deleteActivity = new DeleteActivity();
@@ -437,7 +410,7 @@ class NoteModel extends UuidModel
                     'queued',
                 );
 
-            $deleteActivity->set('id', base_url(route_to('activity', $note->actor->username, $activityId),),);
+            $deleteActivity->set('id', base_url(route_to('activity', $note->actor->username, $activityId),));
 
             model('ActivityModel')
                 ->update($activityId, [
@@ -445,23 +418,12 @@ class NoteModel extends UuidModel
                 ]);
         }
 
-        // clear note + replies / reblogs + actor  and its published notes
-        $hashedNoteUri = md5($note->uri);
-        cache()
-            ->delete($cachePrefix . "note#{$note->id}");
-        cache()
-            ->delete($cachePrefix . "note-{$hashedNoteUri}");
-        cache()
-            ->delete($cachePrefix . "note#{$note->id}_replies");
-        cache()
-            ->delete($cachePrefix . "note#{$note->id}_replies_withBlocked");
-        cache()
-            ->delete($cachePrefix . "note#{$note->id}_reblogs");
-        cache()
-            ->delete($cachePrefix . "note#{$note->id}_preview_card");
-
         $result = model('NoteModel', false)
             ->delete($note->id);
+
+        Events::trigger('on_note_remove', $note);
+
+        $this->clearCache($note);
 
         $this->db->transComplete();
 
@@ -485,19 +447,9 @@ class NoteModel extends UuidModel
             ->where('id', $this->uuid->fromString($reply->in_reply_to_id) ->getBytes(),)
             ->increment('replies_count');
 
-        $prefix = config('ActivityPub')
-            ->cachePrefix;
-        $hashedNoteUri = md5($reply->reply_to_note->uri);
-        cache()
-            ->delete($prefix . "note#{$reply->in_reply_to_id}");
-        cache()
-            ->delete($prefix . "note-{$hashedNoteUri}");
-        cache()
-            ->delete($prefix . "note#{$reply->in_reply_to_id}_replies");
-        cache()
-            ->delete($prefix . "note#{$reply->in_reply_to_id}_replies_withBlocked",);
-
         Events::trigger('on_note_reply', $reply);
+
+        $this->clearCache($reply);
 
         $this->db->transComplete();
 
@@ -521,26 +473,9 @@ class NoteModel extends UuidModel
             ->where('id', $actor->id)
             ->increment('notes_count');
 
-        $prefix = config('ActivityPub')
-            ->cachePrefix;
-        cache()
-            ->delete($prefix . "actor#{$note->actor_id}");
-        cache()
-            ->delete($prefix . "actor#{$note->actor_id}_published_notes");
-
         model('NoteModel')
             ->where('id', $this->uuid->fromString($note->id)->getBytes())
             ->increment('reblogs_count');
-
-        $hashedNoteUri = md5($note->uri);
-        cache()
-            ->delete($prefix . "note#{$note->id}");
-        cache()
-            ->delete($prefix . "note-{$hashedNoteUri}");
-        cache()
-            ->delete($prefix . "note#{$note->id}_reblogs");
-
-        Events::trigger('on_note_reblog', $actor, $note);
 
         if ($registerActivity) {
             $announceActivity = new AnnounceActivity($reblog);
@@ -556,13 +491,17 @@ class NoteModel extends UuidModel
                     'queued',
                 );
 
-            $announceActivity->set('id', base_url(route_to('activity', $note->actor->username, $activityId),),);
+            $announceActivity->set('id', base_url(route_to('activity', $note->actor->username, $activityId),));
 
             model('ActivityModel')
                 ->update($activityId, [
                     'payload' => $announceActivity->toJSON(),
                 ]);
         }
+
+        Events::trigger('on_note_reblog', $actor, $note);
+
+        $this->clearCache($note);
 
         $this->db->transComplete();
 
@@ -577,29 +516,9 @@ class NoteModel extends UuidModel
             ->where('id', $reblogNote->actor_id)
             ->decrement('notes_count');
 
-        $cachePrefix = config('ActivityPub')
-            ->cachePrefix;
-        cache()
-            ->delete($cachePrefix . "actor#{$reblogNote->actor_id}");
-        cache()
-            ->delete($cachePrefix . "actor#{$reblogNote->actor_id}_published_notes",);
-
         model('NoteModel')
             ->where('id', $this->uuid->fromString($reblogNote->reblog_of_id) ->getBytes(),)
             ->decrement('reblogs_count');
-
-        $hashedReblogNoteUri = md5($reblogNote->uri);
-        $hashedNoteUri = md5($reblogNote->reblog_of_note->uri);
-        cache()
-            ->delete($cachePrefix . "note#{$reblogNote->id}");
-        cache()
-            ->delete($cachePrefix . "note-{$hashedReblogNoteUri}");
-        cache()
-            ->delete($cachePrefix . "note#{$reblogNote->reblog_of_id}");
-        cache()
-            ->delete($cachePrefix . "note-{$hashedNoteUri}");
-
-        Events::trigger('on_note_undo_reblog', $reblogNote);
 
         if ($registerActivity) {
             $undoActivity = new UndoActivity();
@@ -649,6 +568,10 @@ class NoteModel extends UuidModel
         $result = model('NoteModel', false)
             ->delete($reblogNote->id);
 
+        Events::trigger('on_note_undo_reblog', $reblogNote);
+
+        $this->clearCache($reblogNote);
+
         $this->db->transComplete();
 
         return $result;
@@ -670,6 +593,29 @@ class NoteModel extends UuidModel
         }
     }
 
+    public function clearCache(Note $note): void
+    {
+        $cachePrefix = config('ActivityPub')
+            ->cachePrefix;
+
+        $hashedNoteUri = md5($note->uri);
+
+        model('ActorModel')
+            ->clearCache($note->actor);
+        cache()
+            ->deleteMatching($cachePrefix . "note#{$note->id}*");
+        cache()
+            ->deleteMatching($cachePrefix . "note-{$hashedNoteUri}*");
+
+        if ($note->is_reply) {
+            $this->clearCache($note->reply_to_note);
+        }
+
+        if ($note->is_reblog) {
+            $this->clearCache($note->reblog_of_note);
+        }
+    }
+
     /**
      * @param array<string, array<string|int, mixed>> $data
      * @return array<string, array<string|int, mixed>>
@@ -681,9 +627,9 @@ class NoteModel extends UuidModel
 
         if (! isset($data['data']['uri'])) {
             $actor = model('ActorModel')
-                ->getActorById($data['data']['actor_id'],);
+                ->getActorById($data['data']['actor_id']);
 
-            $data['data']['uri'] = base_url(route_to('note', $actor->username, $uuid4->toString()),);
+            $data['data']['uri'] = base_url(route_to('note', $actor->username, $uuid4->toString()));
         }
 
         return $data;

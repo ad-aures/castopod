@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Config;
 
 use Myth\Auth\Config\Auth as MythAuthConfig;

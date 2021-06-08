@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2021 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -95,12 +97,12 @@ class Actor extends Entity
     public function getFollowers(): array
     {
         if ($this->id === null) {
-            throw new RuntimeException('Actor must be created before getting followers.',);
+            throw new RuntimeException('Actor must be created before getting followers.');
         }
 
         if ($this->followers === null) {
             $this->followers = (array) model('ActorModel')
-                ->getFollowers($this->id,);
+                ->getFollowers($this->id);
         }
 
         return $this->followers;

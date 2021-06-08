@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Class AnalyticsPodcastByCountryModel Model for analytics_podcasts_by_country table in database
  *
@@ -57,7 +59,7 @@ class AnalyticsPodcastByCountryModel extends Model
                 ->findAll();
 
             cache()
-                ->save("{$podcastId}_analytics_podcast_by_country_weekly", $found, 600,);
+                ->save("{$podcastId}_analytics_podcast_by_country_weekly", $found, 600);
         }
 
         return $found;
@@ -85,7 +87,7 @@ class AnalyticsPodcastByCountryModel extends Model
                 ->findAll();
 
             cache()
-                ->save("{$podcastId}_analytics_podcast_by_country_yearly", $found, 600,);
+                ->save("{$podcastId}_analytics_podcast_by_country_yearly", $found, 600);
         }
         return $found;
     }

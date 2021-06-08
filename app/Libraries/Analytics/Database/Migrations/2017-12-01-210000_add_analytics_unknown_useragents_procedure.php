@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Class AddAnalyticsUnknownUseragentsProcedure Creates analytics_unknown_useragents procedure in database
  *

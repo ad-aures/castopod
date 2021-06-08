@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Class AddAnalyticsPodcastsByCountry Creates analytics_podcasts_by_country table in database
  *
@@ -36,7 +38,7 @@ class AddAnalyticsPodcastsByCountry extends Migration
             ],
         ]);
         $this->forge->addPrimaryKey(['podcast_id', 'date', 'country_code']);
-        $this->forge->addField('`created_at` timestamp NOT NULL DEFAULT current_timestamp()',);
+        $this->forge->addField('`created_at` timestamp NOT NULL DEFAULT current_timestamp()');
         $this->forge->addField(
             '`updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()',
         );

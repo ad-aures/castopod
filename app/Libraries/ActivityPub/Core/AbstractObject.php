@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This class defines the Object which is the primary base type for the Activity Streams vocabulary.
  *

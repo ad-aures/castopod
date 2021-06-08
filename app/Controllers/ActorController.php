@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -24,6 +26,7 @@ class ActorController extends ActivityPubActorController
     {
         // Prevent analytics hit when authenticated
         if (! can_user_interact()) {
+            // @phpstan-ignore-next-line
             $this->registerPodcastWebpageHit($this->actor->podcast->id);
         }
 

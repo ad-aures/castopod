@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Class AnalyticsPodcastByHour Model for analytics_podcasts_by_hour table in database
  *
@@ -54,7 +56,7 @@ class AnalyticsPodcastByHourModel extends Model
                 ->findAll();
 
             cache()
-                ->save("{$podcastId}_analytics_podcasts_by_hour", $found, 600,);
+                ->save("{$podcastId}_analytics_podcasts_by_hour", $found, 600);
         }
 
         return $found;

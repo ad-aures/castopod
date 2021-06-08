@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Class AddAnalyticsPodcastsByPlayer Creates analytics_podcasts_by_player table in database
  *
@@ -52,7 +54,7 @@ class AddAnalyticsPodcastsByPlayer extends Migration
             ],
         ]);
         $this->forge->addPrimaryKey(['podcast_id', 'date', 'service', 'app', 'device', 'os', 'is_bot']);
-        $this->forge->addField('`created_at` timestamp NOT NULL DEFAULT current_timestamp()',);
+        $this->forge->addField('`created_at` timestamp NOT NULL DEFAULT current_timestamp()');
         $this->forge->addField(
             '`updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()',
         );

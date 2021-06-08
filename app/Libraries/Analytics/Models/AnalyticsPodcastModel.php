@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Class AnalyticsPodcastModel Model for analytics_podcasts table in database
  *
@@ -76,7 +78,7 @@ class AnalyticsPodcastModel extends Model
                 ->findAll();
 
             cache()
-                ->save("{$podcastId}_analytics_podcasts_by_weekday", $found, 600,);
+                ->save("{$podcastId}_analytics_podcasts_by_weekday", $found, 600);
         }
         return $found;
     }
@@ -98,7 +100,7 @@ class AnalyticsPodcastModel extends Model
                 ->findAll();
 
             cache()
-                ->save("{$podcastId}_analytics_podcast_by_bandwidth", $found, 600,);
+                ->save("{$podcastId}_analytics_podcast_by_bandwidth", $found, 600);
         }
         return $found;
     }
@@ -121,7 +123,7 @@ class AnalyticsPodcastModel extends Model
                 ->findAll();
 
             cache()
-                ->save("{$podcastId}_analytics_podcast_by_month", $found, 600,);
+                ->save("{$podcastId}_analytics_podcast_by_month", $found, 600);
         }
         return $found;
     }
@@ -145,7 +147,7 @@ class AnalyticsPodcastModel extends Model
                 ->findAll();
 
             cache()
-                ->save("{$podcastId}_analytics_podcast_unique_listeners_by_day", $found, 600,);
+                ->save("{$podcastId}_analytics_podcast_unique_listeners_by_day", $found, 600);
         }
         return $found;
     }
@@ -170,7 +172,7 @@ class AnalyticsPodcastModel extends Model
                 ->findAll();
 
             cache()
-                ->save("{$podcastId}_analytics_podcast_unique_listeners_by_month", $found, 600,);
+                ->save("{$podcastId}_analytics_podcast_unique_listeners_by_month", $found, 600);
         }
         return $found;
     }
@@ -196,7 +198,7 @@ class AnalyticsPodcastModel extends Model
                 ->findAll();
 
             cache()
-                ->save("{$podcastId}_analytics_podcast_listening_time_by_day", $found, 600,);
+                ->save("{$podcastId}_analytics_podcast_listening_time_by_day", $found, 600);
         }
         return $found;
     }
@@ -221,7 +223,7 @@ class AnalyticsPodcastModel extends Model
                 ->findAll();
 
             cache()
-                ->save("{$podcastId}_analytics_podcast_listening_time_by_month", $found, 600,);
+                ->save("{$podcastId}_analytics_podcast_listening_time_by_month", $found, 600);
         }
         return $found;
     }

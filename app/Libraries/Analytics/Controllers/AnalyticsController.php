@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -29,8 +31,8 @@ class AnalyticsController extends Controller
         $this->methodName = 'getData' . (count($params) >= 3 ? $params[2] : '');
 
         return $this->{$method}(
-            $params[0],
-            count($params) >= 4 ? $params[3] : null,
+            (int) $params[0],
+            count($params) >= 4 ? (int) $params[3] : null,
         );
     }
 
@@ -39,9 +41,9 @@ class AnalyticsController extends Controller
         $methodName = $this->methodName;
 
         if ($episodeId === null) {
-            return $this->response->setJSON($this->analyticsModel->{$methodName}($podcastId),);
+            return $this->response->setJSON($this->analyticsModel->{$methodName}($podcastId));
         }
 
-        return $this->response->setJSON($this->analyticsModel->{$methodName}($podcastId, $episodeId),);
+        return $this->response->setJSON($this->analyticsModel->{$methodName}($podcastId, $episodeId));
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2021 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -16,7 +18,7 @@ use RuntimeException;
  * @property string $id
  * @property string $uri
  * @property int $actor_id
- * @property Actor $actor
+ * @property Actor|null $actor
  * @property string|null $in_reply_to_id
  * @property bool $is_reply
  * @property Note|null $reply_to_note
@@ -95,10 +97,10 @@ class Note extends UuidEntity
     /**
      * Returns the note's actor
      */
-    public function getActor(): Actor
+    public function getActor(): ?Actor
     {
         if ($this->actor_id === null) {
-            throw new RuntimeException('Note must have an actor_id before getting actor.',);
+            throw new RuntimeException('Note must have an actor_id before getting actor.');
         }
 
         if ($this->actor === null) {
@@ -112,12 +114,12 @@ class Note extends UuidEntity
     public function getPreviewCard(): ?PreviewCard
     {
         if ($this->id === null) {
-            throw new RuntimeException('Note must be created before getting preview_card.',);
+            throw new RuntimeException('Note must be created before getting preview_card.');
         }
 
         if ($this->preview_card === null) {
             $this->preview_card = model('PreviewCardModel')
-                ->getNotePreviewCard($this->id,);
+                ->getNotePreviewCard($this->id);
         }
 
         return $this->preview_card;
@@ -130,9 +132,7 @@ class Note extends UuidEntity
 
     public function getIsReply(): bool
     {
-        $this->is_reply = $this->in_reply_to_id !== null;
-
-        return $this->is_reply;
+        return $this->in_reply_to_id && ($this->getReplyToNote() !== null);
     }
 
     /**
@@ -141,12 +141,12 @@ class Note extends UuidEntity
     public function getReplies(): array
     {
         if ($this->id === null) {
-            throw new RuntimeException('Note must be created before getting replies.',);
+            throw new RuntimeException('Note must be created before getting replies.');
         }
 
         if ($this->replies === null) {
             $this->replies = (array) model('NoteModel')
-                ->getNoteReplies($this->id,);
+                ->getNoteReplies($this->id);
         }
 
         return $this->replies;
@@ -157,7 +157,7 @@ class Note extends UuidEntity
         return $this->getReplies() !== null;
     }
 
-    public function getReplyToNote(): self
+    public function getReplyToNote(): ?self
     {
         if ($this->in_reply_to_id === null) {
             throw new RuntimeException('Note is not a reply.');
@@ -165,7 +165,7 @@ class Note extends UuidEntity
 
         if ($this->reply_to_note === null) {
             $this->reply_to_note = model('NoteModel')
-                ->getNoteById($this->in_reply_to_id,);
+                ->getNoteById($this->in_reply_to_id);
         }
 
         return $this->reply_to_note;
@@ -177,12 +177,12 @@ class Note extends UuidEntity
     public function getReblogs(): array
     {
         if ($this->id === null) {
-            throw new RuntimeException('Note must be created before getting reblogs.',);
+            throw new RuntimeException('Note must be created before getting reblogs.');
         }
 
         if ($this->reblogs === null) {
             $this->reblogs = (array) model('NoteModel')
-                ->getNoteReblogs($this->id,);
+                ->getNoteReblogs($this->id);
         }
 
         return $this->reblogs;
@@ -193,7 +193,7 @@ class Note extends UuidEntity
         return $this->reblog_of_id !== null;
     }
 
-    public function getReblogOfNote(): self
+    public function getReblogOfNote(): ?self
     {
         if ($this->reblog_of_id === null) {
             throw new RuntimeException('Note is not a reblog.');
@@ -201,7 +201,7 @@ class Note extends UuidEntity
 
         if ($this->reblog_of_note === null) {
             $this->reblog_of_note = model('NoteModel')
-                ->getNoteById($this->reblog_of_id,);
+                ->getNoteById($this->reblog_of_id);
         }
 
         return $this->reblog_of_note;
@@ -214,7 +214,7 @@ class Note extends UuidEntity
         $messageWithoutTags = strip_tags($message);
 
         $this->attributes['message'] = $messageWithoutTags;
-        $this->attributes['message_html'] = str_replace("\n", '<br />', linkify($messageWithoutTags),);
+        $this->attributes['message_html'] = str_replace("\n", '<br />', linkify($messageWithoutTags));
 
         return $this;
     }

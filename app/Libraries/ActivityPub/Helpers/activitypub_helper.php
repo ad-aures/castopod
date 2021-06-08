@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2021 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -27,10 +29,10 @@ if (! function_exists('get_webfinger_data')) {
         $webfingerUri->setPath('/.well-known/webfinger');
         $webfingerUri->setQuery("resource=acct:{$username}@{$domain}");
 
-        $webfingerRequest = new ActivityRequest($webfingerUri);
+        $webfingerRequest = new ActivityRequest((string) $webfingerUri);
         $webfingerResponse = $webfingerRequest->get();
 
-        return json_decode($webfingerResponse->getBody(), false, 512, JSON_THROW_ON_ERROR,);
+        return json_decode($webfingerResponse->getBody(), false, 512, JSON_THROW_ON_ERROR);
     }
 }
 
@@ -77,14 +79,14 @@ if (! function_exists('accept_follow')) {
             $acceptActivity->toJSON(),
         );
 
-        $acceptActivity->set('id', url_to('activity', $actor->username, $activityId),);
+        $acceptActivity->set('id', url_to('activity', $actor->username, $activityId));
 
         $activityModel->update($activityId, [
             'payload' => $acceptActivity->toJSON(),
         ]);
 
         try {
-            $acceptRequest = new ActivityRequest($targetActor->inbox_url, $acceptActivity->toJSON(),);
+            $acceptRequest = new ActivityRequest($targetActor->inbox_url, $acceptActivity->toJSON());
             $acceptRequest->sign($actor->public_key_id, $actor->private_key);
             $acceptRequest->post();
         } catch (Exception) {
@@ -103,12 +105,12 @@ if (! function_exists('send_activity_to_followers')) {
     {
         foreach ($actor->followers as $follower) {
             try {
-                $acceptRequest = new ActivityRequest($follower->inbox_url, $activityPayload,);
-                $acceptRequest->sign($actor->public_key_id, $actor->private_key,);
+                $acceptRequest = new ActivityRequest($follower->inbox_url, $activityPayload);
+                $acceptRequest->sign($actor->public_key_id, $actor->private_key);
                 $acceptRequest->post();
             } catch (Exception $exception) {
                 // log error
-                log_message('critical', $exception);
+                log_message('critical', $exception->getMessage());
             }
         }
     }
@@ -122,7 +124,7 @@ if (! function_exists('extract_urls_from_message')) {
      */
     function extract_urls_from_message(string $message): array
     {
-        preg_match_all('~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i', $message, $match,);
+        preg_match_all('~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i', $message, $match);
 
         return $match[0];
     }
@@ -236,7 +238,7 @@ if (! function_exists('get_or_create_actor')) {
 
         // get actorUri with webfinger request
         $webfingerData = get_webfinger_data($username, $domain);
-        $actorUriKey = array_search('self', array_column($webfingerData->links, 'rel'), true,);
+        $actorUriKey = array_search('self', array_column($webfingerData->links, 'rel'), true);
 
         return create_actor_from_uri($webfingerData->links[$actorUriKey]->href);
     }
@@ -250,7 +252,7 @@ if (! function_exists('create_actor_from_uri')) {
     {
         $activityRequest = new ActivityRequest($actorUri);
         $actorResponse = $activityRequest->get();
-        $actorPayload = json_decode($actorResponse->getBody(), false, 512, JSON_THROW_ON_ERROR,);
+        $actorPayload = json_decode($actorResponse->getBody(), false, 512, JSON_THROW_ON_ERROR);
 
         $newActor = new Actor();
         $newActor->uri = $actorUri;
@@ -331,7 +333,7 @@ if (! function_exists('linkify')) {
 
                             helper('text');
 
-                            $link = preg_replace('~^www\.(.+\.)~i', '$1', $link,);
+                            $link = preg_replace('~^www\.(.+\.)~i', '$1', $link);
 
                             return '<' .
                                 array_push(
@@ -374,7 +376,7 @@ if (! function_exists('linkify')) {
                                 }
 
                                 try {
-                                    $actor = get_or_create_actor($match['username'], $match['domain'],);
+                                    $actor = get_or_create_actor($match['username'], $match['domain']);
                                     return '<' .
                                         array_push(
                                             $links,

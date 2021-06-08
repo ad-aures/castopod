@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -54,11 +56,11 @@ class Credit extends Entity
     public function getPerson(): ?Person
     {
         if ($this->person_id === null) {
-            throw new RuntimeException('Credit must have person_id before getting person.',);
+            throw new RuntimeException('Credit must have person_id before getting person.');
         }
 
         if ($this->person === null) {
-            $this->person = (new PersonModel())->getPersonById($this->person_id,);
+            $this->person = (new PersonModel())->getPersonById($this->person_id);
         }
 
         return $this->person;
@@ -67,11 +69,11 @@ class Credit extends Entity
     public function getPodcast(): ?Podcast
     {
         if ($this->podcast_id === null) {
-            throw new RuntimeException('Credit must have podcast_id before getting podcast.',);
+            throw new RuntimeException('Credit must have podcast_id before getting podcast.');
         }
 
         if ($this->podcast === null) {
-            $this->podcast = (new PodcastModel())->getPodcastById($this->podcast_id,);
+            $this->podcast = (new PodcastModel())->getPodcastById($this->podcast_id);
         }
 
         return $this->podcast;
@@ -80,11 +82,11 @@ class Credit extends Entity
     public function getEpisode(): ?Episode
     {
         if ($this->episode_id === null) {
-            throw new RuntimeException('Credit must have episode_id before getting episode.',);
+            throw new RuntimeException('Credit must have episode_id before getting episode.');
         }
 
         if ($this->episode === null) {
-            $this->episode = (new EpisodeModel())->getPublishedEpisodeById($this->podcast_id, $this->episode_id,);
+            $this->episode = (new EpisodeModel())->getPublishedEpisodeById($this->podcast_id, $this->episode_id);
         }
 
         return $this->episode;
@@ -109,6 +111,6 @@ class Credit extends Entity
             return '';
         }
 
-        return lang("PersonsTaxonomy.persons.{$this->person_group}.roles.{$this->person_role}.label",);
+        return lang("PersonsTaxonomy.persons.{$this->person_group}.roles.{$this->person_role}.label");
     }
 }

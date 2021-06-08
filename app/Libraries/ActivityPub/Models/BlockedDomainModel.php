@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2021 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -95,8 +97,6 @@ class BlockedDomainModel extends Model
         cache()
             ->deleteMatching($prefix . '*replies');
 
-        Events::trigger('on_block_domain', $name);
-
         $this->db->transStart();
 
         // set all actors from the domain as blocked
@@ -108,6 +108,8 @@ class BlockedDomainModel extends Model
         $result = $this->insert([
             'name' => $name,
         ]);
+
+        Events::trigger('on_block_domain', $name);
 
         $this->db->transComplete();
 
@@ -127,8 +129,6 @@ class BlockedDomainModel extends Model
         cache()
             ->deleteMatching($prefix . '*replies');
 
-        Events::trigger('on_unblock_domain', $name);
-
         $this->db->transStart();
         // unblock all actors from the domain
         model('ActorModel')
@@ -137,6 +137,8 @@ class BlockedDomainModel extends Model
             ->update();
 
         $result = $this->delete($name);
+
+        Events::trigger('on_unblock_domain', $name);
 
         $this->db->transComplete();
 

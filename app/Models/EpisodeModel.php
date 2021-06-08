@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -240,7 +242,7 @@ class EpisodeModel extends Model
                     ->findAll();
             }
 
-            $secondsToNextUnpublishedEpisode = $this->getSecondsToNextUnpublishedEpisode($podcastId,);
+            $secondsToNextUnpublishedEpisode = $this->getSecondsToNextUnpublishedEpisode($podcastId);
 
             cache()
                 ->save(
@@ -284,7 +286,7 @@ class EpisodeModel extends Model
      */
     public function clearCache(array $data): array
     {
-        $episode = (new self())->find(is_array($data['id']) ? $data['id'][0] : $data['id'],);
+        $episode = (new self())->find(is_array($data['id']) ? $data['id'][0] : $data['id']);
 
         // delete podcast cache
         cache()
@@ -310,7 +312,7 @@ class EpisodeModel extends Model
     {
         helper('id3');
 
-        $episode = (new self())->find(is_array($data['id']) ? $data['id'][0] : $data['id'],);
+        $episode = (new self())->find(is_array($data['id']) ? $data['id'][0] : $data['id']);
 
         write_audio_file_tags($episode);
 

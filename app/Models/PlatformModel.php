@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Class PlatformModel Model for platforms table in database
  *
@@ -111,7 +113,7 @@ class PlatformModel extends Model
                 ->findAll();
 
             cache()
-                ->save("podcast#{$podcastId}_platforms_{$platformType}_withLinks", $found, DECADE,);
+                ->save("podcast#{$podcastId}_platforms_{$platformType}_withLinks", $found, DECADE);
         }
 
         return $found;

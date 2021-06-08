@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Class LanguageSeeder Inserts values in languages table in database
  *

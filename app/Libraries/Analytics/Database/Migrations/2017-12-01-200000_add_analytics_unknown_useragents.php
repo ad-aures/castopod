@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Class AddAnalyticsUnknownUseragents Creates analytics_unknown_useragents table in database
  *
@@ -36,7 +38,7 @@ class AddAnalyticsUnknownUseragents extends Migration
 
         $this->forge->addPrimaryKey('id');
         // `created_at` and `updated_at` are created with SQL because Model class won’t be used for insertion (Procedure will be used instead)
-        $this->forge->addField('`created_at` timestamp NOT NULL DEFAULT current_timestamp()',);
+        $this->forge->addField('`created_at` timestamp NOT NULL DEFAULT current_timestamp()');
         $this->forge->addField(
             '`updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()',
         );

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Class AnalyticsWebsiteByBrowserModel Model for analytics_website_by_browser table in database
  *
@@ -55,7 +57,7 @@ class AnalyticsWebsiteByBrowserModel extends Model
                 ->findAll();
 
             cache()
-                ->save("{$podcastId}_analytics_website_by_browser", $found, 600,);
+                ->save("{$podcastId}_analytics_website_by_browser", $found, 600);
         }
         return $found;
     }

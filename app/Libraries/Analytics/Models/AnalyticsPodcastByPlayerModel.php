@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Class AnalyticsPodcastByPlayerModel Model for analytics_podcasts_by_player table in database
  *
@@ -58,7 +60,7 @@ class AnalyticsPodcastByPlayerModel extends Model
                 ->orderBy('values', 'DESC')
                 ->findAll();
             cache()
-                ->save("{$podcastId}_analytics_podcasts_by_player_by_app_weekly", $found, 600,);
+                ->save("{$podcastId}_analytics_podcasts_by_player_by_app_weekly", $found, 600);
         }
         return $found;
     }
@@ -86,7 +88,7 @@ class AnalyticsPodcastByPlayerModel extends Model
                 ->orderBy('values', 'DESC')
                 ->findAll();
             cache()
-                ->save("{$podcastId}_analytics_podcasts_by_player_by_app_yearly", $found, 600,);
+                ->save("{$podcastId}_analytics_podcasts_by_player_by_app_yearly", $found, 600);
         }
         return $found;
     }
@@ -115,7 +117,7 @@ class AnalyticsPodcastByPlayerModel extends Model
                 ->orderBy('values', 'DESC')
                 ->findAll();
             cache()
-                ->save("{$podcastId}_analytics_podcasts_by_player_by_os_weekly", $found, 600,);
+                ->save("{$podcastId}_analytics_podcasts_by_player_by_os_weekly", $found, 600);
         }
         return $found;
     }
@@ -143,7 +145,7 @@ class AnalyticsPodcastByPlayerModel extends Model
                 ->orderBy('values', 'DESC')
                 ->findAll();
             cache()
-                ->save("{$podcastId}_analytics_podcasts_by_player_by_device_weekly", $found, 600,);
+                ->save("{$podcastId}_analytics_podcasts_by_player_by_device_weekly", $found, 600);
         }
         return $found;
     }
@@ -171,7 +173,7 @@ class AnalyticsPodcastByPlayerModel extends Model
                 ->findAll();
 
             cache()
-                ->save("{$podcastId}_analytics_podcasts_by_player_bots", $found, 600,);
+                ->save("{$podcastId}_analytics_podcasts_by_player_bots", $found, 600);
         }
         return $found;
     }

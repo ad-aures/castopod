@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Class AnalyticsWebsiteByEntryPageModel Model for analytics_website_by_entry_page table in database
  *
@@ -54,7 +56,7 @@ class AnalyticsWebsiteByEntryPageModel extends Model
                 ->orderBy('values', 'DESC')
                 ->findAll();
             cache()
-                ->save("{$podcastId}_analytics_website_by_entry_page", $found, 600,);
+                ->save("{$podcastId}_analytics_website_by_entry_page", $found, 600);
         }
         return $found;
     }

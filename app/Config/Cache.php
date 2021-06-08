@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Config;
 
 use CodeIgniter\Cache\Handlers\DummyHandler;
@@ -73,6 +75,19 @@ class Cache extends BaseConfig
      * if you run multiple applications with the same cache engine.
      */
     public string $prefix = '';
+
+    /**
+     * --------------------------------------------------------------------------
+     * Default TTL
+     * --------------------------------------------------------------------------
+     *
+     * The default number of seconds to save items when none is specified.
+     *
+     * WARNING: This is not used by framework handlers where 60 seconds is
+     * hard-coded, but may be useful to projects and modules. This will replace
+     * the hard-coded value in a future release.
+     */
+    public int $ttl = 60;
 
     /**
      * --------------------------------------------------------------------------

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This class defines a Paginated OrderedCollection based on CodeIgniter4 Pager to get the pagination metadata
  *
@@ -19,11 +21,11 @@ class OrderedCollectionObject extends ObjectType
 
     protected int $totalItems;
 
-    protected ?string $first;
+    protected ?string $first = null;
 
-    protected ?string $current;
+    protected ?string $current = null;
 
-    protected ?string $last;
+    protected ?string $last = null;
 
     /**
      * @param ObjectType[] $orderedItems

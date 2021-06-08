@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2021 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -58,24 +60,6 @@ class FavouriteModel extends UuidModel
             ->where('id', service('uuid') ->fromString($note->id) ->getBytes(),)
             ->increment('favourites_count');
 
-        $prefix = config('ActivityPub')
-            ->cachePrefix;
-        $hashedNoteUri = md5($note->uri);
-        cache()
-            ->delete($prefix . "note#{$note->id}");
-        cache()
-            ->delete($prefix . "note-{$hashedNoteUri}");
-        cache()
-            ->delete($prefix . "actor#{$actor->id}_published_notes");
-
-        if ($note->in_reply_to_id) {
-            cache()->delete($prefix . "note#{$note->in_reply_to_id}_replies");
-            cache()
-                ->delete($prefix . "note#{$note->in_reply_to_id}_replies_withBlocked",);
-        }
-
-        Events::trigger('on_note_favourite', $actor, $note);
-
         if ($registerActivity) {
             $likeActivity = new LikeActivity();
             $likeActivity->set('actor', $actor->uri)
@@ -92,13 +76,18 @@ class FavouriteModel extends UuidModel
                     'queued',
                 );
 
-            $likeActivity->set('id', url_to('activity', $actor->username, $activityId),);
+            $likeActivity->set('id', url_to('activity', $actor->username, $activityId));
 
             model('ActivityModel')
                 ->update($activityId, [
                     'payload' => $likeActivity->toJSON(),
                 ]);
         }
+
+        Events::trigger('on_note_favourite', $actor, $note);
+
+        model('NoteModel')
+            ->clearCache($note);
 
         $this->db->transComplete();
     }
@@ -111,22 +100,6 @@ class FavouriteModel extends UuidModel
             ->where('id', service('uuid') ->fromString($note->id) ->getBytes(),)
             ->decrement('favourites_count');
 
-        $prefix = config('ActivityPub')
-            ->cachePrefix;
-        $hashedNoteUri = md5($note->uri);
-        cache()
-            ->delete($prefix . "note#{$note->id}");
-        cache()
-            ->delete($prefix . "note-{$hashedNoteUri}");
-        cache()
-            ->delete($prefix . "actor#{$actor->id}_published_notes");
-
-        if ($note->in_reply_to_id) {
-            cache()->delete($prefix . "note#{$note->in_reply_to_id}_replies");
-            cache()
-                ->delete($prefix . "note#{$note->in_reply_to_id}_replies_withBlocked",);
-        }
-
         $this->db
             ->table('activitypub_favourites')
             ->where([
@@ -136,8 +109,6 @@ class FavouriteModel extends UuidModel
                     ->getBytes(),
             ])
             ->delete();
-
-        Events::trigger('on_note_undo_favourite', $actor, $note);
 
         if ($registerActivity) {
             $undoActivity = new UndoActivity();
@@ -173,13 +144,18 @@ class FavouriteModel extends UuidModel
                     'queued',
                 );
 
-            $undoActivity->set('id', url_to('activity', $actor->username, $activityId),);
+            $undoActivity->set('id', url_to('activity', $actor->username, $activityId));
 
             model('ActivityModel')
                 ->update($activityId, [
                     'payload' => $undoActivity->toJSON(),
                 ]);
         }
+
+        Events::trigger('on_note_undo_favourite', $actor, $note);
+
+        model('NoteModel')
+            ->clearCache($note);
 
         $this->db->transComplete();
     }

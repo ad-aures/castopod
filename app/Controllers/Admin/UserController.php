@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -108,7 +110,7 @@ class UserController extends BaseController
             ->route('user-list')
             ->with('message', lang('User.messages.createSuccess', [
                 'username' => $user->username,
-            ]),);
+            ]));
     }
 
     public function edit(): string
@@ -148,7 +150,7 @@ class UserController extends BaseController
             ->route('user-list')
             ->with('message', lang('User.messages.rolesEditSuccess', [
                 'username' => $this->user->username,
-            ]),);
+            ]));
     }
 
     public function forcePassReset(): RedirectResponse
@@ -200,7 +202,7 @@ class UserController extends BaseController
             ->route('user-list')
             ->with('message', lang('User.messages.banSuccess', [
                 'username' => $this->user->username,
-            ]),);
+            ]));
     }
 
     public function unBan(): RedirectResponse
@@ -218,7 +220,7 @@ class UserController extends BaseController
             ->route('user-list')
             ->with('message', lang('User.messages.unbanSuccess', [
                 'username' => $this->user->username,
-            ]),);
+            ]));
     }
 
     public function delete(): RedirectResponse
@@ -240,6 +242,6 @@ class UserController extends BaseController
             ->back()
             ->with('message', lang('User.messages.deleteSuccess', [
                 'username' => $this->user->username,
-            ]),);
+            ]));
     }
 }

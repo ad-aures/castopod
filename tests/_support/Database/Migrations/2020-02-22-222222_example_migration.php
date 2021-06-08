@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Support\Database\Migrations;
 
 use CodeIgniter\Database\Migration;

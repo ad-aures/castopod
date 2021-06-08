@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Class AddAnalyticsPodcastsProcedure Creates analytics_podcasts procedure in database
  *
@@ -79,6 +81,6 @@ class AddAnalyticsPodcastsProcedure extends Migration
     public function down(): void
     {
         $prefix = $this->db->getPrefix();
-        $this->db->query("DROP PROCEDURE IF EXISTS `{$prefix}analytics_podcasts`",);
+        $this->db->query("DROP PROCEDURE IF EXISTS `{$prefix}analytics_podcasts`");
     }
 }

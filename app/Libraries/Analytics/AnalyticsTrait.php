@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2021 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -33,7 +35,7 @@ trait AnalyticsTrait
                 parse_url($referer, PHP_URL_HOST) === null
                     ? '- Direct -'
                     : parse_url($referer, PHP_URL_HOST);
-            parse_str(parse_url($referer, PHP_URL_QUERY), $queries);
+            parse_str((string) parse_url($referer, PHP_URL_QUERY), $queries);
             $keywords = $queries['q'] ?? null;
 
             $procedureName = $db->prefixTable('analytics_website');

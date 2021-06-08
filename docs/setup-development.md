@@ -213,6 +213,11 @@ You do not wish to use the VSCode devcontainer? No problem!
 
 ## Initialize and populate database
 
+> **Note:**
+>
+> You may skip this section if you go through the install wizard (go to
+> `/cp-install`).
+
 1. Build the database with the migrate command:
 
    ```bash

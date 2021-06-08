@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2021 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -9,10 +11,10 @@
 namespace ActivityPub\Controllers;
 
 use ActivityPub\Config\ActivityPub;
+use ActivityPub\Entities\Actor;
 use ActivityPub\Entities\Note;
 use ActivityPub\Objects\OrderedCollectionObject;
 use ActivityPub\Objects\OrderedCollectionPage;
-use App\Entities\Actor;
 use CodeIgniter\Controller;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
@@ -93,26 +95,34 @@ class ActorController extends Controller
                         return $this->response->setStatusCode(501)
                             ->setJSON([]);
                     }
+
                     $replyToNote = model('NoteModel')
-                        ->getNoteByUri($payload->object->inReplyTo,);
-                    // TODO: strip content from html to retrieve message
-                    // remove all html tags and reconstruct message with mentions?
-                    extract_text_from_html($payload->object->content);
-                    $reply = new Note([
-                        'uri' => $payload->object->id,
-                        'actor_id' => $payloadActor->id,
-                        'in_reply_to_id' => $replyToNote->id,
-                        'message' => $payload->object->content,
-                        'published_at' => Time::parse($payload->object->published,),
-                    ]);
-                    $noteId = model('NoteModel')
-                        ->addReply($reply, true, false);
-                    model('ActivityModel')
-                        ->update($activityId, [
-                            'note_id' => service('uuid')
-                                ->fromBytes($noteId)
-                                ->getString(),
+                        ->getNoteByUri($payload->object->inReplyTo);
+
+                    $reply = null;
+                    if ($replyToNote !== null) {
+                        // TODO: strip content from html to retrieve message
+                        // remove all html tags and reconstruct message with mentions?
+                        extract_text_from_html($payload->object->content);
+                        $reply = new Note([
+                            'uri' => $payload->object->id,
+                            'actor_id' => $payloadActor->id,
+                            'in_reply_to_id' => $replyToNote->id,
+                            'message' => $payload->object->content,
+                            'published_at' => Time::parse($payload->object->published,),
                         ]);
+                    }
+
+                    if ($reply !== null) {
+                        $noteId = model('NoteModel')
+                            ->addReply($reply, true, false);
+
+                        model('ActivityModel')
+                            ->update($activityId, [
+                                'note_id' => $noteId,
+                            ]);
+                    }
+
                     return $this->response->setStatusCode(200)
                         ->setJSON([]);
                 }
@@ -121,17 +131,19 @@ class ActorController extends Controller
                     ->setJSON([]);
             case 'Delete':
                 $noteToDelete = model('NoteModel')
-                    ->getNoteByUri($payload->object->id,);
+                    ->getNoteByUri($payload->object->id);
 
-                model('NoteModel')
-                    ->removeNote($noteToDelete, false);
+                if ($noteToDelete !== null) {
+                    model('NoteModel')
+                        ->removeNote($noteToDelete, false);
+                }
 
                 return $this->response->setStatusCode(200)
                     ->setJSON([]);
             case 'Follow':
                 // add to followers table
                 model('FollowModel')
-                    ->addFollower($payloadActor, $this->actor, false,);
+                    ->addFollower($payloadActor, $this->actor, false);
 
                 // Automatically accept follow by returning accept activity
                 accept_follow($this->actor, $payloadActor, $payload->id);
@@ -145,14 +157,16 @@ class ActorController extends Controller
                 $note = model('NoteModel')
                     ->getNoteByUri($payload->object);
 
-                // Like side-effect
-                model('FavouriteModel')
-                    ->addFavourite($payloadActor, $note, false,);
+                if ($note !== null) {
+                    // Like side-effect
+                    model('FavouriteModel')
+                        ->addFavourite($payloadActor, $note, false);
 
-                model('ActivityModel')
-                    ->update($activityId, [
-                        'note_id' => $note->id,
-                    ]);
+                    model('ActivityModel')
+                        ->update($activityId, [
+                            'note_id' => $note->id,
+                        ]);
+                }
 
                 return $this->response->setStatusCode(200)
                     ->setJSON([]);
@@ -160,13 +174,15 @@ class ActorController extends Controller
                 $note = model('NoteModel')
                     ->getNoteByUri($payload->object);
 
-                model('ActivityModel')
-                    ->update($activityId, [
-                        'note_id' => $note->id,
-                    ]);
+                if ($note !== null) {
+                    model('ActivityModel')
+                        ->update($activityId, [
+                            'note_id' => $note->id,
+                        ]);
 
-                model('NoteModel')
-                    ->reblog($payloadActor, $note, false);
+                    model('NoteModel')
+                        ->reblog($payloadActor, $note, false);
+                }
 
                 return $this->response->setStatusCode(200)
                     ->setJSON([]);
@@ -177,46 +193,53 @@ class ActorController extends Controller
                     case 'Follow':
                         // revert side-effect by removing follow from database
                         model('FollowModel')
-                            ->removeFollower($payloadActor, $this->actor, false,);
+                            ->removeFollower($payloadActor, $this->actor, false);
 
                         // TODO: undo has been accepted! (202 - Accepted)
                         return $this->response->setStatusCode(202)
                             ->setJSON([]);
                     case 'Like':
                         $note = model('NoteModel')
-                            ->getNoteByUri($payload->object->object,);
+                            ->getNoteByUri($payload->object->object);
 
-                        // revert side-effect by removing favourite from database
-                        model('FavouriteModel')
-                            ->removeFavourite($payloadActor, $note, false,);
+                        if ($note !== null) {
+                            // revert side-effect by removing favourite from database
+                            model('FavouriteModel')
+                                ->removeFavourite($payloadActor, $note, false);
 
-                        model('ActivityModel')
-                            ->update($activityId, [
-                                'note_id' => $note->id,
-                            ]);
+                            model('ActivityModel')
+                                ->update($activityId, [
+                                    'note_id' => $note->id,
+                                ]);
+                        }
 
                         return $this->response->setStatusCode(200)
                             ->setJSON([]);
                     case 'Announce':
                         $note = model('NoteModel')
-                            ->getNoteByUri($payload->object->object,);
+                            ->getNoteByUri($payload->object->object);
 
-                        $reblogNote = model('NoteModel')
-                            ->where([
-                                'actor_id' => $payloadActor->id,
-                                'reblog_of_id' => service('uuid')
-                                    ->fromString($note->id)
-                                    ->getBytes(),
-                            ])
-                            ->first();
+                        $reblogNote = null;
+                        if ($note !== null) {
+                            $reblogNote = model('NoteModel')
+                                ->where([
+                                    'actor_id' => $payloadActor->id,
+                                    'reblog_of_id' => service('uuid')
+                                        ->fromString($note->id)
+                                        ->getBytes(),
+                                ])
+                                ->first();
+                        }
 
-                        model('NoteModel')
-                            ->undoReblog($reblogNote, false);
+                        if ($reblogNote !== null) {
+                            model('NoteModel')
+                                ->undoReblog($reblogNote, false);
 
-                        model('ActivityModel')
-                            ->update($activityId, [
-                                'note_id' => $note->id,
-                            ]);
+                            model('ActivityModel')
+                                ->update($activityId, [
+                                    'note_id' => $note->id,
+                                ]);
+                        }
 
                         return $this->response->setStatusCode(200)
                             ->setJSON([]);
@@ -251,7 +274,7 @@ class ActorController extends Controller
             $pager = $actorActivity->pager;
             $collection = new OrderedCollectionObject(null, $pager);
         } else {
-            $paginatedActivity = $actorActivity->paginate(12, 'default', $pageNumber,);
+            $paginatedActivity = $actorActivity->paginate(12, 'default', $pageNumber);
             $pager = $actorActivity->pager;
             $orderedItems = [];
             foreach ($paginatedActivity as $activity) {
@@ -283,14 +306,14 @@ class ActorController extends Controller
             $pager = $followers->pager;
             $followersCollection = new OrderedCollectionObject(null, $pager);
         } else {
-            $paginatedFollowers = $followers->paginate(12, 'default', $pageNumber,);
+            $paginatedFollowers = $followers->paginate(12, 'default', $pageNumber);
             $pager = $followers->pager;
 
             $orderedItems = [];
             foreach ($paginatedFollowers as $follower) {
                 $orderedItems[] = $follower->uri;
             }
-            $followersCollection = new OrderedCollectionPage($pager, $orderedItems,);
+            $followersCollection = new OrderedCollectionPage($pager, $orderedItems);
         }
 
         return $this->response

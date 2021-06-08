@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -74,7 +76,7 @@ class PageController extends BaseController
             ->route('page-list')
             ->with('message', lang('Page.messages.createSuccess', [
                 'pageTitle' => $page->title,
-            ]),);
+            ]));
     }
 
     public function edit(): string

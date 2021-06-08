@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2021 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -93,7 +95,7 @@ class PreviewCardModel extends Model
     {
         $hashedPreviewCardUrl = md5($url);
         cache()
-            ->delete(config('ActivityPub') ->cachePrefix . "preview_card-{$hashedPreviewCardUrl}",);
+            ->delete(config('ActivityPub') ->cachePrefix . "preview_card-{$hashedPreviewCardUrl}");
 
         return $this->delete($id);
     }

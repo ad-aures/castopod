@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Class AddPodcasts Creates podcasts table in database
  *
@@ -189,7 +191,7 @@ class AddPodcasts extends Migration
         // TODO: remove name in favor of username from actor
         $this->forge->addUniqueKey('name');
         $this->forge->addUniqueKey('actor_id');
-        $this->forge->addForeignKey('actor_id', 'activitypub_actors', 'id', '', 'CASCADE',);
+        $this->forge->addForeignKey('actor_id', 'activitypub_actors', 'id', '', 'CASCADE');
         $this->forge->addForeignKey('category_id', 'categories', 'id');
         $this->forge->addForeignKey('language_code', 'languages', 'code');
         $this->forge->addForeignKey('created_by', 'users', 'id');

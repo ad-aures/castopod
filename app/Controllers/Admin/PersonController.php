@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2021 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -126,7 +128,7 @@ class PersonController extends BaseController
 
         $this->person->full_name = $this->request->getPost('full_name');
         $this->person->unique_name = $this->request->getPost('unique_name');
-        $this->person->information_url = $this->request->getPost('information_url',);
+        $this->person->information_url = $this->request->getPost('information_url');
         $imageFile = $this->request->getFile('image');
         if ($imageFile !== null && $imageFile->isValid()) {
             $this->person->image = new Image($imageFile);

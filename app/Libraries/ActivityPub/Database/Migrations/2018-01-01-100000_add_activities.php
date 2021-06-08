@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Class AddActivities Creates activitypub_activities table in database
  *
@@ -58,9 +60,9 @@ class AddActivities extends Migration
             ],
         ]);
         $this->forge->addPrimaryKey('id');
-        $this->forge->addForeignKey('actor_id', 'activitypub_actors', 'id', '', 'CASCADE',);
-        $this->forge->addForeignKey('target_actor_id', 'activitypub_actors', 'id', '', 'CASCADE',);
-        $this->forge->addForeignKey('note_id', 'activitypub_notes', 'id', '', 'CASCADE',);
+        $this->forge->addForeignKey('actor_id', 'activitypub_actors', 'id', '', 'CASCADE');
+        $this->forge->addForeignKey('target_actor_id', 'activitypub_actors', 'id', '', 'CASCADE');
+        $this->forge->addForeignKey('note_id', 'activitypub_notes', 'id', '', 'CASCADE');
         $this->forge->createTable('activitypub_activities');
     }
 

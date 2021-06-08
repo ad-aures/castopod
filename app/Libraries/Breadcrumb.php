@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Generates and renders a breadcrumb based on the current url segments
  *

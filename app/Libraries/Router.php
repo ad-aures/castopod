@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file extends the Router class from the CodeIgniter 4 framework.
  *
@@ -30,7 +32,7 @@ class Router extends CodeIgniterRouter
     protected function checkRoutes(string $uri): bool
     {
         /** @noRector RemoveExtraParametersRector */
-        $routes = $this->collection->getRoutes($this->collection->getHTTPVerb(),);
+        $routes = $this->collection->getRoutes($this->collection->getHTTPVerb());
 
         // Don't waste any time
         if ($routes === []) {
@@ -64,7 +66,7 @@ class Router extends CodeIgniterRouter
 
             // Does the RegEx match?
             if (preg_match('#^' . $key . '$#u', $uri, $matches)) {
-                $this->matchedRouteOptions = $this->collection->getRoutesOptions($matchedKey,);
+                $this->matchedRouteOptions = $this->collection->getRoutesOptions($matchedKey);
 
                 // Is this route supposed to redirect to another?
                 if ($this->collection->isRedirect($key)) {
@@ -112,7 +114,7 @@ class Router extends CodeIgniterRouter
                         ->getValue();
                     $parsedHeader = $negotiate->parseHeader($acceptHeader);
 
-                    $supported = array_keys($this->matchedRouteOptions['alternate-content'],);
+                    $supported = array_keys($this->matchedRouteOptions['alternate-content']);
 
                     $expectedContentType = $parsedHeader[0];
                     foreach ($supported as $available) {
@@ -157,7 +159,7 @@ class Router extends CodeIgniterRouter
                 ) {
                     $replacekey = str_replace('/(.*)', '', $key);
                     $val = preg_replace('#^' . $key . '$#u', $val, $uri);
-                    $val = str_replace($replacekey, str_replace('/', '\\', $replacekey), $val,);
+                    $val = str_replace($replacekey, str_replace('/', '\\', $replacekey), $val);
                 } elseif (str_contains($val, '$') && str_contains($key, '(')) {
                     $val = preg_replace('#^' . $key . '$#u', $val, $uri);
                 } elseif (str_contains($val, '/')) {

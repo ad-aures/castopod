@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use CodeIgniter\Router\Exceptions\RouterException;
 use Config\Database;
 use Config\Services;
@@ -65,7 +67,7 @@ if (! function_exists('generate_episode_analytics_url')) {
                             floor((($audioFileSize - $audioFileHeaderSize) / $audioFileDuration) * 60,),
                     $audioFileSize,
                     $audioFileDuration,
-                    strtotime($publicationDate),
+                    $publicationDate->getTimestamp(),
                 ),
             ),
             $audioFilePath,
@@ -83,7 +85,7 @@ if (! function_exists('set_user_session_deny_list_ip')) {
         $session->start();
 
         if (! $session->has('denyListIp')) {
-            $session->set('denyListIp', IpDb::find($_SERVER['REMOTE_ADDR']) !== null,);
+            $session->set('denyListIp', IpDb::find($_SERVER['REMOTE_ADDR']) !== null);
         }
     }
 }
@@ -107,7 +109,7 @@ if (! function_exists('set_user_session_location')) {
         // Finds location:
         if (! $session->has('location')) {
             try {
-                $cityReader = new Reader(WRITEPATH . 'uploads/GeoLite2-City/GeoLite2-City.mmdb',);
+                $cityReader = new Reader(WRITEPATH . 'uploads/GeoLite2-City/GeoLite2-City.mmdb');
                 $city = $cityReader->city($_SERVER['REMOTE_ADDR']);
 
                 $location = [
@@ -158,8 +160,8 @@ if (! function_exists('set_user_session_player')) {
                 // Add to unknown list
                 try {
                     $db = Database::connect();
-                    $procedureNameAnalyticsUnknownUseragents = $db->prefixTable('analytics_unknown_useragents',);
-                    $db->query("CALL {$procedureNameAnalyticsUnknownUseragents}(?)", [$userAgent],);
+                    $procedureNameAnalyticsUnknownUseragents = $db->prefixTable('analytics_unknown_useragents');
+                    $db->query("CALL {$procedureNameAnalyticsUnknownUseragents}(?)", [$userAgent]);
                     // If things go wrong the show must go on and the user must be able to download the file
                 } catch (Exception) {
                 }
@@ -280,7 +282,7 @@ if (! function_exists('podcast_hit')) {
             // We create a sha1 hash for this IP_Address+User_Agent+Episode_ID (used to count only once multiple episode downloads):
             $episodeHashId =
                 '_IpUaEp_' .
-                sha1($_SERVER['REMOTE_ADDR'] . '_' . $_SERVER['HTTP_USER_AGENT'] . '_' . $episodeId,);
+                sha1($_SERVER['REMOTE_ADDR'] . '_' . $_SERVER['HTTP_USER_AGENT'] . '_' . $episodeId);
             // Was this episode downloaded in the past 24h:
             $downloadedBytes = cache($episodeHashId);
             // Rolling window is 24 hours (86400 seconds):
@@ -327,7 +329,7 @@ if (! function_exists('podcast_hit')) {
                     // We create a sha1 hash for this IP_Address+User_Agent+Podcast_ID (used to count unique listeners):
                     $listenerHashId =
                         '_IpUaPo_' .
-                        sha1($_SERVER['REMOTE_ADDR'] . '_' . $_SERVER['HTTP_USER_AGENT'] . '_' . $podcastId,);
+                        sha1($_SERVER['REMOTE_ADDR'] . '_' . $_SERVER['HTTP_USER_AGENT'] . '_' . $podcastId);
                     $newListener = 1;
                     // Has this listener already downloaded an episode today:
                     $downloadsByUser = cache($listenerHashId);
@@ -342,7 +344,7 @@ if (! function_exists('podcast_hit')) {
                     $midnightTTL = strtotime('tomorrow') - time();
                     // We save the download count for this user until midnight:
                     cache()
-                        ->save($listenerHashId, $downloadsByUser, $midnightTTL,);
+                        ->save($listenerHashId, $downloadsByUser, $midnightTTL);
 
                     $db->query(
                         "CALL {$procedureName}(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",
@@ -368,7 +370,7 @@ if (! function_exists('podcast_hit')) {
             }
         } catch (Exception $exception) {
             // If things go wrong the show must go on and the user must be able to download the file
-            log_message('critical', $exception);
+            log_message('critical', $exception->getMessage());
         }
     }
 }

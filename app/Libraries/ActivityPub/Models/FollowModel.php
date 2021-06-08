@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2021 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -13,6 +15,7 @@ use ActivityPub\Activities\UndoActivity;
 use ActivityPub\Entities\Actor;
 use ActivityPub\Entities\Follow;
 use CodeIgniter\Database\Exceptions\DatabaseException;
+use CodeIgniter\Events\Events;
 use CodeIgniter\I18n\Time;
 use CodeIgniter\Model;
 use Exception;
@@ -62,11 +65,6 @@ class FollowModel extends Model
                 ->where('id', $targetActor->id)
                 ->increment('followers_count');
 
-            cache()
-                ->delete(config('ActivityPub') ->cachePrefix . "actor#{$targetActor->id}",);
-            cache()
-                ->delete(config('ActivityPub') ->cachePrefix . "actor#{$targetActor->id}_followers",);
-
             if ($registerActivity) {
                 $followActivity = new FollowActivity();
 
@@ -85,13 +83,18 @@ class FollowModel extends Model
                         'queued',
                     );
 
-                $followActivity->set('id', base_url(route_to('activity', $actor->username, $activityId),),);
+                $followActivity->set('id', base_url(route_to('activity', $actor->username, $activityId),));
 
                 model('ActivityModel')
                     ->update($activityId, [
                         'payload' => $followActivity->toJSON(),
                     ]);
             }
+
+            Events::trigger('on_follow', $actor, $targetActor);
+
+            model('ActorModel')
+                ->clearCache($targetActor);
 
             $this->db->transComplete();
         } catch (Exception) {
@@ -119,11 +122,6 @@ class FollowModel extends Model
             ->where('id', $targetActor->id)
             ->decrement('followers_count');
 
-        cache()
-            ->delete(config('ActivityPub') ->cachePrefix . "actor#{$targetActor->id}",);
-        cache()
-            ->delete(config('ActivityPub') ->cachePrefix . "actor#{$targetActor->id}_followers",);
-
         if ($registerActivity) {
             $undoActivity = new UndoActivity();
             // get follow activity from database
@@ -150,13 +148,18 @@ class FollowModel extends Model
                     'queued',
                 );
 
-            $undoActivity->set('id', url_to('activity', $actor->username, $activityId),);
+            $undoActivity->set('id', url_to('activity', $actor->username, $activityId));
 
             model('ActivityModel')
                 ->update($activityId, [
                     'payload' => $undoActivity->toJSON(),
                 ]);
         }
+
+        Events::trigger('on_undo_follow', $actor, $targetActor);
+
+        model('ActorModel')
+            ->clearCache($targetActor);
 
         $this->db->transComplete();
     }

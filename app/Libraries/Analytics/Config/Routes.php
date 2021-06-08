@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2021 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -69,4 +71,4 @@ $routes->group('', [
 
 // Show the Unknown UserAgents
 $routes->get('.well-known/unknown-useragents', 'UnknownUserAgentsController');
-$routes->get('.well-known/unknown-useragents/(:num)', 'UnknownUserAgentsController/$1',);
+$routes->get('.well-known/unknown-useragents/(:num)', 'UnknownUserAgentsController/$1');

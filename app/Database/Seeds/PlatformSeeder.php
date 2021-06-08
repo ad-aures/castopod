@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Class PlatformsSeeder Inserts values in platforms table in database
  *

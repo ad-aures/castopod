@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is based on the HttpSignature file from the ActivityPhp package. It is adapted to work with CodeIgniter4
  *
@@ -37,10 +39,7 @@ class HttpSignature
         signature="(?P<signature>[\w+\/]+={0,2})"
     /x';
 
-    /**
-     * @var IncomingRequest
-     */
-    protected ?IncomingRequest $request;
+    protected ?IncomingRequest $request = null;
 
     public function __construct(IncomingRequest $request = null)
     {
@@ -64,7 +63,7 @@ class HttpSignature
 
         // verify that request has been made within the last hour
         $currentTime = Time::now();
-        $requestTime = Time::createFromFormat('D, d M Y H:i:s T', $dateHeader->getValue(),);
+        $requestTime = Time::createFromFormat('D, d M Y H:i:s T', $dateHeader->getValue());
 
         $diff = $requestTime->difference($currentTime);
         if ($diff->getSeconds() > 3600) {
@@ -101,7 +100,7 @@ class HttpSignature
         // Fetch the public key linked from keyId
         $actorRequest = new ActivityRequest($keyId);
         $actorResponse = $actorRequest->get();
-        $actor = json_decode($actorResponse->getBody(), false, 512, JSON_THROW_ON_ERROR,);
+        $actor = json_decode($actorResponse->getBody(), false, 512, JSON_THROW_ON_ERROR);
 
         $publicKeyPem = $actor->publicKey->publicKeyPem;
 

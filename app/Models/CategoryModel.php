@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -63,7 +65,7 @@ class CategoryModel extends Model
             $options = array_reduce(
                 $categories,
                 function (array $result, Category $category): array {
-                    $result[$category->id] = lang('Podcast.category_options.' . $category->code,);
+                    $result[$category->id] = lang('Podcast.category_options.' . $category->code);
                     return $result;
                 },
                 [],

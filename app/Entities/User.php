@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -52,7 +54,7 @@ class User extends MythAuthUser
     public function getPodcasts(): array
     {
         if ($this->id === null) {
-            throw new RuntimeException('Users must be created before getting podcasts.',);
+            throw new RuntimeException('Users must be created before getting podcasts.');
         }
 
         if ($this->podcasts === null) {

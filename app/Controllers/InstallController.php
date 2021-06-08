@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -123,7 +125,7 @@ class InstallController extends Controller
             // Could not connect to the database
             // show database config view to fix value
             session()
-                ->setFlashdata('error', lang('Install.messages.databaseConnectError'),);
+                ->setFlashdata('error', lang('Install.messages.databaseConnectError'));
 
             return view('install/database_config');
         }
@@ -171,7 +173,7 @@ class InstallController extends Controller
         helper('text');
 
         // redirect to full install url with new baseUrl input
-        return redirect()->to(reduce_double_slashes($baseUrl . '/' . config('App')->installGateway,),);
+        return redirect()->to(reduce_double_slashes($baseUrl . '/' . config('App')->installGateway,));
     }
 
     public function databaseConfig(): string

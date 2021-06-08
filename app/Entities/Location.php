@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2021 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -84,7 +86,7 @@ class Location extends Entity
             ],
         );
 
-        $places = json_decode($response->getBody(), false, 512, JSON_THROW_ON_ERROR,);
+        $places = json_decode($response->getBody(), false, 512, JSON_THROW_ON_ERROR);
 
         if ($places === []) {
             return $this;

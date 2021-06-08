@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -225,7 +227,7 @@ class PodcastController extends BaseController
         $authorize = Services::authorization();
         $podcastAdminGroup = $authorize->group('podcast_admin');
 
-        $podcastModel->addPodcastContributor(user_id(), $newPodcastId, $podcastAdminGroup->id,);
+        $podcastModel->addPodcastContributor(user_id(), $newPodcastId, $podcastAdminGroup->id);
 
         // set Podcast categories
         (new CategoryModel())->setPodcastCategories(
@@ -276,7 +278,7 @@ class PodcastController extends BaseController
         }
 
         $this->podcast->title = $this->request->getPost('title');
-        $this->podcast->description_markdown = $this->request->getPost('description',);
+        $this->podcast->description_markdown = $this->request->getPost('description');
 
         $image = $this->request->getFile('image');
         if ($image !== null && $image->isValid()) {
@@ -293,12 +295,12 @@ class PodcastController extends BaseController
         $this->podcast->owner_email = $this->request->getPost('owner_email');
         $this->podcast->type = $this->request->getPost('type');
         $this->podcast->copyright = $this->request->getPost('copyright');
-        $this->podcast->location = new Location($this->request->getPost('location_name'),);
-        $this->podcast->payment_pointer = $this->request->getPost('payment_pointer',);
-        $this->podcast->custom_rss_string = $this->request->getPost('custom_rss',);
+        $this->podcast->location = new Location($this->request->getPost('location_name'));
+        $this->podcast->payment_pointer = $this->request->getPost('payment_pointer');
+        $this->podcast->custom_rss_string = $this->request->getPost('custom_rss');
         $this->podcast->partner_id = $this->request->getPost('partner_id');
-        $this->podcast->partner_link_url = $this->request->getPost('partner_link_url',);
-        $this->podcast->partner_image_url = $this->request->getPost('partner_image_url',);
+        $this->podcast->partner_link_url = $this->request->getPost('partner_link_url');
+        $this->podcast->partner_image_url = $this->request->getPost('partner_image_url');
         $this->podcast->is_blocked = $this->request->getPost('block') === 'yes';
         $this->podcast->is_completed =
             $this->request->getPost('complete') === 'yes';

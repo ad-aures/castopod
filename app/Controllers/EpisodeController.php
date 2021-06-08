@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -100,7 +102,7 @@ class EpisodeController extends BaseController
         $session = Services::session();
         $session->start();
         if (isset($_SERVER['HTTP_REFERER'])) {
-            $session->set('embeddable_player_domain', parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST),);
+            $session->set('embeddable_player_domain', parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST));
         }
 
         $locale = service('request')
@@ -159,7 +161,7 @@ class EpisodeController extends BaseController
 
     public function oembedXML(): ResponseInterface
     {
-        $oembed = new SimpleXMLElement("<?xml version='1.0' encoding='utf-8' standalone='yes'?><oembed></oembed>",);
+        $oembed = new SimpleXMLElement("<?xml version='1.0' encoding='utf-8' standalone='yes'?><oembed></oembed>");
 
         $oembed->addChild('type', 'rich');
         $oembed->addChild('version', '1.0');
@@ -182,6 +184,6 @@ class EpisodeController extends BaseController
         $oembed->addChild('width', '600');
         $oembed->addChild('height', '200');
 
-        return $this->response->setXML($oembed);
+        return $this->response->setXML((string) $oembed);
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Class AddBlockedDomains Creates activitypub_blocked_domains table in database
  *

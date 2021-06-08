@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Authorization;
 
 use Myth\Auth\Authorization\FlatAuthorization as MythAuthFlatAuthorization;
@@ -26,7 +28,7 @@ class FlatAuthorization extends MythAuthFlatAuthorization
             return false;
         }
 
-        return $this->permissionModel->doesGroupHavePermission($groupId, $permissionId,);
+        return $this->permissionModel->doesGroupHavePermission($groupId, $permissionId);
     }
 
     /**

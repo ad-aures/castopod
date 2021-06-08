@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -94,13 +96,13 @@ if (! function_exists('button')) {
         if ($uri !== '') {
             return anchor($uri, $label, array_merge([
                 'class' => $buttonClass,
-            ], $customAttributes,),);
+            ], $customAttributes,));
         }
 
         $defaultButtonAttributes = [
             'type' => 'button',
         ];
-        $attributes = stringify_attributes(array_merge($defaultButtonAttributes, $customAttributes),);
+        $attributes = stringify_attributes(array_merge($defaultButtonAttributes, $customAttributes));
 
         return <<<CODE_SAMPLE
             <button class="{$buttonClass}" {$attributes}>
@@ -258,7 +260,7 @@ if (! function_exists('publication_pill')) {
             '</time>',
         ];
 
-        $label = lang('Episode.publication_status.' . $publicationStatus, $langOptions,);
+        $label = lang('Episode.publication_status.' . $publicationStatus, $langOptions);
 
         return '<span class="px-1 font-semibold border ' .
             $class .
@@ -290,7 +292,7 @@ if (! function_exists('publication_button')) {
                 break;
             case 'scheduled':
                 $label = lang('Episode.publish_edit');
-                $route = route_to('episode-publish_edit', $podcastId, $episodeId,);
+                $route = route_to('episode-publish_edit', $podcastId, $episodeId);
                 $variant = 'accent';
                 $iconLeft = 'upload-cloud';
                 break;

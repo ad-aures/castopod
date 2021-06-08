@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2021 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -48,7 +50,7 @@ class Image extends Entity
     public function __construct(?File $file, string $path = '', string $mimetype = '')
     {
         if ($file === null && $path === '') {
-            throw new RuntimeException('File or path must be set to create an Image.',);
+            throw new RuntimeException('File or path must be set to create an Image.');
         }
 
         $this->config = config('Images');

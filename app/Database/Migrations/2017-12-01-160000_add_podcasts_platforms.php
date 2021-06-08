@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Class AddAddPodcastsPlatforms Creates podcasts_platforms table in database
  *

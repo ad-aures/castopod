@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -53,7 +55,7 @@ class AuthController extends MythAuthController
         }
 
         // Save the user
-        $allowedPostFields = array_merge(['password'], $this->config->validFields, $this->config->personalFields,);
+        $allowedPostFields = array_merge(['password'], $this->config->validFields, $this->config->personalFields);
         $user = new User($this->request->getPost($allowedPostFields));
 
         $this->config->requireActivation === null
@@ -80,7 +82,7 @@ class AuthController extends MythAuthController
                 return redirect()
                     ->back()
                     ->withInput()
-                    ->with('error', $activator->error() ?? lang('Auth.unknownError'),);
+                    ->with('error', $activator->error() ?? lang('Auth.unknownError'));
             }
 
             // Success!

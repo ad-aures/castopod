@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Class AppSeeder Calls all required seeders for castopod to work properly
  *

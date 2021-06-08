@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2021 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -27,11 +29,11 @@ use RuntimeException;
  */
 class Activity extends UuidEntity
 {
-    protected ?Actor $actor;
+    protected ?Actor $actor = null;
 
-    protected ?Actor $target_actor;
+    protected ?Actor $target_actor = null;
 
-    protected ?Note $note;
+    protected ?Note $note = null;
 
     /**
      * @var string[]
@@ -59,7 +61,7 @@ class Activity extends UuidEntity
     public function getActor(): Actor
     {
         if ($this->actor_id === null) {
-            throw new RuntimeException('Activity must have an actor_id before getting the actor.',);
+            throw new RuntimeException('Activity must have an actor_id before getting the actor.');
         }
 
         if ($this->actor === null) {
@@ -73,12 +75,12 @@ class Activity extends UuidEntity
     public function getTargetActor(): Actor
     {
         if ($this->target_actor_id === null) {
-            throw new RuntimeException('Activity must have a target_actor_id before getting the target actor.',);
+            throw new RuntimeException('Activity must have a target_actor_id before getting the target actor.');
         }
 
         if ($this->target_actor === null) {
             $this->target_actor = model('ActorModel')
-                ->getActorById($this->target_actor_id,);
+                ->getActorById($this->target_actor_id);
         }
 
         return $this->target_actor;
@@ -87,7 +89,7 @@ class Activity extends UuidEntity
     public function getNote(): Note
     {
         if ($this->note_id === null) {
-            throw new RuntimeException('Activity must have a note_id before getting note.',);
+            throw new RuntimeException('Activity must have a note_id before getting note.');
         }
 
         if ($this->note === null) {

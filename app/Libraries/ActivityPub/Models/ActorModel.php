@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2021 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -58,7 +60,7 @@ class ActorModel extends Model
      */
     protected $useTimestamps = true;
 
-    public function getActorById(int $id): Actor
+    public function getActorById(int $id): ?Actor
     {
         $cacheName = config('ActivityPub')
             ->cachePrefix . "actor#{$id}";
@@ -179,11 +181,11 @@ class ActorModel extends Model
         cache()
             ->deleteMatching($prefix . '*replies');
 
-        Events::trigger('on_block_actor', $actorId);
-
         $this->update($actorId, [
             'is_blocked' => 1,
         ]);
+
+        Events::trigger('on_block_actor', $actorId);
     }
 
     public function unblockActor(int $actorId): void
@@ -195,10 +197,25 @@ class ActorModel extends Model
         cache()
             ->deleteMatching($prefix . '*replies');
 
-        Events::trigger('on_unblock_actor', $actorId);
-
         $this->update($actorId, [
             'is_blocked' => 0,
         ]);
+
+        Events::trigger('on_unblock_actor', $actorId);
+    }
+
+    public function clearCache(Actor $actor): void
+    {
+        $cachePrefix = config('ActivityPub')
+            ->cachePrefix;
+        $hashedActorUri = md5($actor->uri);
+        $cacheDomain = str_replace(':', '', $actor->domain);
+
+        cache()
+            ->delete($cachePrefix . "actor-{$actor->username}-{$cacheDomain}");
+        cache()
+            ->delete($cachePrefix . "actor-{$hashedActorUri}");
+        cache()
+            ->deleteMatching($cachePrefix . "actor#{$actor->id}*");
     }
 }

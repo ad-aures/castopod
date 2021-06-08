@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Class FakePodcastsAnalyticsSeeder Inserts Fake Analytics in the database
  *
@@ -61,7 +63,7 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                     ->where('`published_at` <= NOW()', null, false)
                     ->findAll();
                 foreach ($episodes as $episode) {
-                    $age = floor(($date - strtotime($episode->published_at)) / 86400,);
+                    $age = floor(($date - strtotime($episode->published_at)) / 86400);
                     $probability1 = (int) floor(exp(3 - $age / 40)) + 1;
 
                     for (
@@ -95,7 +97,7 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                             '.' .
                             rand(0, 255);
 
-                        $cityReader = new Reader(WRITEPATH . 'uploads/GeoLite2-City/GeoLite2-City.mmdb',);
+                        $cityReader = new Reader(WRITEPATH . 'uploads/GeoLite2-City/GeoLite2-City.mmdb');
 
                         $countryCode = 'N/A';
                         $regionCode = 'N/A';

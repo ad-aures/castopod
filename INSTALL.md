@@ -7,10 +7,10 @@ or shared hosting, you can install it on most PHP-MySQL compatible web servers.
 
 - [Install instructions](#install-instructions)
   - [0. Pre-requisites](#0-pre-requisites)
-  - [1. Install Wizard](#1-install-wizard)
-  - [1-alt Manual configuration](#1-alt-manual-configuration)
+  - [(recommended) Install Wizard](#recommended-install-wizard)
+  - [(alternative) Manual configuration](#alternative-manual-configuration)
 - [Web Server Requirements](#web-server-requirements)
-  - [PHP v8.0 or higher](#php-v73-or-higher)
+  - [PHP v8.0 or higher](#php-v80-or-higher)
   - [MySQL compatible database](#mysql-compatible-database)
     - [Privileges](#privileges)
   - [(Optional) Other recommendations](#optional-other-recommendations)
@@ -39,17 +39,20 @@ or shared hosting, you can install it on most PHP-MySQL compatible web servers.
    > ⚠️ Social features will not work properly if you do not set the task. It is
    > used to broadcast social activities to the fediverse.
 
-### 1. Install Wizard
+### (recommended) Install Wizard
 
 1. Run the Castopod Host install script by going to the install wizard page
    (`https://your_domain_name.com/cp-install`) in your favorite web browser.
 2. Follow the instructions on your screen.
 3. Start podcasting!
 
-### 1-alt Manual configuration
+> **Note:**
+>
+> The install script writes a `.env` file in the package root. If you cannot go
+> through the install wizard, you can
+> [create and update the `.env` file manually](#alternative-manual-configuration).
 
-The install script writes a `.env` file in the package root. If you cannot go
-through the install wizard, you can create and update the `.env` file yourself:
+### (alternative) Manual configuration
 
 1. Rename the `.env.example` file to `.env` and update the default values with
    your own.

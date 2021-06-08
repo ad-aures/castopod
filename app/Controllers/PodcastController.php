@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -94,7 +96,7 @@ class PodcastController extends BaseController
         $seasonQuery = $this->request->getGet('season');
 
         if (! $yearQuery && ! $seasonQuery) {
-            $defaultQuery = (new PodcastModel())->getDefaultQuery($this->podcast->id,);
+            $defaultQuery = (new PodcastModel())->getDefaultQuery($this->podcast->id);
             if ($defaultQuery) {
                 if ($defaultQuery['type'] === 'season') {
                     $seasonQuery = $defaultQuery['data']['season_number'];

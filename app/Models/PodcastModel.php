@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2021 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -253,7 +255,7 @@ class PodcastModel extends Model
         }
 
         return count($userPodcast) > 0
-            ? $userPodcast[0]->group_id
+            ? (int) $userPodcast[0]->group_id
             : false;
     }
 
@@ -278,7 +280,7 @@ class PodcastModel extends Model
                 ->get()
                 ->getResultArray();
 
-            $secondsToNextUnpublishedEpisode = $episodeModel->getSecondsToNextUnpublishedEpisode($podcastId,);
+            $secondsToNextUnpublishedEpisode = $episodeModel->getSecondsToNextUnpublishedEpisode($podcastId);
 
             cache()
                 ->save(
@@ -314,7 +316,7 @@ class PodcastModel extends Model
                 ->get()
                 ->getResultArray();
 
-            $secondsToNextUnpublishedEpisode = $episodeModel->getSecondsToNextUnpublishedEpisode($podcastId,);
+            $secondsToNextUnpublishedEpisode = $episodeModel->getSecondsToNextUnpublishedEpisode($podcastId);
 
             cache()
                 ->save(
@@ -367,21 +369,23 @@ class PodcastModel extends Model
      */
     public function clearCache(array $data): array
     {
-        $podcast = (new self())->getPodcastById(is_array($data['id']) ? $data['id'][0] : $data['id'],);
+        $podcast = (new self())->getPodcastById(is_array($data['id']) ? $data['id'][0] : $data['id']);
 
-        // delete cache all podcast pages
-        cache()
-            ->deleteMatching("page_podcast#{$podcast->id}*");
+        if ($podcast !== null) {
+            // delete cache all podcast pages
+            cache()
+                ->deleteMatching("page_podcast#{$podcast->id}*");
 
-        // delete all cache for podcast actor
-        cache()
-            ->deleteMatching(config('ActivityPub') ->cachePrefix . "actor#{$podcast->actor_id}*",);
+            // delete all cache for podcast actor
+            cache()
+                ->deleteMatching(config('ActivityPub') ->cachePrefix . "actor#{$podcast->actor_id}*");
 
-        // delete model requests cache, includes feed / query / episode lists, etc.
-        cache()
-            ->deleteMatching("podcast#{$podcast->id}*");
-        cache()
-            ->delete("podcast-{$podcast->name}");
+            // delete model requests cache, includes feed / query / episode lists, etc.
+            cache()
+                ->deleteMatching("podcast#{$podcast->id}*");
+            cache()
+                ->delete("podcast-{$podcast->name}");
+        }
 
         // clear cache for every credit page
         cache()
@@ -440,7 +444,7 @@ class PodcastModel extends Model
      */
     protected function setActorAvatar(array $data): array
     {
-        $podcast = (new self())->getPodcastById(is_array($data['id']) ? $data['id'][0] : $data['id'],);
+        $podcast = (new self())->getPodcastById(is_array($data['id']) ? $data['id'][0] : $data['id']);
 
         $podcastActor = (new ActorModel())->find($podcast->actor_id);
 
@@ -459,19 +463,21 @@ class PodcastModel extends Model
      */
     protected function updatePodcastActor(array $data): array
     {
-        $podcast = (new self())->getPodcastById(is_array($data['id']) ? $data['id'][0] : $data['id'],);
+        $podcast = (new self())->getPodcastById(is_array($data['id']) ? $data['id'][0] : $data['id']);
 
-        $actorModel = new ActorModel();
-        $actor = $actorModel->getActorById($podcast->actor_id);
+        if ($podcast !== null) {
+            $actorModel = new ActorModel();
+            $actor = $actorModel->getActorById($podcast->actor_id);
 
-        // update values
-        $actor->display_name = $podcast->title;
-        $actor->summary = $podcast->description_html;
-        $actor->avatar_image_url = $podcast->image->thumbnail_url;
-        $actor->avatar_image_mimetype = $podcast->image_mimetype;
+            // update values
+            $actor->display_name = $podcast->title;
+            $actor->summary = $podcast->description_html;
+            $actor->avatar_image_url = $podcast->image->thumbnail_url;
+            $actor->avatar_image_mimetype = $podcast->image_mimetype;
 
-        if ($actor->hasChanged()) {
-            $actorModel->update($actor->id, $actor);
+            if ($actor->hasChanged()) {
+                $actorModel->update($actor->id, $actor);
+            }
         }
 
         return $data;

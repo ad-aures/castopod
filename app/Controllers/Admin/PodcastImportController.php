@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -78,7 +80,7 @@ class PodcastImportController extends BaseController
         }
         try {
             ini_set('user_agent', 'Castopod/' . CP_VERSION);
-            $feed = simplexml_load_file($this->request->getPost('imported_feed_url'),);
+            $feed = simplexml_load_file($this->request->getPost('imported_feed_url'));
         } catch (ErrorException $errorException) {
             return redirect()
                 ->back()
@@ -92,11 +94,11 @@ class PodcastImportController extends BaseController
                         ' ⎋</a>',
                 ]);
         }
-        $nsItunes = $feed->channel[0]->children('http://www.itunes.com/dtds/podcast-1.0.dtd',);
+        $nsItunes = $feed->channel[0]->children('http://www.itunes.com/dtds/podcast-1.0.dtd');
         $nsPodcast = $feed->channel[0]->children(
             'https://github.com/Podcastindex-org/podcast-namespace/blob/main/docs/1.0.md',
         );
-        $nsContent = $feed->channel[0]->children('http://purl.org/rss/1.0/modules/content/',);
+        $nsContent = $feed->channel[0]->children('http://purl.org/rss/1.0/modules/content/');
 
         if ((string) $nsPodcast->locked === 'yes') {
             return redirect()
@@ -114,9 +116,9 @@ class PodcastImportController extends BaseController
                 property_exists($nsItunes, 'image') && $nsItunes->image !== null &&
                 $nsItunes->image->attributes()['href'] !== null
             ) {
-                $imageFile = download_file((string) $nsItunes->image->attributes()['href'],);
+                $imageFile = download_file((string) $nsItunes->image->attributes()['href']);
             } else {
-                $imageFile = download_file((string) $feed->channel[0]->image->url,);
+                $imageFile = download_file((string) $feed->channel[0]->image->url);
             }
 
             $location = null;
@@ -195,7 +197,7 @@ class PodcastImportController extends BaseController
         $authorize = Services::authorization();
         $podcastAdminGroup = $authorize->group('podcast_admin');
 
-        $podcastModel->addPodcastContributor(user_id(), $newPodcastId, $podcastAdminGroup->id,);
+        $podcastModel->addPodcastContributor(user_id(), $newPodcastId, $podcastAdminGroup->id);
 
         $podcastsPlatformsData = [];
         $platformTypes = [
@@ -230,7 +232,7 @@ class PodcastImportController extends BaseController
         }
 
         if (count($podcastsPlatformsData) > 1) {
-            $platformModel->createPodcastPlatforms($newPodcastId, $podcastsPlatformsData,);
+            $platformModel->createPodcastPlatforms($newPodcastId, $podcastsPlatformsData);
         }
 
         foreach ($nsPodcast->person as $podcastPerson) {
@@ -291,11 +293,11 @@ class PodcastImportController extends BaseController
         for ($itemNumber = 1; $itemNumber <= $lastItem; ++$itemNumber) {
             $item = $feed->channel[0]->item[$numberItems - $itemNumber];
 
-            $nsItunes = $item->children('http://www.itunes.com/dtds/podcast-1.0.dtd',);
+            $nsItunes = $item->children('http://www.itunes.com/dtds/podcast-1.0.dtd');
             $nsPodcast = $item->children(
                 'https://github.com/Podcastindex-org/podcast-namespace/blob/main/docs/1.0.md',
             );
-            $nsContent = $item->children('http://purl.org/rss/1.0/modules/content/',);
+            $nsContent = $item->children('http://purl.org/rss/1.0/modules/content/');
 
             $slug = slugify(
                 $this->request->getPost('slug_field') === 'title'
@@ -321,7 +323,7 @@ class PodcastImportController extends BaseController
                 property_exists($nsItunes, 'image') && $nsItunes->image !== null &&
                 $nsItunes->image->attributes()['href'] !== null
             ) {
-                $episodeImage = new Image(download_file((string) $nsItunes->image->attributes()['href'],),);
+                $episodeImage = new Image(download_file((string) $nsItunes->image->attributes()['href'],));
             } else {
                 $episodeImage = null;
             }

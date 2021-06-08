@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Config;
 
 use App\Authorization\FlatAuthorization;
@@ -76,7 +78,7 @@ class Services extends BaseService
         bool $getShared = true
     ) {
         if ($getShared) {
-            return self::getSharedInstance('authentication', $lib, $userModel, $loginModel,);
+            return self::getSharedInstance('authentication', $lib, $userModel, $loginModel);
         }
 
         // config() checks first in app/Config
@@ -108,7 +110,7 @@ class Services extends BaseService
         bool $getShared = true
     ) {
         if ($getShared) {
-            return self::getSharedInstance('authorization', $groupModel, $permissionModel, $userModel,);
+            return self::getSharedInstance('authorization', $groupModel, $permissionModel, $userModel);
         }
 
         if ($groupModel === null) {

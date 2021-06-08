@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This class defines the Object which is the primary base type for the Activity Streams vocabulary.
  *
@@ -37,7 +39,7 @@ class NoteObject extends ObjectType
             $this->inReplyTo = $note->reply_to_note->uri;
         }
 
-        $this->replies = base_url(route_to('note-replies', $note->actor->username, $note->id),);
+        $this->replies = base_url(route_to('note-replies', $note->actor->username, $note->id));
 
         $this->cc = [$note->actor->followers_url];
     }

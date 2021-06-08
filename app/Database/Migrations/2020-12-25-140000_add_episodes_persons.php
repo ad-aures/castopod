@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Class AddEpisodesPersons Creates episodes_persons table in database
  *
@@ -45,9 +47,9 @@ class AddEpisodesPersons extends Migration
         ]);
         $this->forge->addPrimaryKey('id');
         $this->forge->addUniqueKey(['podcast_id', 'episode_id', 'person_id', 'person_group', 'person_role']);
-        $this->forge->addForeignKey('podcast_id', 'podcasts', 'id', '', 'CASCADE',);
-        $this->forge->addForeignKey('episode_id', 'episodes', 'id', '', 'CASCADE',);
-        $this->forge->addForeignKey('person_id', 'persons', 'id', '', 'CASCADE',);
+        $this->forge->addForeignKey('podcast_id', 'podcasts', 'id', '', 'CASCADE');
+        $this->forge->addForeignKey('episode_id', 'episodes', 'id', '', 'CASCADE');
+        $this->forge->addForeignKey('person_id', 'persons', 'id', '', 'CASCADE');
         $this->forge->createTable('episodes_persons');
     }
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Config;
 
 // Create a new instance of our RouteCollection class.
@@ -34,7 +36,7 @@ $routes->addPlaceholder('slug', '[a-zA-Z0-9\-]{1,191}');
 $routes->addPlaceholder('base64', '[A-Za-z0-9\.\_]+\-{0,2}');
 $routes->addPlaceholder('platformType', '\bpodcasting|\bsocial|\bfunding');
 $routes->addPlaceholder('noteAction', '\bfavourite|\breblog|\breply');
-$routes->addPlaceholder('embeddablePlayerTheme', '\blight|\bdark|\blight-transparent|\bdark-transparent',);
+$routes->addPlaceholder('embeddablePlayerTheme', '\blight|\bdark|\blight-transparent|\bdark-transparent');
 $routes->addPlaceholder(
     'uuid',
     '[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}',
@@ -59,10 +61,10 @@ $routes->group(config('App')->installGateway, function ($routes): void {
     ]);
     $routes->post('instance-config', 'InstallController::attemptInstanceConfig', [
         'as' => 'instance-config',
-    ],);
+    ]);
     $routes->post('database-config', 'InstallController::attemptDatabaseConfig', [
         'as' => 'database-config',
-    ],);
+    ]);
     $routes->post('cache-config', 'InstallController::attemptCacheConfig', [
         'as' => 'cache-config',
     ]);
@@ -626,7 +628,7 @@ $routes->group(
                     'as' => 'change-password',
                 ],
             );
-            $routes->post('change-password', 'MyAccountController::attemptChange/$1',);
+            $routes->post('change-password', 'MyAccountController::attemptChange/$1');
         });
     },
 );

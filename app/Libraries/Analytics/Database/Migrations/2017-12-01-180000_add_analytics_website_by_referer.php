@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Class AddAnalyticsWebsiteByReferer Creates analytics_website_by_referer table in database
  *
@@ -46,7 +48,7 @@ class AddAnalyticsWebsiteByReferer extends Migration
             ],
         ]);
         $this->forge->addPrimaryKey(['podcast_id', 'date', 'referer_url']);
-        $this->forge->addField('`created_at` timestamp NOT NULL DEFAULT current_timestamp()',);
+        $this->forge->addField('`created_at` timestamp NOT NULL DEFAULT current_timestamp()');
         $this->forge->addField(
             '`updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()',
         );

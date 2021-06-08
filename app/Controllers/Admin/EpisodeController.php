@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @copyright  2020 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -161,7 +163,7 @@ class EpisodeController extends BaseController
         ) {
             $newEpisode->transcript_file = $transcriptFile;
         } elseif ($transcriptChoice === 'remote-url') {
-            $newEpisode->transcript_file_remote_url = $this->request->getPost('transcript_file_remote_url',);
+            $newEpisode->transcript_file_remote_url = $this->request->getPost('transcript_file_remote_url');
         }
 
         $chaptersChoice = $this->request->getPost('chapters-choice');
@@ -171,7 +173,7 @@ class EpisodeController extends BaseController
         ) {
             $newEpisode->chapters_file = $chaptersFile;
         } elseif ($chaptersChoice === 'remote-url') {
-            $newEpisode->chapters_file_remote_url = $this->request->getPost('chapters_file_remote_url',);
+            $newEpisode->chapters_file_remote_url = $this->request->getPost('chapters_file_remote_url');
         }
 
         $episodeModel = new EpisodeModel();
@@ -187,7 +189,7 @@ class EpisodeController extends BaseController
         $podcastModel = new PodcastModel();
 
         if ($this->podcast->hasChanged('episode_description_footer_markdown')) {
-            $this->podcast->episode_description_footer_markdown = $this->request->getPost('description_footer',);
+            $this->podcast->episode_description_footer_markdown = $this->request->getPost('description_footer');
 
             if (! $podcastModel->update($this->podcast->id, $this->podcast)) {
                 return redirect()
@@ -237,8 +239,8 @@ class EpisodeController extends BaseController
 
         $this->episode->title = $this->request->getPost('title');
         $this->episode->slug = $this->request->getPost('slug');
-        $this->episode->description_markdown = $this->request->getPost('description',);
-        $this->episode->location = new Location($this->request->getPost('location_name'),);
+        $this->episode->description_markdown = $this->request->getPost('description');
+        $this->episode->location = new Location($this->request->getPost('location_name'));
         $this->episode->parental_advisory =
             $this->request->getPost('parental_advisory') !== 'undefined'
                 ? $this->request->getPost('parental_advisory')
@@ -251,7 +253,7 @@ class EpisodeController extends BaseController
             : null;
         $this->episode->type = $this->request->getPost('type');
         $this->episode->is_blocked = $this->request->getPost('block') === 'yes';
-        $this->episode->custom_rss_string = $this->request->getPost('custom_rss',);
+        $this->episode->custom_rss_string = $this->request->getPost('custom_rss');
 
         $this->episode->updated_by = (int) user_id();
 
@@ -278,7 +280,7 @@ class EpisodeController extends BaseController
                 (($transcriptFile = $this->episode->transcript_file) &&
                     $transcriptFile !== null)
             ) {
-                unlink($transcriptFile);
+                unlink((string) $transcriptFile);
                 $this->episode->transcript_file_path = null;
             }
             $this->episode->transcript_file_remote_url = $transcriptFileRemoteUrl;
@@ -297,7 +299,7 @@ class EpisodeController extends BaseController
                 (($chaptersFile = $this->episode->chapters_file) &&
                     $chaptersFile !== null)
             ) {
-                unlink($chaptersFile);
+                unlink((string) $chaptersFile);
                 $this->episode->chapters_file_path = null;
             }
             $this->episode->chapters_file_remote_url = $chaptersFileRemoteUrl;
@@ -313,7 +315,7 @@ class EpisodeController extends BaseController
         }
 
         // update podcast's episode_description_footer_markdown if changed
-        $this->podcast->episode_description_footer_markdown = $this->request->getPost('description_footer',);
+        $this->podcast->episode_description_footer_markdown = $this->request->getPost('description_footer');
 
         if ($this->podcast->hasChanged('episode_description_footer_markdown')) {
             $podcastModel = new PodcastModel();
@@ -330,7 +332,7 @@ class EpisodeController extends BaseController
 
     public function transcriptDelete(): RedirectResponse
     {
-        unlink($this->episode->transcript_file);
+        unlink((string) $this->episode->transcript_file);
         $this->episode->transcript_file_path = null;
 
         $episodeModel = new EpisodeModel();
@@ -347,7 +349,7 @@ class EpisodeController extends BaseController
 
     public function chaptersDelete(): RedirectResponse
     {
-        unlink($this->episode->chapters_file);
+        unlink((string) $this->episode->chapters_file);
         $this->episode->chapters_file_path = null;
 
         $episodeModel = new EpisodeModel();
@@ -409,7 +411,7 @@ class EpisodeController extends BaseController
 
         $publishMethod = $this->request->getPost('publication_method');
         if ($publishMethod === 'schedule') {
-            $scheduledPublicationDate = $this->request->getPost('scheduled_publication_date',);
+            $scheduledPublicationDate = $this->request->getPost('scheduled_publication_date');
             if ($scheduledPublicationDate) {
                 $this->episode->published_at = Time::createFromFormat(
                     'Y-m-d H:i',
@@ -498,7 +500,7 @@ class EpisodeController extends BaseController
 
         $publishMethod = $this->request->getPost('publication_method');
         if ($publishMethod === 'schedule') {
-            $scheduledPublicationDate = $this->request->getPost('scheduled_publication_date',);
+            $scheduledPublicationDate = $this->request->getPost('scheduled_publication_date');
             if ($scheduledPublicationDate) {
                 $this->episode->published_at = Time::createFromFormat(
                     'Y-m-d H:i',
@@ -516,7 +518,7 @@ class EpisodeController extends BaseController
             $this->episode->published_at = Time::now();
         }
 
-        $note = (new NoteModel())->getNoteById($this->request->getPost('note_id'),);
+        $note = (new NoteModel())->getNoteById($this->request->getPost('note_id'));
 
         if ($note !== null) {
             $note->message = $this->request->getPost('message');
@@ -688,7 +690,7 @@ class EpisodeController extends BaseController
 
     public function soundbiteDelete(int $soundbiteId): RedirectResponse
     {
-        (new SoundbiteModel())->deleteSoundbite($this->podcast->id, $this->episode->id, $soundbiteId,);
+        (new SoundbiteModel())->deleteSoundbite($this->podcast->id, $this->episode->id, $soundbiteId);
 
         return redirect()->route('soundbites-edit', [$this->podcast->id, $this->episode->id]);
     }
