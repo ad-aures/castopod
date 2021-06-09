@@ -37,14 +37,15 @@ class ContributorController extends BaseController
 
         $this->podcast = $podcast;
 
-        if (
-            count($params) > 1 &&
-            ($this->user = (new UserModel())->getPodcastContributor((int) $params[1], (int) $params[0])) === null
-        ) {
-            throw PageNotFoundException::forPageNotFound();
+        if (count($params) <= 1) {
+            return $this->{$method}();
         }
 
-        return $this->{$method}();
+        if (($this->user = (new UserModel())->getPodcastContributor((int) $params[1], (int) $params[0])) !== null) {
+            return $this->{$method}();
+        }
+
+        throw PageNotFoundException::forPageNotFound();
     }
 
     public function list(): string
