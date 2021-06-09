@@ -11,7 +11,9 @@ declare(strict_types=1);
 namespace App\Controllers;
 
 use App\Models\PodcastModel;
+use CodeIgniter\Database\Exceptions\DatabaseException;
 use CodeIgniter\HTTP\RedirectResponse;
+use Config\Services;
 use mysqli_sql_exception;
 
 class HomeController extends BaseController
@@ -20,10 +22,12 @@ class HomeController extends BaseController
     {
         try {
             $allPodcasts = (new PodcastModel())->findAll();
-        } catch (mysqli_sql_exception) {
+        } catch (mysqli_sql_exception | DatabaseException) {
             // An error was caught when retrieving the podcasts from the database.
             // Redirecting to install page because it is likely that Castopod Host has not been installed yet.
-            return redirect()->route('install');
+            // NB: as base_url wouldn't have been defined here, redirect to install wizard manually
+            $route = Services::routes()->reverseRoute('install');
+            return redirect()->to(rtrim(host_url(), '/') . $route);
         }
 
         // check if there's only one podcast to redirect user to it

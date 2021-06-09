@@ -214,20 +214,15 @@ class NoteController extends ActivityPubNoteController
         }
 
         $action = $this->request->getPost('action');
-        /** @phpstan-ignore-next-line */
-        switch ($action) {
-            case 'favourite':
-                return $this->attemptFavourite();
-            case 'reblog':
-                return $this->attemptReblog();
-            case 'reply':
-                return $this->attemptReply();
-            default:
-                return redirect()
-                    ->back()
-                    ->withInput()
-                    ->with('errors', 'error');
-        }
+        return match ($action) {
+            'favourite' => $this->attemptFavourite(),
+            'reblog' => $this->attemptReblog(),
+            'reply' => $this->attemptReply(),
+            default => redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', 'error'),
+        };
     }
 
     public function remoteAction(string $action): string

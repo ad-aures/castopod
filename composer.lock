@@ -66,12 +66,12 @@
       "source": {
         "type": "git",
         "url": "https://github.com/codeigniter4/CodeIgniter4.git",
-        "reference": "67e6f3d9eaff82d003ad30058857f37536ea4252"
+        "reference": "18f5611fc4462871d1de56bb6a44754916397e09"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/codeigniter4/CodeIgniter4/zipball/67e6f3d9eaff82d003ad30058857f37536ea4252",
-        "reference": "67e6f3d9eaff82d003ad30058857f37536ea4252",
+        "url": "https://api.github.com/repos/codeigniter4/CodeIgniter4/zipball/18f5611fc4462871d1de56bb6a44754916397e09",
+        "reference": "18f5611fc4462871d1de56bb6a44754916397e09",
         "shasum": ""
       },
       "require": {
@@ -93,7 +93,7 @@
         "phpstan/phpstan": "0.12.88",
         "phpunit/phpunit": "^9.1",
         "predis/predis": "^1.1",
-        "rector/rector": "0.11.14",
+        "rector/rector": "0.11.16",
         "symplify/package-builder": "^9.3"
       },
       "suggest": {
@@ -135,20 +135,20 @@
         "slack": "https://codeigniterchat.slack.com",
         "issues": "https://github.com/codeigniter4/CodeIgniter4/issues"
       },
-      "time": "2021-06-07T06:25:13+00:00"
+      "time": "2021-06-09T13:09:11+00:00"
     },
     {
       "name": "composer/ca-bundle",
-      "version": "1.2.9",
+      "version": "1.2.10",
       "source": {
         "type": "git",
         "url": "https://github.com/composer/ca-bundle.git",
-        "reference": "78a0e288fdcebf92aa2318a8d3656168da6ac1a5"
+        "reference": "9fdb22c2e97a614657716178093cd1da90a64aa8"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/composer/ca-bundle/zipball/78a0e288fdcebf92aa2318a8d3656168da6ac1a5",
-        "reference": "78a0e288fdcebf92aa2318a8d3656168da6ac1a5",
+        "url": "https://api.github.com/repos/composer/ca-bundle/zipball/9fdb22c2e97a614657716178093cd1da90a64aa8",
+        "reference": "9fdb22c2e97a614657716178093cd1da90a64aa8",
         "shasum": ""
       },
       "require": {
@@ -187,7 +187,7 @@
       "support": {
         "irc": "irc://irc.freenode.org/composer",
         "issues": "https://github.com/composer/ca-bundle/issues",
-        "source": "https://github.com/composer/ca-bundle/tree/1.2.9"
+        "source": "https://github.com/composer/ca-bundle/tree/1.2.10"
       },
       "funding": [
         {
@@ -203,7 +203,7 @@
           "type": "tidelift"
         }
       ],
-      "time": "2021-01-12T12:10:35+00:00"
+      "time": "2021-06-07T13:58:28+00:00"
     },
     {
       "name": "essence/dom",
@@ -1077,12 +1077,12 @@
       "source": {
         "type": "git",
         "url": "https://github.com/lonnieezell/myth-auth.git",
-        "reference": "fb0c8b8cae5b796d4f6d89e74ce6cab07966cdc1"
+        "reference": "4599540dab891d04df14e3732ff7757292a8620d"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/lonnieezell/myth-auth/zipball/fb0c8b8cae5b796d4f6d89e74ce6cab07966cdc1",
-        "reference": "fb0c8b8cae5b796d4f6d89e74ce6cab07966cdc1",
+        "url": "https://api.github.com/repos/lonnieezell/myth-auth/zipball/4599540dab891d04df14e3732ff7757292a8620d",
+        "reference": "4599540dab891d04df14e3732ff7757292a8620d",
         "shasum": ""
       },
       "require": {
@@ -1135,7 +1135,7 @@
           "type": "patreon"
         }
       ],
-      "time": "2021-06-04T13:20:03+00:00"
+      "time": "2021-06-08T15:38:01+00:00"
     },
     {
       "name": "opawg/user-agents-php",
@@ -3328,16 +3328,16 @@
     },
     {
       "name": "rector/rector",
-      "version": "0.11.14",
+      "version": "0.11.16",
       "source": {
         "type": "git",
         "url": "https://github.com/rectorphp/rector.git",
-        "reference": "49dd2ff88bd67d5126557db91c446c322f5bbcef"
+        "reference": "5c030ad7cefa59075e0fe14604cd4982ceaa2bd0"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/rectorphp/rector/zipball/49dd2ff88bd67d5126557db91c446c322f5bbcef",
-        "reference": "49dd2ff88bd67d5126557db91c446c322f5bbcef",
+        "url": "https://api.github.com/repos/rectorphp/rector/zipball/5c030ad7cefa59075e0fe14604cd4982ceaa2bd0",
+        "reference": "5c030ad7cefa59075e0fe14604cd4982ceaa2bd0",
         "shasum": ""
       },
       "require": {
@@ -3370,7 +3370,7 @@
       "description": "Prefixed and PHP 7.1 downgraded version of rector/rector",
       "support": {
         "issues": "https://github.com/rectorphp/rector/issues",
-        "source": "https://github.com/rectorphp/rector/tree/0.11.14"
+        "source": "https://github.com/rectorphp/rector/tree/0.11.16"
       },
       "funding": [
         {
@@ -3378,7 +3378,7 @@
           "type": "github"
         }
       ],
-      "time": "2021-06-05T21:48:47+00:00"
+      "time": "2021-06-08T08:41:04+00:00"
     },
     {
       "name": "rector/rector-phpstan-rules",
