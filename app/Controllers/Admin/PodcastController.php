@@ -207,7 +207,9 @@ class PodcastController extends BaseController
             'publisher' => $this->request->getPost('publisher'),
             'type' => $this->request->getPost('type'),
             'copyright' => $this->request->getPost('copyright'),
-            'location' => new Location($this->request->getPost('location_name')),
+            'location' => $this->request->getPost('location_name') === '' ? null : new Location($this->request->getPost(
+                'location_name'
+            )),
             'payment_pointer' => $this->request->getPost(
                 'payment_pointer'
             ) === '' ? null : $this->request->getPost('payment_pointer'),
@@ -315,7 +317,9 @@ class PodcastController extends BaseController
         $this->podcast->owner_email = $this->request->getPost('owner_email');
         $this->podcast->type = $this->request->getPost('type');
         $this->podcast->copyright = $this->request->getPost('copyright');
-        $this->podcast->location = new Location($this->request->getPost('location_name'));
+        $this->podcast->location = $this->request->getPost('location_name') === '' ? null : new Location(
+            $this->request->getPost('location_name')
+        );
         $this->podcast->payment_pointer = $this->request->getPost(
             'payment_pointer'
         ) === '' ? null : $this->request->getPost('payment_pointer');

@@ -137,7 +137,9 @@ class EpisodeController extends BaseController
             'audio_file' => $this->request->getFile('audio_file'),
             'description_markdown' => $this->request->getPost('description'),
             'image' => $image,
-            'location' => new Location($this->request->getPost('location_name')),
+            'location' => $this->request->getPost('location_name') === '' ? null : new Location($this->request->getPost(
+                'location_name'
+            )),
             'transcript' => $this->request->getFile('transcript'),
             'chapters' => $this->request->getFile('chapters'),
             'parental_advisory' =>
@@ -242,7 +244,9 @@ class EpisodeController extends BaseController
         $this->episode->title = $this->request->getPost('title');
         $this->episode->slug = $this->request->getPost('slug');
         $this->episode->description_markdown = $this->request->getPost('description');
-        $this->episode->location = new Location($this->request->getPost('location_name'));
+        $this->episode->location = $this->request->getPost('location_name') === '' ? null : new Location(
+            $this->request->getPost('location_name')
+        );
         $this->episode->parental_advisory =
             $this->request->getPost('parental_advisory') !== 'undefined'
                 ? $this->request->getPost('parental_advisory')
