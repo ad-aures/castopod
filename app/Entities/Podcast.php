@@ -320,7 +320,7 @@ class Podcast extends Entity
     {
         if ($this->description === null) {
             $this->description = trim(
-                (string) preg_replace('~\s+~', ' ', strip_tags($this->attributes['description_html']),),
+                (string) preg_replace('~\s+~', ' ', strip_tags($this->attributes['description_html'])),
             );
         }
 

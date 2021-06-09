@@ -81,7 +81,7 @@ class PreviewCardModel extends Model
                 'activitypub_notes_preview_cards.preview_card_id = id',
                 'inner',
             )
-                ->where('note_id', service('uuid') ->fromString($noteId) ->getBytes(),)
+                ->where('note_id', service('uuid') ->fromString($noteId) ->getBytes())
                 ->first();
 
             cache()

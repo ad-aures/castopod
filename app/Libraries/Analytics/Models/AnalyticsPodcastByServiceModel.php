@@ -45,7 +45,7 @@ class AnalyticsPodcastByServiceModel extends Model
     public function getDataByServiceWeekly(int $podcastId): array
     {
         if (
-            ! ($found = cache("{$podcastId}_analytics_podcasts_by_service_weekly",))
+            ! ($found = cache("{$podcastId}_analytics_podcasts_by_service_weekly"))
         ) {
             $oneWeekAgo = date('Y-m-d', strtotime('-1 week'));
             $found = $this->select('service as labels')

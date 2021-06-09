@@ -175,7 +175,7 @@ class PodcastModel extends Model
         $cacheName = "user{$userId}_podcasts";
         if (! ($found = cache($cacheName))) {
             $found = $this->select('podcasts.*')
-                ->join('podcasts_users', 'podcasts_users.podcast_id = podcasts.id',)
+                ->join('podcasts_users', 'podcasts_users.podcast_id = podcasts.id')
                 ->where('podcasts_users.user_id', $userId)
                 ->findAll();
 
@@ -268,7 +268,7 @@ class PodcastModel extends Model
         if (! ($found = cache($cacheName))) {
             $episodeModel = new EpisodeModel();
             $found = $episodeModel
-                ->select('YEAR(published_at) as year, count(*) as number_of_episodes',)
+                ->select('YEAR(published_at) as year, count(*) as number_of_episodes')
                 ->where([
                     'podcast_id' => $podcastId,
                     'season_number' => null,

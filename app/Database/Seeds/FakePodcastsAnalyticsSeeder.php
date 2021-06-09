@@ -24,7 +24,7 @@ class FakePodcastsAnalyticsSeeder extends Seeder
     public function run(): void
     {
         $jsonUserAgents = json_decode(
-            file_get_contents('https://raw.githubusercontent.com/opawg/user-agents/master/src/user-agents.json',),
+            file_get_contents('https://raw.githubusercontent.com/opawg/user-agents/master/src/user-agents.json'),
             true,
             512,
             JSON_THROW_ON_ERROR,
@@ -63,7 +63,7 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                     ->where('`published_at` <= NOW()', null, false)
                     ->findAll();
                 foreach ($episodes as $episode) {
-                    $age = floor(($date - strtotime((string) $episode->published_at)) / 86400,);
+                    $age = floor(($date - strtotime((string) $episode->published_at)) / 86400);
                     $probability1 = floor(exp(3 - $age / 40)) + 1;
 
                     for (
@@ -97,7 +97,7 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                             '.' .
                             rand(0, 255);
 
-                        $cityReader = new Reader(WRITEPATH . 'uploads/GeoLite2-City/GeoLite2-City.mmdb',);
+                        $cityReader = new Reader(WRITEPATH . 'uploads/GeoLite2-City/GeoLite2-City.mmdb');
 
                         $countryCode = 'N/A';
                         $regionCode = 'N/A';

@@ -64,7 +64,7 @@ if (! function_exists('generate_episode_analytics_url')) {
                     $audioFileDuration <= 60
                         ? $audioFileSize
                         : $audioFileHeaderSize +
-                            floor((($audioFileSize - $audioFileHeaderSize) / $audioFileDuration) * 60,),
+                            floor((($audioFileSize - $audioFileHeaderSize) / $audioFileDuration) * 60),
                     $audioFileSize,
                     $audioFileDuration,
                     $publicationDate->getTimestamp(),

@@ -29,7 +29,7 @@ class UserModel extends MythAuthUserModel
         if (! ($found = cache($cacheName))) {
             $found = $this->select('users.*, auth_groups.name as podcast_role')
                 ->join('podcasts_users', 'podcasts_users.user_id = users.id')
-                ->join('auth_groups', 'auth_groups.id = podcasts_users.group_id',)
+                ->join('auth_groups', 'auth_groups.id = podcasts_users.group_id')
                 ->where('podcasts_users.podcast_id', $podcastId)
                 ->findAll();
 
@@ -42,7 +42,7 @@ class UserModel extends MythAuthUserModel
 
     public function getPodcastContributor(int $userId, int $podcastId): ?User
     {
-        return $this->select('users.*, podcasts_users.podcast_id as podcast_id, auth_groups.name as podcast_role',)
+        return $this->select('users.*, podcasts_users.podcast_id as podcast_id, auth_groups.name as podcast_role')
             ->join('podcasts_users', 'podcasts_users.user_id = users.id')
             ->join('auth_groups', 'auth_groups.id = podcasts_users.group_id')
             ->where([

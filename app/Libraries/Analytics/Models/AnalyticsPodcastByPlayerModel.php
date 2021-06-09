@@ -45,7 +45,7 @@ class AnalyticsPodcastByPlayerModel extends Model
     public function getDataByAppWeekly(int $podcastId): array
     {
         if (
-            ! ($found = cache("{$podcastId}_analytics_podcasts_by_player_by_app_weekly",))
+            ! ($found = cache("{$podcastId}_analytics_podcasts_by_player_by_app_weekly"))
         ) {
             $oneWeekAgo = date('Y-m-d', strtotime('-1 week'));
             $found = $this->select('app as labels')
@@ -73,7 +73,7 @@ class AnalyticsPodcastByPlayerModel extends Model
     public function getDataByAppYearly(int $podcastId): array
     {
         if (
-            ! ($found = cache("{$podcastId}_analytics_podcasts_by_player_by_app_yearly",))
+            ! ($found = cache("{$podcastId}_analytics_podcasts_by_player_by_app_yearly"))
         ) {
             $oneYearAgo = date('Y-m-d', strtotime('-1 year'));
             $found = $this->select('app as labels')
@@ -101,7 +101,7 @@ class AnalyticsPodcastByPlayerModel extends Model
     public function getDataByOsWeekly(int $podcastId): array
     {
         if (
-            ! ($found = cache("{$podcastId}_analytics_podcasts_by_player_by_os_weekly",))
+            ! ($found = cache("{$podcastId}_analytics_podcasts_by_player_by_os_weekly"))
         ) {
             $oneWeekAgo = date('Y-m-d', strtotime('-1 week'));
             $found = $this->select('os as labels')
@@ -130,7 +130,7 @@ class AnalyticsPodcastByPlayerModel extends Model
     public function getDataByDeviceWeekly(int $podcastId): array
     {
         if (
-            ! ($found = cache("{$podcastId}_analytics_podcasts_by_player_by_device_weekly",))
+            ! ($found = cache("{$podcastId}_analytics_podcasts_by_player_by_device_weekly"))
         ) {
             $oneWeekAgo = date('Y-m-d', strtotime('-1 week'));
             $found = $this->select('device as labels')

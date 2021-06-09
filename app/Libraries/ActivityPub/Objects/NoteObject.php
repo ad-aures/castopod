@@ -35,7 +35,7 @@ class NoteObject extends ObjectType
         $this->published = $note->published_at->format(DATE_W3C);
         $this->attributedTo = $note->actor->uri;
 
-        if ($note->is_reply) {
+        if ($note->in_reply_to_id !== null) {
             $this->inReplyTo = $note->reply_to_note->uri;
         }
 

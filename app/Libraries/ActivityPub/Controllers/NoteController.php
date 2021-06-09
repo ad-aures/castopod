@@ -39,9 +39,16 @@ class NoteController extends Controller
 
     public function _remap(string $method, string ...$params): mixed
     {
-        if (! ($this->note = model('NoteModel')->getNoteById($params[0]))) {
+        if (count($params) < 1) {
             throw PageNotFoundException::forPageNotFound();
         }
+
+        if (($note = model('NoteModel')->getNoteById($params[0])) === null) {
+            throw PageNotFoundException::forPageNotFound();
+        }
+
+        $this->note = $note;
+
         unset($params[0]);
 
         return $this->{$method}(...$params);
@@ -69,7 +76,7 @@ class NoteController extends Controller
          * get note replies
          */
         $noteReplies = model('NoteModel')
-            ->where('in_reply_to_id', service('uuid') ->fromString($this->note->id) ->getBytes(),)
+            ->where('in_reply_to_id', service('uuid') ->fromString($this->note->id) ->getBytes())
             ->where('`published_at` <= NOW()', null, false)
             ->orderBy('published_at', 'ASC');
 
@@ -252,7 +259,7 @@ class NoteController extends Controller
         }
 
         return redirect()->to(
-            str_replace('{uri}', urlencode($this->note->uri), $data->links[$ostatusKey]->template,),
+            str_replace('{uri}', urlencode($this->note->uri), $data->links[$ostatusKey]->template),
         );
     }
 

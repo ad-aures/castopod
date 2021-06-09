@@ -99,7 +99,7 @@ class PlatformModel extends Model
     public function getPlatformsWithLinks(int $podcastId, string $platformType): array
     {
         if (
-            ! ($found = cache("podcast#{$podcastId}_platforms_{$platformType}_withLinks",))
+            ! ($found = cache("podcast#{$podcastId}_platforms_{$platformType}_withLinks"))
         ) {
             $found = $this->select(
                 'platforms.*, podcasts_platforms.link_url, podcasts_platforms.link_content, podcasts_platforms.is_visible, podcasts_platforms.is_on_embeddable_player',
@@ -129,7 +129,7 @@ class PlatformModel extends Model
             $found = $this->select(
                 'platforms.*, podcasts_platforms.link_url, podcasts_platforms.link_content, podcasts_platforms.is_visible, podcasts_platforms.is_on_embeddable_player',
             )
-                ->join('podcasts_platforms', 'podcasts_platforms.platform_slug = platforms.slug',)
+                ->join('podcasts_platforms', 'podcasts_platforms.platform_slug = platforms.slug')
                 ->where('podcasts_platforms.podcast_id', $podcastId)
                 ->where('platforms.type', $platformType)
                 ->findAll();

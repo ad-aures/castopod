@@ -46,7 +46,7 @@ class AnalyticsWebsiteByEntryPageModel extends Model
     {
         if (! ($found = cache("{$podcastId}_analytics_website_by_entry_page"))) {
             $oneWeekAgo = date('Y-m-d', strtotime('-1 week'));
-            $found = $this->select("IF(entry_page_url='/','/',SUBSTRING_INDEX(entry_page_url,'/',-1)) as labels",)
+            $found = $this->select("IF(entry_page_url='/','/',SUBSTRING_INDEX(entry_page_url,'/',-1)) as labels")
                 ->selectSum('hits', 'values')
                 ->where([
                     'podcast_id' => $podcastId,

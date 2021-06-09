@@ -31,7 +31,7 @@ class EpisodePersonController extends BaseController
         }
 
         if (
-            ($this->podcast = (new PodcastModel())->getPodcastById((int) $params[0],)) &&
+            ($this->podcast = (new PodcastModel())->getPodcastById((int) $params[0])) &&
             ($this->episode = (new EpisodeModel())
                 ->where([
                     'id' => $params[1],

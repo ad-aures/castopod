@@ -85,7 +85,7 @@
 
 <div class="space-y-8">
 <?php foreach ($notes as $note): ?>
-    <?php if ($note->is_reblog): ?>
+    <?php if ($note->reblog_of_id !== null): ?>
         <?= view('podcast/_partials/reblog_authenticated', [
             'note' => $note->reblog_of_note,
         ]) ?>

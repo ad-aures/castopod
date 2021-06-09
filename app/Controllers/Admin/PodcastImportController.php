@@ -56,7 +56,7 @@ class PodcastImportController extends BaseController
         $data = [
             'languageOptions' => $languageOptions,
             'categoryOptions' => $categoryOptions,
-            'browserLang' => get_browser_language($this->request->getServer('HTTP_ACCEPT_LANGUAGE'),),
+            'browserLang' => get_browser_language($this->request->getServer('HTTP_ACCEPT_LANGUAGE')),
         ];
 
         return view('admin/podcast/import', $data);
@@ -132,10 +132,10 @@ class PodcastImportController extends BaseController
 
             $podcast = new Podcast([
                 'name' => $this->request->getPost('name'),
-                'imported_feed_url' => $this->request->getPost('imported_feed_url',),
-                'new_feed_url' => base_url(route_to('podcast_feed', $this->request->getPost('name')),),
+                'imported_feed_url' => $this->request->getPost('imported_feed_url'),
+                'new_feed_url' => base_url(route_to('podcast_feed', $this->request->getPost('name'))),
                 'title' => (string) $feed->channel[0]->title,
-                'description_markdown' => $converter->convert($channelDescriptionHtml,),
+                'description_markdown' => $converter->convert($channelDescriptionHtml),
                 'description_html' => $channelDescriptionHtml,
                 'image' => new Image($imageFile),
                 'language_code' => $this->request->getPost('language'),
@@ -323,7 +323,7 @@ class PodcastImportController extends BaseController
                 property_exists($nsItunes, 'image') && $nsItunes->image !== null &&
                 $nsItunes->image->attributes()['href'] !== null
             ) {
-                $episodeImage = new Image(download_file((string) $nsItunes->image->attributes()['href'],));
+                $episodeImage = new Image(download_file((string) $nsItunes->image->attributes()['href']));
             } else {
                 $episodeImage = null;
             }
@@ -342,8 +342,8 @@ class PodcastImportController extends BaseController
                 'guid' => $item->guid ?? null,
                 'title' => $item->title,
                 'slug' => $slug,
-                'audio_file' => download_file((string) $item->enclosure->attributes()['url'],),
-                'description_markdown' => $converter->convert($itemDescriptionHtml,),
+                'audio_file' => download_file((string) $item->enclosure->attributes()['url']),
+                'description_markdown' => $converter->convert($itemDescriptionHtml),
                 'description_html' => $itemDescriptionHtml,
                 'image' => $episodeImage,
                 'parental_advisory' =>

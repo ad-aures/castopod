@@ -130,7 +130,7 @@ class CategoryModel extends Model
         $cacheName = "podcast#{$podcastId}_categories";
         if (! ($categories = cache($cacheName))) {
             $categories = $this->select('categories.*')
-                ->join('podcasts_categories', 'podcasts_categories.category_id = categories.id',)
+                ->join('podcasts_categories', 'podcasts_categories.category_id = categories.id')
                 ->where('podcasts_categories.podcast_id', $podcastId)
                 ->findAll();
 

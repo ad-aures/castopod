@@ -34,7 +34,7 @@ class PermissionModel extends MythAuthPermissionModel
             $groupPermissions = $this->db
                 ->table('auth_groups_permissions')
                 ->select('id, auth_permissions.name')
-                ->join('auth_permissions', 'auth_permissions.id = permission_id', 'inner',)
+                ->join('auth_permissions', 'auth_permissions.id = permission_id', 'inner')
                 ->where('group_id', $groupId)
                 ->get()
                 ->getResultObject();

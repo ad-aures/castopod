@@ -47,7 +47,7 @@ class AnalyticsPodcastByRegionModel extends Model
         $locale = service('request')
             ->getLocale();
         if (
-            ! ($found = cache("{$podcastId}_analytics_podcast_by_region_{$locale}",))
+            ! ($found = cache("{$podcastId}_analytics_podcast_by_region_{$locale}"))
         ) {
             $found = $this->select('country_code, region_code')
                 ->selectSum('hits', 'value')

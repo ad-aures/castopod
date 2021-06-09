@@ -83,7 +83,7 @@ class FollowModel extends Model
                         'queued',
                     );
 
-                $followActivity->set('id', base_url(route_to('activity', $actor->username, $activityId),));
+                $followActivity->set('id', base_url(route_to('activity', $actor->username, $activityId)));
 
                 model('ActivityModel')
                     ->update($activityId, [

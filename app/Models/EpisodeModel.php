@@ -265,7 +265,7 @@ class EpisodeModel extends Model
      */
     public function getSecondsToNextUnpublishedEpisode(int $podcastId): int | false
     {
-        $result = $this->select('TIMESTAMPDIFF(SECOND, NOW(), `published_at`) as timestamp_diff',)
+        $result = $this->select('TIMESTAMPDIFF(SECOND, NOW(), `published_at`) as timestamp_diff')
             ->where([
                 'podcast_id' => $podcastId,
             ])

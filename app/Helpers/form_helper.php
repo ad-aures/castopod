@@ -159,9 +159,9 @@ if (! function_exists('form_multiselect')) {
             'data-class' => $customExtra['class'],
             'data-select-text' => lang('Common.forms.multiSelect.selectText'),
             'data-loading-text' => lang('Common.forms.multiSelect.loadingText'),
-            'data-no-results-text' => lang('Common.forms.multiSelect.noResultsText',),
-            'data-no-choices-text' => lang('Common.forms.multiSelect.noChoicesText',),
-            'data-max-item-text' => lang('Common.forms.multiSelect.maxItemText',),
+            'data-no-results-text' => lang('Common.forms.multiSelect.noResultsText'),
+            'data-no-choices-text' => lang('Common.forms.multiSelect.noChoicesText'),
+            'data-max-item-text' => lang('Common.forms.multiSelect.maxItemText'),
         ];
         $extra = stringify_attributes(array_merge($defaultExtra, $customExtra));
 

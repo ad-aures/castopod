@@ -62,7 +62,7 @@ class WebFinger
         }
 
         if (
-            ! ($actor = model('ActorModel')->getActorByUsername($username, $domain,))
+            ! ($actor = model('ActorModel')->getActorByUsername($username, $domain))
         ) {
             throw new Exception('Could not find actor');
         }

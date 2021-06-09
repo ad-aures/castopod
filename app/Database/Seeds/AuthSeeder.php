@@ -277,7 +277,7 @@ class AuthSeeder extends Seeder
                 foreach ($action['has_permission'] as $role) {
                     // link permission to specified groups
                     $dataGroupsPermissions[] = [
-                        'group_id' => $this->getGroupIdByName($role, $dataGroups,),
+                        'group_id' => $this->getGroupIdByName($role, $dataGroups),
                         'permission_id' => $permissionId,
                     ];
                 }

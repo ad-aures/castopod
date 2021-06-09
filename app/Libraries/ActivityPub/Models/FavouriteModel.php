@@ -57,7 +57,7 @@ class FavouriteModel extends UuidModel
         ]);
 
         model('NoteModel')
-            ->where('id', service('uuid') ->fromString($note->id) ->getBytes(),)
+            ->where('id', service('uuid') ->fromString($note->id) ->getBytes())
             ->increment('favourites_count');
 
         if ($registerActivity) {
@@ -97,7 +97,7 @@ class FavouriteModel extends UuidModel
         $this->db->transStart();
 
         model('NoteModel')
-            ->where('id', service('uuid') ->fromString($note->id) ->getBytes(),)
+            ->where('id', service('uuid') ->fromString($note->id) ->getBytes())
             ->decrement('favourites_count');
 
         $this->db
@@ -125,7 +125,7 @@ class FavouriteModel extends UuidModel
 
             $likeActivity = new LikeActivity();
             $likeActivity
-                ->set('id', base_url(route_to('activity', $actor->username, $activity->id),),)
+                ->set('id', base_url(route_to('activity', $actor->username, $activity->id)))
                 ->set('actor', $actor->uri)
                 ->set('object', $note->uri);
 

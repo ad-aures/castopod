@@ -67,7 +67,7 @@ class AnalyticsPodcastModel extends Model
     public function getDataByWeekday(int $podcastId): array
     {
         if (! ($found = cache("{$podcastId}_analytics_podcasts_by_weekday"))) {
-            $found = $this->select('LEFT(DAYNAME(date),3) as labels, WEEKDAY(date) as sort_labels',)
+            $found = $this->select('LEFT(DAYNAME(date),3) as labels, WEEKDAY(date) as sort_labels')
                 ->selectSum('hits', 'values')
                 ->where([
                     'podcast_id' => $podcastId,
@@ -91,7 +91,7 @@ class AnalyticsPodcastModel extends Model
     public function getDataBandwidthByDay(int $podcastId): array
     {
         if (! ($found = cache("{$podcastId}_analytics_podcast_by_bandwidth"))) {
-            $found = $this->select('date as labels, round(bandwidth / 1048576, 1) as `values`',)
+            $found = $this->select('date as labels, round(bandwidth / 1048576, 1) as `values`')
                 ->where([
                     'podcast_id' => $podcastId,
                     'date >' => date('Y-m-d', strtotime('-60 days')),
@@ -136,7 +136,7 @@ class AnalyticsPodcastModel extends Model
     public function getDataUniqueListenersByDay(int $podcastId): array
     {
         if (
-            ! ($found = cache("{$podcastId}_analytics_podcast_unique_listeners_by_day",))
+            ! ($found = cache("{$podcastId}_analytics_podcast_unique_listeners_by_day"))
         ) {
             $found = $this->select('date as labels, unique_listeners as values')
                 ->where([
@@ -160,7 +160,7 @@ class AnalyticsPodcastModel extends Model
     public function getDataUniqueListenersByMonth(int $podcastId): array
     {
         if (
-            ! ($found = cache("{$podcastId}_analytics_podcast_unique_listeners_by_month",))
+            ! ($found = cache("{$podcastId}_analytics_podcast_unique_listeners_by_month"))
         ) {
             $found = $this->select('DATE_FORMAT(date,"%Y-%m-01") as labels')
                 ->selectSum('unique_listeners', 'values')
@@ -185,7 +185,7 @@ class AnalyticsPodcastModel extends Model
     public function getDataTotalListeningTimeByDay(int $podcastId): array
     {
         if (
-            ! ($found = cache("{$podcastId}_analytics_podcast_listening_time_by_day",))
+            ! ($found = cache("{$podcastId}_analytics_podcast_listening_time_by_day"))
         ) {
             $found = $this->select('date as labels')
                 ->selectSum('duration', 'values')
@@ -211,7 +211,7 @@ class AnalyticsPodcastModel extends Model
     public function getDataTotalListeningTimeByMonth(int $podcastId): array
     {
         if (
-            ! ($found = cache("{$podcastId}_analytics_podcast_listening_time_by_month",))
+            ! ($found = cache("{$podcastId}_analytics_podcast_listening_time_by_month"))
         ) {
             $found = $this->select('DATE_FORMAT(date,"%Y-%m-01") as labels')
                 ->selectSum('duration', 'values')

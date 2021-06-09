@@ -423,7 +423,7 @@ class PersonModel extends Model
      */
     protected function clearCache(array $data): array
     {
-        $personId = is_array($data['id']) ? $data['id']['id'] : $data['id'];
+        $personId = is_array($data['id']) ? $data['id'][0] : $data['id'];
 
         cache()
             ->delete('person_options');

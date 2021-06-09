@@ -35,13 +35,13 @@ class EpisodeController extends BaseController
         }
 
         if (
-            ($this->podcast = (new PodcastModel())->getPodcastByName($params[0],)) === null
+            ($this->podcast = (new PodcastModel())->getPodcastByName($params[0])) === null
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
 
         if (
-            ($this->episode = (new EpisodeModel())->getEpisodeBySlug($params[0], $params[1],)) !== null
+            ($this->episode = (new EpisodeModel())->getEpisodeBySlug($params[0], $params[1])) !== null
         ) {
             unset($params[1]);
             unset($params[0]);

@@ -30,13 +30,15 @@ class PodcastController extends BaseController
         }
 
         if (
-            ($this->podcast = (new PodcastModel())->getPodcastByName($params[0],)) !== null
+            ($podcast = (new PodcastModel())->getPodcastByName($params[0])) === null
         ) {
-            unset($params[0]);
-            return $this->{$method}(...$params);
+            throw PageNotFoundException::forPageNotFound();
         }
 
-        throw PageNotFoundException::forPageNotFound();
+        $this->podcast = $podcast;
+
+        unset($params[0]);
+        return $this->{$method}(...$params);
     }
 
     public function activity(): string
@@ -61,7 +63,7 @@ class PodcastController extends BaseController
         if (! ($cachedView = cache($cacheName))) {
             $data = [
                 'podcast' => $this->podcast,
-                'notes' => (new NoteModel())->getActorPublishedNotes($this->podcast->actor_id,),
+                'notes' => (new NoteModel())->getActorPublishedNotes($this->podcast->actor_id),
             ];
 
             // if user is logged in then send to the authenticated activity view

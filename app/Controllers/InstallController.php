@@ -155,7 +155,7 @@ class InstallController extends Controller
 
         if (! $this->validate($rules)) {
             return redirect()
-                ->to((host_url() === null ? config('App') ->baseURL : host_url()) . config('App')->installGateway,)
+                ->to((host_url() === null ? config('App') ->baseURL : host_url()) . config('App')->installGateway)
                 ->withInput()
                 ->with('errors', $this->validator->getErrors());
         }
@@ -173,7 +173,7 @@ class InstallController extends Controller
         helper('text');
 
         // redirect to full install url with new baseUrl input
-        return redirect()->to(reduce_double_slashes($baseUrl . '/' . config('App')->installGateway,));
+        return redirect()->to(reduce_double_slashes($baseUrl . '/' . config('App')->installGateway));
     }
 
     public function databaseConfig(): string
@@ -198,10 +198,10 @@ class InstallController extends Controller
         }
 
         self::writeEnv([
-            'database.default.hostname' => $this->request->getPost('db_hostname',),
+            'database.default.hostname' => $this->request->getPost('db_hostname'),
             'database.default.database' => $this->request->getPost('db_name'),
-            'database.default.username' => $this->request->getPost('db_username',),
-            'database.default.password' => $this->request->getPost('db_password',),
+            'database.default.username' => $this->request->getPost('db_username'),
+            'database.default.password' => $this->request->getPost('db_password'),
             'database.default.DBPrefix' => $this->request->getPost('db_prefix'),
         ]);
 

@@ -45,7 +45,7 @@ if (! function_exists('split_handle')) {
     function split_handle(string $handle): array | false
     {
         if (
-            ! preg_match('~^@?(?P<username>[\w\.\-]+)@(?P<domain>[\w\.\-]+)(?P<port>:[\d]+)?$~', $handle, $matches,)
+            ! preg_match('~^@?(?P<username>[\w\.\-]+)@(?P<domain>[\w\.\-]+)(?P<port>:[\d]+)?$~', $handle, $matches)
         ) {
             return false;
         }
@@ -171,7 +171,7 @@ if (! function_exists('create_preview_card_from_url')) {
                 ]);
 
                 if (
-                    ! ($newPreviewCardId = model('PreviewCardModel')->insert($newPreviewCard, true,))
+                    ! ($newPreviewCardId = model('PreviewCardModel')->insert($newPreviewCard, true))
                 ) {
                     return null;
                 }
@@ -194,7 +194,7 @@ if (! function_exists('get_or_create_preview_card_from_url')) {
         // check if preview card has already been generated
         if (
             $previewCard = model('PreviewCardModel')
-                ->getPreviewCardFromUrl((string) $url,)
+                ->getPreviewCardFromUrl((string) $url)
         ) {
             return $previewCard;
         }
@@ -361,7 +361,7 @@ if (! function_exists('linkify')) {
                                 if (
                                     $actor = model(
                                         'ActorModel',
-                                    )->getActorByUsername($match['username'], $match['domain'],)
+                                    )->getActorByUsername($match['username'], $match['domain'])
                                 ) {
                                     // TODO: check that host is local to remove target blank?
                                     return '<' .
@@ -394,11 +394,11 @@ if (! function_exists('linkify')) {
                                 }
                             } else {
                                 if (
-                                    $actor = model('ActorModel',)
+                                    $actor = model('ActorModel')
                                         ->getActorByUsername($match['username'])
                                 ) {
                                     return '<' .
-                                        array_push($links, anchor($actor->uri, $match[0]),) .
+                                        array_push($links, anchor($actor->uri, $match[0])) .
                                         '>';
                                 }
 

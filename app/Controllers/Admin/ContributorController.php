@@ -27,19 +27,24 @@ class ContributorController extends BaseController
 
     public function _remap(string $method, string ...$params): mixed
     {
-        $this->podcast = (new PodcastModel())->getPodcastById((int) $params[0]);
-
-        if (count($params) <= 1) {
-            return $this->{$method}();
+        if (count($params) === 0) {
+            throw PageNotFoundException::forPageNotFound();
         }
+
+        if (($podcast = (new PodcastModel())->getPodcastById((int) $params[0])) === null) {
+            throw PageNotFoundException::forPageNotFound();
+        }
+
+        $this->podcast = $podcast;
 
         if (
-            ($this->user = (new UserModel())->getPodcastContributor((int) $params[1], (int) $params[0],)) !== null
+            count($params) > 1 &&
+            ($this->user = (new UserModel())->getPodcastContributor((int) $params[1], (int) $params[0])) === null
         ) {
-            return $this->{$method}();
+            throw PageNotFoundException::forPageNotFound();
         }
 
-        throw PageNotFoundException::forPageNotFound();
+        return $this->{$method}();
     }
 
     public function list(): string
@@ -57,7 +62,7 @@ class ContributorController extends BaseController
     public function view(): string
     {
         $data = [
-            'contributor' => (new UserModel())->getPodcastContributor($this->user->id, $this->podcast->id,),
+            'contributor' => (new UserModel())->getPodcastContributor($this->user->id, $this->podcast->id),
         ];
 
         replace_breadcrumb_params([
@@ -173,7 +178,7 @@ class ContributorController extends BaseController
 
         $podcastModel = new PodcastModel();
         if (
-            ! $podcastModel->removePodcastContributor($this->user->id, $this->podcast->id,)
+            ! $podcastModel->removePodcastContributor($this->user->id, $this->podcast->id)
         ) {
             return redirect()
                 ->back()

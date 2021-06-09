@@ -27,7 +27,7 @@ class PodcastPersonController extends BaseController
         }
 
         if (
-            ($this->podcast = (new PodcastModel())->getPodcastById((int) $params[0],)) !== null
+            ($this->podcast = (new PodcastModel())->getPodcastById((int) $params[0])) !== null
         ) {
             unset($params[0]);
             return $this->{$method}(...$params);
@@ -42,7 +42,7 @@ class PodcastPersonController extends BaseController
 
         $data = [
             'podcast' => $this->podcast,
-            'podcastPersons' => (new PersonModel())->getPodcastPersons($this->podcast->id,),
+            'podcastPersons' => (new PersonModel())->getPodcastPersons($this->podcast->id),
             'personOptions' => (new PersonModel())->getPersonOptions(),
             'taxonomyOptions' => (new PersonModel())->getTaxonomyOptions(),
         ];

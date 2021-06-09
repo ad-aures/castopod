@@ -35,20 +35,25 @@ class EpisodeController extends BaseController
         }
 
         if (
-            ($this->podcast = (new PodcastModel())->getPodcastByName($params[0],)) === null
+            ($podcast = (new PodcastModel())->getPodcastByName($params[0])) === null
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
 
+        $this->podcast = $podcast;
+
         if (
-            ($this->episode = (new EpisodeModel())->getEpisodeBySlug($params[0], $params[1],)) !== null
+            ($episode = (new EpisodeModel())->getEpisodeBySlug($params[0], $params[1])) === null
         ) {
-            unset($params[1]);
-            unset($params[0]);
-            return $this->{$method}(...$params);
+            throw PageNotFoundException::forPageNotFound();
         }
 
-        throw PageNotFoundException::forPageNotFound();
+        $this->episode = $episode;
+
+        unset($params[1]);
+        unset($params[0]);
+
+        return $this->{$method}(...$params);
     }
 
     public function index(): string

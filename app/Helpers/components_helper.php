@@ -96,7 +96,7 @@ if (! function_exists('button')) {
         if ($uri !== '') {
             return anchor($uri, $label, array_merge([
                 'class' => $buttonClass,
-            ], $customAttributes,));
+            ], $customAttributes));
         }
 
         $defaultButtonAttributes = [

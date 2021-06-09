@@ -33,10 +33,12 @@ class EpisodeController extends BaseController
     public function _remap(string $method, string ...$params): mixed
     {
         if (
-            ($this->podcast = (new PodcastModel())->getPodcastById((int) $params[0],)) === null
+            ($podcast = (new PodcastModel())->getPodcastById((int) $params[0])) === null
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
+
+        $this->podcast = $podcast;
 
         if (count($params) > 1) {
             if (
@@ -135,7 +137,7 @@ class EpisodeController extends BaseController
             'audio_file' => $this->request->getFile('audio_file'),
             'description_markdown' => $this->request->getPost('description'),
             'image' => $image,
-            'location' => new Location($this->request->getPost('location_name'),),
+            'location' => new Location($this->request->getPost('location_name')),
             'transcript' => $this->request->getFile('transcript'),
             'chapters' => $this->request->getFile('chapters'),
             'parental_advisory' =>
@@ -276,7 +278,7 @@ class EpisodeController extends BaseController
             }
         } elseif ($transcriptChoice === 'remote-url') {
             if (
-                ($transcriptFileRemoteUrl = $this->request->getPost('transcript_file_remote_url',)) &&
+                ($transcriptFileRemoteUrl = $this->request->getPost('transcript_file_remote_url')) &&
                 (($transcriptFile = $this->episode->transcript_file) &&
                     $transcriptFile !== null)
             ) {
@@ -295,7 +297,7 @@ class EpisodeController extends BaseController
             }
         } elseif ($chaptersChoice === 'remote-url') {
             if (
-                ($chaptersFileRemoteUrl = $this->request->getPost('chapters_file_remote_url',)) &&
+                ($chaptersFileRemoteUrl = $this->request->getPost('chapters_file_remote_url')) &&
                 (($chaptersFile = $this->episode->chapters_file) &&
                     $chaptersFile !== null)
             ) {

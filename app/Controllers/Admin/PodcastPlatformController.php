@@ -28,7 +28,7 @@ class PodcastPlatformController extends BaseController
         }
 
         if (
-            ($this->podcast = (new PodcastModel())->getPodcastById((int) $params[0],)) !== null
+            ($this->podcast = (new PodcastModel())->getPodcastById((int) $params[0])) !== null
         ) {
             unset($params[0]);
             return $this->{$method}(...$params);
@@ -49,7 +49,7 @@ class PodcastPlatformController extends BaseController
         $data = [
             'podcast' => $this->podcast,
             'platformType' => $platformType,
-            'platforms' => (new PlatformModel())->getPlatformsWithLinks($this->podcast->id, $platformType,),
+            'platforms' => (new PlatformModel())->getPlatformsWithLinks($this->podcast->id, $platformType),
         ];
 
         replace_breadcrumb_params([

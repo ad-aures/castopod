@@ -129,7 +129,7 @@ class ActorModel extends Model
             config('ActivityPub')
                 ->cachePrefix . "actor#{$actorId}_followers";
         if (! ($found = cache($cacheName))) {
-            $found = $this->join('activitypub_follows', 'activitypub_follows.actor_id = id', 'inner',)
+            $found = $this->join('activitypub_follows', 'activitypub_follows.actor_id = id', 'inner')
                 ->where('activitypub_follows.target_actor_id', $actorId)
                 ->findAll();
 

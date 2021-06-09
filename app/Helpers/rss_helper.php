@@ -84,7 +84,7 @@ if (! function_exists('get_rss_feed')) {
             $recipientElement->addAttribute('split', '100');
         }
         $channel
-            ->addChild('locked', $podcast->is_locked ? 'yes' : 'no', $podcastNamespace,)
+            ->addChild('locked', $podcast->is_locked ? 'yes' : 'no', $podcastNamespace)
             ->addAttribute('owner', $podcast->owner_email);
         if ($podcast->imported_feed_url !== null) {
             $channel->addChild('previousUrl', $podcast->imported_feed_url, $podcastNamespace);
@@ -142,13 +142,13 @@ if (! function_exists('get_rss_feed')) {
                 $personElement->addAttribute(
                     'role',
                     htmlspecialchars(
-                        lang("PersonsTaxonomy.persons.{$role->group}.roles.{$role->role}.label", [], 'en',),
+                        lang("PersonsTaxonomy.persons.{$role->group}.roles.{$role->role}.label", [], 'en'),
                     ),
                 );
 
                 $personElement->addAttribute(
                     'group',
-                    htmlspecialchars(lang("PersonsTaxonomy.persons.{$role->group}.label", [], 'en',),),
+                    htmlspecialchars(lang("PersonsTaxonomy.persons.{$role->group}.label", [], 'en')),
                 );
             }
         }
@@ -253,7 +253,7 @@ if (! function_exists('get_rss_feed')) {
                 $transcriptElement->addAttribute('url', $episode->transcript_file_url);
                 $transcriptElement->addAttribute(
                     'type',
-                    Mimes::guessTypeFromExtension(pathinfo($episode->transcript_file_url, PATHINFO_EXTENSION,),),
+                    Mimes::guessTypeFromExtension(pathinfo($episode->transcript_file_url, PATHINFO_EXTENSION)),
                 );
                 $transcriptElement->addAttribute('language', $podcast->language_code);
             }
@@ -281,13 +281,13 @@ if (! function_exists('get_rss_feed')) {
                     $personElement->addAttribute(
                         'role',
                         htmlspecialchars(
-                            lang("PersonsTaxonomy.persons.{$role->group}.roles.{$role->role}.label", [], 'en',),
+                            lang("PersonsTaxonomy.persons.{$role->group}.roles.{$role->role}.label", [], 'en'),
                         ),
                     );
 
                     $personElement->addAttribute(
                         'group',
-                        htmlspecialchars(lang("PersonsTaxonomy.persons.{$role->group}.label", [], 'en',),),
+                        htmlspecialchars(lang("PersonsTaxonomy.persons.{$role->group}.label", [], 'en')),
                     );
 
                     $personElement->addAttribute('img', $person->image->large_url);

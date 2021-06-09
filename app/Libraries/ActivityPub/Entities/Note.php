@@ -18,12 +18,10 @@ use RuntimeException;
  * @property string $id
  * @property string $uri
  * @property int $actor_id
- * @property Actor|null $actor
+ * @property Actor $actor
  * @property string|null $in_reply_to_id
- * @property bool $is_reply
  * @property Note|null $reply_to_note
  * @property string|null $reblog_of_id
- * @property bool $is_reblog
  * @property Note|null $reblog_of_note
  * @property string $message
  * @property string $message_html
@@ -44,11 +42,7 @@ class Note extends UuidEntity
 {
     protected ?Actor $actor = null;
 
-    protected bool $is_reply = false;
-
     protected ?Note $reply_to_note = null;
-
-    protected bool $is_reblog = false;
 
     protected ?Note $reblog_of_note = null;
 
@@ -97,14 +91,14 @@ class Note extends UuidEntity
     /**
      * Returns the note's actor
      */
-    public function getActor(): ?Actor
+    public function getActor(): Actor
     {
         if ($this->actor_id === null) {
             throw new RuntimeException('Note must have an actor_id before getting actor.');
         }
 
         if ($this->actor === null) {
-            $this->actor = model('ActorModel')
+            $this->actor = model('ActorModel', false)
                 ->getActorById($this->actor_id);
         }
 
@@ -118,7 +112,7 @@ class Note extends UuidEntity
         }
 
         if ($this->preview_card === null) {
-            $this->preview_card = model('PreviewCardModel')
+            $this->preview_card = model('PreviewCardModel', false)
                 ->getNotePreviewCard($this->id);
         }
 
@@ -128,11 +122,6 @@ class Note extends UuidEntity
     public function getHasPreviewCard(): bool
     {
         return $this->getPreviewCard() !== null;
-    }
-
-    public function getIsReply(): bool
-    {
-        return $this->in_reply_to_id && ($this->getReplyToNote() !== null);
     }
 
     /**
@@ -145,7 +134,7 @@ class Note extends UuidEntity
         }
 
         if ($this->replies === null) {
-            $this->replies = (array) model('NoteModel')
+            $this->replies = (array) model('NoteModel', false)
                 ->getNoteReplies($this->id);
         }
 
@@ -164,7 +153,7 @@ class Note extends UuidEntity
         }
 
         if ($this->reply_to_note === null) {
-            $this->reply_to_note = model('NoteModel')
+            $this->reply_to_note = model('NoteModel', false)
                 ->getNoteById($this->in_reply_to_id);
         }
 
@@ -181,16 +170,11 @@ class Note extends UuidEntity
         }
 
         if ($this->reblogs === null) {
-            $this->reblogs = (array) model('NoteModel')
+            $this->reblogs = (array) model('NoteModel', false)
                 ->getNoteReblogs($this->id);
         }
 
         return $this->reblogs;
-    }
-
-    public function getIsReblog(): bool
-    {
-        return $this->reblog_of_id !== null;
     }
 
     public function getReblogOfNote(): ?self
@@ -200,7 +184,7 @@ class Note extends UuidEntity
         }
 
         if ($this->reblog_of_note === null) {
-            $this->reblog_of_note = model('NoteModel')
+            $this->reblog_of_note = model('NoteModel', false)
                 ->getNoteById($this->reblog_of_id);
         }
 

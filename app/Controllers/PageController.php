@@ -16,7 +16,7 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 
 class PageController extends BaseController
 {
-    protected ?Page $page = null;
+    protected Page $page;
 
     public function _remap(string $method, string ...$params): mixed
     {
@@ -25,12 +25,14 @@ class PageController extends BaseController
         }
 
         if (
-            $this->page = (new PageModel())->where('slug', $params[0])->first()
+            ($page = (new PageModel())->where('slug', $params[0])->first()) === null
         ) {
-            return $this->{$method}();
+            throw PageNotFoundException::forPageNotFound();
         }
 
-        throw PageNotFoundException::forPageNotFound();
+        $this->page = $page;
+
+        return $this->{$method}();
     }
 
     public function index(): string

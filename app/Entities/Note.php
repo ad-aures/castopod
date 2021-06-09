@@ -17,9 +17,6 @@ use RuntimeException;
 /**
  * @property int|null $episode_id
  * @property Episode|null $episode
- * @property Actor $actor
- * @property Note $reblog_of_note
- * @property Note $reply_to_note
  */
 class Note extends ActivityPubNote
 {

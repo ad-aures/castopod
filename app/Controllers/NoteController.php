@@ -39,8 +39,12 @@ class NoteController extends ActivityPubNoteController
 
     public function _remap(string $method, string ...$params): mixed
     {
+        if (count($params) < 2) {
+            throw PageNotFoundException::forPageNotFound();
+        }
+
         if (
-            ($this->podcast = (new PodcastModel())->getPodcastByName($params[0],)) === null
+            ($this->podcast = (new PodcastModel())->getPodcastByName($params[0])) === null
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
@@ -48,11 +52,13 @@ class NoteController extends ActivityPubNoteController
         $this->actor = $this->podcast->actor;
 
         if (
-            count($params) > 1 &&
-            ! ($this->note = (new NoteModel())->getNoteById($params[1]))
+            ($note = (new NoteModel())->getNoteById($params[1])) === null
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
+
+        $this->note = $note;
+
         unset($params[0]);
         unset($params[1]);
 
@@ -125,7 +131,7 @@ class NoteController extends ActivityPubNoteController
         if (
             $episodeUri &&
             ($params = extract_params_from_episode_uri(new URI($episodeUri))) &&
-            ($episode = (new EpisodeModel())->getEpisodeBySlug($params['podcastName'], $params['episodeSlug'],))
+            ($episode = (new EpisodeModel())->getEpisodeBySlug($params['podcastName'], $params['episodeSlug']))
         ) {
             $newNote->episode_id = $episode->id;
         }
@@ -135,7 +141,7 @@ class NoteController extends ActivityPubNoteController
         $noteModel = new NoteModel();
         if (
             ! $noteModel
-                ->addNote($newNote, ! (bool) $newNote->episode_id, true,)
+                ->addNote($newNote, ! (bool) $newNote->episode_id, true)
         ) {
             return redirect()
                 ->back()

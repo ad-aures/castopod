@@ -123,7 +123,7 @@ Events::on('on_undo_follow', function ($actor, $targetActor): void {
  * @param Note $note
  */
 Events::on('on_note_add', function ($note): void {
-    if ($note->is_reply) {
+    if ($note->in_reply_to_id !== null) {
         $note = $note->reply_to_note;
     }
 
@@ -147,7 +147,7 @@ Events::on('on_note_add', function ($note): void {
  * @param Note $note
  */
 Events::on('on_note_remove', function ($note): void {
-    if ($note->is_reply) {
+    if ($note->in_reply_to_id !== null) {
         Events::trigger('on_note_remove', $note->reply_to_note);
     }
 
@@ -207,7 +207,7 @@ Events::on('on_note_reblog', function ($actor, $note): void {
     cache()
         ->deleteMatching("page_note#{$note->id}*");
 
-    if ($note->is_reply) {
+    if ($note->in_reply_to_id !== null) {
         cache()->deleteMatching("page_note#{$note->in_reply_to_id}");
     }
 });
@@ -239,7 +239,7 @@ Events::on('on_note_undo_reblog', function ($reblogNote): void {
     cache()
         ->deleteMatching("page_note#{$reblogNote->id}*");
 
-    if ($note->is_reply) {
+    if ($note->in_reply_to_id !== null) {
         cache()->deleteMatching("page_note#{$note->in_reply_to_id}");
     }
 
@@ -308,7 +308,7 @@ Events::on('on_note_favourite', function ($actor, $note): void {
     cache()
         ->deleteMatching("page_note#{$note->id}*");
 
-    if ($note->is_reply) {
+    if ($note->in_reply_to_id !== null) {
         cache()->deleteMatching("page_note#{$note->in_reply_to_id}*");
     }
 
@@ -340,7 +340,7 @@ Events::on('on_note_undo_favourite', function ($actor, $note): void {
     cache()
         ->deleteMatching("page_note#{$note->id}*");
 
-    if ($note->is_reply) {
+    if ($note->in_reply_to_id !== null) {
         cache()->deleteMatching("page_note#{$note->in_reply_to_id}*");
     }
 

@@ -101,7 +101,7 @@ class Actor extends Entity
         }
 
         if ($this->followers === null) {
-            $this->followers = (array) model('ActorModel')
+            $this->followers = (array) model('ActorModel', false)
                 ->getFollowers($this->id);
         }
 

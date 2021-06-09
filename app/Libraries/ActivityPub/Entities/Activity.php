@@ -18,9 +18,9 @@ use RuntimeException;
  * @property int $actor_id
  * @property Actor $actor
  * @property int|null $target_actor_id
- * @property Actor|null $target_actor
+ * @property Actor $target_actor
  * @property string|null $note_id
- * @property Note|null $note
+ * @property Note $note
  * @property string $type
  * @property object $payload
  * @property string|null $status
@@ -65,7 +65,7 @@ class Activity extends UuidEntity
         }
 
         if ($this->actor === null) {
-            $this->actor = model('ActorModel')
+            $this->actor = model('ActorModel', false)
                 ->getActorById($this->actor_id);
         }
 
@@ -79,7 +79,7 @@ class Activity extends UuidEntity
         }
 
         if ($this->target_actor === null) {
-            $this->target_actor = model('ActorModel')
+            $this->target_actor = model('ActorModel', false)
                 ->getActorById($this->target_actor_id);
         }
 
@@ -93,7 +93,7 @@ class Activity extends UuidEntity
         }
 
         if ($this->note === null) {
-            $this->note = model('NoteModel')
+            $this->note = model('NoteModel', false)
                 ->getNoteById($this->note_id);
         }
 

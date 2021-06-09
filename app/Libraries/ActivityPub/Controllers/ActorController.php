@@ -39,12 +39,17 @@ class ActorController extends Controller
 
     public function _remap(string $method, string ...$params): mixed
     {
+        if (count($params) < 1) {
+            throw PageNotFoundException::forPageNotFound();
+        }
+
         if (
-            count($params) > 0 &&
-            ! ($this->actor = model('ActorModel')->getActorByUsername($params[0],))
+            ($actor = model('ActorModel')->getActorByUsername($params[0])) === null
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
+
+        $this->actor = $actor;
         unset($params[0]);
 
         return $this->{$method}(...$params);
@@ -109,7 +114,7 @@ class ActorController extends Controller
                             'actor_id' => $payloadActor->id,
                             'in_reply_to_id' => $replyToNote->id,
                             'message' => $payload->object->content,
-                            'published_at' => Time::parse($payload->object->published,),
+                            'published_at' => Time::parse($payload->object->published),
                         ]);
                     }
 
@@ -295,7 +300,7 @@ class ActorController extends Controller
     {
         // get followers for a specific actor
         $followers = model('ActorModel')
-            ->join('activitypub_follows', 'activitypub_follows.actor_id = id', 'inner',)
+            ->join('activitypub_follows', 'activitypub_follows.actor_id = id', 'inner')
             ->where('activitypub_follows.target_actor_id', $this->actor->id)
             ->orderBy('activitypub_follows.created_at', 'DESC');
 
@@ -364,7 +369,7 @@ class ActorController extends Controller
         }
 
         return redirect()->to(
-            str_replace('{uri}', urlencode($this->actor->uri), $data->links[$ostatusKey]->template,),
+            str_replace('{uri}', urlencode($this->actor->uri), $data->links[$ostatusKey]->template),
         );
     }
 

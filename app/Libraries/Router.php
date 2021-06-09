@@ -54,7 +54,7 @@ class Router extends CodeIgniterRouter
             if (str_contains($key, '{locale}')) {
                 $localeSegment = array_search(
                     '{locale}',
-                    preg_split('~[\/]*((^[a-zA-Z0-9])|\(([^()]*)\))*[\/]+~m', $key,),
+                    preg_split('~[\/]*((^[a-zA-Z0-9])|\(([^()]*)\))*[\/]+~m', $key),
                     true,
                 );
 
@@ -104,7 +104,7 @@ class Router extends CodeIgniterRouter
                 // check if the alternate-content has been requested in the accept
                 // header and overwrite the $val with the matching controller method
                 if (
-                    array_key_exists('alternate-content', $this->matchedRouteOptions,) &&
+                    array_key_exists('alternate-content', $this->matchedRouteOptions) &&
                     is_array($this->matchedRouteOptions['alternate-content'])
                 ) {
                     $request = Services::request();
@@ -119,7 +119,7 @@ class Router extends CodeIgniterRouter
                     $expectedContentType = $parsedHeader[0];
                     foreach ($supported as $available) {
                         if (
-                            $negotiate->callMatch($expectedContentType, $available, true,)
+                            $negotiate->callMatch($expectedContentType, $available, true)
                         ) {
                             if (
                                 array_key_exists(

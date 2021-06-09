@@ -45,7 +45,7 @@ class AnalyticsPodcastByCountryModel extends Model
     public function getDataWeekly(int $podcastId): array
     {
         if (
-            ! ($found = cache("{$podcastId}_analytics_podcast_by_country_weekly",))
+            ! ($found = cache("{$podcastId}_analytics_podcast_by_country_weekly"))
         ) {
             $oneWeekAgo = date('Y-m-d', strtotime('-1 week'));
             $found = $this->select('country_code as labels')
@@ -73,7 +73,7 @@ class AnalyticsPodcastByCountryModel extends Model
     public function getDataYearly(int $podcastId): array
     {
         if (
-            ! ($found = cache("{$podcastId}_analytics_podcast_by_country_yearly",))
+            ! ($found = cache("{$podcastId}_analytics_podcast_by_country_yearly"))
         ) {
             $oneYearAgo = date('Y-m-d', strtotime('-1 year'));
             $found = $this->select('country_code as labels')

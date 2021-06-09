@@ -396,7 +396,7 @@ class Episode extends Entity
 
     public function getLink(): string
     {
-        return base_url(route_to('episode', $this->getPodcast() ->name, $this->attributes['slug'],));
+        return base_url(route_to('episode', $this->getPodcast() ->name, $this->attributes['slug']));
     }
 
     public function getEmbeddablePlayerUrl(string $theme = null): string
@@ -410,7 +410,7 @@ class Episode extends Entity
                     $this->attributes['slug'],
                     $theme,
                 )
-                : route_to('embeddable-player', $this->getPodcast() ->name, $this->attributes['slug'],),
+                : route_to('embeddable-player', $this->getPodcast() ->name, $this->attributes['slug']),
         );
     }
 
@@ -471,7 +471,7 @@ class Episode extends Entity
     {
         if ($this->description === null) {
             $this->description = trim(
-                preg_replace('~\s+~', ' ', strip_tags($this->attributes['description_html']),),
+                preg_replace('~\s+~', ' ', strip_tags($this->attributes['description_html'])),
             );
         }
 

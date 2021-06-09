@@ -33,7 +33,7 @@ class PodcastController extends BaseController
         }
 
         if (
-            ($this->podcast = (new PodcastModel())->getPodcastById((int) $params[0],)) !== null
+            ($this->podcast = (new PodcastModel())->getPodcastById((int) $params[0])) !== null
         ) {
             return $this->{$method}();
         }
@@ -45,7 +45,7 @@ class PodcastController extends BaseController
     {
         if (! has_permission('podcasts-list')) {
             $data = [
-                'podcasts' => (new PodcastModel())->getUserPodcasts((int) user_id(),),
+                'podcasts' => (new PodcastModel())->getUserPodcasts((int) user_id()),
             ];
         } else {
             $data = [
@@ -162,7 +162,7 @@ class PodcastController extends BaseController
         $data = [
             'languageOptions' => $languageOptions,
             'categoryOptions' => $categoryOptions,
-            'browserLang' => get_browser_language($this->request->getServer('HTTP_ACCEPT_LANGUAGE'),),
+            'browserLang' => get_browser_language($this->request->getServer('HTTP_ACCEPT_LANGUAGE')),
         ];
 
         return view('admin/podcast/create', $data);
@@ -207,7 +207,7 @@ class PodcastController extends BaseController
             'publisher' => $this->request->getPost('publisher'),
             'type' => $this->request->getPost('type'),
             'copyright' => $this->request->getPost('copyright'),
-            'location' => new Location($this->request->getPost('location_name'),),
+            'location' => new Location($this->request->getPost('location_name')),
             'payment_pointer' => $this->request->getPost(
                 'payment_pointer'
             ) === '' ? null : $this->request->getPost('payment_pointer'),

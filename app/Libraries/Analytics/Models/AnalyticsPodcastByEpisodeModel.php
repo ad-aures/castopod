@@ -43,7 +43,7 @@ class AnalyticsPodcastByEpisodeModel extends Model
     public function getDataByDay(int $podcastId, int $episodeId): array
     {
         if (
-            ! ($found = cache("{$podcastId}_{$episodeId}_analytics_podcast_by_episode_by_day",))
+            ! ($found = cache("{$podcastId}_{$episodeId}_analytics_podcast_by_episode_by_day"))
         ) {
             $found = $this->select('date as labels')
                 ->selectSum('hits', 'values')
@@ -69,7 +69,7 @@ class AnalyticsPodcastByEpisodeModel extends Model
     public function getDataByMonth(int $podcastId, int $episodeId = null): array
     {
         if (
-            ! ($found = cache("{$podcastId}_{$episodeId}_analytics_podcast_by_episode_by_month",))
+            ! ($found = cache("{$podcastId}_{$episodeId}_analytics_podcast_by_episode_by_month"))
         ) {
             $found = $this->select('DATE_FORMAT(date,"%Y-%m-01") as labels')
                 ->selectSum('hits', 'values')

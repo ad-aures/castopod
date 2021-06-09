@@ -37,7 +37,7 @@ class BlockController extends Controller
 
         if ($parts = split_handle($handle)) {
             if (
-                ($actor = get_or_create_actor($parts['username'], $parts['domain'],)) === null
+                ($actor = get_or_create_actor($parts['username'], $parts['domain'])) === null
             ) {
                 return redirect()
                     ->back()
