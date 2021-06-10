@@ -39,10 +39,6 @@ class NoteController extends Controller
 
     public function _remap(string $method, string ...$params): mixed
     {
-        if (count($params) < 1) {
-            throw PageNotFoundException::forPageNotFound();
-        }
-
         if (($note = model('NoteModel')->getNoteById($params[0])) === null) {
             throw PageNotFoundException::forPageNotFound();
         }
@@ -80,9 +76,9 @@ class NoteController extends Controller
             ->where('`published_at` <= NOW()', null, false)
             ->orderBy('published_at', 'ASC');
 
-        $pageNumber = $this->request->getGet('page');
+        $pageNumber = (int) $this->request->getGet('page');
 
-        if (! isset($pageNumber)) {
+        if ($pageNumber < 1) {
             $noteReplies->paginate(12);
             $pager = $noteReplies->pager;
             $collection = new OrderedCollectionObject(null, $pager);

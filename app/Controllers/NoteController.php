@@ -39,28 +39,24 @@ class NoteController extends ActivityPubNoteController
 
     public function _remap(string $method, string ...$params): mixed
     {
-        if (count($params) < 2) {
-            throw PageNotFoundException::forPageNotFound();
-        }
-
         if (
-            ($this->podcast = (new PodcastModel())->getPodcastByName($params[0])) === null
+            ($podcast = (new PodcastModel())->getPodcastByName($params[0],)) === null
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
 
+        $this->podcast = $podcast;
         $this->actor = $this->podcast->actor;
 
         if (
-            ($note = (new NoteModel())->getNoteById($params[1])) === null
+            count($params) > 1 &&
+            ($note = (new NoteModel())->getNoteById($params[1])) !== null
         ) {
-            throw PageNotFoundException::forPageNotFound();
+            $this->note = $note;
+
+            unset($params[0]);
+            unset($params[1]);
         }
-
-        $this->note = $note;
-
-        unset($params[0]);
-        unset($params[1]);
 
         return $this->{$method}(...$params);
     }

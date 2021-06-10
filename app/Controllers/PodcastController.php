@@ -38,6 +38,7 @@ class PodcastController extends BaseController
         $this->podcast = $podcast;
 
         unset($params[0]);
+
         return $this->{$method}(...$params);
     }
 

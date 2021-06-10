@@ -35,7 +35,7 @@ class HttpSignature
             ([\w\-\.#\/@]+)
         )",
         algorithm="(?P<algorithm>[\w\-]+)",
-        (headers="\(request-target\) (?P<headers>[\w\\-\s]+)")?
+        (headers="\(request-target\) (?P<headers>[\w\\-\s]+)",)?
         signature="(?P<signature>[\w+\/]+={0,2})"
     /x';
 

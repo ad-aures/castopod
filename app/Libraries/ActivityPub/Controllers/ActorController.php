@@ -272,9 +272,9 @@ class ActorController extends Controller
             ->where('`created_at` <= NOW()', null, false)
             ->orderBy('created_at', 'DESC');
 
-        $pageNumber = $this->request->getGet('page');
+        $pageNumber = (int) $this->request->getGet('page');
 
-        if (! isset($pageNumber)) {
+        if ($pageNumber < 1) {
             $actorActivity->paginate(12);
             $pager = $actorActivity->pager;
             $collection = new OrderedCollectionObject(null, $pager);
@@ -304,9 +304,9 @@ class ActorController extends Controller
             ->where('activitypub_follows.target_actor_id', $this->actor->id)
             ->orderBy('activitypub_follows.created_at', 'DESC');
 
-        $pageNumber = $this->request->getGet('page');
+        $pageNumber = (int) $this->request->getGet('page');
 
-        if (! isset($pageNumber)) {
+        if ($pageNumber < 1) {
             $followers->paginate(12);
             $pager = $followers->pager;
             $followersCollection = new OrderedCollectionObject(null, $pager);
