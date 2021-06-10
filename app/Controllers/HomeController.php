@@ -18,10 +18,9 @@ class HomeController extends BaseController
 {
     public function index(): RedirectResponse | string
     {
-        $connections = \CodeIgniter\Database\Config::getConnections();
         $db = db_connect();
-        if ($connections === [] || ! $db->tableExists('podcasts')) {
-            // Cannot connect to the database or cannot find the podcasts table
+        if ($db->getDatabase() === '' || ! $db->tableExists('podcasts')) {
+            // Database connection has not been set or could not find the podcasts table
             // Redirecting to install page because it is likely that Castopod Host has not been installed yet.
             // NB: as base_url wouldn't have been defined here, redirect to install wizard manually
             $route = Services::routes()->reverseRoute('install');
