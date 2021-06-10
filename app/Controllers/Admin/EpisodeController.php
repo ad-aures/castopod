@@ -42,7 +42,7 @@ class EpisodeController extends BaseController
 
         if (count($params) > 1) {
             if (
-                ! ($this->episode = (new EpisodeModel())
+                ! ($episode = (new EpisodeModel())
                     ->where([
                         'id' => $params[1],
                         'podcast_id' => $params[0],
@@ -51,6 +51,8 @@ class EpisodeController extends BaseController
             ) {
                 throw PageNotFoundException::forPageNotFound();
             }
+
+            $this->episode = $episode;
 
             unset($params[1]);
             unset($params[0]);

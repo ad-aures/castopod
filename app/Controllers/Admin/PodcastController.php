@@ -33,8 +33,9 @@ class PodcastController extends BaseController
         }
 
         if (
-            ($this->podcast = (new PodcastModel())->getPodcastById((int) $params[0])) !== null
+            ($podcast = (new PodcastModel())->getPodcastById((int) $params[0])) !== null
         ) {
+            $this->podcast = $podcast;
             return $this->{$method}();
         }
 
