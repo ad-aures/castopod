@@ -27,7 +27,10 @@ class AddAnalyticsPodcasts extends Migration
                 'type' => 'DATE',
             ],
             'duration' => [
-                'type' => 'INT',
+                // a hit in analytics podcast increments this value when a podcast is listened to in a given date.
+                // Here, the "cumulative listening time" on a podcast per day
+                // cannot surpass 999,999,999,999.999 seconds (~277,777,777 hours) - should be enough.
+                'type' => 'DECIMAL(15,3)',
                 'unsigned' => true,
             ],
             'bandwidth' => [

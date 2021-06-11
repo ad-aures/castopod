@@ -17,7 +17,7 @@ use CodeIgniter\Entity\Entity;
 /**
  * @property int $podcast_id
  * @property Time $date
- * @property int $duration
+ * @property double $duration
  * @property int $bandwidth
  * @property int $unique_listeners
  * @property int $hits
@@ -36,7 +36,7 @@ class AnalyticsPodcasts extends Entity
      */
     protected $casts = [
         'podcast_id' => 'integer',
-        'duration' => 'integer',
+        'duration' => 'double',
         'bandwidth' => 'integer',
         'unique_listeners' => 'integer',
         'hits' => 'integer',

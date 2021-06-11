@@ -36,7 +36,7 @@ class AddAnalyticsPodcastsProcedure extends Migration
             IN `p_os` VARCHAR(32),
             IN `p_bot` TINYINT(1) UNSIGNED,
             IN `p_filesize` INT UNSIGNED,
-            IN `p_duration` INT UNSIGNED,
+            IN `p_duration` DECIMAL(8,3) UNSIGNED,
             IN `p_age` INT UNSIGNED,
             IN `p_new_listener` TINYINT(1) UNSIGNED
             )  MODIFIES SQL DATA

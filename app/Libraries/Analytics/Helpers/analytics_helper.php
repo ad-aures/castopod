@@ -252,7 +252,7 @@ if (! function_exists('podcast_hit')) {
      * @param integer $episodeId The Episode ID
      * @param integer $bytesThreshold The minimum total number of bytes that must be downloaded so that an episode is counted (>1mn)
      * @param integer $fileSize The podcast complete file size
-     * @param integer $duration The episode duration in seconds
+     * @param double $duration The episode duration in seconds
      * @param int $publicationTime The episode's publication time as a UNIX timestamp
      * @param string $serviceName The name of the service that had fetched the RSS feed
      */
@@ -261,7 +261,7 @@ if (! function_exists('podcast_hit')) {
         int $episodeId,
         int $bytesThreshold,
         int $fileSize,
-        int $duration,
+        float $duration,
         int $publicationTime,
         string $serviceName
     ): void {
