@@ -34,10 +34,12 @@ class AddSoundbites extends Migration
             ],
             'start_time' => [
                 'type' => 'DECIMAL(8,3)',
+                'unsigned' => true,
             ],
             'duration' => [
                 // soundbite duration cannot be higher than 9999,999 seconds ~ 2.77 hours
                 'type' => 'DECIMAL(7,3)',
+                'unsigned' => true,
             ],
             'label' => [
                 'type' => 'VARCHAR',

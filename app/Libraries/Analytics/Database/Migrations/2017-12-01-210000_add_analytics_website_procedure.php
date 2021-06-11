@@ -22,10 +22,17 @@ class AddAnalyticsWebsiteProcedure extends Migration
         // Example: CALL analytics_website(1,'FR','Firefox');
         $procedureName = $this->db->prefixTable('analytics_website');
         $createQuery = <<<CODE_SAMPLE
-        CREATE PROCEDURE `{$procedureName}` (IN `p_podcast_id` INT UNSIGNED, IN `p_browser` VARCHAR(191) CHARSET utf8mb4, IN `p_entry_page` VARCHAR(512) CHARSET utf8mb4, IN `p_referer_url` VARCHAR(512) CHARSET utf8mb4, IN `p_domain` VARCHAR(128) CHARSET utf8mb4, IN `p_keywords` VARCHAR(384) CHARSET utf8mb4)  MODIFIES SQL DATA
+        CREATE PROCEDURE `{$procedureName}` (
+            IN `p_podcast_id` INT UNSIGNED,
+            IN `p_browser` VARCHAR(191),
+            IN `p_entry_page` VARCHAR(512),
+            IN `p_referer_url` VARCHAR(512),
+            IN `p_domain` VARCHAR(128),
+            IN `p_keywords` VARCHAR(384)
+        ) COMMENT 'Add one hit in website logs tables.'
+        MODIFIES SQL DATA
         DETERMINISTIC
         SQL SECURITY INVOKER
-        COMMENT 'Add one hit in website logs tables.'
         BEGIN
 
         SET @current_date = DATE(NOW());

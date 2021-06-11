@@ -22,7 +22,7 @@ class AddAnalyticsUnknownUseragentsProcedure extends Migration
         // Example: CALL analytics_unknown_useragents('Podcasts/1430.46 CFNetwork/1125.2 Darwin/19.4.0');
         $procedureName = $this->db->prefixTable('analytics_unknown_useragents');
         $createQuery = <<<CODE_SAMPLE
-        CREATE PROCEDURE `{$procedureName}` (IN `p_useragent` VARCHAR(191) CHARSET utf8mb4)  MODIFIES SQL DATA
+        CREATE PROCEDURE `{$procedureName}` (IN `p_useragent` VARCHAR(191)) MODIFIES SQL DATA
         DETERMINISTIC
         SQL SECURITY INVOKER
         COMMENT 'Add an unknown useragent to table {$procedureName}.'
