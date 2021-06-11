@@ -296,10 +296,13 @@ class Episode extends Entity
     {
         helper('analytics');
 
+        // remove 'podcasts/' from audio file path
+        $strippedAudioFilePath = substr($this->audio_file_path, 9);
+
         return generate_episode_analytics_url(
             $this->podcast_id,
             $this->id,
-            $this->audio_file_path,
+            $strippedAudioFilePath,
             $this->audio_file_duration,
             $this->audio_file_size,
             $this->audio_file_header_size,

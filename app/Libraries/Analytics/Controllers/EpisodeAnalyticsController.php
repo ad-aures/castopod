@@ -77,6 +77,6 @@ class EpisodeAnalyticsController extends Controller
             $serviceName,
         );
 
-        return redirect()->to($this->config->getAudioFileUrl($audioFilePath));
+        return redirect()->to($this->config->getAudioFileUrl(['podcasts', ...$audioFilePath]));
     }
 }
