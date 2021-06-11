@@ -1,3 +1,57 @@
+# [1.0.0-alpha.58](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.57...v1.0.0-alpha.58) (2021-06-11)
+
+### Bug Fixes
+
+- cast actor_id to pass as int to set_interact_as_actor() function
+  ([56a8e5d](https://code.podlibre.org/podlibre/castopod-host/commit/56a8e5d7dd615322aeb007e730801c65d0b02e5c))
+- **analytics:** set duration field to precise decimal as episode's audio file
+  duration
+  ([d772685](https://code.podlibre.org/podlibre/castopod-host/commit/d77268540569b2be9d91d5e09aefb3ff5ac2b071))
+- **analytics:** update migrations to set decimal precision for latitude and
+  longitude
+  ([714d6b5](https://code.podlibre.org/podlibre/castopod-host/commit/714d6b5d4950e52cf1c3170bb59954f98ffd48bd))
+- check for database connection and podcasts table existence before redirecting
+  to install
+  ([eb74e81](https://code.podlibre.org/podlibre/castopod-host/commit/eb74e81c3d93581e310b391cd029e62a0d690a8a))
+- save transcript and chapters files to podcasts folder
+  ([63f49c7](https://code.podlibre.org/podlibre/castopod-host/commit/63f49c719f672b615c5a8893d3868dffcd332e47))
+- set cache expiration to next note publish to show note on publication date
+  ([0a66de3](https://code.podlibre.org/podlibre/castopod-host/commit/0a66de3e6c17d4ac94ee8e13bd00ceaf64b1303e))
+- set episode description footer to null when empty value
+  ([3a7d97d](https://code.podlibre.org/podlibre/castopod-host/commit/3a7d97d660046d80698611311ff3708110d2af82))
+- set location to null when getting empty string
+  ([71b1b5f](https://code.podlibre.org/podlibre/castopod-host/commit/71b1b5f775af475b1dc78328330e277f565e41b6))
+- update condition in home controller to redirect to install page
+  ([33f1b91](https://code.podlibre.org/podlibre/castopod-host/commit/33f1b91d55dd0652c979d50fc85879dbf88a4a42))
+- **activity-pub:** cache issues when navigating to activity stream urls
+  ([7bcbfb3](https://code.podlibre.org/podlibre/castopod-host/commit/7bcbfb32f7cca08d111be46c7f1640e372d4a4b0))
+- **activity-pub:** get database records using new model instances
+  ([92536dd](https://code.podlibre.org/podlibre/castopod-host/commit/92536ddb3812214a9c5682b92e547e5c1998a5d7))
+- **category:** remove uncategorized option to enforce users in choosing a
+  category
+  ([8c64f25](https://code.podlibre.org/podlibre/castopod-host/commit/8c64f25a0e72fec03d25544797d32623b2276fce))
+- **install:** redirect manually to install wizard on first visit
+  ([2ceaaca](https://code.podlibre.org/podlibre/castopod-host/commit/2ceaaca44f1b82fc64d961e2fb4f4aaeade7e736))
+- **types:** update fake seeders types + fix bugs
+  ([76a4bf3](https://code.podlibre.org/podlibre/castopod-host/commit/76a4bf344160df679db29e236e7df7822970fb60))
+- update broken contributor dropdown fields
+  ([e5b7515](https://code.podlibre.org/podlibre/castopod-host/commit/e5b75150234bd7f19e01def93425d3bda7379dd3))
+- **ux:** redirect user to install page on database error in home page
+  ([9017e30](https://code.podlibre.org/podlibre/castopod-host/commit/9017e30bf41bed8c2be65091bbc5fb1e63aef87a))
+- update condition in AnalyticsTrait
+  ([fbc0967](https://code.podlibre.org/podlibre/castopod-host/commit/fbc0967caa81630d514ddb1b93b0834ebb4d913b))
+
+### Performance Improvements
+
+- **cache:** use deleteMatching method to prevent forgetting cached elements in
+  models
+  ([76afc0c](https://code.podlibre.org/podlibre/castopod-host/commit/76afc0cfa2feb087697bae4bc138e4956873dd62))
+
+### Reverts
+
+- set deprecated config options back in App config
+  ([433745f](https://code.podlibre.org/podlibre/castopod-host/commit/433745f194c73407999b207090478563283876a5))
+
 # [1.0.0-alpha.57](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.56...v1.0.0-alpha.57) (2021-05-12)
 
 ### Bug Fixes
