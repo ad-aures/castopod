@@ -231,7 +231,7 @@ class Episode extends Entity
 
         $this->attributes['transcript_file_path'] = save_media(
             $transcriptFile,
-            $this->getPodcast()
+            'podcasts/' . $this->getPodcast()
                 ->name,
             $this->attributes['slug'] . '-transcript',
         );
@@ -248,7 +248,7 @@ class Episode extends Entity
 
         $this->attributes['chapters_file_path'] = save_media(
             $chaptersFile,
-            $this->getPodcast()
+            'podcasts/' . $this->getPodcast()
                 ->name,
             $this->attributes['slug'] . '-chapters',
         );
