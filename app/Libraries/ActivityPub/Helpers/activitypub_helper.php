@@ -67,7 +67,7 @@ if (! function_exists('accept_follow')) {
         $acceptActivity->set('actor', $actor->uri)
             ->set('object', $objectId);
 
-        $db = Database::connect();
+        $db = db_connect();
         $db->transStart();
 
         $activityModel = model('ActivityModel');

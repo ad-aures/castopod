@@ -159,7 +159,7 @@ if (! function_exists('set_user_session_player')) {
                 ]);
                 // Add to unknown list
                 try {
-                    $db = Database::connect();
+                    $db = db_connect();
                     $procedureNameAnalyticsUnknownUseragents = $db->prefixTable('analytics_unknown_useragents');
                     $db->query("CALL {$procedureNameAnalyticsUnknownUseragents}(?)", [$userAgent]);
                     // If things go wrong the show must go on and the user must be able to download the file
@@ -321,7 +321,7 @@ if (! function_exists('podcast_hit')) {
 
                 // If more that 1mn was downloaded, that's a hit, we send that to the database:
                 if ($downloadedBytes >= $bytesThreshold) {
-                    $db = Database::connect();
+                    $db = db_connect();
                     $procedureName = $db->prefixTable('analytics_podcasts');
 
                     $age = intdiv(time() - $publicationTime, 86400);

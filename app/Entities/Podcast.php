@@ -299,19 +299,28 @@ class Podcast extends Entity
 
     public function setEpisodeDescriptionFooterMarkdown(?string $episodeDescriptionFooterMarkdown = null): static
     {
-        if ($episodeDescriptionFooterMarkdown) {
-            $converter = new CommonMarkConverter([
-                'html_input' => 'strip',
-                'allow_unsafe_links' => false,
-            ]);
-
+        if ($episodeDescriptionFooterMarkdown === null || $episodeDescriptionFooterMarkdown === '') {
             $this->attributes[
                 'episode_description_footer_markdown'
-            ] = $episodeDescriptionFooterMarkdown;
+            ] = null;
             $this->attributes[
                 'episode_description_footer_html'
-            ] = $converter->convertToHtml($episodeDescriptionFooterMarkdown);
+            ] = null;
+
+            return $this;
         }
+
+        $converter = new CommonMarkConverter([
+            'html_input' => 'strip',
+            'allow_unsafe_links' => false,
+        ]);
+
+        $this->attributes[
+            'episode_description_footer_markdown'
+        ] = $episodeDescriptionFooterMarkdown;
+        $this->attributes[
+            'episode_description_footer_html'
+        ] = $converter->convertToHtml($episodeDescriptionFooterMarkdown);
 
         return $this;
     }

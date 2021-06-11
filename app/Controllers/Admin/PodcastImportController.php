@@ -23,7 +23,6 @@ use App\Models\PlatformModel;
 use App\Models\PodcastModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
-use Config\Database;
 use Config\Services;
 use ErrorException;
 use League\HTMLToMarkdown\HtmlConverter;
@@ -182,7 +181,7 @@ class PodcastImportController extends BaseController
         }
 
         $podcastModel = new PodcastModel();
-        $db = Database::connect();
+        $db = db_connect();
 
         $db->transStart();
 

@@ -22,7 +22,6 @@ use App\Models\SoundbiteModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\I18n\Time;
-use Config\Database;
 
 class EpisodeController extends BaseController
 {
@@ -192,10 +191,12 @@ class EpisodeController extends BaseController
         }
 
         // update podcast's episode_description_footer_markdown if changed
-        $podcastModel = new PodcastModel();
+        $this->podcast->episode_description_footer_markdown = $this->request->getPost(
+            'description_footer'
+        ) === '' ? null : $this->request->getPost('description_footer');
 
         if ($this->podcast->hasChanged('episode_description_footer_markdown')) {
-            $this->podcast->episode_description_footer_markdown = $this->request->getPost('description_footer');
+            $podcastModel = new PodcastModel();
 
             if (! $podcastModel->update($this->podcast->id, $this->podcast)) {
                 return redirect()
@@ -313,9 +314,14 @@ class EpisodeController extends BaseController
             $this->episode->chapters_file_remote_url = $chaptersFileRemoteUrl;
         }
 
+        $db = db_connect();
+        $db->transStart();
+
         $episodeModel = new EpisodeModel();
 
         if (! $episodeModel->update($this->episode->id, $this->episode)) {
+            $db->transRollback();
+
             return redirect()
                 ->back()
                 ->withInput()
@@ -323,17 +329,23 @@ class EpisodeController extends BaseController
         }
 
         // update podcast's episode_description_footer_markdown if changed
-        $this->podcast->episode_description_footer_markdown = $this->request->getPost('description_footer');
+        $this->podcast->episode_description_footer_markdown = $this->request->getPost(
+            'description_footer'
+        ) === '' ? null : $this->request->getPost('description_footer');
 
         if ($this->podcast->hasChanged('episode_description_footer_markdown')) {
             $podcastModel = new PodcastModel();
             if (! $podcastModel->update($this->podcast->id, $this->podcast)) {
+                $db->transRollback();
+
                 return redirect()
                     ->back()
                     ->withInput()
                     ->with('errors', $podcastModel->errors());
             }
         }
+
+        $db->transComplete();
 
         return redirect()->route('episode-view', [$this->podcast->id, $this->episode->id]);
     }
@@ -407,7 +419,7 @@ class EpisodeController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $db = Database::connect();
+        $db = db_connect();
         $db->transStart();
 
         $newNote = new Note([
@@ -503,7 +515,7 @@ class EpisodeController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $db = Database::connect();
+        $db = db_connect();
         $db->transStart();
 
         $publishMethod = $this->request->getPost('publication_method');
@@ -589,7 +601,7 @@ class EpisodeController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $db = Database::connect();
+        $db = db_connect();
 
         $db->transStart();
 

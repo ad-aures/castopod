@@ -303,7 +303,7 @@ class InstallController extends Controller
         // Activate user
         $user->activate();
 
-        $db = Database::connect();
+        $db = db_connect();
 
         $db->transStart();
         if (! ($userId = $userModel->insert($user, true))) {

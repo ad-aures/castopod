@@ -386,9 +386,9 @@ if (! function_exists('array_to_rss')) {
                 $childXmlNode = $xmlNode->addChild(
                     $childArrayNode['name'],
                     $childArrayNode['content'] ?? null,
-                    array_key_exists('namespace', $childArrayNode)
-                        ? current($childArrayNode['namespace'])
-                        : null,
+                    $childArrayNode['namespace'] === []
+                        ? null
+                        : current($childArrayNode['namespace'])
                 );
                 if (array_key_exists('attributes', $childArrayNode)) {
                     foreach (

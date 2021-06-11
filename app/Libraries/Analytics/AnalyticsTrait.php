@@ -10,7 +10,6 @@ declare(strict_types=1);
 
 namespace Analytics;
 
-use Config\Database;
 use Config\Services;
 
 trait AnalyticsTrait
@@ -28,7 +27,7 @@ trait AnalyticsTrait
         $session->start();
 
         if (! $session->get('denyListIp')) {
-            $db = Database::connect();
+            $db = db_connect();
 
             $referer = $session->get('referer');
             $domain =

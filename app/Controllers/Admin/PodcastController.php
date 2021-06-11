@@ -19,7 +19,6 @@ use App\Models\LanguageModel;
 use App\Models\PodcastModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
-use Config\Database;
 use Config\Services;
 
 class PodcastController extends BaseController
@@ -226,7 +225,7 @@ class PodcastController extends BaseController
         ]);
 
         $podcastModel = new PodcastModel();
-        $db = Database::connect();
+        $db = db_connect();
 
         $db->transStart();
 
@@ -334,7 +333,7 @@ class PodcastController extends BaseController
         $this->podcast->is_locked = $this->request->getPost('lock') === 'yes';
         $this->podcast->updated_by = (int) user_id();
 
-        $db = Database::connect();
+        $db = db_connect();
         $db->transStart();
 
         $podcastModel = new PodcastModel();
