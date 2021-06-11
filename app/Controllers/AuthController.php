@@ -181,7 +181,7 @@ class AuthController extends MythAuthController
 
         helper('auth');
 
-        set_interact_as_actor($this->request->getPost('actor_id'));
+        set_interact_as_actor((int) $this->request->getPost('actor_id'));
 
         return redirect()->back();
     }
