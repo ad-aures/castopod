@@ -163,22 +163,28 @@ class EpisodeController extends BaseController
 
         $transcriptChoice = $this->request->getPost('transcript-choice');
         if (
-            $transcriptChoice === 'upload-file' &&
-            ($transcriptFile = $this->request->getFile('transcript_file'))
+            $transcriptChoice === 'upload-file'
+            && ($transcriptFile = $this->request->getFile('transcript_file'))
+            && $transcriptFile->isValid()
         ) {
             $newEpisode->transcript_file = $transcriptFile;
         } elseif ($transcriptChoice === 'remote-url') {
-            $newEpisode->transcript_file_remote_url = $this->request->getPost('transcript_file_remote_url');
+            $newEpisode->transcript_file_remote_url = $this->request->getPost(
+                'transcript_file_remote_url'
+            ) === '' ? null : $this->request->getPost('transcript_file_remote_url');
         }
 
         $chaptersChoice = $this->request->getPost('chapters-choice');
         if (
-            $chaptersChoice === 'upload-file' &&
-            ($chaptersFile = $this->request->getFile('chapters_file'))
+            $chaptersChoice === 'upload-file'
+            && ($chaptersFile = $this->request->getFile('chapters_file'))
+            && $chaptersFile->isValid()
         ) {
             $newEpisode->chapters_file = $chaptersFile;
         } elseif ($chaptersChoice === 'remote-url') {
-            $newEpisode->chapters_file_remote_url = $this->request->getPost('chapters_file_remote_url');
+            $newEpisode->chapters_file_remote_url = $this->request->getPost(
+                'chapters_file_remote_url'
+            ) === '' ? null : $this->request->getPost('chapters_file_remote_url');
         }
 
         $episodeModel = new EpisodeModel();
@@ -286,13 +292,12 @@ class EpisodeController extends BaseController
         } elseif ($transcriptChoice === 'remote-url') {
             if (
                 ($transcriptFileRemoteUrl = $this->request->getPost('transcript_file_remote_url')) &&
-                (($transcriptFile = $this->episode->transcript_file) &&
-                    $transcriptFile !== null)
+                (($transcriptFile = $this->episode->transcript_file) !== null)
             ) {
                 unlink((string) $transcriptFile);
                 $this->episode->transcript_file_path = null;
             }
-            $this->episode->transcript_file_remote_url = $transcriptFileRemoteUrl;
+            $this->episode->transcript_file_remote_url = $transcriptFileRemoteUrl === '' ? null : $transcriptFileRemoteUrl;
         }
 
         $chaptersChoice = $this->request->getPost('chapters-choice');
@@ -305,13 +310,12 @@ class EpisodeController extends BaseController
         } elseif ($chaptersChoice === 'remote-url') {
             if (
                 ($chaptersFileRemoteUrl = $this->request->getPost('chapters_file_remote_url')) &&
-                (($chaptersFile = $this->episode->chapters_file) &&
-                    $chaptersFile !== null)
+                (($chaptersFile = $this->episode->chapters_file) !== null)
             ) {
                 unlink((string) $chaptersFile);
                 $this->episode->chapters_file_path = null;
             }
-            $this->episode->chapters_file_remote_url = $chaptersFileRemoteUrl;
+            $this->episode->chapters_file_remote_url = $chaptersFileRemoteUrl === '' ? null : $chaptersFileRemoteUrl;
         }
 
         $db = db_connect();
