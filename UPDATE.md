@@ -33,6 +33,9 @@ performance improvements ⚡.
 
    - Remove all files except `.env` and `public/media`
    - Copy the new files from the downloaded package into your server
+     - Note: you may need to reset files permissions as during the install
+       process. Check
+       [Security Concerns section in INSTALL.md](./INSTALL.md#security-concerns).
 
 4. Alpha releases may come with additional update instructions (see
    [releases page](https://code.podlibre.org/podlibre/castopod-host/-/releases)).
