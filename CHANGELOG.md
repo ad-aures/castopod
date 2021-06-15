@@ -1,3 +1,10 @@
+# [1.0.0-alpha.59](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.58...v1.0.0-alpha.59) (2021-06-15)
+
+### Bug Fixes
+
+- check that additional files are valid when creating episode
+  ([eac5bc8](https://code.podlibre.org/podlibre/castopod-host/commit/eac5bc876de125e1fe08d1b89f767a04fc0fbfb6))
+
 # [1.0.0-alpha.58](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.57...v1.0.0-alpha.58) (2021-06-11)
 
 ### Bug Fixes
