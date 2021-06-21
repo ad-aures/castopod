@@ -20,8 +20,8 @@
 
 
 <label for="message" class="text-lg font-semibold"><?= lang(
-    'Episode.publish_form.note',
-) . hint_tooltip(lang('Episode.publish_form.note_hint'), 'ml-1') ?></label>
+    'Episode.publish_form.status',
+) . hint_tooltip(lang('Episode.publish_form.status_hint'), 'ml-1') ?></label>
 <div class="mb-8 overflow-hidden bg-white shadow-md rounded-xl">
     <div class="flex px-4 py-3">
         <img src="<?= $podcast->actor->avatar_image_url ?>" alt="<?= $podcast

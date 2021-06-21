@@ -39,7 +39,7 @@
 </nav>
 
 <section class="max-w-2xl px-6 py-8 mx-auto">
-<?= form_open(route_to('note-attempt-create', interact_as_actor()->username), [
+<?= form_open(route_to('status-attempt-create', interact_as_actor()->username), [
     'class' => 'flex p-4 bg-white shadow rounded-xl',
 ]) ?>
     <?= csrf_field() ?>
@@ -56,7 +56,7 @@
                 'name' => 'message',
                 'class' => 'form-textarea',
                 'required' => 'required',
-                'placeholder' => lang('Note.form.message_placeholder'),
+                'placeholder' => lang('Status.form.message_placeholder'),
             ],
             old('message', '', false),
             ['rows' => 2],
@@ -66,7 +66,7 @@
             'name' => 'episode_url',
             'class' => 'form-input mb-2',
             'placeholder' =>
-                lang('Note.form.episode_url_placeholder') .
+                lang('Status.form.episode_url_placeholder') .
                 ' (' .
                 lang('Common.optional') .
                 ')',
@@ -74,7 +74,7 @@
         ]) ?>
 
         <?= button(
-            lang('Note.form.submit'),
+            lang('Status.form.submit'),
             '',
             ['variant' => 'primary', 'size' => 'small'],
             ['type' => 'submit', 'class' => 'self-end'],
@@ -84,13 +84,13 @@
 <hr class="my-4 border-2 border-pine-100">
 
 <div class="space-y-8">
-<?php foreach ($notes as $note): ?>
-    <?php if ($note->reblog_of_id !== null): ?>
+<?php foreach ($statuses as $status): ?>
+    <?php if ($status->reblog_of_id !== null): ?>
         <?= view('podcast/_partials/reblog_authenticated', [
-            'note' => $note->reblog_of_note,
+            'status' => $status->reblog_of_status,
         ]) ?>
     <?php else: ?>
-        <?= view('podcast/_partials/note_authenticated', ['note' => $note]) ?>
+        <?= view('podcast/_partials/status_authenticated', ['status' => $status]) ?>
     <?php endif; ?>
 <?php endforeach; ?>
 </div>

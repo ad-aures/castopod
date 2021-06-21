@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 return [
     'title' => "{actorDisplayName}'s Note",
-    'back_to_actor_notes' => 'Back to {actor} notes',
+    'back_to_actor_statuses' => 'Back to {actor} notes',
     'actor_shared' => '{actor} shared',
     'reply_to' => 'Reply to @{actorUsername}',
     'form' => [

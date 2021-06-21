@@ -17,12 +17,12 @@
 ]) ?>
 <?= csrf_field() ?>
 <?= form_hidden('client_timezone', 'UTC') ?>
-<?= form_hidden('note_id', $note->id) ?>
+<?= form_hidden('status_id', $status->id) ?>
 
 
 <label for="message" class="text-lg font-semibold"><?= lang(
-    'Episode.publish_form.note',
-) . hint_tooltip(lang('Episode.publish_form.note_hint'), 'ml-1') ?></label>
+    'Episode.publish_form.status',
+) . hint_tooltip(lang('Episode.publish_form.status_hint'), 'ml-1') ?></label>
 <div class="mb-8 overflow-hidden bg-white shadow-md rounded-xl">
     <div class="flex px-4 py-3">
     <img src="<?= $podcast->actor->avatar_image_url ?>" alt="<?= $podcast->actor
@@ -34,11 +34,11 @@
                 <span class="text-sm text-gray-500 truncate">@<?= $podcast
                     ->actor->username ?></span>
             </p>
-            <time class="text-xs text-gray-500" itemprop="published" datetime="<?= $note->published_at->format(
+            <time class="text-xs text-gray-500" itemprop="published" datetime="<?= $status->published_at->format(
                 DateTime::ATOM,
-            ) ?>" title="<?= $note->published_at ?>"><?= lang(
+            ) ?>" title="<?= $status->published_at ?>"><?= lang(
     'Common.mediumDate',
-    [$note->published_at],
+    [$status->published_at],
 ) ?></time>
         </div>
     </div>
@@ -51,7 +51,7 @@
                 'required' => 'required',
                 'placeholder' => 'Write your message...',
             ],
-            old('message', $note->message, false),
+            old('message', $status->message, false),
             ['rows' => 2],
         ) ?>
     </div>

@@ -26,7 +26,7 @@ return [
         one {# partage en tout}
         other {# partages en tout}
     }',
-    'total_notes' => '{numberOfTotalNotes, plural,
+    'total_statuses' => '{numberOfTotalStatuses, plural,
         one {# note}
         other {# notes}
     }',
@@ -115,8 +115,8 @@ return [
         'submit_edit' => 'Enregistrer l’épisode',
     ],
     'publish_form' => [
-        'note' => 'Votre note',
-        'note_hint' =>
+        'status' => 'Votre note',
+        'status_hint' =>
             'Le message que vous écrirez sera diffusé à toutes les personnes qui vous suivent dans le fédiverse.',
         'publication_date' => 'Date de publication',
         'publication_date_clear' => 'Effacer la date de publication',

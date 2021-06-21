@@ -75,12 +75,12 @@
                     <?= anchor(
                         route_to('episode', $podcast->name, $episode->slug),
                         icon('chat', 'text-xl mr-1 text-gray-400') .
-                            $episode->notes_total,
+                            $episode->statuses_total,
                         [
                             'class' =>
                                 'inline-flex items-center hover:underline',
-                            'title' => lang('Episode.total_notes', [
-                                'numberOfTotalNotes' => $episode->notes_total,
+                            'title' => lang('Episode.total_statuses', [
+                                'numberOfTotalStatuses' => $episode->statuses_total,
                             ]),
                         ],
                     ) ?>
@@ -130,7 +130,7 @@
 
         <div class="tab-panels">
             <section id="activity" class="space-y-8 tab-panel">
-                <?= form_open(route_to('note-attempt-create', $podcast->name), [
+                <?= form_open(route_to('status-attempt-create', $podcast->name), [
                     'class' => 'flex p-4 bg-white shadow rounded-xl',
                 ]) ?>
                 <?= csrf_field() ?>
@@ -148,7 +148,7 @@
                             'class' => 'form-textarea mb-2',
                             'required' => 'required',
                             'placeholder' => lang(
-                                'Note.form.episode_message_placeholder',
+                                'Status.form.episode_message_placeholder',
                             ),
                         ],
                         old('message', '', false),
@@ -163,7 +163,7 @@
                         'type' => 'hidden',
                     ]) ?>
                     <?= button(
-                        lang('Note.form.submit'),
+                        lang('Status.form.submit'),
                         '',
                         ['variant' => 'primary', 'size' => 'small'],
                         ['type' => 'submit', 'class' => 'self-end'],
@@ -171,9 +171,9 @@
                 </div>
                 <?= form_close() ?>
                 <hr class="my-4 border border-pine-100">
-                <?php foreach ($episode->notes as $note): ?>
-                    <?= view('podcast/_partials/note_authenticated', [
-                        'note' => $note,
+                <?php foreach ($episode->statuses as $status): ?>
+                    <?= view('podcast/_partials/status_authenticated', [
+                        'status' => $status,
                     ]) ?>
                 <?php endforeach; ?>
             </section>

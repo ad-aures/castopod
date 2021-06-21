@@ -10,15 +10,15 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use ActivityPub\Models\NoteModel as ActivityPubNoteModel;
-use App\Entities\Note;
+use ActivityPub\Models\StatusModel as ActivityPubStatusModel;
+use App\Entities\Status;
 
-class NoteModel extends ActivityPubNoteModel
+class StatusModel extends ActivityPubStatusModel
 {
     /**
      * @var string
      */
-    protected $returnType = Note::class;
+    protected $returnType = Status::class;
 
     /**
      * @var string[]
@@ -40,11 +40,11 @@ class NoteModel extends ActivityPubNoteModel
     ];
 
     /**
-     * Retrieves all published notes for a given episode ordered by publication date
+     * Retrieves all published statuses for a given episode ordered by publication date
      *
-     * @return Note[]
+     * @return Status[]
      */
-    public function getEpisodeNotes(int $episodeId): array
+    public function getEpisodeStatuses(int $episodeId): array
     {
         return $this->where([
             'episode_id' => $episodeId,

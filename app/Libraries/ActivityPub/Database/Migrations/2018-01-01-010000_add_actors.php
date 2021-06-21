@@ -93,7 +93,7 @@ class AddActors extends Migration
                 'unsigned' => true,
                 'default' => 0,
             ],
-            'notes_count' => [
+            'statuses_count' => [
                 'type' => 'INT',
                 'unsigned' => true,
                 'default' => 0,

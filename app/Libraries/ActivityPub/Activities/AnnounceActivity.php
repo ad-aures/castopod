@@ -14,19 +14,19 @@ declare(strict_types=1);
 namespace ActivityPub\Activities;
 
 use ActivityPub\Core\Activity;
-use ActivityPub\Entities\Note;
+use ActivityPub\Entities\Status;
 
 class AnnounceActivity extends Activity
 {
     protected string $type = 'Announce';
 
-    public function __construct(Note $reblogNote)
+    public function __construct(Status $reblogStatus)
     {
-        $this->actor = $reblogNote->actor->uri;
-        $this->object = $reblogNote->reblog_of_note->uri;
+        $this->actor = $reblogStatus->actor->uri;
+        $this->object = $reblogStatus->reblog_of_status->uri;
 
-        $this->published = $reblogNote->published_at->format(DATE_W3C);
+        $this->published = $reblogStatus->published_at->format(DATE_W3C);
 
-        $this->cc = [$reblogNote->actor->uri, $reblogNote->actor->followers_url];
+        $this->cc = [$reblogStatus->actor->uri, $reblogStatus->actor->followers_url];
     }
 }

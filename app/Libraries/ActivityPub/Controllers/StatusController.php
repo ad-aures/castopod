@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace ActivityPub\Controllers;
 
 use ActivityPub\Config\ActivityPub;
-use ActivityPub\Entities\Note;
+use ActivityPub\Entities\Status;
 use ActivityPub\Objects\OrderedCollectionObject;
 use ActivityPub\Objects\OrderedCollectionPage;
 use CodeIgniter\Controller;
@@ -21,14 +21,14 @@ use CodeIgniter\HTTP\Response;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\I18n\Time;
 
-class NoteController extends Controller
+class StatusController extends Controller
 {
     /**
      * @var string[]
      */
     protected $helpers = ['activitypub'];
 
-    protected Note $note;
+    protected Status $status;
 
     protected ActivityPub $config;
 
@@ -39,11 +39,11 @@ class NoteController extends Controller
 
     public function _remap(string $method, string ...$params): mixed
     {
-        if (($note = model('NoteModel')->getNoteById($params[0])) === null) {
+        if (($status = model('StatusModel')->getStatusById($params[0])) === null) {
             throw PageNotFoundException::forPageNotFound();
         }
 
-        $this->note = $note;
+        $this->status = $status;
 
         unset($params[0]);
 
@@ -56,7 +56,7 @@ class NoteController extends Controller
     public function index(): Response
     {
         $noteObjectClass = $this->config->noteObject;
-        $noteObject = new $noteObjectClass($this->note);
+        $noteObject = new $noteObjectClass($this->status);
 
         return $this->response
             ->setContentType('application/activity+json')
@@ -69,22 +69,22 @@ class NoteController extends Controller
     public function replies(): Response
     {
         /**
-         * get note replies
+         * get status replies
          */
-        $noteReplies = model('NoteModel')
-            ->where('in_reply_to_id', service('uuid') ->fromString($this->note->id) ->getBytes())
+        $statusReplies = model('StatusModel')
+            ->where('in_reply_to_id', service('uuid') ->fromString($this->status->id) ->getBytes())
             ->where('`published_at` <= NOW()', null, false)
             ->orderBy('published_at', 'ASC');
 
         $pageNumber = (int) $this->request->getGet('page');
 
         if ($pageNumber < 1) {
-            $noteReplies->paginate(12);
-            $pager = $noteReplies->pager;
+            $statusReplies->paginate(12);
+            $pager = $statusReplies->pager;
             $collection = new OrderedCollectionObject(null, $pager);
         } else {
-            $paginatedReplies = $noteReplies->paginate(12, 'default', $pageNumber);
-            $pager = $noteReplies->pager;
+            $paginatedReplies = $statusReplies->paginate(12, 'default', $pageNumber);
+            $pager = $statusReplies->pager;
 
             $orderedItems = [];
             $noteObjectClass = $this->config->noteObject;
@@ -118,21 +118,21 @@ class NoteController extends Controller
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $newNote = new Note([
+        $newStatus = new Status([
             'actor_id' => $this->request->getPost('actor_id'),
             'message' => $this->request->getPost('message'),
             'published_at' => Time::now(),
         ]);
 
-        if (! model('NoteModel')->addNote($newNote)) {
+        if (! model('StatusModel')->addStatus($newStatus)) {
             return redirect()
                 ->back()
                 ->withInput()
                 // TODO: translate
-                ->with('error', "Couldn't create Note");
+                ->with('error', "Couldn't create Status");
         }
 
-        // Note without preview card has been successfully created
+        // Status without preview card has been successfully created
         return redirect()->back();
     }
 
@@ -153,7 +153,7 @@ class NoteController extends Controller
             ->getActorById($this->request->getPost('actor_id'));
 
         model('FavouriteModel')
-            ->toggleFavourite($actor, $this->note->id);
+            ->toggleFavourite($actor, $this->status->id);
 
         return redirect()->back();
     }
@@ -174,8 +174,8 @@ class NoteController extends Controller
         $actor = model('ActorModel')
             ->getActorById($this->request->getPost('actor_id'));
 
-        model('NoteModel')
-            ->toggleReblog($actor, $this->note);
+        model('StatusModel')
+            ->toggleReblog($actor, $this->status);
 
         return redirect()->back();
     }
@@ -194,14 +194,14 @@ class NoteController extends Controller
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $newReplyNote = new Note([
+        $newReplyStatus = new Status([
             'actor_id' => $this->request->getPost('actor_id'),
-            'in_reply_to_id' => $this->note->id,
+            'in_reply_to_id' => $this->status->id,
             'message' => $this->request->getPost('message'),
             'published_at' => Time::now(),
         ]);
 
-        if (! model('NoteModel')->addReply($newReplyNote)) {
+        if (! model('StatusModel')->addReply($newReplyStatus)) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -209,7 +209,7 @@ class NoteController extends Controller
                 ->with('error', "Couldn't create Reply");
         }
 
-        // Reply note without preview card has been successfully created
+        // Reply status without preview card has been successfully created
         return redirect()->back();
     }
 
@@ -249,33 +249,33 @@ class NoteController extends Controller
         );
 
         if (! $ostatusKey) {
-            // TODO: error, couldn't remote favourite/share/reply to note
-            // The instance doesn't allow its users remote actions on notes
+            // TODO: error, couldn't remote favourite/share/reply to status
+            // The instance doesn't allow its users remote actions on statuses
             return $this->response->setJSON([]);
         }
 
         return redirect()->to(
-            str_replace('{uri}', urlencode($this->note->uri), $data->links[$ostatusKey]->template),
+            str_replace('{uri}', urlencode($this->status->uri), $data->links[$ostatusKey]->template),
         );
     }
 
     public function attemptBlockActor(): RedirectResponse
     {
-        model('ActorModel')->blockActor($this->note->actor->id);
+        model('ActorModel')->blockActor($this->status->actor->id);
 
         return redirect()->back();
     }
 
     public function attemptBlockDomain(): RedirectResponse
     {
-        model('BlockedDomainModel')->blockDomain($this->note->actor->domain);
+        model('BlockedDomainModel')->blockDomain($this->status->actor->domain);
 
         return redirect()->back();
     }
 
     public function attemptDelete(): RedirectResponse
     {
-        model('NoteModel', false)->removeNote($this->note);
+        model('StatusModel', false)->removeStatus($this->status);
 
         return redirect()->back();
     }

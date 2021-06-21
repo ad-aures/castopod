@@ -92,7 +92,7 @@ class EpisodeModel extends Model
         'custom_rss',
         'favourites_total',
         'reblogs_total',
-        'notes_total',
+        'statuses_total',
         'published_at',
         'created_by',
         'updated_by',

@@ -1,11 +1,4 @@
 <article class="relative z-10 w-full bg-white shadow-md rounded-2xl">
-    <p class="inline-flex px-6 pt-4 text-xs text-gray-700"><?= icon(
-        'repeat',
-        'text-lg mr-2 text-gray-400',
-    ) .
-        lang('Status.actor_shared', [
-            'actor' => $status->actor->display_name,
-        ]) ?></p>
     <header class="flex px-6 py-4">
         <img src="<?= $status->actor
             ->avatar_image_url ?>" alt="<?= $status->display_name ?>" class="w-12 h-12 mr-4 rounded-full" />

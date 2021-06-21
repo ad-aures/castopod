@@ -11,10 +11,10 @@ declare(strict_types=1);
 namespace App\Entities;
 
 use App\Libraries\SimpleRSSElement;
-use App\Models\NoteModel;
 use App\Models\PersonModel;
 use App\Models\PodcastModel;
 use App\Models\SoundbiteModel;
+use App\Models\StatusModel;
 use CodeIgniter\Entity\Entity;
 use CodeIgniter\Files\File;
 use CodeIgniter\HTTP\Files\UploadedFile;
@@ -67,7 +67,7 @@ use RuntimeException;
  * @property string $custom_rss_string
  * @property int $favourites_total
  * @property int $reblogs_total
- * @property int $notes_total
+ * @property int $statuses_total
  * @property int $created_by
  * @property int $updated_by
  * @property string $publication_status;
@@ -117,9 +117,9 @@ class Episode extends Entity
     protected ?array $soundbites = null;
 
     /**
-     * @var Note[]|null
+     * @var Status[]|null
      */
-    protected ?array $notes = null;
+    protected ?array $statuses = null;
 
     protected ?Location $location = null;
 
@@ -165,7 +165,7 @@ class Episode extends Entity
         'custom_rss' => '?json-array',
         'favourites_total' => 'integer',
         'reblogs_total' => 'integer',
-        'notes_total' => 'integer',
+        'statuses_total' => 'integer',
         'created_by' => 'integer',
         'updated_by' => 'integer',
     ];
@@ -382,19 +382,19 @@ class Episode extends Entity
     }
 
     /**
-     * @return Note[]
+     * @return Status[]
      */
-    public function getNotes(): array
+    public function getStatuses(): array
     {
         if ($this->id === null) {
             throw new RuntimeException('Episode must be created before getting soundbites.');
         }
 
-        if ($this->notes === null) {
-            $this->notes = (new NoteModel())->getEpisodeNotes($this->id);
+        if ($this->statuses === null) {
+            $this->statuses = (new StatusModel())->getEpisodeStatuses($this->id);
         }
 
-        return $this->notes;
+        return $this->statuses;
     }
 
     public function getLink(): string

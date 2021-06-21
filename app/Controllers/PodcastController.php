@@ -13,8 +13,8 @@ namespace App\Controllers;
 use Analytics\AnalyticsTrait;
 use App\Entities\Podcast;
 use App\Models\EpisodeModel;
-use App\Models\NoteModel;
 use App\Models\PodcastModel;
+use App\Models\StatusModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 
 class PodcastController extends BaseController
@@ -64,7 +64,7 @@ class PodcastController extends BaseController
         if (! ($cachedView = cache($cacheName))) {
             $data = [
                 'podcast' => $this->podcast,
-                'notes' => (new NoteModel())->getActorPublishedNotes($this->podcast->actor_id),
+                'statuses' => (new StatusModel())->getActorPublishedStatuses($this->podcast->actor_id),
             ];
 
             // if user is logged in then send to the authenticated activity view

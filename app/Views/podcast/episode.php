@@ -75,12 +75,12 @@
                     <?= anchor(
                         route_to('episode', $podcast->name, $episode->slug),
                         icon('chat', 'text-xl mr-1 text-gray-400') .
-                            $episode->notes_total,
+                            $episode->statuses_total,
                         [
                             'class' =>
                                 'inline-flex items-center hover:underline',
-                            'title' => lang('Episode.total_notes', [
-                                'numberOfTotalNotes' => $episode->notes_total,
+                            'title' => lang('Episode.total_statuses', [
+                                'numberOfTotalStatuses' => $episode->statuses_total,
                             ]),
                         ],
                     ) ?>
@@ -122,24 +122,24 @@
     </header>
 
     <div class="tabset">
-        <?php if ($episode->notes): ?>
+        <?php if ($episode->statuses): ?>
 
             <input type="radio" name="tabset" id="activity" aria-controls="activity" checked="checked" />
             <label for="activity"><?= lang('Episode.activity') ?></label>
         <?php endif; ?>
 
-        <input type="radio" name="tabset" id="description" aria-controls="description" <?= $episode->notes
+        <input type="radio" name="tabset" id="description" aria-controls="description" <?= $episode->statuses
             ? ''
             : 'checked="checked"' ?> />
-        <label for="description" class="<?= $episode->notes
+        <label for="description" class="<?= $episode->statuses
             ? ''
             : 'col-span-2' ?>"><?= lang('Episode.description') ?></label>
 
         <div class="tab-panels">
-            <?php if ($episode->notes): ?>
+            <?php if ($episode->statuses): ?>
                 <section id="activity" class="space-y-8 tab-panel">
-                    <?php foreach ($episode->notes as $note): ?>
-                        <?= view('podcast/_partials/note', ['note' => $note]) ?>
+                    <?php foreach ($episode->statuses as $status): ?>
+                        <?= view('podcast/_partials/status', ['status' => $status]) ?>
                     <?php endforeach; ?>
                 </section>
             <?php endif; ?>

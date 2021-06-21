@@ -225,7 +225,7 @@ return [
         one {<span class="font-semibold">#</span> abonné·e}
         other {<span class="font-semibold">#</span> abonné·e·s}
     }',
-    'notes' => '{numberOfNotes, plural,
+    'notes' => '{numberOfStatuses, plural,
         one {<span class="font-semibold">#</span> note}
         other {<span class="font-semibold">#</span> notes}
     }',

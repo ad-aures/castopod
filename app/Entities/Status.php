@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace App\Entities;
 
-use ActivityPub\Entities\Note as ActivityPubNote;
+use ActivityPub\Entities\Status as ActivityPubStatus;
 use App\Models\EpisodeModel;
 use RuntimeException;
 
@@ -18,7 +18,7 @@ use RuntimeException;
  * @property int|null $episode_id
  * @property Episode|null $episode
  */
-class Note extends ActivityPubNote
+class Status extends ActivityPubStatus
 {
     protected ?Episode $episode = null;
 
@@ -41,12 +41,12 @@ class Note extends ActivityPubNote
     ];
 
     /**
-     * Returns the note's attached episode
+     * Returns the status' attached episode
      */
     public function getEpisode(): ?Episode
     {
         if ($this->episode_id === null) {
-            throw new RuntimeException('Note must have an episode_id before getting episode.');
+            throw new RuntimeException('Status must have an episode_id before getting episode.');
         }
 
         if ($this->episode === null) {

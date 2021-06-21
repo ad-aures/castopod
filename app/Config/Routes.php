@@ -35,7 +35,7 @@ $routes->addPlaceholder('podcastName', '[a-zA-Z0-9\_]{1,32}');
 $routes->addPlaceholder('slug', '[a-zA-Z0-9\-]{1,191}');
 $routes->addPlaceholder('base64', '[A-Za-z0-9\.\_]+\-{0,2}');
 $routes->addPlaceholder('platformType', '\bpodcasting|\bsocial|\bfunding');
-$routes->addPlaceholder('noteAction', '\bfavourite|\breblog|\breply');
+$routes->addPlaceholder('statusAction', '\bfavourite|\breblog|\breply');
 $routes->addPlaceholder('embeddablePlayerTheme', '\blight|\bdark|\blight-transparent|\bdark-transparent');
 $routes->addPlaceholder(
     'uuid',
@@ -746,71 +746,71 @@ $routes->post('interact-as-actor', 'AuthController::attemptInteractAsActor', [
  * Overwriting ActivityPub routes file
  */
 $routes->group('@(:podcastName)', function ($routes): void {
-    $routes->post('notes/new', 'NoteController::attemptCreate/$1', [
-        'as' => 'note-attempt-create',
+    $routes->post('statuses/new', 'StatusController::attemptCreate/$1', [
+        'as' => 'status-attempt-create',
         'filter' => 'permission:podcast-manage_publications',
     ]);
-    // Note
-    $routes->group('notes/(:uuid)', function ($routes): void {
-        $routes->get('/', 'NoteController::view/$1/$2', [
-            'as' => 'note',
+    // Status
+    $routes->group('statuses/(:uuid)', function ($routes): void {
+        $routes->get('/', 'StatusController::view/$1/$2', [
+            'as' => 'status',
             'alternate-content' => [
                 'application/activity+json' => [
                     'namespace' => 'ActivityPub\Controllers',
-                    'controller-method' => 'NoteController/$2',
+                    'controller-method' => 'StatusController/$2',
                 ],
                 'application/ld+json; profile="https://www.w3.org/ns/activitystreams' => [
                     'namespace' => 'ActivityPub\Controllers',
-                    'controller-method' => 'NoteController/$2',
+                    'controller-method' => 'StatusController/$2',
                 ],
             ],
         ]);
-        $routes->get('replies', 'NoteController/$1/$2', [
-            'as' => 'note-replies',
+        $routes->get('replies', 'StatusController/$1/$2', [
+            'as' => 'status-replies',
             'alternate-content' => [
                 'application/activity+json' => [
                     'namespace' => 'ActivityPub\Controllers',
-                    'controller-method' => 'NoteController::replies/$2',
+                    'controller-method' => 'StatusController::replies/$2',
                 ],
                 'application/ld+json; profile="https://www.w3.org/ns/activitystreams' => [
                     'namespace' => 'ActivityPub\Controllers',
-                    'controller-method' => 'NoteController::replies/$2',
+                    'controller-method' => 'StatusController::replies/$2',
                 ],
             ],
         ]);
 
         // Actions
-        $routes->post('action', 'NoteController::attemptAction/$1/$2', [
-            'as' => 'note-attempt-action',
+        $routes->post('action', 'StatusController::attemptAction/$1/$2', [
+            'as' => 'status-attempt-action',
             'filter' => 'permission:podcast-interact_as',
         ]);
 
         $routes->post(
             'block-actor',
-            'NoteController::attemptBlockActor/$1/$2',
+            'StatusController::attemptBlockActor/$1/$2',
             [
-                'as' => 'note-attempt-block-actor',
+                'as' => 'status-attempt-block-actor',
                 'filter' => 'permission:fediverse-block_actors',
             ],
         );
         $routes->post(
             'block-domain',
-            'NoteController::attemptBlockDomain/$1/$2',
+            'StatusController::attemptBlockDomain/$1/$2',
             [
-                'as' => 'note-attempt-block-domain',
+                'as' => 'status-attempt-block-domain',
                 'filter' => 'permission:fediverse-block_domains',
             ],
         );
-        $routes->post('delete', 'NoteController::attemptDelete/$1/$2', [
-            'as' => 'note-attempt-delete',
+        $routes->post('delete', 'StatusController::attemptDelete/$1/$2', [
+            'as' => 'status-attempt-delete',
             'filter' => 'permission:podcast-manage_publications',
         ]);
 
         $routes->get(
-            'remote/(:noteAction)',
-            'NoteController::remoteAction/$1/$2/$3',
+            'remote/(:statusAction)',
+            'StatusController::remoteAction/$1/$2/$3',
             [
-                'as' => 'note-remote-action',
+                'as' => 'status-remote-action',
             ],
         );
     });

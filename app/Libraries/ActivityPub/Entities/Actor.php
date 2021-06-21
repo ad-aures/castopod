@@ -31,7 +31,7 @@ use RuntimeException;
  * @property string|null $outbox_url
  * @property string|null $followers_url
  * @property int $followers_count
- * @property int $notes_count
+ * @property int $statuses_count
  * @property bool $is_blocked
  *
  * @property Actor[] $followers
@@ -68,7 +68,7 @@ class Actor extends Entity
         'outbox_url' => '?string',
         'followers_url' => '?string',
         'followers_count' => 'integer',
-        'notes_count' => 'integer',
+        'statuses_count' => 'integer',
         'is_blocked' => 'boolean',
     ];
 

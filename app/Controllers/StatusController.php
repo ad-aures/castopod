@@ -10,21 +10,21 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use ActivityPub\Controllers\NoteController as ActivityPubNoteController;
-use ActivityPub\Entities\Note as ActivityPubNote;
+use ActivityPub\Controllers\StatusController as ActivityPubStatusController;
+use ActivityPub\Entities\Status as ActivityPubStatus;
 use Analytics\AnalyticsTrait;
 use App\Entities\Actor;
-use App\Entities\Note as CastopodNote;
 use App\Entities\Podcast;
+use App\Entities\Status as CastopodStatus;
 use App\Models\EpisodeModel;
-use App\Models\NoteModel;
 use App\Models\PodcastModel;
+use App\Models\StatusModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\URI;
 use CodeIgniter\I18n\Time;
 
-class NoteController extends ActivityPubNoteController
+class StatusController extends ActivityPubStatusController
 {
     use AnalyticsTrait;
 
@@ -50,9 +50,9 @@ class NoteController extends ActivityPubNoteController
 
         if (
             count($params) > 1 &&
-            ($note = (new NoteModel())->getNoteById($params[1])) !== null
+            ($status = (new StatusModel())->getStatusById($params[1])) !== null
         ) {
-            $this->note = $note;
+            $this->status = $status;
 
             unset($params[0]);
             unset($params[1]);
@@ -72,7 +72,7 @@ class NoteController extends ActivityPubNoteController
             '_',
             array_filter([
                 'page',
-                "note#{$this->note->id}",
+                "status#{$this->status->id}",
                 service('request')
                     ->getLocale(),
                 can_user_interact() ? '_authenticated' : null,
@@ -83,15 +83,15 @@ class NoteController extends ActivityPubNoteController
             $data = [
                 'podcast' => $this->podcast,
                 'actor' => $this->actor,
-                'note' => $this->note,
+                'status' => $this->status,
             ];
 
             // if user is logged in then send to the authenticated activity view
             if (can_user_interact()) {
                 helper('form');
-                return view('podcast/note_authenticated', $data);
+                return view('podcast/status_authenticated', $data);
             }
-            return view('podcast/note', $data, [
+            return view('podcast/status', $data, [
                 'cache' => DECADE,
                 'cache_name' => $cacheName,
             ]);
@@ -116,7 +116,7 @@ class NoteController extends ActivityPubNoteController
 
         $message = $this->request->getPost('message');
 
-        $newNote = new CastopodNote([
+        $newStatus = new CastopodStatus([
             'actor_id' => interact_as_actor_id(),
             'published_at' => Time::now(),
             'created_by' => user_id(),
@@ -129,23 +129,23 @@ class NoteController extends ActivityPubNoteController
             ($params = extract_params_from_episode_uri(new URI($episodeUri))) &&
             ($episode = (new EpisodeModel())->getEpisodeBySlug($params['podcastName'], $params['episodeSlug']))
         ) {
-            $newNote->episode_id = $episode->id;
+            $newStatus->episode_id = $episode->id;
         }
 
-        $newNote->message = $message;
+        $newStatus->message = $message;
 
-        $noteModel = new NoteModel();
+        $statusModel = new StatusModel();
         if (
-            ! $noteModel
-                ->addNote($newNote, ! (bool) $newNote->episode_id, true)
+            ! $statusModel
+                ->addStatus($newStatus, ! (bool) $newStatus->episode_id, true)
         ) {
             return redirect()
                 ->back()
                 ->withInput()
-                ->with('errors', $noteModel->errors());
+                ->with('errors', $statusModel->errors());
         }
 
-        // Note has been successfully created
+        // Status has been successfully created
         return redirect()->back();
     }
 
@@ -162,36 +162,36 @@ class NoteController extends ActivityPubNoteController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $newNote = new ActivityPubNote([
+        $newStatus = new ActivityPubStatus([
             'actor_id' => interact_as_actor_id(),
-            'in_reply_to_id' => $this->note->id,
+            'in_reply_to_id' => $this->status->id,
             'message' => $this->request->getPost('message'),
             'published_at' => Time::now(),
             'created_by' => user_id(),
         ]);
 
-        $noteModel = new NoteModel();
-        if (! $noteModel->addReply($newNote)) {
+        $statusModel = new StatusModel();
+        if (! $statusModel->addReply($newStatus)) {
             return redirect()
                 ->back()
                 ->withInput()
-                ->with('errors', $noteModel->errors());
+                ->with('errors', $statusModel->errors());
         }
 
-        // Reply note without preview card has been successfully created
+        // Reply status without preview card has been successfully created
         return redirect()->back();
     }
 
     public function attemptFavourite(): RedirectResponse
     {
-        model('FavouriteModel')->toggleFavourite(interact_as_actor(), $this->note);
+        model('FavouriteModel')->toggleFavourite(interact_as_actor(), $this->status);
 
         return redirect()->back();
     }
 
     public function attemptReblog(): RedirectResponse
     {
-        (new NoteModel())->toggleReblog(interact_as_actor(), $this->note);
+        (new StatusModel())->toggleReblog(interact_as_actor(), $this->status);
 
         return redirect()->back();
     }
@@ -230,20 +230,20 @@ class NoteController extends ActivityPubNoteController
 
         $cacheName = implode(
             '_',
-            array_filter(['page', "note#{$this->note->id}", "remote_{$action}", service('request') ->getLocale()]),
+            array_filter(['page', "status#{$this->status->id}", "remote_{$action}", service('request') ->getLocale()]),
         );
 
         if (! ($cachedView = cache($cacheName))) {
             $data = [
                 'podcast' => $this->podcast,
                 'actor' => $this->actor,
-                'note' => $this->note,
+                'status' => $this->status,
                 'action' => $action,
             ];
 
             helper('form');
 
-            return view('podcast/note_remote_action', $data, [
+            return view('podcast/status_remote_action', $data, [
                 'cache' => DECADE,
                 'cache_name' => $cacheName,
             ]);

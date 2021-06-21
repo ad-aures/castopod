@@ -31,7 +31,7 @@ class ActivityModel extends UuidModel
     /**
      * @var string[]
      */
-    protected $uuidFields = ['id', 'note_id'];
+    protected $uuidFields = ['id', 'status_id'];
 
     /**
      * @var string[]
@@ -40,10 +40,10 @@ class ActivityModel extends UuidModel
         'id',
         'actor_id',
         'target_actor_id',
-        'note_id',
+        'status_id',
         'type',
         'payload',
-        'status',
+        'task_status',
         'scheduled_at',
     ];
 
@@ -88,20 +88,20 @@ class ActivityModel extends UuidModel
         string $type,
         int $actorId,
         ?int $targetActorId,
-        ?string $noteId,
+        ?string $statusId,
         string $payload,
         DateTimeInterface $scheduledAt = null,
-        ?string $status = null
+        ?string $taskStatus = null
     ): BaseResult | int | string | false {
         return $this->insert(
             [
                 'actor_id' => $actorId,
                 'target_actor_id' => $targetActorId,
-                'note_id' => $noteId,
+                'status_id' => $statusId,
                 'type' => $type,
                 'payload' => $payload,
                 'scheduled_at' => $scheduledAt,
-                'status' => $status,
+                'task_status' => $taskStatus,
             ],
             true,
         );

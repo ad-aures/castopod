@@ -18,7 +18,7 @@
             title="<?= $reply->published_at ?>"
             ><?= lang('Common.mediumDate', [$reply->published_at]) ?></time>
         </header>
-        <p class="mb-2 note-content"><?= $reply->message_html ?></p>
+        <p class="mb-2 status-content"><?= $reply->message_html ?></p>
         <?php if ($reply->has_preview_card): ?>
             <?= view('podcast/_partials/preview_card', [
                 'preview_card' => $reply->preview_card,

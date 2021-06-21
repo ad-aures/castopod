@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Class AddNotes Creates activitypub_notes table in database
+ * Class AddStatuses Creates activitypub_statuses table in database
  *
  * @copyright  2021 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -14,7 +14,7 @@ namespace ActivityPub\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class AddNotes extends Migration
+class AddStatuses extends Migration
 {
     public function up(): void
     {
@@ -76,16 +76,16 @@ class AddNotes extends Migration
         ]);
         $this->forge->addPrimaryKey('id');
         $this->forge->addUniqueKey('uri');
-        // FIXME: an actor must reblog a note only once
+        // FIXME: an actor must reblog a status only once
         // $this->forge->addUniqueKey(['actor_id', 'reblog_of_id']);
         $this->forge->addForeignKey('actor_id', 'activitypub_actors', 'id', '', 'CASCADE');
-        $this->forge->addForeignKey('in_reply_to_id', 'activitypub_notes', 'id', '', 'CASCADE');
-        $this->forge->addForeignKey('reblog_of_id', 'activitypub_notes', 'id', '', 'CASCADE');
-        $this->forge->createTable('activitypub_notes');
+        $this->forge->addForeignKey('in_reply_to_id', 'activitypub_statuses', 'id', '', 'CASCADE');
+        $this->forge->addForeignKey('reblog_of_id', 'activitypub_statuses', 'id', '', 'CASCADE');
+        $this->forge->createTable('activitypub_statuses');
     }
 
     public function down(): void
     {
-        $this->forge->dropTable('activitypub_notes');
+        $this->forge->dropTable('activitypub_statuses');
     }
 }

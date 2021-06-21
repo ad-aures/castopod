@@ -121,12 +121,12 @@
                     <?= anchor(
                         route_to('episode', $podcast->name, $episode->slug),
                         icon('chat', 'text-xl mr-1 text-gray-400') .
-                            $episode->notes_total,
+                            $episode->statuses_total,
                         [
                             'class' =>
                                 'inline-flex items-center hover:underline',
-                            'title' => lang('Episode.total_notes', [
-                                'numberOfTotalNotes' => $episode->notes_total,
+                            'title' => lang('Episode.total_statuses', [
+                                'numberOfTotalStatuses' => $episode->statuses_total,
                             ]),
                         ],
                     ) ?>

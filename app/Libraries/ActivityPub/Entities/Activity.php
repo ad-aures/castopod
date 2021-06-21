@@ -19,11 +19,11 @@ use RuntimeException;
  * @property Actor $actor
  * @property int|null $target_actor_id
  * @property Actor $target_actor
- * @property string|null $note_id
- * @property Note $note
+ * @property string|null $status_id
+ * @property Status $status
  * @property string $type
  * @property object $payload
- * @property string|null $status
+ * @property string|null $task_status
  * @property Time|null $scheduled_at
  * @property Time $created_at
  */
@@ -33,12 +33,12 @@ class Activity extends UuidEntity
 
     protected ?Actor $target_actor = null;
 
-    protected ?Note $note = null;
+    protected ?Status $status = null;
 
     /**
      * @var string[]
      */
-    protected $uuids = ['id', 'note_id'];
+    protected $uuids = ['id', 'status_id'];
 
     /**
      * @var string[]
@@ -52,10 +52,10 @@ class Activity extends UuidEntity
         'id' => 'string',
         'actor_id' => 'integer',
         'target_actor_id' => '?integer',
-        'note_id' => '?string',
+        'status_id' => '?string',
         'type' => 'string',
         'payload' => 'json',
-        'status' => '?string',
+        'task_status' => '?string',
     ];
 
     public function getActor(): Actor
@@ -86,17 +86,17 @@ class Activity extends UuidEntity
         return $this->target_actor;
     }
 
-    public function getNote(): Note
+    public function getStatus(): Status
     {
-        if ($this->note_id === null) {
-            throw new RuntimeException('Activity must have a note_id before getting note.');
+        if ($this->status_id === null) {
+            throw new RuntimeException('Activity must have a status_id before getting status.');
         }
 
-        if ($this->note === null) {
-            $this->note = model('NoteModel', false)
-                ->getNoteById($this->note_id);
+        if ($this->status === null) {
+            $this->status = model('StatusModel', false)
+                ->getStatusById($this->status_id);
         }
 
-        return $this->note;
+        return $this->status;
     }
 }

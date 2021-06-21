@@ -26,7 +26,7 @@ return [
         one {# total share}
         other {# total shares}
     }',
-    'total_notes' => '{numberOfTotalNotes, plural,
+    'total_statuses' => '{numberOfTotalStatuses, plural,
         one {# note}
         other {# total notes}
     }',
@@ -112,8 +112,8 @@ return [
         'submit_edit' => 'Save episode',
     ],
     'publish_form' => [
-        'note' => 'Your note',
-        'note_hint' =>
+        'status' => 'Your note',
+        'status_hint' =>
             'The message you write will be broadcasted to all your followers in the fediverse.',
         'publication_date' => 'Publication date',
         'publication_method' => [

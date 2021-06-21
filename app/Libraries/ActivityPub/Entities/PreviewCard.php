@@ -14,7 +14,7 @@ use CodeIgniter\Entity\Entity;
 
 /**
  * @property int $id
- * @property string $note_id
+ * @property string $status_id
  * @property string $url
  * @property string $title
  * @property string $description
@@ -33,7 +33,7 @@ class PreviewCard extends Entity
      */
     protected $casts = [
         'id' => 'integer',
-        'note_id' => 'string',
+        'status_id' => 'string',
         'url' => 'string',
         'title' => 'string',
         'description' => 'string',

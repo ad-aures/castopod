@@ -13,7 +13,7 @@ $routes->addPlaceholder(
     'uuid',
     '[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}',
 );
-$routes->addPlaceholder('noteAction', '\bfavourite|\breblog|\breply');
+$routes->addPlaceholder('statusAction', '\bfavourite|\breblog|\breply');
 
 /**
  * ActivityPub routes file
@@ -54,24 +54,24 @@ $routes->group('', [
         ]);
     });
 
-    // Note
-    $routes->post('notes/new', 'NoteController::attemptCreate/$1', [
-        'as' => 'note-attempt-create',
+    // Status
+    $routes->post('statuses/new', 'StatusController::attemptCreate/$1', [
+        'as' => 'status-attempt-create',
     ]);
 
-    $routes->get('notes/(:uuid)', 'NoteController/$1', [
-        'as' => 'note',
+    $routes->get('statuses/(:uuid)', 'StatusController/$1', [
+        'as' => 'status',
     ]);
 
-    $routes->get('notes/(:uuid)/replies', 'NoteController/$1', [
-        'as' => 'note-replies',
+    $routes->get('statuses/(:uuid)/replies', 'StatusController/$1', [
+        'as' => 'status-replies',
     ]);
 
     $routes->post(
-        'notes/(:uuid)/remote/(:noteAction)',
-        'NoteController::attemptRemoteAction/$1/$2/$3',
+        'statuses/(:uuid)/remote/(:statusAction)',
+        'StatusController::attemptRemoteAction/$1/$2/$3',
         [
-            'as' => 'note-attempt-remote-action',
+            'as' => 'status-attempt-remote-action',
         ],
     );
 

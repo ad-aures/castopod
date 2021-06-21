@@ -13,12 +13,12 @@ namespace App\Controllers\Admin;
 use App\Entities\Episode;
 use App\Entities\Image;
 use App\Entities\Location;
-use App\Entities\Note;
 use App\Entities\Podcast;
+use App\Entities\Status;
 use App\Models\EpisodeModel;
-use App\Models\NoteModel;
 use App\Models\PodcastModel;
 use App\Models\SoundbiteModel;
+use App\Models\StatusModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\I18n\Time;
@@ -426,7 +426,7 @@ class EpisodeController extends BaseController
         $db = db_connect();
         $db->transStart();
 
-        $newNote = new Note([
+        $newStatus = new Status([
             'actor_id' => $this->podcast->actor_id,
             'episode_id' => $this->episode->id,
             'message' => $this->request->getPost('message'),
@@ -453,15 +453,15 @@ class EpisodeController extends BaseController
             $this->episode->published_at = Time::now();
         }
 
-        $newNote->published_at = $this->episode->published_at;
+        $newStatus->published_at = $this->episode->published_at;
 
-        $noteModel = new NoteModel();
-        if (! $noteModel->addNote($newNote)) {
+        $statusModel = new StatusModel();
+        if (! $statusModel->addStatus($newStatus)) {
             $db->transRollback();
             return redirect()
                 ->back()
                 ->withInput()
-                ->with('errors', $noteModel->errors());
+                ->with('errors', $statusModel->errors());
         }
 
         $episodeModel = new EpisodeModel();
@@ -486,7 +486,7 @@ class EpisodeController extends BaseController
             $data = [
                 'podcast' => $this->podcast,
                 'episode' => $this->episode,
-                'note' => (new NoteModel())
+                'status' => (new StatusModel())
                     ->where([
                         'actor_id' => $this->podcast->actor_id,
                         'episode_id' => $this->episode->id,
@@ -506,7 +506,7 @@ class EpisodeController extends BaseController
     public function attemptPublishEdit(): RedirectResponse
     {
         $rules = [
-            'note_id' => 'required',
+            'status_id' => 'required',
             'publication_method' => 'required',
             'scheduled_publication_date' =>
                 'valid_date[Y-m-d H:i]|permit_empty',
@@ -542,19 +542,19 @@ class EpisodeController extends BaseController
             $this->episode->published_at = Time::now();
         }
 
-        $note = (new NoteModel())->getNoteById($this->request->getPost('note_id'));
+        $status = (new StatusModel())->getStatusById($this->request->getPost('status_id'));
 
-        if ($note !== null) {
-            $note->message = $this->request->getPost('message');
-            $note->published_at = $this->episode->published_at;
+        if ($status !== null) {
+            $status->message = $this->request->getPost('message');
+            $status->published_at = $this->episode->published_at;
 
-            $noteModel = new NoteModel();
-            if (! $noteModel->editNote($note)) {
+            $statusModel = new StatusModel();
+            if (! $statusModel->editStatus($status)) {
                 $db->transRollback();
                 return redirect()
                     ->back()
                     ->withInput()
-                    ->with('errors', $noteModel->errors());
+                    ->with('errors', $statusModel->errors());
             }
         }
 
@@ -609,13 +609,13 @@ class EpisodeController extends BaseController
 
         $db->transStart();
 
-        $allNotesLinkedToEpisode = (new NoteModel())
+        $allStatusesLinkedToEpisode = (new StatusModel())
             ->where([
                 'episode_id' => $this->episode->id,
             ])
             ->findAll();
-        foreach ($allNotesLinkedToEpisode as $note) {
-            (new NoteModel())->removeNote($note);
+        foreach ($allStatusesLinkedToEpisode as $status) {
+            (new StatusModel())->removeStatus($status);
         }
 
         // set episode published_at to null to unpublish

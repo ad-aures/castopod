@@ -157,7 +157,7 @@ class AddEpisodes extends Migration
                 'unsigned' => true,
                 'default' => 0,
             ],
-            'notes_total' => [
+            'statuses_total' => [
                 'type' => 'INT',
                 'unsigned' => true,
                 'default' => 0,

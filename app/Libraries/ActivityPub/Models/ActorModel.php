@@ -41,7 +41,7 @@ class ActorModel extends Model
         'outbox_url',
         'followers_url',
         'followers_count',
-        'notes_count',
+        'statuses_count',
         'is_blocked',
     ];
 
