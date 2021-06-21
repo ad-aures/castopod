@@ -4,8 +4,8 @@
 
 - [Introduction](#introduction)
 - [Pre-requisites](#pre-requisites)
-  - [(recommended) Develop inside the app Container with VSCode](#recommended-develop-inside-the-app-container-with-vscode)
-  - [(not-recommended) Develop outside the app container](#not-recommended-develop-outside-the-app-container)
+- [(recommended) Develop inside the app Container with VSCode](#recommended-develop-inside-the-app-container-with-vscode)
+- [(not-recommended) Develop outside the app container](#not-recommended-develop-outside-the-app-container)
 - [Install Castopod Host's dependencies](#install-castopod-hosts-dependencies)
 - [Initialize and populate database](#initialize-and-populate-database)
 - [Start hacking](#start-hacking)
@@ -335,7 +335,7 @@ and run `npm install` again.
 
 ### Files created inside container are attributed to root locally (Linux)
 
-You may use Linux user namespaces to fix this:
+You may use Linux user namespaces to fix this on your machine:
 
 > **Note:**
 >
@@ -352,11 +352,13 @@ You may use Linux user namespaces to fix this:
 2. Configure the subordinate uid/guid:
 
    ```bash
+   # in /etc/subuid
    username:1000:1
    username:100000:65536
    ```
 
    ```bash
+   # in /etc/subgid
    username:1000:1
    username:100000:65536
    ```
@@ -368,7 +370,7 @@ You may use Linux user namespaces to fix this:
    ```
 
 4. That's it! Now, the root user in the container will be mapped to the user on
-   your local machine, no more permission problems! 🎉
+   your local machine, no more permission issues! 🎉
 
 You can check
 [this great article](https://www.jujens.eu/posts/en/2017/Jul/02/docker-userns-remap/)
