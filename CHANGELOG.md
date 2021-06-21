@@ -1,3 +1,10 @@
+# [1.0.0-alpha.60](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.59...v1.0.0-alpha.60) (2021-06-21)
+
+### Features
+
+- **rss:** add ˂podcast:guid˃ tag for channel
+  ([1fab10e](https://code.podlibre.org/podlibre/castopod-host/commit/1fab10eb0d63bb7c3edf34ffe691e2aec2c2e43c))
+
 # [1.0.0-alpha.59](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.58...v1.0.0-alpha.59) (2021-06-15)
 
 ### Bug Fixes
