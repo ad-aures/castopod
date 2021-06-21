@@ -148,4 +148,18 @@ if (! function_exists('format_duration')) {
     }
 }
 
+if (! function_exists('podcast_uuid')) {
+    /**
+     * Generate UUIDv5 for podcast. For more information, see
+     * https://github.com/Podcastindex-org/podcast-namespace/blob/main/docs/1.0.md#guid
+     */
+    function podcast_uuid(string $feedUrl): string
+    {
+        $uuid = service('uuid');
+        // 'ead4c236-bf58-58c6-a2c6-a6b28d128cb6' is the uuid of the podcast namespace
+        return $uuid->uuid5('ead4c236-bf58-58c6-a2c6-a6b28d128cb6', $feedUrl)
+            ->toString();
+    }
+}
+
 //--------------------------------------------------------------------

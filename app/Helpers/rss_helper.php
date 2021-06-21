@@ -50,6 +50,7 @@ if (! function_exists('get_rss_feed')) {
         $channel->addChild('generator', 'Castopod Host - https://castopod.org/');
         $channel->addChild('docs', 'https://cyber.harvard.edu/rss/rss.html');
 
+        $channel->addChild('guid', $podcast->guid, $podcastNamespace);
         $channel->addChild('title', $podcast->title);
         $channel->addChildWithCDATA('description', $podcast->description_html);
 

@@ -23,6 +23,7 @@ use RuntimeException;
 
 /**
  * @property int $id
+ * @property string $guid
  * @property int $actor_id
  * @property Actor|null $actor
  * @property string $name
@@ -137,6 +138,7 @@ class Podcast extends Entity
      */
     protected $casts = [
         'id' => 'integer',
+        'guid' => 'string',
         'actor_id' => 'integer',
         'name' => 'string',
         'title' => 'string',

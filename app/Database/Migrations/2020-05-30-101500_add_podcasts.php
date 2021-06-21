@@ -24,6 +24,10 @@ class AddPodcasts extends Migration
                 'unsigned' => true,
                 'auto_increment' => true,
             ],
+            'guid' => [
+                'type' => 'CHAR',
+                'constraint' => 36,
+            ],
             'actor_id' => [
                 'type' => 'INT',
                 'unsigned' => true,
@@ -190,6 +194,7 @@ class AddPodcasts extends Migration
         $this->forge->addPrimaryKey('id');
         // TODO: remove name in favor of username from actor
         $this->forge->addUniqueKey('name');
+        $this->forge->addUniqueKey('guid');
         $this->forge->addUniqueKey('actor_id');
         $this->forge->addForeignKey('actor_id', 'activitypub_actors', 'id', '', 'CASCADE');
         $this->forge->addForeignKey('category_id', 'categories', 'id');

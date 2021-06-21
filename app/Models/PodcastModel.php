@@ -33,6 +33,7 @@ class PodcastModel extends Model
      */
     protected $allowedFields = [
         'id',
+        'guid',
         'title',
         'name',
         'description_markdown',
