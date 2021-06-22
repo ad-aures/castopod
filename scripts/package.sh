@@ -1,5 +1,7 @@
 #!/bin/bash
 
+VERSION=$1
+
 apt-get install zip -y
 
 # create zip and tar.gz packages for release upload
