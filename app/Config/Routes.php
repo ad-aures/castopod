@@ -311,6 +311,15 @@ $routes->group(
                             ],
                         );
                         $routes->get(
+                            'publish-cancel',
+                            'EpisodeController::publishCancel/$1/$2',
+                            [
+                                'as' => 'episode-publish-cancel',
+                                'filter' =>
+                                    'permission:podcast-manage_publications',
+                            ],
+                        );
+                        $routes->get(
                             'unpublish',
                             'EpisodeController::unpublish/$1/$2',
                             [

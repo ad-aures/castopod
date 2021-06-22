@@ -27,8 +27,8 @@ return [
         other {# total shares}
     }',
     'total_statuses' => '{numberOfTotalStatuses, plural,
-        one {# note}
-        other {# total notes}
+        one {# total post}
+        other {# total posts}
     }',
     'all_podcast_episodes' => 'All podcast episodes',
     'back_to_podcast' => 'Go back to podcast',
@@ -36,6 +36,10 @@ return [
     'publish' => 'Publish',
     'publish_edit' => 'Edit publication',
     'unpublish' => 'Unpublish',
+    'publish_error' => 'Episode is already published.',
+    'publish_edit_error' => 'Episode is already published.',
+    'publish_cancel_error' => 'Episode is already published.',
+    'unpublish_error' => 'Episode is not published.',
     'delete' => 'Delete',
     'go_to_page' => 'Go to page',
     'create' => 'Add an episode',
@@ -112,9 +116,10 @@ return [
         'submit_edit' => 'Save episode',
     ],
     'publish_form' => [
-        'status' => 'Your note',
+        'back_to_episode_dashboard' => 'Back to episode dashboard',
+        'status' => 'Your announcement post',
         'status_hint' =>
-            'The message you write will be broadcasted to all your followers in the fediverse.',
+            "Write a message to announce the publication of your episode. The message will be broadcasted to all your followers in the fediverse and be featured in your podcast's homepage.",
         'publication_date' => 'Publication date',
         'publication_method' => [
             'now' => 'Now',
@@ -126,6 +131,10 @@ return [
             'You can schedule the episode release by setting a future publication date. This field must be formatted as YYYY-MM-DD HH:mm',
         'submit' => 'Publish',
         'submit_edit' => 'Edit publication',
+        'cancel_publication' => 'Cancel publication',
+        'message_warning' => 'You did not write a message for your announcement post!',
+        'message_warning_hint' => 'Having a message increases social engagement, resulting in a better visibility for your episode.',
+        'message_warning_submit' => 'Publish anyways',
     ],
     'unpublish_form' => [
         'disclaimer' =>

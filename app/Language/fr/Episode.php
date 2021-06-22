@@ -27,8 +27,8 @@ return [
         other {# partages en tout}
     }',
     'total_statuses' => '{numberOfTotalStatuses, plural,
-        one {# note}
-        other {# notes}
+        one {# message}
+        other {# messages}
     }',
     'all_podcast_episodes' => 'Tous les épisodes du podcast',
     'back_to_podcast' => 'Revenir au podcast',
@@ -36,6 +36,10 @@ return [
     'publish' => 'Publier',
     'publish_edit' => 'Modifier la publication',
     'unpublish' => 'Dépublier',
+    'publish_error' => 'L’épisode est déjà publié.',
+    'publish_edit_error' => 'L’épisode est déjà publié.',
+    'publish_cancel_error' => 'L’épisode est déjà publié.',
+    'unpublish_error' => 'L’épisode n’est pas publié.',
     'delete' => 'Supprimer',
     'go_to_page' => 'Voir',
     'create' => 'Ajouter un épisode',
@@ -115,9 +119,10 @@ return [
         'submit_edit' => 'Enregistrer l’épisode',
     ],
     'publish_form' => [
-        'status' => 'Votre note',
+        'back_to_episode_dashboard' => 'Retour au tableau de bord de l’épisode',
+        'status' => 'Votre message de publication',
         'status_hint' =>
-            'Le message que vous écrirez sera diffusé à toutes les personnes qui vous suivent dans le fédiverse.',
+            'Écrivez un message pour annoncer la publication de votre épisode. Le message sera diffusé à toutes les personnes qui vous suivent dans le fédiverse et mis en évidence sur la page d’accueil de votre podcast.',
         'publication_date' => 'Date de publication',
         'publication_date_clear' => 'Effacer la date de publication',
         'publication_date_hint' =>
@@ -132,6 +137,10 @@ return [
             'Vous pouvez planifier la sortie de l’épisode en saisissant une date de publication future. Ce champ doit être au format YYYY-MM-DD HH:mm',
         'submit' => 'Publier',
         'submit_edit' => 'Modifier la publication',
+        'cancel_publication' => 'Annuler la publication',
+        'message_warning' => 'Vous n’avez pas saisi de message pour l’annonce de votre épisode !',
+        'message_warning_hint' => 'Ajouter un message augmente l’engagement social, menant à une meilleure visibilité pour votre épisode.',
+        'message_warning_submit' => 'Publish quand même',
     ],
     'soundbites' => 'Extraits sonores',
     'soundbites_form' => [

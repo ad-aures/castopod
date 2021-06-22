@@ -226,8 +226,8 @@ return [
         other {<span class="font-semibold">#</span> abonné·e·s}
     }',
     'notes' => '{numberOfStatuses, plural,
-        one {<span class="font-semibold">#</span> note}
-        other {<span class="font-semibold">#</span> notes}
+        one {<span class="font-semibold">#</span> message}
+        other {<span class="font-semibold">#</span> messages}
     }',
     'activity' => 'Activité',
     'episodes' => 'Épisodes',

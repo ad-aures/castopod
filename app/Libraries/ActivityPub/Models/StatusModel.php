@@ -81,7 +81,7 @@ class StatusModel extends UuidModel
      */
     protected $validationRules = [
         'actor_id' => 'required',
-        'message_html' => 'required_without[reblog_of_id]|max_length[500]',
+        'message_html' => 'max_length[500]',
     ];
 
     /**

@@ -388,7 +388,7 @@ class EpisodeController extends BaseController
         return redirect()->back();
     }
 
-    public function publish(): string
+    public function publish(): string | RedirectResponse
     {
         if ($this->episode->publication_status === 'not_published') {
             helper(['form']);
@@ -405,7 +405,10 @@ class EpisodeController extends BaseController
             return view('admin/episode/publish', $data);
         }
 
-        throw PageNotFoundException::forPageNotFound();
+        return redirect()->route('episode-view', [$this->podcast->id, $this->episode->id])->with(
+            'error',
+            lang('Episode.publish_error')
+        );
     }
 
     public function attemptPublish(): RedirectResponse
@@ -478,7 +481,7 @@ class EpisodeController extends BaseController
         return redirect()->route('episode-view', [$this->podcast->id, $this->episode->id]);
     }
 
-    public function publishEdit(): string
+    public function publishEdit(): string | RedirectResponse
     {
         if ($this->episode->publication_status === 'scheduled') {
             helper(['form']);
@@ -500,7 +503,11 @@ class EpisodeController extends BaseController
             ]);
             return view('admin/episode/publish_edit', $data);
         }
-        throw PageNotFoundException::forPageNotFound();
+
+        return redirect()->route('episode-view', [$this->podcast->id, $this->episode->id])->with(
+            'error',
+            lang('Episode.publish_edit_error')
+        );
     }
 
     public function attemptPublishEdit(): RedirectResponse
@@ -572,7 +579,44 @@ class EpisodeController extends BaseController
         return redirect()->route('episode-view', [$this->podcast->id, $this->episode->id]);
     }
 
-    public function unpublish(): string
+    public function publishCancel(): RedirectResponse
+    {
+        if ($this->episode->publication_status === 'scheduled') {
+            $db = db_connect();
+            $db->transStart();
+
+            $statusModel = new StatusModel();
+            $status = $statusModel
+                ->where([
+                    'actor_id' => $this->podcast->actor_id,
+                    'episode_id' => $this->episode->id,
+                ])
+                ->first();
+            $statusModel->removeStatus($status);
+
+            $this->episode->published_at = null;
+
+            $episodeModel = new EpisodeModel();
+            if (! $episodeModel->update($this->episode->id, $this->episode)) {
+                $db->transRollback();
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->with('errors', $episodeModel->errors());
+            }
+
+            $db->transComplete();
+
+            return redirect()->route('episode-view', [$this->podcast->id, $this->episode->id]);
+        }
+
+        return redirect()->route('episode-view', [$this->podcast->id, $this->episode->id])->with(
+            'error',
+            lang('Episode.publish_cancel_error')
+        );
+    }
+
+    public function unpublish(): string | RedirectResponse
     {
         if ($this->episode->publication_status === 'published') {
             helper(['form']);
@@ -589,7 +633,10 @@ class EpisodeController extends BaseController
             return view('admin/episode/unpublish', $data);
         }
 
-        throw PageNotFoundException::forPageNotFound();
+        return redirect()->route('episode-view', [$this->podcast->id, $this->episode->id])->with(
+            'error',
+            lang('Episode.unpublish_error')
+        );
     }
 
     public function attemptUnpublish(): RedirectResponse

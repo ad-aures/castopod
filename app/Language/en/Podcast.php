@@ -224,8 +224,8 @@ return [
         other {<span class="font-semibold">#</span> followers}
     }',
     'statuses' => '{numberOfStatuses, plural,
-        one {<span class="font-semibold">#</span> note}
-        other {<span class="font-semibold">#</span> notes}
+        one {<span class="font-semibold">#</span> post}
+        other {<span class="font-semibold">#</span> posts}
     }',
     'activity' => 'Activity',
     'episodes' => 'Episodes',

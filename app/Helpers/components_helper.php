@@ -86,11 +86,11 @@ if (! function_exists('button')) {
         }
 
         if ($options['iconLeft']) {
-            $label = icon($options['iconLeft'], 'mr-2') . $label;
+            $label = icon((string) $options['iconLeft'], 'mr-2') . $label;
         }
 
         if ($options['iconRight']) {
-            $label .= icon($options['iconRight'], 'ml-2');
+            $label .= icon((string) $options['iconRight'], 'ml-2');
         }
 
         if ($uri !== '') {
