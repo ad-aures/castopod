@@ -1,3 +1,14 @@
+# [1.0.0-alpha.61](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.60...v1.0.0-alpha.61) (2021-06-23)
+
+### Bug Fixes
+
+- **release:** add missing version number to castopod-host package
+  ([8f3e9d9](https://code.podlibre.org/podlibre/castopod-host/commit/8f3e9d90c14545d3f84d4469b26a53db4554b4dc))
+- **ux:** allow for empty message upon episode publication and warn user on
+  submit
+  ([33d01b8](https://code.podlibre.org/podlibre/castopod-host/commit/33d01b8d4fd6ebf24e9f011aa705c456c846956c)),
+  closes [#129](https://code.podlibre.org/podlibre/castopod-host/issues/129)
+
 # [1.0.0-alpha.60](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.59...v1.0.0-alpha.60) (2021-06-21)
 
 ### Features
