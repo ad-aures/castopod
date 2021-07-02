@@ -1,3 +1,10 @@
+# [1.0.0-alpha.62](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.61...v1.0.0-alpha.62) (2021-07-02)
+
+### Bug Fixes
+
+- **episode:** replace guid's empty string value to null
+  ([441052a](https://code.podlibre.org/podlibre/castopod-host/commit/441052af8d99e6e317edefd1e58ad71799357088))
+
 # [1.0.0-alpha.61](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.60...v1.0.0-alpha.61) (2021-06-23)
 
 ### Bug Fixes
