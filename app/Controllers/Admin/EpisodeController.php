@@ -134,7 +134,7 @@ class EpisodeController extends BaseController
             'podcast_id' => $this->podcast->id,
             'title' => $this->request->getPost('title'),
             'slug' => $this->request->getPost('slug'),
-            'guid' => '',
+            'guid' => null,
             'audio_file' => $this->request->getFile('audio_file'),
             'description_markdown' => $this->request->getPost('description'),
             'image' => $image,
