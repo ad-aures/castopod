@@ -12,6 +12,7 @@ namespace App\Models;
 
 use ActivityPub\Models\StatusModel as ActivityPubStatusModel;
 use App\Entities\Status;
+use CodeIgniter\Database\BaseBuilder;
 
 class StatusModel extends ActivityPubStatusModel
 {
@@ -51,6 +52,23 @@ class StatusModel extends ActivityPubStatusModel
         ])
             ->where('`published_at` <= NOW()', null, false)
             ->orderBy('published_at', 'DESC')
+            ->findAll();
+    }
+
+    /**
+     * Retrieves all published statuses for a given episode ordered by publication date
+     *
+     * @return Status[]
+     */
+    public function getEpisodeComments(int $episodeId): array
+    {
+        return $this->whereIn('in_reply_to_id', function (BaseBuilder $builder) use (&$episodeId): BaseBuilder {
+            return $builder->select('id')
+                ->from('activitypub_statuses')
+                ->where('episode_id', $episodeId);
+        })
+            ->where('`published_at` <= NOW()', null, false)
+            ->orderBy('published_at', 'ASC')
             ->findAll();
     }
 }

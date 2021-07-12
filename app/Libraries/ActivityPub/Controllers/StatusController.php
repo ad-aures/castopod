@@ -92,7 +92,7 @@ class StatusController extends Controller
             if ($paginatedReplies !== null) {
                 foreach ($paginatedReplies as $reply) {
                     $replyObject = new $noteObjectClass($reply);
-                    $orderedItems[] = $replyObject->toJSON();
+                    $orderedItems[] = $replyObject->toArray();
                 }
             }
 

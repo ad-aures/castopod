@@ -40,7 +40,7 @@ trait AnalyticsTrait
             $procedureName = $db->prefixTable('analytics_website');
             $db->query("call {$procedureName}(?,?,?,?,?,?)", [
                 $podcastId,
-                $session->get('browser'),
+                $session->get('browser') ?? '',
                 $session->get('entryPage'),
                 $referer,
                 $domain,

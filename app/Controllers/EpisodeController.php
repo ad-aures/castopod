@@ -10,12 +10,18 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+use ActivityPub\Objects\OrderedCollectionObject;
+use ActivityPub\Objects\OrderedCollectionPage;
 use Analytics\AnalyticsTrait;
 use App\Entities\Episode;
 use App\Entities\Podcast;
+use App\Libraries\NoteObject;
+use App\Libraries\PodcastEpisode;
 use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
+use CodeIgniter\Database\BaseBuilder;
 use CodeIgniter\Exceptions\PageNotFoundException;
+use CodeIgniter\HTTP\Response;
 use CodeIgniter\HTTP\ResponseInterface;
 use Config\Services;
 use SimpleXMLElement;
@@ -190,5 +196,60 @@ class EpisodeController extends BaseController
         $oembed->addChild('height', '200');
 
         return $this->response->setXML((string) $oembed);
+    }
+
+    /**
+     * @noRector ReturnTypeDeclarationRector
+     */
+    public function episodeObject(): Response
+    {
+        $podcastObject = new PodcastEpisode($this->episode);
+
+        return $this->response
+            ->setContentType('application/json')
+            ->setBody($podcastObject->toJSON());
+    }
+
+    /**
+     * @noRector ReturnTypeDeclarationRector
+     */
+    public function comments(): Response
+    {
+        /**
+         * get comments: aggregated replies from posts referring to the episode
+         */
+        $episodeComments = model('StatusModel')
+            ->whereIn('in_reply_to_id', function (BaseBuilder $builder): BaseBuilder {
+                return $builder->select('id')
+                    ->from('activitypub_statuses')
+                    ->where('episode_id', $this->episode->id);
+            })
+            ->where('`published_at` <= NOW()', null, false)
+            ->orderBy('published_at', 'ASC');
+
+        $pageNumber = (int) $this->request->getGet('page');
+
+        if ($pageNumber < 1) {
+            $episodeComments->paginate(12);
+            $pager = $episodeComments->pager;
+            $collection = new OrderedCollectionObject(null, $pager);
+        } else {
+            $paginatedComments = $episodeComments->paginate(12, 'default', $pageNumber);
+            $pager = $episodeComments->pager;
+
+            $orderedItems = [];
+            if ($paginatedComments !== null) {
+                foreach ($paginatedComments as $comment) {
+                    $orderedItems[] = (new NoteObject($comment))->toArray();
+                }
+            }
+
+            // @phpstan-ignore-next-line
+            $collection = new OrderedCollectionPage($pager, $orderedItems);
+        }
+
+        return $this->response
+            ->setContentType('application/activity+json')
+            ->setBody($collection->toJSON());
     }
 }

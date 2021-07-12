@@ -10,12 +10,18 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+use ActivityPub\Objects\OrderedCollectionObject;
+use ActivityPub\Objects\OrderedCollectionPage;
 use Analytics\AnalyticsTrait;
 use App\Entities\Podcast;
+use App\Libraries\PodcastActor;
+use App\Libraries\PodcastEpisode;
 use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
 use App\Models\StatusModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
+use CodeIgniter\HTTP\RedirectResponse;
+use CodeIgniter\HTTP\Response;
 
 class PodcastController extends BaseController
 {
@@ -40,6 +46,15 @@ class PodcastController extends BaseController
         unset($params[0]);
 
         return $this->{$method}(...$params);
+    }
+
+    public function podcastActor(): RedirectResponse
+    {
+        $podcastActor = new PodcastActor($this->podcast);
+
+        return $this->response
+            ->setContentType('application/activity+json')
+            ->setBody($podcastActor->toJSON());
     }
 
     public function activity(): string
@@ -208,5 +223,47 @@ class PodcastController extends BaseController
         }
 
         return $cachedView;
+    }
+
+    /**
+     * @noRector ReturnTypeDeclarationRector
+     */
+    public function episodeCollection(): Response
+    {
+        if ($this->podcast->type === 'serial') {
+            // podcast is serial
+            $episodes = model('EpisodeModel')
+                ->where('`published_at` <= NOW()', null, false)
+                ->orderBy('season_number DESC, number ASC');
+        } else {
+            $episodes = model('EpisodeModel')
+                ->where('`published_at` <= NOW()', null, false)
+                ->orderBy('published_at', 'DESC');
+        }
+
+        $pageNumber = (int) $this->request->getGet('page');
+
+        if ($pageNumber < 1) {
+            $episodes->paginate(12);
+            $pager = $episodes->pager;
+            $collection = new OrderedCollectionObject(null, $pager);
+        } else {
+            $paginatedEpisodes = $episodes->paginate(12, 'default', $pageNumber);
+            $pager = $episodes->pager;
+
+            $orderedItems = [];
+            if ($paginatedEpisodes !== null) {
+                foreach ($paginatedEpisodes as $episode) {
+                    $orderedItems[] = (new PodcastEpisode($episode))->toArray();
+                }
+            }
+
+            // @phpstan-ignore-next-line
+            $collection = new OrderedCollectionPage($pager, $orderedItems);
+        }
+
+        return $this->response
+            ->setContentType('application/activity+json')
+            ->setBody($collection->toJSON());
     }
 }

@@ -121,6 +121,11 @@ class Episode extends Entity
      */
     protected ?array $statuses = null;
 
+    /**
+     * @var Status[]|null
+     */
+    protected ?array $comments = null;
+
     protected ?Location $location = null;
 
     protected string $custom_rss_string;
@@ -387,7 +392,7 @@ class Episode extends Entity
     public function getStatuses(): array
     {
         if ($this->id === null) {
-            throw new RuntimeException('Episode must be created before getting soundbites.');
+            throw new RuntimeException('Episode must be created before getting statuses.');
         }
 
         if ($this->statuses === null) {
@@ -395,6 +400,22 @@ class Episode extends Entity
         }
 
         return $this->statuses;
+    }
+
+    /**
+     * @return Status[]
+     */
+    public function getComments(): array
+    {
+        if ($this->id === null) {
+            throw new RuntimeException('Episode must be created before getting comments.');
+        }
+
+        if ($this->comments === null) {
+            $this->comments = (new StatusModel())->getEpisodeComments($this->id);
+        }
+
+        return $this->comments;
     }
 
     public function getLink(): string

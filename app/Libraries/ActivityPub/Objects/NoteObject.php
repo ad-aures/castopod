@@ -39,7 +39,7 @@ class NoteObject extends ObjectType
             $this->inReplyTo = $status->reply_to_status->uri;
         }
 
-        $this->replies = base_url(route_to('status-replies', $status->actor->username, $status->id));
+        $this->replies = url_to('status-replies', $status->actor->username, $status->id);
 
         $this->cc = [$status->actor->followers_url];
     }

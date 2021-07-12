@@ -6,7 +6,6 @@ namespace Config;
 
 use ActivityPub\Config\ActivityPub as ActivityPubBase;
 use App\Libraries\NoteObject;
-use App\Libraries\PodcastActor;
 
 class ActivityPub extends ActivityPubBase
 {
@@ -15,8 +14,6 @@ class ActivityPub extends ActivityPubBase
      * ActivityPub Objects
      * --------------------------------------------------------------------
      */
-    public string $actorObject = PodcastActor::class;
-
     public string $noteObject = NoteObject::class;
 
     /**

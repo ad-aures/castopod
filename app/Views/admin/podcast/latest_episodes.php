@@ -10,7 +10,7 @@
         </a>
     </header>
     <?php if ($episodes): ?>
-        <div class="flex justify-between p-2 space-x-4 overflow-x-auto">
+        <div class="flex p-2 overflow-x-auto gap-x-6">
         <?php foreach ($episodes as $episode): ?>
             <article class="flex flex-col flex-shrink-0 w-56 overflow-hidden bg-white border shadow rounded-xl">
                 <img

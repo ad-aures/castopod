@@ -697,6 +697,10 @@ $routes->group('@(:podcastName)', function ($routes): void {
                 'namespace' => 'ActivityPub\Controllers',
                 'controller-method' => 'ActorController/$1',
             ],
+            'application/podcast-activity+json' => [
+                'namespace' => 'App\Controllers',
+                'controller-method' => 'PodcastController::podcastActor/$1',
+            ],
             'application/ld+json; profile="https://www.w3.org/ns/activitystreams' => [
                 'namespace' => 'ActivityPub\Controllers',
                 'controller-method' => 'ActorController/$1',
@@ -705,10 +709,44 @@ $routes->group('@(:podcastName)', function ($routes): void {
     ]);
     $routes->get('episodes', 'PodcastController::episodes/$1', [
         'as' => 'podcast-episodes',
+        'alternate-content' => [
+            'application/activity+json' => [
+                'controller-method' => 'PodcastController::episodeCollection/$1',
+            ],
+            'application/podcast-activity+json' => [
+                'controller-method' => 'PodcastController::episodeCollection/$1',
+            ],
+            'application/ld+json; profile="https://www.w3.org/ns/activitystreams' => [
+                'controller-method' => 'PodcastController::episodeCollection/$1',
+            ],
+        ],
     ]);
     $routes->group('episodes/(:slug)', function ($routes): void {
         $routes->get('/', 'EpisodeController/$1/$2', [
             'as' => 'episode',
+            'alternate-content' => [
+                'application/activity+json' => [
+                    'controller-method' => 'EpisodeController::episodeObject/$1/$2',
+                ],
+                'application/podcast-activity+json' => [
+                    'controller-method' => 'EpisodeController::episodeObject/$1/$2',
+                ],
+                'application/ld+json; profile="https://www.w3.org/ns/activitystreams' => [
+                    'controller-method' => 'EpisodeController::episodeObject/$1/$2',
+                ],
+            ],
+        ]);
+        $routes->get('comments', 'EpisodeController::comments/$1/$2', [
+            'as' => 'episode-comments',
+            'application/activity+json' => [
+                'controller-method' => 'EpisodeController::comments/$1/$2',
+            ],
+            'application/podcast-activity+json' => [
+                'controller-method' => 'EpisodeController::comments/$1/$2',
+            ],
+            'application/ld+json; profile="https://www.w3.org/ns/activitystreams' => [
+                'controller-method' => 'EpisodeController::comments/$1/$2',
+            ],
         ]);
         $routes->get('oembed.json', 'EpisodeController::oembedJSON/$1/$2', [
             'as' => 'episode-oembed-json',

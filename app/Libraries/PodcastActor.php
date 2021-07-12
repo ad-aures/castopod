@@ -10,21 +10,39 @@ declare(strict_types=1);
 
 namespace App\Libraries;
 
-use ActivityPub\Entities\Actor;
 use ActivityPub\Objects\ActorObject;
-use App\Models\PodcastModel;
+use App\Entities\Podcast;
 
 class PodcastActor extends ActorObject
 {
-    protected string $rss;
+    protected string $rssFeed;
 
-    public function __construct(Actor $actor)
+    protected string $language;
+
+    protected string $category;
+
+    protected string $episodes;
+
+    public function __construct(Podcast $podcast)
     {
-        parent::__construct($actor);
+        parent::__construct($podcast->actor);
 
-        $podcast = (new PodcastModel())->where('actor_id', $actor->id)
-            ->first();
+        $this->context[] = 'https://github.com/Podcastindex-org/activitypub-spec-work/blob/main/docs/1.0.md';
 
-        $this->rss = $podcast->feed_url;
+        $this->type = 'Podcast';
+
+        $this->rssFeed = $podcast->feed_url;
+
+        $this->language = $podcast->language_code;
+
+        $category = '';
+        if ($podcast->category->parent_id !== null) {
+            $category .= $podcast->category->parent->apple_category . ' > ';
+        }
+        $category .= $podcast->category->apple_category;
+
+        $this->category = $category;
+
+        $this->episodes = url_to('podcast-episodes', $podcast->name);
     }
 }
