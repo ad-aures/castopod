@@ -1,3 +1,11 @@
+# [1.0.0-alpha.63](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.62...v1.0.0-alpha.63) (2021-07-12)
+
+### Features
+
+- build hashed static files to renew browser cache
+  ([37c54d2](https://code.podlibre.org/podlibre/castopod-host/commit/37c54d247749bdf8f528babd4a78f24d48051063)),
+  closes [#107](https://code.podlibre.org/podlibre/castopod-host/issues/107)
+
 # [1.0.0-alpha.62](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.61...v1.0.0-alpha.62) (2021-07-02)
 
 ### Bug Fixes
