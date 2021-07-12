@@ -1,3 +1,10 @@
+# [1.0.0-alpha.64](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.63...v1.0.0-alpha.64) (2021-07-12)
+
+### Features
+
+- **activitypub:** add Podcast actor and PodcastEpisode object with comments
+  ([9e1e5d2](https://code.podlibre.org/podlibre/castopod-host/commit/9e1e5d2e862d6a3345d11ca7f96b955c76bfa013))
+
 # [1.0.0-alpha.63](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.62...v1.0.0-alpha.63) (2021-07-12)
 
 ### Features
