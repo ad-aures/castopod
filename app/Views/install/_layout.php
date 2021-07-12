@@ -7,8 +7,8 @@
     <meta name="description" content="Castopod is an open-source hosting platform made for podcasters who want engage and interact with their audience."/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
-    <link rel="stylesheet" href="/assets/index.css"/>
-    <script src="/assets/install.js" type="module"></script>
+    <?= service('vite')->asset('styles/index.css', 'css') ?>
+    <?= service('vite')->asset('js/install.ts', 'js') ?>
 </head>
 
 <body class="flex flex-col min-h-screen mx-auto">

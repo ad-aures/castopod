@@ -24,8 +24,8 @@
     <meta property="og:image" content="<?= $status->actor->avatar_image_url ?>" />
     <meta property="og:description" content="<?= $status->message ?>" />
 
-    <link rel="stylesheet" href="/assets/index.css"/>
-    <script src="/assets/podcast.js" type="module"></script>
+    <?= service('vite')->asset('styles/index.css', 'css') ?>
+    <?= service('vite')->asset('js/podcast.ts', 'js') ?>
 </head>
 
 <body class="min-h-screen mx-auto bg-pine-50">

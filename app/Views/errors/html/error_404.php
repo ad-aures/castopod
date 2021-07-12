@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <title>404 Page Not Found</title>
-    <link rel="stylesheet" href="/assets/index.css" />
+    <?= service('vite')->asset('styles/index.css', 'css') ?>
 </head>
 
 <body class="flex flex-col items-center justify-center min-h-screen px-2 text-center bg-gray-100">

@@ -5,12 +5,12 @@
   "dockerComposeFile": ["../docker-compose.yml", "./docker-compose.yml"],
   "service": "app",
   "workspaceFolder": "/castopod-host",
-  "postCreateCommand": "composer install && npm install && npm run build:dev",
-  "postStartCommand": "crontab ./crontab && cron && php spark serve --host 0.0.0.0",
+  "postCreateCommand": "composer install && npm install && npm run build:static",
+  "postStartCommand": "crontab ./crontab && cron && php spark serve --host 0.0.0.0 & npm run dev",
   "postAttachCommand": "crontab ./crontab && service cron reload",
   "shutdownAction": "stopCompose",
   "settings": {
-    "terminal.integrated.defaultProfile.linux": "/bin/bash",
+    "terminal.integrated.defaultProfile.linux": "bash",
     "editor.formatOnSave": true,
     "[php]": {
       "editor.defaultFormatter": "bmewburn.vscode-intelephense-client",

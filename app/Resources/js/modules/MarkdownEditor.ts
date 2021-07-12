@@ -18,7 +18,7 @@ class MarkdownView {
     this.textarea.classList.add("w-full", "h-full");
   }
 
-  get content() {
+  content() {
     return this.textarea.innerHTML;
   }
   focus() {
@@ -55,7 +55,7 @@ class ProseMirrorView {
         this.view.updateState(newState);
 
         if (transaction.docChanged) {
-          target.innerHTML = this.content;
+          target.innerHTML = this.content();
         }
       },
       attributes: {
@@ -65,8 +65,8 @@ class ProseMirrorView {
     });
   }
 
-  get content() {
-    return defaultMarkdownSerializer.serialize(this.view.state.doc);
+  content(): string {
+    return defaultMarkdownSerializer.serialize(this.view.state.doc) || "";
   }
   focus() {
     this.view.focus();
@@ -134,7 +134,7 @@ const MarkdownEditor = (): void => {
     // show WYSIWYG editor by default
     target.classList.add("hidden");
     const markdownView = new MarkdownView(target);
-    const wysiwygView = new ProseMirrorView(target, markdownView.content);
+    const wysiwygView = new ProseMirrorView(target, markdownView.content());
 
     markdownEditorContainer.appendChild(viewButtons);
 

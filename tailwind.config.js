@@ -1,7 +1,12 @@
 /* eslint-disable */
 
 module.exports = {
-  purge: ["./app/Views/**/*.php", "./app/Views/**/*.ts", "./app/Helpers/*.php"],
+  mode: "jit",
+  purge: [
+    "./app/Views/**/*.php",
+    "./app/Helpers/*.php",
+    "./app/Resources/**/*.ts",
+  ],
   theme: {
     extend: {
       fontFamily: {

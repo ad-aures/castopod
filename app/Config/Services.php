@@ -10,6 +10,7 @@ use App\Authorization\PermissionModel;
 use App\Libraries\Breadcrumb;
 use App\Libraries\Negotiate;
 use App\Libraries\Router;
+use App\Libraries\Vite;
 use App\Models\UserModel;
 use CodeIgniter\Config\BaseService;
 use CodeIgniter\HTTP\Request;
@@ -137,5 +138,14 @@ class Services extends BaseService
         }
 
         return new Breadcrumb();
+    }
+
+    public static function vite(bool $getShared = true): Vite
+    {
+        if ($getShared) {
+            return self::getSharedInstance('vite');
+        }
+
+        return new Vite();
     }
 }

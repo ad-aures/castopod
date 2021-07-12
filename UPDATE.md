@@ -47,7 +47,8 @@ performance improvements ⚡.
    - cf.
      [I haven't updated my instance in a long time… What should I do?](#i-havent-updated-my-instance-in-a-long-time-what-should-i-do)
 
-5. ✨ Enjoy your fresh instance, you're all done!
+5. If you are using redis, clear your cache.
+6. ✨ Enjoy your fresh instance, you're all done!
 
 ## Automatic update instructions
 

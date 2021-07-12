@@ -5,3 +5,4 @@ composer install --no-dev --prefer-dist --no-ansi --no-interaction --no-progress
 
 # build all production static assets (css, js, images, icons, fonts, etc.)
 npm run build
+npm run build:static

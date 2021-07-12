@@ -87,8 +87,21 @@ required services will be loaded automagically!
    [Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 2. `Ctrl/Cmd + Shift + P` > `Open in container`
 
-   > The VSCode window will reload inside the dev container. It may take a long
-   > time on first load as it is building all necessary services.
+   > The VSCode window will reload inside the dev container. Expect several
+   > minutes during first load as it is building all necessary services.
+
+   **Note**: The dev container will start by running both the Castopod Host
+   server and [Vite](https://vitejs.dev)'s dev server (for compiling the
+   typescript code and styles). If there is any issue with the servers not
+   running, you can restart them using the following commands:
+
+   ```bash
+   # run Castopod host server
+   php spark serve --host 0.0.0.0
+
+   # run Vite dev server
+   npm run dev
+   ```
 
 3. You're all set! 🎉
 
@@ -195,15 +208,12 @@ You do not wish to use the VSCode devcontainer? No problem!
 
    ```bash
    # build all assets at once
-   npm run build:dev
+   npm run build:static
 
    # generate/copy specific assets
-   npm run build:js
-   npm run build:css
    npm run build:icons
    npm run build:svg
    npm run copy:images
-   npm run copy:fonts
    ```
 
    > **Note:**

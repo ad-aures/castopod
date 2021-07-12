@@ -1,0 +1,33 @@
+@layer base {
+  /* kumbh-sans-regular */
+  @font-face {
+    font-family: "Kumbh Sans";
+    font-style: normal;
+    font-weight: 400;
+    src: url("/fonts/kumbh-sans-regular.woff2") format("woff2");
+  }
+
+  /* kumbh-sans-700 */
+  @font-face {
+    font-family: "Kumbh Sans";
+    font-style: normal;
+    font-weight: 700;
+    src: url("/fonts/kumbh-sans-700.woff2") format("woff2");
+  }
+
+  /* montserrat-regular */
+  @font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 400;
+    src: url("/fonts/montserrat-regular.woff2") format("woff2");
+  }
+
+  /* montserrat-600 - latin */
+  @font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 600;
+    src: url("/fonts/montserrat-600.woff2") format("woff2");
+  }
+}

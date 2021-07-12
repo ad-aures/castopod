@@ -13,8 +13,8 @@
         <meta name="monetization" content="<?= $podcast->payment_pointer ?>" />
     <?php endif; ?>
 
-    <link rel="stylesheet" href="/assets/index.css"/>
-    <script src="/assets/podcast.js" type="module"></script>
+    <?= service('vite')->asset('styles/index.css', 'css') ?>
+    <?= service('vite')->asset('js/podcast.ts', 'js') ?>
 </head>
 
 <body class="flex w-full min-h-screen pb-20 overflow-x-hidden lg:mx-auto lg:container bg-pine-50 sm:pb-0">

@@ -151,5 +151,5 @@
     </div>
 
 
-<script src="/assets/charts.js" type="module"></script>
+<?= service('vite')->asset('js/charts.ts', 'js') ?>
 <?= $this->endSection() ?>
