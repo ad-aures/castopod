@@ -288,10 +288,11 @@ class PodcastImportController extends BaseController
         }
 
         $numberItems = $feed->channel[0]->item->count();
+
         $lastItem =
-            $this->request->getPost('max_episodes') !== null &&
+            $this->request->getPost('max_episodes') !== '' &&
             $this->request->getPost('max_episodes') < $numberItems
-            ? $this->request->getPost('max_episodes')
+            ? (int) $this->request->getPost('max_episodes')
             : $numberItems;
 
         $slugs = [];
@@ -364,9 +365,9 @@ class PodcastImportController extends BaseController
                     ? $itemNumber
                     : $nsItunes->episode,
                 'season_number' =>
-                $this->request->getPost('season_number') === null
+                $this->request->getPost('season_number') === ''
                     ? $nsItunes->season
-                    : $this->request->getPost('season_number'),
+                    : (int) $this->request->getPost('season_number'),
                 'type' => property_exists($nsItunes, 'episodeType') && $nsItunes->episodeType !== null
                     ? (string) $nsItunes->episodeType
                     : 'full',
