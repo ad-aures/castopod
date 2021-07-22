@@ -1,3 +1,10 @@
+# [1.0.0-alpha.65](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.64...v1.0.0-alpha.65) (2021-07-22)
+
+### Bug Fixes
+
+- update conditions when checking for empty max_episodes and season_number
+  ([fbad0b5](https://code.podlibre.org/podlibre/castopod-host/commit/fbad0b59f68c65eba2fdcd5a8d3b312b622e9a45))
+
 # [1.0.0-alpha.64](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.63...v1.0.0-alpha.64) (2021-07-12)
 
 ### Features
