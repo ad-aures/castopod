@@ -1,3 +1,10 @@
+# [1.0.0-alpha.67](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.66...v1.0.0-alpha.67) (2021-07-24)
+
+### Features
+
+- allow cross origin requests on episode comments
+  ([e12f95a](https://code.podlibre.org/podlibre/castopod-host/commit/e12f95aca13c6d54489a9cfd99d4cd2490fe83ab))
+
 # [1.0.0-alpha.66](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.65...v1.0.0-alpha.66) (2021-07-24)
 
 ### Features
