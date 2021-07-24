@@ -1,3 +1,10 @@
+# [1.0.0-alpha.66](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.65...v1.0.0-alpha.66) (2021-07-24)
+
+### Features
+
+- **rss:** add podcast:comments tag to link to episode comments
+  ([32e8c7c](https://code.podlibre.org/podlibre/castopod-host/commit/32e8c7c16a61ffe08e2f3bfbdeda556811a0358c))
+
 # [1.0.0-alpha.65](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.64...v1.0.0-alpha.65) (2021-07-22)
 
 ### Bug Fixes
