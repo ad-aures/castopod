@@ -213,6 +213,19 @@ class EpisodeController extends BaseController
     /**
      * @noRector ReturnTypeDeclarationRector
      */
+    public function commentsPreflight(): Response
+    {
+        return $this->response->setHeader('Access-Control-Allow-Origin', '*') // for allowing any domain, insecure
+            ->setHeader('Access-Control-Allow-Headers', '*') // for allowing any headers, insecure
+            ->setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS') // allows GET and OPTIONS methods only
+            ->setHeader('Access-Control-Max-Age', '86400')
+            ->setHeader('Cache-Control', 'public, max-age=86400')
+            ->setStatusCode(200);
+    }
+
+    /**
+     * @noRector ReturnTypeDeclarationRector
+     */
     public function comments(): Response
     {
         /**
@@ -250,6 +263,7 @@ class EpisodeController extends BaseController
 
         return $this->response
             ->setContentType('application/activity+json')
+            ->setHeader('Access-Control-Allow-Origin', '*')
             ->setBody($collection->toJSON());
     }
 }

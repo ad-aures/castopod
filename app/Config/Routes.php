@@ -736,6 +736,7 @@ $routes->group('@(:podcastName)', function ($routes): void {
                 ],
             ],
         ]);
+        $routes->options('comments', 'EpisodeController::commentsPreflight/$1/$2');
         $routes->get('comments', 'EpisodeController::comments/$1/$2', [
             'as' => 'episode-comments',
             'application/activity+json' => [
