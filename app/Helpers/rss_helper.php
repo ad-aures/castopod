@@ -249,6 +249,11 @@ if (! function_exists('get_rss_feed')) {
                 $item->addChild('season', $episode->season_number, $itunesNamespace);
             $item->addChild('episodeType', $episode->type, $itunesNamespace);
 
+            // add link to episode comments as podcast-activity format
+            $comments = $item->addChild('comments', null, $podcastNamespace);
+            $comments->addAttribute('uri', url_to('episode-comments', $podcast->name, $episode->slug));
+            $comments->addAttribute('contentType', 'application/podcast-activity+json');
+
             if ($episode->transcript_file_url) {
                 $transcriptElement = $item->addChild('transcript', null, $podcastNamespace);
                 $transcriptElement->addAttribute('url', $episode->transcript_file_url);

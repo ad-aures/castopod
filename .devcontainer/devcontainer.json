@@ -6,7 +6,7 @@
   "service": "app",
   "workspaceFolder": "/castopod-host",
   "postCreateCommand": "composer install && npm install && npm run build:static",
-  "postStartCommand": "crontab ./crontab && cron && php spark serve --host 0.0.0.0 & npm run dev",
+  "postStartCommand": "crontab ./crontab && cron && php spark serve --host 0.0.0.0",
   "postAttachCommand": "crontab ./crontab && service cron reload",
   "shutdownAction": "stopCompose",
   "settings": {

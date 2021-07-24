@@ -90,17 +90,21 @@ required services will be loaded automagically!
    > The VSCode window will reload inside the dev container. Expect several
    > minutes during first load as it is building all necessary services.
 
-   **Note**: The dev container will start by running both the Castopod Host
-   server and [Vite](https://vitejs.dev)'s dev server (for compiling the
-   typescript code and styles). If there is any issue with the servers not
-   running, you can restart them using the following commands:
+   **Note**: The dev container will start by running Castopod Host's php server.
+   During development, you will have to start [Vite](https://vitejs.dev)'s dev
+   server for compiling the typescript code and styles:
+
+   ```bash
+   # run Vite dev server
+   npm run dev
+   ```
+
+   If there is any issue with the php server not running, you can restart them
+   using the following commands:
 
    ```bash
    # run Castopod host server
    php spark serve --host 0.0.0.0
-
-   # run Vite dev server
-   npm run dev
    ```
 
 3. You're all set! 🎉
