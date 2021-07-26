@@ -8,8 +8,8 @@
         $episode->description,
     ) ?>" />
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-    <?= service('vite')->asset('styles/index.css', 'css') ?>
     <link rel="canonical" href="<?= $episode->link ?>" />
+    <?= service('vite')->asset('styles/index.css', 'css') ?>
 </head>
 
 <body class="flex w-full h-screen" style="background: <?= $theme[
@@ -21,7 +21,7 @@
         <div class="flex items-center">
             <a href="<?= route_to(
                 'podcast',
-                $podcast->name,
+                $podcast->handle,
             ) ?>" style="color: <?= $theme[
     'text'
 ] ?>;" class="mr-2 text-xs tracking-wider uppercase truncate opacity-75 hover:opacity-100" target="_blank">

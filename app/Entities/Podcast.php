@@ -26,7 +26,7 @@ use RuntimeException;
  * @property string $guid
  * @property int $actor_id
  * @property Actor|null $actor
- * @property string $name
+ * @property string $handle
  * @property string $link
  * @property string $feed_url
  * @property string $title
@@ -140,7 +140,7 @@ class Podcast extends Entity
         'id' => 'integer',
         'guid' => 'string',
         'actor_id' => 'integer',
-        'name' => 'string',
+        'handle' => 'string',
         'title' => 'string',
         'description_markdown' => 'string',
         'description_html' => 'string',
@@ -193,7 +193,7 @@ class Podcast extends Entity
     public function setImage(Image $image): static
     {
         // Save image
-        $image->saveImage('podcasts/' . $this->attributes['name'], 'cover');
+        $image->saveImage('podcasts/' . $this->attributes['handle'], 'cover');
 
         $this->attributes['image_mimetype'] = $image->mimetype;
         $this->attributes['image_path'] = $image->path;
@@ -208,12 +208,12 @@ class Podcast extends Entity
 
     public function getLink(): string
     {
-        return url_to('podcast-activity', $this->attributes['name']);
+        return url_to('podcast-activity', $this->attributes['handle']);
     }
 
     public function getFeedUrl(): string
     {
-        return url_to('podcast_feed', $this->attributes['name']);
+        return url_to('podcast_feed', $this->attributes['handle']);
     }
 
     /**

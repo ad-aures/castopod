@@ -28,9 +28,9 @@ return [
         'identity_section_subtitle' => 'These fields allow you to get noticed.',
         'image' => 'Cover image',
         'title' => 'Title',
-        'name' => 'Name',
-        'name_hint' =>
-            'Used for generating the podcast URL. Uppercase, lowercase, numbers and underscores are accepted.',
+        'handle' => 'Handle',
+        'handle_hint' =>
+            'Used to identify the podcast. Uppercase, lowercase, numbers and underscores are accepted.',
         'type' => [
             'label' => 'Type',
             'hint' =>

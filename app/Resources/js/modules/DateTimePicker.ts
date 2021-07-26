@@ -11,15 +11,13 @@ const isBrowserLocale24h = () =>
     .match(/AM/);
 
 const DateTimePicker = (): void => {
-  const dateTimeContainers: NodeListOf<HTMLDivElement> = document.querySelectorAll(
-    "div[data-picker='datetime']"
-  );
+  const dateTimeContainers: NodeListOf<HTMLDivElement> =
+    document.querySelectorAll("div[data-picker='datetime']");
 
   for (let i = 0; i < dateTimeContainers.length; i++) {
     const dateTimeContainer = dateTimeContainers[i];
-    const dateTimeInput: HTMLInputElement | null = dateTimeContainer.querySelector(
-      "input[data-input]"
-    );
+    const dateTimeInput: HTMLInputElement | null =
+      dateTimeContainer.querySelector("input[data-input]");
 
     if (dateTimeInput) {
       const flatpickrInstance = flatpickr(dateTimeContainer, {

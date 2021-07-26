@@ -20,10 +20,10 @@
 <meta property="og:audio" content="<?= $episode->audio_file_opengraph_url ?>" />
 <meta property="og:audio:type" content="<?= $episode->audio_file_mimetype ?>" />
 <link rel="alternate" type="application/json+oembed" href="<?= base_url(
-    route_to('episode-oembed-json', $podcast->name, $episode->slug),
+    route_to('episode-oembed-json', $podcast->handle, $episode->slug),
 ) ?>" title="<?= $episode->title ?> oEmbed json" />
 <link rel="alternate" type="text/xml+oembed" href="<?= base_url(
-    route_to('episode-oembed-xml', $podcast->name, $episode->slug),
+    route_to('episode-oembed-xml', $podcast->handle, $episode->slug),
 ) ?>" title="<?= $episode->title ?> oEmbed xml" />
 <meta name="twitter:title" content="<?= $episode->title ?>" />
 <meta name="twitter:description" content="<?= $episode->description ?>" />
@@ -42,7 +42,7 @@
 <div class="max-w-2xl mx-auto">
     <a href="<?= route_to(
         'podcast-episodes',
-        $podcast->name,
+        $podcast->handle,
     ) ?>" class="inline-flex items-center px-4 py-2 mb-2 text-sm"><?= icon(
     'arrow-left',
     'mr-2 mb- text-lg',
@@ -73,7 +73,7 @@
                 </div>
                 <div class="mb-2 space-x-4 text-sm">
                     <?= anchor(
-                        route_to('episode', $podcast->name, $episode->slug),
+                        route_to('episode', $podcast->handle, $episode->slug),
                         icon('chat', 'text-xl mr-1 text-gray-400') .
                             $episode->statuses_total,
                         [
@@ -85,7 +85,7 @@
                         ],
                     ) ?>
                     <?= anchor(
-                        route_to('episode', $podcast->name, $episode->slug),
+                        route_to('episode', $podcast->handle, $episode->slug),
                         icon('repeat', 'text-xl mr-1 text-gray-400') .
                             $episode->reblogs_total,
                         [
@@ -98,7 +98,7 @@
                         ],
                     ) ?>
                     <?= anchor(
-                        route_to('episode', $podcast->name, $episode->slug),
+                        route_to('episode', $podcast->handle, $episode->slug),
                         icon('heart', 'text-xl mr-1 text-gray-400') .
                             $episode->favourites_total,
                         [
@@ -130,7 +130,7 @@
 
         <div class="tab-panels">
             <section id="activity" class="space-y-8 tab-panel">
-                <?= form_open(route_to('status-attempt-create', $podcast->name), [
+                <?= form_open(route_to('status-attempt-create', $podcast->handle), [
                     'class' => 'flex p-4 bg-white shadow rounded-xl',
                 ]) ?>
                 <?= csrf_field() ?>

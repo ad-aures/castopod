@@ -1,7 +1,6 @@
 const Modal = (): void => {
-  const modalTriggerElements: NodeListOf<HTMLElement> = document.querySelectorAll(
-    "[data-modal-target]"
-  );
+  const modalTriggerElements: NodeListOf<HTMLElement> =
+    document.querySelectorAll("[data-modal-target]");
 
   for (let i = 0; i < modalTriggerElements.length; i++) {
     const modalTrigger = modalTriggerElements[i];
@@ -16,9 +15,8 @@ const Modal = (): void => {
           modal.classList.toggle("hidden");
         });
 
-        const closeButtonsElements: NodeListOf<HTMLElement> = modal.querySelectorAll(
-          "[data-modal-button]"
-        );
+        const closeButtonsElements: NodeListOf<HTMLElement> =
+          modal.querySelectorAll("[data-modal-button]");
 
         for (let j = 0; j < closeButtonsElements.length; j++) {
           const closeButton = closeButtonsElements[j];

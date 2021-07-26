@@ -3,7 +3,7 @@
 <?= $this->section('title') ?>
 <?= lang('Contributor.view', [
     'username' => $contributor->username,
-    'podcastName' => $contributor->podcast->name,
+    'podcastTitle' => $contributor->podcast->title,
 ]) ?>
 <?= $this->endSection() ?>
 

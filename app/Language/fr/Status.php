@@ -9,8 +9,8 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => 'Note de {actorDisplayName}',
-    'back_to_actor_statuses' => 'Retour aux notes de {actor}',
+    'title' => 'Publication de {actorDisplayName}',
+    'back_to_actor_statuses' => 'Retour aux publications de {actor}',
     'actor_shared' => '{actor} a partagé',
     'reply_to' => 'Répondre à @{actorUsername}',
     'form' => [
@@ -34,8 +34,8 @@ return [
         one {# réponse}
         other {# réponses}
     }',
-    'expand' => 'Ouvrir la note',
+    'expand' => 'Ouvrir la publication',
     'block_actor' => 'Bloquer l’utilisateur @{actorUsername}',
     'block_domain' => 'Bloquer le domaine @{actorDomain}',
-    'delete' => 'Supprimer la note',
+    'delete' => 'Supprimer la publication',
 ];

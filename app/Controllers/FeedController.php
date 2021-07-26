@@ -20,11 +20,11 @@ use Opawg\UserAgentsPhp\UserAgentsRSS;
 
 class FeedController extends Controller
 {
-    public function index(string $podcastName): ResponseInterface
+    public function index(string $podcastHandle): ResponseInterface
     {
         helper('rss');
 
-        $podcast = (new PodcastModel())->where('name', $podcastName)
+        $podcast = (new PodcastModel())->where('handle', $podcastHandle)
             ->first();
         if (! $podcast) {
             throw PageNotFoundException::forPageNotFound();

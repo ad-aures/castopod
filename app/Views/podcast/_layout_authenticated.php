@@ -79,10 +79,10 @@
             </button>
             <p class="flex flex-col flex-1 min-w-0 mr-2 text-white">
                 <span class="text-sm font-semibold truncate"><?= $podcast->title ?></span>
-                <span class="text-xs">@<?= $podcast->name ?></span>
+                <span class="text-xs">@<?= $podcast->handle ?></span>
             </p>
             <?= anchor_popup(
-                route_to('follow', $podcast->name),
+                route_to('follow', $podcast->handle),
                 icon(
                     'social/castopod',
                     'mr-2 text-xl text-pink-200 group-hover:text-pink-50',

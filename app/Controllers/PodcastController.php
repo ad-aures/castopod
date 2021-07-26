@@ -20,7 +20,6 @@ use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
 use App\Models\StatusModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
-use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\Response;
 
 class PodcastController extends BaseController
@@ -36,7 +35,7 @@ class PodcastController extends BaseController
         }
 
         if (
-            ($podcast = (new PodcastModel())->getPodcastByName($params[0])) === null
+            ($podcast = (new PodcastModel())->getPodcastByHandle($params[0])) === null
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
@@ -48,7 +47,10 @@ class PodcastController extends BaseController
         return $this->{$method}(...$params);
     }
 
-    public function podcastActor(): RedirectResponse
+    /**
+     * @noRector ReturnTypeDeclarationRector
+     */
+    public function podcastActor(): Response
     {
         $podcastActor = new PodcastActor($this->podcast);
 
@@ -161,7 +163,7 @@ class PodcastController extends BaseController
                     'label' => $year['year'],
                     'number_of_episodes' => $year['number_of_episodes'],
                     'route' =>
-                        route_to('podcast-episodes', $this->podcast->name) .
+                        route_to('podcast-episodes', $this->podcast->handle) .
                         '?year=' .
                         $year['year'],
                     'is_active' => $isActive,
@@ -187,7 +189,7 @@ class PodcastController extends BaseController
                     ]),
                     'number_of_episodes' => $season['number_of_episodes'],
                     'route' =>
-                        route_to('podcast-episodes', $this->podcast->name) .
+                        route_to('podcast-episodes', $this->podcast->handle) .
                         '?season=' .
                         $season['season_number'],
                     'is_active' => $isActive,

@@ -4,15 +4,13 @@ const PublishMessageWarning = (): void => {
   );
 
   if (publishForm) {
-    const messageTextArea: HTMLTextAreaElement | null = publishForm.querySelector(
-      "[name='message']"
-    );
+    const messageTextArea: HTMLTextAreaElement | null =
+      publishForm.querySelector("[name='message']");
     const submitButton: HTMLButtonElement | null = publishForm.querySelector(
       "button[type='submit']"
     );
-    const publishMessageWarning: HTMLDivElement | null = publishForm.querySelector(
-      "[id='publish-warning']"
-    );
+    const publishMessageWarning: HTMLDivElement | null =
+      publishForm.querySelector("[id='publish-warning']");
 
     if (
       messageTextArea &&

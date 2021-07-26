@@ -40,7 +40,7 @@ class StatusController extends ActivityPubStatusController
     public function _remap(string $method, string ...$params): mixed
     {
         if (
-            ($podcast = (new PodcastModel())->getPodcastByName($params[0],)) === null
+            ($podcast = (new PodcastModel())->getPodcastByHandle($params[0],)) === null
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
@@ -127,7 +127,7 @@ class StatusController extends ActivityPubStatusController
         if (
             $episodeUri &&
             ($params = extract_params_from_episode_uri(new URI($episodeUri))) &&
-            ($episode = (new EpisodeModel())->getEpisodeBySlug($params['podcastName'], $params['episodeSlug']))
+            ($episode = (new EpisodeModel())->getEpisodeBySlug($params['podcastHandle'], $params['episodeSlug']))
         ) {
             $newStatus->episode_id = $episode->id;
         }

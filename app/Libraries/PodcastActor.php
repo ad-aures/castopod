@@ -43,6 +43,6 @@ class PodcastActor extends ActorObject
 
         $this->category = $category;
 
-        $this->episodes = url_to('podcast-episodes', $podcast->name);
+        $this->episodes = url_to('podcast-episodes', $podcast->handle);
     }
 }

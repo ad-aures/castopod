@@ -185,7 +185,7 @@ class Episode extends Entity
         }
 
         // Save image
-        $image->saveImage('podcasts/' . $this->getPodcast()->name, $this->attributes['slug']);
+        $image->saveImage('podcasts/' . $this->getPodcast()->handle, $this->attributes['slug']);
 
         $this->attributes['image_mimetype'] = $image->mimetype;
         $this->attributes['image_path'] = $image->path;
@@ -214,7 +214,7 @@ class Episode extends Entity
 
         $this->attributes['audio_file_path'] = save_media(
             $audioFile,
-            'podcasts/' . $this->getPodcast()->name,
+            'podcasts/' . $this->getPodcast()->handle,
             $this->attributes['slug'],
         );
         $this->attributes['audio_file_duration'] =
@@ -237,7 +237,7 @@ class Episode extends Entity
         $this->attributes['transcript_file_path'] = save_media(
             $transcriptFile,
             'podcasts/' . $this->getPodcast()
-                ->name,
+                ->handle,
             $this->attributes['slug'] . '-transcript',
         );
 
@@ -254,7 +254,7 @@ class Episode extends Entity
         $this->attributes['chapters_file_path'] = save_media(
             $chaptersFile,
             'podcasts/' . $this->getPodcast()
-                ->name,
+                ->handle,
             $this->attributes['slug'] . '-chapters',
         );
 
@@ -430,11 +430,11 @@ class Episode extends Entity
                 ? route_to(
                     'embeddable-player-theme',
                     $this->getPodcast()
-                        ->name,
+                        ->handle,
                     $this->attributes['slug'],
                     $theme,
                 )
-                : route_to('embeddable-player', $this->getPodcast() ->name, $this->attributes['slug']),
+                : route_to('embeddable-player', $this->getPodcast()->handle, $this->attributes['slug']),
         );
     }
 

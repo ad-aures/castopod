@@ -16,7 +16,7 @@
                         ? ''
                         : '@' . $status->actor->domain) ?></span>
             </a>
-            <a href="<?= route_to('status', $podcast->name, $status->id) ?>"
+            <a href="<?= route_to('status', $podcast->handle, $status->id) ?>"
             class="text-xs text-gray-500">
                 <time
                 itemprop="published"

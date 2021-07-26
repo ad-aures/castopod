@@ -35,7 +35,7 @@ class PodcastModel extends Model
         'id',
         'guid',
         'title',
-        'name',
+        'handle',
         'description_markdown',
         'description_html',
         'episode_description_footer_markdown',
@@ -87,8 +87,8 @@ class PodcastModel extends Model
      */
     protected $validationRules = [
         'title' => 'required',
-        'name' =>
-            'required|regex_match[/^[a-zA-Z0-9\_]{1,191}$/]|is_unique[podcasts.name,id,{id}]',
+        'handle' =>
+            'required|regex_match[/^[a-zA-Z0-9\_]{1,191}$/]|is_unique[podcasts.handle,id,{id}]',
         'description_markdown' => 'required',
         'image_path' => 'required',
         'language_code' => 'required',
@@ -126,14 +126,14 @@ class PodcastModel extends Model
      */
     protected $beforeDelete = ['clearCache'];
 
-    public function getPodcastByName(string $podcastName): ?Podcast
+    public function getPodcastByHandle(string $podcastHandle): ?Podcast
     {
-        $cacheName = "podcast-{$podcastName}";
+        $cacheName = "podcast-{$podcastHandle}";
         if (! ($found = cache($cacheName))) {
-            $found = $this->where('name', $podcastName)
+            $found = $this->where('handle', $podcastHandle)
                 ->first();
             cache()
-                ->save("podcast-{$podcastName}", $found, DECADE);
+                ->save("podcast-{$podcastHandle}", $found, DECADE);
         }
 
         return $found;
@@ -239,7 +239,7 @@ class PodcastModel extends Model
                 ->join('podcasts', 'podcasts.id = podcasts_users.podcast_id')
                 ->where([
                     'user_id' => $userId,
-                    'name' => $podcastId,
+                    'handle' => $podcastId,
                 ])
                 ->get()
                 ->getResultObject();
@@ -385,7 +385,7 @@ class PodcastModel extends Model
             cache()
                 ->deleteMatching("podcast#{$podcast->id}*");
             cache()
-                ->delete("podcast-{$podcast->name}");
+                ->delete("podcast-{$podcast->handle}");
         }
 
         // clear cache for every credit page
@@ -413,7 +413,7 @@ class PodcastModel extends Model
         $publickey = $rsaKey['publickey'];
 
         $url = new URI(base_url());
-        $username = $data['data']['name'];
+        $username = $data['data']['handle'];
         $domain =
             $url->getHost() . ($url->getPort() ? ':' . $url->getPort() : '');
 

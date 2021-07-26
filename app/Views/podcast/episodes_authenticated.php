@@ -24,13 +24,13 @@
 <nav class="sticky top-0 flex items-center justify-center pt-2 text-lg bg-pine-50">
     <a href="<?= route_to(
         'podcast-activity',
-        $podcast->name,
+        $podcast->handle,
     ) ?>" class="px-4 py-1 mr-8 rounded-full hover:bg-pine-100"><?= lang(
     'Podcast.activity',
 ) ?></a>
     <a href="<?= route_to(
         'podcast-episodes',
-        $podcast->name,
+        $podcast->handle,
     ) ?>" class="px-4 py-1 font-semibold border-b-4 text-pine-800 border-pine-800"><?= lang(
     'Podcast.episodes',
 ) ?></a>
@@ -118,7 +118,7 @@
                 </div>
                 <div class="px-4 py-2 space-x-4 text-sm">
                     <?= anchor(
-                        route_to('episode', $podcast->name, $episode->slug),
+                        route_to('episode', $podcast->handle, $episode->slug),
                         icon('chat', 'text-xl mr-1 text-gray-400') .
                             $episode->statuses_total,
                         [
@@ -130,7 +130,7 @@
                         ],
                     ) ?>
                     <?= anchor(
-                        route_to('episode', $podcast->name, $episode->slug),
+                        route_to('episode', $podcast->handle, $episode->slug),
                         icon('repeat', 'text-xl mr-1 text-gray-400') .
                             $episode->reblogs_total,
                         [
@@ -143,7 +143,7 @@
                         ],
                     ) ?>
                     <?= anchor(
-                        route_to('episode', $podcast->name, $episode->slug),
+                        route_to('episode', $podcast->handle, $episode->slug),
                         icon('heart', 'text-xl mr-1 text-gray-400') .
                             $episode->favourites_total,
                         [

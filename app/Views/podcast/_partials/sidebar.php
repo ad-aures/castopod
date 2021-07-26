@@ -40,7 +40,7 @@
 
     <h2 class="mb-2 text-sm font-semibold"><?= lang('Podcast.listen_on') ?></h2>
     <div class="grid items-center justify-center grid-cols-5 gap-3 mb-8">
-        <?= anchor(route_to('podcast_feed', $podcast->name), icon('rss'), [
+        <?= anchor(route_to('podcast_feed', $podcast->handle), icon('rss'), [
             'class' =>
                 'bg-yellow-500 text-xl text-yellow-900 hover:bg-yellow-600 w-8 h-8 inline-flex items-center justify-center rounded-lg',
             'target' => '_blank',

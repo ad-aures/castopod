@@ -20,17 +20,17 @@ return [
         'submit' => 'Poursuivre',
     ],
     'favourite' => [
-        'title' => 'Mettez la note de {actorDisplayName} en favori',
+        'title' => 'Mettez la publication de {actorDisplayName} en favori',
         'subtitle' => 'Vous allez mettre en favori :',
         'submit' => 'Poursuivre',
     ],
     'reblog' => [
-        'title' => 'Partagez la note de {actorDisplayName}',
+        'title' => 'Partagez la publication de {actorDisplayName}',
         'subtitle' => 'Vous allez partager :',
         'submit' => 'Poursuivre',
     ],
     'reply' => [
-        'title' => 'Répondre à la note de {actorDisplayName}',
+        'title' => 'Répondre à la publication de {actorDisplayName}',
         'subtitle' => 'Vous allez répondre à :',
         'submit' => 'Poursuivre',
     ],

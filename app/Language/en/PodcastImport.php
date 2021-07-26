@@ -17,8 +17,6 @@ return [
     'imported_feed_url' => 'Feed URL',
     'imported_feed_url_hint' => 'The feed must be in xml or rss format.',
     'new_podcast_section_title' => 'The new podcast',
-    'name' => 'Name',
-    'name_hint' => 'Used for generating the podcast URL.',
     'advanced_params_section_title' => 'Advanced parameters',
     'advanced_params_section_subtitle' =>
         'Keep the default values if you have no idea of what the fields are for.',

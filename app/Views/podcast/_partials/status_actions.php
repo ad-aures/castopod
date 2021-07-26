@@ -1,6 +1,6 @@
 <footer class="flex justify-around px-6 py-3">
     <?= anchor(
-        route_to('status', $podcast->name, $status->id),
+        route_to('status', $podcast->handle, $status->id),
         icon('chat', 'text-2xl mr-1 text-gray-400') . $status->replies_count,
         [
             'class' => 'inline-flex items-center hover:underline',
@@ -10,7 +10,7 @@
         ],
     ) ?>
     <?= anchor_popup(
-        route_to('status-remote-action', $podcast->name, $status->id, 'reblog'),
+        route_to('status-remote-action', $podcast->handle, $status->id, 'reblog'),
         icon('repeat', 'text-2xl mr-1 text-gray-400') . $status->reblogs_count,
         [
             'class' => 'inline-flex items-center hover:underline',
@@ -22,7 +22,7 @@
         ],
     ) ?>
     <?= anchor_popup(
-        route_to('status-remote-action', $podcast->name, $status->id, 'favourite'),
+        route_to('status-remote-action', $podcast->handle, $status->id, 'favourite'),
         icon('heart', 'text-2xl mr-1 text-gray-400') . $status->favourites_count,
         [
             'class' => 'inline-flex items-center hover:underline',

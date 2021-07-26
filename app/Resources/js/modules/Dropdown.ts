@@ -1,9 +1,8 @@
 import { createPopper, Instance, Placement } from "@popperjs/core";
 
 const Dropdown = (): void => {
-  const dropdownButtons: NodeListOf<HTMLButtonElement> = document.querySelectorAll(
-    "[data-dropdown='button']"
-  );
+  const dropdownButtons: NodeListOf<HTMLButtonElement> =
+    document.querySelectorAll("[data-dropdown='button']");
 
   for (let i = 0; i < dropdownButtons.length; i++) {
     const button = dropdownButtons[i];

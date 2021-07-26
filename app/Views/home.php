@@ -33,7 +33,7 @@
                             src="<?= $podcast->image->medium_url ?>"
                             class="object-cover w-full h-48 mb-2" />
                             <h2 class="px-2 font-semibold leading-tight truncate"><?= $podcast->title ?></h2>
-                            <p class="px-2 pb-2 text-gray-600">@<?= $podcast->name ?></p>
+                            <p class="px-2 pb-2 text-gray-600">@<?= $podcast->handle ?></p>
                         </article>
                     </a>
                 <?php endforeach; ?>

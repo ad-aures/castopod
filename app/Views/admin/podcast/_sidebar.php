@@ -56,11 +56,11 @@ $podcastNavigation = [
         <span class="w-40 text-sm font-semibold truncate" title="<?= $podcast->title ?>"><?= $podcast->title ?></span>
         <a href="<?= route_to(
             'podcast-activity',
-            $podcast->name,
+            $podcast->handle,
         ) ?>" class="inline-flex items-center text-xs underline outline-none hover:no-underline focus:ring"
         data-toggle="tooltip" data-placement="bottom" title="<?= lang(
             'PodcastNavigation.go_to_page',
-        ) ?>">@<?= $podcast->name ?>
+        ) ?>">@<?= $podcast->handle ?>
         <?= icon('external-link', 'ml-1 text-gray-500') ?>
         </a>
     </div>

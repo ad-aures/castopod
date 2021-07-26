@@ -9,8 +9,8 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => "{actorDisplayName}'s Note",
-    'back_to_actor_statuses' => 'Back to {actor} notes',
+    'title' => "{actorDisplayName}'s post",
+    'back_to_actor_statuses' => 'Back to {actor} posts',
     'actor_shared' => '{actor} shared',
     'reply_to' => 'Reply to @{actorUsername}',
     'form' => [
@@ -33,8 +33,8 @@ return [
         one {# reply}
         other {# replies}
     }',
-    'expand' => 'Expand note',
+    'expand' => 'Expand post',
     'block_actor' => 'Block user @{actorUsername}',
     'block_domain' => 'Block domain @{actorDomain}',
-    'delete' => 'Delete note',
+    'delete' => 'Delete post',
 ];

@@ -1,7 +1,6 @@
 const Clipboard = (): void => {
-  const buttons: NodeListOf<HTMLButtonElement> | null = document.querySelectorAll(
-    "button[data-type='clipboard-copy']"
-  );
+  const buttons: NodeListOf<HTMLButtonElement> | null =
+    document.querySelectorAll("button[data-type='clipboard-copy']");
 
   if (buttons) {
     for (let i = 0; i < buttons.length; i++) {

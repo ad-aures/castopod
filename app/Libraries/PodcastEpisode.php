@@ -72,7 +72,7 @@ class PodcastEpisode extends ObjectType
             'chapters' => $episode->chapters_file_url,
         ];
 
-        $this->comments = url_to('episode-comments', $episode->podcast->name, $episode->slug);
+        $this->comments = url_to('episode-comments', $episode->podcast->handle, $episode->slug);
 
         if ($episode->published_at !== null) {
             $this->published = $episode->published_at->format(DATE_W3C);

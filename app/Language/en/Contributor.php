@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 return [
     'podcast_contributors' => 'Podcast contributors',
-    'view' => "{username}'s contribution to {podcastName}",
+    'view' => "{username}'s contribution to {podcastTitle}",
     'add' => 'Add contributor',
     'add_contributor' => 'Add a contributor for {0}',
     'edit_role' => 'Update role for {0}',

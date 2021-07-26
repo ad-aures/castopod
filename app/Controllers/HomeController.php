@@ -31,7 +31,7 @@ class HomeController extends BaseController
 
         // check if there's only one podcast to redirect user to it
         if (count($allPodcasts) === 1) {
-            return redirect()->route('podcast-activity', [$allPodcasts[0]->name]);
+            return redirect()->route('podcast-activity', [$allPodcasts[0]->handle]);
         }
 
         // default behavior: list all podcasts on home page

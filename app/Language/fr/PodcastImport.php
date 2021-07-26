@@ -17,8 +17,6 @@ return [
     'imported_feed_url' => 'Adresse du flux',
     'imported_feed_url_hint' => 'Le flux doit être au format xml ou rss.',
     'new_podcast_section_title' => 'Le nouveau podcast',
-    'name' => 'Nom',
-    'name_hint' => 'Utilisé pour l’adresse du podcast.',
     'advanced_params_section_title' => 'Paramètres avancés',
     'advanced_params_section_subtitle' =>
         'Si vous ne savez pas à quoi servent ces champs, conservez les valeurs par défaut.',

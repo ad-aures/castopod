@@ -47,7 +47,7 @@
         ) ?>
         <?= button(
             lang('Episode.go_to_page'),
-            route_to('episode', $podcast->name, $episode->slug),
+            route_to('episode', $podcast->handle, $episode->slug),
             ['variant' => 'secondary', 'iconLeft' => 'external-link'],
         ) ?>
         <?= button(

@@ -37,7 +37,7 @@
                 $podcast->id,
             ) ?>" class="flex flex-col p-2 hover:underline">
                 <h2 class="font-semibold truncate"><?= $podcast->title ?></h2>
-                <p class="text-gray-600">@<?= $podcast->name ?></p>
+                <p class="text-gray-600">@<?= $podcast->handle ?></p>
             </a>
             <footer class="flex items-center justify-end p-2">
                 <a class="inline-flex p-2 mr-2 text-blue-700 bg-blue-100 rounded-full shadow-xs hover:bg-blue-200" href="<?= route_to(

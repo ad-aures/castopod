@@ -51,18 +51,21 @@
 <?= form_section(lang('PodcastImport.new_podcast_section_title'), '') ?>
 
 <?= form_label(
-    lang('PodcastImport.name'),
-    'name',
+    lang('Podcast.form.handle'),
+    'handle',
     [],
-    lang('PodcastImport.name_hint'),
+    lang('Podcast.form.handle_hint'),
 ) ?>
-<?= form_input([
-    'id' => 'name',
-    'name' => 'name',
-    'class' => 'form-input mb-4',
-    'value' => old('name'),
-    'required' => 'required',
-]) ?>
+<div class="relative mb-4">
+    <?= icon('at', 'absolute text-2xl h-full inset-0 text-gray-400 left-2') ?>
+    <?= form_input([
+        'id' => 'handle',
+        'name' => 'handle',
+        'class' => 'form-input w-full pl-8',
+        'value' => old('handle'),
+        'required' => 'required',
+    ]) ?>
+</div>
 
 <?= form_label(lang('Podcast.form.language'), 'language') ?>
 <?= form_dropdown('language', $languageOptions, old('language', $browserLang), [

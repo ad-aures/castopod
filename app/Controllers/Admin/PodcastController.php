@@ -192,9 +192,9 @@ class PodcastController extends BaseController
         }
 
         $podcast = new Podcast([
-            'guid' => podcast_uuid(url_to('podcast_feed', $this->request->getPost('name'))),
+            'guid' => podcast_uuid(url_to('podcast_feed', $this->request->getPost('handle'))),
             'title' => $this->request->getPost('title'),
-            'name' => $this->request->getPost('name'),
+            'handle' => $this->request->getPost('handle'),
             'description_markdown' => $this->request->getPost('description'),
             'image' => new Image($this->request->getFile('image')),
             'language_code' => $this->request->getPost('language'),

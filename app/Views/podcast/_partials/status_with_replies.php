@@ -3,7 +3,7 @@
 
 <div class="px-6 pt-8 pb-4 bg-gray-50">
 <?= anchor_popup(
-    route_to('status-remote-action', $podcast->name, $status->id, 'reply'),
+    route_to('status-remote-action', $podcast->handle, $status->id, 'reply'),
     lang('Status.reply_to', ['actorUsername' => $status->actor->username]),
     [
         'class' =>

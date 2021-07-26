@@ -1,7 +1,6 @@
 const Toggler = (): void => {
-  const togglerElements: NodeListOf<HTMLElement> = document.querySelectorAll(
-    "[data-toggle]"
-  );
+  const togglerElements: NodeListOf<HTMLElement> =
+    document.querySelectorAll("[data-toggle]");
 
   for (let i = 0; i < togglerElements.length; i++) {
     const toggler = togglerElements[i];

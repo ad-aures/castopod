@@ -31,7 +31,7 @@ $routes->setAutoRoute(false);
  * --------------------------------------------------------------------
  */
 
-$routes->addPlaceholder('podcastName', '[a-zA-Z0-9\_]{1,32}');
+$routes->addPlaceholder('podcastHandle', '[a-zA-Z0-9\_]{1,32}');
 $routes->addPlaceholder('slug', '[a-zA-Z0-9\-]{1,191}');
 $routes->addPlaceholder('base64', '[A-Za-z0-9\.\_]+\-{0,2}');
 $routes->addPlaceholder('platformType', '\bpodcasting|\bsocial|\bfunding');
@@ -685,7 +685,7 @@ $routes->group(config('App')->authGateway, function ($routes): void {
 });
 
 // Podcast's Public routes
-$routes->group('@(:podcastName)', function ($routes): void {
+$routes->group('@(:podcastHandle)', function ($routes): void {
     $routes->get('/', 'PodcastController::activity/$1', [
         'as' => 'podcast-activity',
     ]);
@@ -802,7 +802,7 @@ $routes->post('interact-as-actor', 'AuthController::attemptInteractAsActor', [
 /**
  * Overwriting ActivityPub routes file
  */
-$routes->group('@(:podcastName)', function ($routes): void {
+$routes->group('@(:podcastHandle)', function ($routes): void {
     $routes->post('statuses/new', 'StatusController::attemptCreate/$1', [
         'as' => 'status-attempt-create',
         'filter' => 'permission:podcast-manage_publications',

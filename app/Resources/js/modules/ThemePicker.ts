@@ -1,16 +1,14 @@
 const ThemePicker = (): void => {
-  const buttons: NodeListOf<HTMLButtonElement> | null = document.querySelectorAll(
-    "button[data-type='theme-picker']"
-  );
+  const buttons: NodeListOf<HTMLButtonElement> | null =
+    document.querySelectorAll("button[data-type='theme-picker']");
   const iframe: HTMLIFrameElement | null = document.querySelector(
     `iframe[id="embeddable_player"]`
   );
   const iframeTextArea: HTMLTextAreaElement | null = document.querySelector(
     `textarea[id="iframe"]`
   );
-  const urlTextArea: HTMLTextAreaElement | null = document.querySelector(
-    `textarea[id="url"]`
-  );
+  const urlTextArea: HTMLTextAreaElement | null =
+    document.querySelector(`textarea[id="url"]`);
 
   if (buttons && iframe && iframeTextArea && urlTextArea) {
     for (let i = 0; i < buttons.length; i++) {

@@ -20,7 +20,7 @@
 <?= $this->section('content') ?>
 <div class="max-w-2xl px-6 mx-auto">
     <nav class="py-3">
-        <a href="<?= route_to('podcast-activity', $podcast->name) ?>"
+        <a href="<?= route_to('podcast-activity', $podcast->handle) ?>"
         class="inline-flex items-center px-4 py-2 text-sm"><?= icon(
             'arrow-left',
             'mr-2 text-lg',

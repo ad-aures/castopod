@@ -147,14 +147,14 @@ class EpisodeModel extends Model
      */
     protected $beforeDelete = ['clearCache'];
 
-    public function getEpisodeBySlug(string $podcastName, string $episodeSlug): ?Episode
+    public function getEpisodeBySlug(string $podcastHandle, string $episodeSlug): ?Episode
     {
-        $cacheName = "podcast-{$podcastName}_episode-{$episodeSlug}";
+        $cacheName = "podcast-{$podcastHandle}_episode-{$episodeSlug}";
         if (! ($found = cache($cacheName))) {
             $found = $this->select('episodes.*')
                 ->join('podcasts', 'podcasts.id = episodes.podcast_id')
                 ->where('slug', $episodeSlug)
-                ->where('podcasts.name', $podcastName)
+                ->where('podcasts.handle', $podcastHandle)
                 ->where('`published_at` <= NOW()', null, false)
                 ->first();
 
@@ -292,7 +292,7 @@ class EpisodeModel extends Model
         cache()
             ->deleteMatching("podcast#{$episode->podcast_id}*");
         cache()
-            ->deleteMatching("podcast-{$episode->podcast->name}*");
+            ->deleteMatching("podcast-{$episode->podcast->handle}*");
         cache()
             ->delete("podcast_episode#{$episode->id}");
         cache()

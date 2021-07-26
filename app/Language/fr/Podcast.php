@@ -29,9 +29,9 @@ return [
             'Ces champs vous permettent de vous faire remarquer.',
         'image' => 'Image de couverture',
         'title' => 'Titre',
-        'name' => 'Nom',
-        'name_hint' =>
-            'Utilisé pour l’adresse du podcast. Les majuscules, les minuscules, les chiffres et le caractère souligné « _ » sont acceptés.',
+        'handle' => 'Identifiant',
+        'handle_hint' =>
+            'Utilisé pour identifier le podcast. Les majuscules, les minuscules, les chiffres et le caractère souligné « _ » sont acceptés.',
         'type' => [
             'label' => 'Type',
             'hint' =>
@@ -225,9 +225,9 @@ return [
         one {<span class="font-semibold">#</span> abonné·e}
         other {<span class="font-semibold">#</span> abonné·e·s}
     }',
-    'notes' => '{numberOfStatuses, plural,
-        one {<span class="font-semibold">#</span> message}
-        other {<span class="font-semibold">#</span> messages}
+    'statuses' => '{numberOfStatuses, plural,
+        one {<span class="font-semibold">#</span> publication}
+        other {<span class="font-semibold">#</span> publications}
     }',
     'activity' => 'Activité',
     'episodes' => 'Épisodes',

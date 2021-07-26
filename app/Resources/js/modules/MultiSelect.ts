@@ -2,9 +2,8 @@ import Choices from "choices.js";
 
 const MultiSelect = (): void => {
   // Pass single element
-  const multiSelects: NodeListOf<HTMLSelectElement> = document.querySelectorAll(
-    "select[multiple]"
-  );
+  const multiSelects: NodeListOf<HTMLSelectElement> =
+    document.querySelectorAll("select[multiple]");
 
   for (let i = 0; i < multiSelects.length; i++) {
     const multiSelect = multiSelects[i];

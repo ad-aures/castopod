@@ -6,7 +6,7 @@
     ) ?>" method="POST" class="flex justify-around">
         <?= csrf_field() ?>
         <?= anchor(
-            route_to('status', $podcast->name, $status->id),
+            route_to('status', $podcast->handle, $status->id),
             icon('chat', 'text-2xl mr-1 text-gray-400') . $status->replies_count,
             [
                 'class' => 'inline-flex items-center hover:underline',
@@ -40,7 +40,7 @@
         '-more-dropdown-menu' ?>" class="flex flex-col py-2 text-sm bg-white border rounded-lg shadow" aria-labelledby="<?= $status->id .
     '-more-dropdown' ?>" data-dropdown="menu" data-dropdown-placement="bottom">
         <?= anchor(
-            route_to('status', $podcast->name, $status->id),
+            route_to('status', $podcast->handle, $status->id),
             lang('Status.expand'),
             [
                 'class' => 'px-4 py-1 hover:bg-gray-100',

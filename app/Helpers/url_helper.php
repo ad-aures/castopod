@@ -40,7 +40,7 @@ if (! function_exists('extract_params_from_episode_uri')) {
     function extract_params_from_episode_uri(URI $episodeUri): ?array
     {
         preg_match(
-            '~@(?P<podcastName>[a-zA-Z0-9\_]{1,32})\/episodes\/(?P<episodeSlug>[a-zA-Z0-9\-]{1,191})~',
+            '~@(?P<podcastHandle>[a-zA-Z0-9\_]{1,32})\/episodes\/(?P<episodeSlug>[a-zA-Z0-9\-]{1,191})~',
             $episodeUri->getPath(),
             $matches,
         );
@@ -50,14 +50,14 @@ if (! function_exists('extract_params_from_episode_uri')) {
         }
 
         if (
-            ! array_key_exists('podcastName', $matches) ||
+            ! array_key_exists('podcastHandle', $matches) ||
             ! array_key_exists('episodeSlug', $matches)
         ) {
             return null;
         }
 
         return [
-            'podcastName' => $matches['podcastName'],
+            'podcastHandle' => $matches['podcastHandle'],
             'episodeSlug' => $matches['episodeSlug'],
         ];
     }

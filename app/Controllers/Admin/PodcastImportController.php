@@ -131,14 +131,14 @@ class PodcastImportController extends BaseController
             if (property_exists($nsPodcast, 'guid') && $nsPodcast->guid !== null) {
                 $guid = (string) $nsPodcast->guid;
             } else {
-                $guid = podcast_uuid(url_to('podcast_feed', $this->request->getPost('name')));
+                $guid = podcast_uuid(url_to('podcast_feed', $this->request->getPost('handle')));
             }
 
             $podcast = new Podcast([
                 'guid' => $guid,
-                'name' => $this->request->getPost('name'),
+                'handle' => $this->request->getPost('handle'),
                 'imported_feed_url' => $this->request->getPost('imported_feed_url'),
-                'new_feed_url' => url_to('podcast_feed', $this->request->getPost('name')),
+                'new_feed_url' => url_to('podcast_feed', $this->request->getPost('handle')),
                 'title' => (string) $feed->channel[0]->title,
                 'description_markdown' => $converter->convert($channelDescriptionHtml),
                 'description_html' => $channelDescriptionHtml,

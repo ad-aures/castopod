@@ -83,7 +83,7 @@
                             ) ?>"><?= lang('Person.persons') ?></a>
                             <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
                                 'episode',
-                                $podcast->name,
+                                $podcast->handle,
                                 $episode->slug,
                             ) ?>"><?= lang('Episode.go_to_page') ?></a>
                             <hr class="my-2 border border-gray-100">

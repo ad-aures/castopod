@@ -54,9 +54,8 @@ const Soundbites = (): void => {
       }
     }
 
-    const soundbitePlayButtons: NodeListOf<HTMLButtonElement> | null = document.querySelectorAll(
-      "button[data-type='play-soundbite']"
-    );
+    const soundbitePlayButtons: NodeListOf<HTMLButtonElement> | null =
+      document.querySelectorAll("button[data-type='play-soundbite']");
     if (soundbitePlayButtons) {
       for (let i = 0; i < soundbitePlayButtons.length; i++) {
         const soundbitePlayButton: HTMLButtonElement = soundbitePlayButtons[i];
@@ -70,15 +69,15 @@ const Soundbites = (): void => {
       }
     }
 
-    const inputFields: NodeListOf<HTMLInputElement> | null = document.querySelectorAll(
-      "input[data-type='soundbite-field']"
-    );
+    const inputFields: NodeListOf<HTMLInputElement> | null =
+      document.querySelectorAll("input[data-type='soundbite-field']");
     if (inputFields) {
       for (let i = 0; i < inputFields.length; i++) {
         const inputField: HTMLInputElement = inputFields[i];
-        const soundbitePlayButton: HTMLButtonElement | null = document.querySelector(
-          `button[data-type="play-soundbite"][data-soundbite-id="${inputField.dataset.soundbiteId}"]`
-        );
+        const soundbitePlayButton: HTMLButtonElement | null =
+          document.querySelector(
+            `button[data-type="play-soundbite"][data-soundbite-id="${inputField.dataset.soundbiteId}"]`
+          );
         if (soundbitePlayButton) {
           if (inputField.dataset.fieldType == "start-time") {
             inputField.addEventListener("input", () => {

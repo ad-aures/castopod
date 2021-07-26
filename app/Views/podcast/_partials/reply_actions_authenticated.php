@@ -6,7 +6,7 @@
     ) ?>" method="POST" class="flex items-start">
         <?= csrf_field() ?>
         <?= anchor(
-            route_to('status', $podcast->name, $reply->id),
+            route_to('status', $podcast->handle, $reply->id),
             icon('chat', 'text-xl mr-1 text-gray-400') . $reply->replies_count,
             [
                 'class' => 'inline-flex items-center mr-6 hover:underline',
@@ -40,7 +40,7 @@
         '-more-dropdown-menu' ?>" class="flex flex-col py-2 text-sm bg-white border rounded-lg shadow" aria-labelledby="<?= $reply->id .
     '-more-dropdown' ?>" data-dropdown="menu" data-dropdown-placement="bottom">
         <?= anchor(
-            route_to('status', $podcast->name, $reply->id),
+            route_to('status', $podcast->handle, $reply->id),
             lang('Status.expand'),
             [
                 'class' => 'px-4 py-1 hover:bg-gray-100',

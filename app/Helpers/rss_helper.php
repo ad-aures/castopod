@@ -251,7 +251,7 @@ if (! function_exists('get_rss_feed')) {
 
             // add link to episode comments as podcast-activity format
             $comments = $item->addChild('comments', null, $podcastNamespace);
-            $comments->addAttribute('uri', url_to('episode-comments', $podcast->name, $episode->slug));
+            $comments->addAttribute('uri', url_to('episode-comments', $podcast->handle, $episode->slug));
             $comments->addAttribute('contentType', 'application/podcast-activity+json');
 
             if ($episode->transcript_file_url) {

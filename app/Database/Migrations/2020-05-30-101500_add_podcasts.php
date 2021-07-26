@@ -32,7 +32,7 @@ class AddPodcasts extends Migration
                 'type' => 'INT',
                 'unsigned' => true,
             ],
-            'name' => [
+            'handle' => [
                 'type' => 'VARCHAR',
                 'constraint' => 32,
             ],
@@ -193,7 +193,7 @@ class AddPodcasts extends Migration
 
         $this->forge->addPrimaryKey('id');
         // TODO: remove name in favor of username from actor
-        $this->forge->addUniqueKey('name');
+        $this->forge->addUniqueKey('handle');
         $this->forge->addUniqueKey('guid');
         $this->forge->addUniqueKey('actor_id');
         $this->forge->addForeignKey('actor_id', 'activitypub_actors', 'id', '', 'CASCADE');

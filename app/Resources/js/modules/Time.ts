@@ -1,7 +1,6 @@
 const Time = (): void => {
-  const timeElements: NodeListOf<HTMLTimeElement> = document.querySelectorAll(
-    "time"
-  );
+  const timeElements: NodeListOf<HTMLTimeElement> =
+    document.querySelectorAll("time");
 
   for (let i = 0; i < timeElements.length; i++) {
     const timeElement = timeElements[i];

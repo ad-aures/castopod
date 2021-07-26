@@ -5,7 +5,7 @@
         <img src="<?= $podcast->image
             ->thumbnail_url ?>" alt="<?= $podcast->title ?>" class="h-24 rounded-full shadow-xl xl:h-36 lg:h-28 ring-4 ring-pine-50" />
         <?= anchor_popup(
-            route_to('follow', $podcast->name),
+            route_to('follow', $podcast->handle),
             icon(
                 'social/castopod',
                 'mr-2 text-xl text-pink-200 group-hover:text-pink-50',
@@ -25,7 +25,7 @@
                     lang('Common.explicit') .
                     '</span>'
                 : '') ?></h1>
-        <p class="mb-4 font-semibold text-gray-600">@<?= $podcast->name ?></p>
+        <p class="mb-4 font-semibold text-gray-600">@<?= $podcast->handle ?></p>
         <div class="mb-2"><?= $podcast->description_html ?></div>
         <?= location_link($podcast->location, 'text-sm mb-4') ?>
         <div class="mb-6 space-x-4">
@@ -49,7 +49,7 @@
             ]) ?></a>
             <a href="<?= route_to(
                 'podcast-activity',
-                $podcast->name,
+                $podcast->handle,
             ) ?>" class="hover:underline"><?= lang('Podcast.statuses', [
     'numberOfStatuses' => $podcast->actor->statuses_count,
 ]) ?></a>

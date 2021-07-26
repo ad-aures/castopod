@@ -1,6 +1,6 @@
 <footer class="mt-2 space-x-6 text-sm">
     <?= anchor(
-        route_to('status', $podcast->name, $reply->id),
+        route_to('status', $podcast->handle, $reply->id),
         icon('chat', 'text-xl mr-1 text-gray-400') . $reply->replies_count,
         [
             'class' => 'inline-flex items-center hover:underline',
@@ -10,7 +10,7 @@
         ],
     ) ?>
     <?= anchor_popup(
-        route_to('status-remote-action', $podcast->name, $reply->id, 'reblog'),
+        route_to('status-remote-action', $podcast->handle, $reply->id, 'reblog'),
         icon('repeat', 'text-xl mr-1 text-gray-400') . $reply->reblogs_count,
         [
             'class' => 'inline-flex items-center hover:underline',
@@ -22,7 +22,7 @@
         ],
     ) ?>
     <?= anchor_popup(
-        route_to('status-remote-action', $podcast->name, $reply->id, 'favourite'),
+        route_to('status-remote-action', $podcast->handle, $reply->id, 'favourite'),
         icon('heart', 'text-xl mr-1 text-gray-400') . $reply->favourites_count,
         [
             'class' => 'inline-flex items-center hover:underline',

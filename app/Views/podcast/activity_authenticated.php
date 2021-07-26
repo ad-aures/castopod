@@ -25,13 +25,13 @@
 <nav class="sticky top-0 z-20 flex justify-center pt-2 text-lg bg-pine-50">
 <a href="<?= route_to(
     'podcast-activity',
-    $podcast->name,
+    $podcast->handle,
 ) ?>" class="px-4 py-1 mr-8 font-semibold border-b-4 text-pine-800 border-pine-800"><?= lang(
     'Podcast.activity',
 ) ?></a>
     <a href="<?= route_to(
         'podcast-episodes',
-        $podcast->name,
+        $podcast->handle,
     ) ?>" class="px-4 py-1 rounded-full hover:bg-pine-100"><?= lang(
     'Podcast.episodes',
 ) ?></a>
