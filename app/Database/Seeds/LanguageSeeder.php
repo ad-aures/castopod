@@ -34,7 +34,7 @@ class LanguageSeeder extends Seeder
             ],
             [
                 'code' => 'ae',
-                'native_name' => 'avesta',
+                'native_name' => 'Avesta',
             ],
             [
                 'code' => 'af',
@@ -50,7 +50,7 @@ class LanguageSeeder extends Seeder
             ],
             [
                 'code' => 'an',
-                'native_name' => 'aragonés',
+                'native_name' => 'Aragonés',
             ],
             [
                 'code' => 'ar',
@@ -66,7 +66,7 @@ class LanguageSeeder extends Seeder
             ],
             [
                 'code' => 'ay',
-                'native_name' => 'aymar aru',
+                'native_name' => 'Aymar aru',
             ],
             [
                 'code' => 'az',
@@ -94,7 +94,7 @@ class LanguageSeeder extends Seeder
             ],
             [
                 'code' => 'bm',
-                'native_name' => 'bamanankan',
+                'native_name' => 'Bamanankan',
             ],
             [
                 'code' => 'bn',
@@ -106,15 +106,15 @@ class LanguageSeeder extends Seeder
             ],
             [
                 'code' => 'br',
-                'native_name' => 'brezhoneg',
+                'native_name' => 'Brezhoneg',
             ],
             [
                 'code' => 'bs',
-                'native_name' => 'bosanski jezik',
+                'native_name' => 'Bosanski jezik',
             ],
             [
                 'code' => 'ca',
-                'native_name' => 'català, valencià',
+                'native_name' => 'Català, valencià',
             ],
             [
                 'code' => 'ce',
@@ -126,7 +126,7 @@ class LanguageSeeder extends Seeder
             ],
             [
                 'code' => 'co',
-                'native_name' => 'corsu, lingua corsa',
+                'native_name' => 'Corsu, lingua corsa',
             ],
             [
                 'code' => 'cr',
@@ -150,7 +150,7 @@ class LanguageSeeder extends Seeder
             ],
             [
                 'code' => 'da',
-                'native_name' => 'dansk',
+                'native_name' => 'Dansk',
             ],
             [
                 'code' => 'de',
@@ -190,7 +190,7 @@ class LanguageSeeder extends Seeder
             ],
             [
                 'code' => 'eu',
-                'native_name' => 'euskara, euskera',
+                'native_name' => 'Euskara, euskera',
             ],
             [
                 'code' => 'fa',
@@ -202,19 +202,19 @@ class LanguageSeeder extends Seeder
             ],
             [
                 'code' => 'fi',
-                'native_name' => 'suomi, suomen kieli',
+                'native_name' => 'Suomi, suomen kieli',
             ],
             [
                 'code' => 'fj',
-                'native_name' => 'vosa Vakaviti',
+                'native_name' => 'Vosa Vakaviti',
             ],
             [
                 'code' => 'fo',
-                'native_name' => 'føroyskt',
+                'native_name' => 'Føroyskt',
             ],
             [
                 'code' => 'fr',
-                'native_name' => 'français, langue française',
+                'native_name' => 'Français, langue française',
             ],
             [
                 'code' => 'fy',
@@ -262,7 +262,7 @@ class LanguageSeeder extends Seeder
             ],
             [
                 'code' => 'hr',
-                'native_name' => 'hrvatski jezik',
+                'native_name' => 'Hrvatski jezik',
             ],
             [
                 'code' => 'ht',
@@ -270,7 +270,7 @@ class LanguageSeeder extends Seeder
             ],
             [
                 'code' => 'hu',
-                'native_name' => 'magyar',
+                'native_name' => 'Magyar',
             ],
             [
                 'code' => 'hy',
@@ -291,7 +291,7 @@ class LanguageSeeder extends Seeder
             [
                 'code' => 'ie',
                 'native_name' =>
-                    '(originally:) Occidental, (after WWII:) Interlingue',
+                    'Interlingue, formerly Occidental',
             ],
             [
                 'code' => 'ig',
@@ -351,7 +351,7 @@ class LanguageSeeder extends Seeder
             ],
             [
                 'code' => 'kl',
-                'native_name' => 'kalaallisut, kalaallit oqaasii',
+                'native_name' => 'Kalaallisut, kalaallit oqaasii',
             ],
             [
                 'code' => 'km',
@@ -391,7 +391,7 @@ class LanguageSeeder extends Seeder
             ],
             [
                 'code' => 'la',
-                'native_name' => 'latine, lingua latina',
+                'native_name' => 'Latine, lingua latina',
             ],
             [
                 'code' => 'lb',
@@ -415,7 +415,7 @@ class LanguageSeeder extends Seeder
             ],
             [
                 'code' => 'lt',
-                'native_name' => 'lietuvių kalba',
+                'native_name' => 'Lietuvių kalba',
             ],
             [
                 'code' => 'lu',
@@ -423,11 +423,11 @@ class LanguageSeeder extends Seeder
             ],
             [
                 'code' => 'lv',
-                'native_name' => 'latviešu valoda',
+                'native_name' => 'Latviešu valoda',
             ],
             [
                 'code' => 'mg',
-                'native_name' => 'fiteny malagasy',
+                'native_name' => 'Fiteny malagasy',
             ],
             [
                 'code' => 'mh',
@@ -435,7 +435,7 @@ class LanguageSeeder extends Seeder
             ],
             [
                 'code' => 'mi',
-                'native_name' => 'te reo Māori',
+                'native_name' => 'Te reo Māori',
             ],
             [
                 'code' => 'mk',
@@ -507,11 +507,11 @@ class LanguageSeeder extends Seeder
             ],
             [
                 'code' => 'ny',
-                'native_name' => 'chiCheŵa, chinyanja',
+                'native_name' => 'Chicheŵa, chinyanja',
             ],
             [
                 'code' => 'oc',
-                'native_name' => 'occitan, lenga d’òc',
+                'native_name' => 'Occitan, lenga d’òc',
             ],
             [
                 'code' => 'oj',
@@ -567,7 +567,7 @@ class LanguageSeeder extends Seeder
             ],
             [
                 'code' => 'ru',
-                'native_name' => 'русский',
+                'native_name' => 'Pусский',
             ],
             [
                 'code' => 'rw',
@@ -579,7 +579,7 @@ class LanguageSeeder extends Seeder
             ],
             [
                 'code' => 'sc',
-                'native_name' => 'sardu',
+                'native_name' => 'Sardu',
             ],
             [
                 'code' => 'sd',
@@ -591,7 +591,7 @@ class LanguageSeeder extends Seeder
             ],
             [
                 'code' => 'sg',
-                'native_name' => 'yângâ tî sängö',
+                'native_name' => 'Yângâ tî sängö',
             ],
             [
                 'code' => 'si',
@@ -607,7 +607,7 @@ class LanguageSeeder extends Seeder
             ],
             [
                 'code' => 'sm',
-                'native_name' => "gagana fa'a Samoa",
+                'native_name' => "Gagana fa'a Samoa",
             ],
             [
                 'code' => 'sn',

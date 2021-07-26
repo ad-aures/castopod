@@ -17,6 +17,7 @@
       "editor.defaultFormatter": "bmewburn.vscode-intelephense-client",
       "editor.formatOnSave": false
     },
+    "css.validate": false,
     "color-highlight.markerType": "dot-before",
     "files.associations": {
       "*.xml.dist": "xml",

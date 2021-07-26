@@ -57,7 +57,7 @@
     lang('Podcast.form.handle_hint'),
 ) ?>
 <div class="relative mb-4">
-    <?= icon('at', 'absolute text-2xl h-full inset-0 text-gray-400 left-2') ?>
+    <?= icon('at', 'absolute text-xl h-full inset-0 text-gray-400 left-3') ?>
     <?= form_input([
         'id' => 'handle',
         'name' => 'handle',

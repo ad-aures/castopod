@@ -1,18 +1,15 @@
 import Choices from "choices.js";
 
-const MultiSelect = (): void => {
+const Select = (): void => {
   // Pass single element
-  const multiSelects: NodeListOf<HTMLSelectElement> =
-    document.querySelectorAll("select[multiple]");
+  const selects: NodeListOf<HTMLSelectElement> = document.querySelectorAll(
+    "select:not([multiple])"
+  );
 
-  for (let i = 0; i < multiSelects.length; i++) {
-    const multiSelect = multiSelects[i];
+  for (let i = 0; i < selects.length; i++) {
+    const select = selects[i];
 
-    new Choices(multiSelect, {
-      maxItemCount: parseInt(multiSelect.dataset.maxItemCount || "-1"),
-      itemSelectText: multiSelect.dataset.selectText,
-      maxItemText: multiSelect.dataset.maxItemText,
-      removeItemButton: true,
+    new Choices(select, {
       classNames: {
         containerOuter: "choices",
         containerInner: "choices__inner",
@@ -45,4 +42,4 @@ const MultiSelect = (): void => {
   }
 };
 
-export default MultiSelect;
+export default Select;
