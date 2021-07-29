@@ -134,7 +134,7 @@ if (! function_exists('get_rss_feed')) {
                     $podcastNamespace,
                 );
 
-                $personElement->addAttribute('img', $person->image->large_url);
+                $personElement->addAttribute('img', $person->image->medium_url);
 
                 if ($person->information_url !== null) {
                     $personElement->addAttribute('href', $person->information_url);
@@ -298,7 +298,7 @@ if (! function_exists('get_rss_feed')) {
                         htmlspecialchars(lang("PersonsTaxonomy.persons.{$role->group}.label", [], 'en')),
                     );
 
-                    $personElement->addAttribute('img', $person->image->large_url);
+                    $personElement->addAttribute('img', $person->image->medium_url);
 
                     if ($person->information_url !== null) {
                         $personElement->addAttribute('href', $person->information_url);

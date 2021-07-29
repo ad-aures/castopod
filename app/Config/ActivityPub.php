@@ -21,11 +21,11 @@ class ActivityPub extends ActivityPubBase
      * Default avatar and cover images
      * --------------------------------------------------------------------
      */
-    public string $defaultAvatarImagePath = 'assets/images/castopod-avatar-default.jpg';
+    public string $defaultAvatarImagePath = 'media/castopod-avatar-default_thumbnail.jpg';
 
     public string $defaultAvatarImageMimetype = 'image/jpeg';
 
-    public string $defaultCoverImagePath = 'assets/images/castopod-cover-default.jpg';
+    public string $defaultCoverImagePath = 'media/castopod-cover-default.jpg';
 
     public string $defaultCoverImageMimetype = 'image/jpeg';
 }

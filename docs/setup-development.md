@@ -211,13 +211,12 @@ You do not wish to use the VSCode devcontainer? No problem!
 3. Generate static assets:
 
    ```bash
-   # build all assets at once
+   # build all static assets at once
    npm run build:static
 
-   # generate/copy specific assets
+   # build specific assets
    npm run build:icons
    npm run build:svg
-   npm run copy:images
    ```
 
    > **Note:**

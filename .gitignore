@@ -144,8 +144,6 @@ public/*
 !public/robots.txt
 
 # public media folder
-public/media/*
-!public/media/index.html
 !public/media/podcasts
 !public/media/persons
 

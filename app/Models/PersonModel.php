@@ -63,7 +63,6 @@ class PersonModel extends Model
         'full_name' => 'required',
         'unique_name' =>
             'required|regex_match[/^[a-z0-9\-]{1,191}$/]|is_unique[persons.unique_name,id,{id}]',
-        'image_path' => 'required',
         'created_by' => 'required',
         'updated_by' => 'required',
     ];

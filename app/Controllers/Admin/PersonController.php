@@ -81,10 +81,14 @@ class PersonController extends BaseController
             'full_name' => $this->request->getPost('full_name'),
             'unique_name' => $this->request->getPost('unique_name'),
             'information_url' => $this->request->getPost('information_url'),
-            'image' => new Image($this->request->getFile('image')),
             'created_by' => user_id(),
             'updated_by' => user_id(),
         ]);
+
+        $imageFile = $this->request->getFile('image');
+        if ($imageFile !== null && $imageFile->isValid()) {
+            $person->image = new Image($imageFile);
+        }
 
         $personModel = new PersonModel();
 
@@ -129,6 +133,7 @@ class PersonController extends BaseController
         $this->person->full_name = $this->request->getPost('full_name');
         $this->person->unique_name = $this->request->getPost('unique_name');
         $this->person->information_url = $this->request->getPost('information_url');
+
         $imageFile = $this->request->getFile('image');
         if ($imageFile !== null && $imageFile->isValid()) {
             $this->person->image = new Image($imageFile);

@@ -23,6 +23,18 @@
         "<img src=\"{$person->image->thumbnail_url}\" alt=\"{$person->full_name}\" class=\"object-cover w-32 h-32 mt-3 rounded\" />",
 ) ?>
 
+<?= form_label(lang('Person.form.image'), 'image') ?>
+<?= form_input([
+    'id' => 'image',
+    'name' => 'image',
+    'class' => 'form-input',
+    'type' => 'file',
+    'accept' => '.jpg,.jpeg,.png',
+]) ?>
+<small class="mb-4 text-gray-600"><?= lang(
+    'Person.form.image_size_hint',
+) ?></small>
+
 <?= form_label(
     lang('Person.form.full_name'),
     'full_name',
@@ -66,18 +78,6 @@
     'class' => 'form-input mb-4',
     'value' => old('information_url', $person->information_url),
 ]) ?>
-
-<?= form_label(lang('Person.form.image'), 'image') ?>
-<?= form_input([
-    'id' => 'image',
-    'name' => 'image',
-    'class' => 'form-input',
-    'type' => 'file',
-    'accept' => '.jpg,.jpeg,.png',
-]) ?>
-<small class="mb-4 text-gray-600"><?= lang(
-    'Person.form.image_size_hint',
-) ?></small>
 
 <?= form_section_close() ?>
 

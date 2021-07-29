@@ -19,6 +19,9 @@ return [
     'form' => [
         'identity_section_title' => 'Identité',
         'identity_section_subtitle' => 'Qui intervient sur le podcast',
+        'image' => 'Photo',
+        'image_size_hint' =>
+            'L’image doit être carrée et avoir au moins 400px de largeur et de hauteur.',
         'full_name' => 'Nom complet',
         'full_name_hint' => 'Le nom complet ou le pseudonyme de l’intervenant',
         'unique_name' => 'Nom unique',
@@ -26,9 +29,6 @@ return [
         'information_url' => 'Adresse d’information',
         'information_url_hint' =>
             'URL pointant vers des informations relatives à l’intervenant, telle qu’une page personnelle ou une page de profil sur une plateforme tierce.',
-        'image' => 'Photo, avatar, image',
-        'image_size_hint' =>
-            'L’image doit être carrée et avoir au moins 400px de largeur et de hauteur.',
         'submit_create' => 'Créer l’intervenant',
         'submit_edit' => 'Enregistrer l’intervenant',
     ],

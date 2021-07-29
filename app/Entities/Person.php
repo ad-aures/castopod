@@ -47,8 +47,8 @@ class Person extends Entity
         'full_name' => 'string',
         'unique_name' => 'string',
         'information_url' => '?string',
-        'image_path' => 'string',
-        'image_mimetype' => 'string',
+        'image_path' => '?string',
+        'image_mimetype' => '?string',
         'podcast_id' => '?integer',
         'episode_id' => '?integer',
         'created_by' => 'integer',
@@ -58,8 +58,12 @@ class Person extends Entity
     /**
      * Saves a picture in `public/media/persons/`
      */
-    public function setImage(Image $image): static
+    public function setImage(?Image $image = null): static
     {
+        if ($image === null) {
+            return $this;
+        }
+
         helper('media');
 
         // Save image
@@ -73,6 +77,10 @@ class Person extends Entity
 
     public function getImage(): Image
     {
+        if ($this->attributes['image_path'] === null) {
+            return new Image(null, '/castopod-avatar-default.jpg', 'image/jpeg');
+        }
+
         return new Image(null, $this->attributes['image_path'], $this->attributes['image_mimetype']);
     }
 

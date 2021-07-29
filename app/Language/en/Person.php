@@ -19,6 +19,9 @@ return [
     'form' => [
         'identity_section_title' => 'Identity',
         'identity_section_subtitle' => 'Who is working on the podcast',
+        'image' => 'Picture',
+        'image_size_hint' =>
+            'Image must be squared with at least 400px wide and tall.',
         'full_name' => 'Full name',
         'full_name_hint' => 'This is the full name or alias of the person.',
         'unique_name' => 'Unique name',
@@ -26,9 +29,6 @@ return [
         'information_url' => 'Information URL',
         'information_url_hint' =>
             'Url to a relevant resource of information about the person, such as a homepage or third-party profile platform.',
-        'image' => 'Picture, avatar, image',
-        'image_size_hint' =>
-            'Image must be squared with at least 400px wide and tall.',
         'submit_create' => 'Create person',
         'submit_edit' => 'Save person',
     ],
