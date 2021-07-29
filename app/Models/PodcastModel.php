@@ -357,8 +357,14 @@ class PodcastModel extends Model
                 ];
             }
 
+            $secondsToNextUnpublishedEpisode = (new EpisodeModel())->getSecondsToNextUnpublishedEpisode($podcastId);
+
             cache()
-                ->save($cacheName, $defaultQuery, DECADE);
+                ->save(
+                    $cacheName,
+                    $defaultQuery,
+                    $secondsToNextUnpublishedEpisode ? $secondsToNextUnpublishedEpisode : DECADE
+                );
         }
         return $defaultQuery;
     }
