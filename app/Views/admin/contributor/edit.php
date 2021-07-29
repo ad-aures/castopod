@@ -17,7 +17,7 @@
 <?= csrf_field() ?>
 
 <?= form_label(lang('Contributor.form.role'), 'role') ?>
-<?= form_dropdown('role', $roleOptions, old('role', $contributorGroupId), [
+<?= form_dropdown('role', $roleOptions, [old('role', $contributorGroupId)], [
     'id' => 'role',
     'class' => 'form-select mb-4',
     'required' => 'required',

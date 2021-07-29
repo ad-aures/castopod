@@ -68,15 +68,12 @@
 
 <div class="mb-4">
     <?= form_label(lang('Podcast.form.description'), 'description') ?>
-    <?= form_textarea(
-        [
+    <?= form_markdown_editor([
             'id' => 'description',
             'name' => 'description',
-            'class' => 'form-textarea',
             'required' => 'required',
         ],
-        old('description', $podcast->description_markdown, false),
-        'data-editor="markdown"',
+        old('description', $podcast->description_markdown, false)
     ) ?>
 </div>
 
@@ -92,7 +89,7 @@
 <?= form_dropdown(
     'language',
     $languageOptions,
-    old('language', $podcast->language_code),
+    [old('language', $podcast->language_code)],
     [
         'id' => 'language',
         'class' => 'form-select mb-4',
@@ -104,7 +101,7 @@
 <?= form_dropdown(
     'category',
     $categoryOptions,
-    old('category', (string) $podcast->category_id),
+    [old('category', (string) $podcast->category_id)],
     [
         'id' => 'category',
         'class' => 'form-select mb-4',

@@ -20,7 +20,7 @@
             <?= $this->include('admin/_sidebar') ?>
         <?php endif; ?>
     </aside>
-    <main class="overflow-hidden holy-grail-main">
+    <main class="holy-grail-main">
         <header class="text-white bg-pine-900">
             <div class="container flex flex-wrap items-end justify-between px-2 py-10 mx-auto md:px-12 gap-y-6 gap-x-6">
                 <div class="flex flex-col">

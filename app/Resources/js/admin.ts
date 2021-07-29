@@ -1,8 +1,10 @@
+import "@github/markdown-toolbar-element";
 import ClientTimezone from "./modules/ClientTimezone";
 import Clipboard from "./modules/Clipboard";
 import DateTimePicker from "./modules/DateTimePicker";
 import Dropdown from "./modules/Dropdown";
-import MarkdownEditor from "./modules/MarkdownEditor";
+import "./modules/markdown-preview";
+import "./modules/markdown-write-preview";
 import MultiSelect from "./modules/MultiSelect";
 import PublishMessageWarning from "./modules/PublishMessageWarning";
 import Select from "./modules/Select";
@@ -15,7 +17,6 @@ import Tooltip from "./modules/Tooltip";
 
 Dropdown();
 Tooltip();
-MarkdownEditor();
 Select();
 MultiSelect();
 Slugify();

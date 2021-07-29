@@ -17,7 +17,7 @@
 <?= csrf_field() ?>
     
 <?= form_label(lang('Contributor.form.user'), 'user') ?>
-<?= form_dropdown('user', $userOptions, old('user', ''), [
+<?= form_dropdown('user', $userOptions, [old('user', '')], [
     'id' => 'user',
     'class' => 'form-select mb-4',
     'required' => 'required',
@@ -25,7 +25,7 @@
 ]) ?>
 
 <?= form_label(lang('Contributor.form.role'), 'role') ?>
-<?= form_dropdown('role', $roleOptions, old('role', ''), [
+<?= form_dropdown('role', $roleOptions, [old('role', '')], [
     'id' => 'role',
     'class' => 'form-select mb-4',
     'required' => 'required',

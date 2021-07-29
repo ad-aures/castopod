@@ -82,15 +82,13 @@
 
 <div class="mb-4">
     <?= form_label(lang('Podcast.form.description'), 'description') ?>
-    <?= form_textarea(
+    <?= form_markdown_editor(
         [
             'id' => 'description',
             'name' => 'description',
-            'class' => 'form-textarea',
             'required' => 'required',
         ],
         old('description', '', false),
-        'data-editor="markdown"',
     ) ?>
 </div>
 
@@ -103,14 +101,14 @@
 ) ?>
 
 <?= form_label(lang('Podcast.form.language'), 'language') ?>
-<?= form_dropdown('language', $languageOptions, old('language', $browserLang), [
+<?= form_dropdown('language', $languageOptions, [old('language', $browserLang)], [
     'id' => 'language',
     'class' => 'form-select mb-4',
     'required' => 'required',
 ]) ?>
 
 <?= form_label(lang('Podcast.form.category'), 'category') ?>
-<?= form_dropdown('category', $categoryOptions, old('category', ''), [
+<?= form_dropdown('category', $categoryOptions, [old('category', '')], [
     'id' => 'category',
     'class' => 'form-select mb-4',
     'required' => 'required',
@@ -127,7 +125,7 @@
 <?= form_multiselect(
     'other_categories[]',
     $categoryOptions,
-    old('other_categories', []),
+    [old('other_categories', '')],
     [
         'id' => 'other_categories',
         'class' => 'mb-4',
@@ -282,11 +280,11 @@
 
 <?= form_label(lang('Podcast.form.partnership')) ?>
 <div class="flex flex-col mb-4 gap-x-2 gap-y-4 md:flex-row">
-    <div class="flex flex-col flex-shrink w-32">
+    <div class="flex flex-col flex-shrink">
         <?= form_label(
             lang('Podcast.form.partner_id'),
             'partner_id',
-            [],
+            ['class' => 'text-sm'],
             lang('Podcast.form.partner_id_hint'),
             true,
         ) ?>
@@ -297,11 +295,11 @@
             'value' => old('partner_id'),
         ]) ?>
     </div>
-    <div class="flex flex-col flex-1">
+    <div class="flex flex-col">
         <?= form_label(
             lang('Podcast.form.partner_link_url'),
             'partner_link_url',
-            [],
+            ['class' => 'text-sm'],
             lang('Podcast.form.partner_link_url_hint'),
             true,
         ) ?>
@@ -312,11 +310,11 @@
             'value' => old('partner_link_url'),
         ]) ?>
     </div>
-    <div class="flex flex-col flex-1">
+    <div class="flex flex-col">
         <?= form_label(
             lang('Podcast.form.partner_image_url'),
             'partner_image_url',
-            [],
+            ['class' => 'text-sm'],
             lang('Podcast.form.partner_image_url_hint'),
             true,
         ) ?>

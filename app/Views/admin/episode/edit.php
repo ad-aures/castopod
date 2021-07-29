@@ -211,15 +211,13 @@
 
 <div class="mb-4">
     <?= form_label(lang('Episode.form.description'), 'description') ?>
-    <?= form_textarea(
+    <?= form_markdown_editor(
         [
             'id' => 'description',
             'name' => 'description',
-            'class' => 'form-textarea',
             'required' => 'required',
         ],
         old('description', $episode->description_markdown, false),
-        'data-editor="markdown"',
     ) ?>
 </div>
 
@@ -229,19 +227,18 @@
         'description_footer',
         [],
         lang('Episode.form.description_footer_hint'),
+        true
     ) ?>
-    <?= form_textarea(
+    <?= form_markdown_editor(
         [
             'id' => 'description_footer',
             'name' => 'description_footer',
-            'class' => 'form-textarea',
         ],
         old(
             'description_footer',
             $podcast->episode_description_footer_markdown ?? '',
             false,
         ),
-        'data-editor="markdown"',
     ) ?>
 </div>
 

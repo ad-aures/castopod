@@ -10,8 +10,11 @@ const MultiSelect = (): void => {
 
     new Choices(multiSelect, {
       maxItemCount: parseInt(multiSelect.dataset.maxItemCount || "-1"),
+      loadingText: multiSelect.dataset.loadingText,
       itemSelectText: multiSelect.dataset.selectText,
       maxItemText: multiSelect.dataset.maxItemText,
+      noChoicesText: multiSelect.dataset.noChoicesText,
+      noResultsText: multiSelect.dataset.noResultsText,
       removeItemButton: true,
       classNames: {
         containerOuter: "choices",

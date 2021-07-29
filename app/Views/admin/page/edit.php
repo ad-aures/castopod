@@ -38,15 +38,13 @@
 
 <div class="mb-4">
     <?= form_label(lang('Page.form.content'), 'content') ?>
-    <?= form_textarea(
+    <?= form_markdown_editor(
         [
             'id' => 'content',
             'name' => 'content',
-            'class' => 'form-textarea',
             'required' => 'required',
         ],
         old('content', $page->content_markdown, false),
-        'data-editor="markdown"',
     ) ?>
 </div>
 

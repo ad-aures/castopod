@@ -10,6 +10,11 @@ const Select = (): void => {
     const select = selects[i];
 
     new Choices(select, {
+      loadingText: select.dataset.loadingText,
+      itemSelectText: select.dataset.selectText,
+      maxItemText: select.dataset.maxItemText,
+      noChoicesText: select.dataset.noChoicesText,
+      noResultsText: select.dataset.noResultsText,
       classNames: {
         containerOuter: "choices",
         containerInner: "choices__inner",

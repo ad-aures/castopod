@@ -23,7 +23,7 @@
         'redis' => lang('Install.form.cacheHandlerOptions.redis'),
         'predis' => lang('Install.form.cacheHandlerOptions.predis'),
     ],
-    old('cache_handler', 'file'),
+    [old('cache_handler', 'file')],
     [
         'id' => 'cache_handler',
         'name' => 'cache_handler',

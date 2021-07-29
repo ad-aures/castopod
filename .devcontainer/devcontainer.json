@@ -25,19 +25,20 @@
     }
   },
   "extensions": [
-    "mikestead.dotenv",
+    "bierner.lit-html",
     "bmewburn.vscode-intelephense-client",
-    "streetsidesoftware.code-spell-checker",
-    "naumovs.color-highlight",
-    "heybourn.headwind",
-    "wayou.vscode-todo-highlight",
-    "esbenp.prettier-vscode",
     "bradlc.vscode-tailwindcss",
-    "jamesbirtles.svelte-vscode",
-    "dbaeumer.vscode-eslint",
-    "stylelint.vscode-stylelint",
-    "eamodio.gitlens",
     "breezelin.phpstan",
-    "kasik96.latte"
+    "dbaeumer.vscode-eslint",
+    "eamodio.gitlens",
+    "esbenp.prettier-vscode",
+    "heybourn.headwind",
+    "jamesbirtles.svelte-vscode",
+    "kasik96.latte",
+    "mikestead.dotenv",
+    "naumovs.color-highlight",
+    "streetsidesoftware.code-spell-checker",
+    "stylelint.vscode-stylelint",
+    "wayou.vscode-todo-highlight"
   ]
 }

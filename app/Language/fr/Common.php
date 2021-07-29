@@ -24,6 +24,11 @@ return [
     'pageInfo' => 'Page {currentPage} sur {pageCount}',
     'go_back' => 'Retour en arrière',
     'forms' => [
+        'editor' => [
+            'write' => 'Écrire',
+            'preview' => 'Aperçu',
+            'help' => 'Propulsé par markdown',
+        ],
         'multiSelect' => [
             'selectText' => 'Cliquez pour selectionner',
             'loadingText' => 'Chargement...',

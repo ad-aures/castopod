@@ -68,14 +68,14 @@
 </div>
 
 <?= form_label(lang('Podcast.form.language'), 'language') ?>
-<?= form_dropdown('language', $languageOptions, old('language', $browserLang), [
+<?= form_dropdown('language', $languageOptions, [old('language', $browserLang)], [
     'id' => 'language',
     'class' => 'form-select mb-4',
     'required' => 'required',
 ]) ?>
 
 <?= form_label(lang('Podcast.form.category'), 'category') ?>
-<?= form_dropdown('category', $categoryOptions, old('category', ''), [
+<?= form_dropdown('category', $categoryOptions, [old('category', '')], [
     'id' => 'category',
     'class' => 'form-select mb-4',
     'required' => 'required',
