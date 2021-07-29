@@ -51,7 +51,7 @@ if (! function_exists('get_rss_feed')) {
         $channel->addChild('docs', 'https://cyber.harvard.edu/rss/rss.html');
 
         $channel->addChild('guid', $podcast->guid, $podcastNamespace);
-        $channel->addChild('title', $podcast->title);
+        $channel->addChild('title', $podcast->title, null, false);
         $channel->addChildWithCDATA('description', $podcast->description_html);
 
         $itunesImage = $channel->addChild('image', null, $itunesNamespace);
@@ -189,7 +189,7 @@ if (! function_exists('get_rss_feed')) {
 
         $image = $channel->addChild('image');
         $image->addChild('url', $podcast->image->feed_url);
-        $image->addChild('title', $podcast->title);
+        $image->addChild('title', $podcast->title, null, false);
         $image->addChild('link', $podcast->link);
 
         if ($podcast->custom_rss !== null) {
@@ -200,7 +200,7 @@ if (! function_exists('get_rss_feed')) {
 
         foreach ($episodes as $episode) {
             $item = $channel->addChild('item');
-            $item->addChild('title', $episode->title);
+            $item->addChild('title', $episode->title, null, false);
             $enclosure = $item->addChild('enclosure');
 
             $enclosure->addAttribute(

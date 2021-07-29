@@ -2,15 +2,8 @@
   "compilerOptions": {
     /* Basic Options */
     "module": "esnext" /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', or 'ESNext'. */,
-    "lib": [
-      "DOM",
-      "DOM.Iterable",
-      "ESNext"
-    ] /* Specify library files to be included in the compilation. */,
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    "outDir": "app/Resources/types",
-    "rootDir": "app/Resources",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "noEmit": true,
 
     /* Strict Type-Checking Options */
     "strict": true /* Enable all strict type-checking options. */,

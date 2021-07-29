@@ -226,7 +226,8 @@ if (! function_exists('form_dropdown')) {
                 }
                 $form .= "</optgroup>\n";
             } else {
-                $form .= '<option value="' . htmlspecialchars($key) . '"'
+                /** @noRector RecastingRemovalRector */
+                $form .= '<option value="' . htmlspecialchars((string) $key) . '"'
                         . (in_array($key, $selected, true) ? ' selected="selected"' : '') . '>'
                         . $val . "</option>\n";
             }

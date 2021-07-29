@@ -39,8 +39,6 @@ Javascript dependencies:
   ([MIT License](https://github.com/rollup/rollup/blob/master/LICENSE.md))
 - [tailwindcss](https://tailwindcss.com/)
   ([MIT License](https://github.com/tailwindcss/tailwindcss/blob/master/LICENSE))
-- [ProseMirror](https://prosemirror.net/)
-  ([MIT License](https://github.com/ProseMirror/prosemirror/blob/master/LICENSE))
 - [amCharts 4](https://github.com/amcharts/amcharts4)
   ([Free amCharts license](https://github.com/amcharts/amcharts4/blob/master/dist/script/LICENSE))
 - [Choices.js](https://joshuajohnson.co.uk/Choices/)
