@@ -19,13 +19,7 @@
                 <span class="mx-1">-</span>
                 <?= $episode->title ?>
             </div>
-            <time
-                class="text-xs"
-                itemprop="published"
-                datetime="<?= $episode->published_at->format(DateTime::ATOM) ?>"
-                title="<?= $episode->published_at ?>">
-                <?= lang('Common.mediumDate', [$episode->published_at]) ?>
-            </time> 
+            <?= relative_time($episode->published_at, 'text-xs whitespace-nowrap') ?>
         </a>
         <?= play_episode_button($episode->id, $episode->image->thumbnail_url, $episode->title, $podcast->title, $episode->audio_file_web_url, $episode->audio_file_mimetype, 'mt-auto') ?>
     </div>

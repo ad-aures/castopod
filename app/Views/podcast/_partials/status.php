@@ -18,11 +18,7 @@
             </a>
             <a href="<?= route_to('status', $podcast->handle, $status->id) ?>"
             class="text-xs text-gray-500">
-                <time
-                itemprop="published"
-                datetime="<?= $status->published_at->format(DateTime::ATOM) ?>"
-                title="<?= $status->published_at ?>"
-                ><?= lang('Common.mediumDate', [$status->published_at]) ?></time>
+                <?= relative_time($status->published_at) ?>
             </a>
         </div>
     </header>

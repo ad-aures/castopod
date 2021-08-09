@@ -42,12 +42,7 @@
                 <span class="text-sm text-gray-500 truncate">@<?= $podcast
                                                                     ->actor->username ?></span>
             </p>
-            <time class="text-xs text-gray-500" itemprop="published" datetime="<?= $status->published_at->format(
-                                                                                    DateTime::ATOM,
-                                                                                ) ?>" title="<?= $status->published_at ?>"><?= lang(
-                                                            'Common.mediumDate',
-                                                            [$status->published_at],
-                                                        ) ?></time>
+            <?= relative_time($status->published_at, 'text-xs text-gray-500') ?>
         </div>
     </div>
     <div class="px-4 mb-2">
@@ -78,13 +73,7 @@
                     ) ?>
                 </div>
                 <div class="text-xs text-gray-600">
-                    <time itemprop="published" datetime="<?= $episode->published_at->format(
-                                                                DateTime::ATOM,
-                                                            ) ?>" title="<?= $episode->published_at ?>">
-                        <?= lang('Common.mediumDate', [
-                            $episode->published_at,
-                        ]) ?>
-                    </time>
+                    <?= relative_time($episode->published_at) ?>
                     <span class="mx-1">•</span>
                     <time datetime="PT<?= $episode->audio_file_duration ?>S">
                         <?= format_duration($episode->audio_file_duration) ?>

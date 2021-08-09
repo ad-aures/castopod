@@ -59,13 +59,7 @@
                     'text-gray-700',
                 ) ?>
                 <div class="mb-4 text-xs">
-                    <time pubdate datetime="<?= $episode->published_at->format(
-                        DateTime::ATOM,
-                    ) ?>" title="<?= $episode->published_at ?>">
-                        <?= lang('Common.mediumDate', [
-                            $episode->published_at,
-                        ]) ?>
-                    </time>
+                    <?= relative_time($episode->published_at) ?>
                     <span class="mx-1">•</span>
                     <time datetime="PT<?= $episode->audio_file_duration ?>S">
                         <?= format_duration($episode->audio_file_duration) ?>

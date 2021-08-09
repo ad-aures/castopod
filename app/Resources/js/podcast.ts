@@ -1,3 +1,4 @@
+import "@github/time-elements";
 import Dropdown from "./modules/Dropdown";
 import Time from "./modules/Time";
 import Toggler from "./modules/Toggler";
