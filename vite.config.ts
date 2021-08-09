@@ -17,6 +17,8 @@ export default defineConfig({
         "admin.ts": "app/Resources/js/admin.ts",
         "charts.ts": "app/Resources/js/charts.ts",
         "map.ts": "app/Resources/js/map.ts",
+        "audio-player.ts": "app/Resources/js/audio-player.ts",
+        "embed.ts": "app/Resources/js/embed.ts",
         "styles/index.css": "app/Resources/styles/index.css",
       },
     },

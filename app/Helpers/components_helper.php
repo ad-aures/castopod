@@ -185,7 +185,7 @@ if (! function_exists('data_table')) {
      * @param mixed[] $data data to loop through and display in rows
      * @param mixed ...$rest Any other argument to pass to the `cell` function
      */
-    function data_table(array $columns, array $data = [], ...$rest): string
+    function data_table(array $columns, array $data = [], string $class = '', ...$rest): string
     {
         $table = new Table();
 
@@ -199,8 +199,8 @@ if (! function_exists('data_table')) {
             'cell_start' => '<td class="px-4 py-2">',
             'cell_alt_start' => '<td class="px-4 py-2">',
 
-            'row_start' => '<tr class="bg-gray-100 hover:bg-pine-100">',
-            'row_alt_start' => '<tr class="hover:bg-pine-100">',
+            'row_start' => '<tr class="bg-gray-50 hover:bg-pine-50">',
+            'row_alt_start' => '<tr class="hover:bg-pine-50">',
         ];
 
         $table->setTemplate($template);
@@ -225,7 +225,7 @@ if (! function_exists('data_table')) {
             return lang('Common.no_data');
         }
 
-        return '<div class="overflow-x-auto bg-white rounded-lg shadow" >' .
+        return '<div class="overflow-x-auto bg-white rounded-lg shadow ' . $class . '" >' .
             $table->generate() .
             '</div>';
     }
@@ -241,28 +241,16 @@ if (! function_exists('publication_pill')) {
      */
     function publication_pill(?Time $publicationDate, string $publicationStatus, string $customClass = ''): string
     {
-        if ($publicationDate === null) {
-            return '';
-        }
+        $class = match ($publicationStatus) {
+            'published' => 'text-pine-600 border-pine-600 bg-pine-50',
+                'scheduled' => 'text-red-600 border-red-600 bg-red-50',
+                'not_published' => 'text-gray-600 border-gray-600 bg-gray-50',
+                default => 'text-gray-600 border-gray-600 bg-gray-50',
+        };
 
-        $class =
-            $publicationStatus === 'published'
-                ? 'text-pine-500 border-pine-500'
-                : 'text-red-600 border-red-600';
+        $label = lang('Episode.publication_status.' . $publicationStatus);
 
-        $langOptions = [
-            '<time pubdate datetime="' .
-            $publicationDate->format(DateTime::ATOM) .
-            '" title="' .
-            $publicationDate .
-            '">' .
-            lang('Common.mediumDate', [$publicationDate]) .
-            '</time>',
-        ];
-
-        $label = lang('Episode.publication_status.' . $publicationStatus, $langOptions);
-
-        return '<span class="px-1 font-semibold border ' .
+        return '<span ' . ($publicationDate === null ? '' : 'title="' . $publicationDate . '"') . ' class="px-1 font-semibold border rounded ' .
             $class .
             ' ' .
             $customClass .
@@ -354,7 +342,7 @@ if (! function_exists('episode_numbering')) {
         }
 
         if ($isAbbr) {
-            return '<abbr class="' .
+            return '<abbr class="tracking-wider ' .
                 $class .
                 '" title="' .
                 lang($transKey, $args) .
@@ -450,4 +438,79 @@ if (! function_exists('person_list')) {
     }
 }
 
+
+
 // ------------------------------------------------------------------------
+
+if (! function_exists('play_episode_button')) {
+    /**
+     * Returns play episode button
+     */
+    function play_episode_button(
+        string $episodeId,
+        string $episodeThumbnail,
+        string $episodeTitle,
+        string $podcastTitle,
+        string $source,
+        string $mediaType,
+        string $class = ''
+    ): string {
+        $playLabel = lang('Common.play_episode_button.play');
+        $playingLabel = lang('Common.play_episode_button.playing');
+
+        return <<<CODE_SAMPLE
+            <play-episode-button
+                class="${class}"
+                id="${episodeId}"
+                imageSrc=${episodeThumbnail}
+                title="${episodeTitle}"
+                podcast="${podcastTitle}"
+                src="${source}"
+                mediaType="${mediaType}"
+                playLabel="Play"
+                playingLabel="Playing"
+            ></play-episode-button>
+        CODE_SAMPLE;
+    }
+}
+
+// ------------------------------------------------------------------------
+
+
+if (! function_exists('audio_player')) {
+    /**
+     * Returns audio player
+     */
+    function audio_player(string $source, string $mediaType, string $class = ''): string
+    {
+        $language = service('request')
+            ->getLocale();
+
+        return <<<CODE_SAMPLE
+            <vm-player
+                id="castopod-vm-player"
+                theme="light"
+                language="${language}"
+                icons="castopod-icons"
+                class="${class}"
+                style="--vm-player-box-shadow:0; --vm-player-theme: #009486; --vm-control-spacing: 4px;"
+            >
+                <vm-audio preload="none">
+                    <source src="${source}" type="${mediaType}" />
+                </vm-audio>
+                <vm-ui>
+                    <vm-icon-library name="castopod-icons"></vm-icon-library>
+                    <vm-controls full-width>
+                        <vm-playback-control></vm-playback-control>
+                        <vm-volume-control></vm-volume-control>
+                        <vm-current-time></vm-current-time>
+                        <vm-scrubber-control></vm-scrubber-control>
+                        <vm-end-time></vm-end-time>
+                        <vm-settings-control></vm-settings-control>
+                        <vm-default-settings></vm-default-settings>
+                    </vm-controls>
+                </vm-ui>
+            </vm-player>
+        CODE_SAMPLE;
+    }
+}

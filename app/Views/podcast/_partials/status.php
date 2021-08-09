@@ -1,4 +1,4 @@
-<article class="relative z-10 w-full bg-white shadow-md rounded-2xl">
+<article class="relative z-10 w-full bg-white shadow rounded-2xl">
     <header class="flex px-6 py-4">
         <img src="<?= $status->actor
             ->avatar_image_url ?>" alt="<?= $status->display_name ?>" class="w-12 h-12 mr-4 rounded-full" />
@@ -28,7 +28,7 @@
     </header>
     <div class="px-6 mb-4 status-content"><?= $status->message_html ?></div>
     <?php if ($status->episode_id): ?>
-        <?= view('podcast/_partials/episode_card', [
+        <?= view('podcast/_partials/episode_preview_card', [
             'episode' => $status->episode,
         ]) ?>
     <?php elseif ($status->has_preview_card): ?>

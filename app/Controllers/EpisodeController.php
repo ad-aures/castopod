@@ -103,7 +103,7 @@ class EpisodeController extends BaseController
 
     public function embeddablePlayer(string $theme = 'light-transparent'): string
     {
-        header('Content-Security-Policy: frame-ancestors https://* http://*');
+        header('Content-Security-Policy: frame-ancestors http://*:* https://*:*');
 
         // Prevent analytics hit when authenticated
         if (! can_user_interact()) {
@@ -122,12 +122,13 @@ class EpisodeController extends BaseController
         $cacheName = "page_podcast#{$this->podcast->id}_episode#{$this->episode->id}_embeddable_player_{$theme}_{$locale}";
 
         if (! ($cachedView = cache($cacheName))) {
-            $theme = EpisodeModel::$themes[$theme];
+            $themeData = EpisodeModel::$themes[$theme];
 
             $data = [
                 'podcast' => $this->podcast,
                 'episode' => $this->episode,
                 'theme' => $theme,
+                'themeData' => $themeData,
             ];
 
             $secondsToNextUnpublishedEpisode = (new EpisodeModel())->getSecondsToNextUnpublishedEpisode(
@@ -159,9 +160,9 @@ class EpisodeController extends BaseController
             'html' =>
                 '<iframe src="' .
                 $this->episode->embeddable_player_url .
-                '" width="100%" height="200" frameborder="0" scrolling="no"></iframe>',
+                '" width="100%" height="144" frameborder="0" scrolling="no"></iframe>',
             'width' => 600,
-            'height' => 200,
+            'height' => 144,
             'thumbnail_url' => $this->episode->image->large_url,
             'thumbnail_width' => config('Images')
                 ->largeSize,
@@ -189,11 +190,11 @@ class EpisodeController extends BaseController
             htmlentities(
                 '<iframe src="' .
                     $this->episode->embeddable_player_url .
-                    '" width="100%" height="200" frameborder="0" scrolling="no"></iframe>',
+                    '" width="100%" height="144" frameborder="0" scrolling="no"></iframe>',
             ),
         );
         $oembed->addChild('width', '600');
-        $oembed->addChild('height', '200');
+        $oembed->addChild('height', '144');
 
         return $this->response->setXML((string) $oembed);
     }

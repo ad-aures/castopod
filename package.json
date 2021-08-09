@@ -31,6 +31,7 @@
     "@amcharts/amcharts4": "^4.10.20",
     "@github/markdown-toolbar-element": "^1.5.1",
     "@popperjs/core": "^2.9.2",
+    "@vime/core": "^5.0.33",
     "choices.js": "^9.0.1",
     "flatpickr": "^4.6.9",
     "leaflet.markercluster": "^1.5.1",

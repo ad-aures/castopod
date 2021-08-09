@@ -73,10 +73,7 @@
                     </time>
                 </div>
             </a>
-            <audio controls preload="none" class="w-full mt-auto">
-                <source src="<?= $episode->audio_file_url ?>" type="<?= $episode->audio_file_mimetype ?>">
-                Your browser does not support the audio tag.
-            </audio>
+            <?= audio_player($episode->audio_file_url, $episode->audio_file_mimetype, 'mt-auto') ?>
         </div>
     </div>
     <footer class="flex justify-around px-6 py-3">

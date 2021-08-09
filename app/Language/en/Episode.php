@@ -44,9 +44,15 @@ return [
     'go_to_page' => 'Go to page',
     'create' => 'Add an episode',
     'publication_status' => [
-        'published' => 'Published on {0}',
-        'scheduled' => 'Scheduled for {0}',
+        'published' => 'Published',
+        'scheduled' => 'Scheduled',
         'not_published' => 'Not published',
+    ],
+    'list' => [
+        'episode' => 'Episode',
+        'visibility' => 'Visibility',
+        'comments' => 'Comments',
+        'actions' => 'Actions',
     ],
     'form' => [
         'warning' =>

@@ -41,4 +41,8 @@ return [
         'upload_file' => 'Upload a file',
         'remote_url' => 'Remote URL',
     ],
+    'play_episode_button' => [
+        'play' => 'Play',
+        'playing' => 'Playing',
+    ],
 ];

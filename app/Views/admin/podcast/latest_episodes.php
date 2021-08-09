@@ -12,10 +12,18 @@
     <?php if ($episodes): ?>
         <div class="flex p-2 overflow-x-auto gap-x-6">
         <?php foreach ($episodes as $episode): ?>
-            <article class="flex flex-col flex-shrink-0 w-56 overflow-hidden bg-white border shadow rounded-xl">
-                <img
-                src="<?= $episode->image->thumbnail_url ?>"
-                alt="<?= $episode->title ?>" class="object-cover" />
+            <article class="flex flex-col flex-shrink-0 flex-1 w-full min-w-[12rem] overflow-hidden bg-white border shadow rounded-xl">
+                <div class="relative">
+                    <div class=""></div>
+                    <?= publication_pill(
+                        $episode->published_at,
+                        $episode->publication_status,
+                        'absolute top-2 right-2 text-sm'
+                    ); ?>
+                    <img
+                    src="<?= $episode->image->thumbnail_url ?>"
+                    alt="<?= $episode->title ?>" class="object-cover w-full" />
+                </div>
                 <div class="flex items-start justify-between p-2">
                     <div class="flex flex-col min-w-0">
                         <a href="<?= route_to(
@@ -24,29 +32,16 @@
                             $episode->id,
                         ) ?>"
                         class="text-sm font-semibold truncate hover:underline"
-                        ><?= $episode->title ?>
-                        </a>
-                        <div class="text-xs">
-                            <?= episode_numbering(
+                        >
+                        <?= episode_numbering(
                                 $episode->number,
                                 $episode->season_number,
                                 'font-semibold text-gray-600',
                                 true,
-                            ) ?>
-                            <?php if ($episode->published_at): ?>
-                                <span class="mx-1">•</span>
-                                <time
-                                pubdate
-                                datetime="<?= $episode->published_at->format(
-                                    DateTime::ATOM,
-                                ) ?>"
-                                title="<?= $episode->published_at ?>">
-                                <?= lang('Common.mediumDate', [
-                                    $episode->published_at,
-                                ]) ?>
-                                </time>
-                            <?php endif; ?>
-                        </div>
+                        ) ?>
+                        <span class="mx-1">-</span>
+                        <?= $episode->title ?>
+                        </a>
                     </div>
                     <button
                         type="button"

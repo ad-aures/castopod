@@ -28,7 +28,7 @@
     </header>
     <div class="px-6 mb-4 status-content"><?= $status->message_html ?></div>
     <?php if ($status->episode_id): ?>
-        <?= view('podcast/_partials/episode_card', [
+        <?= view('podcast/_partials/episode_preview_card', [
             'episode' => $status->episode,
         ]) ?>
     <?php elseif ($status->has_preview_card): ?>

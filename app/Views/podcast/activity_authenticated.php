@@ -18,11 +18,13 @@
 <meta property="og:image:width" content="<?= config('Images')->largeSize ?>" />
 <meta property="og:image:height" content="<?= config('Images')->largeSize ?>" />
 <meta name="twitter:card" content="summary_large_image" />
+
+<?= service('vite')->asset('styles/index.css', 'css') ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
 
-<nav class="sticky top-0 z-20 flex justify-center pt-2 text-lg bg-pine-50">
+<nav class="sticky z-20 flex justify-center pt-2 text-lg top-12 sm:top-0 bg-pine-50">
 <a href="<?= route_to(
     'podcast-activity',
     $podcast->handle,

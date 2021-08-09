@@ -41,4 +41,8 @@ return [
         'upload_file' => 'Téléversez un fichier',
         'remote_url' => 'URL distante',
     ],
+    'play_episode_button' => [
+        'play' => 'Lire',
+        'playing' => 'En cours',
+    ],
 ];

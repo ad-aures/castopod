@@ -8,20 +8,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
     <?= service('vite')->asset('styles/index.css', 'css') ?>
-
+    
     <title><?= lang('Podcast.follow.title', [
         'actorDisplayName' => $actor->display_name,
-    ]) ?></title>
+        ]) ?></title>
     <meta name="description" content="<?= $actor->summary ?>"/>
     <meta property="og:title" content="<?= lang('Podcast.follow.title', [
         'actorDisplayName' => $actor->display_name,
-    ]) ?>"/>
+        ]) ?>"/>
     <meta property="og:locale" content="<?= service(
         'request',
-    )->getLocale() ?>" />
+        )->getLocale() ?>" />
     <meta property="og:url" content="<?= current_url() ?>" />
     <meta property="og:image" content="<?= $actor->avatar_image_url ?>" />
     <meta property="og:description" content="<?= $actor->summary ?>" />
+
+    <?= service('vite')->asset('styles/index.css', 'css') ?>
 </head>
 
 

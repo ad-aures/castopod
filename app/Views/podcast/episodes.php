@@ -18,10 +18,12 @@
 <meta property="og:image:width" content="<?= config('Images')->largeSize ?>" />
 <meta property="og:image:height" content="<?= config('Images')->largeSize ?>" />
 <meta name="twitter:card" content="summary_large_image" />
+
+<?= service('vite')->asset('styles/index.css', 'css') ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-<nav class="sticky top-0 flex items-center justify-center pt-2 text-lg bg-pine-50">
+<nav class="sticky z-20 flex items-center justify-center pt-2 text-lg top-12 sm:top-0 bg-pine-50">
     <a href="<?= route_to(
         'podcast-activity',
         $podcast->handle,
@@ -79,85 +81,9 @@
             <?php endif; ?>
         </h1>
         <?php foreach ($episodes as $episode): ?>
-            <article class="w-full mb-4 bg-white rounded-lg shadow">
-                <div class="flex px-4 pt-4 pb-2">
-                    <img loading="lazy" src="<?= $episode->image
-                        ->thumbnail_url ?>" alt="<?= $episode->title ?>" class="object-cover w-20 h-20 mr-2 rounded-lg" />
-                    <div class="flex flex-col flex-1">
-                        <a class="text-sm" href="<?= $episode->link ?>">
-                            <h2 class="inline-flex justify-between w-full font-semibold leading-none group">
-                                <span class="mr-1 group-hover:underline"><?= $episode->title ?></span>
-                                <?= episode_numbering(
-                                    $episode->number,
-                                    $episode->season_number,
-                                    'text-xs font-semibold text-gray-600',
-                                    true,
-                                ) ?>
-                            </h2>
-                        </a>
-                        <div class="mb-2 text-xs">
-                            <time itemprop="published" datetime="<?= $episode->published_at->format(
-                                DateTime::ATOM,
-                            ) ?>" title="<?= $episode->published_at ?>">
-                                <?= lang('Common.mediumDate', [
-                                    $episode->published_at,
-                                ]) ?>
-                            </time>
-                            <span class="mx-1">•</span>
-                            <time datetime="PT<?= $episode->audio_file_duration ?>S">
-                                <?= format_duration(
-                                    $episode->audio_file_duration,
-                                ) ?>
-                            </time>
-                        </div>
-                        <audio controls preload="none" class="w-full mt-auto">
-                            <source src="<?= $episode->audio_file_web_url ?>" type="<?= $episode->audio_file_mimetype ?>">
-                            Your browser does not support the audio tag.
-                        </audio>
-                    </div>
-                </div>
-                <div class="px-4 py-2 space-x-4 text-sm">
-                    <?= anchor(
-                        route_to('episode', $podcast->handle, $episode->slug),
-                        icon('chat', 'text-xl mr-1 text-gray-400') .
-                            $episode->statuses_total,
-                        [
-                            'class' =>
-                                'inline-flex items-center hover:underline',
-                            'title' => lang('Episode.total_statuses', [
-                                'numberOfTotalStatuses' => $episode->statuses_total,
-                            ]),
-                        ],
-                    ) ?>
-                    <?= anchor(
-                        route_to('episode', $podcast->handle, $episode->slug),
-                        icon('repeat', 'text-xl mr-1 text-gray-400') .
-                            $episode->reblogs_total,
-                        [
-                            'class' =>
-                                'inline-flex items-center hover:underline',
-                            'title' => lang('Episode.total_reblogs', [
-                                'numberOfTotalReblogs' =>
-                                    $episode->reblogs_total,
-                            ]),
-                        ],
-                    ) ?>
-
-                    <?= anchor(
-                        route_to('episode', $podcast->handle, $episode->slug),
-                        icon('heart', 'text-xl mr-1 text-gray-400') .
-                            $episode->favourites_total,
-                        [
-                            'class' =>
-                                'inline-flex items-center hover:underline',
-                            'title' => lang('Episode.total_favourites', [
-                                'numberOfTotalFavourites' =>
-                                    $episode->favourites_total,
-                            ]),
-                        ],
-                    ) ?>
-                </div>
-            </article>
+            <?= view('podcast/_partials/episode_card', [
+                'episode' => $episode,
+            ]) ?>
         <?php endforeach; ?>
     <?php else: ?>
         <h1 class="px-4 mb-2 text-xl text-center"><?= lang(

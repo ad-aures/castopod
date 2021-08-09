@@ -24,7 +24,7 @@
     <?php endforeach; ?>
 </div>
 
-<iframe name="embeddable_player" id="embeddable_player" class="w-full h-48 max-w-xl" frameborder="0" scrolling="no" style="width: 100%;  overflow: hidden;" src="<?= $episode->embeddable_player_url ?>"></iframe>
+<iframe name="embeddable_player" id="embeddable_player" class="w-full max-w-xl h-36" frameborder="0" scrolling="no" style="width: 100%;  overflow: hidden;" src="<?= $episode->embeddable_player_url ?>"></iframe>
 
 <div class="flex items-center w-full mt-8">
     <?= form_textarea(

@@ -65,6 +65,7 @@
         ],
     ],
     $podcast->contributors,
+    '',
     $podcast,
 ) ?>
 

@@ -43,7 +43,7 @@ class EpisodeModel extends Model
         ],
         'dark' => [
             'style' => 'background-color: #001f1a;',
-            'background' => '#001f1a',
+            'background' => '#313131',
             'text' => '#fff',
             'inverted' => '#000',
         ],

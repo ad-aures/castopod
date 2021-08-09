@@ -44,9 +44,15 @@ return [
     'go_to_page' => 'Voir',
     'create' => 'Ajouter un épisode',
     'publication_status' => [
-        'published' => 'Publié le {0}',
-        'scheduled' => 'Planifié pour le {0}',
+        'published' => 'Publié',
+        'scheduled' => 'Planifié',
         'not_published' => 'Non publié',
+    ],
+    'list' => [
+        'episode' => 'Épisode',
+        'visibility' => 'Visibilité',
+        'comments' => 'Commentaires',
+        'actions' => 'Actions',
     ],
     'form' => [
         'warning' =>

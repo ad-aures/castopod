@@ -29,15 +29,14 @@
    
 <div class="flex flex-wrap">
     <div class="w-full max-w-sm mb-6 md:mr-4">
-        <img
+        <div class="mb-6">
+            <img
             src="<?= $episode->image->medium_url ?>"
             alt="Episode cover"
             class="object-cover w-full"
-        />
-        <audio controls preload="auto" class="w-full mb-6">
-        <source src="<?= $episode->audio_file_url ?>" type="<?= $episode->audio_file_mimetype ?>">
-        Your browser does not support the audio tag.
-        </audio>
+            />
+            <?= audio_player($episode->audio_file_url, $episode->audio_file_mimetype) ?>
+        </div>
 
         <div class="flex justify-around">
         <?= button(
@@ -113,7 +112,7 @@
             [
                 'header' => lang('Episode.soundbites_form.duration'),
                 'cell' => function ($soundbite): string {
-                    return format_duration($soundbite->duration);
+                    return $soundbite->duration . 's';
                 },
             ],
             [

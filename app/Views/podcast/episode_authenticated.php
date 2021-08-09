@@ -113,12 +113,9 @@
                 </div>
                 <?= location_link($episode->location, 'text-sm mb-4') ?>
                 <?= person_list($episode->persons) ?>
+                <?= play_episode_button($episode->id, $episode->image->thumbnail_url, $episode->title, $podcast->title, $episode->audio_file_web_url, $episode->audio_file_mimetype) ?>
             </div>
         </div>
-        <audio controls preload="none" class="w-full mt-auto">
-            <source src="<?= $episode->audio_file_web_url ?>" type="<?= $episode->audio_file_mimetype ?>">
-            Your browser does not support the audio tag.
-        </audio>
     </header>
 
     <div class="tabset">
