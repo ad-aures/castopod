@@ -25,7 +25,6 @@
     }
   },
   "extensions": [
-    "bierner.lit-html",
     "bmewburn.vscode-intelephense-client",
     "bradlc.vscode-tailwindcss",
     "breezelin.phpstan",
@@ -37,6 +36,7 @@
     "kasik96.latte",
     "mikestead.dotenv",
     "naumovs.color-highlight",
+    "runem.lit-plugin",
     "streetsidesoftware.code-spell-checker",
     "stylelint.vscode-stylelint",
     "wayou.vscode-todo-highlight"

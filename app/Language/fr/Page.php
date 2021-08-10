@@ -18,7 +18,7 @@ return [
     'delete' => 'Supprimer la page',
     'form' => [
         'title' => 'Titre',
-        'slug' => 'Identifiant',
+        'permalink' => 'Lien permanent',
         'content' => 'Contenu',
         'submit_create' => 'Créer la page',
         'submit_edit' => 'Enregistrer',

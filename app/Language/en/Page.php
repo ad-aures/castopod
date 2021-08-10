@@ -18,7 +18,7 @@ return [
     'delete' => 'Delete page',
     'form' => [
         'title' => 'Title',
-        'slug' => 'Slug',
+        'permalink' => 'Permalink',
         'content' => 'Content',
         'submit_create' => 'Create page',
         'submit_edit' => 'Save',

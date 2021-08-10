@@ -67,8 +67,7 @@ return [
         'title' => 'Titre',
         'title_hint' =>
             'Doit contenir un titre d’épisode clair et concis. Ne précisez ici aucun numéro de saison ou d’épisode.',
-        'slug' => 'Identifiant',
-        'slug_hint' => 'Utilisé pour générer l’adresse de l’épisode.',
+        'permalink' => 'Lien permanent',
         'season_number' => 'Saison',
         'episode_number' => 'Épisode',
         'type' => [
@@ -144,7 +143,7 @@ return [
         'submit' => 'Publier',
         'submit_edit' => 'Modifier la publication',
         'cancel_publication' => 'Annuler la publication',
-        'message_warning' => 'Vous n’avez pas saisi de message pour l’annonce de votre épisode !',
+        'message_warning' => 'Vous n’avez pas saisi de message pour l’annonce de votre épisode !',
         'message_warning_hint' => 'Ajouter un message augmente l’engagement social, menant à une meilleure visibilité pour votre épisode.',
         'message_warning_submit' => 'Publish quand même',
     ],

@@ -67,8 +67,7 @@ return [
         'title' => 'Title',
         'title_hint' =>
             'Should contain a clear and concise episode name. Do not specify the episode or season numbers here.',
-        'slug' => 'Slug',
-        'slug_hint' => 'Used for generating the episode URL.',
+        'permalink' => 'Permalink',
         'season_number' => 'Season',
         'episode_number' => 'Episode',
         'type' => [

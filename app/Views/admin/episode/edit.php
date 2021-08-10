@@ -84,19 +84,22 @@
 ]) ?>
 
 <?= form_label(
-    lang('Episode.form.slug'),
+    lang('Episode.form.permalink'),
     'slug',
     [],
-    lang('Episode.form.slug_hint'),
 ) ?>
-<?= form_input([
+<permalink-edit class="inline-flex items-center mb-4 text-xs" edit-label="<?= lang('Common.edit') ?>" copy-label="<?= lang('Common.copy') ?>" copied-label="<?= lang('Common.copied') ?>">
+    <span slot="domain"><?= base_url('/@'. $podcast->handle . '/episodes' ) . '/' ?></span>
+    <?= form_input([
     'id' => 'slug',
     'name' => 'slug',
-    'class' => 'form-input mb-4',
+    'class' => 'form-input flex-1 w-0 text-xs',
     'value' => old('slug', $episode->slug),
     'required' => 'required',
     'data-slugify' => 'slug',
-]) ?>
+    'slot' => 'slug-input'
+    ]) ?>
+</permalink-edit>
 
 <div class="flex flex-col mb-4 gap-x-2 gap-y-4 md:flex-row">
     <div class="flex flex-col flex-1">

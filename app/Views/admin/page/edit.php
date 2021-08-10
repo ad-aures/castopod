@@ -24,17 +24,25 @@
     'value' => old('title', $page->title),
     'required' => 'required',
     'data-slugify' => 'title',
+    'slot' => 'slug-input',
 ]) ?>
 
-<?= form_label(lang('Page.form.slug'), 'slug', ['class' => 'max-w-sm']) ?>
+<?= form_label(
+    lang('Page.form.permalink'),
+    'slug',
+    [],
+) ?>
+<permalink-edit class="inline-flex items-center max-w-sm mb-4 text-xs" edit-label="<?= lang('Common.edit') ?>" copy-label="<?= lang('Common.copy') ?>" copied-label="<?= lang('Common.copied') ?>">
+<span slot="domain" class="flex-shrink-0"><?= base_url('pages') . '/' ?></span>
 <?= form_input([
     'id' => 'slug',
     'name' => 'slug',
-    'class' => 'form-input mb-4 max-w-sm',
+    'class' => 'form-input flex-1 w-0 text-xs',
     'value' => old('slug', $page->slug),
     'required' => 'required',
     'data-slugify' => 'slug',
 ]) ?>
+</permalink-edit>
 
 <div class="mb-4">
     <?= form_label(lang('Page.form.content'), 'content') ?>

@@ -29,6 +29,7 @@ const Slugify = (): void => {
   if (title && slug) {
     title.addEventListener("input", () => {
       slug.value = slugify(title.value);
+      slug.dispatchEvent(new Event("change"));
     });
   }
 };

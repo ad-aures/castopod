@@ -7,6 +7,7 @@ import Dropdown from "./modules/Dropdown";
 import "./modules/markdown-preview";
 import "./modules/markdown-write-preview";
 import MultiSelect from "./modules/MultiSelect";
+import "./modules/permalink-edit";
 import PublishMessageWarning from "./modules/PublishMessageWarning";
 import Select from "./modules/Select";
 import SidebarToggler from "./modules/SidebarToggler";
