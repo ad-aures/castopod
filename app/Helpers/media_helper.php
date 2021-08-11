@@ -17,10 +17,8 @@ use Config\Services;
 if (! function_exists('save_media')) {
     /**
      * Saves a file to the corresponding podcast folder in `public/media`
-     *
-     * @param File|UploadedFile $file
      */
-    function save_media(File $file, string $folder = '', string $filename = ''): string
+    function save_media(File|UploadedFile $file, string $folder = '', string $filename = ''): string
     {
         if (($extension = $file->getExtension()) !== '') {
             $filename = $filename . '.' . $extension;

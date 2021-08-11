@@ -1,7 +1,6 @@
 <?php
 
 use CodeIgniter\CLI\CLI;
-
 // The main Exception
 CLI::newLine();
 CLI::write('[' . $exception::class . ']', 'light_gray', 'red');
@@ -16,7 +15,6 @@ CLI::write(
         ),
 );
 CLI::newLine();
-
 // The backtrace
 if (defined('SHOW_DEBUG_BACKTRACE') && SHOW_DEBUG_BACKTRACE) {
     $backtraces = $exception->getTrace();
@@ -56,16 +54,12 @@ if (defined('SHOW_DEBUG_BACKTRACE') && SHOW_DEBUG_BACKTRACE) {
         $args = implode(
             ', ',
             array_map(function ($value) {
-                switch (true) {
-                    case is_object($value):
-                        return 'Object(' . $value::class . ')';
-                    case is_array($value):
-                        return count($value) > 0 ? '[...]' : '[]';
-                    case is_null($value):
-                        return 'null'; // return the lowercased version
-                    default:
-                        return var_export($value, true);
-                }
+                return match (true) {
+                    is_object($value) => 'Object(' . $value::class . ')',
+                    is_array($value) => $value !== [] ? '[...]' : '[]',
+                    is_null($value) => 'null',
+                    default => var_export($value, true),
+                };
             }, array_values($error['args'] ?? [])),
         );
 

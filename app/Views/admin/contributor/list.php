@@ -28,7 +28,7 @@
         ],
         [
             'header' => lang('Contributor.list.role'),
-            'cell' => function ($contributor) {
+            'cell' => function ($contributor): string {
                 return lang('Contributor.roles.' . $contributor->podcast_role);
             },
         ],

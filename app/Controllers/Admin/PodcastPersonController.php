@@ -22,7 +22,7 @@ class PodcastPersonController extends BaseController
 
     public function _remap(string $method, string ...$params): mixed
     {
-        if (count($params) === 0) {
+        if ($params === []) {
             throw PageNotFoundException::forPageNotFound();
         }
 

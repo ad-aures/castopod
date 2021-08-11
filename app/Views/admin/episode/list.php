@@ -18,10 +18,12 @@
 
 <?= $this->section('content') ?>
 
-<p class="mb-4 text-sm italic text-gray-700"><?= lang('Common.pageInfo', [
-                                                    'currentPage' => $pager->getDetails()['currentPage'],
-                                                    'pageCount' => $pager->getDetails()['pageCount'],
-                                                ]) ?></p>
+<p class="mb-4 text-sm italic text-gray-700">
+    <?= lang('Common.pageInfo', [
+        'currentPage' => $pager->getDetails()['currentPage'],
+        'pageCount' => $pager->getDetails()['pageCount'],
+    ]) ?>
+</p>
 
 <?= data_table(
     [
@@ -59,7 +61,7 @@
         ],
         [
             'header' => lang('Episode.list.visibility'),
-            'cell' => function ($episode) {
+            'cell' => function ($episode): string {
                 return publication_pill(
                     $episode->published_at,
                     $episode->publication_status,
@@ -68,7 +70,7 @@
         ],
         [
             'header' => lang('Episode.list.comments'),
-            'cell' => function ($episode) {
+            'cell' => function ($episode): int {
                 return count($episode->comments);
             },
         ],

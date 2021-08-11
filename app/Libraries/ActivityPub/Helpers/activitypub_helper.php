@@ -319,121 +319,113 @@ if (! function_exists('linkify')) {
 
         // Extract text links for each protocol
         foreach ($protocols as $protocol) {
-            /** @phpstan-ignore-next-line */
-            switch ($protocol) {
-                case 'http':
-                case 'https':
-                    $text = preg_replace_callback(
-                        '~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i',
-                        function (array $match) use ($protocol, &$links) {
-                            if ($match[1]) {
-                                $protocol = $match[1];
-                            }
-                            $link = $match[2] ?: $match[3];
+            $text = match ($protocol) {
+                'http', 'https' => preg_replace_callback(
+                    '~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i',
+                    function (array $match) use ($protocol, &$links) {
+                        if ($match[1]) {
+                            $protocol = $match[1];
+                        }
+                        $link = $match[2] ?: $match[3];
 
-                            helper('text');
+                        helper('text');
 
-                            $link = preg_replace('~^www\.(.+\.)~i', '$1', $link);
+                        $link = preg_replace('~^www\.(.+\.)~i', '$1', $link);
 
-                            return '<' .
-                                array_push(
-                                    $links,
-                                    anchor(
-                                        "{$protocol}://{$link}",
-                                        ellipsize(rtrim($link, '/'), 30),
-                                        [
+                        return '<' .
+                            array_push(
+                                $links,
+                                anchor(
+                                    "{$protocol}://{$link}",
+                                    ellipsize(rtrim($link, '/'), 30),
+                                    [
+                                        'target' => '_blank',
+                                        'rel' => 'noopener noreferrer',
+                                    ],
+                                ),
+                            ) .
+                            '>';
+                    },
+                    $text,
+                ),
+                'handle' => preg_replace_callback(
+                    '~(?<!\w)@(?<username>\w++)(?:@(?<domain>(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]))?~',
+                    function ($match) use (&$links) {
+                        // check if host is set and look for actor in database
+                        if (isset($match['host'])) {
+                            if (
+                                $actor = model(
+                                    'ActorModel',
+                                )->getActorByUsername($match['username'], $match['domain'])
+                            ) {
+                                // TODO: check that host is local to remove target blank?
+                                return '<' .
+                                    array_push(
+                                        $links,
+                                        anchor($actor->uri, $match[0], [
                                             'target' => '_blank',
                                             'rel' => 'noopener noreferrer',
-                                        ],
-                                    ),
-                                ) .
-                                '>';
-                        },
-                        $text,
-                    );
-                    break;
-                case 'handle':
-                    $text = preg_replace_callback(
-                        '~(?<!\w)@(?<username>\w++)(?:@(?<domain>(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]))?~',
-                        function ($match) use (&$links) {
-                            // check if host is set and look for actor in database
-                            if (isset($match['host'])) {
-                                if (
-                                    $actor = model(
-                                        'ActorModel',
-                                    )->getActorByUsername($match['username'], $match['domain'])
-                                ) {
-                                    // TODO: check that host is local to remove target blank?
-                                    return '<' .
-                                        array_push(
-                                            $links,
-                                            anchor($actor->uri, $match[0], [
-                                                'target' => '_blank',
-                                                'rel' => 'noopener noreferrer',
-                                            ]),
-                                        ) .
-                                        '>';
-                                }
+                                        ]),
+                                    ) .
+                                    '>';
+                            }
 
-                                try {
-                                    $actor = get_or_create_actor($match['username'], $match['domain']);
-                                    return '<' .
-                                        array_push(
-                                            $links,
-                                            anchor($actor->uri, $match[0], [
-                                                'target' => '_blank',
-                                                'rel' => 'noopener noreferrer',
-                                            ]),
-                                        ) .
-                                        '>';
-                                } catch (\CodeIgniter\HTTP\Exceptions\HTTPException) {
-                                    // Couldn't retrieve actor, do not wrap the text in link
-                                    return '<' .
-                                        array_push($links, $match[0]) .
-                                        '>';
-                                }
-                            } else {
-                                if (
-                                    $actor = model('ActorModel')
-                                        ->getActorByUsername($match['username'])
-                                ) {
-                                    return '<' .
-                                        array_push($links, anchor($actor->uri, $match[0])) .
-                                        '>';
-                                }
-
+                            try {
+                                $actor = get_or_create_actor($match['username'], $match['domain']);
+                                return '<' .
+                                    array_push(
+                                        $links,
+                                        anchor($actor->uri, $match[0], [
+                                            'target' => '_blank',
+                                            'rel' => 'noopener noreferrer',
+                                        ]),
+                                    ) .
+                                    '>';
+                            } catch (HTTPException) {
+                                // Couldn't retrieve actor, do not wrap the text in link
                                 return '<' .
                                     array_push($links, $match[0]) .
                                     '>';
                             }
-                        },
-                        $text,
-                    );
-                    break;
-                default:
-                    $text = preg_replace_callback(
-                        '~' .
-                            preg_quote($protocol, '~') .
-                            '://([^\s<]+?)(?<![\.,:])~i',
-                        function (array $match) use ($protocol, &$links) {
+                        } else {
+                            if (
+                                $actor = model('ActorModel')
+                                    ->getActorByUsername($match['username'])
+                            ) {
+                                return '<' .
+                                    array_push($links, anchor($actor->uri, $match[0])) .
+                                    '>';
+                            }
+
                             return '<' .
-                                array_push(
-                                    $links,
-                                    anchor(
-                                        "{$protocol}://{$match[1]}",
-                                        $match[1],
-                                        [
-                                            'target' => '_blank',
-                                            'rel' => 'noopener noreferrer',
-                                        ],
-                                    ),
-                                ) .
+                                array_push($links, $match[0]) .
                                 '>';
-                        },
-                        $text,
-                    );
-                    break;
-            }
+                        }
+                    },
+                    $text,
+                ),
+                default => preg_replace_callback(
+                    '~' .
+                        preg_quote($protocol, '~') .
+                        '://([^\s<]+?)(?<![\.,:])~i',
+                    function (array $match) use ($protocol, &$links) {
+                        return '<' .
+                            array_push(
+                                $links,
+                                anchor(
+                                    "{$protocol}://{$match[1]}",
+                                    $match[1],
+                                    [
+                                        'target' => '_blank',
+                                        'rel' => 'noopener noreferrer',
+                                    ],
+                                ),
+                            ) .
+                            '>';
+                    },
+                    $text,
+                ),
+            };
         }
 
         // Insert all links

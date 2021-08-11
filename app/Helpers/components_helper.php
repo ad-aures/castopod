@@ -7,7 +7,6 @@ declare(strict_types=1);
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
  */
-
 use App\Entities\Location;
 use App\Entities\Person;
 use CodeIgniter\I18n\Time;
@@ -111,9 +110,7 @@ if (! function_exists('button')) {
         CODE_SAMPLE;
     }
 }
-
 // ------------------------------------------------------------------------
-
 if (! function_exists('icon_button')) {
     /**
      * Icon Button component
@@ -147,9 +144,7 @@ if (! function_exists('icon_button')) {
         return button(icon($icon), $uri, $options, $attributes);
     }
 }
-
 // ------------------------------------------------------------------------
-
 if (! function_exists('hint_tooltip')) {
     /**
      * Hint component
@@ -172,9 +167,7 @@ if (! function_exists('hint_tooltip')) {
         return $tooltip . '">' . icon('question') . '</span>';
     }
 }
-
 // ------------------------------------------------------------------------
-
 if (! function_exists('data_table')) {
     /**
      * Data table component
@@ -230,9 +223,7 @@ if (! function_exists('data_table')) {
             '</div>';
     }
 }
-
 // ------------------------------------------------------------------------
-
 if (! function_exists('publication_pill')) {
     /**
      * Publication pill component
@@ -259,9 +250,7 @@ if (! function_exists('publication_pill')) {
             '</span>';
     }
 }
-
 // ------------------------------------------------------------------------
-
 if (! function_exists('publication_button')) {
     /**
      * Publication button component
@@ -304,9 +293,7 @@ if (! function_exists('publication_button')) {
         ]);
     }
 }
-
 // ------------------------------------------------------------------------
-
 if (! function_exists('episode_numbering')) {
     /**
      * Returns relevant translated episode numbering.
@@ -358,7 +345,6 @@ if (! function_exists('episode_numbering')) {
             '</span>';
     }
 }
-
 if (! function_exists('location_link')) {
     /**
      * Returns link to display from location info
@@ -382,9 +368,7 @@ if (! function_exists('location_link')) {
         );
     }
 }
-
 // ------------------------------------------------------------------------
-
 if (! function_exists('person_list')) {
     /**
      * Returns list of persons images
@@ -437,11 +421,7 @@ if (! function_exists('person_list')) {
         return $personList . '</div>';
     }
 }
-
-
-
 // ------------------------------------------------------------------------
-
 if (! function_exists('play_episode_button')) {
     /**
      * Returns play episode button
@@ -460,23 +440,20 @@ if (! function_exists('play_episode_button')) {
 
         return <<<CODE_SAMPLE
             <play-episode-button
-                class="${class}"
-                id="${episodeId}"
-                imageSrc=${episodeThumbnail}
-                title="${episodeTitle}"
-                podcast="${podcastTitle}"
-                src="${source}"
-                mediaType="${mediaType}"
-                playLabel="${playLabel}"
-                playingLabel="${playingLabel}"
+                class="{$class}"
+                id="{$episodeId}"
+                imageSrc={$episodeThumbnail}
+                title="{$episodeTitle}"
+                podcast="{$podcastTitle}"
+                src="{$source}"
+                mediaType="{$mediaType}"
+                playLabel="{$playLabel}"
+                playingLabel="{$playingLabel}"
             ></play-episode-button>
         CODE_SAMPLE;
     }
 }
-
 // ------------------------------------------------------------------------
-
-
 if (! function_exists('audio_player')) {
     /**
      * Returns audio player
@@ -490,13 +467,13 @@ if (! function_exists('audio_player')) {
             <vm-player
                 id="castopod-vm-player"
                 theme="light"
-                language="${language}"
+                language="{$language}"
                 icons="castopod-icons"
-                class="${class}"
+                class="{$class}"
                 style="--vm-player-box-shadow:0; --vm-player-theme: #009486; --vm-control-spacing: 4px;"
             >
                 <vm-audio preload="none">
-                    <source src="${source}" type="${mediaType}" />
+                    <source src="{$source}" type="{$mediaType}" />
                 </vm-audio>
                 <vm-ui>
                     <vm-icon-library name="castopod-icons"></vm-icon-library>
@@ -514,9 +491,7 @@ if (! function_exists('audio_player')) {
         CODE_SAMPLE;
     }
 }
-
 // ------------------------------------------------------------------------
-
 if (! function_exists('relative_time')) {
     function relative_time(Time $time, string $class = ''): string
     {
@@ -524,18 +499,16 @@ if (! function_exists('relative_time')) {
         $datetime = $time->toDateTimeString();
 
         return <<<CODE_SAMPLE
-            <time-ago class="${class}" datetime="${datetime}">
+            <time-ago class="{$class}" datetime="{$datetime}">
                 <time
                     itemprop="published"
-                    datetime="${datetime}"
-                    title="${time}">${translatedDate}</time>
+                    datetime="{$datetime}"
+                    title="{$time}">{$translatedDate}</time>
             </time-ago>
         CODE_SAMPLE;
     }
 }
-
 // ------------------------------------------------------------------------
-
 if (! function_exists('xml_editor')) {
     /**
      * XML Editor field
@@ -554,9 +527,8 @@ if (! function_exists('xml_editor')) {
         $textarea = form_textarea($data, $value, $extra);
 
         return <<<CODE_SAMPLE
-            <xml-editor>${textarea}</time-ago>
+            <xml-editor>{$textarea}</time-ago>
         CODE_SAMPLE;
     }
 }
-
 // ------------------------------------------------------------------------

@@ -49,7 +49,7 @@ class Status extends ActivityPubStatus
             throw new RuntimeException('Status must have an episode_id before getting episode.');
         }
 
-        if ($this->episode === null) {
+        if (! $this->episode instanceof Episode) {
             $this->episode = (new EpisodeModel())->getEpisodeById($this->episode_id);
         }
 

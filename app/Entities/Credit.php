@@ -59,7 +59,7 @@ class Credit extends Entity
             throw new RuntimeException('Credit must have person_id before getting person.');
         }
 
-        if ($this->person === null) {
+        if (! $this->person instanceof Person) {
             $this->person = (new PersonModel())->getPersonById($this->person_id);
         }
 
@@ -72,7 +72,7 @@ class Credit extends Entity
             throw new RuntimeException('Credit must have podcast_id before getting podcast.');
         }
 
-        if ($this->podcast === null) {
+        if (! $this->podcast instanceof Podcast) {
             $this->podcast = (new PodcastModel())->getPodcastById($this->podcast_id);
         }
 
@@ -85,7 +85,7 @@ class Credit extends Entity
             throw new RuntimeException('Credit must have episode_id before getting episode.');
         }
 
-        if ($this->episode === null) {
+        if (! $this->episode instanceof Episode) {
             $this->episode = (new EpisodeModel())->getPublishedEpisodeById($this->podcast_id, $this->episode_id);
         }
 

@@ -182,10 +182,12 @@ if (! function_exists('get_rss_feed')) {
         $channel->addChild('type', $podcast->type, $itunesNamespace);
         $podcast->copyright &&
             $channel->addChild('copyright', $podcast->copyright);
-        $podcast->is_blocked &&
+        if ($podcast->is_blocked) {
             $channel->addChild('block', 'Yes', $itunesNamespace);
-        $podcast->is_completed &&
+        }
+        if ($podcast->is_completed) {
             $channel->addChild('complete', 'Yes', $itunesNamespace);
+        }
 
         $image = $channel->addChild('image');
         $image->addChild('url', $podcast->image->feed_url);
@@ -306,8 +308,9 @@ if (! function_exists('get_rss_feed')) {
                 }
             }
 
-            $episode->is_blocked &&
+            if ($episode->is_blocked) {
                 $item->addChild('block', 'Yes', $itunesNamespace);
+            }
 
             if ($episode->custom_rss !== null) {
                 array_to_rss([

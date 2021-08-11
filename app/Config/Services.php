@@ -102,7 +102,7 @@ class Services extends BaseService
     }
 
     /**
-     * @return mixed
+     * @return mixed|$this
      */
     public static function authorization(
         Model $groupModel = null,
@@ -122,12 +122,14 @@ class Services extends BaseService
             $permissionModel = new PermissionModel();
         }
 
+        /* @phpstan-ignore-next-line */
         $instance = new FlatAuthorization($groupModel, $permissionModel);
 
         if ($userModel === null) {
             $userModel = new UserModel();
         }
 
+        /* @phpstan-ignore-next-line */
         return $instance->setUserModel($userModel);
     }
 

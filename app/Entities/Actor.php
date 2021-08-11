@@ -35,7 +35,7 @@ class Actor extends ActivityPubActor
             throw new RuntimeException('Podcast id must be set before getting associated podcast.');
         }
 
-        if ($this->podcast === null) {
+        if (! $this->podcast instanceof Podcast) {
             $this->podcast = (new PodcastModel())->getPodcastByActorId($this->id);
         }
 

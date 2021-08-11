@@ -255,7 +255,7 @@ class PodcastModel extends Model
                 ->getResultObject();
         }
 
-        return count($userPodcast) > 0
+        return $userPodcast !== []
             ? (int) $userPodcast[0]->group_id
             : false;
     }

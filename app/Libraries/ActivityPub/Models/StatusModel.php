@@ -164,7 +164,7 @@ class StatusModel extends UuidModel
             ->get()
             ->getResultArray();
 
-        return count($result) !== 0
+        return $result !== []
             ? (int) $result[0]['timestamp_diff']
             : false;
     }

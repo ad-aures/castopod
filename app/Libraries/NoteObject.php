@@ -18,7 +18,7 @@ class NoteObject extends ActivityPubNoteObject
     /**
      * @param Status $status
      */
-    public function __construct($status)
+    public function __construct(\ActivityPub\Entities\Status $status)
     {
         parent::__construct($status);
 

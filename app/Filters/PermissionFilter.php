@@ -50,7 +50,7 @@ class PermissionFilter implements FilterInterface
             if (
                 (str_starts_with($permission, 'podcast-') ||
                     str_starts_with($permission, 'podcast_episodes-')) &&
-                count($routerParams) > 0
+                $routerParams !== []
             ) {
                 if (
                     ($groupId = (new PodcastModel())->getContributorGroupId(

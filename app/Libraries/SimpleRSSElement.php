@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace App\Libraries;
 
+use DOMDocument;
 use SimpleXMLElement;
 
 class SimpleRSSElement extends SimpleXMLElement
@@ -60,7 +61,7 @@ class SimpleRSSElement extends SimpleXMLElement
             if ($node !== null) {
                 $no = $node->ownerDocument;
                 $value = $escape ? esc($value ?? '') : $value ?? '';
-                if ($no === null) {
+                if (! $no instanceof DOMDocument) {
                     return $newChild;
                 }
                 if (is_array($value)) {
@@ -68,7 +69,6 @@ class SimpleRSSElement extends SimpleXMLElement
                 }
                 /** @noRector RecastingRemovalRector */
                 $node->appendChild($no->createTextNode((string) $value));
-                return $newChild;
             }
         }
 

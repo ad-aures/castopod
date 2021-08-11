@@ -261,7 +261,7 @@ class Podcast extends Entity
             throw new RuntimeException('Podcast must be created before getting category.');
         }
 
-        if ($this->category === null) {
+        if (! $this->category instanceof Category) {
             $this->category = (new CategoryModel())->getCategoryById($this->category_id);
         }
 
