@@ -16,6 +16,7 @@ import Soundbites from "./modules/Soundbites";
 import ThemePicker from "./modules/ThemePicker";
 import Time from "./modules/Time";
 import Tooltip from "./modules/Tooltip";
+import "./modules/xml-editor";
 
 Dropdown();
 Tooltip();

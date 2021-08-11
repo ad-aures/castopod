@@ -340,7 +340,7 @@
     lang('Podcast.form.custom_rss_hint'),
     true,
 ) ?>
-<?= form_textarea([
+<?= xml_editor([
     'id' => 'custom_rss',
     'name' => 'custom_rss',
     'class' => 'form-textarea',

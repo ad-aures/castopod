@@ -585,7 +585,8 @@ class Episode extends Entity
      */
     public function setCustomRssString(?string $customRssString = null): static
     {
-        if ($customRssString === null) {
+        if ($customRssString === '') {
+            $this->attributes['custom_rss'] = null;
             return $this;
         }
 

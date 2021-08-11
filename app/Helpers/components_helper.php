@@ -467,8 +467,8 @@ if (! function_exists('play_episode_button')) {
                 podcast="${podcastTitle}"
                 src="${source}"
                 mediaType="${mediaType}"
-                playLabel="Play"
-                playingLabel="Playing"
+                playLabel="${playLabel}"
+                playingLabel="${playingLabel}"
             ></play-episode-button>
         CODE_SAMPLE;
     }
@@ -530,6 +530,31 @@ if (! function_exists('relative_time')) {
                     datetime="${datetime}"
                     title="${time}">${translatedDate}</time>
             </time-ago>
+        CODE_SAMPLE;
+    }
+}
+
+// ------------------------------------------------------------------------
+
+if (! function_exists('xml_editor')) {
+    /**
+     * XML Editor field
+     *
+     * @param array<string, mixed> $customData
+     * @param array<string, mixed> $extra
+     */
+    function xml_editor(array $customData = [], string $value = '', array $extra = []): string
+    {
+        $defaultData = [
+            'slot' => 'textarea',
+            'rows' => 5,
+        ];
+        $data = array_merge($defaultData, $customData);
+
+        $textarea = form_textarea($data, $value, $extra);
+
+        return <<<CODE_SAMPLE
+            <xml-editor>${textarea}</time-ago>
         CODE_SAMPLE;
     }
 }

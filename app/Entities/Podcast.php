@@ -487,6 +487,7 @@ class Podcast extends Entity
     public function setCustomRssString(string $customRssString): static
     {
         if ($customRssString === '') {
+            $this->attributes['custom_rss'] = null;
             return $this;
         }
 

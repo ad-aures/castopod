@@ -226,6 +226,7 @@
         [
             'id' => 'description_footer',
             'name' => 'description_footer',
+            'rows' => 6
         ],
         old(
             'description_footer',
@@ -401,7 +402,7 @@
     lang('Episode.form.custom_rss_hint'),
     true,
 ) ?>
-<?= form_textarea([
+<?= xml_editor([
     'id' => 'custom_rss',
     'name' => 'custom_rss',
     'class' => 'form-textarea',
