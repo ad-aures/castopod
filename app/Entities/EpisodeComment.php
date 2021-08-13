@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace App\Entities;
 
+use App\Models\EpisodeCommentModel;
 use App\Models\EpisodeModel;
 use CodeIgniter\I18n\Time;
 use Michalsn\Uuid\UuidEntity;
@@ -23,22 +24,28 @@ use RuntimeException;
  * @property int $actor_id
  * @property Actor|null $actor
  * @property string $in_reply_to_id
- * @property Comment|null $reply_to_comment
+ * @property EpisodeComment|null $reply_to_comment
  * @property string $message
  * @property string $message_html
  * @property int $likes_count
- * @property int $dislikes_count
  * @property int $replies_count
  * @property Time $created_at
  * @property int $created_by
+ *
+ * @property EpisodeComment[] $replies
  */
-class Comment extends UuidEntity
+class EpisodeComment extends UuidEntity
 {
     protected ?Episode $episode = null;
 
     protected ?Actor $actor = null;
 
-    protected ?Comment $reply_to_comment = null;
+    protected ?EpisodeComment $reply_to_comment = null;
+
+    /**
+     * @var EpisodeComment[]|null
+     */
+    protected ?array $replies = null;
 
     /**
      * @var string[]
@@ -57,7 +64,6 @@ class Comment extends UuidEntity
         'message' => 'string',
         'message_html' => 'string',
         'likes_count' => 'integer',
-        'dislikes_count' => 'integer',
         'replies_count' => 'integer',
         'created_by' => 'integer',
         'is_from_post' => 'boolean',
@@ -94,6 +100,22 @@ class Comment extends UuidEntity
         }
 
         return $this->actor;
+    }
+
+    /**
+     * @return EpisodeComment[]
+     */
+    public function getReplies(): array
+    {
+        if ($this->id === null) {
+            throw new RuntimeException('Comment must be created before getting replies.');
+        }
+
+        if ($this->replies === null) {
+            $this->replies = (new EpisodeCommentModel())->getCommentReplies($this->id);
+        }
+
+        return $this->replies;
     }
 
     public function setMessage(string $message): static

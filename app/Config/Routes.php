@@ -771,11 +771,23 @@ $routes->group('@(:podcastHandle)', function ($routes): void {
                 'controller-method' => 'EpisodeController::comments/$1/$2',
             ],
         ]);
-        $routes->get('comments/(:uuid)', 'EpisodeController::comment/$1/$2/$3', [
+        $routes->get('comments/(:uuid)', 'EpisodeCommentController::view/$1/$2/$3', [
             'as' => 'comment',
+            'application/activity+json' => [
+                'controller-method' => 'EpisodeController::commentObject/$1/$2',
+            ],
+            'application/podcast-activity+json' => [
+                'controller-method' => 'EpisodeController::commentObject/$1/$2',
+            ],
+            'application/ld+json; profile="https://www.w3.org/ns/activitystreams' => [
+                'controller-method' => 'EpisodeController::commentObject/$1/$2',
+            ],
         ]);
-        $routes->get('comments/(:uuid)/replies', 'EpisodeController::commentReplies/$1/$2/$3', [
+        $routes->get('comments/(:uuid)/replies', 'EpisodeCommentController::replies/$1/$2/$3', [
             'as' => 'comment-replies',
+        ]);
+        $routes->post('comments/(:uuid)/like', 'EpisodeCommentController::attemptLike/$1/$2/$3', [
+            'as' => 'comment-attempt-like',
         ]);
         $routes->get('oembed.json', 'EpisodeController::oembedJSON/$1/$2', [
             'as' => 'episode-oembed-json',

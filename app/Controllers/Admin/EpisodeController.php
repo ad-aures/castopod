@@ -10,13 +10,13 @@ declare(strict_types=1);
 
 namespace App\Controllers\Admin;
 
-use App\Entities\Comment;
 use App\Entities\Episode;
+use App\Entities\EpisodeComment;
 use App\Entities\Image;
 use App\Entities\Location;
 use App\Entities\Podcast;
 use App\Entities\Post;
-use App\Models\CommentModel;
+use App\Models\EpisodeCommentModel;
 use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
 use App\Models\PostModel;
@@ -800,7 +800,7 @@ class EpisodeController extends BaseController
 
         $message = $this->request->getPost('message');
 
-        $newComment = new Comment([
+        $newComment = new EpisodeComment([
             'actor_id' => interact_as_actor_id(),
             'episode_id' => $this->episode->id,
             'message' => $message,
@@ -808,7 +808,7 @@ class EpisodeController extends BaseController
             'created_by' => user_id(),
         ]);
 
-        $commentModel = new CommentModel();
+        $commentModel = new EpisodeCommentModel();
         if (
             ! $commentModel->addComment($newComment, true)
         ) {

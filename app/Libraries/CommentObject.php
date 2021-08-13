@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace App\Libraries;
 
 use ActivityPub\Core\ObjectType;
-use App\Entities\Comment;
+use App\Entities\EpisodeComment;
 
 class CommentObject extends ObjectType
 {
@@ -23,7 +23,7 @@ class CommentObject extends ObjectType
 
     protected string $replies;
 
-    public function __construct(Comment $comment)
+    public function __construct(EpisodeComment $comment)
     {
         $this->id = $comment->uri;
 

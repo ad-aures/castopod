@@ -8,37 +8,36 @@ declare(strict_types=1);
  * @link       https://castopod.org/
  */
 
-namespace ActivityPub\Models;
+namespace App\Models;
 
 use ActivityPub\Activities\LikeActivity;
 use ActivityPub\Activities\UndoActivity;
 use ActivityPub\Entities\Actor;
-use ActivityPub\Entities\Favourite;
-use ActivityPub\Entities\Post;
-use CodeIgniter\Events\Events;
+use App\Entities\EpisodeComment;
+use App\Entities\Like;
 use Michalsn\Uuid\UuidModel;
 
-class FavouriteModel extends UuidModel
+class LikeModel extends UuidModel
 {
     /**
      * @var string
      */
-    protected $table = 'activitypub_favourites';
+    protected $table = 'likes';
 
     /**
      * @var string[]
      */
-    protected $uuidFields = ['post_id'];
+    protected $uuidFields = ['comment_id'];
 
     /**
      * @var string[]
      */
-    protected $allowedFields = ['actor_id', 'post_id'];
+    protected $allowedFields = ['actor_id', 'comment_id'];
 
     /**
      * @var string
      */
-    protected $returnType = Favourite::class;
+    protected $returnType = Like::class;
 
     /**
      * @var bool
@@ -47,32 +46,32 @@ class FavouriteModel extends UuidModel
 
     protected $updatedField;
 
-    public function addFavourite(Actor $actor, Post $post, bool $registerActivity = true): void
+    public function addLike(Actor $actor, EpisodeComment $comment, bool $registerActivity = true): void
     {
         $this->db->transStart();
 
         $this->insert([
             'actor_id' => $actor->id,
-            'post_id' => $post->id,
+            'comment_id' => $comment->id,
         ]);
 
-        model('PostModel')
-            ->where('id', service('uuid') ->fromString($post->id) ->getBytes())
-            ->increment('favourites_count');
+        (new EpisodeCommentModel())
+            ->where('id', service('uuid')->fromString($comment->id)->getBytes())
+            ->increment('likes_count');
 
         if ($registerActivity) {
             $likeActivity = new LikeActivity();
             $likeActivity->set('actor', $actor->uri)
-                ->set('object', $post->uri);
+                ->set('object', $comment->uri);
 
             $activityId = model('ActivityModel')
                 ->newActivity(
                     'Like',
                     $actor->id,
                     null,
-                    $post->id,
+                    null,
                     $likeActivity->toJSON(),
-                    $post->published_at,
+                    $comment->created_at,
                     'queued',
                 );
 
@@ -84,40 +83,32 @@ class FavouriteModel extends UuidModel
                 ]);
         }
 
-        Events::trigger('on_post_favourite', $actor, $post);
-
-        model('PostModel')
-            ->clearCache($post);
-
         $this->db->transComplete();
     }
 
-    public function removeFavourite(Actor $actor, Post $post, bool $registerActivity = true): void
+    public function removeLike(Actor $actor, EpisodeComment $comment, bool $registerActivity = true): void
     {
         $this->db->transStart();
 
-        model('PostModel')
-            ->where('id', service('uuid') ->fromString($post->id) ->getBytes())
-            ->decrement('favourites_count');
+        (new EpisodeCommentModel())
+            ->where('id', service('uuid') ->fromString($comment->id) ->getBytes())
+            ->decrement('likes_count');
 
         $this->where([
             'actor_id' => $actor->id,
-            'post_id' => service('uuid')
-                ->fromString($post->id)
+            'comment_id' => service('uuid')
+                ->fromString($comment->id)
                 ->getBytes(),
         ])
             ->delete();
 
         if ($registerActivity) {
             $undoActivity = new UndoActivity();
-            // get like activity
+            // FIXME: get like activity associated with the deleted like
             $activity = model('ActivityModel')
                 ->where([
                     'type' => 'Like',
                     'actor_id' => $actor->id,
-                    'post_id' => service('uuid')
-                        ->fromString($post->id)
-                        ->getBytes(),
                 ])
                 ->first();
 
@@ -125,7 +116,7 @@ class FavouriteModel extends UuidModel
             $likeActivity
                 ->set('id', url_to('activity', $actor->username, $activity->id))
                 ->set('actor', $actor->uri)
-                ->set('object', $post->uri);
+                ->set('object', $comment->uri);
 
             $undoActivity
                 ->set('actor', $actor->uri)
@@ -136,9 +127,9 @@ class FavouriteModel extends UuidModel
                     'Undo',
                     $actor->id,
                     null,
-                    $post->id,
+                    null,
                     $undoActivity->toJSON(),
-                    $post->published_at,
+                    $comment->created_at,
                     'queued',
                 );
 
@@ -150,30 +141,25 @@ class FavouriteModel extends UuidModel
                 ]);
         }
 
-        Events::trigger('on_post_undo_favourite', $actor, $post);
-
-        model('PostModel')
-            ->clearCache($post);
-
         $this->db->transComplete();
     }
 
     /**
-     * Adds or removes favourite from database
+     * Adds or removes likes from database
      */
-    public function toggleFavourite(Actor $actor, Post $post): void
+    public function toggleLike(Actor $actor, EpisodeComment $comment): void
     {
         if (
             $this->where([
                 'actor_id' => $actor->id,
-                'post_id' => service('uuid')
-                    ->fromString($post->id)
+                'comment_id' => service('uuid')
+                    ->fromString($comment->id)
                     ->getBytes(),
             ])->first()
         ) {
-            $this->removeFavourite($actor, $post);
+            $this->removeLike($actor, $comment);
         } else {
-            $this->addFavourite($actor, $post);
+            $this->addLike($actor, $comment);
         }
     }
 }

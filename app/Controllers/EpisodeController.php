@@ -15,10 +15,8 @@ use ActivityPub\Objects\OrderedCollectionPage;
 use Analytics\AnalyticsTrait;
 use App\Entities\Episode;
 use App\Entities\Podcast;
-use App\Libraries\CommentObject;
 use App\Libraries\NoteObject;
 use App\Libraries\PodcastEpisode;
-use App\Models\CommentModel;
 use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
 use CodeIgniter\Database\BaseBuilder;
@@ -254,59 +252,6 @@ class EpisodeController extends BaseController
         return $this->response
             ->setContentType('application/activity+json')
             ->setHeader('Access-Control-Allow-Origin', '*')
-            ->setBody($collection->toJSON());
-    }
-
-    /**
-     * @noRector ReturnTypeDeclarationRector
-     */
-    public function comment(string $commentId): Response
-    {
-        if (
-            ($comment = (new CommentModel())->getCommentById($commentId)) === null
-        ) {
-            throw PageNotFoundException::forPageNotFound();
-        }
-
-        $commentObject = new CommentObject($comment);
-
-        return $this->response
-            ->setContentType('application/json')
-            ->setBody($commentObject->toJSON());
-    }
-
-    public function commentReplies(string $commentId): Response
-    {
-        /**
-         * get comment replies
-         */
-        $commentReplies = model('CommentModel', false)
-            ->where('in_reply_to_id', service('uuid')->fromString($commentId)->getBytes())
-            ->orderBy('created_at', 'ASC');
-
-        $pageNumber = (int) $this->request->getGet('page');
-
-        if ($pageNumber < 1) {
-            $commentReplies->paginate(12);
-            $pager = $commentReplies->pager;
-            $collection = new OrderedCollectionObject(null, $pager);
-        } else {
-            $paginatedReplies = $commentReplies->paginate(12, 'default', $pageNumber);
-            $pager = $commentReplies->pager;
-
-            $orderedItems = [];
-            if ($paginatedReplies !== null) {
-                foreach ($paginatedReplies as $reply) {
-                    $replyObject = new CommentObject($reply);
-                    $orderedItems[] = $replyObject;
-                }
-            }
-
-            $collection = new OrderedCollectionPage($pager, $orderedItems);
-        }
-
-        return $this->response
-            ->setContentType('application/activity+json')
             ->setBody($collection->toJSON());
     }
 }

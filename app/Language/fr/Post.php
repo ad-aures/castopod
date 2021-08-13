@@ -19,7 +19,7 @@ return [
             'Écrivez votre message pour l’épisode...',
         'episode_url_placeholder' => 'URL de l’épisode',
         'reply_to_placeholder' => 'Répondre à @{actorUsername}',
-        'submit' => 'Envoyer!',
+        'submit' => 'Envoyer !',
         'submit_reply' => 'Répondre',
     ],
     'favourites' => '{numberOfFavourites, plural,

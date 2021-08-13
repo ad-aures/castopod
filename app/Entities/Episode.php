@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace App\Entities;
 
 use App\Libraries\SimpleRSSElement;
-use App\Models\CommentModel;
+use App\Models\EpisodeCommentModel;
 use App\Models\PersonModel;
 use App\Models\PodcastModel;
 use App\Models\PostModel;
@@ -122,7 +122,7 @@ class Episode extends Entity
     protected ?array $posts = null;
 
     /**
-     * @var Comment[]|null
+     * @var EpisodeComment[]|null
      */
     protected ?array $comments = null;
 
@@ -402,7 +402,7 @@ class Episode extends Entity
     }
 
     /**
-     * @return Comment[]
+     * @return EpisodeComment[]
      */
     public function getComments(): array
     {
@@ -411,7 +411,7 @@ class Episode extends Entity
         }
 
         if ($this->comments === null) {
-            $this->comments = (new CommentModel())->getEpisodeComments($this->id);
+            $this->comments = (new EpisodeCommentModel())->getEpisodeComments($this->id);
         }
 
         return $this->comments;

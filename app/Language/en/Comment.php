@@ -16,11 +16,8 @@ return [
         'submit_reply' => 'Reply',
     ],
     'like' => 'Like',
-    'dislike' => 'Dislike',
-    'replies' => '{numberOfReplies, plural,
-        one {# reply}
-        other {# replies}
-    }',
+    'reply' => 'Reply',
+    'view_replies' => 'View replies ({numberOfReplies})',
     'block_actor' => 'Block user @{actorUsername}',
     'block_domain' => 'Block domain @{actorDomain}',
     'delete' => 'Delete comment',

@@ -11,22 +11,22 @@ declare(strict_types=1);
 namespace App\Models;
 
 use ActivityPub\Activities\CreateActivity;
-use App\Entities\Comment;
+use App\Entities\EpisodeComment;
 use App\Libraries\CommentObject;
 use CodeIgniter\Database\BaseBuilder;
 use Michalsn\Uuid\UuidModel;
 
-class CommentModel extends UuidModel
+class EpisodeCommentModel extends UuidModel
 {
     /**
      * @var string
      */
-    protected $returnType = Comment::class;
+    protected $returnType = EpisodeComment::class;
 
     /**
      * @var string
      */
-    protected $table = 'comments';
+    protected $table = 'episode_comments';
 
     /**
      * @var string[]
@@ -45,7 +45,6 @@ class CommentModel extends UuidModel
         'message',
         'message_html',
         'likes_count',
-        'dislikes_count',
         'replies_count',
         'created_at',
         'created_by',
@@ -56,7 +55,7 @@ class CommentModel extends UuidModel
      */
     protected $beforeInsert = ['setCommentId'];
 
-    public function getCommentById(string $commentId): ?Comment
+    public function getCommentById(string $commentId): ?EpisodeComment
     {
         $cacheName = "comment#{$commentId}";
         if (! ($found = cache($cacheName))) {
@@ -69,7 +68,7 @@ class CommentModel extends UuidModel
         return $found;
     }
 
-    public function addComment(Comment $comment, bool $registerActivity = false): string | false
+    public function addComment(EpisodeComment $comment, bool $registerActivity = false): string | false
     {
         $this->db->transStart();
         // increment Episode's comments_count
@@ -122,7 +121,9 @@ class CommentModel extends UuidModel
     /**
      * Retrieves all published posts for a given episode ordered by publication date
      *
-     * @return Comment[]
+     * @return EpisodeComment[]
+     *
+     * @noRector ReturnTypeDeclarationRector
      */
     public function getEpisodeComments(int $episodeId): array
     {
@@ -133,7 +134,7 @@ class CommentModel extends UuidModel
 
         $episodePostsReplies = $this->db->table('activitypub_posts')
             ->select(
-                'id, uri, episode_id, actor_id, in_reply_to_id, message, message_html, favourites_count as likes_count, 0 as dislikes_count, replies_count, published_at as created_at, created_by, 1 as is_from_post'
+                'id, uri, episode_id, actor_id, in_reply_to_id, message, message_html, favourites_count as likes_count, replies_count, published_at as created_at, created_by, 1 as is_from_post'
             )
             ->whereIn('in_reply_to_id', function (BaseBuilder $builder) use (&$episodeId): BaseBuilder {
                 return $builder->select('id')
@@ -147,18 +148,25 @@ class CommentModel extends UuidModel
             $episodeComments . ' UNION ' . $episodePostsReplies . ' ORDER BY created_at ASC'
         );
 
-        return $allEpisodeComments->getCustomResultObject($this->returnType);
+        // FIXME:?
+        // @phpstan-ignore-next-line
+        return $this->convertUuidFieldsToStrings(
+            $allEpisodeComments->getCustomResultObject($this->tempReturnType),
+            $this->tempReturnType
+        );
     }
 
     /**
      * Retrieves all replies for a given comment
      *
-     * @return Comment[]
+     * @return EpisodeComment[]
      */
-    public function getCommentReplies(int $episodeId, string $commentId): array
+    public function getCommentReplies(string $commentId): array
     {
         // TODO: get all replies for a given comment
-        return $this->findAll();
+        return $this->where('in_reply_to_id', $this->uuid->fromString($commentId)->getBytes())
+            ->orderBy('created_at', 'ASC')
+            ->findAll();
     }
 
     /**

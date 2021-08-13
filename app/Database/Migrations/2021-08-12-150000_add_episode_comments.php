@@ -3,9 +3,9 @@
 declare(strict_types=1);
 
 /**
- * Class AddComments creates comments table in database
+ * Class AddEpisodeComments creates episode_comments table in database
  *
- * @copyright  2020 Podlibre
+ * @copyright  2021 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
  */
@@ -14,7 +14,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class AddComments extends Migration
+class AddEpisodeComments extends Migration
 {
     public function up(): void
     {
@@ -42,19 +42,13 @@ class AddComments extends Migration
             ],
             'message' => [
                 'type' => 'VARCHAR',
-                'constraint' => 500,
-                'null' => true,
+                'constraint' => 5000,
             ],
             'message_html' => [
                 'type' => 'VARCHAR',
-                'constraint' => 600,
-                'null' => true,
+                'constraint' => 6000,
             ],
             'likes_count' => [
-                'type' => 'INT',
-                'unsigned' => true,
-            ],
-            'dislikes_count' => [
                 'type' => 'INT',
                 'unsigned' => true,
             ],
@@ -75,11 +69,11 @@ class AddComments extends Migration
         $this->forge->addForeignKey('episode_id', 'episodes', 'id', '', 'CASCADE');
         $this->forge->addForeignKey('actor_id', 'activitypub_actors', 'id', '', 'CASCADE');
         $this->forge->addForeignKey('created_by', 'users', 'id');
-        $this->forge->createTable('comments');
+        $this->forge->createTable('episode_comments');
     }
 
     public function down(): void
     {
-        $this->forge->dropTable('comments');
+        $this->forge->dropTable('episode_comments');
     }
 }

@@ -85,7 +85,7 @@
         <div class="tab-panels">
             <section id="comments" class="space-y-6 tab-panel">
             <?= form_open(route_to('comment-attempt-create', $podcast->id, $episode->id), [
-                    'class' => 'flex p-4 bg-white shadow rounded-xl',
+                    'class' => 'flex p-4',
                 ]) ?>
                 <?= csrf_field() ?>
 
@@ -118,7 +118,6 @@
                     ) ?>
                 </div>
                 <?= form_close() ?>
-                <hr class="my-4 border border-pine-100">
                 <?php foreach ($episode->comments as $comment): ?>
                     <?= view('podcast/_partials/comment', ['comment' => $comment]) ?>
                 <?php endforeach; ?>
