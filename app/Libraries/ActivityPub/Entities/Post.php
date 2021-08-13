@@ -20,9 +20,9 @@ use RuntimeException;
  * @property int $actor_id
  * @property Actor $actor
  * @property string|null $in_reply_to_id
- * @property Status|null $reply_to_status
+ * @property Post|null $reply_to_post
  * @property string|null $reblog_of_id
- * @property Status|null $reblog_of_status
+ * @property Post|null $reblog_of_post
  * @property string $message
  * @property string $message_html
  * @property int $favourites_count
@@ -35,30 +35,30 @@ use RuntimeException;
  * @property PreviewCard|null $preview_card
  *
  * @property bool $has_replies
- * @property Status[] $replies
- * @property Status[] $reblogs
+ * @property Post[] $replies
+ * @property Post[] $reblogs
  */
-class Status extends UuidEntity
+class Post extends UuidEntity
 {
     protected ?Actor $actor = null;
 
-    protected ?Status $reply_to_status = null;
+    protected ?Post $reply_to_post = null;
 
-    protected ?Status $reblog_of_status = null;
+    protected ?Post $reblog_of_post = null;
 
     protected ?PreviewCard $preview_card = null;
 
     protected bool $has_preview_card = false;
 
     /**
-     * @var Status[]|null
+     * @var Post[]|null
      */
     protected ?array $replies = null;
 
     protected bool $has_replies = false;
 
     /**
-     * @var Status[]|null
+     * @var Post[]|null
      */
     protected ?array $reblogs = null;
 
@@ -89,12 +89,12 @@ class Status extends UuidEntity
     ];
 
     /**
-     * Returns the status's actor
+     * Returns the post's actor
      */
     public function getActor(): Actor
     {
         if ($this->actor_id === null) {
-            throw new RuntimeException('Status must have an actor_id before getting actor.');
+            throw new RuntimeException('Post must have an actor_id before getting actor.');
         }
 
         if ($this->actor === null) {
@@ -108,12 +108,12 @@ class Status extends UuidEntity
     public function getPreviewCard(): ?PreviewCard
     {
         if ($this->id === null) {
-            throw new RuntimeException('Status must be created before getting preview_card.');
+            throw new RuntimeException('Post must be created before getting preview_card.');
         }
 
         if ($this->preview_card === null) {
             $this->preview_card = model('PreviewCardModel', false)
-                ->getStatusPreviewCard($this->id);
+                ->getPostPreviewCard($this->id);
         }
 
         return $this->preview_card;
@@ -125,17 +125,17 @@ class Status extends UuidEntity
     }
 
     /**
-     * @return Status[]
+     * @return Post[]
      */
     public function getReplies(): array
     {
         if ($this->id === null) {
-            throw new RuntimeException('Status must be created before getting replies.');
+            throw new RuntimeException('Post must be created before getting replies.');
         }
 
         if ($this->replies === null) {
-            $this->replies = (array) model('StatusModel', false)
-                ->getStatusReplies($this->id);
+            $this->replies = (array) model('PostModel', false)
+                ->getPostReplies($this->id);
         }
 
         return $this->replies;
@@ -146,49 +146,49 @@ class Status extends UuidEntity
         return $this->getReplies() !== null;
     }
 
-    public function getReplyToStatus(): ?self
+    public function getReplyToPost(): ?self
     {
         if ($this->in_reply_to_id === null) {
-            throw new RuntimeException('Status is not a reply.');
+            throw new RuntimeException('Post is not a reply.');
         }
 
-        if ($this->reply_to_status === null) {
-            $this->reply_to_status = model('StatusModel', false)
-                ->getStatusById($this->in_reply_to_id);
+        if ($this->reply_to_post === null) {
+            $this->reply_to_post = model('PostModel', false)
+                ->getPostById($this->in_reply_to_id);
         }
 
-        return $this->reply_to_status;
+        return $this->reply_to_post;
     }
 
     /**
-     * @return Status[]
+     * @return Post[]
      */
     public function getReblogs(): array
     {
         if ($this->id === null) {
-            throw new RuntimeException('Status must be created before getting reblogs.');
+            throw new RuntimeException('Post must be created before getting reblogs.');
         }
 
         if ($this->reblogs === null) {
-            $this->reblogs = (array) model('StatusModel', false)
-                ->getStatusReblogs($this->id);
+            $this->reblogs = (array) model('PostModel', false)
+                ->getPostReblogs($this->id);
         }
 
         return $this->reblogs;
     }
 
-    public function getReblogOfStatus(): ?self
+    public function getReblogOfPost(): ?self
     {
         if ($this->reblog_of_id === null) {
-            throw new RuntimeException('Status is not a reblog.');
+            throw new RuntimeException('Post is not a reblog.');
         }
 
-        if ($this->reblog_of_status === null) {
-            $this->reblog_of_status = model('StatusModel', false)
-                ->getStatusById($this->reblog_of_id);
+        if ($this->reblog_of_post === null) {
+            $this->reblog_of_post = model('PostModel', false)
+                ->getPostById($this->reblog_of_id);
         }
 
-        return $this->reblog_of_status;
+        return $this->reblog_of_post;
     }
 
     public function setMessage(string $message): static

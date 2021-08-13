@@ -24,13 +24,13 @@
 ]) ?>
 <?= csrf_field() ?>
 <?= form_hidden('client_timezone', 'UTC') ?>
-<?= form_hidden('status_id', $status->id) ?>
+<?= form_hidden('post_id', $post->id) ?>
 
 
 <label for="message" class="text-lg font-semibold"><?= lang(
-                                                        'Episode.publish_form.status',
+                                                        'Episode.publish_form.post',
                                                     ) ?></label>
-<small class="max-w-md mb-2 text-gray-600"><?= lang('Episode.publish_form.status_hint') ?></small>
+<small class="max-w-md mb-2 text-gray-600"><?= lang('Episode.publish_form.post_hint') ?></small>
 <div class="mb-8 overflow-hidden bg-white shadow-md rounded-xl">
     <div class="flex px-4 py-3">
         <img src="<?= $podcast->actor->avatar_image_url ?>" alt="<?= $podcast->actor
@@ -42,7 +42,7 @@
                 <span class="text-sm text-gray-500 truncate">@<?= $podcast
                                                                     ->actor->username ?></span>
             </p>
-            <?= relative_time($status->published_at, 'text-xs text-gray-500') ?>
+            <?= relative_time($post->published_at, 'text-xs text-gray-500') ?>
         </div>
     </div>
     <div class="px-4 mb-2">
@@ -54,7 +54,7 @@
                 'placeholder' => 'Write your message...',
                 'autofocus' => ''
             ],
-            old('message', $status->message, false),
+            old('message', $post->message, false),
             ['rows' => 2],
         ) ?>
     </div>

@@ -38,7 +38,7 @@ class AddEpisodes extends Migration
             ],
             'slug' => [
                 'type' => 'VARCHAR',
-                'constraint' => 191,
+                'constraint' => 128,
             ],
             'audio_file_path' => [
                 'type' => 'VARCHAR',
@@ -147,17 +147,12 @@ class AddEpisodes extends Migration
                 'type' => 'JSON',
                 'null' => true,
             ],
-            'favourites_total' => [
+            'posts_count' => [
                 'type' => 'INT',
                 'unsigned' => true,
                 'default' => 0,
             ],
-            'reblogs_total' => [
-                'type' => 'INT',
-                'unsigned' => true,
-                'default' => 0,
-            ],
-            'statuses_total' => [
+            'comments_count' => [
                 'type' => 'INT',
                 'unsigned' => true,
                 'default' => 0,

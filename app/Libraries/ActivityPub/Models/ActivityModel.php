@@ -31,7 +31,7 @@ class ActivityModel extends UuidModel
     /**
      * @var string[]
      */
-    protected $uuidFields = ['id', 'status_id'];
+    protected $uuidFields = ['id', 'post_id'];
 
     /**
      * @var string[]
@@ -40,7 +40,7 @@ class ActivityModel extends UuidModel
         'id',
         'actor_id',
         'target_actor_id',
-        'status_id',
+        'post_id',
         'type',
         'payload',
         'task_status',
@@ -88,7 +88,7 @@ class ActivityModel extends UuidModel
         string $type,
         int $actorId,
         ?int $targetActorId,
-        ?string $statusId,
+        ?string $postId,
         string $payload,
         DateTimeInterface $scheduledAt = null,
         ?string $taskStatus = null
@@ -97,7 +97,7 @@ class ActivityModel extends UuidModel
             [
                 'actor_id' => $actorId,
                 'target_actor_id' => $targetActorId,
-                'status_id' => $statusId,
+                'post_id' => $postId,
                 'type' => $type,
                 'payload' => $payload,
                 'scheduled_at' => $scheduledAt,

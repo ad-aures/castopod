@@ -40,7 +40,7 @@ if (! function_exists('extract_params_from_episode_uri')) {
     function extract_params_from_episode_uri(URI $episodeUri): ?array
     {
         preg_match(
-            '~@(?P<podcastHandle>[a-zA-Z0-9\_]{1,32})\/episodes\/(?P<episodeSlug>[a-zA-Z0-9\-]{1,191})~',
+            '~@(?P<podcastHandle>[a-zA-Z0-9\_]{1,32})\/episodes\/(?P<episodeSlug>[a-zA-Z0-9\-]{1,128})~',
             $episodeUri->getPath(),
             $matches,
         );

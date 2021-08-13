@@ -33,7 +33,7 @@ class SchedulerController extends Controller
                 json_encode($scheduledActivity->payload, JSON_THROW_ON_ERROR),
             );
 
-            // set activity status to delivered
+            // set activity post to delivered
             model('ActivityModel')
                 ->update($scheduledActivity->id, [
                     'task_status' => 'delivered',

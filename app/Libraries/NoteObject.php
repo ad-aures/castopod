@@ -11,25 +11,25 @@ declare(strict_types=1);
 namespace App\Libraries;
 
 use ActivityPub\Objects\NoteObject as ActivityPubNoteObject;
-use App\Entities\Status;
+use App\Entities\Post;
 
 class NoteObject extends ActivityPubNoteObject
 {
     /**
-     * @param Status $status
+     * @param Post $post
      */
-    public function __construct(\ActivityPub\Entities\Status $status)
+    public function __construct(\ActivityPub\Entities\Post $post)
     {
-        parent::__construct($status);
+        parent::__construct($post);
 
-        if ($status->episode_id) {
+        if ($post->episode_id) {
             $this->content =
                 '<a href="' .
-                $status->episode->link .
+                $post->episode->link .
                 '" target="_blank" rel="noopener noreferrer">' .
-                $status->episode->title .
+                $post->episode->title .
                 '</a><br/>' .
-                $status->message_html;
+                $post->message_html;
         }
     }
 }

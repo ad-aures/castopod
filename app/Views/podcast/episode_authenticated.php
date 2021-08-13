@@ -65,46 +65,6 @@
                         <?= format_duration($episode->audio_file_duration) ?>
                     </time>
                 </div>
-                <div class="mb-2 space-x-4 text-sm">
-                    <?= anchor(
-                        route_to('episode', $podcast->handle, $episode->slug),
-                        icon('chat', 'text-xl mr-1 text-gray-400') .
-                            $episode->statuses_total,
-                        [
-                            'class' =>
-                                'inline-flex items-center hover:underline',
-                            'title' => lang('Episode.total_statuses', [
-                                'numberOfTotalStatuses' => $episode->statuses_total,
-                            ]),
-                        ],
-                    ) ?>
-                    <?= anchor(
-                        route_to('episode', $podcast->handle, $episode->slug),
-                        icon('repeat', 'text-xl mr-1 text-gray-400') .
-                            $episode->reblogs_total,
-                        [
-                            'class' =>
-                                'inline-flex items-center hover:underline',
-                            'title' => lang('Episode.total_reblogs', [
-                                'numberOfTotalReblogs' =>
-                                    $episode->reblogs_total,
-                            ]),
-                        ],
-                    ) ?>
-                    <?= anchor(
-                        route_to('episode', $podcast->handle, $episode->slug),
-                        icon('heart', 'text-xl mr-1 text-gray-400') .
-                            $episode->favourites_total,
-                        [
-                            'class' =>
-                                'inline-flex items-center hover:underline',
-                            'title' => lang('Episode.total_favourites', [
-                                'numberOfTotalFavourites' =>
-                                    $episode->favourites_total,
-                            ]),
-                        ],
-                    ) ?>
-                </div>
                 <?= location_link($episode->location, 'text-sm mb-4') ?>
                 <?= person_list($episode->persons) ?>
                 <?= play_episode_button($episode->id, $episode->image->thumbnail_url, $episode->title, $podcast->title, $episode->audio_file_web_url, $episode->audio_file_mimetype) ?>
@@ -113,15 +73,18 @@
     </header>
 
     <div class="tabset">
-        <input type="radio" name="tabset" id="activity" aria-controls="activity" checked="checked" />
-        <label for="activity"><?= lang('Episode.activity') ?></label>
+        <input type="radio" name="tabset" id="comments" aria-controls="comments" checked="checked" />
+        <label for="comments"><?= lang('Episode.comments') . ' (' . $episode->comments_count . ')' ?></label>
+        
+        <input type="radio" name="tabset" id="activity" aria-controls="activity" />
+        <label for="activity"><?= lang('Episode.activity') . ' ('. $episode->posts_count .')' ?></label>
 
         <input type="radio" name="tabset" id="description" aria-controls="description" />
         <label for="description"><?= lang('Episode.description') ?></label>
 
         <div class="tab-panels">
-            <section id="activity" class="space-y-8 tab-panel">
-                <?= form_open(route_to('status-attempt-create', $podcast->handle), [
+            <section id="comments" class="space-y-6 tab-panel">
+            <?= form_open(route_to('comment-attempt-create', $podcast->id, $episode->id), [
                     'class' => 'flex p-4 bg-white shadow rounded-xl',
                 ]) ?>
                 <?= csrf_field() ?>
@@ -129,8 +92,7 @@
                 <?= view('_message_block') ?>
 
                 <img src="<?= interact_as_actor()
-                    ->avatar_image_url ?>" alt="<?= interact_as_actor()
-    ->display_name ?>" class="w-12 h-12 mr-4 rounded-full" />
+                    ->avatar_image_url ?>" alt="<?= interact_as_actor()->display_name ?>" class="w-12 h-12 mr-4 rounded-full" />
                 <div class="flex flex-col flex-1 min-w-0">
                     <?= form_textarea(
                         [
@@ -139,7 +101,47 @@
                             'class' => 'form-textarea mb-2',
                             'required' => 'required',
                             'placeholder' => lang(
-                                'Status.form.episode_message_placeholder',
+                                'Comment.form.episode_message_placeholder',
+                            ),
+                        ],
+                        old('message', '', false),
+                        [
+                            'rows' => 2,
+                        ],
+                    ) ?>
+
+                    <?= button(
+                        lang('Comment.form.submit'),
+                        '',
+                        ['variant' => 'primary', 'size' => 'small'],
+                        ['type' => 'submit', 'class' => 'self-end'],
+                    ) ?>
+                </div>
+                <?= form_close() ?>
+                <hr class="my-4 border border-pine-100">
+                <?php foreach ($episode->comments as $comment): ?>
+                    <?= view('podcast/_partials/comment', ['comment' => $comment]) ?>
+                <?php endforeach; ?>
+            </section>
+            <section id="activity" class="space-y-8 tab-panel">
+                <?= form_open(route_to('post-attempt-create', $podcast->handle), [
+                    'class' => 'flex p-4 bg-white shadow rounded-xl',
+                ]) ?>
+                <?= csrf_field() ?>
+
+                <?= view('_message_block') ?>
+
+                <img src="<?= interact_as_actor()
+                    ->avatar_image_url ?>" alt="<?= interact_as_actor()->display_name ?>" class="w-12 h-12 mr-4 rounded-full" />
+                <div class="flex flex-col flex-1 min-w-0">
+                    <?= form_textarea(
+                        [
+                            'id' => 'message',
+                            'name' => 'message',
+                            'class' => 'form-textarea mb-2',
+                            'required' => 'required',
+                            'placeholder' => lang(
+                                'Post.form.episode_message_placeholder',
                             ),
                         ],
                         old('message', '', false),
@@ -154,7 +156,7 @@
                         'type' => 'hidden',
                     ]) ?>
                     <?= button(
-                        lang('Status.form.submit'),
+                        lang('Post.form.submit'),
                         '',
                         ['variant' => 'primary', 'size' => 'small'],
                         ['type' => 'submit', 'class' => 'self-end'],
@@ -162,9 +164,9 @@
                 </div>
                 <?= form_close() ?>
                 <hr class="my-4 border border-pine-100">
-                <?php foreach ($episode->statuses as $status): ?>
-                    <?= view('podcast/_partials/status_authenticated', [
-                        'status' => $status,
+                <?php foreach ($episode->posts as $post): ?>
+                    <?= view('podcast/_partials/post_authenticated', [
+                        'post' => $post,
                     ]) ?>
                 <?php endforeach; ?>
             </section>

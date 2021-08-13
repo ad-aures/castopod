@@ -16,19 +16,12 @@ return [
     'season_episode' => 'Season {seasonNumber} episode {episodeNumber}',
     'season_episode_abbr' => 'S{seasonNumber}E{episodeNumber}',
     'back_to_episodes' => 'Back to episodes of {podcast}',
+    'comments' => 'Comments',
     'activity' => 'Activity',
     'description' => 'Description',
-    'total_favourites' => '{numberOfTotalFavourites, plural,
-        one {# total favourite}
-        other {# total favourites}
-    }',
-    'total_reblogs' => '{numberOfTotalReblogs, plural,
-        one {# total share}
-        other {# total shares}
-    }',
-    'total_statuses' => '{numberOfTotalStatuses, plural,
-        one {# total post}
-        other {# total posts}
+    'number_of_comments' => '{numberOfComments, plural,
+        one {# comment}
+        other {# comments}
     }',
     'all_podcast_episodes' => 'All podcast episodes',
     'back_to_podcast' => 'Go back to podcast',
@@ -116,14 +109,14 @@ return [
         'custom_rss_hint' => 'This will be injected within the ❬item❭ tag.',
         'block' => 'Episode should be hidden from all platforms',
         'block_hint' =>
-            'The episode show or hide status. If you want this episode removed from the Apple directory, toggle this on.',
+            'The episode show or hide post. If you want this episode removed from the Apple directory, toggle this on.',
         'submit_create' => 'Create episode',
         'submit_edit' => 'Save episode',
     ],
     'publish_form' => [
         'back_to_episode_dashboard' => 'Back to episode dashboard',
-        'status' => 'Your announcement post',
-        'status_hint' =>
+        'post' => 'Your announcement post',
+        'post_hint' =>
             "Write a message to announce the publication of your episode. The message will be broadcasted to all your followers in the fediverse and be featured in your podcast's homepage.",
         'publication_date' => 'Publication date',
         'publication_method' => [

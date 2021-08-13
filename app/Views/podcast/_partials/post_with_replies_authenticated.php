@@ -1,7 +1,7 @@
-<?= $this->include('podcast/_partials/status_authenticated') ?>
-<div class="-mt-2 overflow-hidden border-b border-l border-r status-replies rounded-b-xl">
+<?= $this->include('podcast/_partials/post_authenticated') ?>
+<div class="-mt-2 overflow-hidden border-b border-l border-r post-replies rounded-b-xl">
 <?= form_open(
-    route_to('status-attempt-action', interact_as_actor()->username, $status->id),
+    route_to('post-attempt-action', interact_as_actor()->username, $post->id),
     [
         'class' => 'bg-gray-50 flex px-6 pt-8 pb-4',
     ],
@@ -16,8 +16,8 @@
         'name' => 'message',
         'class' => 'form-textarea mb-4 w-full',
         'required' => 'required',
-        'placeholder' => lang('Status.form.reply_to_placeholder', [
-            'actorUsername' => $status->actor->username,
+        'placeholder' => lang('Post.form.reply_to_placeholder', [
+            'actorUsername' => $post->actor->username,
         ]),
     ],
     old('message', '', false),
@@ -26,7 +26,7 @@
     ],
 ) ?>
 <?= button(
-    lang('Status.form.submit_reply'),
+    lang('Post.form.submit_reply'),
     '',
     ['variant' => 'primary', 'size' => 'small'],
     [
@@ -39,8 +39,8 @@
 </div>
 <?= form_close() ?>
 
-<?php if ($status->has_replies): ?>
-    <?php foreach ($status->replies as $reply): ?>
+<?php if ($post->has_replies): ?>
+    <?php foreach ($post->replies as $reply): ?>
         <?= view('podcast/_partials/reply_authenticated', [
             'reply' => $reply,
         ]) ?>

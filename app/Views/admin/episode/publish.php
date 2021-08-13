@@ -27,9 +27,9 @@
 
 
 <label for="message" class="text-lg font-semibold"><?= lang(
-                                                        'Episode.publish_form.status',
+                                                        'Episode.publish_form.post',
                                                     ) ?></label>
-<small class="max-w-md mb-2 text-gray-600"><?= lang('Episode.publish_form.status_hint') ?></small>
+<small class="max-w-md mb-2 text-gray-600"><?= lang('Episode.publish_form.post_hint') ?></small>
 <div class="mb-8 overflow-hidden bg-white shadow-md rounded-xl">
     <div class="flex px-4 py-3">
         <img src="<?= $podcast->actor->avatar_image_url ?>" alt="<?= $podcast

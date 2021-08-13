@@ -71,7 +71,7 @@
         [
             'header' => lang('Episode.list.comments'),
             'cell' => function ($episode): int {
-                return count($episode->comments);
+                return $episode->comments_count;
             },
         ],
         [

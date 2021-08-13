@@ -19,8 +19,8 @@ use RuntimeException;
  * @property Actor $actor
  * @property int|null $target_actor_id
  * @property Actor $target_actor
- * @property string|null $status_id
- * @property Status $status
+ * @property string|null $post_id
+ * @property Post $post
  * @property string $type
  * @property object $payload
  * @property string|null $task_status
@@ -33,12 +33,12 @@ class Activity extends UuidEntity
 
     protected ?Actor $target_actor = null;
 
-    protected ?Status $status = null;
+    protected ?Post $post = null;
 
     /**
      * @var string[]
      */
-    protected $uuids = ['id', 'status_id'];
+    protected $uuids = ['id', 'post_id'];
 
     /**
      * @var string[]
@@ -52,7 +52,7 @@ class Activity extends UuidEntity
         'id' => 'string',
         'actor_id' => 'integer',
         'target_actor_id' => '?integer',
-        'status_id' => '?string',
+        'post_id' => '?string',
         'type' => 'string',
         'payload' => 'json',
         'task_status' => '?string',
@@ -86,17 +86,17 @@ class Activity extends UuidEntity
         return $this->target_actor;
     }
 
-    public function getStatus(): Status
+    public function getPost(): Post
     {
-        if ($this->status_id === null) {
-            throw new RuntimeException('Activity must have a status_id before getting status.');
+        if ($this->post_id === null) {
+            throw new RuntimeException('Activity must have a post_id before getting post.');
         }
 
-        if ($this->status === null) {
-            $this->status = model('StatusModel', false)
-                ->getStatusById($this->status_id);
+        if ($this->post === null) {
+            $this->post = model('PostModel', false)
+                ->getPostById($this->post_id);
         }
 
-        return $this->status;
+        return $this->post;
     }
 }

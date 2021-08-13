@@ -162,13 +162,13 @@ class AuthSeeder extends Seeder
             [
                 'name' => 'manage_publications',
                 'description' =>
-                    'Publish / unpublish episodes & statuses of a podcast',
+                    'Publish / unpublish episodes & posts of a podcast',
                 'has_permission' => ['podcast_admin'],
             ],
             [
                 'name' => 'interact_as',
                 'description' =>
-                    'Interact as the podcast to favourite / share or reply to statuses.',
+                    'Interact as the podcast to favourite / share or reply to posts.',
                 'has_permission' => ['podcast_admin'],
             ],
         ],

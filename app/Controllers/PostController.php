@@ -10,21 +10,21 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use ActivityPub\Controllers\StatusController as ActivityPubStatusController;
-use ActivityPub\Entities\Status as ActivityPubStatus;
+use ActivityPub\Controllers\PostController as ActivityPubPostController;
+use ActivityPub\Entities\Post as ActivityPubPost;
 use Analytics\AnalyticsTrait;
 use App\Entities\Actor;
 use App\Entities\Podcast;
-use App\Entities\Status as CastopodStatus;
+use App\Entities\Post as CastopodPost;
 use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
-use App\Models\StatusModel;
+use App\Models\PostModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\URI;
 use CodeIgniter\I18n\Time;
 
-class StatusController extends ActivityPubStatusController
+class PostController extends ActivityPubPostController
 {
     use AnalyticsTrait;
 
@@ -50,9 +50,9 @@ class StatusController extends ActivityPubStatusController
 
         if (
             count($params) > 1 &&
-            ($status = (new StatusModel())->getStatusById($params[1])) !== null
+            ($post = (new PostModel())->getPostById($params[1])) !== null
         ) {
-            $this->status = $status;
+            $this->post = $post;
 
             unset($params[0]);
             unset($params[1]);
@@ -72,7 +72,7 @@ class StatusController extends ActivityPubStatusController
             '_',
             array_filter([
                 'page',
-                "status#{$this->status->id}",
+                "post#{$this->post->id}",
                 service('request')
                     ->getLocale(),
                 can_user_interact() ? '_authenticated' : null,
@@ -83,15 +83,15 @@ class StatusController extends ActivityPubStatusController
             $data = [
                 'podcast' => $this->podcast,
                 'actor' => $this->actor,
-                'status' => $this->status,
+                'post' => $this->post,
             ];
 
             // if user is logged in then send to the authenticated activity view
             if (can_user_interact()) {
                 helper('form');
-                return view('podcast/status_authenticated', $data);
+                return view('podcast/post_authenticated', $data);
             }
-            return view('podcast/status', $data, [
+            return view('podcast/post', $data, [
                 'cache' => DECADE,
                 'cache_name' => $cacheName,
             ]);
@@ -116,7 +116,7 @@ class StatusController extends ActivityPubStatusController
 
         $message = $this->request->getPost('message');
 
-        $newStatus = new CastopodStatus([
+        $newPost = new CastopodPost([
             'actor_id' => interact_as_actor_id(),
             'published_at' => Time::now(),
             'created_by' => user_id(),
@@ -129,23 +129,23 @@ class StatusController extends ActivityPubStatusController
             ($params = extract_params_from_episode_uri(new URI($episodeUri))) &&
             ($episode = (new EpisodeModel())->getEpisodeBySlug($params['podcastHandle'], $params['episodeSlug']))
         ) {
-            $newStatus->episode_id = $episode->id;
+            $newPost->episode_id = $episode->id;
         }
 
-        $newStatus->message = $message;
+        $newPost->message = $message;
 
-        $statusModel = new StatusModel();
+        $postModel = new PostModel();
         if (
-            ! $statusModel
-                ->addStatus($newStatus, ! (bool) $newStatus->episode_id, true)
+            ! $postModel
+                ->addPost($newPost, ! (bool) $newPost->episode_id, true)
         ) {
             return redirect()
                 ->back()
                 ->withInput()
-                ->with('errors', $statusModel->errors());
+                ->with('errors', $postModel->errors());
         }
 
-        // Status has been successfully created
+        // Post has been successfully created
         return redirect()->back();
     }
 
@@ -162,36 +162,36 @@ class StatusController extends ActivityPubStatusController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $newStatus = new ActivityPubStatus([
+        $newPost = new ActivityPubPost([
             'actor_id' => interact_as_actor_id(),
-            'in_reply_to_id' => $this->status->id,
+            'in_reply_to_id' => $this->post->id,
             'message' => $this->request->getPost('message'),
             'published_at' => Time::now(),
             'created_by' => user_id(),
         ]);
 
-        $statusModel = new StatusModel();
-        if (! $statusModel->addReply($newStatus)) {
+        $postModel = new PostModel();
+        if (! $postModel->addReply($newPost)) {
             return redirect()
                 ->back()
                 ->withInput()
-                ->with('errors', $statusModel->errors());
+                ->with('errors', $postModel->errors());
         }
 
-        // Reply status without preview card has been successfully created
+        // Reply post without preview card has been successfully created
         return redirect()->back();
     }
 
     public function attemptFavourite(): RedirectResponse
     {
-        model('FavouriteModel')->toggleFavourite(interact_as_actor(), $this->status);
+        model('FavouriteModel')->toggleFavourite(interact_as_actor(), $this->post);
 
         return redirect()->back();
     }
 
     public function attemptReblog(): RedirectResponse
     {
-        (new StatusModel())->toggleReblog(interact_as_actor(), $this->status);
+        (new PostModel())->toggleReblog(interact_as_actor(), $this->post);
 
         return redirect()->back();
     }
@@ -230,20 +230,20 @@ class StatusController extends ActivityPubStatusController
 
         $cacheName = implode(
             '_',
-            array_filter(['page', "status#{$this->status->id}", "remote_{$action}", service('request') ->getLocale()]),
+            array_filter(['page', "post#{$this->post->id}", "remote_{$action}", service('request') ->getLocale()]),
         );
 
         if (! ($cachedView = cache($cacheName))) {
             $data = [
                 'podcast' => $this->podcast,
                 'actor' => $this->actor,
-                'status' => $this->status,
+                'post' => $this->post,
                 'action' => $action,
             ];
 
             helper('form');
 
-            return view('podcast/status_remote_action', $data, [
+            return view('podcast/post_remote_action', $data, [
                 'cache' => DECADE,
                 'cache_name' => $cacheName,
             ]);

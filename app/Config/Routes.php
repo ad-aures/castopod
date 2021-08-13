@@ -32,10 +32,10 @@ $routes->setAutoRoute(false);
  */
 
 $routes->addPlaceholder('podcastHandle', '[a-zA-Z0-9\_]{1,32}');
-$routes->addPlaceholder('slug', '[a-zA-Z0-9\-]{1,191}');
+$routes->addPlaceholder('slug', '[a-zA-Z0-9\-]{1,128}');
 $routes->addPlaceholder('base64', '[A-Za-z0-9\.\_]+\-{0,2}');
 $routes->addPlaceholder('platformType', '\bpodcasting|\bsocial|\bfunding');
-$routes->addPlaceholder('statusAction', '\bfavourite|\breblog|\breply');
+$routes->addPlaceholder('postAction', '\bfavourite|\breblog|\breply');
 $routes->addPlaceholder('embeddablePlayerTheme', '\blight|\bdark|\blight-transparent|\bdark-transparent');
 $routes->addPlaceholder(
     'uuid',
@@ -416,6 +416,25 @@ $routes->group(
                                 ],
                             );
                         });
+
+                        $routes->group('comments', function ($routes): void {
+                            $routes->post(
+                                'new',
+                                'EpisodeController::attemptCommentCreate/$1/$2',
+                                [
+                                    'as' => 'comment-attempt-create',
+                                    'filter' => 'permission:podcast-manage_publications',
+                                ]
+                            );
+                            $routes->post(
+                                'delete',
+                                'EpisodeController::attemptCommentDelete/$1/$2',
+                                [
+                                    'as' => 'comment-attempt-delete',
+                                    'filter' => 'permission:podcast-manage_publications',
+                                ]
+                            );
+                        });
                     });
                 });
 
@@ -752,6 +771,12 @@ $routes->group('@(:podcastHandle)', function ($routes): void {
                 'controller-method' => 'EpisodeController::comments/$1/$2',
             ],
         ]);
+        $routes->get('comments/(:uuid)', 'EpisodeController::comment/$1/$2/$3', [
+            'as' => 'comment',
+        ]);
+        $routes->get('comments/(:uuid)/replies', 'EpisodeController::commentReplies/$1/$2/$3', [
+            'as' => 'comment-replies',
+        ]);
         $routes->get('oembed.json', 'EpisodeController::oembedJSON/$1/$2', [
             'as' => 'episode-oembed-json',
         ]);
@@ -803,73 +828,74 @@ $routes->post('interact-as-actor', 'AuthController::attemptInteractAsActor', [
  * Overwriting ActivityPub routes file
  */
 $routes->group('@(:podcastHandle)', function ($routes): void {
-    $routes->post('statuses/new', 'StatusController::attemptCreate/$1', [
-        'as' => 'status-attempt-create',
+    $routes->post('posts/new', 'PostController::attemptCreate/$1', [
+        'as' => 'post-attempt-create',
         'filter' => 'permission:podcast-manage_publications',
     ]);
-    // Status
-    $routes->group('statuses/(:uuid)', function ($routes): void {
+
+    // Post
+    $routes->group('posts/(:uuid)', function ($routes): void {
         $routes->options('/', 'ActivityPubController::preflight');
-        $routes->get('/', 'StatusController::view/$1/$2', [
-            'as' => 'status',
+        $routes->get('/', 'PostController::view/$1/$2', [
+            'as' => 'post',
             'alternate-content' => [
                 'application/activity+json' => [
                     'namespace' => 'ActivityPub\Controllers',
-                    'controller-method' => 'StatusController/$2',
+                    'controller-method' => 'PostController/$2',
                 ],
                 'application/ld+json; profile="https://www.w3.org/ns/activitystreams' => [
                     'namespace' => 'ActivityPub\Controllers',
-                    'controller-method' => 'StatusController/$2',
+                    'controller-method' => 'PostController/$2',
                 ],
             ],
         ]);
         $routes->options('replies', 'ActivityPubController::preflight');
-        $routes->get('replies', 'StatusController/$1/$2', [
-            'as' => 'status-replies',
+        $routes->get('replies', 'PostController/$1/$2', [
+            'as' => 'post-replies',
             'alternate-content' => [
                 'application/activity+json' => [
                     'namespace' => 'ActivityPub\Controllers',
-                    'controller-method' => 'StatusController::replies/$2',
+                    'controller-method' => 'PostController::replies/$2',
                 ],
                 'application/ld+json; profile="https://www.w3.org/ns/activitystreams' => [
                     'namespace' => 'ActivityPub\Controllers',
-                    'controller-method' => 'StatusController::replies/$2',
+                    'controller-method' => 'PostController::replies/$2',
                 ],
             ],
         ]);
 
         // Actions
-        $routes->post('action', 'StatusController::attemptAction/$1/$2', [
-            'as' => 'status-attempt-action',
+        $routes->post('action', 'PostController::attemptAction/$1/$2', [
+            'as' => 'post-attempt-action',
             'filter' => 'permission:podcast-interact_as',
         ]);
 
         $routes->post(
             'block-actor',
-            'StatusController::attemptBlockActor/$1/$2',
+            'PostController::attemptBlockActor/$1/$2',
             [
-                'as' => 'status-attempt-block-actor',
+                'as' => 'post-attempt-block-actor',
                 'filter' => 'permission:fediverse-block_actors',
             ],
         );
         $routes->post(
             'block-domain',
-            'StatusController::attemptBlockDomain/$1/$2',
+            'PostController::attemptBlockDomain/$1/$2',
             [
-                'as' => 'status-attempt-block-domain',
+                'as' => 'post-attempt-block-domain',
                 'filter' => 'permission:fediverse-block_domains',
             ],
         );
-        $routes->post('delete', 'StatusController::attemptDelete/$1/$2', [
-            'as' => 'status-attempt-delete',
+        $routes->post('delete', 'PostController::attemptDelete/$1/$2', [
+            'as' => 'post-attempt-delete',
             'filter' => 'permission:podcast-manage_publications',
         ]);
 
         $routes->get(
-            'remote/(:statusAction)',
-            'StatusController::remoteAction/$1/$2/$3',
+            'remote/(:postAction)',
+            'PostController::remoteAction/$1/$2/$3',
             [
-                'as' => 'status-remote-action',
+                'as' => 'post-remote-action',
             ],
         );
     });

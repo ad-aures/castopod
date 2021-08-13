@@ -11,9 +11,9 @@
     ->display_name ?><span class="ml-1 text-sm font-normal text-gray-600">@<?= $reply
     ->actor->username .
     ($reply->actor->is_local ? '' : '@' . $reply->actor->domain) ?></span></a>
-            <?= relative_time($status->published_at, 'flex-shrink-0 ml-auto text-xs text-gray-600') ?>
+            <?= relative_time($post->published_at, 'flex-shrink-0 ml-auto text-xs text-gray-600') ?>
         </header>
-        <p class="mb-2 status-content"><?= $reply->message_html ?></p>
+        <p class="mb-2 post-content"><?= $reply->message_html ?></p>
         <?php if ($reply->has_preview_card): ?>
             <?= view('podcast/_partials/preview_card', [
                 'preview_card' => $reply->preview_card,

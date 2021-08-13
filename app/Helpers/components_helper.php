@@ -255,7 +255,7 @@ if (! function_exists('publication_button')) {
     /**
      * Publication button component
      *
-     * Displays the appropriate publication button depending on the publication status.
+     * Displays the appropriate publication button depending on the publication post.
      */
     function publication_button(int $podcastId, int $episodeId, string $publicationStatus): string
     {

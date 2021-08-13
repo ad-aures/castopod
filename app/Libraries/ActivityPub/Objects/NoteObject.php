@@ -15,7 +15,7 @@ declare(strict_types=1);
 namespace ActivityPub\Objects;
 
 use ActivityPub\Core\ObjectType;
-use ActivityPub\Entities\Status;
+use ActivityPub\Entities\Post;
 
 class NoteObject extends ObjectType
 {
@@ -27,20 +27,20 @@ class NoteObject extends ObjectType
 
     protected string $replies;
 
-    public function __construct(Status $status)
+    public function __construct(Post $post)
     {
-        $this->id = $status->uri;
+        $this->id = $post->uri;
 
-        $this->content = $status->message_html;
-        $this->published = $status->published_at->format(DATE_W3C);
-        $this->attributedTo = $status->actor->uri;
+        $this->content = $post->message_html;
+        $this->published = $post->published_at->format(DATE_W3C);
+        $this->attributedTo = $post->actor->uri;
 
-        if ($status->in_reply_to_id !== null) {
-            $this->inReplyTo = $status->reply_to_status->uri;
+        if ($post->in_reply_to_id !== null) {
+            $this->inReplyTo = $post->reply_to_post->uri;
         }
 
-        $this->replies = url_to('status-replies', $status->actor->username, $status->id);
+        $this->replies = url_to('post-replies', $post->actor->username, $post->id);
 
-        $this->cc = [$status->actor->followers_url];
+        $this->cc = [$post->actor->followers_url];
     }
 }

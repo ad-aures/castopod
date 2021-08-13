@@ -14,20 +14,20 @@ use Michalsn\Uuid\UuidEntity;
 
 /**
  * @property int $actor_id
- * @property string $status_id
+ * @property string $post_id
  */
 class Favourite extends UuidEntity
 {
     /**
      * @var string[]
      */
-    protected $uuids = ['status_id'];
+    protected $uuids = ['post_id'];
 
     /**
      * @var array<string, string>
      */
     protected $casts = [
         'actor_id' => 'integer',
-        'status_id' => 'string',
+        'post_id' => 'string',
     ];
 }

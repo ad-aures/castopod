@@ -1,43 +1,43 @@
-<article class="relative z-10 w-full bg-white shadow-md rounded-2xl">
+<article class="relative z-10 w-full bg-white shadow rounded-2xl">
     <p class="inline-flex px-6 pt-4 text-xs text-gray-700"><?= icon(
         'repeat',
         'text-lg mr-2 text-gray-400',
     ) .
-        lang('Status.actor_shared', [
-            'actor' => $status->actor->display_name,
+        lang('Post.actor_shared', [
+            'actor' => $post->actor->display_name,
         ]) ?></p>
     <header class="flex px-6 py-4">
-        <img src="<?= $status->actor
-            ->avatar_image_url ?>" alt="<?= $status->display_name ?>" class="w-12 h-12 mr-4 rounded-full" />
+        <img src="<?= $post->actor
+            ->avatar_image_url ?>" alt="<?= $post->display_name ?>" class="w-12 h-12 mr-4 rounded-full" />
         <div class="flex flex-col min-w-0">
-            <a href="<?= $status->actor
-                ->uri ?>" class="flex items-baseline hover:underline" <?= $status
+            <a href="<?= $post->actor
+                ->uri ?>" class="flex items-baseline hover:underline" <?= $post
     ->actor->is_local
     ? ''
     : 'target="_blank" rel="noopener noreferrer"' ?>>
-                <span class="mr-2 font-semibold truncate"><?= $status->actor
+                <span class="mr-2 font-semibold truncate"><?= $post->actor
                     ->display_name ?></span>
-                <span class="text-sm text-gray-500 truncate">@<?= $status->actor
+                <span class="text-sm text-gray-500 truncate">@<?= $post->actor
                     ->username .
-                    ($status->actor->is_local
+                    ($post->actor->is_local
                         ? ''
-                        : '@' . $status->actor->domain) ?></span>
+                        : '@' . $post->actor->domain) ?></span>
             </a>
-            <a href="<?= route_to('status', $podcast->handle, $status->id) ?>"
+            <a href="<?= route_to('post', $podcast->handle, $post->id) ?>"
             class="text-xs text-gray-500">
-                <?= relative_time($status->published_at) ?>
+                <?= relative_time($post->published_at) ?>
             </a>
         </div>
     </header>
-    <div class="px-6 mb-4 status-content"><?= $status->message_html ?></div>
-    <?php if ($status->episode_id): ?>
+    <div class="px-6 mb-4 post-content"><?= $post->message_html ?></div>
+    <?php if ($post->episode_id): ?>
         <?= view('podcast/_partials/episode_preview_card', [
-            'episode' => $status->episode,
+            'episode' => $post->episode,
         ]) ?>
-    <?php elseif ($status->has_preview_card): ?>
+    <?php elseif ($post->has_preview_card): ?>
         <?= view('podcast/_partials/preview_card', [
-            'preview_card' => $status->preview_card,
+            'preview_card' => $post->preview_card,
         ]) ?>
     <?php endif; ?>
-    <?= $this->include('podcast/_partials/status_actions_authenticated') ?>
+    <?= $this->include('podcast/_partials/post_actions_authenticated') ?>
 </article>

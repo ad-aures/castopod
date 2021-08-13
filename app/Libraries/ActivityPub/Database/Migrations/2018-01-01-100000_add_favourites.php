@@ -23,15 +23,15 @@ class AddFavourites extends Migration
                 'type' => 'INT',
                 'unsigned' => true,
             ],
-            'status_id' => [
+            'post_id' => [
                 'type' => 'BINARY',
                 'constraint' => 16,
             ],
         ]);
         $this->forge->addField('`created_at` timestamp NOT NULL DEFAULT current_timestamp()');
-        $this->forge->addPrimaryKey(['actor_id', 'status_id']);
+        $this->forge->addPrimaryKey(['actor_id', 'post_id']);
         $this->forge->addForeignKey('actor_id', 'activitypub_actors', 'id', '', 'CASCADE');
-        $this->forge->addForeignKey('status_id', 'activitypub_statuses', 'id', '', 'CASCADE');
+        $this->forge->addForeignKey('post_id', 'activitypub_posts', 'id', '', 'CASCADE');
         $this->forge->createTable('activitypub_favourites');
     }
 

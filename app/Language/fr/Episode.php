@@ -16,19 +16,12 @@ return [
     'season_episode' => 'Saison {seasonNumber} épisode {episodeNumber}',
     'season_episode_abbr' => 'S{seasonNumber}E{episodeNumber}',
     'back_to_episodes' => 'Retour aux épisodes de {podcast}',
+    'comments' => 'Commentaires',
     'activity' => 'Activité',
     'description' => 'Description',
-    'total_favourites' => '{numberOfTotalFavourites, plural,
-        one {# favori en tout}
-        other {# favoris en tout}
-    }',
-    'total_reblogs' => '{numberOfTotalReblogs, plural,
-        one {# partage en tout}
-        other {# partages en tout}
-    }',
-    'total_statuses' => '{numberOfTotalStatuses, plural,
-        one {# message}
-        other {# messages}
+    'number_of_comments' => '{numberOfComments, plural,
+        one {# commentaire}
+        other {# commentaires}
     }',
     'all_podcast_episodes' => 'Tous les épisodes du podcast',
     'back_to_podcast' => 'Revenir au podcast',
@@ -125,8 +118,8 @@ return [
     ],
     'publish_form' => [
         'back_to_episode_dashboard' => 'Retour au tableau de bord de l’épisode',
-        'status' => 'Votre message de publication',
-        'status_hint' =>
+        'post' => 'Votre message de publication',
+        'post_hint' =>
             'Écrivez un message pour annoncer la publication de votre épisode. Le message sera diffusé à toutes les personnes qui vous suivent dans le fédiverse et mis en évidence sur la page d’accueil de votre podcast.',
         'publication_date' => 'Date de publication',
         'publication_date_clear' => 'Effacer la date de publication',

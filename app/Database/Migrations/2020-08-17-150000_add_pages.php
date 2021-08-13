@@ -30,7 +30,7 @@ class AddPages extends Migration
             ],
             'slug' => [
                 'type' => 'VARCHAR',
-                'constraint' => 191,
+                'constraint' => 128,
                 'unique' => true,
             ],
             'content_markdown' => [

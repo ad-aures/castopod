@@ -70,18 +70,18 @@ class PreviewCardModel extends Model
         return $found;
     }
 
-    public function getStatusPreviewCard(string $statusId): ?PreviewCard
+    public function getPostPreviewCard(string $postId): ?PreviewCard
     {
         $cacheName =
             config('ActivityPub')
-                ->cachePrefix . "status#{$statusId}_preview_card";
+                ->cachePrefix . "post#{$postId}_preview_card";
         if (! ($found = cache($cacheName))) {
             $found = $this->join(
-                'activitypub_statuses_preview_cards',
-                'activitypub_statuses_preview_cards.preview_card_id = id',
+                'activitypub_posts_preview_cards',
+                'activitypub_posts_preview_cards.preview_card_id = id',
                 'inner',
             )
-                ->where('status_id', service('uuid') ->fromString($statusId) ->getBytes())
+                ->where('post_id', service('uuid') ->fromString($postId) ->getBytes())
                 ->first();
 
             cache()

@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace ActivityPub\Controllers;
 
 use ActivityPub\Config\ActivityPub;
-use ActivityPub\Entities\Status;
+use ActivityPub\Entities\Post;
 use ActivityPub\Objects\OrderedCollectionObject;
 use ActivityPub\Objects\OrderedCollectionPage;
 use CodeIgniter\Controller;
@@ -21,14 +21,14 @@ use CodeIgniter\HTTP\Response;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\I18n\Time;
 
-class StatusController extends Controller
+class PostController extends Controller
 {
     /**
      * @var string[]
      */
     protected $helpers = ['activitypub'];
 
-    protected Status $status;
+    protected Post $post;
 
     protected ActivityPub $config;
 
@@ -39,11 +39,11 @@ class StatusController extends Controller
 
     public function _remap(string $method, string ...$params): mixed
     {
-        if (($status = model('StatusModel')->getStatusById($params[0])) === null) {
+        if (($post = model('PostModel')->getPostById($params[0])) === null) {
             throw PageNotFoundException::forPageNotFound();
         }
 
-        $this->status = $status;
+        $this->post = $post;
 
         unset($params[0]);
 
@@ -56,7 +56,7 @@ class StatusController extends Controller
     public function index(): Response
     {
         $noteObjectClass = $this->config->noteObject;
-        $noteObject = new $noteObjectClass($this->status);
+        $noteObject = new $noteObjectClass($this->post);
 
         return $this->response
             ->setContentType('application/activity+json')
@@ -69,22 +69,22 @@ class StatusController extends Controller
     public function replies(): Response
     {
         /**
-         * get status replies
+         * get post replies
          */
-        $statusReplies = model('StatusModel')
-            ->where('in_reply_to_id', service('uuid') ->fromString($this->status->id) ->getBytes())
+        $postReplies = model('PostModel')
+            ->where('in_reply_to_id', service('uuid') ->fromString($this->post->id) ->getBytes())
             ->where('`published_at` <= NOW()', null, false)
             ->orderBy('published_at', 'ASC');
 
         $pageNumber = (int) $this->request->getGet('page');
 
         if ($pageNumber < 1) {
-            $statusReplies->paginate(12);
-            $pager = $statusReplies->pager;
+            $postReplies->paginate(12);
+            $pager = $postReplies->pager;
             $collection = new OrderedCollectionObject(null, $pager);
         } else {
-            $paginatedReplies = $statusReplies->paginate(12, 'default', $pageNumber);
-            $pager = $statusReplies->pager;
+            $paginatedReplies = $postReplies->paginate(12, 'default', $pageNumber);
+            $pager = $postReplies->pager;
 
             $orderedItems = [];
             $noteObjectClass = $this->config->noteObject;
@@ -118,21 +118,21 @@ class StatusController extends Controller
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $newStatus = new Status([
+        $newPost = new Post([
             'actor_id' => $this->request->getPost('actor_id'),
             'message' => $this->request->getPost('message'),
             'published_at' => Time::now(),
         ]);
 
-        if (! model('StatusModel')->addStatus($newStatus)) {
+        if (! model('PostModel')->addPost($newPost)) {
             return redirect()
                 ->back()
                 ->withInput()
                 // TODO: translate
-                ->with('error', "Couldn't create Status");
+                ->with('error', "Couldn't create Post");
         }
 
-        // Status without preview card has been successfully created
+        // Post without preview card has been successfully created
         return redirect()->back();
     }
 
@@ -153,7 +153,7 @@ class StatusController extends Controller
             ->getActorById($this->request->getPost('actor_id'));
 
         model('FavouriteModel')
-            ->toggleFavourite($actor, $this->status->id);
+            ->toggleFavourite($actor, $this->post->id);
 
         return redirect()->back();
     }
@@ -174,8 +174,8 @@ class StatusController extends Controller
         $actor = model('ActorModel')
             ->getActorById($this->request->getPost('actor_id'));
 
-        model('StatusModel')
-            ->toggleReblog($actor, $this->status);
+        model('PostModel')
+            ->toggleReblog($actor, $this->post);
 
         return redirect()->back();
     }
@@ -194,14 +194,14 @@ class StatusController extends Controller
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $newReplyStatus = new Status([
+        $newReplyPost = new Post([
             'actor_id' => $this->request->getPost('actor_id'),
-            'in_reply_to_id' => $this->status->id,
+            'in_reply_to_id' => $this->post->id,
             'message' => $this->request->getPost('message'),
             'published_at' => Time::now(),
         ]);
 
-        if (! model('StatusModel')->addReply($newReplyStatus)) {
+        if (! model('PostModel')->addReply($newReplyPost)) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -209,7 +209,7 @@ class StatusController extends Controller
                 ->with('error', "Couldn't create Reply");
         }
 
-        // Reply status without preview card has been successfully created
+        // Reply post without preview card has been successfully created
         return redirect()->back();
     }
 
@@ -249,33 +249,33 @@ class StatusController extends Controller
         );
 
         if (! $ostatusKey) {
-            // TODO: error, couldn't remote favourite/share/reply to status
-            // The instance doesn't allow its users remote actions on statuses
+            // TODO: error, couldn't remote favourite/share/reply to post
+            // The instance doesn't allow its users remote actions on posts
             return $this->response->setJSON([]);
         }
 
         return redirect()->to(
-            str_replace('{uri}', urlencode($this->status->uri), $data->links[$ostatusKey]->template),
+            str_replace('{uri}', urlencode($this->post->uri), $data->links[$ostatusKey]->template),
         );
     }
 
     public function attemptBlockActor(): RedirectResponse
     {
-        model('ActorModel')->blockActor($this->status->actor->id);
+        model('ActorModel')->blockActor($this->post->actor->id);
 
         return redirect()->back();
     }
 
     public function attemptBlockDomain(): RedirectResponse
     {
-        model('BlockedDomainModel')->blockDomain($this->status->actor->domain);
+        model('BlockedDomainModel')->blockDomain($this->post->actor->domain);
 
         return redirect()->back();
     }
 
     public function attemptDelete(): RedirectResponse
     {
-        model('StatusModel', false)->removeStatus($this->status);
+        model('PostModel', false)->removePost($this->post);
 
         return redirect()->back();
     }

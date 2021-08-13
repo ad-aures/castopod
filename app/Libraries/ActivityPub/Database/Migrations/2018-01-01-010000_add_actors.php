@@ -34,7 +34,7 @@ class AddActors extends Migration
             ],
             'domain' => [
                 'type' => 'VARCHAR',
-                'constraint' => 191,
+                'constraint' => 255,
             ],
             'private_key' => [
                 'type' => 'TEXT',
@@ -93,7 +93,7 @@ class AddActors extends Migration
                 'unsigned' => true,
                 'default' => 0,
             ],
-            'statuses_count' => [
+            'posts_count' => [
                 'type' => 'INT',
                 'unsigned' => true,
                 'default' => 0,

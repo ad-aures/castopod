@@ -28,12 +28,12 @@
                 <?= anchor(
                     route_to('episode', $podcast->handle, $episode->slug),
                     icon('chat', 'text-xl mr-1 text-gray-400') .
-                    $episode->statuses_total,
+                    $episode->comments_count,
                     [
                         'class' =>
-                        'inline-flex items-center hover:underline',
-                        'title' => lang('Episode.total_statuses', [
-                            'numberOfTotalStatuses' => $episode->statuses_total,
+                            'inline-flex items-center hover:underline',
+                        'title' => lang('Episode.number_of_comments', [
+                            'numberOfComments' => $episode->comments_count,
                         ]),
                     ],
                     ) ?>

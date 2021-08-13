@@ -18,7 +18,7 @@ use App\Libraries\PodcastActor;
 use App\Libraries\PodcastEpisode;
 use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
-use App\Models\StatusModel;
+use App\Models\PostModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\Response;
 
@@ -81,7 +81,7 @@ class PodcastController extends BaseController
         if (! ($cachedView = cache($cacheName))) {
             $data = [
                 'podcast' => $this->podcast,
-                'statuses' => (new StatusModel())->getActorPublishedStatuses($this->podcast->actor_id),
+                'posts' => (new PostModel())->getActorPublishedPosts($this->podcast->actor_id),
             ];
 
             // if user is logged in then send to the authenticated activity view

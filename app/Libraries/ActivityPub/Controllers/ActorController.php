@@ -12,7 +12,7 @@ namespace ActivityPub\Controllers;
 
 use ActivityPub\Config\ActivityPub;
 use ActivityPub\Entities\Actor;
-use ActivityPub\Entities\Status;
+use ActivityPub\Entities\Post;
 use ActivityPub\Objects\OrderedCollectionObject;
 use ActivityPub\Objects\OrderedCollectionPage;
 use CodeIgniter\Controller;
@@ -101,30 +101,30 @@ class ActorController extends Controller
                             ->setJSON([]);
                     }
 
-                    $replyToStatus = model('StatusModel')
-                        ->getStatusByUri($payload->object->inReplyTo);
+                    $replyToPost = model('PostModel')
+                        ->getPostByUri($payload->object->inReplyTo);
 
                     $reply = null;
-                    if ($replyToStatus !== null) {
+                    if ($replyToPost !== null) {
                         // TODO: strip content from html to retrieve message
                         // remove all html tags and reconstruct message with mentions?
                         extract_text_from_html($payload->object->content);
-                        $reply = new Status([
+                        $reply = new Post([
                             'uri' => $payload->object->id,
                             'actor_id' => $payloadActor->id,
-                            'in_reply_to_id' => $replyToStatus->id,
+                            'in_reply_to_id' => $replyToPost->id,
                             'message' => $payload->object->content,
                             'published_at' => Time::parse($payload->object->published),
                         ]);
                     }
 
                     if ($reply !== null) {
-                        $statusId = model('StatusModel')
+                        $postId = model('PostModel')
                             ->addReply($reply, true, false);
 
                         model('ActivityModel')
                             ->update($activityId, [
-                                'status_id' => $statusId,
+                                'post_id' => $postId,
                             ]);
                     }
 
@@ -135,12 +135,12 @@ class ActorController extends Controller
                 return $this->response->setStatusCode(501)
                     ->setJSON([]);
             case 'Delete':
-                $statusToDelete = model('StatusModel')
-                    ->getStatusByUri($payload->object->id);
+                $postToDelete = model('PostModel')
+                    ->getPostByUri($payload->object->id);
 
-                if ($statusToDelete !== null) {
-                    model('StatusModel')
-                        ->removeStatus($statusToDelete, false);
+                if ($postToDelete !== null) {
+                    model('PostModel')
+                        ->removePost($postToDelete, false);
                 }
 
                 return $this->response->setStatusCode(200)
@@ -158,35 +158,35 @@ class ActorController extends Controller
                     ->setJSON([]);
 
             case 'Like':
-                // get favourited status
-                $status = model('StatusModel')
-                    ->getStatusByUri($payload->object);
+                // get favourited post
+                $post = model('PostModel')
+                    ->getPostByUri($payload->object);
 
-                if ($status !== null) {
+                if ($post !== null) {
                     // Like side-effect
                     model('FavouriteModel')
-                        ->addFavourite($payloadActor, $status, false);
+                        ->addFavourite($payloadActor, $post, false);
 
                     model('ActivityModel')
                         ->update($activityId, [
-                            'status_id' => $status->id,
+                            'post_id' => $post->id,
                         ]);
                 }
 
                 return $this->response->setStatusCode(200)
                     ->setJSON([]);
             case 'Announce':
-                $status = model('StatusModel')
-                    ->getStatusByUri($payload->object);
+                $post = model('PostModel')
+                    ->getPostByUri($payload->object);
 
-                if ($status !== null) {
+                if ($post !== null) {
                     model('ActivityModel')
                         ->update($activityId, [
-                            'status_id' => $status->id,
+                            'post_id' => $post->id,
                         ]);
 
-                    model('StatusModel')
-                        ->reblog($payloadActor, $status, false);
+                    model('PostModel')
+                        ->reblog($payloadActor, $post, false);
                 }
 
                 return $this->response->setStatusCode(200)
@@ -204,45 +204,45 @@ class ActorController extends Controller
                         return $this->response->setStatusCode(202)
                             ->setJSON([]);
                     case 'Like':
-                        $status = model('StatusModel')
-                            ->getStatusByUri($payload->object->object);
+                        $post = model('PostModel')
+                            ->getPostByUri($payload->object->object);
 
-                        if ($status !== null) {
+                        if ($post !== null) {
                             // revert side-effect by removing favourite from database
                             model('FavouriteModel')
-                                ->removeFavourite($payloadActor, $status, false);
+                                ->removeFavourite($payloadActor, $post, false);
 
                             model('ActivityModel')
                                 ->update($activityId, [
-                                    'status_id' => $status->id,
+                                    'post_id' => $post->id,
                                 ]);
                         }
 
                         return $this->response->setStatusCode(200)
                             ->setJSON([]);
                     case 'Announce':
-                        $status = model('StatusModel')
-                            ->getStatusByUri($payload->object->object);
+                        $post = model('PostModel')
+                            ->getPostByUri($payload->object->object);
 
-                        $reblogStatus = null;
-                        if ($status !== null) {
-                            $reblogStatus = model('StatusModel')
+                        $reblogPost = null;
+                        if ($post !== null) {
+                            $reblogPost = model('PostModel')
                                 ->where([
                                     'actor_id' => $payloadActor->id,
                                     'reblog_of_id' => service('uuid')
-                                        ->fromString($status->id)
+                                        ->fromString($post->id)
                                         ->getBytes(),
                                 ])
                                 ->first();
                         }
 
-                        if ($reblogStatus !== null) {
-                            model('StatusModel')
-                                ->undoReblog($reblogStatus, false);
+                        if ($reblogPost !== null) {
+                            model('PostModel')
+                                ->undoReblog($reblogPost, false);
 
                             model('ActivityModel')
                                 ->update($activityId, [
-                                    'status_id' => $status->id,
+                                    'post_id' => $post->id,
                                 ]);
                         }
 

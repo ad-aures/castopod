@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 return [
     'title' => 'Publication de {actorDisplayName}',
-    'back_to_actor_statuses' => 'Retour aux publications de {actor}',
+    'back_to_actor_posts' => 'Retour aux publications de {actor}',
     'actor_shared' => '{actor} a partagé',
     'reply_to' => 'Répondre à @{actorUsername}',
     'form' => [

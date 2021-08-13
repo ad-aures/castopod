@@ -1,11 +1,4 @@
-<article class="relative z-10 w-full bg-white shadow rounded-2xl">
-    <p class="inline-flex px-6 pt-4 text-xs text-gray-700"><?= icon(
-        'repeat',
-        'text-lg mr-2 text-gray-400',
-    ) .
-        lang('Post.actor_shared', [
-            'actor' => $post->actor->display_name,
-        ]) ?></p>
+<article class="relative z-10 w-full bg-white shadow-md rounded-2xl">
     <header class="flex px-6 py-4">
         <img src="<?= $post->actor
             ->avatar_image_url ?>" alt="<?= $post->display_name ?>" class="w-12 h-12 mr-4 rounded-full" />
@@ -39,5 +32,5 @@
             'preview_card' => $post->preview_card,
         ]) ?>
     <?php endif; ?>
-    <?= $this->include('podcast/_partials/post_actions') ?>
+    <?= $this->include('podcast/_partials/post_actions_authenticated') ?>
 </article>

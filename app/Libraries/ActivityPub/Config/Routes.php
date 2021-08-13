@@ -13,7 +13,7 @@ $routes->addPlaceholder(
     'uuid',
     '[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}',
 );
-$routes->addPlaceholder('statusAction', '\bfavourite|\breblog|\breply');
+$routes->addPlaceholder('postAction', '\bfavourite|\breblog|\breply');
 
 /**
  * ActivityPub routes file
@@ -54,24 +54,24 @@ $routes->group('', [
         ]);
     });
 
-    // Status
-    $routes->post('statuses/new', 'StatusController::attemptCreate/$1', [
-        'as' => 'status-attempt-create',
+    // Post
+    $routes->post('posts/new', 'PostController::attemptCreate/$1', [
+        'as' => 'post-attempt-create',
     ]);
 
-    $routes->get('statuses/(:uuid)', 'StatusController/$1', [
-        'as' => 'status',
+    $routes->get('posts/(:uuid)', 'PostController/$1', [
+        'as' => 'post',
     ]);
 
-    $routes->get('statuses/(:uuid)/replies', 'StatusController/$1', [
-        'as' => 'status-replies',
+    $routes->get('posts/(:uuid)/replies', 'PostController/$1', [
+        'as' => 'post-replies',
     ]);
 
     $routes->post(
-        'statuses/(:uuid)/remote/(:statusAction)',
-        'StatusController::attemptRemoteAction/$1/$2/$3',
+        'posts/(:uuid)/remote/(:postAction)',
+        'PostController::attemptRemoteAction/$1/$2/$3',
         [
-            'as' => 'status-attempt-remote-action',
+            'as' => 'post-attempt-remote-action',
         ],
     );
 

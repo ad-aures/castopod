@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Config;
 
 use App\Entities\Actor;
-use App\Entities\Status;
+use App\Entities\Post;
 use App\Entities\User;
 use CodeIgniter\Events\Events;
 use CodeIgniter\Exceptions\FrameworkException;
@@ -120,82 +120,72 @@ Events::on('on_undo_follow', function ($actor, $targetActor): void {
 });
 
 /**
- * @param Status $status
+ * @param Post $post
  */
-Events::on('on_status_add', function ($status): void {
-    if ($status->in_reply_to_id !== null) {
-        $status = $status->reply_to_status;
+Events::on('on_post_add', function ($post): void {
+    $isReply = $post->in_reply_to_id !== null;
+
+    if ($isReply) {
+        $post = $post->reply_to_post;
     }
 
-    if ($status->episode_id) {
-        model('EpisodeModel')
-            ->where('id', $status->episode_id)
-            ->increment('statuses_total');
+    if ($post->episode_id !== null) {
+        if ($isReply) {
+            model('EpisodeModel', false)
+                ->where('id', $post->episode_id)
+                ->increment('comments_count');
+        } else {
+            model('EpisodeModel', false)
+                ->where('id', $post->episode_id)
+                ->increment('posts_count');
+        }
     }
 
-    if ($status->actor->is_podcast) {
+    if ($post->actor->is_podcast) {
         // Removing all of the podcast pages is a bit overkill, but works to avoid caching bugs
         // same for other events below
         cache()
-            ->deleteMatching("podcast#{$status->actor->podcast->id}*");
+            ->deleteMatching("podcast#{$post->actor->podcast->id}*");
         cache()
-            ->deleteMatching("page_podcast#{$status->actor->podcast->id}*");
+            ->deleteMatching("page_podcast#{$post->actor->podcast->id}*");
     }
 });
 
 /**
- * @param Status $status
+ * @param Post $post
  */
-Events::on('on_status_remove', function ($status): void {
-    if ($status->in_reply_to_id !== null) {
-        Events::trigger('on_status_remove', $status->reply_to_status);
+Events::on('on_post_remove', function ($post): void {
+    if ($post->in_reply_to_id !== null) {
+        Events::trigger('on_post_remove', $post->reply_to_post);
     }
 
-    if ($episodeId = $status->episode_id) {
-        model('EpisodeModel')
+    if ($episodeId = $post->episode_id) {
+        model('EpisodeModel', false)
             ->where('id', $episodeId)
-            ->decrement('statuses_total', 1 + $status->reblogs_count);
-
-        model('EpisodeModel')
-            ->where('id', $episodeId)
-            ->decrement('reblogs_total', $status->reblogs_count);
-
-        model('EpisodeModel')
-            ->where('id', $episodeId)
-            ->decrement('favourites_total', $status->favourites_count);
+            ->decrement('posts_count');
     }
 
-    if ($status->actor->is_podcast) {
+    if ($post->actor->is_podcast) {
         cache()
-            ->deleteMatching("podcast#{$status->actor->podcast->id}*");
+            ->deleteMatching("podcast#{$post->actor->podcast->id}*");
         cache()
-            ->deleteMatching("page_podcast#{$status->actor->podcast->id}*");
+            ->deleteMatching("page_podcast#{$post->actor->podcast->id}*");
     }
 
     cache()
-        ->deleteMatching("page_status#{$status->id}*");
+        ->deleteMatching("page_post#{$post->id}*");
 });
 
 /**
  * @param Actor $actor
- * @param Status $status
+ * @param Post $post
  */
-Events::on('on_status_reblog', function ($actor, $status): void {
-    if ($episodeId = $status->episode_id) {
-        model('EpisodeModel')
-            ->where('id', $episodeId)
-            ->increment('reblogs_total');
-
-        model('EpisodeModel')
-            ->where('id', $episodeId)
-            ->increment('statuses_total');
-    }
-
-    if ($status->actor->is_podcast) {
+Events::on('on_post_reblog', function ($actor, $post): void {
+    if ($post->actor->is_podcast) {
         cache()
-            ->deleteMatching("podcast#{$status->actor->podcast->id}*");
+            ->deleteMatching("podcast#{$post->actor->podcast->id}*");
         cache()
-            ->deleteMatching("page_podcast#{$status->actor->podcast->id}*");
+            ->deleteMatching("page_podcast#{$post->actor->podcast->id}*");
     }
 
     if ($actor->is_podcast) {
@@ -205,111 +195,96 @@ Events::on('on_status_reblog', function ($actor, $status): void {
     }
 
     cache()
-        ->deleteMatching("page_status#{$status->id}*");
+        ->deleteMatching("page_post#{$post->id}*");
 
-    if ($status->in_reply_to_id !== null) {
-        cache()->deleteMatching("page_status#{$status->in_reply_to_id}");
+    if ($post->in_reply_to_id !== null) {
+        cache()->deleteMatching("page_post#{$post->in_reply_to_id}");
     }
 });
 
 /**
- * @param Status $reblogStatus
+ * @param Post $reblogPost
  */
-Events::on('on_status_undo_reblog', function ($reblogStatus): void {
-    $status = $reblogStatus->reblog_of_status;
-    if ($episodeId = $status->episode_id) {
-        model('EpisodeModel')
-            ->where('id', $episodeId)
-            ->decrement('reblogs_total');
+Events::on('on_post_undo_reblog', function ($reblogPost): void {
+    $post = $reblogPost->reblog_of_post;
 
-        model('EpisodeModel')
-            ->where('id', $episodeId)
-            ->decrement('statuses_total');
-    }
-
-    if ($status->actor->is_podcast) {
+    if ($post->actor->is_podcast) {
         cache()
-            ->deleteMatching("podcast#{$status->actor->podcast->id}*");
+            ->deleteMatching("podcast#{$post->actor->podcast->id}*");
         cache()
-            ->deleteMatching("page_podcast#{$status->actor->podcast->id}*");
+            ->deleteMatching("page_podcast#{$post->actor->podcast->id}*");
     }
 
     cache()
-        ->deleteMatching("page_status#{$status->id}*");
+        ->deleteMatching("page_post#{$post->id}*");
     cache()
-        ->deleteMatching("page_status#{$reblogStatus->id}*");
+        ->deleteMatching("page_post#{$reblogPost->id}*");
 
-    if ($status->in_reply_to_id !== null) {
-        cache()->deleteMatching("page_status#{$status->in_reply_to_id}");
+    if ($post->in_reply_to_id !== null) {
+        cache()->deleteMatching("page_post#{$post->in_reply_to_id}");
     }
 
-    if ($reblogStatus->actor->is_podcast) {
+    if ($reblogPost->actor->is_podcast) {
         cache()
-            ->deleteMatching("podcast#{$reblogStatus->actor->podcast->id}*");
+            ->deleteMatching("podcast#{$reblogPost->actor->podcast->id}*");
         cache()
-            ->deleteMatching("page_podcast#{$reblogStatus->actor->podcast->id}*");
+            ->deleteMatching("page_podcast#{$reblogPost->actor->podcast->id}*");
     }
 });
 
 /**
- * @param Status $reply
+ * @param Post $reply
  */
-Events::on('on_status_reply', function ($reply): void {
-    $status = $reply->reply_to_status;
+Events::on('on_post_reply', function ($reply): void {
+    $post = $reply->reply_to_post;
 
-    if ($status->actor->is_podcast) {
+    if ($post->actor->is_podcast) {
         cache()
-            ->deleteMatching("podcast#{$status->actor->podcast->id}*");
+            ->deleteMatching("podcast#{$post->actor->podcast->id}*");
         cache()
-            ->deleteMatching("page_podcast#{$status->actor->podcast->id}*");
+            ->deleteMatching("page_podcast#{$post->actor->podcast->id}*");
     }
 
     cache()
-        ->deleteMatching("page_status#{$status->id}*");
+        ->deleteMatching("page_post#{$post->id}*");
 });
 
 /**
- * @param Status $reply
+ * @param Post $reply
  */
 Events::on('on_reply_remove', function ($reply): void {
-    $status = $reply->reply_to_status;
+    $post = $reply->reply_to_post;
 
-    if ($status->actor->is_podcast) {
+    if ($post->actor->is_podcast) {
         cache()
-            ->deleteMatching("page_podcast#{$status->actor->podcast->id}*");
+            ->deleteMatching("page_podcast#{$post->actor->podcast->id}*");
         cache()
-            ->deleteMatching("podcast#{$status->actor->podcast->id}*");
+            ->deleteMatching("podcast#{$post->actor->podcast->id}*");
     }
 
     cache()
-        ->deleteMatching("page_status#{$status->id}*");
+        ->deleteMatching("page_post#{$post->id}*");
     cache()
-        ->deleteMatching("page_status#{$reply->id}*");
+        ->deleteMatching("page_post#{$reply->id}*");
 });
 
 /**
  * @param Actor $actor
- * @param Status $status
+ * @param Post $post
  */
-Events::on('on_status_favourite', function ($actor, $status): void {
-    if ($status->episode_id) {
-        model('EpisodeModel')
-            ->where('id', $status->episode_id)
-            ->increment('favourites_total');
-    }
-
-    if ($status->actor->is_podcast) {
+Events::on('on_post_favourite', function ($actor, $post): void {
+    if ($post->actor->is_podcast) {
         cache()
-            ->deleteMatching("podcast#{$status->actor->podcast->id}*");
+            ->deleteMatching("podcast#{$post->actor->podcast->id}*");
         cache()
-            ->deleteMatching("page_podcast#{$status->actor->podcast->id}*");
+            ->deleteMatching("page_podcast#{$post->actor->podcast->id}*");
     }
 
     cache()
-        ->deleteMatching("page_status#{$status->id}*");
+        ->deleteMatching("page_post#{$post->id}*");
 
-    if ($status->in_reply_to_id !== null) {
-        cache()->deleteMatching("page_status#{$status->in_reply_to_id}*");
+    if ($post->in_reply_to_id !== null) {
+        cache()->deleteMatching("page_post#{$post->in_reply_to_id}*");
     }
 
     if ($actor->is_podcast) {
@@ -321,27 +296,21 @@ Events::on('on_status_favourite', function ($actor, $status): void {
 
 /**
  * @param Actor $actor
- * @param Status $status
+ * @param Post $post
  */
-Events::on('on_status_undo_favourite', function ($actor, $status): void {
-    if ($status->episode_id) {
-        model('EpisodeModel')
-            ->where('id', $status->episode_id)
-            ->decrement('favourites_total');
-    }
-
-    if ($status->actor->is_podcast) {
+Events::on('on_post_undo_favourite', function ($actor, $post): void {
+    if ($post->actor->is_podcast) {
         cache()
-            ->deleteMatching("podcast#{$status->actor->podcast->id}*");
+            ->deleteMatching("podcast#{$post->actor->podcast->id}*");
         cache()
-            ->deleteMatching("page_podcast#{$status->actor->podcast->id}*");
+            ->deleteMatching("page_podcast#{$post->actor->podcast->id}*");
     }
 
     cache()
-        ->deleteMatching("page_status#{$status->id}*");
+        ->deleteMatching("page_post#{$post->id}*");
 
-    if ($status->in_reply_to_id !== null) {
-        cache()->deleteMatching("page_status#{$status->in_reply_to_id}*");
+    if ($post->in_reply_to_id !== null) {
+        cache()->deleteMatching("page_post#{$post->in_reply_to_id}*");
     }
 
     if ($actor->is_podcast) {
@@ -356,7 +325,7 @@ Events::on('on_block_actor', function (int $actorId): void {
     cache()
         ->deleteMatching('podcast*');
     cache()
-        ->deleteMatching('page_status*');
+        ->deleteMatching('page_post*');
 });
 
 Events::on('on_unblock_actor', function (int $actorId): void {
@@ -364,7 +333,7 @@ Events::on('on_unblock_actor', function (int $actorId): void {
     cache()
         ->deleteMatching('podcast*');
     cache()
-        ->deleteMatching('page_status*');
+        ->deleteMatching('page_post*');
 });
 
 Events::on('on_block_domain', function (string $domainName): void {
@@ -372,7 +341,7 @@ Events::on('on_block_domain', function (string $domainName): void {
     cache()
         ->deleteMatching('podcast*');
     cache()
-        ->deleteMatching('page_status*');
+        ->deleteMatching('page_post*');
 });
 
 Events::on('on_unblock_domain', function (string $domainName): void {
@@ -380,5 +349,5 @@ Events::on('on_unblock_domain', function (string $domainName): void {
     cache()
         ->deleteMatching('podcast*');
     cache()
-        ->deleteMatching('page_status*');
+        ->deleteMatching('page_post*');
 });

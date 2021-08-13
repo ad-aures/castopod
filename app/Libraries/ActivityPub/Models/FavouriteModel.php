@@ -14,7 +14,7 @@ use ActivityPub\Activities\LikeActivity;
 use ActivityPub\Activities\UndoActivity;
 use ActivityPub\Entities\Actor;
 use ActivityPub\Entities\Favourite;
-use ActivityPub\Entities\Status;
+use ActivityPub\Entities\Post;
 use CodeIgniter\Events\Events;
 use Michalsn\Uuid\UuidModel;
 
@@ -28,12 +28,12 @@ class FavouriteModel extends UuidModel
     /**
      * @var string[]
      */
-    protected $uuidFields = ['status_id'];
+    protected $uuidFields = ['post_id'];
 
     /**
      * @var string[]
      */
-    protected $allowedFields = ['actor_id', 'status_id'];
+    protected $allowedFields = ['actor_id', 'post_id'];
 
     /**
      * @var string
@@ -47,32 +47,32 @@ class FavouriteModel extends UuidModel
 
     protected $updatedField;
 
-    public function addFavourite(Actor $actor, Status $status, bool $registerActivity = true): void
+    public function addFavourite(Actor $actor, Post $post, bool $registerActivity = true): void
     {
         $this->db->transStart();
 
         $this->insert([
             'actor_id' => $actor->id,
-            'status_id' => $status->id,
+            'post_id' => $post->id,
         ]);
 
-        model('StatusModel')
-            ->where('id', service('uuid') ->fromString($status->id) ->getBytes())
+        model('PostModel')
+            ->where('id', service('uuid') ->fromString($post->id) ->getBytes())
             ->increment('favourites_count');
 
         if ($registerActivity) {
             $likeActivity = new LikeActivity();
             $likeActivity->set('actor', $actor->uri)
-                ->set('object', $status->uri);
+                ->set('object', $post->uri);
 
             $activityId = model('ActivityModel')
                 ->newActivity(
                     'Like',
                     $actor->id,
                     null,
-                    $status->id,
+                    $post->id,
                     $likeActivity->toJSON(),
-                    $status->published_at,
+                    $post->published_at,
                     'queued',
                 );
 
@@ -84,28 +84,28 @@ class FavouriteModel extends UuidModel
                 ]);
         }
 
-        Events::trigger('on_status_favourite', $actor, $status);
+        Events::trigger('on_post_favourite', $actor, $post);
 
-        model('StatusModel')
-            ->clearCache($status);
+        model('PostModel')
+            ->clearCache($post);
 
         $this->db->transComplete();
     }
 
-    public function removeFavourite(Actor $actor, Status $status, bool $registerActivity = true): void
+    public function removeFavourite(Actor $actor, Post $post, bool $registerActivity = true): void
     {
         $this->db->transStart();
 
-        model('StatusModel')
-            ->where('id', service('uuid') ->fromString($status->id) ->getBytes())
+        model('PostModel')
+            ->where('id', service('uuid') ->fromString($post->id) ->getBytes())
             ->decrement('favourites_count');
 
         $this->db
             ->table('activitypub_favourites')
             ->where([
                 'actor_id' => $actor->id,
-                'status_id' => service('uuid')
-                    ->fromString($status->id)
+                'post_id' => service('uuid')
+                    ->fromString($post->id)
                     ->getBytes(),
             ])
             ->delete();
@@ -117,8 +117,8 @@ class FavouriteModel extends UuidModel
                 ->where([
                     'type' => 'Like',
                     'actor_id' => $actor->id,
-                    'status_id' => service('uuid')
-                        ->fromString($status->id)
+                    'post_id' => service('uuid')
+                        ->fromString($post->id)
                         ->getBytes(),
                 ])
                 ->first();
@@ -127,7 +127,7 @@ class FavouriteModel extends UuidModel
             $likeActivity
                 ->set('id', url_to('activity', $actor->username, $activity->id))
                 ->set('actor', $actor->uri)
-                ->set('object', $status->uri);
+                ->set('object', $post->uri);
 
             $undoActivity
                 ->set('actor', $actor->uri)
@@ -138,9 +138,9 @@ class FavouriteModel extends UuidModel
                     'Undo',
                     $actor->id,
                     null,
-                    $status->id,
+                    $post->id,
                     $undoActivity->toJSON(),
-                    $status->published_at,
+                    $post->published_at,
                     'queued',
                 );
 
@@ -152,10 +152,10 @@ class FavouriteModel extends UuidModel
                 ]);
         }
 
-        Events::trigger('on_status_undo_favourite', $actor, $status);
+        Events::trigger('on_post_undo_favourite', $actor, $post);
 
-        model('StatusModel')
-            ->clearCache($status);
+        model('PostModel')
+            ->clearCache($post);
 
         $this->db->transComplete();
     }
@@ -163,19 +163,19 @@ class FavouriteModel extends UuidModel
     /**
      * Adds or removes favourite from database and increments count
      */
-    public function toggleFavourite(Actor $actor, Status $status): void
+    public function toggleFavourite(Actor $actor, Post $post): void
     {
         if (
             $this->where([
                 'actor_id' => $actor->id,
-                'status_id' => service('uuid')
-                    ->fromString($status->id)
+                'post_id' => service('uuid')
+                    ->fromString($post->id)
                     ->getBytes(),
             ])->first()
         ) {
-            $this->removeFavourite($actor, $status);
+            $this->removeFavourite($actor, $post);
         } else {
-            $this->addFavourite($actor, $status);
+            $this->addFavourite($actor, $post);
         }
     }
 }

@@ -10,15 +10,17 @@ declare(strict_types=1);
 
 namespace App\Controllers\Admin;
 
+use App\Entities\Comment;
 use App\Entities\Episode;
 use App\Entities\Image;
 use App\Entities\Location;
 use App\Entities\Podcast;
-use App\Entities\Status;
+use App\Entities\Post;
+use App\Models\CommentModel;
 use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
+use App\Models\PostModel;
 use App\Models\SoundbiteModel;
-use App\Models\StatusModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\I18n\Time;
@@ -429,7 +431,7 @@ class EpisodeController extends BaseController
         $db = db_connect();
         $db->transStart();
 
-        $newStatus = new Status([
+        $newPost = new Post([
             'actor_id' => $this->podcast->actor_id,
             'episode_id' => $this->episode->id,
             'message' => $this->request->getPost('message'),
@@ -456,15 +458,15 @@ class EpisodeController extends BaseController
             $this->episode->published_at = Time::now();
         }
 
-        $newStatus->published_at = $this->episode->published_at;
+        $newPost->published_at = $this->episode->published_at;
 
-        $statusModel = new StatusModel();
-        if (! $statusModel->addStatus($newStatus)) {
+        $postModel = new PostModel();
+        if (! $postModel->addPost($newPost)) {
             $db->transRollback();
             return redirect()
                 ->back()
                 ->withInput()
-                ->with('errors', $statusModel->errors());
+                ->with('errors', $postModel->errors());
         }
 
         $episodeModel = new EpisodeModel();
@@ -489,7 +491,7 @@ class EpisodeController extends BaseController
             $data = [
                 'podcast' => $this->podcast,
                 'episode' => $this->episode,
-                'status' => (new StatusModel())
+                'post' => (new PostModel())
                     ->where([
                         'actor_id' => $this->podcast->actor_id,
                         'episode_id' => $this->episode->id,
@@ -513,7 +515,7 @@ class EpisodeController extends BaseController
     public function attemptPublishEdit(): RedirectResponse
     {
         $rules = [
-            'status_id' => 'required',
+            'post_id' => 'required',
             'publication_method' => 'required',
             'scheduled_publication_date' =>
                 'valid_date[Y-m-d H:i]|permit_empty',
@@ -549,19 +551,19 @@ class EpisodeController extends BaseController
             $this->episode->published_at = Time::now();
         }
 
-        $status = (new StatusModel())->getStatusById($this->request->getPost('status_id'));
+        $post = (new PostModel())->getPostById($this->request->getPost('post_id'));
 
-        if ($status !== null) {
-            $status->message = $this->request->getPost('message');
-            $status->published_at = $this->episode->published_at;
+        if ($post !== null) {
+            $post->message = $this->request->getPost('message');
+            $post->published_at = $this->episode->published_at;
 
-            $statusModel = new StatusModel();
-            if (! $statusModel->editStatus($status)) {
+            $postModel = new PostModel();
+            if (! $postModel->editPost($post)) {
                 $db->transRollback();
                 return redirect()
                     ->back()
                     ->withInput()
-                    ->with('errors', $statusModel->errors());
+                    ->with('errors', $postModel->errors());
             }
         }
 
@@ -585,14 +587,14 @@ class EpisodeController extends BaseController
             $db = db_connect();
             $db->transStart();
 
-            $statusModel = new StatusModel();
-            $status = $statusModel
+            $postModel = new PostModel();
+            $post = $postModel
                 ->where([
                     'actor_id' => $this->podcast->actor_id,
                     'episode_id' => $this->episode->id,
                 ])
                 ->first();
-            $statusModel->removeStatus($status);
+            $postModel->removePost($post);
 
             $this->episode->published_at = null;
 
@@ -656,13 +658,13 @@ class EpisodeController extends BaseController
 
         $db->transStart();
 
-        $allStatusesLinkedToEpisode = (new StatusModel())
+        $allPostsLinkedToEpisode = (new PostModel())
             ->where([
                 'episode_id' => $this->episode->id,
             ])
             ->findAll();
-        foreach ($allStatusesLinkedToEpisode as $status) {
-            (new StatusModel())->removeStatus($status);
+        foreach ($allPostsLinkedToEpisode as $post) {
+            (new PostModel())->removePost($post);
         }
 
         // set episode published_at to null to unpublish
@@ -781,5 +783,42 @@ class EpisodeController extends BaseController
             1 => $this->episode->title,
         ]);
         return view('admin/episode/embeddable_player', $data);
+    }
+
+    public function attemptCommentCreate(): RedirectResponse
+    {
+        $rules = [
+            'message' => 'required|max_length[500]',
+        ];
+
+        if (! $this->validate($rules)) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $this->validator->getErrors());
+        }
+
+        $message = $this->request->getPost('message');
+
+        $newComment = new Comment([
+            'actor_id' => interact_as_actor_id(),
+            'episode_id' => $this->episode->id,
+            'message' => $message,
+            'created_at' => new Time('now'),
+            'created_by' => user_id(),
+        ]);
+
+        $commentModel = new CommentModel();
+        if (
+            ! $commentModel->addComment($newComment, true)
+        ) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $commentModel->errors());
+        }
+
+        // Comment has been successfully created
+        return redirect()->back();
     }
 }

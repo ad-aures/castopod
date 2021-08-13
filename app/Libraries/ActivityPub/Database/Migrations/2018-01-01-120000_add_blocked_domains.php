@@ -21,7 +21,7 @@ class AddBlockedDomains extends Migration
         $this->forge->addField([
             'name' => [
                 'type' => 'VARCHAR',
-                'constraint' => 191,
+                'constraint' => 255,
             ],
             'created_at' => [
                 'type' => 'DATETIME',

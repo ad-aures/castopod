@@ -40,13 +40,13 @@
 </nav>
 
 <section class="max-w-2xl px-6 py-8 mx-auto space-y-8">
-<?php foreach ($statuses as $status): ?>
-    <?php if ($status->reblog_of_id !== null): ?>
+<?php foreach ($posts as $post): ?>
+    <?php if ($post->reblog_of_id !== null): ?>
         <?= view('podcast/_partials/reblog', [
-            'status' => $status->reblog_of_status,
+            'post' => $post->reblog_of_post,
         ]) ?>
     <?php else: ?>
-        <?= view('podcast/_partials/status', ['status' => $status]) ?>
+        <?= view('podcast/_partials/post', ['post' => $post]) ?>
     <?php endif; ?>
 <?php endforeach; ?>
 </section>

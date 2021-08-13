@@ -7,22 +7,22 @@
     <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
 
     <title><?= lang('ActivityPub.' . $action . '.title', [
-        'actorDisplayName' => $status->actor->display_name,
+        'actorDisplayName' => $post->actor->display_name,
     ]) ?></title>
-    <meta name="description" content="<?= $status->message ?>"/>
+    <meta name="description" content="<?= $post->message ?>"/>
     <meta property="og:title" content="<?= lang(
         'ActivityPub.' . $action . '.title',
         [
-            'actorDisplayName' => $status->actor->display_name,
+            'actorDisplayName' => $post->actor->display_name,
         ],
     ) ?>"/>
     <meta property="og:locale" content="<?= service(
         'request',
     )->getLocale() ?>" />
-    <meta property="og:site_name" content="<?= $status->actor->display_name ?>" />
+    <meta property="og:site_name" content="<?= $post->actor->display_name ?>" />
     <meta property="og:url" content="<?= current_url() ?>" />
-    <meta property="og:image" content="<?= $status->actor->avatar_image_url ?>" />
-    <meta property="og:description" content="<?= $status->message ?>" />
+    <meta property="og:image" content="<?= $post->actor->avatar_image_url ?>" />
+    <meta property="og:description" content="<?= $post->message ?>" />
 
     <?= service('vite')->asset('styles/index.css', 'css') ?>
     <?= service('vite')->asset('js/podcast.ts', 'js') ?>
@@ -35,10 +35,10 @@
         ) ?></h1>
     </header>
     <main class="flex-1 max-w-xl px-4 pb-8 mx-auto -mt-24">
-        <?= $this->include('podcast/_partials/status') ?>
+        <?= $this->include('podcast/_partials/post') ?>
 
         <?= form_open(
-            route_to('status-attempt-remote-action', $status->id, $action),
+            route_to('post-attempt-remote-action', $post->id, $action),
             ['method' => 'post', 'class' => 'flex flex-col mt-8'],
         ) ?>
         <?= csrf_field() ?>

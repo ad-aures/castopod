@@ -11,10 +11,11 @@ declare(strict_types=1);
 namespace App\Entities;
 
 use App\Libraries\SimpleRSSElement;
+use App\Models\CommentModel;
 use App\Models\PersonModel;
 use App\Models\PodcastModel;
+use App\Models\PostModel;
 use App\Models\SoundbiteModel;
-use App\Models\StatusModel;
 use CodeIgniter\Entity\Entity;
 use CodeIgniter\Files\File;
 use CodeIgniter\HTTP\Files\UploadedFile;
@@ -65,9 +66,8 @@ use RuntimeException;
  * @property string|null $location_osm
  * @property array|null $custom_rss
  * @property string $custom_rss_string
- * @property int $favourites_total
- * @property int $reblogs_total
- * @property int $statuses_total
+ * @property int $posts_count
+ * @property int $comments_count
  * @property int $created_by
  * @property int $updated_by
  * @property string $publication_status;
@@ -117,12 +117,12 @@ class Episode extends Entity
     protected ?array $soundbites = null;
 
     /**
-     * @var Status[]|null
+     * @var Post[]|null
      */
-    protected ?array $statuses = null;
+    protected ?array $posts = null;
 
     /**
-     * @var Status[]|null
+     * @var Comment[]|null
      */
     protected ?array $comments = null;
 
@@ -168,9 +168,8 @@ class Episode extends Entity
         'location_geo' => '?string',
         'location_osm' => '?string',
         'custom_rss' => '?json-array',
-        'favourites_total' => 'integer',
-        'reblogs_total' => 'integer',
-        'statuses_total' => 'integer',
+        'posts_count' => 'integer',
+        'comments_count' => 'integer',
         'created_by' => 'integer',
         'updated_by' => 'integer',
     ];
@@ -387,23 +386,23 @@ class Episode extends Entity
     }
 
     /**
-     * @return Status[]
+     * @return Post[]
      */
-    public function getStatuses(): array
+    public function getPosts(): array
     {
         if ($this->id === null) {
-            throw new RuntimeException('Episode must be created before getting statuses.');
+            throw new RuntimeException('Episode must be created before getting posts.');
         }
 
-        if ($this->statuses === null) {
-            $this->statuses = (new StatusModel())->getEpisodeStatuses($this->id);
+        if ($this->posts === null) {
+            $this->posts = (new PostModel())->getEpisodePosts($this->id);
         }
 
-        return $this->statuses;
+        return $this->posts;
     }
 
     /**
-     * @return Status[]
+     * @return Comment[]
      */
     public function getComments(): array
     {
@@ -412,7 +411,7 @@ class Episode extends Entity
         }
 
         if ($this->comments === null) {
-            $this->comments = (new StatusModel())->getEpisodeComments($this->id);
+            $this->comments = (new CommentModel())->getEpisodeComments($this->id);
         }
 
         return $this->comments;
@@ -420,7 +419,7 @@ class Episode extends Entity
 
     public function getLink(): string
     {
-        return url_to('episode', $this->getPodcast()->name, $this->attributes['slug']);
+        return url_to('episode', $this->getPodcast()->handle, $this->attributes['slug']);
     }
 
     public function getEmbeddablePlayerUrl(string $theme = null): string

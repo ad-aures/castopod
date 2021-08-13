@@ -50,8 +50,8 @@
             <a href="<?= route_to(
                 'podcast-activity',
                 $podcast->handle,
-            ) ?>" class="hover:underline"><?= lang('Podcast.statuses', [
-    'numberOfStatuses' => $podcast->actor->statuses_count,
+            ) ?>" class="hover:underline"><?= lang('Podcast.posts', [
+    'numberOfPosts' => $podcast->actor->posts_count,
 ]) ?></a>
         </div>
     </div>

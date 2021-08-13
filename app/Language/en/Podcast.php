@@ -223,7 +223,7 @@ return [
         one {<span class="font-semibold">#</span> follower}
         other {<span class="font-semibold">#</span> followers}
     }',
-    'statuses' => '{numberOfStatuses, plural,
+    'posts' => '{numberOfPosts, plural,
         one {<span class="font-semibold">#</span> post}
         other {<span class="font-semibold">#</span> posts}
     }',

@@ -32,7 +32,7 @@ class AddActivities extends Migration
                 'unsigned' => true,
                 'null' => true,
             ],
-            'status_id' => [
+            'post_id' => [
                 'type' => 'BINARY',
                 'constraint' => 16,
                 'null' => true,
@@ -62,7 +62,7 @@ class AddActivities extends Migration
         $this->forge->addPrimaryKey('id');
         $this->forge->addForeignKey('actor_id', 'activitypub_actors', 'id', '', 'CASCADE');
         $this->forge->addForeignKey('target_actor_id', 'activitypub_actors', 'id', '', 'CASCADE');
-        $this->forge->addForeignKey('status_id', 'activitypub_statuses', 'id', '', 'CASCADE');
+        $this->forge->addForeignKey('post_id', 'activitypub_posts', 'id', '', 'CASCADE');
         $this->forge->createTable('activitypub_activities');
     }
 
