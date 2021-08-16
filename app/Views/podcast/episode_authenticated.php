@@ -119,7 +119,7 @@
                 </div>
                 <?= form_close() ?>
                 <?php foreach ($episode->comments as $comment): ?>
-                    <?= view('podcast/_partials/comment', ['comment' => $comment]) ?>
+                    <?= view('podcast/_partials/comment_authenticated', ['comment' => $comment]) ?>
                 <?php endforeach; ?>
             </section>
             <section id="activity" class="space-y-8 tab-panel">

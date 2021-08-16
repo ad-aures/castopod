@@ -9,12 +9,22 @@ declare(strict_types=1);
  */
 
 return [
+    'title' => "{actorDisplayName}'s comment for {episodeTitle}",
+    'back_to_episode' => 'Back to {episodeTitle}',
     'form' => [
         'episode_message_placeholder' => 'Write a comment...',
         'reply_to_placeholder' => 'Reply to @{actorUsername}',
         'submit' => 'Send!',
         'submit_reply' => 'Reply',
     ],
+    'likes' => '{numberOfLikes, plural,
+        one {# like}
+        other {# likes}
+    }',
+    'replies' => '{numberOfReplies, plural,
+        one {# reply}
+        other {# replies}
+    }',
     'like' => 'Like',
     'reply' => 'Reply',
     'view_replies' => 'View replies ({numberOfReplies})',

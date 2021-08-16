@@ -3,11 +3,12 @@
 <?= $this->section('meta-tags') ?>
     <title><?= lang('Comment.title', [
         'actorDisplayName' => $comment->actor->display_name,
+        'episodeTitle' => $episode->title
     ]) ?></title>
     <meta name="description" content="<?= $comment->message ?>"/>
     <meta property="og:title" content="<?= lang('Comment.title', [
         'actorDisplayName' => $comment->actor->display_name,
-    ]) ?>"/>
+        'episodeTitle' => $episode->title    ]) ?>"/>
     <meta property="og:locale" content="<?= service(
         'request',
     )->getLocale() ?>" />
@@ -26,7 +27,7 @@
             'mr-2 text-lg',
         ) .
             lang('Comment.back_to_episode', [
-                'actor' => $comment->actor->display_name,
+                'episodeTitle' => $episode->title,
             ]) ?></a>
     </nav>
     <div class="pb-12">
@@ -36,5 +37,4 @@
     </div>
 </div>
 
-<?= $this->endSection()
-?>
+<?= $this->endSection() ?>

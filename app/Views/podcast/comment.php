@@ -26,7 +26,7 @@
             'mr-2 text-lg',
         ) .
             lang('Comment.back_to_episode', [
-                'actor' => $comment->actor->display_name,
+                'episodeTitle' => $episode->title,
             ]) ?></a>
     </nav>
     <div class="pb-12">

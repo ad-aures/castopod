@@ -427,6 +427,14 @@ $routes->group(
                                 ]
                             );
                             $routes->post(
+                                '(:uuid)/reply',
+                                'EpisodeController::attemptCommentReply/$1/$2/$3',
+                                [
+                                    'as' => 'comment-attempt-reply',
+                                    'filter' => 'permission:podcast-manage_publications',
+                                ]
+                            );
+                            $routes->post(
                                 'delete',
                                 'EpisodeController::attemptCommentDelete/$1/$2',
                                 [

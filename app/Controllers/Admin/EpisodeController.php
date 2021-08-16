@@ -821,4 +821,45 @@ class EpisodeController extends BaseController
         // Comment has been successfully created
         return redirect()->back();
     }
+
+    public function attemptCommentReply(string $commentId): RedirectResponse
+    {
+        // var_dump($commentId);
+        // die();
+
+        $rules = [
+            'message' => 'required|max_length[500]',
+        ];
+
+        if (! $this->validate($rules)) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $this->validator->getErrors());
+        }
+
+        $message = $this->request->getPost('message');
+
+        $newReply = new EpisodeComment([
+            'actor_id' => interact_as_actor_id(),
+            'episode_id' => $this->episode->id,
+            'message' => $message,
+            'in_reply_to_id' => $commentId,
+            'created_at' => new Time('now'),
+            'created_by' => user_id(),
+        ]);
+
+        $commentModel = new EpisodeCommentModel();
+        if (
+            ! $commentModel->addComment($newReply, true)
+        ) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $commentModel->errors());
+        }
+
+        // Reply has been successfully created
+        return redirect()->back();
+    }
 }

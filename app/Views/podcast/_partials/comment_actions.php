@@ -1,19 +1,10 @@
 <footer>
-    <form action="<?= route_to('comment-attempt-like', interact_as_actor()->username, $episode->slug, $comment->id) ?>" method="POST" class="flex items-center gap-x-4">
-        <button type="submit" name="action" value="favourite" class="inline-flex items-center hover:underline group" title="<?= lang(
-            'Comment.like',
-            [
-                'numberOfLikes' => $comment->likes_count,
-            ],
-        ) ?>"><?= icon('heart', 'text-xl mr-1 text-gray-400 group-hover:text-red-600') . $comment->likes_count ?></button>
-        <?= button(
-            lang('Comment.reply'),
-            route_to('comment', $podcast->handle, $episode->slug, $comment->id),
-            [
-                'size' => 'small',
-            ],
-        ) ?>
-    </form>
+    <button class="inline-flex items-center opacity-50 cursor-not-allowed hover:underline" title="<?= lang(
+        'Comment.like',
+        [
+            'numberOfLikes' => $comment->likes_count,
+        ],
+    ) ?>"><?= icon('heart', 'text-xl mr-1 text-gray-500') . $comment->likes_count ?></button>
     <?php if($comment->replies_count): ?>
         <?= anchor(
             route_to('comment', $podcast->handle, $episode->slug, $comment->id),

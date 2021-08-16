@@ -170,4 +170,12 @@ class EpisodeCommentController extends BaseController
 
         return redirect()->back();
     }
+
+    public function attemptReply(): RedirectResponse
+    {
+        model('LikeModel')
+            ->toggleLike(interact_as_actor(), $this->comment);
+
+        return redirect()->back();
+    }
 }

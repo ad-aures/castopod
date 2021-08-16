@@ -1,7 +1,7 @@
-<?= $this->include('podcast/_partials/comment_authenticated') ?>
+<?= $this->include('podcast/_partials/comment_card_authenticated') ?>
 <div class="-mt-2 overflow-hidden border-b border-l border-r post-replies rounded-b-xl">
 <?= form_open(
-    route_to('comment-attempt-action', interact_as_actor()->username, $episode->slug, $comment->id),
+    route_to('comment-attempt-reply', $podcast->id, $episode->id, $comment->id),
     [
         'class' => 'bg-gray-50 flex px-6 pt-8 pb-4',
     ],
@@ -40,8 +40,8 @@
 <?= form_close() ?>
 
 <?php foreach ($comment->replies as $reply): ?>
-    <?= view('podcast/_partials/comment_authenticated', [
-        'comment' => $reply,
+    <?= view('podcast/_partials/comment_reply_authenticated', [
+        'reply' => $reply,
     ]) ?>
 <?php endforeach; ?>
 </div>

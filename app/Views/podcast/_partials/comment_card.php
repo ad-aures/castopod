@@ -1,4 +1,4 @@
-<article class="relative z-10 flex w-full px-4 py-2 rounded-2xl">
+<article class="relative z-10 flex w-full p-4 bg-white shadow rounded-2xl">
     <img src="<?= $comment->actor->avatar_image_url ?>" alt="<?= $comment->display_name ?>" class="w-12 h-12 mr-4 rounded-full" />
     <div class="flex-1">
         <header class="w-full mb-2 text-sm">
@@ -20,7 +20,19 @@
         <?php if ($comment->is_from_post): ?>
             <?= $this->include('podcast/_partials/comment_actions_from_post') ?>
         <?php else: ?>
-            <?= $this->include('podcast/_partials/comment_actions') ?>
+            <footer>
+                <button class="inline-flex items-center opacity-50 cursor-not-allowed" title="<?= lang(
+                    'Comment.likes',
+                    [
+                        'numberOfLikes' => $comment->likes_count,
+                    ],
+                ) ?>"><?= icon('heart', 'text-xl mr-1 text-gray-500') . lang(
+                    'Comment.likes',
+                    [
+                        'numberOfLikes' => $comment->likes_count,
+                    ],
+                ) ?></button>
+            </footer>
         <?php endif; ?>
     </div>
 </article>

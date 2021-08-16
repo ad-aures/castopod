@@ -80,9 +80,15 @@ class EpisodeCommentModel extends UuidModel
             return false;
         }
 
-        (new EpisodeModel())
-            ->where('id', $comment->episode_id)
-            ->increment('comments_count');
+        if ($comment->in_reply_to_id === null) {
+            (new EpisodeModel())
+                ->where('id', $comment->episode_id)
+                ->increment('comments_count');
+        } else {
+            (new self())
+                ->where('id', service('uuid')->fromString($comment->in_reply_to_id)->getBytes())
+                ->increment('replies_count');
+        }
 
         if ($registerActivity) {
             // set post id and uri to construct NoteObject
@@ -129,7 +135,10 @@ class EpisodeCommentModel extends UuidModel
     {
         // TODO: merge with replies from posts linked to episode linked
         $episodeComments = $this->select('*, 0 as is_from_post')
-            ->where('episode_id', $episodeId)
+            ->where([
+                'episode_id' => $episodeId,
+                'in_reply_to_id' => null,
+            ])
             ->getCompiledSelect();
 
         $episodePostsReplies = $this->db->table('activitypub_posts')

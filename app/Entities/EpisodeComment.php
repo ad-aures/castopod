@@ -118,6 +118,20 @@ class EpisodeComment extends UuidEntity
         return $this->replies;
     }
 
+    public function getReplyToComment(): ?self
+    {
+        if ($this->in_reply_to_id === null) {
+            throw new RuntimeException('Comment is not a reply.');
+        }
+
+        if ($this->reply_to_comment === null) {
+            $this->reply_to_comment = model('EpisodeCommentModel', false)
+                ->getCommentById($this->in_reply_to_id);
+        }
+
+        return $this->reply_to_comment;
+    }
+
     public function setMessage(string $message): static
     {
         helper('activitypub');
