@@ -1,3 +1,10 @@
+# [1.0.0-alpha.68](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.67...v1.0.0-alpha.68) (2021-08-19)
+
+### Bug Fixes
+
+- **analytics:** redirect to mp3 file even when referer was not set
+  ([9fc388d](https://code.podlibre.org/podlibre/castopod-host/commit/9fc388d154f29c335dedcd624abe8c1751762c07))
+
 # [1.0.0-alpha.67](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.66...v1.0.0-alpha.67) (2021-07-24)
 
 ### Features
