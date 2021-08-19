@@ -16,7 +16,7 @@
 ]) ?>
 <?= csrf_field() ?>
     
-<?= form_label(lang('Contributor.form.user'), 'user') ?>
+<?= component('Forms/Label', ['text' => lang('Contributor.form.user')], ['for' => 'user']) ?>
 <?= form_dropdown('user', $userOptions, [old('user', '')], [
     'id' => 'user',
     'class' => 'form-select mb-4',
@@ -24,7 +24,7 @@
     'placeholder' => lang('Contributor.form.user_placeholder')
 ]) ?>
 
-<?= form_label(lang('Contributor.form.role'), 'role') ?>
+<?= component('Forms/Label', ['text' => lang('Contributor.form.role')], ['for' => 'role']) ?>
 <?= form_dropdown('role', $roleOptions, [old('role', '')], [
     'id' => 'role',
     'class' => 'form-select mb-4',

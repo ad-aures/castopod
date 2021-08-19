@@ -65,7 +65,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ],
     ]);
 
-    // Path to phpstan with extensions, that PHPSTan in Rector uses to determine types
+    // Path to phpstan with extensions, that PHPStan in Rector uses to determine types
     $parameters->set(
         Option::PHPSTAN_FOR_RECTOR_PATH,
         __DIR__ . '/phpstan.neon',

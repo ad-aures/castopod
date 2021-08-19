@@ -17,8 +17,9 @@
 <?= csrf_field() ?>
 
 <?= form_label(lang('User.form.roles'), 'roles') ?>
-<?= form_multiselect('roles[]', $roleOptions, $user->roles, [
+<?= component('Forms/MultiSelect', ['options' => $roleOptions, 'selected' => $user->roles], [
     'id' => 'roles',
+    'name' => 'roles[]',
     'class' => 'mb-4',
 ]) ?>
 

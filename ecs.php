@@ -1,6 +1,7 @@
 <?php
 
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symplify\CodingStandard\Fixer\Naming\StandardizeHereNowDocKeywordFixer;
 use Symplify\EasyCodingStandard\ValueObject\Option;
 use Symplify\EasyCodingStandard\ValueObject\Set\SetList;
 
@@ -20,6 +21,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
         // skip specific generated files
         __DIR__ . '/app/Language/*/PersonsTaxonomy.php',
+
+        StandardizeHereNowDocKeywordFixer::class => [
+            __DIR__ . '/app/Views/Components',
+        ]
     ]);
 
     $containerConfigurator->import(SetList::PSR_12);

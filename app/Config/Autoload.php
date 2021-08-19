@@ -46,6 +46,7 @@ class Autoload extends AutoloadConfig
         'Config' => APPPATH . 'Config',
         'ActivityPub' => APPPATH . 'Libraries/ActivityPub',
         'Analytics' => APPPATH . 'Libraries/Analytics',
+        'ViewComponents' => APPPATH . 'Libraries/ViewComponents',
     ];
 
     /**
@@ -84,5 +85,5 @@ class Autoload extends AutoloadConfig
      * ```
      * @var array<int, string>
      */
-    public $files = [];
+    public $files = [APPPATH . 'Libraries/ViewComponents/Helpers/view_components_helper.php'];
 }

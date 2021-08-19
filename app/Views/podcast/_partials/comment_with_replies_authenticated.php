@@ -1,4 +1,4 @@
-<?= $this->include('podcast/_partials/comment_card_authenticated') ?>
+<?=  $this->include('podcast/_partials/comment_card_authenticated') ?>
 <div class="-mt-2 overflow-hidden border-b border-l border-r post-replies rounded-b-xl">
 <?= form_open(
     route_to('comment-attempt-reply', $podcast->id, $episode->id, $comment->id),

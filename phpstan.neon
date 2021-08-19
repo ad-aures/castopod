@@ -35,3 +35,4 @@ parameters:
                 - app/Helpers
                 - app/Libraries/ActivityPub/Helpers
                 - app/Libraries/Analytics/Helpers
+                - app/Libraries/ViewComponents/Helpers

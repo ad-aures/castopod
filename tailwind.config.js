@@ -4,6 +4,7 @@ module.exports = {
   mode: "jit",
   purge: [
     "./app/Views/**/*.php",
+    "./app/View/Components/**/*.php",
     "./app/Helpers/*.php",
     "./app/Resources/**/*.ts",
   ],

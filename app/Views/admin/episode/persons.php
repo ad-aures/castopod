@@ -60,8 +60,8 @@
                     ($person->information_url === null
                         ? ''
                         : "<a href=\"{$person->information_url}\" target=\"_blank\" rel=\"noreferrer noopener\" class=\"text-sm text-blue-800 hover:underline\">" .
-                            $person->information_url .
-                            '</a>') .
+                        $person->information_url .
+                        '</a>') .
                     '</div></div>';
             },
         ],
@@ -95,40 +95,36 @@
     lang('Person.episode_form.add_section_subtitle'),
 ) ?>
 
-<?= form_label(
-    lang('Person.episode_form.persons'),
-    'persons',
-    [],
-    lang('Person.episode_form.persons_hint'),
+<?= component(
+    'Forms/Label',
+    ['text' => lang('Person.episode_form.persons'), 'hint' =>     lang('Person.episode_form.persons_hint')],
+    ['for' => 'persons'],
 ) ?>
-<?= form_multiselect('persons[]', $personOptions, old('persons', []), [
+<?= component('Forms/MultiSelect', ['options' => $personOptions, 'selected' => old('persons', [])], [
     'id' => 'persons',
-    'class' => 'form-select mb-4',
+    'name' => 'persons[]',
+    'class' => 'mb-4',
     'required' => 'required',
 ]) ?>
 
-<?= form_label(
-    lang('Person.episode_form.roles'),
-    'roles',
-    [],
-    lang('Person.episode_form.roles_hint'),
-    true,
+<?= component(
+    'Forms/Label',
+    ['text' => lang('Person.episode_form.roles'), 'hint' =>     lang('Person.episode_form.roles_hint'), 'isOptional' => true],
+    ['for' => 'roles'],
 ) ?>
-<?= form_multiselect(
-    'roles[]',
-    $taxonomyOptions,
-    old('roles', []),
-    ['id' => 'roles', 'class' => 'form-select mb-4'],
-) ?>
-        
-    
+<?= component('Forms/MultiSelect', ['options' => $taxonomyOptions, 'selected' => old('roles', [])], [
+    'id' => 'roles',
+    'name' => 'roles[]',
+    'class' => 'mb-4',
+]) ?>
+
 <?= form_section_close() ?>
 <?= button(
     lang('Person.episode_form.submit_add'),
     '',
     ['variant' => 'primary'],
     ['type' => 'submit', 'class' => 'self-end'],
-) ?> 
+) ?>
 <?= form_close() ?>
 
 <?= $this->endSection() ?>

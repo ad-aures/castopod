@@ -8,7 +8,6 @@
 <?= lang('Episode.publish_edit') ?>
 <?= $this->endSection() ?>
 
-
 <?= $this->section('content') ?>
 
 <?= anchor(
@@ -33,14 +32,11 @@
 <small class="max-w-md mb-2 text-gray-600"><?= lang('Episode.publish_form.post_hint') ?></small>
 <div class="mb-8 overflow-hidden bg-white shadow-md rounded-xl">
     <div class="flex px-4 py-3">
-        <img src="<?= $podcast->actor->avatar_image_url ?>" alt="<?= $podcast->actor
-                                                                        ->display_name ?>" class="w-12 h-12 mr-4 rounded-full" />
+        <img src="<?= $podcast->actor->avatar_image_url ?>" alt="<?= $podcast->actor->display_name ?>" class="w-12 h-12 mr-4 rounded-full" />
         <div class="flex flex-col min-w-0">
             <p class="flex items-baseline min-w-0">
-                <span class="mr-2 font-semibold truncate"><?= $podcast->actor
-                                                                ->display_name ?></span>
-                <span class="text-sm text-gray-500 truncate">@<?= $podcast
-                                                                    ->actor->username ?></span>
+                <span class="mr-2 font-semibold truncate"><?= $podcast->actor->display_name ?></span>
+                <span class="text-sm text-gray-500 truncate">@<?= $podcast->actor->username ?></span>
             </p>
             <?= relative_time($post->published_at, 'text-xs text-gray-500') ?>
         </div>
@@ -85,17 +81,17 @@
     </div>
     <footer class="flex justify-around px-6 py-3">
         <span class="inline-flex items-center"><?= icon(
-                                                    'chat',
-                                                    'text-xl mr-1 text-gray-400',
-                                                ) . '0' ?></span>
+            'chat',
+            'text-xl mr-1 text-gray-400',
+        ) . '0' ?></span>
         <span class="inline-flex items-center"><?= icon(
-                                                    'repeat',
-                                                    'text-xl mr-1 text-gray-400',
-                                                ) . '0' ?></span>
+            'repeat',
+            'text-xl mr-1 text-gray-400',
+        ) . '0' ?></span>
         <span class="inline-flex items-center"><?= icon(
-                                                    'heart',
-                                                    'text-xl mr-1 text-gray-400',
-                                                ) . '0' ?></span>
+            'heart',
+            'text-xl mr-1 text-gray-400',
+        ) . '0' ?></span>
     </footer>
 </div>
 
@@ -151,10 +147,10 @@
                 'data-input' => '',
             ]) ?>
             <button class="p-3 border border-l-0 border-gray-500 bg-pine-100 focus:outline-none rounded-r-md hover:bg-pine-200 focus:ring" type="button" aria-label="<?= lang(
-                                                                                                                                                                            'Episode.publish_form.scheduled_publication_date_clear',
-                                                                                                                                                                        ) ?>" title="<?= lang(
-                                                                                                                                                                                            'Episode.publish_form.scheduled_publication_date_clear',
-                                                                                                                                                                                        ) ?>" data-clear=""><?= icon('close') ?></button>
+                'Episode.publish_form.scheduled_publication_date_clear',
+            ) ?>" title="<?= lang(
+                'Episode.publish_form.scheduled_publication_date_clear',
+            ) ?>" data-clear=""><?= icon('close') ?></button>
         </div>
     </div>
 </div>

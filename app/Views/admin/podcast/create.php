@@ -82,13 +82,16 @@
 
 <div class="mb-4">
     <?= form_label(lang('Podcast.form.description'), 'description') ?>
-    <?= form_markdown_editor(
+    <?= component(
+        'Forms/MarkdownEditor',
+        [
+            'content' => old('description', '', false),
+        ],
         [
             'id' => 'description',
             'name' => 'description',
             'required' => 'required',
         ],
-        old('description', '', false),
     ) ?>
 </div>
 
@@ -122,16 +125,12 @@
     '',
     true,
 ) ?>
-<?= form_multiselect(
-    'other_categories[]',
-    $categoryOptions,
-    [old('other_categories', '')],
-    [
-        'id' => 'other_categories',
-        'class' => 'mb-4',
-        'data-max-item-count' => '2',
-    ],
-) ?>
+<?= component('Forms/MultiSelect', ['options' => $categoryOptions, 'selected' => old('other_categories', [])], [
+    'id' => 'other_categories',
+    'name' => 'other_categories[]',
+    'class' => 'mb-4',
+    'data-max-item-count' => '2',
+]) ?>
 
 <?= form_fieldset('', ['class' => 'mb-4']) ?>
     <legend>
@@ -340,12 +339,15 @@
     lang('Podcast.form.custom_rss_hint'),
     true,
 ) ?>
-<?= xml_editor([
-    'id' => 'custom_rss',
-    'name' => 'custom_rss',
-    'class' => 'form-textarea',
-    'value' => old('custom_rss'),
-]) ?>
+<?= component('Forms/XMLEditor', 
+    [
+        'content' => old('custom_rss', '')
+    ],
+    [
+        'id' => 'custom_rss',
+        'name' => 'custom_rss',
+    ]
+) ?>
 <?= form_section_close() ?>
 
 <?= form_section(
@@ -353,28 +355,46 @@
     lang('Podcast.form.status_section_subtitle'),
 ) ?>
 
-<?= form_switch(
-    lang('Podcast.form.block'),
-    ['id' => 'block', 'name' => 'block'],
-    'yes',
-    old('block', false),
-    'mb-2',
+<?= component(
+    'Forms/Toggler',
+    [
+        'label' => lang('Podcast.form.lock'),
+        'hint' => lang('Podcast.form.lock_hint'),
+    ],
+    [
+        'id' => 'lock',
+        'name' => 'lock',
+        'value' => 'yes',
+        'checked' => old('complete', true),
+        'class' => 'mb-2'
+    ]
 ) ?>
 
-<?= form_switch(
-    lang('Podcast.form.complete'),
-    ['id' => 'complete', 'name' => 'complete'],
-    'yes',
-    old('complete', false),
-    'mb-2',
+<?= component(
+    'Forms/Toggler',
+    [
+        'label' => lang('Podcast.form.block'),
+    ],
+    [
+        'id' => 'block',
+        'name' => 'block',
+        'value' => 'yes',
+        'checked' => old('block', false),
+        'class' => 'mb-2'
+    ]
 ) ?>
 
-<?= form_switch(
-    lang('Podcast.form.lock') .
-        hint_tooltip(lang('Podcast.form.lock_hint'), 'ml-1'),
-    ['id' => 'lock', 'name' => 'lock'],
-    'yes',
-    old('lock', true),
+<?= component(
+    'Forms/Toggler',
+    [
+        'label' => lang('Podcast.form.complete'),
+    ],
+    [
+        'id' => 'complete',
+        'name' => 'complete',
+        'value' => 'yes',
+        'checked' => old('complete', false),
+    ]
 ) ?>
 
 <?= form_section_close() ?>

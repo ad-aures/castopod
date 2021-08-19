@@ -110,7 +110,9 @@ if (! function_exists('button')) {
         CODE_SAMPLE;
     }
 }
+
 // ------------------------------------------------------------------------
+
 if (! function_exists('icon_button')) {
     /**
      * Icon Button component
@@ -145,6 +147,7 @@ if (! function_exists('icon_button')) {
     }
 }
 // ------------------------------------------------------------------------
+
 if (! function_exists('hint_tooltip')) {
     /**
      * Hint component
@@ -167,7 +170,9 @@ if (! function_exists('hint_tooltip')) {
         return $tooltip . '">' . icon('question') . '</span>';
     }
 }
+
 // ------------------------------------------------------------------------
+
 if (! function_exists('data_table')) {
     /**
      * Data table component
@@ -223,7 +228,9 @@ if (! function_exists('data_table')) {
             '</div>';
     }
 }
+
 // ------------------------------------------------------------------------
+
 if (! function_exists('publication_pill')) {
     /**
      * Publication pill component
@@ -250,7 +257,9 @@ if (! function_exists('publication_pill')) {
             '</span>';
     }
 }
+
 // ------------------------------------------------------------------------
+
 if (! function_exists('publication_button')) {
     /**
      * Publication button component
@@ -508,27 +517,5 @@ if (! function_exists('relative_time')) {
         CODE_SAMPLE;
     }
 }
-// ------------------------------------------------------------------------
-if (! function_exists('xml_editor')) {
-    /**
-     * XML Editor field
-     *
-     * @param array<string, mixed> $customData
-     * @param array<string, mixed> $extra
-     */
-    function xml_editor(array $customData = [], string $value = '', array $extra = []): string
-    {
-        $defaultData = [
-            'slot' => 'textarea',
-            'rows' => 5,
-        ];
-        $data = array_merge($defaultData, $customData);
 
-        $textarea = form_textarea($data, $value, $extra);
-
-        return <<<CODE_SAMPLE
-            <xml-editor>{$textarea}</time-ago>
-        CODE_SAMPLE;
-    }
-}
 // ------------------------------------------------------------------------

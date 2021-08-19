@@ -38,7 +38,6 @@
     'Podcast.episodes',
 ) ?></a>
 </nav>
-
 <section class="max-w-2xl px-6 py-8 mx-auto space-y-8">
 <?php foreach ($posts as $post): ?>
     <?php if ($post->reblog_of_id !== null): ?>

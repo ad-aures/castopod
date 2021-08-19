@@ -10,7 +10,7 @@
 
 <?= $this->section('content') ?>
 
-<?= form_label(lang('Episode.embeddable_player.label'), 'label') ?>
+<p><?= lang('Episode.embeddable_player.label') ?></p>
 
 <div class="flex w-full mt-6 mb-6">
     <?php foreach ($themes as $themeKey => $theme): ?>

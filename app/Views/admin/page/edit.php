@@ -46,13 +46,16 @@
 
 <div class="mb-4">
     <?= form_label(lang('Page.form.content'), 'content') ?>
-    <?= form_markdown_editor(
+    <?= component(
+        'Forms/MarkdownEditor',
+        [
+            'content' => old('content', $page->content_markdown, false),
+        ],
         [
             'id' => 'content',
             'name' => 'content',
             'required' => 'required',
         ],
-        old('content', $page->content_markdown, false),
     ) ?>
 </div>
 

@@ -46,14 +46,17 @@
 
 <div class="mb-4">
     <?= form_label(lang('Page.form.content'), 'content') ?>
-    <?= form_markdown_editor(
+    <?= component(
+        'Forms/MarkdownEditor',
+        [
+            'content' => old('content', '', false)
+        ],
         [
             'id' => 'content',
             'name' => 'content',
             'required' => 'required',
+            'rows' => 20
         ],
-        old('content', '', false),
-        ['rows' => '20']
     ) ?>
 </div>
 

@@ -103,34 +103,39 @@
             'type' => 'text',
             'placeholder' => lang("Platforms.description.{$platform->type}"),
         ]) ?>
-        <?= form_switch(
-            lang('Platforms.visible'),
+        <?= component(
+            'Forms/Toggler',
+            [
+                'label' => lang('Platforms.visible'),
+            ],
             [
                 'id' => $platform->slug . '_visible',
                 'name' => 'platforms[' . $platform->slug . '][visible]',
-            ],
-            'yes',
-            old(
-                $platform->slug . '_visible',
-                $platform->is_visible ? $platform->is_visible : false,
-            ),
-            'text-sm mb-1',
+                'value' => 'yes',
+                'checked' => old(
+                    $platform->slug . '_visible',
+                    $platform->is_visible ? $platform->is_visible : false,
+                ),
+                'class' => 'text-sm mb-1'
+            ]
         ) ?>
-        <?= form_switch(
-            lang('Platforms.on_embeddable_player'),
+        <?= component(
+            'Forms/Toggler',
+            [
+                'label' => lang('Platforms.on_embeddable_player'),
+            ],
             [
                 'id' => $platform->slug . '_on_embeddable_player',
-                'name' =>
-                    'platforms[' . $platform->slug . '][on_embeddable_player]',
-            ],
-            'yes',
-            old(
-                $platform->slug . '_on_embeddable_player',
-                $platform->is_on_embeddable_player
-                    ? $platform->is_on_embeddable_player
-                    : false,
-            ),
-            'text-sm',
+                'name' => 'platforms[' . $platform->slug . '][on_embeddable_player]',
+                'value' => 'yes',
+                'checked' => old(
+                    $platform->slug . '_on_embeddable_player',
+                    $platform->is_on_embeddable_player
+                        ? $platform->is_on_embeddable_player
+                        : false,
+                ),
+                'class' => 'text-sm'
+            ]
         ) ?>
     </div>
 </div>

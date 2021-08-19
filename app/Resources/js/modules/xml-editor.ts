@@ -60,6 +60,10 @@ export class XMLEditor extends LitElement {
       border: 1px solid #6b7280;
       background-color: #ffffff;
     }
+    .cm-editor.cm-focused {
+      outline: 2px solid transparent;
+      box-shadow: 0 0 0 1px #2563eb;
+    }
   `;
 
   render(): TemplateResult<1> {

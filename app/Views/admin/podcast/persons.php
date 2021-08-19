@@ -99,10 +99,12 @@
     [],
     lang('Person.podcast_form.persons_hint'),
 ) ?>
-<?= form_multiselect('persons[]', $personOptions, old('persons', []), [
+<?= component('Forms/MultiSelect', ['options' => $personOptions, 'selected' => old('persons', [])], [
     'id' => 'persons',
-    'class' => 'form-select mb-4',
+    'name' => 'persons[]',
+    'class' => 'mb-4',
     'required' => 'required',
+    'data-max-item-count' => '2',
 ]) ?>
 
 <?= form_label(
@@ -112,9 +114,10 @@
     lang('Person.podcast_form.roles_hint'),
     true,
 ) ?>
-<?= form_multiselect('roles[]', $taxonomyOptions, old('roles', []), [
+<?= component('Forms/MultiSelect', ['options' => $taxonomyOptions, 'selected' => old('roles', [])], [
     'id' => 'roles',
-    'class' => 'form-select mb-4',
+    'name' => 'roles[]',
+    'class' => 'mb-4',
 ]) ?>
 
 <?= form_section_close() ?>
