@@ -1,3 +1,10 @@
+# [1.0.0-alpha.69](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.68...v1.0.0-alpha.69) (2021-08-23)
+
+### Bug Fixes
+
+- **import:** cast description's SimpleXMLElement to string
+  ([02d17be](https://code.podlibre.org/podlibre/castopod-host/commit/02d17be4ffe229fc6657207d31eba0543b5f1a4c))
+
 # [1.0.0-alpha.68](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.67...v1.0.0-alpha.68) (2021-08-19)
 
 ### Bug Fixes
