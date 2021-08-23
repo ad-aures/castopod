@@ -308,7 +308,7 @@ class PodcastImportController extends BaseController
             $slug = slugify(
                 $this->request->getPost('slug_field') === 'title'
                     ? (string) $item->title
-                    : basename($item->link),
+                    : basename((string) $item->link),
             );
             if (in_array($slug, $slugs, true)) {
                 $slugNumber = 2;
@@ -319,10 +319,10 @@ class PodcastImportController extends BaseController
             }
             $slugs[] = $slug;
             $itemDescriptionHtml = match ($this->request->getPost('description_field')) {
-                'content' => $nsContent->encoded,
-                'summary' => $nsItunes->summary,
+                'content' => (string) $nsContent->encoded,
+                'summary' => (string) $nsItunes->summary,
                 'subtitle_summary' => $nsItunes->subtitle . '<br/>' . $nsItunes->summary,
-                default => $item->description,
+                default => (string) $item->description,
             };
 
             if (
