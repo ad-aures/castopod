@@ -6,9 +6,9 @@ namespace Config;
 
 use App\Entities\Actor;
 use App\Entities\Post;
-use App\Entities\User;
 use CodeIgniter\Events\Events;
 use CodeIgniter\Exceptions\FrameworkException;
+use Modules\Auth\Entities\User;
 
 /*
  * --------------------------------------------------------------------

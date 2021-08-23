@@ -51,8 +51,8 @@ to help you kickstart your contribution.
    app.baseURL="http://localhost:8080/"
    app.mediaBaseURL="http://localhost:8080/"
 
-   app.adminGateway="cp-admin"
-   app.authGateway="cp-auth"
+   admin.gateway="cp-admin"
+   auth.gateway="cp-auth"
 
    database.default.hostname="mariadb"
    database.default.database="castopod"

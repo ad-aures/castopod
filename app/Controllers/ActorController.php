@@ -10,8 +10,8 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use ActivityPub\Controllers\ActorController as ActivityPubActorController;
-use Analytics\AnalyticsTrait;
+use Modules\Analytics\AnalyticsTrait;
+use Modules\Fediverse\Controllers\ActorController as ActivityPubActorController;
 
 class ActorController extends ActivityPubActorController
 {

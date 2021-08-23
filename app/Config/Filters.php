@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Config;
 
-use ActivityPub\Filters\ActivityPubFilter;
-use App\Filters\PermissionFilter;
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Filters\CSRF;
 use CodeIgniter\Filters\DebugToolbar;
 use CodeIgniter\Filters\Honeypot;
+use Modules\Auth\Filters\PermissionFilter;
+use Modules\Fediverse\Filters\ActivityPubFilter;
 use Myth\Auth\Filters\LoginFilter;
 use Myth\Auth\Filters\RoleFilter;
 
@@ -70,7 +70,7 @@ class Filters extends BaseConfig
 
         $this->filters = [
             'login' => [
-                'before' => [config('App')->adminGateway . '*'],
+                'before' => [config('Admin') ->gateway . '*', config('Analytics') ->gateway . '*'],
             ],
         ];
     }

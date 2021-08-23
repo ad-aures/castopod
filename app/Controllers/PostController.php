@@ -10,9 +10,6 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use ActivityPub\Controllers\PostController as ActivityPubPostController;
-use ActivityPub\Entities\Post as ActivityPubPost;
-use Analytics\AnalyticsTrait;
 use App\Entities\Actor;
 use App\Entities\Podcast;
 use App\Entities\Post as CastopodPost;
@@ -23,6 +20,9 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\URI;
 use CodeIgniter\I18n\Time;
+use Modules\Analytics\AnalyticsTrait;
+use Modules\Fediverse\Controllers\PostController as ActivityPubPostController;
+use Modules\Fediverse\Entities\Post as ActivityPubPost;
 
 class PostController extends ActivityPubPostController
 {

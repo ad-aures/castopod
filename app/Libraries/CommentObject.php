@@ -10,8 +10,8 @@ declare(strict_types=1);
 
 namespace App\Libraries;
 
-use ActivityPub\Core\ObjectType;
 use App\Entities\EpisodeComment;
+use Modules\Fediverse\Core\ObjectType;
 
 class CommentObject extends ObjectType
 {

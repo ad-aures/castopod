@@ -4,20 +4,14 @@ declare(strict_types=1);
 
 namespace Config;
 
-use App\Authorization\FlatAuthorization;
-use App\Authorization\GroupModel;
-use App\Authorization\PermissionModel;
 use App\Libraries\Breadcrumb;
 use App\Libraries\Negotiate;
 use App\Libraries\Router;
 use App\Libraries\Vite;
-use App\Models\UserModel;
 use CodeIgniter\Config\BaseService;
 use CodeIgniter\HTTP\Request;
 use CodeIgniter\HTTP\RequestInterface;
-use CodeIgniter\Model;
 use CodeIgniter\Router\RouteCollectionInterface;
-use Myth\Auth\Models\LoginModel;
 
 /**
  * Services Configuration file.
@@ -67,70 +61,6 @@ class Services extends BaseService
         $request = $request ?? static::request();
 
         return new Negotiate($request);
-    }
-
-    /**
-     * @return mixed
-     */
-    public static function authentication(
-        string $lib = 'local',
-        Model $userModel = null,
-        Model $loginModel = null,
-        bool $getShared = true
-    ) {
-        if ($getShared) {
-            return self::getSharedInstance('authentication', $lib, $userModel, $loginModel);
-        }
-
-        // config() checks first in app/Config
-        $config = config('Auth');
-
-        $class = $config->authenticationLibs[$lib];
-
-        $instance = new $class($config);
-
-        if ($userModel === null) {
-            $userModel = new UserModel();
-        }
-
-        if ($loginModel === null) {
-            $loginModel = new LoginModel();
-        }
-
-        return $instance->setUserModel($userModel)
-            ->setLoginModel($loginModel);
-    }
-
-    /**
-     * @return mixed|$this
-     */
-    public static function authorization(
-        Model $groupModel = null,
-        Model $permissionModel = null,
-        Model $userModel = null,
-        bool $getShared = true
-    ) {
-        if ($getShared) {
-            return self::getSharedInstance('authorization', $groupModel, $permissionModel, $userModel);
-        }
-
-        if ($groupModel === null) {
-            $groupModel = new GroupModel();
-        }
-
-        if ($permissionModel === null) {
-            $permissionModel = new PermissionModel();
-        }
-
-        /* @phpstan-ignore-next-line */
-        $instance = new FlatAuthorization($groupModel, $permissionModel);
-
-        if ($userModel === null) {
-            $userModel = new UserModel();
-        }
-
-        /* @phpstan-ignore-next-line */
-        return $instance->setUserModel($userModel);
     }
 
     public static function breadcrumb(bool $getShared = true): Breadcrumb

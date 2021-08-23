@@ -427,28 +427,4 @@ class App extends BaseConfig
      * Defines the root folder for media files storage
      */
     public string $mediaRoot = 'media';
-
-    /**
-     * --------------------------------------------------------------------------
-     * Admin gateway
-     * --------------------------------------------------------------------------
-     * Defines a base route for all admin pages
-     */
-    public string $adminGateway = 'cp-admin';
-
-    /**
-     * --------------------------------------------------------------------------
-     * Auth gateway
-     * --------------------------------------------------------------------------
-     * Defines a base route for all authentication related pages
-     */
-    public string $authGateway = 'cp-auth';
-
-    /**
-     * --------------------------------------------------------------------------
-     * Install gateway
-     * --------------------------------------------------------------------------
-     * Defines a base route for instance installation
-     */
-    public string $installGateway = 'cp-install';
 }

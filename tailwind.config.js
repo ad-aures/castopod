@@ -5,6 +5,7 @@ module.exports = {
   purge: [
     "./app/Views/**/*.php",
     "./app/View/Components/**/*.php",
+    "./modules/**/Views/**/*.php",
     "./app/Helpers/*.php",
     "./app/Resources/**/*.ts",
   ],

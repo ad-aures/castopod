@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Entities\User;
+use Modules\Auth\Entities\User;
 use Myth\Auth\Models\UserModel as MythAuthUserModel;
 
 class UserModel extends MythAuthUserModel

@@ -11,6 +11,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // alternative to CLI arguments, easier to maintain and extend
     $parameters->set(Option::PATHS, [
         __DIR__ . '/app',
+        __DIR__ . '/modules',
         __DIR__ . '/tests',
         __DIR__ . '/public',
     ]);
@@ -18,6 +19,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters->set(Option::SKIP, [
         // TODO: restrict some rules for views?
         __DIR__ . '/app/Views/*',
+        __DIR__ . '/modules/**/Views/*',
 
         // skip specific generated files
         __DIR__ . '/app/Language/*/PersonsTaxonomy.php',

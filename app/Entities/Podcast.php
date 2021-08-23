@@ -19,6 +19,7 @@ use App\Models\UserModel;
 use CodeIgniter\Entity\Entity;
 use CodeIgniter\I18n\Time;
 use League\CommonMark\CommonMarkConverter;
+use Modules\Auth\Entities\User;
 use RuntimeException;
 
 /**

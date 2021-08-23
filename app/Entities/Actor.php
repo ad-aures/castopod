@@ -10,8 +10,8 @@ declare(strict_types=1);
 
 namespace App\Entities;
 
-use ActivityPub\Entities\Actor as ActivityPubActor;
 use App\Models\PodcastModel;
+use Modules\Fediverse\Entities\Actor as ActivityPubActor;
 use RuntimeException;
 
 /**

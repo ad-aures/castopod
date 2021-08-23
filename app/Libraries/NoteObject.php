@@ -10,15 +10,15 @@ declare(strict_types=1);
 
 namespace App\Libraries;
 
-use ActivityPub\Objects\NoteObject as ActivityPubNoteObject;
 use App\Entities\Post;
+use Modules\Fediverse\Objects\NoteObject as ActivityPubNoteObject;
 
 class NoteObject extends ActivityPubNoteObject
 {
     /**
      * @param Post $post
      */
-    public function __construct(\ActivityPub\Entities\Post $post)
+    public function __construct($post)
     {
         parent::__construct($post);
 

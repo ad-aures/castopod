@@ -10,9 +10,6 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use ActivityPub\Objects\OrderedCollectionObject;
-use ActivityPub\Objects\OrderedCollectionPage;
-use Analytics\AnalyticsTrait;
 use App\Entities\Episode;
 use App\Entities\Podcast;
 use App\Libraries\NoteObject;
@@ -24,6 +21,9 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\Response;
 use CodeIgniter\HTTP\ResponseInterface;
 use Config\Services;
+use Modules\Analytics\AnalyticsTrait;
+use Modules\Fediverse\Objects\OrderedCollectionObject;
+use Modules\Fediverse\Objects\OrderedCollectionPage;
 use SimpleXMLElement;
 
 class EpisodeController extends BaseController

@@ -10,8 +10,8 @@ declare(strict_types=1);
 
 namespace App\Entities;
 
-use ActivityPub\Entities\Post as ActivityPubPost;
 use App\Models\EpisodeModel;
+use Modules\Fediverse\Entities\Post as ActivityPubPost;
 use RuntimeException;
 
 /**

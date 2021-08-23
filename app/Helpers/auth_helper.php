@@ -8,10 +8,9 @@ declare(strict_types=1);
  * @link       https://castopod.org/
  */
 
-use ActivityPub\Entities\Actor;
-use App\Entities\User;
 use CodeIgniter\Database\Exceptions\DataException;
-use Config\Services;
+use Modules\Auth\Entities\User;
+use Modules\Fediverse\Entities\Actor;
 
 if (! function_exists('user')) {
     /**
@@ -19,7 +18,7 @@ if (! function_exists('user')) {
      */
     function user(): ?User
     {
-        $authenticate = Services::authentication();
+        $authenticate = service('authentication');
         $authenticate->check();
         return $authenticate->user();
     }
@@ -31,7 +30,7 @@ if (! function_exists('set_interact_as_actor')) {
      */
     function set_interact_as_actor(int $actorId): void
     {
-        $authenticate = Services::authentication();
+        $authenticate = service('authentication');
         $authenticate->check();
 
         $session = session();
@@ -56,7 +55,7 @@ if (! function_exists('interact_as_actor_id')) {
      */
     function interact_as_actor_id(): int
     {
-        $authenticate = Services::authentication();
+        $authenticate = service('authentication');
         $authenticate->check();
 
         $session = session();
@@ -70,7 +69,7 @@ if (! function_exists('interact_as_actor')) {
      */
     function interact_as_actor(): Actor | false
     {
-        $authenticate = Services::authentication();
+        $authenticate = service('authentication');
         $authenticate->check();
 
         $session = session();

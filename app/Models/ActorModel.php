@@ -10,8 +10,8 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use ActivityPub\Models\ActorModel as ActivityPubActorModel;
 use App\Entities\Actor;
+use Modules\Fediverse\Models\ActorModel as ActivityPubActorModel;
 
 class ActorModel extends ActivityPubActorModel
 {

@@ -10,12 +10,12 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use ActivityPub\Activities\LikeActivity;
-use ActivityPub\Activities\UndoActivity;
-use ActivityPub\Entities\Actor;
 use App\Entities\EpisodeComment;
 use App\Entities\Like;
 use Michalsn\Uuid\UuidModel;
+use Modules\Fediverse\Activities\LikeActivity;
+use Modules\Fediverse\Activities\UndoActivity;
+use Modules\Fediverse\Entities\Actor;
 
 class LikeModel extends UuidModel
 {

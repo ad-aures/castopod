@@ -10,8 +10,8 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use ActivityPub\Models\PostModel as ActivityPubPostModel;
 use App\Entities\Post;
+use Modules\Fediverse\Models\PostModel as ActivityPubPostModel;
 
 class PostModel extends ActivityPubPostModel
 {

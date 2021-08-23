@@ -10,9 +10,6 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use ActivityPub\Objects\OrderedCollectionObject;
-use ActivityPub\Objects\OrderedCollectionPage;
-use Analytics\AnalyticsTrait;
 use App\Entities\Podcast;
 use App\Libraries\PodcastActor;
 use App\Libraries\PodcastEpisode;
@@ -21,6 +18,9 @@ use App\Models\PodcastModel;
 use App\Models\PostModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\Response;
+use Modules\Analytics\AnalyticsTrait;
+use Modules\Fediverse\Objects\OrderedCollectionObject;
+use Modules\Fediverse\Objects\OrderedCollectionPage;
 
 class PodcastController extends BaseController
 {

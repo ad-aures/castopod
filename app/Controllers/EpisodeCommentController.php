@@ -10,11 +10,6 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use ActivityPub\Entities\Actor;
-use ActivityPub\Objects\OrderedCollectionObject;
-use ActivityPub\Objects\OrderedCollectionPage;
-use Analytics\AnalyticsTrait;
-use App\Controllers\Admin\BaseController;
 use App\Entities\Episode;
 use App\Entities\EpisodeComment;
 use App\Entities\Podcast;
@@ -25,6 +20,10 @@ use App\Models\PodcastModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\Response;
+use Modules\Analytics\AnalyticsTrait;
+use Modules\Fediverse\Entities\Actor;
+use Modules\Fediverse\Objects\OrderedCollectionObject;
+use Modules\Fediverse\Objects\OrderedCollectionPage;
 
 class EpisodeCommentController extends BaseController
 {

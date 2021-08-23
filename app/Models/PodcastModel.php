@@ -385,7 +385,7 @@ class PodcastModel extends Model
 
             // delete all cache for podcast actor
             cache()
-                ->deleteMatching(config('ActivityPub') ->cachePrefix . "actor#{$podcast->actor_id}*");
+                ->deleteMatching(config('Fediverse') ->cachePrefix . "actor#{$podcast->actor_id}*");
 
             // delete model requests cache, includes feed / query / episode lists, etc.
             cache()

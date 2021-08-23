@@ -10,11 +10,11 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use ActivityPub\Activities\CreateActivity;
 use App\Entities\EpisodeComment;
 use App\Libraries\CommentObject;
 use CodeIgniter\Database\BaseBuilder;
 use Michalsn\Uuid\UuidModel;
+use Modules\Fediverse\Activities\CreateActivity;
 
 class EpisodeCommentModel extends UuidModel
 {

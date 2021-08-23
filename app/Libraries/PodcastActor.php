@@ -10,8 +10,8 @@ declare(strict_types=1);
 
 namespace App\Libraries;
 
-use ActivityPub\Objects\ActorObject;
 use App\Entities\Podcast;
+use Modules\Fediverse\Objects\ActorObject;
 
 class PodcastActor extends ActorObject
 {
