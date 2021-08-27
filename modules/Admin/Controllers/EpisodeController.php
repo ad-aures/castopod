@@ -824,9 +824,6 @@ class EpisodeController extends BaseController
 
     public function attemptCommentReply(string $commentId): RedirectResponse
     {
-        // var_dump($commentId);
-        // die();
-
         $rules = [
             'message' => 'required|max_length[500]',
         ];

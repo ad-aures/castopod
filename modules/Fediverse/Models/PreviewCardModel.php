@@ -11,15 +11,14 @@ declare(strict_types=1);
 namespace Modules\Fediverse\Models;
 
 use CodeIgniter\Database\BaseResult;
-use CodeIgniter\Model;
 use Modules\Fediverse\Entities\PreviewCard;
 
-class PreviewCardModel extends Model
+class PreviewCardModel extends BaseModel
 {
     /**
      * @var string
      */
-    protected $table = 'activitypub_preview_cards';
+    protected $table = 'preview_cards';
 
     /**
      * @var string[]
@@ -76,9 +75,11 @@ class PreviewCardModel extends Model
             config('Fediverse')
                 ->cachePrefix . "post#{$postId}_preview_card";
         if (! ($found = cache($cacheName))) {
+            $tablesPrefix = config('Fediverse')
+                ->tablesPrefix;
             $found = $this->join(
-                'activitypub_posts_preview_cards',
-                'activitypub_posts_preview_cards.preview_card_id = id',
+                $tablesPrefix . 'posts_preview_cards',
+                $tablesPrefix . 'posts_preview_cards.preview_card_id = id',
                 'inner',
             )
                 ->where('post_id', service('uuid') ->fromString($postId) ->getBytes())

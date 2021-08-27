@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace ViewComponents\Config;
 
 use CodeIgniter\Config\BaseService;
-use ViewComponents\ComponentLoader;
+use ViewComponents\ComponentRenderer;
 
 /**
  * Services Configuration file.
@@ -19,12 +19,12 @@ use ViewComponents\ComponentLoader;
  */
 class Services extends BaseService
 {
-    public static function viewcomponents(bool $getShared = true): ComponentLoader
+    public static function components(bool $getShared = true): ComponentRenderer
     {
         if ($getShared) {
-            return self::getSharedInstance('viewcomponents');
+            return self::getSharedInstance('components');
         }
 
-        return new ComponentLoader();
+        return new ComponentRenderer();
     }
 }

@@ -95,28 +95,11 @@
     lang('Person.episode_form.add_section_subtitle'),
 ) ?>
 
-<?= component(
-    'Forms/Label',
-    ['text' => lang('Person.episode_form.persons'), 'hint' =>     lang('Person.episode_form.persons_hint')],
-    ['for' => 'persons'],
-) ?>
-<?= component('Forms/MultiSelect', ['options' => $personOptions, 'selected' => old('persons', [])], [
-    'id' => 'persons',
-    'name' => 'persons[]',
-    'class' => 'mb-4',
-    'required' => 'required',
-]) ?>
+<Forms.Label for="persons" hint="<?= lang('Person.episode_form.persons_hint') ?>"><?= lang('Person.episode_form.persons') ?></Forms.Label>
+<Forms.MultiSelect id="persons" name="persons[]" class="mb-4" required="required" options="<?= htmlspecialchars(json_encode($personOptions)) ?>" selected="<?= htmlspecialchars(json_encode(old('persons', []))) ?>"/>
 
-<?= component(
-    'Forms/Label',
-    ['text' => lang('Person.episode_form.roles'), 'hint' =>     lang('Person.episode_form.roles_hint'), 'isOptional' => true],
-    ['for' => 'roles'],
-) ?>
-<?= component('Forms/MultiSelect', ['options' => $taxonomyOptions, 'selected' => old('roles', [])], [
-    'id' => 'roles',
-    'name' => 'roles[]',
-    'class' => 'mb-4',
-]) ?>
+<Forms.Label for="roles" hint="<?= lang('Person.episode_form.roles_hint') ?>" isOptional="true"><?= lang('Person.episode_form.roles') ?></Forms.Label>
+<Forms.MultiSelect id="roles" name="roles[]" class="mb-4" options="<?= htmlspecialchars(json_encode($taxonomyOptions)) ?>" selected="<?= htmlspecialchars(json_encode(old('roles', []))) ?>"/>
 
 <?= form_section_close() ?>
 <?= button(

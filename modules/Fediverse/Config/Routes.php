@@ -18,7 +18,7 @@ $routes->addPlaceholder(
 $routes->addPlaceholder('postAction', '\bfavourite|\breblog|\breply');
 
 /**
- * ActivityPub routes file
+ * Fediverse routes file
  */
 
 $routes->group('', [

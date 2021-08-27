@@ -141,13 +141,13 @@ class EpisodeCommentModel extends UuidModel
             ])
             ->getCompiledSelect();
 
-        $episodePostsReplies = $this->db->table('activitypub_posts')
+        $episodePostsReplies = $this->db->table(config('Fediverse')->tablesPrefix . 'posts')
             ->select(
                 'id, uri, episode_id, actor_id, in_reply_to_id, message, message_html, favourites_count as likes_count, replies_count, published_at as created_at, created_by, 1 as is_from_post'
             )
             ->whereIn('in_reply_to_id', function (BaseBuilder $builder) use (&$episodeId): BaseBuilder {
                 return $builder->select('id')
-                    ->from('activitypub_posts')
+                    ->from(config('Fediverse')->tablesPrefix . 'posts')
                     ->where('episode_id', $episodeId);
             })
             ->where('`created_at` <= NOW()', null, false)

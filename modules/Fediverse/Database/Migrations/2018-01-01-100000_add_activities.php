@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Class AddActivities Creates activitypub_activities table in database
+ * Class AddActivities Creates activities table in database
  *
  * @copyright  2021 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -59,15 +59,19 @@ class AddActivities extends Migration
                 'type' => 'DATETIME',
             ],
         ]);
+
+        $tablesPrefix = config('Fediverse')
+            ->tablesPrefix;
+
         $this->forge->addPrimaryKey('id');
-        $this->forge->addForeignKey('actor_id', 'activitypub_actors', 'id', '', 'CASCADE');
-        $this->forge->addForeignKey('target_actor_id', 'activitypub_actors', 'id', '', 'CASCADE');
-        $this->forge->addForeignKey('post_id', 'activitypub_posts', 'id', '', 'CASCADE');
-        $this->forge->createTable('activitypub_activities');
+        $this->forge->addForeignKey('actor_id', $tablesPrefix . 'actors', 'id', '', 'CASCADE');
+        $this->forge->addForeignKey('target_actor_id', $tablesPrefix . 'actors', 'id', '', 'CASCADE');
+        $this->forge->addForeignKey('post_id', $tablesPrefix . 'posts', 'id', '', 'CASCADE');
+        $this->forge->createTable($tablesPrefix . 'activities');
     }
 
     public function down(): void
     {
-        $this->forge->dropTable('activitypub_activities');
+        $this->forge->dropTable(config('Fediverse')->tablesPrefix . 'activities');
     }
 }

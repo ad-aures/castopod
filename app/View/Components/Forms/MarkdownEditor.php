@@ -8,8 +8,6 @@ use ViewComponents\Component;
 
 class MarkdownEditor extends Component
 {
-    protected string $content = '';
-
     public function render(): string
     {
         $editorClass = 'w-full flex flex-col bg-white border border-gray-500 focus-within:ring-1 focus-within:ring-blue-600';
@@ -64,7 +62,7 @@ class MarkdownEditor extends Component
                 '</markdown-toolbar>' .
             '</header>' .
             '<div class="relative">' .
-                form_textarea($this->attributes, $this->content) .
+                form_textarea($this->attributes, $this->slot) .
                 '<markdown-preview for="' . $this->attributes['id'] . '" class="absolute top-0 left-0 hidden w-full h-full p-2 overflow-y-auto prose bg-gray-50" showClass="bg-white"></markdown-preview>' .
             '</div>' .
             '<footer class="flex px-2 py-1 bg-gray-100 border-t">' .

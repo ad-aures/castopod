@@ -222,7 +222,7 @@ class EpisodeController extends BaseController
         $episodeComments = model('PostModel')
             ->whereIn('in_reply_to_id', function (BaseBuilder $builder): BaseBuilder {
                 return $builder->select('id')
-                    ->from('activitypub_posts')
+                    ->from(config('Fediverse')->tablesPrefix . 'posts')
                     ->where('episode_id', $this->episode->id);
             })
             ->where('`published_at` <= NOW()', null, false)

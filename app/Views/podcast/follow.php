@@ -30,7 +30,7 @@
 <body class="flex flex-col min-h-screen bg-pine-50">
     <header class="flex flex-col items-center mb-8">
         <h1 class="w-full pt-8 pb-32 text-center text-white bg-pine-900"><?= lang(
-            'ActivityPub.follow.subtitle',
+            'Fediverse.follow.subtitle',
         ) ?></h1>
         <div class="flex flex-col w-full max-w-xs -mt-24 overflow-hidden bg-white shadow rounded-xl">
             <img src="<?= $actor->cover_image_url ?>" alt="" class="object-cover w-full h-32 bg-pine-800" />
@@ -54,10 +54,10 @@
         <?= view('_message_block') ?>
 
         <?= form_label(
-            lang('ActivityPub.your_handle'),
+            lang('Fediverse.your_handle'),
             'handle',
             [],
-            lang('ActivityPub.your_handle_hint'),
+            lang('Fediverse.your_handle_hint'),
         ) ?>
         <?= form_input([
             'id' => 'handle',
@@ -68,7 +68,7 @@
         ]) ?>
 
         <?= button(
-            lang('ActivityPub.follow.submit'),
+            lang('Fediverse.follow.submit'),
             '',
             ['variant' => 'primary'],
             ['type' => 'submit', 'class' => 'self-end'],

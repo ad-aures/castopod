@@ -11,9 +11,9 @@ declare(strict_types=1);
 namespace App\Controllers;
 
 use Modules\Analytics\AnalyticsTrait;
-use Modules\Fediverse\Controllers\ActorController as ActivityPubActorController;
+use Modules\Fediverse\Controllers\ActorController as FediverseActorController;
 
-class ActorController extends ActivityPubActorController
+class ActorController extends FediverseActorController
 {
     use AnalyticsTrait;
 

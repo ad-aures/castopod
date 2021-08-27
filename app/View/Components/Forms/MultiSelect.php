@@ -18,6 +18,16 @@ class MultiSelect extends Component
      */
     protected array $selected = [];
 
+    public function setOptions(string $value): void
+    {
+        $this->options = json_decode(html_entity_decode($value), true);
+    }
+
+    public function setSelected(string $selected): void
+    {
+        $this->selected = json_decode($selected);
+    }
+
     public function render(): string
     {
         $defaultAttributes = [

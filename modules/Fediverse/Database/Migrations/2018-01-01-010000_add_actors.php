@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Class AddActors Creates activitypub_actors table in database
+ * Class AddActors Creates actors table in database
  *
  * @copyright  2021 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -113,11 +113,11 @@ class AddActors extends Migration
         $this->forge->addPrimaryKey('id');
         $this->forge->addUniqueKey('uri');
         $this->forge->addUniqueKey(['username', 'domain']);
-        $this->forge->createTable('activitypub_actors');
+        $this->forge->createTable(config('Fediverse')->tablesPrefix . 'actors');
     }
 
     public function down(): void
     {
-        $this->forge->dropTable('activitypub_actors');
+        $this->forge->dropTable(config('Fediverse')->tablesPrefix . 'actors');
     }
 }

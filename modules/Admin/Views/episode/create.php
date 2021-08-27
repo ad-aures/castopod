@@ -28,11 +28,7 @@
     lang('Episode.form.info_section_subtitle'),
 ) ?>
 
-<?= component(
-    'Forms/Label',
-    ['text' => lang('Episode.form.audio_file'), 'hint' => lang('Episode.form.audio_file_hint')],
-    ['for' => 'audio_file'],
-) ?>
+<Forms.Label for="audio_file" hint="<?= lang('Episode.form.audio_file_hint') ?>"><?= lang('Episode.form.audio_file') ?></Forms.Label>
 <?= form_input([
     'id' => 'audio_file',
     'name' => 'audio_file',
@@ -42,15 +38,7 @@
     'accept' => '.mp3,.m4a',
 ]) ?>
 
-<?= component(
-    'Forms/Label',
-    [   
-        'text' => lang('Episode.form.image'),
-        'hint' => lang('Episode.form.image_hint'),
-        'isOptional' => true
-    ],
-    ['for' => 'image'],
-) ?>
+<Forms.Label for="image" hint="<?= lang('Episode.form.image_hint') ?>" isOptional="true"><?= lang('Episode.form.image') ?></Forms.Label>
 <?= form_input([
     'id' => 'image',
     'name' => 'image',
@@ -62,12 +50,7 @@
     'Common.forms.image_size_hint',
 ) ?></small>
 
-<?= component(
-    'Forms/Label',
-    ['text' => lang('Episode.form.title'),
-     'hint' => lang('Episode.form.title_hint')],
-    ['for' => 'title'],
-) ?>
+<Forms.Label for="title" hint="<?= lang('Episode.form.title_hint') ?>"><?= lang('Episode.form.title') ?></Forms.Label>
 <?= form_input([
     'id' => 'title',
     'name' => 'title',
@@ -77,11 +60,7 @@
     'data-slugify' => 'title',
 ]) ?>
 
-<?= component(
-    'Forms/Label',
-    ['text' => lang('Episode.form.permalink')],
-    ['for' => 'slug']
-) ?>
+<Forms.Label for="slug"><?= lang('Episode.form.permalink') ?></Forms.Label>
 <permalink-edit class="inline-flex items-center mb-4 text-xs" edit-label="<?= lang('Common.edit') ?>" copy-label="<?= lang('Common.copy') ?>" copied-label="<?= lang('Common.copied') ?>">
     <span slot="domain"><?= base_url('/@'. $podcast->handle . '/episodes' ) . '/' ?></span>
     <?= form_input([
@@ -97,7 +76,7 @@
 
 <div class="flex flex-col mb-4 gap-x-2 gap-y-4 md:flex-row">
     <div class="flex flex-col flex-1">
-        <?= component('Forms/Label', ['text' => lang('Episode.form.season_number')], ['for' => 'season_number']) ?>
+        <Forms.Label for="season_number"><?= lang('Episode.form.season_number') ?></Forms.Label>
         <?= form_input([
             'id' => 'season_number',
             'name' => 'season_number',
@@ -107,7 +86,7 @@
         ]) ?>
     </div>
     <div class="flex flex-col flex-1">
-        <?= component('Forms/Label', ['text' => lang('Episode.form.episode_number')], ['for' => 'episode_number']) ?>
+        <Forms.Label for="episode_number"><?= lang('Episode.form.episode_number') ?></Forms.Label>
         <?= form_input([
             'id' => 'episode_number',
             'name' => 'episode_number',
@@ -204,46 +183,13 @@
 ) ?>
 
 <div class="mb-4">
-    <?= component('Forms/Label', ['text' => lang('Episode.form.description')], ['for' => 'description']) ?>
-    <?= component(
-        'Forms/MarkdownEditor',
-        [
-            'content' => old('description', '', false),
-        ],
-        [
-            'id' => 'description',
-            'name' => 'description',
-            'required' => 'required',
-        ],
-    ) ?>
+    <Forms.Label for="description"><?= lang('Episode.form.description') ?></Forms.Label>
+    <Forms.MarkdownEditor id="description" name="description" required="required"><?= old('description', '', false) ?></Forms.MarkdownEditor>
 </div>
 
 <div class="mb-4">
-    <?= component( 'Forms/Label',
-    [
-        'text' => lang('Episode.form.description_footer'),
-        'hint' =>  lang('Episode.form.description_footer_hint'),
-        'isOptional' => true
-    ],
-    [
-        'for' => 'description_footer'
-    ],
-    ) ?>
-    <?= component(
-        'Forms/MarkdownEditor',
-        [
-            'content' => old(
-                'description_footer',
-                $podcast->episode_description_footer_markdown ?? '',
-                false,
-            ),
-        ],
-        [
-            'id' => 'description_footer',
-            'name' => 'description_footer',
-            'rows' => 6
-        ],
-    ) ?>
+    <Forms.Label for="description_footer" hint="<?= lang('Episode.form.description_footer_hint') ?>" isOptional="true"><?= lang('Episode.form.description_footer') ?></Forms.Label>
+    <Forms.MarkdownEditor id="description_footer" name="description_footer" rows="6"><?= old('description_footer', $podcast->episode_description_footer_markdown ?? '', false) ?></Forms.MarkdownEditor>
 </div>
 
 <?= form_section_close() ?>
@@ -253,14 +199,7 @@
     lang('Episode.form.location_section_subtitle'),
 ) ?>
 
-<?= component( 'Forms/Label',
-    [
-        'text' => lang('Episode.form.location_name'),
-        'hint' => lang('Episode.form.location_name_hint'),
-        'isOptional' => true
-    ],
-    ['for' => 'location_name'],
-) ?>
+<Forms.Label for="location_name" hint="<?= lang('Episode.form.location_name_hint') ?>" isOptional="true"><?= lang('Episode.form.location_name') ?></Forms.Label>
 <?= form_input([
     'id' => 'location_name',
     'name' => 'location_name',
@@ -301,13 +240,7 @@
 
         <div class="py-2 tab-panels">
             <section id="transcript-file-upload" class="flex items-center tab-panel">
-            <?= component( 'Forms/Label',
-                [
-                    'text' => lang('Episode.form.transcript_file'),
-                    'isOptional' => true    
-                ],
-                ['for' => 'transcript_file', 'class' => 'sr-only'],
-            ) ?>
+            <Forms.Label class="sr-only" for="transcript_file" isOptional="true"><?= lang('Episode.form.transcript_file') ?></Forms.Label>
             <?= form_input([
                 'id' => 'transcript_file',
                 'name' => 'transcript_file',
@@ -317,13 +250,7 @@
             ]) ?>
             </section>
             <section id="transcript-file-remote-url" class="tab-panel">
-            <?= component( 'Forms/Label',
-                [
-                    'text' => lang('Episode.form.transcript_file_remote_url'),
-                    'isOptional' => true
-                ],
-                ['for' => 'transcript_file_remote_url', 'class' => 'sr-only'],
-            ) ?>
+            <Forms.Label class="sr-only" for="transcript_file_remote_url" isOptional="true"><?= lang('Episode.form.transcript_file_remote_url') ?></Forms.Label>
             <?= form_input([
                 'id' => 'transcript_file_remote_url',
                 'name' => 'transcript_file_remote_url',
@@ -364,13 +291,7 @@
 
         <div class="py-2 tab-panels">
             <section id="chapters-file-upload" class="flex items-center tab-panel">
-            <?= component( 'Forms/Label',
-                [
-                    'text' => lang('Episode.form.chapters_file'),
-                    'isOptional' => true
-                ],
-                ['for' => 'chapters_file', 'class' => 'sr-only'],
-            ) ?>
+            <Forms.Label class="sr-only" for="chapters_file" isOptional="true"><?= lang('Episode.form.chapters_file') ?></Forms.Label>
             <?= form_input([
                 'id' => 'chapters_file',
                 'name' => 'chapters_file',
@@ -380,16 +301,7 @@
             ]) ?>
             </section>
             <section id="chapters-file-remote-url" class="tab-panel">
-            <?= component( 'Forms/Label',
-                [
-                    'text' =>  lang('Episode.form.chapters_file_remote_url'),
-                    'isOptional' => true
-                ],
-                [
-                    'for' => 'chapters_file_remote_url',
-                    'class' => 'sr-only'
-                ],
-            ) ?>
+            <Forms.Label class="sr-only" for="chapters_file_remote_url" isOptional="true"><?= lang('Episode.form.chapters_file_remote_url') ?></Forms.Label>
             <?= form_input([
                 'id' => 'chapters_file_remote_url',
                 'name' => 'chapters_file_remote_url',
@@ -409,38 +321,12 @@
     lang('Episode.form.advanced_section_title'),
     lang('Episode.form.advanced_section_subtitle'),
 ) ?>
-<?= component( 'Forms/Label',
-    [
-        'text' => lang('Episode.form.custom_rss'),
-    'hint' => lang('Episode.form.custom_rss_hint'),
-    'isOptional' => true
-    ],
-    ['for' => 'custom_rss']
-) ?>
-<?= component('Forms/XMLEditor',
-    [
-        'content' => old('custom_rss', '')
-    ],
-    [
-        'id' => 'custom_rss',
-        'name' => 'custom_rss',
-    ]
-) ?>
+<Forms.Label for="custom_rss" hint="<?= lang('Episode.form.custom_rss_hint') ?>" isOptional="true"><?= lang('Episode.form.custom_rss') ?></Forms.Label>
+<Forms.XMLEditor id="custom_rss" name="custom_rss"><?= old('custom_rss', '', false) ?></Forms.XMLEditor>
+
 <?= form_section_close() ?>
 
-<?= component(
-    'Forms/Toggler',
-    [
-        'label' => lang('Episode.form.block'),
-        'hint' => lang('Episode.form.block_hint')
-    ],
-    [
-        'id' => 'block',
-        'name' => 'block',
-        'value' => 'yes',
-        'checked' => old('block', false),
-    ]
-) ?>
+<Forms.Toggler id="block" name="block" value="yes" checked="<?= old('block', false) ?>" hint="<?= lang('Episode.form.block_hint') ?>"><?= lang('Episode.form.block') ?></Forms.Toggler>
 
 <?= button(
     lang('Episode.form.submit_create'),

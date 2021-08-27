@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 use Rector\CodingStyle\Rector\ClassMethod\UnSpreadOperatorRector;
 use Rector\CodingStyle\Rector\Encapsed\EncapsedStringsToSprintfRector;
+use Rector\CodingStyle\Rector\FuncCall\CallUserFuncArrayToVariadicRector;
 use Rector\CodingStyle\Rector\FuncCall\ConsistentPregDelimiterRector;
+use Rector\CodingStyle\Rector\FuncCall\VersionCompareFuncCallToConstantRector;
 use Rector\CodingStyle\Rector\String_\SplitStringClassConstantToClassConstFetchRector;
 use Rector\Core\Configuration\Option;
 use Rector\Core\ValueObject\PhpVersion;
@@ -13,6 +15,7 @@ use Rector\EarlyReturn\Rector\If_\ChangeOrIfReturnToEarlyReturnRector;
 use Rector\Php55\Rector\String_\StringClassNameToClassConstantRector;
 use Rector\Php80\Rector\ClassMethod\OptionalParametersAfterRequiredRector;
 use Rector\Set\ValueObject\SetList;
+use Rector\Transform\Rector\FuncCall\FuncCallToConstFetchRector;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
@@ -21,6 +24,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $parameters->set(Option::PATHS, [
         __DIR__ . '/app',
+        __DIR__ . '/modules',
         __DIR__ . '/tests',
         __DIR__ . '/public',
     ]);
@@ -47,7 +51,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $parameters->set(Option::SKIP, [
         // skip specific generated files
-        __DIR__ . '/app/Language/*/PersonsTaxonomy.php',
+        __DIR__ . '/modules/Admin/Language/*/PersonsTaxonomy.php',
 
         // skip rules from used sets
         ChangeOrIfReturnToEarlyReturnRector::class,
@@ -59,6 +63,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         // skip rule in specific directory
         StringClassNameToClassConstantRector::class => [
             __DIR__ . '/app/Language/*',
+            __DIR__ . '/modules/*/Language/*',
         ],
         OptionalParametersAfterRequiredRector::class => [
             __DIR__ . '/app/Validation',

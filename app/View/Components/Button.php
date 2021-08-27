@@ -25,7 +25,7 @@ class Button extends Component
     public function render(): string
     {
         $baseClass =
-            'inline-flex items-center font-semibold shadow-xs rounded-full focus:outline-none focus:ring';
+            'inline-flex items-center justify-center font-semibold shadow-xs rounded-full focus:outline-none focus:ring';
 
         $variantClass = [
             'default' => 'text-black bg-gray-300 hover:bg-gray-400',
@@ -73,11 +73,11 @@ class Button extends Component
         }
 
         if ($this->iconLeft !== '') {
-            $this->label = icon($this->iconLeft, 'mr-2') . $this->label;
+            $this->slot = '<Icon glyph="' . $this->iconLeft . '" class="mr-2" />' . $this->slot;
         }
 
         if ($this->iconRight !== '') {
-            $this->label .= icon($this->iconRight, 'ml-2');
+            $this->slot .= '<Icon glyph="' . $this->iconRight . '" class="ml-2" />';
         }
 
         if ($this->uri !== '') {
@@ -91,8 +91,8 @@ class Button extends Component
         ];
         $attributes = stringify_attributes(array_merge($defaultButtonAttributes, $this->attributes));
 
-        return <<<CODE_SAMPLE
-            <button class="{$buttonClass}" {$attributes}>{$this->label}</button>
-        CODE_SAMPLE;
+        return <<<HTML
+            <button class="{$buttonClass}" {$attributes}>{$this->slot}</button>
+        HTML;
     }
 }

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Class AddPreviewCards Creates activitypub_preview_cards table in database
+ * Class AddPreviewCards Creates preview_cards table in database
  *
  * @copyright  2021 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -75,11 +75,11 @@ class AddPreviewCards extends Migration
 
         $this->forge->addPrimaryKey('id');
         $this->forge->addUniqueKey('url');
-        $this->forge->createTable('activitypub_preview_cards');
+        $this->forge->createTable(config('Fediverse')->tablesPrefix . 'preview_cards');
     }
 
     public function down(): void
     {
-        $this->forge->dropTable('activitypub_preview_cards');
+        $this->forge->dropTable(config('Fediverse')->tablesPrefix . 'preview_cards');
     }
 }

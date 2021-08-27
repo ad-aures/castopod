@@ -16,7 +16,6 @@ use CodeIgniter\Events\Events;
 use CodeIgniter\HTTP\URI;
 use CodeIgniter\I18n\Time;
 use Exception;
-use Michalsn\Uuid\UuidModel;
 use Modules\Fediverse\Activities\AnnounceActivity;
 use Modules\Fediverse\Activities\CreateActivity;
 use Modules\Fediverse\Activities\DeleteActivity;
@@ -25,12 +24,12 @@ use Modules\Fediverse\Entities\Actor;
 use Modules\Fediverse\Entities\Post;
 use Modules\Fediverse\Objects\TombstoneObject;
 
-class PostModel extends UuidModel
+class PostModel extends BaseUuidModel
 {
     /**
      * @var string
      */
-    protected $table = 'activitypub_posts';
+    protected $table = 'posts';
 
     /**
      * @var string
@@ -183,10 +182,16 @@ class PostModel extends UuidModel
             ($withBlocked ? '_withBlocked' : '');
 
         if (! ($found = cache($cacheName))) {
+            $tablesPrefix = config('Fediverse')
+                ->tablesPrefix;
             if (! $withBlocked) {
-                $this->select('activitypub_posts.*')
-                    ->join('activitypub_actors', 'activitypub_actors.id = activitypub_posts.actor_id', 'inner')
-                    ->where('activitypub_actors.is_blocked', 0);
+                $this->select($tablesPrefix . 'posts.*')
+                    ->join(
+                        $tablesPrefix . 'actors',
+                        $tablesPrefix . 'actors.id = ' . $tablesPrefix . 'posts.actor_id',
+                        'inner'
+                    )
+                    ->where($tablesPrefix . 'actors.is_blocked', 0);
             }
 
             $this->where('in_reply_to_id', $this->uuid->fromString($postId) ->getBytes())
@@ -227,7 +232,7 @@ class PostModel extends UuidModel
 
     public function addPreviewCard(string $postId, int $previewCardId): Query | bool
     {
-        return $this->db->table('activitypub_posts_preview_cards')
+        return $this->db->table(config('Fediverse')->tablesPrefix . 'posts_preview_cards')
             ->insert([
                 'post_id' => $this->uuid->fromString($postId)
                     ->getBytes(),
@@ -245,7 +250,7 @@ class PostModel extends UuidModel
         bool $createPreviewCard = true,
         bool $registerActivity = true
     ): string | false {
-        helper('activitypub');
+        helper('fediverse');
 
         $this->db->transStart();
 
@@ -385,7 +390,7 @@ class PostModel extends UuidModel
         if (
             $post->preview_card &&
             $this->db
-                ->table('activitypub_posts_preview_cards')
+                ->table(config('Fediverse')->tablesPrefix . 'posts_preview_cards')
                 ->where('preview_card_id', $post->preview_card->id)
                 ->countAll() <= 1
         ) {

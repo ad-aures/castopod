@@ -11,9 +11,9 @@ declare(strict_types=1);
 namespace App\Libraries;
 
 use App\Entities\Post;
-use Modules\Fediverse\Objects\NoteObject as ActivityPubNoteObject;
+use Modules\Fediverse\Objects\NoteObject as FediverseNoteObject;
 
-class NoteObject extends ActivityPubNoteObject
+class NoteObject extends FediverseNoteObject
 {
     /**
      * @param Post $post

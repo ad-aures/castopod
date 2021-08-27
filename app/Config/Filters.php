@@ -9,7 +9,7 @@ use CodeIgniter\Filters\CSRF;
 use CodeIgniter\Filters\DebugToolbar;
 use CodeIgniter\Filters\Honeypot;
 use Modules\Auth\Filters\PermissionFilter;
-use Modules\Fediverse\Filters\ActivityPubFilter;
+use Modules\Fediverse\Filters\FediverseFilter;
 use Myth\Auth\Filters\LoginFilter;
 use Myth\Auth\Filters\RoleFilter;
 
@@ -27,7 +27,7 @@ class Filters extends BaseConfig
         'login' => LoginFilter::class,
         'role' => RoleFilter::class,
         'permission' => PermissionFilter::class,
-        'activity-pub' => ActivityPubFilter::class,
+        'activity-pub' => FediverseFilter::class,
     ];
 
     /**

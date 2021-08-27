@@ -19,11 +19,7 @@
             Sorry! Cannot seem to find the page you were looking for.
         <?php endif; ?>
     </p>
-
-    <?= button(lang('Common.go_back'), previous_url(), [
-        'variant' => 'primary',
-        'iconLeft' => 'arrow-left',
-    ]) ?>
+    <button class="inline-flex items-center justify-center px-3 py-1 text-sm font-semibold text-white rounded-full shadow-xs focus:outline-none focus:ring md:px-4 md:py-2 md:text-base bg-pine-700 hover:bg-pine-800"><?= lang('Common.go_back') ?></button>
 </body>
 
 </html>

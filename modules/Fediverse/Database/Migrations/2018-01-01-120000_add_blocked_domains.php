@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Class AddBlockedDomains Creates activitypub_blocked_domains table in database
+ * Class AddBlockedDomains Creates blocked_domains table in database
  *
  * @copyright  2021 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -28,11 +28,11 @@ class AddBlockedDomains extends Migration
             ],
         ]);
         $this->forge->addPrimaryKey('name');
-        $this->forge->createTable('activitypub_blocked_domains');
+        $this->forge->createTable(config('Fediverse')->tablesPrefix . 'blocked_domains');
     }
 
     public function down(): void
     {
-        $this->forge->dropTable('activitypub_blocked_domains');
+        $this->forge->dropTable(config('Fediverse')->tablesPrefix . 'blocked_domains');
     }
 }

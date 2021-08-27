@@ -15,12 +15,12 @@ use CodeIgniter\Events\Events;
 use CodeIgniter\Model;
 use Modules\Fediverse\Entities\BlockedDomain;
 
-class BlockedDomainModel extends Model
+class BlockedDomainModel extends BaseModel
 {
     /**
      * @var string
      */
-    protected $table = 'activitypub_blocked_domains';
+    protected $table = 'blocked_domains';
 
     /**
      * @var string

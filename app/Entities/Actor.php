@@ -11,14 +11,14 @@ declare(strict_types=1);
 namespace App\Entities;
 
 use App\Models\PodcastModel;
-use Modules\Fediverse\Entities\Actor as ActivityPubActor;
+use Modules\Fediverse\Entities\Actor as FediverseActor;
 use RuntimeException;
 
 /**
  * @property Podcast|null $podcast
  * @property boolean $is_podcast
  */
-class Actor extends ActivityPubActor
+class Actor extends FediverseActor
 {
     protected ?Podcast $podcast = null;
 

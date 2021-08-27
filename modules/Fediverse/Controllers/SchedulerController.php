@@ -17,7 +17,7 @@ class SchedulerController extends Controller
     /**
      * @var string[]
      */
-    protected $helpers = ['activitypub'];
+    protected $helpers = ['fediverse'];
 
     public function activity(): void
     {

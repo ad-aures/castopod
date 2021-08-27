@@ -17,11 +17,7 @@
 <?= csrf_field() ?>
 
 <?= form_label(lang('User.form.roles'), 'roles') ?>
-<?= component('Forms/MultiSelect', ['options' => $roleOptions, 'selected' => $user->roles], [
-    'id' => 'roles',
-    'name' => 'roles[]',
-    'class' => 'mb-4',
-]) ?>
+<Forms.MultiSelect id="roles" name="roles[]" class="mb-4" required="required" options="<?= htmlspecialchars(json_encode($roleOptions)) ?>" selected="<?= htmlspecialchars(json_encode($user->roles)) ?>"/>
 
 <?= button(
     lang('User.form.submit_edit'),

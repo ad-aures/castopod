@@ -16,7 +16,7 @@
 ]) ?>
 <?= csrf_field() ?>
 
-<?= component('Forms/Label', ['text' => lang('Contributor.form.role')], ['for' => 'role']) ?>
+<Forms.Label for="role"><?= lang('Contributor.form.role') ?></Forms.Label>
 <?= form_dropdown('role', $roleOptions, [old('role', $contributorGroupId)], [
     'id' => 'role',
     'class' => 'form-select mb-4',

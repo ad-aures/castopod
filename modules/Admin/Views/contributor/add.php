@@ -15,8 +15,8 @@
     'class' => 'flex flex-col max-w-sm',
 ]) ?>
 <?= csrf_field() ?>
-    
-<?= component('Forms/Label', ['text' => lang('Contributor.form.user')], ['for' => 'user']) ?>
+
+<Forms.Label for="user"><?= lang('Contributor.form.user') ?></Forms.Label>
 <?= form_dropdown('user', $userOptions, [old('user', '')], [
     'id' => 'user',
     'class' => 'form-select mb-4',
@@ -24,7 +24,7 @@
     'placeholder' => lang('Contributor.form.user_placeholder')
 ]) ?>
 
-<?= component('Forms/Label', ['text' => lang('Contributor.form.role')], ['for' => 'role']) ?>
+<Forms.Label for="role"><?= lang('Contributor.form.role') ?></Forms.Label>
 <?= form_dropdown('role', $roleOptions, [old('role', '')], [
     'id' => 'role',
     'class' => 'form-select mb-4',

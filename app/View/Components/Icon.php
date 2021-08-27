@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\View\Components;
 
+use Exception;
 use ViewComponents\Component;
 
 class Icon extends Component
@@ -12,16 +13,16 @@ class Icon extends Component
 
     public function render(): string
     {
-        $svgContents = file_get_contents('assets/icons/' . $this->glyph . '.svg');
-
-        if ($svgContents) {
-            if ($this->attributes['class'] !== '') {
-                $svgContents = str_replace('<svg', '<svg class="' . $this->attributes['class'] . '"', $svgContents);
-            }
-
-            return $svgContents;
+        try {
+            $svgContents = file_get_contents('assets/icons/' . $this->glyph . '.svg');
+        } catch (Exception) {
+            return '□';
         }
 
-        return '□';
+        if ($this->attributes['class'] !== '') {
+            $svgContents = str_replace('<svg', '<svg class="' . $this->attributes['class'] . '"', $svgContents);
+        }
+
+        return $svgContents;
     }
 }

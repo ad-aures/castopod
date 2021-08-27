@@ -238,13 +238,13 @@ class AuthSeeder extends Seeder
             [
                 'name' => 'block_actors',
                 'description' =>
-                    'Block an activitypub actors from interacting with the instance.',
+                    'Block fediverse actors from interacting with the instance.',
                 'has_permission' => ['superadmin'],
             ],
             [
                 'name' => 'block_domains',
                 'description' =>
-                    'Block an activitypub domains from interacting with the instance.',
+                    'Block fediverse domains from interacting with the instance.',
                 'has_permission' => ['superadmin'],
             ],
         ],

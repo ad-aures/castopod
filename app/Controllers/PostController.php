@@ -21,10 +21,10 @@ use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\URI;
 use CodeIgniter\I18n\Time;
 use Modules\Analytics\AnalyticsTrait;
-use Modules\Fediverse\Controllers\PostController as ActivityPubPostController;
-use Modules\Fediverse\Entities\Post as ActivityPubPost;
+use Modules\Fediverse\Controllers\PostController as FediversePostController;
+use Modules\Fediverse\Entities\Post as FediversePost;
 
-class PostController extends ActivityPubPostController
+class PostController extends FediversePostController
 {
     use AnalyticsTrait;
 
@@ -35,7 +35,7 @@ class PostController extends ActivityPubPostController
     /**
      * @var string[]
      */
-    protected $helpers = ['auth', 'activitypub', 'svg', 'components', 'misc'];
+    protected $helpers = ['auth', 'fediverse', 'svg', 'components', 'misc'];
 
     public function _remap(string $method, string ...$params): mixed
     {
@@ -162,7 +162,7 @@ class PostController extends ActivityPubPostController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $newPost = new ActivityPubPost([
+        $newPost = new FediversePost([
             'actor_id' => interact_as_actor_id(),
             'in_reply_to_id' => $this->post->id,
             'message' => $this->request->getPost('message'),

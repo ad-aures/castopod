@@ -11,15 +11,14 @@ declare(strict_types=1);
 namespace Modules\Fediverse\Models;
 
 use CodeIgniter\Events\Events;
-use CodeIgniter\Model;
 use Modules\Fediverse\Entities\Actor;
 
-class ActorModel extends Model
+class ActorModel extends BaseModel
 {
     /**
      * @var string
      */
-    protected $table = 'activitypub_actors';
+    protected $table = 'actors';
 
     /**
      * @var string[]
@@ -80,7 +79,7 @@ class ActorModel extends Model
     public function getActorByUsername(string $username, ?string $domain = null): ?Actor
     {
         // TODO: is there a better way?
-        helper('activitypub');
+        helper('fediverse');
 
         if (! $domain) {
             $domain = get_current_domain();
@@ -129,8 +128,10 @@ class ActorModel extends Model
             config('Fediverse')
                 ->cachePrefix . "actor#{$actorId}_followers";
         if (! ($found = cache($cacheName))) {
-            $found = $this->join('activitypub_follows', 'activitypub_follows.actor_id = id', 'inner')
-                ->where('activitypub_follows.target_actor_id', $actorId)
+            $tablesPrefix = config('Fediverse')
+                ->tablesPrefix;
+            $found = $this->join($tablesPrefix . 'follows', $tablesPrefix . 'follows.actor_id = id', 'inner')
+                ->where($tablesPrefix . 'follows.target_actor_id', $actorId)
                 ->findAll();
 
             cache()

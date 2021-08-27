@@ -23,16 +23,16 @@
     "essence/essence": "^3.5.4"
   },
   "require-dev": {
-    "mikey179/vfsstream": "^1.6.9",
-    "phpunit/phpunit": "^9.5.8",
-    "rector/rector": "^0.11.46",
-    "captainhook/captainhook": "^5.10.1",
-    "phpstan/phpstan": "^0.12.94",
+    "mikey179/vfsstream": "^v1.6.8",
+    "phpunit/phpunit": "^9.5.4",
+    "rector/rector": "^0.11.5",
+    "captainhook/captainhook": "^5.10.0",
+    "phpstan/phpstan": "^0.12.85",
     "phpstan/extension-installer": "^1.1.0",
-    "symplify/phpstan-extensions": "^9.4.27",
-    "symplify/easy-coding-standard": "^9.4.27",
-    "symplify/coding-standard": "^9.4.27",
-    "rector/phpstan-rules": "^0.3.4"
+    "rector/rector-phpstan-rules": "^0.2.9",
+    "symplify/phpstan-extensions": "^v9.3.12",
+    "symplify/easy-coding-standard": "^v9.3.12",
+    "symplify/coding-standard": "^v9.3.12"
   },
   "autoload": {
     "psr-4": {
@@ -59,8 +59,8 @@
       "@php vendor/opawg/user-agents-php/src/UserAgentsGenerate.php >  vendor/opawg/user-agents-php/src/UserAgents.php",
       "@php vendor/opawg/user-agents-php/src/UserAgentsRSSGenerate.php >  vendor/opawg/user-agents-php/src/UserAgentsRSS.php",
       "@php vendor/podlibre/ipcat/IpDbGenerate.php >  vendor/podlibre/ipcat/IpDb.php",
-      "@php vendor/podlibre/podcast-namespace/src/TaxonomyGenerate.php https://raw.githubusercontent.com/Podcastindex-org/podcast-namespace/main/taxonomy-en.json >  app/Language/en/PersonsTaxonomy.php",
-      "@php vendor/podlibre/podcast-namespace/src/TaxonomyGenerate.php https://raw.githubusercontent.com/Podcastindex-org/podcast-namespace/main/taxonomy-fr.json >  app/Language/fr/PersonsTaxonomy.php",
+      "@php vendor/podlibre/podcast-namespace/src/TaxonomyGenerate.php https://raw.githubusercontent.com/Podcastindex-org/podcast-namespace/main/taxonomy-en.json >  modules/Admin/Language/en/PersonsTaxonomy.php",
+      "@php vendor/podlibre/podcast-namespace/src/TaxonomyGenerate.php https://raw.githubusercontent.com/Podcastindex-org/podcast-namespace/main/taxonomy-fr.json >  modules/Admin/Language/fr/PersonsTaxonomy.php",
       "@php vendor/podlibre/podcast-namespace/src/ReversedTaxonomyGenerate.php https://raw.githubusercontent.com/Podcastindex-org/podcast-namespace/main/taxonomy-en.json >  vendor/podlibre/podcast-namespace/src/ReversedTaxonomy.php"
     ],
     "post-update-cmd": [
@@ -68,8 +68,8 @@
       "@php vendor/opawg/user-agents-php/src/UserAgentsGenerate.php >  vendor/opawg/user-agents-php/src/UserAgents.php",
       "@php vendor/opawg/user-agents-php/src/UserAgentsRSSGenerate.php >  vendor/opawg/user-agents-php/src/UserAgentsRSS.php",
       "@php vendor/podlibre/ipcat/IpDbGenerate.php >  vendor/podlibre/ipcat/IpDb.php",
-      "@php vendor/podlibre/podcast-namespace/src/TaxonomyGenerate.php https://raw.githubusercontent.com/Podcastindex-org/podcast-namespace/main/taxonomy-en.json >  app/Language/en/PersonsTaxonomy.php",
-      "@php vendor/podlibre/podcast-namespace/src/TaxonomyGenerate.php https://raw.githubusercontent.com/Podcastindex-org/podcast-namespace/main/taxonomy-fr.json >  app/Language/fr/PersonsTaxonomy.php",
+      "@php vendor/podlibre/podcast-namespace/src/TaxonomyGenerate.php https://raw.githubusercontent.com/Podcastindex-org/podcast-namespace/main/taxonomy-en.json >  modules/Admin/Language/en/PersonsTaxonomy.php",
+      "@php vendor/podlibre/podcast-namespace/src/TaxonomyGenerate.php https://raw.githubusercontent.com/Podcastindex-org/podcast-namespace/main/taxonomy-fr.json >  modules/Admin/Language/fr/PersonsTaxonomy.php",
       "@php vendor/podlibre/podcast-namespace/src/ReversedTaxonomyGenerate.php https://raw.githubusercontent.com/Podcastindex-org/podcast-namespace/main/taxonomy-en.json >  vendor/podlibre/podcast-namespace/src/ReversedTaxonomy.php"
     ]
   },

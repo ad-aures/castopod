@@ -22,10 +22,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         __DIR__ . '/modules/**/Views/*',
 
         // skip specific generated files
-        __DIR__ . '/app/Language/*/PersonsTaxonomy.php',
+        __DIR__ . '/modules/Admin/Language/*/PersonsTaxonomy.php',
 
         StandardizeHereNowDocKeywordFixer::class => [
-            __DIR__ . '/app/Views/Components',
+            __DIR__ . '/app/View/Components',
+            __DIR__ . '/modules/**/View/Components',
         ]
     ]);
 

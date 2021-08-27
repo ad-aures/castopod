@@ -55,7 +55,10 @@ class PodcastPlatformController extends BaseController
         replace_breadcrumb_params([
             0 => $this->podcast->title,
         ]);
-        return view('Modules\Admin\Views\podcast\platforms', $data);
+
+        $view = view('Modules\Admin\Views\podcast\platforms', $data);
+
+        return $view;
     }
 
     public function attemptPlatformsUpdate(string $platformType): RedirectResponse

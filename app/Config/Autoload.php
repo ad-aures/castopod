@@ -43,16 +43,14 @@ class Autoload extends AutoloadConfig
      */
     public $psr4 = [
         APP_NAMESPACE => APPPATH,
-        'Modules' => ROOTPATH . 'modules',
-        'Modules\Admin' => ROOTPATH . 'modules/Admin',
-        'Modules\Auth' => ROOTPATH . 'modules/Auth',
-        'Modules\Analytics' => ROOTPATH . 'modules/Analytics',
-        'Modules\Install' => ROOTPATH . 'modules/Install',
-        'Modules\Fediverse' => ROOTPATH . 'modules/Fediverse',
-        'Config' => APPPATH . 'Config',
-        'ActivityPub' => APPPATH . 'Libraries/ActivityPub',
-        'Analytics' => APPPATH . 'Libraries/Analytics',
-        'ViewComponents' => APPPATH . 'Libraries/ViewComponents',
+        'Modules' => ROOTPATH . 'modules/',
+        'Modules\Admin' => ROOTPATH . 'modules/Admin/',
+        'Modules\Auth' => ROOTPATH . 'modules/Auth/',
+        'Modules\Analytics' => ROOTPATH . 'modules/Analytics/',
+        'Modules\Install' => ROOTPATH . 'modules/Install/',
+        'Modules\Fediverse' => ROOTPATH . 'modules/Fediverse/',
+        'Config' => APPPATH . 'Config/',
+        'ViewComponents' => APPPATH . 'Libraries/ViewComponents/',
     ];
 
     /**

@@ -28,9 +28,13 @@ class AddLikes extends Migration
                 'constraint' => 16,
             ],
         ]);
+
+        $fediverseTablesPrefix = config('Fediverse')
+            ->tablesPrefix;
+
         $this->forge->addField('`created_at` timestamp NOT NULL DEFAULT current_timestamp()');
         $this->forge->addPrimaryKey(['actor_id', 'comment_id']);
-        $this->forge->addForeignKey('actor_id', 'activitypub_actors', 'id', '', 'CASCADE');
+        $this->forge->addForeignKey('actor_id', $fediverseTablesPrefix . 'actors', 'id', '', 'CASCADE');
         $this->forge->addForeignKey('comment_id', 'episode_comments', 'id', '', 'CASCADE');
         $this->forge->createTable('likes');
     }

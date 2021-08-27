@@ -11,9 +11,9 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Entities\Post;
-use Modules\Fediverse\Models\PostModel as ActivityPubPostModel;
+use Modules\Fediverse\Models\PostModel as FediversePostModel;
 
-class PostModel extends ActivityPubPostModel
+class PostModel extends FediversePostModel
 {
     /**
      * @var string

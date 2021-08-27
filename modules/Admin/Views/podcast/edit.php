@@ -1,3 +1,6 @@
+<?php 
+?>
+
 <?= $this->extend('Modules\Admin\Views\_layout') ?>
 
 <?= $this->section('title') ?>
@@ -11,7 +14,7 @@
 
 <?= $this->section('content') ?>
 
-<?= form_open_multipart(route_to('podcast-edit', $podcast->id), [
+<?= form_open_multipart((string) route_to('podcast-edit', $podcast->id), [
     'method' => 'post',
     'class' => 'flex flex-col',
 ]) ?>
@@ -24,7 +27,6 @@
 ) ?>
 
 <?= form_label(lang('Podcast.form.image'), 'image') ?>
-
 <img src="<?= $podcast->image->thumbnail_url ?>" alt="<?= $podcast->title ?>" class="object-cover w-32 h-32" />
 <?= form_input([
     'id' => 'image',
@@ -71,18 +73,8 @@
 <?= form_fieldset_close() ?>
 
 <div class="mb-4">
-    <?= form_label(lang('Podcast.form.description'), 'description') ?>
-    <?= component(
-        'Forms/MarkdownEditor',
-        [
-            'content' => old('description', $podcast->description_markdown, false)
-        ],
-        [
-            'id' => 'description',
-            'name' => 'description',
-            'required' => 'required',
-        ],
-    ) ?>
+    <Forms.Label for="description"><?= lang('Podcast.form.description') ?></Forms.Label>
+    <Forms.MarkdownEditor id="description" name="description" required="required"><?= old('description', $podcast->description_markdown, false) ?></Forms.MarkdownEditor>
 </div>
 
 <?= form_section_close() ?>
@@ -125,12 +117,13 @@ lang('Podcast.form.classification_section_subtitle'),
     true,
 ) ?>
 
-<?= component('Forms/MultiSelect', ['options' => $categoryOptions, 'selected' => old('other_categories', $podcast->other_categories_ids)], [
-    'id' => 'other_categories',
-    'name' => 'other_categories[]',
-    'class' => 'mb-4',
-    'data-max-item-count' => '2',
-]) ?>
+<Forms.MultiSelect
+    id="other_categories"
+    name="other_categories[]"
+    class="mb-4"
+    data-max-item-count="2"
+    selected="<?= json_encode(old('other_categories', $podcast->other_categories_ids)) ?>"
+    options="<?= htmlspecialchars(json_encode($categoryOptions)) ?>" />
 
 <?= form_fieldset('', ['class' => 'mb-4']) ?>
 <legend><?= lang('Podcast.form.parental_advisory.label') .
@@ -349,16 +342,7 @@ lang('Podcast.form.classification_section_subtitle'),
     lang('Podcast.form.custom_rss_hint'),
     true,
 ) ?>
-
-<?= component('Forms/XMLEditor', 
-    [
-        'content' => old('custom_rss', $podcast->custom_rss_string)
-    ],
-    [
-        'id' => 'custom_rss',
-        'name' => 'custom_rss',
-    ]
-) ?>
+<Forms.XMLEditor id="custom_rss" name="custom_rss"><?= old('custom_rss', $podcast->custom_rss_string, false) ?></Forms.XMLEditor>
 
 <?= form_section_close() ?>
 
@@ -367,61 +351,21 @@ lang('Podcast.form.classification_section_subtitle'),
     lang('Podcast.form.status_section_subtitle'),
 ) ?>
 
-<?= component(
-    'Forms/Toggler',
-    [
-        'label' => lang('Podcast.form.lock'),
-        'hint' => lang('Podcast.form.lock_hint'),
-    ],
-    [
-        'id' => 'lock',
-        'name' => 'lock',
-        'value' => 'yes',
-        'checked' => old('complete', $podcast->is_locked),
-        'class' => 'mb-2'
-    ]
-) ?>
-
-<?= component(
-    'Forms/Toggler',
-    [
-        'label' => lang('Podcast.form.block'),
-    ],
-    [
-        'id' => 'block',
-        'name' => 'block',
-        'value' => 'yes',
-        'checked' => old('block', $podcast->is_blocked),
-        'class' => 'mb-2'
-    ]
-) ?>
-
-<?= component(
-    'Forms/Toggler',
-    [
-        'label' => lang('Podcast.form.complete'),
-    ],
-    [
-        'id' => 'complete',
-        'name' => 'complete',
-        'value' => 'yes',
-        'checked' => old('complete', $podcast->is_completed),
-    ]
-) ?>
+<Forms.Toggler class="mb-2" id="lock" name="lock" value="yes" checked="<?= old('complete', $podcast->is_locked) ?>" hint="<?= lang('Podcast.form.lock_hint') ?>">
+    <?= lang('Podcast.form.lock') ?>
+</Forms.Toggler>
+<Forms.Toggler class="mb-2" id="block" name="block" value="yes" checked="<?= old('complete', $podcast->is_blocked) ?>">
+    <?= lang('Podcast.form.block') ?>
+</Forms.Toggler>
+<Forms.Toggler id="complete" name="complete" value="yes" checked="<?= old('complete', $podcast->is_completed) ?>">
+    <?= lang('Podcast.form.complete') ?>
+</Forms.Toggler>
 
 <?= form_section_close() ?>
 
-<?= component(
-    'Button',
-    [
-        'label' => lang('Podcast.form.submit_edit'),
-        'variant' => 'primary',
-    ],
-    [
-        'type' => 'submit',
-        'class' => 'self-end'
-    ]
-) ?>
+<Button variant="primary" type="submit" class="self-end" iconLeft="heart">
+<?= lang('Podcast.form.submit_edit') ?>
+</Button>
 
 <?= form_close() ?>
 

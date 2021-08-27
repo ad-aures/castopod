@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Class AddPostsPreviewCards Creates activitypub_posts_preview_cards table in database
+ * Class AddPostsPreviewCards Creates posts_preview_cards table in database
  *
  * @copyright  2021 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -29,14 +29,17 @@ class AddPostsPreviewCards extends Migration
             ],
         ]);
 
+        $tablesPrefix = config('Fediverse')
+            ->tablesPrefix;
+
         $this->forge->addPrimaryKey(['post_id', 'preview_card_id']);
-        $this->forge->addForeignKey('post_id', 'activitypub_posts', 'id', '', 'CASCADE');
-        $this->forge->addForeignKey('preview_card_id', 'activitypub_preview_cards', 'id', '', 'CASCADE');
-        $this->forge->createTable('activitypub_posts_preview_cards');
+        $this->forge->addForeignKey('post_id', $tablesPrefix . 'posts', 'id', '', 'CASCADE');
+        $this->forge->addForeignKey('preview_card_id', $tablesPrefix . 'preview_cards', 'id', '', 'CASCADE');
+        $this->forge->createTable($tablesPrefix . 'posts_preview_cards');
     }
 
     public function down(): void
     {
-        $this->forge->dropTable('activitypub_posts_preview_cards');
+        $this->forge->dropTable(config('Fediverse')->tablesPrefix . 'posts_preview_cards');
     }
 }

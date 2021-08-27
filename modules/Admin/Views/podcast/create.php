@@ -1,3 +1,6 @@
+<?php 
+?>
+
 <?= $this->extend('Modules\Admin\Views\_layout') ?>
 
 <?= $this->section('title') ?>
@@ -81,18 +84,8 @@
 <?= form_fieldset_close() ?>
 
 <div class="mb-4">
-    <?= form_label(lang('Podcast.form.description'), 'description') ?>
-    <?= component(
-        'Forms/MarkdownEditor',
-        [
-            'content' => old('description', '', false),
-        ],
-        [
-            'id' => 'description',
-            'name' => 'description',
-            'required' => 'required',
-        ],
-    ) ?>
+    <Forms.Label for="description"><?= lang('Podcast.form.description') ?></Forms.Label>
+    <Forms.MarkdownEditor id="description" name="description" required="required"><?= old('description', '', false) ?></Forms.MarkdownEditor>
 </div>
 
 <?= form_section_close() ?>
@@ -125,12 +118,13 @@
     '',
     true,
 ) ?>
-<?= component('Forms/MultiSelect', ['options' => $categoryOptions, 'selected' => old('other_categories', [])], [
-    'id' => 'other_categories',
-    'name' => 'other_categories[]',
-    'class' => 'mb-4',
-    'data-max-item-count' => '2',
-]) ?>
+<Forms.MultiSelect
+    id="other_categories"
+    name="other_categories[]"
+    class="mb-4"
+    data-max-item-count="2"
+    selected="<?= htmlspecialchars(json_encode(old('other_categories', []))) ?>"
+    options="<?= htmlspecialchars(json_encode($categoryOptions)) ?>" />
 
 <?= form_fieldset('', ['class' => 'mb-4']) ?>
     <legend>
@@ -339,15 +333,8 @@
     lang('Podcast.form.custom_rss_hint'),
     true,
 ) ?>
-<?= component('Forms/XMLEditor', 
-    [
-        'content' => old('custom_rss', '')
-    ],
-    [
-        'id' => 'custom_rss',
-        'name' => 'custom_rss',
-    ]
-) ?>
+<Forms.XMLEditor id="custom_rss" name="custom_rss"><?= old('custom_rss', '', false) ?></Forms.XMLEditor>
+
 <?= form_section_close() ?>
 
 <?= form_section(
@@ -355,47 +342,15 @@
     lang('Podcast.form.status_section_subtitle'),
 ) ?>
 
-<?= component(
-    'Forms/Toggler',
-    [
-        'label' => lang('Podcast.form.lock'),
-        'hint' => lang('Podcast.form.lock_hint'),
-    ],
-    [
-        'id' => 'lock',
-        'name' => 'lock',
-        'value' => 'yes',
-        'checked' => old('complete', true),
-        'class' => 'mb-2'
-    ]
-) ?>
-
-<?= component(
-    'Forms/Toggler',
-    [
-        'label' => lang('Podcast.form.block'),
-    ],
-    [
-        'id' => 'block',
-        'name' => 'block',
-        'value' => 'yes',
-        'checked' => old('block', false),
-        'class' => 'mb-2'
-    ]
-) ?>
-
-<?= component(
-    'Forms/Toggler',
-    [
-        'label' => lang('Podcast.form.complete'),
-    ],
-    [
-        'id' => 'complete',
-        'name' => 'complete',
-        'value' => 'yes',
-        'checked' => old('complete', false),
-    ]
-) ?>
+<Forms.Toggler class="mb-2" id="lock" name="lock" value="yes" checked="<?= old('complete', true) ?>" hint="<?= lang('Podcast.form.lock_hint') ?>">
+    <?= lang('Podcast.form.lock') ?>
+</Forms.Toggler>
+<Forms.Toggler class="mb-2" id="block" name="block" value="yes" checked="<?= old('complete', false) ?>">
+    <?= lang('Podcast.form.block') ?>
+</Forms.Toggler>
+<Forms.Toggler id="complete" name="complete" value="yes" checked="<?= old('complete', false) ?>">
+    <?= lang('Podcast.form.complete') ?>
+</Forms.Toggler>
 
 <?= form_section_close() ?>
 
@@ -405,7 +360,6 @@
     ['variant' => 'primary'],
     ['type' => 'submit', 'class' => 'self-end'],
 ) ?>
-
 
 <?= form_close() ?>
 

@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
 
-    <title><?= lang('ActivityPub.' . $action . '.title', [
+    <title><?= lang('Fediverse.' . $action . '.title', [
         'actorDisplayName' => $post->actor->display_name,
     ]) ?></title>
     <meta name="description" content="<?= $post->message ?>"/>
     <meta property="og:title" content="<?= lang(
-        'ActivityPub.' . $action . '.title',
+        'Fediverse.' . $action . '.title',
         [
             'actorDisplayName' => $post->actor->display_name,
         ],
@@ -31,7 +31,7 @@
 <body class="min-h-screen mx-auto bg-pine-50">
     <header class="pt-8 pb-32 bg-pine-900">
         <h1 class="text-lg font-semibold text-center text-white"><?= lang(
-            'ActivityPub.' . $action . '.subtitle',
+            'Fediverse.' . $action . '.subtitle',
         ) ?></h1>
     </header>
     <main class="flex-1 max-w-xl px-4 pb-8 mx-auto -mt-24">
@@ -45,10 +45,10 @@
         <?= view('_message_block') ?>
 
         <?= form_label(
-            lang('ActivityPub.your_handle'),
+            lang('Fediverse.your_handle'),
             'handle',
             [],
-            lang('ActivityPub.your_handle_hint'),
+            lang('Fediverse.your_handle_hint'),
         ) ?>
         <?= form_input([
             'id' => 'handle',
@@ -59,7 +59,7 @@
         ]) ?>
 
         <?= button(
-            lang('ActivityPub.' . $action . '.submit'),
+            lang('Fediverse.' . $action . '.submit'),
             '',
             ['variant' => 'primary'],
             ['type' => 'submit', 'class' => 'self-end'],

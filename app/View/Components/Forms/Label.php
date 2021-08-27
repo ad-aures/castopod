@@ -14,15 +14,17 @@ class Label extends Component
     protected array $attributes = [
         'for' => '',
         'name' => '',
-        'value' => '',
         'class' => '',
     ];
-
-    protected string $text = '';
 
     protected string $hint = '';
 
     protected bool $isOptional = false;
+
+    public function setIsOptional(string $value): void
+    {
+        $this->isOptional = $value === 'true';
+    }
 
     public function render(): string
     {
@@ -35,8 +37,8 @@ class Label extends Component
         ')</small>' : '';
         $hint = $this->hint !== '' ? hint_tooltip($this->hint, 'ml-1') : '';
 
-        return <<<CODE_SAMPLE
-            <label class="{$labelClass}" {$attributes}>{$this->text}{$optionalText}{$hint}</label>
-        CODE_SAMPLE;
+        return <<<HTML
+            <label class="{$labelClass}" {$attributes}>{$this->slot}{$optionalText}{$hint}</label>
+        HTML;
     }
 }

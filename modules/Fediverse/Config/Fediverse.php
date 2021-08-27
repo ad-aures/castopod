@@ -18,7 +18,7 @@ class Fediverse extends BaseConfig
 {
     /**
      * --------------------------------------------------------------------
-     * ActivityPub Objects
+     * Fediverse Objects
      * --------------------------------------------------------------------
      */
     public string $actorObject = ActorObject::class;
@@ -37,6 +37,8 @@ class Fediverse extends BaseConfig
     public string $defaultCoverImagePath = 'media/castopod-cover-default.jpg';
 
     public string $defaultCoverImageMimetype = 'image/jpeg';
+
+    public string $tablesPrefix = 'fediverse_';
 
     /**
      * --------------------------------------------------------------------

@@ -103,40 +103,8 @@
             'type' => 'text',
             'placeholder' => lang("Platforms.description.{$platform->type}"),
         ]) ?>
-        <?= component(
-            'Forms/Toggler',
-            [
-                'label' => lang('Platforms.visible'),
-            ],
-            [
-                'id' => $platform->slug . '_visible',
-                'name' => 'platforms[' . $platform->slug . '][visible]',
-                'value' => 'yes',
-                'checked' => old(
-                    $platform->slug . '_visible',
-                    $platform->is_visible ? $platform->is_visible : false,
-                ),
-                'class' => 'text-sm mb-1'
-            ]
-        ) ?>
-        <?= component(
-            'Forms/Toggler',
-            [
-                'label' => lang('Platforms.on_embeddable_player'),
-            ],
-            [
-                'id' => $platform->slug . '_on_embeddable_player',
-                'name' => 'platforms[' . $platform->slug . '][on_embeddable_player]',
-                'value' => 'yes',
-                'checked' => old(
-                    $platform->slug . '_on_embeddable_player',
-                    $platform->is_on_embeddable_player
-                        ? $platform->is_on_embeddable_player
-                        : false,
-                ),
-                'class' => 'text-sm'
-            ]
-        ) ?>
+        <Forms.Toggler class="mb-1 text-sm" id="<?= $platform->slug . '_visible' ?>" name="<?= 'platforms[' . $platform->slug . '][visible]'?>" value="yes" checked="<?= old($platform->slug . '_visible', $platform->is_visible ? $platform->is_visible : false ) ?>"><?= lang('Platforms.visible') ?></Forms.Toggler>
+        <Forms.Toggler class="text-sm" id="<?= $platform->slug . '_on_embeddable_player' ?>" name="<?= 'platforms[' . $platform->slug . '][on_embeddable_player]'?>" value="yes" checked="<?= old($platform->slug . '_on_embeddable_player', $platform->is_on_embeddable_player ? $platform->is_on_embeddable_player : false ) ?>"><?= lang('Platforms.on_embeddable_player') ?></Forms.Toggler>
     </div>
 </div>
 

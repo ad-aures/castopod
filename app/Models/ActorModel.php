@@ -11,9 +11,9 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Entities\Actor;
-use Modules\Fediverse\Models\ActorModel as ActivityPubActorModel;
+use Modules\Fediverse\Models\ActorModel as FediverseActorModel;
 
-class ActorModel extends ActivityPubActorModel
+class ActorModel extends FediverseActorModel
 {
     /**
      * @var string

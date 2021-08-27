@@ -29,21 +29,30 @@ class Toggler extends Component
 
     protected bool $checked = false;
 
+    public function setChecked(string $value): void
+    {
+        $this->checked = $value !== '';
+    }
+
     public function render(): string
     {
+        unset($this->attributes['checked']);
+
         $wrapperClass = $this->attributes['class'];
         unset($this->attributes['class']);
 
         $this->attributes['class'] = 'form-switch';
 
+        helper('form');
+
         $checkbox = form_checkbox($this->attributes, $this->attributes['value'], $this->checked);
-        $hint = $this->hint !== '' ? hint_tooltip(lang('Podcast.form.lock_hint'), 'ml-1') : '';
-        return <<<CODE_SAMPLE
+        $hint = $this->hint === '' ? '' : hint_tooltip($this->hint, 'ml-1');
+        return <<<HTML
             <label class="relative inline-flex items-center {$wrapperClass}">
                 {$checkbox}
                 <span class="form-switch-slider"></span>
-                <span class="ml-2">{$this->label}{$hint}</span>
+                <span class="ml-2">{$this->slot}{$hint}</span>
             </label>
-        CODE_SAMPLE;
+        HTML;
     }
 }

@@ -127,6 +127,9 @@ class EpisodeCommentController extends BaseController
             ->setBody($commentObject->toJSON());
     }
 
+    /**
+     * @noRector ReturnTypeDeclarationRector
+     */
     public function replies(): Response
     {
         /**

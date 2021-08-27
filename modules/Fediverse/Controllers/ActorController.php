@@ -26,11 +26,11 @@ class ActorController extends Controller
     /**
      * @var string[]
      */
-    protected $helpers = ['activitypub'];
+    protected $helpers = ['fediverse'];
 
     protected Actor $actor;
 
-    protected ActivityPub $config;
+    protected Fediverse $config;
 
     public function __construct()
     {
@@ -298,11 +298,14 @@ class ActorController extends Controller
      */
     public function followers(): ResponseInterface
     {
+        $tablesPrefix = config('Fediverse')
+            ->tablesPrefix;
+
         // get followers for a specific actor
         $followers = model('ActorModel')
-            ->join('activitypub_follows', 'activitypub_follows.actor_id = id', 'inner')
-            ->where('activitypub_follows.target_actor_id', $this->actor->id)
-            ->orderBy('activitypub_follows.created_at', 'DESC');
+            ->join($tablesPrefix . 'follows', $tablesPrefix . 'follows.actor_id = id', 'inner')
+            ->where($tablesPrefix . 'follows.target_actor_id', $this->actor->id)
+            ->orderBy($tablesPrefix . 'follows.created_at', 'DESC');
 
         $pageNumber = (int) $this->request->getGet('page');
 
@@ -343,7 +346,7 @@ class ActorController extends Controller
         helper('text');
 
         // get webfinger data from actor
-        // parse activityPub id to get actor and domain
+        // parse actor id to get actor and domain
         // check if actor and domain exist
 
         if (
@@ -353,7 +356,7 @@ class ActorController extends Controller
             return redirect()
                 ->back()
                 ->withInput()
-                ->with('error', lang('ActivityPub.follow.accountNotFound'));
+                ->with('error', lang('Fediverse.follow.accountNotFound'));
         }
 
         $ostatusKey = array_search(

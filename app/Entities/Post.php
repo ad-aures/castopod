@@ -11,14 +11,14 @@ declare(strict_types=1);
 namespace App\Entities;
 
 use App\Models\EpisodeModel;
-use Modules\Fediverse\Entities\Post as ActivityPubPost;
+use Modules\Fediverse\Entities\Post as FediversePost;
 use RuntimeException;
 
 /**
  * @property int|null $episode_id
  * @property Episode|null $episode
  */
-class Post extends ActivityPubPost
+class Post extends FediversePost
 {
     protected ?Episode $episode = null;
 

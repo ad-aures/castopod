@@ -16,6 +16,7 @@ use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\Response;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\I18n\Time;
+use Modules\Fediverse\Config\Fediverse;
 use Modules\Fediverse\Entities\Post;
 use Modules\Fediverse\Objects\OrderedCollectionObject;
 use Modules\Fediverse\Objects\OrderedCollectionPage;
@@ -25,11 +26,11 @@ class PostController extends Controller
     /**
      * @var string[]
      */
-    protected $helpers = ['activitypub'];
+    protected $helpers = ['fediverse'];
 
     protected Post $post;
 
-    protected ActivityPub $config;
+    protected Fediverse $config;
 
     public function __construct()
     {
@@ -229,7 +230,7 @@ class PostController extends Controller
         helper('text');
 
         // get webfinger data from actor
-        // parse activityPub id to get actor and domain
+        // parse actor id to get actor and domain
         // check if actor and domain exist
         if (
             ! ($parts = split_handle($this->request->getPost('handle'))) ||
@@ -238,7 +239,7 @@ class PostController extends Controller
             return redirect()
                 ->back()
                 ->withInput()
-                ->with('error', lang('ActivityPub.follow.accountNotFound'));
+                ->with('error', lang('Fediverse.follow.accountNotFound'));
         }
 
         $ostatusKey = array_search(

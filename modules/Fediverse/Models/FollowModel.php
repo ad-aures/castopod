@@ -21,12 +21,12 @@ use Modules\Fediverse\Activities\UndoActivity;
 use Modules\Fediverse\Entities\Actor;
 use Modules\Fediverse\Entities\Follow;
 
-class FollowModel extends Model
+class FollowModel extends BaseModel
 {
     /**
      * @var string
      */
-    protected $table = 'activitypub_follows';
+    protected $table = 'follows';
 
     /**
      * @var string[]

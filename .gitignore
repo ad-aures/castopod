@@ -154,8 +154,7 @@ public/media/persons/*
 !public/media/persons/index.html
 
 # Generated files
-app/Language/en/PersonsTaxonomy.php
-app/Language/fr/PersonsTaxonomy.php
+modules/Admin/Language/*/PersonsTaxonomy.php
 
 #-------------------------
 # Docker volumes

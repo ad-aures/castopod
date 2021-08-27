@@ -8,23 +8,22 @@ use ViewComponents\Component;
 
 class XMLEditor extends Component
 {
-    protected string $content = '';
-
     /**
      * @var array<string, string>
      */
     protected array $attributes = [
-        'slot' => 'textarea',
         'rows' => '5',
         'class' => 'textarea',
     ];
 
     public function render(): string
     {
-        $textarea = form_textarea($this->attributes, $this->content);
+        $content = $this->slot;
+        $this->attributes['slot'] = 'textarea';
+        $textarea = form_textarea($this->attributes, $content);
 
-        return <<<CODE_SAMPLE
+        return <<<HTML
             <xml-editor>{$textarea}</time-ago>
-        CODE_SAMPLE;
+        HTML;
     }
 }

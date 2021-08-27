@@ -13,7 +13,7 @@ use Config\Services;
 use Exception;
 use Modules\Fediverse\HttpSignature;
 
-class ActivityPubFilter implements FilterInterface
+class FediverseFilter implements FilterInterface
 {
     /**
      * Do whatever processing this filter needs to do. By default it should not return anything during normal execution.

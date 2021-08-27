@@ -46,17 +46,7 @@
 
 <div class="mb-4">
     <?= form_label(lang('Page.form.content'), 'content') ?>
-    <?= component(
-        'Forms/MarkdownEditor',
-        [
-            'content' => old('content', $page->content_markdown, false),
-        ],
-        [
-            'id' => 'content',
-            'name' => 'content',
-            'required' => 'required',
-        ],
-    ) ?>
+    <Forms.MarkdownEditor id="content" name="content" required="required"><?= old('content', $page->content_markdown, false) ?></Forms.MarkdownEditor>
 </div>
 
 <?= button(

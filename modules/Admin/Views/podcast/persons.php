@@ -99,13 +99,7 @@
     [],
     lang('Person.podcast_form.persons_hint'),
 ) ?>
-<?= component('Forms/MultiSelect', ['options' => $personOptions, 'selected' => old('persons', [])], [
-    'id' => 'persons',
-    'name' => 'persons[]',
-    'class' => 'mb-4',
-    'required' => 'required',
-    'data-max-item-count' => '2',
-]) ?>
+<Forms.MultiSelect id="persons" name="persons[]" class="mb-4" required="required" options="<?= htmlspecialchars(json_encode($personOptions)) ?>" selected="<?= htmlspecialchars(json_encode(old('persons', []))) ?>"/>
 
 <?= form_label(
     lang('Person.podcast_form.roles'),
@@ -114,11 +108,7 @@
     lang('Person.podcast_form.roles_hint'),
     true,
 ) ?>
-<?= component('Forms/MultiSelect', ['options' => $taxonomyOptions, 'selected' => old('roles', [])], [
-    'id' => 'roles',
-    'name' => 'roles[]',
-    'class' => 'mb-4',
-]) ?>
+<Forms.MultiSelect id="roles" name="roles[]" class="mb-4" options="<?= htmlspecialchars(json_encode($taxonomyOptions)) ?>" selected="<?= htmlspecialchars(json_encode(old('roles', []))) ?>"/>
 
 <?= form_section_close() ?>
 <?= button(

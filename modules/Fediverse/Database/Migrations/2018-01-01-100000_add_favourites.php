@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Class AddFavourites Creates activitypub_favourites table in database
+ * Class AddFavourites Creates favourites table in database
  *
  * @copyright  2021 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -28,15 +28,19 @@ class AddFavourites extends Migration
                 'constraint' => 16,
             ],
         ]);
+
+        $tablesPrefix = config('Fediverse')
+            ->tablesPrefix;
+
         $this->forge->addField('`created_at` timestamp NOT NULL DEFAULT current_timestamp()');
         $this->forge->addPrimaryKey(['actor_id', 'post_id']);
-        $this->forge->addForeignKey('actor_id', 'activitypub_actors', 'id', '', 'CASCADE');
-        $this->forge->addForeignKey('post_id', 'activitypub_posts', 'id', '', 'CASCADE');
-        $this->forge->createTable('activitypub_favourites');
+        $this->forge->addForeignKey('actor_id', $tablesPrefix . 'actors', 'id', '', 'CASCADE');
+        $this->forge->addForeignKey('post_id', $tablesPrefix . 'posts', 'id', '', 'CASCADE');
+        $this->forge->createTable($tablesPrefix . 'favourites');
     }
 
     public function down(): void
     {
-        $this->forge->dropTable('activitypub_favourites');
+        $this->forge->dropTable(config('Fediverse')->tablesPrefix . 'favourites');
     }
 }

@@ -18,7 +18,7 @@ class BlockController extends Controller
     /**
      * @var string[]
      */
-    protected $helpers = ['activitypub'];
+    protected $helpers = ['fediverse'];
 
     public function attemptBlockActor(): RedirectResponse
     {

@@ -193,7 +193,7 @@ class Post extends UuidEntity
 
     public function setMessage(string $message): static
     {
-        helper('activitypub');
+        helper('fediverse');
 
         $messageWithoutTags = strip_tags($message);
 
