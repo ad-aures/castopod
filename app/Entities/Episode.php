@@ -626,15 +626,12 @@ class Episode extends Entity
 
     public function getPartnerImageUrl(string $serviceSlug = null): string
     {
-        if ($serviceSlug !== null) {
-            return '&_from=' . $serviceSlug;
-        }
-
         return rtrim($this->getPodcast()->partner_image_url, '/') .
             '?pid=' .
             $this->getPodcast()
                 ->partner_id .
             '&guid=' .
-            urlencode($this->attributes['guid']);
+            urlencode($this->attributes['guid']) .
+            ($serviceSlug !== null ? '&_from=' . $serviceSlug : '');
     }
 }
