@@ -1,3 +1,10 @@
+# [1.0.0-alpha.70](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.69...v1.0.0-alpha.70) (2021-08-31)
+
+### Bug Fixes
+
+- **partner:** set correct image URL
+  ([61554be](https://code.podlibre.org/podlibre/castopod-host/commit/61554be12a64d59ab99fab810b1b05632b408f3a))
+
 # [1.0.0-alpha.69](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.68...v1.0.0-alpha.69) (2021-08-23)
 
 ### Bug Fixes
