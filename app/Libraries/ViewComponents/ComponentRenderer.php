@@ -137,12 +137,13 @@ class ComponentRenderer
     private function locateView(string $name): string
     {
         // TODO: Is there a better way to locate components local to current module?
-        $modulesToDiscover = [APPPATH];
-        foreach (config('Autoload')->psr4 as $namespace => $path) {
-            if (str_starts_with($this->currentView, $namespace)) {
-                array_unshift($modulesToDiscover, $path);
-            }
-        }
+        $modulesToDiscover = [];
+        $lookupModules = $this->config->lookupModules;
+        $modulesToDiscover = array_filter($lookupModules, function ($namespace): bool {
+            return str_starts_with($this->currentView, $namespace);
+        }, ARRAY_FILTER_USE_KEY);
+        $modulesToDiscover = array_values($modulesToDiscover);
+        $modulesToDiscover[] = $this->config->defaultLookupPath;
 
         $namePath = str_replace('.', '/', $name);
 
