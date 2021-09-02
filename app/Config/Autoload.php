@@ -51,6 +51,8 @@ class Autoload extends AutoloadConfig
         'Modules\Fediverse' => ROOTPATH . 'modules/Fediverse/',
         'Config' => APPPATH . 'Config/',
         'ViewComponents' => APPPATH . 'Libraries/ViewComponents/',
+        'ViewThemes' => APPPATH . 'Libraries/ViewThemes/',
+        'Themes' => ROOTPATH . 'themes',
     ];
 
     /**

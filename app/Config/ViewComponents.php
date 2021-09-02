@@ -9,14 +9,12 @@ use ViewComponents\Config\ViewComponents as ViewComponentsConfig;
 class ViewComponents extends ViewComponentsConfig
 {
     /**
-     * @var array<string, string>
+     * @var string[]
      */
-    public array $lookupModules = [
-        APP_NAMESPACE => APPPATH,
-        'Modules\Admin' => ROOTPATH . 'modules/Admin/',
-        'Modules\Auth' => ROOTPATH . 'modules/Auth/',
-        'Modules\Analytics' => ROOTPATH . 'modules/Analytics/',
-        'Modules\Install' => ROOTPATH . 'modules/Install/',
-        'Modules\Fediverse' => ROOTPATH . 'modules/Fediverse/',
+    public array $lookupPaths = [
+        ROOTPATH . 'themes/cp_app/',
+        ROOTPATH . 'themes/cp_admin/',
+        ROOTPATH . 'themes/cp_auth/',
+        ROOTPATH . 'themes/cp_install/',
     ];
 }

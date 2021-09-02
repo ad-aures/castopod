@@ -6,6 +6,7 @@ module.exports = {
     "./app/Views/**/*.php",
     "./app/View/Components/**/*.php",
     "./modules/**/Views/**/*.php",
+    "./themes/**/*.php",
     "./app/Helpers/*.php",
     "./app/Resources/**/*.ts",
   ],

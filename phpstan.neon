@@ -16,6 +16,7 @@ parameters:
         - app/Libraries/Router.php
         - app/Views/*
         - modules/*/Views/*
+        - themes/*
     ignoreErrors:
         - '#This property type might be inlined to PHP. Do you have confidence it is correct\? Put it here#'
         - '#^Cognitive complexity for#'
@@ -31,3 +32,4 @@ parameters:
             message: '#Function "function_exists\(\)" cannot be used/left in the code#'
             paths:
                 - app/Helpers
+                - app/Common.php

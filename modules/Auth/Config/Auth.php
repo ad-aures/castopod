@@ -16,12 +16,12 @@ class Auth extends MythAuthConfig
      * @var array<string, string>
      */
     public $views = [
-        'login' => 'Modules\Auth\Views\login',
-        'register' => 'Modules\Auth\Views\register',
-        'forgot' => 'Modules\Auth\Views\forgot',
-        'reset' => 'Modules\Auth\Views\reset',
-        'emailForgot' => 'Modules\Auth\Views\emails\forgot',
-        'emailActivation' => 'Modules\Auth\Views\emails\activation',
+        'login' => 'login',
+        'register' => 'register',
+        'forgot' => 'forgot',
+        'reset' => 'reset',
+        'emailForgot' => 'emails/forgot',
+        'emailActivation' => 'emails/activation',
     ];
 
     /**
@@ -31,7 +31,7 @@ class Auth extends MythAuthConfig
      *
      * @var string
      */
-    public $viewLayout = 'Modules\Auth\Views\_layout';
+    public $viewLayout = '_layout';
 
     /**
      * --------------------------------------------------------------------------

@@ -110,7 +110,7 @@ class View extends CodeIgniterView
         }
 
         $output = service('components')
-            ->setCurrentView($view)
+            ->setCurrentView($this->renderVars['file'])
             ->render($output);
 
         $this->logPerformance($this->renderVars['start'], microtime(true), $this->renderVars['view']);

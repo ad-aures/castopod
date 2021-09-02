@@ -77,7 +77,7 @@ class EpisodeController extends BaseController
         replace_breadcrumb_params([
             0 => $this->podcast->title,
         ]);
-        return view('Modules\Admin\Views\episode\list', $data);
+        return view('episode/list', $data);
     }
 
     public function view(): string
@@ -91,7 +91,7 @@ class EpisodeController extends BaseController
             0 => $this->podcast->title,
             1 => $this->episode->title,
         ]);
-        return view('Modules\Admin\Views\episode\view', $data);
+        return view('episode/view', $data);
     }
 
     public function create(): string
@@ -105,7 +105,7 @@ class EpisodeController extends BaseController
         replace_breadcrumb_params([
             0 => $this->podcast->title,
         ]);
-        return view('Modules\Admin\Views\episode\create', $data);
+        return view('episode/create', $data);
     }
 
     public function attemptCreate(): RedirectResponse
@@ -230,7 +230,7 @@ class EpisodeController extends BaseController
             0 => $this->podcast->title,
             1 => $this->episode->title,
         ]);
-        return view('Modules\Admin\Views\episode\edit', $data);
+        return view('episode/edit', $data);
     }
 
     public function attemptEdit(): RedirectResponse
@@ -404,7 +404,7 @@ class EpisodeController extends BaseController
                 0 => $this->podcast->title,
                 1 => $this->episode->title,
             ]);
-            return view('Modules\Admin\Views\episode\publish', $data);
+            return view('episode/publish', $data);
         }
 
         return redirect()->route('episode-view', [$this->podcast->id, $this->episode->id])->with(
@@ -503,7 +503,7 @@ class EpisodeController extends BaseController
                 0 => $this->podcast->title,
                 1 => $this->episode->title,
             ]);
-            return view('Modules\Admin\Views\episode\publish_edit', $data);
+            return view('episode/publish_edit', $data);
         }
 
         return redirect()->route('episode-view', [$this->podcast->id, $this->episode->id])->with(
@@ -632,7 +632,7 @@ class EpisodeController extends BaseController
                 0 => $this->podcast->title,
                 1 => $this->episode->title,
             ]);
-            return view('Modules\Admin\Views\episode\unpublish', $data);
+            return view('episode/unpublish', $data);
         }
 
         return redirect()->route('episode-view', [$this->podcast->id, $this->episode->id])->with(
@@ -704,7 +704,7 @@ class EpisodeController extends BaseController
             0 => $this->podcast->title,
             1 => $this->episode->title,
         ]);
-        return view('Modules\Admin\Views\episode\soundbites', $data);
+        return view('episode/soundbites', $data);
     }
 
     public function soundbitesAttemptEdit(): RedirectResponse
@@ -782,7 +782,7 @@ class EpisodeController extends BaseController
             0 => $this->podcast->title,
             1 => $this->episode->title,
         ]);
-        return view('Modules\Admin\Views\episode\embeddable_player', $data);
+        return view('episode/embeddable_player', $data);
     }
 
     public function attemptCommentCreate(): RedirectResponse

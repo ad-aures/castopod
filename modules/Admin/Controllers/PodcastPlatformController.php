@@ -39,7 +39,7 @@ class PodcastPlatformController extends BaseController
 
     public function index(): string
     {
-        return view('Modules\Admin\Views\podcast\platforms\dashboard');
+        return view('podcast/platforms\dashboard');
     }
 
     public function platforms(string $platformType): string
@@ -56,9 +56,7 @@ class PodcastPlatformController extends BaseController
             0 => $this->podcast->title,
         ]);
 
-        $view = view('Modules\Admin\Views\podcast\platforms', $data);
-
-        return $view;
+        return view('podcast/platforms', $data);
     }
 
     public function attemptPlatformsUpdate(string $platformType): RedirectResponse

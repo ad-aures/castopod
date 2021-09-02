@@ -57,7 +57,7 @@ class ContributorController extends BaseController
         replace_breadcrumb_params([
             0 => $this->podcast->title,
         ]);
-        return view('Modules\Admin\Views\contributor\list', $data);
+        return view('contributor/list', $data);
     }
 
     public function view(): string
@@ -70,7 +70,7 @@ class ContributorController extends BaseController
             0 => $this->podcast->title,
             1 => $this->user->username,
         ]);
-        return view('Modules\Admin\Views\contributor\view', $data);
+        return view('contributor/view', $data);
     }
 
     public function add(): string
@@ -106,7 +106,7 @@ class ContributorController extends BaseController
         replace_breadcrumb_params([
             0 => $this->podcast->title,
         ]);
-        return view('Modules\Admin\Views\contributor\add', $data);
+        return view('contributor/add', $data);
     }
 
     public function attemptAdd(): RedirectResponse
@@ -155,7 +155,7 @@ class ContributorController extends BaseController
             0 => $this->podcast->title,
             1 => $this->user->username,
         ]);
-        return view('Modules\Admin\Views\contributor\edit', $data);
+        return view('contributor/edit', $data);
     }
 
     public function attemptEdit(): RedirectResponse

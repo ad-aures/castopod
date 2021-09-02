@@ -38,6 +38,7 @@ class HomeController extends BaseController
         $data = [
             'podcasts' => $allPodcasts,
         ];
+
         return view('home', $data);
     }
 }

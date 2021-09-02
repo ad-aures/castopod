@@ -8,17 +8,14 @@ use CodeIgniter\Config\BaseConfig;
 
 class ViewComponents extends BaseConfig
 {
-    public string $classComponentsPath = 'View/Components';
-
-    public string $viewFileComponentsPath = 'Views/components';
+    public string $componentsDirectory = 'Components';
 
     /**
-     * Modules to look into for local components. Associative array with the module namespace as key and the module path
-     * as value.
+     * Paths to look into for local components. Will look for the $componentsDirectory inside.
      *
-     * @var array<string, string>
+     * @var string[]
      */
-    public array $lookupModules = [];
+    public array $lookupPaths = [];
 
-    public string $defaultLookupPath = APPPATH;
+    public string $defaultLookupPath = APPPATH . 'Views/';
 }

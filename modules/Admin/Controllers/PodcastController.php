@@ -53,7 +53,7 @@ class PodcastController extends BaseController
             ];
         }
 
-        return view('Modules\Admin\Views\podcast\list', $data);
+        return view('podcast/list', $data);
     }
 
     public function view(): string
@@ -65,7 +65,7 @@ class PodcastController extends BaseController
         replace_breadcrumb_params([
             0 => $this->podcast->title,
         ]);
-        return view('Modules\Admin\Views\podcast\view', $data);
+        return view('podcast/view', $data);
     }
 
     public function viewAnalytics(): string
@@ -77,7 +77,7 @@ class PodcastController extends BaseController
         replace_breadcrumb_params([
             0 => $this->podcast->title,
         ]);
-        return view('Modules\Admin\Views\podcast\analytics\index', $data);
+        return view('podcast/analytics/index', $data);
     }
 
     public function viewAnalyticsWebpages(): string
@@ -89,7 +89,7 @@ class PodcastController extends BaseController
         replace_breadcrumb_params([
             0 => $this->podcast->title,
         ]);
-        return view('Modules\Admin\Views\podcast\analytics\webpages', $data);
+        return view('podcast/analytics/webpages', $data);
     }
 
     public function viewAnalyticsLocations(): string
@@ -101,7 +101,7 @@ class PodcastController extends BaseController
         replace_breadcrumb_params([
             0 => $this->podcast->title,
         ]);
-        return view('Modules\Admin\Views\podcast\analytics\locations', $data);
+        return view('podcast/analytics/locations', $data);
     }
 
     public function viewAnalyticsUniqueListeners(): string
@@ -113,7 +113,7 @@ class PodcastController extends BaseController
         replace_breadcrumb_params([
             0 => $this->podcast->title,
         ]);
-        return view('Modules\Admin\Views\podcast\analytics\unique_listeners', $data);
+        return view('podcast/analytics/unique_listeners', $data);
     }
 
     public function viewAnalyticsListeningTime(): string
@@ -125,7 +125,7 @@ class PodcastController extends BaseController
         replace_breadcrumb_params([
             0 => $this->podcast->title,
         ]);
-        return view('Modules\Admin\Views\podcast\analytics\listening_time', $data);
+        return view('podcast/analytics/listening_time', $data);
     }
 
     public function viewAnalyticsTimePeriods(): string
@@ -137,7 +137,7 @@ class PodcastController extends BaseController
         replace_breadcrumb_params([
             0 => $this->podcast->title,
         ]);
-        return view('Modules\Admin\Views\podcast\analytics\time_periods', $data);
+        return view('podcast/analytics/time_periods', $data);
     }
 
     public function viewAnalyticsPlayers(): string
@@ -149,7 +149,7 @@ class PodcastController extends BaseController
         replace_breadcrumb_params([
             0 => $this->podcast->title,
         ]);
-        return view('Modules\Admin\Views\podcast\analytics\players', $data);
+        return view('podcast/analytics/players', $data);
     }
 
     public function create(): string
@@ -165,7 +165,7 @@ class PodcastController extends BaseController
             'browserLang' => get_browser_language($this->request->getServer('HTTP_ACCEPT_LANGUAGE')),
         ];
 
-        return view('Modules\Admin\Views\podcast\create', $data);
+        return view('podcast/create', $data);
     }
 
     public function attemptCreate(): RedirectResponse
@@ -274,7 +274,7 @@ class PodcastController extends BaseController
         replace_breadcrumb_params([
             0 => $this->podcast->title,
         ]);
-        return view('Modules\Admin\Views\podcast\edit', $data);
+        return view('podcast/edit', $data);
     }
 
     public function attemptEdit(): RedirectResponse
@@ -357,15 +357,16 @@ class PodcastController extends BaseController
         return redirect()->route('podcast-view', [$this->podcast->id]);
     }
 
-    public function latestEpisodes(int $limit, int $podcast_id): string
+    public function latestEpisodes(int $limit, int $podcastId): string
     {
         $episodes = (new EpisodeModel())
-            ->where('podcast_id', $podcast_id)
+            ->where('podcast_id', $podcastId)
             ->orderBy('created_at', 'desc')
             ->findAll($limit);
 
-        return view('Modules\Admin\Views\podcast\latest_episodes', [
+        return view('podcast/latest_episodes', [
             'episodes' => $episodes,
+            'podcast' => (new PodcastModel())->getPodcastById($podcastId),
         ]);
     }
 

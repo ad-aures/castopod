@@ -18,14 +18,14 @@ class MyAccountController extends BaseController
 {
     public function index(): string
     {
-        return view('Modules\Admin\Views\my_account\view');
+        return view('my_account\view');
     }
 
     public function changePassword(): string
     {
         helper('form');
 
-        return view('Modules\Admin\Views\my_account\change_password');
+        return view('my_account\change_password');
     }
 
     public function attemptChange(): RedirectResponse

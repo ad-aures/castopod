@@ -137,26 +137,26 @@ class ComponentRenderer
     private function locateView(string $name): string
     {
         // TODO: Is there a better way to locate components local to current module?
-        $modulesToDiscover = [];
-        $lookupModules = $this->config->lookupModules;
-        $modulesToDiscover = array_filter($lookupModules, function ($namespace): bool {
-            return str_starts_with($this->currentView, $namespace);
-        }, ARRAY_FILTER_USE_KEY);
-        $modulesToDiscover = array_values($modulesToDiscover);
-        $modulesToDiscover[] = $this->config->defaultLookupPath;
+        $pathsToDiscover = [];
+        $lookupPaths = $this->config->lookupPaths;
+        $pathsToDiscover = array_filter($lookupPaths, function ($path): bool {
+            return str_starts_with($this->currentView, $path);
+        });
+        $pathsToDiscover = array_values($pathsToDiscover);
+        $pathsToDiscover[] = $this->config->defaultLookupPath;
 
         $namePath = str_replace('.', '/', $name);
 
-        foreach ($modulesToDiscover as $basePath) {
+        foreach ($pathsToDiscover as $basePath) {
             // Look for a class component first
-            $filePath = $basePath . $this->config->classComponentsPath . '/' . $namePath . '.php';
+            $filePath = $basePath . $this->config->componentsDirectory . '/' . $namePath . '.php';
 
             if (is_file($filePath)) {
                 return $filePath;
             }
 
-            $camelCaseName = strtolower(preg_replace('~(?<!^)(?<!\/)[A-Z]~', '_$0', $namePath) ?? '');
-            $filePath = $basePath . $this->config->viewFileComponentsPath . '/' . $camelCaseName . '.php';
+            $snakeCaseName = strtolower(preg_replace('~(?<!^)(?<!\/)[A-Z]~', '_$0', $namePath) ?? '');
+            $filePath = $basePath . $this->config->componentsDirectory . '/' . $snakeCaseName . '.php';
 
             if (is_file($filePath)) {
                 return $filePath;

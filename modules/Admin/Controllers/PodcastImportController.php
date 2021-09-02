@@ -58,7 +58,7 @@ class PodcastImportController extends BaseController
             'browserLang' => get_browser_language($this->request->getServer('HTTP_ACCEPT_LANGUAGE')),
         ];
 
-        return view('Modules\Admin\Views\podcast\import', $data);
+        return view('podcast/import', $data);
     }
 
     public function attemptImport(): RedirectResponse

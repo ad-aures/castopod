@@ -40,7 +40,7 @@ class UserController extends BaseController
             'users' => (new UserModel())->findAll(),
         ];
 
-        return view('Modules\Admin\Views\user\list', $data);
+        return view('user/list', $data);
     }
 
     public function view(): string
@@ -52,7 +52,7 @@ class UserController extends BaseController
         replace_breadcrumb_params([
             0 => $this->user->username,
         ]);
-        return view('Modules\Admin\Views\user\view', $data);
+        return view('user/view', $data);
     }
 
     public function create(): string
@@ -63,7 +63,7 @@ class UserController extends BaseController
             'roles' => (new GroupModel())->getUserRoles(),
         ];
 
-        return view('Modules\Admin\Views\user\create', $data);
+        return view('user/create', $data);
     }
 
     public function attemptCreate(): RedirectResponse
@@ -135,7 +135,7 @@ class UserController extends BaseController
         replace_breadcrumb_params([
             0 => $this->user->username,
         ]);
-        return view('Modules\Admin\Views\user\edit', $data);
+        return view('user/edit', $data);
     }
 
     public function attemptEdit(): RedirectResponse

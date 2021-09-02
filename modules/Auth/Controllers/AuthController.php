@@ -13,6 +13,7 @@ namespace Modules\Auth\Controllers;
 use CodeIgniter\HTTP\RedirectResponse;
 use Modules\Auth\Entities\User;
 use Myth\Auth\Controllers\AuthController as MythAuthController;
+use ViewThemes\Theme;
 
 class AuthController extends MythAuthController
 {
@@ -22,6 +23,13 @@ class AuthController extends MythAuthController
      * @var string[]
      */
     protected $helpers = ['components'];
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        Theme::setTheme('auth');
+    }
 
     /**
      * Attempt to register a new user.

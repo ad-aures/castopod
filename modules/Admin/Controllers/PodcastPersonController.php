@@ -49,7 +49,7 @@ class PodcastPersonController extends BaseController
         replace_breadcrumb_params([
             0 => $this->podcast->title,
         ]);
-        return view('Modules\Admin\Views\podcast\persons', $data);
+        return view('podcast/persons', $data);
     }
 
     public function attemptAdd(): RedirectResponse

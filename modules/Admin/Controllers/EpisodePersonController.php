@@ -62,7 +62,7 @@ class EpisodePersonController extends BaseController
             0 => $this->podcast->title,
             1 => $this->episode->title,
         ]);
-        return view('Modules\Admin\Views\episode\persons', $data);
+        return view('episode/persons', $data);
     }
 
     public function attemptAdd(): RedirectResponse

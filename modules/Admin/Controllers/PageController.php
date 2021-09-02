@@ -38,12 +38,12 @@ class PageController extends BaseController
             'pages' => (new PageModel())->findAll(),
         ];
 
-        return view('Modules\Admin\Views\page\list', $data);
+        return view('page/list', $data);
     }
 
     public function view(): string
     {
-        return view('Modules\Admin\Views\page\view', [
+        return view('page/view', [
             'page' => $this->page,
         ]);
     }
@@ -52,7 +52,7 @@ class PageController extends BaseController
     {
         helper('form');
 
-        return view('Modules\Admin\Views\page\create');
+        return view('page/create');
     }
 
     public function attemptCreate(): RedirectResponse
@@ -86,7 +86,7 @@ class PageController extends BaseController
         replace_breadcrumb_params([
             0 => $this->page->title,
         ]);
-        return view('Modules\Admin\Views\page\edit', [
+        return view('page/edit', [
             'page' => $this->page,
         ]);
     }

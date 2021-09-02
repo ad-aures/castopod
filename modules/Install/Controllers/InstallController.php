@@ -24,6 +24,7 @@ use Dotenv\Exception\ValidationException;
 use Modules\Auth\Entities\User;
 use Psr\Log\LoggerInterface;
 use Throwable;
+use ViewThemes\Theme;
 
 class InstallController extends Controller
 {
@@ -42,6 +43,8 @@ class InstallController extends Controller
     ): void {
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
+
+        Theme::setTheme('install');
     }
 
     /**
@@ -58,7 +61,7 @@ class InstallController extends Controller
                 fclose($envFile);
             } catch (Throwable) {
                 // Could not create the .env file, redirect to a view with instructions on how to add it manually
-                return view('Modules\Install\Views\manual_config');
+                return view('manual_config');
             }
         }
 
@@ -106,7 +109,7 @@ class InstallController extends Controller
                     'cache.handler',
                 ]);
             } catch (ValidationException) {
-                return view('Modules\Install\Views\manual_config');
+                return view('manual_config');
             }
         }
 
@@ -127,7 +130,7 @@ class InstallController extends Controller
             session()
                 ->setFlashdata('error', lang('Install.messages.databaseConnectError'));
 
-            return view('Modules\Install\Views\database_config');
+            return view('database_config');
         }
 
         // migrate if no user has been created
@@ -141,7 +144,7 @@ class InstallController extends Controller
 
     public function instanceConfig(): string
     {
-        return view('Modules\Install\Views\instance_config');
+        return view('instance_config');
     }
 
     public function attemptInstanceConfig(): RedirectResponse
@@ -178,7 +181,7 @@ class InstallController extends Controller
 
     public function databaseConfig(): string
     {
-        return view('Modules\Install\Views\database_config');
+        return view('database_config');
     }
 
     public function attemptDatabaseConfig(): RedirectResponse
@@ -210,7 +213,7 @@ class InstallController extends Controller
 
     public function cacheConfig(): string
     {
-        return view('Modules\Install\Views\cache_config');
+        return view('cache_config');
     }
 
     public function attemptCacheConfig(): RedirectResponse
@@ -268,7 +271,7 @@ class InstallController extends Controller
      */
     public function createSuperAdmin(): string
     {
-        return view('Modules\Install\Views\create_superadmin');
+        return view('create_superadmin');
     }
 
     /**

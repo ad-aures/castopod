@@ -41,7 +41,7 @@ class PersonController extends BaseController
             'persons' => (new PersonModel())->findAll(),
         ];
 
-        return view('Modules\Admin\Views\person\list', $data);
+        return view('person/list', $data);
     }
 
     public function view(): string
@@ -53,14 +53,14 @@ class PersonController extends BaseController
         replace_breadcrumb_params([
             0 => $this->person->full_name,
         ]);
-        return view('Modules\Admin\Views\person\view', $data);
+        return view('person/view', $data);
     }
 
     public function create(): string
     {
         helper(['form']);
 
-        return view('Modules\Admin\Views\person\create');
+        return view('person/create');
     }
 
     public function attemptCreate(): RedirectResponse
@@ -113,7 +113,7 @@ class PersonController extends BaseController
         replace_breadcrumb_params([
             0 => $this->person->full_name,
         ]);
-        return view('Modules\Admin\Views\person\edit', $data);
+        return view('person/edit', $data);
     }
 
     public function attemptEdit(): RedirectResponse

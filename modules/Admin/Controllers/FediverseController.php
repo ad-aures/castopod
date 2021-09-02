@@ -14,7 +14,7 @@ class FediverseController extends BaseController
 {
     public function dashboard(): string
     {
-        return view('Modules\Admin\Views\fediverse\dashboard');
+        return view('fediverse/dashboard');
     }
 
     public function blockedActors(): string
@@ -24,7 +24,7 @@ class FediverseController extends BaseController
         $blockedActors = model('ActorModel')
             ->getBlockedActors();
 
-        return view('Modules\Admin\Views\fediverse\blocked_actors', [
+        return view('fediverse/blocked_actors', [
             'blockedActors' => $blockedActors,
         ]);
     }
@@ -36,7 +36,7 @@ class FediverseController extends BaseController
         $blockedDomains = model('BlockedDomainModel')
             ->getBlockedDomains();
 
-        return view('Modules\Admin\Views\fediverse\blocked_domains', [
+        return view('fediverse/blocked_domains', [
             'blockedDomains' => $blockedDomains,
         ]);
     }
