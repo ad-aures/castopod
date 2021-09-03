@@ -29,7 +29,7 @@ class Button extends Component
 
         $variantClass = [
             'default' => 'text-black bg-gray-300 hover:bg-gray-400',
-            'primary' => 'text-white bg-pine-700 hover:bg-pine-800',
+            'primary' => 'text-white bg-pine-500 hover:bg-pine-800',
             'secondary' => 'text-white bg-gray-700 hover:bg-gray-800',
             'accent' => 'text-white bg-rose-600 hover:bg-rose-800',
             'success' => 'text-white bg-green-600 hover:bg-green-700',

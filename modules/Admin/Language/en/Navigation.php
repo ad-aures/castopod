@@ -9,7 +9,7 @@ declare(strict_types=1);
  */
 
 return [
-    'go_to_website' => 'Go to website',
+    'go_to_website' => 'View site',
     'dashboard' => 'Dashboard',
     'admin' => 'Home',
     'podcasts' => 'Podcasts',

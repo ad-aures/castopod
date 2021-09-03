@@ -19,16 +19,16 @@ module.exports = {
       },
       colors: {
         pine: {
-          50: "#ebf8f8",
-          100: "#cff7f3",
-          200: "#9df2e4",
-          300: "#5ee8d4",
-          400: "#1cd7ba",
-          500: "#08c09a",
-          600: "#07a57d",
-          700: "#009486",
-          800: "#006D60",
-          900: "#00564A",
+          50: "#F2FAF9",
+          100: "#E7F9E4",
+          200: "#bfe4e1",
+          300: "#99d4cf",
+          400: "#4db4aa",
+          500: "#009486",
+          600: "#008579",
+          700: "#006D60",
+          800: "#00564A",
+          900: "#003D0B",
         },
         rose: {
           50: "#fcf9f8",
@@ -56,5 +56,6 @@ module.exports = {
     require("@tailwindcss/forms"),
     require("@tailwindcss/typography"),
     require("@tailwindcss/line-clamp"),
+    require("tailwindcss-scroll-snap"),
   ],
 };

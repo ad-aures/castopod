@@ -2,15 +2,11 @@
 $podcastNavigation = [
     'dashboard' => [
         'icon' => 'dashboard',
-        'items' => ['podcast-view', 'podcast-edit'],
+        'items' => ['podcast-view', 'podcast-edit', 'podcast-person-manage'],
     ],
     'episodes' => [
         'icon' => 'mic',
         'items' => ['episode-list', 'episode-create'],
-    ],
-    'persons' => [
-        'icon' => 'folder-user',
-        'items' => ['podcast-person-manage'],
     ],
     'analytics' => [
         'icon' => 'line-chart',
@@ -38,82 +34,45 @@ $podcastNavigation = [
     ],
 ]; ?>
 
-<a href="<?= route_to(
-    'admin',
-) ?>" class="inline-flex items-center px-4 py-2 border-b">
-    <?= icon('arrow-left', 'mr-4 text-xl') ?>
-        <span class="inline-flex items-baseline text-2xl font-semibold font-display text-pine-700"> <?= 'castopod' .
-            svg('castopod-logo', 'h-5 ml-1') ?></span>
-
-</a>
-<div class="flex items-center border-b">
+<div class="flex items-center px-4 py-2 border-b border-pine-900">
     <img
     src="<?= $podcast->image->thumbnail_url ?>"
     alt="<?= $podcast->title ?>"
-    class="object-cover w-16 h-16"
+    class="object-cover w-16 h-16 rounded"
     />
     <div class="flex flex-col items-start flex-1 w-48 px-2">
-        <span class="w-40 text-sm font-semibold truncate" title="<?= $podcast->title ?>"><?= $podcast->title ?></span>
+        <span class="w-full font-semibold truncate" title="<?= $podcast->title ?>"><?= $podcast->title ?></span>
         <a href="<?= route_to(
             'podcast-activity',
             $podcast->handle,
-        ) ?>" class="inline-flex items-center text-xs underline outline-none hover:no-underline focus:ring"
+        ) ?>" class="inline-flex items-center text-sm outline-none hover:underline focus:ring"
         data-toggle="tooltip" data-placement="bottom" title="<?= lang(
             'PodcastNavigation.go_to_page',
         ) ?>">@<?= $podcast->handle ?>
-        <?= icon('external-link', 'ml-1 text-gray-500') ?>
+        <?= icon('external-link', 'ml-1 opacity-60') ?>
         </a>
     </div>
 </div>
-<nav class="flex flex-col flex-1 py-6 overflow-y-auto">
+<nav class="flex flex-col flex-1 py-4 overflow-y-auto gap-y-4">
     <?php foreach ($podcastNavigation as $section => $data): ?>
-    <div class="mb-4">
-        <button class="inline-flex items-center w-full px-6 py-1 outline-none focus:ring" type="button">
-            <?= icon($data['icon'], 'text-gray-400 text-xl mr-3') .
+    <div>
+        <button class="inline-flex items-center w-full px-4 py-1 font-semibold outline-none focus:ring" type="button">
+            <?= icon($data['icon'], 'opacity-60 text-2xl mr-4') .
                 lang('PodcastNavigation.' . $section) ?>
         </button>
         <ul class="flex flex-col">
             <?php foreach ($data['items'] as $item): ?>
                 <?php $isActive = url_is(route_to($item, $podcast->id)); ?>
             <li class="inline-flex">
-                <a class="w-full py-1 pl-14 pr-2 text-sm text-gray-600 outline-none hover:text-gray-900 focus:ring <?= $isActive
-                    ? 'font-semibold text-gray-900'
-                    : '' ?>" href="<?= route_to(
-    $item,
-    $podcast->id,
-) ?>"><?= lang('PodcastNavigation.' . $item) ?></a>
+                <a class="w-full py-1 pl-14 pr-2 text-sm outline-none hover:opacity-100 focus:ring <?= $isActive
+                    ? 'font-semibold opacity-100 inline-flex items-center'
+                    : 'opacity-75' ?>" href="<?= route_to(
+                    $item,
+                    $podcast->id,
+                ) ?>"><?= ($isActive ? icon('chevron-right', 'mr-2') : '') .lang('PodcastNavigation.' . $item) ?></a>
             </li>
             <?php endforeach; ?>
         </ul>
     </div>
     <?php endforeach; ?>
 </nav>
-    <button
-        type="button"
-        class="inline-flex items-center w-full px-6 py-2 mt-auto border-t outline-none focus:ring"
-        id="my-account-dropdown"
-        data-dropdown="button"
-        data-dropdown-target="my-account-dropdown-menu"
-        aria-haspopup="true"
-        aria-expanded="false">
-        <?= icon('user', 'text-gray-500 mr-2') ?>
-        <?= user()->username ?>
-        <?= icon('caret-right', 'ml-auto') ?>
-    </button>
-    <nav
-        id="my-account-dropdown-menu"
-        class="flex flex-col py-2 text-black whitespace-no-wrap bg-white border rounded shadow"
-        aria-labelledby="my-account-dropdown"
-        data-dropdown="menu"
-        data-dropdown-placement="right-end">
-        <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
-            'my-account',
-        ) ?>"><?= lang('AdminNavigation.account.my-account') ?></a>
-        <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
-            'change-password',
-        ) ?>"><?= lang('AdminNavigation.account.change-password') ?></a>
-        <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
-            'logout',
-        ) ?>"><?= lang('AdminNavigation.account.logout') ?></a>
-    </nav>
-</div>

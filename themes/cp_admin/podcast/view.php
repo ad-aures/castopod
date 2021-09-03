@@ -8,10 +8,6 @@
 <?= $podcast->title ?>
 <?= $this->endSection() ?>
 
-<?= $this->section('headerLeft') ?>
-<?= location_link($podcast->location, 'ml-4 text-sm') ?>
-<?= $this->endSection() ?>
-
 <?= $this->section('headerRight') ?>
 <?= button(
     lang('Podcast.edit'),

@@ -1,26 +1,33 @@
 /* Admin layout */
 .holy-grail-grid {
   @apply grid min-h-screen overflow-y-auto;
-  grid-template: 1fr auto / auto 1fr;
+  grid-template: auto 1fr auto / auto 1fr;
 
-  & .holy-grail-sidebar {
-    @apply col-start-1 col-end-2 row-start-1 row-end-3 w-80;
+  & .holy-grail__header {
+    @apply h-10 col-start-1 col-end-4 row-start-1 row-end-2;
   }
 
-  & .holy-grail-main {
-    @apply w-full col-start-1 col-end-3 row-start-1 row-end-2;
+  & .holy-grail__sidebar {
+    @apply col-start-1 col-end-2 row-start-2 row-end-4;
+
+    width: 300px;
+    max-height: calc(100vh - 2.5rem);
   }
 
-  & .holy-grail-footer {
-    @apply w-full col-start-1 col-end-3 row-start-2 row-end-3;
+  & .holy-grail__main {
+    @apply col-start-1 col-end-3 row-start-2 row-end-3;
+  }
+
+  & .holy-grail__footer {
+    @apply col-start-1 col-end-3 row-start-3 row-end-4;
   }
 
   @screen md {
-    & .holy-grail-main {
+    & .holy-grail__main {
       @apply col-start-2;
     }
 
-    & .holy-grail-footer {
+    & .holy-grail__footer {
       @apply col-start-2;
     }
   }

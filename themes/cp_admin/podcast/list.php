@@ -27,7 +27,7 @@
 <div class="grid gap-4 grid-cols-podcasts">
     <?php if ($podcasts !== null): ?>
         <?php foreach ($podcasts as $podcast): ?>
-            <article class="h-full overflow-hidden bg-white border shadow rounded-xl">
+            <article class="h-full overflow-hidden bg-white border-2 border-pine-100 rounded-xl">
             <img
             alt="<?= $podcast->title ?>"
             src="<?= $podcast->image

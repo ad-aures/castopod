@@ -10,9 +10,9 @@
         </a>
     </header>
     <?php if ($episodes): ?>
-        <div class="flex p-2 overflow-x-auto gap-x-6">
+        <div class="flex p-2 overflow-x-auto gap-x-6 snap snap-x snap-proximity">
         <?php foreach ($episodes as $episode): ?>
-            <article class="flex flex-col flex-shrink-0 flex-1 w-full min-w-[12rem] overflow-hidden bg-white border shadow rounded-xl">
+            <article class="snap-center flex flex-col flex-shrink-0 flex-1 w-full min-w-[12rem] max-w-[17rem] overflow-hidden bg-white border-2 border-pine-100 rounded-xl">
                 <div class="relative">
                     <div class=""></div>
                     <?= publication_pill(
