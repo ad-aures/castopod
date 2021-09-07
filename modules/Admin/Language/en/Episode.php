@@ -160,7 +160,6 @@ return [
         'submit_edit' => 'Save all soundbites',
     ],
     'embeddable_player' => [
-        'add' => 'Add embeddable player',
         'title' => 'Embeddable player',
         'label' =>
             'Pick a theme color, copy the embeddable player to clipboard, then paste it on your website.',

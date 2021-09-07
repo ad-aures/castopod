@@ -29,7 +29,7 @@
 </head>
 
 <body class="min-h-screen mx-auto bg-pine-50">
-    <header class="pt-8 pb-32 bg-pine-900">
+    <header class="pt-8 pb-32 bg-pine-800">
         <h1 class="text-lg font-semibold text-center text-white"><?= lang(
             'Fediverse.' . $action . '.subtitle',
         ) ?></h1>

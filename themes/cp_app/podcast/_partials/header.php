@@ -1,6 +1,6 @@
 <header id="main-header" class="fixed top-0 left-0 flex-col flex-shrink-0 h-screen transform -translate-x-full sm:left-auto sm:-translate-x-0 sm:sticky w-80 sm:w-64 lg:w-80 xl:w-112 sm:flex">
     <img src="<?= $podcast->actor
-        ->cover_image_url ?>" alt="" class="object-cover w-full h-48 bg-pine-900"/>
+        ->cover_image_url ?>" alt="" class="object-cover w-full h-48 bg-pine-800"/>
     <div class="flex items-center justify-between px-4 py-2 mb-4 lg:px-6 -mt-14 lg:-mt-16 xl:-mt-20">
         <img src="<?= $podcast->image
             ->thumbnail_url ?>" alt="<?= $podcast->title ?>" class="h-24 rounded-full shadow-xl xl:h-36 lg:h-28 ring-4 ring-pine-50" />

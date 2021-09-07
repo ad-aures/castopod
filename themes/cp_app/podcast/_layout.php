@@ -22,7 +22,7 @@
     <?= $this->include('podcast/_partials/header') ?>
 
     <main class="flex-shrink-0 w-full min-w-0 sm:w-auto sm:flex-1 sm:flex-shrink">
-        <nav class="sticky top-0 left-0 z-50 flex items-center w-full h-12 px-2 py-1 sm:hidden bg-pine-900">
+        <nav class="sticky top-0 left-0 z-50 flex items-center w-full h-12 px-2 py-1 sm:hidden bg-pine-800">
                 <button
                 data-toggle="main-header"
                 data-toggle-class="sticky -translate-x-full"
@@ -64,7 +64,7 @@
     data-toggle="main-sidebar"
     data-toggle-class="translate-x-full"
     data-toggle-body-class="-ml-64"
-    class="fixed z-40 hidden p-4 text-xl rounded-full shadow-2xl sm:block lg:hidden bottom-4 left-4 bg-pine-900 focus:outline-none focus:ring-2 focus:ring-pine-600 text-pine-200 hover:text-pine-50"><?= icon(
+    class="fixed z-40 hidden p-4 text-xl rounded-full shadow-2xl sm:block lg:hidden bottom-4 left-4 bg-pine-800 focus:outline-none focus:ring-2 focus:ring-pine-600 text-pine-200 hover:text-pine-50"><?= icon(
         'menu',
     ) ?><span class="sr-only"><?= lang(
     'Podcast.toggle_podcast_sidebar',
@@ -73,7 +73,7 @@
     <!-- Funding links modal -->
     <div id="funding-links" class="fixed top-0 left-0 z-50 flex items-center justify-center hidden w-screen h-screen">
         <div
-        class="absolute w-full h-full bg-pine-900 bg-opacity-90"
+        class="absolute w-full h-full bg-pine-800 bg-opacity-90"
         role="button"
         data-toggle="funding-links"
         data-toggle-class="hidden"

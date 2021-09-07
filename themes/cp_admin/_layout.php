@@ -59,7 +59,9 @@
         </nav>
     </header>
     <aside id="admin-sidebar" class="sticky z-50 flex flex-col text-white transition duration-200 ease-in-out transform -translate-x-full border-r top-10 border-pine-900 bg-pine-800 holy-grail__sidebar md:translate-x-0">
-        <?php if (isset($podcast)): ?>
+        <?php if (isset($podcast) && isset($episode)): ?>
+            <?= $this->include('episode/_sidebar') ?>
+        <?php elseif (isset($podcast)): ?>
             <?= $this->include('podcast/_sidebar') ?>
         <?php else: ?>
             <?= $this->include('_sidebar') ?>

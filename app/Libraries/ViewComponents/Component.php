@@ -8,6 +8,8 @@ class Component implements ComponentInterface
 {
     protected string $slot = '';
 
+    protected string $class = '';
+
     /**
      * @var array<string, string>
      */

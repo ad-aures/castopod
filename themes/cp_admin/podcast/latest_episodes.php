@@ -1,6 +1,6 @@
 <section class="flex flex-col">
     <header class="flex justify-between py-2">
-        <h1 class="text-xl"><?= lang('Podcast.latest_episodes') ?></h1>
+        <h2 class="text-xl"><?= lang('Podcast.latest_episodes') ?></h1>
         <a href="<?= route_to(
             'episode-list',
             $podcast->id,
@@ -14,14 +14,13 @@
         <?php foreach ($episodes as $episode): ?>
             <article class="snap-center flex flex-col flex-shrink-0 flex-1 w-full min-w-[12rem] max-w-[17rem] overflow-hidden bg-white border-2 border-pine-100 rounded-xl">
                 <div class="relative">
-                    <div class=""></div>
                     <?= publication_pill(
                         $episode->published_at,
                         $episode->publication_status,
                         'absolute top-2 right-2 text-sm'
                     ); ?>
                     <img
-                    src="<?= $episode->image->thumbnail_url ?>"
+                    src="<?= $episode->image->medium_url ?>"
                     alt="<?= $episode->title ?>" class="object-cover w-full" />
                 </div>
                 <div class="flex items-start justify-between p-2">
@@ -72,7 +71,7 @@
     'Episode.embeddable_player.add',
 ) ?></a>
                             <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
-                                'episode-person-manage',
+                                'episode-persons-manage',
                                 $podcast->id,
                                 $episode->id,
                             ) ?>"><?= lang('Person.persons') ?></a>

@@ -207,7 +207,7 @@
   }
 
   .choices__list--multiple .choices__item.is-highlighted {
-    @apply bg-pine-700;
+    @apply bg-pine-500;
   }
 
   .is-disabled .choices__list--multiple .choices__item {

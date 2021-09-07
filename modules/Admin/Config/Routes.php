@@ -90,7 +90,7 @@ $routes->group(
 
                 $routes->group('persons', function ($routes): void {
                     $routes->get('/', 'PodcastPersonController/$1', [
-                        'as' => 'podcast-person-manage',
+                        'as' => 'podcast-persons-manage',
                         'filter' => 'permission:podcast-edit',
                     ]);
                     $routes->post(
@@ -322,7 +322,7 @@ $routes->group(
 
                         $routes->group('persons', function ($routes): void {
                             $routes->get('/', 'EpisodePersonController/$1/$2', [
-                                'as' => 'episode-person-manage',
+                                'as' => 'episode-persons-manage',
                                 'filter' => 'permission:podcast_episodes-edit',
                             ]);
                             $routes->post(

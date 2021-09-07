@@ -10,24 +10,20 @@
 
 <?= $this->section('content') ?>
 
-<div class="mb-12 text-center">
-<h2><?= lang('Charts.unique_daily_listeners') ?></h2>
-<div class="chart-xy" id="by-day-listeners-graph" data-chart-type="xy-chart" data-chart-url="<?= route_to(
-    'analytics-data',
-    $podcast->id,
-    'Podcast',
-    'UniqueListenersByDay',
-) ?>"></div>
-</div>
+<div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+    <Charts.XY class="col-span-1" title="<?= lang('Charts.unique_daily_listeners') ?>" dataUrl="<?= route_to(
+        'analytics-data',
+        $podcast->id,
+        'Podcast',
+        'UniqueListenersByDay',
+    ) ?>"/>
 
-<div class="mb-12 text-center">
-<h2><?= lang('Charts.unique_monthly_listeners') ?></h2>
-<div class="chart-xy" id="by-month-listeners-graph" data-chart-type="xy-chart" data-chart-url="<?= route_to(
-    'analytics-data',
-    $podcast->id,
-    'Podcast',
-    'UniqueListenersByMonth',
-) ?>"></div>
+    <Charts.XY class="col-span-1" title="<?= lang('Charts.unique_monthly_listeners') ?>" dataUrl="<?= route_to(
+        'analytics-data',
+        $podcast->id,
+        'Podcast',
+        'UniqueListenersByMonth',
+    ) ?>"/>
 </div>
 
 <?= service('vite')->asset('js/charts.ts', 'js') ?>

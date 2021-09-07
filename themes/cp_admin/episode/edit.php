@@ -400,12 +400,20 @@
 
 <Forms.Toggler id="block" name="block" value="yes" checked="<?= old('block', $episode->is_blocked) ?>" hint="<?= lang('Episode.form.block_hint') ?>"><?= lang('Episode.form.block') ?></Forms.Toggler>
 
-<?= button(
-    lang('Episode.form.submit_edit'),
-    '',
-    ['variant' => 'primary'],
-    ['type' => 'submit', 'class' => 'self-end'],
-) ?>
+<div class="flex items-center justify-between">
+    <?= button(
+        lang('Episode.delete'),
+        route_to('episode-delete', $podcast->id, $episode->id),
+        ['variant' => 'danger', 'iconLeft' => 'delete-bin'],
+    ) ?>
+
+    <?= button(
+        lang('Episode.form.submit_edit'),
+        '',
+        ['variant' => 'primary'],
+        ['type' => 'submit', 'class' => 'self-end'],
+    ) ?>
+</div>
 
 <?= form_close() ?>
 

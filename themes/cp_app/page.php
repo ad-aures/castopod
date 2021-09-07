@@ -11,7 +11,7 @@
 </head>
 
 <body class="flex flex-col min-h-screen mx-auto">
-    <header class="py-8 text-white border-b bg-pine-900">
+    <header class="py-8 text-white border-b bg-pine-800">
         <div class="container flex flex-col px-2 py-4 mx-auto">
             <a href="<?= route_to('home') ?>"
             class="inline-flex items-center mb-2"><?= icon(

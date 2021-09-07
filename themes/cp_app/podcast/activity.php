@@ -28,7 +28,7 @@
 <a href="<?= route_to(
     'podcast-activity',
     $podcast->handle,
-) ?>" class="px-4 py-1 mr-8 font-semibold border-b-4 text-pine-800 border-pine-800"><?= lang(
+) ?>" class="px-4 py-1 mr-8 font-semibold border-b-4 text-pine-800 border-pine-500"><?= lang(
     'Podcast.activity',
 ) ?></a>
     <a href="<?= route_to(

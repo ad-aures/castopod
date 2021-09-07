@@ -26,24 +26,6 @@ return [
     'actions' => 'Actions',
     'pageInfo' => 'Page {currentPage} out of {pageCount}',
     'go_back' => 'Go back',
-    'forms' => [
-        'editor' => [
-            'write' => 'Write',
-            'preview' => 'Preview',
-            'help' => 'Powered by markdown',
-        ],
-        'multiSelect' => [
-            'selectText' => 'Press to select',
-            'loadingText' => 'Loading...',
-            'noResultsText' => 'No results found',
-            'noChoicesText' => 'No choices to choose from',
-            'maxItemText' => 'Cannot add more items',
-        ],
-        'image_size_hint' =>
-            'Image must be squared with at least 1400px wide and tall.',
-        'upload_file' => 'Upload a file',
-        'remote_url' => 'Remote URL',
-    ],
     'play_episode_button' => [
         'play' => 'Play',
         'playing' => 'Playing',

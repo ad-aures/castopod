@@ -33,7 +33,7 @@
     <a href="<?= route_to(
                     'podcast-episodes',
                     $podcast->handle,
-                ) ?>" class="px-4 py-1 font-semibold border-b-4 text-pine-800 border-pine-800"><?= lang(
+                ) ?>" class="px-4 py-1 font-semibold border-b-4 text-pine-800 border-pine-500"><?= lang(
                                                                                                     'Podcast.episodes',
                                                                                                 ) ?></a>
     <?php if ($activeQuery) : ?>

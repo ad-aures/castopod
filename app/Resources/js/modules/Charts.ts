@@ -5,9 +5,12 @@ import * as am4maps from "@amcharts/amcharts4/maps";
 import * as am4plugins_sliceGrouper from "@amcharts/amcharts4/plugins/sliceGrouper";
 import am4themes_material from "@amcharts/amcharts4/themes/material";
 
-const drawPieChart = (chartDivId: string, dataUrl: string | null): void => {
+const drawPieChart = (
+  chartDiv: HTMLDivElement,
+  dataUrl: string | null
+): void => {
   // Create chart instance
-  const chart = am4core.create(chartDivId, am4charts.PieChart);
+  const chart = am4core.create(chartDiv, am4charts.PieChart);
   am4core.percent(100);
   chart.exporting.menu = new am4core.ExportMenu();
   chart.exporting.menu.align = "left";
@@ -43,9 +46,12 @@ const drawPieChart = (chartDivId: string, dataUrl: string | null): void => {
   chart.legend.scrollable = true;
 };
 
-const drawXYChart = (chartDivId: string, dataUrl: string | null): void => {
+const drawXYChart = (
+  chartDiv: HTMLDivElement,
+  dataUrl: string | null
+): void => {
   // Create chart instance
-  const chart = am4core.create(chartDivId, am4charts.XYChart);
+  const chart = am4core.create(chartDiv, am4charts.XYChart);
   am4core.percent(100);
   chart.exporting.menu = new am4core.ExportMenu();
   chart.exporting.menu.align = "right";
@@ -88,9 +94,12 @@ const drawXYChart = (chartDivId: string, dataUrl: string | null): void => {
   chart.scrollbarX = new am4core.Scrollbar();
 };
 
-const drawBarChart = (chartDivId: string, dataUrl: string | null): void => {
+const drawBarChart = (
+  chartDiv: HTMLDivElement,
+  dataUrl: string | null
+): void => {
   // Create chart instance
-  const chart = am4core.create(chartDivId, am4charts.XYChart);
+  const chart = am4core.create(chartDiv, am4charts.XYChart);
   am4core.percent(100);
   chart.exporting.menu = new am4core.ExportMenu();
   chart.exporting.menu.align = "right";
@@ -121,11 +130,11 @@ const drawBarChart = (chartDivId: string, dataUrl: string | null): void => {
 };
 
 const drawXYDurationChart = (
-  chartDivId: string,
+  chartDiv: HTMLDivElement,
   dataUrl: string | null
 ): void => {
   // Create chart instance
-  const chart = am4core.create(chartDivId, am4charts.XYChart);
+  const chart = am4core.create(chartDiv, am4charts.XYChart);
   am4core.percent(100);
   chart.exporting.menu = new am4core.ExportMenu();
   chart.exporting.menu.align = "right";
@@ -171,9 +180,12 @@ const drawXYDurationChart = (
   chart.scrollbarX = new am4core.Scrollbar();
 };
 
-const drawMapChart = (chartDivId: string, dataUrl: string | null): void => {
+const drawMapChart = (
+  chartDiv: HTMLDivElement,
+  dataUrl: string | null
+): void => {
   // Create map instance
-  const chart = am4core.create(chartDivId, am4maps.MapChart);
+  const chart = am4core.create(chartDiv, am4maps.MapChart);
   am4core.percent(100);
   chart.exporting.menu = new am4core.ExportMenu();
   chart.exporting.menu.align = "left";
@@ -238,22 +250,19 @@ const DrawCharts = (): void => {
 
     switch (chartType) {
       case "pie-chart":
-        drawPieChart(chartDiv.id, chartDiv.getAttribute("data-chart-url"));
+        drawPieChart(chartDiv, chartDiv.getAttribute("data-chart-url"));
         break;
       case "xy-chart":
-        drawXYChart(chartDiv.id, chartDiv.getAttribute("data-chart-url"));
+        drawXYChart(chartDiv, chartDiv.getAttribute("data-chart-url"));
         break;
       case "bar-chart":
-        drawBarChart(chartDiv.id, chartDiv.getAttribute("data-chart-url"));
+        drawBarChart(chartDiv, chartDiv.getAttribute("data-chart-url"));
         break;
       case "xy-duration-chart":
-        drawXYDurationChart(
-          chartDiv.id,
-          chartDiv.getAttribute("data-chart-url")
-        );
+        drawXYDurationChart(chartDiv, chartDiv.getAttribute("data-chart-url"));
         break;
       case "map-chart":
-        drawMapChart(chartDiv.id, chartDiv.getAttribute("data-chart-url"));
+        drawMapChart(chartDiv, chartDiv.getAttribute("data-chart-url"));
         break;
       default:
         console.error("Unknown chart type:" + chartType);

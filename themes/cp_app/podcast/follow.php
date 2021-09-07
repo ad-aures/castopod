@@ -29,7 +29,7 @@
 
 <body class="flex flex-col min-h-screen bg-pine-50">
     <header class="flex flex-col items-center mb-8">
-        <h1 class="w-full pt-8 pb-32 text-center text-white bg-pine-900"><?= lang(
+        <h1 class="w-full pt-8 pb-32 text-center text-white bg-pine-800"><?= lang(
             'Fediverse.follow.subtitle',
         ) ?></h1>
         <div class="flex flex-col w-full max-w-xs -mt-24 overflow-hidden bg-white shadow rounded-xl">

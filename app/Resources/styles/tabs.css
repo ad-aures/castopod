@@ -24,7 +24,7 @@
   }
 
   .tabset > input:checked + label::after {
-    @apply absolute inset-x-0 bottom-0 w-1/3 h-1 mx-auto bg-pine-700;
+    @apply absolute inset-x-0 bottom-0 w-1/3 h-1 mx-auto bg-pine-500;
     content: "";
   }
 

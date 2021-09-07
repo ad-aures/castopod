@@ -10,49 +10,29 @@
 
 <?= $this->section('content') ?>
 
-<div class="lg:divide-x lg:grid lg:grid-cols-2">
-    
-    <div class="mb-12 mr-6 text-center">
-        <h2><?= lang('Charts.by_domain_weekly') ?></h2>
-        <div class="chart-pie" id="by-domain-weekly-pie" data-chart-type="pie-chart" data-chart-url="<?= route_to(
-            'analytics-data',
-            $podcast->id,
-            'WebsiteByReferer',
-            'ByDomainWeekly',
-        ) ?>"></div>
-    </div>
-
-
-    <div class="mb-12 mr-6 text-center">
-        <h2><?= lang('Charts.by_domain_yearly') ?></h2>
-        <div class="chart-pie" id="by-domain-yearly-pie" data-chart-type="pie-chart" data-chart-url="<?= route_to(
-            'analytics-data',
-            $podcast->id,
-            'WebsiteByReferer',
-            'ByDomainYearly',
-        ) ?>"></div>
-    </div>
-
-
-    <div class="mb-12 mr-6 text-center">
-        <h2><?= lang('Charts.by_entry_page') ?></h2>
-        <div class="chart-pie" id="by-entry-page-pie" data-chart-type="pie-chart" data-chart-url="<?= route_to(
-            'analytics-full-data',
-            $podcast->id,
-            'WebsiteByEntryPage',
-        ) ?>"></div>
-    </div>
-
-    
-    <div class="mb-12 mr-6 text-center">
-        <h2><?= lang('Charts.by_browser') ?></h2>
-        <div class="chart-pie" id="by-browser-pie" data-chart-type="pie-chart" data-chart-url="<?= route_to(
-            'analytics-full-data',
-            $podcast->id,
-            'WebsiteByBrowser',
-        ) ?>"></div>
-    </div>
-    
+<div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+    <Charts.Pie title="<?= lang('Charts.by_domain_weekly') ?>" dataUrl="<?= route_to(
+        'analytics-data',
+        $podcast->id,
+        'WebsiteByReferer',
+        'ByDomainWeekly',
+    ) ?>" />
+    <Charts.Pie title="<?= lang('Charts.by_domain_yearly') ?>" dataUrl="<?= route_to(
+        'analytics-data',
+        $podcast->id,
+        'WebsiteByReferer',
+        'ByDomainYearly',
+    ) ?>" />
+    <Charts.Pie title="<?= lang('Charts.by_entry_page') ?>" dataUrl="<?= route_to(
+        'analytics-full-data',
+        $podcast->id,
+        'WebsiteByEntryPage',
+    ) ?>" />
+    <Charts.Pie title="<?= lang('Charts.by_browser') ?>" dataUrl="<?= route_to(
+        'analytics-full-data',
+        $podcast->id,
+        'WebsiteByBrowser',
+    ) ?>" />
 </div>
 
 
