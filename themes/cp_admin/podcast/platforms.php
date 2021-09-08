@@ -20,22 +20,22 @@
 <div class="relative flex items-start mb-8">
     <div class="flex flex-col items-center w-12 mr-4">
         <?= anchor(
-            $platform->submit_url,
-            icon(
-                $platform->type . '/' . $platform->slug,
-                'text-gray-600 text-4xl',
-            ),
-            [
-                'class' => 'mb-1 text-gray-600 hover:text-gray-900',
-                'target' => '_blank',
-                'rel' => 'noopener noreferrer',
-                'data-toggle' => 'tooltip',
-                'data-placement' => 'bottom',
-                'title' => lang('Platforms.submit_url', [
-                    'platformName' => $platform->label,
-                ]),
-            ],
-        ) ?>
+    $platform->submit_url,
+    icon(
+        $platform->type . '/' . $platform->slug,
+        'text-gray-600 text-4xl',
+    ),
+    [
+        'class' => 'mb-1 text-gray-600 hover:text-gray-900',
+        'target' => '_blank',
+        'rel' => 'noopener noreferrer',
+        'data-toggle' => 'tooltip',
+        'data-placement' => 'bottom',
+        'title' => lang('Platforms.submit_url', [
+            'platformName' => $platform->label,
+        ]),
+    ],
+) ?>
         <div class="inline-flex bg-gray-200">
             <?= anchor($platform->home_url, icon('external-link', 'mx-auto'), [
                 'class' => 'flex-1 text-gray-600 hover:text-gray-900',
@@ -103,19 +103,24 @@
             'type' => 'text',
             'placeholder' => lang("Platforms.description.{$platform->type}"),
         ]) ?>
-        <Forms.Toggler class="mb-1 text-sm" id="<?= $platform->slug . '_visible' ?>" name="<?= 'platforms[' . $platform->slug . '][visible]'?>" value="yes" checked="<?= old($platform->slug . '_visible', $platform->is_visible ? $platform->is_visible : false ) ?>"><?= lang('Platforms.visible') ?></Forms.Toggler>
-        <Forms.Toggler class="text-sm" id="<?= $platform->slug . '_on_embeddable_player' ?>" name="<?= 'platforms[' . $platform->slug . '][on_embeddable_player]'?>" value="yes" checked="<?= old($platform->slug . '_on_embeddable_player', $platform->is_on_embeddable_player ? $platform->is_on_embeddable_player : false ) ?>"><?= lang('Platforms.on_embeddable_player') ?></Forms.Toggler>
+        <Forms.Toggler class="mb-1 text-sm" id="<?= $platform->slug . '_visible' ?>" name="<?= 'platforms[' . $platform->slug . '][visible]'?>" value="yes" checked="<?= old($platform->slug . '_visible', $platform->is_visible ? $platform->is_visible : false) ?>"><?= lang('Platforms.visible') ?></Forms.Toggler>
+        <Forms.Toggler class="text-sm" id="<?= $platform->slug . '_on_embeddable_player' ?>" name="<?= 'platforms[' . $platform->slug . '][on_embeddable_player]'?>" value="yes" checked="<?= old($platform->slug . '_on_embeddable_player', $platform->is_on_embeddable_player ? $platform->is_on_embeddable_player : false) ?>"><?= lang('Platforms.on_embeddable_player') ?></Forms.Toggler>
     </div>
 </div>
 
 <?php endforeach; ?>
 
 <?= button(
-    lang('Platforms.submit'),
-    '',
-    ['variant' => 'primary'],
-    ['type' => 'submit', 'class' => 'self-end'],
-) ?>
+            lang('Platforms.submit'),
+            '',
+            [
+                'variant' => 'primary',
+            ],
+            [
+                'type' => 'submit',
+                'class' => 'self-end',
+            ],
+        ) ?>
 
 <?= form_close() ?>
 

@@ -22,9 +22,9 @@
     <nav class="py-3">
         <a href="<?= route_to('episode', $podcast->handle, $episode->slug) ?>"
         class="inline-flex items-center px-4 py-2 text-sm"><?= icon(
-            'arrow-left',
-            'mr-2 text-lg',
-        ) .
+        'arrow-left',
+        'mr-2 text-lg',
+    ) .
             lang('Comment.back_to_episode', [
                 'episodeTitle' => $episode->title,
             ]) ?></a>

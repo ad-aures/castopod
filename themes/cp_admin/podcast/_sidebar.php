@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 $podcastNavigation = [
     'dashboard' => [
         'icon' => 'dashboard',
@@ -43,12 +44,12 @@ $podcastNavigation = [
     <div class="flex flex-col items-start flex-1 w-48 px-2">
         <span class="w-full font-semibold truncate" title="<?= $podcast->title ?>"><?= $podcast->title ?></span>
         <a href="<?= route_to(
-            'podcast-activity',
-            $podcast->handle,
-        ) ?>" class="inline-flex items-center text-sm outline-none hover:underline focus:ring"
+    'podcast-activity',
+    $podcast->handle,
+) ?>" class="inline-flex items-center text-sm outline-none hover:underline focus:ring"
         data-toggle="tooltip" data-placement="bottom" title="<?= lang(
-            'PodcastNavigation.go_to_page',
-        ) ?>">@<?= $podcast->handle ?>
+    'PodcastNavigation.go_to_page',
+) ?>">@<?= $podcast->handle ?>
         <?= icon('external-link', 'ml-1 opacity-60') ?>
         </a>
     </div>
@@ -67,9 +68,9 @@ $podcastNavigation = [
                 <a class="w-full py-1 pl-14 pr-2 text-sm outline-none hover:opacity-100 focus:ring <?= $isActive
                     ? 'font-semibold opacity-100 inline-flex items-center'
                     : 'opacity-75' ?>" href="<?= route_to(
-                    $item,
-                    $podcast->id,
-                ) ?>"><?= ($isActive ? icon('chevron-right', 'mr-2') : '') .lang('PodcastNavigation.' . $item) ?></a>
+                        $item,
+                        $podcast->id,
+                    ) ?>"><?= ($isActive ? icon('chevron-right', 'mr-2') : '') . lang('PodcastNavigation.' . $item) ?></a>
             </li>
             <?php endforeach; ?>
         </ul>

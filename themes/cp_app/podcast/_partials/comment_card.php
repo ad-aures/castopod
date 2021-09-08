@@ -3,7 +3,7 @@
     <div class="flex-1">
         <header class="w-full mb-2 text-sm">
             <a href="<?= $comment->actor
-                ->uri ?>" class="flex items-baseline hover:underline" <?= $comment->actor->is_local
+    ->uri ?>" class="flex items-baseline hover:underline" <?= $comment->actor->is_local
                 ? ''
                 : 'target="_blank" rel="noopener noreferrer"' ?>>
                 <span class="mr-2 font-semibold truncate"><?= $comment->actor
@@ -22,16 +22,16 @@
         <?php else: ?>
             <footer>
                 <button class="inline-flex items-center opacity-50 cursor-not-allowed" title="<?= lang(
-                    'Comment.likes',
-                    [
-                        'numberOfLikes' => $comment->likes_count,
-                    ],
-                ) ?>"><?= icon('heart', 'text-xl mr-1 text-gray-500') . lang(
-                    'Comment.likes',
-                    [
-                        'numberOfLikes' => $comment->likes_count,
-                    ],
-                ) ?></button>
+                            'Comment.likes',
+                            [
+                                'numberOfLikes' => $comment->likes_count,
+                            ],
+                        ) ?>"><?= icon('heart', 'text-xl mr-1 text-gray-500') . lang(
+                            'Comment.likes',
+                            [
+                                'numberOfLikes' => $comment->likes_count,
+                            ],
+                        ) ?></button>
             </footer>
         <?php endif; ?>
     </div>

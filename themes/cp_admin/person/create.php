@@ -83,8 +83,13 @@
 <?= button(
     lang('Person.form.submit_create'),
     '',
-    ['variant' => 'primary'],
-    ['type' => 'submit', 'class' => 'self-end'],
+    [
+        'variant' => 'primary',
+    ],
+    [
+        'type' => 'submit',
+        'class' => 'self-end',
+    ],
 ) ?>
 
 

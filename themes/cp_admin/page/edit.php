@@ -16,7 +16,9 @@
 ]) ?>
 <?= csrf_field() ?>
 
-<?= form_label(lang('Page.form.title'), 'title', ['class' => 'max-w-sm']) ?>
+<?= form_label(lang('Page.form.title'), 'title', [
+    'class' => 'max-w-sm',
+]) ?>
 <?= form_input([
     'id' => 'title',
     'name' => 'title',
@@ -52,8 +54,13 @@
 <?= button(
     lang('Page.form.submit_edit'),
     '',
-    ['variant' => 'primary'],
-    ['type' => 'submit', 'class' => 'self-end'],
+    [
+        'variant' => 'primary',
+    ],
+    [
+        'type' => 'submit',
+        'class' => 'self-end',
+    ],
 ) ?>
 
 <?= form_close() ?>

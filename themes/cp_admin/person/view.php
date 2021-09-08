@@ -13,8 +13,13 @@
 <?= button(
     lang('Person.edit'),
     route_to('person-edit', $person->id),
-    ['variant' => 'secondary', 'iconLeft' => 'edit'],
-    ['class' => 'mr-2'],
+    [
+        'variant' => 'secondary',
+        'iconLeft' => 'edit',
+    ],
+    [
+        'class' => 'mr-2',
+    ],
 ) ?>
 <?= $this->endSection() ?>
 

@@ -3,7 +3,7 @@
     <div class="flex-1">
         <header class="w-full mb-2 text-sm">
             <a href="<?= $comment->actor
-                ->uri ?>" class="flex items-baseline hover:underline" <?= $comment->actor->is_local
+    ->uri ?>" class="flex items-baseline hover:underline" <?= $comment->actor->is_local
                 ? ''
                 : 'target="_blank" rel="noopener noreferrer"' ?>>
                 <span class="mr-2 font-semibold truncate"><?= $comment->actor
@@ -23,16 +23,16 @@
             <footer>
                 <form action="<?= route_to('comment-attempt-like', interact_as_actor()->username, $episode->slug, $comment->id) ?>" method="POST" class="flex items-center gap-x-4">
                     <button type="submit" name="action" class="inline-flex items-center hover:underline group" title="<?= lang(
-                        'Comment.likes',
-                        [
-                            'numberOfLikes' => $comment->likes_count,
-                        ],
-                    ) ?>"><?= icon('heart', 'text-xl mr-1 text-gray-400 group-hover:text-red-600') . lang(
-                        'Comment.likes',
-                        [
-                            'numberOfLikes' => $comment->likes_count,
-                        ],
-                    ) ?></button>
+                            'Comment.likes',
+                            [
+                                'numberOfLikes' => $comment->likes_count,
+                            ],
+                        ) ?>"><?= icon('heart', 'text-xl mr-1 text-gray-400 group-hover:text-red-600') . lang(
+                            'Comment.likes',
+                            [
+                                'numberOfLikes' => $comment->likes_count,
+                            ],
+                        ) ?></button>
                 </form>
             </footer>
         <?php endif; ?>

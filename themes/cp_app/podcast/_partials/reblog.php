@@ -1,8 +1,8 @@
 <article class="relative z-10 w-full bg-white shadow rounded-2xl">
     <p class="inline-flex px-6 pt-4 text-xs text-gray-700"><?= icon(
-        'repeat',
-        'text-lg mr-2 text-gray-400',
-    ) .
+    'repeat',
+    'text-lg mr-2 text-gray-400',
+) .
         lang('Post.actor_shared', [
             'actor' => $post->actor->display_name,
         ]) ?></p>
@@ -11,14 +11,14 @@
             ->avatar_image_url ?>" alt="<?= $post->display_name ?>" class="w-12 h-12 mr-4 rounded-full" />
         <div class="flex flex-col min-w-0">
             <a href="<?= $post->actor
-                ->uri ?>" class="flex items-baseline hover:underline" <?= $post
-    ->actor->is_local
+            ->uri ?>" class="flex items-baseline hover:underline" <?= $post
+            ->actor->is_local
     ? ''
     : 'target="_blank" rel="noopener noreferrer"' ?>>
                 <span class="mr-2 font-semibold truncate"><?= $post->actor
-                    ->display_name ?></span>
+        ->display_name ?></span>
                 <span class="text-sm text-gray-500 truncate">@<?= $post->actor
-                    ->username .
+        ->username .
                     ($post->actor->is_local
                         ? ''
                         : '@' . $post->actor->domain) ?></span>

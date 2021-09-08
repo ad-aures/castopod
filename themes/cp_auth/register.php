@@ -8,7 +8,9 @@
 
 <?= $this->section('content') ?>
 
-<?= form_open(route_to('register'), ['class' => 'flex flex-col']) ?>
+<?= form_open(route_to('register'), [
+    'class' => 'flex flex-col',
+]) ?>
 <?= csrf_field() ?>
 
 <?= form_label(lang('Auth.email'), 'email') ?>
@@ -47,8 +49,13 @@
 <?= button(
     lang('Auth.register'),
     '',
-    ['variant' => 'primary'],
-    ['type' => 'submit', 'class' => 'self-end'],
+    [
+        'variant' => 'primary',
+    ],
+    [
+        'type' => 'submit',
+        'class' => 'self-end',
+    ],
 ) ?>
 
 <?= form_close() ?>
@@ -60,10 +67,10 @@
 
 <p class="py-4 text-sm text-center">
     <?= lang(
-        'Auth.alreadyRegistered',
-    ) ?> <a class="underline hover:no-underline" href="<?= route_to(
-     'login',
- ) ?>"><?= lang('Auth.signIn') ?></a>
+    'Auth.alreadyRegistered',
+) ?> <a class="underline hover:no-underline" href="<?= route_to(
+    'login',
+) ?>"><?= lang('Auth.signIn') ?></a>
 </p>
 
 <?= $this->endSection() ?>

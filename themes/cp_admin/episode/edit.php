@@ -23,8 +23,8 @@
 </div>
 
 <?= form_section(
-    lang('Episode.form.info_section_title'),
-    '<img
+            lang('Episode.form.info_section_title'),
+            '<img
     src="' .
         $episode->image->medium_url .
         '"
@@ -33,7 +33,7 @@
         '"
     class="w-48"
 />',
-) ?>
+        ) ?>
 
 <Forms.Label for="audio_file" hint="<?= lang('Episode.form.audio_file_hint') ?>"><?= lang('Episode.form.audio_file') ?></Forms.Label>
 <?= form_input([
@@ -76,7 +76,7 @@
         'value' => old('slug', $episode->slug),
         'required' => 'required',
         'data-slugify' => 'slug',
-        'slot' => 'slug-input'
+        'slot' => 'slug-input',
     ]) ?>
 </permalink-edit>
 
@@ -103,93 +103,109 @@
     </div>
 </div>
 
-<?= form_fieldset('', ['class' => 'flex mb-4 gap-1']) ?>
+<?= form_fieldset('', [
+    'class' => 'flex mb-4 gap-1',
+]) ?>
 <legend>
     <?= lang('Episode.form.type.label') .
         hint_tooltip(lang('Episode.form.type.hint'), 'ml-1') ?>
 </legend>
 <?= form_radio(
-    ['id' => 'full', 'name' => 'type', 'class' => 'form-radio-btn'],
-    'full',
-    old('type') ? old('type') === 'full' : $episode->type === 'full',
-) ?>
+            [
+                'id' => 'full',
+                'name' => 'type',
+                'class' => 'form-radio-btn',
+            ],
+            'full',
+            old('type') ? old('type') === 'full' : $episode->type === 'full',
+        ) ?>
 <label for="full" class="inline-flex items-center">
     <?= lang('Episode.form.type.full') ?>
 </label>
 <?= form_radio(
-    ['id' => 'trailer', 'name' => 'type', 'class' => 'form-radio-btn'],
-    'trailer',
-    old('type') ? old('type') === 'trailer' : $episode->type === 'trailer',
-) ?>
+            [
+                'id' => 'trailer',
+                'name' => 'type',
+                'class' => 'form-radio-btn',
+            ],
+            'trailer',
+            old('type') ? old('type') === 'trailer' : $episode->type === 'trailer',
+        ) ?>
 <label for="trailer" class="inline-flex items-center">
     <?= lang('Episode.form.type.trailer') ?>
 </label>
 <?= form_radio(
-    ['id' => 'bonus', 'name' => 'type', 'class' => 'form-radio-btn'],
-    'bonus',
-    old('type') ? old('type') === 'bonus' : $episode->type === 'bonus',
-) ?>
+            [
+                'id' => 'bonus',
+                'name' => 'type',
+                'class' => 'form-radio-btn',
+            ],
+            'bonus',
+            old('type') ? old('type') === 'bonus' : $episode->type === 'bonus',
+        ) ?>
 <label for="bonus" class="inline-flex items-center">
     <?= lang('Episode.form.type.bonus') ?>
 </label>
 <?= form_fieldset_close() ?>
 
-<?= form_fieldset('', ['class' => 'mb-6']) ?>
+<?= form_fieldset('', [
+    'class' => 'mb-6',
+]) ?>
 <legend>
     <?= lang('Episode.form.parental_advisory.label') .
         hint_tooltip(lang('Episode.form.parental_advisory.hint'), 'ml-1') ?>
 </legend>
 <?= form_radio(
-    [
-        'id' => 'undefined',
-        'name' => 'parental_advisory',
-        'class' => 'form-radio-btn',
-    ],
-    'undefined',
-    old('parental_advisory')
+            [
+                'id' => 'undefined',
+                'name' => 'parental_advisory',
+                'class' => 'form-radio-btn',
+            ],
+            'undefined',
+            old('parental_advisory')
         ? old('parental_advisory') === 'undefined'
         : $episode->parental_advisory === null,
-) ?>
+        ) ?>
 <label for="undefined"><?= lang(
-                            'Episode.form.parental_advisory.undefined',
-                        ) ?></label>
+            'Episode.form.parental_advisory.undefined',
+        ) ?></label>
 <?= form_radio(
-    [
-        'id' => 'clean',
-        'name' => 'parental_advisory',
-        'class' => 'form-radio-btn',
-    ],
-    'clean',
-    old('parental_advisory')
+            [
+                'id' => 'clean',
+                'name' => 'parental_advisory',
+                'class' => 'form-radio-btn',
+            ],
+            'clean',
+            old('parental_advisory')
         ? old('parental_advisory') === 'clean'
         : $episode->parental_advisory === 'clean',
-) ?>
+        ) ?>
 <label for="clean"><?= lang(
-                        'Episode.form.parental_advisory.clean',
-                    ) ?></label>
+            'Episode.form.parental_advisory.clean',
+        ) ?></label>
 <?= form_radio(
-    [
-        'id' => 'explicit',
-        'name' => 'parental_advisory',
-        'class' => 'form-radio-btn',
-    ],
-    'explicit',
-    old('parental_advisory')
+            [
+                'id' => 'explicit',
+                'name' => 'parental_advisory',
+                'class' => 'form-radio-btn',
+            ],
+            'explicit',
+            old('parental_advisory')
         ? old('parental_advisory') === 'explicit'
         : $episode->parental_advisory === 'explicit',
-) ?>
+        ) ?>
 <label for="explicit"><?= lang(
-                            'Episode.form.parental_advisory.explicit',
-                        ) ?></label>
+            'Episode.form.parental_advisory.explicit',
+        ) ?></label>
 <?= form_fieldset_close() ?>
 
 <?= form_section_close() ?>
 
 
 <?= form_section(
-    lang('Episode.form.show_notes_section_title'),
-    lang('Episode.form.show_notes_section_subtitle'),
-) ?>
+            lang('Episode.form.show_notes_section_title'),
+            lang('Episode.form.show_notes_section_subtitle'),
+        ) ?>
 
 <div class="mb-4">
     <Forms.Label for="description"><?= lang('Episode.form.description') ?></Forms.Label>
@@ -204,9 +220,9 @@
 <?= form_section_close() ?>
 
 <?= form_section(
-    lang('Episode.form.location_section_title'),
-    lang('Episode.form.location_section_subtitle'),
-) ?>
+            lang('Episode.form.location_section_title'),
+            lang('Episode.form.location_section_subtitle'),
+        ) ?>
 
 <Forms.Label for="location_name" hint="<?= lang('Episode.form.location_name_hint') ?>" isOptional="true"><?= lang('Episode.form.location_name') ?></Forms.Label>
 <?= form_input([
@@ -226,7 +242,9 @@
     ]),
 ) ?>
 
-<?= form_fieldset('', ['class' => 'flex flex-col mb-4']) ?>
+<?= form_fieldset('', [
+    'class' => 'flex flex-col mb-4',
+]) ?>
 <legend><?= lang('Episode.form.transcript') .
             '<small class="ml-1 lowercase">(' .
             lang('Common.optional') .
@@ -237,30 +255,30 @@
                                                                                                                                                             ? ''
                                                                                                                                                             : 'checked' ?> />
     <label for="transcript-file-upload-choice"><?= lang(
-                                                    'Common.forms.upload_file',
-                                                ) ?></label>
+                                                                                                                                                                'Common.forms.upload_file',
+                                                                                                                                                            ) ?></label>
 
     <input type="radio" name="transcript-choice" id="transcript-file-remote-url-choice" aria-controls="transcript-file-remote-url-choice" value="remote-url" <?= $episode->transcript_file_remote_url
                                                                                                                                                                     ? 'checked'
                                                                                                                                                                     : '' ?> />
     <label for="transcript-file-remote-url-choice"><?= lang(
-                                                        'Common.forms.remote_url',
-                                                    ) ?></label>
+                                                                                                                                                                        'Common.forms.remote_url',
+                                                                                                                                                                    ) ?></label>
 
     <div class="py-2 tab-panels">
         <section id="transcript-file-upload" class="flex items-center tab-panel">
             <?php if ($episode->transcript_file) : ?>
                 <div class="flex justify-between">
                     <?= anchor(
-                        $episode->transcript_file_url,
-                        icon('file', 'mr-2 text-gray-500') .
+                                                                                                                                                                        $episode->transcript_file_url,
+                                                                                                                                                                        icon('file', 'mr-2 text-gray-500') .
                             $episode->transcript_file,
-                        [
-                            'class' => 'inline-flex items-center text-xs',
-                            'target' => '_blank',
-                            'rel' => 'noreferrer noopener',
-                        ],
-                    ) .
+                                                                                                                                                                        [
+                                                                                                                                                                            'class' => 'inline-flex items-center text-xs',
+                                                                                                                                                                            'target' => '_blank',
+                                                                                                                                                                            'rel' => 'noreferrer noopener',
+                                                                                                                                                                        ],
+                                                                                                                                                                    ) .
                         anchor(
                             route_to(
                                 'transcript-delete',
@@ -307,7 +325,9 @@
 </div>
 <?= form_fieldset_close() ?>
 
-<?= form_fieldset('', ['class' => 'flex flex-col mb-4']) ?>
+<?= form_fieldset('', [
+    'class' => 'flex flex-col mb-4',
+]) ?>
 <legend><?= lang('Episode.form.chapters') .
             '<small class="ml-1 lowercase">(' .
             lang('Common.optional') .
@@ -318,29 +338,29 @@
                                                                                                                                                     ? ''
                                                                                                                                                     : 'checked' ?> />
     <label for="chapters-file-upload-choice"><?= lang(
-                                                    'Common.forms.upload_file',
-                                                ) ?></label>
+                                                                                                                                                        'Common.forms.upload_file',
+                                                                                                                                                    ) ?></label>
 
     <input type="radio" name="chapters-choice" id="chapters-file-remote-url-choice" aria-controls="chapters-file-remote-url-choice" value="remote-url" <?= $episode->chapters_file_remote_url
                                                                                                                                                             ? 'checked'
                                                                                                                                                             : '' ?> />
     <label for="chapters-file-remote-url-choice"><?= lang(
-                                                        'Common.forms.remote_url',
-                                                    ) ?></label>
+                                                                                                                                                                'Common.forms.remote_url',
+                                                                                                                                                            ) ?></label>
 
     <div class="py-2 tab-panels">
         <section id="chapters-file-upload" class="flex items-center tab-panel">
             <?php if ($episode->chapters_file) : ?>
                 <div class="flex justify-between">
                     <?= anchor(
-                        $episode->chapters_file_url,
-                        icon('file', 'mr-2') . $episode->chapters_file,
-                        [
-                            'class' => 'inline-flex items-center text-xs',
-                            'target' => '_blank',
-                            'rel' => 'noreferrer noopener',
-                        ],
-                    ) .
+                                                                                                                                                                $episode->chapters_file_url,
+                                                                                                                                                                icon('file', 'mr-2') . $episode->chapters_file,
+                                                                                                                                                                [
+                                                                                                                                                                    'class' => 'inline-flex items-center text-xs',
+                                                                                                                                                                    'target' => '_blank',
+                                                                                                                                                                    'rel' => 'noreferrer noopener',
+                                                                                                                                                                ],
+                                                                                                                                                            ) .
                         anchor(
                             route_to(
                                 'chapters-delete',
@@ -390,9 +410,9 @@
 <?= form_section_close() ?>
 
 <?= form_section(
-    lang('Episode.form.advanced_section_title'),
-    lang('Episode.form.advanced_section_subtitle'),
-) ?>
+                lang('Episode.form.advanced_section_title'),
+                lang('Episode.form.advanced_section_subtitle'),
+            ) ?>
 <Forms.Label for="custom_rss" hint="<?= lang('Episode.form.custom_rss_hint') ?>" isOptional="true"><?= lang('Episode.form.custom_rss') ?></Forms.Label>
 <Forms.XMLEditor id="custom_rss" name="custom_rss"><?= old('custom_rss', $episode->custom_rss_string, false) ?></Forms.XMLEditor>
 
@@ -402,17 +422,25 @@
 
 <div class="flex items-center justify-between">
     <?= button(
-        lang('Episode.delete'),
-        route_to('episode-delete', $podcast->id, $episode->id),
-        ['variant' => 'danger', 'iconLeft' => 'delete-bin'],
-    ) ?>
+                lang('Episode.delete'),
+                route_to('episode-delete', $podcast->id, $episode->id),
+                [
+                    'variant' => 'danger',
+                    'iconLeft' => 'delete-bin',
+                ],
+            ) ?>
 
     <?= button(
-        lang('Episode.form.submit_edit'),
-        '',
-        ['variant' => 'primary'],
-        ['type' => 'submit', 'class' => 'self-end'],
-    ) ?>
+                lang('Episode.form.submit_edit'),
+                '',
+                [
+                    'variant' => 'primary',
+                ],
+                [
+                    'type' => 'submit',
+                    'class' => 'self-end',
+                ],
+            ) ?>
 </div>
 
 <?= form_close() ?>

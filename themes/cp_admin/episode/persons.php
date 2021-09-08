@@ -12,8 +12,13 @@
 <?= button(
     lang('Person.create'),
     route_to('person-create'),
-    ['variant' => 'primary', 'iconLeft' => 'add'],
-    ['class' => 'mr-2'],
+    [
+        'variant' => 'primary',
+        'iconLeft' => 'add',
+    ],
+    [
+        'class' => 'mr-2',
+    ],
 ) ?>
 <?= $this->endSection() ?>
 
@@ -105,8 +110,13 @@
 <?= button(
     lang('Person.episode_form.submit_add'),
     '',
-    ['variant' => 'primary'],
-    ['type' => 'submit', 'class' => 'self-end'],
+    [
+        'variant' => 'primary',
+    ],
+    [
+        'type' => 'submit',
+        'class' => 'self-end',
+    ],
 ) ?>
 <?= form_close() ?>
 

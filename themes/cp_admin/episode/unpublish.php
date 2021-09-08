@@ -21,15 +21,15 @@
 
 <label for="understand" class="inline-flex items-center mb-4">
     <?= form_checkbox(
-        [
-            'id' => 'understand',
-            'name' => 'understand',
-            'class' => 'text-pine-700',
-            'required' => 'required',
-        ],
-        'yes',
-        old('understand', false),
-    ) ?>
+    [
+        'id' => 'understand',
+        'name' => 'understand',
+        'class' => 'text-pine-700',
+        'required' => 'required',
+    ],
+    'yes',
+    old('understand', false),
+) ?>
     <span class="ml-2"><?= lang('Episode.unpublish_form.understand') ?></span>
 </label>
 
@@ -42,8 +42,12 @@
 <?= button(
     lang('Episode.unpublish_form.submit'),
     '',
-    ['variant' => 'danger'],
-    ['type' => 'submit'],
+    [
+        'variant' => 'danger',
+    ],
+    [
+        'type' => 'submit',
+    ],
 ) ?>
 </div>
 

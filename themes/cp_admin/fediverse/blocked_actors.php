@@ -35,8 +35,13 @@
 <?= button(
     lang('Fediverse.block_lists_form.submit'),
     '',
-    ['variant' => 'primary'],
-    ['type' => 'submit', 'class' => 'self-end'],
+    [
+        'variant' => 'primary',
+    ],
+    [
+        'type' => 'submit',
+        'class' => 'self-end',
+    ],
 ) ?>
 
 <?= form_close() ?>
@@ -66,7 +71,10 @@
                             'fediverse-unblock-actor',
                             $blockedActor->username,
                         ),
-                        ['variant' => 'info', 'size' => 'small'],
+                        [
+                            'variant' => 'info',
+                            'size' => 'small',
+                        ],
                         [
                             'class' => 'mr-2',
                             'type' => 'submit',

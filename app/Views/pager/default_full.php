@@ -1,10 +1,8 @@
-<?php
+<?php declare(strict_types=1);
 
 use CodeIgniter\Pager\PagerRenderer;
 
-/**
- * @var PagerRenderer $pager
- */
+/** @var PagerRenderer $pager */
 $pager->setSurroundCount(2);
 ?>
 
@@ -23,8 +21,8 @@ $pager->setSurroundCount(2);
     'Pager.previous',
 ) ?>" class="block px-3 py-2 text-gray-700 hover:bg-gray-200 hover:text-black">
                     <span aria-hidden="true"><?= lang(
-                        'Pager.previous',
-                    ) ?></span>
+    'Pager.previous',
+) ?></span>
                 </a>
             </li>
         <?php endif; ?>
@@ -48,15 +46,15 @@ $pager->setSurroundCount(2);
         <?php if ($pager->hasNextPage()): ?>
             <li>
                 <a href="<?= $pager->getNextPage() ?>" aria-label="<?= lang(
-    'Pager.next',
-) ?>" class="block px-3 py-2 text-gray-700 hover:bg-gray-200 hover:text-black">
+                        'Pager.next',
+                    ) ?>" class="block px-3 py-2 text-gray-700 hover:bg-gray-200 hover:text-black">
                     <span aria-hidden="true"><?= lang('Pager.next') ?></span>
                 </a>
             </li>
             <li>
                 <a href="<?= $pager->getLast() ?>" aria-label="<?= lang(
-    'Pager.last',
-) ?>" class="block px-3 py-2 text-gray-700 hover:bg-gray-200 hover:text-black">
+                        'Pager.last',
+                    ) ?>" class="block px-3 py-2 text-gray-700 hover:bg-gray-200 hover:text-black">
                     <span aria-hidden="true"><?= lang('Pager.last') ?></span>
                 </a>
             </li>

@@ -11,7 +11,9 @@
 
 <?= $this->section('content') ?>
 
-<?= form_open(route_to('user-create'), ['class' => 'flex flex-col max-w-sm']) ?>
+<?= form_open(route_to('user-create'), [
+    'class' => 'flex flex-col max-w-sm',
+]) ?>
 <?= csrf_field() ?>
 
 <?= form_label(lang('User.form.email'), 'email') ?>
@@ -43,8 +45,13 @@
 <?= button(
     lang('User.form.submit_create'),
     '',
-    ['variant' => 'primary'],
-    ['type' => 'submit', 'class' => 'self-end'],
+    [
+        'variant' => 'primary',
+    ],
+    [
+        'type' => 'submit',
+        'class' => 'self-end',
+    ],
 ) ?>
 
 <?= form_close() ?>

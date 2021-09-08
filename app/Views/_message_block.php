@@ -1,4 +1,6 @@
-<?php if (session()->has('message')): ?>
+<?php declare(strict_types=1);
+
+if (session()->has('message')): ?>
     <div class="px-4 py-2 mb-4 font-semibold text-green-900 bg-green-200 border border-green-700">
         <?= session('message') ?>
     </div>

@@ -1,11 +1,15 @@
 <?= $this->extend('_layout') ?>
 
 <?= $this->section('title') ?>
-<?= lang('User.edit_roles', ['username' => $user->username]) ?>
+<?= lang('User.edit_roles', [
+    'username' => $user->username,
+]) ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('pageTitle') ?>
-<?= lang('User.edit_roles', ['username' => $user->username]) ?>
+<?= lang('User.edit_roles', [
+    'username' => $user->username,
+]) ?>
 <?= $this->endSection() ?>
 
 
@@ -22,8 +26,13 @@
 <?= button(
     lang('User.form.submit_edit'),
     '',
-    ['variant' => 'primary'],
-    ['type' => 'submit', 'class' => 'self-end'],
+    [
+        'variant' => 'primary',
+    ],
+    [
+        'type' => 'submit',
+        'class' => 'self-end',
+    ],
 ) ?>
 
 <?= form_close() ?>

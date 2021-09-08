@@ -10,7 +10,9 @@
 
 <p class="mb-4"><?= lang('Auth.enterCodeEmailPassword') ?></p>
 
-<?= form_open(route_to('reset-password'), ['class' => 'flex flex-col']) ?>
+<?= form_open(route_to('reset-password'), [
+    'class' => 'flex flex-col',
+]) ?>
 <?= csrf_field() ?>
 
 <?= form_label(lang('Auth.token'), 'token') ?>
@@ -45,8 +47,13 @@
 <?= button(
     lang('Auth.resetPassword'),
     '',
-    ['variant' => 'primary'],
-    ['type' => 'submit', 'class' => 'self-end'],
+    [
+        'variant' => 'primary',
+    ],
+    [
+        'type' => 'submit',
+        'class' => 'self-end',
+    ],
 ) ?>
 
 <?= form_close() ?>

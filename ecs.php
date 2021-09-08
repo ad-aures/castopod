@@ -1,9 +1,11 @@
 <?php
 
+use PhpCsFixer\Fixer\Whitespace\IndentationTypeFixer;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\CodingStandard\Fixer\Naming\StandardizeHereNowDocKeywordFixer;
 use Symplify\EasyCodingStandard\ValueObject\Option;
 use Symplify\EasyCodingStandard\ValueObject\Set\SetList;
+use Symplify\CodingStandard\Fixer\LineLength\LineLengthFixer;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters = $containerConfigurator->parameters();
@@ -12,21 +14,32 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters->set(Option::PATHS, [
         __DIR__ . '/app',
         __DIR__ . '/modules',
+        __DIR__ . '/themes',
         __DIR__ . '/tests',
+        __DIR__ . '/public',
         __DIR__ . '/public',
     ]);
 
     $parameters->set(Option::SKIP, [
-        // TODO: restrict some rules for views?
-        __DIR__ . '/app/Views/*',
-        __DIR__ . '/modules/**/Views/*',
-
         // skip specific generated files
         __DIR__ . '/modules/Admin/Language/*/PersonsTaxonomy.php',
 
         StandardizeHereNowDocKeywordFixer::class => [
-            __DIR__ . '/app/View/Components',
-            __DIR__ . '/modules/**/View/Components',
+            __DIR__ . '/app/Views/Components/*',
+            __DIR__ . '/modules/**/Views/Components/*',
+            __DIR__ . '/themes/**/Views/Components/*',
+        ],
+
+        LineLengthFixer::class => [
+            __DIR__ . '/app/Views/*',
+            __DIR__ . '/modules/**/Views/*',
+            __DIR__ . '/themes/*',
+        ],
+
+        IndentationTypeFixer::class => [
+            __DIR__ . '/app/Views/*',
+            __DIR__ . '/modules/**/Views/*',
+            __DIR__ . '/themes/*',
         ]
     ]);
 

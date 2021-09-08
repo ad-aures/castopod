@@ -1,6 +1,6 @@
 <aside id="main-sidebar" class="fixed top-0 right-0 flex flex-col items-start flex-shrink-0 w-64 h-screen px-6 py-4 overflow-y-auto transform translate-x-full lg:sticky lg:translate-x-0">
     <?php if (
-        in_array(true, array_column($podcast->fundingPlatforms, 'is_visible'))
+        in_array(true, array_column($podcast->fundingPlatforms, 'is_visible'), true)
     ): ?>
     <h2 class="mb-2 text-sm font-semibold"><?= lang(
         'Podcast.sponsor_title',
@@ -13,7 +13,7 @@
     <?php endif; ?>
 
     <?php if (
-        in_array(true, array_column($podcast->socialPlatforms, 'is_visible'))
+        in_array(true, array_column($podcast->socialPlatforms, 'is_visible'), true)
     ): ?>
     <h2 class="mb-2 text-sm font-semibold"> <?= lang('Podcast.find_on', [
         'podcastTitle' => $podcast->title,
@@ -22,17 +22,17 @@
     <?php foreach ($podcast->socialPlatforms as $socialPlatform): ?>
         <?php if ($socialPlatform->is_visible): ?>
             <?= anchor(
-                $socialPlatform->link_url,
-                icon($socialPlatform->type . '/' . $socialPlatform->slug),
-                [
-                    'class' => 'text-2xl text-gray-500 hover:text-gray-700',
-                    'target' => '_blank',
-                    'rel' => 'noopener noreferrer',
-                    'data-toggle' => 'tooltip',
-                    'data-placement' => 'bottom',
-                    'title' => $socialPlatform->label,
-                ],
-            ) ?>
+        $socialPlatform->link_url,
+        icon($socialPlatform->type . '/' . $socialPlatform->slug),
+        [
+            'class' => 'text-2xl text-gray-500 hover:text-gray-700',
+            'target' => '_blank',
+            'rel' => 'noopener noreferrer',
+            'data-toggle' => 'tooltip',
+            'data-placement' => 'bottom',
+            'title' => $socialPlatform->label,
+        ],
+    ) ?>
         <?php endif; ?>
     <?php endforeach; ?>
     </div>
@@ -52,21 +52,21 @@
         <?php foreach ($podcast->podcastingPlatforms as $podcastingPlatform): ?>
             <?php if ($podcastingPlatform->is_visible): ?>
                 <?= anchor(
-                    $podcastingPlatform->link_url,
-                    icon(
-                        $podcastingPlatform->type .
+            $podcastingPlatform->link_url,
+            icon(
+                $podcastingPlatform->type .
                             '/' .
                             $podcastingPlatform->slug,
-                    ),
-                    [
-                        'class' => 'text-2xl text-gray-500 hover:text-gray-700',
-                        'target' => '_blank',
-                        'rel' => 'noopener noreferrer',
-                        'data-toggle' => 'tooltip',
-                        'data-placement' => 'bottom',
-                        'title' => $podcastingPlatform->label,
-                    ],
-                ) ?>
+            ),
+            [
+                'class' => 'text-2xl text-gray-500 hover:text-gray-700',
+                'target' => '_blank',
+                'rel' => 'noopener noreferrer',
+                'data-toggle' => 'tooltip',
+                'data-placement' => 'bottom',
+                'title' => $podcastingPlatform->label,
+            ],
+        ) ?>
             <?php endif; ?>
     <?php endforeach; ?>
     </div>

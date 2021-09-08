@@ -4,12 +4,12 @@
     <div class="flex flex-col flex-1 min-w-0">
         <header class="flex items-center mb-2">
             <a href="<?= $reply->actor
-                ->uri ?>" class="mr-2 text-base font-semibold truncate hover:underline" <?= $reply
+    ->uri ?>" class="mr-2 text-base font-semibold truncate hover:underline" <?= $reply
     ->actor->is_local
     ? ''
     : 'target="_blank" rel="noopener noreferrer"' ?>><?= $reply->actor
-    ->display_name ?><span class="ml-1 text-sm font-normal text-gray-600">@<?= $reply
-    ->actor->username .
+        ->display_name ?><span class="ml-1 text-sm font-normal text-gray-600">@<?= $reply
+        ->actor->username .
     ($reply->actor->is_local ? '' : '@' . $reply->actor->domain) ?></span></a>
             <?= relative_time($post->published_at, 'flex-shrink-0 ml-auto text-xs text-gray-600') ?>
         </header>

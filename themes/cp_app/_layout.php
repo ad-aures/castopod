@@ -1,6 +1,7 @@
 <?= helper('page') ?>
 <!DOCTYPE html>
-<html lang="<?= service('request')->getLocale() ?>">
+<html lang="<?= service('request')
+    ->getLocale() ?>">
 
 <head>
     <meta charset="UTF-8"/>
@@ -9,8 +10,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
 
-    <?= service('vite')->asset('styles/index.css', 'css') ?>
-    <?= service('vite')->asset('js/audio-player.ts', 'js') ?>
+    <?= service('vite')
+        ->asset('styles/index.css', 'css') ?>
+    <?= service('vite')
+        ->asset('js/audio-player.ts', 'js') ?>
 </head>
 
 <body class="flex flex-col min-h-screen mx-auto bg-gray-100">

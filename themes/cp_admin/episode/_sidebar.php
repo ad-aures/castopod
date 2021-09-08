@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 $podcastNavigation = [
     'dashboard' => [
         'icon' => 'dashboard',
@@ -7,7 +8,7 @@ $podcastNavigation = [
 ]; ?>
 
 <a href="<?= route_to('podcast-view', $podcast->id) ?>" class="flex items-center px-4 py-2 border-b border-pine-900 focus:ring">
-    <?= icon('arrow-left', 'mr-2' ) ?>
+    <?= icon('arrow-left', 'mr-2') ?>
     <img
     src="<?= $podcast->image->thumbnail_url ?>"
     alt="<?= $podcast->title ?>"
@@ -24,12 +25,12 @@ $podcastNavigation = [
     <div class="flex flex-col items-start flex-1 w-48 px-2">
         <span class="w-full font-semibold truncate" title="<?= $episode->title ?>"><?= $episode->title ?></span>
         <a href="<?= route_to(
-            'episode',
-            $podcast->handle,
-            $episode->slug,
-        ) ?>" class="inline-flex items-center text-xs outline-none hover:underline focus:ring"><?= lang(
-            'EpisodeNavigation.go_to_page',
-        ) ?>
+    'episode',
+    $podcast->handle,
+    $episode->slug,
+) ?>" class="inline-flex items-center text-xs outline-none hover:underline focus:ring"><?= lang(
+    'EpisodeNavigation.go_to_page',
+) ?>
         <?= icon('external-link', 'ml-1 opacity-60') ?>
         </a>
     </div>
@@ -48,10 +49,10 @@ $podcastNavigation = [
                 <a class="w-full py-1 pl-14 pr-2 text-sm outline-none hover:opacity-100 focus:ring <?= $isActive
                     ? 'font-semibold opacity-100 inline-flex items-center'
                     : 'opacity-75' ?>" href="<?= route_to(
-                    $item,
-                    $podcast->id,
-                    $episode->id
-                ) ?>"><?= ($isActive ? icon('chevron-right', 'mr-2') : '') .lang('EpisodeNavigation.' . $item) ?></a>
+                        $item,
+                        $podcast->id,
+                        $episode->id
+                    ) ?>"><?= ($isActive ? icon('chevron-right', 'mr-2') : '') . lang('EpisodeNavigation.' . $item) ?></a>
             </li>
             <?php endforeach; ?>
         </ul>

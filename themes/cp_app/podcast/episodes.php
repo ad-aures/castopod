@@ -15,11 +15,14 @@
 <meta property="og:site_name" content="<?= $podcast->title ?>" />
 <meta property="og:url" content="<?= current_url() ?>" />
 <meta property="og:image" content="<?= $podcast->image->large_url ?>" />
-<meta property="og:image:width" content="<?= config('Images')->largeSize ?>" />
-<meta property="og:image:height" content="<?= config('Images')->largeSize ?>" />
+<meta property="og:image:width" content="<?= config('Images')
+    ->largeSize ?>" />
+<meta property="og:image:height" content="<?= config('Images')
+    ->largeSize ?>" />
 <meta name="twitter:card" content="summary_large_image" />
 
-<?= service('vite')->asset('styles/index.css', 'css') ?>
+<?= service('vite')
+    ->asset('styles/index.css', 'css') ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -28,18 +31,18 @@
         'podcast-activity',
         $podcast->handle,
     ) ?>" class="px-4 py-1 mr-8 rounded-full hover:bg-pine-100"><?= lang(
-    'Podcast.activity',
-) ?></a>
+        'Podcast.activity',
+    ) ?></a>
     <a href="<?= route_to(
         'podcast-episodes',
         $podcast->handle,
     ) ?>" class="px-4 py-1 font-semibold border-b-4 text-pine-800 border-pine-500"><?= lang(
-    'Podcast.episodes',
-) ?></a>
+        'Podcast.episodes',
+    ) ?></a>
     <?php if ($activeQuery): ?>
         <button id="episode-lists-dropdown" type="button" class="inline-flex items-center px-2 py-1 text-sm font-semibold outline-none focus:ring" data-dropdown="button" data-dropdown-target="episode-lists-dropdown-menu" aria-label="<?= lang(
-            'Common.more',
-        ) ?>" aria-haspopup="true" aria-expanded="false">
+        'Common.more',
+    ) ?>" aria-haspopup="true" aria-expanded="false">
             <?= $activeQuery['label'] .
                 ' (' .
                 $activeQuery['number_of_episodes'] .
@@ -68,12 +71,12 @@
 
     <?php if ($episodes): ?>
         <h1 class="mb-4 text-xl font-semibold">
-            <?php if ($activeQuery['type'] == 'year'): ?>
+            <?php if ($activeQuery['type'] === 'year'): ?>
                 <?= lang('Podcast.list_of_episodes_year', [
                     'year' => $activeQuery['value'],
                     'episodeCount' => count($episodes),
                 ]) ?>
-            <?php elseif ($activeQuery['type'] == 'season'): ?>
+            <?php elseif ($activeQuery['type'] === 'season'): ?>
                 <?= lang('Podcast.list_of_episodes_season', [
                     'seasonNumber' => $activeQuery['value'],
                     'episodeCount' => count($episodes),
@@ -83,13 +86,13 @@
         <?php foreach ($episodes as $episode): ?>
             <?= view('podcast/_partials/episode_card', [
                 'episode' => $episode,
-                'podcast' => $podcast
+                'podcast' => $podcast,
             ]) ?>
         <?php endforeach; ?>
     <?php else: ?>
         <h1 class="px-4 mb-2 text-xl text-center"><?= lang(
-            'Podcast.no_episode',
-        ) ?></h1>
+                'Podcast.no_episode',
+            ) ?></h1>
         <p class="italic text-center"><?= lang('Podcast.no_episode_hint') ?></p>
     <?php endif; ?>
 </section>

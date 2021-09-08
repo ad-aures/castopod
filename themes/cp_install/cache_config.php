@@ -28,15 +28,21 @@
         'id' => 'cache_handler',
         'name' => 'cache_handler',
         'class' => 'form-select mb-6',
-        'value' => config('Database')->default['DBPrefix'],
+        'value' => config('Database')
+            ->default['DBPrefix'],
     ],
 ) ?>
 
 <?= button(
     lang('Install.form.next') . icon('arrow-right', 'ml-2'),
     '',
-    ['variant' => 'primary'],
-    ['type' => 'submit', 'class' => 'self-end'],
+    [
+        'variant' => 'primary',
+    ],
+    [
+        'type' => 'submit',
+        'class' => 'self-end',
+    ],
 ) ?>
 
 <?= form_close() ?>

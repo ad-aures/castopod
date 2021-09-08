@@ -1,7 +1,8 @@
 <?= helper('page') ?>
 
 <!DOCTYPE html>
-<html lang="<?= service('request')->getLocale() ?>">
+<html lang="<?= service('request')
+    ->getLocale() ?>">
 
 <head>
     <meta charset="UTF-8" />
@@ -11,19 +12,20 @@
     
     <title><?= lang('Podcast.follow.title', [
         'actorDisplayName' => $actor->display_name,
-        ]) ?></title>
+    ]) ?></title>
     <meta name="description" content="<?= $actor->summary ?>"/>
     <meta property="og:title" content="<?= lang('Podcast.follow.title', [
         'actorDisplayName' => $actor->display_name,
-        ]) ?>"/>
+    ]) ?>"/>
     <meta property="og:locale" content="<?= service(
         'request',
-        )->getLocale() ?>" />
+    )->getLocale() ?>" />
     <meta property="og:url" content="<?= current_url() ?>" />
     <meta property="og:image" content="<?= $actor->avatar_image_url ?>" />
     <meta property="og:description" content="<?= $actor->summary ?>" />
 
-    <?= service('vite')->asset('styles/index.css', 'css') ?>
+    <?= service('vite')
+        ->asset('styles/index.css', 'css') ?>
 </head>
 
 
@@ -70,8 +72,13 @@
         <?= button(
             lang('Fediverse.follow.submit'),
             '',
-            ['variant' => 'primary'],
-            ['type' => 'submit', 'class' => 'self-end'],
+            [
+                'variant' => 'primary',
+            ],
+            [
+                'type' => 'submit',
+                'class' => 'self-end',
+            ],
         ) ?>
         <?= form_close() ?>
     </main>

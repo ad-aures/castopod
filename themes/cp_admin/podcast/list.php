@@ -12,8 +12,13 @@
 <?= button(
     lang('Podcast.create'),
     route_to('podcast-create'),
-    ['variant' => 'accent', 'iconLeft' => 'add'],
-    ['class' => 'mr-2'],
+    [
+        'variant' => 'accent',
+        'iconLeft' => 'add',
+    ],
+    [
+        'class' => 'mr-2',
+    ],
 ) ?>
 <?= button(lang('Podcast.import'), route_to('podcast-import'), [
     'variant' => 'primary',
@@ -31,27 +36,27 @@
             <img
             alt="<?= $podcast->title ?>"
             src="<?= $podcast->image
-                ->medium_url ?>" class="object-cover w-full h-48" />
+        ->medium_url ?>" class="object-cover w-full h-48" />
             <a href="<?= route_to(
-                'podcast-view',
-                $podcast->id,
-            ) ?>" class="flex flex-col p-2 hover:underline">
+            'podcast-view',
+            $podcast->id,
+        ) ?>" class="flex flex-col p-2 hover:underline">
                 <h2 class="font-semibold truncate"><?= $podcast->title ?></h2>
                 <p class="text-gray-600">@<?= $podcast->handle ?></p>
             </a>
             <footer class="flex items-center justify-end p-2">
                 <a class="inline-flex p-2 mr-2 text-blue-700 bg-blue-100 rounded-full shadow-xs hover:bg-blue-200" href="<?= route_to(
-                    'podcast-edit',
-                    $podcast->id,
-                ) ?>" data-toggle="tooltip" data-placement="bottom" title="<?= lang(
-    'Podcast.edit',
-) ?>"><?= icon('edit') ?></a>
+            'podcast-edit',
+            $podcast->id,
+        ) ?>" data-toggle="tooltip" data-placement="bottom" title="<?= lang(
+            'Podcast.edit',
+        ) ?>"><?= icon('edit') ?></a>
                 <a class="inline-flex p-2 text-gray-700 bg-gray-100 rounded-full shadow-xs hover:bg-gray-200" href="<?= route_to(
-                    'podcast-view',
-                    $podcast->id,
-                ) ?>" data-toggle="tooltip" data-placement="bottom" title="<?= lang(
-    'Podcast.view',
-) ?>"><?= icon('eye') ?></a>
+            'podcast-view',
+            $podcast->id,
+        ) ?>" data-toggle="tooltip" data-placement="bottom" title="<?= lang(
+            'Podcast.view',
+        ) ?>"><?= icon('eye') ?></a>
             </footer>
         </article>
         <?php endforeach; ?>

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 use CodeIgniter\CodeIgniter;
 use Config\Services;
@@ -70,9 +70,9 @@ $errorId = uniqid('error', true); ?>
 								<?php if (isset($row['file']) && is_file($row['file'])): ?>
 									<?php
 									if (isset($row['function']) && in_array($row['function'], ['include', 'include_once', 'require', 'require_once'], true)) {
-										echo esc($row['function'] . ' ' . static::cleanPath($row['file']));
+									    echo esc($row['function'] . ' ' . static::cleanPath($row['file']));
 									} else {
-										echo esc(static::cleanPath($row['file']) . ' : ' . $row['line']);
+									    echo esc(static::cleanPath($row['file']) . ' : ' . $row['line']);
 									}
 									?>
 								<?php else: ?>
@@ -82,7 +82,7 @@ $errorId = uniqid('error', true); ?>
 								<!-- Class/Method -->
 								<?php if (isset($row['class'])) : ?>
 									&nbsp;&nbsp;&mdash;&nbsp;&nbsp;<?= esc($row['class'] . $row['type'] . $row['function']) ?>
-									<?php if (!empty($row['args'])) : ?>
+									<?php if (! empty($row['args'])) : ?>
 										<?php $args_id = $errorId . 'args' . $index ?>
 										( <a href="#" onclick="return toggle('<?= esc($args_id, 'attr') ?>');">arguments</a> )
 							<div class="args" id="<?= esc($args_id, 'attr') ?>">
@@ -91,9 +91,9 @@ $errorId = uniqid('error', true); ?>
 									<?php
 										$params = null;
 										// Reflection by name is not available for closure function
-										if (!str_ends_with($row['function'], '}')) {
-											$mirror = isset($row['class']) ? new ReflectionMethod($row['class'], $row['function']) : new ReflectionFunction($row['function']);
-											$params = $mirror->getParameters();
+										if (! str_ends_with($row['function'], '}')) {
+										    $mirror = isset($row['class']) ? new ReflectionMethod($row['class'], $row['function']) : new ReflectionFunction($row['function']);
+										    $params = $mirror->getParameters();
 										}
 										foreach ($row['args'] as $key => $value): ?>
 										<tr>
@@ -111,7 +111,7 @@ $errorId = uniqid('error', true); ?>
 						<?php endif; ?>
 					<?php endif; ?>
 
-					<?php if (!isset($row['class']) && isset($row['function'])): ?>
+					<?php if (! isset($row['class']) && isset($row['function'])): ?>
 						&nbsp;&nbsp;&mdash;&nbsp;&nbsp; <?= esc($row['function']) ?>()
 					<?php endif; ?>
 					</p>
@@ -132,9 +132,9 @@ $errorId = uniqid('error', true); ?>
 			<!-- Server -->
 			<div class="content" id="server">
 				<?php foreach (['_SERVER', '_SESSION'] as $var): ?>
-					<?php if (empty($GLOBALS[$var]) || !is_array($GLOBALS[$var])) {
-						continue;
-					} ?>
+					<?php if (empty($GLOBALS[$var]) || ! is_array($GLOBALS[$var])) {
+										    continue;
+										} ?>
 
 					<h3>$<?= esc($var) ?></h3>
 
@@ -165,7 +165,7 @@ $errorId = uniqid('error', true); ?>
 
 				<!-- Constants -->
 				<?php $constants = get_defined_constants(true); ?>
-				<?php if (!empty($constants['user'])): ?>
+				<?php if (! empty($constants['user'])): ?>
 					<h3>Constants</h3>
 
 					<table>
@@ -234,9 +234,9 @@ $errorId = uniqid('error', true); ?>
 
 				<?php $empty = true; ?>
 				<?php foreach (['_GET', '_POST', '_COOKIE'] as $var): ?>
-					<?php if (empty($GLOBALS[$var]) || !is_array($GLOBALS[$var])) {
-						continue;
-					} ?>
+					<?php if (empty($GLOBALS[$var]) || ! is_array($GLOBALS[$var])) {
+										    continue;
+										} ?>
 
 					<?php $empty = false; ?>
 
@@ -276,7 +276,7 @@ $errorId = uniqid('error', true); ?>
 				<?php endif; ?>
 
 				<?php $headers = $request->getHeaders(); ?>
-				<?php if (!empty($headers)): ?>
+				<?php if (! empty($headers)): ?>
 
 					<h3>Headers</h3>
 
@@ -290,11 +290,11 @@ $errorId = uniqid('error', true); ?>
 						<tbody>
 							<?php foreach ($headers as $value): ?>
 								<?php if (empty($value)) {
-									continue;
-								} ?>
-								<?php if (!is_array($value)) {
-									$value = [$value];
-								} ?>
+										    continue;
+										} ?>
+								<?php if (! is_array($value)) {
+										    $value = [$value];
+										} ?>
 								<?php foreach ($value as $h) : ?>
 									<tr>
 										<td><?= esc($h->getName(), 'html') ?></td>
@@ -389,7 +389,7 @@ $errorId = uniqid('error', true); ?>
 
 			<p>
 				Displayed at <?= esc(date('H:i:sa')) ?> &mdash;
-				PHP: <?= esc(phpversion()) ?> &mdash;
+				PHP: <?= esc(PHP_VERSION) ?> &mdash;
 				CodeIgniter: <?= esc(CodeIgniter::CI_VERSION) ?>
 			</p>
 

@@ -1,19 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 use CodeIgniter\CLI\CLI;
+
 // The main Exception
 CLI::newLine();
 CLI::write('[' . $exception::class . ']', 'light_gray', 'red');
 CLI::newLine();
 CLI::write($message);
 CLI::newLine();
-CLI::write(
-    'at ' .
-        CLI::color(
-            clean_path($exception->getFile()) . ':' . $exception->getLine(),
-            'green',
-        ),
-);
+CLI::write('at ' . CLI::color(clean_path($exception->getFile()) . ':' . $exception->getLine(), 'green', ), );
 CLI::newLine();
 // The backtrace
 if (defined('SHOW_DEBUG_BACKTRACE') && SHOW_DEBUG_BACKTRACE) {
@@ -24,8 +21,7 @@ if (defined('SHOW_DEBUG_BACKTRACE') && SHOW_DEBUG_BACKTRACE) {
     }
 
     foreach ($backtraces as $i => $error) {
-        $padFile = '    '; // 4 spaces
-        $padClass = '       '; // 7 spaces
+        $padFile = '    ';
         $c = str_pad($i + 1, 3, ' ', STR_PAD_LEFT);
 
         if (isset($error['file'])) {
@@ -33,9 +29,7 @@ if (defined('SHOW_DEBUG_BACKTRACE') && SHOW_DEBUG_BACKTRACE) {
 
             CLI::write($c . $padFile . CLI::color($filepath, 'yellow'));
         } else {
-            CLI::write(
-                $c . $padFile . CLI::color('[internal function]', 'yellow'),
-            );
+            CLI::write($c . $padFile . CLI::color('[internal function]', 'yellow'), );
         }
 
         $function = '';
@@ -47,7 +41,7 @@ if (defined('SHOW_DEBUG_BACKTRACE') && SHOW_DEBUG_BACKTRACE) {
                     : $error['type'];
             $function .=
                 $padClass . $error['class'] . $type . $error['function'];
-        } elseif (!isset($error['class']) && isset($error['function'])) {
+        } elseif (! isset($error['class']) && isset($error['function'])) {
             $function .= $padClass . $error['function'];
         }
 
@@ -57,7 +51,7 @@ if (defined('SHOW_DEBUG_BACKTRACE') && SHOW_DEBUG_BACKTRACE) {
                 return match (true) {
                     is_object($value) => 'Object(' . $value::class . ')',
                     is_array($value) => $value !== [] ? '[...]' : '[]',
-                    is_null($value) => 'null',
+                    $value === null => 'null',
                     default => var_export($value, true),
                 };
             }, array_values($error['args'] ?? [])),

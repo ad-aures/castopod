@@ -3,7 +3,7 @@
     <div class="flex-1">
         <header class="w-full mb-2 text-sm">
             <a href="<?= $comment->actor
-                ->uri ?>" class="flex items-baseline hover:underline" <?= $comment->actor->is_local
+    ->uri ?>" class="flex items-baseline hover:underline" <?= $comment->actor->is_local
                 ? ''
                 : 'target="_blank" rel="noopener noreferrer"' ?>>
                 <span class="mr-2 font-semibold truncate"><?= $comment->actor

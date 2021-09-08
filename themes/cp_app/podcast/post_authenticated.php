@@ -22,17 +22,17 @@
     <nav class="py-3">
         <a href="<?= route_to('podcast-activity', $podcast->handle) ?>"
         class="inline-flex items-center px-4 py-2 text-sm"><?= icon(
-            'arrow-left',
-            'mr-2 text-lg',
-        ) .
+        'arrow-left',
+        'mr-2 text-lg',
+    ) .
             lang('Post.back_to_actor_posts', [
                 'actor' => $post->actor->display_name,
             ]) ?></a>
     </nav>
     <div class="pb-12">
         <?= $this->include(
-            'podcast/_partials/post_with_replies_authenticated',
-        ) ?>
+                'podcast/_partials/post_with_replies_authenticated',
+            ) ?>
     </div>
 </div>
 

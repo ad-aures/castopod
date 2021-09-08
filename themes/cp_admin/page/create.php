@@ -16,7 +16,9 @@
 ]) ?>
 <?= csrf_field() ?>
 
-<?= form_label(lang('Page.form.title'), 'title', ['class' => 'max-w-sm']) ?>
+<?= form_label(lang('Page.form.title'), 'title', [
+    'class' => 'max-w-sm',
+]) ?>
 <?= form_input([
     'id' => 'title',
     'name' => 'title',
@@ -32,7 +34,7 @@
     [],
 ) ?>
 <permalink-edit class="inline-flex items-center w-full max-w-sm mb-4 text-xs" edit-label="<?= lang('Common.edit') ?>" copy-label="<?= lang('Common.copy') ?>" copied-label="<?= lang('Common.copied') ?>">
-<span slot="domain" class="flex-shrink-0"><?= base_url('pages' ) . '/' ?></span>
+<span slot="domain" class="flex-shrink-0"><?= base_url('pages') . '/' ?></span>
 <?= form_input([
     'id' => 'slug',
     'name' => 'slug',
@@ -53,8 +55,13 @@
 <?= button(
     lang('Page.form.submit_create'),
     '',
-    ['variant' => 'primary'],
-    ['type' => 'submit', 'class' => 'self-end'],
+    [
+        'variant' => 'primary',
+    ],
+    [
+        'type' => 'submit',
+        'class' => 'self-end',
+    ],
 ) ?>
 
 <?= form_close() ?>

@@ -21,7 +21,7 @@
     'id' => 'user',
     'class' => 'form-select mb-4',
     'required' => 'required',
-    'placeholder' => lang('Contributor.form.user_placeholder')
+    'placeholder' => lang('Contributor.form.user_placeholder'),
 ]) ?>
 
 <Forms.Label for="role"><?= lang('Contributor.form.role') ?></Forms.Label>
@@ -29,14 +29,19 @@
     'id' => 'role',
     'class' => 'form-select mb-4',
     'required' => 'required',
-    'placeholder' => lang('Contributor.form.role_placeholder')
+    'placeholder' => lang('Contributor.form.role_placeholder'),
 ]) ?>
 
 <?= button(
     lang('Contributor.form.submit_add'),
     '',
-    ['variant' => 'primary'],
-    ['type' => 'submit', 'class' => 'self-end'],
+    [
+        'variant' => 'primary',
+    ],
+    [
+        'type' => 'submit',
+        'class' => 'self-end',
+    ],
 ) ?>
 
 <?= form_close() ?>

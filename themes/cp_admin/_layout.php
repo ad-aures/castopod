@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="<?= service('request')->getLocale() ?>">
+<html lang="<?= service('request')
+    ->getLocale() ?>">
 
 <head>
     <meta charset="UTF-8"/>
@@ -8,9 +9,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
 
-    <?= service('vite')->asset('styles/index.css', 'css') ?>
-    <?= service('vite')->asset('js/admin.ts', 'js') ?>
-    <?= service('vite')->asset('js/audio-player.ts', 'js') ?>
+    <?= service('vite')
+        ->asset('styles/index.css', 'css') ?>
+    <?= service('vite')
+        ->asset('js/admin.ts', 'js') ?>
+    <?= service('vite')
+        ->asset('js/audio-player.ts', 'js') ?>
 </head>
 
 <body class="relative bg-pine-50 holy-grail-grid">
@@ -18,13 +22,13 @@
     <header class="sticky top-0 z-50 flex items-center justify-between h-10 text-white border-b holy-grail__header bg-pine-800 border-pine-900">
         <div class="inline-flex items-center h-full">
             <a href="<?= route_to(
-                'admin',
-            ) ?>" class="inline-flex items-center h-full px-2 border-r border-pine-900">
+            'admin',
+        ) ?>" class="inline-flex items-center h-full px-2 border-r border-pine-900">
                 <?= (isset($podcast) ? icon('arrow-left', 'mr-2') : '') . svg('castopod-logo', 'h-6') ?>
             </a>
             <a href="<?= route_to(
-                'home',
-            ) ?>" class="inline-flex items-center h-full px-6 text-sm font-semibold outline-none hover:underline focus:ring">
+            'home',
+        ) ?>" class="inline-flex items-center h-full px-6 text-sm font-semibold outline-none hover:underline focus:ring">
                     <?= lang('AdminNavigation.go_to_website') ?>
                     <?= icon('external-link', 'ml-1 opacity-60') ?>
             </a>
@@ -38,7 +42,8 @@
             aria-haspopup="true"
             aria-expanded="false">
                 <?= icon('account-circle', 'text-2xl opacity-60 mr-2') ?>
-                <?= user()->username ?>
+                <?= user()
+                    ->username ?>
                 <?= icon('caret-down', 'ml-auto text-2xl') ?>
         </button>
         <nav
@@ -48,14 +53,14 @@
             data-dropdown="menu"
             data-dropdown-placement="bottom-end">
                 <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
-                    'my-account',
-                ) ?>"><?= lang('AdminNavigation.account.my-account') ?></a>
+                        'my-account',
+                    ) ?>"><?= lang('AdminNavigation.account.my-account') ?></a>
                 <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
-                    'change-password',
-                ) ?>"><?= lang('AdminNavigation.account.change-password') ?></a>
+                        'change-password',
+                    ) ?>"><?= lang('AdminNavigation.account.change-password') ?></a>
                 <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
-                    'logout',
-                ) ?>"><?= lang('AdminNavigation.account.logout') ?></a>
+                        'logout',
+                    ) ?>"><?= lang('AdminNavigation.account.logout') ?></a>
         </nav>
     </header>
     <aside id="admin-sidebar" class="sticky z-50 flex flex-col text-white transition duration-200 ease-in-out transform -translate-x-full border-r top-10 border-pine-900 bg-pine-800 holy-grail__sidebar md:translate-x-0">
@@ -80,15 +85,15 @@
                 <div class="flex flex-col">
                     <?= render_breadcrumb('text-gray-800 text-xs') ?>
                     <div class="flex flex-wrap items-center">
-                        <h1 class="text-3xl font-bold font-display"><?= $this->renderSection(
-                            'pageTitle',
-                        ) ?></h1>
+                        <Heading level="1" size="large"><?= $this->renderSection(
+                'pageTitle',
+            ) ?></Heading>
                         <?= $this->renderSection('headerLeft') ?>
                     </div>
                 </div>
                 <div class="flex flex-wrap"><?= $this->renderSection(
-                    'headerRight',
-                ) ?></div>
+                'headerRight',
+            ) ?></div>
             </div>
         </header>
         <div class="container px-2 py-8 mx-auto md:px-12">

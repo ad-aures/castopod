@@ -10,7 +10,9 @@
 
 <p class="mb-4 text-gray-600"><?= lang('Auth.enterEmailForInstructions') ?></p>
 
-<?= form_open(route_to('forgot'), ['class' => 'flex flex-col']) ?>
+<?= form_open(route_to('forgot'), [
+    'class' => 'flex flex-col',
+]) ?>
 <?= csrf_field() ?>
 
 <?= form_label(lang('Auth.emailAddress'), 'email') ?>
@@ -25,8 +27,13 @@
 <?= button(
     lang('Auth.sendInstructions'),
     '',
-    ['variant' => 'primary'],
-    ['type' => 'submit', 'class' => 'self-end'],
+    [
+        'variant' => 'primary',
+    ],
+    [
+        'type' => 'submit',
+        'class' => 'self-end',
+    ],
 ) ?>
 
 <?= form_close() ?>

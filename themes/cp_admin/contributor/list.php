@@ -46,7 +46,9 @@
                         'variant' => 'info',
                         'size' => 'small',
                     ],
-                    ['class' => 'mr-2'],
+                    [
+                        'class' => 'mr-2',
+                    ],
                 ) .
                     button(
                         lang('Contributor.remove'),
@@ -59,7 +61,9 @@
                             'variant' => 'danger',
                             'size' => 'small',
                         ],
-                        ['class' => 'mr-2'],
+                        [
+                            'class' => 'mr-2',
+                        ],
                     );
             },
         ],

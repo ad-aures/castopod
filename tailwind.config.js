@@ -4,7 +4,6 @@ module.exports = {
   mode: "jit",
   purge: [
     "./app/Views/**/*.php",
-    "./app/View/Components/**/*.php",
     "./modules/**/Views/**/*.php",
     "./themes/**/*.php",
     "./app/Helpers/*.php",
@@ -48,6 +47,9 @@ module.exports = {
       },
       gridTemplateColumns: {
         podcasts: "repeat(auto-fill, minmax(14rem, 1fr))",
+      },
+      zIndex: {
+        "-10": "-10",
       },
     },
   },

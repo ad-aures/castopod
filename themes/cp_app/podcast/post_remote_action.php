@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="<?= service('request')->getLocale() ?>">
+<html lang="<?= service('request')
+    ->getLocale() ?>">
 
 <head>
     <meta charset="UTF-8"/>
@@ -24,8 +25,10 @@
     <meta property="og:image" content="<?= $post->actor->avatar_image_url ?>" />
     <meta property="og:description" content="<?= $post->message ?>" />
 
-    <?= service('vite')->asset('styles/index.css', 'css') ?>
-    <?= service('vite')->asset('js/podcast.ts', 'js') ?>
+    <?= service('vite')
+        ->asset('styles/index.css', 'css') ?>
+    <?= service('vite')
+        ->asset('js/podcast.ts', 'js') ?>
 </head>
 
 <body class="min-h-screen mx-auto bg-pine-50">
@@ -39,7 +42,10 @@
 
         <?= form_open(
             route_to('post-attempt-remote-action', $post->id, $action),
-            ['method' => 'post', 'class' => 'flex flex-col mt-8'],
+            [
+                'method' => 'post',
+                'class' => 'flex flex-col mt-8',
+            ],
         ) ?>
         <?= csrf_field() ?>
         <?= view('_message_block') ?>
@@ -61,8 +67,13 @@
         <?= button(
             lang('Fediverse.' . $action . '.submit'),
             '',
-            ['variant' => 'primary'],
-            ['type' => 'submit', 'class' => 'self-end'],
+            [
+                'variant' => 'primary',
+            ],
+            [
+                'type' => 'submit',
+                'class' => 'self-end',
+            ],
         ) ?>
         <?= form_close() ?>
     </main>

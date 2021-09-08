@@ -1,13 +1,15 @@
 <?= helper('page') ?>
 <!DOCTYPE html>
-<html lang="<?= service('request')->getLocale() ?>">
+<html lang="<?= service('request')
+    ->getLocale() ?>">
 
 <head>
     <meta charset="UTF-8"/>
     <title><?= $page->title ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
-    <?= service('vite')->asset('styles/index.css', 'css') ?>
+    <?= service('vite')
+        ->asset('styles/index.css', 'css') ?>
 </head>
 
 <body class="flex flex-col min-h-screen mx-auto">
@@ -15,9 +17,9 @@
         <div class="container flex flex-col px-2 py-4 mx-auto">
             <a href="<?= route_to('home') ?>"
             class="inline-flex items-center mb-2"><?= icon(
-                'arrow-left',
-                'mr-2',
-            ) . lang('Page.back_to_home') ?></a>
+            'arrow-left',
+            'mr-2',
+        ) . lang('Page.back_to_home') ?></a>
             <h1 class="text-3xl font-semibold"><?= $page->title ?></h1>
         </div>
     </header>

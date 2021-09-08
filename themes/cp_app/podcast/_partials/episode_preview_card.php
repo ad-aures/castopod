@@ -11,11 +11,11 @@
         <a href="<?= $episode->link ?>" class="flex justify-between flex-1">
             <div class="flex items-baseline font-semibold">
                 <?= episode_numbering(
-                    $episode->number,
-                    $episode->season_number,
-                    'text-xs font-semibold text-gray-600',
-                    true,
-                ) ?>
+    $episode->number,
+    $episode->season_number,
+    'text-xs font-semibold text-gray-600',
+    true,
+) ?>
                 <span class="mx-1">-</span>
                 <?= $episode->title ?>
             </div>

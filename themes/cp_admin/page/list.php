@@ -40,18 +40,28 @@
                         'variant' => 'secondary',
                         'size' => 'small',
                     ],
-                    ['class' => 'mr-2'],
+                    [
+                        'class' => 'mr-2',
+                    ],
                 ) .
                     button(
                         lang('Page.edit'),
                         route_to('page-edit', $page->id),
-                        ['variant' => 'info', 'size' => 'small'],
-                        ['class' => 'mr-2'],
+                        [
+                            'variant' => 'info',
+                            'size' => 'small',
+                        ],
+                        [
+                            'class' => 'mr-2',
+                        ],
                     ) .
                     button(
                         lang('Page.delete'),
                         route_to('page-delete', $page->id),
-                        ['variant' => 'danger', 'size' => 'small'],
+                        [
+                            'variant' => 'danger',
+                            'size' => 'small',
+                        ],
                     );
             },
         ],

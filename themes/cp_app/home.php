@@ -1,6 +1,7 @@
 <?= helper('page') ?>
 <!DOCTYPE html>
-<html lang="<?= service('request')->getLocale() ?>">
+<html lang="<?= service('request')
+    ->getLocale() ?>">
 
 <head>
     <meta charset="UTF-8"/>
@@ -8,22 +9,23 @@
     <meta name="description" content="Castopod is an open-source hosting platform made for podcasters who want engage and interact with their audience."/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
-    <?= service('vite')->asset('styles/index.css', 'css') ?>
+    <?= service('vite')
+        ->asset('styles/index.css', 'css') ?>
 </head>
 
 <body class="flex flex-col min-h-screen mx-auto bg-pine-50">
     <header class="py-8 text-white border-b bg-pine-800">
         <div class="container flex items-center justify-between px-2 py-4 mx-auto">
             <a href="<?= route_to(
-                'home',
-            ) ?>" class="inline-flex items-baseline text-3xl font-semibold font-display"><?= 'castopod' .
+            'home',
+        ) ?>" class="inline-flex items-baseline text-3xl font-semibold font-display"><?= 'castopod' .
     svg('castopod-logo', 'h-6 ml-2') ?></a>
         </div>
     </header>
     <main class="container flex-1 px-4 py-10 mx-auto">
         <h1 class="mb-2 text-xl"><?= lang('Home.all_podcasts') ?> (<?= count(
-     $podcasts,
- ) ?>)</h1>
+        $podcasts,
+    ) ?>)</h1>
         <section class="grid gap-4 grid-cols-podcasts">
             <?php if ($podcasts): ?>
                 <?php foreach ($podcasts as $podcast): ?>

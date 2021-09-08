@@ -12,8 +12,13 @@
 <?= button(
     lang('Podcast.edit'),
     route_to('podcast-edit', $podcast->id),
-    ['variant' => 'primary', 'iconLeft' => 'edit'],
-    ['class' => 'mr-2'],
+    [
+        'variant' => 'primary',
+        'iconLeft' => 'edit',
+    ],
+    [
+        'class' => 'mr-2',
+    ],
 ) ?>
 <?= button(lang('Episode.create'), route_to('episode-create', $podcast->id), [
     'variant' => 'accent',
