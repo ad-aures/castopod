@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace App\Views\Components;
 
-use Exception;
 use ViewComponents\Component;
 
 class Heading extends Component
 {
-    protected string $level = '';
+    protected string $tagName = 'div';
 
     /**
      * @var "small"|"base"|"large"
@@ -18,21 +17,16 @@ class Heading extends Component
 
     public function render(): string
     {
-        if ($this->level === '') {
-            throw new Exception('level property must be set for Heading component.');
-        }
-
         $sizeClasses = [
             'small' => 'tracking-wide text-base',
             'base' => 'text-xl',
             'large' => 'text-3xl',
         ];
 
-        $class = 'relative z-10 font-bold text-pine-800 font-display before:w-full before:absolute before:h-1/2 before:left-0 before:bottom-0 before:rounded-full before:bg-pine-100 before:-z-10 ' . $sizeClasses[$this->size];
-        $level = $this->level;
+        $class = $this->class . ' relative z-10 font-bold text-pine-800 font-display before:w-full before:absolute before:h-1/2 before:left-0 before:bottom-0 before:rounded-full before:bg-pine-100 before:-z-10 ' . $sizeClasses[$this->size];
 
         return <<<HTML
-            <h{$level} class="{$class}">{$this->slot}</h{$level}>
+            <{$this->tagName} class="{$class}">{$this->slot}</{$this->tagName}>
         HTML;
     }
 }

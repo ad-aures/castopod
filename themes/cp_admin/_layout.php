@@ -79,21 +79,17 @@
             ]) ?>
         </footer>
     </aside>
-    <main class="holy-grail__main">
-        <header class="bg-white">
-            <div class="container flex flex-wrap items-end justify-between px-2 py-10 mx-auto md:px-12 gap-y-6 gap-x-6">
-                <div class="flex flex-col">
-                    <?= render_breadcrumb('text-gray-800 text-xs') ?>
+    <main class="relative holy-grail__main">
+        <header class="flex-col py-10 bg-white">
+            <div class="container mx-auto">
+                <?= render_breadcrumb('text-gray-800 text-xs') ?>
+                <div class="flex justify-between">
                     <div class="flex flex-wrap items-center">
-                        <Heading level="1" size="large"><?= $this->renderSection(
-                'pageTitle',
-            ) ?></Heading>
+                        <Heading tagName="h1" size="large"><?= $this->renderSection('pageTitle') ?></Heading>
                         <?= $this->renderSection('headerLeft') ?>
                     </div>
+                    <div class="flex gap-1"><?= $this->renderSection('headerRight') ?></div>
                 </div>
-                <div class="flex flex-wrap"><?= $this->renderSection(
-                'headerRight',
-            ) ?></div>
             </div>
         </header>
         <div class="container px-2 py-8 mx-auto md:px-12">

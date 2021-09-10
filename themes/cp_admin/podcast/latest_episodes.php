@@ -1,6 +1,6 @@
 <section class="flex flex-col">
     <header class="flex justify-between py-2">
-        <Heading level="2"><?= lang('Podcast.latest_episodes') ?></Heading>
+        <Heading tagName="h2"><?= lang('Podcast.latest_episodes') ?></Heading>
         <a href="<?= route_to(
     'episode-list',
     $podcast->id,

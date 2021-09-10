@@ -57,12 +57,17 @@ export class XMLEditor extends LitElement {
 
   static styles = css`
     .cm-wrap {
-      border: 1px solid #6b7280;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      border: 3px solid #000000;
       background-color: #ffffff;
     }
     .cm-editor.cm-focused {
       outline: 2px solid transparent;
-      box-shadow: 0 0 0 1px #2563eb;
+      box-shadow: 0 0 0 2px #e7f9e4, 0 0 0 calc(4px) #009486;
+    }
+    .cm-gutters {
+      background-color: #ffffff !important;
     }
   `;
 

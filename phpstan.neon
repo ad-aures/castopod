@@ -33,3 +33,4 @@ parameters:
             paths:
                 - app/Helpers
                 - app/Common.php
+                - app/Libraries/ViewComponents/Helpers

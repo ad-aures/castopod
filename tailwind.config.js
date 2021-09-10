@@ -51,6 +51,12 @@ module.exports = {
       zIndex: {
         "-10": "-10",
       },
+      borderWidth: {
+        3: "3px",
+      },
+      ringWidth: {
+        3: "3px",
+      },
     },
   },
   variants: {},

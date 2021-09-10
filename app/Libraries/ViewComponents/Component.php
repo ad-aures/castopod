@@ -22,11 +22,12 @@ class Component implements ComponentInterface
      */
     public function __construct(array $attributes)
     {
+        helper('viewcomponents');
+
         if ($attributes !== []) {
             $this->hydrate($attributes);
         }
         // overwrite default attributes if set
-
         $this->attributes = array_merge($this->attributes, $attributes);
     }
 
