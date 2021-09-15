@@ -20,11 +20,7 @@ return [
     'advanced_params_section_title' => 'Advanced parameters',
     'advanced_params_section_subtitle' =>
         'Keep the default values if you have no idea of what the fields are for.',
-    'slug_field' => [
-        'label' => 'Which field should be used to calculate episode slug',
-        'link' => '&lt;link&gt;',
-        'title' => '&lt;title&gt;',
-    ],
+    'slug_field' => 'Field to be used to calculate episode slug',
     'description_field' =>
         'Source field used for episode description / show notes',
     'force_renumber' => 'Force episodes renumbering',

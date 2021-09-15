@@ -81,9 +81,8 @@ class PostController extends FediversePostController
 
         if (! ($cachedView = cache($cacheName))) {
             $data = [
-                'podcast' => $this->podcast,
-                'actor' => $this->actor,
                 'post' => $this->post,
+                'podcast' => $this->podcast,
             ];
 
             // if user is logged in then send to the authenticated activity view

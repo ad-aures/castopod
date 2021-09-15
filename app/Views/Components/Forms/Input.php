@@ -21,17 +21,12 @@ class Input extends FormComponent
             $class .= ' border-black focus:border-black';
         }
 
-        $data = [
-            'id' => $this->id,
-            'name' => $this->name,
-            'class' => $class,
-            'type' => $this->type,
-        ];
+        $this->attributes['class'] = $class;
 
         if ($this->required) {
-            $data['required'] = 'required';
+            $this->attributes['required'] = 'required';
         }
 
-        return form_input($data, old($this->name, $this->value));
+        return form_input($this->attributes, old($this->name, $this->value));
     }
 }

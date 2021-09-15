@@ -8,8 +8,6 @@ use ViewComponents\Component;
 
 class Button extends Component
 {
-    protected string $label = '';
-
     protected string $uri = '';
 
     protected string $variant = 'default';
@@ -21,6 +19,11 @@ class Button extends Component
     protected string $iconRight = '';
 
     protected bool $isSquared = false;
+
+    public function setIsSquared(string $value): void
+    {
+        $this->isSquared = $value === 'true';
+    }
 
     public function render(): string
     {
@@ -80,19 +83,31 @@ class Button extends Component
             $this->slot .= '<Icon glyph="' . $this->iconRight . '" class="ml-2" />';
         }
 
+        unset($this->attributes['slot']);
+        unset($this->attributes['variant']);
+        unset($this->attributes['size']);
+        unset($this->attributes['iconLeft']);
+        unset($this->attributes['iconRight']);
+        unset($this->attributes['isSquared']);
+        unset($this->attributes['uri']);
+        unset($this->attributes['label']);
+
         if ($this->uri !== '') {
-            return anchor($this->uri, $this->label, array_merge([
-                'class' => $buttonClass,
-            ], $this->attributes));
+            $tagName = 'a';
+            $defaultButtonAttributes = [
+                'href' => $this->uri,
+            ];
+        } else {
+            $tagName = 'button';
+            $defaultButtonAttributes = [
+                'type' => 'button',
+            ];
         }
 
-        $defaultButtonAttributes = [
-            'type' => 'button',
-        ];
         $attributes = stringify_attributes(array_merge($defaultButtonAttributes, $this->attributes));
 
         return <<<HTML
-            <button class="{$buttonClass}" {$attributes}>{$this->slot}</button>
+            <{$tagName} class="{$buttonClass}" {$attributes}>{$this->slot}</{$tagName}>
         HTML;
     }
 }

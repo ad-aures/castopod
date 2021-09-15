@@ -17,8 +17,6 @@ return [
     'edit' => 'Modifier l’intervenant',
     'delete' => 'Supprimer l’intervenant',
     'form' => [
-        'identity_section_title' => 'Identité',
-        'identity_section_subtitle' => 'Qui intervient sur le podcast',
         'image' => 'Photo',
         'image_size_hint' =>
             'L’image doit être carrée et avoir au moins 400px de largeur et de hauteur.',
@@ -34,32 +32,28 @@ return [
     ],
     'podcast_form' => [
         'title' => 'Gérer les intervenants',
-        'manage_section_title' => 'Gestion',
-        'manage_section_subtitle' => 'Retirer des intervenants de ce podcast',
         'add_section_title' => 'Ajouter des intervenants à ce podcast',
         'add_section_subtitle' =>
             'Vous pouvez sélectionner plusieurs intervenants et rôles.',
-        'person' => 'Intervenants',
-        'person_hint' =>
+        'persons' => 'Intervenants',
+        'persons_hint' =>
             'Vous pouvez selectionner un ou plusieurs intervenants ayant les mêmes rôles. Les intervenants doivent avoir été préalablement créés.',
-        'group_role' => 'Groupes et rôles',
-        'group_role_hint' =>
+        'roles' => 'Groupes et rôles',
+        'roles_hint' =>
             'Vous pouvez sélectionner aucun, un ou plusieurs groupes et rôles par intervenant.',
         'submit_add' => 'Ajouter un/des intervenant(s)',
         'remove' => 'Retirer',
     ],
     'episode_form' => [
         'title' => 'Gérer les intervenants',
-        'manage_section_title' => 'Gestion',
-        'manage_section_subtitle' => 'Retirer des intervenants de cet épisode',
         'add_section_title' => 'Ajouter des intervenants à cet épisode',
         'add_section_subtitle' =>
             'Vous pouvez sélectionner plusieurs intervenants et rôles.',
-        'person' => 'Intervenants',
-        'person_hint' =>
+        'persons' => 'Intervenants',
+        'persons_hint' =>
             'Vous pouvez selectionner un ou plusieurs intervenants ayant les mêmes rôles. Les intervenants doivent avoir été préalablement créés.',
-        'group_role' => 'Groupes et rôles',
-        'group_role_hint' =>
+        'roles' => 'Groupes et rôles',
+        'roles_hint' =>
             'Vous pouvez sélectionner aucun, un ou plusieurs groupes et rôles par intervenant.',
         'submit_add' => 'Ajouter un/des intervenant(s)',
         'remove' => 'Retirer',

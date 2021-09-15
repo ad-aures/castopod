@@ -4,11 +4,10 @@ const ThemePicker = (): void => {
   const iframe: HTMLIFrameElement | null = document.querySelector(
     `iframe[id="embeddable_player"]`
   );
-  const iframeTextArea: HTMLTextAreaElement | null = document.querySelector(
-    `textarea[id="iframe"]`
-  );
-  const urlTextArea: HTMLTextAreaElement | null =
-    document.querySelector(`textarea[id="url"]`);
+  const iframeTextArea: HTMLFormElement | null =
+    document.querySelector(`[id="iframe"]`);
+  const urlTextArea: HTMLFormElement | null =
+    document.querySelector(`[id="url"]`);
 
   if (buttons && iframe && iframeTextArea && urlTextArea) {
     for (let i = 0; i < buttons.length; i++) {

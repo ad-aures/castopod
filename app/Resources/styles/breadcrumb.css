@@ -1,5 +1,5 @@
 .breadcrumb {
-  @apply inline-flex flex-wrap px-1 text-sm;
+  @apply inline-flex flex-wrap px-1;
 }
 
 .breadcrumb-item + .breadcrumb-item::before {

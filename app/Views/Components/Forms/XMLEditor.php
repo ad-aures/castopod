@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace App\Views\Components\Forms;
 
-use ViewComponents\Component;
-
-class XMLEditor extends Component
+class XMLEditor extends FormComponent
 {
     /**
      * @var array<string, string>

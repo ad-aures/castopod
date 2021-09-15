@@ -22,7 +22,7 @@ return [
         'Si vous ne savez pas à quoi servent ces champs, conservez les valeurs par défaut.',
     'slug_field' => [
         'label' =>
-            'Quel champ utiliser pour calculer l’identifiant de l’épisode',
+            'Champ à utiliser pour calculer l’identifiant de l’épisode',
         'link' => '&lt;link&gt; (adresse)',
         'title' => '&lt;title&gt; (titre)',
     ],

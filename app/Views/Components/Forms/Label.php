@@ -24,11 +24,16 @@ class Label extends Component
         $labelClass = 'text-sm ' . $this->attributes['class'];
         unset($this->attributes['class']);
 
-        $attributes = stringify_attributes($this->attributes);
         $optionalText = $this->isOptional ? '<small class="ml-1 lowercase">(' .
         lang('Common.optional') .
         ')</small>' : '';
         $hint = $this->hint === null ? '' : hint_tooltip($this->hint, 'ml-1');
+
+        unset($this->attributes['isOptional']);
+        unset($this->attributes['hint']);
+        unset($this->attributes['slot']);
+
+        $attributes = stringify_attributes($this->attributes);
 
         return <<<HTML
             <label class="{$labelClass}" {$attributes}>{$this->slot}{$optionalText}{$hint}</label>

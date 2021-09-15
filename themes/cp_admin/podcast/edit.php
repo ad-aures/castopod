@@ -18,12 +18,7 @@
 
 <?= $this->section('content') ?>
 
-<?= form_open_multipart((string) route_to('podcast-edit', $podcast->id), [
-    'id' => 'podcast-edit-form',
-    'method' => 'post',
-    'class' => 'flex flex-col',
-]) ?>
-
+<form id="podcast-edit-form" action="<?= route_to('podcast-edit', $podcast->id) ?>" method="POST" enctype='multipart/form-data' class="flex flex-col">
 <?= csrf_field() ?>
 
 <Forms.Section
@@ -210,19 +205,18 @@
 
 <Forms.Section
     class="mb-8"
-    title="<?= lang('Podcast.form.status_section_title') ?>"
-    subtitle="<?= lang('Podcast.form.status_section_subtitle') ?>" >
-    <Forms.Toggler class="mb-2" id="lock" name="lock" value="yes" checked="<?= old('complete', $podcast->is_locked) ?>" hint="<?= lang('Podcast.form.lock_hint') ?>">
+    title="<?= lang('Podcast.form.status_section_title') ?>" >
+    <Forms.Toggler class="mb-2" name="lock" value="yes" checked="<?= $podcast->is_locked ? 'true' : 'false' ?>" hint="<?= lang('Podcast.form.lock_hint') ?>">
         <?= lang('Podcast.form.lock') ?>
     </Forms.Toggler>
-    <Forms.Toggler class="mb-2" id="block" name="block" value="yes" checked="<?= old('complete', $podcast->is_blocked) ?>">
+    <Forms.Toggler class="mb-2" name="block" value="yes" checked="<?= $podcast->is_blocked ? 'true' : 'false'  ?>">
         <?= lang('Podcast.form.block') ?>
     </Forms.Toggler>
-    <Forms.Toggler id="complete" name="complete" value="yes" checked="<?= old('complete', $podcast->is_completed) ?>">
+    <Forms.Toggler name="complete" value="yes" checked="<?= $podcast->is_completed ? 'true' : 'false' ?>">
         <?= lang('Podcast.form.complete') ?>
     </Forms.Toggler>
 </Forms.Section>
 
-<?= form_close() ?>
+</form>
 
 <?= $this->endSection() ?>

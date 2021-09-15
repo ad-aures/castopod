@@ -3,20 +3,35 @@
 declare(strict_types=1);
 
 /**
- * @copyright  2020 Podlibre
+ * @copyright  2021 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
  */
 
 return [
-    'block_lists' => 'Listes de blocage',
-    'block_lists_form' => [
-        'blocked_users' => 'Utilisateurs bloqués',
-        'blocked_users_hint' =>
-            'Entrez les pseudonymes @utilisateur@domaine séparés par une virgule.',
-        'blocked_domains' => 'Domaines bloqués',
-        'blocked_domains_hint' =>
-            'Entrez les noms de domaine séparés par une virgule.',
-        'submit' => 'Sauvegarder les listes',
+    'your_handle' => 'Votre pseudonyme',
+    'your_handle_hint' =>
+        'Entrez le @utilisateur@domaine avec lequel vous voulez interagir.',
+    'follow' => [
+        'label' => 'Suivre',
+        'title' => 'Suivre {actorDisplayName}',
+        'subtitle' => 'Vous allez suivre :',
+        'accountNotFound' => 'Le compte n’a pas pu être trouvé.',
+        'submit' => 'Poursuivre',
+    ],
+    'favourite' => [
+        'title' => 'Mettez la publication de {actorDisplayName} en favori',
+        'subtitle' => 'Vous allez mettre en favori :',
+        'submit' => 'Poursuivre',
+    ],
+    'reblog' => [
+        'title' => 'Partagez la publication de {actorDisplayName}',
+        'subtitle' => 'Vous allez partager :',
+        'submit' => 'Poursuivre',
+    ],
+    'reply' => [
+        'title' => 'Répondre à la publication de {actorDisplayName}',
+        'subtitle' => 'Vous allez répondre à :',
+        'submit' => 'Poursuivre',
     ],
 ];

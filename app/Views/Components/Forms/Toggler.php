@@ -4,24 +4,12 @@ declare(strict_types=1);
 
 namespace App\Views\Components\Forms;
 
-use ViewComponents\Component;
-
-/**
- * Form Checkbox Switch
- *
- * Abstracts form_label to stylize it as a switch toggle
- */
-class Toggler extends Component
+class Toggler extends FormComponent
 {
     /**
-     * @var array<string, string>
+     * @var 'base'|'small
      */
-    protected array $attributes = [
-        'id' => '',
-        'name' => '',
-        'value' => '',
-        'class' => '',
-    ];
+    protected string $size = 'base';
 
     protected string $label = '';
 
@@ -31,26 +19,29 @@ class Toggler extends Component
 
     public function setChecked(string $value): void
     {
-        $this->checked = $value !== '';
+        $this->checked = $value === 'true';
     }
 
     public function render(): string
     {
         unset($this->attributes['checked']);
 
-        $wrapperClass = $this->attributes['class'];
+        $wrapperClass = $this->class;
         unset($this->attributes['class']);
+
+        $sizeClass = [
+            'base' => 'form-switch-slider',
+            'small' => 'form-switch-slider form-switch-slider--small',
+        ];
 
         $this->attributes['class'] = 'form-switch';
 
-        helper('form');
-
-        $checkbox = form_checkbox($this->attributes, $this->attributes['value'], $this->checked);
+        $checkbox = form_checkbox($this->attributes, $this->value, old($this->name, $this->checked));
         $hint = $this->hint === '' ? '' : hint_tooltip($this->hint, 'ml-1');
         return <<<HTML
             <label class="relative inline-flex items-center {$wrapperClass}">
                 {$checkbox}
-                <span class="form-switch-slider"></span>
+                <span class="{$sizeClass[$this->size]}"></span>
                 <span class="ml-2">{$this->slot}{$hint}</span>
             </label>
         HTML;

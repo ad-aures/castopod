@@ -11,7 +11,7 @@ class Select extends FormComponent
      */
     protected array $options = [];
 
-    protected string $selected;
+    protected string $selected = '';
 
     public function setOptions(string $value): void
     {

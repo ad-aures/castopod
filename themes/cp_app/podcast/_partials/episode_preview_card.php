@@ -21,6 +21,6 @@
             </div>
             <?= relative_time($episode->published_at, 'text-xs whitespace-nowrap') ?>
         </a>
-        <?= play_episode_button($episode->id, $episode->image->thumbnail_url, $episode->title, $podcast->title, $episode->audio_file_web_url, $episode->audio_file_mimetype, 'mt-auto') ?>
+        <?= play_episode_button($episode->id, $episode->image->thumbnail_url, $episode->title, $episode->podcast->title, $episode->audio_file_web_url, $episode->audio_file_mimetype, 'mt-auto') ?>
     </div>
 </div>

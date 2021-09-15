@@ -121,6 +121,7 @@ return [
         'post' => 'Votre message de publication',
         'post_hint' =>
             'Écrivez un message pour annoncer la publication de votre épisode. Le message sera diffusé à toutes les personnes qui vous suivent dans le fédiverse et mis en évidence sur la page d’accueil de votre podcast.',
+        'message_placeholder' => 'Entrez votre message…',
         'publication_date' => 'Date de publication',
         'publication_date_clear' => 'Effacer la date de publication',
         'publication_date_hint' =>

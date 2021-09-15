@@ -11,7 +11,7 @@
 
 <?= $this->section('content') ?>
 
-<?= form_open_multipart(
+<?= form_open(
     route_to('episode-soundbites-edit', $podcast->id, $episode->id),
     [
         'method' => 'post',

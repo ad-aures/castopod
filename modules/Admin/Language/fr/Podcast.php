@@ -90,7 +90,6 @@ return [
         'partner_link_url_hint' => 'L’adresse générique des liens partenaire',
         'partner_image_url_hint' => 'L’adresse générique des images partenaire',
         'status_section_title' => 'Statut',
-        'status_section_subtitle' => 'Vivant ou mort ?',
         'block' => 'Le podcast doit être masqué sur toutes les plateformes',
         'complete' => 'Le podcast n’aura plus de nouveaux épisodes.',
         'lock' => 'Empêcher la copie du podcast',

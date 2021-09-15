@@ -88,7 +88,6 @@ return [
         'partner_link_url_hint' => 'The generic partner link address',
         'partner_image_url_hint' => 'The generic partner image address',
         'status_section_title' => 'Status',
-        'status_section_subtitle' => 'Dead or alive?',
         'block' => 'Podcast should be hidden from all platforms',
         'complete' => 'Podcast will not be having new episodes',
         'lock' => 'Prevent podcast from being copied',

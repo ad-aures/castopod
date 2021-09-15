@@ -24,7 +24,7 @@
             <a href="<?= route_to(
             'admin',
         ) ?>" class="inline-flex items-center h-full px-2 border-r border-pine-900">
-                <?= (isset($podcast) ? icon('arrow-left', 'mr-2') : '') . svg('castopod-logo', 'h-6') ?>
+                <?= (isset($podcast) ? icon('arrow-left', 'mr-2') : '') . svg('castopod-logo-base', 'h-6') ?>
             </a>
             <a href="<?= route_to(
             'home',
@@ -93,7 +93,7 @@
             </div>
         </header>
         <div class="container px-2 py-8 mx-auto md:px-12">
-            <!-- view('App\Views\_message_block') -->
+            <?= view('_message_block') ?>
             <?= $this->renderSection('content') ?>
         </div>
     </main>

@@ -11,39 +11,27 @@
 
 <?= $this->section('content') ?>
 
-<?= form_open(route_to('contributor-add', $podcast->id), [
-    'class' => 'flex flex-col max-w-sm',
-]) ?>
+<form method="POST" action="<?= route_to('contributor-add', $podcast->id) ?>" class="flex flex-col max-w-sm gap-y-4">
 <?= csrf_field() ?>
 
-<Forms.Label for="user"><?= lang('Contributor.form.user') ?></Forms.Label>
-<?= form_dropdown('user', $userOptions, [old('user', '')], [
-    'id' => 'user',
-    'class' => 'form-select mb-4',
-    'required' => 'required',
-    'placeholder' => lang('Contributor.form.user_placeholder'),
-]) ?>
+<Forms.Field
+    as="Select"
+    name="user"
+    label="<?= lang('Contributor.form.user') ?>"
+    options="<?= esc(json_encode($userOptions)) ?>"
+    placeholder="<?= lang('Contributor.form.user_placeholder') ?>"
+    required="true" />
 
-<Forms.Label for="role"><?= lang('Contributor.form.role') ?></Forms.Label>
-<?= form_dropdown('role', $roleOptions, [old('role', '')], [
-    'id' => 'role',
-    'class' => 'form-select mb-4',
-    'required' => 'required',
-    'placeholder' => lang('Contributor.form.role_placeholder'),
-]) ?>
+<Forms.Field
+    as="Select"
+    name="role"
+    label="<?= lang('Contributor.form.role') ?>"
+    options="<?= esc(json_encode($roleOptions)) ?>"
+    placeholder="<?= lang('Contributor.form.role_placeholder') ?>"
+    required="true" />
 
-<?= button(
-    lang('Contributor.form.submit_add'),
-    '',
-    [
-        'variant' => 'primary',
-    ],
-    [
-        'type' => 'submit',
-        'class' => 'self-end',
-    ],
-) ?>
+<Button type="submit" class="self-end" variant="primary"><?= lang('Contributor.form.submit_add') ?></Button>
 
-<?= form_close() ?>
+</form>
 
 <?= $this->endSection() ?>

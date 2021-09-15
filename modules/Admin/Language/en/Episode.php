@@ -118,6 +118,7 @@ return [
         'post' => 'Your announcement post',
         'post_hint' =>
             "Write a message to announce the publication of your episode. The message will be broadcasted to all your followers in the fediverse and be featured in your podcast's homepage.",
+        'message_placeholder' => 'Write your message…',
         'publication_date' => 'Publication date',
         'publication_method' => [
             'now' => 'Now',

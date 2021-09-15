@@ -11,39 +11,10 @@
 
 <?= $this->section('content') ?>
 
-<?= form_open(route_to('fediverse-attempt-block-domain'), [
-    'method' => 'post',
-    'class' => 'flex flex-col max-w-md mb-8',
-]) ?>
-
-<?= form_label(
-    lang('Fediverse.block_lists_form.domain'),
-    'blocked_users',
-    [],
-) ?>
-<?= form_input(
-    [
-        'id' => 'domain',
-        'name' => 'domain',
-        'class' => 'form-input mb-4',
-        'type' => 'text',
-    ],
-    old('domain', ''),
-) ?>
-
-<?= button(
-    lang('Fediverse.block_lists_form.submit'),
-    '',
-    [
-        'variant' => 'primary',
-    ],
-    [
-        'type' => 'submit',
-        'class' => 'self-end',
-    ],
-) ?>
-
-<?= form_close() ?>
+<form action="<?= route_to('fediverse-attempt-block-domain') ?>" method="POST" class="flex flex-col max-w-md">
+    <Forms.Field name="domain" label="<?= lang('Fediverse.block_lists_form.domain') ?>" />
+    <Button variant="primary" type="submit" class="self-end"><?= lang('Fediverse.block_lists_form.submit') ?></Button>
+</form>
 
 <?= data_table(
     [
@@ -83,6 +54,7 @@
         ],
     ],
     $blockedDomains,
+    'mt-8'
 ) ?>
 
 <?= $this->endSection() ?>

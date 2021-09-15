@@ -4,15 +4,19 @@ declare(strict_types=1);
 
 namespace App\Views\Components\Forms;
 
-class Section extends FormComponent
+use ViewComponents\Component;
+
+class Section extends Component
 {
     protected string $title = '';
 
     protected ?string $subtitle = null;
 
+    protected string $subtitleClass = '';
+
     public function render(): string
     {
-        $subtitle = $this->subtitle === null ? '' : '<p class="text-sm text-gray-600 clear-left">' . $this->subtitle . '</p>';
+        $subtitle = $this->subtitle === null ? '' : '<p class="text-sm text-gray-600 clear-left ' . $this->subtitleClass . '">' . $this->subtitle . '</p>';
 
         return <<<HTML
             <fieldset class="w-full max-w-xl p-8 bg-white border-2 border-black rounded-xl {$this->class}">

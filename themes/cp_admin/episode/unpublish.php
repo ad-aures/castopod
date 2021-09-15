@@ -10,48 +10,18 @@
 
 <?= $this->section('content') ?>
 
-<?= form_open(route_to('episode-unpublish', $podcast->id, $episode->id), [
-    'class' => 'flex flex-col max-w-xl mx-auto',
-]) ?>
+<form action="<?= route_to('episode-unpublish', $podcast->id, $episode->id) ?>" method="POST" class="flex flex-col max-w-xl mx-auto">
+<?= csrf_field() ?>
 
-<p class="flex max-w-xl p-2 mb-4 font-semibold text-red-900 bg-red-100 border border-red-300"><?= icon(
-    'alert',
-    'mr-4 text-2xl flex-shrink-0 text-red-500',
-) . lang('Episode.unpublish_form.disclaimer') ?></p>
+<Alert variant="danger" glyph="alert" class="font-semibold"><?= lang('Episode.unpublish_form.disclaimer') ?></Alert>
 
-<label for="understand" class="inline-flex items-center mb-4">
-    <?= form_checkbox(
-    [
-        'id' => 'understand',
-        'name' => 'understand',
-        'class' => 'text-pine-700',
-        'required' => 'required',
-    ],
-    'yes',
-    old('understand', false),
-) ?>
-    <span class="ml-2"><?= lang('Episode.unpublish_form.understand') ?></span>
-</label>
+<Forms.Checkbox name="understand" required="true" isChecked="false"><?= lang('Episode.unpublish_form.understand') ?></Forms.Checkbox>
 
-<div class="self-end">
-<?= button(
-    lang('Common.cancel'),
-    route_to('episode-view', $podcast->id, $episode->id),
-) ?>
-
-<?= button(
-    lang('Episode.unpublish_form.submit'),
-    '',
-    [
-        'variant' => 'danger',
-    ],
-    [
-        'type' => 'submit',
-    ],
-) ?>
+<div class="self-end mt-4">
+    <Button uri="<?= route_to('episode-view', $podcast->id, $episode->id) ?>"><?= lang('Common.cancel') ?></Button>
+    <Button type="submit" variant="danger"><?= lang('Episode.unpublish_form.submit') ?></Button>
 </div>
 
-
-<?= form_close() ?>
+</form>
 
 <?= $this->endSection() ?>

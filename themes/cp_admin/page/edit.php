@@ -11,58 +11,36 @@
 
 <?= $this->section('content') ?>
 
-<?= form_open(route_to('page-edit', $page->id), [
-    'class' => 'flex flex-col max-w-3xl',
-]) ?>
+<form action="<?= route_to('page-edit', $page->id) ?>" method="POST" class="flex flex-col max-w-3xl">
 <?= csrf_field() ?>
 
-<?= form_label(lang('Page.form.title'), 'title', [
-    'class' => 'max-w-sm',
-]) ?>
-<?= form_input([
-    'id' => 'title',
-    'name' => 'title',
-    'class' => 'form-input mb-4 max-w-sm',
-    'value' => old('title', $page->title),
-    'required' => 'required',
-    'data-slugify' => 'title',
-    'slot' => 'slug-input',
-]) ?>
 
-<?= form_label(
-    lang('Page.form.permalink'),
-    'slug',
-    [],
-) ?>
-<permalink-edit class="inline-flex items-center max-w-sm mb-4 text-xs" edit-label="<?= lang('Common.edit') ?>" copy-label="<?= lang('Common.copy') ?>" copied-label="<?= lang('Common.copied') ?>">
-<span slot="domain" class="flex-shrink-0"><?= base_url('pages') . '/' ?></span>
-<?= form_input([
-    'id' => 'slug',
-    'name' => 'slug',
-    'class' => 'form-input flex-1 w-0 text-xs',
-    'value' => old('slug', $page->slug),
-    'required' => 'required',
-    'data-slugify' => 'slug',
-]) ?>
-</permalink-edit>
+<Forms.Field
+    name="title"
+    label="<?= lang('Page.form.title') ?>"
+    required="true"
+    data-slugify="title"
+    value="<?= $page->title ?>"
+    slot="slug-input" />
 
-<div class="mb-4">
-    <?= form_label(lang('Page.form.content'), 'content') ?>
-    <Forms.MarkdownEditor id="content" name="content" required="required"><?= old('content', $page->content_markdown, false) ?></Forms.MarkdownEditor>
+<div>
+    <Forms.Label for="slug"><?= lang('Page.form.permalink') ?></Forms.Label>
+    <permalink-edit class="inline-flex items-center text-xs" edit-label="<?= lang('Common.edit') ?>" copy-label="<?= lang('Common.copy') ?>" copied-label="<?= lang('Common.copied') ?>">
+        <span slot="domain"><?= base_url('pages') . '/' ?></span>
+        <Forms.Input name="slug" value="<?= $episode->slug ?>" required="true" data-slugify="slug" slot="slug-input" class="flex-1 text-xs" value="<?= $page->slug ?>"/>
+    </permalink-edit>
 </div>
 
-<?= button(
-    lang('Page.form.submit_edit'),
-    '',
-    [
-        'variant' => 'primary',
-    ],
-    [
-        'type' => 'submit',
-        'class' => 'self-end',
-    ],
-) ?>
+<Forms.Field
+    as="MarkdownEditor"
+    name="content"
+    label="<?= lang('Page.form.content') ?>"
+    value="<?= $page->content_markdown ?>"
+    required="true"
+    rows="20" />
 
-<?= form_close() ?>
+<Button variant="primary" type="submit" class="self-end"><?= lang('Page.form.submit_edit') ?></Button>
+
+</form>
 
 <?= $this->endSection() ?>

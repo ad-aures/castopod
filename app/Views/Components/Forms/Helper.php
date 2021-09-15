@@ -7,7 +7,7 @@ namespace App\Views\Components\Forms;
 class Helper extends FormComponent
 {
     /**
-     * @var "default"|"error"
+     * @var 'default'|'error'
      */
     protected string $type = 'default';
 

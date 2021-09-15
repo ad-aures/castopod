@@ -98,6 +98,7 @@
                 <?php foreach ($episode->posts as $post): ?>
                     <?= view('podcast/_partials/post', [
                         'post' => $post,
+                        'podcast' => $podcast,
                     ]) ?>
                 <?php endforeach; ?>
             </section>

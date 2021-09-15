@@ -69,9 +69,6 @@ class EpisodeComment extends UuidEntity
         'is_from_post' => 'boolean',
     ];
 
-    /**
-     * Returns the comment's attached episode
-     */
     public function getEpisode(): ?Episode
     {
         if ($this->episode_id === null) {

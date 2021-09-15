@@ -81,46 +81,30 @@
                 ],
             )
             : '' ?>
-        <?= form_label($platform->label, $platform->slug, [
-            'class' => 'font-semibold mb-2',
-        ]) ?>
-        <?= form_input([
-            'id' => $platform->slug . '_link_url',
-            'name' => 'platforms[' . $platform->slug . '][url]',
-            'class' => 'form-input mb-1 w-full',
-            'value' => old($platform->slug . '_link_url', $platform->link_url),
-            'type' => 'url',
-            'placeholder' => 'https://...',
-        ]) ?>
-        <?= form_input([
-            'id' => $platform->slug . '_link_content',
-            'name' => 'platforms[' . $platform->slug . '][content]',
-            'class' => 'form-input mb-1 w-full',
-            'value' => old(
-                $platform->slug . '_link_content',
-                $platform->link_content,
-            ),
-            'type' => 'text',
-            'placeholder' => lang("Platforms.description.{$platform->type}"),
-        ]) ?>
-        <Forms.Toggler class="mb-1 text-sm" id="<?= $platform->slug . '_visible' ?>" name="<?= 'platforms[' . $platform->slug . '][visible]'?>" value="yes" checked="<?= old($platform->slug . '_visible', $platform->is_visible ? $platform->is_visible : false) ?>"><?= lang('Platforms.visible') ?></Forms.Toggler>
-        <Forms.Toggler class="text-sm" id="<?= $platform->slug . '_on_embeddable_player' ?>" name="<?= 'platforms[' . $platform->slug . '][on_embeddable_player]'?>" value="yes" checked="<?= old($platform->slug . '_on_embeddable_player', $platform->is_on_embeddable_player ? $platform->is_on_embeddable_player : false) ?>"><?= lang('Platforms.on_embeddable_player') ?></Forms.Toggler>
+        <fieldset>
+            <legend class="mb-2 font-semibold"><?= $platform->label ?></legend>
+            <Forms.Input
+                class="w-full mb-1"
+                id="<?= $platform->slug . '_link_url' ?>"
+                name="<?= 'platforms[' . $platform->slug . '][url]' ?>"
+                value="<?= $platform->link_url ?>"
+                type="url"
+                placeholder="https://…" />
+            <Forms.Input
+                class="w-full mb-1"
+                id="<?= $platform->slug . '_link_content' ?>"
+                name="<?= 'platforms[' . $platform->slug . '][content]' ?>"
+                value="<?= $platform->link_content ?>"
+                placeholder="<?= lang("Platforms.description.{$platform->type}") ?>" />
+            <Forms.Toggler size="small" class="text-sm" id="<?= $platform->slug . '_visible' ?>" name="<?= 'platforms[' . $platform->slug . '][visible]'?>" value="yes" checked="<?= old($platform->slug . '_visible', $platform->is_visible ? $platform->is_visible : false) ?>"><?= lang('Platforms.visible') ?></Forms.Toggler>
+            <Forms.Toggler size="small" class="text-sm" id="<?= $platform->slug . '_on_embeddable_player' ?>" name="<?= 'platforms[' . $platform->slug . '][on_embeddable_player]'?>" value="yes" checked="<?= old($platform->slug . '_on_embeddable_player', $platform->is_on_embeddable_player ? $platform->is_on_embeddable_player : false) ?>"><?= lang('Platforms.on_embeddable_player') ?></Forms.Toggler>
+        </fieldset>
     </div>
 </div>
 
 <?php endforeach; ?>
 
-<?= button(
-            lang('Platforms.submit'),
-            '',
-            [
-                'variant' => 'primary',
-            ],
-            [
-                'type' => 'submit',
-                'class' => 'self-end',
-            ],
-        ) ?>
+<Button variant="primary" type="submit" class="self-end"><?= lang('Platforms.submit') ?></Button>
 
 <?= form_close() ?>
 

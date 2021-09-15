@@ -132,6 +132,7 @@
                 <?php foreach ($episode->comments as $comment): ?>
                     <?= view('podcast/_partials/comment_authenticated', [
                         'comment' => $comment,
+                        'podcast' => $podcast,
                     ]) ?>
                 <?php endforeach; ?>
             </section>
@@ -186,6 +187,7 @@
                 <?php foreach ($episode->posts as $post): ?>
                     <?= view('podcast/_partials/post_authenticated', [
                         'post' => $post,
+                        'podcast' => $podcast,
                     ]) ?>
                 <?php endforeach; ?>
             </section>

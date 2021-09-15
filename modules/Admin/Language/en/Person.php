@@ -17,8 +17,6 @@ return [
     'edit' => 'Edit person',
     'delete' => 'Delete person',
     'form' => [
-        'identity_section_title' => 'Identity',
-        'identity_section_subtitle' => 'Who is working on the podcast',
         'image' => 'Picture',
         'image_size_hint' =>
             'Image must be squared with at least 400px wide and tall.',
@@ -34,8 +32,6 @@ return [
     ],
     'podcast_form' => [
         'title' => 'Manage persons',
-        'manage_section_title' => 'Management',
-        'manage_section_subtitle' => 'Remove persons from this podcast',
         'add_section_title' => 'Add persons to this podcast',
         'add_section_subtitle' => 'You may pick several persons and roles.',
         'persons' => 'Persons',
@@ -49,8 +45,6 @@ return [
     ],
     'episode_form' => [
         'title' => 'Manage persons',
-        'manage_section_title' => 'Management',
-        'manage_section_subtitle' => 'Remove persons from this episode',
         'add_section_title' => 'Add persons to this episode',
         'add_section_subtitle' => 'You may pick several persons and roles.',
         'persons' => 'Persons',

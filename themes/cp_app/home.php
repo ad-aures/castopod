@@ -19,7 +19,7 @@
             <a href="<?= route_to(
             'home',
         ) ?>" class="inline-flex items-baseline text-3xl font-semibold font-display"><?= 'castopod' .
-    svg('castopod-logo', 'h-6 ml-2') ?></a>
+    svg('castopod-logo-base', 'h-6 ml-2') ?></a>
         </div>
     </header>
     <main class="container flex-1 px-4 py-10 mx-auto">

@@ -5,13 +5,13 @@ const Clipboard = (): void => {
   if (buttons) {
     for (let i = 0; i < buttons.length; i++) {
       const button: HTMLButtonElement = buttons[i];
-      const textArea: HTMLTextAreaElement | null = document.querySelector(
-        `textarea[id="${button.dataset.clipboardTarget}"]`
+      const element: HTMLFormElement | null = document.querySelector(
+        `[id="${button.dataset.clipboardTarget}"]`
       );
-      if (textArea) {
+      if (element) {
         button.addEventListener("click", () => {
-          textArea.select();
-          textArea.setSelectionRange(0, textArea.value.length);
+          element.select();
+          element.setSelectionRange(0, element.value.length);
           document.execCommand("copy");
         });
       }

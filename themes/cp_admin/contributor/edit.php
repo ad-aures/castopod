@@ -11,30 +11,20 @@
 
 <?= $this->section('content') ?>
 
-<?= form_open(route_to('contributor-edit', $podcast->id, $user->id), [
-    'class' => 'flex flex-col max-w-sm',
-]) ?>
+<form method="POST" action="<?= route_to('contributor-edit', $podcast->id, $user->id) ?>" class="flex flex-col max-w-sm gap-y-4">
 <?= csrf_field() ?>
 
-<Forms.Label for="role"><?= lang('Contributor.form.role') ?></Forms.Label>
-<?= form_dropdown('role', $roleOptions, [old('role', $contributorGroupId)], [
-    'id' => 'role',
-    'class' => 'form-select mb-4',
-    'required' => 'required',
-]) ?>
+<Forms.Field
+    as="Select"
+    name="role"
+    label="<?= lang('Contributor.form.role') ?>"
+    selected="<?= $contributorGroupId ?>"
+    options="<?= esc(json_encode($roleOptions)) ?>"
+    placeholder="<?= lang('Contributor.form.role_placeholder') ?>"
+    required="true" />
 
-<?= button(
-    lang('Contributor.form.submit_edit'),
-    '',
-    [
-        'variant' => 'primary',
-    ],
-    [
-        'type' => 'submit',
-        'class' => 'self-end',
-    ],
-) ?>
+<Button variant="primary" type="submit" class="self-end"><?= lang('Contributor.form.submit_edit') ?></Button>
 
-<?= form_close() ?>
+</form>
 
 <?= $this->endSection() ?>

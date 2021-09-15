@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace App\Views\Components\Forms;
 
-use ViewComponents\Component;
-
-class MultiSelect extends Component
+class MultiSelect extends FormComponent
 {
     /**
      * @var array<string, string>
@@ -36,6 +34,6 @@ class MultiSelect extends Component
         ];
         $extra = array_merge($defaultAttributes, $this->attributes);
 
-        return form_dropdown($this->attributes['name'], $this->options, $this->selected, $extra);
+        return form_dropdown($this->name, $this->options, $this->selected, $extra);
     }
 }

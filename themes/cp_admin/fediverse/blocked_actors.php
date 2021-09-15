@@ -11,41 +11,10 @@
 
 <?= $this->section('content') ?>
 
-<?= form_open(route_to('fediverse-attempt-block-actor'), [
-    'method' => 'post',
-    'class' => 'flex flex-col max-w-md mb-8',
-]) ?>
-
-<?= form_label(
-    lang('Fediverse.block_lists_form.handle'),
-    'blocked_users',
-    [],
-    lang('Fediverse.block_lists_form.handle_hint'),
-) ?>
-<?= form_input(
-    [
-        'id' => 'handle',
-        'name' => 'handle',
-        'class' => 'form-input mb-4',
-        'type' => 'text',
-    ],
-    old('handle', ''),
-) ?>
-
-<?= button(
-    lang('Fediverse.block_lists_form.submit'),
-    '',
-    [
-        'variant' => 'primary',
-    ],
-    [
-        'type' => 'submit',
-        'class' => 'self-end',
-    ],
-) ?>
-
-<?= form_close() ?>
-
+<form action="<?= route_to('fediverse-attempt-block-actor') ?>" method="POST" class="flex flex-col max-w-md">
+    <Forms.Field name="handle" label="<?= lang('Fediverse.block_lists_form.handle') ?>" hintText="<?= lang('Fediverse.block_lists_form.handle_hint') ?>" />
+    <Button variant="primary" type="submit" class="self-end"><?= lang('Fediverse.block_lists_form.submit') ?></Button>
+</form>
 
 <?= data_table(
     [

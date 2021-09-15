@@ -26,7 +26,7 @@
     <div class="fixed top-0 left-0 z-50 flex items-center justify-between w-full h-12 px-4 text-white shadow bg-pine-800">
         <?= anchor(
             route_to('admin'),
-            'castopod' . svg('castopod-logo', 'h-5 ml-1'),
+            'castopod' . svg('castopod-logo-base', 'h-5 ml-1'),
             [
                 'class' =>
                     'text-2xl inline-flex items-baseline font-bold font-display',

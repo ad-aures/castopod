@@ -45,12 +45,14 @@
 <?php foreach ($posts as $post): ?>
     <?php if ($post->reblog_of_id !== null): ?>
         <?= view('podcast/_partials/reblog', [
-            'post' => $post->reblog_of_post,
-        ]) ?>
+    'post' => $post->reblog_of_post,
+            'podcast' => $podcast,
+]) ?>
     <?php else: ?>
         <?= view('podcast/_partials/post', [
-            'post' => $post,
-        ]) ?>
+    'post' => $post,
+            'podcast' => $podcast,
+]) ?>
     <?php endif; ?>
 <?php endforeach; ?>
 </section>

@@ -11,7 +11,7 @@ class Heading extends Component
     protected string $tagName = 'div';
 
     /**
-     * @var "small"|"base"|"large"
+     * @var 'small'|'base'|'large'
      */
     protected string $size = 'base';
 
