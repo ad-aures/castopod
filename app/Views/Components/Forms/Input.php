@@ -10,7 +10,7 @@ class Input extends FormComponent
 
     public function render(): string
     {
-        $class = 'px-3 py-2 rounded-lg border-3 focus:ring-2 focus:ring-pine-500 focus:ring-offset-2 focus:ring-offset-pine-100 ' . $this->class;
+        $class = 'px-3 py-2 bg-white rounded-lg border-3 focus:ring-2 focus:ring-pine-500 focus:ring-offset-2 focus:ring-offset-pine-100 ' . $this->class;
 
         if (session()->has('errors')) {
             $error = session('errors')[$this->name];

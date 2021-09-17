@@ -14,20 +14,21 @@
 <?= form_open(route_to('page-create'), [
     'class' => 'flex flex-col max-w-3xl',
 ]) ?>
-<form action="<?= route_to('page-create') ?>" method="POST" class="flex flex-col max-w-3xl">
+<form action="<?= route_to('page-create') ?>" method="POST" class="flex flex-col max-w-3xl gap-y-4">
 <?= csrf_field() ?>
 
 <Forms.Field
     name="title"
     label="<?= lang('Page.form.title') ?>"
     required="true"
-    data-slugify="title" />
+    data-slugify="title"
+    class="max-w-sm" />
 
 <div>
     <Forms.Label for="slug"><?= lang('Page.form.permalink') ?></Forms.Label>
     <permalink-edit class="inline-flex items-center text-xs" edit-label="<?= lang('Common.edit') ?>" copy-label="<?= lang('Common.copy') ?>" copied-label="<?= lang('Common.copied') ?>">
         <span slot="domain"><?= base_url('pages') . '/' ?></span>
-        <Forms.Input name="slug" value="<?= $episode->slug ?>" required="true" data-slugify="slug" slot="slug-input" class="flex-1 text-xs" />
+        <Forms.Input name="slug" required="true" data-slugify="slug" slot="slug-input" class="flex-1 text-xs" />
     </permalink-edit>
 </div>
 

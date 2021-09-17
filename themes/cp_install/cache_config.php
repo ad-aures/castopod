@@ -7,7 +7,7 @@
 ]) ?>
 <?= csrf_field() ?>
 
-<h1 class="mb-4 text-xl font-bold font-display"><span class="inline-flex items-center justify-center w-12 h-12 mr-2 text-sm font-semibold tracking-wider border-4 rounded-full text-pine-700 border-pine-700 font-body">3/4</span><?= lang(
+<h1 class="mb-4 text-xl font-bold font-display"><span class="inline-flex items-center justify-center w-12 h-12 mr-2 text-sm font-semibold tracking-wider border-4 rounded-full text-pine-700 border-pine-700">3/4</span><?= lang(
     'Install.form.cache_config',
 ) ?></h1>
 

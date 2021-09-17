@@ -8,7 +8,7 @@
 ]) ?>
 <?= csrf_field() ?>
 
-<h1 class="mb-2 text-xl font-bold font-display"><span class="inline-flex items-center justify-center w-12 h-12 mr-2 text-sm font-semibold tracking-wider border-4 rounded-full text-pine-700 border-pine-700 font-body">2/4</span><?= lang(
+<h1 class="mb-2 text-xl font-bold font-display"><span class="inline-flex items-center justify-center w-12 h-12 mr-2 text-sm font-semibold tracking-wider border-4 rounded-full text-pine-700 border-pine-700">2/4</span><?= lang(
     'Install.form.database_config',
 ) ?></h1>
 

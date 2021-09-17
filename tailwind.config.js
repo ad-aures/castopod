@@ -1,4 +1,5 @@
 /* eslint-disable */
+const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
   mode: "jit",
@@ -12,9 +13,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Montserrat", "sans-serif"],
-        display: ["Kumbh Sans", "sans-serif"],
-        body: ["Montserrat", "sans-serif"],
+        sans: ["Inter", ...defaultTheme.fontFamily.sans],
+        display: ["Kumbh Sans", ...defaultTheme.fontFamily.sans],
+        // body: ["Inter", ...defaultTheme.fontFamily.sans],
       },
       colors: {
         pine: {
