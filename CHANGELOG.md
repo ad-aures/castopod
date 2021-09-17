@@ -1,3 +1,10 @@
+# [1.0.0-alpha.71](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.70...v1.0.0-alpha.71) (2021-09-17)
+
+### Features
+
+- **map:** display geolocated episodes on a map page
+  ([4357cc2](https://code.podlibre.org/podlibre/castopod-host/commit/4357cc25ccc585ce398035c1c25d566b6a9df775))
+
 # [1.0.0-alpha.70](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.69...v1.0.0-alpha.70) (2021-08-31)
 
 ### Bug Fixes
