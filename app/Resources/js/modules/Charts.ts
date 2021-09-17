@@ -1,4 +1,3 @@
-// Import modules
 import am4geodata_worldLow from "@amcharts/amcharts4-geodata/worldLow";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import * as am4core from "@amcharts/amcharts4/core";

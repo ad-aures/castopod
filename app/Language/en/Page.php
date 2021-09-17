@@ -26,4 +26,5 @@ return [
     'messages' => [
         'createSuccess' => 'The page “{pageTitle}” was created successfully!',
     ],
+    'map' => 'Map',
 ];

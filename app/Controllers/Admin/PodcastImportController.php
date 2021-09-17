@@ -124,8 +124,8 @@ class PodcastImportController extends BaseController
             if (property_exists($nsPodcast, 'location') && $nsPodcast->location !== null) {
                 $location = new Location(
                     (string) $nsPodcast->location,
-                    (string) $nsPodcast->location->attributes()['geo'],
-                    (string) $nsPodcast->location->attributes()['osm'],
+                    $nsPodcast->location->attributes()['geo'] === null ? null : (string) $nsPodcast->location->attributes()['geo'],
+                    $nsPodcast->location->attributes()['osm'] === null ? null : (string) $nsPodcast->location->attributes()['osm'],
                 );
             }
             if (property_exists($nsPodcast, 'guid') && $nsPodcast->guid !== null) {
@@ -338,8 +338,8 @@ class PodcastImportController extends BaseController
             if (property_exists($nsPodcast, 'location') && $nsPodcast->location !== null) {
                 $location = new Location(
                     (string) $nsPodcast->location,
-                    (string) $nsPodcast->location->attributes()['geo'],
-                    (string) $nsPodcast->location->attributes()['osm'],
+                    $nsPodcast->location->attributes()['geo'] === null ? null : (string) $nsPodcast->location->attributes()['geo'],
+                    $nsPodcast->location->attributes()['osm'] === null ? null : (string) $nsPodcast->location->attributes()['osm'],
                 );
             }
 

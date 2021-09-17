@@ -16,6 +16,7 @@ export default defineConfig({
         "install.ts": "app/Resources/js/install.ts",
         "admin.ts": "app/Resources/js/admin.ts",
         "charts.ts": "app/Resources/js/charts.ts",
+        "map.ts": "app/Resources/js/map.ts",
         "styles/index.css": "app/Resources/styles/index.css",
       },
     },

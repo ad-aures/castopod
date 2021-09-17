@@ -18,6 +18,8 @@ use Config\Services;
  * @property string $name
  * @property string|null $geo
  * @property string|null $osm
+ * @property double|null $latitude
+ * @property double|null $longitude
  */
 class Location extends Entity
 {
@@ -34,12 +36,21 @@ class Location extends Entity
     public function __construct(
         protected string $name,
         protected ?string $geo = null,
-        protected ?string $osm = null
+        protected ?string $osm = null,
     ) {
+        $latitude = null;
+        $longitude = null;
+        if ($geo !== null) {
+            $geoArray = explode(',', substr($geo, 4));
+            $latitude = floatval($geoArray[0]);
+            $longitude = floatval($geoArray[1]);
+        }
         parent::__construct([
             'name' => $name,
             'geo' => $geo,
             'osm' => $osm,
+            'latitude' => $latitude,
+            'longitude' => $longitude,
         ]);
     }
 

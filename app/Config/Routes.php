@@ -781,6 +781,12 @@ $routes->group('@(:podcastName)', function ($routes): void {
 $routes->get('/credits', 'CreditsController', [
     'as' => 'credits',
 ]);
+$routes->get('/map', 'MapMarkerController', [
+    'as' => 'map',
+]);
+$routes->get('/episodes-markers', 'MapMarkerController::getEpisodesMarkers', [
+    'as' => 'episodes-markers',
+]);
 $routes->get('/pages/(:slug)', 'PageController/$1', [
     'as' => 'page',
 ]);

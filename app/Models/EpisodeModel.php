@@ -299,6 +299,8 @@ class EpisodeModel extends Model
             ->deleteMatching("page_podcast#{$episode->podcast_id}*");
         cache()
             ->deleteMatching('page_credits_*');
+        cache()
+            ->delete('episodes_markers');
 
         return $data;
     }

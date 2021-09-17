@@ -26,4 +26,5 @@ return [
     'messages' => [
         'createSuccess' => 'La page {pageTitle} a été créée avec succès !',
     ],
+    'map' => 'Cartographie',
 ];

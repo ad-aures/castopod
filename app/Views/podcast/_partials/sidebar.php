@@ -72,7 +72,7 @@
     </div>
     <footer class="px-2 py-4 mt-auto text-gray-600 border-t">
         <div class="container flex flex-col justify-between mx-auto text-xs">
-            <?= render_page_links('inline-flex mb-2') ?>
+            <?= render_page_links('inline-flex mb-2 flex-wrap gap-y-1') ?>
             <div class="flex flex-col">
                 <p><?= $podcast->copyright ?></p>
                 <p><?= lang('Common.powered_by', [
