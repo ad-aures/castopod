@@ -1,3 +1,10 @@
+# [1.0.0-alpha.72](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.71...v1.0.0-alpha.72) (2021-09-20)
+
+### Bug Fixes
+
+- rename field status to task_status to get scheduled activities
+  ([4ff82a5](https://code.podlibre.org/podlibre/castopod-host/commit/4ff82a5f0a38dbbc9e272fca7df70ea5a190e334))
+
 # [1.0.0-alpha.71](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.70...v1.0.0-alpha.71) (2021-09-17)
 
 ### Features
