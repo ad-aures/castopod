@@ -113,7 +113,7 @@ class ActivityModel extends UuidModel
     public function getScheduledActivities(): array
     {
         return $this->where('`scheduled_at` <= NOW()', null, false)
-            ->where('status', 'queued')
+            ->where('task_status', 'queued')
             ->orderBy('scheduled_at', 'ASC')
             ->findAll();
     }
