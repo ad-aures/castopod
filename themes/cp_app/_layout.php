@@ -21,9 +21,9 @@
         <div class="container flex flex-col px-2 py-4 mx-auto">
             <a href="<?= route_to('home') ?>"
             class="inline-flex items-center mb-2"><?= icon(
-                'arrow-left',
-                'mr-2',
-            ) . lang('Page.back_to_home') ?></a>
+            'arrow-left',
+            'mr-2',
+        ) . lang('Page.back_to_home') ?></a>
             <h1 class="text-3xl font-semibold"><?= isset($page)
     ? $page->title
     : 'Castopod' ?></h1>

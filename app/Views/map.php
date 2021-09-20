@@ -1,6 +1,7 @@
 <?= helper('page') ?>
 <!DOCTYPE html>
-<html lang="<?= service('request')->getLocale() ?>" class="h-full">
+<html lang="<?= service('request')
+    ->getLocale() ?>" class="h-full">
 
 <head>
     <meta charset="UTF-8"/>
@@ -8,8 +9,10 @@
     <meta name="description" content="Castopod is an open-source hosting platform made for podcasters who want engage and interact with their audience."/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
-    <?= service('vite')->asset('styles/index.css', 'css') ?>
-    <?= service('vite')->asset('js/map.ts', 'js') ?>
+    <?= service('vite')
+        ->asset('styles/index.css', 'css') ?>
+    <?= service('vite')
+        ->asset('js/map.ts', 'js') ?>
 </head>
 
 <body class="flex flex-col h-full min-h-screen mx-auto bg-gray-100">
@@ -17,9 +20,9 @@
         <div class="container flex flex-col px-2 py-4 mx-auto">
             <a href="<?= route_to('home') ?>"
             class="inline-flex items-center mb-2"><?= icon(
-                'arrow-left',
-                'mr-2',
-            ) . lang('Page.back_to_home') ?></a>
+            'arrow-left',
+            'mr-2',
+        ) . lang('Page.back_to_home') ?></a>
             <h1 class="text-3xl font-semibold"><?= lang('Page.map') ?></h1>
         </div>
     </header>
