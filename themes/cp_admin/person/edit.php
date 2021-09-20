@@ -19,7 +19,7 @@
 <Forms.Field
     name="image"
     label="<?= lang('Person.form.image') ?>"
-    helperText="<?= lang('Person.form.image_size_hint') ?>"
+    helper="<?= lang('Person.form.image_size_hint') ?>"
     type="file"
     accept=".jpg,.jpeg,.png" />
 
@@ -27,7 +27,7 @@
     name="full_name"
     value="<?= $person->full_name ?>"
     label="<?= lang('Person.form.full_name') ?>"
-    hintText="<?= lang('Person.form.full_name_hint') ?>"
+    hint="<?= lang('Person.form.full_name_hint') ?>"
     required="true"
     data-slugify="title" />
 
@@ -35,12 +35,12 @@
     name="unique_name"
     value="<?= $person->unique_name ?>"
     label="<?= lang('Person.form.unique_name') ?>"
-    hintText="<?= lang('Person.form.unique_name_hint') ?>"
+    hint="<?= lang('Person.form.unique_name_hint') ?>"
     required="true" />
 <Forms.Field
     name="information_url"
     label="<?= lang('Person.form.information_url') ?>"
-    hintText="<?= lang('Person.form.information_url_hint') ?>"
+    hint="<?= lang('Person.form.information_url_hint') ?>"
     value="<?= $person->information_url ?>" />
 
 <Button variant="primary" class="self-end" type="submit"><?= lang('Person.form.submit_edit') ?></Button>

@@ -40,41 +40,17 @@
     <main class="flex-1 max-w-xl px-4 pb-8 mx-auto -mt-24">
         <?= $this->include('podcast/_partials/post') ?>
 
-        <?= form_open(
-            route_to('post-attempt-remote-action', $post->id, $action),
-            [
-                'method' => 'post',
-                'class' => 'flex flex-col mt-8',
-            ],
-        ) ?>
-        <?= csrf_field() ?>
-        <?= view('_message_block') ?>
+        <form action="<?= route_to('post-attempt-remote-action', $post->id, $action) ?>" method="POST" class="flex flex-col mt-8">
+            <?= csrf_field() ?>
+            <?= view('_message_block') ?>
 
-        <?= form_label(
-            lang('Fediverse.your_handle'),
-            'handle',
-            [],
-            lang('Fediverse.your_handle_hint'),
-        ) ?>
-        <?= form_input([
-            'id' => 'handle',
-            'name' => 'handle',
-            'class' => 'form-input mb-4',
-            'required' => 'required',
-            'type' => 'text',
-        ]) ?>
+            <Forms.Field
+                name="handle"
+                label="<?= lang('Fediverse.your_handle') ?>"
+                hint="<?= lang('Fediverse.your_handle_hint') ?>"
+                required="true" />
 
-        <?= button(
-            lang('Fediverse.' . $action . '.submit'),
-            '',
-            [
-                'variant' => 'primary',
-            ],
-            [
-                'type' => 'submit',
-                'class' => 'self-end',
-            ],
-        ) ?>
-        <?= form_close() ?>
+            <Button variant="primary" type="submit" class="self-end"><?= lang('Fediverse.' . $action . '.submit') ?></Button>
+        </form>
     </main>
 </body>

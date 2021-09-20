@@ -59,36 +59,28 @@ const Soundbites = (): void => {
     if (soundbitePlayButtons) {
       for (let i = 0; i < soundbitePlayButtons.length; i++) {
         const soundbitePlayButton: HTMLButtonElement = soundbitePlayButtons[i];
-        soundbitePlayButton.addEventListener("click", () => {
-          playSoundbite(
-            audioPlayer,
-            Number(soundbitePlayButton.dataset.soundbiteStartTime),
-            Number(soundbitePlayButton.dataset.soundbiteDuration)
-          );
-        });
-      }
-    }
 
-    const inputFields: NodeListOf<HTMLInputElement> | null =
-      document.querySelectorAll("input[data-type='soundbite-field']");
-    if (inputFields) {
-      for (let i = 0; i < inputFields.length; i++) {
-        const inputField: HTMLInputElement = inputFields[i];
-        const soundbitePlayButton: HTMLButtonElement | null =
-          document.querySelector(
-            `button[data-type="play-soundbite"][data-soundbite-id="${inputField.dataset.soundbiteId}"]`
-          );
-        if (soundbitePlayButton) {
-          if (inputField.dataset.fieldType == "start-time") {
-            inputField.addEventListener("input", () => {
-              soundbitePlayButton.dataset.soundbiteStartTime = inputField.value;
-            });
-          } else if (inputField.dataset.fieldType == "duration") {
-            inputField.addEventListener("input", () => {
-              soundbitePlayButton.dataset.soundbiteDuration = inputField.value;
-            });
+        soundbitePlayButton.addEventListener("click", () => {
+          // get values from inputs to play soundbite
+          const startTime: HTMLInputElement | null | undefined =
+            soundbitePlayButton.parentElement?.parentElement?.querySelector(
+              'input[data-field-type="start_time"]'
+            );
+          const duration: HTMLInputElement | null | undefined =
+            soundbitePlayButton.parentElement?.parentElement?.querySelector(
+              'input[data-field-type="duration"]'
+            );
+
+          console.log(soundbitePlayButton.parentElement);
+
+          if (startTime && duration) {
+            playSoundbite(
+              audioPlayer,
+              parseFloat(startTime.value),
+              parseFloat(duration.value)
+            );
           }
-        }
+        });
       }
     }
   }

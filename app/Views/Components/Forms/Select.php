@@ -15,17 +15,17 @@ class Select extends FormComponent
 
     public function setOptions(string $value): void
     {
-        // dd(json_decode(html_entity_decode(html_entity_decode($value)), true));
         $this->options = json_decode(html_entity_decode($value), true);
     }
 
     public function render(): string
     {
         $defaultAttributes = [
-            'data-class' => 'border-3 rounded-lg ' . $this->class,
+            'class' => 'focus:border-black focus:ring-2 focus:ring-pine-500 focus:ring-offset-2 focus:ring-offset-pine-100 border-3 rounded-lg border-black ' . $this->class,
+            'data-class' => $this->class,
         ];
-        $extra = array_merge($defaultAttributes, $this->attributes);
+        $extra = array_merge($this->attributes, $defaultAttributes);
 
-        return form_dropdown($this->name, $this->options, $this->selected !== '' ? [$this->selected] : [], $extra);
+        return form_dropdown($this->name, $this->options, old($this->name, $this->selected !== '' ? [$this->selected] : []), $extra);
     }
 }

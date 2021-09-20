@@ -11,49 +11,29 @@
 
 <?= $this->section('content') ?>
 
-<?= form_open(route_to('user-create'), [
-    'class' => 'flex flex-col max-w-sm',
-]) ?>
+<form action="<?= route_to('user-create') ?>" method="POST" class="flex flex-col max-w-sm">
 <?= csrf_field() ?>
 
-<?= form_label(lang('User.form.email'), 'email') ?>
-<?= form_input([
-    'id' => 'email',
-    'name' => 'email',
-    'class' => 'form-input mb-4',
-    'value' => old('email'),
-    'type' => 'email',
-]) ?>
+<Forms.Field
+    name="email"
+    type="email"
+    label="<?= lang('User.form.email') ?>"
+    required="true" />
 
-<?= form_label(lang('User.form.username'), 'username') ?>
-<?= form_input([
-    'id' => 'username',
-    'name' => 'username',
-    'class' => 'form-input mb-4',
-    'value' => old('username'),
-]) ?>
+<Forms.Field
+    name="username"
+    label="<?= lang('User.form.username') ?>"
+    required="true" />
 
-<?= form_label(lang('User.form.password'), 'password') ?>
-<?= form_input([
-    'id' => 'password',
-    'name' => 'password',
-    'class' => 'form-input mb-4',
-    'type' => 'password',
-    'autocomplete' => 'new-password',
-]) ?>
+<Forms.Field
+    name="password"
+    type="password"
+    label="<?= lang('User.form.password') ?>"
+    required="true"
+    autocomplete="new-password" />
 
-<?= button(
-    lang('User.form.submit_create'),
-    '',
-    [
-        'variant' => 'primary',
-    ],
-    [
-        'type' => 'submit',
-        'class' => 'self-end',
-    ],
-) ?>
+<Button variant="primary" type="submit" class="self-end"><?= lang('User.form.submit_create') ?></Button>
 
-<?= form_close() ?>
+</form>
 
 <?= $this->endSection() ?>

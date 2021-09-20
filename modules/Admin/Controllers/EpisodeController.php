@@ -722,6 +722,7 @@ class EpisodeController extends BaseController
                 "soundbites.{$soundbite_id}.duration" => 'required|decimal|greater_than_equal_to[0]',
             ];
         }
+
         if (! $this->validate($rules)) {
             return redirect()
                 ->back()
@@ -730,34 +731,33 @@ class EpisodeController extends BaseController
         }
 
         foreach ($soundbites as $soundbite_id => $soundbite) {
-            if ((int) $soundbite['start_time'] < (int) $soundbite['duration']) {
-                $data = [
-                    'podcast_id' => $this->podcast->id,
-                    'episode_id' => $this->episode->id,
-                    'start_time' => (float) $soundbite['start_time'],
-                    'duration' => (float) $soundbite['duration'],
-                    'label' => $soundbite['label'],
-                    'updated_by' => user_id(),
+            $data = [
+                'podcast_id' => $this->podcast->id,
+                'episode_id' => $this->episode->id,
+                'start_time' => (float) $soundbite['start_time'],
+                'duration' => (float) $soundbite['duration'],
+                'label' => $soundbite['label'],
+                'updated_by' => user_id(),
+            ];
+            if ($soundbite_id === 0) {
+                $data += [
+                    'created_by' => user_id(),
                 ];
-                if ($soundbite_id === 0) {
-                    $data += [
-                        'created_by' => user_id(),
-                    ];
-                } else {
-                    $data += [
-                        'id' => $soundbite_id,
-                    ];
-                }
+            } else {
+                $data += [
+                    'id' => $soundbite_id,
+                ];
+            }
 
-                $soundbiteModel = new SoundbiteModel();
-                if (! $soundbiteModel->save($data)) {
-                    return redirect()
-                        ->back()
-                        ->withInput()
-                        ->with('errors', $soundbiteModel->errors());
-                }
+            $soundbiteModel = new SoundbiteModel();
+            if (! $soundbiteModel->save($data)) {
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->with('errors', $soundbiteModel->errors());
             }
         }
+
         return redirect()->route('soundbites-edit', [$this->podcast->id, $this->episode->id]);
     }
 

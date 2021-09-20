@@ -10,20 +10,25 @@ class Field extends FormComponent
 
     protected string $label = '';
 
-    protected ?string $helperText = null;
+    protected ?string $helper = null;
 
-    protected ?string $hintText = null;
+    protected ?string $hint = null;
 
     public function render(): string
     {
-        $helperText = $this->helperText === null ? '' : '<Forms.Helper>' . $this->helperText . '</Forms.Helper>';
+        $helperText = '';
+        if ($this->helper !== null) {
+            $helperId = $this->id . 'Help';
+            $helperText = '<Forms.Helper id="' . $helperId . '">' . $this->helper . '</Forms.Helper>';
+            $this->attributes['aria-describedby'] = $helperId;
+        }
 
         $labelAttributes = [
             'for' => $this->id,
             'isOptional' => $this->required ? 'false' : 'true',
         ];
-        if ($this->hintText) {
-            $labelAttributes['hint'] = $this->hintText;
+        if ($this->hint) {
+            $labelAttributes['hint'] = $this->hint;
         }
         $labelAttributes = stringify_attributes($labelAttributes);
 

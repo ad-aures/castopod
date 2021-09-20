@@ -17,7 +17,7 @@
 <Forms.Field
     name="image"
     label="<?= lang('Person.form.image') ?>"
-    helperText="<?= lang('Person.form.image_size_hint') ?>"
+    helper="<?= lang('Person.form.image_size_hint') ?>"
     type="file"
     required="true"
     accept=".jpg,.jpeg,.png" />
@@ -25,19 +25,19 @@
 <Forms.Field
     name="full_name"
     label="<?= lang('Person.form.full_name') ?>"
-    hintText="<?= lang('Person.form.full_name_hint') ?>"
+    hint="<?= lang('Person.form.full_name_hint') ?>"
     required="true"
     data-slugify="title" />
 
 <Forms.Field
     name="unique_name"
     label="<?= lang('Person.form.unique_name') ?>"
-    hintText="<?= lang('Person.form.unique_name_hint') ?>"
+    hint="<?= lang('Person.form.unique_name_hint') ?>"
     required="true" />
 <Forms.Field
     name="information_url"
     label="<?= lang('Person.form.information_url') ?>"
-    hintText="<?= lang('Person.form.information_url_hint') ?>" />
+    hint="<?= lang('Person.form.information_url_hint') ?>" />
 
 <Button variant="primary" class="self-end" type="submit"><?= lang('Person.form.submit_create') ?></Button>
 

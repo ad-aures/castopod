@@ -10,52 +10,30 @@
 
 <p class="mb-4"><?= lang('Auth.enterCodeEmailPassword') ?></p>
 
-<?= form_open(route_to('reset-password'), [
-    'class' => 'flex flex-col',
-]) ?>
+<form action="<?= route_to('reset-password') ?>" method="POST" class="flex flex-col">
 <?= csrf_field() ?>
 
-<?= form_label(lang('Auth.token'), 'token') ?>
-<?= form_input([
-    'id' => 'token',
-    'name' => 'token',
-    'class' => 'form-input mb-4',
-    'value' => old('token', $token ?? ''),
-    'required' => 'required',
-]) ?>
+<Forms.Field
+    name="token"
+    label="<?= lang('Auth.token') ?>"
+    value="<?= $token ?? '' ?>"
+    required="true" />
+    
+<Forms.Field
+    name="email"
+    label="<?= lang('Auth.email') ?>"
+    type="email"
+    required="true" />
 
-<?= form_label(lang('Auth.email'), 'email') ?>
-<?= form_input([
-    'id' => 'email',
-    'name' => 'email',
-    'class' => 'form-input mb-4',
-    'value' => old('email'),
-    'required' => 'required',
-    'type' => 'email',
-]) ?>
+<Forms.Field
+    name="password"
+    label="<?= lang('Auth.newPassword') ?>"
+    type="password"
+    required="true"
+    autocomplete="new-password" />
 
-<?= form_label(lang('Auth.newPassword'), 'password') ?>
-<?= form_input([
-    'id' => 'password',
-    'name' => 'password',
-    'class' => 'form-input mb-4',
-    'type' => 'password',
-    'required' => 'required',
-    'autocomplete' => 'new-password',
-]) ?>
+<Button variant="primary" type="submit" class="self-end"><?= lang('Auth.resetPassword') ?></Button>
 
-<?= button(
-    lang('Auth.resetPassword'),
-    '',
-    [
-        'variant' => 'primary',
-    ],
-    [
-        'type' => 'submit',
-        'class' => 'self-end',
-    ],
-) ?>
-
-<?= form_close() ?>
+</form>
 
 <?= $this->endSection() ?>

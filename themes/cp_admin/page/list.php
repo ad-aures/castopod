@@ -9,10 +9,7 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
-<?= button(lang('Page.create'), route_to('page-create'), [
-    'variant' => 'accent',
-    'iconLeft' => 'add',
-]) ?>
+<Button uri="<?= route_to('page-create') ?>" variant="accent" iconLeft="add"><?= lang('Page.create') ?></Button>
 <?= $this->endSection() ?>
 
 
@@ -33,36 +30,9 @@
         [
             'header' => lang('Common.actions'),
             'cell' => function ($page) {
-                return button(
-                    lang('Page.go_to_page'),
-                    route_to('page', $page->slug),
-                    [
-                        'variant' => 'secondary',
-                        'size' => 'small',
-                    ],
-                    [
-                        'class' => 'mr-2',
-                    ],
-                ) .
-                    button(
-                        lang('Page.edit'),
-                        route_to('page-edit', $page->id),
-                        [
-                            'variant' => 'info',
-                            'size' => 'small',
-                        ],
-                        [
-                            'class' => 'mr-2',
-                        ],
-                    ) .
-                    button(
-                        lang('Page.delete'),
-                        route_to('page-delete', $page->id),
-                        [
-                            'variant' => 'danger',
-                            'size' => 'small',
-                        ],
-                    );
+                return '<Button uri="' . route_to('page', $page->slug) . '" variant="secondary" size="small">' . lang('Page.go_to_page') . '</Button>' .
+                '<Button uri="' . route_to('page-edit', $page->id) . '" variant="info" size="small">' . lang('Page.edit') . '</Button>' .
+                '<Button uri="' . route_to('page-delete', $page->id) . '" variant="danger" size="small">' . lang('Page.delete') . '</Button>';
             },
         ],
     ],

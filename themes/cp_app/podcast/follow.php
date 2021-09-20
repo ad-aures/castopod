@@ -48,39 +48,18 @@
     </header>
 
     <main class="w-full max-w-md px-4 mx-auto">
-        <?= form_open(route_to('attempt-follow', $actor->username), [
-            'method' => 'post',
-            'class' => 'flex flex-col',
-        ]) ?>
+        <form action="<?= route_to('attempt-follow', $actor->username) ?>" method="POST" class="flex flex-col">
         <?= csrf_field() ?>
         <?= view('_message_block') ?>
 
-        <?= form_label(
-            lang('Fediverse.your_handle'),
-            'handle',
-            [],
-            lang('Fediverse.your_handle_hint'),
-        ) ?>
-        <?= form_input([
-            'id' => 'handle',
-            'name' => 'handle',
-            'class' => 'form-input mb-4',
-            'required' => 'required',
-            'type' => 'text',
-        ]) ?>
-
-        <?= button(
-            lang('Fediverse.follow.submit'),
-            '',
-            [
-                'variant' => 'primary',
-            ],
-            [
-                'type' => 'submit',
-                'class' => 'self-end',
-            ],
-        ) ?>
-        <?= form_close() ?>
+        <Forms.Field
+            name="handle"
+            label="<?= lang('Fediverse.your_handle') ?>"
+            hint="<?= lang('Fediverse.your_handle_hint') ?>"
+            required="true"
+        />
+        <Button variant="primary" type="submit" class="self-end"><?= lang('Fediverse.follow.submit') ?></Button>
+        </form>
     </main>
 
     <footer

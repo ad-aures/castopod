@@ -11,9 +11,6 @@
 
 <?= $this->section('content') ?>
 
-<?= form_open(route_to('page-create'), [
-    'class' => 'flex flex-col max-w-3xl',
-]) ?>
 <form action="<?= route_to('page-create') ?>" method="POST" class="flex flex-col max-w-3xl gap-y-4">
 <?= csrf_field() ?>
 

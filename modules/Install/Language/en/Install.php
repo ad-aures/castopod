@@ -9,6 +9,7 @@ declare(strict_types=1);
  */
 
 return [
+    'title' => 'Castopod installer',
     'manual_config' => 'Manual configuration',
     'manual_config_subtitle' =>
         'Create a `.env` file with your settings and refresh the page to continue installation.',

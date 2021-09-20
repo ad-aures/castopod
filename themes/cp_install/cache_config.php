@@ -2,48 +2,33 @@
 
 <?= $this->section('content') ?>
 
-<?= form_open(route_to('cache-config'), [
-    'class' => 'flex flex-col max-w-sm w-full',
-]) ?>
+<form action="<?= route_to('cache-config') ?>" method="POST" class="flex flex-col w-full max-w-sm gap-y-4">
 <?= csrf_field() ?>
 
-<h1 class="mb-4 text-xl font-bold font-display"><span class="inline-flex items-center justify-center w-12 h-12 mr-2 text-sm font-semibold tracking-wider border-4 rounded-full text-pine-700 border-pine-700">3/4</span><?= lang(
-    'Install.form.cache_config',
-) ?></h1>
+<div class="flex flex-col mb-2">
+    <div class="flex items-center">
+        <span class="inline-flex items-center justify-center w-12 h-12 mr-2 text-sm font-semibold tracking-wider border-4 rounded-full text-pine-700 border-pine-700">3/4</span>
+        <Heading tagName="h1"><?= lang('Install.form.cache_config') ?></h1>
+    </div>
 
-<p class="mb-4 text-sm text-gray-600"><?= lang(
+    <p class="mt-2 text-sm text-gray-600"><?= lang(
     'Install.form.cache_config_hint',
 ) ?></p>
+</div>
 
-<?= form_label(lang('Install.form.cache_handler'), 'db_prefix') ?>
-<?= form_dropdown(
-    'cache_handler',
-    [
+<Forms.Field
+    as="Select"
+    name="cache_handler"
+    label="<?= lang('Install.form.cache_handler') ?>"
+    options="<?= esc(json_encode([
         'file' => lang('Install.form.cacheHandlerOptions.file'),
         'redis' => lang('Install.form.cacheHandlerOptions.redis'),
         'predis' => lang('Install.form.cacheHandlerOptions.predis'),
-    ],
-    [old('cache_handler', 'file')],
-    [
-        'id' => 'cache_handler',
-        'name' => 'cache_handler',
-        'class' => 'form-select mb-6',
-        'value' => config('Database')
-            ->default['DBPrefix'],
-    ],
-) ?>
+    ])) ?>"
+    selected="file"
+    required="true" />
 
-<?= button(
-    lang('Install.form.next') . icon('arrow-right', 'ml-2'),
-    '',
-    [
-        'variant' => 'primary',
-    ],
-    [
-        'type' => 'submit',
-        'class' => 'self-end',
-    ],
-) ?>
+<Button variant="primary" class="self-end" iconRight="arrow-right" type="submit"><?= lang('Install.form.next') ?></Button>
 
 <?= form_close() ?>
 

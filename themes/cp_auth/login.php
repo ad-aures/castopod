@@ -8,42 +8,22 @@
 
 <?= $this->section('content') ?>
 
-<?= form_open(route_to('login'), [
-    'class' => 'flex flex-col',
-]) ?>
-<?= csrf_field() ?>
+<form actions="<?= route_to('login') ?>" method="POST" class="flex flex-col">
+    <?= csrf_field() ?>
 
-<?= form_label(lang('Auth.emailOrUsername'), 'login') ?>
-<?= form_input([
-    'id' => 'login',
-    'name' => 'login',
-    'class' => 'form-input mb-4',
-    'required' => 'required',
-]) ?>
+    <Forms.Field
+        name="login"
+        label="<?= lang('Auth.emailOrUsername') ?>"
+        required="true" />
 
-<?= form_label(lang('Auth.password'), 'password') ?>
-<?= form_input([
-    'id' => 'password',
-    'name' => 'password',
-    'class' => 'form-input mb-4',
-    'type' => 'password',
-    'required' => 'required',
-]) ?>
+    <Forms.Field
+        name="password"
+        label="<?= lang('Auth.password') ?>"
+        type="password"
+        required="true" />
 
-
-<?= button(
-    lang('Auth.loginAction'),
-    '',
-    [
-        'variant' => 'primary',
-    ],
-    [
-        'type' => 'submit',
-        'class' => 'self-end',
-    ],
-) ?>
-
-<?= form_close() ?>
+    <Button variant="primary" type="submit" class="self-end"><?= lang('Auth.loginAction') ?></Button>
+</form>
 
 <?= $this->endSection() ?>
 

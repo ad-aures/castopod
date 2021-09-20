@@ -9,17 +9,7 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
-<?= button(
-    lang('Person.create'),
-    route_to('person-create'),
-    [
-        'variant' => 'primary',
-        'iconLeft' => 'add',
-    ],
-    [
-        'class' => 'mr-2',
-    ],
-) ?>
+<Button uri="<?= route_to('person-create') ?>" variant="primary" iconLeft="add"><?= lang('Person.create') ?></Button>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -60,18 +50,7 @@
         [
             'header' => lang('Common.actions'),
             'cell' => function ($person): string {
-                return button(
-                    lang('Person.podcast_form.remove'),
-                    route_to(
-                        'podcast-person-remove',
-                        $person->podcast_id,
-                        $person->id,
-                    ),
-                    [
-                        'variant' => 'danger',
-                        'size' => 'small',
-                    ],
-                );
+                return '<Button uri="' . route_to('podcast-person-remove', $person->podcast_id, $person->id) . '" variant="danger" size="small">' . lang('Person.podcast_form.remove') . '</Button>';
             },
         ],
     ],

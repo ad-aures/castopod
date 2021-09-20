@@ -16,7 +16,7 @@ class Helper extends FormComponent
         $class = 'text-gray-600';
 
         return <<<HTML
-            <small class="{$class} {$this->class}">{$this->slot}</small>
+            <small id="{$this->id}" class="{$class} {$this->class}">{$this->slot}</small>
         HTML;
     }
 }

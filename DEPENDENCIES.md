@@ -52,7 +52,7 @@ Other:
 
 - [Kumbh Sans](https://fonts.google.com/specimen/Kumbh+Sans)
   ([Open Font License](https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL))
-- [Montserrat](https://fonts.google.com/specimen/Montserrat)
+- [Inter](https://fonts.google.com/specimen/Inter)
   ([Open Font License](https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL))
 - [RemixIcon](https://remixicon.com/)
   ([Apache License 2.0](https://github.com/Remix-Design/RemixIcon/blob/master/License))

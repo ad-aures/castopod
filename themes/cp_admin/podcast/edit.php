@@ -29,14 +29,14 @@
 <Forms.Field
     name="image"
     label="<?= lang('Podcast.form.image') ?>"
-    helperText="<?= lang('Common.forms.image_size_hint') ?>"
+    helper="<?= lang('Common.forms.image_size_hint') ?>"
     type="file"
     accept=".jpg,.jpeg,.png" />
 
 <Forms.Field
     name="title"
     label="<?= lang('Podcast.form.title') ?>"
-    helperText="<?= $podcast->link ?>"
+    helper="<?= $podcast->link ?>"
     value="<?= $podcast->title ?>"
     required="true" />
 
@@ -74,22 +74,22 @@
         name="language"
         label="<?= lang('Podcast.form.language') ?>"
         selected="<?= $podcast->language_code ?>"
-        required="true"
-        options="<?= esc(json_encode($languageOptions)) ?>" />
+        options="<?= esc(json_encode($languageOptions)) ?>"
+        required="true" />
 
     <Forms.Field
         as="Select"
         name="category"
         label="<?= lang('Podcast.form.category') ?>"
         selected="<?= $podcast->category_id ?>"
-        required="true"
-        options="<?= esc(json_encode($categoryOptions)) ?>" />
+        options="<?= esc(json_encode($categoryOptions)) ?>"
+        required="true" />
 
     <Forms.Field
         as="MultiSelect"
         name="other_categories[]"
         label="<?= lang('Podcast.form.other_categories') ?>"
-        selected="<?= json_encode(old('other_categories', $podcast->other_categories_ids)) ?>"
+        selected="<?= json_encode($podcast->other_categories_ids) ?>"
         data-max-item-count="2"
         options="<?= esc(json_encode($categoryOptions)) ?>" />
 
@@ -122,7 +122,7 @@
     name="owner_name"
     label="<?= lang('Podcast.form.owner_name') ?>"
     value="<?= $podcast->owner_name ?>"
-    hintText="<?= lang('Podcast.form.owner_name_hint') ?>"
+    hint="<?= lang('Podcast.form.owner_name_hint') ?>"
     required="true" />
 
 <Forms.Field
@@ -130,14 +130,14 @@
     type="email"
     label="<?= lang('Podcast.form.owner_email') ?>"
     value="<?= $podcast->owner_email ?>"
-    hintText="<?= lang('Podcast.form.owner_email_hint') ?>"
+    hint="<?= lang('Podcast.form.owner_email_hint') ?>"
     required="true" />
 
 <Forms.Field
     name="publisher"
     label="<?= lang('Podcast.form.publisher') ?>"
     value="<?= $podcast->publisher ?>"
-    hintText="<?= lang('Podcast.form.publisher_hint') ?>" />
+    hint="<?= lang('Podcast.form.publisher_hint') ?>" />
 
 <Forms.Field
     name="copyright"
@@ -155,7 +155,7 @@
     name="location_name"
     label="<?= lang('Podcast.form.location_name') ?>"
     value="<?= $podcast->location_name ?>"
-    hintText="<?= lang('Podcast.form.location_name_hint') ?>" />
+    hint="<?= lang('Podcast.form.location_name_hint') ?>" />
 
 </Forms.Section>
 
@@ -168,7 +168,7 @@
     name="payment_pointer"
     label="<?= lang('Podcast.form.payment_pointer') ?>"
     value="<?= $podcast->payment_pointer ?>"
-    hintText="<?= lang('Podcast.form.payment_pointer_hint') ?>" />
+    hint="<?= lang('Podcast.form.payment_pointer_hint') ?>" />
 
 <fieldset class="flex flex-col items-start p-4 bg-gray-100 rounded">
     <Heading tagName="legend" class="float-left" size="small"><?= lang('Podcast.form.partnership') ?></Heading>
@@ -199,7 +199,7 @@
     name="custom_rss"
     label="<?= lang('Podcast.form.custom_rss') ?>"
     value="<?= $podcast->custom_rss_string ?>"
-    hintText="<?= lang('Podcast.form.custom_rss_hint') ?>" />
+    hint="<?= lang('Podcast.form.custom_rss_hint') ?>" />
 
 </Forms.Section>
 

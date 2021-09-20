@@ -34,21 +34,7 @@
                     $blockedDomain->name .
                     '" />' .
                     csrf_field() .
-                    button(
-                        lang('Fediverse.list.unblock'),
-                        route_to(
-                            'fediverse-unblock-domain',
-                            $blockedDomain->name,
-                        ),
-                        [
-                            'variant' => 'info',
-                            'size' => 'small',
-                        ],
-                        [
-                            'class' => 'mr-2',
-                            'type' => 'submit',
-                        ],
-                    ) .
+                    '<Button uri="' . route_to('fediverse-unblock-domain', $blockedDomain->name) . '" variant="info" size="small" type="submit">' . lang('Fediverse.list.unblock') . '</Button>' .
                     '</form>';
             },
         ],

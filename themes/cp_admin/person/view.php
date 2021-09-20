@@ -10,17 +10,7 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
-<?= button(
-    lang('Person.edit'),
-    route_to('person-edit', $person->id),
-    [
-        'variant' => 'secondary',
-        'iconLeft' => 'edit',
-    ],
-    [
-        'class' => 'mr-2',
-    ],
-) ?>
+<Button uri="<?= route_to('person-edit', $person->id) ?>" variant="secondary" iconLeft="edit"><?= lang('Person.edit') ?></Button>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>

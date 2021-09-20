@@ -6,13 +6,7 @@
         'numberOfLikes' => $comment->likes_count,
     ],
 ) ?>"><?= icon('heart', 'text-xl mr-1 text-gray-400 group-hover:text-red-600') . $comment->likes_count ?></button>
-        <?= button(
-    lang('Comment.reply'),
-    route_to('post', $podcast->handle, $comment->id),
-    [
-        'size' => 'small',
-    ],
-) ?>
+        <Button uri="<?= route_to('post', $podcast->handle, $comment->id) ?>" size="small"><?= lang('Comment.reply') ?></Button>
     </form>
     <?php if ($comment->replies_count): ?>
         <?= anchor(

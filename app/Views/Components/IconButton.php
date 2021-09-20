@@ -12,10 +12,20 @@ class IconButton extends Component
 
     public function render(): string
     {
-        $attributes = stringify_attributes($this->attributes);
+        $attributes = [
+            'isSquared' => 'true',
+            'title' => $this->slot,
+            'data-toggle' => 'tooltip',
+            'data-placement' => 'bottom',
+        ];
 
-        return <<<HTML
-            <Button isSquared="true" title="{$this->slot}" data-toggle="tooltip" data-placement="bottom" {$attributes}><Icon glyph="{$this->glyph}" /></Button>
-        HTML;
+        $attributes = array_merge($attributes, $this->attributes);
+
+        $attributes['slot'] = icon($this->glyph);
+
+        unset($attributes['glyph']);
+
+        $iconButton = new Button($attributes);
+        return $iconButton->render();
     }
 }

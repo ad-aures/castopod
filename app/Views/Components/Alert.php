@@ -33,7 +33,7 @@ class Alert extends Component
         $attributes = stringify_attributes($this->attributes);
 
         return <<<HTML
-            <div class="{$class}" role="alert" {$attributes}>{$glyph}<div>{$title}{$this->slot}</div></div>
+            <div class="{$class}" role="alert" {$attributes}>{$glyph}<div>{$title}<p>{$this->slot}</p></div></div>
         HTML;
     }
 }

@@ -22,7 +22,7 @@
 <Forms.Field
     name="imported_feed_url"
     label="<?= lang('PodcastImport.imported_feed_url') ?>"
-    hintText="<?= lang('PodcastImport.imported_feed_url_hint') ?>"
+    hint="<?= lang('PodcastImport.imported_feed_url_hint') ?>"
     placeholder="https://…"
     type="url"
     required="true" />
@@ -81,13 +81,13 @@
     name="season_number"
     type="number"
     label="<?= lang('PodcastImport.season_number') ?>"
-    hintText="<?= lang('PodcastImport.season_number_hint') ?>" />
+    hint="<?= lang('PodcastImport.season_number_hint') ?>" />
 
 <Forms.Field
     name="max_episodes"
     type="number"
     label="<?= lang('PodcastImport.max_episodes') ?>"
-    hintText="<?= lang('PodcastImport.max_episodes_hint') ?>" />
+    hint="<?= lang('PodcastImport.max_episodes_hint') ?>" />
 
 </Forms.Section>
 

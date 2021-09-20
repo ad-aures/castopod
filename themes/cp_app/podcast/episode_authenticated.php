@@ -88,9 +88,7 @@
 
         <div class="tab-panels">
             <section id="comments" class="space-y-6 tab-panel">
-            <?= form_open(route_to('comment-attempt-create', $podcast->id, $episode->id), [
-                'class' => 'flex p-4',
-            ]) ?>
+            <form action="<?= route_to('comment-attempt-create', $podcast->id, $episode->id)  ?>" method="POST" class="flex p-4">
                 <?= csrf_field() ?>
 
                 <?= view('_message_block') ?>
@@ -99,47 +97,23 @@
                     ->avatar_image_url ?>" alt="<?= interact_as_actor()
                     ->display_name ?>" class="w-12 h-12 mr-4 rounded-full" />
                 <div class="flex flex-col flex-1 min-w-0">
-                    <?= form_textarea(
-                        [
-                            'id' => 'message',
-                            'name' => 'message',
-                            'class' => 'form-textarea mb-2',
-                            'required' => 'required',
-                            'placeholder' => lang(
-                                'Comment.form.episode_message_placeholder',
-                            ),
-                        ],
-                        old('message', '', false),
-                        [
-                            'rows' => 2,
-                        ],
-                    ) ?>
-
-                    <?= button(
-                        lang('Comment.form.submit'),
-                        '',
-                        [
-                            'variant' => 'primary',
-                            'size' => 'small',
-                        ],
-                        [
-                            'type' => 'submit',
-                            'class' => 'self-end',
-                        ],
-                    ) ?>
+                    <Forms.Textarea
+                        name="message"
+                        required="true"
+                        placeholder="<?= lang('Comment.form.episode_message_placeholder') ?>"
+                        rows="2" />
+                    <Button class="self-end" variant="primary" size="small" type="submit"><?= lang('Comment.form.submit') ?></Button>
                 </div>
-                <?= form_close() ?>
-                <?php foreach ($episode->comments as $comment): ?>
-                    <?= view('podcast/_partials/comment_authenticated', [
-                        'comment' => $comment,
-                        'podcast' => $podcast,
-                    ]) ?>
-                <?php endforeach; ?>
+            </form>
+            <?php foreach ($episode->comments as $comment): ?>
+                <?= view('podcast/_partials/comment_authenticated', [
+                    'comment' => $comment,
+                    'podcast' => $podcast,
+                ]) ?>
+            <?php endforeach; ?>
             </section>
             <section id="activity" class="space-y-8 tab-panel">
-                <?= form_open(route_to('post-attempt-create', $podcast->handle), [
-                    'class' => 'flex p-4 bg-white shadow rounded-xl',
-                ]) ?>
+                <form action="<?= route_to('post-attempt-create', $podcast->handle) ?>" method="POST" class="flex p-4 bg-white shadow rounded-xl">
                 <?= csrf_field() ?>
 
                 <?= view('_message_block') ?>
@@ -148,41 +122,15 @@
                     ->avatar_image_url ?>" alt="<?= interact_as_actor()
                     ->display_name ?>" class="w-12 h-12 mr-4 rounded-full" />
                 <div class="flex flex-col flex-1 min-w-0">
-                    <?= form_textarea(
-                        [
-                            'id' => 'message',
-                            'name' => 'message',
-                            'class' => 'form-textarea mb-2',
-                            'required' => 'required',
-                            'placeholder' => lang(
-                                'Post.form.episode_message_placeholder',
-                            ),
-                        ],
-                        old('message', '', false),
-                        [
-                            'rows' => 2,
-                        ],
-                    ) ?>
-                    <?= form_input([
-                        'id' => 'episode_url',
-                        'name' => 'episode_url',
-                        'value' => $episode->link,
-                        'type' => 'hidden',
-                    ]) ?>
-                    <?= button(
-                        lang('Post.form.submit'),
-                        '',
-                        [
-                            'variant' => 'primary',
-                            'size' => 'small',
-                        ],
-                        [
-                            'type' => 'submit',
-                            'class' => 'self-end',
-                        ],
-                    ) ?>
+                    <input name="episode_url" value="<?= $episode->link ?>" type="hidden" />
+                    <Forms.Textarea
+                        name="message"
+                        placeholder="<?= lang('Post.form.episode_message_placeholder') ?>"
+                        required="true"
+                        rows="2" />
+                    <Button variant="primary" size="small" type="submit" class="self-end"><?= lang('Post.form.submit') ?></Button>
                 </div>
-                <?= form_close() ?>
+                </form>
                 <hr class="my-4 border border-pine-100">
                 <?php foreach ($episode->posts as $post): ?>
                     <?= view('podcast/_partials/post_authenticated', [

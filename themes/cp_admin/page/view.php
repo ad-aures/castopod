@@ -9,10 +9,7 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
-<?= button(lang('Page.edit'), route_to('page-edit', $page->id), [
-    'variant' => 'accent',
-    'iconLeft' => 'add',
-]) ?>
+<Button variant="accent" uri="<?= route_to('page-edit', $page->id) ?>" iconLeft="add"><?= lang('Page.edit') ?></Button>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>

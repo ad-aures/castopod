@@ -43,9 +43,7 @@
 </nav>
 
 <section class="max-w-2xl px-6 py-8 mx-auto">
-<?= form_open(route_to('post-attempt-create', interact_as_actor()->username), [
-    'class' => 'flex p-4 bg-white shadow rounded-xl',
-]) ?>
+<form action="<?= route_to('post-attempt-create', interact_as_actor()->username) ?>" method="POST" class="flex p-4 bg-white shadow rounded-xl">
     <?= csrf_field() ?>
 
     <?= view('_message_block') ?>
@@ -54,59 +52,32 @@
         ->avatar_image_url ?>" alt="<?= interact_as_actor()
         ->display_name ?>" class="w-12 h-12 mr-4 rounded-full" />
     <div class="flex flex-col flex-1 min-w-0">
-        <?= form_textarea(
-            [
-                'id' => 'message',
-                'name' => 'message',
-                'class' => 'form-textarea',
-                'required' => 'required',
-                'placeholder' => lang('Post.form.message_placeholder'),
-            ],
-            old('message', '', false),
-            [
-                'rows' => 2,
-            ],
-        ) ?>
-        <?= form_input([
-            'id' => 'episode_url',
-            'name' => 'episode_url',
-            'class' => 'form-input mb-2',
-            'placeholder' =>
-                lang('Post.form.episode_url_placeholder') .
-                ' (' .
-                lang('Common.optional') .
-                ')',
-            'type' => 'url',
-        ]) ?>
-
-        <?= button(
-            lang('Post.form.submit'),
-            '',
-            [
-                'variant' => 'primary',
-                'size' => 'small',
-            ],
-            [
-                'type' => 'submit',
-                'class' => 'self-end',
-            ],
-        ) ?>
+        <Forms.Textarea
+            name="message"
+            required="true"
+            placeholder="<?= lang('Post.form.message_placeholder') ?>"
+            rows="2" />
+        <Forms.Input
+            name="episode_url"
+            type="url"
+            placeholder="<?= lang('Post.form.episode_url_placeholder') . ' (' . lang('Common.optional') . ')' ?>" />
+        <Button variant="primary" size="small" type="submit" class="self-end mt-2"><?= lang('Post.form.submit') ?></Button>
     </div>
-<?= form_close() ?>
+</form>
 <hr class="my-4 border-2 border-pine-100">
 
 <div class="space-y-8">
 <?php foreach ($posts as $post): ?>
     <?php if ($post->reblog_of_id !== null): ?>
         <?= view('podcast/_partials/reblog_authenticated', [
-            'post' => $post->reblog_of_post,
+    'post' => $post->reblog_of_post,
             'podcast' => $podcast,
-        ]) ?>
+]) ?>
     <?php else: ?>
         <?= view('podcast/_partials/post_authenticated', [
-            'post' => $post,
+    'post' => $post,
             'podcast' => $podcast,
-        ]) ?>
+]) ?>
     <?php endif; ?>
 <?php endforeach; ?>
 </div>

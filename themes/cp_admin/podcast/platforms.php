@@ -10,9 +10,7 @@
 
 <?= $this->section('content') ?>
 
-<?= form_open(route_to('platforms-save', $podcast->id, $platformType), [
-    'class' => 'flex flex-col max-w-md',
-]) ?>
+<form action="<?= route_to('platforms-save', $podcast->id, $platformType) ?>" method="POST" class="flex flex-col max-w-md">
 <?= csrf_field() ?>
 
 <?php foreach ($platforms as $platform): ?>
@@ -106,6 +104,6 @@
 
 <Button variant="primary" type="submit" class="self-end"><?= lang('Platforms.submit') ?></Button>
 
-<?= form_close() ?>
+</form>
 
 <?= $this->endSection() ?>

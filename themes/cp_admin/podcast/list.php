@@ -9,21 +9,8 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
-<?= button(
-    lang('Podcast.create'),
-    route_to('podcast-create'),
-    [
-        'variant' => 'accent',
-        'iconLeft' => 'add',
-    ],
-    [
-        'class' => 'mr-2',
-    ],
-) ?>
-<?= button(lang('Podcast.import'), route_to('podcast-import'), [
-    'variant' => 'primary',
-    'iconLeft' => 'download',
-]) ?>
+<Button uri="<?= route_to('podcast-create') ?>" variant="accent" iconLeft="add"><?= lang('Podcast.create') ?></Button>
+<Button uri="<?= route_to('podcast-import') ?>" variant="primary" iconLeft="download"><?= lang('Podcast.import') ?></Button>
 <?= $this->endSection() ?>
 
 

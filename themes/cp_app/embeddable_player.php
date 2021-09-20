@@ -21,8 +21,8 @@
 ] ?>; color: <?= $themeData['text'] ?>;">
     <img src="<?= $episode->image
     ->thumbnail_url ?>" alt="<?= $episode->title ?>" class="flex-shrink w-36 h-36" />
-    <div class="flex flex-col flex-1 min-w-0 px-4 py-2 h-36">
-        <div class="flex items-center">
+    <div class="flex flex-col items-start flex-1 min-w-0 px-4 py-2 h-36">
+        <div class="flex items-center w-full">
             <a href="<?= route_to(
         'podcast-activity',
         $podcast->handle,
@@ -31,7 +31,7 @@
 ] ?>;" class="mr-2 text-xs tracking-wider uppercase truncate opacity-75 hover:opacity-100" target="_blank">
                 <?= $podcast->title ?>
             </a>
-            <a href="https://castopod.org/" class="ml-auto text-3xl text-pine-700 hover:opacity-75" title="<?= lang(
+            <a href="https://castopod.org/" class="ml-auto text-3xl text-pine-500 hover:opacity-75" title="<?= lang(
     'Common.powered_by',
     [
         'castopod' => 'Castopod',

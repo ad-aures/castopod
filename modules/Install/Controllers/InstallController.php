@@ -130,7 +130,7 @@ class InstallController extends Controller
             session()
                 ->setFlashdata('error', lang('Install.messages.databaseConnectError'));
 
-            return view('database_config');
+            return $this->databaseConfig();
         }
 
         // migrate if no user has been created

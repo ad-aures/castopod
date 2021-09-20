@@ -50,19 +50,7 @@
         [
             'header' => lang('Common.actions'),
             'cell' => function ($person): string {
-                return button(
-                    lang('Person.episode_form.remove'),
-                    route_to(
-                        'episode-person-remove',
-                        $person->podcast_id,
-                        $person->episode_id,
-                        $person->id,
-                    ),
-                    [
-                        'variant' => 'danger',
-                        'size' => 'small',
-                    ],
-                );
+                return '<Button uri="' . route_to('episode-person-remove', $person->podcast_id, $person->episode_id, $person->id) . '" variant="danger" size="small">' . lang('Person.episode_form.remove') . '</Button>';
             },
         ],
     ],
@@ -82,7 +70,7 @@
     id="persons"
     name="persons[]"
     label="<?= lang('Person.episode_form.persons') ?>"
-    hintText="<?= lang('Person.episode_form.persons_hint') ?>"
+    hint="<?= lang('Person.episode_form.persons_hint') ?>"
     options="<?= htmlspecialchars(json_encode($personOptions)) ?>"
     selected="<?= htmlspecialchars(json_encode(old('persons', []))) ?>"
     required="true"
@@ -93,7 +81,7 @@
     id="roles"
     name="roles[]"
     label="<?= lang('Person.episode_form.roles') ?>"
-    hintText="<?= lang('Person.episode_form.roles_hint') ?>"
+    hint="<?= lang('Person.episode_form.roles_hint') ?>"
     options="<?= htmlspecialchars(json_encode($taxonomyOptions)) ?>"
     selected="<?= htmlspecialchars(json_encode(old('roles', []))) ?>"
     required="true"

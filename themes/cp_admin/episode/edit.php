@@ -26,22 +26,22 @@
 <Forms.Field
     name="audio_file"
     label="<?= lang('Episode.form.audio_file') ?>"
-    hintText="<?= lang('Episode.form.audio_file_hint') ?>"
+    hint="<?= lang('Episode.form.audio_file_hint') ?>"
     type="file"
     accept=".mp3,.m4a" />
 
 <Forms.Field
     name="image"
     label="<?= lang('Episode.form.image') ?>"
-    hintText="<?= lang('Episode.form.image_hint') ?>"
-    helperText="<?= lang('Common.forms.image_size_hint', ) ?>"
+    hint="<?= lang('Episode.form.image_hint') ?>"
+    helper="<?= lang('Common.forms.image_size_hint', ) ?>"
     type="file"
     accept=".jpg,.jpeg,.png" />
 
 <Forms.Field
     name="title"
     label="<?= lang('Episode.form.title') ?>"
-    hintText="<?= lang('Episode.form.title_hint') ?>"
+    hint="<?= lang('Episode.form.title_hint') ?>"
     value="<?= $episode->title ?>"
     required="true"
     data-slugify="title" />
@@ -127,7 +127,7 @@
     as="MarkdownEditor"
     name="description_footer"
     label="<?= lang('Episode.form.description_footer') ?>"
-    hintText="<?= lang('Episode.form.description_footer_hint') ?>"
+    hint="<?= lang('Episode.form.description_footer_hint') ?>"
     value="<?= $podcast->episode_description_footer_markdown ?? '' ?>" />
 
 </Forms.Section>

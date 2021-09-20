@@ -8,57 +8,30 @@
 
 <?= $this->section('content') ?>
 
-<?= form_open(route_to('register'), [
-    'class' => 'flex flex-col',
-]) ?>
+<form action="<?= route_to('register') ?>" method="POST" class="flex flex-col">
 <?= csrf_field() ?>
 
-<?= form_label(lang('Auth.email'), 'email') ?>
-<?= form_input([
-    'id' => 'email',
-    'name' => 'email',
-    'class' => 'form-input',
-    'value' => old('email'),
-    'type' => 'email',
-    'required' => 'required',
-    'aria-describedby' => 'emailHelp',
-]) ?>
-<small id="emailHelp" class="mb-4 text-gray-700">
-    <?= lang('Auth.weNeverShare') ?>
-</small>
+<Forms.Field
+    name="email"
+    label="<?= lang('Auth.email') ?>"
+    helper="<?= lang('Auth.weNeverShare') ?>"
+    type="email"
+    required="true" />
 
-<?= form_label(lang('Auth.username'), 'username') ?>
-<?= form_input([
-    'id' => 'username',
-    'name' => 'username',
-    'class' => 'form-input mb-4',
-    'value' => old('username'),
-    'required' => 'required',
-]) ?>
+<Forms.Field
+    name="username"
+    label="<?= lang('Auth.username') ?>"
+    required="true" />
 
-<?= form_label(lang('Auth.password'), 'password') ?>
-<?= form_input([
-    'id' => 'password',
-    'name' => 'password',
-    'class' => 'form-input mb-4',
-    'type' => 'password',
-    'required' => 'required',
-    'autocomplete' => 'new-password',
-]) ?>
+<Forms.Field
+    name="password"
+    label="<?= lang('Auth.password') ?>"
+    required="true"
+    autocomplete="new-password" />
 
-<?= button(
-    lang('Auth.register'),
-    '',
-    [
-        'variant' => 'primary',
-    ],
-    [
-        'type' => 'submit',
-        'class' => 'self-end',
-    ],
-) ?>
+<Button variant="primary" type="submit" class="self-end"><?= lang('Auth.register') ?></Button>
 
-<?= form_close() ?>
+</form>
 
 <?= $this->endSection() ?>
 

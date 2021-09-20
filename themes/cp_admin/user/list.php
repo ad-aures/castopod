@@ -9,10 +9,7 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
-<?= button(lang('User.create'), route_to('user-create'), [
-    'variant' => 'accent',
-    'iconLeft' => 'user-add',
-]) ?>
+<Button uri="<?= route_to('user-create') ?>" variant="accent" iconLeft="user-add"><?= lang('User.create') ?></Button>
 <?= $this->endSection() ?>
 
 
@@ -34,19 +31,9 @@
             'header' => lang('User.list.roles'),
             'cell' => function ($user) {
                 return implode(',', $user->roles) .
-                    icon_button(
-                        'edit',
-                        lang('User.edit_roles', [
-                            'username' => $user->username,
-                        ]),
-                        route_to('user-edit', $user->id),
-                        [
-                            'variant' => 'info',
-                        ],
-                        [
-                            'class' => 'ml-2',
-                        ],
-                    );
+                    '<IconButton uri="' . route_to('user-edit', $user->id) . '" glyph="edit" variant="info">' . lang('User.edit_roles', [
+                        'username' => $user->username,
+                    ]) . '</IconButton>';
             },
         ],
         [
@@ -60,39 +47,9 @@
         [
             'header' => lang('Common.actions'),
             'cell' => function ($user) {
-                return button(
-                    lang('User.forcePassReset'),
-                    route_to('user-force_pass_reset', $user->id),
-                    [
-                        'variant' => 'secondary',
-                        'size' => 'small',
-                    ],
-                    [
-                        'class' => 'mr-2',
-                    ],
-                ) .
-                    button(
-                        lang('User.' . ($user->isBanned() ? 'unban' : 'ban')),
-                        route_to(
-                            $user->isBanned() ? 'user-unban' : 'user-ban',
-                            $user->id,
-                        ),
-                        [
-                            'variant' => 'warning',
-                            'size' => 'small',
-                        ],
-                        [
-                            'class' => 'mr-2',
-                        ],
-                    ) .
-                    button(
-                        lang('User.delete'),
-                        route_to('user-delete', $user->id),
-                        [
-                            'variant' => 'danger',
-                            'size' => 'small',
-                        ],
-                    );
+                return '<Button uri="' . route_to('user-force_pass_reset', $user->id) . '" variant="secondary" size="small">' . lang('User.forcePassReset') . '</Button>' .
+                '<Button uri="' . route_to($user->isBanned() ? 'user-unban' : 'user-ban', $user->id) . '" variant="warning" size="small">' . lang('User.' . ($user->isBanned() ? 'unban' : 'ban')) . '</Button>' .
+                '<Button uri="' . route_to('user-delete', $user->id) . '" variant="danger" size="small">' . lang('User.delete') . '</Button>';
             },
         ],
     ],

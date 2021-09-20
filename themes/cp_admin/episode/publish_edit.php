@@ -94,7 +94,7 @@
                 as="DatetimePicker"
                 name="scheduled_publication_date"
                 label="<?= lang('Episode.publish_form.scheduled_publication_date') ?>"
-                hintText="<?= lang('Episode.publish_form.scheduled_publication_date_hint') ?>"
+                hint="<?= lang('Episode.publish_form.scheduled_publication_date_hint') ?>"
                 value="<?= $episode->published_at ?>"
             />
         </div>

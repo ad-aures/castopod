@@ -9,21 +9,8 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
-<?= button(
-    lang('Podcast.edit'),
-    route_to('podcast-edit', $podcast->id),
-    [
-        'variant' => 'primary',
-        'iconLeft' => 'edit',
-    ],
-    [
-        'class' => 'mr-2',
-    ],
-) ?>
-<?= button(lang('Episode.create'), route_to('episode-create', $podcast->id), [
-    'variant' => 'accent',
-    'iconLeft' => 'add',
-]) ?>
+<Button uri="<?= route_to('podcast-edit', $podcast->id) ?>" variant="primary" iconLeft="edit"><?= lang('Podcast.edit') ?></Button>
+<Button uri="<?= route_to('episode-create', $podcast->id) ?>" variant="accent" iconLeft="add"><?= lang('Episode.create') ?></Button>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
