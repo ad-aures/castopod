@@ -50,31 +50,31 @@
         [
             'header' => lang('Common.actions'),
             'cell' => function ($person): string {
-                return '<Button uri="' . route_to('podcast-person-remove', $person->podcast_id, $person->id) . '" variant="danger" size="small">' . lang('Person.podcast_form.remove') . '</Button>';
+                return '<Button uri="' . route_to('podcast-person-remove', $person->podcast_id, $person->id) . '" variant="danger" size="small" iconLeft="delete-bin">' . lang('Person.podcast_form.remove') . '</Button>';
             },
         ],
     ],
     $podcast->persons,
+    'max-w-xl'
 ) ?>
 
-<form action="<?= route_to('podcast-person-edit', $podcast->id) ?>" method="POST" class="mt-6">
-<?= csrf_field() ?>
+<form action="<?= route_to('podcast-persons-manage', $podcast->id) ?>" method="POST" class="mt-6">
+    <?= csrf_field() ?>
 
-<Forms.Section
-    title="<?= lang('Person.podcast_form.add_section_title') ?>"
-    subtitle="<?= lang('Person.podcast_form.add_section_subtitle') ?>"
->
+    <Forms.Section
+        title="<?= lang('Person.podcast_form.add_section_title') ?>"
+        subtitle="<?= lang('Person.podcast_form.add_section_subtitle') ?>"
+    >
 
-<Forms.Label for="persons" hint="<?= lang('Person.podcast_form.persons_hint') ?>"><?= lang('Person.podcast_form.persons') ?></Forms.Label>
-<Forms.MultiSelect id="persons" name="persons[]" class="mb-4" required="required" options="<?= esc(json_encode($personOptions)) ?>" selected="<?= esc(json_encode(old('persons', []))) ?>"/>
+    <Forms.Label for="persons" hint="<?= lang('Person.podcast_form.persons_hint') ?>"><?= lang('Person.podcast_form.persons') ?></Forms.Label>
+    <Forms.MultiSelect id="persons" name="persons[]" class="mb-4" required="required" options="<?= esc(json_encode($personOptions)) ?>" selected="<?= esc(json_encode(old('persons', []))) ?>"/>
 
-<Forms.Label for="roles" hint="<?= lang('Person.podcast_form.roles_hint') ?>" isOptional="true"><?= lang('Person.podcast_form.roles') ?></Forms.Label>
-<Forms.MultiSelect id="roles" name="roles[]" class="mb-4" options="<?= esc(json_encode($taxonomyOptions)) ?>" selected="<?= esc(json_encode(old('roles', []))) ?>"/>
+    <Forms.Label for="roles" hint="<?= lang('Person.podcast_form.roles_hint') ?>" isOptional="true"><?= lang('Person.podcast_form.roles') ?></Forms.Label>
+    <Forms.MultiSelect id="roles" name="roles[]" class="mb-4" options="<?= esc(json_encode($taxonomyOptions)) ?>" selected="<?= esc(json_encode(old('roles', []))) ?>"/>
 
-<Button variant="primary" class="self-end" type="submit"><?= lang('Person.podcast_form.submit_add') ?></Button>
+    <Button variant="primary" class="self-end" type="submit"><?= lang('Person.podcast_form.submit_add') ?></Button>
 
-</Forms.Section>
-
+    </Forms.Section>
 </form>
 
 <?= $this->endSection() ?>

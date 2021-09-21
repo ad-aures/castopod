@@ -12,24 +12,24 @@
         ->asset('styles/index.css', 'css') ?>
 </head>
 
-<body class="flex flex-col items-center justify-center min-h-screen mx-auto bg-gray-100">
+<body class="flex flex-col items-center justify-center min-h-screen mx-auto bg-pine-50">
 	<header class="mb-4">
 		<a href="<?= route_to(
             'home',
-        ) ?>" class="inline-flex items-baseline text-4xl font-bold font-display text-pine-700">
+        ) ?>" class="inline-flex items-baseline text-4xl font-bold font-display text-pine-500">
 			<?= 'castopod' . svg('castopod-logo', 'h-8 ml-2') ?>
 		</a>
 	</header>
-	<main class="w-full max-w-md px-6 py-4 mx-auto bg-white rounded-lg shadow">
-		<h1 class="mb-6 text-2xl font-bold text-center font-display"><?= $this->renderSection(
+	<main class="flex flex-col w-full max-w-md px-6 py-4 mx-auto bg-white rounded-lg border-3 border-pine-100 gap-y-4">
+		<Heading tagName="h1" size="large" class="self-center"><?= $this->renderSection(
             'title',
-        ) ?></h1>
-		<!-- view('_message_block') -->
+        ) ?></Heading>
+		<?= view('_message_block') ?>
 		<?= $this->renderSection('content') ?>
 	</main>
 	<footer class="flex flex-col text-sm">
 		<?= $this->renderSection('footer') ?>
-		<small class="py-4 text-center border-t"><?= lang('Common.powered_by', [
+		<small class="py-4 text-center border-t-2 border-pine-100"><?= lang('Common.powered_by', [
 		    'castopod' =>
 		        '<a class="underline hover:no-underline" href="https://castopod.org" target="_blank" rel="noreferrer noopener">Castopod</a>',
 		]) ?></small>

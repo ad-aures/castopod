@@ -11,7 +11,7 @@
 
 <?= $this->section('content') ?>
 
-<form action="<?= route_to('user-create') ?>" method="POST" class="flex flex-col max-w-sm">
+<form action="<?= route_to('user-create') ?>" method="POST" class="flex flex-col max-w-sm gap-y-4">
 <?= csrf_field() ?>
 
 <Forms.Field

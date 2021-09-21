@@ -9,7 +9,7 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
-<Button uri="<?= route_to('episode-create', $podcast->id) ?>" variant="accent" iconLeft="add"><?= lang('Episode.create') ?></Button>
+<Button uri="<?= route_to('episode-create', $podcast->id) ?>" variant="primary" iconLeft="add"><?= lang('Episode.create') ?></Button>
 <?= $this->endSection() ?>
 
 

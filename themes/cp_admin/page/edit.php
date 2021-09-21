@@ -11,9 +11,8 @@
 
 <?= $this->section('content') ?>
 
-<form action="<?= route_to('page-edit', $page->id) ?>" method="POST" class="flex flex-col max-w-3xl">
+<form action="<?= route_to('page-edit', $page->id) ?>" method="POST" class="flex flex-col max-w-3xl gap-y-4">
 <?= csrf_field() ?>
-
 
 <Forms.Field
     name="title"
@@ -21,13 +20,14 @@
     required="true"
     data-slugify="title"
     value="<?= $page->title ?>"
-    slot="slug-input" />
+    slot="slug-input"
+    class="max-w-sm" />
 
-<div>
+<div class="flex flex-col max-w-sm">
     <Forms.Label for="slug"><?= lang('Page.form.permalink') ?></Forms.Label>
     <permalink-edit class="inline-flex items-center text-xs" edit-label="<?= lang('Common.edit') ?>" copy-label="<?= lang('Common.copy') ?>" copied-label="<?= lang('Common.copied') ?>">
-        <span slot="domain"><?= base_url('pages') . '/' ?></span>
-        <Forms.Input name="slug" value="<?= $episode->slug ?>" required="true" data-slugify="slug" slot="slug-input" class="flex-1 text-xs" value="<?= $page->slug ?>"/>
+        <span slot="domain" class="flex-shrink-0"><?= base_url('pages') . '/' ?></span>
+        <Forms.Input name="slug" value="<?= $page->slug ?>" required="true" data-slugify="slug" slot="slug-input" class="flex-1 text-xs" value="<?= $page->slug ?>"/>
     </permalink-edit>
 </div>
 

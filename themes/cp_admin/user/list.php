@@ -9,7 +9,7 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
-<Button uri="<?= route_to('user-create') ?>" variant="accent" iconLeft="user-add"><?= lang('User.create') ?></Button>
+<Button uri="<?= route_to('user-create') ?>" variant="primary" iconLeft="user-add"><?= lang('User.create') ?></Button>
 <?= $this->endSection() ?>
 
 

@@ -1,4 +1,4 @@
-import { html, LitElement, TemplateResult } from "lit";
+import { css, html, LitElement, TemplateResult } from "lit";
 import { customElement, property, queryAssignedNodes } from "lit/decorators.js";
 import { MarkdownPreview } from "./markdown-preview";
 
@@ -28,20 +28,48 @@ export class MarkdownWritePreview extends LitElement {
     ) as MarkdownPreview;
   }
 
+  firstUpdated(): void {
+    this.write();
+  }
+
   write(): void {
     this._markdownPreview.hide();
-    this._write[0].classList.add("font-semibold");
-    this._preview[0].classList.remove("font-semibold");
+    this._write[0].classList.add("active");
+    this._preview[0].classList.remove("active");
   }
 
   preview(): void {
     this._markdownPreview.show();
-    this._preview[0].classList.add("font-semibold");
-    this._write[0].classList.remove("font-semibold");
+    this._preview[0].classList.add("active");
+    this._write[0].classList.remove("active");
   }
 
+  static styles = css`
+    ::slotted(button) {
+      opacity: 0.5;
+    }
+
+    ::slotted(button.active) {
+      position: relative;
+      opacity: 1;
+    }
+
+    ::slotted(button.active)::after {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      width: 80%;
+      height: 4px;
+      margin: 0 auto;
+      background-color: #009486;
+      border-radius: 9999px;
+    }
+  `;
+
   render(): TemplateResult<1> {
-    return html`<slot name="write" @click="${this.write}"></slot>
+    return html`<slot name="write" class="active" @click="${this.write}"></slot>
       <slot name="preview" @click="${this.preview}"></slot>`;
   }
 }

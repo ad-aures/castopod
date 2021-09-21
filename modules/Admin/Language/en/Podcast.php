@@ -11,8 +11,8 @@ declare(strict_types=1);
 return [
     'all_podcasts' => 'All podcasts',
     'no_podcast' => 'No podcast found!',
-    'create' => 'Create a podcast',
-    'import' => 'Import a podcast',
+    'create' => 'Create podcast',
+    'import' => 'Import podcast',
     'new_episode' => 'New Episode',
     'feed' => 'RSS',
     'view' => 'View podcast',

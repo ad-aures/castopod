@@ -55,9 +55,10 @@
         ],
     ],
     $episode->persons,
+    'max-w-xl'
 ) ?>
 
-<form action="<?= route_to('episode-person-edit', $episode->id) ?>" method="POST" class="mt-6">
+<form action="<?= route_to('episode-persons-manage', $episode->id) ?>" method="POST" class="mt-6">
 <?= csrf_field() ?>
 
 <Forms.Section

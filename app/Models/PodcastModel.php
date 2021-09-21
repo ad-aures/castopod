@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Entities\Actor;
 use App\Entities\Podcast;
 use CodeIgniter\Database\Query;
 use CodeIgniter\HTTP\URI;
@@ -88,7 +89,7 @@ class PodcastModel extends Model
     protected $validationRules = [
         'title' => 'required',
         'handle' =>
-            'required|regex_match[/^[a-zA-Z0-9\_]{1,191}$/]|is_unique[podcasts.handle,id,{id}]',
+            'required|regex_match[/^[a-zA-Z0-9\_]{1,32}$/]|is_unique[podcasts.handle,id,{id}]',
         'description_markdown' => 'required',
         'image_path' => 'required',
         'language_code' => 'required',
@@ -102,7 +103,7 @@ class PodcastModel extends Model
     /**
      * @var string[]
      */
-    protected $beforeInsert = ['createPodcastActor'];
+    protected $beforeInsert = ['setPodcastGUID', 'createPodcastActor'];
 
     /**
      * @var string[]
@@ -485,6 +486,21 @@ class PodcastModel extends Model
             if ($actor->hasChanged()) {
                 $actorModel->update($actor->id, $actor);
             }
+        }
+
+        return $data;
+    }
+
+    /**
+     * @param mixed[] $data
+     *
+     * @return mixed[]
+     */
+    protected function setPodcastGUID(array $data): array
+    {
+        if (! array_key_exists('guid', $data['data']) || $data['data']['guid'] === null) {
+            helper('misc');
+            $data['data']['guid'] = podcast_uuid(url_to('podcast_feed', $data['data']['handle']));
         }
 
         return $data;

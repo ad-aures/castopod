@@ -21,10 +21,10 @@
     data-slugify="title"
     class="max-w-sm" />
 
-<div>
+<div class="flex flex-col max-w-sm">
     <Forms.Label for="slug"><?= lang('Page.form.permalink') ?></Forms.Label>
     <permalink-edit class="inline-flex items-center text-xs" edit-label="<?= lang('Common.edit') ?>" copy-label="<?= lang('Common.copy') ?>" copied-label="<?= lang('Common.copied') ?>">
-        <span slot="domain"><?= base_url('pages') . '/' ?></span>
+        <span slot="domain" class="flex-shrink-0"><?= base_url('pages') . '/' ?></span>
         <Forms.Input name="slug" required="true" data-slugify="slug" slot="slug-input" class="flex-1 text-xs" />
     </permalink-edit>
 </div>

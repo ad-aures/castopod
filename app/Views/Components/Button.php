@@ -28,29 +28,29 @@ class Button extends Component
     public function render(): string
     {
         $baseClass =
-            'inline-flex items-center justify-center font-semibold shadow-xs rounded-full focus:outline-none focus:ring';
+            'flex-shrink-0 inline-flex items-center justify-center font-semibold shadow-xs rounded-full focus:outline-none focus:ring-2 focus:ring-pine-500 focus:ring-offset-2 focus:ring-offset-pine-100';
 
         $variantClass = [
             'default' => 'text-black bg-gray-300 hover:bg-gray-400',
             'primary' => 'text-white bg-pine-500 hover:bg-pine-800',
-            'secondary' => 'text-white bg-gray-700 hover:bg-gray-800',
+            'secondary' => 'border-2 border-pine-500 text-pine-500 bg-pine-100 hover:border-pine-800 hover:text-pine-800',
             'accent' => 'text-white bg-rose-600 hover:bg-rose-800',
-            'success' => 'text-white bg-green-600 hover:bg-green-700',
+            'success' => 'text-white bg-pine-500 hover:bg-pine-800',
             'danger' => 'text-white bg-red-600 hover:bg-red-700',
             'warning' => 'text-black bg-yellow-500 hover:bg-yellow-600',
             'info' => 'text-white bg-blue-500 hover:bg-blue-600',
         ];
 
         $sizeClass = [
-            'small' => 'text-xs md:text-sm',
-            'base' => 'text-sm md:text-base',
-            'large' => 'text-lg md:text-xl',
+            'small' => 'text-xs leading-6',
+            'base' => 'text-sm leading-5',
+            'large' => 'text-base leading-6',
         ];
 
         $basePaddings = [
-            'small' => 'px-2 md:px-3 md:py-1',
-            'base' => 'px-3 py-1 md:px-4 md:py-2',
-            'large' => 'px-3 py-2 md:px-5',
+            'small' => 'px-2 py-1',
+            'base' => 'px-3 py-2',
+            'large' => 'px-4 py-2',
         ];
 
         $squaredPaddings = [
@@ -76,11 +76,11 @@ class Button extends Component
         }
 
         if ($this->iconLeft !== '') {
-            $this->slot = '<Icon glyph="' . $this->iconLeft . '" class="mr-2" />' . $this->slot;
+            $this->slot = '<Icon glyph="' . $this->iconLeft . '" class="mr-2 opacity-75" />' . $this->slot;
         }
 
         if ($this->iconRight !== '') {
-            $this->slot .= '<Icon glyph="' . $this->iconRight . '" class="ml-2" />';
+            $this->slot .= '<Icon glyph="' . $this->iconRight . '" class="ml-2 opacity-75" />';
         }
 
         unset($this->attributes['slot']);

@@ -31,11 +31,6 @@ class FormComponent extends Component
     public function setRequired(string $value): void
     {
         $this->required = $value === 'true';
-        if ($this->required) {
-            $this->attributes['required'] = 'required';
-        } else {
-            unset($this->attributes['required']);
-        }
     }
 
     public function setReadonly(string $value): void

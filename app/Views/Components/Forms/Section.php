@@ -19,7 +19,7 @@ class Section extends Component
         $subtitle = $this->subtitle === null ? '' : '<p class="text-sm text-gray-600 clear-left ' . $this->subtitleClass . '">' . $this->subtitle . '</p>';
 
         return <<<HTML
-            <fieldset class="w-full max-w-xl p-8 bg-white border-2 border-black rounded-xl {$this->class}">
+            <fieldset class="w-full max-w-xl p-8 bg-white border-3 border-pine-100 rounded-xl {$this->class}">
                 <Heading tagName="legend" class="float-left">{$this->title}</Heading>
                 {$subtitle}
                 <div class="flex flex-col gap-4 py-4 clear-left">{$this->slot}</div>

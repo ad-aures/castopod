@@ -57,14 +57,14 @@ if (! function_exists('data_table')) {
             'table_open' => '<table class="w-full whitespace-no-wrap">',
 
             'thead_open' =>
-                '<thead class="text-xs font-semibold text-left text-gray-500 uppercase border-b">',
+                '<thead class="text-xs font-semibold text-left text-gray-500 uppercase">',
 
             'heading_cell_start' => '<th class="px-4 py-2">',
             'cell_start' => '<td class="px-4 py-2">',
             'cell_alt_start' => '<td class="px-4 py-2">',
 
-            'row_start' => '<tr class="bg-gray-50 hover:bg-pine-50">',
-            'row_alt_start' => '<tr class="hover:bg-pine-50">',
+            'row_start' => '<tr class="border-t hover:bg-pine-50">',
+            'row_alt_start' => '<tr class="border-t hover:bg-pine-50">',
         ];
 
         $table->setTemplate($template);
@@ -89,7 +89,7 @@ if (! function_exists('data_table')) {
             return lang('Common.no_data');
         }
 
-        return '<div class="overflow-x-auto bg-white rounded-lg shadow ' . $class . '" >' .
+        return '<div class="overflow-x-auto bg-white rounded-lg border-3 border-pine-100 ' . $class . '" >' .
             $table->generate() .
             '</div>';
     }

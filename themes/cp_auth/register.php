@@ -8,7 +8,7 @@
 
 <?= $this->section('content') ?>
 
-<form action="<?= route_to('register') ?>" method="POST" class="flex flex-col">
+<form action="<?= route_to('register') ?>" method="POST" class="flex flex-col w-full gap-y-4">
 <?= csrf_field() ?>
 
 <Forms.Field
@@ -26,6 +26,7 @@
 <Forms.Field
     name="password"
     label="<?= lang('Auth.password') ?>"
+    type="password"
     required="true"
     autocomplete="new-password" />
 

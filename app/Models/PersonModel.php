@@ -62,7 +62,7 @@ class PersonModel extends Model
     protected $validationRules = [
         'full_name' => 'required',
         'unique_name' =>
-            'required|regex_match[/^[a-z0-9\-]{1,191}$/]|is_unique[persons.unique_name,id,{id}]',
+            'required|regex_match[/^[a-z0-9\-]{1,32}$/]|is_unique[persons.unique_name,id,{id}]',
         'created_by' => 'required',
         'updated_by' => 'required',
     ];

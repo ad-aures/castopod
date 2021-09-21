@@ -9,7 +9,7 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
-<Button uri="<?= route_to('page-create') ?>" variant="accent" iconLeft="add"><?= lang('Page.create') ?></Button>
+<Button uri="<?= route_to('page-create') ?>" variant="primary" iconLeft="add"><?= lang('Page.create') ?></Button>
 <?= $this->endSection() ?>
 
 

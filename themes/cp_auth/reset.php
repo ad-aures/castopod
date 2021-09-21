@@ -5,12 +5,11 @@
     <?= lang('Auth.resetYourPassword') ?>
 <?= $this->endSection() ?>
 
-
 <?= $this->section('content') ?>
 
 <p class="mb-4"><?= lang('Auth.enterCodeEmailPassword') ?></p>
 
-<form action="<?= route_to('reset-password') ?>" method="POST" class="flex flex-col">
+<form action="<?= route_to('reset-password') ?>" method="POST" class="flex flex-col w-full">
 <?= csrf_field() ?>
 
 <Forms.Field

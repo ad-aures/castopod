@@ -8,7 +8,7 @@
 
 <?= $this->section('content') ?>
 
-<form actions="<?= route_to('login') ?>" method="POST" class="flex flex-col">
+<form actions="<?= route_to('login') ?>" method="POST" class="flex flex-col w-full gap-y-4">
     <?= csrf_field() ?>
 
     <Forms.Field

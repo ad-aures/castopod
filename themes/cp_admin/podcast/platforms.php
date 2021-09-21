@@ -8,9 +8,13 @@
 <?= lang('Platforms.title') ?>
 <?= $this->endSection() ?>
 
+<?= $this->section('headerRight') ?>
+<Button form="platforms-form" variant="primary" type="submit" class="self-end"><?= lang('Platforms.submit') ?></Button>
+<?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
 
-<form action="<?= route_to('platforms-save', $podcast->id, $platformType) ?>" method="POST" class="flex flex-col max-w-md">
+<form id="platforms-form" action="<?= route_to('platforms-save', $podcast->id, $platformType) ?>" method="POST" class="flex flex-col max-w-md">
 <?= csrf_field() ?>
 
 <?php foreach ($platforms as $platform): ?>
@@ -101,8 +105,6 @@
 </div>
 
 <?php endforeach; ?>
-
-<Button variant="primary" type="submit" class="self-end"><?= lang('Platforms.submit') ?></Button>
 
 </form>
 

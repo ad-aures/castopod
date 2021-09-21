@@ -12,7 +12,7 @@
 <?= $this->section('content') ?>
 
 <form action="<?= route_to('fediverse-attempt-block-actor') ?>" method="POST" class="flex flex-col max-w-md">
-    <Forms.Field name="handle" label="<?= lang('Fediverse.block_lists_form.handle') ?>" hint="<?= lang('Fediverse.block_lists_form.handle_hint') ?>" />
+    <Forms.Field name="handle" label="<?= lang('Fediverse.block_lists_form.handle') ?>" hint="<?= lang('Fediverse.block_lists_form.handle_hint') ?>" required="true" />
     <Button variant="primary" type="submit" class="self-end"><?= lang('Fediverse.block_lists_form.submit') ?></Button>
 </form>
 
