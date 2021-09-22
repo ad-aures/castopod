@@ -285,17 +285,17 @@ class PodcastImportController extends BaseController
             }
         }
 
-        $numberItems = $feed->channel[0]->item->count();
+        $itemsCount = $feed->channel[0]->item->count();
 
         $lastItem =
             $this->request->getPost('max_episodes') !== '' &&
-            $this->request->getPost('max_episodes') < $numberItems
+            $this->request->getPost('max_episodes') < $itemsCount
             ? (int) $this->request->getPost('max_episodes')
-            : $numberItems;
+            : $itemsCount;
 
         $slugs = [];
         for ($itemNumber = 1; $itemNumber <= $lastItem; ++$itemNumber) {
-            $item = $feed->channel[0]->item[$numberItems - $itemNumber];
+            $item = $feed->channel[0]->item[$itemsCount - $itemNumber];
 
             $nsItunes = $item->children('http://www.itunes.com/dtds/podcast-1.0.dtd');
             $nsPodcast = $item->children(

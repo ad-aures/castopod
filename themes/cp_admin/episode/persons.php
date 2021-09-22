@@ -50,7 +50,7 @@
         [
             'header' => lang('Common.actions'),
             'cell' => function ($person): string {
-                return '<Button uri="' . route_to('episode-person-remove', $person->podcast_id, $person->episode_id, $person->id) . '" variant="danger" size="small">' . lang('Person.episode_form.remove') . '</Button>';
+                return '<Button uri="' . route_to('episode-person-remove', $person->podcast_id, $person->episode_id, $person->id) . '" variant="danger" size="small" iconLeft="delete-bin">' . lang('Person.episode_form.remove') . '</Button>';
             },
         ],
     ],
@@ -58,7 +58,7 @@
     'max-w-xl'
 ) ?>
 
-<form action="<?= route_to('episode-persons-manage', $episode->id) ?>" method="POST" class="mt-6">
+<form action="<?= route_to('episode-persons-manage', $podcast->id, $episode->id) ?>" method="POST" class="mt-6">
 <?= csrf_field() ?>
 
 <Forms.Section

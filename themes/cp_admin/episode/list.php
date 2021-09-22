@@ -88,7 +88,7 @@
                             $podcast->id,
                             $episode->id,
                         ) . '">' . lang(
-                            'Episode.embeddable_player.add',
+                            'Episode.embeddable_player.title',
                         ) . '</a>' .
                         '<a class="px-4 py-1 hover:bg-gray-100" href="' . route_to(
                             'episode-persons-manage',

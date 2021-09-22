@@ -23,6 +23,11 @@ class Select extends FormComponent
         $defaultAttributes = [
             'class' => 'focus:border-black focus:ring-2 focus:ring-pine-500 focus:ring-offset-2 focus:ring-offset-pine-100 border-3 rounded-lg border-black ' . $this->class,
             'data-class' => $this->class,
+            'data-select-text' => lang('Common.forms.multiSelect.selectText'),
+            'data-loading-text' => lang('Common.forms.multiSelect.loadingText'),
+            'data-no-results-text' => lang('Common.forms.multiSelect.noResultsText'),
+            'data-no-choices-text' => lang('Common.forms.multiSelect.noChoicesText'),
+            'data-max-item-text' => lang('Common.forms.multiSelect.maxItemText'),
         ];
         $extra = array_merge($this->attributes, $defaultAttributes);
 
