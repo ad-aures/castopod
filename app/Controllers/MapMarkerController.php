@@ -10,7 +10,6 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use App\Entities\Page;
 use App\Models\EpisodeModel;
 use CodeIgniter\HTTP\ResponseInterface;
 
@@ -34,7 +33,9 @@ class MapMarkerController extends BaseController
     {
         $cacheName = 'episodes_markers';
         if (! ($found = cache($cacheName))) {
-            $episodes = (new EpisodeModel())->where('location_geo is not', null)
+            $episodes = (new EpisodeModel())
+                ->where('`published_at` <= NOW()', null, false)
+                ->where('location_geo is not', null)
                 ->findAll();
             $found = [];
             foreach ($episodes as $episode) {
