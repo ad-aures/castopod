@@ -1,3 +1,10 @@
+# [1.0.0-alpha.73](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.72...v1.0.0-alpha.73) (2021-09-22)
+
+### Bug Fixes
+
+- **map:** update episode markers query to discard unpublished episodes
+  ([b3caac4](https://code.podlibre.org/podlibre/castopod-host/commit/b3caac45b12a23e4289d00133d2ad7915d084c44))
+
 # [1.0.0-alpha.72](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.71...v1.0.0-alpha.72) (2021-09-20)
 
 ### Bug Fixes
