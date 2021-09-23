@@ -64,7 +64,7 @@ class MarkdownEditor extends FormComponent
                     {$textarea}
                     <markdown-preview for="{$this->id}" class="absolute top-0 left-0 hidden w-full h-full p-2 overflow-y-auto prose bg-gray-50" showClass="bg-white" />
                 </div>
-                <footer class="flex px-2 py-1 bg-gray-100 border-t">
+                <footer class="flex px-2 py-1 border-t bg-gray-50">
                     <a href="https://commonmark.org/help/" class="inline-flex items-center text-xs font-semibold text-gray-500 hover:text-gray-700" target="_blank" rel="noopener noreferrer">{$icons['markdown']}{$translations['help']}</a>
                 </footer>
             </div>

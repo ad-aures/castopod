@@ -1,0 +1,24 @@
+:root {
+  --sticky-header-outer-height: 180px;
+  --sticky-header-inner-height: 84px;
+  --sticky-header-height-difference: calc(
+    var(--sticky-header-outer-height) - var(--sticky-header-inner-height)
+  );
+}
+
+/* Sticky header */
+.sticky-header-outer {
+  /* Make it stick */
+  height: var(--sticky-header-outer-height);
+  position: sticky;
+  top: calc(
+    var(--sticky-header-height-difference) * -1
+  ); /* Multiply by -1 to get a negative value */
+}
+
+.sticky-header-inner {
+  /* Make it stick */
+  height: var(--sticky-header-inner-height);
+  position: sticky;
+  top: 0;
+}

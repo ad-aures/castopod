@@ -80,10 +80,10 @@
         </footer>
     </aside>
     <main class="relative holy-grail__main">
-        <header class="flex-col py-10 bg-white">
-            <div class="container mx-auto">
-                <?= render_breadcrumb('text-gray-800 text-xs') ?>
-                <div class="flex justify-between">
+        <header class="z-40 flex items-center bg-white border-b sticky-header-outer border-pine-100">
+            <div class="container flex flex-col justify-end mx-auto -mt-4 sticky-header-inner">
+                <?= render_breadcrumb('text-gray-800 text-xs items-center flex') ?>
+                <div class="flex justify-between py-1">
                     <div class="flex flex-wrap items-center">
                         <Heading tagName="h1" size="large"><?= $this->renderSection('pageTitle') ?></Heading>
                         <?= $this->renderSection('headerLeft') ?>

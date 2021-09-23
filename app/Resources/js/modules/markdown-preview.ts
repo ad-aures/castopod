@@ -1,6 +1,6 @@
 import MarkdownToolbarElement from "@github/markdown-toolbar-element";
 import { html, LitElement, TemplateResult } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, state } from "lit/decorators.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 import marked from "marked";
 
@@ -9,13 +9,13 @@ export class MarkdownPreview extends LitElement {
   @property()
   for!: string;
 
-  @property()
+  @state()
   _textarea!: HTMLTextAreaElement;
 
-  @property()
+  @state()
   _markdownToolbar!: MarkdownToolbarElement;
 
-  @property()
+  @state()
   _show = false;
 
   connectedCallback(): void {

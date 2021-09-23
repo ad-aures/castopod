@@ -89,9 +89,7 @@ class Breadcrumb
 
         return '<nav aria-label="' .
             lang('Breadcrumb.label') .
-            '"><ol class="breadcrumb ' .
-            $class .
-            '">' .
+            '" class="' . $class . '"><ol class="breadcrumb">' .
             $listItems .
             '</ol></nav>';
     }
