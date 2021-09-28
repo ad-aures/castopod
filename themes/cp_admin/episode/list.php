@@ -74,44 +74,45 @@
             [
                 'header' => lang('Episode.list.actions'),
                 'cell' => function ($episode, $podcast) {
-                    return '<button id="more-dropdown-<?= $episode->id ?>" type="button" class="inline-flex items-center p-1 outline-none focus:ring" data-dropdown="button" data-dropdown-target="more-dropdown-<?= $episode->id ?>-menu" aria-haspopup="true" aria-expanded="false">' .
+                    return '<button id="more-dropdown-' . $episode->id . '" type="button" class="inline-flex items-center p-1 outline-none focus:ring" data-dropdown="button" data-dropdown-target="more-dropdown-' . $episode->id . '-menu" aria-haspopup="true" aria-expanded="false">' .
                         icon('more') .
                         '</button>' .
-                        '<nav id="more-dropdown-<?= $episode->id ?>-menu" class="flex flex-col py-2 text-black whitespace-no-wrap bg-white border rounded shadow" aria-labelledby="more-dropdown-<?= $episode->id ?>" data-dropdown="menu" data-dropdown-placement="bottom-start" data-dropdown-offset-x="0" data-dropdown-offset-y="-24">' .
-                        '<a class="px-4 py-1 hover:bg-gray-100" href="' . route_to(
-                            'episode-edit',
-                            $podcast->id,
-                            $episode->id,
-                        ) . '">' . lang('Episode.edit') . '</a>' .
-                        '<a class="px-4 py-1 hover:bg-gray-100" href="' . route_to(
-                            'embeddable-player-add',
-                            $podcast->id,
-                            $episode->id,
-                        ) . '">' . lang(
-                            'Episode.embeddable_player.title',
-                        ) . '</a>' .
-                        '<a class="px-4 py-1 hover:bg-gray-100" href="' . route_to(
-                            'episode-persons-manage',
-                            $podcast->id,
-                            $episode->id,
-                        ) . '">' . lang('Person.persons') . '</a>' .
-                        '<a class="px-4 py-1 hover:bg-gray-100" href="' . route_to(
-                            'soundbites-edit',
-                            $podcast->id,
-                            $episode->id,
-                        ) . '">' . lang('Episode.soundbites') . '</a>' .
-                        '<a class="px-4 py-1 hover:bg-gray-100" href="' . route_to(
-                            'episode',
-                            $podcast->handle,
-                            $episode->slug,
-                        ) . '">' . lang('Episode.go_to_page') . '</a>' .
-                        '<a class="px-4 py-1 hover:bg-gray-100" href="' . route_to(
-                            'episode-delete',
-                            $podcast->id,
-                            $episode->id,
-                        ) . '">' . lang('Episode.delete') . '</a>' .
-                        '</nav>' .
-                        '</div>';
+                        '<DropdownMenu id="more-dropdown-' . $episode->id . '-menu" labeledBy="more-dropdown-' . $episode->id . '" items="' . esc(json_encode([
+                            [
+                                'type' => 'link',
+                                'title' => lang('Episode.edit'),
+                                'uri' => route_to('episode-edit', $podcast->id, $episode->id),
+                            ],
+                            [
+                                'type' => 'link',
+                                'title' => lang('Episode.embeddable_player.title'),
+                                'uri' => route_to('embeddable-player-add', $podcast->id, $episode->id),
+                            ],
+                            [
+                                'type' => 'link',
+                                'title' => lang('Person.persons'),
+                                'uri' => route_to('episode-persons-manage', $podcast->id, $episode->id),
+                            ],
+                            [
+                                'type' => 'link',
+                                'title' => lang('Episode.soundbites'),
+                                'uri' => route_to('soundbites-edit', $podcast->id, $episode->id),
+                            ],
+                            [
+                                'type' => 'link',
+                                'title' => lang('Episode.go_to_page'),
+                                'uri' => route_to('episode', $podcast->handle, $episode->slug),
+                            ],
+                            [
+                                'type' => 'separator',
+                            ],
+                            [
+                                'type' => 'link',
+                                'title' => lang('Episode.delete'),
+                                'uri' => route_to('episode-delete', $podcast->id, $episode->id),
+                                'class' => 'font-semibold text-red-600',
+                            ],
+                        ])) . '" />';
                 },
             ],
         ],

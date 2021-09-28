@@ -14,7 +14,7 @@
     <?= service('vite')
         ->asset('js/admin.ts', 'js') ?>
     <?= service('vite')
-        ->asset('js/audio-player.ts', 'js') ?>
+        ->asset('js/admin-audio-player.ts', 'js') ?>
 </head>
 
 <body class="relative bg-pine-50 holy-grail-grid">
@@ -40,28 +40,26 @@
             data-dropdown="button"
             data-dropdown-target="my-account-dropdown-menu"
             aria-haspopup="true"
-            aria-expanded="false">
-                <?= icon('account-circle', 'text-2xl opacity-60 mr-2') ?>
-                <?= user()
-                    ->username ?>
-                <?= icon('caret-down', 'ml-auto text-2xl') ?>
-        </button>
-        <nav
-            id="my-account-dropdown-menu"
-            class="absolute z-50 flex flex-col py-2 text-black whitespace-no-wrap bg-white border-black rounded border-[3px]"
-            aria-labelledby="my-accountDropdown"
-            data-dropdown="menu"
-            data-dropdown-placement="bottom-end">
-                <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
-                        'my-account',
-                    ) ?>"><?= lang('AdminNavigation.account.my-account') ?></a>
-                <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
-                        'change-password',
-                    ) ?>"><?= lang('AdminNavigation.account.change-password') ?></a>
-                <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
-                        'logout',
-                    ) ?>"><?= lang('AdminNavigation.account.logout') ?></a>
-        </nav>
+            aria-expanded="false"><?= icon('account-circle', 'text-2xl opacity-60 mr-2') . user()->username . icon('caret-down', 'ml-auto text-2xl') ?></button>
+        <DropdownMenu id="my-account-dropdown-menu" labeledBy="my-account-dropdown" items="<?= esc(json_encode([
+            [
+                'type' => 'link',
+                'title' => lang('AdminNavigation.account.my-account'),
+                'uri' => route_to('my-account'),
+            ],
+            [
+                'type' => 'link',
+                'title' => lang('AdminNavigation.account.change-password'),
+                'uri' => route_to('change-password'),
+            ],
+            [
+                'type' => 'separator',
+            ],
+            [
+                'type' => 'link',
+                'title' => lang('AdminNavigation.account.logout'),
+                'uri' => route_to('logout'),
+            ], ])) ?>" />
     </header>
     <aside id="admin-sidebar" class="sticky z-50 flex flex-col text-white transition duration-200 ease-in-out transform -translate-x-full border-r top-10 border-pine-900 bg-pine-800 holy-grail__sidebar md:translate-x-0">
         <?php if (isset($podcast) && isset($episode)): ?>
@@ -80,7 +78,7 @@
         </footer>
     </aside>
     <main class="relative holy-grail__main">
-        <header class="z-40 flex items-center bg-white border-b sticky-header-outer border-pine-100">
+        <header class="z-40 flex items-center px-4 bg-white border-b md:px-12 sticky-header-outer border-pine-100">
             <div class="container flex flex-col justify-end mx-auto -mt-4 sticky-header-inner">
                 <?= render_breadcrumb('text-gray-800 text-xs items-center flex') ?>
                 <div class="flex justify-between py-1">

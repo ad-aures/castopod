@@ -52,41 +52,42 @@
                         aria-haspopup="true"
                         aria-expanded="false"
                         ><?= icon('more') ?></button>
-                    <nav
-                        id="more-dropdown-<?= $episode->id ?>-menu"
-                        class="z-50 flex flex-col py-2 text-black whitespace-no-wrap bg-white border rounded shadow"
-                        aria-labelledby="more-dropdown-<?= $episode->id ?>"
-                        data-dropdown="menu"
-                        data-dropdown-placement="bottom">
-                            <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
-    'episode-edit',
-    $podcast->id,
-    $episode->id,
-) ?>"><?= lang('Episode.edit') ?></a>
-                            <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
-    'embeddable-player-add',
-    $podcast->id,
-    $episode->id,
-) ?>"><?= lang(
-    'Episode.embeddable_player.title',
-) ?></a>
-                            <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
-    'episode-persons-manage',
-    $podcast->id,
-    $episode->id,
-) ?>"><?= lang('Person.persons') ?></a>
-                            <a class="px-4 py-1 hover:bg-gray-100" href="<?= route_to(
-    'episode',
-    $podcast->handle,
-    $episode->slug,
-) ?>"><?= lang('Episode.go_to_page') ?></a>
-                            <hr class="my-2 border border-gray-100">
-                            <a class="px-4 py-1 font-semibold text-red-600 hover:bg-gray-100" href="<?= route_to(
-    'episode-delete',
-    $podcast->id,
-    $episode->id,
-) ?>"><?= lang('Episode.delete') ?></a>
-                    </nav>
+                    <DropdownMenu id="more-dropdown-<?= $episode->id ?>-menu" labeledBy="more-dropdown-<?= $episode->id ?>" items="<?= esc(json_encode([
+                        [
+                            'type' => 'link',
+                            'title' => lang('Episode.edit'),
+                            'uri' => route_to('episode-edit', $podcast->id, $episode->id),
+                        ],
+                        [
+                            'type' => 'link',
+                            'title' => lang('Episode.embeddable_player.title'),
+                            'uri' => route_to('embeddable-player-add', $podcast->id, $episode->id),
+                        ],
+                        [
+                            'type' => 'link',
+                            'title' => lang('Person.persons'),
+                            'uri' => route_to('episode-persons-manage', $podcast->id, $episode->id),
+                        ],
+                        [
+                            'type' => 'link',
+                            'title' => lang('Episode.soundbites'),
+                            'uri' => route_to('soundbites-edit', $podcast->id, $episode->id),
+                        ],
+                        [
+                            'type' => 'link',
+                            'title' => lang('Episode.go_to_page'),
+                            'uri' => route_to('episode', $podcast->handle, $episode->slug),
+                        ],
+                        [
+                            'type' => 'separator',
+                        ],
+                        [
+                            'type' => 'link',
+                            'title' => lang('Episode.delete'),
+                            'uri' => route_to('episode-delete', $podcast->id, $episode->id),
+                            'class' => 'font-semibold text-red-600',
+                        ],
+                    ])) ?>" />
                 </div>
             </article>
         <?php endforeach; ?>
