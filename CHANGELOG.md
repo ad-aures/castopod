@@ -1,3 +1,10 @@
+# [1.0.0-alpha.74](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.73...v1.0.0-alpha.74) (2021-09-28)
+
+### Features
+
+- **platforms:** add missing newpodcastapps.com's platforms
+  ([92dd370](https://code.podlibre.org/podlibre/castopod-host/commit/92dd370e2f9a464edd26cddcde96d0e16f91548d))
+
 # [1.0.0-alpha.73](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.72...v1.0.0-alpha.73) (2021-09-22)
 
 ### Bug Fixes
