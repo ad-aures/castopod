@@ -73,17 +73,11 @@
 <legend class="text-lg font-semibold"><?= lang(
         'Episode.publish_form.publication_date',
     ) ?></legend>
-    <Forms.Radio id="now" name="publication_method" isChecked="<?= old('publication_method') ? old('publish') === 'now' : true ?>"><?= lang('Episode.publish_form.publication_method.now') ?></Forms.Radio>
+    <Forms.Radio value="now" name="publication_method" isChecked="<?= old('publication_method') ? old('publish') === 'now' : true ?>"><?= lang('Episode.publish_form.publication_method.now') ?></Forms.Radio>
     <div class="inline-flex flex-wrap items-center radio-toggler">
-        <?= form_radio(
-        [
-            'id' => 'schedule',
-            'name' => 'publication_method',
-            'class' => 'text-pine-500 border-black border-3 focus:ring-2 focus:ring-pine-500 focus:ring-offset-2 focus:ring-offset-pine-100 w-6 h-6',
-        ],
-        'schedule',
-        old('publication_method') && old('publication_method') === 'schedule',
-    ) ?>
+        <input
+            class="w-6 h-6 border-black text-pine-500 border-3 focus:ring-2 focus:ring-pine-500 focus:ring-offset-2 focus:ring-offset-pine-100"
+            type="radio" id="schedule" name="publication_method" value="schedule" <?= old('publication_method') && old('publication_method') === 'schedule' ? 'checked' : '' ?> />
         <Label for="schedule" class="pl-2 leading-8"><?= lang('Episode.publish_form.publication_method.schedule') ?></label>
         <div class="w-full mt-2 radio-toggler-element">
             <Forms.Field
