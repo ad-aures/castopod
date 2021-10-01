@@ -30,7 +30,7 @@ class Checkbox extends FormComponent
         $hint = $this->hint === null ? '' : hint_tooltip($this->hint, 'ml-1');
 
         return <<<HTML
-            <label class="leading-8">
+            <label class="leading-8 {$this->class}">
                 {$checkboxInput}
                 <span class="ml-2">{$this->slot}{$hint}</label>
             </label>

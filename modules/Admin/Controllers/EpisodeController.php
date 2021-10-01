@@ -684,9 +684,63 @@ class EpisodeController extends BaseController
         return redirect()->route('episode-view', [$this->podcast->id, $this->episode->id]);
     }
 
-    public function delete(): RedirectResponse
+    public function delete(): string
     {
-        (new EpisodeModel())->delete($this->episode->id);
+        helper(['form']);
+
+        $data = [
+            'podcast' => $this->podcast,
+            'episode' => $this->episode,
+        ];
+
+        replace_breadcrumb_params([
+            0 => $this->podcast->title,
+            1 => $this->episode->title,
+        ]);
+        return view('episode/delete', $data);
+    }
+
+    public function attemptDelete(): RedirectResponse
+    {
+        $rules = [
+            'understand' => 'required',
+        ];
+
+        if (! $this->validate($rules)) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $this->validator->getErrors());
+        }
+
+        $db = db_connect();
+
+        $db->transStart();
+
+        $allPostsLinkedToEpisode = (new PostModel())
+            ->where([
+                'episode_id' => $this->episode->id,
+            ])
+            ->findAll();
+        foreach ($allPostsLinkedToEpisode as $post) {
+            (new PostModel())->removePost($post);
+        }
+
+        // set episode published_at to null to unpublish before deletion
+        $this->episode->published_at = null;
+
+        $episodeModel = new EpisodeModel();
+        if (! $episodeModel->update($this->episode->id, $this->episode)) {
+            $db->transRollback();
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $episodeModel->errors());
+        }
+
+        $episodeModel->delete($this->episode->id);
+
+        $db->transComplete();
 
         return redirect()->route('episode-list', [$this->podcast->id]);
     }

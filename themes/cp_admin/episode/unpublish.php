@@ -15,7 +15,7 @@
 
 <Alert variant="danger" glyph="alert" class="font-semibold"><?= lang('Episode.unpublish_form.disclaimer') ?></Alert>
 
-<Forms.Checkbox name="understand" required="true" isChecked="false"><?= lang('Episode.unpublish_form.understand') ?></Forms.Checkbox>
+<Forms.Checkbox class="mt-2" name="understand" required="true" isChecked="false"><?= lang('Episode.unpublish_form.understand') ?></Forms.Checkbox>
 
 <div class="self-end mt-4">
     <Button uri="<?= route_to('episode-view', $podcast->id, $episode->id) ?>"><?= lang('Common.cancel') ?></Button>

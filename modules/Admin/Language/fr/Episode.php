@@ -141,6 +141,18 @@ return [
         'message_warning_hint' => 'Ajouter un message augmente l’engagement social, menant à une meilleure visibilité pour votre épisode.',
         'message_warning_submit' => 'Publish quand même',
     ],
+    'unpublish_form' => [
+        'disclaimer' =>
+            'Dépublier l’épisode supprimera toutes les publications qui lui sont associées et le retirera du flux RSS du podcast.',
+        'understand' => 'Je comprends, je veux dépublier l’épisode',
+        'submit' => 'Dépublier',
+    ],
+    'delete_form' => [
+        'disclaimer' =>
+            'Supprimer l’épisode supprimera toutes les publications qui lui sont associées et le retirera du flux RSS du podcast.',
+        'understand' => 'Je comprends, Je veux supprimer l’épisode',
+        'submit' => 'Supprimer',
+    ],
     'soundbites' => 'Extraits sonores',
     'soundbites_form' => [
         'title' => 'Modifier les extraits sonores',

@@ -272,6 +272,14 @@ $routes->group(
                                     'permission:podcast_episodes-delete',
                             ],
                         );
+                        $routes->post(
+                            'delete',
+                            'EpisodeController::attemptDelete/$1/$2',
+                            [
+                                'filter' =>
+                                    'permission:podcast_episodes-delete',
+                            ],
+                        );
                         $routes->get(
                             'transcript-delete',
                             'EpisodeController::transcriptDelete/$1/$2',

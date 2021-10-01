@@ -23,6 +23,7 @@ return [
     'publish' => 'publier',
     'publish-edit' => 'modifier la publication',
     'unpublish' => 'dépublier',
+    'delete' => 'supprimer',
     'fediverse' => 'fédiverse',
     'block-lists' => 'listes de blocage',
     'users' => 'utilisateurs',
