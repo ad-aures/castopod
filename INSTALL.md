@@ -92,7 +92,8 @@ server administrator.
 #### Privileges
 
 User must have at least these privileges on the database for Castopod Host to
-work: `ALTER`, `DELETE`, `EXECUTE`, `INDEX`, `INSERT`, `SELECT`, `UPDATE`.
+work: `CREATE`, `ALTER`, `DELETE`, `EXECUTE`, `INDEX`, `INSERT`, `SELECT`,
+`UPDATE`.
 
 ### (Optional) Other recommendations
 
