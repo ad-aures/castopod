@@ -105,6 +105,51 @@ class PodcastController extends BaseController
         return $cachedView;
     }
 
+    public function about(): string
+    {
+        // Prevent analytics hit when authenticated
+        if (! can_user_interact()) {
+            $this->registerPodcastWebpageHit($this->podcast->id);
+        }
+
+        $cacheName = implode(
+            '_',
+            array_filter([
+                'page',
+                "podcast#{$this->podcast->id}",
+                'about',
+                service('request')
+                    ->getLocale(),
+                can_user_interact() ? '_authenticated' : null,
+            ]),
+        );
+
+        if (! ($cachedView = cache($cacheName))) {
+            $data = [
+                'podcast' => $this->podcast,
+            ];
+
+            // if user is logged in then send to the authenticated activity view
+            if (can_user_interact()) {
+                helper('form');
+                return view('podcast/about_authenticated', $data);
+            }
+
+            $secondsToNextUnpublishedEpisode = (new EpisodeModel())->getSecondsToNextUnpublishedEpisode(
+                $this->podcast->id,
+            );
+
+            return view('podcast/about', $data, [
+                'cache' => $secondsToNextUnpublishedEpisode
+                    ? $secondsToNextUnpublishedEpisode
+                    : DECADE,
+                'cache_name' => $cacheName,
+            ]);
+        }
+
+        return $cachedView;
+    }
+
     public function episodes(): string
     {
         // Prevent analytics hit when authenticated

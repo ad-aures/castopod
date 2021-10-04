@@ -17,7 +17,11 @@
 </head>
 
 <body class="flex flex-col min-h-screen mx-auto bg-gray-100">
-    <header class="py-8 text-white border-b bg-pine-900">
+    <?php if (service('authentication')->check()): ?>
+        <?= $this->include('_admin_navbar') ?>
+    <?php endif; ?>
+
+    <header class="py-8 text-white border-b bg-pine-800">
         <div class="container flex flex-col px-2 py-4 mx-auto">
             <a href="<?= route_to('home') ?>"
             class="inline-flex items-center mb-2"><?= icon(

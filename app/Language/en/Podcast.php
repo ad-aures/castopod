@@ -42,6 +42,7 @@ return [
     }',
     'activity' => 'Activity',
     'episodes' => 'Episodes',
+    'about' => 'About',
     'sponsor_title' => 'Enjoying the show?',
     'sponsor' => 'Sponsor',
     'funding_links' => 'Funding links for {podcastTitle}',

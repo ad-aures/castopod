@@ -80,6 +80,9 @@ $routes->group('@(:podcastHandle)', function ($routes): void {
             ],
         ],
     ]);
+    $routes->get('about', 'PodcastController::about/$1', [
+        'as' => 'podcast-about',
+    ]);
     $routes->options('episodes', 'ActivityPubController::preflight');
     $routes->get('episodes', 'PodcastController::episodes/$1', [
         'as' => 'podcast-episodes',

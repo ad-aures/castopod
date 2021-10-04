@@ -1,5 +1,6 @@
 /* eslint-disable */
 const defaultTheme = require("tailwindcss/defaultTheme");
+const colors = require("tailwindcss/colors");
 
 module.exports = {
   mode: "jit",
@@ -42,6 +43,7 @@ module.exports = {
           800: "#b21a39",
           900: "#8e162e",
         },
+        orange: colors.orange,
       },
       spacing: {
         112: "28rem",

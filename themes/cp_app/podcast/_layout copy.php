@@ -5,8 +5,8 @@
     ->getLocale() ?>">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
 
     <?= $this->renderSection('meta-tags') ?>
@@ -22,10 +22,7 @@
         ->asset('js/audio-player.ts', 'js') ?>
 </head>
 
-<body class="w-full min-h-screen pb-20 overflow-x-hidden bg-pine-50 lg:mx-auto sm:pb-0">
-    <?= $this->include('_admin_navbar') ?>
-    <div class="flex">
-
+<body class="flex w-full min-h-screen pb-20 overflow-x-hidden lg:mx-auto lg:container bg-pine-50 sm:pb-0">
     <?= $this->include('podcast/_partials/header') ?>
 
     <main class="flex-shrink-0 w-full min-w-0 sm:w-auto sm:flex-1 sm:flex-shrink">
@@ -67,7 +64,11 @@
 
     <?= $this->include('podcast/_partials/sidebar') ?>
 
-    <button data-toggle="main-sidebar" data-toggle-class="translate-x-full" data-toggle-body-class="-ml-64" class="fixed z-40 hidden p-4 text-xl rounded-full shadow-2xl sm:block lg:hidden bottom-4 left-4 bg-pine-800 focus:outline-none focus:ring-2 focus:ring-pine-600 text-pine-200 hover:text-pine-50"><?= icon(
+    <button
+    data-toggle="main-sidebar"
+    data-toggle-class="translate-x-full"
+    data-toggle-body-class="-ml-64"
+    class="fixed z-40 hidden p-4 text-xl rounded-full shadow-2xl sm:block lg:hidden bottom-4 left-4 bg-pine-800 focus:outline-none focus:ring-2 focus:ring-pine-600 text-pine-200 hover:text-pine-50"><?= icon(
             'menu',
         ) ?><span class="sr-only"><?= lang(
             'Podcast.toggle_podcast_sidebar',
@@ -75,9 +76,12 @@
 
     <!-- Funding links modal -->
     <div id="funding-links" class="fixed top-0 left-0 z-50 flex items-center justify-center hidden w-screen h-screen">
-        <div class="absolute w-full h-full bg-pine-800 bg-opacity-90" role="button" data-toggle="funding-links" data-toggle-class="hidden" aria-label="<?= lang(
-            'Common.close',
-        ) ?>"></div>
+        <div
+        class="absolute w-full h-full bg-pine-800 bg-opacity-90"
+        role="button"
+        data-toggle="funding-links"
+        data-toggle-class="hidden"
+        aria-label="<?= lang('Common.close') ?>"></div>
         <div class="z-10 w-full max-w-xl bg-white rounded-lg shadow-2xl">
             <div class="flex justify-between px-4 py-2 border-b">
                 <h3 class="self-center text-lg"><?= lang(
@@ -86,11 +90,11 @@
                 'podcastTitle' => $podcast->title,
             ],
         ) ?></h3>
-                <button data-toggle="funding-links" data-toggle-class="hidden" aria-label="<?= lang(
-            'Common.close',
-        ) ?>" class="self-start p-1 text-2xl">
-                    <?= icon('close') ?>
-                </button>
+                <button
+                data-toggle="funding-links"
+                data-toggle-class="hidden"
+                aria-label="<?= lang('Common.close') ?>"
+                class="self-start p-1 text-2xl"><?= icon('close') ?></button>
             </div>
             <div class="flex flex-col items-start p-4 space-y-4">
                 <?php foreach (
@@ -98,12 +102,17 @@
                     as $fundingPlatform
                 ): ?>
                     <?php if ($fundingPlatform->is_visible): ?>
-                        <a href="<?= $fundingPlatform->link_url ?>" title="<?= $fundingPlatform->link_content ?>" target="_blank" rel="noopener noreferrer" class="inline-flex items-center font-semibold text-pine-900">
-                            <?= icon(
+                        <a
+                        href="<?= $fundingPlatform->link_url ?>"
+                        title="<?= $fundingPlatform->link_content ?>"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex items-center font-semibold text-pine-900">
+                        <?= icon(
                     $fundingPlatform->type .
-                                    '/' .
-                                    $fundingPlatform->slug,
-                    'text-2xl text-gray-400 mr-2',
+                                '/' .
+                                $fundingPlatform->slug,
+                    'mr-2',
                 ) . $fundingPlatform->link_url ?>
                         </a>
                     <?php endif; ?>
@@ -111,5 +120,4 @@
             </div>
         </div>
     </div>
-</div>
 </body>
