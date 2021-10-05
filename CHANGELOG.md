@@ -1,3 +1,11 @@
+# [1.0.0-alpha.75](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.74...v1.0.0-alpha.75) (2021-10-05)
+
+### Bug Fixes
+
+- **rss:** cast number type values to string in rss_helper
+  ([7180ae9](https://code.podlibre.org/podlibre/castopod-host/commit/7180ae9ec700930b69c04ed91f8eceea16ad77ce)),
+  closes [#148](https://code.podlibre.org/podlibre/castopod-host/issues/148)
+
 # [1.0.0-alpha.74](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.73...v1.0.0-alpha.74) (2021-09-28)
 
 ### Features
