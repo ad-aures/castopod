@@ -52,7 +52,7 @@
                         aria-haspopup="true"
                         aria-expanded="false"
                         ><?= icon('more') ?></button>
-                    <DropdownMenu id="more-dropdown-<?= $episode->id ?>-menu" labeledBy="more-dropdown-<?= $episode->id ?>" items="<?= esc(json_encode([
+                    <DropdownMenu id="more-dropdown-<?= $episode->id ?>-menu" labelledby="more-dropdown-<?= $episode->id ?>" items="<?= esc(json_encode([
                         [
                             'type' => 'link',
                             'title' => lang('Episode.edit'),

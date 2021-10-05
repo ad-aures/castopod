@@ -27,20 +27,7 @@
 
 <?= $this->section('content') ?>
 
-<nav class="sticky z-20 flex justify-center pt-2 text-lg top-12 sm:top-0 bg-pine-50">
-<a href="<?= route_to(
-        'podcast-activity',
-        $podcast->handle,
-    ) ?>" class="px-4 py-1 mr-8 font-semibold border-b-4 text-pine-800 border-pine-500"><?= lang(
-        'Podcast.activity',
-    ) ?></a>
-    <a href="<?= route_to(
-        'podcast-episodes',
-        $podcast->handle,
-    ) ?>" class="px-4 py-1 rounded-full hover:bg-pine-100"><?= lang(
-        'Podcast.episodes',
-    ) ?></a>
-</nav>
+<?= $this->include('podcast/_navigation') ?>
 
 <section class="max-w-2xl px-6 py-8 mx-auto">
 <form action="<?= route_to('post-attempt-create', interact_as_actor()->username) ?>" method="POST" class="flex p-4 bg-white shadow rounded-xl">
@@ -51,7 +38,7 @@
     <img src="<?= interact_as_actor()
         ->avatar_image_url ?>" alt="<?= interact_as_actor()
         ->display_name ?>" class="w-12 h-12 mr-4 rounded-full" />
-    <div class="flex flex-col flex-1 min-w-0">
+    <div class="flex flex-col flex-1 min-w-0 gap-y-2">
         <Forms.Textarea
             name="message"
             required="true"
@@ -61,7 +48,7 @@
             name="episode_url"
             type="url"
             placeholder="<?= lang('Post.form.episode_url_placeholder') . ' (' . lang('Common.optional') . ')' ?>" />
-        <Button variant="primary" size="small" type="submit" class="self-end mt-2"><?= lang('Post.form.submit') ?></Button>
+        <Button variant="primary" size="small" type="submit" class="self-end"><?= lang('Post.form.submit') ?></Button>
     </div>
 </form>
 <hr class="my-4 border-2 border-pine-100">

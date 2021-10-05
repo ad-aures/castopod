@@ -41,7 +41,7 @@
             data-dropdown-target="my-account-dropdown-menu"
             aria-haspopup="true"
             aria-expanded="false"><?= icon('account-circle', 'text-2xl opacity-60 mr-2') . user()->username . icon('caret-down', 'ml-auto text-2xl') ?></button>
-        <DropdownMenu id="my-account-dropdown-menu" labeledBy="my-account-dropdown" items="<?= esc(json_encode([
+        <DropdownMenu id="my-account-dropdown-menu" labelledby="my-account-dropdown" items="<?= esc(json_encode([
             [
                 'type' => 'link',
                 'title' => lang('AdminNavigation.account.my-account'),

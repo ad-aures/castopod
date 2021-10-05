@@ -77,7 +77,7 @@
                     return '<button id="more-dropdown-' . $episode->id . '" type="button" class="inline-flex items-center p-1 outline-none focus:ring" data-dropdown="button" data-dropdown-target="more-dropdown-' . $episode->id . '-menu" aria-haspopup="true" aria-expanded="false">' .
                         icon('more') .
                         '</button>' .
-                        '<DropdownMenu id="more-dropdown-' . $episode->id . '-menu" labeledBy="more-dropdown-' . $episode->id . '" items="' . esc(json_encode([
+                        '<DropdownMenu id="more-dropdown-' . $episode->id . '-menu" labelledby="more-dropdown-' . $episode->id . '" items="' . esc(json_encode([
                             [
                                 'type' => 'link',
                                 'title' => lang('Episode.edit'),

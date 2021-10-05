@@ -66,11 +66,25 @@
         subtitle="<?= lang('Person.podcast_form.add_section_subtitle') ?>"
     >
 
-    <Forms.Label for="persons" hint="<?= lang('Person.podcast_form.persons_hint') ?>"><?= lang('Person.podcast_form.persons') ?></Forms.Label>
-    <Forms.MultiSelect id="persons" name="persons[]" class="mb-4" required="required" options="<?= esc(json_encode($personOptions)) ?>" selected="<?= esc(json_encode(old('persons', []))) ?>"/>
-
-    <Forms.Label for="roles" hint="<?= lang('Person.podcast_form.roles_hint') ?>" isOptional="true"><?= lang('Person.podcast_form.roles') ?></Forms.Label>
-    <Forms.MultiSelect id="roles" name="roles[]" class="mb-4" options="<?= esc(json_encode($taxonomyOptions)) ?>" selected="<?= esc(json_encode(old('roles', []))) ?>"/>
+    <Forms.Field
+        as="MultiSelect"
+        id="persons"
+        name="persons[]"
+        label="<?= lang('Person.podcast_form.persons') ?>"
+        hint="<?= lang('Person.podcast_form.persons_hint') ?>"
+        options="<?= esc(json_encode($personOptions)) ?>"
+        selected="<?= esc(json_encode(old('persons', []))) ?>"
+        required="true" />
+    
+    <Forms.Field
+        as="MultiSelect"
+        id="roles"
+        name="roles[]"
+        label="<?= lang('Person.podcast_form.roles') ?>"
+        hint="<?= lang('Person.podcast_form.roles_hint') ?>"
+        options="<?= esc(json_encode($taxonomyOptions)) ?>"
+        selected="<?= esc(json_encode(old('roles', []))) ?>"
+        required="true" />
 
     <Button variant="primary" class="self-end" type="submit"><?= lang('Person.podcast_form.submit_add') ?></Button>
 

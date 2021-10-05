@@ -55,11 +55,7 @@
                     ) ?>
             </div>
         </div>
-        <nav class="flex gap-4 px-8">
-            <a href="<?= route_to('podcast-activity', $podcast->handle) ?>" class="px-4 py-1 font-semibold uppercase border-b-4 text-pine-500 border-pine-500"><?= lang('Podcast.activity') ?></a>
-            <a href="<?= route_to('podcast-episodes', $podcast->handle) ?>" class="px-4 py-1 font-semibold text-gray-500 uppercase hover:text-black"><?= lang('Podcast.episodes') ?></a>
-            <a href="<?= route_to('podcast-about', $podcast->handle) ?>" class="px-4 py-1 font-semibold text-gray-500 uppercase hover:text-black"><?= lang('Podcast.about') ?></a>
-        </nav>
+        <?= $this->include('podcast/_navigation') ?>
     </header>
     
     <main class="col-span-6">

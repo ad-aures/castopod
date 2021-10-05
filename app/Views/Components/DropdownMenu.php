@@ -43,7 +43,7 @@ class DropdownMenu extends Component
         return <<<HTML
             <nav id="{$this->id}"
                 class="absolute z-50 flex flex-col py-2 text-black whitespace-no-wrap bg-white border-black rounded-lg border-3"
-                aria-labelledby="{$this->labeledBy}"
+                aria-labelledby="{$this->labelledby}"
                 data-dropdown="menu"
                 data-dropdown-placement="bottom-end">{$menuItems}</nav>
         HTML;

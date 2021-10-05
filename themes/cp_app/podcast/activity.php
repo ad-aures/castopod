@@ -28,6 +28,7 @@
 <?= $this->section('content') ?>
 
 <section class="max-w-2xl mx-auto space-y-8">
+
 <?php foreach ($posts as $post): ?>
     <?php if ($post->reblog_of_id !== null): ?>
         <?= view('podcast/_partials/reblog', [
