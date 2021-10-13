@@ -114,6 +114,9 @@ $routes->group('@(:podcastHandle)', function ($routes): void {
                 ],
             ],
         ]);
+        $routes->get('activity', 'EpisodeController::activity/$1/$2', [
+            'as' => 'episode-activity',
+        ]);
         $routes->options('comments', 'ActivityPubController::preflight');
         $routes->get('comments', 'EpisodeController::comments/$1/$2', [
             'as' => 'episode-comments',
@@ -128,7 +131,7 @@ $routes->group('@(:podcastHandle)', function ($routes): void {
             ],
         ]);
         $routes->get('comments/(:uuid)', 'EpisodeCommentController::view/$1/$2/$3', [
-            'as' => 'comment',
+            'as' => 'episode-comment',
             'application/activity+json' => [
                 'controller-method' => 'EpisodeController::commentObject/$1/$2',
             ],
@@ -140,10 +143,10 @@ $routes->group('@(:podcastHandle)', function ($routes): void {
             ],
         ]);
         $routes->get('comments/(:uuid)/replies', 'EpisodeCommentController::replies/$1/$2/$3', [
-            'as' => 'comment-replies',
+            'as' => 'episode-comment-replies',
         ]);
         $routes->post('comments/(:uuid)/like', 'EpisodeCommentController::attemptLike/$1/$2/$3', [
-            'as' => 'comment-attempt-like',
+            'as' => 'episode-comment-attempt-like',
         ]);
         $routes->get('oembed.json', 'EpisodeController::oembedJSON/$1/$2', [
             'as' => 'episode-oembed-json',

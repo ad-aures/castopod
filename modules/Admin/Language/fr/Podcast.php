@@ -14,7 +14,6 @@ return [
     'create' => 'Créer un podcast',
     'import' => 'Importer un podcast',
     'new_episode' => 'Créer un épisode',
-    'feed' => 'RSS',
     'view' => 'Voir le podcast',
     'edit' => 'Modifier le podcast',
     'delete' => 'Supprimer le podcast',

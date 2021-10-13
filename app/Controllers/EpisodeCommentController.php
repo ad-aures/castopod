@@ -104,9 +104,8 @@ class EpisodeCommentController extends BaseController
             // if user is logged in then send to the authenticated activity view
             if (can_user_interact()) {
                 helper('form');
-                return view('podcast/comment_authenticated', $data);
             }
-            return view('podcast/comment', $data, [
+            return view('episode/comment', $data, [
                 'cache' => DECADE,
                 'cache_name' => $cacheName,
             ]);

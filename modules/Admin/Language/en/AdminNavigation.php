@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 return [
     'go_to_website' => 'View site',
+    'go_to_admin' => 'Go to admin',
     'dashboard' => 'Dashboard',
     'admin' => 'Home',
     'podcasts' => 'Podcasts',

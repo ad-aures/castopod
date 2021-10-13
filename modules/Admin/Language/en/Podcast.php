@@ -14,7 +14,6 @@ return [
     'create' => 'Create podcast',
     'import' => 'Import podcast',
     'new_episode' => 'New Episode',
-    'feed' => 'RSS',
     'view' => 'View podcast',
     'edit' => 'Edit podcast',
     'delete' => 'Delete podcast',

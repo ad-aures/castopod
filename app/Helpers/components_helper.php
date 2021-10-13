@@ -8,7 +8,6 @@ declare(strict_types=1);
  * @link       https://castopod.org/
  */
 use App\Entities\Location;
-use App\Entities\Person;
 use CodeIgniter\I18n\Time;
 use CodeIgniter\View\Table;
 
@@ -189,11 +188,11 @@ if (! function_exists('episode_numbering')) {
         $transKey = '';
         $args = [];
         if ($episodeNumber !== null) {
-            $args['episodeNumber'] = $episodeNumber;
+            $args['episodeNumber'] = sprintf('%02d', $episodeNumber);
         }
 
         if ($seasonNumber !== null) {
-            $args['seasonNumber'] = $seasonNumber;
+            $args['seasonNumber'] = sprintf('%02d', $seasonNumber);
         }
 
         if ($episodeNumber !== null && $seasonNumber !== null) {
@@ -245,95 +244,6 @@ if (! function_exists('location_link')) {
                 'rel' => 'noreferrer noopener',
             ],
         );
-    }
-}
-
-// ------------------------------------------------------------------------
-
-if (! function_exists('person_list')) {
-    /**
-     * Returns list of persons images
-     *
-     * @param Person[] $persons
-     */
-    function person_list(array $persons, string $class = ''): string
-    {
-        if ($persons === []) {
-            return '';
-        }
-
-        $personList = "<div class='flex w-full space-x-2 overflow-y-auto {$class}'>";
-
-        foreach ($persons as $person) {
-            $personList .= anchor(
-                $person->information_url ?? '#',
-                "<img
-                    src='{$person->image->thumbnail_url}'
-                    alt='{$person->full_name}'
-                    class='object-cover w-12 h-12 rounded-full' />",
-                [
-                    'class' =>
-                        'flex-shrink-0 focus:outline-none focus:ring focus:ring-inset',
-                    'target' => '_blank',
-                    'rel' => 'noreferrer noopener',
-                    'title' =>
-                        '<strong>' .
-                        $person->full_name .
-                        '</strong>' .
-                        implode(
-                            '',
-                            array_map(function ($role) {
-                                return '<br />' .
-                                    lang(
-                                        'PersonsTaxonomy.persons.' .
-                                            $role->group .
-                                            '.roles.' .
-                                            $role->role .
-                                            '.label',
-                                    );
-                            }, $person->roles),
-                        ),
-                    'data-toggle' => 'tooltip',
-                    'data-placement' => 'bottom',
-                ],
-            );
-        }
-
-        return $personList . '</div>';
-    }
-}
-
-// ------------------------------------------------------------------------
-
-if (! function_exists('play_episode_button')) {
-    /**
-     * Returns play episode button
-     */
-    function play_episode_button(
-        string $episodeId,
-        string $episodeThumbnail,
-        string $episodeTitle,
-        string $podcastTitle,
-        string $source,
-        string $mediaType,
-        string $class = ''
-    ): string {
-        $playLabel = lang('Common.play_episode_button.play');
-        $playingLabel = lang('Common.play_episode_button.playing');
-
-        return <<<CODE_SAMPLE
-            <play-episode-button
-                class="{$class}"
-                id="{$episodeId}"
-                imageSrc={$episodeThumbnail}
-                title="{$episodeTitle}"
-                podcast="{$podcastTitle}"
-                src="{$source}"
-                mediaType="{$mediaType}"
-                playLabel="{$playLabel}"
-                playingLabel="{$playingLabel}"
-            ></play-episode-button>
-        CODE_SAMPLE;
     }
 }
 

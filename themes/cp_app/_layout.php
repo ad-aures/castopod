@@ -13,10 +13,12 @@
     <?= service('vite')
         ->asset('styles/index.css', 'css') ?>
     <?= service('vite')
+        ->asset('js/app.ts', 'js') ?>
+    <?= service('vite')
         ->asset('js/audio-player.ts', 'js') ?>
 </head>
 
-<body class="flex flex-col min-h-screen mx-auto bg-gray-100">
+<body class="flex flex-col min-h-screen mx-auto bg-pine-50">
     <?php if (service('authentication')->check()): ?>
         <?= $this->include('_admin_navbar') ?>
     <?php endif; ?>
@@ -28,7 +30,7 @@
             'arrow-left',
             'mr-2',
         ) . lang('Page.back_to_home') ?></a>
-            <h1 class="text-3xl font-semibold"><?= isset($page)
+            <h1 class="text-3xl font-bold font-display"><?= isset($page)
     ? $page->title
     : 'Castopod' ?></h1>
         </div>

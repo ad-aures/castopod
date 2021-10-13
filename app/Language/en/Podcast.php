@@ -14,7 +14,7 @@ return [
     'create' => 'Create podcast',
     'import' => 'Import podcast',
     'new_episode' => 'New Episode',
-    'feed' => 'RSS',
+    'feed' => 'RSS Podcast feed',
     'view' => 'View podcast',
     'edit' => 'Edit podcast',
     'delete' => 'Delete podcast',
@@ -48,4 +48,9 @@ return [
     'funding_links' => 'Funding links for {podcastTitle}',
     'find_on' => 'Find {podcastTitle} on',
     'listen_on' => 'Listen on',
+    'persons' => '{personsCount, plural,
+        one {# person}
+        other {# persons}
+    }',
+    'persons_list' => 'Persons',
 ];

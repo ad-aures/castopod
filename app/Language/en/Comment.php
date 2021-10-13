@@ -14,7 +14,7 @@ return [
     'form' => [
         'episode_message_placeholder' => 'Write a comment...',
         'reply_to_placeholder' => 'Reply to @{actorUsername}',
-        'submit' => 'Send!',
+        'submit' => 'Send',
         'submit_reply' => 'Reply',
     ],
     'likes' => '{numberOfLikes, plural,

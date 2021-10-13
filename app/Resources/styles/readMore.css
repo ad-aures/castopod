@@ -1,0 +1,53 @@
+/*
+Read more component (basic unstyled component)
+-- see https://codepen.io/yassinedoghri/pen/QWpwoxp for more info and possible caveats
+*/
+
+@layer components {
+  .read-more {
+    @apply flex flex-col items-start;
+    /* You can update this variable directly in the html with the style attribute: style="--line-clamp: 3" */
+    --line-clamp: 3;
+  }
+
+  .read-more__text {
+    @apply overflow-hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: var(--line-clamp);
+    -webkit-box-orient: vertical;
+  }
+
+  .read-more__checkbox {
+    @apply absolute overflow-hidden whitespace-nowrap;
+    clip: rect(0 0 0 0);
+    clip-path: inset(100%);
+    height: 1px;
+    width: 1px;
+  }
+
+  .read-more__checkbox ~ .read-more__label {
+    @apply text-xs font-semibold underline cursor-pointer;
+  }
+
+  /* Don't forget focus and hover styles for accessibility! */
+  .read-more__checkbox:focus ~ .read-more__label {
+    @apply ring;
+  }
+
+  .read-more__checkbox:hover ~ .read-more__label {
+    @apply no-underline;
+  }
+
+  .read-more__checkbox ~ .read-more__label::before {
+    content: attr(data-read-more);
+  }
+
+  .read-more__checkbox:checked ~ .read-more__label::before {
+    content: attr(data-read-less);
+  }
+
+  .read-more__checkbox:checked ~ .read-more__text {
+    --line-clamp: none;
+    -webkit-line-clamp: var(--line-clamp);
+  }
+}

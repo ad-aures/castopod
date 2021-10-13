@@ -39,7 +39,7 @@ import "./modules/play-episode-button";
 
 const player = html`<div
   id="castopod-audio-player"
-  class="fixed bottom-0 left-0 flex flex-col w-full bg-white border-t sm:flex-row"
+  class="fixed bottom-0 left-0 flex flex-col w-full bg-white border-t sm:flex-row z-50"
   data-episode="-1"
   style="display: none;"
 >

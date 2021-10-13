@@ -48,7 +48,7 @@ class Button extends Component
         ];
 
         $basePaddings = [
-            'small' => 'px-2 py-1',
+            'small' => 'px-3 py-1',
             'base' => 'px-3 py-2',
             'large' => 'px-4 py-2',
         ];

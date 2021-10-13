@@ -49,16 +49,16 @@
 
     <main class="w-full max-w-md px-4 mx-auto">
         <form action="<?= route_to('attempt-follow', $actor->username) ?>" method="POST" class="flex flex-col">
-        <?= csrf_field() ?>
-        <?= view('_message_block') ?>
+            <?= csrf_field() ?>
+            <?= view('_message_block') ?>
 
-        <Forms.Field
-            name="handle"
-            label="<?= lang('Fediverse.your_handle') ?>"
-            hint="<?= lang('Fediverse.your_handle_hint') ?>"
-            required="true"
-        />
-        <Button variant="primary" type="submit" class="self-end"><?= lang('Fediverse.follow.submit') ?></Button>
+            <Forms.Field
+                name="handle"
+                label="<?= lang('Fediverse.your_handle') ?>"
+                hint="<?= lang('Fediverse.your_handle_hint') ?>"
+                required="true"
+            />
+            <Button variant="primary" type="submit" class="self-end"><?= lang('Fediverse.follow.submit') ?></Button>
         </form>
     </main>
 
@@ -68,7 +68,7 @@
         <p>
             <?= lang('Common.powered_by', [
                 'castopod' =>
-                    '<a class="underline hover:no-underline" href="https://castopod.org" target="_blank" rel="noreferrer noopener">Castopod</a>',
+                    '<a class="inline-flex font-semibold hover:underline" href="https://castopod.org" target="_blank" rel="noreferrer noopener">Castopod' . icon('social/castopod', 'ml-1 text-lg') . '</a>',
             ]) ?>
         </p>
     </footer>

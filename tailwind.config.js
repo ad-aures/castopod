@@ -16,7 +16,6 @@ module.exports = {
       fontFamily: {
         sans: ["Inter", ...defaultTheme.fontFamily.sans],
         display: ["Kumbh Sans", ...defaultTheme.fontFamily.sans],
-        // body: ["Inter", ...defaultTheme.fontFamily.sans],
       },
       colors: {
         pine: {
@@ -49,6 +48,7 @@ module.exports = {
         112: "28rem",
       },
       gridTemplateColumns: {
+        podcastLayout: "1fr minmax(auto, 768px) 1fr",
         podcasts: "repeat(auto-fill, minmax(14rem, 1fr))",
       },
       zIndex: {
@@ -67,6 +67,7 @@ module.exports = {
     require("@tailwindcss/forms"),
     require("@tailwindcss/typography"),
     require("@tailwindcss/line-clamp"),
+    require("@tailwindcss/aspect-ratio"),
     require("tailwindcss-scroll-snap"),
   ],
 };

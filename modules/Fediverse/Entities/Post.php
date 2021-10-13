@@ -31,7 +31,6 @@ use RuntimeException;
  * @property Time $published_at
  * @property Time $created_at
  *
- * @property bool $has_preview_card
  * @property PreviewCard|null $preview_card
  *
  * @property bool $has_replies
@@ -47,8 +46,6 @@ class Post extends UuidEntity
     protected ?Post $reblog_of_post = null;
 
     protected ?PreviewCard $preview_card = null;
-
-    protected bool $has_preview_card = false;
 
     /**
      * @var Post[]|null
@@ -117,11 +114,6 @@ class Post extends UuidEntity
         }
 
         return $this->preview_card;
-    }
-
-    public function getHasPreviewCard(): bool
-    {
-        return $this->getPreviewCard() !== null;
     }
 
     /**

@@ -13,7 +13,7 @@ class MarkdownEditor extends FormComponent
         $this->attributes['class'] = 'border-none outline-none focus:border-none focus:outline-none focus:ring-0 w-full h-full';
         $this->attributes['rows'] = 6;
 
-        $textarea = form_textarea($this->attributes, old($this->name, $this->value, false));
+        $textarea = form_textarea($this->attributes, old($this->name, html_entity_decode($this->value), null));
         $icons = [
             'heading' => icon('heading'),
             'bold' => icon('bold'),

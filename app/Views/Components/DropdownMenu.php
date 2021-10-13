@@ -32,6 +32,9 @@ class DropdownMenu extends Component
                         'class' => 'px-4 py-1 hover:bg-gray-100' . (array_key_exists('class', $item) ? ' ' . $item['class'] : ''),
                     ]);
                     break;
+                case 'html':
+                    $menuItems .= html_entity_decode($item['content']);
+                    break;
                 case 'separator':
                     $menuItems .= '<hr class="my-2 border border-gray-100">';
                     break;

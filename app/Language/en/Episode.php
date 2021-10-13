@@ -15,10 +15,15 @@ return [
     'number_abbr' => 'Ep. {episodeNumber}',
     'season_episode' => 'Season {seasonNumber} episode {episodeNumber}',
     'season_episode_abbr' => 'S{seasonNumber}E{episodeNumber}',
+    'persons' => '{personsCount, plural,
+        one {# person}
+        other {# persons}
+    }',
+    'persons_list' => 'Persons',
     'back_to_episodes' => 'Back to episodes of {podcast}',
     'comments' => 'Comments',
     'activity' => 'Activity',
-    'description' => 'Description',
+    'description' => 'Episode description',
     'number_of_comments' => '{numberOfComments, plural,
         one {# comment}
         other {# comments}

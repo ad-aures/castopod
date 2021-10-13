@@ -22,7 +22,7 @@ return [
     'home' => 'Accueil',
     'explicit' => 'Explicite',
     'mediumDate' => '{0,date,medium}',
-    'powered_by' => 'Propulsé par {castopod}.',
+    'powered_by' => 'Propulsé par {castopod}',
     'actions' => 'Actions',
     'pageInfo' => 'Page {currentPage} sur {pageCount}',
     'go_back' => 'Retour en arrière',
@@ -30,4 +30,8 @@ return [
         'play' => 'Lire',
         'playing' => 'En cours',
     ],
+    'read_more' => 'Lire plus',
+    'read_less' => 'Lire moins',
+    'see_more' => 'Voir plus',
+    'see_less' => 'Voir moins',
 ];

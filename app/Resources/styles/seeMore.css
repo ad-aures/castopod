@@ -1,0 +1,52 @@
+@layer components {
+  .see-more {
+    @apply flex flex-col items-start;
+  }
+
+  .see-more__content {
+    @apply relative overflow-hidden;
+    height: 5rem;
+  }
+
+  .see-more_content-fade {
+    @apply absolute bottom-0 left-0 w-full h-full pointer-events-none;
+    background-image: linear-gradient(to bottom, transparent, #00564a);
+  }
+
+  .see-more__checkbox {
+    @apply absolute overflow-hidden whitespace-nowrap;
+    clip: rect(0 0 0 0);
+    clip-path: inset(100%);
+    height: 1px;
+    width: 1px;
+  }
+
+  .see-more__checkbox ~ .see-more__label {
+    @apply text-xs font-semibold underline cursor-pointer;
+  }
+
+  /* Don't forget focus and hover styles for accessibility! */
+  .see-more__checkbox:focus ~ .see-more__label {
+    @apply ring;
+  }
+
+  .see-more__checkbox:hover ~ .see-more__label {
+    @apply no-underline;
+  }
+
+  .see-more__checkbox ~ .see-more__label::before {
+    content: attr(data-see-more);
+  }
+
+  .see-more__checkbox:checked ~ .see-more__label::before {
+    content: attr(data-see-less);
+  }
+
+  .see-more__checkbox:checked ~ .see-more__content {
+    @apply h-auto;
+  }
+
+  .see-more__checkbox:checked ~ .see-more__content .see-more_content-fade {
+    @apply bg-none;
+  }
+}

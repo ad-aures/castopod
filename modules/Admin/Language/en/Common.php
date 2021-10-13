@@ -22,7 +22,7 @@ return [
     'home' => 'Home',
     'explicit' => 'Explicit',
     'mediumDate' => '{0,date,medium}',
-    'powered_by' => 'Powered by {castopod}.',
+    'powered_by' => 'Powered by {castopod}',
     'actions' => 'Actions',
     'pageInfo' => 'Page {currentPage} out of {pageCount}',
     'go_back' => 'Go back',

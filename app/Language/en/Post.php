@@ -18,7 +18,7 @@ return [
         'episode_message_placeholder' => 'Write a message for the episode...',
         'episode_url_placeholder' => 'Episode URL',
         'reply_to_placeholder' => 'Reply to @{actorUsername}',
-        'submit' => 'Send!',
+        'submit' => 'Send',
         'submit_reply' => 'Reply',
     ],
     'favourites' => '{numberOfFavourites, plural,

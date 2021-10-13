@@ -31,7 +31,7 @@
 		<?= $this->renderSection('footer') ?>
 		<small class="py-4 text-center border-t-2 border-pine-100"><?= lang('Common.powered_by', [
 		    'castopod' =>
-		        '<a class="underline hover:no-underline" href="https://castopod.org" target="_blank" rel="noreferrer noopener">Castopod</a>',
+		        '<a class="inline-flex font-semibold hover:underline" target="_blank" rel="noreferrer noopener">Castopod' . icon('social/castopod', 'ml-1 text-lg') . '</a>',
 		]) ?></small>
 	</footer>
 </body>

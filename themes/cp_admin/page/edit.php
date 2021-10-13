@@ -35,7 +35,7 @@
     as="MarkdownEditor"
     name="content"
     label="<?= lang('Page.form.content') ?>"
-    value="<?= $page->content_markdown ?>"
+    value="<?= htmlspecialchars($page->content_markdown) ?>"
     required="true"
     rows="20" />
 

@@ -1,0 +1,29 @@
+<article class="w-full bg-white shadow sm:rounded-lg">
+    <div class="flex p-4 gap-x-2">
+        <div class="relative">
+            <time class="absolute px-1 text-xs font-semibold text-white rounded bottom-2 right-2 bg-black/50" datetime="PT<?= $episode->audio_file_duration ?>S">
+                <?= format_duration($episode->audio_file_duration) ?>
+            </time>
+            <img loading="lazy" src="<?= $episode->image
+                    ->thumbnail_url ?>" alt="<?= $episode->title ?>" class="object-cover w-20 h-20 rounded-lg" />
+        </div>
+        <div class="flex items-center flex-1 gap-x-4">
+            <div class="flex flex-col flex-1">
+                <div class="inline-flex items-center">
+                    <?= episode_numbering($episode->number, $episode->season_number, 'text-xs font-semibold text-gray-700 px-1 border mr-2 !no-underline', true) ?>
+                    <?= relative_time($episode->published_at, 'text-xs whitespace-nowrap') ?>
+                </div>
+                <h2 class="flex-1 font-semibold line-clamp-2"><a class="hover:underline" href="<?= $episode->link ?>"><?= $episode->title ?></a></h2>
+            </div>
+            <play-episode-button
+                id="<?= $episode->id ?>"
+                imageSrc="<?= $episode->image->thumbnail_url ?>"
+                title="<?= $episode->title ?>"
+                podcast="<?= $episode->podcast->title ?>"
+                src="<?= $episode->audio_file_web_url ?>"
+                mediaType="<?= $episode->audio_file_mimetype ?>"
+                playLabel="<?= lang('Common.play_episode_button.play') ?>"
+                playingLabel="<?= lang('Common.play_episode_button.playing') ?>"></play-episode-button>
+        </div>
+    </div>
+</article>

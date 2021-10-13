@@ -14,6 +14,7 @@ export default defineConfig({
       input: {
         "podcast.ts": "app/Resources/js/podcast.ts",
         "install.ts": "app/Resources/js/install.ts",
+        "app.ts": "app/Resources/js/app.ts",
         "admin.ts": "app/Resources/js/admin.ts",
         "charts.ts": "app/Resources/js/charts.ts",
         "map.ts": "app/Resources/js/map.ts",

@@ -87,10 +87,47 @@ class EpisodeController extends BaseController
 
             if (can_user_interact()) {
                 helper('form');
-                return view('podcast/episode_authenticated', $data);
             }
             // The page cache is set to a decade so it is deleted manually upon podcast update
-            return view('podcast/episode', $data, [
+            return view('episode/comments', $data, [
+                'cache' => $secondsToNextUnpublishedEpisode
+                    ? $secondsToNextUnpublishedEpisode
+                    : DECADE,
+                'cache_name' => $cacheName,
+            ]);
+        }
+
+        return $cachedView;
+    }
+
+    public function activity(): string
+    {
+        // Prevent analytics hit when authenticated
+        if (! can_user_interact()) {
+            $this->registerPodcastWebpageHit($this->episode->podcast_id);
+        }
+
+        $locale = service('request')
+            ->getLocale();
+        $cacheName =
+            "page_podcast#{$this->podcast->id}_episode#{$this->episode->id}_{$locale}" .
+            (can_user_interact() ? '_authenticated' : '');
+
+        if (! ($cachedView = cache($cacheName))) {
+            $data = [
+                'podcast' => $this->podcast,
+                'episode' => $this->episode,
+            ];
+
+            $secondsToNextUnpublishedEpisode = (new EpisodeModel())->getSecondsToNextUnpublishedEpisode(
+                $this->podcast->id,
+            );
+
+            if (can_user_interact()) {
+                helper('form');
+            }
+            // The page cache is set to a decade so it is deleted manually upon podcast update
+            return view('episode/activity', $data, [
                 'cache' => $secondsToNextUnpublishedEpisode
                     ? $secondsToNextUnpublishedEpisode
                     : DECADE,

@@ -11,6 +11,8 @@
     <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
     <?= service('vite')
         ->asset('styles/index.css', 'css') ?>
+    <?= service('vite')
+        ->asset('js/app.ts', 'js') ?>
 </head>
 
 <body class="flex flex-col min-h-screen mx-auto bg-pine-50">
@@ -52,7 +54,7 @@
         <?= render_page_links() ?>
         <small><?= lang('Common.powered_by', [
             'castopod' =>
-                '<a class="underline hover:no-underline" href="https://castopod.org/" target="_blank" rel="noreferrer noopener">Castopod</a>',
+                '<a class="inline-flex font-semibold hover:underline" href="https://castopod.org/" target="_blank" rel="noreferrer noopener">Castopod' . icon('social/castopod', 'ml-1 text-lg') . '</a>',
         ]) ?></small>
     </footer>
 </body>

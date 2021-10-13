@@ -63,16 +63,16 @@
 
 <fieldset class="flex flex-col mb-4">
     <legend><?= lang('PodcastImport.slug_field') ?></legend>
-    <Forms.Radio id="title" name="slug_field" isChecked="true">&lt;title&gt;</span></Forms.Radio>
-    <Forms.Radio id="link" name="slug_field">&lt;link&gt;</span></Forms.Radio>
+    <Forms.Radio value="title" name="slug_field" isChecked="true">&lt;title&gt;</span></Forms.Radio>
+    <Forms.Radio value="link" name="slug_field">&lt;link&gt;</span></Forms.Radio>
 </fieldset>
 
 <fieldset class="flex flex-col mb-4">
     <legend><?= lang('PodcastImport.description_field') ?></legend>
-    <Forms.Radio id="description" name="description_field" isChecked="true">&lt;description&gt;</Forms.Radio>
-    <Forms.Radio id="summary" name="description_field">&lt;itunes:summary&gt;</Forms.Radio>
-    <Forms.Radio id="subtitle_summary" name="description_field">&lt;itunes:subtitle&gt; + &lt;itunes:summary&gt;</Forms.Radio>
-    <Forms.Radio id="content" name="description_field">&lt;content:encoded&gt;</Forms.Radio>
+    <Forms.Radio value="description" name="description_field" isChecked="true">&lt;description&gt;</Forms.Radio>
+    <Forms.Radio value="summary" name="description_field">&lt;itunes:summary&gt;</Forms.Radio>
+    <Forms.Radio value="subtitle_summary" name="description_field">&lt;itunes:subtitle&gt; + &lt;itunes:summary&gt;</Forms.Radio>
+    <Forms.Radio value="content" name="description_field">&lt;content:encoded&gt;</Forms.Radio>
 </fieldset>
 
 <Forms.Checkbox name="force_renumber" hint="<?= lang('PodcastImport.force_renumber_hint') ?>"><?= lang('PodcastImport.force_renumber') ?></Forms.Checkbox>

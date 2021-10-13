@@ -159,6 +159,34 @@ if (! function_exists('format_duration')) {
     }
 }
 
+
+if (! function_exists('format_duration_symbol')) {
+    /**
+     * Formats duration in seconds to an hh(h) mm(min) ss(s) string. Doesn't show leading zeros if any.
+     *
+     * ⚠️ This uses php's gmdate function so any duration > 86000 seconds (24 hours) will not be formatted properly.
+     *
+     * @param int $seconds seconds to format
+     */
+    function format_duration_symbol(int $seconds): string
+    {
+        if ($seconds < 60) {
+            return $seconds . 's';
+        }
+        if ($seconds < 3600) {
+            // < 1 hour: returns MM:SS
+            return ltrim(gmdate('i\m\i\n s\s', $seconds), '0');
+        }
+        if ($seconds < 36000) {
+            // < 10 hours: returns H:MM:SS
+            return ltrim(gmdate('h\h i\min s\s', $seconds), '0');
+        }
+        return gmdate('h\h i\min s\s', $seconds);
+    }
+}
+
+//--------------------------------------------------------------------
+
 if (! function_exists('podcast_uuid')) {
     /**
      * Generate UUIDv5 for podcast. For more information, see

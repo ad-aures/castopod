@@ -120,7 +120,7 @@
     as="MarkdownEditor"
     name="description"
     label="<?= lang('Episode.form.description') ?>"
-    value="<?= $episode->description_markdown ?>"
+    value="<?= htmlspecialchars($episode->description_markdown) ?>"
     required="true" />
 
 <Forms.Field
@@ -128,7 +128,7 @@
     name="description_footer"
     label="<?= lang('Episode.form.description_footer') ?>"
     hint="<?= lang('Episode.form.description_footer_hint') ?>"
-    value="<?= $podcast->episode_description_footer_markdown ?? '' ?>" />
+    value="<?= htmlspecialchars($podcast->episode_description_footer_markdown) ?? '' ?>" />
 
 </Forms.Section>
 

@@ -44,7 +44,7 @@
     as="MarkdownEditor"
     name="description"
     label="<?= lang('Podcast.form.description') ?>"
-    value="<?= $podcast->title ?>"
+    value="<?= htmlspecialchars($podcast->description) ?>"
     required="true" />
 
 <fieldset>

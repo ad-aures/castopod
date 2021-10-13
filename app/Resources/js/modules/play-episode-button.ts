@@ -188,35 +188,43 @@ export class PlayEpisodeButton extends LitElement {
 
   static styles = css`
     button {
-      background-color: #ffffff;
+      background-color: #009486;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      padding: 0.25rem 0.5rem;
+      padding: 0.5rem 0.5rem;
       font-size: 0.875rem;
       line-height: 1.25rem;
-      font-weight: 600;
-      border-width: 2px;
-      border-style: solid;
+      border: 2px solid transparent;
       border-radius: 9999px;
-      border-color: rgba(207, 247, 243, 1);
 
       box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     }
 
     button:hover {
-      border-color: #009486;
-      background-color: #ebf8f8;
+      background-color: #00564a;
     }
 
     button:focus {
-      background-color: #ebf8f8;
+      box-shadow: 0 0 0 2px #e7f9e4, 0 0 0 calc(2px + 2px) #009486;
+    }
+
+    button.playing {
+      background-color: #f2faf9;
+      border: 2px solid #009486;
+    }
+
+    button.playing:hover {
+      background-color: #e7f9e4;
+    }
+
+    button.playing svg {
+      color: #009486;
     }
 
     svg {
       font-size: 1.5rem;
-      margin-right: 0.25rem;
-      color: #009486;
+      color: #ffffff;
     }
 
     @keyframes spin {
@@ -231,33 +239,37 @@ export class PlayEpisodeButton extends LitElement {
   `;
 
   render(): TemplateResult<1> {
-    return html`<button @click="${this.isPlaying ? this.pause : this.play}">
+    return html`<button
+      class="${this.isPlaying ? "playing" : ""}"
+      @click="${this.isPlaying ? this.pause : this.play}"
+      title="${this.isPlaying ? this.playingLabel : this.playLabel}"
+    >
       ${this.isPlaying
         ? html`<svg
-              class="animate-spin"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              width="1em"
-              height="1em"
-            >
-              <g>
-                <path fill="none" d="M0 0h24v24H0z" />
-                <path
-                  d="M13 9.17A3 3 0 1 0 15 12V2.458c4.057 1.274 7 5.064 7 9.542 0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2c.337 0 .671.017 1 .05v7.12z"
-                />
-              </g></svg
-            >${this.playingLabel}`
-        : html`<svg
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              width="1em"
-              height="1em"
-            >
+            class="animate-spin"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            width="1em"
+            height="1em"
+          >
+            <g>
               <path fill="none" d="M0 0h24v24H0z" />
               <path
-                d="M7.752 5.439l10.508 6.13a.5.5 0 0 1 0 .863l-10.508 6.13A.5.5 0 0 1 7 18.128V5.871a.5.5 0 0 1 .752-.432z"
-              /></svg
-            >${this.playLabel}`}
+                d="M13 9.17A3 3 0 1 0 15 12V2.458c4.057 1.274 7 5.064 7 9.542 0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2c.337 0 .671.017 1 .05v7.12z"
+              />
+            </g>
+          </svg>`
+        : html`<svg
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            width="1em"
+            height="1em"
+          >
+            <path fill="none" d="M0 0h24v24H0z" />
+            <path
+              d="M7.752 5.439l10.508 6.13a.5.5 0 0 1 0 .863l-10.508 6.13A.5.5 0 0 1 7 18.128V5.871a.5.5 0 0 1 .752-.432z"
+            />
+          </svg>`}
     </button>`;
   }
 }

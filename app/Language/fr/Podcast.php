@@ -14,7 +14,7 @@ return [
     'create' => 'Créer un podcast',
     'import' => 'Importer un podcast',
     'new_episode' => 'Créer un épisode',
-    'feed' => 'RSS',
+    'feed' => 'Podcast RSS feed',
     'view' => 'Voir le podcast',
     'edit' => 'Modifier le podcast',
     'delete' => 'Supprimer le podcast',
@@ -48,4 +48,9 @@ return [
     'funding_links' => 'Liens de financement pour {podcastTitle}',
     'find_on' => 'Trouvez {podcastTitle} sur',
     'listen_on' => 'Écoutez sur',
+    'persons' => '{personsCount, plural,
+        one {# intervenant·e}
+        other {# intervenant·e·s}
+    }',
+    'persons_list' => 'Liste des intervenant·e·s',
 ];

@@ -19,48 +19,7 @@
 
 <body class="relative bg-pine-50 holy-grail-grid">
     <div id="sidebar-backdrop" role="button" tabIndex="0" aria-label="Close" class="fixed z-50 hidden w-full h-full bg-gray-900 bg-opacity-50 md:hidden"></div>
-    <header class="sticky top-0 z-50 flex items-center justify-between h-10 text-white border-b holy-grail__header bg-pine-800 border-pine-900">
-        <div class="inline-flex items-center h-full">
-            <a href="<?= route_to(
-            'admin',
-        ) ?>" class="inline-flex items-center h-full px-2 border-r border-pine-900">
-                <?= (isset($podcast) ? icon('arrow-left', 'mr-2') : '') . svg('castopod-logo-base', 'h-6') ?>
-            </a>
-            <a href="<?= route_to(
-            'home',
-        ) ?>" class="inline-flex items-center h-full px-6 text-sm font-semibold outline-none hover:underline focus:ring">
-                    <?= lang('AdminNavigation.go_to_website') ?>
-                    <?= icon('external-link', 'ml-1 opacity-60') ?>
-            </a>
-        </div>
-        <button
-            type="button"
-            class="inline-flex items-center h-full px-6 mt-auto font-semibold outline-none focus:ring"
-            id="my-account-dropdown"
-            data-dropdown="button"
-            data-dropdown-target="my-account-dropdown-menu"
-            aria-haspopup="true"
-            aria-expanded="false"><?= icon('account-circle', 'text-2xl opacity-60 mr-2') . user()->username . icon('caret-down', 'ml-auto text-2xl') ?></button>
-        <DropdownMenu id="my-account-dropdown-menu" labelledby="my-account-dropdown" items="<?= esc(json_encode([
-            [
-                'type' => 'link',
-                'title' => lang('AdminNavigation.account.my-account'),
-                'uri' => route_to('my-account'),
-            ],
-            [
-                'type' => 'link',
-                'title' => lang('AdminNavigation.account.change-password'),
-                'uri' => route_to('change-password'),
-            ],
-            [
-                'type' => 'separator',
-            ],
-            [
-                'type' => 'link',
-                'title' => lang('AdminNavigation.account.logout'),
-                'uri' => route_to('logout'),
-            ], ])) ?>" />
-    </header>
+    <?= $this->include('_partials/_nav_header') ?>
     <aside id="admin-sidebar" class="sticky z-50 flex flex-col text-white transition duration-200 ease-in-out transform -translate-x-full border-r top-10 border-pine-900 bg-pine-800 holy-grail__sidebar md:translate-x-0">
         <?php if (isset($podcast) && isset($episode)): ?>
             <?= $this->include('episode/_sidebar') ?>
@@ -72,7 +31,7 @@
         <footer class="px-2 py-2 mx-auto text-xs text-right">
             <?= lang('Common.powered_by', [
                 'castopod' =>
-                    '<a class="underline hover:no-underline" href="https://castopod.org/" target="_blank" rel="noreferrer noopener">Castopod</a> ' .
+                    '<a class="inline-flex font-semibold hover:underline" href="https://castopod.org/" target="_blank" rel="noreferrer noopener">Castopod' . icon('social/castopod', 'ml-1 text-lg') . '</a> ' .
                     CP_VERSION,
             ]) ?>
         </footer>

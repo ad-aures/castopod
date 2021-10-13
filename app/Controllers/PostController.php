@@ -88,9 +88,8 @@ class PostController extends FediversePostController
             // if user is logged in then send to the authenticated activity view
             if (can_user_interact()) {
                 helper('form');
-                return view('podcast/post_authenticated', $data);
             }
-            return view('podcast/post', $data, [
+            return view('post/post', $data, [
                 'cache' => DECADE,
                 'cache_name' => $cacheName,
             ]);
@@ -242,7 +241,7 @@ class PostController extends FediversePostController
 
             helper('form');
 
-            return view('podcast/post_remote_action', $data, [
+            return view('post/remote_action', $data, [
                 'cache' => DECADE,
                 'cache_name' => $cacheName,
             ]);
