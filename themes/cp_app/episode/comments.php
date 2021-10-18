@@ -36,8 +36,7 @@
 
 <?= $this->section('content') ?>
 
-<div class="flex flex-col gap-y-4">
-    <?php if (can_user_interact()): ?>
+<?php if (can_user_interact()): ?>
     <form action="<?= route_to('comment-attempt-create', $podcast->id, $episode->id)  ?>" method="POST" class="flex p-4">
         <?= csrf_field() ?>
 
@@ -55,15 +54,14 @@
             <Button class="self-end" variant="primary" size="small" type="submit" iconRight="send-plane"><?= lang('Comment.form.submit') ?></Button>
         </div>
     </form>
-    <?php endif; ?>
+<?php endif; ?>
 
-    <?php foreach ($episode->comments as $comment): ?>
+<?php foreach ($episode->comments as $comment): ?>
     <?= view('episode/_partials/comment', [
     'comment' => $comment,
         'podcast' => $podcast,
 ]) ?>
-    <?php endforeach; ?>
-</div>
+<?php endforeach; ?>
 
 <?= $this->endSection()
 ?>

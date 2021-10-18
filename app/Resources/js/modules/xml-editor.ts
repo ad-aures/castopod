@@ -56,7 +56,7 @@ export class XMLEditor extends LitElement {
   }
 
   static styles = css`
-    .cm-wrap {
+    .cm-editor {
       border-radius: 0.5rem;
       overflow: hidden;
       border: 3px solid #000000;

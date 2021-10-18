@@ -49,7 +49,7 @@
                     <?= episode_numbering(
         $episode->number,
         $episode->season_number,
-        'text-xs font-semibold text-gray-600',
+        'text-xs font-semibold text-gray-600 !no-underline border px-1 border-gray-500',
         true,
     ) ?>
                 </div>
@@ -76,7 +76,7 @@
     <Forms.Radio value="now" name="publication_method" isChecked="<?= old('publication_method') ? old('publish') === 'now' : true ?>"><?= lang('Episode.publish_form.publication_method.now') ?></Forms.Radio>
     <div class="inline-flex flex-wrap items-center radio-toggler">
         <input
-            class="w-6 h-6 border-black text-pine-500 border-3 focus:ring-2 focus:ring-pine-500 focus:ring-offset-2 focus:ring-offset-pine-100"
+            class="w-6 h-6 border-black text-pine-500 border-3 focus:ring-castopod"
             type="radio" id="schedule" name="publication_method" value="schedule" <?= old('publication_method') && old('publication_method') === 'schedule' ? 'checked' : '' ?> />
         <Label for="schedule" class="pl-2 leading-8"><?= lang('Episode.publish_form.publication_method.schedule') ?></label>
         <div class="w-full mt-2 radio-toggler-element">

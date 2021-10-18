@@ -34,9 +34,8 @@
 
 <?= $this->section('content') ?>
 
-<div class="flex flex-col gap-y-4">
 <?php if (can_user_interact()): ?>
-    <form action="<?= route_to('post-attempt-create', $podcast->handle) ?>" method="POST" class="flex p-4 bg-white shadow sm:rounded-2xl">
+    <form action="<?= route_to('post-attempt-create', $podcast->handle) ?>" method="POST" class="flex p-4 bg-white shadow rounded-conditional-2xl">
         <?= csrf_field() ?>
 
         <?= view('_message_block') ?>
@@ -54,15 +53,17 @@
             <Button variant="primary" size="small" type="submit" class="self-end" iconRight="send-plane"><?= lang('Post.form.submit') ?></Button>
         </div>
     </form>
+    <hr class="my-4 border-2 border-pine-100">
 <?php endif; ?>
 
-<?php foreach ($episode->posts as $key => $post): ?>
-    <?= view('post/_partials/card', [
+<div class="flex flex-col gap-y-4">
+    <?php foreach ($episode->posts as $key => $post): ?>
+        <?= view('post/_partials/card', [
     'index' => $key,
-        'post' => $post,
-        'podcast' => $podcast,
+            'post' => $post,
+            'podcast' => $podcast,
 ]) ?>
-<?php endforeach; ?>
+    <?php endforeach; ?>
 </div>
 
 <?= $this->endSection() ?>

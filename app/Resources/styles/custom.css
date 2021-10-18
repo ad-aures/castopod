@@ -1,0 +1,20 @@
+@layer components {
+  .ring-castopod {
+    @apply outline-none ring-2 ring-pine-500 ring-offset-2 ring-offset-pine-100;
+  }
+
+  .rounded-conditional-b-xl {
+    border-bottom-right-radius: max(
+      0px,
+      min(0.75rem, calc((100vw - 0.75rem - 100%) * 9999))
+    );
+    border-bottom-left-radius: max(
+      0px,
+      min(0.75rem, calc((100vw - 0.75rem - 100%) * 9999))
+    );
+  }
+
+  .rounded-conditional-2xl {
+    border-radius: max(0px, min(1rem, calc((100vw - 1rem - 100%) * 9999)));
+  }
+}

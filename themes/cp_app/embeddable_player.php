@@ -43,15 +43,14 @@
         <a href="<?= $episode->link ?>" class="flex items-center mb-2" style="color: <?= $themeData[
     'text'
 ] ?>;" target="_blank">
-            <h1 class="mr-2 text-lg font-semibold truncate opacity-100 hover:opacity-75">
-                <?= $episode->title ?>
-            </h1>
             <?= episode_numbering(
     $episode->number,
     $episode->season_number,
-    'text-xs',
+    'text-xs font-semibold text-gray-600 !no-underline border px-1 border-gray-500 mr-1',
     true,
-) ?>
+) ?><h1 class="mr-2 text-lg font-semibold truncate opacity-100 hover:opacity-75">
+<?= $episode->title ?>
+</h1>
         </a>
         <vm-player
                 id="castopod-vm-player"

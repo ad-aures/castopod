@@ -27,7 +27,7 @@ $navigation = [
 <nav class="flex flex-col flex-1 py-4 overflow-y-auto gap-y-4">
     <?php foreach ($navigation as $section => $data): ?>
     <div>
-        <button class="inline-flex items-center w-full px-4 py-1 font-semibold outline-none focus:ring" type="button">
+        <button class="inline-flex items-center w-full px-4 py-1 font-semibold focus:ring-castopod" type="button">
             <?= icon($data['icon'], 'opacity-60 text-2xl mr-4') ?>
             <?= lang('AdminNavigation.' . $section) ?>
         </button>
@@ -35,7 +35,7 @@ $navigation = [
             <?php foreach ($data['items'] as $item): ?>
                 <?php $isActive = url_is(route_to($item)); ?>
             <li class="inline-flex">
-                <a class="w-full py-1 pl-14 pr-2 text-sm outline-none hover:opacity-100 focus:ring<?= $isActive
+                <a class="w-full py-1 pl-14 pr-2 text-sm hover:opacity-100 focus:ring-inset focus:ring-castopod<?= $isActive
                     ? ' font-semibold opacity-100 inline-flex items-center'
                     : ' opacity-75' ?>" href="<?= route_to($item) ?>"><?= ($isActive ? icon('chevron-right', 'mr-2') : '') . lang(
                         'AdminNavigation.' . $item,

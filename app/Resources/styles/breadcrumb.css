@@ -13,6 +13,10 @@
   &:hover {
     @apply underline;
   }
+
+  &:focus {
+    @apply ring-castopod;
+  }
 }
 
 .breadcrumb-item.active {

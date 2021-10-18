@@ -47,9 +47,29 @@
         [
             'header' => lang('Common.actions'),
             'cell' => function ($user) {
-                return '<Button uri="' . route_to('user-force_pass_reset', $user->id) . '" variant="secondary" size="small">' . lang('User.forcePassReset') . '</Button>' .
-                '<Button uri="' . route_to($user->isBanned() ? 'user-unban' : 'user-ban', $user->id) . '" variant="warning" size="small">' . lang('User.' . ($user->isBanned() ? 'unban' : 'ban')) . '</Button>' .
-                '<Button uri="' . route_to('user-delete', $user->id) . '" variant="danger" size="small">' . lang('User.delete') . '</Button>';
+                return '<button id="more-dropdown-' . $user->id . '" type="button" class="inline-flex items-center p-1 focus:ring-castopod" data-dropdown="button" data-dropdown-target="more-dropdown-' . $user->id . '-menu" aria-haspopup="true" aria-expanded="false">' . icon('more') . '</button>' .
+                '<DropdownMenu id="more-dropdown-' . $user->id . '-menu" labelledby="more-dropdown-' . $user->id . '" items="' . esc(json_encode([
+                    [
+                        'type' => 'link',
+                        'title' => lang('User.forcePassReset'),
+                        'uri' => route_to('user-force_pass_reset', $user->id),
+                    ],
+                    [
+                        'type' => 'link',
+                        'title' => lang('User.' . ($user->isBanned() ? 'unban' : 'ban')),
+                        'uri' => route_to($user->isBanned() ? 'user-unban' : 'user-ban', $user->id),
+                    ],
+                    [
+                        'type' => 'separator',
+                    ],
+                    [
+                        'type' => 'link',
+                        'title' => lang('User.delete'),
+                        'uri' => route_to('user-delete', $user->id),
+                        'class' => 'font-semibold text-red-600',
+                    ],
+
+                ])) . '" />';
             },
         ],
     ],

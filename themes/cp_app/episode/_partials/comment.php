@@ -1,4 +1,4 @@
-<article class="relative z-10 flex w-full px-4 py-2 sm:rounded-2xl">
+<article class="relative z-10 flex w-full px-4 py-2 rounded-conditional-2xl">
     <img src="<?= $comment->actor->avatar_image_url ?>" alt="<?= $comment->display_name ?>" class="w-10 h-10 mr-2 rounded-full" />
     <div class="flex-1">
         <header class="w-full mb-2 text-sm">

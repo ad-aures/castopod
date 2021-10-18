@@ -15,7 +15,7 @@
                 'actorUsername' => $comment->actor->username,
             ]) ?>"
             rows="1" />
-        <Button variant="primary" size="small" type="submit" name="action" value="reply" iconRight="send-plane"><?= lang('Comment.form.submit_reply') ?></Button>
+        <Button variant="primary" size="small" type="submit" name="action" value="reply" class="self-end" iconRight="send-plane"><?= lang('Comment.form.submit_reply') ?></Button>
     </div>
 </form>
 <?php endif; ?>

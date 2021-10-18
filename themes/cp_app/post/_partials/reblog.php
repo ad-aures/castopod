@@ -1,4 +1,4 @@
-<article class="relative z-10 w-full bg-white shadow sm:rounded-2xl">
+<article class="relative z-10 w-full bg-white shadow rounded-conditional-2xl">
     <p class="inline-flex px-6 pt-4 text-xs text-gray-700"><?= icon(
     'repeat',
     'text-lg mr-2 text-gray-400',

@@ -27,11 +27,8 @@
 
 <?= $this->section('content') ?>
 
-<section class="w-full">
-
 <?php if (can_user_interact()): ?>
-
-    <form action="<?= route_to('post-attempt-create', interact_as_actor()->username) ?>" method="POST" class="flex p-4 bg-white shadow rounded-xl">
+    <form action="<?= route_to('post-attempt-create', interact_as_actor()->username) ?>" method="POST" class="flex p-4 bg-white shadow rounded-conditional-2xl">
     <?= csrf_field() ?>
 
     <?= view('_message_block') ?>
@@ -55,7 +52,7 @@
 <hr class="my-4 border-2 border-pine-100">
 
 <?php endif; ?>
-<div class="flex flex-col gap-y-6">
+<div class="flex flex-col gap-y-4">
     <?php foreach ($posts as $key => $post): ?>
         <?php if ($post->reblog_of_id !== null): ?>
             <?= view('post/_partials/reblog', [
@@ -72,7 +69,5 @@
         <?php endif; ?>
     <?php endforeach; ?>
 </div>
-
-</section>
 
 <?= $this->endSection() ?>

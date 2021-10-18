@@ -155,7 +155,7 @@
 
   .is-focused .choices__inner,
   .is-open .choices__inner {
-    @apply ring-inset ring-1 ring-blue-600;
+    @apply ring-castopod ring-inset;
   }
 
   .is-open .choices__inner {

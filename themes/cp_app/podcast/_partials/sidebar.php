@@ -1,4 +1,4 @@
-<aside id="podcast-sidebar" class="sticky hidden col-span-1 sm:block top-12">
+<aside id="podcast-sidebar" class="sticky hidden col-span-1 md:block top-12">
     <div class="absolute z-0 w-full h-full sm:hidden bg-pine-800/50"></div>
     <div class="z-10 bg-pine-50">
         <a href="<?= route_to('podcast_feed', $podcast->handle) ?>" class="inline-flex items-center mb-6 text-sm font-semibold text-pine-800 group" target="_blank" rel="noopener noreferrer">

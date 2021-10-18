@@ -1,20 +1,20 @@
-<header class="sticky top-0 z-50 flex items-center justify-between h-10 text-white border-b holy-grail__header bg-pine-800 border-pine-900">
+<header class="sticky top-0 z-50 flex items-center justify-between h-10 text-white border-b col-span-full bg-pine-800 border-pine-900">
     <div class="inline-flex items-center h-full">
         <a href="<?= route_to(
     'admin',
-) ?>" class="inline-flex items-center h-full px-2 border-r border-pine-900">
+) ?>" class="inline-flex items-center h-full px-2 border-r border-pine-900 focus:ring-inset focus:ring-castopod">
             <?= (isset($podcast) ? icon('arrow-left', 'mr-2') : '') . svg('castopod-logo-base', 'h-6') ?>
         </a>
         <a href="<?= route_to(
     'home',
-) ?>" class="inline-flex items-center h-full px-6 text-sm font-semibold outline-none hover:underline focus:ring">
+) ?>" class="inline-flex items-center h-full px-6 text-sm font-semibold hover:underline focus:ring-inset focus:ring-castopod">
                 <?= lang('AdminNavigation.go_to_website') ?>
                 <?= icon('external-link', 'ml-1 opacity-60') ?>
         </a>
     </div>
     <button
         type="button"
-        class="inline-flex items-center h-full px-3 text-sm font-semibold outline-none focus:ring gap-x-2"
+        class="inline-flex items-center h-full px-3 text-sm font-semibold focus:ring-inset focus:ring-castopod gap-x-2"
         id="my-account-dropdown"
         data-dropdown="button"
         data-dropdown-target="my-account-dropdown-menu"

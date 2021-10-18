@@ -21,7 +21,7 @@ class Checkbox extends FormComponent
             [
                 'id' => $this->value,
                 'name' => $this->name,
-                'class' => 'form-checkbox text-pine-500 border-black border-3 focus:ring-2 focus:ring-pine-500 focus:ring-offset-2 focus:ring-offset-pine-100 w-6 h-6',
+                'class' => 'form-checkbox text-pine-500 border-black border-3 focus:ring-castopod w-6 h-6',
             ],
             'yes',
             old($this->name) ? old($this->name) === $this->value : $this->isChecked,

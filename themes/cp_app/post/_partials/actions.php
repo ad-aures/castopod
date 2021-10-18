@@ -27,7 +27,7 @@
         ) ?>"><?= icon('heart', 'text-2xl mr-1 text-gray-400') .
         $post->favourites_count ?></button>
             <button id="<?= $post->id .
-                '-more-dropdown' ?>" type="button" class="px-2 py-1 text-2xl text-gray-500 outline-none focus:ring" data-dropdown="button" data-dropdown-target="<?= $post->id .
+                '-more-dropdown' ?>" type="button" class="px-2 py-1 text-2xl text-gray-500 focus:ring-castopod" data-dropdown="button" data-dropdown-target="<?= $post->id .
         '-more-dropdown-menu' ?>" aria-label="<?= lang(
             'Common.more',
         ) ?>" aria-haspopup="true" aria-expanded="false"><?= icon('more') ?>

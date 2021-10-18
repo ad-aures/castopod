@@ -30,21 +30,19 @@
     $podcast->id,
     $episode->id,
 ) ?>"
-                        class="text-sm font-semibold truncate hover:underline"
+                        class="text-sm font-semibold truncate hover:underline focus:ring-castopod"
                         >
                         <?= episode_numbering(
     $episode->number,
     $episode->season_number,
-    'font-semibold text-gray-600',
+    'text-xs font-semibold text-gray-600 !no-underline border px-1 border-gray-500 mr-1',
     true,
-) ?>
-                        <span class="mx-1">-</span>
-                        <?= $episode->title ?>
+) . $episode->title ?>
                         </a>
                     </div>
                     <button
                         type="button"
-                        class="inline-flex items-center p-1 outline-none focus:ring"
+                        class="inline-flex items-center p-1 focus:ring-castopod"
                         id="more-dropdown-<?= $episode->id ?>"
                         data-dropdown="button"
                         data-dropdown-target="more-dropdown-<?= $episode->id ?>-menu"

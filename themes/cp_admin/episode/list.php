@@ -36,20 +36,19 @@
                             '</time>' .
                             '<img loading="lazy" src="' . $episode->image->thumbnail_url . '" alt="' . $episode->title . '" class="object-cover w-20 h-20 rounded-lg" />' .
                         '</div>' .
-                        '<a class="text-sm hover:underline" href="' . route_to(
+                        '<a class="overflow-x-hidden text-sm hover:underline" href="' . route_to(
                             'episode-view',
                             $podcast->id,
                             $episode->id,
                         ) . '">' .
-                        '<h2 class="inline-flex w-full font-semibold leading-none group">' .
+                        '<h2 class="inline-flex items-baseline w-full font-semibold leading-none gap-x-1 group">' .
                         episode_numbering(
                             $episode->number,
                             $episode->season_number,
-                            'text-xs font-semibold text-gray-600',
+                            'text-xs font-semibold text-gray-600 !no-underline border px-1 border-gray-500',
                             true,
                         ) .
-                        '<span class="mx-1">-</span>' .
-                        '<span class="mr-1 group-hover:underline">' . $episode->title . '</span>' .
+                        '<span class="mr-1 truncate group-hover:underline">' . $episode->title . '</span>' .
                         '</h2>' .
                         '<p class="max-w-sm text-xs text-gray-600 line-clamp-2">' . $episode->description . '</p>' .
                         '</a>' .
@@ -74,7 +73,7 @@
             [
                 'header' => lang('Episode.list.actions'),
                 'cell' => function ($episode, $podcast) {
-                    return '<button id="more-dropdown-' . $episode->id . '" type="button" class="inline-flex items-center p-1 outline-none focus:ring" data-dropdown="button" data-dropdown-target="more-dropdown-' . $episode->id . '-menu" aria-haspopup="true" aria-expanded="false">' .
+                    return '<button id="more-dropdown-' . $episode->id . '" type="button" class="inline-flex items-center p-1 focus:ring-castopod" data-dropdown="button" data-dropdown-target="more-dropdown-' . $episode->id . '-menu" aria-haspopup="true" aria-expanded="false">' .
                         icon('more') .
                         '</button>' .
                         '<DropdownMenu id="more-dropdown-' . $episode->id . '-menu" labelledby="more-dropdown-' . $episode->id . '" items="' . esc(json_encode([

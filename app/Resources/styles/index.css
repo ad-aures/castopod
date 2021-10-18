@@ -1,6 +1,6 @@
 @import "./tailwind.css";
+@import "./custom.css";
 @import "./fonts.css";
-@import "./layout.css";
 @import "./breadcrumb.css";
 @import "./dropdown.css";
 @import "./choices.css";

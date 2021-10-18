@@ -48,8 +48,13 @@ module.exports = {
         112: "28rem",
       },
       gridTemplateColumns: {
-        podcastLayout: "1fr minmax(auto, 768px) 1fr",
+        admin: "300px calc(100% - 300px)",
+        podcast: "1fr minmax(auto, 960px) 1fr",
+        podcastMain: "1fr minmax(200px, 300px)",
         podcasts: "repeat(auto-fill, minmax(14rem, 1fr))",
+      },
+      gridTemplateRows: {
+        admin: "40px 1fr",
       },
       zIndex: {
         "-10": "-10",

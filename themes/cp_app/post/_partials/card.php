@@ -1,4 +1,4 @@
-<article class="relative z-10 w-full bg-white shadow sm:rounded-2xl">
+<article class="relative z-10 w-full bg-white shadow sm:rounded-conditional-2xl">
     <header class="flex px-6 py-4">
         <img src="<?= $post->actor
     ->avatar_image_url ?>" alt="<?= $post->actor->display_name ?>" class="w-10 h-10 mr-2 rounded-full" />

@@ -14,6 +14,39 @@
 
 <?= $this->section('content') ?>
 
+<form action="<?= route_to('podcast-persons-manage', $podcast->id) ?>" method="POST">
+    <?= csrf_field() ?>
+
+    <Forms.Section
+        title="<?= lang('Person.podcast_form.add_section_title') ?>"
+        subtitle="<?= lang('Person.podcast_form.add_section_subtitle') ?>"
+    >
+
+    <Forms.Field
+        as="MultiSelect"
+        id="persons"
+        name="persons[]"
+        label="<?= lang('Person.podcast_form.persons') ?>"
+        hint="<?= lang('Person.podcast_form.persons_hint') ?>"
+        options="<?= esc(json_encode($personOptions)) ?>"
+        selected="<?= esc(json_encode(old('persons', []))) ?>"
+        required="true" />
+    
+    <Forms.Field
+        as="MultiSelect"
+        id="roles"
+        name="roles[]"
+        label="<?= lang('Person.podcast_form.roles') ?>"
+        hint="<?= lang('Person.podcast_form.roles_hint') ?>"
+        options="<?= esc(json_encode($taxonomyOptions)) ?>"
+        selected="<?= esc(json_encode(old('roles', []))) ?>"
+        required="true" />
+
+    <Button variant="primary" class="self-end" type="submit"><?= lang('Person.podcast_form.submit_add') ?></Button>
+
+    </Forms.Section>
+</form>
+
 <?= data_table(
     [
         [
@@ -55,40 +88,7 @@
         ],
     ],
     $podcast->persons,
-    'max-w-xl'
+    'max-w-xl mt-6'
 ) ?>
-
-<form action="<?= route_to('podcast-persons-manage', $podcast->id) ?>" method="POST" class="mt-6">
-    <?= csrf_field() ?>
-
-    <Forms.Section
-        title="<?= lang('Person.podcast_form.add_section_title') ?>"
-        subtitle="<?= lang('Person.podcast_form.add_section_subtitle') ?>"
-    >
-
-    <Forms.Field
-        as="MultiSelect"
-        id="persons"
-        name="persons[]"
-        label="<?= lang('Person.podcast_form.persons') ?>"
-        hint="<?= lang('Person.podcast_form.persons_hint') ?>"
-        options="<?= esc(json_encode($personOptions)) ?>"
-        selected="<?= esc(json_encode(old('persons', []))) ?>"
-        required="true" />
-    
-    <Forms.Field
-        as="MultiSelect"
-        id="roles"
-        name="roles[]"
-        label="<?= lang('Person.podcast_form.roles') ?>"
-        hint="<?= lang('Person.podcast_form.roles_hint') ?>"
-        options="<?= esc(json_encode($taxonomyOptions)) ?>"
-        selected="<?= esc(json_encode(old('roles', []))) ?>"
-        required="true" />
-
-    <Button variant="primary" class="self-end" type="submit"><?= lang('Person.podcast_form.submit_add') ?></Button>
-
-    </Forms.Section>
-</form>
 
 <?= $this->endSection() ?>

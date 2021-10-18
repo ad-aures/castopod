@@ -18,9 +18,9 @@ class DatetimePicker extends FormComponent
         $closeIcon = icon('close');
 
         return <<<HTML
-            <div class="flex border-3 rounded-lg border-black focus-within:ring-2 focus-within:ring-pine-500 focus-within:ring-offset-2 focus-within:ring-offset-pine-100 {$this->class}" data-picker="datetime">
+            <div class="flex border-3 rounded-lg border-black focus-within:ring-castopod {$this->class}" data-picker="datetime">
                 {$dateInput}
-                <button class="p-3 bg-white hover:bg-pine-100 focus:outline-none rounded-r-md focus:ring-inset focus:ring-2 focus:ring-pine-500 focus:ring-offset-2 focus:ring-offset-pine-100" type="button" aria-label="{$clearLabel}" title="{$clearLabel}" data-clear="">
+                <button class="p-3 bg-white hover:bg-pine-100 rounded-r-md focus:ring-inset focus:ring-castopod" type="button" aria-label="{$clearLabel}" title="{$clearLabel}" data-clear="">
                     {$closeIcon}
                 </button>
             </div>

@@ -1,10 +1,14 @@
 @layer components {
   .form-radio-btn {
-    @apply absolute mt-3 ml-3 border-black border-3 text-pine-500 focus:ring-2 focus:ring-pine-800;
+    @apply absolute mt-3 ml-3 border-black border-3 text-pine-500 focus:ring-castopod;
   }
 
   .form-radio-btn:focus + label {
-    @apply ring ring-pine-100;
+    @apply ring-castopod;
+  }
+
+  .form-radio-btn:focus {
+    @apply ring-0;
   }
 
   .form-radio-btn + label {
@@ -12,6 +16,10 @@
   }
 
   .form-radio-btn:checked + label {
-    @apply text-black border-pine-500;
+    @apply text-white bg-pine-500;
+  }
+
+  .form-radio-btn:checked {
+    @apply ring-2 ring-black;
   }
 }

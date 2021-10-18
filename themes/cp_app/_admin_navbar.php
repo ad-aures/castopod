@@ -1,9 +1,9 @@
 <div class="sticky top-0 left-0 z-50 flex items-center justify-between w-full h-10 text-white border-b shadow bg-pine-800 border-pine-900">
         <div class="inline-flex items-center h-full">
-            <a href="<?= route_to('home') ?>" class="inline-flex items-center h-full px-2 border-r border-pine-900">
+            <a href="<?= route_to('home') ?>" class="inline-flex items-center h-full px-2 border-r border-pine-900 focus:ring-inset focus:ring-castopod">
                     <?= svg('castopod-logo-base', 'h-6') ?>
             </a>
-            <a href="<?= route_to('admin', ) ?>" class="inline-flex items-center h-full px-6 text-sm font-semibold outline-none hover:underline focus:ring">
+            <a href="<?= route_to('admin', ) ?>" class="inline-flex items-center h-full px-6 text-sm font-semibold hover:underline focus:ring-inset focus:ring-castopod">
                 <?= lang('AdminNavigation.go_to_admin') ?>
                 <?= icon('external-link', 'ml-1 opacity-60') ?>
             </a>
@@ -12,7 +12,7 @@
         <div class="inline-flex items-center h-full">
         <button
             type="button"
-            class="inline-flex items-center h-full px-3 text-sm font-semibold outline-none focus:ring gap-x-2"
+            class="inline-flex items-center h-full px-3 text-sm font-semibold focus:ring-inset focus:ring-castopod gap-x-2"
             id="my-account-dropdown"
             data-dropdown="button"
             data-dropdown-target="my-account-dropdown-menu"

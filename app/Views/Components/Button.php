@@ -28,7 +28,7 @@ class Button extends Component
     public function render(): string
     {
         $baseClass =
-            'flex-shrink-0 inline-flex items-center justify-center font-semibold shadow-xs rounded-full focus:outline-none focus:ring-2 focus:ring-pine-500 focus:ring-offset-2 focus:ring-offset-pine-100';
+            'flex-shrink-0 inline-flex items-center justify-center font-semibold shadow-xs rounded-full focus:ring-castopod';
 
         $variantClass = [
             'default' => 'text-black bg-gray-300 hover:bg-gray-400',

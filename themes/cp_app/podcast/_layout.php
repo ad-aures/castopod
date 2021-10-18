@@ -24,7 +24,7 @@
         ->asset('js/audio-player.ts', 'js') ?>
 </head>
 
-<body class="grid items-start mx-auto grid-cols-podcastLayout bg-pine-50">
+<body class="grid items-start mx-auto grid-cols-podcast bg-pine-50">
     <?php if (can_user_interact()): ?>
         <div class="col-span-full">
             <?= $this->include('_admin_navbar') ?>
@@ -55,14 +55,14 @@
                         'width' => 420,
                         'height' => 620,
                         'class' =>
-                            'group inline-flex items-center px-2 py-1 text-xs tracking-wider font-semibold text-white uppercase rounded-full shadow focus:outline-none focus:ring bg-rose-600',
+                            'group inline-flex items-center px-2 py-1 text-xs tracking-wider font-semibold text-white uppercase rounded-full shadow focus:ring-castopod bg-rose-600',
                     ],
                 ) ?>
         </div>
     </header>
     <?= $this->include('podcast/_partials/navigation') ?>
-    <div class="grid items-start grid-cols-3 col-start-2 pb-12 mt-6 gap-x-6">
-        <main class="col-span-full sm:col-span-2">
+    <div class="grid items-start col-start-2 pb-4 mt-6 grid-cols-podcastMain gap-x-6">
+        <main class="w-full max-w-xl mx-auto col-span-full md:col-span-1">
             <?= $this->renderSection('content') ?>
         </main>
         <?= $this->include('podcast/_partials/sidebar') ?>

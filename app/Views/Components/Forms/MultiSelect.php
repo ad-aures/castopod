@@ -37,6 +37,7 @@ class MultiSelect extends FormComponent
             'data-no-choices-text' => lang('Common.forms.multiSelect.noChoicesText'),
             'data-max-item-text' => lang('Common.forms.multiSelect.maxItemText'),
         ];
+        $this->attributes['class'] .= ' border-3 border-black rounded-lg';
         $extra = array_merge($defaultAttributes, $this->attributes);
 
         return form_dropdown($this->name, $this->options, $this->selected, $extra);

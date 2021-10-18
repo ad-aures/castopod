@@ -21,7 +21,7 @@ class Select extends FormComponent
     public function render(): string
     {
         $defaultAttributes = [
-            'class' => 'focus:border-black focus:ring-2 focus:ring-pine-500 focus:ring-offset-2 focus:ring-offset-pine-100 border-3 rounded-lg border-black ' . $this->class,
+            'class' => 'focus:border-black focus:ring-castopod border-3 rounded-lg border-black ' . $this->class,
             'data-class' => $this->class,
             'data-select-text' => lang('Common.forms.multiSelect.selectText'),
             'data-loading-text' => lang('Common.forms.multiSelect.loadingText'),

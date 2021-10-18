@@ -14,6 +14,42 @@
 
 <?= $this->section('content') ?>
 
+<form action="<?= route_to('episode-persons-manage', $podcast->id, $episode->id) ?>" method="POST">
+    <?= csrf_field() ?>
+
+    <Forms.Section
+        title="<?= lang('Person.episode_form.add_section_title') ?>"
+        subtitle="<?= lang('Person.episode_form.add_section_subtitle') ?>"
+    >
+
+    <Forms.Field
+        as="MultiSelect"
+        id="persons"
+        name="persons[]"
+        label="<?= lang('Person.episode_form.persons') ?>"
+        hint="<?= lang('Person.episode_form.persons_hint') ?>"
+        options="<?= htmlspecialchars(json_encode($personOptions)) ?>"
+        selected="<?= htmlspecialchars(json_encode(old('persons', []))) ?>"
+        required="true"
+    />
+
+    <Forms.Field
+        as="MultiSelect"
+        id="roles"
+        name="roles[]"
+        label="<?= lang('Person.episode_form.roles') ?>"
+        hint="<?= lang('Person.episode_form.roles_hint') ?>"
+        options="<?= htmlspecialchars(json_encode($taxonomyOptions)) ?>"
+        selected="<?= htmlspecialchars(json_encode(old('roles', []))) ?>"
+        required="true"
+    />
+
+    <Button variant="primary" type="submit" class="self-end"><?= lang('Person.episode_form.submit_add') ?></Button>
+
+    </Forms.Section>
+
+</form>
+
 <?= data_table(
     [
         [
@@ -55,43 +91,7 @@
         ],
     ],
     $episode->persons,
-    'max-w-xl'
+    'max-w-xl mt-6'
 ) ?>
-
-<form action="<?= route_to('episode-persons-manage', $podcast->id, $episode->id) ?>" method="POST" class="mt-6">
-<?= csrf_field() ?>
-
-<Forms.Section
-    title="<?= lang('Person.episode_form.add_section_title') ?>"
-    subtitle="<?= lang('Person.episode_form.add_section_subtitle') ?>"
->
-
-<Forms.Field
-    as="MultiSelect"
-    id="persons"
-    name="persons[]"
-    label="<?= lang('Person.episode_form.persons') ?>"
-    hint="<?= lang('Person.episode_form.persons_hint') ?>"
-    options="<?= htmlspecialchars(json_encode($personOptions)) ?>"
-    selected="<?= htmlspecialchars(json_encode(old('persons', []))) ?>"
-    required="true"
-/>
-
-<Forms.Field
-    as="MultiSelect"
-    id="roles"
-    name="roles[]"
-    label="<?= lang('Person.episode_form.roles') ?>"
-    hint="<?= lang('Person.episode_form.roles_hint') ?>"
-    options="<?= htmlspecialchars(json_encode($taxonomyOptions)) ?>"
-    selected="<?= htmlspecialchars(json_encode(old('roles', []))) ?>"
-    required="true"
-/>
-
-<Button variant="primary" type="submit" class="self-end"><?= lang('Person.episode_form.submit_add') ?></Button>
-
-</Forms.Section>
-
-</form>
 
 <?= $this->endSection() ?>

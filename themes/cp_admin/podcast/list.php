@@ -19,7 +19,7 @@
 <div class="grid gap-4 grid-cols-podcasts">
     <?php if ($podcasts !== null): ?>
         <?php foreach ($podcasts as $podcast): ?>
-            <article class="relative h-full overflow-hidden transition bg-white shadow border-3 border-pine-100 rounded-xl group hover:shadow-xl">
+            <article class="relative h-full overflow-hidden transition bg-white shadow border-3 border-pine-100 rounded-xl group hover:shadow-xl focus-within:ring-castopod">
                 <div class="w-full h-full overflow-hidden">
                     <img
                     alt="<?= $podcast->title ?>"
