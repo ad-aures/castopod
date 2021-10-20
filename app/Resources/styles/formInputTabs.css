@@ -31,6 +31,6 @@
   }
 
   .form-input-tabs > input:checked + label {
-    @apply font-semibold opacity-100 text-pine-700;
+    @apply font-semibold opacity-100 text-pine-500;
   }
 }

@@ -138,7 +138,7 @@ class EpisodeController extends BaseController
         return $cachedView;
     }
 
-    public function embeddablePlayer(string $theme = 'light-transparent'): string
+    public function embed(string $theme = 'light-transparent'): string
     {
         header('Content-Security-Policy: frame-ancestors http://*:* https://*:*');
 
@@ -150,13 +150,13 @@ class EpisodeController extends BaseController
         $session = Services::session();
         $session->start();
         if (isset($_SERVER['HTTP_REFERER'])) {
-            $session->set('embeddable_player_domain', parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST));
+            $session->set('embed_domain', parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST));
         }
 
         $locale = service('request')
             ->getLocale();
 
-        $cacheName = "page_podcast#{$this->podcast->id}_episode#{$this->episode->id}_embeddable_player_{$theme}_{$locale}";
+        $cacheName = "page_podcast#{$this->podcast->id}_episode#{$this->episode->id}_embed_{$theme}_{$locale}";
 
         if (! ($cachedView = cache($cacheName))) {
             $themeData = EpisodeModel::$themes[$theme];
@@ -173,7 +173,7 @@ class EpisodeController extends BaseController
             );
 
             // The page cache is set to a decade so it is deleted manually upon podcast update
-            return view('embeddable_player', $data, [
+            return view('embed', $data, [
                 'cache' => $secondsToNextUnpublishedEpisode
                     ? $secondsToNextUnpublishedEpisode
                     : DECADE,
@@ -196,7 +196,7 @@ class EpisodeController extends BaseController
             'author_url' => $this->podcast->link,
             'html' =>
                 '<iframe src="' .
-                $this->episode->embeddable_player_url .
+                $this->episode->embed_url .
                 '" width="100%" height="144" frameborder="0" scrolling="no"></iframe>',
             'width' => 600,
             'height' => 144,
@@ -226,7 +226,7 @@ class EpisodeController extends BaseController
             'html',
             htmlentities(
                 '<iframe src="' .
-                    $this->episode->embeddable_player_url .
+                    $this->episode->embed_url .
                     '" width="100%" height="144" frameborder="0" scrolling="no"></iframe>',
             ),
         );

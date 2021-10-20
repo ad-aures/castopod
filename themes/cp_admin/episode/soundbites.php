@@ -8,10 +8,14 @@
 <?= lang('Episode.soundbites_form.title') ?>
 <?= $this->endSection() ?>
 
+<?= $this->section('headerRight') ?>
+<Button variant="primary" type="submit" form="soundbites-form"><?= lang('Episode.soundbites_form.submit') ?></Button>
+<?= $this->endSection() ?>
+
 
 <?= $this->section('content') ?>
 
-<form action="<?= route_to('episode-soundbites-edit', $podcast->id, $episode->id) ?>" method="POST" class="flex flex-col">
+<form id="soundbites-form" action="<?= route_to('episode-soundbites-edit', $podcast->id, $episode->id) ?>" method="POST" class="flex flex-col">
 <?= csrf_field() ?>
 
 <Forms.Section
@@ -62,12 +66,7 @@
         </audio>
         <IconButton glyph="timer" variant="info" data-type="get-soundbite" data-start-time-field-name="soundbites[0][start_time]" data-duration-field-name="soundbites[0][duration]" ><?= lang('Episode.soundbites_form.bookmark') ?></IconButton>
     </div>
-
 </Forms.Section>
-
-<Button variant="primary" type="submit" class="self-end"><?= lang('Episode.soundbites_form.submit_edit') ?></Button>
-
 </form>
-
 
 <?= $this->endSection() ?>

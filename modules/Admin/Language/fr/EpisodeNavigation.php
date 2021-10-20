@@ -14,6 +14,6 @@ return [
     'episode-view' => 'Accueil',
     'episode-edit' => 'Modifier l’épisode',
     'episode-persons-manage' => 'Gestion des intervenants',
-    'embeddable-player-add' => 'Lecteur intégré',
+    'embed' => 'Lecteur intégré',
     'soundbites-edit' => 'Extraits sonores',
 ];

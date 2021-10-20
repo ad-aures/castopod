@@ -11,7 +11,7 @@
 
 <?= $this->section('content') ?>
 
-<form action="<?= route_to('change-password') ?>" method="POST" class="flex flex-col max-w-sm">
+<form action="<?= route_to('change-password') ?>" method="POST" class="flex flex-col max-w-sm gap-y-4">
     <?= csrf_field() ?>
     <Forms.Field
         name="password"

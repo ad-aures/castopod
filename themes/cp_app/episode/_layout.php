@@ -32,7 +32,7 @@
     <?php endif; ?>
 
     <nav class="flex items-center justify-between h-10 col-start-2 px-2 text-white bg-pine-800">
-        <a href="<?= route_to('podcast-episodes', $podcast->handle) ?>" class="inline-flex items-center" title="<?= lang('Episode.back_to_episodes', [
+        <a href="<?= route_to('podcast-episodes', $podcast->handle) ?>" class="inline-flex items-center focus:ring-castopod" title="<?= lang('Episode.back_to_episodes', [
             'podcast' => $podcast->title,
         ]) ?>">
             <?= icon('arrow-left', 'mr-2 text-lg') ?>

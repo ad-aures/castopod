@@ -3,11 +3,11 @@
 $podcastNavigation = [
     'dashboard' => [
         'icon' => 'dashboard',
-        'items' => ['episode-view', 'episode-edit', 'episode-persons-manage', 'embeddable-player-add', 'soundbites-edit'],
+        'items' => ['episode-view', 'episode-edit', 'episode-persons-manage', 'embed-add', 'soundbites-edit'],
     ],
 ]; ?>
 
-<a href="<?= route_to('podcast-view', $podcast->id) ?>" class="flex items-center px-4 py-2 border-b border-pine-900 focus:ring-castopod">
+<a href="<?= route_to('podcast-view', $podcast->id) ?>" class="flex items-center px-4 py-2 border-b border-pine-900 focus:ring-inset focus:ring-castopod">
     <?= icon('arrow-left', 'mr-2') ?>
     <img
     src="<?= $podcast->image->thumbnail_url ?>"

@@ -9,21 +9,7 @@ declare(strict_types=1);
  */
 
 return [
-    'all_podcasts' => 'Tous les podcasts',
-    'no_podcast' => 'Aucun podcast trouvé !',
-    'create' => 'Créer un podcast',
-    'import' => 'Importer un podcast',
-    'new_episode' => 'Créer un épisode',
     'feed' => 'Podcast RSS feed',
-    'view' => 'Voir le podcast',
-    'edit' => 'Modifier le podcast',
-    'delete' => 'Supprimer le podcast',
-    'see_episodes' => 'Voir les épisodes',
-    'see_contributors' => 'Voir les contributeurs',
-    'go_to_page' => 'Aller à la page',
-    'latest_episodes' => 'Derniers épisodes',
-    'see_all_episodes' => 'Voir tous les épisodes',
-    'by' => 'Par {publisher}',
     'season' => 'Saison {seasonNumber}',
     'list_of_episodes_year' => 'Épisodes de {year} ({episodeCount})',
     'list_of_episodes_season' =>
@@ -52,5 +38,5 @@ return [
         one {# intervenant·e}
         other {# intervenant·e·s}
     }',
-    'persons_list' => 'Liste des intervenant·e·s',
+    'persons_list' => 'Intervenant·e·s',
 ];

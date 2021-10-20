@@ -85,11 +85,8 @@ class PodcastPlatformController extends BaseController
                 'is_visible' =>
                     array_key_exists('visible', $podcastPlatform) &&
                     $podcastPlatform['visible'] === 'yes',
-                'is_on_embeddable_player' =>
-                    array_key_exists(
-                        'on_embeddable_player',
-                        $podcastPlatform,
-                    ) && $podcastPlatform['on_embeddable_player'] === 'yes',
+                'is_on_embed' =>
+                    array_key_exists('on_embed', $podcastPlatform,) && $podcastPlatform['on_embed'] === 'yes',
             ];
         }
 

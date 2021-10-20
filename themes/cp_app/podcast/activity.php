@@ -35,7 +35,7 @@
 
     <img src="<?= interact_as_actor()
         ->avatar_image_url ?>" alt="<?= interact_as_actor()
-        ->display_name ?>" class="w-12 h-12 mr-4 rounded-full" />
+        ->display_name ?>" class="w-10 h-10 mr-2 rounded-full" />
     <div class="flex flex-col flex-1 min-w-0 gap-y-2">
         <Forms.Textarea
             name="message"

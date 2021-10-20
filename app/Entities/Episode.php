@@ -78,7 +78,7 @@ use RuntimeException;
  *
  * @property Person[] $persons;
  * @property Soundbite[] $soundbites;
- * @property string $embeddable_player_url;
+ * @property string $embed_url;
  */
 class Episode extends Entity
 {
@@ -96,7 +96,7 @@ class Episode extends Entity
 
     protected string $audio_file_opengraph_url;
 
-    protected string $embeddable_player_url;
+    protected string $embed_url;
 
     protected Image $image;
 
@@ -422,18 +422,12 @@ class Episode extends Entity
         return url_to('episode', $this->getPodcast()->handle, $this->attributes['slug']);
     }
 
-    public function getEmbeddablePlayerUrl(string $theme = null): string
+    public function getEmbedUrl(string $theme = null): string
     {
         return base_url(
             $theme
-                ? route_to(
-                    'embeddable-player-theme',
-                    $this->getPodcast()
-                        ->handle,
-                    $this->attributes['slug'],
-                    $theme,
-                )
-                : route_to('embeddable-player', $this->getPodcast()->handle, $this->attributes['slug']),
+                ? route_to('embed-theme', $this->getPodcast() ->handle, $this->attributes['slug'], $theme,)
+                : route_to('embed', $this->getPodcast()->handle, $this->attributes['slug']),
         );
     }
 

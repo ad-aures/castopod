@@ -168,9 +168,9 @@ return [
         'delete' => 'Supprimer l’extrait sonore',
         'bookmark' =>
             'Cliquez pour récupérer la position actuelle, cliquez à nouveau pour récupérer la durée.',
-        'submit_edit' => 'Enregistrer tous les extraits sonores',
+        'submit' => 'Enregistrer les extraits sonnores',
     ],
-    'embeddable_player' => [
+    'embed' => [
         'add' => 'Ajouter un lecteur intégré',
         'title' => 'Lecteur intégré',
         'label' =>

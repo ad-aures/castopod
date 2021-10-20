@@ -31,7 +31,7 @@
         </div>
     <?php endif; ?>
 
-    <header class="z-50 flex flex-col-reverse justify-between w-full col-start-2 bg-top bg-no-repeat bg-cover sm:flex-row sm:items-end bg-pine-800" style="background-image: url('<?= $podcast->actor->cover_image_url ?>'); aspect-ratio: 15 / 5;">
+    <header class="z-50 flex flex-col-reverse justify-between w-full col-start-2 bg-top bg-no-repeat bg-cover sm:flex-row sm:items-end bg-pine-800" style="background-image: url('<?= $podcast->actor->cover_image_url ?>'); aspect-ratio: 3 / 1;">
         <div class="flex items-center pl-4 -mb-6 md:pl-8 md:-mb-8 gap-x-4">
             <img src="<?= $podcast->image->thumbnail_url ?>" alt="<?= $podcast->title ?>" loading="lazy" class="h-24 rounded-full md:h-28 ring-4 ring-white" />
             <div class="relative flex flex-col text-white -top-2">

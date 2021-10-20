@@ -320,10 +320,10 @@ $routes->group(
                             ],
                         );
                         $routes->get(
-                            'embeddable-player',
-                            'EpisodeController::embeddablePlayer/$1/$2',
+                            'embed',
+                            'EpisodeController::embed/$1/$2',
                             [
-                                'as' => 'embeddable-player-add',
+                                'as' => 'embed-add',
                                 'filter' => 'permission:podcast_episodes-edit',
                             ],
                         );

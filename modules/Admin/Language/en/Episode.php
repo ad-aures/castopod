@@ -160,9 +160,9 @@ return [
         'delete' => 'Delete soundbite',
         'bookmark' =>
             'Click while playing to get current position, click again to get duration.',
-        'submit_edit' => 'Save all soundbites',
+        'submit' => 'Save soundbites',
     ],
-    'embeddable_player' => [
+    'embed' => [
         'title' => 'Embeddable player',
         'label' =>
             'Pick a theme color, copy the embeddable player to clipboard, then paste it on your website.',

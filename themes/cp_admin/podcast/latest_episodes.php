@@ -58,8 +58,8 @@
                         ],
                         [
                             'type' => 'link',
-                            'title' => lang('Episode.embeddable_player.title'),
-                            'uri' => route_to('embeddable-player-add', $podcast->id, $episode->id),
+                            'title' => lang('Episode.embed.title'),
+                            'uri' => route_to('embed-add', $podcast->id, $episode->id),
                         ],
                         [
                             'type' => 'link',

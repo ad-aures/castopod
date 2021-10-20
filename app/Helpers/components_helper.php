@@ -106,9 +106,9 @@ if (! function_exists('publication_pill')) {
     {
         $class = match ($publicationStatus) {
             'published' => 'text-pine-600 border-pine-600 bg-pine-50',
-                'scheduled' => 'text-red-600 border-red-600 bg-red-50',
-                'not_published' => 'text-gray-600 border-gray-600 bg-gray-50',
-                default => 'text-gray-600 border-gray-600 bg-gray-50',
+            'scheduled' => 'text-red-600 border-red-600 bg-red-50',
+            'not_published' => 'text-gray-600 border-gray-600 bg-gray-50',
+            default => 'text-gray-600 border-gray-600 bg-gray-50',
         };
 
         $label = lang('Episode.publication_status.' . $publicationStatus);
@@ -292,7 +292,10 @@ if (! function_exists('audio_player')) {
 if (! function_exists('relative_time')) {
     function relative_time(Time $time, string $class = ''): string
     {
-        $translatedDate = lang('Common.mediumDate', [$time]);
+        $formatter = new IntlDateFormatter(service(
+            'request'
+        )->getLocale(), IntlDateFormatter::MEDIUM, IntlDateFormatter::NONE);
+        $translatedDate = $time->toLocalizedString($formatter->getPattern());
         $datetime = $time->format(DateTime::ISO8601);
 
         return <<<CODE_SAMPLE

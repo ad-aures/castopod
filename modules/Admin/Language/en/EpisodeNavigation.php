@@ -14,6 +14,6 @@ return [
     'episode-view' => 'Home',
     'episode-edit' => 'Edit episode',
     'episode-persons-manage' => 'Manage persons',
-    'embeddable-player-add' => 'Embeddable player',
+    'embed-add' => 'Embeddable player',
     'soundbites-edit' => 'Soundbites',
 ];

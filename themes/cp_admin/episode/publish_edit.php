@@ -29,7 +29,7 @@
 <small class="max-w-md mb-2 text-gray-600"><?= lang('Episode.publish_form.post_hint') ?></small>
 <div class="mb-8 overflow-hidden bg-white shadow-md rounded-xl">
     <div class="flex px-4 py-3">
-        <img src="<?= $podcast->actor->avatar_image_url ?>" alt="<?= $podcast->actor->display_name ?>" class="w-12 h-12 mr-4 rounded-full" />
+        <img src="<?= $podcast->actor->avatar_image_url ?>" alt="<?= $podcast->actor->display_name ?>" class="w-10 h-10 mr-2 rounded-full" />
         <div class="flex flex-col min-w-0">
             <p class="flex items-baseline min-w-0">
                 <span class="mr-2 font-semibold truncate"><?= $podcast->actor->display_name ?></span>

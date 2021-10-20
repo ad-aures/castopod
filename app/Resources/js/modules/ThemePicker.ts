@@ -1,9 +1,8 @@
 const ThemePicker = (): void => {
   const buttons: NodeListOf<HTMLButtonElement> | null =
     document.querySelectorAll("button[data-type='theme-picker']");
-  const iframe: HTMLIFrameElement | null = document.querySelector(
-    `iframe[id="embeddable_player"]`
-  );
+  const iframe: HTMLIFrameElement | null =
+    document.querySelector(`iframe[id="embed"]`);
   const iframeTextArea: HTMLFormElement | null =
     document.querySelector(`[id="iframe"]`);
   const urlTextArea: HTMLFormElement | null =

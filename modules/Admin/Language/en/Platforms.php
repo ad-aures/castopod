@@ -13,7 +13,7 @@ return [
     'home_url' => 'Go to {platformName} website',
     'submit_url' => 'Submit your podcast on {platformName}',
     'visible' => 'Display in podcast homepage?',
-    'on_embeddable_player' => 'Display on embeddable player?',
+    'on_embed' => 'Display on embeddable player?',
     'remove' => 'Remove {platformName}',
     'submit' => 'Save',
     'messages' => [

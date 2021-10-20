@@ -41,7 +41,7 @@ class AddPodcastsPlatforms extends Migration
                 'constraint' => 1,
                 'default' => 0,
             ],
-            'is_on_embeddable_player' => [
+            'is_on_embed' => [
                 'type' => 'TINYINT',
                 'constraint' => 1,
                 'default' => 0,

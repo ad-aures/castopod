@@ -9,7 +9,7 @@
             <form action="<?= route_to('post-attempt-action', interact_as_actor()->username, $post->id) ?>" method="POST" class="flex" >
                 <img src="<?= interact_as_actor()
             ->avatar_image_url ?>" alt="<?= interact_as_actor()
-            ->display_name ?>" class="w-12 h-12 mr-4 rounded-full ring-gray-50 ring-2" />
+            ->display_name ?>" class="w-10 h-10 mr-2 rounded-full ring-gray-50 ring-2" />
                 <div class="flex flex-col flex-1">
                     <Forms.Textarea
                         name="message"

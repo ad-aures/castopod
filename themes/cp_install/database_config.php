@@ -7,7 +7,7 @@
 
 <div class="flex flex-col mb-2">
     <div class="flex items-center">
-        <span class="inline-flex items-center justify-center w-12 h-12 mr-2 text-sm font-semibold tracking-wider border-4 rounded-full text-pine-700 border-pine-700">2/4</span>
+        <span class="inline-flex items-center justify-center w-12 h-12 mr-2 text-sm font-semibold tracking-wider border-4 rounded-full text-pine-500 border-pine-500">2/4</span>
         <Heading tagName="h1"><?= lang(
     'Install.form.database_config',
 ) ?></Heading>

@@ -9,21 +9,7 @@ declare(strict_types=1);
  */
 
 return [
-    'all_podcasts' => 'All podcasts',
-    'no_podcast' => 'No podcast found!',
-    'create' => 'Create podcast',
-    'import' => 'Import podcast',
-    'new_episode' => 'New Episode',
     'feed' => 'RSS Podcast feed',
-    'view' => 'View podcast',
-    'edit' => 'Edit podcast',
-    'delete' => 'Delete podcast',
-    'see_episodes' => 'See episodes',
-    'see_contributors' => 'See contributors',
-    'go_to_page' => 'Go to page',
-    'latest_episodes' => 'Latest episodes',
-    'see_all_episodes' => 'See all episodes',
-    'by' => 'By {publisher}',
     'season' => 'Season {seasonNumber}',
     'list_of_episodes_year' => '{year} episodes ({episodeCount})',
     'list_of_episodes_season' =>

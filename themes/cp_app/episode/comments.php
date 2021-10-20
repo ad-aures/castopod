@@ -29,7 +29,7 @@
 <meta name="twitter:card" content="player" />
 <meta property="twitter:audio:partner" content="<?= $podcast->publisher ?>" />
 <meta property="twitter:audio:artist_name" content="<?= $podcast->owner_name ?>" />
-<meta name="twitter:player" content="<?= $episode->getEmbeddablePlayerUrl('light') ?>" />
+<meta name="twitter:player" content="<?= $episode->getEmbedUrl('light') ?>" />
 <meta name="twitter:player:width" content="600" />
 <meta name="twitter:player:height" content="200" />
 <?= $this->endSection() ?>

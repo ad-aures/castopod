@@ -36,7 +36,7 @@ $routes->addPlaceholder('slug', '[a-zA-Z0-9\-]{1,128}');
 $routes->addPlaceholder('base64', '[A-Za-z0-9\.\_]+\-{0,2}');
 $routes->addPlaceholder('platformType', '\bpodcasting|\bsocial|\bfunding');
 $routes->addPlaceholder('postAction', '\bfavourite|\breblog|\breply');
-$routes->addPlaceholder('embeddablePlayerTheme', '\blight|\bdark|\blight-transparent|\bdark-transparent');
+$routes->addPlaceholder('embedTheme', '\blight|\bdark|\blight-transparent|\bdark-transparent');
 $routes->addPlaceholder(
     'uuid',
     '[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}',
@@ -154,17 +154,13 @@ $routes->group('@(:podcastHandle)', function ($routes): void {
         $routes->get('oembed.xml', 'EpisodeController::oembedXML/$1/$2', [
             'as' => 'episode-oembed-xml',
         ]);
-        $routes->group('embeddable-player', function ($routes): void {
-            $routes->get('/', 'EpisodeController::embeddablePlayer/$1/$2', [
-                'as' => 'embeddable-player',
+        $routes->group('embed', function ($routes): void {
+            $routes->get('/', 'EpisodeController::embed/$1/$2', [
+                'as' => 'embed',
             ]);
-            $routes->get(
-                '(:embeddablePlayerTheme)',
-                'EpisodeController::embeddablePlayer/$1/$2/$3',
-                [
-                    'as' => 'embeddable-player-theme',
-                ],
-            );
+            $routes->get('(:embedTheme)', 'EpisodeController::embed/$1/$2/$3', [
+                'as' => 'embed-theme',
+            ],);
         });
     });
 

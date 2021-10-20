@@ -822,7 +822,7 @@ class EpisodeController extends BaseController
         return redirect()->route('soundbites-edit', [$this->podcast->id, $this->episode->id]);
     }
 
-    public function embeddablePlayer(): string
+    public function embed(): string
     {
         helper(['form']);
 
@@ -836,7 +836,7 @@ class EpisodeController extends BaseController
             0 => $this->podcast->title,
             1 => $this->episode->title,
         ]);
-        return view('episode/embeddable_player', $data);
+        return view('episode/embed', $data);
     }
 
     public function attemptCommentCreate(): RedirectResponse

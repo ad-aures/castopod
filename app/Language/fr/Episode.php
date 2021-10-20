@@ -19,7 +19,7 @@ return [
         one {# intervenant·e}
         other {# intervenant·e·s}
     }',
-    'persons_list' => 'Liste des intervenant·e·s',
+    'persons_list' => 'Intervenant·e·s',
     'back_to_episodes' => 'Retour aux épisodes de {podcast}',
     'comments' => 'Commentaires',
     'activity' => 'Activité',

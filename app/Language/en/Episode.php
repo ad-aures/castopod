@@ -19,7 +19,7 @@ return [
         one {# person}
         other {# persons}
     }',
-    'persons_list' => 'Persons for {episodeTitle}',
+    'persons_list' => 'Persons',
     'back_to_episodes' => 'Back to episodes of {podcast}',
     'comments' => 'Comments',
     'activity' => 'Activity',
