@@ -40,12 +40,15 @@ class Field extends FormComponent
         unset($fieldComponentAttributes['helperText']);
         unset($fieldComponentAttributes['hintText']);
 
-        $fieldComponentAttributes = flatten_attributes($fieldComponentAttributes);
+        $fieldComponentAttributes['class'] = 'mb-1';
+
+        $element = __NAMESPACE__ . '\\' . $this->as;
+        $fieldElement = new $element($fieldComponentAttributes);
 
         return <<<HTML
             <div class="flex flex-col {$this->class}">
                 <Forms.Label {$labelAttributes}>{$this->label}</Forms.Label>
-                <Forms.{$this->as} {$fieldComponentAttributes} class="mb-1"/>
+                {$fieldElement->render()}
                 {$helperText}
             </div>
         HTML;

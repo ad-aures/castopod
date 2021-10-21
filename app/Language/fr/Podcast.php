@@ -18,6 +18,7 @@ return [
     'no_episode_hint' =>
         'Naviguez au sein des épisodes du podcast episodes grâce à la barre de navigation ci-dessus.',
     'follow' => 'Suivre',
+    'followTitle' => 'Suivez {actorDisplayName} sur le fédiverse !',
     'followers' => '{numberOfFollowers, plural,
         one {<span class="font-semibold">#</span> abonné·e}
         other {<span class="font-semibold">#</span> abonné·e·s}

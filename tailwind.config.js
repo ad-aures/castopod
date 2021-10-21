@@ -51,18 +51,13 @@ module.exports = {
         admin: "300px calc(100% - 300px)",
         podcast: "1fr minmax(auto, 960px) 1fr",
         podcastMain: "1fr minmax(200px, 300px)",
-        podcasts: "repeat(auto-fill, minmax(14rem, 1fr))",
+        cards: "repeat(auto-fill, minmax(14rem, 1fr))",
+        latestEpisodes: "repeat(5, 1fr)",
       },
       gridTemplateRows: {
         admin: "40px 1fr",
       },
-      zIndex: {
-        "-10": "-10",
-      },
       borderWidth: {
-        3: "3px",
-      },
-      ringWidth: {
         3: "3px",
       },
     },

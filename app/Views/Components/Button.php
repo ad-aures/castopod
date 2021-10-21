@@ -76,11 +76,17 @@ class Button extends Component
         }
 
         if ($this->iconLeft !== '') {
-            $this->slot = '<Icon glyph="' . $this->iconLeft . '" class="mr-2 opacity-75" />' . $this->slot;
+            $this->slot = (new Icon([
+                'glyph' => $this->iconLeft,
+                'class' => 'mr-2 opacity-75',
+            ]))->render() . $this->slot;
         }
 
         if ($this->iconRight !== '') {
-            $this->slot .= '<Icon glyph="' . $this->iconRight . '" class="ml-2 opacity-75" />';
+            $this->slot .= (new Icon([
+                'glyph' => $this->iconRight,
+                'class' => 'ml-2 opacity-75',
+            ]))->render();
         }
 
         unset($this->attributes['slot']);

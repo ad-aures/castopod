@@ -11,10 +11,8 @@
 
 <?= $this->section('content') ?>
 
-<form action="<?= route_to('person-edit', $person->id) ?>" method="POST" class="flex flex-col" enctype="multipart/form-data">
+<form action="<?= route_to('person-edit', $person->id) ?>" method="POST" class="flex flex-col max-w-sm gap-y-4" enctype="multipart/form-data">
 <?= csrf_field() ?>
-
-<img src="<?= $person->image->thumbnail_url ?>" alt="<?= $person->full_name ?>" class="object-cover w-32 h-32 mt-3 rounded" />
 
 <Forms.Field
     name="image"

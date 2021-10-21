@@ -11,6 +11,12 @@ class DropdownMenu extends Component
 {
     public string $id = '';
 
+    public string $placement = 'bottom-end';
+
+    public string $offsetX = '0';
+
+    public string $offsetY = '0';
+
     public array $items = [];
 
     public function setItems(string $value): void
@@ -48,7 +54,9 @@ class DropdownMenu extends Component
                 class="absolute z-50 flex flex-col py-2 text-black whitespace-no-wrap bg-white border-black rounded-lg border-3"
                 aria-labelledby="{$this->labelledby}"
                 data-dropdown="menu"
-                data-dropdown-placement="bottom-end">{$menuItems}</nav>
+                data-dropdown-placement="{$this->placement}"
+                data-dropdown-offset-x="{$this->offsetX}"
+                data-dropdown-offset-y="{$this->offsetY}">{$menuItems}</nav>
         HTML;
     }
 }

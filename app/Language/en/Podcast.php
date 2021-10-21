@@ -18,6 +18,7 @@ return [
     'no_episode_hint' =>
         'Navigate the podcast episodes with the navigation bar above.',
     'follow' => 'Follow',
+    'followTitle' => 'Follow {actorDisplayName} on the fediverse!',
     'followers' => '{numberOfFollowers, plural,
         one {<span class="font-semibold">#</span> follower}
         other {<span class="font-semibold">#</span> followers}

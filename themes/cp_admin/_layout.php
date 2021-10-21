@@ -26,11 +26,11 @@
             <div class="flex flex-col justify-end w-full -mt-4 sticky-header-inner">
                 <?= render_breadcrumb('text-gray-800 text-xs items-center flex') ?>
                 <div class="flex justify-between py-1">
-                    <div class="flex flex-wrap items-center">
-                        <Heading tagName="h1" size="large"><?= $this->renderSection('pageTitle') ?></Heading>
+                    <div class="flex flex-wrap items-center overflow-x-hidden">
+                        <Heading tagName="h1" size="large" class="truncate"><?= $this->renderSection('pageTitle') ?></Heading>
                         <?= $this->renderSection('headerLeft') ?>
                     </div>
-                    <div class="flex gap-1"><?= $this->renderSection('headerRight') ?></div>
+                    <div class="flex flex-shrink-0 gap-1"><?= $this->renderSection('headerRight') ?></div>
                 </div>
             </div>
         </header>

@@ -9,7 +9,7 @@
     <footer class="px-2 py-2 mx-auto text-xs text-right">
         <?= lang('Common.powered_by', [
             'castopod' =>
-                '<a class="inline-flex font-semibold hover:underline" href="https://castopod.org/" target="_blank" rel="noreferrer noopener">Castopod' . icon('social/castopod', 'ml-1 text-lg') . '</a> ' .
+                '<a class="inline-flex font-semibold hover:underline focus:ring-castopod" href="https://castopod.org/" target="_blank" rel="noreferrer noopener">Castopod' . icon('social/castopod', 'ml-1 text-lg') . '</a> ' .
                 CP_VERSION,
         ]) ?>
     </footer>

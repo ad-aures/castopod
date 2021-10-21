@@ -17,12 +17,16 @@ class Checkbox extends FormComponent
 
     public function render(): string
     {
+        $attributes = [
+            'id' => $this->value,
+            'name' => $this->name,
+            'class' => 'form-checkbox text-pine-500 border-black border-3 focus:ring-castopod w-6 h-6',
+        ];
+        if ($this->required) {
+            $attributes['required'] = 'required';
+        }
         $checkboxInput = form_checkbox(
-            [
-                'id' => $this->value,
-                'name' => $this->name,
-                'class' => 'form-checkbox text-pine-500 border-black border-3 focus:ring-castopod w-6 h-6',
-            ],
+            $attributes,
             'yes',
             old($this->name) ? old($this->name) === $this->value : $this->isChecked,
         );
@@ -30,10 +34,7 @@ class Checkbox extends FormComponent
         $hint = $this->hint === null ? '' : hint_tooltip($this->hint, 'ml-1');
 
         return <<<HTML
-            <label class="leading-8 {$this->class}">
-                {$checkboxInput}
-                <span class="ml-2">{$this->slot}{$hint}</label>
-            </label>
+            <label class="inline-flex items-center {$this->class}">{$checkboxInput}<span class="ml-2">{$this->slot}{$hint}</span></label>
         HTML;
     }
 }

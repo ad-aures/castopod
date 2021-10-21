@@ -16,7 +16,7 @@
 	<header class="mb-4">
 		<a href="<?= route_to(
             'home',
-        ) ?>" class="inline-flex items-baseline text-4xl font-bold font-display text-pine-500">
+        ) ?>" class="inline-flex items-baseline text-4xl font-bold font-display text-pine-500 focus:ring-castopod">
 			<?= 'castopod' . svg('castopod-logo', 'h-8 ml-2') ?>
 		</a>
 	</header>
@@ -31,7 +31,7 @@
 		<?= $this->renderSection('footer') ?>
 		<small class="py-4 text-center border-t-2 border-pine-100"><?= lang('Common.powered_by', [
 		    'castopod' =>
-		        '<a class="inline-flex font-semibold hover:underline" target="_blank" rel="noreferrer noopener">Castopod' . icon('social/castopod', 'ml-1 text-lg') . '</a>',
+		        '<a class="inline-flex font-semibold hover:underline focus:ring-castopod" target="_blank" rel="noreferrer noopener">Castopod' . icon('social/castopod', 'ml-1 text-lg') . '</a>',
 		]) ?></small>
 	</footer>
 </body>

@@ -31,8 +31,8 @@
         </div>
     <?php endif; ?>
 
-    <nav class="flex items-center justify-between h-10 col-start-2 px-2 text-white bg-pine-800">
-        <a href="<?= route_to('podcast-episodes', $podcast->handle) ?>" class="inline-flex items-center focus:ring-castopod" title="<?= lang('Episode.back_to_episodes', [
+    <nav class="flex items-center justify-between h-10 col-start-2 text-white bg-pine-800">
+        <a href="<?= route_to('podcast-episodes', $podcast->handle) ?>" class="inline-flex items-center h-full px-2 focus:ring-castopod focus:ring-inset" title="<?= lang('Episode.back_to_episodes', [
             'podcast' => $podcast->title,
         ]) ?>">
             <?= icon('arrow-left', 'mr-2 text-lg') ?>
@@ -46,7 +46,7 @@
                 </div>
             </div>
         </a>
-        <div class="inline-flex items-center self-end h-full gap-x-2">
+        <div class="inline-flex items-center self-end h-full px-2 gap-x-2">
             <?php if (in_array(true, array_column($podcast->fundingPlatforms, 'is_visible'), true)): ?>
                 <IconButton glyph="heart" variant="accent" data-toggle="funding-links" data-toggle-class="hidden"><?= lang('Podcast.sponsor') . lang('Podcast.sponsor_title') ?></IconButton>
             <?php endif; ?>
@@ -75,7 +75,7 @@
                 <h1 class="inline-flex items-baseline max-w-md mt-2 text-2xl font-bold leading-none sm:text-3xl font-display line-clamp-2"><?= $episode->title ?></h1>
                 <div class="flex items-center mt-4 gap-x-8">
                 <?php if ($episode->persons !== []): ?>
-                    <button class="flex items-center text-xs font-semibold gap-x-2 hover:underline" data-toggle="persons-list" data-toggle-class="hidden">
+                    <button class="flex items-center text-xs font-semibold gap-x-2 hover:underline focus:ring-castopod" data-toggle="persons-list" data-toggle-class="hidden">
                         <div class="inline-flex flex-row-reverse">
                             <?php $i = 0; ?>
                             <?php foreach ($episode->persons as $person): ?>

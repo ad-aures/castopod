@@ -50,7 +50,7 @@
                 hint="<?= lang('Fediverse.your_handle_hint') ?>"
                 required="true" />
 
-            <Button variant="primary" type="submit" class="self-end"><?= lang('Fediverse.' . $action . '.submit') ?></Button>
+            <Button variant="primary" type="submit" class="self-end" iconRight="send-plane"><?= lang('Fediverse.' . $action . '.submit') ?></Button>
         </form>
     </main>
 </body>

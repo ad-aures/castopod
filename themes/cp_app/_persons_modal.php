@@ -19,9 +19,9 @@
                 <div class="flex gap-x-2">
                     <img src="<?= $person->image->thumbnail_url ?>" alt="<?= $person->full_name ?>" class="object-cover w-10 h-10 rounded-full" />
                     <div class="flex flex-col">
-                        <h4 class="text-sm font-semibold hover:underline focus:ring-castopod">
+                        <h4 class="text-sm font-semibold">
                             <?php if ($person->information_url): ?>
-                                <a href="<?= $person->information_url ?>" target="_blank" rel="noopener noreferrer"><?= $person->full_name ?></a>
+                                <a href="<?= $person->information_url ?>" class="hover:underline focus:ring-castopod" target="_blank" rel="noopener noreferrer"><?= $person->full_name ?></a>
                             <?php else: ?>
                                 <?= $person->full_name ?>
                             <?php endif; ?>

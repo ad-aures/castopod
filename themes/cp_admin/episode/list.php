@@ -73,10 +73,15 @@
             [
                 'header' => lang('Episode.list.actions'),
                 'cell' => function ($episode, $podcast) {
-                    return '<button id="more-dropdown-' . $episode->id . '" type="button" class="inline-flex items-center p-1 focus:ring-castopod" data-dropdown="button" data-dropdown-target="more-dropdown-' . $episode->id . '-menu" aria-haspopup="true" aria-expanded="false">' .
+                    return '<button id="more-dropdown-' . $episode->id . '" type="button" class="inline-flex items-center p-1 rounded-full focus:ring-castopod" data-dropdown="button" data-dropdown-target="more-dropdown-' . $episode->id . '-menu" aria-haspopup="true" aria-expanded="false">' .
                         icon('more') .
                         '</button>' .
-                        '<DropdownMenu id="more-dropdown-' . $episode->id . '-menu" labelledby="more-dropdown-' . $episode->id . '" items="' . esc(json_encode([
+                        '<DropdownMenu id="more-dropdown-' . $episode->id . '-menu" labelledby="more-dropdown-' . $episode->id . '" offsetY="-24" items="' . esc(json_encode([
+                            [
+                                'type' => 'link',
+                                'title' => lang('Episode.go_to_page'),
+                                'uri' => route_to('episode', $podcast->handle, $episode->slug),
+                            ],
                             [
                                 'type' => 'link',
                                 'title' => lang('Episode.edit'),
@@ -96,11 +101,6 @@
                                 'type' => 'link',
                                 'title' => lang('Episode.soundbites'),
                                 'uri' => route_to('soundbites-edit', $podcast->id, $episode->id),
-                            ],
-                            [
-                                'type' => 'link',
-                                'title' => lang('Episode.go_to_page'),
-                                'uri' => route_to('episode', $podcast->handle, $episode->slug),
                             ],
                             [
                                 'type' => 'separator',

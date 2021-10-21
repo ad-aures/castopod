@@ -10,11 +10,11 @@
     <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
     <?= service('vite')->asset('styles/index.css', 'css') ?>
     
-    <title><?= lang('Podcast.follow.title', [
+    <title><?= lang('Podcast.followTitle', [
         'actorDisplayName' => $actor->display_name,
     ]) ?></title>
     <meta name="description" content="<?= $actor->summary ?>"/>
-    <meta property="og:title" content="<?= lang('Podcast.follow.title', [
+    <meta property="og:title" content="<?= lang('Podcast.followTitle', [
         'actorDisplayName' => $actor->display_name,
     ]) ?>"/>
     <meta property="og:locale" content="<?= service(
@@ -26,6 +26,8 @@
 
     <?= service('vite')
         ->asset('styles/index.css', 'css') ?>
+    <?= service('vite')
+        ->asset('js/podcast.ts', 'js') ?>
 </head>
 
 
@@ -38,7 +40,7 @@
             <img src="<?= $actor->cover_image_url ?>" alt="" class="object-cover w-full h-32 bg-pine-800" />
             <div class="flex px-4 py-2">
                 <img src="<?= $actor->avatar_image_url ?>" alt="<?= $actor->display_name ?>"
-                    class="w-16 h-16 mr-4 -mt-8 rounded-full shadow-xl ring-2 ring-white" />
+                    class="w-16 h-16 mr-4 -mt-8 rounded-full ring-2 ring-white" />
                 <div class="">
                     <p class="font-semibold"><?= $actor->display_name ?></p>
                     <p class="text-sm text-gray-500">@<?= $actor->username ?></p>
@@ -58,7 +60,7 @@
                 hint="<?= lang('Fediverse.your_handle_hint') ?>"
                 required="true"
             />
-            <Button variant="primary" type="submit" class="self-end"><?= lang('Fediverse.follow.submit') ?></Button>
+            <Button variant="primary" type="submit" class="self-end" iconRight="send-plane"><?= lang('Fediverse.follow.submit') ?></Button>
         </form>
     </main>
 
@@ -68,7 +70,7 @@
         <p>
             <?= lang('Common.powered_by', [
                 'castopod' =>
-                    '<a class="inline-flex font-semibold hover:underline" href="https://castopod.org" target="_blank" rel="noreferrer noopener">Castopod' . icon('social/castopod', 'ml-1 text-lg') . '</a>',
+                    '<a class="inline-flex font-semibold hover:underline focus:ring-castopod" href="https://castopod.org" target="_blank" rel="noreferrer noopener">Castopod' . icon('social/castopod', 'ml-1 text-lg') . '</a>',
             ]) ?>
         </p>
     </footer>

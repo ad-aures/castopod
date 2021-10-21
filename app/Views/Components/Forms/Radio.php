@@ -26,7 +26,7 @@ class Radio extends FormComponent
         );
 
         return <<<HTML
-            <label class="leading-8">{$radioInput}<span class="ml-2">{$this->slot}</span></label>
+            <label class="inline-flex items-center {$this->class}">{$radioInput}<span class="ml-2">{$this->slot}</span></label>
         HTML;
     }
 }

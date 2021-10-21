@@ -32,16 +32,19 @@
         <h1 class="mb-2 text-xl"><?= lang('Home.all_podcasts') ?> (<?= count(
         $podcasts,
     ) ?>)</h1>
-        <section class="grid gap-4 grid-cols-podcasts">
+        <section class="grid gap-4 grid-cols-cards">
             <?php if ($podcasts): ?>
                 <?php foreach ($podcasts as $podcast): ?>
-                    <a href="<?= $podcast->link ?>" class="w-full">
-                        <article class="w-full h-full overflow-hidden bg-white border shadow rounded-xl hover:bg-gray-100 hover:shadow">
-                            <img alt="<?= $podcast->title ?>"
-                            src="<?= $podcast->image->medium_url ?>"
-                            class="object-cover w-full h-48 mb-2" />
-                            <h2 class="px-2 font-semibold leading-tight truncate"><?= $podcast->title ?></h2>
-                            <p class="px-2 pb-2 text-gray-600">@<?= $podcast->handle ?></p>
+                    <a href="<?= $podcast->link ?>" class="relative w-full h-full overflow-hidden transition shadow focus:ring-castopod rounded-xl border-pine-100 hover:shadow-xl focus:shadow-xl group border-3">
+                        <article class="text-white">
+                            <div class="absolute bottom-0 left-0 z-10 w-full h-full backdrop-gradient"></div>
+                            <div class="w-full h-full overflow-hidden">
+                                <img alt="<?= $podcast->title ?>" src="<?= $podcast->image->medium_url ?>" class="object-cover w-full h-full transition duration-200 ease-in-out transform group-focus:scale-105 group-hover:scale-105" />
+                            </div>
+                            <div class="absolute bottom-0 left-0 z-20 px-4 pb-2">
+                                <h2 class="font-bold leading-none truncate font-display"><?= $podcast->title ?></h2>
+                                <p class="text-sm opacity-75">@<?= $podcast->handle ?></p>
+                            </div>
                         </article>
                     </a>
                 <?php endforeach; ?>
@@ -54,7 +57,7 @@
         <?= render_page_links() ?>
         <small><?= lang('Common.powered_by', [
             'castopod' =>
-                '<a class="inline-flex font-semibold hover:underline" href="https://castopod.org/" target="_blank" rel="noreferrer noopener">Castopod' . icon('social/castopod', 'ml-1 text-lg') . '</a>',
+                '<a class="inline-flex font-semibold hover:underline focus:ring-castopod" href="https://castopod.org/" target="_blank" rel="noreferrer noopener">Castopod' . icon('social/castopod', 'ml-1 text-lg') . '</a>',
         ]) ?></small>
     </footer>
 </body>

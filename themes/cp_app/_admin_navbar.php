@@ -1,4 +1,4 @@
-<div class="sticky top-0 left-0 z-50 flex items-center justify-between w-full h-10 text-white border-b shadow bg-pine-800 border-pine-900">
+<div class="sticky top-0 left-0 z-50 flex items-center justify-between w-full h-10 text-white border-b bg-pine-800 border-pine-900">
         <div class="inline-flex items-center h-full">
             <a href="<?= route_to('home') ?>" class="inline-flex items-center h-full px-2 border-r border-pine-900 focus:ring-inset focus:ring-castopod">
                     <?= svg('castopod-logo-base', 'h-6') ?>
@@ -20,7 +20,7 @@
             aria-expanded="false"><div class="relative mr-1">
                 <?= icon('account-circle', 'text-3xl opacity-60') ?>
                 <?= user()
-                    ->podcasts === [] ? '' : '<img src="' . interact_as_actor()->avatar_image_url . '" class="absolute bottom-0 w-4 h-4 rounded-full -right-1" />' ?>
+                    ->podcasts === [] ? '' : '<img src="' . interact_as_actor()->avatar_image_url . '" class="absolute bottom-0 w-4 h-4 border rounded-full -right-1 border-pine-800" />' ?>
             </div>
             <?= user()->username ?>
             <?= icon('caret-down', 'ml-auto text-2xl') ?></button>

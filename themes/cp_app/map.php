@@ -23,9 +23,9 @@
     <?php endif; ?>
 
     <header class="py-8 text-white border-b bg-pine-800">
-        <div class="container flex flex-col px-2 py-4 mx-auto">
+        <div class="container flex flex-col items-start px-2 py-4 mx-auto">
             <a href="<?= route_to('home') ?>"
-            class="inline-flex items-center mb-2"><?= icon(
+            class="inline-flex items-center mb-2 focus:ring-castopod"><?= icon(
             'arrow-left',
             'mr-2',
         ) . lang('Page.back_to_home') ?></a>
@@ -39,7 +39,7 @@
         <?= render_page_links() ?>
         <small><?= lang('Common.powered_by', [
             'castopod' =>
-                '<a class="inline-flex font-semibold hover:underline" href="https://castopod.org/" target="_blank" rel="noreferrer noopener">Castopod' . icon('social/castopod', 'ml-1 text-lg') . '</a>',
+                '<a class="inline-flex font-semibold hover:underline focus:ring-castopod" href="https://castopod.org/" target="_blank" rel="noreferrer noopener">Castopod' . icon('social/castopod', 'ml-1 text-lg') . '</a>',
         ]) ?></small>
     </footer> 
 </body>

@@ -238,7 +238,7 @@ if (! function_exists('location_link')) {
             icon('map-pin', 'mr-2') . $location->name,
             [
                 'class' =>
-                    'inline-flex items-baseline hover:underline' .
+                    'inline-flex items-baseline hover:underline focus:ring-castopod' .
                     ($class === '' ? '' : " {$class}"),
                 'target' => '_blank',
                 'rel' => 'noreferrer noopener',

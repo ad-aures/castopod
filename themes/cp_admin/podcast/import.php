@@ -10,7 +10,7 @@
 
 <?= $this->section('content') ?>
 
-<Alert glyph="alert" variant="danger"><?= lang('PodcastImport.warning') ?></Alert>
+<Alert glyph="alert" variant="danger" class="max-w-xl"><?= lang('PodcastImport.warning') ?></Alert>
 
 <form action="<?= route_to('podcast-import') ?>" method="POST" enctype='multipart/form-data' class="flex flex-col mt-6 gap-y-8">
 <?= csrf_field() ?>

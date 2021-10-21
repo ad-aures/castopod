@@ -1,7 +1,7 @@
 <aside id="podcast-sidebar" class="sticky hidden col-span-1 md:block top-12">
     <div class="absolute z-0 w-full h-full sm:hidden bg-pine-800/50"></div>
     <div class="z-10 bg-pine-50">
-        <a href="<?= route_to('podcast_feed', $podcast->handle) ?>" class="inline-flex items-center mb-6 text-sm font-semibold text-pine-800 group" target="_blank" rel="noopener noreferrer">
+        <a href="<?= route_to('podcast_feed', $podcast->handle) ?>" class="inline-flex items-center mb-6 text-sm font-semibold focus:ring-castopod text-pine-800 group" target="_blank" rel="noopener noreferrer">
             <?= icon('rss', ' mr-2 bg-orange-500 text-xl text-white group-hover:bg-orange-700 p-1 w-6 h-6 inline-flex items-center justify-center rounded-lg') . lang('Podcast.feed') ?>
         </a>
         <?php if (
@@ -61,7 +61,7 @@
                 <p><?= $podcast->copyright ?></p>
                 <p><?= lang('Common.powered_by', [
                     'castopod' =>
-                        '<a class="inline-flex font-semibold text-gray-500 hover:underline" href="https://castopod.org" target="_blank" rel="noreferrer noopener">Castopod' . icon('social/castopod', 'ml-1 text-lg') . '</a>',
+                        '<a class="inline-flex font-semibold text-gray-500 hover:underline focus:ring-castopod" href="https://castopod.org" target="_blank" rel="noreferrer noopener">Castopod' . icon('social/castopod', 'ml-1 text-lg') . '</a>',
                 ]) ?></p>
             </div>
         </footer>
