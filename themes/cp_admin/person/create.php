@@ -19,7 +19,6 @@
     label="<?= lang('Person.form.image') ?>"
     helper="<?= lang('Person.form.image_size_hint') ?>"
     type="file"
-    required="true"
     accept=".jpg,.jpeg,.png" />
 
 <Forms.Field
