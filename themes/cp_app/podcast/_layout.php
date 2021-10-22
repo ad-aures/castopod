@@ -24,14 +24,14 @@
         ->asset('js/audio-player.ts', 'js') ?>
 </head>
 
-<body class="grid items-start mx-auto grid-cols-podcast bg-pine-50">
+<body class="flex flex-col min-h-screen mx-auto md:min-h-full md:grid md:grid-cols-podcast bg-pine-50">
     <?php if (can_user_interact()): ?>
         <div class="col-span-full">
             <?= $this->include('_admin_navbar') ?>
         </div>
     <?php endif; ?>
 
-    <header class="z-50 flex flex-col-reverse justify-between w-full col-start-2 bg-top bg-no-repeat bg-cover sm:flex-row sm:items-end bg-pine-800" style="background-image: url('<?= $podcast->actor->cover_image_url ?>'); aspect-ratio: 3 / 1;">
+    <header class="z-50 flex flex-col-reverse justify-between w-full col-start-2 bg-top bg-no-repeat bg-cover sm:flex-row sm:items-end bg-pine-800 aspect-[3/1]" style="background-image: url('<?= $podcast->actor->cover_image_url ?>');">
         <div class="flex items-center pl-4 -mb-6 md:pl-8 md:-mb-8 gap-x-4">
             <img src="<?= $podcast->image->thumbnail_url ?>" alt="<?= $podcast->title ?>" loading="lazy" class="h-24 rounded-full md:h-28 ring-4 ring-white" />
             <div class="relative flex flex-col text-white -top-2">
@@ -61,8 +61,8 @@
         </div>
     </header>
     <?= $this->include('podcast/_partials/navigation') ?>
-    <div class="grid items-start col-start-2 pb-4 mt-6 grid-cols-podcastMain gap-x-6">
-        <main class="w-full max-w-xl mx-auto col-span-full md:col-span-1">
+    <div class="relative grid items-start flex-1 col-start-2 grid-cols-podcastMain gap-x-6">
+        <main class="w-full max-w-xl col-start-1 row-start-1 py-6 mx-auto col-span-full md:col-span-1">
             <?= $this->renderSection('content') ?>
         </main>
         <?= $this->include('podcast/_partials/sidebar') ?>

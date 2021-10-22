@@ -21,13 +21,10 @@
 <div class="max-w-2xl px-6 mx-auto">
     <nav class="py-3">
         <a href="<?= route_to('episode', $podcast->handle, $episode->slug) ?>"
-        class="inline-flex items-center px-4 py-2 text-sm"><?= icon(
+        class="inline-flex items-center px-4 py-2 text-sm focus:ring-castopod"><?= icon(
         'arrow-left',
         'mr-2 text-lg',
-    ) .
-            lang('Comment.back_to_episode', [
-                'episodeTitle' => $episode->title,
-            ]) ?></a>
+    ) . lang('Comment.back_to_comments') ?></a>
     </nav>
     <div class="pb-12">
         <?= $this->include('episode/_partials/comment_with_replies') ?>

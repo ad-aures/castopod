@@ -1,62 +1,65 @@
 const SidebarToggler = (): void => {
   const sidebar = document.querySelector(
-    "aside[id='admin-sidebar']"
+    "aside[data-sidebar-toggler='sidebar']"
   ) as HTMLElement;
   const toggler = document.querySelector(
-    "button[id='sidebar-toggler']"
+    "button[data-sidebar-toggler='toggler']"
   ) as HTMLButtonElement;
   const sidebarBackdrop = document.querySelector(
-    "div[id='sidebar-backdrop']"
-  ) as HTMLElement;
+    "div[data-sidebar-toggler='backdrop']"
+  ) as HTMLDivElement;
 
-  const setAriaExpanded = (isExpanded: "true" | "false") => {
-    toggler.setAttribute("aria-expanded", isExpanded);
-    sidebarBackdrop.setAttribute("aria-expanded", isExpanded);
-  };
+  if (typeof sidebar.dataset.toggleClass !== "undefined") {
+    console.log("zefzef");
 
-  const hideSidebar = () => {
-    setAriaExpanded("false");
-    sidebar.classList.add("-translate-x-full");
-    sidebarBackdrop.classList.add("hidden");
-    toggler.style.transform = "translateX(0px)";
-  };
+    const setAriaExpanded = (isExpanded: "true" | "false") => {
+      toggler.setAttribute("aria-expanded", isExpanded);
+      sidebarBackdrop.setAttribute("aria-expanded", isExpanded);
+    };
 
-  const showSidebar = () => {
-    setAriaExpanded("true");
-    sidebar.classList.remove("-translate-x-full");
-    sidebarBackdrop.classList.remove("hidden");
-    toggler.style.transform =
-      "translateX(" + sidebar.getBoundingClientRect().width + "px)";
-  };
-
-  toggler.addEventListener("click", () => {
-    if (sidebar.classList.contains("-translate-x-full")) {
-      showSidebar();
-    } else {
-      hideSidebar();
-    }
-  });
-
-  sidebarBackdrop.addEventListener("click", () => {
-    if (!sidebar.classList.contains("-translate-x-full")) {
-      hideSidebar();
-    }
-  });
-
-  const setAriaExpandedOnWindowEvent = () => {
-    const isExpanded =
-      !sidebar.classList.contains("-translate-x-full") ||
-      window.innerWidth >= 768;
-    const ariaExpanded = toggler.getAttribute("aria-expanded");
-    if (isExpanded && (!ariaExpanded || ariaExpanded === "false")) {
-      setAriaExpanded("true");
-    } else if (!isExpanded && (!ariaExpanded || ariaExpanded === "true")) {
+    const hideSidebar = () => {
       setAriaExpanded("false");
-    }
-  };
+      sidebar.classList.add(sidebar.dataset.toggleClass as string);
+      sidebarBackdrop.classList.add("hidden");
+      toggler.classList.add(toggler.dataset.toggleClass as string);
+    };
 
-  window.addEventListener("load", setAriaExpandedOnWindowEvent);
-  window.addEventListener("resize", setAriaExpandedOnWindowEvent);
+    const showSidebar = () => {
+      setAriaExpanded("true");
+      sidebar.classList.remove(sidebar.dataset.toggleClass as string);
+      sidebarBackdrop.classList.remove("hidden");
+      toggler.classList.remove(toggler.dataset.toggleClass as string);
+    };
+
+    toggler.addEventListener("click", () => {
+      if (sidebar.classList.contains(sidebar.dataset.hideClass as string)) {
+        showSidebar();
+      } else {
+        hideSidebar();
+      }
+    });
+
+    sidebarBackdrop.addEventListener("click", () => {
+      if (!sidebar.classList.contains(sidebar.dataset.hideClass as string)) {
+        hideSidebar();
+      }
+    });
+
+    const setAriaExpandedOnWindowEvent = () => {
+      const isExpanded =
+        !sidebar.classList.contains(sidebar.dataset.hideClass as string) ||
+        window.innerWidth >= 768;
+      const ariaExpanded = toggler.getAttribute("aria-expanded");
+      if (isExpanded && (!ariaExpanded || ariaExpanded === "false")) {
+        setAriaExpanded("true");
+      } else if (!isExpanded && (!ariaExpanded || ariaExpanded === "true")) {
+        setAriaExpanded("false");
+      }
+    };
+
+    window.addEventListener("load", setAriaExpandedOnWindowEvent);
+    window.addEventListener("resize", setAriaExpandedOnWindowEvent);
+  }
 };
 
 export default SidebarToggler;

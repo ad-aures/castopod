@@ -1,10 +1,8 @@
 /* eslint-disable */
 const defaultTheme = require("tailwindcss/defaultTheme");
-const colors = require("tailwindcss/colors");
 
 module.exports = {
-  mode: "jit",
-  purge: [
+  content: [
     "./app/Views/**/*.php",
     "./modules/**/Views/**/*.php",
     "./themes/**/*.php",
@@ -42,10 +40,6 @@ module.exports = {
           800: "#b21a39",
           900: "#8e162e",
         },
-        orange: colors.orange,
-      },
-      spacing: {
-        112: "28rem",
       },
       gridTemplateColumns: {
         admin: "300px calc(100% - 300px)",
@@ -67,7 +61,5 @@ module.exports = {
     require("@tailwindcss/forms"),
     require("@tailwindcss/typography"),
     require("@tailwindcss/line-clamp"),
-    require("@tailwindcss/aspect-ratio"),
-    require("tailwindcss-scroll-snap"),
   ],
 };

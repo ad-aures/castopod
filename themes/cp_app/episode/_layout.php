@@ -24,7 +24,7 @@
         ->asset('js/audio-player.ts', 'js') ?>
 </head>
 
-<body class="grid items-start mx-auto grid-cols-podcast bg-pine-50">
+<body class="flex flex-col min-h-screen mx-auto md:min-h-full md:grid md:grid-cols-podcast bg-pine-50">
     <?php if (can_user_interact()): ?>
         <div class="col-span-full">
             <?= $this->include('_admin_navbar') ?>
@@ -124,10 +124,11 @@
         <?php endif; ?>
     </div>
     <?= $this->include('episode/_partials/navigation') ?>
-    <div class="relative grid items-start col-start-2 pt-6 pb-4 grid-cols-podcastMain gap-x-6">
-        <main class="w-full col-span-full md:col-span-1">
+    <div class="relative grid items-start flex-1 col-start-2 grid-cols-podcastMain gap-x-6">
+        <main class="w-full col-start-1 row-start-1 py-6 col-span-full md:col-span-1">
             <?= $this->renderSection('content') ?>
         </main>
+        <div data-sidebar-toggler="backdrop" class="absolute top-0 left-0 z-10 hidden w-full h-full bg-pine-800/75 md:hidden" role="button" tabIndex="0" aria-label="Close"></div>
         <?= $this->include('podcast/_partials/sidebar') ?>
     </div>
     <?= view('_persons_modal', [

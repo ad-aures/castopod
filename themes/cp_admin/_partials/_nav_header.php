@@ -1,4 +1,7 @@
-<header class="sticky top-0 z-50 flex items-center justify-between h-10 text-white border-b col-span-full bg-pine-800 border-pine-900">
+<header class="sticky top-0 z-[60] flex items-center h-10 text-white border-b col-span-full bg-pine-800 border-pine-900">
+    <button type="button"
+        data-sidebar-toggler="toggler"
+        class="h-full pr-1 text-xl md:hidden focus:ring-castopod focus:ring-inset"><?= icon('menu') ?></button>
     <div class="inline-flex items-center h-full">
         <a href="<?= route_to(
     'admin',
@@ -14,7 +17,7 @@
     </div>
     <button
         type="button"
-        class="inline-flex items-center h-full px-3 text-sm font-semibold focus:ring-inset focus:ring-castopod gap-x-2"
+        class="inline-flex items-center h-full px-3 ml-auto text-sm font-semibold focus:ring-inset focus:ring-castopod gap-x-2"
         id="my-account-dropdown"
         data-dropdown="button"
         data-dropdown-target="my-account-dropdown-menu"

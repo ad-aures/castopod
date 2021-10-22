@@ -1,6 +1,6 @@
-<aside id="podcast-sidebar" class="sticky hidden col-span-1 md:block top-12">
-    <div class="absolute z-0 w-full h-full sm:hidden bg-pine-800/50"></div>
-    <div class="z-10 bg-pine-50">
+<div data-sidebar-toggler="backdrop" class="absolute top-0 left-0 z-10 hidden w-full h-full bg-pine-800/75 md:hidden" role="button" tabIndex="0" aria-label="Close"></div>
+<aside id="podcast-sidebar" data-sidebar-toggler="sidebar" data-toggle-class="hidden" data-hide-class="hidden" class="p-4 py-6 z-20 shadow-2xl md:shadow-none hidden h-full col-span-1 col-start-2 row-start-1 md:block bg-pine-50 w-[300px]">
+    <div class="sticky z-10 bg-pine-50 top-12">
         <a href="<?= route_to('podcast_feed', $podcast->handle) ?>" class="inline-flex items-center mb-6 text-sm font-semibold focus:ring-castopod text-pine-800 group" target="_blank" rel="noopener noreferrer">
             <?= icon('rss', ' mr-2 bg-orange-500 text-xl text-white group-hover:bg-orange-700 p-1 w-6 h-6 inline-flex items-center justify-center rounded-lg') . lang('Podcast.feed') ?>
         </a>
