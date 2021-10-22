@@ -132,7 +132,8 @@ export class PlayEpisodeButton extends LitElement {
 
   private _showPlayer(): void {
     this._castopodAudioPlayer.style.display = "";
-    document.body.style.paddingBottom = "52px";
+    document.body.classList.add("pb-[105px]");
+    document.body.classList.add("sm:pb-[52px]");
   }
 
   private _flushLastPlayButton(playingEpisodeButton: PlayEpisodeButton): void {

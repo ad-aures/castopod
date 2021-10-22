@@ -61,14 +61,14 @@
     title="<?= lang('PodcastImport.advanced_params_section_title') ?>"
     subtitle="<?= lang('PodcastImport.advanced_params_section_subtitle') ?>" >
 
-<fieldset class="flex flex-col mb-4">
-    <legend><?= lang('PodcastImport.slug_field') ?></legend>
+<fieldset class="flex flex-col mb-4 gap-y-2">
+    <legend class="mb-2"><?= lang('PodcastImport.slug_field') ?></legend>
     <Forms.Radio value="title" name="slug_field" isChecked="true">&lt;title&gt;</span></Forms.Radio>
     <Forms.Radio value="link" name="slug_field">&lt;link&gt;</span></Forms.Radio>
 </fieldset>
 
-<fieldset class="flex flex-col mb-4">
-    <legend><?= lang('PodcastImport.description_field') ?></legend>
+<fieldset class="flex flex-col mb-4 gap-y-2">
+    <legend class="mb-2"><?= lang('PodcastImport.description_field') ?></legend>
     <Forms.Radio value="description" name="description_field" isChecked="true">&lt;description&gt;</Forms.Radio>
     <Forms.Radio value="summary" name="description_field">&lt;itunes:summary&gt;</Forms.Radio>
     <Forms.Radio value="subtitle_summary" name="description_field">&lt;itunes:subtitle&gt; + &lt;itunes:summary&gt;</Forms.Radio>
