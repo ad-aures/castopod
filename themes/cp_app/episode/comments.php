@@ -37,14 +37,13 @@
 <?= $this->section('content') ?>
 
 <?php if (can_user_interact()): ?>
-    <form action="<?= route_to('comment-attempt-create', $podcast->id, $episode->id)  ?>" method="POST" class="flex p-4">
+    <?= view('_message_block') ?>
+    <form action="<?= route_to('comment-attempt-create', $podcast->id, $episode->id)  ?>" method="POST" class="flex p-4 gap-x-2">
         <?= csrf_field() ?>
-
-        <?= view('_message_block') ?>
 
         <img src="<?= interact_as_actor()
             ->avatar_image_url ?>" alt="<?= interact_as_actor()
-            ->display_name ?>" class="w-10 h-10 mr-2 rounded-full" />
+            ->display_name ?>" class="w-10 h-10 rounded-full" />
         <div class="flex flex-col flex-1 min-w-0 gap-y-2">
             <Forms.Textarea
                 name="message"

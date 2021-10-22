@@ -47,6 +47,8 @@ class EpisodeComment extends UuidEntity
      */
     protected ?array $replies = null;
 
+    protected bool $has_replies = false;
+
     /**
      * @var string[]
      */
@@ -113,6 +115,11 @@ class EpisodeComment extends UuidEntity
         }
 
         return $this->replies;
+    }
+
+    public function getHasReplies(): bool
+    {
+        return $this->getReplies() !== null;
     }
 
     public function getReplyToComment(): ?self

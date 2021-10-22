@@ -1,30 +1,30 @@
 <footer>
     <?php if (can_user_interact()): ?>
-        <form action="<?= route_to('post-attempt-action', interact_as_actor()->username, $reply->id) ?>" method="POST" class="flex items-start">
+        <form action="<?= route_to('post-attempt-action', interact_as_actor()->username, $reply->id) ?>" method="POST" class="flex items-start gap-x-6">
             <?= csrf_field() ?>
             <?= anchor(
     route_to('post', $podcast->handle, $reply->id),
-    icon('chat', 'text-xl mr-1 text-gray-400') . $reply->replies_count,
+    icon('chat', 'text-lg mr-1 text-gray-400') . $reply->replies_count,
     [
-        'class' => 'inline-flex items-center mr-6 hover:underline',
+        'class' => 'inline-flex items-center hover:underline text-sm',
         'title' => lang('Post.replies', [
             'numberOfReplies' => $reply->replies_count,
         ]),
     ],
 ) ?>
-            <button type="submit" name="action" value="reblog" class="inline-flex items-center mr-6 hover:underline" title="<?= lang(
+            <button type="submit" name="action" value="reblog" class="inline-flex items-center text-sm hover:underline" title="<?= lang(
     'Post.reblogs',
     [
         'numberOfReblogs' => $reply->reblogs_count,
     ],
-) ?>"><?= icon('repeat', 'text-xl mr-1 text-gray-400') .
+) ?>"><?= icon('repeat', 'text-lg mr-1 text-gray-400') .
             $reply->reblogs_count ?></button>
-                <button type="submit" name="action" value="favourite" class="inline-flex items-center mr-6 hover:underline" title="<?= lang(
+                <button type="submit" name="action" value="favourite" class="inline-flex items-center text-sm hover:underline" title="<?= lang(
                 'Post.favourites',
                 [
                     'numberOfFavourites' => $reply->favourites_count,
                 ],
-            ) ?>"><?= icon('heart', 'text-xl mr-1 text-gray-400') .
+            ) ?>"><?= icon('heart', 'text-lg mr-1 text-gray-400') .
             $reply->favourites_count ?></button>
                 <button id="<?= $reply->id .
                     '-more-dropdown' ?>" type="button" class="text-xl text-gray-500 focus:ring-castopod" data-dropdown="button" data-dropdown-target="<?= $reply->id .
@@ -88,9 +88,9 @@
     <?php else: ?>
         <?= anchor(
             route_to('post', $podcast->handle, $reply->id),
-            icon('chat', 'text-xl mr-1 text-gray-400') . $reply->replies_count,
+            icon('chat', 'text-lg mr-1 text-gray-400') . $reply->replies_count,
             [
-                'class' => 'inline-flex items-center hover:underline',
+                'class' => 'inline-flex items-center hover:underline text-sm',
                 'title' => lang('Post.replies', [
                     'numberOfReplies' => $reply->replies_count,
                 ]),
@@ -98,9 +98,9 @@
         ) ?>
         <?= anchor_popup(
             route_to('post-remote-action', $podcast->handle, $reply->id, 'reblog'),
-            icon('repeat', 'text-xl mr-1 text-gray-400') . $reply->reblogs_count,
+            icon('repeat', 'text-lg mr-1 text-gray-400') . $reply->reblogs_count,
             [
-                'class' => 'inline-flex items-center hover:underline',
+                'class' => 'inline-flex items-center hover:underline text-sm',
                 'width' => 420,
                 'height' => 620,
                 'title' => lang('Post.reblogs', [
@@ -110,9 +110,9 @@
         ) ?>
         <?= anchor_popup(
             route_to('post-remote-action', $podcast->handle, $reply->id, 'favourite'),
-            icon('heart', 'text-xl mr-1 text-gray-400') . $reply->favourites_count,
+            icon('heart', 'text-lg mr-1 text-gray-400') . $reply->favourites_count,
             [
-                'class' => 'inline-flex items-center hover:underline',
+                'class' => 'inline-flex items-center hover:underline text-sm',
                 'width' => 420,
                 'height' => 620,
                 'title' => lang('Post.favourites', [

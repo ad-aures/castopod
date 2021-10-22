@@ -1,3 +1,14 @@
+<?php declare(strict_types=1);
+
+if ($post->in_reply_to_id): ?>
+    <div class="relative -mb-2 overflow-hidden border-t border-l border-r rounded-t-xl">
+        <div class="absolute z-0 w-[2px] h-full bg-gray-300 left-[43px] top-4"></div>
+        <?= view('post/_partials/reply', [
+            'podcast' => $podcast,
+            'reply' => $post->reply_to_post,
+        ]) ?>
+    </div>
+<?php endif; ?>
 <?= view('post/_partials/card', [
     'index' => $index,
     'post' => $post,
@@ -6,10 +17,10 @@
 <div class="-mt-2 overflow-hidden border-b border-l border-r post-replies rounded-b-xl">
     <div class="px-6 pt-8 pb-4 bg-gray-50">
         <?php if (can_user_interact()): ?>
-            <form action="<?= route_to('post-attempt-action', interact_as_actor()->username, $post->id) ?>" method="POST" class="flex" >
+            <form action="<?= route_to('post-attempt-action', interact_as_actor()->username, $post->id) ?>" method="POST" class="flex gap-x-2" >
                 <img src="<?= interact_as_actor()
             ->avatar_image_url ?>" alt="<?= interact_as_actor()
-            ->display_name ?>" class="w-10 h-10 mr-2 rounded-full ring-gray-50 ring-2" />
+            ->display_name ?>" class="w-10 h-10 rounded-full ring-gray-50 ring-2" />
                 <div class="flex flex-col flex-1">
                     <Forms.Textarea
                         name="message"
@@ -39,11 +50,13 @@
     </div>
 
     <?php if ($post->has_replies): ?>
+        <div class="border-t divide-y">
         <?php foreach ($post->replies as $reply): ?>
             <?= view('post/_partials/reply', [
                 'podcast' => $podcast,
                 'reply' => $reply,
             ]) ?>
         <?php endforeach; ?>
+        </div>
     <?php endif; ?>
 </div>

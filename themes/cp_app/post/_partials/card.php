@@ -1,7 +1,7 @@
 <article class="relative z-10 w-full bg-white shadow sm:rounded-conditional-2xl">
-    <header class="flex px-6 py-4">
+    <header class="flex px-6 py-4 gap-x-2">
         <img src="<?= $post->actor
-    ->avatar_image_url ?>" alt="<?= $post->actor->display_name ?>" class="w-10 h-10 mr-2 rounded-full" />
+    ->avatar_image_url ?>" alt="<?= $post->actor->display_name ?>" class="w-10 h-10 rounded-full" />
         <div class="flex flex-col min-w-0">
             <a href="<?= $post->actor
     ->uri ?>" class="flex items-baseline hover:underline" <?= $post
