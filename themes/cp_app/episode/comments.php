@@ -55,12 +55,14 @@
     </form>
 <?php endif; ?>
 
-<?php foreach ($episode->comments as $comment): ?>
-    <?= view('episode/_partials/comment', [
+<div class="flex flex-col gap-y-2">
+    <?php foreach ($episode->comments as $comment): ?>
+        <?= view('episode/_partials/comment', [
     'comment' => $comment,
-        'podcast' => $podcast,
+            'podcast' => $podcast,
 ]) ?>
-<?php endforeach; ?>
+    <?php endforeach; ?>
+</div>
 
 <?= $this->endSection()
 ?>

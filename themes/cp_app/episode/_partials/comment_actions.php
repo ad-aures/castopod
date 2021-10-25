@@ -29,7 +29,7 @@
 ) ?>"><?= icon('heart', 'text-xl mr-1 text-gray-500') . $comment->likes_count ?></button>
         <?php if ($comment->replies_count): ?>
             <?= anchor(
-    route_to('episode-comment', $comment->episode->podcast->handle, $episode->slug, $comment->id),
+    route_to('episode-comment', $comment->episode->podcast->handle, $comment->episode->slug, $comment->id),
     icon('caret-down', 'text-xl mr-1') . lang('Comment.view_replies', [
         'numberOfReplies' => $comment->replies_count,
     ]),

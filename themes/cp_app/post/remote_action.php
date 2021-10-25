@@ -38,7 +38,11 @@
         ) ?></h1>
     </header>
     <main class="flex-1 max-w-xl px-4 pb-8 mx-auto -mt-24">
-        <?= $this->include('post/_partials/card') ?>
+        <?= view('post/_partials/card', [
+            'index' => 1,
+            'podcast' => $podcast,
+            'post' => $post,
+        ]) ?>
 
         <form action="<?= route_to('post-attempt-remote-action', $post->id, $action) ?>" method="POST" class="flex flex-col mt-8">
             <?= csrf_field() ?>

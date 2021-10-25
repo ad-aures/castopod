@@ -1,5 +1,7 @@
-<footer>
-    <?php if (can_user_interact()): ?>
+<?php declare(strict_types=1);
+
+if (can_user_interact()): ?>
+    <footer>
         <form action="<?= route_to('post-attempt-action', interact_as_actor()->username, $reply->id) ?>" method="POST" class="flex items-start gap-x-6">
             <?= csrf_field() ?>
             <?= anchor(
@@ -85,7 +87,9 @@
                 </form>
             <?php endif; ?>
         </nav>
-    <?php else: ?>
+    </footer>
+<?php else: ?>
+    <footer class="flex gap-x-6">
         <?= anchor(
             route_to('post', $podcast->handle, $reply->id),
             icon('chat', 'text-lg mr-1 text-gray-400') . $reply->replies_count,
@@ -120,5 +124,5 @@
                 ]),
             ],
         ) ?>
-    <?php endif; ?>
-</footer>
+    </footer>
+<?php endif; ?>
