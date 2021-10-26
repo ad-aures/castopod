@@ -40,6 +40,18 @@ class AuthSeeder extends Seeder
      * @var array<string, array<string, string|array>[]>
      */
     protected array $permissions = [
+        'settings' => [
+            [
+                'name' => 'view',
+                'description' => 'View settings options',
+                'has_permission' => ['superadmin'],
+            ],
+            [
+                'name' => 'manage',
+                'description' => 'Update general settings',
+                'has_permission' => ['superadmin'],
+            ],
+        ],
         'users' => [
             [
                 'name' => 'create',

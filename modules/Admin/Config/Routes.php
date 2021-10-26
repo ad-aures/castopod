@@ -18,6 +18,21 @@ $routes->group(
             'as' => 'admin',
         ]);
 
+        $routes->group('settings', function ($routes): void {
+            $routes->get('/', 'SettingsController', [
+                'as' => 'settings-general',
+                'filter' => 'permission:settings-manage',
+            ]);
+            $routes->post('instance', 'SettingsController::attemptInstanceEdit', [
+                'as' => 'settings-instance',
+                'filter' => 'permission:settings-manage',
+            ]);
+            $routes->get('instance-delete-icon', 'SettingsController::deleteIcon', [
+                'as' => 'settings-instance-delete-icon',
+                'filter' => 'permission:settings-manage',
+            ]);
+        });
+
         $routes->group('persons', function ($routes): void {
             $routes->get('/', 'PersonController', [
                 'as' => 'person-list',

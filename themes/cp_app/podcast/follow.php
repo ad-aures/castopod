@@ -7,8 +7,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
-    <?= service('vite')->asset('styles/index.css', 'css') ?>
+    <link rel="icon" type="image/x-icon" href="<?= service('settings')
+    ->get('App.siteIcon')['ico'] ?>" />
+    <link rel="apple-touch-icon" href="<?= service('settings')->get('App.siteIcon')['180'] ?>">
+    <link rel="manifest" href="<?= route_to('webmanifest') ?>">
     
     <title><?= lang('Podcast.followTitle', [
         'actorDisplayName' => $actor->display_name,

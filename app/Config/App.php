@@ -427,4 +427,24 @@ class App extends BaseConfig
      * Defines the root folder for media files storage
      */
     public string $mediaRoot = 'media';
+
+    /**
+     * --------------------------------------------------------------------------
+     * Instance / Site Config
+     * --------------------------------------------------------------------------
+     */
+    public string $siteName = 'Castopod';
+
+    public string $siteDescription = 'Castopod Host is an open-source hosting platform made for podcasters who want engage and interact with their audience.';
+
+    /**
+     * @var array<int|string, string>
+     */
+    public array $siteIcon = [
+        'ico' => '/favicon.ico',
+        '64' => '/icon-64.png',
+        '180' => '/icon-180.png',
+        '192' => '/icon-192.png',
+        '512' => '/icon-512.png',
+    ];
 }

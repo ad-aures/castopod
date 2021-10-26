@@ -9,7 +9,10 @@
 <meta name="description" content="<?= htmlspecialchars(
     $podcast->description,
 ) ?>" />
-<link rel="shortcut icon" type="image/png" href="/favicon.ico" />
+<link rel="icon" type="image/x-icon" href="<?= service('settings')
+    ->get('App.siteIcon')['ico'] ?>" />
+<link rel="apple-touch-icon" href="<?= service('settings')->get('App.siteIcon')['180'] ?>">
+<link rel="manifest" href="<?= route_to('webmanifest') ?>">
 <link rel="canonical" href="<?= current_url() ?>" />
 <meta property="og:title" content="<?= $podcast->title ?>" />
 <meta property="og:description" content="<?= $podcast->description ?>" />

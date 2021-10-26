@@ -22,6 +22,10 @@ $navigation = [
         'items' => ['page-list', 'page-create'],
 
     ],
+    'settings' => [
+        'icon' => 'settings',
+        'items' => ['settings-general'],
+    ],
 ]; ?>
 
 <nav class="flex flex-col flex-1 py-4 overflow-y-auto gap-y-4">

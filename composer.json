@@ -12,15 +12,17 @@
     "geoip2/geoip2": "^v2.11.0",
     "myth/auth": "dev-develop",
     "codeigniter4/codeigniter4": "dev-develop",
-    "league/commonmark": "^1.6.6",
+    "league/commonmark": "^v1.6.6",
     "vlucas/phpdotenv": "^v5.3.0",
-    "league/html-to-markdown": "^5.0.0",
+    "league/html-to-markdown": "^v5.0.1",
     "opawg/user-agents-php": "^v1.0",
     "podlibre/ipcat": "^v1.0",
     "podlibre/podcast-namespace": "^v1.0.6",
     "phpseclib/phpseclib": "~2.0.30",
     "michalsn/codeigniter4-uuid": "dev-develop",
-    "essence/essence": "^3.5.4"
+    "essence/essence": "^3.5.4",
+    "codeigniter4/settings": "dev-develop",
+    "chrisjean/php-ico": "^1.0"
   },
   "require-dev": {
     "mikey179/vfsstream": "^v1.6.8",

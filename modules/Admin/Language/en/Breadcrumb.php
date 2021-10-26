@@ -16,6 +16,7 @@ return [
     'episodes' => 'episodes',
     'contributors' => 'contributors',
     'pages' => 'pages',
+    'settings' => 'settings',
     'add' => 'add',
     'new' => 'new',
     'edit' => 'edit',

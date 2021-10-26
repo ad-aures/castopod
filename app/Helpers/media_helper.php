@@ -29,6 +29,9 @@ if (! function_exists('save_media')) {
 
         if (! file_exists($mediaRoot)) {
             mkdir($mediaRoot, 0777, true);
+        }
+
+        if (! file_exists($mediaRoot . '/index.html')) {
             touch($mediaRoot . '/index.html');
         }
 

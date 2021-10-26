@@ -48,9 +48,13 @@ $routes->addPlaceholder(
  * --------------------------------------------------------------------
  */
 
+$routes->get('manifest.webmanifest', 'WebmanifestController', [
+    'as' => 'webmanifest',
+]);
+
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'HomeController::index', [
+$routes->get('/', 'HomeController', [
     'as' => 'home',
 ]);
 

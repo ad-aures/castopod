@@ -29,6 +29,8 @@ return [
     'pages' => 'Pages',
     'page-list' => 'All pages',
     'page-create' => 'New Page',
+    'settings' => 'Settings',
+    'settings-general' => 'General',
     'account' => [
         'my-account' => 'My account',
         'change-password' => 'Change password',

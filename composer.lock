@@ -4,7 +4,7 @@
     "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
     "This file is @generated automatically"
   ],
-  "content-hash": "af4a438816f7adbbd6950d93ed333e9f",
+  "content-hash": "f35a050323bdc632cd550f9d13f0679c",
   "packages": [
     {
       "name": "brick/math",
@@ -59,6 +59,46 @@
         }
       ],
       "time": "2021-01-20T22:51:39+00:00"
+    },
+    {
+      "name": "chrisjean/php-ico",
+      "version": "1.0.4",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/chrisbliss18/php-ico.git",
+        "reference": "ccd5c0d56554f3ddcd7a823e695be83e0d1e43b6"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/chrisbliss18/php-ico/zipball/ccd5c0d56554f3ddcd7a823e695be83e0d1e43b6",
+        "reference": "ccd5c0d56554f3ddcd7a823e695be83e0d1e43b6",
+        "shasum": ""
+      },
+      "require": {
+        "ext-gd": "*",
+        "php": ">=5.2.4"
+      },
+      "type": "library",
+      "autoload": {
+        "classmap": ["class-php-ico.php"]
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": ["GPL-2.0+"],
+      "authors": [
+        {
+          "name": "Chris Jean",
+          "homepage": "https://chrisjean.com",
+          "role": "Developer"
+        }
+      ],
+      "description": "An easy-to-use library to generate valid ICO files.",
+      "homepage": "https://github.com/chrisbliss18/php-ico",
+      "keywords": ["favicon", "ico"],
+      "support": {
+        "issues": "https://github.com/chrisbliss18/php-ico/issues",
+        "source": "https://github.com/chrisbliss18/php-ico"
+      },
+      "time": "2016-09-27T22:00:56+00:00"
     },
     {
       "name": "codeigniter4/codeigniter4",
@@ -136,6 +176,59 @@
         "issues": "https://github.com/codeigniter4/CodeIgniter4/issues"
       },
       "time": "2021-06-10T06:40:05+00:00"
+    },
+    {
+      "name": "codeigniter4/settings",
+      "version": "dev-develop",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/codeigniter4/settings.git",
+        "reference": "5d758e5e0a3f9dda9f66303d82ccfbb82e979577"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/codeigniter4/settings/zipball/5d758e5e0a3f9dda9f66303d82ccfbb82e979577",
+        "reference": "5d758e5e0a3f9dda9f66303d82ccfbb82e979577",
+        "shasum": ""
+      },
+      "require": {
+        "php": "^7.3 || ^8.0"
+      },
+      "require-dev": {
+        "codeigniter4/codeigniter4": "dev-develop",
+        "fakerphp/faker": "^1.9",
+        "mockery/mockery": "^1.0",
+        "nexusphp/tachycardia": "^1.0",
+        "php-coveralls/php-coveralls": "^2.4",
+        "phpstan/phpstan": "^0.12",
+        "phpunit/phpunit": "^9.0",
+        "squizlabs/php_codesniffer": "^3.3"
+      },
+      "default-branch": true,
+      "type": "library",
+      "autoload": {
+        "psr-4": {
+          "Sparks\\Settings\\": "src"
+        },
+        "exclude-from-classmap": ["**/Database/Migrations/**"]
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": ["MIT"],
+      "authors": [
+        {
+          "name": "Lonnie Ezell",
+          "email": "lonnieje@gmail.com",
+          "role": "Developer"
+        }
+      ],
+      "description": "Settings library for CodeIgniter 4",
+      "homepage": "https://github.com/codeigniter4/settings",
+      "keywords": ["Settings", "codeigniter", "codeigniter4"],
+      "support": {
+        "issues": "https://github.com/codeigniter4/settings/issues",
+        "source": "https://github.com/codeigniter4/settings/tree/develop"
+      },
+      "time": "2021-08-16T05:07:59+00:00"
     },
     {
       "name": "composer/ca-bundle",
@@ -494,16 +587,16 @@
     },
     {
       "name": "james-heinrich/getid3",
-      "version": "2.0.x-dev",
+      "version": "v2.0.0-beta4",
       "source": {
         "type": "git",
         "url": "https://github.com/JamesHeinrich/getID3.git",
-        "reference": "ee238d552571c6029898b087d5fc95df826418d6"
+        "reference": "5ad79104e937e7d9c8a9141a97e1f063dd1123f8"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/JamesHeinrich/getID3/zipball/ee238d552571c6029898b087d5fc95df826418d6",
-        "reference": "ee238d552571c6029898b087d5fc95df826418d6",
+        "url": "https://api.github.com/repos/JamesHeinrich/getID3/zipball/5ad79104e937e7d9c8a9141a97e1f063dd1123f8",
+        "reference": "5ad79104e937e7d9c8a9141a97e1f063dd1123f8",
         "shasum": ""
       },
       "require": {
@@ -562,9 +655,9 @@
       "keywords": ["audio", "codecs", "id3", "metadata", "tags", "video"],
       "support": {
         "issues": "https://github.com/JamesHeinrich/getID3/issues",
-        "source": "https://github.com/JamesHeinrich/getID3/tree/2.0"
+        "source": "https://github.com/JamesHeinrich/getID3/tree/v2.0.0-beta4"
       },
-      "time": "2021-12-15T17:29:14+00:00"
+      "time": "2021-10-06T16:23:45+00:00"
     },
     {
       "name": "kint-php/kint",
@@ -745,16 +838,16 @@
     },
     {
       "name": "league/commonmark",
-      "version": "1.6.2",
+      "version": "1.6.6",
       "source": {
         "type": "git",
         "url": "https://github.com/thephpleague/commonmark.git",
-        "reference": "7d70d2f19c84bcc16275ea47edabee24747352eb"
+        "reference": "c4228d11e30d7493c6836d20872f9582d8ba6dcf"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/7d70d2f19c84bcc16275ea47edabee24747352eb",
-        "reference": "7d70d2f19c84bcc16275ea47edabee24747352eb",
+        "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/c4228d11e30d7493c6836d20872f9582d8ba6dcf",
+        "reference": "c4228d11e30d7493c6836d20872f9582d8ba6dcf",
         "shasum": ""
       },
       "require": {
@@ -772,7 +865,7 @@
         "github/gfm": "0.29.0",
         "michelf/php-markdown": "~1.4",
         "mikehaertl/php-shellcommand": "^1.4",
-        "phpstan/phpstan": "^0.12",
+        "phpstan/phpstan": "^0.12.90",
         "phpunit/phpunit": "^7.5 || ^8.5 || ^9.2",
         "scrutinizer/ocular": "^1.5",
         "symfony/finder": "^4.2"
@@ -838,37 +931,40 @@
           "type": "tidelift"
         }
       ],
-      "time": "2021-05-12T11:39:41+00:00"
+      "time": "2021-07-17T17:13:23+00:00"
     },
     {
       "name": "league/html-to-markdown",
-      "version": "4.10.0",
+      "version": "5.0.1",
       "source": {
         "type": "git",
         "url": "https://github.com/thephpleague/html-to-markdown.git",
-        "reference": "0868ae7a552e809e5cd8f93ba022071640408e88"
+        "reference": "e5600a2c5ce7b7571b16732c7086940f56f7abec"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/thephpleague/html-to-markdown/zipball/0868ae7a552e809e5cd8f93ba022071640408e88",
-        "reference": "0868ae7a552e809e5cd8f93ba022071640408e88",
+        "url": "https://api.github.com/repos/thephpleague/html-to-markdown/zipball/e5600a2c5ce7b7571b16732c7086940f56f7abec",
+        "reference": "e5600a2c5ce7b7571b16732c7086940f56f7abec",
         "shasum": ""
       },
       "require": {
         "ext-dom": "*",
         "ext-xml": "*",
-        "php": ">=5.3.3"
+        "php": "^7.2.5 || ^8.0"
       },
       "require-dev": {
-        "mikehaertl/php-shellcommand": "~1.1.0",
-        "phpunit/phpunit": "^4.8|^5.7",
-        "scrutinizer/ocular": "~1.1"
+        "mikehaertl/php-shellcommand": "^1.1.0",
+        "phpstan/phpstan": "^0.12.82",
+        "phpunit/phpunit": "^8.5 || ^9.2",
+        "scrutinizer/ocular": "^1.6",
+        "unleashedtech/php-coding-standard": "^2.7",
+        "vimeo/psalm": "^4.6"
       },
       "bin": ["bin/html-to-markdown"],
       "type": "library",
       "extra": {
         "branch-alias": {
-          "dev-master": "4.10-dev"
+          "dev-master": "5.1-dev"
         }
       },
       "autoload": {
@@ -897,7 +993,7 @@
       "keywords": ["html", "markdown"],
       "support": {
         "issues": "https://github.com/thephpleague/html-to-markdown/issues",
-        "source": "https://github.com/thephpleague/html-to-markdown/tree/4.10.0"
+        "source": "https://github.com/thephpleague/html-to-markdown/tree/5.0.1"
       },
       "funding": [
         {
@@ -913,11 +1009,11 @@
           "type": "github"
         },
         {
-          "url": "https://www.patreon.com/colinodell",
-          "type": "patreon"
+          "url": "https://tidelift.com/funding/github/packagist/league/html-to-markdown",
+          "type": "tidelift"
         }
       ],
-      "time": "2020-07-01T00:34:03+00:00"
+      "time": "2021-09-17T20:00:27+00:00"
     },
     {
       "name": "maxmind-db/reader",
@@ -7457,7 +7553,8 @@
     "james-heinrich/getid3": 20,
     "myth/auth": 20,
     "codeigniter4/codeigniter4": 20,
-    "michalsn/codeigniter4-uuid": 20
+    "michalsn/codeigniter4-uuid": 20,
+    "codeigniter4/settings": 20
   },
   "prefer-stable": true,
   "prefer-lowest": false,
@@ -7465,5 +7562,5 @@
     "php": "^8.0"
   },
   "platform-dev": [],
-  "plugin-api-version": "2.0.0"
+  "plugin-api-version": "2.1.0"
 }

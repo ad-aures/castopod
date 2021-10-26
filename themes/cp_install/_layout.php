@@ -6,7 +6,10 @@
     <title>Castopod</title>
     <meta name="description" content="Castopod is an open-source hosting platform made for podcasters who want engage and interact with their audience."/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="<?= service('settings')
+    ->get('App.siteIcon')['ico'] ?>" />
+    <link rel="apple-touch-icon" href="<?= service('settings')->get('App.siteIcon')['180'] ?>">
+    <link rel="manifest" href="<?= route_to('webmanifest') ?>">
     <?= service('vite')
         ->asset('styles/index.css', 'css') ?>
     <?= service('vite')

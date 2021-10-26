@@ -243,6 +243,8 @@ class InstallController extends Controller
     {
         $migrations = Services::migrations();
 
+        $migrations->setNamespace('Sparks\Settings')
+            ->latest();
         $migrations->setNamespace('Myth\Auth')
             ->latest();
         $migrations->setNamespace('Modules\Fediverse')

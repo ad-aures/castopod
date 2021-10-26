@@ -8,7 +8,10 @@
     <meta name="description" content="<?= htmlspecialchars(
         $episode->description,
     ) ?>" />
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="<?= service('settings')
+    ->get('App.siteIcon')['ico'] ?>" />
+    <link rel="apple-touch-icon" href="<?= service('settings')->get('App.siteIcon')['180'] ?>">
+    <link rel="manifest" href="<?= route_to('webmanifest') ?>">
     <link rel="canonical" href="<?= $episode->link ?>" />
     <?= service('vite')
         ->asset('styles/index.css', 'css') ?>

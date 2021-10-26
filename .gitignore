@@ -137,9 +137,11 @@ node_modules
 
 # public folder
 public/*
+public/media/site
 !public/media
 !public/.htaccess
 !public/favicon.ico
+!public/icon*
 !public/index.php
 !public/robots.txt
 

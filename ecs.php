@@ -17,7 +17,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         __DIR__ . '/themes',
         __DIR__ . '/tests',
         __DIR__ . '/public',
-        __DIR__ . '/public',
     ]);
 
     $parameters->set(Option::SKIP, [
