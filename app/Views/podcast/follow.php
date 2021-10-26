@@ -7,7 +7,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
-    <link rel="stylesheet" href="/assets/index.css" />
+    <?= service('vite')->asset('styles/index.css', 'css') ?>
 
     <title><?= lang('Podcast.follow.title', [
         'actorDisplayName' => $actor->display_name,

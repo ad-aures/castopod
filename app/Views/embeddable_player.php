@@ -8,7 +8,7 @@
         $episode->description,
     ) ?>" />
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="stylesheet" href="/assets/index.css" />
+    <?= service('vite')->asset('styles/index.css', 'css') ?>
     <link rel="canonical" href="<?= $episode->link ?>" />
 </head>
 

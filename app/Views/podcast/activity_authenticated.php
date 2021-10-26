@@ -8,7 +8,6 @@
     $podcast->description,
 ) ?>" />
 <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
-<link rel="stylesheet" href="/assets/index.css"/>
 <link rel="canonical" href="<?= current_url() ?>" />
 <meta property="og:title" content="<?= $podcast->title ?>" />
 <meta property="og:description" content="<?= $podcast->description ?>" />

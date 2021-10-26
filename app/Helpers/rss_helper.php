@@ -259,7 +259,9 @@ if (! function_exists('get_rss_feed')) {
                 $transcriptElement->addAttribute('url', $episode->transcript_file_url);
                 $transcriptElement->addAttribute(
                     'type',
-                    Mimes::guessTypeFromExtension(pathinfo($episode->transcript_file_url, PATHINFO_EXTENSION)),
+                    Mimes::guessTypeFromExtension(
+                        pathinfo($episode->transcript_file_url, PATHINFO_EXTENSION)
+                    ) ?? 'text/html',
                 );
                 $transcriptElement->addAttribute('language', $podcast->language_code);
             }
