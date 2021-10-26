@@ -1,3 +1,13 @@
+# [1.0.0-alpha.76](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.75...v1.0.0-alpha.76) (2021-10-26)
+
+### Bug Fixes
+
+- replace hardcoded style links with vite service + set default value for remote
+  transcript url
+  ([3f2e056](https://code.podlibre.org/podlibre/castopod-host/commit/3f2e05608e43d47bbb518a9acfaf56ec3eefafb4)),
+  closes [#149](https://code.podlibre.org/podlibre/castopod-host/issues/149)
+  [#150](https://code.podlibre.org/podlibre/castopod-host/issues/150)
+
 # [1.0.0-alpha.75](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.74...v1.0.0-alpha.75) (2021-10-05)
 
 ### Bug Fixes
