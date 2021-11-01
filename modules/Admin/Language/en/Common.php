@@ -38,8 +38,6 @@ return [
             'noChoicesText' => 'No choices to choose from',
             'maxItemText' => 'Cannot add more items',
         ],
-        'image_size_hint' =>
-            'Image must be squared with at least 1400px wide and tall.',
         'upload_file' => 'Upload a file',
         'remote_url' => 'Remote URL',
     ],

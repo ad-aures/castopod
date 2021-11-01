@@ -26,7 +26,11 @@ return [
         'identity_section_title' => 'Informations sur le Podcast',
         'identity_section_subtitle' =>
             'Ces champs vous permettent de vous faire remarquer.',
-        'image' => 'Image de couverture',
+        'cover' => 'Couverture du podcast',
+        'cover_size_hint' => 'La couverture du podcast doit être carrée, avec au minimum 1400px de largeur et de hauteur.',
+        'banner' => 'Bannière du podcast',
+        'banner_size_hint' => 'La bannière doit être au format 3/1, avec au minimum 1500px de largeur.',
+        'banner_delete' => 'Supprimer la bannière du podcast',
         'title' => 'Titre',
         'handle' => 'Identifiant',
         'handle_hint' =>

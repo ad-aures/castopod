@@ -10,7 +10,7 @@ class Input extends FormComponent
 
     public function render(): string
     {
-        $baseClass = 'bg-white border-black rounded-lg focus:border-black border-3 focus:ring-castopod focus-within:ring-castopod ' . $this->class;
+        $baseClass = 'w-full bg-white border-black rounded-lg focus:border-black border-3 focus:ring-castopod focus-within:ring-castopod ' . $this->class;
 
         $this->attributes['class'] = $baseClass;
 

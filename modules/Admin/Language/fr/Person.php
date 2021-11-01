@@ -17,8 +17,8 @@ return [
     'edit' => 'Modifier l’intervenant',
     'delete' => 'Supprimer l’intervenant',
     'form' => [
-        'image' => 'Photo',
-        'image_size_hint' =>
+        'avatar' => 'Avatar',
+        'avatar_size_hint' =>
             'L’image doit être carrée et avoir au moins 400px de largeur et de hauteur.',
         'full_name' => 'Nom complet',
         'full_name_hint' => 'Le nom complet ou le pseudonyme de l’intervenant',

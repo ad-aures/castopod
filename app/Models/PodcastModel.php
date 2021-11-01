@@ -10,7 +10,6 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Entities\Actor;
 use App\Entities\Podcast;
 use CodeIgniter\Database\Query;
 use CodeIgniter\HTTP\URI;
@@ -41,8 +40,10 @@ class PodcastModel extends Model
         'description_html',
         'episode_description_footer_markdown',
         'episode_description_footer_html',
-        'image_path',
-        'image_mimetype',
+        'cover_path',
+        'cover_mimetype',
+        'banner_path',
+        'banner_mimetype',
         'language_code',
         'category_id',
         'parental_advisory',
@@ -91,7 +92,7 @@ class PodcastModel extends Model
         'handle' =>
             'required|regex_match[/^[a-zA-Z0-9\_]{1,32}$/]|is_unique[podcasts.handle,id,{id}]',
         'description_markdown' => 'required',
-        'image_path' => 'required',
+        'cover_path' => 'required',
         'language_code' => 'required',
         'category_id' => 'required',
         'owner_email' => 'required|valid_email',
@@ -454,13 +455,16 @@ class PodcastModel extends Model
     {
         $podcast = (new self())->getPodcastById(is_array($data['id']) ? $data['id'][0] : $data['id']);
 
-        $podcastActor = (new ActorModel())->find($podcast->actor_id);
+        if ($podcast !== null) {
+            $podcastActor = (new ActorModel())->find($podcast->actor_id);
 
-        $podcastActor->avatar_image_url = $podcast->image->thumbnail_url;
-        $podcastActor->avatar_image_mimetype = $podcast->image_mimetype;
+            if ($podcastActor) {
+                $podcastActor->avatar_image_url = $podcast->cover->thumbnail_url;
+                $podcastActor->avatar_image_mimetype = $podcast->cover_mimetype;
 
-        (new ActorModel())->update($podcast->actor_id, $podcastActor);
-
+                (new ActorModel())->update($podcast->actor_id, $podcastActor);
+            }
+        }
         return $data;
     }
 
@@ -477,14 +481,18 @@ class PodcastModel extends Model
             $actorModel = new ActorModel();
             $actor = $actorModel->getActorById($podcast->actor_id);
 
-            // update values
-            $actor->display_name = $podcast->title;
-            $actor->summary = $podcast->description_html;
-            $actor->avatar_image_url = $podcast->image->thumbnail_url;
-            $actor->avatar_image_mimetype = $podcast->image_mimetype;
+            if ($actor !== null) {
+                // update values
+                $actor->display_name = $podcast->title;
+                $actor->summary = $podcast->description_html;
+                $actor->avatar_image_url = $podcast->cover->thumbnail_url;
+                $actor->avatar_image_mimetype = $podcast->cover->mimetype;
+                $actor->cover_image_url = $podcast->banner->large_url;
+                $actor->cover_image_mimetype = $podcast->banner->mimetype;
 
-            if ($actor->hasChanged()) {
-                $actorModel->update($actor->id, $actor);
+                if ($actor->hasChanged()) {
+                    $actorModel->update($actor->id, $actor);
+                }
             }
         }
 

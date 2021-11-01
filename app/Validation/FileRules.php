@@ -57,9 +57,9 @@ class FileRules extends ValidationFileRules
     //--------------------------------------------------------------------
 
     /**
-     * Checks an uploaded file to verify that the image ratio is of 1:1
+     * Checks an uploaded image to verify that the ratio corresponds to the params
      */
-    public function is_image_squared(string $blank = null, string $params): bool
+    public function is_image_ratio(string $blank = null, string $params): bool
     {
         // Grab the file name off the top of the $params
         // after we split it.
@@ -79,12 +79,14 @@ class FileRules extends ValidationFileRules
                 return true;
             }
 
-            // Get uploaded image size
-            $info = getimagesize($file->getTempName());
-            $fileWidth = $info[0];
-            $fileHeight = $info[1];
+            // Get Parameter sizes
+            $x = $params[0] ?? 1;
+            $y = $params[1] ?? 1;
 
-            if ($fileWidth !== $fileHeight) {
+            // Get uploaded image size
+            [0 => $fileWidth, 1 => $fileHeight] = getimagesize($file->getTempName());
+
+            if (($x / $y) !== ($fileWidth / $fileHeight)) {
                 return false;
             }
         }

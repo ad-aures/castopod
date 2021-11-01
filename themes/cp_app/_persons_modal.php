@@ -17,7 +17,7 @@
         <div class="flex flex-col items-start p-4 gap-y-4">
             <?php foreach ($persons as $person): ?>
                 <div class="flex gap-x-2">
-                    <img src="<?= $person->image->thumbnail_url ?>" alt="<?= $person->full_name ?>" class="object-cover w-10 h-10 rounded-full" />
+                    <img src="<?= $person->avatar->thumbnail_url ?>" alt="<?= $person->full_name ?>" class="object-cover w-10 h-10 rounded-full" />
                     <div class="flex flex-col">
                         <h4 class="text-sm font-semibold">
                             <?php if ($person->information_url): ?>

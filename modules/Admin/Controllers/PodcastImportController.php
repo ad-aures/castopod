@@ -115,9 +115,9 @@ class PodcastImportController extends BaseController
                 property_exists($nsItunes, 'image') && $nsItunes->image !== null &&
                 $nsItunes->image->attributes()['href'] !== null
             ) {
-                $imageFile = download_file((string) $nsItunes->image->attributes()['href']);
+                $coverFile = download_file((string) $nsItunes->image->attributes()['href']);
             } else {
-                $imageFile = download_file((string) $feed->channel[0]->image->url);
+                $coverFile = download_file((string) $feed->channel[0]->image->url);
             }
 
             $location = null;
@@ -140,7 +140,8 @@ class PodcastImportController extends BaseController
                 'title' => (string) $feed->channel[0]->title,
                 'description_markdown' => $converter->convert($channelDescriptionHtml),
                 'description_html' => $channelDescriptionHtml,
-                'image' => new Image($imageFile),
+                'cover' => new Image($coverFile),
+                'banner' => null,
                 'language_code' => $this->request->getPost('language'),
                 'category_id' => $this->request->getPost('category'),
                 'parental_advisory' =>
@@ -249,7 +250,7 @@ class PodcastImportController extends BaseController
                     'full_name' => $fullName,
                     'unique_name' => slugify($fullName),
                     'information_url' => $podcastPerson->attributes()['href'],
-                    'image' => new Image(download_file((string) $podcastPerson->attributes()['img'])),
+                    'avatar' => new Image(download_file((string) $podcastPerson->attributes()['img'])),
                     'created_by' => user_id(),
                     'updated_by' => user_id(),
                 ]);
@@ -326,9 +327,9 @@ class PodcastImportController extends BaseController
                 property_exists($nsItunes, 'image') && $nsItunes->image !== null &&
                 $nsItunes->image->attributes()['href'] !== null
             ) {
-                $episodeImage = new Image(download_file((string) $nsItunes->image->attributes()['href']));
+                $episodeCover = new Image(download_file((string) $nsItunes->image->attributes()['href']));
             } else {
-                $episodeImage = null;
+                $episodeCover = null;
             }
 
             $location = null;
@@ -351,7 +352,7 @@ class PodcastImportController extends BaseController
                 ),
                 'description_markdown' => $converter->convert($itemDescriptionHtml),
                 'description_html' => $itemDescriptionHtml,
-                'image' => $episodeImage,
+                'cover' => $episodeCover,
                 'parental_advisory' =>
                 property_exists($nsItunes, 'explicit') && $nsItunes->explicit !== null
                     ? (in_array((string) $nsItunes->explicit, ['yes', 'true'], true)
@@ -402,7 +403,7 @@ class PodcastImportController extends BaseController
                         'full_name' => $fullName,
                         'unique_name' => slugify($fullName),
                         'information_url' => $episodePerson->attributes()['href'],
-                        'image' => new Image(download_file((string) $episodePerson->attributes()['img'])),
+                        'avatar' => new Image(download_file((string) $episodePerson->attributes()['img'])),
                         'created_by' => user_id(),
                         'updated_by' => user_id(),
                     ]);

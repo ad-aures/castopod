@@ -40,7 +40,7 @@
         ]) ?>">
             <?= icon('arrow-left', 'mr-2 text-lg') ?>
             <div class="inline-flex items-center gap-x-2">
-                <img class="w-8 h-8 rounded-full" src="<?= $episode->podcast->image->thumbnail_url ?>" alt="<?= $episode->podcast->title ?>" />
+                <img class="w-8 h-8 rounded-full" src="<?= $episode->podcast->cover->tiny_url ?>" alt="<?= $episode->podcast->title ?>" />
                 <div class="flex flex-col">
                     <span class="text-sm font-semibold leading-none"><?= $episode->podcast->title ?></span>
                     <span class="text-xs"><?= lang('Podcast.followers', [
@@ -69,10 +69,10 @@
         </div>
     </nav>
     <header class="relative z-50 flex flex-col col-start-2 px-8 pt-8 pb-4 overflow-hidden bg-pine-500 gap-y-4">
-        <div class="absolute top-0 left-0 w-full h-full bg-center bg-no-repeat bg-cover blur-lg mix-blend-luminosity" style="background-image: url('<?= $episode->podcast->image->thumbnail_url ?>');"></div>
+        <div class="absolute top-0 left-0 w-full h-full bg-center bg-no-repeat bg-cover blur-lg mix-blend-soft-light" style="background-image: url('<?= $episode->podcast->banner->small_url ?>');"></div>
         <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-pine-800 to-transparent"></div>
         <div class="z-10 flex flex-col items-start gap-y-2 gap-x-4 sm:flex-row">
-            <img src="<?= $episode->image->medium_url ?>" alt="<?= $episode->title ?>" loading="lazy" class="rounded-md h-36" />
+            <img src="<?= $episode->cover->medium_url ?>" alt="<?= $episode->title ?>" loading="lazy" class="rounded-md h-36" />
             <div class="flex flex-col items-start text-white">
                 <?= episode_numbering($episode->number, $episode->season_number, 'bg-pine-50 text-sm leading-none font-semibold text-gray-700 border !no-underline border-pine-100', true) ?>
                 <h1 class="inline-flex items-baseline max-w-md mt-2 text-2xl font-bold leading-none sm:text-3xl font-display line-clamp-2"><?= $episode->title ?></h1>
@@ -82,7 +82,7 @@
                         <div class="inline-flex flex-row-reverse">
                             <?php $i = 0; ?>
                             <?php foreach ($episode->persons as $person): ?>
-                                <img src="<?= $person->image->thumbnail_url ?>" alt="<?= $person->full_name ?>" class="object-cover w-8 h-8 -ml-5 border-2 rounded-full border-pine-100 last:ml-0" />
+                                <img src="<?= $person->avatar->thumbnail_url ?>" alt="<?= $person->full_name ?>" class="object-cover w-8 h-8 -ml-5 border-2 rounded-full border-pine-100 last:ml-0" />
                                 <?php $i++; if ($i === 3) {
                         break;
                     }?>
@@ -102,7 +102,7 @@
         <div class="z-10 inline-flex items-center text-white gap-x-4">
             <play-episode-button
                 id="<?= $episode->id ?>"
-                imageSrc="<?= $episode->image->thumbnail_url ?>"
+                imageSrc="<?= $episode->cover->thumbnail_url ?>"
                 title="<?= $episode->title ?>"
                 podcast="<?= $episode->podcast->title ?>"
                 src="<?= $episode->audio_file_web_url ?>"

@@ -17,7 +17,7 @@ class Textarea extends FormComponent
     {
         unset($this->attributes['value']);
 
-        $this->attributes['class'] = 'focus:border-black focus:ring-castopod rounded-lg border-3 border-black ' . $this->class;
+        $this->attributes['class'] = 'w-full focus:border-black focus:ring-castopod rounded-lg border-3 border-black ' . $this->class;
 
         $textarea = form_textarea(
             $this->attributes,

@@ -200,11 +200,11 @@ class EpisodeController extends BaseController
                 '" width="100%" height="144" frameborder="0" scrolling="no"></iframe>',
             'width' => 600,
             'height' => 144,
-            'thumbnail_url' => $this->episode->image->large_url,
+            'thumbnail_url' => $this->episode->cover->large_url,
             'thumbnail_width' => config('Images')
-                ->largeSize,
+                ->podcastCoverSizes['large'][0],
             'thumbnail_height' => config('Images')
-                ->largeSize,
+                ->podcastCoverSizes['large'][1],
         ]);
     }
 
@@ -219,9 +219,9 @@ class EpisodeController extends BaseController
         $oembed->addChild('provider_url', $this->podcast->link);
         $oembed->addChild('author_name', $this->podcast->title);
         $oembed->addChild('author_url', $this->podcast->link);
-        $oembed->addChild('thumbnail', $this->episode->image->large_url);
-        $oembed->addChild('thumbnail_width', config('Images')->largeSize);
-        $oembed->addChild('thumbnail_height', config('Images')->largeSize);
+        $oembed->addChild('thumbnail', $this->episode->cover->large_url);
+        $oembed->addChild('thumbnail_width', config('Images')->podcastCoverSizes['large'][0]);
+        $oembed->addChild('thumbnail_height', config('Images')->podcastCoverSizes['large'][1]);
         $oembed->addChild(
             'html',
             htmlentities(

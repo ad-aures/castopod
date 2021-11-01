@@ -48,7 +48,7 @@ class CreditsController extends BaseController
                             $personId => [
                                 'full_name' => $credit->person->full_name,
                                 'thumbnail_url' =>
-                                    $credit->person->image->thumbnail_url,
+                                    $credit->person->avatar->thumbnail_url,
                                 'information_url' =>
                                     $credit->person->information_url,
                                 'roles' => [
@@ -87,7 +87,7 @@ class CreditsController extends BaseController
                     $credits[$personGroup]['persons'][$personId] = [
                         'full_name' => $credit->person->full_name,
                         'thumbnail_url' =>
-                            $credit->person->image->thumbnail_url,
+                            $credit->person->avatar->thumbnail_url,
                         'information_url' => $credit->person->information_url,
                         'roles' => [
                             $personRole => [

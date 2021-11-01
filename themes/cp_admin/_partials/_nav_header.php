@@ -36,7 +36,7 @@
 
             $interactButtons .= <<<CODE_SAMPLE
                 <button class="inline-flex items-center w-full px-4 py-1 hover:bg-gray-100" id="interact-as-actor-{$userPodcast->id}" name="actor_id" value="{$userPodcast->actor_id}">
-                    <span class="inline-flex items-center flex-1 text-sm"><img src="{$userPodcast->image->thumbnail_url}" class="w-6 h-6 mr-2 rounded-full" />{$userPodcast->title}{$checkMark}</span>
+                    <span class="inline-flex items-center flex-1 text-sm"><img src="{$userPodcast->cover->tiny_url}" class="w-6 h-6 mr-2 rounded-full" />{$userPodcast->title}{$checkMark}</span>
                 </button>
             CODE_SAMPLE;
         }

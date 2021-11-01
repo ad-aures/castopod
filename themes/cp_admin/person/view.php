@@ -18,7 +18,7 @@
 <div class="flex flex-wrap">
     <div class="w-full max-w-sm mb-6 md:mr-4">
         <img
-            src="<?= $person->image->medium_url ?>"
+            src="<?= $person->avatar->medium_url ?>"
             alt="$person->full_name"
             class="object-cover w-full rounded"
         />

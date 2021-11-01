@@ -50,10 +50,10 @@ return [
         'audio_file' => 'Fichier audio',
         'audio_file_hint' => 'Sélectionnez un fichier audio .mp3 ou .m4a.',
         'info_section_title' => 'Informations épisode',
-        'info_section_subtitle' => '',
-        'image' => 'Image de couverture',
-        'image_hint' =>
+        'cover' => 'Image de couverture',
+        'cover_hint' =>
             'Si vous ne définissez pas d’image, celle du podcast sera utilisée à la place.',
+        'cover_size_hint' => 'La couverture de l’épisode doit être carrée, avec au minimum 1400px de largeur et de hauteur.',
         'title' => 'Titre',
         'title_hint' =>
             'Doit contenir un titre d’épisode clair et concis. Ne précisez ici aucun numéro de saison ou d’épisode.',

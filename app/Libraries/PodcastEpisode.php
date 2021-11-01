@@ -52,8 +52,8 @@ class PodcastEpisode extends ObjectType
 
         $this->image = [
             'type' => 'Image',
-            'mediaType' => $episode->image_mimetype,
-            'url' => $episode->image->url,
+            'mediaType' => $episode->cover_mimetype,
+            'url' => $episode->cover->feed_url,
         ];
 
         // add audio file

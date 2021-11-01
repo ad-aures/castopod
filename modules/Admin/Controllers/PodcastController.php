@@ -171,8 +171,9 @@ class PodcastController extends BaseController
     public function attemptCreate(): RedirectResponse
     {
         $rules = [
-            'image' =>
-                'uploaded[image]|is_image[image]|ext_in[image,jpg,png]|min_dims[image,1400,1400]|is_image_squared[image]',
+            'cover' =>
+                'uploaded[cover]|is_image[cover]|ext_in[cover,jpg,png]|min_dims[cover,1400,1400]|is_image_ratio[cover,1,1]',
+            'banner' => 'is_image[banner]|ext_in[banner,jpg,png]|min_dims[banner,1500,500]|is_image_ratio[banner,3,1]',
         ];
 
         if (! $this->validate($rules)) {
@@ -195,7 +196,7 @@ class PodcastController extends BaseController
             'title' => $this->request->getPost('title'),
             'handle' => $this->request->getPost('handle'),
             'description_markdown' => $this->request->getPost('description'),
-            'image' => new Image($this->request->getFile('image')),
+            'cover' => new Image($this->request->getFile('cover')),
             'language_code' => $this->request->getPost('language'),
             'category_id' => $this->request->getPost('category'),
             'parental_advisory' =>
@@ -223,6 +224,11 @@ class PodcastController extends BaseController
             'created_by' => user_id(),
             'updated_by' => user_id(),
         ]);
+
+        $bannerFile = $this->request->getFile('banner');
+        if ($bannerFile !== null && $bannerFile->isValid()) {
+            $podcast->banner = new Image($bannerFile);
+        }
 
         $podcastModel = new PodcastModel();
         $db = db_connect();
@@ -279,8 +285,9 @@ class PodcastController extends BaseController
     public function attemptEdit(): RedirectResponse
     {
         $rules = [
-            'image' =>
-                'is_image[image]|ext_in[image,jpg,png]|min_dims[image,1400,1400]|is_image_squared[image]',
+            'cover' =>
+                'is_image[cover]|ext_in[cover,jpg,png]|min_dims[cover,1400,1400]|is_image_ratio[cover,1,1]',
+            'banner' => 'is_image[banner]|ext_in[banner,jpg,png]|min_dims[banner,1500,500]|is_image_ratio[banner,3,1]',
         ];
 
         if (! $this->validate($rules)) {
@@ -302,9 +309,13 @@ class PodcastController extends BaseController
         $this->podcast->title = $this->request->getPost('title');
         $this->podcast->description_markdown = $this->request->getPost('description');
 
-        $image = $this->request->getFile('image');
-        if ($image !== null && $image->isValid()) {
-            $this->podcast->image = new Image($image);
+        $coverFile = $this->request->getFile('cover');
+        if ($coverFile !== null && $coverFile->isValid()) {
+            $this->podcast->cover = new Image($coverFile);
+        }
+        $bannerFile = $this->request->getFile('banner');
+        if ($bannerFile !== null && $bannerFile->isValid()) {
+            $this->podcast->banner = new Image($bannerFile);
         }
         $this->podcast->language_code = $this->request->getPost('language');
         $this->podcast->category_id = $this->request->getPost('category');
@@ -354,6 +365,28 @@ class PodcastController extends BaseController
         $db->transComplete();
 
         return redirect()->route('podcast-view', [$this->podcast->id]);
+    }
+
+    public function deleteBanner(): RedirectResponse
+    {
+        if ($this->podcast->banner === null) {
+            return redirect()->back();
+        }
+
+        $this->podcast->banner->delete(config('Images')->podcastBannerSizes);
+
+        $this->podcast->banner_path = null;
+        $this->podcast->banner_mimetype = null;
+
+        $podcastModel = new PodcastModel();
+        if (! $podcastModel->update($this->podcast->id, $this->podcast)) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $podcastModel->errors());
+        }
+
+        return redirect()->back();
     }
 
     public function latestEpisodes(int $limit, int $podcastId): string

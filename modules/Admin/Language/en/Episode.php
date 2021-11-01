@@ -49,10 +49,10 @@ return [
         'audio_file' => 'Audio file',
         'audio_file_hint' => 'Choose an .mp3 or .m4a audio file.',
         'info_section_title' => 'Episode info',
-        'info_section_subtitle' => '',
-        'image' => 'Cover image',
-        'image_hint' =>
-            'If you do not set an image, the podcast cover will be used instead.',
+        'cover' => 'Episode cover',
+        'cover_hint' =>
+            'If you do not set a cover, the podcast cover will be used instead.',
+        'cover_size_hint' => 'Cover must be squared with at least 1400px wide and tall.',
         'title' => 'Title',
         'title_hint' =>
             'Should contain a clear and concise episode name. Do not specify the episode or season numbers here.',

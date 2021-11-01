@@ -34,7 +34,7 @@
                                     $episode->audio_file_duration,
                                 ) .
                             '</time>' .
-                            '<img loading="lazy" src="' . $episode->image->thumbnail_url . '" alt="' . $episode->title . '" class="object-cover w-20 h-20 rounded-lg" />' .
+                            '<img loading="lazy" src="' . $episode->cover->thumbnail_url . '" alt="' . $episode->title . '" class="object-cover w-20 h-20 rounded-lg" />' .
                         '</div>' .
                         '<a class="overflow-x-hidden text-sm hover:underline" href="' . route_to(
                             'episode-view',

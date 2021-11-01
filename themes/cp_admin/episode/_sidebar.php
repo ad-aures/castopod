@@ -10,7 +10,7 @@ $podcastNavigation = [
 <a href="<?= route_to('podcast-view', $podcast->id) ?>" class="flex items-center px-4 py-2 border-b border-pine-900 focus:ring-inset focus:ring-castopod">
     <?= icon('arrow-left', 'mr-2') ?>
     <img
-    src="<?= $podcast->image->thumbnail_url ?>"
+    src="<?= $podcast->cover->tiny_url ?>"
     alt="<?= $podcast->title ?>"
     class="object-cover w-6 h-6 rounded"
     />
@@ -18,7 +18,7 @@ $podcastNavigation = [
 </a>
 <div class="flex items-center px-4 py-2 border-b border-pine-900">
     <img
-    src="<?= $episode->image->thumbnail_url ?>"
+    src="<?= $episode->cover->thumbnail_url ?>"
     alt="<?= $episode->title ?>"
     class="object-cover w-16 h-16 rounded"
     />

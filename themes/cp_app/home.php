@@ -52,7 +52,7 @@
                         <article class="text-white">
                             <div class="absolute bottom-0 left-0 z-10 w-full h-full backdrop-gradient"></div>
                             <div class="w-full h-full overflow-hidden">
-                                <img alt="<?= $podcast->title ?>" src="<?= $podcast->image->medium_url ?>" class="object-cover w-full h-full transition duration-200 ease-in-out transform group-focus:scale-105 group-hover:scale-105" />
+                                <img alt="<?= $podcast->title ?>" src="<?= $podcast->cover->medium_url ?>" class="object-cover w-full h-full transition duration-200 ease-in-out transform group-focus:scale-105 group-hover:scale-105" />
                             </div>
                             <div class="absolute bottom-0 left-0 z-20 px-4 pb-2">
                                 <h2 class="font-bold leading-none truncate font-display"><?= $podcast->title ?></h2>

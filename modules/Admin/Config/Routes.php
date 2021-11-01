@@ -98,6 +98,10 @@ $routes->group(
                 $routes->post('edit', 'PodcastController::attemptEdit/$1', [
                     'filter' => 'permission:podcast-edit',
                 ]);
+                $routes->get('edit/delete-banner', 'PodcastController::deleteBanner/$1', [
+                    'as' => 'podcast-banner-delete',
+                    'filter' => 'permission:podcast-edit',
+                ]);
                 $routes->get('delete', 'PodcastController::delete/$1', [
                     'as' => 'podcast-delete',
                     'filter' => 'permission:podcasts-delete',

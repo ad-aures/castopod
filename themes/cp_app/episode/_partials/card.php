@@ -3,7 +3,7 @@
         <time class="absolute px-1 text-xs font-semibold text-white rounded bottom-2 right-2 bg-black/50" datetime="PT<?= $episode->audio_file_duration ?>S">
             <?= format_duration($episode->audio_file_duration) ?>
         </time>
-        <img loading="lazy" src="<?= $episode->image
+        <img loading="lazy" src="<?= $episode->cover
                 ->thumbnail_url ?>" alt="<?= $episode->title ?>" class="object-cover w-20 h-20 rounded-lg" />
     </div>
     <div class="flex items-center flex-1 gap-x-4">
@@ -16,7 +16,7 @@
         </div>
         <play-episode-button
             id="<?= $episode->id ?>"
-            imageSrc="<?= $episode->image->thumbnail_url ?>"
+            imageSrc="<?= $episode->cover->thumbnail_url ?>"
             title="<?= $episode->title ?>"
             podcast="<?= $episode->podcast->title ?>"
             src="<?= $episode->audio_file_web_url ?>"

@@ -25,7 +25,11 @@ return [
     'form' => [
         'identity_section_title' => 'Podcast identity',
         'identity_section_subtitle' => 'These fields allow you to get noticed.',
-        'image' => 'Cover image',
+        'cover' => 'Podcast cover',
+        'cover_size_hint' => 'Cover must be squared with at least 1400px wide and tall.',
+        'banner' => 'Podcast banner',
+        'banner_size_hint' => 'Banner must have a 3:1 ratio with at least 1500px wide.',
+        'banner_delete' => 'Delete podcast banner',
         'title' => 'Title',
         'handle' => 'Handle',
         'handle_hint' =>

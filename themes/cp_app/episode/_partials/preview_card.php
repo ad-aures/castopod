@@ -4,7 +4,7 @@
                     <?= format_duration($episode->audio_file_duration) ?>
         </time>
         <img
-        src="<?= $episode->image->thumbnail_url ?>"
+        src="<?= $episode->cover->thumbnail_url ?>"
         alt="<?= $episode->title ?>" class="w-24 h-24"/>
     </div>
     <div class="flex flex-col flex-1 px-4 py-2">
@@ -17,7 +17,7 @@
     <play-episode-button
         class="mr-4"
         id="<?= $index . '_' . $episode->id ?>"
-        imageSrc="<?= $episode->image->thumbnail_url ?>"
+        imageSrc="<?= $episode->cover->thumbnail_url ?>"
         title="<?= $episode->title ?>"
         podcast="<?= $episode->podcast->title ?>"
         src="<?= $episode->audio_file_web_url ?>"

@@ -18,18 +18,41 @@
 
 <?= $this->section('content') ?>
 
-<form id="podcast-edit-form" action="<?= route_to('podcast-edit', $podcast->id) ?>" method="POST" enctype='multipart/form-data' class="flex flex-col">
+<form id="podcast-edit-form" action="<?= route_to('podcast-edit', $podcast->id) ?>" method="POST" enctype='multipart/form-data' class="flex flex-row-reverse flex-wrap items-start justify-end gap-4">
 <?= csrf_field() ?>
 
+<div class="sticky z-40 flex flex-col w-full max-w-xs overflow-hidden bg-white shadow-sm border-3 border-pine-100 top-24 rounded-xl">
+    <?php if ($podcast->banner_path !== null): ?>
+        <a href="<?= route_to('podcast-banner-delete', $podcast->id) ?>" class="absolute p-1 text-white bg-red-600 border-2 border-black rounded-full hover:bg-red-800 focus:ring-castopod top-2 right-2" title="<?= lang('Podcast.form.banner_delete') ?>"><?= icon('delete-bin') ?></a>
+    <?php endif; ?>
+    <img src="<?= $podcast->banner->small_url ?>" alt="" class="object-cover w-full aspect-[3/1] bg-pine-800" />
+    <div class="flex px-4 py-2">
+        <img src="<?= $podcast->cover->thumbnail_url ?>" alt="<?= $podcast->title ?>"
+            class="w-16 h-16 mr-4 -mt-8 rounded-full ring-2 ring-white" />
+        <div class="flex flex-col">
+            <p class="font-semibold leading-none"><?= $podcast->title ?></p>
+            <p class="text-sm text-gray-500">@<?= $podcast->handle ?></p>
+        </div>
+    </div>
+</div>
+
+<div class="flex flex-col gap-y-6">
+
 <Forms.Section
-    class="mb-8"
     title="<?= lang('Podcast.form.identity_section_title') ?>"
     subtitle="<?= lang('Podcast.form.identity_section_subtitle') ?>" >
 
 <Forms.Field
-    name="image"
-    label="<?= lang('Podcast.form.image') ?>"
-    helper="<?= lang('Common.forms.image_size_hint') ?>"
+    name="cover"
+    label="<?= lang('Podcast.form.cover') ?>"
+    helper="<?= lang('Podcast.form.cover_size_hint') ?>"
+    type="file"
+    accept=".jpg,.jpeg,.png" />
+
+<Forms.Field
+    name="banner"
+    label="<?= lang('Podcast.form.banner') ?>"
+    helper="<?= lang('Podcast.form.banner_size_hint') ?>"
     type="file"
     accept=".jpg,.jpeg,.png" />
 
@@ -65,7 +88,6 @@
 </Forms.Section>
 
 <Forms.Section
-    class="mb-8"
     title="<?= lang('Podcast.form.classification_section_title') ?>"
     subtitle="<?= lang('Podcast.form.classification_section_subtitle') ?>" >
 
@@ -114,7 +136,6 @@
 </Forms.Section>
 
 <Forms.Section
-    class="mb-8"
     title="<?= lang('Podcast.form.author_section_title') ?>"
     subtitle="<?= lang('Podcast.form.author_section_subtitle') ?>" >
 
@@ -147,7 +168,6 @@
 </Forms.Section>
 
 <Forms.Section
-    class="mb-8"
     title="<?= lang('Podcast.form.location_section_title') ?>"
     subtitle="<?= lang('Podcast.form.location_section_subtitle') ?>" >
 
@@ -160,7 +180,6 @@
 </Forms.Section>
 
 <Forms.Section
-    class="mb-8"
     title="<?= lang('Podcast.form.monetization_section_title') ?>"
     subtitle="<?= lang('Podcast.form.monetization_section_subtitle') ?>" >
 
@@ -190,7 +209,6 @@
 </Forms.Section>
 
 <Forms.Section
-    class="mb-8"
     title="<?= lang('Podcast.form.advanced_section_title') ?>"
     subtitle="<?= lang('Podcast.form.advanced_section_subtitle') ?>" >
 
@@ -204,7 +222,6 @@
 </Forms.Section>
 
 <Forms.Section
-    class="mb-8"
     title="<?= lang('Podcast.form.status_section_title') ?>" >
     <Forms.Toggler class="mb-2" name="lock" value="yes" checked="<?= $podcast->is_locked ? 'true' : 'false' ?>" hint="<?= lang('Podcast.form.lock_hint') ?>">
         <?= lang('Podcast.form.lock') ?>
@@ -216,6 +233,9 @@
         <?= lang('Podcast.form.complete') ?>
     </Forms.Toggler>
 </Forms.Section>
+
+<Button variant="primary" type="submit" class="self-end"><?= lang('Podcast.form.submit_edit') ?></Button>
+</div>
 
 </form>
 

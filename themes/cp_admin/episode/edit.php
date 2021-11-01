@@ -31,10 +31,10 @@
     accept=".mp3,.m4a" />
 
 <Forms.Field
-    name="image"
-    label="<?= lang('Episode.form.image') ?>"
-    hint="<?= lang('Episode.form.image_hint') ?>"
-    helper="<?= lang('Common.forms.image_size_hint', ) ?>"
+    name="cover"
+    label="<?= lang('Episode.form.cover') ?>"
+    hint="<?= lang('Episode.form.cover_hint') ?>"
+    helper="<?= lang('Episode.form.cover_size_hint', ) ?>"
     type="file"
     accept=".jpg,.jpeg,.png" />
 

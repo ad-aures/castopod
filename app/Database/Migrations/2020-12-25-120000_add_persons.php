@@ -42,14 +42,14 @@ class AddPersons extends Migration
                     'The url to a relevant resource of information about the person, such as a homepage or third-party profile platform.',
                 'null' => true,
             ],
-            'image_path' => [
+            'avatar_path' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
                 'null' => true,
             ],
             // constraint is 13 because the longest safe mimetype for images is image/svg+xml,
             // see https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types#image_types
-            'image_mimetype' => [
+            'avatar_mimetype' => [
                 'type' => 'VARCHAR',
                 'constraint' => 13,
                 'null' => true,

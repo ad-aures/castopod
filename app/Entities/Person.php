@@ -19,16 +19,16 @@ use RuntimeException;
  * @property string $full_name
  * @property string $unique_name
  * @property string|null $information_url
- * @property Image $image
- * @property string $image_path
- * @property string $image_mimetype
+ * @property Image $avatar
+ * @property string $avatar_path
+ * @property string $avatar_mimetype
  * @property int $created_by
  * @property int $updated_by
  * @property object[]|null $roles
  */
 class Person extends Entity
 {
-    protected Image $image;
+    protected Image $avatar;
 
     protected ?int $podcast_id = null;
 
@@ -47,8 +47,8 @@ class Person extends Entity
         'full_name' => 'string',
         'unique_name' => 'string',
         'information_url' => '?string',
-        'image_path' => '?string',
-        'image_mimetype' => '?string',
+        'avatar_path' => '?string',
+        'avatar_mimetype' => '?string',
         'podcast_id' => '?integer',
         'episode_id' => '?integer',
         'created_by' => 'integer',
@@ -56,32 +56,31 @@ class Person extends Entity
     ];
 
     /**
-     * Saves a picture in `public/media/persons/`
+     * Saves the person avatar in `public/media/persons/`
      */
-    public function setImage(?Image $image = null): static
+    public function setAvatar(?Image $avatar = null): static
     {
-        if ($image === null) {
+        if ($avatar === null) {
             return $this;
         }
 
         helper('media');
 
-        // Save image
-        $image->saveImage('persons', $this->attributes['unique_name']);
+        $avatar->saveImage(config('Images')->personAvatarSizes, 'persons', $this->attributes['unique_name']);
 
-        $this->attributes['image_mimetype'] = $image->mimetype;
-        $this->attributes['image_path'] = $image->path;
+        $this->attributes['avatar_mimetype'] = $avatar->mimetype;
+        $this->attributes['avatar_path'] = $avatar->path;
 
         return $this;
     }
 
-    public function getImage(): Image
+    public function getAvatar(): Image
     {
-        if ($this->attributes['image_path'] === null) {
+        if ($this->attributes['avatar_path'] === null) {
             return new Image(null, '/castopod-avatar-default.jpg', 'image/jpeg');
         }
 
-        return new Image(null, $this->attributes['image_path'], $this->attributes['image_mimetype']);
+        return new Image(null, $this->attributes['avatar_path'], $this->attributes['avatar_mimetype']);
     }
 
     /**

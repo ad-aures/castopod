@@ -14,20 +14,26 @@
 
 <?= $this->section('content') ?>
 
-<form action="<?= route_to('podcast-create') ?>" method="POST" enctype='multipart/form-data' class="flex flex-col">
+<form action="<?= route_to('podcast-create') ?>" method="POST" enctype='multipart/form-data' class="flex flex-col gap-y-6">
 <?= csrf_field() ?>
 
 <Forms.Section
-    class="mb-8"
     title="<?= lang('Podcast.form.identity_section_title') ?>"
     subtitle="<?= lang('Podcast.form.identity_section_subtitle') ?>" >
 
 <Forms.Field
-    name="image"
-    label="<?= lang('Podcast.form.image') ?>"
-    helper="<?= lang('Common.forms.image_size_hint') ?>"
+    name="cover"
+    label="<?= lang('Podcast.form.cover') ?>"
+    helper="<?= lang('Podcast.form.cover_size_hint') ?>"
     type="file"
     required="true"
+    accept=".jpg,.jpeg,.png" />
+
+<Forms.Field
+    name="banner"
+    label="<?= lang('Podcast.form.banner') ?>"
+    helper="<?= lang('Podcast.form.banner_size_hint') ?>"
+    type="file"
     accept=".jpg,.jpeg,.png" />
 
 <Forms.Field
@@ -67,7 +73,6 @@
 </Forms.Section>
 
 <Forms.Section
-    class="mb-8"
     title="<?= lang('Podcast.form.classification_section_title') ?>"
     subtitle="<?= lang('Podcast.form.classification_section_subtitle') ?>" >
 
@@ -114,7 +119,6 @@
 </Forms.Section>
 
 <Forms.Section
-    class="mb-8"
     title="<?= lang('Podcast.form.author_section_title') ?>"
     subtitle="<?= lang('Podcast.form.author_section_subtitle') ?>" >
 
@@ -143,7 +147,6 @@
 </Forms.Section>
 
 <Forms.Section
-    class="mb-8"
     title="<?= lang('Podcast.form.location_section_title') ?>"
     subtitle="<?= lang('Podcast.form.location_section_subtitle') ?>" >
 
@@ -155,7 +158,6 @@
 </Forms.Section>
 
 <Forms.Section
-    class="mb-8"
     title="<?= lang('Podcast.form.monetization_section_title') ?>"
     subtitle="<?= lang('Podcast.form.monetization_section_subtitle') ?>" >
 
@@ -184,7 +186,6 @@
 </Forms.Section>
 
 <Forms.Section
-    class="mb-8"
     title="<?= lang('Podcast.form.advanced_section_title') ?>"
     subtitle="<?= lang('Podcast.form.advanced_section_subtitle') ?>" >
 
@@ -197,7 +198,6 @@
 </Forms.Section>
 
 <Forms.Section
-    class="mb-8"
     title="<?= lang('Podcast.form.status_section_title') ?>" >
     <Forms.Toggler class="mb-2" name="lock" value="yes" checked="true" hint="<?= lang('Podcast.form.lock_hint') ?>">
         <?= lang('Podcast.form.lock') ?>

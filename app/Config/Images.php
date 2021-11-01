@@ -32,42 +32,63 @@ class Images extends BaseConfig
 
     /*
     |--------------------------------------------------------------------------
-    | Uploaded images resizing sizes (in px)
+    | Uploaded images sizes (in px)
     |--------------------------------------------------------------------------
     | The sizes listed below determine the resizing of images when uploaded.
-    | All uploaded images are of 1:1 ratio (width and height are the same).
     */
 
-    public int $thumbnailSize = 150;
-
-    public int $mediumSize = 320;
-
-    public int $largeSize = 1024;
+    /**
+     * Podcast cover image sizes
+     *
+     * Uploaded podcast covers are of 1:1 ratio (width and height are the same).
+     *
+     * Size of images linked in the rss feed (should be between 1400 and 3000). Size for ID3 tag cover art (should be
+     * between 300 and 800)
+     *
+     * Array values are as follows: 'name' => [width, height]
+     *
+     * @var array<string, int[]>
+     */
+    public array $podcastCoverSizes = [
+        'tiny' => [40, 40],
+        'thumbnail' => [150, 150],
+        'medium' => [320, 320],
+        'large' => [1024, 1024],
+        'feed' => [1400, 1400],
+        'id3' => [500, 500],
+    ];
 
     /**
-     * Size of images linked in the rss feed (should be between 1400 and 3000)
+     * Podcast header cover image
+     *
+     * Uploaded podcast header covers are of 3:1 ratio
+     *
+     * Array values are as follows: 'name' => [width, height]
+     *
+     * @var array<string, int[]>
      */
-    public int $feedSize = 1400;
+    public array $podcastBannerSizes = [
+        'small' => [320, 128],
+        'medium' => [960, 320],
+        'large' => [1500, 500],
+    ];
+
+    public string $podcastBannerDefaultPath = 'castopod-banner-default.jpg';
+
+    public string $podcastBannerDefaultMimeType = 'image/jpeg';
 
     /**
-     * Size for ID3 tag cover art (should be between 300 and 800)
+     * Person image
+     *
+     * Uploaded person images are of 1:1 ratio (width and height are the same).
+     *
+     * Array values are as follows: 'name' => [width, height]
+     *
+     * @var array<string, int[]>
      */
-    public int $id3Size = 500;
-
-    /*
-    |--------------------------------------------------------------------------
-    | Uploaded images naming extensions
-    |--------------------------------------------------------------------------
-    | The properties listed below set the name extensions for the resized images
-    */
-
-    public string $thumbnailSuffix = '_thumbnail';
-
-    public string $mediumSuffix = '_medium';
-
-    public string $largeSuffix = '_large';
-
-    public string $feedSuffix = '_feed';
-
-    public string $id3Suffix = '_id3';
+    public array $personAvatarSizes = [
+        'tiny' => [40, 40],
+        'thumbnail' => [150, 150],
+        'medium' => [320, 320],
+    ];
 }

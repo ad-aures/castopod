@@ -13,7 +13,6 @@ namespace App\Entities;
 use CodeIgniter\Entity\Entity;
 use CodeIgniter\Files\File;
 use Config\Images;
-use Config\Services;
 use RuntimeException;
 
 /**
@@ -24,16 +23,6 @@ use RuntimeException;
  * @property string $mimetype
  * @property string $path
  * @property string $url
- * @property string $thumbnail_path
- * @property string $thumbnail_url
- * @property string $medium_path
- * @property string $medium_url
- * @property string $large_path
- * @property string $large_url
- * @property string $feed_path
- * @property string $feed_url
- * @property string $id3_path
- * @property string $id3_url
  */
 class Image extends Entity
 {
@@ -47,13 +36,13 @@ class Image extends Entity
 
     protected string $extension;
 
+    protected string $mimetype;
+
     public function __construct(?File $file, string $path = '', string $mimetype = '')
     {
         if ($file === null && $path === '') {
             throw new RuntimeException('File or path must be set to create an Image.');
         }
-
-        $this->config = config('Images');
 
         $dirname = '';
         $filename = '';
@@ -81,6 +70,45 @@ class Image extends Entity
         $this->mimetype = $mimetype;
     }
 
+    public function __get($property)
+    {
+        // Convert to CamelCase for the method
+        $method = 'get' . str_replace(' ', '', ucwords(str_replace(['-', '_'], ' ', $property)));
+
+        // if a get* method exists for this property,
+        // call that method to get this value.
+        // @phpstan-ignore-next-line
+        if (method_exists($this, $method)) {
+            return $this->{$method}();
+        }
+
+        $fileSuffix = '';
+        if ($lastUnderscorePosition = strrpos($property, '_')) {
+            $fileSuffix = '_' . substr($property, 0, $lastUnderscorePosition);
+        }
+
+        $path = '';
+        if ($this->dirname !== '.') {
+            $path .= $this->dirname . '/';
+        }
+        $path .= $this->filename . $fileSuffix . '.' . $this->extension;
+
+        if (str_ends_with($property, 'url')) {
+            helper('media');
+
+            return media_base_url($path);
+        }
+
+        if (str_ends_with($property, 'path')) {
+            return $path;
+        }
+    }
+
+    public function getMimetype(): string
+    {
+        return $this->mimetype;
+    }
+
     public function getFile(): File
     {
         if ($this->file === null) {
@@ -90,104 +118,10 @@ class Image extends Entity
         return $this->file;
     }
 
-    public function getPath(): string
-    {
-        return $this->dirname . '/' . $this->filename . '.' . $this->extension;
-    }
-
-    public function getUrl(): string
-    {
-        helper('media');
-
-        return media_base_url($this->path);
-    }
-
-    public function getThumbnailPath(): string
-    {
-        return $this->dirname .
-            '/' .
-            $this->filename .
-            $this->config->thumbnailSuffix .
-            '.' .
-            $this->extension;
-    }
-
-    public function getThumbnailUrl(): string
-    {
-        helper('media');
-
-        return media_base_url($this->thumbnail_path);
-    }
-
-    public function getMediumPath(): string
-    {
-        return $this->dirname .
-            '/' .
-            $this->filename .
-            $this->config->mediumSuffix .
-            '.' .
-            $this->extension;
-    }
-
-    public function getMediumUrl(): string
-    {
-        helper('media');
-
-        return media_base_url($this->medium_path);
-    }
-
-    public function getLargePath(): string
-    {
-        return $this->dirname .
-            '/' .
-            $this->filename .
-            $this->config->largeSuffix .
-            '.' .
-            $this->extension;
-    }
-
-    public function getLargeUrl(): string
-    {
-        helper('media');
-
-        return media_base_url($this->large_path);
-    }
-
-    public function getFeedPath(): string
-    {
-        return $this->dirname .
-            '/' .
-            $this->filename .
-            $this->config->feedSuffix .
-            '.' .
-            $this->extension;
-    }
-
-    public function getFeedUrl(): string
-    {
-        helper('media');
-
-        return media_base_url($this->feed_path);
-    }
-
-    public function getId3Path(): string
-    {
-        return $this->dirname .
-            '/' .
-            $this->filename .
-            $this->config->id3Suffix .
-            '.' .
-            $this->extension;
-    }
-
-    public function getId3Url(): string
-    {
-        helper('media');
-
-        return media_base_url($this->id3_path);
-    }
-
-    public function saveImage(string $dirname, string $filename): void
+    /**
+     * @param array<string, int[]> $sizes
+     */
+    public function saveImage(array $sizes, string $dirname, string $filename): void
     {
         helper('media');
 
@@ -196,37 +130,27 @@ class Image extends Entity
 
         save_media($this->file, $this->dirname, $this->filename);
 
-        $imageService = Services::image();
+        $imageService = service('image');
 
-        $thumbnailSize = $this->config->thumbnailSize;
-        $mediumSize = $this->config->mediumSize;
-        $largeSize = $this->config->largeSize;
-        $feedSize = $this->config->feedSize;
-        $id3Size = $this->config->id3Size;
+        foreach ($sizes as $name => $size) {
+            $pathProperty = $name . '_path';
+            $imageService
+                ->withFile(media_path($this->path))
+                ->resize($size[0], $size[1])
+                ->save(media_path($this->{$pathProperty}));
+        }
+    }
 
-        $imageService
-            ->withFile(media_path($this->path))
-            ->resize($thumbnailSize, $thumbnailSize)
-            ->save(media_path($this->thumbnail_path));
+    /**
+     * @param array<string, int[]> $sizes
+     */
+    public function delete(array $sizes): void
+    {
+        helper('media');
 
-        $imageService
-            ->withFile(media_path($this->path))
-            ->resize($mediumSize, $mediumSize)
-            ->save(media_path($this->medium_path));
-
-        $imageService
-            ->withFile(media_path($this->path))
-            ->resize($largeSize, $largeSize)
-            ->save(media_path($this->large_path));
-
-        $imageService
-            ->withFile(media_path($this->path))
-            ->resize($feedSize, $feedSize)
-            ->save(media_path($this->feed_path));
-
-        $imageService
-            ->withFile(media_path($this->path))
-            ->resize($id3Size, $id3Size)
-            ->save(media_path($this->id3_path));
+        foreach (array_keys($sizes) as $name) {
+            $pathProperty = $name . '_path';
+            unlink(media_path($this->{$pathProperty}));
+        }
     }
 }

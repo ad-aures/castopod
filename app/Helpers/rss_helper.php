@@ -56,8 +56,7 @@ if (! function_exists('get_rss_feed')) {
 
         $itunesImage = $channel->addChild('image', null, $itunesNamespace);
 
-        // FIXME: This should be downsized to 1400x1400
-        $itunesImage->addAttribute('href', $podcast->image->url);
+        $itunesImage->addAttribute('href', $podcast->cover->feed_url);
 
         $channel->addChild('language', $podcast->language_code);
         if ($podcast->location !== null) {
@@ -134,7 +133,7 @@ if (! function_exists('get_rss_feed')) {
                     $podcastNamespace,
                 );
 
-                $personElement->addAttribute('img', $person->image->medium_url);
+                $personElement->addAttribute('img', $person->avatar->medium_url);
 
                 if ($person->information_url !== null) {
                     $personElement->addAttribute('href', $person->information_url);
@@ -190,7 +189,7 @@ if (! function_exists('get_rss_feed')) {
         }
 
         $image = $channel->addChild('image');
-        $image->addChild('url', $podcast->image->feed_url);
+        $image->addChild('url', $podcast->cover->feed_url);
         $image->addChild('title', $podcast->title, null, false);
         $image->addChild('link', $podcast->link);
 
@@ -234,7 +233,7 @@ if (! function_exists('get_rss_feed')) {
             $item->addChild('duration', (string) $episode->audio_file_duration, $itunesNamespace);
             $item->addChild('link', $episode->link);
             $episodeItunesImage = $item->addChild('image', null, $itunesNamespace);
-            $episodeItunesImage->addAttribute('href', $episode->image->feed_url);
+            $episodeItunesImage->addAttribute('href', $episode->cover->feed_url);
 
             $episode->parental_advisory &&
                 $item->addChild(
@@ -300,7 +299,7 @@ if (! function_exists('get_rss_feed')) {
                         htmlspecialchars(lang("PersonsTaxonomy.persons.{$role->group}.label", [], 'en')),
                     );
 
-                    $personElement->addAttribute('img', $person->image->medium_url);
+                    $personElement->addAttribute('img', $person->avatar->medium_url);
 
                     if ($person->information_url !== null) {
                         $personElement->addAttribute('href', $person->information_url);

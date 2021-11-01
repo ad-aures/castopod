@@ -15,9 +15,9 @@
 <?= csrf_field() ?>
 
 <Forms.Field
-    name="image"
-    label="<?= lang('Person.form.image') ?>"
-    helper="<?= lang('Person.form.image_size_hint') ?>"
+    name="avatar"
+    label="<?= lang('Person.form.avatar') ?>"
+    helper="<?= lang('Person.form.avatar_size_hint') ?>"
     type="file"
     accept=".jpg,.jpeg,.png" />
 

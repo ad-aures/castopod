@@ -42,7 +42,7 @@
         <Forms.Textarea name="message" placeholder="<?= lang('Episode.publish_form.message_placeholder') ?>" autofocus="" value="<?= $post->message ?>" rows="2" />
     </div>
     <div class="flex border-t border-b">
-        <img src="<?= $episode->image
+        <img src="<?= $episode->cover
                 ->thumbnail_url ?>" alt="<?= $episode->title ?>" class="w-24 h-24" />
         <div class="flex flex-col flex-1">
             <a href="<?= $episode->link ?>" class="flex-1 px-4 py-2">

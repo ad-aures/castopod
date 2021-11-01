@@ -37,7 +37,7 @@ $podcastNavigation = [
 
 <div class="flex items-center px-4 py-2 border-b border-pine-900">
     <img
-    src="<?= $podcast->image->thumbnail_url ?>"
+    src="<?= $podcast->cover->thumbnail_url ?>"
     alt="<?= $podcast->title ?>"
     class="object-cover w-16 h-16 rounded"
     />

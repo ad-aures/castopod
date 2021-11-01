@@ -66,8 +66,8 @@ class PersonController extends BaseController
     public function attemptCreate(): RedirectResponse
     {
         $rules = [
-            'image' =>
-                'is_image[image]|ext_in[image,jpg,jpeg,png]|min_dims[image,400,400]|is_image_squared[image]',
+            'avatar' =>
+                'is_image[avatar]|ext_in[avatar,jpg,jpeg,png]|min_dims[avatar,400,400]|is_image_ratio[avatar,1,1]',
         ];
 
         if (! $this->validate($rules)) {
@@ -85,9 +85,9 @@ class PersonController extends BaseController
             'updated_by' => user_id(),
         ]);
 
-        $imageFile = $this->request->getFile('image');
-        if ($imageFile !== null && $imageFile->isValid()) {
-            $person->image = new Image($imageFile);
+        $avatarFile = $this->request->getFile('avatar');
+        if ($avatarFile !== null && $avatarFile->isValid()) {
+            $person->avatar = new Image($avatarFile);
         }
 
         $personModel = new PersonModel();
@@ -119,8 +119,8 @@ class PersonController extends BaseController
     public function attemptEdit(): RedirectResponse
     {
         $rules = [
-            'image' =>
-                'is_image[image]|ext_in[image,jpg,jpeg,png]|min_dims[image,400,400]|is_image_squared[image]',
+            'avatar' =>
+                'is_image[avatar]|ext_in[avatar,jpg,jpeg,png]|min_dims[avatar,400,400]|is_image_ratio[avatar,1,1]',
         ];
 
         if (! $this->validate($rules)) {
@@ -134,9 +134,9 @@ class PersonController extends BaseController
         $this->person->unique_name = $this->request->getPost('unique_name');
         $this->person->information_url = $this->request->getPost('information_url');
 
-        $imageFile = $this->request->getFile('image');
-        if ($imageFile !== null && $imageFile->isValid()) {
-            $this->person->image = new Image($imageFile);
+        $avatarFile = $this->request->getFile('avatar');
+        if ($avatarFile !== null && $avatarFile->isValid()) {
+            $this->person->avatar = new Image($avatarFile);
         }
 
         $this->person->updated_by = user_id();

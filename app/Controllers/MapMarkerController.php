@@ -46,7 +46,7 @@ class MapMarkerController extends BaseController
                     'location_url' => $episode->location->url,
                     'episode_link' => $episode->link,
                     'podcast_link' => $episode->podcast->link,
-                    'image_path' => $episode->image->thumbnail_url,
+                    'cover_path' => $episode->cover->thumbnail_url,
                     'podcast_title' => $episode->podcast->title,
                     'episode_title' => $episode->title,
                 ];

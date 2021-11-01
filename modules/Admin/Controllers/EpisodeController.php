@@ -112,8 +112,8 @@ class EpisodeController extends BaseController
     {
         $rules = [
             'audio_file' => 'uploaded[audio_file]|ext_in[audio_file,mp3,m4a]',
-            'image' =>
-                'is_image[image]|ext_in[image,jpg,png]|min_dims[image,1400,1400]|is_image_squared[image]',
+            'cover' =>
+                'is_image[cover]|ext_in[cover,jpg,png]|min_dims[cover,1400,1400]|is_image_ratio[cover,1,1]',
             'transcript_file' =>
                 'ext_in[transcript,txt,html,srt,json]|permit_empty',
             'chapters_file' => 'ext_in[chapters,json]|permit_empty',
@@ -126,12 +126,6 @@ class EpisodeController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $image = null;
-        $imageFile = $this->request->getFile('image');
-        if ($imageFile !== null && $imageFile->isValid()) {
-            $image = new Image($imageFile);
-        }
-
         $newEpisode = new Episode([
             'podcast_id' => $this->podcast->id,
             'title' => $this->request->getPost('title'),
@@ -139,7 +133,6 @@ class EpisodeController extends BaseController
             'guid' => null,
             'audio_file' => $this->request->getFile('audio_file'),
             'description_markdown' => $this->request->getPost('description'),
-            'image' => $image,
             'location' => $this->request->getPost('location_name') === '' ? null : new Location($this->request->getPost(
                 'location_name'
             )),
@@ -162,6 +155,11 @@ class EpisodeController extends BaseController
             'updated_by' => user_id(),
             'published_at' => null,
         ]);
+
+        $coverFile = $this->request->getFile('cover');
+        if ($coverFile !== null && $coverFile->isValid()) {
+            $newEpisode->cover = new Image($coverFile);
+        }
 
         $transcriptChoice = $this->request->getPost('transcript-choice');
         if (
@@ -238,8 +236,8 @@ class EpisodeController extends BaseController
         $rules = [
             'audio_file' =>
                 'uploaded[audio_file]|ext_in[audio_file,mp3,m4a]|permit_empty',
-            'image' =>
-                'is_image[image]|ext_in[image,jpg,png]|min_dims[image,1400,1400]|is_image_squared[image]',
+            'cover' =>
+                'is_image[cover]|ext_in[cover,jpg,png]|min_dims[cover,1400,1400]|is_image_ratio[cover,1,1]',
             'transcript_file' =>
                 'ext_in[transcript_file,txt,html,srt,json]|permit_empty',
             'chapters_file' => 'ext_in[chapters_file,json]|permit_empty',
@@ -279,9 +277,9 @@ class EpisodeController extends BaseController
             $this->episode->audio_file = $audioFile;
         }
 
-        $imageFile = $this->request->getFile('image');
-        if ($imageFile !== null && $imageFile->isValid()) {
-            $this->episode->image = new Image($imageFile);
+        $coverFile = $this->request->getFile('cover');
+        if ($coverFile !== null && $coverFile->isValid()) {
+            $this->episode->cover = new Image($coverFile);
         }
 
         $transcriptChoice = $this->request->getPost('transcript-choice');

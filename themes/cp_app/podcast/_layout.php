@@ -34,9 +34,10 @@
         </div>
     <?php endif; ?>
 
-    <header class="z-50 flex flex-col-reverse justify-between w-full col-start-2 bg-top bg-no-repeat bg-cover sm:flex-row sm:items-end bg-pine-800 aspect-[3/1]" style="background-image: url('<?= $podcast->actor->cover_image_url ?>');">
-        <div class="flex items-center pl-4 -mb-6 md:pl-8 md:-mb-8 gap-x-4">
-            <img src="<?= $podcast->image->thumbnail_url ?>" alt="<?= $podcast->title ?>" loading="lazy" class="h-24 rounded-full md:h-28 ring-4 ring-white" />
+    <header class="relative z-50 flex flex-col-reverse justify-between w-full col-start-2 bg-top bg-no-repeat bg-cover sm:flex-row sm:items-end bg-pine-800 aspect-[3/1]" style="background-image: url('<?= $podcast->banner->medium_url ?>');">
+        <div class="absolute bottom-0 left-0 w-full h-full backdrop-gradient-pine"></div>
+        <div class="z-10 flex items-center pl-4 -mb-6 md:pl-8 md:-mb-8 gap-x-4">
+            <img src="<?= $podcast->cover->thumbnail_url ?>" alt="<?= $podcast->title ?>" loading="lazy" class="h-24 rounded-full md:h-28 ring-4 ring-white" />
             <div class="relative flex flex-col text-white -top-2">
                 <h1 class="text-lg font-bold leading-none line-clamp-2 md:leading-none md:text-2xl font-display"><?= $podcast->title ?><span class="ml-1 font-sans text-base font-normal">@<?= $podcast->handle ?></span></h1>
                 <span class="text-xs"><?= lang('Podcast.followers', [
@@ -44,7 +45,7 @@
                 ]) ?></span>
             </div>
         </div>
-        <div class="inline-flex items-center self-end mt-2 mb-2 mr-2 gap-x-2">
+        <div class="z-10 inline-flex items-center self-end mt-2 mr-2 sm:mb-4 sm:mr-4 gap-x-2">
             <?php if (in_array(true, array_column($podcast->fundingPlatforms, 'is_visible'), true)): ?>
                 <IconButton glyph="heart" variant="accent" data-toggle="funding-links" data-toggle-class="hidden"><?= lang('Podcast.sponsor') . lang('Podcast.sponsor_title') ?></IconButton>
             <?php endif; ?>

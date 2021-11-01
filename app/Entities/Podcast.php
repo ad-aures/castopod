@@ -34,9 +34,12 @@ use RuntimeException;
  * @property string|null $description Holds text only description, striped of any markdown or html special characters
  * @property string $description_markdown
  * @property  string $description_html
- * @property Image $image
- * @property string $image_path
- * @property string $image_mimetype
+ * @property Image $cover
+ * @property string $cover_path
+ * @property string $cover_mimetype
+ * @property Image|null $banner
+ * @property string|null $banner_path
+ * @property string|null $banner_mimetype
  * @property string $language_code
  * @property int $category_id
  * @property Category|null $category
@@ -84,7 +87,9 @@ class Podcast extends Entity
 
     protected ?Actor $actor = null;
 
-    protected Image $image;
+    protected Image $cover;
+
+    protected ?Image $banner;
 
     protected ?string $description = null;
 
@@ -145,8 +150,10 @@ class Podcast extends Entity
         'title' => 'string',
         'description_markdown' => 'string',
         'description_html' => 'string',
-        'image_path' => 'string',
-        'image_mimetype' => 'string',
+        'cover_path' => 'string',
+        'cover_mimetype' => 'string',
+        'banner_path' => '?string',
+        'banner_mimetype' => '?string',
         'language_code' => 'string',
         'category_id' => 'integer',
         'parental_advisory' => '?string',
@@ -189,22 +196,63 @@ class Podcast extends Entity
     }
 
     /**
-     * Saves a cover image to the corresponding podcast folder in `public/media/podcast_name/`
+     * Saves a podcast cover to the corresponding podcast folder in `public/media/podcast_name/`
      */
-    public function setImage(Image $image): static
+    public function setCover(Image $cover): static
     {
         // Save image
-        $image->saveImage('podcasts/' . $this->attributes['handle'], 'cover');
+        $cover->saveImage(config('Images')->podcastCoverSizes, 'podcasts/' . $this->attributes['handle'], 'cover');
 
-        $this->attributes['image_mimetype'] = $image->mimetype;
-        $this->attributes['image_path'] = $image->path;
+        $this->attributes['cover_path'] = $cover->path;
+        $this->attributes['cover_mimetype'] = $cover->mimetype;
 
         return $this;
     }
 
-    public function getImage(): Image
+    public function getCover(): Image
     {
-        return new Image(null, $this->image_path, $this->image_mimetype);
+        return new Image(null, $this->cover_path, $this->cover_mimetype);
+    }
+
+    /**
+     * Saves a podcast cover to the corresponding podcast folder in `public/media/podcast_name/`
+     */
+    public function setBanner(?Image $banner): static
+    {
+        if ($banner === null) {
+            $this->attributes['banner_path'] = null;
+            $this->attributes['banner_mimetype'] = null;
+
+            return $this;
+        }
+
+        // Save image
+        $banner->saveImage(
+            config('Images')
+                ->podcastBannerSizes,
+            'podcasts/' . $this->attributes['handle'],
+            'banner'
+        );
+
+        $this->attributes['banner_path'] = $banner->path;
+        $this->attributes['banner_mimetype'] = $banner->mimetype;
+
+        return $this;
+    }
+
+    public function getBanner(): Image
+    {
+        if ($this->attributes['banner_path'] === null) {
+            return new Image(
+                null,
+                config('Images')
+                    ->podcastBannerDefaultPath,
+                config('Images')
+                    ->podcastBannerDefaultMimeType
+            );
+        }
+
+        return new Image(null, $this->banner_path, $this->banner_mimetype);
     }
 
     public function getLink(): string

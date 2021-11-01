@@ -17,9 +17,9 @@ return [
     'edit' => 'Edit person',
     'delete' => 'Delete person',
     'form' => [
-        'image' => 'Picture',
-        'image_size_hint' =>
-            'Image must be squared with at least 400px wide and tall.',
+        'avatar' => 'Avatar',
+        'avatar_size_hint' =>
+            'Avatar must be squared with at least 400px wide and tall.',
         'full_name' => 'Full name',
         'full_name_hint' => 'This is the full name or alias of the person.',
         'unique_name' => 'Unique name',

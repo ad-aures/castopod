@@ -44,9 +44,9 @@ use RuntimeException;
  * @property string|null $description Holds text only description, striped of any markdown or html special characters
  * @property string $description_markdown
  * @property string $description_html
- * @property Image $image
- * @property string|null $image_path
- * @property string|null $image_mimetype
+ * @property Image $cover
+ * @property string|null $cover_path
+ * @property string|null $cover_mimetype
  * @property File|null $transcript_file
  * @property string|null $transcript_file_url
  * @property string|null $transcript_file_path
@@ -98,7 +98,7 @@ class Episode extends Entity
 
     protected string $embed_url;
 
-    protected Image $image;
+    protected Image $cover;
 
     protected ?string $description = null;
 
@@ -153,8 +153,8 @@ class Episode extends Entity
         'audio_file_header_size' => 'integer',
         'description_markdown' => 'string',
         'description_html' => 'string',
-        'image_path' => '?string',
-        'image_mimetype' => '?string',
+        'cover_path' => '?string',
+        'cover_mimetype' => '?string',
         'transcript_file_path' => '?string',
         'transcript_file_remote_url' => '?string',
         'chapters_file_path' => '?string',
@@ -175,31 +175,36 @@ class Episode extends Entity
     ];
 
     /**
-     * Saves an episode image
+     * Saves an episode cover
      */
-    public function setImage(?Image $image = null): static
+    public function setCover(?Image $cover = null): static
     {
-        if ($image === null) {
+        if ($cover === null) {
             return $this;
         }
 
         // Save image
-        $image->saveImage('podcasts/' . $this->getPodcast()->handle, $this->attributes['slug']);
+        $cover->saveImage(
+            config('Images')
+                ->podcastCoverSizes,
+            'podcasts/' . $this->getPodcast()->handle,
+            $this->attributes['slug']
+        );
 
-        $this->attributes['image_mimetype'] = $image->mimetype;
-        $this->attributes['image_path'] = $image->path;
+        $this->attributes['cover_mimetype'] = $cover->mimetype;
+        $this->attributes['cover_path'] = $cover->path;
 
         return $this;
     }
 
-    public function getImage(): Image
+    public function getCover(): Image
     {
-        if ($imagePath = $this->attributes['image_path']) {
-            return new Image(null, $imagePath, $this->attributes['image_mimetype']);
+        if ($coverPath = $this->attributes['cover_path']) {
+            return new Image(null, $coverPath, $this->attributes['cover_mimetype']);
         }
 
         return $this->getPodcast()
-            ->image;
+            ->cover;
     }
 
     /**

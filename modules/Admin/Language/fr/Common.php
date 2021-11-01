@@ -38,8 +38,6 @@ return [
             'noChoicesText' => 'Aucune sélection possible',
             'maxItemText' => 'Impossible de rajouter un élément',
         ],
-        'image_size_hint' =>
-            'L’image doit être carrée, avec au minimum 1400px de long et de large.',
         'upload_file' => 'Téléversez un fichier',
         'remote_url' => 'URL distante',
     ],

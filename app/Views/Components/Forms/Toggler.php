@@ -36,7 +36,7 @@ class Toggler extends FormComponent
 
         $this->attributes['class'] = 'form-switch';
 
-        $checkbox = form_checkbox($this->attributes, $this->value, old($this->name, $this->checked));
+        $checkbox = form_checkbox($this->attributes, $this->value, old($this->name) === 'yes' ? true : $this->checked);
         $hint = $this->hint === '' ? '' : hint_tooltip($this->hint, 'ml-1');
         return <<<HTML
             <label class="relative inline-flex items-center {$wrapperClass}">

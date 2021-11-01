@@ -51,7 +51,7 @@ if (! function_exists('write_audio_file_tags')) {
         $tagwriter->tagformats = ['id3v2.4'];
         $tagwriter->tag_encoding = $TextEncoding;
 
-        $cover = new File(media_path($episode->image->id3_path));
+        $cover = new File(media_path($episode->cover->id3_path));
 
         $APICdata = file_get_contents($cover->getRealPath());
 

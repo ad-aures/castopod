@@ -46,15 +46,27 @@ class AddPodcasts extends Migration
             'description_html' => [
                 'type' => 'TEXT',
             ],
-            'image_path' => [
+            'cover_path' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
             // constraint is 13 because the longest safe mimetype for images is image/svg+xml,
             // see https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types#image_types
-            'image_mimetype' => [
+            'cover_mimetype' => [
                 'type' => 'VARCHAR',
                 'constraint' => 13,
+            ],
+            'banner_path' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => true,
+                'default' => null,
+            ],
+            'banner_mimetype' => [
+                'type' => 'VARCHAR',
+                'constraint' => 13,
+                'null' => true,
+                'default' => null,
             ],
             'language_code' => [
                 'type' => 'VARCHAR',

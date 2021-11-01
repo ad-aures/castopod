@@ -2,7 +2,7 @@
     <a href="<?= route_to('episode-view', $episode->podcast->id, $episode->id) ?>" class="flex flex-col justify-end w-full h-full text-white group">
         <div class="absolute bottom-0 left-0 z-10 w-full h-full backdrop-gradient"></div>
         <div class="w-full h-full overflow-hidden">
-            <img src="<?= $episode->image->medium_url ?>" alt="<?= $episode->title ?>" class="object-cover w-full h-full transition duration-200 ease-in-out transform group-focus:scale-105 group-hover:scale-105" />
+            <img src="<?= $episode->cover->medium_url ?>" alt="<?= $episode->title ?>" class="object-cover w-full h-full transition duration-200 ease-in-out transform group-focus:scale-105 group-hover:scale-105" />
         </div>
         <?= publication_pill($episode->published_at, $episode->publication_status, 'absolute top-0 left-0 ml-2 mt-2 text-sm'); ?>
         <div class="absolute z-20 flex flex-col items-start px-4 py-2">

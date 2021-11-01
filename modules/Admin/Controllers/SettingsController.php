@@ -25,7 +25,7 @@ class SettingsController extends BaseController
     {
         $rules = [
             'site_icon' =>
-                'is_image[site_icon]|ext_in[site_icon,png,jpeg]|is_image_squared[site_icon]|min_dims[image,512,512]|permit_empty',
+                'is_image[site_icon]|ext_in[site_icon,png,jpeg]|is_image_ratio[site_icon,1,1]|min_dims[image,512,512]|permit_empty',
         ];
 
         if (! $this->validate($rules)) {

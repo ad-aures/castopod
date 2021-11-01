@@ -4,7 +4,7 @@
         <div class="w-full h-full overflow-hidden">
             <img
             alt="<?= $podcast->title ?>"
-            src="<?= $podcast->image->medium_url ?>" class="object-cover w-full h-full transition duration-200 ease-in-out transform group-focus:scale-105 group-hover:scale-105" />
+            src="<?= $podcast->cover->medium_url ?>" class="object-cover w-full h-full transition duration-200 ease-in-out transform group-focus:scale-105 group-hover:scale-105" />
         </div>
         <div class="absolute z-20 px-4 pb-4 transition duration-75 ease-out translate-y-6 group-focus:translate-y-0 group-hover:translate-y-0">
             <h2 class="font-bold leading-none truncate font-display"><?= $podcast->title ?></h2>
