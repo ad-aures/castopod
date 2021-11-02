@@ -39,7 +39,7 @@
             label="<?= lang('Settings.form.site_icon') ?>"
             hint="<?= lang('Settings.form.site_icon_hint') ?>"
             helper="<?= lang('Settings.form.site_icon_helper') ?>"
-            accept=".png,.jpeg"
+            accept=".png,.jpeg,.jpg"
             class="flex-1"
             />
         <?php if (config('App')->siteIcon['ico'] !== service('settings')->get('App.siteIcon')['ico']): ?>
