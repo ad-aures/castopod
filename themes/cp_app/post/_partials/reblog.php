@@ -1,7 +1,7 @@
-<article class="relative z-10 w-full bg-white shadow rounded-conditional-2xl">
-    <p class="inline-flex px-6 pt-4 text-xs text-gray-700"><?= icon(
+<article class="relative z-10 w-full shadow bg-elevated rounded-conditional-2xl">
+    <p class="inline-flex px-6 pt-4 text-xs text-skin-muted"><?= icon(
     'repeat',
-    'text-lg mr-2 text-gray-400',
+    'text-lg mr-2 opacity-40',
 ) .
         lang('Post.actor_shared', [
             'actor' => $post->actor->display_name,
@@ -17,14 +17,14 @@
     : 'target="_blank" rel="noopener noreferrer"' ?>>
                 <span class="mr-2 font-semibold truncate"><?= $post->actor
         ->display_name ?></span>
-                <span class="text-sm text-gray-500 truncate">@<?= $post->actor
+                <span class="text-sm truncate text-skin-muted">@<?= $post->actor
         ->username .
                     ($post->actor->is_local
                         ? ''
                         : '@' . $post->actor->domain) ?></span>
             </a>
             <a href="<?= route_to('post', $podcast->handle, $post->id) ?>"
-            class="text-xs text-gray-500">
+            class="text-xs text-skin-muted">
                 <?= relative_time($post->published_at) ?>
             </a>
         </div>

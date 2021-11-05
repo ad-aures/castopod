@@ -33,13 +33,13 @@
 <div class="px-2 sm:px-4">
     <div class="mb-2"><?= $podcast->description_html ?></div>
     <div class="flex gap-x-4 gap-y-2">
-        <span class="px-2 py-1 text-sm font-semibold text-gray-800 bg-gray-100 border">
+        <span class="px-2 py-1 text-sm font-semibold border rounded-sm border-subtle bg-highlight text-skin-muted">
             <?= lang(
         'Podcast.category_options.' . $podcast->category->code,
     ) ?>
         </span>
         <?php foreach ($podcast->other_categories as $other_category): ?>
-            <span class="px-2 py-1 text-sm font-semibold text-gray-800 bg-gray-100 border">
+            <span class="px-2 py-1 text-sm font-semibold border rounded-sm border-subtle bg-highlight text-skin-muted">
                 <?= lang(
         'Podcast.category_options.' . $other_category->code,
     ) ?>
@@ -49,11 +49,11 @@
 
     <div class="flex items-center mt-4 gap-x-8">
         <?php if ($podcast->persons !== []): ?>
-            <button class="flex items-center text-xs font-semibold gap-x-2 hover:underline focus:ring-castopod" data-toggle="persons-list" data-toggle-class="hidden">
+            <button class="flex items-center text-xs font-semibold gap-x-2 hover:underline focus:ring-accent" data-toggle="persons-list" data-toggle-class="hidden">
                 <div class="inline-flex flex-row-reverse">
                     <?php $i = 0; ?>
                     <?php foreach ($podcast->persons as $person): ?>
-                        <img src="<?= $person->avatar->thumbnail_url ?>" alt="<?= $person->full_name ?>" class="object-cover w-8 h-8 -ml-5 border-2 rounded-full border-pine-100 last:ml-0" />
+                        <img src="<?= $person->avatar->thumbnail_url ?>" alt="<?= $person->full_name ?>" class="object-cover w-8 h-8 -ml-5 border-2 rounded-full border-background-base last:ml-0" />
                         <?php $i++; if ($i === 3) {
         break;
     }?>

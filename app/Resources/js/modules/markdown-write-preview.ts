@@ -63,7 +63,7 @@ export class MarkdownWritePreview extends LitElement {
       width: 80%;
       height: 4px;
       margin: 0 auto;
-      background-color: #009486;
+      background-color: hsl(var(--color-accent-base));
       border-radius: 9999px;
     }
   `;

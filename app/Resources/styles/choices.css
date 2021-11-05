@@ -19,7 +19,7 @@
 
   .choices.is-disabled .choices__inner,
   .choices.is-disabled .choices__input {
-    background-color: #eaeaea;
+    opacity: 0.5;
     cursor: not-allowed;
     -webkit-user-select: none;
     -ms-user-select: none;
@@ -46,8 +46,8 @@
     display: block;
     width: 100%;
     padding: 10px;
-    border-bottom: 1px solid #dddddd;
-    background-color: #ffffff;
+    border-bottom: 1px solid hsl(var(--color-border-subtle));
+    background-color: hsl(var(--color-background-elevated));
     margin: 0;
   }
 
@@ -85,7 +85,8 @@
     height: 0;
     width: 0;
     border-style: solid;
-    border-color: #333333 transparent transparent transparent;
+    border-color: hsl(var(--color-text-muted)) transparent transparent
+      transparent;
     border-width: 5px;
     position: absolute;
     right: 11.5px;
@@ -95,7 +96,8 @@
   }
 
   .choices[data-type*="select-one"].is-open:after {
-    border-color: transparent transparent #333333 transparent;
+    border-color: transparent transparent hsl(var(--color-text-muted))
+      transparent;
     margin-top: -7.5px;
   }
 
@@ -138,9 +140,9 @@
   }
 
   .choices__inner {
-    @apply p-2 bg-white border-black rounded-lg border-3;
+    @apply p-2 rounded-lg border-contrast bg-elevated border-3;
 
-    box-shadow: 2px 2px 0 black;
+    box-shadow: 2px 2px 0 hsl(var(--color-border-contrast));
     display: inline-block;
     vertical-align: top;
     width: 100%;
@@ -155,7 +157,7 @@
 
   .is-focused .choices__inner,
   .is-open .choices__inner {
-    @apply ring-castopod ring-inset;
+    @apply ring-accent ring-inset;
   }
 
   .is-open .choices__inner {
@@ -190,7 +192,7 @@
   }
 
   .choices__list--multiple .choices__item {
-    @apply inline-block px-2 py-1 mb-1 mr-1 text-sm text-white align-middle rounded bg-pine-500;
+    @apply inline-block px-2 py-1 mb-1 mr-1 text-sm align-middle rounded text-accent-contrast bg-accent-base;
 
     word-break: break-all;
     box-sizing: border-box;
@@ -206,7 +208,7 @@
   }
 
   .choices__list--multiple .choices__item.is-highlighted {
-    @apply bg-pine-500;
+    @apply bg-accent-base;
   }
 
   .is-disabled .choices__list--multiple .choices__item {
@@ -215,11 +217,11 @@
   }
 
   .choices__list--dropdown {
-    @apply z-50 border-2 border-black shadow-lg;
+    @apply z-50 border-2 shadow-lg border-contrast;
     visibility: hidden;
     position: absolute;
     width: 100%;
-    background-color: #ffffff;
+    background-color: hsl(var(--color-background-elevated));
     top: 100%;
     margin-top: -1px;
     overflow: hidden;
@@ -286,7 +288,7 @@
   }
 
   .choices__list--dropdown .choices__item--selectable.is-highlighted {
-    background-color: #f2f2f2;
+    background-color: hsl(var(--color-background-highlight));
   }
 
   .choices__list--dropdown .choices__item--selectable.is-highlighted:after {
@@ -334,7 +336,7 @@
   }
 
   .choices__input {
-    @apply mb-1 align-middle bg-white;
+    @apply mb-1 align-middle bg-elevated;
 
     display: inline-block;
     font-size: 14px;

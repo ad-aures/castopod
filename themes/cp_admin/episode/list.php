@@ -15,7 +15,7 @@
 
 <?= $this->section('content') ?>
 
-<p class="mb-4 text-sm italic text-gray-700">
+<p class="mb-4 text-sm italic text-skin-muted">
     <?= lang('Common.pageInfo', [
         'currentPage' => $pager->getDetails()['currentPage'],
         'pageCount' => $pager->getDetails()['pageCount'],
@@ -45,12 +45,12 @@
                         episode_numbering(
                             $episode->number,
                             $episode->season_number,
-                            'text-xs font-semibold text-gray-600 !no-underline border px-1 border-gray-500',
+                            'text-xs font-semibold text-skin-muted !no-underline border px-1 border-gray-500',
                             true,
                         ) .
                         '<span class="mr-1 truncate group-hover:underline">' . $episode->title . '</span>' .
                         '</h2>' .
-                        '<p class="max-w-sm text-xs text-gray-600 line-clamp-2">' . $episode->description . '</p>' .
+                        '<p class="max-w-sm text-xs text-skin-muted line-clamp-2">' . $episode->description . '</p>' .
                         '</a>' .
                         '</div>';
                 },
@@ -73,7 +73,7 @@
             [
                 'header' => lang('Episode.list.actions'),
                 'cell' => function ($episode, $podcast) {
-                    return '<button id="more-dropdown-' . $episode->id . '" type="button" class="inline-flex items-center p-1 rounded-full focus:ring-castopod" data-dropdown="button" data-dropdown-target="more-dropdown-' . $episode->id . '-menu" aria-haspopup="true" aria-expanded="false">' .
+                    return '<button id="more-dropdown-' . $episode->id . '" type="button" class="inline-flex items-center p-1 rounded-full focus:ring-accent" data-dropdown="button" data-dropdown-target="more-dropdown-' . $episode->id . '-menu" aria-haspopup="true" aria-expanded="false">' .
                         icon('more') .
                         '</button>' .
                         '<DropdownMenu id="more-dropdown-' . $episode->id . '-menu" labelledby="more-dropdown-' . $episode->id . '" offsetY="-24" items="' . esc(json_encode([

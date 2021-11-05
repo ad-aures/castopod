@@ -23,7 +23,7 @@ class Heading extends Component
             'large' => 'text-3xl',
         ];
 
-        $class = $this->class . ' relative z-10 font-bold text-pine-800 font-display before:w-full before:absolute before:h-1/2 before:left-0 before:bottom-0 before:rounded-full before:bg-pine-100 before:z-[-10] ' . $sizeClasses[$this->size];
+        $class = $this->class . ' relative z-10 font-bold text-heading-foreground font-display before:w-full before:absolute before:h-1/2 before:left-0 before:bottom-0 before:rounded-full before:bg-heading-background before:z-[-10] ' . $sizeClasses[$this->size];
 
         return <<<HTML
             <{$this->tagName} class="{$class}">{$this->slot}</{$this->tagName}>

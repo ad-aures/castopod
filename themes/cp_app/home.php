@@ -28,12 +28,12 @@
         ->asset('js/app.ts', 'js') ?>
 </head>
 
-<body class="flex flex-col min-h-screen mx-auto bg-pine-50">
+<body class="flex flex-col min-h-screen mx-auto bg-base">
     <?php if (service('authentication')->check()): ?>
         <?= $this->include('_admin_navbar') ?>
     <?php endif; ?>
 
-    <header class="py-8 text-white border-b bg-pine-800">
+    <header class="py-8 text-white border-b bg-header border-subtle">
         <div class="container flex items-center justify-between px-2 py-4 mx-auto">
             <a href="<?= route_to(
             'home',
@@ -42,13 +42,13 @@
         </div>
     </header>
     <main class="container flex-1 px-4 py-10 mx-auto">
-        <h1 class="mb-2 text-xl"><?= lang('Home.all_podcasts') ?> (<?= count(
+        <Heading class="inline-block mb-2"><?= lang('Home.all_podcasts') ?> (<?= count(
         $podcasts,
-    ) ?>)</h1>
+    ) ?>)</Heading>
         <section class="grid gap-4 grid-cols-cards">
             <?php if ($podcasts): ?>
                 <?php foreach ($podcasts as $podcast): ?>
-                    <a href="<?= $podcast->link ?>" class="relative w-full h-full overflow-hidden transition shadow focus:ring-castopod rounded-xl border-pine-100 hover:shadow-xl focus:shadow-xl group border-3">
+                    <a href="<?= $podcast->link ?>" class="relative w-full h-full overflow-hidden transition shadow focus:ring-accent rounded-xl border-subtle hover:shadow-xl focus:shadow-xl group border-3">
                         <article class="text-white">
                             <div class="absolute bottom-0 left-0 z-10 w-full h-full backdrop-gradient"></div>
                             <div class="w-full h-full overflow-hidden">
@@ -66,11 +66,11 @@
             <?php endif; ?>
         </section>
     </main>
-    <footer class="container flex justify-between px-2 py-4 mx-auto text-sm text-right border-t">
+    <footer class="container flex justify-between px-2 py-4 mx-auto text-sm text-right border-t border-subtle">
         <?= render_page_links() ?>
         <small><?= lang('Common.powered_by', [
             'castopod' =>
-                '<a class="inline-flex font-semibold hover:underline focus:ring-castopod" href="https://castopod.org/" target="_blank" rel="noreferrer noopener">Castopod' . icon('social/castopod', 'ml-1 text-lg') . '</a>',
+                '<a class="inline-flex font-semibold hover:underline focus:ring-accent" href="https://castopod.org/" target="_blank" rel="noreferrer noopener">Castopod' . icon('social/castopod', 'ml-1 text-lg') . '</a>',
         ]) ?></small>
     </footer>
 </body>

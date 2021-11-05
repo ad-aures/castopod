@@ -6,7 +6,7 @@
     [
         'numberOfLikes' => $comment->likes_count,
     ],
-) ?>"><?= icon('heart', 'text-xl mr-1 text-gray-400 group-hover:text-red-600') . $comment->likes_count ?></button>
+) ?>"><?= icon('heart', 'text-xl mr-1 opacity-40 group-hover:text-red-600 group-hover:opacity-100') . $comment->likes_count ?></button>
             <Button uri="<?= route_to('episode-comment', $comment->episode->podcast->handle, $comment->episode->slug, $comment->id) ?>" size="small"><?= lang('Comment.reply') ?></Button>
         </form>
         <?php if ($comment->replies_count): ?>
@@ -26,7 +26,7 @@
     [
         'numberOfLikes' => $comment->likes_count,
     ],
-) ?>"><?= icon('heart', 'text-xl mr-1 text-gray-500') . $comment->likes_count ?></button>
+) ?>"><?= icon('heart', 'text-xl mr-1 text-skin-muted') . $comment->likes_count ?></button>
         <?php if ($comment->replies_count): ?>
             <?= anchor(
     route_to('episode-comment', $comment->episode->podcast->handle, $comment->episode->slug, $comment->id),

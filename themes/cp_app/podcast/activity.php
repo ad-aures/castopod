@@ -29,7 +29,7 @@
 <?= $this->section('content') ?>
 
 <?php if (can_user_interact()): ?>
-    <form action="<?= route_to('post-attempt-create', interact_as_actor()->username) ?>" method="POST" class="flex p-4 bg-white shadow gap-x-2 rounded-conditional-2xl">
+    <form action="<?= route_to('post-attempt-create', interact_as_actor()->username) ?>" method="POST" class="flex p-4 shadow bg-elevated gap-x-2 rounded-conditional-2xl">
     <?= csrf_field() ?>
 
     <?= view('_message_block') ?>
@@ -50,7 +50,7 @@
         <Button variant="primary" size="small" type="submit" class="self-end" iconRight="send-plane"><?= lang('Post.form.submit') ?></Button>
     </div>
 </form>
-<hr class="my-4 border-2 border-pine-100">
+<hr class="my-4 border-subtle">
 
 <?php endif; ?>
 <div class="flex flex-col gap-y-4">

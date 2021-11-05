@@ -22,7 +22,7 @@
             'cell' => function ($page) {
                 return '<div class="flex flex-col">' .
                     $page->title .
-                    '<span class="text-sm text-gray-600">/' .
+                    '<span class="text-sm text-skin-muted">/' .
                     $page->slug .
                     '</span></div>';
             },

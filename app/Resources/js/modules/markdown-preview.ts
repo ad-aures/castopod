@@ -1,5 +1,5 @@
 import MarkdownToolbarElement from "@github/markdown-toolbar-element";
-import { html, LitElement, TemplateResult } from "lit";
+import { css, html, LitElement, TemplateResult } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 import marked from "marked";
@@ -52,9 +52,21 @@ export class MarkdownPreview extends LitElement {
     });
   }
 
+  static styles = css`
+    * {
+      max-width: 65ch;
+    }
+
+    a {
+      font-weight: 600;
+      color: hsl(var(--color-accent-base));
+      text-decoration: none;
+    }
+  `;
+
   render(): TemplateResult<1> {
     return html`${this._show
-      ? html`${unsafeHTML(this.markdownToHtml())}`
+      ? html`${unsafeHTML(this.markdownToHtml())}</div>`
       : html``}`;
   }
 }

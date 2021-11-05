@@ -3,11 +3,11 @@
     @apply absolute w-0 h-0 opacity-0;
 
     &:checked + .form-switch-slider {
-      @apply bg-pine-500;
+      @apply bg-accent-base;
     }
 
     &:focus + .form-switch-slider {
-      @apply ring-castopod;
+      @apply ring-accent;
     }
 
     &:checked + .form-switch-slider::before {
@@ -29,7 +29,7 @@
   }
 
   .form-switch-slider {
-    @apply relative inset-0 flex-shrink-0 w-16 h-8 transition duration-200 bg-gray-400 border-black rounded-full cursor-pointer border-3;
+    @apply relative inset-0 flex-shrink-0 w-16 h-8 transition duration-200 rounded-full cursor-pointer bg-highlight border-contrast border-3;
 
     &.form-switch-slider--small {
       @apply w-12 h-6;
@@ -46,7 +46,7 @@
     }
 
     &::before {
-      @apply absolute z-10 w-6 h-6 transition duration-200 bg-white rounded-full shadow ring-1 ring-black ring-opacity-5;
+      @apply absolute z-10 w-6 h-6 transition duration-200 rounded-full shadow bg-elevated ring-1 ring-black ring-opacity-5;
       content: "";
       left: 1px;
       bottom: 1px;

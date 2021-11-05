@@ -38,7 +38,7 @@
                 language="<?= service('request')->getLocale() ?>"
                 icons="castopod-icons"
                 class="w-full mt-auto"
-                style="--vm-player-box-shadow:0; --vm-player-theme: #009486; --vm-control-spacing: 4px; --vm-control-icon-size: 24px; <?= str_ends_with($theme, 'transparent') ? '--vm-controls-bg: transparent;' : '' ?>"
+                style="--vm-player-box-shadow:0; --vm-player-theme: hsl(var(--color-accent-base)); --vm-control-focus-color: hsl(var(--color-accent-contrast)); --vm-control-spacing: 4px; --vm-menu-item-focus-bg: hsl(var(--color-background-highlight)); --vm-control-icon-size: 24px; <?= str_ends_with($theme, 'transparent') ? '--vm-controls-bg: transparent;' : '' ?>"
             >
             <vm-audio preload="none">
                 <?php $source = logged_in() ? $episode->audio_file_url : $episode->audio_file_analytics_url .

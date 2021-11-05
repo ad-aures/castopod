@@ -21,17 +21,17 @@
 <form id="podcast-edit-form" action="<?= route_to('podcast-edit', $podcast->id) ?>" method="POST" enctype='multipart/form-data' class="flex flex-row-reverse flex-wrap items-start justify-end gap-4">
 <?= csrf_field() ?>
 
-<div class="sticky z-40 flex flex-col w-full max-w-xs overflow-hidden bg-white shadow-sm border-3 border-pine-100 top-24 rounded-xl">
+<div class="sticky z-40 flex flex-col w-full max-w-xs overflow-hidden shadow-sm bg-elevated border-3 border-subtle top-24 rounded-xl">
     <?php if ($podcast->banner_path !== null): ?>
-        <a href="<?= route_to('podcast-banner-delete', $podcast->id) ?>" class="absolute p-1 text-white bg-red-600 border-2 border-black rounded-full hover:bg-red-800 focus:ring-castopod top-2 right-2" title="<?= lang('Podcast.form.banner_delete') ?>"><?= icon('delete-bin') ?></a>
+        <a href="<?= route_to('podcast-banner-delete', $podcast->id) ?>" class="absolute p-1 text-red-700 bg-red-100 border-2 rounded-full hover:text-red-900 border-contrast focus:ring-accent top-2 right-2" title="<?= lang('Podcast.form.banner_delete') ?>" data-tooltip="bottom"><?= icon('delete-bin') ?></a>
     <?php endif; ?>
-    <img src="<?= $podcast->banner->small_url ?>" alt="" class="object-cover w-full aspect-[3/1] bg-pine-800" />
+    <img src="<?= $podcast->banner->small_url ?>" alt="" class="object-cover w-full aspect-[3/1] bg-header" />
     <div class="flex px-4 py-2">
         <img src="<?= $podcast->cover->thumbnail_url ?>" alt="<?= $podcast->title ?>"
-            class="w-16 h-16 mr-4 -mt-8 rounded-full ring-2 ring-white" />
+            class="w-16 h-16 mr-4 -mt-8 rounded-full ring-2 ring-background-elevated" />
         <div class="flex flex-col">
             <p class="font-semibold leading-none"><?= $podcast->title ?></p>
-            <p class="text-sm text-gray-500">@<?= $podcast->handle ?></p>
+            <p class="text-sm text-skin-muted">@<?= $podcast->handle ?></p>
         </div>
     </div>
 </div>
@@ -189,7 +189,7 @@
     value="<?= $podcast->payment_pointer ?>"
     hint="<?= lang('Podcast.form.payment_pointer_hint') ?>" />
 
-<fieldset class="flex flex-col items-start p-4 bg-gray-100 rounded">
+<fieldset class="flex flex-col items-start p-4 rounded bg-base">
     <Heading tagName="legend" class="float-left" size="small"><?= lang('Podcast.form.partnership') ?></Heading>
     <div class="flex flex-col w-full clear-left gap-x-2 gap-y-4 md:flex-row">
         <div class="flex flex-col flex-shrink w-32">

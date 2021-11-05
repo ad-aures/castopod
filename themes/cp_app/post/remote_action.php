@@ -34,9 +34,9 @@
         ->asset('js/podcast.ts', 'js') ?>
 </head>
 
-<body class="min-h-screen mx-auto bg-pine-50">
-    <header class="pt-8 pb-32 bg-pine-800">
-        <h1 class="text-lg font-semibold text-center text-white"><?= lang(
+<body class="min-h-screen mx-auto bg-base">
+    <header class="pt-8 pb-32 bg-elevated">
+        <h1 class="text-lg font-semibold text-center text-skin-base"><?= lang(
             'Fediverse.' . $action . '.subtitle',
         ) ?></h1>
     </header>

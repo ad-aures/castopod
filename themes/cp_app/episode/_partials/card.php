@@ -1,6 +1,6 @@
-<article class="flex w-full p-4 bg-white shadow rounded-conditional-2xl gap-x-2">
+<article class="flex w-full p-4 shadow bg-elevated rounded-conditional-2xl gap-x-2">
     <div class="relative">
-        <time class="absolute px-1 text-xs font-semibold text-white rounded bottom-2 right-2 bg-black/50" datetime="PT<?= $episode->audio_file_duration ?>S">
+        <time class="absolute px-1 text-xs font-semibold text-white rounded bottom-2 right-2 bg-black/75" datetime="PT<?= $episode->audio_file_duration ?>S">
             <?= format_duration($episode->audio_file_duration) ?>
         </time>
         <img loading="lazy" src="<?= $episode->cover
@@ -9,8 +9,8 @@
     <div class="flex items-center flex-1 gap-x-4">
         <div class="flex flex-col flex-1">
             <div class="inline-flex items-center">
-                <?= episode_numbering($episode->number, $episode->season_number, 'text-xs font-semibold text-gray-700 px-1 border mr-2 !no-underline', true) ?>
-                <?= relative_time($episode->published_at, 'text-xs whitespace-nowrap') ?>
+                <?= episode_numbering($episode->number, $episode->season_number, 'text-xs font-semibold border-subtle text-skin-muted px-1 border mr-2 !no-underline', true) ?>
+                <?= relative_time($episode->published_at, 'text-xs whitespace-nowrap text-skin-muted') ?>
             </div>
             <h2 class="flex-1 font-semibold line-clamp-2"><a class="hover:underline" href="<?= $episode->link ?>"><?= $episode->title ?></a></h2>
         </div>

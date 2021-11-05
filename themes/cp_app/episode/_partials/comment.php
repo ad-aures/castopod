@@ -8,12 +8,12 @@
                 : 'target="_blank" rel="noopener noreferrer"' ?>>
                 <span class="mr-2 font-semibold truncate"><?= $comment->actor
                     ->display_name ?></span>
-                <span class="text-sm text-gray-500 truncate">@<?= $comment->actor
+                <span class="text-sm text-skin-muted truncate">@<?= $comment->actor
                     ->username .
                     ($comment->actor->is_local
                         ? ''
                         : '@' . $comment->actor->domain) ?></span>
-                <?= relative_time($comment->created_at, 'text-xs text-gray-500 ml-auto flex-shrink-0') ?>
+                <?= relative_time($comment->created_at, 'text-xs text-skin-muted ml-auto flex-shrink-0') ?>
             </a>
         </header>
         <div class="mb-2 post-content"><?= $comment->message_html ?></div>

@@ -19,7 +19,7 @@ class RadioButton extends FormComponent
             [
                 'id' => $this->value,
                 'name' => $this->name,
-                'class' => 'form-radio-btn',
+                'class' => 'form-radio-btn bg-elevated',
             ],
             $this->value,
             old($this->name) ? old($this->name) === $this->value : $this->isChecked,

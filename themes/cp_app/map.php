@@ -20,29 +20,29 @@
         ->asset('js/map.ts', 'js') ?>
 </head>
 
-<body class="flex flex-col h-full min-h-screen mx-auto bg-gray-100">
+<body class="flex flex-col h-full min-h-screen mx-auto bg-base">
     <?php if (service('authentication')->check()): ?>
         <?= $this->include('_admin_navbar') ?>
     <?php endif; ?>
 
-    <header class="py-8 text-white border-b bg-pine-800">
+    <header class="py-8 text-white border-b border-subtle bg-elevated">
         <div class="container flex flex-col items-start px-2 py-4 mx-auto">
             <a href="<?= route_to('home') ?>"
-            class="inline-flex items-center mb-2 focus:ring-castopod"><?= icon(
+            class="inline-flex items-center mb-2 text-sm focus:ring-accent"><?= icon(
             'arrow-left',
             'mr-2',
         ) . lang('Page.back_to_home') ?></a>
-            <h1 class="text-3xl font-semibold"><?= lang('Page.map') ?></h1>
+            <Heading tagName="h1" size="large"><?= lang('Page.map') ?></Heading>
         </div>
     </header>
     <main class="flex-1 w-full h-full">
-        <div id="map" data-episodes-map-data-url="<?= url_to('episodes-markers') ?>" class="w-full h-full"></div>
+        <div id="map" data-episodes-map-data-url="<?= url_to('episodes-markers') ?>" class="z-10 w-full h-full"></div>
     </main>
-    <footer class="container flex justify-between px-2 py-4 mx-auto text-sm text-right border-t">
+    <footer class="container flex justify-between px-2 py-4 mx-auto text-sm text-right">
         <?= render_page_links() ?>
         <small><?= lang('Common.powered_by', [
             'castopod' =>
-                '<a class="inline-flex font-semibold hover:underline focus:ring-castopod" href="https://castopod.org/" target="_blank" rel="noreferrer noopener">Castopod' . icon('social/castopod', 'ml-1 text-lg') . '</a>',
+                '<a class="inline-flex font-semibold hover:underline focus:ring-accent" href="https://castopod.org/" target="_blank" rel="noreferrer noopener">Castopod' . icon('social/castopod', 'ml-1 text-lg') . '</a>',
         ]) ?></small>
     </footer> 
 </body>

@@ -59,15 +59,32 @@ export class XMLEditor extends LitElement {
     .cm-editor {
       border-radius: 0.5rem;
       overflow: hidden;
-      border: 3px solid #000000;
-      background-color: #ffffff;
+      border: 3px solid hsl(var(--color-border-contrast));
+      background-color: hsl(var(--color-background-elevated));
     }
     .cm-editor.cm-focused {
       outline: 2px solid transparent;
-      box-shadow: 0 0 0 2px #e7f9e4, 0 0 0 calc(4px) #009486;
+      box-shadow: 0 0 0 2px hsl(var(--color-background-elevated)),
+        0 0 0 calc(4px) hsl(var(--color-accent-base));
     }
     .cm-gutters {
-      background-color: #ffffff !important;
+      background-color: hsl(var(--color-background-elevated)) !important;
+    }
+
+    .cm-activeLine {
+      background-color: hsl(var(--color-background-highlight)) !important;
+    }
+
+    .cm-activeLineGutter {
+      background-color: hsl(var(--color-background-highlight)) !important;
+    }
+
+    .ͼ4 .cm-line {
+      caret-color: hsl(var(--color-text-base)) !important;
+    }
+
+    .ͼ1 .cm-cursor {
+      border: none;
     }
   `;
 

@@ -8,7 +8,7 @@
 
 <?= $this->section('content') ?>
 
-<p class="mb-4 text-gray-600"><?= lang('Auth.enterEmailForInstructions') ?></p>
+<p class="mb-4 text-skin-muted"><?= lang('Auth.enterEmailForInstructions') ?></p>
 
 <form action="<?= route_to('forgot') ?>" method="POST" class="flex flex-col w-full gap-y-4">
     <?= csrf_field() ?>

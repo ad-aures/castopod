@@ -14,7 +14,7 @@
     route_to('episode-view', $podcast->id, $episode->id),
     icon('arrow-left', 'mr-2 text-lg') . lang('Episode.publish_form.back_to_episode_dashboard'),
     [
-        'class' => 'inline-flex items-center font-semibold mr-4 text-sm focus:ring-castopod',
+        'class' => 'inline-flex items-center font-semibold mr-4 text-sm focus:ring-accent',
     ],
 ) ?>
 
@@ -25,14 +25,14 @@
 <label for="message" class="text-lg font-semibold"><?= lang(
     'Episode.publish_form.post',
 ) ?></label>
-<small class="max-w-md mb-2 text-gray-600"><?= lang('Episode.publish_form.post_hint') ?></small>
-<div class="mb-8 overflow-hidden bg-white shadow-md rounded-xl">
+<small class="max-w-md mb-2 text-skin-muted"><?= lang('Episode.publish_form.post_hint') ?></small>
+<div class="mb-8 overflow-hidden shadow-md bg-elevated rounded-xl">
     <div class="flex px-4 py-3 gap-x-2">
         <img src="<?= $podcast->actor->avatar_image_url ?>" alt="<?= $podcast->actor->display_name ?>" class="w-10 h-10 rounded-full" />
         <div class="flex flex-col min-w-0">
             <p class="flex items-baseline min-w-0">
                 <span class="mr-2 font-semibold truncate"><?= $podcast->actor->display_name ?></span>
-                <span class="text-sm text-gray-500 truncate">@<?= $podcast->actor->username ?></span>
+                <span class="text-sm truncate text-skin-muted">@<?= $podcast->actor->username ?></span>
             </p>
         </div>
     </div>
@@ -49,11 +49,11 @@
                     <?= episode_numbering(
         $episode->number,
         $episode->season_number,
-        'text-xs font-semibold text-gray-600 !no-underline border px-1 border-gray-500',
+        'text-xs font-semibold text-skin-muted !no-underline border px-1 border-gray-500',
         true,
     ) ?>
                 </div>
-                <div class="text-xs text-gray-600">
+                <div class="text-xs text-skin-muted">
                     <time datetime="PT<?= $episode->audio_file_duration ?>S">
                         <?= format_duration($episode->audio_file_duration) ?>
                     </time>
@@ -63,9 +63,9 @@
         </div>
     </div>
     <footer class="flex justify-around px-6 py-3">
-        <span class="inline-flex items-center"><Icon glyph="chat" class="mr-1 text-xl text-gray-400" />0</span>
-        <span class="inline-flex items-center"><Icon glyph="repeat" class="mr-1 text-xl text-gray-400" />0</span>
-        <span class="inline-flex items-center"><Icon glyph="heart" class="mr-1 text-xl text-gray-400" />0</span>
+        <span class="inline-flex items-center"><Icon glyph="chat" class="mr-1 text-xl opacity-40" />0</span>
+        <span class="inline-flex items-center"><Icon glyph="repeat" class="mr-1 text-xl opacity-40" />0</span>
+        <span class="inline-flex items-center"><Icon glyph="heart" class="mr-1 text-xl opacity-40" />0</span>
     </footer>
 </div>
 
@@ -76,7 +76,7 @@
     <Forms.Radio value="now" name="publication_method" isChecked="<?= old('publication_method') ? old('publish') === 'now' : true ?>"><?= lang('Episode.publish_form.publication_method.now') ?></Forms.Radio>
     <div class="inline-flex flex-wrap items-center radio-toggler">
         <input
-            class="w-6 h-6 border-black text-pine-500 border-3 focus:ring-castopod"
+            class="w-6 h-6 border-contrast text-accent-base border-3 focus:ring-accent"
             type="radio" id="schedule" name="publication_method" value="schedule" <?= old('publication_method') && old('publication_method') === 'schedule' ? 'checked' : '' ?> />
         <Label for="schedule" class="pl-2 leading-8"><?= lang('Episode.publish_form.publication_method.schedule') ?></label>
         <div class="w-full mt-2 radio-toggler-element">

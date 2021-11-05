@@ -10,12 +10,12 @@ class Input extends FormComponent
 
     public function render(): string
     {
-        $baseClass = 'w-full bg-white border-black rounded-lg focus:border-black border-3 focus:ring-castopod focus-within:ring-castopod ' . $this->class;
+        $baseClass = 'w-full bg-elevated border-contrast rounded-lg focus:border-contrast border-3 focus:ring-accent focus-within:ring-accent ' . $this->class;
 
         $this->attributes['class'] = $baseClass;
 
         if ($this->type === 'file') {
-            $this->attributes['class'] .= ' file:px-3 file:py-2 file:h-[40px] file:font-semibold file:text-gray-800 file:text-sm file:rounded-none file:border-none file:bg-gray-200 file:hover:bg-gray-300 file:cursor-pointer';
+            $this->attributes['class'] .= ' file:px-3 file:py-2 file:h-[40px] file:font-semibold file:text-skin-muted file:text-sm file:rounded-none file:border-none file:bg-highlight file:cursor-pointer';
         } else {
             $this->attributes['class'] .= ' px-3 py-2';
         }

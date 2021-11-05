@@ -1,13 +1,13 @@
-<div data-sidebar-toggler="backdrop" class="absolute top-0 left-0 z-10 hidden w-full h-full bg-pine-800/75 md:hidden" role="button" tabIndex="0" aria-label="Close"></div>
-<aside id="podcast-sidebar" data-sidebar-toggler="sidebar" data-toggle-class="hidden" data-hide-class="hidden" class="z-20 hidden h-full col-span-1 col-start-2 row-start-1 p-4 py-6 shadow-2xl md:shadow-none md:block bg-pine-50">
-    <div class="sticky z-10 bg-pine-50 top-12">
-        <a href="<?= route_to('podcast_feed', $podcast->handle) ?>" class="inline-flex items-center mb-6 text-sm font-semibold focus:ring-castopod text-pine-800 group" target="_blank" rel="noopener noreferrer">
+<div data-sidebar-toggler="backdrop" class="absolute top-0 left-0 z-10 hidden w-full h-full bg-backdrop/75 md:hidden" role="button" tabIndex="0" aria-label="Close"></div>
+<aside id="podcast-sidebar" data-sidebar-toggler="sidebar" data-toggle-class="hidden" data-hide-class="hidden" class="z-20 hidden h-full col-span-1 col-start-2 row-start-1 p-4 py-6 shadow-2xl md:shadow-none md:block bg-base">
+    <div class="sticky z-10 bg-base top-12">
+        <a href="<?= route_to('podcast_feed', $podcast->handle) ?>" class="inline-flex items-center mb-6 text-sm font-semibold focus:ring-accent text-skin-muted hover:text-skin-base group" target="_blank" rel="noopener noreferrer">
             <?= icon('rss', ' mr-2 bg-orange-500 text-xl text-white group-hover:bg-orange-700 p-1 w-6 h-6 inline-flex items-center justify-center rounded-lg') . lang('Podcast.feed') ?>
         </a>
         <?php if (
             in_array(true, array_column($podcast->socialPlatforms, 'is_visible'), true)
         ): ?>
-        <h2 class="mb-2 font-bold font-display text-pine-900"> <?= lang('Podcast.find_on', [
+        <h2 class="text-sm font-bold font-display text-accent-muted"> <?= lang('Podcast.find_on', [
             'podcastTitle' => $podcast->title,
         ]) ?></h2>
         <div class="grid items-center justify-center grid-cols-6 gap-3 mb-6">
@@ -17,11 +17,10 @@
             $socialPlatform->link_url,
             icon("{$socialPlatform->type}/{$socialPlatform->slug}"),
             [
-                'class' => 'text-2xl text-gray-500 hover:text-gray-700 w-8 h-8 items-center inline-flex justify-center',
+                'class' => 'text-2xl text-skin-muted hover:text-skin-base w-8 h-8 items-center inline-flex justify-center',
                 'target' => '_blank',
                 'rel' => 'noopener noreferrer',
-                'data-toggle' => 'tooltip',
-                'data-placement' => 'bottom',
+                'data-tooltip' => 'bottom',
                 'title' => $socialPlatform->label,
             ],
         ) ?>
@@ -33,7 +32,7 @@
         <?php if (
             in_array(true, array_column($podcast->podcastingPlatforms, 'is_visible'), true)
         ): ?>
-        <h2 class="mb-2 font-bold font-display text-pine-900"><?= lang('Podcast.listen_on') ?></h2>
+        <h2 class="text-sm font-bold font-display text-accent-muted"><?= lang('Podcast.listen_on') ?></h2>
         <div class="grid items-center justify-center grid-cols-6 gap-3 mb-6">
             <?php foreach ($podcast->podcastingPlatforms as $podcastingPlatform): ?>
                 <?php if ($podcastingPlatform->is_visible): ?>
@@ -43,11 +42,10 @@
                 "{$podcastingPlatform->type}/{$podcastingPlatform->slug}",
             ),
             [
-                'class' => 'text-2xl text-gray-500 hover:text-gray-700 w-8 h-8 items-center inline-flex justify-center',
+                'class' => 'text-2xl text-skin-muted hover:text-skin-base w-8 h-8 items-center inline-flex justify-center',
                 'target' => '_blank',
                 'rel' => 'noopener noreferrer',
-                'data-toggle' => 'tooltip',
-                'data-placement' => 'bottom',
+                'data-tooltip' => 'bottom',
                 'title' => $podcastingPlatform->label,
             ],
         ) ?>
@@ -55,13 +53,13 @@
             <?php endforeach; ?>
         </div>
         <?php endif; ?>
-        <footer class="flex flex-col items-center py-2 text-xs text-center text-gray-600 border-t">
-            <?= render_page_links('inline-flex mb-2 flex-wrap gap-y-1') ?>
+        <footer class="flex flex-col items-center py-2 text-xs text-center border-t border-subtle text-skin-muted">
+            <?= render_page_links('inline-flex mb-2 flex-wrap gap-y-1 justify-center') ?>
             <div class="flex flex-col">
                 <p><?= $podcast->copyright ?></p>
                 <p><?= lang('Common.powered_by', [
                     'castopod' =>
-                        '<a class="inline-flex font-semibold text-gray-500 hover:underline focus:ring-castopod" href="https://castopod.org" target="_blank" rel="noreferrer noopener">Castopod' . icon('social/castopod', 'ml-1 text-lg') . '</a>',
+                        '<a class="inline-flex font-semibold text-skin-muted hover:underline focus:ring-accent" href="https://castopod.org" target="_blank" rel="noreferrer noopener">Castopod' . icon('social/castopod', 'ml-1 text-lg') . '</a>',
                 ]) ?></p>
             </div>
         </footer>

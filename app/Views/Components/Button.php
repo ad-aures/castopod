@@ -28,13 +28,12 @@ class Button extends Component
     public function render(): string
     {
         $baseClass =
-            'flex-shrink-0 inline-flex items-center justify-center font-semibold shadow-xs rounded-full focus:ring-castopod';
+            'flex-shrink-0 inline-flex items-center justify-center font-semibold shadow-xs rounded-full focus:ring-accent';
 
         $variantClass = [
             'default' => 'text-black bg-gray-300 hover:bg-gray-400',
-            'primary' => 'text-white bg-pine-500 hover:bg-pine-800',
-            'secondary' => 'border-2 border-pine-500 text-pine-500 bg-pine-100 hover:border-pine-800 hover:text-pine-800',
-            'accent' => 'text-white bg-rose-600 hover:bg-rose-800',
+            'primary' => 'text-accent-contrast bg-accent-base hover:bg-accent-hover',
+            'secondary' => 'border-2 border-accent-base text-accent-base bg-transparent hover:border-accent-hover hover:text-accent-hover',
             'success' => 'text-white bg-pine-500 hover:bg-pine-800',
             'danger' => 'text-white bg-red-600 hover:bg-red-700',
             'warning' => 'text-black bg-yellow-500 hover:bg-yellow-600',

@@ -10,7 +10,11 @@
 
   .see-more_content-fade {
     @apply absolute bottom-0 left-0 w-full h-full pointer-events-none;
-    background-image: linear-gradient(to bottom, transparent, #00564a);
+    background-image: linear-gradient(
+      to bottom,
+      transparent,
+      hsl(var(--color-background-header))
+    );
   }
 
   .see-more__checkbox {
@@ -27,7 +31,7 @@
 
   /* Don't forget focus and hover styles for accessibility! */
   .see-more__checkbox:focus ~ .see-more__label {
-    @apply ring;
+    @apply ring-accent;
   }
 
   .see-more__checkbox:hover ~ .see-more__label {

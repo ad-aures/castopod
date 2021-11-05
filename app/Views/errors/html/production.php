@@ -10,10 +10,10 @@
     <?= service('vite')->asset('styles/index.css', 'css') ?>
 </head>
 
-<body class="flex flex-col items-center justify-center min-h-screen px-2 text-center bg-gray-100">
+<body class="flex flex-col items-center justify-center min-h-screen px-2 text-center bg-base">
 	<?= svg('castopod-mascot_confused', 'h-64') ?>
 	<h1 class="text-3xl font-bold font-display md:text-4xl lg:text-5xl">Whoops!</h1>
-	<p class="mb-6 text-lg text-gray-600 md:text-xl lg:text-2xl">We seem to have hit a snag. Please try again later...</p>
+	<p class="mb-6 text-lg text-skin-muted md:text-xl lg:text-2xl">We seem to have hit a snag. Please try again later...</p>
 </body>
 
 </html>

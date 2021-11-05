@@ -27,15 +27,15 @@
         ->asset('js/audio-player.ts', 'js') ?>
 </head>
 
-<body class="flex flex-col min-h-screen mx-auto md:min-h-full md:grid md:grid-cols-podcast bg-pine-50">
+<body class="flex flex-col min-h-screen mx-auto md:min-h-full md:grid md:grid-cols-podcast bg-base">
     <?php if (can_user_interact()): ?>
         <div class="col-span-full">
             <?= $this->include('_admin_navbar') ?>
         </div>
     <?php endif; ?>
 
-    <nav class="flex items-center justify-between h-10 col-start-2 text-white bg-pine-800">
-        <a href="<?= route_to('podcast-episodes', $podcast->handle) ?>" class="inline-flex items-center h-full px-2 focus:ring-castopod focus:ring-inset" title="<?= lang('Episode.back_to_episodes', [
+    <nav class="flex items-center justify-between h-10 col-start-2 text-white bg-header">
+        <a href="<?= route_to('podcast-episodes', $podcast->handle) ?>" class="inline-flex items-center h-full px-2 focus:ring-accent focus:ring-inset" title="<?= lang('Episode.back_to_episodes', [
             'podcast' => $podcast->title,
         ]) ?>">
             <?= icon('arrow-left', 'mr-2 text-lg') ?>
@@ -51,38 +51,38 @@
         </a>
         <div class="inline-flex items-center self-end h-full px-2 gap-x-2">
             <?php if (in_array(true, array_column($podcast->fundingPlatforms, 'is_visible'), true)): ?>
-                <IconButton glyph="heart" variant="accent" data-toggle="funding-links" data-toggle-class="hidden"><?= lang('Podcast.sponsor') . lang('Podcast.sponsor_title') ?></IconButton>
+                <button class="p-2 text-red-600 bg-white rounded-full shadow hover:text-red-500 focus:ring-accent" data-toggle="funding-links" data-toggle-class="hidden" title="<?= lang('Podcast.sponsor') ?>"><Icon glyph="heart"></Icon></button>
             <?php endif; ?>
             <?= anchor_popup(
                         route_to('follow', $podcast->handle),
                         icon(
                             'social/castopod',
-                            'mr-2 text-xl text-rose-200 group-hover:text-rose-50',
+                            'mr-2 text-xl text-black/75 group-hover:text-black',
                         ) . lang('Podcast.follow'),
                         [
                             'width' => 420,
                             'height' => 620,
                             'class' =>
-                                'group inline-flex items-center px-2 py-1 text-xs tracking-wider font-semibold text-white uppercase rounded-full shadow focus:ring-castopod bg-rose-600',
+                                'group inline-flex items-center px-3 leading-8 text-xs tracking-wider font-semibold text-black uppercase rounded-full shadow focus:ring-accent bg-white',
                         ],
                     ) ?>
         </div>
     </nav>
-    <header class="relative z-50 flex flex-col col-start-2 px-8 pt-8 pb-4 overflow-hidden bg-pine-500 gap-y-4">
-        <div class="absolute top-0 left-0 w-full h-full bg-center bg-no-repeat bg-cover blur-lg mix-blend-soft-light" style="background-image: url('<?= $episode->podcast->banner->small_url ?>');"></div>
-        <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-pine-800 to-transparent"></div>
+    <header class="relative z-50 flex flex-col col-start-2 px-8 pt-8 pb-4 overflow-hidden bg-accent-base/75 gap-y-4">
+        <div class="absolute top-0 left-0 w-full h-full bg-center bg-no-repeat bg-cover blur-lg mix-blend-overlay filter grayscale" style="background-image: url('<?= $episode->podcast->banner->small_url ?>');"></div>
+        <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-background-header to-transparent"></div>
         <div class="z-10 flex flex-col items-start gap-y-2 gap-x-4 sm:flex-row">
-            <img src="<?= $episode->cover->medium_url ?>" alt="<?= $episode->title ?>" loading="lazy" class="rounded-md h-36" />
+            <img src="<?= $episode->cover->medium_url ?>" alt="<?= $episode->title ?>" loading="lazy" class="rounded-md shadow-xl h-36" />
             <div class="flex flex-col items-start text-white">
-                <?= episode_numbering($episode->number, $episode->season_number, 'bg-pine-50 text-sm leading-none font-semibold text-gray-700 border !no-underline border-pine-100', true) ?>
-                <h1 class="inline-flex items-baseline max-w-md mt-2 text-2xl font-bold leading-none sm:text-3xl font-display line-clamp-2"><?= $episode->title ?></h1>
+                <?= episode_numbering($episode->number, $episode->season_number, 'text-sm leading-none font-semibold px-1 py-1 text-white/90 border !no-underline border-subtle', true) ?>
+                <h1 class="inline-flex items-baseline max-w-md mt-2 text-2xl font-bold sm:leading-none sm:text-3xl font-display line-clamp-2"><?= $episode->title ?></h1>
                 <div class="flex items-center mt-4 gap-x-8">
                 <?php if ($episode->persons !== []): ?>
-                    <button class="flex items-center text-xs font-semibold gap-x-2 hover:underline focus:ring-castopod" data-toggle="persons-list" data-toggle-class="hidden">
+                    <button class="flex items-center text-xs font-semibold gap-x-2 hover:underline focus:ring-accent" data-toggle="persons-list" data-toggle-class="hidden">
                         <div class="inline-flex flex-row-reverse">
                             <?php $i = 0; ?>
                             <?php foreach ($episode->persons as $person): ?>
-                                <img src="<?= $person->avatar->thumbnail_url ?>" alt="<?= $person->full_name ?>" class="object-cover w-8 h-8 -ml-5 border-2 rounded-full border-pine-100 last:ml-0" />
+                                <img src="<?= $person->avatar->thumbnail_url ?>" alt="<?= $person->full_name ?>" class="object-cover w-8 h-8 -ml-5 border-2 rounded-full border-background-header last:ml-0" />
                                 <?php $i++; if ($i === 3) {
                         break;
                     }?>
@@ -118,12 +118,12 @@
             </div>
         </div>
     </header>
-    <div class="col-start-2 px-8 py-4 text-white bg-pine-800">
+    <div class="col-start-2 px-8 py-4 text-white bg-header">
         <h2 class="text-xs font-bold tracking-wider uppercase whitespace-pre-line font-display"><?= lang('Episode.description') ?></h2>
         <?php if (substr_count($episode->description_markdown, "\n") > 3 || strlen($episode->description) > 250): ?>
-            <SeeMore class="max-w-xl prose-sm text-white whitespace-pre-line"><?= $episode->getDescriptionHtml('-+Website+-') ?></SeeMore>
+            <SeeMore class="max-w-xl prose-sm text-white"><?= $episode->getDescriptionHtml('-+Website+-') ?></SeeMore>
         <?php else: ?>
-            <div class="max-w-xl prose-sm text-white whitespace-pre-line"><?= $episode->getDescriptionHtml('-+Website+-') ?></div>
+            <div class="max-w-xl prose-sm text-white"><?= $episode->getDescriptionHtml('-+Website+-') ?></div>
         <?php endif; ?>
     </div>
     <?= $this->include('episode/_partials/navigation') ?>
@@ -131,7 +131,7 @@
         <main class="w-full col-start-1 row-start-1 py-6 col-span-full md:col-span-1">
             <?= $this->renderSection('content') ?>
         </main>
-        <div data-sidebar-toggler="backdrop" class="absolute top-0 left-0 z-10 hidden w-full h-full bg-pine-800/75 md:hidden" role="button" tabIndex="0" aria-label="Close"></div>
+        <div data-sidebar-toggler="backdrop" class="absolute top-0 left-0 z-10 hidden w-full h-full bg-backdrop/75 md:hidden" role="button" tabIndex="0" aria-label="Close"></div>
         <?= $this->include('podcast/_partials/sidebar') ?>
     </div>
     <?= view('_persons_modal', [

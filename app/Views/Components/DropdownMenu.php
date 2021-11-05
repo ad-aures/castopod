@@ -35,14 +35,14 @@ class DropdownMenu extends Component
             switch ($item['type']) {
                 case 'link':
                     $menuItems .= anchor($item['uri'], $item['title'], [
-                        'class' => 'px-4 py-1 hover:bg-gray-100 focus:ring-castopod focus:ring-inset' . (array_key_exists('class', $item) ? ' ' . $item['class'] : ''),
+                        'class' => 'px-4 py-1 hover:bg-highlight focus:ring-accent focus:ring-inset' . (array_key_exists('class', $item) ? ' ' . $item['class'] : ''),
                     ]);
                     break;
                 case 'html':
                     $menuItems .= html_entity_decode($item['content']);
                     break;
                 case 'separator':
-                    $menuItems .= '<hr class="my-2 border border-gray-100">';
+                    $menuItems .= '<hr class="my-2 border border-subtle">';
                     break;
                 default:
                     break;
@@ -51,7 +51,7 @@ class DropdownMenu extends Component
 
         return <<<HTML
             <nav id="{$this->id}"
-                class="absolute z-50 flex flex-col py-2 text-black whitespace-no-wrap bg-white border-black rounded-lg border-3"
+                class="absolute z-50 flex flex-col py-2 whitespace-no-wrap rounded-lg text-skin-base border-contrast bg-elevated border-3"
                 aria-labelledby="{$this->labelledby}"
                 data-dropdown="menu"
                 data-dropdown-placement="{$this->placement}"

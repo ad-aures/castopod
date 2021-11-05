@@ -39,14 +39,18 @@ import "./modules/play-episode-button";
 
 const player = html`<div
   id="castopod-audio-player"
-  class="fixed bottom-0 left-0 flex flex-col w-full bg-white border-t sm:flex-row z-50"
+  class="fixed bottom-0 left-0 flex flex-col w-full bg-elevated border-t border-subtle sm:flex-row z-50"
   data-episode="-1"
   style="display: none;"
 >
   <div class="flex items-center">
     <img src="" alt="" class="h-[52px] w-[52px]" />
     <div class="flex flex-col px-2">
-      <p class="text-sm w-48 truncate" title="" id="castopod-player-title"></p>
+      <p
+        class="text-sm w-48 truncate font-semibold"
+        title=""
+        id="castopod-player-title"
+      ></p>
       <p
         class="text-xs w-48 truncate"
         title=""
@@ -60,7 +64,7 @@ const player = html`<div
     language="en"
     icons="castopod-icons"
     class="flex-1"
-    style="--vm-player-box-shadow:0; --vm-player-theme: #009486;"
+    style="--vm-player-box-shadow:0; --vm-player-theme: hsl(var(--color-accent-base)); --vm-control-focus-color: hsl(var(--color-accent-contrast)); --vm-menu-item-focus-bg: hsl(var(--color-background-highlight));"
   >
     <vm-audio preload="none" id="testing-audio">
       <source src="" type="" />

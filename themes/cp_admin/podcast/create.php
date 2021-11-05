@@ -44,7 +44,7 @@
 <div class="flex flex-col">
     <Forms.Label for="handle" hint="<?= lang('Podcast.form.handle_hint') ?>"><?= lang('Podcast.form.handle') ?></Forms.Label>
     <div class="relative">
-        <Icon glyph="at" class="absolute inset-0 h-full text-xl text-gray-400 left-3" />
+        <Icon glyph="at" class="absolute inset-0 h-full text-xl opacity-40 left-3" />
         <Forms.Input name="handle" class="w-full pl-8" required="true" />
     </div>
 </div>
@@ -166,7 +166,7 @@
     label="<?= lang('Podcast.form.payment_pointer') ?>"
     hint="<?= lang('Podcast.form.payment_pointer_hint') ?>" />
 
-<fieldset class="flex flex-col items-start p-4 bg-gray-100 rounded">
+<fieldset class="flex flex-col items-start p-4 rounded bg-base">
     <Heading tagName="legend" class="float-left" size="small"><?= lang('Podcast.form.partnership') ?></Heading>
     <div class="flex flex-col w-full clear-left gap-x-2 gap-y-4 md:flex-row">
         <div class="flex flex-col flex-shrink w-32">

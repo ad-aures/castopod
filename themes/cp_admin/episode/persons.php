@@ -64,7 +64,7 @@
                     implode(
                         '',
                         array_map(function ($role) {
-                            return '<span class="text-sm text-gray-600">' .
+                            return '<span class="text-sm text-skin-muted">' .
                                 lang(
                                     "PersonsTaxonomy.persons.{$role->group}.label",
                                 ) .
@@ -77,7 +77,7 @@
                     ) .
                     ($person->information_url === null
                         ? ''
-                        : "<a href=\"{$person->information_url}\" target=\"_blank\" rel=\"noreferrer noopener\" class=\"text-sm text-blue-800 hover:underline\">" .
+                        : "<a href=\"{$person->information_url}\" target=\"_blank\" rel=\"noreferrer noopener\" class=\"font-semibold text-sm text-accent-base hover:text-accent-hover\">" .
                         $person->information_url .
                         '</a>') .
                     '</div></div>';

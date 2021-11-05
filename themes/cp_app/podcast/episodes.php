@@ -44,20 +44,20 @@
             <?php endif; ?>
         </h1>
         <?php if ($activeQuery): ?>
-            <button id="episode-lists-dropdown" type="button" class="inline-flex items-center px-2 py-1 text-sm font-semibold focus:ring-castopod" data-dropdown="button" data-dropdown-target="episode-lists-dropdown-menu" aria-label="<?= lang('Common.more') ?>" aria-haspopup="true" aria-expanded="false">
+            <button id="episode-lists-dropdown" type="button" class="inline-flex items-center px-2 py-1 text-sm font-semibold focus:ring-accent" data-dropdown="button" data-dropdown-target="episode-lists-dropdown-menu" aria-label="<?= lang('Common.more') ?>" aria-haspopup="true" aria-expanded="false">
                 <?= $activeQuery['label'] . icon('caret-down', 'ml-2 text-xl') ?>
             </button>
-            <nav id="episode-lists-dropdown-menu" class="flex flex-col py-2 text-black bg-white border rounded shadow" aria-labelledby="episode-lists-dropdown" data-dropdown="menu" data-dropdown-placement="bottom-end">
+            <nav id="episode-lists-dropdown-menu" class="flex flex-col py-2 rounded-lg shadow border-3 border-contrast bg-elevated" aria-labelledby="episode-lists-dropdown" data-dropdown="menu" data-dropdown-placement="bottom-end">
                 <?php foreach ($episodesNav as $link): ?>
                     <?= anchor(
     $link['route'],
     $link['label'] . ' (' . $link['number_of_episodes'] . ')',
     [
         'class' =>
-            'px-2 py-1 whitespace-nowrap ' .
+            'px-2 py-1 whitespace-nowrap hover:bg-highlight ' .
             ($link['is_active']
                 ? 'font-semibold'
-                : 'text-gray-600 hover:text-gray-900'),
+                : 'text-skin-muted hover:text-skin-base'),
     ],
 ) ?>
                 <?php endforeach; ?>

@@ -3,7 +3,8 @@
 }
 
 .breadcrumb-item + .breadcrumb-item::before {
-  @apply inline-block px-1 text-gray-500;
+  @apply inline-block px-1;
+  color: hsl(var(--color-text-muted));
   content: "/";
 }
 
@@ -15,7 +16,7 @@
   }
 
   &:focus {
-    @apply ring-castopod;
+    @apply ring-accent;
   }
 }
 

@@ -24,9 +24,9 @@ if (! function_exists('hint_tooltip')) {
     function hint_tooltip(string $hintText = '', string $class = ''): string
     {
         $tooltip =
-            '<span data-toggle="tooltip" data-placement="bottom" tabindex="0" title="' .
+            '<span data-tooltip="bottom" tabindex="0" title="' .
             $hintText .
-            '" class="inline-block text-gray-500 align-middle focus:ring-castopod';
+            '" class="inline-block align-middle text-skin-muted focus:ring-accent';
 
         if ($class !== '') {
             $tooltip .= ' ' . $class;
@@ -56,14 +56,14 @@ if (! function_exists('data_table')) {
             'table_open' => '<table class="w-full whitespace-no-wrap">',
 
             'thead_open' =>
-                '<thead class="text-xs font-semibold text-left text-gray-500 uppercase">',
+                '<thead class="text-xs font-semibold text-left uppercase text-skin-muted">',
 
             'heading_cell_start' => '<th class="px-4 py-2">',
             'cell_start' => '<td class="px-4 py-2">',
             'cell_alt_start' => '<td class="px-4 py-2">',
 
-            'row_start' => '<tr class="border-t hover:bg-pine-50">',
-            'row_alt_start' => '<tr class="border-t hover:bg-pine-50">',
+            'row_start' => '<tr class="border-t border-subtle hover:bg-base">',
+            'row_alt_start' => '<tr class="border-t border-subtle hover:bg-base">',
         ];
 
         $table->setTemplate($template);
@@ -88,7 +88,7 @@ if (! function_exists('data_table')) {
             return lang('Common.no_data');
         }
 
-        return '<div class="overflow-x-auto bg-white rounded-lg border-3 border-pine-100 ' . $class . '" >' .
+        return '<div class="overflow-x-auto rounded-lg bg-elevated border-3 border-subtle ' . $class . '" >' .
             $table->generate() .
             '</div>';
     }
@@ -105,7 +105,7 @@ if (! function_exists('publication_pill')) {
     function publication_pill(?Time $publicationDate, string $publicationStatus, string $customClass = ''): string
     {
         $class = match ($publicationStatus) {
-            'published' => 'text-pine-600 border-pine-600 bg-pine-50',
+            'published' => 'text-pine-500 border-pine-500 bg-pine-50',
             'scheduled' => 'text-red-600 border-red-600 bg-red-50',
             'not_published' => 'text-gray-600 border-gray-600 bg-gray-50',
             default => 'text-gray-600 border-gray-600 bg-gray-50',
@@ -208,7 +208,7 @@ if (! function_exists('episode_numbering')) {
                 $class .
                 '" title="' .
                 lang($transKey, $args) .
-                '">' .
+                '" data-tooltip="bottom">' .
                 lang($transKey . '_abbr', $args) .
                 '</abbr>';
         }
@@ -238,7 +238,7 @@ if (! function_exists('location_link')) {
             icon('map-pin', 'mr-2') . $location->name,
             [
                 'class' =>
-                    'inline-flex items-baseline hover:underline focus:ring-castopod' .
+                    'inline-flex items-baseline hover:underline focus:ring-accent' .
                     ($class === '' ? '' : " {$class}"),
                 'target' => '_blank',
                 'rel' => 'noreferrer noopener',
@@ -264,8 +264,8 @@ if (! function_exists('audio_player')) {
                 theme="light"
                 language="{$language}"
                 icons="castopod-icons"
-                class="{$class}"
-                style="--vm-player-box-shadow:0; --vm-player-theme: #009486; --vm-control-spacing: 4px;"
+                class="{$class} relative z-0"
+                style="--vm-player-box-shadow:0; --vm-player-theme: hsl(var(--color-accent-base)); --vm-control-focus-color: hsl(var(--color-accent-contrast)); --vm-control-spacing: 4px; --vm-menu-item-focus-bg: hsl(var(--color-background-highlight));"
             >
                 <vm-audio preload="none">
                     <source src="{$source}" type="{$mediaType}" />

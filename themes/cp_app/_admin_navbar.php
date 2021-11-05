@@ -1,9 +1,9 @@
-<div class="sticky top-0 left-0 z-50 flex items-center justify-between w-full h-10 text-white border-b bg-pine-800 border-pine-900">
+<div class="sticky top-0 left-0 z-50 flex items-center justify-between w-full h-10 text-white border-b bg-navigation border-navigation">
         <div class="inline-flex items-center h-full">
-            <a href="<?= route_to('home') ?>" class="inline-flex items-center h-full px-2 border-r border-pine-900 focus:ring-inset focus:ring-castopod">
+            <a href="<?= route_to('home') ?>" class="inline-flex items-center h-full px-2 border-r border-navigation focus:ring-inset focus:ring-accent">
                     <?= svg('castopod-logo-base', 'h-6') ?>
             </a>
-            <a href="<?= route_to('admin', ) ?>" class="inline-flex items-center h-full px-6 text-sm font-semibold hover:underline focus:ring-inset focus:ring-castopod">
+            <a href="<?= route_to('admin', ) ?>" class="inline-flex items-center h-full px-6 text-sm font-semibold hover:underline focus:ring-inset focus:ring-accent">
                 <?= lang('AdminNavigation.go_to_admin') ?>
                 <?= icon('external-link', 'ml-1 opacity-60') ?>
             </a>
@@ -12,7 +12,7 @@
         <div class="inline-flex items-center h-full">
         <button
             type="button"
-            class="inline-flex items-center h-full px-3 text-sm font-semibold focus:ring-inset focus:ring-castopod gap-x-2"
+            class="inline-flex items-center h-full px-3 text-sm font-semibold focus:ring-inset focus:ring-accent gap-x-2"
             id="my-account-dropdown"
             data-dropdown="button"
             data-dropdown-target="my-account-dropdown-menu"
@@ -20,17 +20,17 @@
             aria-expanded="false"><div class="relative mr-1">
                 <?= icon('account-circle', 'text-3xl opacity-60') ?>
                 <?= user()
-                    ->podcasts === [] ? '' : '<img src="' . interact_as_actor()->avatar_image_url . '" class="absolute bottom-0 w-4 h-4 border rounded-full -right-1 border-pine-800" />' ?>
+                    ->podcasts === [] ? '' : '<img src="' . interact_as_actor()->avatar_image_url . '" class="absolute bottom-0 w-4 h-4 border rounded-full -right-1 border-navigation" />' ?>
             </div>
             <?= user()->username ?>
             <?= icon('caret-down', 'ml-auto text-2xl') ?></button>
         <?php
             $interactButtons = '';
             foreach (user()->podcasts as $userPodcast) {
-                $checkMark = interact_as_actor_id() === $userPodcast->actor_id ? icon('check', 'ml-2 bg-pine-800 text-white rounded-full') : '';
+                $checkMark = interact_as_actor_id() === $userPodcast->actor_id ? icon('check', 'ml-2 bg-accent-base text-accent-contrast rounded-full') : '';
 
                 $interactButtons .= <<<CODE_SAMPLE
-                    <button class="inline-flex items-center w-full px-4 py-1 hover:bg-gray-100" id="interact-as-actor-{$userPodcast->id}" name="actor_id" value="{$userPodcast->actor_id}">
+                    <button class="inline-flex items-center w-full px-4 py-1 hover:bg-highlight" id="interact-as-actor-{$userPodcast->id}" name="actor_id" value="{$userPodcast->actor_id}">
                         <span class="inline-flex items-center flex-1 text-sm"><img src="{$userPodcast->cover->tiny_url}" class="w-6 h-6 mr-2 rounded-full" />{$userPodcast->title}{$checkMark}</span>
                     </button>
                 CODE_SAMPLE;
@@ -66,8 +66,8 @@
                     [
                         'type' => 'html',
                         'content' => esc(<<<CODE_SAMPLE
-                            <nav class="flex flex-col py-2 text-black whitespace-no-wrap">
-                                <span class="px-4 mb-2 text-xs font-semibold tracking-wider text-gray-500 uppercase">{$interactAsText}</span>
+                            <nav class="flex flex-col py-2 whitespace-no-wrap">
+                                <span class="px-4 mb-2 text-xs font-semibold tracking-wider uppercase text-skin-muted">{$interactAsText}</span>
                                 <form action="{$route}" method="POST" class="flex flex-col">
                                     {$csrfField}
                                     {$interactButtons}

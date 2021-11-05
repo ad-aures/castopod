@@ -12,14 +12,14 @@ $pager->setSurroundCount(2);
             <li>
                 <a href="<?= $pager->getFirst() ?>" aria-label="<?= lang(
     'Pager.first',
-) ?>"  class="block px-3 py-2 text-gray-700 hover:bg-gray-200 hover:text-black">
+) ?>"  class="block px-3 py-2 text-skin-muted hover:bg-highlight">
                     <span aria-hidden="true"><?= lang('Pager.first') ?></span>
                 </a>
             </li>
             <li>
                 <a href="<?= $pager->getPreviousPage() ?>" aria-label="<?= lang(
     'Pager.previous',
-) ?>" class="block px-3 py-2 text-gray-700 hover:bg-gray-200 hover:text-black">
+) ?>" class="block px-3 py-2 text-skin-muted hover:bg-highlight">
                     <span aria-hidden="true"><?= lang(
     'Pager.previous',
 ) ?></span>
@@ -30,13 +30,13 @@ $pager->setSurroundCount(2);
         <?php foreach ($pager->links() as $link): ?>
             <li>
                 <?php if ($link['active']): ?>
-                    <span class="block px-4 py-2 font-semibold text-white rounded-full bg-pine-500">
+                    <span class="block px-4 py-2 font-semibold rounded-full text-accent-contrast bg-accent-base">
                         <?= $link['title'] ?>
                     </span>
                 <?php else: ?>
                     <a href="<?= $link[
                         'uri'
-                    ] ?>" class="block px-4 py-2 text-gray-700 rounded-full hover:bg-gray-200 hover:text-black">
+                    ] ?>" class="block px-4 py-2 rounded-full text-skin-muted hover:bg-highlight">
                         <?= $link['title'] ?>
                     </a>
                 <?php endif; ?>
@@ -47,14 +47,14 @@ $pager->setSurroundCount(2);
             <li>
                 <a href="<?= $pager->getNextPage() ?>" aria-label="<?= lang(
                         'Pager.next',
-                    ) ?>" class="block px-3 py-2 text-gray-700 hover:bg-gray-200 hover:text-black">
+                    ) ?>" class="block px-3 py-2 text-skin-muted hover:bg-highlight">
                     <span aria-hidden="true"><?= lang('Pager.next') ?></span>
                 </a>
             </li>
             <li>
                 <a href="<?= $pager->getLast() ?>" aria-label="<?= lang(
                         'Pager.last',
-                    ) ?>" class="block px-3 py-2 text-gray-700 hover:bg-gray-200 hover:text-black">
+                    ) ?>" class="block px-3 py-2 text-skin-muted hover:bg-highlight">
                     <span aria-hidden="true"><?= lang('Pager.last') ?></span>
                 </a>
             </li>

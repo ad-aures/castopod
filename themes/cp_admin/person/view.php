@@ -15,19 +15,16 @@
 
 <?= $this->section('content') ?>
 
-<div class="flex flex-wrap">
-    <div class="w-full max-w-sm mb-6 md:mr-4">
-        <img
-            src="<?= $person->avatar->medium_url ?>"
-            alt="$person->full_name"
-            class="object-cover w-full rounded"
-        />
+<div class="flex flex-wrap gap-2">
+    <img
+        src="<?= $person->avatar->medium_url ?>"
+        alt="$person->full_name"
+        class="object-cover w-full max-w-xs rounded"
+    />
+    <div class="flex flex-col">
+        <?= $person->full_name ?>
+        <a class="font-semibold no-underline text-accent-base hover:underline" href="<?= $person->information_url ?>"><?= $person->information_url ?></a>
     </div>
-
-    <section class="w-full prose">
-    <?= $person->full_name ?><br />
-    <a href="<?= $person->information_url ?>"><?= $person->information_url ?></a>
-    </section>
 </div>
 
 <?= $this->endSection() ?>

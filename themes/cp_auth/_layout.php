@@ -12,15 +12,15 @@
         ->asset('styles/index.css', 'css') ?>
 </head>
 
-<body class="flex flex-col items-center justify-center min-h-screen mx-auto bg-pine-50">
+<body class="flex flex-col items-center justify-center min-h-screen mx-auto bg-base">
 	<header class="mb-4">
 		<a href="<?= route_to(
             'home',
-        ) ?>" class="inline-flex items-baseline text-4xl font-bold font-display text-pine-500 focus:ring-castopod">
+        ) ?>" class="inline-flex items-baseline text-4xl font-bold font-display text-accent-base focus:ring-accent">
 			<?= 'castopod' . svg('castopod-logo', 'h-8 ml-2') ?>
 		</a>
 	</header>
-	<main class="flex flex-col w-full max-w-md px-6 py-4 mx-auto bg-white rounded-lg border-3 border-pine-100 gap-y-4">
+	<main class="flex flex-col w-full max-w-md px-6 py-4 mx-auto rounded-lg bg-elevated border-3 border-subtle gap-y-4">
 		<Heading tagName="h1" size="large" class="self-center"><?= $this->renderSection(
             'title',
         ) ?></Heading>
@@ -29,9 +29,9 @@
 	</main>
 	<footer class="flex flex-col text-sm">
 		<?= $this->renderSection('footer') ?>
-		<small class="py-4 text-center border-t-2 border-pine-100"><?= lang('Common.powered_by', [
+		<small class="py-4 text-center border-t border-subtle"><?= lang('Common.powered_by', [
 		    'castopod' =>
-		        '<a class="inline-flex font-semibold hover:underline focus:ring-castopod" target="_blank" rel="noreferrer noopener">Castopod' . icon('social/castopod', 'ml-1 text-lg') . '</a>',
+		        '<a class="inline-flex font-semibold hover:underline focus:ring-accent" target="_blank" rel="noreferrer noopener">Castopod' . icon('social/castopod', 'ml-1 text-lg') . '</a>',
 		]) ?></small>
 	</footer>
 </body>

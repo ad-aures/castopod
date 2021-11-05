@@ -1,9 +1,8 @@
 import { createPopper, Placement } from "@popperjs/core";
 
 const Tooltip = (): void => {
-  const tooltipContainers: NodeListOf<HTMLElement> = document.querySelectorAll(
-    "[data-toggle='tooltip']"
-  );
+  const tooltipContainers: NodeListOf<HTMLElement> =
+    document.querySelectorAll("[data-tooltip]");
 
   for (let i = 0; i < tooltipContainers.length; i++) {
     const tooltipReference = tooltipContainers[i];
@@ -18,7 +17,7 @@ const Tooltip = (): void => {
     tooltip.innerHTML = tooltipContent;
 
     const popper = createPopper(tooltipReference, tooltip, {
-      placement: tooltipReference.dataset.placement as Placement,
+      placement: tooltipReference.dataset.tooltip as Placement,
       modifiers: [
         {
           name: "offset",

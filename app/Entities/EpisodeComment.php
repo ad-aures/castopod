@@ -119,7 +119,7 @@ class EpisodeComment extends UuidEntity
 
     public function getHasReplies(): bool
     {
-        return $this->getReplies() !== null;
+        return $this->getReplies() !== [];
     }
 
     public function getReplyToComment(): ?self

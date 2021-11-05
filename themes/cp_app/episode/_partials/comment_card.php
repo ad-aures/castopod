@@ -1,4 +1,4 @@
-<article class="relative z-10 flex w-full p-4 bg-white shadow rounded-conditional-2xl gap-x-2">
+<article class="relative z-10 flex w-full p-4 shadow bg-elevated rounded-conditional-2xl gap-x-2">
     <img src="<?= $comment->actor->avatar_image_url ?>" alt="<?= $comment->display_name ?>" class="w-10 h-10 rounded-full" />
     <div class="flex-1">
         <header class="w-full mb-2 text-sm">
@@ -7,12 +7,12 @@
                 : 'target="_blank" rel="noopener noreferrer"' ?>>
                 <span class="mr-2 font-semibold truncate"><?= $comment->actor
                     ->display_name ?></span>
-                <span class="text-sm text-gray-500 truncate">@<?= $comment->actor
+                <span class="text-sm truncate text-skin-muted">@<?= $comment->actor
                     ->username .
                     ($comment->actor->is_local
                         ? ''
                         : '@' . $comment->actor->domain) ?></span>
-                <?= relative_time($comment->created_at, 'text-xs text-gray-500 ml-auto') ?>
+                <?= relative_time($comment->created_at, 'text-xs text-skin-muted ml-auto') ?>
             </a>
         </header>
         <div class="mb-2 post-content"><?= $comment->message_html ?></div>
@@ -27,7 +27,7 @@
                             [
                                 'numberOfLikes' => $comment->likes_count,
                             ],
-                        ) ?>"><?= icon('heart', 'text-xl mr-1 text-gray-400 group-hover:text-red-600') . lang(
+                        ) ?>"><?= icon('heart', 'text-xl mr-1 opacity-40 group-hover:text-red-600 group-hover:opacity-100') . lang(
                             'Comment.likes',
                             [
                                 'numberOfLikes' => $comment->likes_count,
@@ -40,7 +40,7 @@
                             [
                                 'numberOfLikes' => $comment->likes_count,
                             ],
-                        ) ?>"><?= icon('heart', 'text-xl mr-1 text-gray-500') . lang(
+                        ) ?>"><?= icon('heart', 'text-xl mr-1 text-skin-muted') . lang(
                             'Comment.likes',
                             [
                                 'numberOfLikes' => $comment->likes_count,

@@ -1,4 +1,4 @@
-<article class="relative z-10 w-full bg-white shadow sm:rounded-conditional-2xl">
+<article class="relative z-10 w-full shadow bg-elevated sm:rounded-conditional-2xl">
     <header class="flex px-6 py-4 gap-x-2">
         <img src="<?= $post->actor
     ->avatar_image_url ?>" alt="<?= $post->actor->display_name ?>" class="w-10 h-10 rounded-full" />
@@ -10,14 +10,14 @@
     : 'target="_blank" rel="noopener noreferrer"' ?>>
                 <span class="mr-2 font-semibold truncate"><?= $post->actor
         ->display_name ?></span>
-                <span class="text-sm text-gray-500 truncate">@<?= $post->actor
+                <span class="text-sm truncate text-skin-muted">@<?= $post->actor
         ->username .
                     ($post->actor->is_local
                         ? ''
                         : '@' . $post->actor->domain) ?></span>
             </a>
             <a href="<?= route_to('post', $podcast->handle, $post->id) ?>"
-            class="text-xs text-gray-500">
+            class="text-xs text-skin-muted">
                 <?= relative_time($post->published_at) ?>
             </a>
         </div>
@@ -32,7 +32,7 @@
     'index' => $index,
             'episode' => $post->episode,
 ]) ?>
-    <?php elseif ($post->preview_card_id): ?>
+    <?php elseif ($post->preview_card): ?>
         <?= view('post/_partials/preview_card', [
             'preview_card' => $post->preview_card,
         ]) ?>

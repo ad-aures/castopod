@@ -135,7 +135,7 @@ class Post extends UuidEntity
 
     public function getHasReplies(): bool
     {
-        return $this->getReplies() !== null;
+        return $this->getReplies() !== [];
     }
 
     public function getReplyToPost(): ?self

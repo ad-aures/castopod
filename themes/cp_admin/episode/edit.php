@@ -162,10 +162,10 @@
     <div class="py-2 tab-panels">
         <section id="transcript-file-upload" class="flex items-center tab-panel">
             <?php if ($episode->transcript_file) : ?>
-                <div class="flex justify-between">
+                <div class="flex mb-1 gap-x-2">
                     <?= anchor(
                 $episode->transcript_file_url,
-                icon('file', 'mr-2 text-gray-500') .
+                icon('file', 'mr-2 text-skin-muted') .
                             $episode->transcript_file,
                 [
                     'class' => 'inline-flex items-center text-xs',
@@ -182,9 +182,8 @@
                             icon('delete-bin', 'mx-auto'),
                             [
                                 'class' =>
-                                'p-1 bg-red-200 rounded-full text-red-700 hover:text-red-900',
-                                'data-toggle' => 'tooltip',
-                                'data-placement' => 'bottom',
+                                'p-1 text-sm bg-red-100 rounded-full text-red-700 hover:text-red-900 focus:ring-accent',
+                                'data-tooltip' => 'bottom',
                                 'title' => lang(
                                     'Episode.form.transcript_file_delete',
                                 ),
@@ -220,7 +219,7 @@
     <div class="py-2 tab-panels">
         <section id="chapters-file-upload" class="flex items-center tab-panel">
             <?php if ($episode->chapters_file) : ?>
-                <div class="flex justify-between">
+                <div class="flex mb-1 gap-x-2">
                     <?= anchor(
                 $episode->chapters_file_url,
                 icon('file', 'mr-2') . $episode->chapters_file,
@@ -239,9 +238,8 @@
                             icon('delete-bin', 'mx-auto'),
                             [
                                 'class' =>
-                                'p-1 bg-red-200 rounded-full text-red-700 hover:text-red-900',
-                                'data-toggle' => 'tooltip',
-                                'data-placement' => 'bottom',
+                                'text-sm p-1 bg-red-100 rounded-full text-red-700 hover:text-red-900 focus:ring-accent',
+                                'data-tooltip' => 'bottom',
                                 'title' => lang(
                                     'Episode.form.chapters_file_delete',
                                 ),

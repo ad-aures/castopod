@@ -189,7 +189,7 @@ export class PlayEpisodeButton extends LitElement {
 
   static styles = css`
     button {
-      background-color: #009486;
+      background-color: hsl(var(--color-accent-base));
       cursor: pointer;
       display: inline-flex;
       align-items: center;
@@ -203,30 +203,31 @@ export class PlayEpisodeButton extends LitElement {
     }
 
     button:hover {
-      background-color: #00564a;
+      background-color: hsl(var(--color-accent-hover));
     }
 
     button:focus {
       outline: none;
-      box-shadow: 0 0 0 2px #e7f9e4, 0 0 0 4px #009486;
+      box-shadow: 0 0 0 2px hsl(var(--color-background-base)),
+        0 0 0 4px hsl(var(--color-accent-base));
     }
 
     button.playing {
-      background-color: #f2faf9;
-      border: 2px solid #009486;
+      background-color: hsl(var(--color-background-base));
+      border: 2px solid hsl(var(--color-accent-base));
     }
 
     button.playing:hover {
-      background-color: #e7f9e4;
+      background-color: hsl(var(--color-background-elevated));
     }
 
     button.playing svg {
-      color: #009486;
+      color: hsl(var(--color-accent-base));
     }
 
     svg {
       font-size: 1.5rem;
-      color: #ffffff;
+      color: hsl(var(--color-accent-contrast));
     }
 
     @keyframes spin {

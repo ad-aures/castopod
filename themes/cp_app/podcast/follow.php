@@ -33,19 +33,19 @@
 </head>
 
 
-<body class="flex flex-col min-h-screen bg-pine-50">
+<body class="flex flex-col min-h-screen bg-base">
     <header class="flex flex-col items-center mb-8">
-        <h1 class="w-full pt-8 pb-32 text-center text-white bg-pine-800"><?= lang(
+        <h1 class="w-full pt-8 pb-32 text-lg font-semibold text-center text-skin-base bg-elevated"><?= lang(
             'Fediverse.follow.subtitle',
         ) ?></h1>
-        <div class="flex flex-col w-full max-w-xs -mt-24 overflow-hidden bg-white shadow rounded-xl">
-            <img src="<?= $actor->cover_image_url ?>" alt="" class="object-cover w-full h-32 bg-pine-800" />
+        <div class="flex flex-col w-full max-w-xs -mt-24 overflow-hidden shadow bg-elevated rounded-xl">
+            <img src="<?= $actor->podcast->banner->small_url ?>" alt="" class="object-cover w-full h-32 bg-header" />
             <div class="flex px-4 py-2">
                 <img src="<?= $actor->avatar_image_url ?>" alt="<?= $actor->display_name ?>"
-                    class="w-16 h-16 mr-4 -mt-8 rounded-full ring-2 ring-white" />
-                <div class="">
+                    class="w-16 h-16 mr-4 -mt-8 rounded-full ring-2 ring-background-elevated" />
+                <div class="flex flex-col">
                     <p class="font-semibold"><?= $actor->display_name ?></p>
-                    <p class="text-sm text-gray-500">@<?= $actor->username ?></p>
+                    <p class="text-sm text-skin-muted">@<?= $actor->username ?></p>
                 </div>
             </div>
         </div>
@@ -62,7 +62,7 @@
                 hint="<?= lang('Fediverse.your_handle_hint') ?>"
                 required="true"
             />
-            <Button variant="primary" type="submit" class="self-end" iconRight="send-plane"><?= lang('Fediverse.follow.submit') ?></Button>
+            <Button variant="primary" type="submit" class="self-end mt-2" iconRight="send-plane"><?= lang('Fediverse.follow.submit') ?></Button>
         </form>
     </main>
 
@@ -72,7 +72,7 @@
         <p>
             <?= lang('Common.powered_by', [
                 'castopod' =>
-                    '<a class="inline-flex font-semibold hover:underline focus:ring-castopod" href="https://castopod.org" target="_blank" rel="noreferrer noopener">Castopod' . icon('social/castopod', 'ml-1 text-lg') . '</a>',
+                    '<a class="inline-flex font-semibold hover:underline focus:ring-accent" href="https://castopod.org" target="_blank" rel="noreferrer noopener">Castopod' . icon('social/castopod', 'ml-1 text-lg') . '</a>',
             ]) ?>
         </p>
     </footer>

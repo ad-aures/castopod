@@ -13,7 +13,7 @@ class Helper extends FormComponent
 
     public function render(): string
     {
-        $class = 'text-gray-600';
+        $class = 'text-skin-muted';
 
         return <<<HTML
             <small id="{$this->id}" class="{$class} {$this->class}">{$this->slot}</small>

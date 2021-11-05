@@ -15,8 +15,7 @@ class IconButton extends Component
         $attributes = [
             'isSquared' => 'true',
             'title' => $this->slot,
-            'data-toggle' => 'tooltip',
-            'data-placement' => 'bottom',
+            'data-tooltip' => 'bottom',
         ];
 
         $attributes = array_merge($attributes, $this->attributes);

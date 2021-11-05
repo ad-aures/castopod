@@ -4,7 +4,7 @@
         <a href="<?= route_to(
     'episode-list',
     $podcast->id,
-) ?>" class="inline-flex items-center text-sm underline hover:no-underline focus:ring-castopod">
+) ?>" class="inline-flex items-center text-sm underline hover:no-underline focus:ring-accent">
             <?= lang('Podcast.see_all_episodes') ?>
             <?= icon('chevron-right', 'ml-2') ?>
         </a>

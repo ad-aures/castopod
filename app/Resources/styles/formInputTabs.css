@@ -24,13 +24,17 @@
     @apply relative inline-block px-1 py-2 text-xs text-center cursor-pointer opacity-70 hover:opacity-100;
   }
 
+  .form-input-tabs > input:focus + label {
+    @apply ring-accent;
+  }
+
   .form-input-tabs > input:checked + label::after {
-    @apply absolute inset-x-0 bottom-0 w-full mx-auto bg-pine-500;
+    @apply absolute inset-x-0 bottom-0 w-full mx-auto bg-accent-base;
     content: "";
     height: 0.2rem;
   }
 
   .form-input-tabs > input:checked + label {
-    @apply font-semibold opacity-100 text-pine-500;
+    @apply font-semibold opacity-100 text-accent-base;
   }
 }

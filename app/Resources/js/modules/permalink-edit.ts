@@ -156,6 +156,7 @@ export class PermalinkEdit extends LitElement {
 
     button svg,
     clipboard-copy svg {
+      fill: hsl(var(--color-text-base));
       opacity: 0.6;
       font-size: 1.25rem;
     }

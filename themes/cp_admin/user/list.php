@@ -22,7 +22,7 @@
             'cell' => function ($user) {
                 return '<div class="flex flex-col">' .
                     $user->username .
-                    '<span class="text-sm text-gray-600">' .
+                    '<span class="text-sm text-skin-muted">' .
                     $user->email .
                     '</span></div>';
             },
@@ -47,7 +47,7 @@
         [
             'header' => lang('Common.actions'),
             'cell' => function ($user) {
-                return '<button id="more-dropdown-' . $user->id . '" type="button" class="inline-flex items-center p-1 focus:ring-castopod" data-dropdown="button" data-dropdown-target="more-dropdown-' . $user->id . '-menu" aria-haspopup="true" aria-expanded="false">' . icon('more') . '</button>' .
+                return '<button id="more-dropdown-' . $user->id . '" type="button" class="inline-flex items-center p-1 focus:ring-accent" data-dropdown="button" data-dropdown-target="more-dropdown-' . $user->id . '-menu" aria-haspopup="true" aria-expanded="false">' . icon('more') . '</button>' .
                 '<DropdownMenu id="more-dropdown-' . $user->id . '-menu" labelledby="more-dropdown-' . $user->id . '" items="' . esc(json_encode([
                     [
                         'type' => 'link',

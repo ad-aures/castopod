@@ -1,4 +1,4 @@
-<article class="relative flex flex-col flex-1 flex-shrink-0 w-full transition group overflow-hidden bg-white border-2 snap-center hover:shadow-lg focus-within:shadow-lg focus-within:ring-castopod border-pine-100 rounded-xl min-w-[12rem] max-w-[17rem]">
+<article class="relative flex flex-col flex-1 flex-shrink-0 w-full transition group overflow-hidden bg-elevated border-3 snap-center hover:shadow-lg focus-within:shadow-lg focus-within:ring-accent border-subtle rounded-xl min-w-[12rem] max-w-[17rem]">
     <a href="<?= route_to('episode-view', $episode->podcast->id, $episode->id) ?>" class="flex flex-col justify-end w-full h-full text-white group">
         <div class="absolute bottom-0 left-0 z-10 w-full h-full backdrop-gradient"></div>
         <div class="w-full h-full overflow-hidden">
@@ -10,7 +10,7 @@
             <span class="font-semibold leading-tight line-clamp-2"><?= $episode->title ?></span>
         </div>
     </a>
-    <button class="absolute top-0 right-0 z-10 p-2 mt-2 mr-2 text-white transition -translate-y-12 rounded-full opacity-0 focus:ring-castopod focus:opacity-100 focus:-translate-y-0 group-hover:translate-y-0 bg-black/50 group-hover:opacity-100" id="more-dropdown-<?= $episode->id ?>" data-dropdown="button" data-dropdown-target="more-dropdown-<?= $episode->id ?>-menu" aria-haspopup="true" aria-expanded="false" title="<?= lang('Common.more') ?>"><?= icon('more') ?></button>
+    <button class="absolute top-0 right-0 z-10 p-2 mt-2 mr-2 text-white transition -translate-y-12 rounded-full opacity-0 focus:ring-accent focus:opacity-100 focus:-translate-y-0 group-hover:translate-y-0 bg-black/50 group-hover:opacity-100" id="more-dropdown-<?= $episode->id ?>" data-dropdown="button" data-dropdown-target="more-dropdown-<?= $episode->id ?>-menu" aria-haspopup="true" aria-expanded="false" title="<?= lang('Common.more') ?>"><?= icon('more') ?></button>
     <DropdownMenu id="more-dropdown-<?= $episode->id ?>-menu" labelledby="more-dropdown-<?= $episode->id ?>" offsetY="-32" items="<?= esc(json_encode([
         [
             'type' => 'link',
