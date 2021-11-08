@@ -34,9 +34,10 @@
         ->asset('js/podcast.ts', 'js') ?>
 </head>
 
-<body class="min-h-screen mx-auto bg-base">
-    <header class="pt-8 pb-32 bg-elevated">
-        <h1 class="text-lg font-semibold text-center text-skin-base"><?= lang(
+<body class="flex flex-col min-h-screen mx-auto bg-base theme-<?= service('settings')
+        ->get('App.theme') ?>">
+    <header class="pt-8 pb-32 bg-header">
+        <h1 class="text-lg font-semibold text-center text-white"><?= lang(
             'Fediverse.' . $action . '.subtitle',
         ) ?></h1>
     </header>
@@ -47,7 +48,7 @@
             'post' => $post,
         ]) ?>
 
-        <form action="<?= route_to('post-attempt-remote-action', $post->id, $action) ?>" method="POST" class="flex flex-col mt-8">
+        <form action="<?= route_to('post-attempt-remote-action', $post->id, $action) ?>" method="POST" class="flex flex-col mt-8 gap-y-2">
             <?= csrf_field() ?>
             <?= view('_message_block') ?>
 
@@ -60,4 +61,11 @@
             <Button variant="primary" type="submit" class="self-end" iconRight="send-plane"><?= lang('Fediverse.' . $action . '.submit') ?></Button>
         </form>
     </main>
+    <footer
+        class="flex-col w-full px-2 py-4 mt-auto text-xs text-center border-t text-skin-muted border-subtle">
+        <?= lang('Common.powered_by', [
+            'castopod' =>
+                '<a class="inline-flex font-semibold hover:underline focus:ring-accent" href="https://castopod.org" target="_blank" rel="noreferrer noopener">Castopod' . icon('social/castopod', 'ml-1 text-lg') . '</a>',
+        ]) ?>
+    </footer>
 </body>

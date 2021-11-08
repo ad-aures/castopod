@@ -28,7 +28,8 @@
         ->asset('js/app.ts', 'js') ?>
 </head>
 
-<body class="flex flex-col min-h-screen mx-auto bg-base">
+<body class="flex flex-col min-h-screen mx-auto bg-base theme-<?= service('settings')
+        ->get('App.theme') ?>">
     <?php if (service('authentication')->check()): ?>
         <?= $this->include('_admin_navbar') ?>
     <?php endif; ?>
@@ -37,14 +38,16 @@
         <div class="container flex items-center justify-between px-2 py-4 mx-auto">
             <a href="<?= route_to(
             'home',
-        ) ?>" class="inline-flex items-baseline text-3xl font-semibold font-display"><?= 'castopod' .
-    svg('castopod-logo-base', 'h-6 ml-2') ?></a>
+        ) ?>" class="inline-flex items-baseline text-3xl font-semibold font-display"><?= service('settings')
+        ->get('App.siteName') === 'Castopod' ? 'castopod' .
+    svg('castopod-logo-base', 'h-6 ml-2') : service('settings')
+        ->get('App.siteName') ?></a>
         </div>
     </header>
     <main class="container flex-1 px-4 py-10 mx-auto">
         <Heading class="inline-block mb-2"><?= lang('Home.all_podcasts') ?> (<?= count(
-        $podcasts,
-    ) ?>)</Heading>
+            $podcasts,
+        ) ?>)</Heading>
         <section class="grid gap-4 grid-cols-cards">
             <?php if ($podcasts): ?>
                 <?php foreach ($podcasts as $podcast): ?>

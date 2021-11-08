@@ -88,7 +88,7 @@ class SettingsController extends BaseController
                 ]);
         }
 
-        return redirect()->back();
+        return redirect('settings-general')->with('message', lang('Settings.general.instanceEditSuccess'));
     }
 
     public function deleteIcon(): RedirectResponse
@@ -100,6 +100,25 @@ class SettingsController extends BaseController
         service('settings')
             ->forget('App.siteIcon');
 
-        return redirect()->back();
+        return redirect('settings-general')->with('message', lang('Settings.general.deleteIconSuccess'));
+    }
+
+    public function theme(): string
+    {
+        helper('form');
+        return view('settings/theme');
+    }
+
+    public function attemptSetInstanceTheme(): RedirectResponse
+    {
+        $theme = $this->request->getPost('theme');
+        service('settings')
+            ->set('App.theme', $theme);
+
+        // delete all pages cache
+        cache()
+            ->deleteMatching('page*');
+
+        return redirect('settings-theme')->with('message', lang('Settings.theme.setInstanceThemeSuccess'));
     }
 }

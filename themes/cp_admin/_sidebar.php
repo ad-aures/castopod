@@ -24,7 +24,7 @@ $navigation = [
     ],
     'settings' => [
         'icon' => 'settings',
-        'items' => ['settings-general'],
+        'items' => ['settings-general', 'settings-theme'],
     ],
 ]; ?>
 
@@ -33,7 +33,7 @@ $navigation = [
     <div>
         <button class="inline-flex items-center w-full px-4 py-1 font-semibold focus:ring-accent" type="button">
             <?= icon($data['icon'], 'opacity-60 text-2xl mr-4') ?>
-            <?= lang('AdminNavigation.' . $section) ?>
+            <?= lang('Navigation.' . $section) ?>
         </button>
         <ul class="flex flex-col">
             <?php foreach ($data['items'] as $item): ?>
@@ -42,7 +42,7 @@ $navigation = [
                 <a class="w-full py-1 pl-14 pr-2 text-sm hover:opacity-100 focus:ring-inset focus:ring-accent<?= $isActive
                     ? ' font-semibold opacity-100 inline-flex items-center'
                     : ' opacity-75' ?>" href="<?= route_to($item) ?>"><?= ($isActive ? icon('chevron-right', 'mr-2') : '') . lang(
-                        'AdminNavigation.' . $item,
+                        'Navigation.' . $item,
                     ) ?></a>
             </li>
             <?php endforeach; ?>

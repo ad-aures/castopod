@@ -14,7 +14,7 @@
             data-toggle="funding-links"
             data-toggle-class="hidden"
             aria-label="<?= lang('Common.close') ?>"
-            class="self-start p-1 text-2xl"><?= icon('close') ?></button>
+            class="self-start p-1 text-2xl rounded-full focus:ring-accent"><?= icon('close') ?></button>
         </div>
         <div class="flex flex-col items-start p-4 space-y-4">
             <?php foreach ($podcast->fundingPlatforms as $fundingPlatform): ?>
@@ -24,7 +24,7 @@
                     title="<?= $fundingPlatform->link_content ?>"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="inline-flex items-center font-semibold text-accent-base">
+                    class="inline-flex items-center font-semibold text-accent-base hover:text-accent-hover focus:ring-accent">
                     <?= icon(
                 $fundingPlatform->type .
                             '/' .

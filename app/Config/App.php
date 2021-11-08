@@ -447,4 +447,6 @@ class App extends BaseConfig
         '192' => '/icon-192.png',
         '512' => '/icon-512.png',
     ];
+
+    public string $theme = 'crimson';
 }

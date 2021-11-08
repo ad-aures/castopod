@@ -33,9 +33,10 @@
 </head>
 
 
-<body class="flex flex-col min-h-screen bg-base">
+<body class="flex flex-col min-h-screen bg-base theme-<?= service('settings')
+        ->get('App.theme') ?>">
     <header class="flex flex-col items-center mb-8">
-        <h1 class="w-full pt-8 pb-32 text-lg font-semibold text-center text-skin-base bg-elevated"><?= lang(
+        <h1 class="w-full pt-8 pb-32 text-lg font-semibold text-center text-white bg-header"><?= lang(
             'Fediverse.follow.subtitle',
         ) ?></h1>
         <div class="flex flex-col w-full max-w-xs -mt-24 overflow-hidden shadow bg-elevated rounded-xl">
@@ -52,7 +53,7 @@
     </header>
 
     <main class="w-full max-w-md px-4 mx-auto">
-        <form action="<?= route_to('attempt-follow', $actor->username) ?>" method="POST" class="flex flex-col">
+        <form action="<?= route_to('attempt-follow', $actor->username) ?>" method="POST" class="flex flex-col gap-y-2">
             <?= csrf_field() ?>
             <?= view('_message_block') ?>
 
@@ -62,18 +63,15 @@
                 hint="<?= lang('Fediverse.your_handle_hint') ?>"
                 required="true"
             />
-            <Button variant="primary" type="submit" class="self-end mt-2" iconRight="send-plane"><?= lang('Fediverse.follow.submit') ?></Button>
+            <Button variant="primary" type="submit" class="self-end" iconRight="send-plane"><?= lang('Fediverse.follow.submit') ?></Button>
         </form>
     </main>
 
     <footer
-        class="container flex flex-col items-center px-2 py-4 mx-auto mt-auto text-xs border-t md:justify-between md:flex-row">
-        <?= render_page_links('inline-flex mb-4 md:mb-0') ?>
-        <p>
-            <?= lang('Common.powered_by', [
-                'castopod' =>
-                    '<a class="inline-flex font-semibold hover:underline focus:ring-accent" href="https://castopod.org" target="_blank" rel="noreferrer noopener">Castopod' . icon('social/castopod', 'ml-1 text-lg') . '</a>',
-            ]) ?>
-        </p>
+        class="flex-col w-full px-2 py-4 mt-auto text-xs text-center border-t text-skin-muted border-subtle">
+        <?= lang('Common.powered_by', [
+            'castopod' =>
+                '<a class="inline-flex font-semibold hover:underline focus:ring-accent" href="https://castopod.org" target="_blank" rel="noreferrer noopener">Castopod' . icon('social/castopod', 'ml-1 text-lg') . '</a>',
+        ]) ?>
     </footer>
 </body>

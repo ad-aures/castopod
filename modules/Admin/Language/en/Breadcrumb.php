@@ -17,6 +17,7 @@ return [
     'contributors' => 'contributors',
     'pages' => 'pages',
     'settings' => 'settings',
+    'theme' => 'theme',
     'add' => 'add',
     'new' => 'new',
     'edit' => 'edit',

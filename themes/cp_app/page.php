@@ -17,7 +17,8 @@
         ->asset('js/app.ts', 'js') ?>
 </head>
 
-<body class="flex flex-col min-h-screen mx-auto bg-base">
+<body class="flex flex-col min-h-screen mx-auto bg-base theme-<?= service('settings')
+        ->get('App.theme') ?>">
     <?php if (service('authentication')->check()): ?>
         <?= $this->include('_admin_navbar') ?>
     <?php endif; ?>
@@ -29,7 +30,7 @@
             'arrow-left',
             'mr-2',
         ) . lang('Page.back_to_home') ?></a>
-            <h1 class="text-3xl font-semibold"><?= $page->title ?></h1>
+            <Heading tagName="h1" class="text-3xl font-semibold"><?= $page->title ?></Heading>
         </div>
     </header>
     <main class="container flex-1 px-4 py-10 mx-auto">

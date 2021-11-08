@@ -4,7 +4,7 @@
                     <?= svg('castopod-logo-base', 'h-6') ?>
             </a>
             <a href="<?= route_to('admin', ) ?>" class="inline-flex items-center h-full px-6 text-sm font-semibold hover:underline focus:ring-inset focus:ring-accent">
-                <?= lang('AdminNavigation.go_to_admin') ?>
+                <?= lang('Navigation.go_to_admin') ?>
                 <?= icon('external-link', 'ml-1 opacity-60') ?>
             </a>
         </div>
@@ -43,12 +43,12 @@
             $menuItems = [
                 [
                     'type' => 'link',
-                    'title' => lang('AdminNavigation.account.my-account'),
+                    'title' => lang('Navigation.account.my-account'),
                     'uri' => route_to('my-account'),
                 ],
                 [
                     'type' => 'link',
-                    'title' => lang('AdminNavigation.account.change-password'),
+                    'title' => lang('Navigation.account.change-password'),
                     'uri' => route_to('change-password'),
                 ],
                 [
@@ -56,7 +56,7 @@
                 ],
                 [
                     'type' => 'link',
-                    'title' => lang('AdminNavigation.account.logout'),
+                    'title' => lang('Navigation.account.logout'),
                     'uri' => route_to('logout'),
                 ],
             ];

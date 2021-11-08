@@ -16,6 +16,8 @@ return [
     'episodes' => 'épisodes',
     'contributors' => 'contributeurs',
     'pages' => 'pages',
+    'settings' => 'paramètres',
+    'theme' => 'thème',
     'add' => 'ajouter',
     'new' => 'créer',
     'edit' => 'modifier',

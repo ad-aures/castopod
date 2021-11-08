@@ -107,6 +107,7 @@ module.exports = {
         podcastMain: "1fr minmax(200px, 300px)",
         cards: "repeat(auto-fill, minmax(14rem, 1fr))",
         latestEpisodes: "repeat(5, 1fr)",
+        colorButtons: "repeat(auto-fill, minmax(4rem, 1fr))",
       },
       gridTemplateRows: {
         admin: "40px 1fr",

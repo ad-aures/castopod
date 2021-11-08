@@ -33,13 +33,13 @@
 <div class="px-2 sm:px-4">
     <div class="mb-2"><?= $podcast->description_html ?></div>
     <div class="flex gap-x-4 gap-y-2">
-        <span class="px-2 py-1 text-sm font-semibold border rounded-sm border-subtle bg-highlight text-skin-muted">
+        <span class="px-2 py-1 text-sm font-semibold border rounded-sm border-subtle bg-highlight">
             <?= lang(
         'Podcast.category_options.' . $podcast->category->code,
     ) ?>
         </span>
         <?php foreach ($podcast->other_categories as $other_category): ?>
-            <span class="px-2 py-1 text-sm font-semibold border rounded-sm border-subtle bg-highlight text-skin-muted">
+            <span class="px-2 py-1 text-sm font-semibold border rounded-sm border-subtle bg-highlight">
                 <?= lang(
         'Podcast.category_options.' . $other_category->code,
     ) ?>

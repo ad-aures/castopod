@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 return [
     'title' => 'General settings',
-    'form' => [
+    'general' => [
         'site_section_title' => 'Instance',
         'site_icon' => 'Site icon',
         'site_icon_delete' => 'Delete site icon',
@@ -19,5 +19,20 @@ return [
         'site_name' => 'Site name',
         'site_description' => 'Site description',
         'submit' => 'Save',
+        'instanceEditSuccess' => 'Instance has been updated successfully!',
+        'deleteIconSuccess' => 'Site icon has been remove successfully!',
+    ],
+    'theme' => [
+        'title' => 'Theme',
+        'accent_section_title' => 'Accent color',
+        'accent_section_subtitle' => 'Choose the color to determine the look and feel of all public pages.',
+        'pine' => 'Pine',
+        'crimson' => 'Crimson',
+        'amber' => 'Amber',
+        'lake' => 'Lake',
+        'jacaranda' => 'Jacaranda',
+        'onyx' => 'Onyx',
+        'submit' => 'Save',
+        'setInstanceThemeSuccess' => 'Theme has been updated successfully!',
     ],
 ];

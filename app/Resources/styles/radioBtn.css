@@ -1,22 +1,22 @@
 @layer components {
   .form-radio-btn {
     @apply absolute mt-3 ml-3 border-contrast border-3 text-accent-base;
-  }
 
-  .form-radio-btn:focus + label {
-    @apply ring-accent;
-  }
+    &:focus {
+      @apply ring-accent;
+    }
 
-  .form-radio-btn + label {
-    @apply inline-block py-2 pl-8 pr-2 text-sm font-semibold rounded-lg cursor-pointer border-contrast bg-elevated border-3;
-    color: hsl(var(--color-text-muted));
-  }
+    &:checked {
+      @apply ring-2 ring-contrast;
 
-  .form-radio-btn:checked + label {
-    @apply text-accent-contrast bg-accent-base;
-  }
+      & + label {
+        @apply text-accent-contrast bg-accent-base;
+      }
+    }
 
-  .form-radio-btn:checked {
-    @apply ring-2 ring-contrast;
+    & + label {
+      @apply inline-block py-2 pl-8 pr-2 text-sm font-semibold rounded-lg cursor-pointer border-contrast bg-elevated border-3;
+      color: hsl(var(--color-text-muted));
+    }
   }
 }

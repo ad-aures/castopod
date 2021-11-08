@@ -28,6 +28,9 @@ return [
     'pages' => 'Pages',
     'page-list' => 'Toutes les pages',
     'page-create' => 'Créer une page',
+    'settings' => 'Paramètres',
+    'settings-general' => 'Général',
+    'settings-themes' => 'Thèmes',
     'account' => [
         'my-account' => 'Mon compte',
         'change-password' => 'Modifier le mot de passe',

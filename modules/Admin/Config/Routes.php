@@ -31,6 +31,14 @@ $routes->group(
                 'as' => 'settings-instance-delete-icon',
                 'filter' => 'permission:settings-manage',
             ]);
+            $routes->get('theme', 'SettingsController::theme', [
+                'as' => 'settings-theme',
+                'filter' => 'permission:settings-manage',
+            ]);
+            $routes->post('theme', 'SettingsController::attemptSetInstanceTheme', [
+                'as' => 'settings-theme',
+                'filter' => 'permission:settings-manage',
+            ]);
         });
 
         $routes->group('persons', function ($routes): void {

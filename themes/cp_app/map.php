@@ -20,12 +20,13 @@
         ->asset('js/map.ts', 'js') ?>
 </head>
 
-<body class="flex flex-col h-full min-h-screen mx-auto bg-base">
+<body class="flex flex-col h-full min-h-screen mx-auto bg-base theme-<?= service('settings')
+        ->get('App.theme') ?>">
     <?php if (service('authentication')->check()): ?>
         <?= $this->include('_admin_navbar') ?>
     <?php endif; ?>
 
-    <header class="py-8 text-white border-b border-subtle bg-elevated">
+    <header class="py-8 border-b border-subtle bg-elevated">
         <div class="container flex flex-col items-start px-2 py-4 mx-auto">
             <a href="<?= route_to('home') ?>"
             class="inline-flex items-center mb-2 text-sm focus:ring-accent"><?= icon(
