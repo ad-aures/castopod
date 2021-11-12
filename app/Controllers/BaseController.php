@@ -28,7 +28,7 @@ class BaseController extends Controller
         ResponseInterface $response,
         LoggerInterface $logger
     ): void {
-        $this->helpers = array_merge($this->helpers, ['auth', 'svg', 'components', 'misc']);
+        $this->helpers = array_merge($this->helpers, ['auth', 'svg', 'components', 'misc', 'seo']);
 
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);

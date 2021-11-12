@@ -15,12 +15,7 @@
     <link rel="apple-touch-icon" href="<?= service('settings')->get('App.siteIcon')['180'] ?>">
     <link rel="manifest" href="<?= route_to('webmanifest') ?>">
 
-    <meta property="og:title" content="<?= service('settings')
-    ->get('App.siteName') ?>" />
-    <meta property="og:description" content="<?= service('settings')
-    ->get('App.siteDescription') ?>" />
-    <meta property="og:site_name" content="<?= service('settings')
-    ->get('App.siteName') ?>" />
+    <?= $metatags ?>
 
     <?= service('vite')
         ->asset('styles/index.css', 'css') ?>

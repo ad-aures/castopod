@@ -435,6 +435,8 @@ class App extends BaseConfig
      */
     public string $siteName = 'Castopod';
 
+    public string $siteTitleSeparator = ' | ';
+
     public string $siteDescription = 'Castopod Host is an open-source hosting platform made for podcasters who want engage and interact with their audience.';
 
     /**

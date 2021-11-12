@@ -12,26 +12,13 @@
     <link rel="apple-touch-icon" href="<?= service('settings')->get('App.siteIcon')['180'] ?>">
     <link rel="manifest" href="<?= route_to('webmanifest') ?>">
     
-    <title><?= lang('Podcast.followTitle', [
-        'actorDisplayName' => $actor->display_name,
-    ]) ?></title>
-    <meta name="description" content="<?= $actor->summary ?>"/>
-    <meta property="og:title" content="<?= lang('Podcast.followTitle', [
-        'actorDisplayName' => $actor->display_name,
-    ]) ?>"/>
-    <meta property="og:locale" content="<?= service(
-        'request',
-    )->getLocale() ?>" />
-    <meta property="og:url" content="<?= current_url() ?>" />
-    <meta property="og:image" content="<?= $actor->avatar_image_url ?>" />
-    <meta property="og:description" content="<?= $actor->summary ?>" />
+    <?= $metatags ?>
 
     <?= service('vite')
         ->asset('styles/index.css', 'css') ?>
     <?= service('vite')
         ->asset('js/podcast.ts', 'js') ?>
 </head>
-
 
 <body class="flex flex-col min-h-screen bg-base theme-<?= service('settings')
         ->get('App.theme') ?>">

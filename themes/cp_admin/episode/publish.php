@@ -39,7 +39,7 @@
     <div class="px-4 mb-2">
         <Forms.Textarea name="message" placeholder="<?= lang('Episode.publish_form.message_placeholder') ?>" autofocus="" rows="2" />
     </div>
-    <div class="flex border-t border-b">
+    <div class="flex border-y">
         <img src="<?= $episode->cover
     ->thumbnail_url ?>" alt="<?= $episode->title ?>" class="w-24 h-24" />
         <div class="flex flex-col flex-1">

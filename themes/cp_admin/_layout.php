@@ -4,6 +4,8 @@
 
 <head>
     <meta charset="UTF-8"/>
+    <meta name="robots" content="noindex">
+
     <title><?= $this->renderSection('title') ?> | Castopod Admin</title>
     <meta name="description" content="Castopod is an open-source hosting platform made for podcasters who want engage and interact with their audience."/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>

@@ -3,7 +3,9 @@
 
 <head>
     <meta charset="UTF-8"/>
-    <title>Castopod</title>
+    <meta name="robots" content="noindex">
+
+    <title>Castopod Install</title>
     <meta name="description" content="Castopod is an open-source hosting platform made for podcasters who want engage and interact with their audience."/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="icon" type="image/x-icon" href="<?= service('settings')

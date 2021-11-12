@@ -1,4 +1,4 @@
-<div class="flex items-center border-t border-b border-subtle">
+<div class="flex items-center border-y border-subtle">
     <div class="relative">
         <time class="absolute px-1 text-sm font-semibold text-white rounded bg-black/75 bottom-2 right-2" datetime="PT<?= $episode->audio_file_duration ?>S">
                     <?= format_duration($episode->audio_file_duration) ?>

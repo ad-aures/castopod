@@ -40,10 +40,11 @@ class PageController extends BaseController
         $cacheName = "page-{$this->page->slug}";
         if (! ($found = cache($cacheName))) {
             $data = [
+                'metatags' => get_page_metatags($this->page),
                 'page' => $this->page,
             ];
 
-            $found = view('page', $data);
+            $found = view('pages/page', $data);
 
             // The page cache is set to a decade so it is deleted manually upon page update
             cache()

@@ -25,7 +25,7 @@ if (! function_exists('render_page_links')) {
         $links .= anchor(route_to('credits'), lang('Person.credits'), [
             'class' => 'px-2 py-1 underline hover:no-underline focus:ring-accent',
         ]);
-        $links .= anchor(route_to('map'), lang('Page.map'), [
+        $links .= anchor(route_to('map'), lang('Page.map.title'), [
             'class' => 'px-2 py-1 underline hover:no-underline focus:ring-accent',
         ]);
         foreach ($pages as $page) {

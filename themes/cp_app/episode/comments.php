@@ -1,38 +1,5 @@
 <?= $this->extend('episode/_layout') ?>
 
-<?= $this->section('meta-tags') ?>
-<title><?= $episode->title ?></title>
-<meta name="description" content="<?= htmlspecialchars(
-    $episode->description,
-) ?>" />
-<link rel="canonical" href="<?= $episode->link ?>" />
-<meta property="og:title" content="<?= $episode->title ?>" />
-<meta property="og:description" content="<?= $episode->description ?>" />
-<meta property="og:locale" content="<?= $podcast->language_code ?>" />
-<meta property="og:site_name" content="<?= $podcast->title ?>" />
-<meta property="og:url" content="<?= current_url() ?>" />
-<meta property="og:image" content="<?= $episode->cover->large_url ?>" />
-<meta property="og:image:width" content="<?= config('Images')
-    ->podcastCoverSizes['large'][0] ?>" />
-<meta property="og:image:height" content="<?= config('Images')->podcastCoverSizes['large'][1] ?>" />
-<meta property="og:description" content="$description" />
-<meta property="article:published_time" content="<?= $episode->published_at ?>" />
-<meta property="article:modified_time" content="<?= $episode->updated_at ?>" />
-<meta property="og:audio" content="<?= $episode->audio_file_opengraph_url ?>" />
-<meta property="og:audio:type" content="<?= $episode->audio_file_mimetype ?>" />
-<link rel="alternate" type="application/json+oembed" href="<?= base_url(route_to('episode-oembed-json', $podcast->handle, $episode->slug)) ?>" title="<?= $episode->title ?> oEmbed json" />
-<link rel="alternate" type="text/xml+oembed" href="<?= base_url(route_to('episode-oembed-xml', $podcast->handle, $episode->slug)) ?>" title="<?= $episode->title ?> oEmbed xml" />
-<meta name="twitter:title" content="<?= $episode->title ?>" />
-<meta name="twitter:description" content="<?= $episode->description ?>" />
-<meta name="twitter:image" content="<?= $episode->cover->large_url ?>" />
-<meta name="twitter:card" content="player" />
-<meta property="twitter:audio:partner" content="<?= $podcast->publisher ?>" />
-<meta property="twitter:audio:artist_name" content="<?= $podcast->owner_name ?>" />
-<meta name="twitter:player" content="<?= $episode->getEmbedUrl('light') ?>" />
-<meta name="twitter:player:width" content="600" />
-<meta name="twitter:player:height" content="200" />
-<?= $this->endSection() ?>
-
 <?= $this->section('content') ?>
 
 <?php if (can_user_interact()): ?>

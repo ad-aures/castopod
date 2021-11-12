@@ -35,7 +35,7 @@ class PostController extends FediversePostController
     /**
      * @var string[]
      */
-    protected $helpers = ['auth', 'fediverse', 'svg', 'components', 'misc'];
+    protected $helpers = ['auth', 'fediverse', 'svg', 'components', 'misc', 'seo'];
 
     public function _remap(string $method, string ...$params): mixed
     {
@@ -81,6 +81,8 @@ class PostController extends FediversePostController
 
         if (! ($cachedView = cache($cacheName))) {
             $data = [
+                // @phpstan-ignore-next-line
+                'metatags' => get_post_metatags($this->post),
                 'post' => $this->post,
                 'podcast' => $this->podcast,
             ];
@@ -233,6 +235,8 @@ class PostController extends FediversePostController
 
         if (! ($cachedView = cache($cacheName))) {
             $data = [
+                // @phpstan-ignore-next-line
+                'metatags' => get_remote_actions_metatags($this->post, $action),
                 'podcast' => $this->podcast,
                 'actor' => $this->actor,
                 'post' => $this->post,

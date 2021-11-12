@@ -1,4 +1,4 @@
-<?= $this->extend('_layout') ?>
+<?= $this->extend('pages/_layout') ?>
 
 <?= $this->section('title') ?>
 <?= lang('Person.credits') ?>

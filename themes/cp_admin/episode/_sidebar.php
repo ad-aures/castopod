@@ -16,7 +16,7 @@ $podcastNavigation = [
     />
     <span class="flex-1 w-full px-2 text-xs font-semibold truncate" title="<?= $podcast->title ?>"><?= $podcast->title ?></span>
 </a>
-<div class="flex items-center px-4 py-2 border-t border-b border-navigation">
+<div class="flex items-center px-4 py-2 border-y border-navigation">
     <img
     src="<?= $episode->cover->thumbnail_url ?>"
     alt="<?= $episode->title ?>"

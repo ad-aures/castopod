@@ -180,10 +180,10 @@ $routes->group('@(:podcastHandle)', function ($routes): void {
 $routes->get('/credits', 'CreditsController', [
     'as' => 'credits',
 ]);
-$routes->get('/map', 'MapMarkerController', [
+$routes->get('/map', 'MapController', [
     'as' => 'map',
 ]);
-$routes->get('/episodes-markers', 'MapMarkerController::getEpisodesMarkers', [
+$routes->get('/episodes-markers', 'MapController::getEpisodesMarkers', [
     'as' => 'episodes-markers',
 ]);
 $routes->get('/pages/(:slug)', 'PageController/$1', [

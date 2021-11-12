@@ -13,7 +13,7 @@ namespace App\Controllers;
 use App\Models\EpisodeModel;
 use CodeIgniter\HTTP\ResponseInterface;
 
-class MapMarkerController extends BaseController
+class MapController extends BaseController
 {
     public function index(): string
     {
@@ -21,7 +21,7 @@ class MapMarkerController extends BaseController
             ->getLocale();
         $cacheName = "page_map_{$locale}";
         if (! ($found = cache($cacheName))) {
-            $found = view('map', [], [
+            $found = view('pages/map', [], [
                 'cache' => DECADE,
                 'cache_name' => $cacheName,
             ]);

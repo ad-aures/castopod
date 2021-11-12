@@ -1,31 +1,5 @@
 <?= $this->extend('podcast/_layout') ?>
 
-<?= $this->section('meta-tags') ?>
-<link type="application/rss+xml" rel="alternate" title="<?= $podcast->title ?>" href="<?= $podcast->feed_url ?>"/>
-
-<title><?= $podcast->title ?></title>
-<meta name="description" content="<?= htmlspecialchars(
-    $podcast->description,
-) ?>" />
-<link rel="icon" type="image/x-icon" href="<?= service('settings')
-    ->get('App.siteIcon')['ico'] ?>" />
-<link rel="apple-touch-icon" href="<?= service('settings')->get('App.siteIcon')['180'] ?>">
-<link rel="manifest" href="<?= route_to('webmanifest') ?>">
-<link rel="canonical" href="<?= current_url() ?>" />
-<meta property="og:title" content="<?= $podcast->title ?>" />
-<meta property="og:description" content="<?= $podcast->description ?>" />
-<meta property="og:locale" content="<?= $podcast->language_code ?>" />
-<meta property="og:site_name" content="<?= $podcast->title ?>" />
-<meta property="og:url" content="<?= current_url() ?>" />
-<meta property="og:image" content="<?= $podcast->cover->large_url ?>" />
-<meta property="og:image:width" content="<?= config('Images')->podcastCoverSizes['large'][0] ?>" />
-<meta property="og:image:height" content="<?= config('Images')->podcastCoverSizes['large'][1] ?>" />
-<meta name="twitter:card" content="summary_large_image" />
-
-<?= service('vite')
-    ->asset('styles/index.css', 'css') ?>
-<?= $this->endSection() ?>
-
 <?= $this->section('content') ?>
 
 <?php if (can_user_interact()): ?>
@@ -53,6 +27,7 @@
 <hr class="my-4 border-subtle">
 
 <?php endif; ?>
+
 <div class="flex flex-col gap-y-4">
     <?php foreach ($posts as $key => $post): ?>
         <?php if ($post->reblog_of_id !== null): ?>

@@ -165,11 +165,12 @@ class CreditsController extends BaseController
             }
 
             $data = [
+                'metatags' => get_page_metatags($page),
                 'page' => $page,
                 'credits' => $credits,
             ];
 
-            $found = view('credits', $data);
+            $found = view('pages/credits', $data);
 
             cache()
                 ->save($cacheName, $found, DECADE);

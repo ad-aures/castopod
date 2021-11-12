@@ -10,23 +10,7 @@
     <link rel="apple-touch-icon" href="<?= service('settings')->get('App.siteIcon')['180'] ?>">
     <link rel="manifest" href="<?= route_to('webmanifest') ?>">
 
-    <title><?= lang('Fediverse.' . $action . '.title', [
-        'actorDisplayName' => $post->actor->display_name,
-    ]) ?></title>
-    <meta name="description" content="<?= $post->message ?>"/>
-    <meta property="og:title" content="<?= lang(
-        'Fediverse.' . $action . '.title',
-        [
-            'actorDisplayName' => $post->actor->display_name,
-        ],
-    ) ?>"/>
-    <meta property="og:locale" content="<?= service(
-        'request',
-    )->getLocale() ?>" />
-    <meta property="og:site_name" content="<?= $post->actor->display_name ?>" />
-    <meta property="og:url" content="<?= current_url() ?>" />
-    <meta property="og:image" content="<?= $post->actor->avatar_image_url ?>" />
-    <meta property="og:description" content="<?= $post->message ?>" />
+    <?= $metatags ?>
 
     <?= service('vite')
         ->asset('styles/index.css', 'css') ?>

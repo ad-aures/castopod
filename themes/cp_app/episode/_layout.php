@@ -12,10 +12,7 @@
     <link rel="apple-touch-icon" href="<?= service('settings')->get('App.siteIcon')['180'] ?>">
     <link rel="manifest" href="<?= route_to('webmanifest') ?>">
 
-    <?= $this->renderSection('meta-tags') ?>
-    <?php if ($podcast->payment_pointer): ?>
-        <meta name="monetization" content="<?= $podcast->payment_pointer ?>" />
-    <?php endif; ?>
+    <?= $metatags ?>
 
     <?= service('vite')
         ->asset('styles/index.css', 'css') ?>

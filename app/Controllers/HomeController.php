@@ -36,6 +36,7 @@ class HomeController extends BaseController
 
         // default behavior: list all podcasts on home page
         $data = [
+            'metatags' => get_home_metatags(),
             'podcasts' => $allPodcasts,
         ];
 

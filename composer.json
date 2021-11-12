@@ -22,7 +22,8 @@
     "michalsn/codeigniter4-uuid": "dev-develop",
     "essence/essence": "^3.5.4",
     "codeigniter4/settings": "dev-develop",
-    "chrisjean/php-ico": "^1.0"
+    "chrisjean/php-ico": "^1.0",
+    "melbahja/seo": "^2.0"
   },
   "require-dev": {
     "mikey179/vfsstream": "^v1.6.8",

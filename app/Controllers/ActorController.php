@@ -20,7 +20,7 @@ class ActorController extends FediverseActorController
     /**
      * @var string[]
      */
-    protected $helpers = ['auth', 'svg', 'components', 'misc'];
+    protected $helpers = ['auth', 'svg', 'components', 'misc', 'seo'];
 
     public function follow(): string
     {
@@ -34,6 +34,8 @@ class ActorController extends FediverseActorController
         if (! ($cachedView = cache($cacheName))) {
             helper(['form', 'components', 'svg']);
             $data = [
+                // @phpstan-ignore-next-line
+                'metatags' => get_follow_metatags($this->actor),
                 'actor' => $this->actor,
             ];
 

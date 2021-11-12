@@ -80,6 +80,7 @@ class PodcastController extends BaseController
 
         if (! ($cachedView = cache($cacheName))) {
             $data = [
+                'metatags' => get_podcast_metatags($this->podcast, 'activity'),
                 'podcast' => $this->podcast,
                 'posts' => (new PostModel())->getActorPublishedPosts($this->podcast->actor_id),
             ];
@@ -125,6 +126,7 @@ class PodcastController extends BaseController
 
         if (! ($cachedView = cache($cacheName))) {
             $data = [
+                'metatags' => get_podcast_metatags($this->podcast, 'about'),
                 'podcast' => $this->podcast,
             ];
 
@@ -240,6 +242,7 @@ class PodcastController extends BaseController
             }
 
             $data = [
+                'metatags' => get_podcast_metatags($this->podcast, 'episodes'),
                 'podcast' => $this->podcast,
                 'episodesNav' => $episodesNavigation,
                 'activeQuery' => $activeQuery,

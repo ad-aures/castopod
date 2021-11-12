@@ -77,6 +77,7 @@ class EpisodeController extends BaseController
 
         if (! ($cachedView = cache($cacheName))) {
             $data = [
+                'metatags' => get_episode_metatags($this->episode),
                 'podcast' => $this->podcast,
                 'episode' => $this->episode,
             ];
@@ -115,6 +116,7 @@ class EpisodeController extends BaseController
 
         if (! ($cachedView = cache($cacheName))) {
             $data = [
+                'metatags' => get_episode_metatags($this->episode),
                 'podcast' => $this->podcast,
                 'episode' => $this->episode,
             ];
@@ -220,20 +222,21 @@ class EpisodeController extends BaseController
         $oembed->addChild('author_name', $this->podcast->title);
         $oembed->addChild('author_url', $this->podcast->link);
         $oembed->addChild('thumbnail', $this->episode->cover->large_url);
-        $oembed->addChild('thumbnail_width', config('Images')->podcastCoverSizes['large'][0]);
-        $oembed->addChild('thumbnail_height', config('Images')->podcastCoverSizes['large'][1]);
+        $oembed->addChild('thumbnail_width', (string) config('Images')->podcastCoverSizes['large'][0]);
+        $oembed->addChild('thumbnail_height', (string) config('Images')->podcastCoverSizes['large'][1]);
         $oembed->addChild(
             'html',
             htmlentities(
                 '<iframe src="' .
                     $this->episode->embed_url .
-                    '" width="100%" height="144" frameborder="0" scrolling="no"></iframe>',
+                    '" width="100%" height="' . config('Embed')->height . '" frameborder="0" scrolling="no"></iframe>',
             ),
         );
-        $oembed->addChild('width', '600');
-        $oembed->addChild('height', '144');
+        $oembed->addChild('width', (string) config('Embed')->width);
+        $oembed->addChild('height', (string) config('Embed')->height);
 
-        return $this->response->setXML((string) $oembed);
+        // @phpstan-ignore-next-line
+        return $this->response->setXML($oembed);
     }
 
     /**

@@ -10,21 +10,8 @@ declare(strict_types=1);
 
 return [
     'back_to_home' => 'Back to home',
-    'page' => 'Page',
-    'all_pages' => 'All pages',
-    'create' => 'New page',
-    'go_to_page' => 'Go to page',
-    'edit' => 'Edit page',
-    'delete' => 'Delete page',
-    'form' => [
-        'title' => 'Title',
-        'permalink' => 'Permalink',
-        'content' => 'Content',
-        'submit_create' => 'Create page',
-        'submit_edit' => 'Save',
+    'map' => [
+        'title' => 'Map',
+        'description' => 'Discover podcast episodes on {siteName} that are placed on a map! Travel through the map and listen to episodes that talk about specific locations.',
     ],
-    'messages' => [
-        'createSuccess' => 'The page “{pageTitle}” was created successfully!',
-    ],
-    'map' => 'Map',
 ];

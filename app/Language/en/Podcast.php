@@ -28,8 +28,11 @@ return [
         other {<span class="font-semibold">#</span> posts}
     }',
     'activity' => 'Activity',
+    'activity_title' => '{podcastTitle} news & activity',
     'episodes' => 'Episodes',
+    'episodes_title' => 'Episodes of {podcastTitle}',
     'about' => 'About',
+    'about_title' => 'About {podcastTitle}',
     'sponsor_title' => 'Enjoying the show?',
     'sponsor' => 'Sponsor',
     'funding_links' => 'Funding links for {podcastTitle}',

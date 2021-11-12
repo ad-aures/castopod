@@ -4,7 +4,7 @@
     "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
     "This file is @generated automatically"
   ],
-  "content-hash": "f35a050323bdc632cd550f9d13f0679c",
+  "content-hash": "c0a25c3d11c806b4bc62eafb22902bc8",
   "packages": [
     {
       "name": "brick/math",
@@ -1119,6 +1119,64 @@
         "source": "https://github.com/maxmind/web-service-common-php/tree/v0.8.1"
       },
       "time": "2020-11-02T17:00:53+00:00"
+    },
+    {
+      "name": "melbahja/seo",
+      "version": "v2.0.0",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/melbahja/seo.git",
+        "reference": "a42500223cb532d4069e85097cc5b5e6ee402de1"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/melbahja/seo/zipball/a42500223cb532d4069e85097cc5b5e6ee402de1",
+        "reference": "a42500223cb532d4069e85097cc5b5e6ee402de1",
+        "shasum": ""
+      },
+      "require": {
+        "ext-curl": "*",
+        "ext-xml": "*",
+        "php": ">=7.1"
+      },
+      "require-dev": {
+        "phpunit/phpunit": "^8.5"
+      },
+      "type": "library",
+      "autoload": {
+        "psr-4": {
+          "Melbahja\\Seo\\": "src/"
+        }
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": ["MIT"],
+      "authors": [
+        {
+          "name": "Mohamed ELbahja",
+          "email": "mohamed@elbahja.me",
+          "homepage": "https://elbahja.me",
+          "role": "Developer"
+        }
+      ],
+      "description": "Simple PHP library to help developers 🍻 do better on-page SEO optimization",
+      "keywords": [
+        "PHP7",
+        "meta tags",
+        "open graph",
+        "php7.1",
+        "schema.org",
+        "search engine optimization",
+        "seo",
+        "sitemap index",
+        "sitemap.xml",
+        "sitemaps",
+        "twitter tags"
+      ],
+      "support": {
+        "issues": "https://github.com/melbahja/seo/issues",
+        "source": "https://github.com/melbahja/seo/tree/v2.0.0"
+      },
+      "time": "2021-10-26T00:36:49+00:00"
     },
     {
       "name": "michalsn/codeigniter4-uuid",

@@ -95,6 +95,7 @@ class EpisodeCommentController extends BaseController
 
         if (! ($cachedView = cache($cacheName))) {
             $data = [
+                'metatags' => get_episode_comment_metatags($this->comment),
                 'podcast' => $this->podcast,
                 'actor' => $this->actor,
                 'episode' => $this->episode,
