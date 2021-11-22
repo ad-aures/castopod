@@ -690,6 +690,7 @@ $routes->group('@(:podcastName)', function ($routes): void {
         'as' => 'podcast-activity',
     ]);
     // override default ActivityPub Library's actor route
+    $routes->options('/', 'ActivityPubController::preflight');
     $routes->get('/', 'PodcastController::activity/$1', [
         'as' => 'actor',
         'alternate-content' => [
@@ -707,6 +708,7 @@ $routes->group('@(:podcastName)', function ($routes): void {
             ],
         ],
     ]);
+    $routes->options('episodes', 'ActivityPubController::preflight');
     $routes->get('episodes', 'PodcastController::episodes/$1', [
         'as' => 'podcast-episodes',
         'alternate-content' => [
@@ -722,6 +724,7 @@ $routes->group('@(:podcastName)', function ($routes): void {
         ],
     ]);
     $routes->group('episodes/(:slug)', function ($routes): void {
+        $routes->options('/', 'ActivityPubController::preflight');
         $routes->get('/', 'EpisodeController/$1/$2', [
             'as' => 'episode',
             'alternate-content' => [
@@ -736,7 +739,7 @@ $routes->group('@(:podcastName)', function ($routes): void {
                 ],
             ],
         ]);
-        $routes->options('comments', 'EpisodeController::commentsPreflight/$1/$2');
+        $routes->options('comments', 'ActivityPubController::preflight');
         $routes->get('comments', 'EpisodeController::comments/$1/$2', [
             'as' => 'episode-comments',
             'application/activity+json' => [
@@ -806,6 +809,7 @@ $routes->group('@(:podcastName)', function ($routes): void {
     ]);
     // Status
     $routes->group('statuses/(:uuid)', function ($routes): void {
+        $routes->options('/', 'ActivityPubController::preflight');
         $routes->get('/', 'StatusController::view/$1/$2', [
             'as' => 'status',
             'alternate-content' => [
@@ -819,6 +823,7 @@ $routes->group('@(:podcastName)', function ($routes): void {
                 ],
             ],
         ]);
+        $routes->options('replies', 'ActivityPubController::preflight');
         $routes->get('replies', 'StatusController/$1/$2', [
             'as' => 'status-replies',
             'alternate-content' => [
