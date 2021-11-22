@@ -345,9 +345,9 @@ class PodcastImportController extends BaseController
 
             $newEpisode = new Episode([
                 'podcast_id' => $newPodcastId,
-                'guid' => $item->guid ?? null,
                 'title' => $item->title,
                 'slug' => $slug,
+                'guid' => $item->guid ?? null,
                 'audio_file' => download_file((string) $item->enclosure->attributes()['url']),
                 'description_markdown' => $converter->convert($itemDescriptionHtml),
                 'description_html' => $itemDescriptionHtml,

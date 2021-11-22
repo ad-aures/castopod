@@ -278,7 +278,7 @@ class StatusModel extends UuidModel
         if ($registerActivity) {
             // set status id and uri to construct NoteObject
             $status->id = $newStatusId;
-            $status->uri = base_url(route_to('status', $status->actor->username, $newStatusId));
+            $status->uri = url_to('status', $status->actor->username, $newStatusId);
 
             $createActivity = new CreateActivity();
             $noteObjectClass = config('ActivityPub')
@@ -298,7 +298,7 @@ class StatusModel extends UuidModel
                     'queued',
                 );
 
-            $createActivity->set('id', base_url(route_to('activity', $status->actor->username, $activityId)));
+            $createActivity->set('id', url_to('activity', $status->actor->username, $activityId));
 
             model('ActivityModel')
                 ->update($activityId, [
@@ -411,7 +411,7 @@ class StatusModel extends UuidModel
                     'queued',
                 );
 
-            $deleteActivity->set('id', base_url(route_to('activity', $status->actor->username, $activityId)));
+            $deleteActivity->set('id', url_to('activity', $status->actor->username, $activityId));
 
             model('ActivityModel')
                 ->update($activityId, [
@@ -492,7 +492,7 @@ class StatusModel extends UuidModel
                     'queued',
                 );
 
-            $announceActivity->set('id', base_url(route_to('activity', $status->actor->username, $activityId)));
+            $announceActivity->set('id', url_to('activity', $status->actor->username, $activityId));
 
             model('ActivityModel')
                 ->update($activityId, [
@@ -535,10 +535,7 @@ class StatusModel extends UuidModel
                 ->first();
 
             $announceActivity = new AnnounceActivity($reblogStatus);
-            $announceActivity->set(
-                'id',
-                base_url(route_to('activity', $reblogStatus->actor->username, $activity->id)),
-            );
+            $announceActivity->set('id', url_to('activity', $reblogStatus->actor->username, $activity->id),);
 
             $undoActivity
                 ->set('actor', $reblogStatus->actor->uri)
@@ -555,7 +552,7 @@ class StatusModel extends UuidModel
                     'queued',
                 );
 
-            $undoActivity->set('id', base_url(route_to('activity', $reblogStatus->actor->username, $activityId)));
+            $undoActivity->set('id', url_to('activity', $reblogStatus->actor->username, $activityId));
 
             model('ActivityModel')
                 ->update($activityId, [
@@ -627,7 +624,7 @@ class StatusModel extends UuidModel
             $actor = model('ActorModel')
                 ->getActorById((int) $data['data']['actor_id']);
 
-            $data['data']['uri'] = base_url(route_to('status', $actor->username, $uuid4->toString()));
+            $data['data']['uri'] = url_to('status', $actor->username, $uuid4->toString());
         }
 
         return $data;

@@ -420,7 +420,7 @@ class Episode extends Entity
 
     public function getLink(): string
     {
-        return base_url(route_to('episode', $this->getPodcast() ->name, $this->attributes['slug']));
+        return url_to('episode', $this->getPodcast()->name, $this->attributes['slug']);
     }
 
     public function getEmbeddablePlayerUrl(string $theme = null): string

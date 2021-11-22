@@ -125,7 +125,7 @@ class FavouriteModel extends UuidModel
 
             $likeActivity = new LikeActivity();
             $likeActivity
-                ->set('id', base_url(route_to('activity', $actor->username, $activity->id)))
+                ->set('id', url_to('activity', $actor->username, $activity->id))
                 ->set('actor', $actor->uri)
                 ->set('object', $status->uri);
 
