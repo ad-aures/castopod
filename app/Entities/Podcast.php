@@ -211,7 +211,7 @@ class Podcast extends Entity
 
     public function getCover(): Image
     {
-        return new Image(null, $this->cover_path, $this->cover_mimetype);
+        return new Image(null, $this->cover_path, $this->cover_mimetype, config('Images')->podcastCoverSizes);
     }
 
     /**
@@ -248,11 +248,13 @@ class Podcast extends Entity
                 config('Images')
                     ->podcastBannerDefaultPath,
                 config('Images')
-                    ->podcastBannerDefaultMimeType
+                    ->podcastBannerDefaultMimeType,
+                config('Images')
+                    ->podcastBannerSizes
             );
         }
 
-        return new Image(null, $this->banner_path, $this->banner_mimetype);
+        return new Image(null, $this->banner_path, $this->banner_mimetype, config('Images') ->podcastBannerSizes);
     }
 
     public function getLink(): string

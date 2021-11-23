@@ -10,7 +10,17 @@
     <link rel="icon" type="image/x-icon" href="<?= service('settings')
     ->get('App.siteIcon')['ico'] ?>" />
     <link rel="apple-touch-icon" href="<?= service('settings')->get('App.siteIcon')['180'] ?>">
-    <link rel="manifest" href="<?= route_to('webmanifest') ?>">
+    <link rel="manifest" href="<?= route_to('podcast-webmanifest', $podcast->handle) ?>">
+    <meta name="theme-color" content="<?= \App\Controllers\WebmanifestController::THEME_COLORS[service('settings')->get('App.theme')]['theme'] ?>">
+    <script>
+    // Check that service workers are supported
+    if ('serviceWorker' in navigator) {
+        // Use the window load event to keep the page load performant
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js');
+        });
+    }
+    </script>
 
     <?= $metatags ?>
 
@@ -70,7 +80,7 @@
         <div class="absolute top-0 left-0 w-full h-full bg-center bg-no-repeat bg-cover blur-lg mix-blend-overlay filter grayscale" style="background-image: url('<?= $episode->podcast->banner->small_url ?>');"></div>
         <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-background-header to-transparent"></div>
         <div class="z-10 flex flex-col items-start gap-y-2 gap-x-4 sm:flex-row">
-            <img src="<?= $episode->cover->medium_url ?>" alt="<?= $episode->title ?>" loading="lazy" class="rounded-md shadow-xl h-36" />
+            <img src="<?= $episode->cover->medium_url ?>" alt="<?= $episode->title ?>" loading="lazy" class="rounded-md shadow-xl h-36 aspect-square" />
             <div class="flex flex-col items-start text-white">
                 <?= episode_numbering($episode->number, $episode->season_number, 'text-sm leading-none font-semibold px-1 py-1 text-white/90 border !no-underline border-subtle', true) ?>
                 <h1 class="inline-flex items-baseline max-w-md mt-2 text-2xl font-bold sm:leading-none sm:text-3xl font-display line-clamp-2"><?= $episode->title ?></h1>
@@ -80,7 +90,7 @@
                         <div class="inline-flex flex-row-reverse">
                             <?php $i = 0; ?>
                             <?php foreach ($episode->persons as $person): ?>
-                                <img src="<?= $person->avatar->thumbnail_url ?>" alt="<?= $person->full_name ?>" class="object-cover w-8 h-8 -ml-5 border-2 rounded-full border-background-header last:ml-0" />
+                                <img src="<?= $person->avatar->thumbnail_url ?>" alt="<?= $person->full_name ?>" class="object-cover w-8 h-8 -ml-5 border-2 rounded-full aspect-square border-background-header last:ml-0" />
                                 <?php $i++; if ($i === 3) {
                         break;
                     }?>

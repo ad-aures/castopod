@@ -4,7 +4,7 @@
     "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
     "This file is @generated automatically"
   ],
-  "content-hash": "c0a25c3d11c806b4bc62eafb22902bc8",
+  "content-hash": "afb6585b90ed08cc8a257f346ab1c416",
   "packages": [
     {
       "name": "brick/math",
@@ -603,8 +603,8 @@
         "php": ">=5.4.0"
       },
       "require-dev": {
-        "php-parallel-lint/php-parallel-lint": "^1.0",
-        "phpunit/phpunit": "^4.8 || ^5.0 || ^6.1 || ^7.5 || ^8.5"
+        "jakub-onderka/php-parallel-lint": "^0.9 || ^1.0",
+        "phpunit/phpunit": "^4.8|^5.0"
       },
       "suggest": {
         "ext-SimpleXML": "SimpleXML extension is required to analyze RIFF/WAV/BWF audio files (also requires `ext-libxml`).",

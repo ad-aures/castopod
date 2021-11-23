@@ -8,7 +8,7 @@
         ]) ?></p>
     <header class="flex px-6 py-4 gap-x-2">
         <img src="<?= $post->actor
-            ->avatar_image_url ?>" alt="<?= $post->display_name ?>" class="w-10 h-10 rounded-full" />
+            ->avatar_image_url ?>" alt="<?= $post->display_name ?>" class="w-10 h-10 rounded-full aspect-square" />
         <div class="flex flex-col min-w-0">
             <a href="<?= $post->actor
             ->uri ?>" class="flex items-baseline hover:underline" <?= $post

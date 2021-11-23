@@ -1,6 +1,6 @@
 <article class="flex px-6 py-4 bg-base gap-x-2">
     <img src="<?= $reply->actor->avatar_image_url ?>" alt="<?= $reply->actor
-    ->display_name ?>" class="z-10 w-10 h-10 rounded-full ring-background-base ring-2" />
+    ->display_name ?>" class="z-10 w-10 h-10 rounded-full ring-background-base ring-2 aspect-square" />
     <div class="flex flex-col flex-1 min-w-0">
         <header class="flex items-center mb-2">
             <a href="<?= $reply->actor

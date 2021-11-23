@@ -19,7 +19,7 @@
     <img
         src="<?= $person->avatar->medium_url ?>"
         alt="$person->full_name"
-        class="object-cover w-full max-w-xs rounded"
+        class="object-cover w-full max-w-xs rounded aspect-square"
     />
     <div class="flex flex-col">
         <?= $person->full_name ?>

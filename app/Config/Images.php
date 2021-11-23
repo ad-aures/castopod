@@ -47,15 +47,57 @@ class Images extends BaseConfig
      *
      * Array values are as follows: 'name' => [width, height]
      *
-     * @var array<string, int[]>
+     * @var array<string, array<string, int|string>>
      */
     public array $podcastCoverSizes = [
-        'tiny' => [40, 40],
-        'thumbnail' => [150, 150],
-        'medium' => [320, 320],
-        'large' => [1024, 1024],
-        'feed' => [1400, 1400],
-        'id3' => [500, 500],
+        'tiny' => [
+            'width' => 40,
+            'height' => 40,
+            'mimetype' => 'image/webp',
+            'extension' => 'webp',
+        ],
+        'thumbnail' => [
+            'width' => 150,
+            'height' => 150,
+            'mimetype' => 'image/webp',
+            'extension' => 'webp',
+        ],
+        'medium' => [
+            'width' => 320,
+            'height' => 320,
+            'mimetype' => 'image/webp',
+            'extension' => 'webp',
+        ],
+        'large' => [
+            'width' => 1024,
+            'height' => 1024,
+            'mimetype' => 'image/webp',
+            'extension' => 'webp',
+        ],
+        'feed' => [
+            'width' => 1400,
+            'height' => 1400,
+        ],
+        'id3' => [
+            'width' => 500,
+            'height' => 500,
+        ],
+        'federation' => [
+            'width' => 400,
+            'height' => 400,
+        ],
+        'webmanifest192' => [
+            'width' => 192,
+            'height' => 192,
+            'mimetype' => 'image/png',
+            'extension' => 'png',
+        ],
+        'webmanifest512' => [
+            'width' => 512,
+            'height' => 512,
+            'mimetype' => 'image/png',
+            'extension' => 'png',
+        ],
     ];
 
     /**
@@ -63,14 +105,25 @@ class Images extends BaseConfig
      *
      * Uploaded podcast header covers are of 3:1 ratio
      *
-     * Array values are as follows: 'name' => [width, height]
-     *
-     * @var array<string, int[]>
+     * @var array<string, array<string, int|string>>
      */
     public array $podcastBannerSizes = [
-        'small' => [320, 128],
-        'medium' => [960, 320],
-        'large' => [1500, 500],
+        'small' => [
+            'width' => 320,
+            'height' => 128,
+            'mimetype' => 'image/webp',
+            'extension' => 'webp',
+        ],
+        'medium' => [
+            'width' => 960,
+            'height' => 320,
+            'mimetype' => 'image/webp',
+            'extension' => 'webp',
+        ],
+        'federation' => [
+            'width' => 1500,
+            'height' => 500,
+        ],
     ];
 
     public string $podcastBannerDefaultPath = 'castopod-banner-default.jpg';
@@ -84,11 +137,27 @@ class Images extends BaseConfig
      *
      * Array values are as follows: 'name' => [width, height]
      *
-     * @var array<string, int[]>
+     * @var array<string, array<string, int|string>>
      */
     public array $personAvatarSizes = [
-        'tiny' => [40, 40],
-        'thumbnail' => [150, 150],
-        'medium' => [320, 320],
+        'tiny' => [
+            'width' => 40,
+            'height' => 40,
+            'mimetype' => 'image/webp',
+            'extension' => 'webp',
+        ],
+        'thumbnail' => [
+            'width' => 150,
+            'height' => 150,
+            'mimetype' => 'image/webp',
+            'extension' => 'webp',
+        ],
+        'medium' => [
+            'width' => 320,
+            'height' => 320,
+            'mimetype' =>
+             'image/webp',
+            'extension' => 'webp',
+        ],
     ];
 }

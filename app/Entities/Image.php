@@ -28,7 +28,7 @@ class Image extends Entity
 {
     protected Images $config;
 
-    protected ?File $file = null;
+    protected File $file;
 
     protected string $dirname;
 
@@ -38,7 +38,16 @@ class Image extends Entity
 
     protected string $mimetype;
 
-    public function __construct(?File $file, string $path = '', string $mimetype = '')
+    /**
+     * @var array<string, array<string, int|string>>
+     */
+    protected array $sizes = [];
+
+    /**
+     * @param array<string, array<string, int|string>> $sizes
+     * @param File $file
+     */
+    public function __construct(?File $file, string $path = '', string $mimetype = '', array $sizes = [])
     {
         if ($file === null && $path === '') {
             throw new RuntimeException('File or path must be set to create an Image.');
@@ -63,11 +72,17 @@ class Image extends Entity
             ] = pathinfo($path);
         }
 
+        if ($file === null) {
+            helper('media');
+            $file = new File(media_path($path));
+        }
+
         $this->file = $file;
         $this->dirname = $dirname;
         $this->filename = $filename;
         $this->extension = $extension;
         $this->mimetype = $mimetype;
+        $this->sizes = $sizes;
     }
 
     public function __get($property)
@@ -91,7 +106,24 @@ class Image extends Entity
         if ($this->dirname !== '.') {
             $path .= $this->dirname . '/';
         }
-        $path .= $this->filename . $fileSuffix . '.' . $this->extension;
+        $path .= $this->filename . $fileSuffix;
+
+        $extension = '.' . $this->extension;
+        $mimetype = $this->mimetype;
+        if ($fileSuffix !== '') {
+            $sizeName = substr($fileSuffix, 1);
+            if (array_key_exists('extension', $this->sizes[$sizeName])) {
+                $extension = '.' . $this->sizes[$sizeName]['extension'];
+            }
+            if (array_key_exists('mimetype', $this->sizes[$sizeName])) {
+                $mimetype = $this->sizes[$sizeName]['mimetype'];
+            }
+        }
+        $path .= $extension;
+
+        if (str_ends_with($property, 'mimetype')) {
+            return $mimetype;
+        }
 
         if (str_ends_with($property, 'url')) {
             helper('media');
@@ -111,15 +143,11 @@ class Image extends Entity
 
     public function getFile(): File
     {
-        if ($this->file === null) {
-            $this->file = new File($this->path);
-        }
-
         return $this->file;
     }
 
     /**
-     * @param array<string, int[]> $sizes
+     * @param array<string, array<string, int|string>> $sizes
      */
     public function saveImage(array $sizes, string $dirname, string $filename): void
     {
@@ -127,6 +155,7 @@ class Image extends Entity
 
         $this->dirname = $dirname;
         $this->filename = $filename;
+        $this->sizes = $sizes;
 
         save_media($this->file, $this->dirname, $this->filename);
 
@@ -136,8 +165,8 @@ class Image extends Entity
             $pathProperty = $name . '_path';
             $imageService
                 ->withFile(media_path($this->path))
-                ->resize($size[0], $size[1])
-                ->save(media_path($this->{$pathProperty}));
+                ->resize($size['width'], $size['height']);
+            $imageService->save(media_path($this->{$pathProperty}));
         }
     }
 

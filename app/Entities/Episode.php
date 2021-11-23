@@ -200,7 +200,9 @@ class Episode extends Entity
     public function getCover(): Image
     {
         if ($coverPath = $this->attributes['cover_path']) {
-            return new Image(null, $coverPath, $this->attributes['cover_mimetype']);
+            return new Image(null, $coverPath, $this->attributes['cover_mimetype'], config(
+                'Images'
+            )->podcastCoverSizes);
         }
 
         return $this->getPodcast()

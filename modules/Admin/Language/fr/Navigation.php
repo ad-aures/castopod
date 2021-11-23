@@ -9,6 +9,7 @@ declare(strict_types=1);
  */
 
 return [
+    'toggle_sidebar' => 'Afficher ou cacher la barre latérale',
     'go_to_website' => 'Visiter le site',
     'dashboard' => 'Tableau de bord',
     'admin' => 'Accueil',

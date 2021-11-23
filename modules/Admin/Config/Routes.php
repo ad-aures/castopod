@@ -31,6 +31,10 @@ $routes->group(
                 'as' => 'settings-instance-delete-icon',
                 'filter' => 'permission:settings-manage',
             ]);
+            $routes->post('instance-images-regenerate', 'SettingsController::regenerateImages', [
+                'as' => 'settings-images-regenerate',
+                'filter' => 'permission:settings-manage',
+            ]);
             $routes->get('theme', 'SettingsController::theme', [
                 'as' => 'settings-theme',
                 'filter' => 'permission:settings-manage',

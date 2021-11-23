@@ -37,6 +37,7 @@ RUN apt-get update \
     # https://github.com/mlocati/docker-php-extension-installer (included in php's docker image)
     libicu-dev \
     libpng-dev \
+    libwebp-dev \
     libjpeg-dev \
     zlib1g-dev \
     libzip-dev \
@@ -44,7 +45,7 @@ RUN apt-get update \
     && docker-php-ext-install intl  \
     && docker-php-ext-install zip \
     # gd for image processing
-    && docker-php-ext-configure gd --with-jpeg \
+    && docker-php-ext-configure gd --with-webp --with-jpeg \
     && docker-php-ext-install gd \
     # redis extension for cache
     && pecl install -o -f redis \

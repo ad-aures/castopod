@@ -69,7 +69,8 @@ PHP version 8.0 or higher is required, with the following extensions installed:
 - [intl](https://php.net/manual/en/intl.requirements.php)
 - [libcurl](https://php.net/manual/en/curl.requirements.php)
 - [mbstring](https://php.net/manual/en/mbstring.installation.php)
-- [gd](https://www.php.net/manual/en/image.installation.php)
+- [gd](https://www.php.net/manual/en/image.installation.php) with **JPEG**,
+  **PNG** and **WEBP** libraries.
 
 Additionally, make sure that the following extensions are enabled in your PHP:
 

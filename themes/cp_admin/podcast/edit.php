@@ -28,7 +28,7 @@
     <img src="<?= $podcast->banner->small_url ?>" alt="" class="object-cover w-full aspect-[3/1] bg-header" />
     <div class="flex px-4 py-2">
         <img src="<?= $podcast->cover->thumbnail_url ?>" alt="<?= $podcast->title ?>"
-            class="w-16 h-16 mr-4 -mt-8 rounded-full ring-2 ring-background-elevated" />
+            class="w-16 h-16 mr-4 -mt-8 rounded-full ring-2 ring-background-elevated aspect-square" />
         <div class="flex flex-col">
             <p class="font-semibold leading-none"><?= $podcast->title ?></p>
             <p class="text-sm text-skin-muted">@<?= $podcast->handle ?></p>

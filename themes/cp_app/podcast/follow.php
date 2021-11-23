@@ -10,8 +10,18 @@
     <link rel="icon" type="image/x-icon" href="<?= service('settings')
     ->get('App.siteIcon')['ico'] ?>" />
     <link rel="apple-touch-icon" href="<?= service('settings')->get('App.siteIcon')['180'] ?>">
-    <link rel="manifest" href="<?= route_to('webmanifest') ?>">
-    
+    <link rel="manifest" href="<?= route_to('podcast-webmanifest', $actor->podcast->handle) ?>">
+    <meta name="theme-color" content="<?= \App\Controllers\WebmanifestController::THEME_COLORS[service('settings')->get('App.theme')]['theme'] ?>">
+    <script>
+    // Check that service workers are supported
+    if ('serviceWorker' in navigator) {
+        // Use the window load event to keep the page load performant
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js');
+        });
+    }
+    </script>
+
     <?= $metatags ?>
 
     <?= service('vite')
@@ -27,10 +37,10 @@
             'Fediverse.follow.subtitle',
         ) ?></h1>
         <div class="flex flex-col w-full max-w-xs -mt-24 overflow-hidden shadow bg-elevated rounded-xl">
-            <img src="<?= $actor->podcast->banner->small_url ?>" alt="" class="object-cover w-full h-32 bg-header" />
+            <img src="<?= $actor->podcast->banner->small_url ?>" alt="" class="object-cover w-full aspect-[3/1] bg-header" />
             <div class="flex px-4 py-2">
                 <img src="<?= $actor->avatar_image_url ?>" alt="<?= $actor->display_name ?>"
-                    class="w-16 h-16 mr-4 -mt-8 rounded-full ring-2 ring-background-elevated" />
+                    class="w-16 h-16 mr-4 -mt-8 rounded-full ring-2 ring-background-elevated aspect-square" />
                 <div class="flex flex-col">
                     <p class="font-semibold"><?= $actor->display_name ?></p>
                     <p class="text-sm text-skin-muted">@<?= $actor->username ?></p>

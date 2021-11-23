@@ -20,5 +20,5 @@ $navigationItems = [
         <?php $isActive = url_is($item['uri']); ?>
         <a href="<?= $item['uri'] ?>" class="px-4 py-1 text-sm font-semibold uppercase focus:ring-accent border-b-4<?= $isActive ? ' border-b-4 text-accent-base border-accent-base' : ' text-skin-muted hover:text-skin-base hover:border-subtle border-transparent' ?>"><?= $item['label'] ?></a>
     <?php endforeach; ?>
-    <button type="button" class="p-2 ml-auto rotate-180 rounded-full md:hidden focus:ring-accent" data-sidebar-toggler="toggler"><?= icon('menu') ?></button>
+    <button type="button" class="p-2 ml-auto rotate-180 rounded-full md:hidden focus:ring-accent" data-sidebar-toggler="toggler" aria-label="<?= lang('Navigation.toggle_sidebar') ?>"><?= icon('menu') ?></button>
 </nav>

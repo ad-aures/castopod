@@ -153,8 +153,8 @@ You do not wish to use the VSCode devcontainer? No problem!
    > The `docker-compose up -d` command will boot 4 containers in the
    > background:
    >
-   > - `castopod-host_app`: a php based container with CodeIgniter4 requirements
-   >   installed
+   > - `castopod-host_app`: a php based container with Castopod Host
+   >   requirements installed
    > - `castopod-host_redis`: a [redis](https://redis.io/) database to handle
    >   queries and pages caching
    > - `castopod-host_mariadb`: a [mariadb](https://mariadb.org/) server for

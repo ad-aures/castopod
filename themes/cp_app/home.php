@@ -14,6 +14,16 @@
     ->get('App.siteIcon')['ico'] ?>" />
     <link rel="apple-touch-icon" href="<?= service('settings')->get('App.siteIcon')['180'] ?>">
     <link rel="manifest" href="<?= route_to('webmanifest') ?>">
+    <meta name="theme-color" content="<?= \App\Controllers\WebmanifestController::THEME_COLORS[service('settings')->get('App.theme')]['theme'] ?>">
+    <script>
+    // Check that service workers are supported
+    if ('serviceWorker' in navigator) {
+        // Use the window load event to keep the page load performant
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js');
+        });
+    }
+    </script>
 
     <?= $metatags ?>
 
@@ -50,7 +60,7 @@
                         <article class="text-white">
                             <div class="absolute bottom-0 left-0 z-10 w-full h-full backdrop-gradient"></div>
                             <div class="w-full h-full overflow-hidden">
-                                <img alt="<?= $podcast->title ?>" src="<?= $podcast->cover->medium_url ?>" class="object-cover w-full h-full transition duration-200 ease-in-out transform group-focus:scale-105 group-hover:scale-105" />
+                                <img alt="<?= $podcast->title ?>" src="<?= $podcast->cover->medium_url ?>" class="object-cover w-full h-full transition duration-200 ease-in-out transform aspect-square group-focus:scale-105 group-hover:scale-105" />
                             </div>
                             <div class="absolute bottom-0 left-0 z-20 px-4 pb-2">
                                 <h2 class="font-bold leading-none truncate font-display"><?= $podcast->title ?></h2>

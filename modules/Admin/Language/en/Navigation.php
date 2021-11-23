@@ -9,6 +9,7 @@ declare(strict_types=1);
  */
 
 return [
+    'toggle_sidebar' => 'Toggle sidebar',
     'go_to_website' => 'View site',
     'go_to_admin' => 'Go to admin',
     'dashboard' => 'Dashboard',

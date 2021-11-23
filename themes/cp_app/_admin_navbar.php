@@ -20,7 +20,7 @@
             aria-expanded="false"><div class="relative mr-1">
                 <?= icon('account-circle', 'text-3xl opacity-60') ?>
                 <?= user()
-                    ->podcasts === [] ? '' : '<img src="' . interact_as_actor()->avatar_image_url . '" class="absolute bottom-0 w-4 h-4 border rounded-full -right-1 border-navigation" />' ?>
+                    ->podcasts === [] ? '' : '<img src="' . interact_as_actor()->avatar_image_url . '" class="absolute bottom-0 w-4 h-4 border rounded-full -right-1 border-navigation-bg" />' ?>
             </div>
             <?= user()->username ?>
             <?= icon('caret-down', 'ml-auto text-2xl') ?></button>

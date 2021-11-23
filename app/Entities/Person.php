@@ -77,10 +77,12 @@ class Person extends Entity
     public function getAvatar(): Image
     {
         if ($this->attributes['avatar_path'] === null) {
-            return new Image(null, '/castopod-avatar-default.jpg', 'image/jpeg');
+            return new Image(null, '/castopod-avatar-default.jpg', 'image/jpeg', config('Images')->personAvatarSizes);
         }
 
-        return new Image(null, $this->attributes['avatar_path'], $this->attributes['avatar_mimetype']);
+        return new Image(null, $this->attributes['avatar_path'], $this->attributes['avatar_mimetype'], config(
+            'Images'
+        )->personAvatarSizes);
     }
 
     /**

@@ -41,4 +41,22 @@ class Actor extends FediverseActor
 
         return $this->podcast;
     }
+
+    public function getAvatarImageUrl(): string
+    {
+        if ($this->podcast !== null) {
+            return $this->podcast->cover->thumbnail_url;
+        }
+
+        return $this->attributes['avatar_image_url'];
+    }
+
+    public function getAvatarImageMimetype(): string
+    {
+        if ($this->podcast !== null) {
+            return $this->podcast->cover->thumbnail_mimetype;
+        }
+
+        return $this->attributes['avatar_image_mimetype'];
+    }
 }

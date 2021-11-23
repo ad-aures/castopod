@@ -10,8 +10,8 @@ declare(strict_types=1);
 
 return [
     'title' => 'General settings',
-    'general' => [
-        'site_section_title' => 'Instance',
+    'instance' => [
+        'title' => 'Instance',
         'site_icon' => 'Site icon',
         'site_icon_delete' => 'Delete site icon',
         'site_icon_hint' => 'Site icons are what you see on your browser tabs, bookmarks bar, and when you add a website as a shortcut on mobile devices.',
@@ -19,8 +19,14 @@ return [
         'site_name' => 'Site name',
         'site_description' => 'Site description',
         'submit' => 'Save',
-        'instanceEditSuccess' => 'Instance has been updated successfully!',
+        'editSuccess' => 'Instance has been updated successfully!',
         'deleteIconSuccess' => 'Site icon has been remove successfully!',
+    ],
+    'images' => [
+        'title' => 'Images',
+        'subtitle' => 'Here you can regenerate all images based on the originals that were uploaded.',
+        'regenerate' => 'Regenerate images',
+        'regenerationSuccess' => 'All images have been regenerated successfully!',
     ],
     'theme' => [
         'title' => 'Theme',

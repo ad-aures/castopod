@@ -52,6 +52,7 @@ module.exports = {
         subtle: withOpacity("--color-border-subtle"),
         contrast: withOpacity("--color-border-contrast"),
         navigation: withOpacity("--color-border-navigation"),
+        "navigation-bg": withOpacity("--color-background-navigation"),
         accent: {
           base: withOpacity("--color-accent-base"),
           hover: withOpacity("--color-accent-hover"),

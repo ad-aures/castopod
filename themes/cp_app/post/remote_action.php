@@ -8,7 +8,17 @@
     <link rel="icon" type="image/x-icon" href="<?= service('settings')
     ->get('App.siteIcon')['ico'] ?>" />
     <link rel="apple-touch-icon" href="<?= service('settings')->get('App.siteIcon')['180'] ?>">
-    <link rel="manifest" href="<?= route_to('webmanifest') ?>">
+    <link rel="manifest" href="<?= route_to('podcast-webmanifest', $post->actor->podcast->handle) ?>">
+    <meta name="theme-color" content="<?= \App\Controllers\WebmanifestController::THEME_COLORS[service('settings')->get('App.theme')]['theme'] ?>">
+    <script>
+    // Check that service workers are supported
+    if ('serviceWorker' in navigator) {
+        // Use the window load event to keep the page load performant
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js');
+        });
+    }
+    </script>
 
     <?= $metatags ?>
 

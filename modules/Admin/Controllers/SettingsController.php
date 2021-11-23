@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace Modules\Admin\Controllers;
 
+use App\Models\PersonModel;
+use App\Models\PodcastModel;
 use CodeIgniter\HTTP\RedirectResponse;
 use PHP_ICO;
 
@@ -75,20 +77,20 @@ class SettingsController extends BaseController
                 service('image')
                     ->withFile(ROOTPATH . 'public/media/site/icon.png')
                     ->resize($size, $size)
-                    ->save(ROOTPATH . "public/media/site/icon-{$size}.{$randomHash}.png");
+                    ->save(media_path("/site/icon-{$size}.{$randomHash}.png"));
             }
 
             service('settings')
                 ->set('App.siteIcon', [
-                    'ico' => "/media/site/favicon.{$randomHash}.ico",
-                    '64' => "/media/site/icon-64.{$randomHash}.png",
-                    '180' => "/media/site/icon-180.{$randomHash}.png",
-                    '192' => "/media/site/icon-192.{$randomHash}.png",
-                    '512' => "/media/site/icon-512.{$randomHash}.png",
+                    'ico' => media_path("/site/favicon.{$randomHash}.ico"),
+                    '64' => media_path("/site/icon-64.{$randomHash}.png"),
+                    '180' => media_path("/site/icon-180.{$randomHash}.png"),
+                    '192' => media_path("/site/icon-192.{$randomHash}.png"),
+                    '512' => media_path("/site/icon-512.{$randomHash}.png"),
                 ]);
         }
 
-        return redirect('settings-general')->with('message', lang('Settings.general.instanceEditSuccess'));
+        return redirect('settings-general')->with('message', lang('Settings.instance.editSuccess'));
     }
 
     public function deleteIcon(): RedirectResponse
@@ -100,7 +102,52 @@ class SettingsController extends BaseController
         service('settings')
             ->forget('App.siteIcon');
 
-        return redirect('settings-general')->with('message', lang('Settings.general.deleteIconSuccess'));
+        return redirect('settings-general')->with('message', lang('Settings.instance.deleteIconSuccess'));
+    }
+
+    public function regenerateImages(): RedirectResponse
+    {
+        $allPodcasts = (new PodcastModel())->findAll();
+
+        foreach ($allPodcasts as $podcast) {
+            $podcastImages = glob(ROOTPATH . "public/media/podcasts/{$podcast->handle}/*_*");
+
+            if ($podcastImages) {
+                foreach ($podcastImages as $podcastImage) {
+                    if (is_file($podcastImage)) {
+                        unlink($podcastImage);
+                    }
+                }
+            }
+            $podcast->setCover($podcast->cover);
+            if ($podcast->banner_path !== null) {
+                $podcast->setBanner($podcast->banner);
+            }
+
+            foreach ($podcast->episodes as $episode) {
+                if ($episode->cover_path !== null) {
+                    $episode->setCover($episode->cover);
+                }
+            }
+        }
+
+        $personsImages = glob(ROOTPATH . 'public/media/persons/*_*');
+        if ($personsImages) {
+            foreach ($personsImages as $personsImage) {
+                if (is_file($personsImage)) {
+                    unlink($personsImage);
+                }
+            }
+        }
+
+        $persons = (new PersonModel())->findAll();
+        foreach ($persons as $person) {
+            if ($person->avatar_path !== null) {
+                $person->setAvatar($person->avatar);
+            }
+        }
+
+        return redirect('settings-general')->with('message', lang('Settings.images.regenerationSuccess'));
     }
 
     public function theme(): string

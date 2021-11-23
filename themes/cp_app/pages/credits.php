@@ -17,7 +17,7 @@
             <div class="flex mt-2 mb-2">
                 <img src="<?= $persons['thumbnail_url'] ?>" alt="<?= $persons[
     'full_name'
-] ?>" class="object-cover w-16 h-16 rounded-full md:h-24 md:w-24 border-gray" />
+] ?>" class="object-cover w-16 rounded-full aspect-square md:h-24 md:w-24 border-gray" />
                 <div class="flex flex-col ml-3 mr-4">
                     <span class="text-lg font-semibold text-skin-muted md:text-xl">
                         <?= $persons['full_name'] ?>

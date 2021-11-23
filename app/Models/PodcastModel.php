@@ -485,9 +485,9 @@ class PodcastModel extends Model
                 // update values
                 $actor->display_name = $podcast->title;
                 $actor->summary = $podcast->description_html;
-                $actor->avatar_image_url = $podcast->cover->thumbnail_url;
+                $actor->avatar_image_url = $podcast->cover->federation_url;
                 $actor->avatar_image_mimetype = $podcast->cover->mimetype;
-                $actor->cover_image_url = $podcast->banner->large_url;
+                $actor->cover_image_url = $podcast->banner->federation_url;
                 $actor->cover_image_mimetype = $podcast->banner->mimetype;
 
                 if ($actor->hasChanged()) {

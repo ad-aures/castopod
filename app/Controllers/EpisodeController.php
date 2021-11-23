@@ -204,9 +204,9 @@ class EpisodeController extends BaseController
             'height' => 144,
             'thumbnail_url' => $this->episode->cover->large_url,
             'thumbnail_width' => config('Images')
-                ->podcastCoverSizes['large'][0],
+                ->podcastCoverSizes['large']['width'],
             'thumbnail_height' => config('Images')
-                ->podcastCoverSizes['large'][1],
+                ->podcastCoverSizes['large']['height'],
         ]);
     }
 
@@ -222,8 +222,8 @@ class EpisodeController extends BaseController
         $oembed->addChild('author_name', $this->podcast->title);
         $oembed->addChild('author_url', $this->podcast->link);
         $oembed->addChild('thumbnail', $this->episode->cover->large_url);
-        $oembed->addChild('thumbnail_width', (string) config('Images')->podcastCoverSizes['large'][0]);
-        $oembed->addChild('thumbnail_height', (string) config('Images')->podcastCoverSizes['large'][1]);
+        $oembed->addChild('thumbnail_width', (string) config('Images')->podcastCoverSizes['large']['width']);
+        $oembed->addChild('thumbnail_height', (string) config('Images')->podcastCoverSizes['large']['height']);
         $oembed->addChild(
             'html',
             htmlentities(

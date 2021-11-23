@@ -12,8 +12,6 @@
     <link rel="icon" type="image/x-icon" href="<?= service('settings')
     ->get('App.siteIcon')['ico'] ?>" />
     <link rel="apple-touch-icon" href="<?= service('settings')->get('App.siteIcon')['180'] ?>">
-    <link rel="manifest" href="<?= route_to('webmanifest') ?>">
-    <link rel="canonical" href="<?= $episode->link ?>" />
     <?= service('vite')
         ->asset('styles/index.css', 'css') ?>
     <?= service('vite')
@@ -21,7 +19,7 @@
 </head>
 
 <body class="flex" style="background: <?= $themeData['background'] ?>; color: <?= $themeData['text'] ?>;">
-    <img src="<?= $episode->cover->thumbnail_url ?>" alt="<?= $episode->title ?>" class="flex-shrink w-36 h-36" />
+    <img src="<?= $episode->cover->thumbnail_url ?>" alt="<?= $episode->title ?>" class="flex-shrink w-36 h-36 aspect-square" />
     <div class="flex flex-col items-start flex-1 min-w-0 px-4 pt-4 h-36">
         <a href="https://castopod.org/" class="absolute top-0 right-0 mt-1 mr-2 text-2xl text-pine-500 hover:opacity-75" title="<?= lang('Common.powered_by', [
             'castopod' => 'Castopod',

@@ -10,8 +10,8 @@ declare(strict_types=1);
 
 return [
     'title' => 'Paramètres généraux',
-    'general' => [
-        'site_section_title' => 'Instance',
+    'instance' => [
+        'title' => 'Instance',
         'site_icon' => 'Favicon du site',
         'site_icon_delete' => 'Supprimer la favicon du site',
         'site_icon_hint' => 'Les favicons sont ce que vous voyez sur les onglets de votre navigateur, dans votre barre de favoris, et lorsque vous ajoutez un site web en raccourci sur des appareils mobiles.',
@@ -19,8 +19,14 @@ return [
         'site_name' => 'Titre du site',
         'site_description' => 'Description du site',
         'submit' => 'Sauvegarder',
-        'instanceEditSuccess' => 'L’instance a bien été mise à jour !',
+        'editSuccess' => 'L’instance a bien été mise à jour !',
         'deleteIconSuccess' => 'La favicon du site a bien été retirée !',
+    ],
+    'images' => [
+        'title' => 'Images',
+        'subtitle' => 'Vous pouvez ici regénérer toutes les images en se basant sur celles qui ont été téléversées à l’origine.',
+        'regenerate' => 'Regénérer les images',
+        'regenerationSuccess' => 'Toutes les images ont été regénérés avec succès !',
     ],
     'theme' => [
         'title' => 'Thème',
@@ -32,6 +38,7 @@ return [
         'lake' => 'Lac',
         'jacaranda' => 'Jacaranda',
         'onyx' => 'Onyx',
+        'submit' => 'Sauvegarder',
         'setInstanceThemeSuccess' => 'Le thème a bien été mis à jour !',
     ],
 ];

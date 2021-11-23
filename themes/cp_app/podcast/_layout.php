@@ -10,7 +10,17 @@
     <link rel="icon" type="image/x-icon" href="<?= service('settings')
     ->get('App.siteIcon')['ico'] ?>" />
     <link rel="apple-touch-icon" href="<?= service('settings')->get('App.siteIcon')['180'] ?>">
-    <link rel="manifest" href="<?= route_to('webmanifest') ?>">
+    <link rel="manifest" href="<?= route_to('podcast-webmanifest', $podcast->handle) ?>">
+    <meta name="theme-color" content="<?= \App\Controllers\WebmanifestController::THEME_COLORS[service('settings')->get('App.theme')]['theme'] ?>">
+    <script>
+    // Check that service workers are supported
+    if ('serviceWorker' in navigator) {
+        // Use the window load event to keep the page load performant
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js');
+        });
+    }
+    </script>
 
     <?= $metatags ?>
 
@@ -35,7 +45,7 @@
     <header class="relative z-50 flex flex-col-reverse justify-between w-full col-start-2 bg-top bg-no-repeat bg-cover sm:flex-row sm:items-end bg-header aspect-[3/1]" style="background-image: url('<?= $podcast->banner->medium_url ?>');">
         <div class="absolute bottom-0 left-0 w-full h-full backdrop-gradient"></div>
         <div class="z-10 flex items-center pl-4 -mb-6 md:pl-8 md:-mb-8 gap-x-4">
-            <img src="<?= $podcast->cover->thumbnail_url ?>" alt="<?= $podcast->title ?>" loading="lazy" class="h-24 rounded-full sm:h-28 md:h-36 ring-3 ring-background-elevated" />
+            <img src="<?= $podcast->cover->thumbnail_url ?>" alt="<?= $podcast->title ?>" loading="lazy" class="h-24 rounded-full sm:h-28 md:h-36 ring-3 ring-background-elevated aspect-square" />
             <div class="relative flex flex-col text-white -top-2 sm:top-0 md:top-2">
                 <h1 class="text-lg font-bold leading-none line-clamp-2 md:leading-none md:text-2xl font-display"><?= $podcast->title ?><span class="ml-1 font-sans text-base font-normal">@<?= $podcast->handle ?></span></h1>
                 <span class="text-xs"><?= lang('Podcast.followers', [

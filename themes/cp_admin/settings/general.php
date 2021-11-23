@@ -9,16 +9,17 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
+<div class="flex flex-col gap-y-4">
 
-<form action="<?= route_to('settings-instance') ?>" method="POST" class="flex flex-col gap-y-4" enctype="multipart/form-data">
+<form action="<?= route_to('settings-instance') ?>" method="POST" enctype="multipart/form-data">
 <?= csrf_field() ?>
 
 <Forms.Section
-    title="<?= lang('Settings.general.site_section_title') ?>">
+    title="<?= lang('Settings.instance.title') ?>">
 
     <Forms.Field
         name="site_name"
-        label="<?= lang('Settings.general.site_name') ?>"
+        label="<?= lang('Settings.instance.site_name') ?>"
         value="<?= service('settings')
     ->get('App.siteName') ?>"
         required="true" />
@@ -26,7 +27,7 @@
     <Forms.Field
         as="Textarea"
         name="site_description"
-        label="<?= lang('Settings.general.site_description') ?>"
+        label="<?= lang('Settings.instance.site_description') ?>"
         value="<?= service('settings')
     ->get('App.siteDescription') ?>"
         required="true"
@@ -36,24 +37,38 @@
         <Forms.Field
             name="site_icon"
             type="file"
-            label="<?= lang('Settings.general.site_icon') ?>"
-            hint="<?= lang('Settings.general.site_icon_hint') ?>"
-            helper="<?= lang('Settings.general.site_icon_helper') ?>"
+            label="<?= lang('Settings.instance.site_icon') ?>"
+            hint="<?= lang('Settings.instance.site_icon_hint') ?>"
+            helper="<?= lang('Settings.instance.site_icon_helper') ?>"
             accept=".png,.jpeg,.jpg"
             class="flex-1"
             />
         <?php if (config('App')->siteIcon['ico'] !== service('settings')->get('App.siteIcon')['ico']): ?>
         <div class="relative ml-2">
-            <a href="<?= route_to('settings-instance-delete-icon') ?>" class="absolute p-1 text-red-700 bg-red-100 border-2 rounded-full hover:text-red-900 border-contrast -top-3 -right-3 focus:ring-accent" title="<?= lang('Settings.general.site_icon_delete') ?>" data-tooltip="top"><?= icon('delete-bin') ?></a>
-            <img src="<?= service('settings')->get('App.siteIcon')['64'] ?>" alt="<?= service('settings')->get('App.siteName') ?> Favicon" class="w-10 h-10" />
+            <a href="<?= route_to('settings-instance-delete-icon') ?>" class="absolute p-1 text-red-700 bg-red-100 border-2 rounded-full hover:text-red-900 border-contrast -top-3 -right-3 focus:ring-accent" title="<?= lang('Settings.instance.site_icon_delete') ?>" data-tooltip="top"><?= icon('delete-bin') ?></a>
+            <img src="<?= service('settings')->get('App.siteIcon')['64'] ?>" alt="<?= service('settings')->get('App.siteName') ?> Favicon" class="w-10 h-10 aspect-square" />
         </div>
         <?php endif; ?>
     </div>
 
-    <Button variant="primary" type="submit" class="self-end"><?= lang('Settings.general.submit') ?></Button>
+    <Button variant="primary" type="submit" class="self-end"><?= lang('Settings.instance.submit') ?></Button>
 
 </Forms.Section>
 
 </form>
+
+<form action="<?= route_to('settings-images-regenerate') ?>" method="POST" class="flex flex-col gap-y-4">
+<?= csrf_field() ?>
+
+<Forms.Section
+    title="<?= lang('Settings.images.title') ?>"
+    subtitle="<?= lang('Settings.images.subtitle') ?>" >
+
+    <Button variant="primary" type="submit" iconLeft="refresh"><?= lang('Settings.images.regenerate') ?></Button>
+
+</Forms.Section>
+
+</form>
+</div>
 
 <?= $this->endSection() ?>

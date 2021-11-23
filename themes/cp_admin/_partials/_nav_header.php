@@ -1,7 +1,7 @@
 <header class="sticky top-0 z-[60] flex items-center h-10 text-white border-b col-span-full bg-navigation border-navigation">
     <button type="button"
         data-sidebar-toggler="toggler"
-        class="h-full pr-1 text-xl md:hidden focus:ring-accent focus:ring-inset"><?= icon('menu') ?></button>
+        class="h-full pr-1 text-xl md:hidden focus:ring-accent focus:ring-inset" aria-label="<?= lang('Navigation.toggle_sidebar') ?>"><?= icon('menu') ?></button>
     <div class="inline-flex items-center h-full">
         <a href="<?= route_to(
     'admin',
@@ -25,7 +25,7 @@
         aria-expanded="false"><div class="relative mr-1">
             <?= icon('account-circle', 'text-3xl opacity-60') ?>
             <?= user()
-                ->podcasts === [] ? '' : '<img src="' . interact_as_actor()->avatar_image_url . '" class="absolute bottom-0 w-4 h-4 rounded-full -right-1" />' ?>
+                ->podcasts === [] ? '' : '<img src="' . interact_as_actor()->avatar_image_url . '" class="absolute bottom-0 w-4 h-4 border rounded-full -right-1 border-navigation-bg" />' ?>
         </div>
         <?= user()->username ?>
         <?= icon('caret-down', 'ml-auto text-2xl') ?></button>

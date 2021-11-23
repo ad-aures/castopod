@@ -1,5 +1,5 @@
 <article class="relative z-10 flex w-full p-4 shadow bg-elevated rounded-conditional-2xl gap-x-2">
-    <img src="<?= $comment->actor->avatar_image_url ?>" alt="<?= $comment->display_name ?>" class="w-10 h-10 rounded-full" />
+    <img src="<?= $comment->actor->avatar_image_url ?>" alt="<?= $comment->display_name ?>" class="w-10 h-10 rounded-full aspect-square" />
     <div class="flex-1">
         <header class="w-full mb-2 text-sm">
             <a href="<?= $comment->actor->uri ?>" class="flex items-baseline hover:underline" <?= $comment->actor->is_local
