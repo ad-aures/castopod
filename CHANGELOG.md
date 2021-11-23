@@ -1,3 +1,13 @@
+# [1.0.0-alpha.77](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.76...v1.0.0-alpha.77) (2021-11-23)
+
+### Bug Fixes
+
+- **cors:** add preflight option routes for episode, podcast and status objects
+  ([a281abf](https://code.podlibre.org/podlibre/castopod-host/commit/a281abfda475388a07943c169dab460cc2d4f944))
+- **podcast-import:** move guid attribute declaration for Episode entity to
+  include slug data
+  ([5d02ae3](https://code.podlibre.org/podlibre/castopod-host/commit/5d02ae39908a9d743627135b372bf981134c4328))
+
 # [1.0.0-alpha.76](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.75...v1.0.0-alpha.76) (2021-10-26)
 
 ### Bug Fixes
