@@ -14,7 +14,7 @@ return [
     'number' => 'Épisode {episodeNumber}',
     'number_abbr' => 'Ep. {episodeNumber}',
     'season_episode' => 'Saison {seasonNumber} épisode {episodeNumber}',
-    'season_episode_abbr' => 'S{seasonNumber}E{episodeNumber}',
+    'season_episode_abbr' => 'S{seasonNumber}:E{episodeNumber}',
     'persons' => '{personsCount, plural,
         one {# intervenant·e}
         other {# intervenant·e·s}

@@ -43,5 +43,6 @@ return [
     'listening-time' => 'listening time',
     'time-periods' => 'time periods',
     'soundbites' => 'soundbites',
+    'video-clips' => 'video clips',
     'embed' => 'embeddable player',
 ];

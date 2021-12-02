@@ -23,7 +23,7 @@ RUN apt-get update \
     && apt-get update \
     && apt-get install --yes --no-install-recommends nodejs \
     # update npm
-    && npm install --global npm@7 \
+    && npm install --global npm@8 \
     && apt-get update \
     && apt-get install --yes --no-install-recommends \
     git \
@@ -39,13 +39,16 @@ RUN apt-get update \
     libpng-dev \
     libwebp-dev \
     libjpeg-dev \
+    libfreetype6-dev \
     zlib1g-dev \
     libzip-dev \
+    # ffmpeg for video encoding
+    ffmpeg \
     # intl for Internationalization
     && docker-php-ext-install intl  \
     && docker-php-ext-install zip \
     # gd for image processing
-    && docker-php-ext-configure gd --with-webp --with-jpeg \
+    && docker-php-ext-configure gd --with-webp --with-jpeg --with-freetype \
     && docker-php-ext-install gd \
     # redis extension for cache
     && pecl install -o -f redis \

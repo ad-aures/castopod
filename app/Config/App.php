@@ -450,5 +450,5 @@ class App extends BaseConfig
         '512' => '/icon-512.png',
     ];
 
-    public string $theme = 'crimson';
+    public string $theme = 'pine';
 }

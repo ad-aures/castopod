@@ -351,6 +351,22 @@ $routes->group(
                             ],
                         );
                         $routes->get(
+                            'video-clips',
+                            'ClipsController::videoClips/$1/$2',
+                            [
+                                'as' => 'video-clips',
+                                'filter' => 'permission:podcast_episodes-edit',
+                            ],
+                        );
+                        $routes->post(
+                            'video-clips',
+                            'ClipsController::generateVideoClip/$1/$2',
+                            [
+                                'as' => 'video-clips-generate',
+                                'filter' => 'permission:podcast_episodes-edit',
+                            ],
+                        );
+                        $routes->get(
                             'embed',
                             'EpisodeController::embed/$1/$2',
                             [

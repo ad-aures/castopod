@@ -52,6 +52,7 @@ class Autoload extends AutoloadConfig
         'Config' => APPPATH . 'Config/',
         'ViewComponents' => APPPATH . 'Libraries/ViewComponents/',
         'ViewThemes' => APPPATH . 'Libraries/ViewThemes/',
+        'MediaClipper' => APPPATH . 'Libraries/MediaClipper/',
         'Themes' => ROOTPATH . 'themes',
     ];
 
