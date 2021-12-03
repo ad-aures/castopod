@@ -73,10 +73,11 @@ class ClipsController extends BaseController
 
     public function generateVideoClip(): RedirectResponse
     {
+        // TODO: add end_time greater than start_time, with minimum ?
         $rules = [
-            'format' => 'required',
-            'start_time' => 'required',
-            'end_time' => 'required',
+            'format' => 'required|in_list[landscape,portrait,squared]',
+            'start_time' => 'required|numeric',
+            'end_time' => 'required|numeric|differs[start_time]',
         ];
 
         if (! $this->validate($rules)) {
@@ -86,15 +87,11 @@ class ClipsController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        // TODO: start and end
-
-        helper('media');
-
         $clipper = new VideoClip(
             $this->episode,
             (float) $this->request->getPost('start_time'),
             (float) $this->request->getPost('end_time',),
-            'landscape'
+            $this->request->getPost('format'),
         );
         $clipper->generate();
 

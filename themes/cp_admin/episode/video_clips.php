@@ -15,16 +15,16 @@
 <fieldset>
 <legend>Format</legend>
 <div class="mx-auto">
-    <input type="radio" name="format" value="16:9" id="landscape"/>
+    <input type="radio" name="format" value="landscape" id="landscape" checked="checked"/>
     <label for="landscape">Landscape - 16:9</label>
 </div>
 <div class="mx-auto">
-    <input type="radio" name="format" value="1:1" id="square" checked="checked"/>
-    <label for="square">Square - 1:1</label>
+    <input type="radio" name="format" value="portrait" id="portrait"/>
+    <label for="portrait">Portrait - 9:16</label>
 </div>
 <div class="mx-auto">
-    <input type="radio" name="format" value="9:16" id="portrait"/>
-    <label for="portrait">Portrait - 9:16</label>
+    <input type="radio" name="format" value="squared" id="square"/>
+    <label for="square">Square - 1:1</label>
 </div>
 </fieldset>
 

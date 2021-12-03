@@ -28,6 +28,12 @@ class VideoClip
 
     protected float $duration;
 
+    protected string $audioInput;
+
+    protected string $episodeCoverPath;
+
+    protected ?string $subtitlesInput = null;
+
     protected string $soundbiteOutput;
 
     protected string $subtitlesClipOutput;
@@ -65,27 +71,30 @@ class VideoClip
 
         helper('media');
 
+        $this->audioInput = media_path($this->episode->audio_file_path);
+        $this->episodeCoverPath = media_path($this->episode->cover->path);
+        if ($this->episode->transcript_file_path !== null) {
+            $this->subtitlesInput = media_path($this->episode->transcript_file_path);
+        }
+
         $podcastFolder = media_path("podcasts/{$this->episode->podcast->handle}");
 
         $this->soundbiteOutput = $podcastFolder . "/{$this->episode->slug}-soundbite-{$this->start}-to-{$this->end}.mp3";
         $this->subtitlesClipOutput = $podcastFolder . "/{$this->episode->slug}-subtitles-clip-{$this->start}-to-{$this->end}.srt";
         $this->videoClipBgOutput = $podcastFolder . "/{$this->episode->slug}-clip-bg-{$this->format}.png";
-        $this->videoClipOutput = $podcastFolder . "/{$this->episode->slug}-clip-{$this->start}-to-{$this->end}.mp4";
+        $this->videoClipOutput = $podcastFolder . "/{$this->episode->slug}-clip-{$this->start}-to-{$this->end}-{$this->format}.mp4";
     }
 
     public function soundbite(): void
     {
-        $audioInput = media_path($this->episode->audio_file_path);
-        $soundbiteCmd = "ffmpeg -y -ss {$this->start} -t {$this->duration} -i {$audioInput} {$this->soundbiteOutput}";
+        $soundbiteCmd = "ffmpeg -y -ss {$this->start} -t {$this->duration} -i {$this->audioInput} {$this->soundbiteOutput}";
         exec($soundbiteCmd);
     }
 
     public function subtitlesClip(): void
     {
-        if ($this->episode->transcript_file_path !== null) {
-            $srtFileInput = media_path($this->episode->transcript_file_path);
-
-            $subtitleClipCmd = "ffmpeg -y -i {$srtFileInput} -ss {$this->start} -t {$this->duration} {$this->subtitlesClipOutput}";
+        if ($this->subtitlesInput) {
+            $subtitleClipCmd = "ffmpeg -y -i {$this->subtitlesInput} -ss {$this->start} -t {$this->duration} {$this->subtitlesClipOutput}";
             exec($subtitleClipCmd);
         }
     }
@@ -181,7 +190,7 @@ class VideoClip
             return false;
         }
 
-        $episodeCover = imagecreatefromjpeg(media_path($this->episode->cover->path));
+        $episodeCover = imagecreatefromjpeg($this->episodeCoverPath);
         if (! $episodeCover) {
             return false;
         }
@@ -431,11 +440,20 @@ class VideoClip
             $lines = explode(PHP_EOL, $text);
             foreach ($lines as $i => $line) {
                 // Print line On Image
-                imagettftext($image, $fontsize, 0, $x, $y + (($fontsize + $leading) * $i), $white, $fontPath, $line);
+                imagettftext(
+                    $image,
+                    $fontsize,
+                    0,
+                    $x,
+                    $y + $fontsize + (($fontsize + $leading) * $i),
+                    $white,
+                    $fontPath,
+                    $line
+                );
             }
         } else {
             // Print Text On Image
-            imagettftext($image, $fontsize, 0, $x, $y, $white, $fontPath, $text);
+            imagettftext($image, $fontsize, 0, $x, $y + $fontsize, $white, $fontPath, $text);
         }
 
         return true;
@@ -465,12 +483,12 @@ class VideoClip
             return false;
         }
 
-        $x1 = $x + $bbox['left'];
-        $y1 = $y + $bbox['top'];
-        $x2 = $x + $bbox['width'] + $paddingX;
-        $y2 = $y + $bbox['height'] + $paddingY;
+        $x1 = $x + $bbox['left'] + $paddingX;
+        $y1 = $y + $bbox['top'] + $paddingY;
+        $x2 = $x + $bbox['width'] + ($paddingX * 2);
+        $y2 = $y + $bbox['height'] + ($paddingY * 2);
 
-        imagefilledrectangle($image, $x - $paddingX, $y - $paddingY, $x2, $y2, $bgColor);
+        imagefilledrectangle($image, $x, $y, $x2, $y2, $bgColor);
         imagettftext($image, $fontsize, 0, $x1, $y1, $white, $fontPath, $text);
 
         return true;
