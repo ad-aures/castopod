@@ -15,7 +15,7 @@ class MediaClipper extends BaseConfig
     public string $wavesMask = APPPATH . 'Libraries/MediaClipper/waves-mask.png';
 
     /**
-     * @var array<string, array<string, int|array<string, int|string>>>
+     * @var array<string, array<string, int|array<string, float|int|string>>>
      */
     public array $formats = [
         'landscape' => [
@@ -34,25 +34,25 @@ class MediaClipper extends BaseConfig
                 'x' => 810,
                 'y' => 210,
             ],
+            'podcastTitle' => [
+                'fontsize' => 20,
+                'x' => 150,
+                'y' => 620,
+                'lineWidth' => 510,
+            ],
             'episodeTitle' => [
                 'fontsize' => 32,
                 'x' => 150,
                 'y' => 660,
                 'lines' => 3,
-                'lineWidth' => 28,
-                'leading' => 20,
-            ],
-            'podcastTitle' => [
-                'fontsize' => 20,
-                'x' => 150,
-                'y' => 620,
+                'lineWidth' => 510,
+                'lineHeight' => 1.5,
             ],
             'episodeNumbering' => [
                 'fontsize' => 18,
                 'paddingX' => 10,
                 'paddingY' => 5,
-                'x' => 180,
-                'y' => 540,
+                'marginRight' => 10,
             ],
             'timestamp' => [
                 'fontsize' => 32,
@@ -95,25 +95,25 @@ class MediaClipper extends BaseConfig
                 'x' => 75,
                 'y' => 520,
             ],
+            'podcastTitle' => [
+                'fontsize' => 32,
+                'x' => 360,
+                'y' => 55,
+                'lineWidth' => 670,
+            ],
             'episodeTitle' => [
                 'fontsize' => 42,
                 'x' => 360,
                 'y' => 110,
                 'lines' => 3,
-                'lineWidth' => 32,
-                'leading' => 20,
-            ],
-            'podcastTitle' => [
-                'fontsize' => 32,
-                'x' => 360,
-                'y' => 55,
+                'lineWidth' => 670,
+                'lineHeight' => 1.5,
             ],
             'episodeNumbering' => [
                 'fontsize' => 28,
-                'paddingX' => 0,
+                'paddingX' => 10,
                 'paddingY' => 10,
-                'x' => 50,
-                'y' => 330,
+                'marginRight' => 10,
             ],
             'timestamp' => [
                 'fontsize' => 48,
@@ -156,25 +156,26 @@ class MediaClipper extends BaseConfig
                 'x' => 85,
                 'y' => 320,
             ],
+            'podcastTitle' => [
+                'fontsize' => 28,
+                'x' => 260,
+                'y' => 50,
+                'lines' => 1,
+                'lineWidth' => 700,
+            ],
             'episodeTitle' => [
                 'fontsize' => 36,
                 'x' => 260,
                 'y' => 90,
                 'lines' => 2,
-                'lineWidth' => 38,
-                'leading' => 20,
-            ],
-            'podcastTitle' => [
-                'fontsize' => 28,
-                'x' => 260,
-                'y' => 50,
+                'lineWidth' => 700,
+                'lineHeight' => 1.5,
             ],
             'episodeNumbering' => [
-                'fontsize' => 20,
-                'paddingX' => 0,
-                'paddingY' => 10,
-                'x' => 40,
-                'y' => 240,
+                'fontsize' => 24,
+                'paddingX' => 10,
+                'paddingY' => 5,
+                'marginRight' => 10,
             ],
             'timestamp' => [
                 'fontsize' => 48,

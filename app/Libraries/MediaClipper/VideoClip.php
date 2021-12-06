@@ -45,7 +45,7 @@ class VideoClip
     protected ?string $episodeNumbering = null;
 
     /**
-     * @var array<string, int|array<string, int|string>>
+     * @var array<string, mixed>
      */
     protected array $dimensions = [];
 
@@ -224,38 +224,63 @@ class VideoClip
             return false;
         }
 
-        $this->addTextToImage(
-            $background,
-            $this->dimensions['episodeTitle']['x'],
-            $this->dimensions['episodeTitle']['y'],
-            $this->episode->title,
-            $this->getFont('episodeTitle'),
-            $this->dimensions['episodeTitle']['fontsize'],
-            $this->dimensions['episodeTitle']['lines'],
-            $this->dimensions['episodeTitle']['lineWidth'],
-            $this->dimensions['episodeTitle']['leading'],
-        );
-        $this->addTextToImage(
+        $this->addParagraphToImage(
             $background,
             $this->dimensions['podcastTitle']['x'],
             $this->dimensions['podcastTitle']['y'],
             $this->episode->podcast->title,
             $this->getFont('podcastTitle'),
-            $this->dimensions['podcastTitle']['fontsize']
+            $this->dimensions['podcastTitle']['fontsize'],
+            $this->dimensions['podcastTitle']['lineWidth'],
+            $this->dimensions['podcastTitle']['lines'] ?? 1,
+            $this->dimensions['podcastTitle']['lineHeight'] ?? 1,
         );
+
+        $episodeNumberingWidth = 0;
         if ($this->episodeNumbering) {
+            $episodeTitleBox = $this->calculateTextBox(
+                $this->dimensions['episodeTitle']['fontsize'],
+                0,
+                $this->getFont('episodeTitle'),
+                $this->episode->title
+            );
+            $episodeNumberingBox = $this->calculateTextBox(
+                $this->dimensions['episodeNumbering']['fontsize'],
+                0,
+                $this->getFont('episodeNumbering'),
+                $this->episodeNumbering
+            );
+            if (! $episodeTitleBox || ! $episodeNumberingBox) {
+                return false;
+            }
+
+            $episodeTitleCenter = (int) ($episodeTitleBox['height'] / 2);
+            $episodeNumberingCenter = (int) (($episodeNumberingBox['height'] + ($this->dimensions['episodeNumbering']['paddingY'] * 2)) / 2);
+            $episodeNumberingWidth = $episodeNumberingBox['width'] + ($this->dimensions['episodeNumbering']['paddingX'] * 2);
+
             $this->addTextWithBox(
                 $background,
-                $this->dimensions['episodeNumbering']['x'],
-                $this->dimensions['episodeNumbering']['y'],
+                $this->dimensions['episodeTitle']['x'],
+                $this->dimensions['episodeTitle']['y'] + $episodeTitleCenter - $episodeNumberingCenter,
                 $this->episodeNumbering,
                 $this->getFont('episodeNumbering'),
                 $this->dimensions['episodeNumbering']['fontsize'],
                 $this->dimensions['episodeNumbering']['paddingX'],
                 $this->dimensions['episodeNumbering']['paddingY'],
             );
-            // dd($this->episodeNumbering);
         }
+        $this->addParagraphToImage(
+            $background,
+            $this->dimensions['episodeTitle']['x'],
+            $this->dimensions['episodeTitle']['y'],
+            $this->episode->title,
+            $this->getFont('episodeTitle'),
+            $this->dimensions['episodeTitle']['fontsize'],
+            $this->dimensions['episodeTitle']['lineWidth'],
+            $this->dimensions['episodeTitle']['lines'],
+            $this->dimensions['episodeTitle']['lineHeight'] ?? 1,
+            $episodeNumberingWidth + ($episodeNumberingWidth === 0 ? 0 : $this->dimensions['episodeNumbering']['marginRight']),
+        );
 
         // Add quotes for subtitles
         $quotes = imagecreatefrompng(config('MediaClipper')->quotesImage);
@@ -412,16 +437,17 @@ class VideoClip
         return imagecopy($background, $foreground, $x, $y, 0, 0, $width, $height);
     }
 
-    private function addTextToImage(
+    private function addParagraphToImage(
         GdImage $image,
         int $x,
         int $y,
         string $text,
         string $fontPath,
         int $fontsize,
+        int $lineWidth,
         int $numberOfLines = 1,
-        int $lineWidth = 32,
-        int $leading = 5,
+        float $lineHeight = 1,
+        int $paragraphIndent = 0,
     ): bool {
         // Allocate A Color For The Text
         $white = imagecolorallocate($image, 255, 255, 255);
@@ -430,66 +456,25 @@ class VideoClip
             return false;
         }
 
-        if ($numberOfLines > 1) {
-            $text = wordwrap($text, $lineWidth, PHP_EOL);
-            preg_match_all('~' . PHP_EOL . '~', $text, $matches, PREG_OFFSET_CAPTURE);
-            if (array_key_exists($numberOfLines - 1, $matches[0])) {
-                $text = substr($text, 0, (int) $matches[0][$numberOfLines - 1][1]) . '…';
-            }
-
-            $lines = explode(PHP_EOL, $text);
-            foreach ($lines as $i => $line) {
-                // Print line On Image
-                imagettftext(
-                    $image,
-                    $fontsize,
-                    0,
-                    $x,
-                    $y + $fontsize + (($fontsize + $leading) * $i),
-                    $white,
-                    $fontPath,
-                    $line
-                );
-            }
-        } else {
-            // Print Text On Image
-            imagettftext($image, $fontsize, 0, $x, $y + $fontsize, $white, $fontPath, $text);
-        }
-
-        return true;
-    }
-
-    private function addTextWithBox(
-        GdImage $image,
-        int $x,
-        int $y,
-        string $text,
-        string $fontPath,
-        int $fontsize,
-        int $paddingX = 0,
-        int $paddingY = 0,
-    ): bool {
-        // Create some colors
-        $white = imagecolorallocate($image, 255, 255, 255);
-        $bgColor = imagecolorallocate($image, 0, 86, 74);
-
-        if ($white === false || $bgColor === false) {
+        $lines = $this->textToParagraph($text, $fontPath, $fontsize, $lineWidth, $numberOfLines, $paragraphIndent);
+        if (! $lines) {
             return false;
         }
 
-        $bbox = $this->calculateTextBox($fontsize, 0, $fontPath, $text);
-
-        if ($bbox === false) {
-            return false;
+        $leading = (int) ($fontsize * $lineHeight);
+        foreach ($lines as $i => $line) {
+            // Print line On Image
+            imagettftext(
+                $image,
+                $fontsize,
+                0,
+                $x + ($paragraphIndent * ($i === 0 ? 1 : 0)),
+                $y + $fontsize + ($leading * $i),
+                $white,
+                $fontPath,
+                $line
+            );
         }
-
-        $x1 = $x + $bbox['left'] + $paddingX;
-        $y1 = $y + $bbox['top'] + $paddingY;
-        $x2 = $x + $bbox['width'] + ($paddingX * 2);
-        $y2 = $y + $bbox['height'] + ($paddingY * 2);
-
-        imagefilledrectangle($image, $x, $y, $x2, $y2, $bgColor);
-        imagettftext($image, $fontsize, 0, $x1, $y1, $white, $fontPath, $text);
 
         return true;
     }
@@ -523,5 +508,102 @@ class VideoClip
             'height' => $maxY - $minY,
             'box' => $bbox,
         ];
+    }
+
+    private function addTextWithBox(
+        GdImage $image,
+        int $x,
+        int $y,
+        string $text,
+        string $fontPath,
+        int $fontsize,
+        int $paddingX = 0,
+        int $paddingY = 0,
+    ): bool {
+        // Create some colors
+        $white = imagecolorallocate($image, 255, 255, 255);
+        $bgColor = imagecolorallocate($image, 0, 61, 11);
+
+        if ($white === false || $bgColor === false) {
+            return false;
+        }
+
+        $bbox = $this->calculateTextBox($fontsize, 0, $fontPath, $text);
+
+        if ($bbox === false) {
+            return false;
+        }
+
+        $x1 = $x + $bbox['left'] + $paddingX;
+        $y1 = $y + $bbox['top'] + $paddingY;
+        $x2 = $x + $bbox['width'] + ($paddingX * 2);
+        $y2 = $y + $bbox['height'] + ($paddingY * 2);
+
+        imagefilledrectangle($image, $x, $y, $x2, $y2, $bgColor);
+        imagettftext($image, $fontsize, 0, $x1, $y1, $white, $fontPath, $text);
+
+        return true;
+    }
+
+    /**
+     * @return array<int, string>|false
+     */
+    private function textToParagraph(
+        string $text,
+        string $fontPath,
+        int $fontsize,
+        int $lineWidth,
+        int $numberOfLines,
+        int $paragraphIndent = 0,
+    ): array | false {
+        // check length of text
+        $bbox = $this->calculateTextBox($fontsize, 0, $fontPath, $text);
+        if (! $bbox) {
+            return false;
+        }
+
+        // return early if text width is less than line width
+        if ($bbox['width'] <= $lineWidth) {
+            return [$text];
+        }
+
+        // cut text in multiple lines based on the lineWidth property
+        $lines = [''];
+        $length = $paragraphIndent;
+        $words = preg_split('~\b(?=\S)|(?=\s)~', $text);
+        if (! $words) {
+            return false;
+        }
+
+        $wordCount = count($words);
+        $lineNumber = 0;
+        for ($i = 0; $i < $wordCount; ++$i) {
+            $word = $words[$i];
+            $wordBox = $this->calculateTextBox($fontsize, 0, $fontPath, $word);
+            if (! $wordBox) {
+                return false;
+            }
+            $wordWidth = $wordBox['width'];
+
+            if (($wordWidth + $length) > $lineWidth) {
+                ++$lineNumber;
+                if ($lineNumber > $numberOfLines - 1) {
+                    $lines[$numberOfLines - 1] .= '…';
+                    break;
+                }
+                $lines[$lineNumber] = '';
+                $length = 0;
+
+                // If the current word is just a space, don't bother. Skip (saves a weird-looking gap in the text).
+                if ($word === ' ') {
+                    continue;
+                }
+            }
+
+            $lines[$lineNumber] .= $word;
+            $length += $wordWidth;
+        }
+
+        return $lines;
     }
 }
