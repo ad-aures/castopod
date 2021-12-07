@@ -15,5 +15,8 @@ return [
     'episode-edit' => 'Modifier l’épisode',
     'episode-persons-manage' => 'Gestion des intervenants',
     'embed' => 'Lecteur intégré',
+    'clips' => 'Extraits',
     'soundbites-edit' => 'Extraits sonores',
+    'video-clips-list' => 'Extraits video',
+    'video-clips-generate' => 'Nouvel extrait video',
 ];

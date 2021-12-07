@@ -28,22 +28,30 @@
 </div>
 </fieldset>
 
+<div class="grid gap-4 grid-cols-colorButtons">
+    <?php foreach (config('Colors')->themes as $themeName => $color): ?>
+        <Forms.ColorRadioButton
+        class="theme-<?= $themeName ?> mx-auto"
+        value="<?= $themeName ?>"
+        name="theme"
+        isChecked="<?= $themeName === 'pine' ? 'true' : 'false' ?>" ><?= lang('Settings.theme.' . $themeName) ?></Forms.ColorRadioButton>
+    <?php endforeach; ?>
+</div>
+
 <Forms.Field
     type="number"
     name="start_time"
     label="START"
     required="true"
-    value="0"
+    value="5"
 />
 <Forms.Field
     type="number"
     name="end_time"
     label="END"
     required="true"
-    value="15"
+    value="10"
 />
-
-<audio></audio>
 
 <Button variant="primary" type="submit"><?= lang('Episode.video_clips.submit') ?></Button>
 

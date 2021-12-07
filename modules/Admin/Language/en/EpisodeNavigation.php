@@ -15,6 +15,8 @@ return [
     'episode-edit' => 'Edit episode',
     'episode-persons-manage' => 'Manage persons',
     'embed-add' => 'Embeddable player',
+    'clips' => 'Clips',
     'soundbites-edit' => 'Soundbites',
-    'video-clips' => 'Video clips',
+    'video-clips-list' => 'Video clips',
+    'video-clips-generate' => 'New video clip',
 ];

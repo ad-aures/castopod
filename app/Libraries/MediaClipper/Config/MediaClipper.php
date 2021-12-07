@@ -203,4 +203,24 @@ class MediaClipper extends BaseConfig
             ],
         ],
     ];
+
+    /**
+     * @var array<string, array<string, string|int[]>>
+     */
+    public array $themes = [
+        'pine' => [
+            'background' => [0, 86, 74],
+            'text' => [255, 255, 255],
+            // subtitle hex color is BGR (Blue, Green, Red),
+            'subtitles' => 'FFFFFF',
+            // quotes image MUST BE black
+            'quotes' => [0, 148, 134],
+            'episodeNumberingBg' => [0, 61, 11],
+            'episodeNumberingText' => [255, 255, 255],
+            'progressbar' => '009486',
+            'timestampBg' => '00564A',
+            'timestampText' => 'FFFFFF',
+            'soundwaves' => 'F2FAF9',
+        ],
+    ];
 }

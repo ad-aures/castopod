@@ -45,31 +45,45 @@ class VideoClip
     protected ?string $episodeNumbering = null;
 
     /**
-     * @var array<string, mixed>
-     */
-    protected array $dimensions = [];
-
-    /**
      * @var 'landscape'|'portrait'|'squared'
      */
     protected string $format = 'landscape';
 
     /**
+     * @var array<string, mixed>
+     */
+    protected array $dimensions = [];
+
+    /**
+     * @var 'pine'|'crimson'|'lake'|'amber'|'jacaranda'|'onyx'
+     */
+    protected string $theme = 'pine';
+
+    /**
+     * @var array<string, mixed>
+     */
+    protected array $colors = [];
+
+    /**
      * @param 'landscape'|'portrait'|'squared' $format
+     * @param 'pine'|'crimson'|'lake'|'amber'|'jacaranda'|'onyx' $theme
      */
     public function __construct(
         protected Episode $episode,
         protected float $start,
         protected float $end,
         string $format,
+        string $theme,
     ) {
         $this->duration = $end - $start;
         $this->format = $format;
         $this->episodeNumbering = $this->episodeNumbering($this->episode->number, $this->episode->season_number);
         $this->dimensions = config('MediaClipper')
             ->formats[$format];
+        $this->colors = config('MediaClipper')
+            ->themes[$theme];
 
-        helper('media');
+        helper(['media']);
 
         $this->audioInput = media_path($this->episode->audio_file_path);
         $this->episodeCoverPath = media_path($this->episode->cover->path);
@@ -118,7 +132,7 @@ class VideoClip
     {
         // @phpstan-ignore
         $filters = [
-            "[0:a]aformat=channel_layouts=mono,showwaves=s={$this->dimensions['soundwaves']['width']}x{$this->dimensions['soundwaves']['height']}:mode=cline:rate=10:colors=white,format=yuva420p[waves]",
+            "[0:a]aformat=channel_layouts=mono,showwaves=s={$this->dimensions['soundwaves']['width']}x{$this->dimensions['soundwaves']['height']}:mode=cline:rate=10:colors=0xFFFFFF,format=yuva420p[waves]",
             "[waves]scale={$this->dimensions['width']}:{$this->dimensions['height']}:flags=neighbor[resizedwaves]",
             '[resizedwaves][3:v][4:v][5:v]threshold[cleanwaves]',
             '[cleanwaves][2:v]alphamerge[waves_t]',
@@ -128,11 +142,11 @@ class VideoClip
             "[waves_t3]scale={$this->dimensions['soundwaves']['rescaleWidth']}:{$this->dimensions['soundwaves']['rescaleHeight']}[waves_final]",
             "[1:v][waves_final]overlay=x={$this->dimensions['soundwaves']['x']}:y={$this->dimensions['soundwaves']['y']}:shortest=1,drawtext=fontfile=" . $this->getFont(
                 'timestamp'
-            ) . ":text='%{pts\:gmtime\:{$this->start}\:%H\\\\\\\\\\:%M\\\\\\\\\\:%S\}':x={$this->dimensions['timestamp']['x']}:y={$this->dimensions['timestamp']['y']}:fontsize={$this->dimensions['timestamp']['fontsize']}:fontcolor=white:box=1:boxcolor=0x00564A:boxborderw={$this->dimensions['timestamp']['padding']}[v3]",
-            "color=c=0x009486:s={$this->dimensions['width']}x{$this->dimensions['progressbar']['height']}[progressbar]",
+            ) . ":text='%{pts\:gmtime\:{$this->start}\:%H\\\\\\\\\\:%M\\\\\\\\\\:%S\}':x={$this->dimensions['timestamp']['x']}:y={$this->dimensions['timestamp']['y']}:fontsize={$this->dimensions['timestamp']['fontsize']}:fontcolor=0x{$this->colors['timestampText']}:box=1:boxcolor=0x{$this->colors['timestampBg']}:boxborderw={$this->dimensions['timestamp']['padding']},format=yuv420p,colormatrix=bt601:bt2020[v3]",
+            "color=c=0x{$this->colors['progressbar']}:s={$this->dimensions['width']}x{$this->dimensions['progressbar']['height']}[progressbar]",
             "[v3][progressbar]overlay=-w+(w/{$this->duration})*t:0:shortest=1:format=rgb,subtitles={$this->subtitlesClipOutput}:fontsdir=" . config(
                 'MediaClipper'
-            )->fontsFolder . ":force_style='Fontname=" . self::FONTS['subtitles'] . ",Alignment=5,Fontsize={$this->dimensions['subtitles']['fontsize']},BorderStyle=1,Outline=0,Shadow=0,MarginL={$this->dimensions['subtitles']['marginL']},MarginR={$this->dimensions['subtitles']['marginR']},MarginV={$this->dimensions['subtitles']['marginV']}'[outv]",
+            )->fontsFolder . ":force_style='Fontname=" . self::FONTS['subtitles'] . ",Alignment=5,Fontsize={$this->dimensions['subtitles']['fontsize']},PrimaryColour=&H{$this->colors['subtitles']}&,BorderStyle=1,Outline=0,Shadow=0,MarginL={$this->dimensions['subtitles']['marginL']},MarginR={$this->dimensions['subtitles']['marginR']},MarginV={$this->dimensions['subtitles']['marginV']}',format=yuv420p,colormatrix=bt601:bt2020[outv]",
         ];
 
         $videoClipCmd = [
@@ -142,12 +156,13 @@ class VideoClip
             "-loop 1 -framerate 30 -i {$this->dimensions['soundwaves']['mask']}",
             "-f lavfi -i color=gray:{$this->dimensions['width']}x{$this->dimensions['height']}",
             "-f lavfi -i color=black:{$this->dimensions['width']}x{$this->dimensions['height']}",
-            "-f lavfi -i color=white:{$this->dimensions['width']}x{$this->dimensions['height']}",
+            "-f lavfi -i color=0x{$this->colors['soundwaves']}:{$this->dimensions['width']}x{$this->dimensions['height']}",
             '-filter_complex "' . implode(';', $filters) . '"',
             '-map "[outv]"',
             '-map 0:a',
             '-acodec copy',
             '-vcodec libx264',
+            '-pix_fmt yuv420p',
             "{$this->videoClipOutput}",
         ];
 
@@ -184,7 +199,7 @@ class VideoClip
 
     private function generateVideoClipBg(): bool
     {
-        $background = $this->generateColouredBg($this->dimensions['width'], $this->dimensions['height']);
+        $background = $this->generateBackground($this->dimensions['width'], $this->dimensions['height']);
 
         if ($background === null) {
             return false;
@@ -265,6 +280,8 @@ class VideoClip
                 $this->episodeNumbering,
                 $this->getFont('episodeNumbering'),
                 $this->dimensions['episodeNumbering']['fontsize'],
+                $this->colors['episodeNumberingText'],
+                $this->colors['episodeNumberingBg'],
                 $this->dimensions['episodeNumbering']['paddingX'],
                 $this->dimensions['episodeNumbering']['paddingY'],
             );
@@ -288,6 +305,8 @@ class VideoClip
         if (! $quotes) {
             return false;
         }
+
+        imagefilter($quotes, IMG_FILTER_COLORIZE, ...$this->colors['quotes']);
 
         $scaledQuotes = $this->scaleImage(
             $quotes,
@@ -319,7 +338,7 @@ class VideoClip
         return config('MediaClipper')->fontsFolder . self::FONTS[$name];
     }
 
-    private function generateColouredBg(int $width, int $height): ?GdImage
+    private function generateBackground(int $width, int $height): ?GdImage
     {
         $background = imagecreatetruecolor($width, $height);
 
@@ -327,7 +346,7 @@ class VideoClip
             return null;
         }
 
-        $coloredBackground = imagecolorallocate($background, 0, 86, 74);
+        $coloredBackground = imagecolorallocate($background, ...$this->colors['background']);
 
         if ($coloredBackground === false) {
             return null;
@@ -450,9 +469,9 @@ class VideoClip
         int $paragraphIndent = 0,
     ): bool {
         // Allocate A Color For The Text
-        $white = imagecolorallocate($image, 255, 255, 255);
+        $textColor = imagecolorallocate($image, ...$this->colors['text']);
 
-        if ($white === false) {
+        if ($textColor === false) {
             return false;
         }
 
@@ -470,7 +489,7 @@ class VideoClip
                 0,
                 $x + ($paragraphIndent * ($i === 0 ? 1 : 0)),
                 $y + $fontsize + ($leading * $i),
-                $white,
+                $textColor,
                 $fontPath,
                 $line
             );
@@ -510,6 +529,10 @@ class VideoClip
         ];
     }
 
+    /**
+     * @param int[] $boxTextColor
+     * @param int[] $boxBgColor
+     */
     private function addTextWithBox(
         GdImage $image,
         int $x,
@@ -517,14 +540,16 @@ class VideoClip
         string $text,
         string $fontPath,
         int $fontsize,
+        array $boxTextColor,
+        array $boxBgColor,
         int $paddingX = 0,
         int $paddingY = 0,
     ): bool {
         // Create some colors
-        $white = imagecolorallocate($image, 255, 255, 255);
-        $bgColor = imagecolorallocate($image, 0, 61, 11);
+        $textColor = imagecolorallocate($image, ...$boxTextColor);
+        $bgColor = imagecolorallocate($image, ...$boxBgColor);
 
-        if ($white === false || $bgColor === false) {
+        if ($textColor === false || $bgColor === false) {
             return false;
         }
 
@@ -540,7 +565,7 @@ class VideoClip
         $y2 = $y + $bbox['height'] + ($paddingY * 2);
 
         imagefilledrectangle($image, $x, $y, $x2, $y2, $bgColor);
-        imagettftext($image, $fontsize, 0, $x1, $y1, $white, $fontPath, $text);
+        imagettftext($image, $fontsize, 0, $x1, $y1, $textColor, $fontPath, $text);
 
         return true;
     }

@@ -18,7 +18,7 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
 use MediaClipper\VideoClip;
 
-class ClipsController extends BaseController
+class VideoClipsController extends BaseController
 {
     protected Podcast $podcast;
 
@@ -55,7 +55,21 @@ class ClipsController extends BaseController
         return $this->{$method}(...$params);
     }
 
-    public function videoClips(): string
+    public function list(): string
+    {
+        $data = [
+            'podcast' => $this->podcast,
+            'episode' => $this->episode,
+        ];
+
+        replace_breadcrumb_params([
+            0 => $this->podcast->title,
+            1 => $this->episode->title,
+        ]);
+        return view('episode/video_clips_list', $data);
+    }
+
+    public function generate(): string
     {
         helper('form');
 
@@ -66,18 +80,19 @@ class ClipsController extends BaseController
 
         replace_breadcrumb_params([
             0 => $this->podcast->title,
-            1 => $this->episode->slug,
+            1 => $this->episode->title,
         ]);
-        return view('episode/video_clips', $data);
+        return view('episode/video_clips_new', $data);
     }
 
-    public function generateVideoClip(): RedirectResponse
+    public function attemptGenerate(): RedirectResponse
     {
         // TODO: add end_time greater than start_time, with minimum ?
         $rules = [
-            'format' => 'required|in_list[landscape,portrait,squared]',
             'start_time' => 'required|numeric',
             'end_time' => 'required|numeric|differs[start_time]',
+            'format' => 'required|in_list[' . implode(',', array_keys(config('MediaClipper')->formats)) . ']',
+            'theme' => 'required|in_list[' . implode(',', array_keys(config('Colors')->themes)) . ']',
         ];
 
         if (! $this->validate($rules)) {
@@ -92,10 +107,11 @@ class ClipsController extends BaseController
             (float) $this->request->getPost('start_time'),
             (float) $this->request->getPost('end_time',),
             $this->request->getPost('format'),
+            $this->request->getPost('theme'),
         );
         $clipper->generate();
 
-        return redirect()->route('video-clips', [$this->podcast->id, $this->episode->id])->with(
+        return redirect()->route('video-clips-generate', [$this->podcast->id, $this->episode->id])->with(
             'message',
             lang('Settings.images.regenerationSuccess')
         );
