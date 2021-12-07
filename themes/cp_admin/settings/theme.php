@@ -17,12 +17,13 @@
     subtitle="<?= lang('Settings.theme.accent_section_subtitle') ?>">
 
 <div class="grid gap-4 grid-cols-colorButtons">
-    <?php foreach (['pine', 'lake', 'jacaranda', 'crimson', 'amber', 'onyx'] as $theme): ?>
+    <?php foreach (config('Colors')->themes as $themeName => $color): ?>
         <Forms.ColorRadioButton
-        class="theme-<?= $theme ?> mx-auto"
-        value="<?= $theme ?>"
+        class="theme-<?= $themeName ?> mx-auto"
+        value="<?= $themeName ?>"
         name="theme"
-        isChecked="<?= $theme === service('settings')->get('App.theme') ? 'true' : 'false' ?>" ><?= lang('Settings.theme.' . $theme) ?></Forms.ColorRadioButton>
+        isChecked="<?= $themeName === service('settings')
+        ->get('App.theme') ? 'true' : 'false' ?>" ><?= lang('Settings.theme.' . $themeName) ?></Forms.ColorRadioButton>
     <?php endforeach; ?>
 </div>
 

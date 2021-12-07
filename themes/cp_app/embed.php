@@ -12,6 +12,7 @@
     <link rel="icon" type="image/x-icon" href="<?= service('settings')
     ->get('App.siteIcon')['ico'] ?>" />
     <link rel="apple-touch-icon" href="<?= service('settings')->get('App.siteIcon')['180'] ?>">
+    <link rel='stylesheet' type='text/css' href='<?= route_to('color-themes-css') ?>' />
     <?= service('vite')
         ->asset('styles/index.css', 'css') ?>
     <?= service('vite')

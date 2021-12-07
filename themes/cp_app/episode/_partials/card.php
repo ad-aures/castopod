@@ -4,7 +4,7 @@
             <?= format_duration($episode->audio_file_duration) ?>
         </time>
         <img loading="lazy" src="<?= $episode->cover
-                ->thumbnail_url ?>" alt="<?= $episode->title ?>" class="object-cover w-20 rounded-lg aspect-square" />
+                ->thumbnail_url ?>" alt="<?= $episode->title ?>" class="object-cover w-20 rounded-lg shadow-inner aspect-square" />
     </div>
     <div class="flex items-center flex-1 gap-x-4">
         <div class="flex flex-col flex-1">

@@ -5,10 +5,12 @@
 <head>
     <meta charset="utf-8">
     <title>404 Page Not Found</title>
+    <link rel='stylesheet' type='text/css' href='<?= route_to('color-themes-css') ?>' />
     <?= service('vite')->asset('styles/index.css', 'css') ?>
 </head>
 
-<body class="flex flex-col items-center justify-center min-h-screen px-2 text-center bg-base">
+<body class="flex flex-col items-center justify-center min-h-screen px-2 text-center bg-base theme-<?= service('settings')
+        ->get('App.theme') ?>">
     <?= svg('castopod-mascot_confused', 'h-64') ?>
     <h1 class="text-3xl font-bold font-display md:text-4xl lg:text-5xl">404 - File Not Found</h1>
 

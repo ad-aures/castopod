@@ -6,7 +6,7 @@
         </div>
         <?= publication_pill($episode->published_at, $episode->publication_status, 'absolute top-0 left-0 ml-2 mt-2 text-sm'); ?>
         <div class="absolute z-20 flex flex-col items-start px-4 py-2">
-            <?= episode_numbering($episode->number, $episode->season_number, 'text-xs font-semibold !no-underline border px-1 border-gray-500 mr-1', true) ?>
+            <?= episode_numbering($episode->number, $episode->season_number, 'text-xs font-semibold !no-underline px-1 bg-black/50 mr-1', true) ?>
             <span class="font-semibold leading-tight line-clamp-2"><?= $episode->title ?></span>
         </div>
     </a>

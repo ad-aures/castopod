@@ -24,6 +24,7 @@
 
     <?= $metatags ?>
 
+    <link rel='stylesheet' type='text/css' href='<?= route_to('color-themes-css') ?>' />
     <?= service('vite')
         ->asset('styles/index.css', 'css') ?>
     <?= service('vite')
@@ -90,7 +91,7 @@
                         <div class="inline-flex flex-row-reverse">
                             <?php $i = 0; ?>
                             <?php foreach ($episode->persons as $person): ?>
-                                <img src="<?= $person->avatar->thumbnail_url ?>" alt="<?= $person->full_name ?>" class="object-cover w-8 h-8 -ml-5 border-2 rounded-full aspect-square border-background-header last:ml-0" />
+                                <img src="<?= $person->avatar->thumbnail_url ?>" alt="<?= $person->full_name ?>" class="object-cover w-8 h-8 -ml-4 border-2 rounded-full aspect-square border-background-header last:ml-0" />
                                 <?php $i++; if ($i === 3) {
                         break;
                     }?>
