@@ -8,6 +8,8 @@ class ColorRadioButton extends FormComponent
 {
     protected bool $isChecked = false;
 
+    protected string $style = '';
+
     public function setIsChecked(string $value): void
     {
         $this->isChecked = $value === 'true';
@@ -26,7 +28,7 @@ class ColorRadioButton extends FormComponent
         );
 
         return <<<HTML
-            <div class="{$this->class}">
+            <div class="{$this->class}" style="{$this->style}">
                 {$radioInput}
                 <label for="{$this->value}" title="{$this->slot}" data-tooltip="bottom"></label>
             </div>

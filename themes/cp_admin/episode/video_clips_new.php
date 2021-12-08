@@ -29,12 +29,13 @@
 </fieldset>
 
 <div class="grid gap-4 grid-cols-colorButtons">
-    <?php foreach (config('Colors')->themes as $themeName => $color): ?>
+    <?php foreach (config('MediaClipper')->themes as $themeName => $colors): ?>
         <Forms.ColorRadioButton
-        class="theme-<?= $themeName ?> mx-auto"
+        class="mx-auto"
         value="<?= $themeName ?>"
         name="theme"
-        isChecked="<?= $themeName === 'pine' ? 'true' : 'false' ?>" ><?= lang('Settings.theme.' . $themeName) ?></Forms.ColorRadioButton>
+        isChecked="<?= $themeName === 'pine' ? 'true' : 'false' ?>"
+        style="--color-accent-base: <?= $colors['preview']?>"><?= lang('Settings.theme.' . $themeName) ?></Forms.ColorRadioButton>
     <?php endforeach; ?>
 </div>
 

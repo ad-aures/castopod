@@ -13,6 +13,11 @@ namespace MediaClipper;
 use App\Entities\Episode;
 use GdImage;
 
+/**
+ * TODO: refactor this by splitting image manipulations + video generation
+ *
+ * @phpstan-ignore-next-line
+ */
 class VideoClip
 {
     /**
@@ -45,19 +50,9 @@ class VideoClip
     protected ?string $episodeNumbering = null;
 
     /**
-     * @var 'landscape'|'portrait'|'squared'
-     */
-    protected string $format = 'landscape';
-
-    /**
      * @var array<string, mixed>
      */
     protected array $dimensions = [];
-
-    /**
-     * @var 'pine'|'crimson'|'lake'|'amber'|'jacaranda'|'onyx'
-     */
-    protected string $theme = 'pine';
 
     /**
      * @var array<string, mixed>
@@ -72,11 +67,10 @@ class VideoClip
         protected Episode $episode,
         protected float $start,
         protected float $end,
-        string $format,
-        string $theme,
+        protected string $format = 'landscape',
+        protected string $theme = 'pine',
     ) {
         $this->duration = $end - $start;
-        $this->format = $format;
         $this->episodeNumbering = $this->episodeNumbering($this->episode->number, $this->episode->season_number);
         $this->dimensions = config('MediaClipper')
             ->formats[$format];
@@ -95,8 +89,8 @@ class VideoClip
 
         $this->soundbiteOutput = $podcastFolder . "/{$this->episode->slug}-soundbite-{$this->start}-to-{$this->end}.mp3";
         $this->subtitlesClipOutput = $podcastFolder . "/{$this->episode->slug}-subtitles-clip-{$this->start}-to-{$this->end}.srt";
-        $this->videoClipBgOutput = $podcastFolder . "/{$this->episode->slug}-clip-bg-{$this->format}.png";
-        $this->videoClipOutput = $podcastFolder . "/{$this->episode->slug}-clip-{$this->start}-to-{$this->end}-{$this->format}.mp4";
+        $this->videoClipBgOutput = $podcastFolder . "/{$this->episode->slug}-clip-bg-{$this->format}-{$this->theme}.png";
+        $this->videoClipOutput = $podcastFolder . "/{$this->episode->slug}-clip-{$this->start}-to-{$this->end}-{$this->format}-{$this->theme}.mp4";
     }
 
     public function soundbite(): void
@@ -132,22 +126,29 @@ class VideoClip
     {
         // @phpstan-ignore
         $filters = [
-            "[0:a]aformat=channel_layouts=mono,showwaves=s={$this->dimensions['soundwaves']['width']}x{$this->dimensions['soundwaves']['height']}:mode=cline:rate=10:colors=0xFFFFFF,format=yuva420p[waves]",
+            "[0:a]aformat=channel_layouts=mono,showwaves=s={$this->dimensions['soundwaves']['width']}x{$this->dimensions['soundwaves']['height']}:mode=cline:rate=10:colors=white,format=rgb24[waves]",
             "[waves]scale={$this->dimensions['width']}:{$this->dimensions['height']}:flags=neighbor[resizedwaves]",
             '[resizedwaves][3:v][4:v][5:v]threshold[cleanwaves]',
             '[cleanwaves][2:v]alphamerge[waves_t]',
             '[4:v][waves_t]overlay=x=0:y=0:shortest=1[waves_t2]',
             '[waves_t2]split[m][a]',
             '[m][a]alphamerge[waves_t3]',
-            "[waves_t3]scale={$this->dimensions['soundwaves']['rescaleWidth']}:{$this->dimensions['soundwaves']['rescaleHeight']}[waves_final]",
+            "[waves_t3]scale={$this->dimensions['soundwaves']['rescaleWidth']}:{$this->dimensions['soundwaves']['rescaleHeight']},lutrgb=r='if(gt(val,100),{$this->colors['soundwaves'][0]},val)':g='if(gt(val,100),{$this->colors['soundwaves'][1]},val)':b='if(gt(val,100),{$this->colors['soundwaves'][2]},val)'[waves_final]",
             "[1:v][waves_final]overlay=x={$this->dimensions['soundwaves']['x']}:y={$this->dimensions['soundwaves']['y']}:shortest=1,drawtext=fontfile=" . $this->getFont(
                 'timestamp'
-            ) . ":text='%{pts\:gmtime\:{$this->start}\:%H\\\\\\\\\\:%M\\\\\\\\\\:%S\}':x={$this->dimensions['timestamp']['x']}:y={$this->dimensions['timestamp']['y']}:fontsize={$this->dimensions['timestamp']['fontsize']}:fontcolor=0x{$this->colors['timestampText']}:box=1:boxcolor=0x{$this->colors['timestampBg']}:boxborderw={$this->dimensions['timestamp']['padding']},format=yuv420p,colormatrix=bt601:bt2020[v3]",
+            ) . ":text='%{pts\:gmtime\:{$this->start}\:%H\\\\\\\\\\:%M\\\\\\\\\\:%S\}':x={$this->dimensions['timestamp']['x']}:y={$this->dimensions['timestamp']['y']}:fontsize={$this->dimensions['timestamp']['fontsize']}:fontcolor=0x{$this->colors['timestampText']}:box=1:boxcolor=0x{$this->colors['timestampBg']}:boxborderw={$this->dimensions['timestamp']['padding']}[v3]",
             "color=c=0x{$this->colors['progressbar']}:s={$this->dimensions['width']}x{$this->dimensions['progressbar']['height']}[progressbar]",
             "[v3][progressbar]overlay=-w+(w/{$this->duration})*t:0:shortest=1:format=rgb,subtitles={$this->subtitlesClipOutput}:fontsdir=" . config(
                 'MediaClipper'
-            )->fontsFolder . ":force_style='Fontname=" . self::FONTS['subtitles'] . ",Alignment=5,Fontsize={$this->dimensions['subtitles']['fontsize']},PrimaryColour=&H{$this->colors['subtitles']}&,BorderStyle=1,Outline=0,Shadow=0,MarginL={$this->dimensions['subtitles']['marginL']},MarginR={$this->dimensions['subtitles']['marginR']},MarginV={$this->dimensions['subtitles']['marginV']}',format=yuv420p,colormatrix=bt601:bt2020[outv]",
+            )->fontsFolder . ":force_style='Fontname=" . self::FONTS['subtitles'] . ",Alignment=5,Fontsize={$this->dimensions['subtitles']['fontsize']},PrimaryColour=&H{$this->colors['subtitles']}&,BorderStyle=1,Outline=0,Shadow=0,MarginL={$this->dimensions['subtitles']['marginL']},MarginR={$this->dimensions['subtitles']['marginR']},MarginV={$this->dimensions['subtitles']['marginV']}'[outv]",
+            "[6:v]scale={$this->dimensions['watermark']['width']}:{$this->dimensions['watermark']['height']}[watermark]",
+            "color=0x{$this->colors['watermarkBg']}:{$this->dimensions['watermark']['width']}x{$this->dimensions['watermark']['height']}[over]",
+            '[over][watermark]overlay=x=0:y=0:shortest=1[watermark_box]',
+            "[outv][watermark_box]overlay=x={$this->dimensions['watermark']['x']}:y={$this->dimensions['watermark']['y']}:shortest=1[watermarked]",
         ];
+
+        $watermark = config('MediaClipper')
+            ->watermark;
 
         $videoClipCmd = [
             'ffmpeg -y',
@@ -156,13 +157,13 @@ class VideoClip
             "-loop 1 -framerate 30 -i {$this->dimensions['soundwaves']['mask']}",
             "-f lavfi -i color=gray:{$this->dimensions['width']}x{$this->dimensions['height']}",
             "-f lavfi -i color=black:{$this->dimensions['width']}x{$this->dimensions['height']}",
-            "-f lavfi -i color=0x{$this->colors['soundwaves']}:{$this->dimensions['width']}x{$this->dimensions['height']}",
+            "-f lavfi -i color=white:{$this->dimensions['width']}x{$this->dimensions['height']}",
+            "-loop 1 -framerate 1 -i {$watermark}",
             '-filter_complex "' . implode(';', $filters) . '"',
-            '-map "[outv]"',
+            '-map "[watermarked]"',
             '-map 0:a',
             '-acodec copy',
-            '-vcodec libx264',
-            '-pix_fmt yuv420p',
+            '-vcodec libx264rgb',
             "{$this->videoClipOutput}",
         ];
 
@@ -306,10 +307,16 @@ class VideoClip
             return false;
         }
 
-        imagefilter($quotes, IMG_FILTER_COLORIZE, ...$this->colors['quotes']);
+        $cleanedQuotes = $this->cleanTransparency($quotes);
+
+        if (! $cleanedQuotes) {
+            return false;
+        }
+        imagefilter($cleanedQuotes, IMG_FILTER_CONTRAST, 255);
+        imagefilter($cleanedQuotes, IMG_FILTER_COLORIZE, ...$this->colors['quotes']);
 
         $scaledQuotes = $this->scaleImage(
-            $quotes,
+            $cleanedQuotes,
             $this->dimensions['quotes']['width'],
             $this->dimensions['quotes']['height']
         );
@@ -318,6 +325,7 @@ class VideoClip
             return false;
         }
 
+        imagesavealpha($scaledQuotes, true);
         $this->overlayImages(
             $background,
             $scaledQuotes,
@@ -568,6 +576,32 @@ class VideoClip
         imagettftext($image, $fontsize, 0, $x1, $y1, $textColor, $fontPath, $text);
 
         return true;
+    }
+
+    /**
+     * This helps getting a truly transparent background for images with transparency:
+     * https://stackoverflow.com/a/2611911
+     */
+    private function cleanTransparency(GdImage $image): GdImage | false
+    {
+        $imageBg = imagecolorallocate($image, 0, 0, 0);
+        if ($imageBg === false) {
+            return false;
+        }
+
+        // removing the black from the image
+        imagecolortransparent($image, $imageBg);
+
+        // turning off alpha blending (to ensure alpha channel information
+        // is preserved, rather than removed (blending with the rest of the
+        // image in the form of black))
+        imagealphablending($image, false);
+
+        // turning on alpha channel information saving (to ensure the full range
+        // of transparency is preserved)
+        imagesavealpha($image, true);
+
+        return $image;
     }
 
     /**
