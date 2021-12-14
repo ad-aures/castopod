@@ -52,24 +52,24 @@ class PodcastEpisode extends ObjectType
 
         $this->image = [
             'type' => 'Image',
-            'mediaType' => $episode->cover_mimetype,
+            'mediaType' => $episode->cover->file_content_type,
             'url' => $episode->cover->feed_url,
         ];
 
         // add audio file
         $this->audio = [
-            'id' => $episode->audio_file_url,
+            'id' => $episode->audio->file_url,
             'type' => 'Audio',
             'name' => $episode->title,
-            'size' => $episode->audio_file_size,
-            'duration' => $episode->audio_file_duration,
+            'size' => $episode->audio->file_size,
+            'duration' => $episode->audio->duration,
             'url' => [
-                'href' => $episode->audio_file_url,
+                'href' => $episode->audio->file_url,
                 'type' => 'Link',
-                'mediaType' => $episode->audio_file_mimetype,
+                'mediaType' => $episode->audio->file_content_type,
             ],
-            'transcript' => $episode->transcript_file_url,
-            'chapters' => $episode->chapters_file_url,
+            'transcript' => $episode->transcript->file_url,
+            'chapters' => $episode->chapters->file_url,
         ];
 
         $this->comments = url_to('episode-comments', $episode->podcast->handle, $episode->slug);

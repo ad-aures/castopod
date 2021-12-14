@@ -42,16 +42,9 @@ class AddPersons extends Migration
                     'The url to a relevant resource of information about the person, such as a homepage or third-party profile platform.',
                 'null' => true,
             ],
-            'avatar_path' => [
-                'type' => 'VARCHAR',
-                'constraint' => 255,
-                'null' => true,
-            ],
-            // constraint is 13 because the longest safe mimetype for images is image/svg+xml,
-            // see https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types#image_types
-            'avatar_mimetype' => [
-                'type' => 'VARCHAR',
-                'constraint' => 13,
+            'avatar_id' => [
+                'type' => 'INT',
+                'unsigned' => true,
                 'null' => true,
             ],
             'created_by' => [
@@ -71,6 +64,7 @@ class AddPersons extends Migration
         ]);
 
         $this->forge->addKey('id', true);
+        $this->forge->addForeignKey('avatar_id', 'media', 'id');
         $this->forge->addForeignKey('created_by', 'users', 'id');
         $this->forge->addForeignKey('updated_by', 'users', 'id');
         $this->forge->createTable('persons');

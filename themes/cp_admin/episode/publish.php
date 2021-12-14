@@ -54,12 +54,12 @@
     ) ?>
                 </div>
                 <div class="text-xs text-skin-muted">
-                    <time datetime="PT<?= $episode->audio_file_duration ?>S">
-                        <?= format_duration($episode->audio_file_duration) ?>
+                    <time datetime="PT<?= $episode->audio->duration ?>S">
+                        <?= format_duration($episode->audio->duration) ?>
                     </time>
                 </div>
             </a>
-            <?= audio_player($episode->audio_file_url, $episode->audio_file_mimetype, 'mt-auto') ?>
+            <?= audio_player($episode->audio->file_url, $episode->audio->file_content_type, 'mt-auto') ?>
         </div>
     </div>
     <footer class="flex justify-around px-6 py-3">

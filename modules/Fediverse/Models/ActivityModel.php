@@ -42,7 +42,7 @@ class ActivityModel extends BaseUuidModel
         'post_id',
         'type',
         'payload',
-        'task_status',
+        'status',
         'scheduled_at',
     ];
 
@@ -100,7 +100,7 @@ class ActivityModel extends BaseUuidModel
                 'type' => $type,
                 'payload' => $payload,
                 'scheduled_at' => $scheduledAt,
-                'task_status' => $taskStatus,
+                'status' => $taskStatus,
             ],
             true,
         );
@@ -112,7 +112,7 @@ class ActivityModel extends BaseUuidModel
     public function getScheduledActivities(): array
     {
         return $this->where('`scheduled_at` <= NOW()', null, false)
-            ->where('task_status', 'queued')
+            ->where('status', 'queued')
             ->orderBy('scheduled_at', 'ASC')
             ->findAll();
     }

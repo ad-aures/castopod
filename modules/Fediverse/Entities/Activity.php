@@ -23,7 +23,7 @@ use RuntimeException;
  * @property Post $post
  * @property string $type
  * @property object $payload
- * @property string|null $task_status
+ * @property string|null $status
  * @property Time|null $scheduled_at
  * @property Time $created_at
  */
@@ -55,7 +55,7 @@ class Activity extends UuidEntity
         'post_id' => '?string',
         'type' => 'string',
         'payload' => 'json',
-        'task_status' => '?string',
+        'status' => '?string',
     ];
 
     public function getActor(): Actor

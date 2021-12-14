@@ -35,8 +35,7 @@ class PersonModel extends Model
         'full_name',
         'unique_name',
         'information_url',
-        'avatar_path',
-        'avatar_mimetype',
+        'avatar_id',
         'created_by',
         'updated_by',
     ];

@@ -14,13 +14,15 @@ use App\Entities\Episode;
 use App\Entities\EpisodeComment;
 use App\Entities\Image;
 use App\Entities\Location;
+use App\Entities\Media;
 use App\Entities\Podcast;
 use App\Entities\Post;
+use App\Models\ClipsModel;
 use App\Models\EpisodeCommentModel;
 use App\Models\EpisodeModel;
+use App\Models\MediaModel;
 use App\Models\PodcastModel;
 use App\Models\PostModel;
-use App\Models\SoundbiteModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\I18n\Time;
@@ -156,9 +158,30 @@ class EpisodeController extends BaseController
             'published_at' => null,
         ]);
 
+        $db = db_connect();
+        $db->transStart();
+
         $coverFile = $this->request->getFile('cover');
         if ($coverFile !== null && $coverFile->isValid()) {
-            $newEpisode->cover = new Image($coverFile);
+            $cover = new Image([
+                'file_name' => $newEpisode->slug,
+                'file_directory' => 'podcasts/' . $this->podcast->handle,
+                'sizes' => config('Images')
+                    ->podcastBannerSizes,
+                'file' => $this->request->getFile('banner'),
+                'uploaded_by' => user_id(),
+                'updated_by' => user_id(),
+            ]);
+            $mediaModel = new MediaModel('image');
+            if (! ($newCoverId = $mediaModel->saveMedia($cover))) {
+                $db->transRollback();
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->with('errors', $mediaModel->errors());
+            }
+
+            $newEpisode->cover_id = $newCoverId;
         }
 
         $transcriptChoice = $this->request->getPost('transcript-choice');
@@ -167,10 +190,26 @@ class EpisodeController extends BaseController
             && ($transcriptFile = $this->request->getFile('transcript_file'))
             && $transcriptFile->isValid()
         ) {
-            $newEpisode->transcript_file = $transcriptFile;
+            $transcript = new Media([
+                'file_name' => $newEpisode->slug . '-transcript',
+                'file_directory' => 'podcasts/' . $this->podcast->handle,
+                'file' => $transcriptFile,
+                'uploaded_by' => user_id(),
+                'updated_by' => user_id(),
+            ]);
+            $mediaModel = new MediaModel('image');
+            if (! ($newTranscriptId = $mediaModel->saveMedia($transcript))) {
+                $db->transRollback();
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->with('errors', $mediaModel->errors());
+            }
+
+            $newEpisode->transcript_id = $newTranscriptId;
         } elseif ($transcriptChoice === 'remote-url') {
-            $newEpisode->transcript_file_remote_url = $this->request->getPost(
-                'transcript_file_remote_url'
+            $newEpisode->transcript_remote_url = $this->request->getPost(
+                'transcript_remote_url'
             ) === '' ? null : $this->request->getPost('transcript_file_remote_url');
         }
 
@@ -813,11 +852,11 @@ class EpisodeController extends BaseController
         return redirect()->route('soundbites-edit', [$this->podcast->id, $this->episode->id]);
     }
 
-    public function soundbiteDelete(string $soundbiteId): RedirectResponse
+    public function soundbiteDelete(string $clipId): RedirectResponse
     {
-        (new SoundbiteModel())->deleteSoundbite($this->podcast->id, $this->episode->id, (int) $soundbiteId);
+        (new ClipsModel())->deleteClip($this->podcast->id, $this->episode->id, (int) $clipId);
 
-        return redirect()->route('soundbites-edit', [$this->podcast->id, $this->episode->id]);
+        return redirect()->route('clips-edit', [$this->podcast->id, $this->episode->id]);
     }
 
     public function embed(): string

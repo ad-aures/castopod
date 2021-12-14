@@ -3,9 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Class AddSoundbites Creates soundbites table in database
- *
- * @copyright  2020 Podlibre
+ * @copyright  2021 Podlibre
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
  */
@@ -14,7 +12,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class AddSoundbites extends Migration
+class AddClips extends Migration
 {
     public function up(): void
     {
@@ -37,7 +35,7 @@ class AddSoundbites extends Migration
                 'unsigned' => true,
             ],
             'duration' => [
-                // soundbite duration cannot be higher than 9999,999 seconds ~ 2.77 hours
+                // clip duration cannot be higher than 9999,999 seconds ~ 2.77 hours
                 'type' => 'DECIMAL(7,3)',
                 'unsigned' => true,
             ],
@@ -45,6 +43,21 @@ class AddSoundbites extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 128,
                 'null' => true,
+            ],
+            'type' => [
+                'type' => 'ENUM',
+                'constraint' => ['audio', 'video'],
+            ],
+            'media_id' => [
+                'type' => 'INT',
+                'unsigned' => true,
+            ],
+            'status' => [
+                'type' => 'ENUM',
+                'constraint' => ['queued', 'pending', 'generating', 'passed', 'failed'],
+            ],
+            'logs' => [
+                'type' => 'TEXT',
             ],
             'created_by' => [
                 'type' => 'INT',
@@ -65,17 +78,19 @@ class AddSoundbites extends Migration
                 'null' => true,
             ],
         ]);
+
         $this->forge->addKey('id', true);
-        $this->forge->addUniqueKey(['episode_id', 'start_time', 'duration']);
+        $this->forge->addUniqueKey(['episode_id', 'start_time', 'duration', 'type']);
         $this->forge->addForeignKey('podcast_id', 'podcasts', 'id', '', 'CASCADE');
         $this->forge->addForeignKey('episode_id', 'episodes', 'id', '', 'CASCADE');
+        $this->forge->addForeignKey('media_id', 'media', 'id', '', 'CASCADE');
         $this->forge->addForeignKey('created_by', 'users', 'id');
         $this->forge->addForeignKey('updated_by', 'users', 'id');
-        $this->forge->createTable('soundbites');
+        $this->forge->createTable('clips');
     }
 
     public function down(): void
     {
-        $this->forge->dropTable('soundbites');
+        $this->forge->dropTable('clips');
     }
 }

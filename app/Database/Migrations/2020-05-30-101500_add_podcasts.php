@@ -46,25 +46,13 @@ class AddPodcasts extends Migration
             'description_html' => [
                 'type' => 'TEXT',
             ],
-            'cover_path' => [
-                'type' => 'VARCHAR',
-                'constraint' => 255,
+            'cover_id' => [
+                'type' => 'INT',
+                'unsigned' => true,
             ],
-            // constraint is 13 because the longest safe mimetype for images is image/svg+xml,
-            // see https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types#image_types
-            'cover_mimetype' => [
-                'type' => 'VARCHAR',
-                'constraint' => 13,
-            ],
-            'banner_path' => [
-                'type' => 'VARCHAR',
-                'constraint' => 255,
-                'null' => true,
-                'default' => null,
-            ],
-            'banner_mimetype' => [
-                'type' => 'VARCHAR',
-                'constraint' => 13,
+            'banner_id' => [
+                'type' => 'INT',
+                'unsigned' => true,
                 'null' => true,
                 'default' => null,
             ],
@@ -209,6 +197,8 @@ class AddPodcasts extends Migration
         $this->forge->addUniqueKey('guid');
         $this->forge->addUniqueKey('actor_id');
         $this->forge->addForeignKey('actor_id', config('Fediverse')->tablesPrefix . 'actors', 'id', '', 'CASCADE');
+        $this->forge->addForeignKey('cover_id', 'media', 'id');
+        $this->forge->addForeignKey('banner_id', 'media', 'id');
         $this->forge->addForeignKey('category_id', 'categories', 'id');
         $this->forge->addForeignKey('language_code', 'languages', 'code');
         $this->forge->addForeignKey('created_by', 'users', 'id');

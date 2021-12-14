@@ -44,7 +44,7 @@ class AddActivities extends Migration
             'payload' => [
                 'type' => 'JSON',
             ],
-            'task_status' => [
+            'status' => [
                 'type' => 'ENUM',
                 'constraint' => ['queued', 'delivered'],
                 'null' => true,

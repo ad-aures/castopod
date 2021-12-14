@@ -115,14 +115,14 @@
                 title="<?= $episode->title ?>"
                 podcast="<?= $episode->podcast->title ?>"
                 src="<?= $episode->audio_file_web_url ?>"
-                mediaType="<?= $episode->audio_file_mimetype ?>"
+                mediaType="<?= $episode->audio->file_content_type ?>"
                 playLabel="<?= lang('Common.play_episode_button.play') ?>"
                 playingLabel="<?= lang('Common.play_episode_button.playing') ?>"></play-episode-button>
             <div class="text-xs">
                 <?= relative_time($episode->published_at) ?>
                 <span class="mx-1">•</span>
-                <time datetime="PT<?= $episode->audio_file_duration ?>S">
-                    <?= format_duration_symbol($episode->audio_file_duration) ?>
+                <time datetime="PT<?= $episode->audio->duration ?>S">
+                    <?= format_duration_symbol($episode->audio->duration) ?>
                 </time>
             </div>
         </div>

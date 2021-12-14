@@ -40,29 +40,9 @@ class AddEpisodes extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 128,
             ],
-            'audio_file_path' => [
-                'type' => 'VARCHAR',
-                'constraint' => 255,
-            ],
-            'audio_file_duration' => [
-                // exact value for duration with max 99999,999 ~ 27.7 hours
-                'type' => 'DECIMAL(8,3)',
-                'unsigned' => true,
-                'comment' => 'Playtime in seconds',
-            ],
-            'audio_file_mimetype' => [
-                'type' => 'VARCHAR',
-                'constraint' => 255,
-            ],
-            'audio_file_size' => [
+            'audio_id' => [
                 'type' => 'INT',
                 'unsigned' => true,
-                'comment' => 'File size in bytes',
-            ],
-            'audio_file_header_size' => [
-                'type' => 'INT',
-                'unsigned' => true,
-                'comment' => 'Header size in bytes',
             ],
             'description_markdown' => [
                 'type' => 'TEXT',
@@ -70,34 +50,27 @@ class AddEpisodes extends Migration
             'description_html' => [
                 'type' => 'TEXT',
             ],
-            'cover_path' => [
-                'type' => 'VARCHAR',
-                'constraint' => 255,
+            'cover_id' => [
+                'type' => 'INT',
+                'unsigned' => true,
                 'null' => true,
             ],
-            // constraint is 13 because the longest safe mimetype for images is image/svg+xml,
-            // see https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types#image_types
-            'cover_mimetype' => [
-                'type' => 'VARCHAR',
-                'constraint' => 13,
+            'transcript_id' => [
+                'type' => 'INT',
+                'unsigned' => true,
                 'null' => true,
             ],
-            'transcript_file_path' => [
-                'type' => 'VARCHAR',
-                'constraint' => 255,
-                'null' => true,
-            ],
-            'transcript_file_remote_url' => [
+            'transcript_remote_url' => [
                 'type' => 'VARCHAR',
                 'constraint' => 512,
                 'null' => true,
             ],
-            'chapters_file_path' => [
-                'type' => 'VARCHAR',
-                'constraint' => 255,
+            'chapters_id' => [
+                'type' => 'INT',
+                'unsigned' => true,
                 'null' => true,
             ],
-            'chapters_file_remote_url' => [
+            'chapters_remote_url' => [
                 'type' => 'VARCHAR',
                 'constraint' => 512,
                 'null' => true,
@@ -183,6 +156,10 @@ class AddEpisodes extends Migration
         $this->forge->addPrimaryKey('id');
         $this->forge->addUniqueKey(['podcast_id', 'slug']);
         $this->forge->addForeignKey('podcast_id', 'podcasts', 'id', '', 'CASCADE');
+        $this->forge->addForeignKey('audio_id', 'media', 'id');
+        $this->forge->addForeignKey('cover_id', 'media', 'id');
+        $this->forge->addForeignKey('transcript_id', 'media', 'id');
+        $this->forge->addForeignKey('chapters_id', 'media', 'id');
         $this->forge->addForeignKey('created_by', 'users', 'id');
         $this->forge->addForeignKey('updated_by', 'users', 'id');
         $this->forge->createTable('episodes');

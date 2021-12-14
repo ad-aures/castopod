@@ -11,14 +11,14 @@ declare(strict_types=1);
 namespace App\Entities;
 
 use App\Libraries\SimpleRSSElement;
+use App\Models\ClipsModel;
 use App\Models\EpisodeCommentModel;
+use App\Models\MediaModel;
 use App\Models\PersonModel;
 use App\Models\PodcastModel;
 use App\Models\PostModel;
-use App\Models\SoundbiteModel;
 use CodeIgniter\Entity\Entity;
 use CodeIgniter\Files\File;
-use CodeIgniter\HTTP\Files\UploadedFile;
 use CodeIgniter\I18n\Time;
 use League\CommonMark\CommonMarkConverter;
 use RuntimeException;
@@ -31,30 +31,22 @@ use RuntimeException;
  * @property string $guid
  * @property string $slug
  * @property string $title
- * @property File $audio_file
- * @property string $audio_file_url
+ * @property int $audio_id
+ * @property Audio $audio
  * @property string $audio_file_analytics_url
  * @property string $audio_file_web_url
  * @property string $audio_file_opengraph_url
- * @property string $audio_file_path
- * @property double $audio_file_duration
- * @property string $audio_file_mimetype
- * @property int $audio_file_size
- * @property int $audio_file_header_size
  * @property string|null $description Holds text only description, striped of any markdown or html special characters
  * @property string $description_markdown
  * @property string $description_html
+ * @property int $cover_id
  * @property Image $cover
- * @property string|null $cover_path
- * @property string|null $cover_mimetype
- * @property File|null $transcript_file
- * @property string|null $transcript_file_url
- * @property string|null $transcript_file_path
- * @property string|null $transcript_file_remote_url
- * @property File|null $chapters_file
- * @property string|null $chapters_file_url
- * @property string|null $chapters_file_path
- * @property string|null $chapters_file_remote_url
+ * @property int|null $transcript_id
+ * @property Media|null $transcript
+ * @property string|null $transcript_remote_url
+ * @property int|null $chapters_id
+ * @property Media|null $chapters
+ * @property string|null $chapters_remote_url
  * @property string|null $parental_advisory
  * @property int $number
  * @property int $season_number
@@ -86,15 +78,15 @@ class Episode extends Entity
 
     protected string $link;
 
-    protected File $audio_file;
+    protected Audio $audio;
 
-    protected string $audio_file_url;
+    protected string $audio_url;
 
-    protected string $audio_file_analytics_url;
+    protected string $audio_analytics_url;
 
-    protected string $audio_file_web_url;
+    protected string $audio_web_url;
 
-    protected string $audio_file_opengraph_url;
+    protected string $audio_opengraph_url;
 
     protected string $embed_url;
 
@@ -102,9 +94,9 @@ class Episode extends Entity
 
     protected ?string $description = null;
 
-    protected File $transcript_file;
+    protected ?Media $transcript;
 
-    protected File $chapters_file;
+    protected ?Media $chapters;
 
     /**
      * @var Person[]|null
@@ -112,9 +104,9 @@ class Episode extends Entity
     protected ?array $persons = null;
 
     /**
-     * @var Soundbite[]|null
+     * @var Clip[]|null
      */
-    protected ?array $soundbites = null;
+    protected ?array $clips = null;
 
     /**
      * @var Post[]|null
@@ -146,19 +138,14 @@ class Episode extends Entity
         'guid' => 'string',
         'slug' => 'string',
         'title' => 'string',
-        'audio_file_path' => 'string',
-        'audio_file_duration' => 'double',
-        'audio_file_mimetype' => 'string',
-        'audio_file_size' => 'integer',
-        'audio_file_header_size' => 'integer',
+        'audio_id' => 'integer',
         'description_markdown' => 'string',
         'description_html' => 'string',
-        'cover_path' => '?string',
-        'cover_mimetype' => '?string',
-        'transcript_file_path' => '?string',
-        'transcript_file_remote_url' => '?string',
-        'chapters_file_path' => '?string',
-        'chapters_file_remote_url' => '?string',
+        'cover_id' => '?integer',
+        'transcript_id' => '?integer',
+        'transcript_remote_url' => '?string',
+        'chapters_id' => '?integer',
+        'chapters_remote_url' => '?string',
         'parental_advisory' => '?string',
         'number' => '?integer',
         'season_number' => '?integer',
@@ -199,108 +186,45 @@ class Episode extends Entity
 
     public function getCover(): Image
     {
-        if ($coverPath = $this->attributes['cover_path']) {
-            return new Image(null, $coverPath, $this->attributes['cover_mimetype'], config(
-                'Images'
-            )->podcastCoverSizes);
+        if (! $this->cover instanceof Image) {
+            $this->cover = (new MediaModel('image'))->getMediaById($this->cover_id);
         }
 
-        return $this->getPodcast()
-            ->cover;
+        return $this->cover;
     }
 
-    /**
-     * Saves an audio file
-     */
-    public function setAudioFile(UploadedFile | File $audioFile): static
+    public function getAudio(): Audio
     {
-        helper(['media', 'id3']);
-
-        $audioMetadata = get_file_tags($audioFile);
-
-        $this->attributes['audio_file_path'] = save_media(
-            $audioFile,
-            'podcasts/' . $this->getPodcast()->handle,
-            $this->attributes['slug'],
-        );
-        $this->attributes['audio_file_duration'] =
-            $audioMetadata['playtime_seconds'];
-        $this->attributes['audio_file_mimetype'] = $audioMetadata['mime_type'];
-        $this->attributes['audio_file_size'] = $audioMetadata['filesize'];
-        $this->attributes['audio_file_header_size'] =
-            $audioMetadata['avdataoffset'];
-
-        return $this;
-    }
-
-    /**
-     * Saves an episode transcript file
-     */
-    public function setTranscriptFile(UploadedFile | File $transcriptFile): static
-    {
-        helper('media');
-
-        $this->attributes['transcript_file_path'] = save_media(
-            $transcriptFile,
-            'podcasts/' . $this->getPodcast()
-                ->handle,
-            $this->attributes['slug'] . '-transcript',
-        );
-
-        return $this;
-    }
-
-    /**
-     * Saves an episode chapters file
-     */
-    public function setChaptersFile(UploadedFile | File $chaptersFile): static
-    {
-        helper('media');
-
-        $this->attributes['chapters_file_path'] = save_media(
-            $chaptersFile,
-            'podcasts/' . $this->getPodcast()
-                ->handle,
-            $this->attributes['slug'] . '-chapters',
-        );
-
-        return $this;
-    }
-
-    public function getAudioFile(): File
-    {
-        helper('media');
-
-        return new File(media_path($this->audio_file_path));
-    }
-
-    public function getTranscriptFile(): ?File
-    {
-        if ($this->attributes['transcript_file_path']) {
-            helper('media');
-
-            return new File(media_path($this->attributes['transcript_file_path']));
+        if (! $this->audio) {
+            $this->audio = (new MediaModel('audio'))->getMediaById($this->audio_id);
         }
 
-        return null;
+        return $this->audio;
     }
 
-    public function getChaptersFile(): ?File
+    public function getTranscript(): ?Media
     {
-        if ($this->attributes['chapters_file_path']) {
-            helper('media');
-
-            return new File(media_path($this->attributes['chapters_file_path']));
+        if ($this->transcript_id !== null && $this->transcript === null) {
+            $this->transcript = (new MediaModel('document'))->getMediaById($this->transcript_id);
         }
 
-        return null;
+        return $this->transcript;
+    }
+
+    public function getChaptersFile(): ?Media
+    {
+        if ($this->chapters_id !== null && $this->chapters === null) {
+            $this->chapters = (new MediaModel('document'))->getMediaById($this->chapters_id);
+        }
+
+        return $this->chapters;
     }
 
     public function getAudioFileUrl(): string
     {
         helper('media');
 
-        return media_base_url($this->audio_file_path);
+        return media_base_url($this->audio->file_path);
     }
 
     public function getAudioFileAnalyticsUrl(): string
@@ -308,15 +232,15 @@ class Episode extends Entity
         helper('analytics');
 
         // remove 'podcasts/' from audio file path
-        $strippedAudioFilePath = substr($this->audio_file_path, 9);
+        $strippedAudioFilePath = substr($this->audio->file_path, 9);
 
         return generate_episode_analytics_url(
             $this->podcast_id,
             $this->id,
             $strippedAudioFilePath,
-            $this->audio_file_duration,
-            $this->audio_file_size,
-            $this->audio_file_header_size,
+            $this->audio->duration,
+            $this->audio->file_size,
+            $this->audio->header_size,
             $this->published_at,
         );
     }
@@ -332,28 +256,26 @@ class Episode extends Entity
     }
 
     /**
-     * Gets transcript url from transcript file uri if it exists or returns the transcript_file_remote_url which can be
-     * null.
+     * Gets transcript url from transcript file uri if it exists or returns the transcript_remote_url which can be null.
      */
-    public function getTranscriptFileUrl(): ?string
+    public function getTranscriptUrl(): ?string
     {
-        if ($this->attributes['transcript_file_path']) {
-            return media_base_url($this->attributes['transcript_file_path']);
+        if ($this->transcript !== null) {
+            return $this->transcript->url;
         }
-        return $this->attributes['transcript_file_remote_url'];
+        return $this->transcript_remote_url;
     }
 
     /**
-     * Gets chapters file url from chapters file uri if it exists or returns the chapters_file_remote_url which can be
-     * null.
+     * Gets chapters file url from chapters file uri if it exists or returns the chapters_remote_url which can be null.
      */
     public function getChaptersFileUrl(): ?string
     {
-        if ($this->chapters_file_path) {
-            return media_base_url($this->chapters_file_path);
+        if ($this->chapters) {
+            return $this->chapters->url;
         }
 
-        return $this->chapters_file_remote_url;
+        return $this->chapters_remote_url;
     }
 
     /**
@@ -375,21 +297,21 @@ class Episode extends Entity
     }
 
     /**
-     * Returns the episode’s soundbites
+     * Returns the episode’s clips
      *
-     * @return Soundbite[]
+     * @return Clip[]
      */
-    public function getSoundbites(): array
+    public function getClips(): array
     {
         if ($this->id === null) {
-            throw new RuntimeException('Episode must be created before getting soundbites.');
+            throw new RuntimeException('Episode must be created before getting clips.');
         }
 
-        if ($this->soundbites === null) {
-            $this->soundbites = (new SoundbiteModel())->getEpisodeSoundbites($this->getPodcast() ->id, $this->id);
+        if ($this->clips === null) {
+            $this->clips = (new ClipsModel())->getEpisodeClips($this->getPodcast() ->id, $this->id);
         }
 
-        return $this->soundbites;
+        return $this->clips;
     }
 
     /**

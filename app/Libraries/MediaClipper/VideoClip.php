@@ -79,10 +79,10 @@ class VideoClip
 
         helper(['media']);
 
-        $this->audioInput = media_path($this->episode->audio_file_path);
+        $this->audioInput = media_path($this->episode->audio->file_path);
         $this->episodeCoverPath = media_path($this->episode->cover->path);
-        if ($this->episode->transcript_file_path !== null) {
-            $this->subtitlesInput = media_path($this->episode->transcript_file_path);
+        if ($this->episode->transcript !== null) {
+            $this->subtitlesInput = media_path($this->episode->transcript->file_path);
         }
 
         $podcastFolder = media_path("podcasts/{$this->episode->podcast->handle}");
@@ -167,7 +167,6 @@ class VideoClip
             "{$this->videoClipOutput}",
         ];
 
-        // dd(implode(' ', $videoClipCmd));
         return implode(' ', $videoClipCmd);
     }
 

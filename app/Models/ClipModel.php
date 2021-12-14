@@ -12,16 +12,16 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Entities\Soundbite;
+use App\Entities\Clip;
 use CodeIgniter\Database\BaseResult;
 use CodeIgniter\Model;
 
-class SoundbiteModel extends Model
+class ClipsModel extends Model
 {
     /**
      * @var string
      */
-    protected $table = 'soundbites';
+    protected $table = 'clips';
 
     /**
      * @var string
@@ -35,6 +35,7 @@ class SoundbiteModel extends Model
         'podcast_id',
         'episode_id',
         'label',
+        'type',
         'start_time',
         'duration',
         'created_by',
@@ -44,7 +45,7 @@ class SoundbiteModel extends Model
     /**
      * @var string
      */
-    protected $returnType = Soundbite::class;
+    protected $returnType = Clip::class;
 
     /**
      * @var bool
@@ -71,23 +72,23 @@ class SoundbiteModel extends Model
      */
     protected $beforeDelete = ['clearCache'];
 
-    public function deleteSoundbite(int $podcastId, int $episodeId, int $soundbiteId): BaseResult | bool
+    public function deleteClip(int $podcastId, int $episodeId, int $clipId): BaseResult | bool
     {
         return $this->delete([
             'podcast_id' => $podcastId,
             'episode_id' => $episodeId,
-            'id' => $soundbiteId,
+            'id' => $clipId,
         ]);
     }
 
     /**
-     * Gets all soundbites for an episode
+     * Gets all clips for an episode
      *
-     * @return Soundbite[]
+     * @return Clip[]
      */
-    public function getEpisodeSoundbites(int $podcastId, int $episodeId): array
+    public function getEpisodeClips(int $podcastId, int $episodeId): array
     {
-        $cacheName = "podcast#{$podcastId}_episode#{$episodeId}_soundbites";
+        $cacheName = "podcast#{$podcastId}_episode#{$episodeId}_clips";
         if (! ($found = cache($cacheName))) {
             $found = $this->where([
                 'episode_id' => $episodeId,
@@ -114,7 +115,7 @@ class SoundbiteModel extends Model
         );
 
         cache()
-            ->delete("podcast#{$episode->podcast_id}_episode#{$episode->id}_soundbites");
+            ->delete("podcast#{$episode->podcast_id}_episode#{$episode->id}_clips");
 
         // delete cache for rss feed
         cache()

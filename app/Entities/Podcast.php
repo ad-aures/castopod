@@ -13,6 +13,7 @@ namespace App\Entities;
 use App\Libraries\SimpleRSSElement;
 use App\Models\CategoryModel;
 use App\Models\EpisodeModel;
+use App\Models\MediaModel;
 use App\Models\PersonModel;
 use App\Models\PlatformModel;
 use App\Models\UserModel;
@@ -34,12 +35,10 @@ use RuntimeException;
  * @property string|null $description Holds text only description, striped of any markdown or html special characters
  * @property string $description_markdown
  * @property  string $description_html
+ * @property int $cover_id
  * @property Image $cover
- * @property string $cover_path
- * @property string $cover_mimetype
+ * @property int|null $banner_id
  * @property Image|null $banner
- * @property string|null $banner_path
- * @property string|null $banner_mimetype
  * @property string $language_code
  * @property int $category_id
  * @property Category|null $category
@@ -87,9 +86,9 @@ class Podcast extends Entity
 
     protected ?Actor $actor = null;
 
-    protected Image $cover;
+    protected ?Image $cover = null;
 
-    protected ?Image $banner;
+    protected ?Image $banner = null;
 
     protected ?string $description = null;
 
@@ -150,10 +149,8 @@ class Podcast extends Entity
         'title' => 'string',
         'description_markdown' => 'string',
         'description_html' => 'string',
-        'cover_path' => 'string',
-        'cover_mimetype' => 'string',
-        'banner_path' => '?string',
-        'banner_mimetype' => '?string',
+        'cover_id' => 'int',
+        'banner_id' => '?int',
         'language_code' => 'string',
         'category_id' => 'integer',
         'parental_advisory' => '?string',
@@ -195,66 +192,36 @@ class Podcast extends Entity
         return $this->actor;
     }
 
-    /**
-     * Saves a podcast cover to the corresponding podcast folder in `public/media/podcast_name/`
-     */
-    public function setCover(Image $cover): static
-    {
-        // Save image
-        $cover->saveImage(config('Images')->podcastCoverSizes, 'podcasts/' . $this->attributes['handle'], 'cover');
-
-        $this->attributes['cover_path'] = $cover->path;
-        $this->attributes['cover_mimetype'] = $cover->mimetype;
-
-        return $this;
-    }
-
     public function getCover(): Image
     {
-        return new Image(null, $this->cover_path, $this->cover_mimetype, config('Images')->podcastCoverSizes);
-    }
-
-    /**
-     * Saves a podcast cover to the corresponding podcast folder in `public/media/podcast_name/`
-     */
-    public function setBanner(?Image $banner): static
-    {
-        if ($banner === null) {
-            $this->attributes['banner_path'] = null;
-            $this->attributes['banner_mimetype'] = null;
-
-            return $this;
+        if (! $this->cover instanceof Image) {
+            $this->cover = (new MediaModel('image'))->getMediaById($this->cover_id);
         }
 
-        // Save image
-        $banner->saveImage(
-            config('Images')
-                ->podcastBannerSizes,
-            'podcasts/' . $this->attributes['handle'],
-            'banner'
-        );
-
-        $this->attributes['banner_path'] = $banner->path;
-        $this->attributes['banner_mimetype'] = $banner->mimetype;
-
-        return $this;
+        return $this->cover;
     }
 
     public function getBanner(): Image
     {
-        if ($this->attributes['banner_path'] === null) {
-            return new Image(
-                null,
-                config('Images')
+        if ($this->banner_id === null) {
+            return new Image([
+                'file_path' => config('Images')
                     ->podcastBannerDefaultPath,
-                config('Images')
+                'file_mimetype' => config('Images')
                     ->podcastBannerDefaultMimeType,
-                config('Images')
-                    ->podcastBannerSizes
-            );
+                'file_size' => 0,
+                'file_metadata' => [
+                    'sizes' => config('Images')
+                        ->podcastBannerSizes,
+                ],
+            ]);
         }
 
-        return new Image(null, $this->banner_path, $this->banner_mimetype, config('Images') ->podcastBannerSizes);
+        if (! $this->banner instanceof Image) {
+            $this->banner = (new MediaModel('image'))->getMediaById($this->banner_id);
+        }
+
+        return $this->banner;
     }
 
     public function getLink(): string

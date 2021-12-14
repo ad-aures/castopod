@@ -64,9 +64,9 @@ if (! function_exists('get_episode_metatags')) {
                 'image' => $episode->cover->feed_url,
                 'description' => $episode->description,
                 'datePublished' => $episode->published_at->format(DATE_ISO8601),
-                'timeRequired' => iso8601_duration($episode->audio_file_duration),
+                'timeRequired' => iso8601_duration($episode->audio->duration),
                 'associatedMedia' => new Thing('MediaObject', [
-                    'contentUrl' => $episode->audio_file_url,
+                    'contentUrl' => $episode->audio->file_url,
                 ]),
                 'partOfSeries' => new Thing('PodcastSeries', [
                     'name' => $episode->podcast->title,
@@ -87,7 +87,7 @@ if (! function_exists('get_episode_metatags')) {
             ->og('image:height', (string) config('Images')->podcastCoverSizes['large']['height'])
             ->og('locale', $episode->podcast->language_code)
             ->og('audio', $episode->audio_file_opengraph_url)
-            ->og('audio:type', $episode->audio_file_mimetype)
+            ->og('audio:type', $episode->audio->file_content_type)
             ->meta('article:published_time', $episode->published_at->format(DATE_ISO8601))
             ->meta('article:modified_time', $episode->updated_at->format(DATE_ISO8601))
             ->twitter('audio:partner', $episode->podcast->publisher ?? '')

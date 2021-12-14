@@ -35,8 +35,8 @@
 
     foreach ($episode->soundbites as $soundbite) {
         $table->addRow(
-            "<Forms.Input class='w-24' type='number' step='any' min='0' max='{$episode->audio_file_duration}' name='soundbites[{$soundbite->id}][start_time]' value='{$soundbite->start_time}' data-type='soundbite-field' data-field-type='start_time' required='true' />",
-            "<Forms.Input class='w-24' type='number' step='any' min='0' max='{$episode->audio_file_duration}' name='soundbites[{$soundbite->id}][duration]' value='{$soundbite->duration}' data-type='soundbite-field' data-field-type='duration' required='true' />",
+            "<Forms.Input class='w-24' type='number' step='any' min='0' max='{$episode->audio->duration}' name='soundbites[{$soundbite->id}][start_time]' value='{$soundbite->start_time}' data-type='soundbite-field' data-field-type='start_time' required='true' />",
+            "<Forms.Input class='w-24' type='number' step='any' min='0' max='{$episode->audio->duration}' name='soundbites[{$soundbite->id}][duration]' value='{$soundbite->duration}' data-type='soundbite-field' data-field-type='duration' required='true' />",
             "<Forms.Input class='flex-1' name='soundbites[{$soundbite->id}][label]' value='{$soundbite->label}' />",
             "<IconButton variant='primary' glyph='play' data-type='play-soundbite' data-soundbite-id='{$soundbite->id}'>" . lang('Episode.soundbites_form.play') . '</IconButton>',
             '<IconButton uri=' . route_to(
@@ -49,8 +49,8 @@
     }
 
     $table->addRow(
-        "<Forms.Input class='w-24' type='number' step='any' min='0' max='{$episode->audio_file_duration}' name='soundbites[0][start_time]' data-type='soundbite-field' data-field-type='start_time' />",
-        "<Forms.Input class='w-24' type='number' step='any' min='0' max='{$episode->audio_file_duration}' name='soundbites[0][duration]' data-type='soundbite-field' data-field-type='duration' />",
+        "<Forms.Input class='w-24' type='number' step='any' min='0' max='{$episode->audio->duration}' name='soundbites[0][start_time]' data-type='soundbite-field' data-field-type='start_time' />",
+        "<Forms.Input class='w-24' type='number' step='any' min='0' max='{$episode->audio->duration}' name='soundbites[0][duration]' data-type='soundbite-field' data-field-type='duration' />",
         "<Forms.Input class='flex-1' name='soundbites[0][label]' />",
         "<IconButton variant='primary' glyph='play' data-type='play-soundbite' data-soundbite-id='0'>" . lang('Episode.soundbites_form.play') . '</IconButton>',
     );
@@ -61,7 +61,7 @@
 
     <div class="flex items-center gap-x-2">
         <audio controls preload="auto" class="flex-1 w-full">
-            <source src="<?= $episode->audio_file_url ?>" type="<?= $episode->audio_file_mimetype ?>">
+            <source src="<?= $episode->audio->file_url ?>" type="<?= $episode->audio->file_content_type ?>">
             Your browser does not support the audio tag.
         </audio>
         <IconButton glyph="timer" variant="info" data-type="get-soundbite" data-start-time-field-name="soundbites[0][start_time]" data-duration-field-name="soundbites[0][duration]" ><?= lang('Episode.soundbites_form.bookmark') ?></IconButton>

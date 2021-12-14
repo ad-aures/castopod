@@ -19,20 +19,15 @@ use RuntimeException;
  * @property string $full_name
  * @property string $unique_name
  * @property string|null $information_url
+ * @property int $avatar_id
  * @property Image $avatar
- * @property string $avatar_path
- * @property string $avatar_mimetype
  * @property int $created_by
  * @property int $updated_by
  * @property object[]|null $roles
  */
 class Person extends Entity
 {
-    protected Image $avatar;
-
-    protected ?int $podcast_id = null;
-
-    protected ?int $episode_id = null;
+    protected ?Image $avatar = null;
 
     /**
      * @var object[]|null
@@ -47,8 +42,7 @@ class Person extends Entity
         'full_name' => 'string',
         'unique_name' => 'string',
         'information_url' => '?string',
-        'avatar_path' => '?string',
-        'avatar_mimetype' => '?string',
+        'avatar_id' => '?int',
         'podcast_id' => '?integer',
         'episode_id' => '?integer',
         'created_by' => 'integer',

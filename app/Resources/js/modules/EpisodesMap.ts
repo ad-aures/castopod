@@ -47,7 +47,7 @@ const drawEpisodesMap = async (mapDivId: string, dataUrl: string) => {
         data[i].longitude,
       ]).bindPopup(
         '<div class="flex min-w-max w-full gap-x-2"><img src="' +
-          data[i].cover_path +
+          data[i].cover_url +
           '" alt="' +
           data[i].episode_title +
           '" class="rounded w-16 h-16" /><div class="flex flex-col flex-1"><h2 class="leading-tight text-sm w-56 line-clamp-2 font-bold"><a href="' +

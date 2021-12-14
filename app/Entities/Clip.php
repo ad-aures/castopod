@@ -22,7 +22,7 @@ use CodeIgniter\Entity\Entity;
  * @property int $created_by
  * @property int $updated_by
  */
-class Soundbite extends Entity
+class Clip extends Entity
 {
     /**
      * @var array<string, string>
@@ -33,7 +33,11 @@ class Soundbite extends Entity
         'episode_id' => 'integer',
         'start_time' => 'double',
         'duration' => 'double',
+        'type' => 'string',
         'label' => '?string',
+        'media_id' => 'integer',
+        'status' => 'string',
+        'logs' => 'string',
         'created_by' => 'integer',
         'updated_by' => 'integer',
     ];

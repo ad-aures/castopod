@@ -28,7 +28,7 @@
 <?= $this->section('content') ?>
 
 <div class="mb-12">
-    <?= audio_player($episode->audio_file_url, $episode->audio_file_mimetype) ?>
+    <?= audio_player($episode->audio->file_url, $episode->audio->file_content_type) ?>
 </div>
 
 <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">

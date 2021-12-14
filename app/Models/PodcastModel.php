@@ -40,10 +40,8 @@ class PodcastModel extends Model
         'description_html',
         'episode_description_footer_markdown',
         'episode_description_footer_html',
-        'cover_path',
-        'cover_mimetype',
-        'banner_path',
-        'banner_mimetype',
+        'cover_id',
+        'banner_id',
         'language_code',
         'category_id',
         'parental_advisory',
@@ -92,7 +90,7 @@ class PodcastModel extends Model
         'handle' =>
             'required|regex_match[/^[a-zA-Z0-9\_]{1,32}$/]|is_unique[podcasts.handle,id,{id}]',
         'description_markdown' => 'required',
-        'cover_path' => 'required',
+        'cover_id' => 'required',
         'language_code' => 'required',
         'category_id' => 'required',
         'owner_email' => 'required|valid_email',
@@ -460,7 +458,7 @@ class PodcastModel extends Model
 
             if ($podcastActor) {
                 $podcastActor->avatar_image_url = $podcast->cover->thumbnail_url;
-                $podcastActor->avatar_image_mimetype = $podcast->cover_mimetype;
+                $podcastActor->avatar_image_mimetype = $podcast->cover->thumbnail_mimetype;
 
                 (new ActorModel())->update($podcast->actor_id, $podcastActor);
             }

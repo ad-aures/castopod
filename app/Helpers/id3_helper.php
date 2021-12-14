@@ -10,28 +10,7 @@ declare(strict_types=1);
 
 use App\Entities\Episode;
 use CodeIgniter\Files\File;
-use JamesHeinrich\GetID3\GetID3;
 use JamesHeinrich\GetID3\WriteTags;
-
-if (! function_exists('get_file_tags')) {
-    /**
-     * Gets audio file metadata and ID3 info
-     *
-     * @return array<string, string|double|int>
-     */
-    function get_file_tags(File $file): array
-    {
-        $getID3 = new GetID3();
-        $FileInfo = $getID3->analyze((string) $file);
-
-        return [
-            'filesize' => $FileInfo['filesize'],
-            'mime_type' => $FileInfo['mime_type'],
-            'avdataoffset' => $FileInfo['avdataoffset'],
-            'playtime_seconds' => $FileInfo['playtime_seconds'],
-        ];
-    }
-}
 
 if (! function_exists('write_audio_file_tags')) {
     /**
@@ -45,7 +24,7 @@ if (! function_exists('write_audio_file_tags')) {
 
         // Initialize getID3 tag-writing module
         $tagwriter = new WriteTags();
-        $tagwriter->filename = media_path($episode->audio_file_path);
+        $tagwriter->filename = media_path($episode->audio->file_path);
 
         // set various options (optional)
         $tagwriter->tagformats = ['id3v2.4'];

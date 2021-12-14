@@ -50,6 +50,8 @@ RUN apt-get update \
     # gd for image processing
     && docker-php-ext-configure gd --with-webp --with-jpeg --with-freetype \
     && docker-php-ext-install gd \
+    && docker-php-ext-install exif \
+    && docker-php-ext-enable exif \
     # redis extension for cache
     && pecl install -o -f redis \
     && rm -rf /tmp/pear \

@@ -10,176 +10,68 @@ declare(strict_types=1);
 
 namespace App\Entities;
 
-use CodeIgniter\Entity\Entity;
 use CodeIgniter\Files\File;
-use Config\Images;
-use RuntimeException;
 
-/**
- * @property File|null $file
- * @property string $dirname
- * @property string $filename
- * @property string $extension
- * @property string $mimetype
- * @property string $path
- * @property string $url
- */
-class Image extends Entity
+class Image extends Media
 {
-    protected Images $config;
-
-    protected File $file;
-
-    protected string $dirname;
-
-    protected string $filename;
-
-    protected string $extension;
-
-    protected string $mimetype;
+    protected string $type = 'image';
 
     /**
-     * @var array<string, array<string, int|string>>
+     * @param array<string, mixed>|null $data
      */
-    protected array $sizes = [];
-
-    /**
-     * @param array<string, array<string, int|string>> $sizes
-     * @param File $file
-     */
-    public function __construct(?File $file, string $path = '', string $mimetype = '', array $sizes = [])
+    public function __construct(array $data = null)
     {
-        if ($file === null && $path === '') {
-            throw new RuntimeException('File or path must be set to create an Image.');
-        }
+        parent::__construct($data);
 
-        $dirname = '';
-        $filename = '';
-        $extension = '';
-
-        if ($file !== null) {
-            $dirname = $file->getPath();
-            $filename = $file->getBasename();
-            $extension = $file->getExtension();
-            $mimetype = $file->getMimeType();
-        }
-
-        if ($path !== '') {
-            [
-                'filename' => $filename,
-                'dirname' => $dirname,
-                'extension' => $extension,
-            ] = pathinfo($path);
-        }
-
-        if ($file === null) {
-            helper('media');
-            $file = new File(media_path($path));
-        }
-
-        $this->file = $file;
-        $this->dirname = $dirname;
-        $this->filename = $filename;
-        $this->extension = $extension;
-        $this->mimetype = $mimetype;
-        $this->sizes = $sizes;
-    }
-
-    public function __get($property)
-    {
-        // Convert to CamelCase for the method
-        $method = 'get' . str_replace(' ', '', ucwords(str_replace(['-', '_'], ' ', $property)));
-
-        // if a get* method exists for this property,
-        // call that method to get this value.
-        // @phpstan-ignore-next-line
-        if (method_exists($this, $method)) {
-            return $this->{$method}();
-        }
-
-        $fileSuffix = '';
-        if ($lastUnderscorePosition = strrpos($property, '_')) {
-            $fileSuffix = '_' . substr($property, 0, $lastUnderscorePosition);
-        }
-
-        $path = '';
-        if ($this->dirname !== '.') {
-            $path .= $this->dirname . '/';
-        }
-        $path .= $this->filename . $fileSuffix;
-
-        $extension = '.' . $this->extension;
-        $mimetype = $this->mimetype;
-        if ($fileSuffix !== '') {
-            $sizeName = substr($fileSuffix, 1);
-            if (array_key_exists('extension', $this->sizes[$sizeName])) {
-                $extension = '.' . $this->sizes[$sizeName]['extension'];
-            }
-            if (array_key_exists('mimetype', $this->sizes[$sizeName])) {
-                $mimetype = $this->sizes[$sizeName]['mimetype'];
-            }
-        }
-        $path .= $extension;
-
-        if (str_ends_with($property, 'mimetype')) {
-            return $mimetype;
-        }
-
-        if (str_ends_with($property, 'url')) {
-            helper('media');
-
-            return media_base_url($path);
-        }
-
-        if (str_ends_with($property, 'path')) {
-            return $path;
+        if ($this->file_path && $this->file_metadata) {
+            $this->sizes = $this->file_metadata['sizes'];
+            $this->initSizeProperties();
         }
     }
 
-    public function getMimetype(): string
-    {
-        return $this->mimetype;
-    }
-
-    public function getFile(): File
-    {
-        return $this->file;
-    }
-
-    /**
-     * @param array<string, array<string, int|string>> $sizes
-     */
-    public function saveImage(array $sizes, string $dirname, string $filename): void
+    public function initSizeProperties(): bool
     {
         helper('media');
 
-        $this->dirname = $dirname;
-        $this->filename = $filename;
-        $this->sizes = $sizes;
+        $extension = $this->file_extension;
+        $mimetype = $this->mimetype;
+        foreach ($this->sizes as $name => $size) {
+            if (array_key_exists('extension', $size)) {
+                $extension = $size['extension'];
+            }
+            if (array_key_exists('mimetype', $size)) {
+                $mimetype = $size['mimetype'];
+            }
+            $this->{$name . '_path'} = $this->file_directory . '/' . $this->file_name . '_' . $name . '.' . $extension;
+            $this->{$name . '_url'} = media_base_url($this->{$name . '_path'});
+            $this->{$name . '_mimetype'} = $mimetype;
+        }
 
-        save_media($this->file, $this->dirname, $this->filename);
+        return true;
+    }
 
+    public function setFile(File $file): self
+    {
+        parent::setFile($file);
+
+        $metadata = exif_read_data(media_path($this->file_path), null, true);
+
+        if ($metadata) {
+            $metadata['sizes'] = $this->sizes;
+            $this->attributes['file_size'] = $metadata['FILE']['FileSize'];
+            $this->attributes['file_metadata'] = json_encode($metadata);
+        }
+
+        // save derived sizes
         $imageService = service('image');
-
-        foreach ($sizes as $name => $size) {
+        foreach ($this->sizes as $name => $size) {
             $pathProperty = $name . '_path';
             $imageService
-                ->withFile(media_path($this->path))
+                ->withFile(media_path($this->file_path))
                 ->resize($size['width'], $size['height']);
             $imageService->save(media_path($this->{$pathProperty}));
         }
-    }
 
-    /**
-     * @param array<string, int[]> $sizes
-     */
-    public function delete(array $sizes): void
-    {
-        helper('media');
-
-        foreach (array_keys($sizes) as $name) {
-            $pathProperty = $name . '_path';
-            unlink(media_path($this->{$pathProperty}));
-        }
+        return $this;
     }
 }

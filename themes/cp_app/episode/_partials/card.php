@@ -1,7 +1,7 @@
 <article class="flex w-full p-4 shadow bg-elevated rounded-conditional-2xl gap-x-2">
     <div class="relative">
-        <time class="absolute px-1 text-xs font-semibold text-white rounded bottom-2 right-2 bg-black/75" datetime="PT<?= $episode->audio_file_duration ?>S">
-            <?= format_duration($episode->audio_file_duration) ?>
+        <time class="absolute px-1 text-xs font-semibold text-white rounded bottom-2 right-2 bg-black/75" datetime="PT<?= $episode->audio->duration ?>S">
+            <?= format_duration($episode->audio->duration) ?>
         </time>
         <img loading="lazy" src="<?= $episode->cover
                 ->thumbnail_url ?>" alt="<?= $episode->title ?>" class="object-cover w-20 rounded-lg shadow-inner aspect-square" />
@@ -20,7 +20,7 @@
             title="<?= $episode->title ?>"
             podcast="<?= $episode->podcast->title ?>"
             src="<?= $episode->audio_file_web_url ?>"
-            mediaType="<?= $episode->audio_file_mimetype ?>"
+            mediaType="<?= $episode->audio->file_content_type ?>"
             playLabel="<?= lang('Common.play_episode_button.play') ?>"
             playingLabel="<?= lang('Common.play_episode_button.playing') ?>"></play-episode-button>
     </div>

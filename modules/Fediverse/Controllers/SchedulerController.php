@@ -36,7 +36,7 @@ class SchedulerController extends Controller
             // set activity post to delivered
             model('ActivityModel')
                 ->update($scheduledActivity->id, [
-                    'task_status' => 'delivered',
+                    'status' => 'delivered',
                 ]);
         }
     }

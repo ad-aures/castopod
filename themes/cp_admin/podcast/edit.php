@@ -22,7 +22,7 @@
 <?= csrf_field() ?>
 
 <div class="sticky z-40 flex flex-col w-full max-w-xs overflow-hidden shadow-sm bg-elevated border-3 border-subtle top-24 rounded-xl">
-    <?php if ($podcast->banner_path !== null): ?>
+    <?php if ($podcast->banner_id !== null): ?>
         <a href="<?= route_to('podcast-banner-delete', $podcast->id) ?>" class="absolute p-1 text-red-700 bg-red-100 border-2 rounded-full hover:text-red-900 border-contrast focus:ring-accent top-2 right-2" title="<?= lang('Podcast.form.banner_delete') ?>" data-tooltip="bottom"><?= icon('delete-bin') ?></a>
     <?php endif; ?>
     <img src="<?= $podcast->banner->small_url ?>" alt="" class="object-cover w-full aspect-[3/1] bg-header" />

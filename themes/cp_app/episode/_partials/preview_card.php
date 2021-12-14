@@ -1,7 +1,7 @@
 <div class="flex items-center border-y border-subtle">
     <div class="relative">
-        <time class="absolute px-1 text-sm font-semibold text-white rounded bg-black/75 bottom-2 right-2" datetime="PT<?= $episode->audio_file_duration ?>S">
-                    <?= format_duration($episode->audio_file_duration) ?>
+        <time class="absolute px-1 text-sm font-semibold text-white rounded bg-black/75 bottom-2 right-2" datetime="PT<?= $episode->audio->duration ?>S">
+                    <?= format_duration($episode->audio->duration) ?>
         </time>
         <img
         src="<?= $episode->cover->thumbnail_url ?>"
@@ -21,7 +21,7 @@
         title="<?= $episode->title ?>"
         podcast="<?= $episode->podcast->title ?>"
         src="<?= $episode->audio_file_web_url ?>"
-        mediaType="<?= $episode->audio_file_mimetype ?>"
+        mediaType="<?= $episode->audio->file_content_type ?>"
         playLabel="<?= lang('Common.play_episode_button.play') ?>"
         playingLabel="<?= lang('Common.play_episode_button.playing') ?>"></play-episode-button>
 </div>

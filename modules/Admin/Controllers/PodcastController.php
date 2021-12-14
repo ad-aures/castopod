@@ -16,6 +16,7 @@ use App\Entities\Podcast;
 use App\Models\CategoryModel;
 use App\Models\EpisodeModel;
 use App\Models\LanguageModel;
+use App\Models\MediaModel;
 use App\Models\PodcastModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
@@ -192,11 +193,10 @@ class PodcastController extends BaseController
             $partnerImageUrl = null;
         }
 
-        $podcast = new Podcast([
+        $newPodcast = new Podcast([
             'title' => $this->request->getPost('title'),
             'handle' => $this->request->getPost('handle'),
             'description_markdown' => $this->request->getPost('description'),
-            'cover' => new Image($this->request->getFile('cover')),
             'language_code' => $this->request->getPost('language'),
             'category_id' => $this->request->getPost('category'),
             'parental_advisory' =>
@@ -225,17 +225,53 @@ class PodcastController extends BaseController
             'updated_by' => user_id(),
         ]);
 
+        $db = db_connect();
+        $db->transStart();
+
+        $cover = new Image([
+            'file_name' => 'cover',
+            'file_directory' => 'podcasts/' . $newPodcast->handle,
+            'sizes' => config('Images')
+                ->podcastCoverSizes,
+            'file' => $this->request->getFile('cover'),
+            'uploaded_by' => user_id(),
+            'updated_by' => user_id(),
+        ]);
+        $mediaModel = new MediaModel('image');
+        if (! ($newCoverId = $mediaModel->saveMedia($cover))) {
+            $db->transRollback();
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $mediaModel->errors());
+        }
+        $newPodcast->cover_id = $newCoverId;
+
         $bannerFile = $this->request->getFile('banner');
         if ($bannerFile !== null && $bannerFile->isValid()) {
-            $podcast->banner = new Image($bannerFile);
+            $banner = new Image([
+                'file_name' => 'banner',
+                'file_directory' => 'podcasts/' . $newPodcast->handle,
+                'sizes' => config('Images')
+                    ->podcastBannerSizes,
+                'file' => $this->request->getFile('banner'),
+                'uploaded_by' => user_id(),
+                'updated_by' => user_id(),
+            ]);
+            $mediaModel = new MediaModel('image');
+            if (! ($newBannerId = $mediaModel->saveMedia($banner))) {
+                $db->transRollback();
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->with('errors', $mediaModel->errors());
+            }
+
+            $newPodcast->banner_id = $newBannerId;
         }
 
         $podcastModel = new PodcastModel();
-        $db = db_connect();
-
-        $db->transStart();
-
-        if (! ($newPodcastId = $podcastModel->insert($podcast, true))) {
+        if (! ($newPodcastId = $podcastModel->insert($newPodcast, true))) {
             $db->transRollback();
             return redirect()
                 ->back()
@@ -311,7 +347,7 @@ class PodcastController extends BaseController
 
         $coverFile = $this->request->getFile('cover');
         if ($coverFile !== null && $coverFile->isValid()) {
-            $this->podcast->cover = new Image($coverFile);
+            $this->podcast->cover->setFile($coverFile);
         }
         $bannerFile = $this->request->getFile('banner');
         if ($bannerFile !== null && $bannerFile->isValid()) {
