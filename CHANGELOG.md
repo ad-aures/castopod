@@ -1,3 +1,11 @@
+# [1.0.0-alpha.78](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.77...v1.0.0-alpha.78) (2021-12-15)
+
+### Bug Fixes
+
+- **import:** add extension when downloading file without + truncate slug if too
+  long
+  ([c5f18bb](https://code.podlibre.org/podlibre/castopod-host/commit/c5f18bb6dc08a758ff735454bbe9cfa45a68c09b))
+
 # [1.0.0-alpha.77](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.76...v1.0.0-alpha.77) (2021-11-23)
 
 ### Bug Fixes
