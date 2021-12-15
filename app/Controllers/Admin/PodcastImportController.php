@@ -305,11 +305,10 @@ class PodcastImportController extends BaseController
             );
             $nsContent = $item->children('http://purl.org/rss/1.0/modules/content/');
 
-            $slug = slugify(
-                $this->request->getPost('slug_field') === 'title'
-                    ? (string) $item->title
-                    : basename((string) $item->link),
-            );
+            $textToSlugify = $this->request->getPost('slug_field') === 'title'
+            ? (string) $item->title
+            : basename((string) $item->link);
+            $slug = slugify($textToSlugify, 185);
             if (in_array($slug, $slugs, true)) {
                 $slugNumber = 2;
                 while (in_array($slug . '-' . $slugNumber, $slugs, true)) {
@@ -348,7 +347,10 @@ class PodcastImportController extends BaseController
                 'title' => $item->title,
                 'slug' => $slug,
                 'guid' => $item->guid ?? null,
-                'audio_file' => download_file((string) $item->enclosure->attributes()['url']),
+                'audio_file' => download_file(
+                    (string) $item->enclosure->attributes()['url'],
+                    (string) $item->enclosure->attributes()['type']
+                ),
                 'description_markdown' => $converter->convert($itemDescriptionHtml),
                 'description_html' => $itemDescriptionHtml,
                 'image' => $episodeImage,

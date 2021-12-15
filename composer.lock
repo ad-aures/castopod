@@ -4,7 +4,7 @@
     "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
     "This file is @generated automatically"
   ],
-  "content-hash": "371c6aac9ca489338bf3b3fa06ffdb21",
+  "content-hash": "49719de3dd6af8c394ea0553e2180b5a",
   "packages": [
     {
       "name": "brick/math",
@@ -494,24 +494,24 @@
     },
     {
       "name": "james-heinrich/getid3",
-      "version": "v2.0.0-beta3",
+      "version": "v2.0.0-beta4",
       "source": {
         "type": "git",
         "url": "https://github.com/JamesHeinrich/getID3.git",
-        "reference": "5515a2d24667c3c0ff49fdcbdadc405c0880c7a2"
+        "reference": "5ad79104e937e7d9c8a9141a97e1f063dd1123f8"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/JamesHeinrich/getID3/zipball/5515a2d24667c3c0ff49fdcbdadc405c0880c7a2",
-        "reference": "5515a2d24667c3c0ff49fdcbdadc405c0880c7a2",
+        "url": "https://api.github.com/repos/JamesHeinrich/getID3/zipball/5ad79104e937e7d9c8a9141a97e1f063dd1123f8",
+        "reference": "5ad79104e937e7d9c8a9141a97e1f063dd1123f8",
         "shasum": ""
       },
       "require": {
         "php": ">=5.4.0"
       },
       "require-dev": {
-        "jakub-onderka/php-parallel-lint": "^0.9 || ^1.0",
-        "phpunit/phpunit": "^4.8|^5.0"
+        "php-parallel-lint/php-parallel-lint": "^1.0",
+        "phpunit/phpunit": "^4.8 || ^5.0 || ^6.1 || ^7.5 || ^8.5"
       },
       "suggest": {
         "ext-SimpleXML": "SimpleXML extension is required to analyze RIFF/WAV/BWF audio files (also requires `ext-libxml`).",
@@ -562,9 +562,9 @@
       "keywords": ["audio", "codecs", "id3", "metadata", "tags", "video"],
       "support": {
         "issues": "https://github.com/JamesHeinrich/getID3/issues",
-        "source": "https://github.com/JamesHeinrich/getID3/tree/2.0"
+        "source": "https://github.com/JamesHeinrich/getID3/tree/v2.0.0-beta4"
       },
-      "time": "2020-07-21T08:15:44+00:00"
+      "time": "2021-10-06T16:23:45+00:00"
     },
     {
       "name": "kint-php/kint",
@@ -7465,5 +7465,5 @@
     "php": "^8.0"
   },
   "platform-dev": [],
-  "plugin-api-version": "2.0.0"
+  "plugin-api-version": "2.1.0"
 }

@@ -23,8 +23,13 @@ if (! function_exists('get_browser_language')) {
 }
 
 if (! function_exists('slugify')) {
-    function slugify(string $text): string
+    function slugify(string $text, int $maxLength = 191): string
     {
+        // trim text to the nearest whole word if too long
+        if (strlen($text) > $maxLength) {
+            $text = substr($text, 0, strrpos(substr($text, 0, $maxLength), ' '));
+        }
+
         // replace non letter or digits by -
         $text = preg_replace('~[^\pL\d]+~u', '-', $text);
 

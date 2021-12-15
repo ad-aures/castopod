@@ -89,18 +89,6 @@
 
 <?= form_fieldset('', ['class' => 'flex flex-col mb-4']) ?>
     <legend><?= lang('PodcastImport.slug_field.label') ?></legend>
-    <label for="link" class="inline-flex items-center">
-        <?= form_radio(
-            [
-                'id' => 'link',
-                'name' => 'slug_field',
-                'class' => 'form-radio text-pine-700',
-            ],
-            'link',
-            old('slug_field') ? old('slug_field') == 'link' : true,
-        ) ?>
-        <span class="ml-2"><?= lang('PodcastImport.slug_field.link') ?></span>
-    </label>
     <label for="title" class="inline-flex items-center">
         <?= form_radio(
             [
@@ -109,9 +97,21 @@
                 'class' => 'form-radio text-pine-700',
             ],
             'title',
-            old('slug_field') && old('slug_field') == 'title',
+            old('slug_field') ? old('slug_field') === 'title' : true,
         ) ?>
         <span class="ml-2"><?= lang('PodcastImport.slug_field.title') ?></span>
+    </label>
+    <label for="link" class="inline-flex items-center">
+        <?= form_radio(
+            [
+                'id' => 'link',
+                'name' => 'slug_field',
+                'class' => 'form-radio text-pine-700',
+            ],
+            'link',
+            old('slug_field') && old('slug_field') === 'link',
+        ) ?>
+        <span class="ml-2"><?= lang('PodcastImport.slug_field.link') ?></span>
     </label>
 <?= form_fieldset_close() ?>
 

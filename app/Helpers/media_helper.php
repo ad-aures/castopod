@@ -11,6 +11,7 @@ declare(strict_types=1);
 use CodeIgniter\Files\File;
 use CodeIgniter\HTTP\Files\UploadedFile;
 use CodeIgniter\HTTP\ResponseInterface;
+use Config\Mimes;
 use Config\Services;
 
 if (! function_exists('save_media')) {
@@ -41,7 +42,7 @@ if (! function_exists('save_media')) {
 }
 
 if (! function_exists('download_file')) {
-    function download_file(string $fileUrl): File
+    function download_file(string $fileUrl, string $mimetype = ''): File
     {
         $client = Services::curlrequest();
 
@@ -75,12 +76,15 @@ if (! function_exists('download_file')) {
                 'http_errors' => false,
             ]);
         }
+
+        $fileExtension = pathinfo(parse_url($newFileUrl, PHP_URL_PATH), PATHINFO_EXTENSION);
+        $extension = $fileExtension === '' ? Mimes::guessExtensionFromType($mimetype) : $fileExtension;
         $tmpFilename =
             time() .
             '_' .
             bin2hex(random_bytes(10)) .
             '.' .
-            pathinfo(parse_url($newFileUrl, PHP_URL_PATH), PATHINFO_EXTENSION);
+            $extension;
         $tmpFilePath = WRITEPATH . 'uploads/' . $tmpFilename;
         file_put_contents($tmpFilePath, $response->getBody());
 
