@@ -148,12 +148,16 @@ public/media/site
 # public media folder
 !public/media/podcasts
 !public/media/persons
+!public/media/site
 
 public/media/podcasts/*
 !public/media/podcasts/index.html
 
 public/media/persons/*
 !public/media/persons/index.html
+
+public/media/site/*
+!public/media/site/index.html
 
 # Generated files
 modules/Admin/Language/*/PersonsTaxonomy.php
