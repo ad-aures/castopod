@@ -10,8 +10,6 @@ const SidebarToggler = (): void => {
   ) as HTMLDivElement;
 
   if (typeof sidebar.dataset.toggleClass !== "undefined") {
-    console.log("zefzef");
-
     const setAriaExpanded = (isExpanded: "true" | "false") => {
       toggler.setAttribute("aria-expanded", isExpanded);
       sidebarBackdrop.setAttribute("aria-expanded", isExpanded);

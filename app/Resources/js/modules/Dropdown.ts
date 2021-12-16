@@ -25,7 +25,6 @@ const Dropdown = (): void => {
           const offsetY = menu.dataset.dropdownOffsetY
             ? parseInt(menu.dataset.dropdownOffsetY)
             : 0;
-          console.log(offsetX, offsetY);
           popperInstance = createPopper(button, menu, {
             placement: menu.dataset.dropdownPlacement as Placement,
             modifiers: [

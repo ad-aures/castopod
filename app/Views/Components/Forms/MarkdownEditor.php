@@ -45,8 +45,8 @@ class MarkdownEditor extends FormComponent
                         <markdown-toolbar for="{$this->id}" class="flex gap-4 px-2 py-1">
                             <div class="inline-flex text-2xl gap-x-1">
                                 <md-header class="opacity-50 hover:opacity-100 focus:ring-accent focus:opacity-100">{$icons['heading']}</md-header>
-                                <md-bold class="opacity-50 hover:opacity-100 focus:ring-accent focus:opacity-100">{$icons['bold']}</md-bold>
-                                <md-italic class="opacity-50 hover:opacity-100 focus:ring-accent focus:opacity-100">{$icons['italic']}</md-italic>
+                                <md-bold class="opacity-50 hover:opacity-100 focus:ring-accent focus:opacity-100" data-hotkey-scope="{$this->id}" data-hotkey="Control+b,Meta+b">{$icons['bold']}</md-bold>
+                                <md-italic class="opacity-50 hover:opacity-100 focus:ring-accent focus:opacity-100" data-hotkey-scope="{$this->id}" data-hotkey="Control+i,Meta+i">{$icons['italic']}</md-italic>
                             </div>
                             <div class="inline-flex text-2xl gap-x-1">
                                 <md-unordered-list class="opacity-50 hover:opacity-100 focus:ring-accent focus:opacity-100">{$icons['list-unordered']}</md-unordered-list>
@@ -54,7 +54,7 @@ class MarkdownEditor extends FormComponent
                             </div>
                             <div class="inline-flex text-2xl gap-x-1">
                                 <md-quote class="opacity-50 hover:opacity-100 focus:ring-accent focus:opacity-100">{$icons['quote']}</md-quote>
-                                <md-link class="opacity-50 hover:opacity-100 focus:ring-accent focus:opacity-100">{$icons['link']}</md-link>
+                                <md-link class="opacity-50 hover:opacity-100 focus:ring-accent focus:opacity-100" data-hotkey-scope="{$this->id}" data-hotkey="Control+k,Meta+k">{$icons['link']}</md-link>
                                 <md-image class="opacity-50 hover:opacity-100 focus:ring-accent focus:opacity-100">{$icons['image-add']}</md-image>
                             </div>
                         </markdown-toolbar>

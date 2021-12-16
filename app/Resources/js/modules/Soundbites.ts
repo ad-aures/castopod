@@ -71,8 +71,6 @@ const Soundbites = (): void => {
               'input[data-field-type="duration"]'
             );
 
-          console.log(soundbitePlayButton.parentElement);
-
           if (startTime && duration) {
             playSoundbite(
               audioPlayer,

@@ -63,7 +63,6 @@ export class PlayEpisodeButton extends LitElement {
       name: "ratechange",
       onEvent: (event: Event): void => {
         this._playbackSpeed = (event.target as HTMLAudioElement)?.playbackRate;
-        console.log(this._playbackSpeed);
       },
     },
   ];

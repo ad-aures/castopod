@@ -2,7 +2,7 @@ import MarkdownToolbarElement from "@github/markdown-toolbar-element";
 import { css, html, LitElement, TemplateResult } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
-import marked from "marked";
+import { marked } from "marked";
 
 @customElement("markdown-preview")
 export class MarkdownPreview extends LitElement {
