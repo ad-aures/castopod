@@ -31,7 +31,7 @@ class AddMedia extends Migration
                 'unsigned' => true,
                 'comment' => 'File size in bytes',
             ],
-            'file_content_type' => [
+            'file_mimetype' => [
                 'type' => 'VARCHAR',
                 'constraint' => 45,
             ],
@@ -42,6 +42,7 @@ class AddMedia extends Migration
             'type' => [
                 'type' => 'ENUM',
                 'constraint' => ['image', 'audio', 'video', 'transcript', 'chapters', 'document'],
+                'default' => 'document',
             ],
             'description' => [
                 'type' => 'TEXT',
@@ -71,6 +72,7 @@ class AddMedia extends Migration
         ]);
 
         $this->forge->addKey('id', true);
+        $this->forge->addUniqueKey('file_path');
         $this->forge->addForeignKey('uploaded_by', 'users', 'id');
         $this->forge->addForeignKey('updated_by', 'users', 'id');
         $this->forge->createTable('media');

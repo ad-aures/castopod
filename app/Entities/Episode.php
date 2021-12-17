@@ -10,6 +10,10 @@ declare(strict_types=1);
 
 namespace App\Entities;
 
+use App\Entities\Media\Audio;
+use App\Entities\Media\Chapters;
+use App\Entities\Media\Image;
+use App\Entities\Media\Transcript;
 use App\Libraries\SimpleRSSElement;
 use App\Models\ClipsModel;
 use App\Models\EpisodeCommentModel;
@@ -19,6 +23,7 @@ use App\Models\PodcastModel;
 use App\Models\PostModel;
 use CodeIgniter\Entity\Entity;
 use CodeIgniter\Files\File;
+use CodeIgniter\HTTP\Files\UploadedFile;
 use CodeIgniter\I18n\Time;
 use League\CommonMark\CommonMarkConverter;
 use RuntimeException;
@@ -42,10 +47,10 @@ use RuntimeException;
  * @property int $cover_id
  * @property Image $cover
  * @property int|null $transcript_id
- * @property Media|null $transcript
+ * @property Transcript|null $transcript
  * @property string|null $transcript_remote_url
  * @property int|null $chapters_id
- * @property Media|null $chapters
+ * @property Chapters|null $chapters
  * @property string|null $chapters_remote_url
  * @property string|null $parental_advisory
  * @property int $number
@@ -69,7 +74,7 @@ use RuntimeException;
  * @property Time|null $deleted_at;
  *
  * @property Person[] $persons;
- * @property Soundbite[] $soundbites;
+ * @property Clip[] $clips;
  * @property string $embed_url;
  */
 class Episode extends Entity
@@ -78,7 +83,7 @@ class Episode extends Entity
 
     protected string $link;
 
-    protected Audio $audio;
+    protected ?Audio $audio = null;
 
     protected string $audio_url;
 
@@ -90,13 +95,13 @@ class Episode extends Entity
 
     protected string $embed_url;
 
-    protected Image $cover;
+    protected ?Image $cover = null;
 
     protected ?string $description = null;
 
-    protected ?Media $transcript;
+    protected ?Transcript $transcript = null;
 
-    protected ?Media $chapters;
+    protected ?Chapters $chapters = null;
 
     /**
      * @var Person[]|null
@@ -161,25 +166,31 @@ class Episode extends Entity
         'updated_by' => 'integer',
     ];
 
-    /**
-     * Saves an episode cover
-     */
-    public function setCover(?Image $cover = null): static
+    public function setCover(?UploadedFile $file): self
     {
-        if ($cover === null) {
+        if ($file === null || ! $file->isValid()) {
             return $this;
         }
 
-        // Save image
-        $cover->saveImage(
-            config('Images')
-                ->podcastCoverSizes,
-            'podcasts/' . $this->getPodcast()->handle,
-            $this->attributes['slug']
-        );
+        if (array_key_exists('cover_id', $this->attributes) && $this->attributes['cover_id'] !== null) {
+            $this->getCover()
+                ->setFile($file);
+            $this->getCover()
+                ->updated_by = (int) user_id();
+            (new MediaModel('image'))->updateMedia($this->getCover());
+        } else {
+            $cover = new Image([
+                'file_name' => $this->attributes['slug'],
+                'file_directory' => 'podcasts/' . $this->attributes['handle'],
+                'sizes' => config('Images')
+                    ->podcastCoverSizes,
+                'uploaded_by' => user_id(),
+                'updated_by' => user_id(),
+            ]);
+            $cover->setFile($file);
 
-        $this->attributes['cover_mimetype'] = $cover->mimetype;
-        $this->attributes['cover_path'] = $cover->path;
+            $this->attributes['cover_id'] = (new MediaModel('image'))->saveMedia($cover);
+        }
 
         return $this;
     }
@@ -193,25 +204,106 @@ class Episode extends Entity
         return $this->cover;
     }
 
+    public function setAudio(?UploadedFile $file): self
+    {
+        if ($file === null || ! $file->isValid()) {
+            return $this;
+        }
+
+        if ($this->audio_id !== null) {
+            $this->getAudio()
+                ->setFile($file);
+            $this->getAudio()
+                ->updated_by = (int) user_id();
+            (new MediaModel('audio'))->updateMedia($this->getAudio());
+        } else {
+            $transcript = new Audio([
+                'file_name' => $this->attributes['slug'],
+                'file_directory' => 'podcasts/' . $this->attributes['handle'],
+                'uploaded_by' => user_id(),
+                'updated_by' => user_id(),
+            ]);
+            $transcript->setFile($file);
+
+            $this->attributes['transcript_id'] = (new MediaModel())->saveMedia($transcript);
+        }
+
+        return $this;
+    }
+
     public function getAudio(): Audio
     {
-        if (! $this->audio) {
+        if (! $this->audio instanceof Audio) {
             $this->audio = (new MediaModel('audio'))->getMediaById($this->audio_id);
         }
 
         return $this->audio;
     }
 
-    public function getTranscript(): ?Media
+    public function setTranscript(?UploadedFile $file): self
+    {
+        if ($file === null || ! $file->isValid()) {
+            return $this;
+        }
+
+        if ($this->getTranscript() !== null) {
+            $this->getTranscript()
+                ->setFile($file);
+            $this->getTranscript()
+                ->updated_by = (int) user_id();
+            (new MediaModel('transcript'))->updateMedia($this->getTranscript());
+        } else {
+            $transcript = new Transcript([
+                'file_name' => $this->attributes['slug'] . '-transcript',
+                'file_directory' => 'podcasts/' . $this->attributes['handle'],
+                'uploaded_by' => user_id(),
+                'updated_by' => user_id(),
+            ]);
+            $transcript->setFile($file);
+
+            $this->attributes['transcript_id'] = (new MediaModel())->saveMedia($transcript);
+        }
+
+        return $this;
+    }
+
+    public function getTranscript(): ?Transcript
     {
         if ($this->transcript_id !== null && $this->transcript === null) {
-            $this->transcript = (new MediaModel('document'))->getMediaById($this->transcript_id);
+            $this->transcript = (new MediaModel('transcript'))->getMediaById($this->transcript_id);
         }
 
         return $this->transcript;
     }
 
-    public function getChaptersFile(): ?Media
+    public function setChapters(?UploadedFile $file): self
+    {
+        if ($file === null || ! $file->isValid()) {
+            return $this;
+        }
+
+        if ($this->getChapters() !== null) {
+            $this->getChapters()
+                ->setFile($file);
+            $this->getChapters()
+                ->updated_by = (int) user_id();
+            (new MediaModel('chapters'))->updateMedia($this->getChapters());
+        } else {
+            $chapters = new Chapters([
+                'file_name' => $this->attributes['slug'] . '-chapters',
+                'file_directory' => 'podcasts/' . $this->attributes['handle'],
+                'uploaded_by' => user_id(),
+                'updated_by' => user_id(),
+            ]);
+            $chapters->setFile($file);
+
+            $this->attributes['chapters_id'] = (new MediaModel())->saveMedia($chapters);
+        }
+
+        return $this;
+    }
+
+    public function getChapters(): ?Chapters
     {
         if ($this->chapters_id !== null && $this->chapters === null) {
             $this->chapters = (new MediaModel('document'))->getMediaById($this->chapters_id);
@@ -261,7 +353,7 @@ class Episode extends Entity
     public function getTranscriptUrl(): ?string
     {
         if ($this->transcript !== null) {
-            return $this->transcript->url;
+            return $this->transcript->file_url;
         }
         return $this->transcript_remote_url;
     }
@@ -271,8 +363,8 @@ class Episode extends Entity
      */
     public function getChaptersFileUrl(): ?string
     {
-        if ($this->chapters) {
-            return $this->chapters->url;
+        if ($this->chapters !== null) {
+            return $this->chapters->file_url;
         }
 
         return $this->chapters_remote_url;

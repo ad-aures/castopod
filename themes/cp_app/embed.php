@@ -46,7 +46,7 @@
                         ? '?_from=' .
                             parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST)
                         : '') ?>
-                <source src="<?= $source ?>" type="<?= $episode->audio->file_content_type ?>" />
+                <source src="<?= $source ?>" type="<?= $episode->audio->file_mimetype ?>" />
             </vm-audio>
             <vm-ui>
                 <vm-icon-library name="castopod-icons"></vm-icon-library>

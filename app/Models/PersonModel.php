@@ -10,7 +10,6 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Entities\Image;
 use App\Entities\Person;
 use CodeIgniter\Database\Query;
 use CodeIgniter\Model;
@@ -196,7 +195,7 @@ class PersonModel extends Model
             'full_name' => $fullName,
             'unique_name' => slugify($fullName),
             'information_url' => $informationUrl,
-            'image' => new Image(download_file($image)),
+            'image' => download_file($image),
             'created_by' => user_id(),
             'updated_by' => user_id(),
         ]);

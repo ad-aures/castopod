@@ -156,8 +156,8 @@
             <Forms.Input class="w-full" name="transcript_file" type="file" accept=".txt,.html,.srt,.json" />
         </section>
         <section id="transcript-file-remote-url" class="tab-panel">
-            <Forms.Label class="sr-only" for="transcript_file_remote_url" isOptional="true"><?= lang('Episode.form.transcript_file_remote_url') ?></Forms.Label>
-            <Forms.Input class="w-full" placeholder="https://…" name="transcript_file_remote_url" />
+            <Forms.Label class="sr-only" for="transcript_remote_url" isOptional="true"><?= lang('Episode.form.transcript_remote_url') ?></Forms.Label>
+            <Forms.Input class="w-full" placeholder="https://…" name="transcript_remote_url" />
         </section>
     </div>
 </div>
@@ -183,8 +183,8 @@
             <Forms.Input class="w-full" name="chapters_file" type="file" accept=".json" />
         </section>
         <section id="chapters-file-remote-url" class="tab-panel">
-            <Forms.Label class="sr-only" for="chapters_file_remote_url" isOptional="true"><?= lang('Episode.form.chapters_file_remote_url') ?></Forms.Label>
-            <Forms.Input class="w-full" placeholder="https://…" name="chapters_file_remote_url" />
+            <Forms.Label class="sr-only" for="chapters_remote_url" isOptional="true"><?= lang('Episode.form.chapters_remote_url') ?></Forms.Label>
+            <Forms.Input class="w-full" placeholder="https://…" name="chapters_remote_url" />
         </section>
     </div>
 </div>

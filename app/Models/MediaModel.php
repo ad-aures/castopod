@@ -10,9 +10,12 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Entities\Audio;
-use App\Entities\Image;
-use App\Entities\Media;
+use App\Entities\Media\Audio;
+use App\Entities\Media\Chapters;
+use App\Entities\Media\Document;
+use App\Entities\Media\Image;
+use App\Entities\Media\Transcript;
+use App\Entities\Media\Video;
 use CodeIgniter\Database\ConnectionInterface;
 use CodeIgniter\Model;
 use CodeIgniter\Validation\ValidationInterface;
@@ -27,7 +30,7 @@ class MediaModel extends Model
     /**
      * @var string
      */
-    protected $returnType = Media::class;
+    protected $returnType = Document::class;
 
     /**
      * @var string[]
@@ -36,7 +39,7 @@ class MediaModel extends Model
         'id',
         'file_path',
         'file_size',
-        'file_content_type',
+        'file_mimetype',
         'file_metadata',
         'type',
         'description',
@@ -52,29 +55,36 @@ class MediaModel extends Model
      * @param ValidationInterface|null $validation Validation
      */
     public function __construct(
-        protected string $fileType,
+        protected string $fileType = 'document',
         ConnectionInterface &$db = null,
         ValidationInterface $validation = null
     ) {
+        // @phpstan-ignore-next-line
         switch ($fileType) {
             case 'audio':
                 $this->returnType = Audio::class;
                 break;
+            case 'video':
+                $this->returnType = Video::class;
+                break;
             case 'image':
                 $this->returnType = Image::class;
                 break;
+            case 'transcript':
+                $this->returnType = Transcript::class;
+                break;
+            case 'chapters':
+                $this->returnType = Chapters::class;
+                break;
             default:
-                // do nothing, keep Media class as default
+                // do nothing, keep Document class as default
                 break;
         }
 
         parent::__construct($db, $validation);
     }
 
-    /**
-     * @return Media|Image|Audio
-     */
-    public function getMediaById(int $mediaId): object
+    public function getMediaById(int $mediaId): Document | Audio | Video | Image | Transcript | Chapters
     {
         $cacheName = "media#{$mediaId}";
         if (! ($found = cache($cacheName))) {
@@ -94,7 +104,9 @@ class MediaModel extends Model
     }
 
     /**
-     * @param Media|Image|Audio $media
+     * @param Document|Audio|Video|Image|Transcript|Chapters $media
+     *
+     * @noRector ReturnTypeDeclarationRector
      */
     public function saveMedia(object $media): int | false
     {
@@ -103,7 +115,21 @@ class MediaModel extends Model
             return false;
         }
 
-        // @phpstan-ignore-next-line
         return $mediaId;
+    }
+
+    /**
+     * @param Document|Audio|Video|Image|Transcript|Chapters $media
+     *
+     * @noRector ReturnTypeDeclarationRector
+     */
+    public function updateMedia(object $media): bool
+    {
+        return $this->update($media->id, $media);
+    }
+
+    public function deleteMedia(int $mediaId): bool
+    {
+        return $this->delete($mediaId, true);
     }
 }

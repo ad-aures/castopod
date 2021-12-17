@@ -153,10 +153,10 @@
             ')</small>' .
             hint_tooltip(lang('Episode.form.transcript_hint'), 'ml-1') ?></legend>
 <div class="form-input-tabs">
-    <input type="radio" name="transcript-choice" id="transcript-file-upload-choice" aria-controls="transcript-file-upload-choice" value="upload-file" <?= $episode->transcript_file_remote_url ? '' : 'checked' ?> />
+    <input type="radio" name="transcript-choice" id="transcript-file-upload-choice" aria-controls="transcript-file-upload-choice" value="upload-file" <?= $episode->transcript_remote_url ? '' : 'checked' ?> />
     <label for="transcript-file-upload-choice"><?= lang('Common.forms.upload_file') ?></label>
 
-    <input type="radio" name="transcript-choice" id="transcript-file-remote-url-choice" aria-controls="transcript-file-remote-url-choice" value="remote-url" <?= $episode->transcript_file_remote_url ? 'checked' : '' ?> />
+    <input type="radio" name="transcript-choice" id="transcript-file-remote-url-choice" aria-controls="transcript-file-remote-url-choice" value="remote-url" <?= $episode->transcript_remote_url ? 'checked' : '' ?> />
     <label for="transcript-file-remote-url-choice"><?= lang('Common.forms.remote_url') ?></label>
 
     <div class="py-2 tab-panels">
@@ -164,7 +164,7 @@
             <?php if ($episode->transcript_file) : ?>
                 <div class="flex mb-1 gap-x-2">
                     <?= anchor(
-                $episode->transcript_file_url,
+                $episode->transcript->file_url,
                 icon('file', 'mr-2 text-skin-muted') .
                             $episode->transcript_file,
                 [
@@ -195,8 +195,8 @@
             <Forms.Input class="w-full" name="transcript_file" type="file" accept=".txt,.html,.srt,.json" />
         </section>
         <section id="transcript-file-remote-url" class="tab-panel">
-            <Forms.Label class="sr-only" for="transcript_file_remote_url" isOptional="true"><?= lang('Episode.form.transcript_file_remote_url') ?></Forms.Label>
-            <Forms.Input class="w-full" placeholder="https://…" name="transcript_file_remote_url" value="<?= $episode->transcript_file_remote_url ?>" />
+            <Forms.Label class="sr-only" for="transcript_remote_url" isOptional="true"><?= lang('Episode.form.transcript_remote_url') ?></Forms.Label>
+            <Forms.Input class="w-full" placeholder="https://…" name="transcript_remote_url" value="<?= $episode->transcript_remote_url ?>" />
         </section>
     </div>
 </div>
@@ -210,10 +210,10 @@
             ')</small>' .
             hint_tooltip(lang('Episode.form.chapters_hint'), 'ml-1') ?></legend>
 <div class="form-input-tabs">
-    <input type="radio" name="chapters-choice" id="chapters-file-upload-choice" aria-controls="chapters-file-upload-choice" value="upload-file" <?= $episode->chapters_file_remote_url ? '' : 'checked' ?> />
+    <input type="radio" name="chapters-choice" id="chapters-file-upload-choice" aria-controls="chapters-file-upload-choice" value="upload-file" <?= $episode->chapters_remote_url ? '' : 'checked' ?> />
     <label for="chapters-file-upload-choice"><?= lang('Common.forms.upload_file') ?></label>
 
-    <input type="radio" name="chapters-choice" id="chapters-file-remote-url-choice" aria-controls="chapters-file-remote-url-choice" value="remote-url" <?= $episode->chapters_file_remote_url ? 'checked' : '' ?> />
+    <input type="radio" name="chapters-choice" id="chapters-file-remote-url-choice" aria-controls="chapters-file-remote-url-choice" value="remote-url" <?= $episode->chapters_remote_url ? 'checked' : '' ?> />
     <label for="chapters-file-remote-url-choice"><?= lang('Common.forms.remote_url') ?></label>
 
     <div class="py-2 tab-panels">
@@ -221,7 +221,7 @@
             <?php if ($episode->chapters_file) : ?>
                 <div class="flex mb-1 gap-x-2">
                     <?= anchor(
-                $episode->chapters_file_url,
+                $episode->chapters->file_url,
                 icon('file', 'mr-2') . $episode->chapters_file,
                 [
                     'class' => 'inline-flex items-center text-xs',
@@ -251,8 +251,8 @@
             <Forms.Input class="w-full" name="chapters_file" type="file" accept=".json" />
         </section>
         <section id="chapters-file-remote-url" class="tab-panel">
-            <Forms.Label class="sr-only" for="chapters_file_remote_url" isOptional="true"><?= lang('Episode.form.chapters_file_remote_url') ?></Forms.Label>
-            <Forms.Input class="w-full" placeholder="https://…" name="chapters_file_remote_url" value="<?= $episode->chapters_file_remote_url ?>" />
+            <Forms.Label class="sr-only" for="chapters_remote_url" isOptional="true"><?= lang('Episode.form.chapters_remote_url') ?></Forms.Label>
+            <Forms.Input class="w-full" placeholder="https://…" name="chapters_remote_url" value="<?= $episode->chapters_remote_url ?>" />
         </section>
     </div>
 </div>

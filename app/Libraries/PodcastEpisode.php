@@ -52,7 +52,7 @@ class PodcastEpisode extends ObjectType
 
         $this->image = [
             'type' => 'Image',
-            'mediaType' => $episode->cover->file_content_type,
+            'mediaType' => $episode->cover->file_mimetype,
             'url' => $episode->cover->feed_url,
         ];
 
@@ -66,7 +66,7 @@ class PodcastEpisode extends ObjectType
             'url' => [
                 'href' => $episode->audio->file_url,
                 'type' => 'Link',
-                'mediaType' => $episode->audio->file_content_type,
+                'mediaType' => $episode->audio->file_mimetype,
             ],
             'transcript' => $episode->transcript->file_url,
             'chapters' => $episode->chapters->file_url,

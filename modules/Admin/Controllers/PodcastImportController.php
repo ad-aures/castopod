@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace Modules\Admin\Controllers;
 
 use App\Entities\Episode;
-use App\Entities\Image;
 use App\Entities\Location;
 use App\Entities\Person;
 use App\Entities\Podcast;

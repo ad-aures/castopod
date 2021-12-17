@@ -80,7 +80,7 @@ class VideoClip
         helper(['media']);
 
         $this->audioInput = media_path($this->episode->audio->file_path);
-        $this->episodeCoverPath = media_path($this->episode->cover->path);
+        $this->episodeCoverPath = media_path($this->episode->cover->file_path);
         if ($this->episode->transcript !== null) {
             $this->subtitlesInput = media_path($this->episode->transcript->file_path);
         }

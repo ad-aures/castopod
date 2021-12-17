@@ -10,7 +10,6 @@ declare(strict_types=1);
 
 namespace Modules\Admin\Controllers;
 
-use App\Entities\Image;
 use App\Entities\Person;
 use App\Models\PersonModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
@@ -78,17 +77,13 @@ class PersonController extends BaseController
         }
 
         $person = new Person([
+            'avatar' => $this->request->getFile('avatar'),
             'full_name' => $this->request->getPost('full_name'),
             'unique_name' => $this->request->getPost('unique_name'),
             'information_url' => $this->request->getPost('information_url'),
             'created_by' => user_id(),
             'updated_by' => user_id(),
         ]);
-
-        $avatarFile = $this->request->getFile('avatar');
-        if ($avatarFile !== null && $avatarFile->isValid()) {
-            $person->avatar = new Image($avatarFile);
-        }
 
         $personModel = new PersonModel();
 

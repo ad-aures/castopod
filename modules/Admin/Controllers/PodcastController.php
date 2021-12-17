@@ -10,7 +10,6 @@ declare(strict_types=1);
 
 namespace Modules\Admin\Controllers;
 
-use App\Entities\Image;
 use App\Entities\Location;
 use App\Entities\Podcast;
 use App\Models\CategoryModel;
@@ -196,6 +195,8 @@ class PodcastController extends BaseController
         $newPodcast = new Podcast([
             'title' => $this->request->getPost('title'),
             'handle' => $this->request->getPost('handle'),
+            'cover' => $this->request->getFile('cover'),
+            'banner' => $this->request->getFile('banner'),
             'description_markdown' => $this->request->getPost('description'),
             'language_code' => $this->request->getPost('language'),
             'category_id' => $this->request->getPost('category'),
@@ -227,48 +228,6 @@ class PodcastController extends BaseController
 
         $db = db_connect();
         $db->transStart();
-
-        $cover = new Image([
-            'file_name' => 'cover',
-            'file_directory' => 'podcasts/' . $newPodcast->handle,
-            'sizes' => config('Images')
-                ->podcastCoverSizes,
-            'file' => $this->request->getFile('cover'),
-            'uploaded_by' => user_id(),
-            'updated_by' => user_id(),
-        ]);
-        $mediaModel = new MediaModel('image');
-        if (! ($newCoverId = $mediaModel->saveMedia($cover))) {
-            $db->transRollback();
-            return redirect()
-                ->back()
-                ->withInput()
-                ->with('errors', $mediaModel->errors());
-        }
-        $newPodcast->cover_id = $newCoverId;
-
-        $bannerFile = $this->request->getFile('banner');
-        if ($bannerFile !== null && $bannerFile->isValid()) {
-            $banner = new Image([
-                'file_name' => 'banner',
-                'file_directory' => 'podcasts/' . $newPodcast->handle,
-                'sizes' => config('Images')
-                    ->podcastBannerSizes,
-                'file' => $this->request->getFile('banner'),
-                'uploaded_by' => user_id(),
-                'updated_by' => user_id(),
-            ]);
-            $mediaModel = new MediaModel('image');
-            if (! ($newBannerId = $mediaModel->saveMedia($banner))) {
-                $db->transRollback();
-                return redirect()
-                    ->back()
-                    ->withInput()
-                    ->with('errors', $mediaModel->errors());
-            }
-
-            $newPodcast->banner_id = $newBannerId;
-        }
 
         $podcastModel = new PodcastModel();
         if (! ($newPodcastId = $podcastModel->insert($newPodcast, true))) {
@@ -344,15 +303,9 @@ class PodcastController extends BaseController
 
         $this->podcast->title = $this->request->getPost('title');
         $this->podcast->description_markdown = $this->request->getPost('description');
+        $this->podcast->setCover($this->request->getFile('cover'));
+        $this->podcast->setBanner($this->request->getFile('banner'));
 
-        $coverFile = $this->request->getFile('cover');
-        if ($coverFile !== null && $coverFile->isValid()) {
-            $this->podcast->cover->setFile($coverFile);
-        }
-        $bannerFile = $this->request->getFile('banner');
-        if ($bannerFile !== null && $bannerFile->isValid()) {
-            $this->podcast->banner = new Image($bannerFile);
-        }
         $this->podcast->language_code = $this->request->getPost('language');
         $this->podcast->category_id = $this->request->getPost('category');
         $this->podcast->parental_advisory =
@@ -381,6 +334,7 @@ class PodcastController extends BaseController
         $this->podcast->updated_by = (int) user_id();
 
         $db = db_connect();
+
         $db->transStart();
 
         $podcastModel = new PodcastModel();
@@ -400,7 +354,7 @@ class PodcastController extends BaseController
 
         $db->transComplete();
 
-        return redirect()->route('podcast-view', [$this->podcast->id]);
+        return redirect()->back();
     }
 
     public function deleteBanner(): RedirectResponse
@@ -409,17 +363,14 @@ class PodcastController extends BaseController
             return redirect()->back();
         }
 
-        $this->podcast->banner->delete(config('Images')->podcastBannerSizes);
+        $this->podcast->banner->deleteFile();
 
-        $this->podcast->banner_path = null;
-        $this->podcast->banner_mimetype = null;
-
-        $podcastModel = new PodcastModel();
-        if (! $podcastModel->update($this->podcast->id, $this->podcast)) {
+        $mediaModel = new MediaModel();
+        if (! $mediaModel->deleteMedia((int) $this->podcast->banner_id)) {
             return redirect()
                 ->back()
                 ->withInput()
-                ->with('errors', $podcastModel->errors());
+                ->with('errors', $mediaModel->errors());
         }
 
         return redirect()->back();

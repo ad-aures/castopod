@@ -64,7 +64,7 @@ class AddPersons extends Migration
         ]);
 
         $this->forge->addKey('id', true);
-        $this->forge->addForeignKey('avatar_id', 'media', 'id');
+        $this->forge->addForeignKey('avatar_id', 'media', 'id', '', 'SET NULL');
         $this->forge->addForeignKey('created_by', 'users', 'id');
         $this->forge->addForeignKey('updated_by', 'users', 'id');
         $this->forge->createTable('persons');

@@ -61,7 +61,7 @@
 
     <div class="flex items-center gap-x-2">
         <audio controls preload="auto" class="flex-1 w-full">
-            <source src="<?= $episode->audio->file_url ?>" type="<?= $episode->audio->file_content_type ?>">
+            <source src="<?= $episode->audio->file_url ?>" type="<?= $episode->audio->file_mimetype ?>">
             Your browser does not support the audio tag.
         </audio>
         <IconButton glyph="timer" variant="info" data-type="get-soundbite" data-start-time-field-name="soundbites[0][start_time]" data-duration-field-name="soundbites[0][duration]" ><?= lang('Episode.soundbites_form.bookmark') ?></IconButton>

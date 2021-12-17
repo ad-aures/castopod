@@ -198,7 +198,7 @@ class AddPodcasts extends Migration
         $this->forge->addUniqueKey('actor_id');
         $this->forge->addForeignKey('actor_id', config('Fediverse')->tablesPrefix . 'actors', 'id', '', 'CASCADE');
         $this->forge->addForeignKey('cover_id', 'media', 'id');
-        $this->forge->addForeignKey('banner_id', 'media', 'id');
+        $this->forge->addForeignKey('banner_id', 'media', 'id', '', 'SET NULL');
         $this->forge->addForeignKey('category_id', 'categories', 'id');
         $this->forge->addForeignKey('language_code', 'languages', 'code');
         $this->forge->addForeignKey('created_by', 'users', 'id');

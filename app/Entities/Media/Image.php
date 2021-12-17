@@ -8,20 +8,20 @@ declare(strict_types=1);
  * @link       https://castopod.org/
  */
 
-namespace App\Entities;
+namespace App\Entities\Media;
 
 use CodeIgniter\Files\File;
 
-class Image extends Media
+/**
+ * @property array $sizes
+ */
+class Image extends BaseMedia
 {
     protected string $type = 'image';
 
-    /**
-     * @param array<string, mixed>|null $data
-     */
-    public function __construct(array $data = null)
+    public function initFileProperties(): void
     {
-        parent::__construct($data);
+        parent::initFileProperties();
 
         if ($this->file_path && $this->file_metadata) {
             $this->sizes = $this->file_metadata['sizes'];
@@ -34,7 +34,7 @@ class Image extends Media
         helper('media');
 
         $extension = $this->file_extension;
-        $mimetype = $this->mimetype;
+        $mimetype = $this->file_mimetype;
         foreach ($this->sizes as $name => $size) {
             if (array_key_exists('extension', $size)) {
                 $extension = $size['extension'];
@@ -62,6 +62,23 @@ class Image extends Media
             $this->attributes['file_metadata'] = json_encode($metadata);
         }
 
+        $this->initFileProperties();
+        $this->saveSizes();
+
+        return $this;
+    }
+
+    public function deleteFile(): void
+    {
+        helper('media');
+
+        unlink(media_path($this->file_path));
+
+        $this->deleteSizes();
+    }
+
+    private function saveSizes(): void
+    {
         // save derived sizes
         $imageService = service('image');
         foreach ($this->sizes as $name => $size) {
@@ -71,7 +88,14 @@ class Image extends Media
                 ->resize($size['width'], $size['height']);
             $imageService->save(media_path($this->{$pathProperty}));
         }
+    }
 
-        return $this;
+    private function deleteSizes(): void
+    {
+        // delete all derived sizes
+        foreach (array_keys($this->sizes) as $name) {
+            $pathProperty = $name . '_path';
+            unlink(media_path($this->{$pathProperty}));
+        }
     }
 }

@@ -25,7 +25,7 @@
     <?php if ($podcast->banner_id !== null): ?>
         <a href="<?= route_to('podcast-banner-delete', $podcast->id) ?>" class="absolute p-1 text-red-700 bg-red-100 border-2 rounded-full hover:text-red-900 border-contrast focus:ring-accent top-2 right-2" title="<?= lang('Podcast.form.banner_delete') ?>" data-tooltip="bottom"><?= icon('delete-bin') ?></a>
     <?php endif; ?>
-    <img src="<?= $podcast->banner->small_url ?>" alt="" class="object-cover w-full aspect-[3/1] bg-header" />
+    <img src="<?= $podcast->banner->small_url ?>" alt="" class="w-full aspect-[3/1] bg-header" />
     <div class="flex px-4 py-2">
         <img src="<?= $podcast->cover->thumbnail_url ?>" alt="<?= $podcast->title ?>"
             class="w-16 h-16 mr-4 -mt-8 rounded-full ring-2 ring-background-elevated aspect-square" />

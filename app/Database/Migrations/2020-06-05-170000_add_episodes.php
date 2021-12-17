@@ -157,9 +157,9 @@ class AddEpisodes extends Migration
         $this->forge->addUniqueKey(['podcast_id', 'slug']);
         $this->forge->addForeignKey('podcast_id', 'podcasts', 'id', '', 'CASCADE');
         $this->forge->addForeignKey('audio_id', 'media', 'id');
-        $this->forge->addForeignKey('cover_id', 'media', 'id');
-        $this->forge->addForeignKey('transcript_id', 'media', 'id');
-        $this->forge->addForeignKey('chapters_id', 'media', 'id');
+        $this->forge->addForeignKey('cover_id', 'media', 'id', '', 'SET NULL');
+        $this->forge->addForeignKey('transcript_id', 'media', 'id', '', 'SET NULL');
+        $this->forge->addForeignKey('chapters_id', 'media', 'id', '', 'SET NULL');
         $this->forge->addForeignKey('created_by', 'users', 'id');
         $this->forge->addForeignKey('updated_by', 'users', 'id');
         $this->forge->createTable('episodes');

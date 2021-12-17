@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @link       https://castopod.org/
  */
 
-namespace App\Entities;
+namespace App\Entities\Media;
 
 use CodeIgniter\Files\File;
 use JamesHeinrich\GetID3\GetID3;
@@ -17,7 +17,7 @@ use JamesHeinrich\GetID3\GetID3;
  * @property float $duration
  * @property int $header_size
  */
-class Audio extends Media
+class Audio extends BaseMedia
 {
     protected string $type = 'audio';
 
@@ -41,7 +41,7 @@ class Audio extends Media
         $getID3 = new GetID3();
         $audioMetadata = $getID3->analyze((string) $file);
 
-        $this->attributes['file_content_type'] = $audioMetadata['mimetype'];
+        $this->attributes['file_mimetype'] = $audioMetadata['mimetype'];
         $this->attributes['file_size'] = $audioMetadata['filesize'];
         $this->attributes['description'] = $audioMetadata['comments']['comment'];
         $this->attributes['file_metadata'] = $audioMetadata;

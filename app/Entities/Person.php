@@ -10,8 +10,11 @@ declare(strict_types=1);
 
 namespace App\Entities;
 
+use App\Entities\Media\Image;
+use App\Models\MediaModel;
 use App\Models\PersonModel;
 use CodeIgniter\Entity\Entity;
+use CodeIgniter\HTTP\Files\UploadedFile;
 use RuntimeException;
 
 /**
@@ -52,31 +55,52 @@ class Person extends Entity
     /**
      * Saves the person avatar in `public/media/persons/`
      */
-    public function setAvatar(?Image $avatar = null): static
+    public function setAvatar(?UploadedFile $file = null): static
     {
-        if ($avatar === null) {
+        if ($file === null || ! $file->isValid()) {
             return $this;
         }
 
-        helper('media');
+        if (array_key_exists('cover_id', $this->attributes) && $this->attributes['cover_id'] !== null) {
+            $this->getAvatar()
+                ->setFile($file);
+            $this->getAvatar()
+                ->updated_by = (int) user_id();
+            (new MediaModel('image'))->updateMedia($this->getAvatar());
+        } else {
+            $cover = new Image([
+                'file_name' => $this->attributes['unique_name'],
+                'file_directory' => 'persons',
+                'sizes' => config('Images')
+                    ->personAvatarSizes,
+                'uploaded_by' => user_id(),
+                'updated_by' => user_id(),
+            ]);
+            $cover->setFile($file);
 
-        $avatar->saveImage(config('Images')->personAvatarSizes, 'persons', $this->attributes['unique_name']);
-
-        $this->attributes['avatar_mimetype'] = $avatar->mimetype;
-        $this->attributes['avatar_path'] = $avatar->path;
+            $this->attributes['cover_id'] = (new MediaModel('image'))->saveMedia($cover);
+        }
 
         return $this;
     }
 
     public function getAvatar(): Image
     {
-        if ($this->attributes['avatar_path'] === null) {
-            return new Image(null, '/castopod-avatar-default.jpg', 'image/jpeg', config('Images')->personAvatarSizes);
+        if ($this->attributes['avatar_id'] === null) {
+            helper('media');
+            return new Image([
+                'file_path' => media_path('castopod-avatar-default.jpg'),
+                'file_mimetype' => 'image/jpeg',
+                'sizes' => config('Images')
+                    ->personAvatarSizes,
+            ]);
         }
 
-        return new Image(null, $this->attributes['avatar_path'], $this->attributes['avatar_mimetype'], config(
-            'Images'
-        )->personAvatarSizes);
+        if ($this->avatar === null) {
+            $this->avatar = (new MediaModel('image'))->getMediaById($this->avatar_id);
+        }
+
+        return $this->avatar;
     }
 
     /**

@@ -59,8 +59,8 @@ if (! function_exists('generate_episode_analytics_url')) {
                     $podcastId,
                     $episodeId,
                     // bytes_threshold: number of bytes that must be downloaded for an episode to be counted in download analytics
-                    // - if file is shorter than 60sec, then it's audio_file_size
-                    // - if file is longer than 60 seconds then it's audio_file_header_size + 60 seconds
+                    // - if audio is less than or equal to 60s, then take the audio file_size
+                    // - if audio is more than 60s, then take the audio file_header_size + 60s
                     $audioFileDuration <= 60
                         ? $audioFileSize
                         : $audioFileHeaderSize +

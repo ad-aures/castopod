@@ -212,7 +212,7 @@ if (! function_exists('get_rss_feed')) {
                         : '?_from=' . urlencode($serviceSlug)),
             );
             $enclosure->addAttribute('length', (string) $episode->audio->file_size);
-            $enclosure->addAttribute('type', $episode->audio->file_content_type);
+            $enclosure->addAttribute('type', $episode->audio->file_mimetype);
 
             $item->addChild('guid', $episode->guid);
             $item->addChild('pubDate', $episode->published_at->format(DATE_RFC1123));
@@ -255,25 +255,25 @@ if (! function_exists('get_rss_feed')) {
             $comments->addAttribute('uri', url_to('episode-comments', $podcast->handle, $episode->slug));
             $comments->addAttribute('contentType', 'application/podcast-activity+json');
 
-            if ($episode->transcript->file_url) {
+            if ($episode->transcript->file_url !== '') {
                 $transcriptElement = $item->addChild('transcript', null, $podcastNamespace);
-                $transcriptElement->addAttribute('url', $episode->transcript_file_url);
+                $transcriptElement->addAttribute('url', $episode->transcript->file_url);
                 $transcriptElement->addAttribute(
                     'type',
                     Mimes::guessTypeFromExtension(
-                        pathinfo($episode->transcript_file_url, PATHINFO_EXTENSION)
+                        pathinfo($episode->transcript->file_url, PATHINFO_EXTENSION)
                     ) ?? 'text/html',
                 );
                 $transcriptElement->addAttribute('language', $podcast->language_code);
             }
 
-            if ($episode->chapters->file_url) {
+            if ($episode->chapters->file_url !== '') {
                 $chaptersElement = $item->addChild('chapters', null, $podcastNamespace);
-                $chaptersElement->addAttribute('url', $episode->chapters_file_url);
+                $chaptersElement->addAttribute('url', $episode->chapters->file_url);
                 $chaptersElement->addAttribute('type', 'application/json+chapters');
             }
 
-            foreach ($episode->clip as $clip) {
+            foreach ($episode->clips as $clip) {
                 // TODO: differentiate video from soundbites?
                 $soundbiteElement = $item->addChild('soundbite', $clip->label, $podcastNamespace);
                 $soundbiteElement->addAttribute('start_time', (string) $clip->start_time);

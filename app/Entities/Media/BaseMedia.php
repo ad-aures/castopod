@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @link       https://castopod.org/
  */
 
-namespace App\Entities;
+namespace App\Entities\Media;
 
 use CodeIgniter\Entity\Entity;
 use CodeIgniter\Files\File;
@@ -16,11 +16,12 @@ use CodeIgniter\Files\File;
 /**
  * @property int $id
  * @property string $file_path
+ * @property string $file_url
  * @property string $file_directory
  * @property string $file_extension
  * @property string $file_name
  * @property int $file_size
- * @property string $file_content_type
+ * @property string $file_mimetype
  * @property array $file_metadata
  * @property 'image'|'audio'|'video'|'document' $type
  * @property string $description
@@ -28,7 +29,7 @@ use CodeIgniter\Files\File;
  * @property int $uploaded_by
  * @property int $updated_by
  */
-class Media extends Entity
+class BaseMedia extends Entity
 {
     protected File $file;
 
@@ -44,9 +45,10 @@ class Media extends Entity
      */
     protected $casts = [
         'id' => 'integer',
+        'file_extension' => 'string',
         'file_path' => 'string',
         'file_size' => 'int',
-        'file_content_type' => 'string',
+        'file_mimetype' => 'string',
         'file_metadata' => 'json-array',
         'type' => 'string',
         'description' => 'string',
@@ -62,16 +64,23 @@ class Media extends Entity
     {
         parent::__construct($data);
 
-        if ($this->file_path) {
+        $this->initFileProperties();
+    }
+
+    public function initFileProperties(): void
+    {
+        if ($this->file_path !== '') {
+            helper('media');
             [
                 'filename' => $filename,
                 'dirname' => $dirname,
                 'extension' => $extension,
             ] = pathinfo($this->file_path);
 
-            $this->file_name = $filename;
-            $this->file_directory = $dirname;
-            $this->file_extension = $extension;
+            $this->attributes['file_url'] = media_base_url($this->file_path);
+            $this->attributes['file_name'] = $filename;
+            $this->attributes['file_directory'] = $dirname;
+            $this->attributes['file_extension'] = $extension;
         }
     }
 
@@ -79,7 +88,7 @@ class Media extends Entity
     {
         helper('media');
 
-        $this->attributes['file_content_type'] = $file->getMimeType();
+        $this->attributes['file_mimetype'] = $file->getMimeType();
         $this->attributes['file_metadata'] = json_encode(lstat((string) $file));
         $this->attributes['file_path'] = save_media(
             $file,

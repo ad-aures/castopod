@@ -93,13 +93,13 @@ return [
         'transcript_hint' =>
             'Les formats autorisés sont txt, html, srt ou json.',
         'transcript_file' => 'Fichier de transcription',
-        'transcript_file_remote_url' =>
+        'transcript_remote_url' =>
             'URL distante pour le fichier de transcription',
         'transcript_file_delete' => 'Supprimer le fichier de transcription',
         'chapters' => 'Chapitrage',
         'chapters_hint' => 'Le fichier doit être en format “JSON Chapters”.',
         'chapters_file' => 'Fichier de chapitrage',
-        'chapters_file_remote_url' =>
+        'chapters_remote_url' =>
             'URL distante pour le fichier de chapitrage',
         'chapters_file_delete' => 'Supprimer le fichier de chapitrage',
         'advanced_section_title' => 'Paramètres avancés',

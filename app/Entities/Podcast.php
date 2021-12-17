@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace App\Entities;
 
+use App\Entities\Media\Image;
 use App\Libraries\SimpleRSSElement;
 use App\Models\CategoryModel;
 use App\Models\EpisodeModel;
@@ -18,6 +19,7 @@ use App\Models\PersonModel;
 use App\Models\PlatformModel;
 use App\Models\UserModel;
 use CodeIgniter\Entity\Entity;
+use CodeIgniter\HTTP\Files\UploadedFile;
 use CodeIgniter\I18n\Time;
 use League\CommonMark\CommonMarkConverter;
 use Modules\Auth\Entities\User;
@@ -192,6 +194,35 @@ class Podcast extends Entity
         return $this->actor;
     }
 
+    public function setCover(?UploadedFile $file = null): self
+    {
+        if ($file === null || ! $file->isValid()) {
+            return $this;
+        }
+
+        if (array_key_exists('cover_id', $this->attributes) && $this->attributes['cover_id'] !== null) {
+            $this->getCover()
+                ->setFile($file);
+            $this->getCover()
+                ->updated_by = (int) user_id();
+            (new MediaModel('image'))->updateMedia($this->getCover());
+        } else {
+            $cover = new Image([
+                'file_name' => 'cover',
+                'file_directory' => 'podcasts/' . $this->attributes['handle'],
+                'sizes' => config('Images')
+                    ->podcastCoverSizes,
+                'uploaded_by' => user_id(),
+                'updated_by' => user_id(),
+            ]);
+            $cover->setFile($file);
+
+            $this->attributes['cover_id'] = (new MediaModel('image'))->saveMedia($cover);
+        }
+
+        return $this;
+    }
+
     public function getCover(): Image
     {
         if (! $this->cover instanceof Image) {
@@ -199,6 +230,35 @@ class Podcast extends Entity
         }
 
         return $this->cover;
+    }
+
+    public function setBanner(?UploadedFile $file): self
+    {
+        if ($file === null || ! $file->isValid()) {
+            return $this;
+        }
+
+        if (array_key_exists('banner_id', $this->attributes) && $this->attributes['banner_id'] !== null) {
+            $this->getBanner()
+                ->setFile($file);
+            $this->getBanner()
+                ->updated_by = (int) user_id();
+            (new MediaModel('image'))->updateMedia($this->getBanner());
+        } else {
+            $banner = new Image([
+                'file_name' => 'banner',
+                'file_directory' => 'podcasts/' . $this->attributes['handle'],
+                'sizes' => config('Images')
+                    ->podcastBannerSizes,
+                'uploaded_by' => user_id(),
+                'updated_by' => user_id(),
+            ]);
+            $banner->setFile($file);
+
+            $this->attributes['banner_id'] = (new MediaModel('image'))->saveMedia($banner);
+        }
+
+        return $this;
     }
 
     public function getBanner(): Image

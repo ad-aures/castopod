@@ -63,7 +63,7 @@
                     </time>
                 </div>
             </a>
-            <?= audio_player($episode->audio->file_url, $episode->audio->file_content_type, 'mt-auto') ?>
+            <?= audio_player($episode->audio->file_url, $episode->audio->file_mimetype, 'mt-auto') ?>
         </div>
     </div>
     <footer class="flex justify-around px-6 py-3">
