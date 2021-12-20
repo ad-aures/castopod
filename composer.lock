@@ -4,7 +4,7 @@
     "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
     "This file is @generated automatically"
   ],
-  "content-hash": "49719de3dd6af8c394ea0553e2180b5a",
+  "content-hash": "af4a438816f7adbbd6950d93ed333e9f",
   "packages": [
     {
       "name": "brick/math",
@@ -494,16 +494,16 @@
     },
     {
       "name": "james-heinrich/getid3",
-      "version": "v2.0.0-beta4",
+      "version": "2.0.x-dev",
       "source": {
         "type": "git",
         "url": "https://github.com/JamesHeinrich/getID3.git",
-        "reference": "5ad79104e937e7d9c8a9141a97e1f063dd1123f8"
+        "reference": "ee238d552571c6029898b087d5fc95df826418d6"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/JamesHeinrich/getID3/zipball/5ad79104e937e7d9c8a9141a97e1f063dd1123f8",
-        "reference": "5ad79104e937e7d9c8a9141a97e1f063dd1123f8",
+        "url": "https://api.github.com/repos/JamesHeinrich/getID3/zipball/ee238d552571c6029898b087d5fc95df826418d6",
+        "reference": "ee238d552571c6029898b087d5fc95df826418d6",
         "shasum": ""
       },
       "require": {
@@ -562,9 +562,9 @@
       "keywords": ["audio", "codecs", "id3", "metadata", "tags", "video"],
       "support": {
         "issues": "https://github.com/JamesHeinrich/getID3/issues",
-        "source": "https://github.com/JamesHeinrich/getID3/tree/v2.0.0-beta4"
+        "source": "https://github.com/JamesHeinrich/getID3/tree/2.0"
       },
-      "time": "2021-10-06T16:23:45+00:00"
+      "time": "2021-12-15T17:29:14+00:00"
     },
     {
       "name": "kint-php/kint",

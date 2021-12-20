@@ -365,10 +365,10 @@ class PodcastImportController extends BaseController
                 'number' =>
                 $this->request->getPost('force_renumber') === 'yes'
                     ? $itemNumber
-                    : $nsItunes->episode,
+                    : ((string) $nsItunes->episode === '' ? null : (int) $nsItunes->episode),
                 'season_number' =>
                 $this->request->getPost('season_number') === ''
-                    ? $nsItunes->season
+                    ? ((string) $nsItunes->season === '' ? null : (int) $nsItunes->season)
                     : (int) $this->request->getPost('season_number'),
                 'type' => property_exists($nsItunes, 'episodeType') && $nsItunes->episodeType !== null
                     ? (string) $nsItunes->episodeType
