@@ -1,3 +1,11 @@
+# [1.0.0-alpha.79](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.78...v1.0.0-alpha.79) (2021-12-20)
+
+### Bug Fixes
+
+- **import:** set episode and season numbers to null when not present in item
+  tag
+  ([3211398](https://code.podlibre.org/podlibre/castopod-host/commit/3211398c78b1b28b76a46427ee07874bbf84a85d))
+
 # [1.0.0-alpha.78](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.77...v1.0.0-alpha.78) (2021-12-15)
 
 ### Bug Fixes
