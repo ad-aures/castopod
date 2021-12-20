@@ -39,7 +39,6 @@ class AddPlatforms extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 512,
                 'null' => true,
-                'default' => null,
             ],
         ]);
         $this->forge->addField('`created_at` timestamp NOT NULL DEFAULT NOW()');

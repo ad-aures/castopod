@@ -144,7 +144,7 @@ if (! function_exists('publication_button')) {
             case 'scheduled':
                 $label = lang('Episode.publish_edit');
                 $route = route_to('episode-publish_edit', $podcastId, $episodeId);
-                $variant = 'accent';
+                $variant = 'warning';
                 $iconLeft = 'upload-cloud';
                 break;
             case 'published':

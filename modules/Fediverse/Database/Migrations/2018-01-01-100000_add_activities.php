@@ -48,12 +48,10 @@ class AddActivities extends Migration
                 'type' => 'ENUM',
                 'constraint' => ['queued', 'delivered'],
                 'null' => true,
-                'default' => null,
             ],
             'scheduled_at' => [
                 'type' => 'DATETIME',
                 'null' => true,
-                'default' => null,
             ],
             'created_at' => [
                 'type' => 'DATETIME',

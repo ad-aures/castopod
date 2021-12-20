@@ -14,6 +14,7 @@ use App\Entities\Media\Image;
 use App\Models\MediaModel;
 use App\Models\PersonModel;
 use CodeIgniter\Entity\Entity;
+use CodeIgniter\Files\File;
 use CodeIgniter\HTTP\Files\UploadedFile;
 use RuntimeException;
 
@@ -55,20 +56,20 @@ class Person extends Entity
     /**
      * Saves the person avatar in `public/media/persons/`
      */
-    public function setAvatar(?UploadedFile $file = null): static
+    public function setAvatar(UploadedFile | File $file = null): static
     {
-        if ($file === null || ! $file->isValid()) {
+        if ($file === null || ($file instanceof UploadedFile && ! $file->isValid())) {
             return $this;
         }
 
-        if (array_key_exists('cover_id', $this->attributes) && $this->attributes['cover_id'] !== null) {
+        if (array_key_exists('avatar_id', $this->attributes) && $this->attributes['avatar_id'] !== null) {
             $this->getAvatar()
                 ->setFile($file);
             $this->getAvatar()
                 ->updated_by = (int) user_id();
             (new MediaModel('image'))->updateMedia($this->getAvatar());
         } else {
-            $cover = new Image([
+            $avatar = new Image([
                 'file_name' => $this->attributes['unique_name'],
                 'file_directory' => 'persons',
                 'sizes' => config('Images')
@@ -76,9 +77,9 @@ class Person extends Entity
                 'uploaded_by' => user_id(),
                 'updated_by' => user_id(),
             ]);
-            $cover->setFile($file);
+            $avatar->setFile($file);
 
-            $this->attributes['cover_id'] = (new MediaModel('image'))->saveMedia($cover);
+            $this->attributes['avatar_id'] = (new MediaModel('image'))->saveMedia($avatar);
         }
 
         return $this;
@@ -89,10 +90,15 @@ class Person extends Entity
         if ($this->attributes['avatar_id'] === null) {
             helper('media');
             return new Image([
-                'file_path' => media_path('castopod-avatar-default.jpg'),
-                'file_mimetype' => 'image/jpeg',
-                'sizes' => config('Images')
-                    ->personAvatarSizes,
+                'file_path' => config('Images')
+                    ->avatarDefaultPath,
+                'file_mimetype' => config('Images')
+                    ->avatarDefaultMimeType,
+                'file_size' => 0,
+                'file_metadata' => [
+                    'sizes' => config('Images')
+                        ->personAvatarSizes,
+                ],
             ]);
         }
 

@@ -37,7 +37,7 @@ class AddMedia extends Migration
             ],
             'file_metadata' => [
                 'type' => 'JSON',
-                'nullable' => true,
+                'null' => true,
             ],
             'type' => [
                 'type' => 'ENUM',
@@ -46,6 +46,7 @@ class AddMedia extends Migration
             ],
             'description' => [
                 'type' => 'TEXT',
+                'null' => true,
             ],
             'language_code' => [
                 'type' => 'VARCHAR',

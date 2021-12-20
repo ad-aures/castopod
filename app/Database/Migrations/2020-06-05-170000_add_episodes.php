@@ -79,7 +79,6 @@ class AddEpisodes extends Migration
                 'type' => 'ENUM',
                 'constraint' => ['clean', 'explicit'],
                 'null' => true,
-                'default' => null,
             ],
             'number' => [
                 'type' => 'INT',

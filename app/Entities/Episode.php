@@ -15,14 +15,13 @@ use App\Entities\Media\Chapters;
 use App\Entities\Media\Image;
 use App\Entities\Media\Transcript;
 use App\Libraries\SimpleRSSElement;
-use App\Models\ClipsModel;
+use App\Models\ClipModel;
 use App\Models\EpisodeCommentModel;
 use App\Models\MediaModel;
 use App\Models\PersonModel;
 use App\Models\PodcastModel;
 use App\Models\PostModel;
 use CodeIgniter\Entity\Entity;
-use CodeIgniter\Files\File;
 use CodeIgniter\HTTP\Files\UploadedFile;
 use CodeIgniter\I18n\Time;
 use League\CommonMark\CommonMarkConverter;
@@ -181,7 +180,7 @@ class Episode extends Entity
         } else {
             $cover = new Image([
                 'file_name' => $this->attributes['slug'],
-                'file_directory' => 'podcasts/' . $this->attributes['handle'],
+                'file_directory' => 'podcasts/' . $this->getPodcast()->handle,
                 'sizes' => config('Images')
                     ->podcastCoverSizes,
                 'uploaded_by' => user_id(),
@@ -197,9 +196,18 @@ class Episode extends Entity
 
     public function getCover(): Image
     {
-        if (! $this->cover instanceof Image) {
-            $this->cover = (new MediaModel('image'))->getMediaById($this->cover_id);
+        if ($this->cover instanceof Image) {
+            return $this->cover;
         }
+
+        if ($this->cover_id === null) {
+            $this->cover = $this->getPodcast()
+                ->getCover();
+
+            return $this->cover;
+        }
+
+        $this->cover = (new MediaModel('image'))->getMediaById($this->cover_id);
 
         return $this->cover;
     }
@@ -210,22 +218,22 @@ class Episode extends Entity
             return $this;
         }
 
-        if ($this->audio_id !== null) {
+        if ($this->audio_id !== 0) {
             $this->getAudio()
                 ->setFile($file);
             $this->getAudio()
                 ->updated_by = (int) user_id();
             (new MediaModel('audio'))->updateMedia($this->getAudio());
         } else {
-            $transcript = new Audio([
+            $audio = new Audio([
                 'file_name' => $this->attributes['slug'],
-                'file_directory' => 'podcasts/' . $this->attributes['handle'],
+                'file_directory' => 'podcasts/' . $this->getPodcast()->handle,
                 'uploaded_by' => user_id(),
                 'updated_by' => user_id(),
             ]);
-            $transcript->setFile($file);
+            $audio->setFile($file);
 
-            $this->attributes['transcript_id'] = (new MediaModel())->saveMedia($transcript);
+            $this->attributes['audio_id'] = (new MediaModel())->saveMedia($audio);
         }
 
         return $this;
@@ -255,7 +263,7 @@ class Episode extends Entity
         } else {
             $transcript = new Transcript([
                 'file_name' => $this->attributes['slug'] . '-transcript',
-                'file_directory' => 'podcasts/' . $this->attributes['handle'],
+                'file_directory' => 'podcasts/' . $this->getPodcast()->handle,
                 'uploaded_by' => user_id(),
                 'updated_by' => user_id(),
             ]);
@@ -291,7 +299,7 @@ class Episode extends Entity
         } else {
             $chapters = new Chapters([
                 'file_name' => $this->attributes['slug'] . '-chapters',
-                'file_directory' => 'podcasts/' . $this->attributes['handle'],
+                'file_directory' => 'podcasts/' . $this->getPodcast()->handle,
                 'uploaded_by' => user_id(),
                 'updated_by' => user_id(),
             ]);
@@ -306,7 +314,7 @@ class Episode extends Entity
     public function getChapters(): ?Chapters
     {
         if ($this->chapters_id !== null && $this->chapters === null) {
-            $this->chapters = (new MediaModel('document'))->getMediaById($this->chapters_id);
+            $this->chapters = (new MediaModel('chapters'))->getMediaById($this->chapters_id);
         }
 
         return $this->chapters;
@@ -324,7 +332,7 @@ class Episode extends Entity
         helper('analytics');
 
         // remove 'podcasts/' from audio file path
-        $strippedAudioFilePath = substr($this->audio->file_path, 9);
+        $strippedAudioFilePath = substr($this->getAudio()->file_path, 9);
 
         return generate_episode_analytics_url(
             $this->podcast_id,
@@ -400,7 +408,7 @@ class Episode extends Entity
         }
 
         if ($this->clips === null) {
-            $this->clips = (new ClipsModel())->getEpisodeClips($this->getPodcast() ->id, $this->id);
+            $this->clips = (new ClipModel())->getEpisodeClips($this->getPodcast() ->id, $this->id);
         }
 
         return $this->clips;

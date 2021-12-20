@@ -128,8 +128,10 @@ class MediaModel extends Model
         return $this->update($media->id, $media);
     }
 
-    public function deleteMedia(int $mediaId): bool
+    public function deleteMedia(object $media): bool
     {
-        return $this->delete($mediaId, true);
+        $media->deleteFile();
+
+        return $this->delete($media->id, true);
     }
 }

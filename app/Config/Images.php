@@ -126,6 +126,10 @@ class Images extends BaseConfig
         ],
     ];
 
+    public string $avatarDefaultPath = 'castopod-avatar-default.jpg';
+
+    public string $avatarDefaultMimeType = 'image/jpg';
+
     public string $podcastBannerDefaultPath = 'castopod-banner-default.jpg';
 
     public string $podcastBannerDefaultMimeType = 'image/jpeg';

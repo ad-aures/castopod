@@ -70,9 +70,7 @@ class Image extends BaseMedia
 
     public function deleteFile(): void
     {
-        helper('media');
-
-        unlink(media_path($this->file_path));
+        parent::deleteFile();
 
         $this->deleteSizes();
     }

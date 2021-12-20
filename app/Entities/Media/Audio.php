@@ -39,12 +39,13 @@ class Audio extends BaseMedia
         parent::setFile($file);
 
         $getID3 = new GetID3();
-        $audioMetadata = $getID3->analyze((string) $file);
+        $audioMetadata = $getID3->analyze(media_path($this->file_path));
 
-        $this->attributes['file_mimetype'] = $audioMetadata['mimetype'];
+        $this->attributes['file_mimetype'] = $audioMetadata['mime_type'];
         $this->attributes['file_size'] = $audioMetadata['filesize'];
-        $this->attributes['description'] = $audioMetadata['comments']['comment'];
-        $this->attributes['file_metadata'] = $audioMetadata;
+        // @phpstan-ignore-next-line
+        $this->attributes['description'] = @$audioMetadata['id3v2']['comments']['comment'];
+        $this->attributes['file_metadata'] = json_encode($audioMetadata);
 
         return $this;
     }

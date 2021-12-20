@@ -192,6 +192,9 @@ class PodcastController extends BaseController
             $partnerImageUrl = null;
         }
 
+        $db = db_connect();
+        $db->transStart();
+
         $newPodcast = new Podcast([
             'title' => $this->request->getPost('title'),
             'handle' => $this->request->getPost('handle'),
@@ -225,9 +228,6 @@ class PodcastController extends BaseController
             'created_by' => user_id(),
             'updated_by' => user_id(),
         ]);
-
-        $db = db_connect();
-        $db->transStart();
 
         $podcastModel = new PodcastModel();
         if (! ($newPodcastId = $podcastModel->insert($newPodcast, true))) {
@@ -363,10 +363,8 @@ class PodcastController extends BaseController
             return redirect()->back();
         }
 
-        $this->podcast->banner->deleteFile();
-
         $mediaModel = new MediaModel();
-        if (! $mediaModel->deleteMedia((int) $this->podcast->banner_id)) {
+        if (! $mediaModel->deleteMedia($this->podcast->banner)) {
             return redirect()
                 ->back()
                 ->withInput()

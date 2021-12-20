@@ -267,7 +267,7 @@ if (! function_exists('get_rss_feed')) {
                 $transcriptElement->addAttribute('language', $podcast->language_code);
             }
 
-            if ($episode->chapters->file_url !== '') {
+            if ($episode->getChapters() !== null) {
                 $chaptersElement = $item->addChild('chapters', null, $podcastNamespace);
                 $chaptersElement->addAttribute('url', $episode->chapters->file_url);
                 $chaptersElement->addAttribute('type', 'application/json+chapters');

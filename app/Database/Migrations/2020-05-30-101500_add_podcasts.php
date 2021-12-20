@@ -54,7 +54,6 @@ class AddPodcasts extends Migration
                 'type' => 'INT',
                 'unsigned' => true,
                 'null' => true,
-                'default' => null,
             ],
             'language_code' => [
                 'type' => 'VARCHAR',
@@ -69,7 +68,6 @@ class AddPodcasts extends Migration
                 'type' => 'ENUM',
                 'constraint' => ['clean', 'explicit'],
                 'null' => true,
-                'default' => null,
             ],
             'owner_name' => [
                 'type' => 'VARCHAR',

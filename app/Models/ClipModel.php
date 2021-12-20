@@ -16,7 +16,7 @@ use App\Entities\Clip;
 use CodeIgniter\Database\BaseResult;
 use CodeIgniter\Model;
 
-class ClipsModel extends Model
+class ClipModel extends Model
 {
     /**
      * @var string

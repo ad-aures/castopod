@@ -76,23 +76,28 @@ class PersonController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
+        $db = db_connect();
+        $db->transStart();
+
         $person = new Person([
-            'avatar' => $this->request->getFile('avatar'),
             'full_name' => $this->request->getPost('full_name'),
             'unique_name' => $this->request->getPost('unique_name'),
             'information_url' => $this->request->getPost('information_url'),
+            'avatar' => $this->request->getFile('avatar'),
             'created_by' => user_id(),
             'updated_by' => user_id(),
         ]);
 
         $personModel = new PersonModel();
-
         if (! $personModel->insert($person)) {
+            $db->transRollback();
             return redirect()
                 ->back()
                 ->withInput()
                 ->with('errors', $personModel->errors());
         }
+
+        $db->transComplete();
 
         return redirect()->route('person-list');
     }
@@ -128,11 +133,7 @@ class PersonController extends BaseController
         $this->person->full_name = $this->request->getPost('full_name');
         $this->person->unique_name = $this->request->getPost('unique_name');
         $this->person->information_url = $this->request->getPost('information_url');
-
-        $avatarFile = $this->request->getFile('avatar');
-        if ($avatarFile !== null && $avatarFile->isValid()) {
-            $this->person->avatar = new Image($avatarFile);
-        }
+        $this->person->setAvatar($this->request->getFile('avatar'));
 
         $this->person->updated_by = user_id();
 

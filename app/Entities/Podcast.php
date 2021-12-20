@@ -19,6 +19,7 @@ use App\Models\PersonModel;
 use App\Models\PlatformModel;
 use App\Models\UserModel;
 use CodeIgniter\Entity\Entity;
+use CodeIgniter\Files\File;
 use CodeIgniter\HTTP\Files\UploadedFile;
 use CodeIgniter\I18n\Time;
 use League\CommonMark\CommonMarkConverter;
@@ -194,9 +195,9 @@ class Podcast extends Entity
         return $this->actor;
     }
 
-    public function setCover(?UploadedFile $file = null): self
+    public function setCover(UploadedFile | File $file = null): self
     {
-        if ($file === null || ! $file->isValid()) {
+        if ($file === null || ($file instanceof UploadedFile && ! $file->isValid())) {
             return $this;
         }
 
@@ -232,9 +233,9 @@ class Podcast extends Entity
         return $this->cover;
     }
 
-    public function setBanner(?UploadedFile $file): self
+    public function setBanner(UploadedFile | File $file = null): self
     {
-        if ($file === null || ! $file->isValid()) {
+        if ($file === null || ($file instanceof UploadedFile && ! $file->isValid())) {
             return $this;
         }
 

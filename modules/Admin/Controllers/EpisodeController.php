@@ -15,9 +15,10 @@ use App\Entities\EpisodeComment;
 use App\Entities\Location;
 use App\Entities\Podcast;
 use App\Entities\Post;
-use App\Models\ClipsModel;
+use App\Models\ClipModel;
 use App\Models\EpisodeCommentModel;
 use App\Models\EpisodeModel;
+use App\Models\MediaModel;
 use App\Models\PodcastModel;
 use App\Models\PostModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
@@ -125,6 +126,9 @@ class EpisodeController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
+        $db = db_connect();
+        $db->transStart();
+
         $newEpisode = new Episode([
             'podcast_id' => $this->podcast->id,
             'title' => $this->request->getPost('title'),
@@ -143,10 +147,10 @@ class EpisodeController extends BaseController
                     ? $this->request->getPost('parental_advisory')
                     : null,
             'number' => $this->request->getPost('episode_number')
-                ? $this->request->getPost('episode_number')
+                ? (int) $this->request->getPost('episode_number')
                 : null,
             'season_number' => $this->request->getPost('season_number')
-                ? $this->request->getPost('season_number')
+                ? (int) $this->request->getPost('season_number')
                 : null,
             'type' => $this->request->getPost('type'),
             'is_blocked' => $this->request->getPost('block') === 'yes',
@@ -155,9 +159,6 @@ class EpisodeController extends BaseController
             'updated_by' => user_id(),
             'published_at' => null,
         ]);
-
-        $db = db_connect();
-        $db->transStart();
 
         $transcriptChoice = $this->request->getPost('transcript-choice');
         if ($transcriptChoice === 'upload-file') {
@@ -178,8 +179,8 @@ class EpisodeController extends BaseController
         }
 
         $episodeModel = new EpisodeModel();
-
         if (! ($newEpisodeId = $episodeModel->insert($newEpisode, true))) {
+            $db->transRollback();
             return redirect()
                 ->back()
                 ->withInput()
@@ -195,12 +196,15 @@ class EpisodeController extends BaseController
             $podcastModel = new PodcastModel();
 
             if (! $podcastModel->update($this->podcast->id, $this->podcast)) {
+                $db->transRollback();
                 return redirect()
                     ->back()
                     ->withInput()
                     ->with('errors', $podcastModel->errors());
             }
         }
+
+        $db->transComplete();
 
         return redirect()->route('episode-view', [$this->podcast->id, $newEpisodeId]);
     }
@@ -268,36 +272,34 @@ class EpisodeController extends BaseController
         if ($transcriptChoice === 'upload-file') {
             $transcriptFile = $this->request->getFile('transcript_file');
             if ($transcriptFile !== null && $transcriptFile->isValid()) {
-                $this->episode->transcript_file = $transcriptFile;
+                $this->episode->setTranscript($transcriptFile);
                 $this->episode->transcript_remote_url = null;
             }
         } elseif ($transcriptChoice === 'remote-url') {
             if (
-                ($transcriptFileRemoteUrl = $this->request->getPost('transcript_remote_url')) &&
-                (($transcriptFile = $this->episode->transcript_file) !== null)
+                ($transcriptRemoteUrl = $this->request->getPost('transcript_remote_url')) &&
+                (($transcriptFile = $this->episode->transcript_id) !== null)
             ) {
-                unlink((string) $transcriptFile);
-                $this->episode->transcript->file_path = null;
+                (new MediaModel())->deleteMedia($this->episode->transcript);
             }
-            $this->episode->transcript_remote_url = $transcriptFileRemoteUrl === '' ? null : $transcriptFileRemoteUrl;
+            $this->episode->transcript_remote_url = $transcriptRemoteUrl === '' ? null : $transcriptRemoteUrl;
         }
 
         $chaptersChoice = $this->request->getPost('chapters-choice');
         if ($chaptersChoice === 'upload-file') {
             $chaptersFile = $this->request->getFile('chapters_file');
             if ($chaptersFile !== null && $chaptersFile->isValid()) {
-                $this->episode->chapters = $chaptersFile;
+                $this->episode->setChapters($chaptersFile);
                 $this->episode->chapters_remote_url = null;
             }
         } elseif ($chaptersChoice === 'remote-url') {
             if (
-                ($chaptersFileRemoteUrl = $this->request->getPost('chapters_remote_url')) &&
-                (($chaptersFile = $this->episode->chapters_file) !== null)
+                ($chaptersRemoteUrl = $this->request->getPost('chapters_remote_url')) &&
+                (($chaptersFile = $this->episode->chapters) !== null)
             ) {
-                unlink((string) $chaptersFile);
-                $this->episode->chapters->file_path = null;
+                (new MediaModel())->deleteMedia($this->episode->chapters);
             }
-            $this->episode->chapters_remote_url = $chaptersFileRemoteUrl === '' ? null : $chaptersFileRemoteUrl;
+            $this->episode->chapters_remote_url = $chaptersRemoteUrl === '' ? null : $chaptersRemoteUrl;
         }
 
         $db = db_connect();
@@ -338,16 +340,12 @@ class EpisodeController extends BaseController
 
     public function transcriptDelete(): RedirectResponse
     {
-        unlink((string) $this->episode->transcript_file);
-        $this->episode->transcript->file_path = null;
-
-        $episodeModel = new EpisodeModel();
-
-        if (! $episodeModel->update($this->episode->id, $this->episode)) {
+        $mediaModel = new MediaModel();
+        if (! $mediaModel->deleteMedia($this->episode->transcript)) {
             return redirect()
                 ->back()
                 ->withInput()
-                ->with('errors', $episodeModel->errors());
+                ->with('errors', $mediaModel->errors());
         }
 
         return redirect()->back();
@@ -355,16 +353,12 @@ class EpisodeController extends BaseController
 
     public function chaptersDelete(): RedirectResponse
     {
-        unlink((string) $this->episode->chapters_file);
-        $this->episode->chapters->file_path = null;
-
-        $episodeModel = new EpisodeModel();
-
-        if (! $episodeModel->update($this->episode->id, $this->episode)) {
+        $mediaModel = new MediaModel();
+        if (! $mediaModel->deleteMedia($this->episode->chapters)) {
             return redirect()
                 ->back()
                 ->withInput()
-                ->with('errors', $episodeModel->errors());
+                ->with('errors', $mediaModel->errors());
         }
 
         return redirect()->back();
@@ -797,7 +791,7 @@ class EpisodeController extends BaseController
 
     public function soundbiteDelete(string $clipId): RedirectResponse
     {
-        (new ClipsModel())->deleteClip($this->podcast->id, $this->episode->id, (int) $clipId);
+        (new ClipModel())->deleteClip($this->podcast->id, $this->episode->id, (int) $clipId);
 
         return redirect()->route('clips-edit', [$this->podcast->id, $this->episode->id]);
     }

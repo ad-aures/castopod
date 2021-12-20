@@ -20,11 +20,12 @@ use CodeIgniter\Files\File;
  * @property string $file_directory
  * @property string $file_extension
  * @property string $file_name
+ * @property string $file_name_with_extension
  * @property int $file_size
  * @property string $file_mimetype
- * @property array $file_metadata
+ * @property array|null $file_metadata
  * @property 'image'|'audio'|'video'|'document' $type
- * @property string $description
+ * @property string|null $description
  * @property string|null $language_code
  * @property int $uploaded_by
  * @property int $updated_by
@@ -32,8 +33,6 @@ use CodeIgniter\Files\File;
 class BaseMedia extends Entity
 {
     protected File $file;
-
-    protected string $type = 'document';
 
     /**
      * @var string[]
@@ -49,9 +48,9 @@ class BaseMedia extends Entity
         'file_path' => 'string',
         'file_size' => 'int',
         'file_mimetype' => 'string',
-        'file_metadata' => 'json-array',
+        'file_metadata' => '?json-array',
         'type' => 'string',
-        'description' => 'string',
+        'description' => '?string',
         'language_code' => '?string',
         'uploaded_by' => 'integer',
         'updated_by' => 'integer',
@@ -81,6 +80,7 @@ class BaseMedia extends Entity
             $this->attributes['file_name'] = $filename;
             $this->attributes['file_directory'] = $dirname;
             $this->attributes['file_extension'] = $extension;
+            $this->attributes['file_name_with_extension'] = "{$filename}.{$extension}";
         }
     }
 
@@ -100,5 +100,11 @@ class BaseMedia extends Entity
         }
 
         return $this;
+    }
+
+    public function deleteFile(): void
+    {
+        helper('media');
+        unlink(media_path($this->file_path));
     }
 }

@@ -161,12 +161,12 @@
 
     <div class="py-2 tab-panels">
         <section id="transcript-file-upload" class="flex items-center tab-panel">
-            <?php if ($episode->transcript_file) : ?>
+            <?php if ($episode->transcript) : ?>
                 <div class="flex mb-1 gap-x-2">
                     <?= anchor(
                 $episode->transcript->file_url,
                 icon('file', 'mr-2 text-skin-muted') .
-                            $episode->transcript_file,
+                            $episode->transcript->file_name_with_extension,
                 [
                     'class' => 'inline-flex items-center text-xs',
                     'target' => '_blank',
@@ -218,33 +218,33 @@
 
     <div class="py-2 tab-panels">
         <section id="chapters-file-upload" class="flex items-center tab-panel">
-            <?php if ($episode->chapters_file) : ?>
+            <?php if ($episode->chapters) : ?>
                 <div class="flex mb-1 gap-x-2">
                     <?= anchor(
                 $episode->chapters->file_url,
-                icon('file', 'mr-2') . $episode->chapters_file,
+                icon('file', 'mr-2') . $episode->chapters->file_name_with_extension,
                 [
                     'class' => 'inline-flex items-center text-xs',
                     'target' => '_blank',
                     'rel' => 'noreferrer noopener',
                 ],
             ) .
-                        anchor(
-                            route_to(
-                                'chapters-delete',
-                                $podcast->id,
-                                $episode->id,
+                    anchor(
+                        route_to(
+                            'chapters-delete',
+                            $podcast->id,
+                            $episode->id,
+                        ),
+                        icon('delete-bin', 'mx-auto'),
+                        [
+                            'class' =>
+                            'text-sm p-1 bg-red-100 rounded-full text-red-700 hover:text-red-900 focus:ring-accent',
+                            'data-tooltip' => 'bottom',
+                            'title' => lang(
+                                'Episode.form.chapters_file_delete',
                             ),
-                            icon('delete-bin', 'mx-auto'),
-                            [
-                                'class' =>
-                                'text-sm p-1 bg-red-100 rounded-full text-red-700 hover:text-red-900 focus:ring-accent',
-                                'data-tooltip' => 'bottom',
-                                'title' => lang(
-                                    'Episode.form.chapters_file_delete',
-                                ),
-                            ],
-                        ) ?>
+                        ],
+                    ) ?>
                 </div>
             <?php endif; ?>
             <Forms.Label class="sr-only" for="chapters_file" isOptional="true"><?= lang('Episode.form.chapters_file') ?></Forms.Label>
