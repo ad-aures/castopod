@@ -33,6 +33,23 @@ class MediaModel extends Model
     protected $returnType = Document::class;
 
     /**
+     * @var bool
+     */
+    protected $useSoftDeletes = true;
+
+    /**
+     * @var bool
+     */
+    protected $useTimestamps = true;
+
+    /**
+     * The column used for insert timestamps
+     *
+     * @var string
+     */
+    protected $createdField = 'uploaded_at';
+
+    /**
      * @var string[]
      */
     protected $allowedFields = [

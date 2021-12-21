@@ -345,7 +345,7 @@ class PodcastImportController extends BaseController
                 'title' => $item->title,
                 'slug' => $slug,
                 'guid' => $item->guid ?? null,
-                'audio_file' => download_file(
+                'audio' => download_file(
                     (string) $item->enclosure->attributes()['url'],
                     (string) $item->enclosure->attributes()['type']
                 ),

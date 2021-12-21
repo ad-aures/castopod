@@ -54,13 +54,20 @@ class Image extends BaseMedia
     {
         parent::setFile($file);
 
-        $metadata = exif_read_data(media_path($this->file_path), null, true);
-
-        if ($metadata) {
+        if ($this->file_mimetype === 'image/jpeg' && $metadata = exif_read_data(
+            media_path($this->file_path),
+            null,
+            true
+        )) {
             $metadata['sizes'] = $this->sizes;
             $this->attributes['file_size'] = $metadata['FILE']['FileSize'];
-            $this->attributes['file_metadata'] = json_encode($metadata);
+        } else {
+            $metadata = [
+                'sizes' => $this->sizes,
+            ];
         }
+
+        $this->attributes['file_metadata'] = json_encode($metadata);
 
         $this->initFileProperties();
         $this->saveSizes();

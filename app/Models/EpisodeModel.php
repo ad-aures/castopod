@@ -55,11 +55,6 @@ class EpisodeModel extends Model
     protected $table = 'episodes';
 
     /**
-     * @var string
-     */
-    protected $primaryKey = 'id';
-
-    /**
      * @var string[]
      */
     protected $allowedFields = [

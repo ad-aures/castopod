@@ -51,6 +51,7 @@ class AddMedia extends Migration
             'language_code' => [
                 'type' => 'VARCHAR',
                 'constraint' => 2,
+                'null' => true,
             ],
             'uploaded_by' => [
                 'type' => 'INT',

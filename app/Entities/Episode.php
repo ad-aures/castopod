@@ -22,6 +22,7 @@ use App\Models\PersonModel;
 use App\Models\PodcastModel;
 use App\Models\PostModel;
 use CodeIgniter\Entity\Entity;
+use CodeIgniter\Files\File;
 use CodeIgniter\HTTP\Files\UploadedFile;
 use CodeIgniter\I18n\Time;
 use League\CommonMark\CommonMarkConverter;
@@ -165,9 +166,9 @@ class Episode extends Entity
         'updated_by' => 'integer',
     ];
 
-    public function setCover(?UploadedFile $file): self
+    public function setCover(UploadedFile | File $file = null): self
     {
-        if ($file === null || ! $file->isValid()) {
+        if ($file === null || ($file instanceof UploadedFile && ! $file->isValid())) {
             return $this;
         }
 
@@ -212,9 +213,9 @@ class Episode extends Entity
         return $this->cover;
     }
 
-    public function setAudio(?UploadedFile $file): self
+    public function setAudio(UploadedFile | File $file = null): self
     {
-        if ($file === null || ! $file->isValid()) {
+        if ($file === null || ($file instanceof UploadedFile && ! $file->isValid())) {
             return $this;
         }
 
@@ -228,6 +229,8 @@ class Episode extends Entity
             $audio = new Audio([
                 'file_name' => $this->attributes['slug'],
                 'file_directory' => 'podcasts/' . $this->getPodcast()->handle,
+                'language_code' => $this->getPodcast()
+                    ->language_code,
                 'uploaded_by' => user_id(),
                 'updated_by' => user_id(),
             ]);
@@ -248,9 +251,9 @@ class Episode extends Entity
         return $this->audio;
     }
 
-    public function setTranscript(?UploadedFile $file): self
+    public function setTranscript(UploadedFile | File $file = null): self
     {
-        if ($file === null || ! $file->isValid()) {
+        if ($file === null || ($file instanceof UploadedFile && ! $file->isValid())) {
             return $this;
         }
 
@@ -264,6 +267,8 @@ class Episode extends Entity
             $transcript = new Transcript([
                 'file_name' => $this->attributes['slug'] . '-transcript',
                 'file_directory' => 'podcasts/' . $this->getPodcast()->handle,
+                'language_code' => $this->getPodcast()
+                    ->language_code,
                 'uploaded_by' => user_id(),
                 'updated_by' => user_id(),
             ]);
@@ -284,9 +289,9 @@ class Episode extends Entity
         return $this->transcript;
     }
 
-    public function setChapters(?UploadedFile $file): self
+    public function setChapters(UploadedFile | File $file = null): self
     {
-        if ($file === null || ! $file->isValid()) {
+        if ($file === null || ($file instanceof UploadedFile && ! $file->isValid())) {
             return $this;
         }
 
@@ -300,6 +305,8 @@ class Episode extends Entity
             $chapters = new Chapters([
                 'file_name' => $this->attributes['slug'] . '-chapters',
                 'file_directory' => 'podcasts/' . $this->getPodcast()->handle,
+                'language_code' => $this->getPodcast()
+                    ->language_code,
                 'uploaded_by' => user_id(),
                 'updated_by' => user_id(),
             ]);

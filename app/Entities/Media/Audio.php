@@ -44,8 +44,8 @@ class Audio extends BaseMedia
         $this->attributes['file_mimetype'] = $audioMetadata['mime_type'];
         $this->attributes['file_size'] = $audioMetadata['filesize'];
         // @phpstan-ignore-next-line
-        $this->attributes['description'] = @$audioMetadata['id3v2']['comments']['comment'];
-        $this->attributes['file_metadata'] = json_encode($audioMetadata);
+        $this->attributes['description'] = @$audioMetadata['id3v2']['comments']['comment'][0];
+        $this->attributes['file_metadata'] = json_encode($audioMetadata, JSON_INVALID_UTF8_SUBSTITUTE);
 
         return $this;
     }
