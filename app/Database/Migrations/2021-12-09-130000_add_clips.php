@@ -51,10 +51,15 @@ class AddClips extends Migration
             'media_id' => [
                 'type' => 'INT',
                 'unsigned' => true,
+                'null' => true,
+            ],
+            'metadata' => [
+                'type' => 'JSON',
+                'null' => true,
             ],
             'status' => [
                 'type' => 'ENUM',
-                'constraint' => ['queued', 'pending', 'generating', 'passed', 'failed'],
+                'constraint' => ['queued', 'pending', 'running', 'passed', 'failed'],
             ],
             'logs' => [
                 'type' => 'TEXT',

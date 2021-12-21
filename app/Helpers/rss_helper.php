@@ -273,11 +273,11 @@ if (! function_exists('get_rss_feed')) {
                 $chaptersElement->addAttribute('type', 'application/json+chapters');
             }
 
-            foreach ($episode->clips as $clip) {
+            foreach ($episode->soundbites as $soundbite) {
                 // TODO: differentiate video from soundbites?
-                $soundbiteElement = $item->addChild('soundbite', $clip->label, $podcastNamespace);
-                $soundbiteElement->addAttribute('start_time', (string) $clip->start_time);
-                $soundbiteElement->addAttribute('duration', (string) $clip->duration);
+                $soundbiteElement = $item->addChild('soundbite', $soundbite->label, $podcastNamespace);
+                $soundbiteElement->addAttribute('start_time', (string) $soundbite->start_time);
+                $soundbiteElement->addAttribute('duration', (string) $soundbite->duration);
             }
 
             foreach ($episode->persons as $person) {

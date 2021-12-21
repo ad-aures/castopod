@@ -18,7 +18,7 @@ use GdImage;
  *
  * @phpstan-ignore-next-line
  */
-class VideoClip
+class VideoClipper
 {
     /**
      * @var array<string, string>
@@ -107,7 +107,7 @@ class VideoClip
         }
     }
 
-    public function generate(): void
+    public function generate(): string
     {
         $this->soundbite();
         $this->subtitlesClip();
@@ -119,7 +119,7 @@ class VideoClip
 
         $generateCmd = $this->getCmd();
 
-        shell_exec($generateCmd);
+        return shell_exec($generateCmd . ' 2>&1');
     }
 
     public function getCmd(): string

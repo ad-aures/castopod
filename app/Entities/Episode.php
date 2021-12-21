@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace App\Entities;
 
+use App\Entities\Clip\BaseClip;
 use App\Entities\Media\Audio;
 use App\Entities\Media\Chapters;
 use App\Entities\Media\Image;
@@ -74,7 +75,7 @@ use RuntimeException;
  * @property Time|null $deleted_at;
  *
  * @property Person[] $persons;
- * @property Clip[] $clips;
+ * @property Soundbites[] $soundbites;
  * @property string $embed_url;
  */
 class Episode extends Entity
@@ -109,9 +110,9 @@ class Episode extends Entity
     protected ?array $persons = null;
 
     /**
-     * @var Clip[]|null
+     * @var Soundbites[]|null
      */
-    protected ?array $clips = null;
+    protected ?array $soundbites = null;
 
     /**
      * @var Post[]|null
@@ -406,19 +407,19 @@ class Episode extends Entity
     /**
      * Returns the episode’s clips
      *
-     * @return Clip[]
+     * @return BaseClip[]|\App\Entities\Soundbites[]
      */
-    public function getClips(): array
+    public function getSoundbites(): array
     {
         if ($this->id === null) {
-            throw new RuntimeException('Episode must be created before getting clips.');
+            throw new RuntimeException('Episode must be created before getting soundbites.');
         }
 
-        if ($this->clips === null) {
-            $this->clips = (new ClipModel())->getEpisodeClips($this->getPodcast() ->id, $this->id);
+        if ($this->soundbites === null) {
+            $this->soundbites = (new ClipModel())->getEpisodeSoundbites($this->getPodcast()->id, $this->id);
         }
 
-        return $this->clips;
+        return $this->soundbites;
     }
 
     /**
