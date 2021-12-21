@@ -108,7 +108,7 @@ class EpisodeModel extends Model
     protected $validationRules = [
         'podcast_id' => 'required',
         'title' => 'required',
-        'slug' => 'required|regex_match[/^[a-zA-Z0-9\-]{1,191}$/]',
+        'slug' => 'required|regex_match[/^[a-zA-Z0-9\-]{1,128}$/]',
         'audio_id' => 'required',
         'description_markdown' => 'required',
         'number' => 'is_natural_no_zero|permit_empty',

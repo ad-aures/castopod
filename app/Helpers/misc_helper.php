@@ -23,7 +23,7 @@ if (! function_exists('get_browser_language')) {
 }
 
 if (! function_exists('slugify')) {
-    function slugify(string $text, int $maxLength = 191): string
+    function slugify(string $text, int $maxLength = 128): string
     {
         // trim text to the nearest whole word if too long
         if (strlen($text) > $maxLength) {

@@ -306,7 +306,7 @@ class PodcastImportController extends BaseController
             $textToSlugify = $this->request->getPost('slug_field') === 'title'
             ? (string) $item->title
             : basename((string) $item->link);
-            $slug = slugify($textToSlugify, 185);
+            $slug = slugify($textToSlugify, 120);
             if (in_array($slug, $slugs, true)) {
                 $slugNumber = 2;
                 while (in_array($slug . '-' . $slugNumber, $slugs, true)) {

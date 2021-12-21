@@ -26,7 +26,7 @@ class AddAnalyticsUnknownUseragents extends Migration
             ],
             'useragent' => [
                 'type' => 'VARCHAR',
-                'constraint' => 191,
+                'constraint' => 255,
                 'unique' => true,
             ],
             'hits' => [

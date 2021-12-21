@@ -51,7 +51,7 @@ class PageModel extends Model
     protected $validationRules = [
         'title' => 'required',
         'slug' =>
-            'required|regex_match[/^[a-zA-Z0-9\-]{1,191}$/]|is_unique[pages.slug,id,{id}]',
+            'required|regex_match[/^[a-zA-Z0-9\-]{1,128}$/]|is_unique[pages.slug,id,{id}]',
         'content_markdown' => 'required',
     ];
 
