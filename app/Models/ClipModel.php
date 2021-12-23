@@ -114,6 +114,26 @@ class ClipModel extends Model
         return $found;
     }
 
+    public function getVideoClipById(int $videoClipId): ?VideoClip
+    {
+        $cacheName = "video-clip#{$videoClipId}";
+        if (! ($found = cache($cacheName))) {
+            $clip = $this->find($videoClipId);
+
+            if ($clip === null) {
+                return null;
+            }
+
+            // @phpstan-ignore-next-line
+            $found = new VideoClip($clip->toArray());
+
+            cache()
+                ->save($cacheName, $found, DECADE);
+        }
+
+        return $found;
+    }
+
     /**
      * Gets all video clips for an episode
      *

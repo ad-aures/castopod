@@ -12,6 +12,7 @@ namespace App\Entities\Clip;
 
 use App\Entities\Episode;
 use App\Entities\Media\Audio;
+use App\Entities\Media\BaseMedia;
 use App\Entities\Media\Video;
 use App\Entities\Podcast;
 use App\Models\EpisodeModel;
@@ -44,6 +45,11 @@ use Modules\Auth\Entities\User;
  */
 class BaseClip extends Entity
 {
+    /**
+     * @var BaseMedia
+     */
+    protected $media = null;
+
     /**
      * @var array<string, string>
      */
@@ -122,12 +128,16 @@ class BaseClip extends Entity
         return $this;
     }
 
-    public function getMedia(): Audio | Video
+    /**
+     * @noRector ReturnTypeDeclarationRector
+     */
+    public function getMedia(): Audio | Video | null
     {
         if ($this->media_id !== null && $this->media === null) {
             $this->media = (new MediaModel($this->type))->getMediaById($this->media_id);
         }
 
+        // @phpstan-ignore-next-line
         return $this->media;
     }
 }

@@ -35,7 +35,9 @@ class VideoClipper
 
     public bool $error = false;
 
-    public string $videoClipOutput;
+    public string $videoClipFilePath;
+
+    protected string $videoClipOutput;
 
     protected float $duration;
 
@@ -95,6 +97,7 @@ class VideoClipper
         $this->subtitlesClipOutput = $podcastFolder . "/{$this->episode->slug}-subtitles-clip-{$this->start}-to-{$this->end}.srt";
         $this->videoClipBgOutput = $podcastFolder . "/{$this->episode->slug}-clip-bg-{$this->format}-{$this->theme}.png";
         $this->videoClipOutput = $podcastFolder . "/{$this->episode->slug}-clip-{$this->start}-to-{$this->end}-{$this->format}-{$this->theme}.mp4";
+        $this->videoClipFilePath = "podcasts/{$this->episode->podcast->handle}/{$this->episode->slug}-clip-{$this->start}-to-{$this->end}-{$this->format}-{$this->theme}.mp4";
     }
 
     public function soundbite(): void
@@ -152,6 +155,7 @@ class VideoClipper
             "color=0x{$this->colors['watermarkBg']}:{$this->dimensions['watermark']['width']}x{$this->dimensions['watermark']['height']}[over]",
             '[over][watermark]overlay=x=0:y=0:shortest=1[watermark_box]',
             "[outv][watermark_box]overlay=x={$this->dimensions['watermark']['x']}:y={$this->dimensions['watermark']['y']}:shortest=1[watermarked]",
+            '[watermarked]scale=w=-1:h=-1:out_color_matrix=bt709[outfinal]',
         ];
 
         $watermark = config('MediaClipper')
@@ -167,10 +171,10 @@ class VideoClipper
             "-f lavfi -i color=white:{$this->dimensions['width']}x{$this->dimensions['height']}",
             "-loop 1 -framerate 1 -i {$watermark}",
             '-filter_complex "' . implode(';', $filters) . '"',
-            '-map "[watermarked]"',
+            '-map "[outfinal]"',
             '-map 0:a',
             '-acodec copy',
-            '-vcodec libx264rgb',
+            '-vcodec libx264 -pix_fmt yuv420p',
             "{$this->videoClipOutput}",
         ];
 

@@ -87,6 +87,24 @@ class VideoClipsController extends BaseController
         return view('episode/video_clips_list', $data);
     }
 
+    public function view($videoClipId): string
+    {
+        $videoClip = (new ClipModel())->getVideoClipById((int) $videoClipId);
+
+        $data = [
+            'podcast' => $this->podcast,
+            'episode' => $this->episode,
+            'videoClip' => $videoClip,
+        ];
+
+        replace_breadcrumb_params([
+            0 => $this->podcast->title,
+            1 => $this->episode->title,
+            2 => $videoClip->label,
+        ]);
+        return view('episode/video_clip', $data);
+    }
+
     public function generate(): string
     {
         helper('form');

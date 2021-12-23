@@ -380,6 +380,14 @@ $routes->group(
                             ],
                         );
                         $routes->get(
+                            'video-clips/(:num)',
+                            'VideoClipsController::view/$1/$2/$3',
+                            [
+                                'as' => 'video-clip',
+                                'filter' => 'permission:podcast_episodes-edit',
+                            ],
+                        );
+                        $routes->get(
                             'embed',
                             'EpisodeController::embed/$1/$2',
                             [

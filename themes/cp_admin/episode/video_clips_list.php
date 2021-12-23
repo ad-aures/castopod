@@ -39,17 +39,17 @@
             'header' => lang('VideoClip.list.label'),
             'cell' => function ($videoClip): string {
                 $formatClass = [
-                    'landscape' => 'aspect-video h-4',
-                    'portrait' => 'aspect-[9/16] w-4',
-                    'squared' => 'aspect-square h-6',
+                    'landscape' => 'aspect-video',
+                    'portrait' => 'aspect-[9/16]',
+                    'squared' => 'aspect-square',
                 ];
-                return '<a href="#" class="inline-flex items-center w-full hover:underline gap-x-2"><span class="block w-3 h-3 rounded-full" data-tooltip="bottom" title="' . $videoClip->theme['name'] . '" style="background-color:hsl(' . $videoClip->theme['preview'] . ')"></span><span class="flex items-center justify-center text-white bg-gray-400 rounded-sm ' . $formatClass[$videoClip->format] . '" data-tooltip="bottom" title="' . $videoClip->format . '"><Icon glyph="play"/></span>' . $videoClip->label . '</a>';
+                return '<a href="' . route_to('video-clip', $videoClip->podcast_id, $videoClip->episode_id, $videoClip->id) . '" class="inline-flex items-center font-semibold hover:underline gap-x-2 focus:ring-accent"><div class="relative"><span class="absolute block w-3 h-3 rounded-full -bottom-1 -left-1" data-tooltip="bottom" title="' . $videoClip->theme['name'] . '" style="background-color:hsl(' . $videoClip->theme['preview'] . ')"></span><div class="flex items-center justify-center h-6 overflow-hidden bg-black rounded-sm aspect-video" data-tooltip="bottom" title="' . $videoClip->format . '"><span class="flex items-center justify-center h-full text-white bg-gray-400 ' . $formatClass[$videoClip->format] . '"><Icon glyph="play"/></span></div></div>' . $videoClip->label . '</a>';
             },
         ],
         [
             'header' => lang('VideoClip.list.clip_id'),
             'cell' => function ($videoClip): string {
-                return '#' . $videoClip->id . ' by ' . $videoClip->user->username;
+                return '<a href="' . route_to('video-clip', $videoClip->podcast_id, $videoClip->episode_id, $videoClip->id) . '" class="font-semibold hover:underline focus:ring-accent">#' . $videoClip->id . '</a><span class="ml-1 text-sm">by ' . $videoClip->user->username . '</span>';
             },
         ],
         [

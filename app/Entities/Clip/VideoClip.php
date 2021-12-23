@@ -69,7 +69,8 @@ class VideoClip extends BaseClip
             return $this;
         }
 
-        $file = new File($filePath);
+        helper('media');
+        $file = new File(media_path($filePath));
 
         $video = new Video([
             'file_path' => $filePath,

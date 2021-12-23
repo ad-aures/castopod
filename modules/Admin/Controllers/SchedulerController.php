@@ -53,7 +53,7 @@ class SchedulerController extends Controller
 
             if ($exitCode === 0) {
                 // success, video was generated
-                $scheduledClip->setMedia($clipper->videoClipOutput);
+                $scheduledClip->setMedia($clipper->videoClipFilePath);
                 (new ClipModel())->update($scheduledClip->id, [
                     'media_id' => $scheduledClip->media_id,
                     'status' => 'passed',
