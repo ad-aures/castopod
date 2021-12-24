@@ -1,13 +1,13 @@
 <?= $this->extend('_layout') ?>
 
 <?= $this->section('title') ?>
-<?= lang('Episode.video_clips.title', [
+<?= lang('VideoClip.title', [
     'videoClipLabel' => $videoClip->label,
 ]) ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('pageTitle') ?>
-<?= lang('Episode.video_clips.title', [
+<?= lang('VideoClip.title', [
     'videoClipLabel' => $videoClip->label,
 ]) ?>
 <?= $this->endSection() ?>

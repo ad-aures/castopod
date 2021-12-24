@@ -15,6 +15,7 @@ use App\Entities\Episode;
 use App\Entities\Podcast;
 use App\Models\ClipModel;
 use App\Models\EpisodeModel;
+use App\Models\MediaModel;
 use App\Models\PodcastModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
@@ -105,7 +106,7 @@ class VideoClipsController extends BaseController
         return view('episode/video_clip', $data);
     }
 
-    public function generate(): string
+    public function create(): string
     {
         helper('form');
 
@@ -121,12 +122,12 @@ class VideoClipsController extends BaseController
         return view('episode/video_clips_new', $data);
     }
 
-    public function attemptGenerate(): RedirectResponse
+    public function attemptCreate(): RedirectResponse
     {
-        // TODO: add end_time greater than start_time, with minimum ?
         $rules = [
+            'label' => 'required',
             'start_time' => 'required|numeric',
-            'end_time' => 'required|numeric|differs[start_time]',
+            'duration' => 'required|greater_than[0]',
             'format' => 'required|in_list[' . implode(',', array_keys(config('MediaClipper')->formats)) . ']',
             'theme' => 'required|in_list[' . implode(',', array_keys(config('Colors')->themes)) . ']',
         ];
@@ -147,9 +148,9 @@ class VideoClipsController extends BaseController
         ];
 
         $videoClip = new VideoClip([
-            'label' => 'NEW CLIP',
+            'label' => $this->request->getPost('label'),
             'start_time' => (float) $this->request->getPost('start_time'),
-            'end_time' => (float) $this->request->getPost('end_time',),
+            'duration' => (float) $this->request->getPost('duration',),
             'theme' => $theme,
             'format' => $this->request->getPost('format'),
             'type' => 'video',
@@ -162,9 +163,33 @@ class VideoClipsController extends BaseController
 
         (new ClipModel())->insert($videoClip);
 
-        return redirect()->route('video-clips-generate', [$this->podcast->id, $this->episode->id])->with(
+        return redirect()->route('video-clips-list', [$this->podcast->id, $this->episode->id])->with(
             'message',
             lang('Settings.images.regenerationSuccess')
         );
+    }
+
+    public function delete(string $videoClipId): RedirectResponse
+    {
+        $videoClip = (new ClipModel())->getVideoClipById((int) $videoClipId);
+
+        if ($videoClip === null) {
+            throw PageNotFoundException::forPageNotFound();
+        }
+
+        if ($videoClip->media === null) {
+            // delete Clip directly
+            (new ClipModel())->delete($videoClipId);
+        } else {
+            $mediaModel = new MediaModel();
+            if (! $mediaModel->deleteMedia($videoClip->media)) {
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->with('errors', $mediaModel->errors());
+            }
+        }
+
+        return redirect()->back();
     }
 }

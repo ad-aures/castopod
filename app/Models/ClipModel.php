@@ -49,6 +49,8 @@ class ClipModel extends Model
         'logs',
         'created_by',
         'updated_by',
+        'job_started_at',
+        'job_ended_at',
     ];
 
     /**

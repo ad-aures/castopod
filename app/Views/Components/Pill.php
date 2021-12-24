@@ -17,6 +17,10 @@ class Pill extends Component
 
     public ?string $icon = null;
 
+    public ?string $iconClass = '';
+
+    protected ?string $hint = null;
+
     public function render(): string
     {
         $variantClasses = [
@@ -27,10 +31,11 @@ class Pill extends Component
             'warning' => 'text-yellow-900 bg-yellow-100 border-yellow-300',
         ];
 
-        $icon = $this->icon ? icon($this->icon) : '';
+        $icon = $this->icon ? icon($this->icon, $this->iconClass) : '';
+        $hint = $this->hint ? 'data-tooltip="bottom" title="' . $this->hint . '"' : '';
 
         return <<<HTML
-            <span class="inline-flex items-center gap-x-1 px-1 font-semibold text-sm border rounded {$variantClasses[$this->variant]}">{$icon}{$this->slot}</span>
+            <span class="inline-flex items-center gap-x-1 px-1 font-semibold text-sm border rounded {$variantClasses[$this->variant]} {$this->class}" {$hint}>{$icon}{$this->slot}</span>
         HTML;
     }
 }

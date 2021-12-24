@@ -15,7 +15,7 @@
     }
 
     & + label {
-      @apply inline-block py-2 pl-8 pr-2 text-sm font-semibold rounded-lg cursor-pointer border-contrast bg-elevated border-3;
+      @apply inline-flex items-center py-2 pl-8 pr-2 text-sm font-semibold rounded-lg cursor-pointer border-contrast bg-elevated border-3;
       color: hsl(var(--color-text-muted));
     }
   }

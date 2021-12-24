@@ -162,7 +162,7 @@
     <div class="py-2 tab-panels">
         <section id="transcript-file-upload" class="flex items-center tab-panel">
             <?php if ($episode->transcript) : ?>
-                <div class="flex mb-1 gap-x-2">
+                <div class="flex items-center mb-1 gap-x-2">
                     <?= anchor(
                 $episode->transcript->file_url,
                 icon('file', 'mr-2 text-skin-muted') .

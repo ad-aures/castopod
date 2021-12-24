@@ -1,1 +1,2 @@
-* * * * * /usr/local/bin/php /castopod/public/index.php scheduled-activities
+* * * * * /usr/local/bin/php /castopod-host/public/index.php scheduled-activities
+* * * * * /usr/local/bin/php /castopod-host/public/index.php scheduled-video-clips

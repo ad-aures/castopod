@@ -365,17 +365,17 @@ $routes->group(
                         );
                         $routes->get(
                             'video-clips/new',
-                            'VideoClipsController::generate/$1/$2',
+                            'VideoClipsController::create/$1/$2',
                             [
-                                'as' => 'video-clips-generate',
+                                'as' => 'video-clips-create',
                                 'filter' => 'permission:podcast_episodes-edit',
                             ],
                         );
                         $routes->post(
                             'video-clips/new',
-                            'VideoClipsController::attemptGenerate/$1/$2',
+                            'VideoClipsController::attemptCreate/$1/$2',
                             [
-                                'as' => 'video-clips-generate',
+                                'as' => 'video-clips-create',
                                 'filter' => 'permission:podcast_episodes-edit',
                             ],
                         );
@@ -384,6 +384,14 @@ $routes->group(
                             'VideoClipsController::view/$1/$2/$3',
                             [
                                 'as' => 'video-clip',
+                                'filter' => 'permission:podcast_episodes-edit',
+                            ],
+                        );
+                        $routes->get(
+                            'video-clips/(:num)/delete',
+                            'VideoClipsController::delete/$1/$2/$3',
+                            [
+                                'as' => 'video-clip-delete',
                                 'filter' => 'permission:podcast_episodes-edit',
                             ],
                         );

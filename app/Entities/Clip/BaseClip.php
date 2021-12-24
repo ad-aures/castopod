@@ -12,7 +12,6 @@ namespace App\Entities\Clip;
 
 use App\Entities\Episode;
 use App\Entities\Media\Audio;
-use App\Entities\Media\BaseMedia;
 use App\Entities\Media\Video;
 use App\Entities\Podcast;
 use App\Models\EpisodeModel;
@@ -21,6 +20,7 @@ use App\Models\PodcastModel;
 use App\Models\UserModel;
 use CodeIgniter\Entity\Entity;
 use CodeIgniter\Files\File;
+use CodeIgniter\I18n\Time;
 use Modules\Auth\Entities\User;
 
 /**
@@ -34,21 +34,32 @@ use Modules\Auth\Entities\User;
  * @property double $end_time
  * @property double $duration
  * @property string $type
- * @property int $media_id
- * @property Video|Audio $media
+ * @property int|null $media_id
+ * @property Video|Audio|null $media
  * @property array|null $metadata
  * @property string $status
  * @property string $logs
  * @property User $user
  * @property int $created_by
  * @property int $updated_by
+ * @property Time|null $job_started_at
+ * @property Time|null $job_ended_at
  */
 class BaseClip extends Entity
 {
     /**
-     * @var BaseMedia
+     * @var Video|Audio|null
      */
-    protected $media = null;
+    protected $media;
+
+    protected ?int $job_duration = null;
+
+    protected ?float $end_time = null;
+
+    /**
+     * @var string[]
+     */
+    protected $dates = ['created_at', 'updated_at', 'job_started_at', 'job_ended_at'];
 
     /**
      * @var array<string, string>
@@ -75,12 +86,25 @@ class BaseClip extends Entity
     public function __construct(array $data = null)
     {
         parent::__construct($data);
+    }
 
-        if ($this->start_time && $this->duration) {
-            $this->end_time = $this->start_time + $this->duration;
-        } elseif ($this->start_time && $this->end_time) {
-            $this->duration = $this->end_time - $this->duration;
+    public function getJobDuration(): ?int
+    {
+        if ($this->job_duration === null && $this->job_started_at && $this->job_ended_at) {
+            $this->job_duration = ($this->job_started_at->difference($this->job_ended_at))
+                ->getSeconds();
         }
+
+        return $this->job_duration;
+    }
+
+    public function getEndTime(): float
+    {
+        if ($this->end_time === null) {
+            $this->end_time = $this->start_time + $this->duration;
+        }
+
+        return $this->end_time;
     }
 
     public function getPodcast(): ?Podcast
@@ -128,16 +152,12 @@ class BaseClip extends Entity
         return $this;
     }
 
-    /**
-     * @noRector ReturnTypeDeclarationRector
-     */
     public function getMedia(): Audio | Video | null
     {
         if ($this->media_id !== null && $this->media === null) {
             $this->media = (new MediaModel($this->type))->getMediaById($this->media_id);
         }
 
-        // @phpstan-ignore-next-line
         return $this->media;
     }
 }

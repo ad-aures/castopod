@@ -1,60 +1,74 @@
 <?= $this->extend('_layout') ?>
 
 <?= $this->section('title') ?>
-<?= lang('Episode.video_clips.title') ?>
+<?= lang('VideoClip.form.title') ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('pageTitle') ?>
-<?= lang('Episode.video_clips.title') ?>
+<?= lang('VideoClip.form.title') ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
 
-<form action="<?= route_to('video-clips-generate', $podcast->id, $episode->id) ?>" method="POST" class="flex flex-col max-w-sm gap-y-4">
+<form action="<?= route_to('video-clips-create', $podcast->id, $episode->id) ?>" method="POST" class="flex flex-col gap-y-4">
 
-<fieldset>
-<legend>Format</legend>
-<div class="mx-auto">
-    <input type="radio" name="format" value="landscape" id="landscape" checked="checked"/>
-    <label for="landscape">Landscape - 16:9</label>
-</div>
-<div class="mx-auto">
-    <input type="radio" name="format" value="portrait" id="portrait"/>
-    <label for="portrait">Portrait - 9:16</label>
-</div>
-<div class="mx-auto">
-    <input type="radio" name="format" value="squared" id="square"/>
-    <label for="square">Square - 1:1</label>
-</div>
+<Forms.Section title="<?= lang('VideoClip.form.params_section_title') ?>" >
+ 
+<Forms.Field
+    name="label"
+    label="<?= lang('VideoClip.form.clip_title') ?>"
+    required="true"
+/>
+
+<fieldset class="flex gap-1">
+<legend><?= lang('VideoClip.form.format.label') ?></legend>
+<Forms.RadioButton
+    value="landscape"
+    name="format"
+    hint="<?= lang('VideoClip.form.format.landscape_hint') ?>"><?= lang('VideoClip.form.format.landscape') ?></Forms.RadioButton>
+<Forms.RadioButton
+    value="portrait"
+    name="format"
+    hint="<?= lang('VideoClip.form.format.portrait_hint') ?>"><?= lang('VideoClip.form.format.portrait') ?></Forms.RadioButton>
+<Forms.RadioButton
+    value="squared"
+    name="format"
+    hint="<?= lang('VideoClip.form.format.squared_hint') ?>"><?= lang('VideoClip.form.format.squared') ?></Forms.RadioButton>
 </fieldset>
 
+<fieldset>
+<legend><?= lang('VideoClip.form.theme') ?></legend>
 <div class="grid gap-4 grid-cols-colorButtons">
     <?php foreach (config('MediaClipper')->themes as $themeName => $colors): ?>
         <Forms.ColorRadioButton
         class="mx-auto"
         value="<?= $themeName ?>"
         name="theme"
-        isChecked="<?= $themeName === 'pine' ? 'true' : 'false' ?>"
         style="--color-accent-base: <?= $colors['preview']?>"><?= lang('Settings.theme.' . $themeName) ?></Forms.ColorRadioButton>
     <?php endforeach; ?>
 </div>
+</fieldset>
 
-<Forms.Field
-    type="number"
-    name="start_time"
-    label="START"
-    required="true"
-    value="5"
-/>
-<Forms.Field
-    type="number"
-    name="end_time"
-    label="END"
-    required="true"
-    value="10"
-/>
+<div class="flex flex-col gap-x-2 gap-y-4 md:flex-row">
+    <Forms.Field
+        type="number"
+        name="start_time"
+        label="<?= lang('VideoClip.form.start_time') ?>"
+        required="true"
+        step="0.001"
+    />
+    <Forms.Field
+        type="number"
+        name="duration"
+        label="<?= lang('VideoClip.form.duration') ?>"
+        required="true"
+        step="0.001"
+    />
+</div>
 
-<Button variant="primary" type="submit"><?= lang('Episode.video_clips.submit') ?></Button>
+<Button variant="primary" type="submit" iconRight="arrow-right" class="self-end"><?= lang('VideoClip.form.submit') ?></Button>
+
+</Forms.Section>
 
 </form>
 

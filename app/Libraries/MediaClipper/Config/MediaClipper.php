@@ -213,7 +213,7 @@ class MediaClipper extends BaseConfig
                 'rescaleHeight' => 1200,
                 'x' => 0,
                 'y' => 600,
-                'mask' => APPPATH . 'Libraries/MediaClipper/soundwaves-mask-squared.png',
+                'mask' => APPPATH . 'Libraries/MediaClipper/soundwaves-mask-square.png',
             ],
             'subtitles' => [
                 'fontsize' => 20,

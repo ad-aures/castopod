@@ -12,6 +12,7 @@ namespace Modules\Admin\Controllers;
 
 use App\Models\ClipModel;
 use CodeIgniter\Controller;
+use CodeIgniter\I18n\Time;
 use MediaClipper\VideoClipper;
 
 class SchedulerController extends Controller
@@ -41,6 +42,7 @@ class SchedulerController extends Controller
             (new ClipModel())
                 ->update($scheduledClip->id, [
                     'status' => 'running',
+                    'job_started_at' => Time::now(),
                 ]);
             $clipper = new VideoClipper(
                 $scheduledClip->episode,
@@ -58,12 +60,14 @@ class SchedulerController extends Controller
                     'media_id' => $scheduledClip->media_id,
                     'status' => 'passed',
                     'logs' => $clipper->logs,
+                    'job_ended_at' => Time::now(),
                 ]);
             } else {
                 // error
                 (new ClipModel())->update($scheduledClip->id, [
                     'status' => 'failed',
                     'logs' => $clipper->logs,
+                    'job_ended_at' => Time::now(),
                 ]);
             }
         }

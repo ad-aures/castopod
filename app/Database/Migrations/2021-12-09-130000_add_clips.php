@@ -72,15 +72,19 @@ class AddClips extends Migration
                 'type' => 'INT',
                 'unsigned' => true,
             ],
+            'job_started_at' => [
+                'type' => 'DATETIME',
+                'null' => true,
+            ],
+            'job_ended_at' => [
+                'type' => 'DATETIME',
+                'null' => true,
+            ],
             'created_at' => [
                 'type' => 'DATETIME',
             ],
             'updated_at' => [
                 'type' => 'DATETIME',
-            ],
-            'deleted_at' => [
-                'type' => 'DATETIME',
-                'null' => true,
             ],
         ]);
 

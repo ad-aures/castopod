@@ -136,16 +136,20 @@ if (! function_exists('slugify')) {
 
 if (! function_exists('format_duration')) {
     /**
-     * Formats duration in seconds to an hh:mm:ss string. Doesn't show leading zeros if any.
+     * Formats duration in seconds to an hh:mm:ss string.
      *
      * ⚠️ This uses php's gmdate function so any duration > 86000 seconds (24 hours) will not be formatted properly.
      *
      * @param int $seconds seconds to format
      */
-    function format_duration(int $seconds): string
+    function format_duration(int $seconds, bool $showLeadingZeros = false): string
     {
+        if ($showLeadingZeros) {
+            return gmdate('H:i:s', $seconds);
+        }
+
         if ($seconds < 60) {
-            return '0:' . $seconds;
+            return '0:' . sprintf('%02d', $seconds);
         }
         if ($seconds < 3600) {
             // < 1 hour: returns MM:SS
@@ -153,9 +157,9 @@ if (! function_exists('format_duration')) {
         }
         if ($seconds < 36000) {
             // < 10 hours: returns H:MM:SS
-            return ltrim(gmdate('h:i:s', $seconds), '0');
+            return ltrim(gmdate('H:i:s', $seconds), '0');
         }
-        return gmdate('h:i:s', $seconds);
+        return gmdate('H:i:s', $seconds);
     }
 }
 

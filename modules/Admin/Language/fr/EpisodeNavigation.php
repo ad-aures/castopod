@@ -18,5 +18,5 @@ return [
     'clips' => 'Extraits',
     'soundbites-edit' => 'Extraits sonores',
     'video-clips-list' => 'Extraits video',
-    'video-clips-generate' => 'Nouvel extrait video',
+    'video-clips-create' => 'Nouvel extrait video',
 ];
