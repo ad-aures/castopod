@@ -6,6 +6,11 @@ namespace Modules\Admin\Config;
 
 $routes = service('routes');
 
+// video-clips scheduler
+$routes->add('scheduled-video-clips', 'SchedulerController::generateVideoClips', [
+    'namespace' => 'Modules\Admin\Controllers',
+]);
+
 // Admin area routes
 $routes->group(
     config('Admin')

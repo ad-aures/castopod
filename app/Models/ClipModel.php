@@ -44,6 +44,7 @@ class ClipModel extends Model
         'duration',
         'type',
         'media_id',
+        'metadata',
         'status',
         'logs',
         'created_by',
@@ -64,21 +65,6 @@ class ClipModel extends Model
      * @var bool
      */
     protected $useTimestamps = true;
-
-    /**
-     * @var string[]
-     */
-    protected $afterInsert = ['clearCache'];
-
-    /**
-     * @var string[]
-     */
-    protected $afterUpdate = ['clearCache'];
-
-    /**
-     * @var string[]
-     */
-    protected $beforeDelete = ['clearCache'];
 
     public function __construct(
         protected string $type = 'audio',
@@ -104,7 +90,7 @@ class ClipModel extends Model
     /**
      * Gets all clips for an episode
      *
-     * @return BaseClip[]
+     * @return Soundbite[]
      */
     public function getEpisodeSoundbites(int $podcastId, int $episodeId): array
     {
@@ -155,6 +141,27 @@ class ClipModel extends Model
         return $found;
     }
 
+    /**
+     * Gets scheduled video clips for an episode
+     *
+     * @return VideoClip[]
+     */
+    public function getScheduledVideoClips(): array
+    {
+        $found = $this->where([
+            'type' => 'video',
+            'status' => 'queued',
+        ])
+            ->orderBy('created_at')
+            ->findAll();
+
+        foreach ($found as $key => $videoClip) {
+            $found[$key] = new VideoClip($videoClip->toArray());
+        }
+
+        return $found;
+    }
+
     public function deleteSoundbite(int $podcastId, int $episodeId, int $clipId): BaseResult | bool
     {
         cache()
@@ -167,25 +174,6 @@ class ClipModel extends Model
         ]);
     }
 
-    /**
-     * @param array<string, array<string|int, mixed>> $data
-     * @return array<string, array<string|int, mixed>>
-     */
-    public function clearCache(array $data): array
-    {
-        $episode = (new EpisodeModel())->find(
-            isset($data['data'])
-                ? $data['data']['episode_id']
-                : $data['id']['episode_id'],
-        );
-
-        // delete cache for rss feed
-        cache()
-            ->deleteMatching("podcast#{$episode->podcast_id}_feed*");
-
-        cache()
-            ->deleteMatching("page_podcast#{$episode->podcast_id}_episode#{$episode->id}_*");
-
-        return $data;
-    }
+    //     cache()
+    //         ->deleteMatching("page_podcast#{$clip->podcast_id}_episode#{$clip->episode_id}_*");
 }

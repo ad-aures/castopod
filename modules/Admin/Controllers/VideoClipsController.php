@@ -10,7 +10,6 @@ declare(strict_types=1);
 
 namespace Modules\Admin\Controllers;
 
-use App\Entities\Clip;
 use App\Entities\Clip\VideoClip;
 use App\Entities\Episode;
 use App\Entities\Podcast;
@@ -19,7 +18,6 @@ use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
-use MediaClipper\VideoClipper;
 
 class VideoClipsController extends BaseController
 {
@@ -60,7 +58,7 @@ class VideoClipsController extends BaseController
 
     public function list(): string
     {
-        $videoClips = (new ClipModel('video'))
+        $videoClipsBuilder = (new ClipModel('video'))
             ->where([
                 'podcast_id' => $this->podcast->id,
                 'episode_id' => $this->episode->id,
@@ -68,11 +66,18 @@ class VideoClipsController extends BaseController
             ])
             ->orderBy('created_at', 'desc');
 
+        $clips = $videoClipsBuilder->paginate(10);
+
+        $videoClips = [];
+        foreach ($clips as $clip) {
+            $videoClips[] = new VideoClip($clip->toArray());
+        }
+
         $data = [
             'podcast' => $this->podcast,
             'episode' => $this->episode,
-            'videoClips' => $videoClips->paginate(10),
-            'pager' => $videoClips->pager,
+            'videoClips' => $videoClips,
+            'pager' => $videoClipsBuilder->pager,
         ];
 
         replace_breadcrumb_params([
@@ -115,10 +120,20 @@ class VideoClipsController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
+        $themeName = $this->request->getPost('theme');
+        $themeColors = config('MediaClipper')
+            ->themes[$themeName];
+        $theme = [
+            'name' => $themeName,
+            'preview' => $themeColors['preview'],
+        ];
+
         $videoClip = new VideoClip([
             'label' => 'NEW CLIP',
             'start_time' => (float) $this->request->getPost('start_time'),
             'end_time' => (float) $this->request->getPost('end_time',),
+            'theme' => $theme,
+            'format' => $this->request->getPost('format'),
             'type' => 'video',
             'status' => 'queued',
             'podcast_id' => $this->podcast->id,
@@ -133,40 +148,5 @@ class VideoClipsController extends BaseController
             'message',
             lang('Settings.images.regenerationSuccess')
         );
-    }
-
-    public function scheduleClips(): void
-    {
-        // get all clips that haven't been generated
-        $scheduledClips = (new ClipModel())->getScheduledVideoClips();
-
-        foreach ($scheduledClips as $scheduledClip) {
-            $scheduledClip->status = 'pending';
-        }
-
-        (new ClipModel())->updateBatch($scheduledClips);
-
-        // Loop through clips to generate them
-        foreach ($scheduledClips as $scheduledClip) {
-            // set clip to pending
-            (new ClipModel())
-                ->update($scheduledClip->id, [
-                    'status' => 'running',
-                ]);
-            $clipper = new VideoClipper(
-                $scheduledClip->episode,
-                $scheduledClip->start_time,
-                $scheduledClip->end_time,
-                $scheduledClip->format,
-                $scheduledClip->theme,
-            );
-            $output = $clipper->generate();
-            $scheduledClip->setMedia($clipper->videoClipOutput);
-
-            (new ClipModel())->update($scheduledClip->id, [
-                'status' => 'passed',
-                'logs' => $output,
-            ]);
-        }
     }
 }

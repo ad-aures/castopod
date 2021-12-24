@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace App\Entities;
 
-use App\Entities\Clip\BaseClip;
+use App\Entities\Clip\Soundbite;
 use App\Entities\Media\Audio;
 use App\Entities\Media\Chapters;
 use App\Entities\Media\Image;
@@ -75,7 +75,7 @@ use RuntimeException;
  * @property Time|null $deleted_at;
  *
  * @property Person[] $persons;
- * @property Soundbites[] $soundbites;
+ * @property Soundbite[] $soundbites;
  * @property string $embed_url;
  */
 class Episode extends Entity
@@ -110,7 +110,7 @@ class Episode extends Entity
     protected ?array $persons = null;
 
     /**
-     * @var Soundbites[]|null
+     * @var Soundbite[]|null
      */
     protected ?array $soundbites = null;
 
@@ -407,7 +407,7 @@ class Episode extends Entity
     /**
      * Returns the episode’s clips
      *
-     * @return BaseClip[]|\App\Entities\Soundbites[]
+     * @return Soundbite[]
      */
     public function getSoundbites(): array
     {

@@ -31,6 +31,12 @@ class VideoClipper
         'timestamp' => 'NotoSansMono-Regular.ttf',
     ];
 
+    public ?string $logs = null;
+
+    public bool $error = false;
+
+    public string $videoClipOutput;
+
     protected float $duration;
 
     protected string $audioInput;
@@ -44,8 +50,6 @@ class VideoClipper
     protected string $subtitlesClipOutput;
 
     protected string $videoClipBgOutput;
-
-    protected string $videoClipOutput;
 
     protected ?string $episodeNumbering = null;
 
@@ -107,7 +111,10 @@ class VideoClipper
         }
     }
 
-    public function generate(): string
+    /**
+     * @return int 0 for success, else error
+     */
+    public function generate(): int
     {
         $this->soundbite();
         $this->subtitlesClip();
@@ -119,7 +126,7 @@ class VideoClipper
 
         $generateCmd = $this->getCmd();
 
-        return shell_exec($generateCmd . ' 2>&1');
+        return $this->cmd_exec($generateCmd);
     }
 
     public function getCmd(): string
@@ -205,7 +212,7 @@ class VideoClipper
             return false;
         }
 
-        $episodeCover = imagecreatefromjpeg($this->episodeCoverPath);
+        $episodeCover = $this->createCoverImage();
         if (! $episodeCover) {
             return false;
         }
@@ -340,6 +347,41 @@ class VideoClipper
         return true;
     }
 
+    /**
+     * @return int 0 (success), 1 - 2 - 254 - 255 (error)
+     */
+    private function cmd_exec(string $cmd): int
+    {
+        $outFile = tempnam(WRITEPATH . 'logs', 'cmd-out-');
+
+        if (! $outFile) {
+            return 254;
+        }
+
+        $descriptorSpec = [
+            0 => ['pipe', 'r'],
+            1 => ['pipe', 'w'],
+            2 => ['file', $outFile, 'w'],
+            // FFmpeg outputs to stderr by default
+        ];
+        $proc = proc_open($cmd, $descriptorSpec, $pipes);
+
+        if (! is_resource($proc)) {
+            return 255;
+        }
+
+        fclose($pipes[0]);    //Don't really want to give any input
+
+        $exit = proc_close($proc);
+
+        $this->logs = (string) file_get_contents($outFile);
+
+        // remove temporary files
+        unlink($outFile);
+
+        return $exit;
+    }
+
     private function getFont(string $name): string
     {
         return config('MediaClipper')->fontsFolder . self::FONTS[$name];
@@ -362,6 +404,15 @@ class VideoClipper
         imagefill($background, 0, 0, $coloredBackground);
 
         return $background;
+    }
+
+    private function createCoverImage(): GdImage | false
+    {
+        return match ($this->episode->cover->file_mimetype) {
+            'image/jpeg' => imagecreatefromjpeg($this->episodeCoverPath),
+            'image/png' => imagecreatefrompng($this->episodeCoverPath),
+            default => imagecreate(1400, 1400),
+        };
     }
 
     private function scaleImage(GdImage $image, int $width, int $height): GdImage | false

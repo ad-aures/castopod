@@ -85,7 +85,6 @@ class AddClips extends Migration
         ]);
 
         $this->forge->addKey('id', true);
-        $this->forge->addUniqueKey(['episode_id', 'start_time', 'duration', 'type']);
         $this->forge->addForeignKey('podcast_id', 'podcasts', 'id', '', 'CASCADE');
         $this->forge->addForeignKey('episode_id', 'episodes', 'id', '', 'CASCADE');
         $this->forge->addForeignKey('media_id', 'media', 'id', '', 'CASCADE');
