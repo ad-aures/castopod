@@ -34,4 +34,13 @@
     font-display: swap;
     src: url("/fonts/inter-600.woff2") format("woff2");
   }
+
+  /* noto-sans-mono-regular */
+  @font-face {
+    font-family: "Noto Sans Mono";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/fonts/noto-sans-mono-regular.woff2") format("woff2");
+  }
 }

@@ -23,6 +23,7 @@ module.exports = {
       fontFamily: {
         sans: ["Inter", ...defaultTheme.fontFamily.sans],
         display: ["Kumbh Sans", ...defaultTheme.fontFamily.sans],
+        mono: ["Noto Sans Mono", ...defaultTheme.fontFamily.mono],
       },
       textColor: {
         skin: {

@@ -29,6 +29,7 @@ return [
     ],
     'title' => 'Extrait vidéo : {videoClipLabel}',
     'download_clip' => 'Télécharger l’extrait',
+    'create' => 'Nouvel extrait vidéo',
     'go_to_page' => 'Aller à la page de l’extrait',
     'delete' => 'Supprimer l’extrait',
     'logs' => 'Historique d’exécution',

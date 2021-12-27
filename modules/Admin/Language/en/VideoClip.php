@@ -29,6 +29,7 @@ return [
     ],
     'title' => 'Video clip: {videoClipLabel}',
     'download_clip' => 'Download clip',
+    'create' => 'New video clip',
     'go_to_page' => 'Go to clip page',
     'delete' => 'Delete clip',
     'logs' => 'Job logs',
