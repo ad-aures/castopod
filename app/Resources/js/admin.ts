@@ -1,5 +1,6 @@
 import "@github/markdown-toolbar-element";
 import "@github/time-elements";
+import "./modules/audio-clipper";
 import ClientTimezone from "./modules/ClientTimezone";
 import Clipboard from "./modules/Clipboard";
 import DateTimePicker from "./modules/DateTimePicker";

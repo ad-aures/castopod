@@ -10,9 +10,20 @@
 
 <?= $this->section('content') ?>
 
-<form action="<?= route_to('video-clips-create', $podcast->id, $episode->id) ?>" method="POST" class="flex flex-col gap-y-4">
+<form action="<?= route_to('video-clips-create', $podcast->id, $episode->id) ?>" method="POST" class="flex gap-4">
 
-<Forms.Section title="<?= lang('VideoClip.form.params_section_title') ?>" >
+<div class="flex-1 w-full">
+    <!-- <div class="h-full bg-black"></div> -->
+    <audio-clipper start-time="1000" duration="140" min-duration="10" volume=".25">
+        <audio slot="audio" src="<?= $episode->audio->file_url ?>" class="w-full">
+            Your browser does not support the <code>audio</code> element.
+        </audio>
+        <input slot="start_time" type="number" name="start_time" placeholder="<?= lang('VideoClip.form.start_time') ?>" step="0.001" />
+        <input slot="duration" type="number" name="duration" placeholder="<?= lang('VideoClip.form.duration') ?>" step="0.001" />
+    </audio-clipper>
+</div>
+
+<!-- <Forms.Section title="<?= lang('VideoClip.form.params_section_title') ?>" >
  
 <Forms.Field
     name="label"
@@ -49,26 +60,9 @@
 </div>
 </fieldset>
 
-<div class="flex flex-col gap-x-2 gap-y-4 md:flex-row">
-    <Forms.Field
-        type="number"
-        name="start_time"
-        label="<?= lang('VideoClip.form.start_time') ?>"
-        required="true"
-        step="0.001"
-    />
-    <Forms.Field
-        type="number"
-        name="duration"
-        label="<?= lang('VideoClip.form.duration') ?>"
-        required="true"
-        step="0.001"
-    />
-</div>
-
 <Button variant="primary" type="submit" iconRight="arrow-right" class="self-end"><?= lang('VideoClip.form.submit') ?></Button>
 
-</Forms.Section>
+</Forms.Section> -->
 
 </form>
 
