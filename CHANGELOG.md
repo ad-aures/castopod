@@ -1,3 +1,12 @@
+# [1.0.0-alpha.80](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.79...v1.0.0-alpha.80) (2021-12-29)
+
+### Bug Fixes
+
+- add application/octet-stream mimetype to mp3 and m4a extensions to prevent
+  ext_in error
+  ([339bef8](https://code.podlibre.org/podlibre/castopod-host/commit/339bef878e54983d86e91e6ff7a931a843d321b3)),
+  closes [#145](https://code.podlibre.org/podlibre/castopod-host/issues/145)
+
 # [1.0.0-alpha.79](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-alpha.78...v1.0.0-alpha.79) (2021-12-20)
 
 ### Bug Fixes
