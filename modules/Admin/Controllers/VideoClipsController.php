@@ -119,6 +119,8 @@ class VideoClipsController extends BaseController
             0 => $this->podcast->title,
             1 => $this->episode->title,
         ]);
+
+        $this->response->setHeader('Accept-Ranges', 'bytes');
         return view('episode/video_clips_new', $data);
     }
 

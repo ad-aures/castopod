@@ -14,6 +14,11 @@ enum ACTIONS {
   Seek,
 }
 
+interface EventElement {
+  events: string[];
+  onEvent: EventListener;
+}
+
 @customElement("audio-clipper")
 export class AudioClipper extends LitElement {
   @queryAssignedNodes("audio", true)
@@ -37,20 +42,26 @@ export class AudioClipper extends LitElement {
   @query(".slider__segment-progress-handle")
   _progressNode!: HTMLDivElement;
 
+  @query(".slider__seeking-placeholder")
+  _seekingNode!: HTMLDivElement;
+
   @query("#waveform")
   _waveformNode!: HTMLDivElement;
 
   @property({ type: Number, attribute: "start-time" })
-  startTime = 0;
+  initStartTime = 0;
 
-  @property({ type: Number })
-  duration = 10;
+  @property({ type: Number, attribute: "duration" })
+  initDuration = 10;
 
   @property({ type: Number, attribute: "min-duration" })
   minDuration = 5;
 
   @property({ type: Number, attribute: "volume" })
   initVolume = 0.5;
+
+  @property({ type: Number, attribute: "height" })
+  height = 100;
 
   @state()
   _isPlaying = false;
@@ -77,97 +88,158 @@ export class AudioClipper extends LitElement {
   _volume = 0.5;
 
   @state()
+  _isLoading = false;
+
+  @state()
+  _seekingTime: number | null = null;
+
+  @state()
   _wavesurfer!: WaveSurfer;
+
+  _windowEvents: EventElement[] = [
+    {
+      events: ["load", "resize"],
+      onEvent: () => {
+        this._sliderWidth = this._sliderNode.clientWidth;
+        this.setSegmentPosition();
+      },
+    },
+  ];
+
+  _documentEvents: EventElement[] = [
+    {
+      events: ["mouseup"],
+      onEvent: () => {
+        if (this._action !== null) {
+          document.body.style.cursor = "";
+          if (this._action === ACTIONS.Seek && this._seekingTime) {
+            this._audio[0].currentTime = this._seekingTime;
+            this._seekingTime = 0;
+          }
+          this._action = null;
+        }
+      },
+    },
+    {
+      events: ["mousemove"],
+      onEvent: (event: Event) => {
+        if (this._action !== null) {
+          this.updatePosition(event as MouseEvent);
+        }
+      },
+    },
+  ];
+
+  _audioEvents: EventElement[] = [
+    {
+      events: ["play"],
+      onEvent: () => {
+        this._isPlaying = true;
+      },
+    },
+    {
+      events: ["pause"],
+      onEvent: () => {
+        this._isPlaying = false;
+      },
+    },
+    {
+      events: ["complete"],
+      onEvent: () => {
+        this._isLoading = false;
+      },
+    },
+    {
+      events: ["timeupdate"],
+      onEvent: () => {
+        // TODO: change this
+        this._currentTime = this._audio[0].currentTime;
+        if (this._currentTime > this._clip.endTime) {
+          this.pause();
+        } else if (this._currentTime < this._clip.startTime) {
+          this._audio[0].currentTime = this._clip.startTime;
+        } else {
+          this.setCurrentTime(this._currentTime);
+        }
+      },
+    },
+  ];
 
   connectedCallback(): void {
     super.connectedCallback();
 
-    console.log("connectedCallback_before");
     this._clip = {
-      startTime: this.startTime,
-      endTime: this.startTime + this.duration,
+      startTime: this.initStartTime,
+      endTime: this.initStartTime + this.initDuration,
     };
     this._volume = this.initVolume;
-    console.log("connectedCallback_after");
   }
 
   protected firstUpdated(): void {
-    console.log("firstUpdate");
     this._audioDuration = this._audio[0].duration;
     this._audio[0].volume = this._volume;
+    this._audio[0].currentTime = this._clip.startTime;
+    this._isLoading = true;
 
     this._wavesurfer = WaveSurfer.create({
       container: this._waveformNode,
+      height: this.height,
       interact: false,
-      barWidth: 2,
+      barWidth: 4,
       barHeight: 1,
+      barGap: 4,
       responsive: true,
+      cursorColor: "transparent",
     });
     this._wavesurfer.load(this._audio[0].src);
 
-    window.addEventListener("load", () => {
-      this._sliderWidth = this._sliderNode.clientWidth;
-      this.setSegmentPosition();
-    });
-    window.addEventListener("resize", () => {
-      this._sliderWidth = this._sliderNode.clientWidth;
-      this.setSegmentPosition();
-    });
-
-    document.addEventListener("mouseup", () => {
-      if (this._action !== null) {
-        this._action = null;
-      }
-    });
-    document.addEventListener("mousemove", (event: MouseEvent) => {
-      if (this._action !== null) {
-        this.updatePosition(event);
-      }
-    });
-
-    this._audio[0].addEventListener("play", () => {
-      this._isPlaying = true;
-    });
-    this._audio[0].addEventListener("pause", () => {
-      this._isPlaying = false;
-    });
-    // this._audio[0].addEventListener("timeupdate", () => {
-    //   this._currentTime = this._audio[0].currentTime;
-    // });
+    this.addEventListeners();
   }
 
   disconnectedCallback(): void {
-    console.log("disconnectedCallback");
+    super.disconnectedCallback();
 
-    window.removeEventListener("load", () => {
-      this._sliderWidth = this._sliderNode.clientWidth;
-      this.setSegmentPosition();
-    });
-    window.removeEventListener("resize", () => {
-      this._sliderWidth = this._sliderNode.clientWidth;
-      this.setSegmentPosition();
-    });
+    this.removeEventListeners();
+  }
 
-    document.removeEventListener("mouseup", () => {
-      if (this._action !== null) {
-        this._action = null;
-      }
-    });
-    document.removeEventListener("mousemove", (event: MouseEvent) => {
-      if (this._action !== null) {
-        this.updatePosition(event);
-      }
-    });
+  addEventListeners(): void {
+    for (const event of this._windowEvents) {
+      event.events.forEach((name) => {
+        window.addEventListener(name, event.onEvent);
+      });
+    }
 
-    this._audio[0].removeEventListener("play", () => {
-      this._isPlaying = true;
-    });
-    this._audio[0].removeEventListener("pause", () => {
-      this._isPlaying = false;
-    });
-    // this._audio[0].removeEventListener("timeupdate", () => {
-    //   this._currentTime = this._audio[0].currentTime;
-    // });
+    for (const event of this._documentEvents) {
+      event.events.forEach((name) => {
+        document.addEventListener(name, event.onEvent);
+      });
+    }
+
+    for (const event of this._audioEvents) {
+      event.events.forEach((name) => {
+        this._audio[0].addEventListener(name, event.onEvent);
+      });
+    }
+  }
+
+  removeEventListeners(): void {
+    for (const event of this._windowEvents) {
+      event.events.forEach((name) => {
+        window.removeEventListener(name, event.onEvent);
+      });
+    }
+
+    for (const event of this._documentEvents) {
+      event.events.forEach((name) => {
+        document.removeEventListener(name, event.onEvent);
+      });
+    }
+
+    for (const event of this._audioEvents) {
+      event.events.forEach((name) => {
+        this._audio[0].removeEventListener(name, event.onEvent);
+      });
+    }
   }
 
   setSegmentPosition(): void {
@@ -180,42 +252,38 @@ export class AudioClipper extends LitElement {
     }px`;
   }
 
-  getPositionFromSeconds(seconds: number) {
+  private getPositionFromSeconds(seconds: number) {
     return (seconds * this._sliderWidth) / this._audioDuration;
   }
 
-  getSecondsFromPosition(position: number) {
+  private getSecondsFromPosition(position: number) {
     return (this._audioDuration * position) / this._sliderWidth;
   }
 
   protected updated(
     _changedProperties: Map<string | number | symbol, unknown>
   ): void {
-    // console.log("updated", _changedProperties);
-
     if (_changedProperties.has("_clip")) {
-      // console.log("CLIP", _changedProperties.get("_clip"));
       this.pause();
       this.setSegmentPosition();
-      console.log(this._clip.startTime);
-      this._audio[0].currentTime = 58;
-      console.log(this._audio[0].currentTime);
+      this._audio[0].currentTime = this._clip.startTime;
+    }
+    if (_changedProperties.has("_seekingTime")) {
+      if (this._seekingTime) {
+        this._audio[0].currentTime = this._seekingTime;
+      }
     }
   }
 
   play(): void {
     this._audio[0].play();
-    // setTimeout(() => {
-    //   this.pause();
-    //   this._audio[0].currentTime = this._clip.startTime;
-    // }, (this._clip.endTime - this._clip.startTime) * 1000);
   }
 
   pause(): void {
     this._audio[0].pause();
   }
 
-  updatePosition(event: MouseEvent): void {
+  private updatePosition(event: MouseEvent): void {
     const cursorPosition =
       event.clientX -
       (this._sliderNode.getBoundingClientRect().left +
@@ -260,7 +328,13 @@ export class AudioClipper extends LitElement {
         break;
       }
       case ACTIONS.Seek: {
-        console.log("seeking");
+        if (seconds < this._clip.startTime) {
+          this._seekingTime = this._clip.startTime;
+        } else if (seconds > this._clip.endTime) {
+          this._seekingTime = this._clip.endTime;
+        } else {
+          this._seekingTime = seconds;
+        }
         break;
       }
       default:
@@ -268,37 +342,66 @@ export class AudioClipper extends LitElement {
     }
   }
 
-  setVolume(event: InputEvent): void {
-    this._volume = parseFloat((event.target as HTMLInputElement).value);
-    this._audio[0].volume = this._volume;
-  }
-
-  setCurrentTime(event: MouseEvent): void {
+  goTo(event: MouseEvent): void {
     const cursorPosition =
       event.clientX -
       (this._sliderNode.getBoundingClientRect().left +
         document.documentElement.scrollLeft);
 
     const seconds = this.getSecondsFromPosition(cursorPosition);
+
     this._audio[0].currentTime = seconds;
   }
 
+  setVolume(event: InputEvent): void {
+    this._volume = parseFloat((event.target as HTMLInputElement).value);
+    this._audio[0].volume = this._volume;
+  }
+
+  setCurrentTime(currentTime: number): void {
+    const seekingTimePosition = this.getPositionFromSeconds(currentTime);
+    const startTimePosition = this.getPositionFromSeconds(this._clip.startTime);
+    const seekingTimeSegmentPosition = seekingTimePosition - startTimePosition;
+    const seekingTimePercentage =
+      (seekingTimeSegmentPosition / this._segmentContentNode.clientWidth) *
+      this._segmentContentNode.clientWidth;
+    this._progressNode.style.transform = `translateX(${seekingTimeSegmentPosition}px)`;
+    this._seekingNode.style.transform = `scaleX(${seekingTimePercentage})`;
+  }
+
   setAction(action: ACTIONS): void {
+    switch (action) {
+      case ACTIONS.StretchLeft:
+      case ACTIONS.StretchRight:
+        document.body.style.cursor = "grabbing";
+        break;
+      default:
+        document.body.style.cursor = "default";
+        break;
+    }
     this._action = action;
   }
 
-  secondsToHHMMSS(seconds: number): string {
+  private secondsToHHMMSS(seconds: number): string {
     return new Date(seconds * 1000).toISOString().substr(11, 8);
   }
 
   static styles = css`
-    .slider {
+    .slider-wrapper {
       position: relative;
-      height: 6rem;
-      display: flex;
-      align-items: center;
       width: 100%;
       background-color: #0f172a;
+    }
+
+    .slider {
+      position: absolute;
+      z-index: 10;
+      top: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      height: 100%;
+      width: 100%;
     }
 
     .slider__track-placeholder {
@@ -309,37 +412,64 @@ export class AudioClipper extends LitElement {
 
     .slider__segment--wrapper {
       position: absolute;
+      height: 100%;
     }
 
     .slider__segment {
       position: relative;
       display: flex;
+      height: 100%;
     }
 
     .slider__segment-content {
-      background-color: rgba(255, 255, 255, 0.9);
-      height: 4rem;
+      background-color: rgba(255, 255, 255, 0.5);
+      height: 100%;
       width: 1px;
       border: none;
     }
 
+    .slider__seeking-placeholder {
+      position: absolute;
+      pointer-events: none;
+      background-color: rgba(255, 255, 255, 0.5);
+      height: 100%;
+      width: 1px;
+      transform-origin: left;
+    }
+
     .slider__segment-progress-handle {
       position: absolute;
-      width: 9px;
-      height: 9px;
-      margin-top: -9px;
-      margin-left: -4px;
+      width: 20px;
+      height: 20px;
+      top: -23px;
+      left: -10px;
       background-color: #3b82f6;
-      cursor: pointer;
+      border-radius: 50%;
+    }
+
+    .slider__segment-progress-handle::after {
+      position: absolute;
+      content: "";
+      width: 0px;
+      height: 0px;
+      bottom: -12px;
+      left: 1px;
+      border: 10px solid transparent;
+      border-top-color: transparent;
+      border-top-style: solid;
+      border-top-width: 10px;
+      border-top: 10px solid #3b82f6;
     }
 
     .slider__segment .slider__segment-handle {
       position: absolute;
-      cursor: pointer;
       width: 1rem;
-      height: 100%;
+      height: 120%;
       background-color: #b91c1c;
       border: none;
+      margin: auto 0;
+      top: 0;
+      bottom: 0;
     }
 
     .slider__segment .slider__segment-handle::before {
@@ -357,12 +487,12 @@ export class AudioClipper extends LitElement {
 
     .slider__segment .clipper__handle-left {
       left: -1rem;
-      border-radius: 0.2rem 0 0 0.2rem;
+      border-radius: 0.2rem 9999px 9999px 0.2rem;
     }
 
     .slider__segment .clipper__handle-right {
       right: -1rem;
-      border-radius: 0 0.2rem 0.2rem 0;
+      border-radius: 9999px 0.2rem 0.2rem 9999px;
     }
   `;
 
@@ -374,6 +504,7 @@ export class AudioClipper extends LitElement {
       <div>${this.secondsToHHMMSS(this._clip.startTime)}</div>
       <div>${this.secondsToHHMMSS(this._currentTime)}</div>
       <div>${this.secondsToHHMMSS(this._clip.endTime)}</div>
+      <div>${this._isLoading ? "loading..." : "not loading"}</div>
       <input
         type="range"
         id="volume"
@@ -383,30 +514,33 @@ export class AudioClipper extends LitElement {
         value="${this._volume}"
         @change="${this.setVolume}"
       />
-      <div id="waveform"></div>
-      <div class="slider" role="slider">
-        <div class="slider__track-placeholder"></div>
-        <div class="slider__segment--wrapper">
-          <div
-            class="slider__segment-progress-handle"
-            @mousedown="${() => this.setAction(ACTIONS.Seek)}"
-          ></div>
-          <!-- <div class="slider__segment-progress-handle-bar"></div> -->
-          <div class="slider__segment">
-            <button
-              class="slider__segment-handle clipper__handle-left"
-              title="${this.secondsToHHMMSS(this._clip.startTime)}"
-              @mousedown="${() => this.setAction(ACTIONS.StretchLeft)}"
-            ></button>
+      <div class="slider-wrapper" style="height:${this.height}">
+        <div id="waveform"></div>
+        <div class="slider" role="slider">
+          <div class="slider__track-placeholder"></div>
+          <div class="slider__segment--wrapper">
             <div
-              class="slider__segment-content"
-              @click="${this.setCurrentTime}"
+              class="slider__segment-progress-handle"
+              @mousedown="${() => this.setAction(ACTIONS.Seek)}"
             ></div>
-            <button
-              class="slider__segment-handle clipper__handle-right"
-              title="${this.secondsToHHMMSS(this._clip.endTime)}"
-              @mousedown="${() => this.setAction(ACTIONS.StretchRight)}"
-            ></button>
+            <div class="slider__segment">
+              <button
+                class="slider__segment-handle clipper__handle-left"
+                title="${this.secondsToHHMMSS(this._clip.startTime)}"
+                @mousedown="${() => this.setAction(ACTIONS.StretchLeft)}"
+              ></button>
+              <div class="slider__seeking-placeholder"></div>
+              <div
+                class="slider__segment-content"
+                @mousedown="${() => this.setAction(ACTIONS.Seek)}"
+                @click="${(event: MouseEvent) => this.goTo(event)}"
+              ></div>
+              <button
+                class="slider__segment-handle clipper__handle-right"
+                title="${this.secondsToHHMMSS(this._clip.endTime)}"
+                @mousedown="${() => this.setAction(ACTIONS.StretchRight)}"
+              ></button>
+            </div>
           </div>
         </div>
       </div>

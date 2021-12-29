@@ -14,7 +14,7 @@
 
 <div class="flex-1 w-full">
     <!-- <div class="h-full bg-black"></div> -->
-    <audio-clipper start-time="1000" duration="140" min-duration="10" volume=".25">
+    <audio-clipper start-time="15" duration="10" min-duration="10" volume=".25" height="50">
         <audio slot="audio" src="<?= $episode->audio->file_url ?>" class="w-full">
             Your browser does not support the <code>audio</code> element.
         </audio>
