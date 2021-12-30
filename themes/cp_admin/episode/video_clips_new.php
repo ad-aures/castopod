@@ -10,12 +10,14 @@
 
 <?= $this->section('content') ?>
 
-<form action="<?= route_to('video-clips-create', $podcast->id, $episode->id) ?>" method="POST" class="flex gap-4">
+<form action="<?= route_to('video-clips-create', $podcast->id, $episode->id) ?>" method="POST" class="flex flex-col items-center gap-4 xl:items-start xl:flex-row">
 
 <div class="flex-1 w-full">
-    <!-- <div class="h-full bg-black"></div> -->
+    <video-clip-previewer format="portrait">
+        <img slot="preview_image" src="<?= $episode->cover->thumbnail_url ?>" alt="<?= $episode->cover->description ?>" />
+    </video-clip-previewer>
     <audio-clipper start-time="15" duration="10" min-duration="10" volume=".25" height="50">
-        <audio slot="audio" src="<?= $episode->audio->file_url ?>" class="w-full">
+        <audio slot="audio" src="<?= $episode->audio->file_url ?>" class="w-full" preload="auto">
             Your browser does not support the <code>audio</code> element.
         </audio>
         <input slot="start_time" type="number" name="start_time" placeholder="<?= lang('VideoClip.form.start_time') ?>" step="0.001" />
@@ -23,8 +25,8 @@
     </audio-clipper>
 </div>
 
-<!-- <Forms.Section title="<?= lang('VideoClip.form.params_section_title') ?>" >
- 
+<Forms.Section title="<?= lang('VideoClip.form.params_section_title') ?>" >
+
 <Forms.Field
     name="label"
     label="<?= lang('VideoClip.form.clip_title') ?>"
@@ -62,7 +64,7 @@
 
 <Button variant="primary" type="submit" iconRight="arrow-right" class="self-end"><?= lang('VideoClip.form.submit') ?></Button>
 
-</Forms.Section> -->
+</Forms.Section>
 
 </form>
 

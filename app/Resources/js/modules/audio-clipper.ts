@@ -48,6 +48,9 @@ export class AudioClipper extends LitElement {
   @query("#waveform")
   _waveformNode!: HTMLDivElement;
 
+  @query(".buffering-bar")
+  _bufferingBarNode!: HTMLCanvasElement;
+
   @property({ type: Number, attribute: "start-time" })
   initStartTime = 0;
 
@@ -88,13 +91,13 @@ export class AudioClipper extends LitElement {
   _volume = 0.5;
 
   @state()
-  _isLoading = false;
-
-  @state()
   _seekingTime: number | null = null;
 
   @state()
   _wavesurfer!: WaveSurfer;
+
+  @state()
+  _isBuffering = false;
 
   _windowEvents: EventElement[] = [
     {
@@ -144,21 +147,46 @@ export class AudioClipper extends LitElement {
       },
     },
     {
-      events: ["complete"],
+      events: ["progress"],
       onEvent: () => {
-        this._isLoading = false;
+        const context = this._bufferingBarNode.getContext("2d");
+
+        if (context) {
+          context.fillStyle = "lightgray";
+          context.fillRect(
+            0,
+            0,
+            this._bufferingBarNode.width,
+            this._bufferingBarNode.height
+          );
+          context.fillStyle = "#04AC64";
+
+          const inc = this._bufferingBarNode.width / this._audio[0].duration;
+
+          for (let i = 0; i < this._audio[0].buffered.length; i++) {
+            const startX = this._audio[0].buffered.start(i) * inc;
+            const endX = this._audio[0].buffered.end(i) * inc;
+            const width = endX - startX;
+
+            context.fillRect(startX, 0, width, this._bufferingBarNode.height);
+            context.rect(startX, 0, width, this._bufferingBarNode.height);
+          }
+        }
       },
     },
     {
       events: ["timeupdate"],
       onEvent: () => {
-        // TODO: change this
-        this._currentTime = this._audio[0].currentTime;
+        // TODO: change this?
+        this._currentTime = parseFloat(this._audio[0].currentTime.toFixed(3));
         if (this._currentTime > this._clip.endTime) {
           this.pause();
+          this._audio[0].currentTime = this._clip.endTime;
         } else if (this._currentTime < this._clip.startTime) {
+          this._isBuffering = true;
           this._audio[0].currentTime = this._clip.startTime;
         } else {
+          this._isBuffering = false;
           this.setCurrentTime(this._currentTime);
         }
       },
@@ -178,17 +206,18 @@ export class AudioClipper extends LitElement {
   protected firstUpdated(): void {
     this._audioDuration = this._audio[0].duration;
     this._audio[0].volume = this._volume;
-    this._audio[0].currentTime = this._clip.startTime;
-    this._isLoading = true;
+    this._startTimeInput[0].hidden = true;
+    this._durationInput[0].hidden = true;
 
     this._wavesurfer = WaveSurfer.create({
       container: this._waveformNode,
       height: this.height,
       interact: false,
-      barWidth: 4,
+      barWidth: 2,
       barHeight: 1,
-      barGap: 4,
+      // barGap: 4,
       responsive: true,
+      waveColor: "hsl(0 5% 85%)",
       cursorColor: "transparent",
     });
     this._wavesurfer.load(this._audio[0].src);
@@ -266,6 +295,11 @@ export class AudioClipper extends LitElement {
     if (_changedProperties.has("_clip")) {
       this.pause();
       this.setSegmentPosition();
+
+      this._startTimeInput[0].value = this._clip.startTime.toString();
+      this._durationInput[0].value = (
+        this._clip.endTime - this._clip.startTime
+      ).toFixed(3);
       this._audio[0].currentTime = this._clip.startTime;
     }
     if (_changedProperties.has("_seekingTime")) {
@@ -293,18 +327,16 @@ export class AudioClipper extends LitElement {
 
     switch (this._action) {
       case ACTIONS.StretchLeft: {
-        let startTime;
+        let startTime = 0;
         if (seconds > 0) {
           if (seconds > this._clip.endTime - this.minDuration) {
             startTime = this._clip.endTime - this.minDuration;
           } else {
             startTime = seconds;
           }
-        } else {
-          startTime = 0;
         }
         this._clip = {
-          startTime,
+          startTime: parseFloat(startTime.toFixed(3)),
           endTime: this._clip.endTime,
         };
         break;
@@ -323,7 +355,7 @@ export class AudioClipper extends LitElement {
 
         this._clip = {
           startTime: this._clip.startTime,
-          endTime,
+          endTime: parseFloat(endTime.toFixed(3)),
         };
         break;
       }
@@ -333,7 +365,7 @@ export class AudioClipper extends LitElement {
         } else if (seconds > this._clip.endTime) {
           this._seekingTime = this._clip.endTime;
         } else {
-          this._seekingTime = seconds;
+          this._seekingTime = parseFloat(seconds.toFixed(3));
         }
         break;
       }
@@ -386,11 +418,34 @@ export class AudioClipper extends LitElement {
     return new Date(seconds * 1000).toISOString().substr(11, 8);
   }
 
+  trim(side: "start" | "end") {
+    if (side === "start") {
+      this._clip = {
+        startTime: this._audio[0].currentTime,
+        endTime: this._clip.endTime,
+      };
+    } else {
+      this._clip = {
+        startTime: this._clip.startTime,
+        endTime: this._currentTime,
+      };
+    }
+  }
+
   static styles = css`
     .slider-wrapper {
       position: relative;
       width: 100%;
       background-color: #0f172a;
+    }
+
+    .buffering-bar {
+      position: absolute;
+      width: 100%;
+      height: 4px;
+      background-color: gray;
+      bottom: -4px;
+      left: 0;
     }
 
     .slider {
@@ -404,12 +459,6 @@ export class AudioClipper extends LitElement {
       width: 100%;
     }
 
-    .slider__track-placeholder {
-      width: 100%;
-      height: 8px;
-      background-color: #64748b;
-    }
-
     .slider__segment--wrapper {
       position: absolute;
       height: 100%;
@@ -418,14 +467,17 @@ export class AudioClipper extends LitElement {
     .slider__segment {
       position: relative;
       display: flex;
-      height: 100%;
+      height: 120%;
+      top: -10%;
     }
 
     .slider__segment-content {
+      box-sizing: border-box;
       background-color: rgba(255, 255, 255, 0.5);
       height: 100%;
       width: 1px;
-      border: none;
+      border-top: 2px dashed #b91c1c;
+      border-bottom: 2px dashed #b91c1c;
     }
 
     .slider__seeking-placeholder {
@@ -441,8 +493,9 @@ export class AudioClipper extends LitElement {
       position: absolute;
       width: 20px;
       height: 20px;
-      top: -23px;
+      top: -50%;
       left: -10px;
+      margin-top: -2px;
       background-color: #3b82f6;
       border-radius: 50%;
     }
@@ -453,7 +506,7 @@ export class AudioClipper extends LitElement {
       width: 0px;
       height: 0px;
       bottom: -12px;
-      left: 1px;
+      left: 0;
       border: 10px solid transparent;
       border-top-color: transparent;
       border-top-style: solid;
@@ -464,7 +517,7 @@ export class AudioClipper extends LitElement {
     .slider__segment .slider__segment-handle {
       position: absolute;
       width: 1rem;
-      height: 120%;
+      height: 100%;
       background-color: #b91c1c;
       border: none;
       margin: auto 0;
@@ -475,7 +528,7 @@ export class AudioClipper extends LitElement {
     .slider__segment .slider__segment-handle::before {
       content: "";
       position: absolute;
-      height: 3rem;
+      height: 50%;
       width: 2px;
       background-color: #ffffff;
       margin: auto;
@@ -487,12 +540,79 @@ export class AudioClipper extends LitElement {
 
     .slider__segment .clipper__handle-left {
       left: -1rem;
-      border-radius: 0.2rem 9999px 9999px 0.2rem;
+      border-radius: 0.2rem 0 0 0.2rem;
     }
 
     .slider__segment .clipper__handle-right {
       right: -1rem;
-      border-radius: 9999px 0.2rem 0.2rem 9999px;
+      border-radius: 0 0.2rem 0.2rem 0;
+    }
+
+    .toolbar {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 0.5rem 0.25rem 0.5rem;
+      justify-content: space-between;
+      background-color: hsl(var(--color-background-elevated));
+      box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+      border-radius: 0 0 0.25rem 0.25rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .toolbar__audio-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .toolbar .toolbar__play-button {
+      padding: 0.5rem;
+      height: 32px;
+      width: 32px;
+      font-size: 1em;
+    }
+
+    .toolbar__trim-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .toolbar button {
+      cursor: pointer;
+      background-color: hsl(var(--color-accent-base));
+      color: hsl(var(--color-accent-contrast));
+      border-radius: 9999px;
+      border: none;
+      padding: 0.25rem 0.5rem;
+    }
+
+    .animate-spin {
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .volume {
+      display: flex;
+      font-size: 1.2rem;
+      color: hsl(var(--color-accent-base));
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .range-slider {
+      accent-color: hsl(var(--color-accent-base));
+      width: 100px;
     }
   `;
 
@@ -501,23 +621,9 @@ export class AudioClipper extends LitElement {
       <slot name="audio"></slot>
       <slot name="start_time"></slot>
       <slot name="duration"></slot>
-      <div>${this.secondsToHHMMSS(this._clip.startTime)}</div>
-      <div>${this.secondsToHHMMSS(this._currentTime)}</div>
-      <div>${this.secondsToHHMMSS(this._clip.endTime)}</div>
-      <div>${this._isLoading ? "loading..." : "not loading"}</div>
-      <input
-        type="range"
-        id="volume"
-        min="0"
-        max="1"
-        step="0.1"
-        value="${this._volume}"
-        @change="${this.setVolume}"
-      />
       <div class="slider-wrapper" style="height:${this.height}">
         <div id="waveform"></div>
         <div class="slider" role="slider">
-          <div class="slider__track-placeholder"></div>
           <div class="slider__segment--wrapper">
             <div
               class="slider__segment-progress-handle"
@@ -543,10 +649,61 @@ export class AudioClipper extends LitElement {
             </div>
           </div>
         </div>
+        <canvas class="buffering-bar"></canvas>
       </div>
-      <button @click="${this._isPlaying ? this.pause : this.play}">
-        ${this._isPlaying
-          ? html`<svg
+      <div class="toolbar">
+        <div class="toolbar__audio-controls">
+          <button
+            class="toolbar__play-button"
+            @click="${this._isPlaying ? this.pause : this.play}"
+          >
+            ${this._isBuffering
+              ? html`<svg
+                  class="animate-spin"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    opacity="0.25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    stroke-width="4"
+                  ></circle>
+                  <path
+                    opacity="0.75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
+                </svg>`
+              : this._isPlaying
+              ? html`<svg
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  width="1em"
+                  height="1em"
+                >
+                  <g>
+                    <path fill="none" d="M0 0h24v24H0z" />
+                    <path d="M6 5h2v14H6V5zm10 0h2v14h-2V5z" />
+                  </g>
+                </svg>`
+              : html` <svg
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  width="1em"
+                  height="1em"
+                >
+                  <path fill="none" d="M0 0h24v24H0z" />
+                  <path
+                    d="M7.752 5.439l10.508 6.13a.5.5 0 0 1 0 .863l-10.508 6.13A.5.5 0 0 1 7 18.128V5.871a.5.5 0 0 1 .752-.432z"
+                  />
+                </svg>`}
+          </button>
+          <div class="volume">
+            <svg
               viewBox="0 0 24 24"
               fill="currentColor"
               width="1em"
@@ -554,21 +711,28 @@ export class AudioClipper extends LitElement {
             >
               <g>
                 <path fill="none" d="M0 0h24v24H0z" />
-                <path d="M6 5h2v14H6V5zm10 0h2v14h-2V5z" />
+                <path
+                  d="M8.889 16H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h3.889l5.294-4.332a.5.5 0 0 1 .817.387v15.89a.5.5 0 0 1-.817.387L8.89 16zm9.974.591l-1.422-1.422A3.993 3.993 0 0 0 19 12c0-1.43-.75-2.685-1.88-3.392l1.439-1.439A5.991 5.991 0 0 1 21 12c0 1.842-.83 3.49-2.137 4.591z"
+                />
               </g>
-            </svg>`
-          : html` <svg
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              width="1em"
-              height="1em"
-            >
-              <path fill="none" d="M0 0h24v24H0z" />
-              <path
-                d="M7.752 5.439l10.508 6.13a.5.5 0 0 1 0 .863l-10.508 6.13A.5.5 0 0 1 7 18.128V5.871a.5.5 0 0 1 .752-.432z"
-              />
-            </svg>`}
-      </button>
+            </svg>
+            <input
+              class="range-slider"
+              type="range"
+              id="volume"
+              min="0"
+              max="1"
+              step="0.1"
+              value="${this._volume}"
+              @change="${this.setVolume}"
+            />
+          </div>
+        </div>
+        <div class="toolbar__trim-controls">
+          <button @click="${() => this.trim("start")}">Trim start</button>
+          <button @click="${() => this.trim("end")}">Trim end</button>
+        </div>
+      </div>
     `;
   }
 }
