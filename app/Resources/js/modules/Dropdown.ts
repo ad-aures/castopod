@@ -1,4 +1,10 @@
-import { createPopper, Instance, Placement } from "@popperjs/core";
+import {
+  computePosition,
+  flip,
+  offset,
+  Placement,
+  shift,
+} from "@floating-ui/dom";
 
 const Dropdown = (): void => {
   const dropdownButtons: NodeListOf<HTMLButtonElement> =
@@ -16,46 +22,46 @@ const Dropdown = (): void => {
         // place the menu at then end of the body to prevent any overflow cuts
         document.body.appendChild(menu);
 
-        let popperInstance: Instance | null = null;
-
-        const create = () => {
+        const update = () => {
           const offsetX = menu.dataset.dropdownOffsetX
             ? parseInt(menu.dataset.dropdownOffsetX)
             : 0;
           const offsetY = menu.dataset.dropdownOffsetY
             ? parseInt(menu.dataset.dropdownOffsetY)
             : 0;
-          popperInstance = createPopper(button, menu, {
+          computePosition(button, menu, {
             placement: menu.dataset.dropdownPlacement as Placement,
-            modifiers: [
-              {
-                name: "offset",
-                options: {
-                  offset: [offsetX, offsetY],
-                },
-              },
+            middleware: [
+              offset({ mainAxis: offsetY, crossAxis: offsetX }),
+              flip(),
+              shift(),
             ],
+          }).then(({ x, y }) => {
+            Object.assign(menu.style, {
+              left: `${x}px`,
+              top: `${y}px`,
+            });
           });
         };
 
-        const destroy = () => {
-          if (popperInstance) {
-            popperInstance.destroy();
-            popperInstance = null;
-          }
+        const showMenu = () => {
+          menu.setAttribute("data-show", "");
+          button.setAttribute("aria-expanded", "true");
+          update();
+        };
+
+        const hideMenu = () => {
+          menu.removeAttribute("data-show");
+          button.setAttribute("aria-expanded", "false");
         };
 
         const dropdownToggle = () => {
           const isExpanded = menu.hasAttribute("data-show");
 
           if (isExpanded) {
-            menu.removeAttribute("data-show");
-            button.setAttribute("aria-expanded", "false");
-            destroy();
+            hideMenu();
           } else {
-            menu.setAttribute("data-show", "");
-            button.setAttribute("aria-expanded", "true");
-            create();
+            showMenu();
           }
         };
 
