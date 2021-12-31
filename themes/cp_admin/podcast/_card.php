@@ -6,9 +6,9 @@
             alt="<?= $podcast->title ?>"
             src="<?= $podcast->cover->medium_url ?>" class="object-cover w-full h-full transition duration-200 ease-in-out transform aspect-square group-focus:scale-105 group-hover:scale-105" />
         </div>
-        <div class="absolute z-20 px-4 pb-4 transition duration-75 ease-out translate-y-6 group-focus:translate-y-0 group-hover:translate-y-0">
+        <div class="absolute z-20 w-full px-4 pb-4 transition duration-75 ease-out translate-y-6 group-focus:translate-y-0 group-hover:translate-y-0">
             <h2 class="font-bold leading-none truncate font-display"><?= $podcast->title ?></h2>
-            <p class="text-sm transition duration-150 opacity-0 group-focus:opacity-75 group-hover:opacity-75">@<?= $podcast->handle ?></p>
+            <p class="text-sm transition duration-150 opacity-0 group-focus:opacity-100 group-hover:opacity-100">@<?= $podcast->handle ?></p>
         </div>
     </a>
     <button class="absolute top-0 right-0 z-10 p-2 mt-2 mr-2 text-white transition -translate-y-12 rounded-full opacity-0 focus:ring-accent focus:opacity-100 focus:-translate-y-0 group-hover:translate-y-0 bg-black/50 group-hover:opacity-100" id="more-dropdown-<?= $podcast->id ?>" data-dropdown="button" data-dropdown-target="more-dropdown-<?= $podcast->id ?>-menu" aria-haspopup="true" aria-expanded="false" title="<?= lang('Common.more') ?>"><?= icon('more') ?></button>

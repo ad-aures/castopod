@@ -36,10 +36,10 @@ return [
             'Used to identify the podcast. Uppercase, lowercase, numbers and underscores are accepted.',
         'type' => [
             'label' => 'Type',
-            'hint' =>
-                '- <strong>episodic</strong>: if episodes are intended to be consumed without any specific order. Newest episodes will be presented first.<br/>- <strong>serial</strong>: if episodes are intended to be consumed in sequential order. The oldest episodes will be presented first.',
             'episodic' => 'Episodic',
+            'episodic_hint' => 'If episodes are intended to be consumed without any specific order. Newest episodes will be presented first.',
             'serial' => 'Serial',
+            'serial_hint' => 'If episodes are intended to be consumed in sequential order. The oldest episodes will be presented first.',
         ],
         'description' => 'Description',
         'classification_section_title' => 'Classification',

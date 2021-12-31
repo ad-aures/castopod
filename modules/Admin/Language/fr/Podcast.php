@@ -37,10 +37,10 @@ return [
             'Utilisé pour identifier le podcast. Les majuscules, les minuscules, les chiffres et le caractère souligné « _ » sont acceptés.',
         'type' => [
             'label' => 'Type',
-            'hint' =>
-                '- <strong>épisodique</strong> : si les épisodes sont destinés à être consommés sans ordre spécifique. Les épisodes les plus récents seront présentés en premier.<br/>- <strong>série</strong>: si les épisodes sont destinés à être consommés dans un ordre séquentiel bien défini. Les épisodes les plus anciens seront présentés en premier.',
             'episodic' => 'Épisodique',
+            'episodic_hint' => 'Si les épisodes sont destinés à être consommés sans ordre spécifique. Les épisodes les plus récents seront présentés en premier.',
             'serial' => 'Série',
+            'serial_hint' => 'Si les épisodes sont destinés à être consommés dans un ordre séquentiel bien défini. Les épisodes les plus anciens seront présentés en premier.',
         ],
         'description' => 'Description',
         'classification_section_title' => 'Classification',

@@ -62,11 +62,12 @@ return [
         'episode_number' => 'Épisode',
         'type' => [
             'label' => 'Type',
-            'hint' =>
-                '- <strong>complet</strong>: épisode complet.<br/>- <strong>bande-annonce</strong>: extrait court, promotionnel du podcast.<br/>- <strong>bonus</strong> :  contenu supplémentaire pour le podcast (par exemple des informations sur les coulisses ou des interviews avec les acteurs) ou du contenu promotionnel croisé pour un autre podcast.',
             'full' => 'Complet',
+            'full_hint' => 'Épisode complet',
             'trailer' => 'Bande-annonce',
+            'trailer_hint' => 'Extrait court, promotionnel du podcast',
             'bonus' => 'Bonus',
+            'bonus_hint' => 'Contenu supplémentaire pour le podcast (par exemple des informations sur les coulisses ou des interviews avec les acteurs) ou du contenu promotionnel croisé pour un autre podcast',
         ],
         'parental_advisory' => [
             'label' => 'Avertissement parental',

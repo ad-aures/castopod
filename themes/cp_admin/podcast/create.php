@@ -56,16 +56,17 @@
     required="true" />
 
 <fieldset>
-    <legend><?= lang('Podcast.form.type.label') .
-                hint_tooltip(lang('Podcast.form.type.hint'), 'ml-1') ?></legend>
+    <legend><?= lang('Podcast.form.type.label') ?></legend>
     <div class="flex gap-2">
         <Forms.RadioButton
             value="episodic"
             name="type"
+            hint="<?= lang('Podcast.form.type.episodic_hint') ?>"
             isChecked="true'" ><?= lang('Podcast.form.type.episodic') ?></Forms.RadioButton>
         <Forms.RadioButton
             value="serial"
             name="type"
+            hint="<?= lang('Podcast.form.type.serial_hint') ?>"
             isChecked="false" ><?= lang('Podcast.form.type.serial') ?></Forms.RadioButton>
     </div>
 </fieldset>

@@ -61,11 +61,12 @@ return [
         'episode_number' => 'Episode',
         'type' => [
             'label' => 'Type',
-            'hint' =>
-                '- <strong>full</strong>: complete content the episode.<br/>- <strong>trailer</strong>: short, promotional piece of content that represents a preview of the current show.<br/>- <strong>bonus</strong>: extra content for the show (for example, behind the scenes info or interviews with the cast) or cross-promotional content for another show.',
             'full' => 'Full',
+            'full_hint' => 'Complete content (the episode)',
             'trailer' => 'Trailer',
+            'trailer_hint' => 'Short, promotional piece of content that represents a preview of the current show',
             'bonus' => 'Bonus',
+            'bonus_hint' => 'Extra content for the show (for example, behind the scenes info or interviews with the cast) or cross-promotional content for another show',
         ],
         'parental_advisory' => [
             'label' => 'Parental advisory',

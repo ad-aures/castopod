@@ -72,21 +72,21 @@
 </div>
 
 <fieldset class="flex gap-1">
-<legend>
-    <?= lang('Episode.form.type.label') .
-        hint_tooltip(lang('Episode.form.type.hint'), 'ml-1') ?>
-</legend>
+<legend><?= lang('Episode.form.type.label') ?></legend>
 <Forms.RadioButton
     value="full"
     name="type"
+    hint="<?= lang('Episode.form.type.full_hint') ?>"
     isChecked="<?= $episode->type === 'full' ? 'true' : 'false' ?>" ><?= lang('Episode.form.type.full') ?></Forms.RadioButton>
 <Forms.RadioButton
     value="trailer"
     name="type"
+    hint="<?= lang('Episode.form.type.trailer_hint') ?>"
     isChecked="<?= $episode->type === 'trailer' ? 'true' : 'false' ?>" ><?= lang('Episode.form.type.trailer') ?></Forms.RadioButton>    
 <Forms.RadioButton
     value="bonus"
     name="type"
+    hint="<?= lang('Episode.form.type.bonus_hint') ?>"
     isChecked="<?= $episode->type === 'bonus' ? 'true' : 'false' ?>" ><?= lang('Episode.form.type.bonus') ?></Forms.RadioButton>
 </fieldset>
 
