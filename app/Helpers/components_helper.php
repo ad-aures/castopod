@@ -85,7 +85,13 @@ if (! function_exists('data_table')) {
                 $table->addRow($rowData);
             }
         } else {
-            return lang('Common.no_data');
+            $table->addRow([
+                [
+                    'colspan' => count($tableHeaders),
+                    'class' => 'px-4 py-2 italic font-semibold text-center',
+                    'data' => lang('Common.no_data'),
+                ],
+            ]);
         }
 
         return '<div class="overflow-x-auto rounded-lg bg-elevated border-3 border-subtle ' . $class . '" >' .

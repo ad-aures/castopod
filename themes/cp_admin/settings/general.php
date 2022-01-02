@@ -11,7 +11,7 @@
 <?= $this->section('content') ?>
 <div class="flex flex-col gap-y-4">
 
-<form action="<?= route_to('settings-instance') ?>" method="POST" enctype="multipart/form-data">
+<form action="<?= route_to('settings-instance') ?>" method="POST" enctype="multipart/form-data" class="max-w-xl">
 <?= csrf_field() ?>
 
 <Forms.Section
@@ -57,7 +57,7 @@
 
 </form>
 
-<form action="<?= route_to('settings-images-regenerate') ?>" method="POST" class="flex flex-col gap-y-4">
+<form action="<?= route_to('settings-images-regenerate') ?>" method="POST" class="flex flex-col max-w-xl gap-y-4">
 <?= csrf_field() ?>
 
 <Forms.Section

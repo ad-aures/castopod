@@ -17,12 +17,18 @@ class RadioButton extends FormComponent
 
     public function render(): string
     {
+        $data = [
+            'id' => $this->value,
+            'name' => $this->name,
+            'class' => 'form-radio-btn bg-elevated',
+        ];
+
+        if ($this->required) {
+            $data['required'] = 'required';
+        }
+
         $radioInput = form_radio(
-            [
-                'id' => $this->value,
-                'name' => $this->name,
-                'class' => 'form-radio-btn bg-elevated',
-            ],
+            $data,
             $this->value,
             old($this->name) ? old($this->name) === $this->value : $this->isChecked,
         );
@@ -30,7 +36,7 @@ class RadioButton extends FormComponent
         $hint = $this->hint ? hint_tooltip($this->hint, 'ml-1 text-base') : '';
 
         return <<<HTML
-            <div>
+            <div class="{$this->class}">
                 {$radioInput}
                 <label for="{$this->value}">{$this->slot}{$hint}</label>
             </div>

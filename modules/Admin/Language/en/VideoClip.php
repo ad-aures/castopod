@@ -31,6 +31,7 @@ return [
     'download_clip' => 'Download clip',
     'create' => 'New video clip',
     'go_to_page' => 'Go to clip page',
+    'retry' => 'Retry clip generation',
     'delete' => 'Delete clip',
     'logs' => 'Job logs',
     'form' => [
@@ -50,5 +51,13 @@ return [
         'start_time' => 'Start at',
         'duration' => 'Duration',
         'submit' => 'Create video clip',
+    ],
+    'requirements' => [
+        'title' => 'Missing requirements',
+        'missing' => 'You have missing requirements. Make sure to add all the required items to be allowed creating a video for this episode!',
+        'ffmpeg' => 'FFmpeg',
+        'gd' => 'Graphics Draw (GD)',
+        'freetype' => 'Freetype library for GD',
+        'transcript' => 'Transcript file (.srt)',
     ],
 ];

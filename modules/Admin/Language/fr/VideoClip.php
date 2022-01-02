@@ -31,6 +31,7 @@ return [
     'download_clip' => 'Télécharger l’extrait',
     'create' => 'Nouvel extrait vidéo',
     'go_to_page' => 'Aller à la page de l’extrait',
+    'retry' => 'Relancer la génération de l’extrait',
     'delete' => 'Supprimer l’extrait',
     'logs' => 'Historique d’exécution',
     'form' => [
@@ -50,5 +51,13 @@ return [
         'start_time' => 'Démarrer à',
         'duration' => 'Durée',
         'submit' => 'Créer un extrait vidéo',
+    ],
+    'requirements' => [
+        'title' => 'Outils manquants',
+        'missing' => 'Il vous manque des outils. Assurez vous d’avoir ajouté tous les outils nécessaires pour accéder au fomulaire de génération d’extrait vidéo !',
+        'ffmpeg' => 'FFmpeg',
+        'gd' => 'Graphics Draw (GD)',
+        'freetype' => 'Librairie Freetype pour GD',
+        'transcript' => 'Fichier de transcription (.srt)',
     ],
 ];

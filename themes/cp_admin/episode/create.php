@@ -13,7 +13,7 @@
 
 <Alert variant="danger" glyph="alert" class="max-w-xl"><?= lang('Episode.form.warning') ?></Alert>
 
-<form action="<?= route_to('episode-create', $podcast->id) ?>" method="POST" enctype="multipart/form-data" class="flex flex-col mt-6 gap-y-8">
+<form action="<?= route_to('episode-create', $podcast->id) ?>" method="POST" enctype="multipart/form-data" class="flex flex-col max-w-xl mt-6 gap-y-8">
 <?= csrf_field() ?>
 
 

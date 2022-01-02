@@ -19,6 +19,7 @@ import ThemePicker from "./modules/ThemePicker";
 import Time from "./modules/Time";
 import Tooltip from "./modules/Tooltip";
 import "./modules/video-clip-previewer";
+import VideoClipBuilder from "./modules/VideoClipBuilder";
 import "./modules/xml-editor";
 
 Dropdown();
@@ -35,3 +36,4 @@ Clipboard();
 ThemePicker();
 PublishMessageWarning();
 HotKeys();
+VideoClipBuilder();

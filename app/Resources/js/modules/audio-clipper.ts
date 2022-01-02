@@ -3,15 +3,21 @@ import {
   customElement,
   property,
   query,
+  queryAll,
   queryAssignedNodes,
   state,
 } from "lit/decorators.js";
 import WaveSurfer from "wavesurfer.js";
 
-enum ACTIONS {
+enum ActionType {
   StretchLeft,
   StretchRight,
   Seek,
+}
+
+interface Action {
+  type: ActionType;
+  payload?: any;
 }
 
 interface EventElement {
@@ -51,6 +57,9 @@ export class AudioClipper extends LitElement {
   @query(".buffering-bar")
   _bufferingBarNode!: HTMLCanvasElement;
 
+  @queryAll(".slider__segment-handle")
+  _segmentHandleNodes!: NodeListOf<HTMLButtonElement>;
+
   @property({ type: Number, attribute: "start-time" })
   initStartTime = 0;
 
@@ -76,7 +85,7 @@ export class AudioClipper extends LitElement {
   };
 
   @state()
-  _action: ACTIONS | null = null;
+  _action: Action | null = null;
 
   @state()
   _audioDuration = 0;
@@ -115,7 +124,7 @@ export class AudioClipper extends LitElement {
       onEvent: () => {
         if (this._action !== null) {
           document.body.style.cursor = "";
-          if (this._action === ACTIONS.Seek && this._seekingTime) {
+          if (this._action.type === ActionType.Seek && this._seekingTime) {
             this._audio[0].currentTime = this._seekingTime;
             this._seekingTime = 0;
           }
@@ -193,6 +202,31 @@ export class AudioClipper extends LitElement {
     },
   ];
 
+  _segmentHandleEvents: EventElement[] = [
+    {
+      events: ["mouseenter", "focus"],
+      onEvent: (event: Event) => {
+        const timeInfoElement = (
+          event.target as HTMLButtonElement
+        ).querySelector("span");
+        if (timeInfoElement) {
+          timeInfoElement.style.opacity = "1";
+        }
+      },
+    },
+    {
+      events: ["mouseleave", "blur"],
+      onEvent: (event: Event) => {
+        const timeInfoElement = (
+          event.target as HTMLButtonElement
+        ).querySelector("span");
+        if (timeInfoElement) {
+          timeInfoElement.style.opacity = "0";
+        }
+      },
+    },
+  ];
+
   connectedCallback(): void {
     super.connectedCallback();
 
@@ -249,6 +283,14 @@ export class AudioClipper extends LitElement {
         this._audio[0].addEventListener(name, event.onEvent);
       });
     }
+
+    for (const event of this._segmentHandleEvents) {
+      event.events.forEach((name) => {
+        for (let i = 0; i < this._segmentHandleNodes.length; i++) {
+          this._segmentHandleNodes[i].addEventListener(name, event.onEvent);
+        }
+      });
+    }
   }
 
   removeEventListeners(): void {
@@ -267,6 +309,14 @@ export class AudioClipper extends LitElement {
     for (const event of this._audioEvents) {
       event.events.forEach((name) => {
         this._audio[0].removeEventListener(name, event.onEvent);
+      });
+    }
+
+    for (const event of this._segmentHandleEvents) {
+      event.events.forEach((name) => {
+        for (let i = 0; i < this._segmentHandleNodes.length; i++) {
+          this._segmentHandleNodes[i].addEventListener(name, event.onEvent);
+        }
       });
     }
   }
@@ -300,6 +350,7 @@ export class AudioClipper extends LitElement {
       this._durationInput[0].value = (
         this._clip.endTime - this._clip.startTime
       ).toFixed(3);
+      this._durationInput[0].dispatchEvent(new Event("change"));
       this._audio[0].currentTime = this._clip.startTime;
     }
     if (_changedProperties.has("_seekingTime")) {
@@ -318,15 +369,20 @@ export class AudioClipper extends LitElement {
   }
 
   private updatePosition(event: MouseEvent): void {
+    if (this._action === null) {
+      return;
+    }
+
     const cursorPosition =
-      event.clientX -
+      event.clientX +
+      (this._action.payload?.offset || 0) -
       (this._sliderNode.getBoundingClientRect().left +
         document.documentElement.scrollLeft);
 
     const seconds = this.getSecondsFromPosition(cursorPosition);
 
-    switch (this._action) {
-      case ACTIONS.StretchLeft: {
+    switch (this._action.type) {
+      case ActionType.StretchLeft: {
         let startTime = 0;
         if (seconds > 0) {
           if (seconds > this._clip.endTime - this.minDuration) {
@@ -341,7 +397,7 @@ export class AudioClipper extends LitElement {
         };
         break;
       }
-      case ACTIONS.StretchRight: {
+      case ActionType.StretchRight: {
         let endTime;
         if (seconds < this._audioDuration) {
           if (seconds < this._clip.startTime + this.minDuration) {
@@ -359,7 +415,7 @@ export class AudioClipper extends LitElement {
         };
         break;
       }
-      case ACTIONS.Seek: {
+      case ActionType.Seek: {
         if (seconds < this._clip.startTime) {
           this._seekingTime = this._clip.startTime;
         } else if (seconds > this._clip.endTime) {
@@ -401,14 +457,23 @@ export class AudioClipper extends LitElement {
     this._seekingNode.style.transform = `scaleX(${seekingTimePercentage})`;
   }
 
-  setAction(action: ACTIONS): void {
-    switch (action) {
-      case ACTIONS.StretchLeft:
-      case ACTIONS.StretchRight:
-        document.body.style.cursor = "grabbing";
+  setAction(event: MouseEvent, action: Action): void {
+    switch (action.type) {
+      case ActionType.StretchLeft:
+        action.payload = {
+          offset:
+            this._segmentHandleNodes[0].getBoundingClientRect().right -
+            event.clientX,
+        };
+        break;
+      case ActionType.StretchRight:
+        action.payload = {
+          offset:
+            this._segmentHandleNodes[1].getBoundingClientRect().left -
+            event.clientX,
+        };
         break;
       default:
-        document.body.style.cursor = "default";
         break;
     }
     this._action = action;
@@ -421,7 +486,7 @@ export class AudioClipper extends LitElement {
   trim(side: "start" | "end") {
     if (side === "start") {
       this._clip = {
-        startTime: this._audio[0].currentTime,
+        startTime: parseFloat(this._audio[0].currentTime.toFixed(3)),
         endTime: this._clip.endTime,
       };
     } else {
@@ -498,6 +563,7 @@ export class AudioClipper extends LitElement {
       margin-top: -2px;
       background-color: #3b82f6;
       border-radius: 50%;
+      box-shadow: 0 0 0 2px #ffffff;
     }
 
     .slider__segment-progress-handle::after {
@@ -543,6 +609,17 @@ export class AudioClipper extends LitElement {
       border-radius: 0.2rem 0 0 0.2rem;
     }
 
+    .slider__segment .slider__segment-handle span {
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+      left: -100%;
+      top: -30%;
+      background-color: #0f172a;
+      color: #ffffff;
+      padding: 0 0.25rem;
+    }
+
     .slider__segment .clipper__handle-right {
       right: -1rem;
       border-radius: 0 0.2rem 0.2rem 0;
@@ -555,7 +632,7 @@ export class AudioClipper extends LitElement {
       justify-content: space-between;
       background-color: hsl(var(--color-background-elevated));
       box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-      border-radius: 0 0 0.25rem 0.25rem;
+      border-radius: 0 0 0.75rem 0.75rem;
       flex-wrap: wrap;
       gap: 0.5rem;
     }
@@ -587,6 +664,39 @@ export class AudioClipper extends LitElement {
       border-radius: 9999px;
       border: none;
       padding: 0.25rem 0.5rem;
+      box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    }
+
+    .toolbar button:hover {
+      background-color: hsl(var(--color-accent-hover));
+    }
+
+    .toolbar button:focus {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0
+        var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+      --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
+        calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+      box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow),
+        0 0 rgba(0, 0, 0, 0);
+      box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow),
+        0 0 rgba(0, 0, 0, 0);
+      box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow),
+        var(--tw-shadow, 0 0 rgba(0, 0, 0, 0));
+      --tw-ring-offset-width: 2px;
+      --tw-ring-opacity: 1;
+      --tw-ring-color: hsl(var(--color-accent-base) / var(--tw-ring-opacity));
+      --tw-ring-offset-color: hsl(var(--color-background-base));
+    }
+
+    .toolbar__trim-controls button {
+      font-weight: 600;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI,
+        Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont,
+        "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+        "Noto Color Emoji";
     }
 
     .animate-spin {
@@ -614,6 +724,11 @@ export class AudioClipper extends LitElement {
       accent-color: hsl(var(--color-accent-base));
       width: 100px;
     }
+
+    time {
+      font-size: 0.875rem;
+      font-family: "Mono";
+    }
   `;
 
   render(): TemplateResult<1> {
@@ -627,25 +742,33 @@ export class AudioClipper extends LitElement {
           <div class="slider__segment--wrapper">
             <div
               class="slider__segment-progress-handle"
-              @mousedown="${() => this.setAction(ACTIONS.Seek)}"
+              @mousedown="${(event: MouseEvent) =>
+                this.setAction(event, { type: ActionType.Seek })}"
             ></div>
             <div class="slider__segment">
               <button
                 class="slider__segment-handle clipper__handle-left"
-                title="${this.secondsToHHMMSS(this._clip.startTime)}"
-                @mousedown="${() => this.setAction(ACTIONS.StretchLeft)}"
-              ></button>
+                @mousedown="${(event: MouseEvent) =>
+                  this.setAction(event, {
+                    type: ActionType.StretchLeft,
+                  })}"
+              >
+                <span>${this.secondsToHHMMSS(this._clip.startTime)}</span>
+              </button>
               <div class="slider__seeking-placeholder"></div>
               <div
                 class="slider__segment-content"
-                @mousedown="${() => this.setAction(ACTIONS.Seek)}"
+                @mousedown="${(event: MouseEvent) =>
+                  this.setAction(event, { type: ActionType.Seek })}"
                 @click="${(event: MouseEvent) => this.goTo(event)}"
               ></div>
               <button
                 class="slider__segment-handle clipper__handle-right"
-                title="${this.secondsToHHMMSS(this._clip.endTime)}"
-                @mousedown="${() => this.setAction(ACTIONS.StretchRight)}"
-              ></button>
+                @mousedown="${(event: MouseEvent) =>
+                  this.setAction(event, { type: ActionType.StretchRight })}"
+              >
+                <span>${this.secondsToHHMMSS(this._clip.endTime)}</span>
+              </button>
             </div>
           </div>
         </div>
@@ -727,6 +850,7 @@ export class AudioClipper extends LitElement {
               @change="${this.setVolume}"
             />
           </div>
+          <time>${this.secondsToHHMMSS(this._currentTime)}</time>
         </div>
         <div class="toolbar__trim-controls">
           <button @click="${() => this.trim("start")}">Trim start</button>

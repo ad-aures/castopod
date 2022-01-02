@@ -388,6 +388,14 @@ $routes->group(
                             ],
                         );
                         $routes->get(
+                            'video-clips/(:num)/retry',
+                            'VideoClipsController::retry/$1/$2/$3',
+                            [
+                                'as' => 'video-clip-retry',
+                                'filter' => 'permission:podcast_episodes-edit',
+                            ],
+                        );
+                        $routes->get(
                             'video-clips/(:num)/delete',
                             'VideoClipsController::delete/$1/$2/$3',
                             [

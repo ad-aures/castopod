@@ -15,7 +15,7 @@
 
 <?= $this->section('content') ?>
 
-<form id="soundbites-form" action="<?= route_to('episode-soundbites-edit', $podcast->id, $episode->id) ?>" method="POST" class="flex flex-col">
+<form id="soundbites-form" action="<?= route_to('episode-soundbites-edit', $podcast->id, $episode->id) ?>" method="POST" class="flex flex-col max-w-xl">
 <?= csrf_field() ?>
 
 <Forms.Section

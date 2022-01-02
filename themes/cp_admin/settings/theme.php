@@ -10,7 +10,7 @@
 
 <?= $this->section('content') ?>
 
-<form action="<?= route_to('settings-theme') ?>" method="POST" class="flex flex-col gap-y-4" enctype="multipart/form-data">
+<form action="<?= route_to('settings-theme') ?>" method="POST" class="flex flex-col max-w-xl gap-y-4" enctype="multipart/form-data">
 <?= csrf_field() ?>
 <Forms.Section
     title="<?= lang('Settings.theme.accent_section_title') ?>"

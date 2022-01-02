@@ -17,12 +17,18 @@ class ColorRadioButton extends FormComponent
 
     public function render(): string
     {
+        $data = [
+            'id' => $this->value,
+            'name' => $this->name,
+            'class' => 'color-radio-btn',
+        ];
+
+        if ($this->required) {
+            $data['required'] = 'required';
+        }
+
         $radioInput = form_radio(
-            [
-                'id' => $this->value,
-                'name' => $this->name,
-                'class' => 'color-radio-btn',
-            ],
+            $data,
             $this->value,
             old($this->name) ? old($this->name) === $this->value : $this->isChecked,
         );

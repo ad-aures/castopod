@@ -14,7 +14,7 @@
 
 <?= $this->section('content') ?>
 
-<form action="<?= route_to('episode-persons-manage', $podcast->id, $episode->id) ?>" method="POST">
+<form action="<?= route_to('episode-persons-manage', $podcast->id, $episode->id) ?>" method="POST" class="max-w-xl">
     <?= csrf_field() ?>
 
     <Forms.Section

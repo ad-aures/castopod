@@ -36,7 +36,7 @@
     </div>
 </div>
 
-<div class="flex flex-col gap-y-6">
+<div class="flex flex-col max-w-xl gap-y-6">
 
 <Forms.Section
     title="<?= lang('Podcast.form.identity_section_title') ?>"

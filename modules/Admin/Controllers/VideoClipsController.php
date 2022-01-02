@@ -108,8 +108,6 @@ class VideoClipsController extends BaseController
 
     public function create(): string
     {
-        helper('form');
-
         $data = [
             'podcast' => $this->podcast,
             'episode' => $this->episode,
@@ -120,7 +118,22 @@ class VideoClipsController extends BaseController
             1 => $this->episode->title,
         ]);
 
-        $this->response->setHeader('Accept-Ranges', 'bytes');
+        // First, check that requirements to create a video clip are met
+        $ffmpeg = trim(shell_exec('type -P ffmpeg'));
+        $checks = [
+            'ffmpeg' => ! empty($ffmpeg),
+            'gd' => extension_loaded('gd'),
+            'freetype' => extension_loaded('gd') && gd_info()['FreeType Support'],
+            'transcript' => $this->episode->transcript !== null,
+        ];
+
+        if (in_array(false, $checks, true)) {
+            $data['checks'] = $checks;
+
+            return view('episode/video_clips_requirements', $data);
+        }
+
+        helper('form');
         return view('episode/video_clips_new', $data);
     }
 
@@ -171,6 +184,23 @@ class VideoClipsController extends BaseController
         );
     }
 
+    public function retry(string $videoClipId): RedirectResponse
+    {
+        $videoClip = (new ClipModel())->getVideoClipById((int) $videoClipId);
+
+        if ($videoClip === null) {
+            throw PageNotFoundException::forPageNotFound();
+        }
+
+        (new ClipModel())->update($videoClip->id, [
+            'status' => 'queued',
+            'job_started_at' => null,
+            'job_ended_at' => null,
+        ]);
+
+        return redirect()->back();
+    }
+
     public function delete(string $videoClipId): RedirectResponse
     {
         $videoClip = (new ClipModel())->getVideoClipById((int) $videoClipId);
@@ -181,7 +211,7 @@ class VideoClipsController extends BaseController
 
         if ($videoClip->media === null) {
             // delete Clip directly
-            (new ClipModel())->delete($videoClipId);
+            (new ClipModel())->delete($videoClip->id);
         } else {
             $mediaModel = new MediaModel();
             if (! $mediaModel->deleteMedia($videoClip->media)) {

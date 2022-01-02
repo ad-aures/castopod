@@ -104,6 +104,11 @@ use CodeIgniter\I18n\Time;
                                 'uri' => route_to('video-clip', $videoClip->podcast_id, $videoClip->episode_id, $videoClip->id),
                             ],
                             [
+                                'type' => 'link',
+                                'title' => lang('VideoClip.retry'),
+                                'uri' => route_to('video-clip-retry', $videoClip->podcast_id, $videoClip->episode_id, $videoClip->id),
+                            ],
+                            [
                                 'type' => 'separator',
                             ],
                             [
