@@ -29,7 +29,7 @@ use Modules\Auth\Entities\User;
  * @property Podcast $podcast
  * @property int $episode_id
  * @property Episode $episode
- * @property string $label
+ * @property string $title
  * @property double $start_time
  * @property double $end_time
  * @property double $duration
@@ -68,7 +68,7 @@ class BaseClip extends Entity
         'id' => 'integer',
         'podcast_id' => 'integer',
         'episode_id' => 'integer',
-        'label' => 'string',
+        'title' => 'string',
         'start_time' => 'double',
         'duration' => 'double',
         'type' => 'string',

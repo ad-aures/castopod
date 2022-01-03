@@ -2,13 +2,13 @@
 
 <?= $this->section('title') ?>
 <?= lang('VideoClip.title', [
-    'videoClipLabel' => $videoClip->label,
+    'videoClipLabel' => $videoClip->title,
 ]) ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('pageTitle') ?>
 <?= lang('VideoClip.title', [
-    'videoClipLabel' => $videoClip->label,
+    'videoClipLabel' => $videoClip->title,
 ]) ?>
 <?= $this->endSection() ?>
 

@@ -15,7 +15,6 @@ use App\Entities\EpisodeComment;
 use App\Entities\Location;
 use App\Entities\Podcast;
 use App\Entities\Post;
-use App\Models\ClipModel;
 use App\Models\EpisodeCommentModel;
 use App\Models\EpisodeModel;
 use App\Models\MediaModel;
@@ -717,83 +716,6 @@ class EpisodeController extends BaseController
         $db->transComplete();
 
         return redirect()->route('episode-list', [$this->podcast->id]);
-    }
-
-    public function soundbitesEdit(): string
-    {
-        helper(['form']);
-
-        $data = [
-            'podcast' => $this->podcast,
-            'episode' => $this->episode,
-        ];
-
-        replace_breadcrumb_params([
-            0 => $this->podcast->title,
-            1 => $this->episode->title,
-        ]);
-        return view('episode/soundbites', $data);
-    }
-
-    public function soundbitesAttemptEdit(): RedirectResponse
-    {
-        $soundbites = $this->request->getPost('soundbites');
-        $rules = [
-            'soundbites.0.start_time' =>
-                'permit_empty|required_with[soundbites.0.duration]|decimal|greater_than_equal_to[0]',
-            'soundbites.0.duration' =>
-                'permit_empty|required_with[soundbites.0.start_time]|decimal|greater_than_equal_to[0]',
-        ];
-        foreach (array_keys($soundbites) as $soundbite_id) {
-            $rules += [
-                "soundbites.{$soundbite_id}.start_time" => 'required|decimal|greater_than_equal_to[0]',
-                "soundbites.{$soundbite_id}.duration" => 'required|decimal|greater_than_equal_to[0]',
-            ];
-        }
-
-        if (! $this->validate($rules)) {
-            return redirect()
-                ->back()
-                ->withInput()
-                ->with('errors', $this->validator->getErrors());
-        }
-
-        foreach ($soundbites as $soundbite_id => $soundbite) {
-            $data = [
-                'podcast_id' => $this->podcast->id,
-                'episode_id' => $this->episode->id,
-                'start_time' => (float) $soundbite['start_time'],
-                'duration' => (float) $soundbite['duration'],
-                'label' => $soundbite['label'],
-                'updated_by' => user_id(),
-            ];
-            if ($soundbite_id === 0) {
-                $data += [
-                    'created_by' => user_id(),
-                ];
-            } else {
-                $data += [
-                    'id' => $soundbite_id,
-                ];
-            }
-
-            $soundbiteModel = new SoundbiteModel();
-            if (! $soundbiteModel->save($data)) {
-                return redirect()
-                    ->back()
-                    ->withInput()
-                    ->with('errors', $soundbiteModel->errors());
-            }
-        }
-
-        return redirect()->route('soundbites-edit', [$this->podcast->id, $this->episode->id]);
-    }
-
-    public function soundbiteDelete(string $clipId): RedirectResponse
-    {
-        (new ClipModel())->deleteClip($this->podcast->id, $this->episode->id, (int) $clipId);
-
-        return redirect()->route('clips-edit', [$this->podcast->id, $this->episode->id]);
     }
 
     public function embed(): string

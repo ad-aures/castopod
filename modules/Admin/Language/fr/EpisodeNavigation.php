@@ -16,7 +16,8 @@ return [
     'episode-persons-manage' => 'Gestion des intervenants',
     'embed' => 'Lecteur intégré',
     'clips' => 'Extraits',
-    'soundbites-edit' => 'Extraits sonores',
     'video-clips-list' => 'Extraits video',
     'video-clips-create' => 'Nouvel extrait video',
+    'soundbites-list' => 'Extraits sonores',
+    'soundbites-create' => 'Nouvel extrait sonore',
 ];

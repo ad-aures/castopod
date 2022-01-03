@@ -16,7 +16,8 @@ return [
     'episode-persons-manage' => 'Manage persons',
     'embed-add' => 'Embeddable player',
     'clips' => 'Clips',
-    'soundbites-edit' => 'Soundbites',
     'video-clips-list' => 'Video clips',
     'video-clips-create' => 'New video clip',
+    'soundbites-list' => 'Soundbites',
+    'soundbites-create' => 'New soundbite',
 ];

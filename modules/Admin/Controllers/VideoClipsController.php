@@ -101,7 +101,7 @@ class VideoClipsController extends BaseController
         replace_breadcrumb_params([
             0 => $this->podcast->title,
             1 => $this->episode->title,
-            2 => $videoClip->label,
+            2 => $videoClip->title,
         ]);
         return view('episode/video_clip', $data);
     }
@@ -140,8 +140,8 @@ class VideoClipsController extends BaseController
     public function attemptCreate(): RedirectResponse
     {
         $rules = [
-            'label' => 'required',
-            'start_time' => 'required|numeric',
+            'title' => 'required',
+            'start_time' => 'required|greater_than_equal_to[0]',
             'duration' => 'required|greater_than[0]',
             'format' => 'required|in_list[' . implode(',', array_keys(config('MediaClipper')->formats)) . ']',
             'theme' => 'required|in_list[' . implode(',', array_keys(config('Colors')->themes)) . ']',
@@ -163,7 +163,7 @@ class VideoClipsController extends BaseController
         ];
 
         $videoClip = new VideoClip([
-            'label' => $this->request->getPost('label'),
+            'title' => $this->request->getPost('title'),
             'start_time' => (float) $this->request->getPost('start_time'),
             'duration' => (float) $this->request->getPost('duration',),
             'theme' => $theme,

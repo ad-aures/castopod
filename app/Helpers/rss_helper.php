@@ -255,7 +255,7 @@ if (! function_exists('get_rss_feed')) {
             $comments->addAttribute('uri', url_to('episode-comments', $podcast->handle, $episode->slug));
             $comments->addAttribute('contentType', 'application/podcast-activity+json');
 
-            if ($episode->transcript->file_url !== '') {
+            if ($episode->transcript !== null) {
                 $transcriptElement = $item->addChild('transcript', null, $podcastNamespace);
                 $transcriptElement->addAttribute('url', $episode->transcript->file_url);
                 $transcriptElement->addAttribute(
@@ -275,7 +275,7 @@ if (! function_exists('get_rss_feed')) {
 
             foreach ($episode->soundbites as $soundbite) {
                 // TODO: differentiate video from soundbites?
-                $soundbiteElement = $item->addChild('soundbite', $soundbite->label, $podcastNamespace);
+                $soundbiteElement = $item->addChild('soundbite', $soundbite->title, $podcastNamespace);
                 $soundbiteElement->addAttribute('start_time', (string) $soundbite->start_time);
                 $soundbiteElement->addAttribute('duration', (string) $soundbite->duration);
             }

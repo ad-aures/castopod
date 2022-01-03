@@ -151,26 +151,6 @@ return [
         'understand' => 'Je comprends, Je veux supprimer l’épisode',
         'submit' => 'Supprimer',
     ],
-    'soundbites' => 'Extraits sonores',
-    'soundbites_form' => [
-        'title' => 'Modifier les extraits sonores',
-        'info_section_title' => 'Extraits sonores de l’épisode',
-        'info_section_subtitle' =>
-            'Ajouter, modifier ou supprimer des extraits sonores',
-        'start_time' => 'Début',
-        'start_time_hint' =>
-            'La première seconde de l’extrait sonore, cela peut être un nombre décimal.',
-        'duration' => 'Durée',
-        'duration_hint' =>
-            'La durée de l’extrait sonore (en secondes), cela peut être un nombre décimal.',
-        'label' => 'Libellé',
-        'label_hint' => 'Texte qui sera affiché.',
-        'play' => 'Écouter l’extrait sonore',
-        'delete' => 'Supprimer l’extrait sonore',
-        'bookmark' =>
-            'Cliquez pour récupérer la position actuelle, cliquez à nouveau pour récupérer la durée.',
-        'submit' => 'Enregistrer les extraits sonnores',
-    ],
     'embed' => [
         'add' => 'Ajouter un lecteur intégré',
         'title' => 'Lecteur intégré',

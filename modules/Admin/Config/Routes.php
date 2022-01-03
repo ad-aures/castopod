@@ -334,24 +334,33 @@ $routes->group(
                         );
                         $routes->get(
                             'soundbites',
-                            'EpisodeController::soundbitesEdit/$1/$2',
+                            'SoundbiteController::list/$1/$2',
                             [
-                                'as' => 'soundbites-edit',
+                                'as' => 'soundbites-list',
+                                'filter' => 'permission:podcast_episodes-edit',
+                            ],
+                        );
+                        $routes->get(
+                            'soundbites/new',
+                            'SoundbiteController::create/$1/$2',
+                            [
+                                'as' => 'soundbites-create',
                                 'filter' => 'permission:podcast_episodes-edit',
                             ],
                         );
                         $routes->post(
-                            'soundbites',
-                            'EpisodeController::soundbitesAttemptEdit/$1/$2',
+                            'soundbites/new',
+                            'SoundbiteController::attemptCreate/$1/$2',
                             [
+                                'as' => 'soundbites-create',
                                 'filter' => 'permission:podcast_episodes-edit',
                             ],
                         );
                         $routes->get(
                             'soundbites/(:num)/delete',
-                            'EpisodeController::soundbiteDelete/$1/$2/$3',
+                            'SoundbiteController::delete/$1/$2/$3',
                             [
-                                'as' => 'soundbite-delete',
+                                'as' => 'soundbites-delete',
                                 'filter' => 'permission:podcast_episodes-edit',
                             ],
                         );

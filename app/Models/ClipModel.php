@@ -39,7 +39,7 @@ class ClipModel extends Model
         'id',
         'podcast_id',
         'episode_id',
-        'label',
+        'title',
         'start_time',
         'duration',
         'type',
@@ -87,33 +87,6 @@ class ClipModel extends Model
         }
 
         parent::__construct($db, $validation);
-    }
-
-    /**
-     * Gets all clips for an episode
-     *
-     * @return Soundbite[]
-     */
-    public function getEpisodeSoundbites(int $podcastId, int $episodeId): array
-    {
-        $cacheName = "podcast#{$podcastId}_episode#{$episodeId}_soundbites";
-        if (! ($found = cache($cacheName))) {
-            $found = $this->where([
-                'episode_id' => $episodeId,
-                'podcast_id' => $podcastId,
-                'type' => 'audio',
-            ])
-                ->orderBy('start_time')
-                ->findAll();
-
-            foreach ($found as $key => $soundbite) {
-                $found[$key] = new Soundbite($soundbite->toArray());
-            }
-
-            cache()
-                ->save($cacheName, $found, DECADE);
-        }
-        return $found;
     }
 
     public function getVideoClipById(int $videoClipId): ?VideoClip
@@ -181,6 +154,53 @@ class ClipModel extends Model
             $found[$key] = new VideoClip($videoClip->toArray());
         }
 
+        return $found;
+    }
+
+    public function getSoundbiteById(int $soundbiteId): ?Soundbite
+    {
+        $cacheName = "soundbite#{$soundbiteId}";
+        if (! ($found = cache($cacheName))) {
+            $clip = $this->find($soundbiteId);
+
+            if ($clip === null) {
+                return null;
+            }
+
+            // @phpstan-ignore-next-line
+            $found = new Soundbite($clip->toArray());
+
+            cache()
+                ->save($cacheName, $found, DECADE);
+        }
+
+        return $found;
+    }
+
+    /**
+     * Gets all clips for an episode
+     *
+     * @return Soundbite[]
+     */
+    public function getEpisodeSoundbites(int $podcastId, int $episodeId): array
+    {
+        $cacheName = "podcast#{$podcastId}_episode#{$episodeId}_soundbites";
+        if (! ($found = cache($cacheName))) {
+            $found = $this->where([
+                'episode_id' => $episodeId,
+                'podcast_id' => $podcastId,
+                'type' => 'audio',
+            ])
+                ->orderBy('start_time')
+                ->findAll();
+
+            foreach ($found as $key => $soundbite) {
+                $found[$key] = new Soundbite($soundbite->toArray());
+            }
+
+            cache()
+                ->save($cacheName, $found, DECADE);
+        }
         return $found;
     }
 

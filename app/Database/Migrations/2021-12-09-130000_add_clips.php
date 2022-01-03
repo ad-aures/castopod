@@ -39,10 +39,9 @@ class AddClips extends Migration
                 'type' => 'DECIMAL(7,3)',
                 'unsigned' => true,
             ],
-            'label' => [
+            'title' => [
                 'type' => 'VARCHAR',
                 'constraint' => 128,
-                'null' => true,
             ],
             'type' => [
                 'type' => 'ENUM',

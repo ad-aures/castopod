@@ -17,7 +17,7 @@
         <img slot="preview_image" src="<?= $episode->cover->thumbnail_url ?>" alt="<?= $episode->cover->description ?>" />
     </video-clip-previewer>
     <audio-clipper start-time="<?= old('start_time', 0) ?>" duration="<?= old('duration', 30) ?>" min-duration="10" volume=".5" height="50">
-        <audio slot="audio" src="<?= $episode->audio->file_url ?>" class="w-full" preload="auto">
+        <audio slot="audio" src="<?= $episode->audio->file_url ?>" preload="auto">
             Your browser does not support the <code>audio</code> element.
         </audio>
         <input slot="start_time" type="number" name="start_time" placeholder="<?= lang('VideoClip.form.start_time') ?>" step="0.001" />
@@ -28,7 +28,7 @@
 <div class="flex flex-col items-end w-full max-w-xl xl:max-w-sm 2xl:max-w-xl gap-y-4">
     <Forms.Section title="<?= lang('VideoClip.form.params_section_title') ?>" >
         <Forms.Field
-            name="label"
+            name="title"
             label="<?= lang('VideoClip.form.clip_title') ?>"
             required="true"
         />

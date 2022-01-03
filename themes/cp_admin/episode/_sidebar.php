@@ -7,7 +7,7 @@ $podcastNavigation = [
     ],
     'clips' => [
         'icon' => 'clapperboard',
-        'items' => ['video-clips-list', 'video-clips-create', 'soundbites-edit'],
+        'items' => ['video-clips-list', 'video-clips-create', 'soundbites-list', 'soundbites-create'],
     ],
 ]; ?>
 
