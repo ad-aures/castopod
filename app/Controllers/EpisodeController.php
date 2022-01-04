@@ -16,6 +16,7 @@ use App\Libraries\NoteObject;
 use App\Libraries\PodcastEpisode;
 use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
+use App\Models\PostModel;
 use CodeIgniter\Database\BaseBuilder;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\Response;
@@ -259,7 +260,7 @@ class EpisodeController extends BaseController
         /**
          * get comments: aggregated replies from posts referring to the episode
          */
-        $episodeComments = model('PostModel')
+        $episodeComments = model(PostModel::class)
             ->whereIn('in_reply_to_id', function (BaseBuilder $builder): BaseBuilder {
                 return $builder->select('id')
                     ->from(config('Fediverse')->tablesPrefix . 'posts')

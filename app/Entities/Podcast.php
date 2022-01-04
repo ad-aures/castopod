@@ -12,6 +12,7 @@ namespace App\Entities;
 
 use App\Entities\Media\Image;
 use App\Libraries\SimpleRSSElement;
+use App\Models\ActorModel;
 use App\Models\CategoryModel;
 use App\Models\EpisodeModel;
 use App\Models\MediaModel;
@@ -188,7 +189,7 @@ class Podcast extends Entity
         }
 
         if ($this->actor === null) {
-            $this->actor = model('ActorModel')
+            $this->actor = model(ActorModel::class)
                 ->getActorById($this->actor_id);
         }
 

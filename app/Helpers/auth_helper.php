@@ -8,6 +8,7 @@ declare(strict_types=1);
  * @link       https://castopod.org/
  */
 
+use App\Models\ActorModel;
 use CodeIgniter\Database\Exceptions\DataException;
 use Modules\Auth\Entities\User;
 use Modules\Fediverse\Entities\Actor;
@@ -74,7 +75,7 @@ if (! function_exists('interact_as_actor')) {
 
         $session = session();
         if ($session->has('interact_as_actor_id')) {
-            return model('ActorModel')->getActorById($session->get('interact_as_actor_id'));
+            return model(ActorModel::class)->getActorById($session->get('interact_as_actor_id'));
         }
 
         return false;

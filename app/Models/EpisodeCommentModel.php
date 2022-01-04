@@ -15,6 +15,7 @@ use App\Libraries\CommentObject;
 use CodeIgniter\Database\BaseBuilder;
 use Michalsn\Uuid\UuidModel;
 use Modules\Fediverse\Activities\CreateActivity;
+use Modules\Fediverse\Models\ActivityModel;
 
 class EpisodeCommentModel extends UuidModel
 {
@@ -100,7 +101,7 @@ class EpisodeCommentModel extends UuidModel
                 ->set('actor', $comment->actor->uri)
                 ->set('object', new CommentObject($comment));
 
-            $activityId = model('ActivityModel', false)
+            $activityId = model(ActivityModel::class, false)
                 ->newActivity(
                     'Create',
                     $comment->actor_id,
@@ -113,7 +114,7 @@ class EpisodeCommentModel extends UuidModel
 
             $createActivity->set('id', url_to('activity', $comment->actor->username, $activityId));
 
-            model('ActivityModel', false)
+            model(ActivityModel::class, false)
                 ->update($activityId, [
                     'payload' => $createActivity->toJSON(),
                 ]);
@@ -188,9 +189,9 @@ class EpisodeCommentModel extends UuidModel
         $data['data']['id'] = $uuid4->toString();
 
         if (! isset($data['data']['uri'])) {
-            $actor = model('ActorModel', false)
+            $actor = model(ActorModel::class, false)
                 ->getActorById((int) $data['data']['actor_id']);
-            $episode = model('EpisodeModel', false)
+            $episode = model(EpisodeModel::class, false)
                 ->find((int) $data['data']['episode_id']);
 
             $data['data']['uri'] = url_to('episode-comment', $actor->username, $episode->slug, $uuid4->toString());

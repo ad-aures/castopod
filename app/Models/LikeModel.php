@@ -16,6 +16,7 @@ use Michalsn\Uuid\UuidModel;
 use Modules\Fediverse\Activities\LikeActivity;
 use Modules\Fediverse\Activities\UndoActivity;
 use Modules\Fediverse\Entities\Actor;
+use Modules\Fediverse\Models\ActivityModel;
 
 class LikeModel extends UuidModel
 {
@@ -64,7 +65,7 @@ class LikeModel extends UuidModel
             $likeActivity->set('actor', $actor->uri)
                 ->set('object', $comment->uri);
 
-            $activityId = model('ActivityModel')
+            $activityId = model(ActivityModel::class)
                 ->newActivity(
                     'Like',
                     $actor->id,
@@ -77,7 +78,7 @@ class LikeModel extends UuidModel
 
             $likeActivity->set('id', url_to('activity', $actor->username, $activityId));
 
-            model('ActivityModel')
+            model(ActivityModel::class)
                 ->update($activityId, [
                     'payload' => $likeActivity->toJSON(),
                 ]);
@@ -105,7 +106,7 @@ class LikeModel extends UuidModel
         if ($registerActivity) {
             $undoActivity = new UndoActivity();
             // FIXME: get like activity associated with the deleted like
-            $activity = model('ActivityModel')
+            $activity = model(ActivityModel::class)
                 ->where([
                     'type' => 'Like',
                     'actor_id' => $actor->id,
@@ -122,7 +123,7 @@ class LikeModel extends UuidModel
                 ->set('actor', $actor->uri)
                 ->set('object', $likeActivity);
 
-            $activityId = model('ActivityModel')
+            $activityId = model(ActivityModel::class)
                 ->newActivity(
                     'Undo',
                     $actor->id,
@@ -135,7 +136,7 @@ class LikeModel extends UuidModel
 
             $undoActivity->set('id', url_to('activity', $actor->username, $activityId));
 
-            model('ActivityModel')
+            model(ActivityModel::class)
                 ->update($activityId, [
                     'payload' => $undoActivity->toJSON(),
                 ]);

@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace App\Entities;
 
+use App\Models\ActorModel;
 use App\Models\EpisodeCommentModel;
 use App\Models\EpisodeModel;
 use CodeIgniter\I18n\Time;
@@ -94,7 +95,7 @@ class EpisodeComment extends UuidEntity
         }
 
         if ($this->actor === null) {
-            $this->actor = model('ActorModel', false)
+            $this->actor = model(ActorModel::class, false)
                 ->getActorById($this->actor_id);
         }
 
@@ -129,7 +130,7 @@ class EpisodeComment extends UuidEntity
         }
 
         if ($this->reply_to_comment === null) {
-            $this->reply_to_comment = model('EpisodeCommentModel', false)
+            $this->reply_to_comment = model(EpisodeCommentModel::class, false)
                 ->getCommentById($this->in_reply_to_id);
         }
 

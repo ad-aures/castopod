@@ -37,7 +37,8 @@ class Toolbar extends BaseConfig
      */
     public array $collectors = [
         Timers::class,
-        Database::class,
+        // TODO: uncomment when fixed: https://github.com/codeigniter4/CodeIgniter4/issues/5539
+        // Database::class,
         Logs::class,
         Views::class,
         // Cache::class,
@@ -45,6 +46,16 @@ class Toolbar extends BaseConfig
         Routes::class,
         Events::class,
     ];
+
+    /**
+     * --------------------------------------------------------------------------
+     * Collect Var Data
+     * --------------------------------------------------------------------------
+     *
+     * If set to false var data from the views will not be colleted. Useful to
+     * avoid high memory usage when there are lots of data passed to the view.
+     */
+    public bool $collectVarData = true;
 
     /**
      * --------------------------------------------------------------------------

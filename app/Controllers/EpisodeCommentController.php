@@ -16,6 +16,7 @@ use App\Entities\Podcast;
 use App\Libraries\CommentObject;
 use App\Models\EpisodeCommentModel;
 use App\Models\EpisodeModel;
+use App\Models\LikeModel;
 use App\Models\PodcastModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
@@ -135,7 +136,7 @@ class EpisodeCommentController extends BaseController
         /**
          * get comment replies
          */
-        $commentReplies = model('CommentModel', false)
+        $commentReplies = model(EpisodeCommentModel::class, false)
             ->where('in_reply_to_id', service('uuid')->fromString($this->comment->id)->getBytes())
             ->orderBy('created_at', 'ASC');
 
@@ -167,7 +168,7 @@ class EpisodeCommentController extends BaseController
 
     public function attemptLike(): RedirectResponse
     {
-        model('LikeModel')
+        model(LikeModel::class)
             ->toggleLike(interact_as_actor(), $this->comment);
 
         return redirect()->back();
@@ -175,7 +176,7 @@ class EpisodeCommentController extends BaseController
 
     public function attemptReply(): RedirectResponse
     {
-        model('LikeModel')
+        model(LikeModel::class)
             ->toggleLike(interact_as_actor(), $this->comment);
 
         return redirect()->back();

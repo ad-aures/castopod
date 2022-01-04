@@ -4,17 +4,19 @@ declare(strict_types=1);
 
 namespace Tests\Database;
 
-use Tests\Support\DatabaseTestCase;
+use CodeIgniter\Test\CIUnitTestCase;
+use CodeIgniter\Test\DatabaseTestTrait;
+use Tests\Support\Database\Seeds\ExampleSeeder;
 use Tests\Support\Models\ExampleModel;
 
-class ExampleDatabaseTest extends DatabaseTestCase
+class ExampleDatabaseTest extends CIUnitTestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
+    use DatabaseTestTrait;
 
-        // Extra code to run before each test
-    }
+    /**
+     * @var string
+     */
+    protected $seed = ExampleSeeder::class;
 
     public function testModelFindAll(): void
     {

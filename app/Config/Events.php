@@ -6,6 +6,7 @@ namespace Config;
 
 use App\Entities\Actor;
 use App\Entities\Post;
+use App\Models\EpisodeModel;
 use CodeIgniter\Events\Events;
 use CodeIgniter\Exceptions\FrameworkException;
 use Modules\Auth\Entities\User;
@@ -131,11 +132,11 @@ Events::on('on_post_add', function ($post): void {
 
     if ($post->episode_id !== null) {
         if ($isReply) {
-            model('EpisodeModel', false)
+            model(EpisodeModel::class, false)
                 ->where('id', $post->episode_id)
                 ->increment('comments_count');
         } else {
-            model('EpisodeModel', false)
+            model(EpisodeModel::class, false)
                 ->where('id', $post->episode_id)
                 ->increment('posts_count');
         }
@@ -160,7 +161,7 @@ Events::on('on_post_remove', function ($post): void {
     }
 
     if ($episodeId = $post->episode_id) {
-        model('EpisodeModel', false)
+        model(EpisodeModel::class, false)
             ->where('id', $episodeId)
             ->decrement('posts_count');
     }

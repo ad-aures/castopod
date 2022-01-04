@@ -201,7 +201,7 @@ $errorId = uniqid('error', true); ?>
 					<tbody>
 						<tr>
 							<td style="width: 10em">Path</td>
-							<td><?= esc($request->uri) ?></td>
+							<td><?= esc($request->getUri()) ?></td>
 						</tr>
 						<tr>
 							<td>HTTP Method</td>

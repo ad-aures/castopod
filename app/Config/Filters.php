@@ -8,6 +8,8 @@ use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Filters\CSRF;
 use CodeIgniter\Filters\DebugToolbar;
 use CodeIgniter\Filters\Honeypot;
+use CodeIgniter\Filters\InvalidChars;
+use CodeIgniter\Filters\SecureHeaders;
 use Modules\Auth\Filters\PermissionFilter;
 use Modules\Fediverse\Filters\FediverseFilter;
 use Myth\Auth\Filters\LoginFilter;
@@ -24,6 +26,8 @@ class Filters extends BaseConfig
         'csrf' => CSRF::class,
         'toolbar' => DebugToolbar::class,
         'honeypot' => Honeypot::class,
+        'invalidchars' => InvalidChars::class,
+        'secureheaders' => SecureHeaders::class,
         'login' => LoginFilter::class,
         'role' => RoleFilter::class,
         'permission' => PermissionFilter::class,
@@ -39,10 +43,13 @@ class Filters extends BaseConfig
         'before' => [
             // 'honeypot',
             // 'csrf',
+            // 'invalidchars',
         ],
         'after' => [
             'toolbar',
             // 'honeypot',
+            // 'honeypot',
+            // 'secureheaders',
         ],
     ];
 

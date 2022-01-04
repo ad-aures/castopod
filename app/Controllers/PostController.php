@@ -23,6 +23,7 @@ use CodeIgniter\I18n\Time;
 use Modules\Analytics\AnalyticsTrait;
 use Modules\Fediverse\Controllers\PostController as FediversePostController;
 use Modules\Fediverse\Entities\Post as FediversePost;
+use Modules\Fediverse\Models\FavouriteModel;
 
 class PostController extends FediversePostController
 {
@@ -184,7 +185,7 @@ class PostController extends FediversePostController
 
     public function attemptFavourite(): RedirectResponse
     {
-        model('FavouriteModel')->toggleFavourite(interact_as_actor(), $this->post);
+        model(FavouriteModel::class)->toggleFavourite(interact_as_actor(), $this->post);
 
         return redirect()->back();
     }
