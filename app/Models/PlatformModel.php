@@ -102,7 +102,7 @@ class PlatformModel extends Model
             ! ($found = cache("podcast#{$podcastId}_platforms_{$platformType}_withLinks"))
         ) {
             $found = $this->select(
-                'platforms.*, podcasts_platforms.link_url, podcasts_platforms.link_content, podcasts_platforms.is_visible, podcasts_platforms.is_on_embed',
+                'platforms.*, podcasts_platforms.link_url, podcasts_platforms.account_id, podcasts_platforms.is_visible, podcasts_platforms.is_on_embed',
             )
                 ->join(
                     'podcasts_platforms',
@@ -127,7 +127,7 @@ class PlatformModel extends Model
         $cacheName = "podcast#{$podcastId}_platforms_{$platformType}";
         if (! ($found = cache($cacheName))) {
             $found = $this->select(
-                'platforms.*, podcasts_platforms.link_url, podcasts_platforms.link_content, podcasts_platforms.is_visible, podcasts_platforms.is_on_embed',
+                'platforms.*, podcasts_platforms.link_url, podcasts_platforms.account_id, podcasts_platforms.is_visible, podcasts_platforms.is_on_embed',
             )
                 ->join('podcasts_platforms', 'podcasts_platforms.platform_slug = platforms.slug')
                 ->where('podcasts_platforms.podcast_id', $podcastId)

@@ -21,7 +21,7 @@
                 <?php if ($fundingPlatform->is_visible): ?>
                     <a
                     href="<?= $fundingPlatform->link_url ?>"
-                    title="<?= $fundingPlatform->link_content ?>"
+                    title="<?= $fundingPlatform->account_id ?>"
                     target="_blank"
                     rel="noopener noreferrer"
                     class="inline-flex items-center font-semibold text-accent-base hover:text-accent-hover focus:ring-accent">

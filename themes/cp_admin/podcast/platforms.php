@@ -90,12 +90,11 @@
                 placeholder="https://…" />
             <Forms.Input
                 class="w-full mb-1"
-                id="<?= $platform->slug . '_link_content' ?>"
-                name="<?= 'platforms[' . $platform->slug . '][content]' ?>"
-                value="<?= $platform->link_content ?>"
+                id="<?= $platform->slug . '_account_id' ?>"
+                name="<?= 'platforms[' . $platform->slug . '][account_id]' ?>"
+                value="<?= $platform->account_id ?>"
                 placeholder="<?= lang("Platforms.description.{$platform->type}") ?>" />
-            <Forms.Toggler size="small" class="text-sm" id="<?= $platform->slug . '_visible' ?>" name="<?= 'platforms[' . $platform->slug . '][visible]'?>" value="yes" checked="<?= old($platform->slug . '_visible', $platform->is_visible ? $platform->is_visible : false) ?>"><?= lang('Platforms.visible') ?></Forms.Toggler>
-            <Forms.Toggler size="small" class="text-sm" id="<?= $platform->slug . '_on_embed' ?>" name="<?= 'platforms[' . $platform->slug . '][on_embed]'?>" value="yes" checked="<?= old($platform->slug . '_on_embed', $platform->is_on_embed ? $platform->is_on_embed : false) ?>"><?= lang('Platforms.on_embed') ?></Forms.Toggler>
+            <Forms.Toggler size="small" class="text-sm" id="<?= $platform->slug . '_visible' ?>" name="<?= 'platforms[' . $platform->slug . '][visible]'?>" value="yes" checked="<?= old($platform->slug . '_visible', $platform->is_visible ? 'true' : 'false') ?>"><?= lang('Platforms.visible') ?></Forms.Toggler>
         </fieldset>
     </div>
 </div>

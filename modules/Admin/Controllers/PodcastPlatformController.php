@@ -81,7 +81,7 @@ class PodcastPlatformController extends BaseController
                 'platform_slug' => $platformSlug,
                 'podcast_id' => $this->podcast->id,
                 'link_url' => $podcastPlatformUrl,
-                'link_content' => $podcastPlatform['content'],
+                'account_id' => $podcastPlatform['account_id'],
                 'is_visible' =>
                     array_key_exists('visible', $podcastPlatform) &&
                     $podcastPlatform['visible'] === 'yes',

@@ -19,7 +19,7 @@ use CodeIgniter\Entity\Entity;
  * @property string $home_url
  * @property string|null $submit_url
  * @property string|null $link_url
- * @property string|null $link_content
+ * @property string|null $account_id
  * @property bool|null $is_visible
  * @property bool|null $is_on_embed
  */
@@ -35,7 +35,7 @@ class Platform extends Entity
         'home_url' => 'string',
         'submit_url' => '?string',
         'link_url' => '?string',
-        'link_content' => '?string',
+        'account_id' => '?string',
         'is_visible' => '?boolean',
         'is_on_embed' => '?boolean',
     ];

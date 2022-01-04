@@ -227,7 +227,7 @@ class PodcastImportController extends BaseController
                         'platform_slug' => $platformSlug,
                         'podcast_id' => $newPodcastId,
                         'link_url' => $platform->attributes()['url'],
-                        'link_content' => $platform->attributes()['id'],
+                        'account_id' => $platform->attributes()['id'],
                         'is_visible' => false,
                     ];
                 }

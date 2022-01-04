@@ -31,7 +31,7 @@ class AddPodcastsPlatforms extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 512,
             ],
-            'link_content' => [
+            'account_id' => [
                 'type' => 'VARCHAR',
                 'constraint' => 128,
                 'null' => true,
@@ -49,6 +49,8 @@ class AddPodcastsPlatforms extends Migration
         ]);
 
         $this->forge->addPrimaryKey(['podcast_id', 'platform_slug']);
+        $this->forge->addForeignKey('podcast_id', 'podcasts', 'id', '', 'CASCADE');
+        $this->forge->addForeignKey('platform_slug', 'platforms', 'slug', 'CASCADE');
         $this->forge->createTable('podcasts_platforms');
     }
 

@@ -93,8 +93,8 @@ if (! function_exists('get_rss_feed')) {
         foreach ($podcast->podcasting_platforms as $podcastingPlatform) {
             $podcastingPlatformElement = $channel->addChild('id', null, $podcastNamespace);
             $podcastingPlatformElement->addAttribute('platform', $podcastingPlatform->slug);
-            if ($podcastingPlatform->link_content !== null) {
-                $podcastingPlatformElement->addAttribute('id', $podcastingPlatform->link_content);
+            if ($podcastingPlatform->account_id !== null) {
+                $podcastingPlatformElement->addAttribute('id', $podcastingPlatform->account_id);
             }
             if ($podcastingPlatform->link_url !== null) {
                 $podcastingPlatformElement->addAttribute('url', htmlspecialchars($podcastingPlatform->link_url));
@@ -102,11 +102,7 @@ if (! function_exists('get_rss_feed')) {
         }
 
         foreach ($podcast->social_platforms as $socialPlatform) {
-            $socialPlatformElement = $channel->addChild(
-                'social',
-                $socialPlatform->link_content,
-                $podcastNamespace,
-            );
+            $socialPlatformElement = $channel->addChild('social', $socialPlatform->account_id, $podcastNamespace,);
             $socialPlatformElement->addAttribute('platform', $socialPlatform->slug);
             if ($socialPlatform->link_url !== null) {
                 $socialPlatformElement->addAttribute('url', htmlspecialchars($socialPlatform->link_url));
@@ -116,7 +112,7 @@ if (! function_exists('get_rss_feed')) {
         foreach ($podcast->funding_platforms as $fundingPlatform) {
             $fundingPlatformElement = $channel->addChild(
                 'funding',
-                $fundingPlatform->link_content,
+                $fundingPlatform->account_id,
                 $podcastNamespace,
             );
             $fundingPlatformElement->addAttribute('platform', $fundingPlatform->slug);
