@@ -97,10 +97,12 @@ class EpisodeController extends BaseController
     {
         helper(['form']);
 
+        $currentSeasonNumber = (new EpisodeModel())->getCurrentSeasonNumber($this->podcast->id);
         $data = [
             'podcast' => $this->podcast,
+            'currentSeasonNumber' => $currentSeasonNumber,
+            'nextEpisodeNumber' => (new EpisodeModel())->getNextEpisodeNumber($this->podcast->id, $currentSeasonNumber),
         ];
-
         replace_breadcrumb_params([
             0 => $this->podcast->title,
         ]);
@@ -117,6 +119,10 @@ class EpisodeController extends BaseController
                 'ext_in[transcript,txt,html,srt,json]|permit_empty',
             'chapters_file' => 'ext_in[chapters,json]|permit_empty',
         ];
+
+        if ($this->podcast->type === 'serial') {
+            $rules['episode_number'] = 'required';
+        }
 
         if (! $this->validate($rules)) {
             return redirect()
@@ -238,6 +244,10 @@ class EpisodeController extends BaseController
                 'ext_in[transcript_file,txt,html,srt,json]|permit_empty',
             'chapters_file' => 'ext_in[chapters_file,json]|permit_empty',
         ];
+
+        if ($this->podcast->type === 'serial') {
+            $rules['episode_number'] = 'required';
+        }
 
         if (! $this->validate($rules)) {
             return redirect()

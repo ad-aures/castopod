@@ -51,17 +51,20 @@
 </div>
 
 <div class="flex flex-col gap-x-2 gap-y-4 md:flex-row">
-    <Forms.Field 
+    <Forms.Field
         class="flex-1 w-0"
         name="season_number"
         label="<?= lang('Episode.form.season_number') ?>"
         type="number"
+        value="<?= $currentSeasonNumber ?>"
     />
-    <Forms.Field 
+    <Forms.Field
         class="flex-1 w-0"
         name="episode_number"
         label="<?= lang('Episode.form.episode_number') ?>"
         type="number"
+        value="<?= $nextEpisodeNumber ?>"
+        required="<?= $podcast->type === 'serial' ? 'true' : 'false' ?>"
     />
 </div>
 

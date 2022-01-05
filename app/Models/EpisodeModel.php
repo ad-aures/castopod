@@ -268,6 +268,32 @@ class EpisodeModel extends Model
             : false;
     }
 
+    public function getCurrentSeasonNumber(int $podcastId): ?int
+    {
+        $result = $this->select('MAX(season_number) as current_season_number')
+            ->where([
+                'podcast_id' => $podcastId,
+                $this->deletedField => null,
+            ])
+            ->get()
+            ->getResultArray();
+
+        return $result[0]['current_season_number'] ? (int) $result[0]['current_season_number'] : null;
+    }
+
+    public function getNextEpisodeNumber(int $podcastId, ?int $seasonNumber): int
+    {
+        $result = $this->select('MAX(number) as next_episode_number')
+            ->where([
+                'podcast_id' => $podcastId,
+                'season_number' => $seasonNumber,
+                $this->deletedField => null,
+            ])->get()
+            ->getResultArray();
+
+        return (int) $result[0]['next_episode_number'] + 1;
+    }
+
     /**
      * @param mixed[] $data
      *
