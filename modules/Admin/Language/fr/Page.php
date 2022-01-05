@@ -24,6 +24,7 @@ return [
         'submit_edit' => 'Enregistrer',
     ],
     'messages' => [
-        'createSuccess' => 'La page {pageTitle} a été créée avec succès !',
+        'createSuccess' => 'La page “{pageTitle}” a été créée avec succès !',
+        'editSuccess' => 'La page a bien été mise à jour !',
     ],
 ];

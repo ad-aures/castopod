@@ -25,5 +25,6 @@ return [
     ],
     'messages' => [
         'createSuccess' => 'The page “{pageTitle}” was created successfully!',
+        'editSuccess' => 'The page was successfully updated!',
     ],
 ];

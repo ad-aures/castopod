@@ -134,7 +134,10 @@ class SoundbiteController extends BaseController
                 ->with('errors', $clipModel->errors());
         }
 
-        return redirect()->route('soundbites-list', [$this->podcast->id, $this->episode->id]);
+        return redirect()->route('soundbites-list', [$this->podcast->id, $this->episode->id])->with(
+            'message',
+            lang('Soundbite.messages.createSuccess')
+        );
     }
 
     public function delete(string $soundbiteId): RedirectResponse
@@ -158,6 +161,9 @@ class SoundbiteController extends BaseController
             }
         }
 
-        return redirect()->route('soundbites-list', [$this->podcast->id, $this->episode->id]);
+        return redirect()->route('soundbites-list', [$this->podcast->id, $this->episode->id])->with(
+            'message',
+            lang('Soundbite.messages.deleteSuccess')
+        );
     }
 }

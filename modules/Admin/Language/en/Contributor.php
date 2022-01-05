@@ -32,8 +32,8 @@ return [
         'podcast_admin' => 'Podcast admin',
     ],
     'messages' => [
-        'removeOwnerContributorError' => "You can't remove the podcast owner!",
-        'removeContributorSuccess' =>
+        'removeOwnerError' => "You can't remove the podcast owner!",
+        'removeSuccess' =>
             'You have successfully removed {username} from {podcastTitle}',
         'alreadyAddedError' =>
             "The contributor you're trying to add has already been added!",

@@ -28,8 +28,8 @@
         name="persons[]"
         label="<?= lang('Person.episode_form.persons') ?>"
         hint="<?= lang('Person.episode_form.persons_hint') ?>"
-        options="<?= htmlspecialchars(json_encode($personOptions)) ?>"
-        selected="<?= htmlspecialchars(json_encode(old('persons', []))) ?>"
+        options="<?= esc(json_encode($personOptions)) ?>"
+        selected="<?= esc(json_encode(old('persons', []))) ?>"
         required="true"
     />
 
@@ -39,8 +39,8 @@
         name="roles[]"
         label="<?= lang('Person.episode_form.roles') ?>"
         hint="<?= lang('Person.episode_form.roles_hint') ?>"
-        options="<?= htmlspecialchars(json_encode($taxonomyOptions)) ?>"
-        selected="<?= htmlspecialchars(json_encode(old('roles', []))) ?>"
+        options="<?= esc(json_encode($taxonomyOptions)) ?>"
+        selected="<?= esc(json_encode(old('roles', []))) ?>"
         required="true"
     />
 

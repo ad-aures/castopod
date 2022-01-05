@@ -44,6 +44,10 @@ return [
         'comments' => 'Commentaires',
         'actions' => 'Actions',
     ],
+    'messages' => [
+        'createSuccess' => 'L’épisode a été créé avec succès !',
+        'editSuccess' => 'L’épisode a bien été mis à jour !',
+    ],
     'form' => [
         'warning' =>
             'En cas d’erreur fatale, essayez d’augmenter les valeurs de `memory_limit`, `upload_max_filesize` et `post_max_size` dans votre fichier de configuration php puis redémarrez votre serveur web.<br />Les valeurs doivent être plus grandes que le fichier audio que vous souhaitez téléverser.',

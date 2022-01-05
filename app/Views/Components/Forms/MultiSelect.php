@@ -18,12 +18,12 @@ class MultiSelect extends FormComponent
 
     public function setOptions(string $value): void
     {
-        $this->options = json_decode(html_entity_decode($value), true);
+        $this->options = json_decode(htmlspecialchars_decode($value), true);
     }
 
     public function setSelected(string $selected): void
     {
-        $this->selected = json_decode($selected);
+        $this->selected = json_decode(htmlspecialchars_decode($selected), true);
     }
 
     public function render(): string

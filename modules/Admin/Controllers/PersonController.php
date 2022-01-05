@@ -99,7 +99,8 @@ class PersonController extends BaseController
 
         $db->transComplete();
 
-        return redirect()->route('person-list');
+        return redirect()->route('person-list')
+            ->with('message', lang('Person.messages.createSuccess'));
     }
 
     public function edit(): string
@@ -145,13 +146,17 @@ class PersonController extends BaseController
                 ->with('errors', $personModel->errors());
         }
 
-        return redirect()->route('person-view', [$this->person->id]);
+        return redirect()->route('person-edit', [$this->person->id])->with(
+            'message',
+            lang('Person.messages.editSuccess')
+        );
     }
 
     public function delete(): RedirectResponse
     {
         (new PersonModel())->delete($this->person->id);
 
-        return redirect()->route('person-list');
+        return redirect()->route('person-list')
+            ->with('message', lang('Person.messages.deleteSuccess'));
     }
 }

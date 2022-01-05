@@ -9,6 +9,12 @@ declare(strict_types=1);
  */
 
 return [
+    'messages' => [
+        'blockActorSuccess' => '{actor} a été bloqué !',
+        'unblockActorSuccess' => 'L’utilisateur a été débloqué !',
+        'blockDomainSuccess' => '{domain} a été bloqué !',
+        'unblockDomainSuccess' => '{domain} a été débloqué !',
+    ],
     'block_lists' => 'Listes de blocage',
     'block_lists_form' => [
         'blocked_users' => 'Utilisateurs bloqués',

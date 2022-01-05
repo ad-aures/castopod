@@ -42,14 +42,17 @@ class BlockController extends Controller
                 return redirect()
                     ->back()
                     ->withInput()
-                    ->with('error', 'Actor not found.');
+                    ->with('error', lang('Fediverse.messages.actorNotFound'));
             }
 
             model('ActorModel')
                 ->blockActor($actor->id);
         }
 
-        return redirect()->back();
+        return redirect()->back()
+            ->with('message', lang('Fediverse.messages.blockActorSuccess', [
+                'actor' => $handle,
+            ]));
     }
 
     public function attemptUnblockActor(): RedirectResponse
@@ -68,7 +71,8 @@ class BlockController extends Controller
         model('ActorModel')
             ->unblockActor((int) $this->request->getPost('actor_id'));
 
-        return redirect()->back();
+        return redirect()->back()
+            ->with('message', lang('Fediverse.messages.unblockActorSuccess'));
     }
 
     public function attemptBlockDomain(): RedirectResponse
@@ -84,10 +88,14 @@ class BlockController extends Controller
                 ->with('errors', $this->validator->getErrors());
         }
 
+        $domain = $this->request->getPost('domain');
         model('BlockedDomainModel')
-            ->blockDomain($this->request->getPost('domain'));
+            ->blockDomain($domain);
 
-        return redirect()->back();
+        return redirect()->back()
+            ->with('message', lang('Fediverse.messages.blockDomainSuccess', [
+                'domain' => $domain,
+            ]));
     }
 
     public function attemptUnblockDomain(): RedirectResponse
@@ -103,9 +111,13 @@ class BlockController extends Controller
                 ->with('errors', $this->validator->getErrors());
         }
 
+        $domain = $this->request->getPost('domain');
         model('BlockedDomainModel')
-            ->unblockDomain($this->request->getPost('domain'));
+            ->unblockDomain($domain);
 
-        return redirect()->back();
+        return redirect()->back()
+            ->with('message', lang('Fediverse.messages.unblockDomainSuccess', [
+                'domain' => $domain,
+            ]));
     }
 }

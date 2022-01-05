@@ -9,7 +9,7 @@ class Textarea extends FormComponent
     public function setValue(?string $value): void
     {
         if ($value) {
-            $this->value = html_entity_decode($value);
+            $this->value = htmlspecialchars_decode($value);
         }
     }
 

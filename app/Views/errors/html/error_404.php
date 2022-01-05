@@ -21,7 +21,7 @@
             Sorry! Cannot seem to find the page you were looking for.
         <?php endif; ?>
     </p>
-    <button class="inline-flex items-center justify-center px-3 py-1 text-sm font-semibold rounded-full shadow-xs text-accent-contrast focus:ring-accent md:px-4 md:py-2 md:text-base bg-accent-base hover:bg-accent-hover"><?= lang('Common.go_back') ?></button>
+    <a href="<?= previous_url() ?>" class="inline-flex items-center justify-center px-3 py-1 text-sm font-semibold rounded-full shadow-xs text-accent-contrast focus:ring-accent md:px-4 md:py-2 md:text-base bg-accent-base hover:bg-accent-hover"><?= lang('Common.go_back') ?></a>
 </body>
 
 </html>

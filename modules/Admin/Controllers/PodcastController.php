@@ -255,7 +255,10 @@ class PodcastController extends BaseController
 
         $db->transComplete();
 
-        return redirect()->route('podcast-view', [$newPodcastId]);
+        return redirect()->route('podcast-view', [$newPodcastId])->with(
+            'message',
+            lang('Podcast.messages.createSuccess')
+        );
     }
 
     public function edit(): string
@@ -354,7 +357,10 @@ class PodcastController extends BaseController
 
         $db->transComplete();
 
-        return redirect()->back();
+        return redirect()->route('podcast-edit', [$this->podcast->id])->with(
+            'message',
+            lang('Podcast.messages.editSuccess')
+        );
     }
 
     public function deleteBanner(): RedirectResponse

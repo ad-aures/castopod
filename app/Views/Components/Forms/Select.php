@@ -15,7 +15,7 @@ class Select extends FormComponent
 
     public function setOptions(string $value): void
     {
-        $this->options = json_decode(html_entity_decode($value), true);
+        $this->options = json_decode(htmlspecialchars_decode($value), true);
     }
 
     public function render(): string

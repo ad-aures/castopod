@@ -21,7 +21,7 @@ class DropdownMenu extends Component
 
     public function setItems(string $value): void
     {
-        $this->items = json_decode(html_entity_decode($value), true);
+        $this->items = json_decode(htmlspecialchars_decode($value), true);
     }
 
     public function render(): string
@@ -39,7 +39,7 @@ class DropdownMenu extends Component
                     ]);
                     break;
                 case 'html':
-                    $menuItems .= html_entity_decode($item['content']);
+                    $menuItems .= htmlspecialchars_decode($item['content']);
                     break;
                 case 'separator':
                     $menuItems .= '<hr class="my-2 border border-subtle">';

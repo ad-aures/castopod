@@ -43,6 +43,10 @@ return [
         'comments' => 'Comments',
         'actions' => 'Actions',
     ],
+    'messages' => [
+        'createSuccess' => 'Episode has been successfully created!',
+        'editSuccess' => 'Episode has been successfully updated!',
+    ],
     'form' => [
         'warning' =>
             'In case of fatal error, try increasing the `memory_limit`, `upload_max_filesize` and `post_max_size` values in your php configuration file then restart your web server.<br />These values must be higher than the audio file you wish to upload.',

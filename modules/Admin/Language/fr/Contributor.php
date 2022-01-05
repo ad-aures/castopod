@@ -32,9 +32,9 @@ return [
         'podcast_admin' => 'Administrateur de Podcasts',
     ],
     'messages' => [
-        'removeOwnerContributorError' =>
+        'removeOwnerError' =>
             'Vous ne pouvez pas retirer le propriétaire du podcast !',
-        'removeContributorSuccess' =>
+        'removeSuccess' =>
             'Vous avez retiré {username} de {podcastTitle}',
         'alreadyAddedError' =>
             'Le contributeur que vous essayez d’ajouter est déjà présent.',

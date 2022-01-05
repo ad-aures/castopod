@@ -124,12 +124,13 @@ class PostController extends Controller
             'published_at' => Time::now(),
         ]);
 
-        if (! model('PostModel')->addPost($newPost)) {
+        $postModel = model('PostModel');
+        if (! $postModel->addPost($newPost)) {
             return redirect()
                 ->back()
                 ->withInput()
                 // TODO: translate
-                ->with('error', "Couldn't create Post");
+                ->with('error', $postModel->errors());
         }
 
         // Post without preview card has been successfully created

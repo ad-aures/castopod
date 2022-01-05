@@ -107,13 +107,13 @@
         selected="<?= $podcast->category_id ?>"
         options="<?= esc(json_encode($categoryOptions)) ?>"
         required="true" />
-
+    
     <Forms.Field
         as="MultiSelect"
         name="other_categories[]"
         label="<?= lang('Podcast.form.other_categories') ?>"
-        selected="<?= json_encode($podcast->other_categories_ids) ?>"
         data-max-item-count="2"
+        selected="<?= esc(json_encode($podcast->other_categories_ids)) ?>"
         options="<?= esc(json_encode($categoryOptions)) ?>" />
 
     <fieldset class="mb-4">

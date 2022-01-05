@@ -16,6 +16,11 @@ return [
     'view' => 'Voir l’intervenant',
     'edit' => 'Modifier l’intervenant',
     'delete' => 'Supprimer l’intervenant',
+    'messages' => [
+        'createSuccess' => 'L’intervenant a été créé avec succès !',
+        'editSuccess' => 'L’intervenant a bien été mis à jour !',
+        'deleteSuccess' => 'L’intervenant a bien été retiré !',
+    ],
     'form' => [
         'avatar' => 'Avatar',
         'avatar_size_hint' =>

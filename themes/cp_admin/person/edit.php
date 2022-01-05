@@ -34,7 +34,8 @@
     value="<?= $person->unique_name ?>"
     label="<?= lang('Person.form.unique_name') ?>"
     hint="<?= lang('Person.form.unique_name_hint') ?>"
-    required="true" />
+    required="true"
+    data-slugify="slug" />
 
 <Forms.Field
     name="information_url"

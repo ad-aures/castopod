@@ -13,6 +13,10 @@ return [
         'title' => 'Extraits sonores',
         'soundbite' => 'Extrait sonore',
     ],
+    'messages' => [
+        'createSuccess' => 'L’extrait sonore a été créé avec succès !',
+        'deleteSuccess' => 'L’extrait sonore a bien été supprimé !',
+    ],
     'form' => [
         'title' => 'Nouvel extrait sonore',
         'soundbite_title' => 'Titre de l’extrait',

@@ -34,6 +34,10 @@ return [
     'retry' => 'Retry clip generation',
     'delete' => 'Delete clip',
     'logs' => 'Job logs',
+    'messages' => [
+        'createSuccess' => 'Video clip has been successfully created!',
+        'deleteSuccess' => 'Video clip has been successfully removed!',
+    ],
     'form' => [
         'title' => 'New video clip',
         'params_section_title' => 'Video clip parameters',

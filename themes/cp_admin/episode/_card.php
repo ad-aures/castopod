@@ -34,8 +34,13 @@
         ],
         [
             'type' => 'link',
-            'title' => lang('Episode.soundbites'),
-            'uri' => route_to('soundbites-edit', $episode->podcast->id, $episode->id),
+            'title' => lang('VideoClip.list.title'),
+            'uri' => route_to('video-clips-list', $episode->podcast->id, $episode->id),
+        ],
+        [
+            'type' => 'link',
+            'title' => lang('Soundbite.list.title'),
+            'uri' => route_to('soundbites-list', $episode->podcast->id, $episode->id),
         ],
         [
             'type' => 'separator',

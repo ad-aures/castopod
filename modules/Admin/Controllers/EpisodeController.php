@@ -205,7 +205,10 @@ class EpisodeController extends BaseController
 
         $db->transComplete();
 
-        return redirect()->route('episode-view', [$this->podcast->id, $newEpisodeId]);
+        return redirect()->route('episode-view', [$this->podcast->id, $newEpisodeId])->with(
+            'message',
+            lang('Episode.messages.createSuccess')
+        );
     }
 
     public function edit(): string
@@ -334,11 +337,18 @@ class EpisodeController extends BaseController
 
         $db->transComplete();
 
-        return redirect()->route('episode-view', [$this->podcast->id, $this->episode->id]);
+        return redirect()->route('episode-edit', [$this->podcast->id, $this->episode->id])->with(
+            'message',
+            lang('Episode.messages.editSuccess')
+        );
     }
 
     public function transcriptDelete(): RedirectResponse
     {
+        if ($this->episode->transcript === null) {
+            return redirect()->back();
+        }
+
         $mediaModel = new MediaModel();
         if (! $mediaModel->deleteMedia($this->episode->transcript)) {
             return redirect()
@@ -352,6 +362,10 @@ class EpisodeController extends BaseController
 
     public function chaptersDelete(): RedirectResponse
     {
+        if ($this->episode->chapters === null) {
+            return redirect()->back();
+        }
+
         $mediaModel = new MediaModel();
         if (! $mediaModel->deleteMedia($this->episode->chapters)) {
             return redirect()
@@ -699,16 +713,18 @@ class EpisodeController extends BaseController
             (new PostModel())->removePost($post);
         }
 
-        // set episode published_at to null to unpublish before deletion
-        $this->episode->published_at = null;
-
         $episodeModel = new EpisodeModel();
-        if (! $episodeModel->update($this->episode->id, $this->episode)) {
-            $db->transRollback();
-            return redirect()
-                ->back()
-                ->withInput()
-                ->with('errors', $episodeModel->errors());
+        if ($this->episode->published_at !== null) {
+            // if episode is published, set episode published_at to null to unpublish before deletion
+            $this->episode->published_at = null;
+
+            if (! $episodeModel->update($this->episode->id, $this->episode)) {
+                $db->transRollback();
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->with('errors', $episodeModel->errors());
+            }
         }
 
         $episodeModel->delete($this->episode->id);

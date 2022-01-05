@@ -13,6 +13,10 @@ return [
         'title' => 'Soundbites',
         'soundbite' => 'Soundbite',
     ],
+    'messages' => [
+        'createSuccess' => 'Soundbite has been successfully created!',
+        'deleteSuccess' => 'Soundbite has been successfully removed!',
+    ],
     'form' => [
         'title' => 'New soundbite',
         'soundbite_title' => 'Soundbite title',

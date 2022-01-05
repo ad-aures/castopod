@@ -9,6 +9,12 @@ declare(strict_types=1);
  */
 
 return [
+    'messages' => [
+        'blockActorSuccess' => '{actor} has been blocked!',
+        'unblockActorSuccess' => 'Actor has been unblocked!',
+        'blockDomainSuccess' => '{domain} has been blocked!',
+        'unblockDomainSuccess' => '{domain} has been unblocked!',
+    ],
     'blocked_actors' => 'Blocked accounts',
     'blocked_domains' => 'Blocked domains',
     'block_lists_form' => [

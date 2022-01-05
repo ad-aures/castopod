@@ -22,6 +22,11 @@ return [
     'go_to_page' => 'Aller à la page',
     'latest_episodes' => 'Derniers épisodes',
     'see_all_episodes' => 'Voir tous les épisodes',
+    'messages' => [
+        'createSuccess' => 'Le podcast a été créé avec succès !',
+        'editSuccess' => 'Le podcast a bien été mis à jour !',
+        'importSuccess' => 'Le podcast a été importé avec succès !',
+    ],
     'form' => [
         'identity_section_title' => 'Informations sur le Podcast',
         'identity_section_subtitle' =>

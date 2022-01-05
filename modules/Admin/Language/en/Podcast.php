@@ -22,6 +22,11 @@ return [
     'go_to_page' => 'Go to page',
     'latest_episodes' => 'Latest episodes',
     'see_all_episodes' => 'See all episodes',
+    'messages' => [
+        'createSuccess' => 'Podcast has been successfully created!',
+        'editSuccess' => 'Podcast has been successfully updated!',
+        'importSuccess' => 'Podcast has been successfully imported!',
+    ],
     'form' => [
         'identity_section_title' => 'Podcast identity',
         'identity_section_subtitle' => 'These fields allow you to get noticed.',

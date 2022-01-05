@@ -34,6 +34,10 @@ return [
     'retry' => 'Relancer la génération de l’extrait',
     'delete' => 'Supprimer l’extrait',
     'logs' => 'Historique d’exécution',
+    'messages' => [
+        'createSuccess' => 'L’extrait vidéo a été créé avec succès !',
+        'deleteSuccess' => 'L’extrait vidéo a bien été supprimé !',
+    ],
     'form' => [
         'title' => 'Nouvel extrait vidéo',
         'params_section_title' => 'Paramètres de l’extrait vidéo',

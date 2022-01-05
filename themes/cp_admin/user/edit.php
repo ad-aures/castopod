@@ -19,6 +19,7 @@
 <?= csrf_field() ?>
 
 <Forms.Field
+    as="MultiSelect"
     id="roles"
     name="roles[]"
     label="<?= lang('User.form.roles') ?>"
@@ -26,7 +27,7 @@
     options="<?= esc(json_encode($roleOptions)) ?>"
     selected="<?= esc(json_encode($user->roles)) ?>" />
 
-<Button variant="primary" type="submit" class="self-end"><?= lang('User.form.submit_edit') ?></Button>
+<Button variant="primary" type="submit" class="self-end mt-4"><?= lang('User.form.submit_edit') ?></Button>
 
 </form>
 

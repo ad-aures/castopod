@@ -16,6 +16,11 @@ return [
     'view' => 'View person',
     'edit' => 'Edit person',
     'delete' => 'Delete person',
+    'messages' => [
+        'createSuccess' => 'Person has been successfully created!',
+        'editSuccess' => 'Person has been successfully updated!',
+        'deleteSuccess' => 'Person has been removed!',
+    ],
     'form' => [
         'avatar' => 'Avatar',
         'avatar_size_hint' =>

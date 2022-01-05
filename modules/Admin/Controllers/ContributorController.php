@@ -166,7 +166,10 @@ class ContributorController extends BaseController
             (int) $this->request->getPost('role'),
         );
 
-        return redirect()->route('contributor-list', [$this->podcast->id]);
+        return redirect()->route('contributor-edit', [$this->podcast->id, $this->user->id])->with(
+            'message',
+            lang('Contributor.messages.editSuccess')
+        );
     }
 
     public function remove(): RedirectResponse
@@ -174,7 +177,7 @@ class ContributorController extends BaseController
         if ($this->podcast->created_by === $this->user->id) {
             return redirect()
                 ->back()
-                ->with('errors', [lang('Contributor.messages.removeOwnerContributorError')]);
+                ->with('errors', [lang('Contributor.messages.removeOwnerError')]);
         }
 
         $podcastModel = new PodcastModel();
@@ -187,10 +190,10 @@ class ContributorController extends BaseController
         }
 
         return redirect()
-            ->back()
+            ->route('contributor-list', [$this->podcast->id])
             ->with(
                 'message',
-                lang('Contributor.messages.removeContributorSuccess', [
+                lang('Contributor.messages.removeSuccess', [
                     'username' => $this->user->username,
                     'podcastTitle' => $this->podcast->title,
                 ]),

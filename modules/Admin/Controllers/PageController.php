@@ -106,7 +106,7 @@ class PageController extends BaseController
                 ->with('errors', $pageModel->errors());
         }
 
-        return redirect()->route('page-list');
+        return redirect()->route('page-edit', [$this->page->id])->with('message', lang('Page.messages.editSuccess'));
     }
 
     public function delete(): RedirectResponse
