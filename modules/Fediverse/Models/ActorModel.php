@@ -205,6 +205,73 @@ class ActorModel extends BaseModel
         Events::trigger('on_unblock_actor', $actorId);
     }
 
+    public function getTotalLocalActors(): int
+    {
+        helper('fediverse');
+
+        $cacheName = config('Fediverse')
+            ->cachePrefix . 'blocked_actors';
+        if (! ($found = cache($cacheName))) {
+            $result = $this->select('COUNT(*) as total_local_actors')
+                ->where('domain', get_current_domain())
+                ->get()
+                ->getResultArray();
+
+            $found = (int) $result[0]['total_local_actors'];
+
+            cache()
+                ->save($cacheName, $found, DECADE);
+        }
+
+        return $found;
+    }
+
+    public function getActiveLocalActors(int $lastNumberOfMonths = 1): int
+    {
+        helper('fediverse');
+
+        $cacheName = config('Fediverse')
+            ->cachePrefix . 'blocked_actors';
+        if (! ($found = cache($cacheName))) {
+            $tablePrefix = config('Database')
+                ->default['DBPrefix'] . config('Fediverse')
+                ->tablesPrefix;
+            $result = $this->select('COUNT(DISTINCT `cp_fediverse_actors`.`id`) as `total_active_actors`', false)
+                ->join(
+                    $tablePrefix . 'posts',
+                    $tablePrefix . 'actors.id = ' . $tablePrefix . 'posts.actor_id',
+                    'left outer'
+                )
+                ->join(
+                    $tablePrefix . 'favourites',
+                    $tablePrefix . 'actors.id = ' . $tablePrefix . 'favourites.actor_id',
+                    'left outer'
+                )
+                ->where($tablePrefix . 'actors.domain', get_current_domain())
+                ->groupStart()
+                ->where(
+                    "`{$tablePrefix}posts`.`created_at` >= NOW() - INTERVAL {$lastNumberOfMonths} month",
+                    null,
+                    false
+                )
+                ->orWhere(
+                    "`{$tablePrefix}favourites`.`created_at` >= NOW() - INTERVAL {$lastNumberOfMonths} month",
+                    null,
+                    false
+                )
+                ->groupEnd()
+                ->get()
+                ->getResultArray();
+
+            $found = (int) $result[0]['total_active_actors'];
+
+            cache()
+                ->save($cacheName, $found, DAY);
+        }
+
+        return $found;
+    }
+
     public function clearCache(Actor $actor): void
     {
         $cachePrefix = config('Fediverse')

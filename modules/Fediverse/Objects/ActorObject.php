@@ -36,6 +36,8 @@ class ActorObject extends ObjectType
 
     protected string $url;
 
+    protected string $nodeInfo2Url;
+
     /**
      * @var array<string, string>
      */
@@ -59,6 +61,7 @@ class ActorObject extends ObjectType
         $this->preferredUsername = $actor->username;
         $this->summary = $actor->summary;
         $this->url = $actor->uri;
+        $this->nodeInfo2Url = url_to('nodeInfo2');
 
         $this->inbox = $actor->inbox_url;
         $this->outbox = $actor->outbox_url;

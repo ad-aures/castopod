@@ -470,6 +470,7 @@ class PostModel extends BaseUuidModel
             'actor_id' => $actor->id,
             'reblog_of_id' => $post->id,
             'published_at' => Time::now(),
+            'created_by' => user_id(),
         ]);
 
         // add reblog
@@ -591,6 +592,31 @@ class PostModel extends BaseUuidModel
         } else {
             $this->undoReblog($reblogPost);
         }
+    }
+
+    public function getTotalLocalPosts(): int
+    {
+        helper('fediverse');
+
+        $cacheName = config('Fediverse')
+            ->cachePrefix . 'blocked_actors';
+        if (! ($found = cache($cacheName))) {
+            $tablePrefix = config('Fediverse')
+                ->tablesPrefix;
+            $result = $this->select('COUNT(*) as total_local_posts')
+                ->join($tablePrefix . 'actors', $tablePrefix . 'actors.id = ' . $tablePrefix . 'posts.actor_id')
+                ->where($tablePrefix . 'actors.domain', get_current_domain())
+                ->where('`published_at` <= NOW()', null, false)
+                ->get()
+                ->getResultArray();
+
+            $found = (int) $result[0]['total_local_posts'];
+
+            cache()
+                ->save($cacheName, $found, DECADE);
+        }
+
+        return $found;
     }
 
     public function clearCache(Post $post): void

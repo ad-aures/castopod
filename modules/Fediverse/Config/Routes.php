@@ -29,6 +29,11 @@ $routes->group('', [
         'as' => 'webfinger',
     ]);
 
+    // nodeInfo2
+    $routes->get('.well-known/x-nodeinfo2', 'NodeInfo2Controller', [
+        'as' => 'nodeInfo2',
+    ]);
+
     // Actor
     $routes->group('@(:actorUsername)', function ($routes): void {
         // Actor
