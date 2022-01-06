@@ -125,9 +125,12 @@ class PodcastController extends BaseController
         );
 
         if (! ($cachedView = cache($cacheName))) {
+            $stats = (new EpisodeModel())->getPodcastStats($this->podcast->id);
+
             $data = [
                 'metatags' => get_podcast_metatags($this->podcast, 'about'),
                 'podcast' => $this->podcast,
+                'stats' => $stats,
             ];
 
             // // if user is logged in then send to the authenticated activity view

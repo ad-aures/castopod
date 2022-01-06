@@ -9,7 +9,7 @@ declare(strict_types=1);
  */
 
 return [
-    'feed' => 'Podcast RSS feed',
+    'feed' => 'Flux RSS Podcast',
     'season' => 'Saison {seasonNumber}',
     'list_of_episodes_year' => 'Épisodes de {year} ({episodeCount})',
     'list_of_episodes_season' =>
@@ -29,8 +29,19 @@ return [
     }',
     'activity' => 'Activité',
     'episodes' => 'Épisodes',
-    'about' => 'About',
-    'sponsor_title' => 'Vous aimez le podcast ?',
+    'about' => 'À propos',
+    'stats' => [
+        'title' => 'Statistiques',
+        'number_of_seasons' => '{0, plural,
+            one {<span class="font-semibold">#</span> saison}
+            other {<span class="font-semibold">#</span> saisons}
+        }',
+        'number_of_episodes' => '{0, plural,
+            one {<span class="font-semibold">#</span> épisode}
+            other {<span class="font-semibold">#</span> épisodes}
+        }',
+        'first_published_at' => 'Premier épisode publié le <span class="font-semibold">{0, date, medium}</span>',
+    ],
     'sponsor' => 'Soutenez-nous',
     'funding_links' => 'Liens de financement pour {podcastTitle}',
     'find_on' => 'Trouvez {podcastTitle} sur',

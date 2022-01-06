@@ -236,7 +236,6 @@ return [
     }',
     'activity' => 'Activity',
     'episodes' => 'Episodes',
-    'sponsor_title' => 'Enjoying the show?',
     'sponsor' => 'Sponsor',
     'funding_links' => 'Funding links for {podcastTitle}',
     'find_on' => 'Find {podcastTitle} on',

@@ -28,12 +28,21 @@ return [
         other {<span class="font-semibold">#</span> posts}
     }',
     'activity' => 'Activity',
-    'activity_title' => '{podcastTitle} news & activity',
     'episodes' => 'Episodes',
     'episodes_title' => 'Episodes of {podcastTitle}',
     'about' => 'About',
-    'about_title' => 'About {podcastTitle}',
-    'sponsor_title' => 'Enjoying the show?',
+    'stats' => [
+        'title' => 'Stats',
+        'number_of_seasons' => '{0, plural,
+            one {<span class="font-semibold">#</span> season}
+            other {<span class="font-semibold">#</span> seasons}
+        }',
+        'number_of_episodes' => '{0, plural,
+            one {<span class="font-semibold">#</span> episode}
+            other {<span class="font-semibold">#</span> episodes}
+        }',
+        'first_published_at' => 'First episode published on <span class="font-semibold">{0, date, medium}</span>',
+    ],
     'sponsor' => 'Sponsor',
     'funding_links' => 'Funding links for {podcastTitle}',
     'find_on' => 'Find {podcastTitle} on',

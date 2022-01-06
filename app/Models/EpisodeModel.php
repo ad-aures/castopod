@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Entities\Episode;
+use CodeIgniter\I18n\Time;
 use CodeIgniter\Model;
 
 class EpisodeModel extends Model
@@ -292,6 +293,33 @@ class EpisodeModel extends Model
             ->getResultArray();
 
         return (int) $result[0]['next_episode_number'] + 1;
+    }
+
+    /**
+     * @return array<string, int|Time>
+     */
+    public function getPodcastStats(int $podcastId): array
+    {
+        $result = $this->select(
+            'COUNT(DISTINCT season_number) as number_of_seasons, COUNT(*) as number_of_episodes, MIN(published_at) as first_published_at'
+        )
+            ->where([
+                'podcast_id' => $podcastId,
+                'published_at IS NOT' => null,
+                $this->deletedField => null,
+            ])->get()
+            ->getResultArray();
+
+        $stats = [
+            'number_of_seasons' => (int) $result[0]['number_of_seasons'],
+            'number_of_episodes' => (int) $result[0]['number_of_episodes'],
+        ];
+
+        if ($result[0]['first_published_at'] !== null) {
+            $stats['first_published_at'] = new Time($result[0]['first_published_at']);
+        }
+
+        return $stats;
     }
 
     /**
