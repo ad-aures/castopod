@@ -116,7 +116,7 @@ class EpisodeController extends BaseController
             'cover' =>
                 'is_image[cover]|ext_in[cover,jpg,png]|min_dims[cover,1400,1400]|is_image_ratio[cover,1,1]',
             'transcript_file' =>
-                'ext_in[transcript,txt,html,srt,json]|permit_empty',
+                'ext_in[transcript,srt]|permit_empty',
             'chapters_file' => 'ext_in[chapters,json]|permit_empty',
         ];
 

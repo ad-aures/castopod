@@ -45,4 +45,5 @@ return [
         'play' => 'Lire',
         'playing' => 'En cours',
     ],
+    'size_limit' => 'Taille maximale : {0}.',
 ];

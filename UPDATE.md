@@ -59,7 +59,7 @@ performance improvements ⚡.
 ### Where can I find my _Castopod Host_ version?
 
 Go to your _Castopod Host_ admin panel, the version is displayed on the bottom
-right corner.
+left corner.
 
 Alternatively, you can find the version in the `app > Config > Constants.php`
 file.

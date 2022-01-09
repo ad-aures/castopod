@@ -206,3 +206,64 @@ if (! function_exists('podcast_uuid')) {
 }
 
 //--------------------------------------------------------------------
+
+
+if (! function_exists('file_upload_max_size')) {
+
+    /**
+     * Returns a file size limit in bytes based on the PHP upload_max_filesize and post_max_size Adapted from:
+     * https://stackoverflow.com/a/25370978
+     */
+    function file_upload_max_size(): float
+    {
+        static $max_size = -1;
+
+        if ($max_size < 0) {
+            // Start with post_max_size.
+            $post_max_size = parse_size((string) ini_get('post_max_size'));
+            if ($post_max_size > 0) {
+                $max_size = $post_max_size;
+            }
+
+            // If upload_max_size is less, then reduce. Except if upload_max_size is
+            // zero, which indicates no limit.
+            $upload_max = parse_size((string) ini_get('upload_max_filesize'));
+            if ($upload_max > 0 && $upload_max < $max_size) {
+                $max_size = $upload_max;
+            }
+        }
+        return $max_size;
+    }
+}
+
+if (! function_exists('parse_size')) {
+    function parse_size(string $size): float
+    {
+        $unit = (string) preg_replace('~[^bkmgtpezy]~i', '', $size); // Remove the non-unit characters from the size.
+        $size = (float) preg_replace('~[^0-9\.]~', '', $size); // Remove the non-numeric characters from the size.
+        if ($unit !== '') {
+            // Find the position of the unit in the ordered string which is the power of magnitude to multiply a kilobyte by.
+            return round($size * pow(1024, (float) stripos('bkmgtpezy', $unit[0])));
+        }
+
+        return round($size);
+    }
+}
+
+if (! function_exists('format_bytes')) {
+    /**
+     * Adapted from https://stackoverflow.com/a/2510459
+     */
+    function formatBytes(float $bytes, int $precision = 2): string
+    {
+        $units = ['B', 'KiB', 'MiB', 'GiB', 'TiB'];
+
+        $bytes = max($bytes, 0);
+        $pow = floor(($bytes ? log($bytes) : 0) / log(1024));
+        $pow = min($pow, count($units) - 1);
+
+        $bytes /= pow(1024, $pow);
+
+        return round($bytes, $precision) . $units[$pow];
+    }
+}

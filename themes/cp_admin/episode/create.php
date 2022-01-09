@@ -11,8 +11,6 @@
 
 <?= $this->section('content') ?>
 
-<Alert variant="danger" glyph="alert" class="max-w-xl"><?= lang('Episode.form.warning') ?></Alert>
-
 <form action="<?= route_to('episode-create', $podcast->id) ?>" method="POST" enctype="multipart/form-data" class="flex flex-col max-w-xl mt-6 gap-y-8">
 <?= csrf_field() ?>
 
@@ -23,9 +21,12 @@
     name="audio_file"
     label="<?= lang('Episode.form.audio_file') ?>"
     hint="<?= lang('Episode.form.audio_file_hint') ?>"
+    helper="<?= lang('Common.size_limit', [formatBytes(file_upload_max_size())]) ?>"
     type="file"
     accept=".mp3,.m4a"
-    required="true" />
+    required="true"
+    data-max-size="<?= file_upload_max_size() ?>"
+    data-max-size-error="<?= lang('Episode.form.file_size_error', [formatBytes(file_upload_max_size())]) ?>" />
 
 <Forms.Field
     name="cover"

@@ -45,4 +45,5 @@ return [
         'play' => 'Play',
         'playing' => 'Playing',
     ],
+    'size_limit' => 'Size limit: {0}.',
 ];

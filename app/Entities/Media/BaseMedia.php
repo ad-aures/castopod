@@ -20,7 +20,6 @@ use CodeIgniter\Files\File;
  * @property string $file_directory
  * @property string $file_extension
  * @property string $file_name
- * @property string $file_name_with_extension
  * @property int $file_size
  * @property string $file_mimetype
  * @property array|null $file_metadata
@@ -80,7 +79,6 @@ class BaseMedia extends Entity
             $this->attributes['file_name'] = $filename;
             $this->attributes['file_directory'] = $dirname;
             $this->attributes['file_extension'] = $extension;
-            $this->attributes['file_name_with_extension'] = "{$filename}.{$extension}";
         }
     }
 

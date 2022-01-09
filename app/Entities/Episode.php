@@ -275,7 +275,7 @@ class Episode extends Entity
             ]);
             $transcript->setFile($file);
 
-            $this->attributes['transcript_id'] = (new MediaModel())->saveMedia($transcript);
+            $this->attributes['transcript_id'] = (new MediaModel('transcript'))->saveMedia($transcript);
         }
 
         return $this;
@@ -313,7 +313,7 @@ class Episode extends Entity
             ]);
             $chapters->setFile($file);
 
-            $this->attributes['chapters_id'] = (new MediaModel())->saveMedia($chapters);
+            $this->attributes['chapters_id'] = (new MediaModel('chapters'))->saveMedia($chapters);
         }
 
         return $this;

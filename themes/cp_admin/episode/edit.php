@@ -15,8 +15,6 @@
 
 <?= $this->section('content') ?>
 
-<Alert variant="danger" glyph="alert" class="max-w-xl"><?= lang('Episode.form.warning') ?></Alert>
-
 <form id="episode-edit-form" action="<?= route_to('episode-edit', $podcast->id, $episode->id) ?>" method="POST" enctype="multipart/form-data" class="flex flex-col max-w-xl mt-6 gap-y-8">
 <?= csrf_field() ?>
 
@@ -27,14 +25,17 @@
     name="audio_file"
     label="<?= lang('Episode.form.audio_file') ?>"
     hint="<?= lang('Episode.form.audio_file_hint') ?>"
+    helper="<?= lang('Common.size_limit', [formatBytes(file_upload_max_size())]) ?>"
     type="file"
-    accept=".mp3,.m4a" />
+    accept=".mp3,.m4a"
+    data-max-size="<?= file_upload_max_size() ?>"
+    data-max-size-error="<?= lang('Episode.form.file_size_error', [formatBytes(file_upload_max_size())]) ?>" />
 
 <Forms.Field
     name="cover"
     label="<?= lang('Episode.form.cover') ?>"
     hint="<?= lang('Episode.form.cover_hint') ?>"
-    helper="<?= lang('Episode.form.cover_size_hint', ) ?>"
+    helper="<?= lang('Episode.form.cover_size_hint') ?>"
     type="file"
     accept=".jpg,.jpeg,.png" />
 
@@ -166,12 +167,10 @@
                 <div class="flex items-center mb-1 gap-x-2">
                     <?= anchor(
                 $episode->transcript->file_url,
-                icon('file', 'mr-2 text-skin-muted') .
-                            $episode->transcript->file_name_with_extension,
+                icon('file-download', 'mr-1 text-skin-muted text-xl') . lang('Episode.form.transcript_download'),
                 [
-                    'class' => 'inline-flex items-center text-xs',
-                    'target' => '_blank',
-                    'rel' => 'noreferrer noopener',
+                    'class' => 'flex-1 font-semibold hover:underline inline-flex items-center text-xs',
+                    'download' => '',
                 ],
             ) .
                         anchor(
@@ -223,11 +222,10 @@
                 <div class="flex mb-1 gap-x-2">
                     <?= anchor(
                 $episode->chapters->file_url,
-                icon('file', 'mr-2') . $episode->chapters->file_name_with_extension,
+                icon('file-download', 'mr-1 text-skin-muted text-xl') . lang('Episode.form.chapters_download'),
                 [
-                    'class' => 'inline-flex items-center text-xs',
-                    'target' => '_blank',
-                    'rel' => 'noreferrer noopener',
+                    'class' => 'flex-1 font-semibold hover:underline inline-flex items-center text-xs',
+                    'download' => '',
                 ],
             ) .
                     anchor(

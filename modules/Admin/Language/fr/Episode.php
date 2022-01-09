@@ -49,8 +49,8 @@ return [
         'editSuccess' => 'L’épisode a bien été mis à jour !',
     ],
     'form' => [
-        'warning' =>
-            'En cas d’erreur fatale, essayez d’augmenter les valeurs de `memory_limit`, `upload_max_filesize` et `post_max_size` dans votre fichier de configuration php puis redémarrez votre serveur web.<br />Les valeurs doivent être plus grandes que le fichier audio que vous souhaitez téléverser.',
+        'file_size_error' =>
+            'Votre fichier est trop lourd ! La taille maximale est de {0}. Augmentez les valeurs de `memory_limit`, `upload_max_filesize` et `post_max_size` dans votre fichier de configuration php puis redémarrez votre serveur web pour téléverser votre fichier.',
         'audio_file' => 'Fichier audio',
         'audio_file_hint' => 'Sélectionnez un fichier audio .mp3 ou .m4a.',
         'info_section_title' => 'Informations épisode',
@@ -94,15 +94,16 @@ return [
         'location_section_subtitle' => 'De quel lieu cet épisode parle-t-il ?',
         'location_name' => 'Nom ou adresse du lieu',
         'location_name_hint' => 'Ce lieu peut être réel ou fictif',
-        'transcript' => 'Transcription ou sous-titrage',
-        'transcript_hint' =>
-            'Les formats autorisés sont txt, html, srt ou json.',
-        'transcript_file' => 'Fichier de transcription',
+        'transcript' => 'Transcription (sous-titrage)',
+        'transcript_hint' => 'Seulement les .srt sont autorisés',
+        'transcript_download' => 'Télécharger le transcript',
+        'transcript_file' => 'Fichier de transcription (.srt)',
         'transcript_remote_url' =>
             'URL distante pour le fichier de transcription',
         'transcript_file_delete' => 'Supprimer le fichier de transcription',
         'chapters' => 'Chapitrage',
         'chapters_hint' => 'Le fichier doit être en format “JSON Chapters”.',
+        'chapters_download' => 'Télécharger le chapitrage',
         'chapters_file' => 'Fichier de chapitrage',
         'chapters_remote_url' =>
             'URL distante pour le fichier de chapitrage',
