@@ -11,10 +11,12 @@ declare(strict_types=1);
 namespace MediaClipper;
 
 use App\Entities\Episode;
+use Exception;
 use GdImage;
 
 /**
- * TODO: refactor this by splitting image manipulations + video generation
+ * TODO: refactor this by splitting process modules into different classes (image generation, subtitles clip, video
+ * generation)
  *
  * @phpstan-ignore-next-line
  */
@@ -44,8 +46,6 @@ class VideoClipper
     protected string $audioInput;
 
     protected string $episodeCoverPath;
-
-    protected ?string $subtitlesInput = null;
 
     protected string $soundbiteOutput;
 
@@ -87,9 +87,6 @@ class VideoClipper
 
         $this->audioInput = media_path($this->episode->audio->file_path);
         $this->episodeCoverPath = media_path($this->episode->cover->file_path);
-        if ($this->episode->transcript !== null) {
-            $this->subtitlesInput = media_path($this->episode->transcript->file_path);
-        }
 
         $podcastFolder = media_path("podcasts/{$this->episode->podcast->handle}");
 
@@ -108,10 +105,82 @@ class VideoClipper
 
     public function subtitlesClip(): void
     {
-        if ($this->subtitlesInput) {
-            $subtitleClipCmd = "ffmpeg -y -i {$this->subtitlesInput} -ss {$this->start} -t {$this->duration} {$this->subtitlesClipOutput}";
+        if ($this->episode->transcript === null) {
+            throw new Exception('Episode does not have a transcript!');
+        }
+
+        if ($this->episode->transcript->json_path) {
+            $this->generateSubtitlesClipFromJson($this->episode->transcript->json_path);
+        } else {
+            $subtitlesInput = media_path($this->episode->transcript->file_path);
+            $subtitleClipCmd = "ffmpeg -y -i {$subtitlesInput} -ss {$this->start} -t {$this->duration} {$this->subtitlesClipOutput}";
             exec($subtitleClipCmd);
         }
+    }
+
+    public function generateSubtitlesClipFromJson(string $jsonFileInput): void
+    {
+        $jsonTranscriptString = file_get_contents($jsonFileInput);
+        if ($jsonTranscriptString === false) {
+            throw new Exception('Cannot get transcript json contents.');
+        }
+
+        $jsonTranscript = json_decode($jsonTranscriptString, true);
+        if ($jsonTranscript === null) {
+            throw new Exception('Transcript json is invalid.');
+        }
+
+        $srtClip = '';
+        $segmentIndex = 1;
+        foreach ($jsonTranscript as $segment) {
+            $startTime = null;
+            $endTime = null;
+
+            if ($segment['startTime'] < $this->end && $segment['endTime'] > $this->start) {
+                $startTime = $segment['startTime'] - $this->start;
+                $endTime = $segment['endTime'] - $this->start;
+            }
+
+            if ($segment['startTime'] < $this->start && $this->start < $segment['endTime']) {
+                $startTime = 0;
+            }
+
+            if ($segment['startTime'] < $this->end && $segment['endTime'] >= $this->end) {
+                $endTime = $this->duration;
+            }
+
+            if ($startTime !== null && $endTime !== null) {
+                $formattedStartTime = $this->formatSeconds($startTime);
+                $formattedEndTime = $this->formatSeconds($endTime);
+                $srtClip .= <<<CODE_SAMPLE
+                {$segmentIndex}
+                {$formattedStartTime} --> {$formattedEndTime}
+                {$segment['text']}
+
+
+                CODE_SAMPLE;
+
+                ++$segmentIndex;
+            }
+        }
+
+        // create srt clip file
+        file_put_contents($this->subtitlesClipOutput, $srtClip);
+    }
+
+    public function formatSeconds(float $seconds): string
+    {
+        $milliseconds = str_replace('0.', '', (string) (round($seconds - floor($seconds), 3)));
+
+        return gmdate('H:i:s', (int) floor($seconds)) . ',' . str_pad($milliseconds, 3, '0', STR_PAD_RIGHT);
+    }
+
+    public function cleanTempFiles(): void
+    {
+        // delete generated video background image, soundbite & subtitlesClip
+        unlink($this->soundbiteOutput);
+        unlink($this->subtitlesClipOutput);
+        unlink($this->videoClipBgOutput);
     }
 
     /**
@@ -129,7 +198,11 @@ class VideoClipper
 
         $generateCmd = $this->getCmd();
 
-        return $this->cmd_exec($generateCmd);
+        $cmdResult = $this->cmd_exec($generateCmd);
+
+        $this->cleanTempFiles();
+
+        return $cmdResult;
     }
 
     public function getCmd(): string

@@ -13,7 +13,7 @@ const VideoClipBuilder = (): void => {
       ) as NodeListOf<HTMLInputElement>;
 
       const titleInput = form.querySelector(
-        'input[name="label"]'
+        'input[name="title"]'
       ) as HTMLInputElement;
       if (titleInput) {
         videoClipPreviewer.setAttribute("title", titleInput.value || "");

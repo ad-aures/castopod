@@ -15,11 +15,11 @@ use CodeIgniter\Files\File;
 
 class Transcript extends BaseMedia
 {
+    public ?string $json_path = null;
+
+    public ?string $json_url = null;
+
     protected string $type = 'transcript';
-
-    protected ?string $json_path = null;
-
-    protected ?string $json_url = null;
 
     public function initFileProperties(): void
     {
