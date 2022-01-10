@@ -182,17 +182,22 @@ class Podcast extends Entity
         'updated_by' => 'integer',
     ];
 
-    public function getActor(): Actor
+    /**
+     * @noRector ReturnTypeDeclarationRector
+     */
+    public function getActor(): ?Actor
     {
         if ($this->actor_id === 0) {
             throw new RuntimeException('Podcast must have an actor_id before getting actor.');
         }
 
         if ($this->actor === null) {
+            // @phpstan-ignore-next-line
             $this->actor = model(ActorModel::class)
                 ->getActorById($this->actor_id);
         }
 
+        // @phpstan-ignore-next-line
         return $this->actor;
     }
 

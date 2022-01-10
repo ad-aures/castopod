@@ -106,12 +106,12 @@
       "source": {
         "type": "git",
         "url": "https://github.com/codeigniter4/CodeIgniter4.git",
-        "reference": "0755553a4259fbacc799395ca8a5546c5e979c45"
+        "reference": "8449d13724d460a4e5573f49027cd9f862449a29"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/codeigniter4/CodeIgniter4/zipball/0755553a4259fbacc799395ca8a5546c5e979c45",
-        "reference": "0755553a4259fbacc799395ca8a5546c5e979c45",
+        "url": "https://api.github.com/repos/codeigniter4/CodeIgniter4/zipball/8449d13724d460a4e5573f49027cd9f862449a29",
+        "reference": "8449d13724d460a4e5573f49027cd9f862449a29",
         "shasum": ""
       },
       "require": {
@@ -134,7 +134,7 @@
         "phpstan/phpstan": "^1.0",
         "phpunit/phpunit": "^9.1",
         "predis/predis": "^1.1",
-        "rector/rector": "0.12.10"
+        "rector/rector": "0.12.11"
       },
       "suggest": {
         "ext-fileinfo": "Improves mime type detection for files"
@@ -155,6 +155,7 @@
       "autoload-dev": {
         "psr-4": {
           "CodeIgniter\\": "tests/system/",
+          "CodeIgniter\\AutoReview\\": "tests/AutoReview/",
           "Utils\\": "utils/"
         }
       },
@@ -183,7 +184,7 @@
         "slack": "https://codeigniterchat.slack.com",
         "issues": "https://github.com/codeigniter4/CodeIgniter4/issues"
       },
-      "time": "2022-01-04T07:11:09+00:00"
+      "time": "2022-01-10T01:36:11+00:00"
     },
     {
       "name": "codeigniter4/settings",

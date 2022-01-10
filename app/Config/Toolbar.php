@@ -37,8 +37,7 @@ class Toolbar extends BaseConfig
      */
     public array $collectors = [
         Timers::class,
-        // TODO: uncomment when fixed: https://github.com/codeigniter4/CodeIgniter4/issues/5539
-        // Database::class,
+        Database::class,
         Logs::class,
         Views::class,
         // Cache::class,

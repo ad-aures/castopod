@@ -87,18 +87,22 @@ class EpisodeComment extends UuidEntity
 
     /**
      * Returns the comment's actor
+     *
+     * @noRector ReturnTypeDeclarationRector
      */
-    public function getActor(): Actor
+    public function getActor(): ?Actor
     {
         if ($this->actor_id === null) {
             throw new RuntimeException('Comment must have an actor_id before getting actor.');
         }
 
         if ($this->actor === null) {
+            // @phpstan-ignore-next-line
             $this->actor = model(ActorModel::class, false)
                 ->getActorById($this->actor_id);
         }
 
+        // @phpstan-ignore-next-line
         return $this->actor;
     }
 
@@ -123,6 +127,9 @@ class EpisodeComment extends UuidEntity
         return $this->getReplies() !== [];
     }
 
+    /**
+     * @noRector ReturnTypeDeclarationRector
+     */
     public function getReplyToComment(): ?self
     {
         if ($this->in_reply_to_id === null) {
