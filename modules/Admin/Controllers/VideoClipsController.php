@@ -211,9 +211,12 @@ class VideoClipsController extends BaseController
 
         if ($videoClip->media === null) {
             // delete Clip directly
-            (new ClipModel())->delete($videoClip->id);
+            (new ClipModel())->deleteVideoClip($this->podcast->id, $this->episode->id, $videoClip->id);
         } else {
+            (new ClipModel())->clearVideoClipCache($videoClip->id);
+
             $mediaModel = new MediaModel();
+            // delete the videoClip file, the clip will be deleted on cascade
             if (! $mediaModel->deleteMedia($videoClip->media)) {
                 return redirect()
                     ->back()

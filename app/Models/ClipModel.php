@@ -110,33 +110,6 @@ class ClipModel extends Model
     }
 
     /**
-     * Gets all video clips for an episode
-     *
-     * @return BaseClip[]
-     */
-    public function getVideoClips(int $podcastId, int $episodeId): array
-    {
-        $cacheName = "podcast#{$podcastId}_episode#{$episodeId}_video-clips";
-        if (! ($found = cache($cacheName))) {
-            $found = $this->where([
-                'episode_id' => $episodeId,
-                'podcast_id' => $podcastId,
-                'type' => 'video',
-            ])
-                ->orderBy('start_time')
-                ->findAll();
-
-            foreach ($found as $key => $videoClip) {
-                $found[$key] = new VideoClip($videoClip->toArray());
-            }
-
-            cache()
-                ->save($cacheName, $found, DECADE);
-        }
-        return $found;
-    }
-
-    /**
      * Gets scheduled video clips for an episode
      *
      * @return VideoClip[]
@@ -155,6 +128,23 @@ class ClipModel extends Model
         }
 
         return $found;
+    }
+
+    public function deleteVideoClip(int $podcastId, int $episodeId, int $clipId): BaseResult | bool
+    {
+        $this->clearVideoClipCache($clipId);
+
+        return $this->delete([
+            'podcast_id' => $podcastId,
+            'episode_id' => $episodeId,
+            'id' => $clipId,
+        ]);
+    }
+
+    public function clearVideoClipCache(int $clipId): void
+    {
+        cache()
+            ->delete("video-clip#{$clipId}");
     }
 
     public function getSoundbiteById(int $soundbiteId): ?Soundbite
@@ -206,8 +196,7 @@ class ClipModel extends Model
 
     public function deleteSoundbite(int $podcastId, int $episodeId, int $clipId): BaseResult | bool
     {
-        cache()
-            ->delete("podcast#{$podcastId}_episode#{$episodeId}_soundbites");
+        $this->clearSoundbiteCache($podcastId, $episodeId, $clipId);
 
         return $this->delete([
             'podcast_id' => $podcastId,
@@ -216,6 +205,11 @@ class ClipModel extends Model
         ]);
     }
 
-    //     cache()
-    //         ->deleteMatching("page_podcast#{$clip->podcast_id}_episode#{$clip->episode_id}_*");
+    public function clearSoundbiteCache(int $podcastId, int $episodeId, int $clipId): void
+    {
+        cache()
+            ->delete("podcast#{$podcastId}_episode#{$episodeId}_soundbites");
+        cache()
+            ->delete("soundbite#{$clipId}");
+    }
 }
