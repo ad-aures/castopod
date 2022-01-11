@@ -82,7 +82,7 @@ class Image extends BaseMedia
         $this->deleteSizes();
     }
 
-    private function saveSizes(): void
+    public function saveSizes(): void
     {
         // save derived sizes
         $imageService = service('image');

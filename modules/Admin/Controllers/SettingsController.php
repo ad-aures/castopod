@@ -110,7 +110,10 @@ class SettingsController extends BaseController
         $allPodcasts = (new PodcastModel())->findAll();
 
         foreach ($allPodcasts as $podcast) {
-            $podcastImages = glob(ROOTPATH . "public/media/podcasts/{$podcast->handle}/*_*");
+            $podcastImages = glob(
+                ROOTPATH . 'public/' . config('App')->mediaRoot . "/podcasts/{$podcast->handle}/*_*{jpg,png,webp}",
+                GLOB_BRACE
+            );
 
             if ($podcastImages) {
                 foreach ($podcastImages as $podcastImage) {
@@ -119,19 +122,22 @@ class SettingsController extends BaseController
                     }
                 }
             }
-            $podcast->setCover($podcast->cover);
-            if ($podcast->banner_path !== null) {
-                $podcast->setBanner($podcast->banner);
+            $podcast->cover->saveSizes();
+            if ($podcast->banner_id !== null) {
+                $podcast->banner->saveSizes();
             }
 
             foreach ($podcast->episodes as $episode) {
-                if ($episode->cover_path !== null) {
-                    $episode->setCover($episode->cover);
+                if ($episode->cover_id !== null) {
+                    $episode->cover->saveSizes();
                 }
             }
         }
 
-        $personsImages = glob(ROOTPATH . 'public/media/persons/*_*');
+        $personsImages = glob(
+            ROOTPATH . 'public/' . config('App')->mediaRoot . '/persons/*_*{jpg,png,webp}',
+            GLOB_BRACE
+        );
         if ($personsImages) {
             foreach ($personsImages as $personsImage) {
                 if (is_file($personsImage)) {
@@ -142,8 +148,8 @@ class SettingsController extends BaseController
 
         $persons = (new PersonModel())->findAll();
         foreach ($persons as $person) {
-            if ($person->avatar_path !== null) {
-                $person->setAvatar($person->avatar);
+            if ($person->avatar_id !== null) {
+                $person->avatar->saveSizes();
             }
         }
 
