@@ -46,6 +46,12 @@ class Button extends Component
             'large' => 'text-base leading-6',
         ];
 
+        $iconSize = [
+            'small' => 'text-sm',
+            'base' => 'text-lg',
+            'large' => 'text-2xl',
+        ];
+
         $basePaddings = [
             'small' => 'px-3 py-1',
             'base' => 'px-3 py-2',
@@ -77,14 +83,14 @@ class Button extends Component
         if ($this->iconLeft !== '') {
             $this->slot = (new Icon([
                 'glyph' => $this->iconLeft,
-                'class' => 'mr-2 opacity-75',
+                'class' => 'mr-2 opacity-75' . ' ' . $iconSize[$this->size],
             ]))->render() . $this->slot;
         }
 
         if ($this->iconRight !== '') {
             $this->slot .= (new Icon([
                 'glyph' => $this->iconRight,
-                'class' => 'ml-2 opacity-75',
+                'class' => 'ml-2 opacity-75' . ' ' . $iconSize[$this->size],
             ]))->render();
         }
 

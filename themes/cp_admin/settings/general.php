@@ -69,6 +69,20 @@
 </Forms.Section>
 
 </form>
+
+<form action="<?= route_to('settings-housekeeping-run') ?>" method="POST" class="flex flex-col max-w-xl gap-y-4">
+<?= csrf_field() ?>
+
+<Forms.Section
+    title="<?= lang('Settings.housekeeping.title') ?>"
+    subtitle="<?= lang('Settings.housekeeping.subtitle') ?>" >
+
+    <Button variant="primary" type="submit" iconLeft="home-gear"><?= lang('Settings.housekeeping.run') ?></Button>
+
+</Forms.Section>
+
+</form>
+
 </div>
 
 <?= $this->endSection() ?>

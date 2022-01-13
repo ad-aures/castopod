@@ -28,6 +28,12 @@ return [
         'regenerate' => 'Regénérer les images',
         'regenerationSuccess' => 'Toutes les images ont été regénérés avec succès !',
     ],
+    'housekeeping' => [
+        'title' => 'Ménage',
+        'subtitle' => 'Exécute un nombre de tâches de nettoyage, comme la réécriture de métadonnées des fichiers media (images, fichiers audio, transcript, chapitres, …).',
+        'run' => 'Faire le ménage',
+        'runSuccess' => 'Le ménage a été effectué avec succès !',
+    ],
     'theme' => [
         'title' => 'Thème',
         'accent_section_title' => 'Couleur d’accentuation',

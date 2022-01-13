@@ -28,6 +28,12 @@ return [
         'regenerate' => 'Regenerate images',
         'regenerationSuccess' => 'All images have been regenerated successfully!',
     ],
+    'housekeeping' => [
+        'title' => 'Housekeeping',
+        'subtitle' => 'Runs various housekeeping tasks, such as rewriting media files metadata (images, audio files, transcripts, chapters, …).',
+        'run' => 'Run housekeeping',
+        'runSuccess' => 'Housekeeping has been run successfully!',
+    ],
     'theme' => [
         'title' => 'Theme',
         'accent_section_title' => 'Accent color',

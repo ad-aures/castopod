@@ -145,6 +145,21 @@ class MediaModel extends Model
         return $this->update($media->id, $media);
     }
 
+    /**
+     * @return array<mixed>
+     */
+    public function getAllOfType(): array
+    {
+        $result = $this->where('type', $this->fileType)
+            ->findAll();
+        $mediaClass = $this->returnType;
+        foreach ($result as $key => $media) {
+            $result[$key] = new $mediaClass($media->toArray(false, true));
+        }
+
+        return $result;
+    }
+
     public function deleteMedia(object $media): bool
     {
         $media->deleteFile();

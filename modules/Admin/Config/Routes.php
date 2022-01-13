@@ -40,6 +40,10 @@ $routes->group(
                 'as' => 'settings-images-regenerate',
                 'filter' => 'permission:settings-manage',
             ]);
+            $routes->post('instance-housekeeping-run', 'SettingsController::runHousekeeping', [
+                'as' => 'settings-housekeeping-run',
+                'filter' => 'permission:settings-manage',
+            ]);
             $routes->get('theme', 'SettingsController::theme', [
                 'as' => 'settings-theme',
                 'filter' => 'permission:settings-manage',
