@@ -56,16 +56,16 @@ class SettingsController extends BaseController
             helper(['filesystem', 'media']);
 
             // delete site folder in media before repopulating it
-            delete_files(ROOTPATH . 'public/media/site/');
+            delete_files(media_path('/site'));
 
             // save original in disk
             $originalFilename = save_media($siteIconFile, 'site', 'icon');
 
             // convert jpeg image to png if not
             if ($siteIconFile->getClientMimeType() !== 'image/png') {
-                service('image')->withFile(ROOTPATH . 'public/media/' . $originalFilename)
+                service('image')->withFile(media_path($originalFilename))
                     ->convert(IMAGETYPE_JPEG)
-                    ->save(ROOTPATH . 'public/media/site/icon.png');
+                    ->save(media_path('/site/icon.png'));
             }
 
             // generate random hash to use as a suffix to renew browser cache
@@ -73,24 +73,24 @@ class SettingsController extends BaseController
 
             // generate ico
             $ico_lib = new PHP_ICO();
-            $ico_lib->add_image(ROOTPATH . 'public/media/site/icon.png', [[32, 32], [64, 64]]);
-            $ico_lib->save_ico(ROOTPATH . "public/media/site/favicon.{$randomHash}.ico");
+            $ico_lib->add_image(media_path('/site/icon.png'), [[32, 32], [64, 64]]);
+            $ico_lib->save_ico(media_path("/site/favicon.{$randomHash}.ico"));
 
             // resize original to needed sizes
             foreach ([64, 180, 192, 512] as $size) {
                 service('image')
-                    ->withFile(ROOTPATH . 'public/media/site/icon.png')
+                    ->withFile(media_path('/site/icon.png'))
                     ->resize($size, $size)
                     ->save(media_path("/site/icon-{$size}.{$randomHash}.png"));
             }
 
             service('settings')
                 ->set('App.siteIcon', [
-                    'ico' => media_path("/site/favicon.{$randomHash}.ico"),
-                    '64' => media_path("/site/icon-64.{$randomHash}.png"),
-                    '180' => media_path("/site/icon-180.{$randomHash}.png"),
-                    '192' => media_path("/site/icon-192.{$randomHash}.png"),
-                    '512' => media_path("/site/icon-512.{$randomHash}.png"),
+                    'ico' => '/' . media_path("/site/favicon.{$randomHash}.ico"),
+                    '64' => '/' . media_path("/site/icon-64.{$randomHash}.png"),
+                    '180' => '/' . media_path("/site/icon-180.{$randomHash}.png"),
+                    '192' => '/' . media_path("/site/icon-192.{$randomHash}.png"),
+                    '512' => '/' . media_path("/site/icon-512.{$randomHash}.png"),
                 ]);
         }
 
@@ -99,9 +99,9 @@ class SettingsController extends BaseController
 
     public function deleteIcon(): RedirectResponse
     {
-        helper('filesystem');
+        helper(['filesystem', 'media']);
         // delete site folder in media
-        delete_files(ROOTPATH . 'public/media/site/');
+        delete_files(media_path('/site'));
 
         service('settings')
             ->forget('App.siteIcon');
@@ -111,13 +111,12 @@ class SettingsController extends BaseController
 
     public function regenerateImages(): RedirectResponse
     {
+        helper('media');
+
         $allPodcasts = (new PodcastModel())->findAll();
 
         foreach ($allPodcasts as $podcast) {
-            $podcastImages = glob(
-                ROOTPATH . 'public/' . config('App')->mediaRoot . "/podcasts/{$podcast->handle}/*_*{jpg,png,webp}",
-                GLOB_BRACE
-            );
+            $podcastImages = glob(media_path("/podcasts/{$podcast->handle}/*_*{jpg,png,webp}"), GLOB_BRACE);
 
             if ($podcastImages) {
                 foreach ($podcastImages as $podcastImage) {
@@ -138,10 +137,7 @@ class SettingsController extends BaseController
             }
         }
 
-        $personsImages = glob(
-            ROOTPATH . 'public/' . config('App')->mediaRoot . '/persons/*_*{jpg,png,webp}',
-            GLOB_BRACE
-        );
+        $personsImages = glob(media_path('/persons/*_*{jpg,png,webp}'), GLOB_BRACE);
         if ($personsImages) {
             foreach ($personsImages as $personsImage) {
                 if (is_file($personsImage)) {
@@ -167,10 +163,7 @@ class SettingsController extends BaseController
         // Delete all podcast image sizes to recreate them
         $allPodcasts = (new PodcastModel())->findAll();
         foreach ($allPodcasts as $podcast) {
-            $podcastImages = glob(
-                ROOTPATH . 'public/' . config('App')->mediaRoot . "/podcasts/{$podcast->handle}/*_*{jpg,png,webp}",
-                GLOB_BRACE
-            );
+            $podcastImages = glob(media_path("/podcasts/{$podcast->handle}/*_*{jpg,png,webp}"), GLOB_BRACE);
 
             if ($podcastImages) {
                 foreach ($podcastImages as $podcastImage) {
@@ -182,10 +175,7 @@ class SettingsController extends BaseController
         }
 
         // Delete all person image sizes to recreate them
-        $personsImages = glob(
-            ROOTPATH . 'public/' . config('App')->mediaRoot . '/persons/*_*{jpg,png,webp}',
-            GLOB_BRACE
-        );
+        $personsImages = glob(media_path('/persons/*_*{jpg,png,webp}'), GLOB_BRACE);
         if ($personsImages) {
             foreach ($personsImages as $personsImage) {
                 if (is_file($personsImage)) {
