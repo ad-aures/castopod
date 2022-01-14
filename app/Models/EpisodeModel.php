@@ -322,6 +322,58 @@ class EpisodeModel extends Model
         return $stats;
     }
 
+    public function resetCommentsCount(): int | false
+    {
+        $episodeCommentsCount = $this->select('episodes.id, COUNT(*) as `comments_count`')
+            ->join('episode_comments', 'episodes.id = episode_comments.episode_id')
+            ->where('in_reply_to_id', null)
+            ->groupBy('episodes.id')
+            ->getCompiledSelect();
+
+        $episodePostsRepliesCount = $this
+            ->select('episodes.id, COUNT(*) as `comments_count`')
+            ->join(
+                config('Fediverse')
+                    ->tablesPrefix . 'posts',
+                'episodes.id = ' . config('Fediverse')->tablesPrefix . 'posts.episode_id'
+            )
+            ->where('in_reply_to_id IS NOT', null)
+            ->groupBy('episodes.id')
+            ->getCompiledSelect();
+
+        $query = $this->db->query(
+            'SELECT `id`, SUM(`comments_count`) as `comments_count` FROM (' . $episodeCommentsCount . ' UNION ALL ' . $episodePostsRepliesCount . ') x GROUP BY `id`'
+        );
+
+        $countsPerEpisodeId = $query->getResultArray();
+
+        if ($countsPerEpisodeId !== []) {
+            return $this->updateBatch($countsPerEpisodeId, 'id');
+        }
+
+        return 0;
+    }
+
+    public function resetPostsCount(): int | false
+    {
+        $episodePostsCount = $this->select('episodes.id, COUNT(*) as `posts_count`')
+            ->join(
+                config('Fediverse')
+                    ->tablesPrefix . 'posts',
+                'episodes.id = ' . config('Fediverse')->tablesPrefix . 'posts.episode_id'
+            )
+            ->where('in_reply_to_id', null)
+            ->groupBy('episodes.id')
+            ->get()
+            ->getResultArray();
+
+        if ($episodePostsCount !== []) {
+            return $this->updateBatch($episodePostsCount, 'id');
+        }
+
+        return 0;
+    }
+
     /**
      * @param mixed[] $data
      *

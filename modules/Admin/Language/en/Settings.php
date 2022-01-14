@@ -30,7 +30,11 @@ return [
     ],
     'housekeeping' => [
         'title' => 'Housekeeping',
-        'subtitle' => 'Runs various housekeeping tasks, such as rewriting media files metadata (images, audio files, transcripts, chapters, …).',
+        'subtitle' => 'Runs various housekeeping tasks, such as resetting counts and rewriting media files metadata. This may take a while.',
+        'reset_counts' => 'Reset counts',
+        'reset_counts_helper' => 'This option will recalculate and reset all data counts (number of followers, posts, comments, …).',
+        'rewrite_media' => 'Rewrite media metadata',
+        'rewrite_media_helper' => 'This option will delete all superfluous media files and recreate them (images, audio files, transcripts, chapters, …)',
         'run' => 'Run housekeeping',
         'runSuccess' => 'Housekeeping has been run successfully!',
     ],

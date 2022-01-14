@@ -22,7 +22,6 @@ use CodeIgniter\HTTP\URI;
 use CodeIgniter\I18n\Time;
 use Modules\Analytics\AnalyticsTrait;
 use Modules\Fediverse\Controllers\PostController as FediversePostController;
-use Modules\Fediverse\Entities\Post as FediversePost;
 use Modules\Fediverse\Models\FavouriteModel;
 
 class PostController extends FediversePostController
@@ -32,6 +31,11 @@ class PostController extends FediversePostController
     protected Podcast $podcast;
 
     protected Actor $actor;
+
+    /**
+     * @var CastopodPost
+     */
+    protected $post;
 
     /**
      * @var string[]
@@ -53,6 +57,7 @@ class PostController extends FediversePostController
             count($params) > 1 &&
             ($post = (new PostModel())->getPostById($params[1])) !== null
         ) {
+            /** @var CastopodPost $post */
             $this->post = $post;
 
             unset($params[0]);
@@ -163,13 +168,17 @@ class PostController extends FediversePostController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $newPost = new FediversePost([
+        $newPost = new CastopodPost([
             'actor_id' => interact_as_actor_id(),
             'in_reply_to_id' => $this->post->id,
             'message' => $this->request->getPost('message'),
             'published_at' => Time::now(),
             'created_by' => user_id(),
         ]);
+
+        if ($this->post->in_reply_to_id === null && $this->post->episode_id !== null) {
+            $newPost->episode_id = $this->post->episode_id;
+        }
 
         $postModel = new PostModel();
         if (! $postModel->addReply($newPost)) {

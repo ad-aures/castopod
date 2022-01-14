@@ -27,7 +27,7 @@
     <?php else: ?>
         <div class="px-6 mb-4 post-content"><?= $post->message_html ?></div>
     <?php endif; ?>
-    <?php if ($post->episode_id): ?>
+    <?php if ($post->episode_id && $post->in_reply_to_id === null): ?>
         <?= view('episode/_partials/preview_card', [
     'index' => $index,
             'episode' => $post->episode,

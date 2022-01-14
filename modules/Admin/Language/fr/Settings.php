@@ -31,6 +31,10 @@ return [
     'housekeeping' => [
         'title' => 'Ménage',
         'subtitle' => 'Exécute un nombre de tâches de nettoyage, comme la réécriture de métadonnées des fichiers media (images, fichiers audio, transcript, chapitres, …).',
+        'reset_counts' => 'Réinitialiser les compteurs',
+        'reset_counts_helper' => 'Cette option recalcul et réinitialise les compteurs de données (nombre d’abonné·e·s, de publications, de commentaires, …).',
+        'rewrite_media' => 'Réécrire les métadonnées des fichiers média',
+        'rewrite_media_helper' => 'Cette option supprimera tous les fichiers média superflus et les recréera (images, fichiers audio, transcripts, chapitrages, …)',
         'run' => 'Faire le ménage',
         'runSuccess' => 'Le ménage a été effectué avec succès !',
     ],

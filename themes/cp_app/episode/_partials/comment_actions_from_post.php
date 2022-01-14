@@ -6,7 +6,7 @@
     [
         'numberOfLikes' => $comment->likes_count,
     ],
-) ?>"><?= icon('heart', 'text-xl mr-1 opacity-40 group-hover:text-red-600 group-hover:opacity-100') . $comment->likes_count ?></button>
+) ?>"><?= icon('heart', 'text-xl mr-1 text-gray-400 group-hover:text-red-600') . $comment->likes_count ?></button>
             <Button uri="<?= route_to('post', $podcast->handle, $comment->id) ?>" size="small"><?= lang('Comment.reply') ?></Button>
         </form>
         <?php if ($comment->replies_count): ?>
@@ -21,12 +21,18 @@
 ) ?>
         <?php endif; ?>
     <?php else: ?>
-        <button class="inline-flex items-center opacity-50 cursor-not-allowed hover:underline" title="<?= lang(
-    'Comment.like',
+        <?= anchor_popup(
+    route_to('post-remote-action', $podcast->handle, $comment->id, 'favourite'),
+    icon('heart', 'text-xl mr-1 opacity-40') . $comment->likes_count,
     [
-        'numberOfLikes' => $comment->likes_count,
+        'class' => 'inline-flex items-center hover:underline',
+        'width' => 420,
+        'height' => 620,
+        'title' => lang('Post.favourites', [
+            'numberOfFavourites' => $comment->likes_count,
+        ]),
     ],
-) ?>"><?= icon('heart', 'text-xl mr-1 text-skin-muted') . $comment->likes_count ?></button>
+) ?>
         <?php if ($comment->replies_count): ?>
             <?= anchor(
     route_to('post', $podcast->handle, $comment->id),

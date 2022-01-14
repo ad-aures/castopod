@@ -272,6 +272,47 @@ class ActorModel extends BaseModel
         return $found;
     }
 
+    public function resetFollowersCount(): int | false
+    {
+        $tablePrefix = config('Fediverse')
+            ->tablesPrefix;
+
+        $actorsFollowersCount = $this->db->table($tablePrefix . 'follows')->select(
+            'target_actor_id as id, COUNT(*) as `followers_count`'
+        )
+            ->groupBy('id')
+            ->get()
+            ->getResultArray();
+
+        if ($actorsFollowersCount !== []) {
+            return $this->updateBatch($actorsFollowersCount, 'id');
+        }
+
+        return 0;
+    }
+
+    public function resetPostsCount(): int | false
+    {
+        $tablePrefix = config('Fediverse')
+            ->tablesPrefix;
+
+        $actorsFollowersCount = $this->db->table($tablePrefix . 'posts')->select(
+            'actor_id as id, COUNT(*) as `posts_count`'
+        )
+            ->where([
+                'in_reply_to_id' => null,
+            ])
+            ->groupBy('actor_id')
+            ->get()
+            ->getResultArray();
+
+        if ($actorsFollowersCount !== []) {
+            return $this->updateBatch($actorsFollowersCount, 'id');
+        }
+
+        return 0;
+    }
+
     public function clearCache(Actor $actor): void
     {
         $cachePrefix = config('Fediverse')

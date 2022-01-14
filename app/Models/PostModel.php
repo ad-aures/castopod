@@ -49,8 +49,33 @@ class PostModel extends FediversePostModel
         return $this->where([
             'episode_id' => $episodeId,
         ])
+            ->where('in_reply_to_id', null)
             ->where('`published_at` <= NOW()', null, false)
             ->orderBy('published_at', 'DESC')
             ->findAll();
+    }
+
+    public function setEpisodeIdForRepliesOfEpisodePosts(): int | false
+    {
+        // make sure that posts in reply to episode activities have an episode id
+        $postsToUpdate = $this->db->table(config('Fediverse')->tablesPrefix . 'posts as p1')
+            ->join(config('Fediverse')->tablesPrefix . 'posts as p2', 'p1.id = p2.in_reply_to_id')
+            ->select('p2.id, p1.episode_id')
+            ->where([
+                'p1.in_reply_to_id' => null,
+                'p2.in_reply_to_id IS NOT' => null,
+                'p2.episode_id' => null,
+                'p1.episode_id IS NOT' => null,
+            ])
+            ->get()
+            ->getResultArray();
+
+        if ($postsToUpdate !== []) {
+            $postModel = new self();
+            $postModel->uuidUseBytes = false;
+            return $postModel->updateBatch($postsToUpdate, 'id');
+        }
+
+        return 0;
     }
 }

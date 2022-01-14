@@ -28,7 +28,10 @@ class PostController extends Controller
      */
     protected $helpers = ['fediverse'];
 
-    protected Post $post;
+    /**
+     * @var Post
+     */
+    protected $post;
 
     protected Fediverse $config;
 

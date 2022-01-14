@@ -276,9 +276,12 @@ class PostModel extends BaseUuidModel
             }
         }
 
-        model('ActorModel', false)
-            ->where('id', $post->actor_id)
-            ->increment('posts_count');
+        if ($post->in_reply_to_id === null) {
+            // increment posts_count only if not reply
+            model('ActorModel', false)
+                ->where('id', $post->actor_id)
+                ->increment('posts_count');
+        }
 
         if ($registerActivity) {
             // set post id and uri to construct NoteObject
@@ -617,6 +620,64 @@ class PostModel extends BaseUuidModel
         }
 
         return $found;
+    }
+
+    public function resetFavouritesCount(): int | false
+    {
+        $tablePrefix = config('Fediverse')
+            ->tablesPrefix;
+
+        $postsFavouritesCount = $this->db->table($tablePrefix . 'favourites')->select(
+            'post_id as id, COUNT(*) as `favourites_count`'
+        )
+            ->groupBy('id')
+            ->get()
+            ->getResultArray();
+
+        if ($postsFavouritesCount !== []) {
+            $this->uuidUseBytes = false;
+            return $this->updateBatch($postsFavouritesCount, 'id');
+        }
+
+        return 0;
+    }
+
+    public function resetReblogsCount(): int | false
+    {
+        $tablePrefix = config('Fediverse')
+            ->tablesPrefix;
+
+        $postsReblogsCount = $this->select($tablePrefix . 'posts.id, COUNT(*) as `replies_count`')
+            ->join($tablePrefix . 'posts as p2', $tablePrefix . 'posts.id = p2.reblog_of_id')
+            ->groupBy($tablePrefix . 'posts.id')
+            ->get()
+            ->getResultArray();
+
+        if ($postsReblogsCount !== []) {
+            $this->uuidUseBytes = false;
+            return $this->updateBatch($postsReblogsCount, 'id');
+        }
+
+        return 0;
+    }
+
+    public function resetRepliesCount(): int | false
+    {
+        $tablePrefix = config('Fediverse')
+            ->tablesPrefix;
+
+        $postsRepliesCount = $this->select($tablePrefix . 'posts.id, COUNT(*) as `replies_count`')
+            ->join($tablePrefix . 'posts as p2', $tablePrefix . 'posts.id = p2.in_reply_to_id')
+            ->groupBy($tablePrefix . 'posts.id')
+            ->get()
+            ->getResultArray();
+
+        if ($postsRepliesCount !== []) {
+            $this->uuidUseBytes = false;
+            return $this->updateBatch($postsRepliesCount, 'id');
+        }
+
+        return 0;
     }
 
     public function clearCache(Post $post): void

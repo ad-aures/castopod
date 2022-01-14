@@ -77,6 +77,9 @@
     title="<?= lang('Settings.housekeeping.title') ?>"
     subtitle="<?= lang('Settings.housekeeping.subtitle') ?>" >
 
+    <Forms.Toggler name="reset_counts" value="yes" size="small" checked="true" hint="<?= lang('Settings.housekeeping.reset_counts_helper') ?>"><?= lang('Settings.housekeeping.reset_counts') ?></Forms.Toggler>
+    <Forms.Toggler name="rewrite_media" value="yes" size="small" checked="true" hint="<?= lang('Settings.housekeeping.rewrite_media_helper') ?>"><?= lang('Settings.housekeeping.rewrite_media') ?></Forms.Toggler>
+
     <Button variant="primary" type="submit" iconLeft="home-gear"><?= lang('Settings.housekeeping.run') ?></Button>
 
 </Forms.Section>

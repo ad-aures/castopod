@@ -149,7 +149,10 @@ class EpisodeCommentModel extends UuidModel
             ->whereIn('in_reply_to_id', function (BaseBuilder $builder) use (&$episodeId): BaseBuilder {
                 return $builder->select('id')
                     ->from(config('Fediverse')->tablesPrefix . 'posts')
-                    ->where('episode_id', $episodeId);
+                    ->where([
+                        'episode_id' => $episodeId,
+                        'in_reply_to_id' => null,
+                    ]);
             })
             ->where('`created_at` <= NOW()', null, false)
             ->getCompiledSelect();
@@ -177,6 +180,37 @@ class EpisodeCommentModel extends UuidModel
         return $this->where('in_reply_to_id', $this->uuid->fromString($commentId)->getBytes())
             ->orderBy('created_at', 'ASC')
             ->findAll();
+    }
+
+    public function resetLikesCount(): int | false
+    {
+        $commentsLikesCount = $this->db->table('likes')
+            ->select('comment_id as id, COUNT(*) as `likes_count`')
+            ->groupBy('id')
+            ->get()
+            ->getResultArray();
+
+        if ($commentsLikesCount !== []) {
+            $this->uuidUseBytes = false;
+            return $this->updateBatch($commentsLikesCount, 'id');
+        }
+        return 0;
+    }
+
+    public function resetRepliesCount(): int | false
+    {
+        $commentsRepliesCount = $this->select('episode_comments.id, COUNT(*) as `replies_count`')
+            ->join('episode_comments as c2', 'episode_comments.id = c2.in_reply_to_id')
+            ->groupBy('episode_comments.id')
+            ->get()
+            ->getResultArray();
+
+        if ($commentsRepliesCount !== []) {
+            $this->uuidUseBytes = false;
+            return $this->updateBatch($commentsRepliesCount, 'id');
+        }
+
+        return 0;
     }
 
     /**
