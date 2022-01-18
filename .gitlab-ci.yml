@@ -111,5 +111,5 @@ release:
     - js-dependencies
   only:
     - main
-    - alpha
     - beta
+    - alpha

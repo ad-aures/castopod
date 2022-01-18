@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # see https://github.com/conventional-changelog/commitlint/issues/885
 

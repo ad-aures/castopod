@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 VERSION=$1
 COMPOSER_VERSION=$(echo "$VERSION" | perl -pe 's/(?<=[alpha|beta])\.//g')
