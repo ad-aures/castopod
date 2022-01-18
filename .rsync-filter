@@ -2,7 +2,9 @@
 
 - app/Views/_assets/
 + app/***
++ modules/***
 + public/***
++ themes/***
 + vendor/***
 + writable/***
 + .env.example
