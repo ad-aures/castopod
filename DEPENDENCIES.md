@@ -2,53 +2,15 @@
 
 Castopod Host uses the following components:
 
-PHP Dependencies:
+## PHP Dependencies
 
-- [CodeIgniter 4](https://codeigniter.com)
-  ([MIT License](https://codeigniter.com/user_guide/license.html))
-- [WhichBrowser/Parser-PHP](https://github.com/WhichBrowser/Parser-PHP)
-  ([MIT License](https://github.com/WhichBrowser/Parser-PHP/blob/master/LICENSE))
-- [GeoIP2 PHP API](https://github.com/maxmind/GeoIP2-php)
-  ([Apache License 2.0](https://github.com/maxmind/GeoIP2-php/blob/master/LICENSE))
-- [getID3](https://github.com/JamesHeinrich/getID3)
-  ([GNU General Public License v3](https://github.com/JamesHeinrich/getID3/blob/2.0/licenses/license.gpl-30.txt))
-- [myth-auth](https://github.com/lonnieezell/myth-auth)
-  ([MIT license](https://github.com/lonnieezell/myth-auth/blob/develop/LICENSE.md))
-- [commonmark](https://commonmark.thephpleague.com/)
-  ([BSD 3-Clause "New" or "Revised" License](https://github.com/thephpleague/commonmark/blob/latest/LICENSE))
-- [phpdotenv](https://github.com/vlucas/phpdotenv)
-  ([ BSD-3-Clause License ](https://github.com/vlucas/phpdotenv/blob/master/LICENSE))
-- [HTML To Markdown for PHP](https://github.com/thephpleague/html-to-markdown)
-  ([MIT License](https://github.com/thephpleague/html-to-markdown/blob/master/LICENSE))
-- [opawg/user-agents-php](https://github.com/opawg/user-agents-php)
-  ([MIT License](https://github.com/podlibre/user-agents-php/blob/main/LICENSE))
-- [podlibre/ipcat](https://github.com/podlibre/ipcat)
-  ([GNU General Public License v3.0](https://github.com/podlibre/ipcat/blob/master/LICENSE))
-- [podlibre/podcast-namespace](https://code.podlibre.org/podlibre/podcastnamespace)
-  ([MIT License](https://code.podlibre.org/podlibre/podcastnamespace/-/blob/master/LICENSE))
-- [phpseclib](https://phpseclib.com/)
-  ([MIT License](https://github.com/phpseclib/phpseclib/blob/master/LICENSE))
-- [codeigniter4-uuid](https://github.com/michalsn/codeigniter4-uuid)
-  ([MIT License](https://github.com/michalsn/codeigniter4-uuid/blob/develop/LICENSE))
-- [essence](https://github.com/essence/essence)
-  ([The FreeBSD License](https://github.com/essence/essence/blob/master/LICENSE.txt))
+PHP dependencies can be found in the [composer.json](./composer.json) file.
 
-Javascript dependencies:
+## Javascript dependencies
 
-- [rollup](https://rollupjs.org/)
-  ([MIT License](https://github.com/rollup/rollup/blob/master/LICENSE.md))
-- [tailwindcss](https://tailwindcss.com/)
-  ([MIT License](https://github.com/tailwindcss/tailwindcss/blob/master/LICENSE))
-- [amCharts 4](https://github.com/amcharts/amcharts4)
-  ([Free amCharts license](https://github.com/amcharts/amcharts4/blob/master/dist/script/LICENSE))
-- [Choices.js](https://joshuajohnson.co.uk/Choices/)
-  ([MIT License](https://github.com/jshjohnson/Choices/blob/master/LICENSE))
-- [flatpickr](https://flatpickr.js.org/)
-  ([MIT License](https://github.com/flatpickr/flatpickr/blob/master/LICENSE.md))
-- [popperjs](https://popper.js.org/)
-  ([MIT License](https://github.com/popperjs/popper-core/blob/master/LICENSE.md))
+Javascript dependencies can be found in the [package.json](./package.json) file.
 
-Other:
+## Other dependencies
 
 - [Kumbh Sans](https://fonts.google.com/specimen/Kumbh+Sans)
   ([Open Font License](https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL))
