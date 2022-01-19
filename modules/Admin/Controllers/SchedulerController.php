@@ -53,10 +53,11 @@ class SchedulerController extends Controller
             );
             $exitCode = $clipper->generate();
 
+            $clipModel = new ClipModel();
             if ($exitCode === 0) {
                 // success, video was generated
                 $scheduledClip->setMedia($clipper->videoClipFilePath);
-                (new ClipModel())->update($scheduledClip->id, [
+                $clipModel->update($scheduledClip->id, [
                     'media_id' => $scheduledClip->media_id,
                     'status' => 'passed',
                     'logs' => $clipper->logs,
@@ -64,12 +65,13 @@ class SchedulerController extends Controller
                 ]);
             } else {
                 // error
-                (new ClipModel())->update($scheduledClip->id, [
+                $clipModel->update($scheduledClip->id, [
                     'status' => 'failed',
                     'logs' => $clipper->logs,
                     'job_ended_at' => Time::now(),
                 ]);
             }
+            $clipModel->clearVideoClipCache($scheduledClip->id);
         }
 
         return true;
