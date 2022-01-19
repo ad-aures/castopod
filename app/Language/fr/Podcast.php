@@ -9,7 +9,7 @@ declare(strict_types=1);
  */
 
 return [
-    'feed' => 'Flux RSS Podcast',
+    'feed' => 'RSS du Podcast',
     'season' => 'Saison {seasonNumber}',
     'list_of_episodes_year' => 'Épisodes de {year} ({episodeCount})',
     'list_of_episodes_season' =>

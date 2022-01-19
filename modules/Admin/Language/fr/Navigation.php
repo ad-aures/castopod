@@ -11,6 +11,7 @@ declare(strict_types=1);
 return [
     'toggle_sidebar' => 'Afficher ou cacher la barre latérale',
     'go_to_website' => 'Visiter le site',
+    'go_to_admin' => 'Aller à l’admin',
     'dashboard' => 'Tableau de bord',
     'admin' => 'Accueil',
     'podcasts' => 'Podcasts',

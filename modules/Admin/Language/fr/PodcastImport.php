@@ -20,12 +20,7 @@ return [
     'advanced_params_section_title' => 'Paramètres avancés',
     'advanced_params_section_subtitle' =>
         'Si vous ne savez pas à quoi servent ces champs, conservez les valeurs par défaut.',
-    'slug_field' => [
-        'label' =>
-            'Champ à utiliser pour calculer l’identifiant de l’épisode',
-        'link' => '&lt;link&gt; (adresse)',
-        'title' => '&lt;title&gt; (titre)',
-    ],
+    'slug_field' => 'Champ à utiliser pour calculer l’identifiant de l’épisode',
     'description_field' => 'Champs pour la description des épisodes',
     'force_renumber' => 'Forcer la re-numérotation des épisodes',
     'force_renumber_hint' =>
