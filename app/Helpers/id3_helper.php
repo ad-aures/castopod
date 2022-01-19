@@ -30,9 +30,7 @@ if (! function_exists('write_audio_file_tags')) {
         $tagwriter->tagformats = ['id3v2.4'];
         $tagwriter->tag_encoding = $TextEncoding;
 
-        $cover = new File(media_path($episode->cover->id3_path));
-
-        $APICdata = file_get_contents($cover->getRealPath());
+        $APICdata = file_get_contents(media_path($episode->cover->id3_path));
 
         // TODO: variables used for podcast specific tags
         // $podcastUrl = $episode->podcast->link;
@@ -73,7 +71,7 @@ if (! function_exists('write_audio_file_tags')) {
             'picturetypeid' => 2,
             'data' => $APICdata,
             'description' => 'cover',
-            'mime' => $cover->getMimeType(),
+            'mime' => $episode->cover->file_mimetype,
         ];
 
         $tagwriter->tag_data = $TagData;
