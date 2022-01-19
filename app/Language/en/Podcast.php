@@ -15,8 +15,6 @@ return [
     'list_of_episodes_season' =>
         'Season {seasonNumber} episodes ({episodeCount})',
     'no_episode' => 'No episode found!',
-    'no_episode_hint' =>
-        'Navigate the podcast episodes with the navigation bar above.',
     'follow' => 'Follow',
     'followTitle' => 'Follow {actorDisplayName} on the fediverse!',
     'followers' => '{numberOfFollowers, plural,

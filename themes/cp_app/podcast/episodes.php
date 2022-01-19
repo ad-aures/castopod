@@ -50,7 +50,6 @@
     <h1 class="px-4 mb-2 text-xl text-center"><?= lang(
                 'Podcast.no_episode',
             ) ?></h1>
-    <p class="italic text-center"><?= lang('Podcast.no_episode_hint') ?></p>
 <?php endif; ?>
 
 <?= $this->endSection()

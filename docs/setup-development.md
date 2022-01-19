@@ -42,6 +42,8 @@ to help you kickstart your contribution.
 
    ```ini
    CI_ENVIRONMENT="development"
+   # If set to development, you must run `npm run dev` to start the static assets server
+   vite.environment="development"
 
    # By default, this is set to true in the app config.
    # For development, this must be set to false as it is

@@ -34,16 +34,8 @@ class Image extends BaseMedia
         helper('media');
 
         foreach ($this->sizes as $name => $size) {
-            if (array_key_exists('extension', $size)) {
-                $extension = $size['extension'];
-            } else {
-                $extension = $this->file_extension;
-            }
-            if (array_key_exists('mimetype', $size)) {
-                $mimetype = $size['mimetype'];
-            } else {
-                $mimetype = $this->file_mimetype;
-            }
+            $extension = array_key_exists('extension', $size) ? $size['extension'] : $this->file_extension;
+            $mimetype = array_key_exists('mimetype', $size) ? $size['mimetype'] : $this->file_mimetype;
             $this->{$name . '_path'} = $this->file_directory . '/' . $this->file_name . '_' . $name . '.' . $extension;
             $this->{$name . '_url'} = media_base_url($this->{$name . '_path'});
             $this->{$name . '_mimetype'} = $mimetype;

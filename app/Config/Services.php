@@ -8,7 +8,6 @@ use App\Libraries\Breadcrumb;
 use App\Libraries\Negotiate;
 use App\Libraries\Router;
 use App\Libraries\View;
-use App\Libraries\Vite;
 use CodeIgniter\Config\BaseService;
 use CodeIgniter\HTTP\Request;
 use CodeIgniter\HTTP\RequestInterface;
@@ -91,14 +90,5 @@ class Services extends BaseService
         }
 
         return new Breadcrumb();
-    }
-
-    public static function vite(bool $getShared = true): Vite
-    {
-        if ($getShared) {
-            return self::getSharedInstance('vite');
-        }
-
-        return new Vite();
     }
 }

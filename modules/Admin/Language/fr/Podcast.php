@@ -225,8 +225,6 @@ return [
     'list_of_episodes_season' =>
         'Épisodes de la saison {seasonNumber} ({episodeCount})',
     'no_episode' => 'Aucun épisode trouvé !',
-    'no_episode_hint' =>
-        'Naviguez au sein des épisodes du podcast episodes grâce à la barre de navigation ci-dessus.',
     'follow' => 'Suivre',
     'followers' => '{numberOfFollowers, plural,
         one {<span class="font-semibold">#</span> abonné·e}
