@@ -42,8 +42,7 @@ class WebmanifestController extends Controller
             'background' => '#F9F3F0',
         ],
         'onyx' => [
-            'theme' =>
-            '#040406',
+            'theme' => '#040406',
             'background' => '#F3F3F7',
         ],
     ];

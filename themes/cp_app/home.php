@@ -59,7 +59,7 @@
                 <?php foreach ($podcasts as $podcast): ?>
                     <a href="<?= $podcast->link ?>" class="relative w-full h-full overflow-hidden transition shadow focus:ring-accent rounded-xl border-subtle hover:shadow-xl focus:shadow-xl group border-3">
                         <article class="text-white">
-                            <div class="absolute bottom-0 left-0 z-10 w-full h-full backdrop-gradient"></div>
+                            <div class="absolute bottom-0 left-0 z-10 w-full h-full backdrop-gradient mix-blend-multiply"></div>
                             <div class="w-full h-full overflow-hidden">
                                 <img alt="<?= $podcast->title ?>" src="<?= $podcast->cover->medium_url ?>" class="object-cover w-full h-full transition duration-200 ease-in-out transform aspect-square group-focus:scale-105 group-hover:scale-105" />
                             </div>

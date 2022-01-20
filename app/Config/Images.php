@@ -126,11 +126,43 @@ class Images extends BaseConfig
         ],
     ];
 
-    public string $avatarDefaultPath = 'castopod-avatar-default.jpg';
+    public string $avatarDefaultPath = 'castopod-avatar.jpg';
 
     public string $avatarDefaultMimeType = 'image/jpg';
 
-    public string $podcastBannerDefaultPath = 'castopod-banner-default.jpg';
+    /**
+     * @var array<string, array<string, string>>
+     */
+    public array $podcastBannerDefaultPaths = [
+        'default' => [
+            'path' => 'castopod-banner-pine.jpg',
+            'mimetype' => 'image/jpeg',
+        ],
+        'pine' => [
+            'path' => 'castopod-banner-pine.jpg',
+            'mimetype' => 'image/jpeg',
+        ],
+        'crimson' => [
+            'path' => 'castopod-banner-crimson.jpg',
+            'mimetype' => 'image/jpeg',
+        ],
+        'amber' => [
+            'path' => 'castopod-banner-amber.jpg',
+            'mimetype' => 'image/jpeg',
+        ],
+        'lake' => [
+            'path' => 'castopod-banner-lake.jpg',
+            'mimetype' => 'image/jpeg',
+        ],
+        'jacaranda' => [
+            'path' => 'castopod-banner-jacaranda.jpg',
+            'mimetype' => 'image/jpeg',
+        ],
+        'onyx' => [
+            'path' => 'castopod-banner-onyx.jpg',
+            'mimetype' => 'image/jpeg',
+        ],
+    ];
 
     public string $podcastBannerDefaultMimeType = 'image/jpeg';
 
@@ -144,6 +176,10 @@ class Images extends BaseConfig
      * @var array<string, array<string, int|string>>
      */
     public array $personAvatarSizes = [
+        'federation' => [
+            'width' => 400,
+            'height' => 400,
+        ],
         'tiny' => [
             'width' => 40,
             'height' => 40,

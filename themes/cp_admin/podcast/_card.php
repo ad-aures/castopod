@@ -1,6 +1,6 @@
 <article class="relative h-full overflow-hidden transition shadow bg-elevated border-3 border-subtle group rounded-xl hover:shadow-xl focus-within:shadow-xl focus-within:ring-accent">
     <a href="<?= route_to('podcast-view', $podcast->id) ?>" class="flex flex-col justify-end w-full h-full text-white group">
-        <div class="absolute bottom-0 left-0 z-10 w-full h-full backdrop-gradient"></div>
+        <div class="absolute bottom-0 left-0 z-10 w-full h-full backdrop-gradient mix-blend-multiply"></div>
         <div class="w-full h-full overflow-hidden">
             <img
             alt="<?= $podcast->title ?>"

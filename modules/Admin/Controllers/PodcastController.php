@@ -12,6 +12,7 @@ namespace Modules\Admin\Controllers;
 
 use App\Entities\Location;
 use App\Entities\Podcast;
+use App\Models\ActorModel;
 use App\Models\CategoryModel;
 use App\Models\EpisodeModel;
 use App\Models\LanguageModel;
@@ -369,6 +370,10 @@ class PodcastController extends BaseController
             return redirect()->back();
         }
 
+        $db = db_connect();
+
+        $db->transStart();
+
         $mediaModel = new MediaModel();
         if (! $mediaModel->deleteMedia($this->podcast->banner)) {
             return redirect()
@@ -376,6 +381,18 @@ class PodcastController extends BaseController
                 ->withInput()
                 ->with('errors', $mediaModel->errors());
         }
+
+        // remove banner url from actor
+        $actor = (new ActorModel())->getActorById($this->podcast->actor_id);
+
+        if ($actor !== null) {
+            $actor->cover_image_url = null;
+            $actor->cover_image_mimetype = null;
+
+            (new ActorModel())->update($actor->id, $actor);
+        }
+
+        $db->transComplete();
 
         return redirect()->back();
     }
