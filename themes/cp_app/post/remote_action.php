@@ -22,7 +22,7 @@
 
     <?= $metatags ?>
 
-    <link rel='stylesheet' type='text/css' href='<?= route_to('color-themes-css') ?>' />
+    <link rel='stylesheet' type='text/css' href='<?= route_to('themes-colors-css') ?>' />
     <?= service('vite')
         ->asset('styles/index.css', 'css') ?>
     <?= service('vite')

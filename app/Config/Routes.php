@@ -51,8 +51,8 @@ $routes->addPlaceholder(
 $routes->get('manifest.webmanifest', 'WebmanifestController', [
     'as' => 'webmanifest',
 ]);
-$routes->get('styles/themes.css', 'ColorsController', [
-    'as' => 'color-themes-css',
+$routes->get('themes/colors', 'ColorsController', [
+    'as' => 'themes-colors-css',
 ]);
 
 // We get a performance increase by specifying the default
