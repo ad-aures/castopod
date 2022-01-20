@@ -68,6 +68,9 @@ class TranscriptParser
 
                         $subs[] = $sub;
                     } else {
+                        if ($subText !== '') {
+                            $subText .= PHP_EOL . $line;
+                        }
                         $subText .= $line;
                     }
                     break;

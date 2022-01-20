@@ -25,7 +25,7 @@ return [
             'passed_hint' => 'Clip was generated successfully!',
         ],
         'clip' => 'Clip',
-        'duration' => 'Duration',
+        'duration' => 'Job duration',
     ],
     'title' => 'Video clip: {videoClipLabel}',
     'download_clip' => 'Download clip',

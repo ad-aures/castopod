@@ -25,7 +25,7 @@ return [
             'passed_hint' => 'L’extrait a été généré avec succès !',
         ],
         'clip' => 'Extrait',
-        'duration' => 'Durée',
+        'duration' => 'Durée de traitement',
     ],
     'title' => 'Extrait vidéo : {videoClipLabel}',
     'download_clip' => 'Télécharger l’extrait',
