@@ -21,16 +21,28 @@ use Melbahja\Seo\Schema\Thing;
 if (! function_exists('get_podcast_metatags')) {
     function get_podcast_metatags(Podcast $podcast, string $page): string
     {
+        $category = '';
+        if ($podcast->category->parent_id !== null) {
+            $category .= $podcast->category->parent->apple_category . ' > ';
+        }
+        $category .= $podcast->category->apple_category;
+
         $schema = new Schema(
             new Thing('PodcastSeries', [
                 'name' => $podcast->title,
-                'url' => $podcast->link,
+                'headline' => $podcast->title,
+                'url' => current_url(),
+                'sameAs' => $podcast->link,
+                'identifier' => $podcast->guid,
                 'image' => $podcast->cover->feed_url,
                 'description' => $podcast->description,
                 'webFeed' => $podcast->feed_url,
-                'author' => new Thing('Person', [
-                    'name' => $podcast->publisher,
-                ]),
+                'accessMode' => 'auditory',
+                'author' => $podcast->owner_name,
+                'creator' => $podcast->owner_name,
+                'publisher' => $podcast->publisher,
+                'inLanguage' => $podcast->language_code,
+                'genre' => $category,
             ])
         );
 
@@ -70,6 +82,7 @@ if (! function_exists('get_episode_metatags')) {
                 'description' => $episode->description,
                 'datePublished' => $episode->published_at->format(DATE_ISO8601),
                 'timeRequired' => iso8601_duration($episode->audio->duration),
+                'duration' => iso8601_duration($episode->audio->duration),
                 'associatedMedia' => new Thing('MediaObject', [
                     'contentUrl' => $episode->audio->file_url,
                 ]),

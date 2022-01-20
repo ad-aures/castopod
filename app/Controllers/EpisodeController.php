@@ -112,7 +112,7 @@ class EpisodeController extends BaseController
         $locale = service('request')
             ->getLocale();
         $cacheName =
-            "page_podcast#{$this->podcast->id}_episode#{$this->episode->id}_{$locale}" .
+            "page_podcast#{$this->podcast->id}_episode#{$this->episode->id}_activity_{$locale}" .
             (can_user_interact() ? '_authenticated' : '');
 
         if (! ($cachedView = cache($cacheName))) {
