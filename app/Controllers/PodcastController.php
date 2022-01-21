@@ -88,6 +88,8 @@ class PodcastController extends BaseController
             // if user is logged in then send to the authenticated activity view
             if (can_user_interact()) {
                 helper('form');
+
+                return view('podcast/activity', $data);
             }
 
             $secondsToNextUnpublishedEpisode = (new EpisodeModel())->getSecondsToNextUnpublishedEpisode(
@@ -136,6 +138,8 @@ class PodcastController extends BaseController
             // // if user is logged in then send to the authenticated activity view
             if (can_user_interact()) {
                 helper('form');
+
+                return view('podcast/about', $data);
             }
 
             $secondsToNextUnpublishedEpisode = (new EpisodeModel())->getSecondsToNextUnpublishedEpisode(
@@ -256,6 +260,10 @@ class PodcastController extends BaseController
                     $seasonQuery,
                 ),
             ];
+
+            if (can_user_interact()) {
+                return view('podcast/episodes', $data);
+            }
 
             $secondsToNextUnpublishedEpisode = (new EpisodeModel())->getSecondsToNextUnpublishedEpisode(
                 $this->podcast->id,

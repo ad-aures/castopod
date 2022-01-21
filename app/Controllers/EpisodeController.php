@@ -89,7 +89,10 @@ class EpisodeController extends BaseController
 
             if (can_user_interact()) {
                 helper('form');
+
+                return view('episode/comments', $data);
             }
+
             // The page cache is set to a decade so it is deleted manually upon podcast update
             return view('episode/comments', $data, [
                 'cache' => $secondsToNextUnpublishedEpisode
@@ -128,6 +131,8 @@ class EpisodeController extends BaseController
 
             if (can_user_interact()) {
                 helper('form');
+
+                return view('episode/activity', $data);
             }
             // The page cache is set to a decade so it is deleted manually upon podcast update
             return view('episode/activity', $data, [
