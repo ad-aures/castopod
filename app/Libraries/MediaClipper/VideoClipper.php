@@ -96,7 +96,7 @@ class VideoClipper
         $this->videoClipFilePath = "podcasts/{$this->episode->podcast->handle}/{$this->episode->slug}-clip-{$this->start}-to-{$this->end}-{$this->format}-{$this->theme}.mp4";
 
         // Temporary files to generate clip
-        $tempFile = tempnam(WRITEPATH . 'temp', "{$this->episode->slug}-soundbite-{$this->start}-to-{$this->end}");
+        $tempFile = tempnam(WRITEPATH . 'temp', "{$this->episode->slug}-{$this->start}-{$this->end}");
 
         if (! $tempFile) {
             throw new Exception(
@@ -105,9 +105,9 @@ class VideoClipper
         }
 
         $this->tempFileOutput = $tempFile;
-        $this->soundbiteOutput = $tempFile . '.mp3';
-        $this->subtitlesClipOutput = $tempFile . '.srt';
-        $this->videoClipBgOutput = $tempFile . '.png';
+        $this->soundbiteOutput = $tempFile . '-soundbite.mp3';
+        $this->subtitlesClipOutput = $tempFile . '-subtitle.srt';
+        $this->videoClipBgOutput = $tempFile . '-bg.png';
     }
 
     public function soundbite(): void
