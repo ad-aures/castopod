@@ -57,6 +57,8 @@ return [
         'theme' => 'Sélectionnez un thème',
         'start_time' => 'Démarrer à',
         'duration' => 'Durée',
+        'trim_start' => 'Rogner le début',
+        'trim_end' => 'Rogner la fin',
         'submit' => 'Créer un extrait vidéo',
     ],
     'requirements' => [

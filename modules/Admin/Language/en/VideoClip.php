@@ -57,6 +57,8 @@ return [
         'theme' => 'Select a theme',
         'start_time' => 'Start at',
         'duration' => 'Duration',
+        'trim_start' => 'Trim start',
+        'trim_end' => 'Trim end',
         'submit' => 'Create video clip',
     ],
     'requirements' => [

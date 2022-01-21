@@ -75,6 +75,12 @@ export class AudioClipper extends LitElement {
   @property({ type: Number, attribute: "height" })
   height = 100;
 
+  @property({ attribute: "trim-start-label" })
+  trimStartLabel = "Trim start";
+
+  @property({ attribute: "trim-end-label" })
+  trimEndLabel = "Trim end";
+
   @state()
   _isPlaying = false;
 
@@ -853,8 +859,12 @@ export class AudioClipper extends LitElement {
           <time>${this.secondsToHHMMSS(this._currentTime)}</time>
         </div>
         <div class="toolbar__trim-controls">
-          <button @click="${() => this.trim("start")}">Trim start</button>
-          <button @click="${() => this.trim("end")}">Trim end</button>
+          <button @click="${() => this.trim("start")}">
+            ${this.trimStartLabel}
+          </button>
+          <button @click="${() => this.trim("end")}">
+            ${this.trimEndLabel}
+          </button>
         </div>
       </div>
     `;
