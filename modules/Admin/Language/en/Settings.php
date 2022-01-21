@@ -24,13 +24,13 @@ return [
     ],
     'images' => [
         'title' => 'Images',
-        'subtitle' => 'Here you can regenerate all images based on the originals that were uploaded.',
+        'subtitle' => 'Here you can regenerate all images based on the originals that were uploaded. To be used if you find that some images are missing. This task may take a while.',
         'regenerate' => 'Regenerate images',
         'regenerationSuccess' => 'All images have been regenerated successfully!',
     ],
     'housekeeping' => [
         'title' => 'Housekeeping',
-        'subtitle' => 'Runs various housekeeping tasks, such as resetting counts and rewriting media files metadata. This may take a while.',
+        'subtitle' => 'Runs various housekeeping tasks. Use this feature if you ever encounter issues with media files or data integrity. These tasks may take a while.',
         'reset_counts' => 'Reset counts',
         'reset_counts_helper' => 'This option will recalculate and reset all data counts (number of followers, posts, comments, …).',
         'rewrite_media' => 'Rewrite media metadata',

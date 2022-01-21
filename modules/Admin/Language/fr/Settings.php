@@ -24,13 +24,13 @@ return [
     ],
     'images' => [
         'title' => 'Images',
-        'subtitle' => 'Vous pouvez ici regénérer toutes les images en se basant sur celles qui ont été téléversées à l’origine.',
+        'subtitle' => 'Vous pouvez ici regénérer toutes les images en se basant sur celles qui ont été téléversées à l’origine. À utiliser si vous remarquez qu’il y a des images manquantes. Cette tâche peut prendre du temps.',
         'regenerate' => 'Regénérer les images',
         'regenerationSuccess' => 'Toutes les images ont été regénérés avec succès !',
     ],
     'housekeeping' => [
         'title' => 'Ménage',
-        'subtitle' => 'Exécute un nombre de tâches de nettoyage, comme la réécriture de métadonnées des fichiers media (images, fichiers audio, transcript, chapitres, …).',
+        'subtitle' => 'Exécute un nombre de tâches de nettoyage. Utilisez cette fonctionnalité si vous rencontrez des problèmes avec les fichiers multimédias ou l’intégrité des données. Ces tâches peuvent prendre du temps.',
         'reset_counts' => 'Réinitialiser les compteurs',
         'reset_counts_helper' => 'Cette option recalcul et réinitialise les compteurs de données (nombre d’abonné·e·s, de publications, de commentaires, …).',
         'rewrite_media' => 'Réécrire les métadonnées des fichiers média',
