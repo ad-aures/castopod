@@ -39,9 +39,9 @@ use RuntimeException;
  * @property string $title
  * @property int $audio_id
  * @property Audio $audio
- * @property string $audio_file_analytics_url
- * @property string $audio_file_web_url
- * @property string $audio_file_opengraph_url
+ * @property string $audio_analytics_url
+ * @property string $audio_web_url
+ * @property string $audio_opengraph_url
  * @property string|null $description Holds text only description, striped of any markdown or html special characters
  * @property string $description_markdown
  * @property string $description_html
@@ -85,8 +85,6 @@ class Episode extends Entity
     protected string $link;
 
     protected ?Audio $audio = null;
-
-    protected string $audio_url;
 
     protected string $audio_analytics_url;
 
@@ -328,24 +326,17 @@ class Episode extends Entity
         return $this->chapters;
     }
 
-    public function getAudioFileUrl(): string
-    {
-        helper('media');
-
-        return media_base_url($this->audio->file_path);
-    }
-
-    public function getAudioFileAnalyticsUrl(): string
+    public function getAudioAnalyticsUrl(): string
     {
         helper('analytics');
 
         // remove 'podcasts/' from audio file path
-        $strippedAudioFilePath = substr($this->getAudio()->file_path, 9);
+        $strippedAudioPath = substr($this->getAudio()->file_path, 9);
 
         return generate_episode_analytics_url(
             $this->podcast_id,
             $this->id,
-            $strippedAudioFilePath,
+            $strippedAudioPath,
             $this->audio->duration,
             $this->audio->file_size,
             $this->audio->header_size,
@@ -353,14 +344,14 @@ class Episode extends Entity
         );
     }
 
-    public function getAudioFileWebUrl(): string
+    public function getAudioWebUrl(): string
     {
-        return $this->getAudioFileAnalyticsUrl() . '?_from=-+Website+-';
+        return $this->getAudioAnalyticsUrl() . '?_from=-+Website+-';
     }
 
-    public function getAudioFileOpengraphUrl(): string
+    public function getAudioOpengraphUrl(): string
     {
-        return $this->getAudioFileAnalyticsUrl() . '?_from=-+Open+Graph+-';
+        return $this->getAudioAnalyticsUrl() . '?_from=-+Open+Graph+-';
     }
 
     /**

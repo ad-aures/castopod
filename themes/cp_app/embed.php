@@ -41,7 +41,7 @@
                 style="--vm-player-box-shadow:0; --vm-player-theme: hsl(var(--color-accent-base)); --vm-control-focus-color: hsl(var(--color-accent-contrast)); --vm-control-spacing: 4px; --vm-menu-item-focus-bg: hsl(var(--color-background-highlight)); --vm-control-icon-size: 24px; <?= str_ends_with($theme, 'transparent') ? '--vm-controls-bg: transparent;' : '' ?>"
             >
             <vm-audio preload="none">
-                <?php $source = logged_in() ? $episode->audio->file_url : $episode->audio_file_analytics_url .
+                <?php $source = logged_in() ? $episode->audio->file_url : $episode->audio_analytics_url .
                     (isset($_SERVER['HTTP_REFERER'])
                         ? '?_from=' .
                             parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST)

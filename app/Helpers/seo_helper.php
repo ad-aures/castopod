@@ -104,7 +104,7 @@ if (! function_exists('get_episode_metatags')) {
             ->og('image:width', (string) config('Images')->podcastCoverSizes['large']['width'])
             ->og('image:height', (string) config('Images')->podcastCoverSizes['large']['height'])
             ->og('locale', $episode->podcast->language_code)
-            ->og('audio', $episode->audio_file_opengraph_url)
+            ->og('audio', $episode->audio_opengraph_url)
             ->og('audio:type', $episode->audio->file_mimetype)
             ->meta('article:published_time', $episode->published_at->format(DATE_ISO8601))
             ->meta('article:modified_time', $episode->updated_at->format(DATE_ISO8601))

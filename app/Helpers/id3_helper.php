@@ -9,7 +9,6 @@ declare(strict_types=1);
  */
 
 use App\Entities\Episode;
-use CodeIgniter\Files\File;
 use JamesHeinrich\GetID3\WriteTags;
 
 if (! function_exists('write_audio_file_tags')) {

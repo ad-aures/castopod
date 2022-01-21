@@ -45,8 +45,8 @@ if (! function_exists('generate_episode_analytics_url')) {
     function generate_episode_analytics_url(
         int $podcastId,
         int $episodeId,
-        string $audioFilePath,
-        float $audioFileDuration,
+        string $audioPath,
+        float $audioDuration,
         int $audioFileSize,
         int $audioFileHeaderSize,
         \CodeIgniter\I18n\Time $publicationDate
@@ -61,16 +61,16 @@ if (! function_exists('generate_episode_analytics_url')) {
                     // bytes_threshold: number of bytes that must be downloaded for an episode to be counted in download analytics
                     // - if audio is less than or equal to 60s, then take the audio file_size
                     // - if audio is more than 60s, then take the audio file_header_size + 60s
-                    $audioFileDuration <= 60
+                    $audioDuration <= 60
                         ? $audioFileSize
                         : $audioFileHeaderSize +
-                            floor((($audioFileSize - $audioFileHeaderSize) / $audioFileDuration) * 60),
+                            floor((($audioFileSize - $audioFileHeaderSize) / $audioDuration) * 60),
                     $audioFileSize,
-                    $audioFileDuration,
+                    $audioDuration,
                     $publicationDate->getTimestamp(),
                 ),
             ),
-            $audioFilePath,
+            $audioPath,
         );
     }
 }

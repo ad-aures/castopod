@@ -28,12 +28,12 @@ class Analytics extends BaseConfig
     /**
      * get the full audio file url
      *
-     * @param string|string[] $audioFilePath
+     * @param string|string[] $audioPath
      */
-    public function getAudioFileUrl(string | array $audioFilePath): string
+    public function getAudioUrl(string | array $audioPath): string
     {
         helper('media');
 
-        return media_base_url($audioFilePath);
+        return media_base_url($audioPath);
     }
 }

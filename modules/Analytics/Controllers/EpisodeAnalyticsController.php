@@ -48,7 +48,7 @@ class EpisodeAnalyticsController extends Controller
         $this->config = config('Analytics');
     }
 
-    public function hit(string $base64EpisodeData, string ...$audioFilePath): RedirectResponse
+    public function hit(string $base64EpisodeData, string ...$audioPath): RedirectResponse
     {
         $session = Services::session();
         $session->start();
@@ -77,6 +77,6 @@ class EpisodeAnalyticsController extends Controller
             $serviceName,
         );
 
-        return redirect()->to($this->config->getAudioFileUrl(['podcasts', ...$audioFilePath]));
+        return redirect()->to($this->config->getAudioUrl(['podcasts', ...$audioPath]));
     }
 }

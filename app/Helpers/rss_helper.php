@@ -202,7 +202,7 @@ if (! function_exists('get_rss_feed')) {
 
             $enclosure->addAttribute(
                 'url',
-                $episode->audio_file_analytics_url .
+                $episode->audio_analytics_url .
                     ($serviceSlug === ''
                         ? ''
                         : '?_from=' . urlencode($serviceSlug)),
