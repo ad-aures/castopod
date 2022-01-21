@@ -81,7 +81,10 @@
         <div class="absolute top-0 left-0 w-full h-full bg-center bg-no-repeat bg-cover blur-lg mix-blend-overlay filter grayscale" style="background-image: url('<?= $episode->podcast->banner->small_url ?>');"></div>
         <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-background-header to-transparent"></div>
         <div class="z-10 flex flex-col items-start gap-y-2 gap-x-4 sm:flex-row">
-            <img src="<?= $episode->cover->medium_url ?>" alt="<?= $episode->title ?>" class="rounded-md shadow-xl h-36 aspect-square" loading="lazy" />
+            <div class="relative">
+                <?= explicit_badge($episode->parental_advisory === 'explicit', 'rounded absolute left-0 bottom-0 ml-2 mb-2 bg-black/75 text-accent-contrast') ?>
+                <img src="<?= $episode->cover->medium_url ?>" alt="<?= $episode->title ?>" class="rounded-md shadow-xl h-36 aspect-square" loading="lazy" />
+            </div>
             <div class="flex flex-col items-start text-white">
                 <?= episode_numbering($episode->number, $episode->season_number, 'text-sm leading-none font-semibold px-1 py-1 text-white/90 border !no-underline border-subtle', true) ?>
                 <h1 class="inline-flex items-baseline max-w-md mt-2 text-2xl font-bold sm:leading-none sm:text-3xl font-display line-clamp-2"><?= $episode->title ?></h1>

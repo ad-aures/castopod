@@ -12,7 +12,7 @@
                 <?= episode_numbering($episode->number, $episode->season_number, 'text-xs font-semibold border-subtle text-skin-muted px-1 border mr-2 !no-underline', true) ?>
                 <?= relative_time($episode->published_at, 'text-xs whitespace-nowrap text-skin-muted') ?>
             </div>
-            <h2 class="flex-1 font-semibold line-clamp-2"><a class="hover:underline" href="<?= $episode->link ?>"><?= $episode->title ?></a></h2>
+            <h2 class="flex-1 mt-1 font-semibold leading-tight line-clamp-2"><a class="hover:underline" href="<?= $episode->link ?>"><?= $episode->title ?></a></h2>
         </div>
         <play-episode-button
             id="<?= $episode->id ?>"

@@ -47,11 +47,14 @@
         <div class="absolute bottom-0 left-0 w-full h-full backdrop-gradient mix-blend-multiply"></div>
         <div class="z-10 flex items-center pl-4 -mb-6 md:pl-8 md:-mb-8 gap-x-4">
             <img src="<?= $podcast->cover->thumbnail_url ?>" alt="<?= $podcast->title ?>" class="h-24 rounded-full sm:h-28 md:h-36 ring-3 ring-background-elevated aspect-square" loading="lazy" />
-            <div class="relative flex flex-col text-white -top-2 sm:top-0 md:top-2">
+            <div class="relative flex flex-col text-white -top-3 sm:top-0 md:top-2">
                 <h1 class="text-lg font-bold leading-none line-clamp-2 md:leading-none md:text-2xl font-display"><?= $podcast->title ?><span class="ml-1 font-sans text-base font-normal">@<?= $podcast->handle ?></span></h1>
-                <span class="text-xs"><?= lang('Podcast.followers', [
-                    'numberOfFollowers' => $podcast->actor->followers_count,
-                ]) ?></span>
+                <div class="">
+                    <?= explicit_badge($podcast->parental_advisory === 'explicit', 'mr-1') ?>
+                    <span class="text-xs"><?= lang('Podcast.followers', [
+                        'numberOfFollowers' => $podcast->actor->followers_count,
+                    ]) ?></span>
+                </div>
             </div>
         </div>
         <div class="z-10 inline-flex items-center self-end mt-2 mr-2 sm:mb-4 sm:mr-4 gap-x-2">
@@ -59,18 +62,18 @@
                 <button class="p-2 text-red-600 bg-white rounded-full shadow hover:text-red-500 focus:ring-accent" data-toggle="funding-links" data-toggle-class="hidden" data-tooltip="bottom" title="<?= lang('Podcast.sponsor') ?>"><Icon glyph="heart"></Icon></button>
             <?php endif; ?>
             <?= anchor_popup(
-                    route_to('follow', $podcast->handle),
-                    icon(
-                        'social/castopod',
-                        'mr-2 text-xl text-black/75 group-hover:text-black',
-                    ) . lang('Podcast.follow'),
-                    [
-                        'width' => 420,
-                        'height' => 620,
-                        'class' =>
-                            'group inline-flex items-center px-4 text-xs tracking-wider font-semibold text-black uppercase rounded-full leading-8 shadow focus:ring-accent bg-white',
-                    ],
-                ) ?>
+                        route_to('follow', $podcast->handle),
+                        icon(
+                            'social/castopod',
+                            'mr-2 text-xl text-black/75 group-hover:text-black',
+                        ) . lang('Podcast.follow'),
+                        [
+                            'width' => 420,
+                            'height' => 620,
+                            'class' =>
+                                'group inline-flex items-center px-4 text-xs tracking-wider font-semibold text-black uppercase rounded-full leading-8 shadow focus:ring-accent bg-white',
+                        ],
+                    ) ?>
         </div>
     </header>
     <?= $this->include('podcast/_partials/navigation') ?>

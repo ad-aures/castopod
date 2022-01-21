@@ -316,3 +316,19 @@ if (! function_exists('relative_time')) {
 }
 
 // ------------------------------------------------------------------------
+
+if (! function_exists('explicit_badge')) {
+    function explicit_badge(bool $isExplicit, string $class = ''): string
+    {
+        if (! $isExplicit) {
+            return '';
+        }
+
+        $explicitLabel = lang('Common.explicit');
+        return <<<CODE_SAMPLE
+            <span class="px-1 text-xs font-semibold leading-tight tracking-wider uppercase border md:border-white/50 {$class}">{$explicitLabel}</span>
+        CODE_SAMPLE;
+    }
+}
+
+// ------------------------------------------------------------------------
