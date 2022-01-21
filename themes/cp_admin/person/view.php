@@ -18,8 +18,9 @@
 <div class="flex flex-wrap gap-2">
     <img
         src="<?= $person->avatar->medium_url ?>"
-        alt="$person->full_name"
+        alt="<?= $person->full_name ?>"
         class="object-cover w-full max-w-xs rounded aspect-square"
+        loading="lazy"
     />
     <div class="flex flex-col">
         <?= $person->full_name ?>

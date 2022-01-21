@@ -25,7 +25,7 @@
         aria-expanded="false"><div class="relative mr-1">
             <?= icon('account-circle', 'text-3xl opacity-60') ?>
             <?= user()
-                ->podcasts === [] ? '' : '<img src="' . interact_as_actor()->avatar_image_url . '" class="absolute bottom-0 w-4 h-4 border rounded-full -right-1 border-navigation-bg" />' ?>
+                ->podcasts === [] ? '' : '<img src="' . interact_as_actor()->avatar_image_url . '" class="absolute bottom-0 w-4 h-4 border rounded-full -right-1 border-navigation-bg" loading="lazy" />' ?>
         </div>
         <?= user()->username ?>
         <?= icon('caret-down', 'ml-auto text-2xl') ?></button>
@@ -36,7 +36,7 @@
 
             $interactButtons .= <<<CODE_SAMPLE
                 <button class="inline-flex items-center w-full px-4 py-1 hover:bg-highlight" id="interact-as-actor-{$userPodcast->id}" name="actor_id" value="{$userPodcast->actor_id}">
-                    <div class="inline-flex items-center flex-1 text-sm"><img src="{$userPodcast->cover->tiny_url}" class="w-6 h-6 mr-2 rounded-full" /><span class="truncate">{$userPodcast->title}</span>{$checkMark}</div>
+                    <div class="inline-flex items-center flex-1 text-sm"><img src="{$userPodcast->cover->tiny_url}" class="w-6 h-6 mr-2 rounded-full" loading="lazy" /><span class="truncate">{$userPodcast->title}</span>{$checkMark}</div>
                 </button>
             CODE_SAMPLE;
         }

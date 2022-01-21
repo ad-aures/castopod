@@ -3,8 +3,8 @@
         <time class="absolute px-1 text-xs font-semibold text-white rounded bottom-2 right-2 bg-black/75" datetime="PT<?= $episode->audio->duration ?>S">
             <?= format_duration($episode->audio->duration) ?>
         </time>
-        <img loading="lazy" src="<?= $episode->cover
-                ->thumbnail_url ?>" alt="<?= $episode->title ?>" class="object-cover w-20 rounded-lg shadow-inner aspect-square" />
+        <img src="<?= $episode->cover
+                ->thumbnail_url ?>" alt="<?= $episode->title ?>" class="object-cover w-20 rounded-lg shadow-inner aspect-square" loading="lazy" />
     </div>
     <div class="flex items-center flex-1 gap-x-4">
         <div class="flex flex-col flex-1">

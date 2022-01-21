@@ -58,7 +58,7 @@
                 return '<div class="flex">' .
                     '<a href="' .
                     route_to('person-view', $person->id) .
-                    "\"><img src=\"{$person->avatar->thumbnail_url}\" alt=\"{$person->full_name}\" class=\"object-cover w-16 rounded-full aspect-square\" /></a>" .
+                    "\"><img src=\"{$person->avatar->thumbnail_url}\" alt=\"{$person->full_name}\" class=\"object-cover w-16 rounded-full aspect-square\" loading=\"lazy\" /></a>" .
                     '<div class="flex flex-col ml-3">' .
                     $person->full_name .
                     implode(

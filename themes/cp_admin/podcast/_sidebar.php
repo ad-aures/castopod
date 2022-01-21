@@ -40,6 +40,7 @@ $podcastNavigation = [
     src="<?= $podcast->cover->thumbnail_url ?>"
     alt="<?= $podcast->title ?>"
     class="object-cover w-16 h-16 rounded aspect-square"
+    loading="lazy"
     />
     <div class="flex flex-col items-start flex-1 w-48 px-2">
         <span class="w-full font-semibold truncate" title="<?= $podcast->title ?>"><?= $podcast->title ?></span>

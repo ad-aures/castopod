@@ -14,7 +14,7 @@
 
 <div class="flex-1 w-full rounded-xl border-3 border-subtle">
     <video-clip-previewer duration="<?= old('duration', 30) ?>">
-        <img slot="preview_image" src="<?= $episode->cover->thumbnail_url ?>" alt="<?= $episode->cover->description ?>" />
+        <img slot="preview_image" src="<?= $episode->cover->thumbnail_url ?>" alt="<?= $episode->cover->description ?>" loading="lazy" />
     </video-clip-previewer>
     <audio-clipper start-time="<?= old('start_time', 0) ?>" duration="<?= old('duration', 30) ?>" min-duration="10" volume=".5" height="50">
         <audio slot="audio" src="<?= $episode->audio->file_url ?>" preload="auto">

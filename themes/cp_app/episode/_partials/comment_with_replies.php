@@ -15,7 +15,7 @@ if ($comment->in_reply_to_id): ?>
 <form action="<?= route_to('comment-attempt-reply', $podcast->id, $episode->id, $comment->id) ?>" method="POST" class="flex px-6 pt-8 pb-4 gap-x-2 bg-base">
     <img src="<?= interact_as_actor()
     ->avatar_image_url ?>" alt="<?= interact_as_actor()
-    ->display_name ?>" class="w-10 h-10 rounded-full aspect-square" />
+    ->display_name ?>" class="w-10 h-10 rounded-full aspect-square" loading="lazy" />
     <div class="flex flex-col flex-1">
         <Forms.Textarea
             name="message"

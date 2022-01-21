@@ -1,5 +1,5 @@
 <article class="relative z-10 flex w-full px-4 py-2 rounded-conditional-2xl gap-x-2">
-    <img src="<?= $comment->actor->avatar_image_url ?>" alt="<?= $comment->display_name ?>" class="w-10 h-10 rounded-full aspect-square" />
+    <img src="<?= $comment->actor->avatar_image_url ?>" alt="<?= $comment->display_name ?>" class="w-10 h-10 rounded-full aspect-square" loading="lazy" />
     <div class="flex-1">
         <header class="w-full mb-2 text-sm">
             <a href="<?= $comment->actor

@@ -44,7 +44,7 @@ const player = html`<div
   style="display: none;"
 >
   <div class="flex items-center">
-    <img src="" alt="" class="h-[52px] w-[52px]" />
+    <img src="" alt="" class="h-[52px] w-[52px]" loading="lazy" />
     <div class="flex flex-col px-2">
       <p
         class="text-sm w-48 truncate font-semibold"

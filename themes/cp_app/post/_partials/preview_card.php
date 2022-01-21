@@ -8,7 +8,7 @@ if ($preview_card->type === 'image'): ?>
     'external-link',
     'absolute inset-0 m-auto text-6xl bg-accent-base bg-opacity-50 group-hover:bg-opacity-100 text-accent-contrast rounded-full p-2',
 ) ?>
-        <img src="<?= $preview_card->image ?>" alt="<?= $preview_card->title ?>" class="object-cover w-full aspect-video" />
+        <img src="<?= $preview_card->image ?>" alt="<?= $preview_card->title ?>" class="object-cover w-full aspect-video" loading="lazy" />
     </div>
     <?php endif; ?>
 
@@ -24,7 +24,7 @@ if ($preview_card->type === 'image'): ?>
     'play',
     'absolute inset-0 m-auto text-6xl bg-accent-base bg-opacity-50 group-hover:bg-opacity-100 text-accent-contrast rounded-full p-2',
 ) ?>
-        <img class="object-cover w-full aspect-video" src="<?= $preview_card->image ?>" alt="<?= $preview_card->title ?>" />
+        <img class="object-cover w-full aspect-video" src="<?= $preview_card->image ?>" alt="<?= $preview_card->title ?>" loading="lazy" />
     </div>
     <?php endif; ?>
 
@@ -36,7 +36,7 @@ if ($preview_card->type === 'image'): ?>
 <?php else: ?>
 <a href="<?= $preview_card->url ?>" class="flex items-center bg-highlight">
     <?php if ($preview_card->image): ?>
-    <img src="<?= $preview_card->image ?>" alt="<?= $preview_card->title ?>" class="object-cover w-20 aspect-square" />
+    <img src="<?= $preview_card->image ?>" alt="<?= $preview_card->title ?>" class="object-cover w-20 aspect-square" loading="lazy" />
     <?php endif; ?>
     <p class="flex flex-col flex-1 px-4 py-2">
         <span class="text-xs tracking-wider uppercase text-skin-muted"><?= $preview_card->provider_name ?></span>

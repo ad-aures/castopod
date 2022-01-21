@@ -5,7 +5,7 @@
         </time>
         <img
         src="<?= $episode->cover->thumbnail_url ?>"
-        alt="<?= $episode->title ?>" class="w-24 h-24 aspect-square"/>
+        alt="<?= $episode->title ?>" class="w-24 h-24 aspect-square" loading="lazy" />
     </div>
     <div class="flex flex-col flex-1 px-4 py-2">
         <div class="inline-flex">

@@ -1,8 +1,8 @@
 <article class="relative h-full overflow-hidden transition shadow bg-elevated border-3 border-subtle rounded-xl group hover:shadow-xl focus-within:shadow-xl focus-within:ring-accent">
     <a href="<?= route_to('person-view', $person->id) ?>" class="flex flex-col justify-end w-full h-full text-white group">
         <div class="absolute bottom-0 left-0 z-10 w-full h-full backdrop-gradient mix-blend-multiply"></div>
-        <div class="w-full h-full overflow-hidden">
-            <img alt="<?= $person->full_name ?>" src="<?= $person->avatar->medium_url ?>" class="object-cover w-full h-full transition duration-200 ease-in-out transform aspect-square group-focus:scale-105 group-hover:scale-105" />
+        <div class="w-full h-full overflow-hidden bg-header">
+            <img alt="<?= $person->full_name ?>" src="<?= $person->avatar->medium_url ?>" class="object-cover w-full h-full transition duration-200 ease-in-out transform aspect-square group-focus:scale-105 group-hover:scale-105" loading="lazy" />
         </div>
         <div class="absolute z-20">
             <h2 class="px-4 py-2 font-semibold leading-tight"><?= $person->full_name ?></h2>

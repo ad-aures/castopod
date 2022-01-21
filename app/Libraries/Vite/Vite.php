@@ -120,7 +120,7 @@ class Vite
             CODE_SAMPLE
 ,
             'js' => <<<CODE_SAMPLE
-                    <script type="module" src="{$assetUrl}"></script>
+                    <script type="module" src="{$assetUrl}" defer></script>
                 CODE_SAMPLE
 ,
             default => '',

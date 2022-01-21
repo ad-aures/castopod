@@ -50,7 +50,7 @@ const drawEpisodesMap = async (mapDivId: string, dataUrl: string) => {
           data[i].cover_url +
           '" alt="' +
           data[i].episode_title +
-          '" class="rounded w-16 h-16" /><div class="flex flex-col flex-1"><h2 class="leading-tight text-sm w-56 line-clamp-2 font-bold"><a href="' +
+          '" class="rounded w-16 h-16" loading="lazy" /><div class="flex flex-col flex-1"><h2 class="leading-tight text-sm w-56 line-clamp-2 font-bold"><a href="' +
           data[i].episode_link +
           '" class="hover:underline font-semibold !text-accent-base">' +
           data[i].episode_title +

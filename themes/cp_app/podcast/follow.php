@@ -38,10 +38,10 @@
             'Fediverse.follow.subtitle',
         ) ?></h1>
         <div class="flex flex-col w-full max-w-xs -mt-24 overflow-hidden shadow bg-elevated rounded-xl">
-            <img src="<?= $actor->podcast->banner->small_url ?>" alt="" class="w-full aspect-[3/1] bg-header" />
+            <img src="<?= $actor->podcast->banner->small_url ?>" alt="" class="w-full aspect-[3/1] bg-header" loading="lazy" />
             <div class="flex px-4 py-2">
                 <img src="<?= $actor->avatar_image_url ?>" alt="<?= $actor->display_name ?>"
-                    class="w-16 h-16 mr-4 -mt-8 rounded-full ring-2 ring-background-elevated aspect-square" />
+                    class="w-16 h-16 mr-4 -mt-8 rounded-full ring-2 ring-background-elevated aspect-square" loading="lazy" />
                 <div class="flex flex-col">
                     <p class="font-semibold"><?= $actor->display_name ?></p>
                     <p class="text-sm text-skin-muted">@<?= $actor->username ?></p>

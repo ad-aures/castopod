@@ -25,7 +25,7 @@
                 <div class="inline-flex flex-row-reverse">
                     <?php $i = 0; ?>
                     <?php foreach ($podcast->persons as $person): ?>
-                        <img src="<?= $person->avatar->thumbnail_url ?>" alt="<?= $person->full_name ?>" class="object-cover w-8 -ml-4 border-2 rounded-full aspect-square border-background-base last:ml-0" />
+                        <img src="<?= $person->avatar->thumbnail_url ?>" alt="<?= $person->full_name ?>" class="object-cover w-8 -ml-4 border-2 rounded-full aspect-square bg-header border-background-base last:ml-0" loading="lazy" />
                         <?php $i++; if ($i === 3) {
     break;
 }?>

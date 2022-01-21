@@ -49,7 +49,7 @@
         ]) ?>">
             <?= icon('arrow-left', 'mr-2 text-lg') ?>
             <div class="inline-flex items-center gap-x-2">
-                <img class="w-8 h-8 rounded-full" src="<?= $episode->podcast->cover->tiny_url ?>" alt="<?= $episode->podcast->title ?>" />
+                <img class="w-8 h-8 rounded-full" src="<?= $episode->podcast->cover->tiny_url ?>" alt="<?= $episode->podcast->title ?>" loading="lazy" />
                 <div class="flex flex-col">
                     <span class="text-sm font-semibold leading-none"><?= $episode->podcast->title ?></span>
                     <span class="text-xs"><?= lang('Podcast.followers', [
@@ -81,7 +81,7 @@
         <div class="absolute top-0 left-0 w-full h-full bg-center bg-no-repeat bg-cover blur-lg mix-blend-overlay filter grayscale" style="background-image: url('<?= $episode->podcast->banner->small_url ?>');"></div>
         <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-background-header to-transparent"></div>
         <div class="z-10 flex flex-col items-start gap-y-2 gap-x-4 sm:flex-row">
-            <img src="<?= $episode->cover->medium_url ?>" alt="<?= $episode->title ?>" loading="lazy" class="rounded-md shadow-xl h-36 aspect-square" />
+            <img src="<?= $episode->cover->medium_url ?>" alt="<?= $episode->title ?>" class="rounded-md shadow-xl h-36 aspect-square" loading="lazy" />
             <div class="flex flex-col items-start text-white">
                 <?= episode_numbering($episode->number, $episode->season_number, 'text-sm leading-none font-semibold px-1 py-1 text-white/90 border !no-underline border-subtle', true) ?>
                 <h1 class="inline-flex items-baseline max-w-md mt-2 text-2xl font-bold sm:leading-none sm:text-3xl font-display line-clamp-2"><?= $episode->title ?></h1>
@@ -91,7 +91,7 @@
                         <div class="inline-flex flex-row-reverse">
                             <?php $i = 0; ?>
                             <?php foreach ($episode->persons as $person): ?>
-                                <img src="<?= $person->avatar->thumbnail_url ?>" alt="<?= $person->full_name ?>" class="object-cover w-8 h-8 -ml-4 border-2 rounded-full aspect-square border-background-header last:ml-0" />
+                                <img src="<?= $person->avatar->thumbnail_url ?>" alt="<?= $person->full_name ?>" class="object-cover w-8 h-8 -ml-4 border-2 rounded-full aspect-square border-background-header last:ml-0" loading="lazy" />
                                 <?php $i++; if ($i === 3) {
                         break;
                     }?>
