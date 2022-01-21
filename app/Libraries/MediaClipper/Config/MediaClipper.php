@@ -100,7 +100,7 @@ class MediaClipper extends BaseConfig
             'quotes' => [
                 'width' => 256,
                 'height' => 256,
-                'x' => 75,
+                'x' => 40,
                 'y' => 520,
             ],
             'podcastTitle' => [
@@ -148,9 +148,9 @@ class MediaClipper extends BaseConfig
                 'mask' => APPPATH . 'Libraries/MediaClipper/soundwaves-mask-portrait.png',
             ],
             'subtitles' => [
-                'fontsize' => 18,
-                'marginL' => 60,
-                'marginR' => 20,
+                'fontsize' => 16,
+                'marginL' => 40,
+                'marginR' => 25,
                 'marginV' => 97,
             ],
         ],
