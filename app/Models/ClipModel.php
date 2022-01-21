@@ -144,6 +144,27 @@ class ClipModel extends Model
         return (int) $result[0]['running_count'];
     }
 
+    public function doesVideoClipExist(VideoClip $videoClip): int | false
+    {
+        $result = $this->select('id')
+            ->where([
+                'podcast_id' => $videoClip->podcast_id,
+                'episode_id' => $videoClip->episode_id,
+                'start_time' => $videoClip->start_time,
+                'duration' => $videoClip->duration,
+            ])
+            ->where('JSON_EXTRACT(`metadata`, "$.format")', $videoClip->format)
+            ->where('JSON_EXTRACT(`metadata`, "$.theme.name")', $videoClip->theme['name'])
+            ->get()
+            ->getResultArray();
+
+        if ($result === []) {
+            return false;
+        }
+
+        return (int) $result[0]['id'];
+    }
+
     public function deleteVideoClip(int $podcastId, int $episodeId, int $clipId): BaseResult | bool
     {
         $this->clearVideoClipCache($clipId);

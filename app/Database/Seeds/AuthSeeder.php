@@ -296,18 +296,24 @@ class AuthSeeder extends Seeder
             }
         }
 
-        $this->db
-            ->table('auth_permissions')
-            ->ignore(true)
-            ->insertBatch($dataPermissions);
-        $this->db
-            ->table('auth_groups')
-            ->ignore(true)
-            ->insertBatch($dataGroups);
-        $this->db
-            ->table('auth_groups_permissions')
-            ->ignore(true)
-            ->insertBatch($dataGroupsPermissions);
+        if ($this->db->table('auth_groups')->countAll() < count($dataPermissions)) {
+            $this->db
+                ->table('auth_permissions')
+                ->ignore(true)
+                ->insertBatch($dataPermissions);
+        }
+        if ($this->db->table('auth_groups')->countAll() < count($dataGroups)) {
+            $this->db
+                ->table('auth_groups')
+                ->ignore(true)
+                ->insertBatch($dataGroups);
+        }
+        if ($this->db->table('auth_groups_permissions')->countAll() < count($dataGroupsPermissions)) {
+            $this->db
+                ->table('auth_groups_permissions')
+                ->ignore(true)
+                ->insertBatch($dataGroupsPermissions);
+        }
     }
 
     /**

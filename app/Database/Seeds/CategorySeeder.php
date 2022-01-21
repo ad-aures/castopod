@@ -791,9 +791,11 @@ class CategorySeeder extends Seeder
             ],
         ];
 
-        $this->db
-            ->table('categories')
-            ->ignore(true)
-            ->insertBatch($data);
+        foreach ($data as $categoryLine) {
+            $this->db
+                ->table('categories')
+                ->ignore(true)
+                ->insert($categoryLine);
+        }
     }
 }

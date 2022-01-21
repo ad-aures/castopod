@@ -69,6 +69,11 @@ class VideoClip extends BaseClip
             return $this;
         }
 
+        if ($this->attributes['media_id'] !== null) {
+            // media is already set, do nothing
+            return $this;
+        }
+
         helper('media');
         $file = new File(media_path($filePath));
 

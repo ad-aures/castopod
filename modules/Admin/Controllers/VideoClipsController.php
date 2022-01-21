@@ -176,11 +176,20 @@ class VideoClipsController extends BaseController
             'updated_by' => user_id(),
         ]);
 
+        // Check if video clip exists before inserting a new line
+        if ((new ClipModel())->doesVideoClipExist($videoClip)) {
+            // video clip already exists
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('error', lang('VideoClip.messages.alreadyExistingError'));
+        }
+
         (new ClipModel())->insert($videoClip);
 
         return redirect()->route('video-clips-list', [$this->podcast->id, $this->episode->id])->with(
             'message',
-            lang('Settings.images.regenerationSuccess')
+            lang('VideoClip.messages.addToQueueSuccess')
         );
     }
 

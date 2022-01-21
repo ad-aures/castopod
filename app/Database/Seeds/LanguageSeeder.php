@@ -763,9 +763,11 @@ class LanguageSeeder extends Seeder
             ],
         ];
 
-        $this->db
-            ->table('languages')
-            ->ignore(true)
-            ->insertBatch($data);
+        foreach ($data as $languageLine) {
+            $this->db
+                ->table('languages')
+                ->ignore(true)
+                ->insert($languageLine);
+        }
     }
 }

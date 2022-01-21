@@ -35,7 +35,8 @@ return [
     'delete' => 'Delete clip',
     'logs' => 'Job logs',
     'messages' => [
-        'createSuccess' => 'Video clip has been successfully created!',
+        'alreadyExistingError' => 'The video clip you are trying to create already exists!',
+        'addToQueueSuccess' => 'Video clip has been added to queue, awaiting to be created!',
         'deleteSuccess' => 'Video clip has been successfully removed!',
     ],
     'format' => [

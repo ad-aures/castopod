@@ -35,7 +35,8 @@ return [
     'delete' => 'Supprimer l’extrait',
     'logs' => 'Historique d’exécution',
     'messages' => [
-        'createSuccess' => 'L’extrait vidéo a été créé avec succès !',
+        'alreadyExistingError' => 'L’extrait vidéo que vous essayez de créer existe déjà !',
+        'addToQueueSuccess' => 'L’extrait vidéo a été ajouté à la file d’attente, en attente de création !',
         'deleteSuccess' => 'L’extrait vidéo a bien été supprimé !',
     ],
     'format' => [
