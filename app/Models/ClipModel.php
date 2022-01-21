@@ -130,6 +130,20 @@ class ClipModel extends Model
         return $found;
     }
 
+    public function getRunningVideoClipsCount(): int
+    {
+        $result = $this
+            ->select('COUNT(*) as `running_count`')
+            ->where([
+                'type' => 'video',
+                'status' => 'running',
+            ])
+            ->get()
+            ->getResultArray();
+
+        return (int) $result[0]['running_count'];
+    }
+
     public function deleteVideoClip(int $podcastId, int $episodeId, int $clipId): BaseResult | bool
     {
         $this->clearVideoClipCache($clipId);

@@ -39,17 +39,17 @@
                 name="format"
                 isChecked="true"
                 required="true"
-                hint="<?= lang('VideoClip.form.format.landscape_hint') ?>"><?= lang('VideoClip.form.format.landscape') ?></Forms.RadioButton>
+                hint="<?= lang('VideoClip.form.format.landscape_hint') ?>"><?= lang('VideoClip.format.landscape') ?></Forms.RadioButton>
             <Forms.RadioButton
                 value="portrait"
                 name="format"
                 required="true"
-                hint="<?= lang('VideoClip.form.format.portrait_hint') ?>"><?= lang('VideoClip.form.format.portrait') ?></Forms.RadioButton>
+                hint="<?= lang('VideoClip.form.format.portrait_hint') ?>"><?= lang('VideoClip.format.portrait') ?></Forms.RadioButton>
             <Forms.RadioButton
                 value="squared"
                 name="format"
                 required="true"
-                hint="<?= lang('VideoClip.form.format.squared_hint') ?>"><?= lang('VideoClip.form.format.squared') ?></Forms.RadioButton>
+                hint="<?= lang('VideoClip.form.format.squared_hint') ?>"><?= lang('VideoClip.format.squared') ?></Forms.RadioButton>
         </fieldset>
         <fieldset>
             <legend><?= lang('VideoClip.form.theme') ?></legend>
@@ -61,7 +61,7 @@
                     name="theme"
                     required="true"
                     isChecked="<?= $themeName === 'pine' ? 'true' : 'false' ?>"
-                    style="--color-accent-base: <?= $colors['preview']?>"><?= lang('Settings.theme.' . $themeName) ?></Forms.ColorRadioButton>
+                    style="--color-accent-base: <?= $colors['preview']?>; --color-background-preview: <?= $colors['preview-background'] ?>"><?= lang('Settings.theme.' . $themeName) ?></Forms.ColorRadioButton>
                 <?php endforeach; ?>
             </div>
         </fieldset>

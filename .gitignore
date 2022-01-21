@@ -60,6 +60,9 @@ writable/logs/*
 writable/session/*
 !writable/session/index.html
 
+writable/temp/*
+!writable/temp/index.html
+
 writable/uploads/*
 !writable/uploads/index.html
 

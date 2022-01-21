@@ -31,7 +31,7 @@ export class VideoClipPreviewer extends LitElement {
   format: VideoFormats = VideoFormats.Portrait;
 
   @property()
-  theme = "173 44% 96%";
+  theme = "172 100% 17%";
 
   @property({ type: Number })
   duration!: number;

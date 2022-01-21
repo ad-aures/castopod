@@ -38,17 +38,19 @@ return [
         'createSuccess' => 'Video clip has been successfully created!',
         'deleteSuccess' => 'Video clip has been successfully removed!',
     ],
+    'format' => [
+        'landscape' => 'Landscape',
+        'portrait' => 'Portrait',
+        'squared' => 'Squared',
+    ],
     'form' => [
         'title' => 'New video clip',
         'params_section_title' => 'Video clip parameters',
         'clip_title' => 'Clip title',
         'format' => [
             'label' => 'Choose a format',
-            'landscape' => 'Landscape',
             'landscape_hint' => 'With a 16:9 ratio, landscape videos are great for PeerTube, Youtube and Vimeo.',
-            'portrait' => 'Portrait',
             'portrait_hint' => 'With a 9:16 ratio, portrait videos are great for TikTok, Youtube shorts and Instagram stories.',
-            'squared' => 'Squared',
             'squared_hint' => 'With a 1:1 ratio, squared videos are great for Mastodon, Facebook, Twitter and LinkedIn.',
         ],
         'theme' => 'Select a theme',

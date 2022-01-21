@@ -36,15 +36,16 @@ const VideoClipBuilder = (): void => {
 
       let theme = form
         .querySelector('input[name="theme"]:checked')
-        ?.parentElement?.style.getPropertyValue("--color-accent-base");
+        ?.parentElement?.style.getPropertyValue("--color-background-preview");
       videoClipPreviewer.setAttribute("theme", theme || "");
 
       const watchThemeChange = (event: Event) => {
         theme =
           (
             event.target as HTMLInputElement
-          ).parentElement?.style.getPropertyValue("--color-accent-base") ??
-          theme;
+          ).parentElement?.style.getPropertyValue(
+            "--color-background-preview"
+          ) ?? theme;
         videoClipPreviewer.setAttribute("theme", theme || "");
       };
       for (let i = 0; i < themeOptions.length; i++) {

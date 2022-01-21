@@ -55,6 +55,8 @@ class VideoClipper
 
     protected ?string $episodeNumbering = null;
 
+    protected string $tempFileOutput;
+
     /**
      * @var array<string, mixed>
      */
@@ -90,11 +92,22 @@ class VideoClipper
 
         $podcastFolder = media_path("podcasts/{$this->episode->podcast->handle}");
 
-        $this->soundbiteOutput = $podcastFolder . "/{$this->episode->slug}-soundbite-{$this->start}-to-{$this->end}.mp3";
-        $this->subtitlesClipOutput = $podcastFolder . "/{$this->episode->slug}-subtitles-clip-{$this->start}-to-{$this->end}.srt";
-        $this->videoClipBgOutput = $podcastFolder . "/{$this->episode->slug}-clip-bg-{$this->format}-{$this->theme}.png";
         $this->videoClipOutput = $podcastFolder . "/{$this->episode->slug}-clip-{$this->start}-to-{$this->end}-{$this->format}-{$this->theme}.mp4";
         $this->videoClipFilePath = "podcasts/{$this->episode->podcast->handle}/{$this->episode->slug}-clip-{$this->start}-to-{$this->end}-{$this->format}-{$this->theme}.mp4";
+
+        // Temporary files to generate clip
+        $tempFile = tempnam(WRITEPATH . 'temp', "{$this->episode->slug}-soundbite-{$this->start}-to-{$this->end}");
+
+        if (! $tempFile) {
+            throw new Exception(
+                'Could not create temporary files, check for permissions on your ' . WRITEPATH . 'temp folder.'
+            );
+        }
+
+        $this->tempFileOutput = $tempFile;
+        $this->soundbiteOutput = $tempFile . '.mp3';
+        $this->subtitlesClipOutput = $tempFile . '.srt';
+        $this->videoClipBgOutput = $tempFile . '.png';
     }
 
     public function soundbite(): void
@@ -178,6 +191,7 @@ class VideoClipper
     public function cleanTempFiles(): void
     {
         // delete generated video background image, soundbite & subtitlesClip
+        unlink($this->tempFileOutput);
         unlink($this->soundbiteOutput);
         unlink($this->subtitlesClipOutput);
         unlink($this->videoClipBgOutput);

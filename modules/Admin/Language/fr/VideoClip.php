@@ -38,17 +38,19 @@ return [
         'createSuccess' => 'L’extrait vidéo a été créé avec succès !',
         'deleteSuccess' => 'L’extrait vidéo a bien été supprimé !',
     ],
+    'format' => [
+        'landscape' => 'Paysage',
+        'portrait' => 'Portrait',
+        'squared' => 'Carré',
+    ],
     'form' => [
         'title' => 'Nouvel extrait vidéo',
         'params_section_title' => 'Paramètres de l’extrait vidéo',
         'clip_title' => 'Titre de l’extrait',
         'format' => [
             'label' => 'Choisissez un format',
-            'landscape' => 'Paysage',
             'landscape_hint' => 'Avec un ratio de 16/9, les vidéos en paysage sont adaptées pour PeerTube, Youtube et Vimeo.',
-            'portrait' => 'Portrait',
             'portrait_hint' => 'Avec un ratio de 9/16, les vidéos en portrait sont adaptées pour TikTok, les Youtube shorts and les stories Instagram.',
-            'squared' => 'Carré',
             'squared_hint' => 'Avec un ratio de 1/1,  les vidéos carrées sont adaptées pour Mastodon, Facebook, Twitter et LinkedIn.',
         ],
         'theme' => 'Sélectionnez un thème',

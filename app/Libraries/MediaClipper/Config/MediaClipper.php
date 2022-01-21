@@ -229,8 +229,10 @@ class MediaClipper extends BaseConfig
      */
     public array $themes = [
         'pine' => [
-            // Preview must be a HSL colorscheme string
+            // Previews must be a HSL colorscheme string
             'preview' => '174 100% 29%',
+            'preview-background' => '172 100% 17%',
+            // arrays are rgb
             'background' => [0, 86, 74],
             'text' => [255, 255, 255],
             // subtitle hex color is BGR (Blue, Green, Red),
@@ -248,6 +250,8 @@ class MediaClipper extends BaseConfig
         'crimson' => [
             // Preview must be a HSL colorscheme string
             'preview' => '350 87% 61%',
+            'preview-background' => '348 75% 40%',
+            // arrays are rgb
             'background' => [179, 31, 57],
             'text' => [255, 255, 255],
             // subtitle hex color is BGR (Blue, Green, Red),
@@ -265,6 +269,8 @@ class MediaClipper extends BaseConfig
         'lake' => [
             // Preview must be a HSL colorscheme string
             'preview' => '194 100% 44%',
+            'preview-background' => '194 100% 22%',
+            // arrays are rgb
             'background' => [0, 86, 113],
             'text' => [255, 255, 255],
             // subtitle hex color is BGR (Blue, Green, Red),
@@ -282,6 +288,8 @@ class MediaClipper extends BaseConfig
         'amber' => [
             // Preview must be a HSL colorscheme string
             'preview' => '17 100% 57%',
+            'preview-background' => '17 100% 35%',
+            // arrays are rgb
             'background' => [177, 50, 0],
             'text' => [255, 255, 255],
             // subtitle hex color is BGR (Blue, Green, Red),
@@ -299,6 +307,8 @@ class MediaClipper extends BaseConfig
         'jacaranda' => [
             // Preview must be a HSL colorscheme string
             'preview' => '254 72% 52%',
+            'preview-background' => '254 73% 30%',
+            // arrays are rgb
             'background' => [47, 21, 132],
             'text' => [255, 255, 255],
             // subtitle hex color is BGR (Blue, Green, Red),
@@ -316,6 +326,8 @@ class MediaClipper extends BaseConfig
         'onyx' => [
             // Preview must be a HSL colorscheme string
             'preview' => '240 17% 2%',
+            'preview-background' => '240 17% 2%',
+            // arrays are rgb
             'background' => [5, 5, 7],
             'text' => [255, 255, 255],
             // subtitle hex color is BGR (Blue, Green, Red),
