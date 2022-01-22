@@ -30,6 +30,6 @@ return [
     'contributor-add' => 'Ajouter un contributeur',
     'platforms' => 'Plate-formes externes',
     'platforms-podcasting' => 'Podcasts',
-    'platforms-social' => 'Réseaux Sociaux',
+    'platforms-social' => 'Réseaux sociaux',
     'platforms-funding' => 'Financement',
 ];

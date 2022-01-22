@@ -30,6 +30,6 @@ return [
     'contributor-add' => 'Add contributor',
     'platforms' => 'External platforms',
     'platforms-podcasting' => 'Podcasting',
-    'platforms-social' => 'Social Networks',
+    'platforms-social' => 'Social networks',
     'platforms-funding' => 'Funding',
 ];

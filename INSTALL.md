@@ -11,6 +11,7 @@ or shared hosting, you can install it on most PHP-MySQL compatible web servers.
   - [(alternative) Manual configuration](#alternative-manual-configuration)
 - [Web Server Requirements](#web-server-requirements)
   - [PHP v8.0 or higher](#php-v80-or-higher)
+  - [FFmpeg v4.1.8 or higher for Video Clips](#ffmpeg-v418-or-higher-for-video-clips)
   - [MySQL compatible database](#mysql-compatible-database)
     - [Privileges](#privileges)
   - [(Optional) Other recommendations](#optional-other-recommendations)
@@ -20,24 +21,34 @@ or shared hosting, you can install it on most PHP-MySQL compatible web servers.
 
 ### 0. Pre-requisites
 
-0. Get a Web Server with requirements installed
+0. Get a Web Server with [requirements](#web-server-requirements) installed
 1. Create a MySQL database for Castopod Host with a user having access and
    modification privileges (for more info, see
-   [Web Server Requirements](#web-server-requirements)).
+   [MySQL compatible database](#mysql-compatible-database)).
 2. Activate HTTPS on your domain with an _SSL certificate_.
 3. Download and unzip the latest
    [Castopod Host Package](https://code.podlibre.org/podlibre/castopod-host/-/releases)
    onto the web server if you haven’t already.
    - ⚠️ Set the web server document root to the `public/` sub-folder.
-4. Add a cron task on your web server to run every minute (replace the paths
-   accordingly):
+4. Add **cron tasks** on your web server for various background processes
+   (replace the paths accordingly):
 
-   ```php
+   - For social features to work properly, this task is used to broadcast social
+     activities to your followers on the fediverse:
+
+   ```bash
       * * * * * /path/to/php /path/to/castopod-host/public/index.php scheduled-activities
    ```
 
-   > ⚠️ Social features will not work properly if you do not set the task. It is
-   > used to broadcast social activities to the fediverse.
+   - For Video Clips to be created (see
+     [FFmpeg requirements](#ffmpeg-v418-or-higher-for-video-clips)):
+
+   ```bash
+      * * * * * /path/to/php /path/to/castopod-host/public/index.php scheduled-video-clips
+   ```
+
+   > These tasks run **every minute**. You may set the frequency depending on
+   > your needs: every 5, 10 minutes or more.
 
 ### (recommended) Install Wizard
 
@@ -77,6 +88,14 @@ Additionally, make sure that the following extensions are enabled in your PHP:
 - json (enabled by default - don't turn it off)
 - xml (enabled by default - don't turn it off)
 - [mysqlnd](https://php.net/manual/en/mysqlnd.install.php)
+
+### FFmpeg v4.1.8 or higher for Video Clips
+
+[FFmpeg](https://www.ffmpeg.org/) version 4.1.8 or higher is required, with the
+following extensions:
+
+- **FreeType 2** library for
+  [gd](https://www.php.net/manual/en/image.installation.php).
 
 ### MySQL compatible database
 

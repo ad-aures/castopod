@@ -37,7 +37,7 @@ performance improvements ⚡.
        process. Check
        [Security Concerns section in INSTALL.md](./INSTALL.md#security-concerns).
 
-4. Alpha releases may come with additional update instructions (see
+4. Releases may come with additional update instructions (see
    [releases page](https://code.podlibre.org/podlibre/castopod-host/-/releases)).
    They are usually database migration scripts in `.sql` format to update your
    database schema.
@@ -74,7 +74,7 @@ to the newest.
 > _Castopod Host_.
 
 For example, if you're on `v1.0.0-alpha.42` and would like to upgrade to
-`v1.0.0-alpha.58`:
+`v1.0.0-beta.1`:
 
 0. (recommended) Make a backup of your files and database.
 
@@ -83,7 +83,7 @@ For example, if you're on `v1.0.0-alpha.42` and would like to upgrade to
 
 2. Go through each release update instructions sequentially (from oldest to
    newest) starting with `v1.0.0-alpha.43`, `v1.0.0-alpha.44`,
-   `v1.0.0-alpha.45`, …, `v1.0.0-alpha.58`.
+   `v1.0.0-alpha.45`, …, `v1.0.0-beta.1`.
 
 3. ✨ Enjoy your fresh instance, you're all done!
 

@@ -1,9 +1,12 @@
-<h1 style="text-align: center">
-  <img src="https://podlibre.org/static/images/Castopod-Title.svg" alt="Castopod Host" />
+<h1 align="center">
+  <a href="https://castopod.org/">
+    <img src="https://podlibre.org/static/images/Castopod-Title.svg" alt="Castopod Host" />
+  </a>
 </h1>
 
-> ⚠️ **Castopod Host is in alpha version**. It is still under heavy development
-> and may not be 100% stable as new features are being worked on.
+> **Castopod Host is in beta version**. We are working on getting the last
+> features needed for v1, making performance improvements and fixing any bugs
+> that may arise along the way.
 
 _Castopod Host_ is a free and open-source podcast hosting solution made for
 podcasters who want engage and interact with their audience.
@@ -13,10 +16,6 @@ audience measurements that respect your listeners privacy.
 
 Whether you choose to install it on your own server or have it hosted by a
 professional, all your data and analytics belong to you and you only!
-
-<div style="text-align: center">
-  <img src="https://podlibre.org/static/images/Castopod-Mascot-Server.svg" alt="Castopod Mascot" />
-</div>
 
 You may find Castopod Host's source code on the
 [original repository](https://code.podlibre.org/podlibre/castopod-host) or,
