@@ -8,7 +8,6 @@
 + vendor/***
 + writable/***
 + .env.example
-+ DEPENDENCIES.md
 + LICENSE.md
 + README.md
 + INSTALL.md
