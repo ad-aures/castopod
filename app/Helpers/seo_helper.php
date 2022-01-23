@@ -23,7 +23,7 @@ if (! function_exists('get_podcast_metatags')) {
     {
         $category = '';
         if ($podcast->category->parent_id !== null) {
-            $category .= $podcast->category->parent->apple_category . ' > ';
+            $category .= $podcast->category->parent->apple_category . ' › ';
         }
         $category .= $podcast->category->apple_category;
 

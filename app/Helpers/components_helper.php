@@ -7,6 +7,8 @@ declare(strict_types=1);
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
  */
+
+use App\Entities\Category;
 use App\Entities\Location;
 use CodeIgniter\I18n\Time;
 use CodeIgniter\View\Table;
@@ -327,6 +329,21 @@ if (! function_exists('explicit_badge')) {
         return <<<CODE_SAMPLE
             <span class="px-1 text-xs font-semibold leading-tight tracking-wider uppercase border md:border-white/50 {$class}">{$explicitLabel}</span>
         CODE_SAMPLE;
+    }
+}
+
+// ------------------------------------------------------------------------
+
+
+if (! function_exists('category_label')) {
+    function category_label(Category $category): string
+    {
+        $categoryLabel = '';
+        if ($category->parent_id !== null) {
+            $categoryLabel .= lang('Podcast.category_options.' . $category->parent->code) . ' › ';
+        }
+
+        return $categoryLabel . lang('Podcast.category_options.' . $category->code);
     }
 }
 

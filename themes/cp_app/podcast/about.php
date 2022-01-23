@@ -6,15 +6,11 @@
     <div class="mb-2"><?= $podcast->description_html ?></div>
     <div class="flex gap-x-4 gap-y-2">
         <span class="px-2 py-1 text-sm font-semibold border rounded-sm border-subtle bg-highlight">
-            <?= lang(
-    'Podcast.category_options.' . $podcast->category->code,
-) ?>
+            <?= category_label($podcast->category) ?>
         </span>
         <?php foreach ($podcast->other_categories as $other_category): ?>
             <span class="px-2 py-1 text-sm font-semibold border rounded-sm border-subtle bg-highlight">
-                <?= lang(
-    'Podcast.category_options.' . $other_category->code,
-) ?>
+                <?= category_label($other_category) ?>
             </span>
         <?php endforeach; ?>
     </div>
