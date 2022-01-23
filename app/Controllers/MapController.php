@@ -17,9 +17,17 @@ class MapController extends BaseController
 {
     public function index(): string
     {
-        $locale = service('request')
-            ->getLocale();
-        $cacheName = "page_map_{$locale}";
+        $cacheName = implode(
+            '_',
+            array_filter([
+                'page',
+                'map',
+                service('request')
+                    ->getLocale(),
+                can_user_interact() ? 'authenticated' : null,
+            ]),
+        );
+
         if (! ($found = cache($cacheName))) {
             $found = view('pages/map', [], [
                 'cache' => DECADE,

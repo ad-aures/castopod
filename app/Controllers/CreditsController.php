@@ -20,9 +20,12 @@ class CreditsController extends BaseController
     {
         $locale = service('request')
             ->getLocale();
-        $allPodcasts = (new PodcastModel())->findAll();
 
-        $cacheName = "page_credits_{$locale}";
+        $cacheName = implode(
+            '_',
+            array_filter(['page', 'credits', $locale, can_user_interact() ? 'authenticated' : null]),
+        );
+
         if (! ($found = cache($cacheName))) {
             $page = new Page([
                 'title' => lang('Person.credits', [], $locale),
@@ -30,6 +33,7 @@ class CreditsController extends BaseController
                 'content_markdown' => '',
             ]);
 
+            $allPodcasts = (new PodcastModel())->findAll();
             $allCredits = (new CreditModel())->findAll();
 
             // Unlike the carpenter, we make a tree from a table:

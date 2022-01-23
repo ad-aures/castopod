@@ -74,7 +74,7 @@ class PodcastController extends BaseController
                 'activity',
                 service('request')
                     ->getLocale(),
-                can_user_interact() ? '_authenticated' : null,
+                can_user_interact() ? 'authenticated' : null,
             ]),
         );
 
@@ -122,7 +122,7 @@ class PodcastController extends BaseController
                 'about',
                 service('request')
                     ->getLocale(),
-                can_user_interact() ? '_authenticated' : null,
+                can_user_interact() ? 'authenticated' : null,
             ]),
         );
 
@@ -188,7 +188,7 @@ class PodcastController extends BaseController
                 $seasonQuery ? 'season' . $seasonQuery : null,
                 service('request')
                     ->getLocale(),
-                can_user_interact() ? '_authenticated' : null,
+                can_user_interact() ? 'authenticated' : null,
             ]),
         );
 

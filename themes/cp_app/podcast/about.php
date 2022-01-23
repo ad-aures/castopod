@@ -22,7 +22,7 @@
     <div class="flex items-center mt-4 gap-x-8">
         <?php if ($podcast->persons !== []): ?>
             <button class="flex items-center text-xs font-semibold gap-x-2 hover:underline focus:ring-accent" data-toggle="persons-list" data-toggle-class="hidden">
-                <div class="inline-flex flex-row-reverse">
+                <span class="inline-flex flex-row-reverse">
                     <?php $i = 0; ?>
                     <?php foreach ($podcast->persons as $person): ?>
                         <img src="<?= $person->avatar->thumbnail_url ?>" alt="<?= $person->full_name ?>" class="object-cover w-8 -ml-4 border-2 rounded-full aspect-square bg-header border-background-base last:ml-0" loading="lazy" />
@@ -30,7 +30,7 @@
     break;
 }?>
                     <?php endforeach; ?>
-                </div>
+                </span>
                 <?= lang('Podcast.persons', [
                     'personsCount' => count($podcast->persons),
                 ]) ?>

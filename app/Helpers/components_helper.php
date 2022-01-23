@@ -307,7 +307,6 @@ if (! function_exists('relative_time')) {
         return <<<CODE_SAMPLE
             <time-ago class="{$class}" datetime="{$datetime}">
                 <time
-                    itemprop="published"
                     datetime="{$datetime}"
                     title="{$time}">{$translatedDate}</time>
             </time-ago>

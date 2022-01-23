@@ -91,7 +91,7 @@
                 <div class="flex items-center mt-4 gap-x-8">
                 <?php if ($episode->persons !== []): ?>
                     <button class="flex items-center text-xs font-semibold gap-x-2 hover:underline focus:ring-accent" data-toggle="persons-list" data-toggle-class="hidden">
-                        <div class="inline-flex flex-row-reverse">
+                        <span class="inline-flex flex-row-reverse">
                             <?php $i = 0; ?>
                             <?php foreach ($episode->persons as $person): ?>
                                 <img src="<?= $person->avatar->thumbnail_url ?>" alt="<?= $person->full_name ?>" class="object-cover w-8 h-8 -ml-4 border-2 rounded-full aspect-square border-background-header last:ml-0" loading="lazy" />
@@ -99,7 +99,7 @@
                         break;
                     }?>
                             <?php endforeach; ?>
-                        </div>
+                        </span>
                         <?= lang('Episode.persons', [
                             'personsCount' => count($episode->persons),
                         ]) ?>
@@ -124,7 +124,7 @@
             <div class="text-xs">
                 <?= relative_time($episode->published_at) ?>
                 <span class="mx-1">•</span>
-                <time datetime="PT<?= $episode->audio->duration ?>S">
+                <time datetime="PT<?= round($episode->audio->duration, 3) ?>S">
                     <?= format_duration_symbol($episode->audio->duration) ?>
                 </time>
             </div>

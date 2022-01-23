@@ -37,9 +37,17 @@ class PageController extends BaseController
 
     public function index(): string
     {
-        $locale = service('request')
-            ->getLocale();
-        $cacheName = "page-{$this->page->slug}-{$locale}";
+        $cacheName = implode(
+            '_',
+            array_filter([
+                'page',
+                $this->page->slug,
+                service('request')
+                    ->getLocale(),
+                can_user_interact() ? 'authenticated' : null,
+            ]),
+        );
+
         if (! ($found = cache($cacheName))) {
             $data = [
                 'metatags' => get_page_metatags($this->page),

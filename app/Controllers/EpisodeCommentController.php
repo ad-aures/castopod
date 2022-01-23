@@ -90,7 +90,7 @@ class EpisodeCommentController extends BaseController
                 "comment#{$this->comment->id}",
                 service('request')
                     ->getLocale(),
-                can_user_interact() ? '_authenticated' : null,
+                can_user_interact() ? 'authenticated' : null,
             ]),
         );
 

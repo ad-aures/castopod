@@ -81,7 +81,7 @@ class PostController extends FediversePostController
                 "post#{$this->post->id}",
                 service('request')
                     ->getLocale(),
-                can_user_interact() ? '_authenticated' : null,
+                can_user_interact() ? 'authenticated' : null,
             ]),
         );
 

@@ -37,8 +37,8 @@ class Field extends FormComponent
         unset($fieldComponentAttributes['as']);
         unset($fieldComponentAttributes['label']);
         unset($fieldComponentAttributes['class']);
-        unset($fieldComponentAttributes['helperText']);
-        unset($fieldComponentAttributes['hintText']);
+        unset($fieldComponentAttributes['helper']);
+        unset($fieldComponentAttributes['hint']);
 
         $fieldComponentAttributes['class'] = 'mb-1';
 

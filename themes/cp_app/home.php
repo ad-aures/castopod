@@ -5,10 +5,6 @@
 
 <head>
     <meta charset="UTF-8"/>
-    <title><?= service('settings')
-    ->get('App.siteName') ?></title>
-    <meta name="description" content="<?= service('settings')
-    ->get('App.siteDescription') ?>"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="icon" type="image/x-icon" href="<?= service('settings')
     ->get('App.siteIcon')['ico'] ?>" />
@@ -41,20 +37,20 @@
     <?php endif; ?>
 
     <header class="py-8 text-white border-b bg-header border-subtle">
-        <div class="container flex items-center justify-between px-2 py-4 mx-auto">
+        <h1 class="container flex items-center justify-between px-2 py-4 mx-auto">
             <a href="<?= route_to(
             'home',
         ) ?>" class="inline-flex items-baseline text-3xl font-semibold font-display"><?= service('settings')
         ->get('App.siteName') === 'Castopod' ? 'castopod' .
     svg('castopod-logo-base', 'h-6 ml-2') : service('settings')
         ->get('App.siteName') ?></a>
-        </div>
+        </h1>
     </header>
     <main class="container flex-1 px-4 py-10 mx-auto">
-        <Heading class="inline-block mb-2"><?= lang('Home.all_podcasts') ?> (<?= count(
+        <Heading tagName="h2" class="inline-block mb-2"><?= lang('Home.all_podcasts') ?> (<?= count(
             $podcasts,
         ) ?>)</Heading>
-        <section class="grid gap-4 grid-cols-cards">
+        <div class="grid gap-4 grid-cols-cards">
             <?php if ($podcasts): ?>
                 <?php foreach ($podcasts as $podcast): ?>
                     <a href="<?= $podcast->link ?>" class="relative w-full h-full overflow-hidden transition shadow focus:ring-accent rounded-xl border-subtle hover:shadow-xl focus:shadow-xl group border-3">
@@ -65,7 +61,7 @@
                                 <img alt="<?= $podcast->title ?>" src="<?= $podcast->cover->medium_url ?>" class="object-cover w-full h-full transition duration-200 ease-in-out transform bg-header aspect-square group-focus:scale-105 group-hover:scale-105" loading="lazy" />
                             </div>
                             <div class="absolute bottom-0 left-0 z-20 w-full px-4 pb-2">
-                                <h2 class="font-bold leading-none truncate font-display"><?= $podcast->title ?></h2>
+                                <h3 class="font-bold leading-none truncate font-display"><?= $podcast->title ?></h3>
                                 <p class="text-sm opacity-75">@<?= $podcast->handle ?></p>
                             </div>
                         </article>
@@ -74,7 +70,7 @@
             <?php else: ?>
                 <p class="italic"><?= lang('Home.no_podcast') ?></p>
             <?php endif; ?>
-        </section>
+        </div>
     </main>
     <footer class="container flex justify-between px-2 py-4 mx-auto text-sm text-right border-t border-subtle">
         <?= render_page_links() ?>
