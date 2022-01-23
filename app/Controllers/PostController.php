@@ -96,6 +96,7 @@ class PostController extends FediversePostController
             // if user is logged in then send to the authenticated activity view
             if (can_user_interact()) {
                 helper('form');
+                return view('post/post', $data);
             }
             return view('post/post', $data, [
                 'cache' => DECADE,
