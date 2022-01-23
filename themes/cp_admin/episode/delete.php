@@ -10,7 +10,7 @@
 
 <?= $this->section('content') ?>
 
-<form action="<?= route_to('episode-delete', $podcast->id, $episode->id) ?>" method="POST" class="flex flex-col max-w-xl mx-auto">
+<form action="<?= route_to('episode-delete', $podcast->id, $episode->id) ?>" method="POST" class="flex flex-col w-full max-w-xl mx-auto">
 <?= csrf_field() ?>
 
 <Alert variant="danger" glyph="alert" class="font-semibold"><?= lang('Episode.delete_form.disclaimer') ?></Alert>

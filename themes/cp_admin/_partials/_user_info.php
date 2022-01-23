@@ -26,7 +26,7 @@
     <dt class="text-sm font-medium leading-5 text-skin-muted">
     <?= lang('User.form.permissions') ?>
     </dt>
-    <dd class="max-w-xl mt-1 text-sm leading-5">
+    <dd class="w-full max-w-xl mt-1 text-sm leading-5">
     <?= implode(', ', $user->permissions) ?>
     </dd>
 </div>

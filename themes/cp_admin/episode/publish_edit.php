@@ -18,7 +18,7 @@
     ],
 ) ?>
 
-<form action="<?= route_to('episode-publish_edit', $podcast->id, $episode->id) ?>" method="POST" class="flex flex-col items-start max-w-xl mx-auto" data-submit="validate-message">
+<form action="<?= route_to('episode-publish_edit', $podcast->id, $episode->id) ?>" method="POST" class="flex flex-col items-start w-full max-w-lg mx-auto mt-4" data-submit="validate-message">
 <?= csrf_field() ?>
 <input type="hidden" name="client_timezone" value="UTC" />
 <input type="hidden" name="post_id" value="<?= $post->id ?>" />

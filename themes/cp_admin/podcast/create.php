@@ -14,7 +14,7 @@
 
 <?= $this->section('content') ?>
 
-<form action="<?= route_to('podcast-create') ?>" method="POST" enctype='multipart/form-data' class="flex flex-col max-w-xl gap-y-6">
+<form action="<?= route_to('podcast-create') ?>" method="POST" enctype='multipart/form-data' class="flex flex-col w-full max-w-xl gap-y-6">
 <?= csrf_field() ?>
 
 <Forms.Section

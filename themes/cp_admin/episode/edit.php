@@ -15,7 +15,7 @@
 
 <?= $this->section('content') ?>
 
-<form id="episode-edit-form" action="<?= route_to('episode-edit', $podcast->id, $episode->id) ?>" method="POST" enctype="multipart/form-data" class="flex flex-col max-w-xl mt-6 gap-y-8">
+<form id="episode-edit-form" action="<?= route_to('episode-edit', $podcast->id, $episode->id) ?>" method="POST" enctype="multipart/form-data" class="flex flex-col w-full max-w-xl mt-6 gap-y-8">
 <?= csrf_field() ?>
 
 
@@ -57,14 +57,14 @@
 
 <div class="flex flex-col gap-x-2 gap-y-4 md:flex-row">
     <Forms.Field
-        class="flex-1 w-0"
+        class="flex-1 w-full"
         name="season_number"
         label="<?= lang('Episode.form.season_number') ?>"
         type="number"
         value="<?= $episode->season_number ?>"
     />
     <Forms.Field
-        class="flex-1 w-0"
+        class="flex-1 w-full"
         name="episode_number"
         label="<?= lang('Episode.form.episode_number') ?>"
         type="number"
@@ -267,7 +267,7 @@
     name="custom_rss"
     label="<?= lang('Episode.form.custom_rss') ?>"
     hint="<?= lang('Episode.form.custom_rss_hint') ?>"
-    value="<?= $episode->custom_rss_string ?>"
+    content="<?= esc($episode->custom_rss_string) ?>"
 />
 
 </Forms.Section>

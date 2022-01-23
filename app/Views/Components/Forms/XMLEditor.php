@@ -14,11 +14,17 @@ class XMLEditor extends FormComponent
         'class' => 'textarea',
     ];
 
+    protected string $content = '';
+
+    public function setContent(string $value): void
+    {
+        $this->content = htmlspecialchars_decode($value);
+    }
+
     public function render(): string
     {
-        $content = $this->slot;
         $this->attributes['slot'] = 'textarea';
-        $textarea = form_textarea($this->attributes, $content);
+        $textarea = form_textarea($this->attributes, $this->content);
 
         return <<<HTML
             <xml-editor>{$textarea}</time-ago>

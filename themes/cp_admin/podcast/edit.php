@@ -36,7 +36,7 @@
     </div>
 </div>
 
-<div class="flex flex-col max-w-xl gap-y-6">
+<div class="flex flex-col w-full max-w-xl gap-y-6">
 
 <Forms.Section
     title="<?= lang('Podcast.form.identity_section_title') ?>"
@@ -217,8 +217,8 @@
     as="XMLEditor"
     name="custom_rss"
     label="<?= lang('Podcast.form.custom_rss') ?>"
-    value="<?= $podcast->custom_rss_string ?>"
-    hint="<?= lang('Podcast.form.custom_rss_hint') ?>" />
+    hint="<?= lang('Podcast.form.custom_rss_hint') ?>"
+    content="<?= esc($podcast->custom_rss_string) ?>" />
 
 </Forms.Section>
 

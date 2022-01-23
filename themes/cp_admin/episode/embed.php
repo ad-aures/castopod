@@ -24,7 +24,7 @@
     <?php endforeach; ?>
 </div>
 
-<iframe name="embed" id="embed" class="w-full max-w-xl mt-6 h-36" frameborder="0" scrolling="no" style="width: 100%;  overflow: hidden;" src="<?= $episode->embed_url ?>"></iframe>
+<iframe name="embed" id="embed" class="w-full max-w-xl mt-6 h-28" frameborder="0" scrolling="no" style="width: 100%;  overflow: hidden;" src="<?= $episode->embed_url ?>"></iframe>
 
 <div class="flex items-center mt-8 gap-x-2">
     <Forms.Textarea readonly="true" class="w-full max-w-xl" name="iframe" rows="2" value="<?= esc("<iframe width=\"100%\" height=\"280\" frameborder=\"0\" scrolling=\"no\" style=\"width: 100%; height: 280px; overflow: hidden;\" src=\"{$episode->embed_url}\"></iframe>") ?>" />
