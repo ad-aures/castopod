@@ -57,7 +57,7 @@ class WebmanifestController extends Controller
             'lang' => service('request')
                 ->getLocale(),
             'start_url' => base_url(),
-            'display' => 'minimal-ui',
+            'display' => 'standalone',
             'orientation' => 'portrait',
             'theme_color' => self::THEME_COLORS[service('settings')->get('App.theme')]['theme'],
             'background_color' => self::THEME_COLORS[service('settings')->get('App.theme')]['background'],
@@ -94,7 +94,7 @@ class WebmanifestController extends Controller
             'description' => $podcast->description,
             'lang' => $podcast->language_code,
             'start_url' => $podcast->link,
-            'display' => 'minimal-ui',
+            'display' => 'standalone',
             'orientation' => 'portrait',
             'theme_color' => self::THEME_COLORS[service('settings')->get('App.theme')]['theme'],
             'background_color' => self::THEME_COLORS[service('settings')->get('App.theme')]['background'],
