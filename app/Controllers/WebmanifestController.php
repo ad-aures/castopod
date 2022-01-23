@@ -94,6 +94,7 @@ class WebmanifestController extends Controller
             'description' => $podcast->description,
             'lang' => $podcast->language_code,
             'start_url' => $podcast->link,
+            'scope' => '/@' . $podcast->handle,
             'display' => 'standalone',
             'orientation' => 'portrait',
             'theme_color' => self::THEME_COLORS[service('settings')->get('App.theme')]['theme'],
