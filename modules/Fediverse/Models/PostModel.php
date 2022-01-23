@@ -469,11 +469,16 @@ class PostModel extends BaseUuidModel
     {
         $this->db->transStart();
 
+        $userId = null;
+        if (function_exists('user_id')) {
+            $userId = user_id();
+        }
+
         $reblog = new Post([
             'actor_id' => $actor->id,
             'reblog_of_id' => $post->id,
             'published_at' => Time::now(),
-            'created_by' => user_id(),
+            'created_by' => $userId,
         ]);
 
         // add reblog

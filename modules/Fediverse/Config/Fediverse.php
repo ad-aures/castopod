@@ -30,11 +30,11 @@ class Fediverse extends BaseConfig
      * Default avatar and cover images
      * --------------------------------------------------------------------
      */
-    public string $defaultAvatarImagePath = 'media/castopod-avatar_fediveration.jpg';
+    public string $defaultAvatarImagePath = 'media/avatar-default.jpg';
 
     public string $defaultAvatarImageMimetype = 'image/jpeg';
 
-    public string $defaultCoverImagePath = 'media/castopod-banner-pine_fediveration.jpg';
+    public string $defaultCoverImagePath = 'media/banner-default.jpg';
 
     public string $defaultCoverImageMimetype = 'image/jpeg';
 

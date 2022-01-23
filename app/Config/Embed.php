@@ -13,7 +13,7 @@ class Embed extends BaseConfig
      * Embeddable player config
      * --------------------------------------------------------------------------
      */
-    public int $width = 600;
+    public int $width = 485;
 
-    public int $height = 144;
+    public int $height = 112;
 }

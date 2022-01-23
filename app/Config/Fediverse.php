@@ -10,10 +10,18 @@ declare(strict_types=1);
 
 namespace Config;
 
+use App\Libraries\NoteObject;
 use Modules\Fediverse\Config\Fediverse as FediverseBaseConfig;
 
 class Fediverse extends FediverseBaseConfig
 {
+    /**
+     * --------------------------------------------------------------------
+     * ActivityPub Objects
+     * --------------------------------------------------------------------
+     */
+    public string $noteObject = NoteObject::class;
+
     public function __construct()
     {
         parent::__construct();

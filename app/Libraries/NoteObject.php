@@ -24,12 +24,7 @@ class NoteObject extends FediverseNoteObject
 
         if ($post->episode_id) {
             $this->content =
-                '<a href="' .
-                $post->episode->link .
-                '" target="_blank" rel="noopener noreferrer">' .
-                $post->episode->title .
-                '</a><br/>' .
-                $post->message_html;
+                '<a href="' . $post->episode->link . '">' . $post->episode->title . '</a><br/>' . $post->message_html;
         }
     }
 }
