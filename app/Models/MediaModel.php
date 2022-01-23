@@ -66,6 +66,18 @@ class MediaModel extends Model
     ];
 
     /**
+     * clear cache before update if by any chance, the podcast name changes, so will the podcast link
+     *
+     * @var string[]
+     */
+    protected $beforeUpdate = ['clearCache'];
+
+    /**
+     * @var string[]
+     */
+    protected $beforeDelete = ['clearCache'];
+
+    /**
      * Model constructor.
      *
      * @param ConnectionInterface|null $db         DB Connection
@@ -165,5 +177,20 @@ class MediaModel extends Model
         $media->deleteFile();
 
         return $this->delete($media->id, true);
+    }
+
+    /**
+     * @param mixed[] $data
+     *
+     * @return mixed[]
+     */
+    protected function clearCache(array $data): array
+    {
+        $mediaId = (is_array($data['id']) ? $data['id'][0] : $data['id']);
+
+        cache()
+            ->delete("media#{$mediaId}");
+
+        return $data;
     }
 }

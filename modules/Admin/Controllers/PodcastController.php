@@ -381,6 +381,9 @@ class PodcastController extends BaseController
                 ->withInput()
                 ->with('errors', $mediaModel->errors());
         }
+        (new PodcastModel())->clearCache([
+            'id' => $this->podcast->id,
+        ]);
 
         // remove banner url from actor
         $actor = (new ActorModel())->getActorById($this->podcast->actor_id);
