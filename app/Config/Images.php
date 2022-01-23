@@ -82,6 +82,10 @@ class Images extends BaseConfig
             'width' => 500,
             'height' => 500,
         ],
+        'og' => [
+            'width' => 1200,
+            'height' => 1200,
+        ],
         'federation' => [
             'width' => 400,
             'height' => 400,

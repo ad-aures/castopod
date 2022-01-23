@@ -51,10 +51,10 @@ if (! function_exists('get_podcast_metatags')) {
         $metatags
             ->title('  ' . $podcast->title . " (@{$podcast->handle})" . ' • ' . lang('Podcast.' . $page))
             ->description(htmlspecialchars($podcast->description))
-            ->image((string) $podcast->cover->large_url)
+            ->image((string) $podcast->cover->og_url)
             ->canonical((string) current_url())
-            ->og('image:width', (string) config('Images')->podcastCoverSizes['large']['width'])
-            ->og('image:height', (string) config('Images')->podcastCoverSizes['large']['height'])
+            ->og('image:width', (string) config('Images')->podcastCoverSizes['og']['width'])
+            ->og('image:height', (string) config('Images')->podcastCoverSizes['og']['height'])
             ->og('locale', $podcast->language_code)
             ->og('site_name', service('settings')->get('App.siteName'))
             ->push('link', [
@@ -98,11 +98,11 @@ if (! function_exists('get_episode_metatags')) {
         $metatags
             ->title($episode->title)
             ->description(htmlspecialchars($episode->description))
-            ->image((string) $episode->cover->large_url, 'player')
+            ->image((string) $episode->cover->og_url, 'player')
             ->canonical($episode->link)
             ->og('site_name', service('settings')->get('App.siteName'))
-            ->og('image:width', (string) config('Images')->podcastCoverSizes['large']['width'])
-            ->og('image:height', (string) config('Images')->podcastCoverSizes['large']['height'])
+            ->og('image:width', (string) config('Images')->podcastCoverSizes['og']['width'])
+            ->og('image:height', (string) config('Images')->podcastCoverSizes['og']['height'])
             ->og('locale', $episode->podcast->language_code)
             ->og('audio', $episode->audio_opengraph_url)
             ->og('audio:type', $episode->audio->file_mimetype)
