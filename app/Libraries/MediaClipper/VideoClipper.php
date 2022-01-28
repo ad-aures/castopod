@@ -260,7 +260,7 @@ class VideoClipper
             '-filter_complex "' . implode(';', $filters) . '"',
             '-map "[outfinal]"',
             '-map 0:a',
-            '-acodec copy',
+            '-acodec aac',
             '-vcodec libx264 -pix_fmt yuv420p',
             "{$this->videoClipOutput}",
         ];
