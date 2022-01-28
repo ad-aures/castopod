@@ -4,7 +4,7 @@
     "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
     "This file is @generated automatically"
   ],
-  "content-hash": "9efed48a02371916c3615af689e1cba2",
+  "content-hash": "1cd09e20009835bd1480554991ad2ff1",
   "packages": [
     {
       "name": "brick/math",
@@ -106,12 +106,12 @@
       "source": {
         "type": "git",
         "url": "https://github.com/codeigniter4/CodeIgniter4.git",
-        "reference": "8449d13724d460a4e5573f49027cd9f862449a29"
+        "reference": "367b80590e08e109e96d9cb06abe8bd8345cbfa8"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/codeigniter4/CodeIgniter4/zipball/8449d13724d460a4e5573f49027cd9f862449a29",
-        "reference": "8449d13724d460a4e5573f49027cd9f862449a29",
+        "url": "https://api.github.com/repos/codeigniter4/CodeIgniter4/zipball/367b80590e08e109e96d9cb06abe8bd8345cbfa8",
+        "reference": "367b80590e08e109e96d9cb06abe8bd8345cbfa8",
         "shasum": ""
       },
       "require": {
@@ -121,20 +121,20 @@
         "ext-mbstring": "*",
         "kint-php/kint": "^4.0",
         "laminas/laminas-escaper": "^2.9",
-        "php": "^7.3 || ^8.0",
+        "php": "^7.4 || ^8.0",
         "psr/log": "^1.1"
       },
       "require-dev": {
         "codeigniter/coding-standard": "^1.1",
         "fakerphp/faker": "^1.9",
-        "friendsofphp/php-cs-fixer": "^3.1",
+        "friendsofphp/php-cs-fixer": "3.4.*",
         "mikey179/vfsstream": "^1.6",
         "nexusphp/cs-config": "^3.3",
         "nexusphp/tachycardia": "^1.0",
         "phpstan/phpstan": "^1.0",
         "phpunit/phpunit": "^9.1",
         "predis/predis": "^1.1",
-        "rector/rector": "0.12.11"
+        "rector/rector": "0.12.15"
       },
       "suggest": {
         "ext-fileinfo": "Improves mime type detection for files"
@@ -184,7 +184,7 @@
         "slack": "https://codeigniterchat.slack.com",
         "issues": "https://github.com/codeigniter4/CodeIgniter4/issues"
       },
-      "time": "2022-01-10T01:36:11+00:00"
+      "time": "2022-01-27T07:39:41+00:00"
     },
     {
       "name": "codeigniter4/settings",
@@ -7565,5 +7565,5 @@
     "php": "^8.0"
   },
   "platform-dev": [],
-  "plugin-api-version": "2.1.0"
+  "plugin-api-version": "2.2.0"
 }

@@ -175,14 +175,14 @@ class MediaClipper extends BaseConfig
                 'x' => 260,
                 'y' => 50,
                 'lines' => 1,
-                'lineWidth' => 700,
+                'lineWidth' => 800,
             ],
             'episodeTitle' => [
                 'fontsize' => 36,
                 'x' => 260,
                 'y' => 90,
                 'lines' => 2,
-                'lineWidth' => 700,
+                'lineWidth' => 850,
                 'lineHeight' => 1.5,
             ],
             'episodeNumbering' => [
