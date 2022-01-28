@@ -1,3 +1,15 @@
+# [1.0.0-beta.2](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2022-01-28)
+
+### Bug Fixes
+
+- **migrations:** ignore invalid utf8 chars for media files metadata + update
+  transcript parser
+  ([45e8f99](https://code.podlibre.org/podlibre/castopod-host/commit/45e8f99e753cc02ec105e6f4d7fe026a205724f8))
+- **video-clips:** set audio codec to aac, fixing audio issue on twitter
+  ([3c22c68](https://code.podlibre.org/podlibre/castopod-host/commit/3c22c68ee81f77bd7fcf7e2739ee6af016407843))
+- **video-clips:** set longer podcast and episode lengths for squared format
+  ([c030113](https://code.podlibre.org/podlibre/castopod-host/commit/c0301134c2048dc29eb2b995e4d5c22c49444100))
+
 # 1.0.0-beta.1 (2022-01-23)
 
 ### Bug Fixes
