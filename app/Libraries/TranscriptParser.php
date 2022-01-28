@@ -30,10 +30,21 @@ class TranscriptParser
      */
     public function parseSrt(): string | false
     {
-        define('SRT_STATE_SUBNUMBER', 0);
-        define('SRT_STATE_TIME', 1);
-        define('SRT_STATE_TEXT', 2);
-        define('SRT_STATE_BLANK', 3);
+        if (! defined('SRT_STATE_SUBNUMBER')) {
+            define('SRT_STATE_SUBNUMBER', 0);
+        }
+
+        if (! defined('SRT_STATE_TIME')) {
+            define('SRT_STATE_TIME', 1);
+        }
+
+        if (! defined('SRT_STATE_TEXT')) {
+            define('SRT_STATE_TEXT', 2);
+        }
+
+        if (! defined('SRT_STATE_BLANK')) {
+            define('SRT_STATE_BLANK', 3);
+        }
 
         $subs = [];
         $state = SRT_STATE_SUBNUMBER;

@@ -58,7 +58,7 @@ class Transcript extends BaseMedia
             $metadata['json_path'] = $jsonFilePath;
         }
 
-        $this->attributes['file_metadata'] = json_encode($metadata);
+        $this->attributes['file_metadata'] = json_encode($metadata, JSON_INVALID_UTF8_IGNORE);
 
         return $this;
     }

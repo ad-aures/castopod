@@ -88,7 +88,7 @@ class BaseMedia extends Entity
 
         $this->attributes['type'] = $this->type;
         $this->attributes['file_mimetype'] = $file->getMimeType();
-        $this->attributes['file_metadata'] = json_encode(lstat((string) $file));
+        $this->attributes['file_metadata'] = json_encode(lstat((string) $file), JSON_INVALID_UTF8_IGNORE);
         $this->attributes['file_path'] = save_media(
             $file,
             $this->attributes['file_directory'],

@@ -61,7 +61,7 @@ class Image extends BaseMedia
             ];
         }
 
-        $this->attributes['file_metadata'] = json_encode($metadata);
+        $this->attributes['file_metadata'] = json_encode($metadata, JSON_INVALID_UTF8_IGNORE);
 
         $this->initFileProperties();
         $this->saveSizes();
