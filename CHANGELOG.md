@@ -1,3 +1,10 @@
+# [1.0.0-beta.3](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2022-01-28)
+
+### Bug Fixes
+
+- revert to beta.1's codeigniter4 version
+  ([e831411](https://code.podlibre.org/podlibre/castopod-host/commit/e83141127080ccde44987195db46ba97fd6cc2ca))
+
 # [1.0.0-beta.2](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2022-01-28)
 
 ### Bug Fixes
