@@ -1,3 +1,20 @@
+# [1.0.0-beta.4](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2022-01-29)
+
+### Bug Fixes
+
+- **housekeeping:** replace the use of GLOB_BRACE with looping over file
+  extensions
+  ([42d92d0](https://code.podlibre.org/podlibre/castopod-host/commit/42d92d0c8dfe0c567c28f5bfdda129890fa4c2ec)),
+  closes [#154](https://code.podlibre.org/podlibre/castopod-host/issues/154)
+- **housekeeping:** set default sizes value + ignore illegal IFD size error to
+  proceed with script
+  ([f21ca57](https://code.podlibre.org/podlibre/castopod-host/commit/f21ca57603cfa503699b7e09a155e18d876d65fe))
+
+### Features
+
+- **housekeeping:** add clear_cache option to flush redis or files cache
+  ([99bfac0](https://code.podlibre.org/podlibre/castopod-host/commit/99bfac0b428a4bc6fe8bfd10a355dfd93f42ba5c))
+
 # [1.0.0-beta.3](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2022-01-28)
 
 ### Bug Fixes
