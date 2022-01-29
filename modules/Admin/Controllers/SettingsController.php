@@ -116,17 +116,21 @@ class SettingsController extends BaseController
         helper('media');
 
         $allPodcasts = (new PodcastModel())->findAll();
+        $imageExt = ['jpg', 'png', 'webp'];
 
         foreach ($allPodcasts as $podcast) {
-            $podcastImages = glob(media_path("/podcasts/{$podcast->handle}/*_*{jpg,png,webp}"), GLOB_BRACE);
+            foreach ($imageExt as $ext) {
+                $podcastImages = glob(media_path("/podcasts/{$podcast->handle}/*_*{$ext}"));
 
-            if ($podcastImages) {
-                foreach ($podcastImages as $podcastImage) {
-                    if (is_file($podcastImage)) {
-                        unlink($podcastImage);
+                if ($podcastImages) {
+                    foreach ($podcastImages as $podcastImage) {
+                        if (is_file($podcastImage)) {
+                            unlink($podcastImage);
+                        }
                     }
                 }
             }
+
             $podcast->cover->saveSizes();
             if ($podcast->banner_id !== null) {
                 $podcast->banner->saveSizes();
@@ -139,11 +143,13 @@ class SettingsController extends BaseController
             }
         }
 
-        $personsImages = glob(media_path('/persons/*_*{jpg,png,webp}'), GLOB_BRACE);
-        if ($personsImages) {
-            foreach ($personsImages as $personsImage) {
-                if (is_file($personsImage)) {
-                    unlink($personsImage);
+        foreach ($imageExt as $ext) {
+            $personsImages = glob(media_path("/persons/*_*{$ext}"));
+            if ($personsImages) {
+                foreach ($personsImages as $personsImage) {
+                    if (is_file($personsImage)) {
+                        unlink($personsImage);
+                    }
                 }
             }
         }
@@ -176,27 +182,31 @@ class SettingsController extends BaseController
         helper('media');
 
         if ($this->request->getPost('rewrite_media') === 'yes') {
-
+            $imageExt = ['jpg', 'png', 'webp'];
             // Delete all podcast image sizes to recreate them
             $allPodcasts = (new PodcastModel())->findAll();
             foreach ($allPodcasts as $podcast) {
-                $podcastImages = glob(media_path("/podcasts/{$podcast->handle}/*_*{jpg,png,webp}"), GLOB_BRACE);
+                foreach ($imageExt as $ext) {
+                    $podcastImages = glob(media_path("/podcasts/{$podcast->handle}/*_*{$ext}"));
 
-                if ($podcastImages) {
-                    foreach ($podcastImages as $podcastImage) {
-                        if (is_file($podcastImage)) {
-                            unlink($podcastImage);
+                    if ($podcastImages) {
+                        foreach ($podcastImages as $podcastImage) {
+                            if (is_file($podcastImage)) {
+                                unlink($podcastImage);
+                            }
                         }
                     }
                 }
             }
 
             // Delete all person image sizes to recreate them
-            $personsImages = glob(media_path('/persons/*_*{jpg,png,webp}'), GLOB_BRACE);
-            if ($personsImages) {
-                foreach ($personsImages as $personsImage) {
-                    if (is_file($personsImage)) {
-                        unlink($personsImage);
+            foreach ($imageExt as $ext) {
+                $personsImages = glob(media_path("/persons/*_*{$ext}"));
+                if ($personsImages) {
+                    foreach ($personsImages as $personsImage) {
+                        if (is_file($personsImage)) {
+                            unlink($personsImage);
+                        }
                     }
                 }
             }
@@ -207,7 +217,7 @@ class SettingsController extends BaseController
                     if (str_ends_with($image->file_path, 'banner.jpg') || str_ends_with(
                         $image->file_path,
                         'banner.png'
-                    )) {
+                    ) || str_ends_with($image->file_path, 'banner.jpeg')) {
                         $image->sizes = config('Images')
                             ->podcastBannerSizes;
                     } else {
