@@ -35,6 +35,8 @@ return [
         'reset_counts_helper' => 'This option will recalculate and reset all data counts (number of followers, posts, comments, …).',
         'rewrite_media' => 'Rewrite media metadata',
         'rewrite_media_helper' => 'This option will delete all superfluous media files and recreate them (images, audio files, transcripts, chapters, …)',
+        'clear_cache' => 'Clear all cache',
+        'clear_cache_helper' => 'This option will flush redis cache or writable/cache files.',
         'run' => 'Run housekeeping',
         'runSuccess' => 'Housekeeping has been run successfully!',
     ],

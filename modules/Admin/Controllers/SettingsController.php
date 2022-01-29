@@ -283,6 +283,10 @@ class SettingsController extends BaseController
             }
         }
 
+        if ($this->request->getPost('clear_cache') === 'yes') {
+            cache()->clean();
+        }
+
         return redirect('settings-general')->with('message', lang('Settings.housekeeping.runSuccess'));
     }
 

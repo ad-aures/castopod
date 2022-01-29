@@ -35,6 +35,8 @@ return [
         'reset_counts_helper' => 'Cette option recalcul et réinitialise les compteurs de données (nombre d’abonné·e·s, de publications, de commentaires, …).',
         'rewrite_media' => 'Réécrire les métadonnées des fichiers média',
         'rewrite_media_helper' => 'Cette option supprimera tous les fichiers média superflus et les recréera (images, fichiers audio, transcripts, chapitrages, …)',
+        'clear_cache' => 'Supprimer tout le cache',
+        'clear_cache_helper' => 'Cette option supprimera l’intégralité du cache redis ou des fichiers cache du dossier writable/cache.',
         'run' => 'Faire le ménage',
         'runSuccess' => 'Le ménage a été effectué avec succès !',
     ],
