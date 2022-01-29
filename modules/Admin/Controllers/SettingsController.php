@@ -217,7 +217,10 @@ class SettingsController extends BaseController
                 } elseif (str_starts_with($image->file_path, 'persons')) {
                     $image->sizes = config('Images')
                         ->personAvatarSizes;
+                } else {
+                    $image->sizes = [];
                 }
+
                 $image->setFile(new File(media_path($image->file_path)));
 
                 (new MediaModel('image'))->updateMedia($image);
