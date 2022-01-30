@@ -28,18 +28,14 @@ class HttpSignature
     /**
      * @var string
      */
-    private const SIGNATURE_PATTERN = '/^
-        keyId="(?P<keyId>
-            (https?:\/\/[\w\-\.]+[\w]+)
-            (:[\d]+)?
-            ([\w\-\.#\/@]+)
-        )",
-        algorithm="(?P<algorithm>[\w\-]+)",
-        (headers="\(request-target\) (?P<headers>[\w\\-\s]+)",)?
-        signature="(?P<signature>[\w+\/]+={0,2})"
+    private const SIGNATURE_PATTERN = '/
+        (?=.*(keyId="(?P<keyId>https?:\/\/[\w\-\.]+[\w]+(:[\d]+)?[\w\-\.#\/@]+)"))
+        (?=.*(signature="(?P<signature>[\w+\/]+={0,2})"))
+        (?=.*(headers="\(request-target\)(?P<headers>[\w\\-\s]+)"))?
+        (?=.*(algorithm="(?P<algorithm>[\w\-]+)"))?
     /x';
 
-    protected ?IncomingRequest $request = null;
+    protected IncomingRequest $request;
 
     public function __construct(IncomingRequest $request = null)
     {
@@ -66,7 +62,8 @@ class HttpSignature
         $requestTime = Time::createFromFormat('D, d M Y H:i:s T', $dateHeader->getValue());
 
         $diff = $requestTime->difference($currentTime);
-        if ($diff->getSeconds() > 3600) {
+        $diffSeconds = $diff->getSeconds();
+        if ($diffSeconds > 3600 || $diffSeconds < 0) {
             throw new Exception('Request must be made within the last hour.');
         }
 
@@ -74,6 +71,7 @@ class HttpSignature
         if (! ($digestHeader = $this->request->header('digest'))) {
             throw new Exception('Request must include a digest header');
         }
+
         // compute body digest and compare with header digest
         $bodyDigest = hash('sha256', $this->request->getBody(), true);
         $digest = 'SHA-256=' . base64_encode($bodyDigest);
@@ -94,7 +92,8 @@ class HttpSignature
 
         // set $keyId, $headers and $signature variables
         $keyId = $parts['keyId'];
-        $headers = $parts['headers'];
+        $algorithm = $parts['algorithm'];
+        $headers = $parts['headers'] ?? 'date';
         $signature = $parts['signature'];
 
         // Fetch the public key linked from keyId
@@ -102,19 +101,14 @@ class HttpSignature
         $actorResponse = $actorRequest->get();
         $actor = json_decode($actorResponse->getBody(), false, 512, JSON_THROW_ON_ERROR);
 
-        $publicKeyPem = $actor->publicKey->publicKeyPem;
+        $publicKeyPem = (string) $actor->publicKey->publicKeyPem;
 
         // Create a comparison string from the plaintext headers we got
         // in the same order as was given in the signature header,
         $data = $this->getPlainText(explode(' ', trim($headers)));
 
-        // Verify that string using the public key and the original signature.
-        $rsa = new RSA();
-        $rsa->setHash('sha256');
-        $rsa->setSignatureMode(RSA::SIGNATURE_PKCS1);
-        $rsa->loadKey($publicKeyPem);
-
-        return $rsa->verify($data, base64_decode($signature, true));
+        // Verify the data string using the public key and the original signature.
+        return $this->verifySignature($publicKeyPem, $data, $signature, $algorithm);
     }
 
     /**
@@ -124,7 +118,7 @@ class HttpSignature
      */
     private function splitSignature(string $signature): array | false
     {
-        if (! preg_match(self::SIGNATURE_PATTERN, $signature, $matches)) {
+        if (! preg_match(self::SIGNATURE_PATTERN, $signature, $matches, PREG_UNMATCHED_AS_NULL)) {
             // Signature pattern failed
             return false;
         }
@@ -161,5 +155,28 @@ class HttpSignature
         }
 
         return implode("\n", $strings);
+    }
+
+    /**
+     * Verifies the signature depending on the algorithm sent
+     */
+    private function verifySignature(
+        string $publicKeyPem,
+        string $data,
+        string $signature,
+        string $algorithm = 'rsa-sha256'
+    ): bool {
+        if ($algorithm === 'rsa-sha512' || $algorithm === 'rsa-sha256') {
+            $hash = substr($algorithm, strpos($algorithm, '-') + 1);
+            $rsa = new RSA();
+            $rsa->setHash($hash);
+            $rsa->setSignatureMode(RSA::SIGNATURE_PKCS1);
+            $rsa->loadKey($publicKeyPem);
+
+            return $rsa->verify($data, (string) base64_decode($signature, true));
+        }
+
+        // not implemented
+        return false;
     }
 }
