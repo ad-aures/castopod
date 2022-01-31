@@ -1,3 +1,10 @@
+# [1.0.0-beta.5](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2022-01-31)
+
+### Bug Fixes
+
+- **analytics:** set initial value for duration and bandwidth
+  ([ee50539](https://code.podlibre.org/podlibre/castopod-host/commit/ee5053959154b1a2e5fbe4b43162968425206a26))
+
 # [1.0.0-beta.4](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2022-01-29)
 
 ### Bug Fixes
