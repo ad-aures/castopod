@@ -50,8 +50,8 @@ class AddAnalyticsPodcastsProcedure extends Migration
         SET @current_hour = HOUR(@current_datetime);
 
         IF NOT `p_bot` THEN
-            INSERT INTO `{$prefix}analytics_podcasts`(`podcast_id`, `date`)
-                VALUES (p_podcast_id, @current_date)
+            INSERT INTO `{$prefix}analytics_podcasts`(`podcast_id`, `date`, `duration`, `bandwidth`)
+                VALUES (p_podcast_id, @current_date, `p_duration`, `p_filesize`)
                 ON DUPLICATE KEY UPDATE
                     `duration`=`duration`+`p_duration`,
                     `bandwidth`=`bandwidth`+`p_filesize`,
