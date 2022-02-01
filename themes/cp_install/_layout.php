@@ -23,7 +23,7 @@
         </div>
     </header>
     <main class="container flex flex-col items-center justify-center flex-1 px-4 py-10 mx-auto">
-        <!-- view('_message_block') -->
+        <?= view('_message_block') ?>
         <?= $this->renderSection('content') ?>
     </main>
     <footer class="container px-2 py-4 mx-auto text-sm text-right border-t border-subtle">

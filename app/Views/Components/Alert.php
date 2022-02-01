@@ -30,6 +30,8 @@ class Alert extends Component
         $title = $this->title === null ? '' : '<div class="font-semibold">' . $this->title . '</div>';
         $class = 'inline-flex w-full p-2 text-sm border rounded ' . $variantClasses[$this->variant] . ' ' . $this->class;
 
+        unset($this->attributes['slot']);
+        unset($this->attributes['variant']);
         $attributes = stringify_attributes($this->attributes);
 
         return <<<HTML
