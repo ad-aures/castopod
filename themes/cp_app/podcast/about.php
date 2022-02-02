@@ -3,8 +3,8 @@
 <?= $this->section('content') ?>
 
 <div class="px-2 sm:px-4">
-    <div class="mb-2"><?= $podcast->description_html ?></div>
-    <div class="flex gap-x-4 gap-y-2">
+    <div class="mb-2 prose"><?= $podcast->description_html ?></div>
+    <div class="flex flex-wrap gap-x-4 gap-y-2">
         <span class="px-2 py-1 text-sm font-semibold border rounded-sm border-subtle bg-highlight">
             <?= category_label($podcast->category) ?>
         </span>
