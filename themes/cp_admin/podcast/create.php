@@ -53,7 +53,8 @@
     as="MarkdownEditor"
     name="description"
     label="<?= lang('Podcast.form.description') ?>"
-    required="true" />
+    required="true"
+    disallowList="header,quote" />
 
 <fieldset>
     <legend><?= lang('Podcast.form.type.label') ?></legend>

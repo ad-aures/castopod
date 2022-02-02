@@ -26,7 +26,12 @@ use CodeIgniter\Entity\Entity;
 use CodeIgniter\Files\File;
 use CodeIgniter\HTTP\Files\UploadedFile;
 use CodeIgniter\I18n\Time;
-use League\CommonMark\CommonMarkConverter;
+use League\CommonMark\Environment\Environment;
+use League\CommonMark\Extension\Autolink\AutolinkExtension;
+use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
+use League\CommonMark\Extension\DisallowedRawHtml\DisallowedRawHtmlExtension;
+use League\CommonMark\Extension\SmartPunct\SmartPunctExtension;
+use League\CommonMark\MarkdownConverter;
 use RuntimeException;
 
 /**
@@ -473,13 +478,21 @@ class Episode extends Entity
 
     public function setDescriptionMarkdown(string $descriptionMarkdown): static
     {
-        $converter = new CommonMarkConverter([
-            'html_input' => 'strip',
+        $config = [
+            'html_input' => 'escape',
             'allow_unsafe_links' => false,
-        ]);
+        ];
+
+        $environment = new Environment($config);
+        $environment->addExtension(new CommonMarkCoreExtension());
+        $environment->addExtension(new AutolinkExtension());
+        $environment->addExtension(new SmartPunctExtension());
+        $environment->addExtension(new DisallowedRawHtmlExtension());
+
+        $converter = new MarkdownConverter($environment);
 
         $this->attributes['description_markdown'] = $descriptionMarkdown;
-        $this->attributes['description_html'] = $converter->convertToHtml($descriptionMarkdown);
+        $this->attributes['description_html'] = $converter->convert($descriptionMarkdown);
 
         return $this;
     }

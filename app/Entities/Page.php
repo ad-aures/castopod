@@ -12,7 +12,12 @@ namespace App\Entities;
 
 use CodeIgniter\Entity\Entity;
 use CodeIgniter\I18n\Time;
-use League\CommonMark\CommonMarkConverter;
+use League\CommonMark\Environment\Environment;
+use League\CommonMark\Extension\Autolink\AutolinkExtension;
+use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
+use League\CommonMark\Extension\DisallowedRawHtml\DisallowedRawHtmlExtension;
+use League\CommonMark\Extension\SmartPunct\SmartPunctExtension;
+use League\CommonMark\MarkdownConverter;
 
 /**
  * @property int $id
@@ -49,13 +54,20 @@ class Page extends Entity
 
     public function setContentMarkdown(string $contentMarkdown): static
     {
-        $converter = new CommonMarkConverter([
-            'html_input' => 'strip',
+        $config = [
             'allow_unsafe_links' => false,
-        ]);
+        ];
+
+        $environment = new Environment($config);
+        $environment->addExtension(new CommonMarkCoreExtension());
+        $environment->addExtension(new AutolinkExtension());
+        $environment->addExtension(new SmartPunctExtension());
+        $environment->addExtension(new DisallowedRawHtmlExtension());
+
+        $converter = new MarkdownConverter($environment);
 
         $this->attributes['content_markdown'] = $contentMarkdown;
-        $this->attributes['content_html'] = $converter->convertToHtml($contentMarkdown);
+        $this->attributes['content_html'] = $converter->convert($contentMarkdown);
 
         return $this;
     }

@@ -118,13 +118,15 @@
     as="MarkdownEditor"
     name="description"
     label="<?= lang('Episode.form.description') ?>"
-    required="true" />
+    required="true"
+    disallowList="header,quote" />
 
 <Forms.Field
     as="MarkdownEditor"
     name="description_footer"
     label="<?= lang('Episode.form.description_footer') ?>"
-    hint="<?= lang('Episode.form.description_footer_hint') ?>" />
+    hint="<?= lang('Episode.form.description_footer_hint') ?>"
+    disallowList="header,quote" />
 
 </Forms.Section>
 

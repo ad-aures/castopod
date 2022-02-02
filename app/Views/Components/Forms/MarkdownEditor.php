@@ -6,6 +6,16 @@ namespace App\Views\Components\Forms;
 
 class MarkdownEditor extends FormComponent
 {
+    /**
+     * @var string[]
+     */
+    protected array $disallowList = [];
+
+    public function setDisallowList(string $value): void
+    {
+        $this->disallowList = explode(',', $value);
+    }
+
     public function render(): string
     {
         $editorClass = 'w-full flex flex-col bg-elevated border-3 border-contrast rounded-lg overflow-hidden focus-within:ring-accent ' . $this->class;
@@ -13,29 +23,82 @@ class MarkdownEditor extends FormComponent
         $this->attributes['class'] = 'bg-elevated border-none focus:border-none focus:outline-none focus:ring-0 w-full h-full';
         $this->attributes['rows'] = 6;
 
-        // dd(htmlspecialchars_decode($this->value));
         $value = htmlspecialchars_decode($this->value);
 
-        $textarea = form_textarea($this->attributes, old($this->name, $value, false));
-        $icons = [
-            'heading' => icon('heading'),
-            'bold' => icon('bold'),
-            'italic' => icon('italic'),
-            'list-unordered' => icon('list-unordered'),
-            'list-ordered' => icon('list-ordered'),
-            'quote' => icon('quote'),
-            'link' => icon('link'),
-            'image-add' => icon('image-add'),
-            'markdown' => icon(
-                'markdown',
-                'mr-1 text-lg opacity-40'
-            ),
-        ];
+        $oldValue = old($this->name);
+        if ($oldValue === null) {
+            $oldValue = $value;
+        }
+        $textarea = form_textarea($this->attributes, $oldValue);
+        $markdownIcon = icon(
+            'markdown',
+            'mr-1 text-lg opacity-40'
+        );
         $translations = [
             'write' => lang('Common.forms.editor.write'),
             'preview' => lang('Common.forms.editor.preview'),
             'help' => lang('Common.forms.editor.help'),
         ];
+
+        $toolbarGroups = [
+            [
+                [
+                    'name' => 'header',
+                    'tag' => 'md-header',
+                    'icon' => icon('heading'),
+                ],
+                [
+                    'name' => 'bold',
+                    'tag' => 'md-bold',
+                    'icon' => icon('bold'),
+                ],
+                [
+                    'name' => 'italic',
+                    'tag' => 'md-italic',
+                    'icon' => icon('italic'),
+                ],
+            ],
+            [
+                [
+                    'name' => 'unordered-list',
+                    'tag' => 'md-unordered-list',
+                    'icon' => icon('list-unordered'),
+                ],
+                [
+                    'name' => 'ordered-list',
+                    'tag' => 'md-ordered-list ',
+                    'icon' => icon('list-ordered'),
+                ],
+            ],
+            [
+                [
+                    'name' => 'quote',
+                    'tag' => 'md-quote',
+                    'icon' => icon('quote'),
+                ],
+                [
+                    'name' => 'link',
+                    'tag' => 'md-link',
+                    'icon' => icon('link'),
+                ],
+                [
+                    'name' => 'image',
+                    'tag' => 'md-image',
+                    'icon' => icon('image-add'),
+                ],
+            ],
+        ];
+
+        $toolbarContent = '';
+        foreach ($toolbarGroups as $buttonsGroup) {
+            $toolbarContent .= '<div class="inline-flex text-2xl gap-x-1">';
+            foreach ($buttonsGroup as $button) {
+                if (! in_array($button['name'], $this->disallowList, true)) {
+                    $toolbarContent .= '<' . $button['tag'] . ' class="opacity-50 hover:opacity-100 focus:ring-accent focus:opacity-100">' . $button['icon'] . '</' . $button['tag'] . '>';
+                }
+            }
+            $toolbarContent .= '</div>';
+        }
 
         return <<<HTML
             <div class="{$editorClass}">
@@ -45,22 +108,7 @@ class MarkdownEditor extends FormComponent
                             <button type="button" slot="write" class="px-2 font-semibold focus:ring-inset focus:ring-accent">{$translations['write']}</button>
                             <button type="button" slot="preview" class="px-2 font-semibold focus:ring-inset focus:ring-accent">{$translations['preview']}</button>
                         </markdown-write-preview>
-                        <markdown-toolbar for="{$this->id}" class="flex gap-4 px-2 py-1">
-                            <div class="inline-flex text-2xl gap-x-1">
-                                <md-header class="opacity-50 hover:opacity-100 focus:ring-accent focus:opacity-100">{$icons['heading']}</md-header>
-                                <md-bold class="opacity-50 hover:opacity-100 focus:ring-accent focus:opacity-100" data-hotkey-scope="{$this->id}" data-hotkey="Control+b,Meta+b">{$icons['bold']}</md-bold>
-                                <md-italic class="opacity-50 hover:opacity-100 focus:ring-accent focus:opacity-100" data-hotkey-scope="{$this->id}" data-hotkey="Control+i,Meta+i">{$icons['italic']}</md-italic>
-                            </div>
-                            <div class="inline-flex text-2xl gap-x-1">
-                                <md-unordered-list class="opacity-50 hover:opacity-100 focus:ring-accent focus:opacity-100">{$icons['list-unordered']}</md-unordered-list>
-                                <md-ordered-list class="opacity-50 hover:opacity-100 focus:ring-accent focus:opacity-100">{$icons['list-ordered']}</md-ordered-list>
-                            </div>
-                            <div class="inline-flex text-2xl gap-x-1">
-                                <md-quote class="opacity-50 hover:opacity-100 focus:ring-accent focus:opacity-100">{$icons['quote']}</md-quote>
-                                <md-link class="opacity-50 hover:opacity-100 focus:ring-accent focus:opacity-100" data-hotkey-scope="{$this->id}" data-hotkey="Control+k,Meta+k">{$icons['link']}</md-link>
-                                <md-image class="opacity-50 hover:opacity-100 focus:ring-accent focus:opacity-100">{$icons['image-add']}</md-image>
-                            </div>
-                        </markdown-toolbar>
+                        <markdown-toolbar for="{$this->id}" class="flex gap-4 px-2 py-1">{$toolbarContent}</markdown-toolbar>
                     </div>
                 </header>
                 <div class="relative">
@@ -68,7 +116,7 @@ class MarkdownEditor extends FormComponent
                     <markdown-preview for="{$this->id}" class="absolute top-0 left-0 hidden w-full h-full max-w-full px-3 py-2 overflow-y-auto prose bg-base" showClass="bg-elevated" />
                 </div>
                 <footer class="flex px-2 py-1 border-t bg-base">
-                    <a href="https://commonmark.org/help/" class="inline-flex items-center text-xs font-semibold text-skin-muted hover:text-skin-base" target="_blank" rel="noopener noreferrer">{$icons['markdown']}{$translations['help']}</a>
+                    <a href="https://commonmark.org/help/" class="inline-flex items-center text-xs font-semibold text-skin-muted hover:text-skin-base" target="_blank" rel="noopener noreferrer">{$markdownIcon}{$translations['help']}</a>
                 </footer>
             </div>
         HTML;

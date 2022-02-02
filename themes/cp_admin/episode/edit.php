@@ -123,14 +123,16 @@
     name="description"
     label="<?= lang('Episode.form.description') ?>"
     value="<?= htmlspecialchars($episode->description_markdown) ?>"
-    required="true" />
+    required="true"
+    disallowList="header,quote" />
 
 <Forms.Field
     as="MarkdownEditor"
     name="description_footer"
     label="<?= lang('Episode.form.description_footer') ?>"
     hint="<?= lang('Episode.form.description_footer_hint') ?>"
-    value="<?= htmlspecialchars($podcast->episode_description_footer_markdown) ?? '' ?>" />
+    value="<?= htmlspecialchars($podcast->episode_description_footer_markdown) ?? '' ?>"
+    disallowList="header,quote" />
 
 </Forms.Section>
 

@@ -68,7 +68,8 @@
     name="description"
     label="<?= lang('Podcast.form.description') ?>"
     value="<?= htmlspecialchars($podcast->description_markdown) ?>"
-    required="true" />
+    required="true"
+    disallowList="header,quote" />
 
 <fieldset>
     <legend><?= lang('Podcast.form.type.label') ?></legend>
