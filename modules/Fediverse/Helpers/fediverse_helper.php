@@ -261,7 +261,7 @@ if (! function_exists('create_actor_from_uri')) {
         $newActor->public_key = $actorPayload->publicKey->publicKeyPem;
         $newActor->private_key = null;
         $newActor->display_name = $actorPayload->name;
-        $newActor->summary = $actorPayload->summary;
+        $newActor->summary = property_exists($actorPayload, 'summary') ? $actorPayload->summary : null;
         if (property_exists($actorPayload, 'icon')) {
             $newActor->avatar_image_url = $actorPayload->icon->url;
             $newActor->avatar_image_mimetype = $actorPayload->icon->mediaType;
@@ -272,8 +272,8 @@ if (! function_exists('create_actor_from_uri')) {
             $newActor->cover_image_mimetype = $actorPayload->image->mediaType;
         }
         $newActor->inbox_url = $actorPayload->inbox;
-        $newActor->outbox_url = $actorPayload->outbox;
-        $newActor->followers_url = $actorPayload->followers;
+        $newActor->outbox_url = property_exists($actorPayload, 'outbox') ? $actorPayload->outbox : null;
+        $newActor->followers_url = property_exists($actorPayload, 'followers') ? $actorPayload->followers : null;
 
         if (! ($newActorId = model('ActorModel')->insert($newActor, true))) {
             return null;
@@ -304,6 +304,36 @@ if (! function_exists('extract_text_from_html')) {
     function extract_text_from_html(string $content): ?string
     {
         return preg_replace('~\s+~', ' ', strip_tags($content));
+    }
+}
+
+if (! function_exists('get_message_from_object')) {
+    /**
+     * Gets the message from content, if no content key is present, checks for content in contentMap
+     *
+     * TODO: store multiple languages, convert markdown
+     *
+     * @return string|false
+     */
+    function get_message_from_object(stdClass $object): string | false
+    {
+        if (property_exists($object, 'content')) {
+            extract_text_from_html($object->content);
+            return $object->content;
+        }
+
+        $message = '';
+        if (property_exists($object, 'contentMap')) {
+            // TODO: update message to be json? (include all languages?)
+            if (property_exists($object->contentMap, 'en')) {
+                extract_text_from_html($object->contentMap->en);
+                $message = $object->contentMap->en;
+            } else {
+                $message = current($object->contentMap);
+            }
+        }
+
+        return $message;
     }
 }
 

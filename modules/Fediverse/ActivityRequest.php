@@ -27,15 +27,9 @@ class ActivityRequest
     protected ?Activity $activity = null;
 
     /**
-     * @var array<string, string[]>
+     * @var array<string, mixed>
      */
-    protected array $options = [
-        'headers' => [
-            'Content-Type' => 'application/activity+json',
-            'Accept' => 'application/activity+json',
-            // TODO: outgoing and incoming requests
-        ],
-    ];
+    protected array $options = [];
 
     public function __construct(string $uri, ?string $activityPayload = null)
     {
@@ -45,12 +39,21 @@ class ActivityRequest
             $this->request->setBody($activityPayload);
         }
 
+        $this->options = [
+            'headers' => [
+                'Content-Type' => 'application/activity+json',
+                'Accept' => 'application/activity+json',
+                'User-Agent' => 'Castopod/' . CP_VERSION . '; +' . base_url('', 'https'),
+                // TODO: outgoing and incoming requests
+            ],
+        ];
+
         $this->uri = new URI($uri);
     }
 
     public function post(): void
     {
-        // send Message to Fediverse instance
+        // outgoing message to Fediverse instance
         $this->request->post((string) $this->uri, $this->options);
     }
 
@@ -80,7 +83,7 @@ class ActivityRequest
         $digest = 'SHA-256=' . base64_encode($this->getBodyDigest());
         $contentType = $this->options['headers']['Content-Type'];
         $contentLength = (string) strlen($this->request->getBody());
-        $userAgent = 'Castopod';
+        $userAgent = 'Castopod/' . CP_VERSION . '; +' . base_url('', 'https');
 
         $plainText = "(request-target): post {$path}\nhost: {$host}\ndate: {$date}\ndigest: {$digest}\ncontent-type: {$contentType}\ncontent-length: {$contentLength}\nuser-agent: {$userAgent}";
 

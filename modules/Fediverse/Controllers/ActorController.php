@@ -108,12 +108,13 @@ class ActorController extends Controller
                     if ($replyToPost !== null) {
                         // TODO: strip content from html to retrieve message
                         // remove all html tags and reconstruct message with mentions?
-                        extract_text_from_html($payload->object->content);
+                        $message = get_message_from_object($payload->object);
+
                         $reply = new Post([
                             'uri' => $payload->object->id,
                             'actor_id' => $payloadActor->id,
                             'in_reply_to_id' => $replyToPost->id,
-                            'message' => $payload->object->content,
+                            'message' => $message,
                             'published_at' => Time::parse($payload->object->published),
                         ]);
                     }
