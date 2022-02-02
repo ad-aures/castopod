@@ -499,7 +499,7 @@ class PostModel extends BaseUuidModel
                 ->newActivity(
                     'Announce',
                     $actor->id,
-                    null,
+                    $post->actor_id,
                     $post->id,
                     $announceActivity->toJSON(),
                     $reblog->published_at,
@@ -559,7 +559,7 @@ class PostModel extends BaseUuidModel
                 ->newActivity(
                     'Undo',
                     $reblogPost->actor_id,
-                    null,
+                    $reblogPost->reblog_of_post->actor_id,
                     $reblogPost->reblog_of_id,
                     $undoActivity->toJSON(),
                     Time::now(),

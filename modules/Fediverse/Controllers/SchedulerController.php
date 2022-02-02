@@ -27,11 +27,20 @@ class SchedulerController extends Controller
 
         // Send activity to all followers
         foreach ($scheduledActivities as $scheduledActivity) {
-            // send activity to all actor followers
-            send_activity_to_followers(
-                $scheduledActivity->actor,
-                json_encode($scheduledActivity->payload, JSON_THROW_ON_ERROR),
-            );
+            if ($scheduledActivity->target_actor_id !== null) {
+                // send activity to targeted actor
+                send_activity_to_actor(
+                    $scheduledActivity->actor,
+                    $scheduledActivity->targetActor,
+                    json_encode($scheduledActivity->payload, JSON_THROW_ON_ERROR)
+                );
+            } else {
+                // send activity to all actor followers
+                send_activity_to_followers(
+                    $scheduledActivity->actor,
+                    json_encode($scheduledActivity->payload, JSON_THROW_ON_ERROR),
+                );
+            }
 
             // set activity post to delivered
             model('ActivityModel')

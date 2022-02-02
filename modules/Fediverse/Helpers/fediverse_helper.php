@@ -97,6 +97,25 @@ if (! function_exists('accept_follow')) {
     }
 }
 
+if (! function_exists('send_activity_to_actor')) {
+    /**
+     * Sends an activity to all actor followers
+     */
+    function send_activity_to_actor(Actor $actor, Actor $targetActor, string $activityPayload): void
+    {
+        try {
+            $acceptRequest = new ActivityRequest($targetActor->inbox_url, $activityPayload);
+            if ($actor->private_key !== null) {
+                $acceptRequest->sign($actor->public_key_id, $actor->private_key);
+            }
+            $acceptRequest->post();
+        } catch (Exception $exception) {
+            // log error
+            log_message('critical', $exception->getMessage());
+        }
+    }
+}
+
 if (! function_exists('send_activity_to_followers')) {
     /**
      * Sends an activity to all actor followers
@@ -104,14 +123,7 @@ if (! function_exists('send_activity_to_followers')) {
     function send_activity_to_followers(Actor $actor, string $activityPayload): void
     {
         foreach ($actor->followers as $follower) {
-            try {
-                $acceptRequest = new ActivityRequest($follower->inbox_url, $activityPayload);
-                $acceptRequest->sign($actor->public_key_id, $actor->private_key);
-                $acceptRequest->post();
-            } catch (Exception $exception) {
-                // log error
-                log_message('critical', $exception->getMessage());
-            }
+            send_activity_to_actor($actor, $follower, $activityPayload);
         }
     }
 }

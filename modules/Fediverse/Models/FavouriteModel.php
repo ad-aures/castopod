@@ -68,7 +68,7 @@ class FavouriteModel extends BaseUuidModel
                 ->newActivity(
                     'Like',
                     $actor->id,
-                    null,
+                    $post->actor_id,
                     $post->id,
                     $likeActivity->toJSON(),
                     $post->published_at,
@@ -134,7 +134,7 @@ class FavouriteModel extends BaseUuidModel
                 ->newActivity(
                     'Undo',
                     $actor->id,
-                    null,
+                    $post->actor_id,
                     $post->id,
                     $undoActivity->toJSON(),
                     $post->published_at,

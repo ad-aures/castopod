@@ -22,7 +22,7 @@ use RuntimeException;
  * @property string|null $summary
  * @property string|null $private_key
  * @property string|null $public_key
- * @property string|null $public_key_id
+ * @property string $public_key_id
  * @property string|null $avatar_image_url
  * @property string|null $avatar_image_mimetype
  * @property string|null $cover_image_url
