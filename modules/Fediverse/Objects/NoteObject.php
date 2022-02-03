@@ -39,6 +39,8 @@ class NoteObject extends ObjectType
         $this->attributedTo = $post->actor->uri;
 
         if ($post->in_reply_to_id !== null) {
+            $this->to[] = $post->reply_to_post->actor->uri;
+
             $this->inReplyTo = $post->reply_to_post->uri;
         }
 

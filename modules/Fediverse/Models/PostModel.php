@@ -299,7 +299,7 @@ class PostModel extends BaseUuidModel
                 ->newActivity(
                     'Create',
                     $post->actor_id,
-                    null,
+                    $post->in_reply_to_id === null ? null : $post->reply_to_post->actor_id,
                     $newPostId,
                     $createActivity->toJSON(),
                     $post->published_at,
