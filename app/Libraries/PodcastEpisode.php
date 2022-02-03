@@ -68,9 +68,15 @@ class PodcastEpisode extends ObjectType
                 'type' => 'Link',
                 'mediaType' => $episode->audio->file_mimetype,
             ],
-            'transcript' => $episode->transcript->file_url,
-            'chapters' => $episode->chapters->file_url,
         ];
+
+        if ($episode->transcript !== null) {
+            $this->audio['transcript'] = $episode->transcript->file_url;
+        }
+
+        if ($episode->chapters !== null) {
+            $this->audio['chapters'] = $episode->chapters->file_url;
+        }
 
         $this->comments = url_to('episode-comments', $episode->podcast->handle, $episode->slug);
 
