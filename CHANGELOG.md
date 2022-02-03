@@ -1,3 +1,33 @@
+# [1.0.0-beta.6](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2022-02-03)
+
+### Bug Fixes
+
+- **activitypub:** add conditions for possibly missing actor properties + add
+  user-agent to requests
+  ([8fbf948](https://code.podlibre.org/podlibre/castopod-host/commit/8fbf948fbba22ffd33966a1b2ccd42e8f7c1f8a2))
+- **activitypub:** add target actor id to like / announce activities to send
+  directly to note's actor
+  ([962dd30](https://code.podlibre.org/podlibre/castopod-host/commit/962dd305f5d3f6eadc68f400e0e8f953827fe20d))
+- **activitypub:** add target_actor_id for create activity to broadcast post
+  reply
+  ([0128a21](https://code.podlibre.org/podlibre/castopod-host/commit/0128a21ec55dcc0a2fbf4081dadb4c4737735ba1))
+- **http-signature:** update SIGNATURE_PATTERN allowing signature keys to be
+  sent in any order
+  ([b7f285e](https://code.podlibre.org/podlibre/castopod-host/commit/b7f285e4e24247fedb94f030356fa6f291f525cc))
+- **install:** set message block on forms to show error messages
+  ([3a0a20d](https://code.podlibre.org/podlibre/castopod-host/commit/3a0a20d59cdae7f166325efb750eaa6e9800ba6e)),
+  closes [#157](https://code.podlibre.org/podlibre/castopod-host/issues/157)
+- **markdown-editor:** remove unnecessary buttons for podcast and episode
+  editors + add extensions
+  ([9c4f60e](https://code.podlibre.org/podlibre/castopod-host/commit/9c4f60e00bcbd4f784f12d2a6fed357ad402ee2e))
+- **podcast-activity:** check if transcript and chapters are set before
+  including them in audio
+  ([5855a25](https://code.podlibre.org/podlibre/castopod-host/commit/5855a250936f91641efef77650890a18d8e9917f))
+- **podcast:** use markdown description value for editor + set prose class to
+  about description
+  ([f304d97](https://code.podlibre.org/podlibre/castopod-host/commit/f304d97b14e0ef383509cb3bba50beb55bf701ba)),
+  closes [#156](https://code.podlibre.org/podlibre/castopod-host/issues/156)
+
 # [1.0.0-beta.5](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2022-01-31)
 
 ### Bug Fixes
