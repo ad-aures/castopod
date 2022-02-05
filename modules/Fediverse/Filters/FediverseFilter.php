@@ -50,12 +50,12 @@ class FediverseFilter implements FilterInterface
             $domain = (new URI($actorUri))->getHost();
 
             // check first if domain is blocked
-            if (model('BlockedDomainModel')->isDomainBlocked($domain)) {
+            if (model('BlockedDomainModel', false)->isDomainBlocked($domain)) {
                 throw PageNotFoundException::forPageNotFound();
             }
 
             // check if actor is blocked
-            if (model('ActorModel')->isActorBlocked($actorUri)) {
+            if (model('ActorModel', false)->isActorBlocked($actorUri)) {
                 throw PageNotFoundException::forPageNotFound();
             }
         }

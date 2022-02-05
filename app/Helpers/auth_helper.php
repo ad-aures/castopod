@@ -75,7 +75,7 @@ if (! function_exists('interact_as_actor')) {
 
         $session = session();
         if ($session->has('interact_as_actor_id')) {
-            return model(ActorModel::class)->getActorById($session->get('interact_as_actor_id'));
+            return model(ActorModel::class, false)->getActorById($session->get('interact_as_actor_id'));
         }
 
         return false;

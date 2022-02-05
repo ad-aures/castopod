@@ -42,7 +42,7 @@ class PostController extends Controller
 
     public function _remap(string $method, string ...$params): mixed
     {
-        if (($post = model('PostModel')->getPostById($params[0])) === null) {
+        if (($post = model('PostModel', false)->getPostById($params[0])) === null) {
             throw PageNotFoundException::forPageNotFound();
         }
 
@@ -74,7 +74,7 @@ class PostController extends Controller
         /**
          * get post replies
          */
-        $postReplies = model('PostModel')
+        $postReplies = model('PostModel', false)
             ->where('in_reply_to_id', service('uuid') ->fromString($this->post->id) ->getBytes())
             ->where('`published_at` <= NOW()', null, false)
             ->orderBy('published_at', 'ASC');
@@ -127,7 +127,7 @@ class PostController extends Controller
             'published_at' => Time::now(),
         ]);
 
-        $postModel = model('PostModel');
+        $postModel = model('PostModel', false);
         if (! $postModel->addPost($newPost)) {
             return redirect()
                 ->back()
@@ -153,10 +153,10 @@ class PostController extends Controller
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $actor = model('ActorModel')
+        $actor = model('ActorModel', false)
             ->getActorById($this->request->getPost('actor_id'));
 
-        model('FavouriteModel')
+        model('FavouriteModel', false)
             ->toggleFavourite($actor, $this->post->id);
 
         return redirect()->back();
@@ -175,10 +175,10 @@ class PostController extends Controller
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $actor = model('ActorModel')
+        $actor = model('ActorModel', false)
             ->getActorById($this->request->getPost('actor_id'));
 
-        model('PostModel')
+        model('PostModel', false)
             ->toggleReblog($actor, $this->post);
 
         return redirect()->back();
@@ -205,7 +205,7 @@ class PostController extends Controller
             'published_at' => Time::now(),
         ]);
 
-        if (! model('PostModel')->addReply($newReplyPost)) {
+        if (! model('PostModel', false)->addReply($newReplyPost)) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -265,14 +265,14 @@ class PostController extends Controller
 
     public function attemptBlockActor(): RedirectResponse
     {
-        model('ActorModel')->blockActor($this->post->actor->id);
+        model('ActorModel', false)->blockActor($this->post->actor->id);
 
         return redirect()->back();
     }
 
     public function attemptBlockDomain(): RedirectResponse
     {
-        model('BlockedDomainModel')->blockDomain($this->post->actor->domain);
+        model('BlockedDomainModel', false)->blockDomain($this->post->actor->domain);
 
         return redirect()->back();
     }

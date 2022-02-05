@@ -100,7 +100,7 @@ class BlockedDomainModel extends BaseModel
         $this->db->transStart();
 
         // set all actors from the domain as blocked
-        model('ActorModel')
+        model('ActorModel', false)
             ->where('domain', $name)
             ->set('is_blocked', '1')
             ->update();
@@ -131,7 +131,7 @@ class BlockedDomainModel extends BaseModel
 
         $this->db->transStart();
         // unblock all actors from the domain
-        model('ActorModel')
+        model('ActorModel', false)
             ->where('domain', $name)
             ->set('is_blocked', '0')
             ->update();

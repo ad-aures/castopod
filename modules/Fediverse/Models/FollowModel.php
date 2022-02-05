@@ -61,7 +61,7 @@ class FollowModel extends BaseModel
             ]);
 
             // increment followers_count for target actor
-            model('ActorModel')
+            model('ActorModel', false)
                 ->where('id', $targetActor->id)
                 ->increment('followers_count');
 
@@ -72,7 +72,7 @@ class FollowModel extends BaseModel
                     ->set('actor', $actor->uri)
                     ->set('object', $targetActor->uri);
 
-                $activityId = model('ActivityModel')
+                $activityId = model('ActivityModel', false)
                     ->newActivity(
                         'Follow',
                         $actor->id,
@@ -85,7 +85,7 @@ class FollowModel extends BaseModel
 
                 $followActivity->set('id', url_to('activity', $actor->username, $activityId));
 
-                model('ActivityModel')
+                model('ActivityModel', false)
                     ->update($activityId, [
                         'payload' => $followActivity->toJSON(),
                     ]);
@@ -93,7 +93,7 @@ class FollowModel extends BaseModel
 
             Events::trigger('on_follow', $actor, $targetActor);
 
-            model('ActorModel')
+            model('ActorModel', false)
                 ->clearCache($targetActor);
 
             $this->db->transComplete();
@@ -118,14 +118,14 @@ class FollowModel extends BaseModel
         ])->delete();
 
         // decrement followers_count for target actor
-        model('ActorModel')
+        model('ActorModel', false)
             ->where('id', $targetActor->id)
             ->decrement('followers_count');
 
         if ($registerActivity) {
             $undoActivity = new UndoActivity();
             // get follow activity from database
-            $followActivity = model('ActivityModel')
+            $followActivity = model('ActivityModel', false)
                 ->where([
                     'type' => 'Follow',
                     'actor_id' => $actor->id,
@@ -137,7 +137,7 @@ class FollowModel extends BaseModel
                 ->set('actor', $actor->uri)
                 ->set('object', $followActivity->payload);
 
-            $activityId = model('ActivityModel')
+            $activityId = model('ActivityModel', false)
                 ->newActivity(
                     'Undo',
                     $actor->id,
@@ -150,7 +150,7 @@ class FollowModel extends BaseModel
 
             $undoActivity->set('id', url_to('activity', $actor->username, $activityId));
 
-            model('ActivityModel')
+            model('ActivityModel', false)
                 ->update($activityId, [
                     'payload' => $undoActivity->toJSON(),
                 ]);
@@ -158,7 +158,7 @@ class FollowModel extends BaseModel
 
         Events::trigger('on_undo_follow', $actor, $targetActor);
 
-        model('ActorModel')
+        model('ActorModel', false)
             ->clearCache($targetActor);
 
         $this->db->transComplete();

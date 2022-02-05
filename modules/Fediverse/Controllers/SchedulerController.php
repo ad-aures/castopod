@@ -22,7 +22,7 @@ class SchedulerController extends Controller
     public function activity(): void
     {
         // retrieve scheduled activities from database
-        $scheduledActivities = model('ActivityModel')
+        $scheduledActivities = model('ActivityModel', false)
             ->getScheduledActivities();
 
         // Send activity to all followers
@@ -45,7 +45,7 @@ class SchedulerController extends Controller
             }
 
             // set activity post to delivered
-            model('ActivityModel')
+            model('ActivityModel', false)
                 ->update($scheduledActivity->id, [
                     'status' => 'delivered',
                 ]);

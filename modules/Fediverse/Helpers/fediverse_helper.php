@@ -70,7 +70,7 @@ if (! function_exists('accept_follow')) {
         $db = db_connect();
         $db->transStart();
 
-        $activityModel = model('ActivityModel');
+        $activityModel = model('ActivityModel', false);
         $activityId = $activityModel->newActivity(
             'Accept',
             $actor->id,
@@ -183,7 +183,7 @@ if (! function_exists('create_preview_card_from_url')) {
                 ]);
 
                 if (
-                    ! ($newPreviewCardId = model('PreviewCardModel')->insert($newPreviewCard, true))
+                    ! ($newPreviewCardId = model('PreviewCardModel', false)->insert($newPreviewCard, true))
                 ) {
                     return null;
                 }
@@ -205,7 +205,7 @@ if (! function_exists('get_or_create_preview_card_from_url')) {
     {
         // check if preview card has already been generated
         if (
-            $previewCard = model('PreviewCardModel')
+            $previewCard = model('PreviewCardModel', false)
                 ->getPreviewCardFromUrl((string) $url)
         ) {
             return $previewCard;
@@ -224,7 +224,7 @@ if (! function_exists('get_or_create_actor_from_uri')) {
     function get_or_create_actor_from_uri(string $actorUri): ?Actor
     {
         // check if actor exists in database already and return it
-        if ($actor = model('ActorModel')->getActorByUri($actorUri)) {
+        if ($actor = model('ActorModel', false)->getActorByUri($actorUri)) {
             return $actor;
         }
 
@@ -242,7 +242,7 @@ if (! function_exists('get_or_create_actor')) {
     {
         // check if actor exists in database already and return it
         if (
-            $actor = model('ActorModel')
+            $actor = model('ActorModel', false)
                 ->getActorByUsername($username, $domain)
         ) {
             return $actor;
@@ -287,7 +287,7 @@ if (! function_exists('create_actor_from_uri')) {
         $newActor->outbox_url = property_exists($actorPayload, 'outbox') ? $actorPayload->outbox : null;
         $newActor->followers_url = property_exists($actorPayload, 'followers') ? $actorPayload->followers : null;
 
-        if (! ($newActorId = model('ActorModel')->insert($newActor, true))) {
+        if (! ($newActorId = model('ActorModel', false)->insert($newActor, true))) {
             return null;
         }
 
@@ -431,7 +431,7 @@ if (! function_exists('linkify')) {
                             }
                         } else {
                             if (
-                                $actor = model('ActorModel')
+                                $actor = model('ActorModel', false)
                                     ->getActorByUsername($match['username'])
                             ) {
                                 return '<' .

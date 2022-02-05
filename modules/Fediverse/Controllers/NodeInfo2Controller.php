@@ -17,13 +17,13 @@ class NodeInfo2Controller extends Controller
 {
     public function index(): ResponseInterface
     {
-        $totalUsers = model('ActorModel')
+        $totalUsers = model('ActorModel', false)
             ->getTotalLocalActors();
-        $totalPosts = model('PostModel')
+        $totalPosts = model('PostModel', false)
             ->getTotalLocalPosts();
-        $activeMonth = model('ActorModel')
+        $activeMonth = model('ActorModel', false)
             ->getActiveLocalActors(1);
-        $activeHalfyear = model('ActorModel')
+        $activeHalfyear = model('ActorModel', false)
             ->getActiveLocalActors(6);
 
         $nodeInfo2 = [

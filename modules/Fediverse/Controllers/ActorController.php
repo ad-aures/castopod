@@ -44,7 +44,7 @@ class ActorController extends Controller
         }
 
         if (
-            ($actor = model('ActorModel')->getActorByUsername($params[0])) === null
+            ($actor = model('ActorModel', false)->getActorByUsername($params[0])) === null
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
@@ -82,7 +82,7 @@ class ActorController extends Controller
         $payloadActor = get_or_create_actor_from_uri($payload->actor);
 
         // store activity to database
-        $activityId = model('ActivityModel')
+        $activityId = model('ActivityModel', false)
             ->newActivity(
                 $payload->type,
                 $payloadActor->id,
@@ -101,7 +101,7 @@ class ActorController extends Controller
                             ->setJSON([]);
                     }
 
-                    $replyToPost = model('PostModel')
+                    $replyToPost = model('PostModel', false)
                         ->getPostByUri($payload->object->inReplyTo);
 
                     $reply = null;
@@ -120,10 +120,10 @@ class ActorController extends Controller
                     }
 
                     if ($reply !== null) {
-                        $postId = model('PostModel')
+                        $postId = model('PostModel', false)
                             ->addReply($reply, true, false);
 
-                        model('ActivityModel')
+                        model('ActivityModel', false)
                             ->update($activityId, [
                                 'post_id' => $postId,
                             ]);
@@ -136,11 +136,11 @@ class ActorController extends Controller
                 return $this->response->setStatusCode(501)
                     ->setJSON([]);
             case 'Delete':
-                $postToDelete = model('PostModel')
+                $postToDelete = model('PostModel', false)
                     ->getPostByUri($payload->object->id);
 
                 if ($postToDelete !== null) {
-                    model('PostModel')
+                    model('PostModel', false)
                         ->removePost($postToDelete, false);
                 }
 
@@ -148,7 +148,7 @@ class ActorController extends Controller
                     ->setJSON([]);
             case 'Follow':
                 // add to followers table
-                model('FollowModel')
+                model('FollowModel', false)
                     ->addFollower($payloadActor, $this->actor, false);
 
                 // Automatically accept follow by returning accept activity
@@ -160,15 +160,15 @@ class ActorController extends Controller
 
             case 'Like':
                 // get favourited post
-                $post = model('PostModel')
+                $post = model('PostModel', false)
                     ->getPostByUri($payload->object);
 
                 if ($post !== null) {
                     // Like side-effect
-                    model('FavouriteModel')
+                    model('FavouriteModel', false)
                         ->addFavourite($payloadActor, $post, false);
 
-                    model('ActivityModel')
+                    model('ActivityModel', false)
                         ->update($activityId, [
                             'post_id' => $post->id,
                         ]);
@@ -177,16 +177,16 @@ class ActorController extends Controller
                 return $this->response->setStatusCode(200)
                     ->setJSON([]);
             case 'Announce':
-                $post = model('PostModel')
+                $post = model('PostModel', false)
                     ->getPostByUri($payload->object);
 
                 if ($post !== null) {
-                    model('ActivityModel')
+                    model('ActivityModel', false)
                         ->update($activityId, [
                             'post_id' => $post->id,
                         ]);
 
-                    model('PostModel')
+                    model('PostModel', false)
                         ->reblog($payloadActor, $post, false);
                 }
 
@@ -198,22 +198,22 @@ class ActorController extends Controller
                 switch ($payload->object->type) {
                     case 'Follow':
                         // revert side-effect by removing follow from database
-                        model('FollowModel')
+                        model('FollowModel', false)
                             ->removeFollower($payloadActor, $this->actor, false);
 
                         // TODO: undo has been accepted! (202 - Accepted)
                         return $this->response->setStatusCode(202)
                             ->setJSON([]);
                     case 'Like':
-                        $post = model('PostModel')
+                        $post = model('PostModel', false)
                             ->getPostByUri($payload->object->object);
 
                         if ($post !== null) {
                             // revert side-effect by removing favourite from database
-                            model('FavouriteModel')
+                            model('FavouriteModel', false)
                                 ->removeFavourite($payloadActor, $post, false);
 
-                            model('ActivityModel')
+                            model('ActivityModel', false)
                                 ->update($activityId, [
                                     'post_id' => $post->id,
                                 ]);
@@ -222,12 +222,12 @@ class ActorController extends Controller
                         return $this->response->setStatusCode(200)
                             ->setJSON([]);
                     case 'Announce':
-                        $post = model('PostModel')
+                        $post = model('PostModel', false)
                             ->getPostByUri($payload->object->object);
 
                         $reblogPost = null;
                         if ($post !== null) {
-                            $reblogPost = model('PostModel')
+                            $reblogPost = model('PostModel', false)
                                 ->where([
                                     'actor_id' => $payloadActor->id,
                                     'reblog_of_id' => service('uuid')
@@ -238,10 +238,10 @@ class ActorController extends Controller
                         }
 
                         if ($reblogPost !== null) {
-                            model('PostModel')
+                            model('PostModel', false)
                                 ->undoReblog($reblogPost, false);
 
-                            model('ActivityModel')
+                            model('ActivityModel', false)
                                 ->update($activityId, [
                                     'post_id' => $post->id,
                                 ]);
@@ -268,7 +268,7 @@ class ActorController extends Controller
     public function outbox(): ResponseInterface
     {
         // get published activities by publication date
-        $actorActivity = model('ActivityModel')
+        $actorActivity = model('ActivityModel', false)
             ->where('actor_id', $this->actor->id)
             ->where('`created_at` <= NOW()', null, false)
             ->orderBy('created_at', 'DESC');
@@ -303,7 +303,7 @@ class ActorController extends Controller
             ->tablesPrefix;
 
         // get followers for a specific actor
-        $followers = model('ActorModel')
+        $followers = model('ActorModel', false)
             ->join($tablesPrefix . 'follows', $tablesPrefix . 'follows.actor_id = id', 'inner')
             ->where($tablesPrefix . 'follows.target_actor_id', $this->actor->id)
             ->orderBy($tablesPrefix . 'follows.created_at', 'DESC');
@@ -383,7 +383,7 @@ class ActorController extends Controller
     public function activity(string $activityId): ResponseInterface
     {
         if (
-            ! ($activity = model('ActivityModel')->getActivityById($activityId))
+            ! ($activity = model('ActivityModel', false)->getActivityById($activityId))
         ) {
             throw PageNotFoundException::forPageNotFound();
         }

@@ -55,7 +55,7 @@ class FavouriteModel extends BaseUuidModel
             'post_id' => $post->id,
         ]);
 
-        model('PostModel')
+        model('PostModel', false)
             ->where('id', service('uuid') ->fromString($post->id) ->getBytes())
             ->increment('favourites_count');
 
@@ -64,7 +64,7 @@ class FavouriteModel extends BaseUuidModel
             $likeActivity->set('actor', $actor->uri)
                 ->set('object', $post->uri);
 
-            $activityId = model('ActivityModel')
+            $activityId = model('ActivityModel', false)
                 ->newActivity(
                     'Like',
                     $actor->id,
@@ -77,7 +77,7 @@ class FavouriteModel extends BaseUuidModel
 
             $likeActivity->set('id', url_to('activity', $actor->username, $activityId));
 
-            model('ActivityModel')
+            model('ActivityModel', false)
                 ->update($activityId, [
                     'payload' => $likeActivity->toJSON(),
                 ]);
@@ -85,7 +85,7 @@ class FavouriteModel extends BaseUuidModel
 
         Events::trigger('on_post_favourite', $actor, $post);
 
-        model('PostModel')
+        model('PostModel', false)
             ->clearCache($post);
 
         $this->db->transComplete();
@@ -95,7 +95,7 @@ class FavouriteModel extends BaseUuidModel
     {
         $this->db->transStart();
 
-        model('PostModel')
+        model('PostModel', false)
             ->where('id', service('uuid') ->fromString($post->id) ->getBytes())
             ->decrement('favourites_count');
 
@@ -110,7 +110,7 @@ class FavouriteModel extends BaseUuidModel
         if ($registerActivity) {
             $undoActivity = new UndoActivity();
             // get like activity
-            $activity = model('ActivityModel')
+            $activity = model('ActivityModel', false)
                 ->where([
                     'type' => 'Like',
                     'actor_id' => $actor->id,
@@ -130,7 +130,7 @@ class FavouriteModel extends BaseUuidModel
                 ->set('actor', $actor->uri)
                 ->set('object', $likeActivity);
 
-            $activityId = model('ActivityModel')
+            $activityId = model('ActivityModel', false)
                 ->newActivity(
                     'Undo',
                     $actor->id,
@@ -143,7 +143,7 @@ class FavouriteModel extends BaseUuidModel
 
             $undoActivity->set('id', url_to('activity', $actor->username, $activityId));
 
-            model('ActivityModel')
+            model('ActivityModel', false)
                 ->update($activityId, [
                     'payload' => $undoActivity->toJSON(),
                 ]);
@@ -151,7 +151,7 @@ class FavouriteModel extends BaseUuidModel
 
         Events::trigger('on_post_undo_favourite', $actor, $post);
 
-        model('PostModel')
+        model('PostModel', false)
             ->clearCache($post);
 
         $this->db->transComplete();

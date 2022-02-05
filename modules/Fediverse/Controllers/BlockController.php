@@ -45,7 +45,7 @@ class BlockController extends Controller
                     ->with('error', lang('Fediverse.messages.actorNotFound'));
             }
 
-            model('ActorModel')
+            model('ActorModel', false)
                 ->blockActor($actor->id);
         }
 
@@ -68,7 +68,7 @@ class BlockController extends Controller
                 ->with('errors', $this->validator->getErrors());
         }
 
-        model('ActorModel')
+        model('ActorModel', false)
             ->unblockActor((int) $this->request->getPost('actor_id'));
 
         return redirect()->back()
@@ -89,7 +89,7 @@ class BlockController extends Controller
         }
 
         $domain = $this->request->getPost('domain');
-        model('BlockedDomainModel')
+        model('BlockedDomainModel', false)
             ->blockDomain($domain);
 
         return redirect()->back()
@@ -112,7 +112,7 @@ class BlockController extends Controller
         }
 
         $domain = $this->request->getPost('domain');
-        model('BlockedDomainModel')
+        model('BlockedDomainModel', false)
             ->unblockDomain($domain);
 
         return redirect()->back()

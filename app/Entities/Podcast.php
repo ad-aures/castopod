@@ -198,7 +198,7 @@ class Podcast extends Entity
 
         if ($this->actor === null) {
             // @phpstan-ignore-next-line
-            $this->actor = model(ActorModel::class)
+            $this->actor = model(ActorModel::class, false)
                 ->getActorById($this->actor_id);
         }
 
