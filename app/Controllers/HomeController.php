@@ -27,7 +27,12 @@ class HomeController extends BaseController
             return redirect()->to(rtrim(host_url(), '/') . $route);
         }
 
-        $allPodcasts = (new PodcastModel())->findAll();
+        $sortOptions = ['activity', 'created_desc', 'created_asc'];
+        $sortBy = in_array($this->request->getGet('sort'), $sortOptions, true) ? $this->request->getGet(
+            'sort'
+        ) : 'activity';
+
+        $allPodcasts = (new PodcastModel())->getAllPodcasts($sortBy);
 
         // check if there's only one podcast to redirect user to it
         if (count($allPodcasts) === 1) {
@@ -38,6 +43,7 @@ class HomeController extends BaseController
         $data = [
             'metatags' => get_home_metatags(),
             'podcasts' => $allPodcasts,
+            'sortBy' => $sortBy,
         ];
 
         return view('home', $data);

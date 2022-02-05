@@ -47,10 +47,33 @@
         </h1>
     </header>
     <main class="container flex-1 px-4 py-10 mx-auto">
-        <Heading tagName="h2" class="inline-block mb-2"><?= lang('Home.all_podcasts') ?> (<?= count(
+        <div class="flex flex-wrap items-center justify-between py-2 border-b border-subtle gap-x-4">
+            <Heading tagName="h2" class="inline-block"><?= lang('Home.all_podcasts') ?> (<?= count(
             $podcasts,
         ) ?>)</Heading>
-        <div class="grid gap-4 grid-cols-cards">
+            <button class="inline-flex items-center px-2 py-1 text-sm font-semibold focus:ring-accent" id="sortby-dropdown" data-dropdown="button" data-dropdown-target="sortby-dropdown-menu" aria-haspopup="true" aria-expanded="false"><?= icon('sort', 'mr-1 text-xl opacity-50') . lang('Home.sort_by') ?></button>
+            <DropdownMenu id="sortby-dropdown-menu" labelledby="sortby-dropdown" items="<?= esc(json_encode([
+                [
+                    'type' => 'link',
+                    'title' => ($sortBy === 'activity' ? '✓ ' : '') . lang('Home.sort_options.activity'),
+                    'uri' => route_to('home') . '?sort=activity',
+                    'class' => $sortBy === 'activity' ? 'font-semibold' : '',
+                ],
+                [
+                    'type' => 'link',
+                    'title' => ($sortBy === 'created_desc' ? '✓ ' : '') . lang('Home.sort_options.created_desc'),
+                    'uri' => route_to('home') . '?sort=created_desc',
+                    'class' => $sortBy === 'created_desc' ? 'font-semibold' : '',
+                ],
+                [
+                    'type' => 'link',
+                    'title' => ($sortBy === 'created_asc' ? '✓ ' : '') . lang('Home.sort_options.created_asc'),
+                    'uri' => route_to('home') . '?sort=created_asc',
+                    'class' => $sortBy === 'created_asc' ? 'font-semibold' : '',
+                ],
+            ])) ?>" />
+        </div>
+        <div class="grid gap-4 mt-4 grid-cols-cards">
             <?php if ($podcasts): ?>
                 <?php foreach ($podcasts as $podcast): ?>
                     <a href="<?= $podcast->link ?>" class="relative w-full h-full overflow-hidden transition shadow focus:ring-accent rounded-xl border-subtle hover:shadow-xl focus:shadow-xl group border-3">

@@ -167,6 +167,42 @@ class PodcastModel extends Model
     }
 
     /**
+     * @param 'activity'|'created_asc'|'created_desc' $orderBy
+     *
+     * @return Podcast[]
+     */
+    public function getAllPodcasts(string $orderBy = null): array
+    {
+        if ($orderBy === 'activity') {
+            $prefix = $this->db->getPrefix();
+
+            $fediverseTablePrefix = config('Fediverse')
+                ->tablesPrefix;
+            $this->select(
+                'podcasts.*, MAX(' . $prefix . $fediverseTablePrefix . 'posts.published_at' . ') as max_published_at'
+            )
+                ->join(
+                    $fediverseTablePrefix . 'posts',
+                    $fediverseTablePrefix . 'posts.actor_id = podcasts.actor_id',
+                    'left'
+                )
+                ->where(
+                    '`' . $prefix . $fediverseTablePrefix . 'posts`.`published_at` <= NOW()',
+                    null,
+                    false
+                )->orWhere($fediverseTablePrefix . 'posts.published_at', null)
+                ->groupBy('cp_podcasts.actor_id')
+                ->orderBy('max_published_at', 'DESC');
+        } elseif ($orderBy === 'created_desc') {
+            $this->orderBy('created_at', 'DESC');
+        } elseif ($orderBy === 'created_asc') {
+            $this->orderBy('created_at', 'ASC');
+        }
+
+        return $this->findAll();
+    }
+
+    /**
      * Gets all the podcasts a given user is contributing to
      *
      * @return Podcast[] podcasts
@@ -377,6 +413,10 @@ class PodcastModel extends Model
     public function clearCache(array $data): array
     {
         $podcast = (new self())->getPodcastById(is_array($data['id']) ? $data['id'][0] : $data['id']);
+
+        // delete cache for users' podcasts
+        cache()
+            ->deleteMatching('user*podcasts');
 
         if ($podcast !== null) {
             // delete cache all podcast pages
