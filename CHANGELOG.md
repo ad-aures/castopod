@@ -1,3 +1,23 @@
+# [1.0.0-beta.7](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-beta.6...v1.0.0-beta.7) (2022-02-05)
+
+### Bug Fixes
+
+- **activitypub:** allow cors on get requests for routes exposing acitivitypub
+  objects
+  ([2f24809](https://code.podlibre.org/podlibre/castopod-host/commit/2f2480998f9abb34f02ab186c65d462a74b4e640))
+- **fediverse:** set model instances as non shared to prevent overlapping
+  ([91128fa](https://code.podlibre.org/podlibre/castopod-host/commit/91128fad7a68e1f4e5acacba90b6899288699e61))
+- **htaccess:** add ? after index.php in RewriteRule
+  ([d9d139e](https://code.podlibre.org/podlibre/castopod-host/commit/d9d139eefa03c28d1a064b3b32c9036193497e57)),
+  closes [#152](https://code.podlibre.org/podlibre/castopod-host/issues/152)
+
+### Features
+
+- **home:** sort podcasts by recent activity + add dropdown menu to choose
+  between sorting options
+  ([7b89da6](https://code.podlibre.org/podlibre/castopod-host/commit/7b89da6106c150708782d39ed2742fe416c41e89)),
+  closes [#164](https://code.podlibre.org/podlibre/castopod-host/issues/164)
+
 # [1.0.0-beta.6](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2022-02-03)
 
 ### Bug Fixes
