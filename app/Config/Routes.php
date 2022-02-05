@@ -90,6 +90,7 @@ $routes->group('@(:podcastHandle)', function ($routes): void {
                 'controller-method' => 'ActorController/$1',
             ],
         ],
+        'filter' => 'allow-cors',
     ]);
     $routes->get('about', 'PodcastController::about/$1', [
         'as' => 'podcast-about',
@@ -108,6 +109,7 @@ $routes->group('@(:podcastHandle)', function ($routes): void {
                 'controller-method' => 'PodcastController::episodeCollection/$1',
             ],
         ],
+        'filter' => 'allow-cors',
     ]);
     $routes->group('episodes/(:slug)', function ($routes): void {
         $routes->options('/', 'ActivityPubController::preflight');
@@ -124,6 +126,7 @@ $routes->group('@(:podcastHandle)', function ($routes): void {
                     'controller-method' => 'EpisodeController::episodeObject/$1/$2',
                 ],
             ],
+            'filter' => 'allow-cors',
         ]);
         $routes->get('activity', 'EpisodeController::activity/$1/$2', [
             'as' => 'episode-activity',
@@ -140,7 +143,9 @@ $routes->group('@(:podcastHandle)', function ($routes): void {
             'application/ld+json; profile="https://www.w3.org/ns/activitystreams' => [
                 'controller-method' => 'EpisodeController::comments/$1/$2',
             ],
+            'filter' => 'allow-cors',
         ]);
+        $routes->options('comments/(:uuid)', 'ActivityPubController::preflight');
         $routes->get('comments/(:uuid)', 'EpisodeCommentController::view/$1/$2/$3', [
             'as' => 'episode-comment',
             'application/activity+json' => [
@@ -152,6 +157,7 @@ $routes->group('@(:podcastHandle)', function ($routes): void {
             'application/ld+json; profile="https://www.w3.org/ns/activitystreams' => [
                 'controller-method' => 'EpisodeController::commentObject/$1/$2',
             ],
+            'filter' => 'allow-cors',
         ]);
         $routes->get('comments/(:uuid)/replies', 'EpisodeCommentController::replies/$1/$2/$3', [
             'as' => 'episode-comment-replies',
@@ -221,6 +227,7 @@ $routes->group('@(:podcastHandle)', function ($routes): void {
                     'controller-method' => 'PostController/$2',
                 ],
             ],
+            'filter' => 'allow-cors',
         ]);
         $routes->options('replies', 'ActivityPubController::preflight');
         $routes->get('replies', 'PostController/$1/$2', [
@@ -235,6 +242,7 @@ $routes->group('@(:podcastHandle)', function ($routes): void {
                     'controller-method' => 'PostController::replies/$2',
                 ],
             ],
+            'filter' => 'allow-cors',
         ]);
 
         // Actions
@@ -278,7 +286,7 @@ $routes->group('@(:podcastHandle)', function ($routes): void {
     ]);
     $routes->get('outbox', 'ActorController::outbox/$1', [
         'as' => 'outbox',
-        'filter' => 'activity-pub:verify-activitystream',
+        'filter' => 'fediverse:verify-activitystream',
     ]);
 });
 

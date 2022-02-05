@@ -10,21 +10,8 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use CodeIgniter\Controller;
-use CodeIgniter\HTTP\Response;
+use Modules\Fediverse\Controllers\ActivityPubController as FediverseActivityPubController;
 
-class ActivityPubController extends Controller
+class ActivityPubController extends FediverseActivityPubController
 {
-    /**
-     * @noRector ReturnTypeDeclarationRector
-     */
-    public function preflight(): Response
-    {
-        return $this->response->setHeader('Access-Control-Allow-Origin', '*') // for allowing any domain, insecure
-            ->setHeader('Access-Control-Allow-Headers', '*') // for allowing any headers, insecure
-            ->setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS') // allows GET and OPTIONS methods only
-            ->setHeader('Access-Control-Max-Age', '86400')
-            ->setHeader('Cache-Control', 'public, max-age=86400')
-            ->setStatusCode(200);
-    }
 }

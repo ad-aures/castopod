@@ -11,6 +11,7 @@ use CodeIgniter\Filters\Honeypot;
 use CodeIgniter\Filters\InvalidChars;
 use CodeIgniter\Filters\SecureHeaders;
 use Modules\Auth\Filters\PermissionFilter;
+use Modules\Fediverse\Filters\AllowCorsFilter;
 use Modules\Fediverse\Filters\FediverseFilter;
 use Myth\Auth\Filters\LoginFilter;
 use Myth\Auth\Filters\RoleFilter;
@@ -31,7 +32,8 @@ class Filters extends BaseConfig
         'login' => LoginFilter::class,
         'role' => RoleFilter::class,
         'permission' => PermissionFilter::class,
-        'activity-pub' => FediverseFilter::class,
+        'fediverse' => FediverseFilter::class,
+        'allow-cors' => AllowCorsFilter::class,
     ];
 
     /**
