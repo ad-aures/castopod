@@ -328,6 +328,9 @@ class PodcastController extends BaseController
             'payment_pointer'
         ) === '' ? null : $this->request->getPost('payment_pointer');
         $this->podcast->custom_rss_string = $this->request->getPost('custom_rss');
+        $this->podcast->new_feed_url = $this->request->getPost('new_feed_url') === '' ? null : $this->request->getPost(
+            'new_feed_url'
+        );
         $this->podcast->partner_id = $partnerId;
         $this->podcast->partner_link_url = $partnerLinkUrl;
         $this->podcast->partner_image_url = $partnerImageUrl;

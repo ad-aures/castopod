@@ -94,6 +94,7 @@ class PodcastModel extends Model
         'language_code' => 'required',
         'category_id' => 'required',
         'owner_email' => 'required|valid_email',
+        'new_feed_url' => 'valid_url|permit_empty',
         'type' => 'required',
         'created_by' => 'required',
         'updated_by' => 'required',

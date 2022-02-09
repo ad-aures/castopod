@@ -90,6 +90,8 @@ return [
             'Si vous avez besoin d’une balise que nous n’avons pas couverte, définissez-la ici.',
         'custom_rss' => 'Balises RSS personnalisées pour le podcast',
         'custom_rss_hint' => 'Ceci sera injecté dans la balise ❬channel❭.',
+        'new_feed_url' => 'URL du nouveau flux',
+        'new_feed_url_hint' => 'Utilisez ce champ lorsque vous déplacez ce podcast vers un autre domaine ou que vous changez d’hébergeur. Par défaut, ce champ est rempli avec l’URL du flux actuel si le podcast est importé.',
         'partnership' => 'Partenariat',
         'partner_id' => 'ID',
         'partner_link_url' => 'URL lien',

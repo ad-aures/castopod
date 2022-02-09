@@ -88,6 +88,8 @@ return [
             'If you need RSS tags that Castopod does not handle, set them here.',
         'custom_rss' => 'Custom RSS tags for the podcast',
         'custom_rss_hint' => 'This will be injected within the ❬channel❭ tag.',
+        'new_feed_url' => 'New feed URL',
+        'new_feed_url_hint' => 'Use this field when you move to another domain or podcast hosting platform. By default, the value is set to the current RSS URL if the podcast is imported.',
         'partnership' => 'Partnership',
         'partner_id' => 'ID',
         'partner_link_url' => 'Link URL',

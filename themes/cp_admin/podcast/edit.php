@@ -221,6 +221,14 @@
     hint="<?= lang('Podcast.form.custom_rss_hint') ?>"
     content="<?= esc($podcast->custom_rss_string) ?>" />
 
+<Forms.Field
+    name="new_feed_url"
+    type="url"
+    label="<?= lang('Podcast.form.new_feed_url') ?>"
+    hint="<?= lang('Podcast.form.new_feed_url_hint') ?>"
+    value="<?= $podcast->new_feed_url ?>"
+/>
+
 </Forms.Section>
 
 <Forms.Section
