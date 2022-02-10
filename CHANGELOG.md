@@ -1,3 +1,11 @@
+# [1.0.0-beta.8](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-beta.7...v1.0.0-beta.8) (2022-02-10)
+
+### Features
+
+- **podcast-form:** add new_feed_url field to set an url when changing domain or
+  host
+  ([e7eec48](https://code.podlibre.org/podlibre/castopod-host/commit/e7eec48e7bc06a9aa907db01ed3e5b536e7dd8be))
+
 # [1.0.0-beta.7](https://code.podlibre.org/podlibre/castopod-host/compare/v1.0.0-beta.6...v1.0.0-beta.7) (2022-02-05)
 
 ### Bug Fixes
