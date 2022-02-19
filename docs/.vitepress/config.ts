@@ -3,20 +3,36 @@ import { defineConfig } from "vitepress";
 export default defineConfig({
   title: "Castopod docs",
   description:
-    "Get started with Castopod, install it, contribute and learn more!",
+    "Check out the Castopod documentation! Install your own free & open-source podcast host, help make it better by contributing, or simply learn more about Castopod!",
   srcDir: "src",
 
   head: [
     ["link", { rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
-    ["meta", { name: "twitter:site", content: "@castopod" }],
-    ["meta", { name: "twitter:card", content: "summary" }],
+    ["link", { rel: "canonical", href: "https://docs.castopod.org/" }],
+    ["meta", { name: "robots", content: "index, follow" }],
+    ["meta", { property: "og:type", content: "website" }],
     [
       "meta",
       {
-        name: "twitter:image",
-        content: "https://docs.castopod.org/images/logo.png",
+        property: "og:image",
+        content: "https://docs.castopod.org/images/open-graph.jpg",
       },
     ],
+    ["meta", { property: "og:image:type", content: "image/jpeg" }],
+    ["meta", { property: "og:image:width", content: "1200" }],
+    ["meta", { property: "og:image:height", content: "630" }],
+    [
+      "meta",
+      {
+        property: "og:image:alt",
+        content:
+          "Castopod mascot waving hello and hoding a browser showcasing the Castopod documentation.",
+      },
+    ],
+    ["meta", { property: "og:url", content: "https://docs.castopod.org/" }],
+    ["meta", { name: "twitter:site", content: "@castopod" }],
+    ["meta", { name: "twitter:card", content: "summary_large_image" }],
+    ["meta", { name: "twitter:creator", content: "@ad_aures" }],
     [
       "script",
       {
@@ -28,6 +44,12 @@ export default defineConfig({
   ],
 
   themeConfig: {
+    logo: "/images/castopod-icon.svg",
+    lastUpdated: "Last Updated",
+    repo: "https://code.castopod.org/ad-aures/castopod",
+    docsDir: "docs/src",
+    docsBranch: "develop",
+    editLinks: true,
     nav: [
       {
         text: "Home",
@@ -42,7 +64,6 @@ export default defineConfig({
         link: "https://github.com/ad-aures/castopod",
       },
     ],
-
     sidebar: {
       "/": getGuideSidebar(),
     },

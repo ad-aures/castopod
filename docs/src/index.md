@@ -83,14 +83,14 @@ This project is pushed by the open-source community, and specifically by the
 
 We believe that a solution is not necessarily right for everyone, it highly
 depends on your needs. So, here are comparisons with other tools to help you to
-gauge whether Castopod is the right fit for you.
+gauge whether Castopod is the right fit for&nbsp;you.
 
 ### Castopod vs Wordpress
 
 Castopod is often referred to as "the Wordpress for podcasts" because of the
 similarities between the two. In some ways this is true. And actually, Castopod
 was greatly inspired by the Wordpress ecosystem, seeing the ease of adoption
-from the community and the number of websites running it.
+from the community and the number of websites running&nbsp;it.
 
 Just like Wordpress, Castopod is free & open source, built using PHP with a
 MySQL database and is packaged in a way that you can easily install on most web
@@ -102,7 +102,7 @@ website online.
 
 On the other hand, Castopod is meant to address the podcasters needs
 specifically, focusing on podcasting, and nothing else. You don't need any
-plugin to get you started on your podcasting journey.
+plugin to get you started on your podcasting&nbsp;journey.
 
 This allows optimizing the processes specific to podcasting: ranging from the
 creation of your podcasts and the publication of new episodes all the way to
@@ -137,8 +137,7 @@ Podcasting 2.0 wagon just like Castopod!
 Each of these solutions differ from one another, you may compare with the
 [list of features](#features).
 
-That being said, there are two main differences with any other podcasting
-solution:
+That being said, there are two main differences with other podcasting solutions:
 
 - Castopod can be self-hosted and is the only solution that allows you to keep
   full control over what you produce. Also, as it is open-source, you can even
@@ -151,14 +150,14 @@ solution:
 ## Contributing
 
 Love Castopod and would like to help? Take a look at the following documentation
-to get you started.
+to get you&nbsp;started.
 
 ### Code of conduct
 
 Castopod has adopted a Code of Conduct that we expect project participants to
 adhere to. Please read the
 [CODE_OF_CONDUCT manual](https://code.castopod.org/ad-aures/castopod/-/blob/beta/CODE_OF_CONDUCT.md)
-so that you can understand what actions will and will not be tolerated.
+so that you can understand what actions will and will not be&nbsp;tolerated.
 
 ### Contributing guide
 

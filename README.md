@@ -1,14 +1,20 @@
 <h1 align="center">
   <a href="https://castopod.org/">
-    <img src="https://docs.castopod.org/images/logo-inline.svg" alt="Castopod" />
+    <img src="https://docs.castopod.org/images/castopod-logo-inline.svg" alt="Castopod" style="height:4rem;" />
   </a>
 </h1>
 
+<div align="center">
+
 [![release-badge]][release]&nbsp;[![license-badge]][license]&nbsp;[![semantic-release-badge]][semantic-release]&nbsp;[![discord-badge]][discord]&nbsp;[![stars-badge]][stars]
+
+</div>
 
 Castopod is a free and open-source podcast hosting solution made for podcasters
 who want engage and interact with their audience.
 
+> **Note**
+>
 > Castopod is currently in **beta** but already quite stable and used by
 > podcasters around the world!
 
@@ -28,7 +34,7 @@ please contact us directly by email at
 
 Love Castopod and would like to help? Check out the
 [contribution guidelines](https://docs.castopod.org/contributing/guidelines) for
-this project, everything should be there!
+this project.
 
 ⚠️ Note that **any** contribution made on a repository other than
 [the original repository](https://code.castopod.org/ad-aures/castopod) will not
@@ -55,7 +61,7 @@ Castopod:
 
 <div style="display:flex;flex-wrap:wrap;column-gap:4rem;row-gap:2rem;">
   <a href="https://adaures.com/" target="_blank" rel="noopener noreferrer"><img src="https://docs.castopod.org/images/sponsors/adaures.svg" alt="Ad Aures Logo" style="height:4rem;" /></a>
-  <a href="https://nlnet.nl/project/Castopod/" target="_blank" rel="noopener noreferrer"><img src="https://docs.castopod.org/images/sponsors/adaures.svg" alt="NLnet Logo" style="height:4rem;" /></a>
+  <a href="https://nlnet.nl/project/Castopod/" target="_blank" rel="noopener noreferrer"><img src="https://docs.castopod.org/images/sponsors/nlnet.svg" alt="NLnet Logo" style="height:4rem;" /></a>
   <a href="https://opencollective.com/castopod/contribute" target="_blank" rel="noopener noreferrer">Become a sponsor</a>
 </div>
 

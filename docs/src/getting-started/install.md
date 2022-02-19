@@ -139,8 +139,8 @@ Repo</a>
 
 ### Install with Docker
 
-I you wish to use Docker to install Castopod, it is possible thanks to
-[Romain de Laage](https://podcastindex.social/web/@rdelaage@mamot.fr)!
+If you wish to use Docker to install Castopod, it is possible thanks to
+[Romain de Laage](https://mamot.fr/@rdelaage)!
 
 <a href="https://gitlab.utc.fr/picasoft/projets/services/castopod" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-4 py-2 mx-auto font-semibold text-center text-white rounded-md shadow gap-x-1 bg-[#1282d7] hover:no-underline hover:bg-[#0f6eb5]">Install
 with
