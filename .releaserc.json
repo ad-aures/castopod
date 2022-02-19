@@ -1,8 +1,14 @@
 {
   "branches": [
     "main",
-    { "name": "alpha", "prerelease": true },
-    { "name": "beta", "prerelease": true }
+    {
+      "name": "alpha",
+      "prerelease": true
+    },
+    {
+      "name": "beta",
+      "prerelease": true
+    }
   ],
   "plugins": [
     "@semantic-release/commit-analyzer",
@@ -30,15 +36,15 @@
     [
       "@semantic-release/gitlab",
       {
-        "gitlabUrl": "https://code.podlibre.org/",
+        "gitlabUrl": "https://code.castopod.org/",
         "assets": [
           {
-            "path": "castopod-host-*.zip",
-            "label": "Castopod Host Package (zip)"
+            "path": "castopod-*.zip",
+            "label": "Castopod Package (zip)"
           },
           {
-            "path": "castopod-host-*.tar.gz",
-            "label": "Castopod Host Package (tar.gz)"
+            "path": "castopod-*.tar.gz",
+            "label": "Castopod Package (tar.gz)"
           }
         ]
       }

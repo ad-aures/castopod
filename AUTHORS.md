@@ -1,4 +1,4 @@
 # Authors
 
-- [Benjamin Bellamy](https://code.podlibre.org/benjamin) <ben@podlibre.org>
-- [Yassine Doghri](https://code.podlibre.org/yassine) <yassine@podlibre.org>
+- [Benjamin Bellamy](https://code.castopod.org/benjamin) <ben@castopod.org>
+- [Yassine Doghri](https://code.castopod.org/yassine) <yassine@castopod.org>

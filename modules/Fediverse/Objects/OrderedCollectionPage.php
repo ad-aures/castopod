@@ -5,7 +5,7 @@ declare(strict_types=1);
 /**
  * This class defines a Paginated OrderedCollection based on CodeIgniter4 Pager to get the pagination metadata
  *
- * @copyright  2021 Podlibre
+ * @copyright  2021 Ad Aures
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
  */

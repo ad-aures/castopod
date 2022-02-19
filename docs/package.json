@@ -1,0 +1,21 @@
+{
+  "name": "castopod-docs",
+  "version": "0.0.0-development",
+  "description": "Castopod documentation using vitepress",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vitepress --port=3050",
+    "build": "vitepress build",
+    "serve": "vitepress serve"
+  },
+  "author": {
+    "name": "Yassine Doghri",
+    "email": "yassine@doghri.fr",
+    "url": "https://code.castopod.org/yassine"
+  },
+  "license": "AGPL-3.0-or-later",
+  "devDependencies": {
+    "tailwindcss": "^3.0.22",
+    "vitepress": "^0.22.2"
+  }
+}

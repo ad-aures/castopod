@@ -23,5 +23,5 @@ mv ./writable/uploads/GeoLite2-City* ./writable/uploads/GeoLite2-City
 # install rsync for file transfers
 apt-get install rsync -y
 
-# create castopo-host folder bundle: uses .rsync-filter (-F) file to copy only needed files
-rsync -aF --progress . ./castopod-host
+# create castopod folder bundle: uses .rsync-filter (-F) file to copy only needed files
+rsync -aF --progress . ./castopod

@@ -5,7 +5,7 @@ declare(strict_types=1);
 /**
  * Class SoundbiteModel Model for podcasts_soundbites table in database
  *
- * @copyright  2020 Podlibre
+ * @copyright  2020 Ad Aures
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
  */

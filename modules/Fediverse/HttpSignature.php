@@ -7,7 +7,7 @@ declare(strict_types=1);
  *
  * More info: https://github.com/landrok/activitypub
  *
- * @copyright  2021 Podlibre
+ * @copyright  2021 Ad Aures
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
  */

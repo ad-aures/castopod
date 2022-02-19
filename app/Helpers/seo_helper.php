@@ -13,7 +13,7 @@ use Melbahja\Seo\Schema;
 use Melbahja\Seo\Schema\Thing;
 
 /**
- * @copyright  2021 Podlibre
+ * @copyright  2021 Ad Aures
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
  */

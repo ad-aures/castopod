@@ -1,0 +1,76 @@
+image: node:16
+
+stages:
+  - build
+  - deploy
+
+.documentation-setup:
+  before_script:
+    - cd docs
+    - npm ci
+
+cache:
+  paths:
+    - docs/node_modules/
+
+# This job only serves for validating that the docs builds correctly on all non deployment branches
+build:
+  extends: .documentation-setup
+  stage: build
+  script:
+    - npm run build
+  except:
+    - develop
+    - main
+    - beta
+    - alpha
+
+build-production:
+  extends: .documentation-setup
+  stage: build
+  environment:
+    name: production
+    url: https://docs.castopod.org/
+  script:
+    - npm run build
+  artifacts:
+    paths:
+      - docs/.vitepress/dist
+    expire_in: 30 mins
+  only:
+    - develop
+    - main
+    - beta
+    - alpha
+
+deploy:
+  stage: deploy
+  environment:
+    name: production
+    url: https://docs.castopod.org/
+  variables:
+    HOST: $DOCS_HOST
+    USER: $DOCS_USER
+    TEMP_DIRECTORY: $DOCS_TEMP_DIRECTORY
+    DIRECTORY: $DOCS_DIRECTORY
+    SSH_PORT: 3242
+    SOURCE_FOLDER: "docs/.vitepress/dist/"
+  before_script:
+    # install rsync for file transfers
+    - apt-get update && apt-get install rsync -y
+    # ssh config
+    - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )"
+    # Run ssh-agent (inside the build environment)
+    - eval $(ssh-agent -s)
+    # Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
+    - ssh-add <(echo "$SSH_PRIVATE_KEY" | base64 --decode)
+    - mkdir -p ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  script:
+    - rsync -avzuh -e "ssh -p $SSH_PORT" $SOURCE_FOLDER $USER@$HOST:$TEMP_DIRECTORY --progress
+    - ssh $USER@$HOST -p $SSH_PORT "rsync -rtv $TEMP_DIRECTORY $DIRECTORY"
+  only:
+    - develop
+    - main
+    - beta
+    - alpha

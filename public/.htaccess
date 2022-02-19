@@ -11,7 +11,7 @@ Options All -Indexes
 	Options +FollowSymlinks
 	RewriteEngine On
 
-	# If you installed Castopod Host in a subfolder, you will need to
+	# If you installed Castopod in a subfolder, you will need to
 	# change the following line to match the subfolder you need.
 	# http://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewritebase
 	# RewriteBase /

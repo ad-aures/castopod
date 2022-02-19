@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * @copyright  2020 Podlibre
+ * @copyright  2020 Ad Aures
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
  */
@@ -47,7 +47,7 @@ if (! function_exists('get_rss_feed')) {
 
         // the last build date corresponds to the creation of the feed.xml cache
         $channel->addChild('lastBuildDate', (new Time('now'))->format(DATE_RFC1123));
-        $channel->addChild('generator', 'Castopod Host - https://castopod.org/');
+        $channel->addChild('generator', 'Castopod - https://castopod.org/');
         $channel->addChild('docs', 'https://cyber.harvard.edu/rss/rss.html');
 
         $channel->addChild('guid', $podcast->guid, $podcastNamespace);

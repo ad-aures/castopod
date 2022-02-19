@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
+use AdAures\Ipcat\IpDb;
 use CodeIgniter\Router\Exceptions\RouterException;
-use Config\Database;
 use Config\Services;
 use GeoIp2\Database\Reader;
 use Opawg\UserAgentsPhp\UserAgents;
-use Podlibre\Ipcat\IpDb;
 /**
- * @copyright  2020 Podlibre
+ * @copyright  2020 Ad Aures
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
  */

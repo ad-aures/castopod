@@ -6,7 +6,7 @@
   "license": "AGPL-3.0-or-later",
   "repository": {
     "type": "git",
-    "url": "https://code.podlibre.org/podlibre/castopod-host.git"
+    "url": "https://code.castopod.org/ad-aures/castopod.git"
   },
   "scripts": {
     "dev": "vite",

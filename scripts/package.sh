@@ -6,5 +6,5 @@ VERSION=$1
 apt-get install zip -y
 
 # create zip and tar.gz packages for release upload
-zip -r castopod-host-$VERSION.zip castopod-host
-tar -zcvf castopod-host-$VERSION.tar.gz castopod-host
+zip -r castopod-$VERSION.zip castopod
+tar -zcvf castopod-$VERSION.tar.gz castopod

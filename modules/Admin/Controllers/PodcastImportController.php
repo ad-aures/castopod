@@ -3,13 +3,14 @@
 declare(strict_types=1);
 
 /**
- * @copyright  2020 Podlibre
+ * @copyright  2020 Ad Aures
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
  */
 
 namespace Modules\Admin\Controllers;
 
+use AdAures\PodcastPersonsTaxonomy\ReversedTaxonomy;
 use App\Entities\Episode;
 use App\Entities\Location;
 use App\Entities\Person;
@@ -25,7 +26,6 @@ use CodeIgniter\HTTP\RedirectResponse;
 use Config\Services;
 use ErrorException;
 use League\HTMLToMarkdown\HtmlConverter;
-use Podlibre\PodcastNamespace\ReversedTaxonomy;
 
 class PodcastImportController extends BaseController
 {

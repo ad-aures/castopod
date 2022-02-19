@@ -1,40 +1,32 @@
-# Setup your development environment <!-- omit in toc -->
+---
+title: Development setup
+sidebarDepth: 3
+---
 
-## Table of contents <!-- omit in toc -->
-
-- [Introduction](#introduction)
-- [Pre-requisites](#pre-requisites)
-- [(recommended) Develop inside the app Container with VSCode](#recommended-develop-inside-the-app-container-with-vscode)
-- [(not-recommended) Develop outside the app container](#not-recommended-develop-outside-the-app-container)
-- [Install Castopod Host's dependencies](#install-castopod-hosts-dependencies)
-- [Initialize and populate database](#initialize-and-populate-database)
-- [Start hacking](#start-hacking)
-- [Going Further](#going-further)
-  - [Useful docker / docker-compose commands](#useful-docker--docker-compose-commands)
-- [Known issues](#known-issues)
-  - [Allocation failed - JavaScript heap out of memory](#allocation-failed---javascript-heap-out-of-memory)
-  - [Files created inside container are attributed to root locally (Linux)](#files-created-inside-container-are-attributed-to-root-locally-linux)
+# Setup your development environment
 
 ## Introduction
 
-Castopod Host is a web app based on the `php` framework
+Castopod is a web app based on the `php` framework
 [CodeIgniter 4](https://codeigniter.com).
 
-To setup a dev environment, we use [Docker](https://www.docker.com/). A
+We use [Docker](https://www.docker.com/) quickly setup a dev environment. A
 `docker-compose.yml` and `Dockerfile` are included in the project's root folder
 to help you kickstart your contribution.
 
-> Know that you don't need any prior knowledge of Docker to follow the next
-> steps. However, if you wish to use your own environment, feel free to do so!
+> You don't need any prior knowledge of Docker to follow the next steps.
+> However, if you wish to use your own environment, feel free to do so!
 
-## Pre-requisites
+## Setup instructions
+
+### 1. Pre-requisites
 
 0. Install [docker](https://docs.docker.com/get-docker).
 
-1. Clone Castopod Host project by running:
+1. Clone Castopod project by running:
 
    ```bash
-   git clone https://code.podlibre.org/podlibre/castopod-host.git
+   git clone https://code.castopod.org/ad-aures/castopod.git
    ```
 
 2. Create a `.env` file with the minimum required config to connect the app to
@@ -58,7 +50,7 @@ to help you kickstart your contribution.
 
    database.default.hostname="mariadb"
    database.default.database="castopod"
-   database.default.username="podlibre"
+   database.default.username="castopod"
    database.default.password="castopod"
 
    cache.handler="redis"
@@ -78,12 +70,12 @@ to help you kickstart your contribution.
 3. (for docker desktop) Add the repository you've cloned to docker desktop's
    `Settings` > `Resources` > `File Sharing`
 
-## (recommended) Develop inside the app Container with VSCode
+### 2. (recommended) Develop inside the app Container with VSCode
 
 If you're working in VSCode, you can take advantage of the `.devcontainer/`
 folder. It defines a development environment (dev container) with preinstalled
 requirements and VSCode extensions so you don't have to worry about them. All
-required services will be loaded automagically!
+required services will be loaded automagically! 🪄
 
 1. Install the VSCode extension
    [Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
@@ -92,7 +84,7 @@ required services will be loaded automagically!
    > The VSCode window will reload inside the dev container. Expect several
    > minutes during first load as it is building all necessary services.
 
-   **Note**: The dev container will start by running Castopod Host's php server.
+   **Note**: The dev container will start by running Castopod's php server.
    During development, you will have to start [Vite](https://vitejs.dev)'s dev
    server for compiling the typescript code and styles:
 
@@ -105,8 +97,8 @@ required services will be loaded automagically!
    using the following commands:
 
    ```bash
-   # run Castopod host server
-   php spark serve --host 0.0.0.0
+   # run Castopod server
+   php spark serve - 0.0.0.0
    ```
 
 3. You're all set! 🎉
@@ -131,7 +123,22 @@ required services will be loaded automagically!
 For more info, see
 [VSCode Remote Containers](https://code.visualstudio.com/docs/remote/containers)
 
-## (not-recommended) Develop outside the app container
+### 3. Start hacking
+
+You're all set! Start working your magic by updating the project's files! Help
+yourself to the
+[CodeIgniter4 User Guide](https://codeigniter.com/user_guide/index.html) for
+more insights.
+
+To see your changes, go to:
+
+- `http://localhost:8080/` for the Castopod app
+- `http://localhost:8888/` for the phpmyadmin interface:
+
+  - username: **castopod**
+  - password: **castopod**
+
+### 2-alt. Develop outside the app container
 
 You do not wish to use the VSCode devcontainer? No problem!
 
@@ -155,16 +162,17 @@ You do not wish to use the VSCode devcontainer? No problem!
    > The `docker-compose up -d` command will boot 4 containers in the
    > background:
    >
-   > - `castopod-host_app`: a php based container with Castopod Host
-   >   requirements installed
-   > - `castopod-host_redis`: a [redis](https://redis.io/) database to handle
-   >   queries and pages caching
-   > - `castopod-host_mariadb`: a [mariadb](https://mariadb.org/) server for
+   > - `castopod_app`: a php based container with Castopod requirements
+   >   installed
+   > - `castopod_redis`: a [redis](https://redis.io/) database to handle queries
+   >   and pages caching
+   > - `castopod_mariadb`: a [mariadb](https://mariadb.org/) server for
    >   persistent data
-   > - `castopod-host_phpmyadmin`: a phpmyadmin server to visualize the mariadb
+   > - `castopod_phpmyadmin`: a phpmyadmin server to visualize the mariadb
    >   database.
 
-2. Run any command by prefixing them with `docker-compose run --rm app`:
+2. Run any command inside the containers by prefixing them with
+   `docker-compose run --rm app`:
 
    ```bash
    # use PHP
@@ -180,7 +188,11 @@ You do not wish to use the VSCode devcontainer? No problem!
    docker-compose run --rm app git version
    ```
 
-## Install Castopod Host's dependencies
+---
+
+## Going Further
+
+### Install Castopod's dependencies
 
 1. Install php dependencies with [Composer](https://getcomposer.org/)
 
@@ -188,13 +200,15 @@ You do not wish to use the VSCode devcontainer? No problem!
    composer install
    ```
 
-   > **Note:**
-   >
-   > The php dependencies aren't included in the repository. Composer will check
-   > the `composer.json` and `composer.lock` files to download the packages with
-   > the right versions. The dependencies will live under the `vendor/` folder.
-   > For more info, check out the
-   > [Composer documentation](https://getcomposer.org/doc/).
+   ::: info Note
+
+   The php dependencies aren't included in the repository. Composer will check
+   the `composer.json` and `composer.lock` files to download the packages with
+   the right versions. The dependencies will live under the `vendor/` folder.
+   For more info, check out the
+   [Composer documentation](https://getcomposer.org/doc/).
+
+   :::
 
 2. Install javascript dependencies with [npm](https://www.npmjs.com/)
 
@@ -202,13 +216,14 @@ You do not wish to use the VSCode devcontainer? No problem!
    npm install
    ```
 
-   > **Note:**
-   >
-   > The javascript dependencies aren't included in the repository. Npm will
-   > check the `package.json` and `package.lock` files to download the packages
-   > with the right versions. The dependencies will live under the `node_module`
-   > folder. For more info, check out the
-   > [NPM documentation](https://docs.npmjs.com/).
+   ::: info Note
+
+   The javascript dependencies aren't included in the repository. Npm will check
+   the `package.json` and `package.lock` files to download the packages with the
+   right versions. The dependencies will live under the `node_module` folder.
+   For more info, check out the [NPM documentation](https://docs.npmjs.com/).
+
+   :::
 
 3. Generate static assets:
 
@@ -221,17 +236,21 @@ You do not wish to use the VSCode devcontainer? No problem!
    npm run build:svg
    ```
 
-   > **Note:**
-   >
-   > The static assets generated live under the `public/assets` folder, it
-   > includes javascript, styles, images, fonts, icons and svg files.
+   ::: info Note
 
-## Initialize and populate database
+   The static assets generated live under the `public/assets` folder, it
+   includes javascript, styles, images, fonts, icons and svg files.
 
-> **Note:**
->
-> You may skip this section if you go through the install wizard (go to
-> `/cp-install`).
+   :::
+
+### Initialize and populate database
+
+::: tip
+
+You may skip this section if you go through the install wizard (go to
+`/cp-install`).
+
+:::
 
 1. Build the database with the migrate command:
 
@@ -272,14 +291,21 @@ You do not wish to use the VSCode devcontainer? No problem!
 
 3. (optionnal) Populate the database with test data:
 
+   - Populate test data (login: admin / password: AGUehL3P)
+
    ```bash
-   # Populates test data (login: admin / password: AGUehL3P)
    php spark db:seed TestSeeder
+   ```
 
-   # Populates with fake podcast analytics
+   - Populate with fake podcast analytics:
+
+   ```bash
    php spark db:seed FakePodcastsAnalyticsSeeder
+   ```
 
-   # Populates with fake website analytics
+   - Populate with fake website analytics:
+
+   ```bash
    php spark db:seed FakeWebsiteAnalyticsSeeder
    ```
 
@@ -288,50 +314,53 @@ You do not wish to use the VSCode devcontainer? No problem!
    - username: **admin**
    - password: **AGUehL3P**
 
-## Start hacking
-
-You're all set! Start working your magic by updating the project's files! Help
-yourself to the
-[CodeIgniter4 User Guide](https://codeigniter.com/user_guide/index.html) for
-more insights.
-
-To see your changes, go to:
-
-- [localhost:8080](http://localhost:8080/) for the Castopod Host app
-- [localhost:8888](http://localhost:8888/) for the phpmyadmin interface:
-
-  - username: **podlibre**
-  - password: **castopod**
-
----
-
-## Going Further
-
 ### Useful docker / docker-compose commands
 
+- Monitor the app container:
+
 ```bash
-# monitor the app container
 docker-compose logs --tail 50 --follow --timestamps app
+```
 
-# interact with redis server using included redis-cli command
-docker exec -it castopod-host_redis redis-cli
+- Interact with redis server using included redis-cli command:
 
-# monitor the redis container
+```bash
+docker exec -it castopod_redis redis-cli
+```
+
+- Monitor the redis container:
+
+```bash
 docker-compose logs --tail 50 --follow --timestamps redis
+```
 
-# monitor the mariadb container
+- Monitor the mariadb container:
+
+```bash
 docker-compose logs --tail 50 --follow --timestamps mariadb
+```
 
-# monitor the phpmyadmin container
+- Monitor the phpmyadmin container:
+
+```bash
 docker-compose logs --tail 50 --follow --timestamps phpmyadmin
+```
 
-# restart docker containers
+- Restart docker containers:
+
+```bash
 docker-compose restart
+```
 
-# Destroy all containers, opposite of `up` command
+- Destroy all containers, opposite of `up` command:
+
+```bash
 docker-compose down
+```
 
-# Rebuild app container
+- Rebuild app container:
+
+```bash
 docker-compose build app
 ```
 
@@ -348,13 +377,15 @@ This happens when running `npm install`.
 👉 By default, docker might not have access to enough RAM. Allocate more memory
 and run `npm install` again.
 
-### Files created inside container are attributed to root locally (Linux)
+### (Linux) Files created inside container are attributed to root locally
 
 You may use Linux user namespaces to fix this on your machine:
 
-> **Note:**
->
-> Replace "username" with your local username
+::: info Note
+
+Replace "username" with your local username
+
+:::
 
 1. Go to `/etc/docker/daemon.json` and add:
 

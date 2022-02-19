@@ -1,5 +1,5 @@
 ####################################################
-# Castopod Host development Docker file
+# Castopod development Docker file
 ####################################################
 # ⚠️ NOT optimized for production
 # should be used only for development purposes
@@ -8,8 +8,8 @@ FROM php:8.0-fpm
 
 LABEL maintainer="Yassine Doghri <yassine@doghri.fr>"
 
-COPY . /castopod-host
-WORKDIR /castopod-host
+COPY . /castopod
+WORKDIR /castopod
 
 # Install composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
@@ -19,7 +19,7 @@ RUN apt-get update \
     # gnupg to sign commits with gpg
     && apt-get install --yes --no-install-recommends gnupg \
     # npm through the nodejs package
-    && curl -fsSL https://deb.nodesource.com/setup_14.x | bash - \
+    && curl -fsSL https://deb.nodesource.com/setup_16.x | bash - \
     && apt-get update \
     && apt-get install --yes --no-install-recommends nodejs \
     # update npm

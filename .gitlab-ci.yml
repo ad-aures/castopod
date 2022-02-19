@@ -1,10 +1,11 @@
-image: code.podlibre.org:5050/podlibre/castopod-host:latest
+image: code.castopod.org:5050/ad-aures/castopod:latest
 
 stages:
   - prepare
   - quality
   - bundle
   - release
+  - deploy
 
 php-dependencies:
   stage: prepare
@@ -76,15 +77,15 @@ bundle:
     # make scripts/bundle.sh executable
     - chmod +x ./scripts/bundle.sh
 
-    # bundle castopod-host with commit ref as version
+    # bundle castopod with commit ref as version
     - ./scripts/bundle.sh ${CI_COMMIT_REF_SLUG}_${CI_COMMIT_SHORT_SHA}
   dependencies:
     - php-dependencies
     - js-dependencies
   artifacts:
-    name: "castopod-host-${CI_COMMIT_REF_SLUG}_${CI_COMMIT_SHORT_SHA}"
+    name: "castopod-${CI_COMMIT_REF_SLUG}_${CI_COMMIT_SHORT_SHA}"
     paths:
-      - castopod-host
+      - castopod
   except:
     - main
     - beta
@@ -113,3 +114,12 @@ release:
     - main
     - beta
     - alpha
+
+documentation:
+  stage: deploy
+  trigger:
+    include: docs/.gitlab-ci.yml
+    strategy: depend
+  only:
+    changes:
+      - docs/**/*

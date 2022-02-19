@@ -5,7 +5,7 @@ declare(strict_types=1);
 /**
  * Class AnalyticsPodcasts Entity for AnalyticsPodcasts
  *
- * @copyright  2020 Podlibre
+ * @copyright  2020 Ad Aures
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
  */

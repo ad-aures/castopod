@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * @copyright  2020 Podlibre
+ * @copyright  2020 Ad Aures
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
  */
@@ -21,7 +21,7 @@ class HomeController extends BaseController
         $db = db_connect();
         if ($db->getDatabase() === '' || ! $db->tableExists('podcasts')) {
             // Database connection has not been set or could not find the podcasts table
-            // Redirecting to install page because it is likely that Castopod Host has not been installed yet.
+            // Redirecting to install page because it is likely that Castopod has not been installed yet.
             // NB: as base_url wouldn't have been defined here, redirect to install wizard manually
             $route = Services::routes()->reverseRoute('install');
             return redirect()->to(rtrim(host_url(), '/') . $route);

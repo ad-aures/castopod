@@ -4,8 +4,75 @@
     "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
     "This file is @generated automatically"
   ],
-  "content-hash": "bf66875f72680d0f5953f03bf31c8612",
+  "content-hash": "ec7b17f7a9846c6f31606bcd2dea17ab",
   "packages": [
+    {
+      "name": "adaures/ipcat-php",
+      "version": "v1.0.0",
+      "source": {
+        "type": "git",
+        "url": "https://code.castopod.org/ad-aures/ipcat-php",
+        "reference": "478a121cc32147359df27d2f5d087595ddcdc8b4"
+      },
+      "require": {
+        "php": ">=5.4"
+      },
+      "type": "library",
+      "autoload": {
+        "psr-4": {
+          "AdAures\\Ipcat\\": ""
+        }
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": ["GPL-3.0-only"],
+      "authors": [
+        {
+          "name": "Benjamin Bellamy",
+          "email": "ben@castopod.org",
+          "homepage": "https://code.castopod.org/benjamin"
+        },
+        {
+          "name": "Yassine Doghri",
+          "email": "yassine@doghri.fr",
+          "homepage": "https://code.castopod.org/yassine"
+        }
+      ],
+      "description": "Categorization of IP Addresses adapted to PHP 5.4+ from https://github.com/client9/ipcat",
+      "homepage": "https://code.castopod.org/ad-aures/ipcat-php",
+      "time": "2022-02-12T10:19:28+00:00"
+    },
+    {
+      "name": "adaures/podcast-persons-taxonomy",
+      "version": "v1.0.0",
+      "source": {
+        "type": "git",
+        "url": "https://code.castopod.org/ad-aures/podcast-persons-taxonomy",
+        "reference": "9cb2bc9a36700f28ae907482a6ee2017aa4c38b0"
+      },
+      "type": "library",
+      "autoload": {
+        "psr-4": {
+          "AdAures\\PodcastPersonsTaxonomy\\": "src/"
+        }
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": ["MIT"],
+      "authors": [
+        {
+          "name": "Benjamin Bellamy",
+          "email": "ben@castopod.org",
+          "homepage": "https://code.castopod.org/benjamin"
+        },
+        {
+          "name": "Yassine Doghri",
+          "email": "yassine@doghri.fr",
+          "homepage": "https://code.castopod.org/yassine"
+        }
+      ],
+      "description": "Generate PHP translation files for CodeIgniter4 from the podcast-namespace's Persons Taxonomy json files.",
+      "homepage": "https://code.castopod.org/ad-aures/podcast-persons-taxonomy",
+      "time": "2022-02-12T10:45:50+00:00"
+    },
     {
       "name": "brick/math",
       "version": "0.9.2",
@@ -1723,69 +1790,6 @@
         }
       ],
       "time": "2021-04-06T13:56:45+00:00"
-    },
-    {
-      "name": "podlibre/ipcat",
-      "version": "v1.0",
-      "source": {
-        "type": "git",
-        "url": "https://github.com/podlibre/ipcat.git",
-        "reference": "1adfc821be508ddc8a742f6a5d5e6e42fdf28e86"
-      },
-      "dist": {
-        "type": "zip",
-        "url": "https://api.github.com/repos/podlibre/ipcat/zipball/1adfc821be508ddc8a742f6a5d5e6e42fdf28e86",
-        "reference": "1adfc821be508ddc8a742f6a5d5e6e42fdf28e86",
-        "shasum": ""
-      },
-      "type": "library",
-      "autoload": {
-        "psr-4": {
-          "Podlibre\\Ipcat\\": ""
-        }
-      },
-      "notification-url": "https://packagist.org/downloads/",
-      "license": ["GPL-3.0-only"],
-      "authors": [
-        {
-          "name": "Benjamin Bellamy",
-          "email": "ben@podlibre.org",
-          "homepage": "https://podlibre.org/"
-        }
-      ],
-      "description": "Categorization of IP Addresses forked from https://github.com/client9/ipcat",
-      "homepage": "https://github.com/podlibre/ipcat",
-      "support": {
-        "source": "https://github.com/podlibre/ipcat/tree/v1.0"
-      },
-      "time": "2020-10-05T17:15:07+00:00"
-    },
-    {
-      "name": "podlibre/podcast-namespace",
-      "version": "v1.0.6",
-      "source": {
-        "type": "git",
-        "url": "https://code.podlibre.org/podlibre/podcastnamespace",
-        "reference": "4525c06ee9dd95bb745ee875d55b64a053c74cd6"
-      },
-      "type": "library",
-      "autoload": {
-        "psr-4": {
-          "Podlibre\\PodcastNamespace\\": "src/"
-        }
-      },
-      "notification-url": "https://packagist.org/downloads/",
-      "license": ["MIT"],
-      "authors": [
-        {
-          "name": "Benjamin Bellamy",
-          "email": "ben@podlibre.org",
-          "homepage": "https://podlibre.org/"
-        }
-      ],
-      "description": "PHP implementation for the Podcast Namespace.",
-      "homepage": "https://code.podlibre.org/podlibre/podcastnamespace",
-      "time": "2021-01-14T15:47:06+00:00"
     },
     {
       "name": "psr/cache",
