@@ -4,7 +4,7 @@
     "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
     "This file is @generated automatically"
   ],
-  "content-hash": "ec7b17f7a9846c6f31606bcd2dea17ab",
+  "content-hash": "597109bb66c8ddbe5f80bcfd8ceb523b",
   "packages": [
     {
       "name": "adaures/ipcat-php",
@@ -12,7 +12,7 @@
       "source": {
         "type": "git",
         "url": "https://code.castopod.org/adaures/ipcat-php",
-        "reference": "478a121cc32147359df27d2f5d087595ddcdc8b4"
+        "reference": "e55160afdcd5040abb60c04cf7a95030fe3b967b"
       },
       "require": {
         "php": ">=5.4"
@@ -39,7 +39,7 @@
       ],
       "description": "Categorization of IP Addresses adapted to PHP 5.4+ from https://github.com/client9/ipcat",
       "homepage": "https://code.castopod.org/adaures/ipcat-php",
-      "time": "2022-02-12T10:19:28+00:00"
+      "time": "2022-02-20T14:08:26+00:00"
     },
     {
       "name": "adaures/podcast-persons-taxonomy",
@@ -47,7 +47,7 @@
       "source": {
         "type": "git",
         "url": "https://code.castopod.org/adaures/podcast-persons-taxonomy",
-        "reference": "9cb2bc9a36700f28ae907482a6ee2017aa4c38b0"
+        "reference": "117b207e334f54cd1b00ee52b0c53d58cb1a5524"
       },
       "type": "library",
       "autoload": {
@@ -71,7 +71,7 @@
       ],
       "description": "Generate PHP translation files for CodeIgniter4 from the podcast-namespace's Persons Taxonomy json files.",
       "homepage": "https://code.castopod.org/adaures/podcast-persons-taxonomy",
-      "time": "2022-02-12T10:45:50+00:00"
+      "time": "2022-02-20T14:09:25+00:00"
     },
     {
       "name": "brick/math",
