@@ -115,6 +115,14 @@ release:
     - beta
     - alpha
 
+website:
+  stage: deploy
+  trigger: adaures/castopod.org
+  only:
+    - main
+    - beta
+    - alpha
+
 documentation:
   stage: deploy
   trigger:
