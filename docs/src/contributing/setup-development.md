@@ -26,7 +26,7 @@ to help you kickstart your contribution.
 1. Clone Castopod project by running:
 
    ```bash
-   git clone https://code.castopod.org/ad-aures/castopod.git
+   git clone https://code.castopod.org/adaures/castopod.git
    ```
 
 2. Create a `.env` file with the minimum required config to connect the app to

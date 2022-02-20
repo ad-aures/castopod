@@ -11,7 +11,7 @@
       "version": "v1.0.0",
       "source": {
         "type": "git",
-        "url": "https://code.castopod.org/ad-aures/ipcat-php",
+        "url": "https://code.castopod.org/adaures/ipcat-php",
         "reference": "478a121cc32147359df27d2f5d087595ddcdc8b4"
       },
       "require": {
@@ -38,7 +38,7 @@
         }
       ],
       "description": "Categorization of IP Addresses adapted to PHP 5.4+ from https://github.com/client9/ipcat",
-      "homepage": "https://code.castopod.org/ad-aures/ipcat-php",
+      "homepage": "https://code.castopod.org/adaures/ipcat-php",
       "time": "2022-02-12T10:19:28+00:00"
     },
     {
@@ -46,7 +46,7 @@
       "version": "v1.0.0",
       "source": {
         "type": "git",
-        "url": "https://code.castopod.org/ad-aures/podcast-persons-taxonomy",
+        "url": "https://code.castopod.org/adaures/podcast-persons-taxonomy",
         "reference": "9cb2bc9a36700f28ae907482a6ee2017aa4c38b0"
       },
       "type": "library",
@@ -70,7 +70,7 @@
         }
       ],
       "description": "Generate PHP translation files for CodeIgniter4 from the podcast-namespace's Persons Taxonomy json files.",
-      "homepage": "https://code.castopod.org/ad-aures/podcast-persons-taxonomy",
+      "homepage": "https://code.castopod.org/adaures/podcast-persons-taxonomy",
       "time": "2022-02-12T10:45:50+00:00"
     },
     {

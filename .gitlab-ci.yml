@@ -1,4 +1,4 @@
-image: code.castopod.org:5050/ad-aures/castopod:latest
+image: code.castopod.org:5050/adaures/castopod:latest
 
 stages:
   - prepare

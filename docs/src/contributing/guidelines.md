@@ -16,12 +16,12 @@ should reciprocate that respect in addressing your issue or assessing patches
 and features.
 
 ⚠️ Note that **any** contribution made on a repository other than
-[the original repository](https://code.castopod.org/ad-aures/castopod) will not
+[the original repository](https://code.castopod.org/adaures/castopod) will not
 be accepted.
 
 ## Using the issue tracker
 
-The [issue tracker](https://code.castopod.org/ad-aures/castopod/-/issues) is the
+The [issue tracker](https://code.castopod.org/adaures/castopod/-/issues) is the
 preferred channel for [bug reports](#bug-reports),
 [features requests](#feature-requests) and
 [submitting pull requests](#pull-requests).
@@ -87,7 +87,7 @@ git clone https://code.castopod.org/<your-username>/castopod.git
 cd castopod
 
 # Assign the original repo to a remote called "upstream"
-git remote add upstream https://code.castopod.org/ad-aures/castopod.git
+git remote add upstream https://code.castopod.org/adaures/castopod.git
 ```
 
 2. If you cloned a while ago, get the latest changes from upstream:
@@ -127,7 +127,7 @@ git push origin <topic-branch-name>
 
 **IMPORTANT**: By submitting a patch, you agree to allow the project owners to
 license your work under the terms of the
-[GNU AGPLv3](https://code.castopod.org/ad-aures/castopod/-/blob/main/LICENSE).
+[GNU AGPLv3](https://code.castopod.org/adaures/castopod/-/blob/main/LICENSE).
 
 ## Collaborating guidelines
 

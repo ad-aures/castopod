@@ -16,7 +16,7 @@ improvements ⚡.
 ## Manual update instructions
 
 1. Go to the
-   [releases page](https://code.castopod.org/ad-aures/castopod/-/releases) and
+   [releases page](https://code.castopod.org/adaures/castopod/-/releases) and
    see if your instance is up to date with the latest Castopod version
 
    - cf.
@@ -40,8 +40,8 @@ improvements ⚡.
      :::
 
 4. Releases may come with additional update instructions (see
-   [releases page](https://code.castopod.org/ad-aures/castopod/-/releases)).
-   They are usually database migration scripts in `.sql` format to update your
+   [releases page](https://code.castopod.org/adaures/castopod/-/releases)). They
+   are usually database migration scripts in `.sql` format to update your
    database schema.
 
    - 👉 Make sure you run the scripts on your phpmyadmin panel or using command

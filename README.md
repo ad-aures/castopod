@@ -43,7 +43,7 @@ ways to get started.
 > **Note**
 >
 > Contributions must be made on
-> [the original repository](https://code.castopod.org/ad-aures/castopod) to be
+> [the original repository](https://code.castopod.org/adaures/castopod) to be
 > accepted.
 
 ## Contact
@@ -52,7 +52,7 @@ You may reach us for help or ask any question you have on:
 
 - [Discord](https://castopod.org/discord) (for direct interaction with
   developers and the community)
-- [Issue tracker](https://code.castopod.org/ad-aures/castopod/-/issues) (for
+- [Issue tracker](https://code.castopod.org/adaures/castopod/-/issues) (for
   feature requests & bug reports)
 
 Alternatively, you can follow us on social media platforms to get news about
@@ -88,10 +88,10 @@ backers. If you'd like to help, please consider
 
 Copyright © 2020-present, [Ad Aures](https://adaures.com/).
 
-[release]: https://code.castopod.org/ad-aures/castopod/-/releases
+[release]: https://code.castopod.org/adaures/castopod/-/releases
 [release-badge]:
   https://img.shields.io/gitlab/v/release/2?color=brightgreen&gitlab_url=https%3A%2F%2Fcode.castopod.org%2F&include_prereleases&label=release
-[license]: https://code.castopod.org/ad-aures/castopod/-/blob/beta/LICENSE.md
+[license]: https://code.castopod.org/adaures/castopod/-/blob/beta/LICENSE.md
 [license-badge]:
   https://img.shields.io/github/license/ad-aures/castopod?color=blue
 [semantic-release]: https://github.com/semantic-release/semantic-release

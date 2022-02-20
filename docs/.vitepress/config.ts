@@ -46,7 +46,7 @@ export default defineConfig({
   themeConfig: {
     logo: "/images/castopod-icon.svg",
     lastUpdated: "Last Updated",
-    repo: "https://code.castopod.org/ad-aures/castopod",
+    repo: "https://code.castopod.org/adaures/castopod",
     docsDir: "docs/src",
     docsBranch: "develop",
     editLinks: true,
