@@ -13,7 +13,7 @@ Castopod is easy to install and was built on top of
 [CodeIgniter4](https://codeigniter.com/), a powerful PHP framework with a very
 small footprint.
 
-::: info Note
+::: info Status
 
 Castopod is currently in **beta** but already quite stable and used by
 podcasters around&nbsp;the&nbsp;world!
@@ -184,11 +184,20 @@ Castopod:
 
 ## Sponsors
 
+The ongoing development of Castopod is made possible with the support of its
+backers. If you'd like to help, please consider
+[sponsoring Castopod's development](https://opencollective.com/castopod/contribute).
+
 <div class="flex flex-wrap gap-x-16 gap-y-8">
   <a href="https://adaures.com/" target="_blank" rel="noopener noreferrer"><img src="/images/sponsors/adaures.svg" alt="Ad Aures Logo" class="h-16" /></a>
   <a href="https://nlnet.nl/project/Castopod/" target="_blank" rel="noopener noreferrer"><img src="/images/sponsors/nlnet.svg" alt="NLnet Logo" class="h-16" /></a>
-  <a href="https://opencollective.com/castopod/contribute" class="inline-flex items-center font-semibold text-black underline gap-x-1 decoration-pine-500 decoration-4 hover:no-underline" target="_blank" rel="noopener noreferrer">Become a sponsor<svg viewBox="0 0 24 24" class="h-6"><path fill="currentColor" d="m16.172 11-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg></a>
 </div>
+
+## License
+
+[GNU Affero General Public License v3.0](https://choosealicense.com/licenses/agpl-3.0/)
+
+Copyright © 2020-present, [Ad Aures](https://adaures.com/).
 
 [release]: https://code.castopod.org/ad-aures/castopod/-/releases
 [release-badge]:

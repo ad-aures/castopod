@@ -1,8 +1,10 @@
-<h1 align="center">
-  <a href="https://castopod.org/">
-    <img src="https://docs.castopod.org/images/castopod-logo-inline.svg" alt="Castopod" style="height:4rem;" />
-  </a>
-</h1>
+<div align="center">
+  <h1>
+    <a href="https://castopod.org/">
+      <img src="https://docs.castopod.org/images/castopod-logo-inline.svg" alt="Castopod" height="64px" />
+    </a>
+  </h1>
+</div>
 
 <div align="center">
 
@@ -13,12 +15,12 @@
 Castopod is a free and open-source podcast hosting solution made for podcasters
 who want engage and interact with their audience.
 
-> **Note**
+> **Status**
 >
 > Castopod is currently in **beta** but already quite stable and used by
 > podcasters around the world!
 
-## Documentation
+## Getting started
 
 To get started with Castopod, you may
 [check out the documentation](https://docs.castopod.org/), everything should be
@@ -32,13 +34,17 @@ please contact us directly by email at
 
 ## Contributing
 
-Love Castopod and would like to help? Check out the
-[contribution guidelines](https://docs.castopod.org/contributing/guidelines) for
-this project.
+Contributions are always welcome!
 
-⚠️ Note that **any** contribution made on a repository other than
-[the original repository](https://code.castopod.org/ad-aures/castopod) will not
-be accepted.
+See the
+[contribution guidelines](https://docs.castopod.org/contributing/guidelines) for
+ways to get started.
+
+> **Note**
+>
+> Contributions must be made on
+> [the original repository](https://code.castopod.org/ad-aures/castopod) to be
+> accepted.
 
 ## Contact
 
@@ -59,11 +65,28 @@ Castopod:
 
 ## Sponsors
 
-<div style="display:flex;flex-wrap:wrap;column-gap:4rem;row-gap:2rem;">
-  <a href="https://adaures.com/" target="_blank" rel="noopener noreferrer"><img src="https://docs.castopod.org/images/sponsors/adaures.svg" alt="Ad Aures Logo" style="height:4rem;" /></a>
-  <a href="https://nlnet.nl/project/Castopod/" target="_blank" rel="noopener noreferrer"><img src="https://docs.castopod.org/images/sponsors/nlnet.svg" alt="NLnet Logo" style="height:4rem;" /></a>
-  <a href="https://opencollective.com/castopod/contribute" target="_blank" rel="noopener noreferrer">Become a sponsor</a>
-</div>
+The ongoing development of Castopod is made possible with the support of its
+backers. If you'd like to help, please consider
+[sponsoring Castopod's development](https://opencollective.com/castopod/contribute).
+
+<table>
+  <tbody>
+    <tr>
+      <td align="center">
+        <a href="https://docs.castopod.org/images/sponsors/adaures.svg" target="_blank" rel="noopener noreferrer"><img height="48" src="https://docs.castopod.org/images/sponsors/adaures.svg" alt="Netlify" /></a>
+      </td>
+      <td align="center">
+        <a href="https://nlnet.nl/project/Castopod/" target="_blank" rel="noopener noreferrer"><img src="https://docs.castopod.org/images/sponsors/nlnet.svg" alt="NLnet Logo" height="48" /></a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## License
+
+[GNU Affero General Public License v3.0](https://choosealicense.com/licenses/agpl-3.0/)
+
+Copyright © 2020-present, [Ad Aures](https://adaures.com/).
 
 [release]: https://code.castopod.org/ad-aures/castopod/-/releases
 [release-badge]:
