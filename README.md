@@ -42,9 +42,9 @@ ways to get started.
 
 > **Note**
 >
-> Contributions must be made on
-> [the original repository](https://code.castopod.org/adaures/castopod) to be
-> accepted.
+> **Any** contribution made on a repository other than
+> [the original repository](https://code.castopod.org/adaures/castopod) will not
+> be accepted.
 
 ## Contact
 

@@ -15,9 +15,13 @@ developers managing and developing this open source project. In return, they
 should reciprocate that respect in addressing your issue or assessing patches
 and features.
 
-⚠️ Note that **any** contribution made on a repository other than
+::: info Note
+
+**Any** contribution made on a repository other than
 [the original repository](https://code.castopod.org/adaures/castopod) will not
 be accepted.
+
+:::
 
 ## Using the issue tracker
 
@@ -25,6 +29,12 @@ The [issue tracker](https://code.castopod.org/adaures/castopod/-/issues) is the
 preferred channel for [bug reports](#bug-reports),
 [features requests](#feature-requests) and
 [submitting pull requests](#pull-requests).
+
+## ⚠️ Security issues and vulnerabilities
+
+If you encounter any security issue or vulnerability in the Castopod source,
+please contact us directly by email at
+[security@castopod.org](mailto:security@castopod.org)
 
 ## Bug reports
 
