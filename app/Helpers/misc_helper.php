@@ -183,9 +183,9 @@ if (! function_exists('format_duration_symbol')) {
         }
         if ($seconds < 36000) {
             // < 10 hours: returns H:MM:SS
-            return ltrim(gmdate('h\h i\min s\s', $seconds), '0');
+            return ltrim(gmdate('h\h i\m\i\n s\s', $seconds), '0');
         }
-        return gmdate('h\h i\min s\s', $seconds);
+        return gmdate('h\h i\m\i\n s\s', $seconds);
     }
 }
 
