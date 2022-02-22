@@ -35,6 +35,11 @@ lint-commit-msg:
     - ./scripts/lint-commit-msg.sh
   dependencies:
     - js-dependencies
+  only:
+    - develop
+    - main
+    - beta
+    - alpha
 
 lint-php:
   stage: quality
