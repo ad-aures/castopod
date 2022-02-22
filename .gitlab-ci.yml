@@ -91,6 +91,9 @@ bundle:
     name: "castopod-${CI_COMMIT_REF_SLUG}_${CI_COMMIT_SHORT_SHA}"
     paths:
       - castopod
+  only:
+    variables:
+      - $CI_PROJECT_NAMESPACE == "adaures"
   except:
     - main
     - beta
