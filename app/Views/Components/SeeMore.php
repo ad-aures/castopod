@@ -13,7 +13,7 @@ class SeeMore extends Component
         $seeMoreLabel = lang('Common.see_more');
         $seeLessLabel = lang('Common.see_less');
         return <<<HTML
-            <div class="see-more" style="--line-clamp: 3">
+            <div class="see-more" style="--content-height: 10rem">
                 <input id="see-more-checkbox" type="checkbox" class="see-more__checkbox" aria-hidden="true">
                 <div class="mb-2 see-more__content {$this->class}"><div class="see-more_content-fade"></div>{$this->slot}</div>
                 <label for="see-more-checkbox" class="see-more__label" data-see-more="{$seeMoreLabel}" data-see-less="{$seeLessLabel}" aria-hidden="true"></label>

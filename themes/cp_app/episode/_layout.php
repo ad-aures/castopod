@@ -132,7 +132,7 @@
     </header>
     <div class="col-start-2 px-8 py-4 text-white bg-header">
         <h2 class="text-xs font-bold tracking-wider uppercase whitespace-pre-line font-display"><?= lang('Episode.description') ?></h2>
-        <?php if (substr_count($episode->description_markdown, "\n") > 3 || strlen($episode->description) > 250): ?>
+        <?php if (substr_count($episode->description_markdown, "\n") > 6 || strlen($episode->description) > 500): ?>
             <SeeMore class="max-w-xl prose-sm text-white"><?= $episode->getDescriptionHtml('-+Website+-') ?></SeeMore>
         <?php else: ?>
             <div class="max-w-xl prose-sm text-white"><?= $episode->getDescriptionHtml('-+Website+-') ?></div>

@@ -5,14 +5,14 @@
 
   .see-more__content {
     @apply relative overflow-hidden;
-    height: 5rem;
+    height: var(--content-height);
   }
 
   .see-more_content-fade {
     @apply absolute bottom-0 left-0 w-full h-full pointer-events-none;
     background-image: linear-gradient(
       to bottom,
-      transparent,
+      transparent 70%,
       hsl(var(--color-background-header))
     );
   }
