@@ -12,7 +12,7 @@
       "source": {
         "type": "git",
         "url": "https://code.castopod.org/adaures/ipcat-php",
-        "reference": "e55160afdcd5040abb60c04cf7a95030fe3b967b"
+        "reference": "144fb12141c636b6b4baa72f1f974b388e4994b5"
       },
       "require": {
         "php": ">=5.4"
@@ -20,7 +20,7 @@
       "type": "library",
       "autoload": {
         "psr-4": {
-          "AdAures\\Ipcat\\": ""
+          "AdAures\\Ipcat\\": "src/"
         }
       },
       "notification-url": "https://packagist.org/downloads/",
@@ -39,7 +39,7 @@
       ],
       "description": "Categorization of IP Addresses adapted to PHP 5.4+ from https://github.com/client9/ipcat",
       "homepage": "https://code.castopod.org/adaures/ipcat-php",
-      "time": "2022-02-20T14:08:26+00:00"
+      "time": "2022-02-24T14:34:54+00:00"
     },
     {
       "name": "adaures/podcast-persons-taxonomy",

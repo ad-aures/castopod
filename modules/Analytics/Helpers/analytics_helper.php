@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-use AdAures\Ipcat\IpDb;
-use CodeIgniter\Router\Exceptions\RouterException;
-use Config\Services;
-use GeoIp2\Database\Reader;
-use Opawg\UserAgentsPhp\UserAgents;
 /**
  * @copyright  2020 Ad Aures
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
  */
 
+use AdAures\Ipcat\IpDb;
+use CodeIgniter\Router\Exceptions\RouterException;
+use Config\Services;
+use GeoIp2\Database\Reader;
+use Opawg\UserAgentsPhp\UserAgents;
 use WhichBrowser\Parser;
 
 if (! function_exists('base64_url_encode')) {

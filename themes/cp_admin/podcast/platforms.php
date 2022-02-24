@@ -21,14 +21,22 @@
 
 <div class="relative flex items-start mb-8">
     <div class="flex flex-col items-center w-12 mr-4">
-        <?= anchor(
+        <?php if ($platform->submit_url === ''): ?>
+            <?= icon(
+    $platform->slug,
+    'text-skin-muted text-4xl',
+    $platform->type
+) ?>
+        <?php else: ?>
+            <?= anchor(
     $platform->submit_url,
     icon(
-        $platform->type . '/' . $platform->slug,
+        $platform->slug,
         'text-skin-muted text-4xl',
+        $platform->type
     ),
     [
-        'class' => 'mb-1 text-skin-muted hover:text-skin-base',
+        'class' => 'text-skin-muted hover:text-skin-base',
         'target' => '_blank',
         'rel' => 'noopener noreferrer',
         'data-tooltip' => 'bottom',
@@ -37,7 +45,8 @@
         ]),
     ],
 ) ?>
-        <div class="inline-flex bg-highlight">
+        <?php endif; ?>
+        <div class="inline-flex mt-1 bg-highlight">
             <?= anchor($platform->home_url, icon('external-link', 'mx-auto'), [
                 'class' => 'flex-1 text-skin-muted hover:text-skin-base',
                 'target' => '_blank',

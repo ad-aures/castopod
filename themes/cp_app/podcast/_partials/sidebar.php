@@ -59,7 +59,7 @@
                 <p><?= $podcast->copyright ?></p>
                 <p><?= lang('Common.powered_by', [
                     'castopod' =>
-                        '<a class="inline-flex font-semibold text-skin-muted hover:underline focus:ring-accent" href="https://castopod.org" target="_blank" rel="noreferrer noopener">Castopod' . icon('social/castopod', 'ml-1 text-lg') . '</a>',
+                        '<a class="inline-flex font-semibold text-skin-muted hover:underline focus:ring-accent" href="https://castopod.org" target="_blank" rel="noreferrer noopener">Castopod' . icon('castopod', 'ml-1 text-lg', 'social') . '</a>',
                 ]) ?></p>
             </div>
         </footer>

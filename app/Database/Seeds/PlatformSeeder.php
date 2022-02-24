@@ -18,7 +18,7 @@ class PlatformSeeder extends Seeder
 {
     public function run(): void
     {
-        $data = [
+        $podcastingData = [
             [
                 'slug' => 'amazon',
                 'type' => 'podcasting',
@@ -403,12 +403,22 @@ class PlatformSeeder extends Seeder
                 'home_url' => 'https://getzion.com/',
                 'submit_url' => 'https://shop.n2n2.chat/',
             ],
+        ];
+
+        $fundingData = [
             [
                 'slug' => 'paypal',
                 'type' => 'funding',
                 'label' => 'Paypal',
                 'home_url' => 'https://www.paypal.com/',
                 'submit_url' => 'https://www.paypal.com/paypalme/my/grab',
+            ],
+            [
+                'slug' => 'fosspay',
+                'type' => 'funding',
+                'label' => 'fosspay',
+                'home_url' => 'https://git.sr.ht/~sircmpwn/fosspay',
+                'submit_url' => '',
             ],
             [
                 'slug' => 'gofundme',
@@ -474,6 +484,9 @@ class PlatformSeeder extends Seeder
                 'home_url' => 'https://www.ulule.com/',
                 'submit_url' => 'https://www.ulule.com/projects/create/#/',
             ],
+        ];
+
+        $socialData = [
             [
                 'slug' => 'discord',
                 'type' => 'social',
@@ -519,6 +532,13 @@ class PlatformSeeder extends Seeder
                 'submit_url' => 'https://joinmastodon.org/communities',
             ],
             [
+                'slug' => 'misskey',
+                'type' => 'social',
+                'label' => 'Misskey',
+                'home_url' => 'https://join.misskey.page/',
+                'submit_url' => 'https://join.misskey.page/en-US/instances',
+            ],
+            [
                 'slug' => 'mobilizon',
                 'type' => 'social',
                 'label' => 'Mobilizon',
@@ -538,6 +558,13 @@ class PlatformSeeder extends Seeder
                 'label' => 'Pixelfed',
                 'home_url' => 'https://pixelfed.org/',
                 'submit_url' => 'https://beta.joinpixelfed.org/',
+            ],
+            [
+                'slug' => 'pleroma',
+                'type' => 'social',
+                'label' => 'Pleroma',
+                'home_url' => 'https://pleroma.social/',
+                'submit_url' => 'https://pleroma.social/#featured-instances',
             ],
             [
                 'slug' => 'plume',
@@ -583,6 +610,7 @@ class PlatformSeeder extends Seeder
             ],
         ];
 
+        $data = array_merge($podcastingData, $fundingData, $socialData);
         $this->db
             ->table('platforms')
             ->ignore(true)

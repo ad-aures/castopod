@@ -14,11 +14,25 @@ if (! function_exists('icon')) {
      *
      * @param  string $name name of the icon file without the .svg extension
      * @param  string $class to be added to the svg string
+     * @param  'social'|'podcasting'|'funding' $type type of icon to be added
      * @return string svg contents
      */
-    function icon(string $name, string $class = ''): string
+    function icon(string $name, string $class = '', string $type = null): string
     {
-        $svgContents = file_get_contents('assets/icons/' . $name . '.svg');
+        if ($type !== null) {
+            $name = $type . '/' . $name;
+        }
+
+        try {
+            $svgContents = file_get_contents('assets/icons/' . $name . '.svg');
+        } catch (Exception) {
+            if ($type !== null) {
+                return icon('default', $class, $type);
+            }
+
+            return '□';
+        }
+
         if ($class !== '') {
             $svgContents = str_replace('<svg', '<svg class="' . $class . '"', $svgContents);
         }

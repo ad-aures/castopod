@@ -16,7 +16,7 @@
             aria-label="<?= lang('Common.close') ?>"
             class="self-start p-1 text-2xl rounded-full focus:ring-accent"><?= icon('close') ?></button>
         </div>
-        <div class="flex flex-col items-start p-4 space-y-4">
+        <div class="flex flex-col items-start p-4 space-y-4 overflow-hidden">
             <?php foreach ($podcast->fundingPlatforms as $fundingPlatform): ?>
                 <?php if ($fundingPlatform->is_visible): ?>
                     <a
@@ -24,13 +24,12 @@
                     title="<?= $fundingPlatform->account_id ?>"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="inline-flex items-center font-semibold text-accent-base hover:text-accent-hover focus:ring-accent">
+                    class="inline-flex items-center w-full font-semibold text-accent-base hover:text-accent-hover focus:ring-accent">
                     <?= icon(
-                $fundingPlatform->type .
-                            '/' .
-                            $fundingPlatform->slug,
-                'mr-2',
-            ) . $fundingPlatform->link_url ?>
+                $fundingPlatform->slug,
+                'mr-2 flex-shrink-0',
+                $fundingPlatform->type
+            ) . '<span class="truncate">' . $fundingPlatform->link_url . '</span>' ?>
                     </a>
                 <?php endif; ?>
             <?php endforeach; ?>
