@@ -87,6 +87,7 @@ class EpisodeCommentController extends BaseController
             '_',
             array_filter([
                 'page',
+                "episode#{$this->episode->id}",
                 "comment#{$this->comment->id}",
                 service('request')
                     ->getLocale(),

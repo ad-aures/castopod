@@ -198,5 +198,10 @@ class PlatformModel extends Model
         // delete localized podcast page cache
         cache()
             ->deleteMatching("page_podcast#{$podcastId}*");
+        // delete post and episode comments pages cache
+        cache()
+            ->deleteMatching('page_post*');
+        cache()
+            ->deleteMatching('page_episode#*');
     }
 }

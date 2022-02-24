@@ -122,6 +122,12 @@ class EpisodeCommentModel extends UuidModel
 
         $this->db->transComplete();
 
+        // delete podcast and episode pages cache
+        cache()
+            ->deleteMatching('page_podcast#' . $comment->episode->podcast_id . '*');
+        cache()
+            ->deleteMatching('page_episode#' . $comment->episode_id . '*');
+
         return $newCommentId;
     }
 
