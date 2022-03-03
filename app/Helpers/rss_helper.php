@@ -101,11 +101,73 @@ if (! function_exists('get_rss_feed')) {
             }
         }
 
+        $castopodSocialElement = $channel->addChild('social', null, $podcastNamespace);
+        $castopodSocialElement->addAttribute('priority', '1');
+        $castopodSocialElement->addAttribute('platform', 'castopod');
+        $castopodSocialElement->addAttribute('protocol', 'activitypub');
+        $castopodSocialElement->addAttribute('accountId', "@{$podcast->actor->username}@{$podcast->actor->domain}");
+        $castopodSocialElement->addAttribute('accountUrl', $podcast->link);
+
         foreach ($podcast->social_platforms as $socialPlatform) {
-            $socialPlatformElement = $channel->addChild('social', $socialPlatform->account_id, $podcastNamespace,);
-            $socialPlatformElement->addAttribute('platform', $socialPlatform->slug);
+            $socialElement = $channel->addChild('social', null, $podcastNamespace,);
+            $socialElement->addAttribute('priority', '2');
+            $socialElement->addAttribute('platform', $socialPlatform->slug);
+
+            // TODO: get activitypub info somewhere else
+            if (in_array(
+                $socialPlatform->slug,
+                ['mastodon', 'peertube', 'funkwhale', 'misskey', 'mobilizon', 'pixelfed', 'plume', 'writefreely'],
+                true
+            )) {
+                $socialElement->addAttribute('protocol', 'activitypub');
+            } else {
+                $socialElement->addAttribute('protocol', $socialPlatform->slug);
+            }
+
+            if ($socialPlatform->account_id !== null) {
+                $socialElement->addAttribute('accountId', esc($socialPlatform->account_id));
+            }
             if ($socialPlatform->link_url !== null) {
-                $socialPlatformElement->addAttribute('url', htmlspecialchars($socialPlatform->link_url));
+                $socialElement->addAttribute('accountUrl', esc($socialPlatform->link_url));
+            }
+
+            if ($socialPlatform->slug === 'mastodon') {
+                $socialSignUpelement = $socialElement->addChild('socialSignUp', null, $podcastNamespace);
+                $socialSignUpelement->addAttribute('priority', '1');
+                $socialSignUpelement->addAttribute(
+                    'homeUrl',
+                    parse_url($socialPlatform->link_url, PHP_URL_SCHEME) . '://' . parse_url(
+                        $socialPlatform->link_url,
+                        PHP_URL_HOST
+                    ) . '/public'
+                );
+                $socialSignUpelement->addAttribute(
+                    'signUpUrl',
+                    parse_url($socialPlatform->link_url, PHP_URL_SCHEME) . '://' . parse_url(
+                        $socialPlatform->link_url,
+                        PHP_URL_HOST
+                    ) . '/auth/sign_up'
+                );
+                $castopodSocialSignUpelement = $castopodSocialElement->addChild(
+                    'socialSignUp',
+                    null,
+                    $podcastNamespace
+                );
+                $castopodSocialSignUpelement->addAttribute('priority', '1');
+                $castopodSocialSignUpelement->addAttribute(
+                    'homeUrl',
+                    parse_url($socialPlatform->link_url, PHP_URL_SCHEME) . '://' . parse_url(
+                        $socialPlatform->link_url,
+                        PHP_URL_HOST
+                    ) . '/public'
+                );
+                $castopodSocialSignUpelement->addAttribute(
+                    'signUpUrl',
+                    parse_url($socialPlatform->link_url, PHP_URL_SCHEME) . '://' . parse_url(
+                        $socialPlatform->link_url,
+                        PHP_URL_HOST
+                    ) . '/auth/sign_up'
+                );
             }
         }
 
@@ -250,6 +312,24 @@ if (! function_exists('get_rss_feed')) {
             $comments = $item->addChild('comments', null, $podcastNamespace);
             $comments->addAttribute('uri', url_to('episode-comments', $podcast->handle, $episode->slug));
             $comments->addAttribute('contentType', 'application/podcast-activity+json');
+
+            if ($episode->getPosts()) {
+                $socialInteractUrl = $episode->getPosts()[0]
+                    ->uri;
+                $socialInteractElement = $item->addChild('socialInteract', $socialInteractUrl, $podcastNamespace);
+                $socialInteractElement->addAttribute('priority', '1');
+                $socialInteractElement->addAttribute('platform', 'castopod');
+                $socialInteractElement->addAttribute('protocol', 'activitypub');
+                $socialInteractElement->addAttribute(
+                    'accountId',
+                    "@{$podcast->actor->username}@{$podcast->actor->domain}"
+                );
+                $socialInteractElement->addAttribute(
+                    'pubDate',
+                    $episode->getPosts()[0]
+                        ->published_at->format(DateTime::ISO8601)
+                );
+            }
 
             if ($episode->transcript !== null) {
                 $transcriptElement = $item->addChild('transcript', null, $podcastNamespace);
