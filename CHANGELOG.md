@@ -1,3 +1,36 @@
+# [1.0.0-beta.9](https://code.castopod.org/adaures/castopod/compare/v1.0.0-beta.8...v1.0.0-beta.9) (2022-03-04)
+
+### Bug Fixes
+
+- **cache:** delete posts and comments pages cache when updating platform links
+  ([f7c3e5b](https://code.castopod.org/adaures/castopod/commit/f7c3e5bf4ad43389bf8d58d2c4aaf16b81cbce00)),
+  closes [#169](https://code.castopod.org/adaures/castopod/issues/169)
+- escape characters for `min` in format_duration_symbol
+  ([3b6722a](https://code.castopod.org/adaures/castopod/commit/3b6722a42b9e4330e5235d4ceed41c777159f4dc))
+- **security:** add csrf filter + prevent xss attacks by escaping user input
+  ([cd2e1e1](https://code.castopod.org/adaures/castopod/commit/cd2e1e1dc37c53d32d00971c451c4800b8fd6107))
+- update ivoox podcasting icon
+  ([f2b69a4](https://code.castopod.org/adaures/castopod/commit/f2b69a47339c887f57883ec612f3d200e512ac1c))
+- **video-clips:** update condition to check if ffmpeg is installed
+  ([b57f0b6](https://code.castopod.org/adaures/castopod/commit/b57f0b6eb65dccf22cb4d55f93d18ca36857d7fc)),
+  closes [#163](https://code.castopod.org/adaures/castopod/issues/163)
+
+### Features
+
+- **i18n:** add Polish translation
+  ([2d83b44](https://code.castopod.org/adaures/castopod/commit/2d83b44add9e4e00766a1f326377ed892f48ad73))
+- **icons:** add default icons for podcasting, social and funding platforms +
+  remove complex icons
+  ([5bcdfeb](https://code.castopod.org/adaures/castopod/commit/5bcdfebe6489b5d6b90f3c828b014ec4e9a7e7e1)),
+  closes [#166](https://code.castopod.org/adaures/castopod/issues/166)
+  [#167](https://code.castopod.org/adaures/castopod/issues/167)
+  [#170](https://code.castopod.org/adaures/castopod/issues/170)
+- make episode description more visible on episode pages
+  ([90533be](https://code.castopod.org/adaures/castopod/commit/90533be0298249e5527870c01329fce5f94ec2dc)),
+  closes [#171](https://code.castopod.org/adaures/castopod/issues/171)
+- **podcasting 2.0:** update podcast:social tag to adhere to latest spec
+  ([a597cf4](https://code.castopod.org/adaures/castopod/commit/a597cf4ecfa6807a3413177d99c816056a7e7c45))
+
 # [1.0.0-beta.8](https://code.castopod.org/adaures/castopod/compare/v1.0.0-beta.7...v1.0.0-beta.8) (2022-02-10)
 
 ### Features
