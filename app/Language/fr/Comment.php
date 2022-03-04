@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 return [
     'form' => [
-        'episode_message_placeholder' => 'Saisissez un commentaire...',
+        'episode_message_placeholder' => 'Saisissez un commentaire…',
         'reply_to_placeholder' => 'Répondre à @{actorUsername}',
         'submit' => 'Envoyer !',
         'submit_reply' => 'Répondre',

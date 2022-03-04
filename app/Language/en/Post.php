@@ -14,8 +14,8 @@ return [
     'actor_shared' => '{actor} shared',
     'reply_to' => 'Reply to @{actorUsername}',
     'form' => [
-        'message_placeholder' => 'Write a message...',
-        'episode_message_placeholder' => 'Write a message for the episode...',
+        'message_placeholder' => 'Write a message…',
+        'episode_message_placeholder' => 'Write a message for the episode…',
         'episode_url_placeholder' => 'Episode URL',
         'reply_to_placeholder' => 'Reply to @{actorUsername}',
         'submit' => 'Send',

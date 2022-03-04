@@ -33,7 +33,7 @@ return [
         ],
         'multiSelect' => [
             'selectText' => 'Cliquez pour selectionner',
-            'loadingText' => 'Chargement...',
+            'loadingText' => 'Chargement…',
             'noResultsText' => 'Aucun résultat trouvé',
             'noChoicesText' => 'Aucune sélection possible',
             'maxItemText' => 'Impossible de rajouter un élément',

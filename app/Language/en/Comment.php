@@ -12,7 +12,7 @@ return [
     'title' => "{actorDisplayName}'s comment for {episodeTitle}",
     'back_to_comments' => 'Back to comments',
     'form' => [
-        'episode_message_placeholder' => 'Write a comment...',
+        'episode_message_placeholder' => 'Write a comment…',
         'reply_to_placeholder' => 'Reply to @{actorUsername}',
         'submit' => 'Send',
         'submit_reply' => 'Reply',
