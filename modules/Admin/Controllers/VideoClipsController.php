@@ -119,9 +119,9 @@ class VideoClipsController extends BaseController
         ]);
 
         // First, check that requirements to create a video clip are met
-        $ffmpeg = trim(shell_exec('type -P ffmpeg'));
+        $ffmpeg = shell_exec('which ffmpeg');
         $checks = [
-            'ffmpeg' => ! empty($ffmpeg),
+            'ffmpeg' => $ffmpeg !== null,
             'gd' => extension_loaded('gd'),
             'freetype' => extension_loaded('gd') && gd_info()['FreeType Support'],
             'transcript' => $this->episode->transcript !== null,
