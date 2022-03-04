@@ -197,7 +197,7 @@ class VideoClipsController extends BaseController
     {
         $videoClip = (new ClipModel())->getVideoClipById((int) $videoClipId);
 
-        if ($videoClip === null) {
+        if (! $videoClip instanceof VideoClip) {
             throw PageNotFoundException::forPageNotFound();
         }
 
@@ -214,7 +214,7 @@ class VideoClipsController extends BaseController
     {
         $videoClip = (new ClipModel())->getVideoClipById((int) $videoClipId);
 
-        if ($videoClip === null) {
+        if (! $videoClip instanceof VideoClip) {
             throw PageNotFoundException::forPageNotFound();
         }
 

@@ -58,6 +58,7 @@ class AnalyticsWebsiteByRefererModel extends Model
             cache()
                 ->save("{$podcastId}_analytics_website_by_referer", $found, 600);
         }
+
         return $found;
     }
 
@@ -84,6 +85,7 @@ class AnalyticsWebsiteByRefererModel extends Model
             cache()
                 ->save("{$podcastId}_analytics_website_by_domain_weekly", $found, 600);
         }
+
         return $found;
     }
 
@@ -110,6 +112,7 @@ class AnalyticsWebsiteByRefererModel extends Model
             cache()
                 ->save("{$podcastId}_analytics_website_by_domain_yearly", $found, 600);
         }
+
         return $found;
     }
 }

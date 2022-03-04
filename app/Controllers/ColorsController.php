@@ -33,6 +33,7 @@ class ColorsController extends Controller
                 foreach ($color as $variable => $value) {
                     $colorsCssBody .= "--color-{$variable}: {$value[0]} {$value[1]}% {$value[2]}%;";
                 }
+
                 $colorsCssBody .= '}';
             }
 

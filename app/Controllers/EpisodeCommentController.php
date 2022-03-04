@@ -109,6 +109,7 @@ class EpisodeCommentController extends BaseController
                 helper('form');
                 return view('episode/comment', $data);
             }
+
             return view('episode/comment', $data, [
                 'cache' => DECADE,
                 'cache_name' => $cacheName,

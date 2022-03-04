@@ -39,10 +39,11 @@ class PodcastActor extends ActorObject
         if ($podcast->category->parent_id !== null) {
             $category .= $podcast->category->parent->apple_category . ' › ';
         }
+
         $category .= $podcast->category->apple_category;
 
         $this->category = $category;
 
-        $this->episodes = url_to('podcast-episodes', $podcast->handle);
+        $this->episodes = url_to('podcast-episodes', esc($podcast->handle));
     }
 }

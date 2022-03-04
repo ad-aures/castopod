@@ -134,6 +134,7 @@ class EpisodeController extends BaseController
 
                 return view('episode/activity', $data);
             }
+
             // The page cache is set to a decade so it is deleted manually upon podcast update
             return view('episode/activity', $data, [
                 'cache' => $secondsToNextUnpublishedEpisode

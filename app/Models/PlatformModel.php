@@ -60,6 +60,7 @@ class PlatformModel extends Model
             cache()
                 ->save('platforms', $found, DECADE);
         }
+
         return $found;
     }
 
@@ -72,6 +73,7 @@ class PlatformModel extends Model
             cache()
                 ->save($cacheName, $found, DECADE);
         }
+
         return $found;
     }
 

@@ -87,7 +87,6 @@ class PostController extends FediversePostController
 
         if (! ($cachedView = cache($cacheName))) {
             $data = [
-                // @phpstan-ignore-next-line
                 'metatags' => get_post_metatags($this->post),
                 'post' => $this->post,
                 'podcast' => $this->podcast,
@@ -98,6 +97,7 @@ class PostController extends FediversePostController
                 helper('form');
                 return view('post/post', $data);
             }
+
             return view('post/post', $data, [
                 'cache' => DECADE,
                 'cache_name' => $cacheName,
@@ -111,7 +111,7 @@ class PostController extends FediversePostController
     {
         $rules = [
             'message' => 'required|max_length[500]',
-            'episode_url' => 'valid_url|permit_empty',
+            'episode_url' => 'valid_url_strict|permit_empty',
         ];
 
         if (! $this->validate($rules)) {
@@ -246,7 +246,6 @@ class PostController extends FediversePostController
 
         if (! ($cachedView = cache($cacheName))) {
             $data = [
-                // @phpstan-ignore-next-line
                 'metatags' => get_remote_actions_metatags($this->post, $action),
                 'podcast' => $this->podcast,
                 'actor' => $this->actor,

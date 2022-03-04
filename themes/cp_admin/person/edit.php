@@ -23,7 +23,7 @@
 
 <Forms.Field
     name="full_name"
-    value="<?= $person->full_name ?>"
+    value="<?= esc($person->full_name) ?>"
     label="<?= lang('Person.form.full_name') ?>"
     hint="<?= lang('Person.form.full_name_hint') ?>"
     required="true"
@@ -31,7 +31,7 @@
 
 <Forms.Field
     name="unique_name"
-    value="<?= $person->unique_name ?>"
+    value="<?= esc($person->unique_name) ?>"
     label="<?= lang('Person.form.unique_name') ?>"
     hint="<?= lang('Person.form.unique_name_hint') ?>"
     required="true"
@@ -41,7 +41,7 @@
     name="information_url"
     label="<?= lang('Person.form.information_url') ?>"
     hint="<?= lang('Person.form.information_url_hint') ?>"
-    value="<?= $person->information_url ?>" />
+    value="<?= esc($person->information_url) ?>" />
 
 <Button variant="primary" class="self-end" type="submit"><?= lang('Person.form.submit_edit') ?></Button>
 

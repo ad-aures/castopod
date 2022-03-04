@@ -17,8 +17,6 @@ use GdImage;
 /**
  * TODO: refactor this by splitting process modules into different classes (image generation, subtitles clip, video
  * generation)
- *
- * @phpstan-ignore-next-line
  */
 class VideoClipper
 {
@@ -299,7 +297,7 @@ class VideoClipper
     {
         $background = $this->generateBackground($this->dimensions['width'], $this->dimensions['height']);
 
-        if ($background === null) {
+        if (! $background instanceof \GdImage) {
             return false;
         }
 
@@ -384,6 +382,7 @@ class VideoClipper
                 $this->dimensions['episodeNumbering']['paddingY'],
             );
         }
+
         $this->addParagraphToImage(
             $background,
             $this->dimensions['episodeTitle']['x'],
@@ -409,6 +408,7 @@ class VideoClipper
         if (! $cleanedQuotes) {
             return false;
         }
+
         imagefilter($cleanedQuotes, IMG_FILTER_CONTRAST, 255);
         imagefilter($cleanedQuotes, IMG_FILTER_COLORIZE, ...$this->colors['quotes']);
 
@@ -526,6 +526,7 @@ class VideoClipper
         if ($src === false) {
             return false;
         }
+
         imagecopy($src, $source, 0, 0, 0, 0, $corner, $corner);
         imagecopy($src, $source, $corner, 0, $ws - $corner, 0, $corner, $corner);
         imagecopy($src, $source, $corner, $corner, $ws - $corner, $hs - $corner, $corner, $corner);
@@ -577,6 +578,7 @@ class VideoClipper
         if ($dest === false) {
             return false;
         }
+
         imagealphablending($dest, false);
         imagefilledrectangle($dest, 0, 0, $s, $s, $alphacolor);
         imagecopyresampled($dest, $img, 0, 0, 0, 0, $s, $s, $ns, $ns);
@@ -652,7 +654,7 @@ class VideoClipper
      *
      * @return array<string, mixed>|false
      */
-    private function calculateTextBox(int $fontSize, int $fontAngle, string $fontFile, string $text): array | false
+    private function calculateTextBox(int $fontSize, int $fontAngle, string $fontFile, string $text): array|bool
     {
         /************
         simple function that calculates the *exact* bounding box (single pixel precision).
@@ -664,6 +666,7 @@ class VideoClipper
         if (! $bbox) {
             return false;
         }
+
         $minX = min([$bbox[0], $bbox[2], $bbox[4], $bbox[6]]);
         $maxX = max([$bbox[0], $bbox[2], $bbox[4], $bbox[6]]);
         $minY = min([$bbox[1], $bbox[3], $bbox[5], $bbox[7]]);
@@ -755,7 +758,7 @@ class VideoClipper
         int $lineWidth,
         int $numberOfLines,
         int $paragraphIndent = 0,
-    ): array | false {
+    ): array|bool {
         // check length of text
         $bbox = $this->calculateTextBox($fontsize, 0, $fontPath, $text);
         if (! $bbox) {
@@ -783,6 +786,7 @@ class VideoClipper
             if (! $wordBox) {
                 return false;
             }
+
             $wordWidth = $wordBox['width'];
 
             if (($wordWidth + $length) > $lineWidth) {
@@ -791,6 +795,7 @@ class VideoClipper
                     $lines[$numberOfLines - 1] .= '…';
                     break;
                 }
+
                 $lines[$lineNumber] = '';
                 $length = 0;
 

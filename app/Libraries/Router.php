@@ -27,7 +27,6 @@ class Router extends CodeIgniterRouter
      * @param string $uri The URI path to compare against the routes
      *
      * @return boolean Whether the route was matched or not.
-     * @throws RedirectException
      */
     protected function checkRoutes(string $uri): bool
     {
@@ -75,6 +74,7 @@ class Router extends CodeIgniterRouter
                         $this->collection->getRedirectCode($key),
                     );
                 }
+
                 // Store our locale so CodeIgniter object can
                 // assign it to the Request.
                 if (isset($localeSegment)) {
@@ -135,6 +135,7 @@ class Router extends CodeIgniterRouter
                                     ][$available]['namespace'],
                                 );
                             }
+
                             $val =
                                 $this->collection->getDefaultNamespace() .
                                 $this->directory .

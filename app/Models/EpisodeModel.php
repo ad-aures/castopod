@@ -115,8 +115,8 @@ class EpisodeModel extends Model
         'number' => 'is_natural_no_zero|permit_empty',
         'season_number' => 'is_natural_no_zero|permit_empty',
         'type' => 'required',
-        'transcript_remote_url' => 'valid_url|permit_empty',
-        'chapters_remote_url' => 'valid_url|permit_empty',
+        'transcript_remote_url' => 'valid_url_strict|permit_empty',
+        'chapters_remote_url' => 'valid_url_strict|permit_empty',
         'published_at' => 'valid_date|permit_empty',
         'created_by' => 'required',
         'updated_by' => 'required',
@@ -215,6 +215,7 @@ class EpisodeModel extends Model
                 $where['YEAR(published_at)'] = $year;
                 $where['season_number'] = null;
             }
+
             if ($season) {
                 $where['season_number'] = $season;
             }

@@ -20,7 +20,7 @@
         [
             'header' => lang('Contributor.list.username'),
             'cell' => function ($contributor) {
-                return $contributor->username;
+                return esc($contributor->username);
             },
         ],
         [

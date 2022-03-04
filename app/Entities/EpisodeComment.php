@@ -102,7 +102,6 @@ class EpisodeComment extends UuidEntity
                 ->getActorById($this->actor_id);
         }
 
-        // @phpstan-ignore-next-line
         return $this->actor;
     }
 

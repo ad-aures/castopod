@@ -6,6 +6,7 @@ use Symplify\CodingStandard\Fixer\Naming\StandardizeHereNowDocKeywordFixer;
 use Symplify\EasyCodingStandard\ValueObject\Option;
 use Symplify\EasyCodingStandard\ValueObject\Set\SetList;
 use Symplify\CodingStandard\Fixer\LineLength\LineLengthFixer;
+use PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\AssignmentInConditionSniff;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters = $containerConfigurator->parameters();
@@ -19,7 +20,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         __DIR__ . '/public',
     ]);
 
-    $parameters->set(Option::SKIP, [
+    $parameters->set(Option::SKIP, [        
         // skip specific generated files
         __DIR__ . '/modules/Admin/Language/*/PersonsTaxonomy.php',
 
@@ -39,7 +40,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             __DIR__ . '/app/Views/*',
             __DIR__ . '/modules/**/Views/*',
             __DIR__ . '/themes/*',
-        ]
+        ],
+
+        AssignmentInConditionSniff::class,
     ]);
 
     $containerConfigurator->import(SetList::PSR_12);

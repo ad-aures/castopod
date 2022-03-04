@@ -12,7 +12,6 @@ namespace Modules\Fediverse\Models;
 
 use CodeIgniter\Database\BaseResult;
 use CodeIgniter\Events\Events;
-use CodeIgniter\Model;
 use Modules\Fediverse\Entities\BlockedDomain;
 
 class BlockedDomainModel extends BaseModel
@@ -64,6 +63,7 @@ class BlockedDomainModel extends BaseModel
             cache()
                 ->save($cacheName, $found, DECADE);
         }
+
         return $found;
     }
 

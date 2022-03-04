@@ -59,6 +59,7 @@ class AnalyticsWebsiteByBrowserModel extends Model
             cache()
                 ->save("{$podcastId}_analytics_website_by_browser", $found, 600);
         }
+
         return $found;
     }
 }

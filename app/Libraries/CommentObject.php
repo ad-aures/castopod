@@ -37,7 +37,7 @@ class CommentObject extends ObjectType
 
         $this->replies = url_to(
             'episode-comment-replies',
-            $comment->actor->username,
+            esc($comment->actor->username),
             $comment->episode->slug,
             $comment->id
         );

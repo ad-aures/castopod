@@ -39,17 +39,18 @@ class Filters extends BaseConfig
     /**
      * List of filter aliases that are always applied before and after every request.
      *
-     * @var array<string, string[]>
+     * @var array<string, mixed>
      */
     public array $globals = [
         'before' => [
             // 'honeypot',
-            // 'csrf',
+            'csrf' => [
+                'except' => ['@[a-zA-Z0-9\_]{1,32}/inbox'],
+            ],
             // 'invalidchars',
         ],
         'after' => [
             'toolbar',
-            // 'honeypot',
             // 'honeypot',
             // 'secureheaders',
         ],
@@ -79,7 +80,7 @@ class Filters extends BaseConfig
 
         $this->filters = [
             'login' => [
-                'before' => [config('Admin') ->gateway . '*', config('Analytics') ->gateway . '*'],
+                'before' => [config('Admin')->gateway . '*', config('Analytics')->gateway . '*'],
             ],
         ];
     }

@@ -63,6 +63,7 @@ class ContributorController extends BaseController
     public function view(): string
     {
         $data = [
+            'podcast' => $this->podcast,
             'contributor' => (new UserModel())->getPodcastContributor($this->user->id, $this->podcast->id),
         ];
 

@@ -356,6 +356,7 @@ class InstallController extends Controller
                         $replaced = true;
                         return $keyVal;
                     }
+
                     return $line;
                 },
                 $envData

@@ -228,10 +228,10 @@ class ComponentRenderer
         if (! file_exists($filePath)) {
             return null;
         }
+
         $className = service('locator')
             ->getClassname($filePath);
 
-        /** @phpstan-ignore-next-line */
         if (! class_exists($className)) {
             return null;
         }
@@ -247,7 +247,6 @@ class ComponentRenderer
     private function renderView(string $view, array $data): string
     {
         return (function (string $view, $data): string {
-            /** @phpstan-ignore-next-line */
             extract($data);
             ob_start();
             eval('?>' . file_get_contents($view));

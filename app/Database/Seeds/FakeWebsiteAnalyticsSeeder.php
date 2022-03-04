@@ -248,6 +248,7 @@ class FakeWebsiteAnalyticsSeeder extends Seeder
                         ];
                     }
                 }
+
                 $this->db
                     ->table('analytics_website_by_browser')
                     ->ignore(true)

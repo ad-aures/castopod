@@ -11,7 +11,7 @@
     <?= lang('User.form.username') ?>
     </dt>
     <dd class="mt-1 text-sm leading-5">
-    <?= $user->username ?>
+    <?= esc($user->username) ?>
     </dd>
 </div>
 <div class="px-4 py-5">

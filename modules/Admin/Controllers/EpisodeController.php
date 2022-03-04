@@ -294,6 +294,7 @@ class EpisodeController extends BaseController
             ) {
                 (new MediaModel())->deleteMedia($this->episode->transcript);
             }
+
             $this->episode->transcript_remote_url = $transcriptRemoteUrl === '' ? null : $transcriptRemoteUrl;
         }
 
@@ -311,6 +312,7 @@ class EpisodeController extends BaseController
             ) {
                 (new MediaModel())->deleteMedia($this->episode->chapters);
             }
+
             $this->episode->chapters_remote_url = $chaptersRemoteUrl === '' ? null : $chaptersRemoteUrl;
         }
 

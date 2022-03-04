@@ -286,7 +286,7 @@ class PostModel extends BaseUuidModel
         if ($registerActivity) {
             // set post id and uri to construct NoteObject
             $post->id = $newPostId;
-            $post->uri = url_to('post', $post->actor->username, $newPostId);
+            $post->uri = url_to('post', esc($post->actor->username), $newPostId);
 
             $createActivity = new CreateActivity();
             $noteObjectClass = config('Fediverse')
@@ -306,7 +306,7 @@ class PostModel extends BaseUuidModel
                     'queued',
                 );
 
-            $createActivity->set('id', url_to('activity', $post->actor->username, $activityId));
+            $createActivity->set('id', url_to('activity', esc($post->actor->username), $activityId));
 
             model('ActivityModel', false)
                 ->update($activityId, [
@@ -419,7 +419,7 @@ class PostModel extends BaseUuidModel
                     'queued',
                 );
 
-            $deleteActivity->set('id', url_to('activity', $post->actor->username, $activityId));
+            $deleteActivity->set('id', url_to('activity', esc($post->actor->username), $activityId));
 
             model('ActivityModel', false)
                 ->update($activityId, [
@@ -506,7 +506,7 @@ class PostModel extends BaseUuidModel
                     'queued',
                 );
 
-            $announceActivity->set('id', url_to('activity', $post->actor->username, $activityId));
+            $announceActivity->set('id', url_to('activity', esc($post->actor->username), $activityId));
 
             model('ActivityModel', false)
                 ->update($activityId, [
@@ -721,7 +721,7 @@ class PostModel extends BaseUuidModel
             $actor = model('ActorModel', false)
                 ->getActorById((int) $data['data']['actor_id']);
 
-            $data['data']['uri'] = url_to('post', $actor->username, $uuid4->toString());
+            $data['data']['uri'] = url_to('post', esc($actor->username), $uuid4->toString());
         }
 
         return $data;

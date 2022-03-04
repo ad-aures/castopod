@@ -144,7 +144,7 @@ class SoundbiteController extends BaseController
     {
         $soundbite = (new ClipModel())->getSoundbiteById((int) $soundbiteId);
 
-        if ($soundbite === null) {
+        if (! $soundbite instanceof Soundbite) {
             throw PageNotFoundException::forPageNotFound();
         }
 

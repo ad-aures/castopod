@@ -73,7 +73,6 @@ class ClipModel extends Model
         ConnectionInterface &$db = null,
         ValidationInterface $validation = null
     ) {
-        // @phpstan-ignore-next-line
         switch ($type) {
             case 'audio':
                 $this->returnType = Soundbite::class;
@@ -226,6 +225,7 @@ class ClipModel extends Model
             cache()
                 ->save($cacheName, $found, DECADE);
         }
+
         return $found;
     }
 

@@ -179,6 +179,7 @@ class SettingsController extends BaseController
             (new EpisodeCommentModel())->resetLikesCount();
             (new EpisodeCommentModel())->resetRepliesCount();
         }
+
         helper('media');
 
         if ($this->request->getPost('rewrite_media') === 'yes') {

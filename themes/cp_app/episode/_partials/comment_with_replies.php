@@ -13,16 +13,18 @@ if ($comment->in_reply_to_id): ?>
 
 <?php if (can_user_interact()): ?>
 <form action="<?= route_to('comment-attempt-reply', $podcast->id, $episode->id, $comment->id) ?>" method="POST" class="flex px-6 pt-8 pb-4 gap-x-2 bg-base">
+    <?= csrf_field() ?>
+
     <img src="<?= interact_as_actor()
-    ->avatar_image_url ?>" alt="<?= interact_as_actor()
-    ->display_name ?>" class="w-10 h-10 rounded-full aspect-square" loading="lazy" />
+        ->avatar_image_url ?>" alt="<?= esc(interact_as_actor()
+        ->display_name) ?>" class="w-10 h-10 rounded-full aspect-square" loading="lazy" />
     <div class="flex flex-col flex-1">
         <Forms.Textarea
             name="message"
             required="true"
             class="w-full mb-4"
             placeholder="<?= lang('Comment.form.reply_to_placeholder', [
-                'actorUsername' => $comment->actor->username,
+                'actorUsername' => esc($comment->actor->username),
             ]) ?>"
             rows="1" />
         <Button variant="primary" size="small" type="submit" name="action" value="reply" class="self-end" iconRight="send-plane"><?= lang('Comment.form.submit_reply') ?></Button>

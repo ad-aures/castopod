@@ -55,9 +55,9 @@
                 return '<div class="flex">' .
                     '<a href="' .
                     route_to('person-view', $person->id) .
-                    "\"><img src=\"{$person->avatar->thumbnail_url}\" alt=\"{$person->full_name}\" class=\"object-cover aspect-square w-16 h-16 rounded-full\" loading=\"lazy\" /></a>" .
+                    '"><img src="' . $person->avatar->thumbnail_url . '" alt="' . esc($person->full_name) . '" class="object-cover w-16 h-16 rounded-full aspect-square" loading="lazy" /></a>' .
                     '<div class="flex flex-col ml-3">' .
-                    $person->full_name .
+                    esc($person->full_name) .
                     implode(
                         '',
                         array_map(function ($role) {
@@ -74,8 +74,8 @@
                     ) .
                     ($person->information_url === null
                         ? ''
-                        : "<a href=\"{$person->information_url}\" target=\"_blank\" rel=\"noreferrer noopener\" class=\"font-semibold text-sm text-accent-base hover:text-accent-hover\">" .
-                            $person->information_url .
+                        : '<a href="' . esc($person->information_url) . '" target="_blank" rel="noreferrer noopener" class="text-sm font-semibold text-accent-base hover:text-accent-hover">' .
+                            esc($person->information_url) .
                             '</a>') .
                     '</div></div>';
             },

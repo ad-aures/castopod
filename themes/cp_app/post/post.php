@@ -2,13 +2,13 @@
 
 <?= $this->section('content') ?>
 <nav class="py-2">
-    <a href="<?= route_to('podcast-activity', $podcast->handle) ?>"
+    <a href="<?= route_to('podcast-activity', esc($podcast->handle)) ?>"
     class="inline-flex items-center px-4 py-2 text-sm focus:ring-accent"><?= icon(
     'arrow-left',
     'mr-2 text-lg',
 ) .
         lang('Post.back_to_actor_posts', [
-            'actor' => $post->actor->display_name,
+            'actor' => esc($post->actor->display_name),
         ]) ?></a>
 </nav>
 <div class="pb-12">

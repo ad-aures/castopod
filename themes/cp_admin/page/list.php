@@ -21,16 +21,16 @@
             'header' => lang('Page.page'),
             'cell' => function ($page) {
                 return '<div class="flex flex-col">' .
-                    $page->title .
+                    esc($page->title) .
                     '<span class="text-sm text-skin-muted">/' .
-                    $page->slug .
+                    esc($page->slug) .
                     '</span></div>';
             },
         ],
         [
             'header' => lang('Common.actions'),
             'cell' => function ($page) {
-                return '<Button uri="' . route_to('page', $page->slug) . '" variant="secondary" size="small">' . lang('Page.go_to_page') . '</Button>' .
+                return '<Button uri="' . route_to('page', esc($page->slug)) . '" variant="secondary" size="small">' . lang('Page.go_to_page') . '</Button>' .
                 '<Button uri="' . route_to('page-edit', $page->id) . '" variant="info" size="small">' . lang('Page.edit') . '</Button>' .
                 '<Button uri="' . route_to('page-delete', $page->id) . '" variant="danger" size="small">' . lang('Page.delete') . '</Button>';
             },

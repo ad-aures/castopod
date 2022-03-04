@@ -5,13 +5,13 @@
             <a href="<?= $comment->actor->uri ?>" class="flex items-baseline hover:underline" <?= $comment->actor->is_local
                 ? ''
                 : 'target="_blank" rel="noopener noreferrer"' ?>>
-                <span class="mr-2 font-semibold truncate"><?= $comment->actor
-                    ->display_name ?></span>
-                <span class="text-sm truncate text-skin-muted">@<?= $comment->actor
-                    ->username .
+                <span class="mr-2 font-semibold truncate"><?= esc($comment->actor
+                    ->display_name) ?></span>
+                <span class="text-sm truncate text-skin-muted">@<?= esc($comment->actor
+                    ->username) .
                     ($comment->actor->is_local
                         ? ''
-                        : '@' . $comment->actor->domain) ?></span>
+                        : '@' . esc($comment->actor->domain)) ?></span>
                 <?= relative_time($comment->created_at, 'text-xs text-skin-muted ml-auto') ?>
             </a>
         </header>
@@ -21,7 +21,9 @@
         <?php else: ?>
             <footer>
                 <?php if (can_user_interact()): ?>
-                    <form action="<?= route_to('episode-comment-attempt-like', interact_as_actor()->username, $episode->slug, $comment->id) ?>" method="POST" class="flex items-center gap-x-4">
+                    <form action="<?= route_to('episode-comment-attempt-like', esc(interact_as_actor()->username), esc($episode->slug), $comment->id) ?>" method="POST" class="flex items-center gap-x-4">
+                    <?= csrf_field() ?>
+
                     <button type="submit" name="action" class="inline-flex items-center hover:underline group" title="<?= lang(
                             'Comment.likes',
                             [

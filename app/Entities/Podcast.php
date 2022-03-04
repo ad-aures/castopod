@@ -202,7 +202,6 @@ class Podcast extends Entity
                 ->getActorById($this->actor_id);
         }
 
-        // @phpstan-ignore-next-line
         return $this->actor;
     }
 
@@ -517,11 +516,12 @@ class Podcast extends Entity
     }
 
     /**
-     * @return int[]
+     * @return int[]|string[]
      */
     public function getOtherCategoriesIds(): array
     {
         if ($this->other_categories_ids === null) {
+            // @phpstan-ignore-next-line
             $this->other_categories_ids = array_column($this->getOtherCategories(), 'id');
         }
 
@@ -586,7 +586,7 @@ class Podcast extends Entity
             'elements' => $this->custom_rss,
         ], $xmlNode);
 
-        return str_replace(['<channel>', '</channel>'], '', $xmlNode->asXML());
+        return (string) str_replace(['<channel>', '</channel>'], '', $xmlNode->asXML());
     }
 
     /**

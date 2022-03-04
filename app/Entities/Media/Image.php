@@ -48,7 +48,6 @@ class Image extends BaseMedia
     {
         parent::setFile($file);
 
-        // @phpstan-ignore-next-line
         if ($this->file_mimetype === 'image/jpeg' && $metadata = @exif_read_data(
             media_path($this->file_path),
             null,

@@ -38,13 +38,13 @@ if (! function_exists('write_audio_file_tags')) {
 
         // populate data array
         $TagData = [
-            'title' => [$episode->title],
+            'title' => [esc($episode->title)],
             'artist' => [
                 $episode->podcast->publisher === null
-                    ? $episode->podcast->owner_name
+                    ? esc($episode->podcast->owner_name)
                     : $episode->podcast->publisher,
             ],
-            'album' => [$episode->podcast->title],
+            'album' => [esc($episode->podcast->title)],
             'year' => [$episode->published_at !== null ? $episode->published_at->format('Y') : ''],
             'genre' => ['Podcast'],
             'comment' => [$episode->description],
@@ -52,7 +52,7 @@ if (! function_exists('write_audio_file_tags')) {
             'copyright_message' => [$episode->podcast->copyright],
             'publisher' => [
                 $episode->podcast->publisher === null
-                    ? $episode->podcast->owner_name
+                    ? esc($episode->podcast->owner_name)
                     : $episode->podcast->publisher,
             ],
             'encoded_by' => ['Castopod'],

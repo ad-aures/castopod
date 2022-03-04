@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 return [
     'messages' => [
+        'actorNotFound' => 'L’utilisateur n’a pu être trouvé !',
         'blockActorSuccess' => '{actor} a été bloqué !',
         'unblockActorSuccess' => 'L’utilisateur a été débloqué !',
         'blockDomainSuccess' => '{domain} a été bloqué !',

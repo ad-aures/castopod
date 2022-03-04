@@ -33,6 +33,7 @@ class OrderedCollectionPage extends OrderedCollectionObject
         if ($isFirstPage) {
             $this->first = null;
         }
+
         if ($isLastPage) {
             $this->last = null;
         }

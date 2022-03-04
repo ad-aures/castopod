@@ -37,7 +37,7 @@ class AuthSeeder extends Seeder
      *
      * ``` context => [ [action, description], [action, description], ... ] ```
      *
-     * @var array<string, array<string, string|array>[]>
+     * @var array<string, array<string, string|string[]>[]>
      */
     protected array $permissions = [
         'settings' => [
@@ -302,12 +302,14 @@ class AuthSeeder extends Seeder
                 ->ignore(true)
                 ->insertBatch($dataPermissions);
         }
+
         if ($this->db->table('auth_groups')->countAll() < count($dataGroups)) {
             $this->db
                 ->table('auth_groups')
                 ->ignore(true)
                 ->insertBatch($dataGroups);
         }
+
         if ($this->db->table('auth_groups_permissions')->countAll() < count($dataGroupsPermissions)) {
             $this->db
                 ->table('auth_groups_permissions')

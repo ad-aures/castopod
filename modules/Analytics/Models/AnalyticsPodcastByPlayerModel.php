@@ -62,6 +62,7 @@ class AnalyticsPodcastByPlayerModel extends Model
             cache()
                 ->save("{$podcastId}_analytics_podcasts_by_player_by_app_weekly", $found, 600);
         }
+
         return $found;
     }
 
@@ -90,6 +91,7 @@ class AnalyticsPodcastByPlayerModel extends Model
             cache()
                 ->save("{$podcastId}_analytics_podcasts_by_player_by_app_yearly", $found, 600);
         }
+
         return $found;
     }
 
@@ -119,6 +121,7 @@ class AnalyticsPodcastByPlayerModel extends Model
             cache()
                 ->save("{$podcastId}_analytics_podcasts_by_player_by_os_weekly", $found, 600);
         }
+
         return $found;
     }
 
@@ -147,6 +150,7 @@ class AnalyticsPodcastByPlayerModel extends Model
             cache()
                 ->save("{$podcastId}_analytics_podcasts_by_player_by_device_weekly", $found, 600);
         }
+
         return $found;
     }
 
@@ -175,6 +179,7 @@ class AnalyticsPodcastByPlayerModel extends Model
             cache()
                 ->save("{$podcastId}_analytics_podcasts_by_player_bots", $found, 600);
         }
+
         return $found;
     }
 }

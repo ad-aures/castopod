@@ -69,6 +69,7 @@ class CategoryModel extends Model
                     if ($category->parent !== null) {
                         $result[$category->id] = lang('Podcast.category_options.' . $category->parent->code) . ' › ';
                     }
+
                     $result[$category->id] .= lang('Podcast.category_options.' . $category->code);
                     return $result;
                 },

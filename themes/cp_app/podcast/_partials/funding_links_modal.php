@@ -8,7 +8,7 @@
     <div class="z-10 w-full max-w-xl rounded-lg shadow-2xl bg-elevated">
         <div class="flex justify-between px-4 py-2 border-b border-subtle">
             <h3 class="self-center text-lg"><?= lang('Podcast.funding_links', [
-                'podcastTitle' => $podcast->title,
+                'podcastTitle' => esc($podcast->title),
             ]) ?></h3>
             <button
             data-toggle="funding-links"
@@ -20,16 +20,16 @@
             <?php foreach ($podcast->fundingPlatforms as $fundingPlatform): ?>
                 <?php if ($fundingPlatform->is_visible): ?>
                     <a
-                    href="<?= $fundingPlatform->link_url ?>"
-                    title="<?= $fundingPlatform->account_id ?>"
+                    href="<?= esc($fundingPlatform->link_url) ?>"
+                    title="<?= esc($fundingPlatform->account_id) ?>"
                     target="_blank"
                     rel="noopener noreferrer"
                     class="inline-flex items-center w-full font-semibold text-accent-base hover:text-accent-hover focus:ring-accent">
                     <?= icon(
-                $fundingPlatform->slug,
+                esc($fundingPlatform->slug),
                 'mr-2 flex-shrink-0',
                 $fundingPlatform->type
-            ) . '<span class="truncate">' . $fundingPlatform->link_url . '</span>' ?>
+            ) . '<span class="truncate">' . esc($fundingPlatform->link_url) . '</span>' ?>
                     </a>
                 <?php endif; ?>
             <?php endforeach; ?>

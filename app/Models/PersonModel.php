@@ -389,10 +389,12 @@ class PersonModel extends Model
                     ];
                 }
             }
+
             return $this->db->table('episodes_persons')
                 ->ignore(true)
                 ->insertBatch($data);
         }
+
         return 0;
     }
 

@@ -84,6 +84,7 @@ if (! function_exists('data_table')) {
                 foreach ($columns as $column) {
                     $rowData[] = $column['cell']($row, ...$rest);
                 }
+
                 $table->addRow($rowData);
             }
         } else {
@@ -141,7 +142,6 @@ if (! function_exists('publication_button')) {
      */
     function publication_button(int $podcastId, int $episodeId, string $publicationStatus): string
     {
-        /** @phpstan-ignore-next-line */
         switch ($publicationStatus) {
             case 'not_published':
                 $label = lang('Episode.publish');
@@ -243,10 +243,10 @@ if (! function_exists('location_link')) {
 
         return anchor(
             $location->url,
-            icon('map-pin', 'mr-2') . $location->name,
+            icon('map-pin', 'mr-2 flex-shrink-0') . '<span class="truncate">' . esc($location->name) . '</span>',
             [
                 'class' =>
-                    'inline-flex items-baseline hover:underline focus:ring-accent' .
+                    'w-full overflow-hidden inline-flex items-baseline hover:underline focus:ring-accent' .
                     ($class === '' ? '' : " {$class}"),
                 'target' => '_blank',
                 'rel' => 'noreferrer noopener',

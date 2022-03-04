@@ -12,6 +12,8 @@
 <?= $this->section('content') ?>
 
 <form action="<?= route_to('fediverse-attempt-block-actor') ?>" method="POST" class="flex flex-col max-w-md">
+    <?= csrf_field() ?>
+
     <Forms.Field name="handle" label="<?= lang('Fediverse.block_lists_form.handle') ?>" hint="<?= lang('Fediverse.block_lists_form.handle_hint') ?>" required="true" />
     <Button variant="primary" type="submit" class="self-end"><?= lang('Fediverse.block_lists_form.submit') ?></Button>
 </form>
@@ -21,7 +23,7 @@
         [
             'header' => lang('Fediverse.list.actor'),
             'cell' => function ($blockedActor) {
-                return $blockedActor->username;
+                return esc($blockedActor->username);
             },
         ],
         [
@@ -34,7 +36,7 @@
                     $blockedActor->id .
                     '" />' .
                     csrf_field() .
-                    '<Button uri="' . route_to('fediverse-unblock-actor', $blockedActor->username) . '" variant="info" size="small" type="submit">' . lang('Fediverse.list.unblock') . '</Button>' .
+                    '<Button uri="' . route_to('fediverse-unblock-actor', esc($blockedActor->username)) . '" variant="info" size="small" type="submit">' . lang('Fediverse.list.unblock') . '</Button>' .
                     '</form>';
             },
         ],

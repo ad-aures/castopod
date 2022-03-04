@@ -1,9 +1,9 @@
 <footer class="flex justify-around px-6 py-3">
     <?php if (can_user_interact()): ?>
-        <form action="<?= route_to('post-attempt-action', interact_as_actor()->username, $post->id) ?>" method="POST" class="flex justify-around w-full">
+        <form action="<?= route_to('post-attempt-action', esc(interact_as_actor()->username), $post->id) ?>" method="POST" class="flex justify-around w-full">
             <?= csrf_field() ?>
             <?= anchor(
-    route_to('post', $podcast->handle, $post->id),
+    route_to('post', esc($podcast->handle), $post->id),
     icon('chat', 'text-2xl mr-1 opacity-40') . $post->replies_count,
     [
         'class' => 'inline-flex items-center hover:underline',
@@ -37,7 +37,7 @@
             '-more-dropdown-menu' ?>" class="flex flex-col py-2 text-sm rounded-lg shadow border-3 border-subtle bg-elevated" aria-labelledby="<?= $post->id .
         '-more-dropdown' ?>" data-dropdown="menu" data-dropdown-placement="bottom">
             <?= anchor(
-            route_to('post', $podcast->handle, $post->id),
+            route_to('post', esc($podcast->handle), $post->id),
             lang('Post.expand'),
             [
                 'class' => 'px-4 py-1 hover:bg-highlight',
@@ -45,29 +45,29 @@
         ) ?>
             <form action="<?= route_to(
             'post-attempt-block-actor',
-            interact_as_actor()
-                ->username,
+            esc(interact_as_actor()
+                ->username),
             $post->id,
         ) ?>" method="POST">
                 <?= csrf_field() ?>
                 <button class="w-full px-4 py-1 text-left hover:bg-highlight"><?= lang(
             'Post.block_actor',
             [
-                'actorUsername' => $post->actor->username,
+                'actorUsername' => esc($post->actor->username),
             ],
         ) ?></button>
             </form>
             <form action="<?= route_to(
             'post-attempt-block-domain',
-            interact_as_actor()
-                ->username,
+            esc(interact_as_actor()
+                ->username),
             $post->id,
         ) ?>" method="POST">
                 <?= csrf_field() ?>
                 <button class="w-full px-4 py-1 text-left hover:bg-highlight"><?= lang(
             'Post.block_domain',
             [
-                'actorDomain' => $post->actor->domain,
+                'actorDomain' => esc($post->actor->domain),
             ],
         ) ?></button>
             </form>
@@ -75,7 +75,7 @@
                 <hr class="my-2 border-subtle" />
                 <form action="<?= route_to(
             'post-attempt-delete',
-            $post->actor->username,
+            esc($post->actor->username),
             $post->id,
         ) ?>" method="POST">
                     <?= csrf_field() ?>
@@ -87,7 +87,7 @@
         </nav>
     <?php else: ?>
     <?= anchor(
-            route_to('post', $podcast->handle, $post->id),
+            route_to('post', esc($podcast->handle), $post->id),
             icon('chat', 'text-2xl mr-1 opacity-40') . $post->replies_count,
             [
                 'class' => 'inline-flex items-center hover:underline',
@@ -97,7 +97,7 @@
             ],
         ) ?>
     <?= anchor_popup(
-            route_to('post-remote-action', $podcast->handle, $post->id, 'reblog'),
+            route_to('post-remote-action', esc($podcast->handle), $post->id, 'reblog'),
             icon('repeat', 'text-2xl mr-1 opacity-40') . $post->reblogs_count,
             [
                 'class' => 'inline-flex items-center hover:underline',
@@ -109,7 +109,7 @@
             ],
         ) ?>
     <?= anchor_popup(
-            route_to('post-remote-action', $podcast->handle, $post->id, 'favourite'),
+            route_to('post-remote-action', esc($podcast->handle), $post->id, 'favourite'),
             icon('heart', 'text-2xl mr-1 opacity-40') . $post->favourites_count,
             [
                 'class' => 'inline-flex items-center hover:underline',

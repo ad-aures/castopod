@@ -60,18 +60,16 @@ if (! function_exists('get_rss_feed')) {
 
         $channel->addChild('language', $podcast->language_code);
         if ($podcast->location !== null) {
-            $locationElement = $channel->addChild(
-                'location',
-                htmlspecialchars($podcast->location->name),
-                $podcastNamespace,
-            );
+            $locationElement = $channel->addChild('location', $podcast->location->name, $podcastNamespace);
             if ($podcast->location->geo !== null) {
                 $locationElement->addAttribute('geo', $podcast->location->geo);
             }
+
             if ($podcast->location->osm !== null) {
                 $locationElement->addAttribute('osm', $podcast->location->osm);
             }
         }
+
         if ($podcast->payment_pointer !== null) {
             $valueElement = $channel->addChild('value', null, $podcastNamespace);
             $valueElement->addAttribute('type', 'webmonetization');
@@ -83,6 +81,7 @@ if (! function_exists('get_rss_feed')) {
             $recipientElement->addAttribute('address', $podcast->payment_pointer);
             $recipientElement->addAttribute('split', '100');
         }
+
         $channel
             ->addChild('locked', $podcast->is_locked ? 'yes' : 'no', $podcastNamespace)
             ->addAttribute('owner', $podcast->owner_email);
@@ -96,8 +95,9 @@ if (! function_exists('get_rss_feed')) {
             if ($podcastingPlatform->account_id !== null) {
                 $podcastingPlatformElement->addAttribute('id', $podcastingPlatform->account_id);
             }
+
             if ($podcastingPlatform->link_url !== null) {
-                $podcastingPlatformElement->addAttribute('url', htmlspecialchars($podcastingPlatform->link_url));
+                $podcastingPlatformElement->addAttribute('url', $podcastingPlatform->link_url);
             }
         }
 
@@ -127,6 +127,7 @@ if (! function_exists('get_rss_feed')) {
             if ($socialPlatform->account_id !== null) {
                 $socialElement->addAttribute('accountId', esc($socialPlatform->account_id));
             }
+
             if ($socialPlatform->link_url !== null) {
                 $socialElement->addAttribute('accountUrl', esc($socialPlatform->link_url));
             }
@@ -179,17 +180,13 @@ if (! function_exists('get_rss_feed')) {
             );
             $fundingPlatformElement->addAttribute('platform', $fundingPlatform->slug);
             if ($fundingPlatform->link_url !== null) {
-                $fundingPlatformElement->addAttribute('url', htmlspecialchars($fundingPlatform->link_url));
+                $fundingPlatformElement->addAttribute('url', $fundingPlatform->link_url);
             }
         }
 
         foreach ($podcast->persons as $person) {
             foreach ($person->roles as $role) {
-                $personElement = $channel->addChild(
-                    'person',
-                    htmlspecialchars($person->full_name),
-                    $podcastNamespace,
-                );
+                $personElement = $channel->addChild('person', $person->full_name, $podcastNamespace,);
 
                 $personElement->addAttribute('img', $person->avatar->medium_url);
 
@@ -199,14 +196,12 @@ if (! function_exists('get_rss_feed')) {
 
                 $personElement->addAttribute(
                     'role',
-                    htmlspecialchars(
-                        lang("PersonsTaxonomy.persons.{$role->group}.roles.{$role->role}.label", [], 'en'),
-                    ),
+                    lang("PersonsTaxonomy.persons.{$role->group}.roles.{$role->role}.label", [], 'en'),
                 );
 
                 $personElement->addAttribute(
                     'group',
-                    htmlspecialchars(lang("PersonsTaxonomy.persons.{$role->group}.label", [], 'en')),
+                    lang("PersonsTaxonomy.persons.{$role->group}.label", [], 'en'),
                 );
             }
         }
@@ -242,6 +237,7 @@ if (! function_exists('get_rss_feed')) {
         if ($podcast->is_blocked) {
             $channel->addChild('block', 'Yes', $itunesNamespace);
         }
+
         if ($podcast->is_completed) {
             $channel->addChild('complete', 'Yes', $itunesNamespace);
         }
@@ -275,18 +271,16 @@ if (! function_exists('get_rss_feed')) {
             $item->addChild('guid', $episode->guid);
             $item->addChild('pubDate', $episode->published_at->format(DATE_RFC1123));
             if ($episode->location !== null) {
-                $locationElement = $item->addChild(
-                    'location',
-                    htmlspecialchars($episode->location->name),
-                    $podcastNamespace,
-                );
+                $locationElement = $item->addChild('location', $episode->location->name, $podcastNamespace,);
                 if ($episode->location->geo !== null) {
                     $locationElement->addAttribute('geo', $episode->location->geo);
                 }
+
                 if ($episode->location->osm !== null) {
                     $locationElement->addAttribute('osm', $episode->location->osm);
                 }
             }
+
             $item->addChildWithCDATA('description', $episode->getDescriptionHtml($serviceSlug));
             $item->addChild('duration', (string) $episode->audio->duration, $itunesNamespace);
             $item->addChild('link', $episode->link);
@@ -420,6 +414,7 @@ if (! function_exists('add_category_tag')) {
             $itunesCategoryChild->addAttribute('text', $category->apple_category);
             $node->addChild('category', $category->parent->apple_category);
         }
+
         $node->addChild('category', $category->apple_category);
     }
 }
@@ -445,10 +440,12 @@ if (! function_exists('rss_to_array')) {
         foreach ($rssNode->attributes() as $key => $value) {
             $arrayNode['attributes'][$key] = (string) $value;
         }
+
         $textcontent = trim((string) $rssNode);
         if (strlen($textcontent) > 0) {
             $arrayNode['content'] = $textcontent;
         }
+
         foreach ($nameSpaces as $currentNameSpace) {
             foreach ($rssNode->children($currentNameSpace) as $childXmlNode) {
                 $arrayNode['elements'][] = rss_to_array($childXmlNode);
@@ -485,6 +482,7 @@ if (! function_exists('array_to_rss')) {
                         $childXmlNode->addAttribute($attributeKey, $attributeValue);
                     }
                 }
+
                 array_to_rss($childArrayNode, $childXmlNode);
             }
         }

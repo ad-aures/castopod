@@ -62,6 +62,7 @@ class AnalyticsPodcastByServiceModel extends Model
             cache()
                 ->save("{$podcastId}_analytics_podcasts_by_service_weekly", $found, 600);
         }
+
         return $found;
     }
 }

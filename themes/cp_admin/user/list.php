@@ -21,7 +21,7 @@
             'header' => lang('User.list.user'),
             'cell' => function ($user) {
                 return '<div class="flex flex-col">' .
-                    $user->username .
+                    esc($user->username) .
                     '<span class="text-sm text-skin-muted">' .
                     $user->email .
                     '</span></div>';
@@ -32,7 +32,7 @@
             'cell' => function ($user) {
                 return implode(',', $user->roles) .
                     '<IconButton uri="' . route_to('user-edit', $user->id) . '" glyph="edit" variant="info">' . lang('User.edit_roles', [
-                        'username' => $user->username,
+                        'username' => esc($user->username),
                     ]) . '</IconButton>';
             },
         ],

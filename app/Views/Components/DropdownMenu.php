@@ -11,6 +11,8 @@ class DropdownMenu extends Component
 {
     public string $id = '';
 
+    public string $labelledby;
+
     public string $placement = 'bottom-end';
 
     public string $offsetX = '0';

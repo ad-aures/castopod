@@ -55,6 +55,7 @@ if (! function_exists('svg')) {
         if ($class) {
             $svgContents = str_replace('<svg', '<svg class="' . $class . '"', $svgContents);
         }
+
         return $svgContents;
     }
 }

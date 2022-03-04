@@ -1,11 +1,11 @@
 <?= $this->extend('_layout') ?>
 
 <?= $this->section('title') ?>
-<?= $podcast->title ?>
+<?= esc($podcast->title) ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('pageTitle') ?>
-<?= $podcast->title ?>
+<?= esc($podcast->title) ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>

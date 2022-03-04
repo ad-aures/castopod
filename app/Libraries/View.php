@@ -85,7 +85,6 @@ class View extends CodeIgniterView
         $renderVars = $this->renderVars;
 
         $output = (function (): string {
-            /** @phpstan-ignore-next-line */
             extract($this->tempData);
             ob_start();
             include $this->renderVars['file'];

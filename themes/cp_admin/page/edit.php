@@ -19,7 +19,7 @@
     label="<?= lang('Page.form.title') ?>"
     required="true"
     data-slugify="title"
-    value="<?= $page->title ?>"
+    value="<?= esc($page->title) ?>"
     slot="slug-input"
     class="max-w-sm" />
 
@@ -27,7 +27,7 @@
     <Forms.Label for="slug"><?= lang('Page.form.permalink') ?></Forms.Label>
     <permalink-edit class="inline-flex items-center text-xs" edit-label="<?= lang('Common.edit') ?>" copy-label="<?= lang('Common.copy') ?>" copied-label="<?= lang('Common.copied') ?>">
         <span slot="domain" class="flex-shrink-0"><?= base_url('pages') . '/' ?></span>
-        <Forms.Input name="slug" value="<?= $page->slug ?>" required="true" data-slugify="slug" slot="slug-input" class="flex-1 text-xs" value="<?= $page->slug ?>"/>
+        <Forms.Input name="slug" value="<?= esc($page->slug) ?>" required="true" data-slugify="slug" slot="slug-input" class="flex-1 text-xs" value="<?= esc($page->slug) ?>"/>
     </permalink-edit>
 </div>
 

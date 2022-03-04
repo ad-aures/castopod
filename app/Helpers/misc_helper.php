@@ -151,14 +151,17 @@ if (! function_exists('format_duration')) {
         if ($seconds < 60) {
             return '0:' . sprintf('%02d', $seconds);
         }
+
         if ($seconds < 3600) {
             // < 1 hour: returns MM:SS
             return ltrim(gmdate('i:s', $seconds), '0');
         }
+
         if ($seconds < 36000) {
             // < 10 hours: returns H:MM:SS
             return ltrim(gmdate('H:i:s', $seconds), '0');
         }
+
         return gmdate('H:i:s', $seconds);
     }
 }
@@ -177,14 +180,17 @@ if (! function_exists('format_duration_symbol')) {
         if ($seconds < 60) {
             return $seconds . 's';
         }
+
         if ($seconds < 3600) {
             // < 1 hour: returns MM:SS
             return ltrim(gmdate('i\m\i\n s\s', $seconds), '0');
         }
+
         if ($seconds < 36000) {
             // < 10 hours: returns H:MM:SS
             return ltrim(gmdate('h\h i\m\i\n s\s', $seconds), '0');
         }
+
         return gmdate('h\h i\m\i\n s\s', $seconds);
     }
 }
@@ -232,6 +238,7 @@ if (! function_exists('file_upload_max_size')) {
                 $max_size = $upload_max;
             }
         }
+
         return $max_size;
     }
 }

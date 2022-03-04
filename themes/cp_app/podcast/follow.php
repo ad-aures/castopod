@@ -10,7 +10,7 @@
     <link rel="icon" type="image/x-icon" href="<?= service('settings')
     ->get('App.siteIcon')['ico'] ?>" />
     <link rel="apple-touch-icon" href="<?= service('settings')->get('App.siteIcon')['180'] ?>">
-    <link rel="manifest" href="<?= route_to('podcast-webmanifest', $actor->podcast->handle) ?>">
+    <link rel="manifest" href="<?= route_to('podcast-webmanifest', esc($actor->podcast->handle)) ?>">
     <meta name="theme-color" content="<?= \App\Controllers\WebmanifestController::THEME_COLORS[service('settings')->get('App.theme')]['theme'] ?>">
     <script>
     // Check that service workers are supported
@@ -40,18 +40,18 @@
         <div class="flex flex-col w-full max-w-xs -mt-24 overflow-hidden shadow bg-elevated rounded-xl">
             <img src="<?= $actor->podcast->banner->small_url ?>" alt="" class="w-full aspect-[3/1] bg-header" loading="lazy" />
             <div class="flex px-4 py-2">
-                <img src="<?= $actor->avatar_image_url ?>" alt="<?= $actor->display_name ?>"
+                <img src="<?= $actor->avatar_image_url ?>" alt="<?= esc($actor->display_name) ?>"
                     class="w-16 h-16 mr-4 -mt-8 rounded-full ring-2 ring-background-elevated aspect-square" loading="lazy" />
                 <div class="flex flex-col">
-                    <p class="font-semibold"><?= $actor->display_name ?></p>
-                    <p class="text-sm text-skin-muted">@<?= $actor->username ?></p>
+                    <p class="font-semibold"><?= esc($actor->display_name) ?></p>
+                    <p class="text-sm text-skin-muted">@<?= esc($actor->username) ?></p>
                 </div>
             </div>
         </div>
     </header>
 
     <main class="w-full max-w-md px-4 mx-auto">
-        <form action="<?= route_to('attempt-follow', $actor->username) ?>" method="POST" class="flex flex-col gap-y-2">
+        <form action="<?= route_to('attempt-follow', esc($actor->username)) ?>" method="POST" class="flex flex-col gap-y-2">
             <?= csrf_field() ?>
             <?= view('_message_block') ?>
 

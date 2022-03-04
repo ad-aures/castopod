@@ -29,11 +29,11 @@
 <small class="max-w-md mb-2 text-skin-muted"><?= lang('Episode.publish_form.post_hint') ?></small>
 <div class="mb-8 overflow-hidden shadow-md bg-elevated rounded-xl">
     <div class="flex px-4 py-3 gap-x-2">
-        <img src="<?= $podcast->actor->avatar_image_url ?>" alt="<?= $podcast->actor->display_name ?>" class="w-10 h-10 rounded-full aspect-square" loading="lazy" />
+        <img src="<?= $podcast->actor->avatar_image_url ?>" alt="<?= esc($podcast->actor->display_name) ?>" class="w-10 h-10 rounded-full aspect-square" loading="lazy" />
         <div class="flex flex-col min-w-0">
             <p class="flex items-baseline min-w-0">
-                <span class="mr-2 font-semibold truncate"><?= $podcast->actor->display_name ?></span>
-                <span class="text-sm truncate text-skin-muted">@<?= $podcast->actor->username ?></span>
+                <span class="mr-2 font-semibold truncate"><?= esc($podcast->actor->display_name) ?></span>
+                <span class="text-sm truncate text-skin-muted">@<?= esc($podcast->actor->username) ?></span>
             </p>
             <?= relative_time($post->published_at, 'text-xs text-skin-muted') ?>
         </div>
@@ -43,11 +43,11 @@
     </div>
     <div class="flex border-y">
         <img src="<?= $episode->cover
-                ->thumbnail_url ?>" alt="<?= $episode->title ?>" class="w-24 h-24 aspect-square" loading="lazy" />
+                ->thumbnail_url ?>" alt="<?= esc($episode->title) ?>" class="w-24 h-24 aspect-square" loading="lazy" />
         <div class="flex flex-col flex-1">
             <a href="<?= $episode->link ?>" class="flex-1 px-4 py-2">
                 <div class="flex items-baseline">
-                    <span class="flex-1 w-0 mr-2 text-sm font-semibold truncate"><?= $episode->title ?></span>
+                    <span class="flex-1 w-0 mr-2 text-sm font-semibold truncate"><?= esc($episode->title) ?></span>
                     <?= episode_numbering(
                     $episode->number,
                     $episode->season_number,

@@ -43,15 +43,15 @@
     name="title"
     label="<?= lang('Episode.form.title') ?>"
     hint="<?= lang('Episode.form.title_hint') ?>"
-    value="<?= $episode->title ?>"
+    value="<?= esc($episode->title) ?>"
     required="true"
     data-slugify="title" />
 
 <div>
     <Forms.Label for="slug"><?= lang('Episode.form.permalink') ?></Forms.Label>
     <permalink-edit class="inline-flex items-center text-xs" edit-label="<?= lang('Common.edit') ?>" copy-label="<?= lang('Common.copy') ?>" copied-label="<?= lang('Common.copied') ?>">
-        <span slot="domain"><?= base_url('/@' . $podcast->handle . '/episodes') . '/' ?></span>
-        <Forms.Input name="slug" value="<?= $episode->slug ?>" required="true" data-slugify="slug" slot="slug-input" class="flex-1 text-xs" />
+        <span slot="domain"><?= base_url('/@' . esc($podcast->handle) . '/episodes') . '/' ?></span>
+        <Forms.Input name="slug" value="<?= esc($episode->slug) ?>" required="true" data-slugify="slug" slot="slug-input" class="flex-1 text-xs" />
     </permalink-edit>
 </div>
 
@@ -144,7 +144,7 @@
     name="location_name"
     label="<?= lang('Episode.form.location_name') ?>"
     hint="<?= lang('Episode.form.location_name_hint') ?>"
-    value="<?= $episode->location_name ?>" />
+    value="<?= esc($episode->location_name) ?>" />
 </Forms.Section>
 
 <Forms.Section
@@ -198,7 +198,7 @@
         </section>
         <section id="transcript-file-remote-url" class="tab-panel">
             <Forms.Label class="sr-only" for="transcript_remote_url" isOptional="true"><?= lang('Episode.form.transcript_remote_url') ?></Forms.Label>
-            <Forms.Input class="w-full" placeholder="https://…" name="transcript_remote_url" value="<?= $episode->transcript_remote_url ?>" />
+            <Forms.Input class="w-full" placeholder="https://…" name="transcript_remote_url" value="<?= esc($episode->transcript_remote_url) ?>" />
         </section>
     </div>
 </div>
@@ -253,7 +253,7 @@
         </section>
         <section id="chapters-file-remote-url" class="tab-panel">
             <Forms.Label class="sr-only" for="chapters_remote_url" isOptional="true"><?= lang('Episode.form.chapters_remote_url') ?></Forms.Label>
-            <Forms.Input class="w-full" placeholder="https://…" name="chapters_remote_url" value="<?= $episode->chapters_remote_url ?>" />
+            <Forms.Input class="w-full" placeholder="https://…" name="chapters_remote_url" value="<?= esc($episode->chapters_remote_url) ?>" />
         </section>
     </div>
 </div>

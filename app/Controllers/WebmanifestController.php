@@ -18,7 +18,7 @@ use CodeIgniter\HTTP\ResponseInterface;
 class WebmanifestController extends Controller
 {
     /**
-     * @var array<string, string>
+     * @var array<string, array<string, string>>
      */
     public const THEME_COLORS = [
         'pine' => [
@@ -50,10 +50,8 @@ class WebmanifestController extends Controller
     public function index(): ResponseInterface
     {
         $webmanifest = [
-            'name' => service('settings')
-                ->get('App.siteName'),
-            'description' => service('settings')
-                ->get('App.siteDescription'),
+            'name' => esc(service('settings') ->get('App.siteName')),
+            'description' => esc(service('settings') ->get('App.siteDescription')),
             'lang' => service('request')
                 ->getLocale(),
             'start_url' => base_url(),
@@ -89,12 +87,12 @@ class WebmanifestController extends Controller
         }
 
         $webmanifest = [
-            'name' => $podcast->title,
-            'short_name' => '@' . $podcast->handle,
+            'name' => esc($podcast->title),
+            'short_name' => '@' . esc($podcast->handle),
             'description' => $podcast->description,
             'lang' => $podcast->language_code,
             'start_url' => $podcast->link,
-            'scope' => '/@' . $podcast->handle,
+            'scope' => '/@' . esc($podcast->handle),
             'display' => 'standalone',
             'orientation' => 'portrait',
             'theme_color' => self::THEME_COLORS[service('settings')->get('App.theme')]['theme'],

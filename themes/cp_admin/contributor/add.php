@@ -1,11 +1,11 @@
 <?= $this->extend('_layout') ?>
 
 <?= $this->section('title') ?>
-<?= lang('Contributor.add_contributor', [$podcast->title]) ?>
+<?= lang('Contributor.add_contributor', [esc($podcast->title)]) ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('pageTitle') ?>
-<?= lang('Contributor.add_contributor', [$podcast->title]) ?>
+<?= lang('Contributor.add_contributor', [esc($podcast->title)]) ?>
 <?= $this->endSection() ?>
 
 

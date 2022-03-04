@@ -15,25 +15,25 @@ $podcastNavigation = [
     <?= icon('arrow-left', 'mr-2') ?>
     <img
     src="<?= $podcast->cover->tiny_url ?>"
-    alt="<?= $podcast->title ?>"
+    alt="<?= esc($podcast->title) ?>"
     class="object-cover w-6 h-6 rounded aspect-square"
     loading="lazy"
     />
-    <span class="flex-1 w-full px-2 text-xs font-semibold truncate" title="<?= $podcast->title ?>"><?= $podcast->title ?></span>
+    <span class="flex-1 w-full px-2 text-xs font-semibold truncate" title="<?= esc($podcast->title) ?>"><?= esc($podcast->title) ?></span>
 </a>
 <div class="flex items-center px-4 py-2 border-y border-navigation">
     <img
     src="<?= $episode->cover->thumbnail_url ?>"
-    alt="<?= $episode->title ?>"
+    alt="<?= esc($episode->title) ?>"
     class="object-cover w-16 h-16 rounded aspect-square"
     loading="lazy"
     />
     <div class="flex flex-col items-start flex-1 w-48 px-2">
-        <span class="w-full font-semibold truncate" title="<?= $episode->title ?>"><?= $episode->title ?></span>
+        <span class="w-full font-semibold truncate" title="<?= esc($episode->title) ?>"><?= esc($episode->title) ?></span>
         <a href="<?= route_to(
     'episode',
-    $podcast->handle,
-    $episode->slug,
+    esc($podcast->handle),
+    esc($episode->slug),
 ) ?>" class="inline-flex items-center text-xs hover:underline focus:ring-accent"><?= lang(
     'EpisodeNavigation.go_to_page',
 ) ?>

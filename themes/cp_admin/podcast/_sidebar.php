@@ -38,19 +38,19 @@ $podcastNavigation = [
 <div class="flex items-center px-4 py-2 border-b border-navigation">
     <img
     src="<?= $podcast->cover->thumbnail_url ?>"
-    alt="<?= $podcast->title ?>"
+    alt="<?= esc($podcast->title) ?>"
     class="object-cover w-16 h-16 rounded aspect-square"
     loading="lazy"
     />
     <div class="flex flex-col items-start flex-1 w-48 px-2">
-        <span class="w-full font-semibold truncate" title="<?= $podcast->title ?>"><?= $podcast->title ?></span>
+        <span class="w-full font-semibold truncate" title="<?= esc($podcast->title) ?>"><?= esc($podcast->title) ?></span>
         <a href="<?= route_to(
     'podcast-activity',
-    $podcast->handle,
+    esc($podcast->handle),
 ) ?>" class="inline-flex items-center text-sm hover:underline focus:ring-accent"
         data-tooltip="bottom" title="<?= lang(
     'PodcastNavigation.go_to_page',
-) ?>">@<?= $podcast->handle ?>
+) ?>">@<?= esc($podcast->handle) ?>
         <?= icon('external-link', 'ml-1 opacity-60') ?>
         </a>
     </div>

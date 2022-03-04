@@ -44,7 +44,7 @@ class NoteObject extends ObjectType
             $this->inReplyTo = $post->reply_to_post->uri;
         }
 
-        $this->replies = url_to('post-replies', $post->actor->username, $post->id);
+        $this->replies = url_to('post-replies', esc($post->actor->username), $post->id);
 
         $this->cc = [$post->actor->followers_url];
     }

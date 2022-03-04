@@ -26,7 +26,7 @@ class Paths
      * the path if the folder is not in the same directory as this file.
      */
     public string $systemDirectory =
-        __DIR__ . '/../../vendor/codeigniter4/codeigniter4/system';
+        __DIR__ . '/../../vendor/codeigniter4/framework/system';
 
     /**
      * ---------------------------------------------------------------

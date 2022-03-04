@@ -76,7 +76,7 @@ class LikeModel extends UuidModel
                     'queued',
                 );
 
-            $likeActivity->set('id', url_to('activity', $actor->username, $activityId));
+            $likeActivity->set('id', url_to('activity', esc($actor->username), $activityId));
 
             model(ActivityModel::class)
                 ->update($activityId, [
@@ -115,7 +115,7 @@ class LikeModel extends UuidModel
 
             $likeActivity = new LikeActivity();
             $likeActivity
-                ->set('id', url_to('activity', $actor->username, $activity->id))
+                ->set('id', url_to('activity', esc($actor->username), $activity->id))
                 ->set('actor', $actor->uri)
                 ->set('object', $comment->uri);
 
@@ -134,7 +134,7 @@ class LikeModel extends UuidModel
                     'queued',
                 );
 
-            $undoActivity->set('id', url_to('activity', $actor->username, $activityId));
+            $undoActivity->set('id', url_to('activity', esc($actor->username), $activityId));
 
             model(ActivityModel::class)
                 ->update($activityId, [

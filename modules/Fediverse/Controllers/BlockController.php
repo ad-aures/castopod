@@ -12,6 +12,7 @@ namespace Modules\Fediverse\Controllers;
 
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\RedirectResponse;
+use Exception;
 
 class BlockController extends Controller
 {
@@ -23,7 +24,7 @@ class BlockController extends Controller
     public function attemptBlockActor(): RedirectResponse
     {
         $rules = [
-            'handle' => 'required',
+            'handle' => 'required|regex_match[/^@?([\w\.\-]+)@([\w\.\-]+)(:[\d]+)?$/]',
         ];
 
         if (! $this->validate($rules)) {
@@ -36,9 +37,9 @@ class BlockController extends Controller
         $handle = $this->request->getPost('handle');
 
         if ($parts = split_handle($handle)) {
-            if (
-                ($actor = get_or_create_actor($parts['username'], $parts['domain'])) === null
-            ) {
+            try {
+                $actor = get_or_create_actor($parts['username'], $parts['domain']);
+            } catch (Exception) {
                 return redirect()
                     ->back()
                     ->withInput()
@@ -78,7 +79,7 @@ class BlockController extends Controller
     public function attemptBlockDomain(): RedirectResponse
     {
         $rules = [
-            'domain' => 'required',
+            'domain' => 'required|regex_match[/^[\w\-\.]+[\w]+(:[\d]+)?/]',
         ];
 
         if (! $this->validate($rules)) {

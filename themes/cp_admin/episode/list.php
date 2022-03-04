@@ -34,7 +34,7 @@
                                     $episode->audio->duration,
                                 ) .
                             '</time>' .
-                            '<img src="' . $episode->cover->thumbnail_url . '" alt="' . $episode->title . '" class="object-cover w-20 rounded-lg shadow-inner aspect-square" loading="lazy" />' .
+                            '<img src="' . $episode->cover->thumbnail_url . '" alt="' . esc($episode->title) . '" class="object-cover w-20 rounded-lg shadow-inner aspect-square" loading="lazy" />' .
                         '</div>' .
                         '<a class="overflow-x-hidden text-sm hover:underline" href="' . route_to(
                             'episode-view',
@@ -48,7 +48,7 @@
                             'text-xs font-semibold text-skin-muted !no-underline border px-1 border-gray-500',
                             true,
                         ) .
-                        '<span class="mr-1 truncate group-hover:underline">' . $episode->title . '</span>' .
+                        '<span class="mr-1 truncate group-hover:underline">' . esc($episode->title) . '</span>' .
                         '</h2>' .
                         '<p class="max-w-sm text-xs text-skin-muted line-clamp-2">' . $episode->description . '</p>' .
                         '</a>' .
@@ -80,7 +80,7 @@
                             [
                                 'type' => 'link',
                                 'title' => lang('Episode.go_to_page'),
-                                'uri' => route_to('episode', $podcast->handle, $episode->slug),
+                                'uri' => route_to('episode', esc($podcast->handle), esc($episode->slug)),
                             ],
                             [
                                 'type' => 'link',

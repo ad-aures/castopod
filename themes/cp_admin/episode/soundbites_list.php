@@ -19,7 +19,7 @@
         [
             'header' => lang('Soundbite.list.soundbite'),
             'cell' => function ($soundbite): string {
-                return '<div class="flex gap-x-2"><play-soundbite audio-src="' . $soundbite->episode->audio->file_url . '" start-time="' . $soundbite->start_time . '" duration="' . $soundbite->duration . '" play-label="' . lang('Soundbite.play') . '" playing-label="' . lang('Soundbite.stop') . '"></play-soundbite><div class="flex flex-col"><span class="text-sm font-semibold">' . $soundbite->title . '</span><span class="text-xs">' . format_duration((int) $soundbite->duration) . '</span></div></div>';
+                return '<div class="flex gap-x-2"><play-soundbite audio-src="' . $soundbite->episode->audio->file_url . '" start-time="' . $soundbite->start_time . '" duration="' . $soundbite->duration . '" play-label="' . lang('Soundbite.play') . '" playing-label="' . lang('Soundbite.stop') . '"></play-soundbite><div class="flex flex-col"><span class="text-sm font-semibold">' . esc($soundbite->title) . '</span><span class="text-xs">' . format_duration((int) $soundbite->duration) . '</span></div></div>';
             },
         ],
         [

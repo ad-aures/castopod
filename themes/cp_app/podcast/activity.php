@@ -3,14 +3,14 @@
 <?= $this->section('content') ?>
 
 <?php if (can_user_interact()): ?>
-    <form action="<?= route_to('post-attempt-create', interact_as_actor()->username) ?>" method="POST" class="flex p-4 shadow bg-elevated gap-x-2 rounded-conditional-2xl">
+    <form action="<?= route_to('post-attempt-create', esc(interact_as_actor()->username)) ?>" method="POST" class="flex p-4 shadow bg-elevated gap-x-2 rounded-conditional-2xl">
     <?= csrf_field() ?>
 
     <?= view('_message_block') ?>
 
     <img src="<?= interact_as_actor()
-        ->avatar_image_url ?>" alt="<?= interact_as_actor()
-        ->display_name ?>" class="w-10 h-10 rounded-full aspect-square" loading="lazy" />
+        ->avatar_image_url ?>" alt="<?= esc(interact_as_actor()
+        ->display_name) ?>" class="w-10 h-10 rounded-full aspect-square" loading="lazy" />
     <div class="flex flex-col flex-1 min-w-0 gap-y-2">
         <Forms.Textarea
             name="message"

@@ -169,6 +169,7 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                         ];
                     }
                 }
+
                 $this->db
                     ->table('analytics_podcasts')
                     ->ignore(true)

@@ -92,6 +92,7 @@ if (! function_exists('download_file')) {
         return new File($tmpFilePath);
     }
 }
+
 if (! function_exists('media_path')) {
     /**
      * Prefixes the root media path to a given uri
@@ -104,6 +105,7 @@ if (! function_exists('media_path')) {
         if (is_array($uri)) {
             $uri = implode('/', $uri);
         }
+
         $uri = trim($uri, '/');
 
         return config('App')->mediaRoot . '/' . $uri;
@@ -122,6 +124,7 @@ if (! function_exists('media_base_url')) {
         if (is_array($uri)) {
             $uri = implode('/', $uri);
         }
+
         $uri = trim($uri, '/');
 
         $appConfig = config('App');

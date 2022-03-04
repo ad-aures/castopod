@@ -2,13 +2,13 @@
 
 <?= $this->section('title') ?>
 <?= lang('VideoClip.title', [
-    'videoClipLabel' => $videoClip->title,
+    'videoClipLabel' => esc($videoClip->title),
 ]) ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('pageTitle') ?>
 <?= lang('VideoClip.title', [
-    'videoClipLabel' => $videoClip->title,
+    'videoClipLabel' => esc($videoClip->title),
 ]) ?>
 <?= $this->endSection() ?>
 
@@ -17,7 +17,7 @@
 <?php if ($videoClip->media): ?>
     <video controls class="bg-black h-80 aspect-video">
     <source src="<?= $videoClip->media->file_url ?>" type="<?= $videoClip->media->file_mimetype ?>">
-    Your browser does not support the video tag.
+        Your browser does not support the video tag.
     </video>
 <?php endif; ?>
 

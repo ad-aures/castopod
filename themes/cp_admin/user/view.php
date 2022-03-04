@@ -2,7 +2,7 @@
 
 <?= $this->section('title') ?>
 <?= lang('User.view', [
-    'username' => $user->username,
+    'username' => esc($user->username),
 ]) ?>
 <?= $this->endSection() ?>
 

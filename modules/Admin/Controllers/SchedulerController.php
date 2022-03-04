@@ -81,6 +81,7 @@ class SchedulerController extends Controller
                         'job_ended_at' => Time::now(),
                     ]);
                 }
+
                 $clipModel->clearVideoClipCache($scheduledClip->id);
             } catch (Exception $exception) {
                 (new ClipModel())->update($scheduledClip->id, [

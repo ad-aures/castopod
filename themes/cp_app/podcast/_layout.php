@@ -10,7 +10,7 @@
     <link rel="icon" type="image/x-icon" href="<?= service('settings')
     ->get('App.siteIcon')['ico'] ?>" />
     <link rel="apple-touch-icon" href="<?= service('settings')->get('App.siteIcon')['180'] ?>">
-    <link rel="manifest" href="<?= route_to('podcast-webmanifest', $podcast->handle) ?>">
+    <link rel="manifest" href="<?= route_to('podcast-webmanifest', esc($podcast->handle)) ?>">
     <meta name="theme-color" content="<?= \App\Controllers\WebmanifestController::THEME_COLORS[service('settings')->get('App.theme')]['theme'] ?>">
     <script>
     // Check that service workers are supported
@@ -46,9 +46,9 @@
     <header class="relative z-50 flex flex-col-reverse justify-between w-full col-start-2 bg-top bg-no-repeat bg-cover sm:flex-row sm:items-end bg-header aspect-[3/1]" style="background-image: url('<?= $podcast->banner->medium_url ?>');">
         <div class="absolute bottom-0 left-0 w-full h-full backdrop-gradient mix-blend-multiply"></div>
         <div class="z-10 flex items-center pl-4 -mb-6 md:pl-8 md:-mb-8 gap-x-4">
-            <img src="<?= $podcast->cover->thumbnail_url ?>" alt="<?= $podcast->title ?>" class="h-24 rounded-full sm:h-28 md:h-36 ring-3 ring-background-elevated aspect-square" loading="lazy" />
+            <img src="<?= $podcast->cover->thumbnail_url ?>" alt="<?= esc($podcast->title) ?>" class="h-24 rounded-full sm:h-28 md:h-36 ring-3 ring-background-elevated aspect-square" loading="lazy" />
             <div class="relative flex flex-col text-white -top-3 sm:top-0 md:top-2">
-                <h1 class="text-lg font-bold leading-none line-clamp-2 md:leading-none md:text-2xl font-display"><?= $podcast->title ?><span class="ml-1 font-sans text-base font-normal">@<?= $podcast->handle ?></span></h1>
+                <h1 class="text-lg font-bold leading-none line-clamp-2 md:leading-none md:text-2xl font-display"><?= esc($podcast->title) ?><span class="ml-1 font-sans text-base font-normal">@<?= esc($podcast->handle) ?></span></h1>
                 <div class="">
                     <?= explicit_badge($podcast->parental_advisory === 'explicit', 'mr-1') ?>
                     <span class="text-xs"><?= lang('Podcast.followers', [
@@ -62,7 +62,7 @@
                 <button class="p-2 text-red-600 bg-white rounded-full shadow hover:text-red-500 focus:ring-accent" data-toggle="funding-links" data-toggle-class="hidden" data-tooltip="bottom" title="<?= lang('Podcast.sponsor') ?>"><Icon glyph="heart"></Icon></button>
             <?php endif; ?>
             <?= anchor_popup(
-                        route_to('follow', $podcast->handle),
+                        route_to('follow', esc($podcast->handle)),
                         icon(
                             'social/castopod',
                             'mr-2 text-xl text-black/75 group-hover:text-black',

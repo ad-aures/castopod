@@ -2,12 +2,12 @@
     <a href="<?= route_to('episode-view', $episode->podcast->id, $episode->id) ?>" class="flex flex-col justify-end w-full h-full text-white group">
         <div class="absolute bottom-0 left-0 z-10 w-full h-full backdrop-gradient mix-blend-multiply"></div>
         <div class="w-full h-full overflow-hidden bg-header">
-            <img src="<?= $episode->cover->medium_url ?>" alt="<?= $episode->title ?>" class="object-cover w-full h-full transition duration-200 ease-in-out transform group-focus:scale-105 group-hover:scale-105 aspect-square" loading="lazy" />
+            <img src="<?= $episode->cover->medium_url ?>" alt="<?= esc($episode->title) ?>" class="object-cover w-full h-full transition duration-200 ease-in-out transform group-focus:scale-105 group-hover:scale-105 aspect-square" loading="lazy" />
         </div>
         <?= publication_pill($episode->published_at, $episode->publication_status, 'absolute top-0 left-0 ml-2 mt-2 text-sm'); ?>
         <div class="absolute z-20 flex flex-col items-start px-4 py-2">
             <?= episode_numbering($episode->number, $episode->season_number, 'text-xs font-semibold !no-underline px-1 bg-black/50 mr-1', true) ?>
-            <span class="font-semibold leading-tight line-clamp-2"><?= $episode->title ?></span>
+            <span class="font-semibold leading-tight line-clamp-2"><?= esc($episode->title) ?></span>
         </div>
     </a>
     <button class="absolute top-0 right-0 z-10 p-2 mt-2 mr-2 text-white transition -translate-y-12 rounded-full opacity-0 focus:ring-accent focus:opacity-100 focus:-translate-y-0 group-hover:translate-y-0 bg-black/50 group-hover:opacity-100" id="more-dropdown-<?= $episode->id ?>" data-dropdown="button" data-dropdown-target="more-dropdown-<?= $episode->id ?>-menu" aria-haspopup="true" aria-expanded="false" title="<?= lang('Common.more') ?>"><?= icon('more') ?></button>
@@ -15,7 +15,7 @@
         [
             'type' => 'link',
             'title' => lang('Episode.go_to_page'),
-            'uri' => route_to('episode', $episode->podcast->handle, $episode->slug),
+            'uri' => route_to('episode', esc($episode->podcast->handle), esc($episode->slug)),
         ],
         [
             'type' => 'link',

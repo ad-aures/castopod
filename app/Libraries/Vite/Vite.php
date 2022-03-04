@@ -52,6 +52,7 @@ class Vite
                         die("Could not load css manifest: <strong>{$manifestCSSPath}</strong> file not found!");
                     }
                 }
+
                 $this->manifestCSSData = $cachedManifestCSS;
             }
 
@@ -80,6 +81,7 @@ class Vite
                     die("Could not load manifest: <strong>{$manifestPath}</strong> file not found!");
                 }
             }
+
             $this->manifestData = $cachedManifest;
         }
 

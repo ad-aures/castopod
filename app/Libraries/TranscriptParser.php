@@ -54,7 +54,6 @@ class TranscriptParser
 
         $lines = explode(PHP_EOL, $this->transcriptContent);
         foreach ($lines as $line) {
-            // @phpstan-ignore-next-line
             switch ($state) {
                 case SRT_STATE_SUBNUMBER:
                     $subNum = trim($line);
@@ -82,8 +81,10 @@ class TranscriptParser
                         if ($subText !== '') {
                             $subText .= PHP_EOL . $line;
                         }
+
                         $subText .= $line;
                     }
+
                     break;
 
             }

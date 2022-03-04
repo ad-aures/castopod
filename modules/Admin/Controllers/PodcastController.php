@@ -384,6 +384,7 @@ class PodcastController extends BaseController
                 ->withInput()
                 ->with('errors', $mediaModel->errors());
         }
+
         (new PodcastModel())->clearCache([
             'id' => $this->podcast->id,
         ]);

@@ -1,11 +1,11 @@
 <?= $this->extend('_layout') ?>
 
 <?= $this->section('title') ?>
-<?= lang('Contributor.edit_role', [$user->username]) ?>
+<?= lang('Contributor.edit_role', [esc($user->username)]) ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('pageTitle') ?>
-<?= lang('Contributor.edit_role', [$user->username]) ?>
+<?= lang('Contributor.edit_role', [esc($user->username)]) ?>
 <?= $this->endSection() ?>
 
 

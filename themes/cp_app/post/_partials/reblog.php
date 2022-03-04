@@ -4,26 +4,26 @@
     'text-lg mr-2 opacity-40',
 ) .
         lang('Post.actor_shared', [
-            'actor' => $post->actor->display_name,
+            'actor' => esc($post->actor->display_name),
         ]) ?></p>
     <header class="flex px-6 py-4 gap-x-2">
         <img src="<?= $post->actor
-            ->avatar_image_url ?>" alt="<?= $post->display_name ?>" class="w-10 h-10 rounded-full aspect-square" loading="lazy" />
+            ->avatar_image_url ?>" alt="<?= esc($post->actor->display_name) ?>" class="w-10 h-10 rounded-full aspect-square" loading="lazy" />
         <div class="flex flex-col min-w-0">
             <a href="<?= $post->actor
             ->uri ?>" class="flex items-baseline hover:underline" <?= $post
             ->actor->is_local
     ? ''
     : 'target="_blank" rel="noopener noreferrer"' ?>>
-                <span class="mr-2 font-semibold truncate"><?= $post->actor
-        ->display_name ?></span>
-                <span class="text-sm truncate text-skin-muted">@<?= $post->actor
-        ->username .
+                <span class="mr-2 font-semibold truncate"><?= esc($post->actor
+        ->display_name) ?></span>
+                <span class="text-sm truncate text-skin-muted">@<?= esc($post->actor
+        ->username) .
                     ($post->actor->is_local
                         ? ''
                         : '@' . $post->actor->domain) ?></span>
             </a>
-            <a href="<?= route_to('post', $podcast->handle, $post->id) ?>"
+            <a href="<?= route_to('post', esc($podcast->handle), $post->id) ?>"
             class="text-xs text-skin-muted">
                 <?= relative_time($post->published_at) ?>
             </a>

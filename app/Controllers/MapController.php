@@ -34,6 +34,7 @@ class MapController extends BaseController
                 'cache_name' => $cacheName,
             ]);
         }
+
         return $found;
     }
 
@@ -50,19 +51,21 @@ class MapController extends BaseController
                 $found[] = [
                     'latitude' => $episode->location->latitude,
                     'longitude' => $episode->location->longitude,
-                    'location_name' => $episode->location->name,
+                    'location_name' => esc($episode->location->name),
                     'location_url' => $episode->location->url,
                     'episode_link' => $episode->link,
                     'podcast_link' => $episode->podcast->link,
                     'cover_url' => $episode->cover->thumbnail_url,
-                    'podcast_title' => $episode->podcast->title,
-                    'episode_title' => $episode->title,
+                    'podcast_title' => esc($episode->podcast->title),
+                    'episode_title' => esc($episode->title),
                 ];
             }
+
             // The page cache is set to a decade so it is deleted manually upon episode update
             cache()
                 ->save($cacheName, $found, DECADE);
         }
+
         return $this->response->setJSON($found);
     }
 }

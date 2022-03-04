@@ -11,6 +11,7 @@
 <?= $this->section('content') ?>
 
 <form id="new-video-clip-form" action="<?= route_to('video-clips-create', $podcast->id, $episode->id) ?>" method="POST" class="flex flex-col items-center gap-4 xl:items-start xl:flex-row">
+<?= csrf_field() ?>
 
 <div class="flex-1 w-full rounded-xl border-3 border-subtle">
     <video-clip-previewer duration="<?= old('duration', 30) ?>">

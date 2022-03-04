@@ -17,11 +17,11 @@
 
     <div class="flex items-center mt-4 gap-x-8">
         <?php if ($podcast->persons !== []): ?>
-            <button class="flex items-center text-xs font-semibold gap-x-2 hover:underline focus:ring-accent" data-toggle="persons-list" data-toggle-class="hidden">
+            <button class="flex items-center flex-shrink-0 text-xs font-semibold gap-x-2 hover:underline focus:ring-accent" data-toggle="persons-list" data-toggle-class="hidden">
                 <span class="inline-flex flex-row-reverse">
                     <?php $i = 0; ?>
                     <?php foreach ($podcast->persons as $person): ?>
-                        <img src="<?= $person->avatar->thumbnail_url ?>" alt="<?= $person->full_name ?>" class="object-cover w-8 -ml-4 border-2 rounded-full aspect-square bg-header border-background-base last:ml-0" loading="lazy" />
+                        <img src="<?= $person->avatar->thumbnail_url ?>" alt="<?= esc($person->full_name) ?>" class="object-cover w-8 -ml-4 border-2 rounded-full aspect-square bg-header border-background-base last:ml-0" loading="lazy" />
                         <?php $i++; if ($i === 3) {
     break;
 }?>
@@ -51,7 +51,7 @@
 
 <?= view('_persons_modal', [
     'title' => lang('Podcast.persons_list', [
-        'podcastTitle' => $podcast->title,
+        'podcastTitle' => esc($podcast->title),
     ]),
     'persons' => $podcast->persons,
 ]) ?>

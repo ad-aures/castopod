@@ -74,9 +74,11 @@ class PodcastPlatformController extends BaseController
             if ($podcastPlatformUrl === null) {
                 continue;
             }
+
             if (! $validation->check($podcastPlatformUrl, 'validate_url')) {
                 continue;
             }
+
             $podcastsPlatformsData[] = [
                 'platform_slug' => $platformSlug,
                 'podcast_id' => $this->podcast->id,

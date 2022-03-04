@@ -89,6 +89,7 @@ class AnalyticsPodcastByCountryModel extends Model
             cache()
                 ->save("{$podcastId}_analytics_podcast_by_country_yearly", $found, 600);
         }
+
         return $found;
     }
 }

@@ -8,6 +8,8 @@ use ViewComponents\Component;
 
 class ReadMore extends Component
 {
+    public string $id;
+
     public function render(): string
     {
         $readMoreLabel = lang('Common.read_more');

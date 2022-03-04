@@ -64,6 +64,7 @@ class AnalyticsPodcastByRegionModel extends Model
             cache()
                 ->save("{$podcastId}_analytics_podcast_by_region_{$locale}", $found, 600);
         }
+
         return $found;
     }
 }

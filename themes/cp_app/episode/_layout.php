@@ -10,7 +10,7 @@
     <link rel="icon" type="image/x-icon" href="<?= service('settings')
     ->get('App.siteIcon')['ico'] ?>" />
     <link rel="apple-touch-icon" href="<?= service('settings')->get('App.siteIcon')['180'] ?>">
-    <link rel="manifest" href="<?= route_to('podcast-webmanifest', $podcast->handle) ?>">
+    <link rel="manifest" href="<?= route_to('podcast-webmanifest', esc($podcast->handle)) ?>">
     <meta name="theme-color" content="<?= \App\Controllers\WebmanifestController::THEME_COLORS[service('settings')->get('App.theme')]['theme'] ?>">
     <script>
     // Check that service workers are supported
@@ -44,14 +44,14 @@
     <?php endif; ?>
 
     <nav class="flex items-center justify-between h-10 col-start-2 text-white bg-header">
-        <a href="<?= route_to('podcast-episodes', $podcast->handle) ?>" class="inline-flex items-center h-full px-2 focus:ring-accent focus:ring-inset" title="<?= lang('Episode.back_to_episodes', [
-            'podcast' => $podcast->title,
+        <a href="<?= route_to('podcast-episodes', esc($podcast->handle)) ?>" class="flex items-center flex-1 h-full min-w-0 px-2 gap-x-2 focus:ring-accent focus:ring-inset" title="<?= lang('Episode.back_to_episodes', [
+            'podcast' => esc($podcast->title),
         ]) ?>">
-            <?= icon('arrow-left', 'mr-2 text-lg') ?>
-            <div class="inline-flex items-center gap-x-2">
-                <img class="w-8 h-8 rounded-full" src="<?= $episode->podcast->cover->tiny_url ?>" alt="<?= $episode->podcast->title ?>" loading="lazy" />
-                <div class="flex flex-col">
-                    <span class="text-sm font-semibold leading-none"><?= $episode->podcast->title ?></span>
+            <?= icon('arrow-left', 'text-lg') ?>
+            <div class="flex items-center flex-1 min-w-0 gap-x-2">
+                <img class="w-8 h-8 rounded-full" src="<?= $episode->podcast->cover->tiny_url ?>" alt="<?= esc($episode->podcast->title) ?>" loading="lazy" />
+                <div class="flex flex-col flex-1 overflow-hidden">
+                    <span class="text-sm font-semibold leading-none truncate"><?= esc($episode->podcast->title) ?></span>
                     <span class="text-xs"><?= lang('Podcast.followers', [
                         'numberOfFollowers' => $podcast->actor->followers_count,
                     ]) ?></span>
@@ -63,7 +63,7 @@
                 <button class="p-2 text-red-600 bg-white rounded-full shadow hover:text-red-500 focus:ring-accent" data-toggle="funding-links" data-toggle-class="hidden" title="<?= lang('Podcast.sponsor') ?>"><Icon glyph="heart"></Icon></button>
             <?php endif; ?>
             <?= anchor_popup(
-                        route_to('follow', $podcast->handle),
+                        route_to('follow', esc($podcast->handle)),
                         icon(
                             'social/castopod',
                             'mr-2 text-xl text-black/75 group-hover:text-black',
@@ -81,20 +81,20 @@
         <div class="absolute top-0 left-0 w-full h-full bg-center bg-no-repeat bg-cover blur-lg mix-blend-overlay filter grayscale" style="background-image: url('<?= $episode->podcast->banner->small_url ?>');"></div>
         <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-background-header to-transparent"></div>
         <div class="z-10 flex flex-col items-start gap-y-2 gap-x-4 sm:flex-row">
-            <div class="relative">
+            <div class="relative flex-shrink-0">
                 <?= explicit_badge($episode->parental_advisory === 'explicit', 'rounded absolute left-0 bottom-0 ml-2 mb-2 bg-black/75 text-accent-contrast') ?>
-                <img src="<?= $episode->cover->medium_url ?>" alt="<?= $episode->title ?>" class="rounded-md shadow-xl h-36 aspect-square" loading="lazy" />
+                <img src="<?= $episode->cover->medium_url ?>" alt="<?= esc($episode->title) ?>" class="flex-shrink-0 rounded-md shadow-xl h-36 aspect-square" loading="lazy" />
             </div>
-            <div class="flex flex-col items-start text-white">
+            <div class="flex flex-col items-start w-full min-w-0 text-white">
                 <?= episode_numbering($episode->number, $episode->season_number, 'text-sm leading-none font-semibold px-1 py-1 text-white/90 border !no-underline border-subtle', true) ?>
-                <h1 class="inline-flex items-baseline max-w-md mt-2 text-2xl font-bold sm:leading-none sm:text-3xl font-display line-clamp-2"><?= $episode->title ?></h1>
-                <div class="flex items-center mt-4 gap-x-8">
+                <h1 class="inline-flex items-baseline max-w-lg mt-2 text-2xl font-bold sm:leading-none sm:text-3xl font-display line-clamp-2" title="<?= esc($episode->title) ?>"><?= esc($episode->title) ?></h1>
+                <div class="flex items-center w-full mt-4 gap-x-8">
                 <?php if ($episode->persons !== []): ?>
-                    <button class="flex items-center text-xs font-semibold gap-x-2 hover:underline focus:ring-accent" data-toggle="persons-list" data-toggle-class="hidden">
+                    <button class="flex items-center flex-shrink-0 text-xs font-semibold gap-x-2 hover:underline focus:ring-accent" data-toggle="persons-list" data-toggle-class="hidden">
                         <span class="inline-flex flex-row-reverse">
                             <?php $i = 0; ?>
                             <?php foreach ($episode->persons as $person): ?>
-                                <img src="<?= $person->avatar->thumbnail_url ?>" alt="<?= $person->full_name ?>" class="object-cover w-8 h-8 -ml-4 border-2 rounded-full aspect-square border-background-header last:ml-0" loading="lazy" />
+                                <img src="<?= $person->avatar->thumbnail_url ?>" alt="<?= esc($person->full_name) ?>" class="object-cover w-8 h-8 -ml-4 border-2 rounded-full aspect-square border-background-header last:ml-0" loading="lazy" />
                                 <?php $i++; if ($i === 3) {
                         break;
                     }?>
@@ -115,8 +115,8 @@
             <play-episode-button
                 id="<?= $episode->id ?>"
                 imageSrc="<?= $episode->cover->thumbnail_url ?>"
-                title="<?= $episode->title ?>"
-                podcast="<?= $episode->podcast->title ?>"
+                title="<?= esc($episode->title) ?>"
+                podcast="<?= esc($episode->podcast->title) ?>"
                 src="<?= $episode->audio_web_url ?>"
                 mediaType="<?= $episode->audio->file_mimetype ?>"
                 playLabel="<?= lang('Common.play_episode_button.play') ?>"
@@ -148,10 +148,9 @@
     </div>
     <?= view('_persons_modal', [
         'title' => lang('Episode.persons_list', [
-            'episodeTitle' => $episode->title,
+            'episodeTitle' => esc($episode->title),
         ]),
-        'persons' => $episode->
-persons,
+        'persons' => $episode->persons,
     ]) ?>
     <?php if (in_array(true, array_column($podcast->fundingPlatforms, 'is_visible'), true)): ?>
         <?= $this->include('podcast/_partials/funding_links_modal') ?>

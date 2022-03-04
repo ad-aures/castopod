@@ -31,6 +31,6 @@ if (! function_exists('replace_breadcrumb_params')) {
     function replace_breadcrumb_params(array $newParams): void
     {
         $breadcrumb = Services::breadcrumb();
-        $breadcrumb->replaceParams($newParams);
+        $breadcrumb->replaceParams(esc($newParams));
     }
 }

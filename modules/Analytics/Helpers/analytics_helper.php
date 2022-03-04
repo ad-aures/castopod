@@ -9,7 +9,6 @@ declare(strict_types=1);
  */
 
 use AdAures\Ipcat\IpDb;
-use CodeIgniter\Router\Exceptions\RouterException;
 use Config\Services;
 use GeoIp2\Database\Reader;
 use Opawg\UserAgentsPhp\UserAgents;
@@ -38,8 +37,6 @@ if (! function_exists('base64_url_decode')) {
 if (! function_exists('generate_episode_analytics_url')) {
     /**
      * Builds the episode analytics url that redirects to the audio file url after analytics hit.
-     *
-     * @throws RouterException
      */
     function generate_episode_analytics_url(
         int $podcastId,
@@ -124,6 +121,7 @@ if (! function_exists('set_user_session_location')) {
                 // If things go wrong the show must go on and the user must be able to download the file
             } catch (Exception) {
             }
+
             $session->set('location', $location);
         }
     }
@@ -147,6 +145,7 @@ if (! function_exists('set_user_session_player')) {
                 // If things go wrong the show must go on and the user must be able to download the file
             } catch (Exception) {
             }
+
             if ($playerFound) {
                 $session->set('player', $playerFound);
             } else {
@@ -188,9 +187,11 @@ if (! function_exists('set_user_session_browser')) {
             } catch (Exception) {
                 $browserName = '- Could not get browser name -';
             }
+
             if ($browserName === '') {
                 $browserName = '- Could not get browser name -';
             }
+
             $session->set('browser', $browserName);
         }
     }
@@ -273,6 +274,7 @@ if (! function_exists('podcast_hit')) {
             if ($session->get('denyListIp')) {
                 $session->get('player')['bot'] = true;
             }
+
             //We get the HTTP header field `Range`:
             $httpRange = isset($_SERVER['HTTP_RANGE'])
                 ? $_SERVER['HTTP_RANGE']
@@ -295,6 +297,7 @@ if (! function_exists('podcast_hit')) {
                 // If it was never downloaded that means that zero byte were downloaded:
                 $downloadedBytes = 0;
             }
+
             // If the number of downloaded bytes was previously below the 1mn threshold we go on:
             // (Otherwise it means that this was already counted, therefore we don't do anything)
             if ($downloadedBytes < $bytesThreshold) {
@@ -314,6 +317,7 @@ if (! function_exists('podcast_hit')) {
                                 (array_key_exists(0, $parts) ? 0 : (int) $parts[0]);
                     }
                 }
+
                 // We save the number of downloaded bytes for this user and this episode:
                 cache()
                     ->save($episodeHashId, $downloadedBytes, $rollingTTL);
@@ -339,6 +343,7 @@ if (! function_exists('podcast_hit')) {
                     } else {
                         $downloadsByUser = 1;
                     }
+
                     // Listener count is calculated from 00h00 to 23h59:
                     $midnightTTL = strtotime('tomorrow') - time();
                     // We save the download count for this user until midnight:

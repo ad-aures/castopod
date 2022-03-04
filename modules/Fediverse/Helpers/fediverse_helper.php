@@ -79,7 +79,7 @@ if (! function_exists('accept_follow')) {
             $acceptActivity->toJSON(),
         );
 
-        $acceptActivity->set('id', url_to('activity', $actor->username, $activityId));
+        $acceptActivity->set('id', url_to('activity', esc($actor->username), $activityId));
 
         $activityModel->update($activityId, [
             'payload' => $acceptActivity->toJSON(),
@@ -108,6 +108,7 @@ if (! function_exists('send_activity_to_actor')) {
             if ($actor->private_key !== null) {
                 $acceptRequest->sign($actor->public_key_id, $actor->private_key);
             }
+
             $acceptRequest->post();
         } catch (Exception $exception) {
             // log error
@@ -283,6 +284,7 @@ if (! function_exists('create_actor_from_uri')) {
             $newActor->cover_image_url = $actorPayload->image->url;
             $newActor->cover_image_mimetype = $actorPayload->image->mediaType;
         }
+
         $newActor->inbox_url = $actorPayload->inbox;
         $newActor->outbox_url = property_exists($actorPayload, 'outbox') ? $actorPayload->outbox : null;
         $newActor->followers_url = property_exists($actorPayload, 'followers') ? $actorPayload->followers : null;
@@ -299,8 +301,6 @@ if (! function_exists('create_actor_from_uri')) {
 if (! function_exists('get_current_domain')) {
     /**
      * Returns instance's domain name
-     *
-     * @throws HTTPException
      */
     function get_current_domain(): string
     {
@@ -324,8 +324,6 @@ if (! function_exists('get_message_from_object')) {
      * Gets the message from content, if no content key is present, checks for content in contentMap
      *
      * TODO: store multiple languages, convert markdown
-     *
-     * @return string|false
      */
     function get_message_from_object(stdClass $object): string | false
     {
@@ -365,9 +363,10 @@ if (! function_exists('linkify')) {
                 'http', 'https' => preg_replace_callback(
                     '~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i',
                     function (array $match) use ($protocol, &$links) {
-                        if ($match[1]) {
+                        if ($match[1] !== '' && $match[1] !== '0') {
                             $protocol = $match[1];
                         }
+
                         $link = $match[2] ?: $match[3];
 
                         helper('text');

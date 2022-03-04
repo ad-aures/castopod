@@ -2,13 +2,13 @@
 
 <?= $this->section('title') ?>
 <?= lang('User.edit_roles', [
-    'username' => $user->username,
+    'username' => esc($user->username),
 ]) ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('pageTitle') ?>
 <?= lang('User.edit_roles', [
-    'username' => $user->username,
+    'username' => esc($user->username),
 ]) ?>
 <?= $this->endSection() ?>
 

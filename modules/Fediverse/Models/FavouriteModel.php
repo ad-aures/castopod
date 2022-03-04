@@ -75,7 +75,7 @@ class FavouriteModel extends BaseUuidModel
                     'queued',
                 );
 
-            $likeActivity->set('id', url_to('activity', $actor->username, $activityId));
+            $likeActivity->set('id', url_to('activity', esc($actor->username), $activityId));
 
             model('ActivityModel', false)
                 ->update($activityId, [
@@ -122,7 +122,7 @@ class FavouriteModel extends BaseUuidModel
 
             $likeActivity = new LikeActivity();
             $likeActivity
-                ->set('id', url_to('activity', $actor->username, $activity->id))
+                ->set('id', url_to('activity', esc($actor->username), $activity->id))
                 ->set('actor', $actor->uri)
                 ->set('object', $post->uri);
 
@@ -141,7 +141,7 @@ class FavouriteModel extends BaseUuidModel
                     'queued',
                 );
 
-            $undoActivity->set('id', url_to('activity', $actor->username, $activityId));
+            $undoActivity->set('id', url_to('activity', esc($actor->username), $activityId));
 
             model('ActivityModel', false)
                 ->update($activityId, [

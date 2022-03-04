@@ -132,6 +132,7 @@ class ActorController extends Controller
                     return $this->response->setStatusCode(200)
                         ->setJSON([]);
                 }
+
                 // return not handled undo error (501 = not implemented)
                 return $this->response->setStatusCode(501)
                     ->setJSON([]);
@@ -286,6 +287,7 @@ class ActorController extends Controller
             foreach ($paginatedActivity as $activity) {
                 $orderedItems[] = $activity->payload;
             }
+
             $collection = new OrderedCollectionPage($pager, $orderedItems);
         }
 
@@ -322,6 +324,7 @@ class ActorController extends Controller
             foreach ($paginatedFollowers as $follower) {
                 $orderedItems[] = $follower->uri;
             }
+
             $followersCollection = new OrderedCollectionPage($pager, $orderedItems);
         }
 

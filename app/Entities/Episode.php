@@ -367,6 +367,7 @@ class Episode extends Entity
         if ($this->transcript !== null) {
             return $this->transcript->file_url;
         }
+
         return $this->transcript_remote_url;
     }
 
@@ -452,16 +453,14 @@ class Episode extends Entity
 
     public function getLink(): string
     {
-        return url_to('episode', $this->getPodcast()->handle, $this->attributes['slug']);
+        return url_to('episode', esc($this->getPodcast()->handle), esc($this->attributes['slug']));
     }
 
     public function getEmbedUrl(string $theme = null): string
     {
-        return base_url(
-            $theme
-                ? route_to('embed-theme', $this->getPodcast() ->handle, $this->attributes['slug'], $theme,)
-                : route_to('embed', $this->getPodcast()->handle, $this->attributes['slug']),
-        );
+        return $theme
+                ? url_to('embed-theme', esc($this->getPodcast()->handle), esc($this->attributes['slug']), $theme,)
+                : url_to('embed', esc($this->getPodcast()->handle), esc($this->attributes['slug']));
     }
 
     public function setGuid(?string $guid = null): static
@@ -611,7 +610,7 @@ class Episode extends Entity
             'elements' => $this->custom_rss,
         ], $xmlNode);
 
-        return str_replace(['<item>', '</item>'], '', $xmlNode->asXML());
+        return (string) str_replace(['<item>', '</item>'], '', $xmlNode->asXML());
     }
 
     /**

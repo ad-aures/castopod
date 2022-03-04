@@ -18,7 +18,10 @@ class FormComponent extends Component
 
     protected bool $readonly = false;
 
-    public function __construct($attributes)
+    /**
+     * @param array<string, string> $attributes
+     */
+    public function __construct(array $attributes)
     {
         parent::__construct($attributes);
 

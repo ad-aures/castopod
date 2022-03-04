@@ -1,11 +1,11 @@
 <?= $this->extend('_layout') ?>
 
 <?= $this->section('title') ?>
-<?= $person->full_name ?>
+<?= esc($person->full_name) ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('pageTitle') ?>
-<?= $person->full_name ?>
+<?= esc($person->full_name) ?>
 
 <?= $this->endSection() ?>
 
@@ -18,13 +18,13 @@
 <div class="flex flex-wrap gap-2">
     <img
         src="<?= $person->avatar->medium_url ?>"
-        alt="<?= $person->full_name ?>"
+        alt="<?= esc($person->full_name) ?>"
         class="object-cover w-full max-w-xs rounded aspect-square"
         loading="lazy"
     />
     <div class="flex flex-col">
-        <?= $person->full_name ?>
-        <a class="font-semibold no-underline text-accent-base hover:underline" href="<?= $person->information_url ?>"><?= $person->information_url ?></a>
+        <?= esc($person->full_name) ?>
+        <a class="font-semibold no-underline text-accent-base hover:underline" href="<?= esc($person->information_url) ?>"><?= esc($person->information_url) ?></a>
     </div>
 </div>
 

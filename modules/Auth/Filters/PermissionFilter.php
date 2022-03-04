@@ -78,6 +78,7 @@ class PermissionFilter implements FilterInterface
                     ->to($redirectURL)
                     ->with('error', lang('Auth.notEnoughPrivilege'));
             }
+
             throw new PermissionException(lang('Auth.notEnoughPrivilege'));
         }
     }

@@ -23,7 +23,7 @@
     <div class="flex flex-col items-center w-12 mr-4">
         <?php if ($platform->submit_url === ''): ?>
             <?= icon(
-    $platform->slug,
+    esc($platform->slug),
     'text-skin-muted text-4xl',
     $platform->type
 ) ?>
@@ -31,7 +31,7 @@
             <?= anchor(
     $platform->submit_url,
     icon(
-        $platform->slug,
+        esc($platform->slug),
         'text-skin-muted text-4xl',
         $platform->type
     ),
@@ -75,7 +75,7 @@
                 route_to(
                     'podcast-platform-remove',
                     $podcast->id,
-                    $platform->slug,
+                    esc($platform->slug),
                 ),
                 icon('delete-bin', 'mx-auto'),
                 [
@@ -92,18 +92,18 @@
             <legend class="mb-2 font-semibold"><?= $platform->label ?></legend>
             <Forms.Input
                 class="w-full mb-1"
-                id="<?= $platform->slug . '_link_url' ?>"
-                name="<?= 'platforms[' . $platform->slug . '][url]' ?>"
-                value="<?= $platform->link_url ?>"
+                id="<?= esc($platform->slug) . '_link_url' ?>"
+                name="<?= 'platforms[' . esc($platform->slug) . '][url]' ?>"
+                value="<?= esc($platform->link_url) ?>"
                 type="url"
                 placeholder="https://…" />
             <Forms.Input
                 class="w-full mb-1"
-                id="<?= $platform->slug . '_account_id' ?>"
-                name="<?= 'platforms[' . $platform->slug . '][account_id]' ?>"
-                value="<?= $platform->account_id ?>"
+                id="<?= esc($platform->slug) . '_account_id' ?>"
+                name="<?= 'platforms[' . esc($platform->slug) . '][account_id]' ?>"
+                value="<?= esc($platform->account_id) ?>"
                 placeholder="<?= lang("Platforms.description.{$platform->type}") ?>" />
-            <Forms.Toggler size="small" class="text-sm" id="<?= $platform->slug . '_visible' ?>" name="<?= 'platforms[' . $platform->slug . '][visible]'?>" value="yes" checked="<?= old($platform->slug . '_visible', $platform->is_visible ? 'true' : 'false') ?>"><?= lang('Platforms.visible') ?></Forms.Toggler>
+            <Forms.Toggler size="small" class="text-sm" id="<?= esc($platform->slug) . '_visible' ?>" name="<?= 'platforms[' . esc($platform->slug) . '][visible]'?>" value="yes" checked="<?= old(esc($platform->slug) . '_visible', $platform->is_visible ? 'true' : 'false') ?>"><?= lang('Platforms.visible') ?></Forms.Toggler>
         </fieldset>
     </div>
 </div>

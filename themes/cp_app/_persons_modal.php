@@ -17,13 +17,13 @@
         <div class="flex flex-col items-start p-4 gap-y-4">
             <?php foreach ($persons as $person): ?>
                 <div class="flex gap-x-2">
-                    <img src="<?= $person->avatar->thumbnail_url ?>" alt="<?= $person->full_name ?>" class="object-cover w-10 rounded-full bg-header aspect-square" loading="lazy" />
+                    <img src="<?= $person->avatar->thumbnail_url ?>" alt="<?= esc($person->full_name) ?>" class="object-cover w-10 rounded-full bg-header aspect-square" loading="lazy" />
                     <div class="flex flex-col">
                         <h4 class="text-sm font-semibold">
                             <?php if ($person->information_url): ?>
-                                <a href="<?= $person->information_url ?>" class="hover:underline focus:ring-accent" target="_blank" rel="noopener noreferrer"><?= $person->full_name ?></a>
+                                <a href="<?= esc($person->information_url) ?>" class="hover:underline focus:ring-accent" target="_blank" rel="noopener noreferrer"><?= esc($person->full_name) ?></a>
                             <?php else: ?>
-                                <?= $person->full_name ?>
+                                <?= esc($person->full_name) ?>
                             <?php endif; ?>
                         </h4>
                         <p class="text-xs text-skin-muted"><?= implode(

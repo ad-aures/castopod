@@ -16,6 +16,7 @@ use App\Entities\Media\Document;
 use App\Entities\Media\Image;
 use App\Entities\Media\Transcript;
 use App\Entities\Media\Video;
+use CodeIgniter\Database\BaseResult;
 use CodeIgniter\Database\ConnectionInterface;
 use CodeIgniter\Model;
 use CodeIgniter\Validation\ValidationInterface;
@@ -88,7 +89,6 @@ class MediaModel extends Model
         ConnectionInterface &$db = null,
         ValidationInterface $validation = null
     ) {
-        // @phpstan-ignore-next-line
         switch ($fileType) {
             case 'audio':
                 $this->returnType = Audio::class;
@@ -113,7 +113,7 @@ class MediaModel extends Model
         parent::__construct($db, $validation);
     }
 
-    public function getMediaById(int $mediaId): Document | Audio | Video | Image | Transcript | Chapters
+    public function getMediaById(int $mediaId): mixed
     {
         $cacheName = "media#{$mediaId}";
         if (! ($found = cache($cacheName))) {
@@ -172,7 +172,7 @@ class MediaModel extends Model
         return $result;
     }
 
-    public function deleteMedia(object $media): bool
+    public function deleteMedia(object $media): bool|BaseResult
     {
         $media->deleteFile();
 

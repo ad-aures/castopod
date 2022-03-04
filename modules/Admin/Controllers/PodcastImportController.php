@@ -77,6 +77,7 @@ class PodcastImportController extends BaseController
                 ->withInput()
                 ->with('errors', $this->validator->getErrors());
         }
+
         try {
             ini_set('user_agent', 'Castopod/' . CP_VERSION);
             $feed = simplexml_load_file($this->request->getPost('imported_feed_url'));
@@ -93,6 +94,7 @@ class PodcastImportController extends BaseController
                         ' ⎋</a>',
                 ]);
         }
+
         $nsItunes = $feed->channel[0]->children('http://www.itunes.com/dtds/podcast-1.0.dtd');
         $nsPodcast = $feed->channel[0]->children(
             'https://github.com/Podcastindex-org/podcast-namespace/blob/main/docs/1.0.md',
@@ -128,6 +130,7 @@ class PodcastImportController extends BaseController
                     $nsPodcast->location->attributes()['osm'] === null ? null : (string) $nsPodcast->location->attributes()['osm'],
                 );
             }
+
             $guid = null;
             if (property_exists($nsPodcast, 'guid') && $nsPodcast->guid !== null) {
                 $guid = (string) $nsPodcast->guid;
@@ -313,8 +316,10 @@ class PodcastImportController extends BaseController
                 while (in_array($slug . '-' . $slugNumber, $slugs, true)) {
                     ++$slugNumber;
                 }
+
                 $slug = $slug . '-' . $slugNumber;
             }
+
             $slugs[] = $slug;
             $itemDescriptionHtml = match ($this->request->getPost('description_field')) {
                 'content' => (string) $nsContent->encoded,

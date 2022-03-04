@@ -10,12 +10,9 @@ declare(strict_types=1);
 
 namespace Modules\Fediverse\Models;
 
-use CodeIgniter\Database\Exceptions\DatabaseException;
 use CodeIgniter\Events\Events;
 use CodeIgniter\I18n\Time;
-use CodeIgniter\Model;
 use Exception;
-use InvalidArgumentException;
 use Modules\Fediverse\Activities\FollowActivity;
 use Modules\Fediverse\Activities\UndoActivity;
 use Modules\Fediverse\Entities\Actor;
@@ -48,7 +45,6 @@ class FollowModel extends BaseModel
     /**
      * @param Actor $actor Actor that is following
      * @param Actor $targetActor Actor that is being followed
-     * @throws DatabaseException
      */
     public function addFollower(Actor $actor, Actor $targetActor, bool $registerActivity = true): void
     {
@@ -83,7 +79,7 @@ class FollowModel extends BaseModel
                         'queued',
                     );
 
-                $followActivity->set('id', url_to('activity', $actor->username, $activityId));
+                $followActivity->set('id', url_to('activity', esc($actor->username), $activityId));
 
                 model('ActivityModel', false)
                     ->update($activityId, [
@@ -105,8 +101,6 @@ class FollowModel extends BaseModel
     /**
      * @param Actor $actor Actor that is unfollowing
      * @param Actor $targetActor Actor that is being unfollowed
-     * @throws InvalidArgumentException
-     * @throws DatabaseException
      */
     public function removeFollower(Actor $actor, Actor $targetActor, bool $registerActivity = true): void
     {
@@ -148,7 +142,7 @@ class FollowModel extends BaseModel
                     'queued',
                 );
 
-            $undoActivity->set('id', url_to('activity', $actor->username, $activityId));
+            $undoActivity->set('id', url_to('activity', esc($actor->username), $activityId));
 
             model('ActivityModel', false)
                 ->update($activityId, [

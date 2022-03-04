@@ -58,6 +58,7 @@ class AnalyticsWebsiteByEntryPageModel extends Model
             cache()
                 ->save("{$podcastId}_analytics_website_by_entry_page", $found, 600);
         }
+
         return $found;
     }
 }

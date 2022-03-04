@@ -94,7 +94,12 @@ class EpisodeCommentModel extends UuidModel
         if ($registerActivity) {
             // set post id and uri to construct NoteObject
             $comment->id = $newCommentId;
-            $comment->uri = url_to('episode-comment', $comment->actor->username, $comment->episode->slug, $comment->id);
+            $comment->uri = url_to(
+                'episode-comment',
+                esc($comment->actor->username),
+                $comment->episode->slug,
+                $comment->id
+            );
 
             $createActivity = new CreateActivity();
             $createActivity
@@ -112,7 +117,7 @@ class EpisodeCommentModel extends UuidModel
                     'queued',
                 );
 
-            $createActivity->set('id', url_to('activity', $comment->actor->username, $activityId));
+            $createActivity->set('id', url_to('activity', esc($comment->actor->username), $activityId));
 
             model(ActivityModel::class, false)
                 ->update($activityId, [
@@ -200,6 +205,7 @@ class EpisodeCommentModel extends UuidModel
             $this->uuidUseBytes = false;
             return $this->updateBatch($commentsLikesCount, 'id');
         }
+
         return 0;
     }
 
@@ -234,7 +240,7 @@ class EpisodeCommentModel extends UuidModel
             $episode = model(EpisodeModel::class, false)
                 ->find((int) $data['data']['episode_id']);
 
-            $data['data']['uri'] = url_to('episode-comment', $actor->username, $episode->slug, $uuid4->toString());
+            $data['data']['uri'] = url_to('episode-comment', esc($actor->username), $episode->slug, $uuid4->toString());
         }
 
         return $data;

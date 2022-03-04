@@ -24,7 +24,7 @@ class Database extends Config
     /**
      * The default database connection.
      *
-     * @var array<string, string|bool|int|array>
+     * @var array<string, mixed>
      */
     public array $default = [
         'DSN' => '',
@@ -51,7 +51,7 @@ class Database extends Config
      *
      * @noRector StringClassNameToClassConstantRector
      *
-     * @var array<string, string|bool|int|array>
+     * @var array<string, mixed>
      */
     public array $tests = [
         'DSN' => '',

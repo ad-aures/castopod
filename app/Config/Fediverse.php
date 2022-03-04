@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Config;
 
 use App\Libraries\NoteObject;
+use Exception;
 use Modules\Fediverse\Config\Fediverse as FediverseBaseConfig;
 
 class Fediverse extends FediverseBaseConfig
@@ -26,10 +27,15 @@ class Fediverse extends FediverseBaseConfig
     {
         parent::__construct();
 
-        $defaultBanner = config('Images')
-            ->podcastBannerDefaultPaths[service('settings')->get('App.theme')] ?? config(
-                'Images'
-            )->podcastBannerDefaultPaths['default'];
+        try {
+            $appTheme = service('settings')
+                ->get('App.theme');
+            $defaultBanner = config('Images')
+                ->podcastBannerDefaultPaths[$appTheme] ?? config('Images')->podcastBannerDefaultPaths['default'];
+        } catch (Exception) {
+            $defaultBanner = config('Images')
+                ->podcastBannerDefaultPaths['default'];
+        }
 
         ['dirname' => $dirname, 'extension' => $extension, 'filename' => $filename] = pathinfo(
             $defaultBanner['path']

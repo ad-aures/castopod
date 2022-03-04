@@ -29,7 +29,7 @@ if (! function_exists('render_page_links')) {
             'class' => 'px-2 py-1 underline hover:no-underline focus:ring-accent',
         ]);
         foreach ($pages as $page) {
-            $links .= anchor($page->link, $page->title, [
+            $links .= anchor($page->link, esc($page->title), [
                 'class' => 'px-2  py-1 underline hover:no-underline focus:ring-accent',
             ]);
         }

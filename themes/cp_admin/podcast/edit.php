@@ -27,11 +27,11 @@
     <?php endif; ?>
     <img src="<?= $podcast->banner->small_url ?>" alt="" class="w-full aspect-[3/1] bg-header" loading="lazy" />
     <div class="flex px-4 py-2">
-        <img src="<?= $podcast->cover->thumbnail_url ?>" alt="<?= $podcast->title ?>"
+        <img src="<?= $podcast->cover->thumbnail_url ?>" alt="<?= esc($podcast->title) ?>"
             class="w-16 h-16 mr-4 -mt-8 rounded-full ring-2 ring-background-elevated aspect-square" loading="lazy" />
         <div class="flex flex-col">
-            <p class="font-semibold leading-none"><?= $podcast->title ?></p>
-            <p class="text-sm text-skin-muted">@<?= $podcast->handle ?></p>
+            <p class="font-semibold leading-none"><?= esc($podcast->title) ?></p>
+            <p class="text-sm text-skin-muted">@<?= esc($podcast->handle) ?></p>
         </div>
     </div>
 </div>
@@ -60,7 +60,7 @@
     name="title"
     label="<?= lang('Podcast.form.title') ?>"
     helper="<?= $podcast->link ?>"
-    value="<?= $podcast->title ?>"
+    value="<?= esc($podcast->title) ?>"
     required="true" />
 
 <Forms.Field
@@ -144,7 +144,7 @@
 <Forms.Field
     name="owner_name"
     label="<?= lang('Podcast.form.owner_name') ?>"
-    value="<?= $podcast->owner_name ?>"
+    value="<?= esc($podcast->owner_name) ?>"
     hint="<?= lang('Podcast.form.owner_name_hint') ?>"
     required="true" />
 
@@ -152,20 +152,20 @@
     name="owner_email"
     type="email"
     label="<?= lang('Podcast.form.owner_email') ?>"
-    value="<?= $podcast->owner_email ?>"
+    value="<?= esc($podcast->owner_email) ?>"
     hint="<?= lang('Podcast.form.owner_email_hint') ?>"
     required="true" />
 
 <Forms.Field
     name="publisher"
     label="<?= lang('Podcast.form.publisher') ?>"
-    value="<?= $podcast->publisher ?>"
+    value="<?= esc($podcast->publisher) ?>"
     hint="<?= lang('Podcast.form.publisher_hint') ?>" />
 
 <Forms.Field
     name="copyright"
     label="<?= lang('Podcast.form.copyright') ?>"
-    value="<?= $podcast->copyright ?>" />
+    value="<?= esc($podcast->copyright) ?>" />
 
 </Forms.Section>
 
@@ -176,7 +176,7 @@
 <Forms.Field
     name="location_name"
     label="<?= lang('Podcast.form.location_name') ?>"
-    value="<?= $podcast->location_name ?>"
+    value="<?= esc($podcast->location_name) ?>"
     hint="<?= lang('Podcast.form.location_name_hint') ?>" />
 
 </Forms.Section>
@@ -188,7 +188,7 @@
 <Forms.Field
     name="payment_pointer"
     label="<?= lang('Podcast.form.payment_pointer') ?>"
-    value="<?= $podcast->payment_pointer ?>"
+    value="<?= esc($podcast->payment_pointer) ?>"
     hint="<?= lang('Podcast.form.payment_pointer_hint') ?>" />
 
 <fieldset class="flex flex-col items-start p-4 rounded bg-base">
@@ -196,16 +196,16 @@
     <div class="flex flex-col w-full clear-left gap-x-2 gap-y-4 md:flex-row">
         <div class="flex flex-col flex-shrink w-32">
             <Forms.Label for="partner_id" hint="<?= lang('Podcast.form.partner_id_hint') ?>" isOptional="true"><?= lang('Podcast.form.partner_id') ?></Forms.Label>
-            <Forms.Input name="partner_id" value="<?= $podcast->partner_id ?>" />
+            <Forms.Input name="partner_id" value="<?= esc($podcast->partner_id) ?>" />
         </div>
         <div class="flex flex-col flex-1">
             <Forms.Label for="partner_link_url" hint="<?= lang('Podcast.form.partner_link_url_hint') ?>" isOptional="true"><?= lang('Podcast.form.partner_link_url') ?></Forms.Label>
-            <Forms.Input name="partner_link_url" value="<?= $podcast->partner_link_url ?>" />
+            <Forms.Input name="partner_link_url" value="<?= esc($podcast->partner_link_url) ?>" />
         </div>
     </div>
     <div class="flex flex-col w-full mt-2">
         <Forms.Label for="partner_image_url" hint="<?= lang('Podcast.form.partner_image_url_hint') ?>" isOptional="true"><?= lang('Podcast.form.partner_image_url') ?></Forms.Label>
-        <Forms.Input name="partner_image_url" value="<?= $podcast->partner_image_url ?>" />
+        <Forms.Input name="partner_image_url" value="<?= esc($podcast->partner_image_url) ?>" />
     </div>
 </fieldset>
 </Forms.Section>
@@ -226,7 +226,7 @@
     type="url"
     label="<?= lang('Podcast.form.new_feed_url') ?>"
     hint="<?= lang('Podcast.form.new_feed_url_hint') ?>"
-    value="<?= $podcast->new_feed_url ?>"
+    value="<?= esc($podcast->new_feed_url) ?>"
 />
 
 </Forms.Section>

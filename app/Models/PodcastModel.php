@@ -94,7 +94,7 @@ class PodcastModel extends Model
         'language_code' => 'required',
         'category_id' => 'required',
         'owner_email' => 'required|valid_email',
-        'new_feed_url' => 'valid_url|permit_empty',
+        'new_feed_url' => 'valid_url_strict|permit_empty',
         'type' => 'required',
         'created_by' => 'required',
         'updated_by' => 'required',
@@ -403,6 +403,7 @@ class PodcastModel extends Model
                     $secondsToNextUnpublishedEpisode ? $secondsToNextUnpublishedEpisode : DECADE
                 );
         }
+
         return $defaultQuery;
     }
 
@@ -504,6 +505,7 @@ class PodcastModel extends Model
                 (new ActorModel())->update($podcast->actor_id, $podcastActor);
             }
         }
+
         return $data;
     }
 

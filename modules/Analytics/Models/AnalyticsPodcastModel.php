@@ -56,6 +56,7 @@ class AnalyticsPodcastModel extends Model
             cache()
                 ->save("{$podcastId}_analytics_podcast_by_day", $found, 600);
         }
+
         return $found;
     }
 
@@ -80,6 +81,7 @@ class AnalyticsPodcastModel extends Model
             cache()
                 ->save("{$podcastId}_analytics_podcasts_by_weekday", $found, 600);
         }
+
         return $found;
     }
 
@@ -102,6 +104,7 @@ class AnalyticsPodcastModel extends Model
             cache()
                 ->save("{$podcastId}_analytics_podcast_by_bandwidth", $found, 600);
         }
+
         return $found;
     }
 
@@ -125,6 +128,7 @@ class AnalyticsPodcastModel extends Model
             cache()
                 ->save("{$podcastId}_analytics_podcast_by_month", $found, 600);
         }
+
         return $found;
     }
 
@@ -149,6 +153,7 @@ class AnalyticsPodcastModel extends Model
             cache()
                 ->save("{$podcastId}_analytics_podcast_unique_listeners_by_day", $found, 600);
         }
+
         return $found;
     }
 
@@ -174,6 +179,7 @@ class AnalyticsPodcastModel extends Model
             cache()
                 ->save("{$podcastId}_analytics_podcast_unique_listeners_by_month", $found, 600);
         }
+
         return $found;
     }
 
@@ -200,6 +206,7 @@ class AnalyticsPodcastModel extends Model
             cache()
                 ->save("{$podcastId}_analytics_podcast_listening_time_by_day", $found, 600);
         }
+
         return $found;
     }
 
@@ -225,6 +232,7 @@ class AnalyticsPodcastModel extends Model
             cache()
                 ->save("{$podcastId}_analytics_podcast_listening_time_by_month", $found, 600);
         }
+
         return $found;
     }
 }

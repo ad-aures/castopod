@@ -45,7 +45,7 @@
             'arrow-left',
             'mr-2',
         ) . lang('Page.back_to_home') ?></a>
-            <Heading tagName="h1" size="large"><?= $page->title ?></Heading>
+            <Heading tagName="h1" size="large"><?= esc($page->title) ?></Heading>
         </div>
     </header>
     <main class="container flex-1 px-4 py-6 mx-auto">

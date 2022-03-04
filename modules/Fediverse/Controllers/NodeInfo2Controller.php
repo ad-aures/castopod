@@ -30,8 +30,7 @@ class NodeInfo2Controller extends Controller
             'version' => '1.0',
             'server' => [
                 'baseUrl' => base_url(),
-                'name' => service('settings')
-                    ->get('App.siteName'),
+                'name' => esc(service('settings') ->get('App.siteName')),
                 'software' => 'Castopod',
                 'version' => CP_VERSION,
             ],

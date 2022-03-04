@@ -45,6 +45,7 @@ class Location extends Entity
             $latitude = floatval($geoArray[0]);
             $longitude = floatval($geoArray[1]);
         }
+
         parent::__construct([
             'name' => $name,
             'geo' => $geo,

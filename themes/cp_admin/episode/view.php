@@ -1,11 +1,11 @@
 <?= $this->extend('_layout') ?>
 
 <?= $this->section('title') ?>
-<?= $episode->title ?>
+<?= esc($episode->title) ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('pageTitle') ?>
-<?= $episode->title ?>    
+<?= esc($episode->title) ?>    
 <?= $this->endSection() ?>
 
 <?= $this->section('headerLeft') ?>

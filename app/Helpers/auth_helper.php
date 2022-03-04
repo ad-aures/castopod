@@ -9,7 +9,6 @@ declare(strict_types=1);
  */
 
 use App\Models\ActorModel;
-use CodeIgniter\Database\Exceptions\DataException;
 use Modules\Auth\Entities\User;
 use Modules\Fediverse\Entities\Actor;
 
@@ -83,9 +82,6 @@ if (! function_exists('interact_as_actor')) {
 }
 
 if (! function_exists('can_user_interact')) {
-    /**
-     * @throws DataException
-     */
     function can_user_interact(): bool
     {
         return (bool) interact_as_actor();
