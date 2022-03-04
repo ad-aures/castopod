@@ -4,7 +4,7 @@ sidebarDepth: 2
 
 # Welcome 👋
 
-[![release-badge]][release]&nbsp;[![license-badge]][license]&nbsp;[![semantic-release-badge]][semantic-release]&nbsp;[![discord-badge]][discord]&nbsp;[![stars-badge]][stars]
+[![release-badge]][release]&nbsp;[![license-badge]][license]&nbsp;[![contributions-badge]][contributions]&nbsp;[![semantic-release-badge]][semantic-release]&nbsp;[![discord-badge]][discord]&nbsp;[![stars-badge]][stars]
 
 Castopod is a free & open-source hosting platform made for podcasters who want
 engage and interact with their audience.
@@ -205,6 +205,9 @@ Copyright © 2020-present, [Ad Aures](https://adaures.com/).
 [license]: https://code.castopod.org/adaures/castopod/-/blob/beta/LICENSE.md
 [license-badge]:
   https://img.shields.io/github/license/ad-aures/castopod?color=blue
+[contributions]: https://code.castopod.org/adaures/castopod/-/issues
+[contributions-badge]:
+  https://img.shields.io/badge/contributions-welcome-brightgreen.svg
 [semantic-release]: https://github.com/semantic-release/semantic-release
 [semantic-release-badge]:
   https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
