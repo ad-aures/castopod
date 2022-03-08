@@ -33,7 +33,7 @@
 		<?= $this->renderSection('footer') ?>
 		<small class="py-4 text-center border-t border-subtle"><?= lang('Common.powered_by', [
 		    'castopod' =>
-		        '<a class="inline-flex font-semibold hover:underline focus:ring-accent" target="_blank" rel="noreferrer noopener">Castopod' . icon('castopod', 'ml-1 text-lg', 'social') . '</a>',
+		        '<a class="inline-flex font-semibold hover:underline focus:ring-accent" href="https://castopod.org/" target="_blank" rel="noreferrer noopener">Castopod' . icon('castopod', 'ml-1 text-lg', 'social') . '</a>',
 		]) ?></small>
 	</footer>
 </body>
