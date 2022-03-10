@@ -14,7 +14,8 @@
     <Forms.Field
         name="login"
         label="<?= lang('Auth.emailOrUsername') ?>"
-        required="true" />
+        required="true"
+        autofocus="autofocus" />
 
     <Forms.Field
         name="password"
