@@ -147,6 +147,8 @@ public/media/site
 !public/icon*
 !public/index.php
 !public/robots.txt
+!public/.well-known
+!public/.well-known/GDPR.yml
 
 # public media folder
 !public/media/podcasts

@@ -1,0 +1,51 @@
+# This file lists processing purposes and the personal data gathered by
+# Castopod.
+# It is intended for hosting providers who want to provide a service
+# based on Castopod, helping them to comply with GDPR requirements. Note
+# that the services powered by Castopod may collect more data, HTTP logs
+# in particular. As a hosting provider, you must inform your users of their
+# rights and how their data are used and protected.
+
+purposes:
+  - description: Connect users to their accounts
+    lawfulness: legitimate interest
+    data:
+      - field: username
+        required: yes
+        visibility: authenticated users
+        description: |
+          The username is used to identify users during the login process.
+          The username is only required for users accessing the admin area.
+        mitigation: The username does not have to be a real or known identity.
+        retention: forever
+
+      - field: user e-mail address
+        required: yes
+        visibility: administrators
+        description: |
+          The e-mail address is used for administrative purposes, to identify users
+          during the login process and in case of forgotten password.
+        retention: forever
+
+      - field: password
+        required: yes
+        visibility: private
+        description: |
+          The password is used to check the identity of users during the login
+          process.
+        mitigation: |
+          Only hashes (using the Argon2 key derivation function) of the passwords
+          are stored in the database (but they transit over the network).
+        retention: forever
+
+  - description: Claim ownership of a podcast
+    lawfulness: legitimate interest
+    data:
+      - field: Podcast e-mail address
+        required: yes
+        visibility: public
+        description: |
+          The podcast e-mail address is used to claim podcast ownership on other
+          platforms (such as Apple Podcasts).
+        mitigation: The e-mail can be generic.
+        retention: forever
