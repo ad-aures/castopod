@@ -30,21 +30,13 @@ class ActorController extends FediverseActorController
             $this->registerPodcastWebpageHit($this->actor->podcast->id);
         }
 
-        $cacheName = "page_podcast-{$this->actor->username}_follow";
-        if (! ($cachedView = cache($cacheName))) {
-            helper(['form', 'components', 'svg']);
-            $data = [
-                // @phpstan-ignore-next-line
-                'metatags' => get_follow_metatags($this->actor),
-                'actor' => $this->actor,
-            ];
+        helper(['form', 'components', 'svg']);
+        $data = [
+            // @phpstan-ignore-next-line
+            'metatags' => get_follow_metatags($this->actor),
+            'actor' => $this->actor,
+        ];
 
-            return view('podcast/follow', $data, [
-                'cache' => DECADE,
-                'cache_name' => $cacheName,
-            ]);
-        }
-
-        return $cachedView;
+        return view('podcast/follow', $data);
     }
 }

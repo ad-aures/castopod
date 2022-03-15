@@ -16,6 +16,7 @@ return [
         'title' => 'Follow {actorDisplayName}',
         'subtitle' => 'You are going to follow:',
         'accountNotFound' => 'The account could not be found.',
+        'remoteFollowNotAllowed' => 'Seems like the account server does not allow remote follows…',
         'submit' => 'Proceed to follow',
     ],
     'favourite' => [

@@ -15,23 +15,24 @@ return [
     'follow' => [
         'label' => 'Suivre',
         'title' => 'Suivre {actorDisplayName}',
-        'subtitle' => 'Vous allez suivre :',
+        'subtitle' => 'Vous allez suivre :',
         'accountNotFound' => 'Le compte n’a pas pu être trouvé.',
+        'remoteFollowNotAllowed' => 'Il semble que le serveur du compte ne permet pas le suivi d’un compte externe…',
         'submit' => 'Poursuivre',
     ],
     'favourite' => [
         'title' => 'Mettez la publication de {actorDisplayName} en favori',
-        'subtitle' => 'Vous allez mettre en favori :',
+        'subtitle' => 'Vous allez mettre en favori :',
         'submit' => 'Poursuivre',
     ],
     'reblog' => [
         'title' => 'Partagez la publication de {actorDisplayName}',
-        'subtitle' => 'Vous allez partager :',
+        'subtitle' => 'Vous allez partager :',
         'submit' => 'Poursuivre',
     ],
     'reply' => [
         'title' => 'Répondre à la publication de {actorDisplayName}',
-        'subtitle' => 'Vous allez répondre à :',
+        'subtitle' => 'Vous allez répondre à :',
         'submit' => 'Poursuivre',
     ],
 ];

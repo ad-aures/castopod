@@ -16,6 +16,7 @@ return [
         'title' => 'Obserwuj {actorDisplayName}',
         'subtitle' => 'Zamierzasz obserwować:',
         'accountNotFound' => 'Nie można znaleźć konta.',
+        'remoteFollowNotAllowed' => 'Seems like the account server does not allow remote follows…',
         'submit' => 'Przejdź do obserwowania',
     ],
     'favourite' => [

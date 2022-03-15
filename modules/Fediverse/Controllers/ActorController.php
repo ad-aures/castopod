@@ -15,6 +15,7 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\I18n\Time;
+use Exception;
 use Modules\Fediverse\Config\Fediverse;
 use Modules\Fediverse\Entities\Actor;
 use Modules\Fediverse\Entities\Post;
@@ -353,10 +354,12 @@ class ActorController extends Controller
         // parse actor id to get actor and domain
         // check if actor and domain exist
 
-        if (
-            ! ($parts = split_handle($this->request->getPost('handle'))) ||
-            ! ($data = get_webfinger_data($parts['username'], $parts['domain']))
-        ) {
+        $handle = $this->request->getPost('handle');
+        $parts = split_handle($handle);
+
+        try {
+            $data = get_webfinger_data($parts['username'], $parts['domain']);
+        } catch (Exception) {
             return redirect()
                 ->back()
                 ->withInput()
@@ -372,7 +375,10 @@ class ActorController extends Controller
         if (! $ostatusKey) {
             // TODO: error, couldn't subscribe to activitypub account
             // The instance doesn't allow its users to follow others
-            return $this->response->setJSON([]);
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('error', lang('Fediverse.follow.remoteFollowNotAllowed'));
         }
 
         return redirect()->to(
