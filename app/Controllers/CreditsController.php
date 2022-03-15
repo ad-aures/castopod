@@ -65,10 +65,9 @@ class CreditsController extends BaseController
                                                     : $credit->podcast->link,
                                                 'title' => $credit->episode_id
                                                     ? (count($allPodcasts) > 1
-                                                            ? "{$credit->podcast->title} › "
+                                                            ? esc($credit->podcast->title) . ' › '
                                                             : '') .
-                                                        $credit->episode
-                                                            ->title .
+                                                        esc($credit->episode->title) .
                                                         episode_numbering(
                                                             $credit->episode
                                                                 ->number,
@@ -77,7 +76,7 @@ class CreditsController extends BaseController
                                                             'text-xs ml-2',
                                                             true,
                                                         )
-                                                    : $credit->podcast->title,
+                                                    : esc($credit->podcast->title),
                                             ],
                                         ],
                                     ],
@@ -103,9 +102,9 @@ class CreditsController extends BaseController
                                             : $credit->podcast->link,
                                         'title' => $credit->episode_id
                                             ? (count($allPodcasts) > 1
-                                                    ? "{$credit->podcast->title} › "
+                                                    ? esc($credit->podcast->title) . ' › '
                                                     : '') .
-                                                $credit->episode->title .
+                                                    esc($credit->episode->title) .
                                                 episode_numbering(
                                                     $credit->episode->number,
                                                     $credit->episode
@@ -113,7 +112,7 @@ class CreditsController extends BaseController
                                                     'text-xs ml-2',
                                                     true,
                                                 )
-                                            : $credit->podcast->title,
+                                            : esc($credit->podcast->title),
                                     ],
                                 ],
                             ],
@@ -132,16 +131,16 @@ class CreditsController extends BaseController
                                     : $credit->podcast->link,
                                 'title' => $credit->episode_id
                                     ? (count($allPodcasts) > 1
-                                            ? "{$credit->podcast->title} › "
+                                            ? esc($credit->podcast->title) . ' › '
                                             : '') .
-                                        $credit->episode->title .
+                                            esc($credit->episode->title) .
                                         episode_numbering(
                                             $credit->episode->number,
                                             $credit->episode->season_number,
                                             'text-xs ml-2',
                                             true,
                                         )
-                                    : $credit->podcast->title,
+                                    : esc($credit->podcast->title),
                             ],
                         ],
                     ];
@@ -154,16 +153,16 @@ class CreditsController extends BaseController
                             : $credit->podcast->link,
                         'title' => $credit->episode_id
                             ? (count($allPodcasts) > 1
-                                    ? "{$credit->podcast->title} › "
+                                    ? esc($credit->podcast->title) . ' › '
                                     : '') .
-                                $credit->episode->title .
+                                    esc($credit->episode->title) .
                                 episode_numbering(
                                     $credit->episode->number,
                                     $credit->episode->season_number,
                                     'text-xs ml-2',
                                     true,
                                 )
-                            : $credit->podcast->title,
+                            : esc($credit->podcast->title),
                     ];
                 }
             }

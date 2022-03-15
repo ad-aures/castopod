@@ -38,7 +38,7 @@
                     <?php foreach ($role['is_in'] as $in): ?>
                         <a href="<?= esc($in[
                             'link'
-                        ]) ?>" class="text-sm text-skin-muted hover:underline"><?= esc($in['title']) ?></a>
+                        ]) ?>" class="text-sm text-skin-muted hover:underline"><?= $in['title'] ?></a>
                     <?php endforeach; ?>
                 <?php endforeach; ?>
             </div>
