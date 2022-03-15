@@ -41,6 +41,16 @@ if (! function_exists('get_rss_feed')) {
         $atomLink->addAttribute('rel', 'self');
         $atomLink->addAttribute('type', 'application/rss+xml');
 
+        // websub: add links to hubs defined in config
+        $websubHubs = config('WebSub')
+            ->hubs;
+        foreach ($websubHubs as $websubHub) {
+            $atomLinkHub = $channel->addChild('atom:link', null, 'http://www.w3.org/2005/Atom');
+            $atomLinkHub->addAttribute('href', $websubHub);
+            $atomLinkHub->addAttribute('rel', 'hub');
+            $atomLinkHub->addAttribute('type', 'application/rss+xml');
+        }
+
         if ($podcast->new_feed_url !== null) {
             $channel->addChild('new-feed-url', $podcast->new_feed_url, $itunesNamespace);
         }

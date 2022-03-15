@@ -49,6 +49,7 @@ class Autoload extends AutoloadConfig
         'Modules\Analytics' => ROOTPATH . 'modules/Analytics/',
         'Modules\Install' => ROOTPATH . 'modules/Install/',
         'Modules\Fediverse' => ROOTPATH . 'modules/Fediverse/',
+        'Modules\WebSub' => ROOTPATH . 'modules/WebSub/',
         'Config' => APPPATH . 'Config/',
         'ViewComponents' => APPPATH . 'Libraries/ViewComponents/',
         'ViewThemes' => APPPATH . 'Libraries/ViewThemes/',

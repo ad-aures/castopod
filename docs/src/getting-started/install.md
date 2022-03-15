@@ -88,6 +88,13 @@ want to generate Video Clips. The following extensions must be installed:
       * * * * * /path/to/php /path/to/castopod/public/index.php scheduled-activities
    ```
 
+   - For having your episodes be broadcasted on open hubs upon publication using
+     [WebSub](https://en.wikipedia.org/wiki/WebSub):
+
+   ```bash
+      * * * * * /usr/local/bin/php /castopod/public/index.php scheduled-websub-publish
+   ```
+
    - For Video Clips to be created (see
      [FFmpeg requirements](#ffmpeg-v418-or-higher-for-video-clips)):
 

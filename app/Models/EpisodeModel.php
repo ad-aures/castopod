@@ -81,6 +81,7 @@ class EpisodeModel extends Model
         'location_geo',
         'location_osm',
         'custom_rss',
+        'is_published_on_hubs',
         'posts_count',
         'comments_count',
         'published_at',
@@ -378,7 +379,7 @@ class EpisodeModel extends Model
     /**
      * @param mixed[] $data
      *
-     * @return array<string, array<string|int, mixed>>
+     * @return mixed[]
      */
     public function clearCache(array $data): array
     {
@@ -404,7 +405,7 @@ class EpisodeModel extends Model
     /**
      * @param mixed[] $data
      *
-     * @return array<string, array<string|int, mixed>>
+     * @return mixed[]
      */
     protected function writeEnclosureMetadata(array $data): array
     {

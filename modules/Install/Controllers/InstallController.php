@@ -251,6 +251,8 @@ class InstallController extends Controller
             ->latest();
         $migrations->setNamespace(APP_NAMESPACE)
             ->latest();
+        $migrations->setNamespace('Modules\WebSub')
+            ->latest();
         $migrations->setNamespace('Modules\Auth')
             ->latest();
         $migrations->setNamespace('Modules\Analytics')

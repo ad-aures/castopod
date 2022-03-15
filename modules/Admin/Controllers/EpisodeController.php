@@ -280,6 +280,9 @@ class EpisodeController extends BaseController
         $this->episode->setAudio($this->request->getFile('audio_file'));
         $this->episode->setCover($this->request->getFile('cover'));
 
+        // republish on websub hubs upon edit
+        $this->episode->is_published_on_hubs = false;
+
         $transcriptChoice = $this->request->getPost('transcript-choice');
         if ($transcriptChoice === 'upload-file') {
             $transcriptFile = $this->request->getFile('transcript_file');
@@ -724,6 +727,11 @@ class EpisodeController extends BaseController
         foreach ($allPostsLinkedToEpisode as $post) {
             (new PostModel())->removePost($post);
         }
+
+        // set podcast is_published_on_hubs to false to trigger websub push
+        (new PodcastModel())->update($this->episode->podcast->id, [
+            'is_published_on_hubs' => false,
+        ]);
 
         $episodeModel = new EpisodeModel();
         if ($this->episode->published_at !== null) {

@@ -73,6 +73,7 @@ use RuntimeException;
  * @property string|null $payment_pointer
  * @property array|null $custom_rss
  * @property string $custom_rss_string
+ * @property bool $is_published_on_hubs
  * @property string|null $partner_id
  * @property string|null $partner_link_url
  * @property string|null $partner_image_url
@@ -180,6 +181,7 @@ class Podcast extends Entity
         'location_osm' => '?string',
         'payment_pointer' => '?string',
         'custom_rss' => '?json-array',
+        'is_published_on_hubs' => 'boolean',
         'partner_id' => '?string',
         'partner_link_url' => '?string',
         'partner_image_url' => '?string',

@@ -1,2 +1,3 @@
 * * * * * /usr/local/bin/php /castopod/public/index.php scheduled-activities
 * * * * * /usr/local/bin/php /castopod/public/index.php scheduled-video-clips
+* * * * * /usr/local/bin/php /castopod/public/index.php scheduled-websub-publish

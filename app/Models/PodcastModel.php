@@ -60,6 +60,7 @@ class PodcastModel extends Model
         'location_osm',
         'payment_pointer',
         'custom_rss',
+        'is_published_on_hubs',
         'partner_id',
         'partner_link_url',
         'partner_image_url',

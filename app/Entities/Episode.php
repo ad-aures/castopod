@@ -69,6 +69,7 @@ use RuntimeException;
  * @property string|null $location_osm
  * @property array|null $custom_rss
  * @property string $custom_rss_string
+ * @property bool $is_published_on_hubs
  * @property int $posts_count
  * @property int $comments_count
  * @property int $created_by
@@ -164,6 +165,7 @@ class Episode extends Entity
         'location_geo' => '?string',
         'location_osm' => '?string',
         'custom_rss' => '?json-array',
+        'is_published_on_hubs' => 'boolean',
         'posts_count' => 'integer',
         'comments_count' => 'integer',
         'created_by' => 'integer',

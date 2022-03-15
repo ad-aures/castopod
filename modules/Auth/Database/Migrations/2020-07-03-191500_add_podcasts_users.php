@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @link       https://castopod.org/
  */
 
-namespace App\Database\Migrations;
+namespace Modules\Auth\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 

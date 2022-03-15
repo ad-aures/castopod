@@ -340,6 +340,9 @@ class PodcastController extends BaseController
         $this->podcast->is_locked = $this->request->getPost('lock') === 'yes';
         $this->podcast->updated_by = (int) user_id();
 
+        // republish on websub hubs upon edit
+        $this->podcast->is_published_on_hubs = false;
+
         $db = db_connect();
 
         $db->transStart();
