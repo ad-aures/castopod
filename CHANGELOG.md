@@ -1,3 +1,25 @@
+# [1.0.0-beta.10](https://code.castopod.org/adaures/castopod/compare/v1.0.0-beta.9...v1.0.0-beta.10) (2022-03-15)
+
+### Bug Fixes
+
+- add explicit int conversion when formatting episode duration
+  ([1253096](https://code.castopod.org/adaures/castopod/commit/1253096197a0d30692bdafa7152f250cd9a71acf))
+- add href to castopod website on login page
+  ([cc54257](https://code.castopod.org/adaures/castopod/commit/cc5425735184ad738aa0f38540f18e8971f8f56e))
+- move html escaping on credits page
+  ([fbffdbd](https://code.castopod.org/adaures/castopod/commit/fbffdbde78544c83138ee6234c62d43056f407b6))
+- remove cache from remote follow form to display error messages
+  ([90e4443](https://code.castopod.org/adaures/castopod/commit/90e44437bdf37d8024ef609b2f7336dbdfc3b974))
+
+### Features
+
+- add autofocus to input field "Email or username" on login page
+  ([19caed4](https://code.castopod.org/adaures/castopod/commit/19caed4bce0daab9ccf6ab9645f44b60eb87de88))
+- add WebSub module for pushing feed updates to open hubs
+  ([10d3f73](https://code.castopod.org/adaures/castopod/commit/10d3f73786ba141e27a822b2585c4a244ee92c14))
+- **GDPR:** add GDPR.yml file to public/.well-known/
+  ([86bccc3](https://code.castopod.org/adaures/castopod/commit/86bccc3d5cc9562b89196f1766ac91cdc8ad786d))
+
 # [1.0.0-beta.9](https://code.castopod.org/adaures/castopod/compare/v1.0.0-beta.8...v1.0.0-beta.9) (2022-03-04)
 
 ### Bug Fixes
