@@ -125,7 +125,7 @@
                 <?= relative_time($episode->published_at) ?>
                 <span class="mx-1">•</span>
                 <time datetime="PT<?= round($episode->audio->duration, 3) ?>S">
-                    <?= format_duration_symbol($episode->audio->duration) ?>
+                    <?= format_duration_symbol((int) $episode->audio->duration) ?>
                 </time>
             </div>
         </div>

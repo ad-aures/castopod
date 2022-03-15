@@ -29,9 +29,9 @@
                 'cell' => function ($episode, $podcast) {
                     return '<div class="flex">' .
                         '<div class="relative flex-shrink-0 mr-2">' .
-                            '<time class="absolute px-1 text-xs font-semibold text-white rounded bottom-2 right-2 bg-black/50" datetime="PT<?= $episode->audio->duration ?>S">' .
+                            '<time class="absolute px-1 text-xs font-semibold text-white rounded bottom-2 right-2 bg-black/50" datetime="PT' . round($episode->audio->duration, 3) . 'S">' .
                                 format_duration(
-                                    $episode->audio->duration,
+                                    (int) $episode->audio->duration,
                                 ) .
                             '</time>' .
                             '<img src="' . $episode->cover->thumbnail_url . '" alt="' . esc($episode->title) . '" class="object-cover w-20 rounded-lg shadow-inner aspect-square" loading="lazy" />' .

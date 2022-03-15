@@ -72,7 +72,7 @@ use CodeIgniter\I18n\Time;
                 if ($videoClip->job_started_at !== null) {
                     if ($videoClip->job_ended_at !== null) {
                         $duration = '<div class="flex flex-col text-xs gap-y-1">' .
-                        '<div class="inline-flex items-center font-mono gap-x-1"><Icon glyph="timer" class="text-sm text-gray-400" />' . format_duration($videoClip->job_duration, true) . '</div>' .
+                        '<div class="inline-flex items-center font-mono gap-x-1"><Icon glyph="timer" class="text-sm text-gray-400" />' . format_duration((int) $videoClip->job_duration, true) . '</div>' .
                         '<div class="inline-flex items-center gap-x-1"><Icon glyph="calendar" class="text-sm text-gray-400" />' . relative_time($videoClip->job_ended_at) . '</div>' .
                         '</div>';
                     } else {

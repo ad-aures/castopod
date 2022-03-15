@@ -1,7 +1,7 @@
 <article class="flex w-full p-4 shadow bg-elevated rounded-conditional-2xl gap-x-2">
     <div class="relative">
         <time class="absolute px-1 text-xs font-semibold text-white rounded bottom-2 right-2 bg-black/75" datetime="PT<?= round($episode->audio->duration, 3) ?>S">
-            <?= format_duration($episode->audio->duration) ?>
+            <?= format_duration((int) $episode->audio->duration) ?>
         </time>
         <img src="<?= $episode->cover
                 ->thumbnail_url ?>" alt="<?= esc($episode->title) ?>" class="object-cover w-20 rounded-lg shadow-inner aspect-square" loading="lazy" />

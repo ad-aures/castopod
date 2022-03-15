@@ -58,8 +58,8 @@
                 <div class="text-xs text-skin-muted">
                     <?= relative_time($episode->published_at) ?>
                     <span class="mx-1">•</span>
-                    <time datetime="PT<?= $episode->audio->duration ?>S">
-                        <?= format_duration($episode->audio->duration) ?>
+                    <time datetime="PT<?= round($episode->audio->duration, 3) ?>S">
+                        <?= format_duration((int) $episode->audio->duration) ?>
                     </time>
                 </div>
             </a>

@@ -1,7 +1,7 @@
 <div class="flex items-center border-y border-subtle">
     <div class="relative">
         <time class="absolute px-1 text-sm font-semibold text-white rounded bg-black/75 bottom-2 right-2" datetime="PT<?= round($episode->audio->duration, 3) ?>S">
-                    <?= format_duration($episode->audio->duration) ?>
+            <?= format_duration((int) $episode->audio->duration) ?>
         </time>
         <img
         src="<?= $episode->cover->thumbnail_url ?>"
