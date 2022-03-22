@@ -43,7 +43,7 @@
                     <?= anchor(
             esc($podcastingPlatform->link_url),
             icon(
-                $podcastingPlatform->slug,
+                esc($podcastingPlatform->slug),
                 '',
                 $podcastingPlatform->type
             ),
