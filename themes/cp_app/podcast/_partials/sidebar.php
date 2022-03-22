@@ -15,7 +15,11 @@
             <?php if ($socialPlatform->is_visible): ?>
                 <?= anchor(
             esc($socialPlatform->link_url),
-            icon($socialPlatform->type . '/' . esc($socialPlatform->slug)),
+            icon(
+                esc($socialPlatform->slug),
+                '',
+                $socialPlatform->type
+            ),
             [
                 'class' => 'text-2xl text-skin-muted hover:text-skin-base w-8 h-8 items-center inline-flex justify-center',
                 'target' => '_blank',
@@ -38,7 +42,11 @@
                 <?php if ($podcastingPlatform->is_visible): ?>
                     <?= anchor(
             esc($podcastingPlatform->link_url),
-            icon($podcastingPlatform->type . '/' . $podcastingPlatform->slug),
+            icon(
+                $podcastingPlatform->slug,
+                '',
+                $podcastingPlatform->type
+            ),
             [
                 'class' => 'text-2xl text-skin-muted hover:text-skin-base w-8 h-8 items-center inline-flex justify-center',
                 'target' => '_blank',
