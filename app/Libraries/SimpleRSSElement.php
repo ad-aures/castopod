@@ -26,7 +26,7 @@ class SimpleRSSElement extends SimpleXMLElement
      */
     public function addChildWithCDATA(string $name, string $value = '', ?string $namespace = null): static
     {
-        $newChild = parent::addChild($name, '', $namespace);
+        $newChild = parent::addChild($name, null, $namespace);
 
         if ($newChild !== null) {
             $node = dom_import_simplexml($newChild);
@@ -54,7 +54,7 @@ class SimpleRSSElement extends SimpleXMLElement
      */
     public function addChild($name, $value = null, $namespace = null, $escape = true): static
     {
-        $newChild = parent::addChild($name, '', $namespace);
+        $newChild = parent::addChild($name, null, $namespace);
 
         if ($newChild !== null) {
             $node = dom_import_simplexml($newChild);
@@ -69,8 +69,7 @@ class SimpleRSSElement extends SimpleXMLElement
                     return $newChild;
                 }
 
-                /** @noRector RecastingRemovalRector */
-                $node->appendChild($no->createTextNode((string) $value));
+                $node->appendChild($no->createTextNode($value));
             }
         }
 

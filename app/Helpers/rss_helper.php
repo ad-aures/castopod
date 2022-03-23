@@ -30,13 +30,15 @@ if (! function_exists('get_rss_feed')) {
         $podcastNamespace =
             'https://github.com/Podcastindex-org/podcast-namespace/blob/main/docs/1.0.md';
 
+        $atomNamespace = 'http://www.w3.org/2005/Atom';
+
         $rss = new SimpleRSSElement(
-            "<?xml version='1.0' encoding='utf-8'?><rss version='2.0' xmlns:itunes='{$itunesNamespace}' xmlns:podcast='{$podcastNamespace}' xmlns:content='http://purl.org/rss/1.0/modules/content/'></rss>",
+            "<?xml version='1.0' encoding='utf-8'?><rss version='2.0' xmlns:itunes='{$itunesNamespace}' xmlns:podcast='{$podcastNamespace}' xmlns:atom='{$atomNamespace}' xmlns:content='http://purl.org/rss/1.0/modules/content/'></rss>"
         );
 
         $channel = $rss->addChild('channel');
 
-        $atomLink = $channel->addChild('atom:link', null, 'http://www.w3.org/2005/Atom');
+        $atomLink = $channel->addChild('link', null, $atomNamespace);
         $atomLink->addAttribute('href', $podcast->feed_url);
         $atomLink->addAttribute('rel', 'self');
         $atomLink->addAttribute('type', 'application/rss+xml');
@@ -45,7 +47,7 @@ if (! function_exists('get_rss_feed')) {
         $websubHubs = config('WebSub')
             ->hubs;
         foreach ($websubHubs as $websubHub) {
-            $atomLinkHub = $channel->addChild('atom:link', null, 'http://www.w3.org/2005/Atom');
+            $atomLinkHub = $channel->addChild('link', null, $atomNamespace);
             $atomLinkHub->addAttribute('href', $websubHub);
             $atomLinkHub->addAttribute('rel', 'hub');
             $atomLinkHub->addAttribute('type', 'application/rss+xml');
@@ -411,7 +413,7 @@ if (! function_exists('add_category_tag')) {
     {
         $itunesNamespace = 'http://www.itunes.com/dtds/podcast-1.0.dtd';
 
-        $itunesCategory = $node->addChild('category', '', $itunesNamespace);
+        $itunesCategory = $node->addChild('category', null, $itunesNamespace);
         $itunesCategory->addAttribute(
             'text',
             $category->parent !== null
@@ -420,7 +422,7 @@ if (! function_exists('add_category_tag')) {
         );
 
         if ($category->parent !== null) {
-            $itunesCategoryChild = $itunesCategory->addChild('category', '', $itunesNamespace);
+            $itunesCategoryChild = $itunesCategory->addChild('category', null, $itunesNamespace);
             $itunesCategoryChild->addAttribute('text', $category->apple_category);
             $node->addChild('category', $category->parent->apple_category);
         }
