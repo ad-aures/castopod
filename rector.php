@@ -22,9 +22,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $parameters->set(Option::PATHS, [
         __DIR__ . '/app',
-        // __DIR__ . '/modules',
-        // __DIR__ . '/tests',
-        // __DIR__ . '/public',
+        __DIR__ . '/modules',
+        __DIR__ . '/tests',
+        __DIR__ . '/public',
     ]);
 
     // do you need to include constants, class aliases or custom autoloader? files listed will be executed
