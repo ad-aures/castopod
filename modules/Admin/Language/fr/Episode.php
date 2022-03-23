@@ -47,6 +47,7 @@ return [
     'messages' => [
         'createSuccess' => 'L’épisode a été créé avec succès !',
         'editSuccess' => 'L’épisode a bien été mis à jour !',
+        'publishCancelSuccess' => 'La publication de l’épisode a bien été annulée !',
     ],
     'form' => [
         'file_size_error' =>

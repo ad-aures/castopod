@@ -47,6 +47,7 @@ return [
     'messages' => [
         'createSuccess' => 'Odcinek został pomyślnie utworzony!',
         'editSuccess' => 'Odcinek został pomyślnie zaktualizowany!',
+        'publishCancelSuccess' => 'Episode publication successfully cancelled!',
     ],
     'form' => [
         'file_size_error' =>

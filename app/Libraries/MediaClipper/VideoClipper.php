@@ -266,7 +266,7 @@ class VideoClipper
         return implode(' ', $videoClipCmd);
     }
 
-    private function episodeNumbering(?int $episodeNumber = null, ?int $seasonNumber = null,): ?string
+    private function episodeNumbering(?int $episodeNumber = null, ?int $seasonNumber = null): ?string
     {
         if (! $episodeNumber && ! $seasonNumber) {
             return null;

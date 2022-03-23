@@ -46,6 +46,7 @@ return [
     'messages' => [
         'createSuccess' => 'Episode has been successfully created!',
         'editSuccess' => 'Episode has been successfully updated!',
+        'publishCancelSuccess' => 'Episode publication successfully cancelled!',
     ],
     'form' => [
         'file_size_error' =>

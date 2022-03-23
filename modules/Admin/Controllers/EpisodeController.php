@@ -615,8 +615,8 @@ class EpisodeController extends BaseController
         }
 
         return redirect()->route('episode-view', [$this->podcast->id, $this->episode->id])->with(
-            'error',
-            lang('Episode.publish_cancel_error')
+            'message',
+            lang('Episode.messages.publishCancelSuccess')
         );
     }
 
