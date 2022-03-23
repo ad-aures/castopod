@@ -23,6 +23,7 @@ PHP version 8.0 or higher is required, with the following extensions installed:
 - [mbstring](https://php.net/manual/en/mbstring.installation.php)
 - [gd](https://www.php.net/manual/en/image.installation.php) with **JPEG**,
   **PNG** and **WEBP** libraries.
+- [exif](https://www.php.net/manual/en/exif.installation.php)
 
 Additionally, make sure that the following extensions are enabled in your PHP:
 
@@ -155,7 +156,7 @@ Docker<svg viewBox="0 0 24 24" width="1em" height="1em" class="text-xl text-pine
 
 ::: info Note
 
-Given high demand for docker, we are planning on maintaining an official Docker
+Given high demand for docker, we plan on maintaining an official Castopod Docker
 image directly into the Castopod repository.
 
 :::

@@ -43,19 +43,22 @@ podcasters around&nbsp;the&nbsp;world!
   - 📱 &nbsp;PWA: install as a standalone app
   - 🎨 &nbsp;Customizable theme colors
   - 🎬 &nbsp;Generate ready-to-share Video clips from episodes
-  - 🎵 &nbsp;Generate Soundbites
+  - 🔉 &nbsp;Generate soundbites
   - ▶️ &nbsp;Embeddable player, embed your episodes on any website
-- 💸 &nbsp;Monetization
+- 💸 &nbsp;Monetization:
   - 🔗 &nbsp;Funding links
   - 📲 &nbsp;listen-to-click ads
   - 🤝 &nbsp;value4value / WebMonetization
-- 📡 &nbsp;Publish and broadcast everywhere with RSS: Podcast Index, Apple
-  Podcasts, Spotify, Google Podcasts, Deezer, Podcast Addict, Podfriend, …
+- 📡 &nbsp;Publish your episodes everywhere with RSS:
+  - 📱 &nbsp;On all indexes and apps: Podcast Index, Apple Podcasts, Spotify,
+    Google Podcasts, Deezer, Podcast Addict, Podfriend, …
+  - ⚡ &nbsp;Broadcast your episodes instantly with WebSub
 - 📥 &nbsp;Podcast import: move your existing podcast into Castopod
 - 📤 &nbsp;Move your podcast out of Castopod
 - 🔀 &nbsp;Multi-tenant: host as many podcasts as you want
 - 👥 &nbsp;Multi-user: add contributors and set roles
-- 🌎 &nbsp;i18n support: translated in English & French, and more to come!
+- 🌎 &nbsp;i18n support: translated in English, French & Polish with more to
+  come!
 
 ## Motivation
 
