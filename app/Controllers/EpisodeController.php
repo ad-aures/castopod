@@ -235,7 +235,7 @@ class EpisodeController extends BaseController
         $oembed->addChild('thumbnail_height', (string) config('Images')->podcastCoverSizes['og']['height']);
         $oembed->addChild(
             'html',
-            htmlentities(
+            htmlspecialchars(
                 '<iframe src="' .
                     $this->episode->embed_url .
                     '" width="100%" height="' . config('Embed')->height . '" frameborder="0" scrolling="no"></iframe>',

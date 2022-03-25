@@ -23,13 +23,7 @@ class MarkdownEditor extends FormComponent
         $this->attributes['class'] = 'bg-elevated border-none focus:border-none focus:outline-none focus:ring-0 w-full h-full';
         $this->attributes['rows'] = 6;
 
-        $value = htmlspecialchars_decode($this->value);
-
-        $oldValue = old($this->name);
-        if ($oldValue === null) {
-            $oldValue = $value;
-        }
-        $textarea = form_textarea($this->attributes, $oldValue);
+        $textarea = form_markdown_textarea($this->attributes, old($this->name, $this->value));
         $markdownIcon = icon(
             'markdown',
             'mr-1 text-lg opacity-40'

@@ -122,7 +122,7 @@
     as="MarkdownEditor"
     name="description"
     label="<?= lang('Episode.form.description') ?>"
-    value="<?= htmlspecialchars($episode->description_markdown) ?>"
+    value="<?= esc($episode->description_markdown) ?>"
     required="true"
     disallowList="header,quote" />
 
@@ -131,7 +131,7 @@
     name="description_footer"
     label="<?= lang('Episode.form.description_footer') ?>"
     hint="<?= lang('Episode.form.description_footer_hint') ?>"
-    value="<?= htmlspecialchars($podcast->episode_description_footer_markdown) ?? '' ?>"
+    value="<?= esc($podcast->episode_description_footer_markdown) ?? '' ?>"
     disallowList="header,quote" />
 
 </Forms.Section>

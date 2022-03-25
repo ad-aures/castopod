@@ -39,7 +39,7 @@
         </div>
     </div>
     <div class="px-4 mb-2">
-        <Forms.Textarea name="message" placeholder="<?= lang('Episode.publish_form.message_placeholder') ?>" autofocus="" value="<?= $post->message ?>" rows="2" />
+        <Forms.Textarea name="message" placeholder="<?= lang('Episode.publish_form.message_placeholder') ?>" autofocus="" value="<?= esc($post->message) ?>" rows="2" />
     </div>
     <div class="flex border-y">
         <img src="<?= $episode->cover

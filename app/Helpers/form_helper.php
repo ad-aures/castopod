@@ -43,3 +43,46 @@ if (! function_exists('form_markdown_textarea')) {
                 . "</textarea>\n";
     }
 }
+
+
+if (! function_exists('parse_form_attributes')) {
+    /**
+     * Parse the form attributes
+     *
+     * Helper function used by some of the form helpers
+     *
+     * @param array<string, string>|string $attributes List of attributes
+     * @param array<string, mixed>        $default    Default values
+     */
+    function parse_form_attributes(array|string $attributes, array $default): string
+    {
+        if (is_array($attributes)) {
+            foreach (array_keys($default) as $key) {
+                if (isset($attributes[$key])) {
+                    $default[$key] = $attributes[$key];
+                    unset($attributes[$key]);
+                }
+            }
+
+            if (! empty($attributes)) {
+                $default = array_merge($default, $attributes);
+            }
+        }
+
+        $att = '';
+
+        foreach ($default as $key => $val) {
+            if (! is_bool($val)) {
+                if ($key === 'name' && ! strlen($default['name'])) {
+                    continue;
+                }
+
+                $att .= $key . '="' . $val . '"' . ($key === array_key_last($default) ? '' : ' ');
+            } else {
+                $att .= $key . ' ';
+            }
+        }
+
+        return $att;
+    }
+}

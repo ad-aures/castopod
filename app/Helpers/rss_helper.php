@@ -364,22 +364,16 @@ if (! function_exists('get_rss_feed')) {
 
             foreach ($episode->persons as $person) {
                 foreach ($person->roles as $role) {
-                    $personElement = $item->addChild(
-                        'person',
-                        htmlspecialchars($person->full_name),
-                        $podcastNamespace,
-                    );
+                    $personElement = $item->addChild('person', esc($person->full_name), $podcastNamespace,);
 
                     $personElement->addAttribute(
                         'role',
-                        htmlspecialchars(
-                            lang("PersonsTaxonomy.persons.{$role->group}.roles.{$role->role}.label", [], 'en'),
-                        ),
+                        esc(lang("PersonsTaxonomy.persons.{$role->group}.roles.{$role->role}.label", [], 'en'),),
                     );
 
                     $personElement->addAttribute(
                         'group',
-                        htmlspecialchars(lang("PersonsTaxonomy.persons.{$role->group}.label", [], 'en')),
+                        esc(lang("PersonsTaxonomy.persons.{$role->group}.label", [], 'en')),
                     );
 
                     $personElement->addAttribute('img', $person->avatar->medium_url);

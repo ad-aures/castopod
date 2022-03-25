@@ -6,7 +6,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title><?= esc($episode->title) ?></title>
-    <meta name="description" content="<?= htmlspecialchars(
+    <meta name="description" content="<?= esc(
         $episode->description,
     ) ?>" />
     <link rel="icon" type="image/x-icon" href="<?= service('settings')

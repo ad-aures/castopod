@@ -11,7 +11,7 @@
             ->avatar_image_url ?>" alt="<?= esc(interact_as_actor()
             ->display_name) ?>" class="w-10 h-10 rounded-full aspect-square" loading="lazy" />
         <div class="flex flex-col flex-1 min-w-0 gap-y-2">
-            <input name="episode_url" value="<?= $episode->link ?>" type="hidden" />
+            <input name="episode_url" value="<?= esc($episode->link) ?>" type="hidden" />
             <Forms.Textarea
                 name="message"
                 placeholder="<?= lang('Post.form.episode_message_placeholder') ?>"

@@ -32,7 +32,7 @@
 </div>
 
 <div class="flex items-center mt-4 gap-x-2">
-    <Forms.Input readonly="true" class="w-full max-w-xl" name="url" value="<?= $episode->embed_url ?>" />
+    <Forms.Input readonly="true" class="w-full max-w-xl" name="url" value="<?= esc($episode->embed_url) ?>" />
     <IconButton glyph="file-copy" data-type="clipboard-copy" data-clipboard-target="url"><?= lang('Episode.embed.clipboard_url') ?></IconButton>
 </div>
 

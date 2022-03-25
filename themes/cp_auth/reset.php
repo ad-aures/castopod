@@ -15,7 +15,7 @@
 <Forms.Field
     name="token"
     label="<?= lang('Auth.token') ?>"
-    value="<?= $token ?? '' ?>"
+    value="<?= esc($token) ?? '' ?>"
     required="true" />
     
 <Forms.Field

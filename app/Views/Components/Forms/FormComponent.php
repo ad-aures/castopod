@@ -31,6 +31,11 @@ class FormComponent extends Component
         }
     }
 
+    public function setValue(string $value): void
+    {
+        $this->value = htmlspecialchars_decode($value, ENT_QUOTES);
+    }
+
     public function setRequired(string $value): void
     {
         $this->required = $value === 'true';

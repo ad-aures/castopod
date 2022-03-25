@@ -47,10 +47,19 @@ export class MarkdownPreview extends LitElement {
       return link.replace("<a", "<a target='_blank' rel='noopener noreferrer'");
     };
 
-    return marked(this._textarea.value, {
+    return marked(this.escapeHtml(this._textarea.value), {
       renderer: renderer,
     });
   }
+
+  private escapeHtml = (unsafe: string) => {
+    return unsafe
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  };
 
   static styles = css`
     * {

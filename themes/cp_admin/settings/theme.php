@@ -20,7 +20,7 @@
     <?php foreach (config('Colors')->themes as $themeName => $color): ?>
         <Forms.ColorRadioButton
         class="theme-<?= $themeName ?> mx-auto"
-        value="<?= $themeName ?>"
+        value="<?= esc($themeName) ?>"
         name="theme"
         isChecked="<?= $themeName === service('settings')
         ->get('App.theme') ? 'true' : 'false' ?>" ><?= lang('Settings.theme.' . $themeName) ?></Forms.ColorRadioButton>

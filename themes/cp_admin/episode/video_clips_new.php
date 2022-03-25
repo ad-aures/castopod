@@ -58,7 +58,7 @@
                 <?php foreach (config('MediaClipper')->themes as $themeName => $colors): ?>
                     <Forms.ColorRadioButton
                     class="mx-auto"
-                    value="<?= $themeName ?>"
+                    value="<?= esc($themeName) ?>"
                     name="theme"
                     required="true"
                     isChecked="<?= $themeName === 'pine' ? 'true' : 'false' ?>"
