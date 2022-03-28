@@ -2,5 +2,7 @@ commit_message: "[ci skip]"
 files:
   - source: /app/Language/en/*.php
     translation: /app/Language/%two_letters_code%/%original_file_name%
+    escape_quotes: 1
   - source: /modules/**/Language/en/*.php
     translation: /modules/**/Language/%two_letters_code%/%original_file_name%
+    escape_quotes: 1
