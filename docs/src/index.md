@@ -4,7 +4,7 @@ sidebarDepth: 2
 
 # Welcome 👋
 
-[![release-badge]][release]&nbsp;[![license-badge]][license]&nbsp;[![contributions-badge]][contributions]&nbsp;[![semantic-release-badge]][semantic-release]&nbsp;[![discord-badge]][discord]&nbsp;[![stars-badge]][stars]
+[![release-badge]][release]&nbsp;[![license-badge]][license]&nbsp;[![contributions-badge]][contributions]&nbsp;[![semantic-release-badge]][semantic-release]&nbsp;[![crowdin-badge]][crowdin]&nbsp;[![discord-badge]][discord]&nbsp;[![stars-badge]][stars]
 
 Castopod is a free & open-source hosting platform made for podcasters who want
 engage and interact with their audience.
@@ -219,3 +219,5 @@ Copyright © 2020-present, [Ad Aures](https://adaures.com/).
 [stars]: https://github.com/ad-aures/castopod/stargazers
 [stars-badge]:
   https://img.shields.io/github/stars/ad-aures/castopod?style=social
+[crowdin]: https://translate.castopod.org/project/castopod
+[crowdin-badge]: https://badges.crowdin.net/castopod/localized.svg
