@@ -7,6 +7,7 @@ use Symplify\EasyCodingStandard\ValueObject\Option;
 use Symplify\EasyCodingStandard\ValueObject\Set\SetList;
 use Symplify\CodingStandard\Fixer\LineLength\LineLengthFixer;
 use PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\AssignmentInConditionSniff;
+use PhpCsFixer\Fixer\StringNotation\SingleQuoteFixer;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters = $containerConfigurator->parameters();
@@ -40,6 +41,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             __DIR__ . '/app/Views/*',
             __DIR__ . '/modules/**/Views/*',
             __DIR__ . '/themes/*',
+        ],
+
+        // crowdin enforces its own style for translation files
+        // remove SingleQuoteFixer for Language files to prevent conflicts
+        SingleQuoteFixer::class => [
+            __DIR__ . '/app/Language/*',
+            __DIR__ . '/modules/**/Language/*'
         ],
 
         AssignmentInConditionSniff::class,
