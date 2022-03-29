@@ -43,6 +43,6 @@ return [
     'listening-time' => 'drée d’écoute',
     'time-periods' => 'périodes',
     'soundbites' => 'extraits sonores',
-    'video-clips' => 'video clips',
+    'video-clips' => 'extraits vidéo',
     'embed' => 'lecteur intégré',
 ];

@@ -27,7 +27,7 @@ return [
     }',
     'activity' => 'Activité',
     'episodes' => 'Épisodes',
-    'episodes_title' => 'Episodes of {podcastTitle}',
+    'episodes_title' => 'Épisodes de {podcastTitle}',
     'about' => 'À propos',
     'stats' => [
         'title' => 'Statistiques',

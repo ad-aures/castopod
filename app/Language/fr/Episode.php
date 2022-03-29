@@ -12,7 +12,7 @@ return [
     'season' => 'Saison {seasonNumber}',
     'season_abbr' => 'S{seasonNumber}',
     'number' => 'Épisode {episodeNumber}',
-    'number_abbr' => 'Ep. {episodeNumber}',
+    'number_abbr' => 'Ép. {episodeNumber}',
     'season_episode' => 'Saison {seasonNumber} épisode {episodeNumber}',
     'season_episode_abbr' => 'S{seasonNumber}:E{episodeNumber}',
     'persons' => '{personsCount, plural,

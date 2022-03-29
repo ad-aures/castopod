@@ -9,25 +9,22 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => "{actorDisplayName}'s comment for {episodeTitle}",
-    'back_to_comments' => 'Back to comments',
+    'title' => "Commentaire de {actorDisplayName} pour {episodeTitle}",
+    'back_to_comments' => 'Retour à la liste des commentaires',
     'form' => [
         'episode_message_placeholder' => 'Saisissez un commentaire…',
         'reply_to_placeholder' => 'Répondre à @{actorUsername}',
         'submit' => 'Envoyer !',
         'submit_reply' => 'Répondre',
     ],
-    'likes' => '{numberOfLikes, plural,
-        one {# like}
-        other {# likes}
-    }',
+    'likes' => '{numberOfLikes} j\'aime',
     'replies' => '{numberOfReplies, plural,
         one {# réponse}
         other {# réponses}
     }',
     'like' => 'J’aime',
     'reply' => 'Répondre',
-    'view_replies' => 'View replies ({numberOfReplies})',
+    'view_replies' => 'Voir les réponses ({numberOfReplies})',
     'block_actor' => 'Bloquer l’utilisateur @{actorUsername}',
     'block_domain' => 'Bloquer le domaine @{actorDomain}',
     'delete' => 'Supprimer le commentaire',
