@@ -33,7 +33,7 @@ return [
         'db_password' => 'Hasło bazy danych',
         'db_prefix' => 'Prefiks bazy danych',
         'db_prefix_hint' =>
-            'Przedrostek nazw tabel Castopod; pozostaw bez zmian jeśli nie wiesz, co to znaczy.',
+            "Przedrostek nazw tabel Castopod; pozostaw bez zmian jeśli nie wiesz, co to znaczy.",
         'cache_config' => 'Konfiguracja pamięci podręcznej',
         'cache_config_hint' =>
             'Wybierz preferowaną obsługę pamięci podręcznej (cache). Pozostaw to jako wartość domyślną, jeśli nie masz pojęcia, co to znaczy.',
@@ -56,6 +56,6 @@ return [
         'databaseConnectError' =>
             'Castopod nie mógł połączyć się z Twoją bazą danych. Edytuj konfigurację bazy danych i spróbuj ponownie.',
         'writeError' =>
-            'Nie można utworzyć/zapisać pliku `.env`. Musisz go utworzyć ręcznie postępując zgodnie z szablonem pliku `.env.example` w pakiecie Castopod.',
+            "Nie można utworzyć/zapisać pliku `.env`. Musisz go utworzyć ręcznie postępując zgodnie z szablonem pliku `.env.example` w pakiecie Castopod.",
     ],
 ];

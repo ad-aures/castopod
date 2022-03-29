@@ -12,7 +12,7 @@ return [
     'info' => 'Informacje o moim koncie',
     'changePassword' => 'Zmień moje hasło',
     'messages' => [
-        'wrongPasswordError' => 'Wpisałeś złe hasło, spróbuj ponownie.',
+        'wrongPasswordError' => "Wpisałeś złe hasło, spróbuj ponownie.",
         'passwordChangeSuccess' => 'Hasło zostało pomyślnie zmienione!',
     ],
 ];

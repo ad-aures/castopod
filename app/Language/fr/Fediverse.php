@@ -10,8 +10,7 @@ declare(strict_types=1);
 
 return [
     'your_handle' => 'Votre pseudonyme',
-    'your_handle_hint' =>
-        'Entrez le @utilisateur@domaine avec lequel vous voulez interagir.',
+    'your_handle_hint' => 'Entrez le @utilisateur@domaine avec lequel vous voulez interagir.',
     'follow' => [
         'label' => 'Suivre',
         'title' => 'Suivre {actorDisplayName}',
@@ -21,17 +20,17 @@ return [
         'submit' => 'Poursuivre',
     ],
     'favourite' => [
-        'title' => 'Mettez la publication de {actorDisplayName} en favori',
+        'title' => "Mettez la publication de {actorDisplayName} en favori",
         'subtitle' => 'Vous allez mettre en favori :',
         'submit' => 'Poursuivre',
     ],
     'reblog' => [
-        'title' => 'Partagez la publication de {actorDisplayName}',
+        'title' => "Partagez la publication de {actorDisplayName}",
         'subtitle' => 'Vous allez partager :',
         'submit' => 'Poursuivre',
     ],
     'reply' => [
-        'title' => 'Répondre à la publication de {actorDisplayName}',
+        'title' => "Répondre à la publication de {actorDisplayName}",
         'subtitle' => 'Vous allez répondre à :',
         'submit' => 'Poursuivre',
     ],

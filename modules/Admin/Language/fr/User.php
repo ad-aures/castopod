@@ -9,13 +9,13 @@ declare(strict_types=1);
  */
 
 return [
-    'edit_roles' => 'Modifier les rôles de {username}',
+    'edit_roles' => "Modifier les rôles de {username}",
     'forcePassReset' => 'Forcer la réinitialisation du mot de passe',
     'ban' => 'Bloquer',
     'unban' => 'Débloquer',
     'delete' => 'Supprimer',
     'create' => 'Créer un utilisateur',
-    'view' => 'Informations de {username}',
+    'view' => "Informations de {username}",
     'all_users' => 'Tous les utilisateurs',
     'list' => [
         'user' => 'Utilisateurs',
@@ -40,7 +40,7 @@ return [
         'createSuccess' =>
             'Utilisateur créé avec succès ! {username} devra modifier son mot de passe à la première authentification.',
         'rolesEditSuccess' =>
-            'Les rôles de {username} ont été mis à jour avec succès.',
+            "Les rôles de {username} ont été mis à jour avec succès.",
         'forcePassResetSuccess' =>
             '{username} devra modifier son mot de passe à la prochaine visite.',
         'banSuccess' => '{username} a été bloqué.',

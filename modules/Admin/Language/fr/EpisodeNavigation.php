@@ -14,7 +14,7 @@ return [
     'episode-view' => 'Accueil',
     'episode-edit' => 'Modifier l’épisode',
     'episode-persons-manage' => 'Gestion des intervenants',
-    'embed' => 'Lecteur intégré',
+    'embed-add' => 'Embeddable player',
     'clips' => 'Extraits',
     'video-clips-list' => 'Extraits video',
     'video-clips-create' => 'Nouvel extrait video',

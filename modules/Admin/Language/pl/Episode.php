@@ -122,7 +122,7 @@ return [
         'back_to_episode_dashboard' => 'Wróć do pulpitu odcinka',
         'post' => 'Twój wpis ogłoszeniowy',
         'post_hint' =>
-            'Napisz wiadomość, aby ogłosić publikację swojego odcinka. Wiadomość zostanie wyemitowana do wszystkich Twoich obserwujących w fediverse i pojawi się na stronie głównej Twojego podcastu.',
+            "Napisz wiadomość, aby ogłosić publikację swojego odcinka. Wiadomość zostanie wyemitowana do wszystkich Twoich obserwujących w fediverse i pojawi się na stronie głównej Twojego podcastu.",
         'message_placeholder' => 'Napisz swoją wiadomość…',
         'publication_date' => 'Data publikacji',
         'publication_method' => [
@@ -142,13 +142,13 @@ return [
     ],
     'unpublish_form' => [
         'disclaimer' =>
-            'Cofnięcie publikacji odcinka spowoduje usunięcie wszystkich powiązanych z nim wpisów i usunięcie go z kanału RSS podcastu.',
+            "Cofnięcie publikacji odcinka spowoduje usunięcie wszystkich powiązanych z nim wpisów i usunięcie go z kanału RSS podcastu.",
         'understand' => 'Rozumiem, chcę cofnąć publikację odcinka',
         'submit' => 'Cofnij publikację',
     ],
     'delete_form' => [
         'disclaimer' =>
-            'Usunięcie odcinka spowoduje usunięcie wszystkich powiązanych z nim wpisów i usunięcie go z kanału RSS podcastu.',
+            "Usunięcie odcinka spowoduje usunięcie wszystkich powiązanych z nim wpisów i usunięcie go z kanału RSS podcastu.",
         'understand' => 'Rozumiem, chcę usunąć odcinek',
         'submit' => 'Usuń',
     ],

@@ -9,13 +9,13 @@ declare(strict_types=1);
  */
 
 return [
-    'edit_roles' => 'Edytuj role użytkownika {username}',
+    'edit_roles' => "Edytuj role użytkownika {username}",
     'forcePassReset' => 'Wymuś resetowanie hasła',
     'ban' => 'Zablokuj',
     'unban' => 'Odblokuj',
     'delete' => 'Usuń',
     'create' => 'Nowy użytkownik',
-    'view' => 'Informacje użytkownika {username}',
+    'view' => "Informacje użytkownika {username}",
     'all_users' => 'Wszyscy użytkownicy',
     'list' => [
         'user' => 'Użytkownik',
@@ -40,7 +40,7 @@ return [
         'createSuccess' =>
             'Pomyślnie utworzono użytkownika! {username} zostanie poproszony o zresetowanie hasła przy pierwszym uwierzytelnieniu.',
         'rolesEditSuccess' =>
-            'Role {username} zostały pomyślnie zaktualizowane.',
+            "Role {username} zostały pomyślnie zaktualizowane.",
         'forcePassResetSuccess' =>
             '{username} zostanie poproszony o zresetowanie hasła przy następnej wizycie.',
         'banSuccess' => '{username} został zablokowany.',

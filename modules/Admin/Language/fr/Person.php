@@ -38,8 +38,7 @@ return [
     'podcast_form' => [
         'title' => 'Gérer les intervenants',
         'add_section_title' => 'Ajouter des intervenants à ce podcast',
-        'add_section_subtitle' =>
-            'Vous pouvez sélectionner plusieurs intervenants et rôles.',
+        'add_section_subtitle' => 'Vous pouvez sélectionner plusieurs intervenants et rôles.',
         'persons' => 'Intervenants',
         'persons_hint' =>
             'Vous pouvez selectionner un ou plusieurs intervenants ayant les mêmes rôles. Les intervenants doivent avoir été préalablement créés.',
@@ -52,8 +51,7 @@ return [
     'episode_form' => [
         'title' => 'Gérer les intervenants',
         'add_section_title' => 'Ajouter des intervenants à cet épisode',
-        'add_section_subtitle' =>
-            'Vous pouvez sélectionner plusieurs intervenants et rôles.',
+        'add_section_subtitle' => 'Vous pouvez sélectionner plusieurs intervenants et rôles.',
         'persons' => 'Intervenants',
         'persons_hint' =>
             'Vous pouvez selectionner un ou plusieurs intervenants ayant les mêmes rôles. Les intervenants doivent avoir été préalablement créés.',

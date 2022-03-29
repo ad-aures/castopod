@@ -9,7 +9,7 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => 'Komentarz użytkownika {actorDisplayName} do {episodeTitle}',
+    'title' => "Komentarz użytkownika {actorDisplayName} do {episodeTitle}",
     'back_to_comments' => 'Wróć do komentarzy',
     'form' => [
         'episode_message_placeholder' => 'Napisz komentarz…',

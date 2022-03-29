@@ -20,17 +20,17 @@ return [
         'submit' => 'Przejdź do obserwowania',
     ],
     'favourite' => [
-        'title' => 'Dodaj do ulubionych wpis {actorDisplayName}',
+        'title' => "Dodaj do ulubionych wpis {actorDisplayName}",
         'subtitle' => 'Zamierzasz dodać do ulubionych:',
         'submit' => 'Przejdź do dodania do ulubionych',
     ],
     'reblog' => [
-        'title' => 'Udostępnij wpis {actorDisplayName}',
+        'title' => "Udostępnij wpis {actorDisplayName}",
         'subtitle' => 'Zamierzasz udostępnić:',
         'submit' => 'Przejdź do udostępnienia',
     ],
     'reply' => [
-        'title' => 'Odpowiedź do wpisu {actorDisplayName}',
+        'title' => "Odpowiedź do wpisu {actorDisplayName}",
         'subtitle' => 'Zamierzasz odpisać na:',
         'submit' => 'Przejdź do odpowiedzi',
     ],

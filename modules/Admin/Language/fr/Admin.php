@@ -11,4 +11,5 @@ declare(strict_types=1);
 return [
     'dashboard' => 'Tableau de bord',
     'welcome_message' => 'Bienvenue dans l’administration !',
+    'choose_interact' => 'Choose how to interact',
 ];

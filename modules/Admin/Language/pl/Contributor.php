@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 return [
     'podcast_contributors' => 'Kontrybutorzy podcastu',
-    'view' => 'Wkład {username} do {podcastTitle}',
+    'view' => "Wkład {username} do {podcastTitle}",
     'add' => 'Dodaj kontrybutora',
     'add_contributor' => 'Dodaj kontrybutora do {0}',
     'edit_role' => 'Zaktualizuj rolę dla {0}',
@@ -32,10 +32,10 @@ return [
         'podcast_admin' => 'Administrator podcastu',
     ],
     'messages' => [
-        'removeOwnerError' => 'Nie możesz usunąć właściciela podcastu!',
+        'removeOwnerError' => "Nie możesz usunąć właściciela podcastu!",
         'removeSuccess' =>
             'Pomyślnie usunąłeś/aś {username} z {podcastTitle}',
         'alreadyAddedError' =>
-            'Kontrybutor, którego próbujesz dodać został już dodany!',
+            "Kontrybutor, którego próbujesz dodać został już dodany!",
     ],
 ];

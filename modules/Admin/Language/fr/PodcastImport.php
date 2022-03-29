@@ -21,7 +21,8 @@ return [
     'advanced_params_section_subtitle' =>
         'Si vous ne savez pas à quoi servent ces champs, conservez les valeurs par défaut.',
     'slug_field' => 'Champ à utiliser pour calculer l’identifiant de l’épisode',
-    'description_field' => 'Champs pour la description des épisodes',
+    'description_field' =>
+        'Champs pour la description des épisodes',
     'force_renumber' => 'Forcer la re-numérotation des épisodes',
     'force_renumber_hint' =>
         'Utilisez ceci si le podcast à importer ne contient pas de numéros d’épisodes mais que vous souhaitez en ajouter pendant l’import.',

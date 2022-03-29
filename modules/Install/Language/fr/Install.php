@@ -34,7 +34,7 @@ return [
         'db_password' => 'Mot de passe de base de données',
         'db_prefix' => 'Préfixe des tables',
         'db_prefix_hint' =>
-            'Le préfixe des noms de tables de Castopod, laissez la valeur par défaut si vous ne savez pas de quoi il s’agit.',
+            "Le préfixe des noms de tables de Castopod, laissez la valeur par défaut si vous ne savez pas de quoi il s’agit.",
         'cache_config' => 'Paramètres de cache',
         'cache_config_hint' =>
             'Sélectionnez votre gestionnaire de cache préféré. Laissez la valeur par défaut si vous ne savez pas de quoi il s’agit.',
@@ -57,6 +57,6 @@ return [
         'databaseConnectError' =>
             'Castopod n’a pas pu se connecter à la base de données. Modifier les paramètres de base de données et essayer à nouveau.',
         'writeError' =>
-            'Impossible de créer/écrire le fichier `.env`. Créez manuellement un fichier `.env` en copiant le modèle `.env.example` fourni avec Castopod.',
+            "Impossible de créer/écrire le fichier `.env`. Créez manuellement un fichier `.env` en copiant le modèle `.env.example` fourni avec Castopod.",
     ],
 ];

@@ -15,7 +15,6 @@ return [
     'number_abbr' => 'Ep. {episodeNumber}',
     'season_episode' => 'Saison {seasonNumber} épisode {episodeNumber}',
     'season_episode_abbr' => 'S{seasonNumber}E{episodeNumber}',
-    'back_to_episodes' => 'Retour aux épisodes de {podcast}',
     'number_of_comments' => '{numberOfComments, plural,
         one {# commentaire}
         other {# commentaires}
@@ -99,15 +98,13 @@ return [
         'transcript_hint' => 'Seulement les .srt sont autorisés',
         'transcript_download' => 'Télécharger le transcript',
         'transcript_file' => 'Fichier de transcription (.srt)',
-        'transcript_remote_url' =>
-            'URL distante pour le fichier de transcription',
+        'transcript_remote_url' => 'URL distante pour le fichier de transcription',
         'transcript_file_delete' => 'Supprimer le fichier de transcription',
         'chapters' => 'Chapitrage',
         'chapters_hint' => 'Le fichier doit être en format “JSON Chapters”.',
         'chapters_download' => 'Télécharger le chapitrage',
         'chapters_file' => 'Fichier de chapitrage',
-        'chapters_remote_url' =>
-            'URL distante pour le fichier de chapitrage',
+        'chapters_remote_url' => 'URL distante pour le fichier de chapitrage',
         'chapters_file_delete' => 'Supprimer le fichier de chapitrage',
         'advanced_section_title' => 'Paramètres avancés',
         'advanced_section_subtitle' =>
@@ -124,12 +121,9 @@ return [
         'back_to_episode_dashboard' => 'Retour au tableau de bord de l’épisode',
         'post' => 'Votre message de publication',
         'post_hint' =>
-            'Écrivez un message pour annoncer la publication de votre épisode. Le message sera diffusé à toutes les personnes qui vous suivent dans le fédiverse et mis en évidence sur la page d’accueil de votre podcast.',
+            "Écrivez un message pour annoncer la publication de votre épisode. Le message sera diffusé à toutes les personnes qui vous suivent dans le fédiverse et mis en évidence sur la page d’accueil de votre podcast.",
         'message_placeholder' => 'Entrez votre message…',
         'publication_date' => 'Date de publication',
-        'publication_date_clear' => 'Effacer la date de publication',
-        'publication_date_hint' =>
-            'Vous pouvez planifier la sortie de l’épisode en saisissant une date de publication future. Ce champ doit être au format YYYY-MM-DD HH:mm',
         'publication_method' => [
             'now' => 'Maintenant',
             'schedule' => 'Planifier',
@@ -147,18 +141,17 @@ return [
     ],
     'unpublish_form' => [
         'disclaimer' =>
-            'Dépublier l’épisode supprimera toutes les publications qui lui sont associées et le retirera du flux RSS du podcast.',
+            "Dépublier l’épisode supprimera toutes les publications qui lui sont associées et le retirera du flux RSS du podcast.",
         'understand' => 'Je comprends, je veux dépublier l’épisode',
         'submit' => 'Dépublier',
     ],
     'delete_form' => [
         'disclaimer' =>
-            'Supprimer l’épisode supprimera toutes les publications qui lui sont associées et le retirera du flux RSS du podcast.',
+            "Supprimer l’épisode supprimera toutes les publications qui lui sont associées et le retirera du flux RSS du podcast.",
         'understand' => 'Je comprends, Je veux supprimer l’épisode',
         'submit' => 'Supprimer',
     ],
     'embed' => [
-        'add' => 'Ajouter un lecteur intégré',
         'title' => 'Lecteur intégré',
         'label' =>
             'Sélectionnez une couleur de thème, copiez le code dans le presse-papier, puis collez-le sur votre site internet.',

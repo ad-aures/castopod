@@ -9,7 +9,7 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => 'Wpis {actorDisplayName}',
+    'title' => "Wpis {actorDisplayName}",
     'back_to_actor_posts' => 'Wróć do wpisów {actor}',
     'actor_shared' => '{actor} udostępnił',
     'reply_to' => 'Odpowiedz do @{actorUsername}',

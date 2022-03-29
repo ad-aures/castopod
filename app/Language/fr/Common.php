@@ -14,7 +14,6 @@ return [
     'cancel' => 'Annuler',
     'optional' => 'Optionnel',
     'close' => 'Fermer',
-    'edit' => 'Modifier',
     'home' => 'Accueil',
     'explicit' => 'Explicite',
     'powered_by' => 'Propulsé par {castopod}',

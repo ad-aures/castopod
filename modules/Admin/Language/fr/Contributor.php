@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 return [
     'podcast_contributors' => 'Contributeurs du podcast',
-    'view' => 'Contribution de {username} à {podcastTitle}',
+    'view' => "Contribution de {username} à {podcastTitle}",
     'add' => 'Ajouter un contributeur',
     'add_contributor' => 'Ajouter un contributeur pour {0}',
     'edit_role' => 'Modifier le rôle de {0}',
@@ -32,11 +32,10 @@ return [
         'podcast_admin' => 'Administrateur de Podcasts',
     ],
     'messages' => [
-        'removeOwnerError' =>
-            'Vous ne pouvez pas retirer le propriétaire du podcast !',
+        'removeOwnerError' => "Vous ne pouvez pas retirer le propriétaire du podcast !",
         'removeSuccess' =>
             'Vous avez retiré {username} de {podcastTitle}',
         'alreadyAddedError' =>
-            'Le contributeur que vous essayez d’ajouter est déjà présent.',
+            "Le contributeur que vous essayez d’ajouter est déjà présent.",
     ],
 ];
