@@ -9,26 +9,26 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => "{actorDisplayName}'s comment for {episodeTitle}",
-    'back_to_comments' => 'Back to comments',
+    'title' => "{actorDisplayName}'s Kommentar zu {episodeTitle}",
+    'back_to_comments' => 'Zurück zu den Kommentaren',
     'form' => [
-        'episode_message_placeholder' => 'Write a comment…',
-        'reply_to_placeholder' => 'Reply to @{actorUsername}',
-        'submit' => 'Send',
-        'submit_reply' => 'Reply',
+        'episode_message_placeholder' => 'Schreibe einen Kommentar…',
+        'reply_to_placeholder' => 'Antwort zu @{actorUsername}',
+        'submit' => 'Senden',
+        'submit_reply' => 'Antwort senden',
     ],
     'likes' => '{numberOfLikes, plural,
-        one {# like}
-        other {# likes}
+        one {# Like}
+        other {# Likes}
     }',
     'replies' => '{numberOfReplies, plural,
-        one {# reply}
-        other {# replies}
+        one {# Antwort}
+        other {# Antworten}
     }',
-    'like' => 'Like',
-    'reply' => 'Reply',
-    'view_replies' => 'View replies ({numberOfReplies})',
-    'block_actor' => 'Block user @{actorUsername}',
-    'block_domain' => 'Block domain @{actorDomain}',
-    'delete' => 'Delete comment',
+    'like' => 'Liken',
+    'reply' => 'Antwort',
+    'view_replies' => 'Antworten anzeigen ({numberOfReplies})',
+    'block_actor' => '@{actorUsername} blockieren',
+    'block_domain' => 'Domain @{actorDomain} blockieren',
+    'delete' => 'Kommentar löschen',
 ];

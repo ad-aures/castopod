@@ -40,7 +40,7 @@ return [
     'webpages' => 'pages web',
     'unique-listeners' => 'auditeurs uniques',
     'players' => 'lecteurs',
-    'listening-time' => 'drée d’écoute',
+    'listening-time' => 'durée d’écoute',
     'time-periods' => 'périodes',
     'soundbites' => 'extraits sonores',
     'video-clips' => 'extraits vidéo',

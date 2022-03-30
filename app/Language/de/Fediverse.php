@@ -9,29 +9,29 @@ declare(strict_types=1);
  */
 
 return [
-    'your_handle' => 'Your handle',
+    'your_handle' => 'Handle',
     'your_handle_hint' => 'Enter the @username@domain you want to act from.',
     'follow' => [
-        'label' => 'Follow',
-        'title' => 'Follow {actorDisplayName}',
-        'subtitle' => 'You are going to follow:',
-        'accountNotFound' => 'The account could not be found.',
+        'label' => 'Folge',
+        'title' => 'Folge {actorDisplayName}',
+        'subtitle' => 'Sie werden folgen:',
+        'accountNotFound' => 'Das Konto wurde nicht gefunden.',
         'remoteFollowNotAllowed' => 'Seems like the account server does not allow remote follows…',
-        'submit' => 'Proceed to follow',
+        'submit' => 'Weiter zum Folgen',
     ],
     'favourite' => [
-        'title' => "Favourite {actorDisplayName}'s post",
-        'subtitle' => 'You are going to favourite:',
-        'submit' => 'Proceed to favourite',
+        'title' => "{actorDisplayName}'s Beitrag favorisieren",
+        'subtitle' => 'Sie werden favorisieren:',
+        'submit' => 'Weiter zum Favorisieren',
     ],
     'reblog' => [
-        'title' => "Share {actorDisplayName}'s post",
+        'title' => "{actorDisplayName}'s Beitrag teilen",
         'subtitle' => 'You are going to share:',
-        'submit' => 'Proceed to share',
+        'submit' => 'Weiter zum Teilen',
     ],
     'reply' => [
-        'title' => "Reply to {actorDisplayName}'s post",
+        'title' => "Auf {actorDisplayName}'s Beitrag antworten",
         'subtitle' => 'You are going to reply to:',
-        'submit' => 'Proceed to reply',
+        'submit' => 'Weiter zum Antworten',
     ],
 ];

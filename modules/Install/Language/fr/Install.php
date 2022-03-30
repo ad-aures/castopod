@@ -9,7 +9,7 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => 'Installeur Castopod',
+    'title' => 'Assistant d’installation Castopod',
     'manual_config' => 'Configuration manuelle',
     'manual_config_subtitle' =>
         'Créez un fichier `.env` qui contient tous vos paramètres puis rafraichissez la page pour continuer l’installation.',
@@ -18,7 +18,7 @@ return [
         'hostname' => 'Nom d’hôte',
         'media_base_url' => 'Adresse racine des médias',
         'media_base_url_hint' =>
-            'Si vous utilisez un CDN et/ou un service de mesure d’audience externe, vous pouvez les définir ici.',
+            'Si vous utilisez un CDN vous pouvez les définir ici.',
         'admin_gateway' => 'Adresse d’administration',
         'admin_gateway_hint' =>
             'Le chemin pour accéder à l’administration (par exemple https://example.com/cp-admin). Il est défini par défaut à cp-admin, nous vous recommandons de le changer par mesure de sécurité.',
@@ -47,7 +47,7 @@ return [
         'next' => 'Suivant',
         'submit' => 'Terminer l’installation',
         'create_superadmin' => 'Créer un compte super-utilisateur',
-        'email' => 'E-mail',
+        'email' => 'Adresse électronique (e-mail)',
         'username' => 'Identifiant',
         'password' => 'Mot de passe',
     ],

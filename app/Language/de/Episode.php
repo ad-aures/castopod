@@ -9,25 +9,25 @@ declare(strict_types=1);
  */
 
 return [
-    'season' => 'Season {seasonNumber}',
+    'season' => 'Staffel {seasonNumber}',
     'season_abbr' => 'S{seasonNumber}',
-    'number' => 'Episode {episodeNumber}',
+    'number' => 'Folge {episodeNumber}',
     'number_abbr' => 'Ep. {episodeNumber}',
-    'season_episode' => 'Season {seasonNumber} episode {episodeNumber}',
+    'season_episode' => 'Staffel {seasonNumber} Folge {episodeNumber}',
     'season_episode_abbr' => 'S{seasonNumber}:E{episodeNumber}',
     'persons' => '{personsCount, plural,
-        one {# person}
-        other {# persons}
+        one {# Person}
+        other {# Personen}
     }',
-    'persons_list' => 'Persons',
-    'back_to_episodes' => 'Back to episodes of {podcast}',
-    'comments' => 'Comments',
-    'activity' => 'Activity',
-    'description' => 'Episode description',
+    'persons_list' => 'Personen',
+    'back_to_episodes' => 'Zurück zu Folgen von {podcast}',
+    'comments' => 'Kommentare',
+    'activity' => 'Aktivitäten',
+    'description' => 'Beschreibung der Folge',
     'number_of_comments' => '{numberOfComments, plural,
-        one {# comment}
-        other {# comments}
+        one {# Kommentar}
+        other {# Kommentare}
     }',
-    'all_podcast_episodes' => 'All podcast episodes',
-    'back_to_podcast' => 'Go back to podcast',
+    'all_podcast_episodes' => 'Alle Podcast-Folgen',
+    'back_to_podcast' => 'Zurück zum Podcast',
 ];
