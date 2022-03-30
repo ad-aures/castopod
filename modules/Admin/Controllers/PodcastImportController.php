@@ -211,14 +211,20 @@ class PodcastImportController extends BaseController
             [
                 'name' => 'podcasting',
                 'elements' => $nsPodcast->id,
+                'account_url_key' => 'url',
+                'account_id_key' => 'id',
             ],
             [
                 'name' => 'social',
                 'elements' => $nsPodcast->social,
+                'account_url_key' => 'accountUrl',
+                'account_id_key' => 'accountId',
             ],
             [
                 'name' => 'funding',
                 'elements' => $nsPodcast->funding,
+                'account_url_key' => 'url',
+                'account_id_key' => 'id',
             ],
         ];
         $platformModel = new PlatformModel();
@@ -230,8 +236,8 @@ class PodcastImportController extends BaseController
                     $podcastsPlatformsData[] = [
                         'platform_slug' => $platformSlug,
                         'podcast_id' => $newPodcastId,
-                        'link_url' => $platform->attributes()['url'],
-                        'account_id' => $platform->attributes()['id'],
+                        'link_url' => $platform->attributes()[$platformType['account_url_key']],
+                        'account_id' => $platform->attributes()[$platformType['account_id_key']],
                         'is_visible' => false,
                     ];
                 }

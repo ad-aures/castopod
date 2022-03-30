@@ -320,9 +320,10 @@ if (! function_exists('get_rss_feed')) {
             $comments->addAttribute('contentType', 'application/podcast-activity+json');
 
             if ($episode->getPosts()) {
-                $socialInteractUrl = $episode->getPosts()[0]
+                $socialInteractUri = $episode->getPosts()[0]
                     ->uri;
-                $socialInteractElement = $item->addChild('socialInteract', $socialInteractUrl, $podcastNamespace);
+                $socialInteractElement = $item->addChild('socialInteract', null, $podcastNamespace);
+                $socialInteractElement->addAttribute('uri', $socialInteractUri);
                 $socialInteractElement->addAttribute('priority', '1');
                 $socialInteractElement->addAttribute('platform', 'castopod');
                 $socialInteractElement->addAttribute('protocol', 'activitypub');
