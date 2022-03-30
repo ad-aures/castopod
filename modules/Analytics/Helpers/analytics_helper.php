@@ -241,12 +241,12 @@ if (! function_exists('podcast_hit')) {
      * Counting podcast episode downloads for analytic purposes ✅ No IP address is ever stored on the server. ✅ Only
      * aggregate data is stored in the database. We follow IAB Podcast Measurement Technical Guidelines Version 2.0:
      * https://iabtechlab.com/standards/podcast-measurement-guidelines/
-     * https://iabtechlab.com/wp-content/uploads/2017/12/Podcast_Measurement_v2-Dec-20-2017.pdf ✅ Rolling 24-hour
-     * window ✅ Castopod does not do pre-load ✅ IP deny list https://github.com/client9/ipcat ✅ User-agent
-     * Filtering https://github.com/opawg/user-agents ✅ RSS User-agent https://github.com/opawg/podcast-rss-useragents
-     * ✅ Ignores 2 bytes range "Range: 0-1"  (performed by official Apple iOS Podcast app) ✅ In case of partial
-     * content, adds up all requests to check >1mn was downloaded ✅ Identifying Uniques is done with a combination of
-     * IP Address and User Agent
+     * https://iabtechlab.com/wp-content/uploads/2017/12/Podcast_Measurement_v2-Dec-20-2017.pdf ✅ 24-hour window ✅
+     * Castopod does not do pre-load ✅ IP deny list https://github.com/client9/ipcat ✅ User-agent Filtering
+     * https://github.com/opawg/user-agents ✅ RSS User-agent https://github.com/opawg/podcast-rss-useragents ✅
+     * Ignores 2 bytes range "Range: 0-1"  (performed by official Apple iOS Podcast app) ✅ In case of partial content,
+     * adds up all requests to check >1mn was downloaded ✅ Identifying Uniques is done with a combination of IP
+     * Address and User Agent
      *
      * @param integer $podcastId The podcast ID
      * @param integer $episodeId The Episode ID
@@ -280,19 +280,25 @@ if (! function_exists('podcast_hit')) {
                 ? $_SERVER['HTTP_RANGE']
                 : null;
 
-            // We create a sha1 hash for this IP_Address+User_Agent+Episode_ID (used to count only once multiple episode downloads):
-            $episodeHashId =
-                '_IpUaEp_' .
-                sha1($_SERVER['REMOTE_ADDR'] . '_' . $_SERVER['HTTP_USER_AGENT'] . '_' . $episodeId);
+            $salt = config('Analytics')
+                ->salt;
+            // We create a sha1 hash for this Salt+Current_Date+IP_Address+User_Agent+Episode_ID (used to count only once multiple episode downloads):
+            $episodeListenerHashId =
+                'Analytics_Episode_' .
+                sha1(
+                    $salt . '_' . date(
+                        'Y-m-d'
+                    ) . '_' . $_SERVER['REMOTE_ADDR'] . '_' . $_SERVER['HTTP_USER_AGENT'] . '_' . $episodeId
+                );
             // Was this episode downloaded in the past 24h:
-            $downloadedBytes = cache($episodeHashId);
+            $downloadedBytes = cache($episodeListenerHashId);
             // Rolling window is 24 hours (86400 seconds):
             $rollingTTL = 86400;
             if ($downloadedBytes) {
                 // In case it was already downloaded, TTL should be adjusted (rolling window is 24h since 1st download):
                 $rollingTTL =
                     cache()
-                        ->getMetadata($episodeHashId)['expire'] - time();
+                        ->getMetadata($episodeListenerHashId)['expire'] - time();
             } else {
                 // If it was never downloaded that means that zero byte were downloaded:
                 $downloadedBytes = 0;
@@ -320,7 +326,7 @@ if (! function_exists('podcast_hit')) {
 
                 // We save the number of downloaded bytes for this user and this episode:
                 cache()
-                    ->save($episodeHashId, $downloadedBytes, $rollingTTL);
+                    ->save($episodeListenerHashId, $downloadedBytes, $rollingTTL);
 
                 // If more that 1mn was downloaded, that's a hit, we send that to the database:
                 if ($downloadedBytes >= $bytesThreshold) {
@@ -329,13 +335,17 @@ if (! function_exists('podcast_hit')) {
 
                     $age = intdiv(time() - $publicationTime, 86400);
 
-                    // We create a sha1 hash for this IP_Address+User_Agent+Podcast_ID (used to count unique listeners):
-                    $listenerHashId =
-                        '_IpUaPo_' .
-                        sha1($_SERVER['REMOTE_ADDR'] . '_' . $_SERVER['HTTP_USER_AGENT'] . '_' . $podcastId);
+                    // We create a sha1 hash for this Salt+Current_Date+IP_Address+User_Agent+Podcast_ID (used to count unique listeners):
+                    $podcastListenerHashId =
+                        'Analytics_Podcast_' .
+                        sha1(
+                            $salt . '_' . date(
+                                'Y-m-d'
+                            ) . '_' . $_SERVER['REMOTE_ADDR'] . '_' . $_SERVER['HTTP_USER_AGENT'] . '_' . $podcastId
+                        );
                     $newListener = 1;
                     // Has this listener already downloaded an episode today:
-                    $downloadsByUser = cache($listenerHashId);
+                    $downloadsByUser = cache($podcastListenerHashId);
                     // We add one download
                     if ($downloadsByUser) {
                         $newListener = 0;
@@ -348,7 +358,7 @@ if (! function_exists('podcast_hit')) {
                     $midnightTTL = strtotime('tomorrow') - time();
                     // We save the download count for this user until midnight:
                     cache()
-                        ->save($listenerHashId, $downloadsByUser, $midnightTTL);
+                        ->save($podcastListenerHashId, $downloadsByUser, $midnightTTL);
 
                     $db->query(
                         "CALL {$procedureName}(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",

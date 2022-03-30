@@ -31,7 +31,7 @@ class InstallController extends Controller
     /**
      * @var string[]
      */
-    protected $helpers = ['form', 'components', 'svg'];
+    protected $helpers = ['form', 'components', 'svg', 'misc'];
 
     /**
      * Constructor.
@@ -72,7 +72,7 @@ class InstallController extends Controller
         // Check if the created .env file is writable to continue install process
         if (is_really_writable(ROOTPATH . '.env')) {
             try {
-                $dotenv->required(['app.baseURL', 'admin.gateway', 'auth.gateway']);
+                $dotenv->required(['app.baseURL', 'analytics.salt', 'admin.gateway', 'auth.gateway']);
             } catch (ValidationException) {
                 // form to input instance configuration
                 return $this->instanceConfig();
@@ -99,6 +99,7 @@ class InstallController extends Controller
             try {
                 $dotenv->required([
                     'app.baseURL',
+                    'analytics.salt',
                     'admin.gateway',
                     'auth.gateway',
                     'database.default.hostname',
@@ -169,6 +170,7 @@ class InstallController extends Controller
             'app.baseURL' => $baseUrl,
             'app.mediaBaseURL' =>
                 $mediaBaseUrl === '' ? $baseUrl : $mediaBaseUrl,
+            'analytics.salt' => generate_random_salt(64),
             'admin.gateway' => $this->request->getPost('admin_gateway'),
             'auth.gateway' => $this->request->getPost('auth_gateway'),
         ]);

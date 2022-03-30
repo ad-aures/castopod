@@ -213,6 +213,24 @@ if (! function_exists('podcast_uuid')) {
 
 //--------------------------------------------------------------------
 
+if (! function_exists('generate_random_salt')) {
+    function generate_random_salt(int $length = 64): string
+    {
+        $salt = '';
+        while (strlen($salt) < $length) {
+            $charNumber = random_int(33, 126);
+            // Exclude " ' \ `
+            if (! in_array($charNumber, [34, 39, 92, 96], true)) {
+                $salt .= chr($charNumber);
+            }
+        }
+
+        return $salt;
+    }
+}
+
+//--------------------------------------------------------------------
+
 
 if (! function_exists('file_upload_max_size')) {
 
