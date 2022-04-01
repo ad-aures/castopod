@@ -6,6 +6,29 @@
 # in particular. As a hosting provider, you must inform your users of their
 # rights and how their data are used and protected.
 
+purpose:
+    Deduplicate number of audio file downloads made by the same listener
+    for analytics purposes
+lawfulness: legitimate interest
+
+data: (User IP address + Browser User Agent)
+required: yes
+visibility: none
+description:
+    In order to produce analytics data comparable to the podcasting
+    ecosystem standards, the User IP address (REMOTE_ADDR) with the
+    browser User Agent (HTTP_USER_AGENT) are stored when an audio file
+    is downloaded.
+mitigation:
+    The data (User IP address + Browser User Agent) is never stored in plain
+    format.
+    The data is concatenated with a cryptographic salt, the current date,
+    and the podcast or episode IDs.
+    The data is hashed (using sha1) after being concatenated and before
+    being stored.
+    The data is stored in a cache database (eg. Redis).
+    The data expires every day at midnight (server time).
+
 purpose: Connect users to their accounts
 lawfulness: legitimate interest
 
