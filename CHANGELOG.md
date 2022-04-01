@@ -1,3 +1,35 @@
+# [1.0.0-beta.11](https://code.castopod.org/adaures/castopod/compare/v1.0.0-beta.10...v1.0.0-beta.11) (2022-04-01)
+
+### Bug Fixes
+
+- change message upon cancellation of episode publication
+  ([9859c74](https://code.castopod.org/adaures/castopod/commit/9859c7434c2a3478ce035f7a4de20f594d63f5b0))
+- prefill description footer input when creating a new episode
+  ([9ea5ca3](https://code.castopod.org/adaures/castopod/commit/9ea5ca31697c70d176294f8aea37bd57d471fcf7))
+- remove value escaping for form inputs and textareas
+  ([bc6dea2](https://code.castopod.org/adaures/castopod/commit/bc6dea2f8ad1cf0aee0eaa93151332fbac7fb771))
+- restore default podcast icon on public website
+  ([342778b](https://code.castopod.org/adaures/castopod/commit/342778bac3c684328d72633961df1a2ebdc1330e))
+- **socialinteract:** move social interact uri into uri attribute + update
+  social data upon import
+  ([12b2200](https://code.castopod.org/adaures/castopod/commit/12b22008a237185cb736fc29352fab22421dad16))
+
+### Features
+
+- **analytics-gdpr:** update cached personal data to expire at midnight
+  ([0188b67](https://code.castopod.org/adaures/castopod/commit/0188b67354a756f0c926edd7b46623ab5b20c12b))
+- **analytics:** add current date and secret salt to analytics hash for improved
+  privacy
+  ([6f2e7c0](https://code.castopod.org/adaures/castopod/commit/6f2e7c009c24830d4f08633bfbde3b75f40bf215))
+- **i18n:** add 7 new languages + update german translations
+  ([d021abb](https://code.castopod.org/adaures/castopod/commit/d021abb52f5525d93810e25df2b453c918d7bc8b))
+- **i18n:** add german language as supported locale + create Language files from
+  english source
+  ([c220b31](https://code.castopod.org/adaures/castopod/commit/c220b310ed59cad188af044b1fed0c39efc7da5b))
+- **icons:** add podnews icon to podcasting platforms
+  ([5f42355](https://code.castopod.org/adaures/castopod/commit/5f423557c2b78fd7c38c5e0caab6c6c80d21e36e)),
+  closes [#190](https://code.castopod.org/adaures/castopod/issues/190)
+
 # [1.0.0-beta.10](https://code.castopod.org/adaures/castopod/compare/v1.0.0-beta.9...v1.0.0-beta.10) (2022-03-15)
 
 ### Bug Fixes
