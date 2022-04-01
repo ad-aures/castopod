@@ -290,17 +290,11 @@ if (! function_exists('podcast_hit')) {
                         'Y-m-d'
                     ) . '_' . $_SERVER['REMOTE_ADDR'] . '_' . $_SERVER['HTTP_USER_AGENT'] . '_' . $episodeId
                 );
-            // Was this episode downloaded in the past 24h:
+            // The cache expires at midnight:
+            $secondsToMidnight = strtotime('tomorrow') - time();
             $downloadedBytes = cache($episodeListenerHashId);
-            // Rolling window is 24 hours (86400 seconds):
-            $rollingTTL = 86400;
-            if ($downloadedBytes) {
-                // In case it was already downloaded, TTL should be adjusted (rolling window is 24h since 1st download):
-                $rollingTTL =
-                    cache()
-                        ->getMetadata($episodeListenerHashId)['expire'] - time();
-            } else {
-                // If it was never downloaded that means that zero byte were downloaded:
+            if ($downloadedBytes === null) {
+                // If it was never downloaded that means that zero bytes were downloaded:
                 $downloadedBytes = 0;
             }
 
@@ -326,7 +320,7 @@ if (! function_exists('podcast_hit')) {
 
                 // We save the number of downloaded bytes for this user and this episode:
                 cache()
-                    ->save($episodeListenerHashId, $downloadedBytes, $rollingTTL);
+                    ->save($episodeListenerHashId, $downloadedBytes, $secondsToMidnight);
 
                 // If more that 1mn was downloaded, that's a hit, we send that to the database:
                 if ($downloadedBytes >= $bytesThreshold) {
@@ -354,11 +348,9 @@ if (! function_exists('podcast_hit')) {
                         $downloadsByUser = 1;
                     }
 
-                    // Listener count is calculated from 00h00 to 23h59:
-                    $midnightTTL = strtotime('tomorrow') - time();
                     // We save the download count for this user until midnight:
                     cache()
-                        ->save($podcastListenerHashId, $downloadsByUser, $midnightTTL);
+                        ->save($podcastListenerHashId, $downloadsByUser, $secondsToMidnight);
 
                     $db->query(
                         "CALL {$procedureName}(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",
