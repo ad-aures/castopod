@@ -1,3 +1,15 @@
+# [1.0.0-beta.12](https://code.castopod.org/adaures/castopod/compare/v1.0.0-beta.11...v1.0.0-beta.12) (2022-04-05)
+
+### Bug Fixes
+
+- update form_textarea to prevent escaping value
+  ([78548b5](https://code.castopod.org/adaures/castopod/commit/78548b5cd75ea7d6688d1945ff5449ea4f6bec68))
+
+### Features
+
+- **i18n:** add support for German and Brazilian Portuguese languages
+  ([19da003](https://code.castopod.org/adaures/castopod/commit/19da003fd396bff20b89ad330b787e9cdbe8d919))
+
 # [1.0.0-beta.11](https://code.castopod.org/adaures/castopod/compare/v1.0.0-beta.10...v1.0.0-beta.11) (2022-04-01)
 
 ### Bug Fixes
