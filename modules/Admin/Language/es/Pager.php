@@ -9,13 +9,13 @@ declare(strict_types=1);
  */
 
 return [
-    'pageNavigation' => 'Page navigation',
-    'first' => 'First',
-    'previous' => 'Previous',
-    'next' => 'Next',
-    'last' => 'Last',
-    'older' => 'Older',
-    'newer' => 'Newer',
-    'invalidTemplate' => '{0} is not a valid Pager template.',
-    'invalidPaginationGroup' => '{0} is not a valid Pagination group.',
+    'pageNavigation' => 'Navegación de página',
+    'first' => 'Primero',
+    'previous' => 'Anterior',
+    'next' => 'Siguiente',
+    'last' => 'Ultimo',
+    'older' => 'Más antiguo',
+    'newer' => 'Más nuevo',
+    'invalidTemplate' => '{0} no es una plantilla de paginador válida.',
+    'invalidPaginationGroup' => '{0} no es un grupo de paginación válido.',
 ];

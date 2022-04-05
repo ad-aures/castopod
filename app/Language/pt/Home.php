@@ -9,12 +9,12 @@ declare(strict_types=1);
  */
 
 return [
-    'all_podcasts' => 'All podcasts',
-    'sort_by' => 'Sort by',
+    'all_podcasts' => 'Todos os podcasts',
+    'sort_by' => 'Ordenar por',
     'sort_options' => [
-        'activity' => 'Recent activity',
-        'created_desc' => 'Newest first',
-        'created_asc' => 'Oldest first',
+        'activity' => 'Atividade recente',
+        'created_desc' => 'Mais recentes primeiro',
+        'created_asc' => 'Mais antigos primeiro',
     ],
-    'no_podcast' => 'No podcast found',
+    'no_podcast' => 'Nenhum podcast encontrado',
 ];

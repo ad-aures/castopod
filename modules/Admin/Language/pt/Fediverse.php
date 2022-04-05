@@ -10,23 +10,23 @@ declare(strict_types=1);
 
 return [
     'messages' => [
-        'actorNotFound' => 'The account could not be found!',
-        'blockActorSuccess' => '{actor} has been blocked!',
-        'unblockActorSuccess' => 'Actor has been unblocked!',
-        'blockDomainSuccess' => '{domain} has been blocked!',
-        'unblockDomainSuccess' => '{domain} has been unblocked!',
+        'actorNotFound' => 'A conta não pôde ser encontrada!',
+        'blockActorSuccess' => '{actor} foi bloqueado!',
+        'unblockActorSuccess' => 'A pessoa foi desbloqueada!',
+        'blockDomainSuccess' => '{domain} foi bloqueado!',
+        'unblockDomainSuccess' => '{domain} foi desbloqueado!',
     ],
-    'blocked_actors' => 'Blocked accounts',
-    'blocked_domains' => 'Blocked domains',
+    'blocked_actors' => 'Contas bloqueadas',
+    'blocked_domains' => 'Domínios bloqueados',
     'block_lists_form' => [
-        'handle' => 'Account handle',
-        'handle_hint' => 'Input @username@domain account.',
-        'domain' => 'Domain name',
-        'submit' => 'Block!',
+        'handle' => 'Identificador da conta',
+        'handle_hint' => 'Insira a conta @usuário@domínio.',
+        'domain' => 'Nome do domínio',
+        'submit' => 'Bloquear!',
     ],
     'list' => [
-        'actor' => 'Account',
-        'domain' => 'Domain name',
-        'unblock' => 'Unblock',
+        'actor' => 'Conta',
+        'domain' => 'Nome do domínio',
+        'unblock' => 'Desbloquear',
     ],
 ];

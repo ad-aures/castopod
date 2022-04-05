@@ -9,29 +9,29 @@ declare(strict_types=1);
  */
 
 return [
-    'your_handle' => 'Your handle',
-    'your_handle_hint' => 'Enter the @username@domain you want to act from.',
+    'your_handle' => 'Ho tornell (ho lesanv)',
+    'your_handle_hint' => "Skrivit an @anv@domani a fell deoc'h ober gantañ.",
     'follow' => [
-        'label' => 'Follow',
-        'title' => 'Follow {actorDisplayName}',
-        'subtitle' => 'You are going to follow:',
-        'accountNotFound' => 'The account could not be found.',
-        'remoteFollowNotAllowed' => 'Seems like the account server does not allow remote follows…',
-        'submit' => 'Proceed to follow',
+        'label' => 'Heuliañ',
+        'title' => 'Heuliañ {actorDisplayName}',
+        'subtitle' => "Emaoc'h o vont da heuliañ:",
+        'accountNotFound' => "N'eo ket bet kavet ar gont-se.",
+        'remoteFollowNotAllowed' => "N'eo ket aotreet heuliañ a-bell gant servijer ar gont-se war a seblant…",
+        'submit' => "Kenderc'hel gant an heuliañ",
     ],
     'favourite' => [
-        'title' => "Favourite {actorDisplayName}'s post",
-        'subtitle' => 'You are going to favourite:',
-        'submit' => 'Proceed to favourite',
+        'title' => "Ouzhpennañ kemennadenn {actorDisplayName} d'ho re garetañ",
+        'subtitle' => "Emaoc'h o vont da ouzhpennañ d'ho re garetañ:",
+        'submit' => "Kenderc'hel gant an ouzhpennañ d'ho re garetañ",
     ],
     'reblog' => [
-        'title' => "Share {actorDisplayName}'s post",
-        'subtitle' => 'You are going to share:',
-        'submit' => 'Proceed to share',
+        'title' => "Rannañ kemennadenn {actorDisplayName}",
+        'subtitle' => "Emaoc'h o vont da rannañ:",
+        'submit' => "Kenderc'hel gant ar rannañ",
     ],
     'reply' => [
-        'title' => "Reply to {actorDisplayName}'s post",
-        'subtitle' => 'You are going to reply to:',
-        'submit' => 'Proceed to reply',
+        'title' => "Respont da gemennadenn {actorDisplayName}",
+        'subtitle' => "Emaoc'h o vont da respont da:",
+        'submit' => "Kenderc'hel gant ar respont",
     ],
 ];

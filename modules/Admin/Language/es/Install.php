@@ -9,27 +9,27 @@ declare(strict_types=1);
  */
 
 return [
-    'manual_config' => 'Manual configuration',
+    'manual_config' => 'Configuración manual',
     'manual_config_subtitle' =>
         'Create a `.env` file with your settings and refresh the page to continue installation.',
     'form' => [
-        'instance_config' => 'Instance configuration',
-        'hostname' => 'Hostname',
+        'instance_config' => 'Configuración de instancia',
+        'hostname' => 'Nombre de host',
         'media_base_url' => 'Media base URL',
         'media_base_url_hint' =>
             'If you use a CDN and/or an external analytics service, you may set them here.',
-        'admin_gateway' => 'Admin gateway',
+        'admin_gateway' => 'Pasarela de administración',
         'admin_gateway_hint' =>
             'The route to access the admin area (eg. https://example.com/cp-admin). It is set by default as cp-admin, we recommend you change it for security reasons.',
-        'auth_gateway' => 'Auth gateway',
+        'auth_gateway' => 'Pasarela de autenticación',
         'auth_gateway_hint' =>
             'The route to access the authentication pages (eg. https://example.com/cp-auth). It is set by default as cp-auth, we recommend you change it for security reasons.',
-        'database_config' => 'Database configuration',
+        'database_config' => 'Configuración de la base de datos',
         'database_config_hint' =>
-            'Castopod needs to connect to your MySQL (or MariaDB) database. If you do not have these required info, please contact your server administrator.',
-        'db_hostname' => 'Database hostname',
-        'db_name' => 'Database name',
-        'db_username' => 'Database username',
+            'Castopod necesita conectarse a su base de datos MySQL (o MariaDB). Si no tiene esta información requerida, póngase en contacto con el administrador de su servidor.',
+        'db_hostname' => 'Nombre de host de la base de datos',
+        'db_name' => 'Nombre de la base de datos',
+        'db_username' => 'Usuario la de base de datos',
         'db_password' => 'Database password',
         'db_prefix' => 'Database prefix',
         'db_prefix_hint' =>
@@ -43,11 +43,11 @@ return [
             'redis' => 'Redis',
             'predis' => 'Predis',
         ],
-        'next' => 'Next',
-        'submit' => 'Finish install',
-        'create_superadmin' => 'Create your superadmin account',
-        'email' => 'Email',
-        'username' => 'Username',
+        'next' => 'Siguiente',
+        'submit' => 'Finalizar la instalación',
+        'create_superadmin' => 'Crear la cuenta de administración',
+        'email' => 'Correo electrónico',
+        'username' => 'Nombre de usuario',
         'password' => 'Password',
     ],
     'messages' => [

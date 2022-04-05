@@ -9,25 +9,25 @@ declare(strict_types=1);
  */
 
 return [
-    'season' => 'Temporada {seasonNumber}',
-    'season_abbr' => 'T{seasonNumber}',
-    'number' => 'Episódio {episodeNumber}',
+    'season' => 'Season {seasonNumber}',
+    'season_abbr' => 'S{seasonNumber}',
+    'number' => 'Episode {episodeNumber}',
     'number_abbr' => 'Ep. {episodeNumber}',
-    'season_episode' => 'Temporada {seasonNumber} episódio {episodeNumber}',
-    'season_episode_abbr' => 'T{seasonNumber}:E{episodeNumber}',
+    'season_episode' => 'Season {seasonNumber} episode {episodeNumber}',
+    'season_episode_abbr' => 'S{seasonNumber}:E{episodeNumber}',
     'persons' => '{personsCount, plural,
-        one {# pessoa}
-        other {# pessoas}
+        one {# person}
+        other {# persons}
     }',
-    'persons_list' => 'Pessoas',
-    'back_to_episodes' => 'Voltar para episódios de {podcast}',
-    'comments' => 'Comentários',
-    'activity' => 'Atividade',
-    'description' => 'Descrição do episódio',
+    'persons_list' => 'Persons',
+    'back_to_episodes' => 'Back to episodes of {podcast}',
+    'comments' => 'Comments',
+    'activity' => 'Activity',
+    'description' => 'Episode description',
     'number_of_comments' => '{numberOfComments, plural,
-        one {# comentário}
-        other {# comentários}
+        one {# comment}
+        other {# comments}
     }',
-    'all_podcast_episodes' => 'Todos os episódios de podcast',
-    'back_to_podcast' => 'Voltar ao podcast',
+    'all_podcast_episodes' => 'All podcast episodes',
+    'back_to_podcast' => 'Go back to podcast',
 ];

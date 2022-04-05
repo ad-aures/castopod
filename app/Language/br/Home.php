@@ -9,12 +9,12 @@ declare(strict_types=1);
  */
 
 return [
-    'all_podcasts' => 'All podcasts',
-    'sort_by' => 'Sort by',
+    'all_podcasts' => 'An holl bodkastoù',
+    'sort_by' => 'Rummañ dre',
     'sort_options' => [
-        'activity' => 'Recent activity',
-        'created_desc' => 'Newest first',
-        'created_asc' => 'Oldest first',
+        'activity' => 'Oberiantiz nevez',
+        'created_desc' => 'Ar re nevez da gentañ',
+        'created_asc' => 'A re goshañ da gentañ',
     ],
-    'no_podcast' => 'No podcast found',
+    'no_podcast' => "N'eo bet kavet podkast ebet",
 ];

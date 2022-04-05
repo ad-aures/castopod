@@ -10,19 +10,19 @@ declare(strict_types=1);
 
 return [
     'podcast_contributors' => 'Podcast contributors',
-    'view' => "{username}'s contribution to {podcastTitle}",
+    'view' => "Perzh {username} e {podcastTitle}",
     'add' => 'Add contributor',
     'add_contributor' => 'Add a contributor for {0}',
     'edit_role' => 'Update role for {0}',
     'edit' => 'Edit',
     'remove' => 'Remove',
     'list' => [
-        'username' => 'Username',
+        'username' => 'Anv implijer·ez',
         'role' => 'Role',
     ],
     'form' => [
-        'user' => 'User',
-        'user_placeholder' => 'Select a user…',
+        'user' => 'Implijer·ez',
+        'user_placeholder' => 'Dibabit un implijer·ez…',
         'role' => 'Role',
         'role_placeholder' => 'Select its role…',
         'submit_add' => 'Add contributor',
@@ -34,7 +34,7 @@ return [
     'messages' => [
         'removeOwnerError' => "You can't remove the podcast owner!",
         'removeSuccess' =>
-            'You have successfully removed {username} from {podcastTitle}',
+            'Lamet ho peus {username} diouzh {podcastTitle} gant berzh',
         'alreadyAddedError' =>
             "The contributor you're trying to add has already been added!",
     ],

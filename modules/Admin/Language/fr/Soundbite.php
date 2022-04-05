@@ -18,7 +18,7 @@ return [
         'deleteSuccess' => 'L’extrait sonore a bien été supprimé !',
     ],
     'form' => [
-        'title' => 'Nouvel extrait sonore',
+        'title' => 'Créer un extrait sonore',
         'soundbite_title' => 'Titre de l’extrait',
         'start_time' => 'Début à',
         'duration' => 'Durée',

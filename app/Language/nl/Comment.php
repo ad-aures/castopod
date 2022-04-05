@@ -9,26 +9,26 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => "{actorDisplayName}'s comment for {episodeTitle}",
-    'back_to_comments' => 'Back to comments',
+    'title' => "Reactie van {actorDisplayName} op {episodeTitle}",
+    'back_to_comments' => 'Terug naar reacties',
     'form' => [
-        'episode_message_placeholder' => 'Write a comment…',
-        'reply_to_placeholder' => 'Reply to @{actorUsername}',
-        'submit' => 'Send',
-        'submit_reply' => 'Reply',
+        'episode_message_placeholder' => 'Schrijf een reactie…',
+        'reply_to_placeholder' => 'Reageren op @{actorUsername}',
+        'submit' => 'Verzenden',
+        'submit_reply' => 'Reageer',
     ],
     'likes' => '{numberOfLikes, plural,
         one {# like}
         other {# likes}
     }',
     'replies' => '{numberOfReplies, plural,
-        one {# reply}
-        other {# replies}
+        one {# reactie}
+        other {# reacties}
     }',
     'like' => 'Like',
-    'reply' => 'Reply',
-    'view_replies' => 'View replies ({numberOfReplies})',
-    'block_actor' => 'Block user @{actorUsername}',
-    'block_domain' => 'Block domain @{actorDomain}',
-    'delete' => 'Delete comment',
+    'reply' => 'Reageer',
+    'view_replies' => 'Reacties bekijken ({numberOfReplies})',
+    'block_actor' => 'Blokkeer gebruiker @{actorUsername}',
+    'block_domain' => 'Blokkeer domein @{actorDomain}',
+    'delete' => 'Verwijder reactie',
 ];

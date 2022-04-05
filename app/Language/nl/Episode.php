@@ -9,25 +9,25 @@ declare(strict_types=1);
  */
 
 return [
-    'season' => 'Season {seasonNumber}',
+    'season' => 'Seizoen {seasonNumber}',
     'season_abbr' => 'S{seasonNumber}',
-    'number' => 'Episode {episodeNumber}',
+    'number' => 'Aflevering {episodeNumber}',
     'number_abbr' => 'Ep. {episodeNumber}',
-    'season_episode' => 'Season {seasonNumber} episode {episodeNumber}',
+    'season_episode' => 'Seizoen {seasonNumber} aflevering {episodeNumber}',
     'season_episode_abbr' => 'S{seasonNumber}:E{episodeNumber}',
     'persons' => '{personsCount, plural,
-        one {# person}
-        other {# persons}
+        one {# persoon}
+        other {# personen}
     }',
-    'persons_list' => 'Persons',
-    'back_to_episodes' => 'Back to episodes of {podcast}',
-    'comments' => 'Comments',
-    'activity' => 'Activity',
-    'description' => 'Episode description',
+    'persons_list' => 'Personen',
+    'back_to_episodes' => 'Terug naar de afleveringen van {podcast}',
+    'comments' => 'Reacties',
+    'activity' => 'Activiteiten',
+    'description' => 'Omschrijving aflevering',
     'number_of_comments' => '{numberOfComments, plural,
-        one {# comment}
-        other {# comments}
+        one {# reactie}
+        other {# reacties}
     }',
-    'all_podcast_episodes' => 'All podcast episodes',
-    'back_to_podcast' => 'Go back to podcast',
+    'all_podcast_episodes' => 'Alle podcast afleveringen',
+    'back_to_podcast' => 'Terug naar podcast',
 ];

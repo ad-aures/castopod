@@ -111,7 +111,7 @@ return [
             'If you need RSS tags that Castopod does not handle, set them here.',
         'custom_rss' => 'Custom RSS tags for the episode',
         'custom_rss_hint' => 'This will be injected within the ❬item❭ tag.',
-        'block' => 'Episode should be hidden from all platforms',
+        'block' => 'Ar rann-se a rankfe bezañ kuzhet diouzh an holl savennoù',
         'block_hint' =>
             'The episode show or hide post. If you want this episode removed from the Apple directory, toggle this on.',
         'submit_create' => 'Create episode',

@@ -9,53 +9,53 @@ declare(strict_types=1);
  */
 
 return [
-    'manual_config' => 'Manual configuration',
+    'manual_config' => 'Manuelle Konfiguration',
     'manual_config_subtitle' =>
-        'Create a `.env` file with your settings and refresh the page to continue installation.',
+        '`.env`-Datei mit deinen Einstellungen erstellen und die Seite aktualisieren, um mit der Installation fortzufahren.',
     'form' => [
-        'instance_config' => 'Instance configuration',
+        'instance_config' => 'Instanzinformationen',
         'hostname' => 'Hostname',
-        'media_base_url' => 'Media base URL',
+        'media_base_url' => 'Medien-Basis-URL',
         'media_base_url_hint' =>
-            'If you use a CDN and/or an external analytics service, you may set them here.',
-        'admin_gateway' => 'Admin gateway',
+            'Um optional CDN und/oder einen externen Analysedienst verwenden zu können, müssen die Daten eingegeben werden.',
+        'admin_gateway' => 'Admin-Gateway',
         'admin_gateway_hint' =>
-            'The route to access the admin area (eg. https://example.com/cp-admin). It is set by default as cp-admin, we recommend you change it for security reasons.',
-        'auth_gateway' => 'Auth gateway',
+            'Die Route zum Zugriff auf den Admin-Bereich (z.B. https://example.com/cp-admin). Standardmäßig als cp-admin festgelegt. Wir empfehlen, sie aus Sicherheitsgründen zu ändern.',
+        'auth_gateway' => 'Auth-Gateway',
         'auth_gateway_hint' =>
-            'The route to access the authentication pages (eg. https://example.com/cp-auth). It is set by default as cp-auth, we recommend you change it for security reasons.',
-        'database_config' => 'Database configuration',
+            'Die Route zum Zugriff auf die Authentifizierungsseiten (z. B. https://example.com/cp-auth). Standardmäßig als cp-auth gesetzt. Wir empfehlen, sie aus Sicherheitsgründen zu ändern.',
+        'database_config' => 'Datenbankkonfiguration',
         'database_config_hint' =>
-            'Castopod needs to connect to your MySQL (or MariaDB) database. If you do not have these required info, please contact your server administrator.',
-        'db_hostname' => 'Database hostname',
-        'db_name' => 'Database name',
-        'db_username' => 'Database username',
-        'db_password' => 'Database password',
-        'db_prefix' => 'Database prefix',
+            'Castopod muss sich mit der MySQL-Datenbank (oder MariaDB) verbinden. Wenn diese erforderlichen Informationen nicht verfügbar sind, wenden Sie sich bitte an Ihren Serveradministrator.',
+        'db_hostname' => 'Datenbank Hostname',
+        'db_name' => 'Datenbankname',
+        'db_username' => 'Datenbankbenutzername',
+        'db_password' => 'Datenbankpasswort',
+        'db_prefix' => 'Datenbankpräfix',
         'db_prefix_hint' =>
-            "The prefix of the Castopod table names, leave as is if you don't know what it means.",
-        'cache_config' => 'Cache configuration',
+            "Das Präfix der Castopod-Tabellennamen. Nicht anpassen, wenn nicht gewiss, was damit gemeint ist.",
+        'cache_config' => 'Cachekonfiguration',
         'cache_config_hint' =>
-            'Choose your preferred cache handler. Leave it as the default value if you have no clue what it means.',
-        'cache_handler' => 'Cache handler',
+            'Wählen Sie Ihren bevorzugten Cache-Handler. Standardwert verwenden, wenn nicht gewiss, was damit gemeint ist.',
+        'cache_handler' => 'Cache-Handler',
         'cacheHandlerOptions' => [
-            'file' => 'File',
+            'file' => 'Datei',
             'redis' => 'Redis',
             'predis' => 'Predis',
         ],
-        'next' => 'Next',
-        'submit' => 'Finish install',
-        'create_superadmin' => 'Create your superadmin account',
-        'email' => 'Email',
-        'username' => 'Username',
-        'password' => 'Password',
+        'next' => 'Weiter',
+        'submit' => 'Installation abschließen',
+        'create_superadmin' => 'Superadmin Konto erstellen',
+        'email' => 'E-Mail',
+        'username' => 'Benutzername',
+        'password' => 'Passwort',
     ],
     'messages' => [
         'createSuperAdminSuccess' =>
-            'Your superadmin account has been created successfully. Login to start podcasting!',
+            'Superadmin-Account wurde erfolgreich erstellt. Anmelden, um loszulegen!',
         'databaseConnectError' =>
-            'Castopod could not connect to your database. Edit your database configuration and try again.',
+            'Castopod konnte keine Verbindung zur Datenbank herstellen. Datenbankkonfiguration bearbeiten und erneut versuchen.',
         'writeError' =>
-            "Couldn't create/write the `.env` file. You must create it manually by following the `.env.example` file template in the Castopod package.",
+            "Konnte die `.env`-Datei nicht erstellen/schreiben. Sie muss manuell erstellt werden, indem dem `.env.example` Template im Castopod Paket gefolgt wird.",
     ],
 ];

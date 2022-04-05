@@ -9,33 +9,33 @@ declare(strict_types=1);
  */
 
 return [
-    'podcast_contributors' => 'Podcast contributors',
-    'view' => "{username}'s contribution to {podcastTitle}",
-    'add' => 'Add contributor',
-    'add_contributor' => 'Add a contributor for {0}',
-    'edit_role' => 'Update role for {0}',
-    'edit' => 'Edit',
-    'remove' => 'Remove',
+    'podcast_contributors' => 'Podcast bijdragers',
+    'view' => "Bijdrage van {username} aan {podcastTitle}",
+    'add' => 'Voeg bijdrager toe',
+    'add_contributor' => 'Voeg een bijdrager toe voor {0}',
+    'edit_role' => 'Rol bijwerken voor {0}',
+    'edit' => 'Bewerken',
+    'remove' => 'Verwijder',
     'list' => [
-        'username' => 'Username',
-        'role' => 'Role',
+        'username' => 'Gebruikersnaam',
+        'role' => 'Rol',
     ],
     'form' => [
-        'user' => 'User',
-        'user_placeholder' => 'Select a user…',
-        'role' => 'Role',
-        'role_placeholder' => 'Select its role…',
-        'submit_add' => 'Add contributor',
-        'submit_edit' => 'Update role',
+        'user' => 'Gebruiker',
+        'user_placeholder' => 'Selecteer een gebruiker…',
+        'role' => 'Rol',
+        'role_placeholder' => 'Selecteer de rol…',
+        'submit_add' => 'Voeg bijdrager toe',
+        'submit_edit' => 'Rol bijwerken',
     ],
     'roles' => [
-        'podcast_admin' => 'Podcast admin',
+        'podcast_admin' => 'Podcast beheerder',
     ],
     'messages' => [
-        'removeOwnerError' => "You can't remove the podcast owner!",
+        'removeOwnerError' => "Je kunt de eigenaar van podcast niet verwijderen!",
         'removeSuccess' =>
-            'You have successfully removed {username} from {podcastTitle}',
+            'Je hebt {username} met succes verwijderd van {podcastTitle}',
         'alreadyAddedError' =>
-            "The contributor you're trying to add has already been added!",
+            "De bijdrager die je probeert toe te voegen, is al toegevoegd!",
     ],
 ];

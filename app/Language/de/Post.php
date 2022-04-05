@@ -12,12 +12,12 @@ return [
     'title' => "{actorDisplayName}'s Beitrag",
     'back_to_actor_posts' => "Zurück zu {actor}'s Beiträge",
     'actor_shared' => '{actor} teilte',
-    'reply_to' => 'Reply to @{actorUsername}',
+    'reply_to' => 'Antorten auf @{actorUsername}',
     'form' => [
         'message_placeholder' => 'Scheibe eine Nachricht…',
         'episode_message_placeholder' => 'Schreibe eine Nachricht für die Folge…',
         'episode_url_placeholder' => 'URL der Folge',
-        'reply_to_placeholder' => 'Reply to @{actorUsername}',
+        'reply_to_placeholder' => 'Antworten auf @{actorUsername}',
         'submit' => 'Senden',
         'submit_reply' => 'Antwort senden',
     ],
@@ -26,8 +26,8 @@ return [
         other {# Favoriten}
     }',
     'reblogs' => '{numberOfReblogs, plural,
-        one {# share}
-        other {# shares}
+        one {# mal geteilt}
+        other {# mal geteilt}
     }',
     'replies' => '{numberOfReplies, plural,
         one {# Antwort}

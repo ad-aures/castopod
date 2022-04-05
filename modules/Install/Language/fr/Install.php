@@ -47,7 +47,7 @@ return [
         'next' => 'Suivant',
         'submit' => 'Terminer l’installation',
         'create_superadmin' => 'Créer un compte super-utilisateur',
-        'email' => 'Adresse électronique (e-mail)',
+        'email' => 'E-mail',
         'username' => 'Identifiant',
         'password' => 'Mot de passe',
     ],

@@ -9,6 +9,6 @@ declare(strict_types=1);
  */
 
 return [
-    'all_podcasts' => 'All podcasts',
-    'no_podcast' => 'No podcast found',
+    'all_podcasts' => 'Todos os podcasts',
+    'no_podcast' => 'Nenhum podcast encontrado',
 ];

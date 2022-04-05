@@ -9,32 +9,32 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => "{actorDisplayName}'s post",
-    'back_to_actor_posts' => 'Back to {actor} posts',
-    'actor_shared' => '{actor} shared',
-    'reply_to' => 'Reply to @{actorUsername}',
+    'title' => "Bericht van {actorDisplayName}",
+    'back_to_actor_posts' => 'Terug naar {actor} berichten',
+    'actor_shared' => '{actor} deelde',
+    'reply_to' => 'Reageer op @{actorUsername}',
     'form' => [
-        'message_placeholder' => 'Write a message…',
-        'episode_message_placeholder' => 'Write a message for the episode…',
-        'episode_url_placeholder' => 'Episode URL',
-        'reply_to_placeholder' => 'Reply to @{actorUsername}',
-        'submit' => 'Send',
-        'submit_reply' => 'Reply',
+        'message_placeholder' => 'Schrijf een bericht…',
+        'episode_message_placeholder' => 'Schrijf een bericht voor deze aflevering…',
+        'episode_url_placeholder' => 'Aflevering URL',
+        'reply_to_placeholder' => 'Reageer op @{actorUsername}',
+        'submit' => 'Verzenden',
+        'submit_reply' => 'Reageer',
     ],
     'favourites' => '{numberOfFavourites, plural,
-        one {# favourite}
-        other {# favourites}
+        one {# favoriet}
+        other {# favorieten}
     }',
     'reblogs' => '{numberOfReblogs, plural,
-        one {# share}
-        other {# shares}
+        one {# mededeling}
+        other {# mededelingen}
     }',
     'replies' => '{numberOfReplies, plural,
-        one {# reply}
-        other {# replies}
+        one {# reactie}
+        other {# reacties}
     }',
-    'expand' => 'Expand post',
-    'block_actor' => 'Block user @{actorUsername}',
-    'block_domain' => 'Block domain @{actorDomain}',
-    'delete' => 'Delete post',
+    'expand' => 'Bericht uitklappen',
+    'block_actor' => 'Blokkeer gebruiker @{actorUsername}',
+    'block_domain' => 'Blokkeer domein @{actorDomain}',
+    'delete' => 'Bericht verwijderen',
 ];

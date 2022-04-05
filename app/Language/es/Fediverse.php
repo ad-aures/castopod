@@ -9,29 +9,29 @@ declare(strict_types=1);
  */
 
 return [
-    'your_handle' => 'Your handle',
-    'your_handle_hint' => 'Enter the @username@domain you want to act from.',
+    'your_handle' => 'Tu identificador',
+    'your_handle_hint' => 'Ingresa tu usuario@dominio desde el que quieres seguir.',
     'follow' => [
-        'label' => 'Follow',
-        'title' => 'Follow {actorDisplayName}',
-        'subtitle' => 'You are going to follow:',
-        'accountNotFound' => 'The account could not be found.',
-        'remoteFollowNotAllowed' => 'Seems like the account server does not allow remote follows…',
-        'submit' => 'Proceed to follow',
+        'label' => 'Seguir',
+        'title' => 'Seguir a {actorDisplayName}',
+        'subtitle' => 'Vas a seguir a:',
+        'accountNotFound' => 'No se encuentra la cuenta.',
+        'remoteFollowNotAllowed' => 'Parece que el servidor de cuenta no permite seguimientos remotos…',
+        'submit' => 'Proceder a seguir',
     ],
     'favourite' => [
-        'title' => "Favourite {actorDisplayName}'s post",
-        'subtitle' => 'You are going to favourite:',
-        'submit' => 'Proceed to favourite',
+        'title' => "Publicación favorita de {actorDisplayName}",
+        'subtitle' => 'Vas a marcar como favorito:',
+        'submit' => 'Proceder a marcar como favorito',
     ],
     'reblog' => [
-        'title' => "Share {actorDisplayName}'s post",
-        'subtitle' => 'You are going to share:',
-        'submit' => 'Proceed to share',
+        'title' => "Compartir la publicación de {actorDisplayName}",
+        'subtitle' => 'Usted va a compartir:',
+        'submit' => 'Proceder a compartir',
     ],
     'reply' => [
-        'title' => "Reply to {actorDisplayName}'s post",
-        'subtitle' => 'You are going to reply to:',
-        'submit' => 'Proceed to reply',
+        'title' => "Responder a la publicación de {actorDisplayName}",
+        'subtitle' => 'Vas a responder a:',
+        'submit' => 'Continuar con la respuesta',
     ],
 ];

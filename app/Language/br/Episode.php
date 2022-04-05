@@ -9,25 +9,34 @@ declare(strict_types=1);
  */
 
 return [
-    'season' => 'Season {seasonNumber}',
-    'season_abbr' => 'S{seasonNumber}',
-    'number' => 'Episode {episodeNumber}',
-    'number_abbr' => 'Ep. {episodeNumber}',
-    'season_episode' => 'Season {seasonNumber} episode {episodeNumber}',
-    'season_episode_abbr' => 'S{seasonNumber}:E{episodeNumber}',
+    'season' => 'Koulzad {seasonNumber}',
+    'season_abbr' => 'K{seasonNumber}',
+    'number' => 'Rann {episodeNumber}',
+    'number_abbr' => 'R. {episodeNumber}',
+    'season_episode' => 'Koulzad {seasonNumber} rann {episodeNumber}',
+    'season_episode_abbr' => 'K{seasonNumber}:R{episodeNumber}',
     'persons' => '{personsCount, plural,
-        one {# person}
-        other {# persons}
+        0 {den ebet}
+        one {# den}
+        two {# zen}
+        other {# den}
+        22 {# zen}
+        32 {# zen}
+        42 {# zen}
+        52 {# zen}
+        62 {# zen}
+        82 {# zen}
     }',
-    'persons_list' => 'Persons',
-    'back_to_episodes' => 'Back to episodes of {podcast}',
-    'comments' => 'Comments',
-    'activity' => 'Activity',
-    'description' => 'Episode description',
+    'persons_list' => 'Emellerien·ezed',
+    'back_to_episodes' => 'Mont da rannoù {podcast}',
+    'comments' => 'Evezhiadennoù',
+    'activity' => 'Oberiantiz',
+    'description' => 'Deskrivadur ar rann',
     'number_of_comments' => '{numberOfComments, plural,
-        one {# comment}
-        other {# comments}
+        0 {evezhiadenn ebet}
+        one {# evezhiadenn}
+        other {# evezhiadenn}
     }',
-    'all_podcast_episodes' => 'All podcast episodes',
-    'back_to_podcast' => 'Go back to podcast',
+    'all_podcast_episodes' => 'Holl rannoù ar podkast',
+    'back_to_podcast' => "Mont d'ar podkast en-dro",
 ];

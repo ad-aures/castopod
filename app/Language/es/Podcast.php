@@ -9,45 +9,45 @@ declare(strict_types=1);
  */
 
 return [
-    'feed' => 'RSS Podcast feed',
-    'season' => 'Season {seasonNumber}',
-    'list_of_episodes_year' => '{year} episodes ({episodeCount})',
+    'feed' => 'Fuente del RSS del Podcast',
+    'season' => 'Temporada: {seasonNumber}',
+    'list_of_episodes_year' => '{year} episodios ({episodeCount})',
     'list_of_episodes_season' =>
-        'Season {seasonNumber} episodes ({episodeCount})',
-    'no_episode' => 'No episode found!',
-    'follow' => 'Follow',
-    'followTitle' => 'Follow {actorDisplayName} on the fediverse!',
+        'Temporada {seasonNumber} episodio {episodeCount})',
+    'no_episode' => '¡No se encontró el episodio!',
+    'follow' => 'Seguir',
+    'followTitle' => '¡Sigue a {actorDisplayName} en el fediverso!',
     'followers' => '{numberOfFollowers, plural,
-        one {<span class="font-semibold">#</span> follower}
-        other {<span class="font-semibold">#</span> followers}
+        one {<span class="font-semibold">#</span> seguidor}
+        other {<span class="font-semibold">#</span> seguidores}
     }',
     'posts' => '{numberOfPosts, plural,
-        one {<span class="font-semibold">#</span> post}
-        other {<span class="font-semibold">#</span> posts}
+        one {<span class="font-semibold">#</span> publicación}
+        other {<span class="font-semibold">#</span> publicaciones}
     }',
-    'activity' => 'Activity',
-    'episodes' => 'Episodes',
-    'episodes_title' => 'Episodes of {podcastTitle}',
-    'about' => 'About',
+    'activity' => 'Actividad',
+    'episodes' => 'Episodios',
+    'episodes_title' => 'Episodios de {podcastTitle}',
+    'about' => 'Acerca de',
     'stats' => [
-        'title' => 'Stats',
+        'title' => 'Estadísticas',
         'number_of_seasons' => '{0, plural,
-            one {<span class="font-semibold">#</span> season}
-            other {<span class="font-semibold">#</span> seasons}
+            one {<span class="font-semibold">#</span> temporada}
+            other {<span class="font-semibold">#</span> temporadas}
         }',
         'number_of_episodes' => '{0, plural,
-            one {<span class="font-semibold">#</span> episode}
-            other {<span class="font-semibold">#</span> episodes}
+            one {<span class="font-semibold">#</span> episodio}
+            other {<span class="font-semibold">#</span> episodios}
         }',
-        'first_published_at' => 'First episode published on <span class="font-semibold">{0, date, medium}</span>',
+        'first_published_at' => 'Primer episodio publicado en <span class="font-semibold">{0, date, medium}</span>',
     ],
-    'sponsor' => 'Sponsor',
-    'funding_links' => 'Funding links for {podcastTitle}',
-    'find_on' => 'Find {podcastTitle} on',
-    'listen_on' => 'Listen on',
+    'sponsor' => 'Patrocinador',
+    'funding_links' => 'Enlaces de financiación para {podcastTitle}',
+    'find_on' => 'Buscar {podcastTitle} en',
+    'listen_on' => 'Escuchar en',
     'persons' => '{personsCount, plural,
-        one {# person}
-        other {# persons}
+        one {# persona}
+        other {# personas}
     }',
-    'persons_list' => 'Persons',
+    'persons_list' => 'Personas',
 ];

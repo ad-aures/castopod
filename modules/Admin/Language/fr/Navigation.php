@@ -20,7 +20,7 @@ return [
     'podcast-import' => 'Importer un podcast',
     'persons' => 'Intervenants',
     'person-list' => 'Tous les intervenants',
-    'person-create' => 'Nouvel intervenant',
+    'person-create' => 'Créer un intervenant',
     'fediverse' => 'Fédiverse',
     'fediverse-blocked-actors' => 'Utilisateurs bloqués',
     'fediverse-blocked-domains' => 'Domaines bloqués',

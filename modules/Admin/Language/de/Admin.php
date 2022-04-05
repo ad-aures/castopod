@@ -11,5 +11,5 @@ declare(strict_types=1);
 return [
     'dashboard' => 'Adminübersicht',
     'welcome_message' => 'Willkommen im Administrationsbereich!',
-    'choose_interact' => 'Choose how to interact',
+    'choose_interact' => 'Mit welchem Podcast-Profil wollen Sie handeln',
 ];

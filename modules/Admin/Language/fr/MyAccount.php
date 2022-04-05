@@ -9,7 +9,7 @@ declare(strict_types=1);
  */
 
 return [
-    'info' => 'Informations de mon compte',
+    'info' => 'Informations relatives à mon compte',
     'changePassword' => 'Modifier mon mot de passe',
     'messages' => [
         'wrongPasswordError' => "Le mot de passe que vous avez saisi est invalide.",

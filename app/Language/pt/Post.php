@@ -9,32 +9,32 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => "{actorDisplayName}'s post",
-    'back_to_actor_posts' => 'Back to {actor} posts',
-    'actor_shared' => '{actor} shared',
-    'reply_to' => 'Reply to @{actorUsername}',
+    'title' => "Publicação de {actorDisplayName}",
+    'back_to_actor_posts' => 'Voltar para publicações de {actor}',
+    'actor_shared' => '{actor} compartilhou',
+    'reply_to' => 'Responder a @{actorUsername}',
     'form' => [
-        'message_placeholder' => 'Write a message…',
-        'episode_message_placeholder' => 'Write a message for the episode…',
-        'episode_url_placeholder' => 'Episode URL',
-        'reply_to_placeholder' => 'Reply to @{actorUsername}',
-        'submit' => 'Send',
-        'submit_reply' => 'Reply',
+        'message_placeholder' => 'Escreva uma mensagem…',
+        'episode_message_placeholder' => 'Escreva uma mensagem para o episódio…',
+        'episode_url_placeholder' => 'URL do episódio',
+        'reply_to_placeholder' => 'Responder a @{actorUsername}',
+        'submit' => 'Enviar',
+        'submit_reply' => 'Responder',
     ],
     'favourites' => '{numberOfFavourites, plural,
-        one {# favourite}
-        other {# favourites}
+        one {# favorito}
+        other {# favoritos}
     }',
     'reblogs' => '{numberOfReblogs, plural,
-        one {# share}
-        other {# shares}
+        one {# compartilhamento}
+        other {# compartilhamentos}
     }',
     'replies' => '{numberOfReplies, plural,
-        one {# reply}
-        other {# replies}
+        one {# resposta}
+        other {# respostas}
     }',
-    'expand' => 'Expand post',
-    'block_actor' => 'Block user @{actorUsername}',
-    'block_domain' => 'Block domain @{actorDomain}',
-    'delete' => 'Delete post',
+    'expand' => 'Expandir publicação',
+    'block_actor' => 'Bloquear usuário @{actorUsername}',
+    'block_domain' => 'Bloquear domínio @{actorDomain}',
+    'delete' => 'Excluir publicação',
 ];

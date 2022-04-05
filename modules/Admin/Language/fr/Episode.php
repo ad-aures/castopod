@@ -137,7 +137,7 @@ return [
         'cancel_publication' => 'Annuler la publication',
         'message_warning' => 'Vous n’avez pas saisi de message pour l’annonce de votre épisode !',
         'message_warning_hint' => 'Ajouter un message augmente l’engagement social, menant à une meilleure visibilité pour votre épisode.',
-        'message_warning_submit' => 'Publish quand même',
+        'message_warning_submit' => 'Publier quand même',
     ],
     'unpublish_form' => [
         'disclaimer' =>
@@ -148,7 +148,7 @@ return [
     'delete_form' => [
         'disclaimer' =>
             "Supprimer l’épisode supprimera toutes les publications qui lui sont associées et le retirera du flux RSS du podcast.",
-        'understand' => 'Je comprends, Je veux supprimer l’épisode',
+        'understand' => 'Je comprends, je veux supprimer l’épisode',
         'submit' => 'Supprimer',
     ],
     'embed' => [

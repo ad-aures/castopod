@@ -9,22 +9,22 @@ declare(strict_types=1);
  */
 
 return [
-    'back_to_home' => 'Back to home',
-    'page' => 'Page',
-    'all_pages' => 'All pages',
-    'create' => 'New page',
-    'go_to_page' => 'Go to page',
-    'edit' => 'Edit page',
-    'delete' => 'Delete page',
+    'back_to_home' => 'Volver al inicio',
+    'page' => 'Página',
+    'all_pages' => 'Todas las páginas',
+    'create' => 'Nueva página',
+    'go_to_page' => 'Ir a la página',
+    'edit' => 'Editar página',
+    'delete' => 'Eliminar página',
     'form' => [
-        'title' => 'Title',
-        'permalink' => 'Permalink',
-        'content' => 'Content',
-        'submit_create' => 'Create page',
-        'submit_edit' => 'Save',
+        'title' => 'Título',
+        'permalink' => 'Enlace permanente',
+        'content' => 'Contenido',
+        'submit_create' => 'Crear página',
+        'submit_edit' => 'Guardar',
     ],
     'messages' => [
-        'createSuccess' => 'The page “{pageTitle}” was created successfully!',
-        'editSuccess' => 'The page was successfully updated!',
+        'createSuccess' => '¡La página “{pageTitle}” fue creada con éxito!',
+        'editSuccess' => 'La página se ha actualizado correctamente!',
     ],
 ];

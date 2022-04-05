@@ -9,33 +9,33 @@ declare(strict_types=1);
  */
 
 return [
-    'podcast_contributors' => 'Podcast contributors',
-    'view' => "{username}'s contribution to {podcastTitle}",
-    'add' => 'Add contributor',
-    'add_contributor' => 'Add a contributor for {0}',
-    'edit_role' => 'Update role for {0}',
-    'edit' => 'Edit',
-    'remove' => 'Remove',
+    'podcast_contributors' => 'Podcast-Mitwirkende',
+    'view' => "{username}'s Mitwirkung an {podcastTitle}",
+    'add' => 'Mitwirkenden zufügen',
+    'add_contributor' => 'Mitwirkenden zufügen für {0}',
+    'edit_role' => 'Rolle aktualisieren für {0}',
+    'edit' => 'Bearbeiten',
+    'remove' => 'Entfernen',
     'list' => [
-        'username' => 'Username',
-        'role' => 'Role',
+        'username' => 'Benutzername',
+        'role' => 'Rolle',
     ],
     'form' => [
-        'user' => 'User',
-        'user_placeholder' => 'Select a user…',
-        'role' => 'Role',
-        'role_placeholder' => 'Select its role…',
-        'submit_add' => 'Add contributor',
-        'submit_edit' => 'Update role',
+        'user' => 'Benutzer',
+        'user_placeholder' => 'Benutzer auswählen…',
+        'role' => 'Rolle',
+        'role_placeholder' => 'Rolle auswählen…',
+        'submit_add' => 'Mitwirkenden zufügen',
+        'submit_edit' => 'Rolle aktualisieren',
     ],
     'roles' => [
-        'podcast_admin' => 'Podcast admin',
+        'podcast_admin' => 'Podcast Administrator',
     ],
     'messages' => [
-        'removeOwnerError' => "You can't remove the podcast owner!",
+        'removeOwnerError' => "Der Podcast Inhaber kann nicht entfernt werden!",
         'removeSuccess' =>
-            'You have successfully removed {username} from {podcastTitle}',
+            '{username} wurde von {podcastTitle} entfernt',
         'alreadyAddedError' =>
-            "The contributor you're trying to add has already been added!",
+            "Der Mitwirkende wurde bereits zugefügt!",
     ],
 ];

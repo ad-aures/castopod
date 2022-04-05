@@ -12,7 +12,7 @@ return [
     'list' => [
         'title' => 'Extraits vidéos',
         'status' => [
-            'label' => 'Statut',
+            'label' => 'État',
             'queued' => 'en file d’attente',
             'queued_hint' => 'L’extrait est dans la file d’attente.',
             'pending' => 'en attente',

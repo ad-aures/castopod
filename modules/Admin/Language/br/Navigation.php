@@ -21,7 +21,7 @@ return [
     'persons' => 'Persons',
     'person-list' => 'All persons',
     'person-create' => 'New person',
-    'fediverse' => 'Fediverse',
+    'fediverse' => 'Kevrebed',
     'fediverse-blocked-actors' => 'Blocked accounts',
     'fediverse-blocked-domains' => 'Blocked domains',
     'users' => 'Users',

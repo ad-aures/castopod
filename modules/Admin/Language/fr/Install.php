@@ -54,7 +54,7 @@ return [
         'createSuperAdminSuccess' =>
             'Le compte super-utilisateur a bien été créé. Connectez-vous et commencez à podcaster !',
         'databaseConnectError' =>
-            'Castopod n’a pas pu se connecter à la base de données. Modifier les paramètres de base de données et essayer à nouveau.',
+            'Castopod n’a pas pu se connecter à la base de données. Modifiez les paramètres de base de données et essayez à nouveau.',
         'writeError' =>
             "Impossible de créer/écrire le fichier `.env`. Créez manuellement un fichier `.env` en copiant le modèle `.env.example` fourni avec Castopod.",
     ],

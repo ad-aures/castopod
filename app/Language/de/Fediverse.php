@@ -10,13 +10,13 @@ declare(strict_types=1);
 
 return [
     'your_handle' => 'Handle',
-    'your_handle_hint' => 'Enter the @username@domain you want to act from.',
+    'your_handle_hint' => '@name@domain eingeben, womit Sie agieren möchten.',
     'follow' => [
         'label' => 'Folge',
         'title' => 'Folge {actorDisplayName}',
         'subtitle' => 'Sie werden folgen:',
         'accountNotFound' => 'Das Konto wurde nicht gefunden.',
-        'remoteFollowNotAllowed' => 'Seems like the account server does not allow remote follows…',
+        'remoteFollowNotAllowed' => 'Es sieht so aus, als erlaube der Server kein Folgen von einer anderen Instanz…',
         'submit' => 'Weiter zum Folgen',
     ],
     'favourite' => [
@@ -26,12 +26,12 @@ return [
     ],
     'reblog' => [
         'title' => "{actorDisplayName}'s Beitrag teilen",
-        'subtitle' => 'You are going to share:',
+        'subtitle' => 'Sie werden teilen:',
         'submit' => 'Weiter zum Teilen',
     ],
     'reply' => [
         'title' => "Auf {actorDisplayName}'s Beitrag antworten",
-        'subtitle' => 'You are going to reply to:',
+        'subtitle' => 'Sie werden antworten auf:',
         'submit' => 'Weiter zum Antworten',
     ],
 ];

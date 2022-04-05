@@ -9,12 +9,12 @@ declare(strict_types=1);
  */
 
 return [
-    'by_service_weekly' => 'Episode downloads by service (for the past week)',
-    'by_player_weekly' => 'Episode downloads by player (for the past week)',
-    'by_player_yearly' => 'Episode downloads by player (for the past year)',
-    'by_device_weekly' => 'Episode downloads by device (for the past week)',
-    'by_os_weekly' => 'Episode downloads by O.S. (for the past week)',
-    'podcast_by_region' => 'Episode downloads by region (for the past week)',
+    'by_service_weekly' => 'Pellgargadurioù eus ar rannoù dre servij (e-pad ar sizhunvezh tremenet)',
+    'by_player_weekly' => 'Pellgargadurioù eus ar rannoù dre lenner (e-pad ar sizhunvezh tremenet)',
+    'by_player_yearly' => 'Pellgargadurioù eus ar rannoù dre servij (e-pad ar bloavezh tremenet)',
+    'by_device_weekly' => 'Pellgargadurioù eus ar rannoù dre venveg (e-pad ar sizhunvezh tremenet)',
+    'by_os_weekly' => 'Pellgargadurioù eus ar rannoù dre OS (e-pad ar sizhunvezh tremenet)',
+    'podcast_by_region' => 'Pellgargadurioù eus ar rannoù dre vro (e-pad ar sizhunvezh tremenet)',
     'unique_daily_listeners' => 'Daily unique listeners',
     'unique_monthly_listeners' => 'Monthly unique listeners',
     'by_browser' => 'Web pages usage by browser (for the past week)',

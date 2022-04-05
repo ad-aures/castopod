@@ -9,9 +9,9 @@ declare(strict_types=1);
  */
 
 return [
-    'back_to_home' => 'Back to home',
+    'back_to_home' => "Distreiñ d'ar bennbajennad",
     'map' => [
-        'title' => 'Map',
-        'description' => 'Discover podcast episodes on {siteName} that are placed on a map! Travel through the map and listen to episodes that talk about specific locations.',
+        'title' => 'Kartenn',
+        'description' => "Dizoloit rannoù eus podkastoù war {siteName} lakaet war ur gartenn! Beajit warni ha selaouit ar rannoù a zo diwar-benn al lec'hioù-se.",
     ],
 ];

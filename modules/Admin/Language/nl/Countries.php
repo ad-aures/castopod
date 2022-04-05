@@ -12,9 +12,9 @@ declare(strict_types=1);
 
 return [
     'AD' => 'Andorra',
-    'AE' => 'United Arab Emirates',
+    'AE' => 'Verenigde Arabische Emiraten',
     'AF' => 'Afghanistan',
-    'AG' => 'Antigua and Barbuda',
+    'AG' => 'Antigua en Barbuda',
     'AI' => 'Anguilla',
     'AL' => 'Albania',
     'AM' => 'Armenia',

@@ -9,32 +9,34 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => "{actorDisplayName}'s post",
-    'back_to_actor_posts' => 'Back to {actor} posts',
-    'actor_shared' => '{actor} shared',
-    'reply_to' => 'Reply to @{actorUsername}',
+    'title' => "Kemennadennoù {actorDisplayName}",
+    'back_to_actor_posts' => 'Distroit da gemennadennoù {actor}',
+    'actor_shared' => 'Rannet eo bet gant {actor}',
+    'reply_to' => 'Respont da @{actorUsername}',
     'form' => [
-        'message_placeholder' => 'Write a message…',
-        'episode_message_placeholder' => 'Write a message for the episode…',
-        'episode_url_placeholder' => 'Episode URL',
-        'reply_to_placeholder' => 'Reply to @{actorUsername}',
-        'submit' => 'Send',
-        'submit_reply' => 'Reply',
+        'message_placeholder' => 'Skrivit ho kemennadenn…',
+        'episode_message_placeholder' => 'Skrivit ho kemennadenn evit rann…',
+        'episode_url_placeholder' => 'URL ar rann',
+        'reply_to_placeholder' => 'Respont da @{actorUsername}',
+        'submit' => 'Kas',
+        'submit_reply' => 'Respont',
     ],
     'favourites' => '{numberOfFavourites, plural,
         one {# favourite}
         other {# favourites}
     }',
     'reblogs' => '{numberOfReblogs, plural,
-        one {# share}
-        other {# shares}
+        0 {rannadur ebet}
+        one {# rannadur}
+        other {# rannadur}
     }',
     'replies' => '{numberOfReplies, plural,
-        one {# reply}
-        other {# replies}
+        0 {respont ebet}
+        one {# respont}
+        other {# respont}
     }',
-    'expand' => 'Expand post',
-    'block_actor' => 'Block user @{actorUsername}',
-    'block_domain' => 'Block domain @{actorDomain}',
-    'delete' => 'Delete post',
+    'expand' => 'Astenn ar gemennadenn',
+    'block_actor' => 'Berzañ pep tra eus an implijer·ez @{actorUsername}',
+    'block_domain' => 'Berzañ pep tra eus @{actorDomain}',
+    'delete' => 'Dilemel ar gemennadenn',
 ];
