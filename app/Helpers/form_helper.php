@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-if (! function_exists('form_markdown_textarea')) {
+if (! function_exists('form_textarea')) {
     /**
-     * Textarea field
+     * Adapted textarea field from CI4 core: without value escaping.
      *
      * @param mixed $data
      * @param mixed $extra
      */
-    function form_markdown_textarea($data = '', string $value = '', $extra = ''): string
+    function form_textarea($data = '', string $value = '', $extra = ''): string
     {
         $defaults = [
             'name' => is_array($data) ? '' : $data,
@@ -38,9 +38,9 @@ if (! function_exists('form_markdown_textarea')) {
             unset($defaults['cols']);
         }
 
-        return '<textarea ' . rtrim(parse_form_attributes($data, $defaults)) . stringify_attributes($extra) . '>'
-                . $val
-                . "</textarea>\n";
+        return '<textarea ' . rtrim(parse_form_attributes($data, $defaults)) . stringify_attributes(
+            $extra
+        ) . '>' . $val . "</textarea>\n";
     }
 }
 
