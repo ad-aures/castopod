@@ -234,12 +234,13 @@ if (! function_exists('get_rss_feed')) {
             'author',
             $podcast->publisher ? $podcast->publisher : $podcast->owner_name,
             $itunesNamespace,
+            false
         );
         $channel->addChild('link', $podcast->link);
 
         $owner = $channel->addChild('owner', null, $itunesNamespace);
 
-        $owner->addChild('name', $podcast->owner_name, $itunesNamespace);
+        $owner->addChild('name', $podcast->owner_name, $itunesNamespace, false);
 
         $owner->addChild('email', $podcast->owner_email, $itunesNamespace);
 
