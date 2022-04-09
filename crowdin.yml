@@ -1,8 +1,10 @@
 commit_message: "[ci skip]"
 files:
   - source: /app/Language/en/*.php
-    translation: /app/Language/%two_letters_code%/%original_file_name%
-    escape_quotes: 1
+    translation: /app/Language/%osx_locale%/%original_file_name%
   - source: /modules/**/Language/en/*.php
-    translation: /modules/**/Language/%two_letters_code%/%original_file_name%
-    escape_quotes: 1
+    translation: /modules/**/Language/%osx_locale%/%original_file_name%
+  - source: /docs/src/**/*.md
+    ignore:
+      - /docs/src/contributing/*.md
+    translation: /docs/src/%osx_locale%/**/%original_file_name%
