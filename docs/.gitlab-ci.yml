@@ -7,6 +7,8 @@ stages:
 .documentation-setup:
   before_script:
     - cd docs
+    - chmod +x ./scripts/i18n-filter.sh
+    - ./scripts/i18n-filter.sh
     - npm ci
 
 cache:
