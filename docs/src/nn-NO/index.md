@@ -48,7 +48,7 @@ over heile verda&nbsp;bruker&nbsp;det!
   - 🔉 &nbsp;Lag lydbetar
   - ▶️ &nbsp;Innbyggbar spelar, så du kan spela episodane dine på ein kvar
     nettstad
-- 💸 &nbsp;Kommersialisering:
+- 💸 &nbsp;Ten pengar:
   - 🔗 &nbsp;Donasjonslenker
   - 📲 &nbsp;lytt-for-å-klikka-annonsar
   - 🤝 &nbsp;value4value / WebMonetization
@@ -57,153 +57,149 @@ over heile verda&nbsp;bruker&nbsp;det!
     Google Podcasts, Deezer, Podcast Addict, Podfriend, …
   - ⚡ &nbsp;Kringkast episodane dine straks med WebSub
 - 📥 &nbsp;Podkastimport: Flytt podkasten din til Castopod
-- 📤 &nbsp;Move your podcast out of Castopod
-- 🔀 &nbsp;Multi-tenant: host as many podcasts as you want
-- 👥 &nbsp;Multi-user: add contributors and set roles
-- 🌎 &nbsp;i18n support: translated in English, French & Polish with more to
-  come!
+- 📤 &nbsp;Flytt podkasten din bort frå Castopod
+- 🔀 &nbsp;For fleire: Ver vertskap for så mange podkastar du vil
+- 👥 &nbsp;Fleirbrukar: legg til bidragsytarar og lag roller for dei
+- 🌎 &nbsp;i18n-støtte: Omsett til norsk, engelsk, fransk, polsk og mange andre!
 
-## Motivation
+## Kvifor Castopod?
 
-The podcasting ecosystem is decentralized by nature: you can create your podcast
-as an RSS file, publish it on the web and have it shared everywhere online.
+Podkasting er i utgangspunktet desentralt: Du kan laga din eigen podkast som ei
+RSS-fil, leggja han ut på nettet og dela han kvar som helst.
 
-It is in fact one of the only media to have stayed this way for a long time.
+Faktisk var podkasting lenge eit av få medium som fungerte på denne måten.
 
-As usages are evolving, more and more people are getting into podcasts: whether
-it is creators finding new ways to share their ideas, or listeners in the search
-for better content.
+Etter som bruken endra seg, vart podkastar vanlegare - anten det var folk som
+brukte podkasting til å uttrykkja seg og dela tankane sine, eller lyttarar som
+såg etter betre innhald.
 
-With podcasting becoming more widely used, some companies are trying to shift it
-towards a more controlled and centralized medium.
+Når podkasting blir vanlegare, prøver fleire firma å driva podkasting i retning
+meir sentralisering og kontroll.
 
-Castopod was created in an effort to provide an open and sustainable alternative
-to hosting your podcasts, promoting decentralization to ensure that podcasters
-creativity can express itself.
+Castopod vart til for å tilby eit ope og framtidsretta alternativ for å
+publisera podkastar, med vekt på desentralisering for å tryggja at podkastar kan
+uttrykkja kreativiteten sin.
 
-This project is pushed by the open-source community, and specifically by the
-[Fediverse](https://fediverse.party/en/fediverse/) and
-[Podcasting 2.0](https://podcastindex.org/) movements.
+Miljøa for open kjeldekode står bak dette prosjektetet, og særleg rørslene bak
+[fødiverset](https://fediverse.party/en/fediverse/) og
+[Podcasting 2.0](https://podcastindex.org/).
 
-## Comparison with other solutions
+## Samanlikning med andre løysingar
 
-We believe that a solution is not necessarily right for everyone, it highly
-depends on your needs. So, here are comparisons with other tools to help you to
-gauge whether Castopod is the right fit for&nbsp;you.
+Me trur ikkje at ei spesiell løysing er best for alle, det kjem an på kva du
+treng. Difor kjem me med ei samanlikning med andre verkty, slik at du kan finna
+ut om Castopod er rett for&nbsp;deg.
 
-### Castopod vs Wordpress
+### Castopod og Wordpress
 
-Castopod is often referred to as "the Wordpress for podcasts" because of the
-similarities between the two. In some ways this is true. And actually, Castopod
-was greatly inspired by the Wordpress ecosystem, seeing the ease of adoption
-from the community and the number of websites running&nbsp;it.
+Castopod blir ofte omtala som "Wordpress for podkastar", fordi løysingane er
+ganske like. Det stemmer i grunnen. Castopod har fått mykje inspirasjon frå
+Wordpress-økosystemet, fordi me såg kor lett det var å ta i bruk og kor mange
+nettstader som køyrer&nbsp;det.
 
-Just like Wordpress, Castopod is free & open source, built using PHP with a
-MySQL database and is packaged in a way that you can easily install on most web
-servers.
+Nett som Wordpress er Castopod fri og open, bygd med PHP på ein MySQL-database
+og pakka slik at du lett kan installera han på dei fleste vevtenarar.
 
-Wordpress is a great way to create your website and extend it with plugins to
-get what you want. It is a full fledged CMS that helps you get any type of
-website online.
+Wordpress er ein fin måte å laga ei nettside på, og utvida ho med tillegg som
+inneheld dei funksjonane du treng. Det er eit fullstendig innhaldssystem som kan
+laga ei kva som helst nettside.
 
-On the other hand, Castopod is meant to address the podcasters needs
-specifically, focusing on podcasting, and nothing else. You don't need any
-plugin to get you started on your podcasting&nbsp;journey.
+På andre sida er Castopod laga spesifikt for podkastarar, og legg vekt på
+podkasting og ingenting anna. Du treng ingen ekstra programtillegg for å starta
+med&nbsp;podkasting.
 
-This allows optimizing the processes specific to podcasting: ranging from the
-creation of your podcasts and the publication of new episodes all the way to
-broadcasting, marketing and analytics.
+På denne måten kan me tilpassa programmet spesielt til podkasting, anten det
+gjeld å laga nye podkastar og episodar eller å kringkasta, marknadsføra og
+analysera dei.
 
-Finally, depending on your needs, Wordpress and Castopod can even live side by
-side as they share the same requirements!
+Til slutt: Wordpress og Castopod kan fint bu saman på same nettverten, etter som
+dei har same systemkrava!
 
-### Castopod vs Funkwhale
+### Castopod og Funkwhale
 
-Funkwhale is a self-hosted, modern free and open-source music server. Just as
-Castopod, Funkwhale is on the fediverse, a decentralized social network allowing
-interoperability between the two.
+Funkwhale er ein open og moderne musikktenar du kan køyra sjølv. Nett som
+Castopod er Funkwhale på fødiverset, som er eit desentralt sosialt nettverk.
+Dermed kan dei prata saman.
 
-Funkwhale was initially built around music. And later on, as the project
-evolved, the ability to host podcasts was introduced.
+Funkwhale vart i utgangspunktet laga for musikk. Seinare, etter som prosjektet
+utvikla seg, vart det mogleg å leggja ut podkastar der.
 
-Unlike Funkwhale, Castopod has been designed and built around podcasting
-exclusively. This allows easier implementation for features related to the
-podcasting ecosystem, such as the podcasting 2.0 features (transcripts,
-chapters, locations, persons, …).
+Ulikt Funkwhale er Castopod utforma og bygd berre for podkastar. Det gjer det
+lettare å leggja til funksjonar knytt til økosystemet rundt podkastar, slik som
+podkasting 2.0-funksjonane (transkribering, kapittel, stader, personar…).
 
-So, you should probably use Funkwhale if you want to host your music, and use
-Castopod if you want to host your podcasts.
+For å oppsummera bør du truleg bruka Funkwhale om du vil leggja ut musikk, og
+Castopod om du vil leggja ut podkastar.
 
-### Castopod vs other podcast hosts
+### Castopod og andre podkastvertar
 
-There are many solutions for you to host your podcasts, some of which are really
-great and [a lot of them](https://podcastindex.org/apps) are jumping into the
-Podcasting 2.0 wagon just like Castopod!
+Det finst mange løysingar for å leggja ut podkastar. Nokre av dei er verkeleg
+flotte, og [mange av dei](https://podcastindex.org/apps) tek i bruk podkasting
+2.0-funksjonar, nett som Castopod!
 
-Each of these solutions differ from one another, you may compare with the
-[list of features](#features).
+Kvar av desse løysingane er ulike, og du kan samanlikna dei ved hjelp av
+[lista over funksjonar](#features).
 
-That being said, there are two main differences with other podcasting solutions:
+Når det er sagt, er det to hovudpunkt som skil Castopod frå andre
+podkastløysingar:
 
-- Castopod can be self-hosted and is the only solution that allows you to keep
-  full control over what you produce. Also, as it is open-source, you can even
-  customize it as you wish.
+- Du kan køyra Castopod på di eiga tenarmaskin, og det er den einaste løysinga
+  som gjev deg full kontroll over det du lagar. Og fordi Castopod er open
+  kjeldekode, kan du endra løysinga slik du treng.
 
-- Castopod is the only solution that currently integrates both a decentralized
-  social network with ActivityPub as well as many of the podcasting 2.0
-  features, hoping to bridge the gap between the two.
+- Castopod er den einaste løysinga no som både koplar til eit desentralt sosialt
+  nettverk med Activitypub og som har mange av podkasting 2.0-løysingane. Me tek
+  sikte på å kopla dei to tettare saman.
 
-## Contributing
+## Bidra til Castopod
 
-Love Castopod and would like to help? Take a look at the following documentation
-to get you&nbsp;started.
+Likar du Castopod og vil bidra? Sjå på dokumentasjonen nedanfor for å koma
+i&nbsp;gang.
 
-### Code of conduct
+### Ordensreglar
 
-Castopod has adopted a Code of Conduct that we expect project participants to
-adhere to. Please read the
-[CODE_OF_CONDUCT manual](https://code.castopod.org/adaures/castopod/-/blob/beta/CODE_OF_CONDUCT.md)
-so that you can understand what actions will and will not be&nbsp;tolerated.
+Castopod har laga ordensreglar som me ventar at bidragsytarar fylgjer. Les
+[CODE_OF_CONDUCT-dokumentet](https://code.castopod.org/adaures/castopod/-/blob/beta/CODE_OF_CONDUCT.md)
+for å sjå kva åtferd me godtek og&nbsp;ikkje.
 
-### Contributing guide
+### Korleis bidra
 
-Read our [contributing guide](./contributing/guidelines.md) to learn about our
-development process, how to propose bugfixes and improvements, and how to build
-and test your changes to Castopod.
+Les [korleis du bidreg](./contributing/guidelines.md) for å lære korleis me
+utviklar, korleis du melder inn feil og framlegg til forbetringar, og korleis du
+byggjer og prøver ut endringar i Castopod.
 
-## Contact
+## Kontakt
 
-You may reach us for help or ask any question you have on:
+Du kan spørja om hjelp eller stilla alle moglege spørsmål på:
 
-- [Discord](https://castopod.org/discord) (for direct interaction with
-  developers and the community)
-- [Issue tracker](https://code.castopod.org/adaures/castopod/-/issues) (for
-  feature requests & bug reports)
+- [Discord](https://castopod.org/discord) (for å prata direkte med utviklarane
+  og brukarmiljøet)
+- [Feilmeldinga](https://code.castopod.org/adaures/castopod/-/issues) (for å
+  føreslå nye funksjonar og melda feil)
 
-Alternatively, you can follow us on social media platforms to get news about
-Castopod:
+Eventuelt kan du fylgja oss på sosiale plattformer for å få nytt om Castopod:
 
-- [podlibre.social](https://podlibre.social/@Castopod) (Mastodon instance)
+- [podlibre.social](https://podlibre.social/@Castopod) (Mastodon-nettstad)
 - [Twitter](https://twitter.com/castopod)
 - [LinkedIn](https://linkedin.com/company/castopod)
 - [Facebook](https://www.facebook.com/castopod)
 
-## Sponsors
+## Sponsorar
 
-The ongoing development of Castopod is made possible with the support of its
-backers. If you'd like to help, please consider
-[sponsoring Castopod's development](https://opencollective.com/castopod/contribute).
+Me får økonomisk hjelp til å utvikla Castopod vidare. Viss du vil bidra, kan du
+lesa korleis du
+[sponsar Castopod-utviklinga](https://opencollective.com/castopod/contribute).
 
 <div class="flex flex-wrap gap-x-16 gap-y-8">
   <a href="https://adaures.com/" target="_blank" rel="noopener noreferrer"><img src="/images/sponsors/adaures.svg" alt="Ad Aures Logo" class="h-16" /></a>
   <a href="https://nlnet.nl/project/Castopod/" target="_blank" rel="noopener noreferrer"><img src="/images/sponsors/nlnet.svg" alt="NLnet Logo" class="h-16" /></a>
 </div>
 
-## License
+## Lisens
 
 [GNU Affero General Public License v3.0](https://choosealicense.com/licenses/agpl-3.0/)
 
-Copyright © 2020-present, [Ad Aures](https://adaures.com/).
+Copyright © 2020-d.d., [Ad Aures](https://adaures.com/).
 https://img.shields.io/gitlab/v/release/2?color=brightgreen&gitlab_url=https%3A%2F%2Fcode.castopod.org%2F&include_prereleases&label=release
 https://img.shields.io/github/license/ad-aures/castopod?color=blue
 https://img.shields.io/badge/contributions-welcome-brightgreen.svg
