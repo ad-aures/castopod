@@ -10,13 +10,13 @@ declare(strict_types=1);
 
 return [
     'feed' => 'RSS Podcast feed',
-    'season' => 'Season {seasonNumber}',
+    'season' => 'الموسم {seasonNumber}',
     'list_of_episodes_year' => 'حلَقات {year} ({episodeCount})',
     'list_of_episodes_season' =>
-        'Season {seasonNumber} episodes ({episodeCount})',
-    'no_episode' => 'No episode found!',
+        'الموسم {seasonNumber} الحلقات ({episodeCount})',
+    'no_episode' => 'لم يتم العثور على أية حلقة!',
     'follow' => 'متابعة',
-    'followTitle' => 'Follow {actorDisplayName} on the fediverse!',
+    'followTitle' => 'تابع {actorDisplayName} على الفديفرس!',
     'followers' => '{numberOfFollowers, plural,
         one {<span class="font-semibold">#</span> follower}
         other {<span class="font-semibold">#</span> followers}
@@ -41,7 +41,7 @@ return [
         }',
         'first_published_at' => 'First episode published on <span class="font-semibold">{0, date, medium}</span>',
     ],
-    'sponsor' => 'Sponsor',
+    'sponsor' => 'الراعي',
     'funding_links' => 'Funding links for {podcastTitle}',
     'find_on' => 'Find {podcastTitle} on',
     'listen_on' => 'Listen on',

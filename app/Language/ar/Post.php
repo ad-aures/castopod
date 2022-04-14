@@ -34,7 +34,7 @@ return [
         other {# replies}
     }',
     'expand' => 'Expand post',
-    'block_actor' => 'Block user @{actorUsername}',
-    'block_domain' => 'Block domain @{actorDomain}',
+    'block_actor' => 'احجب المستخدم @{actorUsername}',
+    'block_domain' => 'احجب النطاق @{actorDomain}',
     'delete' => 'احذف المنشور',
 ];

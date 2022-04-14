@@ -13,7 +13,7 @@ return [
     'your_handle_hint' => 'Enter the @username@domain you want to act from.',
     'follow' => [
         'label' => 'تابِع',
-        'title' => 'Follow {actorDisplayName}',
+        'title' => 'تابع {actorDisplayName}',
         'subtitle' => 'إنك بصدد متابعة:',
         'accountNotFound' => 'لا يمكن العثور على الحساب.',
         'remoteFollowNotAllowed' => 'Seems like the account server does not allow remote follows…',

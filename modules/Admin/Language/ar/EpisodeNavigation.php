@@ -16,7 +16,7 @@ return [
     'episode-persons-manage' => 'Manage persons',
     'embed-add' => 'Embeddable player',
     'clips' => 'Clips',
-    'video-clips-list' => 'Video clips',
+    'video-clips-list' => 'مقاطع فيديو',
     'video-clips-create' => 'New video clip',
     'soundbites-list' => 'Soundbites',
     'soundbites-create' => 'New soundbite',

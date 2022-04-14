@@ -43,7 +43,7 @@ return [
             'redis' => 'Redis',
             'predis' => 'Predis',
         ],
-        'next' => 'Next',
+        'next' => 'التالي',
         'submit' => 'إنهاء التثبيت',
         'create_superadmin' => 'Create your superadmin account',
         'email' => 'البريد الإلكتروني',

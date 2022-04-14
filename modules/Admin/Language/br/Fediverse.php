@@ -10,23 +10,23 @@ declare(strict_types=1);
 
 return [
     'messages' => [
-        'actorNotFound' => 'The account could not be found!',
-        'blockActorSuccess' => '{actor} has been blocked!',
-        'unblockActorSuccess' => 'Actor has been unblocked!',
-        'blockDomainSuccess' => '{domain} has been blocked!',
-        'unblockDomainSuccess' => '{domain} has been unblocked!',
+        'actorNotFound' => "N'eo ket bet kavet ar gont-se!",
+        'blockActorSuccess' => 'Stanket eo bet {actor}!',
+        'unblockActorSuccess' => 'Distanket eo bet an implijer·ez!',
+        'blockDomainSuccess' => 'Stanket eo bet {domain}!',
+        'unblockDomainSuccess' => 'Distanket eo bet {domain}!',
     ],
-    'blocked_actors' => 'Blocked accounts',
-    'blocked_domains' => 'Blocked domains',
+    'blocked_actors' => 'Implijerien·ezed stanket',
+    'blocked_domains' => 'Domanioù stanket',
     'block_lists_form' => [
-        'handle' => 'Account handle',
-        'handle_hint' => 'Input @username@domain account.',
-        'domain' => 'Domain name',
-        'submit' => 'Block!',
+        'handle' => 'Dornell (lesanv)',
+        'handle_hint' => 'Skrivit @anv@domani an implijer·ez.',
+        'domain' => 'Anv domani',
+        'submit' => 'Stankañ!',
     ],
     'list' => [
-        'actor' => 'Account',
-        'domain' => 'Domain name',
-        'unblock' => 'Unblock',
+        'actor' => 'Implijer·ez',
+        'domain' => 'Anv domani',
+        'unblock' => 'Distankañ',
     ],
 ];

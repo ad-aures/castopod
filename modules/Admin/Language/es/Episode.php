@@ -50,15 +50,15 @@ return [
     ],
     'form' => [
         'file_size_error' =>
-            'Your file size is too big! Max size is {0}. Increase the `memory_limit`, `upload_max_filesize` and `post_max_size` values in your php configuration file then restart your web server to upload your file.',
+            '¡El tamaño de tu archivo es demasiado grande! El tamaño máximo es {0}. Aumenta los valores de `memory_limit`, `upload_max_filesize` y `post_max_size` en tu archivo de configuración php y reinicia tu servidor web para subir tu archivo.',
         'audio_file' => 'Archivo de audio',
         'audio_file_hint' => 'Choose an .mp3 or .m4a audio file.',
-        'info_section_title' => 'Episode info',
+        'info_section_title' => 'Información de episodio',
         'cover' => 'Episode cover',
         'cover_hint' =>
             'If you do not set a cover, the podcast cover will be used instead.',
         'cover_size_hint' => 'Cover must be squared with at least 1400px wide and tall.',
-        'title' => 'Title',
+        'title' => 'Título',
         'title_hint' =>
             'Should contain a clear and concise episode name. Do not specify the episode or season numbers here.',
         'permalink' => 'Enlace permanente',
@@ -123,9 +123,9 @@ return [
         'post_hint' =>
             "Write a message to announce the publication of your episode. The message will be broadcasted to all your followers in the fediverse and be featured in your podcast's homepage.",
         'message_placeholder' => 'Write your message…',
-        'publication_date' => 'Publication date',
+        'publication_date' => 'Fecha de publicación',
         'publication_method' => [
-            'now' => 'Now',
+            'now' => 'Ahora',
             'schedule' => 'Schedule',
         ],
         'scheduled_publication_date' => 'Scheduled publication date',
@@ -137,29 +137,29 @@ return [
         'cancel_publication' => 'Cancelar publicación',
         'message_warning' => 'You did not write a message for your announcement post!',
         'message_warning_hint' => 'Having a message increases social engagement, resulting in a better visibility for your episode.',
-        'message_warning_submit' => 'Publish anyways',
+        'message_warning_submit' => 'Publicar de todos modos',
     ],
     'unpublish_form' => [
         'disclaimer' =>
             "Unpublishing the episode will delete all the posts associated with it and remove it from the podcast's RSS feed.",
-        'understand' => 'I understand, I want to unpublish the episode',
-        'submit' => 'Unpublish',
+        'understand' => 'Lo entiendo, quiero anular la publicación del episodio',
+        'submit' => 'Anular publicación',
     ],
     'delete_form' => [
         'disclaimer' =>
             "Deleting the episode will delete all the posts associated with it and remove it from the podcast's RSS feed.",
         'understand' => 'I understand, I want to delete the episode',
-        'submit' => 'Delete',
+        'submit' => 'Borrar',
     ],
     'embed' => [
         'title' => 'Embeddable player',
         'label' =>
             'Pick a theme color, copy the embeddable player to clipboard, then paste it on your website.',
         'clipboard_iframe' => 'Copy embeddable player to clipboard',
-        'clipboard_url' => 'Copy address to clipboard',
-        'dark' => 'Dark',
+        'clipboard_url' => 'Copiar dirección al portapapeles',
+        'dark' => 'Oscuro',
         'dark-transparent' => 'Dark transparent',
-        'light' => 'Light',
+        'light' => 'Claro',
         'light-transparent' => 'Light transparent',
     ],
 ];

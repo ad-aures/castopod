@@ -32,13 +32,13 @@ return [
             'help' => 'Powered by markdown',
         ],
         'multiSelect' => [
-            'selectText' => 'Press to select',
-            'loadingText' => 'Loading…',
-            'noResultsText' => 'No results found',
+            'selectText' => 'اضغط للاختيار',
+            'loadingText' => 'جارٍ التحميل…',
+            'noResultsText' => 'لم يتم العثور على نتائج',
             'noChoicesText' => 'No choices to choose from',
             'maxItemText' => 'Cannot add more items',
         ],
-        'upload_file' => 'Upload a file',
+        'upload_file' => 'إرسال ملف',
         'remote_url' => 'Remote URL',
     ],
     'play_episode_button' => [

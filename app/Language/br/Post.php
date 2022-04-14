@@ -22,8 +22,15 @@ return [
         'submit_reply' => 'Respont',
     ],
     'favourites' => '{numberOfFavourites, plural,
-        one {# favourite}
-        other {# favourites}
+        one {# muiañ-karet}
+        2 {# vuiañ-karet}
+        22 {# vuiañ-karet}
+        32 {# vuiañ-karet}
+        42 {# vuiañ-karet}
+        52 {# vuiañ-karet}
+        62 {# vuiañ-karet}
+        82 {# vuiañ-karet}
+        other {# muiañ-karet}
     }',
     'reblogs' => '{numberOfReblogs, plural,
         0 {rannadur ebet}
@@ -36,7 +43,7 @@ return [
         other {# respont}
     }',
     'expand' => 'Astenn ar gemennadenn',
-    'block_actor' => 'Berzañ pep tra eus an implijer·ez @{actorUsername}',
-    'block_domain' => 'Berzañ pep tra eus @{actorDomain}',
+    'block_actor' => 'Stankañ an implijer·ez @{actorUsername}',
+    'block_domain' => 'Stankañ @{actorDomain}',
     'delete' => 'Dilemel ar gemennadenn',
 ];

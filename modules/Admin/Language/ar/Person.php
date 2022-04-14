@@ -22,7 +22,7 @@ return [
         'deleteSuccess' => 'Person has been removed!',
     ],
     'form' => [
-        'avatar' => 'Avatar',
+        'avatar' => 'الصورة الرمزية',
         'avatar_size_hint' =>
             'Avatar must be squared with at least 400px wide and tall.',
         'full_name' => 'الإسم الكامل',

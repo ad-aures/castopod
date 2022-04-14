@@ -9,11 +9,11 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => "{actorDisplayName}'s comment for {episodeTitle}",
+    'title' => "تعليق {actorDisplayName} على {episodeTitle}",
     'back_to_comments' => 'العودة إلى التعليقات',
     'form' => [
         'episode_message_placeholder' => 'أكتب تعليقاً…',
-        'reply_to_placeholder' => 'Reply to @{actorUsername}',
+        'reply_to_placeholder' => 'رد على @{actorUsername}',
         'submit' => 'ارسل',
         'submit_reply' => 'رد',
     ],

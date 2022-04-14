@@ -27,7 +27,7 @@ return [
     'unpublish' => 'diembannañ',
     'delete' => 'dilemel',
     'fediverse' => 'kevrebed',
-    'block-lists' => 'roll ar re harzet',
+    'block-lists' => 'roll ar re stanket',
     'users' => 'implijerien·ezed',
     'my-account' => "ma c'hont",
     'change-password' => 'kemmañ ar ger-tremen',

@@ -22,7 +22,7 @@ return [
         'handle' => 'Identifiant',
         'handle_hint' => 'Saisissez l’utilisateur @nom@domaine.',
         'domain' => 'Nom de domaine',
-        'submit' => 'Sauvegarder les listes',
+        'submit' => 'Bloquer !',
     ],
     'list' => [
         'actor' => 'Utilisateur',

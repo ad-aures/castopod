@@ -9,15 +9,15 @@ declare(strict_types=1);
  */
 
 return [
-    'go_to_page' => 'View episode page',
-    'dashboard' => 'Episode dashboard',
-    'episode-view' => 'Home',
-    'episode-edit' => 'Edit episode',
-    'episode-persons-manage' => 'Manage persons',
-    'embed-add' => 'Embeddable player',
-    'clips' => 'Clips',
-    'video-clips-list' => 'Video clips',
-    'video-clips-create' => 'New video clip',
-    'soundbites-list' => 'Soundbites',
-    'soundbites-create' => 'New soundbite',
+    'go_to_page' => 'Gwelet pajenn ar rann',
+    'dashboard' => 'Taolenn-stur ar rann',
+    'episode-view' => 'Degemer',
+    'episode-edit' => 'Kemm ar rann',
+    'episode-persons-manage' => 'Merañ an emellerien·ezed',
+    'embed-add' => 'Lenner enkorfet',
+    'clips' => 'Tennadoù',
+    'video-clips-list' => 'Tennadoù video',
+    'video-clips-create' => 'Tennad video nevez',
+    'soundbites-list' => 'Tennadoù son',
+    'soundbites-create' => 'Tennad son nevez',
 ];

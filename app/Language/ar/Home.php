@@ -13,8 +13,8 @@ return [
     'sort_by' => 'ترتيب حسب',
     'sort_options' => [
         'activity' => 'آخر نشاط',
-        'created_desc' => 'Newest first',
-        'created_asc' => 'Oldest first',
+        'created_desc' => 'الأحدث أولًا',
+        'created_asc' => 'الأقدم أولاً',
     ],
-    'no_podcast' => 'No podcast found',
+    'no_podcast' => 'لا يوجد أي بودكاست',
 ];

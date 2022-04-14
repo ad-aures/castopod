@@ -9,33 +9,33 @@ declare(strict_types=1);
  */
 
 return [
-    'podcast_contributors' => 'Podcast contributors',
+    'podcast_contributors' => 'Perzhidi ha perzhiadezed ar podkast',
     'view' => "Perzh {username} e {podcastTitle}",
-    'add' => 'Add contributor',
-    'add_contributor' => 'Add a contributor for {0}',
-    'edit_role' => 'Update role for {0}',
-    'edit' => 'Edit',
-    'remove' => 'Remove',
+    'add' => 'Ouzhpennañ ur perzhiad pe ur berzhiadez',
+    'add_contributor' => 'Ouzhpennañ ur perzhiad pe ur berzhiadez da {0}',
+    'edit_role' => 'Hizivaat roll {0}',
+    'edit' => 'Kemmañ',
+    'remove' => 'Lemel',
     'list' => [
         'username' => 'Anv implijer·ez',
-        'role' => 'Role',
+        'role' => 'Roll',
     ],
     'form' => [
         'user' => 'Implijer·ez',
         'user_placeholder' => 'Dibabit un implijer·ez…',
-        'role' => 'Role',
-        'role_placeholder' => 'Select its role…',
-        'submit_add' => 'Add contributor',
-        'submit_edit' => 'Update role',
+        'role' => 'Roll',
+        'role_placeholder' => 'Dibabit e·he roll…',
+        'submit_add' => 'Ouzhpennañ ur perzhiad pe ur berzhiadez',
+        'submit_edit' => 'Hizivaat ar roll',
     ],
     'roles' => [
-        'podcast_admin' => 'Podcast admin',
+        'podcast_admin' => 'Merour podkastoù',
     ],
     'messages' => [
-        'removeOwnerError' => "You can't remove the podcast owner!",
+        'removeOwnerError' => "Ne c'hellit ket lemel perc'henn ar podkast!",
         'removeSuccess' =>
             'Lamet ho peus {username} diouzh {podcastTitle} gant berzh',
         'alreadyAddedError' =>
-            "The contributor you're trying to add has already been added!",
+            "Ar perzhiad pe ar berzhiadez emaoc'h o klask ouzhpennañ zo bet ouzhpennet dija!",
     ],
 ];

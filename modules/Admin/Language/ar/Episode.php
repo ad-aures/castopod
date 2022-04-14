@@ -14,7 +14,7 @@ return [
     'number' => 'الحلقة {episodeNumber}',
     'number_abbr' => 'الحلقة {episodeNumber}',
     'season_episode' => 'الموسم {seasonNumber} الحلقة {episodeNumber}',
-    'season_episode_abbr' => 'S{seasonNumber}E{episodeNumber}',
+    'season_episode_abbr' => 'م{seasonNumber}ح{episodeNumber}',
     'number_of_comments' => '{numberOfComments, plural,
         one {# comment}
         other {# comments}
@@ -23,45 +23,45 @@ return [
     'back_to_podcast' => 'العودة إلى البودكاست',
     'edit' => 'تعديل',
     'publish' => 'نشر',
-    'publish_edit' => 'Edit publication',
-    'unpublish' => 'Unpublish',
+    'publish_edit' => 'تعديل المنشور',
+    'unpublish' => 'إلغاء النشر',
     'publish_error' => 'Episode is already published.',
     'publish_edit_error' => 'Episode is already published.',
     'publish_cancel_error' => 'Episode is already published.',
-    'unpublish_error' => 'Episode is not published.',
+    'unpublish_error' => 'الحلقة غير منشورة.',
     'delete' => 'احذف',
     'go_to_page' => 'الانتقال إلى الصفحة',
     'create' => 'إضافة حلقة',
     'publication_status' => [
-        'published' => 'Published',
-        'scheduled' => 'Scheduled',
-        'not_published' => 'Not published',
+        'published' => 'نُشِرَت',
+        'scheduled' => 'مُبَرمَجة',
+        'not_published' => 'غير منشورة',
     ],
     'list' => [
         'episode' => 'الحلقة',
-        'visibility' => 'Visibility',
+        'visibility' => 'الظهور',
         'comments' => 'التعليقات',
         'actions' => 'الإجراءات',
     ],
     'messages' => [
-        'createSuccess' => 'Episode has been successfully created!',
-        'editSuccess' => 'Episode has been successfully updated!',
-        'publishCancelSuccess' => 'Episode publication successfully cancelled!',
+        'createSuccess' => 'تم إنشاء الحلقة بنجاح!',
+        'editSuccess' => 'تم تحديث الحلقة بنجاح!',
+        'publishCancelSuccess' => 'تم إلغاء نشر الحلقة بنجاح!',
     ],
     'form' => [
         'file_size_error' =>
             'Your file size is too big! Max size is {0}. Increase the `memory_limit`, `upload_max_filesize` and `post_max_size` values in your php configuration file then restart your web server to upload your file.',
         'audio_file' => 'ملف صوتي',
         'audio_file_hint' => 'Choose an .mp3 or .m4a audio file.',
-        'info_section_title' => 'Episode info',
-        'cover' => 'Episode cover',
+        'info_section_title' => 'معلومات الحلقة',
+        'cover' => 'غلاف الحلقة',
         'cover_hint' =>
             'If you do not set a cover, the podcast cover will be used instead.',
         'cover_size_hint' => 'Cover must be squared with at least 1400px wide and tall.',
         'title' => 'العنوان',
         'title_hint' =>
             'Should contain a clear and concise episode name. Do not specify the episode or season numbers here.',
-        'permalink' => 'Permalink',
+        'permalink' => 'الرابط الدائم',
         'season_number' => 'الموسم',
         'episode_number' => 'الحلقة',
         'type' => [
@@ -87,7 +87,7 @@ return [
         'description_footer' => 'Description footer',
         'description_footer_hint' =>
             'This text is added at the end of each episode description, it is a good place to input your social links for example.',
-        'additional_files_section_title' => 'Additional files',
+        'additional_files_section_title' => 'ملفات إضافية',
         'additional_files_section_subtitle' =>
             'These files may be used by other platforms to provide better experience to your audience.<br />See the {podcastNamespaceLink} for more information.',
         'location_section_title' => 'Location',
@@ -122,8 +122,8 @@ return [
         'post' => 'Your announcement post',
         'post_hint' =>
             "Write a message to announce the publication of your episode. The message will be broadcasted to all your followers in the fediverse and be featured in your podcast's homepage.",
-        'message_placeholder' => 'Write your message…',
-        'publication_date' => 'Publication date',
+        'message_placeholder' => 'اكتب رسالتك…',
+        'publication_date' => 'تاريخ النشر',
         'publication_method' => [
             'now' => 'الآن',
             'schedule' => 'برمجة',
@@ -133,8 +133,8 @@ return [
         'scheduled_publication_date_hint' =>
             'You can schedule the episode release by setting a future publication date. This field must be formatted as YYYY-MM-DD HH:mm',
         'submit' => 'Publish',
-        'submit_edit' => 'Edit publication',
-        'cancel_publication' => 'Cancel publication',
+        'submit_edit' => 'تعديل المنشور',
+        'cancel_publication' => 'إلغاء المنشور',
         'message_warning' => 'You did not write a message for your announcement post!',
         'message_warning_hint' => 'Having a message increases social engagement, resulting in a better visibility for your episode.',
         'message_warning_submit' => 'Publish anyways',
@@ -143,7 +143,7 @@ return [
         'disclaimer' =>
             "Unpublishing the episode will delete all the posts associated with it and remove it from the podcast's RSS feed.",
         'understand' => 'I understand, I want to unpublish the episode',
-        'submit' => 'Unpublish',
+        'submit' => 'إلغاء النشر',
     ],
     'delete_form' => [
         'disclaimer' =>
@@ -157,8 +157,8 @@ return [
             'Pick a theme color, copy the embeddable player to clipboard, then paste it on your website.',
         'clipboard_iframe' => 'Copy embeddable player to clipboard',
         'clipboard_url' => 'Copy address to clipboard',
-        'dark' => 'Dark',
-        'dark-transparent' => 'Dark transparent',
+        'dark' => 'داكن',
+        'dark-transparent' => 'داكن شفاف',
         'light' => 'Light',
         'light-transparent' => 'Light transparent',
     ],

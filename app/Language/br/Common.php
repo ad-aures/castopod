@@ -15,7 +15,7 @@ return [
     'optional' => 'Diret',
     'close' => 'Serriñ',
     'home' => 'Degemer',
-    'explicit' => 'Explicit',
+    'explicit' => "Endalc'had evit an oadourien",
     'powered_by' => 'Lusket gant {castopod}',
     'go_back' => 'Mont war-gil',
     'play_episode_button' => [

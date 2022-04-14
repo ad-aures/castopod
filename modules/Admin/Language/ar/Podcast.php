@@ -9,10 +9,10 @@ declare(strict_types=1);
  */
 
 return [
-    'all_podcasts' => 'All podcasts',
+    'all_podcasts' => 'كافة البودكاستات',
     'no_podcast' => 'No podcast found!',
-    'create' => 'Create podcast',
-    'import' => 'Import podcast',
+    'create' => 'إنشاء بودكاست',
+    'import' => 'استيراد بودكاست',
     'new_episode' => 'حلقة جديدة',
     'view' => 'View podcast',
     'edit' => 'Edit podcast',
