@@ -1,3 +1,17 @@
+# [1.0.0-beta.13](https://code.castopod.org/adaures/castopod/compare/v1.0.0-beta.12...v1.0.0-beta.13) (2022-04-14)
+
+### Bug Fixes
+
+- **rss:** remove escaping for publisher and owner name
+  ([e2046e4](https://code.castopod.org/adaures/castopod/commit/e2046e4b116ecddb5e6d68487f666b95fd7f493c))
+- use UTC_TIMESTAMP() to get current utc date instead of NOW() in sql queries
+  ([853a6ba](https://code.castopod.org/adaures/castopod/commit/853a6ba9155b6687604304d59f03d0efb75a9f96))
+
+### Features
+
+- **i18n:** add Norwegian Nynorsk to supported locales
+  ([744340d](https://code.castopod.org/adaures/castopod/commit/744340df615bee38a54c4abbbb7f03d51b61a39d))
+
 # [1.0.0-beta.12](https://code.castopod.org/adaures/castopod/compare/v1.0.0-beta.11...v1.0.0-beta.12) (2022-04-05)
 
 ### Bug Fixes
