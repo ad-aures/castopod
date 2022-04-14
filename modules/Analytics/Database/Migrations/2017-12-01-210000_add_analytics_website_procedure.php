@@ -35,7 +35,7 @@ class AddAnalyticsWebsiteProcedure extends Migration
         SQL SECURITY INVOKER
         BEGIN
 
-        SET @current_date = DATE(NOW());
+        SET @current_date = DATE(UTC_TIMESTAMP());
 
         INSERT INTO {$procedureName}_by_browser(`podcast_id`, `browser`, `date`)
             VALUES (p_podcast_id, p_browser, @current_date)

@@ -250,12 +250,12 @@ class ActorModel extends BaseModel
                 ->where($tablePrefix . 'actors.domain', get_current_domain())
                 ->groupStart()
                 ->where(
-                    "`{$tablePrefix}posts`.`created_at` >= NOW() - INTERVAL {$lastNumberOfMonths} month",
+                    "`{$tablePrefix}posts`.`created_at` >= UTC_TIMESTAMP() - INTERVAL {$lastNumberOfMonths} month",
                     null,
                     false
                 )
                 ->orWhere(
-                    "`{$tablePrefix}favourites`.`created_at` >= NOW() - INTERVAL {$lastNumberOfMonths} month",
+                    "`{$tablePrefix}favourites`.`created_at` >= UTC_TIMESTAMP() - INTERVAL {$lastNumberOfMonths} month",
                     null,
                     false
                 )

@@ -189,7 +189,7 @@ class PodcastModel extends Model
                     'left'
                 )
                 ->where(
-                    '`' . $prefix . $fediverseTablePrefix . 'posts`.`published_at` <= NOW()',
+                    '`' . $prefix . $fediverseTablePrefix . 'posts`.`published_at` <= UTC_TIMESTAMP()',
                     null,
                     false
                 )->orWhere($fediverseTablePrefix . 'posts.published_at', null)
@@ -313,7 +313,7 @@ class PodcastModel extends Model
                     'season_number' => null,
                     $episodeModel->deletedField => null,
                 ])
-                ->where('`published_at` <= NOW()', null, false)
+                ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
                 ->groupBy('year')
                 ->orderBy('year', 'DESC')
                 ->get()
@@ -349,7 +349,7 @@ class PodcastModel extends Model
                     'season_number is not' => null,
                     $episodeModel->deletedField => null,
                 ])
-                ->where('`published_at` <= NOW()', null, false)
+                ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
                 ->groupBy('season_number')
                 ->orderBy('season_number', 'ASC')
                 ->get()

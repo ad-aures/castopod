@@ -274,7 +274,7 @@ class EpisodeController extends BaseController
                     ->from(config('Fediverse')->tablesPrefix . 'posts')
                     ->where('episode_id', $this->episode->id);
             })
-            ->where('`published_at` <= NOW()', null, false)
+            ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
             ->orderBy('published_at', 'ASC');
 
         $pageNumber = (int) $this->request->getGet('page');

@@ -287,11 +287,11 @@ class PodcastController extends BaseController
         if ($this->podcast->type === 'serial') {
             // podcast is serial
             $episodes = model(EpisodeModel::class)
-                ->where('`published_at` <= NOW()', null, false)
+                ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
                 ->orderBy('season_number DESC, number ASC');
         } else {
             $episodes = model(EpisodeModel::class)
-                ->where('`published_at` <= NOW()', null, false)
+                ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
                 ->orderBy('published_at', 'DESC');
         }
 

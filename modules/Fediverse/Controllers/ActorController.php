@@ -272,7 +272,7 @@ class ActorController extends Controller
         // get published activities by publication date
         $actorActivity = model('ActivityModel', false)
             ->where('actor_id', $this->actor->id)
-            ->where('`created_at` <= NOW()', null, false)
+            ->where('`created_at` <= UTC_TIMESTAMP()', null, false)
             ->orderBy('created_at', 'DESC');
 
         $pageNumber = (int) $this->request->getGet('page');

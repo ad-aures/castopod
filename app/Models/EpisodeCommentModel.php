@@ -165,7 +165,7 @@ class EpisodeCommentModel extends UuidModel
                         'in_reply_to_id' => null,
                     ]);
             })
-            ->where('`created_at` <= NOW()', null, false)
+            ->where('`created_at` <= UTC_TIMESTAMP()', null, false)
             ->getCompiledSelect();
 
         $allEpisodeComments = $this->db->query(

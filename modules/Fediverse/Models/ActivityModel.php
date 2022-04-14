@@ -111,7 +111,7 @@ class ActivityModel extends BaseUuidModel
      */
     public function getScheduledActivities(): array
     {
-        return $this->where('`scheduled_at` <= NOW()', null, false)
+        return $this->where('`scheduled_at` <= UTC_TIMESTAMP()', null, false)
             ->where('status', 'queued')
             ->orderBy('scheduled_at', 'ASC')
             ->findAll();

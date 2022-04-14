@@ -34,7 +34,7 @@ class WebSubController extends Controller
             ->where('podcasts.is_published_on_hubs', false)
             ->orGroupStart()
             ->where('episodes.is_published_on_hubs', false)
-            ->where('`' . $podcastModel->db->getPrefix() . 'episodes`.`published_at` <= NOW()', null, false)
+            ->where('`' . $podcastModel->db->getPrefix() . 'episodes`.`published_at` <= UTC_TIMESTAMP()', null, false)
             ->groupEnd()
             ->findAll();
 
@@ -82,7 +82,7 @@ class WebSubController extends Controller
                     'podcast_id' => $podcast->id,
                     'is_published_on_hubs' => false,
                 ])
-                ->where('`published_at` <= NOW()', null, false)
+                ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
                 ->update();
         }
     }

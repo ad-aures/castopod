@@ -45,7 +45,7 @@ class AddAnalyticsPodcastsProcedure extends Migration
         COMMENT 'Add one hit in podcast logs tables.'
         BEGIN
 
-        SET @current_datetime = NOW();
+        SET @current_datetime = UTC_TIMESTAMP();
         SET @current_date = DATE(@current_datetime);
         SET @current_hour = HOUR(@current_datetime);
 

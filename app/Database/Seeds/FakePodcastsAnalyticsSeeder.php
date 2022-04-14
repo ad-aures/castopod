@@ -60,7 +60,7 @@ class FakePodcastsAnalyticsSeeder extends Seeder
 
                 $episodes = (new EpisodeModel())
                     ->where('podcast_id', $podcast->id)
-                    ->where('`published_at` <= NOW()', null, false)
+                    ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
                     ->findAll();
                 foreach ($episodes as $episode) {
                     $age = floor(($date - strtotime((string) $episode->published_at)) / 86400);

@@ -135,7 +135,7 @@ class PostModel extends BaseUuidModel
                 'actor_id' => $actorId,
                 'in_reply_to_id' => null,
             ])
-                ->where('`published_at` <= NOW()', null, false)
+                ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
                 ->orderBy('published_at', 'DESC')
                 ->findAll();
 
@@ -154,11 +154,11 @@ class PostModel extends BaseUuidModel
      */
     public function getSecondsToNextUnpublishedPosts(int $actorId): int | false
     {
-        $result = $this->select('TIMESTAMPDIFF(SECOND, NOW(), `published_at`) as timestamp_diff')
+        $result = $this->select('TIMESTAMPDIFF(SECOND, UTC_TIMESTAMP(), `published_at`) as timestamp_diff')
             ->where([
                 'actor_id' => $actorId,
             ])
-            ->where('`published_at` > NOW()', null, false)
+            ->where('`published_at` > UTC_TIMESTAMP()', null, false)
             ->orderBy('published_at', 'asc')
             ->get()
             ->getResultArray();
@@ -195,7 +195,7 @@ class PostModel extends BaseUuidModel
             }
 
             $this->where('in_reply_to_id', $this->uuid->fromString($postId) ->getBytes())
-                ->where('`published_at` <= NOW()', null, false)
+                ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
                 ->orderBy('published_at', 'ASC');
             $found = $this->findAll();
 
@@ -219,7 +219,7 @@ class PostModel extends BaseUuidModel
 
         if (! ($found = cache($cacheName))) {
             $found = $this->where('reblog_of_id', $this->uuid->fromString($postId) ->getBytes())
-                ->where('`published_at` <= NOW()', null, false)
+                ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
                 ->orderBy('published_at', 'ASC')
                 ->findAll();
 
@@ -614,7 +614,7 @@ class PostModel extends BaseUuidModel
             $result = $this->select('COUNT(*) as total_local_posts')
                 ->join($tablePrefix . 'actors', $tablePrefix . 'actors.id = ' . $tablePrefix . 'posts.actor_id')
                 ->where($tablePrefix . 'actors.domain', get_current_domain())
-                ->where('`published_at` <= NOW()', null, false)
+                ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
                 ->get()
                 ->getResultArray();
 

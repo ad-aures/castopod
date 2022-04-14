@@ -146,7 +146,7 @@ class EpisodeModel extends Model
                 ->join('podcasts', 'podcasts.id = episodes.podcast_id')
                 ->where('slug', $episodeSlug)
                 ->where('podcasts.handle', $podcastHandle)
-                ->where('`published_at` <= NOW()', null, false)
+                ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
                 ->first();
 
             cache()
@@ -182,7 +182,7 @@ class EpisodeModel extends Model
                 'id' => $episodeId,
             ])
                 ->where('podcast_id', $podcastId)
-                ->where('`published_at` <= NOW()', null, false)
+                ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
                 ->first();
 
             cache()
@@ -224,12 +224,12 @@ class EpisodeModel extends Model
             if ($podcastType === 'serial') {
                 // podcast is serial
                 $found = $this->where($where)
-                    ->where('`published_at` <= NOW()', null, false)
+                    ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
                     ->orderBy('season_number DESC, number ASC')
                     ->findAll();
             } else {
                 $found = $this->where($where)
-                    ->where('`published_at` <= NOW()', null, false)
+                    ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
                     ->orderBy('published_at', 'DESC')
                     ->findAll();
             }
@@ -257,11 +257,11 @@ class EpisodeModel extends Model
      */
     public function getSecondsToNextUnpublishedEpisode(int $podcastId): int | false
     {
-        $result = $this->select('TIMESTAMPDIFF(SECOND, NOW(), `published_at`) as timestamp_diff')
+        $result = $this->select('TIMESTAMPDIFF(SECOND, UTC_TIMESTAMP(), `published_at`) as timestamp_diff')
             ->where([
                 'podcast_id' => $podcastId,
             ])
-            ->where('`published_at` > NOW()', null, false)
+            ->where('`published_at` > UTC_TIMESTAMP()', null, false)
             ->orderBy('published_at', 'asc')
             ->get()
             ->getResultArray();

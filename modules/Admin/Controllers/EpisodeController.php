@@ -448,7 +448,7 @@ class EpisodeController extends BaseController
                     'Y-m-d H:i',
                     $scheduledPublicationDate,
                     $this->request->getPost('client_timezone'),
-                )->setTimezone('UTC');
+                )->setTimezone(app_timezone());
             } else {
                 $db->transRollback();
                 return redirect()
@@ -541,7 +541,7 @@ class EpisodeController extends BaseController
                     'Y-m-d H:i',
                     $scheduledPublicationDate,
                     $this->request->getPost('client_timezone'),
-                )->setTimezone('UTC');
+                )->setTimezone(app_timezone());
             } else {
                 $db->transRollback();
                 return redirect()

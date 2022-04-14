@@ -76,7 +76,7 @@ class PostController extends Controller
          */
         $postReplies = model('PostModel', false)
             ->where('in_reply_to_id', service('uuid') ->fromString($this->post->id) ->getBytes())
-            ->where('`published_at` <= NOW()', null, false)
+            ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
             ->orderBy('published_at', 'ASC');
 
         $pageNumber = (int) $this->request->getGet('page');

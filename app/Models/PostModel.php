@@ -50,7 +50,7 @@ class PostModel extends FediversePostModel
             'episode_id' => $episodeId,
         ])
             ->where('in_reply_to_id', null)
-            ->where('`published_at` <= NOW()', null, false)
+            ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
             ->orderBy('published_at', 'DESC')
             ->findAll();
     }

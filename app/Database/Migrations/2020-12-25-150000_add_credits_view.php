@@ -3,8 +3,6 @@
 declare(strict_types=1);
 
 /**
- * Class AddCreditView Creates Credit View in database
- *
  * @copyright  2020 Ad Aures
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
@@ -14,7 +12,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class AddCreditView extends Migration
+class AddCreditsView extends Migration
 {
     public function up(): void
     {
@@ -35,7 +33,7 @@ class AddCreditView extends Migration
                     ON (`person_id`=`{$personsTable}`.`id`)
                 INNER JOIN `{$episodesTable}`
                     ON (`episode_id`=`{$episodesTable}`.`id`)
-            WHERE `{$episodesTable}`.published_at <= NOW()
+            WHERE `{$episodesTable}`.published_at <= UTC_TIMESTAMP()
             ORDER BY `person_group`, `full_name`, `person_role`, `podcast_id`, `episode_id`;
         CODE_SAMPLE;
         $this->db->query($createQuery);
