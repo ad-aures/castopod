@@ -4,7 +4,7 @@ files:
     translation: /app/Language/%osx_locale%/%original_file_name%
   - source: /modules/**/Language/en/*.php
     translation: /modules/**/Language/%osx_locale%/%original_file_name%
-  - source: /docs/src/**/*.md
-    ignore:
-      - /docs/src/contributing/*.md
-    translation: /docs/src/%osx_locale%/**/%original_file_name%
+  - source: /docs/src/getting-started/*.md
+    translation: /docs/src/%osx_locale%/getting-started/%original_file_name%
+  - source: /docs/src/index.md
+    translation: /docs/src/%osx_locale%/index.md
