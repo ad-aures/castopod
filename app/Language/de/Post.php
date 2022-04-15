@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 return [
     'title' => "{actorDisplayName}'s Beitrag",
-    'back_to_actor_posts' => "Zurück zu {actor}'s Beiträge",
+    'back_to_actor_posts' => 'Zurück zu {actor}\'s Beiträge',
     'actor_shared' => '{actor} teilte',
     'reply_to' => 'Antorten auf @{actorUsername}',
     'form' => [

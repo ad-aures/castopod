@@ -46,8 +46,7 @@ improvements ⚡.
 
    - 👉 Make sure you run the scripts on your phpmyadmin panel or using command
      line to update the database along with the package files!
-   - cf.
-     [I haven't updated my instance in a long time… What should I do?](#i-havent-updated-my-instance-in-a-long-time-what-should-i-do)
+   - I haven't updated my instance in a long time… What should I do?
 
 5. If you are using redis, clear your cache.
 6. ✨ Enjoy your fresh instance, you're all done!
@@ -62,11 +61,11 @@ corner.
 Alternatively, you can find the version in the `app > Config > Constants.php`
 file.
 
-### I haven't updated my instance in a long time… What should I do?
+### [I haven't updated my instance in a long time… What should I do?](#i-havent-updated-my-instance-in-a-long-time-what-should-i-do)
 
-No problem! Just get the latest release as described above. Only, when going
-through the release instructions (4), perform them sequentially, from the oldest
-to the newest.
+No problem! No problem! Just get the latest release as described above. Only,
+when going through the release instructions (4), perform them sequentially, from
+the oldest to the newest.
 
 > You may want to backup your instance depending on how long you haven't updated
 > Castopod.

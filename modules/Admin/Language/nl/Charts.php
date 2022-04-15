@@ -28,7 +28,7 @@ return [
     'by_country_yearly' => 'Afleveringen gedownload per land (van de afgelopen jaar)',
     'by_domain_weekly' => 'Directe webpagina verzoeken (van de afgelopen week)',
     'by_domain_yearly' => 'Directe webpagina verzoeken (van de afgelopen jaar)',
-    'by_entry_page' => "Webpagina's bezoeken via landingspagina (van de afgelopen week)",
+    'by_entry_page' => 'Webpagina\'s bezoeken via landingspagina (van de afgelopen week)',
     'podcast_bots' => 'Bots (crawlers)',
     'daily_listening_time' => 'Dagelijkse cumulatieve afspeeltijd',
     'monthly_listening_time' => 'Maandelijkse cumulatieve afspeeltijd',

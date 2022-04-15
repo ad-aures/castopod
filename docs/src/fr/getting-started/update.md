@@ -1,54 +1,58 @@
 ---
-title: Update
+title: Mise à jour
 sidebarDepth: 3
 ---
 
-# How to update Castopod?
+# Comment installer Castopod ?
 
-After installing Castopod, you may want to update your instance to the latest
-version in order to enjoy the latest features ✨, bug fixes 🐛 and performance
-improvements ⚡.
+Après avoir installé Castopod, vous pouvez mettre à jour votre instance vers la
+dernière version afin de profiter des dernières fonctionnalités ✨, des
+corrections de bugs 🐛 et des améliorations de performance ⚡.
 
-## Automatic update instructions
+## Instructions de mise à jour automatique
 
-> Coming soon... 👀
+> Prochainement... 👀
 
-## Manual update instructions
+## Instructions de mise à jour manuelle
 
-1. Go to the
-   [releases page](https://code.castopod.org/adaures/castopod/-/releases) and
-   see if your instance is up to date with the latest Castopod version
+1. Allez sur la
+   [page de notes de versions](https://code.castopod.org/adaures/castopod/-/releases)
+   et vérifiez si votre instance est à jour avec la dernière version de
+   Castopod.
 
    - cf.
      [Where can I find my Castopod version?](#where-can-i-find-my-castopod-version)
 
-2. Download the latest release package named `Castopod Package`, you may choose
-   between the `zip` or `tar.gz` archives
+2. Téléchargez la dernière version du paquet nommé `Castopod Package`. Vous
+   pouvez choisir entre les archives au format `zip` ou `tar.gz`.
 
-   - ⚠️ Make sure you download the Castopod Package and **NOT** the Source Code
+   - ⚠️ Assurez-vous de bien télécharger le paquet Castopod `Castopod Package`
+     et **PAS** le code source.
 
-3. On your server:
+3. Sur votre serveur :
 
-   - Remove all files except `.env` and `public/media`
-   - Copy the new files from the downloaded package into your server
+   - Supprimer tous les fichiers sauf `.env` et `public/media`
+   - Copiez les nouveaux fichiers du package téléchargé sur votre serveur.
 
-     ::: info Note
+     ::: info Nota Bene
 
-     You may need to reset files permissions as during the install process.
-     Check [Security Concerns](./security.md).
+     Vous devrez peut-être re-définir les autorisations de fichiers comme
+     effectué durant le processus d'installation. Vérifiez les
+     [questions de sécurité](./security.md).
 
      :::
 
-4. Releases may come with additional update instructions (see
-   [releases page](https://code.castopod.org/adaures/castopod/-/releases)). They
-   are usually database migration scripts in `.sql` format to update your
-   database schema.
+4. Les versions peuvent être accompagnées d'instructions de mise à jour
+   supplémentaires (cf. la
+   [page des notes de versions](https://code.castopod.org/adaures/castopod/-/releases)).
+   Il s'agit généralement de scripts de migration de base de données au format
+   `.sql` qui mettent à jour le schéma de votre base de données.
 
    - 👉 Assurez-vous d'exécuter les scripts sur votre interface phpmyadmin ou
      utilisez la ligne de commande pour mettre à jour la base de données avec
      les fichiers du paquet !
-   - cf.
-     [Je n'ai pas mis à jour mon instance depuis longtemps… Que devrais-je faire ?](#i-havent-updated-my-instance-in-a-long-time-what-should-i-do)
+   - Je n'ai pas mis à jour mon instance depuis longtemps… Que devrais-je faire
+     ?
 
 5. Si vous utilisez redis, effacez votre cache.
 6. ✨ Votre nouvelle instance est prête !
@@ -63,7 +67,7 @@ bas à gauche.
 Vous pouvez également trouver la version dans le fichier
 `app > Config > Constants.php`.
 
-### Je n'ai pas mis à jour mon instance depuis longtemps… Que devrais-je faire ?
+### [Je n'ai pas mis à jour mon instance depuis longtemps… Que devrais-je faire ?](#i-havent-updated-my-instance-in-a-long-time-what-should-i-do)
 
 Aucun souci ! Il suffit d'obtenir la dernière version comme décrit ci-dessus.
 Lorsque vous exécutez les instructions de mise à jour (4), lancez-les
@@ -81,9 +85,8 @@ la `v1.0.0-beta.1` :
 1. Téléchargez la dernière version, écrasez vos fichiers tout en conservant
    `.env` et `public/media`.
 
-2. Go through each release update instructions sequentially (from oldest to
-   newest) starting with `v1.0.0-alpha.43`, `v1.0.0-alpha.44`,
-   `v1.0.0-alpha.45`, …, `v1.0.0-beta.1`.
+2. Effectuez les instructions de mise à jour l'une après l'autre (de la plus
+   ancienne à la plus récente).
 
 3. ✨ Votre nouvelle instance est prête !
 

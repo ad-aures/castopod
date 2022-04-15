@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 return [
     'all_podcasts' => 'An holl bodkastoù',
-    'no_podcast' => "N'eo bet kavet podkast ebet!",
+    'no_podcast' => 'N\'eo bet kavet podkast ebet!',
     'create' => 'Krouiñ ur podkast',
     'import' => 'Enporzhiañ ur podkast',
     'new_episode' => 'Rann nevez',

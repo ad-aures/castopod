@@ -38,5 +38,5 @@ return [
         other {# evezhiadenn}
     }',
     'all_podcast_episodes' => 'Holl rannoù ar podkast',
-    'back_to_podcast' => "Mont d'ar podkast en-dro",
+    'back_to_podcast' => 'Mont d\'ar podkast en-dro',
 ];

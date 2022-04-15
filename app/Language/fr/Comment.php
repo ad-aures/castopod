@@ -17,7 +17,7 @@ return [
         'submit' => 'Envoyer !',
         'submit_reply' => 'Répondre',
     ],
-    'likes' => "{numberOfLikes} j'aime",
+    'likes' => '{numberOfLikes} j\'aime',
     'replies' => '{numberOfReplies, plural,
         one {# réponse}
         other {# réponses}

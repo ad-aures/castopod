@@ -16,5 +16,5 @@ return [
         'created_desc' => 'Ar re nevez da gentañ',
         'created_asc' => 'A re goshañ da gentañ',
     ],
-    'no_podcast' => "N'eo bet kavet podkast ebet",
+    'no_podcast' => 'N\'eo bet kavet podkast ebet',
 ];

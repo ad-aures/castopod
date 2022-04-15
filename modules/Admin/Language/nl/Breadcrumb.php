@@ -37,7 +37,7 @@ return [
     'funding' => 'financiering',
     'analytics' => 'statistieken',
     'locations' => 'locaties',
-    'webpages' => "web pagina's",
+    'webpages' => 'web pagina\'s',
     'unique-listeners' => 'unieke luisteraars',
     'players' => 'spelers',
     'listening-time' => 'afspeeltijd',

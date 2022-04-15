@@ -14,9 +14,9 @@ return [
     'list_of_episodes_year' => 'Rannoù {year} ({episodeCount})',
     'list_of_episodes_season' =>
         'Rannoù koulzad {seasonNumber} ({episodeCount})',
-    'no_episode' => "N'eo bet kavet rann ebet!",
+    'no_episode' => 'N\'eo bet kavet rann ebet!',
     'follow' => 'Heuliañ',
-    'followTitle' => "Heuliañ {actorDisplayName} war ar c'hevrebed!",
+    'followTitle' => 'Heuliañ {actorDisplayName} war ar c\'hevrebed!',
     'followers' => '{numberOfFollowers, plural,
         0 {heulier·ez ebet}
         one {<span class="font-semibold">#</span> heulier·ez}
@@ -114,7 +114,7 @@ return [
         'first_published_at' => 'Embannet eo bet ar rann gentañ d\'an/d\'ar<span class="font-semibold">{0, date, medium}</span>',
     ],
     'sponsor' => 'Harpit',
-    'funding_links' => "Liammoù evit arc'hantaouiñ {podcastTitle}",
+    'funding_links' => 'Liammoù evit arc\'hantaouiñ {podcastTitle}',
     'find_on' => 'Kavit {podcastTitle} war',
     'listen_on' => 'Selaouit war',
     'persons' => '{personsCount, plural,

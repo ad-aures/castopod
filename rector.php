@@ -7,6 +7,7 @@ use Rector\CodingStyle\Rector\ClassMethod\UnSpreadOperatorRector;
 use Rector\CodingStyle\Rector\Encapsed\EncapsedStringsToSprintfRector;
 use Rector\CodingStyle\Rector\FuncCall\ConsistentPregDelimiterRector;
 use Rector\CodingStyle\Rector\Stmt\NewlineAfterStatementRector;
+use Rector\CodingStyle\Rector\String_\SymplifyQuoteEscapeRector;
 use Rector\Core\Configuration\Option;
 use Rector\Core\ValueObject\PhpVersion;
 use Rector\EarlyReturn\Rector\If_\ChangeOrIfContinueToMultiContinueRector;
@@ -63,6 +64,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
         // skip rule in specific directory
         StringClassNameToClassConstantRector::class => [
+            __DIR__ . '/app/Language/*',
+            __DIR__ . '/modules/*/Language/*',
+        ],
+        SymplifyQuoteEscapeRector::class => [
             __DIR__ . '/app/Language/*',
             __DIR__ . '/modules/*/Language/*',
         ],

@@ -9,9 +9,9 @@ declare(strict_types=1);
  */
 
 return [
-    'back_to_home' => "Distreiñ d'ar bennbajennad",
+    'back_to_home' => 'Distreiñ d\'ar bennbajennad',
     'map' => [
         'title' => 'Kartenn',
-        'description' => "Dizoloit rannoù eus podkastoù war {siteName} lakaet war ur gartenn! Beajit warni ha selaouit ar rannoù a zo diwar-benn al lec'hioù-se.",
+        'description' => 'Dizoloit rannoù eus podkastoù war {siteName} lakaet war ur gartenn! Beajit warni ha selaouit ar rannoù a zo diwar-benn al lec\'hioù-se.',
     ],
 ];

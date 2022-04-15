@@ -71,7 +71,7 @@ return [
             'Wird von den meisten Plattformen verwendet werden, um den Podcast-Besitz zu überprüfen. Sichtbar im öffentlichen RSS-Feed.',
         'publisher' => 'Herausgeber',
         'publisher_hint' =>
-            "Die Gruppe, die für die Erstellung des Podcasts verantwortlich ist. Oft bezogen auf die Muttergesellschaft oder das Netzwerk eines Podcasts. Dieses Feld wird manchmal als 'Autor' bezeichnet.",
+            'Die Gruppe, die für die Erstellung des Podcasts verantwortlich ist. Oft bezogen auf die Muttergesellschaft oder das Netzwerk eines Podcasts. Dieses Feld wird manchmal als \'Autor\' bezeichnet.',
         'copyright' => 'Urheberrecht',
         'location_section_title' => 'Standort',
         'location_section_subtitle' => 'Über welchen Ort handelt dieser Podcast?',
@@ -143,7 +143,7 @@ return [
         'improv' => 'Improvisation',
         'stand_up' => 'Stand-Up',
         'courses' => 'Kurse',
-        'how_to' => "So geht's",
+        'how_to' => 'So geht\'s',
         'language_learning' => 'Sprachenlernen',
         'self_improvement' => 'Weiterbildung',
         'comedy_fiction' => 'Komödie Fiktion',

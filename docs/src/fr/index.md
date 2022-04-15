@@ -13,15 +13,15 @@ Castopod est facile à installer et a été conçu avec
 [CodeIgniter4](https://codeigniter.com/), un framework PHP puissant de très
 petite taille.
 
-::: info Status
+::: info Statut
 
-Castopod is currently in **beta** but already quite stable and used by
-podcasters around&nbsp;the&nbsp;world!
+Castopod est actuellement en **version beta** mais est déjà suffisamment stable
+et est utilisé par des podcasters autour partout dans le monde&nbsp;!
 
 :::
 
 <div class="flex items-center">
-  <a href="/getting-started/install" class="inline-flex items-center px-4 py-2 mx-auto font-semibold text-center text-white rounded-full shadow gap-x-1 bg-pine-500 hover:no-underline hover:bg-pine-600">Installation<svg viewBox="0 0 24 24" width="1em" height="1em" class="text-xl text-pine-200"><path fill="currentColor" d="m16.172 11-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg></a>
+  <a href="/fr/getting-started/install" class="inline-flex items-center px-4 py-2 mx-auto font-semibold text-center text-white rounded-full shadow gap-x-1 bg-pine-500 hover:no-underline hover:bg-pine-600">Installer<svg viewBox="0 0 24 24" width="1em" height="1em" class="text-xl text-pine-200"><path fill="currentColor" d="m16.172 11-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg></a>
 </div>
 
 ## Fonctionnalités
@@ -63,157 +63,169 @@ podcasters around&nbsp;the&nbsp;world!
 - 🌎 &nbsp;support i18n: traduit en Anglais, Français, Polonais, Allemand &
   Brésilien… et bientôt d'autres à venir !
 
-## Motivation
+## Pourquoi Castopod ?
 
-The podcasting ecosystem is decentralized by nature: you can create your podcast
-as an RSS file, publish it on the web and have it shared everywhere online.
+L'écosystème du podcast est décentralisé par nature : vous pouvez créer votre
+podcast grâce au fichier RSS, le publier sur Internet et le rendre disponible
+partout dans le monde.
 
-It is in fact one of the only media to have stayed this way for a long time.
+C'est en fait l'un des seuls médias à être encore décentralisé aujourd'hui.
 
-As usages are evolving, more and more people are getting into podcasts: whether
-it is creators finding new ways to share their ideas, or listeners in the search
-for better content.
+À mesure que les usages évoluent, de plus en plus de gens se retrouvent autour
+du podcast : qu'il s'agisse de créateurs qui y trouvent de nouvelles façons de
+partager leurs idées ou d'auditeurs à la recherche de contenus de qualité.
 
-With podcasting becoming more widely used, some companies are trying to shift it
-towards a more controlled and centralized medium.
+Avec l'avènement du podcast, certaines entreprises se dirigent vers un medium
+plus centralisé et plus contrôlé.
 
-Castopod was created in an effort to provide an open and sustainable alternative
-to hosting your podcasts, promoting decentralization to ensure that podcasters
-creativity can express itself.
+Castopod a été créé dans le but de fournir une alternative ouverte et durable
+pour l'hébergement de vos podcasts, de promouvoir la décentralisation et ainsi
+de s'assurer que la créativité des podcasteurs puisse rester libre.
 
-This project is pushed by the open-source community, and specifically by the
-[Fediverse](https://fediverse.party/en/fediverse/) and
-[Podcasting 2.0](https://podcastindex.org/) movements.
+Ce projet s'appuie sur la communauté open-source, plus spécifiquement sur le
+[Fédiverse](https://fediverse.party/en/fediverse/) et sur
+[Podcasting 2.0](https://podcastindex.org/).
 
-## Comparison with other solutions
+## Comparaison avec d'autres solutions
 
-We believe that a solution is not necessarily right for everyone, it highly
-depends on your needs. So, here are comparisons with other tools to help you to
-gauge whether Castopod is the right fit for&nbsp;you.
+Nous pensons qu'une solution n'est pas adaptée à tous, tout dépend vos besoins.
+Voici donc un comparatif avec d'autres outils qui vous aidera à juger si
+Castopod est fait pour vous.
 
 ### Castopod vs Wordpress
 
-Castopod is often referred to as "the Wordpress for podcasts" because of the
-similarities between the two. In some ways this is true. And actually, Castopod
-was greatly inspired by the Wordpress ecosystem, seeing the ease of adoption
-from the community and the number of websites running&nbsp;it.
+Castopod est souvent appelé "Wordpress pour les podcasts" en raison des points
+communs entre les deux. D'une certaine manière, c'est vrai. Castopod a
+d'ailleurs été inspiré par l'écosystème de Wordpress, en raison de la facilité
+grâce à laquelle sa communauté l'a adopté et du nombre de sites Web qui
+l'utilisent.
 
-Just like Wordpress, Castopod is free & open source, built using PHP with a
-MySQL database and is packaged in a way that you can easily install on most web
-servers.
+Tout comme Wordpress, Castopod est gratuit & open source, utilise PHP et une
+base de données MySQL et est fourni en paquet facilement installable sur la
+plupart des serveurs web.
 
-Wordpress is a great way to create your website and extend it with plugins to
-get what you want. It is a full fledged CMS that helps you get any type of
-website online.
+Wordpress est un excellent outil pour créer votre site web et de l'étendre avec
+des plugins pour faire ce que vous souhaitez. C'est un CMS à part entière qui
+vous permet de mettre en line tout type de site web.
 
-On the other hand, Castopod is meant to address the podcasters needs
-specifically, focusing on podcasting, and nothing else. You don't need any
-plugin to get you started on your podcasting&nbsp;journey.
+Castopod quant à lui est destiné à répondre aux besoins spécifiques des
+podcasteurs, en se concentrant sur les podcasts et rien d'autre. Vous n'avez
+besoin d'installer aucun plugin pour démarrer votre aventure baladodiffusée.
 
-This allows optimizing the processes specific to podcasting: ranging from the
-creation of your podcasts and the publication of new episodes all the way to
-broadcasting, marketing and analytics.
+Cela permet d'optimiser tout ce qui est spécifique aux podcasts : de la création
+de vos podcasts et la publication de nouveaux épisodes jusqu'à la diffusion, le
+marketing et la mesure d'audience.
 
-Finally, depending on your needs, Wordpress and Castopod can even live side by
-side as they share the same requirements!
+Enfin, en fonction de vos besoins, Wordpress et Castopod peuvent même cohabiter
+car ils partagent les mêmes pré-requis techniques !
 
 ### Castopod vs Funkwhale
 
-Funkwhale is a self-hosted, modern free and open-source music server. Just as
-Castopod, Funkwhale is on the fediverse, a decentralized social network allowing
-interoperability between the two.
+Funkwhale est un serveur autohébergé, moderne, libre et open-source, dédié à la
+musique. Tout comme Castopod, Funkwhale est sur le Fédivers, un réseau social
+décentralisé, ce qui offre une interopérabilité entre eux.
 
-Funkwhale was initially built around music. And later on, as the project
-evolved, the ability to host podcasts was introduced.
+Funkwhale a été initialement conçu pour la musique. Et plus tard, à mesure que
+le projet a évolué, la capacité d'héberger des podcasts a été introduite.
 
-Unlike Funkwhale, Castopod has been designed and built around podcasting
-exclusively. This allows easier implementation for features related to the
-podcasting ecosystem, such as the podcasting 2.0 features (transcripts,
-chapters, locations, persons, …).
+Contrairement à Funkwhale, Castopod a été pensé et conçu exclusivement pour les
+podcasts. Cela permet une implémentation plus naturelle des fonctionnalités
+propres à l'écosystème du podcast, comme celles de Podcasting 2.0
+(transcriptions, chapitres, géo-localisation, intervenants …).
 
-So, you should probably use Funkwhale if you want to host your music, and use
-Castopod if you want to host your podcasts.
+Vous devriez ainsi probablement utiliser Funkwhale si vous souhaitez héberger
+votre musique et vous tourner vers Castopod si vous souhaitez héberger des
+podcasts.
 
-### Castopod vs other podcast hosts
+### Castopod vs Autres hébergeurs de podcasts
 
-There are many solutions for you to host your podcasts, some of which are really
-great and [a lot of them](https://podcastindex.org/apps) are jumping into the
-Podcasting 2.0 wagon just like Castopod!
+Il existe de nombreuses solutions pour héberger vos podcasts, dont certaines
+excellentes et [de nombreuses](https://podcastindex.org/apps) ont rejoint
+Castopod dans le train « Podcasting 2.0 » !
 
-Each of these solutions differ from one another, you may compare with the
-[list of features](#features).
+Chacune de ces solutions a ses particularités, vous pouvez comparer grâce à la
+[liste des fonctionnalités](#features).
 
-That being said, there are two main differences with other podcasting solutions:
+Cela étant, on notera deux différences principales avec les autres solutions :
 
-- Castopod can be self-hosted and is the only solution that allows you to keep
-  full control over what you produce. Also, as it is open-source, you can even
-  customize it as you wish.
+- Castopod peut être auto-hébergé et est la seule solution qui vous permet de
+  garder le contrôle total sur ce que vous produisez. D'autre part, comme il est
+  open-source, vous avez le pouvoir de le modifier comme vous le souhaitez.
 
-- Castopod is the only solution that currently integrates both a decentralized
-  social network with ActivityPub as well as many of the podcasting 2.0
-  features, hoping to bridge the gap between the two.
+- Castopod est la seule solution qui intègre aujourd'hui à la fois un réseau
+  social décentralisé avec ActivityPub et des fonctionnalités de « Podcasting
+  2.0 », réduisant ainsi l'écart entre les deux.
 
 ## Contribuer
 
 Vous appréciez Castopod et aimeriez donner un coup de main ? Jetez un œil à la
 documentation suivante pour démarrer.
 
-### Code of conduct
+### Code de conduite
 
-Castopod has adopted a Code of Conduct that we expect project participants to
-adhere to. Please read the
-[CODE_OF_CONDUCT manual](https://code.castopod.org/adaures/castopod/-/blob/beta/CODE_OF_CONDUCT.md)
-so that you can understand what actions will and will not be&nbsp;tolerated.
+Castopod a mis en place un Code de Conduite destiné aux personnes souhaitant
+participer au projet. Veuillez lire le manuel
+[CODE_OF_CONDUCT](https://code.castopod.org/adaures/castopod/-/blob/beta/CODE_OF_CONDUCT.md)
+afin de connaitre quelles actions seront et ne seront pas tolérées.
 
-### Contributing guide
+### Guide de contribution
 
-Read our [contributing guide](./contributing/guidelines.md) to learn about our
-development process, how to propose bugfixes and improvements, and how to build
-and test your changes to Castopod.
+Lisez notre [guide de contribution](./contributing/guidelines.md) pour en savoir
+plus sur notre processus de développement et comprendre comment proposer des
+corrections de bogues et des améliorations, et comment compiler et tester vos
+modifications sur Castopod.
 
 ## Contact
 
-You may reach us for help or ask any question you have on:
+Vous pouvez nous joindre pour obtenir de l'aide ou poser toute question que vous
+avez sur :
 
-- [Discord](https://castopod.org/discord) (for direct interaction with
-  developers and the community)
-- [Issue tracker](https://code.castopod.org/adaures/castopod/-/issues) (for
-  feature requests & bug reports)
+- [Discord](https://castopod.org/discord) (pour dialoguer en temps réel avec les
+  développeurs et la communauté)
+- [Suivi de problèmes](https://code.castopod.org/adaures/castopod/-/issues)
+  (pour toute demande de nouvelle fonctionnalité ou rapport de bug)
 
-Alternatively, you can follow us on social media platforms to get news about
-Castopod:
+En outre, vous pouvez nous suivre sur les plateformes de réseaux sociaux pour
+obtenir des informations sur Castopod :
 
-- [podlibre.social](https://podlibre.social/@Castopod) (Mastodon instance)
+- [podlibre.social](https://podlibre.social/@Castopod) (Instance Mastodon)
 - [Twitter](https://twitter.com/castopod)
 - [LinkedIn](https://linkedin.com/company/castopod)
 - [Facebook](https://www.facebook.com/castopod)
 
-## Sponsors
+## Soutenez-nous
 
-The ongoing development of Castopod is made possible with the support of its
-backers. If you'd like to help, please consider
-[sponsoring Castopod's development](https://opencollective.com/castopod/contribute).
+Le développement de Castopod est rendu possible grâce au soutien de ses
+parrains. Si vous souhaitez aider, n'hésitez pas à
+[parrainer le développement de Castopod](https://opencollective.com/castopod/contribute).
 
 <div class="flex flex-wrap gap-x-16 gap-y-8">
-  <a href="https://adaures.com/" target="_blank" rel="noopener noreferrer"><img src="/images/sponsors/adaures.svg" alt="Ad Aures Logo" class="h-16" /></a>
-  <a href="https://nlnet.nl/project/Castopod/" target="_blank" rel="noopener noreferrer"><img src="/images/sponsors/nlnet.svg" alt="NLnet Logo" class="h-16" /></a>
+  <a href="https://adaures.com/" target="_blank" rel="noopener noreferrer"><img src="/images/sponsors/adaures.svg" alt="Logo d'Ad Aures" class="h-16" /></a>
+  <a href="https://nlnet.nl/project/Castopod/" target="_blank" rel="noopener noreferrer"><img src="/images/sponsors/nlnet.svg" alt="Logo de NLnet" class="h-16" /></a>
 </div>
 
-## License
+## Licence
 
-[GNU Affero General Public License v3.0](https://choosealicense.com/licenses/agpl-3.0/)
+[Licence publique générale GNU Affero v3](https://choosealicense.com/licenses/agpl-3.0/)
 
 Copyright © 2020-present, [Ad Aures](https://adaures.com/).
-https://img.shields.io/gitlab/v/release/2?color=brightgreen&gitlab_url=https%3A%2F%2Fcode.castopod.org%2F&include_prereleases&label=release
-https://img.shields.io/github/license/ad-aures/castopod?color=blue
-https://img.shields.io/badge/contributions-welcome-brightgreen.svg
-https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
-https://img.shields.io/github/stars/ad-aures/castopod?style=social
 
 [release]: https://code.castopod.org/adaures/castopod/-/releases
+[release-badge]:
+  https://img.shields.io/gitlab/v/release/2?color=brightgreen&gitlab_url=https%3A%2F%2Fcode.castopod.org%2F&include_prereleases&label=release
 [license]: https://code.castopod.org/adaures/castopod/-/blob/beta/LICENSE.md
+[license-badge]:
+  https://img.shields.io/github/license/ad-aures/castopod?color=blue
 [contributions]: https://code.castopod.org/adaures/castopod/-/issues
+[contributions-badge]:
+  https://img.shields.io/badge/contributions-welcome-brightgreen.svg
 [semantic-release]: https://github.com/semantic-release/semantic-release
+[semantic-release-badge]:
+  https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
 [discord]: https://castopod.org/discord
+[discord-badge]: https://img.shields.io/badge/chat-on%20discord-7389D8
 [stars]: https://github.com/ad-aures/castopod/stargazers
+[stars-badge]:
+  https://img.shields.io/github/stars/ad-aures/castopod?style=social
 [crowdin]: https://translate.castopod.org/project/castopod
+[crowdin-badge]: https://badges.crowdin.net/castopod/localized.svg

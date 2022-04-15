@@ -34,5 +34,5 @@ return [
     'monthly_listening_time' => 'Sammad miziek ar badelezh selaou',
     'by_weekday' => 'Dre zeiz ar sizhun (e-pad an 60 devezh diwezhañ)',
     'by_hour' => 'Dre eur an devezh (e-pad an 60 devezh diwezhañ)',
-    'podcast_by_bandwidth' => "Lec'hed bann implijet bemdez (e MB)",
+    'podcast_by_bandwidth' => 'Lec\'hed bann implijet bemdez (e MB)',
 ];

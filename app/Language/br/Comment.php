@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 return [
     'title' => "Evezhiadenn {actorDisplayName} evit {episodeTitle}",
-    'back_to_comments' => "Distreiñ d'an evezhiadennoù",
+    'back_to_comments' => 'Distreiñ d\'an evezhiadennoù',
     'form' => [
         'episode_message_placeholder' => 'Skrivañ un evezhiadenn…',
         'reply_to_placeholder' => 'Respont da @{actorUsername}',
