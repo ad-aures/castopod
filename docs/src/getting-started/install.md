@@ -35,7 +35,7 @@ Additionally, make sure that the following extensions are enabled in your PHP:
 
 > We recommend using [MariaDB](https://mariadb.org).
 
-::: warning
+::: warning Warning
 
 Castopod only works with supported MySQL 5.7 or higher compatible databases. It
 will break with the previous MySQL v5.6 for example as its end of life was on

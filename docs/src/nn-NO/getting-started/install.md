@@ -37,7 +37,7 @@ din:
 
 > Me tilrår [MariaDB](https://mariadb.org).
 
-::: Åtvaring
+::: warning Åtvaring
 
 Castopod verkar berre med databasar som støttar MySQL 5.7 eller nyare. MySQL 5.6
 eller eldre vil ikkje fungera, ettersom den versjonen vart forelda i

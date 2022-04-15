@@ -37,7 +37,7 @@ seu PHP:
 
 > Recomendamos usar o [MariaDB](https://mariadb.org).
 
-::: aviso
+::: warning Aviso
 
 Castopod só funciona com bancos de dados compatíveis com MySQL 5.7 ou superior.
 Vai quebrar com a versão anteiror do MySQL, v5.6, por exemplo, pois teve seu
