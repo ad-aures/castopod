@@ -16,7 +16,7 @@ petite taille.
 ::: info Statut
 
 Castopod est actuellement en **version beta** mais est déjà suffisamment stable
-et est utilisé par des podcasters autour partout dans le monde&nbsp;!
+et est utilisé par des podcasters partout autour du monde&nbsp;!
 
 :::
 
@@ -27,7 +27,7 @@ et est utilisé par des podcasters autour partout dans le monde&nbsp;!
 ## Fonctionnalités
 
 - 🌱 &nbsp;Libre, gratuit & open-source (Licence AGPL v3)
-- 🔐 &nbsp;focalisé sur la souveraineté des données : votre contenu, votre
+- 🔐 &nbsp;Focalisé sur la souveraineté des données : votre contenu, votre
   audience et vos statiistiques vous appartiennent, et à vous seulement
 - 🪄&nbsp;Fonctionnalités de Podcasting 2.0 : GUID, verrouillage, transcriptions,
   financement, chapitres, géo-localisation, intervenants, extraits sonores, …
@@ -60,7 +60,7 @@ et est utilisé par des podcasters autour partout dans le monde&nbsp;!
 - 🔀 &nbsp;Multi-locataire : hébergez autant de podcasts que vous le souhaitez
 - 👥 &nbsp;Multi-utilisateur : ajoutez des contributeurs et définissez leurs
   rôles
-- 🌎 &nbsp;support i18n: traduit en Anglais, Français, Polonais, Allemand &
+- 🌎 &nbsp;Multilingue: traduit en Anglais, Français, Polonais, Allemand &
   Brésilien… et bientôt d'autres à venir !
 
 ## Pourquoi Castopod ?
@@ -88,9 +88,9 @@ Ce projet s'appuie sur la communauté open-source, plus spécifiquement sur le
 
 ## Comparaison avec d'autres solutions
 
-Nous pensons qu'une solution n'est pas adaptée à tous, tout dépend vos besoins.
-Voici donc un comparatif avec d'autres outils qui vous aidera à juger si
-Castopod est fait pour vous.
+Nous pensons qu'une solution n'est pas forcément adaptée à tous, tout dépend vos
+besoins. Voici donc un comparatif avec d'autres outils qui vous aidera à juger
+si Castopod est fait pour vous.
 
 ### Castopod vs Wordpress
 

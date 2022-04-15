@@ -47,9 +47,15 @@ export default defineConfig({
       description:
         "Check out the Castopod documentation! Install your own free & open-source podcast host, help make it better by contributing, or simply learn more about Castopod!",
     },
+    "/fr/": {
+      lang: "fr",
+      title: "Documentation Castopod",
+      description:
+        "Castopod est une plateforme d’hébergement gratuite & open-source conçue pour les podcasteurs qui veulent échanger et interagir avec leur public.",
+    },
     "/pt-BR/": {
       lang: "pt-BR",
-      title: "Documentação de Castopod",
+      title: "Documentação Castopod",
       description:
         "Castopod é uma plataforma de hospedagem de código livre & aberto feita para podcasters que querem se envolver e interagir com seu público.",
     },
@@ -72,7 +78,7 @@ export default defineConfig({
       "/": {
         label: "English",
         selectText: "Languages",
-        repoLabel: "Source",
+        repoLabel: "Source code",
         nav: [
           {
             text: "Home",
@@ -89,6 +95,28 @@ export default defineConfig({
         ],
         sidebar: {
           "/": getGuideSidebarEn(),
+        },
+      },
+      "/fr/": {
+        label: "Français",
+        selectText: "Langues",
+        repoLabel: "Code source",
+        nav: [
+          {
+            text: "Accueil",
+            link: "https://castopod.org/",
+          },
+          {
+            text: "Blog",
+            link: "https://blog.castopod.org/",
+          },
+          {
+            text: "Github",
+            link: "https://github.com/ad-aures/castopod",
+          },
+        ],
+        sidebar: {
+          "/": getGuideSidebarFr(),
         },
       },
       "/pt-BR/": {
@@ -154,6 +182,30 @@ function getGuideSidebarEn() {
       children: [
         { text: "Guide", link: "/contributing/guidelines" },
         { text: "Dev Setup", link: "/contributing/setup-development" },
+      ],
+    },
+  ];
+}
+
+function getGuideSidebarFr() {
+  return [
+    {
+      text: "Introduction",
+      link: "/fr/",
+    },
+    {
+      text: "Commencer",
+      children: [
+        { text: "Installer", link: "/fr/getting-started/install" },
+        { text: "Sécurité", link: "/fr/getting-started/security" },
+        { text: "Mise à jour", link: "/fr/getting-started/update" },
+      ],
+    },
+    {
+      text: "Contributing",
+      children: [
+        { text: "Guide", link: "/fr/contributing/guidelines" },
+        { text: "Dev Setup", link: "/fr/contributing/setup-development" },
       ],
     },
   ];
