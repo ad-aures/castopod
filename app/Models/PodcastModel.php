@@ -178,10 +178,10 @@ class PodcastModel extends Model
         if ($orderBy === 'activity') {
             $prefix = $this->db->getPrefix();
 
-            $fediverseTablePrefix = config('Fediverse')
+            $fediverseTablePrefix = $prefix . config('Fediverse')
                 ->tablesPrefix;
             $this->select(
-                'podcasts.*, MAX(' . $prefix . $fediverseTablePrefix . 'posts.published_at' . ') as max_published_at'
+                'podcasts.*, MAX(' . $fediverseTablePrefix . 'posts.published_at' . ') as max_published_at'
             )
                 ->join(
                     $fediverseTablePrefix . 'posts',
@@ -189,11 +189,11 @@ class PodcastModel extends Model
                     'left'
                 )
                 ->where(
-                    '`' . $prefix . $fediverseTablePrefix . 'posts`.`published_at` <= UTC_TIMESTAMP()',
+                    '`' . $fediverseTablePrefix . 'posts`.`published_at` <= UTC_TIMESTAMP()',
                     null,
                     false
                 )->orWhere($fediverseTablePrefix . 'posts.published_at', null)
-                ->groupBy('cp_podcasts.actor_id')
+                ->groupBy('podcasts.actor_id')
                 ->orderBy('max_published_at', 'DESC');
         } elseif ($orderBy === 'created_desc') {
             $this->orderBy('created_at', 'DESC');
