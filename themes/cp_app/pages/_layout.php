@@ -56,6 +56,6 @@
         <small><?= lang('Common.powered_by', [
             'castopod' =>
                 '<a class="underline hover:no-underline focus:ring-accent" href="https://castopod.org/" target="_blank" rel="noreferrer noopener">Castopod</a>',
-        ]) ?></small>
+        ], null, false) ?></small>
     </footer>
 </body>

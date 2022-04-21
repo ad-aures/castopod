@@ -18,16 +18,16 @@ return [
     'follow' => 'Подписаться',
     'followTitle' => 'Подпишитесь на {actorDisplayName} в федивёрсе!',
     'followers' => '{numberOfFollowers, plural,
-        one {<span class="font-semibold">#</span> подписчик}
-        few {<span class="font-semibold">#</span> подписчики}
-        many {<span class="font-semibold">#</span> подписчики}
-        other {<span class="font-semibold">#</span> подписчики}
+        one {# подписчик}
+        few {# подписчики}
+        many {# подписчики}
+        other {# подписчики}
     }',
     'posts' => '{numberOfPosts, plural,
-        one {<span class="font-semibold">#</span> пост}
-        few {<span class="font-semibold">#</span> постов}
-        many {<span class="font-semibold">#</span> постов}
-        other {<span class="font-semibold">#</span> постов}
+        one {# пост}
+        few {# постов}
+        many {# постов}
+        other {# постов}
     }',
     'activity' => 'Активность',
     'episodes' => 'Выпуски',
@@ -36,18 +36,18 @@ return [
     'stats' => [
         'title' => 'Статистика',
         'number_of_seasons' => '{0, plural,
-            one {<span class="font-semibold">#</span> сезон}
-            few {<span class="font-semibold">#</span> сезоны}
-            many {<span class="font-semibold">#</span> сезоны}
-            other {<span class="font-semibold">#</span> сезоны}
+            one {# сезон}
+            few {# сезоны}
+            many {# сезоны}
+            other {# сезоны}
         }',
         'number_of_episodes' => '{0, plural,
-            one {<span class="font-semibold">#</span> эпизод}
-            few {<span class="font-semibold">#</span> эпизодов}
-            many {<span class="font-semibold">#</span> эпизодов}
-            other {<span class="font-semibold">#</span> эпизодов}
+            one {# эпизод}
+            few {# эпизодов}
+            many {# эпизодов}
+            other {# эпизодов}
         }',
-        'first_published_at' => 'Первый эпизод опубликован <span class="font-semibold">{0, date, medium}</span>',
+        'first_published_at' => 'Первый эпизод опубликован {0, date, medium}',
     ],
     'sponsor' => 'Спонсор',
     'funding_links' => 'Ссылки на финансирование для {podcastTitle}',

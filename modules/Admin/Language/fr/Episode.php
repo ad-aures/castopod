@@ -89,7 +89,7 @@ return [
             'Ce texte est ajouté à la fin de chaque description d’épisode, c’est un bon endroit pour placer vos liens sociaux par exemple.',
         'additional_files_section_title' => 'Fichiers additionels',
         'additional_files_section_subtitle' =>
-            'Ces fichiers pourront être utilisées par d’autres plate-formes pour procurer une meilleure expérience à vos auditeurs.<br />Consulter le {podcastNamespaceLink} pour plus d’informations.',
+            'Ces fichiers pourront être utilisées par d’autres plate-formes pour procurer une meilleure expérience à vos auditeurs. Consulter le {podcastNamespaceLink} pour plus d’informations.',
         'location_section_title' => 'Localisation',
         'location_section_subtitle' => 'De quel lieu cet épisode parle-t-il ?',
         'location_name' => 'Nom ou adresse du lieu',

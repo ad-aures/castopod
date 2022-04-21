@@ -90,7 +90,7 @@ return [
             'Ten tekst jest dodawany na końcu każdego opisu odcinka; jest to dobre miejsce do wpisania np. linków społecznościowych.',
         'additional_files_section_title' => 'Dodatkowe pliki',
         'additional_files_section_subtitle' =>
-            'Pliki te mogą być używane przez inne platformy, aby zapewnić lepsze wrażenia odbiorcom.<br />Więcej informacji znajdziesz w {podcastNamespaceLink}.',
+            'Pliki te mogą być używane przez inne platformy, aby zapewnić lepsze wrażenia odbiorcom. Więcej informacji znajdziesz w {podcastNamespaceLink}.',
         'location_section_title' => 'Lokalizacja',
         'location_section_subtitle' => 'O jakim miejscu jest ten odcinek?',
         'location_name' => 'Nazwa lub adres lokalizacji',

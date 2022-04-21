@@ -90,7 +90,7 @@ return [
             'Emañ ouzhpennet an destenn-mañ e dibenn an holl rannoù. Ul lec\'h mat eo evit lakaat liammoù ho rouedadoù sokial da skouer.',
         'additional_files_section_title' => 'Restroù ouzhpenn',
         'additional_files_section_subtitle' =>
-            'Ar restroù-mañ a c\'hell bezañ implijet gant savennoù all evit aesaat an traoù d\'ho selaouerien·ezed.<br />Sellit ouzh {podcastNamespaceLink} evit muioc\'h a ditouroù.',
+            'Ar restroù-mañ a c\'hell bezañ implijet gant savennoù all evit aesaat an traoù d\'ho selaouerien·ezed. Sellit ouzh {podcastNamespaceLink} evit muioc\'h a ditouroù.',
         'location_section_title' => 'Lec\'h',
         'location_section_subtitle' => 'Eus peseurt lec\'h ez eus kaoz er rann-mañ?',
         'location_name' => 'Anv pe chomlec\'h al lec\'h',

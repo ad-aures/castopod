@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Libraries\View;
+use Config\Services;
 use ViewThemes\Theme;
 
 /**
@@ -42,5 +43,42 @@ if (! function_exists('view')) {
 
         return $renderer->setData($data, 'raw')
             ->render($name, $options, $saveData);
+    }
+}
+
+if (! function_exists('lang')) {
+    /**
+     * A convenience method to translate a string or array of them and format the result with the intl extension's
+     * MessageFormatter.
+     *
+     * Overwritten to include an escape parameter (escaped by default).
+     *
+     * @param array<int|string, string> $args
+     *
+     * @return string|string[]
+     */
+    function lang(string $line, array $args = [], ?string $locale = null, bool $escape = true): string | array
+    {
+        $language = Services::language();
+
+        // Get active locale
+        $activeLocale = $language->getLocale();
+
+        if ($locale && $locale !== $activeLocale) {
+            $language->setLocale($locale);
+        }
+
+        $line = $language->getLine($line, $args);
+        if (! $locale) {
+            return $escape ? esc($line) : $line;
+        }
+
+        if ($locale === $activeLocale) {
+            return $escape ? esc($line) : $line;
+        }
+
+        // Reset to active locale
+        $language->setLocale($activeLocale);
+        return $escape ? esc($line) : $line;
     }
 }

@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 return [
     'warning' =>
-        'Dieses Verfahren kann lange dauern.<br/>Da die aktuelle Version keinen Fortschritt anzeigt, während sie läuft, werden Sie keine Aktuallisierung mehr sehen, bis sie fertig ist.<br/>Im Falle eines Timeout-Fehlers erhöhen Sie den `max_execution_time` Wert.',
+        'Dieses Verfahren kann lange dauern. Da die aktuelle Version keinen Fortschritt anzeigt, während sie läuft, werden Sie keine Aktuallisierung mehr sehen, bis sie fertig ist. Im Falle eines Timeout-Fehlers erhöhen Sie den `max_execution_time` Wert.',
     'old_podcast_section_title' => 'Der zu importierende Podcast',
     'old_podcast_section_subtitle' =>
         'Stellen Sie sicher, dass Sie die Rechte für diesen Podcast besitzen, bevor Sie ihn importieren. Vervielfältigung und Ausstrahlung eines Podcasts ohne die entsprechenden Rechte sind Piraterie und strafbar.',

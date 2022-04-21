@@ -92,6 +92,9 @@ class Credit extends Entity
         return $this->episode;
     }
 
+    /**
+     * @noRector ReturnTypeDeclarationRector
+     */
     public function getGroupLabel(): string
     {
         if ($this->person_group === null) {
@@ -101,6 +104,9 @@ class Credit extends Entity
         return lang("PersonsTaxonomy.persons.{$this->person_group}.label");
     }
 
+    /**
+     * @noRector ReturnTypeDeclarationRector
+     */
     public function getRoleLabel(): string
     {
         if ($this->person_group === '') {

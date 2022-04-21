@@ -340,10 +340,10 @@ if (! function_exists('category_label')) {
     {
         $categoryLabel = '';
         if ($category->parent_id !== null) {
-            $categoryLabel .= lang('Podcast.category_options.' . $category->parent->code) . ' › ';
+            $categoryLabel .= lang('Podcast.category_options.' . $category->parent->code, [], null, false) . ' › ';
         }
 
-        return $categoryLabel . lang('Podcast.category_options.' . $category->code);
+        return $categoryLabel . lang('Podcast.category_options.' . $category->code, [], null, false);
     }
 }
 

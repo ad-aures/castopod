@@ -18,12 +18,12 @@ return [
     'follow' => 'Folgen',
     'followTitle' => 'Folge {actorDisplayName} im Fediversum',
     'followers' => '{numberOfFollowers, plural,
-        one {<span class="font-semibold">#</span> Follower}
-        other {<span class="font-semibold">#</span> Follower}
+        one {# Follower}
+        other {# Follower}
     }',
     'posts' => '{numberOfPosts, plural,
-        one {<span class="font-semibold">#</span> Beitrag}
-        other {<span class="font-semibold">#</span> Beiträge}
+        one {# Beitrag}
+        other {# Beiträge}
     }',
     'activity' => 'Aktivitäten',
     'episodes' => 'Folgen',
@@ -32,14 +32,14 @@ return [
     'stats' => [
         'title' => 'Statistiken',
         'number_of_seasons' => '{0, plural,
-            one {<span class="font-semibold">#</span> Staffel}
-            other {<span class="font-semibold">#</span> Staffeln}
+            one {# Staffel}
+            other {# Staffeln}
         }',
         'number_of_episodes' => '{0, plural,
-            one {<span class="font-semibold">#</span> Folge}
-            other {<span class="font-semibold">#</span> Folgen}
+            one {# Folge}
+            other {# Folgen}
         }',
-        'first_published_at' => 'Erste Folge veröffentlicht am <span class="font-semibold">{0, date, medium}</span>',
+        'first_published_at' => 'Erste Folge veröffentlicht am {0, date, medium}',
     ],
     'sponsor' => 'Unterstützer',
     'funding_links' => 'Links zur Finanzierung von {podcastTitle}',

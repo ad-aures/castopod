@@ -227,12 +227,12 @@ return [
     'no_episode' => 'Keine Folge gefunden!',
     'follow' => 'Folgen',
     'followers' => '{numberOfFollowers, plural,
-        one {<span class="font-semibold">#</span> Follower}
-        other {<span class="font-semibold">#</span> Follower}
+        one {# Follower}
+        other {# Follower}
     }',
     'posts' => '{numberOfPosts, plural,
-        one {<span class="font-semibold">#</span> Beitrag}
-        other {<span class="font-semibold">#</span> Beiträge}
+        one {# Beitrag}
+        other {# Beiträge}
     }',
     'activity' => 'Aktivitäten',
     'episodes' => 'Folgen',

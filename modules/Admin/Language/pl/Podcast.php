@@ -227,13 +227,13 @@ return [
     'no_episode' => 'Nie znaleziono odcinków!',
     'follow' => 'Obserwuj',
     'followers' => '{numberOfFollowers, plural,
-        one {<span class="font-semibold">#</span> obserwujący}
-        other {<span class="font-semibold">#</span> obserwujących}
+        one {# obserwujący}
+        other {# obserwujących}
     }',
     'posts' => '{numberOfPosts, plural,
-        one {<span class="font-semibold">#</span> wpis}
-        few {<span class="font-semibold">#</span> wpisy}
-        other {<span class="font-semibold">#</span> wpisów}
+        one {# wpis}
+        few {# wpisy}
+        other {# wpisów}
     }',
     'activity' => 'Aktywność',
     'episodes' => 'Odcinki',

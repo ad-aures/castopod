@@ -89,7 +89,7 @@ return [
             'Dieser Text wird am Ende jeder Episodenbeschreibung hinzugefügt, es ist ein guter Ort, um zum Beispiel Ihre sozialen Links einzufügen.',
         'additional_files_section_title' => 'Zusätzliche Dateien',
         'additional_files_section_subtitle' =>
-            'Diese Filter können von anderen Platformen genutzt werden, um eine bessere Nutzererfahrung bieten zu können.<br />Weitere Informationen sind unter {podcastNamespaceLink} zu finden.',
+            'Diese Filter können von anderen Platformen genutzt werden, um eine bessere Nutzererfahrung bieten zu können. Weitere Informationen sind unter {podcastNamespaceLink} zu finden.',
         'location_section_title' => 'Standort',
         'location_section_subtitle' => 'Über welchen Ort handelt diese Folge?',
         'location_name' => 'Standortname oder Adresse',

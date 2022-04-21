@@ -18,12 +18,12 @@ return [
     'follow' => 'متابعة',
     'followTitle' => 'تابع {actorDisplayName} على الفديفرس!',
     'followers' => '{numberOfFollowers, plural,
-        one {<span class="font-semibold">#</span> follower}
-        other {<span class="font-semibold">#</span> followers}
+        one {# follower}
+        other {# followers}
     }',
     'posts' => '{numberOfPosts, plural,
-        one {<span class="font-semibold">#</span> post}
-        other {<span class="font-semibold">#</span> posts}
+        one {# post}
+        other {# posts}
     }',
     'activity' => 'النشاط',
     'episodes' => 'الحلقات',
@@ -32,14 +32,14 @@ return [
     'stats' => [
         'title' => 'الإحصائيات',
         'number_of_seasons' => '{0, plural,
-            one {<span class="font-semibold">#</span> season}
-            other {<span class="font-semibold">#</span> seasons}
+            one {# season}
+            other {# seasons}
         }',
         'number_of_episodes' => '{0, plural,
-            one {<span class="font-semibold">#</span> episode}
-            other {<span class="font-semibold">#</span> episodes}
+            one {# episode}
+            other {# episodes}
         }',
-        'first_published_at' => 'First episode published on <span class="font-semibold">{0, date, medium}</span>',
+        'first_published_at' => 'First episode published on {0, date, medium}',
     ],
     'sponsor' => 'الراعي',
     'funding_links' => 'Funding links for {podcastTitle}',

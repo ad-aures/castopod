@@ -89,7 +89,7 @@ return [
             'Denne teksten ligg på slutten av kvar episodeskildring, og er ein god stad å ha lenker til td. sosiale nettverk.',
         'additional_files_section_title' => 'Fleire filer',
         'additional_files_section_subtitle' =>
-            'Desse filene kan brukast av andre plattformer for å gje publikum ei betre oppleving.<br />Sjå {podcastNamespaceLink} for meir informasjon.',
+            'Desse filene kan brukast av andre plattformer for å gje publikum ei betre oppleving. Sjå {podcastNamespaceLink} for meir informasjon.',
         'location_section_title' => 'Stad',
         'location_section_subtitle' => 'Kva stad handlar denne episoden om?',
         'location_name' => 'Stadnamn eller adresse',

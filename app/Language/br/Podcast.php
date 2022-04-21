@@ -19,47 +19,47 @@ return [
     'followTitle' => 'Heuliañ {actorDisplayName} war ar c\'hevrebed!',
     'followers' => '{numberOfFollowers, plural,
         0 {heulier·ez ebet}
-        one {<span class="font-semibold">#</span> heulier·ez}
-        other {<span class="font-semibold">#</span> heulier·ez}
+        one {# heulier·ez}
+        other {# heulier·ez}
     }',
     'posts' => '{numberOfPosts, plural,
             0 {kemennadenn ebet}
-            1 {<span class="font-semibold">#</span> gemennadenn}
-            2 {<span class="font-semibold">#</span> gemennadenn}
-            3 {<span class="font-semibold">#</span> c\'hemennadenn}
-            4 {<span class="font-semibold">#</span> c\'hemennadenn}
-            9 {<span class="font-semibold">#</span> c\'hemennadenn}
-            21 {<span class="font-semibold">#</span> gemennadenn}
-            22 {<span class="font-semibold">#</span> gemennadenn}
-            23 {<span class="font-semibold">#</span> c\'hemennadenn}
-            24 {<span class="font-semibold">#</span> c\'hemennadenn}
-            29 {<span class="font-semibold">#</span> c\'hemennadenn}
-            31 {<span class="font-semibold">#</span> gemennadenn}
-            32 {<span class="font-semibold">#</span> gemennadenn}
-            33 {<span class="font-semibold">#</span> c\'hemennadenn}
-            34 {<span class="font-semibold">#</span> c\'hemennadenn}
-            39 {<span class="font-semibold">#</span> c\'hemennadenn}
-            41 {<span class="font-semibold">#</span> gemennadenn}
-            42 {<span class="font-semibold">#</span> gemennadenn}
-            43 {<span class="font-semibold">#</span> c\'hemennadenn}
-            44 {<span class="font-semibold">#</span> c\'hemennadenn}
-            49 {<span class="font-semibold">#</span> c\'hemennadenn}
-            51 {<span class="font-semibold">#</span> gemennadenn}
-            52 {<span class="font-semibold">#</span> gemennadenn}
-            53 {<span class="font-semibold">#</span> c\'hemennadenn}
-            54 {<span class="font-semibold">#</span> c\'hemennadenn}
-            59 {<span class="font-semibold">#</span> c\'hemennadenn}
-            61 {<span class="font-semibold">#</span> gemennadenn}
-            62 {<span class="font-semibold">#</span> gemennadenn}
-            63 {<span class="font-semibold">#</span> c\'hemennadenn}
-            64 {<span class="font-semibold">#</span> c\'hemennadenn}
-            69 {<span class="font-semibold">#</span> c\'hemennadenn}
-            81 {<span class="font-semibold">#</span> gemennadenn}
-            82 {<span class="font-semibold">#</span> gemennadenn}
-            83 {<span class="font-semibold">#</span> c\'hemennadenn}
-            84 {<span class="font-semibold">#</span> c\'hemennadenn}
-            89 {<span class="font-semibold">#</span> c\'hemennadenn}
-            other {<span class="font-semibold">#</span> kemennadenn}
+            1 {# gemennadenn}
+            2 {# gemennadenn}
+            3 {# c\'hemennadenn}
+            4 {# c\'hemennadenn}
+            9 {# c\'hemennadenn}
+            21 {# gemennadenn}
+            22 {# gemennadenn}
+            23 {# c\'hemennadenn}
+            24 {# c\'hemennadenn}
+            29 {# c\'hemennadenn}
+            31 {# gemennadenn}
+            32 {# gemennadenn}
+            33 {# c\'hemennadenn}
+            34 {# c\'hemennadenn}
+            39 {# c\'hemennadenn}
+            41 {# gemennadenn}
+            42 {# gemennadenn}
+            43 {# c\'hemennadenn}
+            44 {# c\'hemennadenn}
+            49 {# c\'hemennadenn}
+            51 {# gemennadenn}
+            52 {# gemennadenn}
+            53 {# c\'hemennadenn}
+            54 {# c\'hemennadenn}
+            59 {# c\'hemennadenn}
+            61 {# gemennadenn}
+            62 {# gemennadenn}
+            63 {# c\'hemennadenn}
+            64 {# c\'hemennadenn}
+            69 {# c\'hemennadenn}
+            81 {# gemennadenn}
+            82 {# gemennadenn}
+            83 {# c\'hemennadenn}
+            84 {# c\'hemennadenn}
+            89 {# c\'hemennadenn}
+            other {# kemennadenn}
         }',
     'activity' => 'Oberiantiz',
     'episodes' => 'Rannoù',
@@ -69,49 +69,49 @@ return [
         'title' => 'Stadegoù',
         'number_of_seasons' => '{0, plural,
             0 {koulzad ebet}
-            1 {<span class="font-semibold">#</span> c\'houlzad}
-            2 {<span class="font-semibold">#</span> goulzad}
-            3 {<span class="font-semibold">#</span> c\'houlzad}
-            4 {<span class="font-semibold">#</span> c\'houlzad}
-            9 {<span class="font-semibold">#</span> c\'houlzad}
-            21 {<span class="font-semibold">#</span> c\'houlzad}
-            22 {<span class="font-semibold">#</span> goulzad}
-            23 {<span class="font-semibold">#</span> c\'houlzad}
-            24 {<span class="font-semibold">#</span> c\'houlzad}
-            29 {<span class="font-semibold">#</span> c\'houlzad}
-            31 {<span class="font-semibold">#</span> c\'houlzad}
-            32 {<span class="font-semibold">#</span> goulzad}
-            33 {<span class="font-semibold">#</span> c\'houlzad}
-            34 {<span class="font-semibold">#</span> c\'houlzad}
-            39 {<span class="font-semibold">#</span> c\'houlzad}
-            41 {<span class="font-semibold">#</span> c\'houlzad}
-            42 {<span class="font-semibold">#</span> goulzad}
-            43 {<span class="font-semibold">#</span> c\'houlzad}
-            44 {<span class="font-semibold">#</span> c\'houlzad}
-            49 {<span class="font-semibold">#</span> c\'houlzad}
-            51 {<span class="font-semibold">#</span> c\'houlzad}
-            52 {<span class="font-semibold">#</span> goulzad}
-            53 {<span class="font-semibold">#</span> c\'houlzad}
-            54 {<span class="font-semibold">#</span> c\'houlzad}
-            59 {<span class="font-semibold">#</span> c\'houlzad}
-            61 {<span class="font-semibold">#</span> c\'houlzad}
-            62 {<span class="font-semibold">#</span> goulzad}
-            63 {<span class="font-semibold">#</span> c\'houlzad}
-            64 {<span class="font-semibold">#</span> c\'houlzad}
-            69 {<span class="font-semibold">#</span> c\'houlzad}
-            81 {<span class="font-semibold">#</span> c\'houlzad}
-            82 {<span class="font-semibold">#</span> goulzad}
-            83 {<span class="font-semibold">#</span> c\'houlzad}
-            84 {<span class="font-semibold">#</span> c\'houlzad}
-            89 {<span class="font-semibold">#</span> c\'houlzad}
-            other {<span class="font-semibold">#</span> koulzad}
+            1 {# c\'houlzad}
+            2 {# goulzad}
+            3 {# c\'houlzad}
+            4 {# c\'houlzad}
+            9 {# c\'houlzad}
+            21 {# c\'houlzad}
+            22 {# goulzad}
+            23 {# c\'houlzad}
+            24 {# c\'houlzad}
+            29 {# c\'houlzad}
+            31 {# c\'houlzad}
+            32 {# goulzad}
+            33 {# c\'houlzad}
+            34 {# c\'houlzad}
+            39 {# c\'houlzad}
+            41 {# c\'houlzad}
+            42 {# goulzad}
+            43 {# c\'houlzad}
+            44 {# c\'houlzad}
+            49 {# c\'houlzad}
+            51 {# c\'houlzad}
+            52 {# goulzad}
+            53 {# c\'houlzad}
+            54 {# c\'houlzad}
+            59 {# c\'houlzad}
+            61 {# c\'houlzad}
+            62 {# goulzad}
+            63 {# c\'houlzad}
+            64 {# c\'houlzad}
+            69 {# c\'houlzad}
+            81 {# c\'houlzad}
+            82 {# goulzad}
+            83 {# c\'houlzad}
+            84 {# c\'houlzad}
+            89 {# c\'houlzad}
+            other {# koulzad}
         }',
         'number_of_episodes' => '{0, plural,
             0 {rann ebet}
-            one {<span class="font-semibold">#</span> rann}
-            other {<span class="font-semibold">#</span> rann}
+            one {# rann}
+            other {# rann}
         }',
-        'first_published_at' => 'Embannet eo bet ar rann gentañ d\'an/d\'ar<span class="font-semibold">{0, date, medium}</span>',
+        'first_published_at' => 'Embannet eo bet ar rann gentañ d\'an/d\'ar{0, date, medium}',
     ],
     'sponsor' => 'Harpit',
     'funding_links' => 'Liammoù evit arc\'hantaouiñ {podcastTitle}',

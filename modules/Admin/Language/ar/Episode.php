@@ -89,7 +89,7 @@ return [
             'This text is added at the end of each episode description, it is a good place to input your social links for example.',
         'additional_files_section_title' => 'ملفات إضافية',
         'additional_files_section_subtitle' =>
-            'These files may be used by other platforms to provide better experience to your audience.<br />See the {podcastNamespaceLink} for more information.',
+            'These files may be used by other platforms to provide better experience to your audience. See the {podcastNamespaceLink} for more information.',
         'location_section_title' => 'Location',
         'location_section_subtitle' => 'What place is this episode about?',
         'location_name' => 'Location name or address',

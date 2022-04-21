@@ -18,12 +18,12 @@ return [
     'follow' => 'Suivre',
     'followTitle' => 'Suivez {actorDisplayName} sur le fédiverse !',
     'followers' => '{numberOfFollowers, plural,
-        one {<span class="font-semibold">#</span> abonné·e}
-        other {<span class="font-semibold">#</span> abonné·e·s}
+        one {# abonné·e}
+        other {# abonné·e·s}
     }',
     'posts' => '{numberOfPosts, plural,
-        one {<span class="font-semibold">#</span> publication}
-        other {<span class="font-semibold">#</span> publications}
+        one {# publication}
+        other {# publications}
     }',
     'activity' => 'Activité',
     'episodes' => 'Épisodes',
@@ -32,14 +32,14 @@ return [
     'stats' => [
         'title' => 'Statistiques',
         'number_of_seasons' => '{0, plural,
-            one {<span class="font-semibold">#</span> saison}
-            other {<span class="font-semibold">#</span> saisons}
+            one {# saison}
+            other {# saisons}
         }',
         'number_of_episodes' => '{0, plural,
-            one {<span class="font-semibold">#</span> épisode}
-            other {<span class="font-semibold">#</span> épisodes}
+            one {# épisode}
+            other {# épisodes}
         }',
-        'first_published_at' => 'Premier épisode publié le <span class="font-semibold">{0, date, medium}</span>',
+        'first_published_at' => 'Premier épisode publié le {0, date, medium}',
     ],
     'sponsor' => 'Soutenez-nous',
     'funding_links' => 'Liens de financement pour {podcastTitle}',

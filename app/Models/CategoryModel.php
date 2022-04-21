@@ -67,10 +67,15 @@ class CategoryModel extends Model
                 function (array $result, Category $category): array {
                     $result[$category->id] = '';
                     if ($category->parent !== null) {
-                        $result[$category->id] = lang('Podcast.category_options.' . $category->parent->code) . ' › ';
+                        $result[$category->id] = lang(
+                            'Podcast.category_options.' . $category->parent->code,
+                            [],
+                            null,
+                            false
+                        ) . ' › ';
                     }
 
-                    $result[$category->id] .= lang('Podcast.category_options.' . $category->code);
+                    $result[$category->id] .= lang('Podcast.category_options.' . $category->code, [], null, false);
                     return $result;
                 },
                 [],

@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 return [
     'warning' =>
-        'Ta procedura może zająć dużo czasu.<br/>Ponieważ bieżąca wersja nie pokazuje żadnego postępu podczas działania, nie zobaczysz żadnych aktualizacji dopóki nie zostanie wykonana.<br/>W przypadku błędu przekroczenia limitu czasu, zwiększ wartość `max_execution_time`.',
+        'Ta procedura może zająć dużo czasu. Ponieważ bieżąca wersja nie pokazuje żadnego postępu podczas działania, nie zobaczysz żadnych aktualizacji dopóki nie zostanie wykonana. W przypadku błędu przekroczenia limitu czasu, zwiększ wartość `max_execution_time`.',
     'old_podcast_section_title' => 'Podcast do zaimportowania',
     'old_podcast_section_subtitle' =>
         'Upewnij się, że masz prawa do tego podcastu zanim go zaimportujesz. Kopiowanie i nadawanie podcastu bez odpowiednich praw jest piractwem i podlega ściganiu.',

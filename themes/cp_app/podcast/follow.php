@@ -70,6 +70,6 @@
         <?= lang('Common.powered_by', [
             'castopod' =>
                 '<a class="inline-flex font-semibold hover:underline focus:ring-accent" href="https://castopod.org" target="_blank" rel="noreferrer noopener">Castopod' . icon('castopod', 'ml-1 text-lg', 'social') . '</a>',
-        ]) ?>
+        ], null, false) ?>
     </footer>
 </body>

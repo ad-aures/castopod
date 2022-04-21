@@ -227,12 +227,12 @@ return [
     'no_episode' => 'Fann ingen episode!',
     'follow' => 'Fylg',
     'followers' => '{numberOfFollowers, plural,
-        one {<span class="font-semibold">#</span> fylgjar}
-        other {<span class="font-semibold">#</span> fylgjarar}
+        one {# fylgjar}
+        other {# fylgjarar}
     }',
     'posts' => '{numberOfPosts, plural,
-        one {<span class="font-semibold">#</span> innlegg}
-        other {<span class="font-semibold">#</span> innlegg}
+        one {# innlegg}
+        other {# innlegg}
     }',
     'activity' => 'Aktivitet',
     'episodes' => 'Episodar',

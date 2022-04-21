@@ -18,13 +18,13 @@ return [
     'follow' => 'Obserwuj',
     'followTitle' => 'Obserwuj {actorDisplayName} na fediverse!',
     'followers' => '{numberOfFollowers, plural,
-        one {<span class="font-semibold">#</span> obserwujący}
-        other {<span class="font-semibold">#</span> obserwujących}
+        one {# obserwujący}
+        other {# obserwujących}
     }',
     'posts' => '{numberOfPosts, plural,
-        one {<span class="font-semibold">#</span> wpis}
-        few {<span class="font-semibold">#</span> wpisy}
-        other {<span class="font-semibold">#</span> wpisów}
+        one {# wpis}
+        few {# wpisy}
+        other {# wpisów}
     }',
     'activity' => 'Aktywność',
     'episodes' => 'Odcinki',
@@ -33,16 +33,16 @@ return [
     'stats' => [
         'title' => 'Statystyki',
         'number_of_seasons' => '{0, plural,
-            one {<span class="font-semibold">#</span> sezon}
-            few{<span class="font-semibold">#</span> sezony}
-            other {<span class="font-semibold">#</span> sezonów}
+            one {# sezon}
+            few{# sezony}
+            other {# sezonów}
         }',
         'number_of_episodes' => '{0, plural,
-            one {<span class="font-semibold">#</span> odcinek}
-            few {<span class="font-semibold">#</span> odcinki}
-            other {<span class="font-semibold">#</span> odcinków}
+            one {# odcinek}
+            few {# odcinki}
+            other {# odcinków}
         }',
-        'first_published_at' => 'Pierwszy odcinek opublikowany <span class="font-semibold">{0, date, medium}</span>',
+        'first_published_at' => 'Pierwszy odcinek opublikowany {0, date, medium}',
     ],
     'sponsor' => 'Sponsoruj',
     'funding_links' => 'Linki finansowania dla {podcastTitle}',

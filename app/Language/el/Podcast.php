@@ -18,12 +18,12 @@ return [
     'follow' => 'Ακολουθήστε',
     'followTitle' => 'Ακολουθήστε το {actorDisplayName} στο fediverse!',
     'followers' => '{numberOfFollowers, plural,
-        one {<span class="font-semibold">#</span> ακόλουθος}
-        other {<span class="font-semibold">#</span> ακόλουθοι}
+        one {# ακόλουθος}
+        other {# ακόλουθοι}
     }',
     'posts' => '{numberOfPosts, plural,
-        one {<span class="font-semibold">#</span> δημοσίευση}
-        other {<span class="font-semibold">#</span> δημοσιεύσεις}
+        one {# δημοσίευση}
+        other {# δημοσιεύσεις}
     }',
     'activity' => 'Δραστηριότητα',
     'episodes' => 'Επεισόδια',
@@ -32,14 +32,14 @@ return [
     'stats' => [
         'title' => 'Στατιστικά',
         'number_of_seasons' => '{0, plural,
-            one {<span class="font-semibold">#</span> σεζόν}
-            other {<span class="font-semibold">#</span> σεζόνς}
+            one {# σεζόν}
+            other {# σεζόνς}
         }',
         'number_of_episodes' => '{0, plural,
-            one {<span class="font-semibold">#</span> επισόδειο}
-            other {<span class="font-semibold">#</span> επισόδεια}
+            one {# επισόδειο}
+            other {# επισόδεια}
         }',
-        'first_published_at' => 'Το πρώτο επεισόδιο δημοσιεύθηκε στις <span class="font-semibold">{0, date, medium}</span>',
+        'first_published_at' => 'Το πρώτο επεισόδιο δημοσιεύθηκε στις {0, date, medium}',
     ],
     'sponsor' => 'Χορηγός',
     'funding_links' => 'Σύνδεσμοι χρηματοδότησης για το {podcastTitle}',
