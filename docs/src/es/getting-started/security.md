@@ -1,23 +1,24 @@
 ---
-title: Security
+title: Seguridad
 ---
 
-# Security concerns
+# Problemas de seguridad
 
-Castopod is built on top of [CodeIgniter4](https://codeigniter.com/), a PHP
-framework that encourages
-[good security practices](https://codeigniter.com/user_guide/concepts/security.html).
+Castopod está construido sobre [CodeIgniter4](https://codeigniter.com/), un
+framework de PHP que alienta
+[buenas prácticas de seguridad](https://codeigniter.com/user_guide/concepts/security.html).
 
-To maximize your instance's safety and prevent any malicious attack, we
-recommend you update all your Castopod files permissions after installation or
-updates (to avoid any prior permission error):
+Para maximizar la seguridad de su instancia y prevenir cualquier ataque
+malicioso, le recomendamos que actualice todos los permisos de sus archivos
+Castopod después de la instalación o actualizaciones (para evitar cualquier
+error de permiso previo):
 
-- `writable/` folder must be **readable** and **writable**.
-- `public/media/` folder must be **readable** and **writable**.
-- any other file must be set to **readonly**.
+- `writable/` carpeta debe ser **legible** y **escribible**.
+- `public/media/` carpeta debe ser **legible** y **escribible**.
+- cualquier otro archivo debe establecerse a **solo lectura**.
 
-For instance, if you are using Apache or NGINX with Ubuntu you may do the
-following:
+Por ejemplo, si estás usando Apache o NGINX con Ubuntu puedes hacer lo
+siguiente:
 
 ```bash
 sudo chown -R root:root /path/to/castopod

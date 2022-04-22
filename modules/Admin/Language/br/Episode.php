@@ -51,7 +51,7 @@ return [
     ],
     'form' => [
         'file_size_error' =>
-            'Re vras eo ho restr! {0} eo ar brasder uhelañ. Dav eo deoc\'h kreskaat an talvoudoù `memory_limit`, `upload_max_filesize` ha `post_max_size` en ho restr kefluniañ, a-raok adloc\'hañ ho servijer web hag uskargañ ho restr.',
+            'Re vras eo ho restr! {0} eo ar braster uhelañ. Dav eo deoc\'h kreskaat an talvoudoù `memory_limit`, `upload_max_filesize` ha `post_max_size` en ho restr kefluniañ, a-raok adloc\'hañ ho tafariad web hag uskargañ ho restr.',
         'audio_file' => 'Restr aodio',
         'audio_file_hint' => 'Dibabit ur restr .mp3 pe .m4a.',
         'info_section_title' => 'Titouroù ar rann',

@@ -10,28 +10,28 @@ declare(strict_types=1);
 
 return [
     'warning' =>
-        'This procedure may take a long time. As the current version does not show any progress while it runs, you will not see anything updated until it is done. In case of timeout error, increase `max_execution_time` value.',
-    'old_podcast_section_title' => 'The podcast to import',
+        'Este procedimiento puede llevar mucho tiempo. Como la versión actual no muestra ningún progreso mientras se ejecuta, no verá nada actualizado hasta que termine. En caso de error de tiempo de espera, incrementa el valor `max_execution_time`.',
+    'old_podcast_section_title' => 'Podcasts para importar',
     'old_podcast_section_subtitle' =>
-        'Make sure you own the rights for this podcast before importing it. Copying and broadcasting a podcast without the proper rights is piracy and is liable to prosecution.',
-    'imported_feed_url' => 'Feed URL',
-    'imported_feed_url_hint' => 'The feed must be in xml or rss format.',
-    'new_podcast_section_title' => 'The new podcast',
-    'advanced_params_section_title' => 'Advanced parameters',
+        'Asegúrese de que tiene los derechos para este podcast antes de importarlo. Copiar y difundir un podcast sin los derechos apropiados es piratería y puede ser procesado.',
+    'imported_feed_url' => 'URL del Feed',
+    'imported_feed_url_hint' => 'El feed debe estar en formato xml o rss.',
+    'new_podcast_section_title' => 'El nuevo Podcast',
+    'advanced_params_section_title' => 'Parámetros avanzados',
     'advanced_params_section_subtitle' =>
-        'Keep the default values if you have no idea of what the fields are for.',
-    'slug_field' => 'Field to be used to calculate episode slug',
+        'Mantenga los valores por defecto si no tiene idea de para qué sirven los campos.',
+    'slug_field' => 'Campo a utilizar para calcular el slug de episodio',
     'description_field' =>
-        'Source field used for episode description / show notes',
-    'force_renumber' => 'Force episodes renumbering',
+        'Campo de origen usado para la descripción del episodio / mostrar notas',
+    'force_renumber' => 'Forzar renumeración de episodios',
     'force_renumber_hint' =>
-        'Use this if your podcast does not have episode numbers but wish to set them during import.',
-    'season_number' => 'Season number',
+        'Utilice esto si su podcast no tiene números de episodios pero desea establecerlos durante la importación.',
+    'season_number' => 'Número de Temporada',
     'season_number_hint' =>
-        'Use this if your podcast does not have a season number but wish to set one during import. Leave blank otherwise.',
-    'max_episodes' => 'Maximum number of episodes to import',
-    'max_episodes_hint' => 'Leave blank to import all episodes',
+        'Utilice esto si su podcast no tiene un número de temporada pero desea establecer uno durante la importación. Deje en blanco de lo contrario.',
+    'max_episodes' => 'Número máximo de episodios a importar',
+    'max_episodes_hint' => 'Dejar en blanco para importar todos los episodios',
     'lock_import' =>
-        'This feed is protected. You cannot import it. If you are the owner, unprotect it on the origin platform.',
-    'submit' => 'Import podcast',
+        'Este feed está protegido. No puedes importarlo. Si eres el propietario, debes desprotegerlo en la plataforma de origen.',
+    'submit' => 'Importar podcast',
 ];

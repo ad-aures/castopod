@@ -9,46 +9,46 @@ declare(strict_types=1);
  */
 
 return [
-    'edit_roles' => "Edit {username}'s roles",
-    'forcePassReset' => 'Force pass reset',
-    'ban' => 'Ban',
-    'unban' => 'Unban',
-    'delete' => 'Delete',
-    'create' => 'New user',
-    'view' => "{username}'s info",
-    'all_users' => 'All users',
+    'edit_roles' => "Editar rol de {username}",
+    'forcePassReset' => 'Forzar el reseteo de la contraseña',
+    'ban' => 'Banear',
+    'unban' => 'Desbanear',
+    'delete' => 'Borrar',
+    'create' => 'Nuevo usuario',
+    'view' => "Información de {username}",
+    'all_users' => 'Todos los usuarios',
     'list' => [
-        'user' => 'User',
+        'user' => 'Usuario',
         'roles' => 'Roles',
-        'banned' => 'Banned?',
+        'banned' => '¿Baneado?',
     ],
     'form' => [
-        'email' => 'Email',
-        'username' => 'Username',
-        'password' => 'Password',
-        'new_password' => 'New Password',
+        'email' => 'Correo electrónico',
+        'username' => 'Nombre de usuario',
+        'password' => 'Contraseña',
+        'new_password' => 'Nueva Contraseña',
         'roles' => 'Roles',
-        'permissions' => 'Permissions',
-        'submit_create' => 'Create user',
-        'submit_edit' => 'Save',
-        'submit_password_change' => 'Change!',
+        'permissions' => 'Permisos',
+        'submit_create' => 'Crear usuario',
+        'submit_edit' => 'Guardar',
+        'submit_password_change' => '¡Cambiar!',
     ],
     'roles' => [
-        'superadmin' => 'Super admin',
+        'superadmin' => 'Super administrador',
     ],
     'messages' => [
         'createSuccess' =>
-            'User created successfully! {username} will be prompted with a password reset upon first authentication.',
+            '¡Usuario creado con éxito! Se le pedirá a {username} que restablezca la contraseña en la primera autenticación.',
         'rolesEditSuccess' =>
-            "{username}'s roles have been successfully updated.",
+            "Los roles de {username} se han actualizado correctamente.",
         'forcePassResetSuccess' =>
-            '{username} will be prompted with a password reset upon next visit.',
-        'banSuccess' => '{username} has been banned.',
-        'unbanSuccess' => '{username} has been unbanned.',
+            'Se pedirá a {username} que restablezca su contraseña en la próxima visita.',
+        'banSuccess' => '{username} ha sido baneado.',
+        'unbanSuccess' => '{username} ha sido desbaneado.',
         'banSuperAdminError' =>
-            '{username} is a superadmin, one does not simply ban a superadmin…',
+            '{username} es un superadmin, no puedes banear a un superadministrador…',
         'deleteSuperAdminError' =>
-            '{username} is a superadmin, one does not simply delete a superadmin…',
-        'deleteSuccess' => '{username} has been deleted.',
+            '{username} es un superadmin, no puedes borrar a un superadministrador…',
+        'deleteSuccess' => '{username} ha sido eliminado.',
     ],
 ];

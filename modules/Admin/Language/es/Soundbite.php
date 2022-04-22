@@ -10,22 +10,22 @@ declare(strict_types=1);
 
 return [
     'list' => [
-        'title' => 'Soundbites',
-        'soundbite' => 'Soundbite',
+        'title' => 'Fragmentos de sonido',
+        'soundbite' => 'Fragmento de sonido',
     ],
     'messages' => [
-        'createSuccess' => 'Soundbite has been successfully created!',
-        'deleteSuccess' => 'Soundbite has been successfully removed!',
+        'createSuccess' => '¡El fragmento de sonido ha sido creado con éxito!',
+        'deleteSuccess' => '¡El fragmento de sonido ha sido eliminado con éxito!',
     ],
     'form' => [
-        'title' => 'New soundbite',
-        'soundbite_title' => 'Soundbite title',
-        'start_time' => 'Start at',
-        'duration' => 'Duration',
-        'submit' => 'Create soundbite',
+        'title' => 'Nuevo fragmento de sonido',
+        'soundbite_title' => 'Título del fragmento de sonido',
+        'start_time' => 'Comenzar en',
+        'duration' => 'Duración',
+        'submit' => 'Crear fragmento de sonido',
     ],
-    'play' => 'Play soundbite',
-    'stop' => 'Stop soundbite',
-    'create' => 'New soundbite',
-    'delete' => 'Delete soundbite',
+    'play' => 'Reproducir fragmento de sonido',
+    'stop' => 'Detener fragmento de sonido',
+    'create' => 'Nuevo fragmento de sonido',
+    'delete' => 'Eliminar fragmento de sonido',
 ];

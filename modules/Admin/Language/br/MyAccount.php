@@ -9,10 +9,10 @@ declare(strict_types=1);
  */
 
 return [
-    'info' => 'My account info',
-    'changePassword' => 'Change my password',
+    'info' => 'Titouroù diwar-benn ma c\'hont',
+    'changePassword' => 'Kemmañ ma ger-tremen',
     'messages' => [
-        'wrongPasswordError' => "You've entered the wrong password, try again.",
-        'passwordChangeSuccess' => 'Password has been successfully changed!',
+        'wrongPasswordError' => "N'eo ket talvoudek ar ger-tremen ho peus skrivet. Klaskit en-dro.",
+        'passwordChangeSuccess' => 'Kemmet eo bet ar ger-tremen gant berzh!',
     ],
 ];

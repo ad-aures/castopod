@@ -1,12 +1,13 @@
 ---
-title: Installation
+title: Instalación
 sidebarDepth: 3
 ---
 
-# How to install Castopod?
+# ¿Cómo instalar Castopod?
 
-Castopod was thought-out to be easy to install. Whether using dedicated or
-shared hosting, you can install it on most PHP-MySQL compatible web servers.
+Castopod era de todas maneras fácil de instalar. Ya sea usando alojamiento
+dedicado o compartido, se puede instalar en la mayoría de servidores web
+compatibles con PHP-MySQL.
 
 ## Requirements
 
@@ -111,12 +112,12 @@ want to generate Video Clips. The following extensions must be installed:
 1. Run the Castopod install script by going to the install wizard page
    (`https://your_domain_name.com/cp-install`) in your favorite web browser.
 2. Follow the instructions on your screen.
-3. Start podcasting!
+3. ¡Empieza a crear podcasting!
 
-::: info Note
+::: Nota de información
 
-The install script writes a `.env` file in the package root. If you cannot go
-through the install wizard, you can
+El script de instalación escribe un archivo `.env` en la raíz del paquete. If
+you cannot go through the install wizard, you can
 [create and update the `.env` file manually](#alternative-manual-configuration).
 
 :::

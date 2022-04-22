@@ -16,7 +16,7 @@ return [
         'title' => 'Heuliañ {actorDisplayName}',
         'subtitle' => 'Emaoc\'h o vont da heuliañ:',
         'accountNotFound' => 'N\'eo ket bet kavet ar gont-se.',
-        'remoteFollowNotAllowed' => 'N\'eo ket aotreet heuliañ a-bell gant servijer ar gont-se war a seblant…',
+        'remoteFollowNotAllowed' => 'N\'eo ket aotreet heuliañ a-bell gant dafariad ar gont-se war a seblant…',
         'submit' => 'Kenderc\'hel gant an heuliañ',
     ],
     'favourite' => [
