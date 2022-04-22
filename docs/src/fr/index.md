@@ -28,7 +28,7 @@ et est utilisé par des podcasters partout autour du monde&nbsp;!
 
 - 🌱 &nbsp;Libre, gratuit & open-source (Licence AGPL v3)
 - 🔐 &nbsp;Focalisé sur la souveraineté des données : votre contenu, votre
-  audience et vos statiistiques vous appartiennent, et à vous seulement
+  audience et vos statistiques vous appartiennent, et à vous seulement
 - 🪄&nbsp;Fonctionnalités de Podcasting 2.0 : GUID, verrouillage, transcriptions,
   financement, chapitres, géo-localisation, intervenants, extraits sonores, …
 - 💬 &nbsp;Réseau social intégré :
@@ -46,9 +46,9 @@ et est utilisé par des podcasters partout autour du monde&nbsp;!
   - 🎬 &nbsp;Générez des clips vidéo prêts à partager à partir d'épisodes
   - 🔉 &nbsp;Générez des extraits sonores
   - ▶️ &nbsp;Intégrer vos épisodes dans n'importe quel site web
-- 💸 &nbsp;Monétisation:
+- 💸 &nbsp;Monétisation :
   - 🔗 &nbsp;Liens de financement
-  - 📲 &nbsp;publicité “listen-to-click”
+  - 📲 &nbsp;Publicité “listen-to-click”
   - 🤝 &nbsp;value4value / WebMonetization
 - 📡&nbsp;Publiez vos épisodes partout avec RSS :
   - 📱 &nbsp;Sur tous les index et toutes les applications : Podcast Index,
@@ -61,7 +61,7 @@ et est utilisé par des podcasters partout autour du monde&nbsp;!
 - 👥 &nbsp;Multi-utilisateur : ajoutez des contributeurs et définissez leurs
   rôles
 - 🌎 &nbsp;Multilingue: traduit en Anglais, Français, Polonais, Allemand &
-  Brésilien… et bientôt d'autres à venir !
+  Brésilien… et bien d'autres à venir !
 
 ## Pourquoi Castopod ?
 
@@ -106,7 +106,7 @@ plupart des serveurs web.
 
 Wordpress est un excellent outil pour créer votre site web et de l'étendre avec
 des plugins pour faire ce que vous souhaitez. C'est un CMS à part entière qui
-vous permet de mettre en line tout type de site web.
+vous permet de mettre en ligne tout type de site web.
 
 Castopod quant à lui est destiné à répondre aux besoins spécifiques des
 podcasteurs, en se concentrant sur les podcasts et rien d'autre. Vous n'avez
@@ -208,7 +208,7 @@ parrains. Si vous souhaitez aider, n'hésitez pas à
 
 [Licence publique générale GNU Affero v3](https://choosealicense.com/licenses/agpl-3.0/)
 
-Copyright © 2020-present, [Ad Aures](https://adaures.com/).
+Copyright © 2020-présent, [Ad Aures](https://adaures.com/).
 
 [release]: https://code.castopod.org/adaures/castopod/-/releases
 [release-badge]:
