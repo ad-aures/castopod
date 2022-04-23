@@ -1,3 +1,19 @@
+# [1.0.0-beta.14](https://code.castopod.org/adaures/castopod/compare/v1.0.0-beta.13...v1.0.0-beta.14) (2022-04-23)
+
+### Bug Fixes
+
+- **home:** remove hardcoded prefix in getAllPodcasts query
+  ([92d5cc5](https://code.castopod.org/adaures/castopod/commit/92d5cc50a3e533875cd894dccc417918102d4b7f))
+- overwrite common lang function to escape returned string
+  ([4c490c1](https://code.castopod.org/adaures/castopod/commit/4c490c15bb6642ad0b2aaddf08d8af25de99b4b0)),
+  closes [#196](https://code.castopod.org/adaures/castopod/issues/196)
+  [#198](https://code.castopod.org/adaures/castopod/issues/198)
+
+### Features
+
+- **i18n:** add Spanish to supported locales
+  ([e340b54](https://code.castopod.org/adaures/castopod/commit/e340b54a84d7dcdf9ba910fe7ff39c453fac0968))
+
 # [1.0.0-beta.13](https://code.castopod.org/adaures/castopod/compare/v1.0.0-beta.12...v1.0.0-beta.13) (2022-04-14)
 
 ### Bug Fixes
