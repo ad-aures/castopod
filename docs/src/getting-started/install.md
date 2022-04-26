@@ -8,6 +8,14 @@ sidebarDepth: 3
 Castopod was thought-out to be easy to install. Whether using dedicated or
 shared hosting, you can install it on most PHP-MySQL compatible web servers.
 
+::: info Note
+
+This section of the documentation will help you set up Castopod for production.
+If you are looking to partake in the development of Castopod, you may skip to
+the contributing section.
+
+:::
+
 ## Requirements
 
 - PHP v8.0 or higher
