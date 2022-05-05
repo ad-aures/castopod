@@ -63,12 +63,16 @@ class Transcript extends BaseMedia
         return $this;
     }
 
-    public function deleteFile(): void
+    public function deleteFile(): bool
     {
-        parent::deleteFile();
+        if (! parent::deleteFile()) {
+            return false;
+        }
 
         if ($this->json_path) {
-            unlink($this->json_path);
+            return unlink($this->json_path);
         }
+
+        return true;
     }
 }

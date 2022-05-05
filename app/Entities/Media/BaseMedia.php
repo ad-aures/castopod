@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace App\Entities\Media;
 
+use App\Models\MediaModel;
+use CodeIgniter\Database\BaseResult;
 use CodeIgniter\Entity\Entity;
 use CodeIgniter\Files\File;
 
@@ -101,9 +103,15 @@ class BaseMedia extends Entity
         return $this;
     }
 
-    public function deleteFile(): void
+    public function deleteFile(): bool
     {
         helper('media');
-        unlink(media_path($this->file_path));
+        return unlink(media_path($this->file_path));
+    }
+
+    public function delete(): bool|BaseResult
+    {
+        $mediaModel = new MediaModel();
+        return $mediaModel->delete($this->id, true);
     }
 }

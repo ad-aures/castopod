@@ -278,7 +278,11 @@
 
 </form>
 
-<Button class="mt-8" variant="danger" uri="<?= route_to('episode-delete', $podcast->id, $episode->id) ?>" iconLeft="delete-bin"><?= lang('Episode.delete') ?></Button>
+<?php if ($episode->published_at === null): ?>
+    <Button class="mt-8" variant="danger" uri="<?= route_to('episode-delete', $podcast->id, $episode->id) ?>" iconLeft="delete-bin"><?= lang('Episode.delete') ?></Button>    
+<?php else: ?>
+    <Button class="mt-8" variant="disabled" iconLeft="forbid" data-tooltip="right" title="<?= lang('Episode.messages.unpublishBeforeDeleteTip') ?>"><?= lang('Episode.delete') ?></Button>
+<?php endif ?>
 
 
 <?= $this->endSection() ?>

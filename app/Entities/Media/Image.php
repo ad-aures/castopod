@@ -69,11 +69,13 @@ class Image extends BaseMedia
         return $this;
     }
 
-    public function deleteFile(): void
+    public function deleteFile(): bool
     {
-        parent::deleteFile();
+        if (parent::deleteFile()) {
+            return $this->deleteSizes();
+        }
 
-        $this->deleteSizes();
+        return false;
     }
 
     public function saveSizes(): void
@@ -89,12 +91,16 @@ class Image extends BaseMedia
         }
     }
 
-    private function deleteSizes(): void
+    private function deleteSizes(): bool
     {
         // delete all derived sizes
         foreach (array_keys($this->sizes) as $name) {
             $pathProperty = $name . '_path';
-            unlink(media_path($this->{$pathProperty}));
+            if (! unlink(media_path($this->{$pathProperty}))) {
+                return false;
+            }
         }
+
+        return true;
     }
 }

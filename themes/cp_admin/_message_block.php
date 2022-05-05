@@ -17,3 +17,13 @@ if (session()->has('message')): ?>
         </ul>
     </Alert>
 <?php endif; ?>
+
+<?php if (session()->has('warnings')): ?>
+    <Alert variant="warning" class="mb-4">
+        <ul>
+            <?php foreach (session('warnings') as $warning): ?>
+                <li><?= esc($warning) ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </Alert>
+<?php endif; ?>

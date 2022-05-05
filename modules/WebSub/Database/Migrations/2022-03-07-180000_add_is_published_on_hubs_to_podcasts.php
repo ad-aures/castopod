@@ -28,8 +28,6 @@ class AddIsPublishedOnHubsToPodcasts extends Migration
 
     public function down(): void
     {
-        $prefix = $this->db->getPrefix();
-
-        $this->forge->dropColumn($prefix . 'podcasts', 'is_published_on_hubs');
+        $this->forge->dropColumn('podcasts', 'is_published_on_hubs');
     }
 }

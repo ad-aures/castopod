@@ -97,11 +97,6 @@ class EpisodeModel extends Model
     /**
      * @var bool
      */
-    protected $useSoftDeletes = true;
-
-    /**
-     * @var bool
-     */
     protected $useTimestamps = true;
 
     /**
@@ -247,6 +242,18 @@ class EpisodeModel extends Model
         }
 
         return $found;
+    }
+
+    /**
+     * Returns number of episodes of a podcast
+     */
+    public function getPodcastEpisodesCount(int $podcastId): int|string
+    {
+        return $this
+            ->where([
+                'podcast_id' => $podcastId,
+            ])
+            ->countAllResults();
     }
 
     /**

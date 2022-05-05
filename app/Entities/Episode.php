@@ -78,7 +78,6 @@ use RuntimeException;
  * @property Time|null $published_at;
  * @property Time $created_at;
  * @property Time $updated_at;
- * @property Time|null $deleted_at;
  *
  * @property Person[] $persons;
  * @property Soundbite[] $soundbites;

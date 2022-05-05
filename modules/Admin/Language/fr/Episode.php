@@ -147,7 +147,7 @@ return [
     ],
     'delete_form' => [
         'disclaimer' =>
-            "Supprimer l’épisode supprimera toutes les publications qui lui sont associées et le retirera du flux RSS du podcast.",
+            "Supprimer l’épisode supprimera tous les fichiers multimédia, commentaires, extraits vidéos et extraits sonores qui lui sont associés.",
         'understand' => 'Je comprends, je veux supprimer l’épisode',
         'submit' => 'Supprimer',
     ],

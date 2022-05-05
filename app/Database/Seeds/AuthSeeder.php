@@ -208,12 +208,6 @@ class AuthSeeder extends Seeder
             [
                 'name' => 'delete',
                 'description' =>
-                    'Delete an episode of a podcast without removing it from the database',
-                'has_permission' => ['podcast_admin'],
-            ],
-            [
-                'name' => 'delete_permanently',
-                'description' =>
                     'Delete all occurrences of an episode of a podcast from the database',
                 'has_permission' => ['podcast_admin'],
             ],

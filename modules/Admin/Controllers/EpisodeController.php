@@ -131,6 +131,18 @@ class EpisodeController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
+        if ((new EpisodeModel())
+            ->where([
+                'slug' => $this->request->getPost('slug'),
+                'podcast_id' => $this->podcast->id,
+            ])
+            ->first()) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('error', lang('Episode.messages.sameSlugError'));
+        }
+
         $db = db_connect();
         $db->transStart();
 
@@ -681,6 +693,11 @@ class EpisodeController extends BaseController
                 ->with('errors', $episodeModel->errors());
         }
 
+        // set podcast is_published_on_hubs to false to trigger websub push
+        (new PodcastModel())->update($this->episode->podcast->id, [
+            'is_published_on_hubs' => false,
+        ]);
+
         $db->transComplete();
 
         return redirect()->route('episode-view', [$this->podcast->id, $this->episode->id]);
@@ -715,43 +732,74 @@ class EpisodeController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
+        if ($this->episode->published_at !== null) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('error', lang('Episode.messages.deletePublishedEpisodeError'));
+        }
+
+        $audio = $this->episode->audio;
+
         $db = db_connect();
 
         $db->transStart();
 
-        $allPostsLinkedToEpisode = (new PostModel())
-            ->where([
-                'episode_id' => $this->episode->id,
-            ])
-            ->findAll();
-        foreach ($allPostsLinkedToEpisode as $post) {
-            (new PostModel())->removePost($post);
+        $episodeModel = new EpisodeModel();
+
+        if (! $episodeModel->delete($this->episode->id)) {
+            $db->transRollback();
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $episodeModel->errors());
         }
 
-        // set podcast is_published_on_hubs to false to trigger websub push
-        (new PodcastModel())->update($this->episode->podcast->id, [
-            'is_published_on_hubs' => false,
-        ]);
+        $episodeMediaList = [$this->episode->transcript, $this->episode->chapters, $audio];
 
-        $episodeModel = new EpisodeModel();
-        if ($this->episode->published_at !== null) {
-            // if episode is published, set episode published_at to null to unpublish before deletion
-            $this->episode->published_at = null;
+        //only delete episode cover if different from podcast's
+        if ($this->episode->cover_id !== null) {
+            $episodeMediaList[] = $this->episode->cover;
+        }
 
-            if (! $episodeModel->update($this->episode->id, $this->episode)) {
+        //delete episode media records from database
+        foreach ($episodeMediaList as $episodeMedia) {
+            if ($episodeMedia !== null && ! $episodeMedia->delete()) {
                 $db->transRollback();
                 return redirect()
                     ->back()
                     ->withInput()
-                    ->with('errors', $episodeModel->errors());
+                    ->with('error', lang('Episode.messages.deleteError', [
+                        'type' => $episodeMedia->type,
+                    ]));
             }
         }
 
-        $episodeModel->delete($this->episode->id);
+        $warnings = [];
+
+        //remove episode media files from disk
+        foreach ($episodeMediaList as $episodeMedia) {
+            if ($episodeMedia !== null && ! $episodeMedia->deleteFile()) {
+                $warnings[] = lang('Episode.messages.deleteFileError', [
+                    'type' => $episodeMedia->type,
+                    'file_path' => $episodeMedia->file_path,
+                ]);
+            }
+        }
 
         $db->transComplete();
 
-        return redirect()->route('episode-list', [$this->podcast->id]);
+        if ($warnings !== []) {
+            return redirect()
+                ->route('episode-list', [$this->podcast->id])
+                ->with('message', lang('Episode.messages.deleteSuccess'))
+                ->with('warnings', $warnings);
+        }
+
+        return redirect()->route('episode-list', [$this->podcast->id])->with(
+            'message',
+            lang('Episode.messages.deleteSuccess')
+        );
     }
 
     public function embed(): string

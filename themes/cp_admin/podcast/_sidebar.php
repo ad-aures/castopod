@@ -33,7 +33,13 @@ $podcastNavigation = [
             'platforms-funding',
         ],
     ],
-]; ?>
+];
+
+$counts = [
+    'episode-list' => $podcast->getEpisodesCount(),
+];
+
+?>
 
 <div class="flex items-center px-4 py-2 border-b border-navigation">
     <img
@@ -65,13 +71,19 @@ $podcastNavigation = [
         <ul class="flex flex-col">
             <?php foreach ($data['items'] as $item): ?>
                 <?php $isActive = url_is(route_to($item, $podcast->id)); ?>
+                <?php
+                    $itemLabel = lang('PodcastNavigation.' . $item);
+                    if (array_key_exists($item, $counts)) {
+                        $itemLabel .= ' (' . $counts[$item] . ')';
+                    }
+                ?>
             <li class="inline-flex">
                 <a class="w-full py-1 pl-14 pr-2 text-sm hover:opacity-100 focus:ring-inset focus:ring-accent <?= $isActive
                     ? 'font-semibold opacity-100 inline-flex items-center'
                     : 'opacity-75' ?>" href="<?= route_to(
                         $item,
                         $podcast->id,
-                    ) ?>"><?= ($isActive ? icon('chevron-right', 'mr-2') : '') . lang('PodcastNavigation.' . $item) ?></a>
+                    ) ?>"><?= ($isActive ? icon('chevron-right', 'mr-2') : '') . $itemLabel ?></a>
             </li>
             <?php endforeach; ?>
         </ul>

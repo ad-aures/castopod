@@ -73,50 +73,63 @@
             [
                 'header' => lang('Episode.list.actions'),
                 'cell' => function ($episode, $podcast) {
+                    $items = [
+                        [
+                            'type' => 'link',
+                            'title' => lang('Episode.go_to_page'),
+                            'uri' => route_to('episode', esc($podcast->handle), esc($episode->slug)),
+                        ],
+                        [
+                            'type' => 'link',
+                            'title' => lang('Episode.edit'),
+                            'uri' => route_to('episode-edit', $podcast->id, $episode->id),
+                        ],
+                        [
+                            'type' => 'link',
+                            'title' => lang('Episode.embed.title'),
+                            'uri' => route_to('embed-add', $podcast->id, $episode->id),
+                        ],
+                        [
+                            'type' => 'link',
+                            'title' => lang('Person.persons'),
+                            'uri' => route_to('episode-persons-manage', $podcast->id, $episode->id),
+                        ],
+                        [
+                            'type' => 'link',
+                            'title' => lang('VideoClip.list.title'),
+                            'uri' => route_to('video-clips-list', $episode->podcast->id, $episode->id),
+                        ],
+                        [
+                            'type' => 'link',
+                            'title' => lang('Soundbite.list.title'),
+                            'uri' => route_to('soundbites-list', $podcast->id, $episode->id),
+                        ],
+                        [
+                            'type' => 'separator',
+                        ],
+                    ];
+                    if ($episode->published_at === null) {
+                        $items[] = [
+                            'type' => 'link',
+                            'title' => lang('Episode.delete'),
+                            'uri' => route_to('episode-delete', $podcast->id, $episode->id),
+                            'class' => 'font-semibold text-red-600',
+                        ];
+                    } else {
+                        $label = lang('Episode.delete');
+                        $icon = icon('forbid');
+                        $title = lang('Episode.messages.unpublishBeforeDeleteTip');
+                        $items[] = [
+                            'type' => 'html',
+                            'content' => esc(<<<CODE_SAMPLE
+                                    <span class="inline-flex items-center px-4 py-1 font-semibold text-gray-400 cursor-not-allowed" data-tooltip="bottom" title="{$title}">{$icon}<span class="ml-2">{$label}</span></span>
+                                CODE_SAMPLE),
+                        ];
+                    }
                     return '<button id="more-dropdown-' . $episode->id . '" type="button" class="inline-flex items-center p-1 rounded-full focus:ring-accent" data-dropdown="button" data-dropdown-target="more-dropdown-' . $episode->id . '-menu" aria-haspopup="true" aria-expanded="false">' .
                         icon('more') .
                         '</button>' .
-                        '<DropdownMenu id="more-dropdown-' . $episode->id . '-menu" labelledby="more-dropdown-' . $episode->id . '" offsetY="-24" items="' . esc(json_encode([
-                            [
-                                'type' => 'link',
-                                'title' => lang('Episode.go_to_page'),
-                                'uri' => route_to('episode', esc($podcast->handle), esc($episode->slug)),
-                            ],
-                            [
-                                'type' => 'link',
-                                'title' => lang('Episode.edit'),
-                                'uri' => route_to('episode-edit', $podcast->id, $episode->id),
-                            ],
-                            [
-                                'type' => 'link',
-                                'title' => lang('Episode.embed.title'),
-                                'uri' => route_to('embed-add', $podcast->id, $episode->id),
-                            ],
-                            [
-                                'type' => 'link',
-                                'title' => lang('Person.persons'),
-                                'uri' => route_to('episode-persons-manage', $podcast->id, $episode->id),
-                            ],
-                            [
-                                'type' => 'link',
-                                'title' => lang('VideoClip.list.title'),
-                                'uri' => route_to('video-clips-list', $episode->podcast->id, $episode->id),
-                            ],
-                            [
-                                'type' => 'link',
-                                'title' => lang('Soundbite.list.title'),
-                                'uri' => route_to('soundbites-list', $podcast->id, $episode->id),
-                            ],
-                            [
-                                'type' => 'separator',
-                            ],
-                            [
-                                'type' => 'link',
-                                'title' => lang('Episode.delete'),
-                                'uri' => route_to('episode-delete', $podcast->id, $episode->id),
-                                'class' => 'font-semibold text-red-600',
-                            ],
-                        ])) . '" />';
+                        '<DropdownMenu id="more-dropdown-' . $episode->id . '-menu" labelledby="more-dropdown-' . $episode->id . '" offsetY="-24" items="' . esc(json_encode($items)) . '" />';
                 },
             ],
         ],

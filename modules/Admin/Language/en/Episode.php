@@ -47,6 +47,24 @@ return [
         'createSuccess' => 'Episode has been successfully created!',
         'editSuccess' => 'Episode has been successfully updated!',
         'publishCancelSuccess' => 'Episode publication successfully cancelled!',
+        'unpublishBeforeDeleteTip' => 'You must unpublish the episode before deleting it.',
+        'deletePublishedEpisodeError' => 'Please unpublish the episode before deleting it.',
+        'deleteSuccess' => 'Episode successfully deleted!',
+        'deleteError' => 'Failed to delete episode {type, select,
+            transcript {transcript}
+            chapters {chapters}
+            image {cover}
+            audio {audio}
+            other {media}
+        }.',
+        'deleteFileError' => 'Failed to delete {type, select,
+            transcript {transcript}
+            chapters {chapters}
+            image {cover}
+            audio {audio}
+            other {media}
+        } file {file_path}. You must manually remove it from your disk.',
+        'sameSlugError' => 'An episode with the chosen slug already exists.',
     ],
     'form' => [
         'file_size_error' =>
@@ -147,7 +165,7 @@ return [
     ],
     'delete_form' => [
         'disclaimer' =>
-            "Deleting the episode will delete all the posts associated with it and remove it from the podcast's RSS feed.",
+            "Deleting the episode will delete all media files, comments, video clips and soundbites associated with it.",
         'understand' => 'I understand, I want to delete the episode',
         'submit' => 'Delete',
     ],

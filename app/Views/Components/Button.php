@@ -38,6 +38,7 @@ class Button extends Component
             'danger' => 'text-white bg-red-600 hover:bg-red-700',
             'warning' => 'text-black bg-yellow-500 hover:bg-yellow-600',
             'info' => 'text-white bg-blue-500 hover:bg-blue-600',
+            'disabled' => 'text-black bg-gray-300 cursor-not-allowed',
         ];
 
         $sizeClass = [

@@ -328,6 +328,18 @@ class Podcast extends Entity
     }
 
     /**
+     * Returns the podcast's episodes count
+     */
+    public function getEpisodesCount(): int|string
+    {
+        if ($this->id === null) {
+            throw new RuntimeException('Podcast must be created before getting number of episodes.');
+        }
+
+        return (new EpisodeModel())->getPodcastEpisodesCount($this->id);
+    }
+
+    /**
      * Returns the podcast's persons
      *
      * @return Person[]
