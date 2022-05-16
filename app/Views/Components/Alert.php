@@ -19,16 +19,24 @@ class Alert extends Component
 
     public function render(): string
     {
-        $variantClasses = [
-            'default' => 'text-gray-800 bg-gray-100 border-gray-300',
-            'success' => 'text-pine-900 bg-pine-100 border-pine-300',
-            'danger' => 'text-red-900 bg-red-100 border-red-300',
-            'warning' => 'text-yellow-900 bg-yellow-100 border-yellow-300',
+        $variants = [
+            'success' => [
+                'class' => 'text-pine-900 bg-pine-100 border-pine-300',
+                'glyph' => 'check',
+            ],
+            'danger' => [
+                'class' => 'text-red-900 bg-red-100 border-red-300',
+                'glyph' => 'close',
+            ],
+            'warning' => [
+                'class' => 'text-yellow-900 bg-yellow-100 border-yellow-300',
+                'glyph' => 'alert',
+            ],
         ];
 
-        $glyph = $this->glyph === null ? '' : '<Icon glyph="' . $this->glyph . '" class="flex-shrink-0 mr-2 text-lg" />';
+        $glyph = '<Icon glyph="' . ($this->glyph === null ? $variants[$this->variant]['glyph'] : $this->glyph) . '" class="flex-shrink-0 mr-2 text-lg" />';
         $title = $this->title === null ? '' : '<div class="font-semibold">' . $this->title . '</div>';
-        $class = 'inline-flex w-full p-2 text-sm border rounded ' . $variantClasses[$this->variant] . ' ' . $this->class;
+        $class = 'inline-flex w-full p-2 text-sm border rounded ' . $variants[$this->variant]['class'] . ' ' . $this->class;
 
         unset($this->attributes['slot']);
         unset($this->attributes['variant']);
