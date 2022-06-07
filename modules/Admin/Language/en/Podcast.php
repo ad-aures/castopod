@@ -26,6 +26,20 @@ return [
         'createSuccess' => 'Podcast has been successfully created!',
         'editSuccess' => 'Podcast has been successfully updated!',
         'importSuccess' => 'Podcast has been successfully imported!',
+        'deleteSuccess' => 'Podcast @{podcast_handle} successfully deleted!',
+        'deletePodcastMediaError' => 'Failed to delete podcast {type, select,
+            cover {cover}
+            banner {banner}
+            other {media}
+        }.',
+        'deleteEpisodeMediaError' => 'Failed to delete podcast episode {episode_slug} {type, select,
+            transcript {transcript}
+            chapters {chapters}
+            image {cover}
+            audio {audio}
+            other {media}
+        }.',
+        'deletePodcastMediaFolderError' => 'Failed to delete podcast media folder {folder_path}. You may manually remove it from your disk.',
     ],
     'form' => [
         'identity_section_title' => 'Podcast identity',
@@ -218,6 +232,12 @@ return [
         'film_interviews' => 'Film Interviews',
         'film_reviews' => 'Film Reviews',
         'tv_reviews' => 'TV Reviews',
+    ],
+    'delete_form' => [
+        'disclaimer' =>
+            "Deleting the podcast will delete all episodes, media files, posts and analytics associated with it. This action is irreversible, you will not be able to retrieve them afterwards.",
+        'understand' => 'I understand, I want the podcast to be permanently deleted',
+        'submit' => 'Delete',
     ],
     'by' => 'By {publisher}',
     'season' => 'Season {seasonNumber}',

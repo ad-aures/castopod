@@ -81,7 +81,6 @@ use RuntimeException;
  * @property int $updated_by
  * @property Time $created_at;
  * @property Time $updated_at;
- * @property Time|null $deleted_at;
  *
  * @property Episode[] $episodes
  * @property Person[] $persons

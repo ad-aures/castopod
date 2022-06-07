@@ -18,6 +18,10 @@ if (session()->has('message')): ?>
     </Alert>
 <?php endif; ?>
 
+<?php if (session()->has('warning')): ?>
+    <Alert variant="warning" class="mb-4"><?= esc(session('warning')) ?></Alert>
+<?php endif; ?>
+
 <?php if (session()->has('warnings')): ?>
     <Alert variant="warning" class="mb-4">
         <ul>

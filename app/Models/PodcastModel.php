@@ -76,11 +76,6 @@ class PodcastModel extends Model
     /**
      * @var bool
      */
-    protected $useSoftDeletes = true;
-
-    /**
-     * @var bool
-     */
     protected $useTimestamps = true;
 
     /**

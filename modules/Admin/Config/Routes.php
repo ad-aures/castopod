@@ -127,6 +127,9 @@ $routes->group(
                     'as' => 'podcast-delete',
                     'filter' => 'permission:podcasts-delete',
                 ]);
+                $routes->post('delete', 'PodcastController::attemptDelete/$1', [
+                    'filter' => 'permission:podcasts-delete',
+                ]);
 
                 $routes->group('persons', function ($routes): void {
                     $routes->get('/', 'PodcastPersonController/$1', [

@@ -244,9 +244,10 @@
     </Forms.Toggler>
 </Forms.Section>
 
-<Button variant="primary" type="submit" class="self-end"><?= lang('Podcast.form.submit_edit') ?></Button>
 </div>
 
 </form>
+
+<Button class="mt-8" variant="danger" uri="<?= route_to('podcast-delete', $podcast->id) ?>" iconLeft="delete-bin"><?= lang('Podcast.delete') ?></Button>
 
 <?= $this->endSection() ?>

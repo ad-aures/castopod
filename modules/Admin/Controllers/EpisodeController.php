@@ -739,8 +739,6 @@ class EpisodeController extends BaseController
                 ->with('error', lang('Episode.messages.deletePublishedEpisodeError'));
         }
 
-        $audio = $this->episode->audio;
-
         $db = db_connect();
 
         $db->transStart();
@@ -755,7 +753,7 @@ class EpisodeController extends BaseController
                 ->with('errors', $episodeModel->errors());
         }
 
-        $episodeMediaList = [$this->episode->transcript, $this->episode->chapters, $audio];
+        $episodeMediaList = [$this->episode->transcript, $this->episode->chapters, $this->episode->audio];
 
         //only delete episode cover if different from podcast's
         if ($this->episode->cover_id !== null) {
@@ -775,6 +773,8 @@ class EpisodeController extends BaseController
             }
         }
 
+        $db->transComplete();
+
         $warnings = [];
 
         //remove episode media files from disk
@@ -786,8 +786,6 @@ class EpisodeController extends BaseController
                 ]);
             }
         }
-
-        $db->transComplete();
 
         if ($warnings !== []) {
             return redirect()

@@ -21,6 +21,15 @@ use App\Models\PodcastModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
 use Config\Services;
+use Modules\Analytics\Models\AnalyticsPodcastByCountryModel;
+use Modules\Analytics\Models\AnalyticsPodcastByEpisodeModel;
+use Modules\Analytics\Models\AnalyticsPodcastByHourModel;
+use Modules\Analytics\Models\AnalyticsPodcastByPlayerModel;
+use Modules\Analytics\Models\AnalyticsPodcastByRegionModel;
+use Modules\Analytics\Models\AnalyticsPodcastModel;
+use Modules\Analytics\Models\AnalyticsWebsiteByBrowserModel;
+use Modules\Analytics\Models\AnalyticsWebsiteByEntryPageModel;
+use Modules\Analytics\Models\AnalyticsWebsiteByRefererModel;
 
 class PodcastController extends BaseController
 {
@@ -420,10 +429,166 @@ class PodcastController extends BaseController
         ]);
     }
 
-    public function delete(): RedirectResponse
+    public function delete(): string
     {
-        (new PodcastModel())->delete($this->podcast->id);
+        helper(['form']);
 
-        return redirect()->route('podcast-list');
+        $data = [
+            'podcast' => $this->podcast,
+        ];
+
+        replace_breadcrumb_params([
+            0 => $this->podcast->title,
+        ]);
+        return view('podcast/delete', $data);
+    }
+
+    public function attemptDelete(): RedirectResponse
+    {
+        $rules = [
+            'understand' => 'required',
+        ];
+
+        if (! $this->validate($rules)) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $this->validator->getErrors());
+        }
+
+        $db = db_connect();
+
+        $db->transStart();
+
+        //delete podcast episodes
+        $podcastEpisodes = (new EpisodeModel())->where('podcast_id', $this->podcast->id)
+            ->findAll();
+
+        foreach ($podcastEpisodes as $podcastEpisode) {
+            $episodeModel = new EpisodeModel();
+
+            if (! $episodeModel->delete($podcastEpisode->id)) {
+                $db->transRollback();
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->with('errors', $episodeModel->errors());
+            }
+
+            $episodeMediaList = [$podcastEpisode->transcript, $podcastEpisode->chapters, $podcastEpisode->audio];
+
+            //only delete episode cover if different from podcast's
+            if ($podcastEpisode->cover_id !== null) {
+                $episodeMediaList[] = $podcastEpisode->cover;
+            }
+
+            foreach ($episodeMediaList as $episodeMedia) {
+                if ($episodeMedia !== null && ! $episodeMedia->delete()) {
+                    $db->transRollback();
+                    return redirect()
+                        ->back()
+                        ->withInput()
+                        ->with('error', lang('Podcast.messages.deleteEpisodeMediaError', [
+                            'episode_slug' => $podcastEpisode->slug,
+                            'type' => $episodeMedia->type,
+                        ]));
+                }
+            }
+        }
+
+        //delete podcast
+        $podcastModel = new PodcastModel();
+
+        if (! $podcastModel->delete($this->podcast->id)) {
+            $db->transRollback();
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $podcastModel->errors());
+        }
+
+        //delete podcast media
+        $podcastMediaList = [
+            [
+                'type' => 'cover',
+                'file' => $this->podcast->cover,
+            ],
+            [
+                'type' => 'banner',
+                'file' => $this->podcast->banner,
+            ],
+        ];
+
+        foreach ($podcastMediaList as $podcastMedia) {
+            if ($podcastMedia['file'] !== null && ! $podcastMedia['file']->delete()) {
+                $db->transRollback();
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->with('error', lang('Podcast.messages.deletePodcastMediaError', [
+                        'type' => $podcastMedia['type'],
+                    ]));
+            }
+        }
+
+        //delete podcast actor
+        $actorModel = new ActorModel();
+
+        if (! $actorModel->delete($this->podcast->actor_id)) {
+            $db->transRollback();
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $actorModel->errors());
+        }
+
+        //delete podcast analytics
+        $analyticsModels = [
+            new AnalyticsPodcastModel(),
+            new AnalyticsPodcastByCountryModel(),
+            new AnalyticsPodcastByEpisodeModel(),
+            new AnalyticsPodcastByHourModel(),
+            new AnalyticsPodcastByPlayerModel(),
+            new AnalyticsPodcastByRegionModel(),
+            new AnalyticsWebsiteByBrowserModel(),
+            new AnalyticsWebsiteByEntryPageModel(),
+            new AnalyticsWebsiteByRefererModel(),
+        ];
+        foreach ($analyticsModels as $analyticsModel) {
+            if (! $analyticsModel->where([
+                'podcast_id' => $this->podcast->id,
+            ])->delete()) {
+                $db->transRollback();
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->with('errors', $analyticsModel->errors());
+            }
+        }
+
+        $db->transComplete();
+
+        //delete podcast media files and folder
+        $folder = 'podcasts/' . $this->podcast->handle;
+
+        $mediaRoot = config('App')
+            ->mediaRoot . '/' . $folder;
+
+        helper('filesystem');
+
+        if (! delete_files($mediaRoot) || ! rmdir($mediaRoot)) {
+            return redirect()->route('podcast-list')
+                ->with('message', lang('Podcast.messages.deleteSuccess', [
+                    'podcast_handle' => $this->podcast->handle,
+                ]))
+                ->with('warning', lang('Podcast.messages.deletePodcastMediaFolderError', [
+                    'folder_path' => $folder,
+                ]));
+        }
+
+        return redirect()->route('podcast-list')
+            ->with('message', lang('Podcast.messages.deleteSuccess', [
+                'podcast_handle' => $this->podcast->handle,
+            ]));
     }
 }
