@@ -131,7 +131,7 @@ class ClipModel extends Model
 
     public function getRunningVideoClipsCount(): int
     {
-        $result = $this
+        $result = $this->builder()
             ->select('COUNT(*) as `running_count`')
             ->where([
                 'type' => 'video',
@@ -146,6 +146,7 @@ class ClipModel extends Model
     public function doesVideoClipExist(VideoClip $videoClip): int | false
     {
         $result = $this->select('id')
+            ->builder()
             ->where([
                 'podcast_id' => $videoClip->podcast_id,
                 'episode_id' => $videoClip->episode_id,

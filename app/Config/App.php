@@ -293,7 +293,7 @@ class App extends BaseConfig
      * (empty string) means default SameSite attribute set by browsers (`Lax`)
      * will be set on cookies. If set to `None`, `$cookieSecure` must also be set.
      *
-     * @deprecated use Config\Cookie::$samesite property instead.
+     * @deprecated `Config\Cookie` $samesite property is used.
      */
     public string $cookieSameSite = 'Lax';
 

@@ -1,6 +1,6 @@
 <footer>
     <?php if (can_user_interact()): ?>
-        <form action="<?= route_to('episode-comment-attempt-like', esc(interact_as_actor()->username), esc($comment->episode->slug), $comment->id) ?>" method="POST" class="flex items-center gap-x-4">
+        <form action="<?= route_to('episode-comment-attempt-like', esc($comment->episode->podcast->handle), esc($comment->episode->slug), $comment->id) ?>" method="POST" class="flex items-center gap-x-4">
             <?= csrf_field() ?>
             <button type="submit" name="action" class="inline-flex items-center hover:underline group" title="<?= lang(
     'Comment.likes',

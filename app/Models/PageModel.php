@@ -38,7 +38,7 @@ class PageModel extends Model
     /**
      * @var bool
      */
-    protected $useSoftDeletes = true;
+    protected $useSoftDeletes = false;
 
     /**
      * @var bool

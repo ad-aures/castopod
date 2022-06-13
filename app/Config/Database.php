@@ -61,8 +61,9 @@ class Database extends Config
         'database' => ':memory:',
         'DBDriver' => 'SQLite3',
         'DBPrefix' => 'db_',
+        // Needed to ensure we're working correctly with prefixes live. DO NOT REMOVE FOR CI DEVS
         'pConnect' => false,
-        'DBDebug' => ENVIRONMENT !== 'production',
+        'DBDebug' => (ENVIRONMENT !== 'production'),
         'charset' => 'utf8',
         'DBCollat' => 'utf8_general_ci',
         'swapPre' => '',
@@ -71,6 +72,7 @@ class Database extends Config
         'strictOn' => false,
         'failover' => [],
         'port' => 3306,
+        'foreignKeys' => true,
     ];
 
     //--------------------------------------------------------------------

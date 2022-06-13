@@ -169,6 +169,7 @@ class Mimes
         'mj2' => ['image/jp2', 'video/mj2', 'image/jpx', 'image/jpm'],
         'mjp2' => ['image/jp2', 'video/mj2', 'image/jpx', 'image/jpm'],
         'png' => ['image/png', 'image/x-png'],
+        'webp' => 'image/webp',
         'tif' => 'image/tiff',
         'tiff' => 'image/tiff',
         'css' => ['text/css', 'text/plain'],

@@ -96,12 +96,13 @@ class EpisodeComment extends UuidEntity
             throw new RuntimeException('Comment must have an actor_id before getting actor.');
         }
 
-        if ($this->actor === null) {
+        if (! $this->actor instanceof Actor) {
             // @phpstan-ignore-next-line
             $this->actor = model(ActorModel::class, false)
                 ->getActorById($this->actor_id);
         }
 
+        // @phpstan-ignore-next-line
         return $this->actor;
     }
 
@@ -135,7 +136,7 @@ class EpisodeComment extends UuidEntity
             throw new RuntimeException('Comment is not a reply.');
         }
 
-        if ($this->reply_to_comment === null) {
+        if (! $this->reply_to_comment instanceof self) {
             $this->reply_to_comment = model(EpisodeCommentModel::class, false)
                 ->getCommentById($this->in_reply_to_id);
         }

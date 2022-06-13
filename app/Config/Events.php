@@ -39,9 +39,7 @@ Events::on('pre_system', function () {
             ob_end_flush();
         }
 
-        ob_start(function ($buffer) {
-            return $buffer;
-        });
+        ob_start(static fn ($buffer) => $buffer);
     }
 
     /*
@@ -132,11 +130,11 @@ Events::on('on_post_add', function ($post): void {
 
     if ($post->episode_id !== null) {
         if ($isReply) {
-            model(EpisodeModel::class, false)
+            model(EpisodeModel::class, false)->builder()
                 ->where('id', $post->episode_id)
                 ->increment('comments_count');
         } else {
-            model(EpisodeModel::class, false)
+            model(EpisodeModel::class, false)->builder()
                 ->where('id', $post->episode_id)
                 ->increment('posts_count');
         }
@@ -161,7 +159,7 @@ Events::on('on_post_remove', function ($post): void {
     }
 
     if ($episodeId = $post->episode_id) {
-        model(EpisodeModel::class, false)
+        model(EpisodeModel::class, false)->builder()
             ->where('id', $episodeId)
             ->decrement('posts_count');
     }

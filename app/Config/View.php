@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Config;
 
 use CodeIgniter\Config\View as BaseView;
+use CodeIgniter\View\ViewDecoratorInterface;
 
 class View extends BaseView
 {
@@ -36,4 +37,14 @@ class View extends BaseView
      * @var string[]
      */
     public $plugins = [];
+
+    /**
+     * View Decorators are class methods that will be run in sequence to have a chance to alter the generated output
+     * just prior to caching the results.
+     *
+     * All classes must implement CodeIgniter\View\ViewDecoratorInterface
+     *
+     * @var class-string<ViewDecoratorInterface>[]
+     */
+    public array $decorators = [];
 }

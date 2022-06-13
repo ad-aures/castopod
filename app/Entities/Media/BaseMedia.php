@@ -38,7 +38,7 @@ class BaseMedia extends Entity
     /**
      * @var string[]
      */
-    protected $dates = ['uploaded_at', 'updated_at', 'deleted_at'];
+    protected $dates = ['uploaded_at', 'updated_at'];
 
     /**
      * @var array<string, string>
@@ -112,6 +112,6 @@ class BaseMedia extends Entity
     public function delete(): bool|BaseResult
     {
         $mediaModel = new MediaModel();
-        return $mediaModel->delete($this->id, true);
+        return $mediaModel->delete($this->id);
     }
 }

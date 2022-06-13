@@ -8,12 +8,12 @@ test your application. Those details can be found in the documentation.
 ## Resources
 
 - [CodeIgniter 4 User Guide on Testing](https://codeigniter4.github.io/userguide/testing/index.html)
-- [PHPUnit docs](https://phpunit.readthedocs.io/en/8.5/index.html)
+- [PHPUnit docs](https://phpunit.de/documentation.html)
 
 ## Requirements
 
 It is recommended to use the latest version of PHPUnit. At the time of this
-writing we are running version 8.5.13. Support for this has been built into the
+writing we are running version 9.x. Support for this has been built into the
 **composer.json** file that ships with CodeIgniter and can easily be installed
 via [Composer](https://getcomposer.org/) if you don't already have it installed
 globally.
@@ -34,7 +34,8 @@ A number of the tests use a running database. In order to set up the database
 edit the details for the `tests` group in **app/Config/Database.php** or
 **phpunit.xml**. Make sure that you provide a database engine that is currently
 running on your machine. More details on a test database setup are in the
-_Docs>>Testing>>Testing Your Database_ section of the documentation.
+[Testing Your Database](https://codeigniter4.github.io/userguide/testing/database.html)
+section of the documentation.
 
 If you want to run the tests without using live database you can exclude
 @DatabaseLive group. Or make a copy of **phpunit.dist.xml** - call it
@@ -47,6 +48,10 @@ The entire test suite can be run by simply typing one command-line command from
 the main directory.
 
     > ./phpunit
+
+If you are using Windows, use the following command.
+
+    > vendor\bin\phpunit
 
 You can limit tests to those within a single test directory by specifying the
 directory name after phpunit.

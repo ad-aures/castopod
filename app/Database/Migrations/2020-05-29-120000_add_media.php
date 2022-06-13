@@ -67,10 +67,6 @@ class AddMedia extends Migration
             'updated_at' => [
                 'type' => 'DATETIME',
             ],
-            'deleted_at' => [
-                'type' => 'DATETIME',
-                'null' => true,
-            ],
         ]);
 
         $this->forge->addKey('id', true);

@@ -56,7 +56,7 @@ class LikeModel extends UuidModel
             'comment_id' => $comment->id,
         ]);
 
-        (new EpisodeCommentModel())
+        (new EpisodeCommentModel())->builder()
             ->where('id', service('uuid')->fromString($comment->id)->getBytes())
             ->increment('likes_count');
 
@@ -91,7 +91,7 @@ class LikeModel extends UuidModel
     {
         $this->db->transStart();
 
-        (new EpisodeCommentModel())
+        (new EpisodeCommentModel())->builder()
             ->where('id', service('uuid') ->fromString($comment->id) ->getBytes())
             ->decrement('likes_count');
 

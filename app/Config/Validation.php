@@ -6,13 +6,14 @@ namespace Config;
 
 use App\Validation\FileRules as AppFileRules;
 use App\Validation\Rules as AppRules;
+use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Validation\CreditCardRules;
 use CodeIgniter\Validation\FileRules;
 use CodeIgniter\Validation\FormatRules;
 use CodeIgniter\Validation\Rules;
 use Myth\Auth\Authentication\Passwords\ValidationRules as PasswordRules;
 
-class Validation
+class Validation extends BaseConfig
 {
     /**
      * Stores the classes that contain the rules that are available.

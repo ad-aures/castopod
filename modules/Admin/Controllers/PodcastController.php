@@ -513,11 +513,15 @@ class PodcastController extends BaseController
                 'type' => 'cover',
                 'file' => $this->podcast->cover,
             ],
+        ];
+
+        if ($this->podcast->banner_id !== null) {
+            $podcastMediaList[] =
             [
                 'type' => 'banner',
                 'file' => $this->podcast->banner,
-            ],
-        ];
+            ];
+        }
 
         foreach ($podcastMediaList as $podcastMedia) {
             if ($podcastMedia['file'] !== null && ! $podcastMedia['file']->delete()) {
@@ -563,6 +567,15 @@ class PodcastController extends BaseController
                     ->back()
                     ->withInput()
                     ->with('errors', $analyticsModel->errors());
+            }
+        }
+
+        if ($this->podcast->actor_id === interact_as_actor_id()) {
+            //set interact to the most recently created podcast actor
+            $mostRecentPodcast = (new PodcastModel())->orderBy('created_at', 'desc')
+                ->first();
+            if ($mostRecentPodcast !== null) {
+                set_interact_as_actor($mostRecentPodcast->actor_id);
             }
         }
 

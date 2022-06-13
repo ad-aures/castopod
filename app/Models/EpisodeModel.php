@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Entities\Episode;
+use CodeIgniter\Database\BaseResult;
 use CodeIgniter\I18n\Time;
 use CodeIgniter\Model;
 
@@ -264,7 +265,8 @@ class EpisodeModel extends Model
      */
     public function getSecondsToNextUnpublishedEpisode(int $podcastId): int | false
     {
-        $result = $this->select('TIMESTAMPDIFF(SECOND, UTC_TIMESTAMP(), `published_at`) as timestamp_diff')
+        $result = $this->builder()
+            ->select('TIMESTAMPDIFF(SECOND, UTC_TIMESTAMP(), `published_at`) as timestamp_diff')
             ->where([
                 'podcast_id' => $podcastId,
             ])
@@ -280,10 +282,11 @@ class EpisodeModel extends Model
 
     public function getCurrentSeasonNumber(int $podcastId): ?int
     {
-        $result = $this->select('MAX(season_number) as current_season_number')
+        $result = $this->builder()
+            ->select('MAX(season_number) as current_season_number')
             ->where([
                 'podcast_id' => $podcastId,
-                $this->deletedField => null,
+                'published_at IS NOT' => null,
             ])
             ->get()
             ->getResultArray();
@@ -293,11 +296,12 @@ class EpisodeModel extends Model
 
     public function getNextEpisodeNumber(int $podcastId, ?int $seasonNumber): int
     {
-        $result = $this->select('MAX(number) as next_episode_number')
+        $result = $this->builder()
+            ->select('MAX(number) as next_episode_number')
             ->where([
                 'podcast_id' => $podcastId,
                 'season_number' => $seasonNumber,
-                $this->deletedField => null,
+                'published_at IS NOT' => null,
             ])->get()
             ->getResultArray();
 
@@ -309,13 +313,13 @@ class EpisodeModel extends Model
      */
     public function getPodcastStats(int $podcastId): array
     {
-        $result = $this->select(
-            'COUNT(DISTINCT season_number) as number_of_seasons, COUNT(*) as number_of_episodes, MIN(published_at) as first_published_at'
-        )
+        $result = $this->builder()
+            ->select(
+                'COUNT(DISTINCT season_number) as number_of_seasons, COUNT(*) as number_of_episodes, MIN(published_at) as first_published_at'
+            )
             ->where([
                 'podcast_id' => $podcastId,
                 'published_at IS NOT' => null,
-                $this->deletedField => null,
             ])->get()
             ->getResultArray();
 
@@ -333,13 +337,16 @@ class EpisodeModel extends Model
 
     public function resetCommentsCount(): int | false
     {
-        $episodeCommentsCount = $this->select('episodes.id, COUNT(*) as `comments_count`')
+        $episodeCommentsBuilder = $this->builder();
+        $episodeCommentsCount = $episodeCommentsBuilder->select('episodes.id, COUNT(*) as `comments_count`')
             ->join('episode_comments', 'episodes.id = episode_comments.episode_id')
             ->where('in_reply_to_id', null)
             ->groupBy('episodes.id')
             ->getCompiledSelect();
 
-        $episodePostsRepliesCount = $this
+        $postModel = new PostModel();
+        $episodePostsRepliesBuilder = $postModel->builder();
+        $episodePostsRepliesCount = $episodePostsRepliesBuilder
             ->select('episodes.id, COUNT(*) as `comments_count`')
             ->join(
                 config('Fediverse')
@@ -350,6 +357,7 @@ class EpisodeModel extends Model
             ->groupBy('episodes.id')
             ->getCompiledSelect();
 
+        /** @var BaseResult $query */
         $query = $this->db->query(
             'SELECT `id`, SUM(`comments_count`) as `comments_count` FROM (' . $episodeCommentsCount . ' UNION ALL ' . $episodePostsRepliesCount . ') x GROUP BY `id`'
         );
@@ -365,7 +373,8 @@ class EpisodeModel extends Model
 
     public function resetPostsCount(): int | false
     {
-        $episodePostsCount = $this->select('episodes.id, COUNT(*) as `posts_count`')
+        $episodePostsCount = $this->builder()
+            ->select('episodes.id, COUNT(*) as `posts_count`')
             ->join(
                 config('Fediverse')
                     ->tablesPrefix . 'posts',

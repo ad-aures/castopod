@@ -19,8 +19,5 @@ parameters:
         - themes/*
     ignoreErrors:
         - '#Cannot access property [\$a-z_]+ on ((array\|)?object)#'
-        - '#^Call to an undefined method CodeIgniter\\Database\\BaseBuilder#'
         - '#^Call to an undefined method CodeIgniter\\Database\\ConnectionInterface#'
-        - '#^Call to an undefined method CodeIgniter\\Model#'
         - '#^Access to an undefined property App\\Entities\\Media\\Image#'
-        - '#^Access to an undefined property CodeIgniter\\Database\\BaseBuilder#'

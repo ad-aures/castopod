@@ -36,7 +36,7 @@ class MediaModel extends Model
     /**
      * @var bool
      */
-    protected $useSoftDeletes = true;
+    protected $useSoftDeletes = false;
 
     /**
      * @var bool
@@ -121,6 +121,7 @@ class MediaModel extends Model
                 'id' => $mediaId,
             ]);
 
+            /** @var object $result */
             $result = $builder->first();
             $mediaClass = $this->returnType;
             $found = new $mediaClass($result->toArray(false, true));
@@ -176,7 +177,7 @@ class MediaModel extends Model
     {
         $media->deleteFile();
 
-        return $this->delete($media->id, true);
+        return $this->delete($media->id);
     }
 
     /**

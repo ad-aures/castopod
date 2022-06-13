@@ -13,6 +13,7 @@ namespace App\Models;
 use App\Entities\EpisodeComment;
 use App\Libraries\CommentObject;
 use CodeIgniter\Database\BaseBuilder;
+use CodeIgniter\Database\BaseResult;
 use Michalsn\Uuid\UuidModel;
 use Modules\Fediverse\Activities\CreateActivity;
 use Modules\Fediverse\Models\ActivityModel;
@@ -82,11 +83,11 @@ class EpisodeCommentModel extends UuidModel
         }
 
         if ($comment->in_reply_to_id === null) {
-            (new EpisodeModel())
+            (new EpisodeModel())->builder()
                 ->where('id', $comment->episode_id)
                 ->increment('comments_count');
         } else {
-            (new self())
+            (new self())->builder()
                 ->where('id', service('uuid')->fromString($comment->in_reply_to_id)->getBytes())
                 ->increment('replies_count');
         }
@@ -146,17 +147,19 @@ class EpisodeCommentModel extends UuidModel
     public function getEpisodeComments(int $episodeId): array
     {
         // TODO: merge with replies from posts linked to episode linked
-        $episodeComments = $this->select('*, 0 as is_from_post')
+        $episodeCommentsBuilder = $this->builder();
+        $episodeComments = $episodeCommentsBuilder->select('*, 0 as is_from_post')
             ->where([
                 'episode_id' => $episodeId,
                 'in_reply_to_id' => null,
             ])
             ->getCompiledSelect();
 
-        $episodePostsReplies = $this->db->table(config('Fediverse')->tablesPrefix . 'posts')
-            ->select(
-                'id, uri, episode_id, actor_id, in_reply_to_id, message, message_html, favourites_count as likes_count, replies_count, published_at as created_at, created_by, 1 as is_from_post'
-            )
+        $postModel = new PostModel();
+        $episodePostsRepliesBuilder = $postModel->builder();
+        $episodePostsReplies = $episodePostsRepliesBuilder->select(
+            'id, uri, episode_id, actor_id, in_reply_to_id, message, message_html, favourites_count as likes_count, replies_count, published_at as created_at, created_by, 1 as is_from_post'
+        )
             ->whereIn('in_reply_to_id', function (BaseBuilder $builder) use (&$episodeId): BaseBuilder {
                 return $builder->select('id')
                     ->from(config('Fediverse')->tablesPrefix . 'posts')
@@ -168,6 +171,7 @@ class EpisodeCommentModel extends UuidModel
             ->where('`created_at` <= UTC_TIMESTAMP()', null, false)
             ->getCompiledSelect();
 
+        /** @var BaseResult $allEpisodeComments */
         $allEpisodeComments = $this->db->query(
             $episodeComments . ' UNION ' . $episodePostsReplies . ' ORDER BY created_at ASC'
         );
@@ -211,7 +215,8 @@ class EpisodeCommentModel extends UuidModel
 
     public function resetRepliesCount(): int | false
     {
-        $commentsRepliesCount = $this->select('episode_comments.id, COUNT(*) as `replies_count`')
+        $commentsRepliesCount = $this->builder()
+            ->select('episode_comments.id, COUNT(*) as `replies_count`')
             ->join('episode_comments as c2', 'episode_comments.id = c2.in_reply_to_id')
             ->groupBy('episode_comments.id')
             ->get()

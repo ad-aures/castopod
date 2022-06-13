@@ -44,13 +44,13 @@
     <?php endif; ?>
 
     <nav class="flex items-center justify-between h-10 col-start-2 text-white bg-header">
-        <a href="<?= route_to('podcast-episodes', esc($podcast->handle)) ?>" class="flex items-center flex-1 h-full min-w-0 px-2 gap-x-2 focus:ring-accent focus:ring-inset" title="<?= lang('Episode.back_to_episodes', [
+        <a href="<?= route_to('podcast-episodes', esc($podcast->handle)) ?>" class="flex items-center h-full min-w-0 px-2 gap-x-2 focus:ring-accent focus:ring-inset" title="<?= lang('Episode.back_to_episodes', [
             'podcast' => esc($podcast->title),
         ]) ?>">
-            <?= icon('arrow-left', 'text-lg') ?>
-            <div class="flex items-center flex-1 min-w-0 gap-x-2">
+            <?= icon('arrow-left', 'text-lg flex-shrink-0') ?>
+            <div class="flex items-center min-w-0 gap-x-2">
                 <img class="w-8 h-8 rounded-full" src="<?= $episode->podcast->cover->tiny_url ?>" alt="<?= esc($episode->podcast->title) ?>" loading="lazy" />
-                <div class="flex flex-col flex-1 overflow-hidden">
+                <div class="flex flex-col overflow-hidden">
                     <span class="text-sm font-semibold leading-none truncate"><?= esc($episode->podcast->title) ?></span>
                     <span class="text-xs"><?= lang('Podcast.followers', [
                         'numberOfFollowers' => $podcast->actor->followers_count,

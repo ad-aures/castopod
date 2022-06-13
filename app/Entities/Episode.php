@@ -136,7 +136,7 @@ class Episode extends Entity
     /**
      * @var string[]
      */
-    protected $dates = ['published_at', 'created_at', 'updated_at', 'deleted_at'];
+    protected $dates = ['published_at', 'created_at', 'updated_at'];
 
     /**
      * @var array<string, string>

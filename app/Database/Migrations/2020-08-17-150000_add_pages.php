@@ -45,10 +45,6 @@ class AddPages extends Migration
             'updated_at' => [
                 'type' => 'DATETIME',
             ],
-            'deleted_at' => [
-                'type' => 'DATETIME',
-                'null' => true,
-            ],
         ]);
         $this->forge->addPrimaryKey('id');
         $this->forge->createTable('pages');

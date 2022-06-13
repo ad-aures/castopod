@@ -32,7 +32,7 @@ $error_id = uniqid('error', true); ?>
 
 	<!-- Source -->
 	<div class="container">
-		<p><b><?= esc(static::cleanPath($file, $line)) ?></b> at line <b><?= esc($line) ?></b></p>
+		<p><b><?= esc(clean_path($file, $line)) ?></b> at line <b><?= esc($line) ?></b></p>
 
 		<?php if (is_file($file)) : ?>
 			<div class="source">
@@ -66,9 +66,9 @@ $error_id = uniqid('error', true); ?>
 							<?php if (isset($row['file']) && is_file($row['file'])) :?>
 								<?php
                                 if (isset($row['function']) && in_array($row['function'], ['include', 'include_once', 'require', 'require_once'], true)) {
-                                    echo esc($row['function'] . ' ' . static::cleanPath($row['file']));
+                                    echo esc($row['function'] . ' ' . clean_path($row['file']));
                                 } else {
-                                    echo esc(static::cleanPath($row['file']) . ' : ' . $row['line']);
+                                    echo esc(clean_path($row['file']) . ' : ' . $row['line']);
                                 }
                                 ?>
 							<?php else : ?>
@@ -201,7 +201,7 @@ $error_id = uniqid('error', true); ?>
 						</tr>
 						<tr>
 							<td>HTTP Method</td>
-							<td><?= esc($request->getMethod(true)) ?></td>
+							<td><?= esc(strtoupper($request->getMethod())) ?></td>
 						</tr>
 						<tr>
 							<td>IP Address</td>
@@ -316,7 +316,7 @@ $error_id = uniqid('error', true); ?>
 				<table>
 					<tr>
 						<td style="width: 15em">Response Status</td>
-						<td><?= esc($response->getStatusCode() . ' - ' . $response->getReason()) ?></td>
+						<td><?= esc($response->getStatusCode() . ' - ' . $response->getReasonPhrase()) ?></td>
 					</tr>
 				</table>
 
@@ -352,7 +352,7 @@ $error_id = uniqid('error', true); ?>
 
 				<ol>
 				<?php foreach ($files as $file) :?>
-					<li><?= esc(static::cleanPath($file)) ?></li>
+					<li><?= esc(clean_path($file)) ?></li>
 				<?php endforeach ?>
 				</ol>
 			</div>

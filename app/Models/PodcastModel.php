@@ -175,9 +175,10 @@ class PodcastModel extends Model
 
             $fediverseTablePrefix = $prefix . config('Fediverse')
                 ->tablesPrefix;
-            $this->select(
-                'podcasts.*, MAX(' . $fediverseTablePrefix . 'posts.published_at' . ') as max_published_at'
-            )
+            $this->builder()
+                ->select(
+                    'podcasts.*, MAX(' . $fediverseTablePrefix . 'posts.published_at' . ') as max_published_at'
+                )
                 ->join(
                     $fediverseTablePrefix . 'posts',
                     $fediverseTablePrefix . 'posts.actor_id = podcasts.actor_id',
@@ -302,11 +303,12 @@ class PodcastModel extends Model
         if (! ($found = cache($cacheName))) {
             $episodeModel = new EpisodeModel();
             $found = $episodeModel
+                ->builder()
                 ->select('YEAR(published_at) as year, count(*) as number_of_episodes')
                 ->where([
                     'podcast_id' => $podcastId,
                     'season_number' => null,
-                    $episodeModel->deletedField => null,
+                    'published_at IS NOT' => null,
                 ])
                 ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
                 ->groupBy('year')
@@ -338,11 +340,12 @@ class PodcastModel extends Model
         if (! ($found = cache($cacheName))) {
             $episodeModel = new EpisodeModel();
             $found = $episodeModel
+                ->builder()
                 ->select('season_number, count(*) as number_of_episodes')
                 ->where([
                     'podcast_id' => $podcastId,
                     'season_number is not' => null,
-                    $episodeModel->deletedField => null,
+                    'published_at IS NOT' => null,
                 ])
                 ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
                 ->groupBy('season_number')

@@ -110,7 +110,7 @@ class PersonModel extends Model
             $cacheName = "podcast#{$podcastId}_episode#{$episodeId}_person#{$personId}_roles";
 
             if (! ($found = cache($cacheName))) {
-                $found = $this
+                $found = $this->builder()
                     ->select('episodes_persons.person_group as group, episodes_persons.person_role as role')
                     ->join('episodes_persons', 'persons.id = episodes_persons.person_id')
                     ->where('persons.id', $personId)
@@ -122,7 +122,7 @@ class PersonModel extends Model
             $cacheName = "podcast#{$podcastId}_person#{$personId}_roles";
 
             if (! ($found = cache($cacheName))) {
-                $found = $this
+                $found = $this->builder()
                     ->select('podcasts_persons.person_group as group, podcasts_persons.person_role as role')
                     ->join('podcasts_persons', 'persons.id = podcasts_persons.person_id')
                     ->where('persons.id', $personId)
@@ -210,15 +210,15 @@ class PersonModel extends Model
     {
         $cacheName = "podcast#{$podcastId}_episode#{$episodeId}_persons";
         if (! ($found = cache($cacheName))) {
-            $found = $this
+            $this->builder()
                 ->select(
                     'persons.*, episodes_persons.podcast_id as podcast_id, episodes_persons.episode_id as episode_id'
                 )
                 ->distinct()
                 ->join('episodes_persons', 'persons.id = episodes_persons.person_id')
                 ->where('episodes_persons.episode_id', $episodeId)
-                ->orderby('persons.full_name')
-                ->findAll();
+                ->orderby('persons.full_name');
+            $found = $this->findAll();
 
             cache()
                 ->save($cacheName, $found, DECADE);
@@ -234,13 +234,13 @@ class PersonModel extends Model
     {
         $cacheName = "podcast#{$podcastId}_persons";
         if (! ($found = cache($cacheName))) {
-            $found = $this
+            $this->builder()
                 ->select('persons.*, podcasts_persons.podcast_id as podcast_id')
                 ->distinct()
                 ->join('podcasts_persons', 'persons.id=podcasts_persons.person_id')
                 ->where('podcasts_persons.podcast_id', $podcastId)
-                ->orderby('persons.full_name')
-                ->findAll();
+                ->orderby('persons.full_name');
+            $found = $this->findAll();
 
             cache()
                 ->save($cacheName, $found, DECADE);

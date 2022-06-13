@@ -197,12 +197,13 @@ class Podcast extends Entity
             throw new RuntimeException('Podcast must have an actor_id before getting actor.');
         }
 
-        if ($this->actor === null) {
+        if (! $this->actor instanceof Actor) {
             // @phpstan-ignore-next-line
             $this->actor = model(ActorModel::class, false)
                 ->getActorById($this->actor_id);
         }
 
+        // @phpstan-ignore-next-line
         return $this->actor;
     }
 
