@@ -1,3 +1,23 @@
+# [1.0.0-beta.15](https://code.castopod.org/adaures/castopod/compare/v1.0.0-beta.14...v1.0.0-beta.15) (2022-06-14)
+
+### Bug Fixes
+
+- replace deletedField with published_at for episodes
+  ([14d7d07](https://code.castopod.org/adaures/castopod/commit/14d7d078225cdc8980759273a5dc4163d9f84b06))
+
+### Features
+
+- add default icons to Alert component
+  ([0d98001](https://code.castopod.org/adaures/castopod/commit/0d9800123b135e4fa1a2acd14a5e039c12174333))
+- add permanent delete feature for podcasts 🎉
+  ([dbb4030](https://code.castopod.org/adaures/castopod/commit/dbb4030da49f9ea1f61759fb7c66d71fc29ea4a1)),
+  closes [#89](https://code.castopod.org/adaures/castopod/issues/89)
+- apply colour theme to embed player
+  ([9548337](https://code.castopod.org/adaures/castopod/commit/9548337a7c49879e8b58c2dfece46e3cfc9517eb)),
+  closes [#201](https://code.castopod.org/adaures/castopod/issues/201)
+- **episodes:** replace soft delete with permanent delete
+  ([eb9ff52](https://code.castopod.org/adaures/castopod/commit/eb9ff522c25af8ceb2ed08614b581757ee791d42))
+
 # [1.0.0-beta.14](https://code.castopod.org/adaures/castopod/compare/v1.0.0-beta.13...v1.0.0-beta.14) (2022-04-23)
 
 ### Bug Fixes
