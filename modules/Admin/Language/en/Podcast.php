@@ -40,20 +40,20 @@ return [
             other {media}
         }.',
         'deletePodcastMediaFolderError' => 'Failed to delete podcast media folder {folder_path}. You may manually remove it from your disk.',
-        'podcastFeedUpdateSuccess' => 'Successful update : {number_of_new_episodes, plural,
+        'podcastFeedUpdateSuccess' => 'Successful update: {number_of_new_episodes, plural,
             one {# episode was}
             other {# episodes were}
         } added to the podcast!',
-        'podcastFeedUpToDate' => 'This podcast is up to date.',
-        'podcastNotImported' => 'This podcast could not be updated as it was not imported.',
+        'podcastFeedUpToDate' => 'Podcast is already up to date.',
+        'podcastNotImported' => 'Podcast could not be updated as it was not imported.',
     ],
     'form' => [
         'identity_section_title' => 'Podcast identity',
         'identity_section_subtitle' => 'These fields allow you to get noticed.',
         'cover' => 'Podcast cover',
-        'cover_size_hint' => 'Cover must be squared with at least 1400px wide and tall.',
+        'cover_size_hint' => 'Cover must be squared and at least 1400px wide and tall.',
         'banner' => 'Podcast banner',
-        'banner_size_hint' => 'Banner must have a 3:1 ratio with at least 1500px wide.',
+        'banner_size_hint' => 'Banner must have a 3:1 ratio and be at least 1500px wide.',
         'banner_delete' => 'Delete podcast banner',
         'title' => 'Title',
         'handle' => 'Handle',
