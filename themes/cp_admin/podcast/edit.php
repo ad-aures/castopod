@@ -229,6 +229,14 @@
     value="<?= esc($podcast->new_feed_url) ?>"
 />
 
+<?php if ($podcast->imported_feed_url !== null): ?>
+    <div class="flex flex-col">
+        <Forms.Label for="old_feed_url"><?= lang('Podcast.form.old_feed_url') ?></Forms.Label>
+        <Forms.Input name="old_feed_url" readonly="true" value="<?= esc($podcast->imported_feed_url) ?>" />
+    </div>
+    <Button variant="primary" class="self-end" uri="<?= route_to('podcast-update-feed', $podcast->id) ?>" iconLeft="refresh" data-tooltip="bottom" title="<?= lang('Podcast.form.update_feed_tip') ?>"><?= lang('Podcast.form.update_feed') ?></Button>
+<?php endif ?>  
+    
 </Forms.Section>
 
 <Forms.Section

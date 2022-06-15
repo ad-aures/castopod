@@ -130,6 +130,10 @@ $routes->group(
                 $routes->post('delete', 'PodcastController::attemptDelete/$1', [
                     'filter' => 'permission:podcasts-delete',
                 ]);
+                $routes->get('update', 'PodcastImportController::updateImport/$1', [
+                    'as' => 'podcast-update-feed',
+                    'filter' => 'permission:podcasts-import',
+                ]);
 
                 $routes->group('persons', function ($routes): void {
                     $routes->get('/', 'PodcastPersonController/$1', [

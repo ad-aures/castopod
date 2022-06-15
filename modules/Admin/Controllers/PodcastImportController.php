@@ -460,4 +460,228 @@ class PodcastImportController extends BaseController
 
         return redirect()->route('podcast-view', [$newPodcastId]);
     }
+
+    public function updateImport(): RedirectResponse
+    {
+        if ($this->podcast->imported_feed_url === null) {
+            return redirect()
+                ->back()
+                ->with('error', lang('Podcast.messages.podcastNotImported'));
+        }
+
+        try {
+            ini_set('user_agent', 'Castopod/' . CP_VERSION);
+            $feed = simplexml_load_file($this->podcast->imported_feed_url);
+        } catch (ErrorException $errorException) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', [
+                    $errorException->getMessage() .
+                    ': <a href="' .
+                    $this->podcast->imported_feed_url .
+                    '" rel="noreferrer noopener" target="_blank">' .
+                    $this->podcast->imported_feed_url .
+                    ' ⎋</a>',
+                ]);
+        }
+
+        $nsPodcast = $feed->channel[0]->children(
+            'https://github.com/Podcastindex-org/podcast-namespace/blob/main/docs/1.0.md',
+        );
+
+        if ((string) $nsPodcast->locked === 'yes') {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', [lang('PodcastImport.lock_import')]);
+        }
+
+        $itemsCount = $feed->channel[0]->item->count();
+
+        $lastItem = $itemsCount;
+
+        $lastEpisode = (new EpisodeModel())->where('podcast_id', $this->podcast->id)
+            ->orderBy('created_at', 'desc')
+            ->first();
+
+        if ($lastEpisode !== null) {
+            for ($itemNumber = 0; $itemNumber < $itemsCount; ++$itemNumber) {
+                $item = $feed->channel[0]->item[$itemNumber];
+
+                if (property_exists(
+                    $item,
+                    'guid'
+                ) && $item->guid !== null && $lastEpisode->guid === (string) $item->guid) {
+                    $lastItem = $itemNumber;
+                    break;
+                }
+            }
+        }
+
+        if ($lastItem === 0) {
+            return redirect()
+                ->back()
+                ->with('message', lang('Podcast.messages.podcastFeedUpToDate'));
+        }
+
+        helper(['media', 'misc']);
+
+        $converter = new HtmlConverter();
+
+        $slugs = [];
+
+        $db = db_connect();
+        $db->transStart();
+
+        for ($itemNumber = 1; $itemNumber <= $lastItem; ++$itemNumber) {
+            $item = $feed->channel[0]->item[$lastItem - $itemNumber];
+
+            $nsItunes = $item->children('http://www.itunes.com/dtds/podcast-1.0.dtd');
+            $nsPodcast = $item->children(
+                'https://github.com/Podcastindex-org/podcast-namespace/blob/main/docs/1.0.md',
+            );
+
+            $textToSlugify = (string) $item->title;
+            $slug = slugify($textToSlugify, 120);
+            if (in_array($slug, $slugs, true) || (new EpisodeModel())->where([
+                'slug' => $slug,
+                'podcast_id' => $this->podcast->id,
+            ])->first()) {
+                $slugNumber = 2;
+                while (in_array($slug . '-' . $slugNumber, $slugs, true) || (new EpisodeModel())->where([
+                    'slug' => $slug . '-' . $slugNumber,
+                    'podcast_id' => $this->podcast->id,
+                ])->first()) {
+                    ++$slugNumber;
+                }
+
+                $slug = $slug . '-' . $slugNumber;
+            }
+
+            $slugs[] = $slug;
+
+            $itemDescriptionHtml = (string) $item->description;
+
+            if (
+                property_exists($nsItunes, 'image') && $nsItunes->image !== null &&
+                $nsItunes->image->attributes()['href'] !== null
+            ) {
+                $episodeCover = download_file((string) $nsItunes->image->attributes()['href']);
+            } else {
+                $episodeCover = null;
+            }
+
+            $location = null;
+            if (property_exists($nsPodcast, 'location') && $nsPodcast->location !== null) {
+                $location = new Location(
+                    (string) $nsPodcast->location,
+                    $nsPodcast->location->attributes()['geo'] === null ? null : (string) $nsPodcast->location->attributes()['geo'],
+                    $nsPodcast->location->attributes()['osm'] === null ? null : (string) $nsPodcast->location->attributes()['osm'],
+                );
+            }
+
+            $newEpisode = new Episode([
+                'podcast_id' => $this->podcast->id,
+                'title' => $item->title,
+                'slug' => $slug,
+                'guid' => $item->guid ?? null,
+                'audio' => download_file(
+                    (string) $item->enclosure->attributes()['url'],
+                    (string) $item->enclosure->attributes()['type']
+                ),
+                'description_markdown' => $converter->convert($itemDescriptionHtml),
+                'description_html' => $itemDescriptionHtml,
+                'cover' => $episodeCover,
+                'parental_advisory' =>
+                property_exists($nsItunes, 'explicit') && $nsItunes->explicit !== null
+                ? (in_array((string) $nsItunes->explicit, ['yes', 'true'], true)
+                ? 'explicit'
+                : (in_array((string) $nsItunes->explicit, ['no', 'false'], true)
+                ? 'clean'
+                : null))
+                : null,
+                'number' => ((string) $nsItunes->episode === '' ? null : (int) $nsItunes->episode),
+                'season_number' => ((string) $nsItunes->season === '' ? null : (int) $nsItunes->season),
+                'type' => property_exists($nsItunes, 'episodeType') && $nsItunes->episodeType !== null
+                ? (string) $nsItunes->episodeType
+                : 'full',
+                'is_blocked' => property_exists(
+                    $nsItunes,
+                    'block'
+                ) && $nsItunes->block !== null && (string) $nsItunes->block === 'yes',
+                'location' => $location,
+                'created_by' => user_id(),
+                'updated_by' => user_id(),
+                'published_at' => strtotime((string) $item->pubDate),
+            ]);
+
+            $episodeModel = new EpisodeModel();
+
+            if (! ($newEpisodeId = $episodeModel->insert($newEpisode, true))) {
+                // FIXME: What shall we do?
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->with('errors', $episodeModel->errors());
+            }
+
+            foreach ($nsPodcast->person as $episodePerson) {
+                $fullName = (string) $episodePerson;
+                $personModel = new PersonModel();
+                $newPersonId = null;
+                if (($newPerson = $personModel->getPerson($fullName)) !== null) {
+                    $newPersonId = $newPerson->id;
+                } else {
+                    $newPerson = new Person([
+                        'full_name' => $fullName,
+                        'unique_name' => slugify($fullName),
+                        'information_url' => $episodePerson->attributes()['href'],
+                        'avatar' => download_file((string) $episodePerson->attributes()['img']),
+                        'created_by' => user_id(),
+                        'updated_by' => user_id(),
+                    ]);
+
+                    if (! ($newPersonId = $personModel->insert($newPerson))) {
+                        return redirect()
+                            ->back()
+                            ->withInput()
+                            ->with('errors', $personModel->errors());
+                    }
+                }
+
+                // TODO: these checks should be in the taxonomy as default values
+                $episodePersonGroup = $episodePerson->attributes()['group'] ?? 'Cast';
+                $episodePersonRole = $episodePerson->attributes()['role'] ?? 'Host';
+
+                $personGroup = ReversedTaxonomy::$taxonomy[(string) $episodePersonGroup];
+
+                $personGroupSlug = $personGroup['slug'];
+                $personRoleSlug = $personGroup['roles'][(string) $episodePersonRole]['slug'];
+
+                $episodePersonModel = new PersonModel();
+                if (! $episodePersonModel->addEpisodePerson(
+                    $this->podcast->id,
+                    $newEpisodeId,
+                    $newPersonId,
+                    $personGroupSlug,
+                    $personRoleSlug
+                )) {
+                    return redirect()
+                        ->back()
+                        ->withInput()
+                        ->with('errors', $episodePersonModel->errors());
+                }
+            }
+        }
+
+        $db->transComplete();
+
+        return redirect()->route('podcast-view', [$this->podcast->id])->with(
+            'message',
+            lang('Podcast.messages.podcastFeedUpdateSuccess', [
+                'number_of_new_episodes' => $lastItem,
+            ])
+        );
+    }
 }

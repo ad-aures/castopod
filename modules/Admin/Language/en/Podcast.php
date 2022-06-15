@@ -40,6 +40,12 @@ return [
             other {media}
         }.',
         'deletePodcastMediaFolderError' => 'Failed to delete podcast media folder {folder_path}. You may manually remove it from your disk.',
+        'podcastFeedUpdateSuccess' => 'Successful update : {number_of_new_episodes, plural,
+            one {# episode was}
+            other {# episodes were}
+        } added to the podcast!',
+        'podcastFeedUpToDate' => 'This podcast is up to date.',
+        'podcastNotImported' => 'This podcast could not be updated as it was not imported.',
     ],
     'form' => [
         'identity_section_title' => 'Podcast identity',
@@ -104,6 +110,9 @@ return [
         'custom_rss_hint' => 'This will be injected within the ❬channel❭ tag.',
         'new_feed_url' => 'New feed URL',
         'new_feed_url_hint' => 'Use this field when you move to another domain or podcast hosting platform. By default, the value is set to the current RSS URL if the podcast is imported.',
+        'old_feed_url' => 'Old feed URL',
+        'update_feed' => 'Update feed',
+        'update_feed_tip' => 'Import this podcast\'s latest episodes',
         'partnership' => 'Partnership',
         'partner_id' => 'ID',
         'partner_link_url' => 'Link URL',
