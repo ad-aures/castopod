@@ -7,7 +7,7 @@
   "license": "AGPL-3.0-or-later",
   "require": {
     "php": "^8.0",
-    "codeigniter4/framework": "^4.2.0",
+    "codeigniter4/framework": "^4.2.1",
     "james-heinrich/getid3": "^2.0.x-dev",
     "whichbrowser/parser": "^v2.1.1",
     "geoip2/geoip2": "^v2.12.2",
