@@ -63,14 +63,25 @@ class EpisodeController extends BaseController
 
     public function list(): string
     {
-        $episodes = (new EpisodeModel())
-            ->where('podcast_id', $this->podcast->id)
-            ->orderBy('created_at', 'desc');
+        /** @var ?string $query */
+        $query = $this->request->getGet('q');
 
+        if ($query !== null && $query !== '') {
+            $episodes = (new EpisodeModel())
+                ->where('podcast_id', $this->podcast->id)
+                ->where("MATCH (title, description_markdown) AGAINST ('{$query}')");
+        } else {
+            $episodes = (new EpisodeModel())
+                ->where('podcast_id', $this->podcast->id)
+                ->orderBy('created_at', 'desc');
+        }
+
+        helper('form');
         $data = [
             'podcast' => $this->podcast,
             'episodes' => $episodes->paginate(10),
             'pager' => $episodes->pager,
+            'query' => $query,
         ];
 
         replace_breadcrumb_params([

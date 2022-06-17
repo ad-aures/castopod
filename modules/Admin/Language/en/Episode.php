@@ -38,6 +38,15 @@ return [
         'not_published' => 'Not published',
     ],
     'list' => [
+        'search' => [
+            'placeholder' => 'Search for an episode',
+            'clear' => 'Clear search',
+            'submit' => 'Search',
+        ],
+        'number_of_episodes' => '{numberOfEpisodes, plural,
+            one {# episode}
+            other {# episodes}
+        }',
         'episode' => 'Episode',
         'visibility' => 'Visibility',
         'comments' => 'Comments',

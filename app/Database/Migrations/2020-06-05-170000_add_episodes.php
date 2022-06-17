@@ -158,6 +158,14 @@ class AddEpisodes extends Migration
         $this->forge->addForeignKey('created_by', 'users', 'id');
         $this->forge->addForeignKey('updated_by', 'users', 'id');
         $this->forge->createTable('episodes');
+
+        // Add Full-Text Search index on title and description_markdown
+        $prefix = $this->db->getPrefix();
+        $createQuery = <<<CODE_SAMPLE
+            ALTER TABLE {$prefix}episodes
+            ADD FULLTEXT(title, description_markdown);
+        CODE_SAMPLE;
+        $this->db->query($createQuery);
     }
 
     public function down(): void

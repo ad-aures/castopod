@@ -33,7 +33,7 @@ class Button extends Component
         $variantClass = [
             'default' => 'text-black bg-gray-300 hover:bg-gray-400',
             'primary' => 'text-accent-contrast bg-accent-base hover:bg-accent-hover',
-            'secondary' => 'border-2 border-accent-base text-accent-base bg-transparent hover:border-accent-hover hover:text-accent-hover',
+            'secondary' => 'border-2 border-accent-base text-accent-base bg-white hover:border-accent-hover hover:text-accent-hover',
             'success' => 'text-white bg-pine-500 hover:bg-pine-800',
             'danger' => 'text-white bg-red-600 hover:bg-red-700',
             'warning' => 'text-black bg-yellow-500 hover:bg-yellow-600',
