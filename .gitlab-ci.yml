@@ -68,10 +68,10 @@ tests:
   services:
     - mariadb
   variables:
-    MYSQL_DATABASE: "tests"
     MYSQL_ROOT_PASSWORD: "R00Tp4ssW0RD"
-    MYSQL_USER: "tests_user"
-    MYSQL_PASSWORD: "password"
+    MYSQL_DATABASE: "test"
+    MYSQL_USER: "castopod"
+    MYSQL_PASSWORD: "castopod"
 
   script:
     - apt-get install -y mariadb-client  libmariadb-dev

@@ -46,9 +46,9 @@
 		<const name="PUBLICPATH" value="./public/"/>
 		<!-- Database configuration -->
 		<env name="database.tests.hostname" value="mariadb"/>
-		<env name="database.tests.database" value="tests"/>
-		<env name="database.tests.username" value="tests_user"/>
-		<env name="database.tests.password" value="password"/>
+		<env name="database.tests.database" value="test"/>
+		<env name="database.tests.username" value="castopod"/>
+		<env name="database.tests.password" value="castopod"/>
 		<env name="database.tests.DBDriver" value="MySQLi"/>
 		<env name="database.tests.DBPrefix" value="tests_"/>
 		<env name="REST_API_ENABLED" value="1"/>
