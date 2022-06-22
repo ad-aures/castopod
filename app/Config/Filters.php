@@ -10,6 +10,7 @@ use CodeIgniter\Filters\DebugToolbar;
 use CodeIgniter\Filters\Honeypot;
 use CodeIgniter\Filters\InvalidChars;
 use CodeIgniter\Filters\SecureHeaders;
+use Modules\Api\Rest\V1\Filters\ApiFilter;
 use Modules\Auth\Filters\PermissionFilter;
 use Modules\Fediverse\Filters\AllowCorsFilter;
 use Modules\Fediverse\Filters\FediverseFilter;
@@ -34,6 +35,7 @@ class Filters extends BaseConfig
         'permission' => PermissionFilter::class,
         'fediverse' => FediverseFilter::class,
         'allow-cors' => AllowCorsFilter::class,
+        'rest-api' => ApiFilter::class,
     ];
 
     /**

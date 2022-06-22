@@ -1,0 +1,328 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Castopod podcasts"
+  },
+  "paths": {
+    "/api/rest/v1/podcasts": {
+      "get": {
+        "summary": "List all podcasts",
+        "responses": {
+          "200": {
+            "description": "Object of podcasts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Podcasts"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/rest/v1/podcasts/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "The id of the podcast to retrieve",
+          "schema": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1,
+            "maxLength": 10
+          }
+        }
+      ],
+      "get": {
+        "summary": "Info for a specific podcast",
+        "responses": {
+          "200": {
+            "description": "Expected response to a valid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Podcast"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Podcast": {
+        "type": "object",
+        "required": [
+          "id",
+          "guid",
+          "actor_id",
+          "handle",
+          "title",
+          "description_markdown",
+          "description_html",
+          "cover_id",
+          "language_code",
+          "category_id",
+          "owner_name",
+          "owner_email",
+          "type",
+          "is_blocked",
+          "is_completed",
+          "is_locked",
+          "is_published_on_hubs",
+          "created_by",
+          "updated_by",
+          "created_at",
+          "updated_at",
+          "feed_url"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1,
+            "maxLength": 10
+          },
+          "guid": {
+            "type": "string",
+            "maxLength": 36
+          },
+          "actor_id": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1,
+            "maxLength": 10
+          },
+          "handle": {
+            "type": "string",
+            "maxLength": 32
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 128
+          },
+          "description_markdown": {
+            "type": "string"
+          },
+          "description_html": {
+            "type": "string"
+          },
+          "cover_id": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1,
+            "maxLength": 10
+          },
+          "banner_id": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1,
+            "maxLength": 10
+          },
+          "language_code": {
+            "type": "string",
+            "maxLength": 2
+          },
+          "category_id": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          "parental_advisory": {
+            "type": "string",
+            "enum": ["clean", "explicit"]
+          },
+          "owner_name": {
+            "type": "string",
+            "maxLength": 128
+          },
+          "owner_email": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "publisher": {
+            "type": "string",
+            "maxLength": 128
+          },
+          "type": {
+            "type": "string",
+            "enum": ["episodic", "serial"]
+          },
+          "copyright": {
+            "type": "string",
+            "maxLength": 128
+          },
+          "episode_description_footer_markdown": {
+            "type": "string"
+          },
+          "episode_description_footer_html": {
+            "type": "string"
+          },
+          "is_blocked": {
+            "type": "integer",
+            "format": "int32",
+            "enum": [0, 1],
+            "minLength": 1
+          },
+          "is_completed": {
+            "type": "integer",
+            "format": "int32",
+            "enum": [0, 1],
+            "minLength": 1
+          },
+          "is_locked": {
+            "type": "integer",
+            "format": "int32",
+            "enum": [0, 1],
+            "minLength": 1
+          },
+          "imported_feed_url": {
+            "type": "string",
+            "maxLength": 512
+          },
+          "new_feed_url": {
+            "type": "string",
+            "maxLength": 512
+          },
+          "payment_pointer": {
+            "type": "string",
+            "maxLength": 128
+          },
+          "location_name": {
+            "type": "string",
+            "maxLength": 128
+          },
+          "location_geo": {
+            "type": "string",
+            "maxLength": 32
+          },
+          "location_osm": {
+            "type": "string",
+            "maxLength": 12
+          },
+          "custom_rss": {
+            "type": "string"
+          },
+          "is_published_on_hubs": {
+            "type": "integer",
+            "format": "int32",
+            "enum": [0, 1],
+            "minLength": 1
+          },
+          "partner_id": {
+            "type": "string",
+            "maxLength": 32
+          },
+          "partner_link_url": {
+            "type": "string",
+            "maxLength": 512
+          },
+          "partner_image_url": {
+            "type": "string",
+            "maxLength": 512
+          },
+          "created_by": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1,
+            "maxLength": 10
+          },
+          "updated_by": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1,
+            "maxLength": 10
+          },
+          "created_at": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "timezone_type": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "timezone": {
+                "type": "string"
+              }
+            }
+          },
+          "updated_at": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "timezone_type": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "timezone": {
+                "type": "string"
+              }
+            }
+          },
+          "feed_url": {
+            "type": "string"
+          }
+        }
+      },
+      "Podcasts": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Podcast"
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "error": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "messages": {
+            "type": "object",
+            "properties": {
+              "error": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -65,7 +65,19 @@ lint-js:
 
 tests:
   stage: quality
+  services:
+    - mariadb
+  variables:
+    MYSQL_DATABASE: "tests"
+    MYSQL_ROOT_PASSWORD: "R00Tp4ssW0RD"
+    MYSQL_USER: "tests_user"
+    MYSQL_PASSWORD: "password"
+
   script:
+    - apt-get install -y mariadb-client  libmariadb-dev
+
+    - echo "SHOW DATABASES;" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mariadb "$MYSQL_DATABASE"
+
     # run phpunit without code coverage
     # TODO: add code coverage
     - vendor/bin/phpunit --no-coverage
