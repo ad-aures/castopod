@@ -1,3 +1,22 @@
+# [1.0.0-beta.16](https://code.castopod.org/adaures/castopod/compare/v1.0.0-beta.15...v1.0.0-beta.16) (2022-06-24)
+
+### Bug Fixes
+
+- change image size requirement hints
+  ([ea20206](https://code.castopod.org/adaures/castopod/commit/ea20206ee674eb54dd3ea188d2a2e2d41425df65))
+
+### Features
+
+- add update rss feed feature for podcasts to import their latest episodes
+  ([5eb9dc1](https://code.castopod.org/adaures/castopod/commit/5eb9dc168eb9af04767829b76242c9120f55d46d)),
+  closes [#183](https://code.castopod.org/adaures/castopod/issues/183)
+- **admin:** add search form in podcast episodes list
+  ([6be5d12](https://code.castopod.org/adaures/castopod/commit/6be5d12877342a7c56e25ea8dd15a975c6ce45ac)),
+  closes [#26](https://code.castopod.org/adaures/castopod/issues/26)
+- **api:** add rest api with podcasts read endpoints
+  ([e64001d](https://code.castopod.org/adaures/castopod/commit/e64001d00604bcf587ec5e9a631282f212df450d)),
+  closes [#210](https://code.castopod.org/adaures/castopod/issues/210)
+
 # [1.0.0-beta.15](https://code.castopod.org/adaures/castopod/compare/v1.0.0-beta.14...v1.0.0-beta.15) (2022-06-14)
 
 ### Bug Fixes
