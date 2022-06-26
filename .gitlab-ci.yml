@@ -5,6 +5,7 @@ stages:
   - quality
   - bundle
   - release
+  - build
   - deploy
 
 php-dependencies:
@@ -151,3 +152,16 @@ documentation:
   only:
     changes:
       - docs/**/*
+
+docker:
+  stage: build
+  trigger:
+    include: docker/production/.gitlab-ci.yml
+    strategy: depend
+  variables:
+    PARENT_PIPELINE_ID: $CI_PIPELINE_ID
+  only:
+    refs:
+      - develop
+    variables:
+      - $CI_PROJECT_NAMESPACE == "adaures"

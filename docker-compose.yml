@@ -7,7 +7,7 @@ services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: docker/development/Dockerfile
     container_name: app
     command: /bin/sh -c "crontab ./crontab && cron && service cron reload && php spark serve - 0.0.0.0"
     ports:

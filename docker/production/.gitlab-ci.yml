@@ -1,0 +1,20 @@
+stages:
+  - build
+
+docker-build-rolling:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  variables:
+    TAG: $CI_COMMIT_BRANCH
+  script:
+    - cp ${DOCKER_HUB_CONFIG} /kaniko/.docker/config.json
+    - /kaniko/executor --context . --dockerfile docker/production/web-server/Dockerfile --destination ${DOCKER_IMAGE_WEB_SERVER}:${TAG}
+    - /kaniko/executor --context . --dockerfile docker/production/app/Dockerfile --destination ${DOCKER_IMAGE_APP}:${TAG}
+  needs:
+    - pipeline: $PARENT_PIPELINE_ID
+      job: bundle
+  only:
+    refs:
+      - develop
