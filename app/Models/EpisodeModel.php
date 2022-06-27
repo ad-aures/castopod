@@ -337,16 +337,14 @@ class EpisodeModel extends Model
 
     public function resetCommentsCount(): int | false
     {
-        $episodeCommentsBuilder = $this->builder();
-        $episodeCommentsCount = $episodeCommentsBuilder->select('episodes.id, COUNT(*) as `comments_count`')
+        $episodeCommentsCount = $this->builder()
+            ->select('episodes.id, COUNT(*) as `comments_count`')
             ->join('episode_comments', 'episodes.id = episode_comments.episode_id')
             ->where('in_reply_to_id', null)
             ->groupBy('episodes.id')
             ->getCompiledSelect();
 
-        $postModel = new PostModel();
-        $episodePostsRepliesBuilder = $postModel->builder();
-        $episodePostsRepliesCount = $episodePostsRepliesBuilder
+        $episodePostsRepliesCount = $this->builder()
             ->select('episodes.id, COUNT(*) as `comments_count`')
             ->join(
                 config('Fediverse')
