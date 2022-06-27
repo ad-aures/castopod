@@ -1,9 +1,9 @@
 #!/bin/sh
-if [ -z "${CP_HOST_BACK}" ]
+if [ -z "${CP_APP_HOSTNAME}" ]
 then
-	echo "CP_HOST_BACK is empty, using default"
-	CP_HOST_BACK="back"
+	echo "CP_APP_HOSTNAME is empty, using default"
+	CP_APP_HOSTNAME="app"
 fi
 
-sed -i "s/CP_HOST_BACK/${CP_HOST_BACK}/" /etc/nginx/nginx.conf
+sed -i "s/CP_APP_HOSTNAME/${CP_APP_HOSTNAME}/" /etc/nginx/nginx.conf
 nginx -g "daemon off;"
