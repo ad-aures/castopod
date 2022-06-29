@@ -7,7 +7,7 @@ namespace Modules\Api\Rest\V1\Config;
 $routes = service('routes');
 
 $routes->group(
-    config('Api')
+    config('RestApi')
         ->gateway . 'podcasts',
     [
         'namespace' => 'Modules\Api\Rest\V1\Controllers',

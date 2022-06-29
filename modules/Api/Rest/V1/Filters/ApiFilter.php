@@ -13,7 +13,7 @@ class ApiFilter implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null): void
     {
-        if (! getenv('REST_API_ENABLED')) {
+        if (! config('RestApi')->enabled) {
             throw PageNotFoundException::forPageNotFound();
         }
     }
