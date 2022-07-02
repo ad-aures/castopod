@@ -295,7 +295,7 @@ if (! function_exists('get_rss_feed')) {
             }
 
             $item->addChildWithCDATA('description', $episode->getDescriptionHtml($serviceSlug));
-            $item->addChild('duration', (string) $episode->audio->duration, $itunesNamespace);
+            $item->addChild('duration', (string) round($episode->audio->duration), $itunesNamespace);
             $item->addChild('link', $episode->link);
             $episodeItunesImage = $item->addChild('image', null, $itunesNamespace);
             $episodeItunesImage->addAttribute('href', $episode->cover->feed_url);
@@ -361,7 +361,7 @@ if (! function_exists('get_rss_feed')) {
                 // TODO: differentiate video from soundbites?
                 $soundbiteElement = $item->addChild('soundbite', $soundbite->title, $podcastNamespace);
                 $soundbiteElement->addAttribute('start_time', (string) $soundbite->start_time);
-                $soundbiteElement->addAttribute('duration', (string) $soundbite->duration);
+                $soundbiteElement->addAttribute('duration', (string) round($soundbite->duration, 3));
             }
 
             foreach ($episode->persons as $person) {
