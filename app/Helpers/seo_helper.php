@@ -305,7 +305,7 @@ if (! function_exists('iso8601_duration')) {
     function iso8601_duration(float $seconds): string
     {
         $days = floor($seconds / 86400);
-        $seconds %= 86400;
+        $seconds = (int) $seconds % 86400;
 
         $hours = floor($seconds / 3600);
         $seconds %= 3600;
