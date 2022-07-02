@@ -1,15 +1,7 @@
 /* eslint-disable */
 const defaultTheme = require("tailwindcss/defaultTheme");
 
-function withOpacity(variableName) {
-  return ({ opacityValue }) => {
-    if (opacityValue !== undefined) {
-      return `hsl(var(${variableName}) / ${opacityValue})`;
-    }
-    return `hsl(var(${variableName}))`;
-  };
-}
-
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     "./app/Views/**/*.php",
@@ -27,56 +19,57 @@ module.exports = {
       },
       textColor: {
         skin: {
-          base: withOpacity("--color-text-base"),
-          muted: withOpacity("--color-text-muted"),
+          base: "hsl(var(--color-text-base) / <alpha-value>)",
+          muted: "hsl(var(--color-text-muted) / <alpha-value>)",
         },
         accent: {
-          base: withOpacity("--color-accent-base"),
-          hover: withOpacity("--color-accent-hover"),
-          muted: withOpacity("--color-accent-muted"),
-          contrast: withOpacity("--color-accent-contrast"),
+          base: "hsl(var(--color-accent-base) / <alpha-value>)",
+          hover: "hsl(var(--color-accent-hover) / <alpha-value>)",
+          muted: "hsl(var(--color-accent-muted) / <alpha-value>)",
+          contrast: "hsl(var(--color-accent-contrast) / <alpha-value>)",
         },
       },
       backgroundColor: {
-        base: withOpacity("--color-background-base"),
-        elevated: withOpacity("--color-background-elevated"),
-        navigation: withOpacity("--color-background-navigation"),
-        backdrop: withOpacity("--color-background-backdrop"),
-        header: withOpacity("--color-background-header"),
+        base: "hsl(var(--color-background-base) / <alpha-value>)",
+        elevated: "hsl(var(--color-background-elevated) / <alpha-value>)",
+        navigation: "hsl(var(--color-background-navigation) / <alpha-value>)",
+        backdrop: "hsl(var(--color-background-backdrop) / <alpha-value>)",
+        header: "hsl(var(--color-background-header) / <alpha-value>)",
         accent: {
-          base: withOpacity("--color-accent-base"),
-          hover: withOpacity("--color-accent-hover"),
+          base: "hsl(var(--color-accent-base) / <alpha-value>)",
+          hover: "hsl(var(--color-accent-hover) / <alpha-value>)",
         },
-        highlight: withOpacity("--color-background-highlight"),
+        highlight: "hsl(var(--color-background-highlight) / <alpha-value>)",
       },
       borderColor: {
-        subtle: withOpacity("--color-border-subtle"),
-        contrast: withOpacity("--color-border-contrast"),
-        navigation: withOpacity("--color-border-navigation"),
-        "navigation-bg": withOpacity("--color-background-navigation"),
+        subtle: "hsl(var(--color-border-subtle) / <alpha-value>)",
+        contrast: "hsl(var(--color-border-contrast) / <alpha-value>)",
+        navigation: "hsl(var(--color-border-navigation) / <alpha-value>)",
+        "navigation-bg":
+          "hsl(var(--color-background-navigation) / <alpha-value>)",
         accent: {
-          base: withOpacity("--color-accent-base"),
-          hover: withOpacity("--color-accent-hover"),
+          base: "hsl(var(--color-accent-base) / <alpha-value>)",
+          hover: "hsl(var(--color-accent-hover) / <alpha-value>)",
         },
         background: {
-          base: withOpacity("--color-background-base"),
-          elevated: withOpacity("--color-background-elevated"),
+          base: "hsl(var(--color-background-base) / <alpha-value>)",
+          elevated: "hsl(var(--color-background-elevated) / <alpha-value>)",
         },
       },
       ringColor: {
-        contrast: withOpacity("--color-border-contrast"),
+        contrast: "hsl(var(--color-border-contrast) / <alpha-value>)",
         background: {
-          base: withOpacity("--color-background-base"),
-          elevated: withOpacity("--color-background-elevated"),
+          base: "hsl(var(--color-background-base) / <alpha-value>)",
+          elevated: "hsl(var(--color-background-elevated) / <alpha-value>)",
         },
       },
       colors: {
         background: {
-          header: withOpacity("--color-background-header"),
+          header: "hsl(var(--color-background-header) / <alpha-value>)",
         },
         heading: {
-          foreground: withOpacity("--color-heading-foreground"),
-          background: withOpacity("--color-heading-background"),
+          foreground: "hsl(var(--color-heading-foreground) / <alpha-value>)",
+          background: "hsl(var(--color-heading-background) / <alpha-value>)",
         },
         pine: {
           50: "#F2FAF9",

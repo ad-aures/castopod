@@ -29,8 +29,9 @@ et est utilisé par des podcasters partout autour du monde&nbsp;!
 - 🌱 &nbsp;Libre, gratuit & open-source (Licence AGPL v3)
 - 🔐 &nbsp;Focalisé sur la souveraineté des données : votre contenu, votre
   audience et vos statistiques vous appartiennent, et à vous seulement
-- 🪄&nbsp;Fonctionnalités de Podcasting 2.0 : GUID, verrouillage, transcriptions,
-  financement, chapitres, géo-localisation, intervenants, extraits sonores, …
+- 🪄&nbsp;Fonctionnalités de Podcasting 2.0 : GUID, verrouillage,
+  transcriptions, financement, chapitres, géo-localisation, intervenants,
+  extraits sonores, …
 - 💬 &nbsp;Réseau social intégré :
   - 🚀 &nbsp;Castopod fait partie du Fédivers, un réseau social décentralisé
   - ❤️ &nbsp;Créer des publications, partager, mettre en favori et commenter des

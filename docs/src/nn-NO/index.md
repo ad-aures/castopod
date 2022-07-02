@@ -30,8 +30,8 @@ over heile verda&nbsp;bruker&nbsp;det!
 - 🌱 &nbsp;Fri og open (AGPL v3-lisens)
 - 🔐 &nbsp;Legg vekt på at du eig dine eigne data: innhaldet, publikum og
   analysedata høyrer deg til, og&nbsp;berre&nbsp;deg
-- 🪄 &nbsp;Podkasting 2.0-funksjonar: GUID, låsing, transkribering, finansiering,
-  kapittel, stader, personar, lydbetar…
+- 🪄 &nbsp;Podkasting 2.0-funksjonar: GUID, låsing, transkribering,
+  finansiering, kapittel, stader, personar, lydbetar…
 - 💬 &nbsp;Innebygd sosialt nettverk:
   - 🚀 &nbsp;Castopod er ein del av fødiverset, som er eit desentralisert
     sosialt nettverk

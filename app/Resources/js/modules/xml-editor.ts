@@ -1,14 +1,21 @@
-import { basicSetup } from "@codemirror/basic-setup";
+import { indentWithTab } from "@codemirror/commands";
 import { xml } from "@codemirror/lang-xml";
-import { EditorState } from "@codemirror/state";
-import { EditorView } from "@codemirror/view";
+import {
+  defaultHighlightStyle,
+  syntaxHighlighting,
+} from "@codemirror/language";
+import { Compartment, EditorState } from "@codemirror/state";
+import { keymap } from "@codemirror/view";
+import { basicSetup, EditorView } from "codemirror";
 import { css, html, LitElement, TemplateResult } from "lit";
 import { customElement, queryAssignedNodes, state } from "lit/decorators.js";
 import prettifyXML from "xml-formatter";
 
+const language = new Compartment();
+
 @customElement("xml-editor")
 export class XMLEditor extends LitElement {
-  @queryAssignedNodes("textarea", true)
+  @queryAssignedNodes({ slot: "textarea" })
   _textarea!: NodeListOf<HTMLTextAreaElement>;
 
   @state()
@@ -24,13 +31,39 @@ export class XMLEditor extends LitElement {
       },
     });
 
-    this.editorState = EditorState.create({
-      doc: this._textarea[0].value
-        ? prettifyXML(this._textarea[0].value, {
+    let editorContents = "";
+    if (this._textarea[0].value) {
+      try {
+        editorContents = prettifyXML(this._textarea[0].value, {
+          indentation: "  ",
+        });
+      } catch (e) {
+        // xml doesn't have a root node
+        editorContents = prettifyXML(
+          "<root>" + this._textarea[0].value + "</root>",
+          {
             indentation: "  ",
-          })
-        : "",
-      extensions: [basicSetup, xml(), minHeightEditor],
+          }
+        );
+        // remove root, unnecessary lines and indents
+        editorContents = editorContents
+          .replace(/^<root>/, "")
+          .replace(/<\/root>$/, "")
+          .replace(/^\s*[\r\n]/gm, "")
+          .replace(/[\r\n] {2}/gm, "\r\n")
+          .trim();
+      }
+    }
+
+    this.editorState = EditorState.create({
+      doc: editorContents,
+      extensions: [
+        basicSetup,
+        keymap.of([indentWithTab]),
+        language.of(xml()),
+        minHeightEditor,
+        syntaxHighlighting(defaultHighlightStyle),
+      ],
     });
 
     this.editorView = new EditorView({

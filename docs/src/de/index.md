@@ -29,8 +29,8 @@ Podcastenden auf &nbsp;der&nbsp; ganzen Welt verwendet!
 - 🌱 Kostenlos & Open-Source (AGPL v3 Lizenz)
 - 🔐 &nbsp;Fokussiert auf die Datensouveränität: Ihre Inhalte, Ihr Publikum und
   Analysen gehören zu Ihnen, und&nbsp;nur Ihnen&nbsp;
-- 🪄 &nbsp;Podcasting 2.0 features: GUID, locked, transcripts, funding, chapters,
-  location, persons, soundbites, …
+- 🪄 &nbsp;Podcasting 2.0 features: GUID, locked, transcripts, funding,
+  chapters, location, persons, soundbites, …
 - 💬 &nbsp;Built-in social network:
   - 🚀 &nbsp;Castopod is part of the Fediverse, a decentralized social network
   - ❤️ &nbsp;Create posts, share, favourite, and comment on episodes
