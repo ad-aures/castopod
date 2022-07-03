@@ -22,12 +22,20 @@ class AddCreatedByToPosts extends Migration
         $fediverseTablesPrefix = config('Fediverse')
             ->tablesPrefix;
 
-        $createQuery = <<<CODE_SAMPLE
+        $this->forge->addColumn("{$fediverseTablesPrefix}posts", [
+            'created_by' => [
+                'type' => 'INT',
+                'unsigned' => true,
+                'null' => true,
+                'after' => 'episode_id',
+            ],
+        ]);
+
+        $alterQuery = <<<CODE_SAMPLE
             ALTER TABLE {$prefix}{$fediverseTablesPrefix}posts
-            ADD COLUMN `created_by` INT UNSIGNED AFTER `episode_id`,
             ADD FOREIGN KEY {$prefix}{$fediverseTablesPrefix}posts_created_by_foreign(created_by) REFERENCES {$prefix}users(id) ON DELETE CASCADE;
         CODE_SAMPLE;
-        $this->db->query($createQuery);
+        $this->db->query($alterQuery);
     }
 
     public function down(): void

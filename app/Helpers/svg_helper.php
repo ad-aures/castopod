@@ -14,7 +14,7 @@ if (! function_exists('icon')) {
      *
      * @param  string $name name of the icon file without the .svg extension
      * @param  string $class to be added to the svg string
-     * @param  'social'|'podcasting'|'funding' $type type of icon to be added
+     * @param string|null $type type of icon to be added
      * @return string svg contents
      */
     function icon(string $name, string $class = '', string $type = null): string
@@ -46,7 +46,7 @@ if (! function_exists('svg')) {
      * Returns the inline svg image
      *
      * @param  string $name name of the image file without the .svg extension
-     * @param  string $class to be added to the svg string
+     * @param string|null $class to be added to the svg string
      * @return string svg contents
      */
     function svg(string $name, ?string $class = null): string

@@ -17,7 +17,7 @@ class FileRules extends ValidationFileRules
     /**
      * Checks an uploaded file to verify that the dimensions are within a specified allowable dimension.
      */
-    public function min_dims(string $blank = null, string $params): bool
+    public function min_dims(string $blank = null, string $params = ''): bool
     {
         // Grab the file name off the top of the $params
         // after we split it.
@@ -59,7 +59,7 @@ class FileRules extends ValidationFileRules
     /**
      * Checks an uploaded image to verify that the ratio corresponds to the params
      */
-    public function is_image_ratio(string $blank = null, string $params): bool
+    public function is_image_ratio(string $blank = null, string $params = ''): bool
     {
         // Grab the file name off the top of the $params
         // after we split it.

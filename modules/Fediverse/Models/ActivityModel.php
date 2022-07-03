@@ -81,7 +81,7 @@ class ActivityModel extends BaseUuidModel
     /**
      * Inserts a new activity record in the database
      *
-     * @param Time $scheduledAt
+     * @param Time|null $scheduledAt
      */
     public function newActivity(
         string $type,

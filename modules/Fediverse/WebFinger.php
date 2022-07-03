@@ -86,7 +86,7 @@ class WebFinger
     /**
      * Get WebFinger response as an array
      *
-     * @return array<string, array|string>
+     * @return array{subject: string, aliases: string[], links: array<mixed, array<string, string>>}
      */
     public function toArray(): array
     {

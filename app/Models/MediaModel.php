@@ -29,7 +29,7 @@ class MediaModel extends Model
     protected $table = 'media';
 
     /**
-     * @var string
+     * @noRector
      */
     protected $returnType = Document::class;
 

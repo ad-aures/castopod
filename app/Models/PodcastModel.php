@@ -164,8 +164,6 @@ class PodcastModel extends Model
     }
 
     /**
-     * @param 'activity'|'created_asc'|'created_desc' $orderBy
-     *
      * @return Podcast[]
      */
     public function getAllPodcasts(string $orderBy = null): array

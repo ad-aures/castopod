@@ -8,20 +8,17 @@ use Rector\CodingStyle\Rector\Encapsed\EncapsedStringsToSprintfRector;
 use Rector\CodingStyle\Rector\FuncCall\ConsistentPregDelimiterRector;
 use Rector\CodingStyle\Rector\Stmt\NewlineAfterStatementRector;
 use Rector\CodingStyle\Rector\String_\SymplifyQuoteEscapeRector;
-use Rector\Core\Configuration\Option;
+use Rector\Config\RectorConfig;
 use Rector\Core\ValueObject\PhpVersion;
 use Rector\EarlyReturn\Rector\If_\ChangeOrIfContinueToMultiContinueRector;
 use Rector\EarlyReturn\Rector\If_\ChangeOrIfReturnToEarlyReturnRector;
 use Rector\Php55\Rector\String_\StringClassNameToClassConstantRector;
 use Rector\Php80\Rector\ClassMethod\OptionalParametersAfterRequiredRector;
 use Rector\Set\ValueObject\SetList;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
-return static function (ContainerConfigurator $containerConfigurator): void {
+return static function (RectorConfig $rectorConfig): void {
     // get parameters
-    $parameters = $containerConfigurator->parameters();
-
-    $parameters->set(Option::PATHS, [
+    $rectorConfig->paths([
         __DIR__ . '/app',
         __DIR__ . '/modules',
         __DIR__ . '/tests',
@@ -29,27 +26,28 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ]);
 
     // do you need to include constants, class aliases or custom autoloader? files listed will be executed
-    $parameters->set(Option::BOOTSTRAP_FILES, [
+    $rectorConfig->bootstrapFiles([
         __DIR__ . '/vendor/codeigniter4/framework/system/Test/bootstrap.php',
     ]);
 
     // Define what rule sets will be applied
-    $containerConfigurator->import(SetList::PHP_80);
-    $containerConfigurator->import(SetList::TYPE_DECLARATION);
-    $containerConfigurator->import(SetList::TYPE_DECLARATION_STRICT);
-    $containerConfigurator->import(SetList::CODE_QUALITY);
-    $containerConfigurator->import(SetList::CODING_STYLE);
-    $containerConfigurator->import(SetList::EARLY_RETURN);
-    $containerConfigurator->import(SetList::DEAD_CODE);
-    $containerConfigurator->import(SetList::ORDER);
+    $rectorConfig->sets([SetList::PHP_80,
+        SetList::TYPE_DECLARATION,
+        SetList::TYPE_DECLARATION_STRICT,
+        SetList::CODE_QUALITY,
+        SetList::CODING_STYLE,
+        SetList::EARLY_RETURN,
+        SetList::DEAD_CODE,
+    ]);
 
     // auto import fully qualified class names
-    $parameters->set(Option::AUTO_IMPORT_NAMES, true);
-    // TODO: add parallel
-    // $parameters->set(Option::PARALLEL, true);
-    $parameters->set(Option::PHP_VERSION_FEATURES, PhpVersion::PHP_80);
+    $rectorConfig->importNames();
+    // TODO: add parallel run
+    // $rectorConfig->parallel();
 
-    $parameters->set(Option::SKIP, [
+    $rectorConfig->phpVersion(PhpVersion::PHP_80);
+
+    $rectorConfig->skip([
         __DIR__ . '/app/Views/errors/*',
 
         // skip specific generated files
@@ -81,15 +79,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ]);
 
     // Path to phpstan with extensions, that PHPStan in Rector uses to determine types
-    $parameters->set(
-        Option::PHPSTAN_FOR_RECTOR_PATH,
-        __DIR__ . '/phpstan.neon',
-    );
+    $rectorConfig->phpstanConfig(__DIR__ . '/phpstan.neon');
 
-    $services = $containerConfigurator->services();
-    $services->set(ConsistentPregDelimiterRector::class)->call('configure', [
-        [
-            ConsistentPregDelimiterRector::DELIMITER => '~',
-        ],
+    $rectorConfig->ruleWithConfiguration(ConsistentPregDelimiterRector::class, [
+        ConsistentPregDelimiterRector::DELIMITER => '~',
     ]);
 };

@@ -9,7 +9,7 @@ use CodeIgniter\Database\Seeder;
 class FakeSinglePodcastApiSeeder extends Seeder
 {
     /**
-     * @return array<mixed>
+     * @return array{id: int, file_path: string, file_size: int, file_mimetype: string, file_metadata: string, type: string, description: null, language_code: null, uploaded_by: int, updated_by: int, uploaded_at: string, updated_at: string}
      */
     public static function cover(): array
     {
@@ -30,7 +30,7 @@ class FakeSinglePodcastApiSeeder extends Seeder
     }
 
     /**
-     * @return array<mixed>
+     * @return array{id: int, file_path: string, file_size: int, file_mimetype: string, file_metadata: string, type: string, description: null, language_code: null, uploaded_by: int, updated_by: int, uploaded_at: string, updated_at: string}
      */
     public static function banner(): array
     {
@@ -51,7 +51,7 @@ class FakeSinglePodcastApiSeeder extends Seeder
     }
 
     /**
-     * @return array<mixed>
+     * @return array{id: int, uri: string, username: string, domain: string|false, private_key: string, public_key: string, display_name: string, summary: string, avatar_image_url: string, avatar_image_mimetype: string, cover_image_url: null, cover_image_mimetype: null, inbox_url: string, outbox_url: string, followers_url: string, followers_count: int, posts_count: int, is_blocked: int, created_at: string, updated_at: string}
      */
     public static function actor(): array
     {
@@ -80,7 +80,7 @@ class FakeSinglePodcastApiSeeder extends Seeder
     }
 
     /**
-     * @return array<mixed>
+     * @return array{id: int, guid: string, actor_id: int, handle: string, title: string, description_markdown: string, description_html: string, cover_id: int, banner_id: int, language_code: string, category_id: int, parental_advisory: null, owner_name: string, owner_email: string, publisher: string, type: string, copyright: string, episode_description_footer_markdown: null, episode_description_footer_html: null, is_blocked: int, is_completed: int, is_locked: int, imported_feed_url: null, new_feed_url: null, payment_pointer: null, location_name: null, location_geo: null, location_osm: null, custom_rss: null, is_published_on_hubs: int, partner_id: null, partner_link_url: null, partner_image_url: null, created_by: int, updated_by: int, created_at: string, updated_at: string}
      */
     public static function podcast(): array
     {

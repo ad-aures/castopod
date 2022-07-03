@@ -14,7 +14,7 @@ if (! function_exists('render_breadcrumb')) {
     /**
      * Renders the breadcrumb navigation through the Breadcrumb service
      *
-     * @param  string $class to be added to the breadcrumb nav
+     * @param string|null $class to be added to the breadcrumb nav
      * @return string html breadcrumb
      */
     function render_breadcrumb(string $class = null): string

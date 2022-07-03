@@ -22,12 +22,20 @@ class AddEpisodeIdToPosts extends Migration
         $fediverseTablesPrefix = config('Fediverse')
             ->tablesPrefix;
 
-        $createQuery = <<<CODE_SAMPLE
+        $this->forge->addColumn("{$fediverseTablesPrefix}posts", [
+            'episode_id' => [
+                'type' => 'INT',
+                'unsigned' => true,
+                'null' => true,
+                'after' => 'replies_count',
+            ],
+        ]);
+
+        $alterQuery = <<<CODE_SAMPLE
             ALTER TABLE {$prefix}{$fediverseTablesPrefix}posts
-            ADD COLUMN `episode_id` INT UNSIGNED NULL AFTER `replies_count`,
             ADD FOREIGN KEY {$prefix}{$fediverseTablesPrefix}posts_episode_id_foreign(episode_id) REFERENCES {$prefix}episodes(id) ON DELETE CASCADE;
         CODE_SAMPLE;
-        $this->db->query($createQuery);
+        $this->db->query($alterQuery);
     }
 
     public function down(): void

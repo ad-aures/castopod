@@ -309,7 +309,7 @@ class EpisodeModel extends Model
     }
 
     /**
-     * @return array<string, int|Time>
+     * @return array{number_of_seasons: int, number_of_episodes: int, first_published_at?: Time}
      */
     public function getPodcastStats(int $podcastId): array
     {

@@ -9,12 +9,12 @@ use ErrorException;
 class Vite
 {
     /**
-     * @var array<string, mixed>
+     * @var array<string, mixed>|null
      */
     protected ?array $manifestData = null;
 
     /**
-     * @var array<string, mixed>
+     * @var array<string, mixed>|null
      */
     protected ?array $manifestCSSData = null;
 

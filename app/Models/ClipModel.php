@@ -54,7 +54,7 @@ class ClipModel extends Model
     ];
 
     /**
-     * @var string
+     * @noRector
      */
     protected $returnType = BaseClip::class;
 
