@@ -38,6 +38,15 @@ return [
         'not_published' => 'Nicht veröffentlicht',
     ],
     'list' => [
+        'search' => [
+            'placeholder' => 'Suche nach einer Episode',
+            'clear' => 'Suche zurücksetzen',
+            'submit' => 'Suche',
+        ],
+        'number_of_episodes' => '{numberOfEpisodes, plural,
+            one {# episode}
+            other {# episodes}
+        }',
         'episode' => 'Folge',
         'visibility' => 'Sichtweite',
         'comments' => 'Komemntar',
@@ -47,6 +56,24 @@ return [
         'createSuccess' => 'Folge wurde erfolgreich erstellt!',
         'editSuccess' => 'Folge wurde erfolgreich aktualisiert!',
         'publishCancelSuccess' => 'Veröffentlichung der Episode erfolgreich abgebrochen!',
+        'unpublishBeforeDeleteTip' => 'Du musst die Episode zurückziehen, bevor du sie löschst.',
+        'deletePublishedEpisodeError' => 'Bitte ziehe die Episode zurück, bevor du sie löschst.',
+        'deleteSuccess' => 'Folge erfolgreich gelöscht!',
+        'deleteError' => 'Failed to delete episode {type, select,
+            transcript {transcript}
+            chapters {chapters}
+            image {cover}
+            audio {audio}
+            other {media}
+        }.',
+        'deleteFileError' => 'Failed to delete {type, select,
+            transcript {transcript}
+            chapters {chapters}
+            image {cover}
+            audio {audio}
+            other {media}
+        } file {file_path}. You may manually remove it from your disk.',
+        'sameSlugError' => 'Eine Folge mit dem ausgewählten Slug existiert bereits.',
     ],
     'form' => [
         'file_size_error' =>
@@ -57,7 +84,7 @@ return [
         'cover' => 'Episoden-Cover',
         'cover_hint' =>
             'Wenn Du kein Cover festlegst, wird stattdessen das Podcast-Cover verwendet.',
-        'cover_size_hint' => 'Das Cover muss quadratisch sein und mindestens 1400 Pixel breit und hoch sein.',
+        'cover_size_hint' => 'Cover must be squared and at least 1400px wide and tall.',
         'title' => 'Titel',
         'title_hint' =>
             'Nutze einen klaren und einprägsamen Episodennamen. Gib hier nicht die Episoden- oder Staffelnummern an.',
@@ -89,7 +116,7 @@ return [
             'Dieser Text wird am Ende jeder Episodenbeschreibung hinzugefügt, es ist ein guter Ort, um zum Beispiel Ihre sozialen Links einzufügen.',
         'additional_files_section_title' => 'Zusätzliche Dateien',
         'additional_files_section_subtitle' =>
-            'Diese Filter können von anderen Platformen genutzt werden, um eine bessere Nutzererfahrung bieten zu können. Weitere Informationen sind unter {podcastNamespaceLink} zu finden.',
+            'These files may be used by other platforms to provide better experience to your audience. See the {podcastNamespaceLink} for more information.',
         'location_section_title' => 'Standort',
         'location_section_subtitle' => 'Über welchen Ort handelt diese Folge?',
         'location_name' => 'Standortname oder Adresse',
@@ -147,9 +174,9 @@ return [
     ],
     'delete_form' => [
         'disclaimer' =>
-            "Das Löschen der Folge löscht alle damit verbundenen Beiträge und entfernt sie aus dem RSS-Feed des Podcasts.",
+            "Deleting the episode will delete all media files, comments, video clips and soundbites associated with it.",
         'understand' => 'Ich verstehe, ich möchte die Folge löschen',
-        'submit' => 'Löschen',
+        'submit' => 'Delete',
     ],
     'embed' => [
         'title' => 'Einbettbarer Spieler',

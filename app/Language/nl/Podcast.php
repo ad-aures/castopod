@@ -18,12 +18,12 @@ return [
     'follow' => 'Abonneer',
     'followTitle' => 'Abonneer op {actorDisplayName} via de fediverse!',
     'followers' => '{numberOfFollowers, plural,
-        one {# abonnee}
-        other {# abonnees}
+        one {# follower}
+        other {# followers}
     }',
     'posts' => '{numberOfPosts, plural,
-        one {# bericht}
-        other {# berichten}
+        one {# post}
+        other {# posts}
     }',
     'activity' => 'Activiteit',
     'episodes' => 'Afleveringen',
@@ -32,14 +32,14 @@ return [
     'stats' => [
         'title' => 'Statistieken',
         'number_of_seasons' => '{0, plural,
-            one {# seizoen}
-            other {# seizoenen}
+            one {# season}
+            other {# seasons}
         }',
         'number_of_episodes' => '{0, plural,
-            one {# aflevering}
-            other {# afleveringen}
+            one {# episode}
+            other {# episodes}
         }',
-        'first_published_at' => 'Eerste aflevering gepubliceerd op {0, date, medium}',
+        'first_published_at' => 'First episode published on {0, date, medium}',
     ],
     'sponsor' => 'Sponsor',
     'funding_links' => 'Financiering links voor {podcastTitle}',

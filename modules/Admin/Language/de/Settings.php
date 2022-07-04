@@ -15,7 +15,7 @@ return [
         'site_icon' => 'Webseiten-Icon',
         'site_icon_delete' => 'Lösche Webseiten-Icon',
         'site_icon_hint' => 'Webseiten-Icons sind das, was Sie auf Ihrem Browser Tabs, Lesezeichenleiste und wenn Sie eine Website als Verknüpfung auf mobilen Geräten hinzufügen, sehen.',
-        'site_icon_helper' => 'Das Icon muss quadratisch sein und mindestens 512 Pixel breit und hoch.',
+        'site_icon_helper' => 'Icon must be squared and at least 512px wide and tall.',
         'site_name' => 'Seitenname',
         'site_description' => 'Seitenbeschreibung',
         'submit' => 'Speichern',

@@ -2,36 +2,37 @@
 sidebarDepth: 2
 ---
 
-# Welcome 👋
+# Καλώς Ήλθατε 👋
 
 [![release-badge]][release]&nbsp;[![license-badge]][license]&nbsp;[![contributions-badge]][contributions]&nbsp;[![semantic-release-badge]][semantic-release]&nbsp;[![crowdin-badge]][crowdin]&nbsp;[![discord-badge]][discord]&nbsp;[![stars-badge]][stars]
 
-Castopod is a free & open-source hosting platform made for podcasters who want
-engage and interact with their audience.
+Το Castopod είναι μια δωρεάν & ανοικτού κώδικα πλατφόρμα φιλοξενίας podcast που
+κατασκευάζεται για podcasters που θέλουν να συμμετάσχουν και να αλληλεπιδράσουν
+με το κοινό τους.
 
-Castopod is easy to install and was built on top of
-[CodeIgniter4](https://codeigniter.com/), a powerful PHP framework with a very
-small footprint.
+Το Castopod είναι εύκολο στην εγκατάσταση και χτίστηκε με το
+[CodeIgniter4](https://codeigniter.com/), ένα ισχυρό PHP framework με ένα πολύ
+μικρό αποτύπωμα.
 
-::: info Status
+::: πληροφορίες κατάστασης
 
-Castopod is currently in **beta** but already quite stable and used by
-podcasters around&nbsp;the&nbsp;world!
+Το Castopod είναι επί του παρόντος σε **beta** αλλά ήδη αρκετά σταθερό και
+χρησιμοποιείται από podcasters γύρω από&nbsp;τον&nbsp;κόσμο!
 
 :::
 
 <div class="flex items-center">
-  <a href="/getting-started/install" class="inline-flex items-center px-4 py-2 mx-auto font-semibold text-center text-white rounded-full shadow gap-x-1 bg-pine-500 hover:no-underline hover:bg-pine-600">Install<svg viewBox="0 0 24 24" width="1em" height="1em" class="text-xl text-pine-200"><path fill="currentColor" d="m16.172 11-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg></a>
+  <a href="/getting-started/install" class="inline-flex items-center px-4 py-2 mx-auto font-semibold text-center text-white rounded-full shadow gap-x-1 bg-pine-500 hover:no-underline hover:bg-pine-600">Εγκατάσταση<svg viewBox="0 0 24 24" width="1em" height="1em" class="text-xl text-pine-200"><path fill="currentColor" d="m16.172 11-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg></a>
 </div>
 
-## Features
+## Χαρακτηριστικά
 
-- 🌱 &nbsp;Free & open-source (AGPL v3 License)
-- 🔐 &nbsp;Focused on data sovereignty: your content, audience, and analytics
-  belong to you, and&nbsp;you&nbsp;only
-- 🪄 &nbsp;Podcasting 2.0 features: GUID, locked, transcripts, funding,
-  chapters, location, persons, soundbites, …
-- 💬 &nbsp;Built-in social network:
+- 🌱 &nbsp;Δωρεάν & open-source (AGPL v3 License)
+- 🔐 &nbsp;Εστιάζει στην κυριαρχία των δεδομένων: το περιεχόμενο, το κοινό και
+  τα αναλυτικά στοιχεία ανήκουν σε εσάς μόνο
+- ◆ &nbsp;Podcasting 2.0 χαρακτηριστικά: GUID, κλειδωμένο, μεταγραφές,
+  χρηματοδότηση, κεφάλαια, τοποθεσία, πρόσωπα, soundbites, …
+- 💬 &nbsp;Ενσωματωμένο κοινωνικό δίκτυο:
   - 🚀 &nbsp;Castopod is part of the Fediverse, a decentralized social network
   - ❤️ &nbsp;Create posts, share, favourite, and comment on episodes
 - 📈 &nbsp;Built-in analytics:
@@ -60,7 +61,7 @@ podcasters around&nbsp;the&nbsp;world!
 - 🌎 &nbsp;i18n support: translated in English, French & Polish with more to
   come!
 
-## Motivation
+## Κίνητρα
 
 The podcasting ecosystem is decentralized by nature: you can create your podcast
 as an RSS file, publish it on the web and have it shared everywhere online.
@@ -201,16 +202,23 @@ backers. If you'd like to help, please consider
 [GNU Affero General Public License v3.0](https://choosealicense.com/licenses/agpl-3.0/)
 
 Copyright © 2020-present, [Ad Aures](https://adaures.com/).
-https://img.shields.io/gitlab/v/release/2?color=brightgreen&gitlab_url=https%3A%2F%2Fcode.castopod.org%2F&include_prereleases&label=release
-https://img.shields.io/github/license/ad-aures/castopod?color=blue
-https://img.shields.io/badge/contributions-welcome-brightgreen.svg
-https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
-https://img.shields.io/github/stars/ad-aures/castopod?style=social
 
 [release]: https://code.castopod.org/adaures/castopod/-/releases
+[release-badge]:
+  https://img.shields.io/gitlab/v/release/2?color=brightgreen&gitlab_url=https%3A%2F%2Fcode.castopod.org%2F&include_prereleases&label=release
 [license]: https://code.castopod.org/adaures/castopod/-/blob/beta/LICENSE.md
+[license-badge]:
+  https://img.shields.io/github/license/ad-aures/castopod?color=blue
 [contributions]: https://code.castopod.org/adaures/castopod/-/issues
+[contributions-badge]:
+  https://img.shields.io/badge/contributions-welcome-brightgreen.svg
 [semantic-release]: https://github.com/semantic-release/semantic-release
+[semantic-release-badge]:
+  https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
 [discord]: https://castopod.org/discord
+[discord-badge]: https://img.shields.io/badge/chat-on%20discord-7389D8
 [stars]: https://github.com/ad-aures/castopod/stargazers
+[stars-badge]:
+  https://img.shields.io/github/stars/ad-aures/castopod?style=social
 [crowdin]: https://translate.castopod.org/project/castopod
+[crowdin-badge]: https://badges.crowdin.net/castopod/localized.svg

@@ -32,8 +32,8 @@ return [
     'stats' => [
         'title' => 'Στατιστικά',
         'number_of_seasons' => '{0, plural,
-            one {# σεζόν}
-            other {# σεζόνς}
+            one {# κύκλος}
+            other {# κύκλοι}
         }',
         'number_of_episodes' => '{0, plural,
             one {# επισόδειο}

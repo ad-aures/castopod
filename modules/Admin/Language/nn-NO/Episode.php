@@ -38,6 +38,15 @@ return [
         'not_published' => 'Ikkje lagt ut',
     ],
     'list' => [
+        'search' => [
+            'placeholder' => 'Search for an episode',
+            'clear' => 'Clear search',
+            'submit' => 'Search',
+        ],
+        'number_of_episodes' => '{numberOfEpisodes, plural,
+            one {# episode}
+            other {# episodes}
+        }',
         'episode' => 'Episode',
         'visibility' => 'Synlegheit',
         'comments' => 'Kommentarar',
@@ -47,6 +56,24 @@ return [
         'createSuccess' => 'Episoden er oppretta!',
         'editSuccess' => 'Episoden er oppdatert!',
         'publishCancelSuccess' => 'Du har avbrote å leggja ut episoden.',
+        'unpublishBeforeDeleteTip' => 'You must unpublish the episode before deleting it.',
+        'deletePublishedEpisodeError' => 'Please unpublish the episode before deleting it.',
+        'deleteSuccess' => 'Episode successfully deleted!',
+        'deleteError' => 'Failed to delete episode {type, select,
+            transcript {transcript}
+            chapters {chapters}
+            image {cover}
+            audio {audio}
+            other {media}
+        }.',
+        'deleteFileError' => 'Failed to delete {type, select,
+            transcript {transcript}
+            chapters {chapters}
+            image {cover}
+            audio {audio}
+            other {media}
+        } file {file_path}. You may manually remove it from your disk.',
+        'sameSlugError' => 'An episode with the chosen slug already exists.',
     ],
     'form' => [
         'file_size_error' =>
@@ -57,7 +84,7 @@ return [
         'cover' => 'Episodeomslag',
         'cover_hint' =>
             'Viss du ikkje bruker eige omslag, blir omslaget til podkasten brukt i staden.',
-        'cover_size_hint' => 'Omslaget må vera kvadratisk, og minst 1400 breitt og høgt.',
+        'cover_size_hint' => 'Cover must be squared and at least 1400px wide and tall.',
         'title' => 'Tittel',
         'title_hint' =>
             'Bør innehalda eit klårt og konsist episodenamn. Ikkje skriv inn nummer på episode eller sesong her.',
@@ -89,7 +116,7 @@ return [
             'Denne teksten ligg på slutten av kvar episodeskildring, og er ein god stad å ha lenker til td. sosiale nettverk.',
         'additional_files_section_title' => 'Fleire filer',
         'additional_files_section_subtitle' =>
-            'Desse filene kan brukast av andre plattformer for å gje publikum ei betre oppleving. Sjå {podcastNamespaceLink} for meir informasjon.',
+            'These files may be used by other platforms to provide better experience to your audience. See the {podcastNamespaceLink} for more information.',
         'location_section_title' => 'Stad',
         'location_section_subtitle' => 'Kva stad handlar denne episoden om?',
         'location_name' => 'Stadnamn eller adresse',
@@ -147,9 +174,9 @@ return [
     ],
     'delete_form' => [
         'disclaimer' =>
-            "Viss du slettar episoden, blir alle innlegga som er knytte til han sletta, og han blir sletta frå RSS-straumen til podkasten.",
+            "Deleting the episode will delete all media files, comments, video clips and soundbites associated with it.",
         'understand' => 'Eg forstår, eg vil sletta episoden',
-        'submit' => 'Slett',
+        'submit' => 'Delete',
     ],
     'embed' => [
         'title' => 'Innbyggbar spelar',

@@ -26,14 +26,34 @@ return [
         'createSuccess' => 'Podkasten er oppretta!',
         'editSuccess' => 'Podkasten er oppdatert!',
         'importSuccess' => 'Podkasten er importert!',
+        'deleteSuccess' => 'Podcast @{podcast_handle} successfully deleted!',
+        'deletePodcastMediaError' => 'Failed to delete podcast {type, select,
+            cover {cover}
+            banner {banner}
+            other {media}
+        }.',
+        'deleteEpisodeMediaError' => 'Failed to delete podcast episode {episode_slug} {type, select,
+            transcript {transcript}
+            chapters {chapters}
+            image {cover}
+            audio {audio}
+            other {media}
+        }.',
+        'deletePodcastMediaFolderError' => 'Failed to delete podcast media folder {folder_path}. You may manually remove it from your disk.',
+        'podcastFeedUpdateSuccess' => 'Successful update: {number_of_new_episodes, plural,
+            one {# episode was}
+            other {# episodes were}
+        } added to the podcast!',
+        'podcastFeedUpToDate' => 'Podcast is already up to date.',
+        'podcastNotImported' => 'Podcast could not be updated as it was not imported.',
     ],
     'form' => [
         'identity_section_title' => 'Podkastidentitet',
         'identity_section_subtitle' => 'Desse felta gjer at du blir lagt merke til.',
         'cover' => 'Podkastomslag',
-        'cover_size_hint' => 'Omslaget må vera kvadratisk, og minst 1400pkt breitt og høgt.',
+        'cover_size_hint' => 'Cover must be squared and at least 1400px wide and tall.',
         'banner' => 'Podkastbanner',
-        'banner_size_hint' => 'Banneret må ha 3:1-forhold og vera minst 1500pkt breitt.',
+        'banner_size_hint' => 'Banner must have a 3:1 ratio and be at least 1500px wide.',
         'banner_delete' => 'Slett podkastbanneret',
         'title' => 'Tittel',
         'handle' => 'Handtak',
@@ -90,6 +110,9 @@ return [
         'custom_rss_hint' => 'Dette blir sett inn i ❬channel❭-elementet.',
         'new_feed_url' => 'Ny straum-URL',
         'new_feed_url_hint' => 'Bruk dette feltet når du flyttar til eit anna domene eller vertsplattform. Standardvalet for verdien er den noverande RSS-adresse viss podkasten er importert.',
+        'old_feed_url' => 'Old feed URL',
+        'update_feed' => 'Update feed',
+        'update_feed_tip' => 'Import this podcast\'s latest episodes',
         'partnership' => 'Partnarskap',
         'partner_id' => 'ID',
         'partner_link_url' => 'Lenke-URL',
@@ -219,6 +242,12 @@ return [
         'film_reviews' => 'Filmmeldingar',
         'tv_reviews' => 'TV-meldingar',
     ],
+    'delete_form' => [
+        'disclaimer' =>
+            "Deleting the podcast will delete all episodes, media files, posts and analytics associated with it. This action is irreversible, you will not be able to retrieve them afterwards.",
+        'understand' => 'I understand, I want the podcast to be permanently deleted',
+        'submit' => 'Delete',
+    ],
     'by' => 'Av {publisher}',
     'season' => 'Sesong {seasonNumber}',
     'list_of_episodes_year' => '{year}-episodar ({episodeCount})',
@@ -227,12 +256,12 @@ return [
     'no_episode' => 'Fann ingen episode!',
     'follow' => 'Fylg',
     'followers' => '{numberOfFollowers, plural,
-        one {# fylgjar}
-        other {# fylgjarar}
+        one {# follower}
+        other {# followers}
     }',
     'posts' => '{numberOfPosts, plural,
-        one {# innlegg}
-        other {# innlegg}
+        one {# post}
+        other {# posts}
     }',
     'activity' => 'Aktivitet',
     'episodes' => 'Episodar',

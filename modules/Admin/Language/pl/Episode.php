@@ -39,6 +39,15 @@ return [
         'not_published' => 'Nieopublikowany',
     ],
     'list' => [
+        'search' => [
+            'placeholder' => 'Search for an episode',
+            'clear' => 'Clear search',
+            'submit' => 'Search',
+        ],
+        'number_of_episodes' => '{numberOfEpisodes, plural,
+            one {# episode}
+            other {# episodes}
+        }',
         'episode' => 'Odcinek',
         'visibility' => 'Widoczność',
         'comments' => 'Komentarze',
@@ -48,6 +57,24 @@ return [
         'createSuccess' => 'Odcinek został pomyślnie utworzony!',
         'editSuccess' => 'Odcinek został pomyślnie zaktualizowany!',
         'publishCancelSuccess' => 'Episode publication successfully cancelled!',
+        'unpublishBeforeDeleteTip' => 'You must unpublish the episode before deleting it.',
+        'deletePublishedEpisodeError' => 'Please unpublish the episode before deleting it.',
+        'deleteSuccess' => 'Episode successfully deleted!',
+        'deleteError' => 'Failed to delete episode {type, select,
+            transcript {transcript}
+            chapters {chapters}
+            image {cover}
+            audio {audio}
+            other {media}
+        }.',
+        'deleteFileError' => 'Failed to delete {type, select,
+            transcript {transcript}
+            chapters {chapters}
+            image {cover}
+            audio {audio}
+            other {media}
+        } file {file_path}. You may manually remove it from your disk.',
+        'sameSlugError' => 'An episode with the chosen slug already exists.',
     ],
     'form' => [
         'file_size_error' =>
@@ -58,7 +85,7 @@ return [
         'cover' => 'Okładka odcinka',
         'cover_hint' =>
             'Jeśli nie ustawisz okładki, zamiast niej zostanie użyta okładka podcastu.',
-        'cover_size_hint' => 'Okładka musi być kwadratowa o szerokości i wysokości co najmniej 1400 pikseli.',
+        'cover_size_hint' => 'Cover must be squared and at least 1400px wide and tall.',
         'title' => 'Tytuł',
         'title_hint' =>
             'Powinien zawierać jasną i zwięzłą nazwę odcinka. Nie podawaj tutaj numerów odcinków ani sezonów.',
@@ -90,7 +117,7 @@ return [
             'Ten tekst jest dodawany na końcu każdego opisu odcinka; jest to dobre miejsce do wpisania np. linków społecznościowych.',
         'additional_files_section_title' => 'Dodatkowe pliki',
         'additional_files_section_subtitle' =>
-            'Pliki te mogą być używane przez inne platformy, aby zapewnić lepsze wrażenia odbiorcom. Więcej informacji znajdziesz w {podcastNamespaceLink}.',
+            'These files may be used by other platforms to provide better experience to your audience. See the {podcastNamespaceLink} for more information.',
         'location_section_title' => 'Lokalizacja',
         'location_section_subtitle' => 'O jakim miejscu jest ten odcinek?',
         'location_name' => 'Nazwa lub adres lokalizacji',
@@ -148,9 +175,9 @@ return [
     ],
     'delete_form' => [
         'disclaimer' =>
-            "Usunięcie odcinka spowoduje usunięcie wszystkich powiązanych z nim wpisów i usunięcie go z kanału RSS podcastu.",
+            "Deleting the episode will delete all media files, comments, video clips and soundbites associated with it.",
         'understand' => 'Rozumiem, chcę usunąć odcinek',
-        'submit' => 'Usuń',
+        'submit' => 'Delete',
     ],
     'embed' => [
         'title' => 'Odtwarzacz osadzalny',

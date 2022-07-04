@@ -5,138 +5,151 @@ sidebarDepth: 3
 
 # ¿Cómo instalar Castopod?
 
-Castopod era de todas maneras fácil de instalar. Ya sea usando alojamiento
-dedicado o compartido, se puede instalar en la mayoría de servidores web
+Castopod está pensado para ser fácil de instalar. Ya sea usando un alojamiento
+dedicado o compartido, puedes instalarlo en la mayoría de servidores web
 compatibles con PHP-MySQL.
 
-## Requirements
+::: Nota informativa
 
-- PHP v8.0 or higher
-- MySQL version 5.7 or higher or MariaDB version 10.2 or higher
-- HTTPS support
+Esta sección de la documentación te ayudará a configurar Castopod para la
+producción. Si estás buscando participar en el desarrollo de Castopod, debes
+pasar a la sección de contribuciones.
 
-### PHP v8.0 or higher
+:::
 
-PHP version 8.0 or higher is required, with the following extensions installed:
+## Requerimientos
+
+- PHP v8.0 o superior
+- MySQL versión 5.7 o superior o MariaDB versión 10.2 o superior
+- Soporte HTTPS
+
+### PHP v8.0 o superior
+
+Se requiere PHP versión 8.0 o superior con las siguientes extensiones
+instaladas:
 
 - [intl](https://php.net/manual/en/intl.requirements.php)
 - [libcurl](https://php.net/manual/en/curl.requirements.php)
 - [mbstring](https://php.net/manual/en/mbstring.installation.php)
-- [gd](https://www.php.net/manual/en/image.installation.php) with **JPEG**,
-  **PNG** and **WEBP** libraries.
+- [gd](https://www.php.net/manual/en/image.installation.php) con librerias
+  **JPEG**, **PNG** y **WEBP**.
 - [exif](https://www.php.net/manual/en/exif.installation.php)
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+Adicionalmente, asegúrate que las siguientes extensiones están habilitadas en tu
+PHP:
 
-- json (enabled by default - don't turn it off)
-- xml (enabled by default - don't turn it off)
+- json (habilitada por defecto - no la desactives)
+- xml (habilitada por defecto - no la desactives)
 - [mysqlnd](https://php.net/manual/en/mysqlnd.install.php)
 
-### MySQL compatible database
+### Base de datos compatible con MySQL
 
-> We recommend using [MariaDB](https://mariadb.org).
+> Recomendamos usar [MariaDB](https://mariadb.org).
 
-::: warning
+::: aviso Aviso
 
-Castopod only works with supported MySQL 5.7 or higher compatible databases. It
-will break with the previous MySQL v5.6 for example as its end of life was on
-February 5, 2021.
+Castopod solo funciona con base de datos compatible con MySQL 5.7 o superior. Se
+romperá con la version previa MySQL v5.6 por ejemplo, ya que su vida terminó el
+5 de febrero de 2021.
 
 :::
 
-You will need the server hostname, database name, username and password to
-complete the installation process. If you do not have these, please contact your
-server administrator.
+Necesitarás el nombre del anfitrión del servidor, nombre de la base de datos,
+usuario y contraseña para completar el proceso de instalación. Si no los tienes,
+por favor, contacta al administrador del servidor.
 
-#### Privileges
+#### Privilegios
 
-User must have at least these privileges on the database for Castopod to work:
-`CREATE`, `ALTER`, `DELETE`, `EXECUTE`, `INDEX`, `INSERT`, `SELECT`, `UPDATE`.
+Los usuarios deben tener al menos estos privilegios en la base de datos para que
+Castopod funcione: `CREAR`, `ALTERAR`, `BORRAR`, `EJECUTAR`, `INDICE`,
+`INSERTAR`, `SELECCIONAR`, `ACTUALIZAR`.
 
-### (Optional) FFmpeg v4.1.8 or higher for Video Clips
+### (Opcional) FFmpeg v4.1.8 o superior para clips de video
 
-[FFmpeg](https://www.ffmpeg.org/) version 4.1.8 or higher is required if you
-want to generate Video Clips. The following extensions must be installed:
+Se requiere [FFmpeg](https://www.ffmpeg.org/) versión 4.1.8 o superior si
+quieres general clips de video. Se debe instalar las siguientes extensiones:
 
-- **FreeType 2** library for
+- Librería **FreeType 2** para
   [gd](https://www.php.net/manual/en/image.installation.php).
 
-### (Optional) Other recommendations
+### (Opcional) Otras recomendaciones
 
-- Redis for better cache performances.
-- CDN for static files caching and better performances.
-- e-mail gateway for lost passwords.
+- Redis para mejores rendimientos de caché.
+- CDN para almacenamiento en caché de archivos estáticos y mejores rendimientos.
+- puerta de enlace de email para pérdidas de contraseña.
 
-## Install instructions
+## Instrucciones de instalación
 
-### Pre-requisites
+### Prerequisitos
 
-0. Get a Web Server with [requirements](#requirements) installed
-1. Create a MySQL database for Castopod with a user having access and
-   modification privileges (for more info, see
-   [MySQL compatible database](#mysql-compatible-database)).
-2. Activate HTTPS on your domain with an _SSL certificate_.
-3. Download and unzip the latest [Castopod Package](https://castopod.org/) onto
-   the web server if you haven’t already.
-   - ⚠️ Set the web server document root to the `public/` sub-folder within the
-     `castopod` folder.
-4. Add **cron tasks** on your web server for various background processes
-   (replace the paths accordingly):
+0. Consigue un Servidor Web con [requerimientos](#requirements) instalados
+1. Crea una base de datos MySQL para Castopod con un usuario que tenga acceso y
+   privilegios de modificación (para más información, ver
+   [MySQL base de datos compatible](#mysql-compatible-database)).
+2. Activa HTTPS en tu domino con un _certificado SSL_.
+3. Descarga y descomprime el último [paquete Castopod](https://castopod.org/) en
+   el servidor de la web si aún no lo has hecho.
+   - ⚠️ Establece la raiz del documento del servidor web en la subcarpeta
+     `pública/` en la carpeta `castopod`.
+4. Añade **cron tasks** en tu servidor web para varios procesos en segundo plano
+   (reemplaza las rutas accorde con):
 
-   - For social features to work properly, this task is used to broadcast social
-     activities to your followers on the fediverse:
-
-   ```bash
-      * * * * * /path/to/php /path/to/castopod/public/index.php scheduled-activities
-   ```
-
-   - For having your episodes be broadcasted on open hubs upon publication using
-     [WebSub](https://en.wikipedia.org/wiki/WebSub):
+   - Para que las características sociales funcionen correctamente, esta tarea
+     se utiliza para transmitir las actividades sociales a tus seguidores en el
+     Fediverso:
 
    ```bash
-      * * * * * /usr/local/bin/php /castopod/public/index.php scheduled-websub-publish
+      * * * * * /path/to/php /path/to/castopod/public/index.php actividades programadas
    ```
 
-   - For Video Clips to be created (see
-     [FFmpeg requirements](#ffmpeg-v418-or-higher-for-video-clips)):
+   - Para que tus episodios sean transmitidos en hubs abiertos sobre
+     publicaciones usando [WebSub](https://en.wikipedia.org/wiki/WebSub):
 
    ```bash
-      * * * * * /path/to/php /path/to/castopod/public/index.php scheduled-video-clips
+      * * * * * /usr/local/bin/php /castopod/public/index.php publicaciones-websub-programadas
    ```
 
-   > These tasks run **every minute**. You may set the frequency depending on
-   > your needs: every 5, 10 minutes or more.
+   - Para crear Clips de video (ver
+     [requerimientos FFmpeg ](#ffmpeg-v418-or-higher-for-video-clips)):
 
-### (recommended) Install Wizard
+   ```bash
+      * * * * * /path/to/php /path/to/castopod/public/index.php clips-devideo-programados
+   ```
 
-1. Run the Castopod install script by going to the install wizard page
-   (`https://your_domain_name.com/cp-install`) in your favorite web browser.
-2. Follow the instructions on your screen.
+   > Estas tareas se ejecutan **cada minuto**. Debes establecer la frecuencia
+   > dependiendo de tus necesidades: cada 5, 10 minutos o más.
+
+### (recomendado) Instalar Wizard
+
+1. Ejecuta el script de instalación de Castopod yendo a la página de instalación
+   de wizard (`https://your_domain_name.com/cp-install`) en tu navegador web
+   preferido.
+2. Sigue las instrucciones de la pantalla.
 3. ¡Empieza a crear podcasting!
 
-::: Nota de información
+::: Nota informativa
 
-El script de instalación escribe un archivo `.env` en la raíz del paquete. If
-you cannot go through the install wizard, you can
-[create and update the `.env` file manually](#alternative-manual-configuration).
+El script de instalación escribe un archivo `.env` en la raiz de paquete. Si no
+puedes completar la instalación de wizard, puedes
+[crear y actualizar el archivo `.env` manualmente](#alternative-manual-configuration).
 
 :::
 
-## Community packages
+## Paquetes de la comunidad
 
-If you don't want to bother with installing Castopod manually, you may use one
-of the packages created and maintained by the open-source community.
+Si no quieres molestarte en instalar Castopod manualmente, puedes usar uno de
+los paquetes creados y mantenidos por la comunidad de código abierto.
 
-### Install with YunoHost
+### Instalar con YunoHost
 
-[YunoHost](https://yunohost.org/) is a distribution based on Debian GNU/Linux
-made up of free and open-source software packages. It manages the hardships of
-self-hosting for you.
+[YunoHost](https://yunohost.org/) es una distribuidora basada en Debian
+GNU/Linux compuesta por paquetes de software libres y de código abierto. It
+manages the hardships of self-hosting for you.
 
 <div class="flex flex-wrap items-center gap-4">
 
 <a href="https://install-app.yunohost.org/?app=castopod" target="_blank" rel="noopener noreferrer">
-   <img src="https://install-app.yunohost.org/install-with-yunohost.svg" alt="Install Castopod with YunoHost" class="align-middle" />
+   <img src="https://install-app.yunohost.org/install-with-yunohost.svg" alt="Instalar Castopod con YunoHost" class="align-middle" />
 </a>
 
 <a href="https://github.com/YunoHost-Apps/castopod_ynh" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-4 py-[.3rem] mx-auto font-semibold text-center text-black rounded-md gap-x-1 border-2 border-solid border-[#333] hover:no-underline hover:bg-gray-100"><svg
@@ -146,18 +159,18 @@ Repo</a>
 
 </div>
 
-### Install with Docker
+### Instalar con Docker
 
-If you wish to use Docker to install Castopod, it is possible thanks to
+Si desea utilizar Docker para instalar Castopod, ¡es posible gracias a
 [Romain de Laage](https://mamot.fr/@rdelaage)!
 
-<a href="https://gitlab.utc.fr/picasoft/projets/services/castopod" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-4 py-2 mx-auto font-semibold text-center text-white rounded-md shadow gap-x-1 bg-[#1282d7] hover:no-underline hover:bg-[#0f6eb5]">Install
-with
+<a href="https://gitlab.utc.fr/picasoft/projets/services/castopod" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-4 py-2 mx-auto font-semibold text-center text-white rounded-md shadow gap-x-1 bg-[#1282d7] hover:no-underline hover:bg-[#0f6eb5]">Instalar
+con
 Docker<svg viewBox="0 0 24 24" width="1em" height="1em" class="text-xl text-pine-200"><path fill="currentColor" d="m16.172 11-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg></a>
 
-::: info Note
+::: Nota de información
 
-Given high demand for docker, we plan on maintaining an official Castopod Docker
-image directly into the Castopod repository.
+Dada la alta demanda de docker, planeamos mantener una imagen oficial del Docker
+de Castopod directamente en el repositorio de Castopod.
 
 :::

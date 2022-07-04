@@ -22,16 +22,21 @@ over heile verda&nbsp;bruker&nbsp;det!
 :::
 
 <div class="flex items-center">
-  <a href="/nn-NO/getting-started/install" class="inline-flex items-center px-4 py-2 mx-auto font-semibold text-center text-white rounded-full shadow gap-x-1 bg-pine-500 hover:no-underline hover:bg-pine-600">Installer<svg viewBox="0 0 24 24" width="1em" height="1em" class="text-xl text-pine-200"><path fill="currentColor" d="m16.172 11-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg></a>
+  <a href="/getting-started/install" class="inline-flex items-center px-4 py-2 mx-auto font-semibold text-center text-white rounded-full shadow gap-x-1 bg-pine-500 hover:no-underline hover:bg-pine-600">Installer<svg viewBox="0 0 24 24" width="1em" height="1em" class="text-xl text-pine-200"><path fill="currentColor" d="m16.172 11-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg></a>
 </div>
 
 ## Funksjonar
 
-- 🌱 &nbsp;Fri og open (AGPL v3-lisens)
+- 🌱 &nbsp;Fri og open (AGPL v3-lisens) <<<<<<< HEAD
 - 🔐 &nbsp;Legg vekt på at du eig dine eigne data: innhaldet, publikum og
   analysedata høyrer deg til, og&nbsp;berre&nbsp;deg
 - 🪄 &nbsp;Podkasting 2.0-funksjonar: GUID, låsing, transkribering,
-  finansiering, kapittel, stader, personar, lydbetar…
+  finansiering, kapittel, stader, personar, lydbetar… =======
+- 🔐 &nbsp;Legg vekt på at du eig dine eigne data: innhaldet, publikum og
+  analysedata høyrer deg til, og&nbsp;berre&nbsp;deg
+- 🪄 &nbsp;Podcasting 2.0 features: GUID, locked, transcripts, funding,
+  chapters, location, persons, soundbites, …
+  > > > > > > > 88098377 (New translations index.md (Norwegian Nynorsk))
 - 💬 &nbsp;Innebygd sosialt nettverk:
   - 🚀 &nbsp;Castopod er ein del av fødiverset, som er eit desentralisert
     sosialt nettverk
@@ -199,7 +204,7 @@ lesa korleis du
 
 [GNU Affero General Public License v3.0](https://choosealicense.com/licenses/agpl-3.0/)
 
-Copyright © 2020-present, [Ad Aures](https://adaures.com/).
+Copyright © 2020-d.d., [Ad Aures](https://adaures.com/).
 
 [release]: https://code.castopod.org/adaures/castopod/-/releases
 [release-badge]:

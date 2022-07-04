@@ -26,6 +26,8 @@ return [
     'publish-edit' => 'edit publication',
     'unpublish' => 'unpublish',
     'delete' => 'delete',
+    'deleted' => 'deleted',
+    'delete-permanently' => 'delete permanently',
     'fediverse' => 'fediverse',
     'block-lists' => 'block lists',
     'users' => 'users',

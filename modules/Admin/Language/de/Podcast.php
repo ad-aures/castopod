@@ -18,7 +18,7 @@ return [
     'edit' => 'Podcast bearbeiten',
     'delete' => 'Podcast löschen',
     'see_episodes' => 'Episoden ansehen',
-    'see_contributors' => 'Mitwirkende anzeigen',
+    'see_contributors' => 'Administratoren anzeigen',
     'go_to_page' => 'Gehe zur Seite',
     'latest_episodes' => 'Neueste Folgen',
     'see_all_episodes' => 'Alle Folgen anzeigen',
@@ -26,14 +26,34 @@ return [
         'createSuccess' => 'Der Podcast wurde erfolgreich erstellt!',
         'editSuccess' => 'Der Podcast wurde erfolgreich aktualisiert!',
         'importSuccess' => 'Der Podcast wurde erfolgreich importiert!',
+        'deleteSuccess' => 'Podcast @{podcast_handle} successfully deleted!',
+        'deletePodcastMediaError' => 'Failed to delete podcast {type, select,
+            cover {cover}
+            banner {banner}
+            other {media}
+        }.',
+        'deleteEpisodeMediaError' => 'Failed to delete podcast episode {episode_slug} {type, select,
+            transcript {transcript}
+            chapters {chapters}
+            image {cover}
+            audio {audio}
+            other {media}
+        }.',
+        'deletePodcastMediaFolderError' => 'Failed to delete podcast media folder {folder_path}. You may manually remove it from your disk.',
+        'podcastFeedUpdateSuccess' => 'Successful update: {number_of_new_episodes, plural,
+            one {# episode was}
+            other {# episodes were}
+        } added to the podcast!',
+        'podcastFeedUpToDate' => 'Podcast is already up to date.',
+        'podcastNotImported' => 'Podcast could not be updated as it was not imported.',
     ],
     'form' => [
         'identity_section_title' => 'Podcast-Identität',
         'identity_section_subtitle' => 'Diese Felder erlauben es dir, Aufmerksamkeit zu bekommen.',
         'cover' => 'Podcast-Cover',
-        'cover_size_hint' => 'Das Cover muss quadratisch sein und mindestens 1400 Pixel breit und hoch sein.',
+        'cover_size_hint' => 'Cover must be squared and at least 1400px wide and tall.',
         'banner' => 'Podcast-Banner',
-        'banner_size_hint' => 'Das Banner muss ein 3:1-Verhältnis und mindestens 1500px Breite haben.',
+        'banner_size_hint' => 'Banner must have a 3:1 ratio and be at least 1500px wide.',
         'banner_delete' => 'Podcast-Banner löschen',
         'title' => 'Titel',
         'handle' => 'Identifikator',
@@ -90,6 +110,9 @@ return [
         'custom_rss_hint' => 'Dies wird innerhalb des ❬channel❭ Tags eingefügt.',
         'new_feed_url' => 'Neue Feed-URL',
         'new_feed_url_hint' => 'Benutzen Sie dieses Feld, wenn Sie zu einer anderen Domain oder Podcast-Plattform wechseln. Standardmäßig wird der Wert auf die aktuelle RSS URL gesetzt, wenn der Podcast importiert wird.',
+        'old_feed_url' => 'Old feed URL',
+        'update_feed' => 'Update feed',
+        'update_feed_tip' => 'Import this podcast\'s latest episodes',
         'partnership' => 'Partnerschaft:en',
         'partner_id' => 'ID',
         'partner_link_url' => 'Link',
@@ -219,6 +242,12 @@ return [
         'film_reviews' => 'Filmkritiken',
         'tv_reviews' => 'TV-Kritiken',
     ],
+    'delete_form' => [
+        'disclaimer' =>
+            "Deleting the podcast will delete all episodes, media files, posts and analytics associated with it. This action is irreversible, you will not be able to retrieve them afterwards.",
+        'understand' => 'I understand, I want the podcast to be permanently deleted',
+        'submit' => 'Delete',
+    ],
     'by' => 'Von {publisher}',
     'season' => 'Staffel {seasonNumber}',
     'list_of_episodes_year' => '{year} Folgen ({episodeCount})',
@@ -227,12 +256,12 @@ return [
     'no_episode' => 'Keine Folge gefunden!',
     'follow' => 'Folgen',
     'followers' => '{numberOfFollowers, plural,
-        one {# Follower}
-        other {# Follower}
+        one {# follower}
+        other {# followers}
     }',
     'posts' => '{numberOfPosts, plural,
-        one {# Beitrag}
-        other {# Beiträge}
+        one {# post}
+        other {# posts}
     }',
     'activity' => 'Aktivitäten',
     'episodes' => 'Folgen',

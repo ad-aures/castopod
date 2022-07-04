@@ -38,6 +38,15 @@ return [
         'not_published' => 'غير منشورة',
     ],
     'list' => [
+        'search' => [
+            'placeholder' => 'Search for an episode',
+            'clear' => 'Clear search',
+            'submit' => 'Search',
+        ],
+        'number_of_episodes' => '{numberOfEpisodes, plural,
+            one {# episode}
+            other {# episodes}
+        }',
         'episode' => 'الحلقة',
         'visibility' => 'الظهور',
         'comments' => 'التعليقات',
@@ -47,6 +56,24 @@ return [
         'createSuccess' => 'تم إنشاء الحلقة بنجاح!',
         'editSuccess' => 'تم تحديث الحلقة بنجاح!',
         'publishCancelSuccess' => 'تم إلغاء نشر الحلقة بنجاح!',
+        'unpublishBeforeDeleteTip' => 'You must unpublish the episode before deleting it.',
+        'deletePublishedEpisodeError' => 'Please unpublish the episode before deleting it.',
+        'deleteSuccess' => 'Episode successfully deleted!',
+        'deleteError' => 'Failed to delete episode {type, select,
+            transcript {transcript}
+            chapters {chapters}
+            image {cover}
+            audio {audio}
+            other {media}
+        }.',
+        'deleteFileError' => 'Failed to delete {type, select,
+            transcript {transcript}
+            chapters {chapters}
+            image {cover}
+            audio {audio}
+            other {media}
+        } file {file_path}. You may manually remove it from your disk.',
+        'sameSlugError' => 'An episode with the chosen slug already exists.',
     ],
     'form' => [
         'file_size_error' =>
@@ -57,7 +84,7 @@ return [
         'cover' => 'غلاف الحلقة',
         'cover_hint' =>
             'If you do not set a cover, the podcast cover will be used instead.',
-        'cover_size_hint' => 'Cover must be squared with at least 1400px wide and tall.',
+        'cover_size_hint' => 'Cover must be squared and at least 1400px wide and tall.',
         'title' => 'العنوان',
         'title_hint' =>
             'Should contain a clear and concise episode name. Do not specify the episode or season numbers here.',
@@ -147,9 +174,9 @@ return [
     ],
     'delete_form' => [
         'disclaimer' =>
-            "Deleting the episode will delete all the posts associated with it and remove it from the podcast's RSS feed.",
+            "Deleting the episode will delete all media files, comments, video clips and soundbites associated with it.",
         'understand' => 'I understand, I want to delete the episode',
-        'submit' => 'احذف',
+        'submit' => 'Delete',
     ],
     'embed' => [
         'title' => 'Embeddable player',

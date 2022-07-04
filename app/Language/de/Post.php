@@ -15,8 +15,8 @@ return [
     'reply_to' => 'Antorten auf @{actorUsername}',
     'form' => [
         'message_placeholder' => 'Scheibe eine Nachricht…',
-        'episode_message_placeholder' => 'Schreibe eine Nachricht für die Folge…',
-        'episode_url_placeholder' => 'URL der Folge',
+        'episode_message_placeholder' => 'Schreibe eine Nachricht für die Episode…',
+        'episode_url_placeholder' => 'URL der Episode',
         'reply_to_placeholder' => 'Antworten auf @{actorUsername}',
         'submit' => 'Senden',
         'submit_reply' => 'Antwort senden',

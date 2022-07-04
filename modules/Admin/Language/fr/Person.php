@@ -24,7 +24,7 @@ return [
     'form' => [
         'avatar' => 'Avatar',
         'avatar_size_hint' =>
-            'L’image doit être carrée et avoir au moins 400px de largeur et de hauteur.',
+            'Avatar must be squared and at least 400px wide and tall.',
         'full_name' => 'Nom complet',
         'full_name_hint' => 'Le nom complet ou le pseudonyme de l’intervenant',
         'unique_name' => 'Nom unique',

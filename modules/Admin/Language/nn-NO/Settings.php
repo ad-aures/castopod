@@ -15,7 +15,7 @@ return [
         'site_icon' => 'Sideikon',
         'site_icon_delete' => 'Slett sideikonet',
         'site_icon_hint' => 'Nettstadikon er det du ser i fanene på nettlesaren, bokmerkelina og når du legg til ein nettstad som snarveg på mobile einingar.',
-        'site_icon_helper' => 'Ikonet må vera kvadratisk og minst 512pkt breitt og høgt.',
+        'site_icon_helper' => 'Icon must be squared and at least 512px wide and tall.',
         'site_name' => 'Nettstadnamn',
         'site_description' => 'Skildring av nettstaden',
         'submit' => 'Lagre',

@@ -29,8 +29,8 @@ por podcasters alrededor de&nbsp;el mundo!
 - 🌱 &nbsp;Gratis & de código abierto (AGPL v3 Licencia)
 - 🔐 &nbsp;Centrado en la soberanía de los datos: su contenido, audiencia, y
   analíticas le pertenecen a usted, y solo a &nbsp;usted&nbsp;
-- &nbsp;Funciones de Podcasting 2.0: GUID, protección y bloqueo del podcast,
-  transcripciones, fondos, capítulos, ubicación, personas, sonidos, …
+- 🪄 &nbsp;Podcasting 2.0 features: GUID, locked, transcripts, funding,
+  chapters, location, persons, soundbites, …
 - :speech \_balloon: &nbsp;Red social integrada:
   - 🚀 &nbsp;Castopod es parte del Fediverso, una red social descentralizada
   - ❤️ &nbsp;Crear mensajes, compartir, favoritos y comentarios en episodios
@@ -204,23 +204,16 @@ contribuyentes. Si quieres ayudar, por favor considera colaborar con
 [Licencia pública general GNU v3.0](https://choosealicense.com/licenses/agpl-3.0/)
 
 Copyright © 2020-presente, [Ad Aures](https://adaures.com/).
+https://img.shields.io/gitlab/v/release/2?color=brightgreen&gitlab_url=https%3A%2F%2Fcode.castopod.org%2F&include_prereleases&label=release
+https://img.shields.io/github/license/ad-aures/castopod?color=blue
+https://img.shields.io/badge/contributions-welcome-brightgreen.svg
+https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
+https://img.shields.io/github/stars/ad-aures/castopod?style=social
 
 [release]: https://code.castopod.org/adaures/castopod/-/releases
-[release-badge]:
-  https://img.shields.io/gitlab/v/release/2?color=brightgreen&gitlab_url=https%3A%2F%2Fcode.castopod.org%2F&include_prereleases&label=release
 [license]: https://code.castopod.org/adaures/castopod/-/blob/beta/LICENSE.md
-[license-badge]:
-  https://img.shields.io/github/license/ad-aures/castopod?color=blue
 [contributions]: https://code.castopod.org/adaures/castopod/-/issues
-[contributions-badge]:
-  https://img.shields.io/badge/contributions-welcome-brightgreen.svg
 [semantic-release]: https://github.com/semantic-release/semantic-release
-[semantic-release-badge]:
-  https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
 [discord]: https://castopod.org/discord
-[discord-badge]: https://img.shields.io/badge/chat-on%20discord-7389D8
 [stars]: https://github.com/ad-aures/castopod/stargazers
-[stars-badge]:
-  https://img.shields.io/github/stars/ad-aures/castopod?style=social
 [crowdin]: https://translate.castopod.org/project/castopod
-[crowdin-badge]: https://badges.crowdin.net/castopod/localized.svg

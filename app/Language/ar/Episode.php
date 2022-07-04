@@ -29,5 +29,6 @@ return [
         other {# comments}
     }',
     'all_podcast_episodes' => 'كافة حلقات البودكاست',
+    'episodes_recycle_bin' => 'Recycle bin',
     'back_to_podcast' => 'العودة إلى البودكاست',
 ];

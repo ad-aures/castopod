@@ -24,7 +24,7 @@ return [
     'form' => [
         'avatar' => 'Awatar',
         'avatar_size_hint' =>
-            'Awatar musi być kwadratowy o szerokości i wysokości co najmniej 400 pikseli.',
+            'Avatar must be squared and at least 400px wide and tall.',
         'full_name' => 'Pełne imię i nazwisko',
         'full_name_hint' => 'To jest pełne imię i nazwisko lub pseudonim osoby.',
         'unique_name' => 'Unikalna nazwa',

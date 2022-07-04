@@ -24,7 +24,7 @@ return [
     'form' => [
         'avatar' => 'الصورة الرمزية',
         'avatar_size_hint' =>
-            'Avatar must be squared with at least 400px wide and tall.',
+            'Avatar must be squared and at least 400px wide and tall.',
         'full_name' => 'الإسم الكامل',
         'full_name_hint' => 'This is the full name or alias of the person.',
         'unique_name' => 'Unique name',

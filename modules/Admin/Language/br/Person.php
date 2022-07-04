@@ -9,22 +9,22 @@ declare(strict_types=1);
  */
 
 return [
-    'persons' => 'Persons',
-    'all_persons' => 'All persons',
-    'no_person' => 'Nobody found!',
-    'create' => 'Create a person',
-    'view' => 'View person',
-    'edit' => 'Edit person',
-    'delete' => 'Delete person',
+    'persons' => 'Emellerien·ezed',
+    'all_persons' => 'An holl emellerien·ezed',
+    'no_person' => 'Emeller·ez ebet!',
+    'create' => 'Krouiñ un emeller·ez',
+    'view' => 'Gwelet an emeller·ez',
+    'edit' => 'Kemmañ an emeller·ez',
+    'delete' => 'Dilemel an emeller·ez',
     'messages' => [
-        'createSuccess' => 'Person has been successfully created!',
-        'editSuccess' => 'Person has been successfully updated!',
-        'deleteSuccess' => 'Person has been removed!',
+        'createSuccess' => 'Krouet eo bet an emeller·ez gant berzh!',
+        'editSuccess' => 'Hizivaet eo bet an emeller·ez gant berzh!',
+        'deleteSuccess' => 'Tennet eo bet an emeller·ez!',
     ],
     'form' => [
         'avatar' => 'Avatar',
         'avatar_size_hint' =>
-            'Avatar must be squared with at least 400px wide and tall.',
+            'Avatar must be squared and at least 400px wide and tall.',
         'full_name' => 'Full name',
         'full_name_hint' => 'This is the full name or alias of the person.',
         'unique_name' => 'Unique name',

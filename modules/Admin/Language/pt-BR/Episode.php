@@ -38,6 +38,15 @@ return [
         'not_published' => 'Não publicado',
     ],
     'list' => [
+        'search' => [
+            'placeholder' => 'Search for an episode',
+            'clear' => 'Clear search',
+            'submit' => 'Search',
+        ],
+        'number_of_episodes' => '{numberOfEpisodes, plural,
+            one {# episode}
+            other {# episodes}
+        }',
         'episode' => 'Episódio',
         'visibility' => 'Visibilidade',
         'comments' => 'Comentários',
@@ -47,6 +56,24 @@ return [
         'createSuccess' => 'Episódio foi criado com sucesso!',
         'editSuccess' => 'Episódio foi atualizado com sucesso!',
         'publishCancelSuccess' => 'Publicação do episódio cancelada!',
+        'unpublishBeforeDeleteTip' => 'Você deve despublicar o episódio antes de excluí-lo.',
+        'deletePublishedEpisodeError' => 'Por favor, despublique o episódio antes de excluí-lo.',
+        'deleteSuccess' => 'Episódio excluído com sucesso!',
+        'deleteError' => 'Falha ao excluir o episódio {type, select,
+            transcript {transcrição}
+            chapters {capítulos}
+            image {cupa}
+            audio {áudio}
+            other {mídia}
+        }.',
+        'deleteFileError' => 'Failed to delete {type, select,
+            transcript {transcript}
+            chapters {chapters}
+            image {cover}
+            audio {audio}
+            other {media}
+        } file {file_path}. You may manually remove it from your disk.',
+        'sameSlugError' => 'Um episódio com o slug escolhido já existe.',
     ],
     'form' => [
         'file_size_error' =>
@@ -57,7 +84,7 @@ return [
         'cover' => 'Capa de episódio',
         'cover_hint' =>
             'Se você não definir uma capa, a capa do podcast será usada no lugar.',
-        'cover_size_hint' => 'Capa deve ser quadrada com pelo menos 1400px de largura e altura.',
+        'cover_size_hint' => 'Cover must be squared and at least 1400px wide and tall.',
         'title' => 'Título',
         'title_hint' =>
             'Deve conter um nome de episódio claro e conciso. Não especifique o número de episódio ou de temporada aqui.',
@@ -89,7 +116,7 @@ return [
             'Este texto é adicionado no final de cada descrição de episódio, é um bom lugar para inserir seus links sociais por exemplo.',
         'additional_files_section_title' => 'Arquivos adicionais',
         'additional_files_section_subtitle' =>
-            'Estes arquivos podem ser usados por outras plataformas para fornecer uma melhor experiência ao seu público. Veja {podcastNamespaceLink} para mais informações.',
+            'Estes arquivos podem ser usados por outras plataformas para fornecer uma melhor experiência ao seu público. Veja o {podcastNamespaceLink} para mais informações.',
         'location_section_title' => 'Localização',
         'location_section_subtitle' => 'Sobre que lugar é este episódio?',
         'location_name' => 'Nome ou endereço da localização',
@@ -147,7 +174,7 @@ return [
     ],
     'delete_form' => [
         'disclaimer' =>
-            "Excluir o episódio vai deletar todas as publicações associadas a ele e removê-lo do feed RSS do podcast.",
+            "Excluir o episódio irá excluir todos os arquivos de mídia, comentários, clipes de vídeo e clipes de áudio associados a ele.",
         'understand' => 'Eu entendo, eu quero excluir o episódio',
         'submit' => 'Excluir',
     ],

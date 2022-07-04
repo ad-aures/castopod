@@ -39,6 +39,15 @@ return [
         'not_published' => 'Diembann',
     ],
     'list' => [
+        'search' => [
+            'placeholder' => 'Search for an episode',
+            'clear' => 'Clear search',
+            'submit' => 'Search',
+        ],
+        'number_of_episodes' => '{numberOfEpisodes, plural,
+            one {# episode}
+            other {# episodes}
+        }',
         'episode' => 'Rann',
         'visibility' => 'Gwelusted',
         'comments' => 'Evezhiadennoù',
@@ -48,6 +57,24 @@ return [
         'createSuccess' => 'Krouet eo bet ar rann gant berzh!',
         'editSuccess' => 'Hizivaet eo bet ar rann gant berzh!',
         'publishCancelSuccess' => 'Nullet eo bet embannadur ar rann gant berzh!',
+        'unpublishBeforeDeleteTip' => 'Ret eo deoc\'h diembannañ ar rann a-raok dilemel anezhi.',
+        'deletePublishedEpisodeError' => 'Diembannit ar rann a-raok dilemel anezhi mar plij.',
+        'deleteSuccess' => 'Dilamet eo bet ar rann gant berzh!',
+        'deleteError' => 'Failed to delete episode {type, select,
+            transcript {transcript}
+            chapters {chapters}
+            image {cover}
+            audio {audio}
+            other {media}
+        }.',
+        'deleteFileError' => 'Failed to delete {type, select,
+            transcript {transcript}
+            chapters {chapters}
+            image {cover}
+            audio {audio}
+            other {media}
+        } file {file_path}. You may manually remove it from your disk.',
+        'sameSlugError' => 'Bez ez eus eus ur rann gant ar berradur-mañ (slug) dija.',
     ],
     'form' => [
         'file_size_error' =>
@@ -58,7 +85,7 @@ return [
         'cover' => 'Golo ar rann',
         'cover_hint' =>
             'Ma n\'ho peus ket kaset ur golo e vo implijet hini ar podkast en e blas.',
-        'cover_size_hint' => 'Ar golo a rankfe bezañ ur c\'harrez 1400px e vent da nebeutañ.',
+        'cover_size_hint' => 'Cover must be squared and at least 1400px wide and tall.',
         'title' => 'Titl',
         'title_hint' =>
             'Dleout a rafe anv ar rann, sklaer ha berr. Arabat lakaat niverenn ar rann pe ar c\'houlzad amañ.',
@@ -148,7 +175,7 @@ return [
     ],
     'delete_form' => [
         'disclaimer' =>
-            "Dilemel ar rann a zilamo an holl gemennadennoù liammet outi ha skarzhet e vo eus lanv RSS ar podkast.",
+            "Gant ar rann e vo dilamet an holl restroù media, evezhiadennoù, tennadoù video ha son liammet outi.",
         'understand' => 'Komprennet eo, dilemel ar rann a fell din',
         'submit' => 'Dilemel',
     ],

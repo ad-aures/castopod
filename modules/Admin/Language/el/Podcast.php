@@ -9,31 +9,51 @@ declare(strict_types=1);
  */
 
 return [
-    'all_podcasts' => 'All podcasts',
-    'no_podcast' => 'No podcast found!',
-    'create' => 'Create podcast',
-    'import' => 'Import podcast',
-    'new_episode' => 'New Episode',
-    'view' => 'View podcast',
-    'edit' => 'Edit podcast',
-    'delete' => 'Delete podcast',
-    'see_episodes' => 'See episodes',
-    'see_contributors' => 'See contributors',
-    'go_to_page' => 'Go to page',
-    'latest_episodes' => 'Latest episodes',
-    'see_all_episodes' => 'See all episodes',
+    'all_podcasts' => 'Όλα τα podcasts',
+    'no_podcast' => 'Δεν βρέθηκαν podcast!',
+    'create' => 'Δημιουργία podcast',
+    'import' => 'Εισαγωγή ενός podcast',
+    'new_episode' => 'Νέο Επεισόδιο',
+    'view' => 'Προβολή podcast',
+    'edit' => 'Επεξεργασία podcast',
+    'delete' => 'Διαγραφή podcast',
+    'see_episodes' => 'Δείτε επεισόδια',
+    'see_contributors' => 'Βλέπε συντελεστές',
+    'go_to_page' => 'Μετάβαση στη σελίδα',
+    'latest_episodes' => 'Τελευταία επεισόδια',
+    'see_all_episodes' => 'Δείτε όλα τα επεισόδια',
     'messages' => [
-        'createSuccess' => 'Podcast has been successfully created!',
-        'editSuccess' => 'Podcast has been successfully updated!',
-        'importSuccess' => 'Podcast has been successfully imported!',
+        'createSuccess' => 'Το επεισόδιο δημιουργήθηκε με επιτυχία!',
+        'editSuccess' => 'Το Podcast ενημερώθηκε με επιτυχία!',
+        'importSuccess' => 'Το Podcast εισήχθη με επιτυχία!',
+        'deleteSuccess' => 'Podcast @{podcast_handle} successfully deleted!',
+        'deletePodcastMediaError' => 'Failed to delete podcast {type, select,
+            cover {cover}
+            banner {banner}
+            other {media}
+        }.',
+        'deleteEpisodeMediaError' => 'Failed to delete podcast episode {episode_slug} {type, select,
+            transcript {transcript}
+            chapters {chapters}
+            image {cover}
+            audio {audio}
+            other {media}
+        }.',
+        'deletePodcastMediaFolderError' => 'Failed to delete podcast media folder {folder_path}. You may manually remove it from your disk.',
+        'podcastFeedUpdateSuccess' => 'Successful update: {number_of_new_episodes, plural,
+            one {# episode was}
+            other {# episodes were}
+        } added to the podcast!',
+        'podcastFeedUpToDate' => 'Podcast is already up to date.',
+        'podcastNotImported' => 'Podcast could not be updated as it was not imported.',
     ],
     'form' => [
-        'identity_section_title' => 'Podcast identity',
-        'identity_section_subtitle' => 'These fields allow you to get noticed.',
+        'identity_section_title' => 'Αναγνωριστικό Podcast',
+        'identity_section_subtitle' => 'Αυτά τα πεδία σας επιτρέπουν να ξεχωρίσει το podcast σας.',
         'cover' => 'Podcast cover',
-        'cover_size_hint' => 'Cover must be squared with at least 1400px wide and tall.',
+        'cover_size_hint' => 'Cover must be squared and at least 1400px wide and tall.',
         'banner' => 'Podcast banner',
-        'banner_size_hint' => 'Banner must have a 3:1 ratio with at least 1500px wide.',
+        'banner_size_hint' => 'Banner must have a 3:1 ratio and be at least 1500px wide.',
         'banner_delete' => 'Delete podcast banner',
         'title' => 'Title',
         'handle' => 'Handle',
@@ -90,6 +110,9 @@ return [
         'custom_rss_hint' => 'This will be injected within the ❬channel❭ tag.',
         'new_feed_url' => 'New feed URL',
         'new_feed_url_hint' => 'Use this field when you move to another domain or podcast hosting platform. By default, the value is set to the current RSS URL if the podcast is imported.',
+        'old_feed_url' => 'Old feed URL',
+        'update_feed' => 'Update feed',
+        'update_feed_tip' => 'Import this podcast\'s latest episodes',
         'partnership' => 'Partnership',
         'partner_id' => 'ID',
         'partner_link_url' => 'Link URL',
@@ -218,6 +241,12 @@ return [
         'film_interviews' => 'Film Interviews',
         'film_reviews' => 'Film Reviews',
         'tv_reviews' => 'TV Reviews',
+    ],
+    'delete_form' => [
+        'disclaimer' =>
+            "Deleting the podcast will delete all episodes, media files, posts and analytics associated with it. This action is irreversible, you will not be able to retrieve them afterwards.",
+        'understand' => 'I understand, I want the podcast to be permanently deleted',
+        'submit' => 'Delete',
     ],
     'by' => 'By {publisher}',
     'season' => 'Season {seasonNumber}',

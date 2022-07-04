@@ -9,22 +9,22 @@ declare(strict_types=1);
  */
 
 return [
-    'back_to_home' => 'Back to home',
-    'page' => 'Page',
-    'all_pages' => 'All pages',
-    'create' => 'New page',
-    'go_to_page' => 'Go to page',
-    'edit' => 'Edit page',
-    'delete' => 'Delete page',
+    'back_to_home' => 'Distreiñ d\'ar bennbajennad',
+    'page' => 'Pajenn',
+    'all_pages' => 'An holl bajennoù',
+    'create' => 'Krouiñ ur bajenn',
+    'go_to_page' => 'Mont d\'ar bajenn',
+    'edit' => 'Kemm ar bajenn',
+    'delete' => 'Dilemel ar bajenn',
     'form' => [
-        'title' => 'Title',
-        'permalink' => 'Permalink',
-        'content' => 'Content',
-        'submit_create' => 'Create page',
-        'submit_edit' => 'Save',
+        'title' => 'Titl',
+        'permalink' => 'Peurliamm',
+        'content' => 'Danvez',
+        'submit_create' => 'Krouiñ ar bajenn',
+        'submit_edit' => 'Enrollañ',
     ],
     'messages' => [
-        'createSuccess' => 'The page “{pageTitle}” was created successfully!',
-        'editSuccess' => 'The page was successfully updated!',
+        'createSuccess' => 'Krouet eo bet ar bajenn "{pageTitle}" gant berzh!',
+        'editSuccess' => 'Hizivaet eo bet ar bajenn gant berzh!',
     ],
 ];

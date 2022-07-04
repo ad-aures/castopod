@@ -17,6 +17,7 @@ return [
     'episodes' => 'Episodar',
     'episode-list' => 'Alle episodane',
     'episode-create' => 'Ny episode',
+    'episode-deleted' => 'Recycle bin',
     'analytics' => 'Analysar',
     'podcast-analytics' => 'Oversikt over publikum',
     'podcast-analytics-webpages' => 'Nettsidevisingar',

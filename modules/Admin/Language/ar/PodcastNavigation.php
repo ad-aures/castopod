@@ -17,6 +17,7 @@ return [
     'episodes' => 'الحلقات',
     'episode-list' => 'جميع الحلقات',
     'episode-create' => 'حلقة جديدة',
+    'episode-deleted' => 'Recycle bin',
     'analytics' => 'Analytics',
     'podcast-analytics' => 'Audience overview',
     'podcast-analytics-webpages' => 'Web pages visits',

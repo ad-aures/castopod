@@ -29,5 +29,6 @@ return [
         other {# comentários}
     }',
     'all_podcast_episodes' => 'Todos os episódios de podcast',
+    'episodes_recycle_bin' => 'Lixeira',
     'back_to_podcast' => 'Voltar para o podcast',
 ];

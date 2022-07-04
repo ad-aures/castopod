@@ -15,7 +15,7 @@ return [
         'site_icon' => 'Icono del sitio',
         'site_icon_delete' => 'Borrar icono del sitio',
         'site_icon_hint' => 'Los iconos del sitio son lo que ves en las pestañas del navegador, la barra de marcadores y cuando agregas un sitio web como un acceso directo en los dispositivos móviles.',
-        'site_icon_helper' => 'El icono debe ser cuadrado con al menos 512px de ancho y alto.',
+        'site_icon_helper' => 'Icon must be squared and at least 512px wide and tall.',
         'site_name' => 'Nombre del sitio',
         'site_description' => 'Descripción del sitio',
         'submit' => 'Guardar',

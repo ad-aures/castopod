@@ -29,5 +29,6 @@ return [
         other {# comments}
     }',
     'all_podcast_episodes' => 'All podcast episodes',
+    'episodes_recycle_bin' => 'Recycle bin',
     'back_to_podcast' => 'Go back to podcast',
 ];

@@ -26,14 +26,34 @@ return [
         'createSuccess' => 'Podcast foi criado com sucesso!',
         'editSuccess' => 'Podcast foi atualizado com sucesso!',
         'importSuccess' => 'Podcast foi importado com sucesso!',
+        'deleteSuccess' => 'Podcast @{podcast_handle} successfully deleted!',
+        'deletePodcastMediaError' => 'Failed to delete podcast {type, select,
+            cover {cover}
+            banner {banner}
+            other {media}
+        }.',
+        'deleteEpisodeMediaError' => 'Failed to delete podcast episode {episode_slug} {type, select,
+            transcript {transcript}
+            chapters {chapters}
+            image {cover}
+            audio {audio}
+            other {media}
+        }.',
+        'deletePodcastMediaFolderError' => 'Failed to delete podcast media folder {folder_path}. You may manually remove it from your disk.',
+        'podcastFeedUpdateSuccess' => 'Successful update: {number_of_new_episodes, plural,
+            one {# episode was}
+            other {# episodes were}
+        } added to the podcast!',
+        'podcastFeedUpToDate' => 'Podcast is already up to date.',
+        'podcastNotImported' => 'Podcast could not be updated as it was not imported.',
     ],
     'form' => [
         'identity_section_title' => 'Identidade do podcast',
         'identity_section_subtitle' => 'Esses campos permitem que você seja notado.',
         'cover' => 'Capa do podcast',
-        'cover_size_hint' => 'Capa deve ser quadrada com pelo menos 1400px de largura e altura.',
+        'cover_size_hint' => 'Cover must be squared and at least 1400px wide and tall.',
         'banner' => 'Banner do podcast',
-        'banner_size_hint' => 'Banner deve ter uma proporção 3:1 com ao menos 1500px de largura.',
+        'banner_size_hint' => 'Banner must have a 3:1 ratio and be at least 1500px wide.',
         'banner_delete' => 'Excluir banner do podcast',
         'title' => 'Título',
         'handle' => 'Identificador',
@@ -90,6 +110,9 @@ return [
         'custom_rss_hint' => 'Isto será injetado dentro da tag ❬channel❭.',
         'new_feed_url' => 'Nova URL de feed',
         'new_feed_url_hint' => 'Use este campo ao mover este podcast para outro domínio ou alterar hosts. Por padrão, este campo é preenchido com a URL do feed RSS atual se o podcast for importado.',
+        'old_feed_url' => 'Old feed URL',
+        'update_feed' => 'Update feed',
+        'update_feed_tip' => 'Import this podcast\'s latest episodes',
         'partnership' => 'Parceria',
         'partner_id' => 'ID',
         'partner_link_url' => 'URL do link',
@@ -219,6 +242,12 @@ return [
         'film_reviews' => 'Avaliações de Filmes',
         'tv_reviews' => 'Avaliações de TV',
     ],
+    'delete_form' => [
+        'disclaimer' =>
+            "Deleting the podcast will delete all episodes, media files, posts and analytics associated with it. This action is irreversible, you will not be able to retrieve them afterwards.",
+        'understand' => 'I understand, I want the podcast to be permanently deleted',
+        'submit' => 'Delete',
+    ],
     'by' => 'Por {publisher}',
     'season' => 'Temporada {seasonNumber}',
     'list_of_episodes_year' => 'Episódios de {year} ({episodeCount})',
@@ -227,16 +256,16 @@ return [
     'no_episode' => 'Nenhum episódio encontrado!',
     'follow' => 'Seguir',
     'followers' => '{numberOfFollowers, plural,
-        one {# seguidor}
-        other {# seguidores}
+        one {# follower}
+        other {# followers}
     }',
     'posts' => '{numberOfPosts, plural,
-        one {# publicação}
-        other {# publicações}
+        one {# post}
+        other {# posts}
     }',
     'activity' => 'Atividade',
     'episodes' => 'Episódios',
-    'sponsor' => 'Patrocinador',
+    'sponsor' => 'Apoiar',
     'funding_links' => 'Links de financiamento para {podcastTitle}',
     'find_on' => 'Encontrar {podcastTitle} em',
     'listen_on' => 'Ouvir em',

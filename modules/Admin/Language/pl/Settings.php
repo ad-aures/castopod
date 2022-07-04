@@ -15,7 +15,7 @@ return [
         'site_icon' => 'Ikona witryny',
         'site_icon_delete' => 'Usuń ikonę witryny',
         'site_icon_hint' => 'Ikony witryny są widoczne na kartach przeglądarki, paskach zakładek oraz po dodaniu witryny jako skrótu na urządzeniach mobilnych.',
-        'site_icon_helper' => 'Ikona musi być kwadratowa o szerokości i wysokości co najmniej 512 pikseli.',
+        'site_icon_helper' => 'Icon must be squared and at least 512px wide and tall.',
         'site_name' => 'Nazwa strony',
         'site_description' => 'Opis strony',
         'submit' => 'Zapisz',

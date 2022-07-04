@@ -26,19 +26,39 @@ return [
         'createSuccess' => 'Krouet eo bet ar podkast gant berzh!',
         'editSuccess' => 'Hizivaet eo bet ar podkast gant berzh!',
         'importSuccess' => 'Enporzhet eo bet ar podkast gant berzh!',
+        'deleteSuccess' => 'Dilamet eo bet ar podkast @{podcast_handle} gant berzh!',
+        'deletePodcastMediaError' => 'Failed to delete podcast {type, select,
+            cover {cover}
+            banner {banner}
+            other {media}
+        }.',
+        'deleteEpisodeMediaError' => 'Failed to delete podcast episode {episode_slug} {type, select,
+            transcript {transcript}
+            chapters {chapters}
+            image {cover}
+            audio {audio}
+            other {media}
+        }.',
+        'deletePodcastMediaFolderError' => 'Failed to delete podcast media folder {folder_path}. You may manually remove it from your disk.',
+        'podcastFeedUpdateSuccess' => 'Successful update: {number_of_new_episodes, plural,
+            one {# episode was}
+            other {# episodes were}
+        } added to the podcast!',
+        'podcastFeedUpToDate' => 'Podcast is already up to date.',
+        'podcastNotImported' => 'Podcast could not be updated as it was not imported.',
     ],
     'form' => [
-        'identity_section_title' => 'Podcast identity',
-        'identity_section_subtitle' => 'These fields allow you to get noticed.',
+        'identity_section_title' => 'Titouroù diwar-benn ar podkast',
+        'identity_section_subtitle' => 'Ar maeziennoù a laka ac\'hanoc\'h da vezañ remerket.',
         'cover' => 'Golo ar podkast',
-        'cover_size_hint' => 'Cover must be squared with at least 1400px wide and tall.',
-        'banner' => 'Podcast banner',
-        'banner_size_hint' => 'Banner must have a 3:1 ratio with at least 1500px wide.',
-        'banner_delete' => 'Delete podcast banner',
+        'cover_size_hint' => 'Cover must be squared and at least 1400px wide and tall.',
+        'banner' => 'Giton ar podkast',
+        'banner_size_hint' => 'Banner must have a 3:1 ratio and be at least 1500px wide.',
+        'banner_delete' => 'Dilemel giton ar podkast',
         'title' => 'Titl',
-        'handle' => 'Handle',
+        'handle' => 'Anv ar podkast (handle)',
         'handle_hint' =>
-            'Used to identify the podcast. Uppercase, lowercase, numbers and underscores are accepted.',
+            'Implijet evit anavezout ar podkast. Lizherennoù bras pe munut, niveroù hag islinenn (_) degemeret.',
         'type' => [
             'label' => 'Doare',
             'episodic' => 'Episodic',
@@ -90,6 +110,9 @@ return [
         'custom_rss_hint' => 'This will be injected within the ❬channel❭ tag.',
         'new_feed_url' => 'New feed URL',
         'new_feed_url_hint' => 'Use this field when you move to another domain or podcast hosting platform. By default, the value is set to the current RSS URL if the podcast is imported.',
+        'old_feed_url' => 'Old feed URL',
+        'update_feed' => 'Update feed',
+        'update_feed_tip' => 'Import this podcast\'s latest episodes',
         'partnership' => 'Partnership',
         'partner_id' => 'ID',
         'partner_link_url' => 'Link URL',
@@ -218,6 +241,12 @@ return [
         'film_interviews' => 'Film Interviews',
         'film_reviews' => 'Film Reviews',
         'tv_reviews' => 'TV Reviews',
+    ],
+    'delete_form' => [
+        'disclaimer' =>
+            "Deleting the podcast will delete all episodes, media files, posts and analytics associated with it. This action is irreversible, you will not be able to retrieve them afterwards.",
+        'understand' => 'I understand, I want the podcast to be permanently deleted',
+        'submit' => 'Delete',
     ],
     'by' => 'By {publisher}',
     'season' => 'Season {seasonNumber}',

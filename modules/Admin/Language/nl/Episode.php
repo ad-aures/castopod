@@ -38,6 +38,15 @@ return [
         'not_published' => 'Niet gepubliceerd',
     ],
     'list' => [
+        'search' => [
+            'placeholder' => 'Search for an episode',
+            'clear' => 'Clear search',
+            'submit' => 'Search',
+        ],
+        'number_of_episodes' => '{numberOfEpisodes, plural,
+            one {# episode}
+            other {# episodes}
+        }',
         'episode' => 'Aflevering',
         'visibility' => 'Zichtbaarheid',
         'comments' => 'Reacties',
@@ -47,6 +56,24 @@ return [
         'createSuccess' => 'Aflevering is succesvol aangemaakt!',
         'editSuccess' => 'Aflevering is succesvol bijgewerkt!',
         'publishCancelSuccess' => 'Aflevering publicatie is geannuleerd!',
+        'unpublishBeforeDeleteTip' => 'You must unpublish the episode before deleting it.',
+        'deletePublishedEpisodeError' => 'Please unpublish the episode before deleting it.',
+        'deleteSuccess' => 'Episode successfully deleted!',
+        'deleteError' => 'Failed to delete episode {type, select,
+            transcript {transcript}
+            chapters {chapters}
+            image {cover}
+            audio {audio}
+            other {media}
+        }.',
+        'deleteFileError' => 'Failed to delete {type, select,
+            transcript {transcript}
+            chapters {chapters}
+            image {cover}
+            audio {audio}
+            other {media}
+        } file {file_path}. You may manually remove it from your disk.',
+        'sameSlugError' => 'An episode with the chosen slug already exists.',
     ],
     'form' => [
         'file_size_error' =>
@@ -57,7 +84,7 @@ return [
         'cover' => 'Aflevering omslag',
         'cover_hint' =>
             'Als je geen omslag instelt, zal de podcast omslag worden gebruikt.',
-        'cover_size_hint' => 'Omslag moet minstens 1400px breed en hoog zijn.',
+        'cover_size_hint' => 'Cover must be squared and at least 1400px wide and tall.',
         'title' => 'Titel',
         'title_hint' =>
             'Moet een duidelijke en beknopte afleveringsnaam bevatten. Geef hier geen aflevering of seizoen nummers op.',
@@ -147,7 +174,7 @@ return [
     ],
     'delete_form' => [
         'disclaimer' =>
-            "Deleting the episode will delete all the posts associated with it and remove it from the podcast's RSS feed.",
+            "Deleting the episode will delete all media files, comments, video clips and soundbites associated with it.",
         'understand' => 'I understand, I want to delete the episode',
         'submit' => 'Delete',
     ],

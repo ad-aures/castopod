@@ -17,6 +17,7 @@ return [
     'episodes' => 'Odcinki',
     'episode-list' => 'Wszystkie odcinki',
     'episode-create' => 'Nowy odcinek',
+    'episode-deleted' => 'Recycle bin',
     'analytics' => 'Analityka',
     'podcast-analytics' => 'Przegląd odbiorców',
     'podcast-analytics-webpages' => 'Odwiedziny stron internetowych',

@@ -9,15 +9,15 @@ declare(strict_types=1);
  */
 
 return [
-    'go_to_page' => 'View episode page',
-    'dashboard' => 'Episode dashboard',
-    'episode-view' => 'Home',
-    'episode-edit' => 'Edit episode',
-    'episode-persons-manage' => 'Manage persons',
-    'embed-add' => 'Embeddable player',
-    'clips' => 'Clips',
-    'video-clips-list' => 'Video clips',
-    'video-clips-create' => 'New video clip',
-    'soundbites-list' => 'Soundbites',
-    'soundbites-create' => 'New soundbite',
+    'go_to_page' => 'Προβολή σελίδας επεισοδίου',
+    'dashboard' => 'Πίνακας εργαλείων επεισοδίου',
+    'episode-view' => 'Αρχική σελίδα',
+    'episode-edit' => 'Επεξεργασία επεισοδίου',
+    'episode-persons-manage' => 'Διαχείριση ατόμων',
+    'embed-add' => 'Ενσωματώσιμος αναπαραγωγέας',
+    'clips' => 'Αποσπάσματα',
+    'video-clips-list' => 'Βίντεο κλιπς',
+    'video-clips-create' => 'Νέο βίντεο κλιπ',
+    'soundbites-list' => 'Ήχοι',
+    'soundbites-create' => 'Νέο soundbite',
 ];

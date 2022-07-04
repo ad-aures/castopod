@@ -9,13 +9,13 @@ declare(strict_types=1);
  */
 
 return [
-    'pageNavigation' => 'Page navigation',
-    'first' => 'First',
-    'previous' => 'Previous',
-    'next' => 'Next',
-    'last' => 'Last',
-    'older' => 'Older',
-    'newer' => 'Newer',
-    'invalidTemplate' => '{0} is not a valid Pager template.',
-    'invalidPaginationGroup' => '{0} is not a valid Pagination group.',
+    'pageNavigation' => 'Merdeiñ',
+    'first' => 'Kentañ',
+    'previous' => 'Kent',
+    'next' => 'Da heul',
+    'last' => 'Diwezhañ',
+    'older' => 'Koshañ',
+    'newer' => 'Nevesañ',
+    'invalidTemplate' => 'N\'eo ket {0} ur patrom reizh.',
+    'invalidPaginationGroup' => 'N\'eo ket {0} ur strollad reizh.',
 ];

@@ -9,6 +9,14 @@ Castopod foi pensado para ser fácil de instalar. Seja usando hospedagem dedicad
 ou compartilhada, você pode instalá-lo na maioria dos servidores web compatíveis
 com PHP-MySQL.
 
+::: info Nota
+
+Esta seção da documentação o ajudará a configurar o Castopod para produção. Se
+você deseja participar do desenvolvimento do Castopod, pode pular para a seção
+de contribuição.
+
+:::
+
 ## Requisitos
 
 - PHP v8.0 ou superior
@@ -17,7 +25,7 @@ com PHP-MySQL.
 
 ### PHP v8.0 ou superior
 
-É necessário PHP versão 8.0 ou superior com as seguintes extensões instaladas:
+É necessário PHP versão 8.0 ou superior, com as seguintes extensões instaladas:
 
 - [intl](https://php.net/manual/en/intl.requirements.php)
 - [libcurl](https://php.net/manual/en/curl.requirements.php)
@@ -39,9 +47,9 @@ seu PHP:
 
 ::: warning Aviso
 
-Castopod só funciona com bancos de dados compatíveis com MySQL 5.7 ou superior.
-Vai quebrar com a versão anteiror do MySQL, v5.6, por exemplo, pois teve seu
-ciclo encerrado em 5 de fevereiro de 2021.
+Castopod só funciona com bancos de dados MySQL 5.7 ou superior compatíveis. Vai
+quebrar com a versão anterior MySQL v5.6, por exemplo, pois foi encerrada em 5
+de fevereiro de 2021.
 
 :::
 
@@ -51,14 +59,14 @@ entre em contato com o administrador do servidor.
 
 #### Privilégios
 
-O usuário deve ter pelo menos estes privilégios no banco de dados para que o
-Castopod funcione: `CREATE`, `ALTER`, `DELETE`, `EXECUTE`, `INDEX`, `INSERT`,
+O usuário deve ter pelo menos esses privilégios no banco de dados do Castopod
+para funcionar: `CREATE`, `ALTER`, `DELETE`, `EXECUTE`, `INDEX`, `INSERT`,
 `SELECT`, `UPDATE`.
 
 ### (Opcional) FFmpeg v4.1.8 ou superior para Clipes de Vídeo
 
 [FFmpeg](https://www.ffmpeg.org/) versão 4.1.8 ou superior é necessário se você
-deseja gerar Clipes de Vídeo. As seguintes extensões devem ser instaladas:
+deseja gerar Video Clips. As seguintes extensões devem ser instaladas:
 
 - Biblioteca **FreeType 2** para
   [gd](https://www.php.net/manual/en/image.installation.php).
@@ -133,7 +141,7 @@ usar um dos pacotes criados e mantidos pela comunidade de código aberto.
 ### Instalar com YunoHost
 
 [YunoHost](https://yunohost.org/) é uma distribuição baseada no Debian GNU/Linux
-composta por pacotes de software livre e de código aberto. Ele gerencia as
+composto por pacotes de software livre e de código aberto. Ele gerencia as
 dificuldades de auto-hospedagem para você.
 
 <div class="flex flex-wrap items-center gap-4">

@@ -9,22 +9,22 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => 'Platforms',
-    'home_url' => 'Go to {platformName} website',
-    'submit_url' => 'Submit your podcast on {platformName}',
-    'visible' => 'Display in podcast homepage?',
-    'on_embed' => 'Display on embeddable player?',
-    'remove' => 'Remove {platformName}',
-    'submit' => 'Save',
+    'title' => 'Πλατφόρμες',
+    'home_url' => 'Μεταβείτε στην ιστοσελίδα {platformName}',
+    'submit_url' => 'Υποβάλετε το podcast σας στην πλατφόρμα {platformName}',
+    'visible' => 'Εμφάνιση στην αρχική σελίδα του podcast;',
+    'on_embed' => 'Εμφάνιση σε ενσωματωμένο player;',
+    'remove' => 'Κατάργηση {platformName}',
+    'submit' => 'Αποθήκευση',
     'messages' => [
-        'updateSuccess' => 'Platform links have been successfully updated!',
-        'removeLinkSuccess' => 'The platform link has been removed.',
+        'updateSuccess' => 'Οι σύνδεσμοι της πλατφόρμας ενημερώθηκαν επιτυχώς!',
+        'removeLinkSuccess' => 'Ο σύνδεσμος πλατφόρμας έχει αφαιρεθεί.',
         'removeLinkError' =>
-            'The platform link could not be removed. Try again.',
+            'Δεν ήταν δυνατή η αφαίρεση του συνδέσμου της πλατφόρμας. Δοκιμάστε ξανά.',
     ],
     'description' => [
-        'podcasting' => 'The podcast ID on this platform',
-        'social' => 'The podcast account ID on this platform',
-        'funding' => 'Call to action message',
+        'podcasting' => 'Το αναγνωριστικό podcast σε αυτή την πλατφόρμα',
+        'social' => 'Το αναγνωριστικό λογαριασμού podcast σε αυτήν την πλατφόρμα',
+        'funding' => 'Κλήση σε μήνυμα δράσης',
     ],
 ];

@@ -39,7 +39,7 @@ return [
             one {# episodio}
             other {# episodios}
         }',
-        'first_published_at' => 'Primer episodio publicado en {0, date, medium}',
+        'first_published_at' => 'Primer episodio publicado el {0, date, medium}',
     ],
     'sponsor' => 'Patrocinador',
     'funding_links' => 'Enlaces de financiación para {podcastTitle}',

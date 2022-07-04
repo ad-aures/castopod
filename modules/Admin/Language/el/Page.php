@@ -9,22 +9,22 @@ declare(strict_types=1);
  */
 
 return [
-    'back_to_home' => 'Back to home',
-    'page' => 'Page',
-    'all_pages' => 'All pages',
-    'create' => 'New page',
-    'go_to_page' => 'Go to page',
-    'edit' => 'Edit page',
-    'delete' => 'Delete page',
+    'back_to_home' => 'Επιστροφή στην αρχική σελίδα',
+    'page' => 'Σελίδα',
+    'all_pages' => 'Όλες οι σελίδες',
+    'create' => 'Νέα σελίδα',
+    'go_to_page' => 'Μετάβαση στη σελίδα',
+    'edit' => 'Επεξεργασία σελίδας',
+    'delete' => 'Διαγραφή σελίδας',
     'form' => [
-        'title' => 'Title',
-        'permalink' => 'Permalink',
-        'content' => 'Content',
-        'submit_create' => 'Create page',
-        'submit_edit' => 'Save',
+        'title' => 'Τίτλος',
+        'permalink' => 'Μόνιμος σύνδεσμος',
+        'content' => 'Περιεχόμενο',
+        'submit_create' => 'Δημιουργία σελίδας',
+        'submit_edit' => 'Αποθήκευση',
     ],
     'messages' => [
-        'createSuccess' => 'The page “{pageTitle}” was created successfully!',
-        'editSuccess' => 'The page was successfully updated!',
+        'createSuccess' => 'Η σελίδα “{pageTitle}” δημιουργήθηκε με επιτυχία!',
+        'editSuccess' => 'Η σελίδα ενημερώθηκε επιτυχώς!',
     ],
 ];

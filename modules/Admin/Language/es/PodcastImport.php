@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 return [
     'warning' =>
-        'Este procedimiento puede llevar mucho tiempo. Como la versión actual no muestra ningún progreso mientras se ejecuta, no verá nada actualizado hasta que termine. En caso de error de tiempo de espera, incrementa el valor `max_execution_time`.',
+        'Este procedimiento puede llevar mucho tiempo.<br/>Como la versión actual no muestra ningún progreso mientras se ejecuta, no verá nada actualizado hasta que termine.<br/>En caso de error de tiempo de espera, incrementa el valor `max_execution_time`.',
     'old_podcast_section_title' => 'Podcasts para importar',
     'old_podcast_section_subtitle' =>
         'Asegúrese de que tiene los derechos para este podcast antes de importarlo. Copiar y difundir un podcast sin los derechos apropiados es piratería y puede ser procesado.',

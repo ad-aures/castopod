@@ -18,16 +18,12 @@ return [
     'follow' => 'Подписаться',
     'followTitle' => 'Подпишитесь на {actorDisplayName} в федивёрсе!',
     'followers' => '{numberOfFollowers, plural,
-        one {# подписчик}
-        few {# подписчики}
-        many {# подписчики}
-        other {# подписчики}
+        one {# follower}
+        other {# followers}
     }',
     'posts' => '{numberOfPosts, plural,
-        one {# пост}
-        few {# постов}
-        many {# постов}
-        other {# постов}
+        one {# post}
+        other {# posts}
     }',
     'activity' => 'Активность',
     'episodes' => 'Выпуски',
@@ -36,18 +32,14 @@ return [
     'stats' => [
         'title' => 'Статистика',
         'number_of_seasons' => '{0, plural,
-            one {# сезон}
-            few {# сезоны}
-            many {# сезоны}
-            other {# сезоны}
+            one {# season}
+            other {# seasons}
         }',
         'number_of_episodes' => '{0, plural,
-            one {# эпизод}
-            few {# эпизодов}
-            many {# эпизодов}
-            other {# эпизодов}
+            one {# episode}
+            other {# episodes}
         }',
-        'first_published_at' => 'Первый эпизод опубликован {0, date, medium}',
+        'first_published_at' => 'First episode published on {0, date, medium}',
     ],
     'sponsor' => 'Спонсор',
     'funding_links' => 'Ссылки на финансирование для {podcastTitle}',

@@ -29,5 +29,6 @@ return [
         other {# reacties}
     }',
     'all_podcast_episodes' => 'Alle podcast afleveringen',
+    'episodes_recycle_bin' => 'Recycle bin',
     'back_to_podcast' => 'Terug naar podcast',
 ];

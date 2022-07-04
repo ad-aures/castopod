@@ -9,10 +9,10 @@ declare(strict_types=1);
  */
 
 return [
-    'podcast_contributors' => 'Podcast-Mitwirkende',
+    'podcast_contributors' => 'Podcast-Administratoren',
     'view' => "{username}'s Mitwirkung an {podcastTitle}",
-    'add' => 'Mitwirkenden zufügen',
-    'add_contributor' => 'Mitwirkenden zufügen für {0}',
+    'add' => 'Adminstrator zufügen',
+    'add_contributor' => 'Administrator zufügen für {0}',
     'edit_role' => 'Rolle aktualisieren für {0}',
     'edit' => 'Bearbeiten',
     'remove' => 'Entfernen',
@@ -25,7 +25,7 @@ return [
         'user_placeholder' => 'Benutzer auswählen…',
         'role' => 'Rolle',
         'role_placeholder' => 'Rolle auswählen…',
-        'submit_add' => 'Mitwirkenden zufügen',
+        'submit_add' => 'Administrator zufügen',
         'submit_edit' => 'Rolle aktualisieren',
     ],
     'roles' => [
@@ -36,6 +36,6 @@ return [
         'removeSuccess' =>
             '{username} wurde von {podcastTitle} entfernt',
         'alreadyAddedError' =>
-            "Der Mitwirkende wurde bereits zugefügt!",
+            "Der Adminstrator wurde bereits zugefügt!",
     ],
 ];

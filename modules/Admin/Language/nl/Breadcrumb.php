@@ -26,6 +26,8 @@ return [
     'publish-edit' => 'publicatie aanpassen',
     'unpublish' => 'publicatie ongedaan maken',
     'delete' => 'verwijder',
+    'deleted' => 'deleted',
+    'delete-permanently' => 'delete permanently',
     'fediverse' => 'fediverse',
     'block-lists' => 'blokkeerlijst',
     'users' => 'gebruikers',

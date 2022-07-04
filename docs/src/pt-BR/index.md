@@ -21,7 +21,7 @@ podcasters em todo o mundo!
 :::
 
 <div class="flex items-center">
-  <a href="/pt-BR/getting-started/install" class="inline-flex items-center px-4 py-2 mx-auto font-semibold text-center text-white rounded-full shadow gap-x-1 bg-pine-500 hover:no-underline hover:bg-pine-600">Instalar<svg viewBox="0 0 24 24" width="1em" height="1em" class="text-xl text-pine-200"><path fill="currentColor" d="m16.172 11-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg></a>
+  <a href="/getting-started/install" class="inline-flex items-center px-4 py-2 mx-auto font-semibold text-center text-white rounded-full shadow gap-x-1 bg-pine-500 hover:no-underline hover:bg-pine-600">Instalar<svg viewBox="0 0 24 24" width="1em" height="1em" class="text-xl text-pine-200"><path fill="currentColor" d="m16.172 11-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg></a>
 </div>
 
 ## Funcionalidades
@@ -29,8 +29,8 @@ podcasters em todo o mundo!
 - 🌱 &nbsp;Livre & de código aberto (Licença AGPL v3)
 - 🔐 &nbsp;Focado na soberania de dados: seu conteúdo, público e análises
   pertence a você, e somente você
-- 🪄 &nbsp;Recursos de Podcasting 2.0: GUID, bloqueado, transcrições,
-  financiamento, capítulos, localização, pessoas, clipes de áudio, …
+- 🪄 &nbsp;Podcasting 2.0 features: GUID, locked, transcripts, funding,
+  chapters, location, persons, soundbites, …
 - 💬 &nbsp;Rede social integrada:
   - 🚀 &nbsp;Castopod é parte do Fediverso, uma rede social descentralizada
   - ❤️ &nbsp;Crie publicações, compartilhe, favorite e comente em episódios
@@ -188,11 +188,11 @@ sobre o Castopod:
 - [LinkedIn](https://linkedin.com/company/castopod)
 - [Facebook](https://www.facebook.com/castopod)
 
-## Patrocinadores
+## Apoiadores
 
 O desenvolvimento contínuo do Castopod é possível com o apoio de seus
-patrocinadores. Se você quiser ajudar, por favor considere
-[patrocinar o desenvolvimento do Castopod](https://opencollective.com/castopod/contribute).
+apoiadores. Se você quiser ajudar, por favor considere
+[apoiar o desenvolvimento do Castopod](https://opencollective.com/castopod/contribute).
 
 <div class="flex flex-wrap gap-x-16 gap-y-8">
   <a href="https://adaures.com/" target="_blank" rel="noopener noreferrer"><img src="/images/sponsors/adaures.svg" alt="Logo de Ad Aures" class="h-16" /></a>
@@ -203,24 +203,17 @@ patrocinadores. Se você quiser ajudar, por favor considere
 
 [Licença Pública Geral GNU Affero v3.0](https://choosealicense.com/licenses/agpl-3.0/)
 
-Copyright © 2020-present, [Ad Aures](https://adaures.com/).
+Copyright © 2020-presente, [Ad Aures](https://adaures.com/).
+https://img.shields.io/gitlab/v/release/2?color=brightgreen&gitlab_url=https%3A%2F%2Fcode.castopod.org%2F&include_prereleases&label=release
+https://img.shields.io/github/license/ad-aures/castopod?color=blue
+https://img.shields.io/badge/contributions-welcome-brightgreen.svg
+https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
+https://img.shields.io/github/stars/ad-aures/castopod?style=social
 
 [release]: https://code.castopod.org/adaures/castopod/-/releases
-[release-badge]:
-  https://img.shields.io/gitlab/v/release/2?color=brightgreen&gitlab_url=https%3A%2F%2Fcode.castopod.org%2F&include_prereleases&label=release
 [license]: https://code.castopod.org/adaures/castopod/-/blob/beta/LICENSE.md
-[license-badge]:
-  https://img.shields.io/github/license/ad-aures/castopod?color=blue
 [contributions]: https://code.castopod.org/adaures/castopod/-/issues
-[contributions-badge]:
-  https://img.shields.io/badge/contributions-welcome-brightgreen.svg
 [semantic-release]: https://github.com/semantic-release/semantic-release
-[semantic-release-badge]:
-  https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
 [discord]: https://castopod.org/discord
-[discord-badge]: https://img.shields.io/badge/chat-on%20discord-7389D8
 [stars]: https://github.com/ad-aures/castopod/stargazers
-[stars-badge]:
-  https://img.shields.io/github/stars/ad-aures/castopod?style=social
 [crowdin]: https://translate.castopod.org/project/castopod
-[crowdin-badge]: https://badges.crowdin.net/castopod/localized.svg

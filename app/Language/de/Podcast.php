@@ -9,7 +9,7 @@ declare(strict_types=1);
  */
 
 return [
-    'feed' => 'RSS-feed',
+    'feed' => 'RSS-Feed',
     'season' => 'Staffel {seasonNumber}',
     'list_of_episodes_year' => '{year} Folgen ({episodeCount})',
     'list_of_episodes_season' =>
@@ -18,28 +18,28 @@ return [
     'follow' => 'Folgen',
     'followTitle' => 'Folge {actorDisplayName} im Fediversum',
     'followers' => '{numberOfFollowers, plural,
-        one {# Follower}
-        other {# Follower}
+        one {# follower}
+        other {# followers}
     }',
     'posts' => '{numberOfPosts, plural,
-        one {# Beitrag}
-        other {# Beiträge}
+        one {# post}
+        other {# posts}
     }',
     'activity' => 'Aktivitäten',
-    'episodes' => 'Folgen',
+    'episodes' => 'Episoden',
     'episodes_title' => 'Folgen von {podcastTitle}',
     'about' => 'Über',
     'stats' => [
         'title' => 'Statistiken',
         'number_of_seasons' => '{0, plural,
-            one {# Staffel}
-            other {# Staffeln}
+            one {# season}
+            other {# seasons}
         }',
         'number_of_episodes' => '{0, plural,
-            one {# Folge}
-            other {# Folgen}
+            one {# episode}
+            other {# episodes}
         }',
-        'first_published_at' => 'Erste Folge veröffentlicht am {0, date, medium}',
+        'first_published_at' => 'Erste Episode veröffentlicht am {0, date, medium}',
     ],
     'sponsor' => 'Unterstützer',
     'funding_links' => 'Links zur Finanzierung von {podcastTitle}',
@@ -49,5 +49,5 @@ return [
         one {# Person}
         other {# Personen}
     }',
-    'persons_list' => 'Personen',
+    'persons_list' => 'Mitwirkende',
 ];

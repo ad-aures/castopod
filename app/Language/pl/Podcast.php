@@ -18,13 +18,12 @@ return [
     'follow' => 'Obserwuj',
     'followTitle' => 'Obserwuj {actorDisplayName} na fediverse!',
     'followers' => '{numberOfFollowers, plural,
-        one {# obserwujący}
-        other {# obserwujących}
+        one {# follower}
+        other {# followers}
     }',
     'posts' => '{numberOfPosts, plural,
-        one {# wpis}
-        few {# wpisy}
-        other {# wpisów}
+        one {# post}
+        other {# posts}
     }',
     'activity' => 'Aktywność',
     'episodes' => 'Odcinki',
@@ -33,16 +32,14 @@ return [
     'stats' => [
         'title' => 'Statystyki',
         'number_of_seasons' => '{0, plural,
-            one {# sezon}
-            few{# sezony}
-            other {# sezonów}
+            one {# season}
+            other {# seasons}
         }',
         'number_of_episodes' => '{0, plural,
-            one {# odcinek}
-            few {# odcinki}
-            other {# odcinków}
+            one {# episode}
+            other {# episodes}
         }',
-        'first_published_at' => 'Pierwszy odcinek opublikowany {0, date, medium}',
+        'first_published_at' => 'First episode published on {0, date, medium}',
     ],
     'sponsor' => 'Sponsoruj',
     'funding_links' => 'Linki finansowania dla {podcastTitle}',

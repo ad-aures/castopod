@@ -19,7 +19,7 @@ return [
         one {# Person}
         other {# Personen}
     }',
-    'persons_list' => 'Personen',
+    'persons_list' => 'Mitwirkende',
     'back_to_episodes' => 'Zurück zu Folgen von {podcast}',
     'comments' => 'Kommentare',
     'activity' => 'Aktivitäten',
@@ -29,5 +29,6 @@ return [
         other {# Kommentare}
     }',
     'all_podcast_episodes' => 'Alle Podcast-Folgen',
+    'episodes_recycle_bin' => 'Papierkorb',
     'back_to_podcast' => 'Zurück zum Podcast',
 ];

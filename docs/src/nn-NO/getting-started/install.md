@@ -9,6 +9,14 @@ Det er meininga at Castopod skal vera lett å installera. Uansett om du bruker
 eige eller delt vevhotell, kan du installera på dei fleste maskiner som har PHP
 og MySQL.
 
+::: info Note
+
+This section of the documentation will help you set up Castopod for production.
+If you are looking to partake in the development of Castopod, you may skip to
+the contributing section.
+
+:::
+
 ## Krav
 
 - PHP v8.0 eller nyare
@@ -17,7 +25,7 @@ og MySQL.
 
 ### PHP v8.0 eller nyare
 
-PHP versjon 8.0 er eit krav, med desse utvidingane:
+PHP version 8.0 or higher is required, with the following extensions installed:
 
 - [intl](https://php.net/manual/en/intl.requirements.php)
 - [libcurl](https://php.net/manual/en/curl.requirements.php)
@@ -26,8 +34,7 @@ PHP versjon 8.0 er eit krav, med desse utvidingane:
   **PNG**- og **WEBP**-biblioteka.
 - [exif](https://www.php.net/manual/en/exif.installation.php)
 
-I tillegg må du passa på at desse utvidingane er skrudde på i PHP-installasjonen
-din:
+Additionally, make sure that the following extensions are enabled in your PHP:
 
 - json (vanlegvis aktivt - ikkje skru det av)
 - xml (vanlegvis aktivt - ikkje skru det av)
@@ -37,28 +44,27 @@ din:
 
 > Me tilrår [MariaDB](https://mariadb.org).
 
-::: warning Åtvaring
+::: warning Warning
 
-Castopod verkar berre med databasar som støttar MySQL 5.7 eller nyare. MySQL 5.6
-eller eldre vil ikkje fungera, ettersom den versjonen vart forelda i
-februar 2021.
+Castopod only works with supported MySQL 5.7 or higher compatible databases. It
+will break with the previous MySQL v5.6 for example as its end of life was on
+February 5, 2021.
 
 :::
 
-Du treng vertsnamnet til tenaren, databasenamnet, brukarnamnet og passordet til
-databasen for å fullføra installeringa. Viss du ikkje har desse, må du kontakta
-administratoren for tenarmaskina di.
+You will need the server hostname, database name, username and password to
+complete the installation process. If you do not have these, please contact your
+server administrator.
 
 #### Tilgangsrettar
 
-Brukaren må minst ha desse tilgangsrettane på databasen for at Castopod skal
-fungera: `CREATE`, `ALTER`, `DELETE`, `EXECUTE`, `INDEX`, `INSERT`, `SELECT`,
-`UPDATE`.
+User must have at least these privileges on the database for Castopod to work:
+`CREATE`, `ALTER`, `DELETE`, `EXECUTE`, `INDEX`, `INSERT`, `SELECT`, `UPDATE`.
 
 ### (Eventuelt) FFmpeg v4.1.8 eller nyare for filmklypp
 
-Du treng [FFmpeg](https://www.ffmpeg.org/) versjon 4.1.8 viss du vil laga
-filmklypp. Desse utvidingane må vera installerte:
+[FFmpeg](https://www.ffmpeg.org/) version 4.1.8 or higher is required if you
+want to generate Video Clips. The following extensions must be installed:
 
 - **FreeType 2**-biblioteket for
   [gd](https://www.php.net/manual/en/image.installation.php).
@@ -115,25 +121,24 @@ filmklypp. Desse utvidingane må vera installerte:
 2. Fylg framgangsmåten på skjermen.
 3. Start å podkasta!
 
-::: info
+::: info Note
 
-Installasjonsskriptet lagar ei`.env`-fil i rotmappa til pakka. Viss du ikkje kan
-bruka autoinstalleringa, kan du
-[oppretta og oppdatera `.env`-fila manuelt](#alternative-manual-configuration).
+The install script writes a `.env` file in the package root. If you cannot go
+through the install wizard, you can
+[create and update the `.env` file manually](#alternative-manual-configuration).
 
 :::
 
 ## Pakker frå brukarsamfunnet
 
-Viss du ikkje vil bry deg med å installera Castopod manuelt, kan du bruka ei av
-pakkene som brukarsamfunnet har laga. Det er tilhengjarar og brukarar av open
-kjeldekode som lagar og vedlikeheld desse pakkene.
+If you don't want to bother with installing Castopod manually, you may use one
+of the packages created and maintained by the open-source community.
 
 ### Installer med Yunohost
 
-[Yunohost](https://yunohost.org/) er ein Linux-distribusjon som er bygd på
-Debian GNU/Linux og som inneheld frie og opne program. Yunohost tek seg av det
-meste som har med oppsett av eigen vevtenar å gjera.
+[YunoHost](https://yunohost.org/) is a distribution based on Debian GNU/Linux
+made up of free and open-source software packages. It manages the hardships of
+self-hosting for you.
 
 <div class="flex flex-wrap items-center gap-4">
 
@@ -149,16 +154,16 @@ meste som har med oppsett av eigen vevtenar å gjera.
 
 ### Installer med Docker
 
-Viss du vil bruka Docker til å installera Castopod, er det mogleg takk vere
+If you wish to use Docker to install Castopod, it is possible thanks to
 [Romain de Laage](https://mamot.fr/@rdelaage)!
 
 <a href="https://gitlab.utc.fr/picasoft/projets/services/castopod" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-4 py-2 mx-auto font-semibold text-center text-white rounded-md shadow gap-x-1 bg-[#1282d7] hover:no-underline hover:bg-[#0f6eb5]">Installer
 med
 Docker<svg viewBox="0 0 24 24" width="1em" height="1em" class="text-xl text-pine-200"><path fill="currentColor" d="m16.172 11-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg></a>
 
-::: info
+::: info Note
 
-Etter som mange spør etter Docker-installasjon, planlegg me å laga ei offisiell
-Docker-pakke for Castopod her i vårt eige arkiv.
+Given high demand for docker, we plan on maintaining an official Castopod Docker
+image directly into the Castopod repository.
 
 :::

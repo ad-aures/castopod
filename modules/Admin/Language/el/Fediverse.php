@@ -10,23 +10,23 @@ declare(strict_types=1);
 
 return [
     'messages' => [
-        'actorNotFound' => 'The account could not be found!',
-        'blockActorSuccess' => '{actor} has been blocked!',
-        'unblockActorSuccess' => 'Actor has been unblocked!',
-        'blockDomainSuccess' => '{domain} has been blocked!',
-        'unblockDomainSuccess' => '{domain} has been unblocked!',
+        'actorNotFound' => 'Δεν βρέθηκε ο λογαριασμός!',
+        'blockActorSuccess' => '{0} έχει αποκλειστεί!',
+        'unblockActorSuccess' => 'Ο ηθοποιός έχει ξεμπλοκαριστεί!',
+        'blockDomainSuccess' => '{domain} έχει αποκλειστεί!',
+        'unblockDomainSuccess' => '{domain} έχει ξεμπλοκαριστεί!',
     ],
-    'blocked_actors' => 'Blocked accounts',
-    'blocked_domains' => 'Blocked domains',
+    'blocked_actors' => 'Αποκλεισμένοι λογαριασμοί',
+    'blocked_domains' => 'Αποκλεισμένοι τομείς',
     'block_lists_form' => [
-        'handle' => 'Account handle',
-        'handle_hint' => 'Input @username@domain account.',
-        'domain' => 'Domain name',
-        'submit' => 'Block!',
+        'handle' => 'Χειρισμός λογαριασμού',
+        'handle_hint' => 'Εισαγωγή λογαριασμού @username@domain.',
+        'domain' => 'Όνομα τομέα',
+        'submit' => 'Αποκλεισμός!',
     ],
     'list' => [
-        'actor' => 'Account',
-        'domain' => 'Domain name',
-        'unblock' => 'Unblock',
+        'actor' => 'Λογαριασμός',
+        'domain' => 'Όνομα τομέα',
+        'unblock' => 'Ξεμπλοκάρισμα',
     ],
 ];
