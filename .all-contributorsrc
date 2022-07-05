@@ -1,0 +1,501 @@
+{
+  "projectName": "castopod",
+  "projectOwner": "adaures",
+  "repoType": "gitlab",
+  "repoHost": "https://code.castopod.org",
+  "files": [
+    "README.md",
+    "docs/src/index.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributorsPerLine": 7,
+  "contributors": [
+    {
+      "login": "yassinedoghri",
+      "name": "Yassine Doghri",
+      "avatar_url": "https://code.castopod.org/uploads/-/system/user/avatar/3/avatar.png",
+      "profile": "https://github.com/yassinedoghri",
+      "contributions": [
+        "code",
+        "bug",
+        "doc",
+        "review",
+        "maintenance",
+        "content",
+        "design",
+        "a11y",
+        {
+          "type": "translation",
+          "url": "https://translate.castopod.org"
+        },
+        "question",
+        "mentoring",
+        "infra",
+        "ideas",
+        "projectManagement",
+        {
+          "type": "blog",
+          "url": "https://blog.castopod.org/author/yassinedoghri/"
+        }
+      ]
+    },
+    {
+      "login": "benjamin",
+      "name": "Benjamin Bellamy",
+      "avatar_url": "https://code.castopod.org/uploads/-/system/user/avatar/2/avatar.png",
+      "profile": "https://code.castopod.org/benjamin",
+      "contributions": [
+        "code",
+        "bug",
+        "review",
+        "content",
+        {
+          "type": "translation",
+          "url": "https://translate.castopod.org"
+        },
+        "question",
+        "infra",
+        "ideas",
+        {
+          "type": "blog",
+          "url": "https://blog.castopod.org/author/benjamin-bellamy/"
+        },
+        "projectManagement",
+        "talk"
+      ]
+    },
+    {
+      "login": "ola",
+      "name": "Ola Hneini",
+      "avatar_url": "https://castopod.org/assets/images/castopod-avatar.jpg",
+      "profile": "https://github.com/ola-hn",
+      "contributions": [
+        "code",
+        "review",
+        "doc",
+        "maintenance",
+        "question",
+        "ideas"
+      ]
+    },
+    {
+      "login": "rdelaage",
+      "name": "Romain de Laage",
+      "avatar_url": "https://castopod.org/assets/images/castopod-avatar.jpg",
+      "profile": "https://mamot.fr/@rdelaage",
+      "contributions": [
+        "code",
+        "infra",
+        "doc",
+        {
+          "type": "translation",
+          "url": "https://translate.castopod.org"
+        },
+        "ideas"
+      ]
+    },
+    {
+      "login": "Lyonel",
+      "name": "Lyonel Bernard",
+      "avatar_url": "https://castopod.org/assets/images/castopod-avatar.jpg",
+      "profile": "https://twitter.com/lyonelbernard",
+      "contributions": [
+        "bug",
+        "question",
+        "audio",
+        "ideas"
+      ]
+    },
+    {
+      "login": "ctlw83",
+      "name": "Christopher Lagonick-Weitzel",
+      "avatar_url": "https://secure.gravatar.com/avatar/7c2a721b52d0763673a600e8f01bd745?s=80&d=identicon",
+      "profile": "https://www.crypticchameleon.com/",
+      "contributions": [
+        "bug",
+        "question",
+        "audio",
+        "ideas"
+      ]
+    },
+    {
+      "login": "ernestoacostame",
+      "name": "Ernesto Acosta",
+      "avatar_url": "https://castopod.org/assets/images/castopod-avatar.jpg",
+      "profile": "https://ernestoacosta.me/",
+      "contributions": [
+        "bug",
+        "audio",
+        {
+          "type": "translation",
+          "url": "https://translate.castopod.org"
+        },
+        "question",
+        "ideas"
+      ]
+    },
+    {
+      "login": "Behel",
+      "name": "Bastien Luneteau",
+      "avatar_url": "https://secure.gravatar.com/avatar/ad63ee8ef8e3db8253d21e5012d2724f?s=80&d=identicon",
+      "profile": "https://code.castopod.org/Behel",
+      "contributions": [
+        "code",
+        "bug"
+      ]
+    },
+    {
+      "login": "cecillie",
+      "name": "Cécile Ricordeau",
+      "avatar_url": "https://castopod.org/assets/images/castopod-avatar.jpg",
+      "profile": "https://www.cecillie.fr/",
+      "contributions": [
+        "design"
+      ]
+    },
+    {
+      "login": "PatrykMis",
+      "name": "Patryk Miś",
+      "avatar_url": "https://castopod.org/assets/images/castopod-avatar.jpg",
+      "profile": "https://code.castopod.org/PatrykMis",
+      "contributions": [
+        {
+          "type": "translation",
+          "url": "https://translate.castopod.org"
+        }
+      ]
+    },
+    {
+      "login": "mspanc",
+      "name": "Marcin Lewandowski",
+      "avatar_url": "https://secure.gravatar.com/avatar/eed8337939641eac5ad0b570bd6acf96?s=80&d=identicon",
+      "profile": "https://code.castopod.org/mspanc",
+      "contributions": [
+        "bug",
+        "ideas"
+      ]
+    },
+    {
+      "login": "SJanik",
+      "name": "Sebastian Janik",
+      "avatar_url": "https://castopod.org/assets/images/castopod-avatar.jpg",
+      "profile": "https://code.castopod.org/SJanik",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "patryk",
+      "name": "Patryk Karczmarczyk",
+      "avatar_url": "https://castopod.org/assets/images/castopod-avatar.jpg",
+      "profile": "https://code.castopod.org/patryk",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "ddenis",
+      "name": "denis d",
+      "avatar_url": "https://castopod.org/assets/images/castopod-avatar.jpg",
+      "profile": "https://code.castopod.org/ddenis",
+      "contributions": [
+        "bug",
+        "ideas"
+      ]
+    },
+    {
+      "login": "douglaskastle",
+      "name": "Douglas Kastle",
+      "avatar_url": "https://secure.gravatar.com/avatar/b7e652ba4b6bcd440afa069e7f7bc9e6?s=80&d=identicon",
+      "profile": "https://code.castopod.org/douglaskastle",
+      "contributions": [
+        "bug",
+        "ideas"
+      ]
+    },
+    {
+      "login": "cExplorer",
+      "name": "cExplorer",
+      "avatar_url": "https://castopod.org/assets/images/castopod-avatar.jpg",
+      "profile": "https://code.castopod.org/cExplorer",
+      "contributions": [
+        "bug",
+        {
+          "type": "translation",
+          "url": "https://translate.castopod.org"
+        }
+      ]
+    },
+    {
+      "login": "imacrea",
+      "name": "ImaCrea",
+      "avatar_url": "https://castopod.org/assets/images/castopod-avatar.jpg",
+      "profile": "https://code.castopod.org/imacrea",
+      "contributions": [
+        "bug",
+        "ideas"
+      ]
+    },
+    {
+      "login": "jonas",
+      "name": "Jonas S",
+      "avatar_url": "https://castopod.org/assets/images/castopod-avatar.jpg",
+      "profile": "https://code.castopod.org/jonas",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "yannL",
+      "name": "LEFEBVRE Yann",
+      "avatar_url": "https://secure.gravatar.com/avatar/9c46600ce566ec6d526370d8e104b1c8?s=80&d=identicon",
+      "profile": "https://code.castopod.org/yannL",
+      "contributions": [
+        "bug"
+      ]
+    },
+    {
+      "login": "spaetz",
+      "name": "Sebastian Späth",
+      "avatar_url": "https://secure.gravatar.com/avatar/278e1af65e82993efd0ba7bbbacf6435?s=80&d=identicon",
+      "profile": "https://code.castopod.org/spaetz",
+      "contributions": [
+        "bug",
+        "ideas"
+      ]
+    },
+    {
+      "login": "rocky",
+      "name": "rocky III",
+      "avatar_url": "https://castopod.org/assets/images/castopod-avatar.jpg",
+      "profile": "https://code.castopod.org/rocky",
+      "contributions": [
+        "bug"
+      ]
+    },
+    {
+      "login": "Regenpfeifer",
+      "name": "Hermann Josef Eckl",
+      "avatar_url": "https://code.castopod.org/uploads/-/system/user/avatar/103/avatar.png",
+      "profile": "https://code.castopod.org/Regenpfeifer",
+      "contributions": [
+        "bug"
+      ]
+    },
+    {
+      "login": "cyrilledel",
+      "name": "Delhaye Cyrille",
+      "avatar_url": "https://castopod.org/assets/images/castopod-avatar.jpg",
+      "profile": "https://code.castopod.org/cyrilledel",
+      "contributions": [
+        "bug",
+        "ideas"
+      ]
+    },
+    {
+      "login": "otetranome",
+      "name": "João Leandro",
+      "avatar_url": "https://code.castopod.org/uploads/-/system/user/avatar/113/avatar.png",
+      "profile": "https://twitter.com/otetranome",
+      "contributions": [
+        {
+          "type": "translation",
+          "url": "https://translate.castopod.org"
+        },
+        "ideas"
+      ]
+    },
+    {
+      "login": "achouvardas",
+      "name": "Angelos Chouvardas",
+      "avatar_url": "https://castopod.org/assets/images/castopod-avatar.jpg",
+      "profile": "https://achouvardas.eu/",
+      "contributions": [
+        {
+          "type": "translation",
+          "url": "https://translate.castopod.org"
+        }
+      ]
+    },
+    {
+      "login": "eivind",
+      "name": "Eivind",
+      "avatar_url": "https://mastodon.fjerland.no/system/accounts/avatars/107/769/768/295/192/222/original/e5c985fea6487dcb.jpg",
+      "profile": "https://mastodon.fjerland.no/@eivind",
+      "contributions": [
+        {
+          "type": "translation",
+          "url": "https://translate.castopod.org"
+        }
+      ]
+    },
+    {
+      "login": "3wen",
+      "name": "Ewen",
+      "avatar_url": "https://mastodon.fedi.bzh/system/accounts/avatars/000/000/002/original/6f387690a504ae46.jpg",
+      "profile": "https://mastodon.fedi.bzh/@ewen",
+      "contributions": [
+        {
+          "type": "translation",
+          "url": "https://translate.castopod.org"
+        },
+        "ideas"
+      ]
+    },
+    {
+      "login": "forght",
+      "name": "forght",
+      "avatar_url": "https://crowdin-static.downloads.crowdin.com/avatar/15073833/large/82d1e2e443a6df7edc43a7405dfeeb75_default.png",
+      "profile": "https://crowdin.com/profile/forght",
+      "contributions": [
+        {
+          "type": "translation",
+          "url": "https://translate.castopod.org"
+        }
+      ]
+    },
+    {
+      "login": "glottis0q",
+      "name": "glottis0q",
+      "avatar_url": "https://crowdin-static.downloads.crowdin.com/avatar/15209934/large/8b17ef6a7399f0b82a8198f87c224195.png",
+      "profile": "https://crowdin.com/profile/glottis0q",
+      "contributions": [
+        {
+          "type": "translation",
+          "url": "https://translate.castopod.org"
+        }
+      ]
+    },
+    {
+      "login": "BoFFire",
+      "name": "ButterflyOfFire",
+      "avatar_url": "https://static.mstdn.fr/static/accounts/avatars/000/065/901/original/302a5777aff9f244.png",
+      "profile": "https://mstdn.fr/@ButterflyOfFire",
+      "contributions": [
+        {
+          "type": "translation",
+          "url": "https://translate.castopod.org"
+        }
+      ]
+    },
+    {
+      "login": "lil5",
+      "name": "Lucian I. Last",
+      "avatar_url": "https://avatars.githubusercontent.com/u/17646836?v=4",
+      "profile": "https://github.com/lil5",
+      "contributions": [
+        {
+          "type": "translation",
+          "url": "https://translate.castopod.org"
+        }
+      ]
+    },
+    {
+      "login": "LuuzViir",
+      "name": "LuuzViir",
+      "avatar_url": "https://crowdin-static.downloads.crowdin.com/avatar/13166188/large/d03ab0abc7ce354b210d836955cd3805_default.png",
+      "profile": "https://crowdin.com/profile/luuzviir",
+      "contributions": [
+        {
+          "type": "translation",
+          "url": "https://translate.castopod.org"
+        }
+      ]
+    },
+    {
+      "login": "cthtc",
+      "name": "CTHTC",
+      "avatar_url": "https://crowdin-static.downloads.crowdin.com/avatar/15211502/large/ed0651060cb8474a9519b5168bd377c1_default.png",
+      "profile": "https://crowdin.com/profile/cthtc",
+      "contributions": [
+        {
+          "type": "translation",
+          "url": "https://translate.castopod.org"
+        }
+      ]
+    },
+    {
+      "login": "retrograde",
+      "name": "Russian Retro",
+      "avatar_url": "https://crowdin-static.downloads.crowdin.com/avatar/15021651/large/b10c4057f85bf4de49c7fdf01354ecde.jpeg",
+      "profile": "https://crowdin.com/profile/retrograde",
+      "contributions": [
+        {
+          "type": "translation",
+          "url": "https://translate.castopod.org"
+        }
+      ]
+    },
+    {
+      "login": "mareklach",
+      "name": "Marek L'ach",
+      "avatar_url": "https://crowdin-static.downloads.crowdin.com/avatar/13572324/large/3eeba8d569c247ace33862bf4ef4748f.jpeg",
+      "profile": "https://crowdin.com/profile/mareklach",
+      "contributions": [
+        {
+          "type": "translation",
+          "url": "https://translate.castopod.org"
+        }
+      ]
+    },
+    {
+      "login": "GunChleoc",
+      "name": "GunChleoc",
+      "avatar_url": "https://crowdin-static.downloads.crowdin.com/avatar/13043878/large/3223f7b606296a8b1c92c5de39c459a2_default.png",
+      "profile": "https://crowdin.com/profile/gunchleoc",
+      "contributions": [
+        {
+          "type": "translation",
+          "url": "https://translate.castopod.org"
+        }
+      ]
+    },
+    {
+      "login": "GabiSnow",
+      "name": "GabiSnow",
+      "avatar_url": "https://crowdin-static.downloads.crowdin.com/avatar/15214858/large/5b083bdf9c9e9de67cc6ee72a6c8db18_default.png",
+      "profile": "https://crowdin.com/profile/gabisnow",
+      "contributions": [
+        {
+          "type": "translation",
+          "url": "https://translate.castopod.org"
+        }
+      ]
+    },
+    {
+      "login": "bendaha",
+      "name": "bendaha",
+      "avatar_url": "https://crowdin-static.downloads.crowdin.com/avatar/15331656/large/cd92450d2c20202299fb3a0075903e20_default.png",
+      "profile": "https://crowdin.com/profile/bendaha",
+      "contributions": [
+        {
+          "type": "translation",
+          "url": "https://translate.castopod.org"
+        }
+      ]
+    },
+    {
+      "login": "samuelroland",
+      "name": "Samuel Roland",
+      "avatar_url": "https://crowdin-static.downloads.crowdin.com/avatar/14980053/large/3e154a37d03d6e98ae402ed3f930f4f5.png",
+      "profile": "https://crowdin.com/profile/samuelroland",
+      "contributions": [
+        {
+          "type": "translation",
+          "url": "https://translate.castopod.org"
+        }
+      ]
+    },
+    {
+      "login": "dimregnier",
+      "name": "Dimitri Regnier",
+      "avatar_url": "https://castopod.org/assets/images/castopod-avatar.jpg",
+      "profile": "https://dimitriregnier.net/",
+      "contributions": [
+        "ideas"
+      ]
+    }
+  ],
+  "commitConvention": "none"
+}

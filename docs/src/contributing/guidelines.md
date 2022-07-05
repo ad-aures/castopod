@@ -7,6 +7,18 @@ title: Guidelines
 Love Castopod and want to help? Thanks so much, there's something to do for
 everybody!
 
+::: tip Note
+
+Castopod follows the [all contributors](https://allcontributors.org/)
+specification in an effort to **recognize any kind of contribution**, not just
+code!
+
+If you've made a contribution and do not appear in the
+[contributors](../index.md#contributors-✨) list, please
+[let us know](../index.md#contact) so we can correct our mistake! 🙂
+
+:::
+
 Please take a moment to review this document in order to make the contribution
 process easy and effective for everyone involved.
 
@@ -15,11 +27,23 @@ developers managing and developing this open source project. In return, they
 should reciprocate that respect in addressing your issue or assessing patches
 and features.
 
+## Translating Castopod
+
+We use [Crowdin](https://translate.castopod.org/) to manage translation files
+for [Castopod](https://code.castopod.org/), the
+[documentation](https://docs.castopod.org/) and the
+[landing](https://castopod.org/) websites.
+
+Whether you'd like to correct a translation error, validate new translations or
+include your language to Castopod, head into the
+[crowdin project](https://translate.castopod.org/) to get started.
+
 ::: info Note
 
-**Any** contribution made on a repository other than
-[the original repository](https://code.castopod.org/adaures/castopod) will not
-be accepted.
+To prevent degrading user experience, new languages are included to Castopod
+when they reach a certain threshold (~90%).
+
+// TODO: ease acceptance criteria (to public pages?)
 
 :::
 
