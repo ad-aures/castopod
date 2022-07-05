@@ -8,6 +8,8 @@ declare(strict_types=1);
  * @link       https://castopod.org/
  */
 
+use CodeIgniter\I18n\Time;
+
 if (! function_exists('get_browser_language')) {
     /**
      * Gets the browser default language using the request header key `HTTP_ACCEPT_LANGUAGE`
@@ -290,5 +292,30 @@ if (! function_exists('format_bytes')) {
         $bytes /= pow(1024, $pow);
 
         return round($bytes, $precision) . $units[$pow];
+    }
+}
+
+if (! function_exists('local_time')) {
+    function local_time(Time $time): string
+    {
+        $formatter = new IntlDateFormatter(service(
+            'request'
+        )->getLocale(), IntlDateFormatter::MEDIUM, IntlDateFormatter::LONG);
+        $translatedDate = $time->toLocalizedString($formatter->getPattern());
+        $datetime = $time->format(DateTime::ISO8601);
+
+        return <<<CODE_SAMPLE
+            <local-time datetime="{$datetime}" 
+                weekday="long" 
+                month="long"
+                day="numeric"
+                year="numeric"
+                hour="numeric"
+                minute="numeric">
+                <time
+                    datetime="{$datetime}"
+                    title="{$time}">{$translatedDate}</time>
+            </local-time>
+        CODE_SAMPLE;
     }
 }

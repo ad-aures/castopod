@@ -142,7 +142,7 @@ class EpisodeModel extends Model
                 ->join('podcasts', 'podcasts.id = episodes.podcast_id')
                 ->where('slug', $episodeSlug)
                 ->where('podcasts.handle', $podcastHandle)
-                ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
+                ->where('`' . $this->db->getPrefix() . 'episodes`.`published_at` <= UTC_TIMESTAMP()', null, false)
                 ->first();
 
             cache()

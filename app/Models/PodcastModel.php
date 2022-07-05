@@ -64,6 +64,7 @@ class PodcastModel extends Model
         'partner_id',
         'partner_link_url',
         'partner_image_url',
+        'published_at',
         'created_by',
         'updated_by',
     ];
@@ -92,6 +93,7 @@ class PodcastModel extends Model
         'owner_email' => 'required|valid_email',
         'new_feed_url' => 'valid_url_strict|permit_empty',
         'type' => 'required',
+        'published_at' => 'valid_date|permit_empty',
         'created_by' => 'required',
         'updated_by' => 'required',
     ];
@@ -128,6 +130,7 @@ class PodcastModel extends Model
         $cacheName = "podcast-{$podcastHandle}";
         if (! ($found = cache($cacheName))) {
             $found = $this->where('handle', $podcastHandle)
+                ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
                 ->first();
             cache()
                 ->save("podcast-{$podcastHandle}", $found, DECADE);
@@ -168,9 +171,9 @@ class PodcastModel extends Model
      */
     public function getAllPodcasts(string $orderBy = null): array
     {
-        if ($orderBy === 'activity') {
-            $prefix = $this->db->getPrefix();
+        $prefix = $this->db->getPrefix();
 
+        if ($orderBy === 'activity') {
             $fediverseTablePrefix = $prefix . config('Fediverse')
                 ->tablesPrefix;
             $this->builder()
@@ -195,7 +198,7 @@ class PodcastModel extends Model
             $this->orderBy('created_at', 'ASC');
         }
 
-        return $this->findAll();
+        return $this->where('`' . $prefix . 'podcasts`.`published_at` <= UTC_TIMESTAMP()', null, false)->findAll();
     }
 
     /**

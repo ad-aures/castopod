@@ -177,6 +177,10 @@ class AddPodcasts extends Migration
                 'type' => 'INT',
                 'unsigned' => true,
             ],
+            'published_at' => [
+                'type' => 'DATETIME',
+                'null' => true,
+            ],
             'created_at' => [
                 'type' => 'DATETIME',
             ],

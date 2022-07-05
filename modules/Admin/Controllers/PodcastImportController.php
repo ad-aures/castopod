@@ -450,11 +450,26 @@ class PodcastImportController extends BaseController
                         ->with('errors', $episodePersonModel->errors());
                 }
             }
+
+            if ($itemNumber === 1) {
+                $firstEpisodePublicationDate = strtotime((string) $item->pubDate);
+            }
         }
 
         // set interact as the newly imported podcast actor
         $importedPodcast = (new PodcastModel())->getPodcastById($newPodcastId);
         set_interact_as_actor($importedPodcast->actor_id);
+
+        // set podcast publication date
+        $importedPodcast->published_at = $firstEpisodePublicationDate ?? $importedPodcast->created_at;
+        $podcastModel = new PodcastModel();
+        if (! $podcastModel->update($importedPodcast->id, $importedPodcast)) {
+            $db->transRollback();
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $podcastModel->errors());
+        }
 
         $db->transComplete();
 

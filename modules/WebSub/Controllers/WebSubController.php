@@ -32,6 +32,7 @@ class WebSubController extends Controller
             ->select('podcasts.*')
             ->join('episodes', 'podcasts.id = episodes.podcast_id', 'left outer')
             ->where('podcasts.is_published_on_hubs', false)
+            ->where('`' . $podcastModel->db->getPrefix() . 'podcasts`.`published_at` <= UTC_TIMESTAMP()', null, false)
             ->orGroupStart()
             ->where('episodes.is_published_on_hubs', false)
             ->where('`' . $podcastModel->db->getPrefix() . 'episodes`.`published_at` <= UTC_TIMESTAMP()', null, false)

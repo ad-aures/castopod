@@ -69,28 +69,30 @@
     </footer>
 </div>
 
-<fieldset class="flex flex-col">
-<legend class="text-lg font-semibold"><?= lang(
+<?php if ($podcast->publication_status === 'published'): ?>
+    <fieldset class="flex flex-col">
+    <legend class="text-lg font-semibold"><?= lang(
         'Episode.publish_form.publication_date',
     ) ?></legend>
-    <Forms.Radio value="now" name="publication_method" isChecked="<?= old('publication_method') ? old('publish') === 'now' : true ?>"><?= lang('Episode.publish_form.publication_method.now') ?></Forms.Radio>
-    <div class="inline-flex flex-wrap items-center radio-toggler">
-        <input
-            class="w-6 h-6 border-contrast text-accent-base border-3 focus:ring-accent"
-            type="radio" id="schedule" name="publication_method" value="schedule" <?= old('publication_method') && old('publication_method') === 'schedule' ? 'checked' : '' ?> />
-        <Label for="schedule" class="pl-2 leading-8"><?= lang('Episode.publish_form.publication_method.schedule') ?></label>
-        <div class="w-full mt-2 radio-toggler-element">
-            <Forms.Field
-                as="DatetimePicker"
-                name="scheduled_publication_date"
-                label="<?= lang('Episode.publish_form.scheduled_publication_date') ?>"
-                hint="<?= lang('Episode.publish_form.scheduled_publication_date_hint') ?>"
-                value="<?= $episode->published_at ?>"
-            />
+        <Forms.Radio value="now" name="publication_method" isChecked="<?= old('publication_method') ? old('publish') === 'now' : true ?>"><?= lang('Episode.publish_form.publication_method.now') ?></Forms.Radio>
+        <div class="inline-flex flex-wrap items-center radio-toggler">
+            <input
+                class="w-6 h-6 border-contrast text-accent-base border-3 focus:ring-accent"
+                type="radio" id="schedule" name="publication_method" value="schedule" <?= old('publication_method') && old('publication_method') === 'schedule' ? 'checked' : '' ?> />
+            <Label for="schedule" class="pl-2 leading-8"><?= lang('Episode.publish_form.publication_method.schedule') ?></label>
+            <div class="w-full mt-2 radio-toggler-element">
+                <Forms.Field
+                    as="DatetimePicker"
+                    name="scheduled_publication_date"
+                    label="<?= lang('Episode.publish_form.scheduled_publication_date') ?>"
+                    hint="<?= lang('Episode.publish_form.scheduled_publication_date_hint') ?>"
+                    value="<?= $episode->published_at ?>"
+                />
+            </div>
         </div>
-    </div>
-</fieldset>
-
+    </fieldset>
+<?php endif ?>
+    
 <Alert id="publish-warning" variant="warning" glyph="alert" class="hidden mt-2" title="<?= lang('Episode.publish_form.message_warning') ?>"><?= lang('Episode.publish_form.message_warning_hint') ?></Alert>
 
 <div class="flex items-center justify-between w-full mt-4">

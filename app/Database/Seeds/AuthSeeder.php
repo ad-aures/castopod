@@ -168,7 +168,7 @@ class AuthSeeder extends Seeder
             [
                 'name' => 'manage_publications',
                 'description' =>
-                    'Publish / unpublish episodes & posts of a podcast',
+                    'Publish a podcast and publish / unpublish its episodes & posts',
                 'has_permission' => ['podcast_admin'],
             ],
             [

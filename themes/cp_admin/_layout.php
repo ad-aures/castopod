@@ -39,6 +39,9 @@
                 </div>
             </div>
         </header>
+        <?php if (isset($podcast) && $podcast->publication_status !== 'published'): ?>
+                <?= publication_status_banner($podcast->published_at, $podcast->id, $podcast->publication_status) ?>
+        <?php endif ?>
         <div class="px-2 py-8 mx-auto md:px-12">
             <?= view('_message_block') ?>
             <?= $this->renderSection('content') ?>

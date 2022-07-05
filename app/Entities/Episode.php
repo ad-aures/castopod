@@ -541,6 +541,8 @@ class Episode extends Entity
         if ($this->publication_status === null) {
             if ($this->published_at === null) {
                 $this->publication_status = 'not_published';
+            } elseif ($this->getPodcast()->publication_status !== 'published') {
+                $this->publication_status = 'with_podcast';
             } elseif ($this->published_at->isBefore(Time::now())) {
                 $this->publication_status = 'published';
             } else {

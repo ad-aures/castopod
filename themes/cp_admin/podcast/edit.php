@@ -244,7 +244,7 @@
     <Forms.Toggler class="mb-2" name="lock" value="yes" checked="<?= $podcast->is_locked ? 'true' : 'false' ?>" hint="<?= lang('Podcast.form.lock_hint') ?>">
         <?= lang('Podcast.form.lock') ?>
     </Forms.Toggler>
-    <Forms.Toggler class="mb-2" name="block" value="yes" checked="<?= $podcast->is_blocked ? 'true' : 'false'  ?>">
+    <Forms.Toggler class="mb-2" name="block" value="yes" checked="<?= $podcast->is_blocked ? 'true' : 'false'  ?>" hint="<?= lang('Podcast.form.block_hint') ?>">
         <?= lang('Podcast.form.block') ?>
     </Forms.Toggler>
     <Forms.Toggler name="complete" value="yes" checked="<?= $podcast->is_completed ? 'true' : 'false' ?>">

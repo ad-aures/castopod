@@ -116,18 +116,27 @@ if (! function_exists('publication_pill')) {
         $class = match ($publicationStatus) {
             'published' => 'text-pine-500 border-pine-500 bg-pine-50',
             'scheduled' => 'text-red-600 border-red-600 bg-red-50',
+            'with_podcast' => 'text-blue-600 border-blue-600 bg-blue-50',
             'not_published' => 'text-gray-600 border-gray-600 bg-gray-50',
             default => 'text-gray-600 border-gray-600 bg-gray-50',
         };
 
+        $title = match ($publicationStatus) {
+            'published', 'scheduled' => (string) $publicationDate,
+            'with_podcast' => lang('Episode.with_podcast_hint'),
+            'not_published' => '',
+            default => '',
+        };
+
         $label = lang('Episode.publication_status.' . $publicationStatus);
 
-        return '<span ' . ($publicationDate === null ? '' : 'title="' . $publicationDate . '"') . ' class="px-1 font-semibold border rounded ' .
+        return '<span ' . ($title === '' ? '' : 'title="' . $title . '"') . ' class="flex items-center px-1 font-semibold border rounded w-max ' .
             $class .
             ' ' .
             $customClass .
             '">' .
             $label .
+            ($publicationStatus === 'with_podcast' ? '<Icon glyph="warning" class="flex-shrink-0 ml-1 text-lg" />' : '') .
             '</span>';
     }
 }
@@ -136,7 +145,7 @@ if (! function_exists('publication_pill')) {
 
 if (! function_exists('publication_button')) {
     /**
-     * Publication button component
+     * Publication button component for episodes
      *
      * Displays the appropriate publication button depending on the publication post.
      */
@@ -149,6 +158,7 @@ if (! function_exists('publication_button')) {
                 $variant = 'primary';
                 $iconLeft = 'upload-cloud';
                 break;
+            case 'with_podcast':
             case 'scheduled':
                 $label = lang('Episode.publish_edit');
                 $route = route_to('episode-publish_edit', $podcastId, $episodeId);
@@ -171,6 +181,51 @@ if (! function_exists('publication_button')) {
 
         return <<<CODE_SAMPLE
             <Button variant="{$variant}" uri="{$route}" iconLeft="{$iconLeft}" >{$label}</Button>
+        CODE_SAMPLE;
+    }
+}
+
+// ------------------------------------------------------------------------
+
+if (! function_exists('publication_status_banner')) {
+    /**
+     * Publication status banner component for podcasts
+     *
+     * Displays the appropriate banner depending on the podcast's publication status.
+     */
+    function publication_status_banner(?Time $publicationDate, int $podcastId, string $publicationStatus): string
+    {
+        switch ($publicationStatus) {
+            case 'not_published':
+                $bannerDisclaimer = lang('Podcast.publication_status_banner.draft_mode');
+                $bannerText = lang('Podcast.publication_status_banner.not_published');
+                $linkRoute = route_to('podcast-publish', $podcastId);
+                $linkLabel = lang('Podcast.publish');
+                break;
+            case 'scheduled':
+                $bannerDisclaimer = lang('Podcast.publication_status_banner.draft_mode');
+                $bannerText = lang('Podcast.publication_status_banner.scheduled', [
+                    'publication_date' => local_time($publicationDate),
+                ], null, false);
+                $linkRoute = route_to('podcast-publish_edit', $podcastId);
+                $linkLabel = lang('Podcast.publish_edit');
+                break;
+            default:
+                $bannerDisclaimer = '';
+                $bannerText = '';
+                $linkRoute = '';
+                $linkLabel = '';
+                break;
+        }
+
+        return <<<CODE_SAMPLE
+        <div class="flex items-center px-12 py-1 border-b bg-stripes-gray border-subtle" role="alert">
+            <p class="text-gray-900">
+                <span class="text-xs font-semibold tracking-wide uppercase">{$bannerDisclaimer}</span>
+                <span class="ml-3 text-sm">{$bannerText}</span>
+            </p>
+            <a href="{$linkRoute}" class="ml-1 text-sm font-semibold underline shadow-xs text-accent-base hover:text-accent-hover hover:no-underline">{$linkLabel}</a>
+        </div>
         CODE_SAMPLE;
     }
 }

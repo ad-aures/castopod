@@ -440,17 +440,19 @@ class EpisodeController extends BaseController
 
     public function attemptPublish(): RedirectResponse
     {
-        $rules = [
-            'publication_method' => 'required',
-            'scheduled_publication_date' =>
-                'valid_date[Y-m-d H:i]|permit_empty',
-        ];
+        if ($this->podcast->publication_status === 'published') {
+            $rules = [
+                'publication_method' => 'required',
+                'scheduled_publication_date' =>
+                    'valid_date[Y-m-d H:i]|permit_empty',
+            ];
 
-        if (! $this->validate($rules)) {
-            return redirect()
-                ->back()
-                ->withInput()
-                ->with('errors', $this->validator->getErrors());
+            if (! $this->validate($rules)) {
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->with('errors', $this->validator->getErrors());
+            }
         }
 
         $db = db_connect();
@@ -463,22 +465,29 @@ class EpisodeController extends BaseController
             'created_by' => user_id(),
         ]);
 
-        $publishMethod = $this->request->getPost('publication_method');
-        if ($publishMethod === 'schedule') {
-            $scheduledPublicationDate = $this->request->getPost('scheduled_publication_date');
-            if ($scheduledPublicationDate) {
-                $this->episode->published_at = Time::createFromFormat(
-                    'Y-m-d H:i',
-                    $scheduledPublicationDate,
-                    $this->request->getPost('client_timezone'),
-                )->setTimezone(app_timezone());
+        if ($this->podcast->publication_status === 'published') {
+            $publishMethod = $this->request->getPost('publication_method');
+            if ($publishMethod === 'schedule') {
+                $scheduledPublicationDate = $this->request->getPost('scheduled_publication_date');
+                if ($scheduledPublicationDate) {
+                    $this->episode->published_at = Time::createFromFormat(
+                        'Y-m-d H:i',
+                        $scheduledPublicationDate,
+                        $this->request->getPost('client_timezone'),
+                    )->setTimezone(app_timezone());
+                } else {
+                    $db->transRollback();
+                    return redirect()
+                        ->back()
+                        ->withInput()
+                        ->with('error', lang('Episode.messages.scheduleDateError'));
+                }
             } else {
-                $db->transRollback();
-                return redirect()
-                    ->back()
-                    ->withInput()
-                    ->with('error', 'Schedule date must be set!');
+                $this->episode->published_at = Time::now();
             }
+        } elseif ($this->podcast->publication_status === 'scheduled') {
+            // podcast publication date has already been set
+            $this->episode->published_at = $this->podcast->published_at->addSeconds(1);
         } else {
             $this->episode->published_at = Time::now();
         }
@@ -505,12 +514,17 @@ class EpisodeController extends BaseController
 
         $db->transComplete();
 
-        return redirect()->route('episode-view', [$this->podcast->id, $this->episode->id]);
+        return redirect()->route('episode-view', [$this->podcast->id, $this->episode->id])->with(
+            'message',
+            lang('Episode.messages.publishSuccess', [
+                'publication_status' => $this->episode->publication_status,
+            ])
+        );
     }
 
     public function publishEdit(): string | RedirectResponse
     {
-        if ($this->episode->publication_status === 'scheduled') {
+        if (in_array($this->episode->publication_status, ['scheduled', 'with_podcast'], true)) {
             helper(['form']);
 
             $data = [
@@ -539,39 +553,48 @@ class EpisodeController extends BaseController
 
     public function attemptPublishEdit(): RedirectResponse
     {
-        $rules = [
-            'post_id' => 'required',
-            'publication_method' => 'required',
-            'scheduled_publication_date' =>
-                'valid_date[Y-m-d H:i]|permit_empty',
-        ];
+        if ($this->podcast->publication_status === 'published') {
+            $rules = [
+                'post_id' => 'required',
+                'publication_method' => 'required',
+                'scheduled_publication_date' =>
+                    'valid_date[Y-m-d H:i]|permit_empty',
+            ];
 
-        if (! $this->validate($rules)) {
-            return redirect()
-                ->back()
-                ->withInput()
-                ->with('errors', $this->validator->getErrors());
+            if (! $this->validate($rules)) {
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->with('errors', $this->validator->getErrors());
+            }
         }
 
         $db = db_connect();
         $db->transStart();
 
-        $publishMethod = $this->request->getPost('publication_method');
-        if ($publishMethod === 'schedule') {
-            $scheduledPublicationDate = $this->request->getPost('scheduled_publication_date');
-            if ($scheduledPublicationDate) {
-                $this->episode->published_at = Time::createFromFormat(
-                    'Y-m-d H:i',
-                    $scheduledPublicationDate,
-                    $this->request->getPost('client_timezone'),
-                )->setTimezone(app_timezone());
+        if ($this->podcast->publication_status === 'published') {
+            $publishMethod = $this->request->getPost('publication_method');
+            if ($publishMethod === 'schedule') {
+                $scheduledPublicationDate = $this->request->getPost('scheduled_publication_date');
+                if ($scheduledPublicationDate) {
+                    $this->episode->published_at = Time::createFromFormat(
+                        'Y-m-d H:i',
+                        $scheduledPublicationDate,
+                        $this->request->getPost('client_timezone'),
+                    )->setTimezone(app_timezone());
+                } else {
+                    $db->transRollback();
+                    return redirect()
+                        ->back()
+                        ->withInput()
+                        ->with('error', lang('Episode.messages.scheduleDateError'));
+                }
             } else {
-                $db->transRollback();
-                return redirect()
-                    ->back()
-                    ->withInput()
-                    ->with('error', 'Schedule date must be set!');
+                $this->episode->published_at = Time::now();
             }
+        } elseif ($this->podcast->publication_status === 'scheduled') {
+            // podcast publication date has already been set
+            $this->episode->published_at = $this->podcast->published_at->addSeconds(1);
         } else {
             $this->episode->published_at = Time::now();
         }
@@ -603,12 +626,17 @@ class EpisodeController extends BaseController
 
         $db->transComplete();
 
-        return redirect()->route('episode-view', [$this->podcast->id, $this->episode->id]);
+        return redirect()->route('episode-view', [$this->podcast->id, $this->episode->id])->with(
+            'message',
+            lang('Episode.messages.publishSuccess', [
+                'publication_status' => $this->episode->publication_status,
+            ])
+        );
     }
 
     public function publishCancel(): RedirectResponse
     {
-        if ($this->episode->publication_status === 'scheduled') {
+        if (in_array($this->episode->publication_status, ['scheduled', 'with_podcast'], true)) {
             $db = db_connect();
             $db->transStart();
 
@@ -634,13 +662,13 @@ class EpisodeController extends BaseController
 
             $db->transComplete();
 
-            return redirect()->route('episode-view', [$this->podcast->id, $this->episode->id]);
+            return redirect()->route('episode-view', [$this->podcast->id, $this->episode->id])->with(
+                'message',
+                lang('Episode.messages.publishCancelSuccess')
+            );
         }
 
-        return redirect()->route('episode-view', [$this->podcast->id, $this->episode->id])->with(
-            'message',
-            lang('Episode.messages.publishCancelSuccess')
-        );
+        return redirect()->route('episode-view', [$this->podcast->id, $this->episode->id]);
     }
 
     public function unpublish(): string | RedirectResponse

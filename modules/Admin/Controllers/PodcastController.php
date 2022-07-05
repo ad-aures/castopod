@@ -12,14 +12,17 @@ namespace Modules\Admin\Controllers;
 
 use App\Entities\Location;
 use App\Entities\Podcast;
+use App\Entities\Post;
 use App\Models\ActorModel;
 use App\Models\CategoryModel;
 use App\Models\EpisodeModel;
 use App\Models\LanguageModel;
 use App\Models\MediaModel;
 use App\Models\PodcastModel;
+use App\Models\PostModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
+use CodeIgniter\I18n\Time;
 use Config\Services;
 use Modules\Analytics\Models\AnalyticsPodcastByCountryModel;
 use Modules\Analytics\Models\AnalyticsPodcastByEpisodeModel;
@@ -237,6 +240,7 @@ class PodcastController extends BaseController
             'is_locked' => $this->request->getPost('lock') === 'yes',
             'created_by' => user_id(),
             'updated_by' => user_id(),
+            'published_at' => null,
         ]);
 
         $podcastModel = new PodcastModel();
@@ -603,5 +607,362 @@ class PodcastController extends BaseController
             ->with('message', lang('Podcast.messages.deleteSuccess', [
                 'podcast_handle' => $this->podcast->handle,
             ]));
+    }
+
+    public function publish(): string | RedirectResponse
+    {
+        helper(['form']);
+
+        $data = [
+            'podcast' => $this->podcast,
+        ];
+
+        replace_breadcrumb_params([
+            0 => $this->podcast->title,
+        ]);
+
+        return view('podcast/publish', $data);
+    }
+
+    public function attemptPublish(): RedirectResponse
+    {
+        if ($this->podcast->publication_status !== 'not_published') {
+            return redirect()->route('podcast-view', [$this->podcast->id])->with(
+                'error',
+                lang('Podcast.messages.publishError')
+            );
+        }
+
+        $rules = [
+            'publication_method' => 'required',
+            'scheduled_publication_date' =>
+            'valid_date[Y-m-d H:i]|permit_empty',
+        ];
+
+        if (! $this->validate($rules)) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $this->validator->getErrors());
+        }
+
+        $db = db_connect();
+        $db->transStart();
+
+        $publishMethod = $this->request->getPost('publication_method');
+        if ($publishMethod === 'schedule') {
+            $scheduledPublicationDate = $this->request->getPost('scheduled_publication_date');
+            if ($scheduledPublicationDate) {
+                $this->podcast->published_at = Time::createFromFormat(
+                    'Y-m-d H:i',
+                    $scheduledPublicationDate,
+                    $this->request->getPost('client_timezone'),
+                )->setTimezone(app_timezone());
+            } else {
+                $db->transRollback();
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->with('error', lang('Podcast.messages.scheduleDateError'));
+            }
+        } else {
+            $this->podcast->published_at = Time::now();
+        }
+
+        $message = $this->request->getPost('message');
+        // only create post if message is not empty
+        if ($message !== '') {
+            $newPost = new Post([
+                'actor_id' => $this->podcast->actor_id,
+                'message' => $message,
+                'created_by' => user_id(),
+            ]);
+
+            $newPost->published_at = $this->podcast->published_at;
+
+            $postModel = new PostModel();
+            if (! $postModel->addPost($newPost)) {
+                $db->transRollback();
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->with('errors', $postModel->errors());
+            }
+        }
+
+        $episodes = (new EpisodeModel())
+            ->where('podcast_id', $this->podcast->id)
+            ->where('published_at !=', null)
+            ->findAll();
+
+        foreach ($episodes as $episode) {
+            $episode->published_at = $this->podcast->published_at->addSeconds(1);
+
+            $episodeModel = new EpisodeModel();
+            if (! $episodeModel->update($episode->id, $episode)) {
+                $db->transRollback();
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->with('errors', $episodeModel->errors());
+            }
+
+            $post = (new PostModel())->where('episode_id', $episode->id)
+                ->first();
+
+            if ($post !== null) {
+                $post->published_at = $episode->published_at;
+                $postModel = new PostModel();
+                if (! $postModel->update($post->id, $post)) {
+                    $db->transRollback();
+                    return redirect()
+                        ->back()
+                        ->withInput()
+                        ->with('errors', $postModel->errors());
+                }
+            }
+        }
+
+        $podcastModel = new PodcastModel();
+        if (! $podcastModel->update($this->podcast->id, $this->podcast)) {
+            $db->transRollback();
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $podcastModel->errors());
+        }
+
+        $db->transComplete();
+
+        return redirect()->route('podcast-view', [$this->podcast->id]);
+    }
+
+    public function publishEdit(): string | RedirectResponse
+    {
+        helper(['form']);
+
+        $data = [
+            'podcast' => $this->podcast,
+            'post' => (new PostModel())
+                ->where([
+                    'actor_id' => $this->podcast->actor_id,
+                    'episode_id' => null,
+                ])
+                ->first(),
+        ];
+
+        replace_breadcrumb_params([
+            0 => $this->podcast->title,
+        ]);
+
+        return view('podcast/publish_edit', $data);
+    }
+
+    public function attemptPublishEdit(): RedirectResponse
+    {
+        if ($this->podcast->publication_status !== 'scheduled') {
+            return redirect()->route('podcast-view', [$this->podcast->id])->with(
+                'error',
+                lang('Podcast.messages.publishEditError')
+            );
+        }
+
+        $rules = [
+            'publication_method' => 'required',
+            'scheduled_publication_date' =>
+                'valid_date[Y-m-d H:i]|permit_empty',
+        ];
+
+        if (! $this->validate($rules)) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $this->validator->getErrors());
+        }
+
+        $db = db_connect();
+        $db->transStart();
+
+        $publishMethod = $this->request->getPost('publication_method');
+        if ($publishMethod === 'schedule') {
+            $scheduledPublicationDate = $this->request->getPost('scheduled_publication_date');
+            if ($scheduledPublicationDate) {
+                $this->podcast->published_at = Time::createFromFormat(
+                    'Y-m-d H:i',
+                    $scheduledPublicationDate,
+                    $this->request->getPost('client_timezone'),
+                )->setTimezone(app_timezone());
+            } else {
+                $db->transRollback();
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->with('error', lang('Podcast.messages.scheduleDateError'));
+            }
+        } else {
+            $this->podcast->published_at = Time::now();
+        }
+
+        $post = (new PostModel())
+            ->where([
+                'actor_id' => $this->podcast->actor_id,
+                'episode_id' => null,
+            ])
+            ->first();
+
+        $newPostMessage = $this->request->getPost('message');
+
+        if ($post !== null) {
+            if ($newPostMessage !== '') {
+                // edit post if post exists and message is not empty
+                $post->message = $newPostMessage;
+                $post->published_at = $this->podcast->published_at;
+
+                $postModel = new PostModel();
+                if (! $postModel->editPost($post)) {
+                    $db->transRollback();
+                    return redirect()
+                        ->back()
+                        ->withInput()
+                        ->with('errors', $postModel->errors());
+                }
+            } else {
+                // remove post if post exists and message is empty
+                $postModel = new PostModel();
+                $post = $postModel
+                    ->where([
+                        'actor_id' => $this->podcast->actor_id,
+                        'episode_id' => null,
+                    ])
+                    ->first();
+                $postModel->removePost($post);
+            }
+        } elseif ($newPostMessage !== '') {
+            // create post if there is no post and message is not empty
+            $newPost = new Post([
+                'actor_id' => $this->podcast->actor_id,
+                'message' => $newPostMessage,
+                'created_by' => user_id(),
+            ]);
+
+            $newPost->published_at = $this->podcast->published_at;
+
+            $postModel = new PostModel();
+            if (! $postModel->addPost($newPost)) {
+                $db->transRollback();
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->with('errors', $postModel->errors());
+            }
+        }
+
+        $episodes = (new EpisodeModel())
+            ->where('podcast_id', $this->podcast->id)
+            ->where('published_at !=', null)
+            ->findAll();
+
+        foreach ($episodes as $episode) {
+            $episode->published_at = $this->podcast->published_at->addSeconds(1);
+
+            $episodeModel = new EpisodeModel();
+            if (! $episodeModel->update($episode->id, $episode)) {
+                $db->transRollback();
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->with('errors', $episodeModel->errors());
+            }
+
+            $post = (new PostModel())->where('episode_id', $episode->id)
+                ->first();
+
+            if ($post !== null) {
+                $post->published_at = $episode->published_at;
+                $postModel = new PostModel();
+                if (! $postModel->update($post->id, $post)) {
+                    $db->transRollback();
+                    return redirect()
+                        ->back()
+                        ->withInput()
+                        ->with('errors', $postModel->errors());
+                }
+            }
+        }
+
+        $podcastModel = new PodcastModel();
+        if (! $podcastModel->update($this->podcast->id, $this->podcast)) {
+            $db->transRollback();
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $podcastModel->errors());
+        }
+
+        $db->transComplete();
+
+        return redirect()->route('podcast-view', [$this->podcast->id]);
+    }
+
+    public function publishCancel(): RedirectResponse
+    {
+        if ($this->podcast->publication_status !== 'scheduled') {
+            return redirect()->route('podcast-view', [$this->podcast->id]);
+        }
+
+        $db = db_connect();
+        $db->transStart();
+
+        $postModel = new PostModel();
+        $post = $postModel
+            ->where([
+                'actor_id' => $this->podcast->actor_id,
+                'episode_id' => null,
+            ])
+            ->first();
+        if ($post !== null) {
+            $postModel->removePost($post);
+        }
+
+        $episodes = (new EpisodeModel())
+            ->where('podcast_id', $this->podcast->id)
+            ->where('published_at !=', null)
+            ->findAll();
+
+        foreach ($episodes as $episode) {
+            $episode->published_at = null;
+
+            $episodeModel = new EpisodeModel();
+            if (! $episodeModel->update($episode->id, $episode)) {
+                $db->transRollback();
+                return redirect()
+                    ->back()
+                    ->withInput()
+                    ->with('errors', $episodeModel->errors());
+            }
+
+            $postModel = new PostModel();
+            $post = $postModel->where('episode_id', $episode->id)
+                ->first();
+            $postModel->removePost($post);
+        }
+
+        $this->podcast->published_at = null;
+
+        $podcastModel = new PodcastModel();
+        if (! $podcastModel->update($this->podcast->id, $this->podcast)) {
+            $db->transRollback();
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $podcastModel->errors());
+        }
+
+        $db->transComplete();
+
+        return redirect()->route('podcast-view', [$this->podcast->id])->with(
+            'message',
+            lang('Podcast.messages.publishCancelSuccess')
+        );
     }
 }

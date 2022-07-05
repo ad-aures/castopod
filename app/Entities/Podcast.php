@@ -79,6 +79,8 @@ use RuntimeException;
  * @property string|null $partner_image_url
  * @property int $created_by
  * @property int $updated_by
+ * @property string $publication_status;
+ * @property Time|null $published_at;
  * @property Time $created_at;
  * @property Time $updated_at;
  *
@@ -146,6 +148,13 @@ class Podcast extends Entity
     protected ?Location $location = null;
 
     protected string $custom_rss_string;
+
+    protected ?string $publication_status = null;
+
+    /**
+     * @var string[]
+     */
+    protected $dates = ['published_at', 'created_at', 'updated_at'];
 
     /**
      * @var array<string, string>
@@ -457,6 +466,21 @@ class Podcast extends Entity
         }
 
         return $this->description;
+    }
+
+    public function getPublicationStatus(): string
+    {
+        if ($this->publication_status === null) {
+            if ($this->published_at === null) {
+                $this->publication_status = 'not_published';
+            } elseif ($this->published_at->isBefore(Time::now())) {
+                $this->publication_status = 'published';
+            } else {
+                $this->publication_status = 'scheduled';
+            }
+        }
+
+        return $this->publication_status;
     }
 
     /**

@@ -119,6 +119,49 @@ $routes->group(
                 $routes->post('edit', 'PodcastController::attemptEdit/$1', [
                     'filter' => 'permission:podcast-edit',
                 ]);
+                $routes->get(
+                    'publish',
+                    'PodcastController::publish/$1',
+                    [
+                        'as' => 'podcast-publish',
+                        'filter' =>
+                            'permission:podcast-manage_publications',
+                    ],
+                );
+                $routes->post(
+                    'publish',
+                    'PodcastController::attemptPublish/$1',
+                    [
+                        'filter' =>
+                            'permission:podcast-manage_publications',
+                    ],
+                );
+                $routes->get(
+                    'publish-edit',
+                    'PodcastController::publishEdit/$1',
+                    [
+                        'as' => 'podcast-publish_edit',
+                        'filter' =>
+                            'permission:podcast-manage_publications',
+                    ],
+                );
+                $routes->post(
+                    'publish-edit',
+                    'PodcastController::attemptPublishEdit/$1',
+                    [
+                        'filter' =>
+                            'permission:podcast-manage_publications',
+                    ],
+                );
+                $routes->get(
+                    'publish-cancel',
+                    'PodcastController::publishCancel/$1',
+                    [
+                        'as' => 'podcast-publish-cancel',
+                        'filter' =>
+                            'permission:podcast-manage_publications',
+                    ],
+                );
                 $routes->get('edit/delete-banner', 'PodcastController::deleteBanner/$1', [
                     'as' => 'podcast-banner-delete',
                     'filter' => 'permission:podcast-edit',
