@@ -1,3 +1,29 @@
+# [1.0.0-beta.17](https://code.castopod.org/adaures/castopod/compare/v1.0.0-beta.16...v1.0.0-beta.17) (2022-07-06)
+
+### Bug Fixes
+
+- explicitly cast seconds to int in iso8601_duration helper function
+  ([779653f](https://code.castopod.org/adaures/castopod/commit/779653f75b140942f731cbb238bc0667cc461307))
+- **housekeeping:** use EpisodeModel's builder to reset comments count
+  ([65e9c0b](https://code.castopod.org/adaures/castopod/commit/65e9c0b05ea4992884149cb4a4b071bf31a20a1a))
+- **rss:** round episode durations and soundbites
+  ([c9fb987](https://code.castopod.org/adaures/castopod/commit/c9fb987fcfbe17069ec68fdbc823777079ce574b)),
+  closes [#214](https://code.castopod.org/adaures/castopod/issues/214)
+- **xml-editor:** prettify xml even without root node
+  ([ca55c24](https://code.castopod.org/adaures/castopod/commit/ca55c248d0562a8529071c1f10be12f40ef50dda))
+
+### Features
+
+- add publish feature for podcasts and set draft by default
+  ([3d363f2](https://code.castopod.org/adaures/castopod/commit/3d363f2efe99836ac05c305a2fa683e342f06561)),
+  closes [#128](https://code.castopod.org/adaures/castopod/issues/128)
+  [#220](https://code.castopod.org/adaures/castopod/issues/220)
+- **admin:** add instance wide dashboard with storage and bandwidth usage
+  ([b1a6c02](https://code.castopod.org/adaures/castopod/commit/b1a6c02e56fdc01a7ff69fa7e7dd8ea71380b7ba)),
+  closes [#216](https://code.castopod.org/adaures/castopod/issues/216)
+- **datetime-picker:** set material_green theme to flatpickr
+  ([3ce6541](https://code.castopod.org/adaures/castopod/commit/3ce6541003260677e722a916ad6bc83ef47c4371))
+
 # [1.0.0-beta.16](https://code.castopod.org/adaures/castopod/compare/v1.0.0-beta.15...v1.0.0-beta.16) (2022-06-24)
 
 ### Bug Fixes
