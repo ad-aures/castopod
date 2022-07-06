@@ -9,7 +9,6 @@ declare(strict_types=1);
  */
 
 return [
-    'dashboard' => 'Adminübersicht',
-    'welcome_message' => 'Willkommen im Administrationsbereich!',
-    'choose_interact' => 'Mit welchem Podcast-Profil wollen Sie handeln',
+    'home' => 'Beheerder overzicht',
+    'welcome_message' => 'Welkom bij de beheerder omgeving!',
 ];

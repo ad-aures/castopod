@@ -9,7 +9,6 @@ declare(strict_types=1);
  */
 
 return [
-    'dashboard' => 'Panel de administración',
-    'welcome_message' => '¡Bienvenido al área de administración!',
-    'choose_interact' => 'Elige cómo interactuar',
+    'home' => 'Admin dashboard',
+    'welcome_message' => 'Welcome to the admin area!',
 ];

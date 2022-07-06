@@ -6,7 +6,7 @@ $podcastNavigation = [
         'items' => ['podcast-view', 'podcast-edit', 'podcast-persons-manage'],
     ],
     'episodes' => [
-        'icon' => 'mic',
+        'icon' => 'play-circle',
         'items' => ['episode-list', 'episode-create'],
     ],
     'analytics' => [

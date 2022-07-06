@@ -179,9 +179,9 @@ if (! function_exists('publication_button')) {
                 break;
         }
 
-        return <<<CODE_SAMPLE
+        return <<<HTML
             <Button variant="{$variant}" uri="{$route}" iconLeft="{$iconLeft}" >{$label}</Button>
-        CODE_SAMPLE;
+        HTML;
     }
 }
 
@@ -205,7 +205,7 @@ if (! function_exists('publication_status_banner')) {
             case 'scheduled':
                 $bannerDisclaimer = lang('Podcast.publication_status_banner.draft_mode');
                 $bannerText = lang('Podcast.publication_status_banner.scheduled', [
-                    'publication_date' => local_time($publicationDate),
+                    'publication_date' => local_datetime($publicationDate),
                 ], null, false);
                 $linkRoute = route_to('podcast-publish_edit', $podcastId);
                 $linkLabel = lang('Podcast.publish_edit');
@@ -218,7 +218,7 @@ if (! function_exists('publication_status_banner')) {
                 break;
         }
 
-        return <<<CODE_SAMPLE
+        return <<<HTML
         <div class="flex items-center px-12 py-1 border-b bg-stripes-gray border-subtle" role="alert">
             <p class="text-gray-900">
                 <span class="text-xs font-semibold tracking-wide uppercase">{$bannerDisclaimer}</span>
@@ -226,7 +226,7 @@ if (! function_exists('publication_status_banner')) {
             </p>
             <a href="{$linkRoute}" class="ml-1 text-sm font-semibold underline shadow-xs text-accent-base hover:text-accent-hover hover:no-underline">{$linkLabel}</a>
         </div>
-        CODE_SAMPLE;
+        HTML;
     }
 }
 
@@ -321,7 +321,7 @@ if (! function_exists('audio_player')) {
         $language = service('request')
             ->getLocale();
 
-        return <<<CODE_SAMPLE
+        return <<<HTML
             <vm-player
                 id="castopod-vm-player"
                 theme="light"
@@ -346,7 +346,7 @@ if (! function_exists('audio_player')) {
                     </vm-controls>
                 </vm-ui>
             </vm-player>
-        CODE_SAMPLE;
+        HTML;
     }
 }
 
@@ -361,15 +361,59 @@ if (! function_exists('relative_time')) {
         $translatedDate = $time->toLocalizedString($formatter->getPattern());
         $datetime = $time->format(DateTime::ISO8601);
 
-        return <<<CODE_SAMPLE
+        return <<<HTML
             <time-ago class="{$class}" datetime="{$datetime}">
                 <time
                     datetime="{$datetime}"
                     title="{$time}">{$translatedDate}</time>
             </time-ago>
-        CODE_SAMPLE;
+        HTML;
     }
 }
+
+// ------------------------------------------------------------------------
+
+if (! function_exists('local_datetime')) {
+    function local_datetime(Time $time): string
+    {
+        $formatter = new IntlDateFormatter(service(
+            'request'
+        )->getLocale(), IntlDateFormatter::MEDIUM, IntlDateFormatter::LONG);
+        $translatedDate = $time->toLocalizedString($formatter->getPattern());
+        $datetime = $time->format(DateTime::ISO8601);
+
+        return <<<HTML
+            <local-time datetime="{$datetime}" 
+                weekday="long" 
+                month="long"
+                day="numeric"
+                year="numeric"
+                hour="numeric"
+                minute="numeric">
+                <time
+                    datetime="{$datetime}"
+                    title="{$time}">{$translatedDate}</time>
+            </local-time>
+        HTML;
+    }
+}
+
+// ------------------------------------------------------------------------
+
+if (! function_exists('local_date')) {
+    function local_date(Time $time): string
+    {
+        $formatter = new IntlDateFormatter(service(
+            'request'
+        )->getLocale(), IntlDateFormatter::MEDIUM, IntlDateFormatter::NONE);
+        $translatedDate = $time->toLocalizedString($formatter->getPattern());
+
+        return <<<HTML
+            <time title="{$time}">{$translatedDate}</time>
+        HTML;
+    }
+}
+
 
 // ------------------------------------------------------------------------
 
@@ -381,9 +425,9 @@ if (! function_exists('explicit_badge')) {
         }
 
         $explicitLabel = lang('Common.explicit');
-        return <<<CODE_SAMPLE
+        return <<<HTML
             <span class="px-1 text-xs font-semibold leading-tight tracking-wider uppercase border md:border-white/50 {$class}">{$explicitLabel}</span>
-        CODE_SAMPLE;
+        HTML;
     }
 }
 

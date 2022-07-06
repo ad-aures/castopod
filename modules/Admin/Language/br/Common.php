@@ -46,4 +46,5 @@ return [
         'playing' => 'O lenn',
     ],
     'size_limit' => 'Bevenn ar vent: {0}.',
+    'choose_interact' => 'Dibabit penaos interaktiñ',
 ];

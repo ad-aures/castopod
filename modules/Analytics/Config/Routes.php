@@ -19,7 +19,7 @@ $routes->addPlaceholder(
 );
 $routes->addPlaceholder(
     'filter',
-    '\bWeekly|\bYearly|\bByDay|\bByWeekday|\bByMonth|\bByAppWeekly|\bByAppYearly|\bByOsWeekly|\bByDeviceWeekly|\bBots|\bByServiceWeekly|\bBandwidthByDay|\bUniqueListenersByDay|\bUniqueListenersByMonth|\bTotalListeningTimeByDay|\bTotalListeningTimeByMonth|\bByDomainWeekly|\bByDomainYearly',
+    '\bWeekly|\bYearly|\bByDay|\bByWeekday|\bByMonth|\bByAppWeekly|\bByAppYearly|\bByOsWeekly|\bByDeviceWeekly|\bBots|\bByServiceWeekly|\bBandwidthByDay|\bUniqueListenersByDay|\bUniqueListenersByMonth|\bTotalListeningTimeByDay|\bTotalListeningTimeByMonth|\bByDomainWeekly|\bByDomainYearly|\bTotalBandwidthByMonth|\bTotalStorageByMonth',
 );
 
 $routes->group('', [
@@ -52,6 +52,10 @@ $routes->group('', [
             ],
         );
     });
+
+    $routes->get(config('Analytics')->gateway . '/(:class)/(:filter)', 'AnalyticsController::getData/$1/$2', [
+        'as' => 'analytics-data-instance',
+    ]);
 
     // Route for podcast audio file analytics (/audio/pack(podcast_id,episode_id,bytes_threshold,filesize,duration,date)/podcast_folder/filename.mp3)
     $routes->head(

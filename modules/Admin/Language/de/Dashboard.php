@@ -9,7 +9,6 @@ declare(strict_types=1);
  */
 
 return [
-    'dashboard' => 'Pulpit administratora',
-    'welcome_message' => 'Witamy w panelu administracyjnym!',
-    'choose_interact' => 'Wybierz sposób interakcji',
+    'home' => 'Adminübersicht',
+    'welcome_message' => 'Willkommen im Administrationsbereich!',
 ];

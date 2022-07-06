@@ -46,4 +46,5 @@ return [
         'playing' => 'Spielt',
     ],
     'size_limit' => 'Größenlimit: {0}.',
+    'choose_interact' => 'Mit welchem Podcast-Profil wollen Sie handeln',
 ];

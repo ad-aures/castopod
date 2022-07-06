@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Modules\Analytics\Controllers;
 
+use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\Controller;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\ResponseInterface;
@@ -17,6 +18,8 @@ use CodeIgniter\Model;
 
 class AnalyticsController extends Controller
 {
+    use ResponseTrait;
+
     protected Model $analyticsModel;
 
     protected string $methodName = '';
@@ -25,6 +28,12 @@ class AnalyticsController extends Controller
     {
         if (count($params) < 2) {
             throw PageNotFoundException::forPageNotFound();
+        }
+
+        if (! is_numeric($params[0])) {
+            $this->analyticsModel = model('Analytics' . $params[0] . 'Model');
+            $this->methodName = 'getData' . $params[1];
+            return $this->{$method}();
         }
 
         $this->analyticsModel = model('Analytics' . $params[1] . 'Model');
@@ -36,14 +45,18 @@ class AnalyticsController extends Controller
         );
     }
 
-    public function getData(int $podcastId, ?int $episodeId = null): ResponseInterface
+    public function getData(?int $podcastId = null, ?int $episodeId = null): ResponseInterface
     {
         $methodName = $this->methodName;
 
-        if ($episodeId === null) {
-            return $this->response->setJSON($this->analyticsModel->{$methodName}($podcastId));
+        if ($podcastId === null) {
+            return $this->respond($this->analyticsModel->{$methodName}());
         }
 
-        return $this->response->setJSON($this->analyticsModel->{$methodName}($podcastId, $episodeId));
+        if ($episodeId === null) {
+            return $this->respond($this->analyticsModel->{$methodName}($podcastId));
+        }
+
+        return $this->respond($this->analyticsModel->{$methodName}($podcastId, $episodeId));
     }
 }

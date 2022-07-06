@@ -9,7 +9,6 @@ declare(strict_types=1);
  */
 
 return [
-    'dashboard' => 'Tableau de bord',
-    'welcome_message' => 'Bienvenue dans l’administration !',
-    'choose_interact' => 'Choisissez comment interagir',
+    'home' => 'لوحة التحكم الإدارية',
+    'welcome_message' => 'أهلًا بك في المنطقة الإدارية!',
 ];

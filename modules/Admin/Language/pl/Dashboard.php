@@ -9,7 +9,6 @@ declare(strict_types=1);
  */
 
 return [
-    'dashboard' => 'Beheerder overzicht',
-    'welcome_message' => 'Welkom bij de beheerder omgeving!',
-    'choose_interact' => 'Kies hoe de interactie moet worden',
+    'home' => 'Pulpit administratora',
+    'welcome_message' => 'Witamy w panelu administracyjnym!',
 ];

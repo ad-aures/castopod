@@ -46,4 +46,5 @@ return [
         'playing' => 'Reproduzindo',
     ],
     'size_limit' => 'Limite de tamanho: {0}.',
+    'choose_interact' => 'Escolha como interagir',
 ];

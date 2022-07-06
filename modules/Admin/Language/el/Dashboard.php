@@ -9,7 +9,6 @@ declare(strict_types=1);
  */
 
 return [
-    'dashboard' => 'Painel de administração',
-    'welcome_message' => 'Bem-vindo à área de administração!',
-    'choose_interact' => 'Escolha como interagir',
+    'home' => 'Πίνακας ελέγχου διαχειριστή',
+    'welcome_message' => 'Καλώς ήρθατε στην περιοχή διαχείρισης!',
 ];

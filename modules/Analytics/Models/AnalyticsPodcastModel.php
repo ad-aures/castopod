@@ -12,6 +12,8 @@ declare(strict_types=1);
 
 namespace Modules\Analytics\Models;
 
+use App\Entities\Media\BaseMedia;
+use App\Models\MediaModel;
 use CodeIgniter\Model;
 use Modules\Analytics\Entities\AnalyticsPodcasts;
 
@@ -93,7 +95,7 @@ class AnalyticsPodcastModel extends Model
     public function getDataBandwidthByDay(int $podcastId): array
     {
         if (! ($found = cache("{$podcastId}_analytics_podcast_by_bandwidth"))) {
-            $found = $this->select('date as labels, round(bandwidth / 1048576, 1) as `values`')
+            $found = $this->select('date as labels, ROUND(bandwidth / 1000000, 2) as `values`')
                 ->where([
                     'podcast_id' => $podcastId,
                     'date >' => date('Y-m-d', strtotime('-60 days')),
@@ -231,6 +233,50 @@ class AnalyticsPodcastModel extends Model
 
             cache()
                 ->save("{$podcastId}_analytics_podcast_listening_time_by_month", $found, 600);
+        }
+
+        return $found;
+    }
+
+    /**
+     * Gets total bandwidth data for instance
+     *
+     * @return AnalyticsPodcasts[]
+     */
+    public function getDataTotalBandwidthByMonth(): array
+    {
+        if (! ($found = cache('analytics_total_bandwidth_by_month'))) {
+            $found = $this->select(
+                'DATE_FORMAT(updated_at,"%Y-%m") as labels, ROUND(sum(bandwidth) / 1000000, 2) as `values`'
+            )
+                ->groupBy('labels')
+                ->orderBy('labels', 'ASC')
+                ->findAll();
+
+            cache()
+                ->save('analytics_total_bandwidth_by_month', $found, 600);
+        }
+
+        return $found;
+    }
+
+    /**
+     * Get total storage
+     *
+     * @return BaseMedia[]
+     */
+    public function getDataTotalStorageByMonth(): array
+    {
+        if (! ($found = cache('analytics_total_storage_by_month'))) {
+            $found = (new MediaModel())->select(
+                'DATE_FORMAT(uploaded_at,"%Y-%m") as labels, ROUND(sum(file_size) / 1000000, 2) as `values`'
+            )
+                ->groupBy('labels')
+                ->orderBy('labels', 'ASC')
+                ->findAll();
+
+            cache()
+                ->save('analytics_total_storage_by_month', $found, 600);
         }
 
         return $found;

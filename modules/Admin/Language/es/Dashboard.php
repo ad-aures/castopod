@@ -9,7 +9,6 @@ declare(strict_types=1);
  */
 
 return [
-    'dashboard' => 'Styringspanel',
-    'welcome_message' => 'Velkomen til styrarområdet!',
-    'choose_interact' => 'Vel korleis du vil samhandla',
+    'home' => 'Panel de administración',
+    'welcome_message' => '¡Bienvenido al área de administración!',
 ];

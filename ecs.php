@@ -26,6 +26,7 @@ return static function (ECSConfig $ecsConfig): void {
             __DIR__ . '/app/Views/Components/*',
             __DIR__ . '/modules/**/Views/Components/*',
             __DIR__ . '/themes/**/Views/Components/*',
+            __DIR__ . '/app/Helpers/components_helper.php'
         ],
 
         LineLengthFixer::class => [

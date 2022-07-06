@@ -8,7 +8,6 @@ declare(strict_types=1);
  * @link       https://castopod.org/
  */
 
-use CodeIgniter\I18n\Time;
 
 if (! function_exists('get_browser_language')) {
     /**
@@ -281,41 +280,16 @@ if (! function_exists('format_bytes')) {
     /**
      * Adapted from https://stackoverflow.com/a/2510459
      */
-    function formatBytes(float $bytes, int $precision = 2): string
+    function formatBytes(float $bytes, bool $is_binary = false, int $precision = 2): string
     {
-        $units = ['B', 'KiB', 'MiB', 'GiB', 'TiB'];
+        $units = $is_binary ? ['B', 'KiB', 'MiB', 'GiB', 'TiB'] : ['B', 'KB', 'MB', 'GB', 'TB'];
 
         $bytes = max($bytes, 0);
-        $pow = floor(($bytes ? log($bytes) : 0) / log(1024));
+        $pow = floor(($bytes ? log($bytes) : 0) / log($is_binary ? 1024 : 1000));
         $pow = min($pow, count($units) - 1);
 
-        $bytes /= pow(1024, $pow);
+        $bytes /= pow($is_binary ? 1024 : 1000, $pow);
 
         return round($bytes, $precision) . $units[$pow];
-    }
-}
-
-if (! function_exists('local_time')) {
-    function local_time(Time $time): string
-    {
-        $formatter = new IntlDateFormatter(service(
-            'request'
-        )->getLocale(), IntlDateFormatter::MEDIUM, IntlDateFormatter::LONG);
-        $translatedDate = $time->toLocalizedString($formatter->getPattern());
-        $datetime = $time->format(DateTime::ISO8601);
-
-        return <<<CODE_SAMPLE
-            <local-time datetime="{$datetime}" 
-                weekday="long" 
-                month="long"
-                day="numeric"
-                year="numeric"
-                hour="numeric"
-                minute="numeric">
-                <time
-                    datetime="{$datetime}"
-                    title="{$time}">{$translatedDate}</time>
-            </local-time>
-        CODE_SAMPLE;
     }
 }

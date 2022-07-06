@@ -19,7 +19,7 @@ $routes->group(
         'namespace' => 'Modules\Admin\Controllers',
     ],
     function ($routes): void {
-        $routes->get('/', 'HomeController', [
+        $routes->get('/', 'DashboardController', [
             'as' => 'admin',
         ]);
 

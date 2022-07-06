@@ -451,4 +451,9 @@ class App extends BaseConfig
     ];
 
     public string $theme = 'pine';
+
+    /**
+     * Storage limit in Gigabytes
+     */
+    public ?int $storageLimit = null;
 }

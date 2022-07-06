@@ -37,7 +37,7 @@
                 CODE_SAMPLE;
             }
 
-            $interactAsText = lang('Admin.choose_interact');
+            $interactAsText = lang('Common.choose_interact');
             $route = route_to('interact-as-actor');
             $csrfField = csrf_field();
 

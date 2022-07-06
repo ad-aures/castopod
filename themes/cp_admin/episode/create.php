@@ -21,12 +21,12 @@
     name="audio_file"
     label="<?= lang('Episode.form.audio_file') ?>"
     hint="<?= lang('Episode.form.audio_file_hint') ?>"
-    helper="<?= lang('Common.size_limit', [formatBytes(file_upload_max_size())]) ?>"
+    helper="<?= lang('Common.size_limit', [formatBytes(file_upload_max_size(), true)]) ?>"
     type="file"
     accept=".mp3,.m4a"
     required="true"
     data-max-size="<?= file_upload_max_size() ?>"
-    data-max-size-error="<?= lang('Episode.form.file_size_error', [formatBytes(file_upload_max_size())]) ?>" />
+    data-max-size-error="<?= lang('Episode.form.file_size_error', [formatBytes(file_upload_max_size(), true)]) ?>" />
 
 <Forms.Field
     name="cover"

@@ -9,7 +9,6 @@ declare(strict_types=1);
  */
 
 return [
-    'dashboard' => 'Taolenn-stur',
-    'welcome_message' => 'Degemer mat en daolenn-stur!',
-    'choose_interact' => 'Dibabit penaos interaktiñ',
+    'home' => 'Tableau de bord',
+    'welcome_message' => 'Bienvenue dans l’administration !',
 ];
