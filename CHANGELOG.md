@@ -1,3 +1,15 @@
+# [1.0.0-beta.18](https://code.castopod.org/adaures/castopod/compare/v1.0.0-beta.17...v1.0.0-beta.18) (2022-07-07)
+
+### Bug Fixes
+
+- **player-styling:** revert vite to 2.8 to reference the player css
+  ([e07d3af](https://code.castopod.org/adaures/castopod/commit/e07d3afea9af85b8361227e000fb64b502781668))
+
+### Features
+
+- add legalNoticeURL to app config for setting an external url to legal notice
+  ([711843a](https://code.castopod.org/adaures/castopod/commit/711843a0c81e1e2ec7a015431786df4ef32d5092))
+
 # [1.0.0-beta.17](https://code.castopod.org/adaures/castopod/compare/v1.0.0-beta.16...v1.0.0-beta.17) (2022-07-06)
 
 ### Bug Fixes
