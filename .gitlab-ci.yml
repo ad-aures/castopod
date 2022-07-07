@@ -75,7 +75,7 @@ tests:
     MYSQL_PASSWORD: "castopod"
 
   script:
-    - apt-get install -y mariadb-client  libmariadb-dev
+    - apt-get update && apt-get install -y mariadb-client  libmariadb-dev
 
     - echo "SHOW DATABASES;" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mariadb "$MYSQL_DATABASE"
 

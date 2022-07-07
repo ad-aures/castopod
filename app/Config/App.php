@@ -456,4 +456,6 @@ class App extends BaseConfig
      * Storage limit in Gigabytes
      */
     public ?int $storageLimit = null;
+
+    public ?string $legalNoticeURL = null;
 }

@@ -34,6 +34,15 @@ if (! function_exists('render_page_links')) {
             ]);
         }
 
+        // if set in .env, add legal notice link at the end of page links
+        if (config('App')->legalNoticeURL !== null) {
+            $links .= anchor(config('App')->legalNoticeURL, lang('Common.legal_notice'), [
+                'class' => 'px-2 py-1 underline hover:no-underline focus:ring-accent',
+                'target' => '_blank',
+                'rel' => 'noopener noreferrer',
+            ]);
+        }
+
         return '<nav class="' . $class . '">' . $links . '</nav>';
     }
 }
