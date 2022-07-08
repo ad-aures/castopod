@@ -115,7 +115,7 @@ then
 	echo "HTTPS redirection is disabled for test purpose, please enable it in production mode"
 	echo "app.forceGlobalSecureRequests=false" >> /opt/castopod/.env
 else
-	echo "HTTPS redirection is enabled by default (mandatory to federate with the fediverse), use CP_DISABLE_HTTPS=1 to disable it for test purpose"
+	echo "HTTPS redirection is enabled by default (mandatory to federate with the fediverse), use CP_DISABLE_HTTPS=1 to disable it for testing purposes"
 fi
 
 cat << EOF >> /opt/castopod/.env

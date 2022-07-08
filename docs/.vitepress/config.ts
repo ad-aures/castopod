@@ -173,6 +173,10 @@ function getGuideSidebarEn() {
       text: "Getting started",
       children: [
         { text: "Install", link: "/getting-started/install" },
+        {
+          text: "Docker",
+          link: "/getting-started/docker",
+        },
         { text: "Security", link: "/getting-started/security" },
         { text: "Update", link: "/getting-started/update" },
       ],
@@ -197,6 +201,10 @@ function getGuideSidebarFr() {
       text: "Commencer",
       children: [
         { text: "Installer", link: "/fr/getting-started/install" },
+        {
+          text: "Docker",
+          link: "/fr/getting-started/docker",
+        },
         { text: "Sécurité", link: "/fr/getting-started/security" },
         { text: "Mise à jour", link: "/fr/getting-started/update" },
       ],
@@ -221,6 +229,10 @@ function getGuideSidebarPtBR() {
       text: "Começando",
       children: [
         { text: "Instalar", link: "/pt-BR/getting-started/install" },
+        {
+          text: "Docker",
+          link: "/pt-BR/getting-started/docker",
+        },
         { text: "Segurança", link: "/pt-BR/getting-started/security" },
         { text: "Atualizar", link: "/pt-BR/getting-started/update" },
       ],
@@ -245,6 +257,10 @@ function getGuideSidebarNnNO() {
       text: "Starter",
       children: [
         { text: "Installer", link: "/nn-NO/getting-started/install" },
+        {
+          text: "Docker",
+          link: "/nn-NO/getting-started/docker",
+        },
         { text: "Sikkerhet", link: "/nn-NO/getting-started/security" },
         { text: "Oppdaterer", link: "/nn-NO/getting-started/update" },
       ],
