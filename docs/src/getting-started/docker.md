@@ -13,6 +13,9 @@ process:
 - [**`castopod/web-server`**](https://hub.docker.com/r/castopod/web-server): an
   Nginx configuration for Castopod
 
+Additionally, Castopod requires a MySQL-compatible database. A Redis database
+can be added as a cache handler.
+
 ## Supported tags
 
 - `develop` [unstable], latest development branch build
@@ -75,8 +78,6 @@ process:
       redis:
         image: redis:7.0-alpine
         container_name: "castopod-redis"
-        ports:
-          - 6379:6379
         volumes:
           - castopod-cache:/data
         networks:
@@ -92,11 +93,22 @@ process:
       castopod-db:
     ```
 
-3.  Setup a reverse proxy for TLS (SSL/HTTPS), using caddy for example:
+    You have to adapt some variables to your needs (e.g. `CP_BASEURL`,
+    `MYSQL_ROOT_PASSWORD`, `MYSQL_PASSWORD` and `CP_ANALYTICS_SALT`).
 
-    // TODO
+3.  Setup a reverse proxy for TLS (SSL/HTTPS)
 
-4.  Run `docker-compose up`, wait for it to initialize and head on to
+    TLS is mandatory for ActivityPub to work. This job can easily be handled by
+    a reverse proxy, for example with [Caddy](https://caddyserver.com/):
+
+    ```
+    #castopod
+    castopod.example.com {
+    	reverse_proxy localhost:8080
+    }
+    ```
+
+4.  Run `docker-compose up -d`, wait for it to initialize and head on to
     `https://castopod.example.com/cp-install` to finish setting up Castopod!
 
 5.  You're all set, start podcasting! 🎙️🚀

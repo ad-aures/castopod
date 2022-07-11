@@ -1,29 +1,32 @@
 ---
-title: Official Docker images
+title: Images Docker officielles
 sidebarDepth: 3
 ---
 
-# Official Docker images
+# Images Docker officielles
 
-Castopod pushes 2 Docker images to the Docker Hub during its automated build
-process:
+Castopod publie 2 images Docker sur Docker Hub grâce à l'automatisation de la
+construction des images par la chaîne d'intégration GitLab :
 
-- [**`castopod/app`**](https://hub.docker.com/r/castopod/app): the app bundle
-  with all of Castopod dependencies
-- [**`castopod/web-server`**](https://hub.docker.com/r/castopod/web-server): an
-  Nginx configuration for Castopod
+- [**`castopod/app`**](https://hub.docker.com/r/castopod/app): l'application
+  avec toutes les dépendances de Castopod
+- [**`castopod/web-server`**](https://hub.docker.com/r/castopod/web-server): un
+  serveur Nginx avec une configuration adaptée à Castopod
 
-## Supported tags
+De plus, Castopod nécessite une base de donnée compatible avec MySQL. Une base
+de donnée Redis peut être utilisée pour gérer le cache.
 
-- `develop` [unstable], latest development branch build
+## Tags disponibles
 
-// stable tags to come…
+- `develop` [instable], dernière version de développement de Castopod
 
-## Example usage
+// d'autres tags sont à venir !
 
-1.  Install [docker](https://docs.docker.com/get-docker/) and
+## Exemple d'utilisation
+
+1.  Installez [docker](https://docs.docker.com/get-docker/) et
     [docker-compose](https://docs.docker.com/compose/install/)
-2.  Create a `docker-compose.yml` file with the following:
+2.  Créez un fichier `docker-compose.yml` contenant :
 
     ```yml
     version: "3.7"
@@ -75,8 +78,6 @@ process:
       redis:
         image: redis:7.0-alpine
         container_name: "castopod-redis"
-        ports:
-          - 6379:6379
         volumes:
           - castopod-cache:/data
         networks:
@@ -92,20 +93,33 @@ process:
       castopod-db:
     ```
 
-3.  Setup a reverse proxy for TLS (SSL/HTTPS), using caddy for example:
+    Vous devez adapter la configuration à vos besoins (e.g. `CP_BASEURL`,
+    `MYSQL_ROOT_PASSWORD`, `MYSQL_PASSWORD` and `CP_ANALYTICS_SALT`).
 
-    // TODO
+3.  Mettre en place un reverse proxy pour gérer TLS (SSL/HTTPS)
 
-4.  Run `docker-compose up`, wait for it to initialize and head on to
-    `https://castopod.example.com/cp-install` to finish the setting up Castopod!
+    TLS est obligatoire pour faire fonctionner ActivityPub. Cette tâche peut
+    facilement être déléguée à un reverse proxy, par exemple avec
+    [Caddy](https://caddyserver.com/):
 
-5.  You're all set, start podcasting! 🎙️🚀
+    ```
+    #castopod
+    castopod.example.com {
+    	reverse_proxy localhost:8080
+    }
+    ```
 
-## Environment Variables
+4.  Lancez la commande `docker-compose up -d`, attendez l'initialisation et
+    rendez-vous sur `https://castopod.example.com/cp-install` pour finir
+    l'installation de Castopod !
+
+5.  Tout est bon à présent, à vos podcasts ! 🎙️🚀
+
+## Variables d'environnement
 
 - **castopod/app**
 
-  | Variable name              | Type (`default`)                    |
+  | Nom de le variable         | Type (`default`)                    |
   | -------------------------- | ----------------------------------- |
   | **`CP_BASEURL`**           | string (`undefined`)                |
   | **`CP_MEDIA_BASEURL`**     | ?string (`(empty)`)                 |
@@ -125,6 +139,6 @@ process:
 
 - **castopod/web-server**
 
-  | Variable name         | Type (`default`) |
-  | --------------------- | ---------------- |
-  | **`CP_APP_HOSTNAME`** | ?string (`app`)  |
+  | Nom de la variable    | Type (`default`)  |
+  | --------------------- | ----------------- |
+  | **`CP_APP_HOSTNAME`** | ?string (`"app"`) |
