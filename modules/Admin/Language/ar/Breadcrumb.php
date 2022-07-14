@@ -26,8 +26,6 @@ return [
     'publish-edit' => 'edit publication',
     'unpublish' => 'unpublish',
     'delete' => 'احذف',
-    'deleted' => 'deleted',
-    'delete-permanently' => 'delete permanently',
     'fediverse' => 'الفديفرس',
     'block-lists' => 'قوائم حجب',
     'users' => 'مستخدمون',

@@ -47,4 +47,5 @@ return [
     ],
     'size_limit' => 'Maks storleik: {0}.',
     'choose_interact' => 'Vel korleis du vil samhandla',
+    'view' => 'View',
 ];

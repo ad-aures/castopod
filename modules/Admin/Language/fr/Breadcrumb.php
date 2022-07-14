@@ -26,8 +26,6 @@ return [
     'publish-edit' => 'modifier la publication',
     'unpublish' => 'dépublier',
     'delete' => 'supprimer',
-    'deleted' => 'supprimés',
-    'delete-permanently' => 'supprimer définitivement',
     'fediverse' => 'fédiverse',
     'block-lists' => 'listes de blocage',
     'users' => 'utilisateurs',

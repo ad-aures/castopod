@@ -26,4 +26,5 @@ return [
     'read_less' => 'Lenn nebeutoc\'h',
     'see_more' => 'Gwelout muioc\'h',
     'see_less' => 'Gwelout nebeutoc\'h',
+    'legal_notice' => 'Legal notice',
 ];

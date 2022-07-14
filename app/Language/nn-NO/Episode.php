@@ -29,6 +29,5 @@ return [
         other {# kommentarar}
     }',
     'all_podcast_episodes' => 'Alle podkast-episodane',
-    'episodes_recycle_bin' => 'Recycle bin',
     'back_to_podcast' => 'Gå tilbake til podkasten',
 ];

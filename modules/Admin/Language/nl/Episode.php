@@ -34,9 +34,11 @@ return [
     'create' => 'Aflevering toevoegen',
     'publication_status' => [
         'published' => 'Gepubliceerd',
+        'with_podcast' => 'Published',
         'scheduled' => 'Gepland',
         'not_published' => 'Niet gepubliceerd',
     ],
+    'with_podcast_hint' => 'To be published at the same time as the podcast',
     'list' => [
         'search' => [
             'placeholder' => 'Search for an episode',
@@ -55,8 +57,15 @@ return [
     'messages' => [
         'createSuccess' => 'Aflevering is succesvol aangemaakt!',
         'editSuccess' => 'Aflevering is succesvol bijgewerkt!',
+        'publishSuccess' => '{publication_status, select,
+            published {Episode successfully published!}
+            scheduled {Episode publication successfully scheduled!}
+            with_podcast {This episode will be published at the same time as the podcast.}
+            other {This episode is not published.}
+        }',
         'publishCancelSuccess' => 'Aflevering publicatie is geannuleerd!',
         'unpublishBeforeDeleteTip' => 'You must unpublish the episode before deleting it.',
+        'scheduleDateError' => 'Schedule date must be set!',
         'deletePublishedEpisodeError' => 'Please unpublish the episode before deleting it.',
         'deleteSuccess' => 'Episode successfully deleted!',
         'deleteError' => 'Failed to delete episode {type, select,
@@ -138,9 +147,9 @@ return [
             'If you need RSS tags that Castopod does not handle, set them here.',
         'custom_rss' => 'Custom RSS tags for the episode',
         'custom_rss_hint' => 'This will be injected within the ❬item❭ tag.',
-        'block' => 'Episode should be hidden from all platforms',
+        'block' => 'Episode should be hidden from public catalogues',
         'block_hint' =>
-            'The episode show or hide post. If you want this episode removed from the Apple directory, toggle this on.',
+            'The episode show or hide status: toggling this on prevents the episode from appearing in Apple Podcasts, Google Podcasts, and any third party apps that pull shows from these directories. (Not guaranteed)',
         'submit_create' => 'Create episode',
         'submit_edit' => 'Save episode',
     ],
@@ -154,6 +163,7 @@ return [
         'publication_method' => [
             'now' => 'Now',
             'schedule' => 'Schedule',
+            'with_podcast' => 'Publish alongside podcast',
         ],
         'scheduled_publication_date' => 'Scheduled publication date',
         'scheduled_publication_date_clear' => 'Clear publication date',

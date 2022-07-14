@@ -47,4 +47,5 @@ return [
     ],
     'size_limit' => 'Size limit: {0}.',
     'choose_interact' => 'Выберите как взаимодействовать',
+    'view' => 'View',
 ];

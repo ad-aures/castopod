@@ -11,4 +11,18 @@ declare(strict_types=1);
 return [
     'home' => 'Pulpit administratora',
     'welcome_message' => 'Witamy w panelu administracyjnym!',
+    'podcasts' => [
+        'title' => 'Podcasts',
+        'not_found' => 'No published podcast',
+        'last_published' => 'Last published on {lastPublicationDate}',
+    ],
+    'episodes' => [
+        'title' => 'Episodes',
+        'not_found' => 'No published episode',
+        'last_published' => 'Last published on {lastPublicationDate}',
+    ],
+    'storage' => [
+        'title' => 'Storage',
+        'subtitle' => '{totalUploaded} out of {totalStorage}',
+    ],
 ];

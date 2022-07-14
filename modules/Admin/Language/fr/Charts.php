@@ -35,4 +35,6 @@ return [
     'by_weekday' => 'Par jour de la semaine (sur les 60 derniers jours)',
     'by_hour' => 'Par heure de la journée (sur les 60 derniers jours)',
     'podcast_by_bandwidth' => 'Bande passante quotidienne consommée (en Mo)',
+    'total_storage_by_month' => 'Monthly storage (in MB)',
+    'total_bandwidth_by_month' => 'Monthly used bandwidth (in MB)',
 ];

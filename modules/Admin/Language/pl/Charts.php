@@ -35,4 +35,6 @@ return [
     'by_weekday' => 'Według dnia tygodnia (dla minionych 60 dni)',
     'by_hour' => 'Według pory dnia (dla minionych 60 dni)',
     'podcast_by_bandwidth' => 'Dzienna przepustowość (w MB)',
+    'total_storage_by_month' => 'Monthly storage (in MB)',
+    'total_bandwidth_by_month' => 'Monthly used bandwidth (in MB)',
 ];

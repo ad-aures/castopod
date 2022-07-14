@@ -29,6 +29,5 @@ return [
         other {# Kommentare}
     }',
     'all_podcast_episodes' => 'Alle Podcast-Folgen',
-    'episodes_recycle_bin' => 'Papierkorb',
     'back_to_podcast' => 'Zurück zum Podcast',
 ];

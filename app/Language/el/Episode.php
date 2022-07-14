@@ -29,6 +29,5 @@ return [
         other {# σχόλια}
     }',
     'all_podcast_episodes' => 'Όλα τα επεισόδια του podcast',
-    'episodes_recycle_bin' => 'Κάδος Aνακύκλωσης',
     'back_to_podcast' => 'Μετάβαση πίσω στο podcast',
 ];

@@ -35,9 +35,11 @@ return [
     'create' => 'Ouzhpennañ ur rann',
     'publication_status' => [
         'published' => 'Embannet',
+        'with_podcast' => 'Published',
         'scheduled' => 'Steuñvet',
         'not_published' => 'Diembann',
     ],
+    'with_podcast_hint' => 'To be published at the same time as the podcast',
     'list' => [
         'search' => [
             'placeholder' => 'Search for an episode',
@@ -56,8 +58,15 @@ return [
     'messages' => [
         'createSuccess' => 'Krouet eo bet ar rann gant berzh!',
         'editSuccess' => 'Hizivaet eo bet ar rann gant berzh!',
+        'publishSuccess' => '{publication_status, select,
+            published {Episode successfully published!}
+            scheduled {Episode publication successfully scheduled!}
+            with_podcast {This episode will be published at the same time as the podcast.}
+            other {This episode is not published.}
+        }',
         'publishCancelSuccess' => 'Nullet eo bet embannadur ar rann gant berzh!',
         'unpublishBeforeDeleteTip' => 'Ret eo deoc\'h diembannañ ar rann a-raok dilemel anezhi.',
+        'scheduleDateError' => 'Schedule date must be set!',
         'deletePublishedEpisodeError' => 'Diembannit ar rann a-raok dilemel anezhi mar plij.',
         'deleteSuccess' => 'Dilamet eo bet ar rann gant berzh!',
         'deleteError' => 'Failed to delete episode {type, select,
@@ -139,9 +148,9 @@ return [
             'M\'ho peus ezhomm eus balizennoù RSS ha n\'eus ket anezho e Castopod e c\'hellit o lakaat amañ.',
         'custom_rss' => 'Balizennoù RSS personelaet evit ar rann',
         'custom_rss_hint' => 'An dra-se a vo ouzhpennet e-barzh ar valizenn ❬item❭.',
-        'block' => 'Ar rann-se a rankfe bezañ kuzhet diouzh an holl savennoù',
+        'block' => 'Episode should be hidden from public catalogues',
         'block_hint' =>
-            'Gwelusted ar rann. Ma fell deoc\'h e vefe skarzhet ar rann eus roll Apple, gweredekait ar vaezienn-mañ.',
+            'The episode show or hide status: toggling this on prevents the episode from appearing in Apple Podcasts, Google Podcasts, and any third party apps that pull shows from these directories. (Not guaranteed)',
         'submit_create' => 'Krouiñ ar rann',
         'submit_edit' => 'Enrollañ ar rann',
     ],
@@ -155,6 +164,7 @@ return [
         'publication_method' => [
             'now' => 'Bremañ',
             'schedule' => 'Steuñviñ',
+            'with_podcast' => 'Publish alongside podcast',
         ],
         'scheduled_publication_date' => 'Deiziad embannadur steuñvet',
         'scheduled_publication_date_clear' => 'Skarzhañ deiziad embannadur',

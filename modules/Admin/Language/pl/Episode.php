@@ -35,9 +35,11 @@ return [
     'create' => 'Dodaj odcinek',
     'publication_status' => [
         'published' => 'Opublikowany',
+        'with_podcast' => 'Published',
         'scheduled' => 'Zaplanowany',
         'not_published' => 'Nieopublikowany',
     ],
+    'with_podcast_hint' => 'To be published at the same time as the podcast',
     'list' => [
         'search' => [
             'placeholder' => 'Search for an episode',
@@ -56,8 +58,15 @@ return [
     'messages' => [
         'createSuccess' => 'Odcinek został pomyślnie utworzony!',
         'editSuccess' => 'Odcinek został pomyślnie zaktualizowany!',
+        'publishSuccess' => '{publication_status, select,
+            published {Episode successfully published!}
+            scheduled {Episode publication successfully scheduled!}
+            with_podcast {This episode will be published at the same time as the podcast.}
+            other {This episode is not published.}
+        }',
         'publishCancelSuccess' => 'Episode publication successfully cancelled!',
         'unpublishBeforeDeleteTip' => 'You must unpublish the episode before deleting it.',
+        'scheduleDateError' => 'Schedule date must be set!',
         'deletePublishedEpisodeError' => 'Please unpublish the episode before deleting it.',
         'deleteSuccess' => 'Episode successfully deleted!',
         'deleteError' => 'Failed to delete episode {type, select,
@@ -139,9 +148,9 @@ return [
             'Jeśli potrzebujesz tagów RSS, których Castopod nie obsługuje, ustaw je tutaj.',
         'custom_rss' => 'Własne tagi RSS dla odcinka',
         'custom_rss_hint' => 'Zostaną wstawione w tagu ❬item❭.',
-        'block' => 'Odcinek powinien być ukryty na wszystkich platformach',
+        'block' => 'Episode should be hidden from public catalogues',
         'block_hint' =>
-            'Pokaż lub ukryj post odcinka. Jeśli chcesz, aby ten odcinek został usunięty z katalogu Apple, włącz to.',
+            'The episode show or hide status: toggling this on prevents the episode from appearing in Apple Podcasts, Google Podcasts, and any third party apps that pull shows from these directories. (Not guaranteed)',
         'submit_create' => 'Stwórz odcinek',
         'submit_edit' => 'Zapisz odcinek',
     ],
@@ -155,6 +164,7 @@ return [
         'publication_method' => [
             'now' => 'Teraz',
             'schedule' => 'Zaplanuj',
+            'with_podcast' => 'Publish alongside podcast',
         ],
         'scheduled_publication_date' => 'Planowana data publikacji',
         'scheduled_publication_date_clear' => 'Wyczyść datę publikacji',

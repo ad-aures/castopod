@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 return [
     'warning' =>
-        'Dette kan ta lang tid.<br/>Denne versjonen syner ikkje framgangen medan importen går, så du vil ikkje sjå noko før han er ferdig.<br/>Viss du får feil med tidsavbrot, aukar du `max_execution_time`-verdien.',
+        'This procedure may take a long time. As the current version does not show any progress while it runs, you will not see anything updated until it is done. In case of timeout error, increase `max_execution_time` value.',
     'old_podcast_section_title' => 'Podkast å importera',
     'old_podcast_section_subtitle' =>
         'Syt for at du har rettane til podkasten før du importerer han. Å kopiera og kringkasta ein podkast utan løyve er ulovleg og straffbart.',

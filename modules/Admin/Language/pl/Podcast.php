@@ -16,14 +16,17 @@ return [
     'new_episode' => 'Nowy Odcinek',
     'view' => 'Wyświetl podcast',
     'edit' => 'Edytuj podcast',
+    'publish' => 'Publish podcast',
+    'publish_edit' => 'Edit publication',
     'delete' => 'Usuń podcast',
     'see_episodes' => 'Zobacz odcinki',
     'see_contributors' => 'Zobacz kontrybutorów',
     'go_to_page' => 'Idź do strony',
     'latest_episodes' => 'Najnowsze odcinki',
     'see_all_episodes' => 'Zobacz wszystkie odcinki',
+    'draft' => 'Draft',
     'messages' => [
-        'createSuccess' => 'Podcast został pomyślnie utworzony!',
+        'createSuccess' => 'Podcast successfully created!',
         'editSuccess' => 'Podcast został pomyślnie zaktualizowany!',
         'importSuccess' => 'Podcast został pomyślnie zaimportowany!',
         'deleteSuccess' => 'Podcast @{podcast_handle} successfully deleted!',
@@ -46,6 +49,10 @@ return [
         } added to the podcast!',
         'podcastFeedUpToDate' => 'Podcast is already up to date.',
         'podcastNotImported' => 'Podcast could not be updated as it was not imported.',
+        'publishError' => 'This podcast is either already published or scheduled for publication.',
+        'publishEditError' => 'This podcast is not scheduled for publication.',
+        'publishCancelSuccess' => 'Podcast publication successfully cancelled!',
+        'scheduleDateError' => 'Schedule date must be set!',
     ],
     'form' => [
         'identity_section_title' => 'Tożsamość podcastu',
@@ -121,7 +128,9 @@ return [
         'partner_link_url_hint' => 'Ogólny adres linku partnera',
         'partner_image_url_hint' => 'Ogólny adres obrazu partnera',
         'status_section_title' => 'Status',
-        'block' => 'Podcast powinien być ukryty na wszystkich platformach',
+        'block' => 'Podcast should be hidden from public catalogues',
+        'block_hint' =>
+            'The podcast show or hide status: toggling this on prevents the entire podcast from appearing in Apple Podcasts, Google Podcasts, and any third party apps that pull shows from these directories. (Not guaranteed)',
         'complete' => 'Podcast nie będzie miał nowych odcinków',
         'lock' => 'Zapobiegaj kopiowaniu podcastu',
         'lock_hint' =>
@@ -241,6 +250,32 @@ return [
         'film_interviews' => 'Wywiady filmowe',
         'film_reviews' => 'Recenzje filmów',
         'tv_reviews' => 'Recenzje telewizyjne',
+    ],
+    'publish_form' => [
+        'back_to_podcast_dashboard' => 'Back to podcast dashboard',
+        'post' => 'Your announcement post',
+        'post_hint' =>
+            "Write a message to announce the publication of your podcast. The message will be featured in your podcast's homepage.",
+        'message_placeholder' => 'Write your message…',
+        'submit' => 'Publish',
+        'publication_date' => 'Publication date',
+        'publication_method' => [
+            'now' => 'Now',
+            'schedule' => 'Schedule',
+        ],
+        'scheduled_publication_date' => 'Scheduled publication date',
+        'scheduled_publication_date_hint' =>
+            'You can schedule the podcast release by setting a future publication date. This field must be formatted as YYYY-MM-DD HH:mm',
+        'submit_edit' => 'Edit publication',
+        'cancel_publication' => 'Cancel publication',
+        'message_warning' => 'You did not write a message for your announcement post!',
+        'message_warning_hint' => 'Having a message increases social engagement, resulting in a better visibility for your podcast.',
+        'message_warning_submit' => 'Publish anyway',
+    ],
+    'publication_status_banner' => [
+        'draft_mode' => 'draft mode',
+        'not_published' => 'This podcast is not yet published.',
+        'scheduled' => 'This podcast is scheduled for publication on {publication_date}.',
     ],
     'delete_form' => [
         'disclaimer' =>

@@ -29,6 +29,5 @@ return [
         other {# comments}
     }',
     'all_podcast_episodes' => 'Všetky epizódy podcastu',
-    'episodes_recycle_bin' => 'Kôš',
     'back_to_podcast' => 'Späť na podcast',
 ];

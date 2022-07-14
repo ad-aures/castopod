@@ -34,9 +34,11 @@ return [
     'create' => 'Προσθήκη επεισοδίου',
     'publication_status' => [
         'published' => 'Δημοσιευμένο',
+        'with_podcast' => 'Published',
         'scheduled' => 'Προγραμματισμένο',
         'not_published' => 'Δεν έχει δημοσιευτεί',
     ],
+    'with_podcast_hint' => 'To be published at the same time as the podcast',
     'list' => [
         'search' => [
             'placeholder' => 'Search for an episode',
@@ -55,8 +57,15 @@ return [
     'messages' => [
         'createSuccess' => 'Το επεισόδιο δημιουργήθηκε με επιτυχία!',
         'editSuccess' => 'Το επεισόδιο ενημερώθηκε με επιτυχία!',
+        'publishSuccess' => '{publication_status, select,
+            published {Episode successfully published!}
+            scheduled {Episode publication successfully scheduled!}
+            with_podcast {This episode will be published at the same time as the podcast.}
+            other {This episode is not published.}
+        }',
         'publishCancelSuccess' => 'Η δημοσίευση του επεισοδίου ακυρώθηκε επιτυχώς!',
         'unpublishBeforeDeleteTip' => 'You must unpublish the episode before deleting it.',
+        'scheduleDateError' => 'Schedule date must be set!',
         'deletePublishedEpisodeError' => 'Please unpublish the episode before deleting it.',
         'deleteSuccess' => 'Episode successfully deleted!',
         'deleteError' => 'Failed to delete episode {type, select,
@@ -138,9 +147,9 @@ return [
             'Αν χρειάζεστε ετικέτες RSS που δεν χειρίζεται το Castopod, ορίστε τις εδώ.',
         'custom_rss' => 'Προσαρμοσμένες ετικέτες RSS για το επεισόδιο',
         'custom_rss_hint' => 'Αυτό θα ενεθεί εντός της ετικέτας "item".',
-        'block' => 'Το επεισόδιο πρέπει να είναι κρυμμένο από όλες τις πλατφόρμες',
+        'block' => 'Episode should be hidden from public catalogues',
         'block_hint' =>
-            'Το επεισόδιο εμφανίζει ή αποκρύπτει την ανάρτηση. Αν θέλετε αυτό το επεισόδιο να αφαιρεθεί από τον κατάλογο της Apple, ενεργοποιήστε το.',
+            'The episode show or hide status: toggling this on prevents the episode from appearing in Apple Podcasts, Google Podcasts, and any third party apps that pull shows from these directories. (Not guaranteed)',
         'submit_create' => 'Δημιουργία επεισοδίου',
         'submit_edit' => 'Αποθήκευση επεισοδίου',
     ],
@@ -154,6 +163,7 @@ return [
         'publication_method' => [
             'now' => 'Τώρα',
             'schedule' => 'Προγραμματισμός',
+            'with_podcast' => 'Publish alongside podcast',
         ],
         'scheduled_publication_date' => 'Ημερομηνία προγραμματισμένης δημοσίευσης',
         'scheduled_publication_date_clear' => 'Εκκαθάριση ημερομηνίας δημοσίευσης',

@@ -34,9 +34,11 @@ return [
     'create' => 'Añadir un episodio',
     'publication_status' => [
         'published' => 'Publicado',
+        'with_podcast' => 'Published',
         'scheduled' => 'Programado',
         'not_published' => 'No publicado',
     ],
+    'with_podcast_hint' => 'To be published at the same time as the podcast',
     'list' => [
         'search' => [
             'placeholder' => 'Search for an episode',
@@ -55,8 +57,15 @@ return [
     'messages' => [
         'createSuccess' => '¡El episodio ha sido creado correctamente!',
         'editSuccess' => '¡El episodio ha sido actualizado correctamente!',
+        'publishSuccess' => '{publication_status, select,
+            published {Episode successfully published!}
+            scheduled {Episode publication successfully scheduled!}
+            with_podcast {This episode will be published at the same time as the podcast.}
+            other {This episode is not published.}
+        }',
         'publishCancelSuccess' => '¡La publicación del episodio ha sido cancelada correctamente!',
         'unpublishBeforeDeleteTip' => 'Debe anular la publicación del episodio antes de eliminarlo.',
+        'scheduleDateError' => 'Schedule date must be set!',
         'deletePublishedEpisodeError' => 'Por favor, anule la publicación del episodio antes de eliminarlo.',
         'deleteSuccess' => '¡Episodio eliminado con éxito!',
         'deleteError' => 'Error al eliminar episodio {type, select,
@@ -138,9 +147,9 @@ return [
             'Si necesita etiquetas RSS que Castopod no maneja, póngalas aquí.',
         'custom_rss' => 'Etiquetas RSS personalizadas para el episodio',
         'custom_rss_hint' => 'Esto se inyectará dentro de la etiqueta del {item}.',
-        'block' => 'El episodio debe estar oculto para todas las plataformas',
+        'block' => 'Episode should be hidden from public catalogues',
         'block_hint' =>
-            'Mostrar u ocultar el episodio. Si quieres que este episodio se elimine del directorio de Apple, active esto.',
+            'The episode show or hide status: toggling this on prevents the episode from appearing in Apple Podcasts, Google Podcasts, and any third party apps that pull shows from these directories. (Not guaranteed)',
         'submit_create' => 'Crear episodio',
         'submit_edit' => 'Guardar episodio',
     ],
@@ -154,6 +163,7 @@ return [
         'publication_method' => [
             'now' => 'Ahora',
             'schedule' => 'Programar',
+            'with_podcast' => 'Publish alongside podcast',
         ],
         'scheduled_publication_date' => 'Fecha programada de publicación',
         'scheduled_publication_date_clear' => 'Borrar fecha de publicación',

@@ -26,4 +26,5 @@ return [
     'read_less' => 'Read less',
     'see_more' => 'الاطّلاع على المزيد',
     'see_less' => 'See less',
+    'legal_notice' => 'Legal notice',
 ];

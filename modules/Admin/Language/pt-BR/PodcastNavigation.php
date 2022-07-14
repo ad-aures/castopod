@@ -17,7 +17,6 @@ return [
     'episodes' => 'Episódios',
     'episode-list' => 'Todos os episódios',
     'episode-create' => 'Novo episódio',
-    'episode-deleted' => 'Lixeira',
     'analytics' => 'Estatísticas',
     'podcast-analytics' => 'Visão geral da audiência',
     'podcast-analytics-webpages' => 'Visitas às páginas web',

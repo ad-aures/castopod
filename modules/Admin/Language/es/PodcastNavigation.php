@@ -17,7 +17,6 @@ return [
     'episodes' => 'Episodios',
     'episode-list' => 'Todos los episodios',
     'episode-create' => 'Nuevo episodio',
-    'episode-deleted' => 'Papelera de reciclaje',
     'analytics' => 'Estadísticas',
     'podcast-analytics' => 'Vista general del público',
     'podcast-analytics-webpages' => 'Visitas a páginas web',

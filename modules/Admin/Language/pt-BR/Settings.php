@@ -15,7 +15,7 @@ return [
         'site_icon' => 'Ícone do site',
         'site_icon_delete' => 'Excluir ícone do site',
         'site_icon_hint' => 'Ícones de sites são o que você vê nas abas do seu navegador, barra de favoritos e quando você adiciona um site como um atalho em dispositivos móveis.',
-        'site_icon_helper' => 'Icon must be squared and at least 512px wide and tall.',
+        'site_icon_helper' => 'O ícone deve ser quadrado e ter pelo menos 512px de largura e altura.',
         'site_name' => 'Nome do site',
         'site_description' => 'Descrição do site',
         'submit' => 'Salvar',

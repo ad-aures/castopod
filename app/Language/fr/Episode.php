@@ -29,6 +29,5 @@ return [
         other {# commentaires}
     }',
     'all_podcast_episodes' => 'Tous les épisodes du podcast',
-    'episodes_recycle_bin' => 'Recycle bin',
     'back_to_podcast' => 'Revenir au podcast',
 ];

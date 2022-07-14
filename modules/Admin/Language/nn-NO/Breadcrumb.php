@@ -26,8 +26,6 @@ return [
     'publish-edit' => 'rediger publiseringa',
     'unpublish' => 'avpubliser',
     'delete' => 'slett',
-    'deleted' => 'deleted',
-    'delete-permanently' => 'delete permanently',
     'fediverse' => 'fødiverset',
     'block-lists' => 'blokkeringslister',
     'users' => 'brukarar',

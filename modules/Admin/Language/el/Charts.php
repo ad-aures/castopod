@@ -35,4 +35,6 @@ return [
     'by_weekday' => 'Την ημέρα της εβδομάδας (για τις τελευταίες 60 ημέρες)',
     'by_hour' => 'Κατά την ώρα της ημέρας (για τις τελευταίες 60 ημέρες)',
     'podcast_by_bandwidth' => 'Ημερήσιο χρησιμοποιούμενο bandwidth (σε MB)',
+    'total_storage_by_month' => 'Monthly storage (in MB)',
+    'total_bandwidth_by_month' => 'Monthly used bandwidth (in MB)',
 ];

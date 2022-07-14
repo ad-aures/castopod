@@ -16,44 +16,51 @@ return [
     'new_episode' => 'Novo Episódio',
     'view' => 'Ver podcast',
     'edit' => 'Editar podcast',
+    'publish' => 'Publicar podcast',
+    'publish_edit' => 'Editar publicação',
     'delete' => 'Excluir podcast',
     'see_episodes' => 'Ver episódios',
     'see_contributors' => 'Ver contribuidores',
     'go_to_page' => 'Ir para a página',
     'latest_episodes' => 'Últimos episódios',
     'see_all_episodes' => 'Ver todos os episódios',
+    'draft' => 'Rascunho',
     'messages' => [
-        'createSuccess' => 'Podcast foi criado com sucesso!',
+        'createSuccess' => 'Podcast criado com sucesso!',
         'editSuccess' => 'Podcast foi atualizado com sucesso!',
         'importSuccess' => 'Podcast foi importado com sucesso!',
-        'deleteSuccess' => 'Podcast @{podcast_handle} successfully deleted!',
-        'deletePodcastMediaError' => 'Failed to delete podcast {type, select,
-            cover {cover}
-            banner {banner}
-            other {media}
-        }.',
-        'deleteEpisodeMediaError' => 'Failed to delete podcast episode {episode_slug} {type, select,
-            transcript {transcript}
-            chapters {chapters}
-            image {cover}
-            audio {audio}
-            other {media}
-        }.',
-        'deletePodcastMediaFolderError' => 'Failed to delete podcast media folder {folder_path}. You may manually remove it from your disk.',
-        'podcastFeedUpdateSuccess' => 'Successful update: {number_of_new_episodes, plural,
-            one {# episode was}
-            other {# episodes were}
-        } added to the podcast!',
-        'podcastFeedUpToDate' => 'Podcast is already up to date.',
-        'podcastNotImported' => 'Podcast could not be updated as it was not imported.',
+        'deleteSuccess' => 'Podcast @{podcast_handle} excluído com sucesso!',
+        'deletePodcastMediaError' => 'Falha ao excluir {type, select,
+            cover {a capa}
+            banner {o banner}
+            other {a mídia}
+        } do podcast.',
+        'deleteEpisodeMediaError' => 'Falha ao excluir {type, select,
+            transcript {a transcrição}
+            chapters {os capítulos}
+            image {a capa}
+            audio {o áudio}
+            other {a mídia}
+        } do episódio de podcast {episode_slug}.',
+        'deletePodcastMediaFolderError' => 'Falha ao excluir a pasta de mídia de podcast {folder_path}. Você pode removê-la manualmente de seu disco.',
+        'podcastFeedUpdateSuccess' => 'Atualização bem sucedida: {number_of_new_episodes, plural,
+            one {# episódio foi adicionado}
+            other {# episódios foram adicionados}
+        } ao podcast!',
+        'podcastFeedUpToDate' => 'O Podcast já está atualizado.',
+        'podcastNotImported' => 'O Podcast não pôde ser atualizado pois não foi importado.',
+        'publishError' => 'Este podcast já está publicado ou agendado para publicação.',
+        'publishEditError' => 'Este podcast não está agendado para publicação.',
+        'publishCancelSuccess' => 'Publicação do Podcast cancelada com sucesso!',
+        'scheduleDateError' => 'Data de agendamento deve ser definida!',
     ],
     'form' => [
         'identity_section_title' => 'Identidade do podcast',
         'identity_section_subtitle' => 'Esses campos permitem que você seja notado.',
         'cover' => 'Capa do podcast',
-        'cover_size_hint' => 'Cover must be squared and at least 1400px wide and tall.',
+        'cover_size_hint' => 'A capa deve ser quadrada e ter pelo menos 1400px de largura e altura.',
         'banner' => 'Banner do podcast',
-        'banner_size_hint' => 'Banner must have a 3:1 ratio and be at least 1500px wide.',
+        'banner_size_hint' => 'Banner deve ter uma proporção 3:1 e ter ao menos 1500px de largura.',
         'banner_delete' => 'Excluir banner do podcast',
         'title' => 'Título',
         'handle' => 'Identificador',
@@ -110,9 +117,9 @@ return [
         'custom_rss_hint' => 'Isto será injetado dentro da tag ❬channel❭.',
         'new_feed_url' => 'Nova URL de feed',
         'new_feed_url_hint' => 'Use este campo ao mover este podcast para outro domínio ou alterar hosts. Por padrão, este campo é preenchido com a URL do feed RSS atual se o podcast for importado.',
-        'old_feed_url' => 'Old feed URL',
-        'update_feed' => 'Update feed',
-        'update_feed_tip' => 'Import this podcast\'s latest episodes',
+        'old_feed_url' => 'URL de feed antigo',
+        'update_feed' => 'Atualizar feed',
+        'update_feed_tip' => 'Importar os últimos episódios deste podcast',
         'partnership' => 'Parceria',
         'partner_id' => 'ID',
         'partner_link_url' => 'URL do link',
@@ -121,7 +128,9 @@ return [
         'partner_link_url_hint' => 'O endereço genérico de link do parceiro',
         'partner_image_url_hint' => 'O endereço genérico da imagem de parceiro',
         'status_section_title' => 'Status',
-        'block' => 'Podcast deve ser ocultado de todas as plataformas',
+        'block' => 'O podcast deve ser ocultado dos catálogos públicos',
+        'block_hint' =>
+            'O status do podcast: ativar isso impede que o podcast inteiro apareça em Apple Podcasts, Google Podcasts e qualquer aplicativo de terceiros que extraia programas desses diretórios. (Não garantido)',
         'complete' => 'Podcast não terá novos episódios',
         'lock' => 'Impedir que o podcast seja copiado',
         'lock_hint' =>
@@ -242,11 +251,37 @@ return [
         'film_reviews' => 'Avaliações de Filmes',
         'tv_reviews' => 'Avaliações de TV',
     ],
+    'publish_form' => [
+        'back_to_podcast_dashboard' => 'Voltar ao painel do podcast',
+        'post' => 'Sua mensagem de publicação',
+        'post_hint' =>
+            "Escreva uma mensagem para anunciar a publicação do seu podcast. A mensagem será destacada na página inicial do seu podcast.",
+        'message_placeholder' => 'Escreva a sua mensagem…',
+        'submit' => 'Publicar',
+        'publication_date' => 'Data de publicação',
+        'publication_method' => [
+            'now' => 'Agora',
+            'schedule' => 'Programar',
+        ],
+        'scheduled_publication_date' => 'Data de publicação programada',
+        'scheduled_publication_date_hint' =>
+            'Você pode agendar a liberação do podcast definindo uma data de publicação futura. Este campo deve ser formatado como YYYY-MM-DD HH:mm',
+        'submit_edit' => 'Editar publicação',
+        'cancel_publication' => 'Cancelar publicação',
+        'message_warning' => 'Você não escreveu uma mensagem para o anúncio do episódio!',
+        'message_warning_hint' => 'Ter uma mensagem aumenta o engajamento social, resultando em uma melhor visibilidade do seu podcast.',
+        'message_warning_submit' => 'Publicar mesmo assim',
+    ],
+    'publication_status_banner' => [
+        'draft_mode' => 'modo rascunho',
+        'not_published' => 'Este podcast ainda não foi publicado.',
+        'scheduled' => 'Este podcast está programado para publicação em {publication_date}.',
+    ],
     'delete_form' => [
         'disclaimer' =>
-            "Deleting the podcast will delete all episodes, media files, posts and analytics associated with it. This action is irreversible, you will not be able to retrieve them afterwards.",
-        'understand' => 'I understand, I want the podcast to be permanently deleted',
-        'submit' => 'Delete',
+            "Excluir o podcast irá excluir todos os episódios, arquivos de mídia, publicações e estatísticas associados a ele. Essa ação é irreversível, você não será capaz de recuperá-la depois.",
+        'understand' => 'Eu compreendo, quero que o podcast seja permanentemente excluído',
+        'submit' => 'Excluir',
     ],
     'by' => 'Por {publisher}',
     'season' => 'Temporada {seasonNumber}',
@@ -256,12 +291,12 @@ return [
     'no_episode' => 'Nenhum episódio encontrado!',
     'follow' => 'Seguir',
     'followers' => '{numberOfFollowers, plural,
-        one {# follower}
-        other {# followers}
+        one {# seguidor}
+        other {# seguidores}
     }',
     'posts' => '{numberOfPosts, plural,
-        one {# post}
-        other {# posts}
+        one {# publicação}
+        other {# publicações}
     }',
     'activity' => 'Atividade',
     'episodes' => 'Episódios',

@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 return [
     'warning' =>
-        'Cette procédure peut prendre du temps.<br/>Dans la mesure où la version actuelle ne montre aucune progression durant l’exécution, vous ne pourrez voir aucun changement avant la fin.<br/>En cas d’erreur de timeout,  augmentez la valeur de `max_execution_time`.',
+        'This procedure may take a long time. As the current version does not show any progress while it runs, you will not see anything updated until it is done. In case of timeout error, increase `max_execution_time` value.',
     'old_podcast_section_title' => 'Le podcast à importer',
     'old_podcast_section_subtitle' =>
         'Assurez-vous d’être détenteur des droits du podcast avant de l’importer. Copier et diffuser un podcast sans en détenir les droits est assimilable à de la contrefaçon et est passible de poursuites.',

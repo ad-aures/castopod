@@ -26,8 +26,6 @@ return [
     'publish-edit' => 'upraviť zverejnené',
     'unpublish' => 'unpublish',
     'delete' => 'vymazať',
-    'deleted' => 'vymazané',
-    'delete-permanently' => 'delete permanently',
     'fediverse' => 'fediverse',
     'block-lists' => 'block lists',
     'users' => 'users',

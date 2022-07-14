@@ -47,4 +47,5 @@ return [
     ],
     'size_limit' => 'Bevenn ar vent: {0}.',
     'choose_interact' => 'Dibabit penaos interaktiñ',
+    'view' => 'View',
 ];

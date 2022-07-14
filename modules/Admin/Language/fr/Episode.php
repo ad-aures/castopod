@@ -34,9 +34,11 @@ return [
     'create' => 'Ajouter un épisode',
     'publication_status' => [
         'published' => 'Publié',
+        'with_podcast' => 'Published',
         'scheduled' => 'Planifié',
         'not_published' => 'Non publié',
     ],
+    'with_podcast_hint' => 'To be published at the same time as the podcast',
     'list' => [
         'search' => [
             'placeholder' => 'Search for an episode',
@@ -55,8 +57,15 @@ return [
     'messages' => [
         'createSuccess' => 'L’épisode a été créé avec succès !',
         'editSuccess' => 'L’épisode a bien été mis à jour !',
+        'publishSuccess' => '{publication_status, select,
+            published {Episode successfully published!}
+            scheduled {Episode publication successfully scheduled!}
+            with_podcast {This episode will be published at the same time as the podcast.}
+            other {This episode is not published.}
+        }',
         'publishCancelSuccess' => 'La publication de l’épisode a bien été annulée !',
         'unpublishBeforeDeleteTip' => 'You must unpublish the episode before deleting it.',
+        'scheduleDateError' => 'Schedule date must be set!',
         'deletePublishedEpisodeError' => 'Please unpublish the episode before deleting it.',
         'deleteSuccess' => 'Episode successfully deleted!',
         'deleteError' => 'Failed to delete episode {type, select,
@@ -138,9 +147,9 @@ return [
             'Si vous avez besoin d’une balise que Castopod ne couvre pas, définissez-la ici.',
         'custom_rss' => 'Balises RSS personnalisées pour l’épisode',
         'custom_rss_hint' => 'Ceci sera injecté dans la balise ❬item❭.',
-        'block' => 'L’épisode doit être masqué de toutes les plateformes',
+        'block' => 'Episode should be hidden from public catalogues',
         'block_hint' =>
-            'La visibilité de l’épisode. Si vous souhaitez retirer cet épisode de l’index Apple, activez ce champ.',
+            'The episode show or hide status: toggling this on prevents the episode from appearing in Apple Podcasts, Google Podcasts, and any third party apps that pull shows from these directories. (Not guaranteed)',
         'submit_create' => 'Créer l’épisode',
         'submit_edit' => 'Enregistrer l’épisode',
     ],
@@ -154,6 +163,7 @@ return [
         'publication_method' => [
             'now' => 'Maintenant',
             'schedule' => 'Planifier',
+            'with_podcast' => 'Publish alongside podcast',
         ],
         'scheduled_publication_date' => 'Date de publication programmée',
         'scheduled_publication_date_clear' => 'Effacer la date de publication',
@@ -174,7 +184,7 @@ return [
     ],
     'delete_form' => [
         'disclaimer' =>
-            "Supprimer l’épisode supprimera tous les fichiers multimédia, commentaires, extraits vidéos et extraits sonores qui lui sont associés.",
+            "Deleting the episode will delete all media files, comments, video clips and soundbites associated with it.",
         'understand' => 'Je comprends, je veux supprimer l’épisode',
         'submit' => 'Delete',
     ],

@@ -26,8 +26,6 @@ return [
     'publish-edit' => 'επεξεργασία δημοσίευσης',
     'unpublish' => 'αναίρεση δημοσίευσης',
     'delete' => 'διαγραφή',
-    'deleted' => 'διαγράφηκε',
-    'delete-permanently' => 'οριστική διαγραφή',
     'fediverse' => 'fediverse',
     'block-lists' => 'λίστες αποκλεισμένων',
     'users' => 'χρήστες',

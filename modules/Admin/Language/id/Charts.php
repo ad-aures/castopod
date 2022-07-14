@@ -35,4 +35,6 @@ return [
     'by_weekday' => 'By week day (for the past 60 days)',
     'by_hour' => 'By time of day (for the past 60 days)',
     'podcast_by_bandwidth' => 'Daily used bandwidth (in MB)',
+    'total_storage_by_month' => 'Monthly storage (in MB)',
+    'total_bandwidth_by_month' => 'Monthly used bandwidth (in MB)',
 ];

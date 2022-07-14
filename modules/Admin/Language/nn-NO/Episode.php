@@ -34,9 +34,11 @@ return [
     'create' => 'Legg til ein episode',
     'publication_status' => [
         'published' => 'Lagt ut',
+        'with_podcast' => 'Published',
         'scheduled' => 'Planlagt',
         'not_published' => 'Ikkje lagt ut',
     ],
+    'with_podcast_hint' => 'To be published at the same time as the podcast',
     'list' => [
         'search' => [
             'placeholder' => 'Search for an episode',
@@ -55,8 +57,15 @@ return [
     'messages' => [
         'createSuccess' => 'Episoden er oppretta!',
         'editSuccess' => 'Episoden er oppdatert!',
+        'publishSuccess' => '{publication_status, select,
+            published {Episode successfully published!}
+            scheduled {Episode publication successfully scheduled!}
+            with_podcast {This episode will be published at the same time as the podcast.}
+            other {This episode is not published.}
+        }',
         'publishCancelSuccess' => 'Du har avbrote å leggja ut episoden.',
         'unpublishBeforeDeleteTip' => 'You must unpublish the episode before deleting it.',
+        'scheduleDateError' => 'Schedule date must be set!',
         'deletePublishedEpisodeError' => 'Please unpublish the episode before deleting it.',
         'deleteSuccess' => 'Episode successfully deleted!',
         'deleteError' => 'Failed to delete episode {type, select,
@@ -138,9 +147,9 @@ return [
             'Viss du treng RSS-merkelappar som Castopod ikkje handterer, kan du skriva dei inn her.',
         'custom_rss' => 'Eigne RSS-merkelappar for episoden',
         'custom_rss_hint' => 'Dette blir sett inn i ❬item❭-elementet.',
-        'block' => 'Episoden skal gøymast frå alle plattformer',
+        'block' => 'Episode should be hidden from public catalogues',
         'block_hint' =>
-            'Gøym eller vis episoden. Viss du vil gøyma denne episoden frå Apple-katalogen, skrur du på denne.',
+            'The episode show or hide status: toggling this on prevents the episode from appearing in Apple Podcasts, Google Podcasts, and any third party apps that pull shows from these directories. (Not guaranteed)',
         'submit_create' => 'Lag episode',
         'submit_edit' => 'Lagre episode',
     ],
@@ -154,6 +163,7 @@ return [
         'publication_method' => [
             'now' => 'No',
             'schedule' => 'Planlegg',
+            'with_podcast' => 'Publish alongside podcast',
         ],
         'scheduled_publication_date' => 'Planlagt publiseringsdato',
         'scheduled_publication_date_clear' => 'Tøm publiseringsdatoen',

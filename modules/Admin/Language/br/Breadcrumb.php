@@ -26,8 +26,6 @@ return [
     'publish-edit' => 'kemmañ an embannadur',
     'unpublish' => 'diembannañ',
     'delete' => 'dilemel',
-    'deleted' => 'dilamet',
-    'delete-permanently' => 'dilemel da viken',
     'fediverse' => 'kevrebed',
     'block-lists' => 'roll ar re stanket',
     'users' => 'implijerien·ezed',

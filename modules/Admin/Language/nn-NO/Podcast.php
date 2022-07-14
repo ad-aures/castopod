@@ -16,14 +16,17 @@ return [
     'new_episode' => 'Ny episode',
     'view' => 'Sjå podkasten',
     'edit' => 'Rediger podkasten',
+    'publish' => 'Publish podcast',
+    'publish_edit' => 'Edit publication',
     'delete' => 'Slett podkasten',
     'see_episodes' => 'Sjå episodane',
     'see_contributors' => 'Sjå bidragsytarane',
     'go_to_page' => 'Gå til side',
     'latest_episodes' => 'Dei nyaste episodane',
     'see_all_episodes' => 'Sjå alle episodane',
+    'draft' => 'Draft',
     'messages' => [
-        'createSuccess' => 'Podkasten er oppretta!',
+        'createSuccess' => 'Podcast successfully created!',
         'editSuccess' => 'Podkasten er oppdatert!',
         'importSuccess' => 'Podkasten er importert!',
         'deleteSuccess' => 'Podcast @{podcast_handle} successfully deleted!',
@@ -46,6 +49,10 @@ return [
         } added to the podcast!',
         'podcastFeedUpToDate' => 'Podcast is already up to date.',
         'podcastNotImported' => 'Podcast could not be updated as it was not imported.',
+        'publishError' => 'This podcast is either already published or scheduled for publication.',
+        'publishEditError' => 'This podcast is not scheduled for publication.',
+        'publishCancelSuccess' => 'Podcast publication successfully cancelled!',
+        'scheduleDateError' => 'Schedule date must be set!',
     ],
     'form' => [
         'identity_section_title' => 'Podkastidentitet',
@@ -121,7 +128,9 @@ return [
         'partner_link_url_hint' => 'Lenkeadressa til den generelle partnaren',
         'partner_image_url_hint' => 'Biletadressa til den generelle partnaren',
         'status_section_title' => 'Status',
-        'block' => 'Podkasten skal gøymast frå alle plattformer',
+        'block' => 'Podcast should be hidden from public catalogues',
+        'block_hint' =>
+            'The podcast show or hide status: toggling this on prevents the entire podcast from appearing in Apple Podcasts, Google Podcasts, and any third party apps that pull shows from these directories. (Not guaranteed)',
         'complete' => 'Podkasten vil ikkje få fleire episodar',
         'lock' => 'Hindre at podkasten blir kopiert',
         'lock_hint' =>
@@ -241,6 +250,32 @@ return [
         'film_interviews' => 'Filmintervju',
         'film_reviews' => 'Filmmeldingar',
         'tv_reviews' => 'TV-meldingar',
+    ],
+    'publish_form' => [
+        'back_to_podcast_dashboard' => 'Back to podcast dashboard',
+        'post' => 'Your announcement post',
+        'post_hint' =>
+            "Write a message to announce the publication of your podcast. The message will be featured in your podcast's homepage.",
+        'message_placeholder' => 'Write your message…',
+        'submit' => 'Publish',
+        'publication_date' => 'Publication date',
+        'publication_method' => [
+            'now' => 'Now',
+            'schedule' => 'Schedule',
+        ],
+        'scheduled_publication_date' => 'Scheduled publication date',
+        'scheduled_publication_date_hint' =>
+            'You can schedule the podcast release by setting a future publication date. This field must be formatted as YYYY-MM-DD HH:mm',
+        'submit_edit' => 'Edit publication',
+        'cancel_publication' => 'Cancel publication',
+        'message_warning' => 'You did not write a message for your announcement post!',
+        'message_warning_hint' => 'Having a message increases social engagement, resulting in a better visibility for your podcast.',
+        'message_warning_submit' => 'Publish anyway',
+    ],
+    'publication_status_banner' => [
+        'draft_mode' => 'draft mode',
+        'not_published' => 'This podcast is not yet published.',
+        'scheduled' => 'This podcast is scheduled for publication on {publication_date}.',
     ],
     'delete_form' => [
         'disclaimer' =>

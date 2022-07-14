@@ -38,6 +38,5 @@ return [
         other {# evezhiadenn}
     }',
     'all_podcast_episodes' => 'Holl rannoù ar podkast',
-    'episodes_recycle_bin' => 'Poubellenn',
     'back_to_podcast' => 'Mont d\'ar podkast en-dro',
 ];

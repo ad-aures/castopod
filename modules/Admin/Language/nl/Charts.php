@@ -35,4 +35,6 @@ return [
     'by_weekday' => 'Per weekdag (laatste 60 dagen)',
     'by_hour' => 'Per tijd van de dag (laatste 60 dagen)',
     'podcast_by_bandwidth' => 'Dagelijks gebruikte bandbreedte (in MB)',
+    'total_storage_by_month' => 'Monthly storage (in MB)',
+    'total_bandwidth_by_month' => 'Monthly used bandwidth (in MB)',
 ];

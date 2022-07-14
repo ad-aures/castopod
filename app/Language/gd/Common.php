@@ -26,4 +26,5 @@ return [
     'read_less' => 'Leugh nas lugha dheth',
     'see_more' => 'Seall barrachd dheth',
     'see_less' => 'Seall nas lugha dheth',
+    'legal_notice' => 'Legal notice',
 ];

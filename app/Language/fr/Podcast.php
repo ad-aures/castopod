@@ -41,7 +41,7 @@ return [
         }',
         'first_published_at' => 'Premier épisode publié le {0, date, medium}',
     ],
-    'sponsor' => 'Soutenez-nous',
+    'sponsor' => 'Soutenir',
     'funding_links' => 'Liens de financement pour {podcastTitle}',
     'find_on' => 'Trouvez {podcastTitle} sur',
     'listen_on' => 'Écoutez sur',

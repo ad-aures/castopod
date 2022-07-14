@@ -26,4 +26,5 @@ return [
     'read_less' => 'Zobraziť menej',
     'see_more' => 'Pozrieť viac',
     'see_less' => 'Pozrieť menej',
+    'legal_notice' => 'Legal notice',
 ];

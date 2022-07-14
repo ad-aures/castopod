@@ -26,8 +26,6 @@ return [
     'publish-edit' => 'Veröffentlichung bearbeiten',
     'unpublish' => 'Veröffentlichung aufheben',
     'delete' => 'löschen',
-    'deleted' => 'gelöscht',
-    'delete-permanently' => 'Endgültig löschen',
     'fediverse' => 'Fediversum',
     'block-lists' => 'Sperrlisten',
     'users' => 'Benutzer',

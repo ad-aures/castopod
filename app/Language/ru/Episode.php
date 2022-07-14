@@ -33,6 +33,5 @@ return [
         other {# комментариев}
     }',
     'all_podcast_episodes' => 'Все выпуски подкаста',
-    'episodes_recycle_bin' => 'Recycle bin',
     'back_to_podcast' => 'Вернуться к подкасту',
 ];

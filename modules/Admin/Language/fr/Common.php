@@ -47,4 +47,5 @@ return [
     ],
     'size_limit' => 'Taille maximale : {0}.',
     'choose_interact' => 'Choisissez comment interagir',
+    'view' => 'Voir',
 ];

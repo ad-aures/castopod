@@ -31,6 +31,5 @@ return [
         other {# komentarzy}
     }',
     'all_podcast_episodes' => 'Wszystkie odcinki podcastu',
-    'episodes_recycle_bin' => 'Recycle bin',
     'back_to_podcast' => 'Wróć do podkastu',
 ];

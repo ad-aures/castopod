@@ -26,8 +26,6 @@ return [
     'publish-edit' => 'редактировать публикацию',
     'unpublish' => 'снять с публикации',
     'delete' => 'удалить',
-    'deleted' => 'deleted',
-    'delete-permanently' => 'delete permanently',
     'fediverse' => 'Федивёрс',
     'block-lists' => 'список блокируемых',
     'users' => 'пользователи',

@@ -33,6 +33,5 @@ return [
         other {# beachd}
     }',
     'all_podcast_episodes' => 'A h-uile eapasod a’ phod-chraolaidh',
-    'episodes_recycle_bin' => 'Am biona',
     'back_to_podcast' => 'Air ais dhan phod-chraoladh',
 ];

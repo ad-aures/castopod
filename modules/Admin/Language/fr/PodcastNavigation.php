@@ -17,7 +17,6 @@ return [
     'episodes' => 'Épisodes',
     'episode-list' => 'Tous les épisodes',
     'episode-create' => 'Créer un épisode',
-    'episode-deleted' => 'Recycle bin',
     'analytics' => 'Mesures d’audience',
     'podcast-analytics' => 'Vue d’ensemble',
     'podcast-analytics-webpages' => 'Visites des pages web',
