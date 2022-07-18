@@ -11,12 +11,17 @@ declare(strict_types=1);
 
 if (! function_exists('get_browser_language')) {
     /**
-     * Gets the browser default language using the request header key `HTTP_ACCEPT_LANGUAGE`
+     * Gets the browser default language using the request header key `HTTP_ACCEPT_LANGUAGE`. Returns Castopod's default
+     * locale if `HTTP_ACCEPT_LANGUAGE` is null.
      *
      * @return string ISO 639-1 language code
      */
-    function get_browser_language(string $httpAcceptLanguage): string
+    function get_browser_language(?string $httpAcceptLanguage = null): string
     {
+        if ($httpAcceptLanguage === null) {
+            return config('App')->defaultLocale;
+        }
+
         $langs = explode(',', $httpAcceptLanguage);
 
         return substr($langs[0], 0, 2);
