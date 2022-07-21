@@ -1,3 +1,20 @@
+# [1.0.0-beta.19](https://code.castopod.org/adaures/castopod/compare/v1.0.0-beta.18...v1.0.0-beta.19) (2022-07-21)
+
+### Bug Fixes
+
+- **episode-unpublish:** set consistent posts_counts' increments/decrements for
+  actors and episodes
+  ([8acdafd](https://code.castopod.org/adaures/castopod/commit/8acdafd26044e50a4d6ee451bf24ad66003c5bb3)),
+  closes [#233](https://code.castopod.org/adaures/castopod/issues/233)
+- **get_browser_language:** return defaultLocale if browser doesn't send user
+  preferred language
+  ([9cc2996](https://code.castopod.org/adaures/castopod/commit/9cc299626181048b85b629bbe7f5806a1f5d21ff))
+
+### Features
+
+- **episode-unpublish:** remove episode comments upon unpublish
+  ([78acd7f](https://code.castopod.org/adaures/castopod/commit/78acd7f5c057c82507d801c424040296dbaba586))
+
 # [1.0.0-beta.18](https://code.castopod.org/adaures/castopod/compare/v1.0.0-beta.17...v1.0.0-beta.18) (2022-07-07)
 
 ### Bug Fixes
