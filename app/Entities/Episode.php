@@ -72,6 +72,7 @@ use RuntimeException;
  * @property bool $is_published_on_hubs
  * @property int $posts_count
  * @property int $comments_count
+ * @property EpisodeComment[]|null $comments
  * @property int $created_by
  * @property int $updated_by
  * @property string $publication_status;

@@ -219,11 +219,15 @@ Events::on('on_post_undo_reblog', function ($reblogPost): void {
 Events::on('on_post_reply', function ($reply): void {
     $post = $reply->reply_to_post;
 
-    model(EpisodeModel::class, false)->builder()
-        ->where('id', $post->episode_id)
-        ->increment('comments_count');
+    if ($post->in_reply_to_id === null) {
+        model(EpisodeModel::class, false)->builder()
+            ->where('id', $post->episode_id)
+            ->increment('comments_count');
+    }
 
     if ($post->actor->is_podcast) {
+        cache()
+            ->deleteMatching("podcast-{$post->actor->podcast->handle}*");
         cache()
             ->deleteMatching("podcast#{$post->actor->podcast->id}*");
         cache()
@@ -240,11 +244,15 @@ Events::on('on_post_reply', function ($reply): void {
 Events::on('on_reply_remove', function ($reply): void {
     $post = $reply->reply_to_post;
 
-    model(EpisodeModel::class, false)->builder()
-        ->where('id', $post->episode_id)
-        ->decrement('comments_count');
+    if ($post->in_reply_to_id === null) {
+        model(EpisodeModel::class, false)->builder()
+            ->where('id', $post->episode_id)
+            ->decrement('comments_count');
+    }
 
     if ($post->actor->is_podcast) {
+        cache()
+            ->deleteMatching("podcast-{$post->actor->podcast->handle}*");
         cache()
             ->deleteMatching("page_podcast#{$post->actor->podcast->id}*");
         cache()

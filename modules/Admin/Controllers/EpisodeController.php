@@ -722,6 +722,16 @@ class EpisodeController extends BaseController
             (new PostModel())->removePost($post);
         }
 
+        $allCommentsLinkedToEpisode = (new EpisodeCommentModel())
+            ->where([
+                'episode_id' => $this->episode->id,
+                'in_reply_to_id' => null,
+            ])
+            ->findAll();
+        foreach ($allCommentsLinkedToEpisode as $comment) {
+            (new EpisodeCommentModel())->removeComment($comment);
+        }
+
         // set episode published_at to null to unpublish
         $this->episode->published_at = null;
 

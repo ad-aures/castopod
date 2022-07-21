@@ -14,9 +14,12 @@ use App\Entities\EpisodeComment;
 use App\Libraries\CommentObject;
 use CodeIgniter\Database\BaseBuilder;
 use CodeIgniter\Database\BaseResult;
+use CodeIgniter\I18n\Time;
 use Michalsn\Uuid\UuidModel;
 use Modules\Fediverse\Activities\CreateActivity;
+use Modules\Fediverse\Activities\DeleteActivity;
 use Modules\Fediverse\Models\ActivityModel;
+use Modules\Fediverse\Objects\TombstoneObject;
 
 class EpisodeCommentModel extends UuidModel
 {
@@ -70,10 +73,9 @@ class EpisodeCommentModel extends UuidModel
         return $found;
     }
 
-    public function addComment(EpisodeComment $comment, bool $registerActivity = false): string | false
+    public function addComment(EpisodeComment $comment, bool $registerActivity = true): string | false
     {
         $this->db->transStart();
-        // increment Episode's comments_count
 
         if (! ($newCommentId = $this->insert($comment, true))) {
             $this->db->transRollback();
@@ -128,13 +130,65 @@ class EpisodeCommentModel extends UuidModel
 
         $this->db->transComplete();
 
-        // delete podcast and episode pages cache
-        cache()
-            ->deleteMatching('page_podcast#' . $comment->episode->podcast_id . '*');
-        cache()
-            ->deleteMatching('page_episode#' . $comment->episode_id . '*');
+        $this->clearCache($comment);
 
         return $newCommentId;
+    }
+
+    public function removeComment(EpisodeComment $comment, bool $registerActivity = true): BaseResult | bool
+    {
+        $this->db->transStart();
+
+        // remove all replies
+        foreach ($comment->replies as $reply) {
+            $this->removeComment($reply);
+        }
+
+        if ($registerActivity) {
+            $deleteActivity = new DeleteActivity();
+            $tombstoneObject = new TombstoneObject();
+            $tombstoneObject->set('id', $comment->uri);
+            $deleteActivity
+                ->set('actor', $comment->actor->uri)
+                ->set('object', $tombstoneObject);
+
+            $activityId = model(ActivityModel::class, false)
+                ->newActivity(
+                    'Delete',
+                    $comment->actor_id,
+                    null,
+                    null,
+                    $deleteActivity->toJSON(),
+                    Time::now(),
+                    'queued',
+                );
+
+            $deleteActivity->set('id', url_to('activity', esc($comment->actor->username), $activityId));
+
+            model(ActivityModel::class, false)
+                ->update($activityId, [
+                    'payload' => $deleteActivity->toJSON(),
+                ]);
+        }
+
+        $result = model(self::class, false)
+            ->delete($comment->id);
+
+        if ($comment->in_reply_to_id === null) {
+            model(EpisodeModel::class, false)->builder()
+                ->where('id', $comment->episode_id)
+                ->decrement('comments_count');
+        } else {
+            (new self())->builder()
+                ->where('id', service('uuid')->fromString($comment->in_reply_to_id)->getBytes())
+                ->decrement('replies_count');
+        }
+
+        $this->clearCache($comment);
+
+        $this->db->transComplete();
+
+        return $result;
     }
 
     /**
@@ -249,5 +303,19 @@ class EpisodeCommentModel extends UuidModel
         }
 
         return $data;
+    }
+
+    protected function clearCache(EpisodeComment $comment): void
+    {
+        cache()
+            ->deleteMatching("comment#{$comment->id}*");
+
+        // delete podcast and episode pages cache
+        cache()
+            ->deleteMatching("podcast-{$comment->episode->podcast->handle}*");
+        cache()
+            ->deleteMatching('page_podcast#' . $comment->episode->podcast_id . '*');
+        cache()
+            ->deleteMatching('page_episode#' . $comment->episode_id . '*');
     }
 }

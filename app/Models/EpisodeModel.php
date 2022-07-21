@@ -337,33 +337,30 @@ class EpisodeModel extends Model
 
     public function resetCommentsCount(): int | false
     {
-        $episodeCommentsCount = $this->builder()
-            ->select('episodes.id, COUNT(*) as `comments_count`')
-            ->join('episode_comments', 'episodes.id = episode_comments.episode_id')
+        $episodeCommentsCount = (new EpisodeCommentModel())->builder()
+            ->select('episode_id, COUNT(*) as `comments_count`')
             ->where('in_reply_to_id', null)
-            ->groupBy('episodes.id')
+            ->groupBy('episode_id')
             ->getCompiledSelect();
 
-        $episodePostsRepliesCount = $this->builder()
-            ->select('episodes.id, COUNT(*) as `comments_count`')
-            ->join(
-                config('Fediverse')
-                    ->tablesPrefix . 'posts',
-                'episodes.id = ' . config('Fediverse')->tablesPrefix . 'posts.episode_id'
-            )
-            ->where('in_reply_to_id IS NOT', null)
-            ->groupBy('episodes.id')
+        $postsTable = config('Fediverse')
+            ->tablesPrefix . 'posts';
+        $episodePostsRepliesCount = (new PostModel())->builder()
+            ->select($postsTable . '.episode_id as episode_id, COUNT(*) as `comments_count`')
+            ->join($postsTable . ' as fp', $postsTable . '.id = fp.in_reply_to_id')
+            ->where($postsTable . '.in_reply_to_id', null)
+            ->groupBy($postsTable . '.episode_id')
             ->getCompiledSelect();
 
         /** @var BaseResult $query */
         $query = $this->db->query(
-            'SELECT `id`, SUM(`comments_count`) as `comments_count` FROM (' . $episodeCommentsCount . ' UNION ALL ' . $episodePostsRepliesCount . ') x GROUP BY `id`'
+            'SELECT `episode_id` as `id`, SUM(`comments_count`) as `comments_count` FROM (' . $episodeCommentsCount . ' UNION ALL ' . $episodePostsRepliesCount . ') x GROUP BY `episode_id`'
         );
 
         $countsPerEpisodeId = $query->getResultArray();
 
         if ($countsPerEpisodeId !== []) {
-            return $this->updateBatch($countsPerEpisodeId, 'id');
+            return (new self())->updateBatch($countsPerEpisodeId, 'id');
         }
 
         return 0;
