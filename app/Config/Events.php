@@ -122,23 +122,9 @@ Events::on('on_undo_follow', function ($actor, $targetActor): void {
  * @param Post $post
  */
 Events::on('on_post_add', function ($post): void {
-    $isReply = $post->in_reply_to_id !== null;
-
-    if ($isReply) {
-        $post = $post->reply_to_post;
-    }
-
-    if ($post->episode_id !== null) {
-        if ($isReply) {
-            model(EpisodeModel::class, false)->builder()
-                ->where('id', $post->episode_id)
-                ->increment('comments_count');
-        } else {
-            model(EpisodeModel::class, false)->builder()
-                ->where('id', $post->episode_id)
-                ->increment('posts_count');
-        }
-    }
+    model(EpisodeModel::class, false)->builder()
+        ->where('id', $post->episode_id)
+        ->increment('posts_count');
 
     if ($post->actor->is_podcast) {
         // Removing all of the podcast pages is a bit overkill, but works to avoid caching bugs
@@ -154,10 +140,6 @@ Events::on('on_post_add', function ($post): void {
  * @param Post $post
  */
 Events::on('on_post_remove', function ($post): void {
-    if ($post->in_reply_to_id !== null) {
-        Events::trigger('on_post_remove', $post->reply_to_post);
-    }
-
     if ($episodeId = $post->episode_id) {
         model(EpisodeModel::class, false)->builder()
             ->where('id', $episodeId)
@@ -237,6 +219,10 @@ Events::on('on_post_undo_reblog', function ($reblogPost): void {
 Events::on('on_post_reply', function ($reply): void {
     $post = $reply->reply_to_post;
 
+    model(EpisodeModel::class, false)->builder()
+        ->where('id', $post->episode_id)
+        ->increment('comments_count');
+
     if ($post->actor->is_podcast) {
         cache()
             ->deleteMatching("podcast#{$post->actor->podcast->id}*");
@@ -253,6 +239,10 @@ Events::on('on_post_reply', function ($reply): void {
  */
 Events::on('on_reply_remove', function ($reply): void {
     $post = $reply->reply_to_post;
+
+    model(EpisodeModel::class, false)->builder()
+        ->where('id', $post->episode_id)
+        ->decrement('comments_count');
 
     if ($post->actor->is_podcast) {
         cache()

@@ -714,6 +714,8 @@ class EpisodeController extends BaseController
         $allPostsLinkedToEpisode = (new PostModel())
             ->where([
                 'episode_id' => $this->episode->id,
+                'in_reply_to_id' => null,
+                'reblog_of_id' => null,
             ])
             ->findAll();
         foreach ($allPostsLinkedToEpisode as $post) {

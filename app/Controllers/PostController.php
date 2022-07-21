@@ -74,6 +74,10 @@ class PostController extends FediversePostController
             $this->registerPodcastWebpageHit($this->podcast->id);
         }
 
+        if ($this->post === null) {
+            throw PageNotFoundException::forPageNotFound();
+        }
+
         $cacheName = implode(
             '_',
             array_filter([
@@ -177,7 +181,7 @@ class PostController extends FediversePostController
             'created_by' => user_id(),
         ]);
 
-        if ($this->post->in_reply_to_id === null && $this->post->episode_id !== null) {
+        if ($this->post->episode_id !== null) {
             $newPost->episode_id = $this->post->episode_id;
         }
 

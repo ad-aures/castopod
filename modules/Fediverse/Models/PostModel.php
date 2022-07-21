@@ -277,10 +277,12 @@ class PostModel extends BaseUuidModel
         }
 
         if ($post->in_reply_to_id === null) {
-            // increment posts_count only if not reply
+            // post is not a reply
             model('ActorModel', false)
                 ->where('id', $post->actor_id)
                 ->increment('posts_count');
+
+            Events::trigger('on_post_add', $post);
         }
 
         if ($registerActivity) {
@@ -313,8 +315,6 @@ class PostModel extends BaseUuidModel
                     'payload' => $createActivity->toJSON(),
                 ]);
         }
-
-        Events::trigger('on_post_add', $post);
 
         $this->clearCache($post);
 
@@ -365,26 +365,13 @@ class PostModel extends BaseUuidModel
     {
         $this->db->transStart();
 
-        model('ActorModel', false)
-            ->where('id', $post->actor_id)
-            ->decrement('posts_count');
-
-        if ($post->in_reply_to_id !== null) {
-            // Post to remove is a reply
-            model('PostModel', false)
-                ->where('id', $this->uuid->fromString($post->in_reply_to_id) ->getBytes())
-                ->decrement('replies_count');
-
-            Events::trigger('on_reply_remove', $post);
-        }
-
         // remove all post reblogs
         foreach ($post->reblogs as $reblog) {
             // FIXME: issue when actor is not local, can't get actor information
-            $this->removePost($reblog);
+            $this->undoReblog($reblog);
         }
 
-        // remove all post replies
+        // remove all replies
         foreach ($post->replies as $reply) {
             $this->removePost($reply);
         }
@@ -427,10 +414,23 @@ class PostModel extends BaseUuidModel
                 ]);
         }
 
+        if ($post->in_reply_to_id === null && $post->reblog_of_id === null) {
+            model('ActorModel', false)
+                ->where('id', $post->actor_id)
+                ->decrement('posts_count');
+
+            Events::trigger('on_post_remove', $post);
+        } elseif ($post->in_reply_to_id !== null) {
+            // Post to remove is a reply
+            model('PostModel', false)
+                ->where('id', $this->uuid->fromString($post->in_reply_to_id) ->getBytes())
+                ->decrement('replies_count');
+
+            Events::trigger('on_reply_remove', $post);
+        }
+
         $result = model('PostModel', false)
             ->delete($post->id);
-
-        Events::trigger('on_post_remove', $post);
 
         $this->clearCache($post);
 
@@ -574,10 +574,10 @@ class PostModel extends BaseUuidModel
                 ]);
         }
 
+        Events::trigger('on_post_undo_reblog', $reblogPost);
+
         $result = model('PostModel', false)
             ->delete($reblogPost->id);
-
-        Events::trigger('on_post_undo_reblog', $reblogPost);
 
         $this->clearCache($reblogPost);
 

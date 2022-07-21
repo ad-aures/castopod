@@ -62,7 +62,6 @@ class PostModel extends FediversePostModel
             ->join(config('Fediverse')->tablesPrefix . 'posts as p2', 'p1.id = p2.in_reply_to_id')
             ->select('p2.id, p1.episode_id')
             ->where([
-                'p1.in_reply_to_id' => null,
                 'p2.in_reply_to_id IS NOT' => null,
                 'p2.episode_id' => null,
                 'p1.episode_id IS NOT' => null,
