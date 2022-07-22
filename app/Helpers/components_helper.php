@@ -55,7 +55,7 @@ if (! function_exists('data_table')) {
         $table = new Table();
 
         $template = [
-            'table_open' => '<table class="w-full whitespace-no-wrap">',
+            'table_open' => '<table class="w-full whitespace-nowrap">',
 
             'thead_open' =>
                 '<thead class="text-xs font-semibold text-left uppercase text-skin-muted">',

@@ -1,5 +1,6 @@
 /* eslint-disable */
 const defaultTheme = require("tailwindcss/defaultTheme");
+const { nodeModuleNameResolver } = require("typescript");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -112,6 +113,30 @@ module.exports = {
       },
       ringWidth: {
         3: "3px",
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            a: {
+              textDecoration: "underline",
+              fontWeight: 600,
+              "&:hover": {
+                textDecoration: "none",
+              },
+            },
+          },
+        },
+        sm: {
+          css: {
+            a: {
+              textDecoration: "underline",
+              fontWeight: 600,
+              "&:hover": {
+                textDecoration: "none",
+              },
+            },
+          },
+        },
       },
     },
   },

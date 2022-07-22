@@ -67,7 +67,7 @@
                     [
                         'type' => 'html',
                         'content' => esc(<<<CODE_SAMPLE
-                            <nav class="flex flex-col py-2 whitespace-no-wrap">
+                            <nav class="flex flex-col py-2 whitespace-nowrap">
                                 <span class="px-4 mb-2 text-xs font-semibold tracking-wider uppercase text-skin-muted">{$interactAsText}</span>
                                 <form action="{$route}" method="POST" class="flex flex-col">
                                     {$csrfField}
