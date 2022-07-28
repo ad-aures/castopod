@@ -67,9 +67,19 @@ class EpisodeController extends BaseController
         $query = $this->request->getGet('q');
 
         if ($query !== null && $query !== '') {
-            $episodes = (new EpisodeModel())
-                ->where('podcast_id', $this->podcast->id)
-                ->where("MATCH (title, description_markdown) AGAINST ('{$query}')");
+            // Default value for MySQL Full-Text Search's minimum length of words is 4.
+            // Use LIKE operator as a fallback.
+            if (strlen($query) < 4) {
+                $episodes = (new EpisodeModel())
+                    ->where('podcast_id', $this->podcast->id)
+                    ->like('title', $query)
+                    ->orLike('description_markdown', $query)
+                    ->orderBy('created_at', 'desc');
+            } else {
+                $episodes = (new EpisodeModel())
+                    ->where('podcast_id', $this->podcast->id)
+                    ->where("MATCH (title, description_markdown) AGAINST ('{$query}')");
+            }
         } else {
             $episodes = (new EpisodeModel())
                 ->where('podcast_id', $this->podcast->id)
