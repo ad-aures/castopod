@@ -110,7 +110,12 @@ class Router extends CodeIgniterRouter
                     $request = Services::request();
                     $negotiate = Services::negotiator();
 
-                    $acceptHeader = $request->getHeader('Accept')
+                    // Accept header is mandatory
+                    if ($request->header('Accept') === null) {
+                        break;
+                    }
+
+                    $acceptHeader = $request->header('Accept')
                         ->getValue();
                     $parsedHeader = $negotiate->parseHeader($acceptHeader);
 

@@ -69,7 +69,7 @@ if (! function_exists('download_file')) {
                 true,
             )
         ) {
-            $newFileUrl = trim($response->getHeader('location')->getValue());
+            $newFileUrl = trim($response->header('location')->getValue());
             $response = $client->get($newFileUrl, [
                 'headers' => [
                     'User-Agent' => 'Castopod/' . CP_VERSION,
