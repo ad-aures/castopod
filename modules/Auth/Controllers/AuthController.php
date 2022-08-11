@@ -169,6 +169,14 @@ class AuthController extends MythAuthController
         $user->force_pass_reset = false;
         $users->save($user);
 
+        helper('auth');
+
+        // set interact_as_actor_id value
+        $userPodcasts = $user->podcasts;
+        if ($userPodcasts = $user->podcasts) {
+            set_interact_as_actor($userPodcasts[0]->actor_id);
+        }
+
         return redirect()
             ->route('login')
             ->with('message', lang('Auth.resetSuccess'));
