@@ -1,3 +1,29 @@
+# [1.0.0-beta.20](https://code.castopod.org/adaures/castopod/compare/v1.0.0-beta.19...v1.0.0-beta.20) (2022-08-12)
+
+### Bug Fixes
+
+- add underline and semibold font weight for prose links to have them stand out
+  ([d4d8671](https://code.castopod.org/adaures/castopod/commit/d4d867121c50bded4176a53d7154cf1bb347e306))
+- **router:** check if Accept header is set before getting value
+  ([10a2ae0](https://code.castopod.org/adaures/castopod/commit/10a2ae02484672d6a0fbc6e7b943519c5ec16cb6)),
+  closes [#228](https://code.castopod.org/adaures/castopod/issues/228)
+- **search-episodes:** add fallback sql query using LIKE for search query with
+  less than 4 characters
+  ([e66bf44](https://code.castopod.org/adaures/castopod/commit/e66bf44341175bc5a10fbf7dfa00b351e76136c2)),
+  closes [#236](https://code.castopod.org/adaures/castopod/issues/236)
+- set interact_as_actor for user upon password reset
+  ([ad8f5f5](https://code.castopod.org/adaures/castopod/commit/ad8f5f5a0fac7b0b9cc10a0b86200f014aca7553)),
+  closes [#178](https://code.castopod.org/adaures/castopod/issues/178)
+
+### Features
+
+- add label to sponsor button on podcast page
+  ([c29c018](https://code.castopod.org/adaures/castopod/commit/c29c018c7a543fc9398b5d7d11f086123e2b33f2)),
+  closes [#162](https://code.castopod.org/adaures/castopod/issues/162)
+- add notifications inbox for actors
+  ([999999e](https://code.castopod.org/adaures/castopod/commit/999999e3efab7b1aad7568e4fd114dc7bac04f38)),
+  closes [#215](https://code.castopod.org/adaures/castopod/issues/215)
+
 # [1.0.0-beta.19](https://code.castopod.org/adaures/castopod/compare/v1.0.0-beta.18...v1.0.0-beta.19) (2022-07-21)
 
 ### Bug Fixes
