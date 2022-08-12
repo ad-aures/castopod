@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Modules\Auth\Entities;
 
 use App\Entities\Podcast;
+use App\Models\NotificationModel;
 use App\Models\PodcastModel;
 use Myth\Auth\Entities\User as MythAuthUser;
 use RuntimeException;
@@ -26,6 +27,7 @@ use RuntimeException;
  * @property string|null $podcast_role
  *
  * @property Podcast[] $podcasts All podcasts the user is contributing to
+ * @property int[] $actorIdsWithUnreadNotifications Ids of the user's actors that have unread notifications
  */
 class User extends MythAuthUser
 {
@@ -33,6 +35,11 @@ class User extends MythAuthUser
      * @var Podcast[]|null
      */
     protected ?array $podcasts = null;
+
+    /**
+     * @var int[]|null
+     */
+    protected ?array $actorIdsWithUnreadNotifications = null;
 
     /**
      * Array of field names and the type of value to cast them as when they are accessed.
@@ -63,5 +70,26 @@ class User extends MythAuthUser
         }
 
         return $this->podcasts;
+    }
+
+    /**
+     * Returns the ids of the user's actors that have unread notifications
+     *
+     * @return int[]
+     */
+    public function getActorIdsWithUnreadNotifications(): array
+    {
+        if ($this->getPodcasts() === []) {
+            return [];
+        }
+
+        $unreadNotifications = (new NotificationModel())->whereIn(
+            'target_actor_id',
+            array_column($this->getPodcasts(), 'actor_id')
+        )
+            ->where('read_at', null)
+            ->findAll();
+
+        return array_column($unreadNotifications, 'target_actor_id');
     }
 }

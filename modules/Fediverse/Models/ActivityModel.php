@@ -97,7 +97,7 @@ class ActivityModel extends BaseUuidModel
                 'actor_id' => $actorId,
                 'target_actor_id' => $targetActorId,
                 'post_id' => $postId,
-                'type' => $type,
+                'type' => $type === 'Undo' ? $type . '_' . (json_decode($payload, true))['object']['type'] : $type,
                 'payload' => $payload,
                 'scheduled_at' => $scheduledAt,
                 'status' => $taskStatus,

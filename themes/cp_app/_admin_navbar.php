@@ -10,20 +10,71 @@
         </div>
 
         <div class="inline-flex items-center h-full">
-        <button
-            type="button"
-            class="inline-flex items-center h-full px-3 text-sm font-semibold focus:ring-inset focus:ring-accent gap-x-2"
-            id="my-account-dropdown"
-            data-dropdown="button"
-            data-dropdown-target="my-account-dropdown-menu"
-            aria-haspopup="true"
-            aria-expanded="false"><div class="relative mr-1">
-                <?= icon('account-circle', 'text-3xl opacity-60') ?>
-                <?= user()
-                    ->podcasts === [] ? '' : '<img src="' . interact_as_actor()->avatar_image_url . '" class="absolute bottom-0 w-4 h-4 border rounded-full -right-1 border-navigation-bg" loading="lazy" />' ?>
-            </div>
-            <?= esc(user()->username) ?>
-            <?= icon('caret-down', 'ml-auto text-2xl') ?></button>
+            <button type="button" class="relative h-full px-2 focus:ring-accent focus:ring-inset" id="notifications-dropdown" data-dropdown="button" data-dropdown-target="notifications-dropdown-menu" aria-haspopup="true" aria-expanded="false">
+                <?= icon('notification-bell', 'text-2xl opacity-80') ?>
+                <?php if (user()->actorIdsWithUnreadNotifications !== []): ?>
+                    <span class="absolute top-2 right-2 w-2.5 h-2.5 bg-red-500 rounded-full border border-navigation-bg"></span>
+                <?php endif ?>
+            </button>
+            <?php
+                $notificationsTitle = lang('Notifications.title');
+
+                $items = [
+                    [
+                        'type' => 'html',
+                        'content' => esc(<<<CODE_SAMPLE
+                            <span class="px-4 my-2 text-xs font-semibold tracking-wider uppercase text-skin-muted">{$notificationsTitle}</span>
+                            CODE_SAMPLE),
+                    ],
+                ];
+
+                if (user()->podcasts !== []) {
+                    foreach (user()->podcasts as $userPodcast) {
+                        $userPodcastTitle = esc($userPodcast->title);
+
+                        $unreadNotificationDotDisplayClass = in_array($userPodcast->actor_id, user()->actorIdsWithUnreadNotifications, true) ? '' : 'hidden';
+
+                        $items[] = [
+                            'type' => 'link',
+                            'title' => <<<CODE_SAMPLE
+                                <div class="inline-flex items-center flex-1 text-sm align-middle">
+                                    <div class="relative">
+                                        <img src="{$userPodcast->cover->tiny_url}" class="w-6 h-6 mr-2 rounded-full" loading="lazy" />
+                                        <span class="absolute top-0 right-1 w-2.5 h-2.5 bg-red-500 rounded-full border border-background-elevated {$unreadNotificationDotDisplayClass}"></span>
+                                    </div>
+                                    <span class="max-w-xs truncate">{$userPodcastTitle}</span>
+                                </div>
+                            CODE_SAMPLE
+                            ,
+                            'uri' => route_to('notification-list', $userPodcast->id),
+                        ];
+                    }
+                } else {
+                    $noNotificationsText = lang('Notifications.no_notifications');
+                    $items[] = [
+                        'type' => 'html',
+                        'content' => esc(<<<CODE_SAMPLE
+                            <span class="mx-4 my-2 text-sm italic text-center text-skin-muted">{$noNotificationsText}</span>
+                        CODE_SAMPLE),
+                    ];
+                }
+            ?>
+            <DropdownMenu id="notifications-dropdown-menu" labelledby="notifications-dropdown" items="<?= esc(json_encode($items)) ?>" placement="bottom"/>
+            
+            <button
+                type="button"
+                class="inline-flex items-center h-full px-3 text-sm font-semibold focus:ring-inset focus:ring-accent gap-x-2"
+                id="my-account-dropdown"
+                data-dropdown="button"
+                data-dropdown-target="my-account-dropdown-menu"
+                aria-haspopup="true"
+                aria-expanded="false"><div class="relative mr-1">
+                    <?= icon('account-circle', 'text-3xl opacity-60') ?>
+                    <?= user()
+                        ->podcasts === [] ? '' : '<img src="' . interact_as_actor()->avatar_image_url . '" class="absolute bottom-0 w-4 h-4 border rounded-full -right-1 border-navigation-bg" loading="lazy" />' ?>
+                </div>
+                <?= esc(user()->username) ?>
+                <?= icon('caret-down', 'ml-auto text-2xl') ?></button>
         <?php
             $interactButtons = '';
             foreach (user()->podcasts as $userPodcast) {

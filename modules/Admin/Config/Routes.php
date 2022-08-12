@@ -626,6 +626,19 @@ $routes->group(
                         ],
                     );
                 });
+
+                // Podcast notifications
+                $routes->group('notifications', function ($routes): void {
+                    $routes->get('/', 'NotificationController::list/$1', [
+                        'as' => 'notification-list',
+                    ]);
+                    $routes->get('(:num)/mark-as-read', 'NotificationController::markAsRead/$1/$2', [
+                        'as' => 'notification-mark-as-read',
+                    ]);
+                    $routes->get('mark-all-as-read', 'NotificationController::markAllAsRead/$1', [
+                        'as' => 'notification-mark-all-as-read',
+                    ]);
+                });
             });
         });
 
