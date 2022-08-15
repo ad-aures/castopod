@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Class AddActivitiesTrigger Creates activities trigger in database
+ * Class AddActivitiesTriggerAfterInsert Creates activities trigger in database
  *
  * @copyright  2020 Ad Aures
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -14,7 +14,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class AddNotificationsTrigger extends Migration
+class AddActivitiesTriggerAfterInsert extends Migration
 {
     public function up(): void
     {
@@ -27,26 +27,14 @@ class AddNotificationsTrigger extends Migration
         BEGIN
         -- only create notification if new incoming activity with NULL status is created
         IF NEW.target_actor_id AND NEW.target_actor_id != NEW.actor_id AND NEW.status IS NULL THEN
-            IF NEW.type IN ( 'Create', 'Like', 'Announce', 'Follow' ) THEN
-                SET @type = (CASE
-                                WHEN NEW.type = 'Create' THEN 'reply'
-                                WHEN NEW.type = 'Like' THEN 'like'
-                                WHEN NEW.type = 'Announce' THEN 'share'
-                                WHEN NEW.type = 'Follow' THEN 'follow'
-                            END);
-                INSERT INTO `{$notificationsTable}` (`actor_id`, `target_actor_id`, `post_id`, `activity_id`, `type`, `created_at`, `updated_at`)
-                    VALUES (NEW.actor_id, NEW.target_actor_id, NEW.post_id, NEW.id, @type, NEW.created_at, NEW.created_at);
-            ELSE
+            IF NEW.type = 'Follow' THEN
+                INSERT INTO `{$notificationsTable}` (`actor_id`, `target_actor_id`, `activity_id`, `type`, `created_at`, `updated_at`)
+                VALUES (NEW.actor_id, NEW.target_actor_id, NEW.id, 'follow', NEW.created_at, NEW.created_at);
+            ELSEIF NEW.type = 'Undo_Follow' THEN
                 DELETE FROM `{$notificationsTable}`
                 WHERE `actor_id` = NEW.actor_id
                 AND `target_actor_id` = NEW.target_actor_id
-                AND ((`type` = (CASE WHEN NEW.type = 'Undo_Follow' THEN 'follow' END) AND `post_id` IS NULL)
-                    OR (`type` = (CASE
-                                    WHEN NEW.type = 'Delete' THEN 'reply'
-                                    WHEN NEW.type = 'Undo_Like' THEN 'like'
-                                    WHEN NEW.type = 'Undo_Announce' THEN 'share'
-                                END)
-                        AND `post_id` = NEW.post_id));
+                AND `type` = 'follow';
             END IF;
         END IF;
         END
