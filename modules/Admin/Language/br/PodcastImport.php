@@ -14,10 +14,10 @@ return [
     'old_podcast_section_title' => 'The podcast to import',
     'old_podcast_section_subtitle' =>
         'Make sure you own the rights for this podcast before importing it. Copying and broadcasting a podcast without the proper rights is piracy and is liable to prosecution.',
-    'imported_feed_url' => 'Feed URL',
+    'imported_feed_url' => 'URL al lanv',
     'imported_feed_url_hint' => 'The feed must be in xml or rss format.',
-    'new_podcast_section_title' => 'The new podcast',
-    'advanced_params_section_title' => 'Advanced parameters',
+    'new_podcast_section_title' => 'Ar podkast nevez',
+    'advanced_params_section_title' => 'Arventennoù kempleshoc\'h',
     'advanced_params_section_subtitle' =>
         'Keep the default values if you have no idea of what the fields are for.',
     'slug_field' => 'Field to be used to calculate episode slug',
@@ -26,12 +26,12 @@ return [
     'force_renumber' => 'Force episodes renumbering',
     'force_renumber_hint' =>
         'Use this if your podcast does not have episode numbers but wish to set them during import.',
-    'season_number' => 'Season number',
+    'season_number' => 'Niverenn ar c\'houlzad',
     'season_number_hint' =>
         'Use this if your podcast does not have a season number but wish to set one during import. Leave blank otherwise.',
     'max_episodes' => 'Maximum number of episodes to import',
     'max_episodes_hint' => 'Leave blank to import all episodes',
     'lock_import' =>
         'This feed is protected. You cannot import it. If you are the owner, unprotect it on the origin platform.',
-    'submit' => 'Import podcast',
+    'submit' => 'Enporzhiañ ar podkast',
 ];

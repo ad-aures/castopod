@@ -46,6 +46,6 @@ return [
         'playing' => 'Playing',
     ],
     'size_limit' => 'Size limit: {0}.',
-    'choose_interact' => 'Выберите как взаимодействовать',
+    'choose_interact' => 'Choose how to interact',
     'view' => 'View',
 ];

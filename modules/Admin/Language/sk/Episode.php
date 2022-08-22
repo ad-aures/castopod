@@ -9,80 +9,84 @@ declare(strict_types=1);
  */
 
 return [
-    'season' => 'Season {seasonNumber}',
+    'season' => 'Séria {seasonNumber}',
     'season_abbr' => 'S{seasonNumber}',
-    'number' => 'Episode {episodeNumber}',
+    'number' => 'Epizóda {episodeNumber}',
     'number_abbr' => 'Ep. {episodeNumber}',
-    'season_episode' => 'Season {seasonNumber} episode {episodeNumber}',
+    'season_episode' => 'Séria {seasonNumber} epizóda {episodeNumber}',
     'season_episode_abbr' => 'S{seasonNumber}E{episodeNumber}',
     'number_of_comments' => '{numberOfComments, plural,
-        one {# comment}
-        other {# comments}
+        one {# komentár}
+        few {# komentáre}
+        many {# komentárov}
+        other {# komentárov}
     }',
-    'all_podcast_episodes' => 'All podcast episodes',
-    'back_to_podcast' => 'Go back to podcast',
-    'edit' => 'Edit',
-    'publish' => 'Publish',
-    'publish_edit' => 'Edit publication',
-    'unpublish' => 'Unpublish',
-    'publish_error' => 'Episode is already published.',
-    'publish_edit_error' => 'Episode is already published.',
-    'publish_cancel_error' => 'Episode is already published.',
-    'unpublish_error' => 'Episode is not published.',
-    'delete' => 'Delete',
-    'go_to_page' => 'Go to page',
-    'create' => 'Add an episode',
+    'all_podcast_episodes' => 'Všetky epizódy podcastu',
+    'back_to_podcast' => 'Späť na podcast',
+    'edit' => 'Upraviť',
+    'publish' => 'Zverejniť',
+    'publish_edit' => 'Upraviť zverejnenie',
+    'unpublish' => 'Zrušiť zverejnenie',
+    'publish_error' => 'Epizóda je už zverejnená.',
+    'publish_edit_error' => 'Epizóda je už zverejnená.',
+    'publish_cancel_error' => 'Epizóda je už zverejnená.',
+    'unpublish_error' => 'Epizóda nie je zverejnená.',
+    'delete' => 'Vymazať',
+    'go_to_page' => 'Prejsť na stránku',
+    'create' => 'Pridať epizódu',
     'publication_status' => [
-        'published' => 'Published',
-        'with_podcast' => 'Published',
-        'scheduled' => 'Scheduled',
-        'not_published' => 'Not published',
+        'published' => 'Zverejnená',
+        'with_podcast' => 'Zverejnený',
+        'scheduled' => 'Naplánovaná',
+        'not_published' => 'Nezverejnená',
     ],
-    'with_podcast_hint' => 'To be published at the same time as the podcast',
+    'with_podcast_hint' => 'Bude publikovaná v rovnakom čase ako podcast',
     'list' => [
         'search' => [
-            'placeholder' => 'Search for an episode',
-            'clear' => 'Clear search',
-            'submit' => 'Search',
+            'placeholder' => 'Vyhľadať epizódu',
+            'clear' => 'Vyčistiť hľadanie',
+            'submit' => 'Hľadať',
         ],
         'number_of_episodes' => '{numberOfEpisodes, plural,
-            one {# episode}
-            other {# episodes}
+            one {# epizóda}
+            few {# epizódy}
+            many {# epizód}
+            other {# epizód}
         }',
-        'episode' => 'Episode',
+        'episode' => 'Epizóda',
         'visibility' => 'Viditeľnosť',
         'comments' => 'Komentáre',
         'actions' => 'Úkony',
     ],
     'messages' => [
-        'createSuccess' => 'Episode has been successfully created!',
-        'editSuccess' => 'Episode has been successfully updated!',
+        'createSuccess' => 'Epizóda je úspešne vytvorená!',
+        'editSuccess' => 'Epizóda je úspešne aktualizovaná!',
         'publishSuccess' => '{publication_status, select,
-            published {Episode successfully published!}
-            scheduled {Episode publication successfully scheduled!}
-            with_podcast {This episode will be published at the same time as the podcast.}
-            other {This episode is not published.}
+            published {Epizóda je úspešne zverejnená!}
+            scheduled {Zverejnenie epizódy je úspešne načasované!}
+            with_podcast {Táto epizóda bude zverejnená v rovnakom čase ako podcast.}
+            other {Táto epizóda nie je zverejnená.}
         }',
-        'publishCancelSuccess' => 'Episode publication successfully cancelled!',
-        'unpublishBeforeDeleteTip' => 'You must unpublish the episode before deleting it.',
-        'scheduleDateError' => 'Schedule date must be set!',
-        'deletePublishedEpisodeError' => 'Please unpublish the episode before deleting it.',
-        'deleteSuccess' => 'Episode successfully deleted!',
-        'deleteError' => 'Failed to delete episode {type, select,
-            transcript {transcript}
-            chapters {chapters}
-            image {cover}
-            audio {audio}
-            other {media}
+        'publishCancelSuccess' => 'Zverejnenie epizódy úspešne zrušené!',
+        'unpublishBeforeDeleteTip' => 'Pred vymazaním musíte zrušiť zverejnenie epizódy.',
+        'scheduleDateError' => 'Musí byť nastavený plánovaný dátum zverejnenia!',
+        'deletePublishedEpisodeError' => 'Prosím zrušte zverejnenie epizódy pred jej vymazaním.',
+        'deleteSuccess' => 'Epizóda úspešne vymazaná!',
+        'deleteError' => 'Nepodarilo sa vymazať epizódu: {type, select,
+            transcript {prepis}
+            chapters {kapitoly}
+            image {obrázok}
+            audio {zvuk}
+            other {médiá}
         }.',
-        'deleteFileError' => 'Failed to delete {type, select,
-            transcript {transcript}
-            chapters {chapters}
-            image {cover}
-            audio {audio}
-            other {media}
-        } file {file_path}. You may manually remove it from your disk.',
-        'sameSlugError' => 'An episode with the chosen slug already exists.',
+        'deleteFileError' => 'Nepodarilo sa vymazať {type, select,
+            transcript {prepis}
+            chapters {kapitoly}
+            image {obrázok}
+            audio {zvuk}
+            other {médiá}
+        } súbor {file_path}. Môžete ho z disku odstrániť ručne.',
+        'sameSlugError' => 'Epizóda s takýmto trvalým odkazom už existuje.',
     ],
     'form' => [
         'file_size_error' =>
@@ -123,78 +127,78 @@ return [
         'description_footer' => 'Description footer',
         'description_footer_hint' =>
             'This text is added at the end of each episode description, it is a good place to input your social links for example.',
-        'additional_files_section_title' => 'Additional files',
+        'additional_files_section_title' => 'Dodatočné súbory',
         'additional_files_section_subtitle' =>
-            'These files may be used by other platforms to provide better experience to your audience. See the {podcastNamespaceLink} for more information.',
+            'Tieto súbory sú určené na použitie s inými platformami s cieľom poslucháčom poskytovať bohačšiu skúsenosť. Pre viac informácií si pozrite {podcastNamespaceLink}.',
         'location_section_title' => 'Lokácia',
-        'location_section_subtitle' => 'What place is this episode about?',
-        'location_name' => 'Location name or address',
-        'location_name_hint' => 'This can be a real or fictional location',
-        'transcript' => 'Transcript (subtitles / closed captions)',
-        'transcript_hint' => 'Only .srt are allowed.',
+        'location_section_subtitle' => 'O akom mieste / oblasti pojednáva táto epizóda?',
+        'location_name' => 'Názov oblasti alebo adresa',
+        'location_name_hint' => 'Môže to byť skutočné alebo vymyslené miesto',
+        'transcript' => 'Prepis (titulky / skryté titulky)',
+        'transcript_hint' => 'Povolené sú len súbory .srt.',
         'transcript_download' => 'Stiahnuť prepis',
-        'transcript_file' => 'Transcript file (.srt)',
-        'transcript_remote_url' => 'Remote url for transcript',
-        'transcript_file_delete' => 'Delete transcript file',
-        'chapters' => 'Chapters',
-        'chapters_hint' => 'File must be in JSON Chapters format.',
-        'chapters_download' => 'Download chapters',
-        'chapters_file' => 'Chapters file',
-        'chapters_remote_url' => 'Remote url for chapters file',
-        'chapters_file_delete' => 'Delete chapters file',
-        'advanced_section_title' => 'Advanced Parameters',
+        'transcript_file' => 'Súbor s prepisom (.srt)',
+        'transcript_remote_url' => 'Vzdialená adresa Url s prepisom',
+        'transcript_file_delete' => 'Vymazať súbor s prepisom',
+        'chapters' => 'Kapitoly',
+        'chapters_hint' => 'Súbor musí byť vo formáte JSON Chapters.',
+        'chapters_download' => 'Prevziať kapitoly',
+        'chapters_file' => 'Súbor s kapitolami',
+        'chapters_remote_url' => 'Vzdialená adresa url súboru s kapitolami',
+        'chapters_file_delete' => 'Vymazať súbor s kapitolami',
+        'advanced_section_title' => 'Pokročilé vlastnosti',
         'advanced_section_subtitle' =>
-            'If you need RSS tags that Castopod does not handle, set them here.',
-        'custom_rss' => 'Custom RSS tags for the episode',
-        'custom_rss_hint' => 'This will be injected within the ❬item❭ tag.',
-        'block' => 'Episode should be hidden from public catalogues',
+            'Ak potrebujete pokročilé tagy RSS, ktoré castopod nepodporuje, nastavte ich tu.',
+        'custom_rss' => 'Vlastné tagy RSS pre túto epizódu',
+        'custom_rss_hint' => 'Toto bude vložené vo vnútri tagu ❬item❭.',
+        'block' => 'Epizóda má byť skrytá z verejných katalógov',
         'block_hint' =>
-            'The episode show or hide status: toggling this on prevents the episode from appearing in Apple Podcasts, Google Podcasts, and any third party apps that pull shows from these directories. (Not guaranteed)',
+            'Stav skryť / zobraziť pre túto epizódu: zapnutím zabránite, aby sa epizóda zobrazila v katalógoch Apple Podcasts, Google Podcasts a v ďalších aplikáciách tretích strán ktoré získavajú podcasty z týchto služieb. (Negarantované)',
         'submit_create' => 'Vytvoriť epizódu',
         'submit_edit' => 'Uložiť epizódu',
     ],
     'publish_form' => [
-        'back_to_episode_dashboard' => 'Back to episode dashboard',
-        'post' => 'Your announcement post',
+        'back_to_episode_dashboard' => 'Späť na nástenku epizódy',
+        'post' => 'Príspevok, ktorým oznamujete zverejnenie',
         'post_hint' =>
-            "Write a message to announce the publication of your episode. The message will be broadcasted to all your followers in the fediverse and be featured in your podcast's homepage.",
-        'message_placeholder' => 'Write your message…',
-        'publication_date' => 'Publication date',
+            "Napíšte správu, v ktorej oznámite zverejnenie tejto epizódy. Správu uvidia všetci sledujúci vo fediverse a správa bude zobrazená na úvodnej stránke podcastu.",
+        'message_placeholder' => 'Napíšte správu…',
+        'publication_date' => 'Dátum zverejnenia',
         'publication_method' => [
-            'now' => 'Now',
-            'schedule' => 'Schedule',
-            'with_podcast' => 'Publish alongside podcast',
+            'now' => 'Hneď teraz',
+            'schedule' => 'Naplánovať',
+            'with_podcast' => 'Publikovať spolu s podcastom',
         ],
-        'scheduled_publication_date' => 'Scheduled publication date',
-        'scheduled_publication_date_clear' => 'Clear publication date',
+        'scheduled_publication_date' => 'Dátum plánovaného zverejnenia',
+        'scheduled_publication_date_clear' => 'Vyčistiť dátum zverejnenia',
         'scheduled_publication_date_hint' =>
-            'You can schedule the episode release by setting a future publication date. This field must be formatted as YYYY-MM-DD HH:mm',
-        'submit' => 'Publish',
-        'submit_edit' => 'Edit publication',
-        'cancel_publication' => 'Cancel publication',
-        'message_warning' => 'You did not write a message for your announcement post!',
-        'message_warning_hint' => 'Having a message increases social engagement, resulting in a better visibility for your episode.',
-        'message_warning_submit' => 'Publish anyways',
+            'Uvedenie epizódy môžete naplánovať nastavením dátumu zverejnenia v budúcnosti. Formát tohoto vstupného poľa je YYYY-MM-DD HH:mm',
+        'submit' => 'Zverejniť',
+        'submit_edit' => 'Upraviť zverejnenie',
+        'cancel_publication' => 'Zrušiť zverejnenie',
+        'message_warning' => 'Nenapísali ste text oznamujúceho príspevku!',
+        'message_warning_hint' => 'Odoslaním uvádzacieho príspevku zlepšujete sociálnu účasť, čím môžete ešte viac zviditeľniť váš podcast.',
+        'message_warning_submit' => 'Napriek tomu zverejniť',
     ],
     'unpublish_form' => [
         'disclaimer' =>
             "Unpublishing the episode will delete all the comments and posts associated with it and remove it from the podcast's RSS feed.",
-        'understand' => 'I understand, I want to unpublish the episode',
-        'submit' => 'Unpublish',
+        'understand' => 'Rozumiem, chcem zrušiť zverejnenie epizódy',
+        'submit' => 'Zrušiť zverejnenie',
     ],
     'delete_form' => [
         'disclaimer' =>
-            "Deleting the episode will delete all media files, comments, video clips and soundbites associated with it.",
-        'understand' => 'I understand, I want to delete the episode',
-        'submit' => 'Delete',
+            "Vymazaním epizódy odstránite všetky prepojené mediálne súbory, komentáre, video klipy a zvukové ukážky.",
+        'understand' => 'Rozumiem, chcem vymazať epizódu',
+        'submit' => 'Vymazať',
     ],
     'embed' => [
-        'title' => 'Embeddable player',
+        'title' => 'Vnorený prehrávač',
         'label' =>
-            'Pick a theme color, copy the embeddable player to clipboard, then paste it on your website.',
-        'clipboard_iframe' => 'Copy embeddable player to clipboard',
-        'clipboard_url' => 'Copy address to clipboard',
-        'dark' => 'Dark',
+            'Vyberte farbu vzhľadu, skopírujte kód prehrávača do schránky a prilepte ho na vašej stránke.',
+        'clipboard_iframe' => 'Skopírovať kód prehrávača do schránky',
+        'clipboard_url' => 'Skopírovať adresu do schránky',
+        'dark' => 'Tmavý',
         'dark-transparent' => 'Dark transparent',
         'light' => 'Light',
         'light-transparent' => 'Light transparent',

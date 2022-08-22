@@ -9,11 +9,12 @@ Castopod está pensado para ser fácil de instalar. Ya sea usando un alojamiento
 dedicado o compartido, puedes instalarlo en la mayoría de servidores web
 compatibles con PHP-MySQL.
 
-::: Nota informativa
+::: tip Note
 
-Esta sección de la documentación te ayudará a configurar Castopod para la
-producción. Si estás buscando participar en el desarrollo de Castopod, debes
-pasar a la sección de contribuciones.
+We've released official Docker images for Castopod!
+
+If you prefer using Docker, you may skip this and go straight to the
+[docker documentation](./docker.md) for Castopod.
 
 :::
 
@@ -25,8 +26,7 @@ pasar a la sección de contribuciones.
 
 ### PHP v8.0 o superior
 
-Se requiere PHP versión 8.0 o superior con las siguientes extensiones
-instaladas:
+PHP version 8.0 or higher is required, with the following extensions installed:
 
 - [intl](https://php.net/manual/en/intl.requirements.php)
 - [libcurl](https://php.net/manual/en/curl.requirements.php)
@@ -35,8 +35,7 @@ instaladas:
   **JPEG**, **PNG** y **WEBP**.
 - [exif](https://www.php.net/manual/en/exif.installation.php)
 
-Adicionalmente, asegúrate que las siguientes extensiones están habilitadas en tu
-PHP:
+Additionally, make sure that the following extensions are enabled in your PHP:
 
 - json (habilitada por defecto - no la desactives)
 - xml (habilitada por defecto - no la desactives)
@@ -46,28 +45,27 @@ PHP:
 
 > Recomendamos usar [MariaDB](https://mariadb.org).
 
-::: aviso Aviso
+::: warning Warning
 
-Castopod solo funciona con base de datos compatible con MySQL 5.7 o superior. Se
-romperá con la version previa MySQL v5.6 por ejemplo, ya que su vida terminó el
-5 de febrero de 2021.
+Castopod only works with supported MySQL 5.7 or higher compatible databases. It
+will break with the previous MySQL v5.6 for example as its end of life was on
+February 5, 2021.
 
 :::
 
-Necesitarás el nombre del anfitrión del servidor, nombre de la base de datos,
-usuario y contraseña para completar el proceso de instalación. Si no los tienes,
-por favor, contacta al administrador del servidor.
+You will need the server hostname, database name, username and password to
+complete the installation process. If you do not have these, please contact your
+server administrator.
 
 #### Privilegios
 
-Los usuarios deben tener al menos estos privilegios en la base de datos para que
-Castopod funcione: `CREAR`, `ALTERAR`, `BORRAR`, `EJECUTAR`, `INDICE`,
-`INSERTAR`, `SELECCIONAR`, `ACTUALIZAR`.
+User must have at least these privileges on the database for Castopod to work:
+`CREATE`, `ALTER`, `DELETE`, `EXECUTE`, `INDEX`, `INSERT`, `SELECT`, `UPDATE`.
 
 ### (Opcional) FFmpeg v4.1.8 o superior para clips de video
 
-Se requiere [FFmpeg](https://www.ffmpeg.org/) versión 4.1.8 o superior si
-quieres general clips de video. Se debe instalar las siguientes extensiones:
+[FFmpeg](https://www.ffmpeg.org/) version 4.1.8 or higher is required if you
+want to generate Video Clips. The following extensions must be installed:
 
 - Librería **FreeType 2** para
   [gd](https://www.php.net/manual/en/image.installation.php).
@@ -127,24 +125,24 @@ quieres general clips de video. Se debe instalar las siguientes extensiones:
 2. Sigue las instrucciones de la pantalla.
 3. ¡Empieza a crear podcasting!
 
-::: Nota informativa
+::: info Note
 
-El script de instalación escribe un archivo `.env` en la raiz de paquete. Si no
-puedes completar la instalación de wizard, puedes
-[crear y actualizar el archivo `.env` manualmente](#alternative-manual-configuration).
+The install script writes a `.env` file in the package root. If you cannot go
+through the install wizard, you can
+[create and update the `.env` file manually](#alternative-manual-configuration).
 
 :::
 
 ## Paquetes de la comunidad
 
-Si no quieres molestarte en instalar Castopod manualmente, puedes usar uno de
-los paquetes creados y mantenidos por la comunidad de código abierto.
+If you don't want to bother with installing Castopod manually, you may use one
+of the packages created and maintained by the open-source community.
 
 ### Instalar con YunoHost
 
-[YunoHost](https://yunohost.org/) es una distribuidora basada en Debian
-GNU/Linux compuesta por paquetes de software libres y de código abierto. It
-manages the hardships of self-hosting for you.
+[YunoHost](https://yunohost.org/) is a distribution based on Debian GNU/Linux
+made up of free and open-source software packages. It manages the hardships of
+self-hosting for you.
 
 <div class="flex flex-wrap items-center gap-4">
 
@@ -158,19 +156,3 @@ manages the hardships of self-hosting for you.
 Repo</a>
 
 </div>
-
-### Instalar con Docker
-
-Si desea utilizar Docker para instalar Castopod, ¡es posible gracias a
-[Romain de Laage](https://mamot.fr/@rdelaage)!
-
-<a href="https://gitlab.utc.fr/picasoft/projets/services/castopod" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-4 py-2 mx-auto font-semibold text-center text-white rounded-md shadow gap-x-1 bg-[#1282d7] hover:no-underline hover:bg-[#0f6eb5]">Instalar
-con
-Docker<svg viewBox="0 0 24 24" width="1em" height="1em" class="text-xl text-pine-200"><path fill="currentColor" d="m16.172 11-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg></a>
-
-::: Nota de información
-
-Dada la alta demanda de docker, planeamos mantener una imagen oficial del Docker
-de Castopod directamente en el repositorio de Castopod.
-
-:::

@@ -46,6 +46,6 @@ return [
         'playing' => 'Spelar',
     ],
     'size_limit' => 'Maks storleik: {0}.',
-    'choose_interact' => 'Vel korleis du vil samhandla',
+    'choose_interact' => 'Choose how to interact',
     'view' => 'View',
 ];

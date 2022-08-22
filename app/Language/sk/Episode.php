@@ -16,17 +16,21 @@ return [
     'season_episode' => 'Sezóna {seasonNumber} epizóda {episodeNumber}',
     'season_episode_abbr' => 'S{seasonNumber}:E{episodeNumber}',
     'persons' => '{personsCount, plural,
-        one {# person}
-        other {# persons}
+        one {# osobnosť}
+        few {# osobnosti}
+        many {# osobností}
+        other {# osobností}
     }',
-    'persons_list' => 'Persons',
+    'persons_list' => 'Osobnosti',
     'back_to_episodes' => 'Späť k epizódam {podcast}',
     'comments' => 'Komentáre',
     'activity' => 'Aktivita',
     'description' => 'Popis epizódy',
     'number_of_comments' => '{numberOfComments, plural,
-        one {# comment}
-        other {# comments}
+        one {# komentár}
+        few {# komentáre}
+        many {# komentárov}
+        other {# komentárov}
     }',
     'all_podcast_episodes' => 'Všetky epizódy podcastu',
     'back_to_podcast' => 'Späť na podcast',

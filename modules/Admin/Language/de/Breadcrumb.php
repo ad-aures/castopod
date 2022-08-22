@@ -45,4 +45,5 @@ return [
     'soundbites' => 'Tonschnipsel',
     'video-clips' => 'Videoclips',
     'embed' => 'einbettbarer Spieler',
+    'notifications' => 'notifications',
 ];

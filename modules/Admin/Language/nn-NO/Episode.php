@@ -178,7 +178,7 @@ return [
     ],
     'unpublish_form' => [
         'disclaimer' =>
-            "Viss du avpubliserer episoden, vil alle innlegga som knytte til han bli sletta, og episoden vil bli fjerna frå RSS-straumen til podkasten.",
+            "Unpublishing the episode will delete all the comments and posts associated with it and remove it from the podcast's RSS feed.",
         'understand' => 'Eg forstår, eg vil avpublisera episoden',
         'submit' => 'Avpubliser',
     ],

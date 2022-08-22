@@ -9,8 +9,8 @@ declare(strict_types=1);
  */
 
 return [
-    'home' => 'Tableau de bord',
-    'welcome_message' => 'Bienvenue dans l’administration !',
+    'home' => 'Admin dashboard',
+    'welcome_message' => 'Welcome to the admin area!',
     'podcasts' => [
         'title' => 'Podcasts',
         'not_found' => 'No published podcast',

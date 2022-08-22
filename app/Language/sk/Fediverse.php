@@ -10,13 +10,13 @@ declare(strict_types=1);
 
 return [
     'your_handle' => 'Vaša prezývka',
-    'your_handle_hint' => 'Enter the @username@domain you want to act from.',
+    'your_handle_hint' => 'Vložte identifikátor v tvare @meno@doména, s ktorým si želáte vystupovať.',
     'follow' => [
         'label' => 'Nasledovať',
         'title' => 'Nasledovať {actorDisplayName}',
         'subtitle' => 'Budete nasledovať:',
         'accountNotFound' => 'Účet nemožno nájsť.',
-        'remoteFollowNotAllowed' => 'Seems like the account server does not allow remote follows…',
+        'remoteFollowNotAllowed' => 'Zdá sa, že server podľa zadaného identifikátora nepodporuje vzdialené sledovanie…',
         'submit' => 'Pokračovať k nasledovaniu',
     ],
     'favourite' => [

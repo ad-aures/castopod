@@ -45,4 +45,5 @@ return [
     'soundbites' => 'clipes de áudio',
     'video-clips' => 'clipes de vídeo',
     'embed' => 'player incorporável',
+    'notifications' => 'notifications',
 ];

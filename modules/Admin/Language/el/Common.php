@@ -46,6 +46,6 @@ return [
         'playing' => 'Αναπαράγεται',
     ],
     'size_limit' => 'Όριο μεγέθους: {0}.',
-    'choose_interact' => 'Επιλέξτε τον τρόπο αλληλεπίδρασης',
+    'choose_interact' => 'Choose how to interact',
     'view' => 'View',
 ];

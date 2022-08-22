@@ -9,11 +9,11 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => 'Platforms',
-    'home_url' => 'Go to {platformName} website',
-    'submit_url' => 'Submit your podcast on {platformName}',
-    'visible' => 'Display in podcast homepage?',
-    'on_embed' => 'Display on embeddable player?',
+    'title' => 'Platformy',
+    'home_url' => 'Prejsť na stránku {platformName}',
+    'submit_url' => 'Uverejniť podcast na platforme {platformName}',
+    'visible' => 'Zobraziť na úvodnej stránke podcastu?',
+    'on_embed' => 'Zobraziť na vnorenom prehrávači?',
     'remove' => 'Remove {platformName}',
     'submit' => 'Save',
     'messages' => [

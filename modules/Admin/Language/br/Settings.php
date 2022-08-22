@@ -9,21 +9,21 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => 'General settings',
+    'title' => 'Arventennoù hollek',
     'instance' => [
-        'title' => 'Instance',
-        'site_icon' => 'Site icon',
-        'site_icon_delete' => 'Delete site icon',
+        'title' => 'Istañs',
+        'site_icon' => 'Arlun al lec\'hienn',
+        'site_icon_delete' => 'Dilemel arlun al lec\'hienn',
         'site_icon_hint' => 'Site icons are what you see on your browser tabs, bookmarks bar, and when you add a website as a shortcut on mobile devices.',
-        'site_icon_helper' => 'Icon must be squared and at least 512px wide and tall.',
-        'site_name' => 'Site name',
-        'site_description' => 'Site description',
-        'submit' => 'Save',
+        'site_icon_helper' => 'An arlun a rankfe bezañ ur c\'harrez ha 512px e vent da nebeutañ.',
+        'site_name' => 'Titl al lec\'hienn',
+        'site_description' => 'Deskrivadur al lec\'hienn',
+        'submit' => 'Enrollañ',
         'editSuccess' => 'Instance has been updated successfully!',
         'deleteIconSuccess' => 'Site icon has been remove successfully!',
     ],
     'images' => [
-        'title' => 'Images',
+        'title' => 'Skeudennoù',
         'subtitle' => 'Here you can regenerate all images based on the originals that were uploaded. To be used if you find that some images are missing. This task may take a while.',
         'regenerate' => 'Regenerate images',
         'regenerationSuccess' => 'All images have been regenerated successfully!',
@@ -41,8 +41,8 @@ return [
         'runSuccess' => 'Housekeeping has been run successfully!',
     ],
     'theme' => [
-        'title' => 'Theme',
-        'accent_section_title' => 'Accent color',
+        'title' => 'Neuz',
+        'accent_section_title' => 'Liv kentañ',
         'accent_section_subtitle' => 'Choose the color to determine the look and feel of all public pages.',
         'pine' => 'Pine',
         'crimson' => 'Crimson',
@@ -50,7 +50,7 @@ return [
         'lake' => 'Lake',
         'jacaranda' => 'Jacaranda',
         'onyx' => 'Onyx',
-        'submit' => 'Save',
-        'setInstanceThemeSuccess' => 'Theme has been updated successfully!',
+        'submit' => 'Enrollañ',
+        'setInstanceThemeSuccess' => 'Cheñchet eo bet an neuz gant berzh!',
     ],
 ];

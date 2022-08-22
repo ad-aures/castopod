@@ -9,10 +9,10 @@ declare(strict_types=1);
  */
 
 return [
-    'info' => 'My account info',
-    'changePassword' => 'Change my password',
+    'info' => 'Informácie o mojom účte',
+    'changePassword' => 'Zmeniť heslo',
     'messages' => [
-        'wrongPasswordError' => "You've entered the wrong password, try again.",
-        'passwordChangeSuccess' => 'Password has been successfully changed!',
+        'wrongPasswordError' => "Zadali ste nesprávne heslo, skúste znovu.",
+        'passwordChangeSuccess' => 'Heslo je úspešne zmenené!',
     ],
 ];

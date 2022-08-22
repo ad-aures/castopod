@@ -54,12 +54,12 @@ return [
         'add_section_subtitle' => 'You may pick several persons and roles.',
         'persons' => 'Persons',
         'persons_hint' =>
-            'You may select one or several persons with the same roles. You need to create the persons first.',
-        'roles' => 'Roles',
+            'Môžete vybrať jednu alebo viac osôb s tou istou rolou. Najprv by ste mali osobnosti vytvoriť.',
+        'roles' => 'Roly',
         'roles_hint' =>
-            'You may select none, one or several roles for a person.',
-        'submit_add' => 'Add person(s)',
-        'remove' => 'Remove',
+            'Pre jednu osobu môžete vybrať žiadnu, jednu alebo viac rolí.',
+        'submit_add' => 'Pridať osob(y)',
+        'remove' => 'Odstrániť',
     ],
-    'credits' => 'Credits',
+    'credits' => 'Zásluhy',
 ];

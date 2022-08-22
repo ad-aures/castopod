@@ -18,7 +18,7 @@ return [
     'delete' => 'Dilemel ar bajenn',
     'form' => [
         'title' => 'Titl',
-        'permalink' => 'Peurliamm',
+        'permalink' => 'Ere peurzalc\'hus',
         'content' => 'Danvez',
         'submit_create' => 'Krouiñ ar bajenn',
         'submit_edit' => 'Enrollañ',

@@ -15,7 +15,7 @@ return [
     'optional' => 'Diret',
     'close' => 'Serriñ',
     'home' => 'Degemer',
-    'explicit' => 'Endalc\'had evit an oadourien',
+    'explicit' => 'Danvez evit an oadourien',
     'powered_by' => 'Lusket gant {castopod}',
     'go_back' => 'Mont war-gil',
     'play_episode_button' => [
@@ -24,7 +24,7 @@ return [
     ],
     'read_more' => 'Lenn muioc\'h',
     'read_less' => 'Lenn nebeutoc\'h',
-    'see_more' => 'Gwelout muioc\'h',
-    'see_less' => 'Gwelout nebeutoc\'h',
-    'legal_notice' => 'Legal notice',
+    'see_more' => 'Gwelet muioc\'h',
+    'see_less' => 'Gwelet nebeutoc\'h',
+    'legal_notice' => 'Evezhiadennoù a-fet lezenn',
 ];

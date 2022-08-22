@@ -9,29 +9,29 @@ declare(strict_types=1);
  */
 
 return [
-    'edit_roles' => "Edit {username}'s roles",
+    'edit_roles' => "Kemm rolloù {username}",
     'forcePassReset' => 'Force pass reset',
     'ban' => 'Ban',
     'unban' => 'Unban',
-    'delete' => 'Delete',
-    'create' => 'New user',
-    'view' => "{username}'s info",
-    'all_users' => 'All users',
+    'delete' => 'Dilemel',
+    'create' => 'Krouiñ un implijer·ez',
+    'view' => "Titouroù diwar-benn {username}",
+    'all_users' => 'An holl implijerien·ezed',
     'list' => [
-        'user' => 'User',
-        'roles' => 'Roles',
+        'user' => 'Implijer·ez',
+        'roles' => 'Rolloù',
         'banned' => 'Banned?',
     ],
     'form' => [
-        'email' => 'Email',
-        'username' => 'Username',
-        'password' => 'Password',
-        'new_password' => 'New Password',
-        'roles' => 'Roles',
-        'permissions' => 'Permissions',
-        'submit_create' => 'Create user',
-        'submit_edit' => 'Save',
-        'submit_password_change' => 'Change!',
+        'email' => 'Postel',
+        'username' => 'Anv implijer·ez',
+        'password' => 'Ger-tremen',
+        'new_password' => 'Ger-tremen nevez',
+        'roles' => 'Rolloù',
+        'permissions' => 'Aotreoù',
+        'submit_create' => 'Krouiñ an implijer·ez',
+        'submit_edit' => 'Enrollañ',
+        'submit_password_change' => 'Kemm!',
     ],
     'roles' => [
         'superadmin' => 'Super admin',
@@ -49,6 +49,6 @@ return [
             '{username} is a superadmin, one does not simply ban a superadmin…',
         'deleteSuperAdminError' =>
             '{username} is a superadmin, one does not simply delete a superadmin…',
-        'deleteSuccess' => '{username} has been deleted.',
+        'deleteSuccess' => 'Dilamet eo bet {username}.',
     ],
 ];

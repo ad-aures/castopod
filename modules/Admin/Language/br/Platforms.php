@@ -9,22 +9,22 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => 'Platforms',
-    'home_url' => 'Go to {platformName} website',
-    'submit_url' => 'Submit your podcast on {platformName}',
-    'visible' => 'Display in podcast homepage?',
-    'on_embed' => 'Display on embeddable player?',
-    'remove' => 'Remove {platformName}',
-    'submit' => 'Save',
+    'title' => 'Savennoù',
+    'home_url' => 'Mont da lec\'hienn {platformName}',
+    'submit_url' => 'Kasit ho podkast war {platformName}',
+    'visible' => 'Diskouez e pajenn ar podkast?',
+    'on_embed' => 'Diskouez el lenner enkorfet?',
+    'remove' => 'Dilemel {platformName}',
+    'submit' => 'Enrollañ',
     'messages' => [
-        'updateSuccess' => 'Platform links have been successfully updated!',
-        'removeLinkSuccess' => 'The platform link has been removed.',
+        'updateSuccess' => 'Hizivaet eo bet ereoù ar savennoù gant berzh!',
+        'removeLinkSuccess' => 'Dilamet eo bet ere ar savenn.',
         'removeLinkError' =>
-            'The platform link could not be removed. Try again.',
+            'N\'eo ket bet dilamet ere ar savenn. Klaskit en-dro.',
     ],
     'description' => [
-        'podcasting' => 'The podcast ID on this platform',
-        'social' => 'The podcast account ID on this platform',
-        'funding' => 'Call to action message',
+        'podcasting' => 'ID ar podkast war ar savenn-mañ',
+        'social' => 'ID kont ar podkast war ar savenn-mañ',
+        'funding' => 'Kemennadenn evit broudañ',
     ],
 ];

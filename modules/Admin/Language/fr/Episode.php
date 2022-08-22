@@ -178,7 +178,7 @@ return [
     ],
     'unpublish_form' => [
         'disclaimer' =>
-            "Dépublier l’épisode supprimera toutes les publications qui lui sont associées et le retirera du flux RSS du podcast.",
+            "Unpublishing the episode will delete all the comments and posts associated with it and remove it from the podcast's RSS feed.",
         'understand' => 'Je comprends, je veux dépublier l’épisode',
         'submit' => 'Dépublier',
     ],

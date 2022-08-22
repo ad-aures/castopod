@@ -179,7 +179,7 @@ return [
     ],
     'unpublish_form' => [
         'disclaimer' =>
-            "Cofnięcie publikacji odcinka spowoduje usunięcie wszystkich powiązanych z nim wpisów i usunięcie go z kanału RSS podcastu.",
+            "Unpublishing the episode will delete all the comments and posts associated with it and remove it from the podcast's RSS feed.",
         'understand' => 'Rozumiem, chcę cofnąć publikację odcinka',
         'submit' => 'Cofnij publikację',
     ],

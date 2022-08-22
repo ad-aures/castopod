@@ -45,4 +45,5 @@ return [
     'soundbites' => 'lydbetar',
     'video-clips' => 'videoklypp',
     'embed' => 'innbyggbar spelar',
+    'notifications' => 'notifications',
 ];

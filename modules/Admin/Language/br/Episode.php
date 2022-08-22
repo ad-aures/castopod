@@ -31,25 +31,26 @@ return [
     'publish_cancel_error' => 'Embannet eo bet ar rann dija.',
     'unpublish_error' => 'N\'eo ket bet embannet ar rann.',
     'delete' => 'Dilemel',
-    'go_to_page' => 'Gwelout ar bajenn',
+    'go_to_page' => 'Gwelet ar bajenn',
     'create' => 'Ouzhpennañ ur rann',
     'publication_status' => [
         'published' => 'Embannet',
-        'with_podcast' => 'Published',
+        'with_podcast' => 'Embannet',
         'scheduled' => 'Steuñvet',
         'not_published' => 'Diembann',
     ],
-    'with_podcast_hint' => 'To be published at the same time as the podcast',
+    'with_podcast_hint' => 'Embannet e vo war un dro gant ar podkast',
     'list' => [
         'search' => [
-            'placeholder' => 'Search for an episode',
-            'clear' => 'Clear search',
-            'submit' => 'Search',
+            'placeholder' => 'Klask ur rann',
+            'clear' => 'Diverkañ an enklask',
+            'submit' => 'Klask',
         ],
         'number_of_episodes' => '{numberOfEpisodes, plural,
-            one {# episode}
-            other {# episodes}
-        }',
+        0 {rann ebet}
+        one {# rann}
+        other {# rann}
+    }',
         'episode' => 'Rann',
         'visibility' => 'Gwelusted',
         'comments' => 'Evezhiadennoù',
@@ -59,30 +60,30 @@ return [
         'createSuccess' => 'Krouet eo bet ar rann gant berzh!',
         'editSuccess' => 'Hizivaet eo bet ar rann gant berzh!',
         'publishSuccess' => '{publication_status, select,
-            published {Episode successfully published!}
-            scheduled {Episode publication successfully scheduled!}
-            with_podcast {This episode will be published at the same time as the podcast.}
-            other {This episode is not published.}
+            published {Embannet eo bet ar rann gant berzh!}
+            scheduled {Raktreset eo bet embannadur ar rann gant berzh!}
+            with_podcast {Ar rann-mañ a vo embannet war un dro gant ar podkast.}
+            other {N\'eo ket bet embannet ar rann-mañ.}
         }',
         'publishCancelSuccess' => 'Nullet eo bet embannadur ar rann gant berzh!',
         'unpublishBeforeDeleteTip' => 'Ret eo deoc\'h diembannañ ar rann a-raok dilemel anezhi.',
-        'scheduleDateError' => 'Schedule date must be set!',
+        'scheduleDateError' => 'Ret eo lakaat un deiziad evit an embannadur!',
         'deletePublishedEpisodeError' => 'Diembannit ar rann a-raok dilemel anezhi mar plij.',
         'deleteSuccess' => 'Dilamet eo bet ar rann gant berzh!',
-        'deleteError' => 'Failed to delete episode {type, select,
-            transcript {transcript}
-            chapters {chapters}
-            image {cover}
-            audio {audio}
+        'deleteError' => 'C\'hwitadenn war dilemel {type, select,
+            transcript {treuzskrivadur}
+            chapters {chabistroù}
+            image {golo}
+            audio {aodio}
             other {media}
-        }.',
-        'deleteFileError' => 'Failed to delete {type, select,
-            transcript {transcript}
-            chapters {chapters}
-            image {cover}
-            audio {audio}
-            other {media}
-        } file {file_path}. You may manually remove it from your disk.',
+        } ar rann.',
+        'deleteFileError' => 'C\'hwitadenn war dilemel restr {type, select,
+            transcript {an treuzskrivadur}
+            chapters {ar chabistroù}
+            image {ar golo}
+            audio {an aodio}
+            other {ar media}
+        } ({file_path}). Gallout a rit lemel kuit ar restr-mañ diouzh ar gantenn dre zorn.',
         'sameSlugError' => 'Bez ez eus eus ur rann gant ar berradur-mañ (slug) dija.',
     ],
     'form' => [
@@ -94,11 +95,11 @@ return [
         'cover' => 'Golo ar rann',
         'cover_hint' =>
             'Ma n\'ho peus ket kaset ur golo e vo implijet hini ar podkast en e blas.',
-        'cover_size_hint' => 'Cover must be squared and at least 1400px wide and tall.',
+        'cover_size_hint' => 'Ar golo a rankfe bezañ ur c\'harrez ha 1400px e vent da nebeutañ.',
         'title' => 'Titl',
         'title_hint' =>
             'Dleout a rafe anv ar rann, sklaer ha berr. Arabat lakaat niverenn ar rann pe ar c\'houlzad amañ.',
-        'permalink' => 'Peurliamm',
+        'permalink' => 'Ere peurzalc\'hus',
         'season_number' => 'Koulzad',
         'episode_number' => 'Rann',
         'type' => [
@@ -112,10 +113,10 @@ return [
         ],
         'parental_advisory' => [
             'label' => 'Kemenn evit ar gerent',
-            'hint' => 'Hag ar rann-mañ a zo endalc\'had ha ne zlefe ket gwelet gant bugale?',
+            'hint' => 'Hag ar rann-mañ a zo danvez ha ne zlefe ket gwelet gant bugale?',
             'undefined' => 'andermenet',
             'clean' => 'Dereat',
-            'explicit' => 'Endalc\'had evit an oadourien',
+            'explicit' => 'Danvez evit an oadourien',
         ],
         'show_notes_section_title' => 'Notennoù ar rann',
         'show_notes_section_subtitle' =>
@@ -123,7 +124,7 @@ return [
         'description' => 'Deskrivadur',
         'description_footer' => 'Traoñ an deskrivadur',
         'description_footer_hint' =>
-            'Emañ ouzhpennet an destenn-mañ e dibenn an holl rannoù. Ul lec\'h mat eo evit lakaat liammoù ho rouedadoù sokial da skouer.',
+            'Emañ ouzhpennet an destenn-mañ e dibenn an holl rannoù. Ul lec\'h mat eo evit lakaat ereoù ho rouedadoù sokial da skouer.',
         'additional_files_section_title' => 'Restroù ouzhpenn',
         'additional_files_section_subtitle' =>
             'Ar restroù-mañ a c\'hell bezañ implijet gant savennoù all evit aesaat an traoù d\'ho selaouerien·ezed. Sellit ouzh {podcastNamespaceLink} evit muioc\'h a ditouroù.',
@@ -148,9 +149,9 @@ return [
             'M\'ho peus ezhomm eus balizennoù RSS ha n\'eus ket anezho e Castopod e c\'hellit o lakaat amañ.',
         'custom_rss' => 'Balizennoù RSS personelaet evit ar rann',
         'custom_rss_hint' => 'An dra-se a vo ouzhpennet e-barzh ar valizenn ❬item❭.',
-        'block' => 'Episode should be hidden from public catalogues',
+        'block' => 'Ar rann-se a rankfe bezañ kuzhet diouzh ar rolladoù publik',
         'block_hint' =>
-            'The episode show or hide status: toggling this on prevents the episode from appearing in Apple Podcasts, Google Podcasts, and any third party apps that pull shows from these directories. (Not guaranteed)',
+            'Diskouez pe kuzhat ar rann: trec\'haoliñ an afell-mañ a viro ar rann-mañ ouzh bezañ diskouezet war Apple Podcasts, Google Podcasts pe savennoù all hag a implij ar renabloù-se. (N\'eus gwarant ebet)',
         'submit_create' => 'Krouiñ ar rann',
         'submit_edit' => 'Enrollañ ar rann',
     ],
@@ -164,7 +165,7 @@ return [
         'publication_method' => [
             'now' => 'Bremañ',
             'schedule' => 'Steuñviñ',
-            'with_podcast' => 'Publish alongside podcast',
+            'with_podcast' => 'Embann asambles gant ar podkast',
         ],
         'scheduled_publication_date' => 'Deiziad embannadur steuñvet',
         'scheduled_publication_date_clear' => 'Skarzhañ deiziad embannadur',

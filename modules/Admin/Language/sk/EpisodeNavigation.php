@@ -14,7 +14,7 @@ return [
     'episode-view' => 'Home',
     'episode-edit' => 'Edit episode',
     'episode-persons-manage' => 'Manage persons',
-    'embed-add' => 'Embeddable player',
+    'embed-add' => 'Vnorený prehrávač',
     'clips' => 'Clips',
     'video-clips-list' => 'Video clips',
     'video-clips-create' => 'New video clip',

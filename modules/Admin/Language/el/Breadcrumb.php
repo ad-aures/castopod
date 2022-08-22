@@ -45,4 +45,5 @@ return [
     'soundbites' => 'ήχοι',
     'video-clips' => 'βίντεο κλιπς',
     'embed' => 'ενσωματώσιμος αναπαραγωγέας',
+    'notifications' => 'notifications',
 ];

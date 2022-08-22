@@ -20,7 +20,7 @@ return [
     'copy' => 'Eilañ',
     'copied' => 'Eilet!',
     'home' => 'Degemer',
-    'explicit' => 'Endalc\'had evit an oadourien',
+    'explicit' => 'Danvez evit an oadourien',
     'powered_by' => 'Lusket gant {castopod}',
     'actions' => 'Obererezhioù',
     'pageInfo' => 'Pajenn {currentPage} diwar {pageCount}',
@@ -46,6 +46,6 @@ return [
         'playing' => 'O lenn',
     ],
     'size_limit' => 'Bevenn ar vent: {0}.',
-    'choose_interact' => 'Dibabit penaos interaktiñ',
-    'view' => 'View',
+    'choose_interact' => 'Dibabit penaos bezañ e darempred',
+    'view' => 'Gwelet',
 ];

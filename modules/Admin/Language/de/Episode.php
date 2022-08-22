@@ -178,7 +178,7 @@ return [
     ],
     'unpublish_form' => [
         'disclaimer' =>
-            "Das Zurückziehen der Episode löscht alle damit verbundenen Beiträge und entfernt sie aus dem RSS-Feed des Podcasts.",
+            "Unpublishing the episode will delete all the comments and posts associated with it and remove it from the podcast's RSS feed.",
         'understand' => 'Ich verstehe, ich möchte die Episode zurückziehen',
         'submit' => 'Zurückziehen',
     ],

@@ -104,7 +104,7 @@ can be added as a cache handler.
     ```
     #castopod
     castopod.example.com {
-    	reverse_proxy localhost:8080
+        reverse_proxy localhost:8080
     }
     ```
 

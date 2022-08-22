@@ -10,53 +10,53 @@ declare(strict_types=1);
 
 return [
     'title' => 'Castopod installer',
-    'manual_config' => 'Manual configuration',
+    'manual_config' => 'Kefluniañ dre zorn',
     'manual_config_subtitle' =>
-        'Create a `.env` file with your settings and refresh the page to continue installation.',
+        'Krouit ur restr `.env` gant hoc’h arventennoù ha hizivait ar bajenn evit kenderc\'hel gant ar staliañ.',
     'form' => [
-        'instance_config' => 'Instance configuration',
-        'hostname' => 'Hostname',
-        'media_base_url' => 'Media base URL',
+        'instance_config' => 'Arventennoù an istañs',
+        'hostname' => 'Anv an ostiz',
+        'media_base_url' => 'Chomlec\'h diazez ar mediaoù',
         'media_base_url_hint' =>
-            'If you use a CDN and/or an external analytics service, you may set them here.',
-        'admin_gateway' => 'Admin gateway',
+            'Ma \'z implijit ur CDN pe ur servij diavaez evit muzuliañ heklev, e c\'hellit lakaat anezho amañ.',
+        'admin_gateway' => 'Chomlec\'h an daolenn-stur',
         'admin_gateway_hint' =>
-            'The route to access the admin area (eg. https://example.com/cp-admin). It is set by default as cp-admin, we recommend you change it for security reasons.',
-        'auth_gateway' => 'Auth gateway',
+            'An hent evit mont d\'an daolenn-stur (da sk. https://skouer.bzh/cp-admin). Dre ziouer eo cp-admin, met erbedet oc\'h kemmañ anezhañ evit abegoù a denn d\'an diogelroez.',
+        'auth_gateway' => 'Chomlec\'h ar c\'hennaskañ',
         'auth_gateway_hint' =>
-            'The route to access the authentication pages (eg. https://example.com/cp-auth). It is set by default as cp-auth, we recommend you change it for security reasons.',
-        'database_config' => 'Database configuration',
+            'An hent evit mont d\'ar bajenn gennaskañ (da sk. https://skouer.bzh/cp-auth). Dre ziouer eo cp-auth, met erbedet oc\'h kemmañ anezhañ evit abegoù a denn d\'an diogelroez.',
+        'database_config' => 'Arventennoù ar stlennvon',
         'database_config_hint' =>
-            'Castopod needs to connect to your MySQL (or MariaDB) database. If you do not have these required info, please contact your server administrator.',
-        'db_hostname' => 'Database hostname',
-        'db_name' => 'Database name',
-        'db_username' => 'Database username',
-        'db_password' => 'Database password',
-        'db_prefix' => 'Database prefix',
+            'Castopod a rank bezañ kennesket ouzh ho stlennvon MySQL (pe MariaDB). Mont e darempred gant merour ho tafariad ma n\'emañ ket ganeoc\'h an titouroù-se.',
+        'db_hostname' => 'Anv ostiz ar stlennvon',
+        'db_name' => 'Anv ar stlennvon (an diaz)',
+        'db_username' => 'Anv implijer ar stlennvon',
+        'db_password' => 'Ger-tremen ar stlennvon',
+        'db_prefix' => 'Rakger an taolennoù',
         'db_prefix_hint' =>
-            "The prefix of the Castopod table names, leave as is if you don't know what it means.",
-        'cache_config' => 'Cache configuration',
+            "Rakger taolennoù Castopod. Laoskit evel m'emañ ma ne ouzoc'h ket petra a dalv.",
+        'cache_config' => 'Arventennoù ar grubuilh (cache)',
         'cache_config_hint' =>
-            'Choose your preferred cache handler. Leave it as the default value if you have no clue what it means.',
-        'cache_handler' => 'Cache handler',
+            'Dibabit hoc’h ardoer krubuilh muiañ plijet. Laoskit evel m\'emañ ma ne ouzoc\'h ket petra a dalv.',
+        'cache_handler' => 'Aorder krubuilh',
         'cacheHandlerOptions' => [
-            'file' => 'File',
+            'file' => 'Restroù',
             'redis' => 'Redis',
             'predis' => 'Predis',
         ],
-        'next' => 'Next',
-        'submit' => 'Finish install',
-        'create_superadmin' => 'Create your superadmin account',
-        'email' => 'Email',
-        'username' => 'Username',
-        'password' => 'Password',
+        'next' => 'War-lerc\'h',
+        'submit' => 'Echuiñ ar staliañ',
+        'create_superadmin' => 'Krouit ho kont gourverour·ez (superadmin)',
+        'email' => 'Postel',
+        'username' => 'Anv implijer·ez',
+        'password' => 'Ger-tremen',
     ],
     'messages' => [
         'createSuperAdminSuccess' =>
-            'Your superadmin account has been created successfully. Login to start podcasting!',
+            'Ho kont gourverour·ez a zo bet krouet gant berzh. Kevreit ha krogit da bodkastiñ!',
         'databaseConnectError' =>
-            'Castopod could not connect to your database. Edit your database configuration and try again.',
+            'N\'en deus ket gellet Castopod kevreañ ouzh ho stlennvon. Kemmit arventennoù ar stlennvon ha klaskit en-dro.',
         'writeError' =>
-            "Couldn't create/write the `.env` file. You must create it manually by following the `.env.example` file template in the Castopod package.",
+            "N'haller ket krouiñ/skrivañ ar restr `.env`. Deoc'h-c'hwi da grouiñ anezhi dre zorn diwar ar patrom `.env.example` az o e pakad Castopod.",
     ],
 ];

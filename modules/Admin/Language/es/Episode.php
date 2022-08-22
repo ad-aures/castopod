@@ -178,7 +178,7 @@ return [
     ],
     'unpublish_form' => [
         'disclaimer' =>
-            "Al cancelar la publicación del episodio se eliminarán todos los mensajes asociados a él y se eliminarán del feed RSS del podcast.",
+            "Unpublishing the episode will delete all the comments and posts associated with it and remove it from the podcast's RSS feed.",
         'understand' => 'Lo entiendo, quiero anular la publicación del episodio',
         'submit' => 'Anular publicación',
     ],

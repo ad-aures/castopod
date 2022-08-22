@@ -35,6 +35,6 @@ return [
     'by_weekday' => 'Dre zeiz ar sizhun (e-pad an 60 devezh diwezhañ)',
     'by_hour' => 'Dre eur an devezh (e-pad an 60 devezh diwezhañ)',
     'podcast_by_bandwidth' => 'Lec\'hed bann implijet bemdez (e MB)',
-    'total_storage_by_month' => 'Monthly storage (in MB)',
-    'total_bandwidth_by_month' => 'Monthly used bandwidth (in MB)',
+    'total_storage_by_month' => 'Kadaviñ bep miz (e MB)',
+    'total_bandwidth_by_month' => 'Lec\'hed bann implijet bep miz (e MB)',
 ];

@@ -45,4 +45,5 @@ return [
     'soundbites' => 'extraits sonores',
     'video-clips' => 'extraits vidéo',
     'embed' => 'lecteur intégré',
+    'notifications' => 'notifications',
 ];

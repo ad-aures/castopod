@@ -18,12 +18,16 @@ return [
     'follow' => 'Nasledovať',
     'followTitle' => 'Nasledovať {actorDisplayName} na fediverse!',
     'followers' => '{numberOfFollowers, plural,
-        one {# follower}
-        other {# followers}
+        one {# sledujúci}
+        few {# sledujúci}
+        many {# sledujúcich}
+        other {# sledujúcich}
     }',
     'posts' => '{numberOfPosts, plural,
-        one {# post}
-        other {# posts}
+        one {# príspevok}
+        few {# príspevky}
+        many {# príspevkov}
+        other {# príspevkov}
     }',
     'activity' => 'Aktivita',
     'episodes' => 'Epizódy',
@@ -32,22 +36,28 @@ return [
     'stats' => [
         'title' => 'Štatistiky',
         'number_of_seasons' => '{0, plural,
-            one {# season}
-            other {# seasons}
+            one {# séria}
+            few {# série}
+            many {# sérií}
+            other {# sérií}
         }',
         'number_of_episodes' => '{0, plural,
-            one {# episode}
-            other {# episodes}
+            one {# epizóda}
+            few {# epizódy}
+            many {# epizód}
+            other {# epizód}
         }',
-        'first_published_at' => 'First episode published on {0, date, medium}',
+        'first_published_at' => 'Prvá epizóda publikovaná {0, date, medium}',
     ],
     'sponsor' => 'Sponzor',
-    'funding_links' => 'Funding links for {podcastTitle}',
-    'find_on' => 'Find {podcastTitle} on',
+    'funding_links' => 'Odkazy na financovanie podcastu {podcastTitle}',
+    'find_on' => 'Nájsť podcast {podcastTitle} na',
     'listen_on' => 'Počúvajte na',
     'persons' => '{personsCount, plural,
-        one {# person}
-        other {# persons}
+        one {# osobnosť}
+        few {# osobnosti}
+        many {# osobností}
+        other {# osobností}
     }',
-    'persons_list' => 'Persons',
+    'persons_list' => 'Osobnosti',
 ];

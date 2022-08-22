@@ -9,12 +9,12 @@ declare(strict_types=1);
  */
 
 return [
-    'back_to_home' => 'Back to home',
-    'page' => 'Page',
-    'all_pages' => 'All pages',
-    'create' => 'New page',
-    'go_to_page' => 'Go to page',
-    'edit' => 'Edit page',
+    'back_to_home' => 'Späť na úvod',
+    'page' => 'Stránka',
+    'all_pages' => 'Všetky stránky',
+    'create' => 'Nová stránka',
+    'go_to_page' => 'Prejsť na stránku',
+    'edit' => 'Upraviť stránku',
     'delete' => 'Delete page',
     'form' => [
         'title' => 'Title',

@@ -9,8 +9,8 @@ declare(strict_types=1);
  */
 
 return [
-    'home' => 'Панель Администратора',
-    'welcome_message' => 'Добро пожаловать в панель администрирования!',
+    'home' => 'Admin dashboard',
+    'welcome_message' => 'Welcome to the admin area!',
     'podcasts' => [
         'title' => 'Podcasts',
         'not_found' => 'No published podcast',

@@ -178,7 +178,7 @@ return [
     ],
     'unpublish_form' => [
         'disclaimer' =>
-            "Η κατάργηση της δημοσίευσης του επεισοδίου θα διαγράψει όλες τις δημοσιεύσεις που σχετίζονται με αυτό και θα τις αφαιρέσει από τη ροή RSS του podcast.",
+            "Unpublishing the episode will delete all the comments and posts associated with it and remove it from the podcast's RSS feed.",
         'understand' => 'Καταλαβαίνω, θέλω να αποδημοσιεύσει το επεισόδιο',
         'submit' => 'Αναίρεση δημοσίευσης',
     ],

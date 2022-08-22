@@ -9,32 +9,38 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => "{actorDisplayName}'s post",
-    'back_to_actor_posts' => 'Back to {actor} posts',
-    'actor_shared' => '{actor} shared',
-    'reply_to' => 'Reply to @{actorUsername}',
+    'title' => "Príspevok používateľa {actorDisplayName}",
+    'back_to_actor_posts' => 'Späť na príspevky používateľa {actor}',
+    'actor_shared' => '{actor} zdieľal',
+    'reply_to' => 'Odpoveď používateľovi @{actorUsername}',
     'form' => [
-        'message_placeholder' => 'Write a message…',
-        'episode_message_placeholder' => 'Write a message for the episode…',
-        'episode_url_placeholder' => 'Episode URL',
-        'reply_to_placeholder' => 'Reply to @{actorUsername}',
-        'submit' => 'Send',
-        'submit_reply' => 'Reply',
+        'message_placeholder' => 'Napíšte správu…',
+        'episode_message_placeholder' => 'Napíšte správu pre túto epizódu…',
+        'episode_url_placeholder' => 'Adresa URL epizódy',
+        'reply_to_placeholder' => 'Odpoveď používateľovi @{actorUsername}',
+        'submit' => 'Odoslať',
+        'submit_reply' => 'Odpovedať',
     ],
     'favourites' => '{numberOfFavourites, plural,
-        one {# favourite}
-        other {# favourites}
+        one {# si obľúbil}
+        few {# si obľúbili}
+        many {# si obľúbilo}
+        other {# si obľúbilo}
     }',
     'reblogs' => '{numberOfReblogs, plural,
-        one {# share}
-        other {# shares}
+        one {# zdieľanie}
+        few {# zdieľania}
+        many {# zdieľaní}
+        other {# zdieľaní}
     }',
     'replies' => '{numberOfReplies, plural,
-        one {# reply}
-        other {# replies}
+        one {# odpoveď}
+        few {# odpovede}
+        many {# odpovedí}
+        other {# odpovedí}
     }',
-    'expand' => 'Expand post',
-    'block_actor' => 'Block user @{actorUsername}',
-    'block_domain' => 'Block domain @{actorDomain}',
+    'expand' => 'Rozbaliť príspevok',
+    'block_actor' => 'Zablokovať používateľa @{actorUsername}',
+    'block_domain' => 'Zablokovať doménu @{actorDomain}',
     'delete' => 'Vymazať príspevok',
 ];

@@ -45,4 +45,5 @@ return [
     'soundbites' => 'zajawki',
     'video-clips' => 'klipy wideo',
     'embed' => 'odtwarzacz do osadzenia',
+    'notifications' => 'notifications',
 ];

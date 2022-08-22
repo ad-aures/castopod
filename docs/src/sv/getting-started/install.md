@@ -8,11 +8,12 @@ sidebarDepth: 3
 Castopod was thought-out to be easy to install. Whether using dedicated or
 shared hosting, you can install it on most PHP-MySQL compatible web servers.
 
-::: info Note
+::: tip Note
 
-This section of the documentation will help you set up Castopod for production.
-If you are looking to partake in the development of Castopod, you may skip to
-the contributing section.
+We've released official Docker images for Castopod!
+
+If you prefer using Docker, you may skip this and go straight to the
+[docker documentation](./docker.md) for Castopod.
 
 :::
 
@@ -152,19 +153,3 @@ self-hosting for you.
 Repo</a>
 
 </div>
-
-### Install with Docker
-
-If you wish to use Docker to install Castopod, it is possible thanks to
-[Romain de Laage](https://mamot.fr/@rdelaage)!
-
-<a href="https://gitlab.utc.fr/picasoft/projets/services/castopod" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-4 py-2 mx-auto font-semibold text-center text-white rounded-md shadow gap-x-1 bg-[#1282d7] hover:no-underline hover:bg-[#0f6eb5]">Install
-with
-Docker<svg viewBox="0 0 24 24" width="1em" height="1em" class="text-xl text-pine-200"><path fill="currentColor" d="m16.172 11-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg></a>
-
-::: info Note
-
-Given high demand for docker, we plan on maintaining an official Castopod Docker
-image directly into the Castopod repository.
-
-:::

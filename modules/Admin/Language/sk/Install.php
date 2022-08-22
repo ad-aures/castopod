@@ -9,7 +9,7 @@ declare(strict_types=1);
  */
 
 return [
-    'manual_config' => 'Manual configuration',
+    'manual_config' => 'Vlastnoručné nastavenie',
     'manual_config_subtitle' =>
         'Create a `.env` file with your settings and refresh the page to continue installation.',
     'form' => [
@@ -37,25 +37,25 @@ return [
         'cache_config' => 'Cache configuration',
         'cache_config_hint' =>
             'Choose your preferred cache handler. Leave it as the default value if you have no clue what it means.',
-        'cache_handler' => 'Cache handler',
+        'cache_handler' => 'Obslužný mechanizmus vyrovnávacej pamäte',
         'cacheHandlerOptions' => [
-            'file' => 'File',
+            'file' => 'Súbor',
             'redis' => 'Redis',
             'predis' => 'Predis',
         ],
-        'next' => 'Next',
-        'submit' => 'Finish install',
-        'create_superadmin' => 'Create your superadmin account',
+        'next' => 'Ďalej',
+        'submit' => 'Dokončiť inštaláciu',
+        'create_superadmin' => 'Vytvoriť účet hlavného správcu',
         'email' => 'Email',
-        'username' => 'Username',
-        'password' => 'Password',
+        'username' => 'Meno používateľa',
+        'password' => 'Heslo',
     ],
     'messages' => [
         'createSuperAdminSuccess' =>
-            'Your superadmin account has been created successfully. Login to start podcasting!',
+            'Účet hlavného správcu je úspešne vytvorený. Prihláste sa a začnite podcastovať!',
         'databaseConnectError' =>
-            'Castopod could not connect to your database. Edit your database configuration and try again.',
+            'Castopod sa nedokáže pripojiť k databáze. Upravte konfiguráciu a skúste znovu.',
         'writeError' =>
-            "Couldn't create/write the `.env` file. You must create it manually by following the `.env.example` file template in the Castopod package.",
+            "Nie je možné vytvoriť/zapísať súbor `.env`. Mali by ste ho vytvoriť ručne podľa vzoru v súbore `.env.example` v balíku castopod.",
     ],
 ];

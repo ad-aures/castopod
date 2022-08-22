@@ -114,7 +114,7 @@ return [
         'first_published_at' => 'Embannet eo bet ar rann gentañ d\'ar/d\'an {0, date, medium}',
     ],
     'sponsor' => 'Harpit',
-    'funding_links' => 'Liammoù evit arc\'hantaouiñ {podcastTitle}',
+    'funding_links' => 'Ereoù evit arc\'hantaouiñ {podcastTitle}',
     'find_on' => 'Kavit {podcastTitle} war',
     'listen_on' => 'Selaouit war',
     'persons' => '{personsCount, plural,

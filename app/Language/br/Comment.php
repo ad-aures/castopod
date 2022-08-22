@@ -35,7 +35,7 @@ return [
     }',
     'like' => 'Muiañ-karet',
     'reply' => 'Respont',
-    'view_replies' => 'Gwelout an evezhiadennoù ({numberOfReplies})',
+    'view_replies' => 'Gwelet an evezhiadennoù ({numberOfReplies})',
     'block_actor' => 'Stankañ an implijer·ez @{actorUsername}',
     'block_domain' => 'Stankañ @{actorDomain}',
     'delete' => 'Dilemel an evezhiadenn',

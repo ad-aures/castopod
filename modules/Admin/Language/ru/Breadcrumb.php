@@ -45,4 +45,5 @@ return [
     'soundbites' => 'звуковые фрагменты',
     'video-clips' => 'видео клипы',
     'embed' => 'встроенный плеер',
+    'notifications' => 'notifications',
 ];

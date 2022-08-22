@@ -10,22 +10,22 @@ declare(strict_types=1);
 
 return [
     'list' => [
-        'title' => 'Soundbites',
-        'soundbite' => 'Soundbite',
+        'title' => 'Tennadoù son',
+        'soundbite' => 'Tennad son',
     ],
     'messages' => [
-        'createSuccess' => 'Soundbite has been successfully created!',
-        'deleteSuccess' => 'Soundbite has been successfully removed!',
+        'createSuccess' => 'Krouet eo bet an tennad son gant berzh!',
+        'deleteSuccess' => 'Dilamet eo bet an tennad son gant berzh!',
     ],
     'form' => [
-        'title' => 'New soundbite',
-        'soundbite_title' => 'Soundbite title',
-        'start_time' => 'Start at',
-        'duration' => 'Duration',
-        'submit' => 'Create soundbite',
+        'title' => 'Tennad son nevez',
+        'soundbite_title' => 'Titl an tennad son',
+        'start_time' => 'Kregiñ da',
+        'duration' => 'Padelezh',
+        'submit' => 'Krouiñ an tennad son',
     ],
-    'play' => 'Play soundbite',
-    'stop' => 'Stop soundbite',
-    'create' => 'New soundbite',
-    'delete' => 'Delete soundbite',
+    'play' => 'Lenn an tennad son',
+    'stop' => 'Paouez an tennad son',
+    'create' => 'Tennad son nevez',
+    'delete' => 'Dilemel an tennad son',
 ];

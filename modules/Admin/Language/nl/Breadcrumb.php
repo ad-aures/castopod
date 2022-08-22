@@ -45,4 +45,5 @@ return [
     'soundbites' => 'geluidsbeet',
     'video-clips' => 'video clips',
     'embed' => 'integreerbare speler',
+    'notifications' => 'notifications',
 ];

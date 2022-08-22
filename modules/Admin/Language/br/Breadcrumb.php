@@ -45,4 +45,5 @@ return [
     'soundbites' => 'tennadoù son',
     'video-clips' => 'tennadoù video',
     'embed' => 'lenner enkorfet',
+    'notifications' => 'notifications',
 ];

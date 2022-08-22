@@ -9,33 +9,33 @@ declare(strict_types=1);
  */
 
 return [
-    'podcast_contributors' => 'Podcast contributors',
-    'view' => "{username}'s contribution to {podcastTitle}",
+    'podcast_contributors' => 'Prispievatelia podcastu',
+    'view' => "Príspevky používateľa {username} do podcastu {podcastTitle}",
     'add' => 'Pridať prispievateľa',
     'add_contributor' => 'Pridať prispievateľa pre {0}',
     'edit_role' => 'Upraviť rolu pre {0}',
     'edit' => 'Upraviť',
     'remove' => 'Odstrániť',
     'list' => [
-        'username' => 'Užívateľské meno',
+        'username' => 'Meno používateľa',
         'role' => 'Rola',
     ],
     'form' => [
-        'user' => 'Užívateľ',
-        'user_placeholder' => 'Vybrať užívateľa…',
+        'user' => 'Používateľ',
+        'user_placeholder' => 'Vybrať používateľa…',
         'role' => 'Rola',
         'role_placeholder' => 'Vybrať jeho úlohu…',
         'submit_add' => 'Pridať prispievateľa',
-        'submit_edit' => 'Update role',
+        'submit_edit' => 'Aktualizovať rolu',
     ],
     'roles' => [
-        'podcast_admin' => 'Podcast admin',
+        'podcast_admin' => 'Správca podcastu',
     ],
     'messages' => [
-        'removeOwnerError' => "You can't remove the podcast owner!",
+        'removeOwnerError' => "Nemôžete odstrániť vlastníka podcastu!",
         'removeSuccess' =>
-            'You have successfully removed {username} from {podcastTitle}',
+            'Úspešne ste odstránili používateľa {username} z podcastu {podcastTitle}',
         'alreadyAddedError' =>
-            "The contributor you're trying to add has already been added!",
+            "Prispievateľa, ktorého sa usiľujete pridať je už pridaný!",
     ],
 ];
