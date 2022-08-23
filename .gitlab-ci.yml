@@ -131,6 +131,10 @@ release:
   dependencies:
     - php-dependencies
     - js-dependencies
+  artifacts:
+    paths:
+      - castopod
+      - CP_VERSION.env
   only:
     - main
     - beta
@@ -163,5 +167,8 @@ docker:
   only:
     refs:
       - develop
+      - main
+      - beta
+      - alpha
     variables:
       - $CI_PROJECT_NAMESPACE == "adaures"

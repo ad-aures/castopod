@@ -11,6 +11,9 @@ echo "$( jq '.version = "'$COMPOSER_VERSION'"' composer.json )" > composer.json
 # replace CP_VERSION constant in app/config/constants
 sed -i "s/^defined('CP_VERSION').*/defined('CP_VERSION') || define('CP_VERSION', '$VERSION');/" ./app/Config/Constants.php
 
+# fill CP_VERSION.env for docker build
+echo "$VERSION" > ./CP_VERSION.env
+
 # install wget to download archives
 apt-get install wget
 

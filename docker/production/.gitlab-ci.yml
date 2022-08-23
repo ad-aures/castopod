@@ -18,3 +18,38 @@ docker-build-rolling:
   only:
     refs:
       - develop
+
+docker-build-main-release:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - cp ${DOCKER_HUB_CONFIG} /kaniko/.docker/config.json
+    - export CP_VERSION=(cat CP_VERSION.env)
+    - /kaniko/executor --context . --dockerfile docker/production/web-server/Dockerfile --destination ${DOCKER_IMAGE_WEB_SERVER}:${CP_VERSION} --destination ${DOCKER_IMAGE_WEB_SERVER}:latest
+    - /kaniko/executor --context . --dockerfile docker/production/app/Dockerfile --destination ${DOCKER_IMAGE_APP}:${CP_VERSION} --destination ${DOCKER_IMAGE_APP}:latest
+  needs:
+    - pipeline: $PARENT_PIPELINE_ID
+      job: release
+  only:
+    refs:
+      - main
+
+docker-build-alpha-beta-release:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - cp ${DOCKER_HUB_CONFIG} /kaniko/.docker/config.json
+    - export CP_VERSION=(cat CP_VERSION.env)
+    - /kaniko/executor --context . --dockerfile docker/production/web-server/Dockerfile --destination ${DOCKER_IMAGE_WEB_SERVER}:${CP_VERSION}
+    - /kaniko/executor --context . --dockerfile docker/production/app/Dockerfile --destination ${DOCKER_IMAGE_APP}:${CP_VERSION}
+  needs:
+    - pipeline: $PARENT_PIPELINE_ID
+      job: release
+  only:
+    refs:
+      - alpha
+      - beta
