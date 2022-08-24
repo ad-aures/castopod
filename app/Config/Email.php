@@ -8,9 +8,9 @@ use CodeIgniter\Config\BaseConfig;
 
 class Email extends BaseConfig
 {
-    public string $fromEmail;
+    public string $fromEmail = 'hello@castopod.local';
 
-    public string $fromName;
+    public string $fromName = 'Castopod';
 
     public string $recipients;
 
@@ -32,17 +32,17 @@ class Email extends BaseConfig
     /**
      * SMTP Server Address
      */
-    public string $SMTPHost;
+    public string $SMTPHost = '';
 
     /**
      * SMTP Username
      */
-    public string $SMTPUser;
+    public string $SMTPUser = '';
 
     /**
      * SMTP Password
      */
-    public string $SMTPPass;
+    public string $SMTPPass = '';
 
     /**
      * SMTP Port

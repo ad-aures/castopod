@@ -47,17 +47,6 @@ class Auth extends MythAuthConfig
 
     /**
      * --------------------------------------------------------------------------
-     * Require confirmation registration via email
-     * --------------------------------------------------------------------------
-     * When enabled, every registered user will receive an email message
-     * with a special link he have to confirm to activate his account.
-     *
-     * @var bool
-     */
-    public $requireActivation = false;
-
-    /**
-     * --------------------------------------------------------------------------
      * Auth gateway
      * --------------------------------------------------------------------------
      * Defines a base route for all authentication related pages

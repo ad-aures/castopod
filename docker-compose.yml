@@ -31,7 +31,7 @@ services:
       - castopod
 
   mariadb:
-    image: mariadb:latest
+    image: mariadb:10.2
     container_name: castopod_mariadb
     ports:
       - 3306:3306

@@ -4,7 +4,7 @@
 
 <p>Your Code: <?= $hash ?></p>
 
-<p>Visit the <a href="<?= base_url('reset-password') .
+<p>Visit the <a href="<?= url_to('reset-password') .
     '?token=' .
     $hash ?>">Reset Form</a>.</p>
 
