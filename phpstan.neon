@@ -21,3 +21,4 @@ parameters:
         - '#Cannot access property [\$a-z_]+ on ((array\|)?object)#'
         - '#^Call to an undefined method CodeIgniter\\Database\\ConnectionInterface#'
         - '#^Access to an undefined property App\\Entities\\Media\\Image#'
+        - '#^Call to an undefined method CodeIgniter\\HTTP\\RequestInterface#'

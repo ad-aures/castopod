@@ -21,7 +21,9 @@
     "color-highlight.markerType": "dot-before",
     "files.associations": {
       "*.xml.dist": "xml",
-      "spark": "php"
+      "spark": "php",
+      "env": "dotenv",
+      ".rsync-filter": "diff"
     }
   },
   "extensions": [
@@ -36,6 +38,7 @@
     "kasik96.latte",
     "mikestead.dotenv",
     "naumovs.color-highlight",
+    "pflannery.vscode-versionlens",
     "runem.lit-plugin",
     "streetsidesoftware.code-spell-checker",
     "stylelint.vscode-stylelint",
