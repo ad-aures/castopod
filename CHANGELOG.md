@@ -1,3 +1,19 @@
+# [1.0.0-beta.21](https://code.castopod.org/adaures/castopod/compare/v1.0.0-beta.20...v1.0.0-beta.21) (2022-09-06)
+
+### Bug Fixes
+
+- **email:** set the correct url in the activation and forgot emails
+  ([10fc6f1](https://code.castopod.org/adaures/castopod/commit/10fc6f17c6838a58348f32ccfd0cf05f9d3e172c)),
+  closes [#204](https://code.castopod.org/adaures/castopod/issues/204)
+- **notifications:** add trigger after activities update + update insert trigger
+  ([e5d16e8](https://code.castopod.org/adaures/castopod/commit/e5d16e87119021fa5a43470d67ddfe5128e57f74))
+
+### Features
+
+- **i18n:** add support for Simplified Chinese (zh-Hans) and Catalan (ca)
+  locales
+  ([48d1443](https://code.castopod.org/adaures/castopod/commit/48d14434727c3310a391160c7af02c56b7e20425))
+
 # [1.0.0-beta.20](https://code.castopod.org/adaures/castopod/compare/v1.0.0-beta.19...v1.0.0-beta.20) (2022-08-12)
 
 ### Bug Fixes
