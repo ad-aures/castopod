@@ -30,8 +30,8 @@ return [
         other {# príspevkov}
     }',
     'activity' => 'Aktivita',
-    'episodes' => 'Epizódy',
-    'episodes_title' => 'Epizódy {podcastTitle}',
+    'episodes' => 'Časti',
+    'episodes_title' => 'Časti {podcastTitle}',
     'about' => 'O',
     'stats' => [
         'title' => 'Štatistiky',
@@ -42,10 +42,10 @@ return [
             other {# sérií}
         }',
         'number_of_episodes' => '{0, plural,
-            one {# epizóda}
-            few {# epizódy}
-            many {# epizód}
-            other {# epizód}
+            one {# časť}
+            few {# častí}
+            many {# častí}
+            other {# časti}
         }',
         'first_published_at' => 'Prvá epizóda publikovaná {0, date, medium}',
     ],

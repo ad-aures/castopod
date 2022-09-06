@@ -17,9 +17,9 @@ return [
         'last_published' => 'Last published on {lastPublicationDate}',
     ],
     'episodes' => [
-        'title' => 'Episodes',
-        'not_found' => 'No published episode',
-        'last_published' => 'Last published on {lastPublicationDate}',
+        'title' => 'Časti',
+        'not_found' => 'Žiadna zverejnená časť',
+        'last_published' => 'Naposledy zverejnené dňa {lastPublicationDate}',
     ],
     'storage' => [
         'title' => 'Storage',

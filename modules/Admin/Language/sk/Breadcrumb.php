@@ -13,7 +13,7 @@ return [
     config('Admin')
         ->gateway => 'Úvod',
     'podcasts' => 'podcasty',
-    'episodes' => 'epizódy',
+    'episodes' => 'časti',
     'contributors' => 'prispievatelia',
     'pages' => 'stránky',
     'settings' => 'nastavenia',
@@ -45,5 +45,5 @@ return [
     'soundbites' => 'zvukové ukážky',
     'video-clips' => 'video klipy',
     'embed' => 'vnorený',
-    'notifications' => 'notifications',
+    'notifications' => 'oboznámenia',
 ];

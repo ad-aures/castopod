@@ -9,7 +9,7 @@ declare(strict_types=1);
  */
 
 return [
-    'label' => 'breadcrumb',
+    'label' => 'menú',
     config('Admin')
         ->gateway => 'Inicio',
     'podcasts' => 'podcasts',
@@ -42,8 +42,8 @@ return [
     'players' => 'reprodutores',
     'listening-time' => 'tempo de escoita',
     'time-periods' => 'período de tempo',
-    'soundbites' => 'soundbites',
+    'soundbites' => 'anaquiños',
     'video-clips' => 'clips de vídeo',
     'embed' => 'reprodutor para incluír',
-    'notifications' => 'notifications',
+    'notifications' => 'notificacións',
 ];

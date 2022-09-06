@@ -9,13 +9,13 @@ declare(strict_types=1);
  */
 
 return [
-    'go_to_page' => 'View episode page',
+    'go_to_page' => 'Zobraziť stránku časti',
     'dashboard' => 'Episode dashboard',
-    'episode-view' => 'Home',
-    'episode-edit' => 'Edit episode',
+    'episode-view' => 'Domov',
+    'episode-edit' => 'Upraviť časť',
     'episode-persons-manage' => 'Manage persons',
     'embed-add' => 'Vnorený prehrávač',
-    'clips' => 'Clips',
+    'clips' => 'Klipy',
     'video-clips-list' => 'Video clips',
     'video-clips-create' => 'New video clip',
     'soundbites-list' => 'Soundbites',

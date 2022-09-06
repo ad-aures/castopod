@@ -9,26 +9,24 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => "{actorDisplayName}'s comment for {episodeTitle}",
-    'back_to_comments' => 'Back to comments',
+    'title' => "Komentar {actorDisplayName} pada {episodeTitle}",
+    'back_to_comments' => 'Kembali ke komentar',
     'form' => [
-        'episode_message_placeholder' => 'Write a comment…',
-        'reply_to_placeholder' => 'Reply to @{actorUsername}',
-        'submit' => 'Send',
-        'submit_reply' => 'Reply',
+        'episode_message_placeholder' => 'Tulis komentar…',
+        'reply_to_placeholder' => 'Membalas @{actorUsername}',
+        'submit' => 'Kirim',
+        'submit_reply' => 'Balas',
     ],
     'likes' => '{numberOfLikes, plural,
-        one {# like}
-        other {# likes}
+        other {# suka}
     }',
     'replies' => '{numberOfReplies, plural,
-        one {# reply}
-        other {# replies}
+        other {# balasan}
     }',
-    'like' => 'Like',
-    'reply' => 'Reply',
-    'view_replies' => 'View replies ({numberOfReplies})',
-    'block_actor' => 'Block user @{actorUsername}',
-    'block_domain' => 'Block domain @{actorDomain}',
-    'delete' => 'Delete comment',
+    'like' => 'Sukai',
+    'reply' => 'Balas',
+    'view_replies' => 'Lihat balasan ({numberOfReplies})',
+    'block_actor' => 'Blokir pengguna @{actorUsername}',
+    'block_domain' => 'Blokir domain @{actorDomain}',
+    'delete' => 'Hapus komentar',
 ];

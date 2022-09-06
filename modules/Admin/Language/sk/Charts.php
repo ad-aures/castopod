@@ -20,10 +20,10 @@ return [
     'by_browser' => 'Používanie web stránok podľa prehliadača (za uplynulý týždeň)',
     'podcast_by_day' => 'Denné prevzatia epizód',
     'podcast_by_month' => 'Mesačné prevzatia epizód',
-    'episode_by_day' => 'Denné prevzatia epizód (prvých 60 dní)',
-    'episode_by_month' => 'Mesačné prevzatia epizód',
+    'episode_by_day' => 'Denné prevzatia častí (prvých 60 dní)',
+    'episode_by_month' => 'Mesačné prevzatia častí',
     'episodes_by_day' =>
-        '5 posledných prevzatí epizód (počas ich prvých 60 dní)',
+        '5 posledných prevzatí častí (počas ich prvých 60 dní)',
     'by_country_weekly' => 'Prevzatia epizód podľa krajiny (za uplynulý týždeň)',
     'by_country_yearly' => 'Prevzatia epizód podľa krajiny (za uplynulý rok)',
     'by_domain_weekly' => 'Návštevy web stránok podľa zdroja (za uplynulý týždeň)',

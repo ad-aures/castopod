@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 return [
     'warning' =>
-        'This procedure may take a long time. As the current version does not show any progress while it runs, you will not see anything updated until it is done. In case of timeout error, increase `max_execution_time` value.',
+        'Este procedimiento puede llevar mucho tiempo. Como la versión actual no muestra ningún progreso mientras se ejecuta, no verás nada actualizado hasta que termine. En el caso de recibir un mensaje de error por falta de tiempo (Timeout error), incrementa el valor `max_execution_time` en la configuración del PHP del servidor.',
     'old_podcast_section_title' => 'Podcasts para importar',
     'old_podcast_section_subtitle' =>
         'Asegúrese de que tiene los derechos para este podcast antes de importarlo. Copiar y difundir un podcast sin los derechos apropiados es piratería y puede ser procesado.',

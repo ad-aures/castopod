@@ -8,19 +8,19 @@ sidebarDepth: 3
 Castopod lanza 2 imágenes Docker al Docker Hub durante su proceso de
 construcción automatizada:
 
-- [**`castopod/aplicación`**](https://hub.docker.com/r/castopod/app): el paquete
-  de aplicación
-- [**`castopod/servidor-web`**](https://hub.docker.com/r/castopod/web-server):
-  una configuración Nginx para Castopod
+- [**`castopod/app`**](https://hub.docker.com/r/castopod/app): el paquete
+  completo de Castopod con todas las dependencias.
+- [**`castopod/web-server`**](https://hub.docker.com/r/castopod/web-server): una
+  configuración Nginx para Castopod
 
-Adicionalmente, Castopod requiere una base de datos compatible con MySQL. Una
-base de datos Redis puede ser añadida como gestor de caché.
+Adicionalmente, Castopod requiere una base de datos compatible con MySQL.
+También se puede añadir una base de datos Redis como gestor de caché.
 
 ## Etiquetas admitidas
 
-- `desarrollo` [unstable], última rama de desarrollo construida
+- `develop` [unstable], última rama de desarrollo construida
 
-// más etiquetas por llegar!
+// más etiquetas por venir!
 
 ## Ejemplo de uso
 
@@ -29,116 +29,116 @@ base de datos Redis puede ser añadida como gestor de caché.
 2.  Crear un archivo `docker-compose.yml` con lo siguiente:
 
     ```yml
-    versión: "3.7"
+    version: "3.7"
 
-    servicios:
-      applicación:
-        imagen: castopod/app:develop
-        nombre_contenedor: "castopod-app"
-        volúmenes:
+    services:
+      app:
+        image: castopod/app:develop
+        container_name: "castopod-app"
+        volumes:
           - castopod-media:/opt/castopod/public/media
-        ambiente:
+        environment:
           MYSQL_DATABASE: castopod
           MYSQL_USER: castopod
-          MYSQL_PASSWORD: cámbiame
+          MYSQL_PASSWORD: changeme
           CP_BASEURL: "http://castopod.example.com"
-          CP_ANALYTICS_SALT: cámbiame
+          CP_ANALYTICS_SALT: changeme
           CP_CACHE_HANDLER: redis
           CP_REDIS_HOST: redis
-        redes:
+        networks:
           - castopod-app
           - castopod-db
-        reiniciar: unless-stopped
+        restart: unless-stopped
 
-      servidor-web:
-        imagen: castopod/web-server:develop
-        nombre_contenedor: "castopod-web-server"
-        volúmenes:
+      web-server:
+        image: castopod/web-server:develop
+        container_name: "castopod-web-server"
+        volumes:
           - castopod-media:/var/www/html/media
-        redes:
+        networks:
           - castopod-app
-        puertos:
+        ports:
           - 8080:80
-        reiniciar: unless-stopped
+        restart: unless-stopped
 
       mariadb:
-        imagen: mariadb:10.5
-        nombre_contenedor: "castopod-mariadb"
-        redes:
+        image: mariadb:10.5
+        container_name: "castopod-mariadb"
+        networks:
           - castopod-db
-        volúmenes:
+        volumes:
           - castopod-db:/var/lib/mysql
-        ambiente:
-          MYSQL_ROOT_PASSWORD: cámbiame
+        environment:
+          MYSQL_ROOT_PASSWORD: changeme
           MYSQL_DATABASE: castopod
           MYSQL_USER: castopod
-          MYSQL_PASSWORD: cámbiame
-        reiniciar: unless-stopped
+          MYSQL_PASSWORD: changeme
+        restart: unless-stopped
 
       redis:
-        imagen: redis:7.0-alpine
-        nombre_contenedor: "castopod-redis"
-        volúmenes:
+        image: redis:7.0-alpine
+        container_name: "castopod-redis"
+        volumes:
           - castopod-cache:/data
-        redes:
+        networks:
           - castopod-app
 
-    volúmenes:
+    volumes:
       castopod-media:
       castopod-db:
       castopod-cache:
 
-    redes:
+    networks:
       castopod-app:
       castopod-db:
     ```
 
     Debes adaptar algunas variables a tus necesidades (ej. `CP_BASEURL`,
-    `MYSQL_ROOT_PASSWORD`, `MYSQL_PASSWORD` and `CP_ANALYTICS_SALT`).
+    `MYSQL_ROOT_PASSWORD`, `MYSQL_PASSWORD` y `CP_ANALYTICS_SALT`).
 
-3.  Configura un proxy inverso para TLS (SSL/HTTPS)
+3.  Configura un servidor proxy inverso para TLS (SSL/HTTPS).
 
-    TLS es obligatorio para que ActivityPub funcione. Este trabajo puede ser
+    TLS es imprescindible para que ActivityPub funcione. Este trabajo puede ser
     fácilmente manejado por un proxy inverso, por ejemplo con
     [Caddy](https://caddyserver.com/):
 
     ```
     #castopod
-    castopod.example.com {
+    castopod.mi_dominio.com {
         reverse_proxy localhost:8080
     }
     ```
 
 4.  Ejecuta `docker-compose -d`, espera a que se inicie y ve a
-    `https://castopod.example.com/cp-install` para terminar de configurar
+    `https://castopod.mi_dominio.com/cp-install` para terminar de configurar
     Castopod!
 
-5.  Todo listo, empieza a podcastear! 🎙️🚀
+5.  Todo listo, empieza a hacer podcasting! 🎙️🚀
 
-## Variables del Entorno
+## Variables de Entorno
 
 - **castopod/app**
 
-  | Nombre de la Variable         | Escribe (`predeterminado`)          |
-  | ----------------------------- | ----------------------------------- |
-  | **`CP_URLBASE`**              | string (`indefinido`)               |
-  | **`CP_MEDIA_URLBASE`**        | ?string (`(vacío)`)                 |
-  | **`CP_PUERTA_ADMINISTRADOR`** | ?string (`"cp-admin"`)              |
-  | **`CP_AUTH_PUERTA`**          | ?string (`"cp-auth"`)               |
-  | **`CP_ANALÍTICAS_SALT`**      | string (`indefinido`)               |
-  | **`CP_DATABASE_HOSTNAME`**    | ?string (`"mariadb"`)               |
-  | **`CP_DATABASE_NAME`**        | string (`MYSQL_DATABASE`)           |
-  | **`CP_DATABASE_USERNAME`**    | string (`MYSQL_USER`)               |
-  | **`CP_DATABASE_PASSWORD`**    | string (`MYSQL_PASSWORD`)           |
-  | **`CP_DATABASE_PREFIX`**      | ?string (`"cp_"`)                   |
-  | **`CP_CACHE_HANDLER`**        | ?[`"file"` or `"redis"`] (`"file"`) |
-  | **`CP_REDIS_HOST`**           | ?string (`"localhost"`)             |
-  | **`CP_REDIS_PASSWORD`**       | ?string (`null`)                    |
-  | **`CP_REDIS_PORT`**           | ?number (`6379`)                    |
-  | **`CP_REDIS_DATABASE`**       | ?number (`0`)                       |
+  | Nombre de la Variable      | Tipo (`predeterminado`)            |
+  | -------------------------- | ---------------------------------- |
+  | **`CP_URLBASE`**           | string (`undefined`)               |
+  | **`CP_MEDIA_URLBASE`**     | ?string (`(vacío)`)                |
+  | **`CP_ADMIN_GATEWAY`**     | ?string (`"cp-admin"`)             |
+  | **`CP_AUTH_GATEWAY`**      | ?string (`"cp-auth"`)              |
+  | **`CP_ANALYTICS_SALT`**    | string (`indefinido`)              |
+  | **`CP_DATABASE_HOSTNAME`** | ?string (`"mariadb"`)              |
+  | **`CP_DATABASE_NAME`**     | string (`MYSQL_DATABASE`)          |
+  | **`CP_DATABASE_USERNAME`** | string (`MYSQL_USER`)              |
+  | **`CP_DATABASE_PASSWORD`** | string (`MYSQL_PASSWORD`)          |
+  | **`CP_DATABASE_PREFIX`**   | ?string (`"cp_"`)                  |
+  | **`CP_CACHE_HANDLER`**     | ?[`"file"` o `"redis"`] (`"file"`) |
+  | **`CP_REDIS_HOST`**        | ?string (`"localhost"`)            |
+  | **`CP_REDIS_PASSWORD`**    | ?string (`null`)                   |
+  | **`CP_REDIS_PORT`**        | ?number (`6379`)                   |
+  | **`CP_REDIS_DATABASE`**    | ?number (`0`)                      |
 
 - **castopod/web-server**
 
-  | Variable name         | Type (`default`)  |
-  | --------------------- | ----------------- |
-  | **`CP_APP_HOSTNAME`** | ?string (`"app"`) |
+  | Nombre de la variable | Tipo (`predeterminado`) |
+  | --------------------- | ----------------------- |
+  | **`CP_APP_HOSTNAME`** | ?string (`"app"`)       |

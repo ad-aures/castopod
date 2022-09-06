@@ -10,44 +10,39 @@ declare(strict_types=1);
 
 return [
     'feed' => 'RSS Podcast feed',
-    'season' => 'Season {seasonNumber}',
+    'season' => 'Musim {seasonNumber}',
     'list_of_episodes_year' => '{year} episodes ({episodeCount})',
     'list_of_episodes_season' =>
-        'Season {seasonNumber} episodes ({episodeCount})',
-    'no_episode' => 'No episode found!',
-    'follow' => 'Follow',
-    'followTitle' => 'Follow {actorDisplayName} on the fediverse!',
+        'Episode-episode pada musim {seasonNumber} ({episodeCount})',
+    'no_episode' => 'Tak ditemukan episode!',
+    'follow' => 'Ikuti',
+    'followTitle' => 'Ikuti {actorDisplayName} di fediverse!',
     'followers' => '{numberOfFollowers, plural,
-        one {# follower}
-        other {# followers}
+        other {# pengikut}
     }',
     'posts' => '{numberOfPosts, plural,
-        one {# post}
-        other {# posts}
+        other {# postingan}
     }',
-    'activity' => 'Activity',
-    'episodes' => 'Episodes',
-    'episodes_title' => 'Episodes of {podcastTitle}',
-    'about' => 'About',
+    'activity' => 'Aktivitas',
+    'episodes' => 'Episode',
+    'episodes_title' => 'Episode-episode {podcastTitle}',
+    'about' => 'Tentang',
     'stats' => [
-        'title' => 'Stats',
+        'title' => 'Statistik',
         'number_of_seasons' => '{0, plural,
-            one {# season}
-            other {# seasons}
+            other {# musim}
         }',
         'number_of_episodes' => '{0, plural,
-            one {# episode}
-            other {# episodes}
+            other {# episode}
         }',
-        'first_published_at' => 'First episode published on {0, date, medium}',
+        'first_published_at' => 'Episode pertama diterbitkan pada {0, date, medium}',
     ],
     'sponsor' => 'Sponsor',
     'funding_links' => 'Funding links for {podcastTitle}',
-    'find_on' => 'Find {podcastTitle} on',
+    'find_on' => 'Cari {podcastTitle} di',
     'listen_on' => 'Listen on',
     'persons' => '{personsCount, plural,
-        one {# person}
-        other {# persons}
+        other {# orang}
     }',
-    'persons_list' => 'Persons',
+    'persons_list' => 'Orang',
 ];

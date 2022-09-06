@@ -49,10 +49,10 @@ return [
         'remove' => 'Remove',
     ],
     'episode_form' => [
-        'title' => 'Manage persons',
+        'title' => 'Spravovať osobnosti',
         'add_section_title' => 'Add persons to this episode',
         'add_section_subtitle' => 'You may pick several persons and roles.',
-        'persons' => 'Persons',
+        'persons' => 'Osobnosti',
         'persons_hint' =>
             'Môžete vybrať jednu alebo viac osôb s tou istou rolou. Najprv by ste mali osobnosti vytvoriť.',
         'roles' => 'Roly',

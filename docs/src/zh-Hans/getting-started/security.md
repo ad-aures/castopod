@@ -1,0 +1,23 @@
+---
+title: 安全性
+---
+
+# 安全问题
+
+Castopod 构建于 [CodeIgniter4](https://codeigniter.com/), PHP 框架上，鼓励
+[更好的安全实践](https://codeigniter.com/user_guide/concepts/security.html)。
+
+为了最大限度地提高你实例的安全性并防止任何恶意攻击。 我们 建议你在安装或更新后检
+查所有的 Castopod 文件权限(避免任何之前的权限错误)：
+
+- `writable/` 文件夹权限为 **可读** 和 **可写**。
+- `public/media/` 文件夹权限为 **可读** 和 **可写**。
+- 任何其他文件都必须设置为**只读**。
+
+例如，如果你在 Ubuntu 上使用 Apache 或 NGINX，你可以这样做：
+
+```bash
+sudo chown -R root:root /path/to/castopod
+sudo chown -R www-data:www-data /path/to/castopod/writable
+sudo chown -R www-data:www-data /path/to/castopod/public/media
+```

@@ -34,20 +34,20 @@ return [
     'create' => 'Añadir un episodio',
     'publication_status' => [
         'published' => 'Publicado',
-        'with_podcast' => 'Published',
+        'with_podcast' => 'Publicado',
         'scheduled' => 'Programado',
         'not_published' => 'No publicado',
     ],
-    'with_podcast_hint' => 'To be published at the same time as the podcast',
+    'with_podcast_hint' => 'A publicar al mismo tiempo que el podcast',
     'list' => [
         'search' => [
-            'placeholder' => 'Search for an episode',
-            'clear' => 'Clear search',
-            'submit' => 'Search',
+            'placeholder' => 'Buscar un episodio',
+            'clear' => 'Limpiar la búsqueda',
+            'submit' => 'Buscar',
         ],
         'number_of_episodes' => '{numberOfEpisodes, plural,
-            one {# episode}
-            other {# episodes}
+            one {# episodio}
+            other {# episodios}
         }',
         'episode' => 'Episodio',
         'visibility' => 'Visibilidad',
@@ -58,14 +58,14 @@ return [
         'createSuccess' => '¡El episodio ha sido creado correctamente!',
         'editSuccess' => '¡El episodio ha sido actualizado correctamente!',
         'publishSuccess' => '{publication_status, select,
-            published {Episode successfully published!}
-            scheduled {Episode publication successfully scheduled!}
-            with_podcast {This episode will be published at the same time as the podcast.}
-            other {This episode is not published.}
+            published {¡Episodio publicado con éxito!}
+            scheduled {¡Publicación del episodio programada con éxito!}
+            with_podcast {Este episodio se publicará al mismo tiempo que el podcast.}
+            other {Este episodio no está publicado.}
         }',
         'publishCancelSuccess' => '¡La publicación del episodio ha sido cancelada correctamente!',
         'unpublishBeforeDeleteTip' => 'Debe anular la publicación del episodio antes de eliminarlo.',
-        'scheduleDateError' => 'Schedule date must be set!',
+        'scheduleDateError' => '¡Se debe definir una fecha de publicación!',
         'deletePublishedEpisodeError' => 'Por favor, anule la publicación del episodio antes de eliminarlo.',
         'deleteSuccess' => '¡Episodio eliminado con éxito!',
         'deleteError' => 'Error al eliminar episodio {type, select,
@@ -75,13 +75,13 @@ return [
             audio {audio}
             other {media}
         }.',
-        'deleteFileError' => 'Failed to delete {type, select,
-            transcript {transcript}
-            chapters {chapters}
-            image {cover}
-            audio {audio}
-            other {media}
-        } file {file_path}. You may manually remove it from your disk.',
+        'deleteFileError' => 'Hubo un problema al tratar de eliminar el archivo {file_path} {type, select,
+            transcript {de la transcripción}
+            chapters {de los episodios}
+            image {de la portada}
+            audio {del audio}
+            other {}
+        }. Puedes eliminarlo manualmente de tu disco.',
         'sameSlugError' => 'Ya existe un episodio con el slug elegido.',
     ],
     'form' => [
@@ -93,7 +93,7 @@ return [
         'cover' => 'Portada del episodio',
         'cover_hint' =>
             'Si no establece una portada, la portada del podcast se utilizará en su lugar.',
-        'cover_size_hint' => 'Cover must be squared and at least 1400px wide and tall.',
+        'cover_size_hint' => 'La portada debe ser cuadrada con al menos 1400 px de ancho y alto.',
         'title' => 'Título',
         'title_hint' =>
             'Debe contener un nombre de episodio claro y conciso. No especifique los números de episodio o temporada aquí.',
@@ -147,9 +147,9 @@ return [
             'Si necesita etiquetas RSS que Castopod no maneja, póngalas aquí.',
         'custom_rss' => 'Etiquetas RSS personalizadas para el episodio',
         'custom_rss_hint' => 'Esto se inyectará dentro de la etiqueta del {item}.',
-        'block' => 'Episode should be hidden from public catalogues',
+        'block' => 'El episodio debe ocultarse a los catálogos públicos',
         'block_hint' =>
-            'The episode show or hide status: toggling this on prevents the episode from appearing in Apple Podcasts, Google Podcasts, and any third party apps that pull shows from these directories. (Not guaranteed)',
+            'El estado de visibilidad del episodio: al activar esto se impide que el episodio aparezca en Apple Podcasts, Google Podcasts y cualquier aplicación de terceros que extraiga episodios de estos directorios. (no está garantizado al 100%)',
         'submit_create' => 'Crear episodio',
         'submit_edit' => 'Guardar episodio',
     ],
@@ -163,7 +163,7 @@ return [
         'publication_method' => [
             'now' => 'Ahora',
             'schedule' => 'Programar',
-            'with_podcast' => 'Publish alongside podcast',
+            'with_podcast' => 'Publicar junto al podcast',
         ],
         'scheduled_publication_date' => 'Fecha programada de publicación',
         'scheduled_publication_date_clear' => 'Borrar fecha de publicación',
@@ -178,7 +178,7 @@ return [
     ],
     'unpublish_form' => [
         'disclaimer' =>
-            "Unpublishing the episode will delete all the comments and posts associated with it and remove it from the podcast's RSS feed.",
+            "Al anular la publicación del episodio se eliminarán todos los comentarios y mensajes asociados a él y el episodio será eliminado del feed RSS del podcast.",
         'understand' => 'Lo entiendo, quiero anular la publicación del episodio',
         'submit' => 'Anular publicación',
     ],

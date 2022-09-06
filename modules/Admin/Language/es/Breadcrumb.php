@@ -45,5 +45,5 @@ return [
     'soundbites' => 'fragmentos de sonido',
     'video-clips' => 'clips de vídeo',
     'embed' => 'reproductor embebido',
-    'notifications' => 'notifications',
+    'notifications' => 'notificaciones',
 ];

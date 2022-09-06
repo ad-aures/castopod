@@ -2,12 +2,12 @@
 sidebarDepth: 2
 ---
 
-# Welcome 👋
+# Selamat Datang 👋
 
 [![release-badge]][release]&nbsp;[![license-badge]][license]&nbsp;[![contributions-badge]][contributions]&nbsp;[![semantic-release-badge]][semantic-release]&nbsp;[![crowdin-badge]][crowdin]&nbsp;[![discord-badge]][discord]&nbsp;[![stars-badge]][stars]
 
-Castopod is a free & open-source hosting platform made for podcasters who want
-engage and interact with their audience.
+Castopod adalah platform hosting yang gratis & sumber terbuka untuk pembuat
+siniar yang ingin berinteraksi dengan pendengar mereka.
 
 Castopod is easy to install and was built on top of
 [CodeIgniter4](https://codeigniter.com/), a powerful PHP framework with a very
@@ -15,27 +15,28 @@ small footprint.
 
 ::: info Status
 
-Castopod is currently in **beta** but already quite stable and used by
-podcasters around&nbsp;the&nbsp;world!
+Castopod saat ini masih dalam fase **beta** namun sudah cukup stabil dan telah
+digunakan oleh pembuat siniar di seluruh dunia!
 
 :::
 
 <div class="flex items-center">
-  <a href="/getting-started/install" class="inline-flex items-center px-4 py-2 mx-auto font-semibold text-center text-white rounded-full shadow gap-x-1 bg-pine-500 hover:no-underline hover:bg-pine-600">Install<svg viewBox="0 0 24 24" width="1em" height="1em" class="text-xl text-pine-200"><path fill="currentColor" d="m16.172 11-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg></a>
+  <a href="/getting-started/install" class="inline-flex items-center px-4 py-2 mx-auto font-semibold text-center text-white rounded-full shadow gap-x-1 bg-pine-500 hover:no-underline hover:bg-pine-600">Pasang<svg viewBox="0 0 24 24" width="1em" height="1em" class="text-xl text-pine-200"><path fill="currentColor" d="m16.172 11-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg></a>
 </div>
 
-## Features
+## Fitur-fitur
 
-- 🌱 &nbsp;Free & open-source (AGPL v3 License)
+- 🌱 &nbsp;Gratis & sumber terbuka (Lisensi AGPL v3)
 - 🔐 &nbsp;Focused on data sovereignty: your content, audience, and analytics
   belong to you, and&nbsp;you&nbsp;only
 - 🪄 &nbsp;Podcasting 2.0 features: GUID, locked, transcripts, funding,
   chapters, location, persons, soundbites, …
-- 💬 &nbsp;Built-in social network:
-  - 🚀 &nbsp;Castopod is part of the Fediverse, a decentralized social network
+- 💬 &nbsp;Jaringan sosial bawaan:
+  - 🚀 &nbsp;Castopod termasuk bagian dari Fediverse, jaringan sosial
+    terdesentralisasi
   - ❤️ &nbsp;Create posts, share, favourite, and comment on episodes
-- 📈 &nbsp;Built-in analytics:
-  - ⚖️ &nbsp;GDPR / CCPA / LGPD compliant
+- 📈 &nbsp;Analitik bawaan:
+  - ⚖️ &nbsp;Sesuai dengan GDPR / CCPA / LGPD
   - 🪙 &nbsp;Standard IABv2 audience measurement
   - 🏡 &nbsp;On-premises analytics, no third party involved
 - 📢 &nbsp;Built-in marketing tools:
@@ -49,7 +50,7 @@ podcasters around&nbsp;the&nbsp;world!
   - 🔗 &nbsp;Funding links
   - 📲 &nbsp;listen-to-click ads
   - 🤝 &nbsp;value4value / WebMonetization
-- 📡 &nbsp;Publish your episodes everywhere with RSS:
+- 📡 &nbsp;Terbitkan episode-episode Anda dimana pun dengan RSS:
   - 📱 &nbsp;On all indexes and apps: Podcast Index, Apple Podcasts, Spotify,
     Google Podcasts, Deezer, Podcast Addict, Podfriend, …
   - ⚡ &nbsp;Broadcast your episodes instantly with WebSub
@@ -61,7 +62,7 @@ podcasters around&nbsp;the&nbsp;world!
   Brazilian Portuguese & Spanish… with
   [more to come](https://translate.castopod.org)!
 
-## Motivation
+## Motivasi
 
 The podcasting ecosystem is decentralized by nature: you can create your podcast
 as an RSS file, publish it on the web and have it shared everywhere online.
@@ -83,18 +84,18 @@ This project is pushed by the open-source community, and specifically by the
 [Fediverse](https://fediverse.party/en/fediverse/) and
 [Podcasting 2.0](https://podcastindex.org/) movements.
 
-## Comparison with other solutions
+## Perbandingan dengan solusi lain
 
-We believe that a solution is not necessarily right for everyone, it highly
-depends on your needs. So, here are comparisons with other tools to help you to
-gauge whether Castopod is the right fit for&nbsp;you.
+Kami percaya bahwa tidak semua solusi sesuai untuk semua orang, ini sangat
+bergantung pada kebutuhan Anda. Jadi, inilah perbandingan dengan alat-alat lain
+untuk membantu Anda untuk mengetahui apa Castopod sesuai untuk&nbsp;Anda.
 
 ### Castopod vs Wordpress
 
-Castopod is often referred to as "the Wordpress for podcasts" because of the
-similarities between the two. In some ways this is true. And actually, Castopod
-was greatly inspired by the Wordpress ecosystem, seeing the ease of adoption
-from the community and the number of websites running&nbsp;it.
+Castopod sering disebut sebagai "Wordpress-nya siniar" karena kemiripan antara
+Castopod dan Wordpress. In some ways this is true. And actually, Castopod was
+greatly inspired by the Wordpress ecosystem, seeing the ease of adoption from
+the community and the number of websites running&nbsp;it.
 
 Just like Wordpress, Castopod is free & open source, built using PHP with a
 MySQL database and is packaged in a way that you can easily install on most web
@@ -117,9 +118,9 @@ side as they share the same requirements!
 
 ### Castopod vs Funkwhale
 
-Funkwhale is a self-hosted, modern free and open-source music server. Just as
-Castopod, Funkwhale is on the fediverse, a decentralized social network allowing
-interoperability between the two.
+Funkwhale adalah server musik modern yang dihosting sendiri, gratis dan sumber
+terbuka. Just as Castopod, Funkwhale is on the fediverse, a decentralized social
+network allowing interoperability between the two.
 
 Funkwhale was initially built around music. And later on, as the project
 evolved, the ability to host podcasts was introduced.
@@ -151,10 +152,9 @@ That being said, there are two main differences with other podcasting solutions:
   social network with ActivityPub as well as many of the podcasting 2.0
   features, hoping to bridge the gap between the two.
 
-## Contributing
+## Berkontribusi
 
-Love Castopod and would like to help? Take a look at the following documentation
-to get you&nbsp;started.
+Suka Castopod dan ingin membantu? Lihat dokumentasi berikut untuk mulai.
 
 ### Code of conduct
 
@@ -163,13 +163,13 @@ adhere to. Please read the
 [CODE_OF_CONDUCT manual](https://code.castopod.org/adaures/castopod/-/blob/beta/CODE_OF_CONDUCT.md)
 so that you can understand what actions will and will not be&nbsp;tolerated.
 
-### Contributing guide
+### Panduan berkontribusi
 
 Read our [contributing guide](./contributing/guidelines.md) to learn about our
 development process, how to propose bugfixes and improvements, and how to build
 and test your changes to Castopod.
 
-## Contributors ✨
+## Kontributor-kontributor ✨
 
 Thanks goes to these wonderful people
 ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -241,9 +241,10 @@ This project follows the
 [all-contributors](https://github.com/all-contributors/all-contributors)
 specification. Contributions of any kind welcome!
 
-## Contact
+## Kontak
 
-You may reach us for help or ask any question you have on:
+Anda dapat menghubungi kami untuk mendapatkan bantuan atau untuk menanyakan
+pertanyaan di:
 
 - [Discord](https://castopod.org/discord) (for direct interaction with
   developers and the community)
@@ -258,22 +259,22 @@ Castopod:
 - [LinkedIn](https://linkedin.com/company/castopod)
 - [Facebook](https://www.facebook.com/castopod)
 
-## Sponsors
+## Sponsor-sponsor
 
 The ongoing development of Castopod is made possible with the support of its
 backers. If you'd like to help, please consider
 [sponsoring Castopod's development](https://opencollective.com/castopod/contribute).
 
 <div class="flex flex-wrap gap-x-16 gap-y-8">
-  <a href="https://adaures.com/" target="_blank" rel="noopener noreferrer"><img src="/images/sponsors/adaures.svg" alt="Ad Aures Logo" class="h-16" /></a>
-  <a href="https://nlnet.nl/project/Castopod/" target="_blank" rel="noopener noreferrer"><img src="/images/sponsors/nlnet.svg" alt="NLnet Logo" class="h-16" /></a>
+  <a href="https://adaures.com/" target="_blank" rel="noopener noreferrer"><img src="/images/sponsors/adaures.svg" alt="Logo Ad Aures" class="h-16" /></a>
+  <a href="https://nlnet.nl/project/Castopod/" target="_blank" rel="noopener noreferrer"><img src="/images/sponsors/nlnet.svg" alt="Logo NLnet" class="h-16" /></a>
 </div>
 
-## License
+## Lisensi
 
 [GNU Affero General Public License v3.0](https://choosealicense.com/licenses/agpl-3.0/)
 
-Copyright © 2020-present, [Ad Aures](https://adaures.com/).
+Hak Cipta © 2020-sekarang, [Ad Aures](https://adaures.com/).
 https://img.shields.io/gitlab/v/release/2?color=brightgreen&gitlab_url=https%3A%2F%2Fcode.castopod.org%2F&include_prereleases&label=release
 https://img.shields.io/github/license/ad-aures/castopod?color=blue
 https://img.shields.io/badge/contributions-welcome-brightgreen.svg

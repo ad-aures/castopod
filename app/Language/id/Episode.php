@@ -9,25 +9,23 @@ declare(strict_types=1);
  */
 
 return [
-    'season' => 'Season {seasonNumber}',
+    'season' => 'Musim {seasonNumber}',
     'season_abbr' => 'S{seasonNumber}',
     'number' => 'Episode {episodeNumber}',
-    'number_abbr' => 'Ep. {episodeNumber}',
-    'season_episode' => 'Season {seasonNumber} episode {episodeNumber}',
+    'number_abbr' => 'Eps. {episodeNumber}',
+    'season_episode' => 'Musim {seasonNumber} episode {episodeNumber}',
     'season_episode_abbr' => 'S{seasonNumber}:E{episodeNumber}',
     'persons' => '{personsCount, plural,
-        one {# person}
-        other {# persons}
+        other {# orang}
     }',
-    'persons_list' => 'Persons',
-    'back_to_episodes' => 'Back to episodes of {podcast}',
-    'comments' => 'Comments',
-    'activity' => 'Activity',
-    'description' => 'Episode description',
+    'persons_list' => 'Orang',
+    'back_to_episodes' => 'Kembali ke episode-episode pada {podcast}',
+    'comments' => 'Komentar',
+    'activity' => 'Aktivitas',
+    'description' => 'Keterangan episode',
     'number_of_comments' => '{numberOfComments, plural,
-        one {# comment}
-        other {# comments}
+        other {# komentar}
     }',
-    'all_podcast_episodes' => 'All podcast episodes',
-    'back_to_podcast' => 'Go back to podcast',
+    'all_podcast_episodes' => 'Semua episode siniar',
+    'back_to_podcast' => 'Kembali ke siniar',
 ];

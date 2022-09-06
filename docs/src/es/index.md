@@ -2,180 +2,191 @@
 sidebarDepth: 2
 ---
 
-# Bienvenido 👋
+# Bienvenid@ 👋
 
 [![release-badge]][release]&nbsp;[![license-badge]][license]&nbsp;[![contributions-badge]][contributions]&nbsp;[![semantic-release-badge]][semantic-release]&nbsp;[![crowdin-badge]][crowdin]&nbsp;[![discord-badge]][discord]&nbsp;[![stars-badge]][stars]
 
-Castopod es una plataforma de alojamiento libre & de código abierto hecha para
-podcasters que quieren comprometerse e interactuar con su audiencia.
+Castopod es una plataforma gratuita y de código abierto para hospedar podcasts
+hecha para podcasters que quieren involucrar e interactuar más con su audiencia.
 
-Castopod es fácil de instalar y se construyó sobre
-[CodeIgniter4](https://codeigniter.com/), un potente framework PHP con un muy
-pequeña huella.
+Castopod es fácil de instalar y se ha desarrollado sobre
+[CodeIgniter4](https://codeigniter.com/), un potente y muy ligero framework PHP.
 
-::: Estado de información
+::: info Estado del desarrollo
 
-Castopod está actualmente en **beta** pero ya es bastante estable y es utilizado
-por podcasters alrededor de&nbsp;el mundo!
+Castopod actualmente está en **beta** pero ya es bastante estable y está sinedo
+utilizado por podcasters alrededor del mundo.
 
 :::
 
 <div class="flex items-center">
-  <a href="/getting-started/install" class="inline-flex items-center px-4 py-2 mx-auto font-semibold text-center text-white rounded-full shadow gap-x-1 bg-pine-500 hover:no-underline hover:bg-pine-600">Instalar<svg viewBox="0 0 24 24" width="1em" height="1em" class="text-xl text-pine-200"><path fill="currentColor" d="m16.172 11-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg></a>
+  <a href="/getting-started/install" class="inline-flex items-center px-4 py-2 mx-auto font-semibold text-center text-white rounded-full shadow gap-x-1 bg-pine-500 hover:no-underline hover:bg-pine-600">Instalación<svg viewBox="0 0 24 24" width="1em" height="1em" class="text-xl text-pine-200"><path fill="currentColor" d="m16.172 11-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg></a>
 </div>
 
 ## Características
 
-- 🌱 &nbsp;Gratis & de código abierto (AGPL v3 Licencia)
-- 🔐 &nbsp;Centrado en la soberanía de los datos: su contenido, audiencia, y
-  analíticas le pertenecen a usted, y solo a &nbsp;usted&nbsp;
-- 🪄 &nbsp;Podcasting 2.0 features: GUID, locked, transcripts, funding,
-  chapters, location, persons, soundbites, …
-- :speech \_balloon: &nbsp;Red social integrada:
+- 🌱 &nbsp;Gratis & de código abierto (licencia AGPL v3).
+- 🔐 &nbsp;Centrado en la soberanía de los datos: tu contenido, tu audiencia, y
+  tus estadísticas te pertenecen a ti y solo a ti.
+- 🪄 &nbsp;Funciones de Podcasting 2.0: GUID (interfaz gráfica de usuario),
+  protección y bloqueo del podcast, transcripciones, monetización, episodios,
+  geo-localización, personas, fragmentos de audio, …
+- 💬 &nbsp;Integración con redes sociales:
   - 🚀 &nbsp;Castopod es parte del Fediverso, una red social descentralizada
-  - ❤️ &nbsp;Crear mensajes, compartir, favoritos y comentarios en episodios
-- 📈 &nbsp;Análisis integrados:
+  - ❤️ &nbsp;Se puede crear mensajes, compartir, agregar a favoritos y comentar
+    en episodios
+- 📈 &nbsp;Análisis estadísticos integrados:
   - ⚖️ &nbsp;Compatible con GDPR / CCPA / LGPD
-  - &nbsp;Medida estándar de audiencia IABv2
-  - 🏡 &nbsp;Estadísticas sin terceros involucrados
+  - 🪙 &nbsp;Medida de audiencia con el estándar IABv2
+  - 🏡 &nbsp;Estadísticas sin terceras partes involucradas
 - 📢 &nbsp;Herramientas de marketing incorporadas:
-  - ✅ &nbsp;SEO listo (meta-etiquetas de open-graph, JSON-LD, …)
-  - 📱 &nbsp;PWA: instalar como una aplicación independiente
-  - 🎨 &nbsp;Colores del tema personalizables
-  - 🎬 &nbsp;Genera videoclips listos para compartir a partir de episodios
-  - 🔉 &nbsp;Genera fragmentos de sonido
-  - ▶️ &nbsp;Reproductor incrustable, inserta tus episodios en cualquier sitio
-    web
+  - ✅ &nbsp;Listo para SEO (meta-etiquetas de open-graph, JSON-LD, …)
+  - 📱 &nbsp;PWA: instalable como una aplicación independiente
+  - 🎨 &nbsp;Personalizar los colores del tema
+  - 🎬 &nbsp;Generar recortes de vídeo listos para compartir, a partir de tus
+    episodios
+  - 🔉 &nbsp;Generar fragmentos de audio (Soundbites) para la promoción de tus
+    episodios.
+  - ▶️ &nbsp;Reproductor incrustable, con el que insertar tus episodios en
+    cualquier sitio web!
 - 💸 &nbsp;Monetización:
   - 🔗 &nbsp;Enlaces de financiación
-  - 📲 &nbsp;anuncios de click para escuchar
-  - 🤝 &nbsp;valor por valor/ Monetización web
+  - 📲 &nbsp;Anuncios publicitarios del tipo click-para-escuchar
+  - 🤝 &nbsp;value4value / WebMonetization (criptomonedas para creadores de
+    contenido).
 - 📡 &nbsp;Publica tus episodios en todas partes con RSS:
   - 📱 &nbsp;En todos los directorios y aplicaciones: Podcast Index, Apple
     Podcasts, Spotify, Google Podcasts, Deezer, Podcast Addict, Podfriend, …
-  - ⚡ &nbsp;Emite tus episodios al instante con WebSub
-- 📥 &nbsp;Importación de Podcast: mueve tu podcast existente a Castopod
-- 📤 &nbsp;Mueve tu podcast fuera de Castopod
-- 🔀 &nbsp;Multi-podcast: alojar tantos podcasts como quieras
-- 👥 &nbsp;Multi-usuario: añadir colaboradores y establecer roles
-- 🌎 &nbsp;i18n support: translated in English, French, Polish, German,
-  Brazilian Portuguese & Spanish… with
-  [more to come](https://translate.castopod.org)!
+  - ⚡ &nbsp;Emite tus episodios al instante con WebSub.
+- 📥 &nbsp;Importación de podcasts: mueve tu podcast existente en otro servicio
+  a tu servidor Castopod.
+- 📤 &nbsp;Mueve tu podcast fuera de Castopod.
+- 🔀 &nbsp;Multi-podcast: aloja tantos podcasts como quieras en una misma
+  instancia/panel de CASTOPOD.
+- 👥 &nbsp;Multi-usuario: añade colaboradores y define roles.
+- 🌎 &nbsp;Soporte multilingüe i18n: traducido al Inglés, Francés, Polaco,
+  Alemán, Portugués brasileño, Español, Noruego, … ¡y
+  [más por venir](https://translate.castopod.org)!
 
 ## Motivación
 
-El ecosistema de podcasting está descentralizado por naturaleza: puedes crear tu
+El ecosistema de podcasting es descentralizado por naturaleza: puedes crear tu
 podcast como un archivo RSS, publicarlo en la web y compartirlo en todas partes.
 
 De hecho, es uno de los únicos medios de comunicación que se han mantenido así
 durante mucho tiempo.
 
-A medida que los usos evolucionan, más y más personas se involucran en los
-podcasts: ya sea que son los creadores que encuentran nuevas formas de compartir
-sus ideas, o los oyentes en busca para un mejor contenido.
+A medida que los usos evolucionan, más y más personas se introducen en el mundo
+del podcast: ya sea que sean creadores que buscando nuevas formas de compartir
+sus ideas, u oyentes en busca de mejores contenidos.
 
-Con el uso más amplio del podcast, algunas empresas están intentando desplazarlo
-hacia un medio más controlado y centralizado.
+A medida que aumenta el uso del podcast, algunas empresas están tratando de
+convertirlo en un medio más controlado y centralizado.
 
-Castopod fue creado en un esfuerzo por proporcionar una alternativa abierta y
-sostenible. para alojar sus podcasts, promover la descentralización para
-garantizar que los podcasters y su creatividad pueda expresarse.
+Castopod fue creado en un esfuerzo por aportar una alternativa abierta y
+sostenible para alojar tus podcasts, promoviendo la descentralización y así
+garantizar que los podcasters y su creatividad pueda expresarse sin
+restricciones.
 
-Este proyecto es promovido por la comunidad de código abierto, y específicamente
-por los movimientos [Fediverso](https://fediverse.party/en/fediverse/) y
+Este proyecto goza del apoyo de la comunidad de código abierto, y
+específicamente de los movimientos del
+[Fediverso](https://fediverse.party/en/fediverse/) y el
 [Podcasting 2.0](https://podcastindex.org/).
 
 ## Comparación con otras soluciones
 
-Creemos que una solución no es necesariamente adecuada para todos, ya que
-depende de tus necesidades. Por lo tanto, aquí hay comparaciones con otras
-herramientas para ayudarte a medir si Castopod es el adecuado para&nbsp;ti.
+Creemos que una misma solución no es necesariamente adecuada para todos, ya que
+depende de las necesidades de cada quien. Por lo tanto, vamos a comparar
+Castopod con otras herramientas para ayudarte a medir si es el más adecuado para
+ti.
 
-### Castopod contra Wordpress
+### Castopod vs. Wordpress
 
-Castopod se denomina a menudo "el Wordpress para podcasts" debido a las
-similitudes entre ambos. En cierto modo esto es cierto. Y en realidad, Castopod
-se inspiró en gran medida en el ecosistema de Wordpress, viendo la facilidad de
-adopción de la comunidad y el número de sitios web que funcionan&nbsp;ella.
+Castopod a menudo lo llaman "el Wordpress para podcasts" debido a las
+similitudes entre ambos. En cierto modo es cierto. Y es que en realidad,
+Castopod se inspiró en gran medida en el ecosistema de Wordpress, viendo la
+facilidad de adopción de la comunidad y el número de sitios web que funcionan
+con WP.
 
-Al igual que Wordpress, Castopod es libre & de código abierto, construido usando
-PHP con una base de datos MySQL y está empaquetado de una manera que puede
-instalar fácilmente en la mayoría de servidores web.
+Al igual que Wordpress, Castopod es software libre, gratuito y de código
+abierto, construido con PHP y una base de datos MySQL, y empaquetado de una
+manera que puede instalar fácilmente en la mayoría de los servidores web.
 
-Wordpress ofrece una gran manera de crear su sitio web y extenderlo con plugins
-para obtener lo que quiere. Es un CMS completo que lo ayuda a obtener cualquier
-tipo de sitio web en línea.
+Wordpress ofrece una buena manera de crear tu sitio web y extenderlo con plugins
+para obtener lo que quieres. Es un CMS completo que te ayuda a tener en línea
+cualquier tipo de sitio web.
 
-Por otro lado, Castopod está pensado para abordar las necesidades de los
-podcasters específicamente, centrándose en el podcasting y nada más. No
-necesitas ningún plugin para empezar con tu podcasting&nbsp;journey.
+Por otro lado, Castopod está pensado para atender específicamente las
+necesidades de los podcasters, centrándose en el podcasting y nada más. No
+necesitas ningún plugin para empezar con tu viaje por el mundo del podcast.
 
 Esto permite optimizar los procesos específicos del podcasting: desde la
 creación de tus podcasts y la publicación de nuevos episodios hasta la
-transmisión, marketing y análisis.
+transmisión, marketing y análisis estadístico.
 
-Por último, dependiendo de sus necesidades, Wordpress y Castopod incluso puede
-vivir lado a lado ya que comparten los mismos requisitos!
+Por último, dependiendo de sus necesidades, Wordpress y Castopod incluso pueden
+convivir codo con codo en el mismo servidor, ¡ya que comparten los mismos
+requisitos!
 
-### Castopod vs Funkwhale
+### Castopod vs. Funkwhale
 
-Funkwhale es un servidor de música autoalojado, moderno y gratuito y de código
-abierto. Así como Castopod, Funkwhale está en el fediverso, una red social
-descentralizada que permite interoperabilidad entre ambos.
+Funkwhale es un servidor de música auto-hospedado, moderno y gratuito y de
+código abierto. Igual que Castopod, Funkwhale está en el fediverso, una red
+social descentralizada, permitiendo la interoperabilidad entre ambos.
 
-Funkwhale se construyó inicialmente en torno a la música. Y más adelante, al
+Funkwhale se desarrolló inicialmente en torno a la música. Y más adelante, al
 evolucionar como proyecto, se introdujo la capacidad de alojar podcasts.
 
-A diferencia de Funkwhale, Castopod ha sido diseñado y construido exclusivamente
-en torno al podcasting. Esto permite una implementación más fácil para
-características relacionadas con el ecosistema de podcasting , tales como las
-características de podcasting 2.0 (transcripciones, capítulos, ubicaciones,
-personas, …).
+A diferencia de Funkwhale, Castopod ha sido diseñado y desarrollado
+exclusivamente para el podcasting. Esto permite una implementación más fácil
+para funciones relacionadas con el ecosistema del podcasting, tales como las del
+podcasting 2.0 (transcripciones, episodios, geo-localizaciones, personas, …).
 
 Por lo tanto, probablemente deberías usar Funkwhale si quieres alojar tu música
 y usar Castopod si quieres alojar tus podcasts.
 
-### Castopod vs otras plataformas de podcast
+### Castopod vs. otras plataformas de podcast
 
-Hay muchas soluciones para que usted aloje sus podcasts, algunos de los cuales
-son realmente geniales y [muchos de ellos](https://podcastindex. org/apps) están
-saltando al vagón del Podcasting 2.0, como Castopod!
+Hay muchas soluciones para alojar tus podcasts, algunas de las cuales son
+realmente geniales y [muchas de ellas](https://podcastindex. org/apps) están
+dando el salto al tren del Podcasting 2.0, ¡como ya ha hecho Castopod!
 
-Cada una de estas soluciones difiere entre sí, puedes comparar con la
+Cada una de estas soluciones difiere entre sí, puedes compararlas en esta
 [lista de características](#features).
 
 Dicho esto, hay dos diferencias principales con otras soluciones de podcasting:
 
-- Castopod puede ser autoalojado y es la única solución que te permite mantener
-  control completo sobre lo que produces. También, como es de código abierto,
-  puedes incluso personalizarlo como desees.
+- Castopod puede ser auto-hospedado en tu propio servidor y es la única solución
+  que te permite mantener un control completo sobre los contenidos que produces.
+  También, como es de código abierto, puedes incluso personalizarlo como desees
+  y necesites.
 
-- Castopod es la única solución que actualmente integra tanto una red social
-  descentralizada con ActivityPub como muchas de las características del
-  podcasting 2.0, con la esperanza de cerrar la brecha entre ambos.
+- Castopod es la única solución que hasta el momento integra tanto una red
+  social descentralizada con ActivityPub así como muchas de las características
+  del podcasting 2.0, con la esperanza de cerrar la brecha entre ambos.
 
-## Contribuciones
+## Cómo colaborar
 
-¿Te encanta Castopod y te gustaría ayudar? Eche un vistazo a la siguiente
-documentación para que usted&nbsp;comience.
+¿Te encanta Castopod y te gustaría ayudar? Echa un vistazo a la siguiente
+documentación para que puedas empezar.
 
 ### Código de conducta
 
-Castopod ha adoptado un Código de Conducta que esperamos que los participantes
-del proyecto cumplan. Por favor, lea el
-[manual CODE_OF_CONDUCT](https://code.castopod.org/adaures/castopod/-/blob/beta/CODE_OF_CONDUCT.md)
-para que pueda entender qué acciones serán y no serán&nbsp;toleradas.
+Castopod ha adoptado un Código de Conducta al que esperamos que los
+participantes del proyecto se adhieran. Por favor, lea el
+[manual del CÓDIGO DE CONDUCTA](https://code.castopod.org/adaures/castopod/-/blob/beta/CODE_OF_CONDUCT.md)
+para que pueda entender qué acciones serán y no serán toleradas.
 
-### Guía de Contribución
+### Guía para colaborar
 
-Lee nuestra [guía de contribución](./contributing/guidelines.md) para aprender
-más sobre nuestro proceso de desarrollo. cómo proponer correcciones de errores y
-mejoras, y cómo compilar y probar sus cambios en Castopod.
+Lee nuestra [guía para colaborar](./contributing/guidelines.md) para aprender
+más sobre nuestro proceso de desarrollo, cómo proponer correcciones de errores y
+sugerir mejoras, y cómo compilar y probar tus cambios en Castopod.
 
-## Contributors ✨
+## Colaboradores ✨
 
-Thanks goes to these wonderful people
-([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+Los agradecimientos van a estas estupendas personas
+([clave emoji](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -240,43 +251,43 @@ Thanks goes to these wonderful people
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-This project follows the
-[all-contributors](https://github.com/all-contributors/all-contributors)
-specification. Contributions of any kind welcome!
+Este proyecto sigue la especificación
+[all-contributors](https://github.com/all-contributors/all-contributors). ¡Son
+bienvenidas colaboraciones de cualquier tipo!
 
-## Contact
+## Contacto
 
-You may reach us for help or ask any question you have on:
+Puedes contactarnos para ayuda o hacer cualquier pregunta que tengas en:
 
 - [Discord](https://castopod.org/discord) (para interacción directa con
   desarrolladores y la comunidad)
-- [Rastreador de problemas](https://code.castopod.org/adaures/castopod/-/issues)
-  (para solicitudes de características & informes de errores)
+- [Seguimiento de incidencias](https://code.castopod.org/adaures/castopod/-/issues)
+  (para informar de errores y solicitar nuevas funcionalidades)
 
-Alternatively, you can follow us on social media platforms to get news about
-Castopod:
+También puedes seguirnos en redes sociales para obtener noticias sobre Castopod:
 
-- [podlibre.social](https://podlibre.social/@Castopod) (Instancia de Mastodon)
-- [Twitter](https://twitter.com/castopod)
-- [LinkedIn](https://linkedin.com/company/castopod)
-- [Facebook](https://www.facebook.com/castopod)
+- [podlibre.social](https://podlibre.social/@castopod) (instancia de Mastodon)
+- [[Twitter](https://twitter.com/castopod)](https://twitter.com/castopod)
+- [[LinkedIn](https://linkedin.com/company/ad-aures)](https://linkedin.com/company/castopod)
+- [Facebook (próximamente?)](https://www.facebook.com/castopod)
 
-## Sponsors
+## Patrocinadores
 
-The ongoing development of Castopod is made possible with the support of its
-backers. If you'd like to help, please consider
-[sponsoring Castopod's development](https://opencollective.com/castopod/contribute).
+El desarrollo en curso de Castopod es posible gracias al apoyo de sus
+patrocinadores. Si quieres ayudar, por favor considera
+[cooperar económicamente](https://opencollective.com/castopod/contribute) con el
+desarrollo de Castopod.
 
 <div class="flex flex-wrap gap-x-16 gap-y-8">
   <a href="https://adaures.com/" target="_blank" rel="noopener noreferrer"><img src="/images/sponsors/adaures.svg" alt="Logo de Ad Aures" class="h-16" /></a>
   <a href="https://nlnet.nl/project/Castopod/" target="_blank" rel="noopener noreferrer"><img src="/images/sponsors/nlnet.svg" alt="Logo de NLnet" class="h-16" /></a>
 </div>
 
-## License
+## Licencia
 
 [GNU Affero General Public License v3.0](https://choosealicense.com/licenses/agpl-3.0/)
 
-Copyright © 2020-present, [Ad Aures](https://adaures.com/).
+Copyright © 2020-presente, [Ad Aures](https://adaures.com/).
 https://img.shields.io/gitlab/v/release/2?color=brightgreen&gitlab_url=https%3A%2F%2Fcode.castopod.org%2F&include_prereleases&label=release
 https://img.shields.io/github/license/ad-aures/castopod?color=blue
 https://img.shields.io/badge/contributions-welcome-brightgreen.svg

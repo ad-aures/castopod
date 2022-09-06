@@ -9,20 +9,20 @@ declare(strict_types=1);
  */
 
 return [
-    'home' => 'Admin dashboard',
-    'welcome_message' => 'Welcome to the admin area!',
+    'home' => 'Panel de control',
+    'welcome_message' => '¡Bienvenid@ al área de administración!',
     'podcasts' => [
         'title' => 'Podcasts',
-        'not_found' => 'No published podcast',
-        'last_published' => 'Last published on {lastPublicationDate}',
+        'not_found' => 'Podcasts sin publicar',
+        'last_published' => 'Últimas publicaciones en {lastPublicationDate}',
     ],
     'episodes' => [
-        'title' => 'Episodes',
-        'not_found' => 'No published episode',
-        'last_published' => 'Last published on {lastPublicationDate}',
+        'title' => 'Episodios',
+        'not_found' => 'Episodios sin publicar',
+        'last_published' => 'Últimas publicaciones en {lastPublicationDate}',
     ],
     'storage' => [
-        'title' => 'Storage',
-        'subtitle' => '{totalUploaded} out of {totalStorage}',
+        'title' => 'Almacenamiento',
+        'subtitle' => '{totalUploaded} de {totalStorage}',
     ],
 ];

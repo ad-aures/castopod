@@ -93,15 +93,15 @@ return [
             'Your file size is too big! Max size is {0}. Increase the `memory_limit`, `upload_max_filesize` and `post_max_size` values in your php configuration file then restart your web server to upload your file.',
         'audio_file' => 'Zvukový súbor',
         'audio_file_hint' => 'Vyberte zvukový súbor .mp3, alebo .m4a.',
-        'info_section_title' => 'Episode info',
-        'cover' => 'Episode cover',
+        'info_section_title' => 'Informácie o časti',
+        'cover' => 'Obal k časti',
         'cover_hint' =>
             'If you do not set a cover, the podcast cover will be used instead.',
         'cover_size_hint' => 'Cover must be squared and at least 1400px wide and tall.',
-        'title' => 'Title',
+        'title' => 'Názov',
         'title_hint' =>
             'Should contain a clear and concise episode name. Do not specify the episode or season numbers here.',
-        'permalink' => 'Permalink',
+        'permalink' => 'Trvalý odkaz',
         'season_number' => 'Season',
         'episode_number' => 'Epizóda',
         'type' => [
@@ -118,7 +118,7 @@ return [
             'hint' => 'Does the episode contain explicit content?',
             'undefined' => 'undefined',
             'clean' => 'Clean',
-            'explicit' => 'Explicit',
+            'explicit' => 'Chúlostivé',
         ],
         'show_notes_section_title' => 'Show notes',
         'show_notes_section_subtitle' =>
