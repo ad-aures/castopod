@@ -495,6 +495,42 @@
       "contributions": [
         "ideas"
       ]
+    },
+    {
+      "login": "irithys",
+      "name": "irithys",
+      "avatar_url": "https://crowdin-static.downloads.crowdin.com/avatar/15405614/large/e46d7f8e9f7c05997827563c3a3cf942.jpeg",
+      "profile": "https://im.irithys.com/@thy",
+      "contributions": [
+        {
+          "type": "translation",
+          "url": "https://translate.castopod.org"
+        }
+      ]
+    },
+    {
+      "login": "caos30",
+      "name": "Sergi",
+      "avatar_url": "https://castopod.org/assets/images/castopod-avatar.jpg",
+      "profile": "https://twitter.com/caos30",
+      "contributions": [
+        {
+          "type": "translation",
+          "url": "https://translate.castopod.org"
+        }
+      ]
+    },
+    {
+      "login": "ghose",
+      "name": "ghose (XoseM)",
+      "avatar_url": "https://crowdin-static.downloads.crowdin.com/avatar/12617257/large/a201650da44fed28890b0e0d8477a663.jpg",
+      "profile": "https://crowdin.com/profile/xosem",
+      "contributions": [
+        {
+          "type": "translation",
+          "url": "https://translate.castopod.org"
+        }
+      ]
     }
   ],
   "commitConvention": "none"
