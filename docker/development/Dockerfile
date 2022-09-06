@@ -65,4 +65,4 @@ RUN apt-get update \
          "upload_max_filesize = 500M\n" \
          "post_max_size = 512M\n" \
          "max_execution_time = 300\n" \
-         > /usr/local/etc/php/conf.d/uploads.ini \
+         > /usr/local/etc/php/conf.d/uploads.ini

@@ -7,7 +7,7 @@
   "license": "AGPL-3.0-or-later",
   "require": {
     "php": "^8.0",
-    "codeigniter4/framework": "v4.2.5",
+    "codeigniter4/framework": "v4.2.6",
     "james-heinrich/getid3": "^2.0.x-dev",
     "whichbrowser/parser": "^v2.1.7",
     "geoip2/geoip2": "v2.13.0",
@@ -30,7 +30,7 @@
     "phpunit/phpunit": "^9.5.24",
     "captainhook/captainhook": "^5.10.11",
     "symplify/easy-coding-standard": "^10.3.3",
-    "phpstan/phpstan": "^1.8.2",
+    "phpstan/phpstan": "^1.8.4",
     "rector/rector": "^0.12.23",
     "symplify/coding-standard": "^10.3.3"
   },

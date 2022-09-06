@@ -10,7 +10,6 @@
   "postAttachCommand": "crontab ./crontab && service cron reload",
   "shutdownAction": "stopCompose",
   "settings": {
-    "terminal.integrated.defaultProfile.linux": "bash",
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "[php]": {
