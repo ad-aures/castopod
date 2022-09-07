@@ -48,7 +48,7 @@ class Actor extends FediverseActor
             return $this->podcast->cover->thumbnail_url;
         }
 
-        return $this->attributes['avatar_image_url'];
+        return parent::getAvatarImageUrl();
     }
 
     public function getAvatarImageMimetype(): string
@@ -57,6 +57,6 @@ class Actor extends FediverseActor
             return $this->podcast->cover->thumbnail_mimetype;
         }
 
-        return $this->attributes['avatar_image_mimetype'];
+        return parent::getAvatarImageMimetype();
     }
 }

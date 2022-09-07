@@ -23,6 +23,10 @@ class Fediverse extends FediverseBaseConfig
      */
     public string $noteObject = NoteObject::class;
 
+    public string $defaultAvatarImagePath = 'media/castopod-avatar_thumbnail.webp';
+
+    public string $defaultAvatarImageMimetype = 'image/webp';
+
     public function __construct()
     {
         parent::__construct();
