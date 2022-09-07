@@ -143,6 +143,17 @@ class UserController extends BaseController
         $authorize = Services::authorization();
 
         $roles = $this->request->getPost('roles');
+
+        if ($this->user->isOwner) {
+            return redirect()
+                ->back()
+                ->with('errors', [
+                    lang('User.messages.editOwnerError', [
+                        'username' => $this->user->username,
+                    ]),
+                ]);
+        }
+
         $authorize->setUserGroups($this->user->id, $roles ?? []);
 
         // Success!

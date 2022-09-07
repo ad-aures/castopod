@@ -23,7 +23,6 @@
     id="roles"
     name="roles[]"
     label="<?= lang('User.form.roles') ?>"
-    required="true"
     options="<?= esc(json_encode($roleOptions)) ?>"
     selected="<?= esc(json_encode($user->roles)) ?>" />
 

@@ -30,10 +30,13 @@
         [
             'header' => lang('User.list.roles'),
             'cell' => function ($user) {
-                return implode(',', $user->roles) .
-                    '<IconButton uri="' . route_to('user-edit', $user->id) . '" glyph="edit" variant="info">' . lang('User.edit_roles', [
-                        'username' => esc($user->username),
-                    ]) . '</IconButton>';
+                if ($user->isOwner) {
+                    return 'owner, ' . implode(',', $user->roles);
+                }
+
+                return implode(',', $user->roles) . '<IconButton uri="' . route_to('user-edit', $user->id) . '" glyph="edit" variant="info">' . lang('User.edit_roles', [
+                    'username' => esc($user->username),
+                ]) . '</IconButton>';
             },
         ],
         [

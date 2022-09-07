@@ -13,6 +13,7 @@ namespace Modules\Auth\Entities;
 use App\Entities\Podcast;
 use App\Models\NotificationModel;
 use App\Models\PodcastModel;
+use App\Models\UserModel;
 use Myth\Auth\Entities\User as MythAuthUser;
 use RuntimeException;
 
@@ -31,6 +32,8 @@ use RuntimeException;
  */
 class User extends MythAuthUser
 {
+    public bool $is_owner;
+
     /**
      * @var Podcast[]|null
      */
@@ -53,6 +56,17 @@ class User extends MythAuthUser
         'podcast_id' => '?integer',
         'podcast_role' => '?string',
     ];
+
+    public function getIsOwner(): bool
+    {
+        $firstUser = (new UserModel())->first();
+
+        if (! $firstUser instanceof self) {
+            return false;
+        }
+
+        return $this->username === $firstUser->username;
+    }
 
     /**
      * Returns the podcasts the user is contributing to
