@@ -53,7 +53,7 @@ class DashboardController extends BaseController
         $appStorageLimit = config('App')
             ->storageLimit;
         if ($appStorageLimit === null || $appStorageLimit < 0) {
-            $storageLimitBytes = disk_free_space('./');
+            $storageLimitBytes = disk_total_space('./');
         } else {
             $storageLimitBytes = $appStorageLimit * 1000000000;
         }
