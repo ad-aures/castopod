@@ -3,17 +3,16 @@
 declare(strict_types=1);
 
 /**
- * @copyright  2021 Ad Aures
+ * @copyright  2022 Ad Aures
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
  */
 
-namespace App\Models;
+namespace Modules\Fediverse\Models;
 
-use App\Entities\Notification;
-use Michalsn\Uuid\UuidModel;
+use Modules\Fediverse\Entities\Notification;
 
-class NotificationModel extends UuidModel
+class NotificationModel extends BaseUuidModel
 {
     /**
      * @var string
@@ -43,5 +42,14 @@ class NotificationModel extends UuidModel
     /**
      * @var string[]
      */
-    protected $allowedFields = ['read_at'];
+    protected $allowedFields = [
+        'actor_id',
+        'target_actor_id',
+        'post_id',
+        'activity_id',
+        'type',
+        'read_at',
+        'created_at',
+        'updated_at',
+    ];
 }

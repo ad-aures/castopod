@@ -11,9 +11,9 @@ declare(strict_types=1);
 namespace Modules\Auth\Entities;
 
 use App\Entities\Podcast;
-use App\Models\NotificationModel;
 use App\Models\PodcastModel;
 use App\Models\UserModel;
+use Modules\Fediverse\Models\NotificationModel;
 use Myth\Auth\Entities\User as MythAuthUser;
 use RuntimeException;
 

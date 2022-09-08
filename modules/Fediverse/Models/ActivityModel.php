@@ -35,6 +35,16 @@ class ActivityModel extends BaseUuidModel
     /**
      * @var string[]
      */
+    protected $afterInsert = ['notify'];
+
+    /**
+     * @var string[]
+     */
+    protected $afterUpdate = ['notify'];
+
+    /**
+     * @var string[]
+     */
     protected $allowedFields = [
         'id',
         'actor_id',
@@ -115,5 +125,72 @@ class ActivityModel extends BaseUuidModel
             ->where('status', 'queued')
             ->orderBy('scheduled_at', 'ASC')
             ->findAll();
+    }
+
+    /**
+     * @param array<string, array<string|int, mixed>> $data
+     * @return array<string, array<string|int, mixed>>
+     */
+    protected function notify(array $data): array
+    {
+        $activity = (new self())->getActivityById(is_array($data['id']) ? $data['id'][0] : $data['id']);
+
+        if (! $activity instanceof Activity) {
+            return $data;
+        }
+
+        if ($activity->target_actor_id === $activity->actor_id) {
+            return $data;
+        }
+
+        // notify only if incoming activity (with status set to NULL) is created
+        if ($activity->status !== null) {
+            return $data;
+        }
+
+        if ($activity->type === 'Follow') {
+            (new NotificationModel())->insert([
+                'actor_id' => $activity->actor_id,
+                'target_actor_id' => $activity->target_actor_id,
+                'activity_id' => $activity->id,
+                'type' => 'follow',
+                'created_at' => $activity->created_at,
+            ]);
+        } elseif ($activity->type === 'Undo_Follow') {
+            (new NotificationModel())->builder()
+                ->delete([
+                    'actor_id' => $activity->actor_id,
+                    'target_actor_id' => $activity->target_actor_id,
+                    'type' => 'follow',
+                ]);
+        } elseif (in_array($activity->type, ['Create', 'Like', 'Announce'], true) && $activity->post_id !== null) {
+            (new NotificationModel())->insert([
+                'actor_id' => $activity->actor_id,
+                'target_actor_id' => $activity->target_actor_id,
+                'post_id' => $activity->post_id,
+                'activity_id' => $activity->id,
+                'type' => match ($activity->type) {
+                    'Create' => 'reply',
+                    'Like' => 'like',
+                    'Announce' => 'share',
+                },
+                'created_at' => $activity->created_at,
+            ]);
+        } elseif (in_array($activity->type, ['Undo_Like', 'Undo_Announce'], true) && $activity->post_id !== null) {
+            (new NotificationModel())->builder()
+                ->delete([
+                    'actor_id' => $activity->actor_id,
+                    'target_actor_id' => $activity->target_actor_id,
+                    'post_id' => service('uuid')
+                        ->fromString($activity->post_id)
+                        ->getBytes(),
+                    'type' => match ($activity->type) {
+                        'Undo_Like' => 'like',
+                        'Undo_Announce' => 'share',
+                    },
+                ]);
+        }
+
+        return $data;
     }
 }

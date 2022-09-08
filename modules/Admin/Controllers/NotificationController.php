@@ -10,13 +10,13 @@ declare(strict_types=1);
 
 namespace Modules\Admin\Controllers;
 
-use App\Entities\Notification;
 use App\Entities\Podcast;
-use App\Models\NotificationModel;
 use App\Models\PodcastModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\I18n\Time;
+use Modules\Fediverse\Entities\Notification;
+use Modules\Fediverse\Models\NotificationModel;
 use Modules\Fediverse\Models\PostModel;
 
 class NotificationController extends BaseController

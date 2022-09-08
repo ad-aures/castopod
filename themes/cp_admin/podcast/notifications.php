@@ -53,7 +53,6 @@
                         ], null, false),
                         'follow' => lang('Notifications.follow', [
                             'actor_username' => $actorUsernameHtml,
-                            'target_actor_username' => $targetActorUsernameHtml,
                         ], null, false),
                         default => '',
                     };

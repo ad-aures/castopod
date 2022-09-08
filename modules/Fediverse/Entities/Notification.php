@@ -8,12 +8,9 @@ declare(strict_types=1);
  * @link       https://castopod.org/
  */
 
-namespace App\Entities;
+namespace Modules\Fediverse\Entities;
 
 use Michalsn\Uuid\UuidEntity;
-use Modules\Fediverse\Entities\Activity;
-use Modules\Fediverse\Entities\Actor;
-use Modules\Fediverse\Entities\Post;
 use Modules\Fediverse\Models\ActorModel;
 use Modules\Fediverse\Models\PostModel;
 use RuntimeException;

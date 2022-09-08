@@ -65,11 +65,11 @@ class AddNotifications extends Migration
         $this->forge->addForeignKey('target_actor_id', $tablesPrefix . 'actors', 'id', '', 'CASCADE');
         $this->forge->addForeignKey('post_id', $tablesPrefix . 'posts', 'id', '', 'CASCADE');
         $this->forge->addForeignKey('activity_id', $tablesPrefix . 'activities', 'id', '', 'CASCADE');
-        $this->forge->createTable('notifications');
+        $this->forge->createTable($tablesPrefix . 'notifications');
     }
 
     public function down(): void
     {
-        $this->forge->dropTable('notifications');
+        $this->forge->dropTable(config('Fediverse')->tablesPrefix . 'notifications');
     }
 }
