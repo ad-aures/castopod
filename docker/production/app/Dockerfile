@@ -2,8 +2,8 @@ FROM docker.io/alpine:3.13 AS ffmpeg-downloader
 
 RUN apk add --no-cache curl && \
     curl https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz -o ffmpeg.tar.xz && \
-    tar -xJf ffmpeg.tar.xz && \
-    mv ffmpeg-5.0.1-amd64-static ffmpeg
+    mkdir ffmpeg && \
+    tar -xJf ffmpeg.tar.xz -C ffmpeg --strip-components 1
 
 FROM docker.io/php:8.0-fpm-alpine3.13
 
