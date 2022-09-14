@@ -207,12 +207,10 @@ class Podcast extends Entity
         }
 
         if (! $this->actor instanceof Actor) {
-            // @phpstan-ignore-next-line
             $this->actor = model(ActorModel::class, false)
                 ->getActorById($this->actor_id);
         }
 
-        // @phpstan-ignore-next-line
         return $this->actor;
     }
 
