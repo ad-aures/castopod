@@ -380,7 +380,11 @@ class PodcastImportController extends BaseController
                 $this->request->getPost('season_number') === ''
                     ? ((string) $nsItunes->season === '' ? null : (int) $nsItunes->season)
                     : (int) $this->request->getPost('season_number'),
-                'type' => property_exists($nsItunes, 'episodeType') && $nsItunes->episodeType !== null
+                'type' => property_exists($nsItunes, 'episodeType') && in_array(
+                    $nsItunes->episodeType,
+                    ['trailer', 'full', 'bonus'],
+                    true
+                )
                     ? (string) $nsItunes->episodeType
                     : 'full',
                 'is_blocked' => property_exists(
