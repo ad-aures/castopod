@@ -143,6 +143,54 @@ cache.redis.database=${CP_REDIS_DATABASE}
 EOF
 fi
 
+if [ ! -z "${CP_EMAIL_SMTP_HOST}" ]
+then
+	if [ -z "${CP_EMAIL_SMTP_USERNAME}" ]
+	then
+		echo "When CP_EMAIL_SMTP_HOST is provided, CP_EMAIL_SMTP_USERNAME must be set"
+		exit 1
+	fi
+
+	if [ -z "${CP_EMAIL_SMTP_PASSWORD}" ]
+	then
+		echo "When CP_EMAIL_SMTP_HOST is provided, CP_EMAIL_SMTP_PASSWORD must be set"
+		exit 1
+	fi
+
+	if [ -z "${CP_EMAIL_FROM}" ]
+	then
+		echo "When CP_EMAIL_SMTP_HOST is provided, CP_EMAIL_FROM must be set"
+		exit 1
+	fi
+
+	cat << EOF >> /opt/castopod/.env
+email.protocol="smtp"
+email.SMTPHost="${CP_EMAIL_SMTP_HOST}"
+email.SMTPUser=${CP_EMAIL_SMTP_USERNAME}
+email.SMTPPass=${CP_EMAIL_SMTP_PASSWORD}
+email.fromEmail=${CP_EMAIL_FROM}
+EOF
+
+	if [ ! -z "${CP_EMAIL_SMTP_PORT}" ]
+	then
+		cat << EOF >> /opt/castopod/.env
+email.SMTPPort=${CP_EMAIL_SMTP_PORT}
+EOF
+	fi
+
+	if [ ! -z "${CP_EMAIL_SMTP_CRYPTO}" ]
+	then
+		if [ "${CP_EMAIL_SMTP_CRYPTO}" != "ssl" ] && [ "${CP_EMAIL_SMTP_CRYPTO}" != "tls" ]
+		then
+			echo "CP_EMAIL_SMTP_CRYPTO must be ssl or tls"
+			exit 1
+		fi
+		cat << EOF >> /opt/castopod/.env
+email.SMTPCrypto=${CP_EMAIL_SMTP_CRYPTO}
+EOF
+	fi
+fi
+
 echo "Using config:"
 cat /opt/castopod/.env
 
