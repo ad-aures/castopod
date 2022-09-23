@@ -45,6 +45,8 @@ return [
             '{username} vil bli beden om å endra passord neste gong hen loggar inn.',
         'banSuccess' => '{username} er utestengd.',
         'unbanSuccess' => '{username} fekk sleppa inn att.',
+        'editOwnerError' =>
+            '{username} is the instance owner, you cannot edit its roles.',
         'banSuperAdminError' =>
             '{username} er superstyrar, og du stengjer ikkje ute ein superstyrar…',
         'deleteSuperAdminError' =>

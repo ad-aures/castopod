@@ -9,16 +9,16 @@ declare(strict_types=1);
  */
 
 return [
-    'persons' => 'Persons',
+    'persons' => 'أشخاص',
     'all_persons' => 'All persons',
-    'no_person' => 'Nobody found!',
-    'create' => 'Create a person',
-    'view' => 'View person',
+    'no_person' => 'لم يعثر على أحد!',
+    'create' => 'إنشاء شخص',
+    'view' => 'عرض شخص',
     'edit' => 'Edit person',
-    'delete' => 'Delete person',
+    'delete' => 'حذف شخص',
     'messages' => [
         'createSuccess' => 'Person has been successfully created!',
-        'editSuccess' => 'Person has been successfully updated!',
+        'editSuccess' => 'تم تحديث الشخص بنجاح!',
         'deleteSuccess' => 'Person has been removed!',
     ],
     'form' => [
@@ -28,12 +28,12 @@ return [
         'full_name' => 'الإسم الكامل',
         'full_name_hint' => 'This is the full name or alias of the person.',
         'unique_name' => 'Unique name',
-        'unique_name_hint' => 'Used for URLs',
+        'unique_name_hint' => 'تستخدم للروابط',
         'information_url' => 'Information URL',
         'information_url_hint' =>
             'Url to a relevant resource of information about the person, such as a homepage or third-party profile platform.',
-        'submit_create' => 'Create person',
-        'submit_edit' => 'Save person',
+        'submit_create' => 'إنشاء شخص',
+        'submit_edit' => 'حفظ الشخص',
     ],
     'podcast_form' => [
         'title' => 'Manage persons',

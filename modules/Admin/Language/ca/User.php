@@ -45,6 +45,8 @@ return [
             'Es demanarà a {username} un restabliment de contrasenya durant la següent visita.',
         'banSuccess' => '{username} ha estat bandejat.',
         'unbanSuccess' => '{username} ha estat desbandejat.',
+        'editOwnerError' =>
+            '{username} is the instance owner, you cannot edit its roles.',
         'banSuperAdminError' =>
             '{username} és un superadministrador, hom simplement no bandeja a un superadministrador...',
         'deleteSuperAdminError' =>

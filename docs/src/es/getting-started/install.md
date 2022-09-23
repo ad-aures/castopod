@@ -60,9 +60,9 @@ no cuentas con esta información, contacta con el administrador de tu servidor.
 
 #### Privilegios
 
-El usuario de la base de datos debe tener al menos estos privilegios sobre la
-base de datos para que Castopod funcione: `CREATE`, `ALTER`, `DELETE`,
-`EXECUTE`, `INDEX`, `INSERT`, `SELECT`, `UPDATE`.
+User must have at least these privileges on the database for Castopod to work:
+`CREATE`, `ALTER`, `DELETE`, `EXECUTE`, `INDEX`, `INSERT`, `SELECT`, `UPDATE`,
+`REFERENCES`, `CREATE VIEW`.
 
 ### (Opcional) FFmpeg v4.1.8 o superior para poder generar clips de vídeo (recortes de vídeo)
 

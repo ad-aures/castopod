@@ -34,16 +34,16 @@ return [
     'create' => 'Ajouter un épisode',
     'publication_status' => [
         'published' => 'Publié',
-        'with_podcast' => 'Published',
+        'with_podcast' => 'Publié',
         'scheduled' => 'Planifié',
         'not_published' => 'Non publié',
     ],
     'with_podcast_hint' => 'To be published at the same time as the podcast',
     'list' => [
         'search' => [
-            'placeholder' => 'Search for an episode',
-            'clear' => 'Clear search',
-            'submit' => 'Search',
+            'placeholder' => 'Rechercher un épisode',
+            'clear' => 'Effacer la recherche',
+            'submit' => 'Recherche',
         ],
         'number_of_episodes' => '{numberOfEpisodes, plural,
             one {# episode}
@@ -67,7 +67,7 @@ return [
         'unpublishBeforeDeleteTip' => 'You must unpublish the episode before deleting it.',
         'scheduleDateError' => 'Schedule date must be set!',
         'deletePublishedEpisodeError' => 'Please unpublish the episode before deleting it.',
-        'deleteSuccess' => 'Episode successfully deleted!',
+        'deleteSuccess' => 'L\'épisode a bien été supprimé !',
         'deleteError' => 'Failed to delete episode {type, select,
             transcript {transcript}
             chapters {chapters}
@@ -186,7 +186,7 @@ return [
         'disclaimer' =>
             "Deleting the episode will delete all media files, comments, video clips and soundbites associated with it.",
         'understand' => 'Je comprends, je veux supprimer l’épisode',
-        'submit' => 'Delete',
+        'submit' => 'Supprimer',
     ],
     'embed' => [
         'title' => 'Lecteur intégré',

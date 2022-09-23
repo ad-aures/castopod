@@ -45,6 +45,8 @@ return [
             '{username} will be prompted with a password reset upon next visit.',
         'banSuccess' => '{username} has been banned.',
         'unbanSuccess' => '{username} has been unbanned.',
+        'editOwnerError' =>
+            '{username} is the instance owner, you cannot edit its roles.',
         'banSuperAdminError' =>
             '{username} is a superadmin, one does not simply ban a superadmin…',
         'deleteSuperAdminError' =>

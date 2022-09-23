@@ -11,10 +11,10 @@ serveurs web compatibles avec PHP-MySQL.
 
 ::: tip Note
 
-We've released official Docker images for Castopod!
+Nous avons publié des images officielles Docker pour Castopod!
 
-If you prefer using Docker, you may skip this and go straight to the
-[docker documentation](./docker.md) for Castopod.
+Si vous préférez utiliser Docker, vous pouvez sauter cette partie et aller
+directement à la [documentation Docker](./docker.md) pour Castopod.
 
 :::
 
@@ -26,7 +26,8 @@ If you prefer using Docker, you may skip this and go straight to the
 
 ### PHP v8.0 ou supérieure
 
-PHP version 8.0 or higher is required, with the following extensions installed:
+PHP version 8.0 ou supérieure est requise, avec les extensions suivantes
+installées :
 
 - [intl](https://www.php.net/manual/fr/intl.requirements.php)
 - [libcurl](https://www.php.net/manual/fr/curl.requirements.php)
@@ -35,7 +36,8 @@ PHP version 8.0 or higher is required, with the following extensions installed:
   **PNG** et bibliothèques **WEBP**.
 - [exif](https://www.php.net/manual/fr/exif.installation.php)
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+De plus, assurez-vous que les extensions suivantes sont activées dans votre PHP
+:
 
 - json (activé par défaut - ne le désactivez pas)
 - xml (activé par défaut - ne pas le désactiver)
@@ -47,25 +49,28 @@ Additionally, make sure that the following extensions are enabled in your PHP:
 
 ::: warning Warning
 
-Castopod only works with supported MySQL 5.7 or higher compatible databases. It
-will break with the previous MySQL v5.6 for example as its end of life was on
-February 5, 2021.
+Castopod ne fonctionne qu'avec les bases de données MySQL 5.7 ou plus récentes.
+Les versions 5.6 (dont le support a cessé le 5 février 2021) ou précédentes de
+MySQL ne fonctionneront pas.
 
 :::
 
-You will need the server hostname, database name, username and password to
-complete the installation process. If you do not have these, please contact your
-server administrator.
+Vous aurez besoin du nom d'hôte du serveur, du nom de la base de données, du nom
+d'utilisateur et du mot de passe pour terminer le processus d'installation. Si
+vous ne disposez pas de ces informations, veuillez contacter votre
+administrateur.
 
 #### Droits d'accès
 
-User must have at least these privileges on the database for Castopod to work:
-`CREATE`, `ALTER`, `DELETE`, `EXECUTE`, `INDEX`, `INSERT`, `SELECT`, `UPDATE`.
+L'utilisateur doit avoir au moins ces droits d'accès sur la base de données pour
+que Castopod fonctionne : `CREATE`, `ALTER`, `DELETE`, `EXECUTE`,
+`INDEX`,`INSERT`, `SELECT`, `UPDATE`,`REFERENCES`, `CREATE VIEW`.
 
 ### (Facultatif) FFmpeg v4.1.8 ou supérieur pour les clips vidéo
 
-[FFmpeg](https://www.ffmpeg.org/) version 4.1.8 or higher is required if you
-want to generate Video Clips. The following extensions must be installed:
+[FFmpeg](https://www.ffmpeg.org/) version 4.1.8 ou supérieure est requis si vous
+souhaitez générer des Clips Vidéo. Les extensions suivantes doivent être
+installées :
 
 - bibliothèque **FreeType 2** pour
   [gd](https://www.php.net/manual/en/image.installation.php).
@@ -127,22 +132,22 @@ want to generate Video Clips. The following extensions must be installed:
 
 ::: info Note
 
-The install script writes a `.env` file in the package root. If you cannot go
-through the install wizard, you can
-[create and update the `.env` file manually](#alternative-manual-configuration).
+Le script d'installation crée un fichier `.env` à la racine du paquet. Si vous
+ne pouvez pas passer par l'assistant d'installation, vous pouvez
+[créer et mettre à jour le fichier `.env` manuellement](#alternative-manual-configuration).
 
 :::
 
 ## Paquets fournis par la communauté
 
-If you don't want to bother with installing Castopod manually, you may use one
-of the packages created and maintained by the open-source community.
+Si vous ne voulez pas vous soucier d'installer Castopod manuellement, vous
+pouvez utiliser un des paquets créés et maintenus par la communauté open-source.
 
 ### Installer avec YunoHost
 
-[YunoHost](https://yunohost.org/) is a distribution based on Debian GNU/Linux
-made up of free and open-source software packages. It manages the hardships of
-self-hosting for you.
+[YunoHost](https://yunohost.org/) est une distribution basée sur Debian
+GNU/Linux composée de paquets logiciels libres et open-source. Il gère les
+difficultés de l'auto-hébergement pour vous.
 
 <div class="flex flex-wrap items-center gap-4">
 

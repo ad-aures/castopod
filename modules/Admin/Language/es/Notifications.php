@@ -13,7 +13,7 @@ return [
     'reply' => '{actor_username} respondió a tu publicación',
     'favourite' => '{actor_username} ha marcado como favorita tu publicación',
     'reblog' => '{actor_username} ha compartido tu publicación',
-    'follow' => '{actor_username} ha comenzado a seguir a {target_actor_username}',
+    'follow' => '{actor_username} started following you',
     'no_notifications' => 'No hay notificaciones',
     'mark_all_as_read' => 'Marcar todas como leídas',
 ];

@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 return [
     'podcast_contributors' => 'Podcast-Administratoren',
-    'view' => "{username}'s Mitwirkung an {podcastTitle}",
+    'view' => "{username}'s Administration von {podcastTitle}",
     'add' => 'Adminstrator zufügen',
     'add_contributor' => 'Administrator zufügen für {0}',
     'edit_role' => 'Rolle aktualisieren für {0}',

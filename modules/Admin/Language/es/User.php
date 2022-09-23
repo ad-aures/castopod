@@ -45,6 +45,8 @@ return [
             'Se pedirá a {username} que restablezca su contraseña en la próxima visita.',
         'banSuccess' => '{username} ha sido baneado.',
         'unbanSuccess' => '{username} ha sido desbaneado.',
+        'editOwnerError' =>
+            '{username} is the instance owner, you cannot edit its roles.',
         'banSuperAdminError' =>
             '{username} es un superadmin, no puedes banear a un superadministrador…',
         'deleteSuperAdminError' =>

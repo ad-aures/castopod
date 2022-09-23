@@ -60,7 +60,8 @@ server administrator.
 #### Privilégios
 
 User must have at least these privileges on the database for Castopod to work:
-`CREATE`, `ALTER`, `DELETE`, `EXECUTE`, `INDEX`, `INSERT`, `SELECT`, `UPDATE`.
+`CREATE`, `ALTER`, `DELETE`, `EXECUTE`, `INDEX`, `INSERT`, `SELECT`, `UPDATE`,
+`REFERENCES`, `CREATE VIEW`.
 
 ### (Opcional) FFmpeg v4.1.8 ou superior para Clipes de Vídeo
 

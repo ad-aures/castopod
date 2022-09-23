@@ -36,7 +36,7 @@ return [
     'BH' => 'البحرين',
     'BI' => 'بورندي',
     'BJ' => 'البينين',
-    'BL' => 'Saint Barthélemy',
+    'BL' => 'سان بارتيليمي',
     'BM' => 'برمودا',
     'BN' => 'Brunei Darussalam',
     'BO' => 'Bolivia, Plurinational State of',

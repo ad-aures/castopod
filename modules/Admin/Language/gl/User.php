@@ -40,15 +40,17 @@ return [
         'createSuccess' =>
             'Usuaria creada correctamente! Váiselle pedir a {username} que cambie o seu contrasinal após o primeiro acceso.',
         'rolesEditSuccess' =>
-            "{username}'s roles have been successfully updated.",
+            "Os roles de {username} actualizáronse correctamente.",
         'forcePassResetSuccess' =>
-            '{username} will be prompted with a password reset upon next visit.',
-        'banSuccess' => '{username} has been banned.',
-        'unbanSuccess' => '{username} has been unbanned.',
+            'Solicitarase que {username} restableza o contrasinal na seguinte visita.',
+        'banSuccess' => '{username} foi vetada.',
+        'unbanSuccess' => 'Retirouse o veto sobre {username}.',
+        'editOwnerError' =>
+            'A instancia pertence a {username}, ti non podes editar os roles.',
         'banSuperAdminError' =>
-            '{username} is a superadmin, one does not simply ban a superadmin…',
+            '{username} é superadmin, non se pode vetar a superadmin…',
         'deleteSuperAdminError' =>
-            '{username} is a superadmin, one does not simply delete a superadmin…',
-        'deleteSuccess' => '{username} has been deleted.',
+            '{username} é superadmin, non se pode eliminar a superadmin…',
+        'deleteSuccess' => 'Eliminouse a {username}.',
     ],
 ];

@@ -45,6 +45,8 @@ return [
             '{username} precisará alterar sua senha na próxima visita.',
         'banSuccess' => '{username} foi banido.',
         'unbanSuccess' => '{username} foi desbanido.',
+        'editOwnerError' =>
+            '{username} is the instance owner, you cannot edit its roles.',
         'banSuperAdminError' =>
             '{username} é um super admin, não bloqueamos um super admin assim…',
         'deleteSuperAdminError' =>

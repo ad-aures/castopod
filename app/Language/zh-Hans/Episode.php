@@ -19,7 +19,7 @@ return [
         one {# 人}
         other {# 人}
     }',
-    'persons_list' => '人',
+    'persons_list' => '人员',
     'back_to_episodes' => '回到剧集 {podcast} 中',
     'comments' => '评论',
     'activity' => '活动',

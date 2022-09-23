@@ -113,7 +113,7 @@ return [
             'label' => '警告标记',
             'hint' => '剧集是否包含限制级内容？',
             'undefined' => '未定义',
-            'clean' => '清理',
+            'clean' => '重置为默认',
             'explicit' => '限制级',
         ],
         'show_notes_section_title' => '显示备注',

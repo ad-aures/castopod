@@ -46,6 +46,6 @@ return [
         'playing' => 'Wordt afgespeeld',
     ],
     'size_limit' => 'Maximale grootte: {0}.',
-    'choose_interact' => 'Choose how to interact',
-    'view' => 'View',
+    'choose_interact' => 'Kies hoe de interactie moet worden',
+    'view' => 'Weergeven',
 ];

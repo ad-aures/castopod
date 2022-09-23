@@ -56,8 +56,8 @@ Castopod 仅适用于受支持的 MySQL 5.7 或更高版本的兼容数据库。
 
 #### 权限
 
-用户至少需要在数据库中有这些权限，Castopod 才能工作： `CREATE`, `ALTER`,
-`DELETE`, `EXECUTE`, `INDEX`, `INSERT`, `SELECT`, `UPDATE`。
+用户至少需要在数据库中有这些权限，Castopod 才能工作：
+`CREATE`，`ALTER`，`DELETE`，`EXECUTE`，`INDEX`，`INSERT`，`SELECT`，`UPDATE`，`REFERENCES`，`CREATE VIEW`。
 
 ### （可选）FFmpeg v4.1.8 或更高版本，用于视频素材
 

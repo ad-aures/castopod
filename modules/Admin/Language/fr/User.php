@@ -45,6 +45,8 @@ return [
             '{username} devra modifier son mot de passe à la prochaine visite.',
         'banSuccess' => '{username} a été bloqué.',
         'unbanSuccess' => '{username} a été débloqué.',
+        'editOwnerError' =>
+            '{username} is the instance owner, you cannot edit its roles.',
         'banSuperAdminError' =>
             '{username} est un super-utilisateur, on ne bloque pas un super-utilisateur comme ça…',
         'deleteSuperAdminError' =>

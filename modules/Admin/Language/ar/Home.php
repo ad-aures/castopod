@@ -10,5 +10,5 @@ declare(strict_types=1);
 
 return [
     'all_podcasts' => 'كافة البودكاستات',
-    'no_podcast' => 'No podcast found',
+    'no_podcast' => 'لا يوجد أي بودكاست',
 ];

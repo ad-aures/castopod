@@ -36,8 +36,8 @@ return [
             other {# seasons}
         }',
         'number_of_episodes' => '{0, plural,
-            one {# episode}
-            other {# episodes}
+            one {# Episode}
+            other {# Episoden}
         }',
         'first_published_at' => 'Erste Episode veröffentlicht am {0, date, medium}',
     ],

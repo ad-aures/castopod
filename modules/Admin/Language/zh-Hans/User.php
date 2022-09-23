@@ -45,6 +45,8 @@ return [
             '下次访问时 {username} 将被提醒重置密码。',
         'banSuccess' => '{username} 已被封禁。',
         'unbanSuccess' => '{username} 已解除封禁。',
+        'editOwnerError' =>
+            '{username} 是实例的所有者，你不能编辑他的角色。',
         'banSuperAdminError' =>
             '{username} 是超级管理员，不能禁止超级管理员…',
         'deleteSuperAdminError' =>

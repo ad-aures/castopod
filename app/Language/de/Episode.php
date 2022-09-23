@@ -11,23 +11,23 @@ declare(strict_types=1);
 return [
     'season' => 'Staffel {seasonNumber}',
     'season_abbr' => 'S{seasonNumber}',
-    'number' => 'Folge {episodeNumber}',
+    'number' => 'Episode {episodeNumber}',
     'number_abbr' => 'E {episodeNumber}',
     'season_episode' => 'Staffel {seasonNumber} Folge {episodeNumber}',
     'season_episode_abbr' => 'S{seasonNumber}:E{episodeNumber}',
     'persons' => '{personsCount, plural,
-        one {# Person}
-        other {# Personen}
+        one {# Mitwirkender}
+        other {# Mitwirkende}
     }',
     'persons_list' => 'Mitwirkende',
-    'back_to_episodes' => 'Zurück zu Folgen von {podcast}',
+    'back_to_episodes' => 'Zurück zu Episoden von {podcast}',
     'comments' => 'Kommentare',
     'activity' => 'Aktivitäten',
-    'description' => 'Beschreibung der Folge',
+    'description' => 'Beschreibung der Episode',
     'number_of_comments' => '{numberOfComments, plural,
         one {# Kommentar}
         other {# Kommentare}
     }',
-    'all_podcast_episodes' => 'Alle Podcast-Folgen',
+    'all_podcast_episodes' => 'Alle Podcast-Episoden',
     'back_to_podcast' => 'Zurück zum Podcast',
 ];

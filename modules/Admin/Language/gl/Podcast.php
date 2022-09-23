@@ -9,32 +9,32 @@ declare(strict_types=1);
  */
 
 return [
-    'all_podcasts' => 'All podcasts',
-    'no_podcast' => 'No podcast found!',
-    'create' => 'Create podcast',
-    'import' => 'Import podcast',
-    'new_episode' => 'New Episode',
-    'view' => 'View podcast',
-    'edit' => 'Edit podcast',
-    'publish' => 'Publish podcast',
-    'publish_edit' => 'Edit publication',
-    'delete' => 'Delete podcast',
-    'see_episodes' => 'See episodes',
-    'see_contributors' => 'See contributors',
-    'go_to_page' => 'Go to page',
-    'latest_episodes' => 'Latest episodes',
-    'see_all_episodes' => 'See all episodes',
-    'draft' => 'Draft',
+    'all_podcasts' => 'Tódolos podcast',
+    'no_podcast' => 'Non se atopan podcast!',
+    'create' => 'Crear un podcast',
+    'import' => 'Importar podcast',
+    'new_episode' => 'Novo Episodio',
+    'view' => 'Ver podcast',
+    'edit' => 'Editar podcast',
+    'publish' => 'Publicar podcast',
+    'publish_edit' => 'Editar publicación',
+    'delete' => 'Eliminar podcast',
+    'see_episodes' => 'Ver episodios',
+    'see_contributors' => 'Ver colaboradoras',
+    'go_to_page' => 'Ir á páxina',
+    'latest_episodes' => 'Últimos episodios',
+    'see_all_episodes' => 'Ver tódolos episodios',
+    'draft' => 'Borrador',
     'messages' => [
-        'createSuccess' => 'Podcast successfully created!',
-        'editSuccess' => 'Podcast has been successfully updated!',
-        'importSuccess' => 'Podcast has been successfully imported!',
-        'deleteSuccess' => 'Podcast @{podcast_handle} successfully deleted!',
-        'deletePodcastMediaError' => 'Failed to delete podcast {type, select,
-            cover {cover}
-            banner {banner}
-            other {media}
-        }.',
+        'createSuccess' => 'Podcast creado correctamente!',
+        'editSuccess' => 'Episodio actualizado correctamente!',
+        'importSuccess' => 'Episodio importado correctamente!',
+        'deleteSuccess' => 'Eliminado o podcast @{podcast_handle}!',
+        'deletePodcastMediaError' => 'Fallou a eliminación {type, select,
+            cover {da portada}
+            banner {da cabeceira}
+            other {do multimedia}
+        } do podcast.',
         'deleteEpisodeMediaError' => 'Fallou a eliminación {type, select,
             transcript {da transcrición}
             chapters {dos capítulos}
@@ -42,12 +42,12 @@ return [
             audio {do audio}
             other {do multimedia}
         } do episodio {episode_slug}.',
-        'deletePodcastMediaFolderError' => 'Failed to delete podcast media folder {folder_path}. You may manually remove it from your disk.',
-        'podcastFeedUpdateSuccess' => 'Successful update: {number_of_new_episodes, plural,
-            one {# episode was}
-            other {# episodes were}
-        } added to the podcast!',
-        'podcastFeedUpToDate' => 'Podcast is already up to date.',
+        'deletePodcastMediaFolderError' => 'Fallou a eliminación do cartafol {folder_path} co multimedia do podcast. Intenta eliminalo do teu disco de xeito manual.',
+        'podcastFeedUpdateSuccess' => 'Actualización correcta: {number_of_new_episodes, plural,
+            one {# episodio foi engadido}
+            other {# episodios foron engadidos}
+        } ao podcast!',
+        'podcastFeedUpToDate' => 'O podcast xa está ao día.',
         'podcastNotImported' => 'Podcast could not be updated as it was not imported.',
         'publishError' => 'This podcast is either already published or scheduled for publication.',
         'publishEditError' => 'This podcast is not scheduled for publication.',

@@ -13,7 +13,7 @@ return [
     'reply' => '{actor_username} replied to your post',
     'favourite' => '{actor_username} favourited your post',
     'reblog' => '{actor_username} shared your post',
-    'follow' => '{actor_username} started following {target_actor_username}',
+    'follow' => '{actor_username} started following you',
     'no_notifications' => 'No notifications',
     'mark_all_as_read' => 'Mark all as read',
 ];

@@ -13,7 +13,7 @@ return [
     'reply' => '{actor_username} 回复了你的帖子',
     'favourite' => '{actor_username} 喜欢了你的帖子',
     'reblog' => '{actor_username} 分享了你的帖子',
-    'follow' => '{actor_username} 开始关注 {target_actor_username}',
+    'follow' => '{actor_username} 开始关注你',
     'no_notifications' => '没有通知',
     'mark_all_as_read' => '全部标记为已读',
 ];

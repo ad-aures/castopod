@@ -29,8 +29,9 @@ et est utilisé par des podcasters autour partout dans le monde&nbsp;!
 - 🌱 &nbsp;Libre, gratuit & open-source (Licence AGPL v3)
 - 🔐 &nbsp;focalisé sur la souveraineté des données : votre contenu, votre
   audience et vos statiistiques vous appartiennent, et à vous seulement
-- 🪄 &nbsp;Podcasting 2.0 features: GUID, locked, transcripts, funding,
-  chapters, location, persons, soundbites, …
+- 🪄&nbsp;Fonctionnalités du Podcasting 2.0 : GUID, verrouillage,
+  transcriptions, financement, chapitres, géo-localisation, intervenants,
+  extraits sonores, …
 - 💬 &nbsp;Réseau social intégré :
   - 🚀 &nbsp;Castopod fait partie du Fédivers, un réseau social décentralisé
   - ❤️ &nbsp;Créer des publications, partager, mettre en favori et commenter des
@@ -60,9 +61,9 @@ et est utilisé par des podcasters autour partout dans le monde&nbsp;!
 - 🔀 &nbsp;Multi-locataire : hébergez autant de podcasts que vous le souhaitez
 - 👥 &nbsp;Multi-utilisateur : ajoutez des contributeurs et définissez leurs
   rôles
-- 🌎 &nbsp;i18n support: translated in English, French, Polish, German,
-  Brazilian Portuguese & Spanish… with
-  [more to come](https://translate.castopod.org)!
+- 🌎 &nbsp;support de i18n : traduit en anglais, français, polonais, allemand,
+  portugais, brésilien & espagnol… et
+  [plus à l'avenir](https://translate.castopod.org)!
 
 ## Pourquoi Castopod ?
 
@@ -176,10 +177,10 @@ plus sur notre processus de développement et comprendre comment proposer des
 corrections de bogues et des améliorations, et comment compiler et tester vos
 modifications sur Castopod.
 
-## Contributors ✨
+## Contributeurs ✨
 
-Thanks goes to these wonderful people
-([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+Merci à toutes ces personnes merveilleuses
+([touche emoji](https://allcontributors.org/docs/en/emoji-key) ) :
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -236,6 +237,11 @@ Thanks goes to these wonderful people
     <td align="center"><a href="https://crowdin.com/profile/bendaha"><img src="https://crowdin-static.downloads.crowdin.com/avatar/15331656/large/cd92450d2c20202299fb3a0075903e20_default.png?s=100" width="100px;" alt=""/><br /><sub><b>bendaha</b></sub></a><br /><a href="https://translate.castopod.org" title="Translation">🌍</a></td>
     <td align="center"><a href="https://crowdin.com/profile/samuelroland"><img src="https://crowdin-static.downloads.crowdin.com/avatar/14980053/large/3e154a37d03d6e98ae402ed3f930f4f5.png?s=100" width="100px;" alt=""/><br /><sub><b>Samuel Roland</b></sub></a><br /><a href="https://translate.castopod.org" title="Translation">🌍</a></td>
     <td align="center"><a href="https://dimitriregnier.net/"><img src="https://castopod.org/assets/images/castopod-avatar.jpg?s=100" width="100px;" alt=""/><br /><sub><b>Dimitri Regnier</b></sub></a><br /><a href="#ideas-dimregnier" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://im.irithys.com/@thy"><img src="https://crowdin-static.downloads.crowdin.com/avatar/15405614/large/e46d7f8e9f7c05997827563c3a3cf942.jpeg?s=100" width="100px;" alt=""/><br /><sub><b>irithys</b></sub></a><br /><a href="https://translate.castopod.org" title="Translation">🌍</a></td>
+    <td align="center"><a href="https://twitter.com/caos30"><img src="https://castopod.org/assets/images/castopod-avatar.jpg?s=100" width="100px;" alt=""/><br /><sub><b>Sergi</b></sub></a><br /><a href="https://translate.castopod.org" title="Translation">🌍</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://crowdin.com/profile/xosem"><img src="https://crowdin-static.downloads.crowdin.com/avatar/12617257/large/a201650da44fed28890b0e0d8477a663.jpg?s=100" width="100px;" alt=""/><br /><sub><b>ghose (XoseM)</b></sub></a><br /><a href="https://translate.castopod.org" title="Translation">🌍</a></td>
   </tr>
 </table>
 
@@ -250,15 +256,16 @@ specification. Contributions of any kind welcome!
 
 ## Contact
 
-You may reach us for help or ask any question you have on:
+Vous pouvez nous joindre pour obtenir de l'aide ou poser toute question que vous
+avez sur :
 
 - [Discord](https://castopod.org/discord) (pour dialoguer en temps réel avec les
   développeurs et la communauté)
 - [Suivi de problèmes](https://code.castopod.org/adaures/castopod/-/issues)
   (pour toute demande de nouvelle fonctionnalité ou rapport de bug)
 
-Alternatively, you can follow us on social media platforms to get news about
-Castopod:
+Autrement, vous pouvez nous suivre sur les réseaux sociaux pour obtenir des
+informations à propos de Castopod :
 
 - [podlibre.social](https://podlibre.social/@Castopod) (Instance Mastodon)
 - [Twitter](https://twitter.com/castopod)
@@ -267,16 +274,16 @@ Castopod:
 
 ## Sponsors
 
-The ongoing development of Castopod is made possible with the support of its
-backers. If you'd like to help, please consider
-[sponsoring Castopod's development](https://opencollective.com/castopod/contribute).
+Le développement de Castopod est rendu possible grâce au soutien de ses
+parrains. Si vous souhaitez aider, n'hésitez pas à
+[parrainer le développement de Castopod](https://opencollective.com/castopod/contribute).
 
 <div class="flex flex-wrap gap-x-16 gap-y-8">
   <a href="https://adaures.com/" target="_blank" rel="noopener noreferrer"><img src="/images/sponsors/adaures.svg" alt="Logo d'Ad Aures" class="h-16" /></a>
   <a href="https://nlnet.nl/project/Castopod/" target="_blank" rel="noopener noreferrer"><img src="/images/sponsors/nlnet.svg" alt="Logo de NLnet" class="h-16" /></a>
 </div>
 
-## License
+## Licence
 
 [GNU Affero General Public License v3.0](https://choosealicense.com/licenses/agpl-3.0/)
 

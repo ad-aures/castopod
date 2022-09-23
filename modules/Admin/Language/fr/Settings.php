@@ -15,7 +15,7 @@ return [
         'site_icon' => 'Favicon du site',
         'site_icon_delete' => 'Supprimer la favicon du site',
         'site_icon_hint' => 'Les favicons sont ce que vous voyez sur les onglets de votre navigateur, dans votre barre de favoris, et lorsque vous ajoutez un site web en raccourci sur des appareils mobiles.',
-        'site_icon_helper' => 'Icon must be squared and at least 512px wide and tall.',
+        'site_icon_helper' => 'L\'icône doit être carrée et au moins 512px de large et haut.',
         'site_name' => 'Titre du site',
         'site_description' => 'Description du site',
         'submit' => 'Sauvegarder',

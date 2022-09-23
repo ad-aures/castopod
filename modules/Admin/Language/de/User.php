@@ -45,6 +45,8 @@ return [
             '{username} wird beim nächsten Besuch zu einem Zurücksetzen des Passworts aufgefordert.',
         'banSuccess' => '{username} wurde gebannt.',
         'unbanSuccess' => '{username} wurde entbannt.',
+        'editOwnerError' =>
+            '{username} is the instance owner, you cannot edit its roles.',
         'banSuperAdminError' =>
             '{username} ist ein Superadmin, man bannt nicht einfach einen Superadmin…',
         'deleteSuperAdminError' =>

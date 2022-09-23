@@ -9,54 +9,54 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => 'Castopod installer',
-    'manual_config' => 'Manual configuration',
+    'title' => 'Instalador de Castopod',
+    'manual_config' => 'Configuración manual',
     'manual_config_subtitle' =>
-        'Create a `.env` file with your settings and refresh the page to continue installation.',
+        'Crea un ficheiro `.env` cos teus axustes e actualiza a páxina para continuar coa instalación.',
     'form' => [
-        'instance_config' => 'Instance configuration',
-        'hostname' => 'Hostname',
-        'media_base_url' => 'Media base URL',
+        'instance_config' => 'Configuración da instancia',
+        'hostname' => 'Servidor',
+        'media_base_url' => 'URL base do multimedia',
         'media_base_url_hint' =>
-            'If you use a CDN and/or an external analytics service, you may set them here.',
-        'admin_gateway' => 'Admin gateway',
+            'Se usas unha CDN e/ou un servizo externo de análise, debes indicalo aquí.',
+        'admin_gateway' => 'Pasarela de administración',
         'admin_gateway_hint' =>
-            'The route to access the admin area (eg. https://example.com/cp-admin). It is set by default as cp-admin, we recommend you change it for security reasons.',
-        'auth_gateway' => 'Auth gateway',
+            'A ruta para acceder á área de administración (ex. https://exemplo.com/cp-admin). Por defecto establécese cp-admin, recomendámosche cambialo por razóns de seguridade.',
+        'auth_gateway' => 'Pasarela de autenticación',
         'auth_gateway_hint' =>
-            'The route to access the authentication pages (eg. https://example.com/cp-auth). It is set by default as cp-auth, we recommend you change it for security reasons.',
-        'database_config' => 'Database configuration',
+            'A ruta para acceder á páxina de autenticación (ex. https://exemplo.com/cp-auth). Por defecto establécese como cp-auth, pero recomendámosche cambialo por razóns de seguridade.',
+        'database_config' => 'Configuración da base de datos',
         'database_config_hint' =>
-            'Castopod needs to connect to your MySQL (or MariaDB) database. If you do not have these required info, please contact your server administrator.',
-        'db_hostname' => 'Database hostname',
-        'db_name' => 'Database name',
-        'db_username' => 'Database username',
-        'db_password' => 'Database password',
-        'db_prefix' => 'Database prefix',
+            'Castopod precisa conectar coa túa base de datos MySQL (ou MariaDB). Se no tes esta información, contacta coa administración do teu servidor.',
+        'db_hostname' => 'Servidor da base de datos',
+        'db_name' => 'Nome da base de datos',
+        'db_username' => 'Usuaria da base de datos',
+        'db_password' => 'Contrasinal da base de datos',
+        'db_prefix' => 'Prefix da base de datos',
         'db_prefix_hint' =>
-            "The prefix of the Castopod table names, leave as is if you don't know what it means.",
-        'cache_config' => 'Cache configuration',
+            "O prefix dos nomes das táboas Castopod, déixao como está se non sabes o significa.",
+        'cache_config' => 'Configuración da caché',
         'cache_config_hint' =>
-            'Choose your preferred cache handler. Leave it as the default value if you have no clue what it means.',
-        'cache_handler' => 'Cache handler',
+            'Elixe o xestor da caché preferido. Deixa o valor por defecto se non sabes o que significa.',
+        'cache_handler' => 'Xestor da cache',
         'cacheHandlerOptions' => [
-            'file' => 'File',
+            'file' => 'Ficheiro',
             'redis' => 'Redis',
             'predis' => 'Predis',
         ],
-        'next' => 'Next',
-        'submit' => 'Finish install',
-        'create_superadmin' => 'Create your superadmin account',
+        'next' => 'Seguinte',
+        'submit' => 'Rematar instalación',
+        'create_superadmin' => 'Crea a conta de superadministración',
         'email' => 'Email',
-        'username' => 'Username',
-        'password' => 'Password',
+        'username' => 'Identificador',
+        'password' => 'Contrasinal',
     ],
     'messages' => [
         'createSuperAdminSuccess' =>
-            'Your superadmin account has been created successfully. Login to start podcasting!',
+            'A conta de superadministración creouse correctamente. Accede para comezar a publicar!',
         'databaseConnectError' =>
-            'Castopod could not connect to your database. Edit your database configuration and try again.',
+            'Castopod non pode conectar coa base de datos. Edita a configuración da base de datos e inténtao outra vez.',
         'writeError' =>
-            "Couldn't create/write the `.env` file. You must create it manually by following the `.env.example` file template in the Castopod package.",
+            "Non se puido crear/escribir o ficheiro `.env`. Tes que crealo manualmente seguindo o modelo `.env.example` incluído no paquete Castopod.",
     ],
 ];

@@ -10,9 +10,9 @@ declare(strict_types=1);
 
 return [
     'min_dims' =>
-        '{field} is either not an image, or it is not wide or tall enough.',
+        'ou ben {field} non é unha imaxe ou non é suficientemente alta ou ancha.',
     'is_image_ratio' =>
-        '{field} is either not an image or not of the right ratio.',
+        'ou ben {field} non é unha imaxe ou non ten proporcións axeitadas.',
     'validate_url' =>
-        'The {field} field must be a valid URL (eg. https://example.com/).',
+        'O campo {field} ten que ser un URL válido (ex. https://exemplo.com/).',
 ];

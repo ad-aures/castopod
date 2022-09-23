@@ -41,7 +41,7 @@ return [
     'with_podcast_hint' => 'To be published at the same time as the podcast',
     'list' => [
         'search' => [
-            'placeholder' => 'Search for an episode',
+            'placeholder' => 'البحث عن حلقة',
             'clear' => 'Clear search',
             'submit' => 'Search',
         ],
@@ -65,7 +65,7 @@ return [
         }',
         'publishCancelSuccess' => 'تم إلغاء نشر الحلقة بنجاح!',
         'unpublishBeforeDeleteTip' => 'You must unpublish the episode before deleting it.',
-        'scheduleDateError' => 'Schedule date must be set!',
+        'scheduleDateError' => 'الموعد المحدد يجب أن لا يكون فارغا!',
         'deletePublishedEpisodeError' => 'Please unpublish the episode before deleting it.',
         'deleteSuccess' => 'Episode successfully deleted!',
         'deleteError' => 'Failed to delete episode {type, select,

@@ -45,6 +45,8 @@ return [
             '{username} zostanie poproszony o zresetowanie hasła przy następnej wizycie.',
         'banSuccess' => '{username} został zablokowany.',
         'unbanSuccess' => '{username} został odblokowany.',
+        'editOwnerError' =>
+            '{username} is the instance owner, you cannot edit its roles.',
         'banSuperAdminError' =>
             '{username} jest superadministratorem, nie można po prostu zablokować superadministratora…',
         'deleteSuperAdminError' =>

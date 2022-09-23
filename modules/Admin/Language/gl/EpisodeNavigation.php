@@ -9,15 +9,15 @@ declare(strict_types=1);
  */
 
 return [
-    'go_to_page' => 'View episode page',
-    'dashboard' => 'Episode dashboard',
-    'episode-view' => 'Home',
-    'episode-edit' => 'Edit episode',
-    'episode-persons-manage' => 'Manage persons',
-    'embed-add' => 'Embeddable player',
-    'clips' => 'Clips',
-    'video-clips-list' => 'Video clips',
-    'video-clips-create' => 'New video clip',
-    'soundbites-list' => 'Soundbites',
-    'soundbites-create' => 'New soundbite',
+    'go_to_page' => 'Ver páxina do episodio',
+    'dashboard' => 'Taboleiro do episodio',
+    'episode-view' => 'Inicio',
+    'episode-edit' => 'Editar episodio',
+    'episode-persons-manage' => 'Xestionar persoas',
+    'embed-add' => 'Reprodutor para incluír',
+    'clips' => 'Recortes',
+    'video-clips-list' => 'Recortes de vídeo',
+    'video-clips-create' => 'Novo recorte de vídeo',
+    'soundbites-list' => 'Anaquiños',
+    'soundbites-create' => 'Novo anaquiño',
 ];

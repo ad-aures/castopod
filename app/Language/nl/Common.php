@@ -26,5 +26,5 @@ return [
     'read_less' => 'Verkort',
     'see_more' => 'Meer weergeven',
     'see_less' => 'Minder weergeven',
-    'legal_notice' => 'Legal notice',
+    'legal_notice' => 'Juridische kennisgeving',
 ];

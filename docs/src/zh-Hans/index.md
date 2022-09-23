@@ -205,6 +205,11 @@ Castopod 已经通过了一项行为准则，并希望所有的参与者都能�
     <td align="center"><a href="https://crowdin.com/profile/bendaha"><img src="https://crowdin-static.downloads.crowdin.com/avatar/15331656/large/cd92450d2c20202299fb3a0075903e20_default.png?s=100" width="100px;" alt=""/><br /><sub><b>bendaha</b></sub></a><br /><a href="https://translate.castopod.org" title="Translation">🌍</a></td>
     <td align="center"><a href="https://crowdin.com/profile/samuelroland"><img src="https://crowdin-static.downloads.crowdin.com/avatar/14980053/large/3e154a37d03d6e98ae402ed3f930f4f5.png?s=100" width="100px;" alt=""/><br /><sub><b>Samuel Roland</b></sub></a><br /><a href="https://translate.castopod.org" title="Translation">🌍</a></td>
     <td align="center"><a href="https://dimitriregnier.net/"><img src="https://castopod.org/assets/images/castopod-avatar.jpg?s=100" width="100px;" alt=""/><br /><sub><b>Dimitri Regnier</b></sub></a><br /><a href="#ideas-dimregnier" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://im.irithys.com/@thy"><img src="https://crowdin-static.downloads.crowdin.com/avatar/15405614/large/e46d7f8e9f7c05997827563c3a3cf942.jpeg?s=100" width="100px;" alt=""/><br /><sub><b>irithys</b></sub></a><br /><a href="https://translate.castopod.org" title="Translation">🌍</a></td>
+    <td align="center"><a href="https://twitter.com/caos30"><img src="https://castopod.org/assets/images/castopod-avatar.jpg?s=100" width="100px;" alt=""/><br /><sub><b>Sergi</b></sub></a><br /><a href="https://translate.castopod.org" title="Translation">🌍</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://crowdin.com/profile/xosem"><img src="https://crowdin-static.downloads.crowdin.com/avatar/12617257/large/a201650da44fed28890b0e0d8477a663.jpg?s=100" width="100px;" alt=""/><br /><sub><b>ghose (XoseM)</b></sub></a><br /><a href="https://translate.castopod.org" title="Translation">🌍</a></td>
   </tr>
 </table>
 
