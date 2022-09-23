@@ -1,3 +1,34 @@
+# [1.0.0-beta.22](https://code.castopod.org/adaures/castopod/compare/v1.0.0-beta.21...v1.0.0-beta.22) (2022-09-23)
+
+### Bug Fixes
+
+- **fediverse:** set default castopod avatar url when actor avatar is not
+  present
+  ([460f52f](https://code.castopod.org/adaures/castopod/commit/460f52f70e493d619c28632db6c698e88f0ebb5f))
+- **import:** set default episode type if not set
+  ([d7250ab](https://code.castopod.org/adaures/castopod/commit/d7250ab03f9b032830c575ad58b51c8d60b7a49a))
+- **input-component:** unset required attribute to prevent rendering it when
+  false
+  ([db9ac13](https://code.castopod.org/adaures/castopod/commit/db9ac13860bce58235a5da275910bea605a00626))
+- **notifications:** notify actors after activities insert / update using model
+  callback methods
+  ([e08555a](https://code.castopod.org/adaures/castopod/commit/e08555a4e9a6c15eeba18273c63403f82eddae35))
+- overwrite getActorById to return app's Actor entity
+  ([f2bc2f7](https://code.castopod.org/adaures/castopod/commit/f2bc2f7e01aa166faa627df6fe4d5ed4887c16e5))
+- remove heavy image cover data from audio file metadata
+  ([f74403b](https://code.castopod.org/adaures/castopod/commit/f74403bd7a5089b760603abe36264e7615be0e78))
+- set storage limit as disk_total_space instead of free space
+  ([7512e2e](https://code.castopod.org/adaures/castopod/commit/7512e2ed1ff5656cd63a4fc2524296dbb8b4164a))
+- **ui:** remove empty tooltip when hovering on sponsor button
+  ([40aa661](https://code.castopod.org/adaures/castopod/commit/40aa661289e1d1517fffcea5d257183bc9c458e4))
+- **users:** remove required roles input when editing user + prevent owner's
+  roles from being edited
+  ([1c8af75](https://code.castopod.org/adaures/castopod/commit/1c8af7550ba27d8c8473ae96acd21ad7731fd863)),
+  closes [#239](https://code.castopod.org/adaures/castopod/issues/239)
+- **ux:** have podcast dashboard card link to podcast dashboard if only one
+  podcast in instance
+  ([7dabee5](https://code.castopod.org/adaures/castopod/commit/7dabee58a187abe92358d962da506a836e29cda3))
+
 # [1.0.0-beta.21](https://code.castopod.org/adaures/castopod/compare/v1.0.0-beta.20...v1.0.0-beta.21) (2022-09-06)
 
 ### Bug Fixes
