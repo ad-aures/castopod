@@ -41,6 +41,10 @@ class Audio extends BaseMedia
         $getID3 = new GetID3();
         $audioMetadata = $getID3->analyze(media_path($this->file_path));
 
+        // remove heavy image data from metadata
+        unset($audioMetadata['comments']['picture']);
+        unset($audioMetadata['id3v2']['APIC']);
+
         $this->attributes['file_mimetype'] = $audioMetadata['mime_type'];
         $this->attributes['file_size'] = $audioMetadata['filesize'];
         $this->attributes['description'] = @$audioMetadata['id3v2']['comments']['comment'][0];
