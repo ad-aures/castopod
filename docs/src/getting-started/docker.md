@@ -117,26 +117,32 @@ can be added as a cache handler.
 
 - **castopod/app**
 
-  | Variable name              | Type (`default`)                    |
-  | -------------------------- | ----------------------------------- |
-  | **`CP_BASEURL`**           | string (`undefined`)                |
-  | **`CP_MEDIA_BASEURL`**     | ?string (`(empty)`)                 |
-  | **`CP_ADMIN_GATEWAY`**     | ?string (`"cp-admin"`)              |
-  | **`CP_AUTH_GATEWAY`**      | ?string (`"cp-auth"`)               |
-  | **`CP_ANALYTICS_SALT`**    | string (`undefined`)                |
-  | **`CP_DATABASE_HOSTNAME`** | ?string (`"mariadb"`)               |
-  | **`CP_DATABASE_NAME`**     | string (`MYSQL_DATABASE`)           |
-  | **`CP_DATABASE_USERNAME`** | string (`MYSQL_USER`)               |
-  | **`CP_DATABASE_PASSWORD`** | string (`MYSQL_PASSWORD`)           |
-  | **`CP_DATABASE_PREFIX`**   | ?string (`"cp_"`)                   |
-  | **`CP_CACHE_HANDLER`**     | ?[`"file"` or `"redis"`] (`"file"`) |
-  | **`CP_REDIS_HOST`**        | ?string (`"localhost"`)             |
-  | **`CP_REDIS_PASSWORD`**    | ?string (`null`)                    |
-  | **`CP_REDIS_PORT`**        | ?number (`6379`)                    |
-  | **`CP_REDIS_DATABASE`**    | ?number (`0`)                       |
+  | Variable name                | Type (`default`)        | Default          |
+  | ---------------------------- | ----------------------- | ---------------- |
+  | **`CP_BASEURL`**             | string                  | `undefined`      |
+  | **`CP_MEDIA_BASEURL`**       | ?string                 | `CP_BASEURL`     |
+  | **`CP_ADMIN_GATEWAY`**       | ?string                 | `"cp-admin"`     |
+  | **`CP_AUTH_GATEWAY`**        | ?string                 | `"cp-auth"`      |
+  | **`CP_ANALYTICS_SALT`**      | string                  | `undefined`      |
+  | **`CP_DATABASE_HOSTNAME`**   | ?string                 | `"mariadb"`      |
+  | **`CP_DATABASE_NAME`**       | ?string                 | `MYSQL_DATABASE` |
+  | **`CP_DATABASE_USERNAME`**   | ?string                 | `MYSQL_USER`     |
+  | **`CP_DATABASE_PASSWORD`**   | ?string                 | `MYSQL_PASSWORD` |
+  | **`CP_DATABASE_PREFIX`**     | ?string                 | `"cp_"`          |
+  | **`CP_CACHE_HANDLER`**       | [`"file"` or `"redis"`] | `"file"`         |
+  | **`CP_REDIS_HOST`**          | ?string                 | `"localhost"`    |
+  | **`CP_REDIS_PASSWORD`**      | ?string                 | `null`           |
+  | **`CP_REDIS_PORT`**          | ?number                 | `6379`           |
+  | **`CP_REDIS_DATABASE`**      | ?number                 | `0`              |
+  | **`CP_EMAIL_SMTP_HOST`**     | ?string                 | `undefined`      |
+  | **`CP_EMAIL_FROM`**          | ?string                 | `undefined`      |
+  | **`CP_EMAIL_SMTP_USERNAME`** | ?string                 | `"localhost"`    |
+  | **`CP_EMAIL_SMTP_PASSWORD`** | ?string                 | `null`           |
+  | **`CP_EMAIL_SMTP_PORT`**     | ?number                 | `25`             |
+  | **`CP_EMAIL_SMTP_CRYPTO`**   | [`"tls"` or `"ssl"`]    | `"tls"`          |
 
 - **castopod/web-server**
 
-  | Variable name         | Type (`default`)  |
-  | --------------------- | ----------------- |
-  | **`CP_APP_HOSTNAME`** | ?string (`"app"`) |
+  | Variable name         | Type    | Default |
+  | --------------------- | ------- | ------- |
+  | **`CP_APP_HOSTNAME`** | ?string | `"app"` |

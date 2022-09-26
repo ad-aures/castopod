@@ -8,7 +8,7 @@ use CodeIgniter\Config\BaseConfig;
 
 class Email extends BaseConfig
 {
-    public string $fromEmail = 'hello@castopod.local';
+    public string $fromEmail = '';
 
     public string $fromName = 'Castopod';
 
@@ -17,12 +17,12 @@ class Email extends BaseConfig
     /**
      * The "user agent"
      */
-    public string $userAgent = 'CodeIgniter';
+    public string $userAgent = 'Castopod/' . CP_VERSION;
 
     /**
      * The mail sending protocol: mail, sendmail, smtp
      */
-    public string $protocol = 'mail';
+    public string $protocol = 'smtp';
 
     /**
      * The server path to Sendmail.
@@ -118,4 +118,11 @@ class Email extends BaseConfig
      * Enable notify message from server
      */
     public bool $DSN = false;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->userAgent = 'Castopod/' . CP_VERSION . '; +' . base_url('', 'https');
+    }
 }
