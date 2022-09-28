@@ -10,6 +10,7 @@ const Clipboard = (): void => {
       );
       if (element) {
         button.addEventListener("click", () => {
+          console.log(element);
           element.select();
           element.setSelectionRange(0, element.value.length);
           document.execCommand("copy");

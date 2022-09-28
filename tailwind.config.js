@@ -18,6 +18,9 @@ module.exports = {
         display: ["Kumbh Sans", ...defaultTheme.fontFamily.sans],
         mono: ["Noto Sans Mono", ...defaultTheme.fontFamily.mono],
       },
+      textDecorationThickness: {
+        3: "3px",
+      },
       textColor: {
         skin: {
           base: "hsl(var(--color-text-base) / <alpha-value>)",
@@ -65,6 +68,7 @@ module.exports = {
         },
       },
       colors: {
+        accent: "hsl(var(--color-accent-base) / <alpha-value>)",
         background: {
           header: "hsl(var(--color-background-header) / <alpha-value>)",
         },

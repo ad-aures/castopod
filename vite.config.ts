@@ -19,6 +19,7 @@ export default defineConfig({
         "audio-player.ts": "app/Resources/js/audio-player.ts",
         "charts.ts": "app/Resources/js/charts.ts",
         "embed.ts": "app/Resources/js/embed.ts",
+        "error.ts": "app/Resources/js/error.ts",
         "install.ts": "app/Resources/js/install.ts",
         "map.ts": "app/Resources/js/map.ts",
         "podcast.ts": "app/Resources/js/podcast.ts",
