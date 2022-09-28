@@ -10,19 +10,21 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+use App\Entities\Podcast;
 use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
 use CodeIgniter\Controller;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\ResponseInterface;
 use Exception;
+use Modules\PremiumPodcasts\Models\SubscriptionModel;
 use Opawg\UserAgentsPhp\UserAgentsRSS;
 
 class FeedController extends Controller
 {
     public function index(string $podcastHandle): ResponseInterface
     {
-        helper('rss');
+        helper(['rss', 'premium_podcasts']);
 
         $podcast = (new PodcastModel())->where('handle', $podcastHandle)
             ->first();
@@ -43,11 +45,24 @@ class FeedController extends Controller
             $serviceSlug = $service['slug'];
         }
 
-        $cacheName =
-            "podcast#{$podcast->id}_feed" . ($service ? "_{$serviceSlug}" : '');
+        $subscription = null;
+        $token = $this->request->getGet('token');
+        if ($token) {
+            $subscription = (new SubscriptionModel())->validateSubscription($podcastHandle, $token);
+        }
+
+        $cacheName = implode(
+            '_',
+            array_filter([
+                "podcast#{$podcast->id}",
+                'feed',
+                $service ? $serviceSlug : null,
+                $subscription !== null ? 'unlocked' : null,
+            ]),
+        );
 
         if (! ($found = cache($cacheName))) {
-            $found = get_rss_feed($podcast, $serviceSlug);
+            $found = get_rss_feed($podcast, $serviceSlug, $subscription, $token);
 
             // The page cache is set to expire after next episode publication or a decade by default so it is deleted manually upon podcast update
             $secondsToNextUnpublishedEpisode = (new EpisodeModel())->getSecondsToNextUnpublishedEpisode(

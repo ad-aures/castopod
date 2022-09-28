@@ -31,6 +31,22 @@ if (! function_exists('host_url')) {
 
 //--------------------------------------------------------------------
 
+/**
+ * Return the host URL to use in views
+ */
+if (! function_exists('current_domain')) {
+    /**
+     * Returns instance's domain name
+     */
+    function current_domain(): string
+    {
+        $uri = current_url(true);
+        return $uri->getHost() . ($uri->getPort() ? ':' . $uri->getPort() : '');
+    }
+}
+
+//--------------------------------------------------------------------
+
 if (! function_exists('extract_params_from_episode_uri')) {
     /**
      * Returns podcast name and episode slug from episode string

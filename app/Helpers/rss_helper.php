@@ -13,6 +13,7 @@ use App\Entities\Podcast;
 use App\Libraries\SimpleRSSElement;
 use CodeIgniter\I18n\Time;
 use Config\Mimes;
+use Modules\PremiumPodcasts\Entities\Subscription;
 
 if (! function_exists('get_rss_feed')) {
     /**
@@ -21,8 +22,12 @@ if (! function_exists('get_rss_feed')) {
      * @param string $serviceSlug The name of the service that fetches the RSS feed for future reference when the audio file is eventually downloaded
      * @return string rss feed as xml
      */
-    function get_rss_feed(Podcast $podcast, string $serviceSlug = ''): string
-    {
+    function get_rss_feed(
+        Podcast $podcast,
+        string $serviceSlug = '',
+        Subscription $subscription = null,
+        string $token = null
+    ): string {
         $episodes = $podcast->episodes;
 
         $itunesNamespace = 'http://www.itunes.com/dtds/podcast-1.0.dtd';
@@ -267,16 +272,22 @@ if (! function_exists('get_rss_feed')) {
         }
 
         foreach ($episodes as $episode) {
+            if ($episode->is_premium && $subscription === null) {
+                continue;
+            }
+
             $item = $channel->addChild('item');
             $item->addChild('title', $episode->title, null, false);
             $enclosure = $item->addChild('enclosure');
 
+            $enclosureParams = implode('&', array_filter([
+                $episode->is_premium ? 'token=' . $token : null,
+                $serviceSlug !== '' ? '_from=' . urlencode($serviceSlug) : null,
+            ]));
+
             $enclosure->addAttribute(
                 'url',
-                $episode->audio_analytics_url .
-                    ($serviceSlug === ''
-                        ? ''
-                        : '?_from=' . urlencode($serviceSlug)),
+                $episode->audio_analytics_url . ($enclosureParams === '' ? '' : '?' . $enclosureParams),
             );
             $enclosure->addAttribute('length', (string) $episode->audio->file_size);
             $enclosure->addAttribute('type', $episode->audio->file_mimetype);

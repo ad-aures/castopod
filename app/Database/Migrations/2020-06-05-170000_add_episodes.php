@@ -129,6 +129,11 @@ class AddEpisodes extends Migration
                 'unsigned' => true,
                 'default' => 0,
             ],
+            'is_premium' => [
+                'type' => 'TINYINT',
+                'constraint' => 1,
+                'default' => 0,
+            ],
             'created_by' => [
                 'type' => 'INT',
                 'unsigned' => true,

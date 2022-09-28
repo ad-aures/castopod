@@ -14,6 +14,7 @@ use Modules\Api\Rest\V1\Filters\ApiFilter;
 use Modules\Auth\Filters\PermissionFilter;
 use Modules\Fediverse\Filters\AllowCorsFilter;
 use Modules\Fediverse\Filters\FediverseFilter;
+use Modules\PremiumPodcasts\Filters\PodcastUnlockFilter;
 use Myth\Auth\Filters\LoginFilter;
 use Myth\Auth\Filters\RoleFilter;
 
@@ -36,6 +37,7 @@ class Filters extends BaseConfig
         'fediverse' => FediverseFilter::class,
         'allow-cors' => AllowCorsFilter::class,
         'rest-api' => ApiFilter::class,
+        'podcast-unlock' => PodcastUnlockFilter::class,
     ];
 
     /**
@@ -86,6 +88,9 @@ class Filters extends BaseConfig
         $this->filters = [
             'login' => [
                 'before' => [config('Admin')->gateway . '*', config('Analytics')->gateway . '*'],
+            ],
+            'podcast-unlock' => [
+                'before' => ['*@*/episodes/*'],
             ],
         ];
     }

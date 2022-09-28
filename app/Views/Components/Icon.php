@@ -19,10 +19,9 @@ class Icon extends Component
             return '□';
         }
 
-        if ($this->attributes['class'] !== '') {
-            return str_replace('<svg', '<svg class="' . $this->attributes['class'] . '"', $svgContents);
-        }
+        unset($this->attributes['glyph']);
+        $attributes = stringify_attributes($this->attributes);
 
-        return $svgContents;
+        return str_replace('<svg', '<svg ' . $attributes, $svgContents);
     }
 }

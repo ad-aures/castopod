@@ -18,7 +18,7 @@ if (! function_exists('save_media')) {
     /**
      * Saves a file to the corresponding podcast folder in `public/media`
      */
-    function save_media(File | UploadedFile $file, string $folder = '', string $filename = ''): string
+    function save_media(File | UploadedFile $file, string $folder = '', string $filename = null): string
     {
         if (($extension = $file->getExtension()) !== '') {
             $filename = $filename . '.' . $extension;

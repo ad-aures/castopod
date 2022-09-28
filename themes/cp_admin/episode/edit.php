@@ -113,7 +113,6 @@
 
 </Forms.Section>
 
-
 <Forms.Section
     title="<?= lang('Episode.form.show_notes_section_title') ?>"
     subtitle="<?= lang('Episode.form.show_notes_section_subtitle') ?>">
@@ -134,6 +133,11 @@
     value="<?= esc($podcast->episode_description_footer_markdown) ?? '' ?>"
     disallowList="header,quote" />
 
+</Forms.Section>
+
+<Forms.Section title="<?= lang('Episode.form.premium_title') ?>" >
+    <Forms.Toggler class="mt-2" name="premium" value="yes" checked="<?= $episode->is_premium ? 'true' : 'false' ?>">
+        <?= lang('Episode.form.premium') ?></Forms.Toggler>
 </Forms.Section>
 
 <Forms.Section

@@ -85,6 +85,7 @@ class EpisodeModel extends Model
         'is_published_on_hubs',
         'posts_count',
         'comments_count',
+        'is_premium',
         'published_at',
         'created_by',
         'updated_by',
@@ -411,6 +412,15 @@ class EpisodeModel extends Model
             ->delete('episodes_markers');
 
         return $data;
+    }
+
+    public function doesPodcastHavePremiumEpisodes(int $podcastId): bool
+    {
+        return $this->builder()
+            ->where([
+                'podcast_id' => $podcastId,
+                'is_premium' => true,
+            ])->countAllResults() > 0;
     }
 
     /**

@@ -73,16 +73,17 @@ use RuntimeException;
  * @property int $posts_count
  * @property int $comments_count
  * @property EpisodeComment[]|null $comments
+ * @property bool $is_premium
  * @property int $created_by
  * @property int $updated_by
- * @property string $publication_status;
- * @property Time|null $published_at;
- * @property Time $created_at;
- * @property Time $updated_at;
+ * @property string $publication_status
+ * @property Time|null $published_at
+ * @property Time $created_at
+ * @property Time $updated_at
  *
- * @property Person[] $persons;
- * @property Soundbite[] $soundbites;
- * @property string $embed_url;
+ * @property Person[] $persons
+ * @property Soundbite[] $soundbites
+ * @property string $embed_url
  */
 class Episode extends Entity
 {
@@ -168,6 +169,7 @@ class Episode extends Entity
         'is_published_on_hubs' => 'boolean',
         'posts_count' => 'integer',
         'comments_count' => 'integer',
+        'is_premium' => 'boolean',
         'created_by' => 'integer',
         'updated_by' => 'integer',
     ];
@@ -233,7 +235,7 @@ class Episode extends Entity
             (new MediaModel('audio'))->updateMedia($this->getAudio());
         } else {
             $audio = new Audio([
-                'file_name' => $this->attributes['slug'],
+                'file_name' => pathinfo($file->getRandomName(), PATHINFO_FILENAME),
                 'file_directory' => 'podcasts/' . $this->getPodcast()->handle,
                 'language_code' => $this->getPodcast()
                     ->language_code,
@@ -337,16 +339,20 @@ class Episode extends Entity
     {
         helper('analytics');
 
-        // remove 'podcasts/' from audio file path
-        $strippedAudioPath = substr($this->getAudio()->file_path, 9);
-
         return generate_episode_analytics_url(
             $this->podcast_id,
             $this->id,
-            $strippedAudioPath,
-            $this->audio->duration,
-            $this->audio->file_size,
-            $this->audio->header_size,
+            $this->getPodcast()
+                ->handle,
+            $this->attributes['slug'],
+            $this->getAudio()
+                ->file_extension,
+            $this->getAudio()
+                ->duration,
+            $this->getAudio()
+                ->file_size,
+            $this->getAudio()
+                ->header_size,
             $this->published_at,
         );
     }

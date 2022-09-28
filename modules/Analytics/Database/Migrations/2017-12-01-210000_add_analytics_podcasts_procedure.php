@@ -38,7 +38,8 @@ class AddAnalyticsPodcastsProcedure extends Migration
             IN `p_filesize` INT UNSIGNED,
             IN `p_duration` DECIMAL(8,3) UNSIGNED,
             IN `p_age` INT UNSIGNED,
-            IN `p_new_listener` TINYINT(1) UNSIGNED
+            IN `p_new_listener` TINYINT(1) UNSIGNED,
+            IN `p_subscription_id` INT UNSIGNED
             )  MODIFIES SQL DATA
         DETERMINISTIC
         SQL SECURITY INVOKER
@@ -69,6 +70,12 @@ class AddAnalyticsPodcastsProcedure extends Migration
             INSERT INTO `{$prefix}analytics_podcasts_by_region`(`podcast_id`, `country_code`, `region_code`, `latitude`, `longitude`, `date`)
                 VALUES (p_podcast_id, p_country_code, p_region_code, p_latitude, p_longitude, @current_date)
                 ON DUPLICATE KEY UPDATE `hits`=`hits`+1;
+
+            IF `p_subscription_id` THEN
+                INSERT INTO `{$prefix}analytics_podcasts_by_subscription`(`podcast_id`, `episode_id`, `subscription_id`, `date`)
+                VALUES (p_podcast_id, p_episode_id, p_subscription_id, @current_date)
+                ON DUPLICATE KEY UPDATE `hits`=`hits`+1;
+            END IF;
         END IF;
         INSERT INTO `{$prefix}analytics_podcasts_by_player`(`podcast_id`, `service`, `app`, `device`, `os`, `is_bot`, `date`)
             VALUES (p_podcast_id, p_service, p_app, p_device, p_os, p_bot, @current_date)

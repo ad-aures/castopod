@@ -42,6 +42,11 @@ data_table(
         [
             'header' => lang('Episode.list.episode'),
             'cell' => function ($episode, $podcast) {
+                $premiumBadge = '';
+                if ($episode->is_premium) {
+                    $premiumBadge = '<Icon glyph="exchange-dollar" class="absolute left-0 w-8 pl-2 text-2xl rounded-r-full rounded-tl-lg top-2 text-accent-contrast bg-accent-base" />';
+                }
+
                 return '<div class="flex">' .
                     '<div class="relative flex-shrink-0 mr-2">' .
                         '<time class="absolute px-1 text-xs font-semibold text-white rounded bottom-2 right-2 bg-black/50" datetime="PT' . round($episode->audio->duration, 3) . 'S">' .
@@ -49,6 +54,7 @@ data_table(
                                 (int) $episode->audio->duration,
                             ) .
                         '</time>' .
+                        $premiumBadge .
                         '<img src="' . $episode->cover->thumbnail_url . '" alt="' . esc($episode->title) . '" class="object-cover w-20 rounded-lg shadow-inner aspect-square" loading="lazy" />' .
                     '</div>' .
                     '<a class="overflow-x-hidden text-sm hover:underline" href="' . route_to(

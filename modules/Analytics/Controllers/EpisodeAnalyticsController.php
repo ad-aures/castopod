@@ -10,12 +10,16 @@ declare(strict_types=1);
 
 namespace Modules\Analytics\Controllers;
 
+use App\Entities\Episode;
+use App\Models\EpisodeModel;
 use CodeIgniter\Controller;
+use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Config\Services;
 use Modules\Analytics\Config\Analytics;
+use Modules\PremiumPodcasts\Models\SubscriptionModel;
 use Psr\Log\LoggerInterface;
 
 class EpisodeAnalyticsController extends Controller
@@ -48,14 +52,14 @@ class EpisodeAnalyticsController extends Controller
         $this->config = config('Analytics');
     }
 
-    public function hit(string $base64EpisodeData, string ...$audioPath): RedirectResponse
+    public function hit(string $base64EpisodeData, string ...$audioPath): RedirectResponse|ResponseInterface
     {
         $session = Services::session();
         $session->start();
 
         $serviceName = '';
-        if (isset($_GET['_from'])) {
-            $serviceName = $_GET['_from'];
+        if ($this->request->getGet('_from')) {
+            $serviceName = $this->request->getGet('_from');
         } elseif ($session->get('embed_domain') !== null) {
             $serviceName = $session->get('embed_domain');
         } elseif ($session->get('referer') !== null && $session->get('referer') !== '- Direct -') {
@@ -67,6 +71,40 @@ class EpisodeAnalyticsController extends Controller
             base64_url_decode($base64EpisodeData),
         );
 
+        if (! $episodeData) {
+            throw PageNotFoundException::forPageNotFound();
+        }
+
+        // check if episode is premium?
+        $episode = (new EpisodeModel())->getEpisodeById($episodeData['episodeId']);
+
+        if (! $episode instanceof Episode) {
+            return $this->response->setStatusCode(404);
+        }
+
+        $subscription = null;
+
+        // check if podcast is already unlocked before any token validation
+        if ($episode->is_premium && ($subscription = service('premium_podcasts')->subscription(
+            $episode->podcast->handle
+        )) === null) {
+            // look for token as GET parameter
+            if (($token = $this->request->getGet('token')) === null) {
+                return $this->response->setStatusCode(
+                    401,
+                    'Episode is premium, you must provide a token to unlock it.'
+                );
+            }
+
+            // check if there's a valid subscription for the provided token
+            if (($subscription = (new SubscriptionModel())->validateSubscription(
+                $episode->podcast->handle,
+                $token
+            )) === null) {
+                return $this->response->setStatusCode(401, 'Invalid token!');
+            }
+        }
+
         podcast_hit(
             $episodeData['podcastId'],
             $episodeData['episodeId'],
@@ -75,8 +113,9 @@ class EpisodeAnalyticsController extends Controller
             $episodeData['duration'],
             $episodeData['publicationDate'],
             $serviceName,
+            $subscription !== null ? $subscription->id : null
         );
 
-        return redirect()->to($this->config->getAudioUrl(['podcasts', ...$audioPath]));
+        return redirect()->to($this->config->getAudioUrl($episode->audio->file_path));
     }
 }

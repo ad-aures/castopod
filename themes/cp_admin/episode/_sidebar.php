@@ -21,7 +21,10 @@ $podcastNavigation = [
     />
     <span class="flex-1 w-full px-2 text-xs font-semibold truncate" title="<?= esc($podcast->title) ?>"><?= esc($podcast->title) ?></span>
 </a>
-<div class="flex items-center px-4 py-2 border-y border-navigation">
+<div class="relative flex items-center px-4 py-2 border-y border-navigation">
+    <?php if ($episode->is_premium): ?>
+        <Icon glyph="exchange-dollar" class="absolute pl-1 text-xl rounded-r-full rounded-tl-lg left-4 top-4 text-accent-contrast bg-accent-base" />
+    <?php endif; ?>
     <img
     src="<?= $episode->cover->thumbnail_url ?>"
     alt="<?= esc($episode->title) ?>"

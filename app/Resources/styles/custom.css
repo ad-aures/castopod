@@ -28,6 +28,10 @@
     border-radius: max(0px, min(1rem, calc((100vw - 1rem - 100%) * 9999)));
   }
 
+  .rounded-conditional-full {
+    border-radius: max(0px, min(9999px, calc((100vw - 1rem - 100%) * 9999)));
+  }
+
   .backdrop-gradient {
     background-image: linear-gradient(
       180deg,

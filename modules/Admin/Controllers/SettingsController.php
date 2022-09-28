@@ -288,6 +288,14 @@ class SettingsController extends BaseController
             cache()->clean();
         }
 
+        if ($this->request->getPost('rename_episodes_files') === 'yes') {
+            $allAudio = (new MediaModel('audio'))->getAllOfType();
+
+            foreach ($allAudio as $audio) {
+                $audio->rename();
+            }
+        }
+
         return redirect('settings-general')->with('message', lang('Settings.housekeeping.runSuccess'));
     }
 

@@ -155,6 +155,12 @@ class AuthSeeder extends Seeder
                 'has_permission' => ['podcast_admin'],
             ],
             [
+                'name' => 'manage_subscriptions',
+                'description' =>
+                    'Add / edit / remove podcast subscriptions',
+                'has_permission' => ['podcast_admin'],
+            ],
+            [
                 'name' => 'manage_contributors',
                 'description' =>
                     'Add / remove contributors to a podcast and edit their roles',

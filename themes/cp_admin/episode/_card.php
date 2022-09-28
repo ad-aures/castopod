@@ -1,10 +1,17 @@
-<article class="relative flex flex-col flex-1 flex-shrink-0 w-full transition group overflow-hidden bg-elevated border-3 snap-center hover:shadow-lg focus-within:shadow-lg focus-within:ring-accent border-subtle rounded-xl min-w-[12rem] max-w-[17rem]">
+<article class="relative flex flex-col flex-1 flex-shrink-0 w-full transition group overflow-hidden bg-elevated border-3 snap-center hover:shadow-lg focus-within:shadow-lg focus-within:ring-accent rounded-xl min-w-[12rem] max-w-[17rem] <?= $episode->is_premium ? 'border-accent-base' : 'border-subtle' ?>">
     <a href="<?= route_to('episode-view', $episode->podcast->id, $episode->id) ?>" class="flex flex-col justify-end w-full h-full text-white group">
         <div class="absolute bottom-0 left-0 z-10 w-full h-full backdrop-gradient mix-blend-multiply"></div>
         <div class="w-full h-full overflow-hidden bg-header">
             <img src="<?= $episode->cover->medium_url ?>" alt="<?= esc($episode->title) ?>" class="object-cover w-full h-full transition duration-200 ease-in-out transform group-focus:scale-105 group-hover:scale-105 aspect-square" loading="lazy" />
         </div>
-        <?= publication_pill($episode->published_at, $episode->publication_status, 'absolute top-0 left-0 ml-2 mt-2 text-sm'); ?>
+        <?php if ($episode->is_premium): ?>
+            <div class="absolute top-0 left-0 inline-flex mt-2 gap-x-2">
+                <Icon glyph="exchange-dollar" class="w-8 pl-2 text-2xl rounded-r-full rounded-tl-lg text-accent-contrast bg-accent-base" />
+                <?= publication_pill($episode->published_at, $episode->publication_status, 'text-sm'); ?>
+            </div>
+        <?php else: ?>
+            <?= publication_pill($episode->published_at, $episode->publication_status, 'absolute top-0 left-0 ml-2 mt-2 text-sm'); ?>
+        <?php endif; ?>
         <div class="absolute z-20 flex flex-col items-start px-4 py-2">
             <?= episode_numbering($episode->number, $episode->season_number, 'text-xs font-semibold !no-underline px-1 bg-black/50 mr-1', true) ?>
             <span class="font-semibold leading-tight line-clamp-2"><?= esc($episode->title) ?></span>

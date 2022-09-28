@@ -10,6 +10,7 @@ parameters:
         - app/Helpers
         - modules/Analytics/Helpers
         - modules/Fediverse/Helpers
+        - modules/PremiumPodcasts/Helpers
         - vendor/codeigniter4/framework/system/Helpers
         - vendor/myth/auth/src/Helpers
     excludePaths:

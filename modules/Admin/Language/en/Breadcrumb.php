@@ -14,6 +14,7 @@ return [
         ->gateway => 'Home',
     'podcasts' => 'podcasts',
     'episodes' => 'episodes',
+    'subscriptions' => 'subscriptions',
     'contributors' => 'contributors',
     'pages' => 'pages',
     'settings' => 'settings',

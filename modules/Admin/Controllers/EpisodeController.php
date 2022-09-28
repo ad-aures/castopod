@@ -193,6 +193,7 @@ class EpisodeController extends BaseController
             'type' => $this->request->getPost('type'),
             'is_blocked' => $this->request->getPost('block') === 'yes',
             'custom_rss_string' => $this->request->getPost('custom_rss'),
+            'is_premium' => $this->request->getPost('premium') === 'yes',
             'created_by' => user_id(),
             'updated_by' => user_id(),
             'published_at' => null,
@@ -308,6 +309,7 @@ class EpisodeController extends BaseController
         $this->episode->type = $this->request->getPost('type');
         $this->episode->is_blocked = $this->request->getPost('block') === 'yes';
         $this->episode->custom_rss_string = $this->request->getPost('custom_rss');
+        $this->episode->is_premium = $this->request->getPost('premium') === 'yes';
 
         $this->episode->updated_by = (int) user_id();
         $this->episode->setAudio($this->request->getFile('audio_file'));

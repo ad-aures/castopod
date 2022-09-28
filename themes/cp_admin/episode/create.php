@@ -107,6 +107,8 @@
     isChecked="false" ><?= lang('Episode.form.parental_advisory.explicit') ?></Forms.RadioButton>
 </fieldset>
 
+
+
 </Forms.Section>
 
 
@@ -129,6 +131,11 @@
     value="<?= esc($podcast->episode_description_footer_markdown) ?? '' ?>"
     disallowList="header,quote" />
 
+</Forms.Section>
+
+<Forms.Section title="<?= lang('Episode.form.premium_title') ?>">
+    <Forms.Toggler class="mt-2" name="premium" value="yes" checked="<?= $podcast->is_premium_by_default ? 'true' : 'false' ?>">
+        <?= lang('Episode.form.premium') ?></Forms.Toggler>
 </Forms.Section>
 
 <Forms.Section

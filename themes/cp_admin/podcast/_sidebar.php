@@ -9,6 +9,10 @@ $podcastNavigation = [
         'icon' => 'play-circle',
         'items' => ['episode-list', 'episode-create'],
     ],
+    'premium' => [
+        'icon' => 'exchange-dollar',
+        'items' => ['subscription-list', 'subscription-add'],
+    ],
     'analytics' => [
         'icon' => 'line-chart',
         'items' => [
@@ -41,7 +45,10 @@ $counts = [
 
 ?>
 
-<div class="flex items-center px-4 py-2 border-b border-navigation">
+<div class="relative flex items-center px-4 py-2 border-b border-navigation">
+    <?php if ($podcast->is_premium): ?>
+        <Icon glyph="exchange-dollar" class="absolute pl-1 text-xl rounded-r-full rounded-tl-lg left-4 top-4 text-accent-contrast bg-accent-base" />
+    <?php endif; ?>
     <img
     src="<?= $podcast->cover->thumbnail_url ?>"
     alt="<?= esc($podcast->title) ?>"

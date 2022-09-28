@@ -114,4 +114,27 @@ class BaseMedia extends Entity
         $mediaModel = new MediaModel();
         return $mediaModel->delete($this->id);
     }
+
+    public function rename(): bool
+    {
+        $newFilePath = $this->file_directory . '/' . (new File(''))->getRandomName() . '.' . $this->file_extension;
+
+        $db = db_connect();
+        $db->transStart();
+
+        if (! (new MediaModel())->update($this->id, [
+            'file_path' => $newFilePath,
+        ])) {
+            return false;
+        }
+
+        if (! rename(media_path($this->file_path), media_path($newFilePath))) {
+            $db->transRollback();
+            return false;
+        }
+
+        $db->transComplete();
+
+        return true;
+    }
 }

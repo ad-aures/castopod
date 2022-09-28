@@ -40,7 +40,7 @@ class PostController extends FediversePostController
     /**
      * @var string[]
      */
-    protected $helpers = ['auth', 'fediverse', 'svg', 'components', 'misc', 'seo'];
+    protected $helpers = ['auth', 'fediverse', 'svg', 'components', 'misc', 'seo', 'premium_podcasts'];
 
     public function _remap(string $method, string ...$params): mixed
     {

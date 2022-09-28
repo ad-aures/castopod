@@ -169,6 +169,11 @@ class AddPodcasts extends Migration
                 'constraint' => 512,
                 'null' => true,
             ],
+            'is_premium_by_default' => [
+                'type' => 'TINYINT',
+                'constraint' => 1,
+                'default' => 0,
+            ],
             'created_by' => [
                 'type' => 'INT',
                 'unsigned' => true,

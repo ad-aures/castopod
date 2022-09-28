@@ -109,6 +109,8 @@ return [
             'bonus' => 'Bonus',
             'bonus_hint' => 'Extra content for the show (for example, behind the scenes info or interviews with the cast) or cross-promotional content for another show',
         ],
+        'premium_title' => 'Premium',
+        'premium' => 'Episode must only be accessible to premium subscribers',
         'parental_advisory' => [
             'label' => 'Parental advisory',
             'hint' => 'Does the episode contain explicit content?',

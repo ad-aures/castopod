@@ -83,6 +83,9 @@
         <div class="z-10 flex flex-col items-start gap-y-2 gap-x-4 sm:flex-row">
             <div class="relative flex-shrink-0">
                 <?= explicit_badge($episode->parental_advisory === 'explicit', 'rounded absolute left-0 bottom-0 ml-2 mb-2 bg-black/75 text-accent-contrast') ?>
+                <?php if ($episode->is_premium): ?>
+                    <Icon glyph="exchange-dollar" class="absolute left-0 w-8 pl-2 text-2xl rounded-r-full rounded-tl-lg top-2 text-accent-contrast bg-accent-base" />
+                <?php endif; ?>
                 <img src="<?= $episode->cover->medium_url ?>" alt="<?= esc($episode->title) ?>" class="flex-shrink-0 rounded-md shadow-xl h-36 aspect-square" loading="lazy" />
             </div>
             <div class="flex flex-col items-start w-full min-w-0 text-white">
@@ -139,11 +142,12 @@
         <?php endif; ?>
     </div>
     <?= $this->include('episode/_partials/navigation') ?>
+    <?= $this->include('podcast/_partials/premium_banner') ?>
     <div class="relative grid items-start flex-1 col-start-2 grid-cols-podcastMain gap-x-6">
         <main class="w-full col-start-1 row-start-1 py-6 col-span-full md:col-span-1">
             <?= $this->renderSection('content') ?>
         </main>
-        <div data-sidebar-toggler="backdrop" class="absolute top-0 left-0 z-10 hidden w-full h-full bg-backdrop/75 md:hidden" role="button" tabIndex="0" aria-label="Close"></div>
+        <div data-sidebar-toggler="backdrop" class="absolute top-0 left-0 z-10 hidden w-full h-full bg-backdrop/75 md:hidden" role="button" tabIndex="0" aria-label="<?= lang('Common.close') ?>"></div>
         <?= $this->include('podcast/_partials/sidebar') ?>
     </div>
     <?= view('_persons_modal', [

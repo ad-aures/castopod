@@ -1,4 +1,4 @@
-<div data-sidebar-toggler="backdrop" class="absolute top-0 left-0 z-10 hidden w-full h-full bg-backdrop/75 md:hidden" role="button" tabIndex="0" aria-label="Close"></div>
+<div data-sidebar-toggler="backdrop" class="absolute top-0 left-0 z-10 hidden w-full h-full bg-backdrop/75 md:hidden" role="button" tabIndex="0" aria-label="<?= lang('Common.close') ?>"></div>
 <aside id="podcast-sidebar" data-sidebar-toggler="sidebar" data-toggle-class="hidden" data-hide-class="hidden" class="z-20 hidden h-full col-span-1 col-start-2 row-start-1 p-4 py-6 shadow-2xl md:shadow-none md:block bg-base">
     <div class="sticky z-10 bg-base top-12">
         <a href="<?= route_to('podcast_feed', esc($podcast->handle)) ?>" class="inline-flex items-center mb-6 text-sm font-semibold focus:ring-accent text-skin-muted hover:text-skin-base group" target="_blank" rel="noopener noreferrer">

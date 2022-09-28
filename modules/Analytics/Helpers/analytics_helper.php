@@ -41,7 +41,9 @@ if (! function_exists('generate_episode_analytics_url')) {
     function generate_episode_analytics_url(
         int $podcastId,
         int $episodeId,
-        string $audioPath,
+        string $podcastHandle,
+        string $episodeSlug,
+        string $audioExtension,
         float $audioDuration,
         int $audioFileSize,
         int $audioFileHeaderSize,
@@ -66,7 +68,7 @@ if (! function_exists('generate_episode_analytics_url')) {
                     $publicationDate->getTimestamp(),
                 ),
             ),
-            $audioPath,
+            $podcastHandle . '/' . $episodeSlug . '.' . $audioExtension,
         );
     }
 }
@@ -263,7 +265,8 @@ if (! function_exists('podcast_hit')) {
         int $fileSize,
         float $duration,
         int $publicationTime,
-        string $serviceName
+        string $serviceName,
+        ?int $subscriptionId,
     ): void {
         $session = Services::session();
         $session->start();
@@ -353,7 +356,7 @@ if (! function_exists('podcast_hit')) {
                         ->save($podcastListenerHashId, $downloadsByUser, $secondsToMidnight);
 
                     $db->query(
-                        "CALL {$procedureName}(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",
+                        "CALL {$procedureName}(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",
                         [
                             $podcastId,
                             $episodeId,
@@ -370,6 +373,7 @@ if (! function_exists('podcast_hit')) {
                             $duration,
                             $age,
                             $newListener,
+                            $subscriptionId,
                         ],
                     );
                 }

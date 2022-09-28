@@ -76,11 +76,18 @@
         <div class="grid gap-4 mt-4 grid-cols-cards">
             <?php if ($podcasts): ?>
                 <?php foreach ($podcasts as $podcast): ?>
-                    <a href="<?= $podcast->link ?>" class="relative w-full h-full overflow-hidden transition shadow focus:ring-accent rounded-xl border-subtle hover:shadow-xl focus:shadow-xl group border-3">
+                    <a href="<?= $podcast->link ?>" class="relative w-full h-full overflow-hidden transition shadow focus:ring-accent rounded-xl hover:shadow-xl focus:shadow-xl group border-3 <?= $podcast->is_premium ? 'border-accent-base' : 'border-subtle' ?>">
                         <article class="text-white">
                             <div class="absolute bottom-0 left-0 z-10 w-full h-full backdrop-gradient mix-blend-multiply"></div>
                             <div class="w-full h-full overflow-hidden bg-header">
-                                <?= explicit_badge($podcast->parental_advisory === 'explicit', 'absolute top-0 left-0 z-10 rounded bg-black/75 ml-2 mt-2') ?>
+                                <?php if ($podcast->is_premium): ?>
+                                    <div class="absolute top-0 left-0 z-10 inline-flex items-center mt-2 gap-x-2">
+                                        <Icon glyph="exchange-dollar" class="w-8 pl-2 text-2xl rounded-r-full rounded-tl-lg text-accent-contrast bg-accent-base" />
+                                        <?= explicit_badge($podcast->parental_advisory === 'explicit', 'rounded bg-black/75') ?>
+                                    </div>
+                                <?php else: ?>
+                                    <?= explicit_badge($podcast->parental_advisory === 'explicit', 'absolute top-0 left-0 z-10 rounded bg-black/75 ml-2 mt-2') ?>
+                                <?php endif; ?>
                                 <img alt="<?= esc($podcast->title) ?>" src="<?= $podcast->cover->medium_url ?>" class="object-cover w-full h-full transition duration-200 ease-in-out transform bg-header aspect-square group-focus:scale-105 group-hover:scale-105" loading="lazy" />
                             </div>
                             <div class="absolute bottom-0 left-0 z-20 w-full px-4 pb-2">

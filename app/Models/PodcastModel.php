@@ -64,6 +64,7 @@ class PodcastModel extends Model
         'partner_id',
         'partner_link_url',
         'partner_image_url',
+        'is_premium_by_default',
         'published_at',
         'created_by',
         'updated_by',

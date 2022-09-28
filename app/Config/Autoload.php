@@ -51,6 +51,7 @@ class Autoload extends AutoloadConfig
         'Modules\Fediverse' => ROOTPATH . 'modules/Fediverse/',
         'Modules\WebSub' => ROOTPATH . 'modules/WebSub/',
         'Modules\Api\Rest\V1' => ROOTPATH . 'modules/Api/Rest/V1',
+        'Modules\PremiumPodcasts' => ROOTPATH . 'modules/PremiumPodcasts/',
         'Config' => APPPATH . 'Config/',
         'ViewComponents' => APPPATH . 'Libraries/ViewComponents/',
         'ViewThemes' => APPPATH . 'Libraries/ViewThemes/',

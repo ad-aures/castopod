@@ -43,7 +43,7 @@
         </div>
     <?php endif; ?>
 
-    <header class="relative z-50 flex flex-col-reverse justify-between w-full col-start-2 bg-top bg-no-repeat bg-cover sm:flex-row sm:items-end bg-header aspect-[3/1]" style="background-image: url('<?= $podcast->banner->medium_url ?>');">
+    <header class="min-h-[200px] relative z-50 flex flex-col-reverse justify-between w-full gap-x-2 col-start-2 bg-top bg-no-repeat bg-cover sm:flex-row sm:items-end bg-header aspect-[3/1]" style="background-image: url('<?= $podcast->banner->medium_url ?>');">
         <div class="absolute bottom-0 left-0 w-full h-full backdrop-gradient mix-blend-multiply"></div>
         <div class="z-10 flex items-center pl-4 -mb-6 md:pl-8 md:-mb-8 gap-x-4">
             <img src="<?= $podcast->cover->thumbnail_url ?>" alt="<?= esc($podcast->title) ?>" class="h-24 rounded-full sm:h-28 md:h-36 ring-3 ring-background-elevated aspect-square" loading="lazy" />
@@ -77,6 +77,7 @@
         </div>
     </header>
     <?= $this->include('podcast/_partials/navigation') ?>
+    <?= $this->include('podcast/_partials/premium_banner') ?>
     <div class="relative grid items-start flex-1 col-start-2 grid-cols-podcastMain gap-x-6">
         <main class="w-full max-w-xl col-start-1 row-start-1 py-6 mx-auto col-span-full md:col-span-1">
             <?= $this->renderSection('content') ?>

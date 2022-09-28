@@ -259,6 +259,8 @@ class InstallController extends Controller
             ->latest();
         $migrations->setNamespace('Modules\Auth')
             ->latest();
+        $migrations->setNamespace('Modules\PremiumPodcasts')
+            ->latest();
         $migrations->setNamespace('Modules\Analytics')
             ->latest();
     }

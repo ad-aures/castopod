@@ -30,6 +30,8 @@ use League\CommonMark\Extension\DisallowedRawHtml\DisallowedRawHtmlExtension;
 use League\CommonMark\Extension\SmartPunct\SmartPunctExtension;
 use League\CommonMark\MarkdownConverter;
 use Modules\Auth\Entities\User;
+use Modules\PremiumPodcasts\Entities\Subscription;
+use Modules\PremiumPodcasts\Models\SubscriptionModel;
 use RuntimeException;
 
 /**
@@ -79,14 +81,17 @@ use RuntimeException;
  * @property string|null $partner_image_url
  * @property int $created_by
  * @property int $updated_by
- * @property string $publication_status;
- * @property Time|null $published_at;
- * @property Time $created_at;
- * @property Time $updated_at;
+ * @property string $publication_status
+ * @property bool $is_premium_by_default
+ * @property bool $is_premium
+ * @property Time|null $published_at
+ * @property Time $created_at
+ * @property Time $updated_at
  *
  * @property Episode[] $episodes
  * @property Person[] $persons
  * @property User[] $contributors
+ * @property Subscription[] $subscriptions
  * @property Platform[] $podcasting_platforms
  * @property Platform[] $social_platforms
  * @property Platform[] $funding_platforms
@@ -129,6 +134,11 @@ class Podcast extends Entity
      * @var User[]|null
      */
     protected ?array $contributors = null;
+
+    /**
+     * @var Subscription[]|null
+     */
+    protected ?array $subscriptions = null;
 
     /**
      * @var Platform[]|null
@@ -182,6 +192,7 @@ class Podcast extends Entity
         'is_blocked' => 'boolean',
         'is_completed' => 'boolean',
         'is_locked' => 'boolean',
+        'is_premium_by_default' => 'boolean',
         'imported_feed_url' => '?string',
         'new_feed_url' => '?string',
         'location_name' => '?string',
@@ -378,6 +389,24 @@ class Podcast extends Entity
         }
 
         return $this->category;
+    }
+
+    /**
+     * Returns all podcast subscriptions
+     *
+     * @return Subscription[]
+     */
+    public function getSubscriptions(): array
+    {
+        if ($this->id === null) {
+            throw new RuntimeException('Podcasts must be created before getting subscriptions.');
+        }
+
+        if ($this->subscriptions === null) {
+            $this->subscriptions = (new SubscriptionModel())->getPodcastSubscriptions($this->id);
+        }
+
+        return $this->subscriptions;
     }
 
     /**
@@ -651,5 +680,11 @@ class Podcast extends Entity
         }
 
         return $this;
+    }
+
+    public function getIsPremium(): bool
+    {
+        // podcast is premium if at least one of its episodes is set as premium
+        return (new EpisodeModel())->doesPodcastHavePremiumEpisodes($this->id);
     }
 }

@@ -28,7 +28,7 @@ class Button extends Component
     public function render(): string
     {
         $baseClass =
-            'flex-shrink-0 inline-flex items-center justify-center font-semibold shadow-xs rounded-full focus:ring-accent';
+            'gap-x-2 flex-shrink-0 inline-flex items-center justify-center font-semibold shadow-xs rounded-full focus:ring-accent';
 
         $variantClass = [
             'default' => 'text-black bg-gray-300 hover:bg-gray-400',
@@ -84,14 +84,14 @@ class Button extends Component
         if ($this->iconLeft !== '') {
             $this->slot = (new Icon([
                 'glyph' => $this->iconLeft,
-                'class' => 'mr-2 opacity-75' . ' ' . $iconSize[$this->size],
+                'class' => 'opacity-75' . ' ' . $iconSize[$this->size],
             ]))->render() . $this->slot;
         }
 
         if ($this->iconRight !== '') {
             $this->slot .= (new Icon([
                 'glyph' => $this->iconRight,
-                'class' => 'ml-2 opacity-75' . ' ' . $iconSize[$this->size],
+                'class' => 'opacity-75' . ' ' . $iconSize[$this->size],
             ]))->render();
         }
 

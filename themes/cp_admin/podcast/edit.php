@@ -169,6 +169,11 @@
 
 </Forms.Section>
 
+<Forms.Section title="<?= lang('Podcast.form.premium') ?>">
+    <Forms.Toggler class="mt-2" name="premium_by_default" value="yes" checked="<?= $podcast->is_premium_by_default ? 'true' : 'false' ?>" hint="<?= lang('Podcast.form.premium_by_default_hint') ?>">
+        <?= lang('Podcast.form.premium_by_default') ?></Forms.Toggler>
+</Forms.Section>
+
 <Forms.Section
     title="<?= lang('Podcast.form.location_section_title') ?>"
     subtitle="<?= lang('Podcast.form.location_section_subtitle') ?>" >

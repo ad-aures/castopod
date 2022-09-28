@@ -238,6 +238,7 @@ class PodcastController extends BaseController
             'is_blocked' => $this->request->getPost('block') === 'yes',
             'is_completed' => $this->request->getPost('complete') === 'yes',
             'is_locked' => $this->request->getPost('lock') === 'yes',
+            'is_premium_by_default' => $this->request->getPost('premium_by_default') === 'yes',
             'created_by' => user_id(),
             'updated_by' => user_id(),
             'published_at' => null,
@@ -351,6 +352,7 @@ class PodcastController extends BaseController
         $this->podcast->is_completed =
             $this->request->getPost('complete') === 'yes';
         $this->podcast->is_locked = $this->request->getPost('lock') === 'yes';
+        $this->podcast->is_premium_by_default = $this->request->getPost('premium_by_default') === 'yes';
         $this->podcast->updated_by = (int) user_id();
 
         // republish on websub hubs upon edit
