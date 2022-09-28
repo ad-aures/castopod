@@ -34,7 +34,7 @@ if (! function_exists('icon')) {
         }
 
         if ($class !== '') {
-            $svgContents = str_replace('<svg', '<svg class="' . $class . '"', $svgContents);
+            return str_replace('<svg', '<svg class="' . $class . '"', $svgContents);
         }
 
         return $svgContents;
@@ -53,7 +53,7 @@ if (! function_exists('svg')) {
     {
         $svgContents = file_get_contents('assets/images/' . $name . '.svg');
         if ($class) {
-            $svgContents = str_replace('<svg', '<svg class="' . $class . '"', $svgContents);
+            return str_replace('<svg', '<svg class="' . $class . '"', $svgContents);
         }
 
         return $svgContents;

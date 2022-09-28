@@ -64,7 +64,7 @@ class CategoryModel extends Model
 
             $options = array_reduce(
                 $categories,
-                function (array $result, Category $category): array {
+                static function (array $result, Category $category): array {
                     $result[$category->id] = '';
                     if ($category->parent !== null) {
                         $result[$category->id] = lang(
@@ -114,12 +114,11 @@ class CategoryModel extends Model
         // prepare data for `podcasts_categories` table
         $data = array_reduce(
             $categoriesIds,
-            function (array $result, int $categoryId) use ($podcastId): array {
+            static function (array $result, int $categoryId) use ($podcastId): array {
                 $result[] = [
                     'podcast_id' => $podcastId,
                     'category_id' => $categoryId,
                 ];
-
                 return $result;
             },
             [],

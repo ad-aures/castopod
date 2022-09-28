@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Entities\Person;
-use CodeIgniter\Database\Query;
 use CodeIgniter\Model;
 
 class PersonModel extends Model
@@ -147,7 +146,7 @@ class PersonModel extends Model
                 $this->select('`id`, `full_name`')
                     ->orderBy('`full_name`', 'ASC')
                     ->findAll(),
-                function ($result, $person) {
+                static function ($result, $person) {
                     $result[$person->id] = $person->full_name;
                     return $result;
                 },
@@ -255,7 +254,7 @@ class PersonModel extends Model
         int $personId,
         string $groupSlug,
         string $roleSlug
-    ): bool | Query {
+    ): bool {
         return $this->db->table('episodes_persons')
             ->insert([
                 'podcast_id' => $podcastId,
@@ -266,12 +265,8 @@ class PersonModel extends Model
             ]);
     }
 
-    public function addPodcastPerson(
-        int $podcastId,
-        int $personId,
-        string $groupSlug,
-        string $roleSlug
-    ): bool | Query {
+    public function addPodcastPerson(int $podcastId, int $personId, string $groupSlug, string $roleSlug): bool
+    {
         return $this->db->table('podcasts_persons')
             ->insert([
                 'podcast_id' => $podcastId,

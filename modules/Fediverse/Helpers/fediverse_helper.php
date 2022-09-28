@@ -362,17 +362,14 @@ if (! function_exists('linkify')) {
             $text = match ($protocol) {
                 'http', 'https' => preg_replace_callback(
                     '~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i',
-                    function (array $match) use ($protocol, &$links) {
+                    static function (array $match) use ($protocol, &$links) {
                         if ($match[1] !== '' && $match[1] !== '0') {
                             $protocol = $match[1];
                         }
 
                         $link = $match[2] ?: $match[3];
-
                         helper('text');
-
                         $link = preg_replace('~^www\.(.+\.)~i', '$1', $link);
-
                         return '<' .
                             array_push(
                                 $links,
@@ -391,7 +388,7 @@ if (! function_exists('linkify')) {
                 ),
                 'handle' => preg_replace_callback(
                     '~(?<!\w)@(?<username>\w++)(?:@(?<domain>(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]))?~',
-                    function ($match) use (&$links) {
+                    static function ($match) use (&$links) {
                         // check if host is set and look for actor in database
                         if (isset($match['host'])) {
                             if (
@@ -449,7 +446,7 @@ if (! function_exists('linkify')) {
                     '~' .
                         preg_quote($protocol, '~') .
                         '://([^\s<]+?)(?<![\.,:])~i',
-                    function (array $match) use ($protocol, &$links) {
+                    static function (array $match) use ($protocol, &$links) {
                         return '<' .
                             array_push(
                                 $links,
@@ -472,7 +469,7 @@ if (! function_exists('linkify')) {
         // Insert all links
         return preg_replace_callback(
             '~<(\d+)>~',
-            function ($match) use (&$links) {
+            static function ($match) use (&$links) {
                 return $links[$match[1] - 1];
             },
             $text,

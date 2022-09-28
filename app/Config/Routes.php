@@ -69,14 +69,13 @@ $routes->get('/', 'HomeController', [
 $routes->get('.well-known/platforms', 'Platform');
 
 // Podcast's Public routes
-$routes->group('@(:podcastHandle)', function ($routes): void {
+$routes->group('@(:podcastHandle)', static function ($routes): void {
     $routes->get('/', 'PodcastController::activity/$1', [
         'as' => 'podcast-activity',
     ]);
     $routes->get('manifest.webmanifest', 'WebmanifestController::podcastManifest/$1', [
         'as' => 'podcast-webmanifest',
     ]);
-
     // override default Fediverse Library's actor route
     $routes->options('/', 'ActivityPubController::preflight');
     $routes->get('/', 'PodcastController::activity/$1', [
@@ -116,7 +115,7 @@ $routes->group('@(:podcastHandle)', function ($routes): void {
         ],
         'filter' => 'allow-cors',
     ]);
-    $routes->group('episodes/(:slug)', function ($routes): void {
+    $routes->group('episodes/(:slug)', static function ($routes): void {
         $routes->options('/', 'ActivityPubController::preflight');
         $routes->get('/', 'EpisodeController/$1/$2', [
             'as' => 'episode',
@@ -176,7 +175,7 @@ $routes->group('@(:podcastHandle)', function ($routes): void {
         $routes->get('oembed.xml', 'EpisodeController::oembedXML/$1/$2', [
             'as' => 'episode-oembed-xml',
         ]);
-        $routes->group('embed', function ($routes): void {
+        $routes->group('embed', static function ($routes): void {
             $routes->get('/', 'EpisodeController::embed/$1/$2', [
                 'as' => 'embed',
             ]);
@@ -185,7 +184,6 @@ $routes->group('@(:podcastHandle)', function ($routes): void {
             ],);
         });
     });
-
     $routes->head('feed.xml', 'FeedController/$1', [
         'as' => 'podcast_feed',
     ]);
@@ -211,14 +209,13 @@ $routes->get('/pages/(:slug)', 'PageController/$1', [
 /**
  * Overwriting Fediverse routes file
  */
-$routes->group('@(:podcastHandle)', function ($routes): void {
+$routes->group('@(:podcastHandle)', static function ($routes): void {
     $routes->post('posts/new', 'PostController::attemptCreate/$1', [
         'as' => 'post-attempt-create',
         'filter' => 'permission:podcast-manage_publications',
     ]);
-
     // Post
-    $routes->group('posts/(:uuid)', function ($routes): void {
+    $routes->group('posts/(:uuid)', static function ($routes): void {
         $routes->options('/', 'ActivityPubController::preflight');
         $routes->get('/', 'PostController::view/$1/$2', [
             'as' => 'post',
@@ -249,13 +246,11 @@ $routes->group('@(:podcastHandle)', function ($routes): void {
             ],
             'filter' => 'allow-cors',
         ]);
-
         // Actions
         $routes->post('action', 'PostController::attemptAction/$1/$2', [
             'as' => 'post-attempt-action',
             'filter' => 'permission:podcast-interact_as',
         ]);
-
         $routes->post(
             'block-actor',
             'PostController::attemptBlockActor/$1/$2',
@@ -276,7 +271,6 @@ $routes->group('@(:podcastHandle)', function ($routes): void {
             'as' => 'post-attempt-delete',
             'filter' => 'permission:podcast-manage_publications',
         ]);
-
         $routes->get(
             'remote/(:postAction)',
             'PostController::remoteAction/$1/$2/$3',
@@ -285,7 +279,6 @@ $routes->group('@(:podcastHandle)', function ($routes): void {
             ],
         );
     });
-
     $routes->get('follow', 'ActorController::follow/$1', [
         'as' => 'follow',
     ]);

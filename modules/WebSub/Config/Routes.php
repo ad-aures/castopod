@@ -16,6 +16,6 @@ $routes = service('routes');
 
 $routes->group('', [
     'namespace' => 'Modules\WebSub\Controllers',
-], function ($routes): void {
+], static function ($routes): void {
     $routes->cli('scheduled-websub-publish', 'WebSubController::publish');
 });

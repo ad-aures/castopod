@@ -13,7 +13,7 @@ $routes->group(
     [
         'namespace' => 'Modules\Install\Controllers',
     ],
-    function ($routes): void {
+    static function ($routes): void {
         $routes->get('/', 'InstallController', [
             'as' => 'install',
         ]);

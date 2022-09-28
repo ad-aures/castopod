@@ -23,7 +23,7 @@ class PodcastController extends Controller
     public function list(): Response
     {
         $data = (new PodcastModel())->findAll();
-        array_map(function ($podcast): void {
+        array_map(static function ($podcast): void {
             $podcast->feed_url = $podcast->getFeedUrl();
         }, $data);
         return $this->respond($data);

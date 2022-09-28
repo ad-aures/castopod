@@ -18,12 +18,11 @@ $routes->group(
     [
         'namespace' => 'Modules\Admin\Controllers',
     ],
-    function ($routes): void {
+    static function ($routes): void {
         $routes->get('/', 'DashboardController', [
             'as' => 'admin',
         ]);
-
-        $routes->group('settings', function ($routes): void {
+        $routes->group('settings', static function ($routes): void {
             $routes->get('/', 'SettingsController', [
                 'as' => 'settings-general',
                 'filter' => 'permission:settings-manage',
@@ -53,8 +52,7 @@ $routes->group(
                 'filter' => 'permission:settings-manage',
             ]);
         });
-
-        $routes->group('persons', function ($routes): void {
+        $routes->group('persons', static function ($routes): void {
             $routes->get('/', 'PersonController', [
                 'as' => 'person-list',
                 'filter' => 'permission:person-list',
@@ -66,7 +64,7 @@ $routes->group(
             $routes->post('new', 'PersonController::attemptCreate', [
                 'filter' => 'permission:person-create',
             ]);
-            $routes->group('(:num)', function ($routes): void {
+            $routes->group('(:num)', static function ($routes): void {
                 $routes->get('/', 'PersonController::view/$1', [
                     'as' => 'person-view',
                     'filter' => 'permission:person-view',
@@ -84,9 +82,8 @@ $routes->group(
                 ]);
             });
         });
-
         // Podcasts
-        $routes->group('podcasts', function ($routes): void {
+        $routes->group('podcasts', static function ($routes): void {
             $routes->get('/', 'PodcastController::list', [
                 'as' => 'podcast-list',
             ]);
@@ -104,10 +101,9 @@ $routes->group(
             $routes->post('import', 'PodcastImportController::attemptImport', [
                 'filter' => 'permission:podcasts-import',
             ]);
-
             // Podcast
             // Use ids in admin area to help permission and group lookups
-            $routes->group('(:num)', function ($routes): void {
+            $routes->group('(:num)', static function ($routes): void {
                 $routes->get('/', 'PodcastController::view/$1', [
                     'as' => 'podcast-view',
                     'filter' => 'permission:podcasts-view,podcast-view',
@@ -177,8 +173,7 @@ $routes->group(
                     'as' => 'podcast-update-feed',
                     'filter' => 'permission:podcasts-import',
                 ]);
-
-                $routes->group('persons', function ($routes): void {
+                $routes->group('persons', static function ($routes): void {
                     $routes->get('/', 'PodcastPersonController/$1', [
                         'as' => 'podcast-persons-manage',
                         'filter' => 'permission:podcast-edit',
@@ -190,7 +185,6 @@ $routes->group(
                             'filter' => 'permission:podcast-edit',
                         ],
                     );
-
                     $routes->get(
                         '(:num)/remove',
                         'PodcastPersonController::remove/$1/$2',
@@ -200,8 +194,7 @@ $routes->group(
                         ],
                     );
                 });
-
-                $routes->group('analytics', function ($routes): void {
+                $routes->group('analytics', static function ($routes): void {
                     $routes->get('/', 'PodcastController::viewAnalytics/$1', [
                         'as' => 'podcast-analytics',
                         'filter' => 'permission:podcasts-view,podcast-view',
@@ -255,9 +248,8 @@ $routes->group(
                         ],
                     );
                 });
-
                 // Podcast episodes
-                $routes->group('episodes', function ($routes): void {
+                $routes->group('episodes', static function ($routes): void {
                     $routes->get('/', 'EpisodeController::list/$1', [
                         'as' => 'episode-list',
                         'filter' =>
@@ -274,9 +266,8 @@ $routes->group(
                             'filter' => 'permission:podcast_episodes-create',
                         ],
                     );
-
                     // Episode
-                    $routes->group('(:num)', function ($routes): void {
+                    $routes->group('(:num)', static function ($routes): void {
                         $routes->get('/', 'EpisodeController::view/$1/$2', [
                             'as' => 'episode-view',
                             'filter' =>
@@ -474,8 +465,7 @@ $routes->group(
                                 'filter' => 'permission:podcast_episodes-edit',
                             ],
                         );
-
-                        $routes->group('persons', function ($routes): void {
+                        $routes->group('persons', static function ($routes): void {
                             $routes->get('/', 'EpisodePersonController/$1/$2', [
                                 'as' => 'episode-persons-manage',
                                 'filter' => 'permission:podcast_episodes-edit',
@@ -498,8 +488,7 @@ $routes->group(
                                 ],
                             );
                         });
-
-                        $routes->group('comments', function ($routes): void {
+                        $routes->group('comments', static function ($routes): void {
                             $routes->post(
                                 'new',
                                 'EpisodeController::attemptCommentCreate/$1/$2',
@@ -527,9 +516,8 @@ $routes->group(
                         });
                     });
                 });
-
                 // Podcast contributors
-                $routes->group('contributors', function ($routes): void {
+                $routes->group('contributors', static function ($routes): void {
                     $routes->get('/', 'ContributorController::list/$1', [
                         'as' => 'contributor-list',
                         'filter' =>
@@ -547,9 +535,8 @@ $routes->group(
                                 'permission:podcast-manage_contributors',
                         ],
                     );
-
                     // Contributor
-                    $routes->group('(:num)', function ($routes): void {
+                    $routes->group('(:num)', static function ($routes): void {
                         $routes->get('/', 'ContributorController::view/$1/$2', [
                             'as' => 'contributor-view',
                             'filter' =>
@@ -583,8 +570,7 @@ $routes->group(
                         );
                     });
                 });
-
-                $routes->group('platforms', function ($routes): void {
+                $routes->group('platforms', static function ($routes): void {
                     $routes->get(
                         '/',
                         'PodcastPlatformController::platforms/$1/podcasting',
@@ -626,9 +612,8 @@ $routes->group(
                         ],
                     );
                 });
-
                 // Podcast notifications
-                $routes->group('notifications', function ($routes): void {
+                $routes->group('notifications', static function ($routes): void {
                     $routes->get('/', 'NotificationController::list/$1', [
                         'as' => 'notification-list',
                     ]);
@@ -641,9 +626,8 @@ $routes->group(
                 });
             });
         });
-
         // Instance wide Fediverse config
-        $routes->group('fediverse', function ($routes): void {
+        $routes->group('fediverse', static function ($routes): void {
             $routes->get('/', 'FediverseController::dashboard', [
                 'as' => 'fediverse-dashboard',
             ]);
@@ -664,9 +648,8 @@ $routes->group(
                 ],
             );
         });
-
         // Pages
-        $routes->group('pages', function ($routes): void {
+        $routes->group('pages', static function ($routes): void {
             $routes->get('/', 'PageController::list', [
                 'as' => 'page-list',
             ]);
@@ -677,8 +660,7 @@ $routes->group(
             $routes->post('new', 'PageController::attemptCreate', [
                 'filter' => 'permission:pages-manage',
             ]);
-
-            $routes->group('(:num)', function ($routes): void {
+            $routes->group('(:num)', static function ($routes): void {
                 $routes->get('/', 'PageController::view/$1', [
                     'as' => 'page-view',
                 ]);
@@ -689,16 +671,14 @@ $routes->group(
                 $routes->post('edit', 'PageController::attemptEdit/$1', [
                     'filter' => 'permission:pages-manage',
                 ]);
-
                 $routes->get('delete', 'PageController::delete/$1', [
                     'as' => 'page-delete',
                     'filter' => 'permission:pages-manage',
                 ]);
             });
         });
-
         // Users
-        $routes->group('users', function ($routes): void {
+        $routes->group('users', static function ($routes): void {
             $routes->get('/', 'UserController::list', [
                 'as' => 'user-list',
                 'filter' => 'permission:users-list',
@@ -710,9 +690,8 @@ $routes->group(
             $routes->post('new', 'UserController::attemptCreate', [
                 'filter' => 'permission:users-create',
             ]);
-
             // User
-            $routes->group('(:num)', function ($routes): void {
+            $routes->group('(:num)', static function ($routes): void {
                 $routes->get('/', 'UserController::view/$1', [
                     'as' => 'user-view',
                     'filter' => 'permission:users-view',
@@ -746,9 +725,8 @@ $routes->group(
                 ]);
             });
         });
-
         // My account
-        $routes->group('my-account', function ($routes): void {
+        $routes->group('my-account', static function ($routes): void {
             $routes->get('/', 'MyAccountController', [
                 'as' => 'my-account',
             ]);

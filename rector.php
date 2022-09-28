@@ -13,7 +13,7 @@ use Rector\Core\ValueObject\PhpVersion;
 use Rector\EarlyReturn\Rector\If_\ChangeOrIfContinueToMultiContinueRector;
 use Rector\EarlyReturn\Rector\If_\ChangeOrIfReturnToEarlyReturnRector;
 use Rector\Php55\Rector\String_\StringClassNameToClassConstantRector;
-use Rector\Php80\Rector\ClassMethod\OptionalParametersAfterRequiredRector;
+use Rector\Php71\Rector\FuncCall\RemoveExtraParametersRector;
 use Rector\Set\ValueObject\SetList;
 
 return static function (RectorConfig $rectorConfig): void {
@@ -42,12 +42,13 @@ return static function (RectorConfig $rectorConfig): void {
 
     // auto import fully qualified class names
     $rectorConfig->importNames();
-    // TODO: add parallel run
-    // $rectorConfig->parallel();
 
     $rectorConfig->phpVersion(PhpVersion::PHP_80);
 
     $rectorConfig->skip([
+        // .mp3 files were somehow processed by rector, so skip all media files
+        __DIR__ . '/public/media/*',
+
         __DIR__ . '/app/Views/errors/*',
 
         // skip specific generated files
@@ -59,6 +60,7 @@ return static function (RectorConfig $rectorConfig): void {
         EncapsedStringsToSprintfRector::class,
         UnSpreadOperatorRector::class,
         ExplicitMethodCallOverMagicGetSetRector::class,
+        RemoveExtraParametersRector::class,
 
         // skip rule in specific directory
         StringClassNameToClassConstantRector::class => [
@@ -68,9 +70,6 @@ return static function (RectorConfig $rectorConfig): void {
         SymplifyQuoteEscapeRector::class => [
             __DIR__ . '/app/Language/*',
             __DIR__ . '/modules/*/Language/*',
-        ],
-        OptionalParametersAfterRequiredRector::class => [
-            __DIR__ . '/app/Validation',
         ],
 
         NewlineAfterStatementRector::class => [

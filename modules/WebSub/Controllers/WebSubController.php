@@ -20,6 +20,7 @@ class WebSubController extends Controller
 {
     public function publish(): void
     {
+        /** @noRector RemoveAlwaysTrueIfConditionRector */
         if (ENVIRONMENT !== 'production') {
             return;
         }

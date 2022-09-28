@@ -121,10 +121,12 @@ class InstallController extends Controller
             if (
                 $db->tableExists('users') &&
                 (new UserModel())->countAll() > 0
-            ) {
+                ) {
                 // if so, show a 404 page
                 throw PageNotFoundException::forPageNotFound();
             }
+
+            /** @noRector */
         } catch (DatabaseException) {
             // Could not connect to the database
             // show database config view to fix value
@@ -355,7 +357,7 @@ class InstallController extends Controller
             $replaced = false;
             $keyVal = $key . '="' . $value . '"' . PHP_EOL;
             $envData = array_map(
-                function ($line) use ($key, $keyVal, &$replaced) {
+                static function ($line) use ($key, $keyVal, &$replaced) {
                     if (str_starts_with($line, $key)) {
                         $replaced = true;
                         return $keyVal;

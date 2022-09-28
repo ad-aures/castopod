@@ -27,15 +27,10 @@ class SimpleRSSElement extends SimpleXMLElement
     public function addChildWithCDATA(string $name, string $value = '', ?string $namespace = null): static
     {
         $newChild = parent::addChild($name, null, $namespace);
-
-        if ($newChild !== null) {
-            $node = dom_import_simplexml($newChild);
-            if ($node !== null) {
-                $no = $node->ownerDocument;
-                if ($no !== null) {
-                    $node->appendChild($no->createCDATASection($value));
-                }
-            }
+        $node = dom_import_simplexml($newChild);
+        $no = $node->ownerDocument;
+        if ($no !== null) {
+            $node->appendChild($no->createCDATASection($value));
         }
 
         return $newChild;
@@ -55,23 +50,18 @@ class SimpleRSSElement extends SimpleXMLElement
     public function addChild($name, $value = null, $namespace = null, $escape = true): static
     {
         $newChild = parent::addChild($name, null, $namespace);
-
-        if ($newChild !== null) {
-            $node = dom_import_simplexml($newChild);
-            if ($node !== null) {
-                $no = $node->ownerDocument;
-                $value = $escape ? esc($value ?? '') : $value ?? '';
-                if (! $no instanceof DOMDocument) {
-                    return $newChild;
-                }
-
-                if (is_array($value)) {
-                    return $newChild;
-                }
-
-                $node->appendChild($no->createTextNode($value));
-            }
+        $node = dom_import_simplexml($newChild);
+        $no = $node->ownerDocument;
+        $value = $escape ? esc($value ?? '') : $value ?? '';
+        if (! $no instanceof DOMDocument) {
+            return $newChild;
         }
+
+        if (is_array($value)) {
+            return $newChild;
+        }
+
+        $node->appendChild($no->createTextNode($value));
 
         return $newChild;
     }

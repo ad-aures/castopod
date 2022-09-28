@@ -23,19 +23,17 @@ $routes->addPlaceholder('postAction', '\bfavourite|\breblog|\breply');
 
 $routes->group('', [
     'namespace' => 'Modules\Fediverse\Controllers',
-], function ($routes): void {
+], static function ($routes): void {
     // webfinger
     $routes->get('.well-known/webfinger', 'WebFingerController', [
         'as' => 'webfinger',
     ]);
-
     // nodeInfo2
     $routes->get('.well-known/x-nodeinfo2', 'NodeInfo2Controller', [
         'as' => 'nodeInfo2',
     ]);
-
     // Actor
-    $routes->group('@(:actorUsername)', function ($routes): void {
+    $routes->group('@(:actorUsername)', static function ($routes): void {
         // Actor
         $routes->get('/', 'ActorController/$1', [
             'as' => 'actor',
@@ -60,20 +58,16 @@ $routes->group('', [
             'as' => 'activity',
         ]);
     });
-
     // Post
     $routes->post('posts/new', 'PostController::attemptCreate/$1', [
         'as' => 'post-attempt-create',
     ]);
-
     $routes->get('posts/(:uuid)', 'PostController/$1', [
         'as' => 'post',
     ]);
-
     $routes->get('posts/(:uuid)/replies', 'PostController/$1', [
         'as' => 'post-replies',
     ]);
-
     $routes->post(
         'posts/(:uuid)/remote/(:postAction)',
         'PostController::attemptRemoteAction/$1/$2/$3',
@@ -81,7 +75,6 @@ $routes->group('', [
             'as' => 'post-attempt-remote-action',
         ],
     );
-
     // Blocking actors and domains
     $routes->post(
         'fediverse-block-actor',
@@ -90,7 +83,6 @@ $routes->group('', [
             'as' => 'fediverse-attempt-block-actor',
         ],
     );
-
     $routes->post(
         'fediverse-block-domain',
         'BlockController::attemptBlockDomain',
@@ -98,7 +90,6 @@ $routes->group('', [
             'as' => 'fediverse-attempt-block-domain',
         ],
     );
-
     $routes->post(
         'fediverse-unblock-actor',
         'BlockController::attemptUnblockActor',
@@ -106,7 +97,6 @@ $routes->group('', [
             'as' => 'fediverse-attempt-unblock-actor',
         ],
     );
-
     $routes->post(
         'fediverse-unblock-domain',
         'BlockController::attemptUnblockDomain',
@@ -114,6 +104,5 @@ $routes->group('', [
             'as' => 'fediverse-attempt-unblock-domain',
         ],
     );
-
     $routes->cli('scheduled-activities', 'SchedulerController::activity');
 });

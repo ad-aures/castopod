@@ -16,10 +16,7 @@ namespace Modules\Fediverse\Core;
 
 abstract class AbstractObject
 {
-    /**
-     * @param mixed $value
-     */
-    public function set(string $property, $value): static
+    public function set(string $property, mixed $value): static
     {
         $this->{$property} = $value;
 
@@ -45,7 +42,7 @@ abstract class AbstractObject
         }
 
         // removes all NULL, FALSE and Empty Strings but leaves 0 (zero) values
-        return array_filter($array, function ($value): bool {
+        return array_filter($array, static function ($value): bool {
             return $value !== null && $value !== false && $value !== '';
         });
     }

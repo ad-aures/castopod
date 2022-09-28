@@ -246,7 +246,7 @@ class ComponentRenderer
      */
     private function renderView(string $view, array $data): string
     {
-        return (function (string $view, $data): string {
+        return (static function (string $view, $data): string {
             extract($data);
             ob_start();
             eval('?>' . file_get_contents($view));

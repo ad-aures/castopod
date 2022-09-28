@@ -20,7 +20,7 @@ class Icon extends Component
         }
 
         if ($this->attributes['class'] !== '') {
-            $svgContents = str_replace('<svg', '<svg class="' . $this->attributes['class'] . '"', $svgContents);
+            return str_replace('<svg', '<svg class="' . $this->attributes['class'] . '"', $svgContents);
         }
 
         return $svgContents;

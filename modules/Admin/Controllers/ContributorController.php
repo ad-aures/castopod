@@ -81,7 +81,7 @@ class ContributorController extends BaseController
         $users = (new UserModel())->findAll();
         $userOptions = array_reduce(
             $users,
-            function ($result, $user) {
+            static function ($result, $user) {
                 $result[$user->id] = $user->username;
                 return $result;
             },
@@ -91,7 +91,7 @@ class ContributorController extends BaseController
         $roles = (new GroupModel())->getContributorRoles();
         $roleOptions = array_reduce(
             $roles,
-            function ($result, $role) {
+            static function ($result, $role) {
                 $result[$role->id] = lang('Contributor.roles.' . $role->name);
                 return $result;
             },
@@ -135,7 +135,7 @@ class ContributorController extends BaseController
         $roles = (new GroupModel())->getContributorRoles();
         $roleOptions = array_reduce(
             $roles,
-            function ($result, $role) {
+            static function ($result, $role) {
                 $result[$role->id] = lang('Contributor.roles.' . $role->name);
                 return $result;
             },

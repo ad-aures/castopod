@@ -29,7 +29,7 @@ class MapController extends BaseController
         );
 
         if (! ($found = cache($cacheName))) {
-            $found = view('pages/map', [], [
+            return view('pages/map', [], [
                 'cache' => DECADE,
                 'cache_name' => $cacheName,
             ]);

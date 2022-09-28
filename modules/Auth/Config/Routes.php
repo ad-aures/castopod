@@ -15,7 +15,7 @@ $routes->group(
     [
         'namespace' => 'Modules\Auth\Controllers',
     ],
-    function ($routes): void {
+    static function ($routes): void {
         // Login/out
         $routes->get('login', 'AuthController::login', [
             'as' => 'login',
@@ -24,13 +24,11 @@ $routes->group(
         $routes->get('logout', 'AuthController::logout', [
             'as' => 'logout',
         ]);
-
         // Registration
         $routes->get('register', 'AuthController::register', [
             'as' => 'register',
         ]);
         $routes->post('register', 'AuthController::attemptRegister');
-
         // Activation
         $routes->get('activate-account', 'AuthController::activateAccount', [
             'as' => 'activate-account',
@@ -42,7 +40,6 @@ $routes->group(
                 'as' => 'resend-activate-account',
             ],
         );
-
         // Forgot/Resets
         $routes->get('forgot', 'AuthController::forgotPassword', [
             'as' => 'forgot',
@@ -52,7 +49,6 @@ $routes->group(
             'as' => 'reset-password',
         ]);
         $routes->post('reset-password', 'AuthController::attemptReset');
-
         // interacting as an actor
         $routes->post('interact-as-actor', 'AuthController::attemptInteractAsActor', [
             'as' => 'interact-as-actor',

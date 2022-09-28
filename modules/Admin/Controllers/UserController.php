@@ -120,7 +120,7 @@ class UserController extends BaseController
         $roles = (new GroupModel())->getUserRoles();
         $roleOptions = array_reduce(
             $roles,
-            function ($result, $role) {
+            static function ($result, $role) {
                 $result[$role->name] = lang('User.roles.' . $role->name);
                 return $result;
             },

@@ -13,7 +13,7 @@ $routes->group(
         'namespace' => 'Modules\Api\Rest\V1\Controllers',
         'filter' => 'rest-api',
     ],
-    function ($routes): void {
+    static function ($routes): void {
         $routes->get('/', 'PodcastController::list');
         $routes->get('(:num)', 'PodcastController::view/$1');
         $routes->get('(:any)', 'ExceptionController::notFound');

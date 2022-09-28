@@ -28,7 +28,7 @@ use Modules\Auth\Entities\User;
  *      Events::on('create', [$myInstance, 'myMethod']);
  */
 
-Events::on('pre_system', function () {
+Events::on('pre_system', static function () {
     // @phpstan-ignore-next-line
     if (ENVIRONMENT !== 'testing') {
         if (ini_get('zlib.output_compression')) {
@@ -56,9 +56,8 @@ Events::on('pre_system', function () {
     }
 });
 
-Events::on('login', function (User $user): void {
+Events::on('login', static function (User $user): void {
     helper('auth');
-
     // set interact_as_actor_id value
     $userPodcasts = $user->podcasts;
     if ($userPodcasts = $user->podcasts) {
@@ -66,9 +65,8 @@ Events::on('login', function (User $user): void {
     }
 });
 
-Events::on('logout', function (User $user): void {
+Events::on('logout', static function (User $user): void {
     helper('auth');
-
     // remove user's interact_as_actor session
     remove_interact_as_actor();
 });
@@ -82,7 +80,7 @@ Events::on('logout', function (User $user): void {
  * @param Actor $actor
  * @param Actor $targetActor
  */
-Events::on('on_follow', function ($actor, $targetActor): void {
+Events::on('on_follow', static function ($actor, $targetActor): void {
     if ($actor->is_podcast) {
         cache()
             ->deleteMatching("podcast#{$actor->podcast->id}*");
@@ -102,7 +100,7 @@ Events::on('on_follow', function ($actor, $targetActor): void {
  * @param Actor $actor
  * @param Actor $targetActor
  */
-Events::on('on_undo_follow', function ($actor, $targetActor): void {
+Events::on('on_undo_follow', static function ($actor, $targetActor): void {
     if ($actor->is_podcast) {
         cache()
             ->deleteMatching("podcast#{$actor->podcast->id}*");
@@ -121,11 +119,10 @@ Events::on('on_undo_follow', function ($actor, $targetActor): void {
 /**
  * @param Post $post
  */
-Events::on('on_post_add', function ($post): void {
+Events::on('on_post_add', static function ($post): void {
     model(EpisodeModel::class, false)->builder()
         ->where('id', $post->episode_id)
         ->increment('posts_count');
-
     if ($post->actor->is_podcast) {
         // Removing all of the podcast pages is a bit overkill, but works to avoid caching bugs
         // same for other events below
@@ -139,7 +136,7 @@ Events::on('on_post_add', function ($post): void {
 /**
  * @param Post $post
  */
-Events::on('on_post_remove', function ($post): void {
+Events::on('on_post_remove', static function ($post): void {
     if ($episodeId = $post->episode_id) {
         model(EpisodeModel::class, false)->builder()
             ->where('id', $episodeId)
@@ -161,7 +158,7 @@ Events::on('on_post_remove', function ($post): void {
  * @param Actor $actor
  * @param Post $post
  */
-Events::on('on_post_reblog', function ($actor, $post): void {
+Events::on('on_post_reblog', static function ($actor, $post): void {
     if ($post->actor->is_podcast) {
         cache()
             ->deleteMatching("podcast#{$post->actor->podcast->id}*");
@@ -177,7 +174,6 @@ Events::on('on_post_reblog', function ($actor, $post): void {
 
     cache()
         ->deleteMatching("page_post#{$post->id}*");
-
     if ($post->in_reply_to_id !== null) {
         cache()->deleteMatching("page_post#{$post->in_reply_to_id}");
     }
@@ -186,9 +182,8 @@ Events::on('on_post_reblog', function ($actor, $post): void {
 /**
  * @param Post $reblogPost
  */
-Events::on('on_post_undo_reblog', function ($reblogPost): void {
+Events::on('on_post_undo_reblog', static function ($reblogPost): void {
     $post = $reblogPost->reblog_of_post;
-
     if ($post->actor->is_podcast) {
         cache()
             ->deleteMatching("podcast#{$post->actor->podcast->id}*");
@@ -200,7 +195,6 @@ Events::on('on_post_undo_reblog', function ($reblogPost): void {
         ->deleteMatching("page_post#{$post->id}*");
     cache()
         ->deleteMatching("page_post#{$reblogPost->id}*");
-
     if ($post->in_reply_to_id !== null) {
         cache()->deleteMatching("page_post#{$post->in_reply_to_id}");
     }
@@ -216,9 +210,8 @@ Events::on('on_post_undo_reblog', function ($reblogPost): void {
 /**
  * @param Post $reply
  */
-Events::on('on_post_reply', function ($reply): void {
+Events::on('on_post_reply', static function ($reply): void {
     $post = $reply->reply_to_post;
-
     if ($post->in_reply_to_id === null) {
         model(EpisodeModel::class, false)->builder()
             ->where('id', $post->episode_id)
@@ -241,9 +234,8 @@ Events::on('on_post_reply', function ($reply): void {
 /**
  * @param Post $reply
  */
-Events::on('on_reply_remove', function ($reply): void {
+Events::on('on_reply_remove', static function ($reply): void {
     $post = $reply->reply_to_post;
-
     if ($post->in_reply_to_id === null) {
         model(EpisodeModel::class, false)->builder()
             ->where('id', $post->episode_id)
@@ -269,7 +261,7 @@ Events::on('on_reply_remove', function ($reply): void {
  * @param Actor $actor
  * @param Post $post
  */
-Events::on('on_post_favourite', function ($actor, $post): void {
+Events::on('on_post_favourite', static function ($actor, $post): void {
     if ($post->actor->is_podcast) {
         cache()
             ->deleteMatching("podcast#{$post->actor->podcast->id}*");
@@ -279,7 +271,6 @@ Events::on('on_post_favourite', function ($actor, $post): void {
 
     cache()
         ->deleteMatching("page_post#{$post->id}*");
-
     if ($post->in_reply_to_id !== null) {
         cache()->deleteMatching("page_post#{$post->in_reply_to_id}*");
     }
@@ -295,7 +286,7 @@ Events::on('on_post_favourite', function ($actor, $post): void {
  * @param Actor $actor
  * @param Post $post
  */
-Events::on('on_post_undo_favourite', function ($actor, $post): void {
+Events::on('on_post_undo_favourite', static function ($actor, $post): void {
     if ($post->actor->is_podcast) {
         cache()
             ->deleteMatching("podcast#{$post->actor->podcast->id}*");
@@ -305,7 +296,6 @@ Events::on('on_post_undo_favourite', function ($actor, $post): void {
 
     cache()
         ->deleteMatching("page_post#{$post->id}*");
-
     if ($post->in_reply_to_id !== null) {
         cache()->deleteMatching("page_post#{$post->in_reply_to_id}*");
     }
@@ -317,7 +307,7 @@ Events::on('on_post_undo_favourite', function ($actor, $post): void {
     }
 });
 
-Events::on('on_block_actor', function (int $actorId): void {
+Events::on('on_block_actor', static function (int $actorId): void {
     cache()->deleteMatching('page_podcast*');
     cache()
         ->deleteMatching('podcast*');
@@ -325,7 +315,7 @@ Events::on('on_block_actor', function (int $actorId): void {
         ->deleteMatching('page_post*');
 });
 
-Events::on('on_unblock_actor', function (int $actorId): void {
+Events::on('on_unblock_actor', static function (int $actorId): void {
     cache()->deleteMatching('page_podcast*');
     cache()
         ->deleteMatching('podcast*');
@@ -333,7 +323,7 @@ Events::on('on_unblock_actor', function (int $actorId): void {
         ->deleteMatching('page_post*');
 });
 
-Events::on('on_block_domain', function (string $domainName): void {
+Events::on('on_block_domain', static function (string $domainName): void {
     cache()->deleteMatching('page_podcast*');
     cache()
         ->deleteMatching('podcast*');
@@ -341,7 +331,7 @@ Events::on('on_block_domain', function (string $domainName): void {
         ->deleteMatching('page_post*');
 });
 
-Events::on('on_unblock_domain', function (string $domainName): void {
+Events::on('on_unblock_domain', static function (string $domainName): void {
     cache()->deleteMatching('page_podcast*');
     cache()
         ->deleteMatching('podcast*');

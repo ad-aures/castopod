@@ -5,11 +5,8 @@ declare(strict_types=1);
 if (! function_exists('form_textarea')) {
     /**
      * Adapted textarea field from CI4 core: without value escaping.
-     *
-     * @param mixed $data
-     * @param mixed $extra
      */
-    function form_textarea($data = '', string $value = '', $extra = ''): string
+    function form_textarea(mixed $data = '', string $value = '', mixed $extra = ''): string
     {
         $defaults = [
             'name' => is_array($data) ? '' : $data,

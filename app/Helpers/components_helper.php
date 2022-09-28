@@ -50,7 +50,7 @@ if (! function_exists('data_table')) {
      * @param mixed[] $data data to loop through and display in rows
      * @param mixed ...$rest Any other argument to pass to the `cell` function
      */
-    function data_table(array $columns, array $data = [], string $class = '', ...$rest): string
+    function data_table(array $columns, array $data = [], string $class = '', mixed ...$rest): string
     {
         $table = new Table();
 

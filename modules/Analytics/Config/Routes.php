@@ -24,8 +24,8 @@ $routes->addPlaceholder(
 
 $routes->group('', [
     'namespace' => 'Modules\Analytics\Controllers',
-], function ($routes): void {
-    $routes->group(config('Analytics')->gateway . '/(:num)/(:class)', function ($routes): void {
+], static function ($routes): void {
+    $routes->group(config('Analytics')->gateway . '/(:num)/(:class)', static function ($routes): void {
         $routes->get('/', 'AnalyticsController::getData/$1/$2', [
             'as' => 'analytics-full-data',
             'filter' => config('Analytics')
@@ -33,13 +33,11 @@ $routes->group('', [
                 'analytics-full-data'
             ],
         ]);
-
         $routes->get('(:filter)', 'AnalyticsController::getData/$1/$2/$3', [
             'as' => 'analytics-data',
             'filter' => config('Analytics')
                 ->routeFilters['analytics-data'],
         ]);
-
         $routes->get(
             '(:filter)/(:num)',
             'AnalyticsController::getData/$1/$2/$3/$4',
@@ -52,11 +50,9 @@ $routes->group('', [
             ],
         );
     });
-
     $routes->get(config('Analytics')->gateway . '/(:class)/(:filter)', 'AnalyticsController::getData/$1/$2', [
         'as' => 'analytics-data-instance',
     ]);
-
     // Route for podcast audio file analytics (/audio/pack(podcast_id,episode_id,bytes_threshold,filesize,duration,date)/podcast_folder/filename.mp3)
     $routes->head(
         'audio/(:base64)/(:any)',
