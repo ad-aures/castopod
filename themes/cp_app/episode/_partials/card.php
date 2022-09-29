@@ -17,7 +17,7 @@
             </div>
             <h2 class="flex-1 mt-1 font-semibold leading-tight line-clamp-2"><a class="hover:underline" href="<?= $episode->link ?>"><?= esc($episode->title) ?></a></h2>
         </div>
-        <?php if ($episode->is_premium && ! subscription($podcast->handle)): ?>
+        <?php if ($episode->is_premium && ! is_unlocked($podcast->handle)): ?>
             <a href="<?= route_to('episode', $episode->podcast->handle, $episode->slug) ?>" class="p-3 rounded-full bg-brand bg-accent-base text-accent-contrast hover:bg-accent-hover focus:ring-accent" title="<?= lang('PremiumPodcasts.unlock_episode') ?>" data-tooltip="bottom">
                 <Icon glyph="lock" class="text-xl" />
             </a>

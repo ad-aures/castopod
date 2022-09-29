@@ -67,6 +67,11 @@ class PodcastUnlockFilter implements FilterInterface
             return;
         }
 
+        // Episode should be embeddable even if it is premium
+        if ($current === route_to('embed', $episode->podcast->handle, $episode->slug)) {
+            return;
+        }
+
         // if podcast is locked then send to the unlock form
         /** @var PremiumPodcasts $premiumPodcasts */
         $premiumPodcasts = service('premium_podcasts');

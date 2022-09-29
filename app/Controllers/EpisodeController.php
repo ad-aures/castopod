@@ -177,10 +177,19 @@ class EpisodeController extends BaseController
             $session->set('embed_domain', parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST));
         }
 
-        $locale = service('request')
-            ->getLocale();
-
-        $cacheName = "page_podcast#{$this->podcast->id}_episode#{$this->episode->id}_embed_{$theme}_{$locale}";
+        $cacheName = implode(
+            '_',
+            array_filter([
+                'page',
+                "podcast#{$this->podcast->id}",
+                "episode#{$this->episode->id}",
+                'embed',
+                $theme,
+                service('request')
+                    ->getLocale(),
+                is_unlocked($this->podcast->handle) ? 'unlocked' : null,
+            ]),
+        );
 
         if (! ($cachedView = cache($cacheName))) {
             $themeData = EpisodeModel::$themes[$theme];

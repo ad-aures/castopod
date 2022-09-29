@@ -33,6 +33,9 @@
         <a href="<?= $episode->link ?>" class="flex flex-col items-start text-sm" style="color: <?= $themeData['text'] ?>;" target="_blank" rel="noopener noreferrer">
             <h1 class="font-semibold leading-tight opacity-100 line-clamp-2 hover:opacity-75"><?= esc($episode->title) ?></h1>
         </a>
+        <?php if ($episode->is_premium && ! is_unlocked($podcast->handle)): ?>
+            <Button variant="primary" class="mt-auto mb-2" iconLeft="lock" uri="<?= $episode->link ?>" target="_blank" rel="noopener noreferrer"><?= lang('PremiumPodcasts.unlock') ?></Button>
+        <?php else: ?>
         <vm-player
                 id="castopod-vm-player"
                 theme="<?= str_starts_with($theme, 'dark') ? 'dark' : 'light' ?>"
@@ -60,6 +63,7 @@
                 </vm-controls>
             </vm-ui>
         </vm-player>
+        <?php endif; ?>
     </div>
 </body>
 
