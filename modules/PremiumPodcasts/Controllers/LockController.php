@@ -43,11 +43,13 @@ class LockController extends BaseController
         return $this->{$method}();
     }
 
-    public function index(): string
+    public function index(): RedirectResponse|string
     {
+        if (! $this->podcast->is_premium) {
+            return redirect()->route('podcast-activity', [$this->podcast->handle]);
+        }
+
         $data = [
-            // TODO: metatags for locked premium podcasts
-            'metatags' => '',
             'podcast' => $this->podcast,
         ];
 

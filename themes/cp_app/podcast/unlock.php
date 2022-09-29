@@ -22,8 +22,6 @@
     }
     </script>
 
-    <?= $metatags ?>
-
     <link rel='stylesheet' type='text/css' href='<?= route_to('themes-colors-css') ?>' />
     <?= service('vite')
         ->asset('styles/index.css', 'css') ?>
@@ -77,8 +75,8 @@
         <div class="flex items-center pl-4 -mb-6 md:pl-8 md:-mb-8 gap-x-4">
             <img src="<?= $podcast->cover->thumbnail_url ?>" alt="<?= esc($podcast->title) ?>" class="z-[45] h-24 rounded-full sm:h-28 md:h-36 ring-3 ring-background-elevated aspect-square" loading="lazy" />
             <div class="relative flex flex-col text-white -top-3 sm:top-0 md:top-2">
-                <h1 class="text-lg font-bold leading-none line-clamp-2 md:leading-none md:text-2xl font-display"><?= esc($podcast->title) ?><span class="ml-1 font-sans text-base font-normal">@<?= esc($podcast->handle) ?></span></h1>
-                <div class="">
+                <div class="text-lg font-bold leading-none line-clamp-2 md:leading-none md:text-2xl font-display"><?= esc($podcast->title) ?><span class="ml-1 font-sans text-base font-normal">@<?= esc($podcast->handle) ?></span></div>
+                <div>
                     <?= explicit_badge($podcast->parental_advisory === 'explicit', 'mr-1') ?>
                     <span class="text-xs"><?= lang('Podcast.followers', [
                         'numberOfFollowers' => $podcast->actor->followers_count,
