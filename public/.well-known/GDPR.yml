@@ -73,3 +73,14 @@ purposes:
           platforms (such as Apple Podcasts).
         mitigation: The e-mail can be generic.
         retention: forever
+  - description: Grant access to premium content
+    lawfulness: legitimate interest
+    data:
+      - field: Subscriber's email address
+        required: yes
+        visibility: administrators
+        description: |
+          The subscriber's e-mail address is used to provide credentials for
+          listening to premium content.
+        mitigation: The e-mail can be generic.
+        retention: until the subscription ends

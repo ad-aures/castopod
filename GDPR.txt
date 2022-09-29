@@ -69,3 +69,15 @@ description:
     platforms (such as Apple Podcasts).
 mitigation:
     The e-mail can be generic.
+
+purpose: Grant access to premium content
+lawfulness: legitimate interest
+
+data: Subscriber's email address
+required: yes
+visibility: administrators
+description:
+    The subscriber's e-mail address is used to provide credentials for
+    listening to premium content.
+mitigation:
+    The e-mail can be generic.
