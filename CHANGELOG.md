@@ -1,3 +1,26 @@
+# [1.0.0-beta.23](https://code.castopod.org/adaures/castopod/compare/v1.0.0-beta.22...v1.0.0-beta.23) (2022-09-29)
+
+### Bug Fixes
+
+- **premium-podcasts:** display unlock button in embed when premium episode
+  ([ca109ba](https://code.castopod.org/adaures/castopod/commit/ca109ba3a8a08e661fd2484454b1983c3418f15d))
+- **premium-podcasts:** remove cache in unlock form + redirect to podcast if
+  podcast is not premium
+  ([242352c](https://code.castopod.org/adaures/castopod/commit/242352c4d9cd936de14e8e8a5d78ebf1287b1f95))
+- **premium-podcasts:** return different cached page when podcast is unlocked
+  ([b1303c5](https://code.castopod.org/adaures/castopod/commit/b1303c525517498b0edfb9885ff36e08c72628b5))
+
+### Features
+
+- add instructions on production error page to ease Castopod debugging process
+  ([9eab54e](https://code.castopod.org/adaures/castopod/commit/9eab54e0853ccb8300d9f9b743cd84aefbf06549)),
+  closes [#224](https://code.castopod.org/adaures/castopod/issues/224)
+- add premium podcasts to manage subscriptions for premium episodes
+  ([3234500](https://code.castopod.org/adaures/castopod/commit/3234500e2d967438ad140f65da801a543f43775d)),
+  closes [#193](https://code.castopod.org/adaures/castopod/issues/193)
+- **gdpr:** add purpose for granting access to premium content
+  ([47d6d81](https://code.castopod.org/adaures/castopod/commit/47d6d81b798ec3ed467e0f4339c98c8a6b80cecd))
+
 # [1.0.0-beta.22](https://code.castopod.org/adaures/castopod/compare/v1.0.0-beta.21...v1.0.0-beta.22) (2022-09-23)
 
 ### Bug Fixes
