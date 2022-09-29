@@ -99,17 +99,17 @@ $routes->group(
                     ],
                 );
                 $routes->get(
-                    'remove',
-                    'SubscriptionController::remove/$1/$2',
+                    'delete',
+                    'SubscriptionController::delete/$1/$2',
                     [
-                        'as' => 'subscription-remove',
+                        'as' => 'subscription-delete',
                         'filter' =>
                             'permission:podcast-manage_subscriptions',
                     ],
                 );
                 $routes->post(
-                    'remove',
-                    'SubscriptionController::attemptRemove/$1/$2',
+                    'delete',
+                    'SubscriptionController::attemptDelete/$1/$2',
                     [
                         'filter' =>
                             'permission:podcast-manage_subscriptions',

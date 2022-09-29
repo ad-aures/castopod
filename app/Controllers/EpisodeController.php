@@ -70,11 +70,18 @@ class EpisodeController extends BaseController
             $this->registerPodcastWebpageHit($this->episode->podcast_id);
         }
 
-        $locale = service('request')
-            ->getLocale();
-        $cacheName =
-            "page_podcast#{$this->podcast->id}_episode#{$this->episode->id}_{$locale}" .
-            (can_user_interact() ? '_authenticated' : '');
+        $cacheName = implode(
+            '_',
+            array_filter([
+                'page',
+                "podcast#{$this->podcast->id}",
+                "episode#{$this->episode->id}",
+                service('request')
+                    ->getLocale(),
+                is_unlocked($this->podcast->handle) ? 'unlocked' : null,
+                can_user_interact() ? 'authenticated' : null,
+            ]),
+        );
 
         if (! ($cachedView = cache($cacheName))) {
             $data = [
@@ -112,11 +119,19 @@ class EpisodeController extends BaseController
             $this->registerPodcastWebpageHit($this->episode->podcast_id);
         }
 
-        $locale = service('request')
-            ->getLocale();
-        $cacheName =
-            "page_podcast#{$this->podcast->id}_episode#{$this->episode->id}_activity_{$locale}" .
-            (can_user_interact() ? '_authenticated' : '');
+        $cacheName = implode(
+            '_',
+            array_filter([
+                'page',
+                "podcast#{$this->podcast->id}",
+                "episode#{$this->episode->id}",
+                'activity',
+                service('request')
+                    ->getLocale(),
+                is_unlocked($this->podcast->handle) ? 'unlocked' : null,
+                can_user_interact() ? 'authenticated' : null,
+            ]),
+        );
 
         if (! ($cachedView = cache($cacheName))) {
             $data = [

@@ -47,4 +47,5 @@ return [
     'video-clips' => 'video clips',
     'embed' => 'embeddable player',
     'notifications' => 'notifications',
+    'suspend' => 'suspend',
 ];

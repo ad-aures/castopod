@@ -94,7 +94,7 @@
                             [
                                 'type' => 'link',
                                 'title' => lang('Subscription.delete'),
-                                'uri' => route_to('subscription-remove', $podcast->id, $subscription->id),
+                                'uri' => route_to('subscription-delete', $podcast->id, $subscription->id),
                                 'class' => 'font-semibold text-red-600',
                             ],
                         ];

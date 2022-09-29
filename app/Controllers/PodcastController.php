@@ -74,6 +74,7 @@ class PodcastController extends BaseController
                 'activity',
                 service('request')
                     ->getLocale(),
+                is_unlocked($this->podcast->handle) ? 'unlocked' : null,
                 can_user_interact() ? 'authenticated' : null,
             ]),
         );
@@ -122,6 +123,7 @@ class PodcastController extends BaseController
                 'about',
                 service('request')
                     ->getLocale(),
+                is_unlocked($this->podcast->handle) ? 'unlocked' : null,
                 can_user_interact() ? 'authenticated' : null,
             ]),
         );
@@ -188,6 +190,7 @@ class PodcastController extends BaseController
                 $seasonQuery ? 'season' . $seasonQuery : null,
                 service('request')
                     ->getLocale(),
+                is_unlocked($this->podcast->handle) ? 'unlocked' : null,
                 can_user_interact() ? 'authenticated' : null,
             ]),
         );

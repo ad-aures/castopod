@@ -45,33 +45,15 @@ class LockController extends BaseController
 
     public function index(): string
     {
-        $locale = service('request')
-            ->getLocale();
-        $cacheName =
-            "page_podcast#{$this->podcast->id}_{$locale}_unlock" .
-            (can_user_interact() ? '_authenticated' : '');
+        $data = [
+            // TODO: metatags for locked premium podcasts
+            'metatags' => '',
+            'podcast' => $this->podcast,
+        ];
 
-        if (! ($cachedView = cache($cacheName))) {
-            $data = [
-                // TODO: metatags for locked premium podcasts
-                'metatags' => '',
-                'podcast' => $this->podcast,
-            ];
+        helper('form');
 
-            helper('form');
-
-            if (can_user_interact()) {
-                return view('podcast/unlock', $data);
-            }
-
-            // The page cache is set to a decade so it is deleted manually upon podcast update
-            return view('podcast/unlock', $data, [
-                'cache' => DECADE,
-                'cache_name' => $cacheName,
-            ]);
-        }
-
-        return $cachedView;
+        return view('podcast/unlock', $data);
     }
 
     public function attemptUnlock(): RedirectResponse

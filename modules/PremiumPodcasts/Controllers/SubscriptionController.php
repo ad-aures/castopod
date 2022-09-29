@@ -88,6 +88,10 @@ class SubscriptionController extends BaseController
         service('settings')
             ->set('Subscription.link', $subscriptionLink, 'podcast:' . $this->podcast->id);
 
+        // clear cached podcast pages to render Call To Action
+        cache()
+            ->deleteMatching("page_podcast#{$this->podcast->id}*");
+
         return redirect()->route('subscription-list', [$this->podcast->id])->with(
             'message',
             lang('Subscription.messages.linkSaveSuccess')
@@ -396,7 +400,7 @@ class SubscriptionController extends BaseController
         );
     }
 
-    public function remove(): string
+    public function delete(): string
     {
         helper('form');
 
@@ -412,7 +416,7 @@ class SubscriptionController extends BaseController
         return view('subscription/delete', $data);
     }
 
-    public function attemptRemove(): RedirectResponse
+    public function attemptDelete(): RedirectResponse
     {
         $db = db_connect();
         $db->transStart();
@@ -423,15 +427,15 @@ class SubscriptionController extends BaseController
         $email = service('email');
 
         if (! $email->setTo($this->subscription->email)
-            ->setSubject(lang('Subscription.emails.removed_subject', [], $this->podcast->language_code))
-            ->setMessage(view('subscription/email/removed', [
+            ->setSubject(lang('Subscription.emails.deleted_subject', [], $this->podcast->language_code))
+            ->setMessage(view('subscription/email/deleted', [
                 'subscription' => $this->subscription,
             ]))->setMailType('html')
             ->send()) {
             $db->transRollback();
             return redirect()->route('subscription-list', [$this->podcast->id])->with(
                 'errors',
-                [lang('Subscription.messages.removeError'), $email->printDebugger([])]
+                [lang('Subscription.messages.deleteError'), $email->printDebugger([])]
             );
         }
 
@@ -439,7 +443,7 @@ class SubscriptionController extends BaseController
 
         return redirect()->route('subscription-list', [$this->podcast->id])->with(
             'messages',
-            lang('Subscription.messages.removeSuccess', [
+            lang('Subscription.messages.deleteSuccess', [
                 'subscriber' => $this->subscription->email,
             ])
         );
