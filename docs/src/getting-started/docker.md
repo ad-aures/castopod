@@ -19,8 +19,13 @@ can be added as a cache handler.
 ## Supported tags
 
 - `develop` [unstable], latest development branch build
+- `beta` [stable], latest beta version build
 
-// more tags to come!
+You can also set a specific Castopod version, see the list of available tags
+for:
+
+- [`castopod/app`](https://hub.docker.com/r/castopod/app/tags)
+- [`castopod/web-server`](https://hub.docker.com/r/castopod/web-server/tags)
 
 ## Example usage
 
@@ -33,7 +38,7 @@ can be added as a cache handler.
 
     services:
       app:
-        image: castopod/app:develop
+        image: castopod/app:beta
         container_name: "castopod-app"
         volumes:
           - castopod-media:/opt/castopod/public/media
@@ -51,7 +56,7 @@ can be added as a cache handler.
         restart: unless-stopped
 
       web-server:
-        image: castopod/web-server:develop
+        image: castopod/web-server:beta
         container_name: "castopod-web-server"
         volumes:
           - castopod-media:/var/www/html/media
