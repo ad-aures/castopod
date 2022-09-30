@@ -20,11 +20,7 @@ can be added as a cache handler.
 
 - `develop` [unstable], latest development branch build
 - `beta` [stable], latest beta version build
-
-You can also set a specific Castopod version, see:
-
-- [available tags for `castopod/app`](https://hub.docker.com/r/castopod/app/tags)
-- [available tags for `castopod/web-server`](https://hub.docker.com/r/castopod/web-server/tags)
+- `1.0.0-beta.x` [stable], specific beta version build (since `1.0.0-beta.22`)
 
 ## Example usage
 
