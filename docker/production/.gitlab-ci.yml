@@ -46,7 +46,7 @@ docker-build-alpha-beta-release:
   script:
     - cp ${DOCKER_HUB_CONFIG} /kaniko/.docker/config.json
     - export CP_VERSION=$(cat CP_VERSION.env)
-    - /kaniko/executor --context . --dockerfile docker/production/web-server/Dockerfile --destination ${DOCKER_IMAGE_WEB_SERVER}:${CP_VERSION}
+    - /kaniko/executor --context . --dockerfile docker/production/web-server/Dockerfile --destination ${DOCKER_IMAGE_WEB_SERVER}:${CP_VERSION} --destination ${DOCKER_IMAGE_WEB_SERVER}:${TAG}
     - /kaniko/executor --context . --dockerfile docker/production/app/Dockerfile --destination ${DOCKER_IMAGE_APP}:${CP_VERSION} --destination ${DOCKER_IMAGE_APP}:${TAG}
   needs:
     - pipeline: $PARENT_PIPELINE_ID
