@@ -50,6 +50,7 @@ digunakan oleh pembuat siniar di seluruh dunia!
   - 🔗 &nbsp;Funding links
   - 📲 &nbsp;listen-to-click ads
   - 🤝 &nbsp;value4value / WebMonetization
+  - 💎 &nbsp;Premium podcasts
 - 📡 &nbsp;Terbitkan episode-episode Anda dimana pun dengan RSS:
   - 📱 &nbsp;On all indexes and apps: Podcast Index, Apple Podcasts, Spotify,
     Google Podcasts, Deezer, Podcast Addict, Podfriend, …

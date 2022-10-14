@@ -52,6 +52,7 @@ over heile verda&nbsp;bruker&nbsp;det!
   - 🔗 &nbsp;Donasjonslenker
   - 📲 &nbsp;lytt-for-å-klikka-annonsar
   - 🤝 &nbsp;value4value / WebMonetization
+  - 💎 &nbsp;Premium podcasts
 - 📡 &nbsp;Kringkast episodane dine kvar som helst med RSS:
   - 📱 &nbsp;På alle indeksar og appar: Podcast Index, Apple Podcasts, Spotify,
     Google Podcasts, Deezer, Podcast Addict, Podfriend, …

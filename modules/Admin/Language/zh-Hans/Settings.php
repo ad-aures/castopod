@@ -35,6 +35,8 @@ return [
         'reset_counts_helper' => '此选项将重新计算并重置所有数据统计(关注者数目、帖子、评论、 …)。',
         'rewrite_media' => '重写媒体元数据',
         'rewrite_media_helper' => '此选项将删除所有多余的媒体文件并重新创建(图像、音频、字幕、章节、 …)',
+        'rename_episodes_files' => '重命名剧集音频文件',
+        'rename_episodes_files_hint' => '此选项会将所有剧集音频文件重命名为随机字符串。 如果你的私人剧集链接被泄露，使用此选项可以隐藏。',
         'clear_cache' => '清除所有缓存',
         'clear_cache_helper' => '此选项将从可写/缓存文件夹中删除整个 redis 缓存或缓存文件。',
         'run' => '运行维护任务',

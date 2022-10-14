@@ -14,6 +14,7 @@ return [
         ->gateway => 'Home',
     'podcasts' => 'podcasts',
     'episodes' => 'episodes',
+    'subscriptions' => 'subscriptions',
     'contributors' => 'contributors',
     'pages' => 'pages',
     'settings' => 'settings',
@@ -24,6 +25,7 @@ return [
     'persons' => 'persons',
     'publish' => 'publish',
     'publish-edit' => 'edit publication',
+    'publish-date-edit' => 'edit publication date',
     'unpublish' => 'unpublish',
     'delete' => 'delete',
     'fediverse' => 'fediverse',
@@ -46,4 +48,5 @@ return [
     'video-clips' => 'video clips',
     'embed' => 'embeddable player',
     'notifications' => 'notifications',
+    'suspend' => 'suspend',
 ];

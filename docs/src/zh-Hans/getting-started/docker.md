@@ -18,8 +18,8 @@ Castopod 在 Docker Hub 自动构建 程序中将 Docker 镜像推送至 Docker 
 ## 目前支持的标签
 
 - `develop` [unstable], 最新开发分支版本
-
-更多标签即将到来！
+- `beta` [stable]，最新的 beta 版本构建
+- `1.0.0-beta.x` [stable]，特定 beta 版本构建 (自 `1.0.0-beta.22` 起)
 
 ## 用法示例：
 
@@ -32,7 +32,7 @@ Castopod 在 Docker Hub 自动构建 程序中将 Docker 镜像推送至 Docker 
 
     services:
       app:
-        image: castopod/app:develop
+        image: castopod/app:beta
         container_name: "castopod-app"
         volumes:
           - castopod-media:/opt/castopod/public/media
@@ -50,7 +50,7 @@ Castopod 在 Docker Hub 自动构建 程序中将 Docker 镜像推送至 Docker 
         restart: unless-stopped
 
       web-server:
-        image: castopod/web-server:develop
+        image: castopod/web-server:beta
         container_name: "castopod-web-server"
         volumes:
           - castopod-media:/var/www/html/media
@@ -116,26 +116,32 @@ Castopod 在 Docker Hub 自动构建 程序中将 Docker 镜像推送至 Docker 
 
 - **castopod/app**
 
-  | 变量名称                   | 类型 (`默认值`)                     |
-  | -------------------------- | ----------------------------------- |
-  | **`CP_BASEURL`**           | string (`undefined`)                |
-  | **`CP_MEDIA_BASEURL`**     | ?string (`(empty)`)                 |
-  | **`CP_ADMIN_GATEWAY`**     | ?string (`"cp-admin"`)              |
-  | **`CP_AUTH_GATEWAY`**      | ?string (`"cp-auth"`)               |
-  | **`CP_ANALYTICS_SALT`**    | string (`undefined`)                |
-  | **`CP_DATABASE_HOSTNAME`** | ?string (`"mariadb"`)               |
-  | **`CP_DATABASE_NAME`**     | string (`MYSQL_DATABASE`)           |
-  | **`CP_DATABASE_USERNAME`** | string (`MYSQL_USER`)               |
-  | **`CP_DATABASE_PASSWORD`** | string (`MYSQL_PASSWORD`)           |
-  | **`CP_DATABASE_PREFIX`**   | ?string (`"cp_"`)                   |
-  | **`CP_CACHE_HANDLER`**     | ?[`"file"` or `"redis"`] (`"file"`) |
-  | **`CP_REDIS_HOST`**        | ?string (`"localhost"`)             |
-  | **`CP_REDIS_PASSWORD`**    | ?string (`null`)                    |
-  | **`CP_REDIS_PORT`**        | ?number (`6379`)                    |
-  | **`CP_REDIS_DATABASE`**    | ?number (`0`)                       |
+  | 变量名称                     | 类型 (`默认值`)         | Default          |
+  | ---------------------------- | ----------------------- | ---------------- |
+  | **`CP_BASEURL`**             | string                  | `undefined`      |
+  | **`CP_MEDIA_BASEURL`**       | ?string                 | `CP_BASEURL`     |
+  | **`CP_ADMIN_GATEWAY`**       | ?string                 | `"cp-admin"`     |
+  | **`CP_AUTH_GATEWAY`**        | ?string                 | `"cp-auth"`      |
+  | **`CP_ANALYTICS_SALT`**      | string                  | `undefined`      |
+  | **`CP_DATABASE_HOSTNAME`**   | ?string                 | `"mariadb"`      |
+  | **`CP_DATABASE_NAME`**       | ?string                 | `MYSQL_DATABASE` |
+  | **`CP_DATABASE_USERNAME`**   | ?string                 | `MYSQL_USER`     |
+  | **`CP_DATABASE_PASSWORD`**   | ?string                 | `MYSQL_PASSWORD` |
+  | **`CP_DATABASE_PREFIX`**     | ?string                 | `"cp_"`          |
+  | **`CP_CACHE_HANDLER`**       | [`"file"` 或 `"redis"`] | `"file"`         |
+  | **`CP_REDIS_HOST`**          | ?string                 | `"localhost"`    |
+  | **`CP_REDIS_PASSWORD`**      | ?string                 | `null`           |
+  | **`CP_REDIS_PORT`**          | ?number                 | `6379`           |
+  | **`CP_REDIS_DATABASE`**      | ?number                 | `0`              |
+  | **`CP_EMAIL_SMTP_HOST`**     | ?string                 | `undefined`      |
+  | **`CP_EMAIL_FROM`**          | ?string                 | `undefined`      |
+  | **`CP_EMAIL_SMTP_USERNAME`** | ?string                 | `"localhost"`    |
+  | **`CP_EMAIL_SMTP_PASSWORD`** | ?string                 | `null`           |
+  | **`CP_EMAIL_SMTP_PORT`**     | ?number                 | `25`             |
+  | **`CP_EMAIL_SMTP_CRYPTO`**   | [`"tls"` 或 `"ssl"`]    | `"tls"`          |
 
 - **castopod/web-server**
 
-  | 变量名称              | 类型 (`默认值`)   |
-  | --------------------- | ----------------- |
-  | **`CP_APP_HOSTNAME`** | ?string (`"app"`) |
+  | 变量名称              | Type    | Default |
+  | --------------------- | ------- | ------- |
+  | **`CP_APP_HOSTNAME`** | ?string | `"app"` |

@@ -9,7 +9,7 @@ declare(strict_types=1);
  */
 
 return [
-    'by_service_weekly' => 'Episode downloads by service (for the past week)',
+    'by_service_weekly' => 'Episodi scaricati per servizio (settimana passata)',
     'by_player_weekly' => 'Episode downloads by player (for the past week)',
     'by_player_yearly' => 'Episode downloads by player (for the past year)',
     'by_device_weekly' => 'Episode downloads by device (for the past week)',

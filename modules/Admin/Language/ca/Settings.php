@@ -35,6 +35,8 @@ return [
         'reset_counts_helper' => 'Aquesta opció tornarà a calcular i restablir tots els recomptes de dades (nombre de seguidors, publicacions, comentaris, …).',
         'rewrite_media' => 'Reescriure les metadades multimèdia',
         'rewrite_media_helper' => 'Aquesta opció suprimirà tots els fitxers multimèdia superflus i els recrearà (imatges, fitxers d\'àudio, transcripcions, capítols, ...)',
+        'rename_episodes_files' => 'Rename episode audio files',
+        'rename_episodes_files_hint' => 'This option will rename all episodes audio files to a random string of characters. Use this if one of your private episodes link was leaked as this will effectively hide it.',
         'clear_cache' => 'Esborrar tota la memòria cau',
         'clear_cache_helper' => 'Aquesta opció esborrarà la memòria cau redis o els fitxers de memòria cau.',
         'run' => 'Executar la neteja',

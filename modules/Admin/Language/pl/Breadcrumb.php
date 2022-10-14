@@ -14,6 +14,7 @@ return [
         ->gateway => 'Początek',
     'podcasts' => 'podcasty',
     'episodes' => 'odcinki',
+    'subscriptions' => 'subscriptions',
     'contributors' => 'kontrybutorzy',
     'pages' => 'strony',
     'settings' => 'ustawienia',
@@ -24,6 +25,7 @@ return [
     'persons' => 'osoby',
     'publish' => 'publikuj',
     'publish-edit' => 'edytuj publikację',
+    'publish-date-edit' => 'edit publication date',
     'unpublish' => 'cofnij publikację',
     'delete' => 'usuń',
     'fediverse' => 'fediverse',
@@ -46,4 +48,5 @@ return [
     'video-clips' => 'klipy wideo',
     'embed' => 'odtwarzacz do osadzenia',
     'notifications' => 'notifications',
+    'suspend' => 'suspend',
 ];

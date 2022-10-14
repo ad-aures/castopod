@@ -24,10 +24,14 @@ return [
     'edit' => 'Bearbeiten',
     'publish' => 'Veröffentllichen',
     'publish_edit' => 'Veröffentlichung bearbeiten',
+    'publish_date_edit' => 'Edit publication date',
     'unpublish' => 'Veröffentlichung zurücknehmen',
     'publish_error' => 'Folge ist bereits veröffentlicht.',
     'publish_edit_error' => 'Folge ist bereits veröffentlicht.',
     'publish_cancel_error' => 'Folge ist bereits veröffentlicht.',
+    'publish_date_edit_error' => 'Episode has not been published yet, you cannot edit its publication date.',
+    'publish_date_edit_future_error' => 'Episode\'s publication date can only be set to a past date! If you would like to reschedule it, unpublish it first.',
+    'publish_date_edit_success' => 'Episode\'s publication date has been updated successfully!',
     'unpublish_error' => 'Folge ist nicht veröffentlicht.',
     'delete' => 'Löschen',
     'go_to_page' => 'Gehe zu Seite',
@@ -109,6 +113,8 @@ return [
             'bonus' => 'Bonus',
             'bonus_hint' => 'Zusätzliche Inhalte für die Sendung (zum Beispiel hinter den Kulissen, Informationen oder Interviews mit dem Team) oder übergreifende Promotionsinhalte für eine andere Show',
         ],
+        'premium_title' => 'Premium',
+        'premium' => 'Episode must be accessible to premium subscribers only',
         'parental_advisory' => [
             'label' => 'Elternberatung',
             'hint' => 'Enthält die Folge anstößige Inhalte?',
@@ -175,6 +181,11 @@ return [
         'message_warning' => 'Du hast keine Nachricht für deinen Ankündigungsbeitrag geschrieben!',
         'message_warning_hint' => 'Eine Nachricht zu haben erhöht das soziale Engagement, was zu einer besseren Sichtbarkeit für Ihre Episode führt.',
         'message_warning_submit' => 'Trotzdem veröffentlichen',
+    ],
+    'publish_date_edit_form' => [
+        'new_publication_date' => 'New publication date',
+        'new_publication_date_hint' => 'Must be set to a past date.',
+        'submit' => 'Edit publication date',
     ],
     'unpublish_form' => [
         'disclaimer' =>

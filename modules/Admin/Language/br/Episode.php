@@ -25,10 +25,14 @@ return [
     'edit' => 'Kemmañ',
     'publish' => 'Embann',
     'publish_edit' => 'Kemmañ an embannadur',
+    'publish_date_edit' => 'Edit publication date',
     'unpublish' => 'Diembannañ',
     'publish_error' => 'Embannet eo bet ar rann dija.',
     'publish_edit_error' => 'Embannet eo bet ar rann dija.',
     'publish_cancel_error' => 'Embannet eo bet ar rann dija.',
+    'publish_date_edit_error' => 'Episode has not been published yet, you cannot edit its publication date.',
+    'publish_date_edit_future_error' => 'Episode\'s publication date can only be set to a past date! If you would like to reschedule it, unpublish it first.',
+    'publish_date_edit_success' => 'Episode\'s publication date has been updated successfully!',
     'unpublish_error' => 'N\'eo ket bet embannet ar rann.',
     'delete' => 'Dilemel',
     'go_to_page' => 'Gwelet ar bajenn',
@@ -111,6 +115,8 @@ return [
             'bonus' => 'Bonuz',
             'bonus_hint' => 'Danvez ouzhpenn ar podkast (da skouer, titouroù diwar-benn kostezioù pe atersadennoù gant an aktourien·ezed), pe bruderezh kroaziet evit ur podkast all',
         ],
+        'premium_title' => 'Premium',
+        'premium' => 'Episode must be accessible to premium subscribers only',
         'parental_advisory' => [
             'label' => 'Kemenn evit ar gerent',
             'hint' => 'Hag ar rann-mañ a zo danvez ha ne zlefe ket gwelet gant bugale?',
@@ -177,6 +183,11 @@ return [
         'message_warning' => 'N\'ho peus ket skrivet ur gemennadenn evit brudañ ho rann!',
         'message_warning_hint' => 'Ouzhpennañ ur gemennadenn a lakay muioc\'h a dud er jeu, ha diwar se e vo gwelet muioc\'h ho rann.',
         'message_warning_submit' => 'Embann memestra',
+    ],
+    'publish_date_edit_form' => [
+        'new_publication_date' => 'New publication date',
+        'new_publication_date_hint' => 'Must be set to a past date.',
+        'submit' => 'Edit publication date',
     ],
     'unpublish_form' => [
         'disclaimer' =>

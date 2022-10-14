@@ -107,6 +107,9 @@ return [
         'monetization_section_title' => 'Monetyzacja',
         'monetization_section_subtitle' =>
             'Zarabiaj dzięki swoim odbiorcom.',
+        'premium' => 'Premium',
+        'premium_by_default' => 'Episodes must be set as premium by default',
+        'premium_by_default_hint' => 'Podcast episodes will be marked as premium by default. You can still choose to set some episodes, trailers or bonuses as public.',
         'payment_pointer' => 'Wskaźnik płatności do zarabiania w sieci',
         'payment_pointer_hint' =>
             'To tutaj otrzymasz pieniądze dzięki Monetyzacji Internetowej',

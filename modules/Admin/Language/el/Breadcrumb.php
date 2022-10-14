@@ -14,6 +14,7 @@ return [
         ->gateway => 'Αρχική σελίδα',
     'podcasts' => 'podcasts',
     'episodes' => 'επεισόδια',
+    'subscriptions' => 'subscriptions',
     'contributors' => 'συντελεστές',
     'pages' => 'σελίδες',
     'settings' => 'ρυθμίσεις',
@@ -24,6 +25,7 @@ return [
     'persons' => 'άτομα',
     'publish' => 'δημοσίευση',
     'publish-edit' => 'επεξεργασία δημοσίευσης',
+    'publish-date-edit' => 'edit publication date',
     'unpublish' => 'αναίρεση δημοσίευσης',
     'delete' => 'διαγραφή',
     'fediverse' => 'fediverse',
@@ -46,4 +48,5 @@ return [
     'video-clips' => 'βίντεο κλιπς',
     'embed' => 'ενσωματώσιμος αναπαραγωγέας',
     'notifications' => 'notifications',
+    'suspend' => 'suspend',
 ];

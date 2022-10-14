@@ -107,6 +107,9 @@ return [
         'monetization_section_title' => 'Monetization',
         'monetization_section_subtitle' =>
             'Earn money thanks to your audience.',
+        'premium' => 'Premium',
+        'premium_by_default' => 'Episodes must be set as premium by default',
+        'premium_by_default_hint' => 'Podcast episodes will be marked as premium by default. You can still choose to set some episodes, trailers or bonuses as public.',
         'payment_pointer' => 'Payment Pointer for Web Monetization',
         'payment_pointer_hint' =>
             'This is your where you will receive money thanks to Web Monetization',

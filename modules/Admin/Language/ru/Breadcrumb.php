@@ -14,6 +14,7 @@ return [
         ->gateway => 'Главная',
     'podcasts' => 'подкасты',
     'episodes' => 'выпуски',
+    'subscriptions' => 'subscriptions',
     'contributors' => 'участников',
     'pages' => 'страниц',
     'settings' => 'настройки',
@@ -24,6 +25,7 @@ return [
     'persons' => 'лица',
     'publish' => 'публикация',
     'publish-edit' => 'редактировать публикацию',
+    'publish-date-edit' => 'edit publication date',
     'unpublish' => 'снять с публикации',
     'delete' => 'удалить',
     'fediverse' => 'Федивёрс',
@@ -46,4 +48,5 @@ return [
     'video-clips' => 'видео клипы',
     'embed' => 'встроенный плеер',
     'notifications' => 'notifications',
+    'suspend' => 'suspend',
 ];

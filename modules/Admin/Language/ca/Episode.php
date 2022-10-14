@@ -24,10 +24,14 @@ return [
     'edit' => 'Editar',
     'publish' => 'Publicar',
     'publish_edit' => 'Editar la publicació',
+    'publish_date_edit' => 'Edit publication date',
     'unpublish' => 'Desfer la publicació',
     'publish_error' => 'L\'episodi ja està publicat.',
     'publish_edit_error' => 'L\'episodi ja està publicat.',
     'publish_cancel_error' => 'L\'episodi ja està publicat.',
+    'publish_date_edit_error' => 'Episode has not been published yet, you cannot edit its publication date.',
+    'publish_date_edit_future_error' => 'Episode\'s publication date can only be set to a past date! If you would like to reschedule it, unpublish it first.',
+    'publish_date_edit_success' => 'Episode\'s publication date has been updated successfully!',
     'unpublish_error' => 'L\'episodi no està publicat.',
     'delete' => 'Eliminar',
     'go_to_page' => 'Anar a la pàgina ',
@@ -109,6 +113,8 @@ return [
             'bonus' => 'Bonificació',
             'bonus_hint' => 'Contingut addicional per al programa (per exemple, informació entre bastidors o entrevistes amb el repartiment) o contingut promocional creuat per a un altre programa',
         ],
+        'premium_title' => 'Premium',
+        'premium' => 'Episode must be accessible to premium subscribers only',
         'parental_advisory' => [
             'label' => 'Avís parental',
             'hint' => 'L\'episodi conté contingut explícit?',
@@ -175,6 +181,11 @@ return [
         'message_warning' => 'No heu escrit cap missatge per la publicació del vostre anunci!',
         'message_warning_hint' => 'Tenir un missatge augmenta la implicació social, donant lloc a una millor visibilitat del vostre episodi.',
         'message_warning_submit' => 'Publicar de totes maneres',
+    ],
+    'publish_date_edit_form' => [
+        'new_publication_date' => 'New publication date',
+        'new_publication_date_hint' => 'Must be set to a past date.',
+        'submit' => 'Edit publication date',
     ],
     'unpublish_form' => [
         'disclaimer' =>

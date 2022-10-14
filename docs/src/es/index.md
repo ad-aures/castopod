@@ -54,6 +54,7 @@ utilizado por podcasters alrededor del mundo.
   - 📲 &nbsp;Anuncios publicitarios del tipo click-para-escuchar
   - 🤝 &nbsp;value4value / WebMonetization (criptomonedas para creadores de
     contenido).
+  - 💎 &nbsp;Premium podcasts
 - 📡 &nbsp;Publica tus episodios en todas partes con RSS:
   - 📱 &nbsp;En todos los directorios y aplicaciones: Podcast Index, Apple
     Podcasts, Spotify, Google Podcasts, Deezer, Podcast Addict, Podfriend, …

@@ -25,10 +25,14 @@ return [
     'edit' => 'Edytuj',
     'publish' => 'Publikuj',
     'publish_edit' => 'Edytuj publikację',
+    'publish_date_edit' => 'Edit publication date',
     'unpublish' => 'Cofnij publikację',
     'publish_error' => 'Odcinek jest już opublikowany.',
     'publish_edit_error' => 'Odcinek jest już opublikowany.',
     'publish_cancel_error' => 'Odcinek jest już opublikowany.',
+    'publish_date_edit_error' => 'Episode has not been published yet, you cannot edit its publication date.',
+    'publish_date_edit_future_error' => 'Episode\'s publication date can only be set to a past date! If you would like to reschedule it, unpublish it first.',
+    'publish_date_edit_success' => 'Episode\'s publication date has been updated successfully!',
     'unpublish_error' => 'Odcinek nie jest opublikowany.',
     'delete' => 'Usuń',
     'go_to_page' => 'Przejdź do strony',
@@ -110,6 +114,8 @@ return [
             'bonus' => 'Bonus',
             'bonus_hint' => 'Dodatkowa treść do programu (np. informacje zza kulis lub wywiady z obsadą) albo treści promujące inne programy',
         ],
+        'premium_title' => 'Premium',
+        'premium' => 'Episode must be accessible to premium subscribers only',
         'parental_advisory' => [
             'label' => 'Kontrola rodzicielska',
             'hint' => 'Czy odcinek zawiera treści dla dorosłych?',
@@ -176,6 +182,11 @@ return [
         'message_warning' => 'Nie napisałeś wiadomości do swojego wpisu ogłoszeniowego!',
         'message_warning_hint' => 'Posiadanie wiadomości zwiększa zaangażowanie społeczne, co skutkuje lepszą widocznością Twojego odcinka.',
         'message_warning_submit' => 'Opublikuj mimo to',
+    ],
+    'publish_date_edit_form' => [
+        'new_publication_date' => 'New publication date',
+        'new_publication_date_hint' => 'Must be set to a past date.',
+        'submit' => 'Edit publication date',
     ],
     'unpublish_form' => [
         'disclaimer' =>

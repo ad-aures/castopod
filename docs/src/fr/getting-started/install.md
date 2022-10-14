@@ -132,22 +132,51 @@ installées :
 
 ::: info Note
 
-Le script d'installation crée un fichier `.env` à la racine du paquet. Si vous
-ne pouvez pas passer par l'assistant d'installation, vous pouvez
-[créer et mettre à jour le fichier `.env` manuellement](#alternative-manual-configuration).
+Le script d'installation crée un fichier `.env` à la racine du paquet. If you
+cannot go through the install wizard, you can create and edit the `.env` file
+manually based on the `.env.example` file.
 
 :::
 
+### Email/SMTP setup
+
+Email configuration is required for some features to work properly (eg.
+retrieving your forgotten password, sending instructions to premium subscribers,
+…)
+
+You may add your email configuration in your instance's `.env` like so:
+
+```ini
+# […]
+
+email.fromEmail="your_email_address"
+email.SMTPHost="your_smtp_host"
+email.SMTPUser="your_smtp_user"
+email.SMTPPass="your_smtp_password"
+```
+
+#### Email config options
+
+| Variable name    | Type                 | Default      |
+| ---------------- | -------------------- | ------------ |
+| **`fromEmail`**  | string               | `undefined`  |
+| **`fromName`**   | string               | `"Castopod"` |
+| **`SMTPHost`**   | string               | `undefined`  |
+| **`SMTPUser`**   | string               | `undefined`  |
+| **`SMTPPass`**   | string               | `undefined`  |
+| **`SMTPPort`**   | number               | `25`         |
+| **`SMTPCrypto`** | [`"tls"` or `"ssl"`] | `"tls"`      |
+
 ## Paquets fournis par la communauté
 
-Si vous ne voulez pas vous soucier d'installer Castopod manuellement, vous
-pouvez utiliser un des paquets créés et maintenus par la communauté open-source.
+If you don't want to bother with installing Castopod manually, you may use one
+of the packages created and maintained by the open-source community.
 
-### Installer avec YunoHost
+### Install with YunoHost
 
-[YunoHost](https://yunohost.org/) est une distribution basée sur Debian
-GNU/Linux composée de paquets logiciels libres et open-source. Il gère les
-difficultés de l'auto-hébergement pour vous.
+[YunoHost](https://yunohost.org/) is a distribution based on Debian GNU/Linux
+made up of free and open-source software packages. It manages the hardships of
+self-hosting for you.
 
 <div class="flex flex-wrap items-center gap-4">
 

@@ -49,6 +49,7 @@ Podcastenden auf &nbsp;der&nbsp; ganzen Welt verwendet!
   - 🔗 &nbsp;Funding links
   - 📲 &nbsp;listen-to-click ads
   - 🤝 &nbsp;value4value / WebMonetization
+  - 💎 &nbsp;Premium podcasts
 - 📡 &nbsp;Publish your episodes everywhere with RSS:
   - 📱 &nbsp;On all indexes and apps: Podcast Index, Apple Podcasts, Spotify,
     Google Podcasts, Deezer, Podcast Addict, Podfriend, …

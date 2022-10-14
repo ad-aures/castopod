@@ -19,8 +19,8 @@ una base de dades Redis com a gestor de memòria cau.
 ## Etiquetes compatibles
 
 - `develop` [no-estable], darrera versió de la branca de desenvolupament
-
-// més etiquetes per venir!
+- `beta` [stable], latest beta version build
+- `1.0.0-beta.x` [stable], specific beta version build (since `1.0.0-beta.22`)
 
 ## Exemple d'ús
 
@@ -33,16 +33,16 @@ una base de dades Redis com a gestor de memòria cau.
 
     services:
       app:
-        image: castopod/app:develop
+        image: castopod/app:beta
         container_name: "castopod-app"
         volumes:
           - castopod-media:/opt/castopod/public/media
         environment:
           MYSQL_DATABASE: castopod
           MYSQL_USER: castopod
-          MYSQL_PASSWORD: canvieu-me
-          CP_BASEURL: "http://castopod.exemple.com"
-          CP_ANALYTICS_SALT: canvieu-me
+          MYSQL_PASSWORD: changeme
+          CP_BASEURL: "http://castopod.example.com"
+          CP_ANALYTICS_SALT: changeme
           CP_CACHE_HANDLER: redis
           CP_REDIS_HOST: redis
         networks:
@@ -51,7 +51,7 @@ una base de dades Redis com a gestor de memòria cau.
         restart: unless-stopped
 
       web-server:
-        image: castopod/web-server:develop
+        image: castopod/web-server:beta
         container_name: "castopod-web-server"
         volumes:
           - castopod-media:/var/www/html/media
@@ -69,10 +69,10 @@ una base de dades Redis com a gestor de memòria cau.
         volumes:
           - castopod-db:/var/lib/mysql
         environment:
-          MYSQL_ROOT_PASSWORD: canvieu-me
+          MYSQL_ROOT_PASSWORD: changeme
           MYSQL_DATABASE: castopod
           MYSQL_USER: castopod
-          MYSQL_PASSWORD: canvieu-me
+          MYSQL_PASSWORD: changeme
         restart: unless-stopped
 
       redis:
@@ -119,26 +119,32 @@ una base de dades Redis com a gestor de memòria cau.
 
 - **castopod/app**
 
-  | Nom de la variable         | Tipus (`default`)                  |
-  | -------------------------- | ---------------------------------- |
-  | **`CP_BASEURL`**           | string (`undefined`)               |
-  | **`CP_MEDIA_BASEURL`**     | ?string (`(buit)`)                 |
-  | **`CP_ADMIN_GATEWAY`**     | ?string (`"cp-admin"`)             |
-  | **`CP_AUTH_GATEWAY`**      | ?string (`"cp-auth"`)              |
-  | **`CP_ANALYTICS_SALT`**    | string (`undefined`)               |
-  | **`CP_DATABASE_HOSTNAME`** | ?string (`"mariadb"`)              |
-  | **`CP_DATABASE_NAME`**     | string (`MYSQL_DATABASE`)          |
-  | **`CP_DATABASE_USERNAME`** | string (`MYSQL_USER`)              |
-  | **`CP_DATABASE_PASSWORD`** | string (`MYSQL_PASSWORD`)          |
-  | **`CP_DATABASE_PREFIX`**   | ?string (`"cp_"`)                  |
-  | **`CP_CACHE_HANDLER`**     | ?[`"file"` o `"redis"`] (`"file"`) |
-  | **`CP_REDIS_HOST`**        | ?string (`"localhost"`)            |
-  | **`CP_REDIS_PASSWORD`**    | ?string (`null`)                   |
-  | **`CP_REDIS_PORT`**        | ?number (`6379`)                   |
-  | **`CP_REDIS_DATABASE`**    | ?number (`0`)                      |
+  | Nom de la variable           | Tipus (`default`)       | Default          |
+  | ---------------------------- | ----------------------- | ---------------- |
+  | **`CP_BASEURL`**             | string                  | `undefined`      |
+  | **`CP_MEDIA_BASEURL`**       | ?string                 | `CP_BASEURL`     |
+  | **`CP_ADMIN_GATEWAY`**       | ?string                 | `"cp-admin"`     |
+  | **`CP_AUTH_GATEWAY`**        | ?string                 | `"cp-auth"`      |
+  | **`CP_ANALYTICS_SALT`**      | string                  | `undefined`      |
+  | **`CP_DATABASE_HOSTNAME`**   | ?string                 | `"mariadb"`      |
+  | **`CP_DATABASE_NAME`**       | ?string                 | `MYSQL_DATABASE` |
+  | **`CP_DATABASE_USERNAME`**   | ?string                 | `MYSQL_USER`     |
+  | **`CP_DATABASE_PASSWORD`**   | ?string                 | `MYSQL_PASSWORD` |
+  | **`CP_DATABASE_PREFIX`**     | ?string                 | `"cp_"`          |
+  | **`CP_CACHE_HANDLER`**       | [`"file"` or `"redis"`] | `"file"`         |
+  | **`CP_REDIS_HOST`**          | ?string                 | `"localhost"`    |
+  | **`CP_REDIS_PASSWORD`**      | ?string                 | `null`           |
+  | **`CP_REDIS_PORT`**          | ?number                 | `6379`           |
+  | **`CP_REDIS_DATABASE`**      | ?number                 | `0`              |
+  | **`CP_EMAIL_SMTP_HOST`**     | ?string                 | `undefined`      |
+  | **`CP_EMAIL_FROM`**          | ?string                 | `undefined`      |
+  | **`CP_EMAIL_SMTP_USERNAME`** | ?string                 | `"localhost"`    |
+  | **`CP_EMAIL_SMTP_PASSWORD`** | ?string                 | `null`           |
+  | **`CP_EMAIL_SMTP_PORT`**     | ?number                 | `25`             |
+  | **`CP_EMAIL_SMTP_CRYPTO`**   | [`"tls"` or `"ssl"`]    | `"tls"`          |
 
 - **castopod/web-server**
 
-  | Nom de la variable    | Type (`default`)  |
-  | --------------------- | ----------------- |
-  | **`CP_APP_HOSTNAME`** | ?string (`"app"`) |
+  | Nom de la variable    | Type    | Default |
+  | --------------------- | ------- | ------- |
+  | **`CP_APP_HOSTNAME`** | ?string | `"app"` |

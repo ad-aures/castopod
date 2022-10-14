@@ -14,6 +14,7 @@ return [
         ->gateway => 'الرئيسية',
     'podcasts' => 'بودكاستات',
     'episodes' => 'حلقات',
+    'subscriptions' => 'subscriptions',
     'contributors' => 'مساهمون',
     'pages' => 'صفحات',
     'settings' => 'الإعدادات',
@@ -24,6 +25,7 @@ return [
     'persons' => 'أشخاص',
     'publish' => 'نشر',
     'publish-edit' => 'تعديل المنشور',
+    'publish-date-edit' => 'edit publication date',
     'unpublish' => 'unpublish',
     'delete' => 'احذف',
     'fediverse' => 'الفديفرس',
@@ -46,4 +48,5 @@ return [
     'video-clips' => 'video clips',
     'embed' => 'embeddable player',
     'notifications' => 'الإشعارات',
+    'suspend' => 'suspend',
 ];

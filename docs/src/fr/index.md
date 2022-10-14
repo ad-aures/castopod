@@ -51,6 +51,7 @@ et est utilisé par des podcasters autour partout dans le monde&nbsp;!
   - 🔗 &nbsp;Liens de financement
   - 📲 &nbsp;publicité “listen-to-click”
   - 🤝 &nbsp;value4value / WebMonetization
+  - 💎 &nbsp;Premium podcasts
 - 📡&nbsp;Publiez vos épisodes partout avec RSS :
   - 📱 &nbsp;Sur tous les index et toutes les applications : Podcast Index,
     Podcasts Apple, Spotify, Google Podcasts, Deezer, Podcast Addict, Podfriend…

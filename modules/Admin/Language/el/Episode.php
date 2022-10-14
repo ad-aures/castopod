@@ -24,10 +24,14 @@ return [
     'edit' => 'Επεξεργασία',
     'publish' => 'Δημοσίευση',
     'publish_edit' => 'Επεξεργασία δημοσίευσης',
+    'publish_date_edit' => 'Edit publication date',
     'unpublish' => 'Αναίρεση δημοσίευσης',
     'publish_error' => 'Το επεισόδιο έχει ήδη δημοσιευθεί.',
     'publish_edit_error' => 'Το επεισόδιο έχει ήδη δημοσιευθεί.',
     'publish_cancel_error' => 'Το επεισόδιο έχει ήδη δημοσιευθεί.',
+    'publish_date_edit_error' => 'Episode has not been published yet, you cannot edit its publication date.',
+    'publish_date_edit_future_error' => 'Episode\'s publication date can only be set to a past date! If you would like to reschedule it, unpublish it first.',
+    'publish_date_edit_success' => 'Episode\'s publication date has been updated successfully!',
     'unpublish_error' => 'Το επεισόδιο δεν έχει δημοσιευθεί.',
     'delete' => 'Διαγραφή',
     'go_to_page' => 'Μετάβαση στη σελίδα',
@@ -109,6 +113,8 @@ return [
             'bonus' => 'Μπόνους',
             'bonus_hint' => 'Επιπλέον περιεχόμενο για την παράσταση (για παράδειγμα, πίσω από τις σκηνές πληροφορίες ή συνεντεύξεις με τη cast) ή δια-διαφημιστικό περιεχόμενο για μια άλλη παράσταση',
         ],
+        'premium_title' => 'Premium',
+        'premium' => 'Episode must be accessible to premium subscribers only',
         'parental_advisory' => [
             'label' => 'Γονικός σύμβουλος',
             'hint' => 'Μήπως το επεισόδιο περιέχει ακατάλληλο περιεχόμενο;',
@@ -175,6 +181,11 @@ return [
         'message_warning' => 'Δεν γράψατε μήνυμα για την ανακοίνωσή σας!',
         'message_warning_hint' => 'Έχοντας ένα μήνυμα αυξάνει την κοινωνική δέσμευση, με αποτέλεσμα μια καλύτερη προβολή για το επεισόδιο σας.',
         'message_warning_submit' => 'Δημοσίευση ούτως ή άλλως',
+    ],
+    'publish_date_edit_form' => [
+        'new_publication_date' => 'New publication date',
+        'new_publication_date_hint' => 'Must be set to a past date.',
+        'submit' => 'Edit publication date',
     ],
     'unpublish_form' => [
         'disclaimer' =>

@@ -14,6 +14,7 @@ return [
         ->gateway => 'Heim',
     'podcasts' => 'podkastar',
     'episodes' => 'episodar',
+    'subscriptions' => 'subscriptions',
     'contributors' => 'bidragsytarar',
     'pages' => 'sider',
     'settings' => 'innstillingar',
@@ -24,6 +25,7 @@ return [
     'persons' => 'personar',
     'publish' => 'legg ut',
     'publish-edit' => 'rediger publiseringa',
+    'publish-date-edit' => 'edit publication date',
     'unpublish' => 'avpubliser',
     'delete' => 'slett',
     'fediverse' => 'fødiverset',
@@ -46,4 +48,5 @@ return [
     'video-clips' => 'videoklypp',
     'embed' => 'innbyggbar spelar',
     'notifications' => 'notifications',
+    'suspend' => 'suspend',
 ];

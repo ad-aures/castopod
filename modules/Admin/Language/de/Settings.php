@@ -35,6 +35,8 @@ return [
         'reset_counts_helper' => 'Diese Option wird alle Datenzähler neu berechnen und zurücksetzen (Anzahl der Follower, Beiträge, Kommentare, …).',
         'rewrite_media' => 'Medien-Metadaten neu schreiben',
         'rewrite_media_helper' => 'Diese Option wird alle überflüssigen Mediendateien löschen und neu erstellen (Bilder, Audiodateien, Transkripte, Kapitel …)',
+        'rename_episodes_files' => 'Rename episode audio files',
+        'rename_episodes_files_hint' => 'This option will rename all episodes audio files to a random string of characters. Use this if one of your private episodes link was leaked as this will effectively hide it.',
         'clear_cache' => 'Alle Caches löschen',
         'clear_cache_helper' => 'Diese Option leert den redis-Cache oder beschreibbare/cache-Dateien.',
         'run' => 'Systempflege starten',

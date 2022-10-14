@@ -9,14 +9,14 @@ declare(strict_types=1);
  */
 
 return [
-    'feed' => 'RSS Podcast feed',
-    'season' => 'Season {seasonNumber}',
-    'list_of_episodes_year' => '{year} episodes ({episodeCount})',
+    'feed' => 'Feed RSS del podcast',
+    'season' => 'Stagione {seasonNumber}',
+    'list_of_episodes_year' => '{year} episodi ({episodeCount})',
     'list_of_episodes_season' =>
-        'Season {seasonNumber} episodes ({episodeCount})',
-    'no_episode' => 'No episode found!',
-    'follow' => 'Follow',
-    'followTitle' => 'Follow {actorDisplayName} on the fediverse!',
+        'Stagione {seasonNumber} episodi ({episodeCount})',
+    'no_episode' => 'Nessun episodio trovato!',
+    'follow' => 'Segui',
+    'followTitle' => 'Segui {actorDisplayName} sul fediverso!',
     'followers' => '{numberOfFollowers, plural,
         one {# follower}
         other {# followers}
@@ -25,10 +25,10 @@ return [
         one {# post}
         other {# posts}
     }',
-    'activity' => 'Activity',
-    'episodes' => 'Episodes',
-    'episodes_title' => 'Episodes of {podcastTitle}',
-    'about' => 'About',
+    'activity' => 'Attività',
+    'episodes' => 'Episodi',
+    'episodes_title' => 'Episodi di {podcastTitle}',
+    'about' => 'Informazioni',
     'stats' => [
         'title' => 'Stats',
         'number_of_seasons' => '{0, plural,
@@ -39,15 +39,15 @@ return [
             one {# episode}
             other {# episodes}
         }',
-        'first_published_at' => 'First episode published on {0, date, medium}',
+        'first_published_at' => 'Primo episodio pubblicato il {0, date, medium}',
     ],
     'sponsor' => 'Sponsor',
-    'funding_links' => 'Funding links for {podcastTitle}',
-    'find_on' => 'Find {podcastTitle} on',
-    'listen_on' => 'Listen on',
+    'funding_links' => 'Link di finanziamento per {podcastTitle}',
+    'find_on' => 'Trova {podcastTitle} su',
+    'listen_on' => 'Ascolta su',
     'persons' => '{personsCount, plural,
         one {# person}
         other {# persons}
     }',
-    'persons_list' => 'Persons',
+    'persons_list' => 'Persone',
 ];

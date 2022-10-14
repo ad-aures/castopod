@@ -24,10 +24,14 @@ return [
     'edit' => 'Modifier',
     'publish' => 'Publier',
     'publish_edit' => 'Modifier la publication',
+    'publish_date_edit' => 'Edit publication date',
     'unpublish' => 'Dépublier',
     'publish_error' => 'L’épisode est déjà publié.',
     'publish_edit_error' => 'L’épisode est déjà publié.',
     'publish_cancel_error' => 'L’épisode est déjà publié.',
+    'publish_date_edit_error' => 'Episode has not been published yet, you cannot edit its publication date.',
+    'publish_date_edit_future_error' => 'Episode\'s publication date can only be set to a past date! If you would like to reschedule it, unpublish it first.',
+    'publish_date_edit_success' => 'Episode\'s publication date has been updated successfully!',
     'unpublish_error' => 'L’épisode n’est pas publié.',
     'delete' => 'Supprimer',
     'go_to_page' => 'Voir',
@@ -109,6 +113,8 @@ return [
             'bonus' => 'Bonus',
             'bonus_hint' => 'Contenu supplémentaire pour le podcast (par exemple des informations sur les coulisses ou des interviews avec les acteurs) ou du contenu promotionnel croisé pour un autre podcast',
         ],
+        'premium_title' => 'Premium',
+        'premium' => 'Episode must be accessible to premium subscribers only',
         'parental_advisory' => [
             'label' => 'Avertissement parental',
             'hint' => 'L’épisode contient-il un contenu explicite ?',
@@ -175,6 +181,11 @@ return [
         'message_warning' => 'Vous n’avez pas saisi de message pour l’annonce de votre épisode !',
         'message_warning_hint' => 'Ajouter un message augmente l’engagement social, menant à une meilleure visibilité pour votre épisode.',
         'message_warning_submit' => 'Publier quand même',
+    ],
+    'publish_date_edit_form' => [
+        'new_publication_date' => 'New publication date',
+        'new_publication_date_hint' => 'Must be set to a past date.',
+        'submit' => 'Edit publication date',
     ],
     'unpublish_form' => [
         'disclaimer' =>

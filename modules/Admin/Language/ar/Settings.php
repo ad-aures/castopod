@@ -35,6 +35,8 @@ return [
         'reset_counts_helper' => 'This option will recalculate and reset all data counts (number of followers, posts, comments, …).',
         'rewrite_media' => 'Rewrite media metadata',
         'rewrite_media_helper' => 'This option will delete all superfluous media files and recreate them (images, audio files, transcripts, chapters, …)',
+        'rename_episodes_files' => 'Rename episode audio files',
+        'rename_episodes_files_hint' => 'This option will rename all episodes audio files to a random string of characters. Use this if one of your private episodes link was leaked as this will effectively hide it.',
         'clear_cache' => 'Clear all cache',
         'clear_cache_helper' => 'This option will flush redis cache or writable/cache files.',
         'run' => 'Run housekeeping',

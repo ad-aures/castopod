@@ -50,6 +50,7 @@ podcasters em todo o mundo!
   - 🔗 &nbsp;Links de financiamento
   - 📲 &nbsp;anúncios clique-para-ouvir
   - 🤝 &nbsp;value4value / WebMonetization
+  - 💎 &nbsp;Premium podcasts
 - 📡 &nbsp;Publique seus episódios em qualquer lugar com RSS:
   - 📱 &nbsp;Em todos os agregadores e aplicativos: Podcast Index, Apple
     Podcasts, Spotify, Google Podcasts, Deezer, Podcast Addict, Podfriend, …

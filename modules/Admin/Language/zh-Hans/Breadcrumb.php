@@ -14,6 +14,7 @@ return [
         ->gateway => '主页',
     'podcasts' => '播客',
     'episodes' => '剧集',
+    'subscriptions' => '订阅',
     'contributors' => '贡献者',
     'pages' => '页',
     'settings' => '设置',
@@ -24,6 +25,7 @@ return [
     'persons' => '人',
     'publish' => '发布',
     'publish-edit' => '编辑发布',
+    'publish-date-edit' => 'edit publication date',
     'unpublish' => '取消发布',
     'delete' => '删除',
     'fediverse' => '联邦宇宙',
@@ -46,4 +48,5 @@ return [
     'video-clips' => '视频素材',
     'embed' => '嵌入式播放器',
     'notifications' => '通知',
+    'suspend' => '暂停',
 ];

@@ -14,6 +14,7 @@ return [
         ->gateway => 'Degemer',
     'podcasts' => 'podkastoù',
     'episodes' => 'rannoù',
+    'subscriptions' => 'subscriptions',
     'contributors' => 'perzhidi, perzhiadezed',
     'pages' => 'pajennoù',
     'settings' => 'arventennoù',
@@ -24,6 +25,7 @@ return [
     'persons' => 'emellerien·ezed',
     'publish' => 'embann',
     'publish-edit' => 'kemmañ an embannadur',
+    'publish-date-edit' => 'edit publication date',
     'unpublish' => 'diembannañ',
     'delete' => 'dilemel',
     'fediverse' => 'kevrebed',
@@ -46,4 +48,5 @@ return [
     'video-clips' => 'tennadoù video',
     'embed' => 'lenner enkorfet',
     'notifications' => 'notifications',
+    'suspend' => 'suspend',
 ];

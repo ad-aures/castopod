@@ -51,6 +51,7 @@ l'utilitzen els podcasters d'arreu del món!
   - 🔗 &nbsp;Enllaços de finançament
   - 📲 &nbsp;Anuncis per escoltar-fent-clic
   - 🤝 &nbsp;Integració amb value4value i WebMonetization
+  - 💎 &nbsp;Premium podcasts
 - 📡 &nbsp;Publiqueu els vostres episodis a tot arreu amb RSS:
   - 📱 &nbsp;A tots els directoris i aplicacions: Podcast Index, Apple Podcasts,
     Spotify, Google Podcasts, Deezer, Podcast Addict, Podfriend, …

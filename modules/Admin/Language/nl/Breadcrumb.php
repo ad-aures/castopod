@@ -14,6 +14,7 @@ return [
         ->gateway => 'Hoofdpagina',
     'podcasts' => 'podcasts',
     'episodes' => 'afleveringen',
+    'subscriptions' => 'subscriptions',
     'contributors' => 'bijdragers',
     'pages' => 'paginas',
     'settings' => 'instellingen',
@@ -24,6 +25,7 @@ return [
     'persons' => 'personen',
     'publish' => 'publiceren',
     'publish-edit' => 'publicatie aanpassen',
+    'publish-date-edit' => 'edit publication date',
     'unpublish' => 'publicatie ongedaan maken',
     'delete' => 'verwijder',
     'fediverse' => 'fediverse',
@@ -46,4 +48,5 @@ return [
     'video-clips' => 'video clips',
     'embed' => 'integreerbare speler',
     'notifications' => 'meldingen',
+    'suspend' => 'suspend',
 ];

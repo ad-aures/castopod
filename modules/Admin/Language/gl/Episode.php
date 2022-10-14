@@ -24,10 +24,14 @@ return [
     'edit' => 'Editar',
     'publish' => 'Publicar',
     'publish_edit' => 'Editar publicación',
+    'publish_date_edit' => 'Edit publication date',
     'unpublish' => 'Retirar publicación',
     'publish_error' => 'O episodio xa está publicado.',
     'publish_edit_error' => 'O episodio xa está publicado.',
     'publish_cancel_error' => 'O episodio xa está publicado.',
+    'publish_date_edit_error' => 'Episode has not been published yet, you cannot edit its publication date.',
+    'publish_date_edit_future_error' => 'Episode\'s publication date can only be set to a past date! If you would like to reschedule it, unpublish it first.',
+    'publish_date_edit_success' => 'Episode\'s publication date has been updated successfully!',
     'unpublish_error' => 'O episodio non foi publicado.',
     'delete' => 'Eliminar',
     'go_to_page' => 'Ir á páxina',
@@ -109,6 +113,8 @@ return [
             'bonus' => 'Extra',
             'bonus_hint' => 'Contido extra para o programa (por exemplo, info sobre a elaboración ou conversa casual cos participantes) ou contido promocional de outras creadoras',
         ],
+        'premium_title' => 'Premium',
+        'premium' => 'Episode must be accessible to premium subscribers only',
         'parental_advisory' => [
             'label' => 'Aviso sobre o contido',
             'hint' => 'Contén o episodio elementos explícitos?',
@@ -175,6 +181,11 @@ return [
         'message_warning' => 'Non escribiches unha mensaxe anunciando a publicación!',
         'message_warning_hint' => 'Ao escribir unha mensaxe aumentas o alcance social, resultando en maior visibilidade para o teu episodio.',
         'message_warning_submit' => 'Publicar igualmente',
+    ],
+    'publish_date_edit_form' => [
+        'new_publication_date' => 'New publication date',
+        'new_publication_date_hint' => 'Must be set to a past date.',
+        'submit' => 'Edit publication date',
     ],
     'unpublish_form' => [
         'disclaimer' =>

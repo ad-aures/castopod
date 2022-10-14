@@ -46,6 +46,7 @@ Castopod 虽然目前处于 **测试阶段** ，但相当稳定，已经被世�
   - 🔗 &nbsp;资金链接
   - 📲 &nbsp;点击收听广告
   - 🤝 &nbsp;value4value / 网络货币化
+  - 💎 &nbsp;高级版播客
 - 📡 &nbsp;使用 RSS 将你的剧集发布到任何地方
   - 📱 &nbsp;支持众多索引和应用程序：Podcast Index，Apple
     Podcasts，Spotify，Google Podcasts，Deezer，Podcast Addict，Podfriend...

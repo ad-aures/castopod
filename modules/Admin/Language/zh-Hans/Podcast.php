@@ -107,6 +107,9 @@ return [
         'monetization_section_title' => '货币化',
         'monetization_section_subtitle' =>
             '感谢你的听众支持。',
+        'premium' => '高级版',
+        'premium_by_default' => '剧集必须默认设置为付费会员订阅。',
+        'premium_by_default_hint' => '默认情况下，播客剧集将被标记为高级。 你仍然可以选择将某些剧集、预告片等设置为公开。',
         'payment_pointer' => '网络货币化支付指南',
         'payment_pointer_hint' =>
             '借助网络货币化，你可以在此收款',

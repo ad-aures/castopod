@@ -107,6 +107,9 @@ return [
         'monetization_section_title' => 'Monetarisierung',
         'monetization_section_subtitle' =>
             'Geld dank der Zuhöhrer verdienen.',
+        'premium' => 'Premium',
+        'premium_by_default' => 'Episodes must be set as premium by default',
+        'premium_by_default_hint' => 'Podcast episodes will be marked as premium by default. You can still choose to set some episodes, trailers or bonuses as public.',
         'payment_pointer' => 'Zahlungsadresse (Payment Pointer) für Web-Monetarisierung',
         'payment_pointer_hint' =>
             'Hier erhalten Sie dank Monetarisierung Geld',

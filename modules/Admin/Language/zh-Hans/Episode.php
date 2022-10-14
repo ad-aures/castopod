@@ -24,10 +24,14 @@ return [
     'edit' => '编辑',
     'publish' => '发布',
     'publish_edit' => '编辑发布',
+    'publish_date_edit' => 'Edit publication date',
     'unpublish' => '取消发布',
     'publish_error' => '剧集已被发布。',
     'publish_edit_error' => '剧集已被发布。',
     'publish_cancel_error' => '剧集已被发布。',
+    'publish_date_edit_error' => 'Episode has not been published yet, you cannot edit its publication date.',
+    'publish_date_edit_future_error' => 'Episode\'s publication date can only be set to a past date! If you would like to reschedule it, unpublish it first.',
+    'publish_date_edit_success' => 'Episode\'s publication date has been updated successfully!',
     'unpublish_error' => '剧集尚未发布。',
     'delete' => '删除',
     'go_to_page' => '转到页面',
@@ -109,6 +113,8 @@ return [
             'bonus' => '奖金',
             'bonus_hint' => '剧集趣闻（例如，幕后信息与对演员的采访）或另一个剧集的推荐',
         ],
+        'premium_title' => '高级版',
+        'premium' => '剧集仅允许高级订阅者访问',
         'parental_advisory' => [
             'label' => '警告标记',
             'hint' => '剧集是否包含限制级内容？',
@@ -175,6 +181,11 @@ return [
         'message_warning' => '你没有为你的公告播文写一条消息！',
         'message_warning_hint' => '有消息发送可以增加社交参与度，从而提高你的剧集曝光度。',
         'message_warning_submit' => '仍然发布',
+    ],
+    'publish_date_edit_form' => [
+        'new_publication_date' => 'New publication date',
+        'new_publication_date_hint' => 'Must be set to a past date.',
+        'submit' => 'Edit publication date',
     ],
     'unpublish_form' => [
         'disclaimer' =>

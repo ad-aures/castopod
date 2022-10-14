@@ -9,33 +9,33 @@ declare(strict_types=1);
  */
 
 return [
-    'podcast_contributors' => 'Podcast contributors',
+    'podcast_contributors' => 'Collaboratori del podcast',
     'view' => "{username}'s contribution to {podcastTitle}",
-    'add' => 'Add contributor',
+    'add' => 'Aggiungi collaboratore',
     'add_contributor' => 'Add a contributor for {0}',
     'edit_role' => 'Update role for {0}',
-    'edit' => 'Edit',
-    'remove' => 'Remove',
+    'edit' => 'Modifica',
+    'remove' => 'Rimuovi',
     'list' => [
-        'username' => 'Username',
+        'username' => 'Nome Utente',
         'role' => 'Role',
     ],
     'form' => [
         'user' => 'User',
-        'user_placeholder' => 'Select a user…',
-        'role' => 'Role',
-        'role_placeholder' => 'Select its role…',
-        'submit_add' => 'Add contributor',
-        'submit_edit' => 'Update role',
+        'user_placeholder' => 'Seleziona un utente…',
+        'role' => 'Ruolo',
+        'role_placeholder' => 'Seleziona il suo ruolo…',
+        'submit_add' => 'Aggiungi collaboratore',
+        'submit_edit' => 'Aggiorna Ruolo',
     ],
     'roles' => [
-        'podcast_admin' => 'Podcast admin',
+        'podcast_admin' => 'Amministratore del podcast',
     ],
     'messages' => [
-        'removeOwnerError' => "You can't remove the podcast owner!",
+        'removeOwnerError' => "Non puoi rimuovere il proprietario del podcast!",
         'removeSuccess' =>
-            'You have successfully removed {username} from {podcastTitle}',
+            'Hai rimosso con successo {username} da {podcastTitle}',
         'alreadyAddedError' =>
-            "The contributor you're trying to add has already been added!",
+            "Il collaboratore che stai cercando di aggiungere è già stato aggiunto!",
     ],
 ];

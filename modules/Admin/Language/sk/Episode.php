@@ -26,10 +26,14 @@ return [
     'edit' => 'Upraviť',
     'publish' => 'Zverejniť',
     'publish_edit' => 'Upraviť zverejnenie',
+    'publish_date_edit' => 'Edit publication date',
     'unpublish' => 'Zrušiť zverejnenie',
     'publish_error' => 'Epizóda je už zverejnená.',
     'publish_edit_error' => 'Epizóda je už zverejnená.',
     'publish_cancel_error' => 'Epizóda je už zverejnená.',
+    'publish_date_edit_error' => 'Episode has not been published yet, you cannot edit its publication date.',
+    'publish_date_edit_future_error' => 'Episode\'s publication date can only be set to a past date! If you would like to reschedule it, unpublish it first.',
+    'publish_date_edit_success' => 'Episode\'s publication date has been updated successfully!',
     'unpublish_error' => 'Epizóda nie je zverejnená.',
     'delete' => 'Vymazať',
     'go_to_page' => 'Prejsť na stránku',
@@ -113,6 +117,8 @@ return [
             'bonus' => 'Bonus',
             'bonus_hint' => 'Extra content for the show (for example, behind the scenes info or interviews with the cast) or cross-promotional content for another show',
         ],
+        'premium_title' => 'Premium',
+        'premium' => 'Episode must be accessible to premium subscribers only',
         'parental_advisory' => [
             'label' => 'Parental advisory',
             'hint' => 'Does the episode contain explicit content?',
@@ -179,6 +185,11 @@ return [
         'message_warning' => 'Nenapísali ste text oznamujúceho príspevku!',
         'message_warning_hint' => 'Odoslaním uvádzacieho príspevku zlepšujete sociálnu účasť, čím môžete ešte viac zviditeľniť váš podcast.',
         'message_warning_submit' => 'Napriek tomu zverejniť',
+    ],
+    'publish_date_edit_form' => [
+        'new_publication_date' => 'New publication date',
+        'new_publication_date_hint' => 'Must be set to a past date.',
+        'submit' => 'Edit publication date',
     ],
     'unpublish_form' => [
         'disclaimer' =>

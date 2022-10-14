@@ -14,6 +14,7 @@ return [
         ->gateway => 'Úvod',
     'podcasts' => 'podcasty',
     'episodes' => 'časti',
+    'subscriptions' => 'subscriptions',
     'contributors' => 'prispievatelia',
     'pages' => 'stránky',
     'settings' => 'nastavenia',
@@ -24,6 +25,7 @@ return [
     'persons' => 'osobnosti',
     'publish' => 'zverejniť',
     'publish-edit' => 'upraviť zverejnené',
+    'publish-date-edit' => 'edit publication date',
     'unpublish' => 'zrušiť zverejnenie',
     'delete' => 'vymazať',
     'fediverse' => 'fediverse',
@@ -46,4 +48,5 @@ return [
     'video-clips' => 'video klipy',
     'embed' => 'vnorený',
     'notifications' => 'oboznámenia',
+    'suspend' => 'suspend',
 ];

@@ -35,6 +35,8 @@ return [
         'reset_counts_helper' => 'Ta opcja zresetuje i ponownie obliczy wszystkie liczniki danych (liczbę obserwujących, wpisów, komentarzy, …).',
         'rewrite_media' => 'Przepisz metadane multimediów',
         'rewrite_media_helper' => 'Ta opcja usunie wszystkie zbędne pliki multimedialne i odtworzy je (obrazy, pliki audio, transkrypcje, rozdziały, …)',
+        'rename_episodes_files' => 'Rename episode audio files',
+        'rename_episodes_files_hint' => 'This option will rename all episodes audio files to a random string of characters. Use this if one of your private episodes link was leaked as this will effectively hide it.',
         'clear_cache' => 'Wyczyść całą pamięć podręczną',
         'clear_cache_helper' => 'Ta opcja opróżni pamięć podręczną (cache) redis lub zapisywalne/buforowane pliki.',
         'run' => 'Przeprowadź porządkowanie',

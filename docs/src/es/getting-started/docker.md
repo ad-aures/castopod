@@ -19,8 +19,8 @@ También se puede añadir una base de datos Redis como gestor de caché.
 ## Etiquetas admitidas
 
 - `develop` [unstable], última rama de desarrollo construida
-
-// más etiquetas por venir!
+- `beta` [stable], latest beta version build
+- `1.0.0-beta.x` [stable], specific beta version build (since `1.0.0-beta.22`)
 
 ## Ejemplo de uso
 
@@ -33,7 +33,7 @@ También se puede añadir una base de datos Redis como gestor de caché.
 
     services:
       app:
-        image: castopod/app:develop
+        image: castopod/app:beta
         container_name: "castopod-app"
         volumes:
           - castopod-media:/opt/castopod/public/media
@@ -51,7 +51,7 @@ También se puede añadir una base de datos Redis como gestor de caché.
         restart: unless-stopped
 
       web-server:
-        image: castopod/web-server:develop
+        image: castopod/web-server:beta
         container_name: "castopod-web-server"
         volumes:
           - castopod-media:/var/www/html/media
@@ -119,26 +119,32 @@ También se puede añadir una base de datos Redis como gestor de caché.
 
 - **castopod/app**
 
-  | Nombre de la Variable      | Tipo (`predeterminado`)            |
-  | -------------------------- | ---------------------------------- |
-  | **`CP_URLBASE`**           | string (`undefined`)               |
-  | **`CP_MEDIA_URLBASE`**     | ?string (`(vacío)`)                |
-  | **`CP_ADMIN_GATEWAY`**     | ?string (`"cp-admin"`)             |
-  | **`CP_AUTH_GATEWAY`**      | ?string (`"cp-auth"`)              |
-  | **`CP_ANALYTICS_SALT`**    | string (`indefinido`)              |
-  | **`CP_DATABASE_HOSTNAME`** | ?string (`"mariadb"`)              |
-  | **`CP_DATABASE_NAME`**     | string (`MYSQL_DATABASE`)          |
-  | **`CP_DATABASE_USERNAME`** | string (`MYSQL_USER`)              |
-  | **`CP_DATABASE_PASSWORD`** | string (`MYSQL_PASSWORD`)          |
-  | **`CP_DATABASE_PREFIX`**   | ?string (`"cp_"`)                  |
-  | **`CP_CACHE_HANDLER`**     | ?[`"file"` o `"redis"`] (`"file"`) |
-  | **`CP_REDIS_HOST`**        | ?string (`"localhost"`)            |
-  | **`CP_REDIS_PASSWORD`**    | ?string (`null`)                   |
-  | **`CP_REDIS_PORT`**        | ?number (`6379`)                   |
-  | **`CP_REDIS_DATABASE`**    | ?number (`0`)                      |
+  | Nombre de la Variable        | Tipo (`predeterminado`) | Default          |
+  | ---------------------------- | ----------------------- | ---------------- |
+  | **`CP_URLBASE`**             | string                  | `undefined`      |
+  | **`CP_MEDIA_URLBASE`**       | ?string                 | `CP_BASEURL`     |
+  | **`CP_ADMIN_GATEWAY`**       | ?string                 | `"cp-admin"`     |
+  | **`CP_AUTH_GATEWAY`**        | ?string                 | `"cp-auth"`      |
+  | **`CP_ANALYTICS_SALT`**      | string                  | `undefined`      |
+  | **`CP_DATABASE_HOSTNAME`**   | ?string                 | `"mariadb"`      |
+  | **`CP_DATABASE_NAME`**       | ?string                 | `MYSQL_DATABASE` |
+  | **`CP_DATABASE_USERNAME`**   | ?string                 | `MYSQL_USER`     |
+  | **`CP_DATABASE_PASSWORD`**   | ?string                 | `MYSQL_PASSWORD` |
+  | **`CP_DATABASE_PREFIX`**     | ?string                 | `"cp_"`          |
+  | **`CP_CACHE_HANDLER`**       | [`"file"` or `"redis"`] | `"file"`         |
+  | **`CP_REDIS_HOST`**          | ?string                 | `"localhost"`    |
+  | **`CP_REDIS_PASSWORD`**      | ?string                 | `null`           |
+  | **`CP_REDIS_PORT`**          | ?number                 | `6379`           |
+  | **`CP_REDIS_DATABASE`**      | ?number                 | `0`              |
+  | **`CP_EMAIL_SMTP_HOST`**     | ?string                 | `undefined`      |
+  | **`CP_EMAIL_FROM`**          | ?string                 | `undefined`      |
+  | **`CP_EMAIL_SMTP_USERNAME`** | ?string                 | `"localhost"`    |
+  | **`CP_EMAIL_SMTP_PASSWORD`** | ?string                 | `null`           |
+  | **`CP_EMAIL_SMTP_PORT`**     | ?number                 | `25`             |
+  | **`CP_EMAIL_SMTP_CRYPTO`**   | [`"tls"` or `"ssl"`]    | `"tls"`          |
 
 - **castopod/web-server**
 
-  | Nombre de la variable | Tipo (`predeterminado`) |
-  | --------------------- | ----------------------- |
-  | **`CP_APP_HOSTNAME`** | ?string (`"app"`)       |
+  | Nombre de la variable | Type    | Default |
+  | --------------------- | ------- | ------- |
+  | **`CP_APP_HOSTNAME`** | ?string | `"app"` |

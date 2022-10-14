@@ -128,17 +128,46 @@ want to generate Video Clips. The following extensions must be installed:
 ::: info Note
 
 The install script writes a `.env` file in the package root. If you cannot go
-through the install wizard, you can
-[create and update the `.env` file manually](#alternative-manual-configuration).
+through the install wizard, you can create and edit the `.env` file manually
+based on the `.env.example` file.
 
 :::
+
+### Email/SMTP setup
+
+Email configuration is required for some features to work properly (eg.
+retrieving your forgotten password, sending instructions to premium subscribers,
+…)
+
+You may add your email configuration in your instance's `.env` like so:
+
+```ini
+# […]
+
+email.fromEmail="your_email_address"
+email.SMTPHost="your_smtp_host"
+email.SMTPUser="your_smtp_user"
+email.SMTPPass="your_smtp_password"
+```
+
+#### Email config options
+
+| Variable name    | Type                 | Default      |
+| ---------------- | -------------------- | ------------ |
+| **`fromEmail`**  | string               | `undefined`  |
+| **`fromName`**   | string               | `"Castopod"` |
+| **`SMTPHost`**   | string               | `undefined`  |
+| **`SMTPUser`**   | string               | `undefined`  |
+| **`SMTPPass`**   | string               | `undefined`  |
+| **`SMTPPort`**   | number               | `25`         |
+| **`SMTPCrypto`** | [`"tls"` or `"ssl"`] | `"tls"`      |
 
 ## Pacotes comunitários
 
 If you don't want to bother with installing Castopod manually, you may use one
 of the packages created and maintained by the open-source community.
 
-### Instalar com YunoHost
+### Install with YunoHost
 
 [YunoHost](https://yunohost.org/) is a distribution based on Debian GNU/Linux
 made up of free and open-source software packages. It manages the hardships of

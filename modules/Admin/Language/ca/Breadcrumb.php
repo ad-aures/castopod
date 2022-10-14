@@ -14,6 +14,7 @@ return [
         ->gateway => 'Inici',
     'podcasts' => 'podcasts',
     'episodes' => 'episodis',
+    'subscriptions' => 'subscriptions',
     'contributors' => 'col·laboradors',
     'pages' => 'pàgines',
     'settings' => 'preferències',
@@ -24,6 +25,7 @@ return [
     'persons' => 'persones',
     'publish' => 'publicar',
     'publish-edit' => 'editar la publicació',
+    'publish-date-edit' => 'edit publication date',
     'unpublish' => 'desfer la publicació',
     'delete' => 'eliminar',
     'fediverse' => 'Fediverse',
@@ -46,4 +48,5 @@ return [
     'video-clips' => 'vídeoclips',
     'embed' => 'reproductor incrustable',
     'notifications' => 'notificacions',
+    'suspend' => 'suspend',
 ];

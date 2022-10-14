@@ -107,6 +107,9 @@ return [
         'monetization_section_title' => 'Kommersialisering',
         'monetization_section_subtitle' =>
             'Ten pengar med hjelp frå publikummet ditt.',
+        'premium' => 'Premium',
+        'premium_by_default' => 'Episodes must be set as premium by default',
+        'premium_by_default_hint' => 'Podcast episodes will be marked as premium by default. You can still choose to set some episodes, trailers or bonuses as public.',
         'payment_pointer' => 'Betalingspunkt for nettkommersialisering',
         'payment_pointer_hint' =>
             'Det er her du vil få inn pengar frå nettkommersialiseringa',

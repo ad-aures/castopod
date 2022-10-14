@@ -24,10 +24,14 @@ return [
     'edit' => 'Rediger',
     'publish' => 'Legg ut',
     'publish_edit' => 'Rediger publiseringa',
+    'publish_date_edit' => 'Edit publication date',
     'unpublish' => 'Avpubliser',
     'publish_error' => 'Episoden er allereie publisert.',
     'publish_edit_error' => 'Episoden er allereie publisert.',
     'publish_cancel_error' => 'Episoden er allereie publisert.',
+    'publish_date_edit_error' => 'Episode has not been published yet, you cannot edit its publication date.',
+    'publish_date_edit_future_error' => 'Episode\'s publication date can only be set to a past date! If you would like to reschedule it, unpublish it first.',
+    'publish_date_edit_success' => 'Episode\'s publication date has been updated successfully!',
     'unpublish_error' => 'Episoden er ikkje publisert.',
     'delete' => 'Slett',
     'go_to_page' => 'Gå til side',
@@ -109,6 +113,8 @@ return [
             'bonus' => 'Bonus',
             'bonus_hint' => 'Ekstra innhald (til dømes bakominfo eller intervju med skodespelarane) eller innhald for å framheva ein annan serie',
         ],
+        'premium_title' => 'Premium',
+        'premium' => 'Episode must be accessible to premium subscribers only',
         'parental_advisory' => [
             'label' => 'Råd til foreldre',
             'hint' => 'Inneheld episoden grov prat?',
@@ -175,6 +181,11 @@ return [
         'message_warning' => 'Du skreiv inga melding til kunngjeringsinnlegget ditt!',
         'message_warning_hint' => 'Viss du skriv ei melding, kan det gje meir sosialt engasjement og syta for at episoden din blir meir synleg.',
         'message_warning_submit' => 'Legg ut likevel',
+    ],
+    'publish_date_edit_form' => [
+        'new_publication_date' => 'New publication date',
+        'new_publication_date_hint' => 'Must be set to a past date.',
+        'submit' => 'Edit publication date',
     ],
     'unpublish_form' => [
         'disclaimer' =>

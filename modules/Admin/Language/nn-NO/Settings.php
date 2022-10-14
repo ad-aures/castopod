@@ -35,6 +35,8 @@ return [
         'reset_counts_helper' => 'Dette nullstiller alle datateljarar (tal på fylgjarar, innlegg, kommentarar…).',
         'rewrite_media' => 'Overskriv metadata for medium',
         'rewrite_media_helper' => 'Dette vil sletta alle overflødige mediafiler og laga dei på nytt (bilete, lydfiler, transkriberingar, kapittel, …)',
+        'rename_episodes_files' => 'Rename episode audio files',
+        'rename_episodes_files_hint' => 'This option will rename all episodes audio files to a random string of characters. Use this if one of your private episodes link was leaked as this will effectively hide it.',
         'clear_cache' => 'Slett bufferinnhald',
         'clear_cache_helper' => 'Dette tømmer redis-mellomlageret eller skrivbare/mellomlagra filer.',
         'run' => 'Gjer reinhald',

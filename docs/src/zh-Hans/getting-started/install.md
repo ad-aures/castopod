@@ -118,18 +118,45 @@ Castopod 仅适用于受支持的 MySQL 5.7 或更高版本的兼容数据库。
 
 ::: 注意
 
-安装脚本将会在根目录中创建一个 `.env` 文件并写入数据。 如果无法执行安装向导，可
-以 [手动创建并更新 `.env` 文件](#alternative-manual-configuration)。
+安装脚本将会在根目录中创建一个 `.env` 文件并写入数据。 如果你不能执行安装向导，
+那么可以基于 `.env.example` 文件手动创建和编辑 `.env` 文件。
 
 :::
 
+### 邮箱/SMTP 设置
+
+某些功能需要电子邮件配置才能正常工作（例如： 找回密码，向高级订阅者发送说明， …)
+
+你可以在实例的 `.env` 中添加你的电子邮件配置，如下所示：
+
+```ini
+# […]
+
+email.fromEmail="你的邮件地址"
+email.SMTPHost="你的邮件主机"
+email.SMTPUser="你的邮件用户名"
+email.SMTPPass="你的邮件密码"
+```
+
+#### 电子邮件配置选项
+
+| 变量名称         | 类型                 | 默认         |
+| ---------------- | -------------------- | ------------ |
+| **`fromEmail`**  | string               | `undefined`  |
+| **`fromName`**   | string               | `"Castopod"` |
+| **`SMTPHost`**   | string               | `undefined`  |
+| **`SMTPUser`**   | string               | `undefined`  |
+| **`SMTPPass`**   | string               | `undefined`  |
+| **`SMTPPort`**   | number               | `25`         |
+| **`SMTPCrypto`** | [`"tls"` or `"ssl"`] | `"tls"`      |
+
 ## 社区套餐
 
-如果你不想手动安装 Castopod，可以使用开源社区创建和维护的软件包。
+如果你不想手动安装 Castopod，可以使用一个 由开源社区创建和维护的软件包。
 
 ### 使用 YunoHost 安装
 
-[Yunohost](https://yunohost.org/) 是一个基于 Debian GNU/Linux 的发行版，由自由和
+[YunoHost](https://yunohost.org/) 是一个基于 Debian GNU/Linux 的发行版，由免费和
 开源软件包组成。 它可以为你解决自托管的困难。
 
 <div class="flex flex-wrap items-center gap-4">
