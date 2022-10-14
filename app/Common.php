@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use App\Libraries\View;
 use Config\Services;
+use Config\View;
 use ViewThemes\Theme;
 
 /**

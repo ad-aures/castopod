@@ -14,21 +14,9 @@ class ComponentRenderer
 {
     protected ViewComponents $config;
 
-    /**
-     * File name of the view source
-     */
-    protected string $currentView;
-
     public function __construct()
     {
         $this->config = config('ViewComponents');
-    }
-
-    public function setCurrentView(string $view): self
-    {
-        $this->currentView = $view;
-
-        return $this;
     }
 
     public function render(string $output): string
@@ -139,10 +127,7 @@ class ComponentRenderer
         // TODO: Is there a better way to locate components local to current module?
         $pathsToDiscover = [];
         $lookupPaths = $this->config->lookupPaths;
-        $pathsToDiscover = array_filter($lookupPaths, function ($path): bool {
-            return str_starts_with($this->currentView, $path);
-        });
-        $pathsToDiscover = array_values($pathsToDiscover);
+        $pathsToDiscover = array_values($lookupPaths);
         $pathsToDiscover[] = $this->config->defaultLookupPath;
 
         $namePath = str_replace('.', '/', $name);

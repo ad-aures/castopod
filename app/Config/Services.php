@@ -7,13 +7,10 @@ namespace Config;
 use App\Libraries\Breadcrumb;
 use App\Libraries\Negotiate;
 use App\Libraries\Router;
-use App\Libraries\View;
 use CodeIgniter\Config\BaseService;
 use CodeIgniter\HTTP\Request;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\Router\RouteCollectionInterface;
-use Config\Services as AppServices;
-use Config\View as ViewConfig;
 
 /**
  * Services Configuration file.
@@ -46,24 +43,6 @@ class Services extends BaseService
         $request = $request ?? static::request();
 
         return new Router($routes, $request);
-    }
-
-    /**
-     * The Renderer class is the class that actually displays a file to the user. The default View class within
-     * CodeIgniter is intentionally simple, but this service could easily be replaced by a template engine if the user
-     * needed to.
-     */
-    public static function renderer(?string $viewPath = null, ?ViewConfig $config = null, bool $getShared = true): View
-    {
-        if ($getShared) {
-            return static::getSharedInstance('renderer', $viewPath, $config);
-        }
-
-        $viewPath = $viewPath ?: config('Paths')
-            ->viewDirectory;
-        $config = $config ?? config('View');
-
-        return new View($config, $viewPath, AppServices::locator(), CI_DEBUG, AppServices::logger());
     }
 
     /**
