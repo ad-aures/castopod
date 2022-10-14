@@ -683,27 +683,102 @@ class EpisodeController extends BaseController
         return redirect()->route('episode-view', [$this->podcast->id, $this->episode->id]);
     }
 
-    public function unpublish(): string | RedirectResponse
+    public function publishDateEdit(): string|RedirectResponse
     {
-        if ($this->episode->publication_status === 'published') {
-            helper(['form']);
+        // only accessible if episode is already published
+        if ($this->episode->publication_status !== 'published') {
+            return redirect()->route('episode-view', [$this->podcast->id, $this->episode->id])->with(
+                'error',
+                lang('Episode.publish_date_edit_error')
+            );
+        }
 
-            $data = [
-                'podcast' => $this->podcast,
-                'episode' => $this->episode,
-            ];
+        helper('form');
 
-            replace_breadcrumb_params([
-                0 => $this->podcast->title,
-                1 => $this->episode->title,
-            ]);
-            return view('episode/unpublish', $data);
+        $data = [
+            'podcast' => $this->podcast,
+            'episode' => $this->episode,
+        ];
+
+        replace_breadcrumb_params([
+            0 => $this->podcast->title,
+            1 => $this->episode->title,
+        ]);
+
+        return view('episode/publish_date_edit', $data);
+    }
+
+    /**
+     * Allows to set an episode's publication date to a past date
+     *
+     * Prevents setting a future date as it does not make sense to set a future published date to an already published
+     * episode. This also prevents any side-effects from occurring.
+     */
+    public function attemptPublishDateEdit(): RedirectResponse
+    {
+        $rules = [
+            'new_publication_date' => 'valid_date[Y-m-d H:i]',
+        ];
+
+        if (! $this->validate($rules)) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $this->validator->getErrors());
+        }
+
+        $newPublicationDate = $this->request->getPost('new_publication_date');
+
+        $newPublicationDate = Time::createFromFormat(
+            'Y-m-d H:i',
+            $newPublicationDate,
+            $this->request->getPost('client_timezone'),
+        )->setTimezone(app_timezone());
+
+        if ($newPublicationDate->isAfter(Time::now())) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('error', lang('Episode.publish_date_edit_future_error'));
+        }
+
+        $this->episode->published_at = $newPublicationDate;
+
+        $episodeModel = new EpisodeModel();
+        if (! $episodeModel->update($this->episode->id, $this->episode)) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $episodeModel->errors());
         }
 
         return redirect()->route('episode-view', [$this->podcast->id, $this->episode->id])->with(
-            'error',
-            lang('Episode.unpublish_error')
+            'message',
+            lang('Episode.publish_date_edit_success')
         );
+    }
+
+    public function unpublish(): string | RedirectResponse
+    {
+        if ($this->episode->publication_status !== 'published') {
+            return redirect()->route('episode-view', [$this->podcast->id, $this->episode->id])->with(
+                'error',
+                lang('Episode.unpublish_error')
+            );
+        }
+
+        helper(['form']);
+
+        $data = [
+            'podcast' => $this->podcast,
+            'episode' => $this->episode,
+        ];
+
+        replace_breadcrumb_params([
+            0 => $this->podcast->title,
+            1 => $this->episode->title,
+        ]);
+        return view('episode/unpublish', $data);
     }
 
     public function attemptUnpublish(): RedirectResponse

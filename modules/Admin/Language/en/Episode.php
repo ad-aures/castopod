@@ -24,10 +24,14 @@ return [
     'edit' => 'Edit',
     'publish' => 'Publish',
     'publish_edit' => 'Edit publication',
+    'publish_date_edit' => 'Edit publication date',
     'unpublish' => 'Unpublish',
     'publish_error' => 'Episode is already published.',
     'publish_edit_error' => 'Episode is already published.',
     'publish_cancel_error' => 'Episode is already published.',
+    'publish_date_edit_error' => 'Episode has not been published yet, you cannot edit its publication date.',
+    'publish_date_edit_future_error' => 'Episode\'s publication date can only be set to a past date! If you would like to reschedule it, unpublish it first.',
+    'publish_date_edit_success' => 'Episode\'s publication date has been updated successfully!',
     'unpublish_error' => 'Episode is not published.',
     'delete' => 'Delete',
     'go_to_page' => 'Go to page',
@@ -177,6 +181,11 @@ return [
         'message_warning' => 'You did not write a message for your announcement post!',
         'message_warning_hint' => 'Having a message increases social engagement, resulting in a better visibility for your episode.',
         'message_warning_submit' => 'Publish anyways',
+    ],
+    'publish_date_edit_form' => [
+        'new_publication_date' => 'New publication date',
+        'new_publication_date_hint' => 'Must be set to a past date.',
+        'submit' => 'Edit publication date',
     ],
     'unpublish_form' => [
         'disclaimer' =>

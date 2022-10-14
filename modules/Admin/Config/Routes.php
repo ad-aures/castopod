@@ -328,6 +328,23 @@ $routes->group(
                             ],
                         );
                         $routes->get(
+                            'publish-date-edit',
+                            'EpisodeController::publishDateEdit/$1/$2',
+                            [
+                                'as' => 'episode-publish_date_edit',
+                                'filter' =>
+                                    'permission:podcast-manage_publications',
+                            ],
+                        );
+                        $routes->post(
+                            'publish-date-edit',
+                            'EpisodeController::attemptPublishDateEdit/$1/$2',
+                            [
+                                'filter' =>
+                                    'permission:podcast-manage_publications',
+                            ],
+                        );
+                        $routes->get(
                             'unpublish',
                             'EpisodeController::unpublish/$1/$2',
                             [

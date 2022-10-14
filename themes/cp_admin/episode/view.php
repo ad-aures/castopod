@@ -17,6 +17,14 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
+<?php if ($episode->publication_status === 'published'): ?>
+<IconButton
+    uri="<?= route_to('episode-publish_date_edit', $podcast->id, $episode->id) ?>"
+    glyph="history"
+    variant="secondary"
+    glyphClass="text-xl"
+><?= lang('Episode.publish_date_edit') ?></IconButton>
+<?php endif; ?>
 <?= publication_button(
     $podcast->id,
     $episode->id,

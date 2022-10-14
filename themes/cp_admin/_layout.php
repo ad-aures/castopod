@@ -1,3 +1,9 @@
+<?php declare(strict_types=1);
+
+$isPodcastArea = isset($podcast) && ! isset($episode);
+$isEpisodeArea = isset($podcast) && isset($episode);
+?>
+
 <!DOCTYPE html>
 <html lang="<?= service('request')
     ->getLocale() ?>">
@@ -32,9 +38,9 @@
                 <?= render_breadcrumb('text-xs items-center flex') ?>
                 <div class="flex justify-between py-1">
                     <div class="flex flex-wrap items-center">
-                    <?php if ((isset($episode) && $episode->is_premium) || (isset($podcast) && $podcast->is_premium)): ?>
+                    <?php if (($isEpisodeArea && $episode->is_premium) || ($isPodcastArea && $podcast->is_premium)): ?>
                         <div class="inline-flex items-center">
-                            <IconButton uri="<?= route_to('subscription-list', $podcast->id) ?>" glyph="exchange-dollar" variant="secondary" class="p-0 mr-2 text-4xl border-0"><?= isset($episode) ? lang('PremiumPodcasts.episode_is_premium') : lang('PremiumPodcasts.podcast_is_premium') ?></IconButton>
+                            <IconButton uri="<?= route_to('subscription-list', $podcast->id) ?>" glyph="exchange-dollar" variant="secondary" size="large" class="p-0 mr-2 border-0"><?= ($isEpisodeArea && $episode->is_premium) ? lang('PremiumPodcasts.episode_is_premium') : lang('PremiumPodcasts.podcast_is_premium') ?></IconButton>
                             <Heading tagName="h1" size="large" class="truncate"><?= $this->renderSection('pageTitle') ?></Heading>
                         </div>
                         <?php else: ?>
@@ -42,11 +48,11 @@
                         <?php endif; ?>
                         <?= $this->renderSection('headerLeft') ?>
                     </div>
-                    <div class="flex flex-shrink-0 gap-x-2"><?= $this->renderSection('headerRight') ?></div>
+                    <div class="flex items-center flex-shrink-0 gap-x-2"><?= $this->renderSection('headerRight') ?></div>
                 </div>
             </div>
         </header>
-        <?php if (isset($podcast) && $podcast->publication_status !== 'published'): ?>
+        <?php if ($isPodcastArea && $podcast->publication_status !== 'published'): ?>
                 <?= publication_status_banner($podcast->published_at, $podcast->id, $podcast->publication_status) ?>
         <?php endif ?>
         <div class="px-2 py-8 mx-auto md:px-12">

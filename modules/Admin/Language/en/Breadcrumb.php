@@ -25,6 +25,7 @@ return [
     'persons' => 'persons',
     'publish' => 'publish',
     'publish-edit' => 'edit publication',
+    'publish-date-edit' => 'edit publication date',
     'unpublish' => 'unpublish',
     'delete' => 'delete',
     'fediverse' => 'fediverse',
