@@ -38,40 +38,40 @@ class Router extends CodeIgniterRouter
             return false;
         }
 
-        $uri = $uri === '/' ? $uri : ltrim($uri, '/ ');
+        $uri = $uri === '/' ? $uri : trim($uri, '/ ');
 
         // Loop through the route array looking for wildcards
-        foreach ($routes as $key => $val) {
+        foreach ($routes as $routeKey => $val) {
             // Reset localeSegment
             $localeSegment = null;
 
-            $key = $key === '/' ? $key : ltrim($key, '/ ');
+            $routeKey = $routeKey === '/' ? $routeKey : ltrim($routeKey, '/ ');
 
-            $matchedKey = $key;
+            $matchedKey = $routeKey;
 
             // Are we dealing with a locale?
-            if (str_contains($key, '{locale}')) {
+            if (str_contains($routeKey, '{locale}')) {
                 $localeSegment = array_search(
                     '{locale}',
-                    preg_split('~[\/]*((^[a-zA-Z0-9])|\(([^()]*)\))*[\/]+~m', $key),
+                    preg_split('~[\/]*((^[a-zA-Z0-9])|\(([^()]*)\))*[\/]+~m', $routeKey),
                     true,
                 );
 
                 // Replace it with a regex so it
                 // will actually match.
-                $key = str_replace('/', '\/', $key);
-                $key = str_replace('{locale}', '[^\/]+', $key);
+                $routeKey = str_replace('/', '\/', $routeKey);
+                $routeKey = str_replace('{locale}', '[^\/]+', $routeKey);
             }
 
             // Does the RegEx match?
-            if (preg_match('#^' . $key . '$#u', $uri, $matches)) {
+            if (preg_match('#^' . $routeKey . '$#u', $uri, $matches)) {
                 $this->matchedRouteOptions = $this->collection->getRoutesOptions($matchedKey);
 
                 // Is this route supposed to redirect to another?
-                if ($this->collection->isRedirect($key)) {
+                if ($this->collection->isRedirect($routeKey)) {
                     throw new RedirectException(
                         is_array($val) ? key($val) : $val,
-                        $this->collection->getRedirectCode($key),
+                        $this->collection->getRedirectCode($routeKey),
                     );
                 }
 
@@ -160,14 +160,14 @@ class Router extends CodeIgniterRouter
                 // ex: $routes->resource('Admin/Admins');
                 if (
                     str_contains($val, '$') &&
-                    str_contains($key, '(') &&
-                    str_contains($key, '/')
+                    str_contains($routeKey, '(') &&
+                    str_contains($routeKey, '/')
                 ) {
-                    $replacekey = str_replace('/(.*)', '', $key);
-                    $val = preg_replace('#^' . $key . '$#u', $val, $uri);
+                    $replacekey = str_replace('/(.*)', '', $routeKey);
+                    $val = preg_replace('#^' . $routeKey . '$#u', $val, $uri);
                     $val = str_replace($replacekey, str_replace('/', '\\', $replacekey), $val);
-                } elseif (str_contains($val, '$') && str_contains($key, '(')) {
-                    $val = preg_replace('#^' . $key . '$#u', $val, $uri);
+                } elseif (str_contains($val, '$') && str_contains($routeKey, '(')) {
+                    $val = preg_replace('#^' . $routeKey . '$#u', $val, $uri);
                 } elseif (str_contains($val, '/')) {
                     [$controller, $method] = explode('::', $val);
 
