@@ -143,7 +143,7 @@ class PodcastImportController extends BaseController
                 'guid' => $guid,
                 'handle' => $this->request->getPost('handle'),
                 'imported_feed_url' => $this->request->getPost('imported_feed_url'),
-                'new_feed_url' => url_to('podcast_feed', $this->request->getPost('handle')),
+                'new_feed_url' => url_to('podcast-rss-feed', $this->request->getPost('handle')),
                 'title' => (string) $feed->channel[0]->title,
                 'description_markdown' => $converter->convert($channelDescriptionHtml),
                 'description_html' => $channelDescriptionHtml,

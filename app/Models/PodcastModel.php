@@ -550,7 +550,7 @@ class PodcastModel extends Model
     {
         if (! array_key_exists('guid', $data['data']) || $data['data']['guid'] === null) {
             helper('misc');
-            $data['data']['guid'] = podcast_uuid(url_to('podcast_feed', $data['data']['handle']));
+            $data['data']['guid'] = podcast_uuid(url_to('podcast-rss-feed', $data['data']['handle']));
         }
 
         return $data;

@@ -324,7 +324,7 @@ class Podcast extends Entity
 
     public function getFeedUrl(): string
     {
-        return url_to('podcast_feed', $this->attributes['handle']);
+        return url_to('podcast-rss-feed', $this->attributes['handle']);
     }
 
     /**

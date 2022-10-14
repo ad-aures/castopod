@@ -185,11 +185,13 @@ $routes->group('@(:podcastHandle)', static function ($routes): void {
         });
     });
     $routes->head('feed.xml', 'FeedController/$1', [
-        'as' => 'podcast_feed',
+        'as' => 'podcast-rss-feed',
     ]);
     $routes->get('feed.xml', 'FeedController/$1', [
-        'as' => 'podcast_feed',
+        'as' => 'podcast-rss-feed',
     ]);
+    $routes->head('feed', 'FeedController/$1');
+    $routes->get('feed', 'FeedController/$1');
 });
 
 // Other pages
