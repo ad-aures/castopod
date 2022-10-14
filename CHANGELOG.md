@@ -1,3 +1,21 @@
+# [1.0.0-beta.24](https://code.castopod.org/adaures/castopod/compare/v1.0.0-beta.23...v1.0.0-beta.24) (2022-10-14)
+
+### Bug Fixes
+
+- **router:** trim URI slash to match same routes for URIs with and without
+  trailing slash
+  ([9e9375f](https://code.castopod.org/adaures/castopod/commit/9e9375f9a2cd6102f827b36ec521f4c86a557c00))
+
+### Features
+
+- **episode:** add form to allow editing episode's publication date to a past
+  date
+  ([d783d16](https://code.castopod.org/adaures/castopod/commit/d783d16eb73d3f896a3dea39a766b4e963e53abf)),
+  closes [#97](https://code.castopod.org/adaures/castopod/issues/97)
+- **rss:** add rss feed route without the `.xml` extension
+  ([94c0b7c](https://code.castopod.org/adaures/castopod/commit/94c0b7c15920dae9ade5cdc79c7996dbfe82ba05)),
+  closes [#247](https://code.castopod.org/adaures/castopod/issues/247)
+
 # [1.0.0-beta.23](https://code.castopod.org/adaures/castopod/compare/v1.0.0-beta.22...v1.0.0-beta.23) (2022-09-29)
 
 ### Bug Fixes
