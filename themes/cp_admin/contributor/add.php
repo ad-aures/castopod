@@ -18,7 +18,7 @@
     as="Select"
     name="user"
     label="<?= lang('Contributor.form.user') ?>"
-    options="<?= esc(json_encode($userOptions)) ?>"
+    options="<?= esc(json_encode($contributorOptions)) ?>"
     placeholder="<?= lang('Contributor.form.user_placeholder') ?>"
     required="true" />
 
@@ -28,6 +28,7 @@
     label="<?= lang('Contributor.form.role') ?>"
     options="<?= esc(json_encode($roleOptions)) ?>"
     placeholder="<?= lang('Contributor.form.role_placeholder') ?>"
+    selected="<?= setting('AuthGroups.defaultPodcastGroup') ?>"
     required="true" />
 
 <Button type="submit" class="self-end" variant="primary"><?= lang('Contributor.form.submit_add') ?></Button>

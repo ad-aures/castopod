@@ -11,7 +11,6 @@ use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Router\Router;
 use Config\App;
 use Modules\PremiumPodcasts\PremiumPodcasts;
-use Myth\Auth\Authentication\AuthenticationBase;
 
 class PodcastUnlockFilter implements FilterInterface
 {
@@ -48,9 +47,7 @@ class PodcastUnlockFilter implements FilterInterface
         }
 
         // no need to go through the unlock form if user is connected
-        /** @var AuthenticationBase $auth */
-        $auth = service('authentication');
-        if ($auth->isLoggedIn()) {
+        if (auth()->loggedIn()) {
             return;
         }
 

@@ -53,7 +53,7 @@ class PodcastPlatformController extends BaseController
         ];
 
         replace_breadcrumb_params([
-            0 => $this->podcast->title,
+            0 => $this->podcast->at_handle,
         ]);
 
         return view('podcast/platforms', $data);

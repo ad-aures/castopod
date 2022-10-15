@@ -12,7 +12,8 @@
 <?= $this->section('content') ?>
 
 <?= view('_partials/_user_info.php', [
-    'user' => user(),
+    'user' => auth()
+        ->user(),
 ]) ?>
 
 <?= $this->endSection() ?>

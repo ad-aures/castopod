@@ -4,7 +4,7 @@
     "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
     "This file is @generated automatically"
   ],
-  "content-hash": "caa3b9ff10584fe03c7be1176713b427",
+  "content-hash": "51482dcb24c719550a1f0aa7e7580dfc",
   "packages": [
     {
       "name": "adaures/ipcat-php",
@@ -285,6 +285,70 @@
         "source": "https://github.com/codeigniter4/settings/tree/v2.1.0"
       },
       "time": "2021-11-22T17:30:18+00:00"
+    },
+    {
+      "name": "codeigniter4/shield",
+      "version": "dev-develop",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/codeigniter4/shield.git",
+        "reference": "f4cdfb672b600a032a6f0bfc0b7735411bee0cae"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/codeigniter4/shield/zipball/f4cdfb672b600a032a6f0bfc0b7735411bee0cae",
+        "reference": "f4cdfb672b600a032a6f0bfc0b7735411bee0cae",
+        "shasum": ""
+      },
+      "require": {
+        "codeigniter4/settings": "^2.0",
+        "php": "^7.4.3 || ^8.0"
+      },
+      "provide": {
+        "codeigniter4/authentication-implementation": "1.0"
+      },
+      "require-dev": {
+        "codeigniter4/devkit": "^1.0",
+        "codeigniter4/framework": "^4.2.3",
+        "mockery/mockery": "^1.0"
+      },
+      "default-branch": true,
+      "type": "library",
+      "autoload": {
+        "files": [
+          "src/Helpers/auth_helper.php",
+          "src/Helpers/email_helper.php"
+        ],
+        "psr-4": {
+          "CodeIgniter\\Shield\\": "src"
+        },
+        "exclude-from-classmap": ["**/Database/Migrations/**"]
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": ["MIT"],
+      "authors": [
+        {
+          "name": "Lonnie Ezell",
+          "email": "lonnieje@gmail.com",
+          "role": "Developer"
+        }
+      ],
+      "description": "Authentication and Authorization for CodeIgniter 4",
+      "homepage": "https://github.com/codeigniter4/shield",
+      "keywords": [
+        "Authentication",
+        "authorization",
+        "codeigniter",
+        "codeigniter4"
+      ],
+      "support": {
+        "docs": "https://github.com/codeigniter4/shield/blob/develop/docs/index.md",
+        "forum": "https://github.com/codeigniter4/shield/discussions",
+        "issues": "https://github.com/codeigniter4/shield/issues",
+        "slack": "https://codeigniterchat.slack.com",
+        "source": "https://github.com/codeigniter4/shield"
+      },
+      "time": "2022-10-05T10:11:44+00:00"
     },
     {
       "name": "composer/ca-bundle",
@@ -1366,73 +1430,6 @@
         "source": "https://github.com/michalsn/codeigniter4-uuid/tree/develop"
       },
       "time": "2021-05-10T16:28:01+00:00"
-    },
-    {
-      "name": "myth/auth",
-      "version": "dev-develop",
-      "source": {
-        "type": "git",
-        "url": "https://github.com/lonnieezell/myth-auth.git",
-        "reference": "cc94231f5284e9578967aba4796f018809669c84"
-      },
-      "dist": {
-        "type": "zip",
-        "url": "https://api.github.com/repos/lonnieezell/myth-auth/zipball/cc94231f5284e9578967aba4796f018809669c84",
-        "reference": "cc94231f5284e9578967aba4796f018809669c84",
-        "shasum": ""
-      },
-      "require": {
-        "php": "^7.4 || ^8.0"
-      },
-      "provide": {
-        "codeigniter4/authentication-implementation": "1.0"
-      },
-      "require-dev": {
-        "codeigniter4/codeigniter4-standard": "^1.0",
-        "codeigniter4/devkit": "^1.0",
-        "codeigniter4/framework": "^4.1",
-        "mockery/mockery": "^1.0"
-      },
-      "default-branch": true,
-      "type": "library",
-      "autoload": {
-        "psr-4": {
-          "Myth\\Auth\\": "src"
-        },
-        "exclude-from-classmap": ["**/Database/Migrations/**"]
-      },
-      "notification-url": "https://packagist.org/downloads/",
-      "license": ["MIT"],
-      "authors": [
-        {
-          "name": "Lonnie Ezell",
-          "email": "lonnieje@gmail.com",
-          "homepage": "http://newmythmedia.com",
-          "role": "Developer"
-        }
-      ],
-      "description": "Flexible authentication/authorization system for CodeIgniter 4.",
-      "homepage": "https://github.com/lonnieezell/myth-auth",
-      "keywords": ["Authentication", "authorization", "codeigniter"],
-      "support": {
-        "issues": "https://github.com/lonnieezell/myth-auth/issues",
-        "source": "https://github.com/lonnieezell/myth-auth/tree/develop"
-      },
-      "funding": [
-        {
-          "url": "https://github.com/lonnieezell",
-          "type": "github"
-        },
-        {
-          "url": "https://github.com/mgatner",
-          "type": "github"
-        },
-        {
-          "url": "https://www.patreon.com/lonnieezell",
-          "type": "patreon"
-        }
-      ],
-      "time": "2022-08-01T17:23:52+00:00"
     },
     {
       "name": "nette/schema",
@@ -6684,8 +6681,8 @@
   "minimum-stability": "stable",
   "stability-flags": {
     "james-heinrich/getid3": 20,
-    "myth/auth": 20,
-    "michalsn/codeigniter4-uuid": 20
+    "michalsn/codeigniter4-uuid": 20,
+    "codeigniter4/shield": 20
   },
   "prefer-stable": true,
   "prefer-lowest": false,

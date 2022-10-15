@@ -23,7 +23,6 @@ use App\Models\PlatformModel;
 use App\Models\PodcastModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
-use Config\Services;
 use ErrorException;
 use League\HTMLToMarkdown\HtmlConverter;
 
@@ -201,10 +200,11 @@ class PodcastImportController extends BaseController
                 ->with('errors', $podcastModel->errors());
         }
 
-        $authorize = Services::authorization();
-        $podcastAdminGroup = $authorize->group('podcast_admin');
-
-        $podcastModel->addPodcastContributor(user_id(), $newPodcastId, (int) $podcastAdminGroup->id);
+        // set current user as podcast admin
+        // 1. create new group
+        config('AuthGroups')
+            ->generatePodcastAuthorizations($newPodcastId);
+        add_podcast_group(auth()->user(), $newPodcastId, 'admin');
 
         $podcastsPlatformsData = [];
         $platformTypes = [
@@ -460,9 +460,7 @@ class PodcastImportController extends BaseController
             }
         }
 
-        // set interact as the newly imported podcast actor
         $importedPodcast = (new PodcastModel())->getPodcastById($newPodcastId);
-        set_interact_as_actor($importedPodcast->actor_id);
 
         // set podcast publication date
         $importedPodcast->published_at = $firstEpisodePublicationDate ?? $importedPodcast->created_at;

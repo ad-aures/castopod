@@ -34,5 +34,7 @@ abstract class BaseController extends Controller
         parent::initController($request, $response, $logger);
 
         Theme::setTheme('app');
+
+        $this->helpers = array_merge($this->helpers, ['setting']);
     }
 }

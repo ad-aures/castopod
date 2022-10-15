@@ -15,22 +15,23 @@
 <?= csrf_field() ?>
 
 <Forms.Field
+    name="username"
+    label="<?= lang('User.form.username') ?>"
+    required="true" />
+
+<Forms.Field
     name="email"
     type="email"
     label="<?= lang('User.form.email') ?>"
     required="true" />
 
 <Forms.Field
-    name="username"
-    label="<?= lang('User.form.username') ?>"
+    as="Select"
+    name="role"
+    label="<?= lang('User.form.role') ?>"
+    options="<?= esc(json_encode($roleOptions)) ?>"
+    selected="<?= setting('AuthGroups.defaultGroup') ?>"
     required="true" />
-
-<Forms.Field
-    name="password"
-    type="password"
-    label="<?= lang('User.form.password') ?>"
-    required="true"
-    autocomplete="new-password" />
 
 <Button variant="primary" type="submit" class="self-end"><?= lang('User.form.submit_create') ?></Button>
 

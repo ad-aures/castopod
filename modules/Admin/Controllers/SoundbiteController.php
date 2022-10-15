@@ -77,7 +77,7 @@ class SoundbiteController extends BaseController
         ];
 
         replace_breadcrumb_params([
-            0 => $this->podcast->title,
+            0 => $this->podcast->at_handle,
             1 => $this->episode->title,
         ]);
         return view('episode/soundbites_list', $data);
@@ -93,7 +93,7 @@ class SoundbiteController extends BaseController
         ];
 
         replace_breadcrumb_params([
-            0 => $this->podcast->title,
+            0 => $this->podcast->at_handle,
             1 => $this->episode->title,
         ]);
         return view('episode/soundbites_new', $data);

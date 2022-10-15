@@ -1,29 +1,38 @@
 <?= helper('form') ?>
-<?= $this->extend($config->viewLayout) ?>
+<?= $this->extend(config('Auth')->views['layout']) ?>
 
-<?= $this->section('title') ?>
-    <?= lang('Auth.loginTitle') ?>
-<?= $this->endSection() ?>
+<?= $this->section('title') ?><?= lang('Auth.login') ?><?= $this->endSection() ?>
 
 
 <?= $this->section('content') ?>
 
-<form actions="<?= route_to('login') ?>" method="POST" class="flex flex-col w-full gap-y-4">
+<form actions="<?= url_to('login') ?>" method="POST" class="flex flex-col w-full gap-y-4">
     <?= csrf_field() ?>
 
     <Forms.Field
-        name="login"
-        label="<?= lang('Auth.emailOrUsername') ?>"
+        name="email"
+        label="<?= lang('Auth.email') ?>"
         required="true"
-        autofocus="autofocus" />
+        type="email"
+        inputmode="email"
+        autocomplete="email"
+        autofocus="autofocus"
+    />
 
     <Forms.Field
         name="password"
         label="<?= lang('Auth.password') ?>"
         type="password"
+        inputmode="text"
+        autocomplete="current-password"
         required="true" />
 
-    <Button variant="primary" type="submit" class="self-end"><?= lang('Auth.loginAction') ?></Button>
+    <!-- Remember me -->
+    <?php if (setting('Auth.sessionConfig')['allowRemembering']): ?>
+        <Forms.Toggler name="remember" value="yes" checked="<?= old('remember') ?>" size="small"><?= lang('Auth.rememberMe') ?></Forms.Toggler>
+    <?php endif; ?>
+
+    <Button variant="primary" type="submit" class="self-end"><?= lang('Auth.login') ?></Button>
 </form>
 
 <?= $this->endSection() ?>
@@ -32,14 +41,12 @@
 <?= $this->section('footer') ?>
 
 <div class="flex flex-col items-center py-4 text-sm text-center">
-    <?php if ($config->allowRegistration): ?>
-        <a class="underline hover:no-underline" href="<?= route_to(
-    'register',
-) ?>"><?= lang('Auth.needAnAccount') ?></a>
-    <?php endif; ?>
-    <a class="underline hover:no-underline" href="<?= route_to(
-    'forgot',
-) ?>"><?= lang('Auth.forgotYourPassword') ?></a>
+    <?php if (setting('Auth.allowMagicLinkLogins')) : ?>
+            <p class="text-center"><?= lang('Auth.forgotPassword') ?> <a class="underline hover:no-underline" href="<?= url_to('magic-link') ?>"><?= lang('Auth.useMagicLink') ?></a></p>
+    <?php endif ?>
+    <?php if (setting('Auth.allowRegistration')) : ?>
+        <p class="text-center"><?= lang('Auth.needAccount') ?> <a class="underline hover:no-underline" href="<?= url_to('register') ?>"><?= lang('Auth.register') ?></a></p>
+    <?php endif ?>
 </div>
 
 <?= $this->endSection() ?>

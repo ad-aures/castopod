@@ -14,7 +14,7 @@
 <body class="flex flex-col items-center justify-center min-h-screen px-2 text-center bg-base theme-<?= service('settings')
         ->get('App.theme') ?>">
     <?= svg('castopod-mascot_confused', 'h-64') ?>
-    <h1 class="text-3xl font-bold font-display md:text-4xl lg:text-5xl">404 - File Not Found</h1>
+    <h1 class="mt-4 text-3xl font-bold font-display md:text-4xl lg:text-5xl">404 - File Not Found</h1>
 
     <p class="mb-6 text-lg text-skin-muted md:text-xl lg:text-2xl">
         <?php if (isset($message) && $message !== '(null)'): ?>

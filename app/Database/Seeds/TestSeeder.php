@@ -18,24 +18,32 @@ class TestSeeder extends Seeder
 {
     public function run(): void
     {
+        helper('setting');
+
         /**
-         * Inserts an active user with the following credentials: username: admin password: AGUehL3P
+         * Inserts an owner with the following credentials: admin: `admin@example.com` password: `AGUehL3P`
          */
         $this->db->table('users')
             ->insert([
                 'id' => 1,
                 'username' => 'admin',
-                'email' => 'admin@example.com',
-                'password_hash' =>
-                    '$2y$10$TXJEHX/djW8jtzgpDVf7dOOCGo5rv1uqtAYWdwwwkttQcDkAeB2.6',
-                'active' => 1,
+                'is_owner' => 1,
+            ]);
+
+        $this->db->table('auth_identities')
+            ->insert([
+                'id' => 1,
+                'user_id' => 1,
+                'type' => 'email_password',
+                'secret' => 'admin@example.com',
+                'secret2' => '$2y$10$TXJEHX/djW8jtzgpDVf7dOOCGo5rv1uqtAYWdwwwkttQcDkAeB2.6',
             ]);
 
         $this->db
             ->table('auth_groups_users')
             ->insert([
-                'group_id' => 1,
                 'user_id' => 1,
+                'group' => setting('AuthGroups.mostPowerfulGroup'),
             ]);
     }
 }

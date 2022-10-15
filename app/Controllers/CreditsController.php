@@ -23,7 +23,7 @@ class CreditsController extends BaseController
 
         $cacheName = implode(
             '_',
-            array_filter(['page', 'credits', $locale, can_user_interact() ? 'authenticated' : null]),
+            array_filter(['page', 'credits', $locale, auth()->loggedIn() ? 'authenticated' : null]),
         );
 
         if (! ($found = cache($cacheName))) {

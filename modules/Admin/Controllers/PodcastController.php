@@ -23,7 +23,6 @@ use App\Models\PostModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\I18n\Time;
-use Config\Services;
 use Modules\Analytics\Models\AnalyticsPodcastByCountryModel;
 use Modules\Analytics\Models\AnalyticsPodcastByEpisodeModel;
 use Modules\Analytics\Models\AnalyticsPodcastByHourModel;
@@ -56,13 +55,13 @@ class PodcastController extends BaseController
 
     public function list(): string
     {
-        if (! has_permission('podcasts-list')) {
+        if (auth()->user()->can('podcasts.view')) {
             $data = [
-                'podcasts' => (new PodcastModel())->getUserPodcasts((int) user_id()),
+                'podcasts' => (new PodcastModel())->findAll(),
             ];
         } else {
             $data = [
-                'podcasts' => (new PodcastModel())->findAll(),
+                'podcasts' => get_user_podcasts(auth()->user()),
             ];
         }
 
@@ -76,7 +75,7 @@ class PodcastController extends BaseController
         ];
 
         replace_breadcrumb_params([
-            0 => $this->podcast->title,
+            0 => $this->podcast->at_handle,
         ]);
         return view('podcast/view', $data);
     }
@@ -88,7 +87,7 @@ class PodcastController extends BaseController
         ];
 
         replace_breadcrumb_params([
-            0 => $this->podcast->title,
+            0 => $this->podcast->at_handle,
         ]);
         return view('podcast/analytics/index', $data);
     }
@@ -100,7 +99,7 @@ class PodcastController extends BaseController
         ];
 
         replace_breadcrumb_params([
-            0 => $this->podcast->title,
+            0 => $this->podcast->at_handle,
         ]);
         return view('podcast/analytics/webpages', $data);
     }
@@ -112,7 +111,7 @@ class PodcastController extends BaseController
         ];
 
         replace_breadcrumb_params([
-            0 => $this->podcast->title,
+            0 => $this->podcast->at_handle,
         ]);
         return view('podcast/analytics/locations', $data);
     }
@@ -124,7 +123,7 @@ class PodcastController extends BaseController
         ];
 
         replace_breadcrumb_params([
-            0 => $this->podcast->title,
+            0 => $this->podcast->at_handle,
         ]);
         return view('podcast/analytics/unique_listeners', $data);
     }
@@ -136,7 +135,7 @@ class PodcastController extends BaseController
         ];
 
         replace_breadcrumb_params([
-            0 => $this->podcast->title,
+            0 => $this->podcast->at_handle,
         ]);
         return view('podcast/analytics/listening_time', $data);
     }
@@ -148,7 +147,7 @@ class PodcastController extends BaseController
         ];
 
         replace_breadcrumb_params([
-            0 => $this->podcast->title,
+            0 => $this->podcast->at_handle,
         ]);
         return view('podcast/analytics/time_periods', $data);
     }
@@ -160,7 +159,7 @@ class PodcastController extends BaseController
         ];
 
         replace_breadcrumb_params([
-            0 => $this->podcast->title,
+            0 => $this->podcast->at_handle,
         ]);
         return view('podcast/analytics/players', $data);
     }
@@ -253,20 +252,17 @@ class PodcastController extends BaseController
                 ->with('errors', $podcastModel->errors());
         }
 
-        $authorize = Services::authorization();
-        $podcastAdminGroup = $authorize->group('podcast_admin');
-
-        $podcastModel->addPodcastContributor(user_id(), $newPodcastId, (int) $podcastAdminGroup->id);
+        // generate podcast roles and permissions
+        // before setting current user as podcast admin
+        config('AuthGroups')
+            ->generatePodcastAuthorizations($newPodcastId);
+        add_podcast_group(auth()->user(), (int) $newPodcastId, setting('AuthGroups.mostPowerfulPodcastGroup'));
 
         // set Podcast categories
         (new CategoryModel())->setPodcastCategories(
             (int) $newPodcastId,
             $this->request->getPost('other_categories') ?? [],
         );
-
-        // set interact as the newly created podcast actor
-        $createdPodcast = (new PodcastModel())->getPodcastById($newPodcastId);
-        set_interact_as_actor($createdPodcast->actor_id);
 
         $db->transComplete();
 
@@ -290,7 +286,7 @@ class PodcastController extends BaseController
         ];
 
         replace_breadcrumb_params([
-            0 => $this->podcast->title,
+            0 => $this->podcast->at_handle,
         ]);
         return view('podcast/edit', $data);
     }
@@ -444,7 +440,7 @@ class PodcastController extends BaseController
         ];
 
         replace_breadcrumb_params([
-            0 => $this->podcast->title,
+            0 => $this->podcast->at_handle,
         ]);
         return view('podcast/delete', $data);
     }
@@ -576,15 +572,6 @@ class PodcastController extends BaseController
             }
         }
 
-        if ($this->podcast->actor_id === interact_as_actor_id()) {
-            //set interact to the most recently created podcast actor
-            $mostRecentPodcast = (new PodcastModel())->orderBy('created_at', 'desc')
-                ->first();
-            if ($mostRecentPodcast !== null) {
-                set_interact_as_actor($mostRecentPodcast->actor_id);
-            }
-        }
-
         $db->transComplete();
 
         //delete podcast media files and folder
@@ -620,7 +607,7 @@ class PodcastController extends BaseController
         ];
 
         replace_breadcrumb_params([
-            0 => $this->podcast->title,
+            0 => $this->podcast->at_handle,
         ]);
 
         return view('podcast/publish', $data);
@@ -754,7 +741,7 @@ class PodcastController extends BaseController
         ];
 
         replace_breadcrumb_params([
-            0 => $this->podcast->title,
+            0 => $this->podcast->at_handle,
         ]);
 
         return view('podcast/publish_edit', $data);

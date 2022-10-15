@@ -1,13 +1,13 @@
 <?= $this->extend('_layout') ?>
 
 <?= $this->section('title') ?>
-<?= lang('User.edit_roles', [
+<?= lang('User.edit_role', [
     'username' => esc($user->username),
 ]) ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('pageTitle') ?>
-<?= lang('User.edit_roles', [
+<?= lang('User.edit_role', [
     'username' => esc($user->username),
 ]) ?>
 <?= $this->endSection() ?>
@@ -19,12 +19,12 @@
 <?= csrf_field() ?>
 
 <Forms.Field
-    as="MultiSelect"
-    id="roles"
-    name="roles[]"
-    label="<?= lang('User.form.roles') ?>"
+    as="Select"
+    name="role"
+    label="<?= lang('User.form.role') ?>"
     options="<?= esc(json_encode($roleOptions)) ?>"
-    selected="<?= esc(json_encode($user->roles)) ?>" />
+    selected="<?= esc(get_instance_group($user)) ?>"
+    required="true" />
 
 <Button variant="primary" type="submit" class="self-end mt-4"><?= lang('User.form.submit_edit') ?></Button>
 

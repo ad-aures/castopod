@@ -37,7 +37,7 @@
 
 <body class="flex flex-col h-full min-h-screen mx-auto bg-base theme-<?= service('settings')
         ->get('App.theme') ?>">
-    <?php if (service('authentication')->check()): ?>
+    <?php if (auth()->loggedIn()): ?>
         <?= $this->include('_admin_navbar') ?>
     <?php endif; ?>
 

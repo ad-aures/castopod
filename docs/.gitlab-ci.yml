@@ -22,7 +22,6 @@ build:
   script:
     - npm run build
   except:
-    - develop
     - main
     - beta
     - alpha
@@ -40,7 +39,6 @@ build-production:
       - docs/.vitepress/dist
     expire_in: 30 mins
   only:
-    - develop
     - main
     - beta
     - alpha
@@ -72,7 +70,6 @@ deploy:
     - rsync -avzuh -e "ssh -p $SSH_PORT" $SOURCE_FOLDER $USER@$HOST:$TEMP_DIRECTORY --progress
     - ssh $USER@$HOST -p $SSH_PORT "rsync -rtv $TEMP_DIRECTORY $DIRECTORY"
   only:
-    - develop
     - main
     - beta
     - alpha

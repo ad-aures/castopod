@@ -11,14 +11,14 @@
 </div>
 
 <Forms.Field
-    name="email"
-    label="<?= lang('Install.form.email') ?>"
-    type="email"
+    name="username"
+    label="<?= lang('Install.form.username') ?>"
     required="true" />
 
 <Forms.Field
-    name="username"
-    label="<?= lang('Install.form.username') ?>"
+    name="email"
+    label="<?= lang('Install.form.email') ?>"
+    type="email"
     required="true" />
 
 <Forms.Field

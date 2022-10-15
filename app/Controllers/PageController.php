@@ -44,7 +44,8 @@ class PageController extends BaseController
                 $this->page->slug,
                 service('request')
                     ->getLocale(),
-                can_user_interact() ? 'authenticated' : null,
+                auth()
+                    ->loggedIn() ? 'authenticated' : null,
             ]),
         );
 

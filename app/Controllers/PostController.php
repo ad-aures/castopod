@@ -70,7 +70,7 @@ class PostController extends FediversePostController
     public function view(): string
     {
         // Prevent analytics hit when authenticated
-        if (! can_user_interact()) {
+        if (! auth()->loggedIn()) {
             $this->registerPodcastWebpageHit($this->podcast->id);
         }
 
@@ -85,7 +85,8 @@ class PostController extends FediversePostController
                 "post#{$this->post->id}",
                 service('request')
                     ->getLocale(),
-                can_user_interact() ? 'authenticated' : null,
+                auth()
+                    ->loggedIn() ? 'authenticated' : null,
             ]),
         );
 
@@ -97,7 +98,7 @@ class PostController extends FediversePostController
             ];
 
             // if user is logged in then send to the authenticated activity view
-            if (can_user_interact()) {
+            if (auth()->loggedIn()) {
                 helper('form');
                 return view('post/post', $data);
             }
@@ -239,7 +240,7 @@ class PostController extends FediversePostController
     public function remoteAction(string $action): string
     {
         // Prevent analytics hit when authenticated
-        if (! can_user_interact()) {
+        if (! auth()->loggedIn()) {
             $this->registerPodcastWebpageHit($this->podcast->id);
         }
 

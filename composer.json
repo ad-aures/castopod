@@ -11,7 +11,6 @@
     "james-heinrich/getid3": "^2.0.x-dev",
     "whichbrowser/parser": "^v2.1.7",
     "geoip2/geoip2": "v2.13.0",
-    "myth/auth": "dev-develop",
     "league/commonmark": "^2.3.5",
     "vlucas/phpdotenv": "^v5.4.1",
     "league/html-to-markdown": "^v5.1.0",
@@ -23,7 +22,8 @@
     "essence/essence": "^3.5.4",
     "codeigniter4/settings": "^v2.1.0",
     "chrisjean/php-ico": "^1.0.4",
-    "melbahja/seo": "^v2.1.1"
+    "melbahja/seo": "^v2.1.1",
+    "codeigniter4/shield": "dev-develop"
   },
   "require-dev": {
     "mikey179/vfsstream": "^v1.6.11",

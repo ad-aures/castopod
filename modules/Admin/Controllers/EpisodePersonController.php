@@ -59,7 +59,7 @@ class EpisodePersonController extends BaseController
             'taxonomyOptions' => (new PersonModel())->getTaxonomyOptions(),
         ];
         replace_breadcrumb_params([
-            0 => $this->podcast->title,
+            0 => $this->podcast->at_handle,
             1 => $this->episode->title,
         ]);
         return view('episode/persons', $data);

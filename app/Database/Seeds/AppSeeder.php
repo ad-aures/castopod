@@ -18,7 +18,6 @@ class AppSeeder extends Seeder
 {
     public function run(): void
     {
-        $this->call('AuthSeeder');
         $this->call('CategorySeeder');
         $this->call('LanguageSeeder');
         $this->call('PlatformSeeder');

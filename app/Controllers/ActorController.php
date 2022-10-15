@@ -20,12 +20,12 @@ class ActorController extends FediverseActorController
     /**
      * @var string[]
      */
-    protected $helpers = ['auth', 'svg', 'components', 'misc', 'seo'];
+    protected $helpers = ['svg', 'components', 'misc', 'seo'];
 
     public function follow(): string
     {
         // Prevent analytics hit when authenticated
-        if (! can_user_interact()) {
+        if (! auth()->loggedIn()) {
             // @phpstan-ignore-next-line
             $this->registerPodcastWebpageHit($this->actor->podcast->id);
         }

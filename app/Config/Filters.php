@@ -15,8 +15,6 @@ use Modules\Auth\Filters\PermissionFilter;
 use Modules\Fediverse\Filters\AllowCorsFilter;
 use Modules\Fediverse\Filters\FediverseFilter;
 use Modules\PremiumPodcasts\Filters\PodcastUnlockFilter;
-use Myth\Auth\Filters\LoginFilter;
-use Myth\Auth\Filters\RoleFilter;
 
 class Filters extends BaseConfig
 {
@@ -31,8 +29,6 @@ class Filters extends BaseConfig
         'honeypot' => Honeypot::class,
         'invalidchars' => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
-        'login' => LoginFilter::class,
-        'role' => RoleFilter::class,
         'permission' => PermissionFilter::class,
         'fediverse' => FediverseFilter::class,
         'allow-cors' => AllowCorsFilter::class,
@@ -86,7 +82,7 @@ class Filters extends BaseConfig
         parent::__construct();
 
         $this->filters = [
-            'login' => [
+            'session' => [
                 'before' => [config('Admin')->gateway . '*', config('Analytics')->gateway . '*'],
             ],
             'podcast-unlock' => [

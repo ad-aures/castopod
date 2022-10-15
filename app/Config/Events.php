@@ -9,7 +9,6 @@ use App\Entities\Post;
 use App\Models\EpisodeModel;
 use CodeIgniter\Events\Events;
 use CodeIgniter\Exceptions\FrameworkException;
-use Modules\Auth\Entities\User;
 
 /*
  * --------------------------------------------------------------------
@@ -54,21 +53,6 @@ Events::on('pre_system', static function () {
         Events::on('DBQuery', 'CodeIgniter\Debug\Toolbar\Collectors\Database::collect');
         Services::toolbar()->respond();
     }
-});
-
-Events::on('login', static function (User $user): void {
-    helper('auth');
-    // set interact_as_actor_id value
-    $userPodcasts = $user->podcasts;
-    if ($userPodcasts = $user->podcasts) {
-        set_interact_as_actor($userPodcasts[0]->actor_id);
-    }
-});
-
-Events::on('logout', static function (User $user): void {
-    helper('auth');
-    // remove user's interact_as_actor session
-    remove_interact_as_actor();
 });
 
 /*

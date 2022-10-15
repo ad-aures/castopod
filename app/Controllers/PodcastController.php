@@ -62,7 +62,7 @@ class PodcastController extends BaseController
     public function activity(): string
     {
         // Prevent analytics hit when authenticated
-        if (! can_user_interact()) {
+        if (! auth()->loggedIn()) {
             $this->registerPodcastWebpageHit($this->podcast->id);
         }
 
@@ -75,7 +75,8 @@ class PodcastController extends BaseController
                 service('request')
                     ->getLocale(),
                 is_unlocked($this->podcast->handle) ? 'unlocked' : null,
-                can_user_interact() ? 'authenticated' : null,
+                auth()
+                    ->loggedIn() ? 'authenticated' : null,
             ]),
         );
 
@@ -87,7 +88,7 @@ class PodcastController extends BaseController
             ];
 
             // if user is logged in then send to the authenticated activity view
-            if (can_user_interact()) {
+            if (auth()->loggedIn()) {
                 helper('form');
 
                 return view('podcast/activity', $data);
@@ -111,7 +112,7 @@ class PodcastController extends BaseController
     public function about(): string
     {
         // Prevent analytics hit when authenticated
-        if (! can_user_interact()) {
+        if (! auth()->loggedIn()) {
             $this->registerPodcastWebpageHit($this->podcast->id);
         }
 
@@ -124,7 +125,8 @@ class PodcastController extends BaseController
                 service('request')
                     ->getLocale(),
                 is_unlocked($this->podcast->handle) ? 'unlocked' : null,
-                can_user_interact() ? 'authenticated' : null,
+                auth()
+                    ->loggedIn() ? 'authenticated' : null,
             ]),
         );
 
@@ -138,7 +140,7 @@ class PodcastController extends BaseController
             ];
 
             // // if user is logged in then send to the authenticated activity view
-            if (can_user_interact()) {
+            if (auth()->loggedIn()) {
                 helper('form');
 
                 return view('podcast/about', $data);
@@ -162,7 +164,7 @@ class PodcastController extends BaseController
     public function episodes(): string
     {
         // Prevent analytics hit when authenticated
-        if (! can_user_interact()) {
+        if (! auth()->loggedIn()) {
             $this->registerPodcastWebpageHit($this->podcast->id);
         }
 
@@ -191,7 +193,8 @@ class PodcastController extends BaseController
                 service('request')
                     ->getLocale(),
                 is_unlocked($this->podcast->handle) ? 'unlocked' : null,
-                can_user_interact() ? 'authenticated' : null,
+                auth()
+                    ->loggedIn() ? 'authenticated' : null,
             ]),
         );
 
@@ -264,7 +267,7 @@ class PodcastController extends BaseController
                 ),
             ];
 
-            if (can_user_interact()) {
+            if (auth()->loggedIn()) {
                 return view('podcast/episodes', $data);
             }
 

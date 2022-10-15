@@ -18,18 +18,18 @@ use App\Models\EpisodeModel;
 use App\Models\MediaModel;
 use App\Models\PersonModel;
 use App\Models\PlatformModel;
-use App\Models\UserModel;
 use CodeIgniter\Entity\Entity;
 use CodeIgniter\Files\File;
 use CodeIgniter\HTTP\Files\UploadedFile;
 use CodeIgniter\I18n\Time;
+use CodeIgniter\Shield\Entities\User;
 use League\CommonMark\Environment\Environment;
 use League\CommonMark\Extension\Autolink\AutolinkExtension;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
 use League\CommonMark\Extension\DisallowedRawHtml\DisallowedRawHtmlExtension;
 use League\CommonMark\Extension\SmartPunct\SmartPunctExtension;
 use League\CommonMark\MarkdownConverter;
-use Modules\Auth\Entities\User;
+use Modules\Auth\Models\UserModel;
 use Modules\PremiumPodcasts\Entities\Subscription;
 use Modules\PremiumPodcasts\Models\SubscriptionModel;
 use RuntimeException;
@@ -99,6 +99,8 @@ use RuntimeException;
 class Podcast extends Entity
 {
     protected string $link;
+
+    protected string $at_handle;
 
     protected ?Actor $actor = null;
 
@@ -207,6 +209,11 @@ class Podcast extends Entity
         'created_by' => 'integer',
         'updated_by' => 'integer',
     ];
+
+    public function getAtHandle(): string
+    {
+        return '@' . $this->handle;
+    }
 
     /**
      * @noRector ReturnTypeDeclarationRector

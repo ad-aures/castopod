@@ -214,7 +214,7 @@ $routes->get('/pages/(:slug)', 'PageController/$1', [
 $routes->group('@(:podcastHandle)', static function ($routes): void {
     $routes->post('posts/new', 'PostController::attemptCreate/$1', [
         'as' => 'post-attempt-create',
-        'filter' => 'permission:podcast-manage_publications',
+        'filter' => 'permission:podcast#.manage-publications',
     ]);
     // Post
     $routes->group('posts/(:uuid)', static function ($routes): void {
@@ -251,14 +251,14 @@ $routes->group('@(:podcastHandle)', static function ($routes): void {
         // Actions
         $routes->post('action', 'PostController::attemptAction/$1/$2', [
             'as' => 'post-attempt-action',
-            'filter' => 'permission:podcast-interact_as',
+            'filter' => 'permission:podcast#.interact-as',
         ]);
         $routes->post(
             'block-actor',
             'PostController::attemptBlockActor/$1/$2',
             [
                 'as' => 'post-attempt-block-actor',
-                'filter' => 'permission:fediverse-block_actors',
+                'filter' => 'permission:fediverse.manage-blocks',
             ],
         );
         $routes->post(
@@ -266,12 +266,12 @@ $routes->group('@(:podcastHandle)', static function ($routes): void {
             'PostController::attemptBlockDomain/$1/$2',
             [
                 'as' => 'post-attempt-block-domain',
-                'filter' => 'permission:fediverse-block_domains',
+                'filter' => 'permission:fediverse.manage-blocks',
             ],
         );
         $routes->post('delete', 'PostController::attemptDelete/$1/$2', [
             'as' => 'post-attempt-delete',
-            'filter' => 'permission:podcast-manage_publications',
+            'filter' => 'permission:podcast#.manage-publications',
         ]);
         $routes->get(
             'remote/(:postAction)',

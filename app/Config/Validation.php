@@ -11,7 +11,6 @@ use CodeIgniter\Validation\CreditCardRules;
 use CodeIgniter\Validation\FileRules;
 use CodeIgniter\Validation\FormatRules;
 use CodeIgniter\Validation\Rules;
-use Myth\Auth\Authentication\Passwords\ValidationRules as PasswordRules;
 
 class Validation extends BaseConfig
 {
@@ -27,7 +26,6 @@ class Validation extends BaseConfig
         CreditCardRules::class,
         AppRules::class,
         AppFileRules::class,
-        PasswordRules::class,
     ];
 
     /**

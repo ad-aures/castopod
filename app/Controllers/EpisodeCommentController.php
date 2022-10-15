@@ -79,7 +79,7 @@ class EpisodeCommentController extends BaseController
     public function view(): string
     {
         // Prevent analytics hit when authenticated
-        if (! can_user_interact()) {
+        if (! auth()->loggedIn()) {
             $this->registerPodcastWebpageHit($this->podcast->id);
         }
 
@@ -91,7 +91,8 @@ class EpisodeCommentController extends BaseController
                 "comment#{$this->comment->id}",
                 service('request')
                     ->getLocale(),
-                can_user_interact() ? 'authenticated' : null,
+                auth()
+                    ->loggedIn() ? 'authenticated' : null,
             ]),
         );
 
@@ -105,7 +106,7 @@ class EpisodeCommentController extends BaseController
             ];
 
             // if user is logged in then send to the authenticated activity view
-            if (can_user_interact()) {
+            if (auth()->loggedIn()) {
                 helper('form');
                 return view('episode/comment', $data);
             }

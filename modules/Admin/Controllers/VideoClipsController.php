@@ -82,7 +82,7 @@ class VideoClipsController extends BaseController
         ];
 
         replace_breadcrumb_params([
-            0 => $this->podcast->title,
+            0 => $this->podcast->at_handle,
             1 => $this->episode->title,
         ]);
         return view('episode/video_clips_list', $data);
@@ -99,7 +99,7 @@ class VideoClipsController extends BaseController
         ];
 
         replace_breadcrumb_params([
-            0 => $this->podcast->title,
+            0 => $this->podcast->at_handle,
             1 => $this->episode->title,
             2 => $videoClip->title,
         ]);
@@ -114,7 +114,7 @@ class VideoClipsController extends BaseController
         ];
 
         replace_breadcrumb_params([
-            0 => $this->podcast->title,
+            0 => $this->podcast->at_handle,
             1 => $this->episode->title,
         ]);
 

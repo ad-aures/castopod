@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Entities\Podcast;
-use CodeIgniter\Database\Query;
 use CodeIgniter\HTTP\URI;
 use CodeIgniter\Model;
 use phpseclib\Crypt\RSA;
@@ -205,15 +204,14 @@ class PodcastModel extends Model
     /**
      * Gets all the podcasts a given user is contributing to
      *
+     * @param string[] $userPodcastIds
      * @return Podcast[] podcasts
      */
-    public function getUserPodcasts(int $userId): array
+    public function getUserPodcasts(int $userId, array $userPodcastIds): array
     {
         $cacheName = "user{$userId}_podcasts";
         if (! ($found = cache($cacheName))) {
-            $found = $this->select('podcasts.*')
-                ->join('podcasts_users', 'podcasts_users.podcast_id = podcasts.id')
-                ->where('podcasts_users.user_id', $userId)
+            $found = $userPodcastIds === [] ? [] : $this->whereIn('id', $userPodcastIds)
                 ->findAll();
 
             cache()
@@ -223,76 +221,18 @@ class PodcastModel extends Model
         return $found;
     }
 
-    public function addPodcastContributor(int $userId, int $podcastId, int $groupId): Query | bool
+    public function getContributorGroup(int $userId, int $podcastId): int | false
     {
-        cache()->delete("podcast#{$podcastId}_contributors");
-
-        $data = [
-            'user_id' => $userId,
-            'podcast_id' => $podcastId,
-            'group_id' => $groupId,
-        ];
-
-        return $this->db->table('podcasts_users')
-            ->insert($data);
-    }
-
-    public function updatePodcastContributor(int $userId, int $podcastId, int $groupId): bool
-    {
-        cache()->delete("podcast#{$podcastId}_contributors");
-
-        return $this->db
-            ->table('podcasts_users')
-            ->where([
-                'user_id' => $userId,
-                'podcast_id' => $podcastId,
-            ])
-            ->update([
-                'group_id' => $groupId,
-            ]);
-    }
-
-    public function removePodcastContributor(int $userId, int $podcastId): string | bool
-    {
-        cache()->delete("podcast#{$podcastId}_contributors");
-
-        return $this->db
-            ->table('podcasts_users')
-            ->where([
-                'user_id' => $userId,
-                'podcast_id' => $podcastId,
-            ])
-            ->delete();
-    }
-
-    public function getContributorGroupId(int $userId, int | string $podcastId): int | false
-    {
-        if (! is_numeric($podcastId)) {
-            // identifier is the podcast name, request must be a join
-            $userPodcast = $this->db
-                ->table('podcasts_users')
-                ->select('group_id, user_id')
-                ->join('podcasts', 'podcasts.id = podcasts_users.podcast_id')
-                ->where([
-                    'user_id' => $userId,
-                    'handle' => $podcastId,
-                ])
-                ->get()
-                ->getResultObject();
-        } else {
-            $userPodcast = $this->db
-                ->table('podcasts_users')
-                ->select('group_id')
-                ->where([
-                    'user_id' => $userId,
-                    'podcast_id' => $podcastId,
-                ])
-                ->get()
-                ->getResultObject();
-        }
+        $userPodcast = $this->db
+            ->table('auth_groups_users')
+            ->select('user_id, group')
+            ->where('user_id', $userId)
+            ->like('group', "podcast#{$podcastId}")
+            ->get()
+            ->getResultObject();
 
         return $userPodcast !== []
-            ? (int) $userPodcast[0]->group_id
+            ? (int) $userPodcast[0]->group
             : false;
     }
 

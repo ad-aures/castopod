@@ -95,7 +95,7 @@ class EpisodeController extends BaseController
         ];
 
         replace_breadcrumb_params([
-            0 => $this->podcast->title,
+            0 => $this->podcast->at_handle,
         ]);
         return view('episode/list', $data);
     }
@@ -108,7 +108,7 @@ class EpisodeController extends BaseController
         ];
 
         replace_breadcrumb_params([
-            0 => $this->podcast->title,
+            0 => $this->podcast->at_handle,
             1 => $this->episode->title,
         ]);
         return view('episode/view', $data);
@@ -125,7 +125,7 @@ class EpisodeController extends BaseController
             'nextEpisodeNumber' => (new EpisodeModel())->getNextEpisodeNumber($this->podcast->id, $currentSeasonNumber),
         ];
         replace_breadcrumb_params([
-            0 => $this->podcast->title,
+            0 => $this->podcast->at_handle,
         ]);
         return view('episode/create', $data);
     }
@@ -261,7 +261,7 @@ class EpisodeController extends BaseController
         ];
 
         replace_breadcrumb_params([
-            0 => $this->podcast->title,
+            0 => $this->podcast->at_handle,
             1 => $this->episode->title,
         ]);
         return view('episode/edit', $data);
@@ -438,7 +438,7 @@ class EpisodeController extends BaseController
             ];
 
             replace_breadcrumb_params([
-                0 => $this->podcast->title,
+                0 => $this->podcast->at_handle,
                 1 => $this->episode->title,
             ]);
             return view('episode/publish', $data);
@@ -551,7 +551,7 @@ class EpisodeController extends BaseController
             ];
 
             replace_breadcrumb_params([
-                0 => $this->podcast->title,
+                0 => $this->podcast->at_handle,
                 1 => $this->episode->title,
             ]);
             return view('episode/publish_edit', $data);
@@ -851,7 +851,7 @@ class EpisodeController extends BaseController
         ];
 
         replace_breadcrumb_params([
-            0 => $this->podcast->title,
+            0 => $this->podcast->at_handle,
             1 => $this->episode->title,
         ]);
         return view('episode/delete', $data);
@@ -949,7 +949,7 @@ class EpisodeController extends BaseController
         ];
 
         replace_breadcrumb_params([
-            0 => $this->podcast->title,
+            0 => $this->podcast->at_handle,
             1 => $this->episode->title,
         ]);
         return view('episode/embed', $data);

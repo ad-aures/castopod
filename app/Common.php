@@ -29,6 +29,10 @@ if (! function_exists('view')) {
      */
     function view(string $name, array $data = [], array $options = []): string
     {
+        if (array_key_exists('theme', $options)) {
+            Theme::setTheme($options['theme']);
+        }
+
         $path = Theme::path();
 
         /** @var CodeIgniter\View\View $renderer */
@@ -54,6 +58,8 @@ if (! function_exists('lang')) {
      * Overwritten to include an escape parameter (escaped by default).
      *
      * @param array<int|string, string> $args
+     *
+     * TODO: remove, and escape args when necessary
      *
      * @return string|string[]
      */

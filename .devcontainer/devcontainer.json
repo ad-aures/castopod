@@ -29,6 +29,7 @@
     "bmewburn.vscode-intelephense-client",
     "bradlc.vscode-tailwindcss",
     "breezelin.phpstan",
+    "DavidAnson.vscode-markdownlint",
     "dbaeumer.vscode-eslint",
     "eamodio.gitlens",
     "esbenp.prettier-vscode",
@@ -41,6 +42,7 @@
     "runem.lit-plugin",
     "streetsidesoftware.code-spell-checker",
     "stylelint.vscode-stylelint",
-    "wayou.vscode-todo-highlight"
+    "wayou.vscode-todo-highlight",
+    "yzhang.markdown-all-in-one"
   ]
 }

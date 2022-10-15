@@ -58,7 +58,7 @@ class SubscriptionController extends BaseController
         helper('form');
 
         replace_breadcrumb_params([
-            0 => $this->podcast->title,
+            0 => $this->podcast->at_handle,
         ]);
         return view('subscription/list', $data);
     }
@@ -106,7 +106,7 @@ class SubscriptionController extends BaseController
         ];
 
         replace_breadcrumb_params([
-            0 => $this->podcast->title,
+            0 => $this->podcast->at_handle,
             1 => '#' . $this->subscription->id,
         ]);
         return view('subscription/view', $data);
@@ -121,7 +121,7 @@ class SubscriptionController extends BaseController
         ];
 
         replace_breadcrumb_params([
-            0 => $this->podcast->title,
+            0 => $this->podcast->at_handle,
         ]);
         return view('subscription/add', $data);
     }
@@ -247,7 +247,7 @@ class SubscriptionController extends BaseController
         ];
 
         replace_breadcrumb_params([
-            0 => $this->podcast->title,
+            0 => $this->podcast->at_handle,
             1 => '#' . $this->subscription->id,
         ]);
         return view('subscription/edit', $data);
@@ -315,7 +315,7 @@ class SubscriptionController extends BaseController
         ];
 
         replace_breadcrumb_params([
-            0 => $this->podcast->title,
+            0 => $this->podcast->at_handle,
             1 => '#' . $this->subscription->id,
         ]);
         return view('subscription/suspend', $data);
@@ -410,7 +410,7 @@ class SubscriptionController extends BaseController
         ];
 
         replace_breadcrumb_params([
-            0 => $this->podcast->title,
+            0 => $this->podcast->at_handle,
             1 => '#' . $this->subscription->id,
         ]);
         return view('subscription/delete', $data);

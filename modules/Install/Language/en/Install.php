@@ -46,7 +46,7 @@ return [
         ],
         'next' => 'Next',
         'submit' => 'Finish install',
-        'create_superadmin' => 'Create your superadmin account',
+        'create_superadmin' => 'Create your Super Admin account',
         'email' => 'Email',
         'username' => 'Username',
         'password' => 'Password',

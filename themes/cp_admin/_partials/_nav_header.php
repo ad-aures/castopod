@@ -1,3 +1,7 @@
+<?php declare(strict_types=1);
+
+$userPodcasts = get_podcasts_user_can_interact_with(auth()->user()); ?>
+
 <header class="sticky top-0 z-[60] flex items-center h-10 text-white border-b col-span-full bg-navigation border-navigation">
     <button type="button"
         data-sidebar-toggler="toggler"
@@ -18,7 +22,7 @@
     <div class="inline-flex items-center h-full ml-auto">
         <button type="button" class="relative h-full px-2 focus:ring-accent focus:ring-inset" id="notifications-dropdown" data-dropdown="button" data-dropdown-target="notifications-dropdown-menu" aria-haspopup="true" aria-expanded="false">
             <?= icon('notification-bell', 'text-2xl opacity-80') ?>
-            <?php if (user()->actorIdsWithUnreadNotifications !== []): ?>
+            <?php if (($actorIdsWithUnreadNotifications = get_actor_ids_with_unread_notifications(auth()->user())) !== []): ?>
                 <span class="absolute top-2 right-2 w-2.5 h-2.5 bg-red-500 rounded-full border border-navigation-bg"></span>
             <?php endif ?>
         </button>
@@ -34,11 +38,11 @@
                 ],
             ];
 
-            if (user()->podcasts !== []) {
-                foreach (user()->podcasts as $userPodcast) {
+            if ($userPodcasts !== []) {
+                foreach ($userPodcasts as $userPodcast) {
                     $userPodcastTitle = esc($userPodcast->title);
 
-                    $unreadNotificationDotDisplayClass = in_array($userPodcast->actor_id, user()->actorIdsWithUnreadNotifications, true) ? '' : 'hidden';
+                    $unreadNotificationDotDisplayClass = in_array($userPodcast->actor_id, $actorIdsWithUnreadNotifications, true) ? '' : 'hidden';
 
                     $items[] = [
                         'type' => 'link',
@@ -66,7 +70,7 @@
             }
         ?>
         <DropdownMenu id="notifications-dropdown-menu" labelledby="notifications-dropdown" items="<?= esc(json_encode($items)) ?>" placement="bottom"/>
-    
+
         <button
             type="button"
             class="inline-flex items-center h-full px-3 text-sm font-semibold focus:ring-inset focus:ring-accent gap-x-2"
@@ -76,15 +80,14 @@
             aria-haspopup="true"
             aria-expanded="false"><div class="relative mr-1">
                 <?= icon('account-circle', 'text-3xl opacity-60') ?>
-                <?= user()
-                    ->podcasts === [] ? '' : '<img src="' . interact_as_actor()->avatar_image_url . '" class="absolute bottom-0 w-4 h-4 border rounded-full -right-1 border-navigation-bg" loading="lazy" />' ?>
+                <?= $userPodcasts === [] ? '' : '<img src="' . interact_as_actor()->avatar_image_url . '" class="absolute bottom-0 w-4 h-4 border rounded-full -right-1 border-navigation-bg" loading="lazy" />' ?>
             </div>
-            <?= esc(user()->username) ?>
+            <?= esc(auth()->user()->username) ?>
             <?= icon('caret-down', 'ml-auto text-2xl') ?></button>
     </div>
     <?php
         $interactButtons = '';
-        foreach (user()->podcasts as $userPodcast) {
+        foreach ($userPodcasts as $userPodcast) {
             $checkMark = interact_as_actor_id() === $userPodcast->actor_id ? icon('check', 'ml-2 bg-accent-base text-accent-contrast rounded-full') : '';
             $userPodcastTitle = esc($userPodcast->title);
 
@@ -96,7 +99,7 @@
         }
 
         $interactAsText = lang('Common.choose_interact');
-        $route = route_to('interact-as-actor');
+        $interactAsRoute = route_to('interact-as-actor');
         $csrfField = csrf_field();
 
         $menuItems = [
@@ -120,14 +123,14 @@
             ],
         ];
 
-        if (user()->podcasts !== []) {
+        if ($userPodcasts !== []) {
             $menuItems = array_merge([
                 [
                     'type' => 'html',
                     'content' => esc(<<<CODE_SAMPLE
                         <nav class="flex flex-col py-2 whitespace-nowrap">
                             <span class="px-4 mb-2 text-xs font-semibold tracking-wider uppercase text-skin-muted">{$interactAsText}</span>
-                            <form action="{$route}" method="POST" class="flex flex-col">
+                            <form action="{$interactAsRoute}" method="POST" class="flex flex-col">
                                 {$csrfField}
                                 {$interactButtons}
                             </form>

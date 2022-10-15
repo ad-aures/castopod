@@ -66,7 +66,7 @@ class EpisodeController extends BaseController
     public function index(): string
     {
         // Prevent analytics hit when authenticated
-        if (! can_user_interact()) {
+        if (! auth()->loggedIn()) {
             $this->registerPodcastWebpageHit($this->episode->podcast_id);
         }
 
@@ -79,7 +79,8 @@ class EpisodeController extends BaseController
                 service('request')
                     ->getLocale(),
                 is_unlocked($this->podcast->handle) ? 'unlocked' : null,
-                can_user_interact() ? 'authenticated' : null,
+                auth()
+                    ->loggedIn() ? 'authenticated' : null,
             ]),
         );
 
@@ -94,7 +95,7 @@ class EpisodeController extends BaseController
                 $this->podcast->id,
             );
 
-            if (can_user_interact()) {
+            if (auth()->loggedIn()) {
                 helper('form');
 
                 return view('episode/comments', $data);
@@ -115,7 +116,7 @@ class EpisodeController extends BaseController
     public function activity(): string
     {
         // Prevent analytics hit when authenticated
-        if (! can_user_interact()) {
+        if (! auth()->loggedIn()) {
             $this->registerPodcastWebpageHit($this->episode->podcast_id);
         }
 
@@ -129,7 +130,8 @@ class EpisodeController extends BaseController
                 service('request')
                     ->getLocale(),
                 is_unlocked($this->podcast->handle) ? 'unlocked' : null,
-                can_user_interact() ? 'authenticated' : null,
+                auth()
+                    ->loggedIn() ? 'authenticated' : null,
             ]),
         );
 
@@ -144,7 +146,7 @@ class EpisodeController extends BaseController
                 $this->podcast->id,
             );
 
-            if (can_user_interact()) {
+            if (auth()->loggedIn()) {
                 helper('form');
 
                 return view('episode/activity', $data);
@@ -167,7 +169,7 @@ class EpisodeController extends BaseController
         header('Content-Security-Policy: frame-ancestors http://*:* https://*:*');
 
         // Prevent analytics hit when authenticated
-        if (! can_user_interact()) {
+        if (! auth()->loggedIn()) {
             $this->registerPodcastWebpageHit($this->episode->podcast_id);
         }
 

@@ -10,14 +10,14 @@
 	<title>Whoops!</title>
 	<link rel='stylesheet' type='text/css' href='<?= route_to('themes-colors-css') ?>' />
     <?= service('vite')->asset('styles/index.css', 'css') ?>
-	<?php if (service('authentication')->isLoggedIn()): ?>
+	<?php if (auth()->loggedIn()): ?>
 		<?= service('vite')->asset('js/error.ts', 'js') ?>
 	<?php endif; ?>
 </head>
 
 <body class="flex flex-col items-center justify-center min-h-screen px-4 bg-base gap-y-12 theme-<?= service('settings')
         ->get('App.theme') ?>">
-	<?php if (service('authentication')->isLoggedIn()): ?>
+	<?php if (auth()->loggedIn()): ?>
 	<div class="flex flex-col items-center justify-center flex-1 gap-6">
 		<div class="flex flex-col items-center">
 			<?= svg('castopod-mascot_confused', 'w-full max-w-xs p-6') ?>

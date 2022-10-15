@@ -17,11 +17,11 @@ use App\Entities\Podcast;
 use App\Models\EpisodeModel;
 use App\Models\MediaModel;
 use App\Models\PodcastModel;
-use App\Models\UserModel;
 use CodeIgniter\Entity\Entity;
 use CodeIgniter\Files\File;
 use CodeIgniter\I18n\Time;
-use Modules\Auth\Entities\User;
+use CodeIgniter\Shield\Entities\User;
+use Modules\Auth\Models\UserModel;
 
 /**
  * @property int $id

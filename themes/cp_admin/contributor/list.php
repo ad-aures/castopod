@@ -25,8 +25,14 @@
         ],
         [
             'header' => lang('Contributor.list.role'),
-            'cell' => function ($contributor): string {
-                return lang('Contributor.roles.' . $contributor->podcast_role);
+            'cell' => function ($contributor, $podcast): string {
+                $role = get_group_info(get_podcast_group($contributor, $podcast->id), $podcast->id)['title'];
+
+                if ($podcast->created_by === $contributor->id) {
+                    $role = '<div class="inline-flex items-center"><span class="mr-2 focus:ring-accent" tabindex="0" data-tooltip="bottom" title="' . lang('Auth.podcast_groups.owner.title') . '">' . icon('shield-user') . '</span>' . $role . '</div>';
+                }
+
+                return $role;
             },
         ],
         [

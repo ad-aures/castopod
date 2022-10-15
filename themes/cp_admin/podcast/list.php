@@ -17,7 +17,7 @@
 <?= $this->section('content') ?>
 
 <div class="grid gap-4 grid-cols-cards">
-    <?php if ($podcasts !== null): ?>
+    <?php if ($podcasts !== []): ?>
         <?php foreach ($podcasts as $podcast): ?>
             <?= view('podcast/_card', [
                 'podcast' => $podcast,

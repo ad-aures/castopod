@@ -28,6 +28,7 @@ return [
     'publish-date-edit' => 'edit publication date',
     'unpublish' => 'unpublish',
     'delete' => 'delete',
+    'remove' => 'remove',
     'fediverse' => 'fediverse',
     'block-lists' => 'block lists',
     'users' => 'users',

@@ -28,23 +28,17 @@
             },
         ],
         [
-            'header' => lang('User.list.roles'),
+            'header' => lang('User.list.role'),
             'cell' => function ($user) {
-                if ($user->isOwner) {
-                    return 'owner, ' . implode(',', $user->roles);
+                $role = get_group_info(get_instance_group($user))['title'];
+
+                if ((bool) $user->is_owner) {
+                    $role = '<div class="inline-flex items-center"><span class="mr-2 focus:ring-accent" tabindex="0" data-tooltip="bottom" title="' . lang('Auth.instance_groups.owner.title') . '">' . icon('shield-user') . '</span>' . $role . '</div>';
                 }
 
-                return implode(',', $user->roles) . '<IconButton uri="' . route_to('user-edit', $user->id) . '" glyph="edit" variant="info">' . lang('User.edit_roles', [
+                return $role . '<IconButton uri="' . route_to('user-edit', $user->id) . '" glyph="edit" variant="info">' . lang('User.edit_role', [
                     'username' => esc($user->username),
                 ]) . '</IconButton>';
-            },
-        ],
-        [
-            'header' => lang('User.list.banned'),
-            'cell' => function ($user) {
-                return $user->isBanned()
-                    ? lang('Common.yes')
-                    : lang('Common.no');
             },
         ],
         [
@@ -54,24 +48,10 @@
                 '<DropdownMenu id="more-dropdown-' . $user->id . '-menu" labelledby="more-dropdown-' . $user->id . '" items="' . esc(json_encode([
                     [
                         'type' => 'link',
-                        'title' => lang('User.forcePassReset'),
-                        'uri' => route_to('user-force_pass_reset', $user->id),
-                    ],
-                    [
-                        'type' => 'link',
-                        'title' => lang('User.' . ($user->isBanned() ? 'unban' : 'ban')),
-                        'uri' => route_to($user->isBanned() ? 'user-unban' : 'user-ban', $user->id),
-                    ],
-                    [
-                        'type' => 'separator',
-                    ],
-                    [
-                        'type' => 'link',
                         'title' => lang('User.delete'),
                         'uri' => route_to('user-delete', $user->id),
                         'class' => 'font-semibold text-red-600',
                     ],
-
                 ])) . '" />';
             },
         ],

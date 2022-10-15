@@ -10,18 +10,18 @@ declare(strict_types=1);
 
 namespace Modules\Install\Controllers;
 
-use App\Models\UserModel;
 use CodeIgniter\Controller;
 use CodeIgniter\Database\Exceptions\DatabaseException;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
+use CodeIgniter\Shield\Entities\User;
 use Config\Database;
 use Config\Services;
 use Dotenv\Dotenv;
 use Dotenv\Exception\ValidationException;
-use Modules\Auth\Entities\User;
+use Modules\Auth\Models\UserModel;
 use Psr\Log\LoggerInterface;
 use Throwable;
 use ViewThemes\Theme;
@@ -31,7 +31,7 @@ class InstallController extends Controller
     /**
      * @var string[]
      */
-    protected $helpers = ['form', 'components', 'svg', 'misc'];
+    protected $helpers = ['form', 'components', 'svg', 'misc', 'setting'];
 
     /**
      * Constructor.
@@ -117,10 +117,11 @@ class InstallController extends Controller
         try {
             $db = db_connect();
 
-            // Check if superadmin has been created, meaning migrations and seeds have passed
+            // Check if instance owner has been created, meaning install was completed
             if (
                 $db->tableExists('users') &&
-                (new UserModel())->countAll() > 0
+                (new UserModel())->where('is_owner', true)
+                    ->first() !== null
                 ) {
                 // if so, show a 404 page
                 throw PageNotFoundException::forPageNotFound();
@@ -249,7 +250,7 @@ class InstallController extends Controller
 
         $migrations->setNamespace('CodeIgniter\Settings')
             ->latest();
-        $migrations->setNamespace('Myth\Auth')
+        $migrations->setNamespace('CodeIgniter\Shield')
             ->latest();
         $migrations->setNamespace('Modules\Fediverse')
             ->latest();
@@ -293,48 +294,25 @@ class InstallController extends Controller
     {
         $userModel = new UserModel();
 
-        // Validate here first, since some things,
-        // like the password, can only be validated properly here.
-        $rules = array_merge(
-            $userModel->getValidationRules([
-                'only' => ['username'],
-            ]),
-            [
-                'email' => 'required|valid_email|is_unique[users.email]',
-                'password' => 'required|strong_password',
-            ],
-        );
-
-        if (! $this->validate($rules)) {
-            return redirect()
-                ->back()
-                ->withInput()
-                ->with('errors', $this->validator->getErrors());
-        }
-
         // Save the user
-        $user = new User($this->request->getPost());
-
-        // Activate user
-        $user->activate();
-
-        $db = db_connect();
-
-        $db->transStart();
-        if (! ($userId = $userModel->insert($user, true))) {
-            $db->transRollback();
-
-            return redirect()
-                ->back()
+        $user = new User([
+            'username' => $this->request->getPost('username'),
+            'email' => $this->request->getPost('email'),
+            'password' => $this->request->getPost('password'),
+            'is_owner' => true,
+        ]);
+        try {
+            $userModel->save($user);
+        } catch (ValidationException) {
+            return redirect()->back()
                 ->withInput()
                 ->with('errors', $userModel->errors());
         }
 
-        // add newly created user to superadmin group
-        $authorization = Services::authorization();
-        $authorization->addUserToGroup($userId, 'superadmin');
+        $user = $userModel->findById($userModel->getInsertID());
 
-        $db->transComplete();
+        // set newly created user as most powerful instance group (superadmin)
+        $user->addGroup(setting('AuthGroups.mostPowerfulGroup'));
 
         // Success!
         // set redirect_url session as admin area to go to after login
@@ -342,7 +320,7 @@ class InstallController extends Controller
             ->set('redirect_url', route_to('admin'));
 
         return redirect()
-            ->route('login')
+            ->route('admin')
             ->with('message', lang('Install.messages.createSuperAdminSuccess'));
     }
 

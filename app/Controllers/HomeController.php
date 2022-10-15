@@ -13,26 +13,26 @@ namespace App\Controllers;
 use App\Models\PodcastModel;
 use CodeIgniter\HTTP\RedirectResponse;
 use Config\Services;
+use Exception;
 
 class HomeController extends BaseController
 {
     public function index(): RedirectResponse | string
     {
-        $db = db_connect();
-        if ($db->getDatabase() === '' || ! $db->tableExists('podcasts')) {
+        $sortOptions = ['activity', 'created_desc', 'created_asc'];
+        $sortBy = in_array($this->request->getGet('sort'), $sortOptions, true) ? $this->request->getGet(
+            'sort'
+        ) : 'activity';
+
+        try {
+            $allPodcasts = (new PodcastModel())->getAllPodcasts($sortBy);
+        } catch (Exception) {
             // Database connection has not been set or could not find the podcasts table
             // Redirecting to install page because it is likely that Castopod has not been installed yet.
             // NB: as base_url wouldn't have been defined here, redirect to install wizard manually
             $route = Services::routes()->reverseRoute('install');
             return redirect()->to(rtrim(host_url(), '/') . $route);
         }
-
-        $sortOptions = ['activity', 'created_desc', 'created_asc'];
-        $sortBy = in_array($this->request->getGet('sort'), $sortOptions, true) ? $this->request->getGet(
-            'sort'
-        ) : 'activity';
-
-        $allPodcasts = (new PodcastModel())->getAllPodcasts($sortBy);
 
         // check if there's only one podcast to redirect user to it
         if (count($allPodcasts) === 1) {

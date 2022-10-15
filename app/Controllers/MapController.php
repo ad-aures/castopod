@@ -24,7 +24,8 @@ class MapController extends BaseController
                 'map',
                 service('request')
                     ->getLocale(),
-                can_user_interact() ? 'authenticated' : null,
+                auth()
+                    ->loggedIn() ? 'authenticated' : null,
             ]),
         );
 

@@ -8,8 +8,8 @@ use App\Models\PodcastModel;
 use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
+use CodeIgniter\Shield\Exceptions\RuntimeException;
 use Config\Services;
-use Myth\Auth\Exceptions\PermissionException;
 
 class PermissionFilter implements FilterInterface
 {
@@ -24,62 +24,49 @@ class PermissionFilter implements FilterInterface
      */
     public function before(RequestInterface $request, $params = null)
     {
-        helper('auth');
-
-        if ($params === null) {
+        if (empty($params)) {
             return;
         }
 
-        $authenticate = Services::authentication();
-
-        // if no user is logged in then send to the login form
-        if (! $authenticate->check()) {
-            session()->set('redirect_url', current_url());
-            return redirect('login');
+        if (! function_exists('auth')) {
+            helper('auth');
         }
 
-        helper('misc');
-        $authorize = Services::authorization();
-        $router = Services::router();
-        $routerParams = $router->params();
-        $result = false;
+        if (! auth()->loggedIn()) {
+            return redirect()->to('login');
+        }
 
-        // Check if user has at least one of the permissions
+        $result = true;
+
         foreach ($params as $permission) {
-            // check if permission is for a specific podcast
-            if (
-                (str_starts_with($permission, 'podcast-') ||
-                    str_starts_with($permission, 'podcast_episodes-')) &&
-                $routerParams !== []
-            ) {
-                if (
-                    ($groupId = (new PodcastModel())->getContributorGroupId(
-                        $authenticate->id(),
-                        $routerParams[0],
-                    )) &&
-                    $authorize->groupHasPermission($permission, $groupId)
-                ) {
-                    $result = true;
-                    break;
+            // does permission is specific to a podcast?
+            if (str_contains($permission, '#')) {
+                $router = Services::router();
+                $routerParams = $router->params();
+
+                // get podcast id
+                $podcastId = null;
+                if (is_numeric($routerParams[0])) {
+                    $podcastId = (int) $routerParams[0];
+                } else {
+                    $podcast = (new PodcastModel())->getPodcastByHandle($routerParams[0]);
+                    if ($podcast !== null) {
+                        $podcastId = $podcast->id;
+                    }
                 }
-            } elseif (
-                $authorize->hasPermission($permission, $authenticate->id())
-            ) {
-                $result = true;
-                break;
+
+                if ($podcastId !== null) {
+                    $permission = str_replace('#', '#' . $podcastId, $permission);
+                }
             }
+
+            $result = $result && auth()
+                ->user()
+                ->can($permission);
         }
 
         if (! $result) {
-            if ($authenticate->silent()) {
-                $redirectURL = session('redirect_url') ?? '/';
-                unset($_SESSION['redirect_url']);
-                return redirect()
-                    ->to($redirectURL)
-                    ->with('error', lang('Auth.notEnoughPrivilege'));
-            }
-
-            throw new PermissionException(lang('Auth.notEnoughPrivilege'));
+            throw new RuntimeException(lang('Auth.notEnoughPrivilege'), 403);
         }
     }
 

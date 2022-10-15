@@ -179,6 +179,7 @@ function getGuideSidebarEn() {
         },
         { text: "Security", link: "/getting-started/security" },
         { text: "Update", link: "/getting-started/update" },
+        { text: "Auth", link: "/getting-started/auth" },
       ],
     },
     {
@@ -207,6 +208,7 @@ function getGuideSidebarFr() {
         },
         { text: "Sécurité", link: "/fr/getting-started/security" },
         { text: "Mise à jour", link: "/fr/getting-started/update" },
+        { text: "Authentification", link: "/fr/getting-started/auth" },
       ],
     },
     {
@@ -235,6 +237,7 @@ function getGuideSidebarPtBR() {
         },
         { text: "Segurança", link: "/pt-BR/getting-started/security" },
         { text: "Atualizar", link: "/pt-BR/getting-started/update" },
+        { text: "Autenticação", link: "/pt-BR/getting-started/auth" },
       ],
     },
     {
@@ -263,6 +266,7 @@ function getGuideSidebarNnNO() {
         },
         { text: "Sikkerhet", link: "/nn-NO/getting-started/security" },
         { text: "Oppdaterer", link: "/nn-NO/getting-started/update" },
+        { text: "Autentisering", link: "/pt-BR/getting-started/auth" },
       ],
     },
     {

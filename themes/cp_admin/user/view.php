@@ -6,6 +6,12 @@
 ]) ?>
 <?= $this->endSection() ?>
 
+<?= $this->section('pageTitle') ?>
+<?= lang('User.view', [
+    'username' => esc($user->username),
+]) ?>
+<?= $this->endSection() ?>
+
 
 <?= $this->section('content') ?>
 
