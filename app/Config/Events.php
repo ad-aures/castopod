@@ -28,7 +28,6 @@ use CodeIgniter\Exceptions\FrameworkException;
  */
 
 Events::on('pre_system', static function () {
-    // @phpstan-ignore-next-line
     if (ENVIRONMENT !== 'testing') {
         if (ini_get('zlib.output_compression')) {
             throw FrameworkException::forEnabledZlibOutputCompression();
@@ -46,8 +45,6 @@ Events::on('pre_system', static function () {
      * Debug Toolbar Listeners.
      * --------------------------------------------------------------------
      * If you delete, they will no longer be collected.
-     *
-     * @phpstan-ignore-next-line
      */
     if (CI_DEBUG && ! is_cli()) {
         Events::on('DBQuery', 'CodeIgniter\Debug\Toolbar\Collectors\Database::collect');

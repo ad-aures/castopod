@@ -20,6 +20,11 @@ parameters:
         - app/Views/*
         - modules/*/Views/*
         - themes/*
+    dynamicConstantNames:
+        - APP_NAMESPACE
+        - CI_DEBUG
+        - ENVIRONMENT
+        - SODIUM_LIBRARY_VERSION
     ignoreErrors:
         - '#Cannot access property [\$a-z_]+ on ((array\|)?object)#'
         - '#^Call to an undefined method CodeIgniter\\Database\\ConnectionInterface#'

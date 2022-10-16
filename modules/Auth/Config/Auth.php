@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Auth\Config;
 
 use CodeIgniter\Shield\Authentication\Actions\ActionInterface;
+use CodeIgniter\Shield\Authentication\Actions\Email2FA;
 use CodeIgniter\Shield\Config\Auth as ShieldAuth;
 use Modules\Auth\Models\UserModel;
 
@@ -77,6 +78,14 @@ class Auth extends ShieldAuth
 
     /**
      * --------------------------------------------------------------------
+     * Allow Two-Factor Authentication
+     * --------------------------------------------------------------------
+     * Determines whether email 2FA is enabled.
+     */
+    public bool $enable2FA = false;
+
+    /**
+     * --------------------------------------------------------------------
      * Welcome Link Lifetime
      * --------------------------------------------------------------------
      * Specifies the amount of time, in seconds, that a welcome link is valid.
@@ -108,6 +117,8 @@ class Auth extends ShieldAuth
 
     public function __construct()
     {
+        parent::__construct();
+
         $adminGateway = config('Admin')
             ->gateway;
 
@@ -116,6 +127,12 @@ class Auth extends ShieldAuth
             'login' => $adminGateway,
             'logout' => $adminGateway,
         ];
+
+        // FIXME: enable2FA config can only be updated in the .env
+        // Using the settings service to have it set in the db causes infinite loop.
+        if ($this->enable2FA) {
+            $this->actions['login'] = Email2FA::class;
+        }
     }
 
     /**

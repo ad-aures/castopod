@@ -10,6 +10,7 @@ use Rector\CodingStyle\Rector\Stmt\NewlineAfterStatementRector;
 use Rector\CodingStyle\Rector\String_\SymplifyQuoteEscapeRector;
 use Rector\Config\RectorConfig;
 use Rector\Core\ValueObject\PhpVersion;
+use Rector\DeadCode\Rector\If_\UnwrapFutureCompatibleIfPhpVersionRector;
 use Rector\EarlyReturn\Rector\If_\ChangeOrIfContinueToMultiContinueRector;
 use Rector\EarlyReturn\Rector\If_\ChangeOrIfReturnToEarlyReturnRector;
 use Rector\Php55\Rector\String_\StringClassNameToClassConstantRector;
@@ -61,6 +62,7 @@ return static function (RectorConfig $rectorConfig): void {
         UnSpreadOperatorRector::class,
         ExplicitMethodCallOverMagicGetSetRector::class,
         RemoveExtraParametersRector::class,
+        UnwrapFutureCompatibleIfPhpVersionRector::class,
 
         // skip rule in specific directory
         StringClassNameToClassConstantRector::class => [

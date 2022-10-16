@@ -80,6 +80,10 @@ return [
         'episodes.manage-publications' => 'Can publish/unpublish episodes and posts of podcast #{id}.',
         'episodes.manage-comments' => 'Can create/remove episode comments of podcast #{id}.',
     ],
+
+    // missing keys
+    'code' => 'Your 6-digit code',
+
     'notEnoughPrivilege' => 'You do not have sufficient permissions to access that page.',
     'set_password' => 'Set your password',
 
