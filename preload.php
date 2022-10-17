@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of CodeIgniter 4 framework.
  *
  * (c) CodeIgniter Foundation <admin@codeigniter.com>
  *
- * For the full copyright and license information, please view
- * the LICENSE file that was distributed with this source code.
+ * For the full copyright and license information, please view the LICENSE file that was distributed with this source
+ * code.
  */
 
 /*
@@ -75,12 +77,6 @@ class preload
         $this->loadAutoloader();
     }
 
-    private function loadAutoloader(): void
-    {
-        $paths = new Config\Paths();
-        require rtrim($paths->systemDirectory, '\\/ ') . DIRECTORY_SEPARATOR . 'bootstrap.php';
-    }
-
     /**
      * Load PHP files.
      */
@@ -88,12 +84,8 @@ class preload
     {
         foreach ($this->paths as $path) {
             $directory = new RecursiveDirectoryIterator($path['include']);
-            $fullTree  = new RecursiveIteratorIterator($directory);
-            $phpFiles  = new RegexIterator(
-                $fullTree,
-                '/.+((?<!Test)+\.php$)/i',
-                RecursiveRegexIterator::GET_MATCH
-            );
+            $fullTree = new RecursiveIteratorIterator($directory);
+            $phpFiles = new RegexIterator($fullTree, '/.+((?<!Test)+\.php$)/i', RecursiveRegexIterator::GET_MATCH);
 
             foreach ($phpFiles as $key => $file) {
                 foreach ($path['exclude'] as $exclude) {
@@ -106,6 +98,12 @@ class preload
                 echo 'Loaded: ' . $file[0] . "\n";
             }
         }
+    }
+
+    private function loadAutoloader(): void
+    {
+        $paths = new Config\Paths();
+        require rtrim($paths->systemDirectory, '\\/ ') . DIRECTORY_SEPARATOR . 'bootstrap.php';
     }
 }
 

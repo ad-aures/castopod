@@ -19,13 +19,13 @@ If you prefer using Docker, you may skip this and go straight to the
 
 ## Requirements
 
-- PHP v8.0 or higher
+- PHP v8.1 or higher
 - MySQL version 5.7 or higher or MariaDB version 10.2 or higher
 - HTTPS support
 
-### PHP v8.0 or higher
+### PHP v8.1 or higher
 
-PHP version 8.0 or higher is required, with the following extensions installed:
+PHP version 8.1 or higher is required, with the following extensions installed:
 
 - [intl](https://php.net/manual/en/intl.requirements.php)
 - [libcurl](https://php.net/manual/en/curl.requirements.php)

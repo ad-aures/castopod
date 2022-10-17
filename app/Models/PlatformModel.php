@@ -53,7 +53,7 @@ class PlatformModel extends Model
     public function getPlatforms(): array
     {
         if (! ($found = cache('platforms'))) {
-            $baseUrl = rtrim(config('app')->baseURL, '/');
+            $baseUrl = rtrim((string) config('app')->baseURL, '/');
             $found = $this->select(
                 "*, CONCAT('{$baseUrl}/assets/images/platforms/',`type`,'/',`slug`,'.svg') as icon",
             )->findAll();

@@ -23,7 +23,7 @@ class VideoClipper
     /**
      * @var array<string, string>
      */
-    public const FONTS = [
+    final public const FONTS = [
         'episodeTitle' => 'Rubik-Bold.ttf',
         'podcastTitle' => 'Inter-Regular.otf',
         'subtitles' => 'Inter-SemiBold',

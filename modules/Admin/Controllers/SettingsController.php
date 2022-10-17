@@ -214,18 +214,18 @@ class SettingsController extends BaseController
 
             $allImages = (new MediaModel('image'))->getAllOfType();
             foreach ($allImages as $image) {
-                if (str_starts_with($image->file_path, 'podcasts')) {
-                    if (str_ends_with($image->file_path, 'banner.jpg') || str_ends_with(
-                        $image->file_path,
+                if (str_starts_with((string) $image->file_path, 'podcasts')) {
+                    if (str_ends_with((string) $image->file_path, 'banner.jpg') || str_ends_with(
+                        (string) $image->file_path,
                         'banner.png'
-                    ) || str_ends_with($image->file_path, 'banner.jpeg')) {
+                    ) || str_ends_with((string) $image->file_path, 'banner.jpeg')) {
                         $image->sizes = config('Images')
                             ->podcastBannerSizes;
                     } else {
                         $image->sizes = config('Images')
                             ->podcastCoverSizes;
                     }
-                } elseif (str_starts_with($image->file_path, 'persons')) {
+                } elseif (str_starts_with((string) $image->file_path, 'persons')) {
                     $image->sizes = config('Images')
                         ->personAvatarSizes;
                 } else {

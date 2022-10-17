@@ -20,13 +20,13 @@ directement à la [documentation Docker](./docker.md) pour Castopod.
 
 ## Prérequis
 
-- PHP v8.0 ou supérieure
+- PHP v8.1 ou supérieure
 - MySQL version 5.7 ou supérieure ou MariaDB version 10.2 ou supérieure
 - Prise en charge HTTPS
 
-### PHP v8.0 ou supérieure
+### PHP v8.1 ou supérieure
 
-PHP version 8.0 ou supérieure est requise, avec les extensions suivantes
+PHP version 8.1 ou supérieure est requise, avec les extensions suivantes
 installées :
 
 - [intl](https://www.php.net/manual/fr/intl.requirements.php)

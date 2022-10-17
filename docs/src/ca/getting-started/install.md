@@ -20,13 +20,13 @@ Si preferiu utilitzar Docker, podeu ometre això i anar directament a la
 
 ## Requisits
 
-- PHP v8.0 o superior
+- PHP v8.1 o superior
 - MySQL versió 5.7 o superior o MariaDB versió 10.2 o superior
 - Support d'HTTPS
 
-### PHP v8.0 o superior
+### PHP v8.1 o superior
 
-Es requereix PHP versió 8.0 o superior, amb les extensions següents
+Es requereix PHP versió 8.1 o superior, amb les extensions següents
 instal·lades:
 
 - [intl](https://php.net/manual/en/intl.requirements.php)

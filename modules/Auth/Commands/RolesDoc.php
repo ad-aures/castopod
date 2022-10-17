@@ -173,7 +173,11 @@ class RolesDoc extends BaseCommand
 
     private function detectLocaleFromPath($filePath): string
     {
-        preg_match('~docs\/src\/(?:([a-z]{2}(?:-[A-Za-z]{2,})?)\/)getting-started\/auth\.md~', $filePath, $match);
+        preg_match(
+            '~docs\/src\/(?:([a-z]{2}(?:-[A-Za-z]{2,})?)\/)getting-started\/auth\.md~',
+            (string) $filePath,
+            $match
+        );
 
         if ($match === []) {
             return 'en';

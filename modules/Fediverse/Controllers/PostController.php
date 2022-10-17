@@ -259,7 +259,7 @@ class PostController extends Controller
         }
 
         return redirect()->to(
-            str_replace('{uri}', urlencode($this->post->uri), $data->links[$ostatusKey]->template),
+            str_replace('{uri}', urlencode($this->post->uri), (string) $data->links[$ostatusKey]->template),
         );
     }
 

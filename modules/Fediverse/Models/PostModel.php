@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace Modules\Fediverse\Models;
 
 use CodeIgniter\Database\BaseResult;
-use CodeIgniter\Database\Query;
 use CodeIgniter\Events\Events;
 use CodeIgniter\HTTP\URI;
 use CodeIgniter\I18n\Time;
@@ -230,7 +229,7 @@ class PostModel extends BaseUuidModel
         return $found;
     }
 
-    public function addPreviewCard(string $postId, int $previewCardId): Query | bool
+    public function addPreviewCard(string $postId, int $previewCardId): bool
     {
         return $this->db->table(config('Fediverse')->tablesPrefix . 'posts_preview_cards')
             ->insert([
@@ -249,7 +248,7 @@ class PostModel extends BaseUuidModel
         Post $post,
         bool $createPreviewCard = true,
         bool $registerActivity = true
-    ): string | false {
+    ): bool|int|object|string {
         helper('fediverse');
 
         $this->db->transStart();

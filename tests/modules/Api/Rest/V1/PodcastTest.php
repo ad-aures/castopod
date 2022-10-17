@@ -44,7 +44,7 @@ class PodcastTest extends CIUnitTestCase
      */
     private array $podcast = [];
 
-    private string $podcastApiUrl;
+    private readonly string $podcastApiUrl;
 
     /**
      * @param array<mixed> $data

@@ -495,7 +495,7 @@ class Podcast extends Entity
     {
         if ($this->description === null) {
             $this->description = trim(
-                (string) preg_replace('~\s+~', ' ', strip_tags($this->attributes['description_html'])),
+                (string) preg_replace('~\s+~', ' ', strip_tags((string) $this->attributes['description_html'])),
             );
         }
 
@@ -658,7 +658,7 @@ class Podcast extends Entity
             'elements' => $this->custom_rss,
         ], $xmlNode);
 
-        return (string) str_replace(['<channel>', '</channel>'], '', $xmlNode->asXML());
+        return str_replace(['<channel>', '</channel>'], '', (string) $xmlNode->asXML());
     }
 
     /**

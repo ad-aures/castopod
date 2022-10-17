@@ -19,13 +19,13 @@ Castopod 的安装非常简单。 你能在大多数兼容的 PHP-MySQL 的服�
 
 ## 要求
 
-- PHP 8.0 或更高版本
+- PHP 8.1 或更高版本
 - MySQL 5.7 或更高版本与 MariaDB 10.2 或更高版本
 - HTTPS 支持
 
-### PHP 8.0 或更高版本
+### PHP 8.1 或更高版本
 
-需要 PHP 8.0 或更高版本，并安装以下扩展：
+需要 PHP 8.1 或更高版本，并安装以下扩展：
 
 - [intl](https://php.net/manual/en/intl.requirements.php)
 - [libcurl](https://php.net/manual/en/curl.requirements.php)

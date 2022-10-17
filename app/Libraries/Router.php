@@ -159,17 +159,17 @@ class Router extends CodeIgniterRouter
                 // Support resource route when function with subdirectory
                 // ex: $routes->resource('Admin/Admins');
                 if (
-                    str_contains($val, '$') &&
+                    str_contains((string) $val, '$') &&
                     str_contains($routeKey, '(') &&
                     str_contains($routeKey, '/')
                 ) {
                     $replacekey = str_replace('/(.*)', '', $routeKey);
                     $val = preg_replace('#^' . $routeKey . '$#u', $val, $uri);
                     $val = str_replace($replacekey, str_replace('/', '\\', $replacekey), $val);
-                } elseif (str_contains($val, '$') && str_contains($routeKey, '(')) {
+                } elseif (str_contains((string) $val, '$') && str_contains($routeKey, '(')) {
                     $val = preg_replace('#^' . $routeKey . '$#u', $val, $uri);
-                } elseif (str_contains($val, '/')) {
-                    [$controller, $method] = explode('::', $val);
+                } elseif (str_contains((string) $val, '/')) {
+                    [$controller, $method] = explode('::', (string) $val);
 
                     // Only replace slashes in the controller, not in the method.
                     $controller = str_replace('/', '\\', $controller);
@@ -177,7 +177,7 @@ class Router extends CodeIgniterRouter
                     $val = $controller . '::' . $method;
                 }
 
-                $this->setRequest(explode('/', $val));
+                $this->setRequest(explode('/', (string) $val));
 
                 $this->matchedRoute = [$matchedKey, $val];
 

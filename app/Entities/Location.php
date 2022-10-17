@@ -115,7 +115,7 @@ class Location extends Entity
             $places[0],
             'osm_id'
         ) && $places[0]->osm_id !== null)) {
-            $this->attributes['osm'] = strtoupper(substr($places[0]->osm_type, 0, 1)) . $places[0]->osm_id;
+            $this->attributes['osm'] = strtoupper(substr((string) $places[0]->osm_type, 0, 1)) . $places[0]->osm_id;
         }
 
         return $this;

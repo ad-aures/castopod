@@ -334,7 +334,7 @@ class ActorController extends Controller
             ->setBody($followersCollection->toJSON());
     }
 
-    public function attemptFollow(): RedirectResponse | ResponseInterface
+    public function attemptFollow(): RedirectResponse
     {
         $rules = [
             'handle' =>
@@ -382,7 +382,7 @@ class ActorController extends Controller
         }
 
         return redirect()->to(
-            str_replace('{uri}', urlencode($this->actor->uri), $data->links[$ostatusKey]->template),
+            str_replace('{uri}', urlencode($this->actor->uri), (string) $data->links[$ostatusKey]->template),
         );
     }
 

@@ -38,7 +38,7 @@ if (is_file($file)) {
         if (is_array($array)) {
             if ($dev) {
                 $array['minimum-stability'] = 'dev';
-                $array['prefer-stable']     = true;
+                $array['prefer-stable'] = true;
                 $array['repositories'] ??= [];
 
                 $found = false;
@@ -53,7 +53,7 @@ if (is_file($file)) {
                 if (! $found) {
                     $array['repositories'][] = [
                         'type' => 'vcs',
-                        'url'  => GITHUB_URL,
+                        'url' => GITHUB_URL,
                     ];
                 }
 

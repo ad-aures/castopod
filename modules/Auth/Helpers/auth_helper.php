@@ -155,7 +155,7 @@ if (! function_exists('get_podcast_group')) {
         }
 
         // strip the `podcast#{id}.` prefix when returning group
-        return substr($podcastGroup, strlen('podcast#' . $podcastId . '-'));
+        return substr((string) $podcastGroup, strlen('podcast#' . $podcastId . '-'));
     }
 }
 
@@ -183,7 +183,7 @@ if (! function_exists('get_podcast_groups')) {
         $userPodcastIds = [];
         // extract all podcast ids from groups
         foreach ($podcastGroups as $podcastGroup) {
-            $userPodcastIds[] = substr($podcastGroup, strpos($podcastGroup, '#') + 1, 1);
+            $userPodcastIds[] = substr((string) $podcastGroup, strpos((string) $podcastGroup, '#') + 1, 1);
         }
 
         return $userPodcastIds;

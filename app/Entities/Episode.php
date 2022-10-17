@@ -536,7 +536,7 @@ class Episode extends Entity
     {
         if ($this->description === null) {
             $this->description = trim(
-                preg_replace('~\s+~', ' ', strip_tags($this->attributes['description_html'])),
+                preg_replace('~\s+~', ' ', strip_tags((string) $this->attributes['description_html'])),
             );
         }
 
@@ -620,7 +620,7 @@ class Episode extends Entity
             'elements' => $this->custom_rss,
         ], $xmlNode);
 
-        return (string) str_replace(['<item>', '</item>'], '', $xmlNode->asXML());
+        return str_replace(['<item>', '</item>'], '', (string) $xmlNode->asXML());
     }
 
     /**
@@ -659,7 +659,7 @@ class Episode extends Entity
             $this->getPodcast()
                 ->partner_id .
             '&guid=' .
-            urlencode($this->attributes['guid']);
+            urlencode((string) $this->attributes['guid']);
 
         if ($serviceSlug !== null) {
             $partnerLink .= '&_from=' . $serviceSlug;
@@ -675,7 +675,7 @@ class Episode extends Entity
             $this->getPodcast()
                 ->partner_id .
             '&guid=' .
-            urlencode($this->attributes['guid']) .
+            urlencode((string) $this->attributes['guid']) .
             ($serviceSlug !== null ? '&_from=' . $serviceSlug : '');
     }
 }

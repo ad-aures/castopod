@@ -20,13 +20,13 @@ If you prefer using Docker, you may skip this and go straight to the
 
 ## Krav
 
-- PHP v8.0 eller nyare
+- PHP v8.1 eller nyare
 - MySQL versjon 5.7 eller nyare, eller MariaDB versjon 10.2 eller nyare
 - Støtte for HTTPS
 
-### PHP v8.0 eller nyare
+### PHP v8.1 eller nyare
 
-PHP version 8.0 or higher is required, with the following extensions installed:
+PHP version 8.1 or higher is required, with the following extensions installed:
 
 - [intl](https://php.net/manual/en/intl.requirements.php)
 - [libcurl](https://php.net/manual/en/curl.requirements.php)

@@ -18,21 +18,14 @@ use Rector\Php71\Rector\FuncCall\RemoveExtraParametersRector;
 use Rector\Set\ValueObject\SetList;
 
 return static function (RectorConfig $rectorConfig): void {
-    // get parameters
-    $rectorConfig->paths([
-        __DIR__ . '/app',
-        __DIR__ . '/modules',
-        __DIR__ . '/tests',
-        __DIR__ . '/public',
-    ]);
+    $rectorConfig->paths([__DIR__ . '/app', __DIR__ . '/modules', __DIR__ . '/tests', __DIR__ . '/public']);
 
     // do you need to include constants, class aliases or custom autoloader? files listed will be executed
-    $rectorConfig->bootstrapFiles([
-        __DIR__ . '/vendor/codeigniter4/framework/system/Test/bootstrap.php',
-    ]);
+    $rectorConfig->bootstrapFiles([__DIR__ . '/vendor/codeigniter4/framework/system/Test/bootstrap.php']);
 
     // Define what rule sets will be applied
-    $rectorConfig->sets([SetList::PHP_80,
+    $rectorConfig->sets([
+        SetList::PHP_81,
         SetList::TYPE_DECLARATION,
         SetList::TYPE_DECLARATION_STRICT,
         SetList::CODE_QUALITY,
@@ -44,7 +37,7 @@ return static function (RectorConfig $rectorConfig): void {
     // auto import fully qualified class names
     $rectorConfig->importNames();
 
-    $rectorConfig->phpVersion(PhpVersion::PHP_80);
+    $rectorConfig->phpVersion(PhpVersion::PHP_81);
 
     $rectorConfig->skip([
         // .mp3 files were somehow processed by rector, so skip all media files
@@ -69,14 +62,9 @@ return static function (RectorConfig $rectorConfig): void {
             __DIR__ . '/app/Language/*',
             __DIR__ . '/modules/*/Language/*',
         ],
-        SymplifyQuoteEscapeRector::class => [
-            __DIR__ . '/app/Language/*',
-            __DIR__ . '/modules/*/Language/*',
-        ],
+        SymplifyQuoteEscapeRector::class => [__DIR__ . '/app/Language/*', __DIR__ . '/modules/*/Language/*'],
 
-        NewlineAfterStatementRector::class => [
-            __DIR__ . '/app/Views',
-        ]
+        NewlineAfterStatementRector::class => [__DIR__ . '/app/Views'],
     ]);
 
     // Path to phpstan with extensions, that PHPStan in Rector uses to determine types

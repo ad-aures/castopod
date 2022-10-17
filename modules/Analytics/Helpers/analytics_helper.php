@@ -212,7 +212,7 @@ if (! function_exists('set_user_session_referer')) {
             ? $_SERVER['HTTP_REFERER']
             : '- Direct -';
         $newreferer =
-            parse_url($newreferer, PHP_URL_HOST) ===
+            parse_url((string) $newreferer, PHP_URL_HOST) ===
             parse_url(current_url(false), PHP_URL_HOST)
                 ? '- Direct -'
                 : $newreferer;
@@ -311,7 +311,7 @@ if (! function_exists('podcast_hit')) {
                     // [0-1] bytes range requests are used (by Apple) to check that file exists and that 206 partial content is working.
                     // We don't count these requests.
                     // We calculate how many bytes are being downloaded based on HTTP_RANGE values:
-                    $ranges = explode(',', substr($httpRange, 6));
+                    $ranges = explode(',', substr((string) $httpRange, 6));
                     foreach ($ranges as $range) {
                         $parts = explode('-', $range);
                         $downloadedBytes += array_key_exists(1, $parts)

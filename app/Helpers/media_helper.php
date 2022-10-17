@@ -130,7 +130,7 @@ if (! function_exists('media_base_url')) {
         $appConfig = config('App');
         $mediaBaseUrl = $appConfig->mediaBaseURL === '' ? $appConfig->baseURL : $appConfig->mediaBaseURL;
 
-        return rtrim($mediaBaseUrl, '/') .
+        return rtrim((string) $mediaBaseUrl, '/') .
             '/' .
             $appConfig->mediaRoot .
             '/' .

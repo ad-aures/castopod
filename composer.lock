@@ -4,7 +4,7 @@
     "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
     "This file is @generated automatically"
   ],
-  "content-hash": "51482dcb24c719550a1f0aa7e7580dfc",
+  "content-hash": "c6dd2c4c4588bd654fd4973c5b574606",
   "packages": [
     {
       "name": "adaures/ipcat-php",
@@ -2411,16 +2411,16 @@
     },
     {
       "name": "vlucas/phpdotenv",
-      "version": "v5.4.1",
+      "version": "v5.5.0",
       "source": {
         "type": "git",
         "url": "https://github.com/vlucas/phpdotenv.git",
-        "reference": "264dce589e7ce37a7ba99cb901eed8249fbec92f"
+        "reference": "1a7ea2afc49c3ee6d87061f5a233e3a035d0eae7"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/264dce589e7ce37a7ba99cb901eed8249fbec92f",
-        "reference": "264dce589e7ce37a7ba99cb901eed8249fbec92f",
+        "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/1a7ea2afc49c3ee6d87061f5a233e3a035d0eae7",
+        "reference": "1a7ea2afc49c3ee6d87061f5a233e3a035d0eae7",
         "shasum": ""
       },
       "require": {
@@ -2435,15 +2435,19 @@
       "require-dev": {
         "bamarni/composer-bin-plugin": "^1.4.1",
         "ext-filter": "*",
-        "phpunit/phpunit": "^7.5.20 || ^8.5.21 || ^9.5.10"
+        "phpunit/phpunit": "^7.5.20 || ^8.5.30 || ^9.5.25"
       },
       "suggest": {
         "ext-filter": "Required to use the boolean validator."
       },
       "type": "library",
       "extra": {
+        "bamarni-bin": {
+          "bin-links": true,
+          "forward-command": true
+        },
         "branch-alias": {
-          "dev-master": "5.4-dev"
+          "dev-master": "5.5-dev"
         }
       },
       "autoload": {
@@ -2469,7 +2473,7 @@
       "keywords": ["dotenv", "env", "environment"],
       "support": {
         "issues": "https://github.com/vlucas/phpdotenv/issues",
-        "source": "https://github.com/vlucas/phpdotenv/tree/v5.4.1"
+        "source": "https://github.com/vlucas/phpdotenv/tree/v5.5.0"
       },
       "funding": [
         {
@@ -2481,7 +2485,7 @@
           "type": "tidelift"
         }
       ],
-      "time": "2021-12-12T23:22:04+00:00"
+      "time": "2022-10-16T01:01:54+00:00"
     },
     {
       "name": "whichbrowser/parser",
@@ -3829,25 +3833,25 @@
     },
     {
       "name": "rector/rector",
-      "version": "0.14.5",
+      "version": "0.14.6",
       "source": {
         "type": "git",
         "url": "https://github.com/rectorphp/rector.git",
-        "reference": "f7fd87b2435835f481e6a94ee28e09af412bd3cc"
+        "reference": "e61574288661334155de6e5f0f45497285abad5d"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/rectorphp/rector/zipball/f7fd87b2435835f481e6a94ee28e09af412bd3cc",
-        "reference": "f7fd87b2435835f481e6a94ee28e09af412bd3cc",
+        "url": "https://api.github.com/repos/rectorphp/rector/zipball/e61574288661334155de6e5f0f45497285abad5d",
+        "reference": "e61574288661334155de6e5f0f45497285abad5d",
         "shasum": ""
       },
       "require": {
         "php": "^7.2|^8.0",
-        "phpstan/phpstan": "^1.8.6"
+        "phpstan/phpstan": "^1.8.7"
       },
       "conflict": {
-        "rector/rector-cakephp": "*",
         "rector/rector-doctrine": "*",
+        "rector/rector-downgrade-php": "*",
         "rector/rector-laravel": "*",
         "rector/rector-php-parser": "*",
         "rector/rector-phpoffice": "*",
@@ -3869,7 +3873,7 @@
       "description": "Instant Upgrade and Automated Refactoring of any PHP code",
       "support": {
         "issues": "https://github.com/rectorphp/rector/issues",
-        "source": "https://github.com/rectorphp/rector/tree/0.14.5"
+        "source": "https://github.com/rectorphp/rector/tree/0.14.6"
       },
       "funding": [
         {
@@ -3877,7 +3881,7 @@
           "type": "github"
         }
       ],
-      "time": "2022-09-29T11:05:42+00:00"
+      "time": "2022-10-15T22:58:22+00:00"
     },
     {
       "name": "sebastian/cli-parser",
@@ -6687,7 +6691,7 @@
   "prefer-stable": true,
   "prefer-lowest": false,
   "platform": {
-    "php": "^8.0"
+    "php": "^8.1"
   },
   "platform-dev": [],
   "plugin-api-version": "2.3.0"

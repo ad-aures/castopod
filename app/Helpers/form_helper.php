@@ -70,7 +70,7 @@ if (! function_exists('parse_form_attributes')) {
 
         foreach ($default as $key => $val) {
             if (! is_bool($val)) {
-                if ($key === 'name' && ! strlen($default['name'])) {
+                if ($key === 'name' && ! strlen((string) $default['name'])) {
                     continue;
                 }
 

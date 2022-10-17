@@ -63,7 +63,7 @@ class EpisodeAnalyticsController extends Controller
         } elseif ($session->get('embed_domain') !== null) {
             $serviceName = $session->get('embed_domain');
         } elseif ($session->get('referer') !== null && $session->get('referer') !== '- Direct -') {
-            $serviceName = parse_url($session->get('referer'), PHP_URL_HOST);
+            $serviceName = parse_url((string) $session->get('referer'), PHP_URL_HOST);
         }
 
         $episodeData = unpack(

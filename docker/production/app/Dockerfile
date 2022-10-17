@@ -1,11 +1,11 @@
-FROM docker.io/alpine:3.13 AS ffmpeg-downloader
+FROM docker.io/alpine:3.16 AS ffmpeg-downloader
 
 RUN apk add --no-cache curl && \
     curl https://johnvansickle.com/ffmpeg/releases/ffmpeg-5.1.1-amd64-static.tar.xz -o ffmpeg.tar.xz && \
     mkdir ffmpeg && \
     tar -xJf ffmpeg.tar.xz -C ffmpeg --strip-components 1
 
-FROM docker.io/php:8.0-fpm-alpine3.13
+FROM docker.io/php:8.1-fpm-alpine3.16
 
 COPY docker/production/app/entrypoint.sh /entrypoint.sh
 

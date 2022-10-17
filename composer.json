@@ -6,7 +6,7 @@
   "homepage": "https://castopod.org",
   "license": "AGPL-3.0-or-later",
   "require": {
-    "php": "^8.0",
+    "php": "^8.1",
     "codeigniter4/framework": "v4.2.7",
     "james-heinrich/getid3": "^2.0.x-dev",
     "whichbrowser/parser": "^v2.1.7",
@@ -47,8 +47,8 @@
   "scripts": {
     "test": "vendor/bin/phpunit",
     "analyse": "vendor/bin/phpstan analyse --ansi",
-    "rector": "vendor/bin/rector process --dry-run --ansi --memory-limit=1G",
-    "rector:fix": "vendor/bin/rector process --ansi --memory-limit=1G",
+    "rector": "vendor/bin/rector process --dry-run --ansi --memory-limit=2G",
+    "rector:fix": "vendor/bin/rector process --ansi --memory-limit=2G",
     "style": "vendor/bin/ecs check --ansi",
     "style:fix": "vendor/bin/ecs check --fix --ansi",
     "post-install-cmd": [

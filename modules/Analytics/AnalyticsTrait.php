@@ -31,10 +31,10 @@ trait AnalyticsTrait
 
             $referer = $session->get('referer');
             $domain =
-                parse_url($referer, PHP_URL_HOST) === null
+                parse_url((string) $referer, PHP_URL_HOST) === null
                     ? '- Direct -'
-                    : parse_url($referer, PHP_URL_HOST);
-            parse_str((string) parse_url($referer, PHP_URL_QUERY), $queries);
+                    : parse_url((string) $referer, PHP_URL_HOST);
+            parse_str((string) parse_url((string) $referer, PHP_URL_QUERY), $queries);
             $keywords = $queries['q'] ?? null;
 
             $procedureName = $db->prefixTable('analytics_website');

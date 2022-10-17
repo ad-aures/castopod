@@ -41,7 +41,7 @@ class DropdownMenu extends Component
                     ]);
                     break;
                 case 'html':
-                    $menuItems .= htmlspecialchars_decode($item['content']);
+                    $menuItems .= htmlspecialchars_decode((string) $item['content']);
                     break;
                 case 'separator':
                     $menuItems .= '<hr class="my-2 border border-subtle">';

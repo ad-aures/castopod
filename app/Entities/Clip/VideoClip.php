@@ -53,7 +53,7 @@ class VideoClip extends BaseClip
 
     public function setFormat(string $format): self
     {
-        $this->attributes['metadata'] = json_decode($this->attributes['metadata'], true);
+        $this->attributes['metadata'] = json_decode((string) $this->attributes['metadata'], true);
 
         $this->attributes['format'] = $format;
         $this->attributes['metadata']['format'] = $format;

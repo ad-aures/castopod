@@ -73,7 +73,7 @@ class EpisodeCommentModel extends UuidModel
         return $found;
     }
 
-    public function addComment(EpisodeComment $comment, bool $registerActivity = true): string | false
+    public function addComment(EpisodeComment $comment, bool $registerActivity = true): bool|int|object|string
     {
         $this->db->transStart();
 
