@@ -23,15 +23,15 @@ class PlatformSeeder extends Seeder
                 'slug' => 'amazon',
                 'type' => 'podcasting',
                 'label' => 'Amazon Music and Audible',
-                'home_url' => 'https://music.amazon.com/podcasts',
-                'submit_url' => 'http://amazon.com/podcasters',
+                'home_url' => 'https://music.amazon.com/',
+                'submit_url' => 'https://podcasters.amazon.com/',
             ],
             [
                 'slug' => 'antennapod',
                 'type' => 'podcasting',
                 'label' => 'AntennaPod',
                 'home_url' => 'https://antennapod.org/',
-                'submit_url' => 'https://api.podcastindex.org/signup',
+                'submit_url' => 'https://podcastindex.org/add',
             ],
             [
                 'slug' => 'apple',
@@ -161,7 +161,7 @@ class PlatformSeeder extends Seeder
                 'type' => 'podcasting',
                 'label' => 'Podcast Index',
                 'home_url' => 'https://podcastindex.org/',
-                'submit_url' => 'https://api.podcastindex.org/signup',
+                'submit_url' => 'https://podcastindex.org/add',
             ],
             [
                 'slug' => 'podchaser',
@@ -203,7 +203,7 @@ class PlatformSeeder extends Seeder
                 'type' => 'podcasting',
                 'label' => 'Podfriend',
                 'home_url' => 'https://www.podfriend.com/',
-                'submit_url' => 'https://api.podcastindex.org/signup',
+                'submit_url' => 'https://podcastindex.org/add',
             ],
             [
                 'slug' => 'podverse',
