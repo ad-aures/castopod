@@ -422,6 +422,7 @@ class PodcastController extends BaseController
     {
         $episodes = (new EpisodeModel())
             ->where('podcast_id', $podcastId)
+            ->orderBy('-`published_at`', '', false)
             ->orderBy('created_at', 'desc')
             ->findAll($limit);
 

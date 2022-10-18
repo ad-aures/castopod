@@ -74,6 +74,7 @@ class EpisodeController extends BaseController
                     ->where('podcast_id', $this->podcast->id)
                     ->like('title', $query)
                     ->orLike('description_markdown', $query)
+                    ->orderBy('-`published_at`', '', false)
                     ->orderBy('created_at', 'desc');
             } else {
                 $episodes = (new EpisodeModel())
@@ -83,6 +84,7 @@ class EpisodeController extends BaseController
         } else {
             $episodes = (new EpisodeModel())
                 ->where('podcast_id', $this->podcast->id)
+                ->orderBy('-`published_at`', '', false)
                 ->orderBy('created_at', 'desc');
         }
 

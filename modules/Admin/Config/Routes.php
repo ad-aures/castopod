@@ -333,7 +333,7 @@ $routes->group(
                             [
                                 'as' => 'episode-publish_date_edit',
                                 'filter' =>
-                                    'permission:podcast-manage_publications',
+                                    'permission:podcast#.episodes.manage-publications',
                             ],
                         );
                         $routes->post(
@@ -341,7 +341,7 @@ $routes->group(
                             'EpisodeController::attemptPublishDateEdit/$1/$2',
                             [
                                 'filter' =>
-                                    'permission:podcast-manage_publications',
+                                    'permission:podcast#.episodes.manage-publications',
                             ],
                         );
                         $routes->get(
