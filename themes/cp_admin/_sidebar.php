@@ -53,4 +53,8 @@ $navigation = [
         </ul>
     </div>
     <?php endforeach; ?>
+    <a class="inline-flex items-center w-full px-4 py-1 font-semibold focus:ring-accent" href="<?= route_to('admin-about') ?>">
+        <?= icon('information', 'opacity-60 text-2xl mr-4') ?>
+        <?= lang('Navigation.about') ?>
+    </a>
 </nav>

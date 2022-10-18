@@ -48,6 +48,7 @@ class Autoload extends AutoloadConfig
         'Modules\Auth' => ROOTPATH . 'modules/Auth/',
         'Modules\Analytics' => ROOTPATH . 'modules/Analytics/',
         'Modules\Install' => ROOTPATH . 'modules/Install/',
+        'Modules\Update' => ROOTPATH . 'modules/Update/',
         'Modules\Fediverse' => ROOTPATH . 'modules/Fediverse/',
         'Modules\WebSub' => ROOTPATH . 'modules/WebSub/',
         'Modules\Api\Rest\V1' => ROOTPATH . 'modules/Api/Rest/V1',

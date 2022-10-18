@@ -19,6 +19,7 @@ return [
     'pages' => 'pages',
     'settings' => 'settings',
     'theme' => 'theme',
+    'about' => 'about',
     'add' => 'add',
     'new' => 'new',
     'edit' => 'edit',

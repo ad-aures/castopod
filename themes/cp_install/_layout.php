@@ -6,8 +6,8 @@
     <meta charset="UTF-8"/>
     <meta name="robots" content="noindex">
 
-    <title>Castopod Install</title>
-    <meta name="description" content="Castopod is an open-source hosting platform made for podcasters who want engage and interact with their audience."/>
+    <title><?= lang('Install.title') ?></title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/icon-180.png">

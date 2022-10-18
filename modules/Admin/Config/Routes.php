@@ -644,5 +644,15 @@ $routes->group(
                 ]);
             });
         });
+
+        $routes->get('about', 'AboutController', [
+            'as' => 'admin-about',
+            'filter' => 'permission:admin.settings',
+        ]);
+
+        $routes->post('update', 'AboutController::updateAction', [
+            'as' => 'update',
+            'filter' => 'permission:admin.settings',
+        ]);
     },
 );
