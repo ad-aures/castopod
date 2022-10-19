@@ -292,7 +292,18 @@ class InstallController extends Controller
      */
     public function attemptCreateSuperAdmin(): RedirectResponse
     {
+        // validate user password
+        $rules = [
+            'password' => 'required|strong_password',
+        ];
+
         $userModel = new UserModel();
+        if (! $this->validate($rules)) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $userModel->errors());
+        }
 
         // Save the user
         $user = new User([
@@ -301,6 +312,7 @@ class InstallController extends Controller
             'password' => $this->request->getPost('password'),
             'is_owner' => true,
         ]);
+
         try {
             $userModel->save($user);
         } catch (ValidationException) {
