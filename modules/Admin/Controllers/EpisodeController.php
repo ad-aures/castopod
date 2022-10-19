@@ -135,6 +135,7 @@ class EpisodeController extends BaseController
     public function attemptCreate(): RedirectResponse
     {
         $rules = [
+            'slug' => 'max_length[128]',
             'audio_file' => 'uploaded[audio_file]|ext_in[audio_file,mp3,m4a]',
             'cover' =>
                 'is_image[cover]|ext_in[cover,jpg,png]|min_dims[cover,1400,1400]|is_image_ratio[cover,1,1]',
@@ -272,6 +273,7 @@ class EpisodeController extends BaseController
     public function attemptEdit(): RedirectResponse
     {
         $rules = [
+            'slug' => 'max_length[128]',
             'audio_file' =>
                 'uploaded[audio_file]|ext_in[audio_file,mp3,m4a]|permit_empty',
             'cover' =>

@@ -49,8 +49,8 @@
 
 <div>
     <Forms.Label for="slug"><?= lang('Episode.form.permalink') ?></Forms.Label>
-    <permalink-edit class="inline-flex items-center text-xs" edit-label="<?= lang('Common.edit') ?>" copy-label="<?= lang('Common.copy') ?>" copied-label="<?= lang('Common.copied') ?>">
-        <span slot="domain"><?= base_url('/@' . esc($podcast->handle) . '/episodes') . '/' ?></span>
+    <permalink-edit class="inline-flex items-center w-full text-xs" edit-label="<?= lang('Common.edit') ?>" copy-label="<?= lang('Common.copy') ?>" copied-label="<?= lang('Common.copied') ?>" permalink-base="<?= url_to('podcast-episodes', esc($podcast->handle)) ?>">
+        <span slot="domain"><?= '…/' . esc($podcast->handle) . '/' ?></span>
         <Forms.Input name="slug" value="<?= esc($episode->slug) ?>" required="true" data-slugify="slug" slot="slug-input" class="flex-1 text-xs" />
     </permalink-edit>
 </div>

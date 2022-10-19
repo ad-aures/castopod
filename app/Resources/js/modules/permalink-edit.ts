@@ -25,6 +25,9 @@ export class PermalinkEdit extends LitElement {
   @property({ attribute: "copy-label" })
   copyLabel = "Copy";
 
+  @property({ attribute: "permalink-base" })
+  permalinkBase = "";
+
   @state()
   isEditable = false;
 
@@ -68,6 +71,8 @@ export class PermalinkEdit extends LitElement {
   }
 
   firstUpdated(): void {
+    this.permalinkBase += this.permalinkBase.endsWith("/") ? "" : "/";
+
     // set permalink value
     this.setPermalink();
 
@@ -130,7 +135,7 @@ export class PermalinkEdit extends LitElement {
   }
 
   setPermalink(): void {
-    this.permalink = this._domain[0].innerHTML + this._slugInput[0].value;
+    this.permalink = this.permalinkBase + this._slugInput[0].value;
   }
 
   static styles = css`
