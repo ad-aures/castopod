@@ -6,8 +6,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-// Add custom column for shield
-class AddCustomColumnForUser extends Migration
+class AddIsOwnerToUsers extends Migration
 {
     public function up(): void
     {
