@@ -194,5 +194,8 @@ fi
 echo "Using config:"
 cat /opt/castopod/.env
 
+cd /opt/castopod
+php spark castopod:database-update
+
 /usr/sbin/crond -f /crontab.txt -L /dev/stdout &
 /usr/local/sbin/php-fpm
