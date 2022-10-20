@@ -246,23 +246,9 @@ class InstallController extends Controller
      */
     public function migrate(): void
     {
-        $migrations = Services::migrations();
+        $migrate = Services::migrations();
 
-        $migrations->setNamespace('CodeIgniter\Settings')
-            ->latest();
-        $migrations->setNamespace('CodeIgniter\Shield')
-            ->latest();
-        $migrations->setNamespace('Modules\Fediverse')
-            ->latest();
-        $migrations->setNamespace(APP_NAMESPACE)
-            ->latest();
-        $migrations->setNamespace('Modules\WebSub')
-            ->latest();
-        $migrations->setNamespace('Modules\Auth')
-            ->latest();
-        $migrations->setNamespace('Modules\PremiumPodcasts')
-            ->latest();
-        $migrations->setNamespace('Modules\Analytics')
+        $migrate->setNamespace(null)
             ->latest();
     }
 

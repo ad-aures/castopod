@@ -44,21 +44,7 @@ class AboutController extends BaseController
     {
         $migrate = Services::migrations();
 
-        $migrate->setNamespace('CodeIgniter\Settings')
-            ->latest();
-        $migrate->setNamespace('CodeIgniter\Shield')
-            ->latest();
-        $migrate->setNamespace('Modules\Fediverse')
-            ->latest();
-        $migrate->setNamespace(APP_NAMESPACE)
-            ->latest();
-        $migrate->setNamespace('Modules\WebSub')
-            ->latest();
-        $migrate->setNamespace('Modules\Auth')
-            ->latest();
-        $migrate->setNamespace('Modules\PremiumPodcasts')
-            ->latest();
-        $migrate->setNamespace('Modules\Analytics')
+        $migrate->setNamespace(null)
             ->latest();
 
         return redirect()->back()
