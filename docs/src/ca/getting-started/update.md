@@ -9,70 +9,86 @@ Després d'instal·lar Castopod, és possible que vulgueu actualitzar la vostra
 instància a la darrera versió per gaudir de les últimes funcions ✨, correccions
 d'errors 🐛 i millores de rendiment ⚡.
 
-## Instruccions d'actualització automàtica
+## Update instructions
 
-> Aviat... 👀
+0. ⚠️ Before any update, we highly recommend you backup your Castopod files and
+   database.
 
-## Instruccions d'actualització manual
+   - cf.
+     [Should I make a backup before updating?](#should-i-make-a-backup-before-updating)
 
-1. Aneu a la
-   [pàgina de llançaments](https://code.castopod.org/adaures/castopod/-/releases)
-   i comproveu si la vostra instància està actualitzada amb la darrera versió de
-   Castopod
+1. Go to the
+   [releases page](https://code.castopod.org/adaures/castopod/-/releases) and
+   see if your instance is up to date with the latest Castopod version
 
-   - [On puc trobar la meva versió de Castopod?](#where-can-i-find-my-castopod-version)
+   - cf.
+     [Where can I find my Castopod version?](#where-can-i-find-my-castopod-version)
 
-2. Baixeu l'últim paquet de llançament anomenat `Castopod Package`, podeu triar
-   entre els fitxers `zip` o `tar.gz`
+2. Download the latest release package named `Castopod Package`, you may choose
+   between the `zip` or `tar.gz` archives
 
-   - ⚠️ Assegureu-vos de descarregar el paquet Castopod i **NO** el codi font
+   - ⚠️ Make sure you download the Castopod Package and **NOT** the Source Code
+   - Note that you can also download the latest package from
+     [castopod.org](https://castopod.org/)
 
-3. Al vostre servidor:
+3. On your server:
 
-   - Elimina tots els fitxers excepte `.env` i `public/media`
-   - Copieu els fitxers nous del paquet descarregat al vostre servidor
+   - Remove all files except `.env` and `public/media`
+   - Copy the new files from the downloaded package into your server
 
-     ::: info Nota
+     ::: info Note
 
-     És possible que hàgiu de restablir els permisos dels fitxers durant el
-     procés d'instal·lació. Comproveu els [Detalls de seguretat](./security.md).
+     You may need to reset files permissions as during the install process.
+     Check [Security Concerns](./security.md).
 
      :::
 
-4. Les diferents versions poden incloure instruccions d'actualització
-   addicionals (vegeu la
-   [pàgina de versions](https://code.castopod.org/adaures/castopod/-/releases)).
-   Normalment són scripts de migració de bases de dades en format `.sql` per
-   actualitzar l'esquema de la base de dades.
+4. Update your database schema from your `Castopod Admin` > `About` page or by
+   running:
 
-   - 👉 Assegureu-vos que executeu els scripts al vostre panell phpmyadmin o
-     utilitzeu la línia d'ordres per actualitzar la base de dades juntament amb
-     els fitxers del paquet.
-   - [Fa molt de temps que no actualitzo la meva instància... Què hauria de fer?](#i-havent-updated-my-instance-in-a-long-time-what-should-i-do)
+   ```bash
+   php spark castopod:database-update
+   ```
 
-5. Si utilitzeu redis, esborreu la memòria cau.
-6. ✨ Gaudiu de la vostra nova instància, tot fet i preparat!
+5. Clear your cache from your `Castopod Admin` > `Settings` > `general` >
+   `Housekeeping`
+6. ✨ Enjoy your fresh instance, you're all done!
+
+::: info Note
+
+Releases may come with additional update instructions (see
+[releases page](https://code.castopod.org/adaures/castopod/-/releases)).
+
+- cf.
+  [I haven't updated my instance in a long time… What should I do?](#i-havent-updated-my-instance-in-a-long-time-what-should-i-do)
+
+:::
+
+## Fully Automated updates
+
+> Aviat... 👀
 
 ## Preguntes més freqüents (FAQ)
 
 ### On puc trobar la meva versió de Castopod?
 
-Aneu al vostre panell de control de Castopod, la versió es mostra a la cantonada
-inferior esquerra.
+Go to your Castopod admin panel, the version is displayed on the bottom left
+corner.
 
-Alternativament, podeu trobar la versió al fitxer
-`app > Config > Constants.php`.
+Alternatively, you can find the version in the `app > Config > Constants.php`
+file.
 
 ### Fa temps que no actualitzo la meva instància... Què hauria de fer?
 
-Cap problema. Només heu d'obtenir l'última versió tal com es descriu
-anteriorment. Només, quan seguiu les instruccions de la versió en qüestió (4),
-realitzeu-les de manera seqüencial, de la més antiga a la més nova.
+No problem! Just get the latest release as described above. Only, when going
+through the release instructions (4), perform them sequentially, from the oldest
+to the newest.
 
 > És possible que vulgueu fer una còpia de seguretat de la vostra instància en
 > funció del temps que no heu actualitzat Castopod.
 
-Per exemple, si sou a `v1.0.0-alpha.42` i voleu actualitzar a `v1.0.0-beta.1`:
+For example, if you're on `v1.0.0-alpha.42` and would like to upgrade to
+`v1.0.0-beta.1`:
 
 0. (molt recomanable) Feu una còpia de seguretat dels vostres fitxers i base de
    dades.
@@ -88,7 +104,7 @@ Per exemple, si sou a `v1.0.0-alpha.42` i voleu actualitzar a `v1.0.0-beta.1`:
 
 ### Hauria de fer una còpia de seguretat abans d'actualitzar?
 
-T'aconsellem que ho facis, perquè no ho perdis tot si alguna cosa va malament!
+We advise you do, so you don't lose everything if anything goes wrong!
 
-De manera més general, us aconsellem que feu còpies de seguretat periòdiques
-dels vostres fitxers i base de dades de Castopod per evitar que ho perdeu tot...
+More generally, we advise you make regular backups of your Castopod files and
+database to prevent you from losing it all…

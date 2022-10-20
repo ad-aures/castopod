@@ -33,6 +33,7 @@ return [
     'settings' => 'الإعدادات',
     'settings-general' => 'العامة',
     'settings-theme' => 'الحلة',
+    'about' => 'About',
     'account' => [
         'my-account' => 'حسابي',
         'change-password' => 'تغيير الكلمة السرية',

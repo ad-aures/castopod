@@ -33,6 +33,7 @@ return [
     'settings' => 'Arventennoù',
     'settings-general' => 'Hollek',
     'settings-theme' => 'Neuz',
+    'about' => 'About',
     'account' => [
         'my-account' => 'Ma c\'hont',
         'change-password' => 'Kemmañ ar ger-tremen',

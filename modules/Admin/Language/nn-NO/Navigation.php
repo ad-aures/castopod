@@ -33,6 +33,7 @@ return [
     'settings' => 'Innstillingar',
     'settings-general' => 'Generelt',
     'settings-theme' => 'Bunad',
+    'about' => 'About',
     'account' => [
         'my-account' => 'Kontoen min',
         'change-password' => 'Endre passord',

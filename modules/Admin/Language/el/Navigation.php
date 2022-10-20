@@ -33,6 +33,7 @@ return [
     'settings' => 'Ρυθμίσεις',
     'settings-general' => 'Γενικά',
     'settings-theme' => 'Θέμα',
+    'about' => 'About',
     'account' => [
         'my-account' => 'Ο λογαριασμός μου',
         'change-password' => 'Αλλαγή κωδικού πρόσβασης',

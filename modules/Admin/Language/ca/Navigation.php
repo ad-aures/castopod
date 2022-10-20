@@ -33,6 +33,7 @@ return [
     'settings' => 'Preferències',
     'settings-general' => 'General',
     'settings-theme' => 'Tema',
+    'about' => 'About',
     'account' => [
         'my-account' => 'El meu compte',
         'change-password' => 'Canviar la contrasenya',

@@ -33,6 +33,7 @@ return [
     'settings' => 'Nastavenia',
     'settings-general' => 'Všeobecné',
     'settings-theme' => 'Vzhľad',
+    'about' => 'About',
     'account' => [
         'my-account' => 'Môj účet',
         'change-password' => 'Zmeniť heslo',

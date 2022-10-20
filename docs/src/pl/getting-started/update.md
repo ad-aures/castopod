@@ -9,11 +9,13 @@ After installing Castopod, you may want to update your instance to the latest
 version in order to enjoy the latest features ✨, bug fixes 🐛 and performance
 improvements ⚡.
 
-## Automatic update instructions
+## Update instructions
 
-> Coming soon... 👀
+0. ⚠️ Before any update, we highly recommend you backup your Castopod files and
+   database.
 
-## Manual update instructions
+   - cf.
+     [Should I make a backup before updating?](#should-i-make-a-backup-before-updating)
 
 1. Go to the
    [releases page](https://code.castopod.org/adaures/castopod/-/releases) and
@@ -26,6 +28,8 @@ improvements ⚡.
    between the `zip` or `tar.gz` archives
 
    - ⚠️ Make sure you download the Castopod Package and **NOT** the Source Code
+   - Note that you can also download the latest package from
+     [castopod.org](https://castopod.org/)
 
 3. On your server:
 
@@ -39,17 +43,30 @@ improvements ⚡.
 
      :::
 
-4. Releases may come with additional update instructions (see
-   [releases page](https://code.castopod.org/adaures/castopod/-/releases)). They
-   are usually database migration scripts in `.sql` format to update your
-   database schema.
+4. Update your database schema from your `Castopod Admin` > `About` page or by
+   running:
 
-   - 👉 Make sure you run the scripts on your phpmyadmin panel or using command
-     line to update the database along with the package files!
-   - I haven't updated my instance in a long time… What should I do?
+   ```bash
+   php spark castopod:database-update
+   ```
 
-5. If you are using redis, clear your cache.
+5. Clear your cache from your `Castopod Admin` > `Settings` > `general` >
+   `Housekeeping`
 6. ✨ Enjoy your fresh instance, you're all done!
+
+::: info Note
+
+Releases may come with additional update instructions (see
+[releases page](https://code.castopod.org/adaures/castopod/-/releases)).
+
+- cf.
+  [I haven't updated my instance in a long time… What should I do?](#i-havent-updated-my-instance-in-a-long-time-what-should-i-do)
+
+:::
+
+## Fully Automated updates
+
+> Coming soon... 👀
 
 ## Frequently asked questions (FAQ)
 

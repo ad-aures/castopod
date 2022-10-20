@@ -33,6 +33,7 @@ return [
     'settings' => 'Configuración',
     'settings-general' => 'General',
     'settings-theme' => 'Tema',
+    'about' => 'About',
     'account' => [
         'my-account' => 'Mi cuenta',
         'change-password' => 'Cambiar contraseña',

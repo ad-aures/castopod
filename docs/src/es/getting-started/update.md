@@ -9,75 +9,85 @@ Después de instalar Castopod, es posible que quieras actualizar tu instancia a
 la última versión para disfrutar de las últimas características ✨, correcciones
 de errores 🐛 y mejoras de rendimiento ⚡.
 
-## Instrucciones de actualización automática
+## Update instructions
 
-> Próximamente... 👀
-
-## Instrucciones de actualización manual
-
-1. Vaya a la página de
-   [lanzamientos](https://code.castopod.org/adaures/castopod/-/releases) y vea
-   si su instancia está actualizada con la última versión de Castopod
+0. ⚠️ Before any update, we highly recommend you backup your Castopod files and
+   database.
 
    - cf.
-     [¿Dónde puedo encontrar mi versión de Castopod?](#where-can-i-find-my-castopod-version)
+     [Should I make a backup before updating?](#should-i-make-a-backup-before-updating)
 
-2. Descargue el último paquete de lanzamiento llamado `Paquete Castopod`, puede
-   elegir entre los archivos `zip` o `tar.gz`
+1. Go to the
+   [releases page](https://code.castopod.org/adaures/castopod/-/releases) and
+   see if your instance is up to date with the latest Castopod version
 
-   - ⚠️ Asegúrate de descargar el paquete de Castopod y **NO** el código fuente
+   - cf.
+     [Where can I find my Castopod version?](#where-can-i-find-my-castopod-version)
 
-3. En tu servidor:
+2. Download the latest release package named `Castopod Package`, you may choose
+   between the `zip` or `tar.gz` archives
 
-   - Eliminar todos los archivos excepto `.env` y la carpeta `public/media`
-   - Copie los nuevos archivos del paquete descargado en su servidor
+   - ⚠️ Make sure you download the Castopod Package and **NOT** the Source Code
+   - Note that you can also download the latest package from
+     [castopod.org](https://castopod.org/)
 
-     ::: Nota de información
+3. On your server:
 
-     Es posible que necesite restablecer los permisos de los archivos después el
-     proceso de instalación. Compruebe
-     [preocupaciones de seguridad](./security.md).
+   - Remove all files except `.env` and `public/media`
+   - Copy the new files from the downloaded package into your server
+
+     ::: info Note
+
+     You may need to reset files permissions as during the install process.
+     Check [Security Concerns](./security.md).
 
      :::
 
-4. Las versiones pueden venir con instrucciones de actualización adicionales
-   (véase la página de
-   [lanzamientos](https://code.castopod.org/adaures/castopod/-/releases)).
-   Generalmente son scripts de migración de base de datos en formato `.sql` para
-   actualizar su esquema de base de datos.
+4. Update your database schema from your `Castopod Admin` > `About` page or by
+   running:
 
-   - 👉 ¡Asegúrate de ejecutar los scripts en tu panel phpmyadmin o usando la
-     línea de comandos para actualizar la base de datos junto con los archivos
-     de paquete!
-   - cf.
+   ```bash
+   php spark castopod:database-update
+   ```
 
-No he actualizado mi instancia en mucho tiempo… ¿Qué debo hacer?</p></li> </ul>
+5. Clear your cache from your `Castopod Admin` > `Settings` > `general` >
+   `Housekeeping`
+6. ✨ Enjoy your fresh instance, you're all done!
 
-     5. Si estás usando redis, limpia tu caché.
+::: info Note
 
-6. ✨ ¡Disfruta de tu instancia recién instalada, todo listo!
+Releases may come with additional update instructions (see
+[releases page](https://code.castopod.org/adaures/castopod/-/releases)).
+
+- cf.
+  [I haven't updated my instance in a long time… What should I do?](#i-havent-updated-my-instance-in-a-long-time-what-should-i-do)
+
+:::
+
+## Fully Automated updates
+
+> Próximamente... 👀
 
 ## Preguntas Frecuentes (FAQ)
 
 ### ¿Dónde puedo encontrar mi versión de Castopod?
 
-Ve al panel de administración de Castopod, la versión se muestra en la esquina
-inferior izquierda.
+Go to your Castopod admin panel, the version is displayed on the bottom left
+corner.
 
-Alternativamente, puedes encontrar la versión en el archivo
-`app > Config > Constants.php`.
+Alternatively, you can find the version in the `app > Config > Constants.php`
+file.
 
 ### No he actualizado mi instancia en mucho tiempo… ¿Qué debo hacer?
 
-¡No hay problema! Sólo obtenga la última versión tal y como se describe
-anteriormente. Simplemente cuando vaya a través de las instrucciones de
-lanzamiento (4), realice la actualización secuencialmente, desde el más antiguo
-hasta el más reciente.
+No problem! Just get the latest release as described above. Only, when going
+through the release instructions (4), perform them sequentially, from the oldest
+to the newest.
 
 > Puede que quieras hacer una copia de seguridad de tu instancia dependiendo del
 > tiempo que no hayas actualizado Castopod.
 
-Por ejemplo, si estás en `v1.0.0-alpha.42` y te gustaría actualizar a
+For example, if you're on `v1.0.0-alpha.42` and would like to upgrade to
 `v1.0.0-beta.1`:
 
 0. (altamente recomendado) Haga una copia de seguridad de sus archivos y base de
@@ -94,7 +104,7 @@ Por ejemplo, si estás en `v1.0.0-alpha.42` y te gustaría actualizar a
 
 ### ¿Debo hacer una copia de seguridad antes de actualizar?
 
-Te aconsejamos que hagas, así que no lo pierdas todo si algo sale mal!
+We advise you do, so you don't lose everything if anything goes wrong!
 
-De manera más general, te aconsejamos hacer copias de seguridad regulares de tus
-archivos de Castopod y base de datos para evitar que pierdas todo…
+More generally, we advise you make regular backups of your Castopod files and
+database to prevent you from losing it all…

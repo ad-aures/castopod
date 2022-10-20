@@ -8,60 +8,85 @@ sidebarDepth: 3
 安装 Castopod 后，你可能希望将实例更新到最新版本 版本以享受最新功能 ✨, 修复错误
 🐛 和性能提升 ⚡。
 
-## 自动更新说明
+## Update instructions
 
-> 即将到来... 👀
+0. ⚠️ Before any update, we highly recommend you backup your Castopod files and
+   database.
 
-## 手动更新说明
+   - cf.
+     [Should I make a backup before updating?](#should-i-make-a-backup-before-updating)
 
-1. 跳转至 [发布页面](https://code.castopod.org/adaures/castopod/-/releases) 并且
-   查看自己的实例是否为最新版本的 Castopod
+1. Go to the
+   [releases page](https://code.castopod.org/adaures/castopod/-/releases) and
+   see if your instance is up to date with the latest Castopod version
 
-   - 参考
-     [在哪里可以找到我的 Castopod 版本号？](#where-can-i-find-my-castopod-version)
+   - cf.
+     [Where can I find my Castopod version?](#where-can-i-find-my-castopod-version)
 
-2. 下载命名为 `Castopod Package`的最新版本，你可以选择 `zip` 或 `tar.gz` 压缩包
+2. Download the latest release package named `Castopod Package`, you may choose
+   between the `zip` or `tar.gz` archives
 
-   - ⚠️ 请确保你下载的是 Castopod 软件包而 **不是** 源代码
+   - ⚠️ Make sure you download the Castopod Package and **NOT** the Source Code
+   - Note that you can also download the latest package from
+     [castopod.org](https://castopod.org/)
 
-3. 在你的服务器上：
+3. On your server:
 
-   - 删除除 `.env` 文件和 `public/media` 目录之外的所有文件
-   - 将下载软件包中的新文件复制到你的服务器中
+   - Remove all files except `.env` and `public/media`
+   - Copy the new files from the downloaded package into your server
 
-     ::: 注意
+     ::: info Note
 
-     你可能在更新过程中需要重置文件权限。 检查 [安全问题](./security.md)。
+     You may need to reset files permissions as during the install process.
+     Check [Security Concerns](./security.md).
 
      :::
 
-4. 新版本可能有额外的更新说明(请参阅
-   [发布页面](https://code.castopod.org/adaures/castopod/-/releases))。 通常以
-   `.sql` 格式的数据库迁移脚本更新你的数据库结构。
+4. Update your database schema from your `Castopod Admin` > `About` page or by
+   running:
 
-   - 👉 确保在 phpmyadmin 面板上运行脚本或使用命令 行来更新数据库以及包文件！
-   - 参阅
-     [我很长时间没有更新我的实例… 我该怎么办？](#i-havent-updated-my-instance-in-a-long-time-what-should-i-do)
+   ```bash
+   php spark castopod:database-update
+   ```
 
-5. 如果你正在使用 redis，请清除缓存。
-6. ✨ 享受你的新实例, 你已经更新完毕！
+5. Clear your cache from your `Castopod Admin` > `Settings` > `general` >
+   `Housekeeping`
+6. ✨ Enjoy your fresh instance, you're all done!
+
+::: info Note
+
+Releases may come with additional update instructions (see
+[releases page](https://code.castopod.org/adaures/castopod/-/releases)).
+
+- cf.
+  [I haven't updated my instance in a long time… What should I do?](#i-havent-updated-my-instance-in-a-long-time-what-should-i-do)
+
+:::
+
+## Fully Automated updates
+
+> 即将到来... 👀
 
 ## 常见问题（FAQ）
 
 ### 在哪里可以找到我的 Castopod 版本号？
 
-跳转到你的 Castopod 管理面板，版本号显示在左下角。
+Go to your Castopod admin panel, the version is displayed on the bottom left
+corner.
 
-或者，你可以在 `应用程序 > 配置 > Constants.php` 文件中找到版本号。
+Alternatively, you can find the version in the `app > Config > Constants.php`
+file.
 
 ### 我很长时间没有更新我的实例… 我该怎么办？
 
-没问题！ 只需如上所述获取最新版本。 在执行上文步骤 (4) 时，将脚本按旧到新依次执
-行。
+No problem! Just get the latest release as described above. Only, when going
+through the release instructions (4), perform them sequentially, from the oldest
+to the newest.
 
 > 你可能想要备份你的实例，这取决于您多久没有更新过 Castopod 。
 
-例如，如果你在 `v1.0.0-alpha.42` 并想要升级到 `v1.0.0-beta.1`
+For example, if you're on `v1.0.0-alpha.42` and would like to upgrade to
+`v1.0.0-beta.1`:
 
 0. (强烈推荐) 备份你的文件和数据库。
 
@@ -74,6 +99,7 @@ sidebarDepth: 3
 
 ### 我是否应该在更新前备份？
 
-我们建议你这样做，这样就不会在出现任何问题时丢失数据！
+We advise you do, so you don't lose everything if anything goes wrong!
 
-更笼统地说，我们建议你定期备份您的 Castopod 文件和 数据库，防止丢失所有内容……
+More generally, we advise you make regular backups of your Castopod files and
+database to prevent you from losing it all…
