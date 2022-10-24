@@ -21,6 +21,8 @@ can be added as a cache handler.
 - `develop` [unstable], latest development branch build
 - `beta` [stable], latest beta version build
 - `1.0.0-beta.x` [stable], specific beta version build (since `1.0.0-beta.22`)
+- `latest` [stable], latest version build
+- `1.x.x` [stable], specific version build (since `1.0.0`)
 
 ## Example usage
 
@@ -33,7 +35,7 @@ can be added as a cache handler.
 
     services:
       app:
-        image: castopod/app:beta
+        image: castopod/app:latest
         container_name: "castopod-app"
         volumes:
           - castopod-media:/opt/castopod/public/media
@@ -51,7 +53,7 @@ can be added as a cache handler.
         restart: unless-stopped
 
       web-server:
-        image: castopod/web-server:beta
+        image: castopod/web-server:latest
         container_name: "castopod-web-server"
         volumes:
           - castopod-media:/var/www/html/media
