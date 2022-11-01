@@ -1,3 +1,10 @@
+## [1.0.1](https://code.castopod.org/adaures/castopod/compare/v1.0.0...v1.0.1) (2022-11-01)
+
+### Bug Fixes
+
+- **platforms:** trim platform url before validation and storage
+  ([259fe5f](https://code.castopod.org/adaures/castopod/commit/259fe5f697a833e268cde88e959bc19bd662edf6))
+
 # 1.0.0 (2022-10-20)
 
 ### Bug Fixes
