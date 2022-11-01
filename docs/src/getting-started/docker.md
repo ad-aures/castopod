@@ -5,13 +5,15 @@ sidebarDepth: 3
 
 # Official Docker images
 
-Castopod pushes 2 Docker images to the Docker Hub during its automated build
+Castopod pushes 3 Docker images to the Docker Hub during its automated build
 process:
 
 - [**`castopod/app`**](https://hub.docker.com/r/castopod/app): the app bundle
   with all of Castopod dependencies
 - [**`castopod/web-server`**](https://hub.docker.com/r/castopod/web-server): an
   Nginx configuration for Castopod
+- [**`castopod/video-clipper`**](https://hub.docker.com/r/castopod/video-clipper):
+  an optional image building videoclips thanks to ffmpeg
 
 Additionally, Castopod requires a MySQL-compatible database. A Redis database
 can be added as a cache handler.
@@ -85,6 +87,21 @@ can be added as a cache handler.
         networks:
           - castopod-app
 
+      # this container is optional
+      # add this if you want to use the videoclips feature
+      ffmpeg:
+        image: castopod/video-clipper:latest
+        container_name: "castopod-video-clipper"
+        volumes:
+          - castopod-media:/opt/castopod/public/media
+        environment:
+          MYSQL_DATABASE: castopod
+          MYSQL_USER: castopod
+          MYSQL_PASSWORD: changeme
+        networks:
+          - castopod-db
+        restart: unless-stopped
+
     volumes:
       castopod-media:
       castopod-db:
@@ -116,6 +133,16 @@ can be added as a cache handler.
 5.  You're all set, start podcasting! 🎙️🚀
 
 ## Environment Variables
+
+- **castopod/video-clipper**
+
+  | Variable name              | Type (`default`) | Default          |
+  | -------------------------- | ---------------- | ---------------- |
+  | **`CP_DATABASE_HOSTNAME`** | ?string          | `"mariadb"`      |
+  | **`CP_DATABASE_NAME`**     | ?string          | `MYSQL_DATABASE` |
+  | **`CP_DATABASE_USERNAME`** | ?string          | `MYSQL_USER`     |
+  | **`CP_DATABASE_PASSWORD`** | ?string          | `MYSQL_PASSWORD` |
+  | **`CP_DATABASE_PREFIX`**   | ?string          | `"cp_"`          |
 
 - **castopod/app**
 

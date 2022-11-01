@@ -1,10 +1,3 @@
-FROM docker.io/alpine:3.16 AS ffmpeg-downloader
-
-RUN apk add --no-cache curl && \
-    curl https://johnvansickle.com/ffmpeg/releases/ffmpeg-5.1.1-amd64-static.tar.xz -o ffmpeg.tar.xz && \
-    mkdir ffmpeg && \
-    tar -xJf ffmpeg.tar.xz -C ffmpeg --strip-components 1
-
 FROM docker.io/php:8.1-fpm-alpine3.16
 
 COPY docker/production/app/entrypoint.sh /entrypoint.sh
@@ -12,9 +5,9 @@ COPY docker/production/app/entrypoint.sh /entrypoint.sh
 COPY docker/production/app/uploads.ini /usr/local/etc/php/conf.d/uploads.ini
 
 RUN echo "* * * * * /usr/local/bin/php /opt/castopod/public/index.php scheduled-activities" > /crontab.txt && \
-    echo "* * * * 10 /usr/local/bin/php /opt/castopod/public/index.php scheduled-video-clips" >> /crontab.txt && \
     echo "* * * * * /usr/local/bin/php /opt/castopod/public/index.php scheduled-websub-publish" >> /crontab.txt
 
+# TODO: remove freetype (package and gd support) and ffmpeg
 RUN apk add --no-cache libpng icu-libs freetype libwebp libjpeg-turbo libxpm ffmpeg && \
     apk add --no-cache --virtual .php-ext-build-dep freetype-dev libpng-dev libjpeg-turbo-dev libwebp-dev zlib-dev libxpm-dev icu-dev && \
     docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp --with-xpm && \
@@ -23,7 +16,6 @@ RUN apk add --no-cache libpng icu-libs freetype libwebp libjpeg-turbo libxpm ffm
     apk del .php-ext-build-dep
 
 COPY castopod /opt/castopod
-COPY --from=ffmpeg-downloader /ffmpeg/ffmpeg /ffmpeg/ffprobe /ffmpeg/qt-faststart /usr/local/bin/
 
 RUN chmod 544 /entrypoint.sh && \
     chmod 444 /crontab.txt && \
