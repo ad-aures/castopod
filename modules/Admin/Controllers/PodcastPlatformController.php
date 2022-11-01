@@ -70,7 +70,7 @@ class PodcastPlatformController extends BaseController
             $this->request->getPost('platforms')
             as $platformSlug => $podcastPlatform
         ) {
-            $podcastPlatformUrl = $podcastPlatform['url'];
+            $podcastPlatformUrl = trim((string) $podcastPlatform['url']);
             if ($podcastPlatformUrl === null) {
                 continue;
             }
@@ -79,11 +79,12 @@ class PodcastPlatformController extends BaseController
                 continue;
             }
 
+            $podcastPlatformAccountId = trim((string) $podcastPlatform['account_id']);
             $podcastsPlatformsData[] = [
                 'platform_slug' => $platformSlug,
                 'podcast_id' => $this->podcast->id,
                 'link_url' => $podcastPlatformUrl,
-                'account_id' => $podcastPlatform['account_id'] === '' ? null : $podcastPlatform['account_id'],
+                'account_id' => $podcastPlatformAccountId === '' ? null : $podcastPlatformAccountId,
                 'is_visible' =>
                     array_key_exists('visible', $podcastPlatform) &&
                     $podcastPlatform['visible'] === 'yes',

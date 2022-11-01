@@ -145,6 +145,8 @@ class PlatformModel extends Model
 
     /**
      * @param mixed[] $podcastsPlatformsData
+     *
+     * @return int|false Number of rows inserted or FALSE on failure
      */
     public function savePodcastPlatforms(
         int $podcastId,
@@ -164,6 +166,11 @@ class PlatformModel extends Model
         CODE_SAMPLE;
 
         $this->db->query($deleteJoinQuery, [$podcastId, $platformType]);
+
+        if ($podcastsPlatformsData === []) {
+            // no rows inserted
+            return 0;
+        }
 
         return $this->db
             ->table('podcasts_platforms')
