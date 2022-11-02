@@ -38,7 +38,7 @@ RUN apt-get update \
     libicu-dev \
     libpng-dev \
     libwebp-dev \
-    libjpeg-dev \
+    libjpeg62-turbo-dev \
     libfreetype6-dev \
     zlib1g-dev \
     libzip-dev \
