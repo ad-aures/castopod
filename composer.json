@@ -23,7 +23,7 @@
     "codeigniter4/settings": "^v2.1.0",
     "chrisjean/php-ico": "^1.0.4",
     "melbahja/seo": "^v2.1.1",
-    "codeigniter4/shield": "dev-develop"
+    "codeigniter4/shield": "v1.0.0-beta.3"
   },
   "require-dev": {
     "mikey179/vfsstream": "^v1.6.11",
@@ -51,6 +51,7 @@
     "rector:fix": "vendor/bin/rector process --ansi --memory-limit=2G",
     "style": "vendor/bin/ecs check --ansi",
     "style:fix": "vendor/bin/ecs check --fix --ansi",
+    "generate:auth-docs": "php spark auth:generate-docs",
     "post-install-cmd": [
       "@php vendor/opawg/user-agents-php/src/UserAgentsGenerate.php > vendor/opawg/user-agents-php/src/UserAgents.php",
       "@php vendor/opawg/user-agents-php/src/UserAgentsRSSGenerate.php > vendor/opawg/user-agents-php/src/UserAgentsRSS.php",
