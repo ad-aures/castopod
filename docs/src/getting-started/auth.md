@@ -49,12 +49,12 @@ coupled with custom rules. Roles and permissions are defined at two levels:
 
 <!-- AUTH-PODCAST-ROLES-LIST:START - Do not remove or modify this section -->
 
-| role   | description                                               | permissions                                                                                                                                                                                                                                                           |
-| ------ | --------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Admin  | Has complete control of podcast #{id}.                    | \*                                                                                                                                                                                                                                                                    |
-| Editor | Manages content and publications of podcast #{id}.        | view, edit, manage-import, manage-persons, manage-platforms, manage-publications, interact-as, episodes.view, episodes.create, episodes.edit, episodes.delete, episodes.manage-persons, episodes.manage-clips, episodes.manage-publications, episodes.manage-comments |
-| Author | Manages content of podcast #{id} but cannot publish them. | view, manage-persons, episodes.view, episodes.create, episodes.edit, episodes.manage-persons, episodes.manage-clips                                                                                                                                                   |
-| Guest  | General contributor of the podcast #{id}.                 | view, episodes.view                                                                                                                                                                                                                                                   |
+| role   | description                                               | permissions                                                                                                                                                                                                                                                                                          |
+| ------ | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Admin  | Has complete control of podcast #{id}.                    | \*                                                                                                                                                                                                                                                                                                   |
+| Editor | Manages content and publications of podcast #{id}.        | view, edit, manage-import, manage-persons, manage-platforms, manage-publications, interact-as, episodes.view, episodes.create, episodes.edit, episodes.delete, episodes.manage-persons, episodes.manage-clips, episodes.manage-publications, episodes.manage-comments, episodes.manage-notifications |
+| Author | Manages content of podcast #{id} but cannot publish them. | view, manage-persons, episodes.view, episodes.create, episodes.edit, episodes.manage-persons, episodes.manage-clips                                                                                                                                                                                  |
+| Guest  | General contributor of the podcast #{id}.                 | view, episodes.view                                                                                                                                                                                                                                                                                  |
 
 <!-- AUTH-PODCAST-ROLES-LIST:END -->
 
@@ -73,6 +73,7 @@ coupled with custom rules. Roles and permissions are defined at two levels:
 | manage-contributors          | Can manage contributors of podcast #{id}.                                |
 | manage-platforms             | Can set/remove platform links of podcast #{id}.                          |
 | manage-publications          | Can publish podcast #{id}.                                               |
+| manage-notifications         | Can view and mark notifications as read for podcast #{id}.               |
 | interact-as                  | Can interact as the podcast #{id} to favourite, share or reply to posts. |
 | episodes.view                | Can view dashboard and analytics of podcast #{id}.                       |
 | episodes.create              | Can create episodes for podcast #{id}.                                   |

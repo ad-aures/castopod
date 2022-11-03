@@ -579,7 +579,7 @@ $routes->group(
                 $routes->group('notifications', static function ($routes): void {
                     $routes->get('/', 'NotificationController::list/$1', [
                         'as' => 'notification-list',
-                        'filter' => 'permission:podcast#.view',
+                        'filter' => 'permission:podcast#.manage-notifications',
                     ]);
                     $routes->get('(:num)/mark-as-read', 'NotificationController::markAsRead/$1/$2', [
                         'as' => 'notification-mark-as-read',
