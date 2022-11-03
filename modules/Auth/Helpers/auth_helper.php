@@ -183,7 +183,9 @@ if (! function_exists('get_podcast_groups')) {
         $userPodcastIds = [];
         // extract all podcast ids from groups
         foreach ($podcastGroups as $podcastGroup) {
-            $userPodcastIds[] = substr((string) $podcastGroup, strpos((string) $podcastGroup, '#') + 1, 1);
+            // extract podcast id from group and add it to the list of ids
+            preg_match('~podcast#([0-9]+)-[a-z]+~', $podcastGroup, $matches);
+            $userPodcastIds[] = $matches[1];
         }
 
         return $userPodcastIds;
