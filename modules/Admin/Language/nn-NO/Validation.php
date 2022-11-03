@@ -13,6 +13,4 @@ return [
         '{field} er anten ikkje eit bilete, eller er ikkje breitt og høgt nok.',
     'is_image_ratio' =>
         '{field} er anten ikkje eit bilete, eller har feil forhold mellom høgd og breidd.',
-    'validate_url' =>
-        '{field}-feltet må vera ei gyldig nettadresse (td. https://eksempel.no/).',
 ];

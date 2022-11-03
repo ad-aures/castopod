@@ -13,6 +13,4 @@ return [
         'ou ben {field} non é unha imaxe ou non é suficientemente alta ou ancha.',
     'is_image_ratio' =>
         'ou ben {field} non é unha imaxe ou non ten proporcións axeitadas.',
-    'validate_url' =>
-        'O campo {field} ten que ser un URL válido (ex. https://exemplo.com/).',
 ];

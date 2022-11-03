@@ -13,6 +13,4 @@ return [
         '{field} ist entweder kein Bild, oder es ist nicht breit oder hoch genug.',
     'is_image_ratio' =>
         '{field} ist entweder kein Bild oder nicht das richtige Verhältnis.',
-    'validate_url' =>
-        'Das {field} -Feld muss eine gültige URL sein (z.B. https://example.com/).',
 ];

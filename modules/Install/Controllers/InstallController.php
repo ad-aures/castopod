@@ -154,8 +154,8 @@ class InstallController extends Controller
     public function attemptInstanceConfig(): RedirectResponse
     {
         $rules = [
-            'hostname' => 'required|validate_url',
-            'media_base_url' => 'permit_empty|validate_url',
+            'hostname' => 'required|valid_url_strict',
+            'media_base_url' => 'permit_empty|valid_url_strict',
             'admin_gateway' => 'required',
             'auth_gateway' => 'required|differs[admin_gateway]',
         ];

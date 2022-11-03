@@ -75,7 +75,7 @@ class PodcastPlatformController extends BaseController
                 continue;
             }
 
-            if (! $validation->check($podcastPlatformUrl, 'validate_url')) {
+            if (! $validation->check(htmlentities($podcastPlatformUrl), 'valid_url_strict')) {
                 continue;
             }
 

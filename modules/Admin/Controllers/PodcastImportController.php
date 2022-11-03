@@ -65,7 +65,7 @@ class PodcastImportController extends BaseController
 
         $rules = [
             'handle' => 'required|regex_match[/^[a-zA-Z0-9\_]{1,32}$/]',
-            'imported_feed_url' => 'required|validate_url',
+            'imported_feed_url' => 'required|valid_url_strict',
             'season_number' => 'is_natural_no_zero|permit_empty',
             'max_episodes' => 'is_natural_no_zero|permit_empty',
         ];

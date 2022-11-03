@@ -13,6 +13,4 @@ return [
         '{field} 不是一张图片，或者宽或高度不够。',
     'is_image_ratio' =>
         '{field} 不是图片或比例不正确。',
-    'validate_url' =>
-        '{field} 字段必须是有效的 URL（例如 https://example.com/）。',
 ];
