@@ -52,6 +52,9 @@ to help you kickstart your contribution.
    database.default.database="castopod"
    database.default.username="castopod"
    database.default.password="castopod"
+   database.default.DBPrefix="dev_"
+
+   analytics.salt="DEV_ANALYTICS_SALT"
 
    cache.handler="redis"
    cache.redis.host = "redis"
