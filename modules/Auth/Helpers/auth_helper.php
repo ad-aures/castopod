@@ -136,7 +136,7 @@ if (! function_exists('set_instance_group')) {
 }
 
 if (! function_exists('get_podcast_group')) {
-    function get_podcast_group(User $user, int $podcastId): ?string
+    function get_podcast_group(User $user, int $podcastId, bool $removePrefix = true): ?string
     {
         $podcastGroups = array_filter($user->getGroups() ?? [], static function ($group) use ($podcastId): bool {
             return str_starts_with($group, "podcast#{$podcastId}");
@@ -154,8 +154,12 @@ if (! function_exists('get_podcast_group')) {
             $user->removeGroup(...$podcastGroups);
         }
 
-        // strip the `podcast#{id}.` prefix when returning group
-        return substr((string) $podcastGroup, strlen('podcast#' . $podcastId . '-'));
+        if ($removePrefix) {
+            // strip the `podcast#{id}.` prefix when returning group
+            return substr((string) $podcastGroup, strlen('podcast#' . $podcastId . '-'));
+        }
+
+        return $podcastGroup;
     }
 }
 
@@ -184,7 +188,7 @@ if (! function_exists('get_podcast_groups')) {
         // extract all podcast ids from groups
         foreach ($podcastGroups as $podcastGroup) {
             // extract podcast id from group and add it to the list of ids
-            preg_match('~podcast#([0-9]+)-[a-z]+~', $podcastGroup, $matches);
+            preg_match('~podcast#(\d+)-[a-z]+~', (string) $podcastGroup, $matches);
             $userPodcastIds[] = $matches[1];
         }
 
