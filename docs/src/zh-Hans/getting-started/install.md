@@ -132,6 +132,8 @@ Castopod 仅适用于受支持的 MySQL 5.7 或更高版本的兼容数据库。
 ```ini
 # […]
 
+# […]
+
 email.fromEmail="你的邮件地址"
 email.SMTPHost="你的邮件主机"
 email.SMTPUser="你的邮件用户名"

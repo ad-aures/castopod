@@ -5,13 +5,15 @@ sidebarDepth: 3
 
 # Imatges Docker oficials
 
-Castopod envia 2 imatges de Docker al Docker Hub durant el seu procés de creació
-automatitzada:
+Castopod pushes 3 Docker images to the Docker Hub during its automated build
+process:
 
 - [** code>castopod/app</code>**](https://hub.docker.com/r/castopod/app): el
   paquet incloent Castopod i totes les dependències
 - [**`castopod/web-server`**](https://hub.docker.com/r/castopod/web-server): una
   configuració de Nginx per a Castopod
+- [**`castopod/video-clipper`**](https://hub.docker.com/r/castopod/video-clipper):
+  an optional image building videoclips thanks to ffmpeg
 
 A més, Castopod requereix una base de dades compatible amb MySQL. Es pot afegir
 una base de dades Redis com a gestor de memòria cau.
@@ -21,6 +23,8 @@ una base de dades Redis com a gestor de memòria cau.
 - `develop` [no-estable], darrera versió de la branca de desenvolupament
 - `beta` [stable], latest beta version build
 - `1.0.0-beta.x` [stable], specific beta version build (since `1.0.0-beta.22`)
+- `latest` [stable], latest version build
+- `1.x.x` [stable], specific version build (since `1.0.0`)
 
 ## Exemple d'ús
 
@@ -33,7 +37,7 @@ una base de dades Redis com a gestor de memòria cau.
 
     services:
       app:
-        image: castopod/app:beta
+        image: castopod/app:latest
         container_name: "castopod-app"
         volumes:
           - castopod-media:/opt/castopod/public/media
@@ -51,7 +55,7 @@ una base de dades Redis com a gestor de memòria cau.
         restart: unless-stopped
 
       web-server:
-        image: castopod/web-server:beta
+        image: castopod/web-server:latest
         container_name: "castopod-web-server"
         volumes:
           - castopod-media:/var/www/html/media
@@ -82,6 +86,21 @@ una base de dades Redis com a gestor de memòria cau.
           - castopod-cache:/data
         networks:
           - castopod-app
+
+      # this container is optional
+      # add this if you want to use the videoclips feature
+      ffmpeg:
+        image: castopod/video-clipper:latest
+        container_name: "castopod-video-clipper"
+        volumes:
+          - castopod-media:/opt/castopod/public/media
+        environment:
+          MYSQL_DATABASE: castopod
+          MYSQL_USER: castopod
+          MYSQL_PASSWORD: changeme
+        networks:
+          - castopod-db
+        restart: unless-stopped
 
     volumes:
       castopod-media:
@@ -117,9 +136,19 @@ una base de dades Redis com a gestor de memòria cau.
 
 ## Variables d'entorn
 
+- **castopod/video-clipper**
+
+  | Nom de la variable         | Tipus (`default`) | Default          |
+  | -------------------------- | ----------------- | ---------------- |
+  | **`CP_DATABASE_HOSTNAME`** | ?string           | `"mariadb"`      |
+  | **`CP_DATABASE_NAME`**     | ?string           | `MYSQL_DATABASE` |
+  | **`CP_DATABASE_USERNAME`** | ?string           | `MYSQL_USER`     |
+  | **`CP_DATABASE_PASSWORD`** | ?string           | `MYSQL_PASSWORD` |
+  | **`CP_DATABASE_PREFIX`**   | ?string           | `"cp_"`          |
+
 - **castopod/app**
 
-  | Nom de la variable           | Tipus (`default`)       | Default          |
+  | Nom de la variable           | Type (`default`)        | Default          |
   | ---------------------------- | ----------------------- | ---------------- |
   | **`CP_BASEURL`**             | string                  | `undefined`      |
   | **`CP_MEDIA_BASEURL`**       | ?string                 | `CP_BASEURL`     |
@@ -145,6 +174,6 @@ una base de dades Redis com a gestor de memòria cau.
 
 - **castopod/web-server**
 
-  | Nom de la variable    | Type    | Default |
+  | Variable name         | Type    | Default |
   | --------------------- | ------- | ------- |
   | **`CP_APP_HOSTNAME`** | ?string | `"app"` |

@@ -10,22 +10,22 @@ declare(strict_types=1);
 
 return [
     'list' => [
-        'title' => 'Soundbites',
-        'soundbite' => 'Soundbite',
+        'title' => 'Ljudklipp',
+        'soundbite' => 'Ljudklipp',
     ],
     'messages' => [
-        'createSuccess' => 'Soundbite has been successfully created!',
-        'deleteSuccess' => 'Soundbite has been successfully removed!',
+        'createSuccess' => 'Ljudklipp har skapats!',
+        'deleteSuccess' => 'Ljudklipp har tagits bort!',
     ],
     'form' => [
-        'title' => 'New soundbite',
-        'soundbite_title' => 'Soundbite title',
-        'start_time' => 'Start at',
-        'duration' => 'Duration',
-        'submit' => 'Create soundbite',
+        'title' => 'Nytt ljudklipp',
+        'soundbite_title' => 'Ljudklipp titel',
+        'start_time' => 'Starta vid',
+        'duration' => 'Längd',
+        'submit' => 'Skapa ljudklipp',
     ],
-    'play' => 'Play soundbite',
-    'stop' => 'Stop soundbite',
-    'create' => 'New soundbite',
-    'delete' => 'Delete soundbite',
+    'play' => 'Spela ljudklipp',
+    'stop' => 'Stoppa ljudklipp',
+    'create' => 'Nytt ljudklipp',
+    'delete' => 'Ta bort ljudklipp',
 ];

@@ -9,7 +9,7 @@ declare(strict_types=1);
  */
 
 return [
-    'edit_roles' => "Endre rollene til {username}",
+    'edit_role' => "Edit {username}'s role",
     'ban' => 'Steng ute',
     'unban' => 'Slepp inn att',
     'delete' => 'Slett',
@@ -18,7 +18,7 @@ return [
     'all_users' => 'Alle brukarane',
     'list' => [
         'user' => 'Brukar',
-        'roles' => 'Roller',
+        'role' => 'Role',
         'banned' => 'Utestengd?',
     ],
     'form' => [
@@ -26,14 +26,19 @@ return [
         'username' => 'Brukarnamn',
         'password' => 'Passord',
         'new_password' => 'Nytt passord',
+        'role' => 'Role',
         'roles' => 'Roller',
         'permissions' => 'Løyve',
         'submit_create' => 'Lag brukar',
         'submit_edit' => 'Lagre',
         'submit_password_change' => 'Endre!',
     ],
-    'roles' => [
-        'superadmin' => 'Superstyrar',
+    'delete_form' => [
+        'title' => 'Delete {user}',
+        'disclaimer' =>
+            "You are about to delete {user} permanently. They will not be able to access the admin area anymore.",
+        'understand' => 'I understand, I want to delete {user} permanently',
+        'submit' => 'Delete',
     ],
     'messages' => [
         'createSuccess' =>
@@ -46,6 +51,8 @@ return [
             '{username} is the instance owner, you cannot edit its roles.',
         'banSuperAdminError' =>
             '{username} er superstyrar, og du stengjer ikkje ute ein superstyrar…',
+        'deleteOwnerError' =>
+            '{username} is the instance owner, one does not simply delete the owner…',
         'deleteSuperAdminError' =>
             '{username} er superstyrar, og du slettar ikkje ein superstyrar…',
         'deleteSuccess' => '{username} er sletta.',

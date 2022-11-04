@@ -5,12 +5,14 @@ sidebarDepth: 3
 
 # 官方 Docker 镜像
 
-Castopod 在 Docker Hub 自动构建 程序中将 Docker 镜像推送至 Docker Hub ：
+Castopod 在其自动构建期间会将 3 个 Docker 映像推送到 Docker Hub ：
 
 - [**`castopod/app`**](https://hub.docker.com/r/castopod/app)：应用程序包，包含
   所有 Castopod 依赖关系
 - [**`castopod/web-server`**](https://hub.docker.com/r/castopod/web-server)：Castopod
   的 Nginx 配置
+- [**`castopod/video-clipper`** ](https://hub.docker.com/r/castopod/video-clipper)：
+  感谢 ffmpeg 提供可选图像构建视频剪辑
 
 此外，Castopod 需要一个与 MySQL 兼容的数据库。 Redis 数据库 可以添加为缓存处理器
 。
@@ -20,6 +22,8 @@ Castopod 在 Docker Hub 自动构建 程序中将 Docker 镜像推送至 Docker 
 - `develop` [unstable], 最新开发分支版本
 - `beta` [stable]，最新的 beta 版本构建
 - `1.0.0-beta.x` [stable]，特定 beta 版本构建 (自 `1.0.0-beta.22` 起)
+- `latest` [stable]，最新版本构建
+- `1.x.x` [stable]，特定版本构建（自 `1.0.0` 起）
 
 ## 用法示例：
 
@@ -32,7 +36,7 @@ Castopod 在 Docker Hub 自动构建 程序中将 Docker 镜像推送至 Docker 
 
     services:
       app:
-        image: castopod/app:beta
+        image: castopod/app:latest
         container_name: "castopod-app"
         volumes:
           - castopod-media:/opt/castopod/public/media
@@ -50,7 +54,7 @@ Castopod 在 Docker Hub 自动构建 程序中将 Docker 镜像推送至 Docker 
         restart: unless-stopped
 
       web-server:
-        image: castopod/web-server:beta
+        image: castopod/web-server:latest
         container_name: "castopod-web-server"
         volumes:
           - castopod-media:/var/www/html/media
@@ -82,6 +86,21 @@ Castopod 在 Docker Hub 自动构建 程序中将 Docker 镜像推送至 Docker 
         networks:
           - castopod-app
 
+      # this container is optional
+      # add this if you want to use the videoclips feature
+      ffmpeg:
+        image: castopod/video-clipper:latest
+        container_name: "castopod-video-clipper"
+        volumes:
+          - castopod-media:/opt/castopod/public/media
+        environment:
+          MYSQL_DATABASE: castopod
+          MYSQL_USER: castopod
+          MYSQL_PASSWORD: changeme
+        networks:
+          - castopod-db
+        restart: unless-stopped
+
     volumes:
       castopod-media:
       castopod-db:
@@ -92,7 +111,7 @@ Castopod 在 Docker Hub 自动构建 程序中将 Docker 镜像推送至 Docker 
       castopod-db:
     ```
 
-    你还需要调整一些变量。（例如：`CP_BASEURL`， `MYSQL_ROOT_PASSWORD`，
+    你还需要调整一些变量。 （例如：`CP_BASEURL`， `MYSQL_ROOT_PASSWORD`，
     `MYSQL_PASSSWORD` 和 `CP_ANALYTICS_SALT`）
 
 3.  设置 TLS 反向代理 (SSL/HTTPS)
@@ -114,9 +133,19 @@ Castopod 在 Docker Hub 自动构建 程序中将 Docker 镜像推送至 Docker 
 
 ## 环境变量
 
+- **castopod/video-clipper**
+
+  | 变量名称                   | 类型 (`默认值`) | Default          |
+  | -------------------------- | --------------- | ---------------- |
+  | **`CP_DATABASE_HOSTNAME`** | ?string         | `"mariadb"`      |
+  | **`CP_DATABASE_NAME`**     | ?string         | `MYSQL_DATABASE` |
+  | **`CP_DATABASE_USERNAME`** | ?string         | `MYSQL_USER`     |
+  | **`CP_DATABASE_PASSWORD`** | ?string         | `MYSQL_PASSWORD` |
+  | **`CP_DATABASE_PREFIX`**   | ?string         | `"cp_"`          |
+
 - **castopod/app**
 
-  | 变量名称                     | 类型 (`默认值`)         | Default          |
+  | 变量名称                     | 类型 (`default`)        | Default          |
   | ---------------------------- | ----------------------- | ---------------- |
   | **`CP_BASEURL`**             | string                  | `undefined`      |
   | **`CP_MEDIA_BASEURL`**       | ?string                 | `CP_BASEURL`     |
@@ -142,6 +171,6 @@ Castopod 在 Docker Hub 自动构建 程序中将 Docker 镜像推送至 Docker 
 
 - **castopod/web-server**
 
-  | 变量名称              | Type    | Default |
+  | 变量名称              | Type    | 默认    |
   | --------------------- | ------- | ------- |
   | **`CP_APP_HOSTNAME`** | ?string | `"app"` |

@@ -9,7 +9,7 @@ declare(strict_types=1);
  */
 
 return [
-    'edit_roles' => "Edit {username}'s roles",
+    'edit_role' => "Edit {username}'s role",
     'ban' => 'Ban',
     'unban' => 'Unban',
     'delete' => 'احذف',
@@ -18,7 +18,7 @@ return [
     'all_users' => 'كافة المستخدمين',
     'list' => [
         'user' => 'مستخدم',
-        'roles' => 'الأدوار',
+        'role' => 'Role',
         'banned' => 'Banned?',
     ],
     'form' => [
@@ -26,14 +26,19 @@ return [
         'username' => 'اسم المستخدم',
         'password' => 'كلمة المرور',
         'new_password' => 'كلمة المرور الجديدة',
+        'role' => 'Role',
         'roles' => 'الأدوار',
         'permissions' => 'Permissions',
         'submit_create' => 'Create user',
         'submit_edit' => 'حفظ',
         'submit_password_change' => 'Change!',
     ],
-    'roles' => [
-        'superadmin' => 'Super admin',
+    'delete_form' => [
+        'title' => 'Delete {user}',
+        'disclaimer' =>
+            "You are about to delete {user} permanently. They will not be able to access the admin area anymore.",
+        'understand' => 'I understand, I want to delete {user} permanently',
+        'submit' => 'Delete',
     ],
     'messages' => [
         'createSuccess' =>
@@ -46,6 +51,8 @@ return [
             '{username} is the instance owner, you cannot edit its roles.',
         'banSuperAdminError' =>
             '{username} is a superadmin, one does not simply ban a superadmin…',
+        'deleteOwnerError' =>
+            '{username} is the instance owner, one does not simply delete the owner…',
         'deleteSuperAdminError' =>
             '{username} is a superadmin, one does not simply delete a superadmin…',
         'deleteSuccess' => '{username} has been deleted.',

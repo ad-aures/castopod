@@ -9,26 +9,26 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => "{actorDisplayName}'s comment for {episodeTitle}",
-    'back_to_comments' => 'Back to comments',
+    'title' => "{actorDisplayName}s kommentar till {episodeTitle}",
+    'back_to_comments' => 'Tillbaka till kommentarer',
     'form' => [
-        'episode_message_placeholder' => 'Write a comment…',
-        'reply_to_placeholder' => 'Reply to @{actorUsername}',
-        'submit' => 'Send',
-        'submit_reply' => 'Reply',
+        'episode_message_placeholder' => 'Skriv en kommentar…',
+        'reply_to_placeholder' => 'Svara på @{actorUsername}',
+        'submit' => 'Skicka',
+        'submit_reply' => 'Svara',
     ],
     'likes' => '{numberOfLikes, plural,
-        one {# like}
-        other {# likes}
+        one {# gillar}
+        other {# gillar}
     }',
     'replies' => '{numberOfReplies, plural,
-        one {# reply}
-        other {# replies}
+        one {# svar}
+        other {# svar}
     }',
-    'like' => 'Like',
-    'reply' => 'Reply',
-    'view_replies' => 'View replies ({numberOfReplies})',
-    'block_actor' => 'Block user @{actorUsername}',
-    'block_domain' => 'Block domain @{actorDomain}',
-    'delete' => 'Delete comment',
+    'like' => 'Gilla',
+    'reply' => 'Svara',
+    'view_replies' => 'Visa svar ({numberOfReplies})',
+    'block_actor' => 'Blockera användare @{actorUsername}',
+    'block_domain' => 'Blockera domän @{actorDomain}',
+    'delete' => 'Radera kommentar',
 ];

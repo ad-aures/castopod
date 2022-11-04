@@ -5,13 +5,15 @@ sidebarDepth: 3
 
 # Imágenes oficiales de Docker
 
-Castopod lanza 2 imágenes Docker al Docker Hub durante su proceso de
-construcción automatizada:
+Castopod pushes 3 Docker images to the Docker Hub during its automated build
+process:
 
 - [**`castopod/app`**](https://hub.docker.com/r/castopod/app): el paquete
   completo de Castopod con todas las dependencias.
 - [**`castopod/web-server`**](https://hub.docker.com/r/castopod/web-server): una
   configuración Nginx para Castopod
+- [**`castopod/video-clipper`**](https://hub.docker.com/r/castopod/video-clipper):
+  an optional image building videoclips thanks to ffmpeg
 
 Adicionalmente, Castopod requiere una base de datos compatible con MySQL.
 También se puede añadir una base de datos Redis como gestor de caché.
@@ -21,6 +23,8 @@ También se puede añadir una base de datos Redis como gestor de caché.
 - `develop` [unstable], última rama de desarrollo construida
 - `beta` [stable], latest beta version build
 - `1.0.0-beta.x` [stable], specific beta version build (since `1.0.0-beta.22`)
+- `latest` [stable], latest version build
+- `1.x.x` [stable], specific version build (since `1.0.0`)
 
 ## Ejemplo de uso
 
@@ -33,7 +37,7 @@ También se puede añadir una base de datos Redis como gestor de caché.
 
     services:
       app:
-        image: castopod/app:beta
+        image: castopod/app:latest
         container_name: "castopod-app"
         volumes:
           - castopod-media:/opt/castopod/public/media
@@ -51,7 +55,7 @@ También se puede añadir una base de datos Redis como gestor de caché.
         restart: unless-stopped
 
       web-server:
-        image: castopod/web-server:beta
+        image: castopod/web-server:latest
         container_name: "castopod-web-server"
         volumes:
           - castopod-media:/var/www/html/media
@@ -83,6 +87,21 @@ También se puede añadir una base de datos Redis como gestor de caché.
         networks:
           - castopod-app
 
+      # this container is optional
+      # add this if you want to use the videoclips feature
+      ffmpeg:
+        image: castopod/video-clipper:latest
+        container_name: "castopod-video-clipper"
+        volumes:
+          - castopod-media:/opt/castopod/public/media
+        environment:
+          MYSQL_DATABASE: castopod
+          MYSQL_USER: castopod
+          MYSQL_PASSWORD: changeme
+        networks:
+          - castopod-db
+        restart: unless-stopped
+
     volumes:
       castopod-media:
       castopod-db:
@@ -113,13 +132,23 @@ También se puede añadir una base de datos Redis como gestor de caché.
     `https://castopod.mi_dominio.com/cp-install` para terminar de configurar
     Castopod!
 
-5.  Todo listo, empieza a hacer podcasting! 🎙️🚀
+5.  Todo listo, empieza a hacer podcasting! 🎙️🚀 🎙️🚀
 
 ## Variables de Entorno
 
+- **castopod/video-clipper**
+
+  | Nombre de la Variable      | Tipo (`predeterminado`) | Default          |
+  | -------------------------- | ----------------------- | ---------------- |
+  | **`CP_DATABASE_HOSTNAME`** | ?string                 | `"mariadb"`      |
+  | **`CP_DATABASE_NAME`**     | ?string                 | `MYSQL_DATABASE` |
+  | **`CP_DATABASE_USERNAME`** | ?string                 | `MYSQL_USER`     |
+  | **`CP_DATABASE_PASSWORD`** | ?string                 | `MYSQL_PASSWORD` |
+  | **`CP_DATABASE_PREFIX`**   | ?string                 | `"cp_"`          |
+
 - **castopod/app**
 
-  | Nombre de la Variable        | Tipo (`predeterminado`) | Default          |
+  | Nombre de la variable        | Type (`default`)        | Default          |
   | ---------------------------- | ----------------------- | ---------------- |
   | **`CP_URLBASE`**             | string                  | `undefined`      |
   | **`CP_MEDIA_URLBASE`**       | ?string                 | `CP_BASEURL`     |
@@ -145,6 +174,6 @@ También se puede añadir una base de datos Redis como gestor de caché.
 
 - **castopod/web-server**
 
-  | Nombre de la variable | Type    | Default |
+  | Variable name         | Type    | Default |
   | --------------------- | ------- | ------- |
   | **`CP_APP_HOSTNAME`** | ?string | `"app"` |

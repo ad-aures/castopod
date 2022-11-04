@@ -120,9 +120,7 @@ extensiones:
 
    > Estas tareas así definidas se ejecutarán **cada minuto**. Pero puedes
    > definir una frecuencia más acorde a tus necesidades: cada 5, 10 minutos o
-   > más. Ejemplo: si reemplazas el último asterisco por \*/30 se ejecutará cada
-   > 30 minutos.
-   > ([más ejemplos](https://blog.carreralinux.com.ar/2016/09/ejemplos-de-cron-tareas-linux/))
+   > más.
 
 ### (recomendado) Asistente web de instalación
 
@@ -150,10 +148,9 @@ You may add your email configuration in your instance's `.env` like so:
 ```ini
 # […]
 
-email.fromEmail="your_email_address"
-email.SMTPHost="your_smtp_host"
-email.SMTPUser="your_smtp_user"
-email.SMTPPass="your_smtp_password"
+SMTPHost="your_smtp_host"
+email. SMTPUser="your_smtp_user"
+email. SMTPPass="your_smtp_password"
 ```
 
 #### Email config options

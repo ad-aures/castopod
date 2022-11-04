@@ -10,23 +10,23 @@ declare(strict_types=1);
 
 return [
     'messages' => [
-        'actorNotFound' => 'The account could not be found!',
-        'blockActorSuccess' => '{actor} has been blocked!',
-        'unblockActorSuccess' => 'Actor has been unblocked!',
-        'blockDomainSuccess' => '{domain} has been blocked!',
-        'unblockDomainSuccess' => '{domain} has been unblocked!',
+        'actorNotFound' => 'Det gick inte att hitta kontot!',
+        'blockActorSuccess' => '{actor} har blockerats!',
+        'unblockActorSuccess' => 'Aktören har blivit avblockerad!',
+        'blockDomainSuccess' => '{domain} har blockerats!',
+        'unblockDomainSuccess' => '{domain} har blivit avblockerad!',
     ],
-    'blocked_actors' => 'Blocked accounts',
-    'blocked_domains' => 'Blocked domains',
+    'blocked_actors' => 'Blockerade konton',
+    'blocked_domains' => 'Blockerade domäner',
     'block_lists_form' => [
-        'handle' => 'Account handle',
-        'handle_hint' => 'Input @username@domain account.',
-        'domain' => 'Domain name',
-        'submit' => 'Block!',
+        'handle' => 'Hantera konto',
+        'handle_hint' => 'Skriv in @användarnamn@domänkonto.',
+        'domain' => 'Domännamn',
+        'submit' => 'Blockera!',
     ],
     'list' => [
-        'actor' => 'Account',
-        'domain' => 'Domain name',
-        'unblock' => 'Unblock',
+        'actor' => 'Konto',
+        'domain' => 'Domännamn',
+        'unblock' => 'Avblockera',
     ],
 ];

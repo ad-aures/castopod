@@ -133,7 +133,8 @@ Funkwhale 最初是围绕音乐制作的。 后来，随着项目的发展，引
 
 ## 贡献
 
-喜欢 Castopod 并且想帮忙吗? 请查看以下文档以帮助你入门。
+喜欢 Castopod 并且想帮忙吗? 请查看以下文档以帮助你入门。 请查看以下文档以帮助你
+入门。
 
 ### 行为准则
 
@@ -143,8 +144,8 @@ Castopod 已经通过了一项行为准则，并希望所有的参与者都能�
 
 ### 贡献指南
 
-阅读我们的 [贡献指南](./contributing/guidelines.md) ，了解我们的开发过程。提出错
-误修正和改进想法，以及如何构建和测试 Castopod 。
+阅读我们的 [贡献指南](./contributing/guidelines.md) ，了解我们的开发过程。 提出
+错 误修正和改进想法，以及如何构建和测试 Castopod 。
 
 ## 贡献者 ✨
 
@@ -251,7 +252,8 @@ Castopod 的发展离不开赞助商的支持。 如果你想要帮助我们，�
 
 [GNU Affero General Public License v3.0](https://choosealicense.com/licenses/agpl-3.0/)
 
-Copyright © 2020-present, [Ad Aures](https://adaures.com/).
+Copyright © 2020-present, [Ad Aures](https://adaures.com/). Copyright ©
+2020-present, [Ad Aures](https://adaures.com/).
 https://img.shields.io/gitlab/v/release/2?color=brightgreen&gitlab_url=https%3A%2F%2Fcode.castopod.org%2F&include_prereleases&label=release
 https://img.shields.io/github/license/ad-aures/castopod?color=blue
 https://img.shields.io/badge/contributions-welcome-brightgreen.svg

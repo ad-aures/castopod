@@ -28,10 +28,16 @@ return [
         'submit_add' => 'Ouzhpennañ ur perzhiad pe ur berzhiadez',
         'submit_edit' => 'Hizivaat ar roll',
     ],
-    'roles' => [
-        'podcast_admin' => 'Merour podkastoù',
+    'delete_form' => [
+        'title' => 'Remove {contributor}',
+        'disclaimer' =>
+            'You are about to remove {contributor} from contributors. They will not be able to access "{podcastTitle}" anymore.',
+        'understand' => 'I understand, I want to remove {contributor} from "{podcastTitle}"',
+        'submit' => 'Remove',
     ],
     'messages' => [
+        'editSuccess' => 'Role successfully changed!',
+        'editOwnerError' => "You can't edit the podcast owner!",
         'removeOwnerError' => "Ne c'hellit ket lemel perc'henn ar podkast!",
         'removeSuccess' =>
             'Lamet ho peus {username} diouzh {podcastTitle} gant berzh',

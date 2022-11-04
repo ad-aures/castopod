@@ -9,45 +9,45 @@ declare(strict_types=1);
  */
 
 return [
-    'feed' => 'RSS Podcast feed',
-    'season' => 'Season {seasonNumber}',
-    'list_of_episodes_year' => '{year} episodes ({episodeCount})',
+    'feed' => 'RSS Podcast flöde',
+    'season' => 'Säsong {seasonNumber}',
+    'list_of_episodes_year' => '{year} avsnitt ({episodeCount})',
     'list_of_episodes_season' =>
-        'Season {seasonNumber} episodes ({episodeCount})',
-    'no_episode' => 'No episode found!',
-    'follow' => 'Follow',
-    'followTitle' => 'Follow {actorDisplayName} on the fediverse!',
+        'Säsong {seasonNumber} avsnitt ({episodeCount})',
+    'no_episode' => 'Inga avsnitt hittades!',
+    'follow' => 'Följ',
+    'followTitle' => 'Följ {actorDisplayName} på fediverse!',
     'followers' => '{numberOfFollowers, plural,
-        one {# follower}
-        other {# followers}
+        one {# följare}
+        other {# följare}
     }',
     'posts' => '{numberOfPosts, plural,
-        one {# post}
-        other {# posts}
+        one {# inlägg}
+        other {# inlägg}
     }',
-    'activity' => 'Activity',
-    'episodes' => 'Episodes',
-    'episodes_title' => 'Episodes of {podcastTitle}',
-    'about' => 'About',
+    'activity' => 'Aktivitet',
+    'episodes' => 'Avsnitt',
+    'episodes_title' => 'Avsnitt av {podcastTitle}',
+    'about' => 'Om',
     'stats' => [
-        'title' => 'Stats',
+        'title' => 'Statistik',
         'number_of_seasons' => '{0, plural,
-            one {# season}
-            other {# seasons}
+            one {# säsong}
+            other {# säsonger}
         }',
         'number_of_episodes' => '{0, plural,
-            one {# episode}
-            other {# episodes}
+            one {# avsnitt}
+            other {# avsnitt}
         }',
-        'first_published_at' => 'First episode published on {0, date, medium}',
+        'first_published_at' => 'Första avsnittet publicerades den {0, date, medium}',
     ],
     'sponsor' => 'Sponsor',
-    'funding_links' => 'Funding links for {podcastTitle}',
-    'find_on' => 'Find {podcastTitle} on',
-    'listen_on' => 'Listen on',
+    'funding_links' => 'Finansiera länkar för {podcastTitle}',
+    'find_on' => 'Hitta {podcastTitle} på',
+    'listen_on' => 'Lyssna på',
     'persons' => '{personsCount, plural,
         one {# person}
-        other {# persons}
+        other {# personer}
     }',
-    'persons_list' => 'Persons',
+    'persons_list' => 'Personer',
 ];

@@ -11,16 +11,16 @@ declare(strict_types=1);
 return [
     'instance_groups' => [
         'owner' => [
-            'title' => 'Instance Owner',
-            'description' => 'The Castopod owner.',
+            'title' => 'Instanzbesitzer',
+            'description' => 'Der Castopod-Besitzer.',
         ],
         'superadmin' => [
-            'title' => 'Super admin',
-            'description' => 'Has complete control over Castopod.',
+            'title' => 'Super-Administrator',
+            'description' => 'Hat die vollständige Kontrolle über Castopod.',
         ],
         'manager' => [
             'title' => 'Manager',
-            'description' => 'Manages Castopod\'s content.',
+            'description' => 'Verwaltet Castopods Inhalte.',
         ],
         'podcaster' => [
             'title' => 'Podcaster',
@@ -28,35 +28,35 @@ return [
         ],
     ],
     'instance_permissions' => [
-        'admin.access' => 'Can access the Castopod admin area.',
-        'admin.settings' => 'Can access the Castopod settings.',
-        'users.manage' => 'Can manage Castopod users.',
-        'persons.manage' => 'Can manage persons.',
-        'pages.manage' => 'Can manage pages.',
-        'podcasts.view' => 'Can view all podcasts.',
-        'podcasts.create' => 'Can create new podcasts.',
-        'podcasts.import' => 'Can import podcasts.',
+        'admin.access' => 'Kann auf den Admin-Bereich von Castopod zugreifen.',
+        'admin.settings' => 'Kann auf die Einstellungen von Castopod zugreifen.',
+        'users.manage' => 'Kann Castopod-Benutzer verwalten.',
+        'persons.manage' => 'Kann Mitwirkende verwalten.',
+        'pages.manage' => 'Kann Seiten verwalten.',
+        'podcasts.view' => 'Kann alle Podcasts einsehen.',
+        'podcasts.create' => 'Kann neue Podcasts erstellen.',
+        'podcasts.import' => 'Kann Podcasts importieren.',
         'fediverse.manage-blocks' => 'Can block fediverse actors/domains from interacting with Castopod.',
     ],
     'podcast_groups' => [
         'owner' => [
-            'title' => 'Podcast Owner',
-            'description' => 'The podcast owner.',
+            'title' => 'Podcast-Besitzer',
+            'description' => 'Der Podcast-Besitzer.',
         ],
         'admin' => [
-            'title' => 'Admin',
-            'description' => 'Has complete control of podcast #{id}.',
+            'title' => 'Administrator',
+            'description' => 'Hat die vollständige Kontrolle über Podcast #{id}.',
         ],
         'editor' => [
             'title' => 'Editor',
-            'description' => 'Manages content and publications of podcast #{id}.',
+            'description' => 'Verwaltet Inhalte und Veröffentlichungen von Podcast #{id}.',
         ],
         'author' => [
-            'title' => 'Author',
-            'description' => 'Manages content of podcast #{id} but cannot publish them.',
+            'title' => 'Autor',
+            'description' => 'Verwaltet Inhalte von Podcast #{id}, kann diese aber nicht veröffentlichen.',
         ],
         'guest' => [
-            'title' => 'Guest',
+            'title' => 'Gast',
             'description' => 'General contributor of the podcast #{id}.',
         ],
     ],
@@ -69,12 +69,13 @@ return [
         'manage-subscriptions' => 'Can manage subscriptions of podcast #{id}.',
         'manage-contributors' => 'Can manage contributors of podcast #{id}.',
         'manage-platforms' => 'Can set/remove platform links of podcast #{id}.',
-        'manage-publications' => 'Can publish podcast #{id}.',
+        'manage-publications' => 'Kann Podcast #{id} veröffentlichen.',
+        'manage-notifications' => 'Can view and mark notifications as read for podcast #{id}.',
         'interact-as' => 'Can interact as the podcast #{id} to favourite, share or reply to posts.',
         'episodes.view' => 'Can view dashboards and analytics of podcast #{id}\'s episodes.',
-        'episodes.create' => 'Can create episodes for podcast #{id}.',
-        'episodes.edit' => 'Can edit episodes of podcast #{id}.',
-        'episodes.delete' => 'Can delete episodes of podcast #{id}.',
+        'episodes.create' => 'Kann Folgen für Podcast #{id} erstellen.',
+        'episodes.edit' => 'Kann Folgen von Podcast #{id} bearbeiten.',
+        'episodes.delete' => 'Kann Folgen von Podcast #{id} löschen.',
         'episodes.manage-persons' => 'Can manage episode persons of podcast #{id}.',
         'episodes.manage-clips' => 'Can manage video clips or soundbites of podcast #{id}.',
         'episodes.manage-publications' => 'Can publish/unpublish episodes and posts of podcast #{id}.',
@@ -82,12 +83,12 @@ return [
     ],
 
     // missing keys
-    'code' => 'Your 6-digit code',
+    'code' => 'Ihr 6-stelliger Code',
 
-    'notEnoughPrivilege' => 'You do not have sufficient permissions to access that page.',
-    'set_password' => 'Set your password',
+    'notEnoughPrivilege' => 'Sie haben keine ausreichenden Berechtigungen, um auf diese Seite zuzugreifen.',
+    'set_password' => 'Legen Sie Ihr Passwort fest',
 
     // Welcome email
-    'welcomeSubject' => 'You\'ve been invited to {siteName}',
+    'welcomeSubject' => 'Sie wurden zu {siteName} eingeladen',
     'emailWelcomeMailBody' => 'An account was created for you on {domain}, click on the login link below to set your password. The link is valid for {numberOfHours} hours after this email was sent.',
 ];

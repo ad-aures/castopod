@@ -9,13 +9,13 @@ declare(strict_types=1);
  */
 
 return [
-    'pageNavigation' => 'Page navigation',
-    'first' => 'First',
-    'previous' => 'Previous',
-    'next' => 'Next',
-    'last' => 'Last',
-    'older' => 'Older',
-    'newer' => 'Newer',
-    'invalidTemplate' => '{0} is not a valid Pager template.',
-    'invalidPaginationGroup' => '{0} is not a valid Pagination group.',
+    'pageNavigation' => 'Sidnavigering',
+    'first' => 'Första',
+    'previous' => 'Föregående',
+    'next' => 'Nästa',
+    'last' => 'Sista',
+    'older' => 'Äldre',
+    'newer' => 'Nyare',
+    'invalidTemplate' => '{0} är inte en giltig sidmall.',
+    'invalidPaginationGroup' => '{0} är inte en giltig sidnumreringsgrupp.',
 ];

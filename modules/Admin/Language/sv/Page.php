@@ -9,22 +9,22 @@ declare(strict_types=1);
  */
 
 return [
-    'back_to_home' => 'Back to home',
-    'page' => 'Page',
-    'all_pages' => 'All pages',
-    'create' => 'New page',
-    'go_to_page' => 'Go to page',
-    'edit' => 'Edit page',
-    'delete' => 'Delete page',
+    'back_to_home' => 'Tillbaka till startsidan',
+    'page' => 'Sida',
+    'all_pages' => 'Alla sidor',
+    'create' => 'Ny sida',
+    'go_to_page' => 'Gå till sida',
+    'edit' => 'Redigera sida',
+    'delete' => 'Ta bort sida',
     'form' => [
-        'title' => 'Title',
-        'permalink' => 'Permalink',
-        'content' => 'Content',
-        'submit_create' => 'Create page',
-        'submit_edit' => 'Save',
+        'title' => 'Rubrik',
+        'permalink' => 'Permalänk',
+        'content' => 'Innehåll',
+        'submit_create' => 'Skapa sida',
+        'submit_edit' => 'Spara',
     ],
     'messages' => [
-        'createSuccess' => 'The page “{pageTitle}” was created successfully!',
-        'editSuccess' => 'The page was successfully updated!',
+        'createSuccess' => 'Sidan ”{pageTitle}” skapades framgångsrikt!',
+        'editSuccess' => 'Sidan har uppdaterats!',
     ],
 ];

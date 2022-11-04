@@ -149,7 +149,7 @@ y usar Castopod si quieres alojar tus podcasts.
 ### Castopod vs. otras plataformas de podcast
 
 Hay muchas soluciones para alojar tus podcasts, algunas de las cuales son
-realmente geniales y [muchas de ellas](https://podcastindex. org/apps) están
+realmente geniales y \[muchas de ellas\](https://podcastindex. org/apps) están
 dando el salto al tren del Podcasting 2.0, ¡como ya ha hecho Castopod!
 
 Cada una de estas soluciones difiere entre sí, puedes compararlas en esta

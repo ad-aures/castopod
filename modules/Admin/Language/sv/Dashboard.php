@@ -9,20 +9,20 @@ declare(strict_types=1);
  */
 
 return [
-    'home' => 'Admin dashboard',
-    'welcome_message' => 'Welcome to the admin area!',
+    'home' => 'Admin kontrollpanel',
+    'welcome_message' => 'Välkommen till adminområdet!',
     'podcasts' => [
         'title' => 'Podcasts',
-        'not_found' => 'No published podcast',
-        'last_published' => 'Last published on {lastPublicationDate}',
+        'not_found' => 'Ingen publicerad podcast',
+        'last_published' => 'Senast publicerad den {lastPublicationDate}',
     ],
     'episodes' => [
-        'title' => 'Episodes',
-        'not_found' => 'No published episode',
-        'last_published' => 'Last published on {lastPublicationDate}',
+        'title' => 'Avsnitt',
+        'not_found' => 'Inga publicerade avsnitt',
+        'last_published' => 'Senast publicerad den {lastPublicationDate}',
     ],
     'storage' => [
-        'title' => 'Storage',
-        'subtitle' => '{totalUploaded} out of {totalStorage}',
+        'title' => 'Lagring',
+        'subtitle' => '{totalUploaded} av {totalStorage}',
     ],
 ];

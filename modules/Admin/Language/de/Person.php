@@ -24,7 +24,7 @@ return [
     'form' => [
         'avatar' => 'Profilbild',
         'avatar_size_hint' =>
-            'Avatar must be squared and at least 400px wide and tall.',
+            'Das Profilbild muss quadratisch und mindestens 400px breit und hoch sein.',
         'full_name' => 'Vollständiger Name',
         'full_name_hint' => 'Dies ist der vollständige Name oder der Alias der Person.',
         'unique_name' => 'Eindeutiger Name',

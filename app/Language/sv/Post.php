@@ -9,32 +9,32 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => "{actorDisplayName}'s post",
-    'back_to_actor_posts' => 'Back to {actor} posts',
-    'actor_shared' => '{actor} shared',
-    'reply_to' => 'Reply to @{actorUsername}',
+    'title' => "{actorDisplayName}s inlägg",
+    'back_to_actor_posts' => 'Tillbaka till {actor} inlägg',
+    'actor_shared' => '{actor} delades',
+    'reply_to' => 'Svara på @{actorUsername}',
     'form' => [
-        'message_placeholder' => 'Write a message…',
-        'episode_message_placeholder' => 'Write a message for the episode…',
-        'episode_url_placeholder' => 'Episode URL',
-        'reply_to_placeholder' => 'Reply to @{actorUsername}',
-        'submit' => 'Send',
-        'submit_reply' => 'Reply',
+        'message_placeholder' => 'Skriv ett meddelande…',
+        'episode_message_placeholder' => 'Skriv ett meddelande för avsnittet…',
+        'episode_url_placeholder' => 'Avsnitt URL',
+        'reply_to_placeholder' => 'Svara på @{actorUsername}',
+        'submit' => 'Skicka',
+        'submit_reply' => 'Svara',
     ],
     'favourites' => '{numberOfFavourites, plural,
-        one {# favourite}
-        other {# favourites}
+        one {# favorit}
+        other {# favoriter}
     }',
     'reblogs' => '{numberOfReblogs, plural,
-        one {# share}
-        other {# shares}
+        one {# delning}
+        other {# delningar}
     }',
     'replies' => '{numberOfReplies, plural,
-        one {# reply}
-        other {# replies}
+        one {# svar}
+        other {# svar}
     }',
-    'expand' => 'Expand post',
-    'block_actor' => 'Block user @{actorUsername}',
-    'block_domain' => 'Block domain @{actorDomain}',
-    'delete' => 'Delete post',
+    'expand' => 'Expandera inlägg',
+    'block_actor' => 'Blockera användare @{actorUsername}',
+    'block_domain' => 'Blockera domän @{actorDomain}',
+    'delete' => 'Ta bort inlägg',
 ];

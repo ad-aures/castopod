@@ -26,5 +26,5 @@ return [
     'read_less' => 'Les mindre',
     'see_more' => 'Sjå meir',
     'see_less' => 'Sjå mindre',
-    'legal_notice' => 'Legal notice',
+    'legal_notice' => 'Juridisk merknad',
 ];

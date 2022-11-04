@@ -18,12 +18,12 @@ return [
     'follow' => 'Folgen',
     'followTitle' => 'Folge {actorDisplayName} im Fediversum',
     'followers' => '{numberOfFollowers, plural,
-        one {# follower}
-        other {# followers}
+        one {# Follower}
+        other {# Follower}
     }',
     'posts' => '{numberOfPosts, plural,
-        one {# post}
-        other {# posts}
+        one {# Beitrag}
+        other {# Beiträge}
     }',
     'activity' => 'Aktivitäten',
     'episodes' => 'Episoden',
@@ -32,8 +32,8 @@ return [
     'stats' => [
         'title' => 'Statistiken',
         'number_of_seasons' => '{0, plural,
-            one {# season}
-            other {# seasons}
+            one {# Staffel}
+            other {# Staffeln}
         }',
         'number_of_episodes' => '{0, plural,
             one {# Episode}

@@ -9,15 +9,15 @@ declare(strict_types=1);
  */
 
 return [
-    'go_to_page' => 'View episode page',
-    'dashboard' => 'Episode dashboard',
-    'episode-view' => 'Home',
-    'episode-edit' => 'Edit episode',
-    'episode-persons-manage' => 'Manage persons',
-    'embed-add' => 'Embeddable player',
-    'clips' => 'Clips',
-    'video-clips-list' => 'Video clips',
-    'video-clips-create' => 'New video clip',
-    'soundbites-list' => 'Soundbites',
-    'soundbites-create' => 'New soundbite',
+    'go_to_page' => 'Visa avsnittssida',
+    'dashboard' => 'Avsnittets instrumentpanel',
+    'episode-view' => 'Hem',
+    'episode-edit' => 'Redigera avsnitt',
+    'episode-persons-manage' => 'Hantera personer',
+    'embed-add' => 'Inbäddad spelare',
+    'clips' => 'Klipp',
+    'video-clips-list' => 'Videoklipp',
+    'video-clips-create' => 'Nytt videoklipp',
+    'soundbites-list' => 'Ljudklipp',
+    'soundbites-create' => 'Ny ljudbit',
 ];

@@ -9,29 +9,29 @@ declare(strict_types=1);
  */
 
 return [
-    'your_handle' => 'Your handle',
-    'your_handle_hint' => 'Enter the @username@domain you want to act from.',
+    'your_handle' => 'Ditt handtag',
+    'your_handle_hint' => 'Ange @användarnamn@domän som du vill agera från.',
     'follow' => [
-        'label' => 'Follow',
-        'title' => 'Follow {actorDisplayName}',
-        'subtitle' => 'You are going to follow:',
-        'accountNotFound' => 'The account could not be found.',
-        'remoteFollowNotAllowed' => 'Seems like the account server does not allow remote follows…',
-        'submit' => 'Proceed to follow',
+        'label' => 'Följ',
+        'title' => 'Följ {actorDisplayName}',
+        'subtitle' => 'Du kommer att följa:',
+        'accountNotFound' => 'Det gick inte att hitta kontot.',
+        'remoteFollowNotAllowed' => 'Verkar som om kontots server inte tillåter fjärråtkomst följare…',
+        'submit' => 'Fortsätt för att följa',
     ],
     'favourite' => [
-        'title' => "Favourite {actorDisplayName}'s post",
-        'subtitle' => 'You are going to favourite:',
-        'submit' => 'Proceed to favourite',
+        'title' => "Favorit {actorDisplayName}s inlägg",
+        'subtitle' => 'Du kommer att favorisera:',
+        'submit' => 'Fortsätt för att favorisera',
     ],
     'reblog' => [
-        'title' => "Share {actorDisplayName}'s post",
-        'subtitle' => 'You are going to share:',
-        'submit' => 'Proceed to share',
+        'title' => "Dela {actorDisplayName}s inlägg",
+        'subtitle' => 'Du kommer att dela:',
+        'submit' => 'Fortsätt för att dela',
     ],
     'reply' => [
-        'title' => "Reply to {actorDisplayName}'s post",
-        'subtitle' => 'You are going to reply to:',
-        'submit' => 'Proceed to reply',
+        'title' => "Svara på {actorDisplayName}s inlägg",
+        'subtitle' => 'Du kommer att svara på:',
+        'submit' => 'Fortsätt för att svara',
     ],
 ];

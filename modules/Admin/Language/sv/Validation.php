@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 return [
     'min_dims' =>
-        '{field} is either not an image, or it is not wide or tall enough.',
+        '{field} är antingen inte en bild, eller så är den inte bred eller tillräckligt hög.',
     'is_image_ratio' =>
-        '{field} is either not an image or not of the right ratio.',
+        '{field} är antingen inte en bild eller inte av rätt förhållande.',
 ];

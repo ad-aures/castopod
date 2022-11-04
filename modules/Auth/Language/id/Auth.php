@@ -70,6 +70,7 @@ return [
         'manage-contributors' => 'Can manage contributors of podcast #{id}.',
         'manage-platforms' => 'Can set/remove platform links of podcast #{id}.',
         'manage-publications' => 'Can publish podcast #{id}.',
+        'manage-notifications' => 'Can view and mark notifications as read for podcast #{id}.',
         'interact-as' => 'Can interact as the podcast #{id} to favourite, share or reply to posts.',
         'episodes.view' => 'Can view dashboards and analytics of podcast #{id}\'s episodes.',
         'episodes.create' => 'Can create episodes for podcast #{id}.',

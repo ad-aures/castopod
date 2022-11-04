@@ -1,39 +1,43 @@
 ---
-title: Official Docker images
+title: Officiella Docker images
 sidebarDepth: 3
 ---
 
-# Official Docker images
+# Officiella Docker images
 
-Castopod pushes 2 Docker images to the Docker Hub during its automated build
+Castopod pushes 3 Docker images to the Docker Hub during its automated build
 process:
 
-- [**`castopod/app`**](https://hub.docker.com/r/castopod/app): the app bundle
-  with all of Castopod dependencies
-- [**`castopod/web-server`**](https://hub.docker.com/r/castopod/web-server): an
-  Nginx configuration for Castopod
+- [**`castopod/app`**](https://hub.docker.com/r/castopod/app): apppaketet med
+  alla Castopod-beroenden
+- [**`castopod/web-server`**](https://hub.docker.com/r/castopod/web-server): en
+  Nginx konfiguration för Castopod
+- [**`castopod/video-clipper`**](https://hub.docker.com/r/castopod/video-clipper):
+  an optional image building videoclips thanks to ffmpeg
 
-Additionally, Castopod requires a MySQL-compatible database. A Redis database
-can be added as a cache handler.
+Dessutom kräver Castopod en MySQL-kompatibel databas. En Redis databas kan
+läggas till som cachehanterare.
 
-## Supported tags
+## Taggar som stöds
 
-- `develop` [unstable], latest development branch build
-- `beta` [stable], latest beta version build
-- `1.0.0-beta.x` [stable], specific beta version build (since `1.0.0-beta.22`)
+- `utveckla` [unstable], senaste utvecklingsgrenen
+- `beta` [stable], senaste betaversionen bygger
+- `1.0.0-beta.x` [stable], specifik betaversion build (sedan `1.0.0-beta.22`)
+- `latest` [stable], latest version build
+- `1.x.x` [stable], specific version build (since `1.0.0`)
 
-## Example usage
+## Exempel på användning
 
-1.  Install [docker](https://docs.docker.com/get-docker/) and
-    [docker-compose](https://docs.docker.com/compose/install/)
-2.  Create a `docker-compose.yml` file with the following:
+1.  Installera [docker](https://docs.docker.com/get-docker/) och
+    [docker-komponera](https://docs.docker.com/compose/install/)
+2.  Skapa en `docker-compose.yml` fil med följande:
 
     ```yml
     version: "3.7"
 
     services:
       app:
-        image: castopod/app:beta
+        image: castopod/app:latest
         container_name: "castopod-app"
         volumes:
           - castopod-media:/opt/castopod/public/media
@@ -51,7 +55,7 @@ can be added as a cache handler.
         restart: unless-stopped
 
       web-server:
-        image: castopod/web-server:beta
+        image: castopod/web-server:latest
         container_name: "castopod-web-server"
         volumes:
           - castopod-media:/var/www/html/media
@@ -83,6 +87,21 @@ can be added as a cache handler.
         networks:
           - castopod-app
 
+      # this container is optional
+      # add this if you want to use the videoclips feature
+      ffmpeg:
+        image: castopod/video-clipper:latest
+        container_name: "castopod-video-clipper"
+        volumes:
+          - castopod-media:/opt/castopod/public/media
+        environment:
+          MYSQL_DATABASE: castopod
+          MYSQL_USER: castopod
+          MYSQL_PASSWORD: changeme
+        networks:
+          - castopod-db
+        restart: unless-stopped
+
     volumes:
       castopod-media:
       castopod-db:
@@ -93,13 +112,14 @@ can be added as a cache handler.
       castopod-db:
     ```
 
-    You have to adapt some variables to your needs (e.g. `CP_BASEURL`,
-    `MYSQL_ROOT_PASSWORD`, `MYSQL_PASSWORD` and `CP_ANALYTICS_SALT`).
+    Du måste anpassa vissa variabler efter dina behov (t.ex. `CP_BASEURL`,
+    `MYSQL_ROOT_PASSWORD`, `MYSQL_PASSWORD` och `CP_ANALYTICS_SALT`).
 
-3.  Setup a reverse proxy for TLS (SSL/HTTPS)
+3.  Ställ in en omvänd proxy för TLS (SSL/HTTPS)
 
-    TLS is mandatory for ActivityPub to work. This job can easily be handled by
-    a reverse proxy, for example with [Caddy](https://caddyserver.com/):
+    TLS är obligatoriskt för ActivityPub att arbeta. Detta jobb kan enkelt
+    hanteras av en omvänd proxy, till exempel med
+    [Caddy](https://caddyserver.com/):
 
     ```
     #castopod
@@ -108,28 +128,39 @@ can be added as a cache handler.
     }
     ```
 
-4.  Run `docker-compose up -d`, wait for it to initialize and head on to
-    `https://castopod.example.com/cp-install` to finish setting up Castopod!
+4.  Kör `docker-komponera upp -d`, vänta på att den initieras och gå vidare till
+    `https://castopod.example.com/cp-install` för att slutföra installationen av
+    Castopod!
 
-5.  You're all set, start podcasting! 🎙️🚀
+5.  Ni är alla klara, börja podcasting! 🎙️🚀
 
-## Environment Variables
+## Miljövariabler
+
+- **castopod/video-clipper**
+
+  | Variabel namn              | Type (`default`) | Standard         |
+  | -------------------------- | ---------------- | ---------------- |
+  | **`CP_DATABASE_HOSTNAME`** | ?string          | `"mariadb"`      |
+  | **`CP_DATABASE_NAME`**     | ?sträng          | `MYSQL_DATABASE` |
+  | **`CP_DATABASE_USERNAME`** | ?string          | `MYSQL_USER`     |
+  | **`CP_DATABASE_PASSWORD`** | ?string          | `MYSQL_PASSWORD` |
+  | **`CP_DATABASE_PREFIX`**   | ?string          | `"cp_"`          |
 
 - **castopod/app**
 
-  | Variable name                | Type (`default`)        | Default          |
+  | Variabelt namn               | Type (`default`)        | Standard         |
   | ---------------------------- | ----------------------- | ---------------- |
-  | **`CP_BASEURL`**             | string                  | `undefined`      |
+  | **`CP_BASEURL`**             | sträng                  | `odefinierad`    |
   | **`CP_MEDIA_BASEURL`**       | ?string                 | `CP_BASEURL`     |
   | **`CP_ADMIN_GATEWAY`**       | ?string                 | `"cp-admin"`     |
   | **`CP_AUTH_GATEWAY`**        | ?string                 | `"cp-auth"`      |
-  | **`CP_ANALYTICS_SALT`**      | string                  | `undefined`      |
+  | **`CP_ANALYTICS_SALT`**      | string                  | `odefinierad`    |
   | **`CP_DATABASE_HOSTNAME`**   | ?string                 | `"mariadb"`      |
   | **`CP_DATABASE_NAME`**       | ?string                 | `MYSQL_DATABASE` |
   | **`CP_DATABASE_USERNAME`**   | ?string                 | `MYSQL_USER`     |
   | **`CP_DATABASE_PASSWORD`**   | ?string                 | `MYSQL_PASSWORD` |
   | **`CP_DATABASE_PREFIX`**     | ?string                 | `"cp_"`          |
-  | **`CP_CACHE_HANDLER`**       | [`"file"` or `"redis"`] | `"file"`         |
+  | **`CP_CACHE_HANDLER`**       | [`"file"` 或 `"redis"`] | `"file"`         |
   | **`CP_REDIS_HOST`**          | ?string                 | `"localhost"`    |
   | **`CP_REDIS_PASSWORD`**      | ?string                 | `null`           |
   | **`CP_REDIS_PORT`**          | ?number                 | `6379`           |
@@ -139,10 +170,10 @@ can be added as a cache handler.
   | **`CP_EMAIL_SMTP_USERNAME`** | ?string                 | `"localhost"`    |
   | **`CP_EMAIL_SMTP_PASSWORD`** | ?string                 | `null`           |
   | **`CP_EMAIL_SMTP_PORT`**     | ?number                 | `25`             |
-  | **`CP_EMAIL_SMTP_CRYPTO`**   | [`"tls"` or `"ssl"`]    | `"tls"`          |
+  | **`CP_EMAIL_SMTP_CRYPTO`**   | [`"tls"` eller `"ssl"`] | `"tls"`          |
 
 - **castopod/web-server**
 
-  | Variable name         | Type    | Default |
+  | Variable name         | Typ     | Default |
   | --------------------- | ------- | ------- |
   | **`CP_APP_HOSTNAME`** | ?string | `"app"` |

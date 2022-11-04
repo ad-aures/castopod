@@ -24,25 +24,25 @@ return [
     'edit' => 'Bearbeiten',
     'publish' => 'Veröffentllichen',
     'publish_edit' => 'Veröffentlichung bearbeiten',
-    'publish_date_edit' => 'Edit publication date',
+    'publish_date_edit' => 'Veröffentlichungsdatum bearbeiten',
     'unpublish' => 'Veröffentlichung zurücknehmen',
     'publish_error' => 'Folge ist bereits veröffentlicht.',
     'publish_edit_error' => 'Folge ist bereits veröffentlicht.',
     'publish_cancel_error' => 'Folge ist bereits veröffentlicht.',
-    'publish_date_edit_error' => 'Episode has not been published yet, you cannot edit its publication date.',
-    'publish_date_edit_future_error' => 'Episode\'s publication date can only be set to a past date! If you would like to reschedule it, unpublish it first.',
-    'publish_date_edit_success' => 'Episode\'s publication date has been updated successfully!',
+    'publish_date_edit_error' => 'Die Folge wurde noch nicht veröffentlicht, Sie können das Veröffentlichungsdatum nicht bearbeiten.',
+    'publish_date_edit_future_error' => 'Das Veröffentlichungsdatum der Folge kann nur auf ein vergangenes Datum gesetzt werden! Wenn Sie es neu planen möchten, heben Sie die Veröffentlichung zuerst auf.',
+    'publish_date_edit_success' => 'Das Veröffentlichungsdatum der Folge wurde erfolgreich aktualisiert!',
     'unpublish_error' => 'Folge ist nicht veröffentlicht.',
     'delete' => 'Löschen',
     'go_to_page' => 'Gehe zu Seite',
     'create' => 'Folge hinzufügen',
     'publication_status' => [
         'published' => 'Veröffentlicht',
-        'with_podcast' => 'Published',
+        'with_podcast' => 'Veröffentlicht',
         'scheduled' => 'Geplant',
         'not_published' => 'Nicht veröffentlicht',
     ],
-    'with_podcast_hint' => 'To be published at the same time as the podcast',
+    'with_podcast_hint' => 'Wird zeitgleich mit dem Podcast veröffentlicht',
     'list' => [
         'search' => [
             'placeholder' => 'Suche nach einer Episode',
@@ -50,8 +50,8 @@ return [
             'submit' => 'Suche',
         ],
         'number_of_episodes' => '{numberOfEpisodes, plural,
-            one {# episode}
-            other {# episodes}
+            one {# Folge}
+            other {# Folgen}
         }',
         'episode' => 'Folge',
         'visibility' => 'Sichtweite',
@@ -62,14 +62,14 @@ return [
         'createSuccess' => 'Folge wurde erfolgreich erstellt!',
         'editSuccess' => 'Folge wurde erfolgreich aktualisiert!',
         'publishSuccess' => '{publication_status, select,
-            published {Episode successfully published!}
-            scheduled {Episode publication successfully scheduled!}
-            with_podcast {This episode will be published at the same time as the podcast.}
-            other {This episode is not published.}
+            published {Folge erfolgreich veröffentlicht!}
+            scheduled {Veröffentlichung der Folge erfolgreich geplant!}
+            with_podcast {Diese Folge wird zeitgleich mit dem Podcast veröffentlicht.}
+            other {Diese Folge ist nicht veröffentlicht.}
         }',
         'publishCancelSuccess' => 'Veröffentlichung der Episode erfolgreich abgebrochen!',
         'unpublishBeforeDeleteTip' => 'Du musst die Episode zurückziehen, bevor du sie löschst.',
-        'scheduleDateError' => 'Schedule date must be set!',
+        'scheduleDateError' => 'Veröffentlichungsdatum muss gesetzt sein!',
         'deletePublishedEpisodeError' => 'Bitte ziehe die Episode zurück, bevor du sie löschst.',
         'deleteSuccess' => 'Folge erfolgreich gelöscht!',
         'deleteError' => 'Failed to delete episode {type, select,
@@ -79,13 +79,13 @@ return [
             audio {audio}
             other {media}
         }.',
-        'deleteFileError' => 'Failed to delete {type, select,
-            transcript {transcript}
-            chapters {chapters}
-            image {cover}
-            audio {audio}
-            other {media}
-        } file {file_path}. You may manually remove it from your disk.',
+        'deleteFileError' => 'Fehler beim Löschen der {type, select,
+            transcript {Abschrift}
+            chapters {Kapitel}
+            image {Cover}
+            audio {Audio}
+            other {Medien}
+        }-Datei {file_path}. Sie können es manuell von der Festplatte entfernen.',
         'sameSlugError' => 'Eine Folge mit dem ausgewählten Slug existiert bereits.',
     ],
     'form' => [
@@ -97,7 +97,7 @@ return [
         'cover' => 'Episoden-Cover',
         'cover_hint' =>
             'Wenn Du kein Cover festlegst, wird stattdessen das Podcast-Cover verwendet.',
-        'cover_size_hint' => 'Cover must be squared and at least 1400px wide and tall.',
+        'cover_size_hint' => 'Das Cover muss quadratisch und mindestens 1400px breit und hoch sein.',
         'title' => 'Titel',
         'title_hint' =>
             'Nutze einen klaren und einprägsamen Episodennamen. Gib hier nicht die Episoden- oder Staffelnummern an.',
@@ -169,7 +169,7 @@ return [
         'publication_method' => [
             'now' => 'Jetzt',
             'schedule' => 'Zeitplan',
-            'with_podcast' => 'Publish alongside podcast',
+            'with_podcast' => 'Zusammen mit dem Podcast veröffentlichen',
         ],
         'scheduled_publication_date' => 'Geplantes Veröffentlichungsdatum',
         'scheduled_publication_date_clear' => 'Veröffentlichungsdatum löschen',
@@ -183,9 +183,9 @@ return [
         'message_warning_submit' => 'Trotzdem veröffentlichen',
     ],
     'publish_date_edit_form' => [
-        'new_publication_date' => 'New publication date',
-        'new_publication_date_hint' => 'Must be set to a past date.',
-        'submit' => 'Edit publication date',
+        'new_publication_date' => 'Neues Veröffentlichungsdatum',
+        'new_publication_date_hint' => 'Muss auf ein vergangenes Datum gesetzt werden.',
+        'submit' => 'Veröffentlichungsdatum bearbeiten',
     ],
     'unpublish_form' => [
         'disclaimer' =>
@@ -197,7 +197,7 @@ return [
         'disclaimer' =>
             "Deleting the episode will delete all media files, comments, video clips and soundbites associated with it.",
         'understand' => 'Ich verstehe, ich möchte die Folge löschen',
-        'submit' => 'Delete',
+        'submit' => 'Löschen',
     ],
     'embed' => [
         'title' => 'Einbettbarer Spieler',

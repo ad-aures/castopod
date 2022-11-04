@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 return [
     'go_to_page' => 'Zobraziť stránku časti',
-    'dashboard' => 'Episode dashboard',
+    'dashboard' => 'Nástenka epizódy',
     'episode-view' => 'Domov',
     'episode-edit' => 'Upraviť časť',
     'episode-persons-manage' => 'Manage persons',

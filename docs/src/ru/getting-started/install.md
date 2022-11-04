@@ -142,6 +142,8 @@ You may add your email configuration in your instance's `.env` like so:
 ```ini
 # […]
 
+# […]
+
 email.fromEmail="your_email_address"
 email.SMTPHost="your_smtp_host"
 email.SMTPUser="your_smtp_user"

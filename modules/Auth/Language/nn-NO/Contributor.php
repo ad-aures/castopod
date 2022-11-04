@@ -28,10 +28,16 @@ return [
         'submit_add' => 'Legg til bidragsytar',
         'submit_edit' => 'Oppdater rolla',
     ],
-    'roles' => [
-        'podcast_admin' => 'Podkaststyrar',
+    'delete_form' => [
+        'title' => 'Remove {contributor}',
+        'disclaimer' =>
+            'You are about to remove {contributor} from contributors. They will not be able to access "{podcastTitle}" anymore.',
+        'understand' => 'I understand, I want to remove {contributor} from "{podcastTitle}"',
+        'submit' => 'Remove',
     ],
     'messages' => [
+        'editSuccess' => 'Role successfully changed!',
+        'editOwnerError' => "You can't edit the podcast owner!",
         'removeOwnerError' => "Du kan ikkje fjerna podkast-eigaren!",
         'removeSuccess' =>
             'Du har fjerna {username} frå {podcastTitle}',

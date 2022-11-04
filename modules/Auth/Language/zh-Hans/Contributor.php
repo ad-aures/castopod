@@ -28,10 +28,16 @@ return [
         'submit_add' => '添加贡献者',
         'submit_edit' => '更新角色',
     ],
-    'roles' => [
-        'podcast_admin' => '播客管理员',
+    'delete_form' => [
+        'title' => '移除 {contributor}',
+        'disclaimer' =>
+            '你将要从贡献者中删除 {contributor}，他们将无法再访问“{podcastTitle}”。',
+        'understand' => '我明白，我想从“{podcastTitle}”中删除 {contributor}',
+        'submit' => '移除',
     ],
     'messages' => [
+        'editSuccess' => '已成功更改角色！',
+        'editOwnerError' => "你无法编辑播客所有者！",
         'removeOwnerError' => "你无法删除播客所有者！",
         'removeSuccess' =>
             '你从 {username} 移除 {podcastTitle}',

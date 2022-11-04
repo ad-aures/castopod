@@ -28,10 +28,16 @@ return [
         'submit_add' => 'Add contributor',
         'submit_edit' => 'Update role',
     ],
-    'roles' => [
-        'podcast_admin' => 'Podcast admin',
+    'delete_form' => [
+        'title' => 'Remove {contributor}',
+        'disclaimer' =>
+            'You are about to remove {contributor} from contributors. They will not be able to access "{podcastTitle}" anymore.',
+        'understand' => 'I understand, I want to remove {contributor} from "{podcastTitle}"',
+        'submit' => 'Remove',
     ],
     'messages' => [
+        'editSuccess' => 'Role successfully changed!',
+        'editOwnerError' => "You can't edit the podcast owner!",
         'removeOwnerError' => "You can't remove the podcast owner!",
         'removeSuccess' =>
             'You have successfully removed {username} from {podcastTitle}',

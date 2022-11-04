@@ -9,54 +9,54 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => 'Castopod installer',
-    'manual_config' => 'Manual configuration',
+    'title' => 'Installationsprogrammet för Castopod',
+    'manual_config' => 'Manuell konfiguration',
     'manual_config_subtitle' =>
-        'Create a `.env` file with your settings and refresh the page to continue installation.',
+        'Skapa en \'.env\' fil med dina inställningar och uppdatera sidan för att fortsätta installationen.',
     'form' => [
-        'instance_config' => 'Instance configuration',
-        'hostname' => 'Hostname',
-        'media_base_url' => 'Media base URL',
+        'instance_config' => 'Konfiguration av instans',
+        'hostname' => 'Servernamn',
+        'media_base_url' => 'Bas-URL för media',
         'media_base_url_hint' =>
-            'If you use a CDN and/or an external analytics service, you may set them here.',
+            'Om du använder en CDN och/eller en extern analystjänst kan du ställa in dem här.',
         'admin_gateway' => 'Admin gateway',
         'admin_gateway_hint' =>
-            'The route to access the admin area (eg. https://example.com/cp-admin). It is set by default as cp-admin, we recommend you change it for security reasons.',
+            'Rutten för att komma åt adminområdet (t.ex. https://example.com/cp-admin). Det är som standard inställt som cp-admin, vi rekommenderar att du ändrar det av säkerhetsskäl.',
         'auth_gateway' => 'Auth gateway',
         'auth_gateway_hint' =>
-            'The route to access the authentication pages (eg. https://example.com/cp-auth). It is set by default as cp-auth, we recommend you change it for security reasons.',
-        'database_config' => 'Database configuration',
+            'Rutten för att komma åt autentiseringssidorna (t.ex. https://example.com/cp-auth). Den är som standard inställd som cp-auth, vi rekommenderar att du ändrar den av säkerhetsskäl.',
+        'database_config' => 'Databas konfiguration',
         'database_config_hint' =>
-            'Castopod needs to connect to your MySQL (or MariaDB) database. If you do not have these required info, please contact your server administrator.',
-        'db_hostname' => 'Database hostname',
-        'db_name' => 'Database name',
-        'db_username' => 'Database username',
-        'db_password' => 'Database password',
-        'db_prefix' => 'Database prefix',
+            'Castopod måste ansluta till din MySQL (eller MariaDB) databas. Om du inte har dessa nödvändiga uppgifter, kontakta din serveradministratör.',
+        'db_hostname' => 'Databasens värdnamn',
+        'db_name' => 'Databasnamn',
+        'db_username' => 'Användarnamn till databasen',
+        'db_password' => 'Databasens lösenord',
+        'db_prefix' => 'Databas prefix',
         'db_prefix_hint' =>
-            "The prefix of the Castopod table names, leave as is if you don't know what it means.",
-        'cache_config' => 'Cache configuration',
+            "Prefixet för Castopod tabellnamn, lämna som om du inte vet vad det betyder.",
+        'cache_config' => 'Cache-konfiguration',
         'cache_config_hint' =>
-            'Choose your preferred cache handler. Leave it as the default value if you have no clue what it means.',
+            'Välj önskad cachehanterare. Lämna det som standardvärde om du inte har någon aning om vad det innebär.',
         'cache_handler' => 'Cache handler',
         'cacheHandlerOptions' => [
-            'file' => 'File',
+            'file' => 'Fil',
             'redis' => 'Redis',
             'predis' => 'Predis',
         ],
-        'next' => 'Next',
-        'submit' => 'Finish install',
+        'next' => 'Nästa',
+        'submit' => 'Slutför installationen',
         'create_superadmin' => 'Create your superadmin account',
-        'email' => 'Email',
-        'username' => 'Username',
-        'password' => 'Password',
+        'email' => 'Epost',
+        'username' => 'Användarnamn',
+        'password' => 'Lösenord',
     ],
     'messages' => [
         'createSuperAdminSuccess' =>
-            'Your superadmin account has been created successfully. Login to start podcasting!',
+            'Ditt superadministratörskonto har skapats. Logga in för att starta podcasting!',
         'databaseConnectError' =>
-            'Castopod could not connect to your database. Edit your database configuration and try again.',
+            'Castopod kunde inte ansluta till din databas. Redigera din databaskonfiguration och försök igen.',
         'writeError' =>
-            "Couldn't create/write the `.env` file. You must create it manually by following the `.env.example` file template in the Castopod package.",
+            "Kunde inte skapa/skriva `.env`-filen. Du måste skapa den manuellt genom att följa filmallen `.env.exempel` i Castopod-paketet.",
     ],
 ];

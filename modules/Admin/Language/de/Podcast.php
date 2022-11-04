@@ -16,7 +16,7 @@ return [
     'new_episode' => 'Neue Folge',
     'view' => 'Podcast ansehen',
     'edit' => 'Podcast bearbeiten',
-    'publish' => 'Publish podcast',
+    'publish' => 'Podcast veröffentlichen',
     'publish_edit' => 'Edit publication',
     'delete' => 'Podcast löschen',
     'see_episodes' => 'Episoden ansehen',
@@ -24,12 +24,12 @@ return [
     'go_to_page' => 'Gehe zur Seite',
     'latest_episodes' => 'Neueste Folgen',
     'see_all_episodes' => 'Alle Folgen anzeigen',
-    'draft' => 'Draft',
+    'draft' => 'Entwurf',
     'messages' => [
-        'createSuccess' => 'Podcast successfully created!',
+        'createSuccess' => 'Podcast erfolgreich erstellt!',
         'editSuccess' => 'Der Podcast wurde erfolgreich aktualisiert!',
         'importSuccess' => 'Der Podcast wurde erfolgreich importiert!',
-        'deleteSuccess' => 'Podcast @{podcast_handle} successfully deleted!',
+        'deleteSuccess' => 'Podcast @{podcast_handle} erfolgreich gelöscht!',
         'deletePodcastMediaError' => 'Failed to delete podcast {type, select,
             cover {cover}
             banner {banner}
@@ -47,18 +47,18 @@ return [
             one {# episode was}
             other {# episodes were}
         } added to the podcast!',
-        'podcastFeedUpToDate' => 'Podcast is already up to date.',
+        'podcastFeedUpToDate' => 'Der Podcast ist bereits auf dem neuesten Stand.',
         'podcastNotImported' => 'Podcast could not be updated as it was not imported.',
         'publishError' => 'This podcast is either already published or scheduled for publication.',
         'publishEditError' => 'This podcast is not scheduled for publication.',
         'publishCancelSuccess' => 'Podcast publication successfully cancelled!',
-        'scheduleDateError' => 'Schedule date must be set!',
+        'scheduleDateError' => 'Veröffentlichungsdatum muss gesetzt sein!',
     ],
     'form' => [
         'identity_section_title' => 'Podcast-Identität',
         'identity_section_subtitle' => 'Diese Felder erlauben es dir, Aufmerksamkeit zu bekommen.',
         'cover' => 'Podcast-Cover',
-        'cover_size_hint' => 'Cover must be squared and at least 1400px wide and tall.',
+        'cover_size_hint' => 'Das Cover muss quadratisch und mindestens 1400px breit und hoch sein.',
         'banner' => 'Podcast-Banner',
         'banner_size_hint' => 'Banner must have a 3:1 ratio and be at least 1500px wide.',
         'banner_delete' => 'Podcast-Banner löschen',
@@ -120,8 +120,8 @@ return [
         'custom_rss_hint' => 'Dies wird innerhalb des ❬channel❭ Tags eingefügt.',
         'new_feed_url' => 'Neue Feed-URL',
         'new_feed_url_hint' => 'Benutzen Sie dieses Feld, wenn Sie zu einer anderen Domain oder Podcast-Plattform wechseln. Standardmäßig wird der Wert auf die aktuelle RSS URL gesetzt, wenn der Podcast importiert wird.',
-        'old_feed_url' => 'Old feed URL',
-        'update_feed' => 'Update feed',
+        'old_feed_url' => 'Alte Feed-URL',
+        'update_feed' => 'Feed aktualisieren',
         'update_feed_tip' => 'Import this podcast\'s latest episodes',
         'partnership' => 'Partnerschaft:en',
         'partner_id' => 'ID',
@@ -259,12 +259,12 @@ return [
         'post' => 'Your announcement post',
         'post_hint' =>
             "Write a message to announce the publication of your podcast. The message will be featured in your podcast's homepage.",
-        'message_placeholder' => 'Write your message…',
-        'submit' => 'Publish',
+        'message_placeholder' => 'Schreiben Sie Ihre Nachricht…',
+        'submit' => 'Veröffentlichen',
         'publication_date' => 'Publication date',
         'publication_method' => [
-            'now' => 'Now',
-            'schedule' => 'Schedule',
+            'now' => 'Jetzt',
+            'schedule' => 'Planen',
         ],
         'scheduled_publication_date' => 'Scheduled publication date',
         'scheduled_publication_date_hint' =>
@@ -273,18 +273,18 @@ return [
         'cancel_publication' => 'Cancel publication',
         'message_warning' => 'You did not write a message for your announcement post!',
         'message_warning_hint' => 'Having a message increases social engagement, resulting in a better visibility for your podcast.',
-        'message_warning_submit' => 'Publish anyway',
+        'message_warning_submit' => 'Dennoch veröffentlichen',
     ],
     'publication_status_banner' => [
-        'draft_mode' => 'draft mode',
-        'not_published' => 'This podcast is not yet published.',
+        'draft_mode' => 'Entwurfsmodus',
+        'not_published' => 'Dieser Podcast ist noch nicht veröffentlicht.',
         'scheduled' => 'This podcast is scheduled for publication on {publication_date}.',
     ],
     'delete_form' => [
         'disclaimer' =>
             "Deleting the podcast will delete all episodes, media files, posts and analytics associated with it. This action is irreversible, you will not be able to retrieve them afterwards.",
-        'understand' => 'I understand, I want the podcast to be permanently deleted',
-        'submit' => 'Delete',
+        'understand' => 'Ich verstehe, ich möchte, dass der Podcast dauerhaft gelöscht wird',
+        'submit' => 'Löschen',
     ],
     'by' => 'Von {publisher}',
     'season' => 'Staffel {seasonNumber}',
@@ -294,12 +294,12 @@ return [
     'no_episode' => 'Keine Folge gefunden!',
     'follow' => 'Folgen',
     'followers' => '{numberOfFollowers, plural,
-        one {# follower}
-        other {# followers}
+        one {# Follower}
+        other {# Follower}
     }',
     'posts' => '{numberOfPosts, plural,
-        one {# post}
-        other {# posts}
+        one {# Beitrag}
+        other {# Beiträge}
     }',
     'activity' => 'Aktivitäten',
     'episodes' => 'Folgen',

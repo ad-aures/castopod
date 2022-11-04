@@ -9,7 +9,7 @@ declare(strict_types=1);
  */
 
 return [
-    'edit_roles' => "Editar cargos de {username}",
+    'edit_role' => "Edit {username}'s role",
     'ban' => 'Banir',
     'unban' => 'Desbanir',
     'delete' => 'Excluir',
@@ -18,7 +18,7 @@ return [
     'all_users' => 'Todos os usuários',
     'list' => [
         'user' => 'Usuário',
-        'roles' => 'Cargos',
+        'role' => 'Role',
         'banned' => 'Banido?',
     ],
     'form' => [
@@ -26,14 +26,19 @@ return [
         'username' => 'Nome de usuário',
         'password' => 'Senha',
         'new_password' => 'Nova Senha',
+        'role' => 'Role',
         'roles' => 'Cargos',
         'permissions' => 'Permissões',
         'submit_create' => 'Criar usuário',
         'submit_edit' => 'Salvar',
         'submit_password_change' => 'Alterar!',
     ],
-    'roles' => [
-        'superadmin' => 'Super admin',
+    'delete_form' => [
+        'title' => 'Delete {user}',
+        'disclaimer' =>
+            "You are about to delete {user} permanently. They will not be able to access the admin area anymore.",
+        'understand' => 'I understand, I want to delete {user} permanently',
+        'submit' => 'Delete',
     ],
     'messages' => [
         'createSuccess' =>
@@ -46,6 +51,8 @@ return [
             '{username} is the instance owner, you cannot edit its roles.',
         'banSuperAdminError' =>
             '{username} é um super admin, não bloqueamos um super admin assim…',
+        'deleteOwnerError' =>
+            '{username} is the instance owner, one does not simply delete the owner…',
         'deleteSuperAdminError' =>
             '{username} é um super admin, você não exclui um super admin assim…',
         'deleteSuccess' => '{username} foi excluído.',

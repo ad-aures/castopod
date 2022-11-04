@@ -66,7 +66,7 @@ Releases may come with additional update instructions (see
 
 ## Fully Automated updates
 
-> Próximamente... 👀
+> Próximamente...
 
 ## Preguntas Frecuentes (FAQ)
 
@@ -80,9 +80,9 @@ file.
 
 ### No he actualizado mi instancia en mucho tiempo… ¿Qué debo hacer?
 
-No problem! Just get the latest release as described above. Only, when going
-through the release instructions (4), perform them sequentially, from the oldest
-to the newest.
+No problem! No problem! Just get the latest release as described above. Only,
+when going through the release instructions (4), perform them sequentially, from
+the oldest to the newest.
 
 > Puede que quieras hacer una copia de seguridad de tu instancia dependiendo del
 > tiempo que no hayas actualizado Castopod.

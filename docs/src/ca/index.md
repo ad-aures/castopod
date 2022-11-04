@@ -87,8 +87,8 @@ descentralització i així garantir que la creativitat dels podcasters pugui
 expressar-se.
 
 Aquest projecte és impulsat per la comunitat de codi obert, i concretament pels
-moviments [Fediverse](https://fediverse.party/en/fediverse/) i [Podcasting
-2.0](https://podcastindex .org/).
+moviments [Fediverse](https://fediverse.party/en/fediverse/) i \[Podcasting
+2.0\](https://podcastindex .org/).
 
 ## Comparació amb altres solucions
 

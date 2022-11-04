@@ -33,7 +33,7 @@ return [
     'settings' => '设置',
     'settings-general' => '通用',
     'settings-theme' => '主题',
-    'about' => 'About',
+    'about' => '关于',
     'account' => [
         'my-account' => '我的帐户',
         'change-password' => '修改密码',

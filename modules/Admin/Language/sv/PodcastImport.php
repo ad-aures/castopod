@@ -10,28 +10,28 @@ declare(strict_types=1);
 
 return [
     'warning' =>
-        'This procedure may take a long time. As the current version does not show any progress while it runs, you will not see anything updated until it is done. In case of timeout error, increase `max_execution_time` value.',
-    'old_podcast_section_title' => 'The podcast to import',
+        'Denna procedur kan ta lång tid. Eftersom den aktuella versionen inte visar några framsteg medan den körs, kommer du inte se något uppdaterat förrän det är gjort. Vid timeoutfel, öka värdet `max_execution_time`.',
+    'old_podcast_section_title' => 'Podcast att importera',
     'old_podcast_section_subtitle' =>
-        'Make sure you own the rights for this podcast before importing it. Copying and broadcasting a podcast without the proper rights is piracy and is liable to prosecution.',
-    'imported_feed_url' => 'Feed URL',
-    'imported_feed_url_hint' => 'The feed must be in xml or rss format.',
-    'new_podcast_section_title' => 'The new podcast',
-    'advanced_params_section_title' => 'Advanced parameters',
+        'Se till att du äger rättigheterna för den här podcasten innan du importerar den. Kopiering och sändning av en podcast utan rätt rättigheter är piratkopiering och riskerar att åtalas.',
+    'imported_feed_url' => 'URL för flöde',
+    'imported_feed_url_hint' => 'Flödet måste vara i xml- eller rss-format.',
+    'new_podcast_section_title' => 'Den nya podcasten',
+    'advanced_params_section_title' => 'Avancerade parametrar',
     'advanced_params_section_subtitle' =>
-        'Keep the default values if you have no idea of what the fields are for.',
-    'slug_field' => 'Field to be used to calculate episode slug',
+        'Behåll standardvärdena om du inte har någon aning om vad fälten är för.',
+    'slug_field' => 'Fält som ska användas för att beräkna avsnitt slug',
     'description_field' =>
-        'Source field used for episode description / show notes',
-    'force_renumber' => 'Force episodes renumbering',
+        'Källfält som används för avsnittsbeskrivning / visa anteckningar',
+    'force_renumber' => 'Tvinga avsnitts åternumrering',
     'force_renumber_hint' =>
-        'Use this if your podcast does not have episode numbers but wish to set them during import.',
-    'season_number' => 'Season number',
+        'Använd detta om din podcast inte har avsnittsnummer men vill ange dem under import.',
+    'season_number' => 'Säsong nummer',
     'season_number_hint' =>
-        'Use this if your podcast does not have a season number but wish to set one during import. Leave blank otherwise.',
-    'max_episodes' => 'Maximum number of episodes to import',
-    'max_episodes_hint' => 'Leave blank to import all episodes',
+        'Använd detta om din podcast inte har ett säsongsnummer men vill ange en under import. Lämna tomt annars.',
+    'max_episodes' => 'Maximalt antal avsnitt att importera',
+    'max_episodes_hint' => 'Lämna tomt för att importera alla avsnitt',
     'lock_import' =>
-        'This feed is protected. You cannot import it. If you are the owner, unprotect it on the origin platform.',
-    'submit' => 'Import podcast',
+        'Detta flöde är skyddat. Du kan inte importera det. Om du är ägare, sluta skydda det på ursprungsplattformen.',
+    'submit' => 'Importera podcast',
 ];

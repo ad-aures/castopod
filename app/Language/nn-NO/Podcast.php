@@ -18,12 +18,12 @@ return [
     'follow' => 'Fylg',
     'followTitle' => 'Fylg {actorDisplayName} på fødiverset!',
     'followers' => '{numberOfFollowers, plural,
-        one {# follower}
-        other {# followers}
+        one {# fylgjar}
+        other {# fylgjarar}
     }',
     'posts' => '{numberOfPosts, plural,
-        one {# post}
-        other {# posts}
+        one {# innlegg}
+        other {# innlegg}
     }',
     'activity' => 'Aktivitet',
     'episodes' => 'Episodar',
@@ -32,14 +32,14 @@ return [
     'stats' => [
         'title' => 'Statistikk',
         'number_of_seasons' => '{0, plural,
-            one {# season}
-            other {# seasons}
+            one {# sesong}
+            other {# sesongar}
         }',
         'number_of_episodes' => '{0, plural,
             one {# episode}
-            other {# episodes}
+            other {# episodar}
         }',
-        'first_published_at' => 'First episode published on {0, date, medium}',
+        'first_published_at' => 'Den fyrste episoden vart utgjeven {0, date, medium}',
     ],
     'sponsor' => 'Sponsor',
     'funding_links' => 'Finansieringslenker for {podcastTitle}',
