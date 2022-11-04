@@ -1,3 +1,18 @@
+## [1.0.2](https://code.castopod.org/adaures/castopod/compare/v1.0.1...v1.0.2) (2022-11-04)
+
+### Bug Fixes
+
+- **auth:** disallow registration by default
+  ([379b9be](https://code.castopod.org/adaures/castopod/commit/379b9be2b99574fe4af4009b01128dba2c75f037))
+- **contributors:** add prefix to podcast group to delete contributor
+  ([9f785db](https://code.castopod.org/adaures/castopod/commit/9f785db7ba674638a6f456aa3626f3f8100911f1))
+- extract podcast ids from user groups using a regex
+  ([e26215a](https://code.castopod.org/adaures/castopod/commit/e26215a11fc23aa0ad5ccff8ee97d6c6e8a09c1a))
+- **notifications:** add manage-notifications permission to podcast
+  ([ed7c247](https://code.castopod.org/adaures/castopod/commit/ed7c247bcbbb450e5ff96418930d3b37ce912cc4))
+- **platforms:** convert special characters to htmlentities to validate url
+  ([82310a2](https://code.castopod.org/adaures/castopod/commit/82310a2e0b426e84501090bdd9c0cf592d1c0d53))
+
 ## [1.0.1](https://code.castopod.org/adaures/castopod/compare/v1.0.0...v1.0.1) (2022-11-01)
 
 ### Bug Fixes
