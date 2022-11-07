@@ -11,7 +11,7 @@
 
 <?= $this->section('content') ?>
 
-<div class="flex flex-wrap items-start gap-4">
+<div class="flex flex-col items-stretch gap-4 lg:flex-row">
     <DashboardCard href="<?= $onlyPodcastId === null ? route_to('podcast-list') : route_to('podcast-view', $onlyPodcastId) ?>" glyph="mic" title="<?= lang('Dashboard.podcasts.title') ?>" subtitle="<?= $podcastsData['last_published_at'] ? esc(lang('Dashboard.podcasts.last_published', [
         'lastPublicationDate' => local_date($podcastsData['last_published_at']),
     ], null, false)) : lang('Dashboard.podcasts.not_found') ?>"><?= $podcastsData['number_of_podcasts'] ?></DashboardCard>
