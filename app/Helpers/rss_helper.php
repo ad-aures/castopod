@@ -90,11 +90,10 @@ if (! function_exists('get_rss_feed')) {
         if ($podcast->payment_pointer !== null) {
             $valueElement = $channel->addChild('value', null, $podcastNamespace);
             $valueElement->addAttribute('type', 'webmonetization');
-            $valueElement->addAttribute('method', '');
-            $valueElement->addAttribute('suggested', '');
+            $valueElement->addAttribute('method', 'ILP');
             $recipientElement = $valueElement->addChild('valueRecipient', null, $podcastNamespace);
             $recipientElement->addAttribute('name', $podcast->owner_name);
-            $recipientElement->addAttribute('type', 'ILP');
+            $recipientElement->addAttribute('type', 'paymentpointer');
             $recipientElement->addAttribute('address', $podcast->payment_pointer);
             $recipientElement->addAttribute('split', '100');
         }
