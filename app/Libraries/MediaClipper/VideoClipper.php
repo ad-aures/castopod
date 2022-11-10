@@ -297,7 +297,7 @@ class VideoClipper
     {
         $background = $this->generateBackground($this->dimensions['width'], $this->dimensions['height']);
 
-        if (! $background instanceof \GdImage) {
+        if (! $background instanceof GdImage) {
             return false;
         }
 

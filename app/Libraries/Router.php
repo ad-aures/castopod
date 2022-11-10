@@ -164,10 +164,10 @@ class Router extends CodeIgniterRouter
                     str_contains($routeKey, '/')
                 ) {
                     $replacekey = str_replace('/(.*)', '', $routeKey);
-                    $val = preg_replace('#^' . $routeKey . '$#u', $val, $uri);
+                    $val = preg_replace('#^' . $routeKey . '$#u', (string) $val, $uri);
                     $val = str_replace($replacekey, str_replace('/', '\\', $replacekey), $val);
                 } elseif (str_contains((string) $val, '$') && str_contains($routeKey, '(')) {
-                    $val = preg_replace('#^' . $routeKey . '$#u', $val, $uri);
+                    $val = preg_replace('#^' . $routeKey . '$#u', (string) $val, $uri);
                 } elseif (str_contains((string) $val, '/')) {
                     [$controller, $method] = explode('::', (string) $val);
 

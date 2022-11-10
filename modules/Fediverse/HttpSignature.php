@@ -116,7 +116,7 @@ class HttpSignature
      *
      * @return array<string, string>|false
      */
-    private function splitSignature(string $signature): array | false
+    private function splitSignature(string $signature): bool|array
     {
         if (! preg_match(self::SIGNATURE_PATTERN, $signature, $matches, PREG_UNMATCHED_AS_NULL)) {
             // Signature pattern failed

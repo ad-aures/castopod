@@ -102,7 +102,7 @@ class WebFinger
      *
      * @return array<string, string>|false
      */
-    private function splitResource(string $resource): array | false
+    private function splitResource(string $resource): bool|array
     {
         if (! preg_match(self::RESOURCE_PATTERN, $resource, $matches)) {
             // Resource pattern failed
