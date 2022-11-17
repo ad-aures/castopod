@@ -370,7 +370,7 @@
     {
       "login": "BoFFire",
       "name": "ButterflyOfFire",
-      "avatar_url": "https://static.mstdn.fr/static/accounts/avatars/000/065/901/original/e18d44b28edd0ada.png",
+      "avatar_url": "https://static.mstdn.fr/static/accounts/avatars/000/065/901/original/5908e93ad5447f15.png",
       "profile": "https://mstdn.fr/@ButterflyOfFire",
       "contributions": [
         {
@@ -499,7 +499,7 @@
     {
       "login": "irithys",
       "name": "irithys",
-      "avatar_url": "https://crowdin-static.downloads.crowdin.com/avatar/15405614/large/e46d7f8e9f7c05997827563c3a3cf942.jpeg",
+      "avatar_url": "https://crowdin-static.downloads.crowdin.com/avatar/15405614/large/3086461c47cce0a0c031925e5f943412.png",
       "profile": "https://im.irithys.com/@thy",
       "contributions": [
         {
@@ -525,6 +525,78 @@
       "name": "ghose (XoseM)",
       "avatar_url": "https://crowdin-static.downloads.crowdin.com/avatar/12617257/large/a201650da44fed28890b0e0d8477a663.jpg",
       "profile": "https://crowdin.com/profile/xosem",
+      "contributions": [
+        {
+          "type": "translation",
+          "url": "https://translate.castopod.org"
+        }
+      ]
+    },
+    {
+      "login": "basen1982",
+      "name": "Andreas Olsson",
+      "avatar_url": "https://castopod.org/assets/images/castopod-avatar.jpg",
+      "profile": "https://crowdin.com/profile/basen1982",
+      "contributions": [
+        {
+          "type": "translation",
+          "url": "https://translate.castopod.org"
+        }
+      ]
+    },
+    {
+      "login": "leonfrom",
+      "name": "leonfrom",
+      "avatar_url": "https://castopod.org/assets/images/castopod-avatar.jpg",
+      "profile": "https://crowdin.com/profile/leonfrom",
+      "contributions": [
+        {
+          "type": "translation",
+          "url": "https://translate.castopod.org"
+        }
+      ]
+    },
+    {
+      "login": "agentcobra57",
+      "name": "agentcobra",
+      "avatar_url": "https://castopod.org/assets/images/castopod-avatar.jpg",
+      "profile": "https://crowdin.com/profile/agentcobra57",
+      "contributions": [
+        {
+          "type": "translation",
+          "url": "https://translate.castopod.org"
+        }
+      ]
+    },
+    {
+      "login": "alephoto85",
+      "name": "Alessandro",
+      "avatar_url": "https://crowdin-static.downloads.crowdin.com/avatar/15094649/large/530391f54157af52ae33058ec15b0f99.jpg",
+      "profile": "https://crowdin.com/profile/alephoto85",
+      "contributions": [
+        {
+          "type": "translation",
+          "url": "https://translate.castopod.org"
+        }
+      ]
+    },
+    {
+      "login": "liimee",
+      "name": "liimee",
+      "avatar_url": "https://castopod.org/assets/images/castopod-avatar.jpg",
+      "profile": "https://crowdin.com/profile/liimee",
+      "contributions": [
+        {
+          "type": "translation",
+          "url": "https://translate.castopod.org"
+        }
+      ]
+    },
+    {
+      "login": "ahmed.sabouni11",
+      "name": "Ahmed Sabouni",
+      "avatar_url": "https://avatars.githubusercontent.com/u/74497842?v=4",
+      "profile": "https://github.com/ahmedsabouni",
       "contributions": [
         {
           "type": "translation",
