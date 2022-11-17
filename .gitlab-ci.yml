@@ -165,8 +165,11 @@ docker:
     strategy: depend
   variables:
     PARENT_PIPELINE_ID: $CI_PIPELINE_ID
-  rules:
-    - if: ($CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == "alpha" || $CI_COMMIT_BRANCH == "beta") && $CI_PROJECT_NAMESPACE == "adaures"
-      exists:
-        - CP_VERSION.env
-    - if: ($CI_COMMIT_BRANCH == "develop" && $CI_PROJECT_NAMESPACE == "adaures")
+  only:
+    refs:
+      - develop
+      - main
+      - beta
+      - alpha
+    variables:
+      - $CI_PROJECT_NAMESPACE == "adaures"
