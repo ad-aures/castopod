@@ -89,7 +89,7 @@ can be added as a cache handler.
 
       # this container is optional
       # add this if you want to use the videoclips feature
-      ffmpeg:
+      video-clipper:
         image: castopod/video-clipper:latest
         container_name: "castopod-video-clipper"
         volumes:
