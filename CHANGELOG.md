@@ -1,3 +1,10 @@
+## [1.0.3](https://code.castopod.org/adaures/castopod/compare/v1.0.2...v1.0.3) (2022-11-17)
+
+### Bug Fixes
+
+- **dashboard-ui:** fill the blank gaps between cards on smaller screen sizes
+  ([00836cc](https://code.castopod.org/adaures/castopod/commit/00836cc368c75ae2e23fa5dc4a53a5bb6eb2ce24))
+
 ## [1.0.2](https://code.castopod.org/adaures/castopod/compare/v1.0.1...v1.0.2) (2022-11-04)
 
 ### Bug Fixes
