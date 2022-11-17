@@ -46,6 +46,6 @@ return [
         'playing' => 'En cours',
     ],
     'size_limit' => 'Taille maximale : {0}.',
-    'choose_interact' => 'Choose how to interact',
-    'view' => 'View',
+    'choose_interact' => 'Choisissez comment interagir',
+    'view' => 'Voir',
 ];

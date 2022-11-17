@@ -16,51 +16,51 @@ return [
     'new_episode' => 'Créer un épisode',
     'view' => 'Voir le podcast',
     'edit' => 'Modifier le podcast',
-    'publish' => 'Publish podcast',
-    'publish_edit' => 'Edit publication',
+    'publish' => 'Publier le podcast',
+    'publish_edit' => 'Modifier la publication',
     'delete' => 'Supprimer le podcast',
     'see_episodes' => 'Voir les épisodes',
     'see_contributors' => 'Voir les contributeurs',
     'go_to_page' => 'Aller à la page',
     'latest_episodes' => 'Derniers épisodes',
     'see_all_episodes' => 'Voir tous les épisodes',
-    'draft' => 'Draft',
+    'draft' => 'Brouillon',
     'messages' => [
-        'createSuccess' => 'Podcast successfully created!',
+        'createSuccess' => 'Le podcast a été créé avec succès !',
         'editSuccess' => 'Le podcast a bien été mis à jour !',
         'importSuccess' => 'Le podcast a été importé avec succès !',
-        'deleteSuccess' => 'Podcast @{podcast_handle} successfully deleted!',
-        'deletePodcastMediaError' => 'Failed to delete podcast {type, select,
-            cover {cover}
-            banner {banner}
-            other {media}
+        'deleteSuccess' => 'Podcast @{podcast_handle} a été supprimé avec succès !',
+        'deletePodcastMediaError' => 'Impossible de supprimer le podcast {type, select,
+            cover {couverture}
+            banner {bannière}
+            other {média}
         }.',
-        'deleteEpisodeMediaError' => 'Failed to delete podcast episode {episode_slug} {type, select,
-            transcript {transcript}
-            chapters {chapters}
-            image {cover}
+        'deleteEpisodeMediaError' => 'Impossible de supprimer l\'épisode de podcast {episode_slug} {type, select,
+            transcript {transcription}
+            chapters {chapitres}
+            image {couverture}
             audio {audio}
-            other {media}
+            other {média}
         }.',
-        'deletePodcastMediaFolderError' => 'Failed to delete podcast media folder {folder_path}. You may manually remove it from your disk.',
-        'podcastFeedUpdateSuccess' => 'Successful update: {number_of_new_episodes, plural,
-            one {# episode was}
-            other {# episodes were}
-        } added to the podcast!',
-        'podcastFeedUpToDate' => 'Podcast is already up to date.',
-        'podcastNotImported' => 'Podcast could not be updated as it was not imported.',
-        'publishError' => 'This podcast is either already published or scheduled for publication.',
-        'publishEditError' => 'This podcast is not scheduled for publication.',
-        'publishCancelSuccess' => 'Podcast publication successfully cancelled!',
-        'scheduleDateError' => 'Schedule date must be set!',
+        'deletePodcastMediaFolderError' => 'Impossible de supprimer le dossier de podcast {folder_path}. Vous pouvez le supprimer manuellement de votre disque.',
+        'podcastFeedUpdateSuccess' => 'Mise à jour réussie : {number_of_new_episodes, plural,
+            one {# épisode a été}
+            other {# épisodes ont été}
+        } ajoutés au podcast!',
+        'podcastFeedUpToDate' => 'Le podcast est déjà à jour.',
+        'podcastNotImported' => 'Le podcast n\'a pas pu être mis à jour car il n\'a pas été importé.',
+        'publishError' => 'Ce podcast est soit déjà publié, soit programmé pour publication.',
+        'publishEditError' => 'Ce podcast n\'est pas programmé pour publication.',
+        'publishCancelSuccess' => 'Publication de Podcast annulée avec succès !',
+        'scheduleDateError' => 'La date de planification doit être définie !',
     ],
     'form' => [
         'identity_section_title' => 'Informations sur le Podcast',
         'identity_section_subtitle' => 'Ces champs vous permettent de vous faire remarquer.',
         'cover' => 'Couverture du podcast',
-        'cover_size_hint' => 'Cover must be squared and at least 1400px wide and tall.',
+        'cover_size_hint' => 'La couverture du podcast doit être carrée, avec au minimum 1400px de largeur et de hauteur.',
         'banner' => 'Bannière du podcast',
-        'banner_size_hint' => 'Banner must have a 3:1 ratio and be at least 1500px wide.',
+        'banner_size_hint' => 'La bannière doit être au format 3/1, avec au minimum 1500px de largeur.',
         'banner_delete' => 'Supprimer la bannière du podcast',
         'title' => 'Titre',
         'handle' => 'Identifiant',
@@ -107,9 +107,9 @@ return [
         'monetization_section_title' => 'Monétisation',
         'monetization_section_subtitle' =>
             'Gagnez de l’argent grâce à votre audience.',
-        'premium' => 'Premium',
-        'premium_by_default' => 'Episodes must be set as premium by default',
-        'premium_by_default_hint' => 'Podcast episodes will be marked as premium by default. You can still choose to set some episodes, trailers or bonuses as public.',
+        'premium' => 'Prémium',
+        'premium_by_default' => 'Les épisodes doivent être définis comme premium par défaut',
+        'premium_by_default_hint' => 'Les épisodes de Podcast seront marqués comme premium par défaut. Vous pouvez toujours choisir de définir certains épisodes, bandes-annonces ou bonus comme publics.',
         'payment_pointer' => 'Adresse de paiement (Payment Pointer) pour Web Monetization',
         'payment_pointer_hint' =>
             'L’adresse où vous recevrez de l’argent grâce à Web Monetization',
@@ -120,9 +120,9 @@ return [
         'custom_rss_hint' => 'Ceci sera injecté dans la balise ❬channel❭.',
         'new_feed_url' => 'URL du nouveau flux',
         'new_feed_url_hint' => 'Utilisez ce champ lorsque vous déplacez ce podcast vers un autre domaine ou que vous changez d’hébergeur. Par défaut, ce champ est rempli avec l’URL du flux actuel si le podcast est importé.',
-        'old_feed_url' => 'Old feed URL',
-        'update_feed' => 'Update feed',
-        'update_feed_tip' => 'Import this podcast\'s latest episodes',
+        'old_feed_url' => 'URL de l\'ancien flux',
+        'update_feed' => 'Actualiser ce flux',
+        'update_feed_tip' => 'Importer les derniers épisodes de ce podcast',
         'partnership' => 'Partenariat',
         'partner_id' => 'ID',
         'partner_link_url' => 'URL lien',
@@ -131,7 +131,7 @@ return [
         'partner_link_url_hint' => 'L’adresse générique des liens partenaire',
         'partner_image_url_hint' => 'L’adresse générique des images partenaire',
         'status_section_title' => 'Statut',
-        'block' => 'Podcast should be hidden from public catalogues',
+        'block' => 'L\'épisode doit être masqué dans les catalogues publics',
         'block_hint' =>
             'The podcast show or hide status: toggling this on prevents the entire podcast from appearing in Apple Podcasts, Google Podcasts, and any third party apps that pull shows from these directories. (Not guaranteed)',
         'complete' => 'Le podcast n’aura plus de nouveaux épisodes.',

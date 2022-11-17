@@ -24,7 +24,7 @@ return [
         'submit_edit' => 'حفظ',
     ],
     'messages' => [
-        'createSuccess' => 'The page “{pageTitle}” was created successfully!',
+        'createSuccess' => 'تم إنشاء الصفحة "{pageTitle}" بنجاح!',
         'editSuccess' => 'تم تحديث الصفحة بنجاح!',
     ],
 ];

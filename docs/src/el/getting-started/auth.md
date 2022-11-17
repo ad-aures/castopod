@@ -3,7 +3,7 @@ title: Authentication & Authorization
 sidebarDepth: 3
 ---
 
-# Authentication & Authorization
+# Ταυτοποίηση & εξουσιοδότηση
 
 Castopod handles authentication and authorization using `codeigniter/shield`
 coupled with custom rules. Roles and permissions are defined at two levels:

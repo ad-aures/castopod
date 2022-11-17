@@ -9,11 +9,11 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => 'Notifications',
+    'title' => 'الإشعارات',
     'reply' => '{actor_username} replied to your post',
     'favourite' => '{actor_username} favourited your post',
     'reblog' => '{actor_username} shared your post',
     'follow' => '{actor_username} started following you',
-    'no_notifications' => 'No notifications',
+    'no_notifications' => 'لا توجد إشعارات',
     'mark_all_as_read' => 'Mark all as read',
 ];
