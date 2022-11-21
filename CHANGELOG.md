@@ -1,3 +1,10 @@
+## [1.0.4](https://code.castopod.org/adaures/castopod/compare/v1.0.3...v1.0.4) (2022-11-21)
+
+### Bug Fixes
+
+- update actorUsername regex to get url_to actor
+  ([1d6b177](https://code.castopod.org/adaures/castopod/commit/1d6b177a55111ede01fba1c08499036d474533bc))
+
 ## [1.0.3](https://code.castopod.org/adaures/castopod/compare/v1.0.2...v1.0.3) (2022-11-17)
 
 ### Bug Fixes
