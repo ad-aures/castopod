@@ -4,7 +4,7 @@
     "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
     "This file is @generated automatically"
   ],
-  "content-hash": "ec434296cd3ae06cb0f6d5fcee2a1ce4",
+  "content-hash": "e5d3ae32b8a1422fc2c33ecef375dfe8",
   "packages": [
     {
       "name": "adaures/ipcat-php",
@@ -169,16 +169,16 @@
     },
     {
       "name": "codeigniter4/framework",
-      "version": "v4.2.10",
+      "version": "v4.2.7",
       "source": {
         "type": "git",
         "url": "https://github.com/codeigniter4/framework.git",
-        "reference": "6ffad151a303c5817ad6b2d9b996d07960aff2cc"
+        "reference": "011ce3bbda6f85930075a9b8fecbee01c4b23ab9"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/codeigniter4/framework/zipball/6ffad151a303c5817ad6b2d9b996d07960aff2cc",
-        "reference": "6ffad151a303c5817ad6b2d9b996d07960aff2cc",
+        "url": "https://api.github.com/repos/codeigniter4/framework/zipball/011ce3bbda6f85930075a9b8fecbee01c4b23ab9",
+        "reference": "011ce3bbda6f85930075a9b8fecbee01c4b23ab9",
         "shasum": ""
       },
       "require": {
@@ -194,19 +194,15 @@
       "require-dev": {
         "codeigniter/coding-standard": "^1.5",
         "fakerphp/faker": "^1.9",
-        "friendsofphp/php-cs-fixer": "~3.13.0",
+        "friendsofphp/php-cs-fixer": "~3.11.0",
         "mikey179/vfsstream": "^1.6",
         "nexusphp/cs-config": "^3.6",
         "phpunit/phpunit": "^9.1",
         "predis/predis": "^1.1 || ^2.0"
       },
       "suggest": {
-        "ext-dom": "If you use TestResponse",
-        "ext-exif": "If you run Image class tests",
         "ext-fileinfo": "Improves mime type detection for files",
-        "ext-gd": "If you use Image class GDHandler",
         "ext-imagick": "If you use Image class ImageMagickHandler",
-        "ext-libxml": "If you use TestResponse",
         "ext-memcache": "If you use Cache class MemcachedHandler with Memcache",
         "ext-memcached": "If you use Cache class MemcachedHandler with Memcached",
         "ext-mysqli": "If you use MySQL",
@@ -216,8 +212,7 @@
         "ext-redis": "If you use Cache class RedisHandler",
         "ext-simplexml": "If you format XML",
         "ext-sqlite3": "If you use SQLite3",
-        "ext-sqlsrv": "If you use SQL Server",
-        "ext-xdebug": "If you use CIUnitTestCase::assertHeaderEmitted()"
+        "ext-sqlsrv": "If you use SQL Server"
       },
       "type": "project",
       "autoload": {
@@ -235,7 +230,7 @@
         "slack": "https://codeigniterchat.slack.com",
         "source": "https://github.com/codeigniter4/CodeIgniter4"
       },
-      "time": "2022-11-05T22:23:07+00:00"
+      "time": "2022-10-06T13:46:23+00:00"
     },
     {
       "name": "codeigniter4/settings",
@@ -1437,25 +1432,25 @@
     },
     {
       "name": "nette/schema",
-      "version": "v1.2.2",
+      "version": "v1.2.3",
       "source": {
         "type": "git",
         "url": "https://github.com/nette/schema.git",
-        "reference": "9a39cef03a5b34c7de64f551538cbba05c2be5df"
+        "reference": "abbdbb70e0245d5f3bf77874cea1dfb0c930d06f"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/nette/schema/zipball/9a39cef03a5b34c7de64f551538cbba05c2be5df",
-        "reference": "9a39cef03a5b34c7de64f551538cbba05c2be5df",
+        "url": "https://api.github.com/repos/nette/schema/zipball/abbdbb70e0245d5f3bf77874cea1dfb0c930d06f",
+        "reference": "abbdbb70e0245d5f3bf77874cea1dfb0c930d06f",
         "shasum": ""
       },
       "require": {
         "nette/utils": "^2.5.7 || ^3.1.5 ||  ^4.0",
-        "php": ">=7.1 <8.2"
+        "php": ">=7.1 <8.3"
       },
       "require-dev": {
         "nette/tester": "^2.3 || ^2.4",
-        "phpstan/phpstan-nette": "^0.12",
+        "phpstan/phpstan-nette": "^1.0",
         "tracy/tracy": "^2.7"
       },
       "type": "library",
@@ -1484,9 +1479,9 @@
       "keywords": ["config", "nette"],
       "support": {
         "issues": "https://github.com/nette/schema/issues",
-        "source": "https://github.com/nette/schema/tree/v1.2.2"
+        "source": "https://github.com/nette/schema/tree/v1.2.3"
       },
-      "time": "2021-10-15T11:40:02+00:00"
+      "time": "2022-10-13T01:24:26+00:00"
     },
     {
       "name": "nette/utils",
@@ -2547,16 +2542,16 @@
   "packages-dev": [
     {
       "name": "captainhook/captainhook",
-      "version": "5.11.0",
+      "version": "5.11.1",
       "source": {
         "type": "git",
         "url": "https://github.com/captainhookphp/captainhook.git",
-        "reference": "0a7b757e065f6e5033f286bbb9b64d180c816a05"
+        "reference": "44ba2b815a64ea71a3dc4afc9007d953ab992238"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/captainhookphp/captainhook/zipball/0a7b757e065f6e5033f286bbb9b64d180c816a05",
-        "reference": "0a7b757e065f6e5033f286bbb9b64d180c816a05",
+        "url": "https://api.github.com/repos/captainhookphp/captainhook/zipball/44ba2b815a64ea71a3dc4afc9007d953ab992238",
+        "reference": "44ba2b815a64ea71a3dc4afc9007d953ab992238",
         "shasum": ""
       },
       "require": {
@@ -2614,7 +2609,7 @@
       ],
       "support": {
         "issues": "https://github.com/captainhookphp/captainhook/issues",
-        "source": "https://github.com/captainhookphp/captainhook/tree/5.11.0"
+        "source": "https://github.com/captainhookphp/captainhook/tree/5.11.1"
       },
       "funding": [
         {
@@ -2622,20 +2617,20 @@
           "type": "github"
         }
       ],
-      "time": "2022-10-27T19:11:19+00:00"
+      "time": "2022-11-11T16:45:34+00:00"
     },
     {
       "name": "composer/pcre",
-      "version": "3.0.2",
+      "version": "3.1.0",
       "source": {
         "type": "git",
         "url": "https://github.com/composer/pcre.git",
-        "reference": "4482b6409ca6bfc2af043a5711cd21ac3e7a8dfb"
+        "reference": "4bff79ddd77851fe3cdd11616ed3f92841ba5bd2"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/composer/pcre/zipball/4482b6409ca6bfc2af043a5711cd21ac3e7a8dfb",
-        "reference": "4482b6409ca6bfc2af043a5711cd21ac3e7a8dfb",
+        "url": "https://api.github.com/repos/composer/pcre/zipball/4bff79ddd77851fe3cdd11616ed3f92841ba5bd2",
+        "reference": "4bff79ddd77851fe3cdd11616ed3f92841ba5bd2",
         "shasum": ""
       },
       "require": {
@@ -2670,7 +2665,7 @@
       "keywords": ["PCRE", "preg", "regex", "regular expression"],
       "support": {
         "issues": "https://github.com/composer/pcre/issues",
-        "source": "https://github.com/composer/pcre/tree/3.0.2"
+        "source": "https://github.com/composer/pcre/tree/3.1.0"
       },
       "funding": [
         {
@@ -2686,7 +2681,7 @@
           "type": "tidelift"
         }
       ],
-      "time": "2022-11-03T20:24:16+00:00"
+      "time": "2022-11-17T09:50:14+00:00"
     },
     {
       "name": "composer/semver",
@@ -3208,16 +3203,16 @@
     },
     {
       "name": "nikic/php-parser",
-      "version": "v4.15.1",
+      "version": "v4.15.2",
       "source": {
         "type": "git",
         "url": "https://github.com/nikic/PHP-Parser.git",
-        "reference": "0ef6c55a3f47f89d7a374e6f835197a0b5fcf900"
+        "reference": "f59bbe44bf7d96f24f3e2b4ddc21cd52c1d2adbc"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/0ef6c55a3f47f89d7a374e6f835197a0b5fcf900",
-        "reference": "0ef6c55a3f47f89d7a374e6f835197a0b5fcf900",
+        "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/f59bbe44bf7d96f24f3e2b4ddc21cd52c1d2adbc",
+        "reference": "f59bbe44bf7d96f24f3e2b4ddc21cd52c1d2adbc",
         "shasum": ""
       },
       "require": {
@@ -3251,9 +3246,9 @@
       "keywords": ["parser", "php"],
       "support": {
         "issues": "https://github.com/nikic/PHP-Parser/issues",
-        "source": "https://github.com/nikic/PHP-Parser/tree/v4.15.1"
+        "source": "https://github.com/nikic/PHP-Parser/tree/v4.15.2"
       },
-      "time": "2022-09-04T07:30:47+00:00"
+      "time": "2022-11-12T15:38:23+00:00"
     },
     {
       "name": "phar-io/manifest",
@@ -3409,16 +3404,16 @@
     },
     {
       "name": "phpunit/php-code-coverage",
-      "version": "9.2.18",
+      "version": "9.2.19",
       "source": {
         "type": "git",
         "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-        "reference": "12fddc491826940cf9b7e88ad9664cf51f0f6d0a"
+        "reference": "c77b56b63e3d2031bd8997fcec43c1925ae46559"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/12fddc491826940cf9b7e88ad9664cf51f0f6d0a",
-        "reference": "12fddc491826940cf9b7e88ad9664cf51f0f6d0a",
+        "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/c77b56b63e3d2031bd8997fcec43c1925ae46559",
+        "reference": "c77b56b63e3d2031bd8997fcec43c1925ae46559",
         "shasum": ""
       },
       "require": {
@@ -3466,7 +3461,7 @@
       "keywords": ["coverage", "testing", "xunit"],
       "support": {
         "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
-        "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.18"
+        "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.19"
       },
       "funding": [
         {
@@ -3474,7 +3469,7 @@
           "type": "github"
         }
       ],
-      "time": "2022-10-27T13:35:33+00:00"
+      "time": "2022-11-18T07:47:47+00:00"
     },
     {
       "name": "phpunit/php-file-iterator",
@@ -3835,16 +3830,16 @@
     },
     {
       "name": "rector/rector",
-      "version": "0.14.7",
+      "version": "0.14.8",
       "source": {
         "type": "git",
         "url": "https://github.com/rectorphp/rector.git",
-        "reference": "3553aaba0e820083fc6d7f0dc78d8d789226a398"
+        "reference": "46ee9a173a2b2645ca92a75ffc17460139fa226e"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/rectorphp/rector/zipball/3553aaba0e820083fc6d7f0dc78d8d789226a398",
-        "reference": "3553aaba0e820083fc6d7f0dc78d8d789226a398",
+        "url": "https://api.github.com/repos/rectorphp/rector/zipball/46ee9a173a2b2645ca92a75ffc17460139fa226e",
+        "reference": "46ee9a173a2b2645ca92a75ffc17460139fa226e",
         "shasum": ""
       },
       "require": {
@@ -3874,7 +3869,7 @@
       "description": "Instant Upgrade and Automated Refactoring of any PHP code",
       "support": {
         "issues": "https://github.com/rectorphp/rector/issues",
-        "source": "https://github.com/rectorphp/rector/tree/0.14.7"
+        "source": "https://github.com/rectorphp/rector/tree/0.14.8"
       },
       "funding": [
         {
@@ -3882,7 +3877,7 @@
           "type": "github"
         }
       ],
-      "time": "2022-11-04T08:48:40+00:00"
+      "time": "2022-11-14T14:09:49+00:00"
     },
     {
       "name": "sebastian/cli-parser",

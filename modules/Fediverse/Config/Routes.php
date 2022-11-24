@@ -10,10 +10,7 @@ declare(strict_types=1);
 
 $routes = service('routes');
 
-// FIXME: HOTFIX to be edited, add character to actorUsername regex to have it show up on routes list
-// This bug is from CI4, since v4.2.8 with the following change
-// https://github.com/codeigniter4/CodeIgniter4/pull/6644/files#diff-b28efb4cd802e8a3ead515befe9f46254b6cc9d17ab1beeb8a42a16cff69d283R1257
-$routes->addPlaceholder('actorUsername', '[a-zA-Z0-9\_]{1,33}');
+$routes->addPlaceholder('actorUsername', '[a-zA-Z0-9\_]{1,32}');
 $routes->addPlaceholder(
     'uuid',
     '[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}',
