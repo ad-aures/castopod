@@ -15,8 +15,8 @@ return [
     'list_of_episodes_season' =>
         'Eapasodan seusan {seasonNumber} ({episodeCount})',
     'no_episode' => 'Cha deach eapasod a lorg!',
-    'follow' => 'Lean air',
-    'followTitle' => 'Lean air {actorDisplayName} sa cho-shaoghal!',
+    'follow' => 'Lean',
+    'followTitle' => 'Lean {actorDisplayName} sa cho-shaoghal!',
     'followers' => '{numberOfFollowers, plural,
         one {# neach-leantainn}
         two {# luchd-leantainn}

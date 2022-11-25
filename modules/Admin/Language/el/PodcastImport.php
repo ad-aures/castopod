@@ -10,28 +10,28 @@ declare(strict_types=1);
 
 return [
     'warning' =>
-        'This procedure may take a long time. As the current version does not show any progress while it runs, you will not see anything updated until it is done. In case of timeout error, increase `max_execution_time` value.',
-    'old_podcast_section_title' => 'The podcast to import',
+        'Αυτή η διαδικασία μπορεί να διαρκέσει πολύ. Καθώς η τρέχουσα έκδοση δεν εμφανίζει καμία πρόοδο ενώ εκτελείται, δεν θα δείτε τίποτα να ενημερώνεται μέχρι να ολοκληρωθεί. Σε περίπτωση σφάλματος χρονικού ορίου, αυξήστε την τιμή `max_execution_time`.',
+    'old_podcast_section_title' => 'Το podcast για εισαγωγή',
     'old_podcast_section_subtitle' =>
-        'Make sure you own the rights for this podcast before importing it. Copying and broadcasting a podcast without the proper rights is piracy and is liable to prosecution.',
-    'imported_feed_url' => 'Feed URL',
-    'imported_feed_url_hint' => 'The feed must be in xml or rss format.',
-    'new_podcast_section_title' => 'The new podcast',
-    'advanced_params_section_title' => 'Advanced parameters',
+        'Βεβαιωθείτε ότι έχετε τα δικαιώματα για αυτό το podcast πριν από την εισαγωγή του. Η αντιγραφή και μετάδοση ενός podcast χωρίς τα κατάλληλα δικαιώματα είναι πειρατεία και μπορεί να διωχθεί.',
+    'imported_feed_url' => 'Διεύθυνση URL Ροής',
+    'imported_feed_url_hint' => 'To Url πρέπει να είναι σε μορφή xml ή rss.',
+    'new_podcast_section_title' => 'Το νέο podcast',
+    'advanced_params_section_title' => 'Παράμετροι για προχωρημένους',
     'advanced_params_section_subtitle' =>
-        'Keep the default values if you have no idea of what the fields are for.',
-    'slug_field' => 'Field to be used to calculate episode slug',
+        'Διατηρήστε τις προεπιλεγμένες τιμές αν δεν έχετε ιδέα για το ποια είναι τα πεδία.',
+    'slug_field' => 'Πεδίο που πρέπει να χρησιμοποιείται για τον υπολογισμό του slug του επεισοδίου',
     'description_field' =>
-        'Source field used for episode description / show notes',
+        'Πεδίο πηγής που χρησιμοποιείται για την περιγραφή επεισοδίου / εμφάνιση σημειώσεων',
     'force_renumber' => 'Force episodes renumbering',
     'force_renumber_hint' =>
         'Use this if your podcast does not have episode numbers but wish to set them during import.',
-    'season_number' => 'Season number',
+    'season_number' => 'Αριθμός σεζόν',
     'season_number_hint' =>
-        'Use this if your podcast does not have a season number but wish to set one during import. Leave blank otherwise.',
-    'max_episodes' => 'Maximum number of episodes to import',
-    'max_episodes_hint' => 'Leave blank to import all episodes',
+        'Χρησιμοποιήστε αυτό αν το podcast σας δεν έχει αριθμό σεζόν αλλά επιθυμεί να ορίσει έναν κατά την εισαγωγή. Αφήστε κενό διαφορετικά.',
+    'max_episodes' => 'Μέγιστος αριθμός επεισοδίων εισαγωγής',
+    'max_episodes_hint' => 'Αφήστε κενό για την εισαγωγή όλων των επεισοδίων',
     'lock_import' =>
-        'This feed is protected. You cannot import it. If you are the owner, unprotect it on the origin platform.',
-    'submit' => 'Import podcast',
+        'Αυτή η ροή προστατεύεται. Δεν μπορείτε να την εισάγετε. Αν είστε ο ιδιοκτήτης, μην την προστατεύετε στην πλατφόρμα προέλευσης.',
+    'submit' => 'Εισαγωγή podcast',
 ];

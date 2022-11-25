@@ -9,20 +9,20 @@ declare(strict_types=1);
  */
 
 return [
-    'home' => 'Admin dashboard',
-    'welcome_message' => 'Welcome to the admin area!',
+    'home' => 'Πίνακας ελέγχου διαχειριστή',
+    'welcome_message' => 'Καλώς ήρθατε στην περιοχή διαχείρισης!',
     'podcasts' => [
         'title' => 'Podcasts',
-        'not_found' => 'No published podcast',
-        'last_published' => 'Last published on {lastPublicationDate}',
+        'not_found' => 'Δεν υπάρχει δημοσιευμένο podcast',
+        'last_published' => 'Τελευταία δημοσίευση στις {lastPublicationDate}',
     ],
     'episodes' => [
-        'title' => 'Episodes',
-        'not_found' => 'No published episode',
-        'last_published' => 'Last published on {lastPublicationDate}',
+        'title' => 'Επεισόδια',
+        'not_found' => 'Κανένα δημοσιευμένο επεισόδιο',
+        'last_published' => 'Τελευταία δημοσίευση στις {lastPublicationDate}',
     ],
     'storage' => [
-        'title' => 'Storage',
-        'subtitle' => '{totalUploaded} out of {totalStorage}',
+        'title' => 'Αποθηκευτικός χώρος',
+        'subtitle' => '{totalUploaded} από {totalStorage}',
     ],
 ];

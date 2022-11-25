@@ -5,15 +5,15 @@ sidebarDepth: 3
 
 # Imágenes oficiales de Docker
 
-Castopod pushes 3 Docker images to the Docker Hub during its automated build
-process:
+Castopod lanza 3 imágenes Docker al DockerHub durante su proceso de construcción
+automatizada:
 
 - [**`castopod/app`**](https://hub.docker.com/r/castopod/app): el paquete
   completo de Castopod con todas las dependencias.
 - [**`castopod/web-server`**](https://hub.docker.com/r/castopod/web-server): una
   configuración Nginx para Castopod
-- [**`castopod/video-clipper`**](https://hub.docker.com/r/castopod/video-clipper):
-  an optional image building videoclips thanks to ffmpeg
+- [**`castopod/videoclipper`**](https://hub.docker.com/r/castopod/video-clipper):
+  una imagen opcional de creación de videoclips gracias a ffmpeg
 
 Adicionalmente, Castopod requiere una base de datos compatible con MySQL.
 También se puede añadir una base de datos Redis como gestor de caché.
@@ -21,10 +21,10 @@ También se puede añadir una base de datos Redis como gestor de caché.
 ## Etiquetas admitidas
 
 - `develop` [unstable], última rama de desarrollo construida
-- `beta` [stable], latest beta version build
-- `1.0.0-beta.x` [stable], specific beta version build (since `1.0.0-beta.22`)
-- `latest` [stable], latest version build
-- `1.x.x` [stable], specific version build (since `1.0.0`)
+- `beta` [stable], última versión beta
+- `1.0.0-beta.x` [stable], versión beta específica (desde `1.0.0-beta.22`)
+- `latest` [stable], última versión
+- `1.x.x` [stable], versión específica de compilación (desde `1.0.0`)
 
 ## Ejemplo de uso
 
@@ -87,9 +87,9 @@ También se puede añadir una base de datos Redis como gestor de caché.
         networks:
           - castopod-app
 
-      # this container is optional
-      # add this if you want to use the videoclips feature
-      ffmpeg:
+      # este contenedor es opcional
+      # agregue esto si desea usar la funcionalidad de videoclips
+      video-clipper:
         image: castopod/video-clipper:latest
         container_name: "castopod-video-clipper"
         volumes:
@@ -138,7 +138,7 @@ También se puede añadir una base de datos Redis como gestor de caché.
 
 - **castopod/video-clipper**
 
-  | Nombre de la Variable      | Tipo (`predeterminado`) | Default          |
+  | Nombre de la Variable      | Tipo (`predeterminado`) | Por defecto      |
   | -------------------------- | ----------------------- | ---------------- |
   | **`CP_DATABASE_HOSTNAME`** | ?string                 | `"mariadb"`      |
   | **`CP_DATABASE_NAME`**     | ?string                 | `MYSQL_DATABASE` |
@@ -148,9 +148,9 @@ También se puede añadir una base de datos Redis como gestor de caché.
 
 - **castopod/app**
 
-  | Nombre de la variable        | Type (`default`)        | Default          |
+  | Nombre de la variable        | Tipo (`por defecto`)    | Por defecto      |
   | ---------------------------- | ----------------------- | ---------------- |
-  | **`CP_URLBASE`**             | string                  | `undefined`      |
+  | **`CP_BASEURL`**             | string                  | `undefined`      |
   | **`CP_MEDIA_URLBASE`**       | ?string                 | `CP_BASEURL`     |
   | **`CP_ADMIN_GATEWAY`**       | ?string                 | `"cp-admin"`     |
   | **`CP_AUTH_GATEWAY`**        | ?string                 | `"cp-auth"`      |
@@ -174,6 +174,6 @@ También se puede añadir una base de datos Redis como gestor de caché.
 
 - **castopod/web-server**
 
-  | Variable name         | Type    | Default |
-  | --------------------- | ------- | ------- |
-  | **`CP_APP_HOSTNAME`** | ?string | `"app"` |
+  | Nombre de la variable | Tipo    | Por defecto |
+  | --------------------- | ------- | ----------- |
+  | **`CP_APP_HOSTNAME`** | ?string | `"app"`     |

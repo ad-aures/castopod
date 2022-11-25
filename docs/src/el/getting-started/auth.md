@@ -5,23 +5,24 @@ sidebarDepth: 3
 
 # Ταυτοποίηση & εξουσιοδότηση
 
-Castopod handles authentication and authorization using `codeigniter/shield`
-coupled with custom rules. Roles and permissions are defined at two levels:
+Ο Castopod χειρίζεται τον έλεγχο ταυτότητας και την έγκριση χρησιμοποιώντας
+`codeigniter/shield` σε συνδυασμό με προσαρμοσμένους κανόνες. Οι ρόλοι και τα
+δικαιώματα καθορίζονται σε δύο επίπεδα:
 
-1. [instance wide](#1-instance-wide-roles-and-permissions)
-2. [per podcast](#2-per-podcast-roles-and-permissions)
+1. [ευρεία παρουσία](#1-instance-wide-roles-and-permissions)
+2. [ανά podcast](#2-per-podcast-roles-and-permissions)
 
-## 1. Instance wide roles and permissions
+## 1. Διαχείριση ρόλων και δικαιωμάτων
 
-### Instance roles
+### Ρόλοι εμφάνισης
 
 <!-- AUTH-INSTANCE-ROLES-LIST:START - Do not remove or modify this section -->
 
-| role        | description                         | permissions                                                                                |
-| ----------- | ----------------------------------- | ------------------------------------------------------------------------------------------ |
-| Super admin | Has complete control over Castopod. | admin.\*, podcasts.\*, users.manage, persons.manage, pages.manage, fediverse.manage-blocks |
-| Manager     | Manages Castopod's content.         | podcasts.create, podcasts.import, persons.manage, pages.manage                             |
-| Podcaster   | General users of Castopod.          | admin.access                                                                               |
+| ρόλος            | περιγραφή                             | δικαιώματα                                                                                 |
+| ---------------- | ------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Υπερδιαχειριστής | Έχει πλήρη έλεγχο του Castopod.       | admin.\*, podcasts.\*, users.manage, persons.manage, pages.manage, fediverse.manage-blocks |
+| Διαχειριστής     | Διαχείριση περιεχομένου του Castopod. | podcasts.create, podcasts.import, persons.manage, pages.manage                             |
+| Podcaster        | Γενικοί χρήστες του Castopod.         | admin.access                                                                               |
 
 <!-- AUTH-INSTANCE-ROLES-LIST:END -->
 

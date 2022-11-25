@@ -89,7 +89,7 @@ una base de dades Redis com a gestor de memòria cau.
 
       # this container is optional
       # add this if you want to use the videoclips feature
-      ffmpeg:
+      video-clipper:
         image: castopod/video-clipper:latest
         container_name: "castopod-video-clipper"
         volumes:

@@ -108,8 +108,8 @@ return [
         'monetization_section_subtitle' =>
             'Gana dinero gracias a tu audiencia.',
         'premium' => 'Premium',
-        'premium_by_default' => 'Episodes must be set as premium by default',
-        'premium_by_default_hint' => 'Podcast episodes will be marked as premium by default. You can still choose to set some episodes, trailers or bonuses as public.',
+        'premium_by_default' => 'Los episodios deben establecerse como premium por defecto',
+        'premium_by_default_hint' => 'Los episodios Podcast se marcarán como premium de forma predeterminada. Todavía puedes elegir establecer algunos episodios, trailers o bonificaciones como públicos.',
         'payment_pointer' => 'Puntero de pago para Monetización web',
         'payment_pointer_hint' =>
             'Aquí es donde usted recibirá dinero gracias a la Monetización Web',

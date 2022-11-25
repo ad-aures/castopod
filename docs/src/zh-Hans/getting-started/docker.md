@@ -88,7 +88,7 @@ Castopod 在其自动构建期间会将 3 个 Docker 映像推送到 Docker Hub 
 
       # this container is optional
       # add this if you want to use the videoclips feature
-      ffmpeg:
+      video-clipper:
         image: castopod/video-clipper:latest
         container_name: "castopod-video-clipper"
         volumes:

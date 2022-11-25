@@ -12,12 +12,12 @@ return [
     'your_handle' => 'An t-aithnichear agad',
     'your_handle_hint' => 'Cuir a-steach an @ainm_cleachdaiche@àrainn leis a ghabhas tu gnìomh.',
     'follow' => [
-        'label' => 'Lean air',
-        'title' => 'Lean air {actorDisplayName}',
-        'subtitle' => 'Tha thu gu bhith leantainn air:',
+        'label' => 'Lean',
+        'title' => 'Lean {actorDisplayName}',
+        'subtitle' => 'Tha thu gu bhith leantainn:',
         'accountNotFound' => 'Cha deach an cunntas a lorg.',
         'remoteFollowNotAllowed' => 'Tha coltas nach gabh am frithealaiche ri leantainn chèin…',
-        'submit' => 'Lean air adhart gus leantainn air',
+        'submit' => 'Lean air adhart gus a leantainn',
     ],
     'favourite' => [
         'title' => "Cuir am post aig {actorDisplayName} ris na h-annsachdan",

@@ -9,11 +9,11 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => 'Notifications',
-    'reply' => '{actor_username} replied to your post',
-    'favourite' => '{actor_username} favourited your post',
-    'reblog' => '{actor_username} shared your post',
-    'follow' => '{actor_username} started following you',
-    'no_notifications' => 'No notifications',
-    'mark_all_as_read' => 'Mark all as read',
+    'title' => 'Ειδοποιήσεις',
+    'reply' => '{actor_username} απάντησε στο post σας',
+    'favourite' => '{actor_username} έβαλε αγαπημένη τη δημοσίευσή σας',
+    'reblog' => '{actor_username} κοινοποίησε τη δημοσίευσή σας',
+    'follow' => '{actor_username} ξεκίνησε να σας ακολουθεί',
+    'no_notifications' => 'Καμία ειδοποίηση',
+    'mark_all_as_read' => 'Σήμανση όλων ως αναγνωσμένα',
 ];

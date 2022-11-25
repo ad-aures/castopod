@@ -24,34 +24,34 @@ return [
     'edit' => 'Επεξεργασία',
     'publish' => 'Δημοσίευση',
     'publish_edit' => 'Επεξεργασία δημοσίευσης',
-    'publish_date_edit' => 'Edit publication date',
+    'publish_date_edit' => 'Επεξεργασία ημερομηνίας δημοσίευσης',
     'unpublish' => 'Αναίρεση δημοσίευσης',
     'publish_error' => 'Το επεισόδιο έχει ήδη δημοσιευθεί.',
     'publish_edit_error' => 'Το επεισόδιο έχει ήδη δημοσιευθεί.',
     'publish_cancel_error' => 'Το επεισόδιο έχει ήδη δημοσιευθεί.',
-    'publish_date_edit_error' => 'Episode has not been published yet, you cannot edit its publication date.',
-    'publish_date_edit_future_error' => 'Episode\'s publication date can only be set to a past date! If you would like to reschedule it, unpublish it first.',
-    'publish_date_edit_success' => 'Episode\'s publication date has been updated successfully!',
+    'publish_date_edit_error' => 'Το επεισόδιο δεν έχει δημοσιευθεί ακόμα, δεν μπορείτε να επεξεργαστείτε την ημερομηνία έκδοσής του.',
+    'publish_date_edit_future_error' => 'Η ημερομηνία δημοσίευσης του επεισοδίου μπορεί να οριστεί μόνο σε μια προηγούμενη ημερομηνία! Αν θέλετε να την προγραμματίσετε εκ νέου, αποδημοσιεύστε την πρώτα.',
+    'publish_date_edit_success' => 'Η ημερομηνία δημοσίευσης του επεισοδίου έχει ενημερωθεί με επιτυχία!',
     'unpublish_error' => 'Το επεισόδιο δεν έχει δημοσιευθεί.',
     'delete' => 'Διαγραφή',
     'go_to_page' => 'Μετάβαση στη σελίδα',
     'create' => 'Προσθήκη επεισοδίου',
     'publication_status' => [
         'published' => 'Δημοσιευμένο',
-        'with_podcast' => 'Published',
+        'with_podcast' => 'Δημοσιευμένο',
         'scheduled' => 'Προγραμματισμένο',
         'not_published' => 'Δεν έχει δημοσιευτεί',
     ],
-    'with_podcast_hint' => 'To be published at the same time as the podcast',
+    'with_podcast_hint' => 'Να δημοσιευτεί ταυτόχρονα με το podcast',
     'list' => [
         'search' => [
-            'placeholder' => 'Search for an episode',
-            'clear' => 'Clear search',
-            'submit' => 'Search',
+            'placeholder' => 'Αναζήτηση ενός επεισοδίου',
+            'clear' => 'Καθαρισμός αναζήτησης',
+            'submit' => 'Αναζήτηση',
         ],
         'number_of_episodes' => '{numberOfEpisodes, plural,
-            one {# episode}
-            other {# episodes}
+            one {# επισόδειο}
+            other {# επισόδεια}
         }',
         'episode' => 'Επεισόδιο',
         'visibility' => 'Ορατότητα',
@@ -62,31 +62,31 @@ return [
         'createSuccess' => 'Το επεισόδιο δημιουργήθηκε με επιτυχία!',
         'editSuccess' => 'Το επεισόδιο ενημερώθηκε με επιτυχία!',
         'publishSuccess' => '{publication_status, select,
-            published {Episode successfully published!}
-            scheduled {Episode publication successfully scheduled!}
-            with_podcast {This episode will be published at the same time as the podcast.}
-            other {This episode is not published.}
+            published {Το επεισόδιο δημοσιεύτηκε με επιτυχία!}
+            scheduled {Η έκδοση για το επεισόδιο έχει προγραμματιστεί επιτυχώς!}
+            with_podcast {Αυτό το επεισόδιο θα δημοσιευθεί ταυτόχρονα με το podcast.}
+            other {Αυτό το επεισόδιο δεν έχει δημοσιευθεί.}
         }',
         'publishCancelSuccess' => 'Η δημοσίευση του επεισοδίου ακυρώθηκε επιτυχώς!',
-        'unpublishBeforeDeleteTip' => 'You must unpublish the episode before deleting it.',
-        'scheduleDateError' => 'Schedule date must be set!',
-        'deletePublishedEpisodeError' => 'Please unpublish the episode before deleting it.',
-        'deleteSuccess' => 'Episode successfully deleted!',
-        'deleteError' => 'Failed to delete episode {type, select,
+        'unpublishBeforeDeleteTip' => 'Πρέπει να καταργήσετε τη δημοσίευση του επεισοδίου πριν τη διαγραφή.',
+        'scheduleDateError' => 'Η ημερομηνία πρέπει να οριστεί!',
+        'deletePublishedEpisodeError' => 'Πρέπει να καταργήσετε τη δημοσίευση του επεισοδίου πριν τη διαγραφή.',
+        'deleteSuccess' => 'Το επεισόδιο διαγράφτηκε με επιτυχία!',
+        'deleteError' => 'Αποτυχία διαγραφής επεισοδίου {type, select,
             transcript {transcript}
-            chapters {chapters}
-            image {cover}
-            audio {audio}
-            other {media}
+            chapters {κεφάλαια}
+            image {καλύπτουν}
+            audio {ήχος}
+            other {πολυμέσα}
         }.',
-        'deleteFileError' => 'Failed to delete {type, select,
+        'deleteFileError' => 'Αποτυχία διαγραφής {type, select,
             transcript {transcript}
-            chapters {chapters}
-            image {cover}
-            audio {audio}
-            other {media}
-        } file {file_path}. You may manually remove it from your disk.',
-        'sameSlugError' => 'An episode with the chosen slug already exists.',
+            chapters {κεφάλαια}
+            image {καλύψτε}
+            audio {ήχος}
+            other {πολυμέσα}
+        } αρχείο {file_path}. Μπορείτε να το αφαιρέσετε χειροκίνητα από το δίσκο σας.',
+        'sameSlugError' => 'Ένα επεισόδιο με το επιλεγμένο slug υπάρχει ήδη.',
     ],
     'form' => [
         'file_size_error' =>
@@ -97,7 +97,7 @@ return [
         'cover' => 'Εξώφυλλο επισοδίου',
         'cover_hint' =>
             'Εάν δεν ορίσετε ένα εξώφυλλο, το εξώφυλλο του podcast θα χρησιμοποιηθεί αντ \'αυτού.',
-        'cover_size_hint' => 'Cover must be squared and at least 1400px wide and tall.',
+        'cover_size_hint' => 'Το εξώφυλλο πρέπει να είναι τουλάχιστον 1400px πλάτος και ύψος.',
         'title' => 'Τίτλος',
         'title_hint' =>
             'Θα πρέπει να υπάρχει ένα σαφές και συνοπτικό όνομα επεισοδίου. Μην καθορίσετε εδώ το επεισόδιο ή τους αριθμούς της σεζόν.',
@@ -114,7 +114,7 @@ return [
             'bonus_hint' => 'Επιπλέον περιεχόμενο για την παράσταση (για παράδειγμα, πίσω από τις σκηνές πληροφορίες ή συνεντεύξεις με τη cast) ή δια-διαφημιστικό περιεχόμενο για μια άλλη παράσταση',
         ],
         'premium_title' => 'Premium',
-        'premium' => 'Episode must be accessible to premium subscribers only',
+        'premium' => 'Το επεισόδιο πρέπει να είναι προσβάσιμο μόνο σε συνδρομητές premium',
         'parental_advisory' => [
             'label' => 'Γονικός σύμβουλος',
             'hint' => 'Μήπως το επεισόδιο περιέχει ακατάλληλο περιεχόμενο;',
@@ -153,9 +153,9 @@ return [
             'Αν χρειάζεστε ετικέτες RSS που δεν χειρίζεται το Castopod, ορίστε τις εδώ.',
         'custom_rss' => 'Προσαρμοσμένες ετικέτες RSS για το επεισόδιο',
         'custom_rss_hint' => 'Αυτό θα ενεθεί εντός της ετικέτας "item".',
-        'block' => 'Episode should be hidden from public catalogues',
+        'block' => 'Το επεισόδιο πρέπει να είναι κρυμμένο από όλες τις πλατφόρμες',
         'block_hint' =>
-            'The episode show or hide status: toggling this on prevents the episode from appearing in Apple Podcasts, Google Podcasts, and any third party apps that pull shows from these directories. (Not guaranteed)',
+            'H κατάσταση εμφάνιση ή απόκρυψη επισοδείου: Η εναλλαγή αποτρέπει την εμφάνιση του επεισοδίου στο Apple Podcast Google Podcasts, και σε οποιεσδήποτε εφαρμογή τρίτων που τραβούν τις εμφανίσεις από αυτούς τους καταλόγους. (Μη εγγυημένη)',
         'submit_create' => 'Δημιουργία επεισοδίου',
         'submit_edit' => 'Αποθήκευση επεισοδίου',
     ],
@@ -169,7 +169,7 @@ return [
         'publication_method' => [
             'now' => 'Τώρα',
             'schedule' => 'Προγραμματισμός',
-            'with_podcast' => 'Publish alongside podcast',
+            'with_podcast' => 'Δημοσίευση παράλληλα με podcast',
         ],
         'scheduled_publication_date' => 'Ημερομηνία προγραμματισμένης δημοσίευσης',
         'scheduled_publication_date_clear' => 'Εκκαθάριση ημερομηνίας δημοσίευσης',
@@ -183,21 +183,21 @@ return [
         'message_warning_submit' => 'Δημοσίευση ούτως ή άλλως',
     ],
     'publish_date_edit_form' => [
-        'new_publication_date' => 'New publication date',
-        'new_publication_date_hint' => 'Must be set to a past date.',
-        'submit' => 'Edit publication date',
+        'new_publication_date' => 'Ημερομηνία νέας δημοσίευσης',
+        'new_publication_date_hint' => 'Πρέπει να οριστεί σε μια προηγούμενη ημερομηνία.',
+        'submit' => 'Επεξεργασία ημερομηνίας δημοσίευσης',
     ],
     'unpublish_form' => [
         'disclaimer' =>
-            "Unpublishing the episode will delete all the comments and posts associated with it and remove it from the podcast's RSS feed.",
+            "Η κατάργηση της δημοσίευσης του επεισοδίου θα διαγράψει όλα τα σχόλια και τις δημοσιεύσεις που σχετίζονται με αυτό και θα τα αφαιρέσει από τη ροή RSS του podcast.",
         'understand' => 'Καταλαβαίνω, θέλω να αποδημοσιεύσει το επεισόδιο',
         'submit' => 'Αναίρεση δημοσίευσης',
     ],
     'delete_form' => [
         'disclaimer' =>
-            "Deleting the episode will delete all media files, comments, video clips and soundbites associated with it.",
+            "Διαγράφοντας το επεισόδιο θα διαγράψετε όλα τα αρχεία πολυμέσων, τα σχόλια, τα βίντεο κλιπ και τα ηχητικά δεδομένα που σχετίζονται με αυτό.",
         'understand' => 'Καταλαβαίνω, θέλω να διαγράψω το επεισόδιο',
-        'submit' => 'Delete',
+        'submit' => 'Διαγραφή',
     ],
     'embed' => [
         'title' => 'Ενσωματώσιμος αναπαραγωγέας',

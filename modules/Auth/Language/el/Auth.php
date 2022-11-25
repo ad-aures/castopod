@@ -11,53 +11,53 @@ declare(strict_types=1);
 return [
     'instance_groups' => [
         'owner' => [
-            'title' => 'Instance Owner',
-            'description' => 'The Castopod owner.',
+            'title' => 'Ιδιοκτήτης Διακομιστή',
+            'description' => 'Ο ιδιοκτήτης του Castopod.',
         ],
         'superadmin' => [
-            'title' => 'Super admin',
-            'description' => 'Has complete control over Castopod.',
+            'title' => 'Υπερδιαχειριστής',
+            'description' => 'Έχει πλήρη έλεγχο του Castopod.',
         ],
         'manager' => [
-            'title' => 'Manager',
-            'description' => 'Manages Castopod\'s content.',
+            'title' => 'Διαχειριστής',
+            'description' => 'Διαχείριση περιεχομένου του Castopod.',
         ],
         'podcaster' => [
             'title' => 'Podcaster',
-            'description' => 'General users of Castopod.',
+            'description' => 'Γενικοί χρήστες του Castopod.',
         ],
     ],
     'instance_permissions' => [
-        'admin.access' => 'Can access the Castopod admin area.',
-        'admin.settings' => 'Can access the Castopod settings.',
-        'users.manage' => 'Can manage Castopod users.',
-        'persons.manage' => 'Can manage persons.',
-        'pages.manage' => 'Can manage pages.',
-        'podcasts.view' => 'Can view all podcasts.',
-        'podcasts.create' => 'Can create new podcasts.',
-        'podcasts.import' => 'Can import podcasts.',
-        'fediverse.manage-blocks' => 'Can block fediverse actors/domains from interacting with Castopod.',
+        'admin.access' => 'Μπορεί να έχει πρόσβαση στην περιοχή διαχείρισης Castopod.',
+        'admin.settings' => 'Μπορεί να έχει πρόσβαση στις ρυθμίσεις Castopod.',
+        'users.manage' => 'Μπορεί να διαχειριστεί τους χρήστες Castopod.',
+        'persons.manage' => 'Μπορεί να διαχειριστεί τα άτομα.',
+        'pages.manage' => 'Μπορεί να διαχειριστεί τις σελίδες.',
+        'podcasts.view' => 'Μπορεί να δει όλα τα podcasts.',
+        'podcasts.create' => 'Μπορεί να δημιουργήσει νέα podcasts.',
+        'podcasts.import' => 'Μπορεί να εισάγει podcasts.',
+        'fediverse.manage-blocks' => 'Μπορεί να εμποδίσει τους ψευτογενείς ηθοποιούς/τομείς να αλληλεπιδρούν με το Castopod.',
     ],
     'podcast_groups' => [
         'owner' => [
-            'title' => 'Podcast Owner',
-            'description' => 'The podcast owner.',
+            'title' => 'Ιδιοκτήτης Podcast',
+            'description' => 'Ο ιδιοκτήτης του podcast.',
         ],
         'admin' => [
-            'title' => 'Admin',
-            'description' => 'Has complete control of podcast #{id}.',
+            'title' => 'Διαχειριστής',
+            'description' => 'Έχει πλήρη έλεγχο του podcast #{id}.',
         ],
         'editor' => [
-            'title' => 'Editor',
-            'description' => 'Manages content and publications of podcast #{id}.',
+            'title' => 'Εκδότης',
+            'description' => 'Διαχειρίζεται περιεχόμενο και δημοσιεύσεις του podcast #{id}.',
         ],
         'author' => [
-            'title' => 'Author',
+            'title' => 'Συντάκτης',
             'description' => 'Manages content of podcast #{id} but cannot publish them.',
         ],
         'guest' => [
-            'title' => 'Guest',
-            'description' => 'General contributor of the podcast #{id}.',
+            'title' => 'Επισκέπτης',
+            'description' => 'Γενικός συντελεστής του podcast #{id}.',
         ],
     ],
     'podcast_permissions' => [

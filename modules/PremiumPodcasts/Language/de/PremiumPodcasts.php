@@ -9,7 +9,7 @@ declare(strict_types=1);
  */
 
 return [
-    'podcast_is_premium' => 'Podcast contains premium episodes',
+    'podcast_is_premium' => 'Podcast enthält Premium-Episoden',
     'episode_is_premium' => 'Episode is premium, only available to premium subscribers',
     'unlock_episode' => 'This episode is for premium subscribers only. Click to unlock it!',
     'banner_unlock' => 'This podcast contains premium episodes, only available to premium subscribers.',

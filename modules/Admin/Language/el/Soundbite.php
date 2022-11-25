@@ -10,22 +10,22 @@ declare(strict_types=1);
 
 return [
     'list' => [
-        'title' => 'Soundbites',
-        'soundbite' => 'Soundbite',
+        'title' => 'Ήχοι',
+        'soundbite' => 'Ήχος',
     ],
     'messages' => [
-        'createSuccess' => 'Soundbite has been successfully created!',
-        'deleteSuccess' => 'Soundbite has been successfully removed!',
+        'createSuccess' => 'Το Soundbite δημιουργήθηκε με επιτυχία!',
+        'deleteSuccess' => 'Το Soundbite αφαιρέθηκε με επιτυχία!',
     ],
     'form' => [
-        'title' => 'New soundbite',
-        'soundbite_title' => 'Soundbite title',
-        'start_time' => 'Start at',
-        'duration' => 'Duration',
-        'submit' => 'Create soundbite',
+        'title' => 'Νέο soundbite',
+        'soundbite_title' => 'Τίτλος Soundbite',
+        'start_time' => 'Έναρξη από',
+        'duration' => 'Διάρκεια',
+        'submit' => 'Δημιουργία soundbite',
     ],
-    'play' => 'Play soundbite',
-    'stop' => 'Stop soundbite',
-    'create' => 'New soundbite',
-    'delete' => 'Delete soundbite',
+    'play' => 'Αναπαραγωγή soundbite',
+    'stop' => 'Σταμάτημα soundbite',
+    'create' => 'Νέο soundbite',
+    'delete' => 'Διαγραφή soundbite',
 ];
