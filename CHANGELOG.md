@@ -1,3 +1,10 @@
+## [1.0.5](https://code.castopod.org/adaures/castopod/compare/v1.0.4...v1.0.5) (2022-11-25)
+
+### Bug Fixes
+
+- **router:** revert to CI4 v4.2.7 to include all routes
+  ([c13cfa0](https://code.castopod.org/adaures/castopod/commit/c13cfa0ea0679751521ca4157b953043ecc7974a))
+
 ## [1.0.4](https://code.castopod.org/adaures/castopod/compare/v1.0.3...v1.0.4) (2022-11-21)
 
 ### Bug Fixes
