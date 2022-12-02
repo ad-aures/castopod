@@ -370,7 +370,7 @@ if (! function_exists('get_rss_feed')) {
             foreach ($episode->soundbites as $soundbite) {
                 // TODO: differentiate video from soundbites?
                 $soundbiteElement = $item->addChild('soundbite', $soundbite->title, $podcastNamespace);
-                $soundbiteElement->addAttribute('start_time', (string) $soundbite->start_time);
+                $soundbiteElement->addAttribute('startTime', (string) $soundbite->start_time);
                 $soundbiteElement->addAttribute('duration', (string) round($soundbite->duration, 3));
             }
 
