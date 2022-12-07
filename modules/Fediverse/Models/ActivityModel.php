@@ -133,7 +133,7 @@ class ActivityModel extends BaseUuidModel
      */
     protected function notify(array $data): array
     {
-        $activity = (new self())->getActivityById(is_array($data['id']) ? $data['id'][0] : $data['id']);
+        $activity = (new self())->find(is_array($data['id']) ? $data['id'][0] : $data['id']);
 
         if (! $activity instanceof Activity) {
             return $data;
