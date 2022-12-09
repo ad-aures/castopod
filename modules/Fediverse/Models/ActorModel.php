@@ -61,16 +61,7 @@ class ActorModel extends BaseModel
 
     public function getActorById(int $id): ?Actor
     {
-        $cacheName = config('Fediverse')
-            ->cachePrefix . "actor#{$id}";
-        if (! ($found = cache($cacheName))) {
-            $found = $this->find($id);
-
-            cache()
-                ->save($cacheName, $found, DECADE);
-        }
-
-        return $found;
+        return $this->find($id);
     }
 
     /**

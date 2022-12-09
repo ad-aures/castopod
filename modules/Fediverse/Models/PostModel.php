@@ -89,16 +89,7 @@ class PostModel extends BaseUuidModel
 
     public function getPostById(string $postId): ?Post
     {
-        $cacheName = config('Fediverse')
-            ->cachePrefix . "post#{$postId}";
-        if (! ($found = cache($cacheName))) {
-            $found = $this->find($postId);
-
-            cache()
-                ->save($cacheName, $found, DECADE);
-        }
-
-        return $found;
+        return $this->find($postId);
     }
 
     public function getPostByUri(string $postUri): ?Post

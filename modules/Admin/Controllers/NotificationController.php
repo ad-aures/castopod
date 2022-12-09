@@ -85,10 +85,7 @@ class NotificationController extends BaseController
 
         $post = (new PostModel())->getPostById($this->notification->post_id);
 
-        return redirect()->route(
-            'post',
-            [esc((new PodcastModel())->getPodcastByActorId($this->notification->actor_id)->handle), $post->id]
-        );
+        return redirect()->route('post', [$this->podcast->handle, $post->id]);
     }
 
     public function markAllAsRead(): RedirectResponse
