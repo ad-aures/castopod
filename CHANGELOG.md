@@ -1,3 +1,20 @@
+# [1.1.0](https://code.castopod.org/adaures/castopod/compare/v1.0.5...v1.1.0) (2022-12-09)
+
+### Bug Fixes
+
+- **notifications:** remove cache inconsistencies when marking notification as
+  read
+  ([46d7054](https://code.castopod.org/adaures/castopod/commit/46d70541d313c836ab0c078ba6121fe5fe956e62))
+- **notifications:** retrieve activity from database instead of getting cache
+  ([7fbbd08](https://code.castopod.org/adaures/castopod/commit/7fbbd08da6a37d08608900ad318e72815fe4b0c4))
+- **podcast:soundbite:** rename start time attribute to follow spec
+  ([689831c](https://code.castopod.org/adaures/castopod/commit/689831c26c756d454de432900d23bc09a37f890b))
+
+### Features
+
+- **analytics:** add OP3 analytics service option + update episode audio url
+  ([16527ed](https://code.castopod.org/adaures/castopod/commit/16527ed529265f2925e205856c684e34175a8933))
+
 ## [1.0.5](https://code.castopod.org/adaures/castopod/compare/v1.0.4...v1.0.5) (2022-11-25)
 
 ### Bug Fixes
