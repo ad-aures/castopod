@@ -90,5 +90,5 @@ return [
 
     // Welcome email
     'welcomeSubject' => 'Has sido invitado a {siteName}',
-    'emailWelcomeMailBody' => 'An account was created for you on {domain}, click on the login link below to set your password. The link is valid for {numberOfHours} hours after this email was sent.',
+    'emailWelcomeMailBody' => 'Una cuenta fue creada para usted en {domain}, haga clic en el enlace de inicio de sesión de abajo para establecer su contraseña. El enlace es válido durante {numberOfHours} horas después de enviar este correo electrónico.',
 ];

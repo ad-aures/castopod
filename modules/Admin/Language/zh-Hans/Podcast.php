@@ -110,6 +110,10 @@ return [
         'premium' => '高级版',
         'premium_by_default' => '剧集必须默认设置为付费会员订阅。',
         'premium_by_default_hint' => '默认情况下，播客剧集将被标记为高级。 你仍然可以选择将某些剧集、预告片等设置为公开。',
+        'op3' => 'Open Podcast Prefix Project (OP3)',
+        'op3_hint' => 'Value your analytics data with OP3, an open-source and trusted third party analytics service. Share, validate and compare your analytics data with the open podcasting ecosystem.',
+        'op3_enable' => 'Enable OP3 analytics service',
+        'op3_enable_hint' => 'For security reasons, premium episodes\' analytics data will not be shared with OP3.',
         'payment_pointer' => '网络货币化支付指南',
         'payment_pointer_hint' =>
             '借助网络货币化，你可以在此收款',

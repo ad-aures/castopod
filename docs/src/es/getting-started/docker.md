@@ -148,31 +148,31 @@ También se puede añadir una base de datos Redis como gestor de caché.
 
 - **castopod/app**
 
-  | Nombre de la variable        | Tipo (`por defecto`)    | Por defecto      |
-  | ---------------------------- | ----------------------- | ---------------- |
-  | **`CP_BASEURL`**             | string                  | `undefined`      |
-  | **`CP_MEDIA_URLBASE`**       | ?string                 | `CP_BASEURL`     |
-  | **`CP_ADMIN_GATEWAY`**       | ?string                 | `"cp-admin"`     |
-  | **`CP_AUTH_GATEWAY`**        | ?string                 | `"cp-auth"`      |
-  | **`CP_ANALYTICS_SALT`**      | string                  | `undefined`      |
-  | **`CP_DATABASE_HOSTNAME`**   | ?string                 | `"mariadb"`      |
-  | **`CP_DATABASE_NAME`**       | ?string                 | `MYSQL_DATABASE` |
-  | **`CP_DATABASE_USERNAME`**   | ?string                 | `MYSQL_USER`     |
-  | **`CP_DATABASE_PASSWORD`**   | ?string                 | `MYSQL_PASSWORD` |
-  | **`CP_DATABASE_PREFIX`**     | ?string                 | `"cp_"`          |
-  | **`CP_CACHE_HANDLER`**       | [`"file"` or `"redis"`] | `"file"`         |
-  | **`CP_REDIS_HOST`**          | ?string                 | `"localhost"`    |
-  | **`CP_REDIS_PASSWORD`**      | ?string                 | `null`           |
-  | **`CP_REDIS_PORT`**          | ?number                 | `6379`           |
-  | **`CP_REDIS_DATABASE`**      | ?number                 | `0`              |
-  | **`CP_EMAIL_SMTP_HOST`**     | ?string                 | `undefined`      |
-  | **`CP_EMAIL_FROM`**          | ?string                 | `undefined`      |
-  | **`CP_EMAIL_SMTP_USERNAME`** | ?string                 | `"localhost"`    |
-  | **`CP_EMAIL_SMTP_PASSWORD`** | ?string                 | `null`           |
-  | **`CP_EMAIL_SMTP_PORT`**     | ?number                 | `25`             |
-  | **`CP_EMAIL_SMTP_CRYPTO`**   | [`"tls"` or `"ssl"`]    | `"tls"`          |
+  | Nombre de la variable        | Tipo (`por defecto`)   | Por defecto      |
+  | ---------------------------- | ---------------------- | ---------------- |
+  | **`CP_BASEURL`**             | string                 | `undefined`      |
+  | **`CP_MEDIA_URLBASE`**       | ?string                | `CP_BASEURL`     |
+  | **`CP_ADMIN_GATEWAY`**       | ?string                | `"cp-admin"`     |
+  | **`CP_AUTH_GATEWAY`**        | ?string                | `"cp-auth"`      |
+  | **`CP_ANALYTICS_SALT`**      | string                 | `undefined`      |
+  | **`CP_DATABASE_HOSTNAME`**   | ?string                | `"mariadb"`      |
+  | **`CP_DATABASE_NAME`**       | ?string                | `MYSQL_DATABASE` |
+  | **`CP_DATABASE_USERNAME`**   | ?string                | `MYSQL_USER`     |
+  | **`CP_DATABASE_PASSWORD`**   | ?string                | `MYSQL_PASSWORD` |
+  | **`CP_DATABASE_PREFIX`**     | ?string                | `"cp_"`          |
+  | **`CP_CACHE_HANDLER`**       | [`"file"` o `"redis"`] | `"file"`         |
+  | **`CP_REDIS_HOST`**          | ?string                | `"localhost"`    |
+  | **`CP_REDIS_PASSWORD`**      | ?string                | `null`           |
+  | **`CP_REDIS_PORT`**          | ?number                | `6379`           |
+  | **`CP_REDIS_DATABASE`**      | ?number                | `0`              |
+  | **`HOST_EMAIL_SMTP_HOST`**   | ?string                | `undefined`      |
+  | **`CP_EMAIL_FROM`**          | ?string                | `undefined`      |
+  | **`CP_EMAIL_SMTP_USERNAME`** | ?string                | `"localhost"`    |
+  | **`CP_EMAIL_SMTP_PASSWORD`** | ?string                | `null`           |
+  | **`CP_EMAIL_SMTP_PORT`**     | ?number                | `25`             |
+  | **`CP_EMAIL_SMTP_CRYPTO`**   | [`"tls"` o `"ssl"`]    | `"tls"`          |
 
-- **castopod/web-server**
+- **castopod/servidor web**
 
   | Nombre de la variable | Tipo    | Por defecto |
   | --------------------- | ------- | ----------- |

@@ -9,7 +9,7 @@ declare(strict_types=1);
  */
 
 return [
-    'edit_role' => "Edit {username}'s role",
+    'edit_role' => "Editar os roles de {username}",
     'ban' => 'Vetar',
     'unban' => 'Retirar veto',
     'delete' => 'Eliminar',
@@ -18,7 +18,7 @@ return [
     'all_users' => 'Tódalas usuarias',
     'list' => [
         'user' => 'Usuaria',
-        'role' => 'Role',
+        'role' => 'Rol',
         'banned' => 'Vetada?',
     ],
     'form' => [
@@ -26,7 +26,7 @@ return [
         'username' => 'Identificador',
         'password' => 'Contrasinal',
         'new_password' => 'Novo contrasinal',
-        'role' => 'Role',
+        'role' => 'Rol',
         'roles' => 'Roles',
         'permissions' => 'Permisos',
         'submit_create' => 'Crear usuaria',
@@ -34,11 +34,11 @@ return [
         'submit_password_change' => 'Cambiar!',
     ],
     'delete_form' => [
-        'title' => 'Delete {user}',
+        'title' => 'Eliminar {user}',
         'disclaimer' =>
-            "You are about to delete {user} permanently. They will not be able to access the admin area anymore.",
-        'understand' => 'I understand, I want to delete {user} permanently',
-        'submit' => 'Delete',
+            "Vas eliminar de xeito permanente a {user}. Non poderá volver a acceder á páxina de administración.",
+        'understand' => 'Enténdoo, quero eliminar a {user} para sempre',
+        'submit' => 'Eliminar',
     ],
     'messages' => [
         'createSuccess' =>
@@ -52,7 +52,7 @@ return [
         'banSuperAdminError' =>
             '{username} é superadmin, non se pode vetar a superadmin…',
         'deleteOwnerError' =>
-            '{username} is the instance owner, one does not simply delete the owner…',
+            '{username} é dona da instancia, non se pode eliminar a propietaria…',
         'deleteSuperAdminError' =>
             '{username} é superadmin, non se pode eliminar a superadmin…',
         'deleteSuccess' => 'Eliminouse a {username}.',

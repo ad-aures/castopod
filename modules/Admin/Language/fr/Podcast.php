@@ -110,6 +110,10 @@ return [
         'premium' => 'Prémium',
         'premium_by_default' => 'Les épisodes doivent être définis comme premium par défaut',
         'premium_by_default_hint' => 'Les épisodes de Podcast seront marqués comme premium par défaut. Vous pouvez toujours choisir de définir certains épisodes, bandes-annonces ou bonus comme publics.',
+        'op3' => 'Open Podcast Prefix Project (OP3)',
+        'op3_hint' => 'Value your analytics data with OP3, an open-source and trusted third party analytics service. Share, validate and compare your analytics data with the open podcasting ecosystem.',
+        'op3_enable' => 'Enable OP3 analytics service',
+        'op3_enable_hint' => 'For security reasons, premium episodes\' analytics data will not be shared with OP3.',
         'payment_pointer' => 'Adresse de paiement (Payment Pointer) pour Web Monetization',
         'payment_pointer_hint' =>
             'L’adresse où vous recevrez de l’argent grâce à Web Monetization',

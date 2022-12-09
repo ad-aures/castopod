@@ -60,9 +60,9 @@ no cuentas con esta información, contacta con el administrador de tu servidor.
 
 #### Privilegios
 
-User must have at least these privileges on the database for Castopod to work:
-`CREATE`, `ALTER`, `DELETE`, `EXECUTE`, `INDEX`, `INSERT`, `SELECT`, `UPDATE`,
-`REFERENCES`, `CREATE VIEW`.
+El usuario debe tener al menos estos privilegios en la base de datos para que
+Castopod funcione: `CREATE`, `ALTER`, `DELETE`, `EXECUTE`, `INDEX`, `INSERT`,
+`SELECT`, `UPDATE`, `REFERENCES`, `CREATE VIEW`.
 
 ### (Opcional) FFmpeg v4.1.8 o superior para poder generar clips de vídeo (recortes de vídeo)
 
@@ -137,44 +137,46 @@ manually based on the `.env.example` file.
 
 :::
 
-### Email/SMTP setup
+### Configuración de Correo Electrónico/SMTP
 
-Email configuration is required for some features to work properly (eg.
-retrieving your forgotten password, sending instructions to premium subscribers,
-…)
+La configuración del correo electrónico es necesaria para que algunas
+características funcionen correctamente (por ejemplo, recuperar su contraseña
+olvidada, enviando instrucciones a los suscriptores premium, …)
 
-You may add your email configuration in your instance's `.env` like so:
+Puedes añadir tu configuración de correo electrónico en el archivo `.env` de tu
+instancia así:
 
 ```ini
 # […]
 
-SMTPHost="your_smtp_host"
-email. SMTPUser="your_smtp_user"
-email. SMTPPass="your_smtp_password"
+email.fromEmail="your_email_address"
+email.SMTPHost="your_smtp_host"
+email.SMTPUser="your_smtp_user"
+email.SMTPPass="your_smtp_password"
 ```
 
-#### Email config options
+#### Opciones de configuración de email
 
-| Variable name    | Type                 | Default      |
-| ---------------- | -------------------- | ------------ |
-| **`fromEmail`**  | string               | `undefined`  |
-| **`fromName`**   | string               | `"Castopod"` |
-| **`SMTPHost`**   | string               | `undefined`  |
-| **`SMTPUser`**   | string               | `undefined`  |
-| **`SMTPPass`**   | string               | `undefined`  |
-| **`SMTPPort`**   | number               | `25`         |
-| **`SMTPCrypto`** | [`"tls"` or `"ssl"`] | `"tls"`      |
+| Nombre de la variable | Tipo                 | Predeterminado |
+| --------------------- | -------------------- | -------------- |
+| **`fromEmail`**       | string               | `undefined`    |
+| **`fromName`**        | string               | `"Castopod"`   |
+| **`SMTPHost`**        | string               | `undefined`    |
+| **`SMTPUser`**        | string               | `undefined`    |
+| **`SMTPPass`**        | string               | `undefined`    |
+| **`SMTPPort`**        | number               | `25`           |
+| **`SMTPCrypto`**      | [`"tls"` or `"ssl"`] | `"tls"`        |
 
 ## Paquetes de la comunidad
 
-If you don't want to bother with installing Castopod manually, you may use one
-of the packages created and maintained by the open-source community.
+Si no quieres molestarte en instalar Castopod manualmente, puedes utilizar uno
+de los paquetes creados y mantenidos por la comunidad de código abierto.
 
-### Install with YunoHost
+### Instalar con YunoHost
 
-[YunoHost](https://yunohost.org/) is a distribution based on Debian GNU/Linux
-made up of free and open-source software packages. It manages the hardships of
-self-hosting for you.
+[YunoHost](https://yunohost.org/) es una distribución GNU/Linux basada en Debian
+compuesta por paquetes de software libre y de código abierto. Te ayuda a
+gestionar las partes difíciles de autoalojamiento.
 
 <div class="flex flex-wrap items-center gap-4">
 
@@ -182,6 +184,9 @@ self-hosting for you.
    <img src="https://install-app.yunohost.org/install-with-yunohost.svg" alt="Instalar Castopod con YunoHost." class="align-middle" />
 </a>
 
-<a href="https://github.com/YunoHost-Apps/castopod_ynh" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-4 py-[.3rem] mx-auto font-semibold text-center text-black rounded-md gap-x-1 border-2 border-solid border-[#333] hover:no-underline hover:bg-gray-100">
+<a href="https://github.com/YunoHost-Apps/castopod_ynh" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-4 py-[.3rem] mx-auto font-semibold text-center text-black rounded-md gap-x-1 border-2 border-solid border-[#333] hover:no-underline hover:bg-gray-100"><svg
+   xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em"
+   class="text-xl"><path fill="none" d="M0 0h24v24H0z"/><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 6.84 9.49c.5.09.69-.21.69-.48l-.02-1.86c-2.51.46-3.16-.61-3.36-1.18-.11-.28-.6-1.17-1.02-1.4-.35-.2-.85-.66-.02-.67.79-.01 1.35.72 1.54 1.02.9 1.52 2.34 1.1 2.91.83a2.1 2.1 0 0 1 .64-1.34c-2.22-.25-4.55-1.11-4.55-4.94A3.9 3.9 0 0 1 6.68 8.8a3.6 3.6 0 0 1 .1-2.65s.83-.27 2.75 1.02a9.28 9.28 0 0 1 2.5-.34c.85 0 1.7.12 2.5.34 1.9-1.3 2.75-1.02 2.75-1.02.54 1.37.2 2.4.1 2.65.63.7 1.02 1.58 1.02 2.68 0 3.84-2.34 4.7-4.56 4.94.36.31.67.91.67 1.85l-.01 2.75c0 .26.19.58.69.48A10.02 10.02 0 0 0 22 12 10 10 0 0 0 12 2z"/></svg>Github
+Repo</a>
 
 </div>

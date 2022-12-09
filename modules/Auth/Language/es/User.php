@@ -9,7 +9,7 @@ declare(strict_types=1);
  */
 
 return [
-    'edit_role' => "Edit {username}'s role",
+    'edit_role' => "Editar rol de {username}",
     'ban' => 'Banear',
     'unban' => 'Desbanear',
     'delete' => 'Borrar',
@@ -18,7 +18,7 @@ return [
     'all_users' => 'Todos los usuarios',
     'list' => [
         'user' => 'Usuario',
-        'role' => 'Role',
+        'role' => 'Rol',
         'banned' => '¿Baneado?',
     ],
     'form' => [
@@ -26,7 +26,7 @@ return [
         'username' => 'Nombre de usuario',
         'password' => 'Contraseña',
         'new_password' => 'Nueva Contraseña',
-        'role' => 'Role',
+        'role' => 'Rol',
         'roles' => 'Roles',
         'permissions' => 'Permisos',
         'submit_create' => 'Crear usuario',
@@ -34,11 +34,11 @@ return [
         'submit_password_change' => '¡Cambiar!',
     ],
     'delete_form' => [
-        'title' => 'Delete {user}',
+        'title' => 'Eliminar {user}',
         'disclaimer' =>
-            "You are about to delete {user} permanently. They will not be able to access the admin area anymore.",
-        'understand' => 'I understand, I want to delete {user} permanently',
-        'submit' => 'Delete',
+            "Estás a punto de eliminar {user} permanentemente. Ya no podrán acceder al área de administración.",
+        'understand' => 'Entiendo, quiero eliminar {user} permanentemente',
+        'submit' => 'Eliminar',
     ],
     'messages' => [
         'createSuccess' =>
@@ -52,7 +52,7 @@ return [
         'banSuperAdminError' =>
             '{username} es un superadmin, no puedes banear a un superadministrador…',
         'deleteOwnerError' =>
-            '{username} is the instance owner, one does not simply delete the owner…',
+            '{username} es el propietario de la instancia, uno no simplemente elimina al propietario…',
         'deleteSuperAdminError' =>
             '{username} es un superadmin, no puedes borrar a un superadministrador…',
         'deleteSuccess' => '{username} ha sido eliminado.',
