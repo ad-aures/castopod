@@ -53,21 +53,12 @@ $routes->group('', [
     $routes->get(config('Analytics')->gateway . '/(:class)/(:filter)', 'AnalyticsController::getData/$1/$2', [
         'as' => 'analytics-data-instance',
     ]);
-    // Route for podcast audio file analytics (/audio/pack(podcast_id,episode_id,bytes_threshold,filesize,duration,date)/podcast_folder/filename.mp3)
-    $routes->head(
-        'audio/(:base64)/(:any)',
-        'EpisodeAnalyticsController::hit/$1/$2',
-        [
-            'as' => 'episode-analytics-hit',
-        ],
-    );
-    $routes->get(
-        'audio/(:base64)/(:any)',
-        'EpisodeAnalyticsController::hit/$1/$2',
-        [
-            'as' => 'episode-analytics-hit',
-        ],
-    );
+
+    /**
+     * @deprecated Route for podcast audio file analytics (/audio/pack(podcast_id,episode_id,bytes_threshold,filesize,duration,date)/podcast_folder/filename.mp3)
+     */
+    $routes->head('audio/(:base64)/(:any)', 'EpisodeAnalyticsController::hit/$1/$2',);
+    $routes->get('audio/(:base64)/(:any)', 'EpisodeAnalyticsController::hit/$1/$2',);
 });
 
 // Show the Unknown UserAgents

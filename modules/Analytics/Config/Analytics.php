@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace Modules\Analytics\Config;
 
+use App\Entities\Episode;
 use CodeIgniter\Config\BaseConfig;
+use CodeIgniter\HTTP\URI;
+use Modules\Analytics\OP3;
 
 class Analytics extends BaseConfig
 {
@@ -39,14 +42,37 @@ class Analytics extends BaseConfig
     public string $salt = '';
 
     /**
-     * get the full audio file url
+     * --------------------------------------------------------------------------
+     * The Open Podcast Prefix Project Config
+     * --------------------------------------------------------------------------
      *
-     * @param string|string[] $audioPath
+     * @var array<string, string>
      */
-    public function getAudioUrl(string | array $audioPath): string
-    {
-        helper('media');
+    public array $OP3 = [
+        'host' => 'https://op3.dev/',
+    ];
 
-        return media_base_url($audioPath);
+    public bool $enableOP3 = false;
+
+    /**
+     * get the full audio file url
+     */
+    public function getAudioUrl(Episode $episode, array $params): string
+    {
+        helper(['media', 'setting']);
+
+        $audioFileURI = new URI(media_base_url($episode->audio->file_path));
+        $audioFileURI->setQueryArray($params);
+
+        // Wrap episode url with OP3 if episode is public and OP3 is enabled on this podcast
+        if (! $episode->is_premium && service('settings')->get(
+            'Analytics.enableOP3',
+            'podcast:' . $episode->podcast_id
+        )) {
+            $op3 = new OP3($this->OP3);
+            $audioFileURI = new URI($op3->wrap($audioFileURI, $episode));
+        }
+
+        return (string) $audioFileURI;
     }
 }

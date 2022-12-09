@@ -3,14 +3,13 @@
 declare(strict_types=1);
 
 /**
- * @copyright  2020 Ad Aures
+ * @copyright  2022 Ad Aures
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
  */
 
 namespace App\Controllers;
 
-use App\Entities\Podcast;
 use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
 use CodeIgniter\Controller;

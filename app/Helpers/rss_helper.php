@@ -286,7 +286,7 @@ if (! function_exists('get_rss_feed')) {
 
             $enclosure->addAttribute(
                 'url',
-                $episode->audio_analytics_url . ($enclosureParams === '' ? '' : '?' . $enclosureParams),
+                $episode->audio_url . ($enclosureParams === '' ? '' : '?' . $enclosureParams),
             );
             $enclosure->addAttribute('length', (string) $episode->audio->file_size);
             $enclosure->addAttribute('type', $episode->audio->file_mimetype);

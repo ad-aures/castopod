@@ -175,6 +175,15 @@
 </Forms.Section>
 
 <Forms.Section
+    title="<?= lang('Podcast.form.op3') ?>"
+    subtitle="<?= lang('Podcast.form.op3_hint') ?>">
+
+    <a href="https://op3.dev" target="_blank" rel="noopener noreferrer" class="inline-flex self-start text-xs font-semibold underline gap-x-1 text-skin-muted hover:no-underline focus:ring-accent"><Icon glyph="link" class="text-sm"/>op3.dev</a>
+    <Forms.Toggler name="enable_op3" value="yes" checked="<?= service('settings')
+            ->get('Analytics.enableOP3', 'podcast:' . $podcast->id) ? 'true' : 'false' ?>" hint="<?= lang('Podcast.form.op3_enable_hint') ?>"><?= lang('Podcast.form.op3_enable') ?></Forms.Toggler>
+</Forms.Section>
+
+<Forms.Section
     title="<?= lang('Podcast.form.location_section_title') ?>"
     subtitle="<?= lang('Podcast.form.location_section_subtitle') ?>" >
 

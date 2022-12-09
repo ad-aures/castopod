@@ -87,7 +87,7 @@ if (! function_exists('get_episode_metatags')) {
                 'timeRequired' => iso8601_duration($episode->audio->duration),
                 'duration' => iso8601_duration($episode->audio->duration),
                 'associatedMedia' => new Thing('MediaObject', [
-                    'contentUrl' => $episode->audio->file_url,
+                    'contentUrl' => $episode->audio_url,
                 ]),
                 'partOfSeries' => new Thing('PodcastSeries', [
                     'name' => $episode->podcast->title,

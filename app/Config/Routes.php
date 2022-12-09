@@ -194,6 +194,14 @@ $routes->group('@(:podcastHandle)', static function ($routes): void {
     $routes->get('feed', 'FeedController/$1');
 });
 
+// audio routes
+$routes->head('audio/@(:podcastHandle)/(:slug)', 'EpisodeController::audio/$1/$2', [
+    'as' => 'episode-audio',
+],);
+$routes->get('audio/@(:podcastHandle)/(:slug)', 'EpisodeController::audio/$1/$2', [
+    'as' => 'episode-audio',
+],);
+
 // Other pages
 $routes->get('/credits', 'CreditsController', [
     'as' => 'credits',

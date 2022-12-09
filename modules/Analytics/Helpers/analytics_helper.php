@@ -34,45 +34,6 @@ if (! function_exists('base64_url_decode')) {
     }
 }
 
-if (! function_exists('generate_episode_analytics_url')) {
-    /**
-     * Builds the episode analytics url that redirects to the audio file url after analytics hit.
-     */
-    function generate_episode_analytics_url(
-        int $podcastId,
-        int $episodeId,
-        string $podcastHandle,
-        string $episodeSlug,
-        string $audioExtension,
-        float $audioDuration,
-        int $audioFileSize,
-        int $audioFileHeaderSize,
-        \CodeIgniter\I18n\Time $publicationDate
-    ): string {
-        return url_to(
-            'episode-analytics-hit',
-            base64_url_encode(
-                pack(
-                    'I*',
-                    $podcastId,
-                    $episodeId,
-                    // bytes_threshold: number of bytes that must be downloaded for an episode to be counted in download analytics
-                    // - if audio is less than or equal to 60s, then take the audio file_size
-                    // - if audio is more than 60s, then take the audio file_header_size + 60s
-                    $audioDuration <= 60
-                        ? $audioFileSize
-                        : $audioFileHeaderSize +
-                            floor((($audioFileSize - $audioFileHeaderSize) / $audioDuration) * 60),
-                    $audioFileSize,
-                    $audioDuration,
-                    $publicationDate->getTimestamp(),
-                ),
-            ),
-            $podcastHandle . '/' . $episodeSlug . '.' . $audioExtension,
-        );
-    }
-}
-
 if (! function_exists('set_user_session_deny_list_ip')) {
     /**
      * Set user country in session variable, for analytic purposes

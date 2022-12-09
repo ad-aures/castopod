@@ -58,13 +58,13 @@ class PodcastEpisode extends ObjectType
 
         // add audio file
         $this->audio = [
-            'id' => $episode->audio->file_url,
+            'id' => $episode->audio_url,
             'type' => 'Audio',
             'name' => esc($episode->title),
             'size' => $episode->audio->file_size,
             'duration' => $episode->audio->duration,
             'url' => [
-                'href' => $episode->audio->file_url,
+                'href' => $episode->audio_url,
                 'type' => 'Link',
                 'mediaType' => $episode->audio->file_mimetype,
             ],

@@ -44,7 +44,7 @@ use RuntimeException;
  * @property string $title
  * @property int $audio_id
  * @property Audio $audio
- * @property string $audio_analytics_url
+ * @property string $audio_url
  * @property string $audio_web_url
  * @property string $audio_opengraph_url
  * @property string|null $description Holds text only description, striped of any markdown or html special characters
@@ -93,7 +93,7 @@ class Episode extends Entity
 
     protected ?Audio $audio = null;
 
-    protected string $audio_analytics_url;
+    protected string $audio_url;
 
     protected string $audio_web_url;
 
@@ -335,36 +335,19 @@ class Episode extends Entity
         return $this->chapters;
     }
 
-    public function getAudioAnalyticsUrl(): string
+    public function getAudioUrl(): string
     {
-        helper('analytics');
-
-        return generate_episode_analytics_url(
-            $this->podcast_id,
-            $this->id,
-            $this->getPodcast()
-                ->handle,
-            $this->attributes['slug'],
-            $this->getAudio()
-                ->file_extension,
-            $this->getAudio()
-                ->duration,
-            $this->getAudio()
-                ->file_size,
-            $this->getAudio()
-                ->header_size,
-            $this->published_at,
-        );
+        return url_to('episode-audio', $this->getPodcast()->handle, $this->slug);
     }
 
     public function getAudioWebUrl(): string
     {
-        return $this->getAudioAnalyticsUrl() . '?_from=-+Website+-';
+        return $this->getAudioUrl() . '?_from=-+Website+-';
     }
 
     public function getAudioOpengraphUrl(): string
     {
-        return $this->getAudioAnalyticsUrl() . '?_from=-+Open+Graph+-';
+        return $this->getAudioUrl() . '?_from=-+Open+Graph+-';
     }
 
     /**

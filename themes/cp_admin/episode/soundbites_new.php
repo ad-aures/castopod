@@ -21,7 +21,7 @@
         class="max-w-sm"
     />
     <audio-clipper start-time="<?= old('start_time', 0) ?>" duration="<?= old('duration', 30) ?>" min-duration="10" volume=".5" height="50" trim-start-label="<?= lang('VideoClip.form.trim_start') ?>" trim-end-label="<?= lang('VideoClip.form.trim_end') ?>" class="mt-8">
-        <audio slot="audio" src="<?= $episode->audio->file_url ?>" preload="auto">
+        <audio slot="audio" src="<?= $episode->audio_url ?>" preload="auto">
             Your browser does not support the <code>audio</code> element.
         </audio>
         <input slot="start_time" type="number" name="start_time" placeholder="<?= lang('VideoClip.form.start_time') ?>" step="0.001" />

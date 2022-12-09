@@ -264,6 +264,10 @@ class PodcastController extends BaseController
             $this->request->getPost('other_categories') ?? [],
         );
 
+        // OP3
+        service('settings')
+            ->set('Analytics.enableOP3', $this->request->getPost('enable_op3') === 'yes', 'podcast:' . $newPodcastId);
+
         $db->transComplete();
 
         return redirect()->route('podcast-view', [$newPodcastId])->with(
@@ -372,6 +376,14 @@ class PodcastController extends BaseController
             $this->podcast->id,
             $this->request->getPost('other_categories') ?? [],
         );
+
+        // enable/disable OP3?
+        service('settings')
+            ->set(
+                'Analytics.enableOP3',
+                $this->request->getPost('enable_op3') === 'yes',
+                'podcast:' . $this->podcast->id
+            );
 
         $db->transComplete();
 
