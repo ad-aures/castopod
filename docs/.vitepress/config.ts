@@ -89,7 +89,7 @@ export default defineConfig({
             link: "https://blog.castopod.org/",
           },
           {
-            text: "Github",
+            text: "GitHub",
             link: "https://github.com/ad-aures/castopod",
           },
         ],
@@ -111,7 +111,7 @@ export default defineConfig({
             link: "https://blog.castopod.org/",
           },
           {
-            text: "Github",
+            text: "GitHub",
             link: "https://github.com/ad-aures/castopod",
           },
         ],
@@ -133,7 +133,7 @@ export default defineConfig({
             link: "https://blog.castopod.org/",
           },
           {
-            text: "Github",
+            text: "GitHub",
             link: "https://github.com/ad-aures/castopod",
           },
         ],
@@ -153,7 +153,7 @@ export default defineConfig({
             link: "https://blog.castopod.org/",
           },
           {
-            text: "Github",
+            text: "GitHub",
             link: "https://github.com/ad-aures/castopod",
           },
         ],
