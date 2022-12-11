@@ -6,9 +6,9 @@ Castopod uses the following components:
 
 PHP dependencies can be found in the [composer.json](./composer.json) file.
 
-## Javascript dependencies
+## JavaScript dependencies
 
-Javascript dependencies can be found in the [package.json](./package.json) file.
+JavaScript dependencies can be found in the [package.json](./package.json) file.
 
 ## Other dependencies
 
