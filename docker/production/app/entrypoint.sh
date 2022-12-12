@@ -35,6 +35,12 @@ then
 	CP_DATABASE_HOSTNAME="mariadb"
 fi
 
+if [ -z "${CP_DATABASE_PORT}" ]
+then
+	echo "CP_DATABASE_PORT is empty, using default"
+	CP_DATABASE_PORT="3306"
+fi
+
 if [ -z "${CP_DATABASE_PREFIX}" ]
 then
 	echo "CP_DATABASE_PREFIX is empty, using default"
@@ -125,6 +131,7 @@ auth.gateway="${CP_AUTH_GATEWAY}"
 analytics.salt="${CP_ANALYTICS_SALT}"
 
 database.default.hostname="${CP_DATABASE_HOSTNAME}"
+database.default.port="${CP_DATABASE_PORT}"
 database.default.database="${CP_DATABASE_NAME}"
 database.default.username="${CP_DATABASE_USERNAME}"
 database.default.password="${CP_DATABASE_PASSWORD}"
