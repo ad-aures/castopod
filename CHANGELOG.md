@@ -812,7 +812,7 @@
   [#91](https://code.castopod.org/adaures/castopod/issues/91)
   [#92](https://code.castopod.org/adaures/castopod/issues/92)
   [#88](https://code.castopod.org/adaures/castopod/issues/88)
-- **fonts:** replace Montserrat with Inter for better readablity
+- **fonts:** replace Montserrat with Inter for better readability
   ([bfa11d0](https://code.castopod.org/adaures/castopod/commit/bfa11d007d04b8ac714c8cf3b8050a6aaf177a26))
 - **GDPR:** add GDPR.yml file to public/.well-known/
   ([86bccc3](https://code.castopod.org/adaures/castopod/commit/86bccc3d5cc9562b89196f1766ac91cdc8ad786d))
@@ -2022,7 +2022,7 @@
   [#91](https://code.castopod.org/adaures/castopod/issues/91)
   [#92](https://code.castopod.org/adaures/castopod/issues/92)
   [#88](https://code.castopod.org/adaures/castopod/issues/88)
-- **fonts:** replace Montserrat with Inter for better readablity
+- **fonts:** replace Montserrat with Inter for better readability
   ([bfa11d0](https://code.castopod.org/adaures/castopod/commit/bfa11d007d04b8ac714c8cf3b8050a6aaf177a26))
 - import podcast from an rss feed url
   ([9a5d5a1](https://code.castopod.org/adaures/castopod/commit/9a5d5a15b4945eb319da9e999c4ca60a0a4f6d2d)),
