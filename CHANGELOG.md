@@ -61,7 +61,7 @@
 - **activitypub:** add target_actor_id for create activity to broadcast post
   reply
   ([0128a21](https://code.castopod.org/adaures/castopod/commit/0128a21ec55dcc0a2fbf4081dadb4c4737735ba1))
-- **activitypub:** allow cors on get requests for routes exposing acitivitypub
+- **activitypub:** allow cors on get requests for routes exposing activitypub
   objects
   ([2f24809](https://code.castopod.org/adaures/castopod/commit/2f2480998f9abb34f02ab186c65d462a74b4e640))
 - **activitypub:** set created_by to null for reblog if no user + update episode
@@ -1400,7 +1400,7 @@
 
 ### Bug Fixes
 
-- **activitypub:** allow cors on get requests for routes exposing acitivitypub
+- **activitypub:** allow cors on get requests for routes exposing activitypub
   objects
   ([2f24809](https://code.castopod.org/adaures/castopod/commit/2f2480998f9abb34f02ab186c65d462a74b4e640))
 - **fediverse:** set model instances as non shared to prevent overlapping
