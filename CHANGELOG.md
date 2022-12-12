@@ -646,7 +646,7 @@
 - add legalNoticeURL to app config for setting an external url to legal notice
   ([711843a](https://code.castopod.org/adaures/castopod/commit/711843a0c81e1e2ec7a015431786df4ef32d5092))
 - add lock podcast according to the Podcastindex podcast-namespace to prevent
-  unauthozized import
+  unauthorized import
   ([72b3012](https://code.castopod.org/adaures/castopod/commit/72b301272e0b70ded3e2b237391909e3f152ad0b))
 - add map analytics, add episodes analytics, clean analytics page layout,
   translate countries
@@ -1903,7 +1903,7 @@
   ([0e14eb4](https://code.castopod.org/adaures/castopod/commit/0e14eb4d3f526b0fd256a6144f3fbfc3fe52a357)),
   closes [#131](https://code.castopod.org/adaures/castopod/issues/131)
 - add lock podcast according to the Podcastindex podcast-namespace to prevent
-  unauthozized import
+  unauthorized import
   ([72b3012](https://code.castopod.org/adaures/castopod/commit/72b301272e0b70ded3e2b237391909e3f152ad0b))
 - add map analytics, add episodes analytics, clean analytics page layout,
   translate countries
@@ -2883,7 +2883,7 @@
 ### Features
 
 - add lock podcast according to the Podcastindex podcast-namespace to prevent
-  unauthozized import
+  unauthorized import
   ([72b3012](https://code.castopod.org/adaures/castopod/commit/72b301272e0b70ded3e2b237391909e3f152ad0b))
 
 # [1.0.0-alpha.4](https://code.castopod.org/adaures/castopod/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2020-10-20)
