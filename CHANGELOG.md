@@ -176,7 +176,7 @@
 - declare typed properties in PHPDoc for php<7.4
   ([14dd44d](https://code.castopod.org/adaures/castopod/commit/14dd44d03d6db0d9ae4198db8e65c92a0e45cb31)),
   closes [#23](https://code.castopod.org/adaures/castopod/issues/23)
-- define podcast_id and platform_slug as foreign keys in podcasts_plaforms table
+- define podcast_id and platform_slug as foreign keys in podcasts_platforms table
   ([6e9451a](https://code.castopod.org/adaures/castopod/commit/6e9451a1103b43750fa70ad576de36af25ca29cb))
 - define podcastNamespaceLink value
   ([0d744d2](https://code.castopod.org/adaures/castopod/commit/0d744d212df0d070ceea185068eaf2746e1ccd48))
@@ -1597,7 +1597,7 @@
 - declare typed properties in PHPDoc for php<7.4
   ([14dd44d](https://code.castopod.org/adaures/castopod/commit/14dd44d03d6db0d9ae4198db8e65c92a0e45cb31)),
   closes [#23](https://code.castopod.org/adaures/castopod/issues/23)
-- define podcast_id and platform_slug as foreign keys in podcasts_plaforms table
+- define podcast_id and platform_slug as foreign keys in podcasts_platforms table
   ([6e9451a](https://code.castopod.org/adaures/castopod/commit/6e9451a1103b43750fa70ad576de36af25ca29cb))
 - define podcastNamespaceLink value
   ([0d744d2](https://code.castopod.org/adaures/castopod/commit/0d744d212df0d070ceea185068eaf2746e1ccd48))
