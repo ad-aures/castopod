@@ -501,7 +501,7 @@
 - **socialinteract:** move social interact uri into uri attribute + update
   social data upon import
   ([12b2200](https://code.castopod.org/adaures/castopod/commit/12b22008a237185cb736fc29352fab22421dad16))
-- sort episodes by published_at with unpublished episodes at the begining
+- sort episodes by published_at with unpublished episodes at the beginning
   ([1686f84](https://code.castopod.org/adaures/castopod/commit/1686f840d16f2bd3d71d7f222a59b8e6a838fd6e)),
   closes [#249](https://code.castopod.org/adaures/castopod/issues/249)
 - sort episodic podcasts by season
