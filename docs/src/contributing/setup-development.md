@@ -292,7 +292,7 @@ You may skip this section if you go through the install wizard (go to
    php spark db:seed AuthSeeder
    ```
 
-3. (optionnal) Populate the database with test data:
+3. (optional) Populate the database with test data:
 
    - Populate test data (login: admin / password: AGUehL3P)
 
