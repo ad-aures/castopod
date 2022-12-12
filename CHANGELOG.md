@@ -1014,7 +1014,7 @@
 - **video-clips:** generate a 16:9 video using ffmpeg
   ([35aa7ea](https://code.castopod.org/adaures/castopod/commit/35aa7ea5d9a339b3e6f745137282268d69fe2231))
 - **video-clips:** generate subtitles clip using transcript json to have
-  subtitles accross video
+  subtitles across video
   ([3ce07e4](https://code.castopod.org/adaures/castopod/commit/3ce07e455d171e29be30d8ad45055510eb8d363c))
 - **video-clips:** replace hardcoded colors with config's theme colors
   ([e462abf](https://code.castopod.org/adaures/castopod/commit/e462abf6d660e41d2170c52caf45704008de58e9))
@@ -2178,7 +2178,7 @@
 - **video-clips:** generate a 16:9 video using ffmpeg
   ([35aa7ea](https://code.castopod.org/adaures/castopod/commit/35aa7ea5d9a339b3e6f745137282268d69fe2231))
 - **video-clips:** generate subtitles clip using transcript json to have
-  subtitles accross video
+  subtitles across video
   ([3ce07e4](https://code.castopod.org/adaures/castopod/commit/3ce07e455d171e29be30d8ad45055510eb8d363c))
 - **video-clips:** replace hardcoded colors with config's theme colors
   ([e462abf](https://code.castopod.org/adaures/castopod/commit/e462abf6d660e41d2170c52caf45704008de58e9))
