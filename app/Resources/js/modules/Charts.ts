@@ -203,7 +203,7 @@ const drawMapChart = (
   // Create map polygon series
   const polygonSeries = chart.series.push(new am4maps.MapPolygonSeries());
 
-  // Exclude Antartica
+  // Exclude Antarctica
   polygonSeries.exclude = ["AQ"];
 
   // Make map load polygon (like country names) data from GeoJSON
