@@ -337,7 +337,7 @@ class Episode extends Entity
 
     public function getAudioUrl(): string
     {
-        return url_to('episode-audio', $this->getPodcast()->handle, $this->slug);
+        return url_to('episode-audio', $this->getPodcast()->handle, $this->slug, $this->getAudio()->file_extension);
     }
 
     public function getAudioWebUrl(): string

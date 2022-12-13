@@ -72,6 +72,9 @@ class EpisodeAnalyticsController extends Controller
             throw PageNotFoundException::forPageNotFound();
         }
 
-        return redirect()->route('episode-audio', [$episode->podcast->handle, $episode->slug]);
+        return redirect()->route(
+            'episode-audio',
+            [$episode->podcast->handle, $episode->slug, $episode->audio->file_extension]
+        );
     }
 }
