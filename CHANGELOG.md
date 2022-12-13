@@ -1,3 +1,12 @@
+## [1.1.1](https://code.castopod.org/adaures/castopod/compare/v1.1.0...v1.1.1) (2022-12-13)
+
+### Bug Fixes
+
+- **op3:** remove scheme when wraping audio URI
+  ([0ad22e4](https://code.castopod.org/adaures/castopod/commit/0ad22e49bc488e96df5a41495f5b242559b64a45))
+- **rss:** add file extension to enclosure url
+  ([964cbba](https://code.castopod.org/adaures/castopod/commit/964cbba54f16556408bf8280c544a52e6be5c9fc))
+
 # [1.1.0](https://code.castopod.org/adaures/castopod/compare/v1.0.5...v1.1.0) (2022-12-09)
 
 ### Bug Fixes
