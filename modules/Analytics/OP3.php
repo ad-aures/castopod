@@ -27,6 +27,9 @@ class OP3
 
     public function wrap(URI $audioURI, Episode $episode): string
     {
+        // remove scheme from audioURI
+        $audioURI->setScheme('');
+
         return $this->host . '/e,pg=' . $episode->podcast->guid . '/' . $audioURI;
     }
 }
