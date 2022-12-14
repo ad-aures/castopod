@@ -17,7 +17,7 @@ return [
     'view' => 'Podcast ansehen',
     'edit' => 'Podcast bearbeiten',
     'publish' => 'Podcast veröffentlichen',
-    'publish_edit' => 'Edit publication',
+    'publish_edit' => 'Veröffentlichung bearbeiten',
     'delete' => 'Podcast löschen',
     'see_episodes' => 'Episoden ansehen',
     'see_contributors' => 'Administratoren anzeigen',
@@ -30,28 +30,28 @@ return [
         'editSuccess' => 'Der Podcast wurde erfolgreich aktualisiert!',
         'importSuccess' => 'Der Podcast wurde erfolgreich importiert!',
         'deleteSuccess' => 'Podcast @{podcast_handle} erfolgreich gelöscht!',
-        'deletePodcastMediaError' => 'Failed to delete podcast {type, select,
-            cover {cover}
-            banner {banner}
-            other {media}
+        'deletePodcastMediaError' => 'Fehler beim Löschen des Podcast-{type, select,
+            cover {Covers}
+            banner {Banners}
+            other {Media}
         }.',
-        'deleteEpisodeMediaError' => 'Failed to delete podcast episode {episode_slug} {type, select,
-            transcript {transcript}
-            chapters {chapters}
-            image {cover}
-            audio {audio}
-            other {media}
-        }.',
-        'deletePodcastMediaFolderError' => 'Failed to delete podcast media folder {folder_path}. You may manually remove it from your disk.',
-        'podcastFeedUpdateSuccess' => 'Successful update: {number_of_new_episodes, plural,
-            one {# episode was}
-            other {# episodes were}
-        } added to the podcast!',
+        'deleteEpisodeMediaError' => 'Fehler beim Löschen {type, select,
+            transcript {der Abschrift}
+            chapters {der Kapitel}
+            image {des Covers}
+            audio {der Audio}
+            other {der Medien}
+        } von Episode {episode_slug}.',
+        'deletePodcastMediaFolderError' => 'Fehler beim Löschen des Podcast-Medienordners {folder_path}. Sie können ihn manuell von der Festplatte löschen.',
+        'podcastFeedUpdateSuccess' => 'Erfolgreiche Aktualisierung: {number_of_new_episodes, plural,
+            one {# Episode wurde}
+            other {# Episoden wurden}
+        } zum Podcast hinzugefügt!',
         'podcastFeedUpToDate' => 'Der Podcast ist bereits auf dem neuesten Stand.',
-        'podcastNotImported' => 'Podcast could not be updated as it was not imported.',
-        'publishError' => 'This podcast is either already published or scheduled for publication.',
-        'publishEditError' => 'This podcast is not scheduled for publication.',
-        'publishCancelSuccess' => 'Podcast publication successfully cancelled!',
+        'podcastNotImported' => 'Der Podcast konnte nicht aktualisiert werden, da er nicht importiert wurde.',
+        'publishError' => 'Dieser Podcast ist entweder bereits veröffentlicht oder zur Veröffentlichung geplant.',
+        'publishEditError' => 'Dieser Podcast ist nicht zur Veröffentlichung geplant.',
+        'publishCancelSuccess' => 'Veröffentlichung des Podcasts erfolgreich abgebrochen!',
         'scheduleDateError' => 'Veröffentlichungsdatum muss gesetzt sein!',
     ],
     'form' => [
@@ -60,7 +60,7 @@ return [
         'cover' => 'Podcast-Cover',
         'cover_size_hint' => 'Das Cover muss quadratisch und mindestens 1400px breit und hoch sein.',
         'banner' => 'Podcast-Banner',
-        'banner_size_hint' => 'Banner must have a 3:1 ratio and be at least 1500px wide.',
+        'banner_size_hint' => 'Der Banner muss ein 3:1-Verhältnis haben und mindestens 1500px breit sein.',
         'banner_delete' => 'Podcast-Banner löschen',
         'title' => 'Titel',
         'handle' => 'Identifikator',
@@ -108,12 +108,12 @@ return [
         'monetization_section_subtitle' =>
             'Geld dank der Zuhöhrer verdienen.',
         'premium' => 'Premium',
-        'premium_by_default' => 'Episodes must be set as premium by default',
-        'premium_by_default_hint' => 'Podcast episodes will be marked as premium by default. You can still choose to set some episodes, trailers or bonuses as public.',
+        'premium_by_default' => 'Episoden müssen standardmäßig als Premium festgelegt werden',
+        'premium_by_default_hint' => 'Podcast-Episoden werden standardmäßig als Premium markiert. Sie können dennoch einzelne Episoden, Trailer oder Boni als öffentlich festlegen.',
         'op3' => 'Open Podcast Prefix Project (OP3)',
-        'op3_hint' => 'Value your analytics data with OP3, an open-source and trusted third party analytics service. Share, validate and compare your analytics data with the open podcasting ecosystem.',
-        'op3_enable' => 'Enable OP3 analytics service',
-        'op3_enable_hint' => 'For security reasons, premium episodes\' analytics data will not be shared with OP3.',
+        'op3_hint' => 'Werten Sie Ihre Analysedaten mit OP3 auf, einem quelloffenen und vertrauenswürdigen Analysedienst eines Drittanbieters. Teilen, validieren und vergleichen Sie Ihre Analysedaten in dem offenen Podcast-Ökosystem.',
+        'op3_enable' => 'OP3-Analysedienst aktivieren',
+        'op3_enable_hint' => 'Aus Sicherheitsgründen werden die Analysedaten von Premium-Episoden nicht mit OP3 geteilt.',
         'payment_pointer' => 'Zahlungsadresse (Payment Pointer) für Web-Monetarisierung',
         'payment_pointer_hint' =>
             'Hier erhalten Sie dank Monetarisierung Geld',
@@ -126,7 +126,7 @@ return [
         'new_feed_url_hint' => 'Benutzen Sie dieses Feld, wenn Sie zu einer anderen Domain oder Podcast-Plattform wechseln. Standardmäßig wird der Wert auf die aktuelle RSS URL gesetzt, wenn der Podcast importiert wird.',
         'old_feed_url' => 'Alte Feed-URL',
         'update_feed' => 'Feed aktualisieren',
-        'update_feed_tip' => 'Import this podcast\'s latest episodes',
+        'update_feed_tip' => 'Importiere die neusten Episoden dieses Podcasts',
         'partnership' => 'Partnerschaft:en',
         'partner_id' => 'ID',
         'partner_link_url' => 'Link',
@@ -135,9 +135,9 @@ return [
         'partner_link_url_hint' => 'Die generische Partnerlink-Adresse',
         'partner_image_url_hint' => 'Die generische Partnerbild-adresse',
         'status_section_title' => 'Status',
-        'block' => 'Podcast should be hidden from public catalogues',
+        'block' => 'Podcast soll vor öffentlichen Katalogen versteckt werden',
         'block_hint' =>
-            'The podcast show or hide status: toggling this on prevents the entire podcast from appearing in Apple Podcasts, Google Podcasts, and any third party apps that pull shows from these directories. (Not guaranteed)',
+            'Der Podcast zeigt oder versteckt den Status: Beim Einschalten dieser Option wird verhindert, dass der Podcast in Apple Podcasts, Google Podcasts und alle Apps von Drittanbietern, die Inhalte aus diesen Verzeichnissen ziehen, erscheint. (Nicht garantiert)',
         'complete' => 'Der Podcast wird keine neuen Folgen erhalten',
         'lock' => 'Schütze den Podcast davor kopiert zu werden',
         'lock_hint' =>
@@ -259,34 +259,34 @@ return [
         'tv_reviews' => 'TV-Kritiken',
     ],
     'publish_form' => [
-        'back_to_podcast_dashboard' => 'Back to podcast dashboard',
-        'post' => 'Your announcement post',
+        'back_to_podcast_dashboard' => 'Zurück zum Podcast-Dashboard',
+        'post' => 'Dein Ankündigungsbeitrag',
         'post_hint' =>
-            "Write a message to announce the publication of your podcast. The message will be featured in your podcast's homepage.",
+            "Schreiben Sie eine Nachricht, um die Veröffentlichung Ihres Podcasts anzukündigen. Diese Nachricht wird auf der Homepage des Podcasts erscheinen.",
         'message_placeholder' => 'Schreiben Sie Ihre Nachricht…',
         'submit' => 'Veröffentlichen',
-        'publication_date' => 'Publication date',
+        'publication_date' => 'Veröffentlichungsdatum',
         'publication_method' => [
             'now' => 'Jetzt',
             'schedule' => 'Planen',
         ],
-        'scheduled_publication_date' => 'Scheduled publication date',
+        'scheduled_publication_date' => 'Geplantes Veröffentlichungsdatum',
         'scheduled_publication_date_hint' =>
-            'You can schedule the podcast release by setting a future publication date. This field must be formatted as YYYY-MM-DD HH:mm',
-        'submit_edit' => 'Edit publication',
-        'cancel_publication' => 'Cancel publication',
-        'message_warning' => 'You did not write a message for your announcement post!',
-        'message_warning_hint' => 'Having a message increases social engagement, resulting in a better visibility for your podcast.',
+            'Du kannst die Veröffentlichung des Podcasts planen, indem du ein zukünftiges Veröffentlichungsdatum festlegst. Dieses Feld muss als YYYY-MM-TT HH:mm formatiert werden',
+        'submit_edit' => 'Veröffentlichung bearbeiten',
+        'cancel_publication' => 'Veröffentlichung abbrechen',
+        'message_warning' => 'Sie haben keinen Text für Ihren Ankündigungsbeitrag geschrieben!',
+        'message_warning_hint' => 'Eine Nachricht erhöht das soziale Engagement, was zu einer besseren Sichtbarkeit des Podcasts führt.',
         'message_warning_submit' => 'Dennoch veröffentlichen',
     ],
     'publication_status_banner' => [
         'draft_mode' => 'Entwurfsmodus',
         'not_published' => 'Dieser Podcast ist noch nicht veröffentlicht.',
-        'scheduled' => 'This podcast is scheduled for publication on {publication_date}.',
+        'scheduled' => 'Dieser Podcast ist für eine Veröffentlichung am {publication_date} vorgesehen.',
     ],
     'delete_form' => [
         'disclaimer' =>
-            "Deleting the podcast will delete all episodes, media files, posts and analytics associated with it. This action is irreversible, you will not be able to retrieve them afterwards.",
+            "Beim Löschen des Podcasts werden alle damit verbundenen Episoden, Mediendateien, Beiträge und Analysen gelöscht. Diese Aktion ist unumkehrbar, Sie können diese danach nicht mehr abrufen.",
         'understand' => 'Ich verstehe, ich möchte, dass der Podcast dauerhaft gelöscht wird',
         'submit' => 'Löschen',
     ],

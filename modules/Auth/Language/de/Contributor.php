@@ -29,15 +29,15 @@ return [
         'submit_edit' => 'Rolle aktualisieren',
     ],
     'delete_form' => [
-        'title' => 'Remove {contributor}',
+        'title' => '{contributor} entfernen',
         'disclaimer' =>
-            'You are about to remove {contributor} from contributors. They will not be able to access "{podcastTitle}" anymore.',
-        'understand' => 'I understand, I want to remove {contributor} from "{podcastTitle}"',
-        'submit' => 'Remove',
+            'Sie sind dabei, {contributor} von den Mitwirkenden zu entfernen. Es wird kein Zugriff mehr auf "{podcastTitle}" möglich sein.',
+        'understand' => 'Ich verstehe, ich möchte {contributor} von "{podcastTitle}" entfernen',
+        'submit' => 'Entfernen',
     ],
     'messages' => [
-        'editSuccess' => 'Role successfully changed!',
-        'editOwnerError' => "You can't edit the podcast owner!",
+        'editSuccess' => 'Rolle erfolgreich geändert!',
+        'editOwnerError' => "Sie können den Podcast-Besitzer nicht verändern!",
         'removeOwnerError' => "Der Podcast Inhaber kann nicht entfernt werden!",
         'removeSuccess' =>
             '{username} wurde von {podcastTitle} entfernt',

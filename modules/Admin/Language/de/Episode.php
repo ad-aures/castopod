@@ -72,13 +72,13 @@ return [
         'scheduleDateError' => 'Veröffentlichungsdatum muss gesetzt sein!',
         'deletePublishedEpisodeError' => 'Bitte ziehe die Episode zurück, bevor du sie löschst.',
         'deleteSuccess' => 'Folge erfolgreich gelöscht!',
-        'deleteError' => 'Failed to delete episode {type, select,
-            transcript {transcript}
-            chapters {chapters}
-            image {cover}
-            audio {audio}
-            other {media}
-        }.',
+        'deleteError' => 'Fehler beim Löschen der {type, select,
+            transcript {Abschrift}
+            chapters {Kapitel}
+            image {Cover}
+            audio {Audio}
+            other {Medien}
+        }-Datei dieser Episode.',
         'deleteFileError' => 'Fehler beim Löschen der {type, select,
             transcript {Abschrift}
             chapters {Kapitel}
@@ -114,12 +114,12 @@ return [
             'bonus_hint' => 'Zusätzliche Inhalte für die Sendung (zum Beispiel hinter den Kulissen, Informationen oder Interviews mit dem Team) oder übergreifende Promotionsinhalte für eine andere Show',
         ],
         'premium_title' => 'Premium',
-        'premium' => 'Episode must be accessible to premium subscribers only',
+        'premium' => 'Diese Episode darf nur für Premium-Abonnenten zugänglich sein',
         'parental_advisory' => [
-            'label' => 'Elternberatung',
+            'label' => 'Hinweis für Erziehungsberechtigte',
             'hint' => 'Enthält die Folge anstößige Inhalte?',
             'undefined' => 'undefiniert',
-            'clean' => 'Zurücksetzen',
+            'clean' => 'Sauber',
             'explicit' => 'Anstößig',
         ],
         'show_notes_section_title' => 'Notizen anzeigen',
@@ -131,7 +131,7 @@ return [
             'Dieser Text wird am Ende jeder Episodenbeschreibung hinzugefügt, es ist ein guter Ort, um zum Beispiel Ihre sozialen Links einzufügen.',
         'additional_files_section_title' => 'Zusätzliche Dateien',
         'additional_files_section_subtitle' =>
-            'These files may be used by other platforms to provide better experience to your audience. See the {podcastNamespaceLink} for more information.',
+            'Diese Dateien könnten von anderen Plattformen genutzt werden, um eine bessere Nutzererfahrung zu bieten. Weitere Informationen finden Sie unter {podcastNamespaceLink}.',
         'location_section_title' => 'Standort',
         'location_section_subtitle' => 'Über welchen Ort handelt diese Folge?',
         'location_name' => 'Standortname oder Adresse',
@@ -153,9 +153,9 @@ return [
             'Wenn du RSS-Tags benötigst, die Castopod nicht behandelt, setze diese hier.',
         'custom_rss' => 'Eigene RSS-Tags für die Episode',
         'custom_rss_hint' => 'Dies wird innerhalb des ❬item❭ Tags eingefügt.',
-        'block' => 'Episode should be hidden from public catalogues',
+        'block' => 'Episode soll vor öffentlichen Katalogen versteckt werden',
         'block_hint' =>
-            'The episode show or hide status: toggling this on prevents the episode from appearing in Apple Podcasts, Google Podcasts, and any third party apps that pull shows from these directories. (Not guaranteed)',
+            'Die Episode zeigt oder versteckt den Status: Beim Einschalten dieser Option wird verhindert, dass die Episode in Apple Podcasts, Google Podcasts und alle Apps von Drittanbietern, die Inhalte aus diesen Verzeichnissen ziehen, erscheint. (Nicht garantiert)',
         'submit_create' => 'Folge erstellen',
         'submit_edit' => 'Folge speichern',
     ],
@@ -189,13 +189,13 @@ return [
     ],
     'unpublish_form' => [
         'disclaimer' =>
-            "Unpublishing the episode will delete all the comments and posts associated with it and remove it from the podcast's RSS feed.",
+            "Das Zurückziehen dieser Episode löscht alle damit verbundenen Kommentare und Beiträge und entferne sie aus dem RSS-Feed des Podcasts.",
         'understand' => 'Ich verstehe, ich möchte die Episode zurückziehen',
         'submit' => 'Zurückziehen',
     ],
     'delete_form' => [
         'disclaimer' =>
-            "Deleting the episode will delete all media files, comments, video clips and soundbites associated with it.",
+            "Das Löschen der Episode wird auch alle verknüpften Mediendateien, Kommentare, Videoclips und Soundbites löschen.",
         'understand' => 'Ich verstehe, ich möchte die Folge löschen',
         'submit' => 'Löschen',
     ],

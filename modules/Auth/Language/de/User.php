@@ -9,7 +9,7 @@ declare(strict_types=1);
  */
 
 return [
-    'edit_role' => "Edit {username}'s role",
+    'edit_role' => "{username}'s Rolle bearbeiten",
     'ban' => 'Bannen',
     'unban' => 'Entbannen',
     'delete' => 'Löschen',
@@ -18,7 +18,7 @@ return [
     'all_users' => 'Alle Benutzer',
     'list' => [
         'user' => 'Benutzer',
-        'role' => 'Role',
+        'role' => 'Rolle',
         'banned' => 'Gebannt?',
     ],
     'form' => [
@@ -26,7 +26,7 @@ return [
         'username' => 'Benutzername',
         'password' => 'Passwort',
         'new_password' => 'Neues Passwort',
-        'role' => 'Role',
+        'role' => 'Rolle',
         'roles' => 'Rollen',
         'permissions' => 'Berechtigungen',
         'submit_create' => 'Benutzer erstellen',
@@ -34,11 +34,11 @@ return [
         'submit_password_change' => 'Verändern!',
     ],
     'delete_form' => [
-        'title' => 'Delete {user}',
+        'title' => '{user} löschen',
         'disclaimer' =>
-            "You are about to delete {user} permanently. They will not be able to access the admin area anymore.",
-        'understand' => 'I understand, I want to delete {user} permanently',
-        'submit' => 'Delete',
+            "Sie sind dabei {user} dauerhaft zu löschen. Es wird für den Benutzer nicht mehr möglich sein, den Admin-Bereich zu nutzen.",
+        'understand' => 'Ich verstehe, Ich will {user} dauerhaft löschen',
+        'submit' => 'Löschen',
     ],
     'messages' => [
         'createSuccess' =>
@@ -52,7 +52,7 @@ return [
         'banSuperAdminError' =>
             '{username} ist ein Superadmin, man bannt nicht einfach einen Superadmin…',
         'deleteOwnerError' =>
-            '{username} is the instance owner, one does not simply delete the owner…',
+            '{username} ist Eigentümer der Instanz, Eigentümer können nicht gelöscht werden…',
         'deleteSuperAdminError' =>
             '{username} ist ein Superadmin, man löscht nicht einfach einen Superadmin…',
         'deleteSuccess' => '{username} wurde gelöscht.',
