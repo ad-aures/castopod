@@ -195,10 +195,10 @@ $routes->group('@(:podcastHandle)', static function ($routes): void {
 });
 
 // audio routes
-$routes->head('audio/@(:podcastHandle)/(:slug).(:alphanum)', 'EpisodeController::audio/$1/$2', [
+$routes->head('audio/@(:podcastHandle)/(:slug).(:alphanum)', 'EpisodeAudioController/$1/$2', [
     'as' => 'episode-audio',
 ], );
-$routes->get('audio/@(:podcastHandle)/(:slug).(:alphanum)', 'EpisodeController::audio/$1/$2', [
+$routes->get('audio/@(:podcastHandle)/(:slug).(:alphanum)', 'EpisodeAudioController/$1/$2', [
     'as' => 'episode-audio',
 ], );
 

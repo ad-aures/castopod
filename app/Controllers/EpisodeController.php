@@ -19,14 +19,12 @@ use App\Models\PodcastModel;
 use App\Models\PostModel;
 use CodeIgniter\Database\BaseBuilder;
 use CodeIgniter\Exceptions\PageNotFoundException;
-use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\Response;
 use CodeIgniter\HTTP\ResponseInterface;
 use Config\Services;
 use Modules\Analytics\AnalyticsTrait;
 use Modules\Fediverse\Objects\OrderedCollectionObject;
 use Modules\Fediverse\Objects\OrderedCollectionPage;
-use Modules\PremiumPodcasts\Models\SubscriptionModel;
 use SimpleXMLElement;
 
 class EpisodeController extends BaseController
@@ -330,83 +328,5 @@ class EpisodeController extends BaseController
             ->setContentType('application/activity+json')
             ->setHeader('Access-Control-Allow-Origin', '*')
             ->setBody($collection->toJSON());
-    }
-
-    public function audio(): RedirectResponse | ResponseInterface
-    {
-        // check if episode is premium?
-        $subscription = null;
-
-        // check if podcast is already unlocked before any token validation
-        if ($this->episode->is_premium && ($subscription = service('premium_podcasts')->subscription(
-            $this->episode->podcast->handle
-        )) === null) {
-            // look for token as GET parameter
-            if (($token = $this->request->getGet('token')) === null) {
-                return $this->response->setStatusCode(401)
-                    ->setJSON([
-                        'errors' => [
-                            'status' => 401,
-                            'title' => 'Unauthorized',
-                            'detail' => 'Episode is premium, you must provide a token to unlock it.',
-                        ],
-                    ]);
-            }
-
-            // check if there's a valid subscription for the provided token
-            if (($subscription = (new SubscriptionModel())->validateSubscription(
-                $this->episode->podcast->handle,
-                $token
-            )) === null) {
-                return $this->response->setStatusCode(401, 'Invalid token!')
-                    ->setJSON([
-                        'errors' => [
-                            'status' => 401,
-                            'title' => 'Unauthorized',
-                            'detail' => 'Invalid token!',
-                        ],
-                    ]);
-            }
-        }
-
-        $session = Services::session();
-        $session->start();
-
-        $serviceName = '';
-        if ($this->request->getGet('_from')) {
-            $serviceName = $this->request->getGet('_from');
-        } elseif ($session->get('embed_domain') !== null) {
-            $serviceName = $session->get('embed_domain');
-        } elseif ($session->get('referer') !== null && $session->get('referer') !== '- Direct -') {
-            $serviceName = parse_url((string) $session->get('referer'), PHP_URL_HOST);
-        }
-
-        $audioFileSize = $this->episode->audio->file_size;
-        $audioFileHeaderSize = $this->episode->audio->header_size;
-        $audioDuration = $this->episode->audio->duration;
-
-        // bytes_threshold: number of bytes that must be downloaded for an episode to be counted in download analytics
-        // - if audio is less than or equal to 60s, then take the audio file_size
-        // - if audio is more than 60s, then take the audio file_header_size + 60s
-        $bytesThreshold = $audioDuration <= 60
-            ? $audioFileSize
-            : $audioFileHeaderSize +
-                (int) floor((($audioFileSize - $audioFileHeaderSize) / $audioDuration) * 60);
-
-        helper('analytics');
-        podcast_hit(
-            $this->episode->podcast_id,
-            $this->episode->id,
-            $bytesThreshold,
-            $audioFileSize,
-            $audioDuration,
-            $this->episode->published_at->getTimestamp(),
-            $serviceName,
-            $subscription !== null ? $subscription->id : null
-        );
-
-        $analyticsConfig = config('Analytics');
-
-        return redirect()->to($analyticsConfig->getAudioUrl($this->episode, $this->request->getGet()));
     }
 }
