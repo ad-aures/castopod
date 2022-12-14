@@ -1,3 +1,10 @@
+## [1.1.2](https://code.castopod.org/adaures/castopod/compare/v1.1.1...v1.1.2) (2022-12-14)
+
+### Bug Fixes
+
+- **analytics:** set EpisodeAudioController to init user session data
+  ([77ccb30](https://code.castopod.org/adaures/castopod/commit/77ccb306009eb093147c56789535e754f3d85570))
+
 ## [1.1.1](https://code.castopod.org/adaures/castopod/compare/v1.1.0...v1.1.1) (2022-12-13)
 
 ### Bug Fixes
