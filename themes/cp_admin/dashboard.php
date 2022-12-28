@@ -30,7 +30,9 @@
         'Podcast',
         'TotalStorageByMonth',
     ) ?>" />
-    <Charts.XY class="col-span-1" title="<?= lang('Charts.total_bandwidth_by_month') ?>" dataUrl="<?= route_to(
+    <Charts.XY class="col-span-1" title="<?= lang('Charts.total_bandwidth_by_month') ?>" subtitle="<?= $bandwidthLimit !== null ? lang('Charts.total_bandwidth_by_month_limit', [
+        'totalBandwidth' => $bandwidthLimit,
+    ]) : '' ?>" dataUrl="<?= route_to(
         'analytics-data-instance',
         'Podcast',
         'TotalBandwidthByMonth',

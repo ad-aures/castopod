@@ -457,5 +457,10 @@ class App extends BaseConfig
      */
     public ?int $storageLimit = null;
 
+    /**
+     * Bandwidth limit (per month) in Gigabytes
+     */
+    public ?int $bandwidthLimit = null;
+
     public ?string $legalNoticeURL = null;
 }

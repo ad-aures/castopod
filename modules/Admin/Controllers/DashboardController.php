@@ -70,10 +70,14 @@ class DashboardController extends BaseController
                 ->id;
         }
 
+        $bandwidthLimit = config('App')
+            ->bandwidthLimit;
+
         $data = [
             'podcastsData' => $podcastsData,
             'episodesData' => $episodesData,
             'storageData' => $storageData,
+            'bandwidthLimit' => $bandwidthLimit === null ? null : formatBytes($bandwidthLimit * 1000000000),
             'onlyPodcastId' => $onlyPodcastId,
         ];
 
