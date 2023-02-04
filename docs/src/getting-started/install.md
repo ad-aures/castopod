@@ -22,6 +22,8 @@ If you prefer using Docker, you may skip this and go straight to the
 - PHP v8.1 or higher
 - MySQL version 5.7 or higher or MariaDB version 10.2 or higher
 - HTTPS support
+- An [ntp-synced clock](https://wiki.debian.org/NTP) to validate federation's
+  incoming requests
 
 ### PHP v8.1 or higher
 

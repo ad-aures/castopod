@@ -126,6 +126,7 @@ nb-configuration.xml
 
 # Visual Studio Code
 .vscode/
+tmp/
 
 /results/
 /phpunit*.xml
