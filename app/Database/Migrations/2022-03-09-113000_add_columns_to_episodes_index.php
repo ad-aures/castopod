@@ -22,7 +22,7 @@ class AddColumnsToEpisodesIndex extends Migration
 
         $createQuery = <<<CODE_SAMPLE
             ALTER TABLE {$prefix}episodes
-            DROP INDEX title;
+            DROP INDEX IF EXISTS title;
         CODE_SAMPLE;
 
         $this->db->query($createQuery);
@@ -42,7 +42,7 @@ class AddColumnsToEpisodesIndex extends Migration
 
         $createQuery = <<<CODE_SAMPLE
             ALTER TABLE {$prefix}episodes
-            DROP INDEX title;
+            DROP INDEX IF EXISTS  title;
         CODE_SAMPLE;
 
         $this->db->query($createQuery);
