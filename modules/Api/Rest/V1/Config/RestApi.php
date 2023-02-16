@@ -13,7 +13,12 @@ class RestApi extends BaseConfig
      *
      * Disabled by default.
      */
-    public bool $enabled = false;
+    public bool $enabled = true;
+
+    /**
+     * Default limit
+     */
+    public int $limit = 10;
 
     /**
      * --------------------------------------------------------------------------

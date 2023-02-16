@@ -438,4 +438,13 @@ class EpisodeModel extends Model
 
         return $data;
     }
+
+    public function fullTextSearch(string $value)
+    {
+        $this->builder()
+            ->select('*, MATCH (title, description_markdown, slug, location_name) AGAINST("*'.$value.'*" IN BOOLEAN MODE) as search_score')
+            ->where('MATCH (title, description_markdown, slug, location_name) AGAINST("*'.$value.'*" IN BOOLEAN MODE) ');
+
+        return $this->builder;
+    }
 }
