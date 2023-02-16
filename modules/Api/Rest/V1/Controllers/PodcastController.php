@@ -46,6 +46,16 @@ class PodcastController extends Controller
         $podcast->actor_display_name = $podcast->getActor()->display_name;
         $podcast->cover_url = $podcast->getCover()->file_url;
 
+        $categories = [
+            $podcast->getCategory(),
+            ...$podcast->getOtherCategories()
+        ];
+
+        foreach($categories as $category) {
+            $category->translated = lang('Podcast.category_options.' . $category->code, [], null, false);;
+        }
+
+        $podcast->categories =  $categories;
 
         return $podcast;
     }
