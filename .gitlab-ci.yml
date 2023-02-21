@@ -1,4 +1,4 @@
-image: code.castopod.org:5050/adaures/castopod:php8.1
+image: code.castopod.org:5050/adaures/castopod:ci
 
 stages:
   - prepare
@@ -13,20 +13,32 @@ php-dependencies:
   script:
     # Install all php dependencies
     - composer install --prefer-dist --no-ansi --no-interaction --no-progress --ignore-platform-reqs
+  cache:
+    key:
+      files:
+        - composer.lock
+    paths:
+      - .composer-cache
   artifacts:
+    expire_in: 30 mins
     paths:
       - vendor/
-    expire_in: 30 mins
 
 js-dependencies:
   stage: prepare
   script:
-    # Install all npm dependencies
-    - npm ci
+    # Install all js dependencies
+    - pnpm install
+  cache:
+    key:
+      files:
+        - pnpm-lock.yaml
+    paths:
+      - .pnpm-store
   artifacts:
+    expire_in: 30 mins
     paths:
       - node_modules/
-    expire_in: 30 mins
 
 lint-commit-msg:
   stage: quality
@@ -49,19 +61,18 @@ lint-php:
     - vendor/bin/ecs check --ansi
     # phpstan - increase memory limit to 1GB to prevent script failure
     - php -d memory_limit=1G vendor/bin/phpstan analyse --ansi
-    # FIXME: rector keeps failing in CI
     # run rector to check for php errors
-    # - vendor/bin/rector process --dry-run --ansi
+    - vendor/bin/rector process --dry-run --ansi
   dependencies:
     - php-dependencies
 
 lint-js:
   stage: quality
   script:
-    - npm run prettier
-    - npm run typecheck
-    - npm run lint
-    - npm run lint:css
+    - pnpm run prettier
+    - pnpm run typecheck
+    - pnpm run lint
+    - pnpm run lint:css
   dependencies:
     - js-dependencies
 
@@ -74,10 +85,7 @@ tests:
     MYSQL_DATABASE: "test"
     MYSQL_USER: "castopod"
     MYSQL_PASSWORD: "castopod"
-
   script:
-    - apt-get update && apt-get install -y mariadb-client  libmariadb-dev
-
     - echo "SHOW DATABASES;" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mariadb "$MYSQL_DATABASE"
 
     # run phpunit without code coverage
@@ -128,7 +136,7 @@ release:
     - chmod +x ./scripts/package.sh
 
     # run semantic-release script (configured in `.releaserc.json` file)
-    - npm run release
+    - pnpm run release
   dependencies:
     - php-dependencies
     - js-dependencies

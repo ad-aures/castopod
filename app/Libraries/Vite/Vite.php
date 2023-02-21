@@ -34,36 +34,6 @@ class Vite
 
     private function loadProd(string $path, string $type): string
     {
-        if ($type === 'css') {
-            if ($this->manifestCSSData === null) {
-                $cacheName = 'vite-manifest-css';
-                if (! ($cachedManifestCSS = cache($cacheName))) {
-                    $manifestCSSPath = config('Vite')
-                        ->assetsRoot . '/' . config('Vite')
-                        ->manifestCSSFile;
-                    try {
-                        if (($manifestCSSContent = file_get_contents($manifestCSSPath)) !== false) {
-                            $cachedManifestCSS = json_decode($manifestCSSContent, true);
-                            cache()
-                                ->save($cacheName, $cachedManifestCSS, DECADE);
-                        }
-                    } catch (ErrorException) {
-                        // ERROR when getting the manifest-css file
-                        die("Could not load css manifest: <strong>{$manifestCSSPath}</strong> file not found!");
-                    }
-                }
-
-                $this->manifestCSSData = $cachedManifestCSS;
-            }
-
-            if (array_key_exists($path, $this->manifestCSSData)) {
-                return $this->getHtmlTag(
-                    '/' . config('Vite')->assetsRoot . '/' . $this->manifestCSSData[$path]['file'],
-                    'css'
-                );
-            }
-        }
-
         if ($this->manifestData === null) {
             $cacheName = 'vite-manifest';
             if (! ($cachedManifest = cache($cacheName))) {
@@ -100,6 +70,14 @@ class Vite
             if (array_key_exists('imports', $manifestElement)) {
                 foreach ($manifestElement['imports'] as $importPath) {
                     if (array_key_exists($importPath, $this->manifestData)) {
+                        
+                        // import css dependencies if any
+                        if (array_key_exists('css', $this->manifestData[$importPath])) {
+                            foreach ($this->manifestData[$importPath]['css'] as $cssFile) {
+                                $html .= $this->getHtmlTag('/' . config('Vite')->assetsRoot . '/' . $cssFile, 'css');
+                            }
+                        }
+
                         $html .= $this->getHtmlTag(
                             '/' . config('Vite')->assetsRoot . '/' . $this->manifestData[$importPath]['file'],
                             'js'

@@ -1,4 +1,4 @@
-FROM docker.io/php:8.1-fpm-alpine3.16
+FROM docker.io/php:8.1-fpm-alpine3.17
 
 COPY docker/production/app/entrypoint.sh /entrypoint.sh
 

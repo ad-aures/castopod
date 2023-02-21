@@ -85,6 +85,7 @@ tests/coverage*
 
 # Don't save phpunit under version control.
 phpunit
+.phpunit.cache
 
 #-------------------------
 # Composer
@@ -132,9 +133,10 @@ tmp/
 /phpunit*.xml
 /.phpunit.*.cache
 
-# npm
+# js package manager
 yarn.lock
 node_modules
+.pnpm-store
 
 # JS
 .cache

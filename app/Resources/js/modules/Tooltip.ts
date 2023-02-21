@@ -1,4 +1,3 @@
-import { Coords } from "@floating-ui/core";
 import {
   arrow,
   computePosition,
@@ -47,7 +46,7 @@ const Tooltip = (): void => {
         });
 
         // Accessing the data
-        const { x: arrowX, y: arrowY } = middlewareData.arrow as Coords;
+        const { x: arrowX, y: arrowY } = middlewareData.arrow as any;
 
         const staticSide = {
           top: "bottom",

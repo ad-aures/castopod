@@ -10,7 +10,7 @@ class Vite extends BaseConfig
 {
     public string $environment = 'production';
 
-    public string $baseUrl = 'http://localhost:3000/';
+    public string $baseUrl = 'http://localhost:5173/';
 
     public string $assetsRoot = 'assets';
 

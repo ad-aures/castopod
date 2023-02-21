@@ -15,20 +15,12 @@ WORKDIR /castopod
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 # Install server requirements
-RUN apt-get update \
-    # gnupg to sign commits with gpg
-    && apt-get install --yes --no-install-recommends gnupg \
-    # npm through the nodejs package
-    && curl -fsSL https://deb.nodesource.com/setup_16.x | bash - \
+RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - \
     && apt-get update \
     && apt-get install --yes --no-install-recommends nodejs \
-    # update npm
-    && npm install --global npm@8 \
-    && apt-get update \
-    && apt-get install --yes --no-install-recommends \
-    git \
+    # gnupg to sign commits with gpg
+    gnupg \
     openssh-client \
-    vim \
     # cron for scheduled tasks
     cron \
     # unzip used by composer

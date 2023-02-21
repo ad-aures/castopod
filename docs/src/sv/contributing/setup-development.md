@@ -34,7 +34,7 @@ to help you kickstart your contribution.
 
    ```ini
    CI_ENVIRONMENT="development"
-   # If set to development, you must run `npm run dev` to start the static assets server
+   # If set to development, you must run `pnpm run dev` to start the static assets server
    vite.environment="development"
 
    # By default, this is set to true in the app config.
@@ -90,7 +90,7 @@ required services will be loaded automagically! 🪄
 
    ```bash
    # run Vite dev server
-   npm run dev
+   pnpm run dev
    ```
 
    If there is any issue with the php server not running, you can restart them
@@ -113,8 +113,8 @@ required services will be loaded automagically! 🪄
    # Composer is installed
    composer -V
 
-   # npm is installed
-   npm -v
+   # pnpm is installed
+   pnpm -v
 
    # git is installed
    git version
@@ -181,8 +181,8 @@ You do not wish to use the VSCode devcontainer? No problem!
    # use Composer
    docker-compose run --rm app composer -V
 
-   # use npm
-   docker-compose run --rm app npm -v
+   # use pnpm
+   docker-compose run --rm app pnpm -v
 
    # use git
    docker-compose run --rm app git version
@@ -210,18 +210,19 @@ You do not wish to use the VSCode devcontainer? No problem!
 
    :::
 
-2. Install javascript dependencies with [npm](https://www.npmjs.com/)
+2. Install javascript dependencies with [pnpm](https://pnpm.io/)
 
    ```bash
-   npm install
+   pnpm install
    ```
 
    ::: info Note
 
-   The javascript dependencies aren't included in the repository. Npm will check
-   the `package.json` and `package.lock` files to download the packages with the
-   right versions. The dependencies will live under the `node_module` folder.
-   For more info, check out the [NPM documentation](https://docs.npmjs.com/).
+   The javascript dependencies aren't included in the repository. pnPM will
+   check the `package.json` and `pnpm-lock.yaml` files to download the packages
+   with the right versions. The dependencies will live under the `node_module`
+   folder. For more info, check out the
+   [pnPM documentation](https://pnpm.io/motivation).
 
    :::
 
@@ -229,11 +230,11 @@ You do not wish to use the VSCode devcontainer? No problem!
 
    ```bash
    # build all static assets at once
-   npm run build:static
+   pnpm run build:static
 
    # build specific assets
-   npm run build:icons
-   npm run build:svg
+   pnpm run build:icons
+   pnpm run build:svg
    ```
 
    ::: info Note
@@ -372,10 +373,10 @@ more insights.
 
 ### Allocation failed - JavaScript heap out of memory
 
-This happens when running `npm install`.
+This happens when running `pnpm install`.
 
 👉 By default, docker might not have access to enough RAM. Allocate more memory
-and run `npm install` again.
+and run `pnpm install` again.
 
 ### (Linux) Files created inside container are attributed to root locally
 

@@ -5,7 +5,7 @@
   "dockerComposeFile": ["../docker-compose.yml", "./docker-compose.yml"],
   "service": "app",
   "workspaceFolder": "/castopod",
-  "postCreateCommand": "composer install && npm install && npm run build:static",
+  "postCreateCommand": "composer install && pnpm install && pnpm run build:static",
   "postStartCommand": "crontab ./crontab && cron && php spark serve --host 0.0.0.0",
   "postAttachCommand": "crontab ./crontab && service cron reload",
   "shutdownAction": "stopCompose",
@@ -44,5 +44,11 @@
     "stylelint.vscode-stylelint",
     "wayou.vscode-todo-highlight",
     "yzhang.markdown-all-in-one"
-  ]
+  ],
+
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/guiyomh/features/vim:0": {},
+    "ghcr.io/NicoVIII/devcontainer-features/pnpm:2": {}
+  }
 }
