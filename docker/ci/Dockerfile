@@ -20,10 +20,14 @@ RUN \
         jq \
         zip \
         rsync \
+        icu-libs \
         mysql \
         mysql-client \
+    && apk add --no-cache --virtual .php-ext-build-dep icu-dev \
     && docker-php-ext-install \
+        intl \
         mysqli \
+    && apk del .php-ext-build-dep \
     # install pnpm
     && wget -qO- https://get.pnpm.io/install.sh | ENV="~/.shrc" SHELL="$(which sh)" sh - \
     && mv ~/.local/share/pnpm/pnpm /usr/bin/pnpm \
