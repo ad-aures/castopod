@@ -47,11 +47,11 @@
                 <div class="flex items-baseline">
                     <span class="flex-1 w-0 mr-2 text-sm font-semibold truncate"><?= esc($episode->title) ?></span>
                     <?= episode_numbering(
-        $episode->number,
-        $episode->season_number,
-        'text-xs font-semibold text-skin-muted !no-underline border px-1 border-gray-500',
-        true,
-    ) ?>
+                        $episode->number,
+                        $episode->season_number,
+                        'text-xs font-semibold text-skin-muted !no-underline border px-1 border-gray-500',
+                        true,
+                    ) ?>
                 </div>
                 <div class="text-xs text-skin-muted">
                     <time datetime="PT<?= round($episode->audio->duration, 3) ?>S">

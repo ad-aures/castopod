@@ -27,17 +27,17 @@
                             <?php endif; ?>
                         </h4>
                         <p class="text-xs text-skin-muted"><?= implode(
-    ', ',
-    array_map(function ($role) {
-        return lang(
-            'PersonsTaxonomy.persons.' .
-                                            $role->group .
-                                            '.roles.' .
-                                            $role->role .
-                                            '.label',
-        );
-    }, $person->roles),
-) ?></p>
+                            ', ',
+                            array_map(function ($role) {
+                                return lang(
+                                    'PersonsTaxonomy.persons.' .
+                                                                    $role->group .
+                                                                    '.roles.' .
+                                                                    $role->role .
+                                                                    '.label',
+                                );
+                            }, $person->roles),
+                        ) ?></p>
                     </div>
                 </div>
             <?php endforeach; ?>

@@ -18,15 +18,15 @@
 <body class="flex flex-col items-center justify-center min-h-screen mx-auto bg-base">
 	<header class="mb-4">
 		<a href="<?= route_to(
-            'home',
-        ) ?>" class="inline-flex items-baseline text-4xl font-bold font-display text-accent-base focus:ring-accent">
+		    'home',
+		) ?>" class="inline-flex items-baseline text-4xl font-bold font-display text-accent-base focus:ring-accent">
 			<?= 'castopod' . svg('castopod-logo', 'h-8 ml-2') ?>
 		</a>
 	</header>
 	<main class="flex flex-col w-full max-w-md px-6 py-4 mx-auto rounded-lg bg-elevated border-3 border-subtle gap-y-4">
 		<Heading tagName="h1" size="large" class="self-center"><?= $this->renderSection(
-            'title',
-        ) ?></Heading>
+		    'title',
+		) ?></Heading>
 		<?= view('_message_block') ?>
 		<?= $this->renderSection('content') ?>
 	</main>

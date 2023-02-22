@@ -450,7 +450,7 @@ class Episode extends Entity
     public function getEmbedUrl(string $theme = null): string
     {
         return $theme
-                ? url_to('embed-theme', esc($this->getPodcast()->handle), esc($this->attributes['slug']), $theme,)
+                ? url_to('embed-theme', esc($this->getPodcast()->handle), esc($this->attributes['slug']), $theme)
                 : url_to('embed', esc($this->getPodcast()->handle), esc($this->attributes['slug']));
     }
 

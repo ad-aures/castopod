@@ -215,9 +215,6 @@ class Podcast extends Entity
         return '@' . $this->handle;
     }
 
-    /**
-     * @noRector ReturnTypeDeclarationRector
-     */
     public function getActor(): ?Actor
     {
         if ($this->actor_id === 0) {

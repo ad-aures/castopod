@@ -42,9 +42,9 @@
         <div class="container flex flex-col items-start px-2 py-4 mx-auto">
             <a href="<?= route_to('home') ?>"
             class="inline-flex items-center mb-2 text-sm focus:ring-accent"><?= icon(
-            'arrow-left',
-            'mr-2',
-        ) . lang('Page.back_to_home') ?></a>
+                'arrow-left',
+                'mr-2',
+            ) . lang('Page.back_to_home') ?></a>
             <Heading tagName="h1" size="large"><?= esc($page->title) ?></Heading>
         </div>
     </header>
@@ -54,8 +54,8 @@
     <footer class="container flex justify-between px-2 py-4 mx-auto text-sm text-right border-t border-subtle">
         <?= render_page_links() ?>
         <small><?= lang('Common.powered_by', [
-            'castopod' =>
-                '<a class="underline hover:no-underline focus:ring-accent" href="https://castopod.org/" target="_blank" rel="noreferrer noopener">Castopod</a>',
-        ], null, false) ?></small>
+                'castopod' =>
+                    '<a class="underline hover:no-underline focus:ring-accent" href="https://castopod.org/" target="_blank" rel="noreferrer noopener">Castopod</a>',
+            ], null, false) ?></small>
     </footer>
 </body>

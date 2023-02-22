@@ -19,47 +19,47 @@
     <div class="-mx-2 -mt-8 border-b divide-y md:-mx-12">
         <?php
             foreach ($notifications as $notification):
-            $backgroundColor = $notification->read_at === null ? 'bg-heading-background' : 'bg-base';
-        ?>
+                $backgroundColor = $notification->read_at === null ? 'bg-heading-background' : 'bg-base';
+                ?>
             <div class="py-3 hover:bg-white px-4 <?= $backgroundColor ?> group">
                 <?php
-                    $post = $notification->post_id !== null ? $notification->post : null;
+                            $post = $notification->post_id !== null ? $notification->post : null;
 
-                    $actorUsername = '@' . esc($notification->actor
-                        ->username) .
-                                ($notification->actor->is_local
-                                    ? ''
-                                    : '@' . esc($notification->actor->domain));
+                $actorUsername = '@' . esc($notification->actor
+                    ->username) .
+                            ($notification->actor->is_local
+                                ? ''
+                                : '@' . esc($notification->actor->domain));
 
-                    $actorUsernameHtml = <<<CODE_SAMPLE
+                $actorUsernameHtml = <<<CODE_SAMPLE
                     <strong class="break-all">{$actorUsername}</strong>
                     CODE_SAMPLE;
 
-                    $targetActorUsername = '@' . esc($notification->target_actor->username);
+                $targetActorUsername = '@' . esc($notification->target_actor->username);
 
-                    $targetActorUsernameHtml = <<<CODE_SAMPLE
+                $targetActorUsernameHtml = <<<CODE_SAMPLE
                     <strong class="break-all">{$targetActorUsername}</strong>
                     CODE_SAMPLE;
 
-                    $notificationTitle = match ($notification->type) {
-                        'reply' => lang('Notifications.reply', [
-                            'actor_username' => $actorUsernameHtml,
-                        ], null, false),
-                        'like' => lang('Notifications.favourite', [
-                            'actor_username' => $actorUsernameHtml,
-                        ], null, false),
-                        'share' => lang('Notifications.reblog', [
-                            'actor_username' => $actorUsernameHtml,
-                        ], null, false),
-                        'follow' => lang('Notifications.follow', [
-                            'actor_username' => $actorUsernameHtml,
-                        ], null, false),
-                        default => '',
-                    };
-                    $notificationContent = $post !== null ? $post->message_html : null;
+                $notificationTitle = match ($notification->type) {
+                    'reply' => lang('Notifications.reply', [
+                        'actor_username' => $actorUsernameHtml,
+                    ], null, false),
+                    'like' => lang('Notifications.favourite', [
+                        'actor_username' => $actorUsernameHtml,
+                    ], null, false),
+                    'share' => lang('Notifications.reblog', [
+                        'actor_username' => $actorUsernameHtml,
+                    ], null, false),
+                    'follow' => lang('Notifications.follow', [
+                        'actor_username' => $actorUsernameHtml,
+                    ], null, false),
+                    default => '',
+                };
+                $notificationContent = $post !== null ? $post->message_html : null;
 
-                    $postLink = $post !== null ? route_to('post', esc($podcast->handle), $post->id) : route_to('podcast-activity', esc($podcast->handle));
-                    $link = $notification->read_at !== null ? $postLink : route_to('notification-mark-as-read', $podcast->id, $notification->id);
+                $postLink = $post !== null ? route_to('post', esc($podcast->handle), $post->id) : route_to('podcast-activity', esc($podcast->handle));
+                $link = $notification->read_at !== null ? $postLink : route_to('notification-mark-as-read', $podcast->id, $notification->id);
                 ?>
                 <a href="<?= $link ?>">
                     <div class="flex items-start md:items-center">
@@ -76,7 +76,7 @@
                                             'follow' => icon('user-follow', 'text-violet-500 text-base'),
                                             default => '',
                                         };
-                                    ?>
+                ?>
                                     <?= $icon ?>
                                 </span>
                             </div>

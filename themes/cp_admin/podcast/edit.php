@@ -128,11 +128,11 @@
             <Forms.RadioButton
                 value="clean"
                 name="parental_advisory"
-                isChecked="<?= $podcast->parental_advisory === 'clean' ? 'true' : 'false' ?>" ><?= lang('Podcast.form.parental_advisory.clean', ) ?></Forms.RadioButton>
+                isChecked="<?= $podcast->parental_advisory === 'clean' ? 'true' : 'false' ?>" ><?= lang('Podcast.form.parental_advisory.clean') ?></Forms.RadioButton>
             <Forms.RadioButton
                 value="explicit"
                 name="parental_advisory"
-                isChecked="<?= $podcast->parental_advisory === 'explicit' ? 'true' : 'false' ?>" ><?= lang('Podcast.form.parental_advisory.explicit', ) ?></Forms.RadioButton>
+                isChecked="<?= $podcast->parental_advisory === 'explicit' ? 'true' : 'false' ?>" ><?= lang('Podcast.form.parental_advisory.explicit') ?></Forms.RadioButton>
         </div>
     </fieldset>
 </Forms.Section>

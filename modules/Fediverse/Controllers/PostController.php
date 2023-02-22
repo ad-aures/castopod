@@ -53,9 +53,6 @@ class PostController extends Controller
         return $this->{$method}(...$params);
     }
 
-    /**
-     * @noRector ReturnTypeDeclarationRector
-     */
     public function index(): Response
     {
         $noteObjectClass = $this->config->noteObject;
@@ -66,9 +63,6 @@ class PostController extends Controller
             ->setBody($noteObject->toJSON());
     }
 
-    /**
-     * @noRector ReturnTypeDeclarationRector
-     */
     public function replies(): Response
     {
         /**

@@ -21,8 +21,6 @@ class Pager extends BaseConfig
      * and the desired group as $pagerGroup;
      *
      * @var array<string, string>
-     *
-     * @noRector Rector\Php55\Rector\String_\StringClassNameToClassConstantRector
      */
     public $templates = [
         'default_full' => 'App\Views\pager\default_full',

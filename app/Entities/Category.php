@@ -36,9 +36,6 @@ class Category extends Entity
         'google_category' => 'string',
     ];
 
-    /**
-     * @noRector ReturnTypeDeclarationRector
-     */
     public function getParent(): ?self
     {
         if ($this->parent_id === null) {

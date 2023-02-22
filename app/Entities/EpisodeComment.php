@@ -87,8 +87,6 @@ class EpisodeComment extends UuidEntity
 
     /**
      * Returns the comment's actor
-     *
-     * @noRector ReturnTypeDeclarationRector
      */
     public function getActor(): ?Actor
     {
@@ -125,9 +123,6 @@ class EpisodeComment extends UuidEntity
         return $this->getReplies() !== [];
     }
 
-    /**
-     * @noRector ReturnTypeDeclarationRector
-     */
     public function getReplyToComment(): ?self
     {
         if ($this->in_reply_to_id === null) {

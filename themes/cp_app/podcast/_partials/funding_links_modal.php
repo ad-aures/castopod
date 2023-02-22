@@ -26,10 +26,10 @@
                     rel="noopener noreferrer"
                     class="inline-flex items-center w-full font-semibold text-accent-base hover:text-accent-hover focus:ring-accent">
                     <?= icon(
-                esc($fundingPlatform->slug),
-                'mr-2 flex-shrink-0',
-                $fundingPlatform->type
-            ) . '<span class="truncate">' . esc($fundingPlatform->link_url) . '</span>' ?>
+                        esc($fundingPlatform->slug),
+                        'mr-2 flex-shrink-0',
+                        $fundingPlatform->type
+                    ) . '<span class="truncate">' . esc($fundingPlatform->link_url) . '</span>' ?>
                     </a>
                 <?php endif; ?>
             <?php endforeach; ?>

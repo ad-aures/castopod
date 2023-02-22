@@ -55,7 +55,7 @@ class EpisodeCommentController extends BaseController
 
         if (
             ($episode = (new EpisodeModel())->getEpisodeBySlug($params[0], $params[1])) === null
-            ) {
+        ) {
             throw PageNotFoundException::forPageNotFound();
         }
 
@@ -120,9 +120,6 @@ class EpisodeCommentController extends BaseController
         return $cachedView;
     }
 
-    /**
-     * @noRector ReturnTypeDeclarationRector
-     */
     public function commentObject(): Response
     {
         $commentObject = new CommentObject($this->comment);
@@ -132,9 +129,6 @@ class EpisodeCommentController extends BaseController
             ->setBody($commentObject->toJSON());
     }
 
-    /**
-     * @noRector ReturnTypeDeclarationRector
-     */
     public function replies(): Response
     {
         /**

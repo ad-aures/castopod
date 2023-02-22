@@ -3,7 +3,7 @@
 <?php if ($subscription->expires_at): ?>
     <?php
         $formatter = new IntlDateFormatter($subscription->podcast->language_code, IntlDateFormatter::LONG, IntlDateFormatter::LONG);
-        $translatedDate = $subscription->expires_at->toLocalizedString($formatter->getPattern());
+    $translatedDate = $subscription->expires_at->toLocalizedString($formatter->getPattern());
     ?>
     <?= lang('Subscription.emails.edited_expires', [
         'podcastTitle' => '<strong>' . $subscription->podcast->title . '</strong>',

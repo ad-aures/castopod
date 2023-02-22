@@ -47,9 +47,6 @@ class PodcastController extends BaseController
         return $this->{$method}(...$params);
     }
 
-    /**
-     * @noRector ReturnTypeDeclarationRector
-     */
     public function podcastActor(): Response
     {
         $podcastActor = new PodcastActor($this->podcast);
@@ -285,9 +282,6 @@ class PodcastController extends BaseController
         return $cachedView;
     }
 
-    /**
-     * @noRector ReturnTypeDeclarationRector
-     */
     public function episodeCollection(): Response
     {
         if ($this->podcast->type === 'serial') {

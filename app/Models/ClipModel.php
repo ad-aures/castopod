@@ -53,9 +53,6 @@ class ClipModel extends Model
         'job_ended_at',
     ];
 
-    /**
-     * @noRector
-     */
     protected $returnType = BaseClip::class;
 
     /**

@@ -58,12 +58,12 @@ $counts = [
     <div class="flex flex-col items-start flex-1 w-48 px-2">
         <span class="w-full font-semibold truncate" title="<?= esc($podcast->title) ?>"><?= esc($podcast->title) ?></span>
         <a href="<?= route_to(
-    'podcast-activity',
-    esc($podcast->handle),
-) ?>" class="inline-flex items-center text-sm hover:underline focus:ring-accent"
+            'podcast-activity',
+            esc($podcast->handle),
+        ) ?>" class="inline-flex items-center text-sm hover:underline focus:ring-accent"
         data-tooltip="bottom" title="<?= lang(
-    'PodcastNavigation.go_to_page',
-) ?>">@<?= esc($podcast->handle) ?>
+            'PodcastNavigation.go_to_page',
+        ) ?>">@<?= esc($podcast->handle) ?>
         <?= icon('external-link', 'ml-1 opacity-60') ?>
         </a>
     </div>
@@ -73,16 +73,16 @@ $counts = [
     <div>
         <button class="inline-flex items-center w-full px-4 py-1 font-semibold focus:ring-accent" type="button">
             <?= icon($data['icon'], 'opacity-60 text-2xl mr-4') .
-                lang('PodcastNavigation.' . $section) ?>
+                        lang('PodcastNavigation.' . $section) ?>
         </button>
         <ul class="flex flex-col">
             <?php foreach ($data['items'] as $item): ?>
                 <?php $isActive = url_is(route_to($item, $podcast->id)); ?>
                 <?php
-                    $itemLabel = lang('PodcastNavigation.' . $item);
-                    if (array_key_exists($item, $counts)) {
-                        $itemLabel .= ' (' . $counts[$item] . ')';
-                    }
+                            $itemLabel = lang('PodcastNavigation.' . $item);
+                if (array_key_exists($item, $counts)) {
+                    $itemLabel .= ' (' . $counts[$item] . ')';
+                }
                 ?>
             <li class="inline-flex">
                 <a class="w-full py-1 pl-14 pr-2 text-sm hover:opacity-100 focus:ring-inset focus:ring-accent <?= $isActive

@@ -9,13 +9,13 @@
     <div class="flex items-center">
         <span class="inline-flex items-center justify-center w-12 h-12 mr-2 text-sm font-semibold tracking-wider border-4 rounded-full text-accent-base border-accent-base">2/4</span>
         <Heading tagName="h1"><?= lang(
-    'Install.form.database_config',
-) ?></Heading>
+            'Install.form.database_config',
+        ) ?></Heading>
     </div>
 
     <p class="mt-2 text-sm text-skin-muted"><?= lang(
-    'Install.form.database_config_hint',
-) ?></p>
+        'Install.form.database_config_hint',
+    ) ?></p>
 </div>
 
 <Forms.Field

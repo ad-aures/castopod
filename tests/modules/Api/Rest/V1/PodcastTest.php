@@ -46,12 +46,9 @@ class PodcastTest extends CIUnitTestCase
 
     private readonly string $podcastApiUrl;
 
-    /**
-     * @param array<mixed> $data
-     */
-    public function __construct(?string $name = null, array $data = [], $dataName = '')
+    public function __construct(?string $name = null)
     {
-        parent::__construct($name, $data, $dataName);
+        parent::__construct($name);
         $this->podcast = FakeSinglePodcastApiSeeder::podcast();
         $this->podcast['created_at'] = [];
         $this->podcast['updated_at'] = [];

@@ -23,28 +23,28 @@
     <div class="flex flex-col items-center w-12 mr-4">
         <?php if ($platform->submit_url === ''): ?>
             <?= icon(
-    esc($platform->slug),
-    'text-skin-muted text-4xl',
-    $platform->type
-) ?>
+                esc($platform->slug),
+                'text-skin-muted text-4xl',
+                $platform->type
+            ) ?>
         <?php else: ?>
             <?= anchor(
-    $platform->submit_url,
-    icon(
-        esc($platform->slug),
-        'text-skin-muted text-4xl',
-        $platform->type
-    ),
-    [
-        'class' => 'text-skin-muted hover:text-skin-base',
-        'target' => '_blank',
-        'rel' => 'noopener noreferrer',
-        'data-tooltip' => 'bottom',
-        'title' => lang('Platforms.submit_url', [
-            'platformName' => $platform->label,
-        ]),
-    ],
-) ?>
+                $platform->submit_url,
+                icon(
+                    esc($platform->slug),
+                    'text-skin-muted text-4xl',
+                    $platform->type
+                ),
+                [
+                    'class' => 'text-skin-muted hover:text-skin-base',
+                    'target' => '_blank',
+                    'rel' => 'noopener noreferrer',
+                    'data-tooltip' => 'bottom',
+                    'title' => lang('Platforms.submit_url', [
+                        'platformName' => $platform->label,
+                    ]),
+                ],
+            ) ?>
         <?php endif; ?>
         <div class="inline-flex mt-1 bg-highlight">
             <?= anchor($platform->home_url, icon('external-link', 'mx-auto'), [
@@ -57,37 +57,37 @@
                 ]),
             ]) ?>
             <?= $platform->submit_url
-                ? anchor($platform->submit_url, icon('add', 'mx-auto'), [
-                    'class' => 'flex-1 text-skin-muted hover:text-skin-base',
-                    'target' => '_blank',
-                    'rel' => 'noopener noreferrer',
-                    'data-tooltip' => 'bottom',
-                    'title' => lang('Platforms.submit_url', [
-                        'platformName' => $platform->label,
-                    ]),
-                ])
-                : '' ?>
+                            ? anchor($platform->submit_url, icon('add', 'mx-auto'), [
+                                'class' => 'flex-1 text-skin-muted hover:text-skin-base',
+                                'target' => '_blank',
+                                'rel' => 'noopener noreferrer',
+                                'data-tooltip' => 'bottom',
+                                'title' => lang('Platforms.submit_url', [
+                                    'platformName' => $platform->label,
+                                ]),
+                            ])
+                            : '' ?>
         </div>
     </div>
     <div class="flex flex-col flex-1">
         <?= $platform->link_url
-            ? anchor(
-                route_to(
-                    'podcast-platform-remove',
-                    $podcast->id,
-                    esc($platform->slug),
-                ),
-                icon('delete-bin', 'mx-auto'),
-                [
-                    'class' =>
-                        'absolute right-0 p-1 bg-red-100 rounded-full text-red-700 hover:text-red-900',
-                    'data-tooltip' => 'bottom',
-                    'title' => lang('Platforms.remove', [
-                        'platformName' => $platform->label,
-                    ]),
-                ],
-            )
-            : '' ?>
+                        ? anchor(
+                            route_to(
+                                'podcast-platform-remove',
+                                $podcast->id,
+                                esc($platform->slug),
+                            ),
+                            icon('delete-bin', 'mx-auto'),
+                            [
+                                'class' =>
+                                    'absolute right-0 p-1 bg-red-100 rounded-full text-red-700 hover:text-red-900',
+                                'data-tooltip' => 'bottom',
+                                'title' => lang('Platforms.remove', [
+                                    'platformName' => $platform->label,
+                                ]),
+                            ],
+                        )
+                        : '' ?>
         <fieldset>
             <legend class="mb-2 font-semibold"><?= $platform->label ?></legend>
             <Forms.Input

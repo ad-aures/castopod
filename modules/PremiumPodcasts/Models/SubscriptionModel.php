@@ -42,9 +42,6 @@ class SubscriptionModel extends Model
         'updated_by',
     ];
 
-    /**
-     * @noRector
-     */
     protected $returnType = Subscription::class;
 
     /**

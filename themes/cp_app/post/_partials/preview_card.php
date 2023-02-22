@@ -5,9 +5,9 @@ if ($preview_card->type === 'image'): ?>
     <?php if ($preview_card->image): ?>
     <div class="relative group">
         <?= icon(
-    'external-link',
-    'absolute inset-0 m-auto text-6xl bg-accent-base bg-opacity-50 group-hover:bg-opacity-100 text-accent-contrast rounded-full p-2',
-) ?>
+            'external-link',
+            'absolute inset-0 m-auto text-6xl bg-accent-base bg-opacity-50 group-hover:bg-opacity-100 text-accent-contrast rounded-full p-2',
+        ) ?>
         <img src="<?= $preview_card->image ?>" alt="<?= esc($preview_card->title) ?>" class="object-cover w-full aspect-video" loading="lazy" />
     </div>
     <?php endif; ?>
@@ -21,9 +21,9 @@ if ($preview_card->type === 'image'): ?>
     <?php if ($preview_card->image): ?>
     <div class="relative group">
         <?= icon(
-    'play',
-    'absolute inset-0 m-auto text-6xl bg-accent-base bg-opacity-50 group-hover:bg-opacity-100 text-accent-contrast rounded-full p-2',
-) ?>
+            'play',
+            'absolute inset-0 m-auto text-6xl bg-accent-base bg-opacity-50 group-hover:bg-opacity-100 text-accent-contrast rounded-full p-2',
+        ) ?>
         <img class="object-cover w-full aspect-video" src="<?= $preview_card->image ?>" alt="<?= esc($preview_card->title) ?>" loading="lazy" />
     </div>
     <?php endif; ?>

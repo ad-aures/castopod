@@ -47,7 +47,6 @@ class SchedulerController extends Controller
         // Loop through clips to generate them
         foreach ($scheduledClips as $scheduledClip) {
             try {
-
                 // set clip to pending
                 (new ClipModel())
                     ->update($scheduledClip->id, [

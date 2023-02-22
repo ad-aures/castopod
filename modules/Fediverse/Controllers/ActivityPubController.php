@@ -15,9 +15,6 @@ use CodeIgniter\HTTP\Response;
 
 class ActivityPubController extends Controller
 {
-    /**
-     * @noRector ReturnTypeDeclarationRector
-     */
     public function preflight(): Response
     {
         return $this->response->setHeader('Access-Control-Allow-Origin', '*') // for allowing any domain, insecure

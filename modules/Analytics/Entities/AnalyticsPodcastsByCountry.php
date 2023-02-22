@@ -39,9 +39,6 @@ class AnalyticsPodcastsByCountry extends Entity
         'hits' => 'integer',
     ];
 
-    /**
-     * @noRector ReturnTypeDeclarationRector
-     */
     public function getLabels(): string
     {
         return lang('Countries.' . $this->attributes['labels']);

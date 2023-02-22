@@ -74,7 +74,7 @@ class EpisodeAudioController extends Controller
 
         if (
             ($episode = (new EpisodeModel())->getEpisodeBySlug($params[0], $params[1])) === null
-            ) {
+        ) {
             throw PageNotFoundException::forPageNotFound();
         }
 

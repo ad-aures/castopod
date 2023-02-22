@@ -30,7 +30,6 @@ class Router extends CodeIgniterRouter
      */
     protected function checkRoutes(string $uri): bool
     {
-        /** @noRector RemoveExtraParametersRector */
         $routes = $this->collection->getRoutes($this->collection->getHTTPVerb());
 
         // Don't waste any time

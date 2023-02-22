@@ -56,9 +56,6 @@ class ActorController extends Controller
         return $this->{$method}(...$params);
     }
 
-    /**
-     * @noRector ReturnTypeDeclarationRector
-     */
     public function index(): ResponseInterface
     {
         $actorObjectClass = $this->config->actorObject;
@@ -71,8 +68,6 @@ class ActorController extends Controller
 
     /**
      * Handles incoming requests from fediverse servers
-     *
-     * @noRector ReturnTypeDeclarationRector
      */
     public function inbox(): ResponseInterface
     {
@@ -264,9 +259,6 @@ class ActorController extends Controller
         }
     }
 
-    /**
-     * @noRector ReturnTypeDeclarationRector
-     */
     public function outbox(): ResponseInterface
     {
         // get published activities by publication date
@@ -297,9 +289,6 @@ class ActorController extends Controller
             ->setBody($collection->toJSON());
     }
 
-    /**
-     * @noRector ReturnTypeDeclarationRector
-     */
     public function followers(): ResponseInterface
     {
         $tablesPrefix = config('Fediverse')
@@ -386,9 +375,6 @@ class ActorController extends Controller
         );
     }
 
-    /**
-     * @noRector ReturnTypeDeclarationRector
-     */
     public function activity(string $activityId): ResponseInterface
     {
         if (

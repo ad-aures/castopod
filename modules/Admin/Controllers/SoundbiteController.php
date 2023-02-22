@@ -117,7 +117,7 @@ class SoundbiteController extends BaseController
         $newSoundbite = new Soundbite([
             'title' => $this->request->getPost('title'),
             'start_time' => (float) $this->request->getPost('start_time'),
-            'duration' => (float) $this->request->getPost('duration',),
+            'duration' => (float) $this->request->getPost('duration'),
             'type' => 'audio',
             'status' => '',
             'podcast_id' => $this->podcast->id,

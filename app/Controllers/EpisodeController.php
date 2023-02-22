@@ -51,7 +51,7 @@ class EpisodeController extends BaseController
 
         if (
             ($episode = (new EpisodeModel())->getEpisodeBySlug($params[0], $params[1])) === null
-            ) {
+        ) {
             throw PageNotFoundException::forPageNotFound();
         }
 
@@ -274,9 +274,6 @@ class EpisodeController extends BaseController
         return $this->response->setXML($oembed);
     }
 
-    /**
-     * @noRector ReturnTypeDeclarationRector
-     */
     public function episodeObject(): Response
     {
         $podcastObject = new PodcastEpisode($this->episode);
@@ -286,9 +283,6 @@ class EpisodeController extends BaseController
             ->setBody($podcastObject->toJSON());
     }
 
-    /**
-     * @noRector ReturnTypeDeclarationRector
-     */
     public function comments(): Response
     {
         /**

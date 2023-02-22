@@ -539,7 +539,7 @@ class PostModel extends BaseUuidModel
                 ->first();
 
             $announceActivity = new AnnounceActivity($reblogPost);
-            $announceActivity->set('id', url_to('activity', $reblogPost->actor->username, $activity->id),);
+            $announceActivity->set('id', url_to('activity', $reblogPost->actor->username, $activity->id));
 
             $undoActivity
                 ->set('actor', $reblogPost->actor->uri)

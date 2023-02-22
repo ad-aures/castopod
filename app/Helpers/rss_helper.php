@@ -125,7 +125,7 @@ if (! function_exists('get_rss_feed')) {
         $castopodSocialElement->addAttribute('accountUrl', $podcast->link);
 
         foreach ($podcast->social_platforms as $socialPlatform) {
-            $socialElement = $channel->addChild('social', null, $podcastNamespace,);
+            $socialElement = $channel->addChild('social', null, $podcastNamespace);
             $socialElement->addAttribute('priority', '2');
             $socialElement->addAttribute('platform', $socialPlatform->slug);
 
@@ -202,7 +202,7 @@ if (! function_exists('get_rss_feed')) {
 
         foreach ($podcast->persons as $person) {
             foreach ($person->roles as $role) {
-                $personElement = $channel->addChild('person', $person->full_name, $podcastNamespace,);
+                $personElement = $channel->addChild('person', $person->full_name, $podcastNamespace);
 
                 $personElement->addAttribute('img', $person->avatar->medium_url);
 
@@ -294,7 +294,7 @@ if (! function_exists('get_rss_feed')) {
             $item->addChild('guid', $episode->guid);
             $item->addChild('pubDate', $episode->published_at->format(DATE_RFC1123));
             if ($episode->location !== null) {
-                $locationElement = $item->addChild('location', $episode->location->name, $podcastNamespace,);
+                $locationElement = $item->addChild('location', $episode->location->name, $podcastNamespace);
                 if ($episode->location->geo !== null) {
                     $locationElement->addAttribute('geo', $episode->location->geo);
                 }
@@ -376,11 +376,11 @@ if (! function_exists('get_rss_feed')) {
 
             foreach ($episode->persons as $person) {
                 foreach ($person->roles as $role) {
-                    $personElement = $item->addChild('person', esc($person->full_name), $podcastNamespace,);
+                    $personElement = $item->addChild('person', esc($person->full_name), $podcastNamespace);
 
                     $personElement->addAttribute(
                         'role',
-                        esc(lang("PersonsTaxonomy.persons.{$role->group}.roles.{$role->role}.label", [], 'en'),),
+                        esc(lang("PersonsTaxonomy.persons.{$role->group}.roles.{$role->role}.label", [], 'en')),
                     );
 
                     $personElement->addAttribute(

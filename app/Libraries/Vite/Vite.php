@@ -70,7 +70,6 @@ class Vite
             if (array_key_exists('imports', $manifestElement)) {
                 foreach ($manifestElement['imports'] as $importPath) {
                     if (array_key_exists($importPath, $this->manifestData)) {
-                        
                         // import css dependencies if any
                         if (array_key_exists('css', $this->manifestData[$importPath])) {
                             foreach ($this->manifestData[$importPath]['css'] as $cssFile) {
@@ -98,11 +97,11 @@ class Vite
             'css' => <<<CODE_SAMPLE
                 <link rel="stylesheet" href="{$assetUrl}"/>
             CODE_SAMPLE
-,
+            ,
             'js' => <<<CODE_SAMPLE
                     <script type="module" src="{$assetUrl}"></script>
                 CODE_SAMPLE
-,
+            ,
             default => '',
         };
     }

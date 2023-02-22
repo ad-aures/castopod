@@ -63,18 +63,18 @@
                 <button class="p-2 text-red-600 bg-white rounded-full shadow hover:text-red-500 focus:ring-accent" data-toggle="funding-links" data-toggle-class="hidden" title="<?= lang('Podcast.sponsor') ?>"><Icon glyph="heart"></Icon></button>
             <?php endif; ?>
             <?= anchor_popup(
-                        route_to('follow', esc($podcast->handle)),
-                        icon(
-                            'social/castopod',
-                            'mr-2 text-xl text-black/75 group-hover:text-black',
-                        ) . lang('Podcast.follow'),
-                        [
-                            'width' => 420,
-                            'height' => 620,
-                            'class' =>
-                                'group inline-flex items-center px-3 leading-8 text-xs tracking-wider font-semibold text-black uppercase rounded-full shadow focus:ring-accent bg-white',
-                        ],
-                    ) ?>
+                route_to('follow', esc($podcast->handle)),
+                icon(
+                    'social/castopod',
+                    'mr-2 text-xl text-black/75 group-hover:text-black',
+                ) . lang('Podcast.follow'),
+                [
+                    'width' => 420,
+                    'height' => 620,
+                    'class' =>
+                        'group inline-flex items-center px-3 leading-8 text-xs tracking-wider font-semibold text-black uppercase rounded-full shadow focus:ring-accent bg-white',
+                ],
+            ) ?>
         </div>
     </nav>
     <header class="relative z-50 flex flex-col col-start-2 px-8 pt-8 pb-4 overflow-hidden bg-accent-base/75 gap-y-4">
@@ -98,9 +98,10 @@
                             <?php $i = 0; ?>
                             <?php foreach ($episode->persons as $person): ?>
                                 <img src="<?= $person->avatar->thumbnail_url ?>" alt="<?= esc($person->full_name) ?>" class="object-cover w-8 h-8 -ml-4 border-2 rounded-full aspect-square border-background-header last:ml-0" loading="lazy" />
-                                <?php $i++; if ($i === 3) {
-                        break;
-                    }?>
+                                <?php $i++;
+                                if ($i === 3) {
+                                    break;
+                                }?>
                             <?php endforeach; ?>
                         </span>
                         <?= lang('Episode.persons', [

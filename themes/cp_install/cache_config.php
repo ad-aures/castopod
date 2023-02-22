@@ -12,8 +12,8 @@
     </div>
 
     <p class="mt-2 text-sm text-skin-muted"><?= lang(
-    'Install.form.cache_config_hint',
-) ?></p>
+        'Install.form.cache_config_hint',
+    ) ?></p>
 </div>
 
 <Forms.Field
@@ -21,10 +21,10 @@
     name="cache_handler"
     label="<?= lang('Install.form.cache_handler') ?>"
     options="<?= esc(json_encode([
-        'file' => lang('Install.form.cacheHandlerOptions.file'),
-        'redis' => lang('Install.form.cacheHandlerOptions.redis'),
-        'predis' => lang('Install.form.cacheHandlerOptions.predis'),
-    ])) ?>"
+            'file' => lang('Install.form.cacheHandlerOptions.file'),
+            'redis' => lang('Install.form.cacheHandlerOptions.redis'),
+            'predis' => lang('Install.form.cacheHandlerOptions.predis'),
+        ])) ?>"
     selected="file"
     required="true" />
 

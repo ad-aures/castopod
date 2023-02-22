@@ -7,6 +7,7 @@ namespace Config;
 use App\Entities\Actor;
 use App\Entities\Post;
 use App\Models\EpisodeModel;
+use CodeIgniter\Debug\Toolbar\Collectors\Database;
 use CodeIgniter\Events\Events;
 use CodeIgniter\Exceptions\FrameworkException;
 
@@ -47,7 +48,7 @@ Events::on('pre_system', static function () {
      * If you delete, they will no longer be collected.
      */
     if (CI_DEBUG && ! is_cli()) {
-        Events::on('DBQuery', 'CodeIgniter\Debug\Toolbar\Collectors\Database::collect');
+        Events::on('DBQuery', Database::class . '::collect');
         Services::toolbar()->respond();
     }
 });

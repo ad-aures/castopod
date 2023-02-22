@@ -172,13 +172,13 @@
             <?php if ($episode->transcript) : ?>
                 <div class="flex items-center mb-1 gap-x-2">
                     <?= anchor(
-                $episode->transcript->file_url,
-                icon('file-download', 'mr-1 text-skin-muted text-xl') . lang('Episode.form.transcript_download'),
-                [
-                    'class' => 'flex-1 font-semibold hover:underline inline-flex items-center text-xs',
-                    'download' => '',
-                ],
-            ) .
+                        $episode->transcript->file_url,
+                        icon('file-download', 'mr-1 text-skin-muted text-xl') . lang('Episode.form.transcript_download'),
+                        [
+                            'class' => 'flex-1 font-semibold hover:underline inline-flex items-center text-xs',
+                            'download' => '',
+                        ],
+                    ) .
                         anchor(
                             route_to(
                                 'transcript-delete',
@@ -227,13 +227,13 @@
             <?php if ($episode->chapters) : ?>
                 <div class="flex mb-1 gap-x-2">
                     <?= anchor(
-                $episode->chapters->file_url,
-                icon('file-download', 'mr-1 text-skin-muted text-xl') . lang('Episode.form.chapters_download'),
-                [
-                    'class' => 'flex-1 font-semibold hover:underline inline-flex items-center text-xs',
-                    'download' => '',
-                ],
-            ) .
+                        $episode->chapters->file_url,
+                        icon('file-download', 'mr-1 text-skin-muted text-xl') . lang('Episode.form.chapters_download'),
+                        [
+                            'class' => 'flex-1 font-semibold hover:underline inline-flex items-center text-xs',
+                            'download' => '',
+                        ],
+                    ) .
                     anchor(
                         route_to(
                             'chapters-delete',

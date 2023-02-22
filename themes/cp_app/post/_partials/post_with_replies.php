@@ -37,17 +37,17 @@ if ($post->in_reply_to_id): ?>
             </form>
         <?php else: ?>
             <?= anchor_popup(
-                            route_to('post-remote-action', esc($podcast->handle), $post->id, 'reply'),
-                            lang('Post.reply_to', [
-                                'actorUsername' => esc($post->actor->username),
-                            ]),
-                            [
-                                'class' =>
-                                    'text-center justify-center font-semibold rounded-full shadow relative z-10 px-4 py-2 w-full bg-accent-base text-accent-contrast inline-flex items-center hover:bg-accent-hover',
-                                'width' => 420,
-                                'height' => 620,
-                            ],
-                        ) ?>
+                route_to('post-remote-action', esc($podcast->handle), $post->id, 'reply'),
+                lang('Post.reply_to', [
+                    'actorUsername' => esc($post->actor->username),
+                ]),
+                [
+                    'class' =>
+                        'text-center justify-center font-semibold rounded-full shadow relative z-10 px-4 py-2 w-full bg-accent-base text-accent-contrast inline-flex items-center hover:bg-accent-hover',
+                    'width' => 420,
+                    'height' => 620,
+                ],
+            ) ?>
         <?php endif; ?>
     </div>
 

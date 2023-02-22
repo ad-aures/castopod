@@ -49,11 +49,11 @@
                 <div class="flex items-baseline">
                     <span class="flex-1 w-0 mr-2 text-sm font-semibold truncate"><?= esc($episode->title) ?></span>
                     <?= episode_numbering(
-                    $episode->number,
-                    $episode->season_number,
-                    'text-xs font-semibold text-skin-muted !no-underline border px-1 border-gray-500',
-                    true,
-                ) ?>
+                        $episode->number,
+                        $episode->season_number,
+                        'text-xs font-semibold text-skin-muted !no-underline border px-1 border-gray-500',
+                        true,
+                    ) ?>
                 </div>
                 <div class="text-xs text-skin-muted">
                     <?= relative_time($episode->published_at) ?>
@@ -76,8 +76,8 @@
 <?php if ($podcast->publication_status === 'published'): ?>
     <fieldset class="flex flex-col">
     <legend class="text-lg font-semibold"><?= lang(
-                    'Episode.publish_form.publication_date',
-                ) ?></legend>
+        'Episode.publish_form.publication_date',
+    ) ?></legend>
         <Forms.Radio value="now" name="publication_method" isChecked="<?= old('publication_method') && old('publish') === 'now' ?>"><?= lang('Episode.publish_form.publication_method.now') ?></Forms.Radio>
         <div class="inline-flex flex-wrap items-center radio-toggler">
             <input

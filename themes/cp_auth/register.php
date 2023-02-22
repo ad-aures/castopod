@@ -53,10 +53,10 @@
 
 <p class="py-4 text-sm text-center">
     <?= lang(
-    'Auth.haveAccount',
-) ?> <a class="underline hover:no-underline" href="<?= route_to(
-    'login',
-) ?>"><?= lang('Auth.login') ?></a>
+        'Auth.haveAccount',
+    ) ?> <a class="underline hover:no-underline" href="<?= route_to(
+        'login',
+    ) ?>"><?= lang('Auth.login') ?></a>
 </p>
 
 <?= $this->endSection() ?>

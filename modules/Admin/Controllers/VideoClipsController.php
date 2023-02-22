@@ -165,7 +165,7 @@ class VideoClipsController extends BaseController
         $videoClip = new VideoClip([
             'title' => $this->request->getPost('title'),
             'start_time' => (float) $this->request->getPost('start_time'),
-            'duration' => (float) $this->request->getPost('duration',),
+            'duration' => (float) $this->request->getPost('duration'),
             'theme' => $theme,
             'format' => $this->request->getPost('format'),
             'type' => 'video',

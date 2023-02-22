@@ -28,9 +28,6 @@ class MediaModel extends Model
      */
     protected $table = 'media';
 
-    /**
-     * @noRector
-     */
     protected $returnType = Document::class;
 
     /**
@@ -135,8 +132,6 @@ class MediaModel extends Model
 
     /**
      * @param Document|Audio|Video|Image|Transcript|Chapters $media
-     *
-     * @noRector ReturnTypeDeclarationRector
      */
     public function saveMedia(object $media): int | false
     {
@@ -150,8 +145,6 @@ class MediaModel extends Model
 
     /**
      * @param Document|Audio|Video|Image|Transcript|Chapters $media
-     *
-     * @noRector ReturnTypeDeclarationRector
      */
     public function updateMedia(object $media): bool
     {

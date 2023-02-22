@@ -15,9 +15,6 @@ use CodeIgniter\HTTP\Response;
 
 class ColorsController extends Controller
 {
-    /**
-     * @noRector ReturnTypeDeclarationRector
-     */
     public function index(): Response
     {
         $cacheName = 'colors.css';

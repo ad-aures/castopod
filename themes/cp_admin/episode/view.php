@@ -41,20 +41,20 @@
 
 <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
     <Charts.XY title="<?= lang('Charts.episode_by_day') ?>" dataUrl="<?= route_to(
-    'analytics-filtered-data',
-    $podcast->id,
-    'PodcastByEpisode',
-    'ByDay',
-    $episode->id,
-) ?>"/>
+        'analytics-filtered-data',
+        $podcast->id,
+        'PodcastByEpisode',
+        'ByDay',
+        $episode->id,
+    ) ?>"/>
 
     <Charts.XY title="<?= lang('Charts.episode_by_month') ?>" dataUrl="<?= route_to(
-    'analytics-filtered-data',
-    $podcast->id,
-    'PodcastByEpisode',
-    'ByMonth',
-    $episode->id,
-) ?>"/>
+        'analytics-filtered-data',
+        $podcast->id,
+        'PodcastByEpisode',
+        'ByMonth',
+        $episode->id,
+    ) ?>"/>
 </div>
 
 

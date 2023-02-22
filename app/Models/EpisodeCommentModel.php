@@ -195,8 +195,6 @@ class EpisodeCommentModel extends UuidModel
      * Retrieves all published posts for a given episode ordered by publication date
      *
      * @return EpisodeComment[]
-     *
-     * @noRector ReturnTypeDeclarationRector
      */
     public function getEpisodeComments(int $episodeId): array
     {

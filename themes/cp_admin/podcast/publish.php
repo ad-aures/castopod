@@ -48,8 +48,8 @@
 
 <fieldset class="flex flex-col">
     <legend class="text-lg font-semibold"><?= lang(
-    'Podcast.publish_form.publication_date',
-) ?></legend>
+        'Podcast.publish_form.publication_date',
+    ) ?></legend>
     <Forms.Radio value="now" name="publication_method" isChecked="<?= old('publication_method') ? old('publish') === 'now' : true ?>"><?= lang('Podcast.publish_form.publication_method.now') ?></Forms.Radio>
     <div class="inline-flex flex-wrap items-center radio-toggler">
         <input

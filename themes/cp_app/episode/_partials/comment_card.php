@@ -25,29 +25,29 @@
                     <?= csrf_field() ?>
 
                     <button type="submit" name="action" class="inline-flex items-center hover:underline group" title="<?= lang(
-                            'Comment.likes',
-                            [
-                                'numberOfLikes' => $comment->likes_count,
-                            ],
-                        ) ?>"><?= icon('heart', 'text-xl mr-1 text-gray-400 group-hover:text-red-600') . lang(
-                            'Comment.likes',
-                            [
-                                'numberOfLikes' => $comment->likes_count,
-                            ],
-                        ) ?></button>
+                        'Comment.likes',
+                        [
+                            'numberOfLikes' => $comment->likes_count,
+                        ],
+                    ) ?>"><?= icon('heart', 'text-xl mr-1 text-gray-400 group-hover:text-red-600') . lang(
+                        'Comment.likes',
+                        [
+                            'numberOfLikes' => $comment->likes_count,
+                        ],
+                    ) ?></button>
                 </form>
                 <?php else: ?>
                     <button class="inline-flex items-center opacity-50 cursor-not-allowed" title="<?= lang(
-                            'Comment.likes',
-                            [
-                                'numberOfLikes' => $comment->likes_count,
-                            ],
-                        ) ?>"><?= icon('heart', 'text-xl mr-1 text-skin-muted') . lang(
-                            'Comment.likes',
-                            [
-                                'numberOfLikes' => $comment->likes_count,
-                            ],
-                        ) ?></button>
+                        'Comment.likes',
+                        [
+                            'numberOfLikes' => $comment->likes_count,
+                        ],
+                    ) ?>"><?= icon('heart', 'text-xl mr-1 text-skin-muted') . lang(
+                        'Comment.likes',
+                        [
+                            'numberOfLikes' => $comment->likes_count,
+                        ],
+                    ) ?></button>
                 <?php endif; ?>
             </footer>
         <?php endif; ?>

@@ -61,7 +61,7 @@ if (! function_exists('parse_form_attributes')) {
                 }
             }
 
-            if (! empty($attributes)) {
+            if ($attributes !== []) {
                 $default = array_merge($default, $attributes);
             }
         }

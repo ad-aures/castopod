@@ -53,23 +53,23 @@
             'type' => 'separator',
         ],
     ];
-    if ($episode->published_at === null) {
-        $items[] = [
-            'type' => 'link',
-            'title' => lang('Episode.delete'),
-            'uri' => route_to('episode-delete', $episode->podcast->id, $episode->id),
-            'class' => 'font-semibold text-red-600',
-        ];
-    } else {
-        $label = lang('Episode.delete');
-        $icon = icon('forbid', 'mr-2');
-        $title = lang('Episode.messages.unpublishBeforeDeleteTip');
-        $items[] = [
-            'type' => 'html',
-            'content' => esc(<<<CODE_SAMPLE
+if ($episode->published_at === null) {
+    $items[] = [
+        'type' => 'link',
+        'title' => lang('Episode.delete'),
+        'uri' => route_to('episode-delete', $episode->podcast->id, $episode->id),
+        'class' => 'font-semibold text-red-600',
+    ];
+} else {
+    $label = lang('Episode.delete');
+    $icon = icon('forbid', 'mr-2');
+    $title = lang('Episode.messages.unpublishBeforeDeleteTip');
+    $items[] = [
+        'type' => 'html',
+        'content' => esc(<<<CODE_SAMPLE
                     <span class="inline-flex items-center px-4 py-1 font-semibold text-gray-400 cursor-not-allowed" data-tooltip="bottom" title="{$title}">{$icon}{$label}</span>
                 CODE_SAMPLE),
-        ];
-    } ?>
+    ];
+} ?>
     <DropdownMenu id="more-dropdown-<?= $episode->id ?>-menu" labelledby="more-dropdown-<?= $episode->id ?>" offsetY="-32" items="<?= esc(json_encode($items)) ?>" />
 </article>

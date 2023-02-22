@@ -239,7 +239,6 @@ if (! function_exists('generate_random_salt')) {
 
 
 if (! function_exists('file_upload_max_size')) {
-
     /**
      * Returns a file size limit in bytes based on the PHP upload_max_filesize and post_max_size Adapted from:
      * https://stackoverflow.com/a/25370978

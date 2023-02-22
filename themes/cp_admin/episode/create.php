@@ -32,7 +32,7 @@
     name="cover"
     label="<?= lang('Episode.form.cover') ?>"
     hint="<?= lang('Episode.form.cover_hint') ?>"
-    helper="<?= lang('Episode.form.cover_size_hint', ) ?>"
+    helper="<?= lang('Episode.form.cover_size_hint') ?>"
     type="file"
     accept=".jpg,.jpeg,.png" />
 

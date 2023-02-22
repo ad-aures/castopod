@@ -39,8 +39,8 @@
     <header class="py-8 text-white border-b bg-header border-subtle">
         <h1 class="container flex items-center justify-between px-2 py-4 mx-auto">
             <a href="<?= route_to(
-            'home',
-        ) ?>" class="inline-flex items-baseline text-3xl font-semibold font-display"><?= service('settings')
+                'home',
+            ) ?>" class="inline-flex items-baseline text-3xl font-semibold font-display"><?= service('settings')
         ->get('App.siteName') === 'Castopod' ? 'castopod' .
     svg('castopod-logo-base', 'h-6 ml-2') : esc(service('settings')
         ->get('App.siteName')) ?></a>
@@ -49,29 +49,29 @@
     <main class="container flex-1 px-4 py-10 mx-auto">
         <div class="flex flex-wrap items-center justify-between py-2 border-b border-subtle gap-x-4">
             <Heading tagName="h2" class="inline-block"><?= lang('Home.all_podcasts') ?> (<?= count(
-            $podcasts,
-        ) ?>)</Heading>
+                $podcasts,
+            ) ?>)</Heading>
             <button class="inline-flex items-center px-2 py-1 text-sm font-semibold focus:ring-accent" id="sortby-dropdown" data-dropdown="button" data-dropdown-target="sortby-dropdown-menu" aria-haspopup="true" aria-expanded="false"><?= icon('sort', 'mr-1 text-xl opacity-50') . lang('Home.sort_by') ?></button>
             <DropdownMenu id="sortby-dropdown-menu" labelledby="sortby-dropdown" items="<?= esc(json_encode([
-                [
-                    'type' => 'link',
-                    'title' => ($sortBy === 'activity' ? '✓ ' : '') . lang('Home.sort_options.activity'),
-                    'uri' => route_to('home') . '?sort=activity',
-                    'class' => $sortBy === 'activity' ? 'font-semibold' : '',
-                ],
-                [
-                    'type' => 'link',
-                    'title' => ($sortBy === 'created_desc' ? '✓ ' : '') . lang('Home.sort_options.created_desc'),
-                    'uri' => route_to('home') . '?sort=created_desc',
-                    'class' => $sortBy === 'created_desc' ? 'font-semibold' : '',
-                ],
-                [
-                    'type' => 'link',
-                    'title' => ($sortBy === 'created_asc' ? '✓ ' : '') . lang('Home.sort_options.created_asc'),
-                    'uri' => route_to('home') . '?sort=created_asc',
-                    'class' => $sortBy === 'created_asc' ? 'font-semibold' : '',
-                ],
-            ])) ?>" />
+                    [
+                        'type' => 'link',
+                        'title' => ($sortBy === 'activity' ? '✓ ' : '') . lang('Home.sort_options.activity'),
+                        'uri' => route_to('home') . '?sort=activity',
+                        'class' => $sortBy === 'activity' ? 'font-semibold' : '',
+                    ],
+                    [
+                        'type' => 'link',
+                        'title' => ($sortBy === 'created_desc' ? '✓ ' : '') . lang('Home.sort_options.created_desc'),
+                        'uri' => route_to('home') . '?sort=created_desc',
+                        'class' => $sortBy === 'created_desc' ? 'font-semibold' : '',
+                    ],
+                    [
+                        'type' => 'link',
+                        'title' => ($sortBy === 'created_asc' ? '✓ ' : '') . lang('Home.sort_options.created_asc'),
+                        'uri' => route_to('home') . '?sort=created_asc',
+                        'class' => $sortBy === 'created_asc' ? 'font-semibold' : '',
+                    ],
+                ])) ?>" />
         </div>
         <div class="grid gap-4 mt-4 grid-cols-cards">
             <?php if ($podcasts): ?>
@@ -105,8 +105,8 @@
     <footer class="container flex justify-between px-2 py-4 mx-auto text-sm text-right border-t border-subtle">
         <?= render_page_links() ?>
         <small><?= lang('Common.powered_by', [
-            'castopod' =>
-                '<a class="inline-flex font-semibold hover:underline focus:ring-accent" href="https://castopod.org/" target="_blank" rel="noreferrer noopener">Castopod' . icon('castopod', 'ml-1 text-lg', 'social') . '</a>',
-        ], null, false) ?></small>
+                'castopod' =>
+                    '<a class="inline-flex font-semibold hover:underline focus:ring-accent" href="https://castopod.org/" target="_blank" rel="noreferrer noopener">Castopod' . icon('castopod', 'ml-1 text-lg', 'social') . '</a>',
+            ], null, false) ?></small>
     </footer>
 </body>

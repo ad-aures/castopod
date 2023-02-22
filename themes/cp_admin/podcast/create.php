@@ -111,11 +111,11 @@
             <Forms.RadioButton
                 value="clean"
                 name="parental_advisory"
-                isChecked="false" ><?= lang('Podcast.form.parental_advisory.clean', ) ?></Forms.RadioButton>
+                isChecked="false" ><?= lang('Podcast.form.parental_advisory.clean') ?></Forms.RadioButton>
             <Forms.RadioButton
                 value="explicit"
                 name="parental_advisory"
-                isChecked="false" ><?= lang('Podcast.form.parental_advisory.explicit', ) ?></Forms.RadioButton>
+                isChecked="false" ><?= lang('Podcast.form.parental_advisory.explicit') ?></Forms.RadioButton>
         </div>
     </fieldset>
 </Forms.Section>

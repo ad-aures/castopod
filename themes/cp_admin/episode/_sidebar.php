@@ -34,12 +34,12 @@ $podcastNavigation = [
     <div class="flex flex-col items-start flex-1 w-48 px-2">
         <span class="w-full font-semibold truncate" title="<?= esc($episode->title) ?>"><?= esc($episode->title) ?></span>
         <a href="<?= route_to(
-    'episode',
-    esc($podcast->handle),
-    esc($episode->slug),
-) ?>" class="inline-flex items-center text-xs hover:underline focus:ring-accent"><?= lang(
-    'EpisodeNavigation.go_to_page',
-) ?>
+            'episode',
+            esc($podcast->handle),
+            esc($episode->slug),
+        ) ?>" class="inline-flex items-center text-xs hover:underline focus:ring-accent"><?= lang(
+            'EpisodeNavigation.go_to_page',
+        ) ?>
         <?= icon('external-link', 'ml-1 opacity-60') ?>
         </a>
     </div>
@@ -49,19 +49,19 @@ $podcastNavigation = [
     <div>
         <button class="inline-flex items-center w-full px-4 py-1 font-semibold focus:ring-accent" type="button">
             <?= icon($data['icon'], 'opacity-60 text-2xl mr-4') .
-                lang('EpisodeNavigation.' . $section) ?>
+                        lang('EpisodeNavigation.' . $section) ?>
         </button>
         <ul class="flex flex-col">
             <?php foreach ($data['items'] as $item): ?>
                 <?php $isActive = url_is(route_to($item, $podcast->id, $episode->id)); ?>
             <li class="inline-flex">
                 <a class="w-full py-1 pl-14 pr-2 text-sm hover:opacity-100 focus:ring-inset focus:ring-accent <?= $isActive
-                    ? 'font-semibold opacity-100 inline-flex items-center'
-                    : 'opacity-75' ?>" href="<?= route_to(
-                        $item,
-                        $podcast->id,
-                        $episode->id
-                    ) ?>"><?= ($isActive ? icon('chevron-right', 'mr-2') : '') . lang('EpisodeNavigation.' . $item) ?></a>
+                            ? 'font-semibold opacity-100 inline-flex items-center'
+                            : 'opacity-75' ?>" href="<?= route_to(
+                                $item,
+                                $podcast->id,
+                                $episode->id
+                            ) ?>"><?= ($isActive ? icon('chevron-right', 'mr-2') : '') . lang('EpisodeNavigation.' . $item) ?></a>
             </li>
             <?php endforeach; ?>
         </ul>
