@@ -7,5 +7,5 @@ INTERACTIVE="--no-interaction"
 
 vendor/bin/captainhook $INTERACTIVE --configuration=captainhook.json --bootstrap=vendor/autoload.php hook:pre-commit "$@" <&0
 
-npm run typecheck
-npx lint-staged
+pnpm run typecheck
+pnpm exec lint-staged

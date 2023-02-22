@@ -9,7 +9,7 @@ stages:
     - cd docs
     - chmod +x ./scripts/i18n-filter.sh
     - ./scripts/i18n-filter.sh src
-    - npm ci
+    - pnpm install
 
 cache:
   paths:
@@ -20,7 +20,7 @@ build:
   extends: .documentation-setup
   stage: build
   script:
-    - npm run build
+    - pnpm run build
   except:
     - main
     - beta
@@ -33,7 +33,7 @@ build-production:
     name: production
     url: https://docs.castopod.org/
   script:
-    - npm run build
+    - pnpm run build
   artifacts:
     paths:
       - docs/.vitepress/dist
@@ -56,10 +56,6 @@ deploy:
     SSH_PORT: 3242
     SOURCE_FOLDER: "docs/.vitepress/dist/"
   before_script:
-    # install rsync for file transfers
-    - apt-get update && apt-get install rsync -y
-    # ssh config
-    - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )"
     # Run ssh-agent (inside the build environment)
     - eval $(ssh-agent -s)
     # Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store

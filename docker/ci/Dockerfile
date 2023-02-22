@@ -19,6 +19,7 @@ RUN \
         wget \
         jq \
         zip \
+        openssh-client \
         rsync \
         icu-libs \
         mysql \
