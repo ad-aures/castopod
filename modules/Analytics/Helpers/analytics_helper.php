@@ -34,6 +34,20 @@ if (! function_exists('base64_url_decode')) {
     }
 }
 
+if (! function_exists('client_ip')) {
+    /**
+     * Get the client IP, depending on available headers
+     */
+    function client_ip(): string
+    {
+        if (! empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            return $_SERVER['HTTP_X_FORWARDED_FOR'];
+        }
+
+        return $_SERVER['REMOTE_ADDR'];
+    }
+}
+
 if (! function_exists('set_user_session_deny_list_ip')) {
     /**
      * Set user country in session variable, for analytic purposes
@@ -44,7 +58,7 @@ if (! function_exists('set_user_session_deny_list_ip')) {
         $session->start();
 
         if (! $session->has('denyListIp')) {
-            $session->set('denyListIp', IpDb::find($_SERVER['REMOTE_ADDR']) !== null);
+            $session->set('denyListIp', IpDb::find(client_ip()) !== null);
         }
     }
 }
@@ -69,7 +83,7 @@ if (! function_exists('set_user_session_location')) {
         if (! $session->has('location')) {
             try {
                 $cityReader = new Reader(WRITEPATH . 'uploads/GeoLite2-City/GeoLite2-City.mmdb');
-                $city = $cityReader->city($_SERVER['REMOTE_ADDR']);
+                $city = $cityReader->city(client_ip());
 
                 $location = [
                     'countryCode' => $city->country->isoCode === null
@@ -232,6 +246,8 @@ if (! function_exists('podcast_hit')) {
         $session = Services::session();
         $session->start();
 
+        $clientIp = client_ip();
+
         // We try to count (but if things went wrong the show should go on and the user should be able to download the file):
         try {
             // If the user IP is denied it's probably a bot:
@@ -252,7 +268,7 @@ if (! function_exists('podcast_hit')) {
                 sha1(
                     $salt . '_' . date(
                         'Y-m-d'
-                    ) . '_' . $_SERVER['REMOTE_ADDR'] . '_' . $_SERVER['HTTP_USER_AGENT'] . '_' . $episodeId
+                    ) . '_' . $clientIp . '_' . $_SERVER['HTTP_USER_AGENT'] . '_' . $episodeId
                 );
             // The cache expires at midnight:
             $secondsToMidnight = strtotime('tomorrow') - time();
@@ -299,7 +315,7 @@ if (! function_exists('podcast_hit')) {
                         sha1(
                             $salt . '_' . date(
                                 'Y-m-d'
-                            ) . '_' . $_SERVER['REMOTE_ADDR'] . '_' . $_SERVER['HTTP_USER_AGENT'] . '_' . $podcastId
+                            ) . '_' . $clientIp . '_' . $_SERVER['HTTP_USER_AGENT'] . '_' . $podcastId
                         );
                     $newListener = 1;
                     // Has this listener already downloaded an episode today:
