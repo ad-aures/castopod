@@ -22,6 +22,7 @@ class EpisodeController extends Controller
 
     public function list(): Response
     {
+
         $params = $this->request->getGet();
 
         $searchParam = $params['search'] ?? null;
@@ -43,8 +44,9 @@ class EpisodeController extends Controller
         }
 
         if($orderParams == "newest") {
-            $builder->orderBy('created_at', 'desc');
+            $builder->orderBy($builder->db->getPrefix().$builder->getTable().'.created_at', 'desc');
         }
+
 
         $data = $builder->findAll(
             (int) ($params['limit'] ?? config('RestApi')->limit),

@@ -33,6 +33,14 @@ class AddColumnsToEpisodesIndex extends Migration
         CODE_SAMPLE;
 
         $this->db->query($createQuery);
+
+
+        $createQuery = <<<CODE_SAMPLE
+            ALTER TABLE {$prefix}podcasts
+            ADD FULLTEXT title (title, description_markdown, handle);
+        CODE_SAMPLE;
+
+        $this->db->query($createQuery);
     }
 
 

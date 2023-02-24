@@ -441,9 +441,58 @@ class EpisodeModel extends Model
 
     public function fullTextSearch(string $value)
     {
+
+        $prefix = $this->db->getPrefix();
+        $episodeTable = $prefix.$this->builder()->getTable();
+
+        $podcastModel =  (new PodcastModel());
+
+        $podcastTable = $podcastModel->db->getPrefix().$podcastModel->builder()->getTable();
+
         $this->builder()
-            ->select('*, MATCH (title, description_markdown, slug, location_name) AGAINST("*'.$value.'*" IN BOOLEAN MODE) as search_score')
-            ->where('MATCH (title, description_markdown, slug, location_name) AGAINST("*'.$value.'*" IN BOOLEAN MODE) ');
+            ->select(''.$episodeTable.'.*')
+            ->select(
+             '
+              MATCH (
+                    '.$episodeTable.'.title,
+                    '.$episodeTable.'.description_markdown,
+                    '.$episodeTable.'.slug,
+                    '.$episodeTable.'.location_name
+              )
+              AGAINST("*'.$value.'*" IN BOOLEAN MODE) as score1,
+
+              MATCH (
+                    '.$podcastTable.'.title ,
+                    '.$podcastTable.'.description_markdown,
+                    '.$podcastTable.'.handle
+              )
+              AGAINST("*'.$value.'*" IN BOOLEAN MODE) as score2,
+
+
+             '
+            )
+            ->select("$podcastTable.created_at AS podcast_created_at")
+            ->select("$podcastTable.title, $podcastTable.handle, $podcastTable.description_markdown")
+            ->join($podcastTable, "$podcastTable on $podcastTable.id = $episodeTable.podcast_id")
+            ->where('
+                MATCH (
+                    '.$episodeTable.'.title,
+                    '.$episodeTable.'.description_markdown,
+                    '.$episodeTable.'.slug,
+                    '.$episodeTable.'.location_name
+                )
+                AGAINST("*'.$value.'*" IN BOOLEAN MODE)
+            ')
+            ->orWhere('
+                MATCH (
+                    '.$podcastTable.'.title ,
+                    '.$podcastTable.'.description_markdown,
+                    '.$podcastTable.'.handle
+                )
+                AGAINST("*'.$value.'*" IN BOOLEAN MODE)
+            ');
+
+
 
         return $this->builder;
     }
