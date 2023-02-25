@@ -1,0 +1,3 @@
+* * * * * /usr/local/bin/php /var/www/castopod/public/index.php scheduled-activities
+* * * * * /usr/local/bin/php /var/www/castopod/public/index.php scheduled-websub-publish
+* * * * * /usr/local/bin/php /var/www/castopod/public/index.php scheduled-video-clips

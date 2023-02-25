@@ -1,0 +1,43 @@
+{
+  "listeners": {
+    "*:8000": {
+      "pass": "routes"
+    }
+  },
+  "routes": [
+    {
+      "action": {
+        "share": "/var/www/castopod/public$uri",
+        "fallback": {
+          "pass": "applications/castopod"
+        }
+      }
+    }
+  ],
+  "applications": {
+    "castopod": {
+      "type": "php",
+      "root": "/var/www/castopod/public/",
+      "script": "index.php",
+      "options": {
+        "admin": {
+          "file_uploads": "On",
+          "memory_limit": "512M",
+          "upload_max_filesize": "500M",
+          "post_max_size": "512M",
+          "max_execution_time": "300",
+          "max_input_time": "300"
+        }
+      }
+    }
+  },
+  "access_log": {
+    "path": "/dev/stdout"
+  },
+  "settings": {
+    "http": {
+      "body_read_timeout": 300,
+      "max_body_size": 536870912
+    }
+  }
+}
