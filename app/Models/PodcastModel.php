@@ -495,4 +495,16 @@ class PodcastModel extends Model
 
         return $data;
     }
+
+    public function getFullTextMatchClauseForPodcasts(string $table, string  $value): string
+    {
+        return '
+                MATCH (
+                    '.$table.'.title ,
+                    '.$table.'.description_markdown,
+                    '.$table.'.handle
+                )
+                AGAINST("*'.$value.'*" IN BOOLEAN MODE)
+            ';
+    }
 }

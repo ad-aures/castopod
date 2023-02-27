@@ -449,51 +449,37 @@ class EpisodeModel extends Model
 
         $podcastTable = $podcastModel->db->getPrefix().$podcastModel->builder()->getTable();
 
+
+
         $this->builder()
             ->select(''.$episodeTable.'.*')
             ->select(
              '
-              MATCH (
-                    '.$episodeTable.'.title,
-                    '.$episodeTable.'.description_markdown,
-                    '.$episodeTable.'.slug,
-                    '.$episodeTable.'.location_name
-              )
-              AGAINST("*'.$value.'*" IN BOOLEAN MODE) as score1,
-
-              MATCH (
-                    '.$podcastTable.'.title ,
-                    '.$podcastTable.'.description_markdown,
-                    '.$podcastTable.'.handle
-              )
-              AGAINST("*'.$value.'*" IN BOOLEAN MODE) as score2,
-
-
+                ' . $this->getFullTextMatchClauseForEpisodes($episodeTable, $value) . ' as score1,
+                ' . $podcastModel->getFullTextMatchClauseForPodcasts($podcastTable, $value) . ' as score2,
              '
             )
             ->select("$podcastTable.created_at AS podcast_created_at")
             ->select("$podcastTable.title, $podcastTable.handle, $podcastTable.description_markdown")
             ->join($podcastTable, "$podcastTable on $podcastTable.id = $episodeTable.podcast_id")
             ->where('
-                MATCH (
-                    '.$episodeTable.'.title,
-                    '.$episodeTable.'.description_markdown,
-                    '.$episodeTable.'.slug,
-                    '.$episodeTable.'.location_name
-                )
-                AGAINST("*'.$value.'*" IN BOOLEAN MODE)
-            ')
-            ->orWhere('
-                MATCH (
-                    '.$podcastTable.'.title ,
-                    '.$podcastTable.'.description_markdown,
-                    '.$podcastTable.'.handle
-                )
-                AGAINST("*'.$value.'*" IN BOOLEAN MODE)
+                ('. $this->getFullTextMatchClauseForEpisodes($episodeTable, $value) . "OR".$podcastModel->getFullTextMatchClauseForPodcasts($podcastTable, $value).')
             ');
 
 
-
         return $this->builder;
+    }
+
+    public function getFullTextMatchClauseForEpisodes(string $table, string  $value): string
+    {
+        return '
+                MATCH (
+                    '.$table.'.title,
+                    '.$table.'.description_markdown,
+                    '.$table.'.slug,
+                    '.$table.'.location_name
+                )
+                AGAINST("*'.$value.'*" IN BOOLEAN MODE)
+            ';
     }
 }

@@ -14,7 +14,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class AddColumnsToEpisodesIndex extends Migration
+class AddFullTextSearchIndexes extends Migration
 {
     public function up(): void
     {
@@ -22,22 +22,14 @@ class AddColumnsToEpisodesIndex extends Migration
 
         $createQuery = <<<CODE_SAMPLE
             ALTER TABLE {$prefix}episodes
-            DROP INDEX IF EXISTS title;
+            ADD FULLTEXT episodes_search (title, description_markdown, slug, location_name);
         CODE_SAMPLE;
 
         $this->db->query($createQuery);
-
-        $createQuery = <<<CODE_SAMPLE
-            ALTER TABLE {$prefix}episodes
-            ADD FULLTEXT title (title, description_markdown, slug, location_name);
-        CODE_SAMPLE;
-
-        $this->db->query($createQuery);
-
 
         $createQuery = <<<CODE_SAMPLE
             ALTER TABLE {$prefix}podcasts
-            ADD FULLTEXT title (title, description_markdown, handle);
+            ADD FULLTEXT podcasts_search (title, description_markdown, handle);
         CODE_SAMPLE;
 
         $this->db->query($createQuery);
@@ -50,16 +42,18 @@ class AddColumnsToEpisodesIndex extends Migration
 
         $createQuery = <<<CODE_SAMPLE
             ALTER TABLE {$prefix}episodes
-            DROP INDEX IF EXISTS  title;
+            DROP INDEX IF EXISTS  episodes_search;
         CODE_SAMPLE;
 
         $this->db->query($createQuery);
 
         $createQuery = <<<CODE_SAMPLE
-            ALTER TABLE {$prefix}episodes
-            ADD FULLTEXT(title, description_markdown);
+            ALTER TABLE {$prefix}podcasts
+            DROP INDEX IF EXISTS  podcasts_searcg;
         CODE_SAMPLE;
 
         $this->db->query($createQuery);
+
+
     }
 }
