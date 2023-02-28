@@ -39,7 +39,7 @@ class EpisodeController extends Controller
            $builder->fullTextSearch($searchParam);
 
            if($orderParams == "search") {
-                $builder->orderBy('search_score', 'desc');
+                $builder->orderBy('(episodes_score + podcasts_score)', 'desc');
            }
         }
 

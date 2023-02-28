@@ -453,12 +453,10 @@ class EpisodeModel extends Model
 
         $this->builder()
             ->select(''.$episodeTable.'.*')
-            ->select(
-             '
-                ' . $this->getFullTextMatchClauseForEpisodes($episodeTable, $value) . ' as score1,
-                ' . $podcastModel->getFullTextMatchClauseForPodcasts($podcastTable, $value) . ' as score2,
-             '
-            )
+            ->select('
+                ' . $this->getFullTextMatchClauseForEpisodes($episodeTable, $value) . ' as episodes_score,
+                ' . $podcastModel->getFullTextMatchClauseForPodcasts($podcastTable, $value) . ' as podcasts_score,
+             ')
             ->select("$podcastTable.created_at AS podcast_created_at")
             ->select("$podcastTable.title, $podcastTable.handle, $podcastTable.description_markdown")
             ->join($podcastTable, "$podcastTable on $podcastTable.id = $episodeTable.podcast_id")
