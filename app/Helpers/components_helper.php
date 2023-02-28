@@ -447,3 +447,36 @@ if (! function_exists('category_label')) {
 }
 
 // ------------------------------------------------------------------------
+
+if (! function_exists('downloads_abbr')) {
+    function downloads_abbr(int $downloads): string
+    {
+        if ($downloads < 1000) {
+            return (string) $downloads;
+        }
+
+        $option = match (true) {
+            $downloads < 1_000_000 => [
+                'divider' => 1_000,
+                'suffix' => 'K',
+            ],
+            $downloads < 1_000_000_000 => [
+                'divider' => 1_000_000,
+                'suffix' => 'M',
+            ],
+            default => [
+                'divider' => 1_000_000_000,
+                'suffix' => 'B',
+            ],
+        };
+        $formatter = new NumberFormatter(service('request')->getLocale(), NumberFormatter::DECIMAL);
+
+        $formatter->setPattern('#,##0.##');
+
+        $abbr = $formatter->format($downloads / $option['divider']) . $option['suffix'];
+
+        return <<<HTML
+            <abbr title="{$downloads}">{$abbr}</abbr>
+        HTML;
+    }
+}

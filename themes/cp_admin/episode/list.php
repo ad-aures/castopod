@@ -82,7 +82,14 @@ data_table(
                 return publication_pill(
                     $episode->published_at,
                     $episode->publication_status,
+                    'text-sm'
                 );
+            },
+        ],
+        [
+            'header' => lang('Episode.list.downloads'),
+            'cell' => function ($episode): string {
+                return downloads_abbr($episode->downloads);
             },
         ],
         [

@@ -72,6 +72,7 @@ use RuntimeException;
  * @property bool $is_published_on_hubs
  * @property int $posts_count
  * @property int $comments_count
+ * @property int $downloads
  * @property EpisodeComment[]|null $comments
  * @property bool $is_premium
  * @property int $created_by
@@ -108,6 +109,8 @@ class Episode extends Entity
     protected ?Transcript $transcript = null;
 
     protected ?Chapters $chapters = null;
+
+    protected int $downloads = 0;
 
     /**
      * @var Person[]|null

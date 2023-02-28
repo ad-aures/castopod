@@ -71,19 +71,28 @@ class EpisodeController extends BaseController
             // Use LIKE operator as a fallback.
             if (strlen($query) < 4) {
                 $episodes = (new EpisodeModel())
-                    ->where('podcast_id', $this->podcast->id)
+                    ->select('episodes.*, IFNULL(SUM(ape.hits),0) as downloads')
+                    ->join('analytics_podcasts_by_episode ape', 'episodes.id=ape.episode_id', 'left')
+                    ->where('episodes.podcast_id', $this->podcast->id)
                     ->like('title', $query)
                     ->orLike('description_markdown', $query)
+                    ->groupBy('episodes.id')
                     ->orderBy('-`published_at`', '', false)
                     ->orderBy('created_at', 'desc');
             } else {
                 $episodes = (new EpisodeModel())
-                    ->where('podcast_id', $this->podcast->id)
-                    ->where("MATCH (title, description_markdown) AGAINST ('{$query}')");
+                    ->select('episodes.*, IFNULL(SUM(ape.hits),0) as downloads')
+                    ->join('analytics_podcasts_by_episode ape', 'episodes.id=ape.episode_id', 'left')
+                    ->where('episodes.podcast_id', $this->podcast->id)
+                    ->where("MATCH (title, description_markdown) AGAINST ('{$query}')")
+                    ->groupBy('episodes.id');
             }
         } else {
             $episodes = (new EpisodeModel())
-                ->where('podcast_id', $this->podcast->id)
+                ->select('episodes.*, IFNULL(SUM(ape.hits),0) as downloads')
+                ->join('analytics_podcasts_by_episode ape', 'episodes.id=ape.episode_id', 'left')
+                ->where('episodes.podcast_id', $this->podcast->id)
+                ->groupBy('episodes.id')
                 ->orderBy('-`published_at`', '', false)
                 ->orderBy('created_at', 'desc');
         }
