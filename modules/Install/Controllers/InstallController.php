@@ -115,8 +115,10 @@ class InstallController extends Controller
         }
 
         try {
+            $db = db_connect();
+
             // Check if instance owner has been created, meaning install was completed
-            if ((new UserModel())->where('is_owner', true)
+            if ($db->tableExists('users') && (new UserModel())->where('is_owner', true)
                 ->first() !== null
             ) {
                 // if so, show a 404 page

@@ -11,6 +11,7 @@ use Rector\CodingStyle\Rector\String_\SymplifyQuoteEscapeRector;
 use Rector\Config\RectorConfig;
 use Rector\Core\ValueObject\PhpVersion;
 use Rector\DeadCode\Rector\If_\UnwrapFutureCompatibleIfPhpVersionRector;
+use Rector\EarlyReturn\Rector\If_\ChangeAndIfToEarlyReturnRector;
 use Rector\EarlyReturn\Rector\If_\ChangeOrIfContinueToMultiContinueRector;
 use Rector\EarlyReturn\Rector\If_\ChangeOrIfReturnToEarlyReturnRector;
 use Rector\Php55\Rector\String_\StringClassNameToClassConstantRector;
@@ -64,6 +65,8 @@ return static function (RectorConfig $rectorConfig): void {
         SymplifyQuoteEscapeRector::class => [__DIR__ . '/app/Language/*', __DIR__ . '/modules/*/Language/*'],
 
         NewlineAfterStatementRector::class => [__DIR__ . '/app/Views'],
+
+        ChangeAndIfToEarlyReturnRector::class => [__DIR__ . '/modules/Install/Controllers/InstallController.php'],
     ]);
 
     // Path to phpstan with extensions, that PHPStan in Rector uses to determine types
