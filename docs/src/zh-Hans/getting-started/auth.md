@@ -17,7 +17,7 @@ Castopod 使用 `codeigniter/shield` 处理身份验证和授权 与自定义规
 
 <!-- AUTH-INSTANCE-ROLES-LIST:START - Do not remove or modify this section -->
 
-| 角色       | 描述                         | 权限                                                                                       |
+| role       | description                  | permissions                                                                                |
 | ---------- | ---------------------------- | ------------------------------------------------------------------------------------------ |
 | 超级管理员 | 拥有对 Castopod 的完全控制。 | admin.\*, podcasts.\*, users.manage, persons.manage, pages.manage, fediverse.manage-blocks |
 | 管理       | 管理 Castopod 的内容。       | podcasts.create, podcasts.import, persons.manage, pages.manage                             |
@@ -29,7 +29,7 @@ Castopod 使用 `codeigniter/shield` 处理身份验证和授权 与自定义规
 
 <!-- AUTH-INSTANCE-PERMISSIONS-LIST:START - Do not remove or modify this section -->
 
-| 权限                    | 描述                                        |
+| permission              | description                                 |
 | ----------------------- | ------------------------------------------- |
 | admin.access            | 可以访问 Castopod 管理区域。                |
 | admin.settings          | 可以访问 Castopod 设置。                    |
@@ -49,12 +49,12 @@ Castopod 使用 `codeigniter/shield` 处理身份验证和授权 与自定义规
 
 <!-- AUTH-PODCAST-ROLES-LIST:START - Do not remove or modify this section -->
 
-| 角色   | 描述                                | 权限                                                                                                                                                                                                                                                                                                 |
-| ------ | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 管理员 | 完全控制播客 #{id}。                | \*                                                                                                                                                                                                                                                                                                   |
-| 编辑   | 管理播客 #{id} 的内容和出版物。     | view, edit, manage-import, manage-persons, manage-platforms, manage-publications, interact-as, episodes.view, episodes.create, episodes.edit, episodes.delete, episodes.manage-persons, episodes.manage-clips, episodes.manage-publications, episodes.manage-comments, episodes.manage-notifications |
-| 作者   | 管理播客 #{id} 的内容，但不能发布。 | view, manage-persons, episodes.view, episodes.create, episodes.edit, episodes.manage-persons, episodes.manage-clips                                                                                                                                                                                  |
-| 访客   | 播客 #{id} 的普通贡献者。           | view, episodes.view                                                                                                                                                                                                                                                                                  |
+| role   | description                         | permissions                                                                                                                                                                                                                                                                                 |
+| ------ | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 管理员 | 完全控制播客 #{id}。                | \*                                                                                                                                                                                                                                                                                          |
+| 编辑   | 管理播客 #{id} 的内容和出版物。     | view, edit, manage-import, manage-persons, manage-platforms, manage-publications, manage-notifications, interact-as, episodes.view, episodes.create, episodes.edit, episodes.delete, episodes.manage-persons, episodes.manage-clips, episodes.manage-publications, episodes.manage-comments |
+| 作者   | 管理播客 #{id} 的内容，但不能发布。 | view, manage-persons, episodes.view, episodes.create, episodes.edit, episodes.manage-persons, episodes.manage-clips                                                                                                                                                                         |
+| 访客   | 播客 #{id} 的普通贡献者。           | view, episodes.view                                                                                                                                                                                                                                                                         |
 
 <!-- AUTH-PODCAST-ROLES-LIST:END -->
 
@@ -62,11 +62,11 @@ Castopod 使用 `codeigniter/shield` 处理身份验证和授权 与自定义规
 
 <!-- AUTH-PODCAST-PERMISSIONS-LIST:START - Do not remove or modify this section -->
 
-| 权限                         | 描述                                                |
+| permission                   | description                                         |
 | ---------------------------- | --------------------------------------------------- |
 | view                         | 可以查看播客 #{id} 的仪表板和分析。                 |
 | edit                         | 可以编辑播客 #{id}。                                |
-| 删除                         | 可以删除播客 #{id}。                                |
+| delete                       | 可以删除播客 #{id}。                                |
 | manage-import                | 可以同步导入的播客 #{id}。                          |
 | manage-persons               | 可以管理播客 #{id} 的订阅。                         |
 | manage-subscriptions         | 可以管理播客 #{id} 的订阅。                         |

@@ -174,6 +174,7 @@ class AuthGroups extends ShieldAuthGroups
             'manage-persons',
             'manage-platforms',
             'manage-publications',
+            'manage-notifications',
             'interact-as',
             'episodes.view',
             'episodes.create',
@@ -183,7 +184,6 @@ class AuthGroups extends ShieldAuthGroups
             'episodes.manage-clips',
             'episodes.manage-publications',
             'episodes.manage-comments',
-            'episodes.manage-notifications',
         ],
         'author' => [
             'view',

@@ -18,7 +18,7 @@ sidebarDepth: 3
 
 <!-- AUTH-INSTANCE-ROLES-LIST:START - Do not remove or modify this section -->
 
-| ρόλος            | περιγραφή                             | δικαιώματα                                                                                 |
+| role             | description                           | permissions                                                                                |
 | ---------------- | ------------------------------------- | ------------------------------------------------------------------------------------------ |
 | Υπερδιαχειριστής | Έχει πλήρη έλεγχο του Castopod.       | admin.\*, podcasts.\*, users.manage, persons.manage, pages.manage, fediverse.manage-blocks |
 | Διαχειριστής     | Διαχείριση περιεχομένου του Castopod. | podcasts.create, podcasts.import, persons.manage, pages.manage                             |
@@ -30,17 +30,17 @@ sidebarDepth: 3
 
 <!-- AUTH-INSTANCE-PERMISSIONS-LIST:START - Do not remove or modify this section -->
 
-| permission              | description                                                        |
-| ----------------------- | ------------------------------------------------------------------ |
-| admin.access            | Can access the Castopod admin area.                                |
-| admin.settings          | Can access the Castopod settings.                                  |
-| users.manage            | Can manage Castopod users.                                         |
-| persons.manage          | Can manage persons.                                                |
-| pages.manage            | Can manage pages.                                                  |
-| podcasts.view           | Can view all podcasts.                                             |
-| podcasts.create         | Can create new podcasts.                                           |
-| podcasts.import         | Can import podcasts.                                               |
-| fediverse.manage-blocks | Can block fediverse actors/domains from interacting with Castopod. |
+| permission              | description                                                                            |
+| ----------------------- | -------------------------------------------------------------------------------------- |
+| admin.access            | Μπορεί να έχει πρόσβαση στην περιοχή διαχείρισης Castopod.                             |
+| admin.settings          | Μπορεί να έχει πρόσβαση στις ρυθμίσεις Castopod.                                       |
+| users.manage            | Μπορεί να διαχειριστεί τους χρήστες Castopod.                                          |
+| persons.manage          | Μπορεί να διαχειριστεί τα άτομα.                                                       |
+| pages.manage            | Μπορεί να διαχειριστεί τις σελίδες.                                                    |
+| podcasts.view           | Μπορεί να δει όλα τα podcasts.                                                         |
+| podcasts.create         | Μπορεί να δημιουργήσει νέα podcasts.                                                   |
+| podcasts.import         | Μπορεί να εισάγει podcasts.                                                            |
+| fediverse.manage-blocks | Μπορεί να εμποδίσει τους ψευτογενείς ηθοποιούς/τομείς να αλληλεπιδρούν με το Castopod. |
 
 <!-- AUTH-INSTANCE-PERMISSIONS-LIST:END -->
 
@@ -50,12 +50,12 @@ sidebarDepth: 3
 
 <!-- AUTH-PODCAST-ROLES-LIST:START - Do not remove or modify this section -->
 
-| role   | description                                               | permissions                                                                                                                                                                                                                                                                                          |
-| ------ | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Admin  | Has complete control of podcast #{id}.                    | \*                                                                                                                                                                                                                                                                                                   |
-| Editor | Manages content and publications of podcast #{id}.        | view, edit, manage-import, manage-persons, manage-platforms, manage-publications, interact-as, episodes.view, episodes.create, episodes.edit, episodes.delete, episodes.manage-persons, episodes.manage-clips, episodes.manage-publications, episodes.manage-comments, episodes.manage-notifications |
-| Author | Manages content of podcast #{id} but cannot publish them. | view, manage-persons, episodes.view, episodes.create, episodes.edit, episodes.manage-persons, episodes.manage-clips                                                                                                                                                                                  |
-| Guest  | General contributor of the podcast #{id}.                 | view, episodes.view                                                                                                                                                                                                                                                                                  |
+| role         | description                                                   | permissions                                                                                                                                                                                                                                                                                 |
+| ------------ | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Διαχειριστής | Έχει πλήρη έλεγχο του podcast #{id}.                          | \*                                                                                                                                                                                                                                                                                          |
+| Εκδότης      | Διαχειρίζεται περιεχόμενο και δημοσιεύσεις του podcast #{id}. | view, edit, manage-import, manage-persons, manage-platforms, manage-publications, manage-notifications, interact-as, episodes.view, episodes.create, episodes.edit, episodes.delete, episodes.manage-persons, episodes.manage-clips, episodes.manage-publications, episodes.manage-comments |
+| Συντάκτης    | Manages content of podcast #{id} but cannot publish them.     | view, manage-persons, episodes.view, episodes.create, episodes.edit, episodes.manage-persons, episodes.manage-clips                                                                                                                                                                         |
+| Επισκέπτης   | Γενικός συντελεστής του podcast #{id}.                        | view, episodes.view                                                                                                                                                                                                                                                                         |
 
 <!-- AUTH-PODCAST-ROLES-LIST:END -->
 
