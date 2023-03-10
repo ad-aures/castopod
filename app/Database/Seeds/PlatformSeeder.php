@@ -31,7 +31,7 @@ class PlatformSeeder extends Seeder
                 'type' => 'podcasting',
                 'label' => 'AntennaPod',
                 'home_url' => 'https://antennapod.org/',
-                'submit_url' => 'https://podcastindex.org/add',
+                'submit_url' => 'https://antennapod.org/documentation/podcasters-hosters/add-on-antennapod',
             ],
             [
                 'slug' => 'apple',
