@@ -14,13 +14,6 @@ sidebarDepth: 2
 [CodeIgniter4](https://codeigniter.com/), ένα ισχυρό PHP framework με ένα πολύ
 μικρό αποτύπωμα.
 
-::: πληροφορίες κατάστασης
-
-Το Castopod είναι επί του παρόντος σε **beta** αλλά ήδη αρκετά σταθερό και
-χρησιμοποιείται από podcasters γύρω από&nbsp;τον&nbsp;κόσμο!
-
-:::
-
 <div class="flex items-center">
   <a href="/getting-started/install" class="inline-flex items-center px-4 py-2 mx-auto font-semibold text-center text-white rounded-full shadow gap-x-1 bg-pine-500 hover:no-underline hover:bg-pine-600">Εγκατάσταση<svg viewBox="0 0 24 24" width="1em" height="1em" class="text-xl text-pine-200"><path fill="currentColor" d="m16.172 11-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg></a>
 </div>

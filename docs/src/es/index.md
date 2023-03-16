@@ -12,13 +12,6 @@ hecha para podcasters que quieren involucrar e interactuar más con su audiencia
 Castopod es fácil de instalar y se ha desarrollado sobre
 [CodeIgniter4](https://codeigniter.com/), un potente y muy ligero framework PHP.
 
-::: info Estado del desarrollo
-
-Castopod actualmente está en **beta** pero ya es bastante estable y está sinedo
-utilizado por podcasters alrededor del mundo.
-
-:::
-
 <div class="flex items-center">
   <a href="/getting-started/install" class="inline-flex items-center px-4 py-2 mx-auto font-semibold text-center text-white rounded-full shadow gap-x-1 bg-pine-500 hover:no-underline hover:bg-pine-600">Instalación<svg viewBox="0 0 24 24" width="1em" height="1em" class="text-xl text-pine-200"><path fill="currentColor" d="m16.172 11-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg></a>
 </div>

@@ -12,12 +12,6 @@ Castopod 是一个免费的开源播客托管平台，为那些想要和听众�
 Castopod 易于安装，并使用 [CodeIgniter4](https://codeigniter.com/) 构建， 这是一
 个强大的 PHP 框架，并且占用极小。
 
-::: 状态
-
-Castopod 虽然目前处于 **测试阶段** ，但相当稳定，已经被世界各地的播客使用！
-
-:::
-
 <div class="flex items-center">
   <a href="/getting-started/install" class="inline-flex items-center px-4 py-2 mx-auto font-semibold text-center text-white rounded-full shadow gap-x-1 bg-pine-500 hover:no-underline hover:bg-pine-600">安装<svg viewBox="0 0 24 24" width="1em" height="1em" class="text-xl text-pine-200"><path fill="currentColor" d="m16.172 11-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg></a>
 </div>
