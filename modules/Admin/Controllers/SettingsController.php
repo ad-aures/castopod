@@ -10,15 +10,18 @@ declare(strict_types=1);
 
 namespace Modules\Admin\Controllers;
 
+use App\Entities\Podcast;
 use App\Models\ActorModel;
 use App\Models\EpisodeCommentModel;
 use App\Models\EpisodeModel;
-use App\Models\MediaModel;
 use App\Models\PersonModel;
 use App\Models\PodcastModel;
 use App\Models\PostModel;
-use CodeIgniter\Files\File;
 use CodeIgniter\HTTP\RedirectResponse;
+use Modules\Media\Entities\Audio;
+use Modules\Media\FileManagers\FileManagerInterface;
+use Modules\Media\FileManagers\FS;
+use Modules\Media\Models\MediaModel;
 use PHP_ICO;
 
 class SettingsController extends BaseController
@@ -61,7 +64,10 @@ class SettingsController extends BaseController
             delete_files(media_path('/site'));
 
             // save original in disk
-            $originalFilename = save_media($siteIconFile, 'site', 'icon');
+            $originalFilename = (new FS(config('Media')))->save(
+                $siteIconFile,
+                'site/icon.' . $siteIconFile->getExtension()
+            );
 
             // convert jpeg image to png if not
             if ($siteIconFile->getClientMimeType() !== 'image/png') {
@@ -113,23 +119,14 @@ class SettingsController extends BaseController
 
     public function regenerateImages(): RedirectResponse
     {
-        helper('media');
-
+        /** @var Podcast[] $allPodcasts */
         $allPodcasts = (new PodcastModel())->findAll();
-        $imageExt = ['jpg', 'png', 'webp'];
+
+        /** @var FileManagerInterface $fileManager */
+        $fileManager = service('file_manager');
 
         foreach ($allPodcasts as $podcast) {
-            foreach ($imageExt as $ext) {
-                $podcastImages = glob(media_path("/podcasts/{$podcast->handle}/*_*{$ext}"));
-
-                if ($podcastImages) {
-                    foreach ($podcastImages as $podcastImage) {
-                        if (is_file($podcastImage)) {
-                            unlink($podcastImage);
-                        }
-                    }
-                }
-            }
+            $fileManager->deletePodcastImageSizes($podcast->handle);
 
             $podcast->cover->saveSizes();
             if ($podcast->banner_id !== null) {
@@ -143,16 +140,7 @@ class SettingsController extends BaseController
             }
         }
 
-        foreach ($imageExt as $ext) {
-            $personsImages = glob(media_path("/persons/*_*{$ext}"));
-            if ($personsImages) {
-                foreach ($personsImages as $personsImage) {
-                    if (is_file($personsImage)) {
-                        unlink($personsImage);
-                    }
-                }
-            }
-        }
+        $fileManager->deletePersonImagesSizes();
 
         $persons = (new PersonModel())->findAll();
         foreach ($persons as $person) {
@@ -180,115 +168,12 @@ class SettingsController extends BaseController
             (new EpisodeCommentModel())->resetRepliesCount();
         }
 
-        helper('media');
-
-        if ($this->request->getPost('rewrite_media') === 'yes') {
-            $imageExt = ['jpg', 'png', 'webp'];
-            // Delete all podcast image sizes to recreate them
-            $allPodcasts = (new PodcastModel())->findAll();
-            foreach ($allPodcasts as $podcast) {
-                foreach ($imageExt as $ext) {
-                    $podcastImages = glob(media_path("/podcasts/{$podcast->handle}/*_*{$ext}"));
-
-                    if ($podcastImages) {
-                        foreach ($podcastImages as $podcastImage) {
-                            if (is_file($podcastImage)) {
-                                unlink($podcastImage);
-                            }
-                        }
-                    }
-                }
-            }
-
-            // Delete all person image sizes to recreate them
-            foreach ($imageExt as $ext) {
-                $personsImages = glob(media_path("/persons/*_*{$ext}"));
-                if ($personsImages) {
-                    foreach ($personsImages as $personsImage) {
-                        if (is_file($personsImage)) {
-                            unlink($personsImage);
-                        }
-                    }
-                }
-            }
-
-            $allImages = (new MediaModel('image'))->getAllOfType();
-            foreach ($allImages as $image) {
-                if (str_starts_with((string) $image->file_path, 'podcasts')) {
-                    if (str_ends_with((string) $image->file_path, 'banner.jpg') || str_ends_with(
-                        (string) $image->file_path,
-                        'banner.png'
-                    ) || str_ends_with((string) $image->file_path, 'banner.jpeg')) {
-                        $image->sizes = config('Images')
-                            ->podcastBannerSizes;
-                    } else {
-                        $image->sizes = config('Images')
-                            ->podcastCoverSizes;
-                    }
-                } elseif (str_starts_with((string) $image->file_path, 'persons')) {
-                    $image->sizes = config('Images')
-                        ->personAvatarSizes;
-                } else {
-                    $image->sizes = [];
-                }
-
-                $image->setFile(new File(media_path($image->file_path)));
-
-                (new MediaModel('image'))->updateMedia($image);
-            }
-
-            $allAudio = (new MediaModel('audio'))->getAllOfType();
-            foreach ($allAudio as $audio) {
-                $audio->setFile(new File(media_path($audio->file_path)));
-
-                (new MediaModel('audio'))->updateMedia($audio);
-            }
-
-            $allTranscripts = (new MediaModel('transcript'))->getAllOfType();
-            foreach ($allTranscripts as $transcript) {
-                $transcript->setFile(new File(media_path($transcript->file_path)));
-
-                (new MediaModel('transcript'))->updateMedia($transcript);
-            }
-
-            $allChapters = (new MediaModel('chapters'))->getAllOfType();
-            foreach ($allChapters as $chapters) {
-                $chapters->setFile(new File(media_path($chapters->file_path)));
-
-                (new MediaModel('chapters'))->updateMedia($chapters);
-            }
-
-            $allVideos = (new MediaModel('video'))->getAllOfType();
-            foreach ($allVideos as $video) {
-                $video->setFile(new File(media_path($video->file_path)));
-
-                (new MediaModel('video'))->updateMedia($video);
-            }
-
-            // reset avatar and banner image urls for each podcast actor
-            foreach ($allPodcasts as $podcast) {
-                $actorModel = new ActorModel();
-                $actor = $actorModel->getActorById($podcast->actor_id);
-
-                if ($actor !== null) {
-                    // update values
-                    $actor->avatar_image_url = $podcast->cover->federation_url;
-                    $actor->avatar_image_mimetype = $podcast->cover->file_mimetype;
-                    $actor->cover_image_url = $podcast->banner->federation_url;
-                    $actor->cover_image_mimetype = $podcast->banner->file_mimetype;
-
-                    if ($actor->hasChanged()) {
-                        $actorModel->update($actor->id, $actor);
-                    }
-                }
-            }
-        }
-
         if ($this->request->getPost('clear_cache') === 'yes') {
             cache()->clean();
         }
 
         if ($this->request->getPost('rename_episodes_files') === 'yes') {
+            /** @var Audio[] $allAudio */
             $allAudio = (new MediaModel('audio'))->getAllOfType();
 
             foreach ($allAudio as $audio) {

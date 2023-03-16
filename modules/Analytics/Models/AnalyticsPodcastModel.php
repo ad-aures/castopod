@@ -13,9 +13,9 @@ declare(strict_types=1);
 namespace Modules\Analytics\Models;
 
 use App\Entities\Media\BaseMedia;
-use App\Models\MediaModel;
 use CodeIgniter\Model;
 use Modules\Analytics\Entities\AnalyticsPodcasts;
+use Modules\Media\Models\MediaModel;
 
 class AnalyticsPodcastModel extends Model
 {

@@ -11,17 +11,17 @@ declare(strict_types=1);
 namespace App\Entities\Clip;
 
 use App\Entities\Episode;
-use App\Entities\Media\Audio;
-use App\Entities\Media\Video;
 use App\Entities\Podcast;
 use App\Models\EpisodeModel;
-use App\Models\MediaModel;
 use App\Models\PodcastModel;
 use CodeIgniter\Entity\Entity;
 use CodeIgniter\Files\File;
 use CodeIgniter\I18n\Time;
 use CodeIgniter\Shield\Entities\User;
 use Modules\Auth\Models\UserModel;
+use Modules\Media\Entities\Audio;
+use Modules\Media\Entities\Video;
+use Modules\Media\Models\MediaModel;
 
 /**
  * @property int $id
@@ -122,14 +122,8 @@ class BaseClip extends Entity
         return (new UserModel())->find($this->created_by);
     }
 
-    public function setMedia(string $filePath = null): static
+    public function setMedia(File $file, string $fileKey): static
     {
-        if ($filePath === null) {
-            return $this;
-        }
-
-        $file = new File($filePath);
-
         if ($this->media_id !== null) {
             $this->getMedia()
                 ->setFile($file);
@@ -138,9 +132,9 @@ class BaseClip extends Entity
             (new MediaModel('audio'))->updateMedia($this->getMedia());
         } else {
             $media = new Audio([
-                'file_path' => $filePath,
+                'file_key' => $fileKey,
                 'language_code' => $this->getPodcast()
-                    ->language_code,
+->language_code,
                 'uploaded_by' => $this->attributes['created_by'],
                 'updated_by' => $this->attributes['created_by'],
             ]);

@@ -10,12 +10,12 @@ declare(strict_types=1);
 
 namespace App\Entities;
 
-use App\Entities\Media\Image;
-use App\Models\MediaModel;
 use App\Models\PersonModel;
 use CodeIgniter\Entity\Entity;
 use CodeIgniter\Files\File;
 use CodeIgniter\HTTP\Files\UploadedFile;
+use Modules\Media\Entities\Image;
+use Modules\Media\Models\MediaModel;
 use RuntimeException;
 
 /**
@@ -70,10 +70,9 @@ class Person extends Entity
             (new MediaModel('image'))->updateMedia($this->getAvatar());
         } else {
             $avatar = new Image([
-                'file_name' => $this->attributes['unique_name'],
-                'file_directory' => 'persons',
+                'file_key' => 'persons/' . $this->attributes['unique_name'] . '.' . $file->getExtension(),
                 'sizes' => config('Images')
-                    ->personAvatarSizes,
+->personAvatarSizes,
                 'uploaded_by' => user_id(),
                 'updated_by' => user_id(),
             ]);
@@ -90,7 +89,7 @@ class Person extends Entity
         if ($this->attributes['avatar_id'] === null) {
             helper('media');
             return new Image([
-                'file_path' => config('Images')
+                'file_key' => config('Images')
                     ->avatarDefaultPath,
                 'file_mimetype' => config('Images')
                     ->avatarDefaultMimeType,
@@ -99,7 +98,7 @@ class Person extends Entity
                     'sizes' => config('Images')
                         ->personAvatarSizes,
                 ],
-            ]);
+            ], 'fs');
         }
 
         if ($this->avatar === null) {

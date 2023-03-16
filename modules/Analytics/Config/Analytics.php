@@ -59,9 +59,7 @@ class Analytics extends BaseConfig
      */
     public function getAudioUrl(Episode $episode, array $params): string
     {
-        helper(['media', 'setting']);
-
-        $audioFileURI = new URI(media_base_url($episode->audio->file_path));
+        $audioFileURI = new URI(service('file_manager')->getUrl($episode->audio->file_key));
         $audioFileURI->setQueryArray($params);
 
         // Wrap episode url with OP3 if episode is public and OP3 is enabled on this podcast

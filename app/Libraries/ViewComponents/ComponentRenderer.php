@@ -134,17 +134,17 @@ class ComponentRenderer
 
         foreach ($pathsToDiscover as $basePath) {
             // Look for a class component first
-            $filePath = $basePath . $this->config->componentsDirectory . '/' . $namePath . '.php';
+            $fileKey = $basePath . $this->config->componentsDirectory . '/' . $namePath . '.php';
 
-            if (is_file($filePath)) {
-                return $filePath;
+            if (is_file($fileKey)) {
+                return $fileKey;
             }
 
             $snakeCaseName = strtolower(preg_replace('~(?<!^)(?<!\/)[A-Z]~', '_$0', $namePath) ?? '');
-            $filePath = $basePath . $this->config->componentsDirectory . '/' . $snakeCaseName . '.php';
+            $fileKey = $basePath . $this->config->componentsDirectory . '/' . $snakeCaseName . '.php';
 
-            if (is_file($filePath)) {
-                return $filePath;
+            if (is_file($fileKey)) {
+                return $fileKey;
             }
         }
 
@@ -204,18 +204,18 @@ class ComponentRenderer
     {
         // Locate the class in the same folder as the view
         $class = $name . '.php';
-        $filePath = str_replace($name . '.php', $class, $view);
+        $fileKey = str_replace($name . '.php', $class, $view);
 
-        if ($filePath === '') {
+        if ($fileKey === '') {
             return null;
         }
 
-        if (! file_exists($filePath)) {
+        if (! file_exists($fileKey)) {
             return null;
         }
 
         $className = service('locator')
-            ->getClassname($filePath);
+            ->getClassname($fileKey);
 
         if (! class_exists($className)) {
             return null;

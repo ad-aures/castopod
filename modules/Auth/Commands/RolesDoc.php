@@ -171,11 +171,11 @@ class RolesDoc extends BaseCommand
         return $newFileContents;
     }
 
-    private function detectLocaleFromPath($filePath): string
+    private function detectLocaleFromPath($fileKey): string
     {
         preg_match(
             '~docs\/src\/(?:([a-z]{2}(?:-[A-Za-z]{2,})?)\/)getting-started\/auth\.md~',
-            (string) $filePath,
+            (string) $fileKey,
             $match
         );
 

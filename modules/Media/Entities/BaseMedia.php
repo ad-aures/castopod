@@ -8,20 +8,22 @@ declare(strict_types=1);
  * @link       https://castopod.org/
  */
 
-namespace App\Entities\Media;
+namespace Modules\Media\Entities;
 
-use App\Models\MediaModel;
-use CodeIgniter\Database\BaseResult;
 use CodeIgniter\Entity\Entity;
 use CodeIgniter\Files\File;
+use Modules\Media\FileManagers\FileManagerInterface;
+use Modules\Media\FileManagers\FS;
+use Modules\Media\FileManagers\S3;
+use Modules\Media\Models\MediaModel;
 
 /**
  * @property int $id
- * @property string $file_path
+ * @property string $file_key
  * @property string $file_url
+ * @property string $file_name
  * @property string $file_directory
  * @property string $file_extension
- * @property string $file_name
  * @property int $file_size
  * @property string $file_mimetype
  * @property array|null $file_metadata
@@ -45,8 +47,7 @@ class BaseMedia extends Entity
      */
     protected $casts = [
         'id' => 'integer',
-        'file_extension' => 'string',
-        'file_path' => 'string',
+        'file_key' => 'string',
         'file_size' => 'int',
         'file_mimetype' => 'string',
         'file_metadata' => '?json-array',
@@ -57,27 +58,41 @@ class BaseMedia extends Entity
         'updated_by' => 'integer',
     ];
 
+    protected FileManagerInterface $fileManager;
+
     /**
      * @param array<string, mixed>|null $data
+     * @param 'fs'|'s3'|null $fileManager
      */
-    public function __construct(array $data = null)
+    public function __construct(array $data = null, string $fileManager = null)
     {
         parent::__construct($data);
+
+        if ($fileManager !== null) {
+            $this->fileManager = match ($fileManager) {
+                'fs' => new FS(config('Media')),
+                's3' => new S3(config('Media'))
+            };
+        } else {
+            /** @var FileManagerInterface $fileManagerService */
+            $fileManagerService = service('file_manager');
+
+            $this->fileManager = $fileManagerService;
+        }
 
         $this->initFileProperties();
     }
 
     public function initFileProperties(): void
     {
-        if ($this->file_path !== '') {
-            helper('media');
+        if ($this->file_key !== '') {
             [
                 'filename' => $filename,
                 'dirname' => $dirname,
                 'extension' => $extension,
-            ] = pathinfo($this->file_path);
+            ] = pathinfo($this->file_key);
 
-            $this->attributes['file_url'] = media_base_url($this->file_path);
+            $this->attributes['file_url'] = $this->fileManager->getUrl($this->file_key);
             $this->attributes['file_name'] = $filename;
             $this->attributes['file_directory'] = $dirname;
             $this->attributes['file_extension'] = $extension;
@@ -86,49 +101,49 @@ class BaseMedia extends Entity
 
     public function setFile(File $file): self
     {
-        helper('media');
-
         $this->attributes['type'] = $this->type;
         $this->attributes['file_mimetype'] = $file->getMimeType();
         $this->attributes['file_metadata'] = json_encode(lstat((string) $file), JSON_INVALID_UTF8_IGNORE);
-        $this->attributes['file_path'] = save_media(
-            $file,
-            $this->attributes['file_directory'],
-            $this->attributes['file_name']
-        );
-        if ($filesize = filesize(media_path($this->file_path))) {
+
+        if ($filesize = $file->getSize()) {
             $this->attributes['file_size'] = $filesize;
         }
+
+        $this->attributes['file'] = $file;
 
         return $this;
     }
 
-    public function deleteFile(): bool
+    public function saveFile(): bool
     {
-        helper('media');
-        return unlink(media_path($this->file_path));
+        if (! $this->attributes['file'] || ! $this->file_key) {
+            return false;
+        }
+
+        $this->attributes['file_key'] = $this->fileManager->save($this->attributes['file'], $this->file_key);
+
+        return true;
     }
 
-    public function delete(): bool|BaseResult
+    public function deleteFile(): bool
     {
-        $mediaModel = new MediaModel();
-        return $mediaModel->delete($this->id);
+        return $this->fileManager->delete($this->file_key);
     }
 
     public function rename(): bool
     {
-        $newFilePath = $this->file_directory . '/' . (new File(''))->getRandomName() . '.' . $this->file_extension;
+        $newFileKey = $this->file_directory . '/' . (new File(''))->getRandomName() . '.' . $this->file_extension;
 
         $db = db_connect();
         $db->transStart();
 
         if (! (new MediaModel())->update($this->id, [
-            'file_path' => $newFilePath,
+            'file_key' => $newFileKey,
         ])) {
             return false;
         }
 
-        if (! rename(media_path($this->file_path), media_path($newFilePath))) {
+        if (! $this->fileManager->rename($this->file_key, $newFileKey)) {
             $db->transRollback();
             return false;
         }

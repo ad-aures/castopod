@@ -13,6 +13,7 @@ namespace MediaClipper;
 use App\Entities\Episode;
 use Exception;
 use GdImage;
+use Modules\Media\FileManagers\FileManagerInterface;
 
 /**
  * TODO: refactor this by splitting process modules into different classes (image generation, subtitles clip, video
@@ -35,9 +36,9 @@ class VideoClipper
 
     public bool $error = false;
 
-    public string $videoClipFilePath;
+    public string $videoClipFileKey;
 
-    protected string $videoClipOutput;
+    public string $videoClipOutput;
 
     protected float $duration;
 
@@ -83,15 +84,11 @@ class VideoClipper
         $this->colors = config('MediaClipper')
             ->themes[$theme];
 
-        helper(['media']);
+        /** @var FileManagerInterface $fileManager */
+        $fileManager = service('file_manager');
 
-        $this->audioInput = media_path($this->episode->audio->file_path);
-        $this->episodeCoverPath = media_path($this->episode->cover->file_path);
-
-        $podcastFolder = media_path("podcasts/{$this->episode->podcast->handle}");
-
-        $this->videoClipOutput = $podcastFolder . "/{$this->episode->slug}-clip-{$this->start}-to-{$this->end}-{$this->format}-{$this->theme}.mp4";
-        $this->videoClipFilePath = "podcasts/{$this->episode->podcast->handle}/{$this->episode->slug}-clip-{$this->start}-to-{$this->end}-{$this->format}-{$this->theme}.mp4";
+        $this->audioInput = $fileManager->getFileInput($this->episode->audio->file_key);
+        $this->episodeCoverPath = $fileManager->getFileInput($this->episode->cover->file_key);
 
         // Temporary files to generate clip
         $tempFile = tempnam(WRITEPATH . 'temp', "{$this->episode->slug}-{$this->start}-{$this->end}");
@@ -102,7 +99,10 @@ class VideoClipper
             );
         }
 
+        $this->videoClipFileKey = "podcasts/{$this->episode->podcast->handle}/{$this->episode->slug}-clip-{$this->start}-to-{$this->end}-{$this->format}-{$this->theme}.mp4";
+
         $this->tempFileOutput = $tempFile;
+        $this->videoClipOutput = $tempFile . '-video-clip.mp4';
         $this->soundbiteOutput = $tempFile . '-soundbite.mp3';
         $this->subtitlesClipOutput = $tempFile . '-subtitle.srt';
         $this->videoClipBgOutput = $tempFile . '-bg.png';
@@ -120,19 +120,22 @@ class VideoClipper
             throw new Exception('Episode does not have a transcript!');
         }
 
-        if ($this->episode->transcript->json_path) {
-            $this->generateSubtitlesClipFromJson($this->episode->transcript->json_path);
+        if ($this->episode->transcript->json_url) {
+            $this->generateSubtitlesClipFromJson($this->episode->transcript->json_key);
         } else {
-            $subtitlesInput = media_path($this->episode->transcript->file_path);
+            $subtitlesInput = $this->episode->transcript->file_url;
             $subtitleClipCmd = "ffmpeg -y -i {$subtitlesInput} -ss {$this->start} -t {$this->duration} {$this->subtitlesClipOutput}";
             exec($subtitleClipCmd);
         }
     }
 
-    public function generateSubtitlesClipFromJson(string $jsonFileInput): void
+    public function generateSubtitlesClipFromJson(string $jsonFileKey): void
     {
-        $jsonTranscriptString = file_get_contents($jsonFileInput);
-        if ($jsonTranscriptString === false) {
+        /** @var FileManagerInterface $fileManager */
+        $fileManager = service('file_manager');
+
+        $jsonTranscriptString = $fileManager->getFileContents($jsonFileKey);
+        if ($jsonTranscriptString === '') {
             throw new Exception('Cannot get transcript json contents.');
         }
 

@@ -28,18 +28,6 @@ class App extends BaseConfig
 
     /**
      * --------------------------------------------------------------------------
-     * Media Base URL
-     * --------------------------------------------------------------------------
-     *
-     * URL to your media root. Typically this will be your base URL,
-     * WITH a trailing slash:
-     *
-     *    http://cdn.example.com/
-     */
-    public string $mediaBaseURL = 'http://localhost:8080/';
-
-    /**
-     * --------------------------------------------------------------------------
      * Index File
      * --------------------------------------------------------------------------
      *
@@ -419,14 +407,6 @@ class App extends BaseConfig
      * @see http://www.w3.org/TR/CSP/
      */
     public bool $CSPEnabled = false;
-
-    /**
-     * --------------------------------------------------------------------------
-     * Media root folder
-     * --------------------------------------------------------------------------
-     * Defines the root folder for media files storage
-     */
-    public string $mediaRoot = 'media';
 
     /**
      * --------------------------------------------------------------------------

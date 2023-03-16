@@ -11,6 +11,7 @@ use Rector\CodingStyle\Rector\String_\SymplifyQuoteEscapeRector;
 use Rector\Config\RectorConfig;
 use Rector\Core\ValueObject\PhpVersion;
 use Rector\DeadCode\Rector\If_\UnwrapFutureCompatibleIfPhpVersionRector;
+use Rector\DeadCode\Rector\Stmt\RemoveUnreachableStatementRector;
 use Rector\EarlyReturn\Rector\If_\ChangeAndIfToEarlyReturnRector;
 use Rector\EarlyReturn\Rector\If_\ChangeOrIfContinueToMultiContinueRector;
 use Rector\EarlyReturn\Rector\If_\ChangeOrIfReturnToEarlyReturnRector;
@@ -65,6 +66,10 @@ return static function (RectorConfig $rectorConfig): void {
         SymplifyQuoteEscapeRector::class => [__DIR__ . '/app/Language/*', __DIR__ . '/modules/*/Language/*'],
 
         NewlineAfterStatementRector::class => [__DIR__ . '/app/Views'],
+
+        RemoveUnreachableStatementRector::class => [
+            __DIR__ . '/modules/Install/Controllers/InstallController.php',
+        ],
 
         ChangeAndIfToEarlyReturnRector::class => [__DIR__ . '/modules/Install/Controllers/InstallController.php'],
     ]);

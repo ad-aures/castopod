@@ -12,6 +12,7 @@ namespace Modules\Admin\Controllers;
 
 use App\Models\ClipModel;
 use CodeIgniter\Controller;
+use CodeIgniter\Files\File;
 use CodeIgniter\I18n\Time;
 use Exception;
 use MediaClipper\VideoClipper;
@@ -65,7 +66,7 @@ class SchedulerController extends Controller
                 $clipModel = new ClipModel();
                 if ($exitCode === 0) {
                     // success, video was generated
-                    $scheduledClip->setMedia($clipper->videoClipFilePath);
+                    $scheduledClip->setMedia(new File($clipper->videoClipOutput), $clipper->videoClipFileKey);
                     $clipModel->update($scheduledClip->id, [
                         'media_id' => $scheduledClip->media_id,
                         'status' => 'passed',

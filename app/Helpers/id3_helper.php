@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 use App\Entities\Episode;
 use JamesHeinrich\GetID3\WriteTags;
+use Modules\Media\FileManagers\FileManagerInterface;
 
 if (! function_exists('write_audio_file_tags')) {
     /**
@@ -23,13 +24,16 @@ if (! function_exists('write_audio_file_tags')) {
 
         // Initialize getID3 tag-writing module
         $tagwriter = new WriteTags();
-        $tagwriter->filename = media_path($episode->audio->file_path);
+        $tagwriter->filename = $episode->audio->file_name;
 
         // set various options (optional)
         $tagwriter->tagformats = ['id3v2.4'];
         $tagwriter->tag_encoding = $TextEncoding;
 
-        $APICdata = file_get_contents(media_path($episode->cover->id3_path));
+        /** @var FileManagerInterface $fileManager */
+        $fileManager = service('file_manager');
+
+        $APICdata = $fileManager->getFileContents($episode->cover->id3_key);
 
         // TODO: variables used for podcast specific tags
         // $podcastUrl = $episode->podcast->link;

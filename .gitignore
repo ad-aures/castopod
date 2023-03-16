@@ -177,6 +177,7 @@ modules/Admin/Language/*/PersonsTaxonomy.php
 mariadb
 phpmyadmin
 sessions
+data
 
 # Castopod bundle & packages
 castopod/

@@ -17,7 +17,6 @@ use App\Models\ActorModel;
 use App\Models\CategoryModel;
 use App\Models\EpisodeModel;
 use App\Models\LanguageModel;
-use App\Models\MediaModel;
 use App\Models\PodcastModel;
 use App\Models\PostModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
@@ -32,6 +31,7 @@ use Modules\Analytics\Models\AnalyticsPodcastModel;
 use Modules\Analytics\Models\AnalyticsWebsiteByBrowserModel;
 use Modules\Analytics\Models\AnalyticsWebsiteByEntryPageModel;
 use Modules\Analytics\Models\AnalyticsWebsiteByRefererModel;
+use Modules\Media\Models\MediaModel;
 
 class PodcastController extends BaseController
 {

@@ -1,7 +1,10 @@
-version: "3"
+version: "3.8"
 
 networks:
   castopod:
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
 
 services:
   app:
@@ -18,7 +21,8 @@ services:
       - redis
       - mariadb
     networks:
-      - castopod
+      castopod:
+        ipv4_address: 172.20.0.2
 
   redis:
     image: redis:alpine
@@ -28,7 +32,8 @@ services:
     volumes:
       - redis:/data
     networks:
-      - castopod
+      castopod:
+        ipv4_address: 172.20.0.3
 
   mariadb:
     image: mariadb:10.2
@@ -44,7 +49,8 @@ services:
       MYSQL_USER: castopod
       MYSQL_PASSWORD: castopod
     networks:
-      - castopod
+      castopod:
+        ipv4_address: 172.20.0.4
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
@@ -59,7 +65,22 @@ services:
     depends_on:
       - mariadb
     networks:
-      - castopod
+      castopod:
+        ipv4_address: 172.20.0.5
+
+  s3:
+    image: adobe/s3mock:latest
+    container_name: castopod_s3
+    environment:
+      - debug=true
+      - root=/data
+    ports:
+      - 9090:9090
+    volumes:
+      - ./data/s3:/data:cached
+    networks:
+      castopod:
+        ipv4_address: 172.20.0.6
 
 volumes:
   redis:

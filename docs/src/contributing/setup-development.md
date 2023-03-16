@@ -43,7 +43,6 @@ to help you kickstart your contribution.
    app.forceGlobalSecureRequests=false
 
    app.baseURL="http://localhost:8080/"
-   app.mediaBaseURL="http://localhost:8080/"
 
    admin.gateway="cp-admin"
    auth.gateway="cp-auth"
@@ -62,7 +61,21 @@ to help you kickstart your contribution.
    # You may not want to use redis as your cache handler
    # Comment/remove the two lines above and uncomment
    # the next line for file caching.
+   # -----------------------
    #cache.handler="file"
+
+   ######################################
+   # Media config
+   ######################################
+   media.baseURL="http://localhost:8080/"
+
+   # S3
+   # Uncomment to store s3 objects using adobe/s3mock service
+   # -----------------------
+   #media.fileManager="s3"
+   #media.s3.bucket="castopod"
+   #media.s3.endpoint="http://172.20.0.6:9090/"
+   #media.s3.path_style_endpoint=true
    ```
 
    > _NB._ You can tweak your environment by setting more environment variables

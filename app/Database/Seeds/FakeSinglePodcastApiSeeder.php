@@ -9,13 +9,13 @@ use CodeIgniter\Database\Seeder;
 class FakeSinglePodcastApiSeeder extends Seeder
 {
     /**
-     * @return array{id: int, file_path: string, file_size: int, file_mimetype: string, file_metadata: string, type: string, description: null, language_code: null, uploaded_by: int, updated_by: int, uploaded_at: string, updated_at: string}
+     * @return array{id: int, file_key: string, file_size: int, file_mimetype: string, file_metadata: string, type: string, description: null, language_code: null, uploaded_by: int, updated_by: int, uploaded_at: string, updated_at: string}
      */
     public static function cover(): array
     {
         return [
             'id' => 1,
-            'file_path' => 'podcasts/Handle/cover.jpg',
+            'file_key' => 'podcasts/Handle/cover.jpg',
             'file_size' => 400000,
             'file_mimetype' => 'image/jpeg',
             'file_metadata' => '{"FILE":{"FileName":"cover.jpg","FileDateTime":1654861723,"FileSize":468541,"FileType":2,"MimeType":"image\/jpeg","SectionsFound":"COMMENT"},"COMPUTED":{"html":"width=\"1400\" height=\"1400\"","Height":1400,"Width":1400,"IsColor":1},"COMMENT":["CREATOR: gd-jpeg v1.0 (using IJG JPEG v62), quality = 90\n"],"sizes":{"tiny":{"width":40,"height":40,"mimetype":"image\/webp","extension":"webp"},"thumbnail":{"width":150,"height":150,"mimetype":"image\/webp","extension":"webp"},"medium":{"width":320,"height":320,"mimetype":"image\/webp","extension":"webp"},"large":{"width":1024,"height":1024,"mimetype":"image\/webp","extension":"webp"},"feed":{"width":1400,"height":1400},"id3":{"width":500,"height":500},"og":{"width":1200,"height":1200},"federation":{"width":400,"height":400},"webmanifest192":{"width":192,"height":192,"mimetype":"image\/png","extension":"png"},"webmanifest512":{"width":512,"height":512,"mimetype":"image\/png","extension":"png"}}}',
@@ -30,13 +30,13 @@ class FakeSinglePodcastApiSeeder extends Seeder
     }
 
     /**
-     * @return array{id: int, file_path: string, file_size: int, file_mimetype: string, file_metadata: string, type: string, description: null, language_code: null, uploaded_by: int, updated_by: int, uploaded_at: string, updated_at: string}
+     * @return array{id: int, file_key: string, file_size: int, file_mimetype: string, file_metadata: string, type: string, description: null, language_code: null, uploaded_by: int, updated_by: int, uploaded_at: string, updated_at: string}
      */
     public static function banner(): array
     {
         return [
             'id' => 2,
-            'file_path' => 'podcasts/Handle/banner.jpg',
+            'file_key' => 'podcasts/Handle/banner.jpg',
             'file_size' => 400000,
             'file_mimetype' => 'image/jpeg',
             'file_metadata' => '{"FILE":{"FileName":"banner.jpg","FileDateTime":1654861724,"FileSize":98209,"FileType":2,"MimeType":"image\/jpeg","SectionsFound":""},"COMPUTED":{"html":"width=\"1500\" height=\"500\"","Height":500,"Width":1500,"IsColor":1},"sizes":{"small":{"width":320,"height":128,"mimetype":"image\/webp","extension":"webp"},"medium":{"width":960,"height":320,"mimetype":"image\/webp","extension":"webp"},"federation":{"width":1500,"height":500}}}',

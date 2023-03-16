@@ -362,7 +362,7 @@ if (! function_exists('linkify')) {
             $text = match ($protocol) {
                 'http', 'https' => preg_replace_callback(
                     '~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i',
-                    static function (array $match) use ($protocol, &$links) {
+                    static function (array $match) use ($protocol, &$links): string {
                         if ($match[1] !== '' && $match[1] !== '0') {
                             $protocol = $match[1];
                         }
@@ -446,7 +446,7 @@ if (! function_exists('linkify')) {
                     '~' .
                         preg_quote($protocol, '~') .
                         '://([^\s<]+?)(?<![\.,:])~i',
-                    static function (array $match) use ($protocol, &$links) {
+                    static function (array $match) use ($protocol, &$links): string {
                         return '<' .
                             array_push(
                                 $links,

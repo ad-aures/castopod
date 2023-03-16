@@ -10,9 +10,9 @@ declare(strict_types=1);
 
 namespace App\Entities\Clip;
 
-use App\Entities\Media\Video;
-use App\Models\MediaModel;
 use CodeIgniter\Files\File;
+use Modules\Media\Entities\Video;
+use Modules\Media\Models\MediaModel;
 
 /**
  * @property array $theme
@@ -63,30 +63,23 @@ class VideoClip extends BaseClip
         return $this;
     }
 
-    public function setMedia(string $filePath = null): static
+    public function setMedia(File $file, string $fileKey): static
     {
-        if ($filePath === null) {
-            return $this;
-        }
-
         if ($this->attributes['media_id'] !== null) {
             // media is already set, do nothing
             return $this;
         }
 
-        helper('media');
-        $file = new File(media_path($filePath));
-
         $video = new Video([
-            'file_path' => $filePath,
+            'file_key' => $fileKey,
             'language_code' => $this->getPodcast()
-                ->language_code,
+->language_code,
             'uploaded_by' => $this->attributes['created_by'],
             'updated_by' => $this->attributes['created_by'],
         ]);
         $video->setFile($file);
 
-        $this->attributes['media_id'] = (new MediaModel())->saveMedia($video);
+        $this->attributes['media_id'] = (new MediaModel('video'))->saveMedia($video);
 
         return $this;
     }

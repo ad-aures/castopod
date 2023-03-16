@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @link       https://castopod.org/
  */
 
-namespace App\Entities\Media;
+namespace Modules\Media\Entities;
 
 use CodeIgniter\Files\File;
 use JamesHeinrich\GetID3\GetID3;
@@ -39,7 +39,7 @@ class Audio extends BaseMedia
         parent::setFile($file);
 
         $getID3 = new GetID3();
-        $audioMetadata = $getID3->analyze(media_path($this->file_path));
+        $audioMetadata = $getID3->analyze($file->getRealPath());
 
         // remove heavy image data from metadata
         unset($audioMetadata['comments']['picture']);

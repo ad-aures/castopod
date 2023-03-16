@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @link       https://castopod.org/
  */
 
-namespace App\Database\Migrations;
+namespace Media\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
@@ -22,7 +22,7 @@ class AddMedia extends Migration
                 'unsigned' => true,
                 'auto_increment' => true,
             ],
-            'file_path' => [
+            'file_key' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
@@ -72,7 +72,7 @@ class AddMedia extends Migration
         ]);
 
         $this->forge->addKey('id', true);
-        $this->forge->addUniqueKey('file_path');
+        $this->forge->addUniqueKey('file_key');
         $this->forge->addForeignKey('uploaded_by', 'users', 'id');
         $this->forge->addForeignKey('updated_by', 'users', 'id');
         $this->forge->createTable('media');

@@ -85,7 +85,7 @@ return [
             image {couverture}
             audio {audio}
             other {média}
-        } fichier {file_path}. Vous pouvez le supprimer manuellement de votre disque.',
+        } fichier {file_key}. Vous pouvez le supprimer manuellement de votre disque.',
         'sameSlugError' => 'Il existe déjà un épisode avec le slug choisi.',
     ],
     'form' => [

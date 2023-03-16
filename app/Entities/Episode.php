@@ -11,14 +11,9 @@ declare(strict_types=1);
 namespace App\Entities;
 
 use App\Entities\Clip\Soundbite;
-use App\Entities\Media\Audio;
-use App\Entities\Media\Chapters;
-use App\Entities\Media\Image;
-use App\Entities\Media\Transcript;
 use App\Libraries\SimpleRSSElement;
 use App\Models\ClipModel;
 use App\Models\EpisodeCommentModel;
-use App\Models\MediaModel;
 use App\Models\PersonModel;
 use App\Models\PodcastModel;
 use App\Models\PostModel;
@@ -32,6 +27,11 @@ use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
 use League\CommonMark\Extension\DisallowedRawHtml\DisallowedRawHtmlExtension;
 use League\CommonMark\Extension\SmartPunct\SmartPunctExtension;
 use League\CommonMark\MarkdownConverter;
+use Modules\Media\Entities\Audio;
+use Modules\Media\Entities\Chapters;
+use Modules\Media\Entities\Image;
+use Modules\Media\Entities\Transcript;
+use Modules\Media\Models\MediaModel;
 use RuntimeException;
 
 /**
@@ -191,10 +191,9 @@ class Episode extends Entity
             (new MediaModel('image'))->updateMedia($this->getCover());
         } else {
             $cover = new Image([
-                'file_name' => $this->attributes['slug'],
-                'file_directory' => 'podcasts/' . $this->getPodcast()->handle,
+                'file_key' => 'podcasts/' . $this->getPodcast()->handle . '/' . $this->attributes['slug'] . '.' . $file->getExtension(),
                 'sizes' => config('Images')
-                    ->podcastCoverSizes,
+->podcastCoverSizes,
                 'uploaded_by' => user_id(),
                 'updated_by' => user_id(),
             ]);
@@ -238,8 +237,10 @@ class Episode extends Entity
             (new MediaModel('audio'))->updateMedia($this->getAudio());
         } else {
             $audio = new Audio([
-                'file_name' => pathinfo($file->getRandomName(), PATHINFO_FILENAME),
-                'file_directory' => 'podcasts/' . $this->getPodcast()->handle,
+                'file_key' => 'podcasts/' . $this->getPodcast()->handle . '/' . pathinfo(
+                    $file->getRandomName(),
+                    PATHINFO_FILENAME
+                ) . '.' . $file->getExtension(),
                 'language_code' => $this->getPodcast()
                     ->language_code,
                 'uploaded_by' => user_id(),
@@ -276,10 +277,9 @@ class Episode extends Entity
             (new MediaModel('transcript'))->updateMedia($this->getTranscript());
         } else {
             $transcript = new Transcript([
-                'file_name' => $this->attributes['slug'] . '-transcript',
-                'file_directory' => 'podcasts/' . $this->getPodcast()->handle,
+                'file_key' => 'podcasts/' . $this->getPodcast()->handle . '/' . $this->attributes['slug'] . '-transcript.' . $file->getExtension(),
                 'language_code' => $this->getPodcast()
-                    ->language_code,
+->language_code,
                 'uploaded_by' => user_id(),
                 'updated_by' => user_id(),
             ]);
@@ -314,10 +314,9 @@ class Episode extends Entity
             (new MediaModel('chapters'))->updateMedia($this->getChapters());
         } else {
             $chapters = new Chapters([
-                'file_name' => $this->attributes['slug'] . '-chapters',
-                'file_directory' => 'podcasts/' . $this->getPodcast()->handle,
+                'file_key' => 'podcasts/' . $this->getPodcast()->handle . '/' . $this->attributes['slug'] . '-chapters' . '.' . $file->getExtension(),
                 'language_code' => $this->getPodcast()
-                    ->language_code,
+->language_code,
                 'uploaded_by' => user_id(),
                 'updated_by' => user_id(),
             ]);

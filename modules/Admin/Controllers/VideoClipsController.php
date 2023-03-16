@@ -15,10 +15,10 @@ use App\Entities\Episode;
 use App\Entities\Podcast;
 use App\Models\ClipModel;
 use App\Models\EpisodeModel;
-use App\Models\MediaModel;
 use App\Models\PodcastModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
+use Modules\Media\Models\MediaModel;
 
 class VideoClipsController extends BaseController
 {

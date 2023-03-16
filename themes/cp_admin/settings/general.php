@@ -78,7 +78,6 @@
     subtitle="<?= lang('Settings.housekeeping.subtitle') ?>" >
 
     <Forms.Toggler name="reset_counts" value="yes" size="small" checked="false" hint="<?= lang('Settings.housekeeping.reset_counts_helper') ?>"><?= lang('Settings.housekeeping.reset_counts') ?></Forms.Toggler>
-    <Forms.Toggler name="rewrite_media" value="yes" size="small" checked="false" hint="<?= lang('Settings.housekeeping.rewrite_media_helper') ?>"><?= lang('Settings.housekeeping.rewrite_media') ?></Forms.Toggler>
     <Forms.Toggler name="rename_episodes_files" value="yes" size="small" checked="false" hint="<?= lang('Settings.housekeeping.rename_episodes_files_hint') ?>"><?= lang('Settings.housekeeping.rename_episodes_files') ?></Forms.Toggler>
     <Forms.Toggler name="clear_cache" value="yes" size="small" checked="false" hint="<?= lang('Settings.housekeeping.clear_cache_helper') ?>"><?= lang('Settings.housekeeping.clear_cache') ?></Forms.Toggler>
 

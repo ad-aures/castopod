@@ -11,9 +11,9 @@ declare(strict_types=1);
 namespace Modules\Admin\Controllers;
 
 use App\Models\EpisodeModel;
-use App\Models\MediaModel;
 use App\Models\PodcastModel;
 use CodeIgniter\I18n\Time;
+use Modules\Media\Models\MediaModel;
 
 class DashboardController extends BaseController
 {

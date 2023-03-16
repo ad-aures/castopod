@@ -27,9 +27,9 @@ if (defined('SHOW_DEBUG_BACKTRACE') && SHOW_DEBUG_BACKTRACE) {
         $c = str_pad((string) ($i + 1), 3, ' ', STR_PAD_LEFT);
 
         if (isset($error['file'])) {
-            $filepath = clean_path($error['file']) . ':' . $error['line'];
+            $fileKey = clean_path($error['file']) . ':' . $error['line'];
 
-            CLI::write($c . $padFile . CLI::color($filepath, 'yellow'));
+            CLI::write($c . $padFile . CLI::color($fileKey, 'yellow'));
         } else {
             CLI::write($c . $padFile . CLI::color('[internal function]', 'yellow'));
         }

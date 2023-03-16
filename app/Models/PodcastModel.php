@@ -440,8 +440,8 @@ class PodcastModel extends Model
             $podcastActor = (new ActorModel())->find($podcast->actor_id);
 
             if ($podcastActor) {
-                $podcastActor->avatar_image_url = $podcast->cover->thumbnail_url;
-                $podcastActor->avatar_image_mimetype = $podcast->cover->thumbnail_mimetype;
+                $podcastActor->avatar_image_url = $podcast->cover->federation_url;
+                $podcastActor->avatar_image_mimetype = $podcast->cover->federation_mimetype;
 
                 (new ActorModel())->update($podcast->actor_id, $podcastActor);
             }
@@ -468,9 +468,9 @@ class PodcastModel extends Model
                 $actor->display_name = $podcast->title;
                 $actor->summary = $podcast->description_html;
                 $actor->avatar_image_url = $podcast->cover->federation_url;
-                $actor->avatar_image_mimetype = $podcast->cover->file_mimetype;
+                $actor->avatar_image_mimetype = $podcast->cover->federation_mimetype;
                 $actor->cover_image_url = $podcast->banner->federation_url;
-                $actor->cover_image_mimetype = $podcast->banner->file_mimetype;
+                $actor->cover_image_mimetype = $podcast->banner->federation_mimetype;
 
                 if ($actor->hasChanged()) {
                     $actorModel->update($actor->id, $actor);

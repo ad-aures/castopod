@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @link       https://castopod.org/
  */
 
-namespace App\Libraries;
+namespace Modules\Media;
 
 use stdClass;
 

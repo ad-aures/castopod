@@ -10,12 +10,10 @@ declare(strict_types=1);
 
 namespace App\Entities;
 
-use App\Entities\Media\Image;
 use App\Libraries\SimpleRSSElement;
 use App\Models\ActorModel;
 use App\Models\CategoryModel;
 use App\Models\EpisodeModel;
-use App\Models\MediaModel;
 use App\Models\PersonModel;
 use App\Models\PlatformModel;
 use CodeIgniter\Entity\Entity;
@@ -30,6 +28,8 @@ use League\CommonMark\Extension\DisallowedRawHtml\DisallowedRawHtmlExtension;
 use League\CommonMark\Extension\SmartPunct\SmartPunctExtension;
 use League\CommonMark\MarkdownConverter;
 use Modules\Auth\Models\UserModel;
+use Modules\Media\Entities\Image;
+use Modules\Media\Models\MediaModel;
 use Modules\PremiumPodcasts\Entities\Subscription;
 use Modules\PremiumPodcasts\Models\SubscriptionModel;
 use RuntimeException;
@@ -49,7 +49,7 @@ use RuntimeException;
  * @property int $cover_id
  * @property Image $cover
  * @property int|null $banner_id
- * @property Image|null $banner
+ * @property Image $banner
  * @property string $language_code
  * @property int $category_id
  * @property Category|null $category
@@ -243,10 +243,9 @@ class Podcast extends Entity
             (new MediaModel('image'))->updateMedia($this->getCover());
         } else {
             $cover = new Image([
-                'file_name' => 'cover',
-                'file_directory' => 'podcasts/' . $this->attributes['handle'],
+                'file_key' => 'podcasts/' . $this->attributes['handle'] . '/cover.' . $file->getExtension(),
                 'sizes' => config('Images')
-                    ->podcastCoverSizes,
+->podcastCoverSizes,
                 'uploaded_by' => user_id(),
                 'updated_by' => user_id(),
             ]);
@@ -281,10 +280,9 @@ class Podcast extends Entity
             (new MediaModel('image'))->updateMedia($this->getBanner());
         } else {
             $banner = new Image([
-                'file_name' => 'banner',
-                'file_directory' => 'podcasts/' . $this->attributes['handle'],
+                'file_key' => 'podcasts/' . $this->attributes['handle'] . '/banner.' . $file->getExtension(),
                 'sizes' => config('Images')
-                    ->podcastBannerSizes,
+->podcastBannerSizes,
                 'uploaded_by' => user_id(),
                 'updated_by' => user_id(),
             ]);
@@ -304,14 +302,14 @@ class Podcast extends Entity
                     'Images'
                 )->podcastBannerDefaultPaths['default'];
             return new Image([
-                'file_path' => $defaultBanner['path'],
+                'file_key' => $defaultBanner['path'],
                 'file_mimetype' => $defaultBanner['mimetype'],
                 'file_size' => 0,
                 'file_metadata' => [
                     'sizes' => config('Images')
-                        ->podcastBannerSizes,
+->podcastBannerSizes,
                 ],
-            ]);
+            ], 'fs');
         }
 
         if (! $this->banner instanceof Image) {

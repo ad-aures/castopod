@@ -8,9 +8,9 @@ declare(strict_types=1);
  * @link       https://castopod.org/
  */
 
-namespace App\Entities\Media;
+namespace Modules\Media\Entities;
 
-class Chapters extends BaseMedia
+class Video extends BaseMedia
 {
-    protected string $type = 'chapters';
+    protected string $type = 'video';
 }
