@@ -65,7 +65,7 @@ return [
         'title' => 'Brakujące wymagania',
         'missing' => 'Brakuje wymagań. Upewnij się, że dodałeś wszystkie wymagane elementy, aby móc tworzyć wideo do tego odcinka!',
         'ffmpeg' => 'FFmpeg',
-        'gd' => 'Graphics Draw (GD)',
+        'gd' => 'Rysunek graficzny (GD)',
         'freetype' => 'Freetype library dla GD',
         'transcript' => 'Plik z transkrypcją (.srt)',
     ],

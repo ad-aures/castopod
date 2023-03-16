@@ -9,13 +9,13 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => "{actorDisplayName}'s Beitrag",
-    'back_to_actor_posts' => 'Zurück zu {actor}\'s Beiträge',
+    'title' => "Beitrag von {actorDisplayName}",
+    'back_to_actor_posts' => 'Zurück zu den Beiträgen von {actor}',
     'actor_shared' => '{actor} teilte',
-    'reply_to' => 'Antorten auf @{actorUsername}',
+    'reply_to' => 'Antworten auf @{actorUsername}',
     'form' => [
         'message_placeholder' => 'Scheibe eine Nachricht…',
-        'episode_message_placeholder' => 'Schreibe eine Nachricht für die Episode…',
+        'episode_message_placeholder' => 'Schreibe eine Nachricht für die Folge…',
         'episode_url_placeholder' => 'URL der Episode',
         'reply_to_placeholder' => 'Antworten auf @{actorUsername}',
         'submit' => 'Senden',

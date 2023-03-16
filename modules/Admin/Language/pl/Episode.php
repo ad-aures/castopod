@@ -25,37 +25,39 @@ return [
     'edit' => 'Edytuj',
     'publish' => 'Publikuj',
     'publish_edit' => 'Edytuj publikację',
-    'publish_date_edit' => 'Edit publication date',
+    'publish_date_edit' => 'Edytuj datę publikacji',
     'unpublish' => 'Cofnij publikację',
     'publish_error' => 'Odcinek jest już opublikowany.',
     'publish_edit_error' => 'Odcinek jest już opublikowany.',
     'publish_cancel_error' => 'Odcinek jest już opublikowany.',
-    'publish_date_edit_error' => 'Episode has not been published yet, you cannot edit its publication date.',
-    'publish_date_edit_future_error' => 'Episode\'s publication date can only be set to a past date! If you would like to reschedule it, unpublish it first.',
-    'publish_date_edit_success' => 'Episode\'s publication date has been updated successfully!',
+    'publish_date_edit_error' => 'Odcinek nie został jeszcze opublikowany, nie możesz edytować daty jego publikacji.',
+    'publish_date_edit_future_error' => 'Data publikacji odcinka może być ustawiona tylko na przeszłą datę! Jeśli chcesz ją ponownie zaplanować, należy najpierw ją odpublikować.',
+    'publish_date_edit_success' => 'Data publikacji odcinka została pomyślnie zaktualizowana!',
     'unpublish_error' => 'Odcinek nie jest opublikowany.',
     'delete' => 'Usuń',
     'go_to_page' => 'Przejdź do strony',
     'create' => 'Dodaj odcinek',
     'publication_status' => [
         'published' => 'Opublikowany',
-        'with_podcast' => 'Published',
+        'with_podcast' => 'Opublikowano',
         'scheduled' => 'Zaplanowany',
         'not_published' => 'Nieopublikowany',
     ],
-    'with_podcast_hint' => 'To be published at the same time as the podcast',
+    'with_podcast_hint' => 'Opublikowany w tym samym czasie co podcast',
     'list' => [
         'search' => [
-            'placeholder' => 'Search for an episode',
-            'clear' => 'Clear search',
-            'submit' => 'Search',
+            'placeholder' => 'Szukaj odcinka',
+            'clear' => 'Wyczyść wyszukiwanie',
+            'submit' => 'Szukaj',
         ],
         'number_of_episodes' => '{numberOfEpisodes, plural,
-            one {# episode}
-            other {# episodes}
-        }',
+        one {# osoba}
+        few {# osoby}
+        other {# osób}
+    }',
         'episode' => 'Odcinek',
         'visibility' => 'Widoczność',
+        'downloads' => 'Downloads',
         'comments' => 'Komentarze',
         'actions' => 'Działania',
     ],
@@ -63,31 +65,31 @@ return [
         'createSuccess' => 'Odcinek został pomyślnie utworzony!',
         'editSuccess' => 'Odcinek został pomyślnie zaktualizowany!',
         'publishSuccess' => '{publication_status, select,
-            published {Episode successfully published!}
-            scheduled {Episode publication successfully scheduled!}
-            with_podcast {This episode will be published at the same time as the podcast.}
-            other {This episode is not published.}
+            published {Odcinek został pomyślnie opublikowany!}
+            scheduled {Publikacja odcinka pomyślnie zaplanowana!}
+            with_podcast {Ten odcinek zostanie opublikowany w tym samym czasie co podcast.}
+            other {Ten odcinek nie jest opublikowany.}
         }',
-        'publishCancelSuccess' => 'Episode publication successfully cancelled!',
-        'unpublishBeforeDeleteTip' => 'You must unpublish the episode before deleting it.',
-        'scheduleDateError' => 'Schedule date must be set!',
-        'deletePublishedEpisodeError' => 'Please unpublish the episode before deleting it.',
-        'deleteSuccess' => 'Episode successfully deleted!',
-        'deleteError' => 'Failed to delete episode {type, select,
-            transcript {transcript}
-            chapters {chapters}
-            image {cover}
+        'publishCancelSuccess' => 'Publikacja odcinka pomyślnie anulowana!',
+        'unpublishBeforeDeleteTip' => 'Musisz cofnąć publikację odcinka przed jego usunięciem.',
+        'scheduleDateError' => 'Zaplanowana data musi być ustawiona!',
+        'deletePublishedEpisodeError' => 'Musisz cofnąć publikację odcinka przed jego usunięciem.',
+        'deleteSuccess' => 'Odcinek pomyślnie usunięty!',
+        'deleteError' => 'Nie udało się usunąć {type, select,
+            transcript {transkrypcji}
+            chapters {rozdziału}
+            image {okładki}
+            audio {audio}
+            other {mediów}
+        } odcinka.',
+        'deleteFileError' => 'Nie udało się usunąć {type, select,
+            transcript {transkryptu}
+            chapters {rozdziały}
+            image {okładka}
             audio {audio}
             other {media}
-        }.',
-        'deleteFileError' => 'Failed to delete {type, select,
-            transcript {transcript}
-            chapters {chapters}
-            image {cover}
-            audio {audio}
-            other {media}
-        } file {file_key}. You may manually remove it from your disk.',
-        'sameSlugError' => 'An episode with the chosen slug already exists.',
+        } plik {file_key}. Możesz ręcznie usunąć go ze swojego dysku.',
+        'sameSlugError' => 'Odcinek z wybranym slugiem już istnieje.',
     ],
     'form' => [
         'file_size_error' =>
@@ -98,7 +100,7 @@ return [
         'cover' => 'Okładka odcinka',
         'cover_hint' =>
             'Jeśli nie ustawisz okładki, zamiast niej zostanie użyta okładka podcastu.',
-        'cover_size_hint' => 'Cover must be squared and at least 1400px wide and tall.',
+        'cover_size_hint' => 'Okładka musi być kwadratowa o szerokości i wysokości co najmniej 1400 pikseli.',
         'title' => 'Tytuł',
         'title_hint' =>
             'Powinien zawierać jasną i zwięzłą nazwę odcinka. Nie podawaj tutaj numerów odcinków ani sezonów.',
@@ -115,7 +117,7 @@ return [
             'bonus_hint' => 'Dodatkowa treść do programu (np. informacje zza kulis lub wywiady z obsadą) albo treści promujące inne programy',
         ],
         'premium_title' => 'Premium',
-        'premium' => 'Episode must be accessible to premium subscribers only',
+        'premium' => 'Odcinek musi być dostępny wyłącznie dla subskrybentów premium',
         'parental_advisory' => [
             'label' => 'Kontrola rodzicielska',
             'hint' => 'Czy odcinek zawiera treści dla dorosłych?',
@@ -132,7 +134,7 @@ return [
             'Ten tekst jest dodawany na końcu każdego opisu odcinka; jest to dobre miejsce do wpisania np. linków społecznościowych.',
         'additional_files_section_title' => 'Dodatkowe pliki',
         'additional_files_section_subtitle' =>
-            'These files may be used by other platforms to provide better experience to your audience. See the {podcastNamespaceLink} for more information.',
+            'Pliki te mogą być używane przez inne platformy, aby zapewnić lepsze wrażenia odbiorcom. Więcej informacji znajdziesz w {podcastNamespaceLink}.',
         'location_section_title' => 'Lokalizacja',
         'location_section_subtitle' => 'O jakim miejscu jest ten odcinek?',
         'location_name' => 'Nazwa lub adres lokalizacji',
@@ -154,9 +156,9 @@ return [
             'Jeśli potrzebujesz tagów RSS, których Castopod nie obsługuje, ustaw je tutaj.',
         'custom_rss' => 'Własne tagi RSS dla odcinka',
         'custom_rss_hint' => 'Zostaną wstawione w tagu ❬item❭.',
-        'block' => 'Episode should be hidden from public catalogues',
+        'block' => 'Odcinek powinien być ukryty w publicznych katalogach',
         'block_hint' =>
-            'The episode show or hide status: toggling this on prevents the episode from appearing in Apple Podcasts, Google Podcasts, and any third party apps that pull shows from these directories. (Not guaranteed)',
+            'Pokazywanie lub ukrywanie odcinka: przełączanie tej funkcji zapobiega pojawieniu się odcinka w podcastach Apple\'a, Google Podcasts, a także aplikacje innych firm, które pobierają z tych katalogów. (Nie sugerowane)',
         'submit_create' => 'Stwórz odcinek',
         'submit_edit' => 'Zapisz odcinek',
     ],
@@ -170,7 +172,7 @@ return [
         'publication_method' => [
             'now' => 'Teraz',
             'schedule' => 'Zaplanuj',
-            'with_podcast' => 'Publish alongside podcast',
+            'with_podcast' => 'Opublikuj obok podcastu',
         ],
         'scheduled_publication_date' => 'Planowana data publikacji',
         'scheduled_publication_date_clear' => 'Wyczyść datę publikacji',
@@ -184,21 +186,21 @@ return [
         'message_warning_submit' => 'Opublikuj mimo to',
     ],
     'publish_date_edit_form' => [
-        'new_publication_date' => 'New publication date',
-        'new_publication_date_hint' => 'Must be set to a past date.',
-        'submit' => 'Edit publication date',
+        'new_publication_date' => 'Nowa data publikacji',
+        'new_publication_date_hint' => 'Musi być ustawiona przeszła data.',
+        'submit' => 'Edytuj datę publikacji',
     ],
     'unpublish_form' => [
         'disclaimer' =>
-            "Unpublishing the episode will delete all the comments and posts associated with it and remove it from the podcast's RSS feed.",
+            "Cofnięcie publikacji odcinka spowoduje usunięcie wszystkich powiązanych z nim wpisów i usunięcie go z kanału RSS podcastu.",
         'understand' => 'Rozumiem, chcę cofnąć publikację odcinka',
         'submit' => 'Cofnij publikację',
     ],
     'delete_form' => [
         'disclaimer' =>
-            "Deleting the episode will delete all media files, comments, video clips and soundbites associated with it.",
+            "Usunięcie odcinka spowoduje usunięcie wszystkich plików multimedialnych, komentarzy, klipów wideo i powiązanych z nimi dźwięków.",
         'understand' => 'Rozumiem, chcę usunąć odcinek',
-        'submit' => 'Delete',
+        'submit' => 'Usuń',
     ],
     'embed' => [
         'title' => 'Odtwarzacz osadzalny',

@@ -20,10 +20,10 @@ return [
             'Um optional CDN und/oder einen externen Analysedienst verwenden zu können, müssen die Daten eingegeben werden.',
         'admin_gateway' => 'Admin-Gateway',
         'admin_gateway_hint' =>
-            'Die Route zum Zugriff auf den Admin-Bereich (z.B. https://example.com/cp-admin). Standardmäßig als cp-admin festgelegt. Wir empfehlen, sie aus Sicherheitsgründen zu ändern.',
+            'Der Pfad zum Zugriff auf den Admin-Bereich (z.B. https://example.com/cp-admin). Standardmäßig als cp-admin festgelegt. Wir empfehlen, sie aus Sicherheitsgründen zu ändern.',
         'auth_gateway' => 'Auth-Gateway',
         'auth_gateway_hint' =>
-            'Die Route zum Zugriff auf die Authentifizierungsseiten (z. B. https://example.com/cp-auth). Standardmäßig als cp-auth gesetzt. Wir empfehlen, sie aus Sicherheitsgründen zu ändern.',
+            'Der Pfad zum Zugriff auf die Authentifizierungsseiten (z. B. https://example.com/cp-auth). Standardmäßig als cp-auth gesetzt. Wir empfehlen, sie aus Sicherheitsgründen zu ändern.',
         'database_config' => 'Datenbankkonfiguration',
         'database_config_hint' =>
             'Castopod muss sich mit der MySQL-Datenbank (oder MariaDB) verbinden. Wenn diese erforderlichen Informationen nicht verfügbar sind, wenden Sie sich bitte an Ihren Serveradministrator.',
@@ -31,12 +31,12 @@ return [
         'db_name' => 'Datenbankname',
         'db_username' => 'Datenbankbenutzername',
         'db_password' => 'Datenbankpasswort',
-        'db_prefix' => 'Datenbankpräfix',
+        'db_prefix' => 'Tabellenpräfix',
         'db_prefix_hint' =>
-            "Das Präfix der Castopod-Tabellennamen. Nicht anpassen, wenn nicht gewiss, was damit gemeint ist.",
+            "Das Präfix der Castopod-Tabellennamen. Nicht anpassen, wenn du nicht weißt, was damit gemeint ist.",
         'cache_config' => 'Cachekonfiguration',
         'cache_config_hint' =>
-            'Wählen Sie Ihren bevorzugten Cache-Handler. Standardwert verwenden, wenn nicht gewiss, was damit gemeint ist.',
+            'Wählen Sie Ihren bevorzugten Cache-Handler. Standardwert verwenden, wenn Sie nicht wissen, was damit gemeint ist.',
         'cache_handler' => 'Cache-Handler',
         'cacheHandlerOptions' => [
             'file' => 'Datei',

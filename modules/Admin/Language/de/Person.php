@@ -44,7 +44,7 @@ return [
             'Es können eine oder mehrere Personen mit der gleichen Rolle ausgewählt werden. Die Personen müssen zuerst erstellt werden.',
         'roles' => 'Rollen',
         'roles_hint' =>
-            'Es können sowhol keine, eine als auch mehrere Rollen für eine Person ausgewählt werden.',
+            'Es können sowohl keine, eine als auch mehrere Rollen für eine Person ausgewählt werden.',
         'submit_add' => 'Person:en hinzufügen',
         'remove' => 'Entfernen',
     ],
@@ -57,9 +57,9 @@ return [
             'Es können eine oder mehrere Personen mit der gleichen Rolle ausgewählt werden. Die Personen müssen zuerst erstellt werden.',
         'roles' => 'Rollen',
         'roles_hint' =>
-            'Es können sowhol keine, eine als auch mehrere Rollen für eine Person ausgewählt werden.',
+            'Es können sowohl keine, eine als auch mehrere Rollen für eine Person ausgewählt werden.',
         'submit_add' => 'Person:en hinzufügen',
         'remove' => 'Entfernen',
     ],
-    'credits' => 'Danksagungen',
+    'credits' => 'Credits',
 ];

@@ -9,22 +9,22 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => 'Platforms',
-    'home_url' => 'Go to {platformName} website',
-    'submit_url' => 'Submit your podcast on {platformName}',
-    'visible' => 'Display in podcast homepage?',
-    'on_embed' => 'Display on embeddable player?',
-    'remove' => 'Remove {platformName}',
-    'submit' => 'Save',
+    'title' => 'Platforme',
+    'home_url' => 'Idi na {platformName} stranicu',
+    'submit_url' => 'Dodaj svoj podkast na {platformName}',
+    'visible' => 'Prikaži na naslovnoj strani podkasta?',
+    'on_embed' => 'Prikaži na embedovanom plejeru?',
+    'remove' => 'Ukloni {platformName}',
+    'submit' => 'Sačuvaj',
     'messages' => [
-        'updateSuccess' => 'Platform links have been successfully updated!',
-        'removeLinkSuccess' => 'The platform link has been removed.',
+        'updateSuccess' => 'Veze sa platformama su uspešno ažurirane!',
+        'removeLinkSuccess' => 'Veza ka platformi je izbrisana.',
         'removeLinkError' =>
-            'The platform link could not be removed. Try again.',
+            'Vezu sa platformom nije moguće ukloniti. Probajte ponovo.',
     ],
     'description' => [
-        'podcasting' => 'The podcast ID on this platform',
-        'social' => 'The podcast account ID on this platform',
-        'funding' => 'Call to action message',
+        'podcasting' => 'ID podkasta na ovoj platformi',
+        'social' => 'ID naloga podkasta na ovoj platformi',
+        'funding' => 'Poruka poziva na akciju',
     ],
 ];

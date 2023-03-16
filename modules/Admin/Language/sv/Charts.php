@@ -37,4 +37,5 @@ return [
     'podcast_by_bandwidth' => 'Dagligen använd bandbredd (i MB)',
     'total_storage_by_month' => 'Månadslagring (i MB)',
     'total_bandwidth_by_month' => 'Månatlig använd bandbredd (i MB)',
+    'total_bandwidth_by_month_limit' => 'Limited to {totalBandwidth} per month',
 ];

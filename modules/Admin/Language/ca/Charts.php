@@ -37,4 +37,5 @@ return [
     'podcast_by_bandwidth' => 'Ample de banda emprat diàriament (en MB)',
     'total_storage_by_month' => 'Emmagatzematge mensual (en MB)',
     'total_bandwidth_by_month' => 'Ample de banda emprat mensualment (en MB)',
+    'total_bandwidth_by_month_limit' => 'Limitat a {totalBandwidth} al mes',
 ];

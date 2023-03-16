@@ -9,17 +9,17 @@ declare(strict_types=1);
  */
 
 return [
-    'edit_role' => "{username}'s Rolle bearbeiten",
-    'ban' => 'Bannen',
-    'unban' => 'Entbannen',
+    'edit_role' => "Die Rolle(n) von {username} bearbeiten",
+    'ban' => 'Sperren',
+    'unban' => 'Entsperren',
     'delete' => 'Löschen',
     'create' => 'Neuer Benutzer',
-    'view' => "{username}'s Info",
+    'view' => "{username}-Infos",
     'all_users' => 'Alle Benutzer',
     'list' => [
         'user' => 'Benutzer',
         'role' => 'Rolle',
-        'banned' => 'Gebannt?',
+        'banned' => 'Gesperrt?',
     ],
     'form' => [
         'email' => 'E-mail',
@@ -48,7 +48,7 @@ return [
         'banSuccess' => '{username} wurde gebannt.',
         'unbanSuccess' => '{username} wurde entbannt.',
         'editOwnerError' =>
-            '{username} is the instance owner, you cannot edit its roles.',
+            '{username} ist Eigentümer der Instanz, Eigentümer können nicht gelöscht werden…',
         'banSuperAdminError' =>
             '{username} ist ein Superadmin, man bannt nicht einfach einen Superadmin…',
         'deleteOwnerError' =>

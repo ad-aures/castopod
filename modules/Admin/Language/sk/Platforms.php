@@ -15,7 +15,7 @@ return [
     'visible' => 'Zobraziť na úvodnej stránke podcastu?',
     'on_embed' => 'Zobraziť na vnorenom prehrávači?',
     'remove' => 'Remove {platformName}',
-    'submit' => 'Save',
+    'submit' => 'Uložiť',
     'messages' => [
         'updateSuccess' => 'Platform links have been successfully updated!',
         'removeLinkSuccess' => 'The platform link has been removed.',

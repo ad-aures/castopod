@@ -17,7 +17,7 @@ return [
         'last_published' => 'Zuletzt veröffentlicht am {lastPublicationDate}',
     ],
     'episodes' => [
-        'title' => 'Episoden',
+        'title' => 'Folgen',
         'not_found' => 'Keine veröffentlichte Episode',
         'last_published' => 'Zuletzt veröffentlicht am {lastPublicationDate}',
     ],

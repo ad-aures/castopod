@@ -37,4 +37,5 @@ return [
     'podcast_by_bandwidth' => 'Daily used bandwidth (in MB)',
     'total_storage_by_month' => 'التخزين الشهري (بالميغابايت)',
     'total_bandwidth_by_month' => 'Monthly used bandwidth (in MB)',
+    'total_bandwidth_by_month_limit' => 'Limited to {totalBandwidth} per month',
 ];

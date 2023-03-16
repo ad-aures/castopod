@@ -37,4 +37,5 @@ return [
     'podcast_by_bandwidth' => 'Ημερήσιο χρησιμοποιούμενο bandwidth (σε MB)',
     'total_storage_by_month' => 'Μηνιαία αποθήκευση (σε MB)',
     'total_bandwidth_by_month' => 'Μηνιαίο χρησιμοποιούμενο εύρος ζώνης (σε MB)',
+    'total_bandwidth_by_month_limit' => 'Limited to {totalBandwidth} per month',
 ];

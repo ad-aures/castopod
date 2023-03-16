@@ -16,38 +16,38 @@ return [
     'new_episode' => 'Nowy Odcinek',
     'view' => 'Wyświetl podcast',
     'edit' => 'Edytuj podcast',
-    'publish' => 'Publish podcast',
-    'publish_edit' => 'Edit publication',
+    'publish' => 'Opublikuj podcast',
+    'publish_edit' => 'Edytuj publikację',
     'delete' => 'Usuń podcast',
     'see_episodes' => 'Zobacz odcinki',
     'see_contributors' => 'Zobacz kontrybutorów',
     'go_to_page' => 'Idź do strony',
     'latest_episodes' => 'Najnowsze odcinki',
     'see_all_episodes' => 'Zobacz wszystkie odcinki',
-    'draft' => 'Draft',
+    'draft' => 'Wersja robocza',
     'messages' => [
-        'createSuccess' => 'Podcast successfully created!',
+        'createSuccess' => 'Podcast został pomyślnie utworzony!',
         'editSuccess' => 'Podcast został pomyślnie zaktualizowany!',
         'importSuccess' => 'Podcast został pomyślnie zaimportowany!',
-        'deleteSuccess' => 'Podcast @{podcast_handle} successfully deleted!',
-        'deletePodcastMediaError' => 'Failed to delete podcast {type, select,
-            cover {cover}
-            banner {banner}
-            other {media}
-        }.',
-        'deleteEpisodeMediaError' => 'Failed to delete podcast episode {episode_slug} {type, select,
-            transcript {transcript}
-            chapters {chapters}
-            image {cover}
+        'deleteSuccess' => 'Podcast @{podcast_handle} został pomyślnie usunięty!',
+        'deletePodcastMediaError' => 'Nie udało się usunąć {type, select,
+            cover {okładki}
+            banner {baneru}
+            other {mediów}
+        } podcastu.',
+        'deleteEpisodeMediaError' => 'Nie udało się usunąć {episode_slug} {type, select,
+            transcript {transkrypcji}
+            chapters {rozdziału}
+            image {okładki}
             audio {audio}
-            other {media}
-        }.',
-        'deletePodcastMediaFolderError' => 'Failed to delete podcast media folder {folder_path}. You may manually remove it from your disk.',
+            other {mediów}
+        } odcinka.',
+        'deletePodcastMediaFolderError' => 'Nie udało się usunąć folderu podcast {folder_path}. Możesz go ręcznie usunąć ze swojego dysku.',
         'podcastFeedUpdateSuccess' => 'Successful update: {number_of_new_episodes, plural,
             one {# episode was}
             other {# episodes were}
         } added to the podcast!',
-        'podcastFeedUpToDate' => 'Podcast is already up to date.',
+        'podcastFeedUpToDate' => 'Podcast jest już aktualny.',
         'podcastNotImported' => 'Podcast could not be updated as it was not imported.',
         'publishError' => 'This podcast is either already published or scheduled for publication.',
         'publishEditError' => 'This podcast is not scheduled for publication.',

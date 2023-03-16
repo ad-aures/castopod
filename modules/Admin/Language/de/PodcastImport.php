@@ -20,9 +20,9 @@ return [
     'advanced_params_section_title' => 'Erweiterte Parameter',
     'advanced_params_section_subtitle' =>
         'Behalten Sie die Standardwerte, wenn Sie keine Ahnung haben, wofür die Felder sind.',
-    'slug_field' => 'Feld zum Berechnen der Episoden-URL (epiode slug)',
+    'slug_field' => 'Feld zum Berechnen der Episoden-URL (episode slug)',
     'description_field' =>
-        'Quellfeld für Episodenbeschreibung verwendet / Notizen anzeigen',
+        'Dieses Feld wird für die Episodenbeschreibung und Shownotes verwendet',
     'force_renumber' => 'Erzwinge Neu-Nummerierung der Folgen',
     'force_renumber_hint' =>
         'Verwende dies, wenn dein Podcast keine Episodennummern hat, aber du diese während des Imports setzen möchtest.',
@@ -30,7 +30,7 @@ return [
     'season_number_hint' =>
         'Benutze dies, wenn dein Podcast keine Staffelnummer hat, aber du eine beim Import setzen möchtest. Lasse es andernfalls leer.',
     'max_episodes' => 'Maximale Anzahl der zu importierenden Episoden',
-    'max_episodes_hint' => 'Leer lassen um alle Episoden zu importieren',
+    'max_episodes_hint' => 'Leer lassen, um alle Episoden zu importieren',
     'lock_import' =>
         'Dieser Feed ist geschützt. Du kannst ihn nicht importieren. Wenn du der Besitzer bist, entferne den Schutz auf der Ursprungsplattform.',
     'submit' => 'Podcast importieren',

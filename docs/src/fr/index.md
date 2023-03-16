@@ -44,7 +44,7 @@ petite taille.
   - 🔗 &nbsp;Liens de financement
   - 📲 &nbsp;publicité “listen-to-click”
   - 🤝 &nbsp;value4value / WebMonetization
-  - 💎 &nbsp;Premium podcasts
+  - 💎 &nbsp;Podcasts premium
 - 📡&nbsp;Publiez vos épisodes partout avec RSS :
   - 📱 &nbsp;Sur tous les index et toutes les applications : Podcast Index,
     Podcasts Apple, Spotify, Google Podcasts, Deezer, Podcast Addict, Podfriend…
@@ -252,9 +252,9 @@ Merci à toutes ces personnes merveilleuses
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-This project follows the
-[all-contributors](https://github.com/all-contributors/all-contributors)
-specification. Contributions of any kind welcome!
+Ce projet suit la spécification
+[all-contributors](https://github.com/all-contributors/all-contributors) .
+Toutes les contributions sont bienvenues !
 
 ## Contact
 
@@ -287,9 +287,9 @@ parrains. Si vous souhaitez aider, n'hésitez pas à
 
 ## Licence
 
-[GNU Affero General Public License v3.0](https://choosealicense.com/licenses/agpl-3.0/)
+[Licence publique générale GNU Affero v3](https://choosealicense.com/licenses/agpl-3.0/)
 
-Copyright © 2020-present, [Ad Aures](https://adaures.com/).
+Copyright © 2020-aujourd'hui, [Ad Aures](https://adaures.com/).
 https://img.shields.io/gitlab/v/release/2?color=brightgreen&gitlab_url=https%3A%2F%2Fcode.castopod.org%2F&include_prereleases&label=release
 https://img.shields.io/github/license/ad-aures/castopod?color=blue
 https://img.shields.io/badge/contributions-welcome-brightgreen.svg

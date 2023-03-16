@@ -22,6 +22,8 @@ Castopod 的安装非常简单。 你能在大多数兼容的 PHP-MySQL 的服�
 - PHP 8.1 或更高版本
 - MySQL 5.7 或更高版本与 MariaDB 10.2 或更高版本
 - HTTPS 支持
+- An [ntp-synced clock](https://wiki.debian.org/NTP) to validate federation's
+  incoming requests
 
 ### PHP 8.1 或更高版本
 
@@ -152,14 +154,45 @@ email.SMTPPass="你的邮件密码"
 | **`SMTPPort`**   | number               | `25`         |
 | **`SMTPCrypto`** | [`"tls"` or `"ssl"`] | `"tls"`      |
 
+### S3
+
+By default, files are stored in the `public/media` folder using the filesystem.
+
+If you prefer storing your media files on an S3 compatible storage, you may
+specify it in your `.env`:
+
+```ini
+# […]
+
+media.fileManager="s3"
+media.s3.endpoint="your_s3_host"
+media.s3.key="your_s3_key"
+media.s3.secret="your_s3_secret"
+media.s3.region="your_s3_region"
+```
+
+#### S3 config options
+
+| Variable name             | Type    | Default     |
+| ------------------------- | ------- | ----------- |
+| **`endpoint`**            | string  | `undefined` |
+| **`key`**                 | string  | `undefined` |
+| **`secret`**              | string  | `undefined` |
+| **`region`**              | string  | `undefined` |
+| **`bucket`**              | string  | `castopod`  |
+| **`protocol`**            | number  | `undefined` |
+| **`path_style_endpoint`** | boolean | `false`     |
+
 ## 社区套餐
 
-如果你不想手动安装 Castopod，可以使用一个 由开源社区创建和维护的软件包。
+If you don't want to bother with installing Castopod manually, you may use one
+of the packages created and maintained by the open-source community.
 
-### 使用 YunoHost 安装
+### Install with YunoHost
 
-[YunoHost](https://yunohost.org/) 是一个基于 Debian GNU/Linux 的发行版，由免费和
-开源软件包组成。 它可以为你解决自托管的困难。
+[YunoHost](https://yunohost.org/) is a distribution based on Debian GNU/Linux
+made up of free and open-source software packages. It manages the hardships of
+self-hosting for you.
 
 <div class="flex flex-wrap items-center gap-4">
 

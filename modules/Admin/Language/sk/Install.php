@@ -13,8 +13,8 @@ return [
     'manual_config_subtitle' =>
         'Create a `.env` file with your settings and refresh the page to continue installation.',
     'form' => [
-        'instance_config' => 'Instance configuration',
-        'hostname' => 'Hostname',
+        'instance_config' => 'Nastavenie inštancie',
+        'hostname' => 'Názov hostiteľa',
         'media_base_url' => 'Media base URL',
         'media_base_url_hint' =>
             'If you use a CDN and/or an external analytics service, you may set them here.',
@@ -24,17 +24,17 @@ return [
         'auth_gateway' => 'Auth gateway',
         'auth_gateway_hint' =>
             'The route to access the authentication pages (eg. https://example.com/cp-auth). It is set by default as cp-auth, we recommend you change it for security reasons.',
-        'database_config' => 'Database configuration',
+        'database_config' => 'Nastavenie databázy',
         'database_config_hint' =>
             'Castopod needs to connect to your MySQL (or MariaDB) database. If you do not have these required info, please contact your server administrator.',
         'db_hostname' => 'Database hostname',
-        'db_name' => 'Database name',
-        'db_username' => 'Database username',
-        'db_password' => 'Database password',
-        'db_prefix' => 'Database prefix',
+        'db_name' => 'Názov databázy',
+        'db_username' => 'Prihlasovacie meno do databázy',
+        'db_password' => 'Heslo databázy',
+        'db_prefix' => 'Prefix databázy',
         'db_prefix_hint' =>
             "The prefix of the Castopod table names, leave as is if you don't know what it means.",
-        'cache_config' => 'Cache configuration',
+        'cache_config' => 'Nastavenie cache',
         'cache_config_hint' =>
             'Choose your preferred cache handler. Leave it as the default value if you have no clue what it means.',
         'cache_handler' => 'Obslužný mechanizmus vyrovnávacej pamäte',

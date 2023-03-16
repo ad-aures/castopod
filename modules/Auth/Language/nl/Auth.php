@@ -11,7 +11,7 @@ declare(strict_types=1);
 return [
     'instance_groups' => [
         'owner' => [
-            'title' => 'Instance Owner',
+            'title' => 'Instance eigenaar',
             'description' => 'De Castopod eigenaar.',
         ],
         'superadmin' => [
@@ -31,12 +31,12 @@ return [
         'admin.access' => 'Kan toegang krijgen tot de beheeromgeving van Castopod.',
         'admin.settings' => 'Kan toegang krijgen tot de instellingen van Castopod.',
         'users.manage' => 'Kan Castopod-gebruikers beheren.',
-        'persons.manage' => 'Can manage persons.',
+        'persons.manage' => 'Kan personen beheren.',
         'pages.manage' => 'Kan pagina\'s beheren.',
         'podcasts.view' => 'Kan alle podcasts bekijken.',
         'podcasts.create' => 'Kan nieuwe podcast aanmaken.',
         'podcasts.import' => 'Kan podcasts importeren.',
-        'fediverse.manage-blocks' => 'Can block fediverse actors/domains from interacting with Castopod.',
+        'fediverse.manage-blocks' => 'Kan fediverse actors/domains blokkeren voor interactie met Castopod.',
     ],
     'podcast_groups' => [
         'owner' => [
@@ -65,21 +65,21 @@ return [
         'edit' => 'Kan podcast #{id} wijzigen.',
         'delete' => 'Kan podcast #{id} verwijderen.',
         'manage-import' => 'Kan de geïmporteerde podcast #{id} synchroniseren.',
-        'manage-persons' => 'Can manage subscriptions of podcast #{id}.',
+        'manage-persons' => 'Kan abonnementen van podcast #{id} beheren.',
         'manage-subscriptions' => 'Kan abonnementen van podcast #{id} beheren.',
         'manage-contributors' => 'Kan bijdragers van podcast #{id} beheren.',
-        'manage-platforms' => 'Can set/remove platform links of podcast #{id}.',
+        'manage-platforms' => 'Kan platform links van podcast #{id} instellen of verwijderen.',
         'manage-publications' => 'Kan podcast #{id} publiceren.',
         'manage-notifications' => 'Kan meldingen bekijken en markeren als gelezen voor podcast #{id}.',
-        'interact-as' => 'Can interact as the podcast #{id} to favourite, share or reply to posts.',
+        'interact-as' => 'Kan als podcast #{id} handelen om te favorieten, te delen of te reageren op berichten.',
         'episodes.view' => 'Kan dashboard en analyses van de afleveringen van podcast #{id} zien.',
         'episodes.create' => 'Kan afleveringen voor podcast #{id} aanmaken.',
         'episodes.edit' => 'Kan afleveringen van podcast #{id} wijzigen.',
         'episodes.delete' => 'Kan afleveringen van podcast #{id} verwijderen.',
-        'episodes.manage-persons' => 'Can manage episode persons of podcast #{id}.',
+        'episodes.manage-persons' => 'Kan aflevering personen van podcast #{id} beheren.',
         'episodes.manage-clips' => 'Kan videoclips of soundbites van podcast #{id} beheren.',
         'episodes.manage-publications' => 'Kan afleveringen en berichten van podcast #{id} publiceren/depubliceren.',
-        'episodes.manage-comments' => 'Can create/remove episode comments of podcast #{id}.',
+        'episodes.manage-comments' => 'Kan opmerkingen van aflevering van podcast van #{id} maken of verwijderen.',
     ],
 
     // missing keys

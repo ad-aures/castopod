@@ -16,7 +16,7 @@ return [
         'title' => 'Prati {actorDisplayName}',
         'subtitle' => 'Pratićete:',
         'accountNotFound' => 'Nalog ne može biti pronađen.',
-        'remoteFollowNotAllowed' => 'Seems like the account server does not allow remote follows…',
+        'remoteFollowNotAllowed' => 'Čini se da server naloga ne dozvoljava daljinsko praćenje…',
         'submit' => 'Nastavite',
     ],
     'favourite' => [

@@ -29,15 +29,15 @@ return [
         'submit_edit' => 'Atualizar cargo',
     ],
     'delete_form' => [
-        'title' => 'Remove {contributor}',
+        'title' => 'Remover {contributor}',
         'disclaimer' =>
-            'You are about to remove {contributor} from contributors. They will not be able to access "{podcastTitle}" anymore.',
-        'understand' => 'I understand, I want to remove {contributor} from "{podcastTitle}"',
-        'submit' => 'Remove',
+            'Você está prestes a remover {contributor} dos colaboradores. Eles não poderão mais acessar "{podcastTitle}".',
+        'understand' => 'Eu entendo, eu desejo remover {contributor} de "{podcastTitle}"',
+        'submit' => 'Remover',
     ],
     'messages' => [
-        'editSuccess' => 'Role successfully changed!',
-        'editOwnerError' => "You can't edit the podcast owner!",
+        'editSuccess' => 'Cargo alterado com sucesso!',
+        'editOwnerError' => "Você não pode editar o dono do podcast!",
         'removeOwnerError' => "Você não pode remover o dono do podcast!",
         'removeSuccess' =>
             'Você removeu {username} com sucesso de {podcastTitle}',

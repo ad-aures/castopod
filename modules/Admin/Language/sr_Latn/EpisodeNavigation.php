@@ -9,15 +9,15 @@ declare(strict_types=1);
  */
 
 return [
-    'go_to_page' => 'View episode page',
-    'dashboard' => 'Episode dashboard',
-    'episode-view' => 'Home',
-    'episode-edit' => 'Edit episode',
-    'episode-persons-manage' => 'Manage persons',
-    'embed-add' => 'Embeddable player',
-    'clips' => 'Clips',
-    'video-clips-list' => 'Video clips',
-    'video-clips-create' => 'New video clip',
-    'soundbites-list' => 'Soundbites',
-    'soundbites-create' => 'New soundbite',
+    'go_to_page' => 'Pogledaj stranicu epizode',
+    'dashboard' => 'Kontrolna tabla epizode',
+    'episode-view' => 'Početna',
+    'episode-edit' => 'Uredi epizodu',
+    'episode-persons-manage' => 'Uredi osobe',
+    'embed-add' => 'Embedovan plejer',
+    'clips' => 'Isečci',
+    'video-clips-list' => 'Video isečci',
+    'video-clips-create' => 'Novi video isečak',
+    'soundbites-list' => 'Zvučni isečci',
+    'soundbites-create' => 'Novi zvučni isečak',
 ];

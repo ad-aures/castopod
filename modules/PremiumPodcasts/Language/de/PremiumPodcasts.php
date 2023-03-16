@@ -10,8 +10,8 @@ declare(strict_types=1);
 
 return [
     'podcast_is_premium' => 'Podcast enthält Premium-Episoden',
-    'episode_is_premium' => 'Diese Episode ist Premium, nur verfügbar für Premium-Abonnenten',
-    'unlock_episode' => 'Diese Episode ist nur für Premium-Abonnenten. Klicken Sie hier zum entsperren!',
+    'episode_is_premium' => 'Diese Episode ist nur verfügbar für Premium-Abonnenten',
+    'unlock_episode' => 'Diese Episode ist nur für Premium-Abonnenten. Klicke, um sie freizuschalten!',
     'banner_unlock' => 'Dieser Podcast enthält Premium-Episoden, nur verfügbar für Premium-Abonnenten.',
     'banner_lock' => 'Der Podcast ist freigeschaltet, viel Spaß mit den Premium-Episoden!',
     'subscribe' => 'Abonnieren',

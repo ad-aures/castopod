@@ -55,6 +55,7 @@ return [
         }',
         'episode' => 'الحلقة',
         'visibility' => 'الظهور',
+        'downloads' => 'Downloads',
         'comments' => 'التعليقات',
         'actions' => 'الإجراءات',
     ],

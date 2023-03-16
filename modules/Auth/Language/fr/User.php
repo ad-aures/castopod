@@ -9,7 +9,7 @@ declare(strict_types=1);
  */
 
 return [
-    'edit_role' => "Edit {username}'s role",
+    'edit_role' => "Modifier le rôle de {username}",
     'ban' => 'Bloquer',
     'unban' => 'Débloquer',
     'delete' => 'Supprimer',
@@ -18,7 +18,7 @@ return [
     'all_users' => 'Tous les utilisateurs',
     'list' => [
         'user' => 'Utilisateurs',
-        'role' => 'Role',
+        'role' => 'Rôle',
         'banned' => 'Bloqué ?',
     ],
     'form' => [
@@ -26,7 +26,7 @@ return [
         'username' => 'Identifiant',
         'password' => 'Mot de passe',
         'new_password' => 'Nouveau mot de passe',
-        'role' => 'Role',
+        'role' => 'Rôle',
         'roles' => 'Rôles',
         'permissions' => 'Permissions',
         'submit_create' => 'Créer un utilisateur',
@@ -34,11 +34,11 @@ return [
         'submit_password_change' => 'Valider !',
     ],
     'delete_form' => [
-        'title' => 'Delete {user}',
+        'title' => 'Supprimer {user}',
         'disclaimer' =>
-            "You are about to delete {user} permanently. They will not be able to access the admin area anymore.",
-        'understand' => 'I understand, I want to delete {user} permanently',
-        'submit' => 'Delete',
+            "Vous êtes sur le point de supprimer {user} définitivement. Ils ne pourront plus accéder à la zone d'administration.",
+        'understand' => 'Je comprends, je veux supprimer {user} définitivement',
+        'submit' => 'Supprimer',
     ],
     'messages' => [
         'createSuccess' =>
@@ -52,7 +52,7 @@ return [
         'banSuperAdminError' =>
             '{username} est un super-utilisateur, on ne bloque pas un super-utilisateur comme ça…',
         'deleteOwnerError' =>
-            '{username} is the instance owner, one does not simply delete the owner…',
+            '{username} est le propriétaire de l\'instance, on ne supprime pas le propriétaire…',
         'deleteSuperAdminError' =>
             '{username} est un super-utilisateur, on ne supprime pas un super-utilisateur comme ça…',
         'deleteSuccess' => '{username} a été supprimé.',

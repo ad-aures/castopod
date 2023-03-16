@@ -9,7 +9,7 @@ declare(strict_types=1);
  */
 
 return [
-    'edit_role' => "Edit {username}'s role",
+    'edit_role' => "Editeu el rol de {username}",
     'ban' => 'Bandejar',
     'unban' => 'Re-admetre',
     'delete' => 'Eliminar',
@@ -18,7 +18,7 @@ return [
     'all_users' => 'Tots els usuaris',
     'list' => [
         'user' => 'Usuari',
-        'role' => 'Role',
+        'role' => 'Rol',
         'banned' => 'Bandejat?',
     ],
     'form' => [
@@ -26,7 +26,7 @@ return [
         'username' => 'Nom de l\'usuari',
         'password' => 'Contrasenya',
         'new_password' => 'Nova contrasenya',
-        'role' => 'Role',
+        'role' => 'Rol',
         'roles' => 'Rols',
         'permissions' => 'Permisos',
         'submit_create' => 'Crea un usuari',
@@ -34,11 +34,11 @@ return [
         'submit_password_change' => 'Canviat!',
     ],
     'delete_form' => [
-        'title' => 'Delete {user}',
+        'title' => 'Suprimeix {user}',
         'disclaimer' =>
-            "You are about to delete {user} permanently. They will not be able to access the admin area anymore.",
-        'understand' => 'I understand, I want to delete {user} permanently',
-        'submit' => 'Delete',
+            "Esteu a punt de suprimir {user} permanentment. Ja no podrà accedir a l'àrea d'administració.",
+        'understand' => 'Entenc, vull suprimir {user} permanentment',
+        'submit' => 'Suprimeix',
     ],
     'messages' => [
         'createSuccess' =>
@@ -52,7 +52,7 @@ return [
         'banSuperAdminError' =>
             '{username} és un superadministrador, hom simplement no bandeja a un superadministrador...',
         'deleteOwnerError' =>
-            '{username} is the instance owner, one does not simply delete the owner…',
+            '{username} és el propietari de la instància, un no pot suprimir senzillament el propietari…',
         'deleteSuperAdminError' =>
             '{username} és un superadministrador, hom simplement no elimina a un superadministrador...',
         'deleteSuccess' => '{username} ha estat eliminat.',

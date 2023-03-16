@@ -55,6 +55,7 @@ return [
         }',
         'episode' => 'Aflevering',
         'visibility' => 'Zichtbaarheid',
+        'downloads' => 'Downloads',
         'comments' => 'Reacties',
         'actions' => 'Acties',
     ],

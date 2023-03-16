@@ -55,6 +55,7 @@ return [
         }',
         'episode' => 'Episode',
         'visibility' => 'Synlegheit',
+        'downloads' => 'Downloads',
         'comments' => 'Kommentarar',
         'actions' => 'Handlingar',
     ],

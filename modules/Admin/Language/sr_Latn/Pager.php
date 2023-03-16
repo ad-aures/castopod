@@ -9,13 +9,13 @@ declare(strict_types=1);
  */
 
 return [
-    'pageNavigation' => 'Page navigation',
-    'first' => 'First',
-    'previous' => 'Previous',
-    'next' => 'Next',
-    'last' => 'Last',
-    'older' => 'Older',
-    'newer' => 'Newer',
+    'pageNavigation' => 'Navigacija po stranicama',
+    'first' => 'Prva',
+    'previous' => 'Prеthodna',
+    'next' => 'Sledeća',
+    'last' => 'Poslednja',
+    'older' => 'Starije',
+    'newer' => 'Novije',
     'invalidTemplate' => '{0} is not a valid Pager template.',
     'invalidPaginationGroup' => '{0} is not a valid Pagination group.',
 ];

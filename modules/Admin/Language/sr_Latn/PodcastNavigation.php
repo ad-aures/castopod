@@ -32,7 +32,7 @@ return [
     'contributor-list' => 'All contributors',
     'contributor-add' => 'Add contributor',
     'platforms' => 'External platforms',
-    'platforms-podcasting' => 'Podcasting',
-    'platforms-social' => 'Social networks',
-    'platforms-funding' => 'Funding',
+    'platforms-podcasting' => 'Podkasting',
+    'platforms-social' => 'Društvene mreže',
+    'platforms-funding' => 'Finansiranje',
 ];

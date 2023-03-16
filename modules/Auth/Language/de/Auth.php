@@ -36,7 +36,7 @@ return [
         'podcasts.view' => 'Kann alle Podcasts einsehen.',
         'podcasts.create' => 'Kann neue Podcasts erstellen.',
         'podcasts.import' => 'Kann Podcasts importieren.',
-        'fediverse.manage-blocks' => 'Can block fediverse actors/domains from interacting with Castopod.',
+        'fediverse.manage-blocks' => 'Kann föderierte Nutzer/Domains davon abhalten, mit Castopod zu interagieren.',
     ],
     'podcast_groups' => [
         'owner' => [
@@ -71,14 +71,14 @@ return [
         'manage-platforms' => 'Kann Plattform-Links des Podcasts #{id} verwalten.',
         'manage-publications' => 'Kann Podcast #{id} veröffentlichen.',
         'manage-notifications' => 'Kann Benachrichtigungen des Podcasts #{id} einsehen und als gelesen markieren.',
-        'interact-as' => 'Can interact as the podcast #{id} to favourite, share or reply to posts.',
+        'interact-as' => 'Kann als Podcast #{id} interagieren, um Beiträge zu favorisieren, zu teilen oder diese zu beantworten.',
         'episodes.view' => 'Kann Dashboards und Analysen von Episoden des Podcasts #{id} einsehen.',
         'episodes.create' => 'Kann Folgen für Podcast #{id} erstellen.',
         'episodes.edit' => 'Kann Folgen von Podcast #{id} bearbeiten.',
         'episodes.delete' => 'Kann Folgen von Podcast #{id} löschen.',
         'episodes.manage-persons' => 'Kann Personen von Episoden des Podcasts #{id} verwalten.',
         'episodes.manage-clips' => 'Kann Videoclips und Soundbites des Podcasts #{id} verwalten.',
-        'episodes.manage-publications' => 'Can publish/unpublish episodes and posts of podcast #{id}.',
+        'episodes.manage-publications' => 'Kann Episoden und Posts von Podcast #{id} veröffentlichen/zurückziehen.',
         'episodes.manage-comments' => 'Kann Kommentare von Folgen des Podcasts #{id} erstellen und löschen.',
     ],
 
@@ -90,5 +90,5 @@ return [
 
     // Welcome email
     'welcomeSubject' => 'Sie wurden zu {siteName} eingeladen',
-    'emailWelcomeMailBody' => 'An account was created for you on {domain}, click on the login link below to set your password. The link is valid for {numberOfHours} hours after this email was sent.',
+    'emailWelcomeMailBody' => 'Ein Account auf {domain} wurde für Sie angelegt, klicken Sie auf den unten stehenden Login-Link, um Ihr Passwort festzulegen. Der Link ist mit Versand der Mail für {numberOfHours} gültig.',
 ];

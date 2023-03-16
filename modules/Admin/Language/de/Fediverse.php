@@ -12,7 +12,7 @@ return [
     'messages' => [
         'actorNotFound' => 'Das Konto konnte nicht gefunden werden!',
         'blockActorSuccess' => '{actor} wurde blockiert!',
-        'unblockActorSuccess' => 'Darsteller wurde freigegeben!',
+        'unblockActorSuccess' => 'Benutzer wurde entsperrt!',
         'blockDomainSuccess' => '{domain} wurde blockiert!',
         'unblockDomainSuccess' => '{domain} wurde freigegeben!',
     ],

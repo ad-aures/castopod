@@ -37,4 +37,5 @@ return [
     'podcast_by_bandwidth' => '每日使用带宽(MB)',
     'total_storage_by_month' => '每月存储量 (MB)',
     'total_bandwidth_by_month' => '每月使用带宽(MB)',
+    'total_bandwidth_by_month_limit' => 'Limited to {totalBandwidth} per month',
 ];

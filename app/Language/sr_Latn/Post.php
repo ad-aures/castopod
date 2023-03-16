@@ -22,16 +22,16 @@ return [
         'submit_reply' => 'Odgovori',
     ],
     'favourites' => '{numberOfFavourites, plural,
-        one {# favourite}
-        other {# favourites}
+        one {# omiljen}
+        other {# omiljenih}
     }',
     'reblogs' => '{numberOfReblogs, plural,
-        one {# share}
-        other {# shares}
+        one {# deljenje}
+        other {# deljenja}
     }',
     'replies' => '{numberOfReplies, plural,
-        one {# reply}
-        other {# replies}
+        one {# odgovor}
+        other {# odgovora}
     }',
     'expand' => 'Proširi objavu',
     'block_actor' => 'Blokiraj korisnika @{actorUsername}',

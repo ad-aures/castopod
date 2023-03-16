@@ -21,10 +21,10 @@ return [
             'Wenn du einen CDN und/oder einen externen Analysedienst verwendest, kannst du diesen hier festlegen.',
         'admin_gateway' => 'Admin-Gateway',
         'admin_gateway_hint' =>
-            'Die Route zum Zugriff auf den Admin-Bereich (z.B. https://example.com/cp-admin), wird standardmäßig als "cp-admin" festgelegt. Wir empfehlen, sie aus Sicherheitsgründen zu ändern.',
+            'Der Pfad zum Zugriff auf den Admin-Bereich (z.B. https://example.com/cp-admin), wird standardmäßig als "cp-admin" festgelegt. Wir empfehlen, sie aus Sicherheitsgründen zu ändern.',
         'auth_gateway' => 'Auth-Gateway',
         'auth_gateway_hint' =>
-            'Die Route zum Zugriff auf die Authentifizierungsseiten (z. B. https://example.com/cp-auth), wird standardmäßig als "cp-auth" gesetzt. Wir empfehlen, sie aus Sicherheitsgründen zu ändern.',
+            'Der Pfad zum Zugriff auf die Authentifizierungsseiten (z. B. https://example.com/cp-auth), wird standardmäßig als "cp-auth" gesetzt. Wir empfehlen, sie aus Sicherheitsgründen zu ändern.',
         'database_config' => 'Datenbankkonfiguration',
         'database_config_hint' =>
             'Castopod muss sich mit der MySQL-Datenbank (oder MariaDB) verbinden. Wenn diese erforderlichen Informationen nicht verfügbar sind, wende dich bitte an deinen Serveradministrator.',

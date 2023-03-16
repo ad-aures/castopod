@@ -11,7 +11,7 @@ declare(strict_types=1);
 return [
     'feed' => 'RSS-Feed',
     'season' => 'Staffel {seasonNumber}',
-    'list_of_episodes_year' => '{year} Folgen ({episodeCount})',
+    'list_of_episodes_year' => '({episodeCount}) Folgen in {year}',
     'list_of_episodes_season' =>
         'Staffel {seasonNumber} Folgen ({episodeCount})',
     'no_episode' => 'Keine Folge gefunden',

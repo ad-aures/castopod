@@ -10,8 +10,8 @@ declare(strict_types=1);
 
 return [
     'messages' => [
-        'actorNotFound' => 'The account could not be found!',
-        'blockActorSuccess' => '{actor} has been blocked!',
+        'actorNotFound' => 'Nalog ne može biti pronađen!',
+        'blockActorSuccess' => '{actor} je blokiran!',
         'unblockActorSuccess' => 'Actor has been unblocked!',
         'blockDomainSuccess' => '{domain} has been blocked!',
         'unblockDomainSuccess' => '{domain} has been unblocked!',

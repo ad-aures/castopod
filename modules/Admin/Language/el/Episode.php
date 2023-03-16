@@ -55,6 +55,7 @@ return [
         }',
         'episode' => 'Επεισόδιο',
         'visibility' => 'Ορατότητα',
+        'downloads' => 'Downloads',
         'comments' => 'Σχόλια',
         'actions' => 'Ενέργειες',
     ],

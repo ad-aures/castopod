@@ -9,10 +9,10 @@ Après avoir installé Castopod, vous pouvez mettre à jour votre instance vers 
 dernière version afin de profiter des dernières fonctionnalités ✨, des
 corrections de bugs 🐛 et des améliorations de performance ⚡.
 
-## Update instructions
+## Instructions de mise à jour
 
-0. ⚠️ Before any update, we highly recommend you backup your Castopod files and
-   database.
+0. ⚠️ Avant toute mise à jour, nous vous recommandons fortement de sauvegarder
+   vos fichiers Castopod et la base de données .
 
    - cf.
      [Should I make a backup before updating?](#should-i-make-a-backup-before-updating)
@@ -31,15 +31,16 @@ corrections de bugs 🐛 et des améliorations de performance ⚡.
    - Note that you can also download the latest package from
      [castopod.org](https://castopod.org/)
 
-3. On your server:
+3. Sur votre serveur :
 
-   - Remove all files except `.env` and `public/media`
-   - Copy the new files from the downloaded package into your server
+   - Supprimer tous les fichiers sauf `.env` et `public/media`
+   - Copiez les nouveaux fichiers du paquet téléchargé sur votre serveur
 
      ::: info Note
 
-     You may need to reset files permissions as during the install process.
-     Check [Security Concerns](./security.md).
+     Vous devrez peut-être re-définir les autorisations de fichiers comme
+     effectué durant le processus d'installation. Check
+     [Security Concerns](./security.md).
 
      :::
 
@@ -52,19 +53,20 @@ corrections de bugs 🐛 et des améliorations de performance ⚡.
 
 5. Clear your cache from your `Castopod Admin` > `Settings` > `general` >
    `Housekeeping`
-6. ✨ Enjoy your fresh instance, you're all done!
+6. ✨Profitez de votre nouvelle instance, vous avez terminé !
 
 ::: info Note
 
-Releases may come with additional update instructions (see
-[releases page](https://code.castopod.org/adaures/castopod/-/releases)).
+Les versions peuvent être accompagnées d'instructions de mise à jour
+supplémentaires (cf. la
+[page des notes de versions](https://code.castopod.org/adaures/castopod/-/releases)).
 
-- cf.
-  [I haven't updated my instance in a long time… What should I do?](#i-havent-updated-my-instance-in-a-long-time-what-should-i-do)
+- Je n'ai pas mis à jour mon instance depuis longtemps… Que devrais-je faire
+  ?</a>
 
 :::
 
-## Fully Automated updates
+## Mises à jour entièrement automatisées
 
 > Prochainement... 👀
 
@@ -72,23 +74,23 @@ Releases may come with additional update instructions (see
 
 ### Où puis-je trouver ma version de Castopod ?
 
-Go to your Castopod admin panel, the version is displayed on the bottom left
-corner.
+Allez dans votre panneau d'administration de Castopod, la version s'affiche en
+bas à gauche.
 
-Alternatively, you can find the version in the `app > Config > Constants.php`
-file.
+Vous pouvez également trouver la version dans l'application
+`> Configuration > Constantes.php` dossier.
 
 ### [Je n'ai pas mis à jour mon instance depuis longtemps… Que devrais-je faire ?](#i-havent-updated-my-instance-in-a-long-time-what-should-i-do)
 
-No problem! Just get the latest release as described above. Only, when going
-through the release instructions (4), perform them sequentially, from the oldest
-to the newest.
+Pas de problème ! Il suffit d'obtenir la dernière version comme décrit
+ci-dessus. Lorsque vous exécutez les instructions de mise à jour (4), lancez-les
+séquentiellement, de la plus ancienne à la plus récente.
 
 > Vous devriez sauvegarder votre instance selon la date de votre dernière mise à
 > jour de Castopod.
 
-For example, if you're on `v1.0.0-alpha.42` and would like to upgrade to
-`v1.0.0-beta.1`:
+Par exemple, si vous êtes en `v1.0.0-alpha.42` et souhaitez mettre à jour vers
+la `v1.0.0-beta.1` :
 
 0. (fortement recommandé) Faites une sauvegarde de vos fichiers et de votre base
    de données.
@@ -103,7 +105,8 @@ For example, if you're on `v1.0.0-alpha.42` and would like to upgrade to
 
 ### Dois-je faire une sauvegarde avant de mettre à jour ?
 
-We advise you do, so you don't lose everything if anything goes wrong!
+Nous vous conseillons de le faire, afin de ne pas tout perdre si quelque chose
+se passait mal !
 
-More generally, we advise you make regular backups of your Castopod files and
-database to prevent you from losing it all…
+Plus généralement, nous vous conseillons de faire des sauvegardes régulières de
+vos fichiers Castopod et de votre base de données afin d'éviter de tout perdre…

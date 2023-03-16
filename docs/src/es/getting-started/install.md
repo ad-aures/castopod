@@ -23,6 +23,8 @@ Si prefieres usar Docker, puedes saltarte esto e ir directamente a la
 - PHP v8.1 o superior
 - MySQL versión 5.7 o superior o MariaDB versión 10.2 o superior
 - Soporte HTTPS
+- An [ntp-synced clock](https://wiki.debian.org/NTP) to validate federation's
+  incoming requests
 
 ### PHP v8.1 o superior
 
@@ -167,16 +169,45 @@ email.SMTPPass="your_smtp_password"
 | **`SMTPPort`**        | number               | `25`           |
 | **`SMTPCrypto`**      | [`"tls"` or `"ssl"`] | `"tls"`        |
 
+### S3
+
+By default, files are stored in the `public/media` folder using the filesystem.
+
+If you prefer storing your media files on an S3 compatible storage, you may
+specify it in your `.env`:
+
+```ini
+# […]
+
+media.fileManager="s3"
+media.s3.endpoint="your_s3_host"
+media.s3.key="your_s3_key"
+media.s3.secret="your_s3_secret"
+media.s3.region="your_s3_region"
+```
+
+#### S3 config options
+
+| Variable name             | Type    | Default     |
+| ------------------------- | ------- | ----------- |
+| **`endpoint`**            | string  | `undefined` |
+| **`key`**                 | string  | `undefined` |
+| **`secret`**              | string  | `undefined` |
+| **`region`**              | string  | `undefined` |
+| **`bucket`**              | string  | `castopod`  |
+| **`protocol`**            | number  | `undefined` |
+| **`path_style_endpoint`** | boolean | `false`     |
+
 ## Paquetes de la comunidad
 
-Si no quieres molestarte en instalar Castopod manualmente, puedes utilizar uno
-de los paquetes creados y mantenidos por la comunidad de código abierto.
+If you don't want to bother with installing Castopod manually, you may use one
+of the packages created and maintained by the open-source community.
 
-### Instalar con YunoHost
+### Install with YunoHost
 
-[YunoHost](https://yunohost.org/) es una distribución GNU/Linux basada en Debian
-compuesta por paquetes de software libre y de código abierto. Te ayuda a
-gestionar las partes difíciles de autoalojamiento.
+[YunoHost](https://yunohost.org/) is a distribution based on Debian GNU/Linux
+made up of free and open-source software packages. It manages the hardships of
+self-hosting for you.
 
 <div class="flex flex-wrap items-center gap-4">
 

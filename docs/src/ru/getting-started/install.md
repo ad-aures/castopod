@@ -22,6 +22,8 @@ If you prefer using Docker, you may skip this and go straight to the
 - PHP v8.1 or higher
 - MySQL version 5.7 or higher or MariaDB version 10.2 or higher
 - HTTPS support
+- An [ntp-synced clock](https://wiki.debian.org/NTP) to validate federation's
+  incoming requests
 
 ### PHP v8.1 or higher
 
@@ -161,6 +163,35 @@ email.SMTPPass="your_smtp_password"
 | **`SMTPPass`**   | string               | `undefined`  |
 | **`SMTPPort`**   | number               | `25`         |
 | **`SMTPCrypto`** | [`"tls"` or `"ssl"`] | `"tls"`      |
+
+### S3
+
+By default, files are stored in the `public/media` folder using the filesystem.
+
+If you prefer storing your media files on an S3 compatible storage, you may
+specify it in your `.env`:
+
+```ini
+# […]
+
+media.fileManager="s3"
+media.s3.endpoint="your_s3_host"
+media.s3.key="your_s3_key"
+media.s3.secret="your_s3_secret"
+media.s3.region="your_s3_region"
+```
+
+#### S3 config options
+
+| Variable name             | Type    | Default     |
+| ------------------------- | ------- | ----------- |
+| **`endpoint`**            | string  | `undefined` |
+| **`key`**                 | string  | `undefined` |
+| **`secret`**              | string  | `undefined` |
+| **`region`**              | string  | `undefined` |
+| **`bucket`**              | string  | `castopod`  |
+| **`protocol`**            | number  | `undefined` |
+| **`path_style_endpoint`** | boolean | `false`     |
 
 ## Community packages
 

@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 return [
     'your_handle' => 'Handle',
-    'your_handle_hint' => '@name@domain eingeben, womit Sie agieren möchten.',
+    'your_handle_hint' => '@name@domain eingeben, in deren Name Sie agieren möchten.',
     'follow' => [
         'label' => 'Folge',
         'title' => 'Folge {actorDisplayName}',
@@ -20,18 +20,18 @@ return [
         'submit' => 'Weiter zum Folgen',
     ],
     'favourite' => [
-        'title' => "{actorDisplayName}'s Beitrag favorisieren",
+        'title' => "Beitrag von {actorDisplayName} favorisieren",
         'subtitle' => 'Sie werden favorisieren:',
-        'submit' => 'Weiter zum Favorisieren',
+        'submit' => 'Zum Favorisieren fortfahren',
     ],
     'reblog' => [
-        'title' => "{actorDisplayName}'s Beitrag teilen",
+        'title' => "Den Beitrag von {actorDisplayName} teilen",
         'subtitle' => 'Sie werden teilen:',
         'submit' => 'Weiter zum Teilen',
     ],
     'reply' => [
-        'title' => "Auf {actorDisplayName}'s Beitrag antworten",
-        'subtitle' => 'Sie werden antworten auf:',
+        'title' => "Auf den Beitrag von {actorDisplayName} antworten",
+        'subtitle' => 'Sie antworten auf:',
         'submit' => 'Weiter zum Antworten',
     ],
 ];

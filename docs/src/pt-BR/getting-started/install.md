@@ -11,10 +11,10 @@ com PHP-MySQL.
 
 ::: dica Nota
 
-We've released official Docker images for Castopod!
+Nós lançamos imagens Docker oficiais para Castopod!
 
-If you prefer using Docker, you may skip this and go straight to the
-[docker documentation](./docker.md) for Castopod.
+Se você prefere usar o Docker, você pode pular isso e ir direto para a
+[documentação docker](./docker.md) de Castopod.
 
 :::
 
@@ -23,10 +23,12 @@ If you prefer using Docker, you may skip this and go straight to the
 - PHP v8.1 ou superior
 - MySQL versão 5.7 ou superior ou MariaDB versão 10.2 ou superior
 - Suporte a HTTPS
+- An [ntp-synced clock](https://wiki.debian.org/NTP) to validate federation's
+  incoming requests
 
 ### PHP v8.1 ou superior
 
-PHP version 8.1 or higher is required, with the following extensions installed:
+É necessário PHP versão 8.1 ou superior, com as seguintes extensões instaladas:
 
 - [intl](https://php.net/manual/en/intl.requirements.php)
 - [libcurl](https://php.net/manual/en/curl.requirements.php)
@@ -35,7 +37,8 @@ PHP version 8.1 or higher is required, with the following extensions installed:
   **PNG** e bibliotecas **WEBP**.
 - [exif](https://www.php.net/manual/en/exif.installation.php)
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+Além disso, certifique-se de que as seguintes extensões estejam habilitadas em
+seu PHP:
 
 - json (habilitado por padrão - não desativar)
 - xml (habilitado por padrão - não desativar)
@@ -45,17 +48,17 @@ Additionally, make sure that the following extensions are enabled in your PHP:
 
 > Recomendamos usar o [MariaDB](https://mariadb.org).
 
-::: warning Warning
+::: warning Aviso
 
-Castopod only works with supported MySQL 5.7 or higher compatible databases. It
+Castopod só funciona com bancos de dados MySQL 5.7 ou superior compatíveis. It
 will break with the previous MySQL v5.6 for example as its end of life was on
 February 5, 2021.
 
 :::
 
-You will need the server hostname, database name, username and password to
-complete the installation process. If you do not have these, please contact your
-server administrator.
+Você vai precisar do hostname do servidor, nome do banco de dados, nome do
+usuário e senha para concluir o processo de instalação. Se você não os tem,
+entre em contato com o administrador do servidor.
 
 #### Privilégios
 
@@ -66,7 +69,7 @@ User must have at least these privileges on the database for Castopod to work:
 ### (Opcional) FFmpeg v4.1.8 ou superior para Clipes de Vídeo
 
 [FFmpeg](https://www.ffmpeg.org/) version 4.1.8 or higher is required if you
-want to generate Video Clips. The following extensions must be installed:
+want to generate Video Clips. As seguintes extensões devem ser instaladas:
 
 - Biblioteca **FreeType 2** para
   [gd](https://www.php.net/manual/en/image.installation.php).
@@ -125,10 +128,10 @@ want to generate Video Clips. The following extensions must be installed:
 2. Siga as instruções na sua tela.
 3. Comece o podcast!
 
-::: info Note
+::: Nota de Informação
 
-The install script writes a `.env` file in the package root. If you cannot go
-through the install wizard, you can create and edit the `.env` file manually
+O script de instalação grava um arquivo `.env` na raiz do pacote. If you cannot
+go through the install wizard, you can create and edit the `.env` file manually
 based on the `.env.example` file.
 
 :::
@@ -152,17 +155,46 @@ email.SMTPUser="your_smtp_user"
 email.SMTPPass="your_smtp_password"
 ```
 
-#### Email config options
+#### Configurar opções de e-mail
 
-| Variable name    | Type                 | Default      |
+| Nome da variável | Tipo                 | Padrão       |
 | ---------------- | -------------------- | ------------ |
-| **`fromEmail`**  | string               | `undefined`  |
+| **`fromEmail`**  | string               | `indefinido` |
 | **`fromName`**   | string               | `"Castopod"` |
 | **`SMTPHost`**   | string               | `undefined`  |
 | **`SMTPUser`**   | string               | `undefined`  |
 | **`SMTPPass`**   | string               | `undefined`  |
 | **`SMTPPort`**   | number               | `25`         |
 | **`SMTPCrypto`** | [`"tls"` or `"ssl"`] | `"tls"`      |
+
+### S3
+
+By default, files are stored in the `public/media` folder using the filesystem.
+
+If you prefer storing your media files on an S3 compatible storage, you may
+specify it in your `.env`:
+
+```ini
+# […]
+
+media.fileManager="s3"
+media.s3.endpoint="your_s3_host"
+media.s3.key="your_s3_key"
+media.s3.secret="your_s3_secret"
+media.s3.region="your_s3_region"
+```
+
+#### S3 config options
+
+| Variable name             | Type    | Default     |
+| ------------------------- | ------- | ----------- |
+| **`endpoint`**            | string  | `undefined` |
+| **`key`**                 | string  | `undefined` |
+| **`secret`**              | string  | `undefined` |
+| **`region`**              | string  | `undefined` |
+| **`bucket`**              | string  | `castopod`  |
+| **`protocol`**            | number  | `undefined` |
+| **`path_style_endpoint`** | boolean | `false`     |
 
 ## Pacotes comunitários
 

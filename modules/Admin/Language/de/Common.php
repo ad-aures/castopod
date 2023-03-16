@@ -21,7 +21,7 @@ return [
     'copied' => 'Kopiert!',
     'home' => 'Startseite',
     'explicit' => 'Anstößig',
-    'powered_by' => 'Betrieben durch {castopod}',
+    'powered_by' => 'Betrieben mit {castopod}',
     'actions' => 'Aktionen',
     'pageInfo' => 'Seite {currentPage} von {pageCount}',
     'go_back' => 'Zurück',

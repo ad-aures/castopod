@@ -10,10 +10,10 @@ declare(strict_types=1);
 
 return [
     'pageNavigation' => 'Seiten-Navigation',
-    'first' => 'Erste',
-    'previous' => 'Zurück',
-    'next' => 'Weiter',
-    'last' => 'Letzte',
+    'first' => 'Erste Seite',
+    'previous' => 'Vorherige',
+    'next' => 'Nächste',
+    'last' => 'Letzte Seite',
     'older' => 'Älter',
     'newer' => 'Neuer',
     'invalidTemplate' => '{0} ist kein gültiges Pager Template.',

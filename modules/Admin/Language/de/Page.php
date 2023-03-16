@@ -18,7 +18,7 @@ return [
     'delete' => 'Seite löschen',
     'form' => [
         'title' => 'Titel',
-        'permalink' => 'Permanenter Link',
+        'permalink' => 'Permalink',
         'content' => 'Inhalt',
         'submit_create' => 'Seite erstellen',
         'submit_edit' => 'Speichern',

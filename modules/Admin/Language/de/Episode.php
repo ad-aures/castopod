@@ -13,7 +13,7 @@ return [
     'season_abbr' => 'S{seasonNumber}',
     'number' => 'Folge {episodeNumber}',
     'number_abbr' => 'F. {episodeNumber}',
-    'season_episode' => 'Staffel {seasonNumber} episode {episodeNumber}',
+    'season_episode' => 'Staffel {seasonNumber} Folge {episodeNumber}',
     'season_episode_abbr' => 'S{seasonNumber}F{episodeNumber}',
     'number_of_comments' => '{numberOfComments, plural,
         one {# Kommentar}
@@ -54,8 +54,9 @@ return [
             other {# Folgen}
         }',
         'episode' => 'Folge',
-        'visibility' => 'Sichtweite',
-        'comments' => 'Komemntar',
+        'visibility' => 'Sichtbarkeit',
+        'downloads' => 'Downloads',
+        'comments' => 'Kommentar',
         'actions' => 'Aktionen',
     ],
     'messages' => [
@@ -67,7 +68,7 @@ return [
             with_podcast {Diese Folge wird zeitgleich mit dem Podcast veröffentlicht.}
             other {Diese Folge ist nicht veröffentlicht.}
         }',
-        'publishCancelSuccess' => 'Veröffentlichung der Episode erfolgreich abgebrochen!',
+        'publishCancelSuccess' => 'Veröffentlichung der Episode abgebrochen!',
         'unpublishBeforeDeleteTip' => 'Du musst die Episode zurückziehen, bevor du sie löschst.',
         'scheduleDateError' => 'Veröffentlichungsdatum muss gesetzt sein!',
         'deletePublishedEpisodeError' => 'Bitte ziehe die Episode zurück, bevor du sie löschst.',

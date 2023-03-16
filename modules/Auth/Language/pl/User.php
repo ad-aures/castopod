@@ -9,7 +9,7 @@ declare(strict_types=1);
  */
 
 return [
-    'edit_role' => "Edit {username}'s role",
+    'edit_role' => "Edytuj role użytkownika {username}",
     'ban' => 'Zablokuj',
     'unban' => 'Odblokuj',
     'delete' => 'Usuń',
@@ -18,7 +18,7 @@ return [
     'all_users' => 'Wszyscy użytkownicy',
     'list' => [
         'user' => 'Użytkownik',
-        'role' => 'Role',
+        'role' => 'Rola',
         'banned' => 'Zablokowany?',
     ],
     'form' => [
@@ -26,7 +26,7 @@ return [
         'username' => 'Nazwa użytkownika',
         'password' => 'Hasło',
         'new_password' => 'Nowe hasło',
-        'role' => 'Role',
+        'role' => 'Rola',
         'roles' => 'Role',
         'permissions' => 'Uprawnienia',
         'submit_create' => 'Stwórz użytkownika',
@@ -34,11 +34,11 @@ return [
         'submit_password_change' => 'Zmień!',
     ],
     'delete_form' => [
-        'title' => 'Delete {user}',
+        'title' => 'Usuń użytkownika {user}',
         'disclaimer' =>
-            "You are about to delete {user} permanently. They will not be able to access the admin area anymore.",
-        'understand' => 'I understand, I want to delete {user} permanently',
-        'submit' => 'Delete',
+            "Zamierzasz usunąć {user} na stałe. Nie będą już mogli uzyskać dostępu do obszaru administratora.",
+        'understand' => 'Rozumiem, chcę trwale usunąć {user}',
+        'submit' => 'Usuń',
     ],
     'messages' => [
         'createSuccess' =>
@@ -52,7 +52,7 @@ return [
         'banSuperAdminError' =>
             '{username} jest superadministratorem, nie można po prostu zablokować superadministratora…',
         'deleteOwnerError' =>
-            '{username} is the instance owner, one does not simply delete the owner…',
+            '{username} jest właścicielem instancji, nie można usunąć właściciela…',
         'deleteSuperAdminError' =>
             '{username} jest superadministratorem, nie można po prostu usunąć superadministratora…',
         'deleteSuccess' => '{username} został usunięty.',

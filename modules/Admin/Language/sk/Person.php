@@ -9,48 +9,48 @@ declare(strict_types=1);
  */
 
 return [
-    'persons' => 'Persons',
-    'all_persons' => 'All persons',
-    'no_person' => 'Nobody found!',
-    'create' => 'Create a person',
-    'view' => 'View person',
-    'edit' => 'Edit person',
-    'delete' => 'Delete person',
+    'persons' => 'Osobnosti',
+    'all_persons' => 'Všetky osobnosti',
+    'no_person' => 'Nikto nenájdený!',
+    'create' => 'Vytvoriť osobnosť',
+    'view' => 'Ukázať osobnosť',
+    'edit' => 'Upraviť osobnosť',
+    'delete' => 'Vymazať osobnosť',
     'messages' => [
         'createSuccess' => 'Person has been successfully created!',
         'editSuccess' => 'Person has been successfully updated!',
-        'deleteSuccess' => 'Person has been removed!',
+        'deleteSuccess' => 'Osobnosť bol/a odstránená!',
     ],
     'form' => [
         'avatar' => 'Avatar',
         'avatar_size_hint' =>
             'Avatar must be squared and at least 400px wide and tall.',
-        'full_name' => 'Full name',
+        'full_name' => 'Celé meno',
         'full_name_hint' => 'This is the full name or alias of the person.',
-        'unique_name' => 'Unique name',
-        'unique_name_hint' => 'Used for URLs',
+        'unique_name' => 'Unikátne meno',
+        'unique_name_hint' => 'Použité pre URL odkazy',
         'information_url' => 'Information URL',
         'information_url_hint' =>
             'Url to a relevant resource of information about the person, such as a homepage or third-party profile platform.',
-        'submit_create' => 'Create person',
-        'submit_edit' => 'Save person',
+        'submit_create' => 'Vytvoriť osobnosť',
+        'submit_edit' => 'Uložiť osobnosť',
     ],
     'podcast_form' => [
-        'title' => 'Manage persons',
-        'add_section_title' => 'Add persons to this podcast',
+        'title' => 'Spravovať osobnosti',
+        'add_section_title' => 'Pridať osobnosti k tomuto podcastu',
         'add_section_subtitle' => 'You may pick several persons and roles.',
-        'persons' => 'Persons',
+        'persons' => 'Osobnosti',
         'persons_hint' =>
             'You may select one or several persons with the same roles. You need to create the persons first.',
-        'roles' => 'Roles',
+        'roles' => 'Úlohy',
         'roles_hint' =>
             'You may select none, one or several roles for a person.',
-        'submit_add' => 'Add person(s)',
-        'remove' => 'Remove',
+        'submit_add' => 'Pridať osob(y)',
+        'remove' => 'Odstrániť',
     ],
     'episode_form' => [
         'title' => 'Spravovať osobnosti',
-        'add_section_title' => 'Add persons to this episode',
+        'add_section_title' => 'Pridať osobnosti k tejto epizóde',
         'add_section_subtitle' => 'You may pick several persons and roles.',
         'persons' => 'Osobnosti',
         'persons_hint' =>

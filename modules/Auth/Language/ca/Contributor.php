@@ -29,15 +29,15 @@ return [
         'submit_edit' => 'Actualitzar el rol',
     ],
     'delete_form' => [
-        'title' => 'Remove {contributor}',
+        'title' => 'Suprimeix {contributor}',
         'disclaimer' =>
-            'You are about to remove {contributor} from contributors. They will not be able to access "{podcastTitle}" anymore.',
-        'understand' => 'I understand, I want to remove {contributor} from "{podcastTitle}"',
-        'submit' => 'Remove',
+            'Esteu a punt d\'eliminar {contributor} dels col·laboradors. Ja no podrà accedir a "{podcastTitle}".',
+        'understand' => 'Entenc, vull eliminar {contributor} de "{podcastTitle}"',
+        'submit' => 'Suprimeix',
     ],
     'messages' => [
-        'editSuccess' => 'Role successfully changed!',
-        'editOwnerError' => "You can't edit the podcast owner!",
+        'editSuccess' => 'El rol ha canviat correctament!',
+        'editOwnerError' => "No pots editar el propietari del podcast!",
         'removeOwnerError' => "No podeu eliminar al propietari del podcast!",
         'removeSuccess' =>
             'S\'ha eliminat a {username} de {podcastTitle}',

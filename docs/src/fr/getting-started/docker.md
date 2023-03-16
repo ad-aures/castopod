@@ -1,12 +1,12 @@
 ---
-title: Official Docker images
+title: Images officielles Docker
 sidebarDepth: 3
 ---
 
-# Official Docker images
+# Images officielles de Docker
 
-Castopod pushes 3 Docker images to the Docker Hub during its automated build
-process:
+Castopod envoie 3 images Docker au Hub Docker pendant son processus de
+construction automatisée :
 
 - [**`castopod/app`**](https://hub.docker.com/r/castopod/app): the app bundle
   with all of Castopod dependencies
@@ -15,22 +15,22 @@ process:
 - [**`castopod/video-clipper`**](https://hub.docker.com/r/castopod/video-clipper):
   an optional image building videoclips thanks to ffmpeg
 
-Additionally, Castopod requires a MySQL-compatible database. A Redis database
-can be added as a cache handler.
+De plus, Castopod nécessite une base de données compatible avec MySQL. Une base
+de données Redis peut être ajoutée en tant que gestionnaire de cache.
 
-## Supported tags
+## Tags supportés
 
-- `develop` [unstable], latest development branch build
-- `beta` [stable], latest beta version build
-- `1.0.0-beta.x` [stable], specific beta version build (since `1.0.0-beta.22`)
-- `latest` [stable], latest version build
-- `1.x.x` [stable], specific version build (since `1.0.0`)
+- `développer` [unstable], la dernière version de la branche de développement
+- `beta` [stable], dernière version bêta
+- `1.0.0-beta.x` [stable], version bêta spécifique (depuis `1.0.0-beta.22`)
+- `beta` [stable], dernière version bêta
+- `1.x.x` [stable], version spécifique (depuis `1.0.0`)
 
-## Example usage
+## Exemple d'utilisation
 
-1.  Install [docker](https://docs.docker.com/get-docker/) and
+1.  Installez [docker](https://docs.docker.com/get-docker/) et
     [docker-compose](https://docs.docker.com/compose/install/)
-2.  Create a `docker-compose.yml` file with the following:
+2.  Créez un fichier `docker-compose.yml` avec les éléments suivants :
 
     ```yml
     version: "3.7"
@@ -112,8 +112,8 @@ can be added as a cache handler.
       castopod-db:
     ```
 
-    You have to adapt some variables to your needs (e.g. `CP_BASEURL`,
-    `MYSQL_ROOT_PASSWORD`, `MYSQL_PASSWORD` and `CP_ANALYTICS_SALT`).
+    Vous devez adapter certaines variables à vos besoins (p. ex. `CP_BASEURL`,
+    `MYSQL_ROOT_PASSWORD`, `MYSQL_PASSWORD` et `CP_ANALYTICS_SALT`).
 
 3.  Setup a reverse proxy for TLS (SSL/HTTPS)
 
@@ -127,16 +127,17 @@ can be added as a cache handler.
     }
     ```
 
-4.  Run `docker-compose up -d`, wait for it to initialize and head on to
-    `https://castopod.example.com/cp-install` to finish setting up Castopod!
+4.  Exécutez `docker-compose up -d`, attendez qu'il s'initialise sur
+    `https://castopod.example.com/cp-install` pour terminer la configuration de
+    Castopod !
 
-5.  You're all set, start podcasting! 🎙️🚀
+5.  Vous êtes prêt, commencez à podcaster! 🎙️🚀
 
 ## Environment Variables
 
 - **castopod/video-clipper**
 
-  | Variable name              | Type (`default`) | Default          |
+  | Nom de la variable         | Type (`default`) | Par défaut       |
   | -------------------------- | ---------------- | ---------------- |
   | **`CP_DATABASE_HOSTNAME`** | ?string          | `"mariadb"`      |
   | **`CP_DATABASE_NAME`**     | ?string          | `MYSQL_DATABASE` |
@@ -146,7 +147,7 @@ can be added as a cache handler.
 
 - **castopod/app**
 
-  | Variable name                | Type (`default`)        | Default          |
+  | Variable name                | Type (`default`)        | Par défaut       |
   | ---------------------------- | ----------------------- | ---------------- |
   | **`CP_BASEURL`**             | string                  | `undefined`      |
   | **`CP_MEDIA_BASEURL`**       | ?string                 | `CP_BASEURL`     |
@@ -172,6 +173,6 @@ can be added as a cache handler.
 
 - **castopod/web-server**
 
-  | Variable name         | Type    | Default |
-  | --------------------- | ------- | ------- |
-  | **`CP_APP_HOSTNAME`** | ?string | `"app"` |
+  | Nom de la variable    | Type    | Par défaut |
+  | --------------------- | ------- | ---------- |
+  | **`CP_APP_HOSTNAME`** | ?string | `"app"`    |

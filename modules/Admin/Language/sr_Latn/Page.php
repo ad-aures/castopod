@@ -9,22 +9,22 @@ declare(strict_types=1);
  */
 
 return [
-    'back_to_home' => 'Back to home',
-    'page' => 'Page',
-    'all_pages' => 'All pages',
-    'create' => 'New page',
-    'go_to_page' => 'Go to page',
-    'edit' => 'Edit page',
-    'delete' => 'Delete page',
+    'back_to_home' => 'Natrag na početnu',
+    'page' => 'Stranica',
+    'all_pages' => 'Sve stranice',
+    'create' => 'Nova Stranica',
+    'go_to_page' => 'Idi na stranicu',
+    'edit' => 'Izmeni stranicu',
+    'delete' => 'Obriši stranicu',
     'form' => [
-        'title' => 'Title',
-        'permalink' => 'Permalink',
-        'content' => 'Content',
-        'submit_create' => 'Create page',
-        'submit_edit' => 'Save',
+        'title' => 'Naslov',
+        'permalink' => 'Trajni link',
+        'content' => 'Sadržaj',
+        'submit_create' => 'Napravi stranicu',
+        'submit_edit' => 'Sačuvaj',
     ],
     'messages' => [
-        'createSuccess' => 'The page “{pageTitle}” was created successfully!',
-        'editSuccess' => 'The page was successfully updated!',
+        'createSuccess' => 'Stranica “{pageTitle}” je uspešno napravljena!',
+        'editSuccess' => 'Stranica je uspešno ažurirana!',
     ],
 ];

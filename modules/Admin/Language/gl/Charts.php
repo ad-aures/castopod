@@ -37,4 +37,5 @@ return [
     'podcast_by_bandwidth' => 'Ancho de banda diario utilizado (en MB)',
     'total_storage_by_month' => 'Almacenaxe mensual (en MB)',
     'total_bandwidth_by_month' => 'Ancho de banda mensual utilizado (en MB)',
+    'total_bandwidth_by_month_limit' => 'Limitado a {totalBandwidth} ao mes',
 ];

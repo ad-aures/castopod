@@ -18,12 +18,12 @@ return [
         'submit_reply' => 'Odgovori',
     ],
     'likes' => '{numberOfLikes, plural,
-        one {# like}
-        other {# likes}
+        one {# sviđanje}
+        other {# sviđanja}
     }',
     'replies' => '{numberOfReplies, plural,
-        one {# reply}
-        other {# replies}
+        one {# odgovor}
+        other {# odgovora}
     }',
     'like' => 'Preporuči',
     'reply' => 'Odgovori',

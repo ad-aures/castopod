@@ -37,4 +37,5 @@ return [
     'podcast_by_bandwidth' => 'Denný prenos údajov (v MB)',
     'total_storage_by_month' => 'Mesačné úložisko (v MB)',
     'total_bandwidth_by_month' => 'Mesačný prenos údajov (v MB)',
+    'total_bandwidth_by_month_limit' => 'Obmedzený na {totalBandwidth} za mesiac',
 ];

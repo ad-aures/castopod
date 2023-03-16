@@ -57,6 +57,7 @@ return [
     }',
         'episode' => 'Rann',
         'visibility' => 'Gwelusted',
+        'downloads' => 'Downloads',
         'comments' => 'Evezhiadennoù',
         'actions' => 'Obererezhioù',
     ],

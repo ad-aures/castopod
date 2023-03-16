@@ -59,6 +59,7 @@ return [
         }',
         'episode' => 'Epizóda',
         'visibility' => 'Viditeľnosť',
+        'downloads' => 'Downloads',
         'comments' => 'Komentáre',
         'actions' => 'Úkony',
     ],

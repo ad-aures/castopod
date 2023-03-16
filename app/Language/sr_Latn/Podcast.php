@@ -14,40 +14,40 @@ return [
     'list_of_episodes_year' => '{year} epizode ({episodeCount})',
     'list_of_episodes_season' =>
         'Sezona {seasonNumber} epizoda ({episodeCount})',
-    'no_episode' => 'Bez epizoda!',
+    'no_episode' => 'Nijedna epizode nije pronađena!',
     'follow' => 'Prati',
     'followTitle' => 'Prati {actorDisplayName} na fediverse!',
     'followers' => '{numberOfFollowers, plural,
-        one {# follower}
-        other {# followers}
+        one {# pratioc}
+        other {# pratilaca}
     }',
     'posts' => '{numberOfPosts, plural,
-        one {# post}
-        other {# posts}
+        few {# objave}
+        other {# objava}
     }',
-    'activity' => 'Aktivnosti',
+    'activity' => 'Aktivnost',
     'episodes' => 'Epizode',
     'episodes_title' => 'Epizode {podcastTitle}',
-    'about' => 'O',
+    'about' => 'Osnovni podaci',
     'stats' => [
         'title' => 'Statistika',
         'number_of_seasons' => '{0, plural,
-            one {# season}
-            other {# seasons}
+            few {# sezone}
+            other {# sezona}
         }',
         'number_of_episodes' => '{0, plural,
-            one {# episode}
-            other {# episodes}
+            one {# epizoda}
+            other {# epizode}
         }',
         'first_published_at' => 'Prva epizoda objavljena na {0, date, medium}',
     ],
     'sponsor' => 'Sponzor',
-    'funding_links' => 'Funding links for {podcastTitle}',
+    'funding_links' => 'Linkovi za finansiranje {podcastTitle}',
     'find_on' => 'Pronađi {podcastTitle} na',
     'listen_on' => 'Slušaj na',
     'persons' => '{personsCount, plural,
-        one {# person}
-        other {# persons}
+        one {# osoba}
+        other {# osobe}
     }',
     'persons_list' => 'Ličnosti',
 ];

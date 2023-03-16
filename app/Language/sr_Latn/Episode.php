@@ -16,17 +16,17 @@ return [
     'season_episode' => 'Sezona {seasonNumber} epizoda {episodeNumber}',
     'season_episode_abbr' => 'S{seasonNumber}:E{episodeNumber}',
     'persons' => '{personsCount, plural,
-        one {# person}
-        other {# persons}
-    }',
+        few {# osobe}
+        other {# osoba}
+}',
     'persons_list' => 'Ličnosti',
     'back_to_episodes' => 'Nazad na epizode {podcast}',
     'comments' => 'Komentari',
     'activity' => 'Aktivnosti',
     'description' => 'Opis epizode',
     'number_of_comments' => '{numberOfComments, plural,
-        one {# comment}
-        other {# comments}
+        one {# komentar}
+        other {# komentara}
     }',
     'all_podcast_episodes' => 'Sve epizode podkasta',
     'back_to_podcast' => 'Nazad na podkast',

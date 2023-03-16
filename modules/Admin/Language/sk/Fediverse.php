@@ -11,22 +11,22 @@ declare(strict_types=1);
 return [
     'messages' => [
         'actorNotFound' => 'Účet nieje možné nájsť!',
-        'blockActorSuccess' => '{actor} has been blocked!',
-        'unblockActorSuccess' => 'Actor has been unblocked!',
+        'blockActorSuccess' => '{actor} bol/i zablokovaný!',
+        'unblockActorSuccess' => 'Aktér bol odblokovaný!',
         'blockDomainSuccess' => '{domain} has been blocked!',
         'unblockDomainSuccess' => '{domain} has been unblocked!',
     ],
-    'blocked_actors' => 'Zablokované účty',
+    'blocked_actors' => 'Blokované účty',
     'blocked_domains' => 'Zablokované domény',
     'block_lists_form' => [
         'handle' => 'Account handle',
         'handle_hint' => 'Input @username@domain account.',
-        'domain' => 'Domain name',
-        'submit' => 'Block!',
+        'domain' => 'Názov domény',
+        'submit' => 'Blokovať!',
     ],
     'list' => [
         'actor' => 'Účet',
-        'domain' => 'Domain name',
-        'unblock' => 'Unblock',
+        'domain' => 'Názov domény',
+        'unblock' => 'Odblokovať',
     ],
 ];

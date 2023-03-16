@@ -55,6 +55,7 @@ return [
         }',
         'episode' => '剧集',
         'visibility' => '可见性',
+        'downloads' => 'Downloads',
         'comments' => '评论',
         'actions' => '操作',
     ],

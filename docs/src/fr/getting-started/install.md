@@ -23,6 +23,8 @@ directement à la [documentation Docker](./docker.md) pour Castopod.
 - PHP v8.1 ou supérieure
 - MySQL version 5.7 ou supérieure ou MariaDB version 10.2 ou supérieure
 - Prise en charge HTTPS
+- An [ntp-synced clock](https://wiki.debian.org/NTP) to validate federation's
+  incoming requests
 
 ### PHP v8.1 ou supérieure
 
@@ -47,7 +49,7 @@ De plus, assurez-vous que les extensions suivantes sont activées dans votre PHP
 
 > Nous vous recommandons d'utiliser [MariaDB](https://mariadb.org).
 
-::: warning Warning
+::: warning Attention
 
 Castopod ne fonctionne qu'avec les bases de données MySQL 5.7 ou plus récentes.
 Les versions 5.6 (dont le support a cessé le 5 février 2021) ou précédentes de
@@ -130,11 +132,11 @@ installées :
 2. Suivez les instructions affichée.
 3. Commencer à baladodiffuser !
 
-::: info Note
+:::info Note
 
-Le script d'installation crée un fichier `.env` à la racine du paquet. If you
-cannot go through the install wizard, you can create and edit the `.env` file
-manually based on the `.env.example` file.
+Le script d'installation crée un fichier `.env` à la racine du paquet. Si vous
+ne pouvez pas passer par l'assistant d'installation, vous pouvez créer et éditer
+le fichier `.env` manuellement en vous appuyant sur le fichier `.env.example`.
 
 :::
 
@@ -166,6 +168,35 @@ email.SMTPPass="your_smtp_password"
 | **`SMTPPass`**   | string               | `undefined`  |
 | **`SMTPPort`**   | number               | `25`         |
 | **`SMTPCrypto`** | [`"tls"` or `"ssl"`] | `"tls"`      |
+
+### S3
+
+By default, files are stored in the `public/media` folder using the filesystem.
+
+If you prefer storing your media files on an S3 compatible storage, you may
+specify it in your `.env`:
+
+```ini
+# […]
+
+media.fileManager="s3"
+media.s3.endpoint="your_s3_host"
+media.s3.key="your_s3_key"
+media.s3.secret="your_s3_secret"
+media.s3.region="your_s3_region"
+```
+
+#### S3 config options
+
+| Variable name             | Type    | Default     |
+| ------------------------- | ------- | ----------- |
+| **`endpoint`**            | string  | `undefined` |
+| **`key`**                 | string  | `undefined` |
+| **`secret`**              | string  | `undefined` |
+| **`region`**              | string  | `undefined` |
+| **`bucket`**              | string  | `castopod`  |
+| **`protocol`**            | number  | `undefined` |
+| **`path_style_endpoint`** | boolean | `false`     |
 
 ## Paquets fournis par la communauté
 

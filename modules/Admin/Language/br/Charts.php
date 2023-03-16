@@ -37,4 +37,5 @@ return [
     'podcast_by_bandwidth' => 'Lec\'hed bann implijet bemdez (e MB)',
     'total_storage_by_month' => 'Kadaviñ bep miz (e MB)',
     'total_bandwidth_by_month' => 'Lec\'hed bann implijet bep miz (e MB)',
+    'total_bandwidth_by_month_limit' => 'Limited to {totalBandwidth} per month',
 ];

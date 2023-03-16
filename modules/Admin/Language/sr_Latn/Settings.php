@@ -9,11 +9,11 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => 'General settings',
+    'title' => 'Opšta podešavanja',
     'instance' => [
         'title' => 'Instance',
-        'site_icon' => 'Site icon',
-        'site_icon_delete' => 'Delete site icon',
+        'site_icon' => 'Ikonica sajta',
+        'site_icon_delete' => 'Obriši ikonicu sajta',
         'site_icon_hint' => 'Site icons are what you see on your browser tabs, bookmarks bar, and when you add a website as a shortcut on mobile devices.',
         'site_icon_helper' => 'Icon must be squared and at least 512px wide and tall.',
         'site_name' => 'Site name',

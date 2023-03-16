@@ -25,7 +25,7 @@ return [
         'auth_gateway' => 'Auth gateway',
         'auth_gateway_hint' =>
             'The route to access the authentication pages (eg. https://example.com/cp-auth). It is set by default as cp-auth, we recommend you change it for security reasons.',
-        'database_config' => 'Database configuration',
+        'database_config' => 'Nastavenie databázy',
         'database_config_hint' =>
             'Castopod needs to connect to your MySQL (or MariaDB) database. If you do not have these required info, please contact your server administrator.',
         'db_hostname' => 'Database hostname',
