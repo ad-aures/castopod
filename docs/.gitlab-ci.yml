@@ -9,18 +9,21 @@ stages:
     - cd docs
     - chmod +x ./scripts/i18n-filter.sh
     - ./scripts/i18n-filter.sh src
-    - pnpm install
+    - npm install
 
 cache:
+  key:
+    files:
+      - docs/package-lock.json
   paths:
-    - docs/node_modules/
+    - docs/node_modules
 
 # This job only serves for validating that the docs builds correctly on all non deployment branches
 build:
   extends: .documentation-setup
   stage: build
   script:
-    - pnpm run build
+    - npm run build
   except:
     - main
     - beta
@@ -33,7 +36,7 @@ build-production:
     name: production
     url: https://docs.castopod.org/
   script:
-    - pnpm run build
+    - npm run build
   artifacts:
     paths:
       - docs/.vitepress/dist
