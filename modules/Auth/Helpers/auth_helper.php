@@ -139,7 +139,7 @@ if (! function_exists('get_podcast_group')) {
     function get_podcast_group(User $user, int $podcastId, bool $removePrefix = true): ?string
     {
         $podcastGroups = array_filter($user->getGroups() ?? [], static function ($group) use ($podcastId): bool {
-            return str_starts_with($group, "podcast#{$podcastId}");
+            return str_starts_with($group, "podcast#{$podcastId}-");
         });
 
         if ($podcastGroups === []) {
@@ -155,7 +155,7 @@ if (! function_exists('get_podcast_group')) {
         }
 
         if ($removePrefix) {
-            // strip the `podcast#{id}.` prefix when returning group
+            // strip the `podcast#{id}-` prefix when returning group
             return substr((string) $podcastGroup, strlen('podcast#' . $podcastId . '-'));
         }
 

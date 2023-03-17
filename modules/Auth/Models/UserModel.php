@@ -35,7 +35,7 @@ class UserModel extends ShieldUserModel
     {
         return $this->select('users.*')
             ->join('auth_groups_users', 'users.id = auth_groups_users.user_id')
-            ->like('auth_groups_users.group', "podcast#{$podcastId}")
+            ->like('auth_groups_users.group', "podcast#{$podcastId}-")
             ->findAll();
     }
 
@@ -44,7 +44,7 @@ class UserModel extends ShieldUserModel
         return $this->select('users.*')
             ->join('auth_groups_users', 'users.id = auth_groups_users.user_id')
             ->where('users.id', $contributorId)
-            ->like('auth_groups_users.group', "podcast#{$podcastId}")
+            ->like('auth_groups_users.group', "podcast#{$podcastId}-")
             ->first();
     }
 }
