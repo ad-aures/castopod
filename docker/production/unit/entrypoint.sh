@@ -107,7 +107,7 @@ fi
 
 cat << EOF > /var/www/castopod/.env
 app.baseURL="${CP_BASEURL}"
-app.mediaBaseURL="${CP_MEDIA_BASEURL}"
+media.baseURL="${CP_MEDIA_BASEURL}"
 EOF
 
 if [ "${CP_DISABLE_HTTPS}" = "1" ]

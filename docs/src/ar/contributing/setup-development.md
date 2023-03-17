@@ -43,7 +43,7 @@ to help you kickstart your contribution.
    app.forceGlobalSecureRequests=false
 
    app.baseURL="http://localhost:8080/"
-   app.mediaBaseURL="http://localhost:8080/"
+   media.baseURL="http://localhost:8080/"
 
    admin.gateway="cp-admin"
    auth.gateway="cp-auth"

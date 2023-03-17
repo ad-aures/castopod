@@ -167,7 +167,7 @@ class InstallController extends Controller
         $mediaBaseUrl = $this->request->getPost('media_base_url');
         self::writeEnv([
             'app.baseURL' => $baseUrl,
-            'app.mediaBaseURL' =>
+            'media.baseURL' =>
                 $mediaBaseUrl === '' ? $baseUrl : $mediaBaseUrl,
             'analytics.salt' => generate_random_salt(64),
             'admin.gateway' => $this->request->getPost('admin_gateway'),
