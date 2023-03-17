@@ -138,7 +138,7 @@ Castopod 已经通过了一项行为准则，并希望所有的参与者都能�
 
 ### 贡献指南
 
-阅读我们的 [贡献指南](./contributing/guidelines.md) ，了解我们的开发过程。 提出
+阅读我们的 [贡献指南](../contributing/guidelines.md) ，了解我们的开发过程。 提出
 错 误修正和改进想法，以及如何构建和测试 Castopod 。
 
 ## 贡献者 ✨

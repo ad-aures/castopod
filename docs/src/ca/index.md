@@ -141,7 +141,7 @@ són realment fantàstiques i [moltes](https://podcastindex.org/apps) s'estan
 incorporant al carro Podcasting 2.0. com Castopod!
 
 Cadascuna d'aquestes solucions difereix entre si, podeu comparar-les amb la
-[llista de funcions](#features).
+[llista de funcions](#característiques).
 
 Dit això, hi ha dues diferències principals amb altres solucions de podcasting:
 
@@ -167,7 +167,7 @@ perquè pugueu entendre quines accions seran o no tolerades.
 
 ### Guia de col·laboració
 
-Llegiu la nostra [guia de col·laboració](./contributing/guidelines.md) per
+Llegiu la nostra [guia de col·laboració](../contributing/guidelines.md) per
 conèixer el nostre procés de desenvolupament, com proposar correccions d'errors
 i millores, i com construir i prova els teus canvis a Castopod.
 
