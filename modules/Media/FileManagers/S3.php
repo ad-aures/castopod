@@ -27,15 +27,19 @@ class S3 implements FileManagerInterface
             'use_path_style_endpoint' => $config->s3['path_style_endpoint'],
         ]);
 
-        // create bucket if it does not already exist
-        if (! $this->s3->doesBucketExist((string) $this->config->s3['bucket'])) {
-            try {
-                $this->s3->createBucket([
-                    'Bucket' => $this->config->s3['bucket'],
-                ]);
-            } catch (Exception $exception) {
-                log_message('critical', $exception->getMessage());
+        try {
+            // create bucket if it does not already exist
+            if (! $this->s3->doesBucketExist((string) $this->config->s3['bucket'])) {
+                try {
+                    $this->s3->createBucket([
+                        'Bucket' => $this->config->s3['bucket'],
+                    ]);
+                } catch (Exception $exception) {
+                    log_message('critical', $exception->getMessage());
+                }
             }
+        } catch (Exception $exception) {
+            throw new Exception($exception->getMessage(), $exception->getCode(), $exception);
         }
     }
 
@@ -170,5 +174,19 @@ class S3 implements FileManagerInterface
 
         $podcastImageKeys = preg_grep("~^persons\/.*_.*.\.(jpg|png|webp)$~", $objectsKeys);
         return (bool) $podcastImageKeys;
+    }
+
+    public function isHealthy(): bool
+    {
+        try {
+            // ok if bucket exists and you have permission to access it
+            $this->s3->headBucket([
+                'Bucket' => $this->config->s3['bucket'],
+            ]);
+        } catch (Exception) {
+            return false;
+        }
+
+        return true;
     }
 }

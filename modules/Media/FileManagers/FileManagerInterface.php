@@ -23,4 +23,6 @@ interface FileManagerInterface
     public function deletePodcastImageSizes(string $podcastHandle): bool;
 
     public function deletePersonImagesSizes(): bool;
+
+    public function isHealthy(): bool;
 }

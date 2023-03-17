@@ -60,6 +60,11 @@ $routes->get('themes/colors', 'ColorsController', [
     'as' => 'themes-colors-css',
 ]);
 
+// health check
+$routes->get('/health', 'HomeController::health', [
+    'as' => 'health',
+]);
+
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'HomeController', [

@@ -132,4 +132,11 @@ class FS implements FileManagerInterface
 
         return true;
     }
+
+    public function isHealthy(): bool
+    {
+        helper('media');
+
+        return is_really_writable(ROOTPATH . 'public/' . media_path());
+    }
 }
