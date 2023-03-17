@@ -14,6 +14,8 @@ RUN \
     # install ci requirements
     && apk add --no-cache \
         nodejs \
+        # install npm for @semantic-release/npm
+        npm \
         git \
         unzip \
         wget \
