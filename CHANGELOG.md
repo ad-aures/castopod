@@ -1,3 +1,36 @@
+# [1.2.0](https://code.castopod.org/adaures/castopod/compare/v1.1.2...v1.2.0) (2023-03-17)
+
+### Bug Fixes
+
+- **analytics:** check the x_forwarded_for client header
+  ([1111177](https://code.castopod.org/adaures/castopod/commit/1111177eb7fea4eba6d119b17acdf3bf416492ef))
+- **auth:** update podcast editors' permissions
+  ([a9b6308](https://code.castopod.org/adaures/castopod/commit/a9b630884bc318499ea7f03862d5752dd5f178e1))
+- **contributors:** add dash to prevent deleting permissions from other podcast
+  ([5d2a2d4](https://code.castopod.org/adaures/castopod/commit/5d2a2d49c489cd98f9c9ecbca35fd5d21a9cadfb)),
+  closes [#310](https://code.castopod.org/adaures/castopod/issues/310)
+- display bandwidth limit on dashboard when set in .env
+  ([a2a87ab](https://code.castopod.org/adaures/castopod/commit/a2a87abf7caea3c87bcf2d0988610cc07782de9e))
+- **docker:** update nginx configuration
+  ([8884598](https://code.castopod.org/adaures/castopod/commit/8884598a56d0e2550776ef4cee5e53558c20e009))
+- **platforms:** update 'submit_url' for Antennapod
+  ([9fc49a7](https://code.castopod.org/adaures/castopod/commit/9fc49a7430406f50e68318c5fd7c577ae1ebd9df))
+
+### Features
+
+- add downloads count to episode list
+  ([b63c1dc](https://code.castopod.org/adaures/castopod/commit/b63c1dc9b1ed41626b99ba852a9a00ed417059ba))
+- add health route to check if db, cache and file manager are ok
+  ([1dde11f](https://code.castopod.org/adaures/castopod/commit/1dde11f8e42b66684a956068f5347e9289f4918b))
+- **media:** add s3 to manage media files
+  ([d93fc98](https://code.castopod.org/adaures/castopod/commit/d93fc98469ffe93913b65e539dec396891708c70))
+
+### Reverts
+
+- **install:** reset condition to look for instance owner before continuing
+  install
+  ([fc009f3](https://code.castopod.org/adaures/castopod/commit/fc009f3d0058028bbbb6418603cf820c0f7cea80))
+
 ## [1.1.2](https://code.castopod.org/adaures/castopod/compare/v1.1.1...v1.1.2) (2022-12-14)
 
 ### Bug Fixes

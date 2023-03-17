@@ -11,7 +11,7 @@ declare(strict_types=1);
  |
  | NOTE: this constant is updated upon release with Continuous Integration.
  */
-defined('CP_VERSION') || define('CP_VERSION', '1.1.2');
+defined('CP_VERSION') || define('CP_VERSION', '1.2.0');
 
 /*
  | --------------------------------------------------------------------
