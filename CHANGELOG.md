@@ -1,3 +1,11 @@
+## [1.2.1](https://code.castopod.org/adaures/castopod/compare/v1.2.0...v1.2.1) (2023-03-17)
+
+### Bug Fixes
+
+- change app.mediaBaseURL to media.baseURL in install, docker entrypoints and
+  docs
+  ([b3c6e05](https://code.castopod.org/adaures/castopod/commit/b3c6e05e6fcd8a518eeedeefde28b61f879ba71d))
+
 # [1.2.0](https://code.castopod.org/adaures/castopod/compare/v1.1.2...v1.2.0) (2023-03-17)
 
 ### Bug Fixes
