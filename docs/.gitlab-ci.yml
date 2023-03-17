@@ -59,6 +59,8 @@ deploy:
     SSH_PORT: 3242
     SOURCE_FOLDER: "docs/.vitepress/dist/"
   before_script:
+    # install rsync for file transfers
+    - apt-get update && apt-get install rsync -y
     # Run ssh-agent (inside the build environment)
     - eval $(ssh-agent -s)
     # Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store

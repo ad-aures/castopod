@@ -22,7 +22,7 @@ class AddMedia extends Migration
                 'unsigned' => true,
                 'auto_increment' => true,
             ],
-            'file_key' => [
+            'file_path' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],

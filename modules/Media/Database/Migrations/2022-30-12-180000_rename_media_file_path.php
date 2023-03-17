@@ -17,7 +17,7 @@ class RenameMediafileKey extends Migration
     public function up(): void
     {
         $fields = [
-            'file_key' => [
+            'file_path' => [
                 'name' => 'file_key',
                 'type' => 'VARCHAR',
                 'constraint' => 255,
@@ -30,7 +30,7 @@ class RenameMediafileKey extends Migration
     {
         $fields = [
             'file_key' => [
-                'name' => 'file_key',
+                'name' => 'file_path',
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
