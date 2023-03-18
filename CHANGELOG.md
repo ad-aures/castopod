@@ -1,3 +1,11 @@
+## [1.2.3](https://code.castopod.org/adaures/castopod/compare/v1.2.2...v1.2.3) (2023-03-18)
+
+### Bug Fixes
+
+- **notifications:** set mark-all-as-read parameter to be podcast_id instead of
+  actor_id
+  ([2748f23](https://code.castopod.org/adaures/castopod/commit/2748f2313797e50d8a2a7b87df09c0bc6e64360a))
+
 ## [1.2.2](https://code.castopod.org/adaures/castopod/compare/v1.2.1...v1.2.2) (2023-03-18)
 
 ### Bug Fixes
