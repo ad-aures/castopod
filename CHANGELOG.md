@@ -1,3 +1,11 @@
+## [1.2.2](https://code.castopod.org/adaures/castopod/compare/v1.2.1...v1.2.2) (2023-03-18)
+
+### Bug Fixes
+
+- **migration:** change old media file_key to file_path
+  ([a414142](https://code.castopod.org/adaures/castopod/commit/a4141421aa1d6e89742b390b042382f729f965a9)),
+  closes [#314](https://code.castopod.org/adaures/castopod/issues/314)
+
 ## [1.2.1](https://code.castopod.org/adaures/castopod/compare/v1.2.0...v1.2.1) (2023-03-17)
 
 ### Bug Fixes
