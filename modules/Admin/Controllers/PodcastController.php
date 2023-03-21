@@ -184,8 +184,8 @@ class PodcastController extends BaseController
     {
         $rules = [
             'cover' =>
-                'uploaded[cover]|is_image[cover]|ext_in[cover,jpg,png]|min_dims[cover,1400,1400]|is_image_ratio[cover,1,1]',
-            'banner' => 'is_image[banner]|ext_in[banner,jpg,png]|min_dims[banner,1500,500]|is_image_ratio[banner,3,1]',
+                'uploaded[cover]|is_image[cover]|ext_in[cover,jpg,jpeg,png]|min_dims[cover,1400,1400]|is_image_ratio[cover,1,1]',
+            'banner' => 'is_image[banner]|ext_in[banner,jpg,jpeg,png]|min_dims[banner,1500,500]|is_image_ratio[banner,3,1]',
         ];
 
         if (! $this->validate($rules)) {
@@ -299,8 +299,8 @@ class PodcastController extends BaseController
     {
         $rules = [
             'cover' =>
-                'is_image[cover]|ext_in[cover,jpg,png]|min_dims[cover,1400,1400]|is_image_ratio[cover,1,1]',
-            'banner' => 'is_image[banner]|ext_in[banner,jpg,png]|min_dims[banner,1500,500]|is_image_ratio[banner,3,1]',
+                'is_image[cover]|ext_in[cover,jpg,jpeg,png]|min_dims[cover,1400,1400]|is_image_ratio[cover,1,1]',
+            'banner' => 'is_image[banner]|ext_in[banner,jpg,jpeg,png]|min_dims[banner,1500,500]|is_image_ratio[banner,3,1]',
         ];
 
         if (! $this->validate($rules)) {

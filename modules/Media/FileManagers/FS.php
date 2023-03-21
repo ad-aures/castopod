@@ -90,7 +90,7 @@ class FS implements FileManagerInterface
         helper('media');
 
         $allPodcastImagesPaths = [];
-        foreach (['jpg', 'png', 'webp'] as $ext) {
+        foreach (['jpg', 'jpeg', 'png', 'webp'] as $ext) {
             $images = glob(media_path("/podcasts/{$podcastHandle}/*_*{$ext}"));
 
             if (! $images) {
@@ -114,7 +114,7 @@ class FS implements FileManagerInterface
         helper('media');
 
         $allPersonsImagesPaths = [];
-        foreach (['jpg', 'png', 'webp'] as $ext) {
+        foreach (['jpg', 'jpeg', 'png', 'webp'] as $ext) {
             $images = glob(media_path("/persons/*_*{$ext}"));
 
             if (! $images) {

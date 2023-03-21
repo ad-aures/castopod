@@ -136,7 +136,10 @@ class S3 implements FileManagerInterface
 
             $prefixedPodcasts = $this->prefixKey('podcasts');
 
-            array_push($keys, ...preg_grep("~^{$prefixedPodcasts}\/{$podcastHandle}\/.*_.*.\.(jpg|png|webp)$~", $key));
+            array_push(
+                $keys,
+                ...preg_grep("~^{$prefixedPodcasts}\/{$podcastHandle}\/.*_.*.\.(jpe?g|png|webp)$~", $key)
+            );
         }
 
         $objectsToDelete = array_map(static function ($key): array {
@@ -178,7 +181,7 @@ class S3 implements FileManagerInterface
 
             $prefixedPersons = $this->prefixKey('persons');
 
-            array_push($keys, ...preg_grep("~^{$prefixedPersons}\/.*_.*.\.(jpg|png|webp)$~", $key));
+            array_push($keys, ...preg_grep("~^{$prefixedPersons}\/.*_.*.\.(jpe?g|png|webp)$~", $key));
         }
 
         $objectsToDelete = array_map(static function ($key): array {
