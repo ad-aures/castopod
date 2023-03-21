@@ -24,7 +24,7 @@ class S3 implements FileManagerInterface
             'endpoint' => $config->s3['endpoint'],
             'credentials' => new Credentials((string) $config->s3['key'], (string) $config->s3['secret']),
             'debug' => $config->s3['debug'],
-            'use_path_style_endpoint' => $config->s3['path_style_endpoint'],
+            'use_path_style_endpoint' => $config->s3['pathStyleEndpoint'],
         ]);
 
         try {
@@ -48,7 +48,7 @@ class S3 implements FileManagerInterface
         try {
             $this->s3->putObject([
                 'Bucket' => $this->config->s3['bucket'],
-                'Key' => $key,
+                'Key' => $this->prefixKey($key),
                 'SourceFile' => $file,
             ]);
         } catch (Exception) {
@@ -66,7 +66,7 @@ class S3 implements FileManagerInterface
         try {
             $this->s3->deleteObject([
                 'Bucket' => $this->config->s3['bucket'],
-                'Key' => $key,
+                'Key' => $this->prefixKey($key),
             ]);
         } catch (Exception) {
             return false;
@@ -79,13 +79,13 @@ class S3 implements FileManagerInterface
     {
         $url = new URI((string) $this->config->s3['endpoint']);
 
-        if ($this->config->s3['path_style_endpoint'] === true) {
-            $url->setPath($this->config->s3['bucket'] . '/' . $key);
+        if ($this->config->s3['pathStyleEndpoint'] === true) {
+            $url->setPath($this->config->s3['bucket'] . '/' . $this->prefixKey($key));
             return (string) $url;
         }
 
         $url->setHost($this->config->s3['bucket'] . '.' . $url->getHost());
-        $url->setPath($key);
+        $url->setPath($this->prefixKey($key));
         return (string) $url;
     }
 
@@ -95,22 +95,22 @@ class S3 implements FileManagerInterface
             // copy old object with new key
             $this->s3->copyObject([
                 'Bucket' => $this->config->s3['bucket'],
-                'CopySource' => $this->config->s3['bucket'] . '/' . $oldKey,
-                'Key' => $newKey,
+                'CopySource' => $this->config->s3['bucket'] . '/' . $this->prefixKey($oldKey),
+                'Key' => $this->prefixKey($newKey),
             ]);
         } catch (Exception) {
             return false;
         }
 
         // delete old object
-        return $this->delete($oldKey);
+        return $this->delete($this->prefixKey($oldKey));
     }
 
     public function getFileContents(string $key): string
     {
         $result = $this->s3->getObject([
             'Bucket' => $this->config->s3['bucket'],
-            'Key' => $key,
+            'Key' => $this->prefixKey($key),
         ]);
 
         return (string) $result->get('Body');
@@ -125,7 +125,7 @@ class S3 implements FileManagerInterface
     {
         $results = $this->s3->getPaginator('ListObjectsV2', [
             'Bucket' => $this->config->s3['bucket'],
-            'Prefix' => 'podcasts/' . $podcastHandle . '/',
+            'Prefix' => $this->prefixKey('podcasts/' . $podcastHandle . '/'),
         ]);
 
         $keys = [];
@@ -134,7 +134,9 @@ class S3 implements FileManagerInterface
                 return $object['Key'];
             }, $result['Contents']);
 
-            array_push($keys, ...preg_grep("~^podcasts\/{$podcastHandle}\/.*_.*.\.(jpg|png|webp)$~", $key));
+            $prefixedPodcasts = $this->prefixKey('podcasts');
+
+            array_push($keys, ...preg_grep("~^{$prefixedPodcasts}\/{$podcastHandle}\/.*_.*.\.(jpg|png|webp)$~", $key));
         }
 
         $objectsToDelete = array_map(static function ($key): array {
@@ -163,17 +165,44 @@ class S3 implements FileManagerInterface
 
     public function deletePersonImagesSizes(): bool
     {
-        $objects = $this->s3->getIterator('ListObjectsV2', [
+        $results = $this->s3->getPaginator('ListObjectsV2', [
             'Bucket' => $this->config->s3['bucket'],
-            'prefix' => 'persons/',
+            'prefix' => $this->prefixKey('persons/'),
         ]);
 
-        $objectsKeys = array_map(static function ($object) {
-            return $object['Key'];
-        }, iterator_to_array($objects));
+        $keys = [];
+        foreach ($results as $result) {
+            $key = array_map(static function ($object) {
+                return $object['Key'];
+            }, $result['Contents']);
 
-        $podcastImageKeys = preg_grep("~^persons\/.*_.*.\.(jpg|png|webp)$~", $objectsKeys);
-        return (bool) $podcastImageKeys;
+            $prefixedPersons = $this->prefixKey('persons');
+
+            array_push($keys, ...preg_grep("~^{$prefixedPersons}\/.*_.*.\.(jpg|png|webp)$~", $key));
+        }
+
+        $objectsToDelete = array_map(static function ($key): array {
+            return [
+                'Key' => $key,
+            ];
+        }, $keys);
+
+        if ($objectsToDelete === []) {
+            return true;
+        }
+
+        try {
+            $this->s3->deleteObjects([
+                'Bucket' => $this->config->s3['bucket'],
+                'Delete' => [
+                    'Objects' => $objectsToDelete,
+                ],
+            ]);
+        } catch (Exception) {
+            return false;
+        }
+
+        return true;
     }
 
     public function isHealthy(): bool
@@ -188,5 +217,16 @@ class S3 implements FileManagerInterface
         }
 
         return true;
+    }
+
+    private function prefixKey(string $key): string
+    {
+        if ($this->config->s3['keyPrefix'] === '') {
+            return $key;
+        }
+
+        $keyPrefix = rtrim((string) $this->config->s3['keyPrefix']);
+
+        return $keyPrefix . '/' . $key;
     }
 }

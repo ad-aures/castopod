@@ -31,7 +31,8 @@ class Media extends BaseConfig
         'protocol' => '',
         'endpoint' => '',
         'debug' => false,
-        'path_style_endpoint' => false,
+        'pathStyleEndpoint' => false,
+        'keyPrefix' => '',
     ];
 
     /**
