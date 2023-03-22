@@ -191,7 +191,8 @@ EOF
 	fi
 fi
 
-unitd --no-daemon &
-php spark castopod:database-update
-sleep 2 && curl -X PUT --data-binary @/config.json --unix-socket /var/run/control.unit.sock http://localhost/config/
-supercronic /crontab.txt
+#Run database migrations after 10 seconds (to wait for the database to be started)
+(sleep 10 && php spark castopod:database-update) &
+#Apply configuration after unit is started
+(sleep 2 && curl -X PUT --data-binary @/config.json --unix-socket /var/run/control.unit.sock http://localhost/config/) &
+supervisord
