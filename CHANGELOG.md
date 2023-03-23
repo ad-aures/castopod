@@ -1,3 +1,19 @@
+## [1.2.4](https://code.castopod.org/adaures/castopod/compare/v1.2.3...v1.2.4) (2023-03-23)
+
+### Bug Fixes
+
+- allow images to have .jpeg extension consistently
+  ([ae5e12b](https://code.castopod.org/adaures/castopod/commit/ae5e12be3b15fe50cb2311abcbbc19ac23b592f6))
+- **s3:** delete persons image sizes from bucket + add keyPrefix to config
+  ([208c271](https://code.castopod.org/adaures/castopod/commit/208c2715f900371987c3b75a749fe937a3db1991))
+- **s3:** do not create bucket if not exists, check if healthy instead
+  ([da7076f](https://code.castopod.org/adaures/castopod/commit/da7076fc2d49d07708d5adaa99733487b7f52e20))
+
+### Reverts
+
+- **homepage:** remove redirect to install if database is not setup
+  ([d4954e0](https://code.castopod.org/adaures/castopod/commit/d4954e026d5e0d48c5f15ed69d1ce71abb34d1a1))
+
 ## [1.2.3](https://code.castopod.org/adaures/castopod/compare/v1.2.2...v1.2.3) (2023-03-18)
 
 ### Bug Fixes
