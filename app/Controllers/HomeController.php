@@ -67,7 +67,7 @@ class HomeController extends BaseController
         }
 
         if ($errors !== []) {
-            return $this->response->setStatusCode(503, 'Problem with cache handler.')
+            return $this->response->setStatusCode(503)
                 ->setJSON([
                     'code' => 503,
                     'errors' => $errors,
