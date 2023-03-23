@@ -14,22 +14,12 @@ use App\Models\PodcastModel;
 use CodeIgniter\Database\Exceptions\DatabaseException;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\ResponseInterface;
-use Config\Services;
 use Modules\Media\FileManagers\FileManagerInterface;
 
 class HomeController extends BaseController
 {
     public function index(): RedirectResponse | string
     {
-        $db = db_connect();
-        if ($db->getDatabase() === '' || ! $db->tableExists('podcasts')) {
-            // Database has not been set or could not find the podcasts table
-            // Redirecting to install page because it is likely that Castopod has not been installed yet.
-            // NB: as base_url wouldn't have been defined here, redirect to install wizard manually
-            $route = Services::routes()->reverseRoute('install');
-            return redirect()->to(rtrim(host_url(), '/') . $route);
-        }
-
         $sortOptions = ['activity', 'created_desc', 'created_asc'];
         $sortBy = in_array($this->request->getGet('sort'), $sortOptions, true) ? $this->request->getGet(
             'sort'
