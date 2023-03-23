@@ -72,6 +72,7 @@ services:
     image: adobe/s3mock:latest
     container_name: castopod_s3
     environment:
+      - initialBuckets=castopod
       - debug=true
       - root=/data
     ports:

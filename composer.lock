@@ -4,7 +4,7 @@
     "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
     "This file is @generated automatically"
   ],
-  "content-hash": "84568da2a8ddda6d9bcd8eb63ee83682",
+  "content-hash": "44b79ceee12a4fe0ce58763458036267",
   "packages": [
     {
       "name": "adaures/ipcat-php",
@@ -116,16 +116,16 @@
     },
     {
       "name": "aws/aws-sdk-php",
-      "version": "3.261.10",
+      "version": "3.261.17",
       "source": {
         "type": "git",
         "url": "https://github.com/aws/aws-sdk-php.git",
-        "reference": "4889eff2b3fe35e878fbcaf8374d73f043609170"
+        "reference": "a8d2d89d79e912aa87bd2d381d34f47fbd08be65"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/4889eff2b3fe35e878fbcaf8374d73f043609170",
-        "reference": "4889eff2b3fe35e878fbcaf8374d73f043609170",
+        "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/a8d2d89d79e912aa87bd2d381d34f47fbd08be65",
+        "reference": "a8d2d89d79e912aa87bd2d381d34f47fbd08be65",
         "shasum": ""
       },
       "require": {
@@ -200,9 +200,9 @@
       "support": {
         "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
         "issues": "https://github.com/aws/aws-sdk-php/issues",
-        "source": "https://github.com/aws/aws-sdk-php/tree/3.261.10"
+        "source": "https://github.com/aws/aws-sdk-php/tree/3.261.17"
       },
-      "time": "2023-03-13T18:19:14+00:00"
+      "time": "2023-03-22T18:22:29+00:00"
     },
     {
       "name": "brick/math",
@@ -3176,16 +3176,16 @@
   "packages-dev": [
     {
       "name": "captainhook/captainhook",
-      "version": "5.15.2",
+      "version": "5.15.5",
       "source": {
         "type": "git",
         "url": "https://github.com/captainhookphp/captainhook.git",
-        "reference": "728fe3847c57f2d9cd4c53a8c26bc5522b42a1d0"
+        "reference": "7fb1c78586ea58ec4118c2d4db35c9d5da3fabb0"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/captainhookphp/captainhook/zipball/728fe3847c57f2d9cd4c53a8c26bc5522b42a1d0",
-        "reference": "728fe3847c57f2d9cd4c53a8c26bc5522b42a1d0",
+        "url": "https://api.github.com/repos/captainhookphp/captainhook/zipball/7fb1c78586ea58ec4118c2d4db35c9d5da3fabb0",
+        "reference": "7fb1c78586ea58ec4118c2d4db35c9d5da3fabb0",
         "shasum": ""
       },
       "require": {
@@ -3243,7 +3243,7 @@
       ],
       "support": {
         "issues": "https://github.com/captainhookphp/captainhook/issues",
-        "source": "https://github.com/captainhookphp/captainhook/tree/5.15.2"
+        "source": "https://github.com/captainhookphp/captainhook/tree/5.15.5"
       },
       "funding": [
         {
@@ -3251,7 +3251,7 @@
           "type": "github"
         }
       ],
-      "time": "2023-03-03T11:11:58+00:00"
+      "time": "2023-03-20T10:35:30+00:00"
     },
     {
       "name": "composer/pcre",
@@ -3935,16 +3935,16 @@
     },
     {
       "name": "phpstan/phpstan",
-      "version": "1.10.6",
+      "version": "1.10.7",
       "source": {
         "type": "git",
         "url": "https://github.com/phpstan/phpstan.git",
-        "reference": "50d089a3e0904b0fe7e2cf2d4fd37d427d64235a"
+        "reference": "b10ceb526d9607903c5b2673f1fc8775dbe48975"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/phpstan/phpstan/zipball/50d089a3e0904b0fe7e2cf2d4fd37d427d64235a",
-        "reference": "50d089a3e0904b0fe7e2cf2d4fd37d427d64235a",
+        "url": "https://api.github.com/repos/phpstan/phpstan/zipball/b10ceb526d9607903c5b2673f1fc8775dbe48975",
+        "reference": "b10ceb526d9607903c5b2673f1fc8775dbe48975",
         "shasum": ""
       },
       "require": {
@@ -3963,8 +3963,11 @@
       "description": "PHPStan - PHP Static Analysis Tool",
       "keywords": ["dev", "static analysis"],
       "support": {
+        "docs": "https://phpstan.org/user-guide/getting-started",
+        "forum": "https://github.com/phpstan/phpstan/discussions",
         "issues": "https://github.com/phpstan/phpstan/issues",
-        "source": "https://github.com/phpstan/phpstan/tree/1.10.6"
+        "security": "https://github.com/phpstan/phpstan/security/policy",
+        "source": "https://github.com/phpstan/phpstan-src"
       },
       "funding": [
         {
@@ -3980,7 +3983,7 @@
           "type": "tidelift"
         }
       ],
-      "time": "2023-03-09T16:55:12+00:00"
+      "time": "2023-03-16T15:24:20+00:00"
     },
     {
       "name": "phpunit/php-code-coverage",
@@ -4269,16 +4272,16 @@
     },
     {
       "name": "phpunit/phpunit",
-      "version": "10.0.16",
+      "version": "10.0.18",
       "source": {
         "type": "git",
         "url": "https://github.com/sebastianbergmann/phpunit.git",
-        "reference": "07d386a11ac7094032900f07cada1c8975d16607"
+        "reference": "582563ed2edc62d1455cdbe00ea49fe09428eef3"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/07d386a11ac7094032900f07cada1c8975d16607",
-        "reference": "07d386a11ac7094032900f07cada1c8975d16607",
+        "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/582563ed2edc62d1455cdbe00ea49fe09428eef3",
+        "reference": "582563ed2edc62d1455cdbe00ea49fe09428eef3",
         "shasum": ""
       },
       "require": {
@@ -4337,7 +4340,8 @@
       "keywords": ["phpunit", "testing", "xunit"],
       "support": {
         "issues": "https://github.com/sebastianbergmann/phpunit/issues",
-        "source": "https://github.com/sebastianbergmann/phpunit/tree/10.0.16"
+        "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
+        "source": "https://github.com/sebastianbergmann/phpunit/tree/10.0.18"
       },
       "funding": [
         {
@@ -4353,7 +4357,7 @@
           "type": "tidelift"
         }
       ],
-      "time": "2023-03-13T09:02:40+00:00"
+      "time": "2023-03-22T06:15:31+00:00"
     },
     {
       "name": "psr/container",
@@ -4408,16 +4412,16 @@
     },
     {
       "name": "rector/rector",
-      "version": "0.15.21",
+      "version": "0.15.23",
       "source": {
         "type": "git",
         "url": "https://github.com/rectorphp/rector.git",
-        "reference": "1cee8cc5d6d836e1bf9a3006d7b062adde3a6022"
+        "reference": "f4984ebd62b3613002869b0ddd6868261d62819e"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/rectorphp/rector/zipball/1cee8cc5d6d836e1bf9a3006d7b062adde3a6022",
-        "reference": "1cee8cc5d6d836e1bf9a3006d7b062adde3a6022",
+        "url": "https://api.github.com/repos/rectorphp/rector/zipball/f4984ebd62b3613002869b0ddd6868261d62819e",
+        "reference": "f4984ebd62b3613002869b0ddd6868261d62819e",
         "shasum": ""
       },
       "require": {
@@ -4446,7 +4450,7 @@
       "keywords": ["automation", "dev", "migration", "refactoring"],
       "support": {
         "issues": "https://github.com/rectorphp/rector/issues",
-        "source": "https://github.com/rectorphp/rector/tree/0.15.21"
+        "source": "https://github.com/rectorphp/rector/tree/0.15.23"
       },
       "funding": [
         {
@@ -4454,7 +4458,7 @@
           "type": "github"
         }
       ],
-      "time": "2023-03-06T11:44:29+00:00"
+      "time": "2023-03-22T15:22:45+00:00"
     },
     {
       "name": "sebastian/cli-parser",
@@ -4734,16 +4738,16 @@
     },
     {
       "name": "sebastian/diff",
-      "version": "5.0.0",
+      "version": "5.0.1",
       "source": {
         "type": "git",
         "url": "https://github.com/sebastianbergmann/diff.git",
-        "reference": "70dd1b20bc198da394ad542e988381b44e64e39f"
+        "reference": "aae9a0a43bff37bd5d8d0311426c87bf36153f02"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/70dd1b20bc198da394ad542e988381b44e64e39f",
-        "reference": "70dd1b20bc198da394ad542e988381b44e64e39f",
+        "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/aae9a0a43bff37bd5d8d0311426c87bf36153f02",
+        "reference": "aae9a0a43bff37bd5d8d0311426c87bf36153f02",
         "shasum": ""
       },
       "require": {
@@ -4779,7 +4783,8 @@
       "keywords": ["diff", "udiff", "unidiff", "unified diff"],
       "support": {
         "issues": "https://github.com/sebastianbergmann/diff/issues",
-        "source": "https://github.com/sebastianbergmann/diff/tree/5.0.0"
+        "security": "https://github.com/sebastianbergmann/diff/security/policy",
+        "source": "https://github.com/sebastianbergmann/diff/tree/5.0.1"
       },
       "funding": [
         {
@@ -4787,7 +4792,7 @@
           "type": "github"
         }
       ],
-      "time": "2023-02-03T07:00:31+00:00"
+      "time": "2023-03-23T05:12:41+00:00"
     },
     {
       "name": "sebastian/environment",
@@ -6430,16 +6435,16 @@
     },
     {
       "name": "symplify/easy-coding-standard",
-      "version": "11.2.10",
+      "version": "11.3.2",
       "source": {
         "type": "git",
         "url": "https://github.com/easy-coding-standard/easy-coding-standard.git",
-        "reference": "5fc343df9b86e154516ddf506f7fe0b421d7d5ef"
+        "reference": "d4159e06c0970e71a2a58d350160241e7cb3994b"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/easy-coding-standard/easy-coding-standard/zipball/5fc343df9b86e154516ddf506f7fe0b421d7d5ef",
-        "reference": "5fc343df9b86e154516ddf506f7fe0b421d7d5ef",
+        "url": "https://api.github.com/repos/easy-coding-standard/easy-coding-standard/zipball/d4159e06c0970e71a2a58d350160241e7cb3994b",
+        "reference": "d4159e06c0970e71a2a58d350160241e7cb3994b",
         "shasum": ""
       },
       "require": {
@@ -6447,7 +6452,8 @@
       },
       "conflict": {
         "friendsofphp/php-cs-fixer": "<3.0",
-        "squizlabs/php_codesniffer": "<3.6"
+        "squizlabs/php_codesniffer": "<3.6",
+        "symplify/coding-standard": "<11.3"
       },
       "bin": ["bin/ecs"],
       "type": "library",
@@ -6457,9 +6463,10 @@
       "notification-url": "https://packagist.org/downloads/",
       "license": ["MIT"],
       "description": "Use Coding Standard with 0-knowledge of PHP-CS-Fixer and PHP_CodeSniffer",
+      "keywords": ["Code style", "automation", "fixer", "static analysis"],
       "support": {
         "issues": "https://github.com/easy-coding-standard/easy-coding-standard/issues",
-        "source": "https://github.com/easy-coding-standard/easy-coding-standard/tree/11.2.10"
+        "source": "https://github.com/easy-coding-standard/easy-coding-standard/tree/11.3.2"
       },
       "funding": [
         {
@@ -6471,7 +6478,7 @@
           "type": "github"
         }
       ],
-      "time": "2023-02-27T10:00:30+00:00"
+      "time": "2023-03-22T15:28:51+00:00"
     },
     {
       "name": "symplify/rule-doc-generator-contracts",

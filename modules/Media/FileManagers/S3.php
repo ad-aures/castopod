@@ -26,21 +26,6 @@ class S3 implements FileManagerInterface
             'debug' => $config->s3['debug'],
             'use_path_style_endpoint' => $config->s3['pathStyleEndpoint'],
         ]);
-
-        try {
-            // create bucket if it does not already exist
-            if (! $this->s3->doesBucketExist((string) $this->config->s3['bucket'])) {
-                try {
-                    $this->s3->createBucket([
-                        'Bucket' => $this->config->s3['bucket'],
-                    ]);
-                } catch (Exception $exception) {
-                    log_message('critical', $exception->getMessage());
-                }
-            }
-        } catch (Exception $exception) {
-            throw new Exception($exception->getMessage(), $exception->getCode(), $exception);
-        }
     }
 
     public function save(File $file, string $key): string|false
@@ -210,6 +195,11 @@ class S3 implements FileManagerInterface
 
     public function isHealthy(): bool
     {
+        // check that bucket exists
+        if (! $this->s3->doesBucketExist((string) $this->config->s3['bucket'])) {
+            return false;
+        }
+
         try {
             // ok if bucket exists and you have permission to access it
             $this->s3->headBucket([
