@@ -57,66 +57,63 @@ mit einem sehr kleinen Fußabdruck.
 
 ## Motivation
 
-Das Podcasting-Ökosystem ist von Natur aus dezentralisiert: Du kannst deinen
-Podcast als RSS-Datei erstellen, im Web publizieren und von dort aus überall
-online teilen.
+The podcasting ecosystem is decentralized by nature: you can create your podcast
+as an RSS file, publish it on the web and have it shared everywhere online.
 
-Es ist in der Tat eines der einzigen Medien, die lange Zeit so geblieben sind.
+It is in fact one of the only media to have stayed this way for a long time.
 
-Da sich die Nutzungsmöglichkeiten weiterentwickeln, interessieren sich immer
-mehr Menschen für Podcasts: seien es Schöpfer, die neue Wege finden, ihre Ideen
-zu teilen, oder Zuhörer auf der Suche nach besseren Inhalten.
+As usages are evolving, more and more people are getting into podcasts: whether
+it is creators finding new ways to share their ideas, or listeners in the search
+for better content.
 
-Mit zunehmender Verbreitung des Podcasts versuchen einige Unternehmen, ihn auf
-ein stärker kontrollierbares und zentralisiertes Medium zu verlagern.
+With podcasting becoming more widely used, some companies are trying to shift it
+towards a more controlled and centralized medium.
 
-Castopod wurde in dem Bestreben erstellt, eine offene und nachhaltige
-Alternative für das Hosting Ihrer Podcasts zu bieten. Die Förderung der
-Dezentralisierung soll sicherstellen, dass sich Podcaster in ihrer Kreativität
-frei entfalten können.
+Castopod was created in an effort to provide an open and sustainable alternative
+to hosting your podcasts, promoting decentralization to ensure that podcasters
+creativity can express itself.
 
-Dieses Projekt wird von der Open-Source-Community und speziell von den
-[Fediverse](https://fediverse.party/en/fediverse/) und
-[Podcasting 2.0](https://podcastindex.org/) Bewegungen getragen.
+This project is pushed by the open-source community, and specifically by the
+[Fediverse](https://fediverse.party/en/fediverse/) and
+[Podcasting 2.0](https://podcastindex.org/) movements.
 
 ## Vergleiche mit anderen Lösungen
 
-Wir glauben, dass es nicht die eine Lösung für jeden gibt, es ist sehr abhängig
-von deinen Bedürfnissen. Also, hier sind Vergleiche mit anderen Tools, die Dir
-helfen sollen herauszufinden, ob Castopod das richtige für Dich ist.
+We believe that a solution is not necessarily right for everyone, it highly
+depends on your needs. So, here are comparisons with other tools to help you to
+gauge whether Castopod is the right fit for&nbsp;you.
 
 ### Castopod vs Wordpress
 
-Castopod wird oft als "das Wordpress für Podcasts" bezeichnet, da die
--Ähnlichkeiten zwischen den beiden übereinstimmen. In gewisser Hinsicht ist das
-richtig. Und tatsächlich war Castopod stark vom Wordpress-Ökosystem inspiriert,
-da es die einfache Übernahme durch die Community und die Anzahl der Websites,
-auf denen es ausgeführt wird, sah.
+Castopod is often referred to as "the Wordpress for podcasts" because of the
+similarities between the two. In some ways this is true. And actually, Castopod
+was greatly inspired by the Wordpress ecosystem, seeing the ease of adoption
+from the community and the number of websites running&nbsp;it.
 
-Genau wie Wordpress ist Castopod kostenlos; Open Source, erstellt mit PHP mit
-einer MySQL-Datenbank und ist so verpackt, dass Du es auf den Servern der
-meisten Websites problemlos installieren kannst.
+Just like Wordpress, Castopod is free & open source, built using PHP with a
+MySQL database and is packaged in a way that you can easily install on most web
+servers.
 
-Wordpress ist ein großartiger Weg, um Deine Website zu erstellen und mit Plugins
-zu erweitern, um das zu bekommen, was Du willst. Es ist ein vollwertiges CMS
-welches dir hilft, jede Art von Webseite online zu bekommen.
+Wordpress is a great way to create your website and extend it with plugins to
+get what you want. It is a full fledged CMS that helps you get any type of
+website online.
 
-Auf der anderen Seite soll Castopod die Bedürfnisse von Podcastern erfüllen.
-Konzentriere Dich ausschließlich aufs Podcasten und sonst nichts. Du benötigst
-kein Plugin, um dein Podcasting zu beginnen.
+On the other hand, Castopod is meant to address the podcasters needs
+specifically, focusing on podcasting, and nothing else. You don't need any
+plugin to get you started on your podcasting&nbsp;journey.
 
-Dadurch lassen sich die Podcast-spezifischen Prozesse optimieren: von der
-Erstellung Ihrer Podcasts und die Veröffentlichung neuer Folgen bis hin zu
-Rundfunk, Marketing und Analytik.
+This allows optimizing the processes specific to podcasting: ranging from the
+creation of your podcasts and the publication of new episodes all the way to
+broadcasting, marketing and analytics.
 
-Schließlich können Wordpress und Castopod je nach Bedarf sogar nebeneinander
-existieren, da sie die gleichen Anforderungen haben!
+Finally, depending on your needs, Wordpress and Castopod can even live side by
+side as they share the same requirements!
 
 ### Castopod vs Funkwale
 
-Funkwhale ist ein selbstgehosteter, moderner kostenloser und
-Open-Source-Musikserver. Just as Castopod, Funkwhale is on the fediverse, a
-decentralized social network allowing interoperability between the two.
+Funkwhale is a self-hosted, modern free and open-source music server. Just as
+Castopod, Funkwhale is on the fediverse, a decentralized social network allowing
+interoperability between the two.
 
 Funkwhale was initially built around music. And later on, as the project
 evolved, the ability to host podcasts was introduced.

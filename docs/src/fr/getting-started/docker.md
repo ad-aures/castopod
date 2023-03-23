@@ -8,6 +8,8 @@ sidebarDepth: 3
 Castopod envoie 3 images Docker au Hub Docker pendant son processus de
 construction automatisée :
 
+- [**`castopod/castopod`**](https://hub.docker.com/r/castopod/castopod): an all
+  in one castopod image using nginx unit
 - [**`castopod/app`**](https://hub.docker.com/r/castopod/app): the app bundle
   with all of Castopod dependencies
 - [**`castopod/web-server`**](https://hub.docker.com/r/castopod/web-server): an

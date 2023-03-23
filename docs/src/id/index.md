@@ -80,16 +80,16 @@ This project is pushed by the open-source community, and specifically by the
 
 ## Perbandingan dengan solusi lain
 
-Kami percaya bahwa tidak semua solusi sesuai untuk semua orang, ini sangat
-bergantung pada kebutuhan Anda. Jadi, inilah perbandingan dengan alat-alat lain
-untuk membantu Anda untuk mengetahui apa Castopod sesuai untuk&nbsp;Anda.
+We believe that a solution is not necessarily right for everyone, it highly
+depends on your needs. So, here are comparisons with other tools to help you to
+gauge whether Castopod is the right fit for&nbsp;you.
 
 ### Castopod vs Wordpress
 
-Castopod sering disebut sebagai "Wordpress-nya siniar" karena kemiripan antara
-Castopod dan Wordpress. In some ways this is true. And actually, Castopod was
-greatly inspired by the Wordpress ecosystem, seeing the ease of adoption from
-the community and the number of websites running&nbsp;it.
+Castopod is often referred to as "the Wordpress for podcasts" because of the
+similarities between the two. In some ways this is true. And actually, Castopod
+was greatly inspired by the Wordpress ecosystem, seeing the ease of adoption
+from the community and the number of websites running&nbsp;it.
 
 Just like Wordpress, Castopod is free & open source, built using PHP with a
 MySQL database and is packaged in a way that you can easily install on most web
@@ -112,9 +112,9 @@ side as they share the same requirements!
 
 ### Castopod vs Funkwhale
 
-Funkwhale adalah server musik modern yang dihosting sendiri, gratis dan sumber
-terbuka. Just as Castopod, Funkwhale is on the fediverse, a decentralized social
-network allowing interoperability between the two.
+Funkwhale is a self-hosted, modern free and open-source music server. Just as
+Castopod, Funkwhale is on the fediverse, a decentralized social network allowing
+interoperability between the two.
 
 Funkwhale was initially built around music. And later on, as the project
 evolved, the ability to host podcasts was introduced.
@@ -148,7 +148,8 @@ That being said, there are two main differences with other podcasting solutions:
 
 ## Berkontribusi
 
-Suka Castopod dan ingin membantu? Lihat dokumentasi berikut untuk mulai.
+Love Castopod and would like to help? Take a look at the following documentation
+to get you&nbsp;started.
 
 ### Code of conduct
 
@@ -250,8 +251,7 @@ specification. Contributions of any kind welcome!
 
 ## Kontak
 
-Anda dapat menghubungi kami untuk mendapatkan bantuan atau untuk menanyakan
-pertanyaan di:
+You may reach us for help or ask any question you have on:
 
 - [Discord](https://castopod.org/discord) (for direct interaction with
   developers and the community)
@@ -281,7 +281,7 @@ backers. If you'd like to help, please consider
 
 [GNU Affero General Public License v3.0](https://choosealicense.com/licenses/agpl-3.0/)
 
-Hak Cipta © 2020-sekarang, [Ad Aures](https://adaures.com/).
+Copyright © 2020-present, [Ad Aures](https://adaures.com/).
 https://img.shields.io/gitlab/v/release/2?color=brightgreen&gitlab_url=https%3A%2F%2Fcode.castopod.org%2F&include_prereleases&label=release
 https://img.shields.io/github/license/ad-aures/castopod?color=blue
 https://img.shields.io/badge/contributions-welcome-brightgreen.svg

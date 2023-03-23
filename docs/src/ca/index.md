@@ -59,91 +59,85 @@ molt petita.
 
 ## Motivació
 
-L'ecosistema de podcasting ès descentralitzat per naturalesa: podeu crear el
-vostre podcast com a fitxer RSS, publicar-lo a la web i compartir-lo a tot arreu
-en línia.
+The podcasting ecosystem is decentralized by nature: you can create your podcast
+as an RSS file, publish it on the web and have it shared everywhere online.
 
-De fet, és un dels únics mitjans que s'han mantingut durant molt de temps
-(dècades!).
+It is in fact one of the only media to have stayed this way for a long time.
 
-A mesura que els usos evolucionen, cada vegada hi ha més gent que s'incorpora
-als podcasts: ja siguin els creadors que troben noves maneres de compartir les
-seves idees o els oients a la recerca de millors continguts.
+As usages are evolving, more and more people are getting into podcasts: whether
+it is creators finding new ways to share their ideas, or listeners in the search
+for better content.
 
-Essent el podcasting cada cop més utilitzat, algunes empreses intenten
-canviar-lo cap a un mitjà més controlat i centralitzat, creant plataformes de
-publicació sota el seu control.
+With podcasting becoming more widely used, some companies are trying to shift it
+towards a more controlled and centralized medium.
 
-Castopod es va crear amb l'objectiu de proporcionar una alternativa oberta i
-sostenible per a que allotjeu els vostres podcasts, promovent la
-descentralització i així garantir que la creativitat dels podcasters pugui
-expressar-se.
+Castopod was created in an effort to provide an open and sustainable alternative
+to hosting your podcasts, promoting decentralization to ensure that podcasters
+creativity can express itself.
 
-Aquest projecte és impulsat per la comunitat de codi obert, i concretament pels
-moviments [Fediverse](https://fediverse.party/en/fediverse/) i \[Podcasting
-2.0\](https://podcastindex .org/).
+This project is pushed by the open-source community, and specifically by the
+[Fediverse](https://fediverse.party/en/fediverse/) and
+[Podcasting 2.0](https://podcastindex.org/) movements.
 
 ## Comparació amb altres solucions
 
-Creiem que una mateixa solució no és necessàriament adequada per a tothom, depèn
-molt de les vostres necessitats. Per tant, aquí us mostrem comparacions amb
-altres eines per ajudar-vos a determinar si Castopod és l'adequat per a
-vosaltres.
+We believe that a solution is not necessarily right for everyone, it highly
+depends on your needs. So, here are comparisons with other tools to help you to
+gauge whether Castopod is the right fit for&nbsp;you.
 
 ### Castopod vs Wordpress
 
-Casopod es coneix sovint com "el Wordpress per a podcasts" a causa de les
-similituds entre els dos. D'alguna manera això és cert. I, de fet, Castopod es
-va inspirar molt en l'ecosistema de Wordpress, veient la facilitat d'adopció per
-part de la comunitat i el nombre de llocs web que l'executen.
+Castopod is often referred to as "the Wordpress for podcasts" because of the
+similarities between the two. In some ways this is true. And actually, Castopod
+was greatly inspired by the Wordpress ecosystem, seeing the ease of adoption
+from the community and the number of websites running&nbsp;it.
 
-Igual que Wordpress, Castopod és gratuït i de codi obert, fet amb PHP amb una
-base de dades MySQL i està empaquetat de manera que es pot instal·lar fàcilment
-a la majoria del servidors web.
+Just like Wordpress, Castopod is free & open source, built using PHP with a
+MySQL database and is packaged in a way that you can easily install on most web
+servers.
 
-Wordpress és una manera fantàstica de crear el vostre lloc web i ampliar-lo amb
-complements per obtenir el que voleu. És un CMS complet que us ajuda a tenir
-qualsevol tipus de lloc web en línia.
+Wordpress is a great way to create your website and extend it with plugins to
+get what you want. It is a full fledged CMS that helps you get any type of
+website online.
 
-D'altra banda, Castopod està pensat per atendre les necessitats dels podcasters
-específicament, centrant-se en el podcasting i res més. No necessiteu cap
-complement o connector per començar el vostre viatge de podcasting.
+On the other hand, Castopod is meant to address the podcasters needs
+specifically, focusing on podcasting, and nothing else. You don't need any
+plugin to get you started on your podcasting&nbsp;journey.
 
-Això permet optimitzar els processos específics del podcasting: des de la
-creació dels teus podcasts i la publicació de nous episodis fins a la difusió,
-el màrqueting i l'anàlisi estadística.
+This allows optimizing the processes specific to podcasting: ranging from the
+creation of your podcasts and the publication of new episodes all the way to
+broadcasting, marketing and analytics.
 
-Finalment, depenent de les vostres necessitats, Wordpress i Castopod poden
-conviure fins i tot, ja que comparteixen els mateixos requisits!
+Finally, depending on your needs, Wordpress and Castopod can even live side by
+side as they share the same requirements!
 
 ### Castopod vs Funkwhale
 
-Funkwhale és un servidor de música de codi obert, modern i auto-allotjat. Igual
-que Castopod, Funkwhale es troba al Fediverse, una xarxa social descentralitzada
-que permet la interoperabilitat entre ambdues.
+Funkwhale is a self-hosted, modern free and open-source music server. Just as
+Castopod, Funkwhale is on the fediverse, a decentralized social network allowing
+interoperability between the two.
 
-Funkwhale es va construir inicialment al voltant de la música. I més tard, a
-mesura que el projecte anava evolucionant, es va introduir la possibilitat
-d'allotjar podcasts.
+Funkwhale was initially built around music. And later on, as the project
+evolved, the ability to host podcasts was introduced.
 
-A diferència de Funkwhale, Castopod ha estat dissenyat i construït exclusivament
-al voltant del podcasting. Això permet una implementació més fàcil de funcions
-relacionades amb l'ecosistema del podcasting, com ara les funcions del
-podcasting 2.0 (transcripcions, capítols, geo-localitzacions, persones, ...).
+Unlike Funkwhale, Castopod has been designed and built around podcasting
+exclusively. This allows easier implementation for features related to the
+podcasting ecosystem, such as the podcasting 2.0 features (transcripts,
+chapters, locations, persons, …).
 
-Per tant, probablement hauríeu d'utilitzar Funkwhale si voleu allotjar la vostra
-música i utilitzar Castopod si voleu allotjar els vostres podcasts.
+So, you should probably use Funkwhale if you want to host your music, and use
+Castopod if you want to host your podcasts.
 
 ### Castopod vs altres plataformes de podcast
 
-Hi ha moltes solucions per allotjar els vostres podcasts, algunes de les quals
-són realment fantàstiques i [moltes](https://podcastindex.org/apps) s'estan
-incorporant al carro Podcasting 2.0. com Castopod!
+There are many solutions for you to host your podcasts, some of which are really
+great and [a lot of them](https://podcastindex.org/apps) are jumping into the
+Podcasting 2.0 wagon just like Castopod!
 
 Cadascuna d'aquestes solucions difereix entre si, podeu comparar-les amb la
 [llista de funcions](#característiques).
 
-Dit això, hi ha dues diferències principals amb altres solucions de podcasting:
+That being said, there are two main differences with other podcasting solutions:
 
 - Castopod es pot auto-allotjar i és la única solució que us permet mantenir el
   control total sobre el que produïu. A més, com que és de codi obert, fins i
@@ -155,15 +149,15 @@ Dit això, hi ha dues diferències principals amb altres solucions de podcasting
 
 ## Col·laborar
 
-Us agrada Castopod i voleu ajudar? Fes una ullada a la documentació següent per
-començar.
+Love Castopod and would like to help? Take a look at the following documentation
+to get you&nbsp;started.
 
 ### Codi de conducta
 
-Castopod ha adoptat un codi de conducta que esperem que els participants del
-projecte compleixin. Si us plau, llegiu el
-[manual CODE_OF_CONDUCT](https://code.castopod.org/adaures/castopod/-/blob/beta/CODE_OF_CONDUCT.md)
-perquè pugueu entendre quines accions seran o no tolerades.
+Castopod has adopted a Code of Conduct that we expect project participants to
+adhere to. Please read the
+[CODE_OF_CONDUCT manual](https://code.castopod.org/adaures/castopod/-/blob/beta/CODE_OF_CONDUCT.md)
+so that you can understand what actions will and will not be&nbsp;tolerated.
 
 ### Guia de col·laboració
 
@@ -173,8 +167,8 @@ i millores, i com construir i prova els teus canvis a Castopod.
 
 ## Col·laboradors ✨
 
-Gràcies a aquestes persones meravelloses
-([clau emoji](https://allcontributors.org/docs/en/emoji-key)):
+Thanks goes to these wonderful people
+([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -252,22 +246,21 @@ Gràcies a aquestes persones meravelloses
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-Aquest projecte segueix l'especificació
-[all-contributors](https://github.com/all-contributors/all-contributors).
-Benvingudes les col·laboracions de qualsevol mena!
+This project follows the
+[all-contributors](https://github.com/all-contributors/all-contributors)
+specification. Contributions of any kind welcome!
 
 ## Contacte
 
-Podeu contactar amb nosaltres per demanar ajuda o fer qualsevol pregunta que
-tingueu via:
+You may reach us for help or ask any question you have on:
 
 - [Discord](https://castopod.org/discord) (per a la interacció directa amb
   desenvolupadors i la comunitat)
 - [Seguiment d'incidències](https://code.castopod.org/adaures/castopod/-/issues)
   (per a sol·licituds de noves funcionalitats i informes d'errors)
 
-Alternativament, podeu seguir-nos a les plataformes de xarxes socials per rebre
-notícies sobre Castopod:
+Alternatively, you can follow us on social media platforms to get news about
+Castopod:
 
 - [podlibre.social](https://podlibre.social/@Castopod) (instància de Mastodon)
 - [Twitter](https://twitter.com/castopod)
@@ -276,9 +269,9 @@ notícies sobre Castopod:
 
 ## Patrocinadors
 
-El desenvolupament continu de Castopod és possible amb el suport dels seus
-patrocinadors. Si voleu ajudar, considereu
-[patrocinar el desenvolupament de Castopod](https://opencollective.com/castopod/contribute).
+The ongoing development of Castopod is made possible with the support of its
+backers. If you'd like to help, please consider
+[sponsoring Castopod's development](https://opencollective.com/castopod/contribute).
 
 <div class="flex flex-wrap gap-x-16 gap-y-8">
   <a href="https://adaures.com/" target="_blank" rel="noopener noreferrer"><img src="/images/sponsors/adaures.svg" alt="Ad Aures Logo" class="h-16" /></a>
@@ -289,7 +282,7 @@ patrocinadors. Si voleu ajudar, considereu
 
 [GNU Affero General Public License v3.0](https://choosealicense.com/licenses/agpl-3.0/)
 
-Copyright © 2020-avui, [Ad Aures](https://adaures.com/).
+Copyright © 2020-present, [Ad Aures](https://adaures.com/).
 https://img.shields.io/gitlab/v/release/2?color=brightgreen&gitlab_url=https%3A%2F%2Fcode.castopod.org%2F&include_prereleases&label=release
 https://img.shields.io/github/license/ad-aures/castopod?color=blue
 https://img.shields.io/badge/contributions-welcome-brightgreen.svg

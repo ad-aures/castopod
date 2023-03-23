@@ -54,70 +54,85 @@ Castopod 易于安装，并使用 [CodeIgniter4](https://codeigniter.com/) 构�
 
 ## 创作动机
 
-播客生态系统本质上是去中心化的：你可以创建自己的播客订阅源，将其发布到网络上并在
-线共享。
+The podcasting ecosystem is decentralized by nature: you can create your podcast
+as an RSS file, publish it on the web and have it shared everywhere online.
 
-事实上，它是唯一长期保持这种状态的媒体之一。
+It is in fact one of the only media to have stayed this way for a long time.
 
-随着习惯的发展，越来越多的人开始接触播客：允许创作者寻找新的方式来分享他们的想法
-，或是让听众获得更好的内容。
+As usages are evolving, more and more people are getting into podcasts: whether
+it is creators finding new ways to share their ideas, or listeners in the search
+for better content.
 
-随着播客的使用越来越广泛，一些公司正试图控制播客与集中化。
+With podcasting becoming more widely used, some companies are trying to shift it
+towards a more controlled and centralized medium.
 
-Castopod 的创建旨在提供一种开放且可持续的替代方案来托管你的播客，促进权力下放，
-确保播客可以用创造力表达自己。
+Castopod was created in an effort to provide an open and sustainable alternative
+to hosting your podcasts, promoting decentralization to ensure that podcasters
+creativity can express itself.
 
-此项目由开源社区推动的，特别是
-由[联邦宇宙](https://fediverse.party/en/fediverse/) 和
-[播客 2.0](https://podcastindex.org/) 推动。
+This project is pushed by the open-source community, and specifically by the
+[Fediverse](https://fediverse.party/en/fediverse/) and
+[Podcasting 2.0](https://podcastindex.org/) movements.
 
 ## 与其他解决方案的对比
 
-我们相信此解决方案不一定适合所有人，它只取决于你是否需要。 因此，下面是与其他解
-决方案的比较，可帮助判断 Castopod 是否适合你。
+We believe that a solution is not necessarily right for everyone, it highly
+depends on your needs. So, here are comparisons with other tools to help you to
+gauge whether Castopod is the right fit for&nbsp;you.
 
 ### Castopod 对比 Wordpress
 
-Castopod 经常被称为 “播客中的 Wordpress”，因为两者有很多相似之处。 在某些方面，
-确实如此。 实际上，Castopod 受到 WordPress 生态的极大启发，看到了采用社区的易用
-性 以及运行它的网站数量。
+Castopod is often referred to as "the Wordpress for podcasts" because of the
+similarities between the two. In some ways this is true. And actually, Castopod
+was greatly inspired by the Wordpress ecosystem, seeing the ease of adoption
+from the community and the number of websites running&nbsp;it.
 
-就像 Wordpress 一样，Castopod 是免费且开源的，PHP 构建并使用 MySQL 数据库，可以
-在大多数 Web 服务器上轻松安装。
+Just like Wordpress, Castopod is free & open source, built using PHP with a
+MySQL database and is packaged in a way that you can easily install on most web
+servers.
 
-Wordpress 是创建你的网站，并使用插件扩展以获得想要内容的好办法。 这是一个成熟的
-CMS，可以帮助你在线访问任何类型的网站。
+Wordpress is a great way to create your website and extend it with plugins to
+get what you want. It is a full fledged CMS that helps you get any type of
+website online.
 
-另一方面，Castopod 旨在专门满足播客的需求，专注于播客，而不是其他。 你不需要任何
-插件即可轻松开始播客之旅。
+On the other hand, Castopod is meant to address the podcasters needs
+specifically, focusing on podcasting, and nothing else. You don't need any
+plugin to get you started on your podcasting&nbsp;journey.
 
-还拥有对播客的独特优化：从播客的创建和新剧集的发布一直到广播，营销和分析。
+This allows optimizing the processes specific to podcasting: ranging from the
+creation of your podcasts and the publication of new episodes all the way to
+broadcasting, marketing and analytics.
 
-最后，根据你的需要，Wordpress 和 Castopod 甚至可以共存，因为他们有相同的配置环境
-！
+Finally, depending on your needs, Wordpress and Castopod can even live side by
+side as they share the same requirements!
 
 ### Castopod 对比 Funkwhale
 
-Funkwhale 是一个自托管、现代界面、免费开源的音乐服务器。 就像 Castopod 一样
-，Funkwhale 也位于联邦宇宙中，这是一个去中心化的社交网络，允许两者的互联。
+Funkwhale is a self-hosted, modern free and open-source music server. Just as
+Castopod, Funkwhale is on the fediverse, a decentralized social network allowing
+interoperability between the two.
 
-Funkwhale 最初是围绕音乐制作的。 后来，随着项目的发展，引入了托管播客的能力。
+Funkwhale was initially built around music. And later on, as the project
+evolved, the ability to host podcasts was introduced.
 
-与 Funkwhale 不同，Castopod 是只围绕播客设计和构建的。 这样可以更简单地实现与播
-客相关的生态系统，例如播客 2.0 功能（报表、 章节、地点、人员…）。
+Unlike Funkwhale, Castopod has been designed and built around podcasting
+exclusively. This allows easier implementation for features related to the
+podcasting ecosystem, such as the podcasting 2.0 features (transcripts,
+chapters, locations, persons, …).
 
-因此，如果你想托管你的音乐库，你可能应该使用 Funkwhale，如果您想主持一个播客，请
-使用 Castopod。
+So, you should probably use Funkwhale if you want to host your music, and use
+Castopod if you want to host your podcasts.
 
 ### Castopod 与其他播客
 
-有许多非常棒的解决方案可供你托管播客，并
-且[很多](https://podcastindex.org/apps)正在搭上播客 2.0 的便车，就像 Castopod 一
-样！
+There are many solutions for you to host your podcasts, some of which are really
+great and [a lot of them](https://podcastindex.org/apps) are jumping into the
+Podcasting 2.0 wagon just like Castopod!
 
-这些解决方案各不相同，你可以对比 [功能列表](#features)。
+Each of these solutions differ from one another, you may compare with the
+[list of features](#features).
 
-话虽如此，Castopod 与其他播客解决方案有两个主要区别：
+That being said, there are two main differences with other podcasting solutions:
 
 - Castopod 是自托管的，唯一允许你控制所有数据的方案。 并且，由于是开源的，甚至可
   以按自己的想法修改。
@@ -127,14 +142,15 @@ Funkwhale 最初是围绕音乐制作的。 后来，随着项目的发展，引
 
 ## 贡献
 
-喜欢 Castopod 并且想帮忙吗? 请查看以下文档以帮助你入门。 请查看以下文档以帮助你
-入门。
+Love Castopod and would like to help? Take a look at the following documentation
+to get you&nbsp;started.
 
 ### 行为准则
 
-Castopod 已经通过了一项行为准则，并希望所有的参与者都能够遵循本行为准则。 请阅
-读[行为准则](https://code.castopod.org/adaures/castopod/-/blob/beta/CODE_OF_CONDUCT.md)
-以便了解哪些行为被允许，哪些行为不会被容忍。
+Castopod has adopted a Code of Conduct that we expect project participants to
+adhere to. Please read the
+[CODE_OF_CONDUCT manual](https://code.castopod.org/adaures/castopod/-/blob/beta/CODE_OF_CONDUCT.md)
+so that you can understand what actions will and will not be&nbsp;tolerated.
 
 ### 贡献指南
 
@@ -143,8 +159,8 @@ Castopod 已经通过了一项行为准则，并希望所有的参与者都能�
 
 ## 贡献者 ✨
 
-感谢这些了不起的人
-([表情符号键](https://allcontributors.org/docs/en/emoji-key)):
+Thanks goes to these wonderful people
+([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -222,18 +238,20 @@ Castopod 已经通过了一项行为准则，并希望所有的参与者都能�
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-此项目遵循 [所有贡献者](https://github.com/all-contributors/all-contributors) 规
-范。 欢迎任何形式的贡献！
+This project follows the
+[all-contributors](https://github.com/all-contributors/all-contributors)
+specification. Contributions of any kind welcome!
 
 ## 联系
 
-你可以联系我们寻求帮助或提出任何问题：
+You may reach us for help or ask any question you have on:
 
 - [Discord](https://castopod.org/discord) （用于与开发人员和社区直接互动）
 - [问题跟踪器](https://code.castopod.org/adaures/castopod/-/issues)（用于功能请
   求和错误报告）
 
-或者，你可以在社交媒体上关注我们，以获取有关 Castopod 的新闻：
+Alternatively, you can follow us on social media platforms to get news about
+Castopod:
 
 - [podlibre.social](https://podlibre.social/@Castopod) （Mastodon 实例）
 - [推特](https://twitter.com/castopod)
@@ -242,8 +260,9 @@ Castopod 已经通过了一项行为准则，并希望所有的参与者都能�
 
 ## 赞助商
 
-Castopod 的发展离不开赞助商的支持。 如果你想要帮助我们，请考
-虑[赞助 Castopod 的开发](https://opencollective.com/castopod/contribute).
+The ongoing development of Castopod is made possible with the support of its
+backers. If you'd like to help, please consider
+[sponsoring Castopod's development](https://opencollective.com/castopod/contribute).
 
 <div class="flex flex-wrap gap-x-16 gap-y-8">
   <a href="https://adaures.com/" target="_blank" rel="noopener noreferrer"><img src="/images/sponsors/adaures.svg" alt="Ad Aures Logo" class="h-16" /></a>
@@ -254,8 +273,7 @@ Castopod 的发展离不开赞助商的支持。 如果你想要帮助我们，�
 
 [GNU Affero General Public License v3.0](https://choosealicense.com/licenses/agpl-3.0/)
 
-Copyright © 2020-present, [Ad Aures](https://adaures.com/). Copyright ©
-2020-present, [Ad Aures](https://adaures.com/).
+Copyright © 2020-present, [Ad Aures](https://adaures.com/).
 https://img.shields.io/gitlab/v/release/2?color=brightgreen&gitlab_url=https%3A%2F%2Fcode.castopod.org%2F&include_prereleases&label=release
 https://img.shields.io/github/license/ad-aures/castopod?color=blue
 https://img.shields.io/badge/contributions-welcome-brightgreen.svg

@@ -8,6 +8,8 @@ sidebarDepth: 3
 Castopod dă push la 3 imagini Docker pe Docker Hub pe parcursul procesului de
 compilare automată
 
+- [**`castopod/castopod`**](https://hub.docker.com/r/castopod/castopod): an all
+  in one castopod image using nginx unit
 - [**`castopod/app`**](https://hub.docker.com/r/castopod/app): pachetul
   aplicației cu toate dependințele Castopod
 - [**`castopod/web-server`**](https://hub.docker.com/r/castopod/web-server): o

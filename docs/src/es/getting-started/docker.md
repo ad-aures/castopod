@@ -8,6 +8,8 @@ sidebarDepth: 3
 Castopod lanza 3 imágenes Docker al DockerHub durante su proceso de construcción
 automatizada:
 
+- [**`castopod/castopod`**](https://hub.docker.com/r/castopod/castopod): an all
+  in one castopod image using nginx unit
 - [**`castopod/app`**](https://hub.docker.com/r/castopod/app): el paquete
   completo de Castopod con todas las dependencias.
 - [**`castopod/web-server`**](https://hub.docker.com/r/castopod/web-server): una

@@ -186,15 +186,16 @@ media.s3.region="your_s3_region"
 
 #### S3 config options
 
-| Variable name             | Type    | Default     |
-| ------------------------- | ------- | ----------- |
-| **`endpoint`**            | string  | `undefined` |
-| **`key`**                 | string  | `undefined` |
-| **`secret`**              | string  | `undefined` |
-| **`region`**              | string  | `undefined` |
-| **`bucket`**              | string  | `castopod`  |
-| **`protocol`**            | number  | `undefined` |
-| **`path_style_endpoint`** | boolean | `false`     |
+| Variable name           | Type    | Default     |
+| ----------------------- | ------- | ----------- |
+| **`endpoint`**          | string  | `undefined` |
+| **`key`**               | string  | `undefined` |
+| **`secret`**            | string  | `undefined` |
+| **`region`**            | string  | `undefined` |
+| **`bucket`**            | string  | `castopod`  |
+| **`protocol`**          | number  | `undefined` |
+| **`pathStyleEndpoint`** | boolean | `false`     |
+| **`keyPrefix`**         | string  | `undefined` |
 
 ## Paquets de la comunitat
 

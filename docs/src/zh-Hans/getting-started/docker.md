@@ -7,6 +7,8 @@ sidebarDepth: 3
 
 Castopod 在其自动构建期间会将 3 个 Docker 映像推送到 Docker Hub ：
 
+- [**`castopod/castopod`**](https://hub.docker.com/r/castopod/castopod): an all
+  in one castopod image using nginx unit
 - [**`castopod/app`**](https://hub.docker.com/r/castopod/app)：应用程序包，包含
   所有 Castopod 依赖关系
 - [**`castopod/web-server`**](https://hub.docker.com/r/castopod/web-server)：Castopod
