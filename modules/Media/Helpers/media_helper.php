@@ -82,3 +82,15 @@ if (! function_exists('media_path')) {
         return config('Media')->root . '/' . $uri;
     }
 }
+
+if (! function_exists('media_path_absolute')) {
+    /**
+     * Prefixes the absolute storage directory to the media path of a given uri
+     *
+     * @param  string|string[] $uri URI string or array of URI segments
+     */
+    function media_path_absolute(string | array $uri = ''): string
+    {
+        return config('Media')->storage . '/' . media_path($uri);
+    }
+}

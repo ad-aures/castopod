@@ -21,11 +21,13 @@ class FS implements FileManagerInterface
      */
     public function save(File $file, string $path): string | false
     {
+        helper('media');
+
         if ((pathinfo($path, PATHINFO_EXTENSION) === '') && (($extension = $file->getExtension()) !== '')) {
             $path = $path . '.' . $extension;
         }
 
-        $mediaRoot = $this->config->root;
+        $mediaRoot = media_path_absolute();
 
         if (! file_exists(dirname($mediaRoot . '/' . $path))) {
             mkdir(dirname($mediaRoot . '/' . $path), 0777, true);
@@ -49,7 +51,7 @@ class FS implements FileManagerInterface
     {
         helper('media');
 
-        return unlink(media_path($key));
+        return unlink(media_path_absolute($key));
     }
 
     public function getUrl(string $key): string
@@ -68,21 +70,21 @@ class FS implements FileManagerInterface
     {
         helper('media');
 
-        return rename(media_path($oldKey), media_path($newKey));
+        return rename(media_path_absolute($oldKey), media_path_absolute($newKey));
     }
 
     public function getFileContents(string $key): string
     {
         helper('media');
 
-        return (string) file_get_contents(media_path($key));
+        return (string) file_get_contents(media_path_absolute($key));
     }
 
     public function getFileInput(string $key): string
     {
         helper('media');
 
-        return media_path($key);
+        return media_path_absolute($key);
     }
 
     public function deletePodcastImageSizes(string $podcastHandle): bool
@@ -91,7 +93,7 @@ class FS implements FileManagerInterface
 
         $allPodcastImagesPaths = [];
         foreach (['jpg', 'jpeg', 'png', 'webp'] as $ext) {
-            $images = glob(media_path("/podcasts/{$podcastHandle}/*_*{$ext}"));
+            $images = glob(media_path_absolute("/podcasts/{$podcastHandle}/*_*{$ext}"));
 
             if (! $images) {
                 return false;
@@ -115,7 +117,7 @@ class FS implements FileManagerInterface
 
         $allPersonsImagesPaths = [];
         foreach (['jpg', 'jpeg', 'png', 'webp'] as $ext) {
-            $images = glob(media_path("/persons/*_*{$ext}"));
+            $images = glob(media_path_absolute("/persons/*_*{$ext}"));
 
             if (! $images) {
                 return false;
@@ -137,6 +139,6 @@ class FS implements FileManagerInterface
     {
         helper('media');
 
-        return is_really_writable(ROOTPATH . 'public/' . media_path());
+        return is_really_writable(media_path_absolute());
     }
 }

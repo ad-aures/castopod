@@ -61,7 +61,7 @@ class SettingsController extends BaseController
             helper(['filesystem', 'media']);
 
             // delete site folder in media before repopulating it
-            delete_files(media_path('/site'));
+            delete_files(media_path_absolute('/site'));
 
             // save original in disk
             $originalFilename = (new FS(config('Media')))->save(
@@ -71,9 +71,9 @@ class SettingsController extends BaseController
 
             // convert jpeg image to png if not
             if ($siteIconFile->getClientMimeType() !== 'image/png') {
-                service('image')->withFile(media_path($originalFilename))
+                service('image')->withFile(media_path_absolute($originalFilename))
                     ->convert(IMAGETYPE_JPEG)
-                    ->save(media_path('/site/icon.png'));
+                    ->save(media_path_absolute('/site/icon.png'));
             }
 
             // generate random hash to use as a suffix to renew browser cache
@@ -81,15 +81,15 @@ class SettingsController extends BaseController
 
             // generate ico
             $ico_lib = new PHP_ICO();
-            $ico_lib->add_image(media_path('/site/icon.png'), [[32, 32], [64, 64]]);
-            $ico_lib->save_ico(media_path("/site/favicon.{$randomHash}.ico"));
+            $ico_lib->add_image(media_path_absolute('/site/icon.png'), [[32, 32], [64, 64]]);
+            $ico_lib->save_ico(media_path_absolute("/site/favicon.{$randomHash}.ico"));
 
             // resize original to needed sizes
             foreach ([64, 180, 192, 512] as $size) {
                 service('image')
-                    ->withFile(media_path('/site/icon.png'))
+                    ->withFile(media_path_absolute('/site/icon.png'))
                     ->resize($size, $size)
-                    ->save(media_path("/site/icon-{$size}.{$randomHash}.png"));
+                    ->save(media_path_absolute("/site/icon-{$size}.{$randomHash}.png"));
             }
 
             service('settings')
@@ -109,7 +109,7 @@ class SettingsController extends BaseController
     {
         helper(['filesystem', 'media']);
         // delete site folder in media
-        delete_files(media_path('/site'));
+        delete_files(media_path_absolute('/site'));
 
         service('settings')
             ->forget('App.siteIcon');

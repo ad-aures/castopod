@@ -56,6 +56,14 @@ class Media extends BaseConfig
     public string $root = 'media';
 
     /**
+     * --------------------------------------------------------------------------
+     * Media storage folder
+     * --------------------------------------------------------------------------
+     * Defines the folder used to store the media root folder
+     */
+    public string $storage = ROOTPATH . 'public';
+
+    /**
      * @var array<string, string>
      */
     public array $folders = [
