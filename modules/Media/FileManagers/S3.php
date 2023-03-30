@@ -88,7 +88,7 @@ class S3 implements FileManagerInterface
         }
 
         // delete old object
-        return $this->delete($this->prefixKey($oldKey));
+        return $this->delete($oldKey);
     }
 
     public function getFileContents(string $key): string
@@ -108,44 +108,8 @@ class S3 implements FileManagerInterface
 
     public function deletePodcastImageSizes(string $podcastHandle): bool
     {
-        $results = $this->s3->getPaginator('ListObjectsV2', [
-            'Bucket' => $this->config->s3['bucket'],
-            'Prefix' => $this->prefixKey('podcasts/' . $podcastHandle . '/'),
-        ]);
-
-        $keys = [];
-        foreach ($results as $result) {
-            $key = array_map(static function ($object) {
-                return $object['Key'];
-            }, $result['Contents']);
-
-            $prefixedPodcasts = $this->prefixKey('podcasts');
-
-            array_push(
-                $keys,
-                ...preg_grep("~^{$prefixedPodcasts}\/{$podcastHandle}\/.*_.*.\.(jpe?g|png|webp)$~", $key)
-            );
-        }
-
-        $objectsToDelete = array_map(static function ($key): array {
-            return [
-                'Key' => $key,
-            ];
-        }, $keys);
-
-        if ($objectsToDelete === []) {
-            return true;
-        }
-
-        try {
-            $this->s3->deleteObjects([
-                'Bucket' => $this->config->s3['bucket'],
-                'Delete' => [
-                    'Objects' => $objectsToDelete,
-                ],
-            ]);
-        } catch (Exception) {
-            return false;
+        foreach (['jpg', 'jpeg', 'png', 'webp'] as $ext) {
+            $this->deleteAll('podcasts/' . $podcastHandle, "*_*{$ext}");
         }
 
         return true;
@@ -153,27 +117,37 @@ class S3 implements FileManagerInterface
 
     public function deletePersonImagesSizes(): bool
     {
-        $results = $this->s3->getPaginator('ListObjectsV2', [
-            'Bucket' => $this->config->s3['bucket'],
-            'prefix' => $this->prefixKey('persons/'),
-        ]);
-
-        $keys = [];
-        foreach ($results as $result) {
-            $key = array_map(static function ($object) {
-                return $object['Key'];
-            }, $result['Contents']);
-
-            $prefixedPersons = $this->prefixKey('persons');
-
-            array_push($keys, ...preg_grep("~^{$prefixedPersons}\/.*_.*.\.(jpe?g|png|webp)$~", $key));
+        foreach (['jpg', 'jpeg', 'png', 'webp'] as $ext) {
+            $this->deleteAll('persons', "*_*{$ext}");
         }
 
-        $objectsToDelete = array_map(static function ($key): array {
-            return [
-                'Key' => $key,
-            ];
-        }, $keys);
+        return true;
+    }
+
+    public function deleteAll(string $prefix, ?string $pattern = '*'): bool
+    {
+        $prefix = rtrim($this->prefixKey($prefix), '/') . '/'; // make sure that there is a trailing slash
+        $pattern = $prefix . $pattern;
+
+        $results = $this->s3->getPaginator('ListObjectsV2', [
+            'Bucket' => $this->config->s3['bucket'],
+            'prefix' => $prefix,
+        ]);
+
+        $objectsToDelete = [];
+        foreach ($results as $result) {
+            if ($result['Contents'] === null) {
+                continue;
+            }
+
+            foreach ($result['Contents'] as $object) {
+                if (fnmatch($pattern, $object['Key'])) {
+                    $objectsToDelete[] = [
+                        'Key' => $object['Key'],
+                    ];
+                }
+            }
+        }
 
         if ($objectsToDelete === []) {
             return true;

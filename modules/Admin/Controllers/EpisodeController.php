@@ -911,9 +911,11 @@ class EpisodeController extends BaseController
             $episodeMediaList[] = $this->episode->cover;
         }
 
+        $mediaModel = new MediaModel();
+
         //delete episode media records from database
         foreach ($episodeMediaList as $episodeMedia) {
-            if ($episodeMedia !== null && ! $episodeMedia->delete()) {
+            if ($episodeMedia !== null && ! $mediaModel->delete($episodeMedia->id)) {
                 $db->transRollback();
                 return redirect()
                     ->back()

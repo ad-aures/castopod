@@ -31,6 +31,7 @@ use Modules\Analytics\Models\AnalyticsPodcastModel;
 use Modules\Analytics\Models\AnalyticsWebsiteByBrowserModel;
 use Modules\Analytics\Models\AnalyticsWebsiteByEntryPageModel;
 use Modules\Analytics\Models\AnalyticsWebsiteByRefererModel;
+use Modules\Media\FileManagers\FileManagerInterface;
 use Modules\Media\Models\MediaModel;
 
 class PodcastController extends BaseController
@@ -497,8 +498,10 @@ class PodcastController extends BaseController
                 $episodeMediaList[] = $podcastEpisode->cover;
             }
 
+            $mediaModel = new MediaModel();
+
             foreach ($episodeMediaList as $episodeMedia) {
-                if ($episodeMedia !== null && ! $episodeMedia->delete()) {
+                if ($episodeMedia !== null && ! $mediaModel->delete($episodeMedia->id)) {
                     $db->transRollback();
                     return redirect()
                         ->back()
@@ -538,8 +541,10 @@ class PodcastController extends BaseController
             ];
         }
 
+        $mediaModel = new MediaModel();
+
         foreach ($podcastMediaList as $podcastMedia) {
-            if ($podcastMedia['file'] !== null && ! $podcastMedia['file']->delete()) {
+            if ($podcastMedia['file'] !== null && ! $mediaModel->delete($podcastMedia['file']->id)) {
                 $db->transRollback();
                 return redirect()
                     ->back()
@@ -587,15 +592,12 @@ class PodcastController extends BaseController
 
         $db->transComplete();
 
+        /** @var FileManagerInterface $fileManager */
+        $fileManager = service('file_manager');
+
         //delete podcast media files and folder
         $folder = 'podcasts/' . $this->podcast->handle;
-
-        $mediaRoot = config('App')
-            ->mediaRoot . '/' . $folder;
-
-        helper('filesystem');
-
-        if (! delete_files($mediaRoot) || ! rmdir($mediaRoot)) {
+        if (! $fileManager->deleteAll($folder)) {
             return redirect()->route('podcast-list')
                 ->with('message', lang('Podcast.messages.deleteSuccess', [
                     'podcast_handle' => $this->podcast->handle,

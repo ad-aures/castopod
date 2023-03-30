@@ -51,7 +51,7 @@ class FS implements FileManagerInterface
     {
         helper('media');
 
-        return unlink(media_path_absolute($key));
+        return @unlink(media_path_absolute($key));
     }
 
     public function getUrl(string $key): string
@@ -89,23 +89,8 @@ class FS implements FileManagerInterface
 
     public function deletePodcastImageSizes(string $podcastHandle): bool
     {
-        helper('media');
-
-        $allPodcastImagesPaths = [];
         foreach (['jpg', 'jpeg', 'png', 'webp'] as $ext) {
-            $images = glob(media_path_absolute("/podcasts/{$podcastHandle}/*_*{$ext}"));
-
-            if (! $images) {
-                return false;
-            }
-
-            array_push($allPodcastImagesPaths, ...$images);
-        }
-
-        foreach ($allPodcastImagesPaths as $podcastImagePath) {
-            if (is_file($podcastImagePath)) {
-                unlink($podcastImagePath);
-            }
+            $this->deleteAll("podcasts/{$podcastHandle}", "*_*{$ext}");
         }
 
         return true;
@@ -113,23 +98,34 @@ class FS implements FileManagerInterface
 
     public function deletePersonImagesSizes(): bool
     {
-        helper('media');
-
-        $allPersonsImagesPaths = [];
         foreach (['jpg', 'jpeg', 'png', 'webp'] as $ext) {
-            $images = glob(media_path_absolute("/persons/*_*{$ext}"));
-
-            if (! $images) {
-                return false;
-            }
-
-            array_push($allPersonsImagesPaths, ...$images);
+            $this->deleteAll('persons', "*_*{$ext}");
         }
 
-        foreach ($allPersonsImagesPaths as $personImagePath) {
-            if (is_file($personImagePath)) {
-                unlink($personImagePath);
-            }
+        return true;
+    }
+
+    public function deleteAll(string $prefix, string $pattern = '*'): bool
+    {
+        helper('media');
+
+        // delete all in folder?
+        if ($pattern === '*') {
+            helper('filesystem');
+
+            return delete_files(media_path_absolute($prefix), true);
+        }
+
+        $prefix = rtrim($prefix, '/') . '/';
+
+        $imagePaths = glob(media_path_absolute($prefix . $pattern));
+
+        if (! $imagePaths) {
+            return true;
+        }
+
+        foreach ($imagePaths as $imagePath) {
+            @unlink($imagePath);
         }
 
         return true;

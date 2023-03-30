@@ -24,5 +24,7 @@ interface FileManagerInterface
 
     public function deletePersonImagesSizes(): bool;
 
+    public function deleteAll(string $prefix, string $pattern = '*'): bool;
+
     public function isHealthy(): bool;
 }
