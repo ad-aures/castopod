@@ -169,9 +169,23 @@ email.SMTPPass="your_smtp_password"
 | **`SMTPPort`**        | number               | `25`           |
 | **`SMTPCrypto`**      | [`"tls"` or `"ssl"`] | `"tls"`        |
 
-### S3
+### Media storage
 
-By default, files are stored in the `public/media` folder using the filesystem.
+By default, files are saved to the `public/media` folder using the file system.
+If you need to relocate the `media` folder to a different location, you can
+specify it in your `.env` file as shown below:
+
+```ini
+# […]
+
+media.root="media"
+media.storage="/mnt/storage"
+```
+
+In this example, the files will be saved to the /mnt/storage/media folder. Make
+sure to also update your web server configuration to reflect this change.
+
+### S3
 
 If you prefer storing your media files on an S3 compatible storage, you may
 specify it in your `.env`:
@@ -188,7 +202,7 @@ media.s3.region="your_s3_region"
 
 #### S3 config options
 
-| Variable name           | Type    | Default     |
+| Nombre de variable      | Type    | Default     |
 | ----------------------- | ------- | ----------- |
 | **`endpoint`**          | string  | `undefined` |
 | **`key`**               | string  | `undefined` |

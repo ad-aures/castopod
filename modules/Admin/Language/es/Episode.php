@@ -55,7 +55,7 @@ return [
         }',
         'episode' => 'Episodio',
         'visibility' => 'Visibilidad',
-        'downloads' => 'Downloads',
+        'downloads' => 'Descargas',
         'comments' => 'Comentarios',
         'actions' => 'Acciones',
     ],
@@ -80,7 +80,7 @@ return [
             audio {audio}
             other {media}
         }.',
-        'deleteFileError' => 'Hubo un problema al tratar de eliminar el archivo {file_key} {type, select,
+        'deleteFileError' => 'Hubo un problema al tratar de eliminar el archivo {file_path} {type, select,
             transcript {de la transcripción}
             chapters {de los episodios}
             image {de la portada}
