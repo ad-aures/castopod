@@ -1,3 +1,15 @@
+# [1.3.0](https://code.castopod.org/adaures/castopod/compare/v1.2.4...v1.3.0) (2023-04-03)
+
+### Bug Fixes
+
+- delete files using file_manager when deleting episode and podcast
+  ([41d8efe](https://code.castopod.org/adaures/castopod/commit/41d8efe6e71566eba44bfdfd00d1708ac4338366))
+
+### Features
+
+- **media:** set media storage directory as configurable
+  ([7e1a470](https://code.castopod.org/adaures/castopod/commit/7e1a470ba42172eb4c3864ab3652e9f8b55d1ba8))
+
 ## [1.2.4](https://code.castopod.org/adaures/castopod/compare/v1.2.3...v1.2.4) (2023-03-23)
 
 ### Bug Fixes
