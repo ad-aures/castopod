@@ -17,7 +17,7 @@
         <div class="flex flex-col items-start p-4 gap-y-4">
             <?php foreach ($persons as $person): ?>
                 <div class="flex gap-x-2">
-                    <img src="<?= $person->avatar->thumbnail_url ?>" alt="<?= esc($person->full_name) ?>" class="object-cover w-10 rounded-full bg-header aspect-square" loading="lazy" />
+                    <img src="<?= get_avatar_url($person, 'thumbnail') ?>" alt="<?= esc($person->full_name) ?>" class="object-cover w-10 rounded-full bg-header aspect-square" loading="lazy" />
                     <div class="flex flex-col">
                         <h4 class="text-sm font-semibold">
                             <?php if ($person->information_url): ?>

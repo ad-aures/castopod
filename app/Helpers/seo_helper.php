@@ -273,7 +273,7 @@ if (! function_exists('get_home_metatags')) {
         $metatags
             ->title(service('settings')->get('App.siteName'))
             ->description(esc(service('settings')->get('App.siteDescription')))
-            ->image(service('settings')->get('App.siteIcon')['512'])
+            ->image(get_site_icon_url('512'))
             ->canonical((string) current_url())
             ->og('site_name', esc(service('settings')->get('App.siteName')));
 
@@ -292,7 +292,7 @@ if (! function_exists('get_page_metatags')) {
                 )->get('App.siteName')
             )
             ->description(esc(service('settings')->get('App.siteDescription')))
-            ->image(service('settings')->get('App.siteIcon')['512'])
+            ->image(get_site_icon_url('512'))
             ->canonical((string) current_url())
             ->og('site_name', esc(service('settings')->get('App.siteName')));
 

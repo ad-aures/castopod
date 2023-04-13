@@ -134,7 +134,7 @@ class VideoClipper
         /** @var FileManagerInterface $fileManager */
         $fileManager = service('file_manager');
 
-        $jsonTranscriptString = $fileManager->getFileContents($jsonFileKey);
+        $jsonTranscriptString = (string) $fileManager->getFileContents($jsonFileKey);
         if ($jsonTranscriptString === '') {
             throw new Exception('Cannot get transcript json contents.');
         }

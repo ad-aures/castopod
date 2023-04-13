@@ -55,7 +55,7 @@
                 return '<div class="flex">' .
                     '<a href="' .
                     route_to('person-view', $person->id) .
-                    '"><img src="' . $person->avatar->thumbnail_url . '" alt="' . esc($person->full_name) . '" class="object-cover w-16 h-16 rounded-full aspect-square" loading="lazy" /></a>' .
+                    '"><img src="' . get_avatar_url($person, 'thumbnail') . '" alt="' . esc($person->full_name) . '" class="object-cover w-16 h-16 rounded-full aspect-square" loading="lazy" /></a>' .
                     '<div class="flex flex-col ml-3">' .
                     esc($person->full_name) .
                     implode(

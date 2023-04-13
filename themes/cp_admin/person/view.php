@@ -17,7 +17,7 @@
 
 <div class="flex flex-wrap gap-2">
     <img
-        src="<?= $person->avatar->medium_url ?>"
+        src="<?= get_avatar_url($person, 'medium') ?>"
         alt="<?= esc($person->full_name) ?>"
         class="object-cover w-full max-w-xs rounded aspect-square"
         loading="lazy"

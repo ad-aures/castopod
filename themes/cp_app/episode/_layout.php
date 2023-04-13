@@ -7,9 +7,8 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="icon" type="image/x-icon" href="<?= service('settings')
-    ->get('App.siteIcon')['ico'] ?>" />
-    <link rel="apple-touch-icon" href="<?= service('settings')->get('App.siteIcon')['180'] ?>">
+    <link rel="icon" type="image/x-icon" href="<?= get_site_icon_url('ico') ?>" />
+    <link rel="apple-touch-icon" href="<?= get_site_icon_url('180') ?>">
     <link rel="manifest" href="<?= route_to('podcast-webmanifest', esc($podcast->handle)) ?>">
     <meta name="theme-color" content="<?= \App\Controllers\WebmanifestController::THEME_COLORS[service('settings')->get('App.theme')]['theme'] ?>">
     <script>
@@ -78,7 +77,7 @@
         </div>
     </nav>
     <header class="relative z-50 flex flex-col col-start-2 px-8 pt-8 pb-4 overflow-hidden bg-accent-base/75 gap-y-4">
-        <div class="absolute top-0 left-0 w-full h-full bg-center bg-no-repeat bg-cover blur-lg mix-blend-overlay filter grayscale" style="background-image: url('<?= $episode->podcast->banner->small_url ?>');"></div>
+        <div class="absolute top-0 left-0 w-full h-full bg-center bg-no-repeat bg-cover blur-lg mix-blend-overlay filter grayscale" style="background-image: url('<?= get_podcast_banner_url($episode->podcast, 'small') ?>');"></div>
         <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-background-header to-transparent"></div>
         <div class="z-10 flex flex-col items-start gap-y-2 gap-x-4 sm:flex-row">
             <div class="relative flex-shrink-0">
@@ -97,7 +96,7 @@
                         <span class="inline-flex flex-row-reverse">
                             <?php $i = 0; ?>
                             <?php foreach ($episode->persons as $person): ?>
-                                <img src="<?= $person->avatar->thumbnail_url ?>" alt="<?= esc($person->full_name) ?>" class="object-cover w-8 h-8 -ml-4 border-2 rounded-full aspect-square border-background-header last:ml-0" loading="lazy" />
+                                <img src="<?= get_avatar_url($person, 'thumbnail') ?>" alt="<?= esc($person->full_name) ?>" class="object-cover w-8 h-8 -ml-4 border-2 rounded-full aspect-square border-background-header last:ml-0" loading="lazy" />
                                 <?php $i++;
                                 if ($i === 3) {
                                     break;

@@ -42,14 +42,12 @@ class Image extends BaseMedia
     {
         helper('filesystem');
 
-        $fileKeyWithoutExt = path_without_ext($this->file_key);
-
         foreach ($this->sizes as $name => $size) {
             $extension = array_key_exists('extension', $size) ? $size['extension'] : $this->file_extension;
             $mimetype = array_key_exists('mimetype', $size) ? $size['mimetype'] : $this->file_mimetype;
 
-            $this->{$name . '_key'} = $fileKeyWithoutExt . '_' . $name . '.' . $extension;
-            $this->{$name . '_url'} = $this->fileManager->getUrl($this->{$name . '_key'});
+            $this->{$name . '_key'} = change_file_path($this->file_key, '_' . $name, $extension);
+            $this->{$name . '_url'} = service('file_manager')->getUrl($this->{$name . '_key'});
             $this->{$name . '_mimetype'} = $mimetype;
         }
 
@@ -126,7 +124,8 @@ class Image extends BaseMedia
 
             // download image temporarily to generate sizes from
             $tempImagePath = (string) tempnam(WRITEPATH . 'temp', 'img_');
-            $imageContent = $this->fileManager->getFileContents($this->file_key);
+            $imageContent = (string) service('file_manager')
+                ->getFileContents($this->file_key);
             file_put_contents($tempImagePath, $imageContent);
 
             $this->attributes['file'] = new File($tempImagePath, true);
@@ -144,7 +143,7 @@ class Image extends BaseMedia
 
             $newImage = new File($tempFilePath, true);
 
-            $this->fileManager
+            service('file_manager')
                 ->save($newImage, $this->{$name . '_key'});
         }
 
@@ -159,7 +158,7 @@ class Image extends BaseMedia
         foreach (array_keys($this->sizes) as $name) {
             $pathProperty = $name . '_key';
 
-            if (! $this->fileManager->delete($this->{$pathProperty})) {
+            if (! service('file_manager')->delete($this->{$pathProperty})) {
                 return false;
             }
         }

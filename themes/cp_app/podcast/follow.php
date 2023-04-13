@@ -7,9 +7,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/x-icon" href="<?= service('settings')
-    ->get('App.siteIcon')['ico'] ?>" />
-    <link rel="apple-touch-icon" href="<?= service('settings')->get('App.siteIcon')['180'] ?>">
+    <link rel="icon" type="image/x-icon" href="<?= get_site_icon_url('ico') ?>" />
+    <link rel="apple-touch-icon" href="<?= get_site_icon_url('180') ?>">
     <link rel="manifest" href="<?= route_to('podcast-webmanifest', esc($actor->podcast->handle)) ?>">
     <meta name="theme-color" content="<?= \App\Controllers\WebmanifestController::THEME_COLORS[service('settings')->get('App.theme')]['theme'] ?>">
     <script>
@@ -38,7 +37,7 @@
             'Fediverse.follow.subtitle',
         ) ?></h1>
         <div class="flex flex-col w-full max-w-xs -mt-24 overflow-hidden shadow bg-elevated rounded-xl">
-            <img src="<?= $actor->podcast->banner->small_url ?>" alt="" class="w-full aspect-[3/1] bg-header" loading="lazy" />
+            <img src="<?= get_podcast_banner_url($actor->podcast, 'small') ?>" alt="" class="w-full aspect-[3/1] bg-header" loading="lazy" />
             <div class="flex px-4 py-2">
                 <img src="<?= $actor->avatar_image_url ?>" alt="<?= esc($actor->display_name) ?>"
                     class="w-16 h-16 mr-4 -mt-8 rounded-full ring-2 ring-background-elevated aspect-square" loading="lazy" />

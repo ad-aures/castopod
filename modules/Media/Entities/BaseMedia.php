@@ -12,9 +12,6 @@ namespace Modules\Media\Entities;
 
 use CodeIgniter\Entity\Entity;
 use CodeIgniter\Files\File;
-use Modules\Media\FileManagers\FileManagerInterface;
-use Modules\Media\FileManagers\FS;
-use Modules\Media\FileManagers\S3;
 use Modules\Media\Models\MediaModel;
 
 /**
@@ -58,27 +55,12 @@ class BaseMedia extends Entity
         'updated_by' => 'integer',
     ];
 
-    protected FileManagerInterface $fileManager;
-
     /**
      * @param array<string, mixed>|null $data
-     * @param 'fs'|'s3'|null $fileManager
      */
-    public function __construct(array $data = null, string $fileManager = null)
+    public function __construct(array $data = null)
     {
         parent::__construct($data);
-
-        if ($fileManager !== null) {
-            $this->fileManager = match ($fileManager) {
-                'fs' => new FS(config('Media')),
-                's3' => new S3(config('Media'))
-            };
-        } else {
-            /** @var FileManagerInterface $fileManagerService */
-            $fileManagerService = service('file_manager');
-
-            $this->fileManager = $fileManagerService;
-        }
 
         $this->initFileProperties();
     }
@@ -92,7 +74,7 @@ class BaseMedia extends Entity
                 'extension' => $extension,
             ] = pathinfo($this->file_key);
 
-            $this->attributes['file_url'] = $this->fileManager->getUrl($this->file_key);
+            $this->attributes['file_url'] = service('file_manager')->getUrl($this->file_key);
             $this->attributes['file_name'] = $filename;
             $this->attributes['file_directory'] = $dirname;
             $this->attributes['file_extension'] = $extension;
@@ -120,14 +102,14 @@ class BaseMedia extends Entity
             return false;
         }
 
-        $this->attributes['file_key'] = $this->fileManager->save($this->attributes['file'], $this->file_key);
+        $this->attributes['file_key'] = service('file_manager')->save($this->attributes['file'], $this->file_key);
 
         return true;
     }
 
     public function deleteFile(): bool
     {
-        return $this->fileManager->delete($this->file_key);
+        return service('file_manager')->delete($this->file_key);
     }
 
     public function rename(): bool
@@ -143,7 +125,7 @@ class BaseMedia extends Entity
             return false;
         }
 
-        if (! $this->fileManager->rename($this->file_key, $newFileKey)) {
+        if (! service('file_manager')->rename($this->file_key, $newFileKey)) {
             $db->transRollback();
             return false;
         }

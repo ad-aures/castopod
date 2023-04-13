@@ -17,10 +17,10 @@ use App\Models\EpisodeModel;
 use App\Models\PersonModel;
 use App\Models\PodcastModel;
 use App\Models\PostModel;
+use CodeIgniter\Files\File;
 use CodeIgniter\HTTP\RedirectResponse;
 use Modules\Media\Entities\Audio;
 use Modules\Media\FileManagers\FileManagerInterface;
-use Modules\Media\FileManagers\FS;
 use Modules\Media\Models\MediaModel;
 use PHP_ICO;
 
@@ -58,47 +58,60 @@ class SettingsController extends BaseController
 
         $siteIconFile = $this->request->getFile('site_icon');
         if ($siteIconFile !== null && $siteIconFile->isValid()) {
-            helper(['filesystem', 'media']);
+            /** @var FileManagerInterface $fileManager */
+            $fileManager = service('file_manager');
 
             // delete site folder in media before repopulating it
-            delete_files(media_path_absolute('/site'));
-
-            // save original in disk
-            $originalFilename = (new FS(config('Media')))->save(
-                $siteIconFile,
-                'site/icon.' . $siteIconFile->getExtension()
-            );
+            $fileManager->deleteAll('site');
 
             // convert jpeg image to png if not
             if ($siteIconFile->getClientMimeType() !== 'image/png') {
-                service('image')->withFile(media_path_absolute($originalFilename))
+                $tempFilePath = tempnam(WRITEPATH . 'temp', 'img_');
+                service('image')
+                    ->withFile($siteIconFile->getRealPath())
                     ->convert(IMAGETYPE_JPEG)
-                    ->save(media_path_absolute('/site/icon.png'));
+                    ->save($tempFilePath);
+
+                @unlink($siteIconFile->getRealPath());
+
+                $siteIconFile = new File($tempFilePath, true);
             }
+
+            $icoTempFilePath = WRITEPATH . 'temp/img_favicon.ico';
+
+            // generate ico
+            $ico_lib = new PHP_ICO();
+            $ico_lib->add_image($siteIconFile->getRealPath(), [[32, 32], [64, 64]]);
+            $ico_lib->save_ico($icoTempFilePath);
 
             // generate random hash to use as a suffix to renew browser cache
             $randomHash = substr(bin2hex(random_bytes(18)), 0, 8);
 
-            // generate ico
-            $ico_lib = new PHP_ICO();
-            $ico_lib->add_image(media_path_absolute('/site/icon.png'), [[32, 32], [64, 64]]);
-            $ico_lib->save_ico(media_path_absolute("/site/favicon.{$randomHash}.ico"));
+            // save ico
+            $fileManager->save(new File($icoTempFilePath, true), "site/favicon.{$randomHash}.ico");
 
             // resize original to needed sizes
             foreach ([64, 180, 192, 512] as $size) {
+                $tempFilePath = tempnam(WRITEPATH . 'temp', 'img_');
                 service('image')
-                    ->withFile(media_path_absolute('/site/icon.png'))
+                    ->withFile($siteIconFile->getRealPath())
                     ->resize($size, $size)
-                    ->save(media_path_absolute("/site/icon-{$size}.{$randomHash}.png"));
+                    ->save($tempFilePath);
+
+                // save sizes to
+                $fileManager->save(new File($tempFilePath), "site/icon-{$size}.{$randomHash}.png");
             }
+
+            // save original as png
+            $fileManager->save($siteIconFile, 'site/icon.png');
 
             service('settings')
                 ->set('App.siteIcon', [
-                    'ico' => '/' . media_path("/site/favicon.{$randomHash}.ico"),
-                    '64' => '/' . media_path("/site/icon-64.{$randomHash}.png"),
-                    '180' => '/' . media_path("/site/icon-180.{$randomHash}.png"),
-                    '192' => '/' . media_path("/site/icon-192.{$randomHash}.png"),
-                    '512' => '/' . media_path("/site/icon-512.{$randomHash}.png"),
+                    'ico' => "site/favicon.{$randomHash}.ico",
+                    '64' => "site/icon-64.{$randomHash}.png",
+                    '180' => "site/icon-180.{$randomHash}.png",
+                    '192' => "site/icon-192.{$randomHash}.png",
+                    '512' => "site/icon-512.{$randomHash}.png",
                 ]);
         }
 
@@ -107,9 +120,11 @@ class SettingsController extends BaseController
 
     public function deleteIcon(): RedirectResponse
     {
-        helper(['filesystem', 'media']);
-        // delete site folder in media
-        delete_files(media_path_absolute('/site'));
+        /** @var FileManagerInterface $fileManager */
+        $fileManager = service('file_manager');
+
+        // delete site folder
+        $fileManager->deleteAll('site');
 
         service('settings')
             ->forget('App.siteIcon');

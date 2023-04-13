@@ -52,7 +52,7 @@ class CreditsController extends BaseController
                             $personId => [
                                 'full_name' => $credit->person->full_name,
                                 'thumbnail_url' =>
-                                    $credit->person->avatar->thumbnail_url,
+                                    get_avatar_url($credit->person, 'thumbnail'),
                                 'information_url' =>
                                     $credit->person->information_url,
                                 'roles' => [
@@ -90,7 +90,7 @@ class CreditsController extends BaseController
                     $credits[$personGroup]['persons'][$personId] = [
                         'full_name' => $credit->person->full_name,
                         'thumbnail_url' =>
-                            $credit->person->avatar->thumbnail_url,
+                            get_avatar_url($credit->person, 'thumbnail'),
                         'information_url' => $credit->person->information_url,
                         'roles' => [
                             $personRole => [

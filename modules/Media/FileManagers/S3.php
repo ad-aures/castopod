@@ -6,8 +6,9 @@ namespace Modules\Media\FileManagers;
 
 use Aws\Credentials\Credentials;
 use Aws\S3\S3Client;
+use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\Files\File;
-use CodeIgniter\HTTP\URI;
+use CodeIgniter\HTTP\Response;
 use Exception;
 use Modules\Media\Config\Media as MediaConfig;
 
@@ -35,6 +36,7 @@ class S3 implements FileManagerInterface
                 'Bucket' => $this->config->s3['bucket'],
                 'Key' => $this->prefixKey($key),
                 'SourceFile' => $file,
+                'ContentType' => $file->getMimeType(),
             ]);
         } catch (Exception) {
             return false;
@@ -62,16 +64,7 @@ class S3 implements FileManagerInterface
 
     public function getUrl(string $key): string
     {
-        $url = new URI((string) $this->config->s3['endpoint']);
-
-        if ($this->config->s3['pathStyleEndpoint'] === true) {
-            $url->setPath($this->config->s3['bucket'] . '/' . $this->prefixKey($key));
-            return (string) $url;
-        }
-
-        $url->setHost($this->config->s3['bucket'] . '.' . $url->getHost());
-        $url->setPath($this->prefixKey($key));
-        return (string) $url;
+        return url_to('media-serve', $key);
     }
 
     public function rename(string $oldKey, string $newKey): bool
@@ -91,12 +84,16 @@ class S3 implements FileManagerInterface
         return $this->delete($oldKey);
     }
 
-    public function getFileContents(string $key): string
+    public function getFileContents(string $key): string|false
     {
-        $result = $this->s3->getObject([
-            'Bucket' => $this->config->s3['bucket'],
-            'Key' => $this->prefixKey($key),
-        ]);
+        try {
+            $result = $this->s3->getObject([
+                'Bucket' => $this->config->s3['bucket'],
+                'Key' => $this->prefixKey($key),
+            ]);
+        } catch (Exception) {
+            return false;
+        }
 
         return (string) $result->get('Body');
     }
@@ -184,6 +181,31 @@ class S3 implements FileManagerInterface
         }
 
         return true;
+    }
+
+    public function serve(string $key): Response
+    {
+        $response = service('response');
+
+        try {
+            $result = $this->s3->getObject([
+                'Bucket' => $this->config->s3['bucket'],
+                'Key' => $this->prefixKey($key),
+            ]);
+        } catch (Exception) {
+            throw new PageNotFoundException();
+        }
+
+        // Remove Cache-Control header before redefining it
+        header_remove('Cache-Control');
+
+        return $response->setCache([
+            'max-age' => DECADE,
+            'last-modified' => $result->get('LastModified'),
+            'etag' => $result->get('ETag'),
+            'public' => true,
+        ])->setContentType($result->get('ContentType'))
+            ->setBody((string) $result->get('Body')->getContents());
     }
 
     private function prefixKey(string $key): string

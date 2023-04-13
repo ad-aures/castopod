@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Media\FileManagers;
 
 use CodeIgniter\Files\File;
+use CodeIgniter\HTTP\Response;
 
 interface FileManagerInterface
 {
@@ -16,7 +17,7 @@ interface FileManagerInterface
 
     public function rename(string $oldKey, string $newKey): bool;
 
-    public function getFileContents(string $key): string;
+    public function getFileContents(string $key): string|false;
 
     public function getFileInput(string $key): string;
 
@@ -27,4 +28,6 @@ interface FileManagerInterface
     public function deleteAll(string $prefix, string $pattern = '*'): bool;
 
     public function isHealthy(): bool;
+
+    public function serve(string $key): Response;
 }

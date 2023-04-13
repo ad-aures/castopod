@@ -143,15 +143,19 @@ node_modules
 
 # public folder
 public/*
-public/media/site
 !public/media
 !public/.htaccess
 !public/favicon.ico
 !public/icon*
+!public/castopod-banner*
+!public/castopod-avatar*
 !public/index.php
 !public/robots.txt
 !public/.well-known
 !public/.well-known/GDPR.yml
+
+public/assets/*
+!public/assets/index.html
 
 # public media folder
 !public/media/podcasts

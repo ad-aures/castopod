@@ -84,21 +84,10 @@ class Person extends Entity
         return $this;
     }
 
-    public function getAvatar(): Image
+    public function getAvatar(): ?Image
     {
-        if ($this->attributes['avatar_id'] === null) {
-            helper('media');
-            return new Image([
-                'file_key' => config('Images')
-                    ->avatarDefaultPath,
-                'file_mimetype' => config('Images')
-                    ->avatarDefaultMimeType,
-                'file_size' => 0,
-                'file_metadata' => [
-                    'sizes' => config('Images')
-                        ->personAvatarSizes,
-                ],
-            ], 'fs');
+        if ($this->avatar_id === null) {
+            return null;
         }
 
         if ($this->avatar === null) {

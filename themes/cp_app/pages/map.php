@@ -11,9 +11,8 @@
             ->get('App.siteName')),
     ]) ?>"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="icon" type="image/x-icon" href="<?= service('settings')
-    ->get('App.siteIcon')['ico'] ?>" />
-    <link rel="apple-touch-icon" href="<?= service('settings')->get('App.siteIcon')['180'] ?>">
+    <link rel="icon" type="image/x-icon" href="<?= get_site_icon_url('ico') ?>" />
+    <link rel="apple-touch-icon" href="<?= get_site_icon_url('180') ?>">
     <link rel="manifest" href="<?= route_to('webmanifest') ?>">
     <meta name="theme-color" content="<?= \App\Controllers\WebmanifestController::THEME_COLORS[service('settings')->get('App.theme')]['theme'] ?>">
     <script>

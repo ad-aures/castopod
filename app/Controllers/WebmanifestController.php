@@ -61,14 +61,12 @@ class WebmanifestController extends Controller
             'background_color' => self::THEME_COLORS[service('settings')->get('App.theme')]['background'],
             'icons' => [
                 [
-                    'src' => service('settings')
-                        ->get('App.siteIcon')['192'],
+                    'src' => get_site_icon_url('192'),
                     'type' => 'image/png',
                     'sizes' => '192x192',
                 ],
                 [
-                    'src' => service('settings')
-                        ->get('App.siteIcon')['512'],
+                    'src' => get_site_icon_url('512'),
                     'type' => 'image/png',
                     'sizes' => '512x512',
                 ],

@@ -33,7 +33,7 @@ if (! function_exists('write_audio_file_tags')) {
         /** @var FileManagerInterface $fileManager */
         $fileManager = service('file_manager');
 
-        $APICdata = $fileManager->getFileContents($episode->cover->id3_key);
+        $APICdata = (string) $fileManager->getFileContents($episode->cover->id3_key);
 
         // TODO: variables used for podcast specific tags
         // $podcastUrl = $episode->podcast->link;

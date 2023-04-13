@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+use App\Entities\Person;
+use App\Entities\Podcast;
+
 /**
  * @copyright  2020 Ad Aures
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -295,5 +298,91 @@ if (! function_exists('format_bytes')) {
         $bytes /= pow($is_binary ? 1024 : 1000, $pow);
 
         return round($bytes, $precision) . $units[$pow];
+    }
+}
+
+
+if (! function_exists('get_site_icon_url')) {
+    function get_site_icon_url(string $size): string
+    {
+        if (config('App')->siteIcon['ico'] === service('settings')->get('App.siteIcon')['ico']) {
+            // return default site icon url
+            return base_url(service('settings')->get('App.siteIcon')[$size]);
+        }
+
+        return service('file_manager')->getUrl(service('settings')->get('App.siteIcon')[$size]);
+    }
+}
+
+
+if (! function_exists('get_podcast_banner')) {
+    function get_podcast_banner_url(Podcast $podcast, string $size): string
+    {
+        if ($podcast->banner === null) {
+            $defaultBanner = config('Images')
+                ->podcastBannerDefaultPaths[service('settings')->get('App.theme')] ?? config(
+                    'Images'
+                )->podcastBannerDefaultPaths['default'];
+
+            $sizes = config('Images')
+->podcastBannerSizes;
+
+            $sizeConfig = $sizes[$size];
+            helper('filesystem');
+
+            // return default site icon url
+            return base_url(
+                change_file_path($defaultBanner['path'], '_' . $size, $sizeConfig['extension'] ?? null)
+            );
+        }
+
+        $sizeKey = $size . '_url';
+        return $podcast->banner->{$sizeKey};
+    }
+}
+
+if (! function_exists('get_podcast_banner_mimetype')) {
+    function get_podcast_banner_mimetype(Podcast $podcast, string $size): string
+    {
+        if ($podcast->banner === null) {
+            $sizes = config('Images')
+->podcastBannerSizes;
+
+            $sizeConfig = $sizes[$size];
+            helper('filesystem');
+
+            // return default site icon url
+            return array_key_exists('mimetype', $sizeConfig) ? $sizeConfig['mimetype'] : config(
+                'Images'
+            )->podcastBannerDefaultMimeType;
+        }
+
+        $mimetype = $size . '_mimetype';
+        return $podcast->banner->{$mimetype};
+    }
+}
+
+if (! function_exists('get_avatar_url')) {
+    function get_avatar_url(Person $person, string $size): string
+    {
+        if ($person->avatar === null) {
+            $defaultAvatar = config('Images')
+->avatarDefaultPath;
+
+            $sizes = config('Images')
+->personAvatarSizes;
+
+            $sizeConfig = $sizes[$size];
+
+            helper('filesystem');
+
+            // return default site icon url
+            return base_url(
+                change_file_path($defaultAvatar['path'], '_' . $size, $sizeConfig['extension'] ?? null)
+            );
+        }
+
+        $sizeKey = $size . '_url';
+        return $person->avatar->{$sizeKey};
     }
 }

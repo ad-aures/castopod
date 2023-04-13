@@ -294,22 +294,10 @@ class Podcast extends Entity
         return $this;
     }
 
-    public function getBanner(): Image
+    public function getBanner(): ?Image
     {
         if ($this->banner_id === null) {
-            $defaultBanner = config('Images')
-                ->podcastBannerDefaultPaths[service('settings')->get('App.theme')] ?? config(
-                    'Images'
-                )->podcastBannerDefaultPaths['default'];
-            return new Image([
-                'file_key' => $defaultBanner['path'],
-                'file_mimetype' => $defaultBanner['mimetype'],
-                'file_size' => 0,
-                'file_metadata' => [
-                    'sizes' => config('Images')
-->podcastBannerSizes,
-                ],
-            ], 'fs');
+            return null;
         }
 
         if (! $this->banner instanceof Image) {

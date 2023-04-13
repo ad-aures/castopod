@@ -8,20 +8,13 @@ declare(strict_types=1);
  * @link       https://castopod.org/
  */
 
-
-if (! function_exists('path_without_ext')) {
-    function path_without_ext(string $path): string
+if (! function_exists('add_suffix_to_path')) {
+    function change_file_path(string $path, string $suffix = '', ?string $newExtension = null): string
     {
-        $fileKeyInfo = pathinfo($path);
-
-        if ($fileKeyInfo['dirname'] === '.' && ! str_starts_with($path, '.')) {
-            return $fileKeyInfo['filename'];
+        if ($newExtension === null) {
+            $newExtension = pathinfo($path, PATHINFO_EXTENSION);
         }
 
-        if ($fileKeyInfo['dirname'] === '/') {
-            return '/' . $fileKeyInfo['filename'];
-        }
-
-        return implode('/', [$fileKeyInfo['dirname'], $fileKeyInfo['filename']]);
+        return preg_replace('~\.[^.]+$~', '', $path) . $suffix . '.' . $newExtension;
     }
 }

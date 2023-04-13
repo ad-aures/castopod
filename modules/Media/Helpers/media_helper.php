@@ -63,34 +63,3 @@ if (! function_exists('download_file')) {
         return new File($tmpfileKey);
     }
 }
-
-if (! function_exists('media_path')) {
-    /**
-     * Prefixes the root media path to a given uri
-     *
-     * @param  string|string[] $uri URI string or array of URI segments
-     */
-    function media_path(string | array $uri = ''): string
-    {
-        // convert segment array to string
-        if (is_array($uri)) {
-            $uri = implode('/', $uri);
-        }
-
-        $uri = trim($uri, '/');
-
-        return config('Media')->root . '/' . $uri;
-    }
-}
-
-if (! function_exists('media_path_absolute')) {
-    /**
-     * Prefixes the absolute storage directory to the media path of a given uri
-     *
-     * @param  string|string[] $uri URI string or array of URI segments
-     */
-    function media_path_absolute(string | array $uri = ''): string
-    {
-        return config('Media')->storage . '/' . media_path($uri);
-    }
-}

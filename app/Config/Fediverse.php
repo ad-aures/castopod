@@ -23,7 +23,7 @@ class Fediverse extends FediverseBaseConfig
      */
     public string $noteObject = NoteObject::class;
 
-    public string $defaultAvatarImagePath = 'media/castopod-avatar_thumbnail.webp';
+    public string $defaultAvatarImagePath = 'castopod-avatar_thumbnail.webp';
 
     public string $defaultAvatarImageMimetype = 'image/webp';
 
@@ -52,7 +52,7 @@ class Fediverse extends FediverseBaseConfig
 
         helper('media');
 
-        $this->defaultCoverImagePath = media_path($defaultBannerPath . '_federation.' . $extension);
+        $this->defaultCoverImagePath = $defaultBannerPath . '_federation.' . $extension;
         $this->defaultCoverImageMimetype = $defaultBanner['mimetype'];
     }
 }

@@ -7,9 +7,8 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="icon" type="image/x-icon" href="<?= service('settings')
-    ->get('App.siteIcon')['ico'] ?>" />
-    <link rel="apple-touch-icon" href="<?= service('settings')->get('App.siteIcon')['180'] ?>">
+    <link rel="icon" type="image/x-icon" href="<?= get_site_icon_url('ico') ?>" />
+    <link rel="apple-touch-icon" href="<?= get_site_icon_url('180') ?>">
     <link rel="manifest" href="<?= route_to('podcast-webmanifest', esc($podcast->handle)) ?>">
     <meta name="theme-color" content="<?= \App\Controllers\WebmanifestController::THEME_COLORS[service('settings')->get('App.theme')]['theme'] ?>">
     <script>
@@ -43,7 +42,7 @@
         </div>
     <?php endif; ?>
 
-    <header class="min-h-[200px] relative z-50 flex flex-col-reverse justify-between w-full gap-x-2 col-start-2 bg-top bg-no-repeat bg-cover sm:flex-row sm:items-end bg-header aspect-[3/1]" style="background-image: url('<?= $podcast->banner->medium_url ?>');">
+    <header class="min-h-[200px] relative z-50 flex flex-col-reverse justify-between w-full gap-x-2 col-start-2 bg-top bg-no-repeat bg-cover sm:flex-row sm:items-end bg-header aspect-[3/1]" style="background-image: url('<?= get_podcast_banner_url($podcast, 'medium') ?>');">
         <div class="absolute bottom-0 left-0 w-full h-full backdrop-gradient mix-blend-multiply"></div>
         <div class="z-10 flex items-center pl-4 -mb-6 md:pl-8 md:-mb-8 gap-x-4">
             <img src="<?= $podcast->cover->thumbnail_url ?>" alt="<?= esc($podcast->title) ?>" class="h-24 rounded-full sm:h-28 md:h-36 ring-3 ring-background-elevated aspect-square" loading="lazy" />

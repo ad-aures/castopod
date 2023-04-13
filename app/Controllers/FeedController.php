@@ -23,7 +23,7 @@ class FeedController extends Controller
 {
     public function index(string $podcastHandle): ResponseInterface
     {
-        helper(['rss', 'premium_podcasts']);
+        helper(['rss', 'premium_podcasts', 'misc']);
 
         $podcast = (new PodcastModel())->where('handle', $podcastHandle)
             ->first();

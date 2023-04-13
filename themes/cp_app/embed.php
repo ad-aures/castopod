@@ -9,9 +9,8 @@
     <meta name="description" content="<?= esc(
         $episode->description,
     ) ?>" />
-    <link rel="icon" type="image/x-icon" href="<?= service('settings')
-    ->get('App.siteIcon')['ico'] ?>" />
-    <link rel="apple-touch-icon" href="<?= service('settings')->get('App.siteIcon')['180'] ?>">
+    <link rel="icon" type="image/x-icon" href="<?= get_site_icon_url('ico') ?>" />
+    <link rel="apple-touch-icon" href="<?= get_site_icon_url('180') ?>">
     <link rel='stylesheet' type='text/css' href='<?= route_to('themes-colors-css') ?>' />
     <?= service('vite')
         ->asset('styles/index.css', 'css') ?>

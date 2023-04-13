@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Media\FileManagers;
 
 use CodeIgniter\Files\File;
+use CodeIgniter\HTTP\Response;
 use Exception;
 use Modules\Media\Config\Media as MediaConfig;
 
@@ -27,7 +28,7 @@ class FS implements FileManagerInterface
             $path = $path . '.' . $extension;
         }
 
-        $mediaRoot = media_path_absolute();
+        $mediaRoot = $this->media_path_absolute();
 
         if (! file_exists(dirname($mediaRoot . '/' . $path))) {
             mkdir(dirname($mediaRoot . '/' . $path), 0777, true);
@@ -51,7 +52,7 @@ class FS implements FileManagerInterface
     {
         helper('media');
 
-        return @unlink(media_path_absolute($key));
+        return @unlink($this->media_path_absolute($key));
     }
 
     public function getUrl(string $key): string
@@ -70,21 +71,21 @@ class FS implements FileManagerInterface
     {
         helper('media');
 
-        return rename(media_path_absolute($oldKey), media_path_absolute($newKey));
+        return rename($this->media_path_absolute($oldKey), $this->media_path_absolute($newKey));
     }
 
-    public function getFileContents(string $key): string
+    public function getFileContents(string $key): string|false
     {
         helper('media');
 
-        return (string) file_get_contents(media_path_absolute($key));
+        return file_get_contents($this->media_path_absolute($key));
     }
 
     public function getFileInput(string $key): string
     {
         helper('media');
 
-        return media_path_absolute($key);
+        return $this->media_path_absolute($key);
     }
 
     public function deletePodcastImageSizes(string $podcastHandle): bool
@@ -113,12 +114,12 @@ class FS implements FileManagerInterface
         if ($pattern === '*') {
             helper('filesystem');
 
-            return delete_files(media_path_absolute($prefix), true);
+            return delete_files($this->media_path_absolute($prefix), true);
         }
 
         $prefix = rtrim($prefix, '/') . '/';
 
-        $imagePaths = glob(media_path_absolute($prefix . $pattern));
+        $imagePaths = glob($this->media_path_absolute($prefix . $pattern));
 
         if (! $imagePaths) {
             return true;
@@ -135,6 +136,28 @@ class FS implements FileManagerInterface
     {
         helper('media');
 
-        return is_really_writable(media_path_absolute());
+        return is_really_writable($this->media_path_absolute());
+    }
+
+    public function serve(string $key): Response
+    {
+        return redirect()->to($this->getUrl($key));
+    }
+
+    /**
+     * Prefixes the absolute storage directory to the media path of a given uri
+     *
+     * @param  string|string[] $uri URI string or array of URI segments
+     */
+    private function media_path_absolute(string | array $uri = ''): string
+    {
+        // convert segment array to string
+        if (is_array($uri)) {
+            $uri = implode('/', $uri);
+        }
+
+        $uri = trim($uri, '/');
+
+        return config('Media')->storage . '/' . config('Media')->root . '/' . $uri;
     }
 }
