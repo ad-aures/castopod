@@ -1,3 +1,11 @@
+## [1.3.1](https://code.castopod.org/adaures/castopod/compare/v1.3.0...v1.3.1) (2023-04-13)
+
+### Bug Fixes
+
+- **s3:** add proxy to serve images from s3 to client
+  ([a76724a](https://code.castopod.org/adaures/castopod/commit/a76724a8cfee700f6874f86b35616d61facc664e)),
+  closes [#321](https://code.castopod.org/adaures/castopod/issues/321)
+
 # [1.3.0](https://code.castopod.org/adaures/castopod/compare/v1.2.4...v1.3.0) (2023-04-03)
 
 ### Bug Fixes
