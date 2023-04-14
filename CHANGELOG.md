@@ -1,3 +1,12 @@
+## [1.3.2](https://code.castopod.org/adaures/castopod/compare/v1.3.1...v1.3.2) (2023-04-14)
+
+### Bug Fixes
+
+- remove path key when getting default avatar path
+  ([c5a1359](https://code.castopod.org/adaures/castopod/commit/c5a1359218d61c0f78006f2bd5785e317f32bade))
+- **s3:** serve files using media base url to allow for CDN setup
+  ([502f53c](https://code.castopod.org/adaures/castopod/commit/502f53c9701da3b8da2caef1eb54df25b7d2d86a))
+
 ## [1.3.1](https://code.castopod.org/adaures/castopod/compare/v1.3.0...v1.3.1) (2023-04-13)
 
 ### Bug Fixes
