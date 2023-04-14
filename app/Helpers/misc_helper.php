@@ -366,7 +366,7 @@ if (! function_exists('get_avatar_url')) {
     function get_avatar_url(Person $person, string $size): string
     {
         if ($person->avatar === null) {
-            $defaultAvatar = config('Images')
+            $defaultAvatarPath = config('Images')
 ->avatarDefaultPath;
 
             $sizes = config('Images')
@@ -376,10 +376,8 @@ if (! function_exists('get_avatar_url')) {
 
             helper('filesystem');
 
-            // return default site icon url
-            return base_url(
-                change_file_path($defaultAvatar['path'], '_' . $size, $sizeConfig['extension'] ?? null)
-            );
+            // return default avatar url
+            return base_url(change_file_path($defaultAvatarPath, '_' . $size, $sizeConfig['extension'] ?? null));
         }
 
         $sizeKey = $size . '_url';
