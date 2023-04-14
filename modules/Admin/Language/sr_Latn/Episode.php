@@ -86,7 +86,7 @@ return [
             image {omota}
             audio {zvuka}
             other {medija}
-        } datoteke {file_key}. Možete je ukloniti ručno sa diska.',
+        } datoteke {file_path}. Možete je ukloniti ručno sa diska.',
         'sameSlugError' => 'Odabrano URL ime (slug) epizode već postoji.',
     ],
     'form' => [

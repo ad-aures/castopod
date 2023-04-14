@@ -16,5 +16,5 @@ return [
         'created_desc' => 'Neueste zuerst',
         'created_asc' => 'Älteste zuerst',
     ],
-    'no_podcast' => 'Keinen Podcast gefunden',
+    'no_podcast' => 'Keine Podcasts gefunden',
 ];

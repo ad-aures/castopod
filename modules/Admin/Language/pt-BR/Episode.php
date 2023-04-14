@@ -86,7 +86,7 @@ return [
             image {capa}
             audio {áudio}
             other {mídia}
-        } {file_key}. Você pode removê-lo manualmente do seu disco.',
+        } {file_path}. Você pode removê-lo manualmente do seu disco.',
         'sameSlugError' => 'Um episódio com o slug escolhido já existe.',
     ],
     'form' => [

@@ -88,7 +88,7 @@ return [
             image {okładka}
             audio {audio}
             other {media}
-        } plik {file_key}. Możesz ręcznie usunąć go ze swojego dysku.',
+        } plik {file_path}. Możesz ręcznie usunąć go ze swojego dysku.',
         'sameSlugError' => 'Odcinek z wybranym slugiem już istnieje.',
     ],
     'form' => [

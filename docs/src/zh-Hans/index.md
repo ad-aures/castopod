@@ -154,8 +154,9 @@ so that you can understand what actions will and will not be&nbsp;tolerated.
 
 ### 贡献指南
 
-阅读我们的 [贡献指南](../contributing/guidelines.md) ，了解我们的开发过程。 提出
-错 误修正和改进想法，以及如何构建和测试 Castopod 。
+Read our [contributing guide](./contributing/guidelines.md) to learn about our
+development process, how to propose bugfixes and improvements, and how to build
+and test your changes to Castopod.
 
 ## 贡献者 ✨
 

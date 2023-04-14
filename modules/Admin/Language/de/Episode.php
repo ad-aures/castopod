@@ -86,7 +86,7 @@ return [
             image {Cover}
             audio {Audio}
             other {Medien}
-        }-Datei {file_key}. Sie können es manuell von der Festplatte entfernen.',
+        }-Datei {file_path}. Sie können es manuell von der Festplatte entfernen.',
         'sameSlugError' => 'Eine Folge mit dem ausgewählten Slug existiert bereits.',
     ],
     'form' => [

@@ -86,7 +86,7 @@ return [
             image {da imaxe}
             audio {do audio}
             other {do multimedia}
-        } {file_key}. Deberías eliminala manualmente do disco.',
+        } {file_path}. Deberías eliminala manualmente do disco.',
         'sameSlugError' => 'Xa existe un episodio co id de url elexido.',
     ],
     'form' => [

@@ -80,7 +80,7 @@ return [
             audio {l\'àudio}
             other {el material}
         } de l\'episodi.',
-        'deleteFileError' => 'No s\'ha pogut esborrar el fitxer {file_key} {type, select,
+        'deleteFileError' => 'No s\'ha pogut esborrar el fitxer {file_path} {type, select,
             transcript {de la transcripció}
             chapters {dels episodis}
             image {de la portada}

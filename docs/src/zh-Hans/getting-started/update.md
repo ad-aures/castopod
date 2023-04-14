@@ -53,8 +53,10 @@ sidebarDepth: 3
 [发布页面](https://code.castopod.org/adaures/castopod/-/releases))。
 
 - cf.
-  [我很长时间没有更新我的实例… 我该怎么办？ 我该怎么办？](#我很长时间没有更新我的实例-我该怎么办-我该怎么办)
-  :::
+  [I haven't updated my instance in a long time… What should I do?](#i-havent-updated-my-instance-in-a-long-time-what-should-i-do)
+  我该怎么办？</a>
+
+:::
 
 ## 全自动更新
 

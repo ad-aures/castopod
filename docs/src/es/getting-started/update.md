@@ -62,7 +62,8 @@ la página de
 [lanzamientos](https://code.castopod.org/adaures/castopod/-/releases)).
 
 - cf.
-  [No he actualizado mi instancia en mucho tiempo… ¿Qué debo hacer?](#no-he-actualizado-mi-instancia-en-mucho-tiempo-qué-debo-hacer)
+
+No he actualizado mi instancia en mucho tiempo… ¿Qué debo hacer?</li> </ul>
 
 :::
 

@@ -134,8 +134,8 @@ There are many solutions for you to host your podcasts, some of which are really
 great and [a lot of them](https://podcastindex.org/apps) are jumping into the
 Podcasting 2.0 wagon just like Castopod!
 
-Cadascuna d'aquestes solucions difereix entre si, podeu comparar-les amb la
-[llista de funcions](#característiques).
+Each of these solutions differ from one another, you may compare with the
+[list of features](#features).
 
 That being said, there are two main differences with other podcasting solutions:
 
@@ -161,9 +161,9 @@ so that you can understand what actions will and will not be&nbsp;tolerated.
 
 ### Guia de col·laboració
 
-Llegiu la nostra [guia de col·laboració](../contributing/guidelines.md) per
-conèixer el nostre procés de desenvolupament, com proposar correccions d'errors
-i millores, i com construir i prova els teus canvis a Castopod.
+Read our [contributing guide](./contributing/guidelines.md) to learn about our
+development process, how to propose bugfixes and improvements, and how to build
+and test your changes to Castopod.
 
 ## Col·laboradors ✨
 
