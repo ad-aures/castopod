@@ -28,7 +28,7 @@ class NotificationController extends BaseController
     public function _remap(string $method, string ...$params): mixed
     {
         if (
-            ($podcast = (new PodcastModel())->getPodcastById((int) $params[0])) === null
+            ! ($podcast = (new PodcastModel())->getPodcastById((int) $params[0])) instanceof Podcast
         ) {
             throw PageNotFoundException::forPageNotFound();
         }

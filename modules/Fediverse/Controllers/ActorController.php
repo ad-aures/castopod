@@ -115,7 +115,7 @@ class ActorController extends Controller
                         ]);
                     }
 
-                    if ($reply !== null) {
+                    if ($reply instanceof Post) {
                         $postId = model('PostModel', false)
                             ->addReply($reply, true, false);
 

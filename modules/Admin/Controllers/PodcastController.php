@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Modules\Admin\Controllers;
 
+use App\Entities\Actor;
 use App\Entities\Location;
 use App\Entities\Podcast;
 use App\Entities\Post;
@@ -45,7 +46,7 @@ class PodcastController extends BaseController
         }
 
         if (
-            ($podcast = (new PodcastModel())->getPodcastById((int) $params[0])) !== null
+            ($podcast = (new PodcastModel())->getPodcastById((int) $params[0])) instanceof Podcast
         ) {
             $this->podcast = $podcast;
             return $this->{$method}();
@@ -419,7 +420,7 @@ class PodcastController extends BaseController
         // remove banner url from actor
         $actor = (new ActorModel())->getActorById($this->podcast->actor_id);
 
-        if ($actor !== null) {
+        if ($actor instanceof Actor) {
             $actor->cover_image_url = null;
             $actor->cover_image_mimetype = null;
 

@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+use App\Entities\Podcast;
 use App\Models\PodcastModel;
 use CodeIgniter\Controller;
 use CodeIgniter\Exceptions\PageNotFoundException;
@@ -79,7 +80,7 @@ class WebmanifestController extends Controller
     public function podcastManifest(string $podcastHandle): ResponseInterface
     {
         if (
-            ($podcast = (new PodcastModel())->getPodcastByHandle($podcastHandle)) === null
+            ! ($podcast = (new PodcastModel())->getPodcastByHandle($podcastHandle)) instanceof Podcast
         ) {
             throw PageNotFoundException::forPageNotFound();
         }

@@ -231,7 +231,7 @@ class Podcast extends Entity
 
     public function setCover(UploadedFile | File $file = null): self
     {
-        if ($file === null || ($file instanceof UploadedFile && ! $file->isValid())) {
+        if (! $file instanceof File || ($file instanceof UploadedFile && ! $file->isValid())) {
             return $this;
         }
 
@@ -268,7 +268,7 @@ class Podcast extends Entity
 
     public function setBanner(UploadedFile | File $file = null): self
     {
-        if ($file === null || ($file instanceof UploadedFile && ! $file->isValid())) {
+        if (! $file instanceof File || ($file instanceof UploadedFile && ! $file->isValid())) {
             return $this;
         }
 
@@ -488,7 +488,7 @@ class Podcast extends Entity
     public function getPublicationStatus(): string
     {
         if ($this->publication_status === null) {
-            if ($this->published_at === null) {
+            if (! $this->published_at instanceof Time) {
                 $this->publication_status = 'not_published';
             } elseif ($this->published_at->isBefore(Time::now())) {
                 $this->publication_status = 'published';
@@ -576,7 +576,6 @@ class Podcast extends Entity
     public function getOtherCategoriesIds(): array
     {
         if ($this->other_categories_ids === null) {
-            // @phpstan-ignore-next-line
             $this->other_categories_ids = array_column($this->getOtherCategories(), 'id');
         }
 
@@ -588,7 +587,7 @@ class Podcast extends Entity
      */
     public function setLocation(?Location $location = null): static
     {
-        if ($location === null) {
+        if (! $location instanceof Location) {
             $this->attributes['location_name'] = null;
             $this->attributes['location_geo'] = null;
             $this->attributes['location_osm'] = null;
@@ -616,7 +615,7 @@ class Podcast extends Entity
             return null;
         }
 
-        if ($this->location === null) {
+        if (! $this->location instanceof Location) {
             $this->location = new Location($this->location_name, $this->location_geo, $this->location_osm);
         }
 

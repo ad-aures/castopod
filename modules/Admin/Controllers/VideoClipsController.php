@@ -18,6 +18,7 @@ use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
+use Modules\Media\Entities\Transcript;
 use Modules\Media\Models\MediaModel;
 
 class VideoClipsController extends BaseController
@@ -29,7 +30,7 @@ class VideoClipsController extends BaseController
     public function _remap(string $method, string ...$params): mixed
     {
         if (
-            ($podcast = (new PodcastModel())->getPodcastById((int) $params[0])) === null
+            ! ($podcast = (new PodcastModel())->getPodcastById((int) $params[0])) instanceof Podcast
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
@@ -124,7 +125,7 @@ class VideoClipsController extends BaseController
             'ffmpeg' => $ffmpeg !== null,
             'gd' => extension_loaded('gd'),
             'freetype' => extension_loaded('gd') && gd_info()['FreeType Support'],
-            'transcript' => $this->episode->transcript !== null,
+            'transcript' => $this->episode->transcript instanceof Transcript,
         ];
 
         if (in_array(false, $checks, true)) {

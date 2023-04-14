@@ -29,7 +29,7 @@ class SimpleRSSElement extends SimpleXMLElement
         $newChild = parent::addChild($name, null, $namespace);
         $node = dom_import_simplexml($newChild);
         $no = $node->ownerDocument;
-        if ($no !== null) {
+        if ($no instanceof DOMDocument) {
             $node->appendChild($no->createCDATASection($value));
         }
 

@@ -22,6 +22,8 @@ use App\Models\PostModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\I18n\Time;
+use Modules\Media\Entities\Chapters;
+use Modules\Media\Entities\Transcript;
 use Modules\Media\Models\MediaModel;
 
 class EpisodeController extends BaseController
@@ -33,7 +35,7 @@ class EpisodeController extends BaseController
     public function _remap(string $method, string ...$params): mixed
     {
         if (
-            ($podcast = (new PodcastModel())->getPodcastById((int) $params[0])) === null
+            ! ($podcast = (new PodcastModel())->getPodcastById((int) $params[0])) instanceof Podcast
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
@@ -359,7 +361,7 @@ class EpisodeController extends BaseController
         } elseif ($chaptersChoice === 'remote-url') {
             if (
                 ($chaptersRemoteUrl = $this->request->getPost('chapters_remote_url')) &&
-                (($chaptersFile = $this->episode->chapters) !== null)
+                (($chaptersFile = $this->episode->chapters) instanceof Chapters)
             ) {
                 (new MediaModel())->deleteMedia($this->episode->chapters);
             }
@@ -408,7 +410,7 @@ class EpisodeController extends BaseController
 
     public function transcriptDelete(): RedirectResponse
     {
-        if ($this->episode->transcript === null) {
+        if (! $this->episode->transcript instanceof Transcript) {
             return redirect()->back();
         }
 
@@ -425,7 +427,7 @@ class EpisodeController extends BaseController
 
     public function chaptersDelete(): RedirectResponse
     {
-        if ($this->episode->chapters === null) {
+        if (! $this->episode->chapters instanceof Chapters) {
             return redirect()->back();
         }
 
@@ -626,7 +628,7 @@ class EpisodeController extends BaseController
 
         $post = (new PostModel())->getPostById($this->request->getPost('post_id'));
 
-        if ($post !== null) {
+        if ($post instanceof Post) {
             $post->message = $this->request->getPost('message');
             $post->published_at = $this->episode->published_at;
 
@@ -883,7 +885,7 @@ class EpisodeController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        if ($this->episode->published_at !== null) {
+        if ($this->episode->published_at instanceof Time) {
             return redirect()
                 ->back()
                 ->withInput()

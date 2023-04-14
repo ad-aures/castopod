@@ -42,7 +42,7 @@ class EpisodeController extends BaseController
         }
 
         if (
-            ($podcast = (new PodcastModel())->getPodcastByHandle($params[0])) === null
+            ! ($podcast = (new PodcastModel())->getPodcastByHandle($params[0])) instanceof Podcast
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
@@ -50,7 +50,7 @@ class EpisodeController extends BaseController
         $this->podcast = $podcast;
 
         if (
-            ($episode = (new EpisodeModel())->getEpisodeBySlug($params[0], $params[1])) === null
+            ! ($episode = (new EpisodeModel())->getEpisodeBySlug($params[0], $params[1])) instanceof Episode
         ) {
             throw PageNotFoundException::forPageNotFound();
         }

@@ -29,7 +29,7 @@ class Decorator implements ViewDecoratorInterface
      */
     private static function factory(): ComponentRenderer
     {
-        if (self::$components === null) {
+        if (! self::$components instanceof ComponentRenderer) {
             self::$components = new ComponentRenderer();
         }
 

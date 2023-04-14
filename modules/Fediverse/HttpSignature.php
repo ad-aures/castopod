@@ -39,7 +39,7 @@ class HttpSignature
 
     public function __construct(IncomingRequest $request = null)
     {
-        if ($request === null) {
+        if (! $request instanceof IncomingRequest) {
             $request = Services::request();
         }
 

@@ -16,6 +16,7 @@ use CodeIgniter\Controller;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\ResponseInterface;
 use Exception;
+use Modules\PremiumPodcasts\Entities\Subscription;
 use Modules\PremiumPodcasts\Models\SubscriptionModel;
 use Opawg\UserAgentsPhp\UserAgentsRSS;
 
@@ -56,7 +57,7 @@ class FeedController extends Controller
                 "podcast#{$podcast->id}",
                 'feed',
                 $service ? $serviceSlug : null,
-                $subscription !== null ? 'unlocked' : null,
+                $subscription instanceof Subscription ? 'unlocked' : null,
             ]),
         );
 

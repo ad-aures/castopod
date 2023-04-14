@@ -28,7 +28,7 @@ class PodcastPlatformController extends BaseController
         }
 
         if (
-            ($this->podcast = (new PodcastModel())->getPodcastById((int) $params[0])) !== null
+            ($this->podcast = (new PodcastModel())->getPodcastById((int) $params[0])) instanceof Podcast
         ) {
             unset($params[0]);
             return $this->{$method}(...$params);

@@ -10,8 +10,12 @@ declare(strict_types=1);
 
 namespace App\Libraries;
 
+use App\Entities\Actor;
 use App\Entities\Episode;
+use CodeIgniter\I18n\Time;
 use Modules\Fediverse\Core\ObjectType;
+use Modules\Media\Entities\Chapters;
+use Modules\Media\Entities\Transcript;
 
 class PodcastEpisode extends ObjectType
 {
@@ -70,21 +74,21 @@ class PodcastEpisode extends ObjectType
             ],
         ];
 
-        if ($episode->transcript !== null) {
+        if ($episode->transcript instanceof Transcript) {
             $this->audio['transcript'] = $episode->transcript->file_url;
         }
 
-        if ($episode->chapters !== null) {
+        if ($episode->chapters instanceof Chapters) {
             $this->audio['chapters'] = $episode->chapters->file_url;
         }
 
         $this->comments = url_to('episode-comments', $episode->podcast->handle, $episode->slug);
 
-        if ($episode->published_at !== null) {
+        if ($episode->published_at instanceof Time) {
             $this->published = $episode->published_at->format(DATE_W3C);
         }
 
-        if ($episode->podcast->actor !== null) {
+        if ($episode->podcast->actor instanceof Actor) {
             $this->attributedTo = $episode->podcast->actor->uri;
 
             if ($episode->podcast->actor->followers_url) {

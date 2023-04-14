@@ -21,6 +21,7 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Config\Services;
 use Modules\Analytics\Config\Analytics;
+use Modules\PremiumPodcasts\Entities\Subscription;
 use Modules\PremiumPodcasts\Models\SubscriptionModel;
 use Psr\Log\LoggerInterface;
 
@@ -65,7 +66,7 @@ class EpisodeAudioController extends Controller
         }
 
         if (
-            ($podcast = (new PodcastModel())->getPodcastByHandle($params[0])) === null
+            ! ($podcast = (new PodcastModel())->getPodcastByHandle($params[0])) instanceof Podcast
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
@@ -73,7 +74,7 @@ class EpisodeAudioController extends Controller
         $this->podcast = $podcast;
 
         if (
-            ($episode = (new EpisodeModel())->getEpisodeBySlug($params[0], $params[1])) === null
+            ! ($episode = (new EpisodeModel())->getEpisodeBySlug($params[0], $params[1])) instanceof Episode
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
@@ -108,10 +109,10 @@ class EpisodeAudioController extends Controller
             }
 
             // check if there's a valid subscription for the provided token
-            if (($subscription = (new SubscriptionModel())->validateSubscription(
+            if (! ($subscription = (new SubscriptionModel())->validateSubscription(
                 $this->episode->podcast->handle,
                 $token
-            )) === null) {
+            )) instanceof Subscription) {
                 return $this->response->setStatusCode(401, 'Invalid token!')
                     ->setJSON([
                         'errors' => [

@@ -64,7 +64,7 @@ class Activity extends UuidEntity
             throw new RuntimeException('Activity must have an actor_id before getting the actor.');
         }
 
-        if ($this->actor === null) {
+        if (! $this->actor instanceof Actor) {
             $this->actor = model('ActorModel', false)
                 ->getActorById($this->actor_id);
         }
@@ -78,7 +78,7 @@ class Activity extends UuidEntity
             throw new RuntimeException('Activity must have a target_actor_id before getting the target actor.');
         }
 
-        if ($this->target_actor === null) {
+        if (! $this->target_actor instanceof Actor) {
             $this->target_actor = model('ActorModel', false)
                 ->getActorById($this->target_actor_id);
         }
@@ -92,7 +92,7 @@ class Activity extends UuidEntity
             throw new RuntimeException('Activity must have a post_id before getting post.');
         }
 
-        if ($this->post === null) {
+        if (! $this->post instanceof Post) {
             $this->post = model('PostModel', false)
                 ->getPostById($this->post_id);
         }

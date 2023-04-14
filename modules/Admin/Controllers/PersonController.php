@@ -26,7 +26,7 @@ class PersonController extends BaseController
         }
 
         if (
-            ($this->person = (new PersonModel())->getPersonById((int) $params[0])) !== null
+            ($this->person = (new PersonModel())->getPersonById((int) $params[0])) instanceof Person
         ) {
             return $this->{$method}();
         }

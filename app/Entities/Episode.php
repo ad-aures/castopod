@@ -50,8 +50,8 @@ use RuntimeException;
  * @property string|null $description Holds text only description, striped of any markdown or html special characters
  * @property string $description_markdown
  * @property string $description_html
- * @property int $cover_id
- * @property Image $cover
+ * @property ?int $cover_id
+ * @property ?Image $cover
  * @property int|null $transcript_id
  * @property Transcript|null $transcript
  * @property string|null $transcript_remote_url
@@ -179,7 +179,7 @@ class Episode extends Entity
 
     public function setCover(UploadedFile | File $file = null): self
     {
-        if ($file === null || ($file instanceof UploadedFile && ! $file->isValid())) {
+        if (! $file instanceof File || ($file instanceof UploadedFile && ! $file->isValid())) {
             return $this;
         }
 
@@ -225,7 +225,7 @@ class Episode extends Entity
 
     public function setAudio(UploadedFile | File $file = null): self
     {
-        if ($file === null || ($file instanceof UploadedFile && ! $file->isValid())) {
+        if (! $file instanceof File || ($file instanceof UploadedFile && ! $file->isValid())) {
             return $this;
         }
 
@@ -265,11 +265,11 @@ class Episode extends Entity
 
     public function setTranscript(UploadedFile | File $file = null): self
     {
-        if ($file === null || ($file instanceof UploadedFile && ! $file->isValid())) {
+        if (! $file instanceof File || ($file instanceof UploadedFile && ! $file->isValid())) {
             return $this;
         }
 
-        if ($this->getTranscript() !== null) {
+        if ($this->getTranscript() instanceof Transcript) {
             $this->getTranscript()
                 ->setFile($file);
             $this->getTranscript()
@@ -293,7 +293,7 @@ class Episode extends Entity
 
     public function getTranscript(): ?Transcript
     {
-        if ($this->transcript_id !== null && $this->transcript === null) {
+        if ($this->transcript_id !== null && ! $this->transcript instanceof Transcript) {
             $this->transcript = (new MediaModel('transcript'))->getMediaById($this->transcript_id);
         }
 
@@ -302,11 +302,11 @@ class Episode extends Entity
 
     public function setChapters(UploadedFile | File $file = null): self
     {
-        if ($file === null || ($file instanceof UploadedFile && ! $file->isValid())) {
+        if (! $file instanceof File || ($file instanceof UploadedFile && ! $file->isValid())) {
             return $this;
         }
 
-        if ($this->getChapters() !== null) {
+        if ($this->getChapters() instanceof Chapters) {
             $this->getChapters()
                 ->setFile($file);
             $this->getChapters()
@@ -330,7 +330,7 @@ class Episode extends Entity
 
     public function getChapters(): ?Chapters
     {
-        if ($this->chapters_id !== null && $this->chapters === null) {
+        if ($this->chapters_id !== null && ! $this->chapters instanceof Chapters) {
             $this->chapters = (new MediaModel('chapters'))->getMediaById($this->chapters_id);
         }
 
@@ -357,7 +357,7 @@ class Episode extends Entity
      */
     public function getTranscriptUrl(): ?string
     {
-        if ($this->transcript !== null) {
+        if ($this->transcript instanceof Transcript) {
             return $this->transcript->file_url;
         }
 
@@ -369,7 +369,7 @@ class Episode extends Entity
      */
     public function getChaptersFileUrl(): ?string
     {
-        if ($this->chapters !== null) {
+        if ($this->chapters instanceof Chapters) {
             return $this->chapters->file_url;
         }
 
@@ -531,7 +531,7 @@ class Episode extends Entity
     public function getPublicationStatus(): string
     {
         if ($this->publication_status === null) {
-            if ($this->published_at === null) {
+            if (! $this->published_at instanceof Time) {
                 $this->publication_status = 'not_published';
             } elseif ($this->getPodcast()->publication_status !== 'published') {
                 $this->publication_status = 'with_podcast';
@@ -550,7 +550,7 @@ class Episode extends Entity
      */
     public function setLocation(?Location $location = null): static
     {
-        if ($location === null) {
+        if (! $location instanceof Location) {
             $this->attributes['location_name'] = null;
             $this->attributes['location_geo'] = null;
             $this->attributes['location_osm'] = null;
@@ -578,7 +578,7 @@ class Episode extends Entity
             return null;
         }
 
-        if ($this->location === null) {
+        if (! $this->location instanceof Location) {
             $this->location = new Location($this->location_name, $this->location_geo, $this->location_osm);
         }
 

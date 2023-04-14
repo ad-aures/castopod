@@ -35,7 +35,7 @@ class PodcastController extends BaseController
         }
 
         if (
-            ($podcast = (new PodcastModel())->getPodcastByHandle($params[0])) === null
+            ! ($podcast = (new PodcastModel())->getPodcastByHandle($params[0])) instanceof Podcast
         ) {
             throw PageNotFoundException::forPageNotFound();
         }

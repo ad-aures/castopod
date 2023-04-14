@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Entities\Actor;
+
 use App\Entities\Episode;
 use App\Entities\EpisodeComment;
 use App\Entities\Page;
@@ -11,6 +12,7 @@ use App\Entities\Post;
 use Melbahja\Seo\MetaTags;
 use Melbahja\Seo\Schema;
 use Melbahja\Seo\Schema\Thing;
+use Modules\Fediverse\Entities\PreviewCard;
 
 /**
  * @copyright  2021 Ad Aures
@@ -157,7 +159,7 @@ if (! function_exists('get_post_metatags')) {
                     'name' => $post->episode->podcast->owner_name,
                 ]),
             ]));
-        } elseif ($post->preview_card !== null) {
+        } elseif ($post->preview_card instanceof PreviewCard) {
             $socialMediaPosting->__set('sharedContent', new Thing('WebPage', [
                 'headline' => $post->preview_card->title,
                 'url' => $post->preview_card->url,

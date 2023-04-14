@@ -45,7 +45,7 @@ class EpisodeCommentController extends BaseController
         }
 
         if (
-            ($podcast = (new PodcastModel())->getPodcastByHandle($params[0])) === null
+            ! ($podcast = (new PodcastModel())->getPodcastByHandle($params[0])) instanceof Podcast
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
@@ -54,7 +54,7 @@ class EpisodeCommentController extends BaseController
         $this->actor = $podcast->actor;
 
         if (
-            ($episode = (new EpisodeModel())->getEpisodeBySlug($params[0], $params[1])) === null
+            ! ($episode = (new EpisodeModel())->getEpisodeBySlug($params[0], $params[1])) instanceof Episode
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
@@ -62,7 +62,7 @@ class EpisodeCommentController extends BaseController
         $this->episode = $episode;
 
         if (
-            ($comment = (new EpisodeCommentModel())->getCommentById($params[2])) === null
+            ! ($comment = (new EpisodeCommentModel())->getCommentById($params[2])) instanceof EpisodeComment
         ) {
             throw PageNotFoundException::forPageNotFound();
         }

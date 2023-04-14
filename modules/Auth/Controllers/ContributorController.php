@@ -30,7 +30,7 @@ class ContributorController extends BaseController
             throw PageNotFoundException::forPageNotFound();
         }
 
-        if (($podcast = (new PodcastModel())->getPodcastById((int) $params[0])) === null) {
+        if (! ($podcast = (new PodcastModel())->getPodcastById((int) $params[0])) instanceof Podcast) {
             throw PageNotFoundException::forPageNotFound();
         }
 
@@ -43,7 +43,7 @@ class ContributorController extends BaseController
         if (($this->contributor = (new UserModel())->getPodcastContributor(
             (int) $params[1],
             (int) $params[0]
-        )) !== null) {
+        )) instanceof User) {
             return $this->{$method}();
         }
 

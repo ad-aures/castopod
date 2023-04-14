@@ -13,6 +13,7 @@ namespace MediaClipper;
 use App\Entities\Episode;
 use Exception;
 use GdImage;
+use Modules\Media\Entities\Transcript;
 use Modules\Media\FileManagers\FileManagerInterface;
 
 /**
@@ -116,7 +117,7 @@ class VideoClipper
 
     public function subtitlesClip(): void
     {
-        if ($this->episode->transcript === null) {
+        if (! $this->episode->transcript instanceof Transcript) {
             throw new Exception('Episode does not have a transcript!');
         }
 

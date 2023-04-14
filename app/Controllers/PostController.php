@@ -45,7 +45,7 @@ class PostController extends FediversePostController
     public function _remap(string $method, string ...$params): mixed
     {
         if (
-            ($podcast = (new PodcastModel())->getPodcastByHandle($params[0])) === null
+            ! ($podcast = (new PodcastModel())->getPodcastByHandle($params[0])) instanceof Podcast
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
@@ -55,9 +55,8 @@ class PostController extends FediversePostController
 
         if (
             count($params) > 1 &&
-            ($post = (new PostModel())->getPostById($params[1])) !== null
+            ($post = (new PostModel())->getPostById($params[1])) instanceof CastopodPost
         ) {
-            /** @var CastopodPost $post */
             $this->post = $post;
 
             unset($params[0]);

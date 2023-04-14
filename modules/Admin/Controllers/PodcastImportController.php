@@ -14,6 +14,7 @@ use AdAures\PodcastPersonsTaxonomy\ReversedTaxonomy;
 use App\Entities\Episode;
 use App\Entities\Location;
 use App\Entities\Person;
+use App\Entities\Platform;
 use App\Entities\Podcast;
 use App\Models\CategoryModel;
 use App\Models\EpisodeModel;
@@ -36,7 +37,7 @@ class PodcastImportController extends BaseController
             return $this->{$method}();
         }
 
-        if (($this->podcast = (new PodcastModel())->getPodcastById((int) $params[0])) !== null) {
+        if (($this->podcast = (new PodcastModel())->getPodcastById((int) $params[0])) instanceof Podcast) {
             return $this->{$method}();
         }
 
@@ -232,7 +233,7 @@ class PodcastImportController extends BaseController
             foreach ($platformType['elements'] as $platform) {
                 $platformLabel = $platform->attributes()['platform'];
                 $platformSlug = slugify((string) $platformLabel);
-                if ($platformModel->getPlatform($platformSlug) !== null) {
+                if ($platformModel->getPlatform($platformSlug) instanceof Platform) {
                     $podcastsPlatformsData[] = [
                         'platform_slug' => $platformSlug,
                         'podcast_id' => $newPodcastId,
@@ -252,7 +253,7 @@ class PodcastImportController extends BaseController
             $fullName = (string) $podcastPerson;
             $personModel = new PersonModel();
             $newPersonId = null;
-            if (($newPerson = $personModel->getPerson($fullName)) !== null) {
+            if (($newPerson = $personModel->getPerson($fullName)) instanceof Person) {
                 $newPersonId = $newPerson->id;
             } else {
                 $newPodcastPerson = new Person([
@@ -412,7 +413,7 @@ class PodcastImportController extends BaseController
                 $fullName = (string) $episodePerson;
                 $personModel = new PersonModel();
                 $newPersonId = null;
-                if (($newPerson = $personModel->getPerson($fullName)) !== null) {
+                if (($newPerson = $personModel->getPerson($fullName)) instanceof Person) {
                     $newPersonId = $newPerson->id;
                 } else {
                     $newPerson = new Person([
@@ -648,7 +649,7 @@ class PodcastImportController extends BaseController
                 $fullName = (string) $episodePerson;
                 $personModel = new PersonModel();
                 $newPersonId = null;
-                if (($newPerson = $personModel->getPerson($fullName)) !== null) {
+                if (($newPerson = $personModel->getPerson($fullName)) instanceof Person) {
                     $newPersonId = $newPerson->id;
                 } else {
                     $newPerson = new Person([

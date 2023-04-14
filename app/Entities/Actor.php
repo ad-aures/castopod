@@ -26,7 +26,7 @@ class Actor extends FediverseActor
 
     public function getIsPodcast(): bool
     {
-        return $this->getPodcast() !== null;
+        return $this->getPodcast() instanceof Podcast;
     }
 
     public function getPodcast(): ?Podcast
@@ -44,7 +44,7 @@ class Actor extends FediverseActor
 
     public function getAvatarImageUrl(): string
     {
-        if ($this->podcast !== null) {
+        if ($this->podcast instanceof Podcast) {
             return $this->podcast->cover->thumbnail_url;
         }
 
@@ -53,7 +53,7 @@ class Actor extends FediverseActor
 
     public function getAvatarImageMimetype(): string
     {
-        if ($this->podcast !== null) {
+        if ($this->podcast instanceof Podcast) {
             return $this->podcast->cover->thumbnail_mimetype;
         }
 

@@ -58,7 +58,7 @@ class Person extends Entity
      */
     public function setAvatar(UploadedFile | File $file = null): static
     {
-        if ($file === null || ($file instanceof UploadedFile && ! $file->isValid())) {
+        if (! $file instanceof File || ($file instanceof UploadedFile && ! $file->isValid())) {
             return $this;
         }
 
@@ -90,7 +90,7 @@ class Person extends Entity
             return null;
         }
 
-        if ($this->avatar === null) {
+        if (! $this->avatar instanceof Image) {
             $this->avatar = (new MediaModel('image'))->getMediaById($this->avatar_id);
         }
 

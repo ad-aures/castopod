@@ -7,12 +7,15 @@ declare(strict_types=1);
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
  */
-
 use App\Entities\Category;
+use App\Entities\Location;
 use App\Entities\Podcast;
+
 use App\Libraries\SimpleRSSElement;
 use CodeIgniter\I18n\Time;
 use Config\Mimes;
+use Modules\Media\Entities\Chapters;
+use Modules\Media\Entities\Transcript;
 use Modules\PremiumPodcasts\Entities\Subscription;
 
 if (! function_exists('get_rss_feed')) {
@@ -76,7 +79,7 @@ if (! function_exists('get_rss_feed')) {
         $itunesImage->addAttribute('href', $podcast->cover->feed_url);
 
         $channel->addChild('language', $podcast->language_code);
-        if ($podcast->location !== null) {
+        if ($podcast->location instanceof Location) {
             $locationElement = $channel->addChild('location', $podcast->location->name, $podcastNamespace);
             if ($podcast->location->geo !== null) {
                 $locationElement->addAttribute('geo', $podcast->location->geo);
@@ -271,7 +274,7 @@ if (! function_exists('get_rss_feed')) {
         }
 
         foreach ($episodes as $episode) {
-            if ($episode->is_premium && $subscription === null) {
+            if ($episode->is_premium && ! $subscription instanceof Subscription) {
                 continue;
             }
 
@@ -293,7 +296,7 @@ if (! function_exists('get_rss_feed')) {
 
             $item->addChild('guid', $episode->guid);
             $item->addChild('pubDate', $episode->published_at->format(DATE_RFC1123));
-            if ($episode->location !== null) {
+            if ($episode->location instanceof Location) {
                 $locationElement = $item->addChild('location', $episode->location->name, $podcastNamespace);
                 if ($episode->location->geo !== null) {
                     $locationElement->addAttribute('geo', $episode->location->geo);
@@ -349,7 +352,7 @@ if (! function_exists('get_rss_feed')) {
                 );
             }
 
-            if ($episode->transcript !== null) {
+            if ($episode->transcript instanceof Transcript) {
                 $transcriptElement = $item->addChild('transcript', null, $podcastNamespace);
                 $transcriptElement->addAttribute('url', $episode->transcript->file_url);
                 $transcriptElement->addAttribute(
@@ -361,7 +364,7 @@ if (! function_exists('get_rss_feed')) {
                 $transcriptElement->addAttribute('language', $podcast->language_code);
             }
 
-            if ($episode->getChapters() !== null) {
+            if ($episode->getChapters() instanceof Chapters) {
                 $chaptersElement = $item->addChild('chapters', null, $podcastNamespace);
                 $chaptersElement->addAttribute('url', $episode->chapters->file_url);
                 $chaptersElement->addAttribute('type', 'application/json+chapters');
@@ -422,12 +425,12 @@ if (! function_exists('add_category_tag')) {
         $itunesCategory = $node->addChild('category', null, $itunesNamespace);
         $itunesCategory->addAttribute(
             'text',
-            $category->parent !== null
+            $category->parent instanceof Category
                 ? $category->parent->apple_category
                 : $category->apple_category,
         );
 
-        if ($category->parent !== null) {
+        if ($category->parent instanceof Category) {
             $itunesCategoryChild = $itunesCategory->addChild('category', null, $itunesNamespace);
             $itunesCategoryChild->addAttribute('text', $category->apple_category);
             $node->addChild('category', $category->parent->apple_category);

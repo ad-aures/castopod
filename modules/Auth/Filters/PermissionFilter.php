@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Auth\Filters;
 
+use App\Entities\Podcast;
 use App\Models\PodcastModel;
 use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
@@ -50,7 +51,7 @@ class PermissionFilter implements FilterInterface
                     $podcastId = (int) $routerParams[0];
                 } else {
                     $podcast = (new PodcastModel())->getPodcastByHandle($routerParams[0]);
-                    if ($podcast !== null) {
+                    if ($podcast instanceof Podcast) {
                         $podcastId = $podcast->id;
                     }
                 }

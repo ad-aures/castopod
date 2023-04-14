@@ -292,7 +292,7 @@ if (! function_exists('location_link')) {
      */
     function location_link(?Location $location, string $class = ''): string
     {
-        if ($location === null) {
+        if (! $location instanceof Location) {
             return '';
         }
 
@@ -359,14 +359,14 @@ if (! function_exists('relative_time')) {
             'request'
         )->getLocale(), IntlDateFormatter::MEDIUM, IntlDateFormatter::NONE);
         $translatedDate = $time->toLocalizedString($formatter->getPattern());
-        $datetime = $time->format(DateTime::ISO8601);
+        $datetime = $time->format(DateTime::ATOM);
 
         return <<<HTML
-            <time-ago class="{$class}" datetime="{$datetime}">
+            <relative-time tense="past" class="{$class}" datetime="{$datetime}">
                 <time
                     datetime="{$datetime}"
                     title="{$time}">{$translatedDate}</time>
-            </time-ago>
+            </relative-time>
         HTML;
     }
 }
@@ -383,17 +383,19 @@ if (! function_exists('local_datetime')) {
         $datetime = $time->format(DateTime::ISO8601);
 
         return <<<HTML
-            <local-time datetime="{$datetime}" 
-                weekday="long" 
-                month="long"
+            <relative-time datetime="{$datetime}" 
+                prefix=""
+                threshold="PT0S"
+                weekday="long"
                 day="numeric"
+                month="long"
                 year="numeric"
                 hour="numeric"
                 minute="numeric">
                 <time
                     datetime="{$datetime}"
                     title="{$time}">{$translatedDate}</time>
-            </local-time>
+            </relative-time>
         HTML;
     }
 }

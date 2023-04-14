@@ -94,7 +94,7 @@ class Post extends UuidEntity
             throw new RuntimeException('Post must have an actor_id before getting actor.');
         }
 
-        if ($this->actor === null) {
+        if (! $this->actor instanceof Actor) {
             $this->actor = model('ActorModel', false)
                 ->getActorById($this->actor_id);
         }
@@ -108,7 +108,7 @@ class Post extends UuidEntity
             throw new RuntimeException('Post must be created before getting preview_card.');
         }
 
-        if ($this->preview_card === null) {
+        if (! $this->preview_card instanceof PreviewCard) {
             $this->preview_card = model('PreviewCardModel', false)
                 ->getPostPreviewCard($this->id);
         }
@@ -144,7 +144,7 @@ class Post extends UuidEntity
             throw new RuntimeException('Post is not a reply.');
         }
 
-        if ($this->reply_to_post === null) {
+        if (! $this->reply_to_post instanceof self) {
             $this->reply_to_post = model('PostModel', false)
                 ->getPostById($this->in_reply_to_id);
         }
@@ -175,7 +175,7 @@ class Post extends UuidEntity
             throw new RuntimeException('Post is not a reblog.');
         }
 
-        if ($this->reblog_of_post === null) {
+        if (! $this->reblog_of_post instanceof self) {
             $this->reblog_of_post = model('PostModel', false)
                 ->getPostById($this->reblog_of_id);
         }

@@ -36,7 +36,7 @@ class OrderedCollectionObject extends ObjectType
     ) {
         $this->id = current_url();
 
-        if ($pager !== null) {
+        if ($pager instanceof Pager) {
             $totalItems = $pager->getTotal();
             $this->totalItems = $totalItems;
 

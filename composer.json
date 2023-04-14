@@ -11,7 +11,7 @@
     "james-heinrich/getid3": "^2.0.0-beta5",
     "whichbrowser/parser": "^v2.1.7",
     "geoip2/geoip2": "v2.13.0",
-    "league/commonmark": "^2.3.9",
+    "league/commonmark": "^2.4.0",
     "vlucas/phpdotenv": "v5.5.0",
     "league/html-to-markdown": "^v5.1.0",
     "opawg/user-agents-php": "^v1.0",
@@ -24,15 +24,15 @@
     "chrisjean/php-ico": "^1.0.4",
     "melbahja/seo": "^v2.1.1",
     "codeigniter4/shield": "v1.0.0-beta.3",
-    "aws/aws-sdk-php": "^3.261.17"
+    "aws/aws-sdk-php": "^3.263.10"
   },
   "require-dev": {
     "mikey179/vfsstream": "^v1.6.11",
-    "phpunit/phpunit": "^10.0.18",
-    "captainhook/captainhook": "^5.15.5",
+    "phpunit/phpunit": "^10.1.0",
+    "captainhook/captainhook": "^5.16.3",
     "symplify/easy-coding-standard": "^11.3.2",
-    "phpstan/phpstan": "^1.10.7",
-    "rector/rector": "^0.15.23",
+    "phpstan/phpstan": "^1.10.13",
+    "rector/rector": "^0.15.24",
     "symplify/coding-standard": "^11.3.0"
   },
   "autoload": {

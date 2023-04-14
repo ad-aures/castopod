@@ -1,4 +1,4 @@
-import "@github/time-elements";
+import "@github/relative-time-element";
 import SidebarToggler from "./modules/SidebarToggler";
 import Time from "./modules/Time";
 import Toggler from "./modules/Toggler";

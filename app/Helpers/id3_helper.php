@@ -7,8 +7,9 @@ declare(strict_types=1);
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
  */
-
 use App\Entities\Episode;
+
+use CodeIgniter\I18n\Time;
 use JamesHeinrich\GetID3\WriteTags;
 use Modules\Media\FileManagers\FileManagerInterface;
 
@@ -49,7 +50,7 @@ if (! function_exists('write_audio_file_tags')) {
                     : $episode->podcast->publisher,
             ],
             'album' => [esc($episode->podcast->title)],
-            'year' => [$episode->published_at !== null ? $episode->published_at->format('Y') : ''],
+            'year' => [$episode->published_at instanceof Time ? $episode->published_at->format('Y') : ''],
             'genre' => ['Podcast'],
             'comment' => [$episode->description],
             'track_number' => [(string) $episode->number],

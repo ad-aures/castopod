@@ -137,7 +137,7 @@ class ActorModel extends BaseModel
      */
     public function isActorBlocked(string $actorUri): bool
     {
-        if (($actor = $this->getActorByUri($actorUri)) !== null) {
+        if (($actor = $this->getActorByUri($actorUri)) instanceof Actor) {
             return $actor->is_blocked;
         }
 

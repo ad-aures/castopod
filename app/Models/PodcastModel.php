@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Entities\Actor;
 use App\Entities\Podcast;
 use CodeIgniter\HTTP\URI;
 use CodeIgniter\Model;
@@ -361,7 +362,7 @@ class PodcastModel extends Model
         cache()
             ->deleteMatching('user*podcasts');
 
-        if ($podcast !== null) {
+        if ($podcast instanceof Podcast) {
             // delete cache all podcast pages
             cache()
                 ->deleteMatching("page_podcast#{$podcast->id}*");
@@ -436,7 +437,7 @@ class PodcastModel extends Model
     {
         $podcast = (new self())->getPodcastById(is_array($data['id']) ? $data['id'][0] : $data['id']);
 
-        if ($podcast !== null) {
+        if ($podcast instanceof Podcast) {
             $podcastActor = (new ActorModel())->find($podcast->actor_id);
 
             if ($podcastActor) {
@@ -459,11 +460,11 @@ class PodcastModel extends Model
     {
         $podcast = (new self())->getPodcastById(is_array($data['id']) ? $data['id'][0] : $data['id']);
 
-        if ($podcast !== null) {
+        if ($podcast instanceof Podcast) {
             $actorModel = new ActorModel();
             $actor = $actorModel->getActorById($podcast->actor_id);
 
-            if ($actor !== null) {
+            if ($actor instanceof Actor) {
                 // update values
                 $actor->display_name = $podcast->title;
                 $actor->summary = $podcast->description_html;
