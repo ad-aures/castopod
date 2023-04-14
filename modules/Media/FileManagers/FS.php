@@ -57,14 +57,7 @@ class FS implements FileManagerInterface
 
     public function getUrl(string $key): string
     {
-        $appConfig = config('App');
-        $mediaBaseUrl = $this->config->baseURL === '' ? $appConfig->baseURL : $this->config->baseURL;
-
-        return rtrim((string) $mediaBaseUrl, '/') .
-            '/' .
-            $this->config->root .
-            '/' .
-            $key;
+        return media_url($this->config->root . '/' . $key);
     }
 
     public function rename(string $oldKey, string $newKey): bool

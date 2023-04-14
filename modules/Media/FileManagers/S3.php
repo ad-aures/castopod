@@ -64,7 +64,7 @@ class S3 implements FileManagerInterface
 
     public function getUrl(string $key): string
     {
-        return url_to('media-serve', $key);
+        return media_url((string) route_to('media-serve', $key));
     }
 
     public function rename(string $oldKey, string $newKey): bool
