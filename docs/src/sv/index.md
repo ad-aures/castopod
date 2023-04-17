@@ -22,7 +22,7 @@ mycket litet fotavtryck.
 - 🌱 &nbsp;Gratis & öppen källkod (AGPL v3-licens)
 - 🔐 &nbsp;Fokuserad på datasuveränitet: ditt innehåll, målgrupp och analys
   tillhör dig, och&nbsp;du&nbsp;bara
-- <unk> &nbsp;Podcasting 2.0 funktioner: GUID, låst, avskrifter, finansiering,
+- 🪄 &nbsp;Podcasting 2.0 funktioner: GUID, låst, avskrifter, finansiering,
   kapitel, plats, personer, ljud, …
 - 💬 &nbsp;Inbyggt socialt nätverk:
   - 🚀 &nbsp;Castopod är en del av Fediverse, ett decentraliserat socialt
@@ -30,7 +30,7 @@ mycket litet fotavtryck.
   - ❤️ &nbsp;Skapa inlägg, dela, favorit och kommentera avsnitt
 - 📈 &nbsp;Inbyggd analys:
   - ⚖️ &nbsp;GDPR / CCPA / LGPD kompatibel
-  - <unk> &nbsp;Standard IABv2 målgruppsmätning
+  - 🪙 &nbsp;Standard IABv2 målgruppsmätning
   - 🏡 &nbsp;Lokalanalys, ingen tredje part involverad
 - 📢 &nbsp;Inbyggda marknadsföringsverktyg:
   - ✅ &nbsp;SEO ready (open-graph meta-tags, JSON-LD, …)
@@ -38,8 +38,7 @@ mycket litet fotavtryck.
   - 🎨 &nbsp;Anpassningsbara temafärger
   - 🎬 &nbsp;Generera att dela videoklipp från avsnitt
   - 🔉 &nbsp;Generera ljudbitar
-  - <unk> \_button_selector: &nbsp;Inbäddbar spelare, bädda in dina avsnitt på
-    valfri webbplats
+  - ▶️ &nbsp;Inbäddbar spelare, bädda in dina avsnitt på valfri webbplats
 - 💸 &nbsp;Monetization:
   - 🔗 &nbsp;Finansierar länkar
   - 📲 &nbsp;lista-att-klicka annonser
@@ -51,7 +50,7 @@ mycket litet fotavtryck.
   - ⚡ &nbsp;Sänd dina avsnitt direkt med WebSub
 - 📥 &nbsp;Podcast import: flytta din befintliga podcast till Castopod
 - 📤 &nbsp;Flytta ut din podcast från Castopod
-- :shuffle_tracks<unk> &nbsp;Flera hyresgäst: värd så många podcasts du vill
+- 🔀 &nbsp;Flera hyresgäst: värd så många podcasts du vill
 - 👥 &nbsp;Flera användare: lägg till bidragslämnare och ange roller
 - 🌎 &nbsp;i18n support: översatt till engelska, franska, polska, tyska,
   brasilianska portugisiska & spanska… med
