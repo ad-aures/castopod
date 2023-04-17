@@ -24,20 +24,22 @@ class WebSubController extends Controller
             return;
         }
 
+        helper('misc');
+
         // get all podcasts that haven't been published yet
         // or having a published episode that hasn't been pushed yet
         $podcastModel = new PodcastModel();
-        $podcasts = $podcastModel
-            ->distinct()
+        $podcastModel->builder()
             ->select('podcasts.*')
+            ->distinct()
             ->join('episodes', 'podcasts.id = episodes.podcast_id', 'left outer')
             ->where('podcasts.is_published_on_hubs', false)
             ->where('`' . $podcastModel->db->getPrefix() . 'podcasts`.`published_at` <= UTC_TIMESTAMP()', null, false)
             ->orGroupStart()
             ->where('episodes.is_published_on_hubs', false)
             ->where('`' . $podcastModel->db->getPrefix() . 'episodes`.`published_at` <= UTC_TIMESTAMP()', null, false)
-            ->groupEnd()
-            ->findAll();
+            ->groupEnd();
+        $podcasts = $podcastModel->findAll();
 
         if ($podcasts === []) {
             return;

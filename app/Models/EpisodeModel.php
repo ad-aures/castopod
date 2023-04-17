@@ -395,7 +395,20 @@ class EpisodeModel extends Model
      */
     public function clearCache(array $data): array
     {
-        $episode = (new self())->find(is_array($data['id']) ? $data['id'][0] : $data['id']);
+        /** @var int|null $episodeId */
+        $episodeId = is_array($data['id']) ? $data['id'][0] : $data['id'];
+
+        if ($episodeId === null) {
+            // Multiple episodes have been updated, do nothing
+            return $data;
+        }
+
+        /** @var ?Episode $episode */
+        $episode = (new self())->find($episodeId);
+
+        if (! $episode instanceof Episode) {
+            return $data;
+        }
 
         // delete podcast cache
         cache()
@@ -430,9 +443,22 @@ class EpisodeModel extends Model
      */
     protected function writeEnclosureMetadata(array $data): array
     {
-        helper('id3');
+        /** @var int|null $episodeId */
+        $episodeId = is_array($data['id']) ? $data['id'][0] : $data['id'];
 
-        $episode = (new self())->find(is_array($data['id']) ? $data['id'][0] : $data['id']);
+        if ($episodeId === null) {
+            // Multiple episodes have been updated, do nothing
+            return $data;
+        }
+
+        /** @var ?Episode $episode */
+        $episode = (new self())->find($episodeId);
+
+        if (! $episode instanceof Episode) {
+            return $data;
+        }
+
+        helper('id3');
 
         write_audio_file_tags($episode);
 
