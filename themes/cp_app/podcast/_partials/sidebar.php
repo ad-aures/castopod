@@ -8,7 +8,7 @@
             in_array(true, array_column($podcast->socialPlatforms, 'is_visible'), true)
         ): ?>
         <h2 class="text-sm font-bold font-display text-accent-muted"> <?= lang('Podcast.find_on', [
-            'podcastTitle' => esc($podcast->title),
+            'podcastTitle' => $podcast->title,
         ]) ?></h2>
         <div class="grid items-center justify-center grid-cols-6 gap-3 mb-6">
         <?php foreach ($podcast->socialPlatforms as $socialPlatform): ?>
