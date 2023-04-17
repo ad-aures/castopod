@@ -1,3 +1,13 @@
+## [1.3.3](https://code.castopod.org/adaures/castopod/compare/v1.3.2...v1.3.3) (2023-04-17)
+
+### Bug Fixes
+
+- unnescape podcast title special characters in "find us on" section
+  ([f727276](https://code.castopod.org/adaures/castopod/commit/f727276f820a8ef2c47947f40a37a4a157b509ef)),
+  closes [#323](https://code.castopod.org/adaures/castopod/issues/323)
+- **websub:** add missing misc helper import
+  ([855aacc](https://code.castopod.org/adaures/castopod/commit/855aacce0bf3841a876cd593e668e116149080aa))
+
 ## [1.3.2](https://code.castopod.org/adaures/castopod/compare/v1.3.1...v1.3.2) (2023-04-14)
 
 ### Bug Fixes
