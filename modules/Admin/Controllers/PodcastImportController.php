@@ -307,7 +307,6 @@ class PodcastImportController extends BaseController
         $slugs = [];
         for ($itemNumber = 1; $itemNumber <= $lastItem; ++$itemNumber) {
             $item = $feed->channel[0]->item[$itemsCount - $itemNumber];
-            log_message('critical', (string) $item->title);
 
             $nsItunes = $item->children('http://www.itunes.com/dtds/podcast-1.0.dtd');
             $nsPodcast = $item->children(
