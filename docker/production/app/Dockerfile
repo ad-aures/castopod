@@ -1,7 +1,7 @@
 FROM docker.io/php:8.1-fpm-alpine3.17
 
+COPY docker/production/common/prepare_environment.sh /prepare_environment.sh
 COPY docker/production/app/entrypoint.sh /entrypoint.sh
-
 COPY docker/production/app/uploads.ini /usr/local/etc/php/conf.d/uploads.ini
 
 RUN echo "* * * * * /usr/local/bin/php /opt/castopod/public/index.php scheduled-activities" > /crontab.txt && \

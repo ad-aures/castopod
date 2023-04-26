@@ -33,6 +33,7 @@ COPY --from=UNIT_BUILDER /usr/sbin/unitd /usr/sbin/unitd
 COPY --from=UNIT_BUILDER /usr/lib/unit/ /usr/lib/unit/
 COPY --from=CRON_BUILDER /usr/local/bin/supercronic /usr/local/bin/supercronic
 
+COPY docker/production/common/prepare_environment.sh /prepare_environment.sh
 COPY docker/production/unit/entrypoint.sh /entrypoint.sh
 COPY castopod /var/www/castopod
 COPY docker/production/unit/config.json /config.json

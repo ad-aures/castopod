@@ -4,7 +4,7 @@ ENV SUPERCRONIC_VERSION=v0.2.1
 
 COPY docker/production/video-clipper/entrypoint.sh /entrypoint.sh
 
-RUN echo "*/2 * * * * /usr/local/bin/php /opt/castopod/public/index.php scheduled-video-clips" >> /crontab.txt
+RUN echo "* * * * * /usr/local/bin/php /opt/castopod/public/index.php scheduled-video-clips" >> /crontab.txt
 
 RUN apt update && \
     apt install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev libwebp-dev libxpm-dev libicu-dev && \
