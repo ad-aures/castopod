@@ -458,10 +458,17 @@ class EpisodeModel extends Model
                 ' . $podcastModel->getFullTextMatchClauseForPodcasts($podcastTable, $value) . ' as podcasts_score,
              ')
             ->select("$podcastTable.created_at AS podcast_created_at")
-            ->select("$podcastTable.title, $podcastTable.handle, $podcastTable.description_markdown")
+            ->select("$podcastTable.title as podcast_title, $podcastTable.handle as podcast_handle, $podcastTable.description_markdown as podcast_description_markdown")
             ->join($podcastTable, "$podcastTable on $podcastTable.id = $episodeTable.podcast_id")
             ->where('
-                ('. $this->getFullTextMatchClauseForEpisodes($episodeTable, $value) . "OR".$podcastModel->getFullTextMatchClauseForPodcasts($podcastTable, $value).')
+                ('.
+                    $this->getFullTextMatchClauseForEpisodes($episodeTable, $value)
+
+                    . "OR" .
+
+                    $podcastModel->getFullTextMatchClauseForPodcasts($podcastTable, $value)
+
+                .')
             ');
 
 
@@ -477,7 +484,7 @@ class EpisodeModel extends Model
                     '.$table.'.slug,
                     '.$table.'.location_name
                 )
-                AGAINST("*'.$value.'*" IN BOOLEAN MODE)
+                AGAINST("*'.preg_replace('/[^\p{L}\p{N}_]+/u', ' ', $value).'*" IN BOOLEAN MODE)
             ';
     }
 }

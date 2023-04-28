@@ -504,7 +504,7 @@ class PodcastModel extends Model
                     '.$table.'.description_markdown,
                     '.$table.'.handle
                 )
-                AGAINST("*'.$value.'*" IN BOOLEAN MODE)
+                AGAINST("*'.preg_replace('/[^\p{L}\p{N}_]+/u', ' ', $value).'*" IN BOOLEAN MODE)
             ';
     }
 }

@@ -22,7 +22,6 @@ class EpisodeController extends Controller
 
     public function list(): Response
     {
-
         $params = $this->request->getGet();
 
         $searchParam = $params['search'] ?? null;
@@ -30,6 +29,7 @@ class EpisodeController extends Controller
         $podcastId = $params['podcast_id'] ?? null;
 
         $builder = (new EpisodeModel());
+
 
         if($podcastId) {
             $builder->where('podcast_id', $podcastId);
@@ -52,6 +52,7 @@ class EpisodeController extends Controller
             (int) ($params['limit'] ?? config('RestApi')->limit),
             (int) ($params['offset'] ?? 0)
         );
+
 
         array_map(static function ($episode): void  {
           self::mapEpisode($episode);
