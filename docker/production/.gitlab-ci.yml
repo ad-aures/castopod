@@ -11,6 +11,7 @@ docker-build-rolling:
     TAG: $CI_COMMIT_BRANCH
     DOCKER_BUILDKIT: 1
     DOCKER_HOST: tcp://docker:2376
+    DOCKER_TLS_CERTDIR: "/certs"
   script:
     - mkdir -p /root/.docker
     - cp ${DOCKER_HUB_CONFIG} /root/.docker/config.json
@@ -35,6 +36,7 @@ docker-build-main-release:
   variables:
     DOCKER_BUILDKIT: 1
     DOCKER_HOST: tcp://docker:2376
+    DOCKER_TLS_CERTDIR: "/certs"
   script:
     - mkdir -p /root/.docker
     - cp ${DOCKER_HUB_CONFIG} /root/.docker/config.json
@@ -61,6 +63,7 @@ docker-build-alpha-beta-release:
     TAG: $CI_COMMIT_BRANCH
     DOCKER_BUILDKIT: 1
     DOCKER_HOST: tcp://docker:2376
+    DOCKER_TLS_CERTDIR: "/certs"
   script:
     - mkdir -p /root/.docker
     - cp ${DOCKER_HUB_CONFIG} /root/.docker/config.json
