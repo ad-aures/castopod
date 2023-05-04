@@ -17,9 +17,9 @@ docker-build-rolling:
     - cp ${DOCKER_HUB_CONFIG} /root/.docker/config.json
     - docker context create tls-environment
     - docker buildx create --use tls-environment
-    - docker buildx build --push --platform=linux/amd64,linux/arm64 --file=docker/production/web-server/Dockerfile --tag=${DOCKER_IMAGE_WEB_SERVER}:${TAG} .
-    - docker buildx build --push --platform=linux/amd64,linux/arm64 --file=docker/production/app/Dockerfile --tag=${DOCKER_IMAGE_APP}:${TAG} .
-    - docker buildx build --push --platform=linux/amd64,linux/arm64 --file=docker/production/video-clipper/Dockerfile --tag=${DOCKER_IMAGE_VIDEO_CLIPPER}:${TAG} .
+    - docker buildx build --push --platform=linux/amd64 --file=docker/production/web-server/Dockerfile --tag=${DOCKER_IMAGE_WEB_SERVER}:${TAG} .
+    - docker buildx build --push --platform=linux/amd64 --file=docker/production/app/Dockerfile --tag=${DOCKER_IMAGE_APP}:${TAG} .
+    - docker buildx build --push --platform=linux/amd64 --file=docker/production/video-clipper/Dockerfile --tag=${DOCKER_IMAGE_VIDEO_CLIPPER}:${TAG} .
     - docker buildx build --push --platform=linux/amd64,linux/arm64 --file=docker/production/unit/Dockerfile --tag=${DOCKER_IMAGE_UNIT}:${TAG} .
   needs:
     - pipeline: $PARENT_PIPELINE_ID
@@ -44,9 +44,9 @@ docker-build-main-release:
     - export CP_VERSION=$(cat CP_VERSION.env)
     - docker context create tls-environment
     - docker buildx create --use tls-environment
-    - docker buildx build --push --platform=linux/amd64,linux/arm64 --file=docker/production/web-server/Dockerfile --tag=${DOCKER_IMAGE_WEB_SERVER}:${CP_VERSION} --tag={DOCKER_IMAGE_WEB_SERVER}:latest .
-    - docker buildx build --push --platform=linux/amd64,linux/arm64 --file=docker/production/app/Dockerfile --tag=${DOCKER_IMAGE_APP}:${CP_VERSION} --tag=${DOCKER_IMAGE_APP}:latest .
-    - docker buildx build --push --platform=linux/amd64,linux/arm64 --file=docker/production/video-clipper/Dockerfile --tag=${DOCKER_IMAGE_VIDEO_CLIPPER}:${CP_VERSION} --tag=${DOCKER_IMAGE_VIDEO_CLIPPER}:latest .
+    - docker buildx build --push --platform=linux/amd64 --file=docker/production/web-server/Dockerfile --tag=${DOCKER_IMAGE_WEB_SERVER}:${CP_VERSION} --tag={DOCKER_IMAGE_WEB_SERVER}:latest .
+    - docker buildx build --push --platform=linux/amd64 --file=docker/production/app/Dockerfile --tag=${DOCKER_IMAGE_APP}:${CP_VERSION} --tag=${DOCKER_IMAGE_APP}:latest .
+    - docker buildx build --push --platform=linux/amd64 --file=docker/production/video-clipper/Dockerfile --tag=${DOCKER_IMAGE_VIDEO_CLIPPER}:${CP_VERSION} --tag=${DOCKER_IMAGE_VIDEO_CLIPPER}:latest .
     - docker buildx build --push --platform=linux/amd64,linux/arm64 --file=docker/production/unit/Dockerfile --tag=${DOCKER_IMAGE_UNIT}:${CP_VERSION} --tag=${DOCKER_IMAGE_UNIT}:latest .
   needs:
     - pipeline: $PARENT_PIPELINE_ID
@@ -72,9 +72,9 @@ docker-build-alpha-beta-release:
     - export CP_VERSION=$(cat CP_VERSION.env)
     - docker context create tls-environment
     - docker buildx create --use tls-environment
-    - docker buildx build --push --platform=linux/amd64,linux/arm64 --file=docker/production/web-server/Dockerfile --tag=${DOCKER_IMAGE_WEB_SERVER}:${CP_VERSION} --tag={DOCKER_IMAGE_WEB_SERVER}:${TAG} .
-    - docker buildx build --push --platform=linux/amd64,linux/arm64 --file=docker/production/app/Dockerfile --tag=${DOCKER_IMAGE_APP}:${CP_VERSION} --tag=${DOCKER_IMAGE_APP}:${TAG} .
-    - docker buildx build --push --platform=linux/amd64,linux/arm64 --file=docker/production/video-clipper/Dockerfile --tag=${DOCKER_IMAGE_VIDEO_CLIPPER}:${CP_VERSION} --tag=${DOCKER_IMAGE_VIDEO_CLIPPER}:${TAG} .
+    - docker buildx build --push --platform=linux/amd64 --file=docker/production/web-server/Dockerfile --tag=${DOCKER_IMAGE_WEB_SERVER}:${CP_VERSION} --tag={DOCKER_IMAGE_WEB_SERVER}:${TAG} .
+    - docker buildx build --push --platform=linux/amd64 --file=docker/production/app/Dockerfile --tag=${DOCKER_IMAGE_APP}:${CP_VERSION} --tag=${DOCKER_IMAGE_APP}:${TAG} .
+    - docker buildx build --push --platform=linux/amd64 --file=docker/production/video-clipper/Dockerfile --tag=${DOCKER_IMAGE_VIDEO_CLIPPER}:${CP_VERSION} --tag=${DOCKER_IMAGE_VIDEO_CLIPPER}:${TAG} .
     - docker buildx build --push --platform=linux/amd64,linux/arm64 --file=docker/production/unit/Dockerfile --tag=${DOCKER_IMAGE_UNIT}:${CP_VERSION} --tag=${DOCKER_IMAGE_UNIT}:${TAG} .
   needs:
     - pipeline: $PARENT_PIPELINE_ID
