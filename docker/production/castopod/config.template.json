@@ -22,11 +22,11 @@
       "options": {
         "admin": {
           "file_uploads": "On",
-          "memory_limit": "512M",
-          "upload_max_filesize": "500M",
-          "post_max_size": "512M",
-          "max_execution_time": "300",
-          "max_input_time": "300"
+          "memory_limit": "$CP_PHP_MEMORY_LIMIT",
+          "upload_max_filesize": "$CP_MAX_BODY_SIZE",
+          "post_max_size": "$CP_MAX_BODY_SIZE",
+          "max_execution_time": "$CP_TIMEOUT",
+          "max_input_time": "$CP_TIMEOUT"
         }
       }
     }
@@ -36,8 +36,8 @@
   },
   "settings": {
     "http": {
-      "body_read_timeout": 300,
-      "max_body_size": 536870912
+      "body_read_timeout": $CP_TIMEOUT,
+      "max_body_size": $CP_MAX_BODY_SIZE_BYTES
     }
   }
 }

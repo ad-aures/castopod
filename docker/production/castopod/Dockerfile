@@ -34,14 +34,14 @@ COPY --from=UNIT_BUILDER /usr/lib/unit/ /usr/lib/unit/
 COPY --from=CRON_BUILDER /usr/local/bin/supercronic /usr/local/bin/supercronic
 
 COPY docker/production/common/prepare_environment.sh /prepare_environment.sh
-COPY docker/production/unit/entrypoint.sh /entrypoint.sh
+COPY docker/production/castopod/entrypoint.sh /entrypoint.sh
 COPY castopod /var/www/castopod
-COPY docker/production/unit/config.json /config.json
-COPY docker/production/unit/crontab.txt /crontab.txt
-COPY docker/production/unit/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY docker/production/castopod/config.template.json /config.template.json
+COPY docker/production/castopod/crontab.txt /crontab.txt
+COPY docker/production/castopod/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 RUN apt-get update && \
-    apt-get install -y supervisor ffmpeg curl libfreetype6-dev libjpeg62-turbo-dev libpng-dev libwebp-dev libxpm-dev libpcre2-8-0 libicu-dev && \
+    apt-get install -y supervisor ffmpeg curl gettext-base libfreetype6-dev libjpeg62-turbo-dev libpng-dev libwebp-dev libxpm-dev libpcre2-8-0 libicu-dev && \
     rm -rf /var/lib/apt/lists/* && \
     pecl install -o -f redis && \
     rm -rf /tmp/pear && \

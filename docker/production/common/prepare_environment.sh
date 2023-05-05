@@ -16,7 +16,8 @@ fi
 
 if [ -z "${CP_MEDIA_BASEURL}" ]
 then
-	echo "CP_MEDIA_BASEURL is empty, leaving empty by default"
+	echo "CP_MEDIA_BASEURL is empty, using CP_BASEURL by default"
+	CP_MEDIA_BASEURL=$CP_BASEURL
 fi
 
 if [ -z "${CP_ADMIN_GATEWAY}" ]
@@ -131,6 +132,28 @@ then
 	then
 		log_warning "CP_MEDIA_S3_BUCKET is empty, using default"
 	fi
+fi
+
+if [ -z "${CP_PHP_MEMORY_LIMIT}" ]
+then
+	export CP_PHP_MEMORY_LIMIT="512M"
+fi
+
+if [ -z "${CP_MAX_BODY_SIZE}" ]
+then
+	export CP_MAX_BODY_SIZE="512M"
+fi
+
+CP_MAX_BODY_SIZE_BYTES=$(numfmt --from=iec "$CP_MAX_BODY_SIZE")
+if [ $? -ne 0 ]
+then
+	log_error "Failed to parse CP_MAX_BODY_SIZE ($CP_MAX_BODY_SIZE) as human readable number"
+fi
+export CP_MAX_BODY_SIZE_BYTES=$CP_MAX_BODY_SIZE_BYTES
+
+if [ -z "${CP_TIMEOUT}" ]
+then
+	export CP_TIMEOUT=900
 fi
 
 cat << EOF > $ENV_FILE_LOCATION
