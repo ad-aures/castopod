@@ -1,3 +1,10 @@
+## [1.3.4](https://code.castopod.org/adaures/castopod/compare/v1.3.3...v1.3.4) (2023-05-05)
+
+### Bug Fixes
+
+- **import-update:** insert episodes incrementally into database
+  ([108fdf8](https://code.castopod.org/adaures/castopod/commit/108fdf84b8dd458fc71a06a77d14069287ab8e42))
+
 ## [1.3.3](https://code.castopod.org/adaures/castopod/compare/v1.3.2...v1.3.3) (2023-04-17)
 
 ### Bug Fixes
