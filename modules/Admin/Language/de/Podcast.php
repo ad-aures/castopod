@@ -80,7 +80,7 @@ return [
         'language' => 'Sprache',
         'category' => 'Kategorie',
         'category_placeholder' => 'Kategorie wählen...',
-        'other_categories' => 'Andere Kategorieen',
+        'other_categories' => 'Andere Kategorien',
         'parental_advisory' => [
             'label' => 'Hinweis an Eltern',
             'hint' => 'Enthält die Folge anstößige Inhalte?',

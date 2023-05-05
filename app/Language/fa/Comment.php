@@ -9,13 +9,13 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => "{actorDisplayName}'s comment for {episodeTitle}",
-    'back_to_comments' => 'Back to comments',
+    'title' => "دیدگاه {actorDisplayName} روی {episodeTitle}",
+    'back_to_comments' => 'بازکشت به نظرها',
     'form' => [
-        'episode_message_placeholder' => 'Write a comment…',
-        'reply_to_placeholder' => 'Reply to @{actorUsername}',
-        'submit' => 'Send',
-        'submit_reply' => 'Reply',
+        'episode_message_placeholder' => 'نوشتن دیدگاه…',
+        'reply_to_placeholder' => 'پاسخ به ‪@{actorUsername}‬',
+        'submit' => 'فرستادن',
+        'submit_reply' => 'پاسخ',
     ],
     'likes' => '{numberOfLikes, plural,
         one {# like}
@@ -25,10 +25,10 @@ return [
         one {# reply}
         other {# replies}
     }',
-    'like' => 'Like',
-    'reply' => 'Reply',
-    'view_replies' => 'View replies ({numberOfReplies})',
-    'block_actor' => 'Block user @{actorUsername}',
-    'block_domain' => 'Block domain @{actorDomain}',
-    'delete' => 'Delete comment',
+    'like' => 'پسند',
+    'reply' => 'پاسخ',
+    'view_replies' => 'دیدن پاسخ‌ها ({numberOfReplies})',
+    'block_actor' => 'انسداد کاربر ‪@{actorUsername}‬',
+    'block_domain' => 'انسداد دامنهٔ ‪@{actorDomain}‬',
+    'delete' => 'حذف دیدگاه',
 ];

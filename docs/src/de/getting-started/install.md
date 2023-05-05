@@ -5,15 +5,16 @@ sidebarDepth: 3
 
 # Wie installiere ich Castopod?
 
-Castopod was thought-out to be easy to install. Whether using dedicated or
-shared hosting, you can install it on most PHP-MySQL compatible web servers.
+Castopod ist für eine einfache Installation konzipiert. Ob dediziertes oder
+Shared-Hosting, du kannst es auf den meisten PHP-MySQL-kompatiblen Webservern
+installieren.
 
 ::: tip Note
 
-We've released official Docker images for Castopod!
+Wir haben offizielle Docker Images für Castopod veröffentlicht!
 
-If you prefer using Docker, you may skip this and go straight to the
-[docker documentation](./docker.md) for Castopod.
+Wenn du Docker bevorzugst, kannst du die manuelle Anleitung überspringen und
+direkt zur [Docker-Dokumentation](./docker.md) für Castopod gehen.
 
 :::
 
@@ -22,65 +23,68 @@ If you prefer using Docker, you may skip this and go straight to the
 - PHP v8.1 oder höher
 - MySQL Version 5.7 oder höher oder MariaDB Version 10.2 oder höher
 - HTTPS-Unterstützung
-- An [ntp-synced clock](https://wiki.debian.org/NTP) to validate federation's
-  incoming requests
+- Eine [ntp-synchronisierte Uhr](https://wiki.debian.org/NTP) um die eingehenden
+  Anfragen zu überprüfen
 
 ### PHP v8.1 oder höher
 
-PHP version 8.1 or higher is required, with the following extensions installed:
+PHP Version 8.1 oder höher ist erforderlich, wobei folgende Erweiterungen
+installiert sind:
 
 - [intl](https://php.net/manual/en/intl.requirements.php)
 - [libcurl](https://php.net/manual/en/curl.requirements.php)
 - [mbstring](https://php.net/manual/en/mbstring.installation.php)
-- [gd](https://www.php.net/manual/en/image.installation.php) with **JPEG**,
-  **PNG** and **WEBP** libraries.
+- [gd](https://www.php.net/manual/en/image.installation.php) mit **JPEG**,
+  **PNG** und **WEBP** Bibliotheken.
 - [exif](https://www.php.net/manual/en/exif.installation.php)
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+Stelle außerdem sicher, dass die folgenden Erweiterungen in deinem PHP aktiviert
+sind:
 
-- json (enabled by default - don't turn it off)
-- xml (enabled by default - don't turn it off)
+- json (standardmäßig aktiviert - nicht ausschalten)
+- xml (standardmäßig aktiviert - nicht ausschalten)
 - [mysqlnd](https://php.net/manual/en/mysqlnd.install.php)
 
-### MySQL compatible database
+### MySQL kompatible Datenbank
 
-> We recommend using [MariaDB](https://mariadb.org).
+> Wir empfehlen [MariaDB](https://mariadb.org).
 
 ::: warning Warning
 
-Castopod only works with supported MySQL 5.7 or higher compatible databases. It
-will break with the previous MySQL v5.6 for example as its end of life was on
-February 5, 2021.
+Castopod funktioniert nur mit unterstützten MySQL 5.7 oder höher kompatiblen
+Datenbanken. Es wird zum Beispiel mit dem vorherigen MySQL v5.6 nicht mehr
+funktionieren, dessen Lebensende am 5. Februar 2021 war.
 
 :::
 
-You will need the server hostname, database name, username and password to
-complete the installation process. If you do not have these, please contact your
-server administrator.
+Du benötigst den Servernamen, den Datenbanknamen, den Benutzernamen und das
+Passwort, um den Installationsvorgang abzuschließen. Kontaktiere bitte den
+Administrator, falls du keinen Benutzeraccount hast.
 
-#### Privileges
+#### Berechtigungen
 
-User must have at least these privileges on the database for Castopod to work:
-`CREATE`, `ALTER`, `DELETE`, `EXECUTE`, `INDEX`, `INSERT`, `SELECT`, `UPDATE`,
-`REFERENCES`, `CREATE VIEW`.
+Benutzer müssen mindestens diese Berechtigungen in der Datenbank haben, damit
+Castopod funktioniert: `CREATE`, `ALTER`, `DELETE`, `EXECUTE`, `INDEX`,
+`INSERT`, `SELECT`, `UPDATE`, `REFERENCES`, `CREATE VIEW`.
 
-### (Optional) FFmpeg v4.1.8 or higher for Video Clips
+### (Optional) FFmpeg v4.1.8 oder höher für Videoclips
 
-[FFmpeg](https://www.ffmpeg.org/) version 4.1.8 or higher is required if you
-want to generate Video Clips. The following extensions must be installed:
+[FFmpeg](https://www.ffmpeg.org/) Version 4.1.8 oder höher ist erforderlich,
+wenn Du Videoclips generieren möchtest. Die folgenden Php-Erweiterungen sind
+nicht installiert: %s:
 
-- **FreeType 2** library for
+- **FreeType 2** Bibliothek für
   [gd](https://www.php.net/manual/en/image.installation.php).
 
-### (Optional) Other recommendations
+### (Optional) Weitere Empfehlungen
 
-- Redis for better cache performances.
-- CDN for static files caching and better performances.
-- e-mail gateway for lost passwords.
+- Redis für bessere Cache-Leistungen.
+- CDN für das Caching statischer Dateien und bessere Leistungen.
+- E-Mail Server Anbindung für E-Mails zu verlorenen Passwörtern.
 
-## Install instructions
+## Installationsanleitung
 
-### Pre-requisites
+### Voraussetzungen
 
 0. Get a Web Server with [requirements](#requirements) installed
 1. Create a MySQL database for Castopod with a user having access and

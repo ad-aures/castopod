@@ -9,14 +9,14 @@ declare(strict_types=1);
  */
 
 return [
-    'feed' => 'RSS Podcast feed',
-    'season' => 'Season {seasonNumber}',
-    'list_of_episodes_year' => '{year} episodes ({episodeCount})',
+    'feed' => 'خوراک RSS پادکست',
+    'season' => 'فصل {seasonNumber}',
+    'list_of_episodes_year' => 'قسمت‌های {year} ({episodeCount})',
     'list_of_episodes_season' =>
-        'Season {seasonNumber} episodes ({episodeCount})',
-    'no_episode' => 'No episode found!',
-    'follow' => 'Follow',
-    'followTitle' => 'Follow {actorDisplayName} on the fediverse!',
+        'قسمت‌های فصل {seasonNumber} ({episodeCount})',
+    'no_episode' => 'هیچ قسمتی پیدا نشد!',
+    'follow' => 'پی‌گیری',
+    'followTitle' => 'پی‌گیری {actorDisplayName} روی فدیورس!',
     'followers' => '{numberOfFollowers, plural,
         one {# follower}
         other {# followers}
@@ -25,12 +25,12 @@ return [
         one {# post}
         other {# posts}
     }',
-    'activity' => 'Activity',
-    'episodes' => 'Episodes',
-    'episodes_title' => 'Episodes of {podcastTitle}',
-    'about' => 'About',
+    'activity' => 'فعّالیت',
+    'episodes' => 'قسمت‌ها',
+    'episodes_title' => 'قسمت‌های {podcastTitle}',
+    'about' => 'درباره',
     'stats' => [
-        'title' => 'Stats',
+        'title' => 'آمار',
         'number_of_seasons' => '{0, plural,
             one {# season}
             other {# seasons}
@@ -39,15 +39,15 @@ return [
             one {# episode}
             other {# episodes}
         }',
-        'first_published_at' => 'First episode published on {0, date, medium}',
+        'first_published_at' => 'قسمت نخست منتشر شده روی {0, date, medium}',
     ],
-    'sponsor' => 'Sponsor',
-    'funding_links' => 'Funding links for {podcastTitle}',
-    'find_on' => 'Find {podcastTitle} on',
-    'listen_on' => 'Listen on',
+    'sponsor' => 'حامی',
+    'funding_links' => 'پیوندهای حمایت مالی از {podcastTitle}',
+    'find_on' => 'یافتن {podcastTitle} روی',
+    'listen_on' => 'شنیدن روی',
     'persons' => '{personsCount, plural,
         one {# person}
         other {# persons}
     }',
-    'persons_list' => 'Persons',
+    'persons_list' => 'نفر',
 ];

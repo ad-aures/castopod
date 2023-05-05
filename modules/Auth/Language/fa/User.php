@@ -9,46 +9,46 @@ declare(strict_types=1);
  */
 
 return [
-    'edit_role' => "Edit {username}'s role",
+    'edit_role' => "ویراش نقش {username}",
     'ban' => 'Ban',
     'unban' => 'Unban',
-    'delete' => 'Delete',
-    'create' => 'New user',
-    'view' => "{username}'s info",
-    'all_users' => 'All users',
+    'delete' => 'حذف',
+    'create' => 'کاربر جدید',
+    'view' => "اطّلاعات {username}",
+    'all_users' => 'تمامی کاربران',
     'list' => [
-        'user' => 'User',
-        'role' => 'Role',
+        'user' => 'کاربر',
+        'role' => 'نقش',
         'banned' => 'Banned?',
     ],
     'form' => [
-        'email' => 'Email',
-        'username' => 'Username',
-        'password' => 'Password',
-        'new_password' => 'New Password',
-        'role' => 'Role',
-        'roles' => 'Roles',
-        'permissions' => 'Permissions',
-        'submit_create' => 'Create user',
-        'submit_edit' => 'Save',
-        'submit_password_change' => 'Change!',
+        'email' => 'رایانامه',
+        'username' => 'نام‌کاربری',
+        'password' => 'گذرواژه',
+        'new_password' => 'گذرواژه‌ٔ جدید',
+        'role' => 'نقش',
+        'roles' => 'نقش‌ها',
+        'permissions' => 'اجازه‌ها',
+        'submit_create' => 'ایجاد کاربر',
+        'submit_edit' => 'ذخیره',
+        'submit_password_change' => 'تغییر!',
     ],
     'delete_form' => [
-        'title' => 'Delete {user}',
+        'title' => 'حذف {user}',
         'disclaimer' =>
             "You are about to delete {user} permanently. They will not be able to access the admin area anymore.",
         'understand' => 'I understand, I want to delete {user} permanently',
-        'submit' => 'Delete',
+        'submit' => 'حذف',
     ],
     'messages' => [
         'createSuccess' =>
-            'User created successfully! {username} will be prompted with a password reset upon first authentication.',
+            'کاربر با موفّقیت ساخته شد! رایانامهٔ خوش‌آمدی به همراه پیوند ورود برای {username} فرستاده شد. در نخستین ورودش اعلانی برای بازنشانی گذرواژه دریافت خواهد کرد.',
         'roleEditSuccess' =>
             "{username}'s roles have been successfully updated.",
         'banSuccess' => '{username} has been banned.',
         'unbanSuccess' => '{username} has been unbanned.',
         'editOwnerError' =>
-            '{username} is the instance owner, you cannot edit its roles.',
+            '{username} مالک نمونه است. کسی به سادگی مالک را تغییر نمی‌دهد…',
         'banSuperAdminError' =>
             '{username} is a superadmin, one does not simply ban a superadmin…',
         'deleteOwnerError' =>

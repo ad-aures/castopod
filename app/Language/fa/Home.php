@@ -9,12 +9,12 @@ declare(strict_types=1);
  */
 
 return [
-    'all_podcasts' => 'All podcasts',
-    'sort_by' => 'Sort by',
+    'all_podcasts' => 'تمامی پادکست‌ها',
+    'sort_by' => 'چینش بر اساس',
     'sort_options' => [
-        'activity' => 'Recent activity',
-        'created_desc' => 'Newest first',
-        'created_asc' => 'Oldest first',
+        'activity' => 'فعّالیت اخیر',
+        'created_desc' => 'نخست جدیدترین',
+        'created_asc' => 'نخست قدیمی‌ترین',
     ],
-    'no_podcast' => 'No podcast found',
+    'no_podcast' => 'هیچ پادکستی پیدا نشد',
 ];

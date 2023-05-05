@@ -9,25 +9,25 @@ declare(strict_types=1);
  */
 
 return [
-    'season' => 'Season {seasonNumber}',
-    'season_abbr' => 'S{seasonNumber}',
-    'number' => 'Episode {episodeNumber}',
-    'number_abbr' => 'Ep. {episodeNumber}',
-    'season_episode' => 'Season {seasonNumber} episode {episodeNumber}',
-    'season_episode_abbr' => 'S{seasonNumber}:E{episodeNumber}',
+    'season' => 'فصل {seasonNumber}',
+    'season_abbr' => 'ف{seasonNumber}',
+    'number' => 'قسمت {episodeNumber}',
+    'number_abbr' => 'ق. {episodeNumber}',
+    'season_episode' => 'قسمت {episodeNumber} فصل {seasonNumber}',
+    'season_episode_abbr' => 'ف{seasonNumber}: ق{episodeNumber}',
     'persons' => '{personsCount, plural,
         one {# person}
         other {# persons}
     }',
-    'persons_list' => 'Persons',
-    'back_to_episodes' => 'Back to episodes of {podcast}',
-    'comments' => 'Comments',
-    'activity' => 'Activity',
-    'description' => 'Episode description',
+    'persons_list' => 'نفر',
+    'back_to_episodes' => 'بازگشت به قسمت‌های {podcast}',
+    'comments' => 'دیدگاه‌ها',
+    'activity' => 'فعّالیت',
+    'description' => 'شرح قسمت',
     'number_of_comments' => '{numberOfComments, plural,
         one {# comment}
         other {# comments}
     }',
-    'all_podcast_episodes' => 'All podcast episodes',
-    'back_to_podcast' => 'Go back to podcast',
+    'all_podcast_episodes' => 'تمامی قسمت‌های پادکست',
+    'back_to_podcast' => 'بازگشت به پادکست',
 ];

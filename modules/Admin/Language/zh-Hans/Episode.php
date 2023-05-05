@@ -9,8 +9,8 @@ declare(strict_types=1);
  */
 
 return [
-    'season' => '第 {seasonNumber} 季',
-    'season_abbr' => '第 {seasonNumber} 季',
+    'season' => '第 {seasonNumber} 节',
+    'season_abbr' => '第 {seasonNumber} 节',
     'number' => '第 {episodeNumber} 集',
     'number_abbr' => '第 {episodeNumber} 集',
     'season_episode' => '第 {seasonNumber} 季第 {episodeNumber} 集',
@@ -55,7 +55,7 @@ return [
         }',
         'episode' => '剧集',
         'visibility' => '可见性',
-        'downloads' => 'Downloads',
+        'downloads' => '下载',
         'comments' => '评论',
         'actions' => '操作',
     ],
