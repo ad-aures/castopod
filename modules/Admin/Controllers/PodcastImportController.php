@@ -549,10 +549,10 @@ class PodcastImportController extends BaseController
 
         $slugs = [];
 
-        $db = db_connect();
-        $db->transStart();
-
         for ($itemNumber = 1; $itemNumber <= $lastItem; ++$itemNumber) {
+            $db = db_connect();
+            $db->transStart();
+
             $item = $feed->channel[0]->item[$lastItem - $itemNumber];
 
             $nsItunes = $item->children('http://www.itunes.com/dtds/podcast-1.0.dtd');
@@ -691,9 +691,9 @@ class PodcastImportController extends BaseController
                         ->with('errors', $episodePersonModel->errors());
                 }
             }
-        }
 
-        $db->transComplete();
+            $db->transComplete();
+        }
 
         return redirect()->route('podcast-view', [$this->podcast->id])->with(
             'message',
