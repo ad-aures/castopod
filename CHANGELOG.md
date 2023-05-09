@@ -1,3 +1,10 @@
+## [1.3.5](https://code.castopod.org/adaures/castopod/compare/v1.3.4...v1.3.5) (2023-05-09)
+
+### Bug Fixes
+
+- replace essence with embera to create preview cards
+  ([c682f03](https://code.castopod.org/adaures/castopod/commit/c682f03a67c6c0ebbcc6ff45d9a037f6f9823bde))
+
 ## [1.3.4](https://code.castopod.org/adaures/castopod/compare/v1.3.3...v1.3.4) (2023-05-05)
 
 ### Bug Fixes
