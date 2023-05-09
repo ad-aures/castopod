@@ -47,6 +47,9 @@ docker-build-main-release:
     - docker buildx build --push --platform=linux/amd64 --file=docker/production/web-server/Dockerfile --tag=${DOCKER_IMAGE_WEB_SERVER}:${CP_VERSION} --tag=${DOCKER_IMAGE_WEB_SERVER}:latest .
     - docker buildx build --push --platform=linux/amd64 --file=docker/production/app/Dockerfile --tag=${DOCKER_IMAGE_APP}:${CP_VERSION} --tag=${DOCKER_IMAGE_APP}:latest .
     - docker buildx build --push --platform=linux/amd64 --file=docker/production/video-clipper/Dockerfile --tag=${DOCKER_IMAGE_VIDEO_CLIPPER}:${CP_VERSION} --tag=${DOCKER_IMAGE_VIDEO_CLIPPER}:latest .
+    # when --platform=linux/amd64,linux/arm64: amd64 image takes too long to be pushed as it needs to wait for arm64 to be built
+    # --> build and push amd64 image to be pushed first, then overwrite manifest after building arm64
+    - docker buildx build --push --platform=linux/amd64 --file=docker/production/castopod/Dockerfile --tag=${DOCKER_IMAGE_CASTOPOD}:${CP_VERSION} --tag=${DOCKER_IMAGE_CASTOPOD}:latest .
     - docker buildx build --push --platform=linux/amd64,linux/arm64 --file=docker/production/castopod/Dockerfile --tag=${DOCKER_IMAGE_CASTOPOD}:${CP_VERSION} --tag=${DOCKER_IMAGE_CASTOPOD}:latest .
   needs:
     - pipeline: $PARENT_PIPELINE_ID
@@ -75,6 +78,9 @@ docker-build-alpha-beta-release:
     - docker buildx build --push --platform=linux/amd64 --file=docker/production/web-server/Dockerfile --tag=${DOCKER_IMAGE_WEB_SERVER}:${CP_VERSION} --tag=${DOCKER_IMAGE_WEB_SERVER}:${TAG} .
     - docker buildx build --push --platform=linux/amd64 --file=docker/production/app/Dockerfile --tag=${DOCKER_IMAGE_APP}:${CP_VERSION} --tag=${DOCKER_IMAGE_APP}:${TAG} .
     - docker buildx build --push --platform=linux/amd64 --file=docker/production/video-clipper/Dockerfile --tag=${DOCKER_IMAGE_VIDEO_CLIPPER}:${CP_VERSION} --tag=${DOCKER_IMAGE_VIDEO_CLIPPER}:${TAG} .
+    # when --platform=linux/amd64,linux/arm64: amd64 image takes too long to be pushed as it needs to wait for arm64 to be built
+    # --> build and push amd64 image to be pushed first, then overwrite manifest after building arm64
+    - docker buildx build --push --platform=linux/amd64 --file=docker/production/castopod/Dockerfile --tag=${DOCKER_IMAGE_CASTOPOD}:${CP_VERSION} --tag=${DOCKER_IMAGE_CASTOPOD}:${TAG} .
     - docker buildx build --push --platform=linux/amd64,linux/arm64 --file=docker/production/castopod/Dockerfile --tag=${DOCKER_IMAGE_CASTOPOD}:${CP_VERSION} --tag=${DOCKER_IMAGE_CASTOPOD}:${TAG} .
   needs:
     - pipeline: $PARENT_PIPELINE_ID
