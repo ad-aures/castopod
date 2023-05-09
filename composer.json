@@ -19,20 +19,20 @@
     "adaures/podcast-persons-taxonomy": "^v1.0.0",
     "phpseclib/phpseclib": "~2.0.42",
     "michalsn/codeigniter4-uuid": "dev-develop",
-    "essence/essence": "^3.5.4",
     "codeigniter4/settings": "^v2.1.0",
     "chrisjean/php-ico": "^1.0.4",
     "melbahja/seo": "^v2.1.1",
     "codeigniter4/shield": "v1.0.0-beta.3",
-    "aws/aws-sdk-php": "^3.263.10"
+    "aws/aws-sdk-php": "^3.269.7",
+    "mpratt/embera": "^2.0.32"
   },
   "require-dev": {
     "mikey179/vfsstream": "^v1.6.11",
-    "phpunit/phpunit": "^10.1.0",
-    "captainhook/captainhook": "^5.16.3",
+    "phpunit/phpunit": "^10.1.2",
+    "captainhook/captainhook": "^5.16.4",
     "symplify/easy-coding-standard": "^11.3.2",
     "phpstan/phpstan": "^1.10.13",
-    "rector/rector": "^0.15.24",
+    "rector/rector": "^0.16.0",
     "symplify/coding-standard": "^11.3.0"
   },
   "autoload": {

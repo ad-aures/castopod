@@ -73,7 +73,7 @@ class PostController extends FediversePostController
             $this->registerPodcastWebpageHit($this->podcast->id);
         }
 
-        if ($this->post === null) {
+        if (! $this->post instanceof CastopodPost) {
             throw PageNotFoundException::forPageNotFound();
         }
 

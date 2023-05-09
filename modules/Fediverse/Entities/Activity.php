@@ -16,11 +16,11 @@ use RuntimeException;
 /**
  * @property string $id
  * @property int $actor_id
- * @property Actor $actor
+ * @property ?Actor $actor
  * @property int|null $target_actor_id
- * @property Actor $target_actor
+ * @property ?Actor $target_actor
  * @property string|null $post_id
- * @property Post $post
+ * @property ?Post $post
  * @property string $type
  * @property object $payload
  * @property string|null $status

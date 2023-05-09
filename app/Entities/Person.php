@@ -24,7 +24,7 @@ use RuntimeException;
  * @property string $unique_name
  * @property string|null $information_url
  * @property int $avatar_id
- * @property Image $avatar
+ * @property ?Image $avatar
  * @property int $created_by
  * @property int $updated_by
  * @property object[]|null $roles

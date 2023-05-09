@@ -43,7 +43,7 @@ use RuntimeException;
  * @property string $slug
  * @property string $title
  * @property int $audio_id
- * @property Audio $audio
+ * @property ?Audio $audio
  * @property string $audio_url
  * @property string $audio_web_url
  * @property string $audio_opengraph_url

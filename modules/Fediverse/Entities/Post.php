@@ -18,7 +18,7 @@ use RuntimeException;
  * @property string $id
  * @property string $uri
  * @property int $actor_id
- * @property Actor $actor
+ * @property ?Actor $actor
  * @property string|null $in_reply_to_id
  * @property Post|null $reply_to_post
  * @property string|null $reblog_of_id

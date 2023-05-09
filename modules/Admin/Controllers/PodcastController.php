@@ -32,6 +32,7 @@ use Modules\Analytics\Models\AnalyticsPodcastModel;
 use Modules\Analytics\Models\AnalyticsWebsiteByBrowserModel;
 use Modules\Analytics\Models\AnalyticsWebsiteByEntryPageModel;
 use Modules\Analytics\Models\AnalyticsWebsiteByRefererModel;
+use Modules\Media\Entities\Image;
 use Modules\Media\FileManagers\FileManagerInterface;
 use Modules\Media\Models\MediaModel;
 
@@ -397,7 +398,7 @@ class PodcastController extends BaseController
 
     public function deleteBanner(): RedirectResponse
     {
-        if ($this->podcast->banner === null) {
+        if (! $this->podcast->banner instanceof Image) {
             return redirect()->back();
         }
 
@@ -545,7 +546,7 @@ class PodcastController extends BaseController
         $mediaModel = new MediaModel();
 
         foreach ($podcastMediaList as $podcastMedia) {
-            if ($podcastMedia['file'] !== null && ! $mediaModel->delete($podcastMedia['file']->id)) {
+            if ($podcastMedia['file'] instanceof Image && ! $mediaModel->delete($podcastMedia['file']->id)) {
                 $db->transRollback();
                 return redirect()
                     ->back()

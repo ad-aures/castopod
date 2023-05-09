@@ -10,8 +10,7 @@ declare(strict_types=1);
 
 use CodeIgniter\HTTP\Exceptions\HTTPException;
 use CodeIgniter\HTTP\URI;
-use Config\Database;
-use Essence\Essence;
+use Embera\Embera;
 use Modules\Fediverse\Activities\AcceptActivity;
 use Modules\Fediverse\ActivityRequest;
 use Modules\Fediverse\Entities\Actor;
@@ -149,38 +148,35 @@ if (! function_exists('create_preview_card_from_url')) {
      */
     function create_preview_card_from_url(URI $url): ?PreviewCard
     {
-        $essence = new Essence([
-            'filters' => [
-                'OEmbedProvider' => '//',
-                'OpenGraphProvider' => '//',
-                'TwitterCardsProvider' => '//',
-            ],
-        ]);
-        $media = $essence->extract((string) $url);
+        $embera = new Embera();
+        $mediaData = $embera->getUrlData((string) $url);
 
-        if ($media) {
-            $typeMapping = [
-                'photo' => 'image',
-                'video' => 'video',
-                'website' => 'link',
-                'rich' => 'rich',
-            ];
+        if ($mediaData !== []) {
+            $mediaUrl = array_key_first($mediaData);
+            $media = array_values($mediaData)[0];
 
-            // Check that, at least, the url and title are set
-            if ($media->url && $media->title) {
+            if (array_key_exists('title', $media)) {
+                $typeMapping = [
+                    'photo' => 'image',
+                    'video' => 'video',
+                    'website' => 'link',
+                    'rich' => 'rich',
+                ];
+
+                // Check that, at least, the url and title are set
                 $newPreviewCard = new PreviewCard([
-                    'url' => (string) $url,
-                    'title' => $media->title,
-                    'description' => $media->description,
-                    'type' => isset($typeMapping[$media->type])
-                        ? $typeMapping[$media->type]
+                    'url' => $mediaUrl,
+                    'title' => $media['title'] ?? '',
+                    'description' => $media['description'] ?? '',
+                    'type' => isset($typeMapping[$media['type']])
+                        ? $typeMapping[$media['type']]
                         : 'link',
-                    'author_name' => $media->authorName,
-                    'author_url' => $media->authorUrl,
-                    'provider_name' => $media->providerName,
-                    'provider_url' => $media->providerUrl,
-                    'image' => $media->thumbnailUrl,
-                    'html' => $media->html,
+                    'author_name' => $media['author_name'] ?? null,
+                    'author_url' => $media['author_url'] ?? null,
+                    'provider_name' => $media['provider_name'] ?? '',
+                    'provider_url' => $media['provider_url'] ?? '',
+                    'image' => $media['thumbnail_url'] ?? '',
+                    'html' => $media['html'] ?? '',
                 ]);
 
                 if (

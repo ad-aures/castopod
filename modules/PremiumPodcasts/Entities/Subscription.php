@@ -58,7 +58,7 @@ class Subscription extends Entity
 
     public function getStatus(): string
     {
-        return ($this->expires_at !== null && $this->expires_at->isBefore(
+        return ($this->expires_at instanceof Time && $this->expires_at->isBefore(
             Time::now()
         )) ? 'expired' : $this->attributes['status'];
     }

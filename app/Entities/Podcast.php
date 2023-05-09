@@ -47,9 +47,9 @@ use RuntimeException;
  * @property string $description_markdown
  * @property  string $description_html
  * @property int $cover_id
- * @property Image $cover
+ * @property ?Image $cover
  * @property int|null $banner_id
- * @property Image $banner
+ * @property ?Image $banner
  * @property string $language_code
  * @property int $category_id
  * @property Category|null $category

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Entities\Person;
 use App\Entities\Podcast;
+use Modules\Media\Entities\Image;
 
 /**
  * @copyright  2020 Ad Aures
@@ -318,7 +319,7 @@ if (! function_exists('get_site_icon_url')) {
 if (! function_exists('get_podcast_banner')) {
     function get_podcast_banner_url(Podcast $podcast, string $size): string
     {
-        if ($podcast->banner === null) {
+        if (! $podcast->banner instanceof Image) {
             $defaultBanner = config('Images')
                 ->podcastBannerDefaultPaths[service('settings')->get('App.theme')] ?? config(
                     'Images'
@@ -344,7 +345,7 @@ if (! function_exists('get_podcast_banner')) {
 if (! function_exists('get_podcast_banner_mimetype')) {
     function get_podcast_banner_mimetype(Podcast $podcast, string $size): string
     {
-        if ($podcast->banner === null) {
+        if (! $podcast->banner instanceof Image) {
             $sizes = config('Images')
 ->podcastBannerSizes;
 
@@ -365,7 +366,7 @@ if (! function_exists('get_podcast_banner_mimetype')) {
 if (! function_exists('get_avatar_url')) {
     function get_avatar_url(Person $person, string $size): string
     {
-        if ($person->avatar === null) {
+        if (! $person->avatar instanceof Image) {
             $defaultAvatarPath = config('Images')
 ->avatarDefaultPath;
 
