@@ -24,7 +24,7 @@ return [
     'form' => [
         'avatar' => 'Profilbilete',
         'avatar_size_hint' =>
-            'Avatar must be squared and at least 400px wide and tall.',
+            'Profilbiletet må vera kvadratisk og minst 400pkt breitt og høgt.',
         'full_name' => 'Fullt namn',
         'full_name_hint' => 'Dette er det fulle namnet eller aliaset til personen.',
         'unique_name' => 'Unikt namn',

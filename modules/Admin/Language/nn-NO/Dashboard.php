@@ -9,20 +9,20 @@ declare(strict_types=1);
  */
 
 return [
-    'home' => 'Admin dashboard',
-    'welcome_message' => 'Welcome to the admin area!',
+    'home' => 'Styringspanel',
+    'welcome_message' => 'Velkomen til styrarområdet!',
     'podcasts' => [
-        'title' => 'Podcasts',
-        'not_found' => 'No published podcast',
-        'last_published' => 'Last published on {lastPublicationDate}',
+        'title' => 'Podkastar',
+        'not_found' => 'Ingen publiserte podkastar',
+        'last_published' => 'Sist lagt ut {lastPublicationDate}',
     ],
     'episodes' => [
-        'title' => 'Episodes',
-        'not_found' => 'No published episode',
-        'last_published' => 'Last published on {lastPublicationDate}',
+        'title' => 'Episodar',
+        'not_found' => 'Ingen publisert episode',
+        'last_published' => 'Sist lagt ut {lastPublicationDate}',
     ],
     'storage' => [
-        'title' => 'Storage',
-        'subtitle' => '{totalUploaded} out of {totalStorage}',
+        'title' => 'Lagring',
+        'subtitle' => '{totalUploaded} av {totalStorage}',
     ],
 ];

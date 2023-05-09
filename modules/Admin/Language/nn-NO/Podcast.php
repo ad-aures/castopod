@@ -16,51 +16,51 @@ return [
     'new_episode' => 'Ny episode',
     'view' => 'Sjå podkasten',
     'edit' => 'Rediger podkasten',
-    'publish' => 'Publish podcast',
-    'publish_edit' => 'Edit publication',
+    'publish' => 'Legg ut podkasten',
+    'publish_edit' => 'Rediger publiseringa',
     'delete' => 'Slett podkasten',
     'see_episodes' => 'Sjå episodane',
     'see_contributors' => 'Sjå bidragsytarane',
     'go_to_page' => 'Gå til side',
     'latest_episodes' => 'Dei nyaste episodane',
     'see_all_episodes' => 'Sjå alle episodane',
-    'draft' => 'Draft',
+    'draft' => 'Kladd',
     'messages' => [
-        'createSuccess' => 'Podcast successfully created!',
+        'createSuccess' => 'Podkasten er oppretta!',
         'editSuccess' => 'Podkasten er oppdatert!',
         'importSuccess' => 'Podkasten er importert!',
-        'deleteSuccess' => 'Podcast @{podcast_handle} successfully deleted!',
-        'deletePodcastMediaError' => 'Failed to delete podcast {type, select,
-            cover {cover}
-            banner {banner}
+        'deleteSuccess' => 'Podkasten @{podcast_handle} vart sletta.',
+        'deletePodcastMediaError' => 'Greidde ikkje sletta {type, select,
+            cover {omslaget}
+            banner {banneret}
             other {media}
-        }.',
-        'deleteEpisodeMediaError' => 'Failed to delete podcast episode {episode_slug} {type, select,
-            transcript {transcript}
-            chapters {chapters}
-            image {cover}
-            audio {audio}
+        } til podkasten.',
+        'deleteEpisodeMediaError' => 'Greidde ikkje sletta {type, select,
+            transcript {transkripsjonen}
+            chapters {kapittel}
+            image {omslag}
+            audio {lyd}
             other {media}
-        }.',
-        'deletePodcastMediaFolderError' => 'Failed to delete podcast media folder {folder_path}. You may manually remove it from your disk.',
-        'podcastFeedUpdateSuccess' => 'Successful update: {number_of_new_episodes, plural,
-            one {# episode was}
-            other {# episodes were}
-        } added to the podcast!',
-        'podcastFeedUpToDate' => 'Podcast is already up to date.',
-        'podcastNotImported' => 'Podcast could not be updated as it was not imported.',
-        'publishError' => 'This podcast is either already published or scheduled for publication.',
-        'publishEditError' => 'This podcast is not scheduled for publication.',
-        'publishCancelSuccess' => 'Podcast publication successfully cancelled!',
-        'scheduleDateError' => 'Schedule date must be set!',
+        } frå {episode_slug}.',
+        'deletePodcastMediaFolderError' => 'Greidde ikkje sletta mediemappa {folder_path} for podkasten. Du kan sletta mappa manuelt.',
+        'podcastFeedUpdateSuccess' => 'Vellukka oppdatering: {number_of_new_episodes, plural,
+            one {# episode vart lagt}
+            other {# episodar vart lagde}
+        } til podkasten!',
+        'podcastFeedUpToDate' => 'Podkasten er allereie oppdatert.',
+        'podcastNotImported' => 'Greidde ikkje oppdatera podkasten fordi han ikkje vart importert.',
+        'publishError' => 'Denne podkasten er allereie lagt ut eller planlagt for offentleggjering.',
+        'publishEditError' => 'Denne podkasten er ikkje planlagt publisert.',
+        'publishCancelSuccess' => 'Du har avbrote å leggja ut podkasten.',
+        'scheduleDateError' => 'Du må velja publiseringsdato.',
     ],
     'form' => [
         'identity_section_title' => 'Podkastidentitet',
         'identity_section_subtitle' => 'Desse felta gjer at du blir lagt merke til.',
         'cover' => 'Podkastomslag',
-        'cover_size_hint' => 'Cover must be squared and at least 1400px wide and tall.',
+        'cover_size_hint' => 'Omslaget må vera kvadratisk, og minst 1400pkt breitt og høgt.',
         'banner' => 'Podkastbanner',
-        'banner_size_hint' => 'Banner must have a 3:1 ratio and be at least 1500px wide.',
+        'banner_size_hint' => 'Banneret må ha 3:1-forhold og vera minst 1500pkt breitt.',
         'banner_delete' => 'Slett podkastbanneret',
         'title' => 'Tittel',
         'handle' => 'Handtak',
@@ -108,9 +108,9 @@ return [
         'monetization_section_subtitle' =>
             'Ten pengar med hjelp frå publikummet ditt.',
         'premium' => 'Premium',
-        'premium_by_default' => 'Episodes must be set as premium by default',
-        'premium_by_default_hint' => 'Podcast episodes will be marked as premium by default. You can still choose to set some episodes, trailers or bonuses as public.',
-        'op3' => 'Open Podcast Prefix Project (OP3)',
+        'premium_by_default' => 'Episodane må ha premium som standardval',
+        'premium_by_default_hint' => 'Podkastepisodane vil få premium som standardmerking. Du kan likevel ha nokre episodar, trailerar eller bonusar som offentlege.',
+        'op3' => 'Open Podcast Prefix-prosjekt (OP3)',
         'op3_hint' => 'Value your analytics data with OP3, an open-source and trusted third party analytics service. Share, validate and compare your analytics data with the open podcasting ecosystem.',
         'op3_enable' => 'Enable OP3 analytics service',
         'op3_enable_hint' => 'For security reasons, premium episodes\' analytics data will not be shared with OP3.',

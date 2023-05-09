@@ -35,7 +35,7 @@ return [
     'by_weekday' => 'Etter vekedag (dei siste 60 dagane)',
     'by_hour' => 'Etter tid på dagen (dei siste 60 dagane)',
     'podcast_by_bandwidth' => 'Dagleg bandbreidde (i MB)',
-    'total_storage_by_month' => 'Monthly storage (in MB)',
-    'total_bandwidth_by_month' => 'Monthly used bandwidth (in MB)',
-    'total_bandwidth_by_month_limit' => 'Limited to {totalBandwidth} per month',
+    'total_storage_by_month' => 'Lagrinsgsplass kvar månad (i MB)',
+    'total_bandwidth_by_month' => 'Brukt bandbreidd pr. månad (i MB)',
+    'total_bandwidth_by_month_limit' => 'Avgrensa til {totalBandwidth} pr. månad',
 ];

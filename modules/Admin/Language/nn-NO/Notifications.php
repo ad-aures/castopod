@@ -9,11 +9,11 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => 'Notifications',
-    'reply' => '{actor_username} replied to your post',
-    'favourite' => '{actor_username} favourited your post',
-    'reblog' => '{actor_username} shared your post',
-    'follow' => '{actor_username} started following you',
-    'no_notifications' => 'No notifications',
-    'mark_all_as_read' => 'Mark all as read',
+    'title' => 'Varslingar',
+    'reply' => '{actor_username} svara på innlegget ditt',
+    'favourite' => '{actor_username} merkte innlegget ditt som favoritt',
+    'reblog' => '{actor_username} delte innlegget ditt',
+    'follow' => '{actor_username} fylgde deg',
+    'no_notifications' => 'Ingen varslingar',
+    'mark_all_as_read' => 'Merk alle som lesne',
 ];

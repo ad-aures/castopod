@@ -24,38 +24,38 @@ return [
     'edit' => 'Rediger',
     'publish' => 'Legg ut',
     'publish_edit' => 'Rediger publiseringa',
-    'publish_date_edit' => 'Edit publication date',
+    'publish_date_edit' => 'Rediger publiseringsdatoen',
     'unpublish' => 'Avpubliser',
     'publish_error' => 'Episoden er allereie publisert.',
     'publish_edit_error' => 'Episoden er allereie publisert.',
     'publish_cancel_error' => 'Episoden er allereie publisert.',
-    'publish_date_edit_error' => 'Episode has not been published yet, you cannot edit its publication date.',
-    'publish_date_edit_future_error' => 'Episode\'s publication date can only be set to a past date! If you would like to reschedule it, unpublish it first.',
-    'publish_date_edit_success' => 'Episode\'s publication date has been updated successfully!',
+    'publish_date_edit_error' => 'Episoden er ikkje lagt ut enno, så du kan ikkje endra publiseringsdatoen.',
+    'publish_date_edit_future_error' => 'Du kan berre setja publiseringsdatoen til ein tidlegare dato. Viss du vil endra planlagd publisering, kan du avpublisera episoden fyrst.',
+    'publish_date_edit_success' => 'Publiseringsdatoen er endra.',
     'unpublish_error' => 'Episoden er ikkje publisert.',
     'delete' => 'Slett',
     'go_to_page' => 'Gå til side',
     'create' => 'Legg til ein episode',
     'publication_status' => [
         'published' => 'Lagt ut',
-        'with_podcast' => 'Published',
+        'with_podcast' => 'Lagt ut',
         'scheduled' => 'Planlagt',
         'not_published' => 'Ikkje lagt ut',
     ],
-    'with_podcast_hint' => 'To be published at the same time as the podcast',
+    'with_podcast_hint' => 'Skal gjevast ut samstundes som podkasten',
     'list' => [
         'search' => [
-            'placeholder' => 'Search for an episode',
-            'clear' => 'Clear search',
-            'submit' => 'Search',
+            'placeholder' => 'Søk etter ein episode',
+            'clear' => 'Tøm søket',
+            'submit' => 'Søk',
         ],
         'number_of_episodes' => '{numberOfEpisodes, plural,
             one {# episode}
-            other {# episodes}
+            other {# episodar}
         }',
         'episode' => 'Episode',
         'visibility' => 'Synlegheit',
-        'downloads' => 'Downloads',
+        'downloads' => 'Nedlastingar',
         'comments' => 'Kommentarar',
         'actions' => 'Handlingar',
     ],
@@ -63,31 +63,31 @@ return [
         'createSuccess' => 'Episoden er oppretta!',
         'editSuccess' => 'Episoden er oppdatert!',
         'publishSuccess' => '{publication_status, select,
-            published {Episode successfully published!}
-            scheduled {Episode publication successfully scheduled!}
-            with_podcast {This episode will be published at the same time as the podcast.}
-            other {This episode is not published.}
+            published {Episoden er lagt ut.}
+            scheduled {Episoden er planlagt lagt ut.}
+            with_podcast {Denne episoden blir lagt ut samstundes som podkasten.}
+            other {Denne episoden er ikkje lagt ut.}
         }',
         'publishCancelSuccess' => 'Du har avbrote å leggja ut episoden.',
-        'unpublishBeforeDeleteTip' => 'You must unpublish the episode before deleting it.',
-        'scheduleDateError' => 'Schedule date must be set!',
-        'deletePublishedEpisodeError' => 'Please unpublish the episode before deleting it.',
-        'deleteSuccess' => 'Episode successfully deleted!',
-        'deleteError' => 'Failed to delete episode {type, select,
-            transcript {transcript}
-            chapters {chapters}
-            image {cover}
-            audio {audio}
+        'unpublishBeforeDeleteTip' => 'Du må avpublisera episoden før du slettar han.',
+        'scheduleDateError' => 'Du må velja publiseringsdato.',
+        'deletePublishedEpisodeError' => 'Du må avpublisera episoden før du slettar han.',
+        'deleteSuccess' => 'Episoden er sletta.',
+        'deleteError' => 'Greidde ikkje sletta {type, select,
+            transcript {transkripsjon}
+            chapters {kapittel}
+            image {omslag}
+            audio {lyd}
             other {media}
-        }.',
-        'deleteFileError' => 'Failed to delete {type, select,
-            transcript {transcript}
-            chapters {chapters}
-            image {cover}
-            audio {audio}
+        } for episoden.',
+        'deleteFileError' => 'Greidde ikkje sletta {type, select,
+            transcript {transkripsjonen}
+            chapters {kapittel}
+            image {omslag}
+            audio {lyd}
             other {media}
-        } file {file_path}. You may manually remove it from your disk.',
-        'sameSlugError' => 'An episode with the chosen slug already exists.',
+        } i fila {file_path}. Du kan fjerna det manuelt.',
+        'sameSlugError' => 'Ei episode med denne kortadressa finst allereie.',
     ],
     'form' => [
         'file_size_error' =>
@@ -98,7 +98,7 @@ return [
         'cover' => 'Episodeomslag',
         'cover_hint' =>
             'Viss du ikkje bruker eige omslag, blir omslaget til podkasten brukt i staden.',
-        'cover_size_hint' => 'Cover must be squared and at least 1400px wide and tall.',
+        'cover_size_hint' => 'Omslaget må vera kvadratisk, og minst 1400pkt breitt og høgt.',
         'title' => 'Tittel',
         'title_hint' =>
             'Bør innehalda eit klårt og konsist episodenamn. Ikkje skriv inn nummer på episode eller sesong her.',
@@ -115,7 +115,7 @@ return [
             'bonus_hint' => 'Ekstra innhald (til dømes bakominfo eller intervju med skodespelarane) eller innhald for å framheva ein annan serie',
         ],
         'premium_title' => 'Premium',
-        'premium' => 'Episode must be accessible to premium subscribers only',
+        'premium' => 'Episoden må vera tilgjengeleg berre for premium-abonnentar',
         'parental_advisory' => [
             'label' => 'Råd til foreldre',
             'hint' => 'Inneheld episoden grov prat?',
@@ -132,7 +132,7 @@ return [
             'Denne teksten ligg på slutten av kvar episodeskildring, og er ein god stad å ha lenker til td. sosiale nettverk.',
         'additional_files_section_title' => 'Fleire filer',
         'additional_files_section_subtitle' =>
-            'These files may be used by other platforms to provide better experience to your audience. See the {podcastNamespaceLink} for more information.',
+            'Desse filene kan brukast av andre plattformer for å gje publikum ei betre oppleving. Sjå {podcastNamespaceLink} for meir informasjon.',
         'location_section_title' => 'Stad',
         'location_section_subtitle' => 'Kva stad handlar denne episoden om?',
         'location_name' => 'Stadnamn eller adresse',
@@ -154,9 +154,9 @@ return [
             'Viss du treng RSS-merkelappar som Castopod ikkje handterer, kan du skriva dei inn her.',
         'custom_rss' => 'Eigne RSS-merkelappar for episoden',
         'custom_rss_hint' => 'Dette blir sett inn i ❬item❭-elementet.',
-        'block' => 'Episode should be hidden from public catalogues',
+        'block' => 'Episoden skal gøymast frå offentlege katalogar',
         'block_hint' =>
-            'The episode show or hide status: toggling this on prevents the episode from appearing in Apple Podcasts, Google Podcasts, and any third party apps that pull shows from these directories. (Not guaranteed)',
+            'Vis- eller gøym- status for episoden: Dersom du skrur på dette, hindrar det at episoden kjem opp i Apple podcasts, Google podcasts og andre tredjeparts-appar som hentar podkastar frå desse (men ingen garanti)',
         'submit_create' => 'Lag episode',
         'submit_edit' => 'Lagre episode',
     ],
@@ -170,7 +170,7 @@ return [
         'publication_method' => [
             'now' => 'No',
             'schedule' => 'Planlegg',
-            'with_podcast' => 'Publish alongside podcast',
+            'with_podcast' => 'Legg ut saman med podkast',
         ],
         'scheduled_publication_date' => 'Planlagt publiseringsdato',
         'scheduled_publication_date_clear' => 'Tøm publiseringsdatoen',
@@ -184,21 +184,21 @@ return [
         'message_warning_submit' => 'Legg ut likevel',
     ],
     'publish_date_edit_form' => [
-        'new_publication_date' => 'New publication date',
-        'new_publication_date_hint' => 'Must be set to a past date.',
-        'submit' => 'Edit publication date',
+        'new_publication_date' => 'Ny publiseringsdato',
+        'new_publication_date_hint' => 'Må vera ein dato i fortida.',
+        'submit' => 'Rediger publiseringsdatoen',
     ],
     'unpublish_form' => [
         'disclaimer' =>
-            "Unpublishing the episode will delete all the comments and posts associated with it and remove it from the podcast's RSS feed.",
+            "Viss du avpubliserer episoden, slettar du alle kommentarar og innlegg til han, og fjernar han frå RSS-straumen til podkasten.",
         'understand' => 'Eg forstår, eg vil avpublisera episoden',
         'submit' => 'Avpubliser',
     ],
     'delete_form' => [
         'disclaimer' =>
-            "Deleting the episode will delete all media files, comments, video clips and soundbites associated with it.",
+            "Viss du slettar episoden, slettar du òg alle tilknytte mediafiler, kommentarar, filmklypp og lydbetar.",
         'understand' => 'Eg forstår, eg vil sletta episoden',
-        'submit' => 'Delete',
+        'submit' => 'Slett',
     ],
     'embed' => [
         'title' => 'Innbyggbar spelar',
