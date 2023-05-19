@@ -14,7 +14,7 @@ const ThemePicker = (): void => {
       const url: string | undefined = button.dataset.url;
       if (url) {
         button.addEventListener("click", () => {
-          iframeTextArea.value = `<iframe width="100%" height="280" frameborder="0" scrolling="no" style="width: 100%; height: 280px;  overflow: hidden;" src="${url}"></iframe>`;
+          iframeTextArea.value = `<iframe width="100%" height="112" frameborder="0" scrolling="no" style="width: 100%; height: 112px;  overflow: hidden;" src="${url}"></iframe>`;
           urlTextArea.value = url;
           iframe.src = url;
         });

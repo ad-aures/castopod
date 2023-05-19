@@ -1,3 +1,10 @@
+<?php declare(strict_types=1);
+
+$embedHeight = config('Embed')
+->height;
+
+?>
+
 <?= $this->extend('_layout') ?>
 
 <?= $this->section('title') ?>
@@ -27,7 +34,7 @@
 <iframe name="embed" id="embed" class="w-full max-w-xl mt-6 h-28" frameborder="0" scrolling="no" style="width: 100%;  overflow: hidden;" src="<?= $episode->embed_url ?>"></iframe>
 
 <div class="flex items-center mt-8 gap-x-2">
-    <Forms.Textarea readonly="true" class="w-full max-w-xl" name="iframe" rows="2" value="<?= esc("<iframe width=\"100%\" height=\"280\" frameborder=\"0\" scrolling=\"no\" style=\"width: 100%; height: 280px; overflow: hidden;\" src=\"{$episode->embed_url}\"></iframe>") ?>" />
+    <Forms.Textarea readonly="true" class="w-full max-w-xl" name="iframe" rows="2" value="<?= esc("<iframe width=\"100%\" height=\"{$embedHeight}\" frameborder=\"0\" scrolling=\"no\" style=\"width: 100%; height: {$embedHeight}px; overflow: hidden;\" src=\"{$episode->embed_url}\"></iframe>") ?>" />
     <IconButton glyph="file-copy" data-type="clipboard-copy" data-clipboard-target="iframe"><?= lang('Episode.embed.clipboard_iframe') ?></IconButton>
 </div>
 
