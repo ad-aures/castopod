@@ -50,6 +50,8 @@ class WebmanifestController extends Controller
 
     public function index(): ResponseInterface
     {
+        helper('misc');
+
         $webmanifest = [
             'name' => esc(service('settings') ->get('App.siteName')),
             'description' => esc(service('settings') ->get('App.siteDescription')),
