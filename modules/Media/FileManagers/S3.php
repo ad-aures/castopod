@@ -9,6 +9,7 @@ use Aws\S3\S3Client;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\Files\File;
 use CodeIgniter\HTTP\Response;
+use DateTime;
 use Exception;
 use Modules\Media\Config\Media as MediaConfig;
 
@@ -37,6 +38,7 @@ class S3 implements FileManagerInterface
                 'Key' => $this->prefixKey($key),
                 'SourceFile' => $file,
                 'ContentType' => $file->getMimeType(),
+                'CacheControl' => 'max-age=' . YEAR,
             ]);
         } catch (Exception) {
             return false;
@@ -185,27 +187,42 @@ class S3 implements FileManagerInterface
 
     public function serve(string $key): Response
     {
-        $response = service('response');
+        $cacheName = 'object_presigned_uri_' . str_replace('/', '-', $key) . '_' . $this->config->s3['bucket'];
+        if (! $found = cache($cacheName)) {
+            try {
+                $cmd = $this->s3->getCommand('GetObject', [
+                    'Bucket' => $this->config->s3['bucket'],
+                    'Key' => $this->prefixKey($key),
+                ]);
+            } catch (Exception) {
+                throw new PageNotFoundException();
+            }
 
-        try {
-            $result = $this->s3->getObject([
-                'Bucket' => $this->config->s3['bucket'],
-                'Key' => $this->prefixKey($key),
-            ]);
-        } catch (Exception) {
-            throw new PageNotFoundException();
+            $request = $this->s3->createPresignedRequest($cmd, '+1 day');
+
+            $found = (string) $request->getUri();
+
+            cache()
+                ->save($cacheName, $found, DAY);
         }
+
+        $lastModifiedTimestamp = cache()
+            ->getMetaData($cacheName)['mtime'];
+        $lastModified = new DateTime();
+        $lastModified->setTimestamp($lastModifiedTimestamp);
+
+        /** @var Response $response */
+        $response = service('response');
 
         // Remove Cache-Control header before redefining it
         header_remove('Cache-Control');
 
         return $response->setCache([
-            'max-age' => DECADE,
-            'last-modified' => $result->get('LastModified'),
-            'etag' => $result->get('ETag'),
+            'max-age' => DAY,
+            'last-modified' => $lastModified->format(DATE_RFC7231),
+            'etag' => md5($cacheName),
             'public' => true,
-        ])->setContentType($result->get('ContentType'))
-            ->setBody((string) $result->get('Body')->getContents());
+        ])->redirect($found);
     }
 
     private function prefixKey(string $key): string
