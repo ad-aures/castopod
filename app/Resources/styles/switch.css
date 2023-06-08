@@ -16,6 +16,7 @@
 
     &:checked + .form-switch-slider::after {
       @apply transform translate-x-0 left-2;
+
       content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff'%3E%3Cpath fill='none' d='M0 0h24v24H0z'/%3E%3Cpath d='m10 15.172 9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z'/%3E%3C/svg%3E%0A");
     }
 
@@ -40,6 +41,7 @@
 
       &::after {
         @apply translate-x-5;
+
         left: 0;
         top: -1px;
       }
@@ -47,6 +49,7 @@
 
     &::before {
       @apply absolute z-10 w-6 h-6 transition duration-200 rounded-full shadow bg-elevated ring-1 ring-black ring-opacity-5;
+
       content: "";
       left: 1px;
       bottom: 1px;

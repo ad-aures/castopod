@@ -149,7 +149,7 @@ const drawXYDurationChart = (
 
   const yAxis = chart.yAxes.push(new am4charts.DurationAxis());
   yAxis.baseUnit = "second";
-  chart.durationFormatter.durationFormat = "hh'h,' mm'mn'";
+  chart.durationFormatter.durationFormat = "hh'h'mm";
 
   // Add data
   chart.dataSource.url = dataUrl || "";

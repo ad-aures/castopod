@@ -4,6 +4,7 @@
 
 .breadcrumb-item + .breadcrumb-item::before {
   @apply inline-block px-1;
+
   color: hsl(var(--color-text-muted));
   content: "/";
 }

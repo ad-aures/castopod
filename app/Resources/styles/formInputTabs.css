@@ -30,6 +30,7 @@
 
   .form-input-tabs > input:checked + label::after {
     @apply absolute inset-x-0 bottom-0 w-full mx-auto bg-accent-base;
+
     content: "";
     height: 0.2rem;
   }

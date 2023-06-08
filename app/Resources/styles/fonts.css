@@ -19,7 +19,7 @@
 
   /* inter-regular */
   @font-face {
-    font-family: "Inter";
+    font-family: Inter;
     font-style: normal;
     font-weight: 400;
     font-display: swap;
@@ -28,7 +28,7 @@
 
   /* inter-600 */
   @font-face {
-    font-family: "Inter";
+    font-family: Inter;
     font-style: normal;
     font-weight: 600;
     font-display: swap;

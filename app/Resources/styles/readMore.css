@@ -6,12 +6,14 @@ Read more component (basic unstyled component)
 @layer components {
   .read-more {
     @apply flex flex-col items-start;
+
     /* You can update this variable directly in the html with the style attribute: style="--line-clamp: 3" */
     --line-clamp: 3;
   }
 
   .read-more__text {
     @apply overflow-hidden;
+
     display: -webkit-box;
     -webkit-line-clamp: var(--line-clamp);
     -webkit-box-orient: vertical;
@@ -19,6 +21,7 @@ Read more component (basic unstyled component)
 
   .read-more__checkbox {
     @apply absolute overflow-hidden whitespace-nowrap;
+
     clip: rect(0 0 0 0);
     clip-path: inset(100%);
     height: 1px;
@@ -48,6 +51,7 @@ Read more component (basic unstyled component)
 
   .read-more__checkbox:checked ~ .read-more__text {
     --line-clamp: none;
+
     -webkit-line-clamp: var(--line-clamp);
   }
 }
