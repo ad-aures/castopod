@@ -107,11 +107,11 @@ class ActorController extends Controller
                         $message = get_message_from_object($payload->object);
 
                         $reply = new Post([
-                            'uri' => $payload->object->id,
-                            'actor_id' => $payloadActor->id,
+                            'uri'            => $payload->object->id,
+                            'actor_id'       => $payloadActor->id,
                             'in_reply_to_id' => $replyToPost->id,
-                            'message' => $message,
-                            'published_at' => Time::parse($payload->object->published),
+                            'message'        => $message,
+                            'published_at'   => Time::parse($payload->object->published),
                         ]);
                     }
 
@@ -226,7 +226,7 @@ class ActorController extends Controller
                         if ($post !== null) {
                             $reblogPost = model('PostModel', false)
                                 ->where([
-                                    'actor_id' => $payloadActor->id,
+                                    'actor_id'     => $payloadActor->id,
                                     'reblog_of_id' => service('uuid')
                                         ->fromString($post->id)
                                         ->getBytes(),
@@ -326,8 +326,7 @@ class ActorController extends Controller
     public function attemptFollow(): RedirectResponse
     {
         $rules = [
-            'handle' =>
-                'regex_match[/^@?(?P<username>[\w\.\-]+)@(?P<host>[\w\.\-]+)(?P<port>:[\d]+)?$/]',
+            'handle' => 'regex_match[/^@?(?P<username>[\w\.\-]+)@(?P<host>[\w\.\-]+)(?P<port>:[\d]+)?$/]',
         ];
 
         if (! $this->validate($rules)) {

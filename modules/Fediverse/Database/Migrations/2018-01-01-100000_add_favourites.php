@@ -20,11 +20,11 @@ class AddFavourites extends Migration
     {
         $this->forge->addField([
             'actor_id' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
             ],
             'post_id' => [
-                'type' => 'BINARY',
+                'type'       => 'BINARY',
                 'constraint' => 16,
             ],
         ]);

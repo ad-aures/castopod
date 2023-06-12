@@ -27,7 +27,7 @@ class Database extends Config
      * @var array<string, mixed>
      */
     public array $default = [
-        'DSN' => '',
+        'DSN'      => '',
         'hostname' => 'localhost',
         'username' => '',
         'password' => '',
@@ -35,15 +35,15 @@ class Database extends Config
         'DBDriver' => 'MySQLi',
         'DBPrefix' => 'cp_',
         'pConnect' => false,
-        'DBDebug' => ENVIRONMENT !== 'production',
-        'charset' => 'utf8mb4',
+        'DBDebug'  => ENVIRONMENT !== 'production',
+        'charset'  => 'utf8mb4',
         'DBCollat' => 'utf8mb4_unicode_ci',
-        'swapPre' => '',
-        'encrypt' => false,
+        'swapPre'  => '',
+        'encrypt'  => false,
         'compress' => false,
         'strictOn' => false,
         'failover' => [],
-        'port' => 3306,
+        'port'     => 3306,
     ];
 
     /**
@@ -52,7 +52,7 @@ class Database extends Config
      * @var array<string, mixed>
      */
     public array $tests = [
-        'DSN' => '',
+        'DSN'      => '',
         'hostname' => '127.0.0.1',
         'username' => '',
         'password' => '',
@@ -60,16 +60,16 @@ class Database extends Config
         'DBDriver' => 'SQLite3',
         'DBPrefix' => 'db_',
         // Needed to ensure we're working correctly with prefixes live. DO NOT REMOVE FOR CI DEVS
-        'pConnect' => false,
-        'DBDebug' => (ENVIRONMENT !== 'production'),
-        'charset' => 'utf8',
-        'DBCollat' => 'utf8_general_ci',
-        'swapPre' => '',
-        'encrypt' => false,
-        'compress' => false,
-        'strictOn' => false,
-        'failover' => [],
-        'port' => 3306,
+        'pConnect'    => false,
+        'DBDebug'     => (ENVIRONMENT !== 'production'),
+        'charset'     => 'utf8',
+        'DBCollat'    => 'utf8_general_ci',
+        'swapPre'     => '',
+        'encrypt'     => false,
+        'compress'    => false,
+        'strictOn'    => false,
+        'failover'    => [],
+        'port'        => 3306,
         'foreignKeys' => true,
     ];
 

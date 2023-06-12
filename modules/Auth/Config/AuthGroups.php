@@ -128,7 +128,7 @@ class AuthGroups extends ShieldAuthGroups
             'pages.manage',
             'fediverse.manage-blocks',
         ],
-        'manager' => ['podcasts.create', 'podcasts.import', 'persons.manage', 'pages.manage'],
+        'manager'   => ['podcasts.create', 'podcasts.import', 'persons.manage', 'pages.manage'],
         'podcaster' => ['admin.access'],
     ];
 
@@ -166,7 +166,7 @@ class AuthGroups extends ShieldAuthGroups
      * @var array<string, string[]>
      */
     public array $podcastMatrix = [
-        'admin' => ['*'],
+        'admin'  => ['*'],
         'editor' => [
             'view',
             'edit',
@@ -206,7 +206,7 @@ class AuthGroups extends ShieldAuthGroups
 
         foreach ($this->instanceBaseGroups as $group) {
             $this->instanceGroups[$group] = [
-                'title' => lang("Auth.instance_groups.{$group}.title"),
+                'title'       => lang("Auth.instance_groups.{$group}.title"),
                 'description' => lang("Auth.instance_groups.{$group}.description"),
             ];
         }

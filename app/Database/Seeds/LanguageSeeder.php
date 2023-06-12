@@ -25,740 +25,739 @@ class LanguageSeeder extends Seeder
     {
         $data = [
             [
-                'code' => 'aa',
+                'code'        => 'aa',
                 'native_name' => 'Afaraf',
             ],
             [
-                'code' => 'ab',
+                'code'        => 'ab',
                 'native_name' => 'аҧсуа бызшәа, аҧсшәа',
             ],
             [
-                'code' => 'ae',
+                'code'        => 'ae',
                 'native_name' => 'Avesta',
             ],
             [
-                'code' => 'af',
+                'code'        => 'af',
                 'native_name' => 'Afrikaans',
             ],
             [
-                'code' => 'ak',
+                'code'        => 'ak',
                 'native_name' => 'Akan',
             ],
             [
-                'code' => 'am',
+                'code'        => 'am',
                 'native_name' => 'አማርኛ',
             ],
             [
-                'code' => 'an',
+                'code'        => 'an',
                 'native_name' => 'Aragonés',
             ],
             [
-                'code' => 'ar',
+                'code'        => 'ar',
                 'native_name' => 'العربية',
             ],
             [
-                'code' => 'as',
+                'code'        => 'as',
                 'native_name' => 'অসমীয়া',
             ],
             [
-                'code' => 'av',
+                'code'        => 'av',
                 'native_name' => 'авар мацӀ, магӀарул мацӀ',
             ],
             [
-                'code' => 'ay',
+                'code'        => 'ay',
                 'native_name' => 'Aymar aru',
             ],
             [
-                'code' => 'az',
+                'code'        => 'az',
                 'native_name' => 'azərbaycan dili',
             ],
             [
-                'code' => 'ba',
+                'code'        => 'ba',
                 'native_name' => 'башҡорт теле',
             ],
             [
-                'code' => 'be',
+                'code'        => 'be',
                 'native_name' => 'беларуская мова',
             ],
             [
-                'code' => 'bg',
+                'code'        => 'bg',
                 'native_name' => 'български език',
             ],
             [
-                'code' => 'bh',
+                'code'        => 'bh',
                 'native_name' => 'भोजपुरी',
             ],
             [
-                'code' => 'bi',
+                'code'        => 'bi',
                 'native_name' => 'Bislama',
             ],
             [
-                'code' => 'bm',
+                'code'        => 'bm',
                 'native_name' => 'Bamanankan',
             ],
             [
-                'code' => 'bn',
+                'code'        => 'bn',
                 'native_name' => 'বাংলা',
             ],
             [
-                'code' => 'bo',
+                'code'        => 'bo',
                 'native_name' => 'བོད་ཡིག',
             ],
             [
-                'code' => 'br',
+                'code'        => 'br',
                 'native_name' => 'Brezhoneg',
             ],
             [
-                'code' => 'bs',
+                'code'        => 'bs',
                 'native_name' => 'Bosanski jezik',
             ],
             [
-                'code' => 'ca',
+                'code'        => 'ca',
                 'native_name' => 'Català, valencià',
             ],
             [
-                'code' => 'ce',
+                'code'        => 'ce',
                 'native_name' => 'нохчийн мотт',
             ],
             [
-                'code' => 'ch',
+                'code'        => 'ch',
                 'native_name' => 'Chamoru',
             ],
             [
-                'code' => 'co',
+                'code'        => 'co',
                 'native_name' => 'Corsu, lingua corsa',
             ],
             [
-                'code' => 'cr',
+                'code'        => 'cr',
                 'native_name' => 'ᓀᐦᐃᔭᐍᐏᐣ',
             ],
             [
-                'code' => 'cs',
+                'code'        => 'cs',
                 'native_name' => 'čeština, český jazyk',
             ],
             [
-                'code' => 'cu',
+                'code'        => 'cu',
                 'native_name' => 'ѩзыкъ словѣньскъ',
             ],
             [
-                'code' => 'cv',
+                'code'        => 'cv',
                 'native_name' => 'чӑваш чӗлхи',
             ],
             [
-                'code' => 'cy',
+                'code'        => 'cy',
                 'native_name' => 'Cymraeg',
             ],
             [
-                'code' => 'da',
+                'code'        => 'da',
                 'native_name' => 'Dansk',
             ],
             [
-                'code' => 'de',
+                'code'        => 'de',
                 'native_name' => 'Deutsch',
             ],
             [
-                'code' => 'dv',
+                'code'        => 'dv',
                 'native_name' => 'ދިވެހި',
             ],
             [
-                'code' => 'dz',
+                'code'        => 'dz',
                 'native_name' => 'རྫོང་ཁ',
             ],
             [
-                'code' => 'ee',
+                'code'        => 'ee',
                 'native_name' => 'Eʋegbe',
             ],
             [
-                'code' => 'el',
+                'code'        => 'el',
                 'native_name' => 'ελληνικά',
             ],
             [
-                'code' => 'en',
+                'code'        => 'en',
                 'native_name' => 'English',
             ],
             [
-                'code' => 'eo',
+                'code'        => 'eo',
                 'native_name' => 'Esperanto',
             ],
             [
-                'code' => 'es',
+                'code'        => 'es',
                 'native_name' => 'Español',
             ],
             [
-                'code' => 'et',
+                'code'        => 'et',
                 'native_name' => 'eesti, eesti keel',
             ],
             [
-                'code' => 'eu',
+                'code'        => 'eu',
                 'native_name' => 'Euskara, euskera',
             ],
             [
-                'code' => 'fa',
+                'code'        => 'fa',
                 'native_name' => 'فارسی',
             ],
             [
-                'code' => 'ff',
+                'code'        => 'ff',
                 'native_name' => 'Fulfulde, Pulaar, Pular',
             ],
             [
-                'code' => 'fi',
+                'code'        => 'fi',
                 'native_name' => 'Suomi, suomen kieli',
             ],
             [
-                'code' => 'fj',
+                'code'        => 'fj',
                 'native_name' => 'Vosa Vakaviti',
             ],
             [
-                'code' => 'fo',
+                'code'        => 'fo',
                 'native_name' => 'Føroyskt',
             ],
             [
-                'code' => 'fr',
+                'code'        => 'fr',
                 'native_name' => 'Français, langue française',
             ],
             [
-                'code' => 'fy',
+                'code'        => 'fy',
                 'native_name' => 'Frysk',
             ],
             [
-                'code' => 'ga',
+                'code'        => 'ga',
                 'native_name' => 'Gaeilge',
             ],
             [
-                'code' => 'gd',
+                'code'        => 'gd',
                 'native_name' => 'Gàidhlig',
             ],
             [
-                'code' => 'gl',
+                'code'        => 'gl',
                 'native_name' => 'Galego',
             ],
             [
-                'code' => 'gn',
+                'code'        => 'gn',
                 'native_name' => "Avañe'ẽ",
             ],
             [
-                'code' => 'gu',
+                'code'        => 'gu',
                 'native_name' => 'ગુજરાતી',
             ],
             [
-                'code' => 'gv',
+                'code'        => 'gv',
                 'native_name' => 'Gaelg, Gailck',
             ],
             [
-                'code' => 'ha',
+                'code'        => 'ha',
                 'native_name' => '(Hausa) هَوُسَ',
             ],
             [
-                'code' => 'he',
+                'code'        => 'he',
                 'native_name' => 'עברית',
             ],
             [
-                'code' => 'hi',
+                'code'        => 'hi',
                 'native_name' => 'हिन्दी, हिंदी',
             ],
             [
-                'code' => 'ho',
+                'code'        => 'ho',
                 'native_name' => 'Hiri Motu',
             ],
             [
-                'code' => 'hr',
+                'code'        => 'hr',
                 'native_name' => 'Hrvatski jezik',
             ],
             [
-                'code' => 'ht',
+                'code'        => 'ht',
                 'native_name' => 'Kreyòl ayisyen',
             ],
             [
-                'code' => 'hu',
+                'code'        => 'hu',
                 'native_name' => 'Magyar',
             ],
             [
-                'code' => 'hy',
+                'code'        => 'hy',
                 'native_name' => 'Հայերեն',
             ],
             [
-                'code' => 'hz',
+                'code'        => 'hz',
                 'native_name' => 'Otjiherero',
             ],
             [
-                'code' => 'ia',
+                'code'        => 'ia',
                 'native_name' => 'Interlingua',
             ],
             [
-                'code' => 'id',
+                'code'        => 'id',
                 'native_name' => 'Bahasa Indonesia',
             ],
             [
-                'code' => 'ie',
-                'native_name' =>
-                    'Interlingue, formerly Occidental',
+                'code'        => 'ie',
+                'native_name' => 'Interlingue, formerly Occidental',
             ],
             [
-                'code' => 'ig',
+                'code'        => 'ig',
                 'native_name' => 'Asụsụ Igbo',
             ],
             [
-                'code' => 'ii',
+                'code'        => 'ii',
                 'native_name' => 'ꆈꌠ꒿ Nuosuhxop',
             ],
             [
-                'code' => 'ik',
+                'code'        => 'ik',
                 'native_name' => 'Iñupiaq, Iñupiatun',
             ],
             [
-                'code' => 'io',
+                'code'        => 'io',
                 'native_name' => 'Ido',
             ],
             [
-                'code' => 'is',
+                'code'        => 'is',
                 'native_name' => 'Íslenska',
             ],
             [
-                'code' => 'it',
+                'code'        => 'it',
                 'native_name' => 'Italiano',
             ],
             [
-                'code' => 'iu',
+                'code'        => 'iu',
                 'native_name' => 'ᐃᓄᒃᑎᑐᑦ',
             ],
             [
-                'code' => 'ja',
+                'code'        => 'ja',
                 'native_name' => '日本語 (にほんご)',
             ],
             [
-                'code' => 'jv',
+                'code'        => 'jv',
                 'native_name' => 'ꦧꦱꦗꦮ, Basa Jawa',
             ],
             [
-                'code' => 'ka',
+                'code'        => 'ka',
                 'native_name' => 'ქართული',
             ],
             [
-                'code' => 'kg',
+                'code'        => 'kg',
                 'native_name' => 'Kikongo',
             ],
             [
-                'code' => 'ki',
+                'code'        => 'ki',
                 'native_name' => 'Gĩkũyũ',
             ],
             [
-                'code' => 'kj',
+                'code'        => 'kj',
                 'native_name' => 'Kuanyama',
             ],
             [
-                'code' => 'kk',
+                'code'        => 'kk',
                 'native_name' => 'қазақ тілі',
             ],
             [
-                'code' => 'kl',
+                'code'        => 'kl',
                 'native_name' => 'Kalaallisut, kalaallit oqaasii',
             ],
             [
-                'code' => 'km',
+                'code'        => 'km',
                 'native_name' => 'ខ្មែរ, ខេមរភាសា, ភាសាខ្មែរ',
             ],
             [
-                'code' => 'kn',
+                'code'        => 'kn',
                 'native_name' => 'ಕನ್ನಡ',
             ],
             [
-                'code' => 'ko',
+                'code'        => 'ko',
                 'native_name' => '한국어',
             ],
             [
-                'code' => 'kr',
+                'code'        => 'kr',
                 'native_name' => 'Kanuri',
             ],
             [
-                'code' => 'ks',
+                'code'        => 'ks',
                 'native_name' => 'कश्मीरी, كشميري‎',
             ],
             [
-                'code' => 'ku',
+                'code'        => 'ku',
                 'native_name' => 'Kurdî, کوردی‎',
             ],
             [
-                'code' => 'kv',
+                'code'        => 'kv',
                 'native_name' => 'коми кыв',
             ],
             [
-                'code' => 'kw',
+                'code'        => 'kw',
                 'native_name' => 'Kernewek',
             ],
             [
-                'code' => 'ky',
+                'code'        => 'ky',
                 'native_name' => 'Кыргызча, Кыргыз тили',
             ],
             [
-                'code' => 'la',
+                'code'        => 'la',
                 'native_name' => 'Latine, lingua latina',
             ],
             [
-                'code' => 'lb',
+                'code'        => 'lb',
                 'native_name' => 'Lëtzebuergesch',
             ],
             [
-                'code' => 'lg',
+                'code'        => 'lg',
                 'native_name' => 'Luganda',
             ],
             [
-                'code' => 'li',
+                'code'        => 'li',
                 'native_name' => 'Limburgs',
             ],
             [
-                'code' => 'ln',
+                'code'        => 'ln',
                 'native_name' => 'Lingála',
             ],
             [
-                'code' => 'lo',
+                'code'        => 'lo',
                 'native_name' => 'ພາສາລາວ',
             ],
             [
-                'code' => 'lt',
+                'code'        => 'lt',
                 'native_name' => 'Lietuvių kalba',
             ],
             [
-                'code' => 'lu',
+                'code'        => 'lu',
                 'native_name' => 'Kiluba',
             ],
             [
-                'code' => 'lv',
+                'code'        => 'lv',
                 'native_name' => 'Latviešu valoda',
             ],
             [
-                'code' => 'mg',
+                'code'        => 'mg',
                 'native_name' => 'Fiteny malagasy',
             ],
             [
-                'code' => 'mh',
+                'code'        => 'mh',
                 'native_name' => 'Kajin M̧ajeļ',
             ],
             [
-                'code' => 'mi',
+                'code'        => 'mi',
                 'native_name' => 'Te reo Māori',
             ],
             [
-                'code' => 'mk',
+                'code'        => 'mk',
                 'native_name' => 'македонски јазик',
             ],
             [
-                'code' => 'ml',
+                'code'        => 'ml',
                 'native_name' => 'മലയാളം',
             ],
             [
-                'code' => 'mn',
+                'code'        => 'mn',
                 'native_name' => 'Монгол хэл',
             ],
             [
-                'code' => 'mr',
+                'code'        => 'mr',
                 'native_name' => 'मराठी',
             ],
             [
-                'code' => 'ms',
+                'code'        => 'ms',
                 'native_name' => 'Bahasa Melayu, بهاس ملايو‎',
             ],
             [
-                'code' => 'mt',
+                'code'        => 'mt',
                 'native_name' => 'Malti',
             ],
             [
-                'code' => 'my',
+                'code'        => 'my',
                 'native_name' => 'ဗမာစာ',
             ],
             [
-                'code' => 'na',
+                'code'        => 'na',
                 'native_name' => 'Dorerin Naoero',
             ],
             [
-                'code' => 'nb',
+                'code'        => 'nb',
                 'native_name' => 'Norsk Bokmål',
             ],
             [
-                'code' => 'nd',
+                'code'        => 'nd',
                 'native_name' => 'isiNdebele',
             ],
             [
-                'code' => 'ne',
+                'code'        => 'ne',
                 'native_name' => 'नेपाली',
             ],
             [
-                'code' => 'ng',
+                'code'        => 'ng',
                 'native_name' => 'Owambo',
             ],
             [
-                'code' => 'nl',
+                'code'        => 'nl',
                 'native_name' => 'Nederlands, Vlaams',
             ],
             [
-                'code' => 'nn',
+                'code'        => 'nn',
                 'native_name' => 'Norsk Nynorsk',
             ],
             [
-                'code' => 'no',
+                'code'        => 'no',
                 'native_name' => 'Norsk',
             ],
             [
-                'code' => 'nr',
+                'code'        => 'nr',
                 'native_name' => 'isiNdebele',
             ],
             [
-                'code' => 'nv',
+                'code'        => 'nv',
                 'native_name' => 'Diné bizaad',
             ],
             [
-                'code' => 'ny',
+                'code'        => 'ny',
                 'native_name' => 'Chicheŵa, chinyanja',
             ],
             [
-                'code' => 'oc',
+                'code'        => 'oc',
                 'native_name' => 'Occitan, lenga d’òc',
             ],
             [
-                'code' => 'oj',
+                'code'        => 'oj',
                 'native_name' => 'ᐊᓂᔑᓈᐯᒧᐎᓐ',
             ],
             [
-                'code' => 'om',
+                'code'        => 'om',
                 'native_name' => 'Afaan Oromoo',
             ],
             [
-                'code' => 'or',
+                'code'        => 'or',
                 'native_name' => 'ଓଡ଼ିଆ',
             ],
             [
-                'code' => 'os',
+                'code'        => 'os',
                 'native_name' => 'ирон æвзаг',
             ],
             [
-                'code' => 'pa',
+                'code'        => 'pa',
                 'native_name' => 'ਪੰਜਾਬੀ, پنجابی‎',
             ],
             [
-                'code' => 'pi',
+                'code'        => 'pi',
                 'native_name' => 'पालि, पाळि',
             ],
             [
-                'code' => 'pl',
+                'code'        => 'pl',
                 'native_name' => 'język polski, polszczyzna',
             ],
             [
-                'code' => 'ps',
+                'code'        => 'ps',
                 'native_name' => 'پښتو',
             ],
             [
-                'code' => 'pt',
+                'code'        => 'pt',
                 'native_name' => 'Português',
             ],
             [
-                'code' => 'qu',
+                'code'        => 'qu',
                 'native_name' => 'Runa Simi, Kichwa',
             ],
             [
-                'code' => 'rm',
+                'code'        => 'rm',
                 'native_name' => 'Rumantsch Grischun',
             ],
             [
-                'code' => 'rn',
+                'code'        => 'rn',
                 'native_name' => 'Ikirundi',
             ],
             [
-                'code' => 'ro',
+                'code'        => 'ro',
                 'native_name' => 'Română',
             ],
             [
-                'code' => 'ru',
+                'code'        => 'ru',
                 'native_name' => 'Pусский',
             ],
             [
-                'code' => 'rw',
+                'code'        => 'rw',
                 'native_name' => 'Ikinyarwanda',
             ],
             [
-                'code' => 'sa',
+                'code'        => 'sa',
                 'native_name' => 'संस्कृतम्',
             ],
             [
-                'code' => 'sc',
+                'code'        => 'sc',
                 'native_name' => 'Sardu',
             ],
             [
-                'code' => 'sd',
+                'code'        => 'sd',
                 'native_name' => 'सिन्धी, سنڌي، سندھی‎',
             ],
             [
-                'code' => 'se',
+                'code'        => 'se',
                 'native_name' => 'Davvisámegiella',
             ],
             [
-                'code' => 'sg',
+                'code'        => 'sg',
                 'native_name' => 'Yângâ tî sängö',
             ],
             [
-                'code' => 'si',
+                'code'        => 'si',
                 'native_name' => 'සිංහල',
             ],
             [
-                'code' => 'sk',
+                'code'        => 'sk',
                 'native_name' => 'Slovenčina, Slovenský Jazyk',
             ],
             [
-                'code' => 'sl',
+                'code'        => 'sl',
                 'native_name' => 'Slovenski Jezik, Slovenščina',
             ],
             [
-                'code' => 'sm',
+                'code'        => 'sm',
                 'native_name' => "Gagana fa'a Samoa",
             ],
             [
-                'code' => 'sn',
+                'code'        => 'sn',
                 'native_name' => 'chiShona',
             ],
             [
-                'code' => 'so',
+                'code'        => 'so',
                 'native_name' => 'Soomaaliga, af Soomaali',
             ],
             [
-                'code' => 'sq',
+                'code'        => 'sq',
                 'native_name' => 'Shqip',
             ],
             [
-                'code' => 'sr',
+                'code'        => 'sr',
                 'native_name' => 'српски језик',
             ],
             [
-                'code' => 'ss',
+                'code'        => 'ss',
                 'native_name' => 'SiSwati',
             ],
             [
-                'code' => 'st',
+                'code'        => 'st',
                 'native_name' => 'Sesotho',
             ],
             [
-                'code' => 'su',
+                'code'        => 'su',
                 'native_name' => 'Basa Sunda',
             ],
             [
-                'code' => 'sv',
+                'code'        => 'sv',
                 'native_name' => 'Svenska',
             ],
             [
-                'code' => 'sw',
+                'code'        => 'sw',
                 'native_name' => 'Kiswahili',
             ],
             [
-                'code' => 'ta',
+                'code'        => 'ta',
                 'native_name' => 'தமிழ்',
             ],
             [
-                'code' => 'te',
+                'code'        => 'te',
                 'native_name' => 'తెలుగు',
             ],
             [
-                'code' => 'tg',
+                'code'        => 'tg',
                 'native_name' => 'тоҷикӣ, toçikī, تاجیکی‎',
             ],
             [
-                'code' => 'th',
+                'code'        => 'th',
                 'native_name' => 'ไทย',
             ],
             [
-                'code' => 'ti',
+                'code'        => 'ti',
                 'native_name' => 'ትግርኛ',
             ],
             [
-                'code' => 'tk',
+                'code'        => 'tk',
                 'native_name' => 'Türkmen, Түркмен',
             ],
             [
-                'code' => 'tl',
+                'code'        => 'tl',
                 'native_name' => 'Wikang Tagalog',
             ],
             [
-                'code' => 'tn',
+                'code'        => 'tn',
                 'native_name' => 'Setswana',
             ],
             [
-                'code' => 'to',
+                'code'        => 'to',
                 'native_name' => 'Faka Tonga',
             ],
             [
-                'code' => 'tr',
+                'code'        => 'tr',
                 'native_name' => 'Türkçe',
             ],
             [
-                'code' => 'ts',
+                'code'        => 'ts',
                 'native_name' => 'Xitsonga',
             ],
             [
-                'code' => 'tt',
+                'code'        => 'tt',
                 'native_name' => 'татар теле, tatar tele',
             ],
             [
-                'code' => 'tw',
+                'code'        => 'tw',
                 'native_name' => 'Twi',
             ],
             [
-                'code' => 'ty',
+                'code'        => 'ty',
                 'native_name' => 'Reo Tahiti',
             ],
             [
-                'code' => 'ug',
+                'code'        => 'ug',
                 'native_name' => 'ئۇيغۇرچە‎, Uyghurche',
             ],
             [
-                'code' => 'uk',
+                'code'        => 'uk',
                 'native_name' => 'Українська',
             ],
             [
-                'code' => 'ur',
+                'code'        => 'ur',
                 'native_name' => 'اردو',
             ],
             [
-                'code' => 'uz',
+                'code'        => 'uz',
                 'native_name' => 'Oʻzbek, Ўзбек, أۇزبېك‎',
             ],
             [
-                'code' => 've',
+                'code'        => 've',
                 'native_name' => 'Tshivenḓa',
             ],
             [
-                'code' => 'vi',
+                'code'        => 'vi',
                 'native_name' => 'Tiếng Việt',
             ],
             [
-                'code' => 'vo',
+                'code'        => 'vo',
                 'native_name' => 'Volapük',
             ],
             [
-                'code' => 'wa',
+                'code'        => 'wa',
                 'native_name' => 'Walon',
             ],
             [
-                'code' => 'wo',
+                'code'        => 'wo',
                 'native_name' => 'Wollof',
             ],
             [
-                'code' => 'xh',
+                'code'        => 'xh',
                 'native_name' => 'isiXhosa',
             ],
             [
-                'code' => 'yi',
+                'code'        => 'yi',
                 'native_name' => 'ייִדיש',
             ],
             [
-                'code' => 'yo',
+                'code'        => 'yo',
                 'native_name' => 'Yorùbá',
             ],
             [
-                'code' => 'za',
+                'code'        => 'za',
                 'native_name' => 'Saɯ cueŋƅ, Saw cuengh',
             ],
             [
-                'code' => 'zh',
+                'code'        => 'zh',
                 'native_name' => '中文 (Zhōngwén), 汉语, 漢語',
             ],
             [
-                'code' => 'zu',
+                'code'        => 'zu',
                 'native_name' => 'isiZulu',
             ],
         ];

@@ -80,8 +80,8 @@ class PodcastController extends BaseController
         if (! ($cachedView = cache($cacheName))) {
             $data = [
                 'metatags' => get_podcast_metatags($this->podcast, 'activity'),
-                'podcast' => $this->podcast,
-                'posts' => (new PostModel())->getActorPublishedPosts($this->podcast->actor_id),
+                'podcast'  => $this->podcast,
+                'posts'    => (new PostModel())->getActorPublishedPosts($this->podcast->actor_id),
             ];
 
             // if user is logged in then send to the authenticated activity view
@@ -132,8 +132,8 @@ class PodcastController extends BaseController
 
             $data = [
                 'metatags' => get_podcast_metatags($this->podcast, 'about'),
-                'podcast' => $this->podcast,
-                'stats' => $stats,
+                'podcast'  => $this->podcast,
+                'stats'    => $stats,
             ];
 
             // // if user is logged in then send to the authenticated activity view
@@ -207,18 +207,17 @@ class PodcastController extends BaseController
                 $isActive = $yearQuery === $year['year'];
                 if ($isActive) {
                     $activeQuery = [
-                        'type' => 'year',
-                        'value' => $year['year'],
-                        'label' => $year['year'],
+                        'type'               => 'year',
+                        'value'              => $year['year'],
+                        'label'              => $year['year'],
                         'number_of_episodes' => $year['number_of_episodes'],
                     ];
                 }
 
                 $episodesNavigation[] = [
-                    'label' => $year['year'],
+                    'label'              => $year['year'],
                     'number_of_episodes' => $year['number_of_episodes'],
-                    'route' =>
-                        route_to('podcast-episodes', $this->podcast->handle) .
+                    'route'              => route_to('podcast-episodes', $this->podcast->handle) .
                         '?year=' .
                         $year['year'],
                     'is_active' => $isActive,
@@ -229,7 +228,7 @@ class PodcastController extends BaseController
                 $isActive = $seasonQuery === $season['season_number'];
                 if ($isActive) {
                     $activeQuery = [
-                        'type' => 'season',
+                        'type'  => 'season',
                         'value' => $season['season_number'],
                         'label' => lang('Podcast.season', [
                             'seasonNumber' => $season['season_number'],
@@ -243,8 +242,7 @@ class PodcastController extends BaseController
                         'seasonNumber' => $season['season_number'],
                     ]),
                     'number_of_episodes' => $season['number_of_episodes'],
-                    'route' =>
-                        route_to('podcast-episodes', $this->podcast->handle) .
+                    'route'              => route_to('podcast-episodes', $this->podcast->handle) .
                         '?season=' .
                         $season['season_number'],
                     'is_active' => $isActive,
@@ -252,11 +250,11 @@ class PodcastController extends BaseController
             }
 
             $data = [
-                'metatags' => get_podcast_metatags($this->podcast, 'episodes'),
-                'podcast' => $this->podcast,
+                'metatags'    => get_podcast_metatags($this->podcast, 'episodes'),
+                'podcast'     => $this->podcast,
                 'episodesNav' => $episodesNavigation,
                 'activeQuery' => $activeQuery,
-                'episodes' => (new EpisodeModel())->getPodcastEpisodes(
+                'episodes'    => (new EpisodeModel())->getPodcastEpisodes(
                     $this->podcast->id,
                     $this->podcast->type,
                     $yearQuery,

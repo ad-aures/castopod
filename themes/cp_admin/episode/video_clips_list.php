@@ -23,32 +23,32 @@ use CodeIgniter\I18n\Time;
     [
         [
             'header' => lang('VideoClip.list.status.label'),
-            'cell' => function ($videoClip): string {
+            'cell'   => function ($videoClip): string {
                 $pillVariantMap = [
-                    'queued' => 'default',
-                    'pending' => 'warning',
-                    'running' => 'primary',
+                    'queued'   => 'default',
+                    'pending'  => 'warning',
+                    'running'  => 'primary',
                     'canceled' => 'default',
-                    'failed' => 'danger',
-                    'passed' => 'success',
+                    'failed'   => 'danger',
+                    'passed'   => 'success',
                 ];
 
                 $pillIconMap = [
-                    'queued' => 'timer',
-                    'pending' => 'pause',
-                    'running' => 'loader',
+                    'queued'   => 'timer',
+                    'pending'  => 'pause',
+                    'running'  => 'loader',
                     'canceled' => 'forbid',
-                    'failed' => 'close',
-                    'passed' => 'check',
+                    'failed'   => 'close',
+                    'passed'   => 'check',
                 ];
 
                 $pillIconClassMap = [
-                    'queued' => '',
-                    'pending' => '',
-                    'running' => 'animate-spin',
+                    'queued'   => '',
+                    'pending'  => '',
+                    'running'  => 'animate-spin',
                     'canceled' => '',
-                    'failed' => '',
-                    'passed' => '',
+                    'failed'   => '',
+                    'passed'   => '',
                 ];
 
                 return '<Pill variant="' . $pillVariantMap[$videoClip->status] . '" icon="' . $pillIconMap[$videoClip->status] . '" iconClass="' . $pillIconClassMap[$videoClip->status] . '" hint="' . lang('VideoClip.list.status.' . $videoClip->status . '_hint') . '">' . lang('VideoClip.list.status.' . $videoClip->status) . '</Pill>';
@@ -56,18 +56,18 @@ use CodeIgniter\I18n\Time;
         ],
         [
             'header' => lang('VideoClip.list.clip'),
-            'cell' => function ($videoClip): string {
+            'cell'   => function ($videoClip): string {
                 $formatClass = [
                     'landscape' => 'aspect-video',
-                    'portrait' => 'aspect-[9/16]',
-                    'squared' => 'aspect-square',
+                    'portrait'  => 'aspect-[9/16]',
+                    'squared'   => 'aspect-square',
                 ];
                 return '<a href="' . route_to('video-clip', $videoClip->podcast_id, $videoClip->episode_id, $videoClip->id) . '" class="inline-flex items-center w-full group gap-x-2 focus:ring-accent"><div class="relative"><span class="absolute block w-3 h-3 rounded-full ring-2 ring-white -bottom-1 -left-1" data-tooltip="bottom" title="' . lang('Settings.theme.' . $videoClip->theme['name']) . '" style="background-color:hsl(' . $videoClip->theme['preview'] . ')"></span><div class="flex items-center justify-center h-6 overflow-hidden bg-black rounded-sm aspect-video" data-tooltip="bottom" title="' . lang('VideoClip.format.' . $videoClip->format) . '"><span class="flex items-center justify-center h-full text-white bg-gray-400 ' . $formatClass[$videoClip->format] . '"><Icon glyph="play"/></span></div></div><div class="flex flex-col"><div class="text-sm">#' . $videoClip->id . ' – <span class="font-semibold group-hover:underline">' . esc($videoClip->title) . '</span><span class="ml-1 text-sm">by ' . esc($videoClip->user->username) . '</span></div><span class="text-xs">' . format_duration((int) $videoClip->duration) . '</span></div></a>';
             },
         ],
         [
             'header' => lang('VideoClip.list.duration'),
-            'cell' => function (VideoClip $videoClip): string {
+            'cell'   => function (VideoClip $videoClip): string {
                 $duration = '';
                 if ($videoClip->job_started_at !== null) {
                     if ($videoClip->job_ended_at !== null) {
@@ -85,7 +85,7 @@ use CodeIgniter\I18n\Time;
         ],
         [
             'header' => lang('Common.actions'),
-            'cell' => function ($videoClip): string {
+            'cell'   => function ($videoClip): string {
                 $downloadButton = '';
                 if ($videoClip->media) {
                     helper('misc');
@@ -99,22 +99,22 @@ use CodeIgniter\I18n\Time;
                         '</button>' .
                         '<DropdownMenu id="more-dropdown-' . $videoClip->id . '-menu" labelledby="more-dropdown-' . $videoClip->id . '" offsetY="-24" items="' . esc(json_encode([
                             [
-                                'type' => 'link',
+                                'type'  => 'link',
                                 'title' => lang('VideoClip.go_to_page'),
-                                'uri' => route_to('video-clip', $videoClip->podcast_id, $videoClip->episode_id, $videoClip->id),
+                                'uri'   => route_to('video-clip', $videoClip->podcast_id, $videoClip->episode_id, $videoClip->id),
                             ],
                             [
-                                'type' => 'link',
+                                'type'  => 'link',
                                 'title' => lang('VideoClip.retry'),
-                                'uri' => route_to('video-clip-retry', $videoClip->podcast_id, $videoClip->episode_id, $videoClip->id),
+                                'uri'   => route_to('video-clip-retry', $videoClip->podcast_id, $videoClip->episode_id, $videoClip->id),
                             ],
                             [
                                 'type' => 'separator',
                             ],
                             [
-                                'type' => 'link',
+                                'type'  => 'link',
                                 'title' => lang('VideoClip.delete'),
-                                'uri' => route_to('video-clip-delete', $videoClip->podcast_id, $videoClip->episode_id, $videoClip->id),
+                                'uri'   => route_to('video-clip-delete', $videoClip->podcast_id, $videoClip->episode_id, $videoClip->id),
                                 'class' => 'font-semibold text-red-600',
                             ],
                         ])) . '" />' .

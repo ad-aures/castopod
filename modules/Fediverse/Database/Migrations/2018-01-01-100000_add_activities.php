@@ -20,34 +20,34 @@ class AddActivities extends Migration
     {
         $this->forge->addField([
             'id' => [
-                'type' => 'BINARY',
+                'type'       => 'BINARY',
                 'constraint' => 16,
             ],
             'actor_id' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
             ],
             'target_actor_id' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
-                'null' => true,
+                'null'     => true,
             ],
             'post_id' => [
-                'type' => 'BINARY',
+                'type'       => 'BINARY',
                 'constraint' => 16,
-                'null' => true,
+                'null'       => true,
             ],
             'type' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 100,
             ],
             'payload' => [
                 'type' => 'JSON',
             ],
             'status' => [
-                'type' => 'ENUM',
+                'type'       => 'ENUM',
                 'constraint' => ['queued', 'delivered'],
-                'null' => true,
+                'null'       => true,
             ],
             'scheduled_at' => [
                 'type' => 'DATETIME',

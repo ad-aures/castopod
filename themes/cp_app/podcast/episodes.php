@@ -7,12 +7,12 @@
         <h1 class="font-semibold">
             <?php if ($activeQuery['type'] === 'year'): ?>
                 <?= lang('Podcast.list_of_episodes_year', [
-    'year' => $activeQuery['value'],
+    'year'                         => $activeQuery['value'],
                     'episodeCount' => count($episodes),
 ]) ?>
             <?php elseif ($activeQuery['type'] === 'season'): ?>
                 <?= lang('Podcast.list_of_episodes_season', [
-    'seasonNumber' => $activeQuery['value'],
+    'seasonNumber'                 => $activeQuery['value'],
                     'episodeCount' => count($episodes),
 ]) ?>
             <?php endif; ?>
@@ -27,8 +27,7 @@
                         $link['route'],
                         $link['label'] . ' (' . $link['number_of_episodes'] . ')',
                         [
-                            'class' =>
-                                'px-2 py-1 whitespace-nowrap hover:bg-highlight ' .
+                            'class' => 'px-2 py-1 whitespace-nowrap hover:bg-highlight ' .
                                 ($link['is_active']
                                     ? 'font-semibold'
                                     : 'text-skin-muted hover:text-skin-base'),

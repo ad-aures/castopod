@@ -20,24 +20,24 @@ class AddCategories extends Migration
     {
         $this->forge->addField([
             'id' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
             ],
             'parent_id' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
-                'null' => true,
+                'null'     => true,
             ],
             'code' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 32,
             ],
             'apple_category' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 32,
             ],
             'google_category' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 32,
             ],
         ]);

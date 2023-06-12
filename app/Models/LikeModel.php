@@ -52,7 +52,7 @@ class LikeModel extends UuidModel
         $this->db->transStart();
 
         $this->insert([
-            'actor_id' => $actor->id,
+            'actor_id'   => $actor->id,
             'comment_id' => $comment->id,
         ]);
 
@@ -96,7 +96,7 @@ class LikeModel extends UuidModel
             ->decrement('likes_count');
 
         $this->where([
-            'actor_id' => $actor->id,
+            'actor_id'   => $actor->id,
             'comment_id' => service('uuid')
                 ->fromString($comment->id)
                 ->getBytes(),
@@ -108,7 +108,7 @@ class LikeModel extends UuidModel
             // FIXME: get like activity associated with the deleted like
             $activity = model(ActivityModel::class)
                 ->where([
-                    'type' => 'Like',
+                    'type'     => 'Like',
                     'actor_id' => $actor->id,
                 ])
                 ->first();
@@ -152,7 +152,7 @@ class LikeModel extends UuidModel
     {
         if (
             $this->where([
-                'actor_id' => $actor->id,
+                'actor_id'   => $actor->id,
                 'comment_id' => service('uuid')
                     ->fromString($comment->id)
                     ->getBytes(),

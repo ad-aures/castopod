@@ -28,6 +28,6 @@ class Favourite extends UuidEntity
      */
     protected $casts = [
         'actor_id' => 'integer',
-        'post_id' => 'string',
+        'post_id'  => 'string',
     ];
 }

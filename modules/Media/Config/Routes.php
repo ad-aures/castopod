@@ -11,6 +11,6 @@ declare(strict_types=1);
 $routes = service('routes');
 
 $routes->get('static/(:any)', 'MediaController::serve/$1', [
-    'as' => 'media-serve',
+    'as'        => 'media-serve',
     'namespace' => 'Modules\Media\Controllers',
 ]);

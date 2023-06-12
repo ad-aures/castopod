@@ -85,10 +85,10 @@ class PlatformModel extends Model
         string $submitUrl = null
     ): int | false {
         $data = [
-            'slug' => $slug,
-            'type' => $type,
-            'label' => $label,
-            'home_url' => $homeUrl,
+            'slug'       => $slug,
+            'type'       => $type,
+            'label'      => $label,
+            'home_url'   => $homeUrl,
             'submit_url' => $submitUrl,
         ];
 
@@ -195,7 +195,7 @@ class PlatformModel extends Model
 
         return $this->db->table('podcasts_platforms')
             ->delete([
-                'podcast_id' => $podcastId,
+                'podcast_id'    => $podcastId,
                 'platform_slug' => $platformSlug,
             ]);
     }

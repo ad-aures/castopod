@@ -105,7 +105,7 @@ class PostController extends Controller
     {
         $rules = [
             'actor_id' => 'required|is_natural_no_zero',
-            'message' => 'required|max_length[500]',
+            'message'  => 'required|max_length[500]',
         ];
 
         if (! $this->validate($rules)) {
@@ -116,8 +116,8 @@ class PostController extends Controller
         }
 
         $newPost = new Post([
-            'actor_id' => $this->request->getPost('actor_id'),
-            'message' => $this->request->getPost('message'),
+            'actor_id'     => $this->request->getPost('actor_id'),
+            'message'      => $this->request->getPost('message'),
             'published_at' => Time::now(),
         ]);
 
@@ -182,7 +182,7 @@ class PostController extends Controller
     {
         $rules = [
             'actor_id' => 'required|is_natural_no_zero',
-            'message' => 'required|max_length[500]',
+            'message'  => 'required|max_length[500]',
         ];
 
         if (! $this->validate($rules)) {
@@ -193,10 +193,10 @@ class PostController extends Controller
         }
 
         $newReplyPost = new Post([
-            'actor_id' => $this->request->getPost('actor_id'),
+            'actor_id'       => $this->request->getPost('actor_id'),
             'in_reply_to_id' => $this->post->id,
-            'message' => $this->request->getPost('message'),
-            'published_at' => Time::now(),
+            'message'        => $this->request->getPost('message'),
+            'published_at'   => Time::now(),
         ]);
 
         if (! model('PostModel', false)->addReply($newReplyPost)) {
@@ -214,8 +214,7 @@ class PostController extends Controller
     public function attemptRemoteAction(string $action): RedirectResponse | ResponseInterface
     {
         $rules = [
-            'handle' =>
-                'regex_match[/^@?(?P<username>[\w\.\-]+)@(?P<host>[\w\.\-]+)(?P<port>:[\d]+)?$/]',
+            'handle' => 'regex_match[/^@?(?P<username>[\w\.\-]+)@(?P<host>[\w\.\-]+)(?P<port>:[\d]+)?$/]',
         ];
 
         if (! $this->validate($rules)) {

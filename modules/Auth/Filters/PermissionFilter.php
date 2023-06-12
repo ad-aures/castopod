@@ -25,7 +25,7 @@ class PermissionFilter implements FilterInterface
      */
     public function before(RequestInterface $request, $params = null)
     {
-        if (empty($params)) {
+        if ($params === null || $params === []) {
             return;
         }
 

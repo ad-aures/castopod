@@ -12,10 +12,10 @@ class AddIsOwnerToUsers extends Migration
     {
         $fields = [
             'is_owner' => [
-                'type' => 'TINYINT',
+                'type'       => 'TINYINT',
                 'constraint' => 1,
-                'default' => 0,
-                'null' => false,
+                'default'    => 0,
+                'null'       => false,
             ],
         ];
 

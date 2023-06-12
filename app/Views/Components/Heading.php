@@ -19,7 +19,7 @@ class Heading extends Component
     {
         $sizeClasses = [
             'small' => 'tracking-wide text-base',
-            'base' => 'text-xl',
+            'base'  => 'text-xl',
             'large' => 'text-3xl',
         ];
 

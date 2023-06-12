@@ -20,7 +20,7 @@ class AddAnalyticsPodcasts extends Migration
     {
         $this->forge->addField([
             'podcast_id' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
             ],
             'date' => [
@@ -30,22 +30,22 @@ class AddAnalyticsPodcasts extends Migration
                 // a hit in analytics podcast increments this value when a podcast is listened to in a given date.
                 // Here, the "cumulative listening time" on a podcast per day
                 // cannot surpass 999,999,999,999.999 seconds (~277,777,777 hours) - should be enough.
-                'type' => 'DECIMAL(15,3)',
+                'type'     => 'DECIMAL(15,3)',
                 'unsigned' => true,
             ],
             'bandwidth' => [
-                'type' => 'BIGINT',
+                'type'     => 'BIGINT',
                 'unsigned' => true,
             ],
             'unique_listeners' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
-                'default' => 1,
+                'default'  => 1,
             ],
             'hits' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
-                'default' => 1,
+                'default'  => 1,
             ],
         ]);
         $this->forge->addPrimaryKey(['podcast_id', 'date']);

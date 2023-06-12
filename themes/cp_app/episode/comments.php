@@ -24,7 +24,7 @@
 <div class="flex flex-col gap-y-2">
     <?php foreach ($episode->comments as $comment): ?>
         <?= view('episode/_partials/comment', [
-    'comment' => $comment,
+    'comment'         => $comment,
             'podcast' => $podcast,
 ]) ?>
     <?php endforeach; ?>

@@ -42,8 +42,8 @@ class ActivityRequest
         $this->options = [
             'headers' => [
                 'Content-Type' => 'application/activity+json',
-                'Accept' => 'application/activity+json',
-                'User-Agent' => 'Castopod/' . CP_VERSION . '; +' . base_url('', 'https'),
+                'Accept'       => 'application/activity+json',
+                'User-Agent'   => 'Castopod/' . CP_VERSION . '; +' . base_url('', 'https'),
                 // TODO: outgoing and incoming requests
             ],
         ];
@@ -98,14 +98,14 @@ class ActivityRequest
 
         $this->options = [
             'headers' => [
-                'Content-Type' => $contentType,
+                'Content-Type'   => $contentType,
                 'Content-Length' => $contentLength,
-                'Authorization' => "Signature {$signatureHeader}",
-                'Signature' => $signatureHeader,
-                'Host' => $host,
-                'Date' => $date,
-                'User-Agent' => $userAgent,
-                'Digest' => $digest,
+                'Authorization'  => "Signature {$signatureHeader}",
+                'Signature'      => $signatureHeader,
+                'Host'           => $host,
+                'Date'           => $date,
+                'User-Agent'     => $userAgent,
+                'Digest'         => $digest,
             ],
         ];
     }

@@ -111,8 +111,8 @@ class SubscriptionModel extends Model
 
         return $subscriptionModel
             ->where([
-                'token' => hash('sha256', $token),
-                'status' => 'active',
+                'token'      => hash('sha256', $token),
+                'status'     => 'active',
                 'expires_at' => null,
             ])
             ->orWhere('`expires_at` > UTC_TIMESTAMP()', null, false)

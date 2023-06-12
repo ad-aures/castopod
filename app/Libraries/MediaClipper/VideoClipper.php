@@ -26,11 +26,11 @@ class VideoClipper
      * @var array<string, string>
      */
     final public const FONTS = [
-        'episodeTitle' => 'Rubik-Bold.ttf',
-        'podcastTitle' => 'Inter-Regular.otf',
-        'subtitles' => 'Inter-SemiBold',
+        'episodeTitle'     => 'Rubik-Bold.ttf',
+        'podcastTitle'     => 'Inter-Regular.otf',
+        'subtitles'        => 'Inter-SemiBold',
         'episodeNumbering' => 'Inter-SemiBold.otf',
-        'timestamp' => 'NotoSansMono-Regular.ttf',
+        'timestamp'        => 'NotoSansMono-Regular.ttf',
     ];
 
     public ?string $logs = null;
@@ -505,8 +505,8 @@ class VideoClipper
     {
         return match ($this->episode->cover->file_mimetype) {
             'image/jpeg' => imagecreatefromjpeg($this->episodeCoverPath),
-            'image/png' => imagecreatefrompng($this->episodeCoverPath),
-            default => imagecreate(1400, 1400),
+            'image/png'  => imagecreatefrompng($this->episodeCoverPath),
+            default      => imagecreate(1400, 1400),
         };
     }
 
@@ -677,11 +677,11 @@ class VideoClipper
         $maxY = max([$bbox[1], $bbox[3], $bbox[5], $bbox[7]]);
 
         return [
-            'left' => abs($minX) - 1,
-            'top' => abs($minY),
-            'width' => $maxX - $minX,
+            'left'   => abs($minX) - 1,
+            'top'    => abs($minY),
+            'width'  => $maxX - $minX,
             'height' => $maxY - $minY,
-            'box' => $bbox,
+            'box'    => $bbox,
         ];
     }
 

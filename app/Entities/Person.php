@@ -42,15 +42,15 @@ class Person extends Entity
      * @var array<string, string>
      */
     protected $casts = [
-        'id' => 'integer',
-        'full_name' => 'string',
-        'unique_name' => 'string',
+        'id'              => 'integer',
+        'full_name'       => 'string',
+        'unique_name'     => 'string',
         'information_url' => '?string',
-        'avatar_id' => '?int',
-        'podcast_id' => '?integer',
-        'episode_id' => '?integer',
-        'created_by' => 'integer',
-        'updated_by' => 'integer',
+        'avatar_id'       => '?int',
+        'podcast_id'      => '?integer',
+        'episode_id'      => '?integer',
+        'created_by'      => 'integer',
+        'updated_by'      => 'integer',
     ];
 
     /**
@@ -71,10 +71,10 @@ class Person extends Entity
         } else {
             $avatar = new Image([
                 'file_key' => 'persons/' . $this->attributes['unique_name'] . '.' . $file->getExtension(),
-                'sizes' => config('Images')
+                'sizes'    => config('Images')
 ->personAvatarSizes,
                 'uploaded_by' => user_id(),
-                'updated_by' => user_id(),
+                'updated_by'  => user_id(),
             ]);
             $avatar->setFile($file);
 

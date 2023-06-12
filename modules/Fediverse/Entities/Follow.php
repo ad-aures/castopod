@@ -22,7 +22,7 @@ class Follow extends Entity
      * @var array<string, string>
      */
     protected $casts = [
-        'actor_id' => 'integer',
+        'actor_id'        => 'integer',
         'target_actor_id' => 'integer',
     ];
 }

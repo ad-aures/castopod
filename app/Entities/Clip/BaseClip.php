@@ -65,17 +65,17 @@ class BaseClip extends Entity
      * @var array<string, string>
      */
     protected $casts = [
-        'id' => 'integer',
+        'id'         => 'integer',
         'podcast_id' => 'integer',
         'episode_id' => 'integer',
-        'title' => 'string',
+        'title'      => 'string',
         'start_time' => 'double',
-        'duration' => 'double',
-        'type' => 'string',
-        'media_id' => '?integer',
-        'metadata' => '?json-array',
-        'status' => 'string',
-        'logs' => 'string',
+        'duration'   => 'double',
+        'type'       => 'string',
+        'media_id'   => '?integer',
+        'metadata'   => '?json-array',
+        'status'     => 'string',
+        'logs'       => 'string',
         'created_by' => 'integer',
         'updated_by' => 'integer',
     ];
@@ -132,11 +132,11 @@ class BaseClip extends Entity
             (new MediaModel('audio'))->updateMedia($this->getMedia());
         } else {
             $media = new Audio([
-                'file_key' => $fileKey,
+                'file_key'      => $fileKey,
                 'language_code' => $this->getPodcast()
 ->language_code,
                 'uploaded_by' => $this->attributes['created_by'],
-                'updated_by' => $this->attributes['created_by'],
+                'updated_by'  => $this->attributes['created_by'],
             ]);
             $media->setFile($file);
 

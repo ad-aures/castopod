@@ -24,15 +24,15 @@ class Media extends BaseConfig
      * @var array<string, null|string|bool>
      */
     public array $s3 = [
-        'bucket' => 'castopod',
-        'key' => '',
-        'secret' => '',
-        'region' => '',
-        'protocol' => '',
-        'endpoint' => '',
-        'debug' => false,
+        'bucket'            => 'castopod',
+        'key'               => '',
+        'secret'            => '',
+        'region'            => '',
+        'protocol'          => '',
+        'endpoint'          => '',
+        'debug'             => false,
         'pathStyleEndpoint' => false,
-        'keyPrefix' => '',
+        'keyPrefix'         => '',
     ];
 
     /**
@@ -68,6 +68,6 @@ class Media extends BaseConfig
      */
     public array $folders = [
         'podcasts' => 'podcasts',
-        'persons' => 'persons',
+        'persons'  => 'persons',
     ];
 }

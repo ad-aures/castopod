@@ -175,7 +175,7 @@
                         $episode->transcript->file_url,
                         icon('file-download', 'mr-1 text-skin-muted text-xl') . lang('Episode.form.transcript_download'),
                         [
-                            'class' => 'flex-1 font-semibold hover:underline inline-flex items-center text-xs',
+                            'class'    => 'flex-1 font-semibold hover:underline inline-flex items-center text-xs',
                             'download' => '',
                         ],
                     ) .
@@ -187,10 +187,9 @@
                             ),
                             icon('delete-bin', 'mx-auto'),
                             [
-                                'class' =>
-                                'p-1 text-sm bg-red-100 rounded-full text-red-700 hover:text-red-900 focus:ring-accent',
+                                'class'        => 'p-1 text-sm bg-red-100 rounded-full text-red-700 hover:text-red-900 focus:ring-accent',
                                 'data-tooltip' => 'bottom',
-                                'title' => lang(
+                                'title'        => lang(
                                     'Episode.form.transcript_file_delete',
                                 ),
                             ],
@@ -230,7 +229,7 @@
                         $episode->chapters->file_url,
                         icon('file-download', 'mr-1 text-skin-muted text-xl') . lang('Episode.form.chapters_download'),
                         [
-                            'class' => 'flex-1 font-semibold hover:underline inline-flex items-center text-xs',
+                            'class'    => 'flex-1 font-semibold hover:underline inline-flex items-center text-xs',
                             'download' => '',
                         ],
                     ) .
@@ -242,10 +241,9 @@
                         ),
                         icon('delete-bin', 'mx-auto'),
                         [
-                            'class' =>
-                            'text-sm p-1 bg-red-100 rounded-full text-red-700 hover:text-red-900 focus:ring-accent',
+                            'class'        => 'text-sm p-1 bg-red-100 rounded-full text-red-700 hover:text-red-900 focus:ring-accent',
                             'data-tooltip' => 'bottom',
-                            'title' => lang(
+                            'title'        => lang(
                                 'Episode.form.chapters_file_delete',
                             ),
                         ],

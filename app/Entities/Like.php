@@ -27,7 +27,7 @@ class Like extends UuidEntity
      * @var array<string, string>
      */
     protected $casts = [
-        'actor_id' => 'integer',
+        'actor_id'   => 'integer',
         'comment_id' => 'string',
     ];
 }

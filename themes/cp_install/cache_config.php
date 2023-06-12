@@ -21,8 +21,8 @@
     name="cache_handler"
     label="<?= lang('Install.form.cache_handler') ?>"
     options="<?= esc(json_encode([
-            'file' => lang('Install.form.cacheHandlerOptions.file'),
-            'redis' => lang('Install.form.cacheHandlerOptions.redis'),
+            'file'   => lang('Install.form.cacheHandlerOptions.file'),
+            'redis'  => lang('Install.form.cacheHandlerOptions.redis'),
             'predis' => lang('Install.form.cacheHandlerOptions.predis'),
         ])) ?>"
     selected="file"

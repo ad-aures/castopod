@@ -40,7 +40,7 @@ class SoundbiteController extends BaseController
             if (
                 ! ($episode = (new EpisodeModel())
                     ->where([
-                        'id' => $params[1],
+                        'id'         => $params[1],
                         'podcast_id' => $params[0],
                     ])
                     ->first())
@@ -63,17 +63,17 @@ class SoundbiteController extends BaseController
             ->where([
                 'podcast_id' => $this->podcast->id,
                 'episode_id' => $this->episode->id,
-                'type' => 'audio',
+                'type'       => 'audio',
             ])
             ->orderBy('created_at', 'desc');
 
         $soundbites = $soundbitesBuilder->paginate(10);
 
         $data = [
-            'podcast' => $this->podcast,
-            'episode' => $this->episode,
+            'podcast'    => $this->podcast,
+            'episode'    => $this->episode,
             'soundbites' => $soundbites,
-            'pager' => $soundbitesBuilder->pager,
+            'pager'      => $soundbitesBuilder->pager,
         ];
 
         replace_breadcrumb_params([
@@ -102,9 +102,9 @@ class SoundbiteController extends BaseController
     public function attemptCreate(): RedirectResponse
     {
         $rules = [
-            'title' => 'required',
+            'title'      => 'required',
             'start_time' => 'required|greater_than_equal_to[0]',
-            'duration' => 'required|greater_than[0]',
+            'duration'   => 'required|greater_than[0]',
         ];
 
         if (! $this->validate($rules)) {
@@ -115,11 +115,11 @@ class SoundbiteController extends BaseController
         }
 
         $newSoundbite = new Soundbite([
-            'title' => $this->request->getPost('title'),
+            'title'      => $this->request->getPost('title'),
             'start_time' => (float) $this->request->getPost('start_time'),
-            'duration' => (float) $this->request->getPost('duration'),
-            'type' => 'audio',
-            'status' => '',
+            'duration'   => (float) $this->request->getPost('duration'),
+            'type'       => 'audio',
+            'status'     => '',
             'podcast_id' => $this->podcast->id,
             'episode_id' => $this->episode->id,
             'created_by' => user_id(),

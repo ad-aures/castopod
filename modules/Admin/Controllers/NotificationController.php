@@ -61,9 +61,9 @@ class NotificationController extends BaseController
             ->orderBy('created_at', 'desc');
 
         $data = [
-            'podcast' => $this->podcast,
+            'podcast'       => $this->podcast,
             'notifications' => $notifications->paginate(10),
-            'pager' => $notifications->pager,
+            'pager'         => $notifications->pager,
         ];
 
         replace_breadcrumb_params([

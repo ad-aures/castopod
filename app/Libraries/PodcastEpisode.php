@@ -46,30 +46,30 @@ class PodcastEpisode extends ObjectType
         $this->id = $episode->link;
 
         $this->description = [
-            'type' => 'Note',
-            'mediaType' => 'text/markdown',
-            'content' => $episode->description_markdown,
+            'type'       => 'Note',
+            'mediaType'  => 'text/markdown',
+            'content'    => $episode->description_markdown,
             'contentMap' => [
                 $episode->podcast->language_code => $episode->description_html,
             ],
         ];
 
         $this->image = [
-            'type' => 'Image',
+            'type'      => 'Image',
             'mediaType' => $episode->cover->file_mimetype,
-            'url' => $episode->cover->feed_url,
+            'url'       => $episode->cover->feed_url,
         ];
 
         // add audio file
         $this->audio = [
-            'id' => $episode->audio_url,
-            'type' => 'Audio',
-            'name' => esc($episode->title),
-            'size' => $episode->audio->file_size,
+            'id'       => $episode->audio_url,
+            'type'     => 'Audio',
+            'name'     => esc($episode->title),
+            'size'     => $episode->audio->file_size,
             'duration' => $episode->audio->duration,
-            'url' => [
-                'href' => $episode->audio_url,
-                'type' => 'Link',
+            'url'      => [
+                'href'      => $episode->audio_url,
+                'type'      => 'Link',
                 'mediaType' => $episode->audio->file_mimetype,
             ],
         ];

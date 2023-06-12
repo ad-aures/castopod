@@ -18,42 +18,42 @@ class AddSubscriptions extends Migration
     {
         $this->forge->addField([
             'id' => [
-                'type' => 'INT',
-                'unsigned' => true,
+                'type'           => 'INT',
+                'unsigned'       => true,
                 'auto_increment' => true,
             ],
             'podcast_id' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
             ],
             'email' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 255,
             ],
             'token' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 64,
             ],
             'status' => [
-                'type' => 'ENUM',
+                'type'       => 'ENUM',
                 'constraint' => ['active', 'suspended'],
-                'default' => 'active',
+                'default'    => 'active',
             ],
             'status_message' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 255,
-                'null' => true,
+                'null'       => true,
             ],
             'expires_at' => [
                 'type' => 'DATETIME',
                 'null' => true,
             ],
             'created_by' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
             ],
             'updated_by' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
             ],
             'created_at' => [

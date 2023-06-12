@@ -33,8 +33,8 @@ class AnalyticsWebsiteByEntryPage extends Entity
      * @var array<string, string>
      */
     protected $casts = [
-        'podcast_id' => 'integer',
+        'podcast_id'     => 'integer',
         'entry_page_url' => 'string',
-        'hits' => 'integer',
+        'hits'           => 'integer',
     ];
 }

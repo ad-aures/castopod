@@ -65,7 +65,7 @@ class ContributorController extends BaseController
     public function view(): string
     {
         $data = [
-            'podcast' => $this->podcast,
+            'podcast'     => $this->podcast,
             'contributor' => (new UserModel())->getPodcastContributor($this->contributor->id, $this->podcast->id),
         ];
 
@@ -102,9 +102,9 @@ class ContributorController extends BaseController
         );
 
         $data = [
-            'podcast' => $this->podcast,
+            'podcast'            => $this->podcast,
             'contributorOptions' => $contributorOptions,
-            'roleOptions' => $roleOptions,
+            'roleOptions'        => $roleOptions,
         ];
 
         replace_breadcrumb_params([
@@ -154,10 +154,10 @@ class ContributorController extends BaseController
         }
 
         $data = [
-            'podcast' => $this->podcast,
-            'contributor' => $this->contributor,
+            'podcast'          => $this->podcast,
+            'contributor'      => $this->contributor,
             'contributorGroup' => $contributorGroup,
-            'roleOptions' => $roleOptions,
+            'roleOptions'      => $roleOptions,
         ];
 
         replace_breadcrumb_params([
@@ -194,7 +194,7 @@ class ContributorController extends BaseController
         helper('form');
 
         $data = [
-            'podcast' => $this->podcast,
+            'podcast'     => $this->podcast,
             'contributor' => $this->contributor,
         ];
 
@@ -235,7 +235,7 @@ class ContributorController extends BaseController
             ->with(
                 'message',
                 lang('Contributor.messages.removeSuccess', [
-                    'username' => $this->contributor->username,
+                    'username'     => $this->contributor->username,
                     'podcastTitle' => $this->podcast->title,
                 ]),
             );

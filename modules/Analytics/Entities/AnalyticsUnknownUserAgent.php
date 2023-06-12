@@ -32,8 +32,8 @@ class AnalyticsUnknownUserAgent extends Entity
      * @var array<string, string>
      */
     protected $casts = [
-        'id' => 'integer',
+        'id'        => 'integer',
         'useragent' => 'integer',
-        'hits' => 'integer',
+        'hits'      => 'integer',
     ];
 }

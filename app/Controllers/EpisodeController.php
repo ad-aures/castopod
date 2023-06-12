@@ -87,8 +87,8 @@ class EpisodeController extends BaseController
         if (! ($cachedView = cache($cacheName))) {
             $data = [
                 'metatags' => get_episode_metatags($this->episode),
-                'podcast' => $this->podcast,
-                'episode' => $this->episode,
+                'podcast'  => $this->podcast,
+                'episode'  => $this->episode,
             ];
 
             $secondsToNextUnpublishedEpisode = (new EpisodeModel())->getSecondsToNextUnpublishedEpisode(
@@ -138,8 +138,8 @@ class EpisodeController extends BaseController
         if (! ($cachedView = cache($cacheName))) {
             $data = [
                 'metatags' => get_episode_metatags($this->episode),
-                'podcast' => $this->podcast,
-                'episode' => $this->episode,
+                'podcast'  => $this->podcast,
+                'episode'  => $this->episode,
             ];
 
             $secondsToNextUnpublishedEpisode = (new EpisodeModel())->getSecondsToNextUnpublishedEpisode(
@@ -197,9 +197,9 @@ class EpisodeController extends BaseController
             $themeData = EpisodeModel::$themes[$theme];
 
             $data = [
-                'podcast' => $this->podcast,
-                'episode' => $this->episode,
-                'theme' => $theme,
+                'podcast'   => $this->podcast,
+                'episode'   => $this->episode,
+                'theme'     => $theme,
                 'themeData' => $themeData,
             ];
 
@@ -222,22 +222,21 @@ class EpisodeController extends BaseController
     public function oembedJSON(): ResponseInterface
     {
         return $this->response->setJSON([
-            'type' => 'rich',
-            'version' => '1.0',
-            'title' => $this->episode->title,
+            'type'          => 'rich',
+            'version'       => '1.0',
+            'title'         => $this->episode->title,
             'provider_name' => $this->podcast->title,
-            'provider_url' => $this->podcast->link,
-            'author_name' => $this->podcast->title,
-            'author_url' => $this->podcast->link,
-            'html' =>
-                '<iframe src="' .
+            'provider_url'  => $this->podcast->link,
+            'author_name'   => $this->podcast->title,
+            'author_url'    => $this->podcast->link,
+            'html'          => '<iframe src="' .
                 $this->episode->embed_url .
                 '" width="100%" height="' . config('Embed')->height . '" frameborder="0" scrolling="no"></iframe>',
             'width' => config('Embed')
                 ->width,
             'height' => config('Embed')
                 ->height,
-            'thumbnail_url' => $this->episode->cover->og_url,
+            'thumbnail_url'   => $this->episode->cover->og_url,
             'thumbnail_width' => config('Images')
                 ->podcastCoverSizes['og']['width'],
             'thumbnail_height' => config('Images')

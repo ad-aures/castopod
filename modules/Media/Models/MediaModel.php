@@ -87,12 +87,12 @@ class MediaModel extends Model
         ValidationInterface $validation = null
     ) {
         $this->returnType = match ($fileType) {
-            'audio' => Audio::class,
-            'video' => Video::class,
-            'image' => Image::class,
+            'audio'      => Audio::class,
+            'video'      => Video::class,
+            'image'      => Image::class,
             'transcript' => Transcript::class,
-            'chapters' => Chapters::class,
-            default => Document::class
+            'chapters'   => Chapters::class,
+            default      => Document::class
         };
 
         parent::__construct($db, $validation);

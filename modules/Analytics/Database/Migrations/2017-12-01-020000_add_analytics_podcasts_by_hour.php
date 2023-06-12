@@ -20,20 +20,20 @@ class AddAnalyticsPodcastsByHour extends Migration
     {
         $this->forge->addField([
             'podcast_id' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
             ],
             'date' => [
                 'type' => 'DATE',
             ],
             'hour' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
             ],
             'hits' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
-                'default' => 1,
+                'default'  => 1,
             ],
         ]);
         $this->forge->addPrimaryKey(['podcast_id', 'date', 'hour']);

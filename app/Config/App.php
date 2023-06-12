@@ -424,7 +424,7 @@ class App extends BaseConfig
      */
     public array $siteIcon = [
         'ico' => '/favicon.ico',
-        '64' => '/icon-64.png',
+        '64'  => '/icon-64.png',
         '180' => '/icon-180.png',
         '192' => '/icon-192.png',
         '512' => '/icon-512.png',

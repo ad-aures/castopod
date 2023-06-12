@@ -22,7 +22,7 @@ class Language extends Entity
      * @var array<string, string>
      */
     protected $casts = [
-        'code' => 'string',
+        'code'        => 'string',
         'native_name' => 'string',
     ];
 }

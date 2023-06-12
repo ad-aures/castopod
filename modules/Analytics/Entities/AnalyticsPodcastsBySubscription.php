@@ -32,9 +32,9 @@ class AnalyticsPodcastsBySubscription extends Entity
      * @var array<string, string>
      */
     protected $casts = [
-        'podcast_id' => 'integer',
-        'episode_id' => 'integer',
+        'podcast_id'      => 'integer',
+        'episode_id'      => 'integer',
         'subscription_id' => 'integer',
-        'hits' => 'integer',
+        'hits'            => 'integer',
     ];
 }

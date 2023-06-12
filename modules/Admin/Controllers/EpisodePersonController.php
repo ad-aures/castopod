@@ -34,7 +34,7 @@ class EpisodePersonController extends BaseController
             ($this->podcast = (new PodcastModel())->getPodcastById((int) $params[0])) &&
             ($this->episode = (new EpisodeModel())
                 ->where([
-                    'id' => $params[1],
+                    'id'         => $params[1],
                     'podcast_id' => $params[0],
                 ])
                 ->first())
@@ -53,9 +53,9 @@ class EpisodePersonController extends BaseController
         helper('form');
 
         $data = [
-            'episode' => $this->episode,
-            'podcast' => $this->podcast,
-            'personOptions' => (new PersonModel())->getPersonOptions(),
+            'episode'         => $this->episode,
+            'podcast'         => $this->podcast,
+            'personOptions'   => (new PersonModel())->getPersonOptions(),
             'taxonomyOptions' => (new PersonModel())->getTaxonomyOptions(),
         ];
         replace_breadcrumb_params([

@@ -21,11 +21,11 @@ class S3 implements FileManagerInterface
         protected MediaConfig $config
     ) {
         $this->s3 = new S3Client([
-            'version' => 'latest',
-            'region' => $config->s3['region'],
-            'endpoint' => $config->s3['endpoint'],
-            'credentials' => new Credentials((string) $config->s3['key'], (string) $config->s3['secret']),
-            'debug' => $config->s3['debug'],
+            'version'                 => 'latest',
+            'region'                  => $config->s3['region'],
+            'endpoint'                => $config->s3['endpoint'],
+            'credentials'             => new Credentials((string) $config->s3['key'], (string) $config->s3['secret']),
+            'debug'                   => $config->s3['debug'],
             'use_path_style_endpoint' => $config->s3['pathStyleEndpoint'],
         ]);
     }
@@ -34,10 +34,10 @@ class S3 implements FileManagerInterface
     {
         try {
             $this->s3->putObject([
-                'Bucket' => $this->config->s3['bucket'],
-                'Key' => $this->prefixKey($key),
-                'SourceFile' => $file,
-                'ContentType' => $file->getMimeType(),
+                'Bucket'       => $this->config->s3['bucket'],
+                'Key'          => $this->prefixKey($key),
+                'SourceFile'   => $file,
+                'ContentType'  => $file->getMimeType(),
                 'CacheControl' => 'max-age=' . YEAR,
             ]);
         } catch (Exception) {
@@ -55,7 +55,7 @@ class S3 implements FileManagerInterface
         try {
             $this->s3->deleteObject([
                 'Bucket' => $this->config->s3['bucket'],
-                'Key' => $this->prefixKey($key),
+                'Key'    => $this->prefixKey($key),
             ]);
         } catch (Exception) {
             return false;
@@ -74,9 +74,9 @@ class S3 implements FileManagerInterface
         try {
             // copy old object with new key
             $this->s3->copyObject([
-                'Bucket' => $this->config->s3['bucket'],
+                'Bucket'     => $this->config->s3['bucket'],
                 'CopySource' => $this->config->s3['bucket'] . '/' . $this->prefixKey($oldKey),
-                'Key' => $this->prefixKey($newKey),
+                'Key'        => $this->prefixKey($newKey),
             ]);
         } catch (Exception) {
             return false;
@@ -91,7 +91,7 @@ class S3 implements FileManagerInterface
         try {
             $result = $this->s3->getObject([
                 'Bucket' => $this->config->s3['bucket'],
-                'Key' => $this->prefixKey($key),
+                'Key'    => $this->prefixKey($key),
             ]);
         } catch (Exception) {
             return false;
@@ -192,7 +192,7 @@ class S3 implements FileManagerInterface
             try {
                 $cmd = $this->s3->getCommand('GetObject', [
                     'Bucket' => $this->config->s3['bucket'],
-                    'Key' => $this->prefixKey($key),
+                    'Key'    => $this->prefixKey($key),
                 ]);
             } catch (Exception) {
                 throw new PageNotFoundException();
@@ -218,10 +218,10 @@ class S3 implements FileManagerInterface
         header_remove('Cache-Control');
 
         return $response->setCache([
-            'max-age' => DAY,
+            'max-age'       => DAY,
             'last-modified' => $lastModified->format(DATE_RFC7231),
-            'etag' => md5($cacheName),
-            'public' => true,
+            'etag'          => md5($cacheName),
+            'public'        => true,
         ])->redirect($found);
     }
 

@@ -19,7 +19,7 @@
     [
         [
             'header' => lang('User.list.user'),
-            'cell' => function ($user) {
+            'cell'   => function ($user) {
                 return '<div class="flex flex-col">' .
                     esc($user->username) .
                     '<span class="text-sm text-skin-muted">' .
@@ -29,7 +29,7 @@
         ],
         [
             'header' => lang('User.list.role'),
-            'cell' => function ($user) {
+            'cell'   => function ($user) {
                 $role = get_group_info(get_instance_group($user))['title'];
 
                 if ((bool) $user->is_owner) {
@@ -43,13 +43,13 @@
         ],
         [
             'header' => lang('Common.actions'),
-            'cell' => function ($user) {
+            'cell'   => function ($user) {
                 return '<button id="more-dropdown-' . $user->id . '" type="button" class="inline-flex items-center p-1 focus:ring-accent" data-dropdown="button" data-dropdown-target="more-dropdown-' . $user->id . '-menu" aria-haspopup="true" aria-expanded="false">' . icon('more') . '</button>' .
                 '<DropdownMenu id="more-dropdown-' . $user->id . '-menu" labelledby="more-dropdown-' . $user->id . '" items="' . esc(json_encode([
                     [
-                        'type' => 'link',
+                        'type'  => 'link',
                         'title' => lang('User.delete'),
-                        'uri' => route_to('user-delete', $user->id),
+                        'uri'   => route_to('user-delete', $user->id),
                         'class' => 'font-semibold text-red-600',
                     ],
                 ])) . '" />';

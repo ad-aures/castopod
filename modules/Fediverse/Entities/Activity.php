@@ -49,13 +49,13 @@ class Activity extends UuidEntity
      * @var array<string, string>
      */
     protected $casts = [
-        'id' => 'string',
-        'actor_id' => 'integer',
+        'id'              => 'string',
+        'actor_id'        => 'integer',
         'target_actor_id' => '?integer',
-        'post_id' => '?string',
-        'type' => 'string',
-        'payload' => 'json',
-        'status' => '?string',
+        'post_id'         => '?string',
+        'type'            => 'string',
+        'payload'         => 'json',
+        'status'          => '?string',
     ];
 
     public function getActor(): Actor

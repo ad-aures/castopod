@@ -20,18 +20,18 @@ class AddPages extends Migration
     {
         $this->forge->addField([
             'id' => [
-                'type' => 'INT',
-                'unsigned' => true,
+                'type'           => 'INT',
+                'unsigned'       => true,
                 'auto_increment' => true,
             ],
             'title' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 255,
             ],
             'slug' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 128,
-                'unique' => true,
+                'unique'     => true,
             ],
             'content_markdown' => [
                 'type' => 'TEXT',

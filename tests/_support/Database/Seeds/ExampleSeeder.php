@@ -12,24 +12,24 @@ class ExampleSeeder extends Seeder
     {
         $factories = [
             [
-                'name' => 'Test Factory',
-                'uid' => 'test001',
-                'class' => 'Factories\Tests\NewFactory',
-                'icon' => 'fas fa-puzzle-piece',
+                'name'    => 'Test Factory',
+                'uid'     => 'test001',
+                'class'   => 'Factories\Tests\NewFactory',
+                'icon'    => 'fas fa-puzzle-piece',
                 'summary' => 'Longer sample text for testing',
             ],
             [
-                'name' => 'Widget Factory',
-                'uid' => 'widget',
-                'class' => 'Factories\Tests\WidgetPlant',
-                'icon' => 'fas fa-puzzle-piece',
+                'name'    => 'Widget Factory',
+                'uid'     => 'widget',
+                'class'   => 'Factories\Tests\WidgetPlant',
+                'icon'    => 'fas fa-puzzle-piece',
                 'summary' => 'Create widgets in your factory',
             ],
             [
-                'name' => 'Evil Factory',
-                'uid' => 'evil-maker',
-                'class' => 'Factories\Evil\MyFactory',
-                'icon' => 'fas fa-book-dead',
+                'name'    => 'Evil Factory',
+                'uid'     => 'evil-maker',
+                'class'   => 'Factories\Evil\MyFactory',
+                'icon'    => 'fas fa-book-dead',
                 'summary' => 'Abandon all hope, ye who enter here',
             ],
         ];

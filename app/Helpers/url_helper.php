@@ -74,7 +74,7 @@ if (! function_exists('extract_params_from_episode_uri')) {
 
         return [
             'podcastHandle' => $matches['podcastHandle'],
-            'episodeSlug' => $matches['episodeSlug'],
+            'episodeSlug'   => $matches['episodeSlug'],
         ];
     }
 }

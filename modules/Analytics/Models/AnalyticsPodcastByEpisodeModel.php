@@ -50,7 +50,7 @@ class AnalyticsPodcastByEpisodeModel extends Model
                 ->where([
                     'episode_id' => $episodeId,
                     'podcast_id' => $podcastId,
-                    'age <' => 60,
+                    'age <'      => 60,
                 ])
                 ->groupBy('labels')
                 ->orderBy('labels', 'ASC')

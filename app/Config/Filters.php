@@ -24,15 +24,15 @@ class Filters extends BaseConfig
      * @var array<string, string>
      */
     public array $aliases = [
-        'csrf' => CSRF::class,
-        'toolbar' => DebugToolbar::class,
-        'honeypot' => Honeypot::class,
-        'invalidchars' => InvalidChars::class,
-        'secureheaders' => SecureHeaders::class,
-        'permission' => PermissionFilter::class,
-        'fediverse' => FediverseFilter::class,
-        'allow-cors' => AllowCorsFilter::class,
-        'rest-api' => ApiFilter::class,
+        'csrf'           => CSRF::class,
+        'toolbar'        => DebugToolbar::class,
+        'honeypot'       => Honeypot::class,
+        'invalidchars'   => InvalidChars::class,
+        'secureheaders'  => SecureHeaders::class,
+        'permission'     => PermissionFilter::class,
+        'fediverse'      => FediverseFilter::class,
+        'allow-cors'     => AllowCorsFilter::class,
+        'rest-api'       => ApiFilter::class,
         'podcast-unlock' => PodcastUnlockFilter::class,
     ];
 

@@ -92,8 +92,8 @@ class PostController extends FediversePostController
         if (! ($cachedView = cache($cacheName))) {
             $data = [
                 'metatags' => get_post_metatags($this->post),
-                'post' => $this->post,
-                'podcast' => $this->podcast,
+                'post'     => $this->post,
+                'podcast'  => $this->podcast,
             ];
 
             // if user is logged in then send to the authenticated activity view
@@ -103,7 +103,7 @@ class PostController extends FediversePostController
             }
 
             return view('post/post', $data, [
-                'cache' => DECADE,
+                'cache'      => DECADE,
                 'cache_name' => $cacheName,
             ]);
         }
@@ -114,7 +114,7 @@ class PostController extends FediversePostController
     public function attemptCreate(): RedirectResponse
     {
         $rules = [
-            'message' => 'required|max_length[500]',
+            'message'     => 'required|max_length[500]',
             'episode_url' => 'valid_url_strict|permit_empty',
         ];
 
@@ -128,9 +128,9 @@ class PostController extends FediversePostController
         $message = $this->request->getPost('message');
 
         $newPost = new CastopodPost([
-            'actor_id' => interact_as_actor_id(),
+            'actor_id'     => interact_as_actor_id(),
             'published_at' => Time::now(),
-            'created_by' => user_id(),
+            'created_by'   => user_id(),
         ]);
 
         // get episode if episodeUrl has been set
@@ -174,11 +174,11 @@ class PostController extends FediversePostController
         }
 
         $newPost = new CastopodPost([
-            'actor_id' => interact_as_actor_id(),
+            'actor_id'       => interact_as_actor_id(),
             'in_reply_to_id' => $this->post->id,
-            'message' => $this->request->getPost('message'),
-            'published_at' => Time::now(),
-            'created_by' => user_id(),
+            'message'        => $this->request->getPost('message'),
+            'published_at'   => Time::now(),
+            'created_by'     => user_id(),
         ]);
 
         if ($this->post->episode_id !== null) {
@@ -227,9 +227,9 @@ class PostController extends FediversePostController
         $action = $this->request->getPost('action');
         return match ($action) {
             'favourite' => $this->attemptFavourite(),
-            'reblog' => $this->attemptReblog(),
-            'reply' => $this->attemptReply(),
-            default => redirect()
+            'reblog'    => $this->attemptReblog(),
+            'reply'     => $this->attemptReply(),
+            default     => redirect()
                 ->back()
                 ->withInput()
                 ->with('errors', 'error'),
@@ -251,16 +251,16 @@ class PostController extends FediversePostController
         if (! ($cachedView = cache($cacheName))) {
             $data = [
                 'metatags' => get_remote_actions_metatags($this->post, $action),
-                'podcast' => $this->podcast,
-                'actor' => $this->actor,
-                'post' => $this->post,
-                'action' => $action,
+                'podcast'  => $this->podcast,
+                'actor'    => $this->actor,
+                'post'     => $this->post,
+                'action'   => $action,
             ];
 
             helper('form');
 
             return view('post/remote_action', $data, [
-                'cache' => DECADE,
+                'cache'      => DECADE,
                 'cache_name' => $cacheName,
             ]);
         }

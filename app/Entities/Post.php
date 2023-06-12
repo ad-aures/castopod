@@ -26,18 +26,18 @@ class Post extends FediversePost
      * @var array<string, string>
      */
     protected $casts = [
-        'id' => 'string',
-        'uri' => 'string',
-        'actor_id' => 'integer',
-        'in_reply_to_id' => '?string',
-        'reblog_of_id' => '?string',
-        'episode_id' => '?integer',
-        'message' => 'string',
-        'message_html' => 'string',
+        'id'               => 'string',
+        'uri'              => 'string',
+        'actor_id'         => 'integer',
+        'in_reply_to_id'   => '?string',
+        'reblog_of_id'     => '?string',
+        'episode_id'       => '?integer',
+        'message'          => 'string',
+        'message_html'     => 'string',
         'favourites_count' => 'integer',
-        'reblogs_count' => 'integer',
-        'replies_count' => 'integer',
-        'created_by' => 'integer',
+        'reblogs_count'    => 'integer',
+        'replies_count'    => 'integer',
+        'created_by'       => 'integer',
     ];
 
     /**

@@ -20,31 +20,31 @@ class AddPodcastsPlatforms extends Migration
     {
         $this->forge->addField([
             'podcast_id' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
             ],
             'platform_slug' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 32,
             ],
             'link_url' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 512,
             ],
             'account_id' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 128,
-                'null' => true,
+                'null'       => true,
             ],
             'is_visible' => [
-                'type' => 'TINYINT',
+                'type'       => 'TINYINT',
                 'constraint' => 1,
-                'default' => 0,
+                'default'    => 0,
             ],
             'is_on_embed' => [
-                'type' => 'TINYINT',
+                'type'       => 'TINYINT',
                 'constraint' => 1,
-                'default' => 0,
+                'default'    => 0,
             ],
         ]);
 

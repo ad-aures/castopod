@@ -50,7 +50,7 @@ class AnalyticsWebsiteByRefererModel extends Model
                 ->selectSum('hits', 'values')
                 ->where([
                     'podcast_id' => $podcastId,
-                    'date >' => $oneWeekAgo,
+                    'date >'     => $oneWeekAgo,
                 ])
                 ->groupBy('labels')
                 ->orderBy('values', 'DESC')
@@ -77,7 +77,7 @@ class AnalyticsWebsiteByRefererModel extends Model
                 ->selectSum('hits', 'values')
                 ->where([
                     'podcast_id' => $podcastId,
-                    'date >' => $oneWeekAgo,
+                    'date >'     => $oneWeekAgo,
                 ])
                 ->groupBy('labels')
                 ->orderBy('values', 'DESC')
@@ -104,7 +104,7 @@ class AnalyticsWebsiteByRefererModel extends Model
                 ->selectSum('hits', 'values')
                 ->where([
                     'podcast_id' => $podcastId,
-                    'date >' => $oneYearAgo,
+                    'date >'     => $oneYearAgo,
                 ])
                 ->groupBy('labels')
                 ->orderBy('values', 'DESC')

@@ -54,7 +54,7 @@ class PodcastImportController extends BaseController
         $data = [
             'languageOptions' => $languageOptions,
             'categoryOptions' => $categoryOptions,
-            'browserLang' => get_browser_language($this->request->getServer('HTTP_ACCEPT_LANGUAGE')),
+            'browserLang'     => get_browser_language($this->request->getServer('HTTP_ACCEPT_LANGUAGE')),
         ];
 
         return view('podcast/import', $data);
@@ -65,10 +65,10 @@ class PodcastImportController extends BaseController
         helper(['media', 'misc']);
 
         $rules = [
-            'handle' => 'required|regex_match[/^[a-zA-Z0-9\_]{1,32}$/]',
+            'handle'            => 'required|regex_match[/^[a-zA-Z0-9\_]{1,32}$/]',
             'imported_feed_url' => 'required|valid_url_strict',
-            'season_number' => 'is_natural_no_zero|permit_empty',
-            'max_episodes' => 'is_natural_no_zero|permit_empty',
+            'season_number'     => 'is_natural_no_zero|permit_empty',
+            'max_episodes'      => 'is_natural_no_zero|permit_empty',
         ];
 
         if (! $this->validate($rules)) {
@@ -140,50 +140,50 @@ class PodcastImportController extends BaseController
             $db->transStart();
 
             $podcast = new Podcast([
-                'guid' => $guid,
-                'handle' => $this->request->getPost('handle'),
-                'imported_feed_url' => $this->request->getPost('imported_feed_url'),
-                'new_feed_url' => url_to('podcast-rss-feed', $this->request->getPost('handle')),
-                'title' => (string) $feed->channel[0]->title,
+                'guid'                 => $guid,
+                'handle'               => $this->request->getPost('handle'),
+                'imported_feed_url'    => $this->request->getPost('imported_feed_url'),
+                'new_feed_url'         => url_to('podcast-rss-feed', $this->request->getPost('handle')),
+                'title'                => (string) $feed->channel[0]->title,
                 'description_markdown' => $converter->convert($channelDescriptionHtml),
-                'description_html' => $channelDescriptionHtml,
-                'cover' => $coverFile,
-                'banner' => null,
-                'language_code' => $this->request->getPost('language'),
-                'category_id' => $this->request->getPost('category'),
-                'parental_advisory' =>
-                property_exists($nsItunes, 'explicit') && $nsItunes->explicit !== null
+                'description_html'     => $channelDescriptionHtml,
+                'cover'                => $coverFile,
+                'banner'               => null,
+                'language_code'        => $this->request->getPost('language'),
+                'category_id'          => $this->request->getPost('category'),
+                'parental_advisory'    => property_exists($nsItunes, 'explicit') && $nsItunes->explicit !== null
                     ? (in_array((string) $nsItunes->explicit, ['yes', 'true'], true)
                         ? 'explicit'
                         : (in_array((string) $nsItunes->explicit, ['no', 'false'], true)
                             ? 'clean'
                             : null))
                     : null,
-                'owner_name' => (string) $nsItunes->owner->name,
+                'owner_name'  => (string) $nsItunes->owner->name,
                 'owner_email' => (string) $nsItunes->owner->email,
-                'publisher' => (string) $nsItunes->author,
-                'type' => property_exists(
+                'publisher'   => (string) $nsItunes->author,
+                'type'        => property_exists(
                     $nsItunes,
                     'type'
                 ) && $nsItunes->type !== null ? (string) $nsItunes->type : 'episodic',
-                'copyright' => (string) $feed->channel[0]->copyright,
-                'is_blocked' =>
-                property_exists($nsItunes, 'block') && $nsItunes->block !== null && (string) $nsItunes->block === 'yes',
-                'is_completed' =>
-                property_exists(
+                'copyright'  => (string) $feed->channel[0]->copyright,
+                'is_blocked' => property_exists(
+                    $nsItunes,
+                    'block'
+                ) && $nsItunes->block !== null && (string) $nsItunes->block === 'yes',
+                'is_completed' => property_exists(
                     $nsItunes,
                     'complete'
                 ) && $nsItunes->complete !== null && (string) $nsItunes->complete === 'yes',
-                'location' => $location,
+                'location'   => $location,
                 'created_by' => user_id(),
                 'updated_by' => user_id(),
             ]);
-        } catch (ErrorException $ex) {
+        } catch (ErrorException $errorException) {
             return redirect()
                 ->back()
                 ->withInput()
                 ->with('errors', [
-                    $ex->getMessage() .
+                    $errorException->getMessage() .
                         ': <a href="' .
                         $this->request->getPost('imported_feed_url') .
                         '" rel="noreferrer noopener" target="_blank">' .
@@ -210,22 +210,22 @@ class PodcastImportController extends BaseController
         $podcastsPlatformsData = [];
         $platformTypes = [
             [
-                'name' => 'podcasting',
-                'elements' => $nsPodcast->id,
+                'name'            => 'podcasting',
+                'elements'        => $nsPodcast->id,
                 'account_url_key' => 'url',
-                'account_id_key' => 'id',
+                'account_id_key'  => 'id',
             ],
             [
-                'name' => 'social',
-                'elements' => $nsPodcast->social,
+                'name'            => 'social',
+                'elements'        => $nsPodcast->social,
                 'account_url_key' => 'accountUrl',
-                'account_id_key' => 'accountId',
+                'account_id_key'  => 'accountId',
             ],
             [
-                'name' => 'funding',
-                'elements' => $nsPodcast->funding,
+                'name'            => 'funding',
+                'elements'        => $nsPodcast->funding,
                 'account_url_key' => 'url',
-                'account_id_key' => 'id',
+                'account_id_key'  => 'id',
             ],
         ];
         $platformModel = new PlatformModel();
@@ -236,10 +236,10 @@ class PodcastImportController extends BaseController
                 if ($platformModel->getPlatform($platformSlug) instanceof Platform) {
                     $podcastsPlatformsData[] = [
                         'platform_slug' => $platformSlug,
-                        'podcast_id' => $newPodcastId,
-                        'link_url' => $platform->attributes()[$platformType['account_url_key']],
-                        'account_id' => $platform->attributes()[$platformType['account_id_key']],
-                        'is_visible' => false,
+                        'podcast_id'    => $newPodcastId,
+                        'link_url'      => $platform->attributes()[$platformType['account_url_key']],
+                        'account_id'    => $platform->attributes()[$platformType['account_id_key']],
+                        'is_visible'    => false,
                     ];
                 }
             }
@@ -257,12 +257,12 @@ class PodcastImportController extends BaseController
                 $newPersonId = $newPerson->id;
             } else {
                 $newPodcastPerson = new Person([
-                    'full_name' => $fullName,
-                    'unique_name' => slugify($fullName),
+                    'full_name'       => $fullName,
+                    'unique_name'     => slugify($fullName),
                     'information_url' => $podcastPerson->attributes()['href'],
-                    'avatar' => download_file((string) $podcastPerson->attributes()['img']),
-                    'created_by' => user_id(),
-                    'updated_by' => user_id(),
+                    'avatar'          => download_file((string) $podcastPerson->attributes()['img']),
+                    'created_by'      => user_id(),
+                    'updated_by'      => user_id(),
                 ]);
 
                 if (! $newPersonId = $personModel->insert($newPodcastPerson)) {
@@ -329,10 +329,10 @@ class PodcastImportController extends BaseController
 
             $slugs[] = $slug;
             $itemDescriptionHtml = match ($this->request->getPost('description_field')) {
-                'content' => (string) $nsContent->encoded,
-                'summary' => (string) $nsItunes->summary,
+                'content'          => (string) $nsContent->encoded,
+                'summary'          => (string) $nsItunes->summary,
                 'subtitle_summary' => $nsItunes->subtitle . '<br/>' . $nsItunes->summary,
-                default => (string) $item->description,
+                default            => (string) $item->description,
             };
 
             if (
@@ -355,30 +355,27 @@ class PodcastImportController extends BaseController
 
             $newEpisode = new Episode([
                 'podcast_id' => $newPodcastId,
-                'title' => $item->title,
-                'slug' => $slug,
-                'guid' => $item->guid ?? null,
-                'audio' => download_file(
+                'title'      => $item->title,
+                'slug'       => $slug,
+                'guid'       => $item->guid ?? null,
+                'audio'      => download_file(
                     (string) $item->enclosure->attributes()['url'],
                     (string) $item->enclosure->attributes()['type']
                 ),
                 'description_markdown' => $converter->convert($itemDescriptionHtml),
-                'description_html' => $itemDescriptionHtml,
-                'cover' => $episodeCover,
-                'parental_advisory' =>
-                property_exists($nsItunes, 'explicit') && $nsItunes->explicit !== null
+                'description_html'     => $itemDescriptionHtml,
+                'cover'                => $episodeCover,
+                'parental_advisory'    => property_exists($nsItunes, 'explicit') && $nsItunes->explicit !== null
                     ? (in_array((string) $nsItunes->explicit, ['yes', 'true'], true)
                         ? 'explicit'
                         : (in_array((string) $nsItunes->explicit, ['no', 'false'], true)
                             ? 'clean'
                             : null))
                     : null,
-                'number' =>
-                $this->request->getPost('force_renumber') === 'yes'
+                'number' => $this->request->getPost('force_renumber') === 'yes'
                     ? $itemNumber
                     : ((string) $nsItunes->episode === '' ? null : (int) $nsItunes->episode),
-                'season_number' =>
-                $this->request->getPost('season_number') === ''
+                'season_number' => $this->request->getPost('season_number') === ''
                     ? ((string) $nsItunes->season === '' ? null : (int) $nsItunes->season)
                     : (int) $this->request->getPost('season_number'),
                 'type' => property_exists($nsItunes, 'episodeType') && in_array(
@@ -392,9 +389,9 @@ class PodcastImportController extends BaseController
                     $nsItunes,
                     'block'
                 ) && $nsItunes->block !== null && (string) $nsItunes->block === 'yes',
-                'location' => $location,
-                'created_by' => user_id(),
-                'updated_by' => user_id(),
+                'location'     => $location,
+                'created_by'   => user_id(),
+                'updated_by'   => user_id(),
                 'published_at' => strtotime((string) $item->pubDate),
             ]);
 
@@ -416,12 +413,12 @@ class PodcastImportController extends BaseController
                     $newPersonId = $newPerson->id;
                 } else {
                     $newPerson = new Person([
-                        'full_name' => $fullName,
-                        'unique_name' => slugify($fullName),
+                        'full_name'       => $fullName,
+                        'unique_name'     => slugify($fullName),
                         'information_url' => $episodePerson->attributes()['href'],
-                        'avatar' => download_file((string) $episodePerson->attributes()['img']),
-                        'created_by' => user_id(),
-                        'updated_by' => user_id(),
+                        'avatar'          => download_file((string) $episodePerson->attributes()['img']),
+                        'created_by'      => user_id(),
+                        'updated_by'      => user_id(),
                     ]);
 
                     if (! ($newPersonId = $personModel->insert($newPerson))) {
@@ -563,12 +560,12 @@ class PodcastImportController extends BaseController
             $textToSlugify = (string) $item->title;
             $slug = slugify($textToSlugify, 120);
             if (in_array($slug, $slugs, true) || (new EpisodeModel())->where([
-                'slug' => $slug,
+                'slug'       => $slug,
                 'podcast_id' => $this->podcast->id,
             ])->first()) {
                 $slugNumber = 2;
                 while (in_array($slug . '-' . $slugNumber, $slugs, true) || (new EpisodeModel())->where([
-                    'slug' => $slug . '-' . $slugNumber,
+                    'slug'       => $slug . '-' . $slugNumber,
                     'podcast_id' => $this->podcast->id,
                 ])->first()) {
                     ++$slugNumber;
@@ -601,36 +598,35 @@ class PodcastImportController extends BaseController
 
             $newEpisode = new Episode([
                 'podcast_id' => $this->podcast->id,
-                'title' => $item->title,
-                'slug' => $slug,
-                'guid' => $item->guid ?? null,
-                'audio' => download_file(
+                'title'      => $item->title,
+                'slug'       => $slug,
+                'guid'       => $item->guid ?? null,
+                'audio'      => download_file(
                     (string) $item->enclosure->attributes()['url'],
                     (string) $item->enclosure->attributes()['type']
                 ),
                 'description_markdown' => $converter->convert($itemDescriptionHtml),
-                'description_html' => $itemDescriptionHtml,
-                'cover' => $episodeCover,
-                'parental_advisory' =>
-                property_exists($nsItunes, 'explicit') && $nsItunes->explicit !== null
+                'description_html'     => $itemDescriptionHtml,
+                'cover'                => $episodeCover,
+                'parental_advisory'    => property_exists($nsItunes, 'explicit') && $nsItunes->explicit !== null
                 ? (in_array((string) $nsItunes->explicit, ['yes', 'true'], true)
                 ? 'explicit'
                 : (in_array((string) $nsItunes->explicit, ['no', 'false'], true)
                 ? 'clean'
                 : null))
                 : null,
-                'number' => ((string) $nsItunes->episode === '' ? null : (int) $nsItunes->episode),
+                'number'        => ((string) $nsItunes->episode === '' ? null : (int) $nsItunes->episode),
                 'season_number' => ((string) $nsItunes->season === '' ? null : (int) $nsItunes->season),
-                'type' => property_exists($nsItunes, 'episodeType') && $nsItunes->episodeType !== null
+                'type'          => property_exists($nsItunes, 'episodeType') && $nsItunes->episodeType !== null
                 ? (string) $nsItunes->episodeType
                 : 'full',
                 'is_blocked' => property_exists(
                     $nsItunes,
                     'block'
                 ) && $nsItunes->block !== null && (string) $nsItunes->block === 'yes',
-                'location' => $location,
-                'created_by' => user_id(),
-                'updated_by' => user_id(),
+                'location'     => $location,
+                'created_by'   => user_id(),
+                'updated_by'   => user_id(),
                 'published_at' => strtotime((string) $item->pubDate),
             ]);
 
@@ -652,12 +648,12 @@ class PodcastImportController extends BaseController
                     $newPersonId = $newPerson->id;
                 } else {
                     $newPerson = new Person([
-                        'full_name' => $fullName,
-                        'unique_name' => slugify($fullName),
+                        'full_name'       => $fullName,
+                        'unique_name'     => slugify($fullName),
                         'information_url' => $episodePerson->attributes()['href'],
-                        'avatar' => download_file((string) $episodePerson->attributes()['img']),
-                        'created_by' => user_id(),
-                        'updated_by' => user_id(),
+                        'avatar'          => download_file((string) $episodePerson->attributes()['img']),
+                        'created_by'      => user_id(),
+                        'updated_by'      => user_id(),
                     ]);
 
                     if (! ($newPersonId = $personModel->insert($newPerson))) {

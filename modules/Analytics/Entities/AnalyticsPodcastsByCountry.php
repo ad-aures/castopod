@@ -34,9 +34,9 @@ class AnalyticsPodcastsByCountry extends Entity
      * @var array<string, string>
      */
     protected $casts = [
-        'podcast_id' => 'integer',
+        'podcast_id'   => 'integer',
         'country_code' => 'string',
-        'hits' => 'integer',
+        'hits'         => 'integer',
     ];
 
     public function getLabels(): string

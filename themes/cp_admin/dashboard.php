@@ -20,7 +20,7 @@
     ], null, false)) : lang('Dashboard.episodes.not_found') ?>"><?= $episodesData['number_of_episodes'] ?></DashboardCard>
     <DashboardCard glyph="database" title="<?= lang('Dashboard.storage.title') ?>" subtitle="<?= lang('Dashboard.storage.subtitle', [
         'totalUploaded' => $storageData['total_uploaded'],
-        'totalStorage' => $storageData['limit'],
+        'totalStorage'  => $storageData['limit'],
     ]) ?>"><?= $storageData['percentage'] ?>%</DashboardCard>
 </div>
 

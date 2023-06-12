@@ -53,7 +53,7 @@ if (is_file($file)) {
                 if (! $found) {
                     $array['repositories'][] = [
                         'type' => 'vcs',
-                        'url' => GITHUB_URL,
+                        'url'  => GITHUB_URL,
                     ];
                 }
 

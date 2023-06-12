@@ -54,12 +54,12 @@ class Notification extends UuidEntity
      * @var array<string, string>
      */
     protected $casts = [
-        'id' => 'integer',
-        'actor_id' => 'integer',
+        'id'              => 'integer',
+        'actor_id'        => 'integer',
         'target_actor_id' => 'integer',
-        'post_id' => '?string',
-        'activity_id' => 'string',
-        'type' => 'string',
+        'post_id'         => '?string',
+        'activity_id'     => 'string',
+        'type'            => 'string',
     ];
 
     public function getActor(): ?Actor

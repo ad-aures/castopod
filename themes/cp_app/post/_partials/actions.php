@@ -100,10 +100,10 @@
         route_to('post-remote-action', esc($podcast->handle), $post->id, 'reblog'),
         icon('repeat', 'text-2xl mr-1 opacity-40') . $post->reblogs_count,
         [
-            'class' => 'inline-flex items-center hover:underline',
-            'width' => 420,
+            'class'  => 'inline-flex items-center hover:underline',
+            'width'  => 420,
             'height' => 620,
-            'title' => lang('Post.reblogs', [
+            'title'  => lang('Post.reblogs', [
                 'numberOfReblogs' => $post->reblogs_count,
             ]),
         ],
@@ -112,10 +112,10 @@
         route_to('post-remote-action', esc($podcast->handle), $post->id, 'favourite'),
         icon('heart', 'text-2xl mr-1 opacity-40') . $post->favourites_count,
         [
-            'class' => 'inline-flex items-center hover:underline',
-            'width' => 420,
+            'class'  => 'inline-flex items-center hover:underline',
+            'width'  => 420,
             'height' => 620,
-            'title' => lang('Post.favourites', [
+            'title'  => lang('Post.favourites', [
                 'numberOfFavourites' => $post->favourites_count,
             ]),
         ],

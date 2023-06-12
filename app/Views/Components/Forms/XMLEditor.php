@@ -10,7 +10,7 @@ class XMLEditor extends FormComponent
      * @var array<string, string>
      */
     protected array $attributes = [
-        'rows' => '5',
+        'rows'  => '5',
         'class' => 'textarea',
     ];
 

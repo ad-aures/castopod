@@ -26,8 +26,8 @@
 <div class="flex flex-col gap-y-4">
     <?php foreach ($episode->posts as $key => $post): ?>
         <?= view('post/_partials/card', [
-    'index' => $key,
-            'post' => $post,
+    'index'           => $key,
+            'post'    => $post,
             'podcast' => $podcast,
 ]) ?>
     <?php endforeach; ?>

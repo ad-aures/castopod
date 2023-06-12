@@ -22,13 +22,13 @@
     [
         [
             'header' => lang('Fediverse.list.actor'),
-            'cell' => function ($blockedActor) {
+            'cell'   => function ($blockedActor) {
                 return esc($blockedActor->username);
             },
         ],
         [
             'header' => lang('Common.actions'),
-            'cell' => function ($blockedActor) {
+            'cell'   => function ($blockedActor) {
                 return '<form action="' .
                     route_to('fediverse-attempt-unblock-actor') .
                     '" method="POST">' .

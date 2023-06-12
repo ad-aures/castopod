@@ -18,57 +18,57 @@ class AddClips extends Migration
     {
         $this->forge->addField([
             'id' => [
-                'type' => 'INT',
-                'unsigned' => true,
+                'type'           => 'INT',
+                'unsigned'       => true,
                 'auto_increment' => true,
             ],
             'podcast_id' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
             ],
             'episode_id' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
             ],
             'start_time' => [
-                'type' => 'DECIMAL(8,3)',
+                'type'     => 'DECIMAL(8,3)',
                 'unsigned' => true,
             ],
             'duration' => [
                 // clip duration cannot be higher than 9999,999 seconds ~ 2.77 hours
-                'type' => 'DECIMAL(7,3)',
+                'type'     => 'DECIMAL(7,3)',
                 'unsigned' => true,
             ],
             'title' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 128,
             ],
             'type' => [
-                'type' => 'ENUM',
+                'type'       => 'ENUM',
                 'constraint' => ['audio', 'video'],
             ],
             'media_id' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
-                'null' => true,
+                'null'     => true,
             ],
             'metadata' => [
                 'type' => 'JSON',
                 'null' => true,
             ],
             'status' => [
-                'type' => 'ENUM',
+                'type'       => 'ENUM',
                 'constraint' => ['queued', 'pending', 'running', 'passed', 'failed'],
             ],
             'logs' => [
                 'type' => 'TEXT',
             ],
             'created_by' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
             ],
             'updated_by' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
             ],
             'job_started_at' => [

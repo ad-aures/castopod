@@ -172,42 +172,42 @@ class Podcast extends Entity
      * @var array<string, string>
      */
     protected $casts = [
-        'id' => 'integer',
-        'guid' => 'string',
-        'actor_id' => 'integer',
-        'handle' => 'string',
-        'title' => 'string',
-        'description_markdown' => 'string',
-        'description_html' => 'string',
-        'cover_id' => 'int',
-        'banner_id' => '?int',
-        'language_code' => 'string',
-        'category_id' => 'integer',
-        'parental_advisory' => '?string',
-        'publisher' => '?string',
-        'owner_name' => 'string',
-        'owner_email' => 'string',
-        'type' => 'string',
-        'copyright' => '?string',
+        'id'                                  => 'integer',
+        'guid'                                => 'string',
+        'actor_id'                            => 'integer',
+        'handle'                              => 'string',
+        'title'                               => 'string',
+        'description_markdown'                => 'string',
+        'description_html'                    => 'string',
+        'cover_id'                            => 'int',
+        'banner_id'                           => '?int',
+        'language_code'                       => 'string',
+        'category_id'                         => 'integer',
+        'parental_advisory'                   => '?string',
+        'publisher'                           => '?string',
+        'owner_name'                          => 'string',
+        'owner_email'                         => 'string',
+        'type'                                => 'string',
+        'copyright'                           => '?string',
         'episode_description_footer_markdown' => '?string',
-        'episode_description_footer_html' => '?string',
-        'is_blocked' => 'boolean',
-        'is_completed' => 'boolean',
-        'is_locked' => 'boolean',
-        'is_premium_by_default' => 'boolean',
-        'imported_feed_url' => '?string',
-        'new_feed_url' => '?string',
-        'location_name' => '?string',
-        'location_geo' => '?string',
-        'location_osm' => '?string',
-        'payment_pointer' => '?string',
-        'custom_rss' => '?json-array',
-        'is_published_on_hubs' => 'boolean',
-        'partner_id' => '?string',
-        'partner_link_url' => '?string',
-        'partner_image_url' => '?string',
-        'created_by' => 'integer',
-        'updated_by' => 'integer',
+        'episode_description_footer_html'     => '?string',
+        'is_blocked'                          => 'boolean',
+        'is_completed'                        => 'boolean',
+        'is_locked'                           => 'boolean',
+        'is_premium_by_default'               => 'boolean',
+        'imported_feed_url'                   => '?string',
+        'new_feed_url'                        => '?string',
+        'location_name'                       => '?string',
+        'location_geo'                        => '?string',
+        'location_osm'                        => '?string',
+        'payment_pointer'                     => '?string',
+        'custom_rss'                          => '?json-array',
+        'is_published_on_hubs'                => 'boolean',
+        'partner_id'                          => '?string',
+        'partner_link_url'                    => '?string',
+        'partner_image_url'                   => '?string',
+        'created_by'                          => 'integer',
+        'updated_by'                          => 'integer',
     ];
 
     public function getAtHandle(): string
@@ -244,10 +244,10 @@ class Podcast extends Entity
         } else {
             $cover = new Image([
                 'file_key' => 'podcasts/' . $this->attributes['handle'] . '/cover.' . $file->getExtension(),
-                'sizes' => config('Images')
+                'sizes'    => config('Images')
 ->podcastCoverSizes,
                 'uploaded_by' => user_id(),
-                'updated_by' => user_id(),
+                'updated_by'  => user_id(),
             ]);
             $cover->setFile($file);
 
@@ -281,10 +281,10 @@ class Podcast extends Entity
         } else {
             $banner = new Image([
                 'file_key' => 'podcasts/' . $this->attributes['handle'] . '/banner.' . $file->getExtension(),
-                'sizes' => config('Images')
+                'sizes'    => config('Images')
 ->podcastBannerSizes,
                 'uploaded_by' => user_id(),
-                'updated_by' => user_id(),
+                'updated_by'  => user_id(),
             ]);
             $banner->setFile($file);
 
@@ -420,7 +420,7 @@ class Podcast extends Entity
     public function setDescriptionMarkdown(string $descriptionMarkdown): static
     {
         $config = [
-            'html_input' => 'escape',
+            'html_input'         => 'escape',
             'allow_unsafe_links' => false,
         ];
 
@@ -452,7 +452,7 @@ class Podcast extends Entity
         }
 
         $config = [
-            'html_input' => 'escape',
+            'html_input'         => 'escape',
             'allow_unsafe_links' => false,
         ];
 

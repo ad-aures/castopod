@@ -20,24 +20,24 @@ class AddPodcastsPersons extends Migration
     {
         $this->forge->addField([
             'id' => [
-                'type' => 'INT',
-                'unsigned' => true,
+                'type'           => 'INT',
+                'unsigned'       => true,
                 'auto_increment' => true,
             ],
             'podcast_id' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
             ],
             'person_id' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
             ],
             'person_group' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 32,
             ],
             'person_role' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 32,
             ],
         ]);

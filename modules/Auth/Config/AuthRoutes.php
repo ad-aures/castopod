@@ -32,7 +32,7 @@ class AuthRoutes extends ShieldAuthRoutes
                 'verify-magic-link', // Route name
             ],
         ],
-        'logout' => [['get', 'logout', 'LoginController::logoutAction', 'logout']],
+        'logout'       => [['get', 'logout', 'LoginController::logoutAction', 'logout']],
         'auth-actions' => [
             ['get', 'auth/a/show', 'ActionController::show', 'auth-action-show'],
             ['post', 'auth/a/handle', 'ActionController::handle', 'auth-action-handle'],

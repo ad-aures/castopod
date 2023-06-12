@@ -29,10 +29,10 @@ class Category extends Entity
      * @var array<string, string>
      */
     protected $casts = [
-        'id' => 'integer',
-        'parent_id' => '?integer',
-        'code' => 'string',
-        'apple_category' => 'string',
+        'id'              => 'integer',
+        'parent_id'       => '?integer',
+        'code'            => 'string',
+        'apple_category'  => 'string',
         'google_category' => 'string',
     ];
 

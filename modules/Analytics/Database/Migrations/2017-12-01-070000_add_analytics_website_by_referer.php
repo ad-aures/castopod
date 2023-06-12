@@ -20,31 +20,31 @@ class AddAnalyticsWebsiteByReferer extends Migration
     {
         $this->forge->addField([
             'podcast_id' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
             ],
             'date' => [
                 'type' => 'DATE',
             ],
             'referer_url' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 512,
             ],
             'domain' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 128,
-                'null' => true,
+                'null'       => true,
             ],
             'keywords' => [
                 'type' => 'VARCHAR',
                 // length of referer_url (512) - domain (128) = 384
                 'constraint' => 384,
-                'null' => true,
+                'null'       => true,
             ],
             'hits' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
-                'default' => 1,
+                'default'  => 1,
             ],
         ]);
         $this->forge->addPrimaryKey(['podcast_id', 'date', 'referer_url']);

@@ -52,7 +52,7 @@ class FollowModel extends BaseModel
             $this->db->transStart();
 
             $this->insert([
-                'actor_id' => $actor->id,
+                'actor_id'        => $actor->id,
                 'target_actor_id' => $targetActor->id,
             ]);
 
@@ -107,7 +107,7 @@ class FollowModel extends BaseModel
         $this->db->transStart();
 
         $this->where([
-            'actor_id' => $actor->id,
+            'actor_id'        => $actor->id,
             'target_actor_id' => $targetActor->id,
         ])->delete();
 
@@ -121,8 +121,8 @@ class FollowModel extends BaseModel
             // get follow activity from database
             $followActivity = model('ActivityModel', false)
                 ->where([
-                    'type' => 'Follow',
-                    'actor_id' => $actor->id,
+                    'type'            => 'Follow',
+                    'actor_id'        => $actor->id,
                     'target_actor_id' => $targetActor->id,
                 ])
                 ->first();

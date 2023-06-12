@@ -74,9 +74,9 @@ if (! function_exists('set_user_session_location')) {
 
         $location = [
             'countryCode' => 'N/A',
-            'regionCode' => 'N/A',
-            'latitude' => null,
-            'longitude' => null,
+            'regionCode'  => 'N/A',
+            'latitude'    => null,
+            'longitude'   => null,
         ];
 
         // Finds location:
@@ -92,7 +92,7 @@ if (! function_exists('set_user_session_location')) {
                     'regionCode' => $city->subdivisions[0]->isoCode === null
                         ? 'N/A'
                         : $city->subdivisions[0]->isoCode,
-                    'latitude' => round($city->location->latitude, 3),
+                    'latitude'  => round($city->location->latitude, 3),
                     'longitude' => round($city->location->longitude, 3),
                 ];
                 // If things go wrong the show must go on and the user must be able to download the file
@@ -127,10 +127,10 @@ if (! function_exists('set_user_session_player')) {
                 $session->set('player', $playerFound);
             } else {
                 $session->set('player', [
-                    'app' => '- unknown -',
+                    'app'    => '- unknown -',
                     'device' => '',
-                    'os' => '',
-                    'bot' => 0,
+                    'os'     => '',
+                    'bot'    => 0,
                 ]);
                 // Add to unknown list
                 try {

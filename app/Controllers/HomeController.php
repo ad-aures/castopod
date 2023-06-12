@@ -36,7 +36,7 @@ class HomeController extends BaseController
         $data = [
             'metatags' => get_home_metatags(),
             'podcasts' => $allPodcasts,
-            'sortBy' => $sortBy,
+            'sortBy'   => $sortBy,
         ];
 
         return view('home', $data);
@@ -69,14 +69,14 @@ class HomeController extends BaseController
         if ($errors !== []) {
             return $this->response->setStatusCode(503)
                 ->setJSON([
-                    'code' => 503,
+                    'code'   => 503,
                     'errors' => $errors,
                 ]);
         }
 
         return $this->response->setStatusCode(200)
             ->setJSON([
-                'code' => 200,
+                'code'    => 200,
                 'message' => '✨ All good!',
             ]);
     }

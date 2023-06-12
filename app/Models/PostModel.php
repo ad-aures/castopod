@@ -63,8 +63,8 @@ class PostModel extends FediversePostModel
             ->select('p2.id, p1.episode_id')
             ->where([
                 'p2.in_reply_to_id IS NOT' => null,
-                'p2.episode_id' => null,
-                'p1.episode_id IS NOT' => null,
+                'p2.episode_id'            => null,
+                'p1.episode_id IS NOT'     => null,
             ])
             ->get()
             ->getResultArray();

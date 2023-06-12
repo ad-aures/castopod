@@ -18,21 +18,21 @@ class AddMedia extends Migration
     {
         $this->forge->addField([
             'id' => [
-                'type' => 'INT',
-                'unsigned' => true,
+                'type'           => 'INT',
+                'unsigned'       => true,
                 'auto_increment' => true,
             ],
             'file_path' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 255,
             ],
             'file_size' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
-                'comment' => 'File size in bytes',
+                'comment'  => 'File size in bytes',
             ],
             'file_mimetype' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 45,
             ],
             'file_metadata' => [
@@ -40,28 +40,28 @@ class AddMedia extends Migration
                 'null' => true,
             ],
             'type' => [
-                'type' => 'ENUM',
+                'type'       => 'ENUM',
                 'constraint' => ['image', 'audio', 'video', 'transcript', 'chapters', 'document'],
-                'default' => 'document',
+                'default'    => 'document',
             ],
             'description' => [
                 'type' => 'TEXT',
                 'null' => true,
             ],
             'language_code' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 2,
-                'null' => true,
+                'null'       => true,
             ],
             'uploaded_by' => [
-                'type' => 'INT',
+                'type'       => 'INT',
                 'constraint' => 11,
-                'unsigned' => true,
+                'unsigned'   => true,
             ],
             'updated_by' => [
-                'type' => 'INT',
+                'type'       => 'INT',
                 'constraint' => 11,
-                'unsigned' => true,
+                'unsigned'   => true,
             ],
             'uploaded_at' => [
                 'type' => 'DATETIME',

@@ -23,8 +23,8 @@ class Analytics extends BaseConfig
      * @var array<string, string>
      */
     public array $routeFilters = [
-        'analytics-full-data' => 'permission:podcast#.view',
-        'analytics-data' => 'permission:podcast#.view',
+        'analytics-full-data'     => 'permission:podcast#.view',
+        'analytics-data'          => 'permission:podcast#.view',
         'analytics-filtered-data' => 'permission:podcast#.view',
     ];
 

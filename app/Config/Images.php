@@ -26,7 +26,7 @@ class Images extends BaseConfig
      * @var array<string, string>
      */
     public array $handlers = [
-        'gd' => GDHandler::class,
+        'gd'      => GDHandler::class,
         'imagick' => ImageMagickHandler::class,
     ];
 
@@ -51,55 +51,55 @@ class Images extends BaseConfig
      */
     public array $podcastCoverSizes = [
         'tiny' => [
-            'width' => 40,
-            'height' => 40,
-            'mimetype' => 'image/webp',
+            'width'     => 40,
+            'height'    => 40,
+            'mimetype'  => 'image/webp',
             'extension' => 'webp',
         ],
         'thumbnail' => [
-            'width' => 150,
-            'height' => 150,
-            'mimetype' => 'image/webp',
+            'width'     => 150,
+            'height'    => 150,
+            'mimetype'  => 'image/webp',
             'extension' => 'webp',
         ],
         'medium' => [
-            'width' => 320,
-            'height' => 320,
-            'mimetype' => 'image/webp',
+            'width'     => 320,
+            'height'    => 320,
+            'mimetype'  => 'image/webp',
             'extension' => 'webp',
         ],
         'large' => [
-            'width' => 1024,
-            'height' => 1024,
-            'mimetype' => 'image/webp',
+            'width'     => 1024,
+            'height'    => 1024,
+            'mimetype'  => 'image/webp',
             'extension' => 'webp',
         ],
         'feed' => [
-            'width' => 1400,
+            'width'  => 1400,
             'height' => 1400,
         ],
         'id3' => [
-            'width' => 500,
+            'width'  => 500,
             'height' => 500,
         ],
         'og' => [
-            'width' => 1200,
+            'width'  => 1200,
             'height' => 1200,
         ],
         'federation' => [
-            'width' => 400,
+            'width'  => 400,
             'height' => 400,
         ],
         'webmanifest192' => [
-            'width' => 192,
-            'height' => 192,
-            'mimetype' => 'image/png',
+            'width'     => 192,
+            'height'    => 192,
+            'mimetype'  => 'image/png',
             'extension' => 'png',
         ],
         'webmanifest512' => [
-            'width' => 512,
-            'height' => 512,
-            'mimetype' => 'image/png',
+            'width'     => 512,
+            'height'    => 512,
+            'mimetype'  => 'image/png',
             'extension' => 'png',
         ],
     ];
@@ -113,19 +113,19 @@ class Images extends BaseConfig
      */
     public array $podcastBannerSizes = [
         'small' => [
-            'width' => 320,
-            'height' => 128,
-            'mimetype' => 'image/webp',
+            'width'     => 320,
+            'height'    => 128,
+            'mimetype'  => 'image/webp',
             'extension' => 'webp',
         ],
         'medium' => [
-            'width' => 960,
-            'height' => 320,
-            'mimetype' => 'image/webp',
+            'width'     => 960,
+            'height'    => 320,
+            'mimetype'  => 'image/webp',
             'extension' => 'webp',
         ],
         'federation' => [
-            'width' => 1500,
+            'width'  => 1500,
             'height' => 500,
         ],
     ];
@@ -139,31 +139,31 @@ class Images extends BaseConfig
      */
     public array $podcastBannerDefaultPaths = [
         'default' => [
-            'path' => 'castopod-banner-pine.jpg',
+            'path'     => 'castopod-banner-pine.jpg',
             'mimetype' => 'image/jpeg',
         ],
         'pine' => [
-            'path' => 'castopod-banner-pine.jpg',
+            'path'     => 'castopod-banner-pine.jpg',
             'mimetype' => 'image/jpeg',
         ],
         'crimson' => [
-            'path' => 'castopod-banner-crimson.jpg',
+            'path'     => 'castopod-banner-crimson.jpg',
             'mimetype' => 'image/jpeg',
         ],
         'amber' => [
-            'path' => 'castopod-banner-amber.jpg',
+            'path'     => 'castopod-banner-amber.jpg',
             'mimetype' => 'image/jpeg',
         ],
         'lake' => [
-            'path' => 'castopod-banner-lake.jpg',
+            'path'     => 'castopod-banner-lake.jpg',
             'mimetype' => 'image/jpeg',
         ],
         'jacaranda' => [
-            'path' => 'castopod-banner-jacaranda.jpg',
+            'path'     => 'castopod-banner-jacaranda.jpg',
             'mimetype' => 'image/jpeg',
         ],
         'onyx' => [
-            'path' => 'castopod-banner-onyx.jpg',
+            'path'     => 'castopod-banner-onyx.jpg',
             'mimetype' => 'image/jpeg',
         ],
     ];
@@ -181,26 +181,25 @@ class Images extends BaseConfig
      */
     public array $personAvatarSizes = [
         'federation' => [
-            'width' => 400,
+            'width'  => 400,
             'height' => 400,
         ],
         'tiny' => [
-            'width' => 40,
-            'height' => 40,
-            'mimetype' => 'image/webp',
+            'width'     => 40,
+            'height'    => 40,
+            'mimetype'  => 'image/webp',
             'extension' => 'webp',
         ],
         'thumbnail' => [
-            'width' => 150,
-            'height' => 150,
-            'mimetype' => 'image/webp',
+            'width'     => 150,
+            'height'    => 150,
+            'mimetype'  => 'image/webp',
             'extension' => 'webp',
         ],
         'medium' => [
-            'width' => 320,
-            'height' => 320,
-            'mimetype' =>
-             'image/webp',
+            'width'     => 320,
+            'height'    => 320,
+            'mimetype'  => 'image/webp',
             'extension' => 'webp',
         ],
     ];

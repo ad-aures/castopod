@@ -20,21 +20,21 @@ class AddAnalyticsPodcastsByCountry extends Migration
     {
         $this->forge->addField([
             'podcast_id' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
             ],
             'date' => [
                 'type' => 'DATE',
             ],
             'country_code' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 3,
-                'comment' => 'ISO 3166-1 code.',
+                'comment'    => 'ISO 3166-1 code.',
             ],
             'hits' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
-                'default' => 1,
+                'default'  => 1,
             ],
         ]);
         $this->forge->addPrimaryKey(['podcast_id', 'date', 'country_code']);

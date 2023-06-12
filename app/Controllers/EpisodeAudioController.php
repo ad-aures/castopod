@@ -102,7 +102,7 @@ class EpisodeAudioController extends Controller
                     ->setJSON([
                         'errors' => [
                             'status' => 401,
-                            'title' => 'Unauthorized',
+                            'title'  => 'Unauthorized',
                             'detail' => 'Episode is premium, you must provide a token to unlock it.',
                         ],
                     ]);
@@ -117,7 +117,7 @@ class EpisodeAudioController extends Controller
                     ->setJSON([
                         'errors' => [
                             'status' => 401,
-                            'title' => 'Unauthorized',
+                            'title'  => 'Unauthorized',
                             'detail' => 'Invalid token!',
                         ],
                     ]);

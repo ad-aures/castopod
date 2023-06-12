@@ -84,19 +84,18 @@ class PodcastModel extends Model
      * @var array<string, string>
      */
     protected $validationRules = [
-        'title' => 'required',
-        'handle' =>
-            'required|regex_match[/^[a-zA-Z0-9\_]{1,32}$/]|is_unique[podcasts.handle,id,{id}]',
+        'title'                => 'required',
+        'handle'               => 'required|regex_match[/^[a-zA-Z0-9\_]{1,32}$/]|is_unique[podcasts.handle,id,{id}]',
         'description_markdown' => 'required',
-        'cover_id' => 'required',
-        'language_code' => 'required',
-        'category_id' => 'required',
-        'owner_email' => 'required|valid_email',
-        'new_feed_url' => 'valid_url_strict|permit_empty',
-        'type' => 'required',
-        'published_at' => 'valid_date|permit_empty',
-        'created_by' => 'required',
-        'updated_by' => 'required',
+        'cover_id'             => 'required',
+        'language_code'        => 'required',
+        'category_id'          => 'required',
+        'owner_email'          => 'required|valid_email',
+        'new_feed_url'         => 'valid_url_strict|permit_empty',
+        'type'                 => 'required',
+        'published_at'         => 'valid_date|permit_empty',
+        'created_by'           => 'required',
+        'updated_by'           => 'required',
     ];
 
     /**
@@ -249,8 +248,8 @@ class PodcastModel extends Model
                 ->builder()
                 ->select('YEAR(published_at) as year, count(*) as number_of_episodes')
                 ->where([
-                    'podcast_id' => $podcastId,
-                    'season_number' => null,
+                    'podcast_id'          => $podcastId,
+                    'season_number'       => null,
                     'published_at IS NOT' => null,
                 ])
                 ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
@@ -286,9 +285,9 @@ class PodcastModel extends Model
                 ->builder()
                 ->select('season_number, count(*) as number_of_episodes')
                 ->where([
-                    'podcast_id' => $podcastId,
+                    'podcast_id'           => $podcastId,
                     'season_number is not' => null,
-                    'published_at IS NOT' => null,
+                    'published_at IS NOT'  => null,
                 ])
                 ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
                 ->groupBy('season_number')
@@ -409,15 +408,15 @@ class PodcastModel extends Model
 
         $actorId = (new ActorModel())->insert(
             [
-                'uri' => url_to('actor', $username),
-                'username' => $username,
-                'domain' => $domain,
-                'private_key' => $privatekey,
-                'public_key' => $publickey,
-                'display_name' => $data['data']['title'],
-                'summary' => $data['data']['description_html'],
-                'inbox_url' => url_to('inbox', $username),
-                'outbox_url' => url_to('outbox', $username),
+                'uri'           => url_to('actor', $username),
+                'username'      => $username,
+                'domain'        => $domain,
+                'private_key'   => $privatekey,
+                'public_key'    => $publickey,
+                'display_name'  => $data['data']['title'],
+                'summary'       => $data['data']['description_html'],
+                'inbox_url'     => url_to('inbox', $username),
+                'outbox_url'    => url_to('outbox', $username),
                 'followers_url' => url_to('followers', $username),
             ],
             true,

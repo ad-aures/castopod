@@ -34,7 +34,7 @@ class ActorController extends FediverseActorController
         $data = [
             // @phpstan-ignore-next-line
             'metatags' => get_follow_metatags($this->actor),
-            'actor' => $this->actor,
+            'actor'    => $this->actor,
         ];
 
         return view('podcast/follow', $data);

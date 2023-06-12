@@ -36,12 +36,12 @@ class AnalyticsPodcastsByRegion extends Entity
      * @var array<string, string>
      */
     protected $casts = [
-        'podcast_id' => 'integer',
+        'podcast_id'   => 'integer',
         'country_code' => 'string',
-        'region_code' => '?string',
-        'latitude' => '?double',
-        'longitude' => '?double',
-        'hits' => 'integer',
+        'region_code'  => '?string',
+        'latitude'     => '?double',
+        'longitude'    => '?double',
+        'hits'         => 'integer',
     ];
 
     public function getCountryCode(): string

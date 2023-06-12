@@ -67,10 +67,9 @@
                     'mr-2 text-xl text-black/75 group-hover:text-black',
                 ) . lang('Podcast.follow'),
                 [
-                    'width' => 420,
+                    'width'  => 420,
                     'height' => 620,
-                    'class' =>
-                        'group inline-flex items-center px-4 text-xs tracking-wider font-semibold text-black uppercase rounded-full leading-8 shadow focus:ring-accent bg-white',
+                    'class'  => 'group inline-flex items-center px-4 text-xs tracking-wider font-semibold text-black uppercase rounded-full leading-8 shadow focus:ring-accent bg-white',
                 ],
             ) ?>
         </div>

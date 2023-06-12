@@ -28,19 +28,19 @@ class NodeInfo2Controller extends Controller
 
         $nodeInfo2 = [
             'version' => '1.0',
-            'server' => [
-                'baseUrl' => base_url(),
-                'name' => esc(service('settings') ->get('App.siteName')),
+            'server'  => [
+                'baseUrl'  => base_url(),
+                'name'     => esc(service('settings') ->get('App.siteName')),
                 'software' => 'Castopod',
-                'version' => CP_VERSION,
+                'version'  => CP_VERSION,
             ],
-            'protocols' => ['activitypub'],
+            'protocols'         => ['activitypub'],
             'openRegistrations' => config('Auth')
                 ->allowRegistration,
             'usage' => [
                 'users' => [
-                    'total' => $totalUsers,
-                    'activeMonth' => $activeMonth,
+                    'total'          => $totalUsers,
+                    'activeMonth'    => $activeMonth,
                     'activeHalfyear' => $activeHalfyear,
                 ],
                 'localPosts' => $totalPosts,

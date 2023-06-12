@@ -103,7 +103,7 @@ class SubscriptionController extends BaseController
     public function view(): string
     {
         $data = [
-            'podcast' => $this->podcast,
+            'podcast'      => $this->podcast,
             'subscription' => $this->subscription,
         ];
 
@@ -144,8 +144,8 @@ class SubscriptionController extends BaseController
 
         $newSubscription = new Subscription([
             'podcast_id' => $this->podcast->id,
-            'email' => $this->request->getPost('email'),
-            'token' => hash('sha256', $rawToken = random_string('alnum', 8)),
+            'email'      => $this->request->getPost('email'),
+            'token'      => hash('sha256', $rawToken = random_string('alnum', 8)),
             'expires_at' => $expiresAt,
             'created_by' => user_id(),
             'updated_by' => user_id(),
@@ -172,7 +172,7 @@ class SubscriptionController extends BaseController
             ], $this->podcast->language_code))
             ->setMessage(view('subscription/email/welcome', [
                 'subscription' => $newSubscription,
-                'token' => $rawToken,
+                'token'        => $rawToken,
             ]))->setMailType('html')
             ->send()) {
             $db->transRollback();
@@ -219,7 +219,7 @@ class SubscriptionController extends BaseController
             ->setSubject(lang('Subscription.emails.reset_subject', [], $this->podcast->language_code))
             ->setMessage(view('subscription/email/reset', [
                 'subscription' => $this->subscription,
-                'token' => $rawToken,
+                'token'        => $rawToken,
             ]))->setMailType('html')
             ->send()) {
             $db->transRollback();
@@ -244,7 +244,7 @@ class SubscriptionController extends BaseController
         helper('form');
 
         $data = [
-            'podcast' => $this->podcast,
+            'podcast'      => $this->podcast,
             'subscription' => $this->subscription,
         ];
 
@@ -312,7 +312,7 @@ class SubscriptionController extends BaseController
         helper('form');
 
         $data = [
-            'podcast' => $this->podcast,
+            'podcast'      => $this->podcast,
             'subscription' => $this->subscription,
         ];
 
@@ -407,7 +407,7 @@ class SubscriptionController extends BaseController
         helper('form');
 
         $data = [
-            'podcast' => $this->podcast,
+            'podcast'      => $this->podcast,
             'subscription' => $this->subscription,
         ];
 

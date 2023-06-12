@@ -35,8 +35,7 @@ class SettingsController extends BaseController
     public function attemptInstanceEdit(): RedirectResponse
     {
         $rules = [
-            'site_icon' =>
-                'is_image[site_icon]|ext_in[site_icon,png,jpeg]|is_image_ratio[site_icon,1,1]|min_dims[image,512,512]|permit_empty',
+            'site_icon' => 'is_image[site_icon]|ext_in[site_icon,png,jpeg]|is_image_ratio[site_icon,1,1]|min_dims[image,512,512]|permit_empty',
         ];
 
         if (! $this->validate($rules)) {
@@ -108,7 +107,7 @@ class SettingsController extends BaseController
             service('settings')
                 ->set('App.siteIcon', [
                     'ico' => "site/favicon.{$randomHash}.ico",
-                    '64' => "site/icon-64.{$randomHash}.png",
+                    '64'  => "site/icon-64.{$randomHash}.png",
                     '180' => "site/icon-180.{$randomHash}.png",
                     '192' => "site/icon-192.{$randomHash}.png",
                     '512' => "site/icon-512.{$randomHash}.png",

@@ -20,20 +20,20 @@ class AddActors extends Migration
     {
         $this->forge->addField([
             'id' => [
-                'type' => 'INT',
-                'unsigned' => true,
+                'type'           => 'INT',
+                'unsigned'       => true,
                 'auto_increment' => true,
             ],
             'uri' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 255,
             ],
             'username' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 32,
             ],
             'domain' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 255,
             ],
             'private_key' => [
@@ -45,7 +45,7 @@ class AddActors extends Migration
                 'null' => true,
             ],
             'display_name' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 128,
             ],
             'summary' => [
@@ -53,55 +53,55 @@ class AddActors extends Migration
                 'null' => true,
             ],
             'avatar_image_url' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 255,
-                'null' => true,
+                'null'       => true,
             ],
             // constraint is 13 because the longest safe mimetype for images is image/svg+xml,
             // see https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types#image_types
             'avatar_image_mimetype' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 13,
-                'null' => true,
+                'null'       => true,
             ],
             'cover_image_url' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 255,
-                'null' => true,
+                'null'       => true,
             ],
             'cover_image_mimetype' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 13,
-                'null' => true,
+                'null'       => true,
             ],
             'inbox_url' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 255,
             ],
             'outbox_url' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 255,
-                'null' => true,
+                'null'       => true,
             ],
             'followers_url' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 255,
-                'null' => true,
+                'null'       => true,
             ],
             'followers_count' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
-                'default' => 0,
+                'default'  => 0,
             ],
             'posts_count' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
-                'default' => 0,
+                'default'  => 0,
             ],
             'is_blocked' => [
-                'type' => 'TINYINT',
+                'type'       => 'TINYINT',
                 'constraint' => 1,
-                'default' => 0,
+                'default'    => 0,
             ],
             'created_at' => [
                 'type' => 'DATETIME',

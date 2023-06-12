@@ -5,13 +5,13 @@ if ($post->in_reply_to_id): ?>
         <div class="absolute z-0 w-[2px] h-full bg-base left-[43px] top-4"></div>
         <?= view('post/_partials/reply', [
             'podcast' => $podcast,
-            'reply' => $post->reply_to_post,
+            'reply'   => $post->reply_to_post,
         ]) ?>
     </div>
 <?php endif; ?>
 <?= view('post/_partials/card', [
-    'index' => $index,
-    'post' => $post,
+    'index'   => $index,
+    'post'    => $post,
     'podcast' => $podcast,
 ]) ?>
 <div class="-mt-2 overflow-hidden border-b border-l border-r border-subtle post-replies rounded-b-xl">
@@ -42,9 +42,8 @@ if ($post->in_reply_to_id): ?>
                     'actorUsername' => esc($post->actor->username),
                 ]),
                 [
-                    'class' =>
-                        'text-center justify-center font-semibold rounded-full shadow relative z-10 px-4 py-2 w-full bg-accent-base text-accent-contrast inline-flex items-center hover:bg-accent-hover',
-                    'width' => 420,
+                    'class'  => 'text-center justify-center font-semibold rounded-full shadow relative z-10 px-4 py-2 w-full bg-accent-base text-accent-contrast inline-flex items-center hover:bg-accent-hover',
+                    'width'  => 420,
                     'height' => 620,
                 ],
             ) ?>
@@ -56,7 +55,7 @@ if ($post->in_reply_to_id): ?>
         <?php foreach ($post->replies as $reply): ?>
             <?= view('post/_partials/reply', [
                 'podcast' => $podcast,
-                'reply' => $reply,
+                'reply'   => $reply,
             ]) ?>
         <?php endforeach; ?>
         </div>

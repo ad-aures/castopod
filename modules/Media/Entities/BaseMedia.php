@@ -43,16 +43,16 @@ class BaseMedia extends Entity
      * @var array<string, string>
      */
     protected $casts = [
-        'id' => 'integer',
-        'file_key' => 'string',
-        'file_size' => 'int',
+        'id'            => 'integer',
+        'file_key'      => 'string',
+        'file_size'     => 'int',
         'file_mimetype' => 'string',
         'file_metadata' => '?json-array',
-        'type' => 'string',
-        'description' => '?string',
+        'type'          => 'string',
+        'description'   => '?string',
         'language_code' => '?string',
-        'uploaded_by' => 'integer',
-        'updated_by' => 'integer',
+        'uploaded_by'   => 'integer',
+        'updated_by'    => 'integer',
     ];
 
     /**
@@ -69,8 +69,8 @@ class BaseMedia extends Entity
     {
         if ($this->file_key !== '') {
             [
-                'filename' => $filename,
-                'dirname' => $dirname,
+                'filename'  => $filename,
+                'dirname'   => $dirname,
                 'extension' => $extension,
             ] = pathinfo($this->file_key);
 

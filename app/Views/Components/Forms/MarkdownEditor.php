@@ -29,55 +29,55 @@ class MarkdownEditor extends FormComponent
             'mr-1 text-lg opacity-40'
         );
         $translations = [
-            'write' => lang('Common.forms.editor.write'),
+            'write'   => lang('Common.forms.editor.write'),
             'preview' => lang('Common.forms.editor.preview'),
-            'help' => lang('Common.forms.editor.help'),
+            'help'    => lang('Common.forms.editor.help'),
         ];
 
         $toolbarGroups = [
             [
                 [
                     'name' => 'header',
-                    'tag' => 'md-header',
+                    'tag'  => 'md-header',
                     'icon' => icon('heading'),
                 ],
                 [
                     'name' => 'bold',
-                    'tag' => 'md-bold',
+                    'tag'  => 'md-bold',
                     'icon' => icon('bold'),
                 ],
                 [
                     'name' => 'italic',
-                    'tag' => 'md-italic',
+                    'tag'  => 'md-italic',
                     'icon' => icon('italic'),
                 ],
             ],
             [
                 [
                     'name' => 'unordered-list',
-                    'tag' => 'md-unordered-list',
+                    'tag'  => 'md-unordered-list',
                     'icon' => icon('list-unordered'),
                 ],
                 [
                     'name' => 'ordered-list',
-                    'tag' => 'md-ordered-list ',
+                    'tag'  => 'md-ordered-list ',
                     'icon' => icon('list-ordered'),
                 ],
             ],
             [
                 [
                     'name' => 'quote',
-                    'tag' => 'md-quote',
+                    'tag'  => 'md-quote',
                     'icon' => icon('quote'),
                 ],
                 [
                     'name' => 'link',
-                    'tag' => 'md-link',
+                    'tag'  => 'md-link',
                     'icon' => icon('link'),
                 ],
                 [
                     'name' => 'image',
-                    'tag' => 'md-image',
+                    'tag'  => 'md-image',
                     'icon' => icon('image-add'),
                 ],
             ],

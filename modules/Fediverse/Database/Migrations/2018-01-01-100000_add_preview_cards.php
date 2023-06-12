@@ -20,46 +20,46 @@ class AddPreviewCards extends Migration
     {
         $this->forge->addField([
             'id' => [
-                'type' => 'INT',
-                'unsigned' => true,
+                'type'           => 'INT',
+                'unsigned'       => true,
                 'auto_increment' => true,
             ],
             'url' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 512,
             ],
             'title' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 128,
             ],
             'description' => [
                 'type' => 'TEXT',
             ],
             'type' => [
-                'type' => 'ENUM',
+                'type'       => 'ENUM',
                 'constraint' => ['link', 'video', 'image', 'rich'],
-                'default' => 'link',
+                'default'    => 'link',
             ],
             'author_name' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 64,
-                'null' => true,
+                'null'       => true,
             ],
             'author_url' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 255,
-                'null' => true,
+                'null'       => true,
             ],
             'provider_name' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 255,
             ],
             'provider_url' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 255,
             ],
             'image' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 255,
             ],
             'html' => [

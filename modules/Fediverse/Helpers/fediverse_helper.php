@@ -157,26 +157,26 @@ if (! function_exists('create_preview_card_from_url')) {
 
             if (array_key_exists('title', $media)) {
                 $typeMapping = [
-                    'photo' => 'image',
-                    'video' => 'video',
+                    'photo'   => 'image',
+                    'video'   => 'video',
                     'website' => 'link',
-                    'rich' => 'rich',
+                    'rich'    => 'rich',
                 ];
 
                 // Check that, at least, the url and title are set
                 $newPreviewCard = new PreviewCard([
-                    'url' => $mediaUrl,
-                    'title' => $media['title'] ?? '',
+                    'url'         => $mediaUrl,
+                    'title'       => $media['title'] ?? '',
                     'description' => $media['description'] ?? '',
-                    'type' => isset($typeMapping[$media['type']])
+                    'type'        => isset($typeMapping[$media['type']])
                         ? $typeMapping[$media['type']]
                         : 'link',
-                    'author_name' => $media['author_name'] ?? null,
-                    'author_url' => $media['author_url'] ?? null,
+                    'author_name'   => $media['author_name'] ?? null,
+                    'author_url'    => $media['author_url'] ?? null,
                     'provider_name' => $media['provider_name'] ?? '',
-                    'provider_url' => $media['provider_url'] ?? '',
-                    'image' => $media['thumbnail_url'] ?? '',
-                    'html' => $media['html'] ?? '',
+                    'provider_url'  => $media['provider_url'] ?? '',
+                    'image'         => $media['thumbnail_url'] ?? '',
+                    'html'          => $media['html'] ?? '',
                 ]);
 
                 if (
@@ -374,7 +374,7 @@ if (! function_exists('linkify')) {
                                     ellipsize(rtrim($link, '/'), 30),
                                     [
                                         'target' => '_blank',
-                                        'rel' => 'noopener noreferrer',
+                                        'rel'    => 'noopener noreferrer',
                                     ],
                                 ),
                             ) .
@@ -398,7 +398,7 @@ if (! function_exists('linkify')) {
                                         $links,
                                         anchor($actor->uri, $match[0], [
                                             'target' => '_blank',
-                                            'rel' => 'noopener noreferrer',
+                                            'rel'    => 'noopener noreferrer',
                                         ]),
                                     ) .
                                     '>';
@@ -411,7 +411,7 @@ if (! function_exists('linkify')) {
                                         $links,
                                         anchor($actor->uri, $match[0], [
                                             'target' => '_blank',
-                                            'rel' => 'noopener noreferrer',
+                                            'rel'    => 'noopener noreferrer',
                                         ]),
                                     ) .
                                     '>';
@@ -451,7 +451,7 @@ if (! function_exists('linkify')) {
                                     $match[1],
                                     [
                                         'target' => '_blank',
-                                        'rel' => 'noopener noreferrer',
+                                        'rel'    => 'noopener noreferrer',
                                     ],
                                 ),
                             ) .

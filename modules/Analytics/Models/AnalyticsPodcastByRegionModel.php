@@ -56,7 +56,7 @@ class AnalyticsPodcastByRegionModel extends Model
                 ->groupBy('country_code, region_code')
                 ->where([
                     'podcast_id' => $podcastId,
-                    'date >' => date('Y-m-d', strtotime('-1 week')),
+                    'date >'     => date('Y-m-d', strtotime('-1 week')),
                 ])
                 ->orderBy('value', 'DESC')
                 ->findAll();

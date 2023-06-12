@@ -78,7 +78,7 @@ class PostModel extends BaseUuidModel
      * @var array<string, string>
      */
     protected $validationRules = [
-        'actor_id' => 'required',
+        'actor_id'     => 'required',
         'message_html' => 'max_length[500]',
     ];
 
@@ -122,7 +122,7 @@ class PostModel extends BaseUuidModel
             "actor#{$actorId}_published_posts";
         if (! ($found = cache($cacheName))) {
             $found = $this->where([
-                'actor_id' => $actorId,
+                'actor_id'       => $actorId,
                 'in_reply_to_id' => null,
             ])
                 ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
@@ -320,7 +320,7 @@ class PostModel extends BaseUuidModel
         // update post create activity schedule in database
         $scheduledActivity = model('ActivityModel', false)
             ->where([
-                'type' => 'Create',
+                'type'    => 'Create',
                 'post_id' => $this->uuid
                     ->fromString($updatedPost->id)
                     ->getBytes(),
@@ -332,7 +332,7 @@ class PostModel extends BaseUuidModel
         $newPayload->object->published = $updatedPost->published_at->format(DATE_W3C);
         model('ActivityModel', false)
             ->update($scheduledActivity->id, [
-                'payload' => json_encode($newPayload, JSON_THROW_ON_ERROR),
+                'payload'      => json_encode($newPayload, JSON_THROW_ON_ERROR),
                 'scheduled_at' => $updatedPost->published_at,
             ]);
 
@@ -465,10 +465,10 @@ class PostModel extends BaseUuidModel
         }
 
         $reblog = new Post([
-            'actor_id' => $actor->id,
+            'actor_id'     => $actor->id,
             'reblog_of_id' => $post->id,
             'published_at' => Time::now(),
-            'created_by' => $userId,
+            'created_by'   => $userId,
         ]);
 
         // add reblog
@@ -530,9 +530,9 @@ class PostModel extends BaseUuidModel
             // get like activity
             $activity = model('ActivityModel', false)
                 ->where([
-                    'type' => 'Announce',
+                    'type'     => 'Announce',
                     'actor_id' => $reblogPost->actor_id,
-                    'post_id' => $this->uuid
+                    'post_id'  => $this->uuid
                         ->fromString($reblogPost->reblog_of_id)
                         ->getBytes(),
                 ])
@@ -580,7 +580,7 @@ class PostModel extends BaseUuidModel
     {
         if (
             ! ($reblogPost = $this->where([
-                'actor_id' => $actor->id,
+                'actor_id'     => $actor->id,
                 'reblog_of_id' => $this->uuid
                     ->fromString($post->id)
                     ->getBytes(),

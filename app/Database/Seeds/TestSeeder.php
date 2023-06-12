@@ -25,17 +25,17 @@ class TestSeeder extends Seeder
          */
         $this->db->table('users')
             ->insert([
-                'id' => 1,
+                'id'       => 1,
                 'username' => 'admin',
                 'is_owner' => 1,
             ]);
 
         $this->db->table('auth_identities')
             ->insert([
-                'id' => 1,
+                'id'      => 1,
                 'user_id' => 1,
-                'type' => 'email_password',
-                'secret' => 'admin@example.com',
+                'type'    => 'email_password',
+                'secret'  => 'admin@example.com',
                 'secret2' => '$2y$10$TXJEHX/djW8jtzgpDVf7dOOCGo5rv1uqtAYWdwwwkttQcDkAeB2.6',
             ]);
 
@@ -43,7 +43,7 @@ class TestSeeder extends Seeder
             ->table('auth_groups_users')
             ->insert([
                 'user_id' => 1,
-                'group' => setting('AuthGroups.mostPowerfulGroup'),
+                'group'   => setting('AuthGroups.mostPowerfulGroup'),
             ]);
     }
 }

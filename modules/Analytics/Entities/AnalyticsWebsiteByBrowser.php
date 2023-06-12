@@ -34,7 +34,7 @@ class AnalyticsWebsiteByBrowser extends Entity
      */
     protected $casts = [
         'podcast_id' => 'integer',
-        'browser' => 'string',
-        'hits' => 'integer',
+        'browser'    => 'string',
+        'hits'       => 'integer',
     ];
 }

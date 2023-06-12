@@ -32,14 +32,14 @@
     <?php foreach ($posts as $key => $post): ?>
         <?php if ($post->reblog_of_id !== null): ?>
             <?= view('post/_partials/reblog', [
-    'index' => $key,
-                'post' => $post->reblog_of_post,
+    'index'               => $key,
+                'post'    => $post->reblog_of_post,
                 'podcast' => $podcast,
 ]) ?>
         <?php else: ?>
             <?= view('post/_partials/card', [
-    'index' => $key,
-                'post' => $post,
+    'index'               => $key,
+                'post'    => $post,
                 'podcast' => $podcast,
 ]) ?>
         <?php endif; ?>

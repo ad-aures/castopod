@@ -32,17 +32,17 @@ class PreviewCard extends Entity
      * @var array<string, string>
      */
     protected $casts = [
-        'id' => 'integer',
-        'post_id' => 'string',
-        'url' => 'string',
-        'title' => 'string',
-        'description' => 'string',
-        'type' => 'string',
-        'author_name' => '?string',
-        'author_url' => '?string',
+        'id'            => 'integer',
+        'post_id'       => 'string',
+        'url'           => 'string',
+        'title'         => 'string',
+        'description'   => 'string',
+        'type'          => 'string',
+        'author_name'   => '?string',
+        'author_url'    => '?string',
         'provider_name' => '?string',
-        'provider_url' => '?string',
-        'image' => '?string',
-        'html' => '?string',
+        'provider_url'  => '?string',
+        'image'         => '?string',
+        'html'          => '?string',
     ];
 }

@@ -52,9 +52,9 @@ class AnalyticsPodcastByPlayerModel extends Model
                 ->selectSum('hits', 'values')
                 ->where([
                     'podcast_id' => $podcastId,
-                    'app !=' => '',
-                    'is_bot' => 0,
-                    'date >' => $oneWeekAgo,
+                    'app !='     => '',
+                    'is_bot'     => 0,
+                    'date >'     => $oneWeekAgo,
                 ])
                 ->groupBy('labels')
                 ->orderBy('values', 'DESC')
@@ -81,9 +81,9 @@ class AnalyticsPodcastByPlayerModel extends Model
                 ->selectSum('hits', 'values')
                 ->where([
                     'podcast_id' => $podcastId,
-                    'app !=' => '',
-                    'is_bot' => 0,
-                    'date >' => $oneYearAgo,
+                    'app !='     => '',
+                    'is_bot'     => 0,
+                    'date >'     => $oneYearAgo,
                 ])
                 ->groupBy('labels')
                 ->orderBy('values', 'DESC')
@@ -110,10 +110,10 @@ class AnalyticsPodcastByPlayerModel extends Model
                 ->selectSum('hits', 'values')
                 ->where([
                     'podcast_id' => $podcastId,
-                    'app !=' => '',
-                    'os !=' => '',
-                    'is_bot' => 0,
-                    'date >' => $oneWeekAgo,
+                    'app !='     => '',
+                    'os !='      => '',
+                    'is_bot'     => 0,
+                    'date >'     => $oneWeekAgo,
                 ])
                 ->groupBy('labels')
                 ->orderBy('values', 'DESC')
@@ -140,9 +140,9 @@ class AnalyticsPodcastByPlayerModel extends Model
                 ->selectSum('hits', 'values')
                 ->where([
                     'podcast_id' => $podcastId,
-                    'device !=' => '',
-                    'is_bot' => 0,
-                    'date >' => $oneWeekAgo,
+                    'device !='  => '',
+                    'is_bot'     => 0,
+                    'date >'     => $oneWeekAgo,
                 ])
                 ->groupBy('labels')
                 ->orderBy('values', 'DESC')
@@ -169,8 +169,8 @@ class AnalyticsPodcastByPlayerModel extends Model
                 ->selectSum('hits', 'values')
                 ->where([
                     'podcast_id' => $podcastId,
-                    'is_bot' => 1,
-                    'date >' => $oneYearAgo,
+                    'is_bot'     => 1,
+                    'date >'     => $oneYearAgo,
                 ])
                 ->groupBy('labels')
                 ->orderBy('labels', 'ASC')

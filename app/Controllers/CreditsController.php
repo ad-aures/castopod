@@ -28,8 +28,8 @@ class CreditsController extends BaseController
 
         if (! ($found = cache($cacheName))) {
             $page = new Page([
-                'title' => lang('Person.credits', [], $locale),
-                'slug' => 'credits',
+                'title'            => lang('Person.credits', [], $locale),
+                'slug'             => 'credits',
                 'content_markdown' => '',
             ]);
 
@@ -48,17 +48,15 @@ class CreditsController extends BaseController
                     $personRole = $credit->person_role;
                     $credits[$personGroup] = [
                         'group_label' => $credit->group_label,
-                        'persons' => [
+                        'persons'     => [
                             $personId => [
-                                'full_name' => $credit->person->full_name,
-                                'thumbnail_url' =>
-                                    get_avatar_url($credit->person, 'thumbnail'),
-                                'information_url' =>
-                                    $credit->person->information_url,
-                                'roles' => [
+                                'full_name'       => $credit->person->full_name,
+                                'thumbnail_url'   => get_avatar_url($credit->person, 'thumbnail'),
+                                'information_url' => $credit->person->information_url,
+                                'roles'           => [
                                     $personRole => [
                                         'role_label' => $credit->role_label,
-                                        'is_in' => [
+                                        'is_in'      => [
                                             [
                                                 'link' => $credit->episode_id
                                                     ? $credit->episode->link
@@ -88,14 +86,13 @@ class CreditsController extends BaseController
                     $personId = $credit->person_id;
                     $personRole = $credit->person_role;
                     $credits[$personGroup]['persons'][$personId] = [
-                        'full_name' => $credit->person->full_name,
-                        'thumbnail_url' =>
-                            get_avatar_url($credit->person, 'thumbnail'),
+                        'full_name'       => $credit->person->full_name,
+                        'thumbnail_url'   => get_avatar_url($credit->person, 'thumbnail'),
                         'information_url' => $credit->person->information_url,
-                        'roles' => [
+                        'roles'           => [
                             $personRole => [
                                 'role_label' => $credit->role_label,
-                                'is_in' => [
+                                'is_in'      => [
                                     [
                                         'link' => $credit->episode_id
                                             ? $credit->episode->link
@@ -124,7 +121,7 @@ class CreditsController extends BaseController
                         $personRole
                     ] = [
                         'role_label' => $credit->role_label,
-                        'is_in' => [
+                        'is_in'      => [
                             [
                                 'link' => $credit->episode_id
                                     ? $credit->episode->link
@@ -169,8 +166,8 @@ class CreditsController extends BaseController
 
             $data = [
                 'metatags' => get_page_metatags($page),
-                'page' => $page,
-                'credits' => $credits,
+                'page'     => $page,
+                'credits'  => $credits,
             ];
 
             $found = view('pages/credits', $data);

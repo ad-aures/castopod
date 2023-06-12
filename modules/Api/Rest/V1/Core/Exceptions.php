@@ -12,8 +12,8 @@ class Exceptions extends \CodeIgniter\Debug\Exceptions
     {
         header('Content-Type: application/json');
         $data = [
-            'status' => $statusCode,
-            'error' => $statusCode,
+            'status'   => $statusCode,
+            'error'    => $statusCode,
             'messages' => [
                 'error' => 'Unexpected error',
             ],
@@ -21,9 +21,9 @@ class Exceptions extends \CodeIgniter\Debug\Exceptions
         if (ENVIRONMENT === 'development') {
             $data['messages'] = array_merge($data['messages'], [
                 'message' => $exception->getMessage(),
-                'file' => $exception->getFile(),
-                'line' => $exception->getLine(),
-                'trace' => $exception->getTrace(),
+                'file'    => $exception->getFile(),
+                'line'    => $exception->getLine(),
+                'trace'   => $exception->getTrace(),
             ]);
         }
 

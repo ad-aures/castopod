@@ -20,14 +20,14 @@ class AddFollowers extends Migration
     {
         $this->forge->addField([
             'actor_id' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
-                'comment' => 'Actor that is following',
+                'comment'  => 'Actor that is following',
             ],
             'target_actor_id' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
-                'comment' => 'Actor that is followed',
+                'comment'  => 'Actor that is followed',
             ],
         ]);
 

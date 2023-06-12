@@ -7,7 +7,7 @@
     ?>
     <?= lang('Subscription.emails.edited_expires', [
         'podcastTitle' => '<strong>' . $subscription->podcast->title . '</strong>',
-        'expiresAt' => '<strong>' . $translatedDate . '</strong>',
+        'expiresAt'    => '<strong>' . $translatedDate . '</strong>',
     ], $subscription->podcast->language_code, false) ?>
 <?php else: ?>
     <?= lang('Subscription.emails.edited_never_expires', [

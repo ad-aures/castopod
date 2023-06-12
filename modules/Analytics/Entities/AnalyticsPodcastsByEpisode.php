@@ -35,6 +35,6 @@ class AnalyticsPodcastsByEpisode extends Entity
     protected $casts = [
         'podcast_id' => 'integer',
         'episode_id' => 'integer',
-        'hits' => 'integer',
+        'hits'       => 'integer',
     ];
 }

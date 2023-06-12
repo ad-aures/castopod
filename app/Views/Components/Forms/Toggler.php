@@ -30,7 +30,7 @@ class Toggler extends FormComponent
         unset($this->attributes['class']);
 
         $sizeClass = [
-            'base' => 'form-switch-slider',
+            'base'  => 'form-switch-slider',
             'small' => 'form-switch-slider form-switch-slider--small',
         ];
 

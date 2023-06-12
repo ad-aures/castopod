@@ -17,23 +17,23 @@ class ExampleMigration extends Migration
     {
         $fields = [
             'name' => [
-                'type' => 'varchar',
+                'type'       => 'varchar',
                 'constraint' => 31,
             ],
             'uid' => [
-                'type' => 'varchar',
+                'type'       => 'varchar',
                 'constraint' => 31,
             ],
             'class' => [
-                'type' => 'varchar',
+                'type'       => 'varchar',
                 'constraint' => 63,
             ],
             'icon' => [
-                'type' => 'varchar',
+                'type'       => 'varchar',
                 'constraint' => 31,
             ],
             'summary' => [
-                'type' => 'varchar',
+                'type'       => 'varchar',
                 'constraint' => 255,
             ],
             'created_at' => [

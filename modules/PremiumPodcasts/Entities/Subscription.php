@@ -46,14 +46,14 @@ class Subscription extends Entity
      * @var array<string, string>
      */
     protected $casts = [
-        'id' => 'integer',
-        'podcast_id' => 'integer',
-        'email' => 'string',
-        'token' => 'string',
-        'status' => 'string',
+        'id'             => 'integer',
+        'podcast_id'     => 'integer',
+        'email'          => 'string',
+        'token'          => 'string',
+        'status'         => 'string',
         'status_message' => '?string',
-        'created_by' => 'integer',
-        'updated_by' => 'integer',
+        'created_by'     => 'integer',
+        'updated_by'     => 'integer',
     ];
 
     public function getStatus(): string

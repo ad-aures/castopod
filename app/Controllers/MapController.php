@@ -31,7 +31,7 @@ class MapController extends BaseController
 
         if (! ($found = cache($cacheName))) {
             return view('pages/map', [], [
-                'cache' => DECADE,
+                'cache'      => DECADE,
                 'cache_name' => $cacheName,
             ]);
         }
@@ -50,13 +50,13 @@ class MapController extends BaseController
             $found = [];
             foreach ($episodes as $episode) {
                 $found[] = [
-                    'latitude' => $episode->location->latitude,
-                    'longitude' => $episode->location->longitude,
+                    'latitude'      => $episode->location->latitude,
+                    'longitude'     => $episode->location->longitude,
                     'location_name' => esc($episode->location->name),
-                    'location_url' => $episode->location->url,
-                    'episode_link' => $episode->link,
-                    'podcast_link' => $episode->podcast->link,
-                    'cover_url' => $episode->cover->thumbnail_url,
+                    'location_url'  => $episode->location->url,
+                    'episode_link'  => $episode->link,
+                    'podcast_link'  => $episode->podcast->link,
+                    'cover_url'     => $episode->cover->thumbnail_url,
                     'podcast_title' => esc($episode->podcast->title),
                     'episode_title' => esc($episode->title),
                 ];

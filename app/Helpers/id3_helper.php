@@ -43,19 +43,19 @@ if (! function_exists('write_audio_file_tags')) {
 
         // populate data array
         $TagData = [
-            'title' => [esc($episode->title)],
+            'title'  => [esc($episode->title)],
             'artist' => [
                 $episode->podcast->publisher === null
                     ? esc($episode->podcast->owner_name)
                     : $episode->podcast->publisher,
             ],
-            'album' => [esc($episode->podcast->title)],
-            'year' => [$episode->published_at instanceof Time ? $episode->published_at->format('Y') : ''],
-            'genre' => ['Podcast'],
-            'comment' => [$episode->description],
-            'track_number' => [(string) $episode->number],
+            'album'             => [esc($episode->podcast->title)],
+            'year'              => [$episode->published_at instanceof Time ? $episode->published_at->format('Y') : ''],
+            'genre'             => ['Podcast'],
+            'comment'           => [$episode->description],
+            'track_number'      => [(string) $episode->number],
             'copyright_message' => [$episode->podcast->copyright],
-            'publisher' => [
+            'publisher'         => [
                 $episode->podcast->publisher === null
                     ? esc($episode->podcast->owner_name)
                     : $episode->podcast->publisher,
@@ -73,9 +73,9 @@ if (! function_exists('write_audio_file_tags')) {
         $TagData['attached_picture'][] = [
             // picturetypeid == Cover. More: module.tag.id3v2.php
             'picturetypeid' => 2,
-            'data' => $APICdata,
-            'description' => 'cover',
-            'mime' => $episode->cover->file_mimetype,
+            'data'          => $APICdata,
+            'description'   => 'cover',
+            'mime'          => $episode->cover->file_mimetype,
         ];
 
         $tagwriter->tag_data = $TagData;

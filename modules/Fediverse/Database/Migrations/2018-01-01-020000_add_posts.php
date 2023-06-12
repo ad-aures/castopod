@@ -20,51 +20,51 @@ class AddPosts extends Migration
     {
         $this->forge->addField([
             'id' => [
-                'type' => 'BINARY',
+                'type'       => 'BINARY',
                 'constraint' => 16,
             ],
             'uri' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 255,
             ],
             'actor_id' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
             ],
             'in_reply_to_id' => [
-                'type' => 'BINARY',
+                'type'       => 'BINARY',
                 'constraint' => 16,
-                'null' => true,
+                'null'       => true,
             ],
             'reblog_of_id' => [
-                'type' => 'BINARY',
+                'type'       => 'BINARY',
                 'constraint' => 16,
-                'null' => true,
+                'null'       => true,
             ],
             'message' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 500,
-                'null' => true,
+                'null'       => true,
             ],
             'message_html' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 600,
-                'null' => true,
+                'null'       => true,
             ],
             'favourites_count' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
-                'default' => 0,
+                'default'  => 0,
             ],
             'reblogs_count' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
-                'default' => 0,
+                'default'  => 0,
             ],
             'replies_count' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
-                'default' => 0,
+                'default'  => 0,
             ],
             'published_at' => [
                 'type' => 'DATETIME',

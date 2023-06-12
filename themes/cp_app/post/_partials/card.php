@@ -29,7 +29,7 @@
     <?php endif; ?>
     <?php if ($post->episode_id && $post->in_reply_to_id === null): ?>
         <?= view('episode/_partials/preview_card', [
-    'index' => $index,
+    'index'           => $index,
             'episode' => $post->episode,
 ]) ?>
     <?php elseif ($post->preview_card): ?>

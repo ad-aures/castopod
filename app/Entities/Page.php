@@ -40,11 +40,11 @@ class Page extends Entity
      * @var array<string, string>
      */
     protected $casts = [
-        'id' => 'integer',
-        'title' => 'string',
-        'slug' => 'string',
+        'id'               => 'integer',
+        'title'            => 'string',
+        'slug'             => 'string',
         'content_markdown' => 'string',
-        'content_html' => 'string',
+        'content_html'     => 'string',
     ];
 
     public function getLink(): string

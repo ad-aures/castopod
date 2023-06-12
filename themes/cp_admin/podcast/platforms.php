@@ -36,11 +36,11 @@
                     $platform->type
                 ),
                 [
-                    'class' => 'text-skin-muted hover:text-skin-base',
-                    'target' => '_blank',
-                    'rel' => 'noopener noreferrer',
+                    'class'        => 'text-skin-muted hover:text-skin-base',
+                    'target'       => '_blank',
+                    'rel'          => 'noopener noreferrer',
                     'data-tooltip' => 'bottom',
-                    'title' => lang('Platforms.submit_url', [
+                    'title'        => lang('Platforms.submit_url', [
                         'platformName' => $platform->label,
                     ]),
                 ],
@@ -48,21 +48,21 @@
         <?php endif; ?>
         <div class="inline-flex mt-1 bg-highlight">
             <?= anchor($platform->home_url, icon('external-link', 'mx-auto'), [
-                'class' => 'flex-1 text-skin-muted hover:text-skin-base',
-                'target' => '_blank',
-                'rel' => 'noopener noreferrer',
+                'class'        => 'flex-1 text-skin-muted hover:text-skin-base',
+                'target'       => '_blank',
+                'rel'          => 'noopener noreferrer',
                 'data-tooltip' => 'bottom',
-                'title' => lang('Platforms.home_url', [
+                'title'        => lang('Platforms.home_url', [
                     'platformName' => $platform->label,
                 ]),
             ]) ?>
             <?= $platform->submit_url
                             ? anchor($platform->submit_url, icon('add', 'mx-auto'), [
-                                'class' => 'flex-1 text-skin-muted hover:text-skin-base',
-                                'target' => '_blank',
-                                'rel' => 'noopener noreferrer',
+                                'class'        => 'flex-1 text-skin-muted hover:text-skin-base',
+                                'target'       => '_blank',
+                                'rel'          => 'noopener noreferrer',
                                 'data-tooltip' => 'bottom',
-                                'title' => lang('Platforms.submit_url', [
+                                'title'        => lang('Platforms.submit_url', [
                                     'platformName' => $platform->label,
                                 ]),
                             ])
@@ -79,10 +79,9 @@
                             ),
                             icon('delete-bin', 'mx-auto'),
                             [
-                                'class' =>
-                                    'absolute right-0 p-1 bg-red-100 rounded-full text-red-700 hover:text-red-900',
+                                'class'        => 'absolute right-0 p-1 bg-red-100 rounded-full text-red-700 hover:text-red-900',
                                 'data-tooltip' => 'bottom',
-                                'title' => lang('Platforms.remove', [
+                                'title'        => lang('Platforms.remove', [
                                     'platformName' => $platform->label,
                                 ]),
                             ],

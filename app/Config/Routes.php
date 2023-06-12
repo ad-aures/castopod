@@ -84,18 +84,18 @@ $routes->group('@(:podcastHandle)', static function ($routes): void {
     // override default Fediverse Library's actor route
     $routes->options('/', 'ActivityPubController::preflight');
     $routes->get('/', 'PodcastController::activity/$1', [
-        'as' => 'actor',
+        'as'                => 'actor',
         'alternate-content' => [
             'application/activity+json' => [
-                'namespace' => 'Modules\Fediverse\Controllers',
+                'namespace'         => 'Modules\Fediverse\Controllers',
                 'controller-method' => 'ActorController/$1',
             ],
             'application/podcast-activity+json' => [
-                'namespace' => 'App\Controllers',
+                'namespace'         => 'App\Controllers',
                 'controller-method' => 'PodcastController::podcastActor/$1',
             ],
             'application/ld+json; profile="https://www.w3.org/ns/activitystreams' => [
-                'namespace' => 'Modules\Fediverse\Controllers',
+                'namespace'         => 'Modules\Fediverse\Controllers',
                 'controller-method' => 'ActorController/$1',
             ],
         ],
@@ -106,7 +106,7 @@ $routes->group('@(:podcastHandle)', static function ($routes): void {
     ]);
     $routes->options('episodes', 'ActivityPubController::preflight');
     $routes->get('episodes', 'PodcastController::episodes/$1', [
-        'as' => 'podcast-episodes',
+        'as'                => 'podcast-episodes',
         'alternate-content' => [
             'application/activity+json' => [
                 'controller-method' => 'PodcastController::episodeCollection/$1',
@@ -123,7 +123,7 @@ $routes->group('@(:podcastHandle)', static function ($routes): void {
     $routes->group('episodes/(:slug)', static function ($routes): void {
         $routes->options('/', 'ActivityPubController::preflight');
         $routes->get('/', 'EpisodeController/$1/$2', [
-            'as' => 'episode',
+            'as'                => 'episode',
             'alternate-content' => [
                 'application/activity+json' => [
                     'controller-method' => 'EpisodeController::episodeObject/$1/$2',
@@ -142,7 +142,7 @@ $routes->group('@(:podcastHandle)', static function ($routes): void {
         ]);
         $routes->options('comments', 'ActivityPubController::preflight');
         $routes->get('comments', 'EpisodeController::comments/$1/$2', [
-            'as' => 'episode-comments',
+            'as'                        => 'episode-comments',
             'application/activity+json' => [
                 'controller-method' => 'EpisodeController::comments/$1/$2',
             ],
@@ -156,7 +156,7 @@ $routes->group('@(:podcastHandle)', static function ($routes): void {
         ]);
         $routes->options('comments/(:uuid)', 'ActivityPubController::preflight');
         $routes->get('comments/(:uuid)', 'EpisodeCommentController::view/$1/$2/$3', [
-            'as' => 'episode-comment',
+            'as'                        => 'episode-comment',
             'application/activity+json' => [
                 'controller-method' => 'EpisodeController::commentObject/$1/$2',
             ],
@@ -226,21 +226,21 @@ $routes->get('/pages/(:slug)', 'PageController/$1', [
  */
 $routes->group('@(:podcastHandle)', static function ($routes): void {
     $routes->post('posts/new', 'PostController::attemptCreate/$1', [
-        'as' => 'post-attempt-create',
+        'as'     => 'post-attempt-create',
         'filter' => 'permission:podcast#.manage-publications',
     ]);
     // Post
     $routes->group('posts/(:uuid)', static function ($routes): void {
         $routes->options('/', 'ActivityPubController::preflight');
         $routes->get('/', 'PostController::view/$1/$2', [
-            'as' => 'post',
+            'as'                => 'post',
             'alternate-content' => [
                 'application/activity+json' => [
-                    'namespace' => 'Modules\Fediverse\Controllers',
+                    'namespace'         => 'Modules\Fediverse\Controllers',
                     'controller-method' => 'PostController/$2',
                 ],
                 'application/ld+json; profile="https://www.w3.org/ns/activitystreams' => [
-                    'namespace' => 'Modules\Fediverse\Controllers',
+                    'namespace'         => 'Modules\Fediverse\Controllers',
                     'controller-method' => 'PostController/$2',
                 ],
             ],
@@ -248,14 +248,14 @@ $routes->group('@(:podcastHandle)', static function ($routes): void {
         ]);
         $routes->options('replies', 'ActivityPubController::preflight');
         $routes->get('replies', 'PostController/$1/$2', [
-            'as' => 'post-replies',
+            'as'                => 'post-replies',
             'alternate-content' => [
                 'application/activity+json' => [
-                    'namespace' => 'Modules\Fediverse\Controllers',
+                    'namespace'         => 'Modules\Fediverse\Controllers',
                     'controller-method' => 'PostController::replies/$2',
                 ],
                 'application/ld+json; profile="https://www.w3.org/ns/activitystreams' => [
-                    'namespace' => 'Modules\Fediverse\Controllers',
+                    'namespace'         => 'Modules\Fediverse\Controllers',
                     'controller-method' => 'PostController::replies/$2',
                 ],
             ],
@@ -263,14 +263,14 @@ $routes->group('@(:podcastHandle)', static function ($routes): void {
         ]);
         // Actions
         $routes->post('action', 'PostController::attemptAction/$1/$2', [
-            'as' => 'post-attempt-action',
+            'as'     => 'post-attempt-action',
             'filter' => 'permission:podcast#.interact-as',
         ]);
         $routes->post(
             'block-actor',
             'PostController::attemptBlockActor/$1/$2',
             [
-                'as' => 'post-attempt-block-actor',
+                'as'     => 'post-attempt-block-actor',
                 'filter' => 'permission:fediverse.manage-blocks',
             ],
         );
@@ -278,12 +278,12 @@ $routes->group('@(:podcastHandle)', static function ($routes): void {
             'block-domain',
             'PostController::attemptBlockDomain/$1/$2',
             [
-                'as' => 'post-attempt-block-domain',
+                'as'     => 'post-attempt-block-domain',
                 'filter' => 'permission:fediverse.manage-blocks',
             ],
         );
         $routes->post('delete', 'PostController::attemptDelete/$1/$2', [
-            'as' => 'post-attempt-delete',
+            'as'     => 'post-attempt-delete',
             'filter' => 'permission:podcast#.manage-publications',
         ]);
         $routes->get(
@@ -298,7 +298,7 @@ $routes->group('@(:podcastHandle)', static function ($routes): void {
         'as' => 'follow',
     ]);
     $routes->get('outbox', 'ActorController::outbox/$1', [
-        'as' => 'outbox',
+        'as'     => 'outbox',
         'filter' => 'fediverse:verify-activitystream',
     ]);
 });

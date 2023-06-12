@@ -113,7 +113,7 @@ class ClipModel extends Model
     public function getScheduledVideoClips(): array
     {
         $found = $this->where([
-            'type' => 'video',
+            'type'   => 'video',
             'status' => 'queued',
         ])
             ->orderBy('created_at')
@@ -131,7 +131,7 @@ class ClipModel extends Model
         $result = $this->builder()
             ->select('COUNT(*) as `running_count`')
             ->where([
-                'type' => 'video',
+                'type'   => 'video',
                 'status' => 'running',
             ])
             ->get()
@@ -148,7 +148,7 @@ class ClipModel extends Model
                 'podcast_id' => $videoClip->podcast_id,
                 'episode_id' => $videoClip->episode_id,
                 'start_time' => $videoClip->start_time,
-                'duration' => $videoClip->duration,
+                'duration'   => $videoClip->duration,
             ])
             ->where('JSON_EXTRACT(`metadata`, "$.format")', $videoClip->format)
             ->where('JSON_EXTRACT(`metadata`, "$.theme.name")', $videoClip->theme['name'])
@@ -169,7 +169,7 @@ class ClipModel extends Model
         return $this->delete([
             'podcast_id' => $podcastId,
             'episode_id' => $episodeId,
-            'id' => $clipId,
+            'id'         => $clipId,
         ]);
     }
 
@@ -211,7 +211,7 @@ class ClipModel extends Model
             $found = $this->where([
                 'episode_id' => $episodeId,
                 'podcast_id' => $podcastId,
-                'type' => 'audio',
+                'type'       => 'audio',
             ])
                 ->orderBy('start_time')
                 ->findAll();
@@ -234,7 +234,7 @@ class ClipModel extends Model
         return $this->delete([
             'podcast_id' => $podcastId,
             'episode_id' => $episodeId,
-            'id' => $clipId,
+            'id'         => $clipId,
         ]);
     }
 

@@ -83,7 +83,7 @@ class ActorModel extends BaseModel
         if (! ($found = cache($cacheName))) {
             $found = $this->where([
                 'username' => $username,
-                'domain' => $domain,
+                'domain'   => $domain,
             ])->first();
 
             cache()

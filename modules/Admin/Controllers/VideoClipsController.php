@@ -41,7 +41,7 @@ class VideoClipsController extends BaseController
             if (
                 ! ($episode = (new EpisodeModel())
                     ->where([
-                        'id' => $params[1],
+                        'id'         => $params[1],
                         'podcast_id' => $params[0],
                     ])
                     ->first())
@@ -64,7 +64,7 @@ class VideoClipsController extends BaseController
             ->where([
                 'podcast_id' => $this->podcast->id,
                 'episode_id' => $this->episode->id,
-                'type' => 'video',
+                'type'       => 'video',
             ])
             ->orderBy('created_at', 'desc');
 
@@ -76,10 +76,10 @@ class VideoClipsController extends BaseController
         }
 
         $data = [
-            'podcast' => $this->podcast,
-            'episode' => $this->episode,
+            'podcast'    => $this->podcast,
+            'episode'    => $this->episode,
             'videoClips' => $videoClips,
-            'pager' => $videoClipsBuilder->pager,
+            'pager'      => $videoClipsBuilder->pager,
         ];
 
         replace_breadcrumb_params([
@@ -94,8 +94,8 @@ class VideoClipsController extends BaseController
         $videoClip = (new ClipModel())->getVideoClipById((int) $videoClipId);
 
         $data = [
-            'podcast' => $this->podcast,
-            'episode' => $this->episode,
+            'podcast'   => $this->podcast,
+            'episode'   => $this->episode,
             'videoClip' => $videoClip,
         ];
 
@@ -122,9 +122,9 @@ class VideoClipsController extends BaseController
         // First, check that requirements to create a video clip are met
         $ffmpeg = shell_exec('which ffmpeg');
         $checks = [
-            'ffmpeg' => $ffmpeg !== null,
-            'gd' => extension_loaded('gd'),
-            'freetype' => extension_loaded('gd') && gd_info()['FreeType Support'],
+            'ffmpeg'     => $ffmpeg !== null,
+            'gd'         => extension_loaded('gd'),
+            'freetype'   => extension_loaded('gd') && gd_info()['FreeType Support'],
             'transcript' => $this->episode->transcript instanceof Transcript,
         ];
 
@@ -141,11 +141,11 @@ class VideoClipsController extends BaseController
     public function attemptCreate(): RedirectResponse
     {
         $rules = [
-            'title' => 'required',
+            'title'      => 'required',
             'start_time' => 'required|greater_than_equal_to[0]',
-            'duration' => 'required|greater_than[0]',
-            'format' => 'required|in_list[' . implode(',', array_keys(config('MediaClipper')->formats)) . ']',
-            'theme' => 'required|in_list[' . implode(',', array_keys(config('Colors')->themes)) . ']',
+            'duration'   => 'required|greater_than[0]',
+            'format'     => 'required|in_list[' . implode(',', array_keys(config('MediaClipper')->formats)) . ']',
+            'theme'      => 'required|in_list[' . implode(',', array_keys(config('Colors')->themes)) . ']',
         ];
 
         if (! $this->validate($rules)) {
@@ -159,18 +159,18 @@ class VideoClipsController extends BaseController
         $themeColors = config('MediaClipper')
             ->themes[$themeName];
         $theme = [
-            'name' => $themeName,
+            'name'    => $themeName,
             'preview' => $themeColors['preview'],
         ];
 
         $videoClip = new VideoClip([
-            'title' => $this->request->getPost('title'),
+            'title'      => $this->request->getPost('title'),
             'start_time' => (float) $this->request->getPost('start_time'),
-            'duration' => (float) $this->request->getPost('duration'),
-            'theme' => $theme,
-            'format' => $this->request->getPost('format'),
-            'type' => 'video',
-            'status' => 'queued',
+            'duration'   => (float) $this->request->getPost('duration'),
+            'theme'      => $theme,
+            'format'     => $this->request->getPost('format'),
+            'type'       => 'video',
+            'status'     => 'queued',
             'podcast_id' => $this->podcast->id,
             'episode_id' => $this->episode->id,
             'created_by' => user_id(),
@@ -203,9 +203,9 @@ class VideoClipsController extends BaseController
         }
 
         (new ClipModel())->update($videoClip->id, [
-            'status' => 'queued',
+            'status'         => 'queued',
             'job_started_at' => null,
-            'job_ended_at' => null,
+            'job_ended_at'   => null,
         ]);
 
         return redirect()->back();

@@ -31,7 +31,7 @@ $userPodcasts = get_podcasts_user_can_interact_with(auth()->user()); ?>
 
 $items = [
     [
-        'type' => 'html',
+        'type'    => 'html',
         'content' => esc(<<<CODE_SAMPLE
                         <span class="px-4 my-2 text-xs font-semibold tracking-wider uppercase text-skin-muted">{$notificationsTitle}</span>
                         CODE_SAMPLE),
@@ -45,7 +45,7 @@ if ($userPodcasts !== []) {
         $unreadNotificationDotDisplayClass = in_array($userPodcast->actor_id, $actorIdsWithUnreadNotifications, true) ? '' : 'hidden';
 
         $items[] = [
-            'type' => 'link',
+            'type'  => 'link',
             'title' => <<<CODE_SAMPLE
                             <div class="inline-flex items-center flex-1 text-sm align-middle">
                                 <div class="relative">
@@ -62,7 +62,7 @@ if ($userPodcasts !== []) {
 } else {
     $noNotificationsText = lang('Notifications.no_notifications');
     $items[] = [
-        'type' => 'html',
+        'type'    => 'html',
         'content' => esc(<<<CODE_SAMPLE
                         <span class="mx-4 my-2 text-sm italic text-center text-skin-muted">{$noNotificationsText}</span>
                     CODE_SAMPLE),
@@ -104,29 +104,29 @@ $csrfField = csrf_field();
 
 $menuItems = [
     [
-        'type' => 'link',
+        'type'  => 'link',
         'title' => lang('Navigation.account.my-account'),
-        'uri' => route_to('my-account'),
+        'uri'   => route_to('my-account'),
     ],
     [
-        'type' => 'link',
+        'type'  => 'link',
         'title' => lang('Navigation.account.change-password'),
-        'uri' => route_to('change-password'),
+        'uri'   => route_to('change-password'),
     ],
     [
         'type' => 'separator',
     ],
     [
-        'type' => 'link',
+        'type'  => 'link',
         'title' => lang('Navigation.account.logout'),
-        'uri' => route_to('logout'),
+        'uri'   => route_to('logout'),
     ],
 ];
 
 if ($userPodcasts !== []) {
     $menuItems = array_merge([
         [
-            'type' => 'html',
+            'type'    => 'html',
             'content' => esc(<<<CODE_SAMPLE
                         <nav class="flex flex-col py-2 whitespace-nowrap">
                             <span class="px-4 mb-2 text-xs font-semibold tracking-wider uppercase text-skin-muted">{$interactAsText}</span>

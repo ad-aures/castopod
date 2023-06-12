@@ -49,7 +49,7 @@ class AnalyticsPodcastByHourModel extends Model
                 ->selectSum('hits', 'values')
                 ->where([
                     'podcast_id' => $podcastId,
-                    'date >' => date('Y-m-d', strtotime('-60 days')),
+                    'date >'     => date('Y-m-d', strtotime('-60 days')),
                 ])
                 ->groupBy('labels')
                 ->orderBy('labels', 'ASC')

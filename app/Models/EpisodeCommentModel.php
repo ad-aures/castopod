@@ -202,7 +202,7 @@ class EpisodeCommentModel extends UuidModel
         $episodeCommentsBuilder = $this->builder();
         $episodeComments = $episodeCommentsBuilder->select('*, 0 as is_from_post')
             ->where([
-                'episode_id' => $episodeId,
+                'episode_id'     => $episodeId,
                 'in_reply_to_id' => null,
             ])
             ->getCompiledSelect();
@@ -216,7 +216,7 @@ class EpisodeCommentModel extends UuidModel
                 return $builder->select('id')
                     ->from(config('Fediverse')->tablesPrefix . 'posts')
                     ->where([
-                        'episode_id' => $episodeId,
+                        'episode_id'     => $episodeId,
                         'in_reply_to_id' => null,
                     ]);
             })

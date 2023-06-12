@@ -2,19 +2,19 @@
 
 $podcastNavigation = [
     'dashboard' => [
-        'icon' => 'dashboard',
+        'icon'  => 'dashboard',
         'items' => ['podcast-view', 'podcast-edit', 'podcast-persons-manage'],
     ],
     'episodes' => [
-        'icon' => 'play-circle',
+        'icon'  => 'play-circle',
         'items' => ['episode-list', 'episode-create'],
     ],
     'premium' => [
-        'icon' => 'exchange-dollar',
+        'icon'  => 'exchange-dollar',
         'items' => ['subscription-list', 'subscription-add'],
     ],
     'analytics' => [
-        'icon' => 'line-chart',
+        'icon'  => 'line-chart',
         'items' => [
             'podcast-analytics',
             'podcast-analytics-unique-listeners',
@@ -26,11 +26,11 @@ $podcastNavigation = [
         ],
     ],
     'contributors' => [
-        'icon' => 'group',
+        'icon'  => 'group',
         'items' => ['contributor-list', 'contributor-add'],
     ],
     'platforms' => [
-        'icon' => 'link',
+        'icon'  => 'link',
         'items' => [
             'platforms-podcasting',
             'platforms-social',

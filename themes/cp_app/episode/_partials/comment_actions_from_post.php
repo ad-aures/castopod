@@ -26,10 +26,10 @@
             route_to('post-remote-action', esc($podcast->handle), $comment->id, 'favourite'),
             icon('heart', 'text-xl mr-1 opacity-40') . $comment->likes_count,
             [
-                'class' => 'inline-flex items-center hover:underline',
-                'width' => 420,
+                'class'  => 'inline-flex items-center hover:underline',
+                'width'  => 420,
                 'height' => 620,
-                'title' => lang('Post.favourites', [
+                'title'  => lang('Post.favourites', [
                     'numberOfFavourites' => $comment->likes_count,
                 ]),
             ],

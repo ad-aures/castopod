@@ -150,10 +150,10 @@ class InstallController extends Controller
     public function attemptInstanceConfig(): RedirectResponse
     {
         $rules = [
-            'hostname' => 'required|valid_url_strict',
+            'hostname'       => 'required|valid_url_strict',
             'media_base_url' => 'permit_empty|valid_url_strict',
-            'admin_gateway' => 'required',
-            'auth_gateway' => 'required|differs[admin_gateway]',
+            'admin_gateway'  => 'required',
+            'auth_gateway'   => 'required|differs[admin_gateway]',
         ];
 
         if (! $this->validate($rules)) {
@@ -166,12 +166,11 @@ class InstallController extends Controller
         $baseUrl = $this->request->getPost('hostname');
         $mediaBaseUrl = $this->request->getPost('media_base_url');
         self::writeEnv([
-            'app.baseURL' => $baseUrl,
-            'media.baseURL' =>
-                $mediaBaseUrl === '' ? $baseUrl : $mediaBaseUrl,
+            'app.baseURL'    => $baseUrl,
+            'media.baseURL'  => $mediaBaseUrl === '' ? $baseUrl : $mediaBaseUrl,
             'analytics.salt' => generate_random_salt(64),
-            'admin.gateway' => $this->request->getPost('admin_gateway'),
-            'auth.gateway' => $this->request->getPost('auth_gateway'),
+            'admin.gateway'  => $this->request->getPost('admin_gateway'),
+            'auth.gateway'   => $this->request->getPost('auth_gateway'),
         ]);
 
         helper('text');
@@ -189,7 +188,7 @@ class InstallController extends Controller
     {
         $rules = [
             'db_hostname' => 'required',
-            'db_name' => 'required',
+            'db_name'     => 'required',
             'db_username' => 'required',
             'db_password' => 'required',
         ];
@@ -290,7 +289,7 @@ class InstallController extends Controller
         // Save the user
         $user = new User([
             'username' => $this->request->getPost('username'),
-            'email' => $this->request->getPost('email'),
+            'email'    => $this->request->getPost('email'),
             'password' => $this->request->getPost('password'),
             'is_owner' => true,
         ]);

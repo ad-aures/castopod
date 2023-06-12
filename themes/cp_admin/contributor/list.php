@@ -19,13 +19,13 @@
     [
         [
             'header' => lang('Contributor.list.username'),
-            'cell' => function ($contributor) {
+            'cell'   => function ($contributor) {
                 return esc($contributor->username);
             },
         ],
         [
             'header' => lang('Contributor.list.role'),
-            'cell' => function ($contributor, $podcast): string {
+            'cell'   => function ($contributor, $podcast): string {
                 $role = get_group_info(get_podcast_group($contributor, $podcast->id), $podcast->id)['title'];
 
                 if ($podcast->created_by === $contributor->id) {
@@ -37,7 +37,7 @@
         ],
         [
             'header' => lang('Common.actions'),
-            'cell' => function ($contributor, $podcast) {
+            'cell'   => function ($contributor, $podcast) {
                 return '<Button uri="' . route_to('contributor-edit', $podcast->id, $contributor->id) . '" variant="secondary" iconLeft="edit" size="small">' . lang('Contributor.edit') . '</Button>' .
                 '<Button uri="' . route_to('contributor-remove', $podcast->id, $contributor->id) . '" variant="danger" iconLeft="delete-bin" size="small">' . lang('Contributor.remove') . '</Button>';
             },

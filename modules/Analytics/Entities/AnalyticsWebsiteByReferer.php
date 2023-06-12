@@ -33,8 +33,8 @@ class AnalyticsWebsiteByReferer extends Entity
      * @var array<string, string>
      */
     protected $casts = [
-        'podcast_id' => 'integer',
+        'podcast_id'  => 'integer',
         'referer_url' => 'string',
-        'hits' => 'integer',
+        'hits'        => 'integer',
     ];
 }

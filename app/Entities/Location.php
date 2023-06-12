@@ -47,10 +47,10 @@ class Location extends Entity
         }
 
         parent::__construct([
-            'name' => $name,
-            'geo' => $geo,
-            'osm' => $osm,
-            'latitude' => $latitude,
+            'name'      => $name,
+            'geo'       => $geo,
+            'osm'       => $osm,
+            'latitude'  => $latitude,
             'longitude' => $longitude,
         ]);
     }
@@ -93,7 +93,7 @@ class Location extends Entity
             [
                 'headers' => [
                     'User-Agent' => 'Castopod/' . CP_VERSION,
-                    'Accept' => 'application/json',
+                    'Accept'     => 'application/json',
                 ],
             ],
         );

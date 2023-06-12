@@ -2,15 +2,15 @@
 
 $navigationItems = [
     [
-        'uri' => route_to('podcast-activity', esc($podcast->handle)),
+        'uri'   => route_to('podcast-activity', esc($podcast->handle)),
         'label' => lang('Podcast.activity'),
     ],
     [
-        'uri' => route_to('podcast-episodes', esc($podcast->handle)),
+        'uri'   => route_to('podcast-episodes', esc($podcast->handle)),
         'label' => lang('Podcast.episodes'),
     ],
     [
-        'uri' => route_to('podcast-about', esc($podcast->handle)),
+        'uri'   => route_to('podcast-about', esc($podcast->handle)),
         'label' => lang('Podcast.about'),
     ],
 ]

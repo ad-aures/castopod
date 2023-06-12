@@ -50,7 +50,7 @@ class AnalyticsPodcastModel extends Model
             $found = $this->select('date as labels, hits as values')
                 ->where([
                     'podcast_id' => $podcastId,
-                    'date >' => date('Y-m-d', strtotime('-60 days')),
+                    'date >'     => date('Y-m-d', strtotime('-60 days')),
                 ])
                 ->orderBy('labels', 'ASC')
                 ->findAll();
@@ -74,7 +74,7 @@ class AnalyticsPodcastModel extends Model
                 ->selectSum('hits', 'values')
                 ->where([
                     'podcast_id' => $podcastId,
-                    'date >' => date('Y-m-d', strtotime('-60 days')),
+                    'date >'     => date('Y-m-d', strtotime('-60 days')),
                 ])
                 ->groupBy('labels, sort_labels')
                 ->orderBy('sort_labels', 'ASC')
@@ -98,7 +98,7 @@ class AnalyticsPodcastModel extends Model
             $found = $this->select('date as labels, ROUND(bandwidth / 1000000, 2) as `values`')
                 ->where([
                     'podcast_id' => $podcastId,
-                    'date >' => date('Y-m-d', strtotime('-60 days')),
+                    'date >'     => date('Y-m-d', strtotime('-60 days')),
                 ])
                 ->orderBy('labels', 'ASC')
                 ->findAll();
@@ -147,7 +147,7 @@ class AnalyticsPodcastModel extends Model
             $found = $this->select('date as labels, unique_listeners as values')
                 ->where([
                     'podcast_id' => $podcastId,
-                    'date >' => date('Y-m-d', strtotime('-60 days')),
+                    'date >'     => date('Y-m-d', strtotime('-60 days')),
                 ])
                 ->orderBy('labels', 'ASC')
                 ->findAll();
@@ -199,7 +199,7 @@ class AnalyticsPodcastModel extends Model
                 ->selectSum('duration', 'values')
                 ->where([
                     $this->table . '.podcast_id' => $podcastId,
-                    'date >' => date('Y-m-d', strtotime('-60 days')),
+                    'date >'                     => date('Y-m-d', strtotime('-60 days')),
                 ])
                 ->groupBy('labels')
                 ->orderBy('labels', 'ASC')

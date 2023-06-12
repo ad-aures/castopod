@@ -147,34 +147,34 @@ class Episode extends Entity
      * @var array<string, string>
      */
     protected $casts = [
-        'id' => 'integer',
-        'podcast_id' => 'integer',
-        'guid' => 'string',
-        'slug' => 'string',
-        'title' => 'string',
-        'audio_id' => 'integer',
-        'description_markdown' => 'string',
-        'description_html' => 'string',
-        'cover_id' => '?integer',
-        'transcript_id' => '?integer',
+        'id'                    => 'integer',
+        'podcast_id'            => 'integer',
+        'guid'                  => 'string',
+        'slug'                  => 'string',
+        'title'                 => 'string',
+        'audio_id'              => 'integer',
+        'description_markdown'  => 'string',
+        'description_html'      => 'string',
+        'cover_id'              => '?integer',
+        'transcript_id'         => '?integer',
         'transcript_remote_url' => '?string',
-        'chapters_id' => '?integer',
-        'chapters_remote_url' => '?string',
-        'parental_advisory' => '?string',
-        'number' => '?integer',
-        'season_number' => '?integer',
-        'type' => 'string',
-        'is_blocked' => 'boolean',
-        'location_name' => '?string',
-        'location_geo' => '?string',
-        'location_osm' => '?string',
-        'custom_rss' => '?json-array',
-        'is_published_on_hubs' => 'boolean',
-        'posts_count' => 'integer',
-        'comments_count' => 'integer',
-        'is_premium' => 'boolean',
-        'created_by' => 'integer',
-        'updated_by' => 'integer',
+        'chapters_id'           => '?integer',
+        'chapters_remote_url'   => '?string',
+        'parental_advisory'     => '?string',
+        'number'                => '?integer',
+        'season_number'         => '?integer',
+        'type'                  => 'string',
+        'is_blocked'            => 'boolean',
+        'location_name'         => '?string',
+        'location_geo'          => '?string',
+        'location_osm'          => '?string',
+        'custom_rss'            => '?json-array',
+        'is_published_on_hubs'  => 'boolean',
+        'posts_count'           => 'integer',
+        'comments_count'        => 'integer',
+        'is_premium'            => 'boolean',
+        'created_by'            => 'integer',
+        'updated_by'            => 'integer',
     ];
 
     public function setCover(UploadedFile | File $file = null): self
@@ -192,10 +192,10 @@ class Episode extends Entity
         } else {
             $cover = new Image([
                 'file_key' => 'podcasts/' . $this->getPodcast()->handle . '/' . $this->attributes['slug'] . '.' . $file->getExtension(),
-                'sizes' => config('Images')
+                'sizes'    => config('Images')
 ->podcastCoverSizes,
                 'uploaded_by' => user_id(),
-                'updated_by' => user_id(),
+                'updated_by'  => user_id(),
             ]);
             $cover->setFile($file);
 
@@ -244,7 +244,7 @@ class Episode extends Entity
                 'language_code' => $this->getPodcast()
                     ->language_code,
                 'uploaded_by' => user_id(),
-                'updated_by' => user_id(),
+                'updated_by'  => user_id(),
             ]);
             $audio->setFile($file);
 
@@ -277,11 +277,11 @@ class Episode extends Entity
             (new MediaModel('transcript'))->updateMedia($this->getTranscript());
         } else {
             $transcript = new Transcript([
-                'file_key' => 'podcasts/' . $this->getPodcast()->handle . '/' . $this->attributes['slug'] . '-transcript.' . $file->getExtension(),
+                'file_key'      => 'podcasts/' . $this->getPodcast()->handle . '/' . $this->attributes['slug'] . '-transcript.' . $file->getExtension(),
                 'language_code' => $this->getPodcast()
 ->language_code,
                 'uploaded_by' => user_id(),
-                'updated_by' => user_id(),
+                'updated_by'  => user_id(),
             ]);
             $transcript->setFile($file);
 
@@ -314,11 +314,11 @@ class Episode extends Entity
             (new MediaModel('chapters'))->updateMedia($this->getChapters());
         } else {
             $chapters = new Chapters([
-                'file_key' => 'podcasts/' . $this->getPodcast()->handle . '/' . $this->attributes['slug'] . '-chapters' . '.' . $file->getExtension(),
+                'file_key'      => 'podcasts/' . $this->getPodcast()->handle . '/' . $this->attributes['slug'] . '-chapters' . '.' . $file->getExtension(),
                 'language_code' => $this->getPodcast()
 ->language_code,
                 'uploaded_by' => user_id(),
-                'updated_by' => user_id(),
+                'updated_by'  => user_id(),
             ]);
             $chapters->setFile($file);
 
@@ -471,7 +471,7 @@ class Episode extends Entity
     public function setDescriptionMarkdown(string $descriptionMarkdown): static
     {
         $config = [
-            'html_input' => 'escape',
+            'html_input'         => 'escape',
             'allow_unsafe_links' => false,
         ];
 

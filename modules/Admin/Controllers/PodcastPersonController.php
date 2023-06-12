@@ -41,9 +41,9 @@ class PodcastPersonController extends BaseController
         helper('form');
 
         $data = [
-            'podcast' => $this->podcast,
-            'podcastPersons' => (new PersonModel())->getPodcastPersons($this->podcast->id),
-            'personOptions' => (new PersonModel())->getPersonOptions(),
+            'podcast'         => $this->podcast,
+            'podcastPersons'  => (new PersonModel())->getPodcastPersons($this->podcast->id),
+            'personOptions'   => (new PersonModel())->getPersonOptions(),
             'taxonomyOptions' => (new PersonModel())->getTaxonomyOptions(),
         ];
         replace_breadcrumb_params([

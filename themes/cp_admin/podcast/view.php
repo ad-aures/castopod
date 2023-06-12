@@ -16,7 +16,7 @@
 <?= $this->section('content') ?>
 
 <?= view_cell('Modules\Admin\Controllers\PodcastController::latestEpisodes', [
-    'limit' => 5,
+    'limit'     => 5,
     'podcastId' => $podcast->id,
 ]) ?>
 

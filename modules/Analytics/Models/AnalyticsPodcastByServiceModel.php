@@ -53,8 +53,8 @@ class AnalyticsPodcastByServiceModel extends Model
                 ->where([
                     'podcast_id' => $podcastId,
                     'service !=' => '',
-                    'is_bot' => 0,
-                    'date >' => $oneWeekAgo,
+                    'is_bot'     => 0,
+                    'date >'     => $oneWeekAgo,
                 ])
                 ->groupBy('labels')
                 ->orderBy('values', 'DESC')

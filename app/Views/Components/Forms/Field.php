@@ -24,7 +24,7 @@ class Field extends FormComponent
         }
 
         $labelAttributes = [
-            'for' => $this->id,
+            'for'        => $this->id,
             'isOptional' => $this->required ? 'false' : 'true',
         ];
         if ($this->hint) {

@@ -59,8 +59,8 @@ class DashboardController extends BaseController
         }
 
         $storageData = [
-            'limit' => formatBytes((int) $storageLimitBytes),
-            'percentage' => round((((int) $totalUploaded['file_size']) / $storageLimitBytes) * 100, 0),
+            'limit'          => formatBytes((int) $storageLimitBytes),
+            'percentage'     => round((((int) $totalUploaded['file_size']) / $storageLimitBytes) * 100, 0),
             'total_uploaded' => formatBytes((int) $totalUploaded['file_size']),
         ];
 
@@ -74,11 +74,11 @@ class DashboardController extends BaseController
             ->bandwidthLimit;
 
         $data = [
-            'podcastsData' => $podcastsData,
-            'episodesData' => $episodesData,
-            'storageData' => $storageData,
+            'podcastsData'   => $podcastsData,
+            'episodesData'   => $episodesData,
+            'storageData'    => $storageData,
             'bandwidthLimit' => $bandwidthLimit === null ? null : formatBytes($bandwidthLimit * 1000000000),
-            'onlyPodcastId' => $onlyPodcastId,
+            'onlyPodcastId'  => $onlyPodcastId,
         ];
 
         return view('dashboard', $data);

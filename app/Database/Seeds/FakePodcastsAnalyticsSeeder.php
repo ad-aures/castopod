@@ -122,50 +122,50 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                         $hits = rand(0, (int) $probability2);
 
                         $analyticsPodcasts[] = [
-                            'podcast_id' => $podcast->id,
-                            'date' => date('Y-m-d', $date),
-                            'duration' => rand(60, 3600),
-                            'bandwidth' => rand(1000000, 10000000),
-                            'hits' => $hits,
+                            'podcast_id'       => $podcast->id,
+                            'date'             => date('Y-m-d', $date),
+                            'duration'         => rand(60, 3600),
+                            'bandwidth'        => rand(1000000, 10000000),
+                            'hits'             => $hits,
                             'unique_listeners' => $hits,
                         ];
                         $analyticsPodcastsByHour[] = [
                             'podcast_id' => $podcast->id,
-                            'date' => date('Y-m-d', $date),
-                            'hour' => rand(0, 23),
-                            'hits' => $hits,
+                            'date'       => date('Y-m-d', $date),
+                            'hour'       => rand(0, 23),
+                            'hits'       => $hits,
                         ];
                         $analyticsPodcastsByCountry[] = [
-                            'podcast_id' => $podcast->id,
-                            'date' => date('Y-m-d', $date),
+                            'podcast_id'   => $podcast->id,
+                            'date'         => date('Y-m-d', $date),
                             'country_code' => $countryCode,
-                            'hits' => $hits,
+                            'hits'         => $hits,
                         ];
                         $analyticsPodcastsByEpisode[] = [
                             'podcast_id' => $podcast->id,
-                            'date' => date('Y-m-d', $date),
+                            'date'       => date('Y-m-d', $date),
                             'episode_id' => $episode->id,
-                            'age' => $age,
-                            'hits' => $hits,
+                            'age'        => $age,
+                            'hits'       => $hits,
                         ];
                         $analyticsPodcastsByPlayer[] = [
                             'podcast_id' => $podcast->id,
-                            'date' => date('Y-m-d', $date),
-                            'service' => $service,
-                            'app' => $app,
-                            'device' => $device,
-                            'os' => $os,
-                            'is_bot' => $isBot,
-                            'hits' => $hits,
+                            'date'       => date('Y-m-d', $date),
+                            'service'    => $service,
+                            'app'        => $app,
+                            'device'     => $device,
+                            'os'         => $os,
+                            'is_bot'     => $isBot,
+                            'hits'       => $hits,
                         ];
                         $analyticsPodcastsByRegion[] = [
-                            'podcast_id' => $podcast->id,
-                            'date' => date('Y-m-d', $date),
+                            'podcast_id'   => $podcast->id,
+                            'date'         => date('Y-m-d', $date),
                             'country_code' => $countryCode,
-                            'region_code' => $regionCode,
-                            'latitude' => $latitude,
-                            'longitude' => $longitude,
-                            'hits' => $hits,
+                            'region_code'  => $regionCode,
+                            'latitude'     => $latitude,
+                            'longitude'    => $longitude,
+                            'hits'         => $hits,
                         ];
                     }
                 }

@@ -27,14 +27,14 @@ $routes->group('', [
 ], static function ($routes): void {
     $routes->group(config('Analytics')->gateway . '/(:num)/(:class)', static function ($routes): void {
         $routes->get('/', 'AnalyticsController::getData/$1/$2', [
-            'as' => 'analytics-full-data',
+            'as'     => 'analytics-full-data',
             'filter' => config('Analytics')
                 ->routeFilters[
                 'analytics-full-data'
             ],
         ]);
         $routes->get('(:filter)', 'AnalyticsController::getData/$1/$2/$3', [
-            'as' => 'analytics-data',
+            'as'     => 'analytics-data',
             'filter' => config('Analytics')
                 ->routeFilters['analytics-data'],
         ]);
@@ -42,7 +42,7 @@ $routes->group('', [
             '(:filter)/(:num)',
             'AnalyticsController::getData/$1/$2/$3/$4',
             [
-                'as' => 'analytics-filtered-data',
+                'as'     => 'analytics-filtered-data',
                 'filter' => config('Analytics')
                     ->routeFilters[
                     'analytics-filtered-data'

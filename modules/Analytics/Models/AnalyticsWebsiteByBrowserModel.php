@@ -50,7 +50,7 @@ class AnalyticsWebsiteByBrowserModel extends Model
                 ->selectSum('hits', 'values')
                 ->where([
                     'podcast_id' => $podcastId,
-                    'date >' => $oneWeekAgo,
+                    'date >'     => $oneWeekAgo,
                 ])
                 ->groupBy('labels')
                 ->orderBy('values', 'DESC')

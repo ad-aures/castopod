@@ -68,21 +68,21 @@ class ActorObject extends ObjectType
         $this->followers = $actor->followers_url;
 
         $this->image = [
-            'type' => 'Image',
+            'type'      => 'Image',
             'mediaType' => $actor->cover_image_mimetype,
-            'url' => $actor->cover_image_url,
+            'url'       => $actor->cover_image_url,
         ];
 
         $this->icon = [
-            'type' => 'Image',
+            'type'      => 'Image',
             'mediaType' => $actor->avatar_image_mimetype,
-            'url' => $actor->avatar_image_url,
+            'url'       => $actor->avatar_image_url,
         ];
 
         if ($actor->public_key !== null) {
             $this->publicKey = [
-                'id' => $actor->public_key_id,
-                'owner' => $actor->uri,
+                'id'           => $actor->public_key_id,
+                'owner'        => $actor->uri,
                 'publicKeyPem' => $actor->public_key,
             ];
         }

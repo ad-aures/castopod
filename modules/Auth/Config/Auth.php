@@ -17,19 +17,19 @@ class Auth extends ShieldAuth
      * @var array<string, string>
      */
     public array $views = [
-        'login' => 'login',
-        'register' => 'register',
-        'layout' => '_layout',
-        'action_email_2fa' => 'email_2fa_show',
-        'action_email_2fa_verify' => 'email_2fa_verify',
-        'action_email_2fa_email' => 'emails/email_2fa_email',
-        'action_email_activate_show' => 'email_activate_show',
+        'login'                       => 'login',
+        'register'                    => 'register',
+        'layout'                      => '_layout',
+        'action_email_2fa'            => 'email_2fa_show',
+        'action_email_2fa_verify'     => 'email_2fa_verify',
+        'action_email_2fa_email'      => 'emails/email_2fa_email',
+        'action_email_activate_show'  => 'email_activate_show',
         'action_email_activate_email' => 'emails/email_activate_email',
-        'magic-link-login' => 'magic_link_form',
-        'magic-link-message' => 'magic_link_message',
-        'magic-link-email' => 'emails/magic_link_email',
-        'magic-link-set-password' => 'magic_link_set_password',
-        'welcome-email' => 'emails/welcome_email',
+        'magic-link-login'            => 'magic_link_form',
+        'magic-link-message'          => 'magic_link_message',
+        'magic-link-email'            => 'emails/magic_link_email',
+        'magic-link-set-password'     => 'magic_link_set_password',
+        'welcome-email'               => 'emails/welcome_email',
     ];
 
     /**
@@ -44,8 +44,8 @@ class Auth extends ShieldAuth
      */
     public array $redirects = [
         'register' => '/',
-        'login' => '/',
-        'logout' => 'login',
+        'login'    => '/',
+        'logout'   => 'login',
     ];
 
     /**
@@ -65,7 +65,7 @@ class Auth extends ShieldAuth
      */
     public array $actions = [
         'register' => null,
-        'login' => null,
+        'login'    => null,
     ];
 
     /**
@@ -124,8 +124,8 @@ class Auth extends ShieldAuth
 
         $this->redirects = [
             'register' => $adminGateway,
-            'login' => $adminGateway,
-            'logout' => $adminGateway,
+            'login'    => $adminGateway,
+            'logout'   => $adminGateway,
         ];
 
         // FIXME: enable2FA config can only be updated in the .env

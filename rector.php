@@ -5,7 +5,6 @@ declare(strict_types=1);
 use Rector\CodeQuality\Rector\PropertyFetch\ExplicitMethodCallOverMagicGetSetRector;
 use Rector\CodingStyle\Rector\ClassMethod\UnSpreadOperatorRector;
 use Rector\CodingStyle\Rector\Encapsed\EncapsedStringsToSprintfRector;
-use Rector\CodingStyle\Rector\FuncCall\ConsistentPregDelimiterRector;
 use Rector\CodingStyle\Rector\Stmt\NewlineAfterStatementRector;
 use Rector\CodingStyle\Rector\String_\SymplifyQuoteEscapeRector;
 use Rector\Config\RectorConfig;
@@ -76,8 +75,4 @@ return static function (RectorConfig $rectorConfig): void {
 
     // Path to phpstan with extensions, that PHPStan in Rector uses to determine types
     $rectorConfig->phpstanConfig(__DIR__ . '/phpstan.neon');
-
-    $rectorConfig->ruleWithConfiguration(ConsistentPregDelimiterRector::class, [
-        ConsistentPregDelimiterRector::DELIMITER => '~',
-    ]);
 };

@@ -46,7 +46,7 @@ class EpisodeController extends BaseController
             if (
                 ! ($episode = (new EpisodeModel())
                     ->where([
-                        'id' => $params[1],
+                        'id'         => $params[1],
                         'podcast_id' => $params[0],
                     ])
                     ->first())
@@ -101,10 +101,10 @@ class EpisodeController extends BaseController
 
         helper('form');
         $data = [
-            'podcast' => $this->podcast,
+            'podcast'  => $this->podcast,
             'episodes' => $episodes->paginate(10),
-            'pager' => $episodes->pager,
-            'query' => $query,
+            'pager'    => $episodes->pager,
+            'query'    => $query,
         ];
 
         replace_breadcrumb_params([
@@ -133,9 +133,12 @@ class EpisodeController extends BaseController
 
         $currentSeasonNumber = (new EpisodeModel())->getCurrentSeasonNumber($this->podcast->id);
         $data = [
-            'podcast' => $this->podcast,
+            'podcast'             => $this->podcast,
             'currentSeasonNumber' => $currentSeasonNumber,
-            'nextEpisodeNumber' => (new EpisodeModel())->getNextEpisodeNumber($this->podcast->id, $currentSeasonNumber),
+            'nextEpisodeNumber'   => (new EpisodeModel())->getNextEpisodeNumber(
+                $this->podcast->id,
+                $currentSeasonNumber
+            ),
         ];
         replace_breadcrumb_params([
             0 => $this->podcast->at_handle,
@@ -146,13 +149,11 @@ class EpisodeController extends BaseController
     public function attemptCreate(): RedirectResponse
     {
         $rules = [
-            'slug' => 'max_length[128]',
-            'audio_file' => 'uploaded[audio_file]|ext_in[audio_file,mp3,m4a]',
-            'cover' =>
-                'is_image[cover]|ext_in[cover,jpg,jpeg,png]|min_dims[cover,1400,1400]|is_image_ratio[cover,1,1]',
-            'transcript_file' =>
-                'ext_in[transcript,srt]|permit_empty',
-            'chapters_file' => 'ext_in[chapters,json]|permit_empty',
+            'slug'            => 'max_length[128]',
+            'audio_file'      => 'uploaded[audio_file]|ext_in[audio_file,mp3,m4a]',
+            'cover'           => 'is_image[cover]|ext_in[cover,jpg,jpeg,png]|min_dims[cover,1400,1400]|is_image_ratio[cover,1,1]',
+            'transcript_file' => 'ext_in[transcript,srt]|permit_empty',
+            'chapters_file'   => 'ext_in[chapters,json]|permit_empty',
         ];
 
         if ($this->podcast->type === 'serial') {
@@ -168,7 +169,7 @@ class EpisodeController extends BaseController
 
         if ((new EpisodeModel())
             ->where([
-                'slug' => $this->request->getPost('slug'),
+                'slug'       => $this->request->getPost('slug'),
                 'podcast_id' => $this->podcast->id,
             ])
             ->first()) {
@@ -182,20 +183,19 @@ class EpisodeController extends BaseController
         $db->transStart();
 
         $newEpisode = new Episode([
-            'podcast_id' => $this->podcast->id,
-            'title' => $this->request->getPost('title'),
-            'slug' => $this->request->getPost('slug'),
-            'guid' => null,
-            'audio' => $this->request->getFile('audio_file'),
-            'cover' => $this->request->getFile('cover'),
+            'podcast_id'           => $this->podcast->id,
+            'title'                => $this->request->getPost('title'),
+            'slug'                 => $this->request->getPost('slug'),
+            'guid'                 => null,
+            'audio'                => $this->request->getFile('audio_file'),
+            'cover'                => $this->request->getFile('cover'),
             'description_markdown' => $this->request->getPost('description'),
-            'location' => $this->request->getPost('location_name') === '' ? null : new Location($this->request->getPost(
-                'location_name'
-            )),
-            'transcript' => $this->request->getFile('transcript'),
-            'chapters' => $this->request->getFile('chapters'),
-            'parental_advisory' =>
-                $this->request->getPost('parental_advisory') !== 'undefined'
+            'location'             => $this->request->getPost('location_name') === '' ? null : new Location(
+                $this->request->getPost('location_name')
+            ),
+            'transcript'        => $this->request->getFile('transcript'),
+            'chapters'          => $this->request->getFile('chapters'),
+            'parental_advisory' => $this->request->getPost('parental_advisory') !== 'undefined'
                     ? $this->request->getPost('parental_advisory')
                     : null,
             'number' => $this->request->getPost('episode_number')
@@ -204,13 +204,13 @@ class EpisodeController extends BaseController
             'season_number' => $this->request->getPost('season_number')
                 ? (int) $this->request->getPost('season_number')
                 : null,
-            'type' => $this->request->getPost('type'),
-            'is_blocked' => $this->request->getPost('block') === 'yes',
+            'type'              => $this->request->getPost('type'),
+            'is_blocked'        => $this->request->getPost('block') === 'yes',
             'custom_rss_string' => $this->request->getPost('custom_rss'),
-            'is_premium' => $this->request->getPost('premium') === 'yes',
-            'created_by' => user_id(),
-            'updated_by' => user_id(),
-            'published_at' => null,
+            'is_premium'        => $this->request->getPost('premium') === 'yes',
+            'created_by'        => user_id(),
+            'updated_by'        => user_id(),
+            'published_at'      => null,
         ]);
 
         $transcriptChoice = $this->request->getPost('transcript-choice');
@@ -284,14 +284,11 @@ class EpisodeController extends BaseController
     public function attemptEdit(): RedirectResponse
     {
         $rules = [
-            'slug' => 'max_length[128]',
-            'audio_file' =>
-                'uploaded[audio_file]|ext_in[audio_file,mp3,m4a]|permit_empty',
-            'cover' =>
-                'is_image[cover]|ext_in[cover,jpg,jpeg,png]|min_dims[cover,1400,1400]|is_image_ratio[cover,1,1]',
-            'transcript_file' =>
-                'ext_in[transcript_file,txt,html,srt,json]|permit_empty',
-            'chapters_file' => 'ext_in[chapters_file,json]|permit_empty',
+            'slug'            => 'max_length[128]',
+            'audio_file'      => 'uploaded[audio_file]|ext_in[audio_file,mp3,m4a]|permit_empty',
+            'cover'           => 'is_image[cover]|ext_in[cover,jpg,jpeg,png]|min_dims[cover,1400,1400]|is_image_ratio[cover,1,1]',
+            'transcript_file' => 'ext_in[transcript_file,txt,html,srt,json]|permit_empty',
+            'chapters_file'   => 'ext_in[chapters_file,json]|permit_empty',
         ];
 
         if ($this->podcast->type === 'serial') {
@@ -469,9 +466,8 @@ class EpisodeController extends BaseController
     {
         if ($this->podcast->publication_status === 'published') {
             $rules = [
-                'publication_method' => 'required',
-                'scheduled_publication_date' =>
-                    'valid_date[Y-m-d H:i]|permit_empty',
+                'publication_method'         => 'required',
+                'scheduled_publication_date' => 'valid_date[Y-m-d H:i]|permit_empty',
             ];
 
             if (! $this->validate($rules)) {
@@ -486,9 +482,9 @@ class EpisodeController extends BaseController
         $db->transStart();
 
         $newPost = new Post([
-            'actor_id' => $this->podcast->actor_id,
+            'actor_id'   => $this->podcast->actor_id,
             'episode_id' => $this->episode->id,
-            'message' => $this->request->getPost('message'),
+            'message'    => $this->request->getPost('message'),
             'created_by' => user_id(),
         ]);
 
@@ -557,9 +553,9 @@ class EpisodeController extends BaseController
             $data = [
                 'podcast' => $this->podcast,
                 'episode' => $this->episode,
-                'post' => (new PostModel())
+                'post'    => (new PostModel())
                     ->where([
-                        'actor_id' => $this->podcast->actor_id,
+                        'actor_id'   => $this->podcast->actor_id,
                         'episode_id' => $this->episode->id,
                     ])
                     ->first(),
@@ -582,10 +578,9 @@ class EpisodeController extends BaseController
     {
         if ($this->podcast->publication_status === 'published') {
             $rules = [
-                'post_id' => 'required',
-                'publication_method' => 'required',
-                'scheduled_publication_date' =>
-                    'valid_date[Y-m-d H:i]|permit_empty',
+                'post_id'                    => 'required',
+                'publication_method'         => 'required',
+                'scheduled_publication_date' => 'valid_date[Y-m-d H:i]|permit_empty',
             ];
 
             if (! $this->validate($rules)) {
@@ -670,7 +665,7 @@ class EpisodeController extends BaseController
             $postModel = new PostModel();
             $post = $postModel
                 ->where([
-                    'actor_id' => $this->podcast->actor_id,
+                    'actor_id'   => $this->podcast->actor_id,
                     'episode_id' => $this->episode->id,
                 ])
                 ->first();
@@ -815,9 +810,9 @@ class EpisodeController extends BaseController
 
         $allPostsLinkedToEpisode = (new PostModel())
             ->where([
-                'episode_id' => $this->episode->id,
+                'episode_id'     => $this->episode->id,
                 'in_reply_to_id' => null,
-                'reblog_of_id' => null,
+                'reblog_of_id'   => null,
             ])
             ->findAll();
         foreach ($allPostsLinkedToEpisode as $post) {
@@ -826,7 +821,7 @@ class EpisodeController extends BaseController
 
         $allCommentsLinkedToEpisode = (new EpisodeCommentModel())
             ->where([
-                'episode_id' => $this->episode->id,
+                'episode_id'     => $this->episode->id,
                 'in_reply_to_id' => null,
             ])
             ->findAll();
@@ -934,12 +929,18 @@ class EpisodeController extends BaseController
 
         //remove episode media files from disk
         foreach ($episodeMediaList as $episodeMedia) {
-            if ($episodeMedia !== null && ! $episodeMedia->deleteFile()) {
-                $warnings[] = lang('Episode.messages.deleteFileError', [
-                    'type' => $episodeMedia->type,
-                    'file_key' => $episodeMedia->file_key,
-                ]);
+            if ($episodeMedia === null) {
+                continue;
             }
+
+            if ($episodeMedia->deleteFile()) {
+                continue;
+            }
+
+            $warnings[] = lang('Episode.messages.deleteFileError', [
+                'type'     => $episodeMedia->type,
+                'file_key' => $episodeMedia->file_key,
+            ]);
         }
 
         if ($warnings !== []) {
@@ -962,7 +963,7 @@ class EpisodeController extends BaseController
         $data = [
             'podcast' => $this->podcast,
             'episode' => $this->episode,
-            'themes' => EpisodeModel::$themes,
+            'themes'  => EpisodeModel::$themes,
         ];
 
         replace_breadcrumb_params([
@@ -988,9 +989,9 @@ class EpisodeController extends BaseController
         $message = $this->request->getPost('message');
 
         $newComment = new EpisodeComment([
-            'actor_id' => interact_as_actor_id(),
+            'actor_id'   => interact_as_actor_id(),
             'episode_id' => $this->episode->id,
-            'message' => $message,
+            'message'    => $message,
             'created_at' => new Time('now'),
             'created_by' => user_id(),
         ]);
@@ -1025,12 +1026,12 @@ class EpisodeController extends BaseController
         $message = $this->request->getPost('message');
 
         $newReply = new EpisodeComment([
-            'actor_id' => interact_as_actor_id(),
-            'episode_id' => $this->episode->id,
-            'message' => $message,
+            'actor_id'       => interact_as_actor_id(),
+            'episode_id'     => $this->episode->id,
+            'message'        => $message,
             'in_reply_to_id' => $commentId,
-            'created_at' => new Time('now'),
-            'created_by' => user_id(),
+            'created_at'     => new Time('now'),
+            'created_by'     => user_id(),
         ]);
 
         $commentModel = new EpisodeCommentModel();

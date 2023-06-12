@@ -57,11 +57,10 @@ class PersonModel extends Model
      * @var array<string, string>
      */
     protected $validationRules = [
-        'full_name' => 'required',
-        'unique_name' =>
-            'required|regex_match[/^[a-z0-9\-]{1,32}$/]|is_unique[persons.unique_name,id,{id}]',
-        'created_by' => 'required',
-        'updated_by' => 'required',
+        'full_name'   => 'required',
+        'unique_name' => 'required|regex_match[/^[a-z0-9\-]{1,32}$/]|is_unique[persons.unique_name,id,{id}]',
+        'created_by'  => 'required',
+        'updated_by'  => 'required',
     ];
 
     /**
@@ -191,12 +190,12 @@ class PersonModel extends Model
     public function addPerson(string $fullName, ?string $informationUrl, string $image): int | bool
     {
         $person = new Person([
-            'full_name' => $fullName,
-            'unique_name' => slugify($fullName),
+            'full_name'       => $fullName,
+            'unique_name'     => slugify($fullName),
             'information_url' => $informationUrl,
-            'image' => download_file($image),
-            'created_by' => user_id(),
-            'updated_by' => user_id(),
+            'image'           => download_file($image),
+            'created_by'      => user_id(),
+            'updated_by'      => user_id(),
         ]);
 
         return $this->insert($person);
@@ -257,11 +256,11 @@ class PersonModel extends Model
     ): bool {
         return $this->db->table('episodes_persons')
             ->insert([
-                'podcast_id' => $podcastId,
-                'episode_id' => $episodeId,
-                'person_id' => $personId,
+                'podcast_id'   => $podcastId,
+                'episode_id'   => $episodeId,
+                'person_id'    => $personId,
                 'person_group' => $groupSlug,
-                'person_role' => $roleSlug,
+                'person_role'  => $roleSlug,
             ]);
     }
 
@@ -269,10 +268,10 @@ class PersonModel extends Model
     {
         return $this->db->table('podcasts_persons')
             ->insert([
-                'podcast_id' => $podcastId,
-                'person_id' => $personId,
+                'podcast_id'   => $podcastId,
+                'person_id'    => $personId,
                 'person_group' => $groupSlug,
-                'person_role' => $roleSlug,
+                'person_role'  => $roleSlug,
             ]);
     }
 
@@ -301,17 +300,17 @@ class PersonModel extends Model
             if ($roles === []) {
                 $data[] = [
                     'podcast_id' => $podcastId,
-                    'person_id' => $personId,
+                    'person_id'  => $personId,
                 ];
             }
 
             foreach ($roles as $role) {
                 $groupRole = explode(',', $role);
                 $data[] = [
-                    'podcast_id' => $podcastId,
-                    'person_id' => $personId,
+                    'podcast_id'   => $podcastId,
+                    'person_id'    => $personId,
                     'person_group' => $groupRole[0],
-                    'person_role' => $groupRole[1],
+                    'person_role'  => $groupRole[1],
                 ];
             }
         }
@@ -338,7 +337,7 @@ class PersonModel extends Model
         return $this->db->table('podcasts_persons')
             ->delete([
                 'podcast_id' => $podcastId,
-                'person_id' => $personId,
+                'person_id'  => $personId,
             ]);
     }
 
@@ -369,18 +368,18 @@ class PersonModel extends Model
                     foreach ($groupsRoles as $groupRole) {
                         $groupRole = explode(',', $groupRole);
                         $data[] = [
-                            'podcast_id' => $podcastId,
-                            'episode_id' => $episodeId,
-                            'person_id' => $personId,
+                            'podcast_id'   => $podcastId,
+                            'episode_id'   => $episodeId,
+                            'person_id'    => $personId,
                             'person_group' => $groupRole[0],
-                            'person_role' => $groupRole[1],
+                            'person_role'  => $groupRole[1],
                         ];
                     }
                 } else {
                     $data[] = [
                         'podcast_id' => $podcastId,
                         'episode_id' => $episodeId,
-                        'person_id' => $personId,
+                        'person_id'  => $personId,
                     ];
                 }
             }
@@ -406,7 +405,7 @@ class PersonModel extends Model
             ->delete([
                 'podcast_id' => $podcastId,
                 'episode_id' => $episodeId,
-                'person_id' => $personId,
+                'person_id'  => $personId,
             ]);
     }
 

@@ -104,10 +104,10 @@ if (can_user_interact()): ?>
             route_to('post-remote-action', esc($podcast->handle), $reply->id, 'reblog'),
             icon('repeat', 'text-lg mr-1 opacity-40') . $reply->reblogs_count,
             [
-                'class' => 'inline-flex items-center hover:underline text-sm',
-                'width' => 420,
+                'class'  => 'inline-flex items-center hover:underline text-sm',
+                'width'  => 420,
                 'height' => 620,
-                'title' => lang('Post.reblogs', [
+                'title'  => lang('Post.reblogs', [
                     'numberOfReblogs' => $reply->reblogs_count,
                 ]),
             ],
@@ -116,10 +116,10 @@ if (can_user_interact()): ?>
             route_to('post-remote-action', esc($podcast->handle), $reply->id, 'favourite'),
             icon('heart', 'text-lg mr-1 opacity-40') . $reply->favourites_count,
             [
-                'class' => 'inline-flex items-center hover:underline text-sm',
-                'width' => 420,
+                'class'  => 'inline-flex items-center hover:underline text-sm',
+                'width'  => 420,
                 'height' => 620,
-                'title' => lang('Post.favourites', [
+                'title'  => lang('Post.favourites', [
                     'numberOfFavourites' => $reply->favourites_count,
                 ]),
             ],

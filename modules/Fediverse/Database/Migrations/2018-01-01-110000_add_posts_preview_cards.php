@@ -20,11 +20,11 @@ class AddPostsPreviewCards extends Migration
     {
         $this->forge->addField([
             'post_id' => [
-                'type' => 'BINARY',
+                'type'       => 'BINARY',
                 'constraint' => 16,
             ],
             'preview_card_id' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
             ],
         ]);

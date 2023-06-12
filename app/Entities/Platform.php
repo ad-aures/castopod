@@ -29,14 +29,14 @@ class Platform extends Entity
      * @var array<string, string>
      */
     protected $casts = [
-        'slug' => 'string',
-        'type' => 'string',
-        'label' => 'string',
-        'home_url' => 'string',
-        'submit_url' => '?string',
-        'link_url' => '?string',
-        'account_id' => '?string',
-        'is_visible' => '?boolean',
+        'slug'        => 'string',
+        'type'        => 'string',
+        'label'       => 'string',
+        'home_url'    => 'string',
+        'submit_url'  => '?string',
+        'link_url'    => '?string',
+        'account_id'  => '?string',
+        'is_visible'  => '?boolean',
         'is_on_embed' => '?boolean',
     ];
 }

@@ -19,10 +19,10 @@ class RolesDoc extends BaseCommand
      * @var array<string, string>
      */
     private const COMMENT_BLOCK_IDS = [
-        'instance_roles' => 'AUTH-INSTANCE-ROLES-LIST',
+        'instance_roles'       => 'AUTH-INSTANCE-ROLES-LIST',
         'instance_permissions' => 'AUTH-INSTANCE-PERMISSIONS-LIST',
-        'podcast_roles' => 'AUTH-PODCAST-ROLES-LIST',
-        'podcast_permissions' => 'AUTH-PODCAST-PERMISSIONS-LIST',
+        'podcast_roles'        => 'AUTH-PODCAST-ROLES-LIST',
+        'podcast_permissions'  => 'AUTH-PODCAST-PERMISSIONS-LIST',
     ];
 
     /**

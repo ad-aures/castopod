@@ -177,7 +177,7 @@ class PodcastController extends BaseController
         $data = [
             'languageOptions' => $languageOptions,
             'categoryOptions' => $categoryOptions,
-            'browserLang' => get_browser_language($this->request->getServer('HTTP_ACCEPT_LANGUAGE')),
+            'browserLang'     => get_browser_language($this->request->getServer('HTTP_ACCEPT_LANGUAGE')),
         ];
 
         return view('podcast/create', $data);
@@ -186,8 +186,7 @@ class PodcastController extends BaseController
     public function attemptCreate(): RedirectResponse
     {
         $rules = [
-            'cover' =>
-                'uploaded[cover]|is_image[cover]|ext_in[cover,jpg,jpeg,png]|min_dims[cover,1400,1400]|is_image_ratio[cover,1,1]',
+            'cover'  => 'uploaded[cover]|is_image[cover]|ext_in[cover,jpg,jpeg,png]|min_dims[cover,1400,1400]|is_image_ratio[cover,1,1]',
             'banner' => 'is_image[banner]|ext_in[banner,jpg,jpeg,png]|min_dims[banner,1500,500]|is_image_ratio[banner,3,1]',
         ];
 
@@ -211,39 +210,38 @@ class PodcastController extends BaseController
         $db->transStart();
 
         $newPodcast = new Podcast([
-            'title' => $this->request->getPost('title'),
-            'handle' => $this->request->getPost('handle'),
-            'cover' => $this->request->getFile('cover'),
-            'banner' => $this->request->getFile('banner'),
+            'title'                => $this->request->getPost('title'),
+            'handle'               => $this->request->getPost('handle'),
+            'cover'                => $this->request->getFile('cover'),
+            'banner'               => $this->request->getFile('banner'),
             'description_markdown' => $this->request->getPost('description'),
-            'language_code' => $this->request->getPost('language'),
-            'category_id' => $this->request->getPost('category'),
-            'parental_advisory' =>
-                $this->request->getPost('parental_advisory') !== 'undefined'
+            'language_code'        => $this->request->getPost('language'),
+            'category_id'          => $this->request->getPost('category'),
+            'parental_advisory'    => $this->request->getPost('parental_advisory') !== 'undefined'
                     ? $this->request->getPost('parental_advisory')
                     : null,
-            'owner_name' => $this->request->getPost('owner_name'),
+            'owner_name'  => $this->request->getPost('owner_name'),
             'owner_email' => $this->request->getPost('owner_email'),
-            'publisher' => $this->request->getPost('publisher'),
-            'type' => $this->request->getPost('type'),
-            'copyright' => $this->request->getPost('copyright'),
-            'location' => $this->request->getPost('location_name') === '' ? null : new Location($this->request->getPost(
-                'location_name'
-            )),
+            'publisher'   => $this->request->getPost('publisher'),
+            'type'        => $this->request->getPost('type'),
+            'copyright'   => $this->request->getPost('copyright'),
+            'location'    => $this->request->getPost('location_name') === '' ? null : new Location(
+                $this->request->getPost('location_name')
+            ),
             'payment_pointer' => $this->request->getPost(
                 'payment_pointer'
             ) === '' ? null : $this->request->getPost('payment_pointer'),
-            'custom_rss_string' => $this->request->getPost('custom_rss'),
-            'partner_id' => $partnerId,
-            'partner_link_url' => $partnerLinkUrl,
-            'partner_image_url' => $partnerImageUrl,
-            'is_blocked' => $this->request->getPost('block') === 'yes',
-            'is_completed' => $this->request->getPost('complete') === 'yes',
-            'is_locked' => $this->request->getPost('lock') === 'yes',
+            'custom_rss_string'     => $this->request->getPost('custom_rss'),
+            'partner_id'            => $partnerId,
+            'partner_link_url'      => $partnerLinkUrl,
+            'partner_image_url'     => $partnerImageUrl,
+            'is_blocked'            => $this->request->getPost('block') === 'yes',
+            'is_completed'          => $this->request->getPost('complete') === 'yes',
+            'is_locked'             => $this->request->getPost('lock') === 'yes',
             'is_premium_by_default' => $this->request->getPost('premium_by_default') === 'yes',
-            'created_by' => user_id(),
-            'updated_by' => user_id(),
-            'published_at' => null,
+            'created_by'            => user_id(),
+            'updated_by'            => user_id(),
+            'published_at'          => null,
         ]);
 
         $podcastModel = new PodcastModel();
@@ -287,7 +285,7 @@ class PodcastController extends BaseController
         $categoryOptions = (new CategoryModel())->getCategoryOptions();
 
         $data = [
-            'podcast' => $this->podcast,
+            'podcast'         => $this->podcast,
             'languageOptions' => $languageOptions,
             'categoryOptions' => $categoryOptions,
         ];
@@ -301,8 +299,7 @@ class PodcastController extends BaseController
     public function attemptEdit(): RedirectResponse
     {
         $rules = [
-            'cover' =>
-                'is_image[cover]|ext_in[cover,jpg,jpeg,png]|min_dims[cover,1400,1400]|is_image_ratio[cover,1,1]',
+            'cover'  => 'is_image[cover]|ext_in[cover,jpg,jpeg,png]|min_dims[cover,1400,1400]|is_image_ratio[cover,1,1]',
             'banner' => 'is_image[banner]|ext_in[banner,jpg,jpeg,png]|min_dims[banner,1500,500]|is_image_ratio[banner,3,1]',
         ];
 
@@ -443,7 +440,7 @@ class PodcastController extends BaseController
 
         return view('podcast/latest_episodes', [
             'episodes' => $episodes,
-            'podcast' => (new PodcastModel())->getPodcastById($podcastId),
+            'podcast'  => (new PodcastModel())->getPodcastById($podcastId),
         ]);
     }
 
@@ -510,7 +507,7 @@ class PodcastController extends BaseController
                         ->withInput()
                         ->with('error', lang('Podcast.messages.deleteEpisodeMediaError', [
                             'episode_slug' => $podcastEpisode->slug,
-                            'type' => $episodeMedia->type,
+                            'type'         => $episodeMedia->type,
                         ]));
                 }
             }
@@ -640,9 +637,8 @@ class PodcastController extends BaseController
         }
 
         $rules = [
-            'publication_method' => 'required',
-            'scheduled_publication_date' =>
-            'valid_date[Y-m-d H:i]|permit_empty',
+            'publication_method'         => 'required',
+            'scheduled_publication_date' => 'valid_date[Y-m-d H:i]|permit_empty',
         ];
 
         if (! $this->validate($rules)) {
@@ -679,8 +675,8 @@ class PodcastController extends BaseController
         // only create post if message is not empty
         if ($message !== '') {
             $newPost = new Post([
-                'actor_id' => $this->podcast->actor_id,
-                'message' => $message,
+                'actor_id'   => $this->podcast->actor_id,
+                'message'    => $message,
                 'created_by' => user_id(),
             ]);
 
@@ -749,9 +745,9 @@ class PodcastController extends BaseController
 
         $data = [
             'podcast' => $this->podcast,
-            'post' => (new PostModel())
+            'post'    => (new PostModel())
                 ->where([
-                    'actor_id' => $this->podcast->actor_id,
+                    'actor_id'   => $this->podcast->actor_id,
                     'episode_id' => null,
                 ])
                 ->first(),
@@ -774,9 +770,8 @@ class PodcastController extends BaseController
         }
 
         $rules = [
-            'publication_method' => 'required',
-            'scheduled_publication_date' =>
-                'valid_date[Y-m-d H:i]|permit_empty',
+            'publication_method'         => 'required',
+            'scheduled_publication_date' => 'valid_date[Y-m-d H:i]|permit_empty',
         ];
 
         if (! $this->validate($rules)) {
@@ -811,7 +806,7 @@ class PodcastController extends BaseController
 
         $post = (new PostModel())
             ->where([
-                'actor_id' => $this->podcast->actor_id,
+                'actor_id'   => $this->podcast->actor_id,
                 'episode_id' => null,
             ])
             ->first();
@@ -837,7 +832,7 @@ class PodcastController extends BaseController
                 $postModel = new PostModel();
                 $post = $postModel
                     ->where([
-                        'actor_id' => $this->podcast->actor_id,
+                        'actor_id'   => $this->podcast->actor_id,
                         'episode_id' => null,
                     ])
                     ->first();
@@ -846,8 +841,8 @@ class PodcastController extends BaseController
         } elseif ($newPostMessage !== '') {
             // create post if there is no post and message is not empty
             $newPost = new Post([
-                'actor_id' => $this->podcast->actor_id,
-                'message' => $newPostMessage,
+                'actor_id'   => $this->podcast->actor_id,
+                'message'    => $newPostMessage,
                 'created_by' => user_id(),
             ]);
 
@@ -922,7 +917,7 @@ class PodcastController extends BaseController
         $postModel = new PostModel();
         $post = $postModel
             ->where([
-                'actor_id' => $this->podcast->actor_id,
+                'actor_id'   => $this->podcast->actor_id,
                 'episode_id' => null,
             ])
             ->first();

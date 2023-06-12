@@ -17,8 +17,8 @@ class Radio extends FormComponent
     {
         $radioInput = form_radio(
             [
-                'id' => $this->value,
-                'name' => $this->name,
+                'id'    => $this->value,
+                'name'  => $this->name,
                 'class' => 'text-accent-base bg-elevated border-contrast border-3 focus:ring-accent w-6 h-6',
             ],
             $this->value,

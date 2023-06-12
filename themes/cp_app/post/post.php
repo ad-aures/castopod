@@ -13,8 +13,8 @@
 </nav>
 <div class="pb-12">
     <?= view('post/_partials/post_with_replies', [
-            'index' => 1,
-            'post' => $post,
+            'index'   => 1,
+            'post'    => $post,
             'podcast' => $podcast,
         ]) ?>
 </div>

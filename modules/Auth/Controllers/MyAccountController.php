@@ -31,7 +31,7 @@ class MyAccountController extends BaseController
     public function attemptChange(): RedirectResponse
     {
         $rules = [
-            'password' => 'required',
+            'password'     => 'required',
             'new_password' => 'required|strong_password|differs[password]',
         ];
 

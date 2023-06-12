@@ -11,14 +11,14 @@ class IconButton extends Button
     public function __construct(array $attributes)
     {
         $iconButtonAttributes = [
-            'isSquared' => 'true',
-            'title' => $attributes['slot'],
+            'isSquared'    => 'true',
+            'title'        => $attributes['slot'],
             'data-tooltip' => 'bottom',
         ];
 
         $glyphSize = [
             'small' => 'text-sm',
-            'base' => 'text-lg',
+            'base'  => 'text-lg',
             'large' => 'text-2xl',
         ];
 

@@ -11,7 +11,7 @@ $routes->group(
         ->gateway . 'podcasts',
     [
         'namespace' => 'Modules\Api\Rest\V1\Controllers',
-        'filter' => 'rest-api',
+        'filter'    => 'rest-api',
     ],
     static function ($routes): void {
         $routes->get('/', 'PodcastController::list');

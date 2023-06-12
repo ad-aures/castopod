@@ -65,8 +65,7 @@ class PersonController extends BaseController
     public function attemptCreate(): RedirectResponse
     {
         $rules = [
-            'avatar' =>
-                'is_image[avatar]|ext_in[avatar,jpg,jpeg,png]|min_dims[avatar,400,400]|is_image_ratio[avatar,1,1]',
+            'avatar' => 'is_image[avatar]|ext_in[avatar,jpg,jpeg,png]|min_dims[avatar,400,400]|is_image_ratio[avatar,1,1]',
         ];
 
         if (! $this->validate($rules)) {
@@ -80,12 +79,12 @@ class PersonController extends BaseController
         $db->transStart();
 
         $person = new Person([
-            'full_name' => $this->request->getPost('full_name'),
-            'unique_name' => $this->request->getPost('unique_name'),
+            'full_name'       => $this->request->getPost('full_name'),
+            'unique_name'     => $this->request->getPost('unique_name'),
             'information_url' => $this->request->getPost('information_url'),
-            'avatar' => $this->request->getFile('avatar'),
-            'created_by' => user_id(),
-            'updated_by' => user_id(),
+            'avatar'          => $this->request->getFile('avatar'),
+            'created_by'      => user_id(),
+            'updated_by'      => user_id(),
         ]);
 
         $personModel = new PersonModel();
@@ -120,8 +119,7 @@ class PersonController extends BaseController
     public function attemptEdit(): RedirectResponse
     {
         $rules = [
-            'avatar' =>
-                'is_image[avatar]|ext_in[avatar,jpg,jpeg,png]|min_dims[avatar,400,400]|is_image_ratio[avatar,1,1]',
+            'avatar' => 'is_image[avatar]|ext_in[avatar,jpg,jpeg,png]|min_dims[avatar,400,400]|is_image_ratio[avatar,1,1]',
         ];
 
         if (! $this->validate($rules)) {

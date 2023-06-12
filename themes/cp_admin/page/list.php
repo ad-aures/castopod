@@ -19,7 +19,7 @@
     [
         [
             'header' => lang('Page.page'),
-            'cell' => function ($page) {
+            'cell'   => function ($page) {
                 return '<div class="flex flex-col">' .
                     esc($page->title) .
                     '<span class="text-sm text-skin-muted">/' .
@@ -29,7 +29,7 @@
         ],
         [
             'header' => lang('Common.actions'),
-            'cell' => function ($page) {
+            'cell'   => function ($page) {
                 return '<Button uri="' . route_to('page', esc($page->slug)) . '" variant="secondary" size="small">' . lang('Page.go_to_page') . '</Button>' .
                 '<Button uri="' . route_to('page-edit', $page->id) . '" variant="info" size="small">' . lang('Page.edit') . '</Button>' .
                 '<Button uri="' . route_to('page-delete', $page->id) . '" variant="danger" size="small">' . lang('Page.delete') . '</Button>';

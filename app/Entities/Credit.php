@@ -45,12 +45,12 @@ class Credit extends Entity
      * @var array<string, string>
      */
     protected $casts = [
-        'podcast_id' => 'integer',
-        'episode_id' => '?integer',
-        'person_id' => 'integer',
-        'full_name' => 'string',
+        'podcast_id'   => 'integer',
+        'episode_id'   => '?integer',
+        'person_id'    => 'integer',
+        'full_name'    => 'string',
         'person_group' => 'string',
-        'person_role' => 'string',
+        'person_role'  => 'string',
     ];
 
     public function getPerson(): ?Person

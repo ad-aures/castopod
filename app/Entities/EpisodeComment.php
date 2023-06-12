@@ -59,17 +59,17 @@ class EpisodeComment extends UuidEntity
      * @var array<string, string>
      */
     protected $casts = [
-        'id' => 'string',
-        'uri' => 'string',
-        'episode_id' => 'integer',
-        'actor_id' => 'integer',
+        'id'             => 'string',
+        'uri'            => 'string',
+        'episode_id'     => 'integer',
+        'actor_id'       => 'integer',
         'in_reply_to_id' => '?string',
-        'message' => 'string',
-        'message_html' => 'string',
-        'likes_count' => 'integer',
-        'replies_count' => 'integer',
-        'created_by' => 'integer',
-        'is_from_post' => 'boolean',
+        'message'        => 'string',
+        'message_html'   => 'string',
+        'likes_count'    => 'integer',
+        'replies_count'  => 'integer',
+        'created_by'     => 'integer',
+        'is_from_post'   => 'boolean',
     ];
 
     public function getEpisode(): ?Episode

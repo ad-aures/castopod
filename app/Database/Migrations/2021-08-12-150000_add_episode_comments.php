@@ -20,49 +20,49 @@ class AddEpisodeComments extends Migration
     {
         $this->forge->addField([
             'id' => [
-                'type' => 'BINARY',
+                'type'       => 'BINARY',
                 'constraint' => 16,
             ],
             'uri' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 255,
             ],
             'episode_id' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
             ],
             'actor_id' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
             ],
             'in_reply_to_id' => [
-                'type' => 'BINARY',
+                'type'       => 'BINARY',
                 'constraint' => 16,
-                'null' => true,
+                'null'       => true,
             ],
             'message' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 5000,
             ],
             'message_html' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 6000,
             ],
             'likes_count' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
             ],
             'replies_count' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
             ],
             'created_at' => [
                 'type' => 'DATETIME',
             ],
             'created_by' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
-                'null' => true,
+                'null'     => true,
             ],
         ]);
 

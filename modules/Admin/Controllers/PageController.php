@@ -58,8 +58,8 @@ class PageController extends BaseController
     public function attemptCreate(): RedirectResponse
     {
         $page = new Page([
-            'title' => $this->request->getPost('title'),
-            'slug' => $this->request->getPost('slug'),
+            'title'            => $this->request->getPost('title'),
+            'slug'             => $this->request->getPost('slug'),
             'content_markdown' => $this->request->getPost('content'),
         ]);
 

@@ -38,7 +38,7 @@ class SchedulerController extends Controller
         $data = [];
         foreach ($scheduledClips as $scheduledClip) {
             $data[] = [
-                'id' => $scheduledClip->id,
+                'id'     => $scheduledClip->id,
                 'status' => 'pending',
             ];
         }
@@ -51,7 +51,7 @@ class SchedulerController extends Controller
                 // set clip to pending
                 (new ClipModel())
                     ->update($scheduledClip->id, [
-                        'status' => 'running',
+                        'status'         => 'running',
                         'job_started_at' => Time::now(),
                     ]);
                 $clipper = new VideoClipper(
@@ -68,16 +68,16 @@ class SchedulerController extends Controller
                     // success, video was generated
                     $scheduledClip->setMedia(new File($clipper->videoClipOutput), $clipper->videoClipFileKey);
                     $clipModel->update($scheduledClip->id, [
-                        'media_id' => $scheduledClip->media_id,
-                        'status' => 'passed',
-                        'logs' => $clipper->logs,
+                        'media_id'     => $scheduledClip->media_id,
+                        'status'       => 'passed',
+                        'logs'         => $clipper->logs,
                         'job_ended_at' => Time::now(),
                     ]);
                 } else {
                     // error
                     $clipModel->update($scheduledClip->id, [
-                        'status' => 'failed',
-                        'logs' => $clipper->logs,
+                        'status'       => 'failed',
+                        'logs'         => $clipper->logs,
                         'job_ended_at' => Time::now(),
                     ]);
                 }
@@ -85,8 +85,8 @@ class SchedulerController extends Controller
                 $clipModel->clearVideoClipCache($scheduledClip->id);
             } catch (Exception $exception) {
                 (new ClipModel())->update($scheduledClip->id, [
-                    'status' => 'failed',
-                    'logs' => $exception,
+                    'status'       => 'failed',
+                    'logs'         => $exception,
                     'job_ended_at' => Time::now(),
                 ]);
             }

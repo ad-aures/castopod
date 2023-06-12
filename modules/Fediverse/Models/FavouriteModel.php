@@ -52,7 +52,7 @@ class FavouriteModel extends BaseUuidModel
 
         $this->insert([
             'actor_id' => $actor->id,
-            'post_id' => $post->id,
+            'post_id'  => $post->id,
         ]);
 
         model('PostModel', false)
@@ -101,7 +101,7 @@ class FavouriteModel extends BaseUuidModel
 
         $this->where([
             'actor_id' => $actor->id,
-            'post_id' => service('uuid')
+            'post_id'  => service('uuid')
                 ->fromString($post->id)
                 ->getBytes(),
         ])
@@ -112,9 +112,9 @@ class FavouriteModel extends BaseUuidModel
             // get like activity
             $activity = model('ActivityModel', false)
                 ->where([
-                    'type' => 'Like',
+                    'type'     => 'Like',
                     'actor_id' => $actor->id,
-                    'post_id' => service('uuid')
+                    'post_id'  => service('uuid')
                         ->fromString($post->id)
                         ->getBytes(),
                 ])
@@ -165,7 +165,7 @@ class FavouriteModel extends BaseUuidModel
         if (
             $this->where([
                 'actor_id' => $actor->id,
-                'post_id' => service('uuid')
+                'post_id'  => service('uuid')
                     ->fromString($post->id)
                     ->getBytes(),
             ])->first()

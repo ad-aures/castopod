@@ -18,11 +18,11 @@ class AboutController extends BaseController
     public function index(): string
     {
         $instanceInfo = [
-            'host_name' => current_domain(),
-            'version' => CP_VERSION,
+            'host_name'   => current_domain(),
+            'version'     => CP_VERSION,
             'php_version' => PHP_VERSION,
-            'os' => PHP_OS,
-            'languages' => implode(', ', config('App')->supportedLocales),
+            'os'          => PHP_OS,
+            'languages'   => implode(', ', config('App')->supportedLocales),
         ];
 
         return view('about', [

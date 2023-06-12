@@ -39,16 +39,15 @@ $routes->group('', [
             'as' => 'actor',
         ]);
         $routes->post('inbox', 'ActorController::inbox/$1', [
-            'as' => 'inbox',
-            'filter' =>
-                'fediverse:verify-activitystream,verify-blocks,verify-signature',
+            'as'     => 'inbox',
+            'filter' => 'fediverse:verify-activitystream,verify-blocks,verify-signature',
         ]);
         $routes->get('outbox', 'ActorController::outbox/$1', [
-            'as' => 'outbox',
+            'as'     => 'outbox',
             'filter' => 'fediverse:verify-activitystream',
         ]);
         $routes->get('followers', 'ActorController::followers/$1', [
-            'as' => 'followers',
+            'as'     => 'followers',
             'filter' => 'fediverse::activity-stream',
         ]);
         $routes->post('follow', 'ActorController::attemptFollow/$1', [

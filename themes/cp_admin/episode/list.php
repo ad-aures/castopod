@@ -22,7 +22,7 @@
         ]) ?></span><br />
         <?= lang('Common.pageInfo', [
             'currentPage' => $pager->getDetails()['currentPage'],
-            'pageCount' => $pager->getDetails()['pageCount'],
+            'pageCount'   => $pager->getDetails()['pageCount'],
         ]) ?>
     </p>
     <form class="relative flex">
@@ -41,7 +41,7 @@ data_table(
     [
         [
             'header' => lang('Episode.list.episode'),
-            'cell' => function ($episode, $podcast) {
+            'cell'   => function ($episode, $podcast) {
                 $premiumBadge = '';
                 if ($episode->is_premium) {
                     $premiumBadge = '<Icon glyph="exchange-dollar" class="absolute left-0 w-8 pl-2 text-2xl rounded-r-full rounded-tl-lg top-2 text-accent-contrast bg-accent-base" />';
@@ -78,7 +78,7 @@ data_table(
         ],
         [
             'header' => lang('Episode.list.visibility'),
-            'cell' => function ($episode): string {
+            'cell'   => function ($episode): string {
                 return publication_pill(
                     $episode->published_at,
                     $episode->publication_status,
@@ -88,49 +88,49 @@ data_table(
         ],
         [
             'header' => lang('Episode.list.downloads'),
-            'cell' => function ($episode): string {
+            'cell'   => function ($episode): string {
                 return downloads_abbr($episode->downloads);
             },
         ],
         [
             'header' => lang('Episode.list.comments'),
-            'cell' => function ($episode): int {
+            'cell'   => function ($episode): int {
                 return $episode->comments_count;
             },
         ],
         [
             'header' => lang('Episode.list.actions'),
-            'cell' => function ($episode, $podcast) {
+            'cell'   => function ($episode, $podcast) {
                 $items = [
                     [
-                        'type' => 'link',
+                        'type'  => 'link',
                         'title' => lang('Episode.go_to_page'),
-                        'uri' => route_to('episode', esc($podcast->handle), esc($episode->slug)),
+                        'uri'   => route_to('episode', esc($podcast->handle), esc($episode->slug)),
                     ],
                     [
-                        'type' => 'link',
+                        'type'  => 'link',
                         'title' => lang('Episode.edit'),
-                        'uri' => route_to('episode-edit', $podcast->id, $episode->id),
+                        'uri'   => route_to('episode-edit', $podcast->id, $episode->id),
                     ],
                     [
-                        'type' => 'link',
+                        'type'  => 'link',
                         'title' => lang('Episode.embed.title'),
-                        'uri' => route_to('embed-add', $podcast->id, $episode->id),
+                        'uri'   => route_to('embed-add', $podcast->id, $episode->id),
                     ],
                     [
-                        'type' => 'link',
+                        'type'  => 'link',
                         'title' => lang('Person.persons'),
-                        'uri' => route_to('episode-persons-manage', $podcast->id, $episode->id),
+                        'uri'   => route_to('episode-persons-manage', $podcast->id, $episode->id),
                     ],
                     [
-                        'type' => 'link',
+                        'type'  => 'link',
                         'title' => lang('VideoClip.list.title'),
-                        'uri' => route_to('video-clips-list', $episode->podcast->id, $episode->id),
+                        'uri'   => route_to('video-clips-list', $episode->podcast->id, $episode->id),
                     ],
                     [
-                        'type' => 'link',
+                        'type'  => 'link',
                         'title' => lang('Soundbite.list.title'),
-                        'uri' => route_to('soundbites-list', $podcast->id, $episode->id),
+                        'uri'   => route_to('soundbites-list', $podcast->id, $episode->id),
                     ],
                     [
                         'type' => 'separator',
@@ -138,9 +138,9 @@ data_table(
                 ];
                 if ($episode->published_at === null) {
                     $items[] = [
-                        'type' => 'link',
+                        'type'  => 'link',
                         'title' => lang('Episode.delete'),
-                        'uri' => route_to('episode-delete', $podcast->id, $episode->id),
+                        'uri'   => route_to('episode-delete', $podcast->id, $episode->id),
                         'class' => 'font-semibold text-red-600',
                     ];
                 } else {
@@ -148,7 +148,7 @@ data_table(
                     $icon = icon('forbid');
                     $title = lang('Episode.messages.unpublishBeforeDeleteTip');
                     $items[] = [
-                        'type' => 'html',
+                        'type'    => 'html',
                         'content' => esc(<<<CODE_SAMPLE
                         <span class="inline-flex items-center px-4 py-1 font-semibold text-gray-400 cursor-not-allowed" data-tooltip="bottom" title="{$title}">{$icon}<span class="ml-2">{$label}</span></span>
                     CODE_SAMPLE),

@@ -21,11 +21,11 @@
                         $socialPlatform->type
                     ),
                     [
-                        'class' => 'text-2xl text-skin-muted hover:text-skin-base w-8 h-8 items-center inline-flex justify-center',
-                        'target' => '_blank',
-                        'rel' => 'noopener noreferrer',
+                        'class'        => 'text-2xl text-skin-muted hover:text-skin-base w-8 h-8 items-center inline-flex justify-center',
+                        'target'       => '_blank',
+                        'rel'          => 'noopener noreferrer',
                         'data-tooltip' => 'bottom',
-                        'title' => $socialPlatform->label,
+                        'title'        => $socialPlatform->label,
                     ],
                 ) ?>
             <?php endif; ?>
@@ -48,11 +48,11 @@
                             $podcastingPlatform->type
                         ),
                         [
-                            'class' => 'text-2xl text-skin-muted hover:text-skin-base w-8 h-8 items-center inline-flex justify-center',
-                            'target' => '_blank',
-                            'rel' => 'noopener noreferrer',
+                            'class'        => 'text-2xl text-skin-muted hover:text-skin-base w-8 h-8 items-center inline-flex justify-center',
+                            'target'       => '_blank',
+                            'rel'          => 'noopener noreferrer',
                             'data-tooltip' => 'bottom',
-                            'title' => $podcastingPlatform->label,
+                            'title'        => $podcastingPlatform->label,
                         ],
                     ) ?>
                 <?php endif; ?>
@@ -64,8 +64,7 @@
             <div class="flex flex-col">
                 <p><?= esc($podcast->copyright) ?></p>
                 <p><?= lang('Common.powered_by', [
-                                'castopod' =>
-                                    '<a class="inline-flex font-semibold text-skin-muted hover:underline focus:ring-accent" href="https://castopod.org" target="_blank" rel="noreferrer noopener">Castopod' . icon('castopod', 'ml-1 text-lg', 'social') . '</a>',
+                                'castopod' => '<a class="inline-flex font-semibold text-skin-muted hover:underline focus:ring-accent" href="https://castopod.org" target="_blank" rel="noreferrer noopener">Castopod' . icon('castopod', 'ml-1 text-lg', 'social') . '</a>',
                             ], null, false) ?></p>
             </div>
         </footer>

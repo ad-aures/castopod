@@ -51,7 +51,7 @@
     [
         [
             'header' => lang('Person.podcast_form.persons'),
-            'cell' => function ($person) {
+            'cell'   => function ($person) {
                 return '<div class="flex">' .
                     '<a href="' .
                     route_to('person-view', $person->id) .
@@ -82,7 +82,7 @@
         ],
         [
             'header' => lang('Common.actions'),
-            'cell' => function ($person): string {
+            'cell'   => function ($person): string {
                 return '<Button uri="' . route_to('podcast-person-remove', $person->podcast_id, $person->id) . '" variant="danger" size="small" iconLeft="delete-bin">' . lang('Person.podcast_form.remove') . '</Button>';
             },
         ],

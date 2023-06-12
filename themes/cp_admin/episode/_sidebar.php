@@ -2,11 +2,11 @@
 
 $podcastNavigation = [
     'dashboard' => [
-        'icon' => 'dashboard',
+        'icon'  => 'dashboard',
         'items' => ['episode-view', 'episode-edit', 'episode-persons-manage', 'embed-add'],
     ],
     'clips' => [
-        'icon' => 'clapperboard',
+        'icon'  => 'clapperboard',
         'items' => ['video-clips-list', 'video-clips-create', 'soundbites-list', 'soundbites-create'],
     ],
 ]; ?>

@@ -97,7 +97,7 @@ class UserController extends BaseController
         $email = $this->request->getPost('email');
         $user = new User([
             'username' => $this->request->getPost('username'),
-            'email' => $email,
+            'email'    => $email,
             // set a random password
             // user will be prompted to change it on first magic link login.
             'password' => random_string('alnum', 32),
@@ -126,8 +126,8 @@ class UserController extends BaseController
 
         $identityModel->insert([
             'user_id' => $user->id,
-            'type' => Session::ID_TYPE_MAGIC_LINK,
-            'secret' => $token,
+            'type'    => Session::ID_TYPE_MAGIC_LINK,
+            'secret'  => $token,
             'expires' => Time::now()->addSeconds(setting('Auth.welcomeLinkLifetime'))->format('Y-m-d H:i:s'),
         ]);
 
@@ -180,7 +180,7 @@ class UserController extends BaseController
         );
 
         $data = [
-            'user' => $this->user,
+            'user'        => $this->user,
             'roleOptions' => $roleOptions,
         ];
 

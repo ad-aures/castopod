@@ -18,8 +18,8 @@ class RadioButton extends FormComponent
     public function render(): string
     {
         $data = [
-            'id' => $this->value,
-            'name' => $this->name,
+            'id'    => $this->value,
+            'name'  => $this->name,
             'class' => 'form-radio-btn bg-elevated',
         ];
 

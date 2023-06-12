@@ -227,24 +227,23 @@ class FakeWebsiteAnalyticsSeeder extends Seeder
 
                         $websiteByBrowser[] = [
                             'podcast_id' => $podcast->id,
-                            'date' => date('Y-m-d', $date),
-                            'browser' => $browser,
-                            'hits' => $hits,
+                            'date'       => date('Y-m-d', $date),
+                            'browser'    => $browser,
+                            'hits'       => $hits,
                         ];
                         $websiteByEntryPage[] = [
-                            'podcast_id' => $podcast->id,
-                            'date' => date('Y-m-d', $date),
+                            'podcast_id'     => $podcast->id,
+                            'date'           => date('Y-m-d', $date),
                             'entry_page_url' => $episode->link,
-                            'hits' => $hits,
+                            'hits'           => $hits,
                         ];
                         $websiteByReferer[] = [
-                            'podcast_id' => $podcast->id,
-                            'date' => date('Y-m-d', $date),
-                            'referer_url' =>
-                                'http://' . $domain . '/?q=' . $keyword,
-                            'domain' => $domain,
-                            'keywords' => $keyword,
-                            'hits' => $hits,
+                            'podcast_id'  => $podcast->id,
+                            'date'        => date('Y-m-d', $date),
+                            'referer_url' => 'http://' . $domain . '/?q=' . $keyword,
+                            'domain'      => $domain,
+                            'keywords'    => $keyword,
+                            'hits'        => $hits,
                         ];
                     }
                 }

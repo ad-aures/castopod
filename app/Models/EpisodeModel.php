@@ -24,30 +24,28 @@ class EpisodeModel extends Model
      */
     public static $themes = [
         'light-transparent' => [
-            'style' =>
-                'background-color: #fff; background-image: linear-gradient(45deg, #ccc 12.5%, transparent 12.5%, transparent 50%, #ccc 50%, #ccc 62.5%, transparent 62.5%, transparent 100%); background-size: 5.66px 5.66px;',
+            'style'      => 'background-color: #fff; background-image: linear-gradient(45deg, #ccc 12.5%, transparent 12.5%, transparent 50%, #ccc 50%, #ccc 62.5%, transparent 62.5%, transparent 100%); background-size: 5.66px 5.66px;',
             'background' => 'transparent',
-            'text' => '#000',
-            'inverted' => '#fff',
+            'text'       => '#000',
+            'inverted'   => '#fff',
         ],
         'light' => [
-            'style' => 'background-color: #fff;',
+            'style'      => 'background-color: #fff;',
             'background' => '#fff',
-            'text' => '#000',
-            'inverted' => '#fff',
+            'text'       => '#000',
+            'inverted'   => '#fff',
         ],
         'dark-transparent' => [
-            'style' =>
-                'background-color: #001f1a; background-image: linear-gradient(45deg, #888 12.5%, transparent 12.5%, transparent 50%, #888 50%, #888 62.5%, transparent 62.5%, transparent 100%); background-size: 5.66px 5.66px;',
+            'style'      => 'background-color: #001f1a; background-image: linear-gradient(45deg, #888 12.5%, transparent 12.5%, transparent 50%, #888 50%, #888 62.5%, transparent 62.5%, transparent 100%); background-size: 5.66px 5.66px;',
             'background' => 'transparent',
-            'text' => '#fff',
-            'inverted' => '#000',
+            'text'       => '#fff',
+            'inverted'   => '#000',
         ],
         'dark' => [
-            'style' => 'background-color: #001f1a;',
+            'style'      => 'background-color: #001f1a;',
             'background' => '#313131',
-            'text' => '#fff',
-            'inverted' => '#000',
+            'text'       => '#fff',
+            'inverted'   => '#000',
         ],
     ];
 
@@ -105,19 +103,19 @@ class EpisodeModel extends Model
      * @var array<string, string>
      */
     protected $validationRules = [
-        'podcast_id' => 'required',
-        'title' => 'required',
-        'slug' => 'required|regex_match[/^[a-zA-Z0-9\-]{1,128}$/]',
-        'audio_id' => 'required',
-        'description_markdown' => 'required',
-        'number' => 'is_natural_no_zero|permit_empty',
-        'season_number' => 'is_natural_no_zero|permit_empty',
-        'type' => 'required',
+        'podcast_id'            => 'required',
+        'title'                 => 'required',
+        'slug'                  => 'required|regex_match[/^[a-zA-Z0-9\-]{1,128}$/]',
+        'audio_id'              => 'required',
+        'description_markdown'  => 'required',
+        'number'                => 'is_natural_no_zero|permit_empty',
+        'season_number'         => 'is_natural_no_zero|permit_empty',
+        'type'                  => 'required',
         'transcript_remote_url' => 'valid_url_strict|permit_empty',
-        'chapters_remote_url' => 'valid_url_strict|permit_empty',
-        'published_at' => 'valid_date|permit_empty',
-        'created_by' => 'required',
-        'updated_by' => 'required',
+        'chapters_remote_url'   => 'valid_url_strict|permit_empty',
+        'published_at'          => 'valid_date|permit_empty',
+        'created_by'            => 'required',
+        'updated_by'            => 'required',
     ];
 
     /**
@@ -286,7 +284,7 @@ class EpisodeModel extends Model
         $result = $this->builder()
             ->select('MAX(season_number) as current_season_number')
             ->where([
-                'podcast_id' => $podcastId,
+                'podcast_id'          => $podcastId,
                 'published_at IS NOT' => null,
             ])
             ->get()
@@ -300,8 +298,8 @@ class EpisodeModel extends Model
         $result = $this->builder()
             ->select('MAX(number) as next_episode_number')
             ->where([
-                'podcast_id' => $podcastId,
-                'season_number' => $seasonNumber,
+                'podcast_id'          => $podcastId,
+                'season_number'       => $seasonNumber,
                 'published_at IS NOT' => null,
             ])->get()
             ->getResultArray();
@@ -319,13 +317,13 @@ class EpisodeModel extends Model
                 'COUNT(DISTINCT season_number) as number_of_seasons, COUNT(*) as number_of_episodes, MIN(published_at) as first_published_at'
             )
             ->where([
-                'podcast_id' => $podcastId,
+                'podcast_id'          => $podcastId,
                 'published_at IS NOT' => null,
             ])->get()
             ->getResultArray();
 
         $stats = [
-            'number_of_seasons' => (int) $result[0]['number_of_seasons'],
+            'number_of_seasons'  => (int) $result[0]['number_of_seasons'],
             'number_of_episodes' => (int) $result[0]['number_of_episodes'],
         ];
 

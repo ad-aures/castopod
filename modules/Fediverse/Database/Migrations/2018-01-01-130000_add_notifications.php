@@ -20,29 +20,29 @@ class AddNotifications extends Migration
     {
         $this->forge->addField([
             'id' => [
-                'type' => 'INT',
-                'unsigned' => true,
+                'type'           => 'INT',
+                'unsigned'       => true,
                 'auto_increment' => true,
             ],
             'actor_id' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
             ],
             'target_actor_id' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
             ],
             'post_id' => [
-                'type' => 'BINARY',
+                'type'       => 'BINARY',
                 'constraint' => 16,
-                'null' => true,
+                'null'       => true,
             ],
             'activity_id' => [
-                'type' => 'BINARY',
+                'type'       => 'BINARY',
                 'constraint' => 16,
             ],
             'type' => [
-                'type' => 'ENUM',
+                'type'       => 'ENUM',
                 'constraint' => ['like', 'follow', 'share', 'reply'],
             ],
             'read_at' => [

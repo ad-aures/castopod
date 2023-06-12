@@ -16,9 +16,9 @@ class Themes extends BaseConfig
      * @var array<string, string>
      */
     public array $themes = [
-        'app' => 'cp_app',
-        'admin' => 'cp_admin',
+        'app'     => 'cp_app',
+        'admin'   => 'cp_admin',
         'install' => 'cp_install',
-        'auth' => 'cp_auth',
+        'auth'    => 'cp_auth',
     ];
 }

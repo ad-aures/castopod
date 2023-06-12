@@ -35,10 +35,10 @@ class AnalyticsPodcasts extends Entity
      * @var array<string, string>
      */
     protected $casts = [
-        'podcast_id' => 'integer',
-        'duration' => 'double',
-        'bandwidth' => 'integer',
+        'podcast_id'       => 'integer',
+        'duration'         => 'double',
+        'bandwidth'        => 'integer',
         'unique_listeners' => 'integer',
-        'hits' => 'integer',
+        'hits'             => 'integer',
     ];
 }

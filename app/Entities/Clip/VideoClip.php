@@ -71,11 +71,11 @@ class VideoClip extends BaseClip
         }
 
         $video = new Video([
-            'file_key' => $fileKey,
+            'file_key'      => $fileKey,
             'language_code' => $this->getPodcast()
 ->language_code,
             'uploaded_by' => $this->attributes['created_by'],
-            'updated_by' => $this->attributes['created_by'],
+            'updated_by'  => $this->attributes['created_by'],
         ]);
         $video->setFile($file);
 

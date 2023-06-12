@@ -35,35 +35,35 @@
     [
         [
             'header' => lang('Subscription.list.number'),
-            'cell' => function ($subscription) {
+            'cell'   => function ($subscription) {
                 return '#' . $subscription->id;
             },
         ],
         [
             'header' => lang('Subscription.list.email'),
-            'cell' => function ($subscription) {
+            'cell'   => function ($subscription) {
                 return esc($subscription->email);
             },
         ],
         [
             'header' => lang('Subscription.list.expiration_date'),
-            'cell' => function ($subscription) {
+            'cell'   => function ($subscription) {
                 return $subscription->expires_at ? local_date($subscription->expires_at) : lang('Subscription.list.unlimited');
             },
         ],
         [
             'header' => lang('Subscription.list.downloads'),
-            'cell' => function ($subscription) {
+            'cell'   => function ($subscription) {
                 return $subscription->downloads_last_3_months;
             },
         ],
         [
             'header' => lang('Subscription.list.status'),
-            'cell' => function ($subscription) {
+            'cell'   => function ($subscription) {
                 $statusMapping = [
-                    'active' => 'success',
+                    'active'    => 'success',
                     'suspended' => 'warning',
-                    'expired' => 'default',
+                    'expired'   => 'default',
                 ];
 
                 return '<Pill variant="' . $statusMapping[$subscription->status] . '" class="lowercase">' . lang('Subscription.status.' . $subscription->status) . '</Pill>';
@@ -71,45 +71,45 @@
         ],
         [
             'header' => lang('Common.actions'),
-            'cell' => function ($subscription, $podcast) {
+            'cell'   => function ($subscription, $podcast) {
                 $items = [
                     [
-                        'type' => 'link',
+                        'type'  => 'link',
                         'title' => lang('Subscription.view'),
-                        'uri' => route_to('subscription-view', $podcast->id, $subscription->id),
+                        'uri'   => route_to('subscription-view', $podcast->id, $subscription->id),
                     ],
                     [
-                        'type' => 'link',
+                        'type'  => 'link',
                         'title' => lang('Subscription.edit'),
-                        'uri' => route_to('subscription-edit', $podcast->id, $subscription->id),
+                        'uri'   => route_to('subscription-edit', $podcast->id, $subscription->id),
                     ],
                     [
-                        'type' => 'link',
+                        'type'  => 'link',
                         'title' => lang('Subscription.regenerate_token'),
-                        'uri' => route_to('subscription-regenerate-token', $podcast->id, $subscription->id),
+                        'uri'   => route_to('subscription-regenerate-token', $podcast->id, $subscription->id),
                     ],
                     [
                         'type' => 'separator',
                     ],
                     [
-                        'type' => 'link',
+                        'type'  => 'link',
                         'title' => lang('Subscription.delete'),
-                        'uri' => route_to('subscription-delete', $podcast->id, $subscription->id),
+                        'uri'   => route_to('subscription-delete', $podcast->id, $subscription->id),
                         'class' => 'font-semibold text-red-600',
                     ],
                 ];
 
                 if ($subscription->status === 'suspended') {
                     $suspendAction = [[
-                        'type' => 'link',
+                        'type'  => 'link',
                         'title' => lang('Subscription.resume'),
-                        'uri' => route_to('subscription-resume', $podcast->id, $subscription->id),
+                        'uri'   => route_to('subscription-resume', $podcast->id, $subscription->id),
                     ]];
                 } else {
                     $suspendAction = [[
-                        'type' => 'link',
+                        'type'  => 'link',
                         'title' => lang('Subscription.suspend'),
-                        'uri' => route_to('subscription-suspend', $podcast->id, $subscription->id),
+                        'uri'   => route_to('subscription-suspend', $podcast->id, $subscription->id),
                     ]];
                 }
 

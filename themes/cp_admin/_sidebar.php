@@ -2,32 +2,32 @@
 
 $navigation = [
     'dashboard' => [
-        'icon' => 'dashboard',
+        'icon'  => 'dashboard',
         'items' => ['admin'],
     ],
     'podcasts' => [
-        'icon' => 'mic',
+        'icon'  => 'mic',
         'items' => ['podcast-list', 'podcast-create', 'podcast-import'],
     ],
     'persons' => [
-        'icon' => 'folder-user',
+        'icon'  => 'folder-user',
         'items' => ['person-list', 'person-create'],
     ],
     'fediverse' => [
-        'icon' => 'star-smile',
+        'icon'  => 'star-smile',
         'items' => ['fediverse-blocked-actors', 'fediverse-blocked-domains'],
     ],
     'users' => [
-        'icon' => 'group',
+        'icon'  => 'group',
         'items' => ['user-list', 'user-create'],
     ],
     'pages' => [
-        'icon' => 'pages',
+        'icon'  => 'pages',
         'items' => ['page-list', 'page-create'],
 
     ],
     'settings' => [
-        'icon' => 'settings',
+        'icon'  => 'settings',
         'items' => ['settings-general', 'settings-theme'],
     ],
 ]; ?>

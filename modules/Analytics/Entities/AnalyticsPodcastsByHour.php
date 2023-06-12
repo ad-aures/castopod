@@ -34,7 +34,7 @@ class AnalyticsPodcastsByHour extends Entity
      */
     protected $casts = [
         'podcast_id' => 'integer',
-        'hour' => 'integer',
-        'hits' => 'integer',
+        'hour'       => 'integer',
+        'hits'       => 'integer',
     ];
 }

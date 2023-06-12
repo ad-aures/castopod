@@ -18,12 +18,12 @@
 <?= csrf_field() ?>
 
 <Alert variant="danger" glyph="alert" class="font-semibold"><?= lang('Contributor.delete_form.disclaimer', [
-    'contributor' => $contributor->username,
+    'contributor'  => $contributor->username,
     'podcastTitle' => $podcast->title,
 ]) ?></Alert>
 
 <Forms.Checkbox class="mt-2" name="understand" required="true" isChecked="false"><?= lang('Contributor.delete_form.understand', [
-    'contributor' => $contributor->username,
+    'contributor'  => $contributor->username,
     'podcastTitle' => $podcast->title,
 ]) ?></Forms.Checkbox>
 

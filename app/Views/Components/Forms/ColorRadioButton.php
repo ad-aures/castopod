@@ -18,8 +18,8 @@ class ColorRadioButton extends FormComponent
     public function render(): string
     {
         $data = [
-            'id' => $this->value,
-            'name' => $this->name,
+            'id'    => $this->value,
+            'name'  => $this->name,
             'class' => 'color-radio-btn',
         ];
 

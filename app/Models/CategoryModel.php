@@ -116,7 +116,7 @@ class CategoryModel extends Model
             $categoriesIds,
             static function (array $result, int $categoryId) use ($podcastId): array {
                 $result[] = [
-                    'podcast_id' => $podcastId,
+                    'podcast_id'  => $podcastId,
                     'category_id' => $categoryId,
                 ];
                 return $result;

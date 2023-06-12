@@ -70,12 +70,12 @@ class WebFinger
         $this->aliases = [$actor->id];
         $this->links = [
             [
-                'rel' => 'self',
+                'rel'  => 'self',
                 'type' => 'application/activity+json',
                 'href' => $actor->uri,
             ],
             [
-                'rel' => 'http://webfinger.net/rel/profile-page',
+                'rel'  => 'http://webfinger.net/rel/profile-page',
                 'type' => 'text/html',
                 'href' => $actor->uri,
                 # TODO: should there be 2 values? @actorUsername
@@ -93,7 +93,7 @@ class WebFinger
         return [
             'subject' => $this->subject,
             'aliases' => $this->aliases,
-            'links' => $this->links,
+            'links'   => $this->links,
         ];
     }
 

@@ -45,7 +45,7 @@ class AnalyticsPodcastBySubscriptionModel extends Model
             $found = (int) ($this->builder()
                 ->selectSum('hits', 'total_hits')
                 ->where([
-                    'podcast_id' => $podcastId,
+                    'podcast_id'      => $podcastId,
                     'subscription_id' => $subscriptionId,
                 ])
                 ->where('`date` >= UTC_TIMESTAMP() - INTERVAL 3 month', null, false)

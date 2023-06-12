@@ -49,7 +49,7 @@ class WebSubController extends Controller
 
         $requestOptions = [
             'headers' => [
-                'User-Agent' => 'Castopod/' . CP_VERSION . '; +' . base_url('', 'https'),
+                'User-Agent'   => 'Castopod/' . CP_VERSION . '; +' . base_url('', 'https'),
                 'Content-Type' => 'application/x-www-form-urlencoded',
             ],
         ];
@@ -60,7 +60,7 @@ class WebSubController extends Controller
         foreach ($podcasts as $podcast) {
             $requestOptions['form_params'] = [
                 'hub.mode' => 'publish',
-                'hub.url' => $podcast->feed_url,
+                'hub.url'  => $podcast->feed_url,
             ];
 
             foreach ($hubUrls as $hub) {
@@ -82,7 +82,7 @@ class WebSubController extends Controller
             // set newly published episodes as pushed onto hubs
             (new EpisodeModel())->set('is_published_on_hubs', true)
                 ->where([
-                    'podcast_id' => $podcast->id,
+                    'podcast_id'           => $podcast->id,
                     'is_published_on_hubs' => false,
                 ])
                 ->where('`published_at` <= UTC_TIMESTAMP()', null, false)

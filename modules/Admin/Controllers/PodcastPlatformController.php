@@ -47,9 +47,9 @@ class PodcastPlatformController extends BaseController
         helper('form');
 
         $data = [
-            'podcast' => $this->podcast,
+            'podcast'      => $this->podcast,
             'platformType' => $platformType,
-            'platforms' => (new PlatformModel())->getPlatformsWithLinks($this->podcast->id, $platformType),
+            'platforms'    => (new PlatformModel())->getPlatformsWithLinks($this->podcast->id, $platformType),
         ];
 
         replace_breadcrumb_params([
@@ -82,14 +82,15 @@ class PodcastPlatformController extends BaseController
             $podcastPlatformAccountId = trim((string) $podcastPlatform['account_id']);
             $podcastsPlatformsData[] = [
                 'platform_slug' => $platformSlug,
-                'podcast_id' => $this->podcast->id,
-                'link_url' => $podcastPlatformUrl,
-                'account_id' => $podcastPlatformAccountId === '' ? null : $podcastPlatformAccountId,
-                'is_visible' =>
-                    array_key_exists('visible', $podcastPlatform) &&
+                'podcast_id'    => $this->podcast->id,
+                'link_url'      => $podcastPlatformUrl,
+                'account_id'    => $podcastPlatformAccountId === '' ? null : $podcastPlatformAccountId,
+                'is_visible'    => array_key_exists('visible', $podcastPlatform) &&
                     $podcastPlatform['visible'] === 'yes',
-                'is_on_embed' =>
-                    array_key_exists('on_embed', $podcastPlatform) && $podcastPlatform['on_embed'] === 'yes',
+                'is_on_embed' => array_key_exists(
+                    'on_embed',
+                    $podcastPlatform
+                ) && $podcastPlatform['on_embed'] === 'yes',
             ];
         }
 

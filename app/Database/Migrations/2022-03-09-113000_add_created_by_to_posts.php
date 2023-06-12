@@ -24,10 +24,10 @@ class AddCreatedByToPosts extends Migration
 
         $this->forge->addColumn("{$fediverseTablesPrefix}posts", [
             'created_by' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
-                'null' => true,
-                'after' => 'episode_id',
+                'null'     => true,
+                'after'    => 'episode_id',
             ],
         ]);
 

@@ -24,10 +24,10 @@ class AddEpisodeIdToPosts extends Migration
 
         $this->forge->addColumn("{$fediverseTablesPrefix}posts", [
             'episode_id' => [
-                'type' => 'INT',
+                'type'     => 'INT',
                 'unsigned' => true,
-                'null' => true,
-                'after' => 'replies_count',
+                'null'     => true,
+                'after'    => 'replies_count',
             ],
         ]);
 

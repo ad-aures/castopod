@@ -80,8 +80,8 @@ class PodcastTest extends CIUnitTestCase
         $result->assertStatus(404);
         $result->assertJSONExact(
             [
-                'status' => 404,
-                'error' => 404,
+                'status'   => 404,
+                'error'    => 404,
                 'messages' => [
                     'error' => 'Podcast not found',
                 ],

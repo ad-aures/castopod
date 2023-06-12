@@ -39,11 +39,11 @@ class AnalyticsPodcastsByService extends Entity
      */
     protected $casts = [
         'podcast_id' => 'integer',
-        'app' => '?string',
-        'device' => '?string',
-        'os' => '?string',
-        'is_bot' => 'boolean',
-        'hits' => 'integer',
+        'app'        => '?string',
+        'device'     => '?string',
+        'os'         => '?string',
+        'is_bot'     => 'boolean',
+        'hits'       => 'integer',
     ];
 
     public function getLabels(): string

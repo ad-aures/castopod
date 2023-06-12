@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use PHP_CodeSniffer\Standards\Generic\Sniffs\CodeAnalysis\AssignmentInConditionSniff;
+use PhpCsFixer\Fixer\Operator\BinaryOperatorSpacesFixer;
 use PhpCsFixer\Fixer\StringNotation\SingleQuoteFixer;
 use PhpCsFixer\Fixer\Whitespace\IndentationTypeFixer;
 use Symplify\CodingStandard\Fixer\LineLength\LineLengthFixer;
@@ -24,6 +25,8 @@ return static function (ECSConfig $ecsConfig): void {
         __DIR__ . '/rector.php',
         __DIR__ . '/spark',
     ]);
+
+    $ecsConfig->sets([SetList::CLEAN_CODE, SetList::COMMON, SetList::SYMPLIFY, SetList::PSR_12]);
 
     $ecsConfig->skip([
         // skip specific generated files
@@ -52,8 +55,14 @@ return static function (ECSConfig $ecsConfig): void {
         // remove SingleQuoteFixer for Language files to prevent conflicts
         SingleQuoteFixer::class => [__DIR__ . '/app/Language/*', __DIR__ . '/modules/**/Language/*'],
 
+        BinaryOperatorSpacesFixer::class => [__DIR__ . '/app/Language/*', __DIR__ . '/modules/**/Language/*'],
+
         AssignmentInConditionSniff::class,
     ]);
 
-    $ecsConfig->sets([SetList::PSR_12, SetList::SYMPLIFY, SetList::COMMON, SetList::CLEAN_CODE]);
+    $ecsConfig->ruleWithConfiguration(BinaryOperatorSpacesFixer::class, [
+        'operators' => [
+            '=>' => 'align_single_space_minimal',
+        ],
+    ]);
 };

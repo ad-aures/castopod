@@ -20,25 +20,25 @@ class AddPlatforms extends Migration
     {
         $this->forge->addField([
             'slug' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 32,
             ],
             'type' => [
-                'type' => 'ENUM',
+                'type'       => 'ENUM',
                 'constraint' => ['podcasting', 'social', 'funding'],
             ],
             'label' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 32,
             ],
             'home_url' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 255,
             ],
             'submit_url' => [
-                'type' => 'VARCHAR',
+                'type'       => 'VARCHAR',
                 'constraint' => 512,
-                'null' => true,
+                'null'       => true,
             ],
         ]);
         $this->forge->addField('`created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP()');

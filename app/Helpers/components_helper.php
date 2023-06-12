@@ -57,14 +57,13 @@ if (! function_exists('data_table')) {
         $template = [
             'table_open' => '<table class="w-full whitespace-nowrap">',
 
-            'thead_open' =>
-                '<thead class="text-xs font-semibold text-left uppercase text-skin-muted">',
+            'thead_open' => '<thead class="text-xs font-semibold text-left uppercase text-skin-muted">',
 
             'heading_cell_start' => '<th class="px-4 py-2">',
-            'cell_start' => '<td class="px-4 py-2">',
-            'cell_alt_start' => '<td class="px-4 py-2">',
+            'cell_start'         => '<td class="px-4 py-2">',
+            'cell_alt_start'     => '<td class="px-4 py-2">',
 
-            'row_start' => '<tr class="border-t border-subtle hover:bg-base">',
+            'row_start'     => '<tr class="border-t border-subtle hover:bg-base">',
             'row_alt_start' => '<tr class="border-t border-subtle hover:bg-base">',
         ];
 
@@ -91,8 +90,8 @@ if (! function_exists('data_table')) {
             $table->addRow([
                 [
                     'colspan' => count($tableHeaders),
-                    'class' => 'px-4 py-2 italic font-semibold text-center',
-                    'data' => lang('Common.no_data'),
+                    'class'   => 'px-4 py-2 italic font-semibold text-center',
+                    'data'    => lang('Common.no_data'),
                 ],
             ]);
         }
@@ -114,18 +113,18 @@ if (! function_exists('publication_pill')) {
     function publication_pill(?Time $publicationDate, string $publicationStatus, string $customClass = ''): string
     {
         $class = match ($publicationStatus) {
-            'published' => 'text-pine-500 border-pine-500 bg-pine-50',
-            'scheduled' => 'text-red-600 border-red-600 bg-red-50',
-            'with_podcast' => 'text-blue-600 border-blue-600 bg-blue-50',
+            'published'     => 'text-pine-500 border-pine-500 bg-pine-50',
+            'scheduled'     => 'text-red-600 border-red-600 bg-red-50',
+            'with_podcast'  => 'text-blue-600 border-blue-600 bg-blue-50',
             'not_published' => 'text-gray-600 border-gray-600 bg-gray-50',
-            default => 'text-gray-600 border-gray-600 bg-gray-50',
+            default         => 'text-gray-600 border-gray-600 bg-gray-50',
         };
 
         $title = match ($publicationStatus) {
             'published', 'scheduled' => (string) $publicationDate,
-            'with_podcast' => lang('Episode.with_podcast_hint'),
+            'with_podcast'  => lang('Episode.with_podcast_hint'),
             'not_published' => '',
-            default => '',
+            default         => '',
         };
 
         $label = lang('Episode.publication_status.' . $publicationStatus);
@@ -300,11 +299,10 @@ if (! function_exists('location_link')) {
             $location->url,
             icon('map-pin', 'mr-2 flex-shrink-0') . '<span class="truncate">' . esc($location->name) . '</span>',
             [
-                'class' =>
-                    'w-full overflow-hidden inline-flex items-baseline hover:underline focus:ring-accent' .
+                'class' => 'w-full overflow-hidden inline-flex items-baseline hover:underline focus:ring-accent' .
                     ($class === '' ? '' : " {$class}"),
                 'target' => '_blank',
-                'rel' => 'noreferrer noopener',
+                'rel'    => 'noreferrer noopener',
             ],
         );
     }
@@ -460,15 +458,15 @@ if (! function_exists('downloads_abbr')) {
         $option = match (true) {
             $downloads < 1_000_000 => [
                 'divider' => 1_000,
-                'suffix' => 'K',
+                'suffix'  => 'K',
             ],
             $downloads < 1_000_000_000 => [
                 'divider' => 1_000_000,
-                'suffix' => 'M',
+                'suffix'  => 'M',
             ],
             default => [
                 'divider' => 1_000_000_000,
-                'suffix' => 'B',
+                'suffix'  => 'B',
             ],
         };
         $formatter = new NumberFormatter(service('request')->getLocale(), NumberFormatter::DECIMAL);
