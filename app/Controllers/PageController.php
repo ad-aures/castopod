@@ -24,9 +24,8 @@ class PageController extends BaseController
             throw PageNotFoundException::forPageNotFound();
         }
 
-        if (
-            ($page = (new PageModel())->where('slug', $params[0])->first()) === null
-        ) {
+        $page = (new PageModel())->where('slug', $params[0])->first();
+        if (! $page instanceof Page) {
             throw PageNotFoundException::forPageNotFound();
         }
 

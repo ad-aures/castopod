@@ -15,6 +15,7 @@ use App\Entities\Like;
 use Michalsn\Uuid\UuidModel;
 use Modules\Fediverse\Activities\LikeActivity;
 use Modules\Fediverse\Activities\UndoActivity;
+use Modules\Fediverse\Entities\Activity;
 use Modules\Fediverse\Entities\Actor;
 use Modules\Fediverse\Models\ActivityModel;
 
@@ -112,6 +113,11 @@ class LikeModel extends UuidModel
                     'actor_id' => $actor->id,
                 ])
                 ->first();
+
+            if (! $activity instanceof Activity) {
+                // no like activity found, do nothing
+                return;
+            }
 
             $likeActivity = new LikeActivity();
             $likeActivity

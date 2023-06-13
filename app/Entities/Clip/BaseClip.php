@@ -119,6 +119,7 @@ class BaseClip extends Entity
 
     public function getUser(): ?User
     {
+        /** @var ?User */
         return (new UserModel())->find($this->created_by);
     }
 

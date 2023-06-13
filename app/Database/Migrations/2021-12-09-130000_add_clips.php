@@ -10,9 +10,7 @@ declare(strict_types=1);
 
 namespace App\Database\Migrations;
 
-use CodeIgniter\Database\Migration;
-
-class AddClips extends Migration
+class AddClips extends BaseMigration
 {
     public function up(): void
     {

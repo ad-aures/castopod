@@ -166,16 +166,24 @@ class EpisodeCommentController extends BaseController
 
     public function attemptLike(): RedirectResponse
     {
+        if (! ($interactAsActor = interact_as_actor()) instanceof Actor) {
+            return redirect()->back();
+        }
+
         model(LikeModel::class)
-            ->toggleLike(interact_as_actor(), $this->comment);
+            ->toggleLike($interactAsActor, $this->comment);
 
         return redirect()->back();
     }
 
     public function attemptReply(): RedirectResponse
     {
+        if (! ($interactAsActor = interact_as_actor()) instanceof Actor) {
+            return redirect()->back();
+        }
+
         model(LikeModel::class)
-            ->toggleLike(interact_as_actor(), $this->comment);
+            ->toggleLike($interactAsActor, $this->comment);
 
         return redirect()->back();
     }

@@ -10,10 +10,12 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+use App\Entities\Podcast;
 use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
 use CodeIgniter\Controller;
 use CodeIgniter\Exceptions\PageNotFoundException;
+use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\ResponseInterface;
 use Exception;
 use Modules\PremiumPodcasts\Entities\Subscription;
@@ -22,13 +24,20 @@ use Opawg\UserAgentsPhp\UserAgentsRSS;
 
 class FeedController extends Controller
 {
+    /**
+     * Instance of the main Request object.
+     *
+     * @var IncomingRequest
+     */
+    protected $request;
+
     public function index(string $podcastHandle): ResponseInterface
     {
         helper(['rss', 'premium_podcasts', 'misc']);
 
         $podcast = (new PodcastModel())->where('handle', $podcastHandle)
             ->first();
-        if (! $podcast) {
+        if (! $podcast instanceof Podcast) {
             throw PageNotFoundException::forPageNotFound();
         }
 

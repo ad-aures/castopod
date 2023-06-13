@@ -40,7 +40,9 @@ if (! function_exists('current_domain')) {
      */
     function current_domain(): string
     {
+        /** @var URI $uri */
         $uri = current_url(true);
+
         return $uri->getHost() . ($uri->getPort() ? ':' . $uri->getPort() : '');
     }
 }

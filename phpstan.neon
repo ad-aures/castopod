@@ -27,7 +27,4 @@ parameters:
         - ENVIRONMENT
         - SODIUM_LIBRARY_VERSION
     ignoreErrors:
-        - '#Cannot access property [\$a-z_]+ on ((array\|)?object)#'
-        - '#^Call to an undefined method CodeIgniter\\Database\\ConnectionInterface#'
         - '#^Access to an undefined property Modules\\Media\\Entities\\Image#'
-        - '#^Call to an undefined method CodeIgniter\\HTTP\\RequestInterface#'

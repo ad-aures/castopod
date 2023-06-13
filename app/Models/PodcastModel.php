@@ -439,12 +439,14 @@ class PodcastModel extends Model
         if ($podcast instanceof Podcast) {
             $podcastActor = (new ActorModel())->find($podcast->actor_id);
 
-            if ($podcastActor) {
-                $podcastActor->avatar_image_url = $podcast->cover->federation_url;
-                $podcastActor->avatar_image_mimetype = $podcast->cover->federation_mimetype;
-
-                (new ActorModel())->update($podcast->actor_id, $podcastActor);
+            if (! $podcastActor instanceof Actor) {
+                return $data;
             }
+
+            $podcastActor->avatar_image_url = $podcast->cover->federation_url;
+            $podcastActor->avatar_image_mimetype = $podcast->cover->federation_mimetype;
+
+            (new ActorModel())->update($podcast->actor_id, $podcastActor);
         }
 
         return $data;

@@ -12,9 +12,7 @@ declare(strict_types=1);
 
 namespace App\Database\Migrations;
 
-use CodeIgniter\Database\Migration;
-
-class AddPages extends Migration
+class AddPages extends BaseMigration
 {
     public function up(): void
     {

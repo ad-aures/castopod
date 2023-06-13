@@ -12,9 +12,9 @@ declare(strict_types=1);
 
 namespace Modules\Analytics\Database\Migrations;
 
-use CodeIgniter\Database\Migration;
+use App\Database\Migrations\BaseMigration;
 
-class AddAnalyticsPodcastsByPlayer extends Migration
+class AddAnalyticsPodcastsByPlayer extends BaseMigration
 {
     public function up(): void
     {

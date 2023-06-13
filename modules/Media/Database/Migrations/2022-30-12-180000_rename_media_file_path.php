@@ -10,9 +10,9 @@ declare(strict_types=1);
 
 namespace Media\Database\Migrations;
 
-use CodeIgniter\Database\Migration;
+use App\Database\Migrations\BaseMigration;
 
-class RenameMediafileKey extends Migration
+class RenameMediafileKey extends BaseMigration
 {
     public function up(): void
     {

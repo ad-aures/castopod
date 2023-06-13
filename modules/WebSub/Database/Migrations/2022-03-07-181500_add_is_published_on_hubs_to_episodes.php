@@ -10,9 +10,9 @@ declare(strict_types=1);
 
 namespace Modules\WebSub\Database\Migrations;
 
-use CodeIgniter\Database\Migration;
+use App\Database\Migrations\BaseMigration;
 
-class AddIsPublishedOnHubsToEpisodes extends Migration
+class AddIsPublishedOnHubsToEpisodes extends BaseMigration
 {
     public function up(): void
     {

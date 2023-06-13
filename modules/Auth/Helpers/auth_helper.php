@@ -68,15 +68,15 @@ if (! function_exists('interact_as_actor')) {
     /**
      * Get the actor the user is currently interacting as
      */
-    function interact_as_actor(): Actor | false
+    function interact_as_actor(): ?Actor
     {
         if (! auth()->loggedIn()) {
-            return false;
+            return null;
         }
 
         $session = session();
         if (! $session->has('interact_as_actor_id')) {
-            return false;
+            return null;
         }
 
         return model(ActorModel::class, false)->getActorById($session->get('interact_as_actor_id'));

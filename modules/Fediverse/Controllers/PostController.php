@@ -12,6 +12,7 @@ namespace Modules\Fediverse\Controllers;
 
 use CodeIgniter\Controller;
 use CodeIgniter\Exceptions\PageNotFoundException;
+use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\Response;
 use CodeIgniter\HTTP\ResponseInterface;
@@ -23,6 +24,13 @@ use Modules\Fediverse\Objects\OrderedCollectionPage;
 
 class PostController extends Controller
 {
+    /**
+     * Instance of the main Request object.
+     *
+     * @var IncomingRequest
+     */
+    protected $request;
+
     /**
      * @var string[]
      */

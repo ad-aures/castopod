@@ -12,9 +12,9 @@ declare(strict_types=1);
 
 namespace Modules\Fediverse\Database\Migrations;
 
-use CodeIgniter\Database\Migration;
+use App\Database\Migrations\BaseMigration;
 
-class AddPostsPreviewCards extends Migration
+class AddPostsPreviewCards extends BaseMigration
 {
     public function up(): void
     {

@@ -10,9 +10,9 @@ declare(strict_types=1);
 
 namespace Modules\PremiumPodcasts\Database\Migrations;
 
-use CodeIgniter\Database\Migration;
+use App\Database\Migrations\BaseMigration;
 
-class AddSubscriptions extends Migration
+class AddSubscriptions extends BaseMigration
 {
     public function up(): void
     {

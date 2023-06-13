@@ -12,9 +12,7 @@ declare(strict_types=1);
 
 namespace App\Database\Migrations;
 
-use CodeIgniter\Database\Migration;
-
-class AddLikes extends Migration
+class AddLikes extends BaseMigration
 {
     public function up(): void
     {

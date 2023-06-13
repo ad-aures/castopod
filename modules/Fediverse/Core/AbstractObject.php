@@ -47,8 +47,8 @@ abstract class AbstractObject
         });
     }
 
-    public function toJSON(): string | bool
+    public function toJSON(): string
     {
-        return json_encode($this->toArray(), JSON_UNESCAPED_UNICODE);
+        return (string) json_encode($this->toArray(), JSON_UNESCAPED_UNICODE);
     }
 }

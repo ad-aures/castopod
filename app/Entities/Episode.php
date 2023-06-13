@@ -33,6 +33,7 @@ use Modules\Media\Entities\Image;
 use Modules\Media\Entities\Transcript;
 use Modules\Media\Models\MediaModel;
 use RuntimeException;
+use SimpleXMLElement;
 
 /**
  * @property int $id
@@ -619,13 +620,19 @@ class Episode extends Entity
         }
 
         helper('rss');
-        $customRssArray = rss_to_array(
-            simplexml_load_string(
-                '<?xml version="1.0" encoding="utf-8"?><rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:podcast="https://github.com/Podcastindex-org/podcast-namespace/blob/main/docs/1.0.md" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><item>' .
-                    $customRssString .
-                    '</item></channel></rss>',
-            ),
-        )['elements'][0]['elements'][0];
+
+        $customXML = simplexml_load_string(
+            '<?xml version="1.0" encoding="utf-8"?><rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:podcast="https://github.com/Podcastindex-org/podcast-namespace/blob/main/docs/1.0.md" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><item>' .
+                $customRssString .
+                '</item></channel></rss>',
+        );
+
+        if (! $customXML instanceof SimpleXMLElement) {
+            // TODO: Failed to parse custom xml, should return error?
+            return $this;
+        }
+
+        $customRssArray = rss_to_array($customXML)['elements'][0]['elements'][0];
 
         if (array_key_exists('elements', $customRssArray)) {
             $this->attributes['custom_rss'] = json_encode($customRssArray['elements']);

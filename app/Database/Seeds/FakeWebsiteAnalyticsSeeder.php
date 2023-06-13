@@ -12,10 +12,13 @@ declare(strict_types=1);
 
 namespace App\Database\Seeds;
 
+use App\Entities\Episode;
+use App\Entities\Podcast;
 use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
 
 use CodeIgniter\Database\Seeder;
+use Exception;
 
 class FakeWebsiteAnalyticsSeeder extends Seeder
 {
@@ -183,86 +186,90 @@ class FakeWebsiteAnalyticsSeeder extends Seeder
     {
         $podcast = (new PodcastModel())->first();
 
-        if ($podcast) {
-            $firstEpisode = (new EpisodeModel())
-                ->selectMin('published_at')
-                ->first();
+        if (! $podcast instanceof Podcast) {
+            throw new Exception("COULD NOT POPULATE DATABASE:\n\tCreate a podcast with episodes first.\n");
+        }
 
-            for (
-                $date = strtotime((string) $firstEpisode->published_at);
-                $date < strtotime('now');
-                $date = strtotime(date('Y-m-d', $date) . ' +1 day')
-            ) {
-                $websiteByBrowser = [];
-                $websiteByEntryPage = [];
-                $websiteByReferer = [];
+        $firstEpisode = (new EpisodeModel())
+            ->selectMin('published_at')
+            ->first();
 
-                $episodes = (new EpisodeModel())
-                    ->where('podcast_id', $podcast->id)
-                    ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
-                    ->findAll();
-                foreach ($episodes as $episode) {
-                    $age = floor(($date - strtotime((string) $episode->published_at)) / 86400);
-                    $probability1 = (int) floor(exp(3 - $age / 40)) + 1;
+        if (! $firstEpisode instanceof Episode) {
+            throw new Exception("COULD NOT POPULATE DATABASE:\n\tCreate an episode first.");
+        }
 
-                    for (
-                        $lineNumber = 0;
-                        $lineNumber < rand(1, $probability1);
-                        ++$lineNumber
-                    ) {
-                        $probability2 = (int) floor(exp(6 - $age / 20)) + 10;
+        for (
+            $date = strtotime((string) $firstEpisode->published_at);
+            $date < strtotime('now');
+            $date = strtotime(date('Y-m-d', $date) . ' +1 day')
+        ) {
+            $websiteByBrowser = [];
+            $websiteByEntryPage = [];
+            $websiteByReferer = [];
 
-                        $domain =
-                            $this->domains[rand(0, count($this->domains) - 1)];
-                        $keyword =
-                            $this->keywords[
-                                rand(0, count($this->keywords) - 1)
-                            ];
-                        $browser =
-                            $this->browsers[
-                                rand(0, count($this->browsers) - 1)
-                            ];
+            $episodes = (new EpisodeModel())
+                ->where('podcast_id', $podcast->id)
+                ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
+                ->findAll();
+            foreach ($episodes as $episode) {
+                $age = floor(($date - strtotime((string) $episode->published_at)) / 86400);
+                $probability1 = (int) floor(exp(3 - $age / 40)) + 1;
 
-                        $hits = rand(0, $probability2);
+                for (
+                    $lineNumber = 0;
+                    $lineNumber < rand(1, $probability1);
+                    ++$lineNumber
+                ) {
+                    $probability2 = (int) floor(exp(6 - $age / 20)) + 10;
 
-                        $websiteByBrowser[] = [
-                            'podcast_id' => $podcast->id,
-                            'date'       => date('Y-m-d', $date),
-                            'browser'    => $browser,
-                            'hits'       => $hits,
+                    $domain =
+                        $this->domains[rand(0, count($this->domains) - 1)];
+                    $keyword =
+                        $this->keywords[
+                            rand(0, count($this->keywords) - 1)
                         ];
-                        $websiteByEntryPage[] = [
-                            'podcast_id'     => $podcast->id,
-                            'date'           => date('Y-m-d', $date),
-                            'entry_page_url' => $episode->link,
-                            'hits'           => $hits,
+                    $browser =
+                        $this->browsers[
+                            rand(0, count($this->browsers) - 1)
                         ];
-                        $websiteByReferer[] = [
-                            'podcast_id'  => $podcast->id,
-                            'date'        => date('Y-m-d', $date),
-                            'referer_url' => 'http://' . $domain . '/?q=' . $keyword,
-                            'domain'      => $domain,
-                            'keywords'    => $keyword,
-                            'hits'        => $hits,
-                        ];
-                    }
+
+                    $hits = rand(0, $probability2);
+
+                    $websiteByBrowser[] = [
+                        'podcast_id' => $podcast->id,
+                        'date'       => date('Y-m-d', $date),
+                        'browser'    => $browser,
+                        'hits'       => $hits,
+                    ];
+                    $websiteByEntryPage[] = [
+                        'podcast_id'     => $podcast->id,
+                        'date'           => date('Y-m-d', $date),
+                        'entry_page_url' => $episode->link,
+                        'hits'           => $hits,
+                    ];
+                    $websiteByReferer[] = [
+                        'podcast_id'  => $podcast->id,
+                        'date'        => date('Y-m-d', $date),
+                        'referer_url' => 'http://' . $domain . '/?q=' . $keyword,
+                        'domain'      => $domain,
+                        'keywords'    => $keyword,
+                        'hits'        => $hits,
+                    ];
                 }
-
-                $this->db
-                    ->table('analytics_website_by_browser')
-                    ->ignore(true)
-                    ->insertBatch($websiteByBrowser);
-                $this->db
-                    ->table('analytics_website_by_entry_page')
-                    ->ignore(true)
-                    ->insertBatch($websiteByEntryPage);
-                $this->db
-                    ->table('analytics_website_by_referer')
-                    ->ignore(true)
-                    ->insertBatch($websiteByReferer);
             }
-        } else {
-            echo "COULD NOT POPULATE DATABASE:\n\tCreate a podcast with episodes first.\n";
+
+            $this->db
+                ->table('analytics_website_by_browser')
+                ->ignore(true)
+                ->insertBatch($websiteByBrowser);
+            $this->db
+                ->table('analytics_website_by_entry_page')
+                ->ignore(true)
+                ->insertBatch($websiteByEntryPage);
+            $this->db
+                ->table('analytics_website_by_referer')
+                ->ignore(true)
+                ->insertBatch($websiteByReferer);
         }
     }
 }

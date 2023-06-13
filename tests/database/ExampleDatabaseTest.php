@@ -36,6 +36,11 @@ class ExampleDatabaseTest extends CIUnitTestCase
         $this->setPrivateProperty($model, 'tempUseSoftDeletes', true);
 
         $object = $model->first();
+
+        if (! is_object($object)) {
+            return;
+        }
+
         $model->delete($object->id);
 
         // The model should no longer find it

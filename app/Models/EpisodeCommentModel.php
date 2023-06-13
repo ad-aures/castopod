@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Entities\Actor;
+use App\Entities\Episode;
 use App\Entities\EpisodeComment;
 use App\Libraries\CommentObject;
 use CodeIgniter\Database\BaseBuilder;
@@ -297,7 +299,15 @@ class EpisodeCommentModel extends UuidModel
             $episode = model(EpisodeModel::class, false)
                 ->find((int) $data['data']['episode_id']);
 
-            $data['data']['uri'] = url_to('episode-comment', esc($actor->username), $episode->slug, $uuid4->toString());
+            if (! $episode instanceof Episode) {
+                return $data;
+            }
+
+            if (! $actor instanceof Actor) {
+                return $data;
+            }
+
+            $data['data']['uri'] = url_to('episode-comment', $actor->username, $episode->slug, $uuid4->toString());
         }
 
         return $data;

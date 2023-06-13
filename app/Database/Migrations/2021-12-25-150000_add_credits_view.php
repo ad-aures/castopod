@@ -10,9 +10,7 @@ declare(strict_types=1);
 
 namespace App\Database\Migrations;
 
-use CodeIgniter\Database\Migration;
-
-class AddCreditsView extends Migration
+class AddCreditsView extends BaseMigration
 {
     public function up(): void
     {

@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace App\Database\Migrations;
 
-use CodeIgniter\Database\Migration;
-
-class AddIsOwnerToUsers extends Migration
+class AddIsOwnerToUsers extends BaseMigration
 {
     public function up(): void
     {

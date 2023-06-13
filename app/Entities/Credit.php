@@ -98,6 +98,7 @@ class Credit extends Entity
             return '';
         }
 
+        /** @var string */
         return lang("PersonsTaxonomy.persons.{$this->person_group}.label");
     }
 
@@ -111,6 +112,7 @@ class Credit extends Entity
             return '';
         }
 
+        /** @var string */
         return lang("PersonsTaxonomy.persons.{$this->person_group}.roles.{$this->person_role}.label");
     }
 }

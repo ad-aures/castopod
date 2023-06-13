@@ -12,9 +12,9 @@ declare(strict_types=1);
 
 namespace Modules\Fediverse\Database\Migrations;
 
-use CodeIgniter\Database\Migration;
+use App\Database\Migrations\BaseMigration;
 
-class AddFavourites extends Migration
+class AddFavourites extends BaseMigration
 {
     public function up(): void
     {

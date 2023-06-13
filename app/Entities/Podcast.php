@@ -21,6 +21,7 @@ use CodeIgniter\Files\File;
 use CodeIgniter\HTTP\Files\UploadedFile;
 use CodeIgniter\I18n\Time;
 use CodeIgniter\Shield\Entities\User;
+use Exception;
 use League\CommonMark\Environment\Environment;
 use League\CommonMark\Extension\Autolink\AutolinkExtension;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
@@ -260,7 +261,13 @@ class Podcast extends Entity
     public function getCover(): Image
     {
         if (! $this->cover instanceof Image) {
-            $this->cover = (new MediaModel('image'))->getMediaById($this->cover_id);
+            $cover = (new MediaModel('image'))->getMediaById($this->cover_id);
+
+            if (! $cover instanceof Image) {
+                throw new Exception('Could not retrieve podcast cover.');
+            }
+
+            $this->cover = $cover;
         }
 
         return $this->cover;
