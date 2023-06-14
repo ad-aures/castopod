@@ -188,6 +188,8 @@ class S3 implements FileManagerInterface
     public function serve(string $key): Response
     {
         $cacheName = 'object_presigned_uri_' . str_replace('/', '-', $key) . '_' . $this->config->s3['bucket'];
+
+        /** @var string $found */
         if (! $found = cache($cacheName)) {
             try {
                 $cmd = $this->s3->getCommand('GetObject', [
@@ -206,13 +208,19 @@ class S3 implements FileManagerInterface
                 ->save($cacheName, $found, DAY);
         }
 
-        $lastModifiedTimestamp = cache()
-            ->getMetaData($cacheName)['mtime'];
-        $lastModified = new DateTime();
-        $lastModified->setTimestamp($lastModifiedTimestamp);
-
         /** @var Response $response */
         $response = service('response');
+
+        if (cache()->getMetaData($cacheName) === null) {
+            return $response->setHeader('HTTP_REFERER', previous_url())
+                ->redirect($found);
+        }
+
+        $lastModifiedTimestamp = cache()
+            ->getMetaData($cacheName)['mtime'];
+
+        $lastModified = new DateTime();
+        $lastModified->setTimestamp($lastModifiedTimestamp);
 
         // Remove Cache-Control header before redefining it
         header_remove('Cache-Control');
@@ -222,7 +230,9 @@ class S3 implements FileManagerInterface
             'last-modified' => $lastModified->format(DATE_RFC7231),
             'etag'          => md5($cacheName),
             'public'        => true,
-        ])->redirect($found);
+        ])
+            ->setHeader('HTTP_REFERER', previous_url())
+            ->redirect($found);
     }
 
     private function prefixKey(string $key): string
