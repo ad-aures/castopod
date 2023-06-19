@@ -17,23 +17,23 @@
     "opawg/user-agents-php": "^v1.0",
     "adaures/ipcat-php": "^v1.0.0",
     "adaures/podcast-persons-taxonomy": "^v1.0.0",
-    "phpseclib/phpseclib": "~2.0.42",
+    "phpseclib/phpseclib": "~2.0.44",
     "michalsn/codeigniter4-uuid": "dev-develop",
     "codeigniter4/settings": "v2.1.2",
     "chrisjean/php-ico": "^1.0.4",
     "melbahja/seo": "^v2.1.1",
     "codeigniter4/shield": "v1.0.0-beta.3",
-    "aws/aws-sdk-php": "^3.272.1",
+    "aws/aws-sdk-php": "^3.273.2",
     "mpratt/embera": "^2.0.33"
   },
   "require-dev": {
     "mikey179/vfsstream": "^v1.6.11",
     "phpunit/phpunit": "^10.2.2",
     "captainhook/captainhook": "^5.16.4",
-    "symplify/easy-coding-standard": "^11.3.4",
-    "phpstan/phpstan": "^1.10.18",
-    "rector/rector": "^0.17.0",
-    "symplify/coding-standard": "^11.3.0"
+    "symplify/easy-coding-standard": "^11.4.3",
+    "phpstan/phpstan": "^1.10.19",
+    "rector/rector": "^0.17.1",
+    "symplify/coding-standard": "^11.4.1"
   },
   "autoload": {
     "exclude-from-classmap": [

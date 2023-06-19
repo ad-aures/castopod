@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="vendor/codeigniter4/framework/system/Test/bootstrap.php" backupGlobals="false" colors="true" stopOnError="false" stopOnFailure="false" stopOnIncomplete="false" stopOnSkipped="false" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.0/phpunit.xsd" cacheDirectory=".phpunit.cache">
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="vendor/codeigniter4/framework/system/Test/bootstrap.php" backupGlobals="false" colors="true" stopOnError="false" stopOnFailure="false" stopOnIncomplete="false" stopOnSkipped="false" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.2/phpunit.xsd" cacheDirectory=".phpunit.cache">
   <coverage includeUncoveredFiles="true">
-    <include>
-      <directory suffix=".php">./app</directory>
-    </include>
-    <exclude>
-      <directory suffix=".php">./app/Views</directory>
-      <file>./app/Config/Routes.php</file>
-    </exclude>
     <report>
       <clover outputFile="build/logs/clover.xml"/>
       <html outputDirectory="build/logs/html"/>
@@ -42,4 +35,13 @@
     <env name="database.tests.DBPrefix" value="tests_"/>
     <env name="restapi.enabled" value="true"/>
   </php>
+  <source>
+    <include>
+      <directory suffix=".php">./app</directory>
+    </include>
+    <exclude>
+      <directory suffix=".php">./app/Views</directory>
+      <file>./app/Config/Routes.php</file>
+    </exclude>
+  </source>
 </phpunit>
