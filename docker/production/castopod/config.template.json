@@ -37,7 +37,13 @@
   "settings": {
     "http": {
       "body_read_timeout": $CP_TIMEOUT,
-      "max_body_size": $CP_MAX_BODY_SIZE_BYTES
+      "max_body_size": $CP_MAX_BODY_SIZE_BYTES,
+      "static": {
+        "mime_types": {
+          "text/vtt": [".vtt"],
+          "text/srt": [".srt"]
+        }
+      }
     }
   }
 }
