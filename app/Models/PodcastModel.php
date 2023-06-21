@@ -384,6 +384,19 @@ class PodcastModel extends Model
         return $data;
     }
 
+    public function getFullTextMatchClauseForPodcasts(string $table, string $value): string
+    {
+        return '
+                MATCH (
+                    ' . $table . '.title ,
+                    ' . $table . '.description_markdown,
+                    ' . $table . '.handle,
+                    ' . $table . '.location_name
+                )
+                AGAINST("*' . preg_replace('/[^\p{L}\p{N}_]+/u', ' ', $value) . '*" IN BOOLEAN MODE)
+            ';
+    }
+
     /**
      * Creates an actor linked to the podcast (Triggered before insert)
      *

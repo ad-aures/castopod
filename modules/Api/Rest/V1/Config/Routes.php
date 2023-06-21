@@ -19,3 +19,17 @@ $routes->group(
         $routes->get('(:any)', 'ExceptionController::notFound');
     }
 );
+
+$routes->group(
+    config('RestApi')
+        ->gateway . 'episodes',
+    [
+        'namespace' => 'Modules\Api\Rest\V1\Controllers',
+        'filter'    => 'rest-api',
+    ],
+    static function ($routes): void {
+        $routes->get('/', 'EpisodeController::list');
+        $routes->get('(:num)', 'EpisodeController::view/$1');
+        $routes->get('(:any)', 'ExceptionController::notFound');
+    }
+);

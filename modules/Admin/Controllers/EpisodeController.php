@@ -86,7 +86,7 @@ class EpisodeController extends BaseController
                     ->select('episodes.*, IFNULL(SUM(ape.hits),0) as downloads')
                     ->join('analytics_podcasts_by_episode ape', 'episodes.id=ape.episode_id', 'left')
                     ->where('episodes.podcast_id', $this->podcast->id)
-                    ->where("MATCH (title, description_markdown) AGAINST ('{$query}')")
+                    ->where("MATCH (title, description_markdown, slug, location_name) AGAINST ('{$query}')")
                     ->groupBy('episodes.id');
             }
         } else {

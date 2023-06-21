@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Entities\Episode;
+use CodeIgniter\Database\BaseBuilder;
 use CodeIgniter\Database\BaseResult;
 use CodeIgniter\I18n\Time;
 use CodeIgniter\Model;
@@ -434,6 +435,37 @@ class EpisodeModel extends Model
             ])->countAllResults() > 0;
     }
 
+    public function fullTextSearch(string $query): ?BaseBuilder
+    {
+        $prefix = $this->db->getPrefix();
+        $episodeTable = $prefix . $this->builder()->getTable();
+
+        $podcastModel = (new PodcastModel());
+
+        $podcastTable = $podcastModel->db->getPrefix() . $podcastModel->builder()->getTable();
+
+        $this->builder()
+            ->select('' . $episodeTable . '.*')
+            ->select('
+                ' . $this->getFullTextMatchClauseForEpisodes($episodeTable, $query) . ' as episodes_score,
+                ' . $podcastModel->getFullTextMatchClauseForPodcasts($podcastTable, $query) . ' as podcasts_score,
+             ')
+            ->select("{$podcastTable}.created_at AS podcast_created_at")
+            ->select(
+                "{$podcastTable}.title as podcast_title, {$podcastTable}.handle as podcast_handle, {$podcastTable}.description_markdown as podcast_description_markdown"
+            )
+            ->join($podcastTable, "{$podcastTable} on {$podcastTable}.id = {$episodeTable}.podcast_id")
+            ->where('
+                (' .
+                    $this->getFullTextMatchClauseForEpisodes($episodeTable, $query)
+                    . 'OR' .
+                    $podcastModel->getFullTextMatchClauseForPodcasts($podcastTable, $query)
+                . ')
+            ');
+
+        return $this->builder;
+    }
+
     /**
      * @param mixed[] $data
      *
@@ -461,5 +493,18 @@ class EpisodeModel extends Model
         write_audio_file_tags($episode);
 
         return $data;
+    }
+
+    private function getFullTextMatchClauseForEpisodes(string $table, string $value): string
+    {
+        return '
+                MATCH (
+                    ' . $table . '.title,
+                    ' . $table . '.description_markdown,
+                    ' . $table . '.slug,
+                    ' . $table . '.location_name
+                )
+                AGAINST("*' . preg_replace('/[^\p{L}\p{N}_]+/u', ' ', $value) . '*" IN BOOLEAN MODE)
+            ';
     }
 }

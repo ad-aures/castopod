@@ -15,6 +15,17 @@ class RestApi extends BaseConfig
      */
     public bool $enabled = false;
 
+    public bool $basicAuth = false;
+
+    public ?string $basicAuthUsername = null;
+
+    public ?string $basicAuthPassword = null;
+
+    /**
+     * Default results limit.
+     */
+    public int $limit = 10;
+
     /**
      * --------------------------------------------------------------------------
      * Rest API gateway
