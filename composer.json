@@ -24,7 +24,9 @@
     "melbahja/seo": "^v2.1.1",
     "codeigniter4/shield": "v1.0.0-beta.3",
     "aws/aws-sdk-php": "^3.273.2",
-    "mpratt/embera": "^2.0.33"
+    "mpratt/embera": "^2.0.33",
+    "codeigniter4/tasks": "dev-develop",
+    "yassinedoghri/podcast-feed": "dev-main"
   },
   "require-dev": {
     "mikey179/vfsstream": "^v1.6.11",
@@ -80,5 +82,11 @@
     "allow-plugins": {
       "phpstan/extension-installer": true
     }
-  }
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/codeigniter4/tasks.git"
+    }
+  ]
 }

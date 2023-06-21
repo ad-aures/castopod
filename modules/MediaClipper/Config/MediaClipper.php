@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace MediaClipper\Config;
+namespace Modules\MediaClipper\Config;
 
 use CodeIgniter\Config\BaseConfig;
 
 class MediaClipper extends BaseConfig
 {
-    public string $fontsFolder = APPPATH . 'Libraries/MediaClipper/fonts/';
+    public string $fontsFolder = ROOTPATH . 'modules/MediaClipper/Resources/fonts/';
 
-    public string $quotesImage = APPPATH . 'Libraries/MediaClipper/quotes.png';
+    public string $quotesImage = ROOTPATH . 'modules/MediaClipper/Resources/quotes.png';
 
-    public string $wavesMask = APPPATH . 'Libraries/MediaClipper/waves-mask.png';
+    public string $wavesMask = ROOTPATH . 'modules/MediaClipper/Resources/waves-mask.png';
 
-    public string $watermark = APPPATH . 'Libraries/MediaClipper/castopod-logo.png';
+    public string $watermark = ROOTPATH . 'modules/MediaClipper/Resources/castopod-logo.png';
 
     /**
      * @var array<string, array<string, int|array<string, float|int|string>>>
@@ -78,7 +78,7 @@ class MediaClipper extends BaseConfig
                 'rescaleHeight' => 540,
                 'x'             => 0,
                 'y'             => 810,
-                'mask'          => APPPATH . 'Libraries/MediaClipper/soundwaves-mask-landscape.png',
+                'mask'          => ROOTPATH . 'modules/MediaClipper/Resources/soundwaves-mask-landscape.png',
             ],
             'subtitles' => [
                 'fontsize' => 18,
@@ -145,7 +145,7 @@ class MediaClipper extends BaseConfig
                 'rescaleHeight' => 1920,
                 'x'             => 0,
                 'y'             => 960,
-                'mask'          => APPPATH . 'Libraries/MediaClipper/soundwaves-mask-portrait.png',
+                'mask'          => ROOTPATH . 'modules/MediaClipper/Resources/soundwaves-mask-portrait.png',
             ],
             'subtitles' => [
                 'fontsize' => 16,
@@ -213,7 +213,7 @@ class MediaClipper extends BaseConfig
                 'rescaleHeight' => 1200,
                 'x'             => 0,
                 'y'             => 600,
-                'mask'          => APPPATH . 'Libraries/MediaClipper/soundwaves-mask-squared.png',
+                'mask'          => ROOTPATH . 'modules/MediaClipper/Resources/soundwaves-mask-squared.png',
             ],
             'subtitles' => [
                 'fontsize' => 20,

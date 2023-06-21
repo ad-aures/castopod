@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Admin\Controllers;
 
 use CodeIgniter\Controller;
+use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
@@ -21,6 +22,13 @@ use ViewThemes\Theme;
 
 abstract class BaseController extends Controller
 {
+    /**
+     * Instance of the main Request object.
+     *
+     * @var IncomingRequest
+     */
+    protected $request;
+
     /**
      * Constructor.
      */

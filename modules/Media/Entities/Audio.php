@@ -41,14 +41,13 @@ class Audio extends BaseMedia
         $getID3 = new GetID3();
         $audioMetadata = $getID3->analyze($file->getRealPath());
 
-        // remove heavy image data from metadata
-        unset($audioMetadata['comments']['picture']);
-        unset($audioMetadata['id3v2']['APIC']);
-
         $this->attributes['file_mimetype'] = $audioMetadata['mime_type'];
         $this->attributes['file_size'] = $audioMetadata['filesize'];
         $this->attributes['description'] = @$audioMetadata['id3v2']['comments']['comment'][0];
-        $this->attributes['file_metadata'] = json_encode($audioMetadata, JSON_INVALID_UTF8_SUBSTITUTE);
+        $this->attributes['file_metadata'] = json_encode([
+            'playtime_seconds' => $audioMetadata['playtime_seconds'],
+            'avdataoffset'     => $audioMetadata['avdataoffset'],
+        ], JSON_INVALID_UTF8_SUBSTITUTE);
 
         return $this;
     }

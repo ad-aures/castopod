@@ -2,27 +2,25 @@
 
 declare(strict_types=1);
 
-/**
- * @copyright  2021 Ad Aures
- * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
- * @link       https://castopod.org/
- */
+namespace Modules\Fediverse\Commands;
 
-namespace Modules\Fediverse\Controllers;
+use CodeIgniter\CLI\BaseCommand;
+use Modules\Fediverse\Models\ActivityModel;
 
-use CodeIgniter\Controller;
-
-class SchedulerController extends Controller
+class Broadcast extends BaseCommand
 {
-    /**
-     * @var string[]
-     */
-    protected $helpers = ['fediverse'];
+    protected $group = 'fediverse';
 
-    public function activity(): void
+    protected $name = 'fediverse:broadcast';
+
+    protected $description = 'Broadcasts new outgoing activity to followers.';
+
+    public function run(array $params): void
     {
+        helper('fediverse');
+
         // retrieve scheduled activities from database
-        $scheduledActivities = model('ActivityModel', false)
+        $scheduledActivities = model(ActivityModel::class, false)
             ->getScheduledActivities();
 
         // Send activity to all followers
@@ -45,7 +43,7 @@ class SchedulerController extends Controller
             }
 
             // set activity post to delivered
-            model('ActivityModel', false)
+            model(ActivityModel::class, false)
                 ->update($scheduledActivity->id, [
                     'status' => 'delivered',
                 ]);

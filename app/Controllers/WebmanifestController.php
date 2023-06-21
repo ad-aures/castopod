@@ -89,11 +89,11 @@ class WebmanifestController extends Controller
 
         $webmanifest = [
             'name'             => esc($podcast->title),
-            'short_name'       => '@' . esc($podcast->handle),
+            'short_name'       => $podcast->at_handle,
             'description'      => $podcast->description,
             'lang'             => $podcast->language_code,
             'start_url'        => $podcast->link,
-            'scope'            => '/@' . esc($podcast->handle),
+            'scope'            => '/' . $podcast->at_handle,
             'display'          => 'standalone',
             'orientation'      => 'portrait',
             'theme_color'      => self::THEME_COLORS[service('settings')->get('App.theme')]['theme'],

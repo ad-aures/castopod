@@ -7,7 +7,7 @@ $navigation = [
     ],
     'podcasts' => [
         'icon'  => 'mic',
-        'items' => ['podcast-list', 'podcast-create', 'podcast-import'],
+        'items' => ['podcast-list', 'podcast-create', 'all-podcast-imports', 'podcast-imports-add'],
     ],
     'persons' => [
         'icon'  => 'folder-user',

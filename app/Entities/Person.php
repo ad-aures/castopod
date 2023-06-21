@@ -66,15 +66,15 @@ class Person extends Entity
             $this->getAvatar()
                 ->setFile($file);
             $this->getAvatar()
-                ->updated_by = (int) user_id();
+                ->updated_by = $this->attributes['updated_by'];
             (new MediaModel('image'))->updateMedia($this->getAvatar());
         } else {
             $avatar = new Image([
                 'file_key' => 'persons/' . $this->attributes['unique_name'] . '.' . $file->getExtension(),
                 'sizes'    => config('Images')
 ->personAvatarSizes,
-                'uploaded_by' => user_id(),
-                'updated_by'  => user_id(),
+                'uploaded_by' => $this->attributes['updated_by'],
+                'updated_by'  => $this->attributes['updated_by'],
             ]);
             $avatar->setFile($file);
 

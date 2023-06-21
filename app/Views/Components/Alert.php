@@ -32,14 +32,24 @@ class Alert extends Component
                 'class' => 'text-yellow-900 bg-yellow-100 border-yellow-300',
                 'glyph' => 'alert',
             ],
+            'default' => [
+                'class' => 'text-blue-900 bg-blue-100 border-blue-300',
+                'glyph' => 'error-warning',
+            ],
         ];
 
-        $glyph = '<Icon glyph="' . ($this->glyph === null ? $variants[$this->variant]['glyph'] : $this->glyph) . '" class="flex-shrink-0 mr-2 text-lg" />';
+        if (! array_key_exists($this->variant, $variants)) {
+            $this->variant = 'default';
+        }
+
+        $glyph = icon(($this->glyph === null ? $variants[$this->variant]['glyph'] : $this->glyph), 'flex-shrink-0 mr-2 text-lg');
         $title = $this->title === null ? '' : '<div class="font-semibold">' . $this->title . '</div>';
         $class = 'inline-flex w-full p-2 text-sm border rounded ' . $variants[$this->variant]['class'] . ' ' . $this->class;
 
         unset($this->attributes['slot']);
         unset($this->attributes['variant']);
+        unset($this->attributes['class']);
+        unset($this->attributes['glyph']);
         $attributes = stringify_attributes($this->attributes);
 
         return <<<HTML

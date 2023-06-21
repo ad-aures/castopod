@@ -283,7 +283,7 @@ class EpisodeModel extends Model
     public function getCurrentSeasonNumber(int $podcastId): ?int
     {
         $result = $this->builder()
-            ->select('MAX(season_number) as current_season_number')
+            ->selectMax('season_number', 'current_season_number')
             ->where([
                 'podcast_id'          => $podcastId,
                 'published_at IS NOT' => null,
@@ -297,7 +297,7 @@ class EpisodeModel extends Model
     public function getNextEpisodeNumber(int $podcastId, ?int $seasonNumber): int
     {
         $result = $this->builder()
-            ->select('MAX(number) as next_episode_number')
+            ->selectMax('number', 'next_episode_number')
             ->where([
                 'podcast_id'          => $podcastId,
                 'season_number'       => $seasonNumber,
@@ -466,6 +466,19 @@ class EpisodeModel extends Model
         return $this->builder;
     }
 
+    public function getFullTextMatchClauseForEpisodes(string $table, string $value): string
+    {
+        return '
+                MATCH (
+                    ' . $table . '.title,
+                    ' . $table . '.description_markdown,
+                    ' . $table . '.slug,
+                    ' . $table . '.location_name
+                )
+                AGAINST(' . $this->db->escape($value) . ')
+            ';
+    }
+
     /**
      * @param mixed[] $data
      *
@@ -493,18 +506,5 @@ class EpisodeModel extends Model
         write_audio_file_tags($episode);
 
         return $data;
-    }
-
-    private function getFullTextMatchClauseForEpisodes(string $table, string $value): string
-    {
-        return '
-                MATCH (
-                    ' . $table . '.title,
-                    ' . $table . '.description_markdown,
-                    ' . $table . '.slug,
-                    ' . $table . '.location_name
-                )
-                AGAINST("*' . preg_replace('/[^\p{L}\p{N}_]+/u', ' ', $value) . '*" IN BOOLEAN MODE)
-            ';
     }
 }

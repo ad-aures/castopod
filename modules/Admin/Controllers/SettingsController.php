@@ -18,6 +18,7 @@ use App\Models\PersonModel;
 use App\Models\PodcastModel;
 use App\Models\PostModel;
 use CodeIgniter\Files\File;
+use CodeIgniter\HTTP\Files\UploadedFile;
 use CodeIgniter\HTTP\RedirectResponse;
 use Modules\Media\Entities\Audio;
 use Modules\Media\FileManagers\FileManagerInterface;
@@ -56,7 +57,7 @@ class SettingsController extends BaseController
         }
 
         $siteIconFile = $this->request->getFile('site_icon');
-        if ($siteIconFile !== null && $siteIconFile->isValid()) {
+        if ($siteIconFile instanceof UploadedFile && $siteIconFile->isValid()) {
             /** @var FileManagerInterface $fileManager */
             $fileManager = service('file_manager');
 

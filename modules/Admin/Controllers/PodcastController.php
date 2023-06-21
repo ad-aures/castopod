@@ -210,6 +210,8 @@ class PodcastController extends BaseController
         $db->transStart();
 
         $newPodcast = new Podcast([
+            'created_by'           => user_id(),
+            'updated_by'           => user_id(),
             'title'                => $this->request->getPost('title'),
             'handle'               => $this->request->getPost('handle'),
             'cover'                => $this->request->getFile('cover'),
@@ -239,8 +241,6 @@ class PodcastController extends BaseController
             'is_completed'          => $this->request->getPost('complete') === 'yes',
             'is_locked'             => $this->request->getPost('lock') === 'yes',
             'is_premium_by_default' => $this->request->getPost('premium_by_default') === 'yes',
-            'created_by'            => user_id(),
-            'updated_by'            => user_id(),
             'published_at'          => null,
         ]);
 
@@ -319,6 +319,8 @@ class PodcastController extends BaseController
             $partnerImageUrl = null;
         }
 
+        $this->podcast->updated_by = (int) user_id();
+
         $this->podcast->title = $this->request->getPost('title');
         $this->podcast->description_markdown = $this->request->getPost('description');
         $this->podcast->setCover($this->request->getFile('cover'));
@@ -353,7 +355,6 @@ class PodcastController extends BaseController
             $this->request->getPost('complete') === 'yes';
         $this->podcast->is_locked = $this->request->getPost('lock') === 'yes';
         $this->podcast->is_premium_by_default = $this->request->getPost('premium_by_default') === 'yes';
-        $this->podcast->updated_by = (int) user_id();
 
         // republish on websub hubs upon edit
         $this->podcast->is_published_on_hubs = false;

@@ -27,7 +27,7 @@
     </p>
     <form class="relative flex">
         <div class="relative">
-            <Forms.Input name="q" placeholder="<?= lang('Episode.list.search.placeholder') ?>" value="<?= $query ?>" class="<?= $query ? 'pr-8' : '' ?>" />
+            <Forms.Input name="q" placeholder="<?= lang('Episode.list.search.placeholder') ?>" value="<?= esc($query) ?>" class="<?= $query ? 'pr-8' : '' ?>" />
             <?php if ($query): ?>
                 <a href="<?= route_to('episode-list', $podcast->id) ?>" class="absolute inset-y-0 right-0 inline-flex items-center justify-center px-2 opacity-75 focus:ring-accent hover:opacity-100 focus:opacity-100" title="<?= lang('Episode.list.search.clear') ?>" data-tooltip="bottom"><?= icon('close', 'text-lg') ?></a>
             <?php endif; ?>

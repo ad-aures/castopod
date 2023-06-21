@@ -188,15 +188,15 @@ class Episode extends Entity
             $this->getCover()
                 ->setFile($file);
             $this->getCover()
-                ->updated_by = (int) user_id();
+                ->updated_by = $this->attributes['updated_by'];
             (new MediaModel('image'))->updateMedia($this->getCover());
         } else {
             $cover = new Image([
                 'file_key' => 'podcasts/' . $this->getPodcast()->handle . '/' . $this->attributes['slug'] . '.' . $file->getExtension(),
                 'sizes'    => config('Images')
 ->podcastCoverSizes,
-                'uploaded_by' => user_id(),
-                'updated_by'  => user_id(),
+                'uploaded_by' => $this->attributes['updated_by'],
+                'updated_by'  => $this->attributes['updated_by'],
             ]);
             $cover->setFile($file);
 
@@ -234,7 +234,7 @@ class Episode extends Entity
             $this->getAudio()
                 ->setFile($file);
             $this->getAudio()
-                ->updated_by = (int) user_id();
+                ->updated_by = $this->attributes['updated_by'];
             (new MediaModel('audio'))->updateMedia($this->getAudio());
         } else {
             $audio = new Audio([
@@ -244,8 +244,8 @@ class Episode extends Entity
                 ) . '.' . $file->getExtension(),
                 'language_code' => $this->getPodcast()
                     ->language_code,
-                'uploaded_by' => user_id(),
-                'updated_by'  => user_id(),
+                'uploaded_by' => $this->attributes['updated_by'],
+                'updated_by'  => $this->attributes['updated_by'],
             ]);
             $audio->setFile($file);
 
@@ -274,15 +274,15 @@ class Episode extends Entity
             $this->getTranscript()
                 ->setFile($file);
             $this->getTranscript()
-                ->updated_by = (int) user_id();
+                ->updated_by = $this->attributes['updated_by'];
             (new MediaModel('transcript'))->updateMedia($this->getTranscript());
         } else {
             $transcript = new Transcript([
                 'file_key'      => 'podcasts/' . $this->getPodcast()->handle . '/' . $this->attributes['slug'] . '-transcript.' . $file->getExtension(),
                 'language_code' => $this->getPodcast()
 ->language_code,
-                'uploaded_by' => user_id(),
-                'updated_by'  => user_id(),
+                'uploaded_by' => $this->attributes['updated_by'],
+                'updated_by'  => $this->attributes['updated_by'],
             ]);
             $transcript->setFile($file);
 
@@ -311,15 +311,15 @@ class Episode extends Entity
             $this->getChapters()
                 ->setFile($file);
             $this->getChapters()
-                ->updated_by = (int) user_id();
+                ->updated_by = $this->attributes['updated_by'];
             (new MediaModel('chapters'))->updateMedia($this->getChapters());
         } else {
             $chapters = new Chapters([
                 'file_key'      => 'podcasts/' . $this->getPodcast()->handle . '/' . $this->attributes['slug'] . '-chapters' . '.' . $file->getExtension(),
                 'language_code' => $this->getPodcast()
 ->language_code,
-                'uploaded_by' => user_id(),
-                'updated_by'  => user_id(),
+                'uploaded_by' => $this->attributes['updated_by'],
+                'updated_by'  => $this->attributes['updated_by'],
             ]);
             $chapters->setFile($file);
 

@@ -43,23 +43,24 @@ class Autoload extends AutoloadConfig
      */
     public $psr4 = [
         APP_NAMESPACE             => APPPATH,
+        'Config'                  => APPPATH . 'Config/',
         'Modules'                 => ROOTPATH . 'modules/',
         'Modules\Admin'           => ROOTPATH . 'modules/Admin/',
-        'Modules\Auth'            => ROOTPATH . 'modules/Auth/',
         'Modules\Analytics'       => ROOTPATH . 'modules/Analytics/',
-        'Modules\Install'         => ROOTPATH . 'modules/Install/',
-        'Modules\Update'          => ROOTPATH . 'modules/Update/',
-        'Modules\Fediverse'       => ROOTPATH . 'modules/Fediverse/',
-        'Modules\Media'           => ROOTPATH . 'modules/Media/',
-        'Modules\WebSub'          => ROOTPATH . 'modules/WebSub/',
         'Modules\Api\Rest\V1'     => ROOTPATH . 'modules/Api/Rest/V1',
+        'Modules\Auth'            => ROOTPATH . 'modules/Auth/',
+        'Modules\Fediverse'       => ROOTPATH . 'modules/Fediverse/',
+        'Modules\Install'         => ROOTPATH . 'modules/Install/',
+        'Modules\Media'           => ROOTPATH . 'modules/Media/',
+        'Modules\MediaClipper'    => ROOTPATH . 'modules/MediaClipper/',
+        'Modules\PodcastImport'   => ROOTPATH . 'modules/PodcastImport/',
         'Modules\PremiumPodcasts' => ROOTPATH . 'modules/PremiumPodcasts/',
-        'Config'                  => APPPATH . 'Config/',
+        'Modules\Update'          => ROOTPATH . 'modules/Update/',
+        'Modules\WebSub'          => ROOTPATH . 'modules/WebSub/',
+        'Themes'                  => ROOTPATH . 'themes',
         'ViewComponents'          => APPPATH . 'Libraries/ViewComponents/',
         'ViewThemes'              => APPPATH . 'Libraries/ViewThemes/',
-        'MediaClipper'            => APPPATH . 'Libraries/MediaClipper/',
         'Vite'                    => APPPATH . 'Libraries/Vite/',
-        'Themes'                  => ROOTPATH . 'themes',
     ];
 
     /**

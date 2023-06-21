@@ -35,13 +35,13 @@ class EpisodeController extends Controller
         if ($query !== null) {
             $builder->fullTextSearch($query);
 
-            if ($order === 'query') {
+            if ($order === 'search') {
                 $builder->orderBy('(episodes_score + podcasts_score)', 'desc');
             }
         }
 
         if ($order === 'newest') {
-            $builder->orderBy($builder->db->getPrefix() . $builder->getTable() . '.created_at', 'desc');
+            $builder->orderBy('episodes.created_at', 'desc');
         }
 
         $data = $builder->findAll(

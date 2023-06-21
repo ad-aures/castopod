@@ -20,6 +20,7 @@ use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
 use App\Models\PostModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
+use CodeIgniter\HTTP\Files\UploadedFile;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\I18n\Time;
 use Modules\Media\Entities\Chapters;
@@ -68,29 +69,36 @@ class EpisodeController extends BaseController
         /** @var ?string $query */
         $query = $this->request->getGet('q');
 
+        $episodeModel = new EpisodeModel();
         if ($query !== null && $query !== '') {
             // Default value for MySQL Full-Text Search's minimum length of words is 4.
             // Use LIKE operator as a fallback.
             if (strlen($query) < 4) {
-                $episodes = (new EpisodeModel())
+                $episodes = $episodeModel
                     ->select('episodes.*, IFNULL(SUM(ape.hits),0) as downloads')
                     ->join('analytics_podcasts_by_episode ape', 'episodes.id=ape.episode_id', 'left')
                     ->where('episodes.podcast_id', $this->podcast->id)
-                    ->like('title', $query)
-                    ->orLike('description_markdown', $query)
+                    ->like('title', $episodeModel->db->escapeLikeString($query))
+                    ->orLike('description_markdown', $episodeModel->db->escapeLikeString($query))
+                    ->orLike('slug', $episodeModel->db->escapeLikeString($query))
+                    ->orLike('location_name', $episodeModel->db->escapeLikeString($query))
                     ->groupBy('episodes.id')
                     ->orderBy('-`published_at`', '', false)
                     ->orderBy('created_at', 'desc');
             } else {
-                $episodes = (new EpisodeModel())
+                $episodes = $episodeModel
                     ->select('episodes.*, IFNULL(SUM(ape.hits),0) as downloads')
                     ->join('analytics_podcasts_by_episode ape', 'episodes.id=ape.episode_id', 'left')
                     ->where('episodes.podcast_id', $this->podcast->id)
-                    ->where("MATCH (title, description_markdown, slug, location_name) AGAINST ('{$query}')")
+                    ->where(
+                        "MATCH (title, description_markdown, slug, location_name) AGAINST ('{$episodeModel->db->escapeString(
+                            $query
+                        )}')"
+                    )
                     ->groupBy('episodes.id');
             }
         } else {
-            $episodes = (new EpisodeModel())
+            $episodes = $episodeModel
                 ->select('episodes.*, IFNULL(SUM(ape.hits),0) as downloads')
                 ->join('analytics_podcasts_by_episode ape', 'episodes.id=ape.episode_id', 'left')
                 ->where('episodes.podcast_id', $this->podcast->id)
@@ -183,6 +191,8 @@ class EpisodeController extends BaseController
         $db->transStart();
 
         $newEpisode = new Episode([
+            'created_by'           => user_id(),
+            'updated_by'           => user_id(),
             'podcast_id'           => $this->podcast->id,
             'title'                => $this->request->getPost('title'),
             'slug'                 => $this->request->getPost('slug'),
@@ -208,8 +218,6 @@ class EpisodeController extends BaseController
             'is_blocked'        => $this->request->getPost('block') === 'yes',
             'custom_rss_string' => $this->request->getPost('custom_rss'),
             'is_premium'        => $this->request->getPost('premium') === 'yes',
-            'created_by'        => user_id(),
-            'updated_by'        => user_id(),
             'published_at'      => null,
         ]);
 
@@ -333,7 +341,7 @@ class EpisodeController extends BaseController
         $transcriptChoice = $this->request->getPost('transcript-choice');
         if ($transcriptChoice === 'upload-file') {
             $transcriptFile = $this->request->getFile('transcript_file');
-            if ($transcriptFile !== null && $transcriptFile->isValid()) {
+            if ($transcriptFile instanceof UploadedFile && $transcriptFile->isValid()) {
                 $this->episode->setTranscript($transcriptFile);
                 $this->episode->transcript_remote_url = null;
             }
@@ -351,7 +359,7 @@ class EpisodeController extends BaseController
         $chaptersChoice = $this->request->getPost('chapters-choice');
         if ($chaptersChoice === 'upload-file') {
             $chaptersFile = $this->request->getFile('chapters_file');
-            if ($chaptersFile !== null && $chaptersFile->isValid()) {
+            if ($chaptersFile instanceof UploadedFile && $chaptersFile->isValid()) {
                 $this->episode->setChapters($chaptersFile);
                 $this->episode->chapters_remote_url = null;
             }

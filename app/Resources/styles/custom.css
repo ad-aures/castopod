@@ -57,4 +57,14 @@
       #e5e7eb 20px
     );
   }
+
+  .bg-stripes-warning {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      #fde047,
+      #fde047 10px,
+      #facc15 10px,
+      #facc15 20px
+    );
+  }
 }

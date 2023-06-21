@@ -51,9 +51,22 @@ $isEpisodeArea = isset($podcast) && isset($episode);
                 </div>
             </div>
         </header>
-        <?php if ($isPodcastArea && $podcast->publication_status !== 'published'): ?>
+        <?php if ($isPodcastArea): ?>
+            <?php if (service('settings')->get('Import.current') === $podcast->handle): ?>
+                <div class="flex items-center px-12 py-2 border-b bg-stripes-warning border-subtle" role="alert">
+                    <p class="flex items-center text-gray-900">
+                        <span class="inline-flex items-center gap-1 text-xs font-semibold tracking-wide uppercase"><Icon glyph="download" class="text-base text-yellow-900"/><?= lang('PodcastImport.banner.disclaimer') ?></span>
+                        <span class="ml-3 text-sm"><?= lang('PodcastImport.banner.text', [
+                            'podcastTitle' => $podcast->title,
+                        ]) ?></span>
+                    </p>
+                    <a href="<?= route_to('podcast-imports', $podcast->id) ?>" class="ml-1 text-sm font-semibold underline shadow-xs text-accent-base hover:text-accent-hover hover:no-underline"><?= lang('PodcastImport.banner.cta') ?></a>
+                </div>
+            <?php endif; ?>
+            <?php if ($podcast->publication_status !== 'published'): ?>
                 <?= publication_status_banner($podcast->published_at, $podcast->id, $podcast->publication_status) ?>
-        <?php endif ?>
+            <?php endif; ?>
+        <?php endif; ?>
         <div class="px-2 py-8 mx-auto md:px-12">
             <?= view('_message_block') ?>
             <?= $this->renderSection('content') ?>

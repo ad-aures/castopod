@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Admin\Config;
 
+use CodeIgniter\Router\RouteCollection;
+
+/** @var RouteCollection $routes */
 $routes = service('routes');
 
 // video-clips scheduler
@@ -94,13 +97,6 @@ $routes->group(
             $routes->post('new', 'PodcastController::attemptCreate', [
                 'filter' => 'permission:podcasts.create',
             ]);
-            $routes->get('import', 'PodcastImportController', [
-                'as'     => 'podcast-import',
-                'filter' => 'permission:podcasts.import',
-            ]);
-            $routes->post('import', 'PodcastImportController::attemptImport', [
-                'filter' => 'permission:podcasts.import',
-            ]);
             // Podcast
             // Use ids in admin area to help permission and group lookups
             $routes->group('(:num)', static function ($routes): void {
@@ -163,10 +159,6 @@ $routes->group(
                 ]);
                 $routes->post('delete', 'PodcastController::attemptDelete/$1', [
                     'filter' => 'permission:podcast#.delete',
-                ]);
-                $routes->get('update', 'PodcastImportController::updateImport/$1', [
-                    'as'     => 'podcast-update-feed',
-                    'filter' => 'permission:podcast#.manage-import',
                 ]);
                 $routes->group('persons', static function ($routes): void {
                     $routes->get('/', 'PodcastPersonController/$1', [

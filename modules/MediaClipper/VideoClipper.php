@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @link       https://castopod.org/
  */
 
-namespace MediaClipper;
+namespace Modules\MediaClipper;
 
 use App\Entities\Episode;
 use Exception;

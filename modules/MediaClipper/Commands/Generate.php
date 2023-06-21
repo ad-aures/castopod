@@ -2,37 +2,37 @@
 
 declare(strict_types=1);
 
-/**
- * @copyright  2021 Ad Aures
- * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
- * @link       https://castopod.org/
- */
-
-namespace Modules\Admin\Controllers;
+namespace Modules\MediaClipper\Commands;
 
 use App\Models\ClipModel;
-use CodeIgniter\Controller;
+use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\Files\File;
 use CodeIgniter\I18n\Time;
 use Exception;
-use MediaClipper\VideoClipper;
+use Modules\MediaClipper\VideoClipper;
 
-class SchedulerController extends Controller
+class Generate extends BaseCommand
 {
-    public function generateVideoClips(): bool
+    protected $group = 'media-clipper';
+
+    protected $name = 'video-clips:generate';
+
+    protected $description = 'Displays basic application information.';
+
+    public function run(array $params): void
     {
         // get number of running clips to prevent from having too much running in parallel
         // TODO: get the number of running ffmpeg processes directly from the machine?
         $runningVideoClips = (new ClipModel())->getRunningVideoClipsCount();
         if ($runningVideoClips >= config('Admin')->videoClipWorkers) {
-            return true;
+            return;
         }
 
         // get all clips that haven't been processed yet
         $scheduledClips = (new ClipModel())->getScheduledVideoClips();
 
         if ($scheduledClips === []) {
-            return true;
+            return;
         }
 
         $data = [];
@@ -91,7 +91,5 @@ class SchedulerController extends Controller
                 ]);
             }
         }
-
-        return true;
     }
 }

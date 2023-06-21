@@ -218,8 +218,8 @@ if (! function_exists('publication_status_banner')) {
         }
 
         return <<<HTML
-        <div class="flex items-center px-12 py-1 border-b bg-stripes-gray border-subtle" role="alert">
-            <p class="text-gray-900">
+        <div class="flex items-center px-12 py-2 border-b bg-stripes-gray border-subtle" role="alert">
+            <p class="flex items-center text-gray-900">
                 <span class="text-xs font-semibold tracking-wide uppercase">{$bannerDisclaimer}</span>
                 <span class="ml-3 text-sm">{$bannerText}</span>
             </p>

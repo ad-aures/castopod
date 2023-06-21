@@ -1,3 +1,1 @@
-* * * * * /usr/local/bin/php /var/www/castopod/public/index.php scheduled-activities
-* * * * * /usr/local/bin/php /var/www/castopod/public/index.php scheduled-websub-publish
-* * * * * /usr/local/bin/php /var/www/castopod/public/index.php scheduled-video-clips
+* * * * * /usr/local/bin/php /var/www/castopod/spark tasks:run >> /dev/null 2>&1

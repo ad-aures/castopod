@@ -129,15 +129,15 @@ class BaseClip extends Entity
             $this->getMedia()
                 ->setFile($file);
             $this->getMedia()
-                ->updated_by = (int) user_id();
+                ->updated_by = $this->attributes['updated_by'];
             (new MediaModel('audio'))->updateMedia($this->getMedia());
         } else {
             $media = new Audio([
                 'file_key'      => $fileKey,
                 'language_code' => $this->getPodcast()
 ->language_code,
-                'uploaded_by' => $this->attributes['created_by'],
-                'updated_by'  => $this->attributes['created_by'],
+                'uploaded_by' => $this->attributes['updated_by'],
+                'updated_by'  => $this->attributes['updated_by'],
             ]);
             $media->setFile($file);
 

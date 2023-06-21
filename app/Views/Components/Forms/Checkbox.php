@@ -22,9 +22,7 @@ class Checkbox extends FormComponent
             'name'  => $this->name,
             'class' => 'form-checkbox bg-elevated text-accent-base border-contrast border-3 focus:ring-accent w-6 h-6',
         ];
-        if ($this->required) {
-            $attributes['required'] = 'required';
-        }
+
         $checkboxInput = form_checkbox(
             $attributes,
             'yes',

@@ -177,18 +177,6 @@ class PlatformModel extends Model
             ->insertBatch($podcastsPlatformsData);
     }
 
-    /**
-     * @param mixed[] $podcastsPlatformsData
-     */
-    public function createPodcastPlatforms(int $podcastId, array $podcastsPlatformsData): int | false
-    {
-        $this->clearCache($podcastId);
-
-        return $this->db
-            ->table('podcasts_platforms')
-            ->insertBatch($podcastsPlatformsData);
-    }
-
     public function removePodcastPlatform(int $podcastId, string $platformSlug): bool | string
     {
         $this->clearCache($podcastId);

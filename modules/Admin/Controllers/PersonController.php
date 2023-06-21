@@ -79,12 +79,12 @@ class PersonController extends BaseController
         $db->transStart();
 
         $person = new Person([
+            'created_by'      => user_id(),
+            'updated_by'      => user_id(),
             'full_name'       => $this->request->getPost('full_name'),
             'unique_name'     => $this->request->getPost('unique_name'),
             'information_url' => $this->request->getPost('information_url'),
             'avatar'          => $this->request->getFile('avatar'),
-            'created_by'      => user_id(),
-            'updated_by'      => user_id(),
         ]);
 
         $personModel = new PersonModel();
@@ -129,12 +129,11 @@ class PersonController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
+        $this->person->updated_by = user_id();
         $this->person->full_name = $this->request->getPost('full_name');
         $this->person->unique_name = $this->request->getPost('unique_name');
         $this->person->information_url = $this->request->getPost('information_url');
         $this->person->setAvatar($this->request->getFile('avatar'));
-
-        $this->person->updated_by = user_id();
 
         $personModel = new PersonModel();
         if (! $personModel->update($this->person->id, $this->person)) {

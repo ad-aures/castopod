@@ -190,12 +190,13 @@ class PersonModel extends Model
     public function addPerson(string $fullName, ?string $informationUrl, string $image): int | bool
     {
         $person = new Person([
+            'created_by'      => user_id(),
+            'updated_by'      => user_id(),
             'full_name'       => $fullName,
             'unique_name'     => slugify($fullName),
             'information_url' => $informationUrl,
             'image'           => download_file($image),
-            'created_by'      => user_id(),
-            'updated_by'      => user_id(),
+
         ]);
 
         return $this->insert($person);
@@ -267,6 +268,7 @@ class PersonModel extends Model
     public function addPodcastPerson(int $podcastId, int $personId, string $groupSlug, string $roleSlug): bool
     {
         return $this->db->table('podcasts_persons')
+            ->ignore(true)
             ->insert([
                 'podcast_id'   => $podcastId,
                 'person_id'    => $personId,

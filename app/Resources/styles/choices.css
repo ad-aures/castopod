@@ -217,7 +217,7 @@
   .choices__list--dropdown {
     @apply z-50 border-2 shadow-lg border-contrast;
 
-    visibility: hidden;
+    display: none;
     position: absolute;
     width: 100%;
     background-color: hsl(var(--color-background-elevated));
@@ -225,11 +225,10 @@
     margin-top: -1px;
     overflow: hidden;
     word-break: break-all;
-    will-change: visibility;
   }
 
   .choices__list--dropdown.is-active {
-    visibility: visible;
+    display: block;
   }
 
   .is-open .choices__list--dropdown {

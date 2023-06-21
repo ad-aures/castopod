@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-/**
- * @copyright  2022 Ad Aures
- * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
- * @link       https://castopod.org/
- */
-
-namespace Modules\WebSub\Controllers;
+namespace Modules\WebSub\Commands;
 
 use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
-use CodeIgniter\Controller;
-use Config\Services;
+use CodeIgniter\CLI\BaseCommand;
+use CodeIgniter\HTTP\CURLRequest;
 use Exception;
 
-class WebSubController extends Controller
+class Publish extends BaseCommand
 {
-    public function publish(): void
+    protected $group = 'Websub';
+
+    protected $name = 'websub:publish';
+
+    protected $description = 'Publishes feed updates to websub hubs.';
+
+    public function run(array $params): void
     {
         if (ENVIRONMENT !== 'production') {
             return;
@@ -45,7 +45,8 @@ class WebSubController extends Controller
             return;
         }
 
-        $request = Services::curlrequest();
+        /** @var CURLRequest $request */
+        $request = service('curlrequest');
 
         $requestOptions = [
             'headers' => [

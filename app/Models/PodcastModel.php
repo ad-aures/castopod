@@ -393,7 +393,7 @@ class PodcastModel extends Model
                     ' . $table . '.handle,
                     ' . $table . '.location_name
                 )
-                AGAINST("*' . preg_replace('/[^\p{L}\p{N}_]+/u', ' ', $value) . '*" IN BOOLEAN MODE)
+                AGAINST(' . $this->db->escape($value) . ')
             ';
     }
 
@@ -499,13 +499,18 @@ class PodcastModel extends Model
     /**
      * @param mixed[] $data
      *
+     * Sets the UUIDv5 for a podcast. For more information, see
+     * https://github.com/Podcastindex-org/podcast-namespace/blob/main/docs/1.0.md#guid
+     *
      * @return mixed[]
      */
     protected function setPodcastGUID(array $data): array
     {
         if (! array_key_exists('guid', $data['data']) || $data['data']['guid'] === null) {
-            helper('misc');
-            $data['data']['guid'] = podcast_uuid(url_to('podcast-rss-feed', $data['data']['handle']));
+            $uuid = service('uuid');
+            $feedUrl = url_to('podcast-rss-feed', $data['data']['handle']);
+            // 'ead4c236-bf58-58c6-a2c6-a6b28d128cb6' is the uuid of the podcast namespace
+            $data['data']['guid'] = $uuid->uuid5('ead4c236-bf58-58c6-a2c6-a6b28d128cb6', $feedUrl)->toString();
         }
 
         return $data;

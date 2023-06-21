@@ -41,6 +41,7 @@ use RuntimeException;
  * @property int $actor_id
  * @property Actor|null $actor
  * @property string $handle
+ * @property string $at_handle
  * @property string $link
  * @property string $feed_url
  * @property string $title
@@ -240,15 +241,15 @@ class Podcast extends Entity
             $this->getCover()
                 ->setFile($file);
             $this->getCover()
-                ->updated_by = (int) user_id();
+                ->updated_by = $this->attributes['updated_by'];
             (new MediaModel('image'))->updateMedia($this->getCover());
         } else {
             $cover = new Image([
                 'file_key' => 'podcasts/' . $this->attributes['handle'] . '/cover.' . $file->getExtension(),
                 'sizes'    => config('Images')
 ->podcastCoverSizes,
-                'uploaded_by' => user_id(),
-                'updated_by'  => user_id(),
+                'uploaded_by' => $this->attributes['updated_by'],
+                'updated_by'  => $this->attributes['updated_by'],
             ]);
             $cover->setFile($file);
 
@@ -283,15 +284,15 @@ class Podcast extends Entity
             $this->getBanner()
                 ->setFile($file);
             $this->getBanner()
-                ->updated_by = (int) user_id();
+                ->updated_by = $this->attributes['updated_by'];
             (new MediaModel('image'))->updateMedia($this->getBanner());
         } else {
             $banner = new Image([
                 'file_key' => 'podcasts/' . $this->attributes['handle'] . '/banner.' . $file->getExtension(),
                 'sizes'    => config('Images')
 ->podcastBannerSizes,
-                'uploaded_by' => user_id(),
-                'updated_by'  => user_id(),
+                'uploaded_by' => $this->attributes['updated_by'],
+                'updated_by'  => $this->attributes['updated_by'],
             ]);
             $banner->setFile($file);
 

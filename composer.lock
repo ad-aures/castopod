@@ -478,6 +478,82 @@
       "time": "2022-10-30T23:14:47+00:00"
     },
     {
+      "name": "codeigniter4/tasks",
+      "version": "dev-develop",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/codeigniter4/tasks.git",
+        "reference": "7e1ffe22f5aec609325a9a1fafa401f703cddd71"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/codeigniter4/tasks/zipball/7e1ffe22f5aec609325a9a1fafa401f703cddd71",
+        "reference": "7e1ffe22f5aec609325a9a1fafa401f703cddd71",
+        "shasum": ""
+      },
+      "require": {
+        "codeigniter4/settings": "^2.0",
+        "ext-json": "*",
+        "php": "^7.4 || ^8.0"
+      },
+      "require-dev": {
+        "codeigniter4/devkit": "^1.0",
+        "codeigniter4/framework": "^4.1",
+        "rector/rector": "0.17.0"
+      },
+      "default-branch": true,
+      "type": "library",
+      "autoload": {
+        "psr-4": {
+          "CodeIgniter\\Tasks\\": "src"
+        },
+        "exclude-from-classmap": ["**/Database/Migrations/**"]
+      },
+      "autoload-dev": {
+        "psr-4": {
+          "Tests\\Support\\": "tests/_support"
+        }
+      },
+      "scripts": {
+        "post-update-cmd": ["bash admin/setup.sh"],
+        "analyze": ["phpstan analyze", "psalm"],
+        "ci": [
+          "Composer\\Config::disableProcessTimeout",
+          "@deduplicate",
+          "@analyze",
+          "@test",
+          "@inspect",
+          "rector process",
+          "@style"
+        ],
+        "deduplicate": ["phpcpd app/ src/"],
+        "inspect": ["deptrac analyze --cache-file=build/deptrac.cache"],
+        "mutate": [
+          "infection --threads=2 --skip-initial-tests --coverage=build/phpunit"
+        ],
+        "retool": ["retool"],
+        "style": ["php-cs-fixer fix --verbose --ansi --using-cache=no"],
+        "cs-fix": ["@style"],
+        "test": ["phpunit"]
+      },
+      "license": ["MIT"],
+      "authors": [
+        {
+          "name": "Lonnie Ezell",
+          "email": "lonnieje@gmail.com",
+          "role": "Developer"
+        }
+      ],
+      "description": "Task Scheduler for CodeIgniter 4",
+      "homepage": "https://github.com/codeigniter4/tasks",
+      "keywords": ["codeigniter", "codeigniter4", "cron", "task scheduling"],
+      "support": {
+        "source": "https://github.com/codeigniter4/tasks/tree/develop",
+        "issues": "https://github.com/codeigniter4/tasks/issues"
+      },
+      "time": "2023-06-02T11:03:24+00:00"
+    },
+    {
       "name": "composer/ca-bundle",
       "version": "1.3.6",
       "source": {
@@ -3052,6 +3128,55 @@
         "source": "https://github.com/WhichBrowser/Parser-PHP/tree/v2.1.7"
       },
       "time": "2022-04-19T20:14:54+00:00"
+    },
+    {
+      "name": "yassinedoghri/podcast-feed",
+      "version": "dev-main",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/yassinedoghri/podcast-feed.git",
+        "reference": "c6b25fb19d6d14f93e403e423640df7714067aca"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/yassinedoghri/podcast-feed/zipball/c6b25fb19d6d14f93e403e423640df7714067aca",
+        "reference": "c6b25fb19d6d14f93e403e423640df7714067aca",
+        "shasum": ""
+      },
+      "require": {
+        "ext-intl": "*",
+        "php": ">=8.1"
+      },
+      "require-dev": {
+        "kint-php/kint": "^5.0.5",
+        "phpstan/phpstan": "^1.10.18",
+        "rector/rector": "^0.17.0",
+        "symplify/coding-standard": "^11.3.0",
+        "symplify/easy-coding-standard": "^11.3.4"
+      },
+      "default-branch": true,
+      "type": "library",
+      "autoload": {
+        "psr-4": {
+          "PodcastFeed\\": "src/"
+        }
+      },
+      "notification-url": "https://packagist.org/downloads/",
+      "license": ["AGPL-3.0-or-later"],
+      "authors": [
+        {
+          "name": "Yassine Doghri",
+          "email": "yassine@doghri.fr",
+          "homepage": "https://yassinedoghri.com",
+          "role": "Maintainer"
+        }
+      ],
+      "description": "A robust podcast feed parser and validator written in PHP.",
+      "support": {
+        "issues": "https://github.com/yassinedoghri/podcast-feed/issues",
+        "source": "https://github.com/yassinedoghri/podcast-feed/tree/main"
+      },
+      "time": "2023-06-11T16:54:30+00:00"
     }
   ],
   "packages-dev": [
@@ -6460,7 +6585,9 @@
   "stability-flags": {
     "james-heinrich/getid3": 10,
     "michalsn/codeigniter4-uuid": 20,
-    "codeigniter4/shield": 10
+    "codeigniter4/shield": 10,
+    "codeigniter4/tasks": 20,
+    "yassinedoghri/podcast-feed": 20
   },
   "prefer-stable": true,
   "prefer-lowest": false,

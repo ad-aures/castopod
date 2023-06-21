@@ -20,12 +20,6 @@ class Input extends FormComponent
             $this->attributes['class'] .= ' px-3 py-2';
         }
 
-        unset($this->attributes['required']);
-
-        if ($this->required) {
-            $this->attributes['required'] = 'required';
-        }
-
         return form_input($this->attributes, old($this->name, $this->value));
     }
 }

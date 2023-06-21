@@ -23,7 +23,7 @@ class DashboardController extends BaseController
         $podcastsCount = (new PodcastModel())->builder()
             ->countAll();
         $podcastsLastPublishedAt = (new PodcastModel())->builder()
-            ->select('MAX(published_at) as last_published_at')
+            ->selectMax('published_at', 'last_published_at')
             ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
             ->get()
             ->getResultArray()[0]['last_published_at'];
@@ -36,7 +36,7 @@ class DashboardController extends BaseController
         $episodesCount = (new EpisodeModel())->builder()
             ->countAll();
         $episodesLastPublishedAt = (new EpisodeModel())->builder()
-            ->select('MAX(published_at) as last_published_at')
+            ->selectMax('published_at', 'last_published_at')
             ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
             ->get()
             ->getResultArray()[0]['last_published_at'];

@@ -12,11 +12,9 @@ class Section extends Component
 
     protected ?string $subtitle = null;
 
-    protected string $subtitleClass = '';
-
     public function render(): string
     {
-        $subtitle = $this->subtitle === null ? '' : '<p class="text-sm text-skin-muted ' . $this->subtitleClass . '">' . $this->subtitle . '</p>';
+        $subtitle = $this->subtitle === null ? '' : '<p class="text-sm text-skin-muted">' . $this->subtitle . '</p>';
 
         return <<<HTML
             <fieldset class="w-full p-8 bg-elevated border-3 flex flex-col items-start border-subtle rounded-xl {$this->class}">

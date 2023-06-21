@@ -29,6 +29,9 @@ class Select extends FormComponent
             'data-no-choices-text' => lang('Common.forms.multiSelect.noChoicesText'),
             'data-max-item-text'   => lang('Common.forms.multiSelect.maxItemText'),
         ];
+        unset($this->attributes['name']);
+        unset($this->attributes['options']);
+        unset($this->attributes['selected']);
         $extra = array_merge($this->attributes, $defaultAttributes);
 
         return form_dropdown($this->name, $this->options, old($this->name, $this->selected !== '' ? [$this->selected] : []), $extra);
