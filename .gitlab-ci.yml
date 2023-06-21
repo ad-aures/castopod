@@ -5,8 +5,8 @@ stages:
   - quality
   - bundle
   - release
-  - build
   - deploy
+  - build
 
 php-dependencies:
   stage: prepare
