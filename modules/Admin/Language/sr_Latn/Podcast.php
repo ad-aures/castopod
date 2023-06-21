@@ -13,6 +13,7 @@ return [
     'no_podcast' => 'Nema pronađenih podkasta!',
     'create' => 'Napravi podkast',
     'import' => 'Uvezi podkast',
+    'all_imports' => 'Podcast imports',
     'new_episode' => 'Nova epizoda',
     'view' => 'Pogledaj epizodu',
     'edit' => 'Uredi podkast',
@@ -25,6 +26,8 @@ return [
     'latest_episodes' => 'Najnovije epizode',
     'see_all_episodes' => 'Prikaži sve epizode',
     'draft' => 'Nacrt',
+    'sync_feed' => 'Synchronize feed',
+    'sync_feed_hint' => 'Import this podcast\'s latest episodes',
     'messages' => [
         'createSuccess' => 'Podkast uspešno kreiran!',
         'editSuccess' => 'Podkast je uspešno ažuriran!',
@@ -48,7 +51,6 @@ return [
             other {# epizode su}
         } deo podkasta!',
         'podcastFeedUpToDate' => 'Podkast je već ažuriran.',
-        'podcastNotImported' => 'Podkast nije moguće ažurirati jer nije uvezen.',
         'publishError' => 'Ovaj podkast je ili već objavljen ili zakazan za objavu.',
         'publishEditError' => 'Ovaj podkast nije zakazan za objavu.',
         'publishCancelSuccess' => 'Objavljivanje podkasta je uspešno otkazano!',
@@ -125,8 +127,6 @@ return [
         'new_feed_url' => 'New feed URL',
         'new_feed_url_hint' => 'Use this field when you move to another domain or podcast hosting platform. By default, the value is set to the current RSS URL if the podcast is imported.',
         'old_feed_url' => 'Old feed URL',
-        'update_feed' => 'Update feed',
-        'update_feed_tip' => 'Import this podcast\'s latest episodes',
         'partnership' => 'Partnership',
         'partner_id' => 'ID',
         'partner_link_url' => 'URL adresa veze',

@@ -36,7 +36,7 @@ return [
     'users' => 'пользователи',
     'my-account' => 'мой аккаунт',
     'change-password' => 'сменить пароль',
-    'import' => 'импорт ленты',
+    'imports' => 'imports',
     'platforms' => 'платформы',
     'social' => 'социальные сети',
     'funding' => 'финансирование',

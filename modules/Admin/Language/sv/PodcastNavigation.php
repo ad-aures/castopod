@@ -14,6 +14,7 @@ return [
     'podcast-view' => 'Hem',
     'podcast-edit' => 'Redigera podcast',
     'podcast-persons-manage' => 'Hantera personer',
+    'podcast-imports' => 'Podcast imports',
     'episodes' => 'Avsnitt',
     'episode-list' => 'Alla avsnitt',
     'episode-create' => 'Nytt avsnitt',

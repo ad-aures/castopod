@@ -13,6 +13,7 @@ return [
     'no_podcast' => 'N\'eo bet kavet podkast ebet!',
     'create' => 'Krouiñ ur podkast',
     'import' => 'Enporzhiañ ur podkast',
+    'all_imports' => 'Podcast imports',
     'new_episode' => 'Rann nevez',
     'view' => 'Gwelet ar podkast',
     'edit' => 'Kemmañ ar podkast',
@@ -25,6 +26,8 @@ return [
     'latest_episodes' => 'Rannoù diwezhañ',
     'see_all_episodes' => 'Gwelet an holl rannoù',
     'draft' => 'Brouilhed',
+    'sync_feed' => 'Synchronize feed',
+    'sync_feed_hint' => 'Import this podcast\'s latest episodes',
     'messages' => [
         'createSuccess' => 'Krouet eo bet ar podkast gant berzh!',
         'editSuccess' => 'Hizivaet eo bet ar podkast gant berzh!',
@@ -51,7 +54,6 @@ return [
             other {# rann}
         } a zo bet ouzhpennet d\'ar podkast gant berzh!',
         'podcastFeedUpToDate' => 'Hizivaet eo bet ar podkast dija.',
-        'podcastNotImported' => 'C\'hwitadenn war hizivadenn ar podkast peogwir n\'eo ket bet enporzhiet.',
         'publishError' => 'Ar podkast-mañ a zo bet embannet dija pe steuñvet eo e embannadur.',
         'publishEditError' => 'N\'eo ket steuñvet embannadur ar podkast-mañ.',
         'publishCancelSuccess' => 'Nullet eo bet embannadur ar podkast gant berzh!',
@@ -128,8 +130,6 @@ return [
         'new_feed_url' => 'URL nevez al lanv',
         'new_feed_url_hint' => 'Implijit ar vaezienn-mañ pa cheñchit anv domani pe savenn herberc\'hiañ ho podkast. M\'eo enporzhiet ar podkast e vez lakaet enni URL a-vremañ al lanv dre ziouer.',
         'old_feed_url' => 'URL kozh al lanv',
-        'update_feed' => 'Hizivaat al lanv',
-        'update_feed_tip' => 'Enporzhiañ rannoù diwezhañ ar podkast-mañ',
         'partnership' => 'Kevelerezh',
         'partner_id' => 'ID',
         'partner_link_url' => 'Ere URL',

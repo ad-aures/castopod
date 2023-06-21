@@ -13,6 +13,7 @@ return [
     'no_podcast' => 'No s\'han trobat podcasts!',
     'create' => 'Crear un podcast',
     'import' => 'Importar el podcast',
+    'all_imports' => 'Podcast imports',
     'new_episode' => 'Nou episodi',
     'view' => 'Veure el podcast',
     'edit' => 'Editar el podcast',
@@ -25,6 +26,8 @@ return [
     'latest_episodes' => 'Darrers episodis',
     'see_all_episodes' => 'Veure tots els episodis',
     'draft' => 'Esborrany',
+    'sync_feed' => 'Synchronize feed',
+    'sync_feed_hint' => 'Import this podcast\'s latest episodes',
     'messages' => [
         'createSuccess' => 'Podcast creat correctament.',
         'editSuccess' => 'El podcast s´ha actualitzat correctament.',
@@ -48,7 +51,6 @@ return [
             other {s\'han afegit # episodis}
         } al podcast.',
         'podcastFeedUpToDate' => 'El podcast ja està actualitzat.',
-        'podcastNotImported' => 'No s\'ha pogut actualitzar el podcast perquè no s\'havia importat.',
         'publishError' => 'Aquest podcast ja està publicat o bé està programat per a la seva publicació.',
         'publishEditError' => 'Aquest podcast no està programat per a la seva publicació.',
         'publishCancelSuccess' => 'La publicació del podcast s\'ha cancel·lat correctament.',
@@ -125,8 +127,6 @@ return [
         'new_feed_url' => 'Nova adreça URL del fil RSS',
         'new_feed_url_hint' => 'Utilitzeu aquest camp quan us moveu a un altre domini o plataforma d\'allotjament de podcasts. De manera predeterminada, el valor s\'estableix a l\'URL RSS actual si s\'importa el podcast.',
         'old_feed_url' => 'Antiga adreça URL del fil RSS',
-        'update_feed' => 'Actualitzar el fil',
-        'update_feed_tip' => 'Importar els darrers episodis d\'aquest podcast',
         'partnership' => 'Socis',
         'partner_id' => 'ID',
         'partner_link_url' => 'URL de l\'enllaç',

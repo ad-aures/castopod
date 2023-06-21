@@ -36,7 +36,7 @@ return [
     'users' => 'používatelia',
     'my-account' => 'môj účet',
     'change-password' => 'zmeniť heslo',
-    'import' => 'import kanála',
+    'imports' => 'imports',
     'platforms' => 'platformy',
     'social' => 'sociálne siete',
     'funding' => 'financovanie',

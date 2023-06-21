@@ -36,7 +36,7 @@ return [
     'users' => 'implijerien·ezed',
     'my-account' => 'ma c\'hont',
     'change-password' => 'kemmañ ar ger-tremen',
-    'import' => 'enporzhiañ ul lanv',
+    'imports' => 'imports',
     'platforms' => 'savennoù',
     'social' => 'rouedadoù sokial',
     'funding' => 'arc\'hantaouiñ',

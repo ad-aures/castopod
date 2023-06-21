@@ -20,16 +20,15 @@ Si preferiu utilitzar Docker, podeu ometre això i anar directament a la
 
 ## Requisits
 
-- PHP v8.1 o superior
+- PHP v8.1 only
 - MySQL versió 5.7 o superior o MariaDB versió 10.2 o superior
 - Support d'HTTPS
 - An [ntp-synced clock](https://wiki.debian.org/NTP) to validate federation's
   incoming requests
 
-### PHP v8.1 o superior
+### PHP v8.1 only
 
-Es requereix PHP versió 8.1 o superior, amb les extensions següents
-instal·lades:
+PHP version 8.1 is required, with the following extensions installed:
 
 - [intl](https://php.net/manual/en/intl.requirements.php)
 - [libcurl](https://php.net/manual/en/curl.requirements.php)
@@ -94,33 +93,22 @@ o superior. Cal instal·lar les següents extensions:
    servidor web si encara no ho heu fet.
    - ⚠️ Establiu l'arrel del document del servidor web a la subcarpeta
      `castopod/public/`.
-4. Afegiu **tasques cron** al vostre servidor web per a diversos processos en
-   segon pla (substituïu les rutes d'acord a la vostra configuració de fitxers):
-
-   - Perquè les funcions socials funcionin correctament, aquesta tasca
-     s'utilitza per transmetre activitats socials als vostres seguidors al
-     Fediverse:
+4. Add **cron tasks** on your web server for various background processes
+   (replace the paths accordingly):
 
    ```bash
-      * * * * * /ruta/al/php /ruta/al/castopod/public/index.php scheduled-activities
+      * * * * * /path/to/php /path/to/castopod/spark tasks:run >> /dev/null 2>&1
    ```
 
-   - Per transmetre els vostres episodis en hubs oberts després de la publicació
-     mitjançant [WebSub](https://en.wikipedia.org/wiki/WebSub):
+   **Note** - If you do not add this cron task, the following Castopod features
+   will not work:
 
-   ```bash
-      * * * * * /ruta/al/php /rutal/al/castopod/public/index.php scheduled-websub-publish
-   ```
-
-   - Per crear clips de vídeo (consulteu
-     [requisits de FFmpeg](#ffmpeg-v418-or-higher-for-video-clips)):
-
-   ```bash
-      * * * * * /ruta/al/php /ruta/al/castopod/public/index.php scheduled-video-clips
-   ```
-
-   > Aquestes tasques s'executen **cada minut**. Podeu configurar la freqüència
-   > segons les vostres necessitats: cada 5, 10 minuts o més.
+   - Importing a podcast from an existing RSS feed
+   - Broadcasting social activities to your followers in the fediverse
+   - Broadcasting episodes to open hubs using
+     [WebSub](https://en.wikipedia.org/wiki/WebSub)
+   - Generating video clips -
+     [requires FFmpeg](#optional-ffmpeg-v418-or-higher-for-video-clips)
 
 ### (recomanat) Assistent d'instal·lació
 

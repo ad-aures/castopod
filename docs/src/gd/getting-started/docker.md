@@ -14,8 +14,6 @@ process:
   with all of Castopod dependencies
 - [**`castopod/web-server`**](https://hub.docker.com/r/castopod/web-server): an
   Nginx configuration for Castopod
-- [**`castopod/video-clipper`**](https://hub.docker.com/r/castopod/video-clipper):
-  an optional image building videoclips thanks to ffmpeg
 
 Additionally, Castopod requires a MySQL-compatible database. A Redis database
 can be added as a cache handler.
@@ -24,7 +22,6 @@ can be added as a cache handler.
 
 - `develop` [unstable], latest development branch build
 - `beta` [stable], latest beta version build
-- `1.0.0-beta.x` [stable], specific beta version build (since `1.0.0-beta.22`)
 - `latest` [stable], latest version build
 - `1.x.x` [stable], specific version build (since `1.0.0`)
 
@@ -39,7 +36,7 @@ can be added as a cache handler.
 
     services:
       app:
-        image: castopod/app:latest
+        image: castopod/castopod:latest
         container_name: "castopod-app"
         volumes:
           - castopod-media:/var/www/castopod/public/media
@@ -111,16 +108,6 @@ can be added as a cache handler.
 5.  You're all set, start podcasting! 🎙️🚀
 
 ## Environment Variables
-
-- **castopod/video-clipper**
-
-  | Variable name              | Type (`default`) | Default          |
-  | -------------------------- | ---------------- | ---------------- |
-  | **`CP_DATABASE_HOSTNAME`** | ?string          | `"mariadb"`      |
-  | **`CP_DATABASE_NAME`**     | ?string          | `MYSQL_DATABASE` |
-  | **`CP_DATABASE_USERNAME`** | ?string          | `MYSQL_USER`     |
-  | **`CP_DATABASE_PASSWORD`** | ?string          | `MYSQL_PASSWORD` |
-  | **`CP_DATABASE_PREFIX`**   | ?string          | `"cp_"`          |
 
 - **castopod/castopod** and **castopod/app**
 

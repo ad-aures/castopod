@@ -9,39 +9,39 @@ declare(strict_types=1);
  */
 
 return [
-    'podcast_contributors' => 'Podcast contributors',
-    'view' => "{username}'s contribution to {podcastTitle}",
-    'add' => 'Add contributor',
-    'add_contributor' => 'Add a contributor for {0}',
-    'edit_role' => 'Update role for {0}',
-    'edit' => 'Edit',
-    'remove' => 'Remove',
+    'podcast_contributors' => 'Luchd-cuideachaidh a’ phod-chraolaidh',
+    'view' => "Na chuir {username} ri {podcastTitle}",
+    'add' => 'Cuir neach-cuideachaidh ris',
+    'add_contributor' => 'Cuir neach-cuideachaidh ris airson {0}',
+    'edit_role' => 'Ùraich an dreuchd airson {0}',
+    'edit' => 'Deasaich',
+    'remove' => 'Thoir air falbh',
     'list' => [
-        'username' => 'Username',
-        'role' => 'Role',
+        'username' => 'Ainm-cleachdaiche',
+        'role' => 'Dreuchd',
     ],
     'form' => [
-        'user' => 'User',
-        'user_placeholder' => 'Select a user…',
-        'role' => 'Role',
-        'role_placeholder' => 'Select its role…',
-        'submit_add' => 'Add contributor',
-        'submit_edit' => 'Update role',
+        'user' => 'Cleachdaiche',
+        'user_placeholder' => 'Tagh cleachdaiche…',
+        'role' => 'Dreuchd',
+        'role_placeholder' => 'Tagh dreuchd dhaibh…',
+        'submit_add' => 'Cuir neach-cuideachaidh ris',
+        'submit_edit' => 'Ùraich an dreuchd',
     ],
     'delete_form' => [
-        'title' => 'Remove {contributor}',
+        'title' => 'Thoir {contributor} air falbh',
         'disclaimer' =>
-            'You are about to remove {contributor} from contributors. They will not be able to access "{podcastTitle}" anymore.',
-        'understand' => 'I understand, I want to remove {contributor} from "{podcastTitle}"',
-        'submit' => 'Remove',
+            'Tha thu an impis {contributor} a toirt air falbh on luchd-cuideachaidh. Chan urrainn dhaibh “{podcastTitle}” inntrigeadh tuilleadh an uairsin.',
+        'understand' => 'Tha mi agaibh, tha mi airson {contributor} a thoirt air falbh o “{podcastTitle}”',
+        'submit' => 'Thoir air falbh',
     ],
     'messages' => [
-        'editSuccess' => 'Role successfully changed!',
-        'editOwnerError' => "You can't edit the podcast owner!",
-        'removeOwnerError' => "You can't remove the podcast owner!",
+        'editSuccess' => 'Chaidh an dreuchd atharrachadh!',
+        'editOwnerError' => "Chan urrainn dhut sealbhadair a’ phod-chraolaidh a dheasachadh!",
+        'removeOwnerError' => "Chan urrainn dhut sealbhadair a’ phod-chraolaidh a thoirt air falbh!",
         'removeSuccess' =>
-            'You have successfully removed {username} from {podcastTitle}',
+            'Thug thu {username} air falbh o {podcastTitle}',
         'alreadyAddedError' =>
-            "The contributor you're trying to add has already been added!",
+            "Chaidh an neach-cuideachaidh a tha thu airson cur ris a chur ris mu thràth!",
     ],
 ];

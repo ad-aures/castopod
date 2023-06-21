@@ -36,7 +36,7 @@ return [
     'users' => 'brukarar',
     'my-account' => 'kontoen min',
     'change-password' => 'endre passord',
-    'import' => 'importer straumar',
+    'imports' => 'imports',
     'platforms' => 'plattformer',
     'social' => 'sosiale nettverk',
     'funding' => 'finansiering',

@@ -13,8 +13,6 @@ Castopod 在其自动构建期间会将 3 个 Docker 映像推送到 Docker Hub 
   所有 Castopod 依赖关系
 - [**`castopod/web-server`**](https://hub.docker.com/r/castopod/web-server)：Castopod
   的 Nginx 配置
-- [**`castopod/video-clipper`** ](https://hub.docker.com/r/castopod/video-clipper)：
-  感谢 ffmpeg 提供可选图像构建视频剪辑
 
 此外，Castopod 需要一个与 MySQL 兼容的数据库。 Redis 数据库 可以添加为缓存处理器
 。
@@ -23,7 +21,6 @@ Castopod 在其自动构建期间会将 3 个 Docker 映像推送到 Docker Hub 
 
 - `develop` [unstable], 最新开发分支版本
 - `beta` [stable]，最新的 beta 版本构建
-- `1.0.0-beta.x` [stable]，特定 beta 版本构建 (自 `1.0.0-beta.22` 起)
 - `latest` [stable]，最新版本构建
 - `1.x.x` [stable]，特定版本构建（自 `1.0.0` 起）
 
@@ -38,7 +35,7 @@ Castopod 在其自动构建期间会将 3 个 Docker 映像推送到 Docker Hub 
 
     services:
       app:
-        image: castopod/app:latest
+        image: castopod/castopod:latest
         container_name: "castopod-app"
         volumes:
           - castopod-media:/var/www/castopod/public/media
@@ -111,19 +108,9 @@ Castopod 在其自动构建期间会将 3 个 Docker 映像推送到 Docker Hub 
 
 ## 环境变量
 
-- **castopod/video-clipper**
-
-  | 变量名称                   | 类型 (`默认值`) | Default          |
-  | -------------------------- | --------------- | ---------------- |
-  | **`CP_DATABASE_HOSTNAME`** | ?string         | `"mariadb"`      |
-  | **`CP_DATABASE_NAME`**     | ?string         | `MYSQL_DATABASE` |
-  | **`CP_DATABASE_USERNAME`** | ?string         | `MYSQL_USER`     |
-  | **`CP_DATABASE_PASSWORD`** | ?string         | `MYSQL_PASSWORD` |
-  | **`CP_DATABASE_PREFIX`**   | ?string         | `"cp_"`          |
-
 - **castopod/castopod** and **castopod/app**
 
-  | 变量名称                              | 类型 (`default`)        | Default          |
+  | 变量名称                              | 类型 (`默认值`)         | Default          |
   | ------------------------------------- | ----------------------- | ---------------- |
   | **`CP_BASEURL`**                      | string                  | `undefined`      |
   | **`CP_MEDIA_BASEURL`**                | ?string                 | `CP_BASEURL`     |
@@ -163,7 +150,7 @@ Castopod 在其自动构建期间会将 3 个 Docker 映像推送到 Docker Hub 
 
 - **castopod/web-server**
 
-  | 变量名称               | Type                  | 默认    |
+  | 变量名称               | Type                  | Default |
   | ---------------------- | --------------------- | ------- |
   | **`CP_APP_HOSTNAME`**  | ?string               | `"app"` |
   | **`CP_MAX_BODY_SIZE`** | ?number (with suffix) | `512M`  |

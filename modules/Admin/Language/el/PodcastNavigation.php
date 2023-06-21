@@ -14,6 +14,7 @@ return [
     'podcast-view' => 'Αρχική σελίδα',
     'podcast-edit' => 'Επεξεργασία podcast',
     'podcast-persons-manage' => 'Διαχείριση ατόμων',
+    'podcast-imports' => 'Podcast imports',
     'episodes' => 'Επεισόδια',
     'episode-list' => 'Όλα τα επεισόδια',
     'episode-create' => 'Νέο Επεισόδιο',

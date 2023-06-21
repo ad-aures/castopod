@@ -20,16 +20,15 @@ direkt zur [Docker-Dokumentation](./docker.md) für Castopod gehen.
 
 ## Voraussetzungen
 
-- PHP v8.1 oder höher
+- PHP v8.1 only
 - MySQL Version 5.7 oder höher oder MariaDB Version 10.2 oder höher
 - HTTPS-Unterstützung
 - Eine [ntp-synchronisierte Uhr](https://wiki.debian.org/NTP) um die eingehenden
   Anfragen zu überprüfen
 
-### PHP v8.1 oder höher
+### PHP v8.1 only
 
-PHP Version 8.1 oder höher ist erforderlich, wobei folgende Erweiterungen
-installiert sind:
+PHP version 8.1 is required, with the following extensions installed:
 
 - [intl](https://php.net/manual/en/intl.requirements.php)
 - [libcurl](https://php.net/manual/en/curl.requirements.php)
@@ -98,29 +97,19 @@ nicht installiert: %s:
 4. Add **cron tasks** on your web server for various background processes
    (replace the paths accordingly):
 
-   - For social features to work properly, this task is used to broadcast social
-     activities to your followers on the fediverse:
-
    ```bash
-      * * * * * /path/to/php /path/to/castopod/public/index.php scheduled-activities
+      * * * * * /path/to/php /path/to/castopod/spark tasks:run >> /dev/null 2>&1
    ```
 
-   - For having your episodes be broadcasted on open hubs upon publication using
-     [WebSub](https://en.wikipedia.org/wiki/WebSub):
+   **Note** - If you do not add this cron task, the following Castopod features
+   will not work:
 
-   ```bash
-      * * * * * /usr/local/bin/php /castopod/public/index.php scheduled-websub-publish
-   ```
-
-   - For Video Clips to be created (see
-     [FFmpeg requirements](#ffmpeg-v418-or-higher-for-video-clips)):
-
-   ```bash
-      * * * * * /path/to/php /path/to/castopod/public/index.php scheduled-video-clips
-   ```
-
-   > These tasks run **every minute**. You may set the frequency depending on
-   > your needs: every 5, 10 minutes or more.
+   - Importing a podcast from an existing RSS feed
+   - Broadcasting social activities to your followers in the fediverse
+   - Broadcasting episodes to open hubs using
+     [WebSub](https://en.wikipedia.org/wiki/WebSub)
+   - Generating video clips -
+     [requires FFmpeg](#optional-ffmpeg-v418-or-higher-for-video-clips)
 
 ### (recommended) Install Wizard
 

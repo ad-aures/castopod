@@ -14,6 +14,7 @@ return [
     'podcast-view' => '主页',
     'podcast-edit' => '编辑播客',
     'podcast-persons-manage' => '管理人员',
+    'podcast-imports' => 'Podcast imports',
     'episodes' => '剧集',
     'episode-list' => '所有剧集',
     'episode-create' => '新剧集',

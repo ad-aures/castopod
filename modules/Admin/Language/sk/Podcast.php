@@ -13,6 +13,7 @@ return [
     'no_podcast' => 'Žiadny podcast nenájdený!',
     'create' => 'Vytvoriť podcast',
     'import' => 'Importovať podcast',
+    'all_imports' => 'Podcast imports',
     'new_episode' => 'Nová časť',
     'view' => 'Zobraziť podcast',
     'edit' => 'Upraviť podcast',
@@ -25,6 +26,8 @@ return [
     'latest_episodes' => 'Posledné časti',
     'see_all_episodes' => 'Pozrieť všetky časti',
     'draft' => 'Koncept',
+    'sync_feed' => 'Synchronize feed',
+    'sync_feed_hint' => 'Import this podcast\'s latest episodes',
     'messages' => [
         'createSuccess' => 'Podcast úspešne vytvorený!',
         'editSuccess' => 'Podcast has been successfully updated!',
@@ -47,8 +50,7 @@ return [
             one {# episode was}
             other {# episodes were}
         } added to the podcast!',
-        'podcastFeedUpToDate' => 'Podcast is already up to date.',
-        'podcastNotImported' => 'Podcast could not be updated as it was not imported.',
+        'podcastFeedUpToDate' => 'Podcast už je aktualizovaný.',
         'publishError' => 'This podcast is either already published or scheduled for publication.',
         'publishEditError' => 'This podcast is not scheduled for publication.',
         'publishCancelSuccess' => 'Podcast publication successfully cancelled!',
@@ -57,7 +59,7 @@ return [
     'form' => [
         'identity_section_title' => 'Podcast identity',
         'identity_section_subtitle' => 'These fields allow you to get noticed.',
-        'cover' => 'Podcast cover',
+        'cover' => 'Obal podcastu',
         'cover_size_hint' => 'Cover must be squared and at least 1400px wide and tall.',
         'banner' => 'Podcast banner',
         'banner_size_hint' => 'Banner must have a 3:1 ratio and be at least 1500px wide.',
@@ -88,12 +90,12 @@ return [
             'clean' => 'Clean',
             'explicit' => 'Explicit',
         ],
-        'author_section_title' => 'Author',
-        'author_section_subtitle' => 'Who is managing the podcast?',
-        'owner_name' => 'Owner name',
+        'author_section_title' => 'Autor',
+        'author_section_subtitle' => 'Kto spravuje tento podcast?',
+        'owner_name' => 'Meno vlastníka',
         'owner_name_hint' =>
             'For administrative use only. Visible in the public RSS feed.',
-        'owner_email' => 'Owner email',
+        'owner_email' => 'Email vlastníka',
         'owner_email_hint' =>
             'Will be used by most platforms to verify the podcast ownership. Visible in the public RSS feed.',
         'publisher' => 'Vydavateľ',
@@ -125,8 +127,6 @@ return [
         'new_feed_url' => 'New feed URL',
         'new_feed_url_hint' => 'Use this field when you move to another domain or podcast hosting platform. By default, the value is set to the current RSS URL if the podcast is imported.',
         'old_feed_url' => 'Old feed URL',
-        'update_feed' => 'Update feed',
-        'update_feed_tip' => 'Import this podcast\'s latest episodes',
         'partnership' => 'Partnership',
         'partner_id' => 'ID',
         'partner_link_url' => 'URL adresa odkazu',

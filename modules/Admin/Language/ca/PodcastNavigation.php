@@ -14,6 +14,7 @@ return [
     'podcast-view' => 'Inici',
     'podcast-edit' => 'Editar el podcast',
     'podcast-persons-manage' => 'Administrar persones',
+    'podcast-imports' => 'Podcast imports',
     'episodes' => 'Episodis',
     'episode-list' => 'Tots els episodis',
     'episode-create' => 'Nou episodi',

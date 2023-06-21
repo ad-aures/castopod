@@ -36,7 +36,7 @@ return [
     'users' => 'gebruikers',
     'my-account' => 'mijn account',
     'change-password' => 'wachtwoord wijzigen',
-    'import' => 'feed importeren',
+    'imports' => 'imports',
     'platforms' => 'platformen',
     'social' => 'sociale netwerken',
     'funding' => 'financiering',

@@ -36,7 +36,7 @@ return [
     'users' => 'χρήστες',
     'my-account' => 'ο λογαριασμός μου',
     'change-password' => 'αλλαγή κωδικού πρόσβασης',
-    'import' => 'εισαγωγή ροής',
+    'imports' => 'imports',
     'platforms' => 'πλατφόρμες',
     'social' => 'κοινωνικά δίκτυα',
     'funding' => 'χρηματοδότηση',

@@ -14,8 +14,6 @@ Docker Hub:
   allen Castopod Abhängigkeiten
 - [**`castopod/web-server`**](https://hub.docker.com/r/castopod/web-server): Ein
   Nginx Webserver für Castopod
-- [**`castopod/video-clipper`**](https://hub.docker.com/r/castopod/video-clipper):
-  Ein optionales Image, das dank ffmpeg Videoclips erstellt
 
 Außerdem benötigt Castopod eine MySQL-kompatible Datenbank. Eine Redis-Datenbank
 kann als Cache-Handler hinzugefügt werden.
@@ -24,8 +22,6 @@ kann als Cache-Handler hinzugefügt werden.
 
 - `develop` [unstable], neueste Updates des development Branches
 - `beta` [stable], neueste Beta-Version
-- `1.0.0-beta.x` [stable], spezifischer Beta-Version Build (seit
-  `1.0.0-beta.22`)
 - `latest` [stable], die neuste Version
 - `1.x.x` [stable], spezifische Version (seit `1.0.0`)
 
@@ -40,7 +36,7 @@ kann als Cache-Handler hinzugefügt werden.
 
     services:
       app:
-        image: castopod/app:latest
+        image: castopod/castopod:latest
         container_name: "castopod-app"
         volumes:
           - castopod-media:/var/www/castopod/public/media
@@ -116,16 +112,6 @@ kann als Cache-Handler hinzugefügt werden.
 
 ## Umgebungsvariablen
 
-- **castopod/video-clipper**
-
-  | Variablennamen             | Typ (`Standard`) | Standardwert     |
-  | -------------------------- | ---------------- | ---------------- |
-  | **`CP_DATABASE_HOSTNAME`** | ?string          | `"mariadb"`      |
-  | **`CP_DATABASE_NAME`**     | ?string          | `MYSQL_DATABASE` |
-  | **`CP_DATABASE_USERNAME`** | ?string          | `MYSQL_USER`     |
-  | **`CP_DATABASE_PASSWORD`** | ?string          | `MYSQL_PASSWORD` |
-  | **`CP_DATABASE_PREFIX`**   | ?string          | `"cp_"`          |
-
 - **castopod/castopod** and **castopod/app**
 
   | Variablennamen                        | Typ (`Standard`)        | Standardwert      |
@@ -152,15 +138,15 @@ kann als Cache-Handler hinzugefügt werden.
   | **`CP_EMAIL_SMTP_PORT`**              | ?number                 | `25`              |
   | **`CP_EMAIL_SMTP_CRYPTO`**            | [`"tls"` or `"ssl"`]    | `"tls"`           |
   | **`CP_ENABLE_2FA`**                   | ?boolean                | `nicht definiert` |
-  | **`CP_MEDIA_FILE_MANAGER`**           | ?string                 | `nicht definiert` |
-  | **`CP_MEDIA_S3_ENDPOINT`**            | ?string                 | `nicht definiert` |
+  | **`CP_MEDIA_FILE_MANAGER`**           | ?string                 | `undefined`       |
+  | **`CP_MEDIA_S3_ENDPOINT`**            | ?string                 | `undefined`       |
   | **`CP_MEDIA_S3_KEY`**                 | ?string                 | `nicht definiert` |
   | **`CP_MEDIA_S3_SECRET`**              | ?string                 | `nicht definiert` |
   | **`CP_MEDIA_S3_REGION`**              | ?string                 | `nicht definiert` |
-  | **`CP_MEDIA_S3_BUCKET`**              | ?string                 | `nicht definiert` |
-  | **`CP_MEDIA_S3_PROTOCOL`**            | ?number                 | `nicht definiert` |
-  | **`CP_MEDIA_S3_PATH_STYLE_ENDPOINT`** | ?boolean                | `nicht definiert` |
-  | **`CP_MEDIA_S3_KEY_PREFIX`**          | ?string                 | `nicht definiert` |
+  | **`CP_MEDIA_S3_BUCKET`**              | ?string                 | `undefined`       |
+  | **`CP_MEDIA_S3_PROTOCOL`**            | ?number                 | `undefined`       |
+  | **`CP_MEDIA_S3_PATH_STYLE_ENDPOINT`** | ?boolean                | `undefined`       |
+  | **`CP_MEDIA_S3_KEY_PREFIX`**          | ?string                 | `undefined`       |
   | **`CP_DISABLE_HTTPS`**                | ?[`0` or `1`]           | `undefined`       |
   | **`CP_MAX_BODY_SIZE`**                | ?number (with suffix)   | `512M`            |
   | **`CP_PHP_MEMORY_LIMIT`**             | ?number (with suffix)   | `512M`            |

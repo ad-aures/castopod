@@ -14,8 +14,6 @@ process:
   alla Castopod-beroenden
 - [**`castopod/web-server`**](https://hub.docker.com/r/castopod/web-server): en
   Nginx konfiguration för Castopod
-- [**`castopod/video-clipper`**](https://hub.docker.com/r/castopod/video-clipper):
-  an optional image building videoclips thanks to ffmpeg
 
 Dessutom kräver Castopod en MySQL-kompatibel databas. En Redis databas kan
 läggas till som cachehanterare.
@@ -24,7 +22,6 @@ läggas till som cachehanterare.
 
 - `utveckla` [unstable], senaste utvecklingsgrenen
 - `beta` [stable], senaste betaversionen bygger
-- `1.0.0-beta.x` [stable], specifik betaversion build (sedan `1.0.0-beta.22`)
 - `latest` [stable], latest version build
 - `1.x.x` [stable], specific version build (since `1.0.0`)
 
@@ -39,7 +36,7 @@ läggas till som cachehanterare.
 
     services:
       app:
-        image: castopod/app:latest
+        image: castopod/castopod:latest
         container_name: "castopod-app"
         volumes:
           - castopod-media:/var/www/castopod/public/media
@@ -114,23 +111,13 @@ läggas till som cachehanterare.
 
 ## Miljövariabler
 
-- **castopod/video-clipper**
-
-  | Variabel namn              | Type (`default`) | Standard         |
-  | -------------------------- | ---------------- | ---------------- |
-  | **`CP_DATABASE_HOSTNAME`** | ?string          | `"mariadb"`      |
-  | **`CP_DATABASE_NAME`**     | ?sträng          | `MYSQL_DATABASE` |
-  | **`CP_DATABASE_USERNAME`** | ?string          | `MYSQL_USER`     |
-  | **`CP_DATABASE_PASSWORD`** | ?string          | `MYSQL_PASSWORD` |
-  | **`CP_DATABASE_PREFIX`**   | ?string          | `"cp_"`          |
-
 - **castopod/castopod** and **castopod/app**
 
-  | Variabelt namn                        | Type (`default`)        | Standard         |
+  | Variabel namn                         | Type (`default`)        | Standard         |
   | ------------------------------------- | ----------------------- | ---------------- |
   | **`CP_BASEURL`**                      | sträng                  | `odefinierad`    |
   | **`CP_MEDIA_BASEURL`**                | ?string                 | `CP_BASEURL`     |
-  | **`CP_ADMIN_GATEWAY`**                | ?string                 | `"cp-admin"`     |
+  | **`CP_ADMIN_GATEWAY`**                | ?sträng                 | `"cp-admin"`     |
   | **`CP_AUTH_GATEWAY`**                 | ?string                 | `"cp-auth"`      |
   | **`CP_ANALYTICS_SALT`**               | string                  | `odefinierad`    |
   | **`CP_DATABASE_HOSTNAME`**            | ?string                 | `"mariadb"`      |
@@ -166,8 +153,8 @@ läggas till som cachehanterare.
 
 - **castopod/web-server**
 
-  | Variable name          | Typ                   | Default |
-  | ---------------------- | --------------------- | ------- |
-  | **`CP_APP_HOSTNAME`**  | ?string               | `"app"` |
-  | **`CP_MAX_BODY_SIZE`** | ?number (with suffix) | `512M`  |
-  | **`CP_TIMEOUT`**       | ?number               | `900`   |
+  | Variabelt namn         | Typ                   | Standard |
+  | ---------------------- | --------------------- | -------- |
+  | **`CP_APP_HOSTNAME`**  | ?string               | `"app"`  |
+  | **`CP_MAX_BODY_SIZE`** | ?number (with suffix) | `512M`   |
+  | **`CP_TIMEOUT`**       | ?number               | `900`    |

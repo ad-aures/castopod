@@ -9,29 +9,52 @@ declare(strict_types=1);
  */
 
 return [
-    'warning' =>
-        '此过程可能需要很长时间。 由于当前版本在运行时未显示任何进度，因此在完成之前您不会看到任何提示。 在超时错误的情况下，增加 `max_execution_time` 值。',
-    'old_podcast_section_title' => '要导入的播客',
-    'old_podcast_section_subtitle' =>
-        '请确保您在导入之前拥有此播客的权限。 在没有权限的情况下复制和广播播客是盗版行为，可能受到起诉。',
-    'imported_feed_url' => '订阅源的 URL',
-    'imported_feed_url_hint' => '订阅源必须是 xml 或 rss 格式。',
-    'new_podcast_section_title' => '新播客',
-    'advanced_params_section_title' => '高级参数',
-    'advanced_params_section_subtitle' =>
-        '如果您不知道这些字段的用途，请保留默认值。',
-    'slug_field' => '用于计算剧集 Slug 的字段',
-    'description_field' =>
-        '用于剧集描述/节目说明的源字段',
-    'force_renumber' => '强制剧集重新编号',
-    'force_renumber_hint' =>
-        '如果你的播客没有剧集编号但希望在导入时设置，请使用此选项。',
-    'season_number' => '季号',
-    'season_number_hint' =>
-        '如果您的播客没有季号，但希望在导入时设置，请使用此选项，否则留空。',
-    'max_episodes' => '要导入的最大剧集数',
-    'max_episodes_hint' => '留空导入所有剧集',
+    'banner' => [
+        'disclaimer' => 'Importing',
+        'text' => '{podcastTitle} is currently being imported.',
+        'cta' => 'See import status',
+    ],
+    'old_podcast_section_title' => 'The podcast to import',
+    'old_podcast_legal_disclaimer_title' => 'Legal disclaimer',
+    'old_podcast_legal_disclaimer' =>
+        'Make sure you own the rights for this podcast before importing it. Copying and broadcasting a podcast without the proper rights is piracy and is liable to prosecution.',
+    'imported_feed_url' => 'Feed URL',
+    'imported_feed_url_hint' => 'The feed must be in xml or rss format.',
+    'new_podcast_section_title' => 'The new podcast',
     'lock_import' =>
-        '此订阅源受到保护。你不能导入它。如果你是所有者，请在原平台取消保护。',
-    'submit' => '导入播客',
+        'This feed is protected. You cannot import it. If you are the owner, unlock it on the origin platform.',
+    'submit' => 'Add import to queue',
+    'queue' => [
+        'status' => [
+            'label' => 'Status',
+            'queued' => 'queued',
+            'queued_hint' => 'Import task is awaiting to be processed.',
+            'canceled' => 'canceled',
+            'canceled_hint' => 'Import task was canceled.',
+            'running' => 'running',
+            'running_hint' => 'Import task is being processed.',
+            'failed' => 'failed',
+            'failed_hint' => 'Import task could not complete: script failure.',
+            'passed' => 'passed',
+            'passed_hint' => 'Import task was completed successfully!',
+        ],
+        'feed' => 'Feed',
+        'duration' => 'Import duration',
+        'imported_episodes' => 'Imported episodes',
+        'imported_episodes_hint' => '{newlyImportedCount} newly imported, {alreadyImportedCount} already imported.',
+        'actions' => [
+            'cancel' => 'Cancel',
+            'retry' => 'Retry',
+            'delete' => 'Delete',
+        ],
+    ],
+    'messages' => [
+        'canceled' => 'Import task has been successfully canceled!',
+        'alreadyRunning' => 'Import Task is already running. You may cancel it before retrying.',
+        'retried' => 'Import task has been queued, it will be retried shortly!',
+        'deleted' => 'Import task has been successfully deleted!',
+        'importTaskQueued' => 'An new task has been queued, import will start shortly!',
+        'podcastNotImported' => 'Podcast cannot be synched as it was not imported.',
+        'syncTaskQueued' => 'A new import task has been queued, synchronization will start shortly!',
+    ],
 ];

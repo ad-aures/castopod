@@ -36,7 +36,7 @@ return [
     'users' => 'pengguna',
     'my-account' => 'akun saya',
     'change-password' => 'ubah kata sandi',
-    'import' => 'feed import',
+    'imports' => 'imports',
     'platforms' => 'platforms',
     'social' => 'social networks',
     'funding' => 'funding',

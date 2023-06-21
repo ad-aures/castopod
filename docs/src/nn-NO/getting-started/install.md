@@ -9,26 +9,26 @@ Det er meininga at Castopod skal vera lett å installera. Uansett om du bruker
 eige eller delt vevhotell, kan du installera på dei fleste maskiner som har PHP
 og MySQL.
 
-::: tip Note
+::: tip Notat
 
-We've released official Docker images for Castopod!
+Me har laga offisielle Docker-biletfiler for Castopod!
 
-If you prefer using Docker, you may skip this and go straight to the
-[docker documentation](./docker.md) for Castopod.
+Viss du helst vil bruka Docker, kan du hoppa over dette og gå rett til
+[docker-dokumentasjonen](./docker.md) for Castopod.
 
 :::
 
 ## Krav
 
-- PHP v8.1 eller nyare
+- PHP v8.1 only
 - MySQL versjon 5.7 eller nyare, eller MariaDB versjon 10.2 eller nyare
 - Støtte for HTTPS
-- An [ntp-synced clock](https://wiki.debian.org/NTP) to validate federation's
-  incoming requests
+- Ei [ntp-synkronisert klokke](https://wiki.debian.org/NTP) for å stadfesta
+  innkomande førespurnader frå allheimen
 
-### PHP v8.1 eller nyare
+### PHP v8.1 only
 
-PHP version 8.1 or higher is required, with the following extensions installed:
+PHP version 8.1 is required, with the following extensions installed:
 
 - [intl](https://php.net/manual/en/intl.requirements.php)
 - [libcurl](https://php.net/manual/en/curl.requirements.php)
@@ -37,7 +37,8 @@ PHP version 8.1 or higher is required, with the following extensions installed:
   **PNG**- og **WEBP**-biblioteka.
 - [exif](https://www.php.net/manual/en/exif.installation.php)
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+I tillegg må du passa på at desse utvidingane er skrudde på i PHP-installasjonen
+din:
 
 - json (vanlegvis aktivt - ikkje skru det av)
 - xml (vanlegvis aktivt - ikkje skru det av)
@@ -47,28 +48,28 @@ Additionally, make sure that the following extensions are enabled in your PHP:
 
 > Me tilrår [MariaDB](https://mariadb.org).
 
-::: warning Warning
+::: warning Åtvaring
 
-Castopod only works with supported MySQL 5.7 or higher compatible databases. It
-will break with the previous MySQL v5.6 for example as its end of life was on
-February 5, 2021.
+Castopod verkar berre med databasar som støttar MySQL 5.7 eller nyare. MySQL 5.6
+eller eldre vil ikkje fungera, ettersom den versjonen vart forelda 5.
+februar 2021.
 
 :::
 
-You will need the server hostname, database name, username and password to
-complete the installation process. If you do not have these, please contact your
-server administrator.
+Du treng vertsnamnet til tenaren, databasenamnet, brukarnamnet og passordet til
+databasen for å fullføra installeringa. Viss du ikkje har desse, må du kontakta
+administratoren for tenarmaskina di.
 
 #### Tilgangsrettar
 
-User must have at least these privileges on the database for Castopod to work:
-`CREATE`, `ALTER`, `DELETE`, `EXECUTE`, `INDEX`, `INSERT`, `SELECT`, `UPDATE`,
-`REFERENCES`, `CREATE VIEW`.
+Brukaren må minst ha desse tilgangsrettane på databasen for at Castopod skal
+fungera: `CREATE`, `ALTER`, `DELETE`, `EXECUTE`, `INDEX`, `INSERT`, `SELECT`,
+`UPDATE`, `REFERENCES`, `CREATE VIEW`.
 
 ### (Eventuelt) FFmpeg v4.1.8 eller nyare for filmklypp
 
-[FFmpeg](https://www.ffmpeg.org/) version 4.1.8 or higher is required if you
-want to generate Video Clips. The following extensions must be installed:
+Du treng [FFmpeg](https://www.ffmpeg.org/) versjon 4.1.8 viss du vil laga
+filmklypp. Desse utvidingane må vera installerte:
 
 - **FreeType 2**-biblioteket for
   [gd](https://www.php.net/manual/en/image.installation.php).
@@ -91,32 +92,22 @@ want to generate Video Clips. The following extensions must be installed:
    vevtenaren din, om du ikkje allereie har gjort det.
    - ⚠️ Set dokumentrota til vevtenaren til undermappa `public/` i
      `castopod`-mappa.
-4. Lag **cron-oppgåver** på vevtenaren din for ulike bakgrunnsprosessar (byt ut
-   stiane så dei passar til oppsettet ditt):
-
-   - For at sosiale funksjonar skal fungera, trengst denne oppgåva for å
-     kringkasta sosiale aktivitetar til fylgjarane dine på fødiverset:
+4. Add **cron tasks** on your web server for various background processes
+   (replace the paths accordingly):
 
    ```bash
-      * * * * * /sti/til/php /sti/til/castopod/public/index.php scheduled-activities
+      * * * * * /path/to/php /path/to/castopod/spark tasks:run >> /dev/null 2>&1
    ```
 
-   - For å kringkasta episodane på opne nettnav som bruker
-     [WebSub](https://en.wikipedia.org/wiki/WebSub):
+   **Note** - If you do not add this cron task, the following Castopod features
+   will not work:
 
-   ```bash
-      * * * * * /usr/local/bin/php /castopod/public/index.php scheduled-websub-publish
-   ```
-
-   - For å laga filmklypp (sjå
-     [FFmpeg-krava](#ffmpeg-v418-or-higher-for-video-clips)):
-
-   ```bash
-      * * * * * /sti/til/php /sti/til/castopod/public/index.php scheduled-video-clips
-   ```
-
-   > Desse oppgåvene blir utførte **kvart minutt**. Du kan setja opp kor ofte du
-   > treng å utføra oppgåvene: kvart 5., 10. minutt eller meir.
+   - Importing a podcast from an existing RSS feed
+   - Broadcasting social activities to your followers in the fediverse
+   - Broadcasting episodes to open hubs using
+     [WebSub](https://en.wikipedia.org/wiki/WebSub)
+   - Generating video clips -
+     [requires FFmpeg](#optional-ffmpeg-v418-or-higher-for-video-clips)
 
 ### (Tilrådd) Autoinstallering
 
@@ -125,9 +116,9 @@ want to generate Video Clips. The following extensions must be installed:
 2. Fylg framgangsmåten på skjermen.
 3. Start å podkasta!
 
-::: info Note
+::: info Notat
 
-The install script writes a `.env` file in the package root. If you cannot go
+Installasjonsskriptet lagar ei`.env`-fil i rotmappa til pakka. If you cannot go
 through the install wizard, you can create and edit the `.env` file manually
 based on the `.env.example` file.
 
@@ -195,27 +186,27 @@ media.s3.region="your_s3_region"
 
 #### S3 config options
 
-| Variable name           | Type    | Default     |
-| ----------------------- | ------- | ----------- |
-| **`endpoint`**          | string  | `undefined` |
-| **`key`**               | string  | `undefined` |
-| **`secret`**            | string  | `undefined` |
-| **`region`**            | string  | `undefined` |
-| **`bucket`**            | string  | `castopod`  |
-| **`protocol`**          | number  | `undefined` |
-| **`pathStyleEndpoint`** | boolean | `false`     |
-| **`keyPrefix`**         | string  | `undefined` |
+| Variable name       | Type   | Default     |
+| ------------------- | ------ | ----------- |
+| **`endpoint`**      | string | `undefined` |
+| **`nykjel`**        | tekst  | `udefinert` |
+| **`løyndom`**       | tekst  | `udefinert` |
+| **`region`**        | tekst  | `udefinert` |
+| **`bytte`**         | tekst  | `castopod`  |
+| **`protokoll`**     | tal    | `udefinert` |
+| **`stilendepunkt`** | boolsk | `usant`     |
+| **`keyPrefix`**     | tekst  | `udefinert` |
 
 ## Pakker frå brukarsamfunnet
 
-If you don't want to bother with installing Castopod manually, you may use one
-of the packages created and maintained by the open-source community.
+Viss du ikkje vil bry deg med å installera Castopod manuelt, kan du bruka ei av
+pakkene som brukarsamfunnet har laga.
 
-### Install with YunoHost
+### Installer med Yunohost
 
-[YunoHost](https://yunohost.org/) is a distribution based on Debian GNU/Linux
-made up of free and open-source software packages. It manages the hardships of
-self-hosting for you.
+[Yunohost](https://yunohost.org/) er ein Linux-distribusjon som er bygd på
+Debian GNU/Linux og som inneheld frie og opne program. Yunohost tek seg av det
+meste som har med oppsett av eigen vevtenar å gjera.
 
 <div class="flex flex-wrap items-center gap-4">
 

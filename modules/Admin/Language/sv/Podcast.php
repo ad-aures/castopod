@@ -13,6 +13,7 @@ return [
     'no_podcast' => 'Ingen podcast hittades!',
     'create' => 'Skapa podcast',
     'import' => 'Importera podcast',
+    'all_imports' => 'Podcast imports',
     'new_episode' => 'Nytt avsnitt',
     'view' => 'Visa podcast',
     'edit' => 'Redigera podcast',
@@ -25,6 +26,8 @@ return [
     'latest_episodes' => 'Senaste avsnitt',
     'see_all_episodes' => 'Se alla avsnitt',
     'draft' => 'Utkast',
+    'sync_feed' => 'Synchronize feed',
+    'sync_feed_hint' => 'Import this podcast\'s latest episodes',
     'messages' => [
         'createSuccess' => 'Podcast har skapats!',
         'editSuccess' => 'Podcasten har uppdaterats!',
@@ -48,7 +51,6 @@ return [
             other {# episoder var}
         } lades till i podcasten!',
         'podcastFeedUpToDate' => 'Podcasten är redan uppdaterad.',
-        'podcastNotImported' => 'Podcast kunde inte uppdateras eftersom den inte importerades.',
         'publishError' => 'Denna podcast är antingen redan publicerad eller schemalagd för publicering.',
         'publishEditError' => 'Denna podcast är inte schemalagd för publicering.',
         'publishCancelSuccess' => 'Podcast publicering avbröts!',
@@ -125,8 +127,6 @@ return [
         'new_feed_url' => 'Ny flödes-URL',
         'new_feed_url_hint' => 'Använd detta fält när du flyttar till en annan domän eller podcast webbhotell. Som standard är värdet inställt på nuvarande RSS-URL om podcasten importeras.',
         'old_feed_url' => 'Gammal flödes-URL',
-        'update_feed' => 'Uppdatera flöde',
-        'update_feed_tip' => 'Importera den här podcastens senaste avsnitt',
         'partnership' => 'Samarbete',
         'partner_id' => 'ID',
         'partner_link_url' => 'Länk url',

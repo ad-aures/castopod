@@ -14,6 +14,7 @@ return [
     'podcast-view' => 'الرئيسية',
     'podcast-edit' => 'Edit podcast',
     'podcast-persons-manage' => 'Manage persons',
+    'podcast-imports' => 'Podcast imports',
     'episodes' => 'الحلقات',
     'episode-list' => 'جميع الحلقات',
     'episode-create' => 'حلقة جديدة',

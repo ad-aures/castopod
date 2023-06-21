@@ -9,10 +9,10 @@ declare(strict_types=1);
  */
 
 return [
-    'info' => 'My account info',
-    'changePassword' => 'Change my password',
+    'info' => 'Fiosrachadh a’ chunntais agam',
+    'changePassword' => 'Atharraich am facal-faire agam',
     'messages' => [
-        'wrongPasswordError' => "You've entered the wrong password, try again.",
-        'passwordChangeSuccess' => 'Password has been successfully changed!',
+        'wrongPasswordError' => "Chuir thu a-steach am facal-faire ceàrr, feuch ris a-rithist.",
+        'passwordChangeSuccess' => 'Chaidh am facal-faire atharrachadh!',
     ],
 ];

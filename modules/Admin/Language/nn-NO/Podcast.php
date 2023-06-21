@@ -13,6 +13,7 @@ return [
     'no_podcast' => 'Fann ingen podkast!',
     'create' => 'Lag ein podcast',
     'import' => 'Importer ein podkast',
+    'all_imports' => 'Podcast imports',
     'new_episode' => 'Ny episode',
     'view' => 'Sjå podkasten',
     'edit' => 'Rediger podkasten',
@@ -25,6 +26,8 @@ return [
     'latest_episodes' => 'Dei nyaste episodane',
     'see_all_episodes' => 'Sjå alle episodane',
     'draft' => 'Kladd',
+    'sync_feed' => 'Synchronize feed',
+    'sync_feed_hint' => 'Import this podcast\'s latest episodes',
     'messages' => [
         'createSuccess' => 'Podkasten er oppretta!',
         'editSuccess' => 'Podkasten er oppdatert!',
@@ -48,7 +51,6 @@ return [
             other {# episodar vart lagde}
         } til podkasten!',
         'podcastFeedUpToDate' => 'Podkasten er allereie oppdatert.',
-        'podcastNotImported' => 'Greidde ikkje oppdatera podkasten fordi han ikkje vart importert.',
         'publishError' => 'Denne podkasten er allereie lagt ut eller planlagt for offentleggjering.',
         'publishEditError' => 'Denne podkasten er ikkje planlagt publisert.',
         'publishCancelSuccess' => 'Du har avbrote å leggja ut podkasten.',
@@ -112,8 +114,8 @@ return [
         'premium_by_default_hint' => 'Podkastepisodane vil få premium som standardmerking. Du kan likevel ha nokre episodar, trailerar eller bonusar som offentlege.',
         'op3' => 'Open Podcast Prefix-prosjekt (OP3)',
         'op3_hint' => 'Value your analytics data with OP3, an open-source and trusted third party analytics service. Share, validate and compare your analytics data with the open podcasting ecosystem.',
-        'op3_enable' => 'Enable OP3 analytics service',
-        'op3_enable_hint' => 'For security reasons, premium episodes\' analytics data will not be shared with OP3.',
+        'op3_enable' => 'Bruk OP3-analysetenesta',
+        'op3_enable_hint' => 'Av tryggleiksgrunnar deler me ikkje analysedata for premium-episodar med OP3.',
         'payment_pointer' => 'Betalingspunkt for nettkommersialisering',
         'payment_pointer_hint' =>
             'Det er her du vil få inn pengar frå nettkommersialiseringa',
@@ -124,9 +126,7 @@ return [
         'custom_rss_hint' => 'Dette blir sett inn i ❬channel❭-elementet.',
         'new_feed_url' => 'Ny straum-URL',
         'new_feed_url_hint' => 'Bruk dette feltet når du flyttar til eit anna domene eller vertsplattform. Standardvalet for verdien er den noverande RSS-adresse viss podkasten er importert.',
-        'old_feed_url' => 'Old feed URL',
-        'update_feed' => 'Update feed',
-        'update_feed_tip' => 'Import this podcast\'s latest episodes',
+        'old_feed_url' => 'Gamal straum-URL',
         'partnership' => 'Partnarskap',
         'partner_id' => 'ID',
         'partner_link_url' => 'Lenke-URL',
@@ -135,9 +135,9 @@ return [
         'partner_link_url_hint' => 'Lenkeadressa til den generelle partnaren',
         'partner_image_url_hint' => 'Biletadressa til den generelle partnaren',
         'status_section_title' => 'Status',
-        'block' => 'Podcast should be hidden from public catalogues',
+        'block' => 'Podkasten skal gøymast frå offentlege katalogar',
         'block_hint' =>
-            'The podcast show or hide status: toggling this on prevents the entire podcast from appearing in Apple Podcasts, Google Podcasts, and any third party apps that pull shows from these directories. (Not guaranteed)',
+            'Vis- eller gøym- status for podkasten: Dersom du skrur på dette, hindrar det heile podkasten frå å syna i Apple podcasts, Google podcasts og andre tredjeparts-appar som hentar podkastar frå desse (men ingen garanti)',
         'complete' => 'Podkasten vil ikkje få fleire episodar',
         'lock' => 'Hindre at podkasten blir kopiert',
         'lock_hint' =>
@@ -259,36 +259,36 @@ return [
         'tv_reviews' => 'TV-meldingar',
     ],
     'publish_form' => [
-        'back_to_podcast_dashboard' => 'Back to podcast dashboard',
-        'post' => 'Your announcement post',
+        'back_to_podcast_dashboard' => 'Tilbake til podkast-styringspanelet',
+        'post' => 'Kunngjeringsinnlegget ditt',
         'post_hint' =>
-            "Write a message to announce the publication of your podcast. The message will be featured in your podcast's homepage.",
-        'message_placeholder' => 'Write your message…',
-        'submit' => 'Publish',
-        'publication_date' => 'Publication date',
+            "Skriv ei melding for å kunngjera at du legg ut podkasten. Dette vil stå på hiemesida til podkasten din.",
+        'message_placeholder' => 'Skriv kunngjeringa di…',
+        'submit' => 'Legg ut',
+        'publication_date' => 'Publiseringsdato',
         'publication_method' => [
-            'now' => 'Now',
-            'schedule' => 'Schedule',
+            'now' => 'No',
+            'schedule' => 'Tidsplan',
         ],
-        'scheduled_publication_date' => 'Scheduled publication date',
+        'scheduled_publication_date' => 'Planlagd publiseringsdato',
         'scheduled_publication_date_hint' =>
-            'You can schedule the podcast release by setting a future publication date. This field must be formatted as YYYY-MM-DD HH:mm',
-        'submit_edit' => 'Edit publication',
-        'cancel_publication' => 'Cancel publication',
-        'message_warning' => 'You did not write a message for your announcement post!',
-        'message_warning_hint' => 'Having a message increases social engagement, resulting in a better visibility for your podcast.',
-        'message_warning_submit' => 'Publish anyway',
+            'Du kan planleggja å offengleggjera podkasten seinare ved å skriva inn eit publiseringstidspunkt. Feltet må vera i formatet ÅÅÅÅ-MM-DD HH:mm',
+        'submit_edit' => 'Rediger publiseringa',
+        'cancel_publication' => 'Avbryt publisering',
+        'message_warning' => 'Du skreiv inga melding til kunngjeringsinnlegget ditt!',
+        'message_warning_hint' => 'Viss du skriv ei melding, kan det gje meir sosialt engasjement og syta for at podkasten din blir meir synleg.',
+        'message_warning_submit' => 'Legg ut likevel',
     ],
     'publication_status_banner' => [
-        'draft_mode' => 'draft mode',
-        'not_published' => 'This podcast is not yet published.',
-        'scheduled' => 'This podcast is scheduled for publication on {publication_date}.',
+        'draft_mode' => 'kladdemodus',
+        'not_published' => 'Denne podkasten er ikkje lagt ut enno.',
+        'scheduled' => 'Denne podkasten er planlagt for utgjeving {publication_date}.',
     ],
     'delete_form' => [
         'disclaimer' =>
-            "Deleting the podcast will delete all episodes, media files, posts and analytics associated with it. This action is irreversible, you will not be able to retrieve them afterwards.",
-        'understand' => 'I understand, I want the podcast to be permanently deleted',
-        'submit' => 'Delete',
+            "Viss du slettar podkasten, vil det sletta alle episodar, mediafiler, innlegg og analyse som høyrer til. Du kan ikkje angra dette, og vil ikkje få det tilbake etterpå.",
+        'understand' => 'Eg forstår, og vil sletta podkasten for alltid',
+        'submit' => 'Slett',
     ],
     'by' => 'Av {publisher}',
     'season' => 'Sesong {seasonNumber}',
@@ -298,12 +298,12 @@ return [
     'no_episode' => 'Fann ingen episode!',
     'follow' => 'Fylg',
     'followers' => '{numberOfFollowers, plural,
-        one {# follower}
-        other {# followers}
+        one {# fylgjar}
+        other {# fylgjarar}
     }',
     'posts' => '{numberOfPosts, plural,
-        one {# post}
-        other {# posts}
+        one {# innlegg}
+        other {# innlegg}
     }',
     'activity' => 'Aktivitet',
     'episodes' => 'Episodar',

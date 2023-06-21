@@ -20,16 +20,15 @@ Si prefieres usar Docker, puedes saltarte esto e ir directamente a la
 
 ## Requisitos
 
-- PHP v8.1 o superior
+- PHP v8.1 only
 - MySQL versión 5.7 o superior o MariaDB versión 10.2 o superior
 - Soporte HTTPS
 - An [ntp-synced clock](https://wiki.debian.org/NTP) to validate federation's
   incoming requests
 
-### PHP v8.1 o superior
+### PHP v8.1 only
 
-Se requiere PHP versión 8.1 o superior con las siguientes extensiones
-instaladas:
+PHP version 8.1 is required, with the following extensions installed:
 
 - [intl](https://php.net/manual/en/intl.requirements.php)
 - [libcurl](https://php.net/manual/en/curl.requirements.php)
@@ -95,34 +94,22 @@ extensiones:
    [Castopod](https://castopod.org/), si aún no lo has hecho.
    - ⚠️ Edita la configuración de tu servidor para que el "document root" sea la
      subcarpeta `castopod/public/`.
-4. Añade tareas en el **cron** de tu servidor web para hacer funcionar varios
-   procesos de Castopod en segundo plano (reemplaza las rutas de acuerdo a la
-   estructura de directorios de tu servidor):
-
-   - Esta tarea se utiliza para transmitir las actividades sociales a tus
-     seguidores en el Fediverso:
+4. Add **cron tasks** on your web server for various background processes
+   (replace the paths accordingly):
 
    ```bash
-      * * * * * /ruta/al/php /ruta/a/castopod/public/index.php scheduled-activities
+      * * * * * /path/to/php /path/to/castopod/spark tasks:run >> /dev/null 2>&1
    ```
 
-   - Para que tus episodios sean transmitidos a los hubs abiertos que usan el
-     nuevo protocolo [WebSub](https://en.wikipedia.org/wiki/WebSub) (2018):
+   **Note** - If you do not add this cron task, the following Castopod features
+   will not work:
 
-   ```bash
-      * * * * * /ruta/al/php /castopod/public/index.php scheduled-websub-publish
-   ```
-
-   - Para generar Recortes de video (ver
-     [requisitos FFmpeg ](#ffmpeg-v418-or-higher-for-video-clips)):
-
-   ```bash
-      * * * * * /ruta/al/php /path/to/castopod/public/index.php scheduled-video-clips
-   ```
-
-   > Estas tareas así definidas se ejecutarán **cada minuto**. Pero puedes
-   > definir una frecuencia más acorde a tus necesidades: cada 5, 10 minutos o
-   > más.
+   - Importing a podcast from an existing RSS feed
+   - Broadcasting social activities to your followers in the fediverse
+   - Broadcasting episodes to open hubs using
+     [WebSub](https://en.wikipedia.org/wiki/WebSub)
+   - Generating video clips -
+     [requires FFmpeg](#optional-ffmpeg-v418-or-higher-for-video-clips)
 
 ### (recomendado) Asistente web de instalación
 

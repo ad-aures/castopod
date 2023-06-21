@@ -14,8 +14,6 @@ compilare automată
   aplicației cu toate dependințele Castopod
 - [**`castopod/web-server`**](https://hub.docker.com/r/castopod/web-server): o
   configurație Nginx pentru Castopod
-- [**`castopod/video-clipper`**](https://hub.docker.com/r/castopod/video-clipper):
-  o imagine opțională ce compilează videoclipuri cu ajutorul ffmpeg
 
 În plus, Castopod necesită o bază de date compatibilă cu MySQL. O bază de date
 Redis poate fi adăugată pentru cache.
@@ -24,7 +22,6 @@ Redis poate fi adăugată pentru cache.
 
 - `develop` [unstable], latest development branch build
 - `beta` [stable], latest beta version build
-- `1.0.0-beta.x` [stable], specific beta version build (since `1.0.0-beta.22`)
 - `latest` [stable], latest version build
 - `1.x.x` [stable], specific version build (since `1.0.0`)
 
@@ -39,7 +36,7 @@ Redis poate fi adăugată pentru cache.
 
     services:
       app:
-        image: castopod/app:latest
+        image: castopod/castopod:latest
         container_name: "castopod-app"
         volumes:
           - castopod-media:/var/www/castopod/public/media
@@ -111,16 +108,6 @@ Redis poate fi adăugată pentru cache.
 5.  You're all set, start podcasting! 🎙️🚀
 
 ## Environment Variables
-
-- **castopod/video-clipper**
-
-  | Variable name              | Type (`default`) | Default          |
-  | -------------------------- | ---------------- | ---------------- |
-  | **`CP_DATABASE_HOSTNAME`** | ?string          | `"mariadb"`      |
-  | **`CP_DATABASE_NAME`**     | ?string          | `MYSQL_DATABASE` |
-  | **`CP_DATABASE_USERNAME`** | ?string          | `MYSQL_USER`     |
-  | **`CP_DATABASE_PASSWORD`** | ?string          | `MYSQL_PASSWORD` |
-  | **`CP_DATABASE_PREFIX`**   | ?string          | `"cp_"`          |
 
 - **castopod/castopod** and **castopod/app**
 

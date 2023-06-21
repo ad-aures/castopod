@@ -14,6 +14,7 @@ return [
     'podcast-view' => 'Startseite',
     'podcast-edit' => 'Podcast bearbeiten',
     'podcast-persons-manage' => 'Mitwirkende verwalten',
+    'podcast-imports' => 'Podcast imports',
     'episodes' => 'Folgen',
     'episode-list' => 'Alle Episoden',
     'episode-create' => 'Neue Episoden',

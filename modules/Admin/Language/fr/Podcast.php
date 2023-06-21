@@ -13,6 +13,7 @@ return [
     'no_podcast' => 'Aucun podcast trouvé !',
     'create' => 'Créer un podcast',
     'import' => 'Importer un podcast',
+    'all_imports' => 'Podcast imports',
     'new_episode' => 'Créer un épisode',
     'view' => 'Voir le podcast',
     'edit' => 'Modifier le podcast',
@@ -25,6 +26,8 @@ return [
     'latest_episodes' => 'Derniers épisodes',
     'see_all_episodes' => 'Voir tous les épisodes',
     'draft' => 'Brouillon',
+    'sync_feed' => 'Synchronize feed',
+    'sync_feed_hint' => 'Import this podcast\'s latest episodes',
     'messages' => [
         'createSuccess' => 'Le podcast a été créé avec succès !',
         'editSuccess' => 'Le podcast a bien été mis à jour !',
@@ -48,7 +51,6 @@ return [
             other {# épisodes ont été}
         } ajoutés au podcast!',
         'podcastFeedUpToDate' => 'Le podcast est déjà à jour.',
-        'podcastNotImported' => 'Le podcast n\'a pas pu être mis à jour car il n\'a pas été importé.',
         'publishError' => 'Ce podcast est soit déjà publié, soit programmé pour publication.',
         'publishEditError' => 'Ce podcast n\'est pas programmé pour publication.',
         'publishCancelSuccess' => 'Publication de Podcast annulée avec succès !',
@@ -125,8 +127,6 @@ return [
         'new_feed_url' => 'URL du nouveau flux',
         'new_feed_url_hint' => 'Utilisez ce champ lorsque vous déplacez ce podcast vers un autre domaine ou que vous changez d’hébergeur. Par défaut, ce champ est rempli avec l’URL du flux actuel si le podcast est importé.',
         'old_feed_url' => 'URL de l\'ancien flux',
-        'update_feed' => 'Actualiser ce flux',
-        'update_feed_tip' => 'Importer les derniers épisodes de ce podcast',
         'partnership' => 'Partenariat',
         'partner_id' => 'ID',
         'partner_link_url' => 'URL lien',

@@ -13,6 +13,7 @@ return [
     'no_podcast' => '没有找到播客!',
     'create' => '创建播客',
     'import' => '导入播客',
+    'all_imports' => 'Podcast imports',
     'new_episode' => '新剧集',
     'view' => '浏览博客',
     'edit' => '编辑播客',
@@ -25,6 +26,8 @@ return [
     'latest_episodes' => '最新剧集',
     'see_all_episodes' => '查看所有剧集',
     'draft' => '草稿',
+    'sync_feed' => 'Synchronize feed',
+    'sync_feed_hint' => 'Import this podcast\'s latest episodes',
     'messages' => [
         'createSuccess' => '播客创建成功！',
         'editSuccess' => '播客已更新！',
@@ -48,7 +51,6 @@ return [
             other {# 剧集}
         } 添加到播客！',
         'podcastFeedUpToDate' => '播客已经是最新状态。',
-        'podcastNotImported' => '播客无法更新，因为它没有被导入。',
         'publishError' => '此播客已经发布或计划发布。',
         'publishEditError' => '此播客未计划发布。',
         'publishCancelSuccess' => '取消播客发布！',
@@ -125,8 +127,6 @@ return [
         'new_feed_url' => '新订阅源网址',
         'new_feed_url_hint' => '当你迁移到另一个域或播客托管平台时，请使用此字段。 默认情况下，播客导入时，该值为当前的订阅源网址。',
         'old_feed_url' => '旧订阅源网址',
-        'update_feed' => '更新订阅源',
-        'update_feed_tip' => '导入此播客的最新剧集',
         'partnership' => '合作伙伴',
         'partner_id' => 'ID',
         'partner_link_url' => '链接网址',

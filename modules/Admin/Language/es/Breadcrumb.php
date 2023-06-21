@@ -36,7 +36,7 @@ return [
     'users' => 'usuarios',
     'my-account' => 'mi cuenta',
     'change-password' => 'cambiar contraseña',
-    'import' => 'importar feed',
+    'imports' => 'imports',
     'platforms' => 'plataformas',
     'social' => 'redes sociales',
     'funding' => 'financiación | fondos',

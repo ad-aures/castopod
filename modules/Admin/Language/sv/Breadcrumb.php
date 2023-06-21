@@ -36,7 +36,7 @@ return [
     'users' => 'användare',
     'my-account' => 'mitt konto',
     'change-password' => 'ändra lösenord',
-    'import' => 'import av flöde',
+    'imports' => 'imports',
     'platforms' => 'plattformar',
     'social' => 'sociala nätverk',
     'funding' => 'finansiering',

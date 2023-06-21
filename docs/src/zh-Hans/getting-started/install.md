@@ -19,15 +19,15 @@ Castopod 的安装非常简单。 你能在大多数兼容的 PHP-MySQL 的服�
 
 ## 要求
 
-- PHP 8.1 或更高版本
+- PHP v8.1 only
 - MySQL 5.7 或更高版本与 MariaDB 10.2 或更高版本
 - HTTPS 支持
 - An [ntp-synced clock](https://wiki.debian.org/NTP) to validate federation's
   incoming requests
 
-### PHP 8.1 或更高版本
+### PHP v8.1 only
 
-需要 PHP 8.1 或更高版本，并安装以下扩展：
+PHP version 8.1 is required, with the following extensions installed:
 
 - [intl](https://php.net/manual/en/intl.requirements.php)
 - [libcurl](https://php.net/manual/en/curl.requirements.php)
@@ -86,30 +86,22 @@ Castopod 仅适用于受支持的 MySQL 5.7 或更高版本的兼容数据库。
 3. 下载最新的 [Castopod](https://castopod.org/) 到 web 服务器并解压（如果尚未下
    载）。
    - ⚠️ 将 web 服务器根目录设置为 `castopod` 文件夹中的 `public/` 子文件夹。
-4. 在 Web 服务器上为各种后台进程添加 **cron 任务** （相应地替换路径）
-
-   - 为了使社交功能正常工作，此任务用于向联邦宇宙中的关注者发送活动：
-
-   ```bash
-      * * * * * /path/to/php /path/to/castopod/public/index.php scheduled-activities
-   ```
-
-   - 使用 [WebSub](https://en.wikipedia.org/wiki/WebSub) 在发布时将您的剧集广播
-     在公共平台：
+4. Add **cron tasks** on your web server for various background processes
+   (replace the paths accordingly):
 
    ```bash
-      * * * * * /usr/local/bin/php /castopod/public/index.php scheduled-websub-publish
+      * * * * * /path/to/php /path/to/castopod/spark tasks:run >> /dev/null 2>&1
    ```
 
-   - 如果需要使用视频素材(请参阅
-     [FFmpeg 要求](#ffmpeg-v418-or-higher-for-video-clips))：
+   **Note** - If you do not add this cron task, the following Castopod features
+   will not work:
 
-   ```bash
-      * * * * * /path/to/php /path/to/castopod/public/index.php scheduled-video-clips
-   ```
-
-   > 这些任务 **每分钟**运行一次。 你可以根据需要设置频率：每 5 分钟，10 分钟或
-   > 更长的时间。
+   - Importing a podcast from an existing RSS feed
+   - Broadcasting social activities to your followers in the fediverse
+   - Broadcasting episodes to open hubs using
+     [WebSub](https://en.wikipedia.org/wiki/WebSub)
+   - Generating video clips -
+     [requires FFmpeg](#optional-ffmpeg-v418-or-higher-for-video-clips)
 
 ### (推荐) 安装向导
 

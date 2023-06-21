@@ -9,29 +9,52 @@ declare(strict_types=1);
  */
 
 return [
-    'warning' =>
-        'This procedure may take a long time. As the current version does not show any progress while it runs, you will not see anything updated until it is done. In case of timeout error, increase `max_execution_time` value.',
+    'banner' => [
+        'disclaimer' => 'Importing',
+        'text' => '{podcastTitle} is currently being imported.',
+        'cta' => 'See import status',
+    ],
     'old_podcast_section_title' => 'The podcast to import',
-    'old_podcast_section_subtitle' =>
+    'old_podcast_legal_disclaimer_title' => 'Legal disclaimer',
+    'old_podcast_legal_disclaimer' =>
         'Make sure you own the rights for this podcast before importing it. Copying and broadcasting a podcast without the proper rights is piracy and is liable to prosecution.',
     'imported_feed_url' => 'Feed URL',
     'imported_feed_url_hint' => 'The feed must be in xml or rss format.',
     'new_podcast_section_title' => 'The new podcast',
-    'advanced_params_section_title' => 'Advanced parameters',
-    'advanced_params_section_subtitle' =>
-        'Keep the default values if you have no idea of what the fields are for.',
-    'slug_field' => 'Field to be used to calculate episode slug',
-    'description_field' =>
-        'Source field used for episode description / show notes',
-    'force_renumber' => 'Force episodes renumbering',
-    'force_renumber_hint' =>
-        'Use this if your podcast does not have episode numbers but wish to set them during import.',
-    'season_number' => 'رقم الموسم',
-    'season_number_hint' =>
-        'Use this if your podcast does not have a season number but wish to set one during import. Leave blank otherwise.',
-    'max_episodes' => 'Maximum number of episodes to import',
-    'max_episodes_hint' => 'Leave blank to import all episodes',
     'lock_import' =>
-        'This feed is protected. You cannot import it. If you are the owner, unprotect it on the origin platform.',
-    'submit' => 'Import podcast',
+        'This feed is protected. You cannot import it. If you are the owner, unlock it on the origin platform.',
+    'submit' => 'Add import to queue',
+    'queue' => [
+        'status' => [
+            'label' => 'Status',
+            'queued' => 'queued',
+            'queued_hint' => 'Import task is awaiting to be processed.',
+            'canceled' => 'canceled',
+            'canceled_hint' => 'Import task was canceled.',
+            'running' => 'running',
+            'running_hint' => 'Import task is being processed.',
+            'failed' => 'failed',
+            'failed_hint' => 'Import task could not complete: script failure.',
+            'passed' => 'passed',
+            'passed_hint' => 'Import task was completed successfully!',
+        ],
+        'feed' => 'Feed',
+        'duration' => 'Import duration',
+        'imported_episodes' => 'Imported episodes',
+        'imported_episodes_hint' => '{newlyImportedCount} newly imported, {alreadyImportedCount} already imported.',
+        'actions' => [
+            'cancel' => 'Cancel',
+            'retry' => 'Retry',
+            'delete' => 'Delete',
+        ],
+    ],
+    'messages' => [
+        'canceled' => 'Import task has been successfully canceled!',
+        'alreadyRunning' => 'Import Task is already running. You may cancel it before retrying.',
+        'retried' => 'Import task has been queued, it will be retried shortly!',
+        'deleted' => 'Import task has been successfully deleted!',
+        'importTaskQueued' => 'An new task has been queued, import will start shortly!',
+        'podcastNotImported' => 'Podcast cannot be synched as it was not imported.',
+        'syncTaskQueued' => 'A new import task has been queued, synchronization will start shortly!',
+    ],
 ];

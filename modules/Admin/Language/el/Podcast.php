@@ -13,6 +13,7 @@ return [
     'no_podcast' => 'Δεν βρέθηκαν podcast!',
     'create' => 'Δημιουργία podcast',
     'import' => 'Εισαγωγή ενός podcast',
+    'all_imports' => 'Podcast imports',
     'new_episode' => 'Νέο Επεισόδιο',
     'view' => 'Προβολή podcast',
     'edit' => 'Επεξεργασία podcast',
@@ -25,6 +26,8 @@ return [
     'latest_episodes' => 'Τελευταία επεισόδια',
     'see_all_episodes' => 'Δείτε όλα τα επεισόδια',
     'draft' => 'Πρόχειρο',
+    'sync_feed' => 'Synchronize feed',
+    'sync_feed_hint' => 'Import this podcast\'s latest episodes',
     'messages' => [
         'createSuccess' => 'Το επεισόδιο δημιουργήθηκε με επιτυχία!',
         'editSuccess' => 'Το Podcast ενημερώθηκε με επιτυχία!',
@@ -48,7 +51,6 @@ return [
             other {# επεισόδια ήταν}
         } προστέθηκαν στο podcast!',
         'podcastFeedUpToDate' => 'Το Podcast είναι ήδη ενημερωμένο.',
-        'podcastNotImported' => 'Το Podcast δεν μπόρεσε να ενημερωθεί καθώς δεν εισήχθη.',
         'publishError' => 'Αυτό το podcast είτε έχει ήδη δημοσιευθεί είτε έχει προγραμματιστεί για δημοσίευση.',
         'publishEditError' => 'Αυτό το podcast δεν έχει προγραμματιστεί για δημοσίευση.',
         'publishCancelSuccess' => 'Η δημοσίευση του επεισοδίου ακυρώθηκε επιτυχώς!',
@@ -125,8 +127,6 @@ return [
         'new_feed_url' => 'New feed URL',
         'new_feed_url_hint' => 'Use this field when you move to another domain or podcast hosting platform. By default, the value is set to the current RSS URL if the podcast is imported.',
         'old_feed_url' => 'Old feed URL',
-        'update_feed' => 'Update feed',
-        'update_feed_tip' => 'Import this podcast\'s latest episodes',
         'partnership' => 'Partnership',
         'partner_id' => 'ID',
         'partner_link_url' => 'Link URL',

@@ -8,10 +8,10 @@ sidebarDepth: 3
 Når du har installert Castopod, kan det vera lurt å oppdatera nettstaden din til
 siste versjonen for å få nye funksjonar, ✨, feilrettingar 🐛 og betre yting ⚡.
 
-## Update instructions
+## Korleis du oppdaterer
 
-0. ⚠️ Before any update, we highly recommend you backup your Castopod files and
-   database.
+0. ⚠️ Før du oppdaterer, rår me sterkt til at du tek ein tryggingskopi av filene
+   og databasen til Castopod.
 
    - cf.
      [Should I make a backup before updating?](#should-i-make-a-backup-before-updating)

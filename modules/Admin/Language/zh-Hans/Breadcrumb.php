@@ -36,7 +36,7 @@ return [
     'users' => '用户',
     'my-account' => '我的帐户',
     'change-password' => '修改密码',
-    'import' => '订阅源导入',
+    'imports' => 'imports',
     'platforms' => '平台',
     'social' => '社交网络',
     'funding' => '资金支持',

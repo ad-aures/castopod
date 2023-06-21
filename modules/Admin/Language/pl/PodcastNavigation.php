@@ -14,6 +14,7 @@ return [
     'podcast-view' => 'Początek',
     'podcast-edit' => 'Edytuj podcast',
     'podcast-persons-manage' => 'Zarządzaj osobami',
+    'podcast-imports' => 'Podcast imports',
     'episodes' => 'Odcinki',
     'episode-list' => 'Wszystkie odcinki',
     'episode-create' => 'Nowy odcinek',

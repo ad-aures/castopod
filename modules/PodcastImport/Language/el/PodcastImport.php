@@ -9,29 +9,52 @@ declare(strict_types=1);
  */
 
 return [
-    'warning' =>
-        'Αυτή η διαδικασία μπορεί να διαρκέσει πολύ. Καθώς η τρέχουσα έκδοση δεν εμφανίζει καμία πρόοδο ενώ εκτελείται, δεν θα δείτε τίποτα να ενημερώνεται μέχρι να ολοκληρωθεί. Σε περίπτωση σφάλματος χρονικού ορίου, αυξήστε την τιμή `max_execution_time`.',
-    'old_podcast_section_title' => 'Το podcast για εισαγωγή',
-    'old_podcast_section_subtitle' =>
-        'Βεβαιωθείτε ότι έχετε τα δικαιώματα για αυτό το podcast πριν από την εισαγωγή του. Η αντιγραφή και μετάδοση ενός podcast χωρίς τα κατάλληλα δικαιώματα είναι πειρατεία και μπορεί να διωχθεί.',
-    'imported_feed_url' => 'Διεύθυνση URL Ροής',
-    'imported_feed_url_hint' => 'To Url πρέπει να είναι σε μορφή xml ή rss.',
-    'new_podcast_section_title' => 'Το νέο podcast',
-    'advanced_params_section_title' => 'Παράμετροι για προχωρημένους',
-    'advanced_params_section_subtitle' =>
-        'Διατηρήστε τις προεπιλεγμένες τιμές αν δεν έχετε ιδέα για το ποια είναι τα πεδία.',
-    'slug_field' => 'Πεδίο που πρέπει να χρησιμοποιείται για τον υπολογισμό του slug του επεισοδίου',
-    'description_field' =>
-        'Πεδίο πηγής που χρησιμοποιείται για την περιγραφή επεισοδίου / εμφάνιση σημειώσεων',
-    'force_renumber' => 'Force episodes renumbering',
-    'force_renumber_hint' =>
-        'Use this if your podcast does not have episode numbers but wish to set them during import.',
-    'season_number' => 'Αριθμός σεζόν',
-    'season_number_hint' =>
-        'Χρησιμοποιήστε αυτό αν το podcast σας δεν έχει αριθμό σεζόν αλλά επιθυμεί να ορίσει έναν κατά την εισαγωγή. Αφήστε κενό διαφορετικά.',
-    'max_episodes' => 'Μέγιστος αριθμός επεισοδίων εισαγωγής',
-    'max_episodes_hint' => 'Αφήστε κενό για την εισαγωγή όλων των επεισοδίων',
+    'banner' => [
+        'disclaimer' => 'Importing',
+        'text' => '{podcastTitle} is currently being imported.',
+        'cta' => 'See import status',
+    ],
+    'old_podcast_section_title' => 'The podcast to import',
+    'old_podcast_legal_disclaimer_title' => 'Legal disclaimer',
+    'old_podcast_legal_disclaimer' =>
+        'Make sure you own the rights for this podcast before importing it. Copying and broadcasting a podcast without the proper rights is piracy and is liable to prosecution.',
+    'imported_feed_url' => 'Feed URL',
+    'imported_feed_url_hint' => 'The feed must be in xml or rss format.',
+    'new_podcast_section_title' => 'The new podcast',
     'lock_import' =>
-        'Αυτή η ροή προστατεύεται. Δεν μπορείτε να την εισάγετε. Αν είστε ο ιδιοκτήτης, μην την προστατεύετε στην πλατφόρμα προέλευσης.',
-    'submit' => 'Εισαγωγή podcast',
+        'This feed is protected. You cannot import it. If you are the owner, unlock it on the origin platform.',
+    'submit' => 'Add import to queue',
+    'queue' => [
+        'status' => [
+            'label' => 'Status',
+            'queued' => 'queued',
+            'queued_hint' => 'Import task is awaiting to be processed.',
+            'canceled' => 'canceled',
+            'canceled_hint' => 'Import task was canceled.',
+            'running' => 'running',
+            'running_hint' => 'Import task is being processed.',
+            'failed' => 'failed',
+            'failed_hint' => 'Import task could not complete: script failure.',
+            'passed' => 'passed',
+            'passed_hint' => 'Import task was completed successfully!',
+        ],
+        'feed' => 'Feed',
+        'duration' => 'Import duration',
+        'imported_episodes' => 'Imported episodes',
+        'imported_episodes_hint' => '{newlyImportedCount} newly imported, {alreadyImportedCount} already imported.',
+        'actions' => [
+            'cancel' => 'Cancel',
+            'retry' => 'Retry',
+            'delete' => 'Delete',
+        ],
+    ],
+    'messages' => [
+        'canceled' => 'Import task has been successfully canceled!',
+        'alreadyRunning' => 'Import Task is already running. You may cancel it before retrying.',
+        'retried' => 'Import task has been queued, it will be retried shortly!',
+        'deleted' => 'Import task has been successfully deleted!',
+        'importTaskQueued' => 'An new task has been queued, import will start shortly!',
+        'podcastNotImported' => 'Podcast cannot be synched as it was not imported.',
+        'syncTaskQueued' => 'A new import task has been queued, synchronization will start shortly!',
+    ],
 ];

@@ -9,54 +9,54 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => 'Castopod installer',
-    'manual_config' => 'Manual configuration',
+    'title' => 'Inneal-stàlaidh Chastopod',
+    'manual_config' => 'Rèiteachadh a làimh',
     'manual_config_subtitle' =>
-        'Create a `.env` file with your settings and refresh the page to continue installation.',
+        'Cruthaich faidhle `.env` leis na roghainnean agad agus ath-nuadhaich an duilleag a leantainn air adhart leis an stàladh.',
     'form' => [
-        'instance_config' => 'Instance configuration',
-        'hostname' => 'Hostname',
-        'media_base_url' => 'Media base URL',
+        'instance_config' => 'Rèiteachadh an ionstans',
+        'hostname' => 'Ainm an òstair',
+        'media_base_url' => 'URL bunaiteach nam meadhanan',
         'media_base_url_hint' =>
-            'If you use a CDN and/or an external analytics service, you may set them here.',
-        'admin_gateway' => 'Admin gateway',
+            'Ma tha thu a’ cleachdadh CDN agus/no seirbheis anailiseachd air an taobh a-muigh, faodaidh tu an suidheachadh an-seo.',
+        'admin_gateway' => 'Balach na rianachd',
         'admin_gateway_hint' =>
-            'The route to access the admin area (eg. https://example.com/cp-admin). It is set by default as cp-admin, we recommend you change it for security reasons.',
-        'auth_gateway' => 'Auth gateway',
+            'Seo an t-slighe airson raon na rianachd inntrigeadh (m.e. https://ball-eisimpleir.com/cp-admin). Thèid seo a shuidheachadh air cp-admin a ghnàth ach mholamaid gun atharraich thu seo air adhbhar tèarainteachd.',
+        'auth_gateway' => 'Bealach an dearbhaidh',
         'auth_gateway_hint' =>
-            'The route to access the authentication pages (eg. https://example.com/cp-auth). It is set by default as cp-auth, we recommend you change it for security reasons.',
-        'database_config' => 'Database configuration',
+            'Seo an t-slighe airson duilleagan an dearbhaidh inntrigeadh (m.e. https://ball-eisimpleir.com/cp-auth). Thèid seo a shuidheachadh air cp-auth a ghnàth ach mholamaid gun atharraich thu seo air adhbhar tèarainteachd.',
+        'database_config' => 'Rèiteachadh an stòir-dhàta',
         'database_config_hint' =>
-            'Castopod needs to connect to your MySQL (or MariaDB) database. If you do not have these required info, please contact your server administrator.',
-        'db_hostname' => 'Database hostname',
-        'db_name' => 'Database name',
-        'db_username' => 'Database username',
-        'db_password' => 'Database password',
-        'db_prefix' => 'Database prefix',
+            'Feumaidh Castopod ceangal ris an stòr-dàta MySQL (no MariaDB) agad. Mur eil am fiosrachadh riatanach seo agad, cuir fios tu rianaire an fhrithealaiche agad.',
+        'db_hostname' => 'Ainm òstair an stòir-dhàta',
+        'db_name' => 'Ainm an stòir-dhàta',
+        'db_username' => 'Ainm-cleachdaiche an stòir-dhàta',
+        'db_password' => 'Facal-faire an stòir-dhàta',
+        'db_prefix' => 'Ro-leasachan an stòir-dhàta',
         'db_prefix_hint' =>
-            "The prefix of the Castopod table names, leave as is if you don't know what it means.",
-        'cache_config' => 'Cache configuration',
+            "Seo ro-leasachan do dh’ainmean clàran Chastopod, fàg e mar a tha e mur eil thu a’ tuigsinn dè as ciall dha.",
+        'cache_config' => 'Rèiteachadh an tasgadain',
         'cache_config_hint' =>
-            'Choose your preferred cache handler. Leave it as the default value if you have no clue what it means.',
-        'cache_handler' => 'Cache handler',
+            'Tagh an làimhsichear as fheàrr leat dhan tasgadan. Fàg air an luach bhunaiteach e mur eil thu a’ tuigsinn dè as ciall dha.',
+        'cache_handler' => 'Làimhsichear an tasgadain',
         'cacheHandlerOptions' => [
-            'file' => 'File',
+            'file' => 'Faidhle',
             'redis' => 'Redis',
             'predis' => 'Predis',
         ],
-        'next' => 'Next',
-        'submit' => 'Finish install',
-        'create_superadmin' => 'Create your superadmin account',
-        'email' => 'Email',
-        'username' => 'Username',
-        'password' => 'Password',
+        'next' => 'Air adhart',
+        'submit' => 'Cuir crìoch air an stàladh',
+        'create_superadmin' => 'Cruthaich an cunntas sàr-rianaire agad',
+        'email' => 'Post-d',
+        'username' => 'Ainm-cleachdaiche',
+        'password' => 'Facal-faire',
     ],
     'messages' => [
         'createSuperAdminSuccess' =>
-            'Your superadmin account has been created successfully. Login to start podcasting!',
+            'Chaidh an cunntas sàr-rianaire agad a chruthachadh. Clàraich a-steach a thòiseachadh leis a’ phod-chraoladh!',
         'databaseConnectError' =>
-            'Castopod could not connect to your database. Edit your database configuration and try again.',
+            'Cha b’ urrainn do Chastopod ceangal ris an stòr-dàta agad. Deasaich rèiteachadh an stòir-dhàta agad is feuch ris a-rithist.',
         'writeError' =>
-            "Couldn't create/write the `.env` file. You must create it manually by following the `.env.example` file template in the Castopod package.",
+            "Cha b’ urrainn dhuinn am faidhle `.env` a chruthachadh/sgrìobhadh thuige. Feumaidh tu a chruthachadh a làimh a leantainn ris an fhaidhle-teamplaid `.env.example` sa phacaid Castopod.",
     ],
 ];

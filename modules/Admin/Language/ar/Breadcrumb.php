@@ -36,7 +36,7 @@ return [
     'users' => 'مستخدمون',
     'my-account' => 'حسابي',
     'change-password' => 'تغيير الكلمة السرية',
-    'import' => 'feed import',
+    'imports' => 'imports',
     'platforms' => 'منصات',
     'social' => 'شبكات التواصل الاجتماعي',
     'funding' => 'funding',

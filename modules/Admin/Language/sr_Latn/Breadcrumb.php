@@ -36,7 +36,7 @@ return [
     'users' => 'korisnici',
     'my-account' => 'moj nalog',
     'change-password' => 'promenite lozinku',
-    'import' => 'importuj feed',
+    'imports' => 'imports',
     'platforms' => 'platforme',
     'social' => 'društvene mreže',
     'funding' => 'finansiranje',

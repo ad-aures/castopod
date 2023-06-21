@@ -13,6 +13,7 @@ return [
     'no_podcast' => 'Nenhum podcast encontrado!',
     'create' => 'Criar podcast',
     'import' => 'Importar podcast',
+    'all_imports' => 'Podcast imports',
     'new_episode' => 'Novo Episódio',
     'view' => 'Ver podcast',
     'edit' => 'Editar podcast',
@@ -25,6 +26,8 @@ return [
     'latest_episodes' => 'Últimos episódios',
     'see_all_episodes' => 'Ver todos os episódios',
     'draft' => 'Rascunho',
+    'sync_feed' => 'Synchronize feed',
+    'sync_feed_hint' => 'Import this podcast\'s latest episodes',
     'messages' => [
         'createSuccess' => 'Podcast criado com sucesso!',
         'editSuccess' => 'Podcast foi atualizado com sucesso!',
@@ -48,7 +51,6 @@ return [
             other {# episódios foram adicionados}
         } ao podcast!',
         'podcastFeedUpToDate' => 'O Podcast já está atualizado.',
-        'podcastNotImported' => 'O Podcast não pôde ser atualizado pois não foi importado.',
         'publishError' => 'Este podcast já está publicado ou agendado para publicação.',
         'publishEditError' => 'Este podcast não está agendado para publicação.',
         'publishCancelSuccess' => 'Publicação do Podcast cancelada com sucesso!',
@@ -125,8 +127,6 @@ return [
         'new_feed_url' => 'Nova URL de feed',
         'new_feed_url_hint' => 'Use este campo ao mover este podcast para outro domínio ou alterar hosts. Por padrão, este campo é preenchido com a URL do feed RSS atual se o podcast for importado.',
         'old_feed_url' => 'URL de feed antigo',
-        'update_feed' => 'Atualizar feed',
-        'update_feed_tip' => 'Importar os últimos episódios deste podcast',
         'partnership' => 'Parceria',
         'partner_id' => 'ID',
         'partner_link_url' => 'URL do link',

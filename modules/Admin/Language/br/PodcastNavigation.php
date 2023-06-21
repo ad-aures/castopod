@@ -14,6 +14,7 @@ return [
     'podcast-view' => 'Degemer',
     'podcast-edit' => 'Kemmañ ar podkast',
     'podcast-persons-manage' => 'Merañ an emellerien·ezed',
+    'podcast-imports' => 'Podcast imports',
     'episodes' => 'Rannoù',
     'episode-list' => 'An holl rannoù',
     'episode-create' => 'Rann nevez',

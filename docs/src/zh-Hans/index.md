@@ -130,7 +130,7 @@ great and [a lot of them](https://podcastindex.org/apps) are jumping into the
 Podcasting 2.0 wagon just like Castopod!
 
 Each of these solutions differ from one another, you may compare with the
-[list of features](#功能特色).
+[list of features](#features).
 
 That being said, there are two main differences with other podcasting solutions:
 

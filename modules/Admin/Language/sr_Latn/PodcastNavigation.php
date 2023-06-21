@@ -14,6 +14,7 @@ return [
     'podcast-view' => 'Home',
     'podcast-edit' => 'Edit podcast',
     'podcast-persons-manage' => 'Manage persons',
+    'podcast-imports' => 'Podcast imports',
     'episodes' => 'Episodes',
     'episode-list' => 'All episodes',
     'episode-create' => 'New episode',

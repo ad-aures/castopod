@@ -14,8 +14,6 @@ construction automatisée :
   with all of Castopod dependencies
 - [**`castopod/web-server`**](https://hub.docker.com/r/castopod/web-server): an
   Nginx configuration for Castopod
-- [**`castopod/video-clipper`**](https://hub.docker.com/r/castopod/video-clipper):
-  an optional image building videoclips thanks to ffmpeg
 
 De plus, Castopod nécessite une base de données compatible avec MySQL. Une base
 de données Redis peut être ajoutée en tant que gestionnaire de cache.
@@ -24,7 +22,6 @@ de données Redis peut être ajoutée en tant que gestionnaire de cache.
 
 - `développer` [unstable], la dernière version de la branche de développement
 - `beta` [stable], dernière version bêta
-- `1.0.0-beta.x` [stable], version bêta spécifique (depuis `1.0.0-beta.22`)
 - `beta` [stable], dernière version bêta
 - `1.x.x` [stable], version spécifique (depuis `1.0.0`)
 
@@ -39,7 +36,7 @@ de données Redis peut être ajoutée en tant que gestionnaire de cache.
 
     services:
       app:
-        image: castopod/app:latest
+        image: castopod/castopod:latest
         container_name: "castopod-app"
         volumes:
           - castopod-media:/var/www/castopod/public/media
@@ -113,19 +110,9 @@ de données Redis peut être ajoutée en tant que gestionnaire de cache.
 
 ## Environment Variables
 
-- **castopod/video-clipper**
-
-  | Nom de la variable         | Type (`default`) | Par défaut       |
-  | -------------------------- | ---------------- | ---------------- |
-  | **`CP_DATABASE_HOSTNAME`** | ?string          | `"mariadb"`      |
-  | **`CP_DATABASE_NAME`**     | ?string          | `MYSQL_DATABASE` |
-  | **`CP_DATABASE_USERNAME`** | ?string          | `MYSQL_USER`     |
-  | **`CP_DATABASE_PASSWORD`** | ?string          | `MYSQL_PASSWORD` |
-  | **`CP_DATABASE_PREFIX`**   | ?string          | `"cp_"`          |
-
 - **castopod/castopod** and **castopod/app**
 
-  | Variable name                         | Type (`default`)        | Par défaut       |
+  | Nom de la variable                    | Type (`default`)        | Par défaut       |
   | ------------------------------------- | ----------------------- | ---------------- |
   | **`CP_BASEURL`**                      | string                  | `undefined`      |
   | **`CP_MEDIA_BASEURL`**                | ?string                 | `CP_BASEURL`     |
@@ -165,7 +152,7 @@ de données Redis peut être ajoutée en tant que gestionnaire de cache.
 
 - **castopod/web-server**
 
-  | Nom de la variable     | Type                  | Par défaut |
+  | Variable name          | Type                  | Par défaut |
   | ---------------------- | --------------------- | ---------- |
   | **`CP_APP_HOSTNAME`**  | ?string               | `"app"`    |
   | **`CP_MAX_BODY_SIZE`** | ?number (with suffix) | `512M`     |

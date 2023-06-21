@@ -80,7 +80,7 @@ bas à gauche.
 Vous pouvez également trouver la version dans l'application
 `> Configuration > Constantes.php` dossier.
 
-### [Je n'ai pas mis à jour mon instance depuis longtemps… Que devrais-je faire ?](#i-havent-updated-my-instance-in-a-long-time-what-should-i-do)
+### Je n'ai pas mis à jour mon instance depuis longtemps… Que devrais-je faire ?
 
 Pas de problème ! Il suffit d'obtenir la dernière version comme décrit
 ci-dessus. Lorsque vous exécutez les instructions de mise à jour (4), lancez-les
