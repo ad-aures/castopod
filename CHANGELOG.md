@@ -1,3 +1,28 @@
+# [1.4.0](https://code.castopod.org/adaures/castopod/compare/v1.3.5...v1.4.0) (2023-06-21)
+
+### Bug Fixes
+
+- **charts:** set duration charts label to HHhMM for listening time analytics
+  ([3fc1d8e](https://code.castopod.org/adaures/castopod/commit/3fc1d8e18dc8119251c72dcaa7e5121246c2b194))
+- **embed:** set height of player iframe from config
+  ([4665741](https://code.castopod.org/adaures/castopod/commit/4665741425532f253a46a42ba05602047798dba2))
+- **s3:** serve files without cache if dummy cache handler + add http referer
+  header to redirect
+  ([30db9f0](https://code.castopod.org/adaures/castopod/commit/30db9f0667bf7f7a5f186ea667a524d1e3b502db))
+- **s3:** use presigned request uri to serve static files
+  ([cb92dc7](https://code.castopod.org/adaures/castopod/commit/cb92dc73f17543d32d1cdc24db72403a5c561a74))
+- **webmanifest:** import misc helper to get site_icon_url
+  ([548a11d](https://code.castopod.org/adaures/castopod/commit/548a11d501749fa61ef894fd8818abae5668554f))
+
+### Features
+
+- **import:** run podcast imports' processes asynchronously using tasks
+  ([d8e1d40](https://code.castopod.org/adaures/castopod/commit/d8e1d4031d86de9a3889b74ae2a6d9c90af8a1da))
+- **rest-api:** add endpoints for episodes and full text search for podcasts and
+  episodes
+  ([85505d4](https://code.castopod.org/adaures/castopod/commit/85505d4b3181c96bc91619e3ab9b0601f8e1c120)),
+  closes [#296](https://code.castopod.org/adaures/castopod/issues/296)
+
 ## [1.3.5](https://code.castopod.org/adaures/castopod/compare/v1.3.4...v1.3.5) (2023-05-09)
 
 ### Bug Fixes
