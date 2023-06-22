@@ -310,10 +310,22 @@ class PodcastImport extends BaseCommand
             $personGroup = $person->getAttribute('group');
             $personRole = $person->getAttribute('role');
 
-            $personGroup = ReversedTaxonomy::$taxonomy[(string) $personGroup];
+            $isTaxonomyFound = false;
+            if (array_key_exists(strtolower((string) $personGroup), ReversedTaxonomy::$taxonomy)) {
+                $personGroup = ReversedTaxonomy::$taxonomy[strtolower((string) $personGroup)];
+                $personGroupSlug = $personGroup['slug'];
 
-            $personGroupSlug = $personGroup['slug'];
-            $personRoleSlug = $personGroup['roles'][(string) $personRole]['slug'];
+                if (array_key_exists(strtolower((string) $personRole), $personGroup['roles'])) {
+                    $personRoleSlug = $personGroup['roles'][strtolower((string) $personRole)]['slug'];
+                    $isTaxonomyFound = true;
+                }
+            }
+
+            if (! $isTaxonomyFound) {
+                // taxonomy was not found, set default group and role
+                $personGroupSlug = 'cast';
+                $personRoleSlug = 'host';
+            }
 
             $podcastPersonModel = new PersonModel();
             if (! $podcastPersonModel->addPodcastPerson(
@@ -512,10 +524,22 @@ class PodcastImport extends BaseCommand
             $personGroup = $person->getAttribute('group');
             $personRole = $person->getAttribute('role');
 
-            $personGroup = ReversedTaxonomy::$taxonomy[(string) $personGroup];
+            $isTaxonomyFound = false;
+            if (array_key_exists(strtolower((string) $personGroup), ReversedTaxonomy::$taxonomy)) {
+                $personGroup = ReversedTaxonomy::$taxonomy[strtolower((string) $personGroup)];
+                $personGroupSlug = $personGroup['slug'];
 
-            $personGroupSlug = $personGroup['slug'];
-            $personRoleSlug = $personGroup['roles'][(string) $personRole]['slug'];
+                if (array_key_exists(strtolower((string) $personRole), $personGroup['roles'])) {
+                    $personRoleSlug = $personGroup['roles'][strtolower((string) $personRole)]['slug'];
+                    $isTaxonomyFound = true;
+                }
+            }
+
+            if (! $isTaxonomyFound) {
+                // taxonomy was not found, set default group and role
+                $personGroupSlug = 'cast';
+                $personRoleSlug = 'host';
+            }
 
             $episodePersonModel = new PersonModel();
             if (! $episodePersonModel->addEpisodePerson(

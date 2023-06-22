@@ -4,7 +4,7 @@
     "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
     "This file is @generated automatically"
   ],
-  "content-hash": "9fa20de985bf6177f95f7ac32155d843",
+  "content-hash": "c63a07ae62c9740982f4270527b6de53",
   "packages": [
     {
       "name": "adaures/ipcat-php",
@@ -43,11 +43,11 @@
     },
     {
       "name": "adaures/podcast-persons-taxonomy",
-      "version": "v1.0.0",
+      "version": "v1.0.1",
       "source": {
         "type": "git",
         "url": "https://code.castopod.org/adaures/podcast-persons-taxonomy",
-        "reference": "117b207e334f54cd1b00ee52b0c53d58cb1a5524"
+        "reference": "d2a6836e32ed013676fd969425e133e0ebb104fc"
       },
       "type": "library",
       "autoload": {
@@ -71,7 +71,7 @@
       ],
       "description": "Generate PHP translation files for CodeIgniter4 from the podcast-namespace's Persons Taxonomy json files.",
       "homepage": "https://code.castopod.org/adaures/podcast-persons-taxonomy",
-      "time": "2022-02-20T14:09:25+00:00"
+      "time": "2023-06-22T14:24:55+00:00"
     },
     {
       "name": "aws/aws-crt-php",
@@ -3135,12 +3135,12 @@
       "source": {
         "type": "git",
         "url": "https://github.com/yassinedoghri/podcast-feed.git",
-        "reference": "c6b25fb19d6d14f93e403e423640df7714067aca"
+        "reference": "366ddcedfb4b89c7093d03b2398184435f930843"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/yassinedoghri/podcast-feed/zipball/c6b25fb19d6d14f93e403e423640df7714067aca",
-        "reference": "c6b25fb19d6d14f93e403e423640df7714067aca",
+        "url": "https://api.github.com/repos/yassinedoghri/podcast-feed/zipball/366ddcedfb4b89c7093d03b2398184435f930843",
+        "reference": "366ddcedfb4b89c7093d03b2398184435f930843",
         "shasum": ""
       },
       "require": {
@@ -3176,7 +3176,7 @@
         "issues": "https://github.com/yassinedoghri/podcast-feed/issues",
         "source": "https://github.com/yassinedoghri/podcast-feed/tree/main"
       },
-      "time": "2023-06-11T16:54:30+00:00"
+      "time": "2023-06-22T13:54:05+00:00"
     }
   ],
   "packages-dev": [

@@ -16,7 +16,7 @@
     "league/html-to-markdown": "^v5.1.0",
     "opawg/user-agents-php": "^v1.0",
     "adaures/ipcat-php": "^v1.0.0",
-    "adaures/podcast-persons-taxonomy": "^v1.0.0",
+    "adaures/podcast-persons-taxonomy": "^v1.0.1",
     "phpseclib/phpseclib": "~2.0.44",
     "michalsn/codeigniter4-uuid": "dev-develop",
     "codeigniter4/settings": "v2.1.2",
