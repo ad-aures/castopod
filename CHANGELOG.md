@@ -1,3 +1,11 @@
+## [1.4.1](https://code.castopod.org/adaures/castopod/compare/v1.4.0...v1.4.1) (2023-06-22)
+
+### Bug Fixes
+
+- **podcast-import:** set default values for person group and role if not found
+  in taxonomy
+  ([aa46dca](https://code.castopod.org/adaures/castopod/commit/aa46dca4e399bf2e544d62dcb4a9a0328e4e6c41))
+
 # [1.4.0](https://code.castopod.org/adaures/castopod/compare/v1.3.5...v1.4.0) (2023-06-21)
 
 ### Bug Fixes
