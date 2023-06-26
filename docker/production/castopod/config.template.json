@@ -18,17 +18,7 @@
     "castopod": {
       "type": "php",
       "root": "/var/www/castopod/public/",
-      "script": "index.php",
-      "options": {
-        "admin": {
-          "file_uploads": "On",
-          "memory_limit": "$CP_PHP_MEMORY_LIMIT",
-          "upload_max_filesize": "$CP_MAX_BODY_SIZE",
-          "post_max_size": "$CP_MAX_BODY_SIZE",
-          "max_execution_time": "$CP_TIMEOUT",
-          "max_input_time": "$CP_TIMEOUT"
-        }
-      }
+      "script": "index.php"
     }
   },
   "access_log": {

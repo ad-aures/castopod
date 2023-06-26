@@ -37,6 +37,7 @@ COPY docker/production/common/prepare_environment.sh /prepare_environment.sh
 COPY docker/production/castopod/entrypoint.sh /entrypoint.sh
 COPY castopod /var/www/castopod
 COPY docker/production/castopod/config.template.json /config.template.json
+COPY docker/production/common/uploads.template.ini /uploads.template.ini
 COPY docker/production/common/crontab.txt /crontab.txt
 COPY docker/production/castopod/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 

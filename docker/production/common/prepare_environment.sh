@@ -287,3 +287,6 @@ cat $ENV_FILE_LOCATION
 
 #Run database migrations after 10 seconds (to wait for the database to be started)
 (sleep 10 && php spark castopod:database-update) &
+
+#Apply php configuration
+cat /uploads.template.ini | envsubst '$CP_MAX_BODY_SIZE$CP_MAX_BODY_SIZE_BYTES$CP_TIMEOUT$CP_PHP_MEMORY_LIMIT' > /usr/local/etc/php/conf.d/uploads.ini

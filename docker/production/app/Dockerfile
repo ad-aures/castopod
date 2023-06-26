@@ -17,7 +17,7 @@ COPY --from=CRON_BUILDER /usr/local/bin/supercronic /usr/local/bin/supercronic
 
 COPY docker/production/common/prepare_environment.sh /prepare_environment.sh
 COPY docker/production/app/entrypoint.sh /entrypoint.sh
-COPY docker/production/app/uploads.template.ini /uploads.template.ini
+COPY docker/production/common/uploads.template.ini /uploads.template.ini
 COPY docker/production/common/crontab.txt /crontab.txt
 COPY docker/production/app/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY castopod /var/www/castopod
