@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 use CodeIgniter\HTTP\Exceptions\HTTPException;
 use CodeIgniter\HTTP\URI;
+use Config\Mimes;
 use Embera\Embera;
 use Modules\Fediverse\Activities\AcceptActivity;
 use Modules\Fediverse\ActivityRequest;
@@ -273,12 +274,26 @@ if (! function_exists('create_actor_from_uri')) {
         $newActor->summary = property_exists($actorPayload, 'summary') ? $actorPayload->summary : null;
         if (property_exists($actorPayload, 'icon')) {
             $newActor->avatar_image_url = $actorPayload->icon->url;
-            $newActor->avatar_image_mimetype = $actorPayload->icon->mediaType;
+
+            if (property_exists($actorPayload->icon, 'mediaType')) {
+                $newActor->avatar_image_mimetype = $actorPayload->icon->mediaType;
+            } else {
+                $iconExtension = pathinfo((string) $actorPayload->icon->url, PATHINFO_EXTENSION);
+
+                $newActor->avatar_image_mimetype = (string) Mimes::guessTypeFromExtension($iconExtension);
+            }
         }
 
         if (property_exists($actorPayload, 'image')) {
             $newActor->cover_image_url = $actorPayload->image->url;
-            $newActor->cover_image_mimetype = $actorPayload->image->mediaType;
+
+            if (property_exists($actorPayload->image, 'mediaType')) {
+                $newActor->cover_image_mimetype = $actorPayload->image->mediaType;
+            } else {
+                $coverExtension = pathinfo((string) $actorPayload->image->url, PATHINFO_EXTENSION);
+
+                $newActor->cover_image_mimetype = (string) Mimes::guessTypeFromExtension($coverExtension);
+            }
         }
 
         $newActor->inbox_url = $actorPayload->inbox;
