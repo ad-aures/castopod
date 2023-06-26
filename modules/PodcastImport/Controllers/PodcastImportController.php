@@ -145,11 +145,17 @@ class PodcastImportController extends BaseController
         $importTask = $importQueue[$taskId];
         switch ($action) {
             case 'cancel':
-                $importTask->cancel();
+                if ($importTask->status === TaskStatus::Running || $importTask->status === TaskStatus::Queued) {
+                    $importTask->cancel();
+
+                    return redirect()->back()
+                        ->with('message', lang('PodcastImport.messages.canceled'));
+                }
+
                 return redirect()->back()
-                    ->with('message', lang('PodcastImport.messages.canceled'));
+                    ->with('error', lang('PodcastImport.messages.notRunning'));
             case 'retry':
-                if ($importTask->status === TaskStatus::Running) {
+                if ($importTask->status === TaskStatus::Running || $importTask->status === TaskStatus::Queued) {
                     return redirect()->back()
                         ->with('error', lang('PodcastImport.messages.alreadyRunning'));
                 }

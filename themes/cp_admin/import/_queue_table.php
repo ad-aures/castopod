@@ -98,31 +98,37 @@ use Modules\PodcastImport\Entities\TaskStatus;
         [
             'header' => lang('Common.list.actions'),
             'cell'   => function (PodcastImportTask $importTask) {
+                $menuItems = [
+                    [
+                        'type' => 'separator',
+                    ],
+                    [
+                        'type'  => 'link',
+                        'title' => lang('PodcastImport.queue.actions.delete'),
+                        'uri'   => route_to('podcast-imports-task-action', $importTask->id, 'delete'),
+                        'class' => 'font-semibold text-red-600',
+                    ],
+                ];
+
+                if ($importTask->status === TaskStatus::Running || $importTask->status === TaskStatus::Queued) {
+                    array_unshift($menuItems, [
+                        'type'  => 'link',
+                        'title' => lang('PodcastImport.queue.actions.cancel'),
+                        'uri'   => route_to('podcast-imports-task-action', $importTask->id, 'cancel'),
+                    ]);
+                } else {
+                    array_unshift($menuItems, [
+                        'type'  => 'link',
+                        'title' => lang('PodcastImport.queue.actions.retry'),
+                        'uri'   => route_to('podcast-imports-task-action', $importTask->id, 'retry'),
+                    ], );
+                }
+
                 return '<div class="inline-flex items-center gap-x-2">' .
                 '<button id="more-dropdown-' . $importTask->id . '" type="button" class="inline-flex items-center p-1 rounded-full focus:ring-accent" data-dropdown="button" data-dropdown-target="more-dropdown-' . $importTask->id . '-menu" aria-haspopup="true" aria-expanded="false">' .
                         icon('more') .
                         '</button>' .
-                        '<DropdownMenu id="more-dropdown-' . $importTask->id . '-menu" labelledby="more-dropdown-' . $importTask->id . '" offsetY="-24" items="' . esc(json_encode([
-                            [
-                                'type'  => 'link',
-                                'title' => lang('PodcastImport.queue.actions.cancel'),
-                                'uri'   => route_to('podcast-imports-task-action', $importTask->id, 'cancel'),
-                            ],
-                            [
-                                'type'  => 'link',
-                                'title' => lang('PodcastImport.queue.actions.retry'),
-                                'uri'   => route_to('podcast-imports-task-action', $importTask->id, 'retry'),
-                            ],
-                            [
-                                'type' => 'separator',
-                            ],
-                            [
-                                'type'  => 'link',
-                                'title' => lang('PodcastImport.queue.actions.delete'),
-                                'uri'   => route_to('podcast-imports-task-action', $importTask->id, 'delete'),
-                                'class' => 'font-semibold text-red-600',
-                            ],
-                        ])) . '" />' .
+                        '<DropdownMenu id="more-dropdown-' . $importTask->id . '-menu" labelledby="more-dropdown-' . $importTask->id . '" offsetY="-24" items="' . esc(json_encode($menuItems)) . '" />' .
                     '</div>';
             },
         ],
