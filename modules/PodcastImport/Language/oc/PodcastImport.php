@@ -50,6 +50,7 @@ return [
     ],
     'messages' => [
         'canceled' => 'Import task has been successfully canceled!',
+        'notRunning' => 'Cannot cancel Import Task as it is not running.',
         'alreadyRunning' => 'Import Task is already running. You may cancel it before retrying.',
         'retried' => 'Import task has been queued, it will be retried shortly!',
         'deleted' => 'Import task has been successfully deleted!',
