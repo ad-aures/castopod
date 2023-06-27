@@ -1,3 +1,14 @@
+## [1.4.2](https://code.castopod.org/adaures/castopod/compare/v1.4.1...v1.4.2) (2023-06-27)
+
+### Bug Fixes
+
+- **fediverse:** check that actor's images mimetype is present or guess it
+  otherwise
+  ([06c4f15](https://code.castopod.org/adaures/castopod/commit/06c4f15477a568407a3d3c1e5e489bc0241bc1e9)),
+  closes [#348](https://code.castopod.org/adaures/castopod/issues/348)
+- **podcast-import:** show cancel or retry action depending on task status
+  ([e42258d](https://code.castopod.org/adaures/castopod/commit/e42258de1f331aac0cbb380b80cd8fc7f9d7dc18))
+
 ## [1.4.1](https://code.castopod.org/adaures/castopod/compare/v1.4.0...v1.4.1) (2023-06-22)
 
 ### Bug Fixes
