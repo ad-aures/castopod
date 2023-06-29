@@ -244,6 +244,9 @@ Thanks goes to these wonderful people
       <td align="center" valign="top" width="14.28%"><a href="https://crowdin.com/profile/liimee"><img src="https://castopod.org/assets/images/castopod-avatar.jpg?s=100" width="100px;" alt="liimee"/><br /><sub><b>liimee</b></sub></a><br /><a href="https://translate.castopod.org" title="Translation">🌍</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/ahmedsabouni"><img src="https://avatars.githubusercontent.com/u/74497842?v=4?s=100" width="100px;" alt="Ahmed Sabouni"/><br /><sub><b>Ahmed Sabouni</b></sub></a><br /><a href="https://translate.castopod.org" title="Translation">🌍</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/KrzysztofDomanczyk"><img src="https://avatars.githubusercontent.com/u/75178474?v=4?s=100" width="100px;" alt="KrzysztofDomanczyk"/><br /><sub><b>KrzysztofDomanczyk</b></sub></a><br /><a href="https://code.castopod.org/adaures/castopod/commits/master" title="Code">💻</a></td>
+    </tr>
   </tbody>
 </table>
 
