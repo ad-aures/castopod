@@ -603,6 +603,15 @@
           "url": "https://translate.castopod.org"
         }
       ]
+    },
+    {
+      "login": "KrzysztofDomanczyk",
+      "name": "KrzysztofDomanczyk",
+      "avatar_url": "https://avatars.githubusercontent.com/u/75178474?v=4",
+      "profile": "https://github.com/KrzysztofDomanczyk",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
