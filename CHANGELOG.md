@@ -1,3 +1,12 @@
+## [1.4.3](https://code.castopod.org/adaures/castopod/compare/v1.4.2...v1.4.3) (2023-06-29)
+
+### Bug Fixes
+
+- **video-clipper:** add -t option to ffmpeg command to stop generation after
+  duration
+  ([60814b8](https://code.castopod.org/adaures/castopod/commit/60814b8d202419c2bdbf6abb7c2bde447537b7e9)),
+  closes [#341](https://code.castopod.org/adaures/castopod/issues/341)
+
 ## [1.4.2](https://code.castopod.org/adaures/castopod/compare/v1.4.1...v1.4.2) (2023-06-27)
 
 ### Bug Fixes
