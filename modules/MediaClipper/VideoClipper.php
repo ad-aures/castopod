@@ -260,6 +260,7 @@ class VideoClipper
             "-f lavfi -i color=white:{$this->dimensions['width']}x{$this->dimensions['height']}",
             "-loop 1 -framerate 1 -i {$watermark}",
             '-filter_complex "' . implode(';', $filters) . '"',
+            '-t ' . $this->duration,
             '-map "[outfinal]"',
             '-map 0:a',
             '-acodec aac',
