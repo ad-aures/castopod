@@ -1,23 +1,24 @@
 import "@github/clipboard-copy-element";
+import ClipboardCopyElement from "@github/clipboard-copy-element";
 import { css, html, LitElement, TemplateResult } from "lit";
 import {
   customElement,
   property,
   query,
-  queryAssignedNodes,
+  queryAssignedElements,
   state,
 } from "lit/decorators.js";
 
 @customElement("permalink-edit")
 export class PermalinkEdit extends LitElement {
-  @queryAssignedNodes("domain", true)
+  @queryAssignedElements({ slot: "domain", flatten: true })
   _domain!: NodeListOf<HTMLSpanElement>;
 
-  @queryAssignedNodes("slug-input", true)
+  @queryAssignedElements({ slot: "slug-input", flatten: true })
   _slugInput!: NodeListOf<HTMLInputElement>;
 
   @query("clipboard-copy")
-  _clipboardCopy!: any;
+  _clipboardCopy!: ClipboardCopyElement;
 
   @property({ attribute: "edit-label" })
   editLabel = "Edit";

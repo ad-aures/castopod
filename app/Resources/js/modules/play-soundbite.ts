@@ -44,11 +44,6 @@ export class PlaySoundbite extends LitElement {
       name: "timeupdate",
       onEvent: () => {
         if (this._audio) {
-          console.log(
-            this._audio.currentTime,
-            this.startTime,
-            this.startTime + this.duration
-          );
           if (this._audio.currentTime < this.startTime) {
             this._isLoading = true;
             this._audio.currentTime = this.startTime;

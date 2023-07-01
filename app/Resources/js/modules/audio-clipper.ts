@@ -4,7 +4,7 @@ import {
   property,
   query,
   queryAll,
-  queryAssignedNodes,
+  queryAssignedElements,
   state,
 } from "lit/decorators.js";
 import WaveSurfer from "wavesurfer.js";
@@ -27,14 +27,14 @@ interface EventElement {
 
 @customElement("audio-clipper")
 export class AudioClipper extends LitElement {
-  @queryAssignedNodes("audio", true)
-  _audio!: NodeListOf<HTMLAudioElement>;
+  @queryAssignedElements({ slot: "audio", flatten: true })
+  _audio!: Array<HTMLAudioElement>;
 
-  @queryAssignedNodes("start_time", true)
-  _startTimeInput!: NodeListOf<HTMLInputElement>;
+  @queryAssignedElements({ slot: "start_time", flatten: true })
+  _startTimeInput!: Array<HTMLInputElement>;
 
-  @queryAssignedNodes("duration", true)
-  _durationInput!: NodeListOf<HTMLInputElement>;
+  @queryAssignedElements({ slot: "duration", flatten: true })
+  _durationInput!: Array<HTMLInputElement>;
 
   @query(".slider")
   _sliderNode!: HTMLDivElement;
@@ -45,8 +45,11 @@ export class AudioClipper extends LitElement {
   @query(".slider__segment-content")
   _segmentContentNode!: HTMLDivElement;
 
-  @query(".slider__segment-progress-handle")
+  @query(".slider__segment-progress-handle--main")
   _progressNode!: HTMLDivElement;
+
+  @query(".slider__segment-progress-handle--ghost")
+  _progressGhostNode!: HTMLDivElement;
 
   @query(".slider__seeking-placeholder")
   _seekingNode!: HTMLDivElement;
@@ -59,6 +62,9 @@ export class AudioClipper extends LitElement {
 
   @queryAll(".slider__segment-handle")
   _segmentHandleNodes!: NodeListOf<HTMLButtonElement>;
+
+  @property({ type: Number, attribute: "audio-duration" })
+  audioDuration = 0;
 
   @property({ type: Number, attribute: "start-time" })
   initStartTime = 0;
@@ -82,6 +88,9 @@ export class AudioClipper extends LitElement {
   trimEndLabel = "Trim end";
 
   @state()
+  _canInteract = false;
+
+  @state()
   _isPlaying = false;
 
   @state()
@@ -92,9 +101,6 @@ export class AudioClipper extends LitElement {
 
   @state()
   _action: Action | null = null;
-
-  @state()
-  _audioDuration = 0;
 
   @state()
   _sliderWidth = 0;
@@ -116,7 +122,15 @@ export class AudioClipper extends LitElement {
 
   _windowEvents: EventElement[] = [
     {
-      events: ["load", "resize"],
+      events: ["load"],
+      onEvent: () => {
+        this._canInteract = true;
+        this._sliderWidth = this._sliderNode.clientWidth;
+        this.setSegmentPosition();
+      },
+    },
+    {
+      events: ["resize"],
       onEvent: () => {
         this._sliderWidth = this._sliderNode.clientWidth;
         this.setSegmentPosition();
@@ -130,9 +144,12 @@ export class AudioClipper extends LitElement {
       onEvent: () => {
         if (this._action !== null) {
           document.body.style.cursor = "";
-          if (this._action.type === ActionType.Seek && this._seekingTime) {
+          if (
+            this._action.type === ActionType.Seek &&
+            this._seekingTime !== null
+          ) {
             this._audio[0].currentTime = this._seekingTime;
-            this._seekingTime = 0;
+            this._seekingTime = null;
           }
           this._action = null;
         }
@@ -141,14 +158,24 @@ export class AudioClipper extends LitElement {
     {
       events: ["mousemove"],
       onEvent: (event: Event) => {
-        if (this._action !== null) {
-          this.updatePosition(event as MouseEvent);
-        }
+        this.updatePosition(event as MouseEvent);
       },
     },
   ];
 
   _audioEvents: EventElement[] = [
+    {
+      events: ["loadedmetadata"],
+      onEvent: () => {
+        this.audioDuration = this._audio[0].duration;
+      },
+    },
+    {
+      events: ["waiting"],
+      onEvent: () => {
+        this._isBuffering = true;
+      },
+    },
     {
       events: ["play"],
       onEvent: () => {
@@ -176,7 +203,7 @@ export class AudioClipper extends LitElement {
           );
           context.fillStyle = "#04AC64";
 
-          const inc = this._bufferingBarNode.width / this._audio[0].duration;
+          const inc = this._bufferingBarNode.width / this.audioDuration;
 
           for (let i = 0; i < this._audio[0].buffered.length; i++) {
             const startX = this._audio[0].buffered.start(i) * inc;
@@ -192,13 +219,11 @@ export class AudioClipper extends LitElement {
     {
       events: ["timeupdate"],
       onEvent: () => {
-        // TODO: change this?
-        this._currentTime = parseFloat(this._audio[0].currentTime.toFixed(3));
+        this._currentTime = this._audio[0].currentTime;
         if (this._currentTime > this._clip.endTime) {
           this.pause();
           this._audio[0].currentTime = this._clip.endTime;
         } else if (this._currentTime < this._clip.startTime) {
-          this._isBuffering = true;
           this._audio[0].currentTime = this._clip.startTime;
         } else {
           this._isBuffering = false;
@@ -233,6 +258,21 @@ export class AudioClipper extends LitElement {
     },
   ];
 
+  _sliderSegmentEvents: EventElement[] = [
+    {
+      events: ["hover"],
+      onEvent: (event: Event) => {
+        const ghostHandle = (event.target as HTMLDivElement).querySelector(
+          ".segment"
+        ) as HTMLDivElement;
+        if (ghostHandle) {
+          ghostHandle.style.opacity = "1";
+          ghostHandle.style.transform = "translateX(50)";
+        }
+      },
+    },
+  ];
+
   connectedCallback(): void {
     super.connectedCallback();
 
@@ -244,7 +284,9 @@ export class AudioClipper extends LitElement {
   }
 
   protected firstUpdated(): void {
-    this._audioDuration = this._audio[0].duration;
+    this._sliderWidth = this._sliderNode.clientWidth;
+    this.setSegmentPosition();
+
     this._audio[0].volume = this._volume;
     this._startTimeInput[0].hidden = true;
     this._durationInput[0].hidden = true;
@@ -255,7 +297,6 @@ export class AudioClipper extends LitElement {
       interact: false,
       barWidth: 2,
       barHeight: 1,
-      // barGap: 4,
       responsive: true,
       waveColor: "hsl(0 5% 85%)",
       cursorColor: "transparent",
@@ -338,11 +379,11 @@ export class AudioClipper extends LitElement {
   }
 
   private getPositionFromSeconds(seconds: number) {
-    return (seconds * this._sliderWidth) / this._audioDuration;
+    return (seconds * this._sliderWidth) / this.audioDuration;
   }
 
   private getSecondsFromPosition(position: number) {
-    return (this._audioDuration * position) / this._sliderWidth;
+    return (this.audioDuration * position) / this._sliderWidth;
   }
 
   protected updated(
@@ -405,14 +446,14 @@ export class AudioClipper extends LitElement {
       }
       case ActionType.StretchRight: {
         let endTime;
-        if (seconds < this._audioDuration) {
+        if (seconds < this.audioDuration) {
           if (seconds < this._clip.startTime + this.minDuration) {
             endTime = this._clip.startTime + this.minDuration;
           } else {
             endTime = seconds;
           }
         } else {
-          endTime = this._audioDuration;
+          endTime = this.audioDuration;
         }
 
         this._clip = {
@@ -459,6 +500,7 @@ export class AudioClipper extends LitElement {
     const seekingTimePercentage =
       (seekingTimeSegmentPosition / this._segmentContentNode.clientWidth) *
       this._segmentContentNode.clientWidth;
+
     this._progressNode.style.transform = `translateX(${seekingTimeSegmentPosition}px)`;
     this._seekingNode.style.transform = `scaleX(${seekingTimePercentage})`;
   }
@@ -584,6 +626,10 @@ export class AudioClipper extends LitElement {
       border-top-style: solid;
       border-top-width: 10px;
       border-top: 10px solid #3b82f6;
+    }
+
+    .slider__segment-progress-handle--ghost {
+      opacity: 0.5;
     }
 
     .slider__segment .slider__segment-handle {
@@ -742,14 +788,19 @@ export class AudioClipper extends LitElement {
       <slot name="audio"></slot>
       <slot name="start_time"></slot>
       <slot name="duration"></slot>
-      <div class="slider-wrapper" style="height:${this.height}">
+      <div class="slider-wrapper" style="height:${this.height}px">
         <div id="waveform"></div>
         <div class="slider" role="slider">
           <div class="slider__segment--wrapper">
             <div
-              class="slider__segment-progress-handle"
-              @mousedown="${(event: MouseEvent) =>
-                this.setAction(event, { type: ActionType.Seek })}"
+              class="slider__segment-progress-handle slider__segment-progress-handle--main"
+              @mousedown="${(event: MouseEvent) => {
+                this.setAction(event, { type: ActionType.Seek });
+              }}"
+            ></div>
+            <div
+              class="slider__segment-progress-handle slider__segment-progress-handle--ghost"
+              ?hidden=${true}
             ></div>
             <div class="slider__segment">
               <button
@@ -764,6 +815,16 @@ export class AudioClipper extends LitElement {
               <div class="slider__seeking-placeholder"></div>
               <div
                 class="slider__segment-content"
+                @mousemove="${(event: MouseEvent) => {
+                  const seekingTimeSegmentPosition =
+                    event.clientX -
+                    (event.target as HTMLDivElement).getBoundingClientRect()
+                      .left;
+
+                  this._progressGhostNode.hidden = false;
+                  this._progressGhostNode.style.transform = `translateX(${seekingTimeSegmentPosition}px)`;
+                }}"
+                @mouseleave="${() => (this._progressGhostNode.hidden = true)}"
                 @mousedown="${(event: MouseEvent) =>
                   this.setAction(event, { type: ActionType.Seek })}"
                 @click="${(event: MouseEvent) => this.goTo(event)}"
@@ -786,7 +847,7 @@ export class AudioClipper extends LitElement {
             class="toolbar__play-button"
             @click="${this._isPlaying ? this.pause : this.play}"
           >
-            ${this._isBuffering
+            ${this._isBuffering || !this._canInteract
               ? html`<svg
                   class="animate-spin"
                   xmlns="http://www.w3.org/2000/svg"

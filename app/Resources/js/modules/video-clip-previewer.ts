@@ -2,8 +2,7 @@ import { css, html, LitElement, TemplateResult } from "lit";
 import {
   customElement,
   property,
-  queryAssignedNodes,
-  state,
+  queryAssignedElements,
 } from "lit/decorators.js";
 import { styleMap } from "lit/directives/style-map.js";
 
@@ -21,7 +20,7 @@ const formatMap = {
 
 @customElement("video-clip-previewer")
 export class VideoClipPreviewer extends LitElement {
-  @queryAssignedNodes("preview_image", true)
+  @queryAssignedElements({ slot: "preview_image", flatten: true })
   _image!: NodeListOf<HTMLImageElement>;
 
   @property()
@@ -36,7 +35,7 @@ export class VideoClipPreviewer extends LitElement {
   @property({ type: Number })
   duration!: number;
 
-  @state()
+  @property({ attribute: false })
   _previewImage!: HTMLImageElement;
 
   protected firstUpdated(): void {

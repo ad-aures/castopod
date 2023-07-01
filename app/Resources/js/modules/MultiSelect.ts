@@ -9,6 +9,7 @@ const MultiSelect = (): void => {
     const multiSelect = multiSelects[i];
 
     new Choices(multiSelect, {
+      allowHTML: false,
       maxItemCount: parseInt(multiSelect.dataset.maxItemCount || "-1"),
       loadingText: multiSelect.dataset.loadingText,
       itemSelectText: multiSelect.dataset.selectText,

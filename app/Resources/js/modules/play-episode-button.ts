@@ -27,14 +27,14 @@ export class PlayEpisodeButton extends LitElement {
   @property()
   playingLabel!: string;
 
-  @property()
-  isPlaying!: boolean;
-
-  @property()
+  @property({ attribute: false })
   _castopodAudioPlayer!: HTMLDivElement;
 
-  @property()
+  @property({ attribute: false })
   _audio!: HTMLAudioElement;
+
+  @state()
+  isPlaying!: boolean;
 
   @state()
   _playbackSpeed = 1;

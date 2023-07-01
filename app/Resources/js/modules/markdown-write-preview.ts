@@ -1,5 +1,9 @@
 import { css, html, LitElement, TemplateResult } from "lit";
-import { customElement, property, queryAssignedNodes } from "lit/decorators.js";
+import {
+  customElement,
+  property,
+  queryAssignedElements,
+} from "lit/decorators.js";
 import { MarkdownPreview } from "./markdown-preview";
 
 @customElement("markdown-write-preview")
@@ -7,17 +11,17 @@ export class MarkdownWritePreview extends LitElement {
   @property()
   for!: string;
 
-  @property()
+  @property({ attribute: false })
   _textarea: HTMLTextAreaElement | null = null;
 
-  @property()
+  @property({ attribute: false })
   _markdownPreview!: MarkdownPreview;
 
-  @queryAssignedNodes("write", true)
-  _write!: NodeListOf<HTMLButtonElement>;
+  @queryAssignedElements({ slot: "write", flatten: true })
+  _write!: Array<HTMLButtonElement>;
 
-  @queryAssignedNodes("preview", true)
-  _preview!: NodeListOf<HTMLButtonElement>;
+  @queryAssignedElements({ slot: "preview", flatten: true })
+  _preview!: Array<HTMLButtonElement>;
 
   connectedCallback(): void {
     super.connectedCallback();

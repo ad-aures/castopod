@@ -9,10 +9,10 @@ export class MarkdownPreview extends LitElement {
   @property()
   for!: string;
 
-  @state()
+  @property({ attribute: false })
   _textarea!: HTMLTextAreaElement;
 
-  @state()
+  @property({ attribute: false })
   _markdownToolbar!: MarkdownToolbarElement;
 
   @state()
@@ -49,6 +49,8 @@ export class MarkdownPreview extends LitElement {
 
     return marked(this.escapeHtml(this._textarea.value), {
       renderer: renderer,
+      headerIds: false,
+      mangle: false,
     });
   }
 

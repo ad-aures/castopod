@@ -10,6 +10,7 @@ const Select = (): void => {
     const select = selects[i];
 
     new Choices(select, {
+      allowHTML: false,
       loadingText: select.dataset.loadingText,
       itemSelectText: select.dataset.selectText,
       maxItemText: select.dataset.maxItemText,
