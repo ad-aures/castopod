@@ -136,10 +136,17 @@ class Image extends BaseMedia
 
         foreach ($this->sizes as $name => $size) {
             $tempFilePath = tempnam(WRITEPATH . 'temp', 'img_');
-            $imageService
+            $resizedImage = $imageService
                 ->withFile($this->attributes['file']->getRealPath())
-                ->resize($size['width'], $size['height'])
-                ->save($tempFilePath);
+                ->resize($size['width'], $size['height']);
+
+            $resizedImageResource = $resizedImage->getResource();
+
+            // set resolution to 72 by 72 for all sizes
+            // Apple Podcasts requires images to be 72 dpi
+            imageresolution($resizedImageResource, 72, 72);
+
+            $resizedImage->save($tempFilePath);
 
             $newImage = new File($tempFilePath, true);
 
