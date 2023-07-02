@@ -1,3 +1,15 @@
+## [1.4.4](https://code.castopod.org/adaures/castopod/compare/v1.4.3...v1.4.4) (2023-07-02)
+
+### Bug Fixes
+
+- **audio-clipper:** init segment position on firstUpdate + improve UX by adding
+  ghost handle
+  ([aa68386](https://code.castopod.org/adaures/castopod/commit/aa683866671d14c0b9a11b09c74eb132673e5547)),
+  closes [#351](https://code.castopod.org/adaures/castopod/issues/351)
+- set resized images to 72dpi for compatibility with Apple Podcasts
+  ([0b327cb](https://code.castopod.org/adaures/castopod/commit/0b327cb4d9c92d0ae227a0f08ede3b29390df172)),
+  closes [#282](https://code.castopod.org/adaures/castopod/issues/282)
+
 ## [1.4.3](https://code.castopod.org/adaures/castopod/compare/v1.4.2...v1.4.3) (2023-06-29)
 
 ### Bug Fixes
