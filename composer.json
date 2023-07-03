@@ -22,19 +22,19 @@
     "codeigniter4/settings": "v2.1.2",
     "chrisjean/php-ico": "^1.0.4",
     "melbahja/seo": "^v2.1.1",
-    "codeigniter4/shield": "v1.0.0-beta.3",
-    "aws/aws-sdk-php": "^3.273.2",
-    "mpratt/embera": "^2.0.33",
+    "codeigniter4/shield": "v1.0.0-beta.6",
+    "aws/aws-sdk-php": "^3.275.1",
+    "mpratt/embera": "^2.0.34",
     "codeigniter4/tasks": "dev-develop",
     "yassinedoghri/podcast-feed": "dev-main"
   },
   "require-dev": {
     "mikey179/vfsstream": "^v1.6.11",
-    "phpunit/phpunit": "^10.2.2",
+    "phpunit/phpunit": "^10.2.3",
     "captainhook/captainhook": "^5.16.4",
-    "symplify/easy-coding-standard": "^11.4.3",
-    "phpstan/phpstan": "^1.10.19",
-    "rector/rector": "^0.17.1",
+    "symplify/easy-coding-standard": "^11.5.0",
+    "phpstan/phpstan": "^1.10.22",
+    "rector/rector": "^0.17.2",
     "symplify/coding-standard": "^11.4.1"
   },
   "autoload": {

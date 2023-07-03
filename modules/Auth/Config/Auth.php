@@ -142,8 +142,23 @@ class Auth extends ShieldAuth
      */
     public function loginRedirect(): string
     {
-        $url = session('magicLogin') ? route_to('magic-link-set-password') : setting('Auth.redirects')['login'];
+        if (! session('magicLogin')) {
+            return $this->getUrl(setting('Auth.redirects')['login']);
+        }
 
-        return $this->getUrl($url);
+        // activate user upon magic-link login as it is done via email
+        if (! auth()->user()->active) {
+            /** @var Session $authenticator */
+            $authenticator = auth('session')
+                ->getAuthenticator();
+
+            $user = $authenticator->getUser();
+
+            // Set the user active now
+            $user->activate();
+        }
+
+        // prompt user to change their password
+        return $this->getUrl(route_to('magic-link-set-password'));
     }
 }

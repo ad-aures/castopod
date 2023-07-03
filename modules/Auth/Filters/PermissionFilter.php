@@ -6,41 +6,26 @@ namespace Modules\Auth\Filters;
 
 use App\Entities\Podcast;
 use App\Models\PodcastModel;
-use CodeIgniter\Filters\FilterInterface;
-use CodeIgniter\HTTP\RequestInterface;
-use CodeIgniter\HTTP\ResponseInterface;
-use CodeIgniter\Shield\Exceptions\RuntimeException;
+use CodeIgniter\Shield\Filters\AbstractAuthFilter;
 use Config\Services;
 
-class PermissionFilter implements FilterInterface
+/**
+ * Permission Authorization Filter.
+ */
+class PermissionFilter extends AbstractAuthFilter
 {
     /**
-     * Do whatever processing this filter needs to do. By default it should not return anything during normal execution.
-     * However, when an abnormal state is found, it should return an instance of CodeIgniter\HTTP\Response. If it does,
-     * script execution will end and that Response will be sent back to the client, allowing for error pages, redirects,
-     * etc.
+     * Ensures the user is logged in and has one or more
+     * of the permissions as specified in the filter.
      *
-     * @param string[]|null                         $params
-     * @return void|mixed
+     * @param string[] $arguments
      */
-    public function before(RequestInterface $request, $params = null)
+    protected function isAuthorized(array $arguments): bool
     {
-        if ($params === null || $params === []) {
-            return;
-        }
-
-        if (! function_exists('auth')) {
-            helper('auth');
-        }
-
-        if (! auth()->loggedIn()) {
-            return redirect()->to('login');
-        }
-
         $result = true;
 
-        foreach ($params as $permission) {
-            // does permission is specific to a podcast?
+        foreach ($arguments as $permission) {
+            // is permission specific to a podcast?
             if (str_contains($permission, '#')) {
                 $router = Services::router();
                 $routerParams = $router->params();
@@ -66,22 +51,6 @@ class PermissionFilter implements FilterInterface
                 ->can($permission);
         }
 
-        if (! $result) {
-            throw new RuntimeException(lang('Auth.notEnoughPrivilege'), 403);
-        }
+        return $result;
     }
-
-    //--------------------------------------------------------------------
-
-    /**
-     * Allows After filters to inspect and modify the response object as needed. This method does not allow any way to
-     * stop execution of other after filters, short of throwing an Exception or Error.
-     *
-     * @param string[]|null                          $arguments
-     */
-    public function after(RequestInterface $request, ResponseInterface $response, $arguments = null): void
-    {
-    }
-
-    //--------------------------------------------------------------------
 }
