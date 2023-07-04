@@ -1,3 +1,10 @@
+## [1.4.5](https://code.castopod.org/adaures/castopod/compare/v1.4.4...v1.4.5) (2023-07-04)
+
+### Bug Fixes
+
+- **s3:** handle range requests to serve media files
+  ([41a5932](https://code.castopod.org/adaures/castopod/commit/41a59322332c835808a32987aaf8ec6cafbf5fca))
+
 ## [1.4.4](https://code.castopod.org/adaures/castopod/compare/v1.4.3...v1.4.4) (2023-07-02)
 
 ### Bug Fixes
