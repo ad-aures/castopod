@@ -124,7 +124,7 @@ class Cache extends BaseConfig
      *
      * @see https://codeigniter.com/user_guide/libraries/caching.html#memcached
      *
-     * @var array<string, string|int|boolean>
+     * @var array<string, string|int|bool>
      */
     public array $memcached = [
         'host'   => '127.0.0.1',

@@ -4,7 +4,7 @@
     "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
     "This file is @generated automatically"
   ],
-  "content-hash": "942a9d1dc5e734592657b1a3f651007e",
+  "content-hash": "658d8ad2579bb70845c1150757868314",
   "packages": [
     {
       "name": "adaures/ipcat-php",
@@ -120,16 +120,16 @@
     },
     {
       "name": "aws/aws-sdk-php",
-      "version": "3.275.1",
+      "version": "3.275.2",
       "source": {
         "type": "git",
         "url": "https://github.com/aws/aws-sdk-php.git",
-        "reference": "6cf6aacecda1dec52bf4a70d8e1503b5bc56e924"
+        "reference": "4506d631caf6097fd73009d57707e61b95efe92c"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/6cf6aacecda1dec52bf4a70d8e1503b5bc56e924",
-        "reference": "6cf6aacecda1dec52bf4a70d8e1503b5bc56e924",
+        "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/4506d631caf6097fd73009d57707e61b95efe92c",
+        "reference": "4506d631caf6097fd73009d57707e61b95efe92c",
         "shasum": ""
       },
       "require": {
@@ -205,9 +205,9 @@
       "support": {
         "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
         "issues": "https://github.com/aws/aws-sdk-php/issues",
-        "source": "https://github.com/aws/aws-sdk-php/tree/3.275.1"
+        "source": "https://github.com/aws/aws-sdk-php/tree/3.275.2"
       },
-      "time": "2023-06-30T18:23:40+00:00"
+      "time": "2023-07-03T18:27:31+00:00"
     },
     {
       "name": "brick/math",
@@ -304,20 +304,19 @@
     },
     {
       "name": "codeigniter4/framework",
-      "version": "v4.2.7",
+      "version": "v4.2.12",
       "source": {
         "type": "git",
         "url": "https://github.com/codeigniter4/framework.git",
-        "reference": "011ce3bbda6f85930075a9b8fecbee01c4b23ab9"
+        "reference": "bc3f312a3ebaf53394fa099b090b7a52a29375c2"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/codeigniter4/framework/zipball/011ce3bbda6f85930075a9b8fecbee01c4b23ab9",
-        "reference": "011ce3bbda6f85930075a9b8fecbee01c4b23ab9",
+        "url": "https://api.github.com/repos/codeigniter4/framework/zipball/bc3f312a3ebaf53394fa099b090b7a52a29375c2",
+        "reference": "bc3f312a3ebaf53394fa099b090b7a52a29375c2",
         "shasum": ""
       },
       "require": {
-        "ext-curl": "*",
         "ext-intl": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
@@ -329,15 +328,20 @@
       "require-dev": {
         "codeigniter/coding-standard": "^1.5",
         "fakerphp/faker": "^1.9",
-        "friendsofphp/php-cs-fixer": "~3.11.0",
+        "friendsofphp/php-cs-fixer": "3.13.0",
         "mikey179/vfsstream": "^1.6",
         "nexusphp/cs-config": "^3.6",
         "phpunit/phpunit": "^9.1",
         "predis/predis": "^1.1 || ^2.0"
       },
       "suggest": {
+        "ext-curl": "If you use CURLRequest class",
+        "ext-dom": "If you use TestResponse",
+        "ext-exif": "If you run Image class tests",
         "ext-fileinfo": "Improves mime type detection for files",
+        "ext-gd": "If you use Image class GDHandler",
         "ext-imagick": "If you use Image class ImageMagickHandler",
+        "ext-libxml": "If you use TestResponse",
         "ext-memcache": "If you use Cache class MemcachedHandler with Memcache",
         "ext-memcached": "If you use Cache class MemcachedHandler with Memcached",
         "ext-mysqli": "If you use MySQL",
@@ -347,7 +351,8 @@
         "ext-redis": "If you use Cache class RedisHandler",
         "ext-simplexml": "If you format XML",
         "ext-sqlite3": "If you use SQLite3",
-        "ext-sqlsrv": "If you use SQL Server"
+        "ext-sqlsrv": "If you use SQL Server",
+        "ext-xdebug": "If you use CIUnitTestCase::assertHeaderEmitted()"
       },
       "type": "project",
       "autoload": {
@@ -361,11 +366,11 @@
       "description": "The CodeIgniter framework v4",
       "homepage": "https://codeigniter.com",
       "support": {
-        "forum": "http://forum.codeigniter.com/",
+        "forum": "https://forum.codeigniter.com/",
         "slack": "https://codeigniterchat.slack.com",
         "source": "https://github.com/codeigniter4/CodeIgniter4"
       },
-      "time": "2022-10-06T13:46:23+00:00"
+      "time": "2023-01-09T06:53:50+00:00"
     },
     {
       "name": "codeigniter4/settings",
@@ -3947,16 +3952,16 @@
     },
     {
       "name": "phpstan/phpstan",
-      "version": "1.10.22",
+      "version": "1.10.23",
       "source": {
         "type": "git",
         "url": "https://github.com/phpstan/phpstan.git",
-        "reference": "97d694dfd4ceb57bcce4e3b38548f13ea62e4287"
+        "reference": "65ab678d1248a8bc6fde456f0d7ff3562a61a4cd"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/phpstan/phpstan/zipball/97d694dfd4ceb57bcce4e3b38548f13ea62e4287",
-        "reference": "97d694dfd4ceb57bcce4e3b38548f13ea62e4287",
+        "url": "https://api.github.com/repos/phpstan/phpstan/zipball/65ab678d1248a8bc6fde456f0d7ff3562a61a4cd",
+        "reference": "65ab678d1248a8bc6fde456f0d7ff3562a61a4cd",
         "shasum": ""
       },
       "require": {
@@ -3995,7 +4000,7 @@
           "type": "tidelift"
         }
       ],
-      "time": "2023-06-30T20:04:11+00:00"
+      "time": "2023-07-04T13:32:44+00:00"
     },
     {
       "name": "phpunit/php-code-coverage",
