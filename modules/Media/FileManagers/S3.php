@@ -8,8 +8,8 @@ use Aws\Credentials\Credentials;
 use Aws\S3\S3Client;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\Files\File;
+use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\Response;
-use DateTime;
 use Exception;
 use Modules\Media\Config\Media as MediaConfig;
 
@@ -187,52 +187,38 @@ class S3 implements FileManagerInterface
 
     public function serve(string $key): Response
     {
-        $cacheName = 'object_presigned_uri_' . str_replace('/', '-', $key) . '_' . $this->config->s3['bucket'];
-
-        /** @var string $found */
-        if (! $found = cache($cacheName)) {
-            try {
-                $cmd = $this->s3->getCommand('GetObject', [
-                    'Bucket' => $this->config->s3['bucket'],
-                    'Key'    => $this->prefixKey($key),
-                ]);
-            } catch (Exception) {
-                throw new PageNotFoundException();
-            }
-
-            $request = $this->s3->createPresignedRequest($cmd, '+1 day');
-
-            $found = (string) $request->getUri();
-
-            cache()
-                ->save($cacheName, $found, DAY);
-        }
+        /** @var IncomingRequest $request */
+        $request = service('request');
 
         /** @var Response $response */
         $response = service('response');
 
-        if (cache()->getMetaData($cacheName) === null) {
-            return $response->setHeader('HTTP_REFERER', previous_url())
-                ->redirect($found);
+        $s3Request = [
+            'Bucket' => $this->config->s3['bucket'],
+            'Key'    => $this->prefixKey($key),
+        ];
+
+        if ($request->hasHeader('Range')) {
+            $s3Request['Range'] = $request->header('Range')->getValue();
         }
 
-        $lastModifiedTimestamp = cache()
-            ->getMetaData($cacheName)['mtime'];
-
-        $lastModified = new DateTime();
-        $lastModified->setTimestamp($lastModifiedTimestamp);
+        try {
+            $result = $this->s3->getObject($s3Request);
+        } catch (Exception) {
+            throw new PageNotFoundException();
+        }
 
         // Remove Cache-Control header before redefining it
         header_remove('Cache-Control');
 
-        return $response->setCache([
-            'max-age'       => DAY,
-            'last-modified' => $lastModified->format(DATE_RFC7231),
-            'etag'          => md5($cacheName),
-            'public'        => true,
-        ])
-            ->setHeader('HTTP_REFERER', previous_url())
-            ->redirect($found);
+        $response->setStatusCode($result['@metadata']['statusCode']);
+
+        // set same headers as response from s3
+        foreach ($result['@metadata']['headers'] as $headerName => $headerValue) {
+            $response->setHeader($headerName, $headerValue);
+        }
+
+        return $response->setBody((string) $result->get('Body')->getContents());
     }
 
     private function prefixKey(string $key): string
