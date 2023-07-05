@@ -14,8 +14,10 @@ use Config\Mimes;
 use Embera\Embera;
 use Modules\Fediverse\Activities\AcceptActivity;
 use Modules\Fediverse\ActivityRequest;
+use Modules\Fediverse\Core\ObjectType;
 use Modules\Fediverse\Entities\Actor;
 use Modules\Fediverse\Entities\PreviewCard;
+use Modules\Fediverse\Models\ActivityModel;
 
 if (! function_exists('get_webfinger_data')) {
     /**
@@ -64,13 +66,20 @@ if (! function_exists('accept_follow')) {
     function accept_follow(Actor $actor, Actor $targetActor, string $objectId): void
     {
         $acceptActivity = new AcceptActivity();
+
+        $object = new ObjectType();
+        $object->set('id', $objectId);
+        $object->set('type', 'Follow');
+        $object->set('actor', $targetActor->uri);
+        $object->set('object', $actor->uri);
+
         $acceptActivity->set('actor', $actor->uri)
-            ->set('object', $objectId);
+            ->set('object', $object);
 
         $db = db_connect();
         $db->transStart();
 
-        $activityModel = model('ActivityModel', false);
+        $activityModel = model(ActivityModel::class, false);
         $activityId = $activityModel->newActivity(
             'Accept',
             $actor->id,
