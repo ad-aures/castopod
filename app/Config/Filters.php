@@ -29,7 +29,6 @@ class Filters extends BaseConfig
         'honeypot'       => Honeypot::class,
         'invalidchars'   => InvalidChars::class,
         'secureheaders'  => SecureHeaders::class,
-        'permission'     => PermissionFilter::class,
         'fediverse'      => FediverseFilter::class,
         'allow-cors'     => AllowCorsFilter::class,
         'rest-api'       => ApiFilter::class,
@@ -89,5 +88,7 @@ class Filters extends BaseConfig
                 'before' => ['*@*/episodes/*'],
             ],
         ];
+
+        $this->aliases['permission'] = PermissionFilter::class;
     }
 }

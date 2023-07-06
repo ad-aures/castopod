@@ -6,14 +6,46 @@ namespace Modules\Auth\Filters;
 
 use App\Entities\Podcast;
 use App\Models\PodcastModel;
-use CodeIgniter\Shield\Filters\AbstractAuthFilter;
+use CodeIgniter\Filters\FilterInterface;
+use CodeIgniter\HTTP\RequestInterface;
+use CodeIgniter\HTTP\ResponseInterface;
 use Config\Services;
+use RuntimeException;
 
 /**
  * Permission Authorization Filter.
  */
-class PermissionFilter extends AbstractAuthFilter
+class PermissionFilter implements FilterInterface
 {
+    /**
+     * @param string[]|null $arguments
+     * @return mixed
+     */
+    public function before(RequestInterface $request, $arguments = null)
+    {
+        if ($arguments === null || $arguments === []) {
+            return;
+        }
+
+        if (! auth()->loggedIn()) {
+            return redirect()->route('login');
+        }
+
+        if ($this->isAuthorized($arguments)) {
+            return;
+        }
+
+        throw new RuntimeException(lang('Auth.notEnoughPrivilege'), 403);
+    }
+
+    /**
+     * @param string[]|null $arguments
+     * @return mixed
+     */
+    public function after(RequestInterface $request, ResponseInterface $response, $arguments = null): void
+    {
+    }
+
     /**
      * Ensures the user is logged in and has one or more
      * of the permissions as specified in the filter.
