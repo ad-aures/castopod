@@ -4,17 +4,13 @@ declare(strict_types=1);
 
 namespace Config;
 
-use App\Filters\AllowCorsFilter;
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Filters\CSRF;
 use CodeIgniter\Filters\DebugToolbar;
 use CodeIgniter\Filters\Honeypot;
 use CodeIgniter\Filters\InvalidChars;
 use CodeIgniter\Filters\SecureHeaders;
-use Modules\Api\Rest\V1\Filters\ApiFilter;
 use Modules\Auth\Filters\PermissionFilter;
-use Modules\Fediverse\Filters\FediverseFilter;
-use Modules\PremiumPodcasts\Filters\PodcastUnlockFilter;
 
 class Filters extends BaseConfig
 {
@@ -24,15 +20,11 @@ class Filters extends BaseConfig
      * @var array<string, string>
      */
     public array $aliases = [
-        'csrf'           => CSRF::class,
-        'toolbar'        => DebugToolbar::class,
-        'honeypot'       => Honeypot::class,
-        'invalidchars'   => InvalidChars::class,
-        'secureheaders'  => SecureHeaders::class,
-        'fediverse'      => FediverseFilter::class,
-        'allow-cors'     => AllowCorsFilter::class,
-        'rest-api'       => ApiFilter::class,
-        'podcast-unlock' => PodcastUnlockFilter::class,
+        'csrf'          => CSRF::class,
+        'toolbar'       => DebugToolbar::class,
+        'honeypot'      => Honeypot::class,
+        'invalidchars'  => InvalidChars::class,
+        'secureheaders' => SecureHeaders::class,
     ];
 
     /**
