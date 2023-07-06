@@ -12,7 +12,7 @@ class Email extends BaseConfig
 
     public string $fromName = 'Castopod';
 
-    public string $recipients;
+    public string $recipients = '';
 
     /**
      * The "user agent"

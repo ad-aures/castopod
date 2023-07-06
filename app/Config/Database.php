@@ -35,7 +35,7 @@ class Database extends Config
         'DBDriver' => 'MySQLi',
         'DBPrefix' => 'cp_',
         'pConnect' => false,
-        'DBDebug'  => ENVIRONMENT !== 'production',
+        'DBDebug'  => true,
         'charset'  => 'utf8mb4',
         'DBCollat' => 'utf8mb4_unicode_ci',
         'swapPre'  => '',
@@ -61,7 +61,7 @@ class Database extends Config
         'DBPrefix' => 'db_',
         // Needed to ensure we're working correctly with prefixes live. DO NOT REMOVE FOR CI DEVS
         'pConnect'    => false,
-        'DBDebug'     => (ENVIRONMENT !== 'production'),
+        'DBDebug'     => true,
         'charset'     => 'utf8',
         'DBCollat'    => 'utf8_general_ci',
         'swapPre'     => '',
@@ -71,6 +71,7 @@ class Database extends Config
         'failover'    => [],
         'port'        => 3306,
         'foreignKeys' => true,
+        'busyTimeout' => 1000,
     ];
 
     //--------------------------------------------------------------------

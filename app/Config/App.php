@@ -14,17 +14,26 @@ class App extends BaseConfig
      * Base Site URL
      * --------------------------------------------------------------------------
      *
-     * URL to your CodeIgniter root. Typically this will be your base URL,
+     * URL to your CodeIgniter root. Typically, this will be your base URL,
      * WITH a trailing slash:
      *
      *    http://example.com/
-     *
-     * If this is not set then CodeIgniter will try guess the protocol, domain
-     * and path to your installation. However, you should always configure this
-     * explicitly and never rely on auto-guessing, especially in production
-     * environments.
      */
     public string $baseURL = 'http://localhost:8080/';
+
+    /**
+     * Allowed Hostnames in the Site URL other than the hostname in the baseURL.
+     * If you want to accept multiple Hostnames, set this.
+     *
+     * E.g. When your site URL ($baseURL) is 'http://example.com/', and your site
+     *      also accepts 'http://media.example.com/' and
+     *      'http://accounts.example.com/':
+     *          ['media.example.com', 'accounts.example.com']
+     *
+     * @var string[]
+     * @phpstan-var list<string>
+     */
+    public array $allowedHostnames = [];
 
     /**
      * --------------------------------------------------------------------------
@@ -87,6 +96,8 @@ class App extends BaseConfig
      * by the application in descending order of priority. If no match is
      * found, the first locale will be used.
      *
+     * IncomingRequest::setLocale() also uses this list.
+     *
      * @var string[]
      */
     public array $supportedLocales = ['en', 'fr', 'pl', 'de', 'pt-BR', 'nn-NO', 'es', 'zh-Hans', 'ca'];
@@ -98,6 +109,8 @@ class App extends BaseConfig
      *
      * The default timezone that will be used in your application to display
      * dates with the date helper, and can be retrieved through app_timezone()
+     *
+     * @see https://www.php.net/manual/en/timezones.php for list of timezones supported by PHP.
      */
     public string $appTimezone = 'UTC';
 
@@ -135,6 +148,8 @@ class App extends BaseConfig
      * - `CodeIgniter\Session\Handlers\DatabaseHandler`
      * - `CodeIgniter\Session\Handlers\MemcachedHandler`
      * - `CodeIgniter\Session\Handlers\RedisHandler`
+     *
+     * @deprecated use Config\Session::$driver instead.
      */
     public string $sessionDriver = FileHandler::class;
 
@@ -144,6 +159,8 @@ class App extends BaseConfig
      * --------------------------------------------------------------------------
      *
      * The session cookie name, must contain only [0-9a-z_-] characters
+     *
+     * @deprecated use Config\Session::$cookieName instead.
      */
     public string $sessionCookieName = 'ci_session';
 
@@ -154,6 +171,8 @@ class App extends BaseConfig
      *
      * The number of SECONDS you want the session to last.
      * Setting to 0 (zero) means expire when the browser is closed.
+     *
+     * @deprecated use Config\Session::$expiration instead.
      */
     public int $sessionExpiration = 7200;
 
@@ -171,6 +190,8 @@ class App extends BaseConfig
      * Please read up the manual for the format with other session drivers.
      *
      * IMPORTANT: You are REQUIRED to set a valid save path!
+     *
+     * @deprecated use Config\Session::$savePath instead.
      */
     public string $sessionSavePath = WRITEPATH . 'session';
 
@@ -183,6 +204,8 @@ class App extends BaseConfig
      *
      * WARNING: If you're using the database driver, don't forget to update
      *          your session table's PRIMARY KEY when changing this setting.
+     *
+     * @deprecated use Config\Session::$matchIP instead.
      */
     public bool $sessionMatchIP = false;
 
@@ -192,6 +215,8 @@ class App extends BaseConfig
      * --------------------------------------------------------------------------
      *
      * How many seconds between CI regenerating the session ID.
+     *
+     * @deprecated use Config\Session::$timeToUpdate instead.
      */
     public int $sessionTimeToUpdate = 300;
 
@@ -203,8 +228,21 @@ class App extends BaseConfig
      * Whether to destroy session data associated with the old session ID
      * when auto-regenerating the session ID. When set to FALSE, the data
      * will be later deleted by the garbage collector.
+     *
+     * @deprecated use Config\Session::$regenerateDestroy instead.
      */
     public bool $sessionRegenerateDestroy = false;
+
+    /**
+     * --------------------------------------------------------------------------
+     * Session Database Group
+     * --------------------------------------------------------------------------
+     *
+     * DB Group for the database session.
+     *
+     * @deprecated use Config\Session::$DBGroup instead.
+     */
+    public ?string $sessionDBGroup = null;
 
     /**
      * --------------------------------------------------------------------------
@@ -283,7 +321,7 @@ class App extends BaseConfig
      *
      * @deprecated `Config\Cookie` $samesite property is used.
      */
-    public string $cookieSameSite = 'Lax';
+    public ?string $cookieSameSite = 'Lax';
 
     /**
      * --------------------------------------------------------------------------

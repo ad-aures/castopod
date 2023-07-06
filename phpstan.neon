@@ -1,6 +1,7 @@
 parameters:
     tmpDir: build/phpstan
     level: 6
+    checkGenericClassInNonGenericObjectType: false
     paths:
         - app
         - tests

@@ -4,7 +4,7 @@
     "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
     "This file is @generated automatically"
   ],
-  "content-hash": "658d8ad2579bb70845c1150757868314",
+  "content-hash": "50b45bbec65f3100f25ba9b161be7762",
   "packages": [
     {
       "name": "adaures/ipcat-php",
@@ -120,16 +120,16 @@
     },
     {
       "name": "aws/aws-sdk-php",
-      "version": "3.275.2",
+      "version": "3.275.3",
       "source": {
         "type": "git",
         "url": "https://github.com/aws/aws-sdk-php.git",
-        "reference": "4506d631caf6097fd73009d57707e61b95efe92c"
+        "reference": "bbdf8e8d5df0b44ee83d5a751f316fc9f9dd2849"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/4506d631caf6097fd73009d57707e61b95efe92c",
-        "reference": "4506d631caf6097fd73009d57707e61b95efe92c",
+        "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/bbdf8e8d5df0b44ee83d5a751f316fc9f9dd2849",
+        "reference": "bbdf8e8d5df0b44ee83d5a751f316fc9f9dd2849",
         "shasum": ""
       },
       "require": {
@@ -205,9 +205,9 @@
       "support": {
         "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
         "issues": "https://github.com/aws/aws-sdk-php/issues",
-        "source": "https://github.com/aws/aws-sdk-php/tree/3.275.2"
+        "source": "https://github.com/aws/aws-sdk-php/tree/3.275.3"
       },
-      "time": "2023-07-03T18:27:31+00:00"
+      "time": "2023-07-05T18:22:08+00:00"
     },
     {
       "name": "brick/math",
@@ -304,23 +304,22 @@
     },
     {
       "name": "codeigniter4/framework",
-      "version": "v4.2.12",
+      "version": "v4.3.6",
       "source": {
         "type": "git",
         "url": "https://github.com/codeigniter4/framework.git",
-        "reference": "bc3f312a3ebaf53394fa099b090b7a52a29375c2"
+        "reference": "e3921233a20daf05ae9d2b50ca41ce97748e1d6d"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/codeigniter4/framework/zipball/bc3f312a3ebaf53394fa099b090b7a52a29375c2",
-        "reference": "bc3f312a3ebaf53394fa099b090b7a52a29375c2",
+        "url": "https://api.github.com/repos/codeigniter4/framework/zipball/e3921233a20daf05ae9d2b50ca41ce97748e1d6d",
+        "reference": "e3921233a20daf05ae9d2b50ca41ce97748e1d6d",
         "shasum": ""
       },
       "require": {
         "ext-intl": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
-        "kint-php/kint": "^4.2",
         "laminas/laminas-escaper": "^2.9",
         "php": "^7.4 || ^8.0",
         "psr/log": "^1.1"
@@ -329,6 +328,7 @@
         "codeigniter/coding-standard": "^1.5",
         "fakerphp/faker": "^1.9",
         "friendsofphp/php-cs-fixer": "3.13.0",
+        "kint-php/kint": "^5.0.4",
         "mikey179/vfsstream": "^1.6",
         "nexusphp/cs-config": "^3.6",
         "phpunit/phpunit": "^9.1",
@@ -370,7 +370,7 @@
         "slack": "https://codeigniterchat.slack.com",
         "source": "https://github.com/codeigniter4/CodeIgniter4"
       },
-      "time": "2023-01-09T06:53:50+00:00"
+      "time": "2023-06-17T23:13:38+00:00"
     },
     {
       "name": "codeigniter4/settings",
@@ -1188,63 +1188,6 @@
         "source": "https://github.com/JamesHeinrich/getID3/tree/v2.0.0-beta5"
       },
       "time": "2022-10-28T11:52:26+00:00"
-    },
-    {
-      "name": "kint-php/kint",
-      "version": "4.2.3",
-      "source": {
-        "type": "git",
-        "url": "https://github.com/kint-php/kint.git",
-        "reference": "7601bfd95ccc50a1b903c2764b31d00919e8edd9"
-      },
-      "dist": {
-        "type": "zip",
-        "url": "https://api.github.com/repos/kint-php/kint/zipball/7601bfd95ccc50a1b903c2764b31d00919e8edd9",
-        "reference": "7601bfd95ccc50a1b903c2764b31d00919e8edd9",
-        "shasum": ""
-      },
-      "require": {
-        "php": ">=5.6"
-      },
-      "require-dev": {
-        "friendsofphp/php-cs-fixer": "^3.0",
-        "phpspec/prophecy-phpunit": "^2",
-        "phpunit/phpunit": "^9.0",
-        "seld/phar-utils": "^1.0",
-        "symfony/finder": "^3.0 || ^4.0 || ^5.0",
-        "vimeo/psalm": "^4.0"
-      },
-      "suggest": {
-        "kint-php/kint-helpers": "Provides extra helper functions",
-        "kint-php/kint-twig": "Provides d() and s() functions in twig templates"
-      },
-      "type": "library",
-      "autoload": {
-        "files": ["init.php"],
-        "psr-4": {
-          "Kint\\": "src/"
-        }
-      },
-      "notification-url": "https://packagist.org/downloads/",
-      "license": ["MIT"],
-      "authors": [
-        {
-          "name": "Jonathan Vollebregt",
-          "homepage": "https://github.com/jnvsor"
-        },
-        {
-          "name": "Contributors",
-          "homepage": "https://github.com/kint-php/kint/graphs/contributors"
-        }
-      ],
-      "description": "Kint - debugging tool for PHP developers",
-      "homepage": "https://kint-php.github.io/kint/",
-      "keywords": ["debug", "kint", "php"],
-      "support": {
-        "issues": "https://github.com/kint-php/kint/issues",
-        "source": "https://github.com/kint-php/kint/tree/4.2.3"
-      },
-      "time": "2022-10-01T20:16:33+00:00"
     },
     {
       "name": "laminas/laminas-escaper",
@@ -3610,16 +3553,16 @@
     },
     {
       "name": "friendsofphp/php-cs-fixer",
-      "version": "v3.20.0",
+      "version": "v3.21.1",
       "source": {
         "type": "git",
         "url": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer.git",
-        "reference": "0e8249e0b15e2bc022fbbd1090ce29d071481e69"
+        "reference": "229b55b3eae4729a8e2a321441ba40fcb3720b86"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/0e8249e0b15e2bc022fbbd1090ce29d071481e69",
-        "reference": "0e8249e0b15e2bc022fbbd1090ce29d071481e69",
+        "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/229b55b3eae4729a8e2a321441ba40fcb3720b86",
+        "reference": "229b55b3eae4729a8e2a321441ba40fcb3720b86",
         "shasum": ""
       },
       "require": {
@@ -3629,7 +3572,7 @@
         "doctrine/lexer": "^2 || ^3",
         "ext-json": "*",
         "ext-tokenizer": "*",
-        "php": "^7.4 || ^8.0",
+        "php": "^8.0.1",
         "sebastian/diff": "^4.0 || ^5.0",
         "symfony/console": "^5.4 || ^6.0",
         "symfony/event-dispatcher": "^5.4 || ^6.0",
@@ -3690,7 +3633,7 @@
       ],
       "support": {
         "issues": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/issues",
-        "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.20.0"
+        "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.21.1"
       },
       "funding": [
         {
@@ -3698,7 +3641,7 @@
           "type": "github"
         }
       ],
-      "time": "2023-06-27T20:22:39+00:00"
+      "time": "2023-07-05T21:50:25+00:00"
     },
     {
       "name": "mikey179/vfsstream",
@@ -3952,16 +3895,16 @@
     },
     {
       "name": "phpstan/phpstan",
-      "version": "1.10.23",
+      "version": "1.10.25",
       "source": {
         "type": "git",
         "url": "https://github.com/phpstan/phpstan.git",
-        "reference": "65ab678d1248a8bc6fde456f0d7ff3562a61a4cd"
+        "reference": "578f4e70d117f9a90699324c555922800ac38d8c"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/phpstan/phpstan/zipball/65ab678d1248a8bc6fde456f0d7ff3562a61a4cd",
-        "reference": "65ab678d1248a8bc6fde456f0d7ff3562a61a4cd",
+        "url": "https://api.github.com/repos/phpstan/phpstan/zipball/578f4e70d117f9a90699324c555922800ac38d8c",
+        "reference": "578f4e70d117f9a90699324c555922800ac38d8c",
         "shasum": ""
       },
       "require": {
@@ -4000,7 +3943,7 @@
           "type": "tidelift"
         }
       ],
-      "time": "2023-07-04T13:32:44+00:00"
+      "time": "2023-07-06T12:11:37+00:00"
     },
     {
       "name": "phpunit/php-code-coverage",

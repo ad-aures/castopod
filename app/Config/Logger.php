@@ -40,7 +40,7 @@ class Logger extends BaseConfig
      *
      * @var int|int[]
      */
-    public int | array $threshold = 4;
+    public int | array $threshold = (ENVIRONMENT === 'production') ? 4 : 9;
 
     /**
      * --------------------------------------------------------------------------

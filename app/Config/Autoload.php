@@ -93,12 +93,27 @@ class Autoload extends AutoloadConfig
      * or for loading functions.
      *
      * Prototype:
-     * ```
+     *
      *	  $files = [
      *	 	   '/path/to/my/file.php',
      *    ];
-     * ```
-     * @var array<int, string>
+     *
+     * @var string[]
+     * @phpstan-var list<string>
      */
     public $files = [APPPATH . 'Libraries/ViewComponents/Helpers/view_components_helper.php'];
+
+    /**
+     * -------------------------------------------------------------------
+     * Helpers
+     * -------------------------------------------------------------------
+     * Prototype:
+     *   $helpers = [
+     *       'form',
+     *   ];
+     *
+     * @var string[]
+     * @phpstan-var list<string>
+     */
+    public $helpers = [];
 }

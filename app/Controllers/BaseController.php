@@ -7,6 +7,7 @@ namespace App\Controllers;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
+use CodeIgniter\HTTP\Response;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use ViewThemes\Theme;
@@ -27,6 +28,13 @@ abstract class BaseController extends Controller
      * @var IncomingRequest
      */
     protected $request;
+
+    /**
+     * Instance of the main response object.
+     *
+     * @var Response
+     */
+    protected $response;
 
     /**
      * An array of helpers to be loaded automatically upon

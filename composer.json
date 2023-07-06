@@ -7,7 +7,7 @@
   "license": "AGPL-3.0-or-later",
   "require": {
     "php": "^8.1",
-    "codeigniter4/framework": "v4.2.12",
+    "codeigniter4/framework": "v4.3.6",
     "james-heinrich/getid3": "^2.0.0-beta5",
     "whichbrowser/parser": "^v2.1.7",
     "geoip2/geoip2": "v2.13.0",
@@ -23,7 +23,7 @@
     "chrisjean/php-ico": "^1.0.4",
     "melbahja/seo": "^v2.1.1",
     "codeigniter4/shield": "v1.0.0-beta.6",
-    "aws/aws-sdk-php": "^3.275.2",
+    "aws/aws-sdk-php": "^3.275.3",
     "mpratt/embera": "^2.0.34",
     "codeigniter4/tasks": "dev-develop",
     "yassinedoghri/podcast-feed": "dev-main"
@@ -33,9 +33,14 @@
     "phpunit/phpunit": "^10.2.3",
     "captainhook/captainhook": "^5.16.4",
     "symplify/easy-coding-standard": "^11.5.0",
-    "phpstan/phpstan": "^1.10.23",
+    "phpstan/phpstan": "^1.10.25",
     "rector/rector": "^0.17.2",
     "symplify/coding-standard": "^11.4.1"
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true
   },
   "autoload": {
     "exclude-from-classmap": [

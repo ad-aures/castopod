@@ -7,7 +7,7 @@
 	<meta name="robots" content="noindex">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-	<title>Whoops!</title>
+	<title><?= lang('Errors.whoops') ?></title>
 	<link rel='stylesheet' type='text/css' href='<?= route_to('themes-colors-css') ?>' />
     <?= service('vite')->asset('styles/index.css', 'css') ?>
 	<?php if (auth()->loggedIn()): ?>
@@ -21,8 +21,8 @@
 	<div class="flex flex-col items-center justify-center flex-1 gap-6">
 		<div class="flex flex-col items-center">
 			<?= svg('castopod-mascot_confused', 'w-full max-w-xs p-6') ?>
-			<h1 class="text-3xl font-bold font-display md:text-4xl lg:text-5xl">Whoops!</h1>
-			<p class="text-lg text-skin-muted md:text-xl lg:text-2xl">We seem to have hit a snag. Please try again later...</p>
+			<h1 class="text-3xl font-bold font-display md:text-4xl lg:text-5xl"><?= lang('Errors.whoops') ?></h1>
+			<p class="text-lg text-skin-muted md:text-xl lg:text-2xl"><?= lang('Errors.weHitASnag') ?></p>
 		</div>
 		<div class="flex flex-col items-start max-w-xl">
 			<h2 class="font-mono font-semibold"><?= esc($title), esc($exception->getCode() ? ' #' . $exception->getCode() : '') ?></h2>
