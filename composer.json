@@ -37,11 +37,6 @@
     "rector/rector": "^0.17.2",
     "symplify/coding-standard": "^11.4.1"
   },
-  "config": {
-    "optimize-autoloader": true,
-    "preferred-install": "dist",
-    "sort-packages": true
-  },
   "autoload": {
     "exclude-from-classmap": [
       "**/Database/Migrations/**"
@@ -85,6 +80,9 @@
   },
   "prefer-stable": true,
   "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true,
     "allow-plugins": {
       "phpstan/extension-installer": true
     }
