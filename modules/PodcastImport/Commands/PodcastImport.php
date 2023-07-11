@@ -74,7 +74,8 @@ class PodcastImport extends BaseCommand
         $nextImport = end($queuedImports);
 
         if (! $nextImport instanceof PodcastImportTask) {
-            throw new Exception('No import in queue.');
+            // no queued import task, stop process.
+            exit(0);
         }
 
         $this->importTask = $nextImport;
