@@ -1,3 +1,14 @@
+## [1.4.6](https://code.castopod.org/adaures/castopod/compare/v1.4.5...v1.4.6) (2023-07-11)
+
+### Bug Fixes
+
+- **fediverse:** expand object before sending accept follow request
+  ([082cdc9](https://code.castopod.org/adaures/castopod/commit/082cdc9ee79d004c2ed748e3b8046e9141bf0242)),
+  closes [#350](https://code.castopod.org/adaures/castopod/issues/350)
+- **podcast-import:** remove error log when no import in queue, exit with
+  success instead
+  ([5e719f3](https://code.castopod.org/adaures/castopod/commit/5e719f3e9eb6cf48c3fd8ac97181638b24d03fc9))
+
 ## [1.4.5](https://code.castopod.org/adaures/castopod/compare/v1.4.4...v1.4.5) (2023-07-04)
 
 ### Bug Fixes
