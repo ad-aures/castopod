@@ -1,3 +1,10 @@
+## [1.4.7](https://code.castopod.org/adaures/castopod/compare/v1.4.6...v1.4.7) (2023-07-19)
+
+### Bug Fixes
+
+- **s3:** allow CORS for served static files
+  ([9b955c9](https://code.castopod.org/adaures/castopod/commit/9b955c9ce25a06a9102b67ebe77375dc45d28f0f))
+
 ## [1.4.6](https://code.castopod.org/adaures/castopod/compare/v1.4.5...v1.4.6) (2023-07-11)
 
 ### Bug Fixes
