@@ -13,4 +13,5 @@ $routes = service('routes');
 $routes->get('static/(:any)', 'MediaController::serve/$1', [
     'as'        => 'media-serve',
     'namespace' => 'Modules\Media\Controllers',
+    'filter'    => 'allow-cors',
 ]);

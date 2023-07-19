@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Config;
 
+use App\Filters\AllowCorsFilter;
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Filters\CSRF;
 use CodeIgniter\Filters\DebugToolbar;
@@ -12,7 +13,6 @@ use CodeIgniter\Filters\InvalidChars;
 use CodeIgniter\Filters\SecureHeaders;
 use Modules\Api\Rest\V1\Filters\ApiFilter;
 use Modules\Auth\Filters\PermissionFilter;
-use Modules\Fediverse\Filters\AllowCorsFilter;
 use Modules\Fediverse\Filters\FediverseFilter;
 use Modules\PremiumPodcasts\Filters\PodcastUnlockFilter;
 
