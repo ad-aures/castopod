@@ -14,9 +14,9 @@ $userPodcasts = get_podcasts_user_can_interact_with(auth()->user()); ?>
         </a>
         <a href="<?= route_to(
             'home',
-        ) ?>" class="inline-flex items-center h-full px-6 text-sm font-semibold hover:underline focus:ring-inset focus:ring-accent">
-                <?= lang('Navigation.go_to_website') ?>
-                <?= icon('external-link', 'ml-1 opacity-60') ?>
+        ) ?>" class="inline-flex items-center h-full px-2 text-sm font-semibold sm:px-6 hover:underline focus:ring-inset focus:ring-accent" title="<?= lang('Navigation.go_to_website') ?>">
+                <span class="hidden sm:block"><?= lang('Navigation.go_to_website') ?></span>
+                <?= icon('external-link', 'ml-1 text-xl sm:opacity-60') ?>
         </a>
     </div>
     <div class="inline-flex items-center h-full ml-auto">
@@ -82,7 +82,7 @@ if ($userPodcasts !== []) {
                 <?= icon('account-circle', 'text-3xl opacity-60') ?>
                 <?= $userPodcasts === [] ? '' : '<img src="' . interact_as_actor()->avatar_image_url . '" class="absolute bottom-0 w-4 h-4 border rounded-full -right-1 border-navigation-bg" loading="lazy" />' ?>
             </div>
-            <?= esc(auth()->user()->username) ?>
+            <span class="hidden sm:block"><?= esc(auth()->user()->username) ?></span>
             <?= icon('caret-down', 'ml-auto text-2xl') ?></button>
     </div>
     <?php

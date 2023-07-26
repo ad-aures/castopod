@@ -36,7 +36,7 @@ $isEpisodeArea = isset($podcast) && isset($episode);
             <div class="flex flex-col justify-end w-full -mt-4 sticky-header-inner">
                 <?= render_breadcrumb('text-xs items-center flex') ?>
                 <div class="flex justify-between py-1">
-                    <div class="flex flex-wrap items-center">
+                    <div class="flex flex-wrap items-center truncate">
                     <?php if (($isEpisodeArea && $episode->is_premium) || ($isPodcastArea && $podcast->is_premium)): ?>
                         <div class="inline-flex items-center">
                             <IconButton uri="<?= route_to('subscription-list', $podcast->id) ?>" glyph="exchange-dollar" variant="secondary" size="large" class="p-0 mr-2 border-0"><?= ($isEpisodeArea && $episode->is_premium) ? lang('PremiumPodcasts.episode_is_premium') : lang('PremiumPodcasts.podcast_is_premium') ?></IconButton>

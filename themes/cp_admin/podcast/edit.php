@@ -18,10 +18,10 @@
 
 <?= $this->section('content') ?>
 
-<form id="podcast-edit-form" action="<?= route_to('podcast-edit', $podcast->id) ?>" method="POST" enctype='multipart/form-data' class="flex flex-row-reverse flex-wrap items-start justify-end gap-4">
+<form id="podcast-edit-form" action="<?= route_to('podcast-edit', $podcast->id) ?>" method="POST" enctype='multipart/form-data' class="flex flex-col items-start justify-end gap-4 xl:flex-row-reverse">
 <?= csrf_field() ?>
 
-<div class="sticky z-40 flex flex-col w-full max-w-xs overflow-hidden shadow-sm bg-elevated border-3 border-subtle top-24 rounded-xl">
+<div class="z-40 flex flex-col w-full max-w-xs overflow-hidden shadow-sm xl:sticky bg-elevated border-3 border-subtle top-24 rounded-xl">
     <?php if ($podcast->banner_id !== null): ?>
         <a href="<?= route_to('podcast-banner-delete', $podcast->id) ?>" class="absolute p-1 text-red-700 bg-red-100 border-2 rounded-full hover:text-red-900 border-contrast focus:ring-accent top-2 right-2" title="<?= lang('Podcast.form.banner_delete') ?>" data-tooltip="bottom"><?= icon('delete-bin') ?></a>
     <?php endif; ?>
