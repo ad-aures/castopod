@@ -318,4 +318,12 @@ class PodcastController extends BaseController
             ->setContentType('application/activity+json')
             ->setBody($collection->toJSON());
     }
+
+    public function links(): string
+    {
+        return view('podcast/links', [
+            'metatags' => get_podcast_metatags($this->podcast, 'links'),
+            'podcast'  => $this->podcast,
+        ]);
+    }
 }

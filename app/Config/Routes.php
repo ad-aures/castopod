@@ -81,6 +81,9 @@ $routes->group('@(:podcastHandle)', static function ($routes): void {
     $routes->get('manifest.webmanifest', 'WebmanifestController::podcastManifest/$1', [
         'as' => 'podcast-webmanifest',
     ]);
+    $routes->get('links', 'PodcastController::links/$1', [
+        'as' => 'podcast-links',
+    ]);
     // override default Fediverse Library's actor route
     $routes->options('/', 'ActivityPubController::preflight');
     $routes->get('/', 'PodcastController::activity/$1', [

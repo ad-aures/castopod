@@ -71,6 +71,7 @@ module.exports = {
         accent: "hsl(var(--color-accent-base) / <alpha-value>)",
         background: {
           header: "hsl(var(--color-background-header) / <alpha-value>)",
+          base: "hsl(var(--color-background-base) / <alpha-value>)",
         },
         heading: {
           foreground: "hsl(var(--color-heading-foreground) / <alpha-value>)",

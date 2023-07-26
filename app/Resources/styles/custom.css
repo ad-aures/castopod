@@ -48,6 +48,17 @@
     );
   }
 
+  .backdrop-gradient-accent {
+    background-image: linear-gradient(
+      180deg,
+      theme(colors.background.base / 0.4) 0%,
+      theme(colors.background.base / 0.6) 65.75%,
+      theme(colors.background.base / 1) 90.28%,
+      theme(colors.background.base / 1) 97.43%,
+      theme(colors.background.base / 1) 100%
+    );
+  }
+
   .bg-stripes-gray {
     background-image: repeating-linear-gradient(
       -45deg,

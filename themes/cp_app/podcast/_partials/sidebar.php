@@ -60,7 +60,7 @@
         </div>
         <?php endif; ?>
         <footer class="flex flex-col items-center py-2 text-xs text-center border-t border-subtle text-skin-muted">
-            <?= render_page_links('inline-flex mb-2 flex-wrap gap-y-1 justify-center') ?>
+            <?= render_page_links('inline-flex mb-2 flex-wrap gap-y-1 justify-center', $podcast->handle) ?>
             <div class="flex flex-col">
                 <p><?= esc($podcast->copyright) ?></p>
                 <p><?= lang('Common.powered_by', [
