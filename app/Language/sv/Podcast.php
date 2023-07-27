@@ -25,6 +25,7 @@ return [
         one {# inlägg}
         other {# inlägg}
     }',
+    'links' => 'Links',
     'activity' => 'Aktivitet',
     'episodes' => 'Avsnitt',
     'episodes_title' => 'Avsnitt av {podcastTitle}',

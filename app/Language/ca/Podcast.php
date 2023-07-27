@@ -25,6 +25,7 @@ return [
         one {# publicació}
         other {# publicacions}
     }',
+    'links' => 'Links',
     'activity' => 'Activitat',
     'episodes' => 'Episodis',
     'episodes_title' => 'Episodis de {podcastTitle}',

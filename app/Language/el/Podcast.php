@@ -25,6 +25,7 @@ return [
         one {# δημοσίευση}
         other {# δημοσιεύσεις}
     }',
+    'links' => 'Links',
     'activity' => 'Δραστηριότητα',
     'episodes' => 'Επεισόδια',
     'episodes_title' => 'Επεισόδια του {podcastTitle}',

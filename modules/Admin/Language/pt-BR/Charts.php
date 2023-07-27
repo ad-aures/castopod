@@ -37,5 +37,5 @@ return [
     'podcast_by_bandwidth' => 'Largura de banda usada diária (em MB)',
     'total_storage_by_month' => 'Armazenamento mensal (em MB)',
     'total_bandwidth_by_month' => 'Largura de banda usada mensalmente (em MB)',
-    'total_bandwidth_by_month_limit' => 'Limited to {totalBandwidth} per month',
+    'total_bandwidth_by_month_limit' => 'Limitado a {totalBandwidth} por mês',
 ];

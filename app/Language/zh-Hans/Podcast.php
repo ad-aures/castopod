@@ -9,7 +9,7 @@ declare(strict_types=1);
  */
 
 return [
-    'feed' => '播客订阅源',
+    'feed' => '播客 RSS 摘要',
     'season' => '第 {seasonNumber} 季',
     'list_of_episodes_year' => '{year} 剧集 ({episodeCount})',
     'list_of_episodes_season' =>
@@ -25,6 +25,7 @@ return [
         one {# 帖子}
         other {# 帖子}
     }}',
+    'links' => 'Links',
     'activity' => '活动',
     'episodes' => '剧集',
     'episodes_title' => '{podcastTitle} 的剧集',

@@ -25,7 +25,7 @@ return [
     'activity' => '活动',
     'description' => '剧集描述',
     'number_of_comments' => '{numberOfComments, plural,
-        one {# 评论}
+        other {# 评论}
         other {# 评论}
     }',
     'all_podcast_episodes' => '所有播客剧集',

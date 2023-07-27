@@ -15,7 +15,7 @@ return [
     'optional' => 'اختیاری',
     'close' => 'بستن',
     'home' => 'خانه',
-    'explicit' => 'Explicit',
+    'explicit' => 'صریح',
     'powered_by' => 'نیرو گرفته از {castopod}',
     'go_back' => 'بازگشت',
     'play_episode_button' => [

@@ -27,6 +27,7 @@ return [
         few {# postări}
         other {# postări}
     }',
+    'links' => 'Links',
     'activity' => 'Activitate',
     'episodes' => 'Episoade',
     'episodes_title' => 'Episoadele podcastului {podcastTitle}',

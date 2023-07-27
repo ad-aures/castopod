@@ -151,8 +151,8 @@ return [
         'chapters_file_delete' => '删除章节文件',
         'advanced_section_title' => '高级参数',
         'advanced_section_subtitle' =>
-            '如果你不需要 Castopod 处理某些订阅源标签，请在此处设置。',
-        'custom_rss' => '剧集的自定义订阅标签',
+            '如果您需要 Castopod 无法处理的 RSS 标签，请在此处设置它们。',
+        'custom_rss' => '剧集的自定义 RSS 标签',
         'custom_rss_hint' => '这将被注入到 ❬item❭ 标签中。',
         'block' => '剧集应该在公共目录中隐藏',
         'block_hint' =>
@@ -190,7 +190,7 @@ return [
     ],
     'unpublish_form' => [
         'disclaimer' =>
-            "取消发布该剧集将删除相关的所有评论和播文，并将其从播客的订阅源中删除。",
+            "取消发布该剧集将删除相关的所有评论和播文，并将其从播客的 RSS 摘要中删除。",
         'understand' => '我明白，我想取消发布此剧集',
         'submit' => '取消发布',
     ],

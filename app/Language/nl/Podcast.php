@@ -25,6 +25,7 @@ return [
         one {# bericht}
         other {# berichten}
     }',
+    'links' => 'Links',
     'activity' => 'Activiteit',
     'episodes' => 'Afleveringen',
     'episodes_title' => 'Afleveringen van {podcastTitle}',

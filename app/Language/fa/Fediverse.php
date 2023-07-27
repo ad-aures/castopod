@@ -9,8 +9,8 @@ declare(strict_types=1);
  */
 
 return [
-    'your_handle' => 'Your handle',
-    'your_handle_hint' => 'Enter the @username@domain you want to act from.',
+    'your_handle' => 'شناسه‌تان',
+    'your_handle_hint' => '‪@username@domain‬ای که می‌خواهید کنشتان از آن باشد را وارد کنید.',
     'follow' => [
         'label' => 'پی‌گیری',
         'title' => 'پی‌گیری {actorDisplayName}',

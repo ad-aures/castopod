@@ -25,6 +25,7 @@ return [
         few {# objave}
         other {# objava}
     }',
+    'links' => 'Links',
     'activity' => 'Aktivnost',
     'episodes' => 'Epizode',
     'episodes_title' => 'Epizode {podcastTitle}',

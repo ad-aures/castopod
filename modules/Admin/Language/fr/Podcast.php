@@ -109,7 +109,7 @@ return [
         'monetization_section_title' => 'Monétisation',
         'monetization_section_subtitle' =>
             'Gagnez de l’argent grâce à votre audience.',
-        'premium' => 'Prémium',
+        'premium' => 'Premium',
         'premium_by_default' => 'Les épisodes doivent être définis comme premium par défaut',
         'premium_by_default_hint' => 'Les épisodes de Podcast seront marqués comme premium par défaut. Vous pouvez toujours choisir de définir certains épisodes, bandes-annonces ou bonus comme publics.',
         'op3' => 'Open Podcast Prefix Project (OP3)',

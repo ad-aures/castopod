@@ -114,7 +114,7 @@ return [
             'bonus' => 'Bonus',
             'bonus_hint' => 'Contenu supplémentaire pour le podcast (par exemple des informations sur les coulisses ou des interviews avec les acteurs) ou du contenu promotionnel croisé pour un autre podcast',
         ],
-        'premium_title' => 'Prémium',
+        'premium_title' => 'Premium',
         'premium' => 'L\'épisode doit être accessible aux abonnés premium uniquement',
         'parental_advisory' => [
             'label' => 'Avertissement parental',

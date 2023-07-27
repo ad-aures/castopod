@@ -61,6 +61,7 @@ return [
         84 {# c\'hemennadenn}
         89 {# c\'hemennadenn}
     }',
+    'links' => 'Links',
     'activity' => 'Oberiantiz',
     'episodes' => 'Rannoù',
     'episodes_title' => 'Rannoù {podcastTitle}',

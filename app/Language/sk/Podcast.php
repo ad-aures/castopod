@@ -29,6 +29,7 @@ return [
         many {# príspevkov}
         other {# príspevkov}
     }',
+    'links' => 'Links',
     'activity' => 'Aktivita',
     'episodes' => 'Časti',
     'episodes_title' => 'Časti {podcastTitle}',

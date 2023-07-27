@@ -19,15 +19,14 @@ Castopod 的安装非常简单。 你能在大多数兼容的 PHP-MySQL 的服�
 
 ## 要求
 
-- PHP v8.1 only
+- 仅 PHP v8.1
 - MySQL 5.7 或更高版本与 MariaDB 10.2 或更高版本
 - HTTPS 支持
-- An [ntp-synced clock](https://wiki.debian.org/NTP) to validate federation's
-  incoming requests
+- 用于验证的 [NTP 同步时钟](https://wiki.debian.org/NTP) 传入请求
 
-### PHP v8.1 only
+### 仅 PHP v8.1
 
-PHP version 8.1 is required, with the following extensions installed:
+需要 PHP 8.1，并安装以下扩展：
 
 - [intl](https://php.net/manual/en/intl.requirements.php)
 - [libcurl](https://php.net/manual/en/curl.requirements.php)
@@ -86,22 +85,19 @@ Castopod 仅适用于受支持的 MySQL 5.7 或更高版本的兼容数据库。
 3. 下载最新的 [Castopod](https://castopod.org/) 到 web 服务器并解压（如果尚未下
    载）。
    - ⚠️ 将 web 服务器根目录设置为 `castopod` 文件夹中的 `public/` 子文件夹。
-4. Add **cron tasks** on your web server for various background processes
-   (replace the paths accordingly):
+4. 在 Web 服务器上为各种后台进程添加 **cron 任务** (相应地替换路径):
 
    ```bash
       * * * * * /path/to/php /path/to/castopod/spark tasks:run >> /dev/null 2>&1
    ```
 
-   **Note** - If you do not add this cron task, the following Castopod features
-   will not work:
+   **注意** - 如果您不添加此 cron 任务，则以下 Castopod 功能不工作：
 
-   - Importing a podcast from an existing RSS feed
-   - Broadcasting social activities to your followers in the fediverse
-   - Broadcasting episodes to open hubs using
-     [WebSub](https://en.wikipedia.org/wiki/WebSub)
-   - Generating video clips -
-     [requires FFmpeg](#optional-ffmpeg-v418-or-higher-for-video-clips)
+   - 从现有的 RSS 摘要导入播客文件
+   - 在联邦宇宙中向您的关注者广播社交活动
+   - 使用 [WebSub](https://en.wikipedia.org/wiki/WebSub) 开放订阅打开广播剧集
+   - 生成视频素材 -
+     [需要 FFmpeg](#optional-ffmpeg-v418-or-higher-for-video-clips)
 
 ### (推荐) 安装向导
 
@@ -146,11 +142,10 @@ email.SMTPPass="你的邮件密码"
 | **`SMTPPort`**   | number               | `25`         |
 | **`SMTPCrypto`** | [`"tls"` or `"ssl"`] | `"tls"`      |
 
-### Media storage
+### 媒体存储
 
-By default, files are saved to the `public/media` folder using the file system.
-If you need to relocate the `media` folder to a different location, you can
-specify it in your `.env` file as shown below:
+默认情况下，文件使用文件系统保存到 `公共/媒体` 文件夹中。 如果您需要将 `media`
+文件夹重新定位到其他位置，您可以在您的 `.env` 文件中指定它，如下所示：
 
 ```ini
 # […]
@@ -159,13 +154,12 @@ media.root="media"
 media.storage="/mnt/storage"
 ```
 
-In this example, the files will be saved to the /mnt/storage/media folder. Make
-sure to also update your web server configuration to reflect this change.
+在此示例中，文件将保存到 /mnt/storage/media 文件夹。 请确保同时更新您的 Web 服务
+器配置以应用此更改。
 
 ### S3
 
-If you prefer storing your media files on an S3 compatible storage, you may
-specify it in your `.env`:
+如果您想要将媒体文件存储在 S3 兼容存储上，可以在您的 `.env` 中指定：
 
 ```ini
 # […]
@@ -177,9 +171,9 @@ media.s3.secret="your_s3_secret"
 media.s3.region="your_s3_region"
 ```
 
-#### S3 config options
+#### S3 配置选项
 
-| Variable name           | Type    | Default     |
+| 变量名称                | 类型    | 默认        |
 | ----------------------- | ------- | ----------- |
 | **`endpoint`**          | string  | `undefined` |
 | **`key`**               | string  | `undefined` |
@@ -192,14 +186,12 @@ media.s3.region="your_s3_region"
 
 ## 社区套餐
 
-If you don't want to bother with installing Castopod manually, you may use one
-of the packages created and maintained by the open-source community.
+如果你不想手动安装 Castopod，可以使用一个由开源社区创建和维护的软件包。
 
-### Install with YunoHost
+### 使用 YunoHost 安装
 
-[YunoHost](https://yunohost.org/) is a distribution based on Debian GNU/Linux
-made up of free and open-source software packages. It manages the hardships of
-self-hosting for you.
+[YunoHost](https://yunohost.org/) 是一个基于 Debian GNU/Linux 的发行版，由免费和
+开源软件包组成。 它可以为你解决自托管的困难。
 
 <div class="flex flex-wrap items-center gap-4">
 

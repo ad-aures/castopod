@@ -29,6 +29,7 @@ return [
         few {# postaichean}
         other {# post}
     }',
+    'links' => 'Links',
     'activity' => 'Gnìomhachd',
     'episodes' => 'Eapasodan',
     'episodes_title' => 'Eapasodan aig {podcastTitle}',

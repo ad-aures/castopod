@@ -18,13 +18,12 @@ return [
     'follow' => 'پی‌گیری',
     'followTitle' => 'پی‌گیری {actorDisplayName} روی فدیورس!',
     'followers' => '{numberOfFollowers, plural,
-        one {# follower}
-        other {# followers}
+        other {# پی‌گیر}
     }',
     'posts' => '{numberOfPosts, plural,
-        one {# post}
-        other {# posts}
+        other {# فرسته}
     }',
+    'links' => 'Links',
     'activity' => 'فعّالیت',
     'episodes' => 'قسمت‌ها',
     'episodes_title' => 'قسمت‌های {podcastTitle}',
@@ -32,12 +31,10 @@ return [
     'stats' => [
         'title' => 'آمار',
         'number_of_seasons' => '{0, plural,
-            one {# season}
-            other {# seasons}
+            other {# فصل}
         }',
         'number_of_episodes' => '{0, plural,
-            one {# episode}
-            other {# episodes}
+            other {# قسمت}
         }',
         'first_published_at' => 'قسمت نخست منتشر شده روی {0, date, medium}',
     ],
@@ -46,8 +43,7 @@ return [
     'find_on' => 'یافتن {podcastTitle} روی',
     'listen_on' => 'شنیدن روی',
     'persons' => '{personsCount, plural,
-        one {# person}
-        other {# persons}
+        other {# نفر}
     }',
     'persons_list' => 'نفر',
 ];

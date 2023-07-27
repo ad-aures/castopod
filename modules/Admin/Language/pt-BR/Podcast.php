@@ -26,8 +26,8 @@ return [
     'latest_episodes' => 'Últimos episódios',
     'see_all_episodes' => 'Ver todos os episódios',
     'draft' => 'Rascunho',
-    'sync_feed' => 'Synchronize feed',
-    'sync_feed_hint' => 'Import this podcast\'s latest episodes',
+    'sync_feed' => 'Sincronizar o feed',
+    'sync_feed_hint' => 'Importar os últimos episódios deste podcast',
     'messages' => [
         'createSuccess' => 'Podcast criado com sucesso!',
         'editSuccess' => 'Podcast foi atualizado com sucesso!',
@@ -114,8 +114,8 @@ return [
         'premium_by_default_hint' => 'Podcast episodes will be marked as premium by default. You can still choose to set some episodes, trailers or bonuses as public.',
         'op3' => 'Open Podcast Prefix Project (OP3)',
         'op3_hint' => 'Value your analytics data with OP3, an open-source and trusted third party analytics service. Share, validate and compare your analytics data with the open podcasting ecosystem.',
-        'op3_enable' => 'Enable OP3 analytics service',
-        'op3_enable_hint' => 'For security reasons, premium episodes\' analytics data will not be shared with OP3.',
+        'op3_enable' => 'Ativar serviço de análise OP3',
+        'op3_enable_hint' => 'Por razões de segurança, os dados de análise dos episódios premium não serão compartilhados com o OP3.',
         'payment_pointer' => 'Endereço de pagamento (Payment Pointer) para web monetização',
         'payment_pointer_hint' =>
             'Este é o seu lugar onde você receberá dinheiro graças à web monetização',

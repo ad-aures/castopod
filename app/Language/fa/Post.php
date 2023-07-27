@@ -22,16 +22,13 @@ return [
         'submit_reply' => 'پاسخ',
     ],
     'favourites' => '{numberOfFavourites, plural,
-        one {# favourite}
-        other {# favourites}
+        other {# برگزیده}
     }',
     'reblogs' => '{numberOfReblogs, plural,
-        one {# share}
-        other {# shares}
+        other {# هم‌رسانی}
     }',
     'replies' => '{numberOfReplies, plural,
-        one {# reply}
-        other {# replies}
+        other {# پاسخ}
     }',
     'expand' => 'گسترش فرسته',
     'block_actor' => 'انسداد کاربر ‪@{actorUsername}‬',

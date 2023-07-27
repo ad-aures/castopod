@@ -20,13 +20,13 @@ Se você prefere usar o Docker, você pode pular isso e ir direto para a
 
 ## Requisitos
 
-- PHP v8.1 only
+- Somente PHP v8.1
 - MySQL versão 5.7 ou superior ou MariaDB versão 10.2 ou superior
 - Suporte a HTTPS
 - An [ntp-synced clock](https://wiki.debian.org/NTP) to validate federation's
   incoming requests
 
-### PHP v8.1 only
+### Somento PHP v8.1
 
 PHP version 8.1 is required, with the following extensions installed:
 

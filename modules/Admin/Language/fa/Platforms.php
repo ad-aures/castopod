@@ -9,22 +9,22 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => 'Platforms',
-    'home_url' => 'Go to {platformName} website',
-    'submit_url' => 'Submit your podcast on {platformName}',
-    'visible' => 'Display in podcast homepage?',
-    'on_embed' => 'Display on embeddable player?',
-    'remove' => 'Remove {platformName}',
-    'submit' => 'Save',
+    'title' => 'بن‌سازه‌ها',
+    'home_url' => 'رفتن به پایگاه وب {platformName}',
+    'submit_url' => 'ثبت پادکستتان روی {platformName}',
+    'visible' => 'نمایش در صفحهٔ خانگی پادکست؟',
+    'on_embed' => 'نمایش در پخش‌کنندهٔ تعبیه شده؟',
+    'remove' => 'برداشتن {platformName}',
+    'submit' => 'ذخیره',
     'messages' => [
-        'updateSuccess' => 'Platform links have been successfully updated!',
-        'removeLinkSuccess' => 'The platform link has been removed.',
+        'updateSuccess' => 'پیوندهای بن‌سازه با موفّقیت به‌روز شدند!',
+        'removeLinkSuccess' => 'پیوند بن‌سازه برداشته شد.',
         'removeLinkError' =>
-            'The platform link could not be removed. Try again.',
+            'پیوند بن‌سازه نتوانست برداشته شود. دوباره تلاش کنید.',
     ],
     'description' => [
-        'podcasting' => 'The podcast ID on this platform',
-        'social' => 'The podcast account ID on this platform',
-        'funding' => 'Call to action message',
+        'podcasting' => 'شناسهٔ پادکست روی این بن‌سازه',
+        'social' => 'شناسهٔ حساب پادکست روی این بن‌سازه',
+        'funding' => 'پیام فراخوانی کنش',
     ],
 ];

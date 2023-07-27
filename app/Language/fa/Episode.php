@@ -16,8 +16,7 @@ return [
     'season_episode' => 'قسمت {episodeNumber} فصل {seasonNumber}',
     'season_episode_abbr' => 'ف{seasonNumber}: ق{episodeNumber}',
     'persons' => '{personsCount, plural,
-        one {# person}
-        other {# persons}
+        other {# نفر}
     }',
     'persons_list' => 'نفر',
     'back_to_episodes' => 'بازگشت به قسمت‌های {podcast}',
@@ -25,8 +24,7 @@ return [
     'activity' => 'فعّالیت',
     'description' => 'شرح قسمت',
     'number_of_comments' => '{numberOfComments, plural,
-        one {# comment}
-        other {# comments}
+        other {# نظر}
     }',
     'all_podcast_episodes' => 'تمامی قسمت‌های پادکست',
     'back_to_podcast' => 'بازگشت به پادکست',

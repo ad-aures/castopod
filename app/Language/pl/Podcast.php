@@ -27,6 +27,7 @@ return [
         few {# osoby}
         other {# osób}
     }',
+    'links' => 'Links',
     'activity' => 'Aktywność',
     'episodes' => 'Odcinki',
     'episodes_title' => 'Odcinki {podcastTitle}',

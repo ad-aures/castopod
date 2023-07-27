@@ -72,10 +72,10 @@ return [
     'emails' => [
         'greeting' => '嘿，',
         'token' => '你的令牌: {0}',
-        'unique_feed_link' => '你唯一的源链接：{0}',
+        'unique_feed_link' => '你唯一的摘要链接：{0}',
         'how_to_use' => '如何使用?',
         'two_ways' => '你有两种解锁高级剧集的方法：',
-        'import_into_app' => '在你最喜欢的播客应用程序中复制你唯一的源 URL（将其作为私人源导入以防止暴露你的凭据）。',
+        'import_into_app' => '在你最喜欢的播客应用程序中复制你唯一的摘要 URL（将其作为私人源导入以防止暴露你的凭据）。',
         'go_to_website' => '访问 {podcastWebsite} 的网站并使用你的令牌解锁播客。',
         'welcome_subject' => '欢迎来到 {podcastTitle}',
         'welcome' => '你已订阅 {podcastTitle}，谢谢，欢迎加入！',

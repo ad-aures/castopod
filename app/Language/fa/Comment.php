@@ -18,12 +18,10 @@ return [
         'submit_reply' => 'پاسخ',
     ],
     'likes' => '{numberOfLikes, plural,
-        one {# like}
-        other {# likes}
+        other {# پسند}
     }',
     'replies' => '{numberOfReplies, plural,
-        one {# reply}
-        other {# replies}
+        other {# پاسخ}
     }',
     'like' => 'پسند',
     'reply' => 'پاسخ',

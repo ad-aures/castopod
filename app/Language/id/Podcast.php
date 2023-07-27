@@ -23,6 +23,7 @@ return [
     'posts' => '{numberOfPosts, plural,
         other {# postingan}
     }',
+    'links' => 'Links',
     'activity' => 'Aktivitas',
     'episodes' => 'Episode',
     'episodes_title' => 'Episode-episode {podcastTitle}',
