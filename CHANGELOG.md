@@ -1,3 +1,16 @@
+# [1.5.0](https://code.castopod.org/adaures/castopod/compare/v1.4.7...v1.5.0) (2023-07-27)
+
+### Bug Fixes
+
+- **admin-ui:** truncate header title + remove sticky podcast banner card on
+  mobile
+  ([63c20da](https://code.castopod.org/adaures/castopod/commit/63c20da5ffd500265f06fa38f2b2c963e14602af))
+
+### Features
+
+- add podcast links page including social, podcasting and funding links
+  ([8ae2929](https://code.castopod.org/adaures/castopod/commit/8ae292933af15fa99856582ac24e985bfef37d5b))
+
 ## [1.4.7](https://code.castopod.org/adaures/castopod/compare/v1.4.6...v1.4.7) (2023-07-19)
 
 ### Bug Fixes
