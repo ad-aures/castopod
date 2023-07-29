@@ -81,6 +81,10 @@ class Button extends Component
             unset($this->attributes['class']);
         }
 
+        if ($this->iconLeft !== '' || $this->iconRight !== '') {
+            $this->slot = '<span>' . $this->slot . '</span>';
+        }
+
         if ($this->iconLeft !== '') {
             $this->slot = (new Icon([
                 'glyph' => $this->iconLeft,

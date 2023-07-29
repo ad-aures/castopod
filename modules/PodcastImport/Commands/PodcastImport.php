@@ -209,6 +209,11 @@ class PodcastImport extends BaseCommand
             throw new Exception('Missing podcast cover. Please include an <itunes:image> tag');
         }
 
+        $parentalAdvisory = null;
+        if ($this->podcastFeed->channel->itunes_explicit->getValue() !== null) {
+            $parentalAdvisory = $this->podcastFeed->channel->itunes_explicit->getValue() ? 'explicit' : 'clean';
+        }
+
         $htmlConverter = new HtmlConverter();
         $podcast = new Podcast([
             'created_by'           => $this->user->id,
@@ -224,7 +229,7 @@ class PodcastImport extends BaseCommand
             'banner'               => null,
             'language_code'        => $this->importTask->language,
             'category_id'          => $this->importTask->category,
-            'parental_advisory'    => $this->podcastFeed->channel->itunes_explicit->getValue(),
+            'parental_advisory'    => $parentalAdvisory,
             'owner_name'           => $this->podcastFeed->channel->itunes_owner->itunes_name->getValue(),
             'owner_email'          => $this->podcastFeed->channel->itunes_owner->itunes_email->getValue(),
             'publisher'            => $this->podcastFeed->channel->itunes_author->getValue(),
@@ -439,6 +444,11 @@ class PodcastImport extends BaseCommand
 
             $coverUrl = $this->getCoverUrl($item);
 
+            $parentalAdvisory = null;
+            if ($item->itunes_explicit->getValue() !== null) {
+                $parentalAdvisory = $item->itunes_explicit->getValue() ? 'explicit' : 'clean';
+            }
+
             $episode = new Episode([
                 'created_by' => $this->user->id,
                 'updated_by' => $this->user->id,
@@ -455,7 +465,7 @@ class PodcastImport extends BaseCommand
                 'description_markdown' => $htmlConverter->convert($showNotes),
                 'description_html'     => $showNotes,
                 'cover'                => $coverUrl ? download_file($coverUrl) : null,
-                'parental_advisory'    => $item->itunes_explicit->getValue(),
+                'parental_advisory'    => $parentalAdvisory,
                 'number'               => $item->itunes_episode->getValue(),
                 'season_number'        => $item->itunes_season->getValue(),
                 'type'                 => $item->itunes_episodeType->getValue(),

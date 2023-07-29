@@ -9,8 +9,8 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
-<Button uri="<?= route_to('podcast-edit', $podcast->id) ?>" variant="secondary" iconLeft="edit"><?= lang('Podcast.edit') ?></Button>
-<Button uri="<?= route_to('episode-create', $podcast->id) ?>" variant="primary" iconLeft="add"><?= lang('Episode.create') ?></Button>
+<Button uri="<?= route_to('podcast-edit', $podcast->id) ?>" variant="secondary" class="[&>span]:hidden [&>span]:md:block py-3 md:py-2" iconLeft="edit"><?= lang('Podcast.edit') ?></Button>
+<Button uri="<?= route_to('episode-create', $podcast->id) ?>" variant="primary" class="[&>span]:hidden [&>span]:md:block py-3 md:py-2" iconLeft="add"><?= lang('Episode.create') ?></Button>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>

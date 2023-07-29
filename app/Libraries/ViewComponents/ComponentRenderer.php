@@ -96,7 +96,7 @@ class ComponentRenderer
 
     private function renderPairedTags(string $output): string
     {
-        $pattern = '/<\s*(?<name>[A-Z][A-Za-z0-9\.]*?)(?<attributes>[\s\S\=\'\"]*)>(?<slot>.*)<\/\s*\1\s*>/uUsm';
+        $pattern = '/<\s*(?<name>[A-Z][A-Za-z0-9\.]*?)(?<attributes>(\s*[\w\-]+\s*=\s*(\'[^\']*\'|\"[^\"]*\"))+\s*)>(?<slot>.*)<\/\s*\1\s*>/uUsm';
         ini_set('pcre.backtrack_limit', '-1');
         /*
             $matches[0] = full tags matched and all of its content

@@ -16,7 +16,7 @@ $userPodcasts = get_podcasts_user_can_interact_with(auth()->user()); ?>
             'home',
         ) ?>" class="inline-flex items-center h-full px-2 text-sm font-semibold sm:px-6 hover:underline focus:ring-inset focus:ring-accent" title="<?= lang('Navigation.go_to_website') ?>">
                 <span class="hidden sm:block"><?= lang('Navigation.go_to_website') ?></span>
-                <?= icon('external-link', 'ml-1 text-xl sm:opacity-60') ?>
+                <?= icon('external-link', 'sm:ml-1 text-xl sm:text-base sm:opacity-60') ?>
         </a>
     </div>
     <div class="inline-flex items-center h-full ml-auto">
