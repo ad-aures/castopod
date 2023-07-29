@@ -4,7 +4,7 @@ networks:
   castopod:
     ipam:
       config:
-        - subnet: 172.20.0.0/24
+        - subnet: 172.100.0.0/24
 
 services:
   app:
@@ -22,7 +22,7 @@ services:
       - mariadb
     networks:
       castopod:
-        ipv4_address: 172.20.0.2
+        ipv4_address: 172.100.0.2
 
   redis:
     image: redis:alpine
@@ -33,7 +33,7 @@ services:
       - redis:/data
     networks:
       castopod:
-        ipv4_address: 172.20.0.3
+        ipv4_address: 172.100.0.3
 
   mariadb:
     image: mariadb:10.2
@@ -50,7 +50,7 @@ services:
       MYSQL_PASSWORD: castopod
     networks:
       castopod:
-        ipv4_address: 172.20.0.4
+        ipv4_address: 172.100.0.4
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
@@ -67,7 +67,7 @@ services:
       - mariadb
     networks:
       castopod:
-        ipv4_address: 172.20.0.5
+        ipv4_address: 172.100.0.5
 
   s3:
     image: adobe/s3mock:latest
@@ -82,7 +82,7 @@ services:
       - ./data/s3:/data:cached
     networks:
       castopod:
-        ipv4_address: 172.20.0.6
+        ipv4_address: 172.100.0.6
 
 volumes:
   redis:
