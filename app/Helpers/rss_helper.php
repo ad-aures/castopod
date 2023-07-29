@@ -35,8 +35,7 @@ if (! function_exists('get_rss_feed')) {
 
         $itunesNamespace = 'http://www.itunes.com/dtds/podcast-1.0.dtd';
 
-        $podcastNamespace =
-            'https://github.com/Podcastindex-org/podcast-namespace/blob/main/docs/1.0.md';
+        $podcastNamespace = 'https://podcastindex.org/namespace/1.0';
 
         $atomNamespace = 'http://www.w3.org/2005/Atom';
 
@@ -450,11 +449,7 @@ if (! function_exists('rss_to_array')) {
      */
     function rss_to_array(SimpleXMLElement $rssNode): array
     {
-        $nameSpaces = [
-            '',
-            'http://www.itunes.com/dtds/podcast-1.0.dtd',
-            'https://github.com/Podcastindex-org/podcast-namespace/blob/main/docs/1.0.md',
-        ];
+        $nameSpaces = ['', 'http://www.itunes.com/dtds/podcast-1.0.dtd', 'https://podcastindex.org/namespace/1.0'];
         $arrayNode = [];
         $arrayNode['name'] = $rssNode->getName();
         $arrayNode['namespace'] = $rssNode->getNamespaces(false);

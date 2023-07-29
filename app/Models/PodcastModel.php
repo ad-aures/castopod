@@ -500,7 +500,7 @@ class PodcastModel extends Model
      * @param mixed[] $data
      *
      * Sets the UUIDv5 for a podcast. For more information, see
-     * https://github.com/Podcastindex-org/podcast-namespace/blob/main/docs/1.0.md#guid
+     * https://podcastindex.org/namespace/1.0#guid
      *
      * @return mixed[]
      */
