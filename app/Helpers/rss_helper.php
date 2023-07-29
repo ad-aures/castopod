@@ -360,6 +360,9 @@ if (! function_exists('get_rss_feed')) {
                         pathinfo($episode->transcript->file_url, PATHINFO_EXTENSION)
                     ) ?? 'text/html',
                 );
+                // Castopod only allows for captions (SubRip files)
+                $transcriptElement->addAttribute('rel', 'captions');
+                // TODO: allow for multiple languages
                 $transcriptElement->addAttribute('language', $podcast->language_code);
             }
 

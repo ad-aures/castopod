@@ -276,7 +276,7 @@ class Mimes
         ],
         'svg' => ['image/svg+xml', 'image/svg', 'application/xml', 'text/xml'],
         'vcf' => 'text/x-vcard',
-        'srt' => ['text/srt', 'text/plain', 'application/octet-stream'],
+        'srt' => ['application/x-subrip', 'text/srt', 'text/plain', 'application/octet-stream'],
         'vtt' => ['text/vtt', 'text/plain'],
         'ico' => ['image/x-icon', 'image/x-ico', 'image/vnd.microsoft.icon'],
         'stl' => ['application/sla', 'application/vnd.ms-pki.stl', 'application/x-navistyle'],
