@@ -1,3 +1,17 @@
+## [1.5.1](https://code.castopod.org/adaures/castopod/compare/v1.5.0...v1.5.1) (2023-07-29)
+
+### Bug Fixes
+
+- **admin-ui:** remove button labels on smaller screens in podcast view
+  ([9cc5ffd](https://code.castopod.org/adaures/castopod/commit/9cc5ffd1439fdc86f46a03f4319cae32db95f84e))
+- **rss:** set srt transcripts' mimetype to application/x-subrip with
+  rel="captions" attribute
+  ([16a3fdb](https://code.castopod.org/adaures/castopod/commit/16a3fdb56e3f07185e75d106216f29519ccb25f7)),
+  closes [#360](https://code.castopod.org/adaures/castopod/issues/360)
+- **rss:** update podcast extension namespace
+  ([6833dd0](https://code.castopod.org/adaures/castopod/commit/6833dd05ab51bc530d34fd4174ad732f623226c0)),
+  closes [#360](https://code.castopod.org/adaures/castopod/issues/360)
+
 # [1.5.0](https://code.castopod.org/adaures/castopod/compare/v1.4.7...v1.5.0) (2023-07-27)
 
 ### Bug Fixes
