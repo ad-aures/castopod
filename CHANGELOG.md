@@ -1,3 +1,15 @@
+## [1.5.2](https://code.castopod.org/adaures/castopod/compare/v1.5.1...v1.5.2) (2023-07-31)
+
+### Bug Fixes
+
+- **credits:** remove undefined $podcast variable from page layout
+  ([73a5b68](https://code.castopod.org/adaures/castopod/commit/73a5b680875cc520fd15c529c01d44df728f9be2)),
+  closes [#359](https://code.castopod.org/adaures/castopod/issues/359)
+- **platforms:** change twitter to X + add buymeacoffee and kofi as funding
+  ([d69b4e4](https://code.castopod.org/adaures/castopod/commit/d69b4e4857fcb1ac1c05ac59c78d130788f00400)),
+  closes [#353](https://code.castopod.org/adaures/castopod/issues/353)
+  [#361](https://code.castopod.org/adaures/castopod/issues/361)
+
 ## [1.5.1](https://code.castopod.org/adaures/castopod/compare/v1.5.0...v1.5.1) (2023-07-29)
 
 ### Bug Fixes
