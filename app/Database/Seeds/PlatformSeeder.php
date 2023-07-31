@@ -22,7 +22,7 @@ class PlatformSeeder extends Seeder
             [
                 'slug'       => 'amazon',
                 'type'       => 'podcasting',
-                'label'      => 'Amazon Music and Audible',
+                'label'      => 'Amazon Music & Audible',
                 'home_url'   => 'https://music.amazon.com/',
                 'submit_url' => 'https://podcasters.amazon.com/',
             ],
@@ -365,7 +365,7 @@ class PlatformSeeder extends Seeder
             [
                 'slug'       => 'podnews',
                 'type'       => 'podcasting',
-                'label'      => 'podnews',
+                'label'      => 'Podnews',
                 'home_url'   => 'https://podnews.net/podcast/subscribe-pages',
                 'submit_url' => '',
             ],
@@ -394,16 +394,23 @@ class PlatformSeeder extends Seeder
                 'slug'       => 'zion',
                 'type'       => 'podcasting',
                 'label'      => 'Zion',
-                'home_url'   => 'https://getzion.com/',
-                'submit_url' => 'https://shop.n2n2.chat/',
+                'home_url'   => 'https://zion.fyi/',
+                'submit_url' => 'https://guide.zion.fyi/zion/getting-started',
             ],
         ];
 
         $fundingData = [
             [
+                'slug'       => 'buymeacoffee',
+                'type'       => 'funding',
+                'label'      => 'Buy Me a Coffee',
+                'home_url'   => 'https://www.buymeacoffee.com/',
+                'submit_url' => 'https://www.buymeacoffee.com/signup',
+            ],
+            [
                 'slug'       => 'paypal',
                 'type'       => 'funding',
-                'label'      => 'Paypal',
+                'label'      => 'PayPal',
                 'home_url'   => 'https://www.paypal.com/',
                 'submit_url' => 'https://www.paypal.com/paypalme/my/grab',
             ],
@@ -424,7 +431,7 @@ class PlatformSeeder extends Seeder
             [
                 'slug'       => 'helloasso',
                 'type'       => 'funding',
-                'label'      => 'helloasso',
+                'label'      => 'HelloAsso',
                 'home_url'   => 'https://www.helloasso.com/',
                 'submit_url' => 'https://auth.helloasso.com/inscription',
             ],
@@ -448,6 +455,13 @@ class PlatformSeeder extends Seeder
                 'label'      => 'KissKissBankBank',
                 'home_url'   => 'https://www.kisskissbankbank.com/',
                 'submit_url' => 'https://www.kisskissbankbank.com/en/financer-mon-projet',
+            ],
+            [
+                'slug'       => 'kofi',
+                'type'       => 'funding',
+                'label'      => 'Ko-fi',
+                'home_url'   => 'https://ko-fi.com/',
+                'submit_url' => 'https://ko-fi.com/account/register',
             ],
             [
                 'slug'       => 'liberapay',
@@ -579,11 +593,11 @@ class PlatformSeeder extends Seeder
                 'submit_url' => 'https://www.twitch.tv/signup',
             ],
             [
-                'slug'       => 'twitter',
+                'slug'       => 'x',
                 'type'       => 'social',
-                'label'      => 'Twitter',
-                'home_url'   => 'https://twitter.com/',
-                'submit_url' => 'https://twitter.com/i/flow/signup',
+                'label'      => 'X',
+                'home_url'   => 'https://x.com/',
+                'submit_url' => 'https://x.com/i/flow/signup',
             ],
             [
                 'slug'       => 'writefreely',
@@ -595,7 +609,7 @@ class PlatformSeeder extends Seeder
             [
                 'slug'       => 'youtube',
                 'type'       => 'social',
-                'label'      => 'Youtube',
+                'label'      => 'YouTube',
                 'home_url'   => 'https://www.youtube.com/',
                 'submit_url' => 'https://creatoracademy.youtube.com/page/home',
             ],
