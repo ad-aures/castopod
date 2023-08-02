@@ -48,6 +48,7 @@
     }
   },
   "scripts": {
+    "dev": "php spark serve",
     "test": "vendor/bin/phpunit --no-coverage",
     "analyse": "vendor/bin/phpstan analyse --ansi",
     "rector": "vendor/bin/rector process --dry-run --ansi --memory-limit=2G",

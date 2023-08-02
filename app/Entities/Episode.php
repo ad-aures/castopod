@@ -238,10 +238,7 @@ class Episode extends Entity
             (new MediaModel('audio'))->updateMedia($this->getAudio());
         } else {
             $audio = new Audio([
-                'file_key' => 'podcasts/' . $this->getPodcast()->handle . '/' . pathinfo(
-                    $file->getRandomName(),
-                    PATHINFO_FILENAME
-                ) . '.' . $file->getExtension(),
+                'file_key'      => 'podcasts/' . $this->getPodcast()->handle . '/' . $file->getRandomName(),
                 'language_code' => $this->getPodcast()
                     ->language_code,
                 'uploaded_by' => $this->attributes['updated_by'],
