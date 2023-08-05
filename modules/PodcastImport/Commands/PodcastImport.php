@@ -168,6 +168,10 @@ class PodcastImport extends BaseCommand
             $this->importTask->pass();
         } catch (Exception $exception) {
             $this->error($exception->getMessage());
+            log_message(
+                'critical',
+                'Error when importing ' . $this->importTask->feed_url . PHP_EOL . $exception->getTraceAsString()
+            );
         }
     }
 

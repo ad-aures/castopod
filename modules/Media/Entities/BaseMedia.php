@@ -56,29 +56,30 @@ class BaseMedia extends Entity
     ];
 
     /**
-     * @param array<string, mixed>|null $data
+     * @param array<string, mixed> $data
      */
-    public function __construct(array $data = null)
+    public function setAttributes(array $data): self
     {
-        parent::__construct($data);
+        parent::setAttributes($data);
 
         $this->initFileProperties();
+
+        return $this;
     }
 
     public function initFileProperties(): void
     {
-        if ($this->file_key !== '') {
-            [
-                'filename'  => $filename,
-                'dirname'   => $dirname,
-                'extension' => $extension,
-            ] = pathinfo($this->file_key);
+        $pathInfo = pathinfo($this->file_key) + [
+            'filename'  => '',
+            'dirname'   => '',
+            'extension' => '',
+        ];
 
-            $this->attributes['file_url'] = service('file_manager')->getUrl($this->file_key);
-            $this->attributes['file_name'] = $filename;
-            $this->attributes['file_directory'] = $dirname;
-            $this->attributes['file_extension'] = $extension;
-        }
+        $this->file_url = service('file_manager')
+            ->getUrl($this->file_key);
+        $this->file_name = $pathInfo['filename'];
+        $this->file_directory = $pathInfo['dirname'];
+        $this->file_extension = $pathInfo['extension'];
     }
 
     public function setFile(File $file): self

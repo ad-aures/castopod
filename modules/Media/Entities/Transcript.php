@@ -21,11 +21,11 @@ class Transcript extends BaseMedia
 
     protected string $type = 'transcript';
 
-    public function __construct(?array $data = null)
+    public function initFileProperties(): void
     {
-        parent::__construct($data);
+        parent::initFileProperties();
 
-        if ($this->file_key && $this->file_metadata && array_key_exists('json_key', $this->file_metadata)) {
+        if ($this->file_metadata !== null && array_key_exists('json_key', $this->file_metadata)) {
             helper('media');
 
             $this->json_key = $this->file_metadata['json_key'];

@@ -21,14 +21,11 @@ class Audio extends BaseMedia
 {
     protected string $type = 'audio';
 
-    /**
-     * @param array<string, mixed>|null $data
-     */
-    public function __construct(array $data = null)
+    public function initFileProperties(): void
     {
-        parent::__construct($data);
+        parent::initFileProperties();
 
-        if ($this->file_metadata) {
+        if ($this->file_metadata !== null) {
             $this->duration = (float) $this->file_metadata['playtime_seconds'];
             $this->header_size = (int) $this->file_metadata['avdataoffset'];
         }

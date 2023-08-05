@@ -102,14 +102,7 @@ class MediaModel extends Model
     {
         $cacheName = "media#{$mediaId}";
         if (! ($found = cache($cacheName))) {
-            $builder = $this->where([
-                'id' => $mediaId,
-            ]);
-
-            /** @var object $result */
-            $result = $builder->first();
-            $mediaClass = $this->returnType;
-            $found = new $mediaClass($result->toArray(false, true));
+            $found = $this->find($mediaId);
 
             cache()
                 ->save($cacheName, $found, DECADE);

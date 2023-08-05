@@ -29,10 +29,7 @@ class Image extends BaseMedia
     {
         parent::initFileProperties();
 
-        if ($this->file_key !== '' && $this->file_metadata !== null && array_key_exists(
-            'sizes',
-            $this->file_metadata
-        )) {
+        if ($this->file_metadata && array_key_exists('sizes', $this->file_metadata)) {
             $this->sizes = $this->file_metadata['sizes'];
             $this->initSizeProperties();
         }
