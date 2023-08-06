@@ -24,8 +24,7 @@ class FS implements FileManagerInterface
     {
         helper('media');
 
-        $mediaRoot = $this->media_path_absolute();
-        $path = $mediaRoot . '/' . $key;
+        $path = $this->media_path_absolute($key);
 
         if (! file_exists(dirname($path))) {
             mkdir(dirname($path), 0777, true);
