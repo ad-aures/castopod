@@ -20,32 +20,32 @@ class FS implements FileManagerInterface
     /**
      * Saves a file to the corresponding folder in `public/media`
      */
-    public function save(File $file, string $path): string | false
+    public function save(File $file, string $key): string
     {
         helper('media');
 
-        if ((pathinfo($path, PATHINFO_EXTENSION) === '') && (($extension = $file->getExtension()) !== '')) {
-            $path = $path . '.' . $extension;
-        }
-
         $mediaRoot = $this->media_path_absolute();
+        $path = $mediaRoot . '/' . $key;
 
-        if (! file_exists(dirname($mediaRoot . '/' . $path))) {
-            mkdir(dirname($mediaRoot . '/' . $path), 0777, true);
+        if (! file_exists(dirname($path))) {
+            mkdir(dirname($path), 0777, true);
         }
 
-        if (! file_exists(dirname($mediaRoot . '/' . $path) . '/index.html')) {
-            touch(dirname($mediaRoot . '/' . $path) . '/index.html');
+        if (! file_exists(dirname($path) . '/index.html')) {
+            touch(dirname($path) . '/index.html');
         }
 
-        try {
-            // move to media folder, overwrite file if already existing
-            $file->move($mediaRoot . '/', $path, true);
-        } catch (Exception) {
-            return false;
+        // copy to media folder, overwrite file if already existing
+        $isCopySuccessful = copy($file->getRealPath(), $path);
+
+        if (! $isCopySuccessful) {
+            throw new Exception("Could not save file {$key} to {$path}");
         }
 
-        return $path;
+        // delete temporary file after copy
+        unlink($file->getRealPath());
+
+        return $key;
     }
 
     public function delete(string $key): bool

@@ -69,7 +69,7 @@ class Publish extends BaseCommand
                     $request->post($hub, $requestOptions);
                 } catch (Exception $exception) {
                     log_message(
-                        'critical',
+                        'warning',
                         "COULD NOT PUBLISH @{$podcast->handle} ON {$hub}" . PHP_EOL . $exception->getMessage()
                     );
                 }

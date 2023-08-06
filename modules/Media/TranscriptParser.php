@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace Modules\Media;
 
+use Exception;
 use stdClass;
 
 class TranscriptParser
@@ -27,8 +28,10 @@ class TranscriptParser
 
     /**
      * Adapted from: https://stackoverflow.com/a/11659306
+     *
+     * @return string Returns the json encoded string
      */
-    public function parseSrt(): string | false
+    public function parseSrt(): string
     {
         if (! defined('SRT_STATE_SUBNUMBER')) {
             define('SRT_STATE_SUBNUMBER', 0);
@@ -98,7 +101,13 @@ class TranscriptParser
             $subs[] = $sub;
         }
 
-        return json_encode($subs, JSON_PRETTY_PRINT);
+        $jsonString = json_encode($subs, JSON_PRETTY_PRINT);
+
+        if (! $jsonString) {
+            throw new Exception('Failed to parse SRT to JSON.');
+        }
+
+        return $jsonString;
     }
 
     private function getSecondsFromTimeString(string $timeString): float

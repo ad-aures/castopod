@@ -94,14 +94,14 @@ class Image extends BaseMedia
         return $this;
     }
 
-    public function saveFile(): bool
+    public function saveFile(): void
     {
         if ($this->attributes['sizes'] !== []) {
             $this->initFileProperties();
             $this->saveSizes();
         }
 
-        return parent::saveFile();
+        parent::saveFile();
     }
 
     public function deleteFile(): bool

@@ -117,12 +117,13 @@ class MediaModel extends Model
     public function saveMedia(object $media): int | false
     {
         // save file first
-        if (! $media->saveFile()) {
-            return false;
-        }
+        $media->saveFile();
 
         // insert record in database
-        if (! $mediaId = $this->insert($media, true)) {
+        /** @var int|false $mediaId */
+        $mediaId = $this->insert($media, true);
+
+        if (! $mediaId) {
             $this->db->transRollback();
 
             return false;
@@ -137,10 +138,10 @@ class MediaModel extends Model
     public function updateMedia(object $media): bool
     {
         // save file first
-        if (! $media->saveFile()) {
-            return false;
-        }
+        // FIXME: what if file is not set?
+        $media->saveFile();
 
+        // update record in database
         return $this->update($media->id, $media);
     }
 

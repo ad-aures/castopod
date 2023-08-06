@@ -13,6 +13,7 @@ namespace Modules\Media\Entities;
 use CodeIgniter\Entity\Entity;
 use CodeIgniter\Files\File;
 use Modules\Media\Models\MediaModel;
+use RuntimeException;
 
 /**
  * @property int $id
@@ -97,15 +98,13 @@ class BaseMedia extends Entity
         return $this;
     }
 
-    public function saveFile(): bool
+    public function saveFile(): void
     {
         if (! $this->attributes['file'] || ! $this->file_key) {
-            return false;
+            throw new RuntimeException("'file' and 'file_key' attributes must be set before saving a file.");
         }
 
         $this->attributes['file_key'] = service('file_manager')->save($this->attributes['file'], $this->file_key);
-
-        return true;
     }
 
     public function deleteFile(): bool
@@ -128,6 +127,7 @@ class BaseMedia extends Entity
 
         if (! service('file_manager')->rename($this->file_key, $newFileKey)) {
             $db->transRollback();
+
             return false;
         }
 

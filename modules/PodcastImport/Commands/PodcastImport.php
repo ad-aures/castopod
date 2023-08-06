@@ -46,8 +46,6 @@ class PodcastImport extends BaseCommand
 
     public function init(): void
     {
-        CLI::clearScreen();
-
         helper('podcast_import');
 
         $importQueue = get_import_tasks();
@@ -97,9 +95,9 @@ class PodcastImport extends BaseCommand
 
     public function run(array $params): void
     {
-        try {
-            $this->init();
+        $this->init();
 
+        try {
             CLI::write('All good! Feed was parsed successfully!');
 
             CLI::write(

@@ -30,19 +30,15 @@ class S3 implements FileManagerInterface
         ]);
     }
 
-    public function save(File $file, string $key): string|false
+    public function save(File $file, string $key): string
     {
-        try {
-            $this->s3->putObject([
-                'Bucket'       => $this->config->s3['bucket'],
-                'Key'          => $this->prefixKey($key),
-                'SourceFile'   => $file,
-                'ContentType'  => $file->getMimeType(),
-                'CacheControl' => 'max-age=' . YEAR,
-            ]);
-        } catch (Exception) {
-            return false;
-        }
+        $this->s3->putObject([
+            'Bucket'       => $this->config->s3['bucket'],
+            'Key'          => $this->prefixKey($key),
+            'SourceFile'   => $file,
+            'ContentType'  => $file->getMimeType(),
+            'CacheControl' => 'max-age=' . YEAR,
+        ]);
 
         // delete file after storage in s3
         unlink($file->getRealPath());

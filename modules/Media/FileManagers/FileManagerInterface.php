@@ -9,7 +9,7 @@ use CodeIgniter\HTTP\Response;
 
 interface FileManagerInterface
 {
-    public function save(File $file, string $key): string | false;
+    public function save(File $file, string $key): string;
 
     public function delete(string $key): bool;
 

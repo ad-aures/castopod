@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Modules\Media\Entities;
 
 use CodeIgniter\Files\File;
+use Exception;
 use Modules\Media\TranscriptParser;
 
 class Transcript extends BaseMedia
@@ -53,11 +54,11 @@ class Transcript extends BaseMedia
         return $this;
     }
 
-    public function saveFile(): bool
+    public function saveFile(): void
     {
         $this->saveJsonTranscript();
 
-        return parent::saveFile();
+        parent::saveFile();
     }
 
     public function deleteFile(): bool
@@ -73,19 +74,18 @@ class Transcript extends BaseMedia
         return true;
     }
 
-    private function saveJsonTranscript(): bool
+    private function saveJsonTranscript(): void
     {
         $srtContent = file_get_contents($this->file->getRealPath());
 
         $transcriptParser = new TranscriptParser();
 
         if ($srtContent === false) {
-            return false;
+            throw new Exception('Could not read transcript file at ' . $this->file->getRealPath());
         }
 
-        if (! $transcriptJson = $transcriptParser->loadString($srtContent)->parseSrt()) {
-            return false;
-        }
+        $transcriptJson = $transcriptParser->loadString($srtContent)
+            ->parseSrt();
 
         $tempFilePath = WRITEPATH . 'uploads/' . $this->file->getRandomName();
         file_put_contents($tempFilePath, $transcriptJson);
@@ -94,7 +94,5 @@ class Transcript extends BaseMedia
 
         service('file_manager')
             ->save($newTranscriptJson, $this->json_key);
-
-        return true;
     }
 }
