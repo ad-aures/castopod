@@ -33,6 +33,7 @@ class Media extends BaseConfig
         'debug'             => false,
         'pathStyleEndpoint' => false,
         'keyPrefix'         => '',
+        'serveWithRedirect' => false,
     ];
 
     /**

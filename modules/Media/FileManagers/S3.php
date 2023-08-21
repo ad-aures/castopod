@@ -10,6 +10,7 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\Files\File;
 use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\Response;
+use DateTime;
 use Exception;
 use Modules\Media\Config\Media as MediaConfig;
 
@@ -183,8 +184,17 @@ class S3 implements FileManagerInterface
 
     public function serve(string $key): Response
     {
-        /** @var IncomingRequest $request */
-        $request = service('request');
+        if ($this->config->s3['serveWithRedirect']) {
+            return $this->servePresignedRequest($key);
+        }
+
+        return $this->serveProxy($key);
+    }
+
+    private function serveProxy(string $key): Response
+    {
+        /** @var IncomingRequest $incomingRequest */
+        $incomingRequest = service('request');
 
         /** @var Response $response */
         $response = service('response');
@@ -194,8 +204,8 @@ class S3 implements FileManagerInterface
             'Key'    => $this->prefixKey($key),
         ];
 
-        if ($request->hasHeader('Range')) {
-            $s3Request['Range'] = $request->header('Range')->getValue();
+        foreach ($incomingRequest->headers() as $header) {
+            $s3Request[$header->getName()] = $header->getValue();
         }
 
         try {
@@ -215,6 +225,47 @@ class S3 implements FileManagerInterface
         }
 
         return $response->setBody((string) $result->get('Body')->getContents());
+    }
+
+    private function servePresignedRequest(string $key): Response
+    {
+        $cacheName = 'object_presigned_uri_' . str_replace('/', '-', $key) . '_' . $this->config->s3['bucket'];
+        if (! $found = cache($cacheName)) {
+            $cmd = $this->s3->getCommand('GetObject', [
+                'Bucket' => $this->config->s3['bucket'],
+                'Key'    => $this->prefixKey($key),
+            ]);
+
+            $request = $this->s3->createPresignedRequest($cmd, '+1 day');
+
+            $found = (string) $request->getUri();
+
+            cache()
+                ->save($cacheName, $found, DAY);
+        }
+
+        $cacheOptions = [
+            'max-age' => DAY,
+            'etag'    => md5($found),
+            'public'  => true,
+        ];
+
+        if (cache()->getMetaData($cacheName)) {
+            $lastModifiedTimestamp = cache()
+                ->getMetaData($cacheName)['mtime'];
+            $lastModified = new DateTime();
+            $lastModified->setTimestamp($lastModifiedTimestamp);
+            $cacheOptions['last-modified'] = $lastModified->format(DATE_RFC7231);
+        }
+
+        /** @var Response $response */
+        $response = service('response');
+
+        // Remove Cache-Control header before redefining it
+        header_remove('Cache-Control');
+
+        return $response->setCache($cacheOptions)
+            ->redirect($found);
     }
 
     private function prefixKey(string $key): string
