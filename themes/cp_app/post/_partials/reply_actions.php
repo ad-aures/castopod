@@ -19,24 +19,16 @@ if (can_user_interact()): ?>
                 [
                     'numberOfReblogs' => $reply->reblogs_count,
                 ],
-            ) ?>"><?= icon('repeat', 'text-lg mr-1 opacity-40') .
-                        $reply->reblogs_count ?></button>
+            ) ?>"><?= icon('repeat', 'text-lg mr-1 opacity-40') . $reply->reblogs_count ?></button>
                 <button type="submit" name="action" value="favourite" class="inline-flex items-center text-sm hover:underline" title="<?= lang(
                     'Post.favourites',
                     [
                         'numberOfFavourites' => $reply->favourites_count,
                     ],
-                ) ?>"><?= icon('heart', 'text-lg mr-1 opacity-40') .
-                $reply->favourites_count ?></button>
-                <button id="<?= $reply->id .
-                '-more-dropdown' ?>" type="button" class="text-xl text-skin-muted focus:ring-accent" data-dropdown="button" data-dropdown-target="<?= $reply->id .
-                '-more-dropdown-menu' ?>" aria-label="<?= lang(
-                    'Common.more',
-                ) ?>" aria-haspopup="true" aria-expanded="false"><?= icon('more') ?>
-                </button>
+                ) ?>"><?= icon('heart', 'text-lg mr-1 opacity-40') . $reply->favourites_count ?></button>
+                <button id="<?= $reply->id . '-more-dropdown' ?>" type="button" class="text-xl text-skin-muted focus:ring-accent" data-dropdown="button" data-dropdown-target="<?= $reply->id . '-more-dropdown-menu' ?>" aria-label="<?= lang('Common.more') ?>" aria-haspopup="true" aria-expanded="false"><?= icon('more') ?></button>
         </form>
-        <nav id="<?= $reply->id .
-                '-more-dropdown-menu' ?>" class="flex flex-col py-2 text-sm rounded-lg shadow border-3 border-subtle bg-elevated" aria-labelledby="<?= $reply->id .
+        <nav id="<?= $reply->id . '-more-dropdown-menu' ?>" class="flex flex-col py-2 text-sm rounded-lg shadow border-3 border-subtle bg-elevated" aria-labelledby="<?= $reply->id .
         '-more-dropdown' ?>" data-dropdown="menu" data-dropdown-placement="bottom">
             <?= anchor(
                 route_to('post', esc($podcast->handle), $reply->id),
@@ -47,8 +39,7 @@ if (can_user_interact()): ?>
             ) ?>
             <form action="<?= route_to(
                 'post-attempt-block-actor',
-                esc(interact_as_actor()
-                    ->username),
+                esc(interact_as_actor()->username),
                 $reply->id,
             ) ?>" method="POST">
                 <?= csrf_field() ?>

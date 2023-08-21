@@ -72,7 +72,7 @@ class AddMedia extends BaseMigration
         ]);
 
         $this->forge->addKey('id', true);
-        $this->forge->addUniqueKey('file_key');
+        $this->forge->addUniqueKey('file_path');
         $this->forge->addForeignKey('uploaded_by', 'users', 'id');
         $this->forge->addForeignKey('updated_by', 'users', 'id');
         $this->forge->createTable('media');

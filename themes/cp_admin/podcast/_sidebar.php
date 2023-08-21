@@ -72,14 +72,12 @@ $counts = [
     <?php foreach ($podcastNavigation as $section => $data): ?>
     <div>
         <button class="inline-flex items-center w-full px-4 py-1 font-semibold focus:ring-accent" type="button">
-            <?= icon($data['icon'], 'opacity-60 text-2xl mr-4') .
-                        lang('PodcastNavigation.' . $section) ?>
+            <?= icon($data['icon'], 'opacity-60 text-2xl mr-4') . lang('PodcastNavigation.' . $section) ?>
         </button>
         <ul class="flex flex-col">
             <?php foreach ($data['items'] as $item): ?>
-                <?php $isActive = url_is(route_to($item, $podcast->id)); ?>
-                <?php
-                            $itemLabel = lang('PodcastNavigation.' . $item);
+                <?php $isActive = url_is(route_to($item, $podcast->id));
+                $itemLabel = lang('PodcastNavigation.' . $item);
                 if (array_key_exists($item, $counts)) {
                     $itemLabel .= ' (' . $counts[$item] . ')';
                 }

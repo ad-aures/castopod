@@ -48,45 +48,46 @@
         <?php endif; ?>
         <div class="inline-flex mt-1 bg-highlight">
             <?= anchor($platform->home_url, icon('external-link', 'mx-auto'), [
-                'class'        => 'flex-1 text-skin-muted hover:text-skin-base',
-                'target'       => '_blank',
-                'rel'          => 'noopener noreferrer',
-                'data-tooltip' => 'bottom',
-                'title'        => lang('Platforms.home_url', [
-                    'platformName' => $platform->label,
-                ]),
-            ]) ?>
-            <?= $platform->submit_url
-                            ? anchor($platform->submit_url, icon('add', 'mx-auto'), [
-                                'class'        => 'flex-1 text-skin-muted hover:text-skin-base',
-                                'target'       => '_blank',
-                                'rel'          => 'noopener noreferrer',
-                                'data-tooltip' => 'bottom',
-                                'title'        => lang('Platforms.submit_url', [
-                                    'platformName' => $platform->label,
-                                ]),
-                            ])
-                            : '' ?>
+                            'class'        => 'flex-1 text-skin-muted hover:text-skin-base',
+                            'target'       => '_blank',
+                            'rel'          => 'noopener noreferrer',
+                            'data-tooltip' => 'bottom',
+                            'title'        => lang('Platforms.home_url', [
+                                'platformName' => $platform->label,
+                            ]),
+                        ]) ?>
+            <?= $platform->submit_url ? anchor(
+                $platform->submit_url,
+                icon('add', 'mx-auto'),
+                [
+                    'class'        => 'flex-1 text-skin-muted hover:text-skin-base',
+                    'target'       => '_blank',
+                    'rel'          => 'noopener noreferrer',
+                    'data-tooltip' => 'bottom',
+                    'title'        => lang('Platforms.submit_url', [
+                        'platformName' => $platform->label,
+                    ]),
+                ]
+            ) : '' ?>
         </div>
     </div>
     <div class="flex flex-col flex-1">
-        <?= $platform->link_url
-                        ? anchor(
-                            route_to(
-                                'podcast-platform-remove',
-                                $podcast->id,
-                                esc($platform->slug),
-                            ),
-                            icon('delete-bin', 'mx-auto'),
-                            [
-                                'class'        => 'absolute right-0 p-1 bg-red-100 rounded-full text-red-700 hover:text-red-900',
-                                'data-tooltip' => 'bottom',
-                                'title'        => lang('Platforms.remove', [
-                                    'platformName' => $platform->label,
-                                ]),
-                            ],
-                        )
-                        : '' ?>
+        <?= $platform->link_url ? anchor(
+            route_to(
+                'podcast-platform-remove',
+                $podcast->id,
+                esc($platform->slug),
+            ),
+            icon('delete-bin', 'mx-auto'),
+            [
+                'class'        => 'absolute right-0 p-1 bg-red-100 rounded-full text-red-700 hover:text-red-900',
+                'data-tooltip' => 'bottom',
+                'title'        => lang('Platforms.remove', [
+                    'platformName' => $platform->label,
+                ]),
+            ],
+        )
+                : '' ?>
         <fieldset>
             <legend class="mb-2 font-semibold"><?= $platform->label ?></legend>
             <Forms.Input

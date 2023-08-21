@@ -26,8 +26,7 @@ $userPodcasts = get_podcasts_user_can_interact_with(auth()->user()); ?>
                 <span class="absolute top-2 right-2 w-2.5 h-2.5 bg-red-500 rounded-full border border-navigation-bg"></span>
             <?php endif ?>
         </button>
-        <?php
-                    $notificationsTitle = lang('Notifications.title');
+        <?php $notificationsTitle = lang('Notifications.title');
 
 $items = [
     [

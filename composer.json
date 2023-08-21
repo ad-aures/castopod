@@ -7,13 +7,13 @@
   "license": "AGPL-3.0-or-later",
   "require": {
     "php": "^8.1",
-    "codeigniter4/framework": "v4.3.6",
+    "codeigniter4/framework": "v4.3.7",
     "james-heinrich/getid3": "^2.0.0-beta5",
     "whichbrowser/parser": "^v2.1.7",
     "geoip2/geoip2": "v2.13.0",
     "league/commonmark": "^2.4.0",
     "vlucas/phpdotenv": "v5.5.0",
-    "league/html-to-markdown": "^v5.1.0",
+    "league/html-to-markdown": "5.1.1",
     "opawg/user-agents-php": "^v1.0",
     "adaures/ipcat-php": "^v1.0.0",
     "adaures/podcast-persons-taxonomy": "^v1.0.1",
@@ -23,19 +23,19 @@
     "chrisjean/php-ico": "^1.0.4",
     "melbahja/seo": "^v2.1.1",
     "codeigniter4/shield": "v1.0.0-beta.6",
-    "aws/aws-sdk-php": "^3.275.3",
+    "aws/aws-sdk-php": "^3.279.2",
     "mpratt/embera": "^2.0.34",
     "codeigniter4/tasks": "dev-develop",
     "yassinedoghri/podcast-feed": "dev-main"
   },
   "require-dev": {
     "mikey179/vfsstream": "^v1.6.11",
-    "phpunit/phpunit": "^10.2.3",
+    "phpunit/phpunit": "^10.3.2",
     "captainhook/captainhook": "^5.16.4",
-    "symplify/easy-coding-standard": "^11.5.0",
-    "phpstan/phpstan": "^1.10.25",
-    "rector/rector": "^0.17.2",
-    "symplify/coding-standard": "^11.4.1"
+    "symplify/easy-coding-standard": "^12.0.6",
+    "phpstan/phpstan": "^1.10.29",
+    "rector/rector": "^0.18.0",
+    "symplify/coding-standard": "^12.0.3"
   },
   "autoload": {
     "exclude-from-classmap": [

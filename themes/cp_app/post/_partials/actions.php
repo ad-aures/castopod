@@ -17,21 +17,14 @@
                 [
                     'numberOfReblogs' => $post->reblogs_count,
                 ],
-            ) ?>"><?= icon('repeat', 'text-2xl mr-1 opacity-40') .
-                    $post->reblogs_count ?></button>
+            ) ?>"><?= icon('repeat', 'text-2xl mr-1 opacity-40') . $post->reblogs_count ?></button>
             <button type="submit" name="action" value="favourite" class="inline-flex items-center hover:underline" title="<?= lang(
                 'Post.favourites',
                 [
                     'numberOfFavourites' => $post->favourites_count,
                 ],
-            ) ?>"><?= icon('heart', 'text-2xl mr-1 opacity-40') .
-            $post->favourites_count ?></button>
-            <button id="<?= $post->id .
-            '-more-dropdown' ?>" type="button" class="px-2 py-1 text-2xl text-skin-muted focus:ring-accent" data-dropdown="button" data-dropdown-target="<?= $post->id .
-            '-more-dropdown-menu' ?>" aria-label="<?= lang(
-                'Common.more',
-            ) ?>" aria-haspopup="true" aria-expanded="false"><?= icon('more') ?>
-            </button>
+            ) ?>"><?= icon('heart', 'text-2xl mr-1 opacity-40') . $post->favourites_count ?></button>
+            <button id="<?= $post->id . '-more-dropdown' ?>" type="button" class="px-2 py-1 text-2xl text-skin-muted focus:ring-accent" data-dropdown="button" data-dropdown-target="<?= $post->id . '-more-dropdown-menu' ?>" aria-label="<?= lang('Common.more') ?>" aria-haspopup="true" aria-expanded="false"><?= icon('more') ?></button>
         </form>
         <nav id="<?= $post->id .
                 '-more-dropdown-menu' ?>" class="flex flex-col py-2 text-sm rounded-lg shadow border-3 border-subtle bg-elevated" aria-labelledby="<?= $post->id .

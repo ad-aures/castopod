@@ -1,6 +1,7 @@
 import {
   arrow,
   computePosition,
+  Coords,
   flip,
   offset,
   Placement,
@@ -46,7 +47,7 @@ const Tooltip = (): void => {
         });
 
         // Accessing the data
-        const { x: arrowX, y: arrowY } = middlewareData.arrow as any;
+        const { x: arrowX, y: arrowY } = middlewareData.arrow as Coords;
 
         const staticSide = {
           top: "bottom",

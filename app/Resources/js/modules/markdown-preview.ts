@@ -42,7 +42,7 @@ export class MarkdownPreview extends LitElement {
   markdownToHtml(): string {
     const renderer = new marked.Renderer();
     renderer.link = function () {
-      // eslint-disable-next-line prefer-rest-params
+      // eslint-disable-next-line prefer-rest-params, @typescript-eslint/no-explicit-any
       const link = marked.Renderer.prototype.link.apply(this, arguments as any);
       return link.replace("<a", "<a target='_blank' rel='noopener noreferrer'");
     };

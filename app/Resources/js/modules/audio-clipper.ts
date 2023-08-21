@@ -7,7 +7,7 @@ import {
   queryAssignedElements,
   state,
 } from "lit/decorators.js";
-import WaveSurfer from "wavesurfer.js";
+import WaveSurfer, { WaveSurferOptions } from "wavesurfer.js";
 
 enum ActionType {
   StretchLeft,
@@ -17,7 +17,9 @@ enum ActionType {
 
 interface Action {
   type: ActionType;
-  payload?: any;
+  payload?: {
+    offset: number;
+  };
 }
 
 interface EventElement {
@@ -300,7 +302,7 @@ export class AudioClipper extends LitElement {
       responsive: true,
       waveColor: "hsl(0 5% 85%)",
       cursorColor: "transparent",
-    });
+    } as WaveSurferOptions);
     this._wavesurfer.load(this._audio[0].src);
 
     this.addEventListeners();

@@ -21,9 +21,9 @@
 <Forms.Field
     name="db_hostname"
     label="<?= lang('Install.form.db_hostname') ?>"
-    value="<?= config('Database')
-    ->default['hostname'] ?>"
-    required="true" />
+    value="<?= config('Database')->default['hostname'] ?>"
+    required="true"
+/>
 
 <Forms.Field
     name="db_name"

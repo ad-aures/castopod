@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Modules\Fediverse\Config;
 
-use Modules\Fediverse\Filters\AllowCorsFilter;
 use Modules\Fediverse\Filters\FediverseFilter;
 
 class Registrar
@@ -13,8 +12,7 @@ class Registrar
     {
         return [
             'aliases' => [
-                'fediverse'  => FediverseFilter::class,
-                'allow-cors' => AllowCorsFilter::class,
+                'fediverse' => FediverseFilter::class,
             ],
         ];
     }

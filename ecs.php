@@ -8,6 +8,7 @@ use PhpCsFixer\Fixer\StringNotation\SingleQuoteFixer;
 use PhpCsFixer\Fixer\Whitespace\IndentationTypeFixer;
 use Symplify\CodingStandard\Fixer\LineLength\LineLengthFixer;
 use Symplify\CodingStandard\Fixer\Naming\StandardizeHereNowDocKeywordFixer;
+use Symplify\CodingStandard\Fixer\Spacing\MethodChainingNewlineFixer;
 use Symplify\EasyCodingStandard\Config\ECSConfig;
 use Symplify\EasyCodingStandard\ValueObject\Set\SetList;
 
@@ -46,6 +47,12 @@ return static function (ECSConfig $ecsConfig): void {
         ],
 
         IndentationTypeFixer::class => [
+            __DIR__ . '/app/Views/*',
+            __DIR__ . '/modules/**/Views/*',
+            __DIR__ . '/themes/*',
+        ],
+
+        MethodChainingNewlineFixer::class => [
             __DIR__ . '/app/Views/*',
             __DIR__ . '/modules/**/Views/*',
             __DIR__ . '/themes/*',
