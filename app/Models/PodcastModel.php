@@ -185,11 +185,13 @@ class PodcastModel extends Model
                     $fediverseTablePrefix . 'posts.actor_id = podcasts.actor_id',
                     'left'
                 )
+                ->groupStart()
                 ->where(
                     '`' . $fediverseTablePrefix . 'posts`.`published_at` <= UTC_TIMESTAMP()',
                     null,
                     false
                 )->orWhere($fediverseTablePrefix . 'posts.published_at', null)
+                ->groupEnd()
                 ->groupBy('podcasts.actor_id')
                 ->orderBy('max_published_at', 'DESC');
         } elseif ($orderBy === 'created_desc') {
