@@ -13,14 +13,15 @@ namespace Modules\Fediverse\Models;
 use CodeIgniter\Database\BaseResult;
 use CodeIgniter\I18n\Time;
 use DateTimeInterface;
+use Michalsn\Uuid\UuidModel;
 use Modules\Fediverse\Entities\Activity;
 
-class ActivityModel extends BaseUuidModel
+class ActivityModel extends UuidModel
 {
     /**
      * @var string
      */
-    protected $table = 'activities';
+    protected $table = 'fediverse_activities';
 
     /**
      * @var string

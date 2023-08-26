@@ -290,7 +290,7 @@ class EpisodeController extends BaseController
         $episodeComments = model(PostModel::class)
             ->whereIn('in_reply_to_id', function (BaseBuilder $builder): BaseBuilder {
                 return $builder->select('id')
-                    ->from(config('Fediverse')->tablesPrefix . 'posts')
+                    ->from('fediverse_posts')
                     ->where('episode_id', $this->episode->id);
             })
             ->where('`published_at` <= UTC_TIMESTAMP()', null, false)

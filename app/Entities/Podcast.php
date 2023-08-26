@@ -166,7 +166,8 @@ class Podcast extends Entity
     protected ?string $publication_status = null;
 
     /**
-     * @var string[]
+     * @var array<int, string>
+     * @phpstan-var list<string>
      */
     protected $dates = ['published_at', 'created_at', 'updated_at'];
 

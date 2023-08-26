@@ -158,12 +158,12 @@ class PlatformModel extends Model
         $podcastsPlatformsTable = $this->db->prefixTable('podcasts_platforms');
         $platformsTable = $this->db->prefixTable('platforms');
 
-        $deleteJoinQuery = <<<CODE_SAMPLE
+        $deleteJoinQuery = <<<SQL
         DELETE {$podcastsPlatformsTable}
         FROM {$podcastsPlatformsTable}
         INNER JOIN {$platformsTable} ON {$platformsTable}.slug = {$podcastsPlatformsTable}.platform_slug
         WHERE `podcast_id` = ? AND `type` = ?
-        CODE_SAMPLE;
+        SQL;
 
         $this->db->query($deleteJoinQuery, [$podcastId, $platformType]);
 

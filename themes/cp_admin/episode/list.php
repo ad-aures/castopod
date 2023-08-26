@@ -149,9 +149,9 @@ data_table(
                     $title = lang('Episode.messages.unpublishBeforeDeleteTip');
                     $items[] = [
                         'type'    => 'html',
-                        'content' => esc(<<<CODE_SAMPLE
+                        'content' => esc(<<<HTML
                         <span class="inline-flex items-center px-4 py-1 font-semibold text-gray-400 cursor-not-allowed" data-tooltip="bottom" title="{$title}">{$icon}<span class="ml-2">{$label}</span></span>
-                    CODE_SAMPLE),
+                    HTML),
                     ];
                 }
                 return '<button id="more-dropdown-' . $episode->id . '" type="button" class="inline-flex items-center p-1 rounded-full focus:ring-accent" data-dropdown="button" data-dropdown-target="more-dropdown-' . $episode->id . '-menu" aria-haspopup="true" aria-expanded="false">' .

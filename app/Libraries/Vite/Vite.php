@@ -94,13 +94,13 @@ class Vite
     private function getHtmlTag(string $assetUrl, string $type): string
     {
         return match ($type) {
-            'css' => <<<CODE_SAMPLE
+            'css' => <<<HTML
                 <link rel="stylesheet" href="{$assetUrl}"/>
-            CODE_SAMPLE
+            HTML
             ,
-            'js' => <<<CODE_SAMPLE
+            'js' => <<<HTML
                     <script type="module" src="{$assetUrl}"></script>
-                CODE_SAMPLE
+                HTML
             ,
             default => '',
         };

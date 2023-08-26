@@ -164,10 +164,10 @@ class AddEpisodes extends BaseMigration
 
         // Add Full-Text Search index on title and description_markdown
         $prefix = $this->db->getPrefix();
-        $createQuery = <<<CODE_SAMPLE
+        $createQuery = <<<SQL
             ALTER TABLE {$prefix}episodes
-            ADD FULLTEXT(title, description_markdown);
-        CODE_SAMPLE;
+            ADD FULLTEXT title (title, description_markdown);
+        SQL;
         $this->db->query($createQuery);
     }
 

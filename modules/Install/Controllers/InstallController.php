@@ -243,8 +243,6 @@ class InstallController extends Controller
     {
         $migrate = Services::migrations();
 
-        $migrate->setNamespace('CodeIgniter\Settings')
-            ->latest();
         $migrate->setNamespace(null)
             ->latest();
     }

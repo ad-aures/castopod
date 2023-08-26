@@ -11,14 +11,15 @@ declare(strict_types=1);
 namespace Modules\Fediverse\Models;
 
 use CodeIgniter\Events\Events;
+use CodeIgniter\Model;
 use Modules\Fediverse\Entities\Actor;
 
-class ActorModel extends BaseModel
+class ActorModel extends Model
 {
     /**
      * @var string
      */
-    protected $table = 'actors';
+    protected $table = 'fediverse_actors';
 
     /**
      * @var string[]
@@ -119,10 +120,8 @@ class ActorModel extends BaseModel
             config('Fediverse')
                 ->cachePrefix . "actor#{$actorId}_followers";
         if (! ($found = cache($cacheName))) {
-            $tablesPrefix = config('Fediverse')
-                ->tablesPrefix;
-            $found = $this->join($tablesPrefix . 'follows', $tablesPrefix . 'follows.actor_id = id', 'inner')
-                ->where($tablesPrefix . 'follows.target_actor_id', $actorId)
+            $found = $this->join('fediverse_follows', 'fediverse_follows.actor_id = id', 'inner')
+                ->where('fediverse_follows.target_actor_id', $actorId)
                 ->findAll();
 
             cache()
@@ -225,28 +224,27 @@ class ActorModel extends BaseModel
             ->cachePrefix . 'blocked_actors';
         if (! ($found = cache($cacheName))) {
             $tablePrefix = config('Database')
-                ->default['DBPrefix'] . config('Fediverse')
-                ->tablesPrefix;
+                ->default['DBPrefix'];
             $result = $this->select('COUNT(DISTINCT `cp_fediverse_actors`.`id`) as `total_active_actors`', false)
                 ->join(
-                    $tablePrefix . 'posts',
-                    $tablePrefix . 'actors.id = ' . $tablePrefix . 'posts.actor_id',
+                    $tablePrefix . 'fediverse_posts',
+                    $tablePrefix . 'fediverse_actors.id = ' . $tablePrefix . 'fediverse_posts.actor_id',
                     'left outer'
                 )
                 ->join(
-                    $tablePrefix . 'favourites',
-                    $tablePrefix . 'actors.id = ' . $tablePrefix . 'favourites.actor_id',
+                    $tablePrefix . 'fediverse_favourites',
+                    $tablePrefix . 'fediverse_actors.id = ' . $tablePrefix . 'fediverse_favourites.actor_id',
                     'left outer'
                 )
                 ->where($tablePrefix . 'actors.domain', get_current_domain())
                 ->groupStart()
                 ->where(
-                    "`{$tablePrefix}posts`.`created_at` >= UTC_TIMESTAMP() - INTERVAL {$lastNumberOfMonths} month",
+                    "`{$tablePrefix}fediverse_posts`.`created_at` >= UTC_TIMESTAMP() - INTERVAL {$lastNumberOfMonths} month",
                     null,
                     false
                 )
                 ->orWhere(
-                    "`{$tablePrefix}favourites`.`created_at` >= UTC_TIMESTAMP() - INTERVAL {$lastNumberOfMonths} month",
+                    "`{$tablePrefix}fediverse_favourites`.`created_at` >= UTC_TIMESTAMP() - INTERVAL {$lastNumberOfMonths} month",
                     null,
                     false
                 )
@@ -265,12 +263,8 @@ class ActorModel extends BaseModel
 
     public function resetFollowersCount(): int | false
     {
-        $tablePrefix = config('Fediverse')
-            ->tablesPrefix;
-
-        $actorsFollowersCount = $this->db->table($tablePrefix . 'follows')->select(
-            'target_actor_id as id, COUNT(*) as `followers_count`'
-        )
+        $actorsFollowersCount = $this->db->table('fediverse_follows')
+            ->select('target_actor_id as id, COUNT(*) as `followers_count`')
             ->groupBy('id')
             ->get()
             ->getResultArray();
@@ -284,10 +278,7 @@ class ActorModel extends BaseModel
 
     public function resetPostsCount(): int | false
     {
-        $tablePrefix = config('Fediverse')
-            ->tablesPrefix;
-
-        $actorsFollowersCount = $this->db->table($tablePrefix . 'posts')->select(
+        $actorsFollowersCount = $this->db->table($tablePrefix . 'fediverse_posts')->select(
             'actor_id as id, COUNT(*) as `posts_count`'
         )
             ->where([

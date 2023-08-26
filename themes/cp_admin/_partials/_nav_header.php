@@ -31,9 +31,9 @@ $userPodcasts = get_podcasts_user_can_interact_with(auth()->user()); ?>
 $items = [
     [
         'type'    => 'html',
-        'content' => esc(<<<CODE_SAMPLE
+        'content' => esc(<<<HTML
                         <span class="px-4 my-2 text-xs font-semibold tracking-wider uppercase text-skin-muted">{$notificationsTitle}</span>
-                        CODE_SAMPLE),
+                        HTML),
     ],
 ];
 
@@ -45,7 +45,7 @@ if ($userPodcasts !== []) {
 
         $items[] = [
             'type'  => 'link',
-            'title' => <<<CODE_SAMPLE
+            'title' => <<<HTML
                             <div class="inline-flex items-center flex-1 text-sm align-middle">
                                 <div class="relative">
                                     <img src="{$userPodcast->cover->tiny_url}" class="w-6 h-6 mr-2 rounded-full" loading="lazy" />
@@ -53,7 +53,7 @@ if ($userPodcasts !== []) {
                                 </div>
                                 <span class="max-w-xs truncate">{$userPodcastTitle}</span>
                             </div>
-                        CODE_SAMPLE
+                        HTML
             ,
             'uri' => route_to('notification-list', $userPodcast->id),
         ];
@@ -62,9 +62,9 @@ if ($userPodcasts !== []) {
     $noNotificationsText = lang('Notifications.no_notifications');
     $items[] = [
         'type'    => 'html',
-        'content' => esc(<<<CODE_SAMPLE
+        'content' => esc(<<<HTML
                         <span class="mx-4 my-2 text-sm italic text-center text-skin-muted">{$noNotificationsText}</span>
-                    CODE_SAMPLE),
+                    HTML),
     ];
 }
 ?>
@@ -90,11 +90,11 @@ foreach ($userPodcasts as $userPodcast) {
     $checkMark = interact_as_actor_id() === $userPodcast->actor_id ? icon('check', 'ml-2 bg-accent-base text-accent-contrast rounded-full') : '';
     $userPodcastTitle = esc($userPodcast->title);
 
-    $interactButtons .= <<<CODE_SAMPLE
+    $interactButtons .= <<<HTML
                 <button class="inline-flex items-center w-full px-4 py-1 hover:bg-highlight" id="interact-as-actor-{$userPodcast->id}" name="actor_id" value="{$userPodcast->actor_id}">
                     <div class="inline-flex items-center flex-1 text-sm"><img src="{$userPodcast->cover->tiny_url}" class="w-6 h-6 mr-2 rounded-full" loading="lazy" /><span class="max-w-xs truncate">{$userPodcastTitle}</span>{$checkMark}</div>
                 </button>
-            CODE_SAMPLE;
+            HTML;
 }
 
 $interactAsText = lang('Common.choose_interact');
@@ -126,7 +126,7 @@ if ($userPodcasts !== []) {
     $menuItems = array_merge([
         [
             'type'    => 'html',
-            'content' => esc(<<<CODE_SAMPLE
+            'content' => esc(<<<HTML
                         <nav class="flex flex-col py-2 whitespace-nowrap">
                             <span class="px-4 mb-2 text-xs font-semibold tracking-wider uppercase text-skin-muted">{$interactAsText}</span>
                             <form action="{$interactAsRoute}" method="POST" class="flex flex-col">
@@ -134,7 +134,7 @@ if ($userPodcasts !== []) {
                                 {$interactButtons}
                             </form>
                         </nav>
-                    CODE_SAMPLE),
+                    HTML),
         ],
         [
             'type' => 'separator',

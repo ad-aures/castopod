@@ -12,14 +12,15 @@ namespace Modules\Fediverse\Models;
 
 use CodeIgniter\Database\BaseResult;
 use CodeIgniter\Events\Events;
+use CodeIgniter\Model;
 use Modules\Fediverse\Entities\BlockedDomain;
 
-class BlockedDomainModel extends BaseModel
+class BlockedDomainModel extends Model
 {
     /**
      * @var string
      */
-    protected $table = 'blocked_domains';
+    protected $table = 'fediverse_blocked_domains';
 
     /**
      * @var string

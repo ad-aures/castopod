@@ -28,11 +28,11 @@ class AddBlockedDomains extends BaseMigration
             ],
         ]);
         $this->forge->addPrimaryKey('name');
-        $this->forge->createTable(config('Fediverse')->tablesPrefix . 'blocked_domains');
+        $this->forge->createTable('fediverse_blocked_domains');
     }
 
     public function down(): void
     {
-        $this->forge->dropTable(config('Fediverse')->tablesPrefix . 'blocked_domains');
+        $this->forge->dropTable('fediverse_blocked_domains');
     }
 }

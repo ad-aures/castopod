@@ -84,6 +84,7 @@ class PodcastModel extends Model
      * @var array<string, string>
      */
     protected $validationRules = [
+        'id'                   => 'permit_empty|is_natural_no_zero',
         'title'                => 'required',
         'handle'               => 'required|regex_match[/^[a-zA-Z0-9\_]{1,32}$/]|is_unique[podcasts.handle,id,{id}]',
         'description_markdown' => 'required',
@@ -174,23 +175,15 @@ class PodcastModel extends Model
         $prefix = $this->db->getPrefix();
 
         if ($orderBy === 'activity') {
-            $fediverseTablePrefix = $prefix . config('Fediverse')
-                ->tablesPrefix;
             $this->builder()
-                ->select(
-                    'podcasts.*, MAX(' . $fediverseTablePrefix . 'posts.published_at' . ') as max_published_at'
-                )
-                ->join(
-                    $fediverseTablePrefix . 'posts',
-                    $fediverseTablePrefix . 'posts.actor_id = podcasts.actor_id',
-                    'left'
-                )
+                ->select('podcasts.*, MAX(`' . $prefix . 'fediverse_posts`.`published_at`) as max_published_at')
+                ->join('fediverse_posts', 'fediverse_posts.actor_id = podcasts.actor_id', 'left')
                 ->groupStart()
                 ->where(
-                    '`' . $fediverseTablePrefix . 'posts`.`published_at` <= UTC_TIMESTAMP()',
+                    '`' . $prefix . 'fediverse_posts`.`published_at` <= UTC_TIMESTAMP()',
                     null,
                     false
-                )->orWhere($fediverseTablePrefix . 'posts.published_at', null)
+                )->orWhere('fediverse_posts.published_at', null)
                 ->groupEnd()
                 ->groupBy('podcasts.actor_id')
                 ->orderBy('max_published_at', 'DESC');

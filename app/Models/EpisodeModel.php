@@ -382,13 +382,11 @@ class EpisodeModel extends UuidModel
             ->groupBy('episode_id')
             ->getCompiledSelect();
 
-        $postsTable = config('Fediverse')
-            ->tablesPrefix . 'posts';
         $episodePostsRepliesCount = (new PostModel())->builder()
-            ->select($postsTable . '.episode_id as episode_id, COUNT(*) as `comments_count`')
-            ->join($postsTable . ' as fp', $postsTable . '.id = fp.in_reply_to_id')
-            ->where($postsTable . '.in_reply_to_id', null)
-            ->groupBy($postsTable . '.episode_id')
+            ->select('fediverse_posts.episode_id as episode_id, COUNT(*) as `comments_count`')
+            ->join('fediverse_posts as fp', 'fediverse_posts.id = fp.in_reply_to_id')
+            ->where('fediverse_posts.in_reply_to_id', null)
+            ->groupBy('fediverse_posts.episode_id')
             ->getCompiledSelect();
 
         /** @var BaseResult $query */
@@ -409,11 +407,7 @@ class EpisodeModel extends UuidModel
     {
         $episodePostsCount = $this->builder()
             ->select('episodes.id, COUNT(*) as `posts_count`')
-            ->join(
-                config('Fediverse')
-                    ->tablesPrefix . 'posts',
-                'episodes.id = ' . config('Fediverse')->tablesPrefix . 'posts.episode_id'
-            )
+            ->join('fediverse_posts', 'episodes.id = fediverse_posts.episode_id')
             ->where('in_reply_to_id', null)
             ->groupBy('episodes.id')
             ->get()

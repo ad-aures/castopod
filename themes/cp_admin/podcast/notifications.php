@@ -31,15 +31,15 @@
                                 ? ''
                                 : '@' . esc($notification->actor->domain));
 
-                $actorUsernameHtml = <<<CODE_SAMPLE
+                $actorUsernameHtml = <<<HTML
                     <strong class="break-all">{$actorUsername}</strong>
-                    CODE_SAMPLE;
+                    HTML;
 
                 $targetActorUsername = '@' . esc($notification->target_actor->username);
 
-                $targetActorUsernameHtml = <<<CODE_SAMPLE
+                $targetActorUsernameHtml = <<<HTML
                     <strong class="break-all">{$targetActorUsername}</strong>
-                    CODE_SAMPLE;
+                    HTML;
 
                 $notificationTitle = match ($notification->type) {
                     'reply' => lang('Notifications.reply', [

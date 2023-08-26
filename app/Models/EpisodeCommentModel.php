@@ -216,7 +216,7 @@ class EpisodeCommentModel extends UuidModel
         )
             ->whereIn('in_reply_to_id', static function (BaseBuilder $builder) use (&$episodeId): BaseBuilder {
                 return $builder->select('id')
-                    ->from(config('Fediverse')->tablesPrefix . 'posts')
+                    ->from('fediverse_posts')
                     ->where([
                         'episode_id'     => $episodeId,
                         'in_reply_to_id' => null,

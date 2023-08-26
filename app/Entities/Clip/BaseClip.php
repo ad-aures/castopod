@@ -57,7 +57,8 @@ class BaseClip extends Entity
     protected ?float $end_time = null;
 
     /**
-     * @var string[]
+     * @var array<int, string>
+     * @phpstan-var list<string>
      */
     protected $dates = ['created_at', 'updated_at', 'job_started_at', 'job_ended_at'];
 

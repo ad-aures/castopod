@@ -66,9 +66,9 @@ if ($episode->published_at === null) {
     $title = lang('Episode.messages.unpublishBeforeDeleteTip');
     $items[] = [
         'type'    => 'html',
-        'content' => esc(<<<CODE_SAMPLE
+        'content' => esc(<<<HTML
                     <span class="inline-flex items-center px-4 py-1 font-semibold text-gray-400 cursor-not-allowed" data-tooltip="bottom" title="{$title}">{$icon}{$label}</span>
-                CODE_SAMPLE),
+                HTML),
     ];
 } ?>
     <DropdownMenu id="more-dropdown-<?= $episode->id ?>-menu" labelledby="more-dropdown-<?= $episode->id ?>" offsetY="-32" items="<?= esc(json_encode($items)) ?>" />

@@ -29,18 +29,15 @@ class AddFavourites extends BaseMigration
             ],
         ]);
 
-        $tablesPrefix = config('Fediverse')
-            ->tablesPrefix;
-
         $this->forge->addField('`created_at` timestamp NOT NULL DEFAULT current_timestamp()');
         $this->forge->addPrimaryKey(['actor_id', 'post_id']);
-        $this->forge->addForeignKey('actor_id', $tablesPrefix . 'actors', 'id', '', 'CASCADE');
-        $this->forge->addForeignKey('post_id', $tablesPrefix . 'posts', 'id', '', 'CASCADE');
-        $this->forge->createTable($tablesPrefix . 'favourites');
+        $this->forge->addForeignKey('actor_id', 'fediverse_actors', 'id', '', 'CASCADE');
+        $this->forge->addForeignKey('post_id', 'fediverse_posts', 'id', '', 'CASCADE');
+        $this->forge->createTable('fediverse_favourites');
     }
 
     public function down(): void
     {
-        $this->forge->dropTable(config('Fediverse')->tablesPrefix . 'favourites');
+        $this->forge->dropTable('fediverse_favourites');
     }
 }

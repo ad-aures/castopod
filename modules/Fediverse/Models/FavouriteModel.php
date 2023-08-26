@@ -11,18 +11,19 @@ declare(strict_types=1);
 namespace Modules\Fediverse\Models;
 
 use CodeIgniter\Events\Events;
+use Michalsn\Uuid\UuidModel;
 use Modules\Fediverse\Activities\LikeActivity;
 use Modules\Fediverse\Activities\UndoActivity;
 use Modules\Fediverse\Entities\Actor;
 use Modules\Fediverse\Entities\Favourite;
 use Modules\Fediverse\Entities\Post;
 
-class FavouriteModel extends BaseUuidModel
+class FavouriteModel extends UuidModel
 {
     /**
      * @var string
      */
-    protected $table = 'favourites';
+    protected $table = 'fediverse_favourites';
 
     /**
      * @var string[]

@@ -20,7 +20,7 @@ class AddCreditsView extends BaseMigration
         $podcastPersonsTable = $this->db->prefixTable('podcasts_persons');
         $episodePersonsTable = $this->db->prefixTable('episodes_persons');
         $episodesTable = $this->db->prefixTable('episodes');
-        $createQuery = <<<CODE_SAMPLE
+        $createQuery = <<<SQL
         CREATE VIEW `{$viewName}` AS
             SELECT `person_group`, `person_id`, `full_name`, `person_role`, `podcast_id`, NULL AS `episode_id` FROM `{$podcastPersonsTable}`
                 INNER JOIN `{$personsTable}`
@@ -33,7 +33,7 @@ class AddCreditsView extends BaseMigration
                     ON (`episode_id`=`{$episodesTable}`.`id`)
             WHERE `{$episodesTable}`.published_at <= UTC_TIMESTAMP()
             ORDER BY `person_group`, `full_name`, `person_role`, `podcast_id`, `episode_id`;
-        CODE_SAMPLE;
+        SQL;
         $this->db->query($createQuery);
     }
 

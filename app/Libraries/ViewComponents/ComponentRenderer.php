@@ -82,7 +82,7 @@ class ComponentRenderer
             $matches[name] = tag name
             $matches[attributes] = array of attribute string (class="foo")
          */
-        return preg_replace_callback($pattern, function ($match): string {
+        return preg_replace_callback($pattern, function (array $match): string {
             $view = $this->locateView($match['name']);
             $attributes = $this->parseAttributes($match['attributes']);
 
@@ -104,7 +104,7 @@ class ComponentRenderer
             $matches[attributes] = string of tag attributes (class="foo")
             $matches[slot] = the content inside the tags
          */
-        return preg_replace_callback($pattern, function ($match): string {
+        return preg_replace_callback($pattern, function (array $match): string {
             $view = $this->locateView($match['name']);
             $attributes = $this->parseAttributes($match['attributes']);
             $attributes['slot'] = $match['slot'];

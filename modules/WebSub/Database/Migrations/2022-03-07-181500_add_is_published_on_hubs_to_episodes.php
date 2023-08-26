@@ -16,14 +16,14 @@ class AddIsPublishedOnHubsToEpisodes extends BaseMigration
 {
     public function up(): void
     {
-        $prefix = $this->db->getPrefix();
-
-        $createQuery = <<<CODE_SAMPLE
-            ALTER TABLE {$prefix}episodes
-            ADD COLUMN `is_published_on_hubs` BOOLEAN NOT NULL DEFAULT 0 AFTER `custom_rss`;
-        CODE_SAMPLE;
-
-        $this->db->query($createQuery);
+        $this->forge->addColumn('episodes', [
+            'is_published_on_hubs' => [
+                'type'    => 'BOOLEAN',
+                'null'    => false,
+                'default' => 0,
+                'after'   => 'custom_rss',
+            ],
+        ]);
     }
 
     public function down(): void

@@ -29,17 +29,14 @@ class AddPostsPreviewCards extends BaseMigration
             ],
         ]);
 
-        $tablesPrefix = config('Fediverse')
-            ->tablesPrefix;
-
         $this->forge->addPrimaryKey(['post_id', 'preview_card_id']);
-        $this->forge->addForeignKey('post_id', $tablesPrefix . 'posts', 'id', '', 'CASCADE');
-        $this->forge->addForeignKey('preview_card_id', $tablesPrefix . 'preview_cards', 'id', '', 'CASCADE');
-        $this->forge->createTable($tablesPrefix . 'posts_preview_cards');
+        $this->forge->addForeignKey('post_id', 'fediverse_posts', 'id', '', 'CASCADE');
+        $this->forge->addForeignKey('preview_card_id', 'fediverse_preview_cards', 'id', '', 'CASCADE');
+        $this->forge->createTable('fediverse_posts_preview_cards');
     }
 
     public function down(): void
     {
-        $this->forge->dropTable(config('Fediverse')->tablesPrefix . 'posts_preview_cards');
+        $this->forge->dropTable('fediverse_posts_preview_cards');
     }
 }

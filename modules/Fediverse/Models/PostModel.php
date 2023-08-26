@@ -15,6 +15,7 @@ use CodeIgniter\Events\Events;
 use CodeIgniter\HTTP\URI;
 use CodeIgniter\I18n\Time;
 use Exception;
+use Michalsn\Uuid\UuidModel;
 use Modules\Fediverse\Activities\AnnounceActivity;
 use Modules\Fediverse\Activities\CreateActivity;
 use Modules\Fediverse\Activities\DeleteActivity;
@@ -23,12 +24,12 @@ use Modules\Fediverse\Entities\Actor;
 use Modules\Fediverse\Entities\Post;
 use Modules\Fediverse\Objects\TombstoneObject;
 
-class PostModel extends BaseUuidModel
+class PostModel extends UuidModel
 {
     /**
      * @var string
      */
-    protected $table = 'posts';
+    protected $table = 'fediverse_posts';
 
     /**
      * @var string
@@ -172,16 +173,10 @@ class PostModel extends BaseUuidModel
             ($withBlocked ? '_withBlocked' : '');
 
         if (! ($found = cache($cacheName))) {
-            $tablesPrefix = config('Fediverse')
-                ->tablesPrefix;
             if (! $withBlocked) {
-                $this->select($tablesPrefix . 'posts.*')
-                    ->join(
-                        $tablesPrefix . 'actors',
-                        $tablesPrefix . 'actors.id = ' . $tablesPrefix . 'posts.actor_id',
-                        'inner'
-                    )
-                    ->where($tablesPrefix . 'actors.is_blocked', 0);
+                $this->select('fediverse_posts.*')
+                    ->join('fediverse_actors', 'fediverse_actors.id = fediverse_posts.actor_id', 'inner')
+                    ->where('fediverse_actors.is_blocked', 0);
             }
 
             $this->where('in_reply_to_id', $this->uuid->fromString($postId) ->getBytes())
@@ -222,7 +217,7 @@ class PostModel extends BaseUuidModel
 
     public function addPreviewCard(string $postId, int $previewCardId): bool
     {
-        return $this->db->table(config('Fediverse')->tablesPrefix . 'posts_preview_cards')
+        return $this->db->table('fediverse_posts_preview_cards')
             ->insert([
                 'post_id' => $this->uuid->fromString($postId)
                     ->getBytes(),
@@ -370,7 +365,7 @@ class PostModel extends BaseUuidModel
         if (
             $post->preview_card &&
             $this->db
-                ->table(config('Fediverse')->tablesPrefix . 'posts_preview_cards')
+                ->table('fediverse_posts_preview_cards')
                 ->where('preview_card_id', $post->preview_card->id)
                 ->countAll() <= 1
         ) {
@@ -599,11 +594,9 @@ class PostModel extends BaseUuidModel
         $cacheName = config('Fediverse')
             ->cachePrefix . 'blocked_actors';
         if (! ($found = cache($cacheName))) {
-            $tablePrefix = config('Fediverse')
-                ->tablesPrefix;
             $result = $this->select('COUNT(*) as total_local_posts')
-                ->join($tablePrefix . 'actors', $tablePrefix . 'actors.id = ' . $tablePrefix . 'posts.actor_id')
-                ->where($tablePrefix . 'actors.domain', get_current_domain())
+                ->join('fediverse_actors', 'fediverse_actors.id = fediverse_posts.actor_id')
+                ->where('fediverse_actors.domain', get_current_domain())
                 ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
                 ->get()
                 ->getResultArray();
@@ -619,12 +612,8 @@ class PostModel extends BaseUuidModel
 
     public function resetFavouritesCount(): int | false
     {
-        $tablePrefix = config('Fediverse')
-            ->tablesPrefix;
-
-        $postsFavouritesCount = $this->db->table($tablePrefix . 'favourites')->select(
-            'post_id as id, COUNT(*) as `favourites_count`'
-        )
+        $postsFavouritesCount = $this->db->table('fediverse_favourites')
+            ->select('post_id as id, COUNT(*) as `favourites_count`')
             ->groupBy('id')
             ->get()
             ->getResultArray();
@@ -639,12 +628,9 @@ class PostModel extends BaseUuidModel
 
     public function resetReblogsCount(): int | false
     {
-        $tablePrefix = config('Fediverse')
-            ->tablesPrefix;
-
-        $postsReblogsCount = $this->select($tablePrefix . 'posts.id, COUNT(*) as `replies_count`')
-            ->join($tablePrefix . 'posts as p2', $tablePrefix . 'posts.id = p2.reblog_of_id')
-            ->groupBy($tablePrefix . 'posts.id')
+        $postsReblogsCount = $this->select('fediverse_posts.id, COUNT(*) as `replies_count`')
+            ->join('fediverse_posts as p2', 'fediverse_posts.id = p2.reblog_of_id')
+            ->groupBy('fediverse_posts.id')
             ->get()
             ->getResultArray();
 
@@ -658,12 +644,9 @@ class PostModel extends BaseUuidModel
 
     public function resetRepliesCount(): int | false
     {
-        $tablePrefix = config('Fediverse')
-            ->tablesPrefix;
-
-        $postsRepliesCount = $this->select($tablePrefix . 'posts.id, COUNT(*) as `replies_count`')
-            ->join($tablePrefix . 'posts as p2', $tablePrefix . 'posts.id = p2.in_reply_to_id')
-            ->groupBy($tablePrefix . 'posts.id')
+        $postsRepliesCount = $this->select('fediverse_posts.id, COUNT(*) as `replies_count`')
+            ->join('fediverse_posts as p2', 'fediverse_posts.id = p2.in_reply_to_id')
+            ->groupBy('fediverse_posts.id')
             ->get()
             ->getResultArray();
 

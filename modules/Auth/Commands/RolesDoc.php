@@ -82,7 +82,7 @@ class RolesDoc extends BaseCommand
             $pattern,
             ['role', 'description', 'permissions'],
             $authGroups->instanceGroups,
-            static function ($table, $key, $value) use ($instanceMatrix): void {
+            static function ($table, $key, array $value) use ($instanceMatrix): void {
                 $table->addRow($value['title'], $value['description'], implode(', ', $instanceMatrix[$key]));
             }
         );
@@ -109,7 +109,7 @@ class RolesDoc extends BaseCommand
             $pattern,
             ['role', 'description', 'permissions'],
             $authGroups->podcastGroups,
-            static function ($table, $key, $value) use ($podcastMatrix): void {
+            static function ($table, $key, array $value) use ($podcastMatrix): void {
                 $table->addRow($value['title'], $value['description'], implode(', ', $podcastMatrix[$key]));
             }
         );

@@ -10,11 +10,17 @@ use CodeIgniter\HTTP\ResponseInterface;
 
 class AllowCorsFilter implements FilterInterface
 {
+    /**
+     * @param string[]|null $arguments
+     */
     public function before(RequestInterface $request, $arguments = null): void
     {
         // Do something here
     }
 
+    /**
+     * @param string[]|null $arguments
+     */
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null): void
     {
         if (! $response->hasHeader('Cache-Control')) {

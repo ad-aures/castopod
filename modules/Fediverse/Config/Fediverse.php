@@ -38,8 +38,6 @@ class Fediverse extends BaseConfig
 
     public string $defaultCoverImageMimetype = 'image/jpeg';
 
-    public string $tablesPrefix = 'fediverse_';
-
     /**
      * --------------------------------------------------------------------
      * Cache options

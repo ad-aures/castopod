@@ -55,19 +55,16 @@ class AddNotifications extends BaseMigration
             ],
         ]);
 
-        $tablesPrefix = config('Fediverse')
-            ->tablesPrefix;
-
         $this->forge->addPrimaryKey('id');
-        $this->forge->addForeignKey('actor_id', $tablesPrefix . 'actors', 'id', '', 'CASCADE');
-        $this->forge->addForeignKey('target_actor_id', $tablesPrefix . 'actors', 'id', '', 'CASCADE');
-        $this->forge->addForeignKey('post_id', $tablesPrefix . 'posts', 'id', '', 'CASCADE');
-        $this->forge->addForeignKey('activity_id', $tablesPrefix . 'activities', 'id', '', 'CASCADE');
-        $this->forge->createTable($tablesPrefix . 'notifications');
+        $this->forge->addForeignKey('actor_id', 'fediverse_actors', 'id', '', 'CASCADE');
+        $this->forge->addForeignKey('target_actor_id', 'fediverse_actors', 'id', '', 'CASCADE');
+        $this->forge->addForeignKey('post_id', 'fediverse_posts', 'id', '', 'CASCADE');
+        $this->forge->addForeignKey('activity_id', 'fediverse_activities', 'id', '', 'CASCADE');
+        $this->forge->createTable('fediverse_notifications');
     }
 
     public function down(): void
     {
-        $this->forge->dropTable(config('Fediverse')->tablesPrefix . 'notifications');
+        $this->forge->dropTable('fediverse_notifications');
     }
 }

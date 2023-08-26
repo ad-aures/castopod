@@ -66,7 +66,7 @@ class UserController extends BaseController
         $roleOptions = [];
         array_walk(
             $roles,
-            static function ($role, $key) use (&$roleOptions): array {
+            static function (array $role, $key) use (&$roleOptions): array {
                 $roleOptions[$key] = $role['title'];
                 return $roleOptions;
             },
@@ -172,7 +172,7 @@ class UserController extends BaseController
         $roleOptions = [];
         array_walk(
             $roles,
-            static function ($role, $key) use (&$roleOptions): array {
+            static function (array $role, $key) use (&$roleOptions): array {
                 $roleOptions[$key] = $role['title'];
                 return $roleOptions;
             },

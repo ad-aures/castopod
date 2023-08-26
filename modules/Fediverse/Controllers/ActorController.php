@@ -291,14 +291,11 @@ class ActorController extends Controller
 
     public function followers(): ResponseInterface
     {
-        $tablesPrefix = config('Fediverse')
-            ->tablesPrefix;
-
         // get followers for a specific actor
         $followers = model('ActorModel', false)
-            ->join($tablesPrefix . 'follows', $tablesPrefix . 'follows.actor_id = id', 'inner')
-            ->where($tablesPrefix . 'follows.target_actor_id', $this->actor->id)
-            ->orderBy($tablesPrefix . 'follows.created_at', 'DESC');
+            ->join('fediverse_follows', 'fediverse_follows.actor_id = id', 'inner')
+            ->where('fediverse_follows.target_actor_id', $this->actor->id)
+            ->orderBy('fediverse_follows.created_at', 'DESC');
 
         $pageNumber = (int) $this->request->getGet('page');
 

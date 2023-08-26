@@ -206,7 +206,7 @@ if (! function_exists('publication_status_banner')) {
                 $bannerDisclaimer = lang('Podcast.publication_status_banner.draft_mode');
                 $bannerText = lang('Podcast.publication_status_banner.scheduled', [
                     'publication_date' => local_datetime($publicationDate),
-                ], null, false);
+                ]);
                 $linkRoute = route_to('podcast-publish_edit', $podcastId);
                 $linkLabel = lang('Podcast.publish_edit');
                 break;
@@ -492,10 +492,10 @@ if (! function_exists('category_label')) {
     {
         $categoryLabel = '';
         if ($category->parent_id !== null) {
-            $categoryLabel .= lang('Podcast.category_options.' . $category->parent->code, [], null, false) . ' › ';
+            $categoryLabel .= lang('Podcast.category_options.' . $category->parent->code) . ' › ';
         }
 
-        return $categoryLabel . lang('Podcast.category_options.' . $category->code, [], null, false);
+        return $categoryLabel . lang('Podcast.category_options.' . $category->code);
     }
 }
 

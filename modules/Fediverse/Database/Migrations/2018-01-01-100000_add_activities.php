@@ -58,18 +58,15 @@ class AddActivities extends BaseMigration
             ],
         ]);
 
-        $tablesPrefix = config('Fediverse')
-            ->tablesPrefix;
-
         $this->forge->addPrimaryKey('id');
-        $this->forge->addForeignKey('actor_id', $tablesPrefix . 'actors', 'id', '', 'CASCADE');
-        $this->forge->addForeignKey('target_actor_id', $tablesPrefix . 'actors', 'id', '', 'CASCADE');
-        $this->forge->addForeignKey('post_id', $tablesPrefix . 'posts', 'id', '', 'CASCADE');
-        $this->forge->createTable($tablesPrefix . 'activities');
+        $this->forge->addForeignKey('actor_id', 'fediverse_actors', 'id', '', 'CASCADE');
+        $this->forge->addForeignKey('target_actor_id', 'fediverse_actors', 'id', '', 'CASCADE');
+        $this->forge->addForeignKey('post_id', 'fediverse_posts', 'id', '', 'CASCADE');
+        $this->forge->createTable('fediverse_activities');
     }
 
     public function down(): void
     {
-        $this->forge->dropTable(config('Fediverse')->tablesPrefix . 'activities');
+        $this->forge->dropTable('fediverse_activities');
     }
 }

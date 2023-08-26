@@ -51,7 +51,8 @@ class EpisodeComment extends UuidEntity
     protected bool $has_replies = false;
 
     /**
-     * @var string[]
+     * @var array<int, string>
+     * @phpstan-var list<string>
      */
     protected $dates = ['created_at'];
 

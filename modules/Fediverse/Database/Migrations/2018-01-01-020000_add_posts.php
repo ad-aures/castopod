@@ -75,21 +75,18 @@ class AddPosts extends BaseMigration
             ],
         ]);
 
-        $tablesPrefix = config('Fediverse')
-            ->tablesPrefix;
-
         $this->forge->addPrimaryKey('id');
         $this->forge->addUniqueKey('uri');
         // FIXME: an actor must reblog a post only once
         // $this->forge->addUniqueKey(['actor_id', 'reblog_of_id']);
-        $this->forge->addForeignKey('actor_id', $tablesPrefix . 'actors', 'id', '', 'CASCADE');
-        $this->forge->addForeignKey('in_reply_to_id', $tablesPrefix . 'posts', 'id', '', 'CASCADE');
-        $this->forge->addForeignKey('reblog_of_id', $tablesPrefix . 'posts', 'id', '', 'CASCADE');
-        $this->forge->createTable($tablesPrefix . 'posts');
+        $this->forge->addForeignKey('actor_id', 'fediverse_actors', 'id', '', 'CASCADE');
+        $this->forge->addForeignKey('in_reply_to_id', 'fediverse_posts', 'id', '', 'CASCADE');
+        $this->forge->addForeignKey('reblog_of_id', 'fediverse_posts', 'id', '', 'CASCADE');
+        $this->forge->createTable('fediverse_posts');
     }
 
     public function down(): void
     {
-        $this->forge->dropTable(config('Fediverse')->tablesPrefix . 'posts');
+        $this->forge->dropTable('fediverse_posts');
     }
 }

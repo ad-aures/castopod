@@ -12,18 +12,19 @@ namespace Modules\Fediverse\Models;
 
 use CodeIgniter\Events\Events;
 use CodeIgniter\I18n\Time;
+use CodeIgniter\Model;
 use Exception;
 use Modules\Fediverse\Activities\FollowActivity;
 use Modules\Fediverse\Activities\UndoActivity;
 use Modules\Fediverse\Entities\Actor;
 use Modules\Fediverse\Entities\Follow;
 
-class FollowModel extends BaseModel
+class FollowModel extends Model
 {
     /**
      * @var string
      */
-    protected $table = 'follows';
+    protected $table = 'fediverse_follows';
 
     /**
      * @var string[]

@@ -195,7 +195,7 @@ class AddPodcasts extends BaseMigration
         $this->forge->addUniqueKey('handle');
         $this->forge->addUniqueKey('guid');
         $this->forge->addUniqueKey('actor_id');
-        $this->forge->addForeignKey('actor_id', config('Fediverse')->tablesPrefix . 'actors', 'id', '', 'CASCADE');
+        $this->forge->addForeignKey('actor_id', 'fediverse_actors', 'id', '', 'CASCADE');
         $this->forge->addForeignKey('cover_id', 'media', 'id');
         $this->forge->addForeignKey('banner_id', 'media', 'id', '', 'SET NULL');
         $this->forge->addForeignKey('category_id', 'categories', 'id');

@@ -75,11 +75,11 @@ class AddPreviewCards extends BaseMigration
 
         $this->forge->addPrimaryKey('id');
         $this->forge->addUniqueKey('url');
-        $this->forge->createTable(config('Fediverse')->tablesPrefix . 'preview_cards');
+        $this->forge->createTable('fediverse_preview_cards');
     }
 
     public function down(): void
     {
-        $this->forge->dropTable(config('Fediverse')->tablesPrefix . 'preview_cards');
+        $this->forge->dropTable('fediverse_preview_cards');
     }
 }

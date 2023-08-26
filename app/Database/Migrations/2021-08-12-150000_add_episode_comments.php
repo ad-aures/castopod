@@ -64,12 +64,9 @@ class AddEpisodeComments extends BaseMigration
             ],
         ]);
 
-        $fediverseTablesPrefix = config('Fediverse')
-            ->tablesPrefix;
-
         $this->forge->addPrimaryKey('id');
         $this->forge->addForeignKey('episode_id', 'episodes', 'id', '', 'CASCADE');
-        $this->forge->addForeignKey('actor_id', $fediverseTablesPrefix . 'actors', 'id', '', 'CASCADE');
+        $this->forge->addForeignKey('actor_id', 'fediverse_actors', 'id', '', 'CASCADE');
         $this->forge->addForeignKey('created_by', 'users', 'id');
         $this->forge->createTable('episode_comments');
     }

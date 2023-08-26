@@ -10,14 +10,15 @@ declare(strict_types=1);
 
 namespace Modules\Fediverse\Models;
 
+use Michalsn\Uuid\UuidModel;
 use Modules\Fediverse\Entities\Notification;
 
-class NotificationModel extends BaseUuidModel
+class NotificationModel extends UuidModel
 {
     /**
      * @var string
      */
-    protected $table = 'notifications';
+    protected $table = 'fediverse_notifications';
 
     /**
      * @var string

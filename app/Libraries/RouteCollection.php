@@ -14,18 +14,25 @@ declare(strict_types=1);
 
 namespace App\Libraries;
 
+use Closure;
 use CodeIgniter\Router\RouteCollection as CodeIgniterRouteCollection;
 
 class RouteCollection extends CodeIgniterRouteCollection
 {
     /**
+     * The current hostname from $_SERVER['HTTP_HOST']
+     */
+    private ?string $httpHost = null;
+
+    /**
      * Does the heavy lifting of creating an actual route. You must specify
      * the request method(s) that this route will work for. They can be separated
      * by a pipe character "|" if there is more than one.
      *
-     * @param array|Closure|string $to
+     * @param array<int, mixed>|Closure|string $to
+     * @param array<string, mixed> $options
      */
-    protected function create(string $verb, string $from, $to, ?array $options = null)
+    protected function create(string $verb, string $from, $to, ?array $options = null): void
     {
         $overwrite = false;
         $prefix = $this->group === null ? '' : $this->group . '/';
@@ -81,8 +88,8 @@ class RouteCollection extends CodeIgniterRouteCollection
             // Get a constant string to work with.
             $to = preg_replace('/(\$\d+)/', '$X', $to);
 
-            for ($i = (int) $options['offset'] + 1; $i < (int) $options['offset'] + 7; $i++) {
-                $to = preg_replace_callback('/\$X/', static fn ($m) => '$' . $i, $to, 1);
+            for ($i = (int) $options['offset'] + 1; $i < (int) $options['offset'] + 7; ++$i) {
+                $to = preg_replace_callback('/\$X/', static fn ($m): string => '$' . $i, $to, 1);
             }
         }
 
@@ -97,7 +104,7 @@ class RouteCollection extends CodeIgniterRouteCollection
             // If no namespace found, add the default namespace
             if (strpos($to, '\\') === false || strpos($to, '\\') > 0) {
                 $namespace = $options['namespace'] ?? $this->defaultNamespace;
-                $to = trim($namespace, '\\') . '\\' . $to;
+                $to = trim((string) $namespace, '\\') . '\\' . $to;
             }
             // Always ensure that we escape our namespace so we're not pointing to
             // \CodeIgniter\Routes\Controller::method.
@@ -133,5 +140,141 @@ class RouteCollection extends CodeIgniterRouteCollection
         if (isset($options['redirect']) && is_numeric($options['redirect'])) {
             $this->routes['*'][$name]['redirect'] = $options['redirect'];
         }
+    }
+
+    /**
+     * Compares the hostname passed in against the current hostname
+     * on this page request.
+     *
+     * @param string $hostname Hostname in route options
+     */
+    private function checkHostname($hostname): bool
+    {
+        // CLI calls can't be on hostname.
+        if ($this->httpHost === null) {
+            return false;
+        }
+
+        return strtolower($this->httpHost) === strtolower($hostname);
+    }
+
+    /**
+     * @param array<int, mixed> $to
+     *
+     * @return string|array<int, mixed>
+     */
+    private function processArrayCallableSyntax(string $from, array $to): string | array
+    {
+        // [classname, method]
+        // eg, [Home::class, 'index']
+        if (is_callable($to, true, $callableName)) {
+            // If the route has placeholders, add params automatically.
+            $params = $this->getMethodParams($from);
+
+            return '\\' . $callableName . $params;
+        }
+
+        // [[classname, method], params]
+        // eg, [[Home::class, 'index'], '$1/$2']
+        if (
+            isset($to[0], $to[1])
+            && is_callable($to[0], true, $callableName)
+            && is_string($to[1])
+        ) {
+            return '\\' . $callableName . '/' . $to[1];
+        }
+
+        return $to;
+    }
+
+    /**
+     * Compares the subdomain(s) passed in against the current subdomain
+     * on this page request.
+     *
+     * @param string|string[] $subdomains
+     */
+    private function checkSubdomains($subdomains): bool
+    {
+        // CLI calls can't be on subdomain.
+        if ($this->httpHost === null) {
+            return false;
+        }
+
+        if ($this->currentSubdomain === null) {
+            $this->currentSubdomain = $this->determineCurrentSubdomain();
+        }
+
+        if (! is_array($subdomains)) {
+            $subdomains = [$subdomains];
+        }
+
+        // Routes can be limited to any sub-domain. In that case, though,
+        // it does require a sub-domain to be present.
+        if (! empty($this->currentSubdomain) && in_array('*', $subdomains, true)) {
+            return true;
+        }
+
+        return in_array($this->currentSubdomain, $subdomains, true);
+    }
+
+    /**
+     * Returns the method param string like `/$1/$2` for placeholders
+     */
+    private function getMethodParams(string $from): string
+    {
+        preg_match_all('/\(.+?\)/', $from, $matches);
+        $count = is_countable($matches[0]) ? count($matches[0]) : 0;
+
+        $params = '';
+
+        for ($i = 1; $i <= $count; ++$i) {
+            $params .= '/$' . $i;
+        }
+
+        return $params;
+    }
+
+    /**
+     * Examines the HTTP_HOST to get the best match for the subdomain. It
+     * won't be perfect, but should work for our needs.
+     *
+     * It's especially not perfect since it's possible to register a domain
+     * with a period (.) as part of the domain name.
+     *
+     * @return false|string the subdomain
+     */
+    private function determineCurrentSubdomain()
+    {
+        // We have to ensure that a scheme exists
+        // on the URL else parse_url will mis-interpret
+        // 'host' as the 'path'.
+        $url = $this->httpHost;
+        if (strpos($url, 'http') !== 0) {
+            $url = 'http://' . $url;
+        }
+
+        $parsedUrl = parse_url($url);
+
+        $host = explode('.', $parsedUrl['host']);
+
+        if ($host[0] === 'www') {
+            unset($host[0]);
+        }
+
+        // Get rid of any domains, which will be the last
+        unset($host[count($host) - 1]);
+
+        // Account for .co.uk, .co.nz, etc. domains
+        if (end($host) === 'co') {
+            $host = array_slice($host, 0, -1);
+        }
+
+        // If we only have 1 part left, then we don't have a sub-domain.
+        if (count($host) === 1) {
+            // Set it to false so we don't make it back here again.
+            return false;
+        }
+
+        return array_shift($host);
     }
 }

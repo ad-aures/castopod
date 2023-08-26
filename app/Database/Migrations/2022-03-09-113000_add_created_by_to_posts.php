@@ -17,10 +17,8 @@ class AddCreatedByToPosts extends BaseMigration
     public function up(): void
     {
         $prefix = $this->db->getPrefix();
-        $fediverseTablesPrefix = config('Fediverse')
-            ->tablesPrefix;
 
-        $this->forge->addColumn("{$fediverseTablesPrefix}posts", [
+        $this->forge->addColumn('fediverse_posts', [
             'created_by' => [
                 'type'     => 'INT',
                 'unsigned' => true,
@@ -29,22 +27,22 @@ class AddCreatedByToPosts extends BaseMigration
             ],
         ]);
 
-        $alterQuery = <<<CODE_SAMPLE
-            ALTER TABLE {$prefix}{$fediverseTablesPrefix}posts
-            ADD FOREIGN KEY {$prefix}{$fediverseTablesPrefix}posts_created_by_foreign(created_by) REFERENCES {$prefix}users(id) ON DELETE CASCADE;
-        CODE_SAMPLE;
-        $this->db->query($alterQuery);
+        $this->forge->addForeignKey(
+            'created_by',
+            'users',
+            'id',
+            '',
+            'CASCADE',
+            $prefix . 'fediverse_posts_created_by_foreign'
+        );
+        $this->forge->processIndexes('fediverse_posts');
     }
 
     public function down(): void
     {
-        $fediverseTablesPrefix = config('Fediverse')
-            ->tablesPrefix;
+        $prefix = $this->db->getPrefix();
 
-        $this->forge->dropForeignKey(
-            $fediverseTablesPrefix . 'posts',
-            $fediverseTablesPrefix . 'posts_created_by_foreign'
-        );
-        $this->forge->dropColumn($fediverseTablesPrefix . 'posts', 'created_by');
+        $this->forge->dropForeignKey('fediverse_posts', $prefix . 'fediverse_posts_created_by_foreign');
+        $this->forge->dropColumn('fediverse_posts', 'created_by');
     }
 }

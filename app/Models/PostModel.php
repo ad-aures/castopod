@@ -58,8 +58,8 @@ class PostModel extends FediversePostModel
     public function setEpisodeIdForRepliesOfEpisodePosts(): int | false
     {
         // make sure that posts in reply to episode activities have an episode id
-        $postsToUpdate = $this->db->table(config('Fediverse')->tablesPrefix . 'posts as p1')
-            ->join(config('Fediverse')->tablesPrefix . 'posts as p2', 'p1.id = p2.in_reply_to_id')
+        $postsToUpdate = $this->db->table('fediverse_posts as p1')
+            ->join('fediverse_posts as p2', 'p1.id = p2.in_reply_to_id')
             ->select('p2.id, p1.episode_id')
             ->where([
                 'p2.in_reply_to_id IS NOT' => null,

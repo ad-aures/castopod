@@ -145,7 +145,7 @@ class PersonModel extends Model
                 $this->select('`id`, `full_name`')
                     ->orderBy('`full_name`', 'ASC')
                     ->findAll(),
-                static function ($result, $person) {
+                static function (array $result, $person): array {
                     $result[$person->id] = $person->full_name;
                     return $result;
                 },

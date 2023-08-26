@@ -18,6 +18,7 @@ use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
 use CodeIgniter\I18n\Time;
 use CodeIgniter\Shield\Entities\User;
+use Config\Services;
 use Exception;
 use League\HTMLToMarkdown\HtmlConverter;
 use Modules\Auth\Models\UserModel;
@@ -95,6 +96,9 @@ class PodcastImport extends BaseCommand
 
     public function run(array $params): void
     {
+        // FIXME: getting named routes doesn't work from v4.3 anymore, so loading all routes before importing
+        Services::routes()->loadRoutes();
+
         $this->init();
 
         try {
@@ -503,7 +507,7 @@ class PodcastImport extends BaseCommand
             ->get()
             ->getResultArray();
 
-        return array_map(static function ($element) {
+        return array_map(static function (array $element) {
             return $element['guid'];
         }, $result);
     }

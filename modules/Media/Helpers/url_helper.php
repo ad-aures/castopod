@@ -18,7 +18,7 @@ if (! function_exists('media_url')) {
             $relativePath = implode('/', $relativePath);
         }
 
-        $uri = new URI(rtrim((string) config(Media::class)->baseURL, '/') . '/' . ltrim($relativePath));
+        $uri = new URI(rtrim(config(Media::class)->baseURL, '/') . '/' . ltrim($relativePath));
 
         return URI::createURIString(
             $scheme ?? $uri->getScheme(),

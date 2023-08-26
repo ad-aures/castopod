@@ -28,8 +28,6 @@ class DatabaseUpdate extends BaseCommand
     {
         $migrate = Services::migrations();
 
-        $migrate->setNamespace('CodeIgniter\Settings')
-            ->latest();
         $migrate->setNamespace(null)
             ->latest();
     }

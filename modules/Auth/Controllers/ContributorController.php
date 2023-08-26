@@ -83,7 +83,7 @@ class ContributorController extends BaseController
         $users = (new UserModel())->findAll();
         $contributorOptions = array_reduce(
             $users,
-            static function ($result, $user) {
+            static function (array $result, $user): array {
                 $result[$user->id] = $user->username;
                 return $result;
             },
@@ -94,7 +94,7 @@ class ContributorController extends BaseController
         $roleOptions = [];
         array_walk(
             $roles,
-            static function ($role, $key) use (&$roleOptions): array {
+            static function (string $role, $key) use (&$roleOptions): array {
                 $roleOptions[$role] = lang('Auth.podcast_groups.' . $role . '.title');
                 return $roleOptions;
             },
@@ -137,7 +137,7 @@ class ContributorController extends BaseController
         $roleOptions = [];
         array_walk(
             $roles,
-            static function ($role) use (&$roleOptions): array {
+            static function (string $role) use (&$roleOptions): array {
                 $roleOptions[$role] = lang('Auth.podcast_groups.' . $role . '.title');
                 return $roleOptions;
             },

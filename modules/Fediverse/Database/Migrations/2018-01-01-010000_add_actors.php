@@ -113,11 +113,11 @@ class AddActors extends BaseMigration
         $this->forge->addPrimaryKey('id');
         $this->forge->addUniqueKey('uri');
         $this->forge->addUniqueKey(['username', 'domain']);
-        $this->forge->createTable(config('Fediverse')->tablesPrefix . 'actors');
+        $this->forge->createTable('fediverse_actors');
     }
 
     public function down(): void
     {
-        $this->forge->dropTable(config('Fediverse')->tablesPrefix . 'actors');
+        $this->forge->dropTable('fediverse_actors');
     }
 }

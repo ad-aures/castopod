@@ -67,15 +67,10 @@ class CategoryModel extends Model
                 static function (array $result, Category $category): array {
                     $result[$category->id] = '';
                     if ($category->parent instanceof Category) {
-                        $result[$category->id] = lang(
-                            'Podcast.category_options.' . $category->parent->code,
-                            [],
-                            null,
-                            false
-                        ) . ' › ';
+                        $result[$category->id] = lang('Podcast.category_options.' . $category->parent->code) . ' › ';
                     }
 
-                    $result[$category->id] .= lang('Podcast.category_options.' . $category->code, [], null, false);
+                    $result[$category->id] .= lang('Podcast.category_options.' . $category->code);
                     return $result;
                 },
                 [],
