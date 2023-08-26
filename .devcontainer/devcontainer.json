@@ -9,46 +9,49 @@
   "postStartCommand": "crontab ./crontab && cron && php spark serve --host 0.0.0.0",
   "postAttachCommand": "crontab ./crontab && service cron reload",
   "shutdownAction": "stopCompose",
-  "settings": {
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "[php]": {
-      "editor.defaultFormatter": "bmewburn.vscode-intelephense-client",
-      "editor.formatOnSave": false
-    },
-    "css.validate": false,
-    "color-highlight.markerType": "dot-before",
-    "files.associations": {
-      "*.xml.dist": "xml",
-      "spark": "php",
-      "env": "dotenv",
-      ".rsync-filter": "diff"
-    }
-  },
-  "extensions": [
-    "bmewburn.vscode-intelephense-client",
-    "bradlc.vscode-tailwindcss",
-    "breezelin.phpstan",
-    "DavidAnson.vscode-markdownlint",
-    "dbaeumer.vscode-eslint",
-    "eamodio.gitlens",
-    "esbenp.prettier-vscode",
-    "heybourn.headwind",
-    "jamesbirtles.svelte-vscode",
-    "kasik96.latte",
-    "mikestead.dotenv",
-    "naumovs.color-highlight",
-    "pflannery.vscode-versionlens",
-    "runem.lit-plugin",
-    "streetsidesoftware.code-spell-checker",
-    "stylelint.vscode-stylelint",
-    "wayou.vscode-todo-highlight",
-    "yzhang.markdown-all-in-one"
-  ],
-
   "features": {
     "ghcr.io/devcontainers/features/git:1": {},
     "ghcr.io/guiyomh/features/vim:0": {},
     "ghcr.io/NicoVIII/devcontainer-features/pnpm:2": {}
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "[php]": {
+          "editor.defaultFormatter": "bmewburn.vscode-intelephense-client",
+          "editor.formatOnSave": false
+        },
+        "css.validate": false,
+        "color-highlight.markerType": "dot-before",
+        "files.associations": {
+          "*.xml.dist": "xml",
+          "spark": "php",
+          "env": "dotenv",
+          ".rsync-filter": "diff"
+        }
+      },
+      "extensions": [
+        "bmewburn.vscode-intelephense-client",
+        "bradlc.vscode-tailwindcss",
+        "breezelin.phpstan",
+        "DavidAnson.vscode-markdownlint",
+        "dbaeumer.vscode-eslint",
+        "eamodio.gitlens",
+        "esbenp.prettier-vscode",
+        "heybourn.headwind",
+        "jamesbirtles.svelte-vscode",
+        "kasik96.latte",
+        "mikestead.dotenv",
+        "naumovs.color-highlight",
+        "pflannery.vscode-versionlens",
+        "runem.lit-plugin",
+        "streetsidesoftware.code-spell-checker",
+        "stylelint.vscode-stylelint",
+        "wayou.vscode-todo-highlight",
+        "yzhang.markdown-all-in-one"
+      ]
+    }
   }
 }
