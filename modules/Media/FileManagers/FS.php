@@ -150,6 +150,6 @@ class FS implements FileManagerInterface
 
         $uri = trim($uri, '/');
 
-        return config('Media')->storage . '/' . config('Media')->root . '/' . $uri;
+        return config(MediaConfig::class)->storage . '/' . config(MediaConfig::class)->root . '/' . $uri;
     }
 }

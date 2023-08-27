@@ -9,6 +9,8 @@ use App\Entities\EpisodeComment;
 use App\Entities\Page;
 use App\Entities\Podcast;
 use App\Entities\Post;
+use Config\Embed;
+use Config\Images;
 use Melbahja\Seo\MetaTags;
 use Melbahja\Seo\Schema;
 use Melbahja\Seo\Schema\Thing;
@@ -56,8 +58,8 @@ if (! function_exists('get_podcast_metatags')) {
             ->description(esc($podcast->description))
             ->image((string) $podcast->cover->og_url)
             ->canonical((string) current_url())
-            ->og('image:width', (string) config('Images')->podcastCoverSizes['og']['width'])
-            ->og('image:height', (string) config('Images')->podcastCoverSizes['og']['height'])
+            ->og('image:width', (string) config(Images::class)->podcastCoverSizes['og']['width'])
+            ->og('image:height', (string) config(Images::class)->podcastCoverSizes['og']['height'])
             ->og('locale', $podcast->language_code)
             ->og('site_name', esc(service('settings')->get('App.siteName')))
             ->push('link', [
@@ -106,8 +108,8 @@ if (! function_exists('get_episode_metatags')) {
             ->image((string) $episode->cover->og_url, 'player')
             ->canonical($episode->link)
             ->og('site_name', esc(service('settings')->get('App.siteName')))
-            ->og('image:width', (string) config('Images')->podcastCoverSizes['og']['width'])
-            ->og('image:height', (string) config('Images')->podcastCoverSizes['og']['height'])
+            ->og('image:width', (string) config(Images::class)->podcastCoverSizes['og']['width'])
+            ->og('image:height', (string) config(Images::class)->podcastCoverSizes['og']['height'])
             ->og('locale', $episode->podcast->language_code)
             ->og('audio', $episode->audio_opengraph_url)
             ->og('audio:type', $episode->audio->file_mimetype)
@@ -116,8 +118,8 @@ if (! function_exists('get_episode_metatags')) {
             ->twitter('audio:partner', $episode->podcast->publisher ?? '')
             ->twitter('audio:artist_name', esc($episode->podcast->owner_name))
             ->twitter('player', $episode->getEmbedUrl('light'))
-            ->twitter('player:width', (string) config('Embed')->width)
-            ->twitter('player:height', (string) config('Embed')->height)
+            ->twitter('player:width', (string) config(Embed::class)->width)
+            ->twitter('player:height', (string) config(Embed::class)->height)
             ->push('link', [
                 'rel'  => 'alternate',
                 'type' => 'application/activity+json',

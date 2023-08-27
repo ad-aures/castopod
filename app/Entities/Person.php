@@ -14,6 +14,7 @@ use App\Models\PersonModel;
 use CodeIgniter\Entity\Entity;
 use CodeIgniter\Files\File;
 use CodeIgniter\HTTP\Files\UploadedFile;
+use Config\Images;
 use Modules\Media\Entities\Image;
 use Modules\Media\Models\MediaModel;
 use RuntimeException;
@@ -71,7 +72,7 @@ class Person extends Entity
         } else {
             $avatar = new Image([
                 'file_key' => 'persons/' . $this->attributes['unique_name'] . '.' . $file->getExtension(),
-                'sizes'    => config('Images')
+                'sizes'    => config(Images::class)
 ->personAvatarSizes,
                 'uploaded_by' => $this->attributes['updated_by'],
                 'updated_by'  => $this->attributes['updated_by'],

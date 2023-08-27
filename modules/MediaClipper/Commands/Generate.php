@@ -9,6 +9,7 @@ use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\Files\File;
 use CodeIgniter\I18n\Time;
 use Exception;
+use Modules\Admin\Config\Admin;
 use Modules\MediaClipper\VideoClipper;
 
 class Generate extends BaseCommand
@@ -24,7 +25,7 @@ class Generate extends BaseCommand
         // get number of running clips to prevent from having too much running in parallel
         // TODO: get the number of running ffmpeg processes directly from the machine?
         $runningVideoClips = (new ClipModel())->getRunningVideoClipsCount();
-        if ($runningVideoClips >= config('Admin')->videoClipWorkers) {
+        if ($runningVideoClips >= config(Admin::class)->videoClipWorkers) {
             return;
         }
 

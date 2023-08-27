@@ -12,6 +12,7 @@ namespace Modules\Fediverse\Models;
 
 use CodeIgniter\Events\Events;
 use CodeIgniter\Model;
+use Modules\Fediverse\Config\Fediverse;
 use Modules\Fediverse\Entities\Actor;
 
 class ActorModel extends Model
@@ -98,7 +99,7 @@ class ActorModel extends Model
     {
         $hashedActorUri = md5($actorUri);
         $cacheName =
-            config('Fediverse')
+            config(Fediverse::class)
                 ->cachePrefix . "actor-{$hashedActorUri}";
         if (! ($found = cache($cacheName))) {
             $found = $this->where('uri', $actorUri)
@@ -117,7 +118,7 @@ class ActorModel extends Model
     public function getFollowers(int $actorId): array
     {
         $cacheName =
-            config('Fediverse')
+            config(Fediverse::class)
                 ->cachePrefix . "actor#{$actorId}_followers";
         if (! ($found = cache($cacheName))) {
             $found = $this->join('fediverse_follows', 'fediverse_follows.actor_id = id', 'inner')
@@ -150,7 +151,7 @@ class ActorModel extends Model
      */
     public function getBlockedActors(): array
     {
-        $cacheName = config('Fediverse')
+        $cacheName = config(Fediverse::class)
             ->cachePrefix . 'blocked_actors';
         if (! ($found = cache($cacheName))) {
             $found = $this->where('is_blocked', 1)
@@ -165,7 +166,7 @@ class ActorModel extends Model
 
     public function blockActor(int $actorId): void
     {
-        $prefix = config('Fediverse')
+        $prefix = config(Fediverse::class)
             ->cachePrefix;
         cache()
             ->delete($prefix . 'blocked_actors');
@@ -181,7 +182,7 @@ class ActorModel extends Model
 
     public function unblockActor(int $actorId): void
     {
-        $prefix = config('Fediverse')
+        $prefix = config(Fediverse::class)
             ->cachePrefix;
         cache()
             ->delete($prefix . 'blocked_actors');
@@ -199,7 +200,7 @@ class ActorModel extends Model
     {
         helper('fediverse');
 
-        $cacheName = config('Fediverse')
+        $cacheName = config(Fediverse::class)
             ->cachePrefix . 'blocked_actors';
         if (! ($found = cache($cacheName))) {
             $result = $this->select('COUNT(*) as total_local_actors')
@@ -220,10 +221,10 @@ class ActorModel extends Model
     {
         helper('fediverse');
 
-        $cacheName = config('Fediverse')
+        $cacheName = config(Fediverse::class)
             ->cachePrefix . 'blocked_actors';
         if (! ($found = cache($cacheName))) {
-            $tablePrefix = config('Database')
+            $tablePrefix = config(Database::class)
                 ->default['DBPrefix'];
             $result = $this->select('COUNT(DISTINCT `cp_fediverse_actors`.`id`) as `total_active_actors`', false)
                 ->join(
@@ -297,7 +298,7 @@ class ActorModel extends Model
 
     public function clearCache(Actor $actor): void
     {
-        $cachePrefix = config('Fediverse')
+        $cachePrefix = config(Fediverse::class)
             ->cachePrefix;
         $hashedActorUri = md5($actor->uri);
         $cacheDomain = str_replace(':', '', $actor->domain);

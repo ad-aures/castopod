@@ -14,6 +14,7 @@ use App\Models\PodcastModel;
 use CodeIgniter\Database\Exceptions\DatabaseException;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\ResponseInterface;
+use Config\Cache;
 use Modules\Media\FileManagers\FileManagerInterface;
 
 class HomeController extends BaseController
@@ -53,7 +54,7 @@ class HomeController extends BaseController
         }
 
         // --- Can Castopod connect to the cache handler
-        if (config('Cache')->handler !== 'dummy' && cache()->getCacheInfo() === null) {
+        if (config(Cache::class)->handler !== 'dummy' && cache()->getCacheInfo() === null) {
             $errors[] = 'Unable connect to the cache handler.';
         }
 

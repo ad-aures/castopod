@@ -18,8 +18,10 @@ use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
+use Config\Colors;
 use Modules\Media\Entities\Transcript;
 use Modules\Media\Models\MediaModel;
+use Modules\MediaClipper\Config\MediaClipper;
 
 class VideoClipsController extends BaseController
 {
@@ -144,8 +146,8 @@ class VideoClipsController extends BaseController
             'title'      => 'required',
             'start_time' => 'required|greater_than_equal_to[0]',
             'duration'   => 'required|greater_than[0]',
-            'format'     => 'required|in_list[' . implode(',', array_keys(config('MediaClipper')->formats)) . ']',
-            'theme'      => 'required|in_list[' . implode(',', array_keys(config('Colors')->themes)) . ']',
+            'format'     => 'required|in_list[' . implode(',', array_keys(config(MediaClipper::class)->formats)) . ']',
+            'theme'      => 'required|in_list[' . implode(',', array_keys(config(Colors::class)->themes)) . ']',
         ];
 
         if (! $this->validate($rules)) {
@@ -156,7 +158,7 @@ class VideoClipsController extends BaseController
         }
 
         $themeName = $this->request->getPost('theme');
-        $themeColors = config('MediaClipper')
+        $themeColors = config(MediaClipper::class)
             ->themes[$themeName];
         $theme = [
             'name'    => $themeName,

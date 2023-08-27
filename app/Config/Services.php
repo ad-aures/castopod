@@ -6,7 +6,6 @@ namespace Config;
 
 use App\Libraries\Breadcrumb;
 use App\Libraries\Negotiate;
-use App\Libraries\RouteCollection;
 use App\Libraries\Router;
 use CodeIgniter\Config\BaseService;
 use CodeIgniter\HTTP\Request;
@@ -42,21 +41,6 @@ class Services extends BaseService
         $request = $request ?? static::request();
 
         return new Router($routes, $request);
-    }
-
-    /**
-     * The Routes service is a class that allows for easily building
-     * a collection of routes.
-     *
-     * @return RouteCollection
-     */
-    public static function routes(bool $getShared = true)
-    {
-        if ($getShared) {
-            return static::getSharedInstance('routes');
-        }
-
-        return new RouteCollection(self::locator(), config('Modules'));
     }
 
     /**

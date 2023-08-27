@@ -45,7 +45,7 @@ class PostController extends Controller
 
     public function __construct()
     {
-        $this->config = config('Fediverse');
+        $this->config = config(Fediverse::class);
     }
 
     public function _remap(string $method, string ...$params): mixed

@@ -4,13 +4,16 @@ declare(strict_types=1);
 
 namespace Modules\PremiumPodcasts\Config;
 
-$routes = service('routes');
+use CodeIgniter\Router\RouteCollection;
+use Modules\Admin\Config\Admin;
+
+/** @var RouteCollection $routes */
 
 $routes->addPlaceholder('podcastHandle', '[a-zA-Z0-9\_]{1,32}');
 
 // Admin routes for subscriptions
 $routes->group(
-    config('Admin')
+    config(Admin::class)
         ->gateway,
     [
         'namespace' => 'Modules\PremiumPodcasts\Controllers',
@@ -115,7 +118,7 @@ $routes->group(
         'namespace' => 'Modules\PremiumPodcasts\Controllers',
     ],
     static function ($routes): void {
-        $routes->get('unlock', 'LockController/$1', [
+        $routes->get('unlock', 'LockController::index/$1', [
             'as' => 'premium-podcast-unlock',
         ]);
         $routes->post('unlock', 'LockController::attemptUnlock/$1', [

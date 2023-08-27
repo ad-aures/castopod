@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Modules\Admin\Config\Admin;
+
 /**
  * @copyright  2020 Ad Aures
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -10,7 +12,7 @@ declare(strict_types=1);
 
 return [
     'label' => 'menú',
-    config('Admin')
+    config(Admin::class)
         ->gateway => 'Inicio',
     'podcasts' => 'podcasts',
     'episodes' => 'episodios',

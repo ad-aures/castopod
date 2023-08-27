@@ -10,6 +10,7 @@ use App\Models\EpisodeModel;
 use CodeIgniter\Debug\Toolbar\Collectors\Database;
 use CodeIgniter\Events\Events;
 use CodeIgniter\Exceptions\FrameworkException;
+use CodeIgniter\HotReloader\HotReloader;
 
 /*
  * --------------------------------------------------------------------
@@ -50,6 +51,13 @@ Events::on('pre_system', static function () {
     if (CI_DEBUG && ! is_cli()) {
         Events::on('DBQuery', Database::class . '::collect');
         Services::toolbar()->respond();
+
+        // Hot Reload route - for framework use on the hot reloader.
+        if (ENVIRONMENT === 'development') {
+            Services::routes()->get('__hot-reload', static function (): void {
+                (new HotReloader())->run();
+            });
+        }
     }
 });
 

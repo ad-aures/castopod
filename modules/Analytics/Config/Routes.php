@@ -2,13 +2,16 @@
 
 declare(strict_types=1);
 
+use CodeIgniter\Router\RouteCollection;
+use Modules\Analytics\Config\Analytics;
+
 /**
  * @copyright  2021 Ad Aures
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
  */
 
-$routes = service('routes');
+/** @var RouteCollection $routes */
 
 /**
  * Analytics routes file
@@ -25,17 +28,17 @@ $routes->addPlaceholder(
 $routes->group('', [
     'namespace' => 'Modules\Analytics\Controllers',
 ], static function ($routes): void {
-    $routes->group(config('Analytics')->gateway . '/(:num)/(:class)', static function ($routes): void {
+    $routes->group(config(Analytics::class)->gateway . '/(:num)/(:class)', static function ($routes): void {
         $routes->get('/', 'AnalyticsController::getData/$1/$2', [
             'as'     => 'analytics-full-data',
-            'filter' => config('Analytics')
+            'filter' => config(Analytics::class)
                 ->routeFilters[
                 'analytics-full-data'
             ],
         ]);
         $routes->get('(:filter)', 'AnalyticsController::getData/$1/$2/$3', [
             'as'     => 'analytics-data',
-            'filter' => config('Analytics')
+            'filter' => config(Analytics::class)
                 ->routeFilters['analytics-data'],
         ]);
         $routes->get(
@@ -43,14 +46,14 @@ $routes->group('', [
             'AnalyticsController::getData/$1/$2/$3/$4',
             [
                 'as'     => 'analytics-filtered-data',
-                'filter' => config('Analytics')
+                'filter' => config(Analytics::class)
                     ->routeFilters[
                     'analytics-filtered-data'
                 ],
             ],
         );
     });
-    $routes->get(config('Analytics')->gateway . '/(:class)/(:filter)', 'AnalyticsController::getData/$1/$2', [
+    $routes->get(config(Analytics::class)->gateway . '/(:class)/(:filter)', 'AnalyticsController::getData/$1/$2', [
         'as' => 'analytics-data-instance',
     ]);
 
@@ -63,4 +66,4 @@ $routes->group('', [
 
 // Show the Unknown UserAgents
 $routes->get('.well-known/unknown-useragents', 'UnknownUserAgentsController');
-$routes->get('.well-known/unknown-useragents/(:num)', 'UnknownUserAgentsController/$1');
+$routes->get('.well-known/unknown-useragents/(:num)', 'UnknownUserAgentsController::index/$1');

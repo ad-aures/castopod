@@ -7,6 +7,7 @@ namespace Modules\Auth\Config;
 use CodeIgniter\Shield\Authentication\Actions\ActionInterface;
 use CodeIgniter\Shield\Authentication\Actions\Email2FA;
 use CodeIgniter\Shield\Config\Auth as ShieldAuth;
+use Modules\Admin\Config\Admin;
 use Modules\Auth\Models\UserModel;
 
 class Auth extends ShieldAuth
@@ -119,7 +120,7 @@ class Auth extends ShieldAuth
     {
         parent::__construct();
 
-        $adminGateway = config('Admin')
+        $adminGateway = config(Admin::class)
             ->gateway;
 
         $this->redirects = [

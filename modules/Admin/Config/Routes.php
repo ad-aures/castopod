@@ -7,7 +7,6 @@ namespace Modules\Admin\Config;
 use CodeIgniter\Router\RouteCollection;
 
 /** @var RouteCollection $routes */
-$routes = service('routes');
 
 // video-clips scheduler
 $routes->add('scheduled-video-clips', 'SchedulerController::generateVideoClips', [
@@ -16,8 +15,7 @@ $routes->add('scheduled-video-clips', 'SchedulerController::generateVideoClips',
 
 // Admin area routes
 $routes->group(
-    config('Admin')
-        ->gateway,
+    config(Admin::class)->gateway,
     [
         'namespace' => 'Modules\Admin\Controllers',
     ],
@@ -161,7 +159,7 @@ $routes->group(
                     'filter' => 'permission:podcast#.delete',
                 ]);
                 $routes->group('persons', static function ($routes): void {
-                    $routes->get('/', 'PodcastPersonController/$1', [
+                    $routes->get('/', 'PodcastPersonController::index/$1', [
                         'as'     => 'podcast-persons-manage',
                         'filter' => 'permission:podcast#.manage-persons',
                     ]);
@@ -457,7 +455,7 @@ $routes->group(
                             ],
                         );
                         $routes->group('persons', static function ($routes): void {
-                            $routes->get('/', 'EpisodePersonController/$1/$2', [
+                            $routes->get('/', 'EpisodePersonController::index/$1/$2', [
                                 'as'     => 'episode-persons-manage',
                                 'filter' => 'permission:podcast#.episodes.manage-persons',
                             ]);

@@ -14,7 +14,9 @@ declare(strict_types=1);
 
 namespace App\Libraries;
 
+use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\Router\Exceptions\RedirectException;
+use CodeIgniter\Router\Exceptions\RouterException;
 use CodeIgniter\Router\Router as CodeIgniterRouter;
 use Config\Services;
 
@@ -40,26 +42,14 @@ class Router extends CodeIgniterRouter
         $uri = $uri === '/' ? $uri : trim($uri, '/ ');
 
         // Loop through the route array looking for wildcards
-        foreach ($routes as $routeKey => $val) {
-            // Reset localeSegment
-            $localeSegment = null;
-
+        foreach ($routes as $routeKey => $handler) {
             $routeKey = $routeKey === '/' ? $routeKey : ltrim($routeKey, '/ ');
 
             $matchedKey = $routeKey;
 
             // Are we dealing with a locale?
-            if (str_contains($routeKey, '{locale}')) {
-                $localeSegment = array_search(
-                    '{locale}',
-                    preg_split('~[\/]*((^[a-zA-Z0-9])|\(([^()]*)\))*[\/]+~m', $routeKey),
-                    true,
-                );
-
-                // Replace it with a regex so it
-                // will actually match.
-                $routeKey = str_replace('/', '\/', $routeKey);
-                $routeKey = str_replace('{locale}', '[^\/]+', $routeKey);
+            if (strpos($routeKey, '{locale}') !== false) {
+                $routeKey = str_replace('{locale}', '[^/]+', $routeKey);
             }
 
             // Does the RegEx match?
@@ -68,32 +58,51 @@ class Router extends CodeIgniterRouter
 
                 // Is this route supposed to redirect to another?
                 if ($this->collection->isRedirect($routeKey)) {
+                    // replacing matched route groups with references: post/([0-9]+) -> post/$1
+                    $redirectTo = preg_replace_callback('/(\([^\(]+\))/', static function (): string {
+                        static $i = 1;
+
+                        return '$' . $i++;
+                    }, (string) (is_array($handler) ? key($handler) : $handler));
+
                     throw new RedirectException(
-                        is_array($val) ? key($val) : $val,
-                        $this->collection->getRedirectCode($routeKey),
+                        preg_replace('#^' . $routeKey . '$#u', $redirectTo, $uri),
+                        $this->collection->getRedirectCode($routeKey)
                     );
                 }
 
                 // Store our locale so CodeIgniter object can
                 // assign it to the Request.
-                if (isset($localeSegment)) {
-                    // The following may be inefficient, but doesn't upset NetBeans :-/
-                    $temp = explode('/', $uri);
-                    $this->detectedLocale = $temp[$localeSegment];
+                if (strpos($matchedKey, '{locale}') !== false) {
+                    preg_match(
+                        '#^' . str_replace('{locale}', '(?<locale>[^/]+)', $matchedKey) . '$#u',
+                        $uri,
+                        $matched
+                    );
+
+                    if ($this->collection->shouldUseSupportedLocalesOnly()
+                        && ! in_array($matched['locale'], config(App::class)->supportedLocales, true)) {
+                        // Throw exception to prevent the autorouter, if enabled,
+                        // from trying to find a route
+                        throw PageNotFoundException::forLocaleNotSupported($matched['locale']);
+                    }
+
+                    $this->detectedLocale = $matched['locale'];
+                    unset($matched);
                 }
 
                 // Are we using Closures? If so, then we need
                 // to collect the params into an array
                 // so it can be passed to the controller method later.
-                if (! is_string($val) && is_callable($val)) {
-                    $this->controller = $val;
+                if (! is_string($handler) && is_callable($handler)) {
+                    $this->controller = $handler;
 
                     // Remove the original string from the matches array
                     array_shift($matches);
 
                     $this->params = $matches;
 
-                    $this->matchedRoute = [$matchedKey, $val];
+                    $this->setMatchedRoute($matchedKey, $handler);
 
                     return true;
                 }
@@ -123,62 +132,74 @@ class Router extends CodeIgniterRouter
                     $expectedContentType = $parsedHeader[0];
                     foreach ($supported as $available) {
                         if (
-                            $negotiate->callMatch($expectedContentType, $available, true)
+                            ! $negotiate->callMatch($expectedContentType, $available, true)
                         ) {
-                            if (
-                                array_key_exists(
-                                    'namespace',
-                                    $this->matchedRouteOptions[
-                                        'alternate-content'
-                                    ][$available],
-                                )
-                            ) {
-                                $this->collection->setDefaultNamespace(
-                                    $this->matchedRouteOptions[
-                                        'alternate-content'
-                                    ][$available]['namespace'],
-                                );
-                            }
-
-                            $val =
-                                $this->collection->getDefaultNamespace() .
-                                $this->directory .
-                                $this->matchedRouteOptions['alternate-content'][
-                                    $available
-                                ]['controller-method'];
-
-                            // no need to continue loop as $val has been overwritten
-                            break;
+                            continue;
                         }
+
+                        if (
+                            array_key_exists(
+                                'namespace',
+                                $this->matchedRouteOptions[
+                                    'alternate-content'
+                                    ][$available],
+                            )
+                        ) {
+                            $this->collection->setDefaultNamespace(
+                                $this->matchedRouteOptions[
+                                    'alternate-content'
+                                    ][$available]['namespace'],
+                            );
+                        }
+
+                        $handler =
+                            $this->collection->getDefaultNamespace() .
+                            $this->directory .
+                            $this->matchedRouteOptions['alternate-content'][
+                                $available
+                            ]['controller-method'];
+
+                        // no need to continue loop as $handle has been overwritten
+                        break;
                     }
                 }
 
-                // Are we using the default method for back-references?
+                // Are we using Closures? If so, then we need
+                // to collect the params into an array
+                // so it can be passed to the controller method later.
+                if (! is_string($handler) && is_callable($handler)) {
+                    $this->controller = $handler;
 
-                // Support resource route when function with subdirectory
-                // ex: $routes->resource('Admin/Admins');
-                if (
-                    str_contains((string) $val, '$') &&
-                    str_contains($routeKey, '(') &&
-                    str_contains($routeKey, '/')
-                ) {
-                    $replacekey = str_replace('/(.*)', '', $routeKey);
-                    $val = preg_replace('#^' . $routeKey . '$#u', (string) $val, $uri);
-                    $val = str_replace($replacekey, str_replace('/', '\\', $replacekey), $val);
-                } elseif (str_contains((string) $val, '$') && str_contains($routeKey, '(')) {
-                    $val = preg_replace('#^' . $routeKey . '$#u', (string) $val, $uri);
-                } elseif (str_contains((string) $val, '/')) {
-                    [$controller, $method] = explode('::', (string) $val);
+                    // Remove the original string from the matches array
+                    array_shift($matches);
 
-                    // Only replace slashes in the controller, not in the method.
-                    $controller = str_replace('/', '\\', $controller);
+                    $this->params = $matches;
 
-                    $val = $controller . '::' . $method;
+                    $this->setMatchedRoute($matchedKey, $handler);
+
+                    return true;
                 }
 
-                $this->setRequest(explode('/', (string) $val));
+                [$controller] = explode('::', (string) $handler);
 
-                $this->matchedRoute = [$matchedKey, $val];
+                // Checks `/` in controller name
+                if (strpos($controller, '/') !== false) {
+                    throw RouterException::forInvalidControllerName($handler);
+                }
+
+                if (strpos((string) $handler, '$') !== false && strpos($routeKey, '(') !== false) {
+                    // Checks dynamic controller
+                    if (strpos($controller, '$') !== false) {
+                        throw RouterException::forDynamicController($handler);
+                    }
+
+                    // Using back-references
+                    $handler = preg_replace('#^' . $routeKey . '$#u', (string) $handler, $uri);
+                }
+
+                $this->setRequest(explode('/', (string) $handler));
+
+                $this->setMatchedRoute($matchedKey, $handler);
 
                 return true;
             }

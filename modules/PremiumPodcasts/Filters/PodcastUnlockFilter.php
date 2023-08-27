@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Modules\PremiumPodcasts\Filters;
 
+use App\Entities\Episode;
 use App\Models\EpisodeModel;
 use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Router\Router;
-use Config\App;
 use Modules\PremiumPodcasts\PremiumPodcasts;
 
 class PodcastUnlockFilter implements FilterInterface
@@ -17,25 +17,14 @@ class PodcastUnlockFilter implements FilterInterface
     /**
      * Verifies that a user is logged in, or redirects to login.
      *
-     * @param array|null $params
+     * @param string[]|null $arguments
      *
      * @return mixed
      */
-    public function before(RequestInterface $request, $params = null)
+    public function before(RequestInterface $request, $arguments = null)
     {
         if (! function_exists('is_unlocked')) {
             helper('premium_podcasts');
-        }
-
-        $current = (string) current_url(true)
-            ->setHost('')
-            ->setScheme('')
-            ->stripQuery('token');
-
-        $config = config(App::class);
-        if ($config->forceGlobalSecureRequests) {
-            // Remove "https:/"
-            $current = substr($current, 7);
         }
 
         /** @var Router $router */
@@ -52,20 +41,28 @@ class PodcastUnlockFilter implements FilterInterface
         }
 
         // Make sure this isn't already a premium podcast route
-        if ($current === route_to('premium-podcast-unlock', $routerParams[0])) {
+        if (url_is((string) route_to('premium-podcast-unlock', $routerParams[0]))) {
+            return;
+        }
+
+        // expect 2 parameters (podcast handle and episode slug)
+        if (count($routerParams) < 2) {
+            return;
+        }
+
+        $episode = (new EpisodeModel())->getEpisodeBySlug($routerParams[0], $routerParams[1]);
+
+        if (! $episode instanceof Episode) {
             return;
         }
 
         // Make sure that public episodes are still accessible
-        if ($routerParams >= 2 && ($episode = (new EpisodeModel())->getEpisodeBySlug(
-            $routerParams[0],
-            $routerParams[1]
-        )) && ! $episode->is_premium) {
+        if (! $episode->is_premium) {
             return;
         }
 
         // Episode should be embeddable even if it is premium
-        if ($current === route_to('embed', $episode->podcast->handle, $episode->slug)) {
+        if (url_is((string) route_to('embed', $episode->podcast->handle, $episode->slug))) {
             return;
         }
 
@@ -80,7 +77,7 @@ class PodcastUnlockFilter implements FilterInterface
     }
 
     /**
-     * @param array|null $arguments
+     * @param string[]|null $arguments
      */
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null): void
     {

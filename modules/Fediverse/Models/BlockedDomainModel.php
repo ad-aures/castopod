@@ -13,6 +13,7 @@ namespace Modules\Fediverse\Models;
 use CodeIgniter\Database\BaseResult;
 use CodeIgniter\Events\Events;
 use CodeIgniter\Model;
+use Modules\Fediverse\Config\Fediverse;
 use Modules\Fediverse\Entities\BlockedDomain;
 
 class BlockedDomainModel extends Model
@@ -56,7 +57,7 @@ class BlockedDomainModel extends Model
      */
     public function getBlockedDomains(): array
     {
-        $cacheName = config('Fediverse')
+        $cacheName = config(Fediverse::class)
             ->cachePrefix . 'blocked_domains';
         if (! ($found = cache($cacheName))) {
             $found = $this->findAll();
@@ -72,7 +73,7 @@ class BlockedDomainModel extends Model
     {
         $hashedDomainName = md5($name);
         $cacheName =
-            config('Fediverse')
+            config(Fediverse::class)
                 ->cachePrefix .
             "domain#{$hashedDomainName}_isBlocked";
         if (! ($found = cache($cacheName))) {
@@ -88,7 +89,7 @@ class BlockedDomainModel extends Model
     public function blockDomain(string $name): int | bool
     {
         $hashedDomain = md5($name);
-        $prefix = config('Fediverse')
+        $prefix = config(Fediverse::class)
             ->cachePrefix;
         cache()
             ->delete($prefix . "domain#{$hashedDomain}_isBlocked");
@@ -120,7 +121,7 @@ class BlockedDomainModel extends Model
     public function unblockDomain(string $name): BaseResult | bool
     {
         $hashedDomain = md5($name);
-        $prefix = config('Fediverse')
+        $prefix = config(Fediverse::class)
             ->cachePrefix;
         cache()
             ->delete($prefix . "domain#{$hashedDomain}_isBlocked");

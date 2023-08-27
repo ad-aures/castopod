@@ -54,9 +54,9 @@ class Image extends BaseMedia
     /**
      * @param array<string, string> $data
      */
-    public function setAttributes(array $data): self
+    public function injectRawData(array $data): static
     {
-        parent::setAttributes($data);
+        parent::injectRawData($data);
 
         if ($this->attributes === []) {
             return $this;

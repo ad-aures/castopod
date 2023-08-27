@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
+use CodeIgniter\Router\RouteCollection;
+
 /**
  * @copyright  2021 Ad Aures
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
  */
 
-$routes = service('routes');
+/** @var RouteCollection $routes */
 
 $routes->addPlaceholder('actorUsername', '[a-zA-Z0-9\_]{1,32}');
 $routes->addPlaceholder(
@@ -35,7 +37,7 @@ $routes->group('', [
     // Actor
     $routes->group('@(:actorUsername)', static function ($routes): void {
         // Actor
-        $routes->get('/', 'ActorController/$1', [
+        $routes->get('/', 'ActorController::index/$1', [
             'as' => 'actor',
         ]);
         $routes->post('inbox', 'ActorController::inbox/$1', [
@@ -61,10 +63,10 @@ $routes->group('', [
     $routes->post('posts/new', 'PostController::attemptCreate/$1', [
         'as' => 'post-attempt-create',
     ]);
-    $routes->get('posts/(:uuid)', 'PostController/$1', [
+    $routes->get('posts/(:uuid)', 'PostController::index/$1', [
         'as' => 'post',
     ]);
-    $routes->get('posts/(:uuid)/replies', 'PostController/$1', [
+    $routes->get('posts/(:uuid)/replies', 'PostController::index/$1', [
         'as' => 'post-replies',
     ]);
     $routes->post(

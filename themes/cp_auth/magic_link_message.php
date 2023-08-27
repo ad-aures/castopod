@@ -1,4 +1,9 @@
-<?= $this->extend(config('Auth')->views['layout']) ?>
+<?php declare(strict_types=1);
+
+use Modules\Auth\Config\Auth;
+
+?>
+<?= $this->extend(config(Auth::class)->views['layout']) ?>
 
 <?= $this->section('title') ?><?= lang('Auth.useMagicLink') ?> <?= $this->endSection() ?>
 

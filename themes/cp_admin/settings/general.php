@@ -1,3 +1,9 @@
+<?php declare(strict_types=1);
+
+use Config\App;
+
+?>
+
 <?= $this->extend('_layout') ?>
 
 <?= $this->section('title') ?>
@@ -43,7 +49,7 @@
             accept=".png,.jpeg,.jpg"
             class="flex-1"
             />
-        <?php if (config('App')->siteIcon['ico'] !== service('settings')->get('App.siteIcon')['ico']): ?>
+        <?php if (config(App::class)->siteIcon['ico'] !== service('settings')->get('App.siteIcon')['ico']): ?>
         <div class="relative ml-2">
             <a href="<?= route_to('settings-instance-delete-icon') ?>" class="absolute p-1 text-red-700 bg-red-100 border-2 rounded-full hover:text-red-900 border-contrast -top-3 -right-3 focus:ring-accent" title="<?= lang('Settings.instance.site_icon_delete') ?>" data-tooltip="top"><?= icon('delete-bin') ?></a>
             <img src="<?= get_site_icon_url('64') ?>" alt="<?= esc(service('settings')->get('App.siteName')) ?> Favicon" class="w-10 h-10 aspect-square" loading="lazy" />

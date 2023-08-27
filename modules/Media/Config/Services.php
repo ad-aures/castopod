@@ -27,8 +27,7 @@ class Services extends BaseService
             return self::getSharedInstance('file_manager');
         }
 
-        /** @var MediaConfig $config * */
-        $config = config('Media');
+        $config = config(MediaConfig::class);
         $fileManagerClass = $config->fileManagers[$config->fileManager];
 
         $fileManager = new $fileManagerClass($config);

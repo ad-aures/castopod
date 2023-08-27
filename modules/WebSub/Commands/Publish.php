@@ -9,6 +9,7 @@ use App\Models\PodcastModel;
 use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\HTTP\CURLRequest;
 use Exception;
+use Modules\WebSub\Config\WebSub;
 
 class Publish extends BaseCommand
 {
@@ -55,7 +56,7 @@ class Publish extends BaseCommand
             ],
         ];
 
-        $hubUrls = config('WebSub')
+        $hubUrls = config(WebSub::class)
             ->hubs;
 
         foreach ($podcasts as $podcast) {

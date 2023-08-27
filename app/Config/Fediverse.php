@@ -34,15 +34,15 @@ class Fediverse extends FediverseBaseConfig
         try {
             $appTheme = service('settings')
                 ->get('App.theme');
-            $defaultBanner = config('Images')
-                ->podcastBannerDefaultPaths[$appTheme] ?? config('Images')->podcastBannerDefaultPaths['default'];
+            $defaultBanner = config(Images::class)
+                ->podcastBannerDefaultPaths[$appTheme] ?? config(Images::class)->podcastBannerDefaultPaths['default'];
         } catch (Exception) {
-            $defaultBanner = config('Images')
+            $defaultBanner = config(Images::class)
                 ->podcastBannerDefaultPaths['default'];
         }
 
         ['dirname' => $dirname, 'extension' => $extension, 'filename' => $filename] = pathinfo(
-            (string) $defaultBanner['path']
+            $defaultBanner['path']
         );
         $defaultBannerPath = $filename;
         if ($dirname !== '.') {

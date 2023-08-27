@@ -11,6 +11,7 @@ declare(strict_types=1);
 use AdAures\Ipcat\IpDb;
 use Config\Services;
 use GeoIp2\Database\Reader;
+use Modules\Analytics\Config\Analytics;
 use Opawg\UserAgentsPhp\UserAgents;
 use WhichBrowser\Parser;
 
@@ -260,7 +261,7 @@ if (! function_exists('podcast_hit')) {
                 ? $_SERVER['HTTP_RANGE']
                 : null;
 
-            $salt = config('Analytics')
+            $salt = config(Analytics::class)
                 ->salt;
             // We create a sha1 hash for this Salt+Current_Date+IP_Address+User_Agent+Episode_ID (used to count only once multiple episode downloads):
             $episodeListenerHashId =

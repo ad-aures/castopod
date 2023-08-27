@@ -14,6 +14,7 @@ use CodeIgniter\Database\BaseResult;
 use CodeIgniter\I18n\Time;
 use DateTimeInterface;
 use Michalsn\Uuid\UuidModel;
+use Modules\Fediverse\Config\Fediverse;
 use Modules\Fediverse\Entities\Activity;
 
 class ActivityModel extends UuidModel
@@ -77,7 +78,7 @@ class ActivityModel extends UuidModel
     public function getActivityById(string $activityId): ?Activity
     {
         $cacheName =
-            config('Fediverse')
+            config(Fediverse::class)
                 ->cachePrefix . "activity#{$activityId}";
         if (! ($found = cache($cacheName))) {
             $found = $this->find($activityId);

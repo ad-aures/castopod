@@ -1,5 +1,10 @@
+<?php declare(strict_types=1);
+
+use Modules\Auth\Config\Auth;
+
+?>
 <?= helper('form') ?>
-<?= $this->extend(config('Auth')->views['layout']) ?>
+<?= $this->extend(config(Auth::class)->views['layout']) ?>
 
 <?= $this->section('title') ?>
 	<?= lang('Auth.set_password') ?>

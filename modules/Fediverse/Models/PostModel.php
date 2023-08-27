@@ -20,6 +20,7 @@ use Modules\Fediverse\Activities\AnnounceActivity;
 use Modules\Fediverse\Activities\CreateActivity;
 use Modules\Fediverse\Activities\DeleteActivity;
 use Modules\Fediverse\Activities\UndoActivity;
+use Modules\Fediverse\Config\Fediverse;
 use Modules\Fediverse\Entities\Actor;
 use Modules\Fediverse\Entities\Post;
 use Modules\Fediverse\Objects\TombstoneObject;
@@ -97,7 +98,7 @@ class PostModel extends UuidModel
     {
         $hashedPostUri = md5($postUri);
         $cacheName =
-            config('Fediverse')
+            config(Fediverse::class)
                 ->cachePrefix . "post-{$hashedPostUri}";
         if (! ($found = cache($cacheName))) {
             $found = $this->where('uri', $postUri)
@@ -118,7 +119,7 @@ class PostModel extends UuidModel
     public function getActorPublishedPosts(int $actorId): array
     {
         $cacheName =
-            config('Fediverse')
+            config(Fediverse::class)
                 ->cachePrefix .
             "actor#{$actorId}_published_posts";
         if (! ($found = cache($cacheName))) {
@@ -167,7 +168,7 @@ class PostModel extends UuidModel
     public function getPostReplies(string $postId, bool $withBlocked = false): array
     {
         $cacheName =
-            config('Fediverse')
+            config(Fediverse::class)
                 ->cachePrefix .
             "post#{$postId}_replies" .
             ($withBlocked ? '_withBlocked' : '');
@@ -199,7 +200,7 @@ class PostModel extends UuidModel
     public function getPostReblogs(string $postId): array
     {
         $cacheName =
-            config('Fediverse')
+            config(Fediverse::class)
                 ->cachePrefix . "post#{$postId}_reblogs";
 
         if (! ($found = cache($cacheName))) {
@@ -276,7 +277,7 @@ class PostModel extends UuidModel
             $post->uri = url_to('post', esc($post->actor->username), $newPostId);
 
             $createActivity = new CreateActivity();
-            $noteObjectClass = config('Fediverse')
+            $noteObjectClass = config(Fediverse::class)
                 ->noteObject;
             $createActivity
                 ->set('actor', $post->actor->uri)
@@ -591,7 +592,7 @@ class PostModel extends UuidModel
     {
         helper('fediverse');
 
-        $cacheName = config('Fediverse')
+        $cacheName = config(Fediverse::class)
             ->cachePrefix . 'blocked_actors';
         if (! ($found = cache($cacheName))) {
             $result = $this->select('COUNT(*) as total_local_posts')
@@ -660,7 +661,7 @@ class PostModel extends UuidModel
 
     public function clearCache(Post $post): void
     {
-        $cachePrefix = config('Fediverse')
+        $cachePrefix = config(Fediverse::class)
             ->cachePrefix;
 
         $hashedPostUri = md5($post->uri);

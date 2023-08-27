@@ -2,28 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Config;
-
-// Create a new instance of our RouteCollection class.
-$routes = Services::routes();
+use CodeIgniter\Router\RouteCollection;
 
 /**
- * --------------------------------------------------------------------
- * Router Setup
- * --------------------------------------------------------------------
- */
-$routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Home');
-$routes->setDefaultMethod('index');
-$routes->setTranslateURIDashes(false);
-$routes->set404Override();
-
-// The Auto Routing (Legacy) is very dangerous. It is easy to create vulnerable apps
-// where controller filters or CSRF protection are bypassed.
-// If you don't want to define all routes, please use the Auto Routing (Improved).
-// Set `$autoRoutesImproved` to true in `app/Config/Feature.php` and set the following to true.
-$routes->setAutoRoute(false);
-
+ * @var RouteCollection $routes
 /**
  * --------------------------------------------------------------------
  * Placeholder definitions
@@ -69,23 +51,14 @@ $routes->get('.well-known/platforms', 'Platform');
 
 // Podcast's Public routes
 $routes->group('@(:podcastHandle)', static function ($routes): void {
-    $routes->get('/', 'PodcastController::activity/$1', [
-        'as' => 'podcast-activity',
-    ]);
-    $routes->get('manifest.webmanifest', 'WebmanifestController::podcastManifest/$1', [
-        'as' => 'podcast-webmanifest',
-    ]);
-    $routes->get('links', 'PodcastController::links/$1', [
-        'as' => 'podcast-links',
-    ]);
     // override default Fediverse Library's actor route
     $routes->options('/', 'ActivityPubController::preflight');
     $routes->get('/', 'PodcastController::activity/$1', [
-        'as'                => 'actor',
+        'as'                => 'podcast-activity',
         'alternate-content' => [
             'application/activity+json' => [
                 'namespace'         => 'Modules\Fediverse\Controllers',
-                'controller-method' => 'ActorController/$1',
+                'controller-method' => 'ActorController::index/$1',
             ],
             'application/podcast-activity+json' => [
                 'namespace'         => 'App\Controllers',
@@ -93,10 +66,16 @@ $routes->group('@(:podcastHandle)', static function ($routes): void {
             ],
             'application/ld+json; profile="https://www.w3.org/ns/activitystreams' => [
                 'namespace'         => 'Modules\Fediverse\Controllers',
-                'controller-method' => 'ActorController/$1',
+                'controller-method' => 'ActorController::index/$1',
             ],
         ],
         'filter' => 'allow-cors',
+    ]);
+    $routes->get('manifest.webmanifest', 'WebmanifestController::podcastManifest/$1', [
+        'as' => 'podcast-webmanifest',
+    ]);
+    $routes->get('links', 'PodcastController::links/$1', [
+        'as' => 'podcast-links',
     ]);
     $routes->get('about', 'PodcastController::about/$1', [
         'as' => 'podcast-about',
@@ -106,12 +85,15 @@ $routes->group('@(:podcastHandle)', static function ($routes): void {
         'as'                => 'podcast-episodes',
         'alternate-content' => [
             'application/activity+json' => [
+                'namespace'         => 'App\Controllers',
                 'controller-method' => 'PodcastController::episodeCollection/$1',
             ],
             'application/podcast-activity+json' => [
+                'namespace'         => 'App\Controllers',
                 'controller-method' => 'PodcastController::episodeCollection/$1',
             ],
             'application/ld+json; profile="https://www.w3.org/ns/activitystreams' => [
+                'namespace'         => 'App\Controllers',
                 'controller-method' => 'PodcastController::episodeCollection/$1',
             ],
         ],
@@ -119,16 +101,19 @@ $routes->group('@(:podcastHandle)', static function ($routes): void {
     ]);
     $routes->group('episodes/(:slug)', static function ($routes): void {
         $routes->options('/', 'ActivityPubController::preflight');
-        $routes->get('/', 'EpisodeController/$1/$2', [
+        $routes->get('/', 'EpisodeController::index/$1/$2', [
             'as'                => 'episode',
             'alternate-content' => [
                 'application/activity+json' => [
+                    'namespace'         => 'App\Controllers',
                     'controller-method' => 'EpisodeController::episodeObject/$1/$2',
                 ],
                 'application/podcast-activity+json' => [
+                    'namespace'         => 'App\Controllers',
                     'controller-method' => 'EpisodeController::episodeObject/$1/$2',
                 ],
                 'application/ld+json; profile="https://www.w3.org/ns/activitystreams' => [
+                    'namespace'         => 'App\Controllers',
                     'controller-method' => 'EpisodeController::episodeObject/$1/$2',
                 ],
             ],
@@ -186,21 +171,21 @@ $routes->group('@(:podcastHandle)', static function ($routes): void {
             ],);
         });
     });
-    $routes->head('feed.xml', 'FeedController/$1', [
+    $routes->head('feed.xml', 'FeedController::index/$1', [
         'as' => 'podcast-rss-feed',
     ]);
-    $routes->get('feed.xml', 'FeedController/$1', [
+    $routes->get('feed.xml', 'FeedController::index/$1', [
         'as' => 'podcast-rss-feed',
     ]);
-    $routes->head('feed', 'FeedController/$1');
-    $routes->get('feed', 'FeedController/$1');
+    $routes->head('feed', 'FeedController::index/$1');
+    $routes->get('feed', 'FeedController::index/$1');
 });
 
 // audio routes
-$routes->head('audio/@(:podcastHandle)/(:slug).(:alphanum)', 'EpisodeAudioController/$1/$2', [
+$routes->head('/audio/@(:podcastHandle)/(:slug).(:alphanum)', 'EpisodeAudioController::index/$1/$2', [
     'as' => 'episode-audio',
 ], );
-$routes->get('audio/@(:podcastHandle)/(:slug).(:alphanum)', 'EpisodeAudioController/$1/$2', [
+$routes->get('/audio/@(:podcastHandle)/(:slug).(:alphanum)', 'EpisodeAudioController::index/$1/$2', [
     'as' => 'episode-audio',
 ], );
 
@@ -223,7 +208,7 @@ $routes->get('/map', 'MapController', [
 $routes->get('/episodes-markers', 'MapController::getEpisodesMarkers', [
     'as' => 'episodes-markers',
 ]);
-$routes->get('/pages/(:slug)', 'PageController/$1', [
+$routes->get('/pages/(:slug)', 'PageController::index/$1', [
     'as' => 'page',
 ]);
 
@@ -253,7 +238,7 @@ $routes->group('@(:podcastHandle)', static function ($routes): void {
             'filter' => 'allow-cors',
         ]);
         $routes->options('replies', 'ActivityPubController::preflight');
-        $routes->get('replies', 'PostController/$1/$2', [
+        $routes->get('replies', 'PostController::index/$1/$2', [
             'as'                => 'post-replies',
             'alternate-content' => [
                 'application/activity+json' => [
@@ -308,20 +293,3 @@ $routes->group('@(:podcastHandle)', static function ($routes): void {
         'filter' => 'fediverse:verify-activitystream',
     ]);
 });
-
-/*
- * --------------------------------------------------------------------
- * Additional Routing
- * --------------------------------------------------------------------
- *
- * There will often be times that you need additional routing and you
- * need it to be able to override any defaults in this file. Environment
- * based routes is one such time. require() additional route files here
- * to make that happen.
- *
- * You will have access to the $routes object within that file without
- * needing to reload it.
- */
-if (is_file(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
-    require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
-}

@@ -11,6 +11,8 @@ use CodeIgniter\Filters\DebugToolbar;
 use CodeIgniter\Filters\Honeypot;
 use CodeIgniter\Filters\InvalidChars;
 use CodeIgniter\Filters\SecureHeaders;
+use Modules\Admin\Config\Admin;
+use Modules\Analytics\Config\Analytics;
 use Modules\Auth\Filters\PermissionFilter;
 
 class Filters extends BaseConfig
@@ -19,6 +21,7 @@ class Filters extends BaseConfig
      * Configures aliases for Filter classes to make reading things nicer and simpler.
      *
      * @var array<string, string>
+     * @phpstan-var array<string, class-string>
      */
     public array $aliases = [
         'csrf'          => CSRF::class,
@@ -32,7 +35,8 @@ class Filters extends BaseConfig
     /**
      * List of filter aliases that are always applied before and after every request.
      *
-     * @var array<string, mixed>
+     * @var array<string, array<string, array<string, string>>>|array<string, array<string>>
+     * @phpstan-var array<string, list<string>>|array<string, array<string, array<string, string>>>
      */
     public array $globals = [
         'before' => [
@@ -76,7 +80,7 @@ class Filters extends BaseConfig
 
         $this->filters = [
             'session' => [
-                'before' => [config('Admin')->gateway . '*', config('Analytics')->gateway . '*'],
+                'before' => [config(Admin::class)->gateway . '*', config(Analytics::class)->gateway . '*'],
             ],
             'podcast-unlock' => [
                 'before' => ['*@*/episodes/*'],

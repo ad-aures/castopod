@@ -4,14 +4,19 @@ declare(strict_types=1);
 
 namespace Modules\Auth\Config;
 
-$routes = service('routes');
+use CodeIgniter\Router\RouteCollection;
+use Modules\Admin\Config\Admin;
+
+/**
+ * @var RouteCollection $routes
+ */
 
 service('auth')
     ->routes($routes);
 
 // Admin routes for users and podcast contributors
 $routes->group(
-    config('Admin')
+    config(Admin::class)
         ->gateway,
     [
         'namespace' => 'Modules\Auth\Controllers',

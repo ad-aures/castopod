@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Modules\Install\Config;
 
-$routes = service('routes');
+use CodeIgniter\Router\RouteCollection;
+
+/** @var RouteCollection $routes */
 
 // Install Wizard routes
 $routes->group(
-    config('Install')
+    config(Install::class)
         ->gateway,
     [
         'namespace' => 'Modules\Install\Controllers',

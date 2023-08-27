@@ -1,7 +1,8 @@
 <?php declare(strict_types=1);
 
-$embedHeight = config('Embed')
-->height;
+use Config\Embed;
+
+$embedHeight = config(Embed::class)->height;
 
 ?>
 

@@ -1,3 +1,9 @@
+<?php declare(strict_types=1);
+
+use Modules\MediaClipper\Config\MediaClipper;
+
+?>
+
 <?= $this->extend('_layout') ?>
 
 <?= $this->section('title') ?>
@@ -55,7 +61,7 @@
         <fieldset>
             <legend><?= lang('VideoClip.form.theme') ?></legend>
             <div class="grid gap-x-4 gap-y-2 grid-cols-colorButtons">
-                <?php foreach (config('MediaClipper')->themes as $themeName => $colors): ?>
+                <?php foreach (config(MediaClipper::class)->themes as $themeName => $colors): ?>
                     <Forms.ColorRadioButton
                     class="mx-auto"
                     value="<?= esc($themeName) ?>"

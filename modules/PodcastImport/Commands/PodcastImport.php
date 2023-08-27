@@ -21,6 +21,7 @@ use CodeIgniter\Shield\Entities\User;
 use Config\Services;
 use Exception;
 use League\HTMLToMarkdown\HtmlConverter;
+use Modules\Auth\Config\AuthGroups;
 use Modules\Auth\Models\UserModel;
 use Modules\PodcastImport\Entities\PodcastImportTask;
 use Modules\PodcastImport\Entities\TaskStatus;
@@ -256,7 +257,7 @@ class PodcastImport extends BaseCommand
 
         // set current user as podcast admin
         // 1. create new group
-        config('AuthGroups')
+        config(AuthGroups::class)
             ->generatePodcastAuthorizations($podcast->id);
         add_podcast_group($this->user, $podcast->id, 'admin');
 

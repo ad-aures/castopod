@@ -12,6 +12,7 @@ namespace Modules\Fediverse\Models;
 
 use CodeIgniter\Database\BaseResult;
 use CodeIgniter\Model;
+use Modules\Fediverse\Config\Fediverse;
 use Modules\Fediverse\Entities\PreviewCard;
 
 class PreviewCardModel extends Model
@@ -57,7 +58,7 @@ class PreviewCardModel extends Model
     {
         $hashedPreviewCardUrl = md5($url);
         $cacheName =
-            config('Fediverse')
+            config(Fediverse::class)
                 ->cachePrefix .
             "preview_card-{$hashedPreviewCardUrl}";
         if (! ($found = cache($cacheName))) {
@@ -73,7 +74,7 @@ class PreviewCardModel extends Model
     public function getPostPreviewCard(string $postId): ?PreviewCard
     {
         $cacheName =
-            config('Fediverse')
+            config(Fediverse::class)
                 ->cachePrefix . "post#{$postId}_preview_card";
         if (! ($found = cache($cacheName))) {
             $found = $this->join(
@@ -95,7 +96,7 @@ class PreviewCardModel extends Model
     {
         $hashedPreviewCardUrl = md5($url);
         cache()
-            ->delete(config('Fediverse') ->cachePrefix . "preview_card-{$hashedPreviewCardUrl}");
+            ->delete(config(Fediverse::class) ->cachePrefix . "preview_card-{$hashedPreviewCardUrl}");
 
         return $this->delete($id);
     }

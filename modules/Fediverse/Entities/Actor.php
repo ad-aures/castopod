@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Modules\Fediverse\Entities;
 
 use CodeIgniter\Entity\Entity;
+use Modules\Fediverse\Config\Fediverse;
 use RuntimeException;
 
 /**
@@ -111,7 +112,7 @@ class Actor extends Entity
     public function getAvatarImageUrl(): string
     {
         if ($this->attributes['avatar_image_url'] === null) {
-            return base_url(config('Fediverse')->defaultAvatarImagePath);
+            return base_url(config(Fediverse::class)->defaultAvatarImagePath);
         }
 
         return $this->attributes['avatar_image_url'];
@@ -120,7 +121,7 @@ class Actor extends Entity
     public function getAvatarImageMimetype(): string
     {
         if ($this->attributes['avatar_image_mimetype'] === null) {
-            return config('Fediverse')->defaultAvatarImageMimetype;
+            return config(Fediverse::class)->defaultAvatarImageMimetype;
         }
 
         return $this->attributes['avatar_image_mimetype'];
@@ -129,7 +130,7 @@ class Actor extends Entity
     public function getCoverImageUrl(): string
     {
         if ($this->attributes['cover_image_url'] === null) {
-            return base_url(config('Fediverse')->defaultCoverImagePath);
+            return base_url(config(Fediverse::class)->defaultCoverImagePath);
         }
 
         return $this->attributes['cover_image_url'];
@@ -138,7 +139,7 @@ class Actor extends Entity
     public function getCoverImageMimetype(): string
     {
         if ($this->attributes['cover_image_mimetype'] === null) {
-            return config('Fediverse')->defaultCoverImageMimetype;
+            return config(Fediverse::class)->defaultCoverImageMimetype;
         }
 
         return $this->attributes['cover_image_mimetype'];

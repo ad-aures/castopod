@@ -59,9 +59,9 @@ class BaseMedia extends Entity
     /**
      * @param array<string, mixed> $data
      */
-    public function setAttributes(array $data): self
+    public function injectRawData(array $data): static
     {
-        parent::setAttributes($data);
+        parent::injectRawData($data);
 
         $this->initFileProperties();
 

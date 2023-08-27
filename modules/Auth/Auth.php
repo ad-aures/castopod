@@ -6,6 +6,8 @@ namespace Modules\Auth;
 
 use CodeIgniter\Router\RouteCollection;
 use CodeIgniter\Shield\Auth as ShieldAuth;
+use Modules\Auth\Config\Auth as AuthConfig;
+use Modules\Auth\Config\AuthRoutes;
 
 class Auth extends ShieldAuth
 {
@@ -19,10 +21,10 @@ class Auth extends ShieldAuth
      */
     public function routes(RouteCollection &$routes, array $config = []): void
     {
-        $authRoutes = config('AuthRoutes')
+        $authRoutes = config(AuthRoutes::class)
             ->routes;
 
-        $routes->group(config('Auth')->gateway, [
+        $routes->group(config(AuthConfig::class)->gateway, [
             'namespace' => 'Modules\Auth\Controllers',
         ], static function (RouteCollection $routes) use ($authRoutes, $config): void {
             foreach ($authRoutes as $name => $row) {

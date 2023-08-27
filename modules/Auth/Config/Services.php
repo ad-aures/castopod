@@ -7,6 +7,7 @@ namespace Modules\Auth\Config;
 use CodeIgniter\Shield\Authentication\Authentication;
 use Config\Services as BaseService;
 use Modules\Auth\Auth;
+use Modules\Auth\Config\Auth as AuthConfig;
 
 class Services extends BaseService
 {
@@ -16,10 +17,11 @@ class Services extends BaseService
     public static function auth(bool $getShared = true): Auth
     {
         if ($getShared) {
+            /** @var Auth */
             return self::getSharedInstance('auth');
         }
 
-        $config = config('Auth');
+        $config = config(AuthConfig::class);
 
         return new Auth(new Authentication($config));
     }

@@ -14,6 +14,7 @@ namespace App\Models;
 
 use App\Entities\Platform;
 use CodeIgniter\Model;
+use Config\App;
 
 class PlatformModel extends Model
 {
@@ -53,7 +54,7 @@ class PlatformModel extends Model
     public function getPlatforms(): array
     {
         if (! ($found = cache('platforms'))) {
-            $baseUrl = rtrim((string) config('app')->baseURL, '/');
+            $baseUrl = rtrim(config(App::class)->baseURL, '/');
             $found = $this->select(
                 "*, CONCAT('{$baseUrl}/assets/images/platforms/',`type`,'/',`slug`,'.svg') as icon",
             )->findAll();

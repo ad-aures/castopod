@@ -1,3 +1,8 @@
+<?php declare(strict_types=1);
+
+use Config\Database;
+
+?>
 <?= $this->extend('_layout') ?>
 
 <?= $this->section('content') ?>
@@ -21,27 +26,27 @@
 <Forms.Field
     name="db_hostname"
     label="<?= lang('Install.form.db_hostname') ?>"
-    value="<?= config('Database')->default['hostname'] ?>"
+    value="<?= config(Database::class)->default['hostname'] ?>"
     required="true"
 />
 
 <Forms.Field
     name="db_name"
     label="<?= lang('Install.form.db_name') ?>"
-    value="<?= config('Database')->default['database'] ?>"
+    value="<?= config(Database::class)->default['database'] ?>"
     required="true" />
 
 <Forms.Field
     name="db_username"
     label="<?= lang('Install.form.db_username') ?>"
-    value="<?= config('Database')->default['username'] ?>"
+    value="<?= config(Database::class)->default['username'] ?>"
     required="true"
     autocomplete="off" />
 
 <Forms.Field
     name="db_password"
     label="<?= lang('Install.form.db_password') ?>"
-    value="<?= config('Database')->default['password'] ?>"
+    value="<?= config(Database::class)->default['password'] ?>"
     type="password"
     required="true"
     autocomplete="off" />
@@ -50,7 +55,7 @@
     name="db_prefix"
     label="<?= lang('Install.form.db_prefix') ?>"
     hint="<?= lang('Install.form.db_prefix_hint') ?>"
-    value="<?= config('Database')->default['DBPrefix'] ?>" />
+    value="<?= config(Database::class)->default['DBPrefix'] ?>" />
 
 <Button variant="primary" type="submit" class="self-end" iconRight="arrow-right"><?= lang('Install.form.next') ?></Button>
 

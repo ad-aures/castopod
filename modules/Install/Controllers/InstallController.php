@@ -17,11 +17,13 @@ use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Shield\Entities\User;
+use Config\App;
 use Config\Database;
 use Config\Services;
 use Dotenv\Dotenv;
 use Dotenv\Exception\ValidationException;
 use Modules\Auth\Models\UserModel;
+use Modules\Install\Config\Install;
 use Psr\Log\LoggerInterface;
 use Throwable;
 use ViewThemes\Theme;
@@ -158,7 +160,9 @@ class InstallController extends Controller
 
         if (! $this->validate($rules)) {
             return redirect()
-                ->to((host_url() === null ? config('App') ->baseURL : host_url()) . config('Install')->gateway)
+                ->to(
+                    (host_url() === null ? config(App::class) ->baseURL : host_url()) . config(Install::class)->gateway
+                )
                 ->withInput()
                 ->with('errors', $this->validator->getErrors());
         }
@@ -176,7 +180,7 @@ class InstallController extends Controller
         helper('text');
 
         // redirect to full install url with new baseUrl input
-        return redirect()->to(reduce_double_slashes($baseUrl . '/' . config('Install')->gateway));
+        return redirect()->to(reduce_double_slashes($baseUrl . '/' . config(Install::class)->gateway));
     }
 
     public function databaseConfig(): string

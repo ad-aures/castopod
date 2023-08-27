@@ -9,6 +9,7 @@ use App\Models\EpisodeModel;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\Response;
+use Modules\Api\Rest\V1\Config\RestApi;
 use Modules\Api\Rest\V1\Config\Services;
 
 class EpisodeController extends Controller
@@ -45,7 +46,7 @@ class EpisodeController extends Controller
         }
 
         $data = $builder->findAll(
-            (int) ($this->request->getGet('limit') ?? config('RestApi')->limit),
+            (int) ($this->request->getGet('limit') ?? config(RestApi::class)->limit),
             (int) $this->request->getGet('offset')
         );
 

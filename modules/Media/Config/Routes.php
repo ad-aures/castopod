@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
+use CodeIgniter\Router\RouteCollection;
+
 /**
  * @copyright  2023 Ad Aures
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
  * @link       https://castopod.org/
  */
 
-$routes = service('routes');
+/** @var RouteCollection $routes */
 
 $routes->get('static/(:any)', 'MediaController::serve/$1', [
     'as'        => 'media-serve',

@@ -8,6 +8,7 @@ use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Shield\Controllers\MagicLinkController as ShieldMagicLinkController;
+use Modules\Auth\Config\Auth;
 use Modules\Auth\Models\UserModel;
 use Psr\Log\LoggerInterface;
 use ViewThemes\Theme;
@@ -32,7 +33,7 @@ class MagicLinkController extends ShieldMagicLinkController
     public function setPasswordView(): string | RedirectResponse
     {
         if (! session('magicLogin')) {
-            return redirect()->to(config('Auth')->loginRedirect());
+            return redirect()->to(config(Auth::class)->loginRedirect());
         }
 
         return view(setting('Auth.views')['magic-link-set-password']);
@@ -70,7 +71,7 @@ class MagicLinkController extends ShieldMagicLinkController
         }
 
         // Success!
-        return redirect()->to(config('Auth')->loginRedirect())
+        return redirect()->to(config(Auth::class)->loginRedirect())
             ->with('message', lang('MyAccount.messages.passwordChangeSuccess'));
     }
 }

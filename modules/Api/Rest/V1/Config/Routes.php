@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Modules\Api\Rest\V1\Config;
 
-$routes = service('routes');
+use CodeIgniter\Router\RouteCollection;
+
+/** @var RouteCollection $routes */
 
 $routes->group(
-    config('RestApi')
+    config(RestApi::class)
         ->gateway . 'podcasts',
     [
         'namespace' => 'Modules\Api\Rest\V1\Controllers',
@@ -21,7 +23,7 @@ $routes->group(
 );
 
 $routes->group(
-    config('RestApi')
+    config(RestApi::class)
         ->gateway . 'episodes',
     [
         'namespace' => 'Modules\Api\Rest\V1\Controllers',

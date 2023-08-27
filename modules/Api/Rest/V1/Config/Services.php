@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Api\Rest\V1\Config;
 
 use CodeIgniter\Config\BaseService;
+use Config\Exceptions as ExceptionsConfig;
 use Modules\Api\Rest\V1\Core\Exceptions;
 
 class Services extends BaseService
@@ -15,6 +16,6 @@ class Services extends BaseService
             return static::getSharedInstance('restApiExceptions');
         }
 
-        return new Exceptions(config('Exceptions'), static::request(), static::response());
+        return new Exceptions(config(ExceptionsConfig::class), static::request(), static::response());
     }
 }

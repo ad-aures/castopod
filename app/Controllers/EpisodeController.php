@@ -21,6 +21,8 @@ use CodeIgniter\Database\BaseBuilder;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\Response;
 use CodeIgniter\HTTP\ResponseInterface;
+use Config\Embed;
+use Config\Images;
 use Config\Services;
 use Modules\Analytics\AnalyticsTrait;
 use Modules\Fediverse\Objects\OrderedCollectionObject;
@@ -104,8 +106,8 @@ class EpisodeController extends BaseController
             // The page cache is set to a decade so it is deleted manually upon podcast update
             return view('episode/comments', $data, [
                 'cache' => $secondsToNextUnpublishedEpisode
-                    ? $secondsToNextUnpublishedEpisode
-                    : DECADE,
+                ? $secondsToNextUnpublishedEpisode
+                : DECADE,
                 'cache_name' => $cacheName,
             ]);
         }
@@ -231,15 +233,15 @@ class EpisodeController extends BaseController
             'author_url'    => $this->podcast->link,
             'html'          => '<iframe src="' .
                 $this->episode->embed_url .
-                '" width="100%" height="' . config('Embed')->height . '" frameborder="0" scrolling="no"></iframe>',
-            'width' => config('Embed')
+                '" width="100%" height="' . config(Embed::class)->height . '" frameborder="0" scrolling="no"></iframe>',
+            'width' => config(Embed::class)
                 ->width,
-            'height' => config('Embed')
+            'height' => config(Embed::class)
                 ->height,
             'thumbnail_url'   => $this->episode->cover->og_url,
-            'thumbnail_width' => config('Images')
+            'thumbnail_width' => config(Images::class)
                 ->podcastCoverSizes['og']['width'],
-            'thumbnail_height' => config('Images')
+            'thumbnail_height' => config(Images::class)
                 ->podcastCoverSizes['og']['height'],
         ]);
     }
@@ -256,18 +258,20 @@ class EpisodeController extends BaseController
         $oembed->addChild('author_name', $this->podcast->title);
         $oembed->addChild('author_url', $this->podcast->link);
         $oembed->addChild('thumbnail', $this->episode->cover->og_url);
-        $oembed->addChild('thumbnail_width', (string) config('Images')->podcastCoverSizes['og']['width']);
-        $oembed->addChild('thumbnail_height', (string) config('Images')->podcastCoverSizes['og']['height']);
+        $oembed->addChild('thumbnail_width', (string) config(Images::class)->podcastCoverSizes['og']['width']);
+        $oembed->addChild('thumbnail_height', (string) config(Images::class)->podcastCoverSizes['og']['height']);
         $oembed->addChild(
             'html',
             htmlspecialchars(
                 '<iframe src="' .
                     $this->episode->embed_url .
-                    '" width="100%" height="' . config('Embed')->height . '" frameborder="0" scrolling="no"></iframe>',
+                    '" width="100%" height="' . config(
+                        Embed::class
+                    )->height . '" frameborder="0" scrolling="no"></iframe>',
             ),
         );
-        $oembed->addChild('width', (string) config('Embed')->width);
-        $oembed->addChild('height', (string) config('Embed')->height);
+        $oembed->addChild('width', (string) config(Embed::class)->width);
+        $oembed->addChild('height', (string) config(Embed::class)->height);
 
         // @phpstan-ignore-next-line
         return $this->response->setXML($oembed);
