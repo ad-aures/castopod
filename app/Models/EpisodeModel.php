@@ -471,7 +471,9 @@ class EpisodeModel extends UuidModel
             ->where([
                 'podcast_id' => $podcastId,
                 'is_premium' => true,
-            ])->countAllResults() > 0;
+            ])
+            ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
+            ->countAllResults() > 0;
     }
 
     public function fullTextSearch(string $query): ?BaseBuilder
