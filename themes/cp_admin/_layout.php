@@ -67,6 +67,9 @@ $isEpisodeArea = isset($podcast) && isset($episode);
                 <?= publication_status_banner($podcast->published_at, $podcast->id, $podcast->publication_status) ?>
             <?php endif; ?>
         <?php endif; ?>
+        <?php if ($isEpisodeArea && $episode->publication_status !== 'published'): ?>
+            <?= episode_publication_status_banner($episode, 'border-b') ?>
+        <?php endif; ?>
         <div class="px-2 py-8 mx-auto md:px-12">
             <?= view('_message_block') ?>
             <?= $this->renderSection('content') ?>

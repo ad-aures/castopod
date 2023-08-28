@@ -59,7 +59,7 @@
     );
   }
 
-  .bg-stripes-gray {
+  .bg-stripes-default {
     background-image: repeating-linear-gradient(
       -45deg,
       #f3f4f6,

@@ -1,17 +1,32 @@
 <?php declare(strict_types=1);
 
-$navigationItems = [
-    [
-        'uri'       => route_to('episode', esc($podcast->handle), esc($episode->slug)),
-        'label'     => lang('Episode.comments'),
-        'labelInfo' => $episode->comments_count,
-    ],
-    [
-        'uri'       => route_to('episode-activity', esc($podcast->handle), esc($episode->slug)),
-        'label'     => lang('Episode.activity'),
-        'labelInfo' => $episode->posts_count,
-    ],
-]
+if ($episode->publication_status === 'published') {
+    $navigationItems = [
+        [
+            'uri'       => route_to('episode', esc($podcast->handle), esc($episode->slug)),
+            'label'     => lang('Episode.comments'),
+            'labelInfo' => $episode->comments_count,
+        ],
+        [
+            'uri'       => route_to('episode-activity', esc($podcast->handle), esc($episode->slug)),
+            'label'     => lang('Episode.activity'),
+            'labelInfo' => $episode->posts_count,
+        ],
+    ];
+} else {
+    $navigationItems = [
+        [
+            'uri'       => route_to('episode-preview', $episode->preview_id),
+            'label'     => lang('Episode.comments'),
+            'labelInfo' => $episode->comments_count,
+        ],
+        [
+            'uri'       => route_to('episode-preview-activity', $episode->preview_id),
+            'label'     => lang('Episode.activity'),
+            'labelInfo' => $episode->posts_count,
+        ],
+    ];
+}
 ?>
 <nav class="sticky z-40 flex col-start-2 pt-4 shadow bg-elevated md:px-8 gap-x-2 md:gap-x-4 -top-4 rounded-conditional-b-xl">
     <?php foreach ($navigationItems as $item): ?>

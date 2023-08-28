@@ -14,6 +14,7 @@ use App\Entities\Clip\Soundbite;
 use App\Libraries\SimpleRSSElement;
 use App\Models\ClipModel;
 use App\Models\EpisodeCommentModel;
+use App\Models\EpisodeModel;
 use App\Models\PersonModel;
 use App\Models\PodcastModel;
 use App\Models\PostModel;
@@ -21,6 +22,7 @@ use CodeIgniter\Entity\Entity;
 use CodeIgniter\Files\File;
 use CodeIgniter\HTTP\Files\UploadedFile;
 use CodeIgniter\I18n\Time;
+use Exception;
 use League\CommonMark\Environment\Environment;
 use League\CommonMark\Extension\Autolink\AutolinkExtension;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
@@ -39,6 +41,8 @@ use SimpleXMLElement;
  * @property int $id
  * @property int $podcast_id
  * @property Podcast $podcast
+ * @property ?string $preview_id
+ * @property string $preview_link
  * @property string $link
  * @property string $guid
  * @property string $slug
@@ -150,6 +154,7 @@ class Episode extends Entity
     protected $casts = [
         'id'                    => 'integer',
         'podcast_id'            => 'integer',
+        'preview_id'            => '?string',
         'guid'                  => 'string',
         'slug'                  => 'string',
         'title'                 => 'string',
@@ -509,7 +514,7 @@ class Episode extends Entity
 
         if ($this->getPodcast()->episode_description_footer_html) {
             $descriptionHtml .= "<footer>{$this->getPodcast()
-                ->episode_description_footer_html}</footer>";
+->episode_description_footer_html}</footer>";
         }
 
         return $descriptionHtml;
@@ -666,5 +671,19 @@ class Episode extends Entity
             '&guid=' .
             urlencode((string) $this->attributes['guid']) .
             ($serviceSlug !== null ? '&_from=' . $serviceSlug : '');
+    }
+
+    public function getPreviewLink(): string
+    {
+        if ($this->preview_id === null) {
+            // generate preview id
+            if (! $previewUUID = (new EpisodeModel())->setEpisodePreviewId($this->id)) {
+                throw new Exception('Could not set episode preview id');
+            }
+
+            $this->preview_id = $previewUUID;
+        }
+
+        return url_to('episode-preview', (string) $this->preview_id);
     }
 }

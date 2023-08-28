@@ -82,14 +82,12 @@ if (! function_exists('write_audio_file_tags')) {
 
         // write tags
         if ($tagwriter->WriteTags()) {
-            echo 'Successfully wrote tags<br>';
+            // Successfully wrote tags
             if ($tagwriter->warnings !== []) {
-                echo 'There were some warnings:<br>' .
-                    implode('<br><br>', $tagwriter->warnings);
+                log_message('warning', 'There were some warnings:' . PHP_EOL . implode(PHP_EOL, $tagwriter->warnings));
             }
         } else {
-            echo 'Failed to write tags!<br>' .
-                implode('<br><br>', $tagwriter->errors);
+            log_message('critical', 'Failed to write tags!' . PHP_EOL . implode(PHP_EOL, $tagwriter->errors));
         }
     }
 }

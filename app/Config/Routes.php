@@ -210,6 +210,15 @@ $routes->get('audio/@(:podcastHandle)/(:slug).(:alphanum)', 'EpisodeAudioControl
     'as' => 'episode-audio',
 ], );
 
+// episode preview link
+$routes->get('/p/(:uuid)', 'EpisodePreviewController::index/$1', [
+    'as' => 'episode-preview',
+]);
+
+$routes->get('/p/(:uuid)/activity', 'EpisodePreviewController::activity/$1', [
+    'as' => 'episode-preview-activity',
+]);
+
 // Other pages
 $routes->get('/credits', 'CreditsController', [
     'as' => 'credits',

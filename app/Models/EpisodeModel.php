@@ -14,9 +14,10 @@ use App\Entities\Episode;
 use CodeIgniter\Database\BaseBuilder;
 use CodeIgniter\Database\BaseResult;
 use CodeIgniter\I18n\Time;
-use CodeIgniter\Model;
+use Michalsn\Uuid\UuidModel;
+use Ramsey\Uuid\Lazy\LazyUuidFromString;
 
-class EpisodeModel extends Model
+class EpisodeModel extends UuidModel
 {
     /**
      * TODO: remove, shouldn't be here
@@ -51,6 +52,11 @@ class EpisodeModel extends Model
     ];
 
     /**
+     * @var string[]
+     */
+    protected $uuidFields = ['preview_id'];
+
+    /**
      * @var string
      */
     protected $table = 'episodes';
@@ -61,6 +67,7 @@ class EpisodeModel extends Model
     protected $allowedFields = [
         'id',
         'podcast_id',
+        'preview_id',
         'guid',
         'title',
         'slug',
@@ -186,6 +193,38 @@ class EpisodeModel extends Model
         }
 
         return $found;
+    }
+
+    public function getEpisodeByPreviewId(string $previewId): ?Episode
+    {
+        $cacheName = "podcast_episode#preview-{$previewId}";
+        if (! ($found = cache($cacheName))) {
+            $builder = $this->where([
+                'preview_id' => $this->uuid->fromString($previewId)
+                    ->getBytes(),
+            ]);
+
+            $found = $builder->first();
+
+            cache()
+                ->save($cacheName, $found, DECADE);
+        }
+
+        return $found;
+    }
+
+    public function setEpisodePreviewId(int $episodeId): string|false
+    {
+        /** @var LazyUuidFromString $uuid */
+        $uuid = $this->uuid->{$this->uuidVersion}();
+
+        if (! $this->update($episodeId, [
+            'preview_id' => $uuid,
+        ])) {
+            return false;
+        }
+
+        return (string) $uuid;
     }
 
     /**

@@ -9,6 +9,7 @@ declare(strict_types=1);
  */
 
 use App\Entities\Category;
+use App\Entities\Episode;
 use App\Entities\Location;
 use CodeIgniter\I18n\Time;
 use CodeIgniter\View\Table;
@@ -218,12 +219,64 @@ if (! function_exists('publication_status_banner')) {
         }
 
         return <<<HTML
-        <div class="flex items-center px-12 py-2 border-b bg-stripes-gray border-subtle" role="alert">
-            <p class="flex items-center text-gray-900">
+        <div class="flex flex-wrap items-baseline px-4 py-2 border-b md:px-12 bg-stripes-default border-subtle" role="alert">
+            <p class="flex items-baseline text-gray-900">
                 <span class="text-xs font-semibold tracking-wide uppercase">{$bannerDisclaimer}</span>
                 <span class="ml-3 text-sm">{$bannerText}</span>
             </p>
             <a href="{$linkRoute}" class="ml-1 text-sm font-semibold underline shadow-xs text-accent-base hover:text-accent-hover hover:no-underline">{$linkLabel}</a>
+        </div>
+        HTML;
+    }
+}
+
+// ------------------------------------------------------------------------
+
+if (! function_exists('episode_publication_status_banner')) {
+    /**
+     * Publication status banner component for podcasts
+     *
+     * Displays the appropriate banner depending on the podcast's publication status.
+     */
+    function episode_publication_status_banner(Episode $episode, string $class = ''): string
+    {
+        switch ($episode->publication_status) {
+            case 'not_published':
+                $linkRoute = route_to('episode-publish', $episode->podcast_id, $episode->id);
+                $publishLinkLabel = lang('Episode.publish');
+                break;
+            case 'scheduled':
+            case 'with_podcast':
+                $linkRoute = route_to('episode-publish_edit', $episode->podcast_id, $episode->id);
+                $publishLinkLabel = lang('Episode.publish_edit');
+                break;
+            default:
+                $bannerDisclaimer = '';
+                $linkRoute = '';
+                $publishLinkLabel = '';
+                break;
+        }
+
+        $bannerDisclaimer = lang('Episode.publication_status_banner.draft_mode');
+        $bannerText = lang('Episode.publication_status_banner.text', [
+            'publication_status' => $episode->publication_status,
+            'publication_date'   => $episode->published_at instanceof Time ? local_datetime(
+                $episode->published_at
+            ) : null,
+        ], null, false);
+        $previewLinkLabel = lang('Episode.publication_status_banner.preview');
+
+        return <<<HTML
+        <div class="flex flex-wrap gap-4 items-baseline px-4 md:px-12 py-2 bg-stripes-default border-subtle {$class}" role="alert">
+            <p class="flex items-baseline text-gray-900">
+                <span class="text-xs font-semibold tracking-wide uppercase">{$bannerDisclaimer}</span>
+                <span class="ml-3 text-sm">{$bannerText}</span>
+            </p>
+            <div class="flex items-baseline">    
+                <a href="{$episode->preview_link}" class="ml-1 text-sm font-semibold underline shadow-xs text-accent-base hover:text-accent-hover hover:no-underline">{$previewLinkLabel}</a>
+                <span class="mx-1">•</span>
+                <a href="{$linkRoute}" class="ml-1 text-sm font-semibold underline shadow-xs text-accent-base hover:text-accent-hover hover:no-underline">{$publishLinkLabel}</a>
+            </div>
         </div>
         HTML;
     }
@@ -360,7 +413,7 @@ if (! function_exists('relative_time')) {
         $datetime = $time->format(DateTime::ATOM);
 
         return <<<HTML
-            <relative-time tense="past" class="{$class}" datetime="{$datetime}">
+            <relative-time tense="auto" class="{$class}" datetime="{$datetime}">
                 <time
                     datetime="{$datetime}"
                     title="{$time}">{$translatedDate}</time>
@@ -378,10 +431,10 @@ if (! function_exists('local_datetime')) {
             'request'
         )->getLocale(), IntlDateFormatter::MEDIUM, IntlDateFormatter::LONG);
         $translatedDate = $time->toLocalizedString($formatter->getPattern());
-        $datetime = $time->format(DateTime::ISO8601);
+        $datetime = $time->format(DateTime::ATOM);
 
         return <<<HTML
-            <relative-time datetime="{$datetime}" 
+            <relative-time datetime="{$datetime}"
                 prefix=""
                 threshold="PT0S"
                 weekday="long"
