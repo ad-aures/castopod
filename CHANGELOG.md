@@ -1,3 +1,32 @@
+# [1.6.0](https://code.castopod.org/adaures/castopod/compare/v1.5.2...v1.6.0) (2023-08-28)
+
+### Bug Fixes
+
+- **home:** update where clause when getting all podcasts to prevent draft
+  podcasts from showing up
+  ([7a1eea5](https://code.castopod.org/adaures/castopod/commit/7a1eea58d3cbc1982baaec21d87a36e218e1910a))
+- **media:** copy and delete temp file when saving instead of moving it for FS
+  FileManager
+  ([9346e78](https://code.castopod.org/adaures/castopod/commit/9346e787bd2a2c815533092279f96ae1fe0d9aae)),
+  closes [#338](https://code.castopod.org/adaures/castopod/issues/338)
+- **media:** get path using media_path_absolute when saving media file
+  ([754e7a6](https://code.castopod.org/adaures/castopod/commit/754e7a6b4b2c12cf50c1c8b166732dc3255f36fb))
+- **media:** init file properties in setAttributes' Model method + set defaults
+  to pathinfo data
+  ([0775add](https://code.castopod.org/adaures/castopod/commit/0775add67860b94a35b68c01b133ec8ec969f539))
+- **premium-podcasts:** show premium flag only when podcast has published
+  premium episodes
+  ([d10c4fd](https://code.castopod.org/adaures/castopod/commit/d10c4fd7538e6af8a5b0eb232a06522fe8c4bf8e))
+- **s3:** add a flag to serve media files by redirecting to a presigned url
+  instead of default proxy
+  ([11aa358](https://code.castopod.org/adaures/castopod/commit/11aa3586a04c166404954600235634cee77219df))
+
+### Features
+
+- **episode:** add preview link in admin to view and share episode before
+  publication
+  ([7d21b35](https://code.castopod.org/adaures/castopod/commit/7d21b3509ec5d1aa65420efa038f44bcd235e64f))
+
 ## [1.5.2](https://code.castopod.org/adaures/castopod/compare/v1.5.1...v1.5.2) (2023-07-31)
 
 ### Bug Fixes
