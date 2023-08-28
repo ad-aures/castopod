@@ -9,25 +9,25 @@ declare(strict_types=1);
  */
 
 return [
-    'season' => 'Season {seasonNumber}',
+    'season' => 'Sæson {seasonNumber}',
     'season_abbr' => 'S{seasonNumber}',
     'number' => 'Episode {episodeNumber}',
     'number_abbr' => 'Ep. {episodeNumber}',
-    'season_episode' => 'Season {seasonNumber} episode {episodeNumber}',
+    'season_episode' => 'Sæson {seasonNumber} episode {episodeNumber}',
     'season_episode_abbr' => 'S{seasonNumber}:E{episodeNumber}',
     'persons' => '{personsCount, plural,
         one {# person}
-        other {# persons}
+        other {# personer}
     }',
-    'persons_list' => 'Persons',
-    'back_to_episodes' => 'Back to episodes of {podcast}',
-    'comments' => 'Comments',
-    'activity' => 'Activity',
-    'description' => 'Episode description',
+    'persons_list' => 'Personer',
+    'back_to_episodes' => 'Tilbage til episoderne af {podcast}',
+    'comments' => 'Kommentarer',
+    'activity' => 'Aktivitet',
+    'description' => 'Episodebeskrivelse',
     'number_of_comments' => '{numberOfComments, plural,
-        one {# comment}
-        other {# comments}
+        one {# kommentar}
+        other {# kommentarer}
     }',
-    'all_podcast_episodes' => 'All podcast episodes',
-    'back_to_podcast' => 'Go back to podcast',
+    'all_podcast_episodes' => 'Alle podcastepisoder',
+    'back_to_podcast' => 'Tilbage til podcast',
 ];

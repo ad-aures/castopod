@@ -9,29 +9,29 @@ declare(strict_types=1);
  */
 
 return [
-    'your_handle' => 'Your handle',
-    'your_handle_hint' => 'Enter the @username@domain you want to act from.',
+    'your_handle' => 'Dit handle',
+    'your_handle_hint' => 'Indtast det @brugernavn@domæne, du ønsker at handle fra.',
     'follow' => [
-        'label' => 'Follow',
-        'title' => 'Follow {actorDisplayName}',
-        'subtitle' => 'You are going to follow:',
-        'accountNotFound' => 'The account could not be found.',
-        'remoteFollowNotAllowed' => 'Seems like the account server does not allow remote follows…',
-        'submit' => 'Proceed to follow',
+        'label' => 'Følg',
+        'title' => 'Følg {actorDisplayName}',
+        'subtitle' => 'Du er ved at følge:',
+        'accountNotFound' => 'Brugeren blev ikke fundet.',
+        'remoteFollowNotAllowed' => 'Det ser ud til, at kontoserveren ikke tillader eksterne følgere…',
+        'submit' => 'Fortsæt for at følge',
     ],
     'favourite' => [
-        'title' => "Favourite {actorDisplayName}'s post",
-        'subtitle' => 'You are going to favourite:',
-        'submit' => 'Proceed to favourite',
+        'title' => "Markér {actorDisplayName}s opslag som favorit",
+        'subtitle' => 'Du er ved at favoritmarkere:',
+        'submit' => 'Fortsæt for at favoritmarkere',
     ],
     'reblog' => [
-        'title' => "Share {actorDisplayName}'s post",
-        'subtitle' => 'You are going to share:',
-        'submit' => 'Proceed to share',
+        'title' => "Del {actorDisplayName}s opslag",
+        'subtitle' => 'Du er ved at dele:',
+        'submit' => 'Fortsæt for at dele',
     ],
     'reply' => [
-        'title' => "Reply to {actorDisplayName}'s post",
-        'subtitle' => 'You are going to reply to:',
-        'submit' => 'Proceed to reply',
+        'title' => "Svar på {actorDisplayName}s opslag",
+        'subtitle' => 'Du er ved at svare på:',
+        'submit' => 'Fortsæt for at svare',
     ],
 ];

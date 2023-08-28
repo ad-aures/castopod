@@ -9,7 +9,7 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => "{actorDisplayName}'s comment for {episodeTitle}",
+    'title' => "{actorDisplayName} прокоментував {episodeTitle}",
     'back_to_comments' => 'Повернутися до коментарів',
     'form' => [
         'episode_message_placeholder' => 'Написати коментар…',
@@ -18,12 +18,16 @@ return [
         'submit_reply' => 'Відповісти',
     ],
     'likes' => '{numberOfLikes, plural,
-        one {# like}
-        other {# likes}
+        one {# лайк}
+        few {# подобається}
+        many {# подобається}
+        other {# подобається}
     }',
     'replies' => '{numberOfReplies, plural,
-        one {# reply}
-        other {# replies}
+        one {# коментар}
+        few {# коментарів}
+        many {# коментарів}
+        other {# коментарів}
     }',
     'like' => 'Вподобайка',
     'reply' => 'Відповідь',

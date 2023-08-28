@@ -1,5 +1,5 @@
 ---
-title: Authentication & Authorization
+title: Autenticació i Autorització
 sidebarDepth: 3
 ---
 

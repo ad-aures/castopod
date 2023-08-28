@@ -5,22 +5,22 @@ sidebarDepth: 3
 
 # Imágenes oficiales de Docker
 
-Castopod lanza 3 imágenes Docker al DockerHub durante su proceso de construcción
-automatizada:
+Castopod lanza 3 imágenes Docker al Docker Hub durante su proceso de
+construcción automatizada:
 
-- [**`castopod/castopod`**](https://hub.docker.com/r/castopod/castopod): an all
-  in one castopod image using nginx unit
+- [**`castopod/castopod`**](https://hub.docker.com/r/castopod/castopod): una
+  imagen completa de castopod que utiliza una unidad nginx
 - [**`castopod/app`**](https://hub.docker.com/r/castopod/app): el paquete
-  completo de Castopod con todas las dependencias.
+  completo de la aplicación con todas las dependencias de Castopod
 - [**`castopod/web-server`**](https://hub.docker.com/r/castopod/web-server): una
-  configuración Nginx para Castopod
+  configuración de Nginx para Castopod
 
 Adicionalmente, Castopod requiere una base de datos compatible con MySQL.
 También se puede añadir una base de datos Redis como gestor de caché.
 
 ## Etiquetas admitidas
 
-- `develop` [unstable], última rama de desarrollo construida
+- `develop` [unstable], última rama construída de desarrollo
 - `beta` [stable], última versión beta
 - `latest` [stable], última versión
 - `1.x.x` [stable], versión específica de compilación (desde `1.0.0`)

@@ -9,32 +9,32 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => "{actorDisplayName}'s post",
-    'back_to_actor_posts' => 'Back to {actor} posts',
-    'actor_shared' => '{actor} shared',
-    'reply_to' => 'Reply to @{actorUsername}',
+    'title' => "{actorDisplayName}'s indlæg",
+    'back_to_actor_posts' => 'Tilbage til {actor} indlæg',
+    'actor_shared' => '{actor} delt',
+    'reply_to' => 'Svar @{actorUsername}',
     'form' => [
-        'message_placeholder' => 'Write a message…',
-        'episode_message_placeholder' => 'Write a message for the episode…',
+        'message_placeholder' => 'Skriv en besked…',
+        'episode_message_placeholder' => 'Skriv en besked til episoden…',
         'episode_url_placeholder' => 'Episode URL',
-        'reply_to_placeholder' => 'Reply to @{actorUsername}',
+        'reply_to_placeholder' => 'Svar @{actorUsername}',
         'submit' => 'Send',
-        'submit_reply' => 'Reply',
+        'submit_reply' => 'Svar',
     ],
     'favourites' => '{numberOfFavourites, plural,
-        one {# favourite}
-        other {# favourites}
+        one {# kan lide}
+        other {# kan lide}
     }',
     'reblogs' => '{numberOfReblogs, plural,
-        one {# share}
-        other {# shares}
+        one {# del}
+        other {# delinger}
     }',
     'replies' => '{numberOfReplies, plural,
-        one {# reply}
-        other {# replies}
+        one {# svar}
+        other {# svar}
     }',
-    'expand' => 'Expand post',
-    'block_actor' => 'Block user @{actorUsername}',
-    'block_domain' => 'Block domain @{actorDomain}',
-    'delete' => 'Delete post',
+    'expand' => 'Udvid opslag',
+    'block_actor' => 'Blokér bruger @{actorUsername}',
+    'block_domain' => 'Blokér domænet @{actorDomain}',
+    'delete' => 'Slet indlæg',
 ];

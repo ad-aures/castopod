@@ -9,26 +9,26 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => "{actorDisplayName}'s comment for {episodeTitle}",
-    'back_to_comments' => 'Back to comments',
+    'title' => "{actorDisplayName}s kommentar til {episodeTitle}",
+    'back_to_comments' => 'Tilbage til kommentarer',
     'form' => [
-        'episode_message_placeholder' => 'Write a comment…',
-        'reply_to_placeholder' => 'Reply to @{actorUsername}',
+        'episode_message_placeholder' => 'Skriv en kommentar…',
+        'reply_to_placeholder' => 'Svar til @{actorUsername}',
         'submit' => 'Send',
-        'submit_reply' => 'Reply',
+        'submit_reply' => 'Svar',
     ],
     'likes' => '{numberOfLikes, plural,
-        one {# like}
-        other {# likes}
+        one {# kan lide}
+        other {# kan lide}
     }',
     'replies' => '{numberOfReplies, plural,
-        one {# reply}
-        other {# replies}
+        one {# svar}
+        other {# svar}
     }',
-    'like' => 'Like',
-    'reply' => 'Reply',
-    'view_replies' => 'View replies ({numberOfReplies})',
-    'block_actor' => 'Block user @{actorUsername}',
-    'block_domain' => 'Block domain @{actorDomain}',
-    'delete' => 'Delete comment',
+    'like' => 'Synes godt om',
+    'reply' => 'Svar',
+    'view_replies' => 'Se svar ({numberOfReplies})',
+    'block_actor' => 'Blokér bruger @{actorUsername}',
+    'block_domain' => 'Blokér domænet @{actorDomain}',
+    'delete' => 'Slet kommentar',
 ];

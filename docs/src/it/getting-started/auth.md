@@ -1,45 +1,46 @@
 ---
-title: Authentication & Authorization
+title: Autenticazione & Autorizzazione
 sidebarDepth: 3
 ---
 
-# Authentication & Authorization
+# Autenticazione & Autorizzazione
 
-Castopod handles authentication and authorization using `codeigniter/shield`
-coupled with custom rules. Roles and permissions are defined at two levels:
+Castopod gestisce l'autenticazione e l'autorizzazione utilizzando
+`codeigniter/shield` abbinato a regole personalizzate. Ruoli e permessi sono
+definiti a due livelli:
 
-1. [instance wide](#1-instance-wide-roles-and-permissions)
+1. [intera istanza](#1-instance-wide-roles-and-permissions)
 2. [per podcast](#2-per-podcast-roles-and-permissions)
 
-## 1. Instance wide roles and permissions
+## 1. Ruoli e permessi per l'intera istanza
 
-### Instance roles
+### Ruoli dell'istanza
 
 <!-- AUTH-INSTANCE-ROLES-LIST:START - Do not remove or modify this section -->
 
-| role        | description                         | permissions                                                                                |
-| ----------- | ----------------------------------- | ------------------------------------------------------------------------------------------ |
-| Super admin | Has complete control over Castopod. | admin.\*, podcasts.\*, users.manage, persons.manage, pages.manage, fediverse.manage-blocks |
-| Manager     | Manages Castopod's content.         | podcasts.create, podcasts.import, persons.manage, pages.manage                             |
-| Podcaster   | General users of Castopod.          | admin.access                                                                               |
+| ruolo       | descrizione                        | permessi                                                                                   |
+| ----------- | ---------------------------------- | ------------------------------------------------------------------------------------------ |
+| Super admin | Ha il pieno controllo su Castopod. | admin.\*, podcasts.\*, users.manage, persons.manage, pages.manage, fediverse.manage-blocks |
+| Manager     | Gestisce il contenuto di Castopod. | podcasts.create, podcasts.import, persons.manage, pages.manage                             |
+| Podcaster   | Utenti generali di Castopod.       | admin.access                                                                               |
 
 <!-- AUTH-INSTANCE-ROLES-LIST:END -->
 
-### Instance permissions
+### Permessi istanza
 
 <!-- AUTH-INSTANCE-PERMISSIONS-LIST:START - Do not remove or modify this section -->
 
-| permission              | description                                                        |
-| ----------------------- | ------------------------------------------------------------------ |
-| admin.access            | Can access the Castopod admin area.                                |
-| admin.settings          | Can access the Castopod settings.                                  |
-| users.manage            | Can manage Castopod users.                                         |
-| persons.manage          | Can manage persons.                                                |
-| pages.manage            | Can manage pages.                                                  |
-| podcasts.view           | Can view all podcasts.                                             |
-| podcasts.create         | Can create new podcasts.                                           |
-| podcasts.import         | Can import podcasts.                                               |
-| fediverse.manage-blocks | Can block fediverse actors/domains from interacting with Castopod. |
+| permesso                | descrizione                                                               |
+| ----------------------- | ------------------------------------------------------------------------- |
+| admin.access            | Può accedere alla zona di amministrazione di Castopod.                    |
+| admin.settings          | Può accedere alle impostazioni di Castopod.                               |
+| users.manage            | Può gestire gli utenti di Castopod.                                       |
+| persons.manage          | Può gestire le persone.                                                   |
+| pages.manage            | Può gestire le pagine.                                                    |
+| podcasts.view           | Può visualizzare tutti i podcast.                                         |
+| podcasts.create         | Può creare nuovi podcast.                                                 |
+| podcasts.import         | Può importare podcast.                                                    |
+| fediverse.manage-blocks | Può impedire agli attori/domini del fediverso di interagire con Castopod. |
 
 <!-- AUTH-INSTANCE-PERMISSIONS-LIST:END -->
 

@@ -9,22 +9,22 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => 'Platforms',
-    'home_url' => 'Go to {platformName} website',
-    'submit_url' => 'Submit your podcast on {platformName}',
-    'visible' => 'Display in podcast homepage?',
-    'on_embed' => 'Display on embeddable player?',
-    'remove' => 'Remove {platformName}',
-    'submit' => 'Save',
+    'title' => 'Plataformas',
+    'home_url' => 'Ir á web de {platformName}',
+    'submit_url' => 'Envía o teu podcast en {platformName}',
+    'visible' => 'Mostrar na páxina de inicio do podcast?',
+    'on_embed' => 'Mostrar no navegador incrustable?',
+    'remove' => 'Eliminar {platformName}',
+    'submit' => 'Gardar',
     'messages' => [
-        'updateSuccess' => 'Platform links have been successfully updated!',
-        'removeLinkSuccess' => 'The platform link has been removed.',
+        'updateSuccess' => 'Actualizáronse correctamente as ligazóns á plataforma!',
+        'removeLinkSuccess' => 'Eliminouse a ligazón á plataforma.',
         'removeLinkError' =>
-            'The platform link could not be removed. Try again.',
+            'A ligazón á plataforma non se puido eliminar. Inténtao outra vez.',
     ],
     'description' => [
-        'podcasting' => 'The podcast ID on this platform',
-        'social' => 'The podcast account ID on this platform',
-        'funding' => 'Call to action message',
+        'podcasting' => 'ID do podcast nesta plataforma',
+        'social' => 'ID da conta do podcast nesta plataforma',
+        'funding' => 'Mensaxe de convite a realizar acción',
     ],
 ];

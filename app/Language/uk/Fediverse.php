@@ -9,29 +9,29 @@ declare(strict_types=1);
  */
 
 return [
-    'your_handle' => 'Your handle',
-    'your_handle_hint' => 'Enter the @username@domain you want to act from.',
+    'your_handle' => 'Ваш псевдонім',
+    'your_handle_hint' => 'Будь ласка, введіть @username@domain з яким ви хочете працювати.',
     'follow' => [
-        'label' => 'Follow',
-        'title' => 'Follow {actorDisplayName}',
-        'subtitle' => 'You are going to follow:',
-        'accountNotFound' => 'The account could not be found.',
-        'remoteFollowNotAllowed' => 'Seems like the account server does not allow remote follows…',
-        'submit' => 'Proceed to follow',
+        'label' => 'Підписатися',
+        'title' => 'Підписатись на {actorDisplayName}',
+        'subtitle' => 'Ви збираєтеся підписатися:',
+        'accountNotFound' => 'Ваш обліковий запис не знайдено.',
+        'remoteFollowNotAllowed' => 'Схоже, сервер облікового запису не дозволяє підписатись…',
+        'submit' => 'Перейти до підписки',
     ],
     'favourite' => [
-        'title' => "Favourite {actorDisplayName}'s post",
-        'subtitle' => 'You are going to favourite:',
-        'submit' => 'Proceed to favourite',
+        'title' => "Вибрана публікація {actorDisplayName}",
+        'subtitle' => 'Ви збираєтеся підписатися:',
+        'submit' => 'Перейти до улюбленого',
     ],
     'reblog' => [
-        'title' => "Share {actorDisplayName}'s post",
-        'subtitle' => 'You are going to share:',
-        'submit' => 'Proceed to share',
+        'title' => "Поділитися публікацією {actorDisplayName}",
+        'subtitle' => 'Ви збираєтеся поділитись:',
+        'submit' => 'Перейти до публікації',
     ],
     'reply' => [
-        'title' => "Reply to {actorDisplayName}'s post",
-        'subtitle' => 'You are going to reply to:',
-        'submit' => 'Proceed to reply',
+        'title' => "Відповісти на пост {actorDisplayName}",
+        'subtitle' => 'Ви збираєтеся відповісти на:',
+        'submit' => 'Перейти до відповіді',
     ],
 ];

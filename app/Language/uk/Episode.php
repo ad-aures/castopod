@@ -16,8 +16,10 @@ return [
     'season_episode' => 'Сезон {seasonNumber} серія {episodeNumber}',
     'season_episode_abbr' => 'С{seasonNumber}:Е{episodeNumber}',
     'persons' => '{personsCount, plural,
-        one {# person}
-        other {# persons}
+        one {# особа}
+        few {# осіб}
+        many {# осіб}
+        other {# осіб}
     }',
     'persons_list' => 'Кіл-сть осіб',
     'back_to_episodes' => 'Повернутись до серій {podcast}',
@@ -25,8 +27,10 @@ return [
     'activity' => 'Активність',
     'description' => 'Опис Серії',
     'number_of_comments' => '{numberOfComments, plural,
-        one {# comment}
-        other {# comments}
+        one {# коментар}
+        few {# коментарів}
+        many {# коментарів}
+        other {# коментарів}
     }',
     'all_podcast_episodes' => 'Всі серії подкастів',
     'back_to_podcast' => 'Повернутися до подкасту',

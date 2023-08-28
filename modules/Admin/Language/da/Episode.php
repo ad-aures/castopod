@@ -27,52 +27,52 @@ return [
     'publish_date_edit' => 'Edit publication date',
     'unpublish' => 'Unpublish',
     'publish_error' => 'Episode is already published.',
-    'publish_edit_error' => 'Episode is already published.',
-    'publish_cancel_error' => 'Episode is already published.',
-    'publish_date_edit_error' => 'Episode has not been published yet, you cannot edit its publication date.',
-    'publish_date_edit_future_error' => 'Episode\'s publication date can only be set to a past date! If you would like to reschedule it, unpublish it first.',
-    'publish_date_edit_success' => 'Episode\'s publication date has been updated successfully!',
-    'unpublish_error' => 'Episode is not published.',
-    'delete' => 'Delete',
-    'go_to_page' => 'Go to page',
-    'create' => 'Add an episode',
+    'publish_edit_error' => 'Episoden er allerede publiceret.',
+    'publish_cancel_error' => 'Episoden er allerede publiceret.',
+    'publish_date_edit_error' => 'Episode er endnu ikke blevet offentliggjort. Du kan ikke redigere dens publiceringsdato.',
+    'publish_date_edit_future_error' => 'Episodes publiceringsdato kan kun indstilles til en tidligere dato! Hvis du ønsker at omlægge den, så afpublicér den først.',
+    'publish_date_edit_success' => 'Episodens udgivelsesdato er blevet opdateret!',
+    'unpublish_error' => 'Episoden er ikke publiceret.',
+    'delete' => 'Slet',
+    'go_to_page' => 'Gå til side',
+    'create' => 'Tilføj en episode',
     'publication_status' => [
-        'published' => 'Published',
-        'with_podcast' => 'Published',
-        'scheduled' => 'Scheduled',
-        'not_published' => 'Not published',
+        'published' => 'Udgivet',
+        'with_podcast' => 'Udgivet',
+        'scheduled' => 'Planlagt',
+        'not_published' => 'Ikke offentliggjort',
     ],
-    'with_podcast_hint' => 'To be published at the same time as the podcast',
+    'with_podcast_hint' => 'Skal offentliggøres samtidig med podcasten',
     'list' => [
         'search' => [
-            'placeholder' => 'Search for an episode',
-            'clear' => 'Clear search',
-            'submit' => 'Search',
+            'placeholder' => 'Søg efter en episode',
+            'clear' => 'Ryd søgning',
+            'submit' => 'Søg',
         ],
         'number_of_episodes' => '{numberOfEpisodes, plural,
             one {# episode}
-            other {# episodes}
+            other {# episoder}
         }',
         'episode' => 'Episode',
-        'visibility' => 'Visibility',
+        'visibility' => 'Synlighed',
         'downloads' => 'Downloads',
-        'comments' => 'Comments',
-        'actions' => 'Actions',
+        'comments' => 'Kommentarer',
+        'actions' => 'Handlinger',
     ],
     'messages' => [
-        'createSuccess' => 'Episode has been successfully created!',
-        'editSuccess' => 'Episode has been successfully updated!',
+        'createSuccess' => 'Episoden er blevet oprettet!',
+        'editSuccess' => 'Episoden er blevet opdateret!',
         'publishSuccess' => '{publication_status, select,
-            published {Episode successfully published!}
-            scheduled {Episode publication successfully scheduled!}
-            with_podcast {This episode will be published at the same time as the podcast.}
-            other {This episode is not published.}
+            published {Episode udgivet!}
+            scheduled {Episodeudgivelse planlagt!}
+            with_podcast {Denne episode vil blive offentliggjort samtidig med podcasten.}
+            other {Denne episode er ikke offentliggjort.}
         }',
-        'publishCancelSuccess' => 'Episode publication successfully cancelled!',
-        'unpublishBeforeDeleteTip' => 'You must unpublish the episode before deleting it.',
-        'scheduleDateError' => 'Schedule date must be set!',
-        'deletePublishedEpisodeError' => 'Please unpublish the episode before deleting it.',
-        'deleteSuccess' => 'Episode successfully deleted!',
+        'publishCancelSuccess' => 'Udgivelsen blev annulleret!',
+        'unpublishBeforeDeleteTip' => 'Du skal afpublicere episoden, før du sletter den.',
+        'scheduleDateError' => 'Udgivelsesdato skal være sat!',
+        'deletePublishedEpisodeError' => 'Afpublicér venligst episoden, før du sletter den.',
+        'deleteSuccess' => 'Episode slettet succesfuldt!',
         'deleteError' => 'Failed to delete episode {type, select,
             transcript {transcript}
             chapters {chapters}
