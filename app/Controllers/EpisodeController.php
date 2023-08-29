@@ -177,8 +177,8 @@ class EpisodeController extends BaseController
 
         $session = Services::session();
         $session->start();
-        if (isset($_SERVER['HTTP_REFERER'])) {
-            $session->set('embed_domain', parse_url((string) $_SERVER['HTTP_REFERER'], PHP_URL_HOST));
+        if (service('superglobals')->server('HTTP_REFERER') !== null) {
+            $session->set('embed_domain', parse_url(service('superglobals')->server('HTTP_REFERER'), PHP_URL_HOST));
         }
 
         $cacheName = implode(

@@ -101,9 +101,9 @@ class EpisodeAudioController extends Controller
         $subscription = null;
 
         // check if podcast is already unlocked before any token validation
-        if ($this->episode->is_premium && ($subscription = service('premium_podcasts')->subscription(
+        if ($this->episode->is_premium && ! ($subscription = service('premium_podcasts')->subscription(
             $this->episode->podcast->handle
-        )) === null) {
+        )) instanceof Subscription) {
             // look for token as GET parameter
             if (($token = $this->request->getGet('token')) === null) {
                 return $this->response->setStatusCode(401)
@@ -164,7 +164,7 @@ class EpisodeAudioController extends Controller
             $audioDuration,
             $this->episode->published_at->getTimestamp(),
             $serviceName,
-            $subscription !== null ? $subscription->id : null
+            $subscription instanceof Subscription ? $subscription->id : null
         );
 
         return redirect()->to($this->analyticsConfig->getAudioUrl($this->episode, $this->request->getGet()));

@@ -17,6 +17,7 @@ use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\I18n\Time;
 use Exception;
 use Modules\Fediverse\Config\Fediverse;
+use Modules\Fediverse\Entities\Activity;
 use Modules\Fediverse\Entities\Actor;
 use Modules\Fediverse\Entities\Post;
 use Modules\Fediverse\Objects\OrderedCollectionObject;
@@ -45,7 +46,7 @@ class ActorController extends Controller
         }
 
         if (
-            ($actor = model('ActorModel', false)->getActorByUsername($params[0])) === null
+            ! ($actor = model('ActorModel', false)->getActorByUsername($params[0])) instanceof Actor
         ) {
             throw PageNotFoundException::forPageNotFound();
         }
@@ -101,7 +102,7 @@ class ActorController extends Controller
                         ->getPostByUri($payload->object->inReplyTo);
 
                     $reply = null;
-                    if ($replyToPost !== null) {
+                    if ($replyToPost instanceof Post) {
                         // TODO: strip content from html to retrieve message
                         // remove all html tags and reconstruct message with mentions?
                         $message = get_message_from_object($payload->object);
@@ -136,7 +137,7 @@ class ActorController extends Controller
                 $postToDelete = model('PostModel', false)
                     ->getPostByUri($payload->object->id);
 
-                if ($postToDelete !== null) {
+                if ($postToDelete instanceof Post) {
                     model('PostModel', false)
                         ->removePost($postToDelete, false);
                 }
@@ -160,7 +161,7 @@ class ActorController extends Controller
                 $post = model('PostModel', false)
                     ->getPostByUri($payload->object);
 
-                if ($post !== null) {
+                if ($post instanceof Post) {
                     // Like side-effect
                     model('FavouriteModel', false)
                         ->addFavourite($payloadActor, $post, false);
@@ -177,7 +178,7 @@ class ActorController extends Controller
                 $post = model('PostModel', false)
                     ->getPostByUri($payload->object);
 
-                if ($post !== null) {
+                if ($post instanceof Post) {
                     model('ActivityModel', false)
                         ->update($activityId, [
                             'post_id' => $post->id,
@@ -205,7 +206,7 @@ class ActorController extends Controller
                         $post = model('PostModel', false)
                             ->getPostByUri($payload->object->object);
 
-                        if ($post !== null) {
+                        if ($post instanceof Post) {
                             // revert side-effect by removing favourite from database
                             model('FavouriteModel', false)
                                 ->removeFavourite($payloadActor, $post, false);
@@ -223,7 +224,7 @@ class ActorController extends Controller
                             ->getPostByUri($payload->object->object);
 
                         $reblogPost = null;
-                        if ($post !== null) {
+                        if ($post instanceof Post) {
                             $reblogPost = model('PostModel', false)
                                 ->where([
                                     'actor_id'     => $payloadActor->id,
@@ -374,7 +375,7 @@ class ActorController extends Controller
     public function activity(string $activityId): ResponseInterface
     {
         if (
-            ! ($activity = model('ActivityModel', false)->getActivityById($activityId))
+            ! ($activity = model('ActivityModel', false)->getActivityById($activityId)) instanceof Activity
         ) {
             throw PageNotFoundException::forPageNotFound();
         }

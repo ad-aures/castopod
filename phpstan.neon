@@ -16,11 +16,34 @@ parameters:
         - app/Views/*
         - modules/*/Views/*
         - themes/*
+    codeigniter:
+        additionalConfigNamespaces:
+            - Modules\Admin\Config\
+            - Modules\Analytics\Config\
+            - Modules\Api\Rest\V1\Config\
+            - Modules\Auth\Config\
+            - Modules\Fediverse\Config\
+            - Modules\Install\Config\
+            - Modules\Media\Config\
+            - Modules\MediaClipper\Config\
+            - Modules\PodcastImport\Config\
+            - Modules\PremiumPodcasts\Config\
+            - Modules\WebSub\Config\
+        additionalModelNamespaces:
+            - Modules\Analytics\Models\
+            - Modules\Auth\Models\
+            - Modules\Fediverse\Models\
+            - Modules\Media\Models\
+            - Modules\PremiumPodcasts\Models\
+        additionalServices:
+            - CodeIgniter\Settings\Config\Services
+            - Michalsn\Uuid\Config\Services
+            - Modules\PremiumPodcasts\Config\Services
+            - Modules\Media\Config\Services
     dynamicConstantNames:
         - APP_NAMESPACE
         - CI_DEBUG
         - ENVIRONMENT
         - SODIUM_LIBRARY_VERSION
     ignoreErrors:
-        - '#^Access to an undefined property Modules\\Media\\Entities\\Image#'
         - '#^Call to an undefined method CodeIgniter\\Cache\\CacheInterface\:\:deleteMatching\(\)#'

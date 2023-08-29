@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Modules\Fediverse;
 
 use Exception;
+use Modules\Fediverse\Entities\Actor;
 
 class WebFinger
 {
@@ -62,7 +63,7 @@ class WebFinger
         }
 
         if (
-            ! ($actor = model('ActorModel', false)->getActorByUsername($username, $domain))
+            ! ($actor = model('ActorModel', false)->getActorByUsername($username, $domain)) instanceof Actor
         ) {
             throw new Exception('Could not find actor');
         }

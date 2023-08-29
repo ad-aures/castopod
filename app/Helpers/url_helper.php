@@ -16,13 +16,14 @@ if (! function_exists('host_url')) {
      */
     function host_url(): ?string
     {
-        if (isset($_SERVER['HTTP_HOST'])) {
+        $superglobals = service('superglobals');
+        if ($superglobals->server('HTTP_HOST') !== null) {
             $protocol =
-                (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ||
-                $_SERVER['SERVER_PORT'] === 443
+                ($superglobals->server('HTTPS') !== null && $superglobals->server('HTTPS') !== 'off') ||
+                (int) $superglobals->server('SERVER_PORT') === 443
                     ? 'https://'
                     : 'http://';
-            return $protocol . $_SERVER['HTTP_HOST'] . '/';
+            return $protocol . $superglobals->server('HTTP_HOST') . '/';
         }
 
         return null;

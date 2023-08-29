@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace Modules\PremiumPodcasts\Config;
 
-use Config\Services as BaseService;
+use CodeIgniter\Config\BaseService;
 use Modules\PremiumPodcasts\Models\SubscriptionModel;
 use Modules\PremiumPodcasts\PremiumPodcasts;
 
 class Services extends BaseService
 {
-    public static function premium_podcasts(?SubscriptionModel $subscriptionModel = null, bool $getShared = true)
-    {
+    public static function premium_podcasts(
+        ?SubscriptionModel $subscriptionModel = null,
+        bool $getShared = true
+    ): PremiumPodcasts {
         if ($getShared) {
             return self::getSharedInstance('premium_podcasts', $subscriptionModel);
         }

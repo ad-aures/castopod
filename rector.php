@@ -71,4 +71,5 @@ return static function (RectorConfig $rectorConfig): void {
 
     // Path to phpstan with extensions, that PHPStan in Rector uses to determine types
     $rectorConfig->phpstanConfig(__DIR__ . '/phpstan.neon');
+    $rectorConfig->phpstanConfigs(['vendor/codeigniter/phpstan-codeigniter/extension.neon']);
 };

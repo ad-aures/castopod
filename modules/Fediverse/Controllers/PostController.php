@@ -50,7 +50,7 @@ class PostController extends Controller
 
     public function _remap(string $method, string ...$params): mixed
     {
-        if (($post = model('PostModel', false)->getPostById($params[0])) === null) {
+        if (! ($post = model('PostModel', false)->getPostById($params[0])) instanceof Post) {
             throw PageNotFoundException::forPageNotFound();
         }
 

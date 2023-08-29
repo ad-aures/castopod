@@ -212,8 +212,8 @@ if (! function_exists('get_or_create_preview_card_from_url')) {
     {
         // check if preview card has already been generated
         if (
-            $previewCard = model('PreviewCardModel', false)
-                ->getPreviewCardFromUrl((string) $url)
+            ($previewCard = model('PreviewCardModel', false)
+                ->getPreviewCardFromUrl((string) $url)) instanceof PreviewCard
         ) {
             return $previewCard;
         }
@@ -231,7 +231,7 @@ if (! function_exists('get_or_create_actor_from_uri')) {
     function get_or_create_actor_from_uri(string $actorUri): ?Actor
     {
         // check if actor exists in database already and return it
-        if ($actor = model('ActorModel', false)->getActorByUri($actorUri)) {
+        if (($actor = model('ActorModel', false)->getActorByUri($actorUri)) instanceof Actor) {
             return $actor;
         }
 
@@ -249,8 +249,8 @@ if (! function_exists('get_or_create_actor')) {
     {
         // check if actor exists in database already and return it
         if (
-            $actor = model('ActorModel', false)
-                ->getActorByUsername($username, $domain)
+            ($actor = model('ActorModel', false)
+                ->getActorByUsername($username, $domain)) instanceof Actor
         ) {
             return $actor;
         }
@@ -412,9 +412,9 @@ if (! function_exists('linkify')) {
                         // check if host is set and look for actor in database
                         if (isset($match['host'])) {
                             if (
-                                $actor = model(
+                                ($actor = model(
                                     'ActorModel',
-                                )->getActorByUsername($match['username'], $match['domain'])
+                                )->getActorByUsername($match['username'], $match['domain'])) instanceof Actor
                             ) {
                                 // TODO: check that host is local to remove target blank?
                                 return '<' .
@@ -447,8 +447,8 @@ if (! function_exists('linkify')) {
                             }
                         } else {
                             if (
-                                $actor = model('ActorModel', false)
-                                    ->getActorByUsername($match['username'])
+                                ($actor = model('ActorModel', false)
+                                    ->getActorByUsername($match['username'])) instanceof Actor
                             ) {
                                 return '<' .
                                     array_push($links, anchor($actor->uri, $match[0])) .

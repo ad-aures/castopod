@@ -126,7 +126,7 @@ class Post extends UuidEntity
         }
 
         if ($this->replies === null) {
-            $this->replies = (array) model('PostModel', false)
+            $this->replies = model('PostModel', false)
                 ->getPostReplies($this->id);
         }
 
@@ -162,7 +162,7 @@ class Post extends UuidEntity
         }
 
         if ($this->reblogs === null) {
-            $this->reblogs = (array) model('PostModel', false)
+            $this->reblogs = model('PostModel', false)
                 ->getPostReblogs($this->id);
         }
 
