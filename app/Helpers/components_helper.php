@@ -263,7 +263,7 @@ if (! function_exists('episode_publication_status_banner')) {
             'publication_date'   => $episode->published_at instanceof Time ? local_datetime(
                 $episode->published_at
             ) : null,
-        ], null, false);
+        ]);
         $previewLinkLabel = lang('Episode.publication_status_banner.preview');
 
         return <<<HTML
