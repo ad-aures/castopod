@@ -71,7 +71,8 @@ class PodcastImportController extends BaseController
         $rules = [
             'handle'            => 'required|regex_match[/^[a-zA-Z0-9\_]{1,32}$/]',
             'imported_feed_url' => 'required|valid_url_strict',
-            'max_episodes'      => 'is_natural_no_zero|permit_empty',
+            'language'          => 'required',
+            'category'          => 'required',
         ];
 
         if (! $this->validate($rules)) {
@@ -81,13 +82,15 @@ class PodcastImportController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
+        $validData = $this->validator->getValidated();
+
         // TODO: check that handle is not already in use
 
         $importTask = new PodcastImportTask([
-            'handle'     => $this->request->getPost('handle'),
-            'feed_url'   => $this->request->getPost('imported_feed_url'),
-            'language'   => $this->request->getPost('language'),
-            'category'   => $this->request->getPost('category'),
+            'handle'     => $validData['handle'],
+            'feed_url'   => $validData['imported_feed_url'],
+            'language'   => $validData['language'],
+            'category'   => $validData['category'],
             'status'     => TaskStatus::Queued,
             'created_by' => user_id(),
             'updated_by' => user_id(),

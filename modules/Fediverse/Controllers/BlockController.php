@@ -34,7 +34,9 @@ class BlockController extends Controller
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $handle = $this->request->getPost('handle');
+        $validData = $this->validator->getValidated();
+
+        $handle = $validData['handle'];
 
         if ($parts = split_handle($handle)) {
             try {
@@ -69,8 +71,10 @@ class BlockController extends Controller
                 ->with('errors', $this->validator->getErrors());
         }
 
+        $validData = $this->validator->getValidated();
+
         model('ActorModel', false)
-            ->unblockActor((int) $this->request->getPost('actor_id'));
+            ->unblockActor((int) $validData['actor_id']);
 
         return redirect()->back()
             ->with('message', lang('Fediverse.messages.unblockActorSuccess'));
@@ -89,7 +93,9 @@ class BlockController extends Controller
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $domain = $this->request->getPost('domain');
+        $validData = $this->validator->getValidated();
+
+        $domain = $validData['domain'];
         model('BlockedDomainModel', false)
             ->blockDomain($domain);
 
@@ -112,7 +118,9 @@ class BlockController extends Controller
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $domain = $this->request->getPost('domain');
+        $validData = $this->validator->getValidated();
+
+        $domain = $validData['domain'];
         model('BlockedDomainModel', false)
             ->unblockDomain($domain);
 

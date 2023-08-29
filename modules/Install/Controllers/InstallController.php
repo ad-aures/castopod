@@ -167,14 +167,16 @@ class InstallController extends Controller
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $baseUrl = $this->request->getPost('hostname');
-        $mediaBaseUrl = $this->request->getPost('media_base_url');
+        $validData = $this->validator->getValidated();
+
+        $baseUrl = $validData['hostname'];
+        $mediaBaseUrl = $validData['media_base_url'];
         self::writeEnv([
             'app.baseURL'    => $baseUrl,
             'media.baseURL'  => $mediaBaseUrl === '' ? $baseUrl : $mediaBaseUrl,
             'analytics.salt' => generate_random_salt(64),
-            'admin.gateway'  => $this->request->getPost('admin_gateway'),
-            'auth.gateway'   => $this->request->getPost('auth_gateway'),
+            'admin.gateway'  => $validData['admin_gateway'],
+            'auth.gateway'   => $validData['auth_gateway'],
         ]);
 
         helper('text');
@@ -204,11 +206,13 @@ class InstallController extends Controller
                 ->with('errors', $this->validator->getErrors());
         }
 
+        $validData = $this->validator->getValidated();
+
         self::writeEnv([
-            'database.default.hostname' => $this->request->getPost('db_hostname'),
-            'database.default.database' => $this->request->getPost('db_name'),
-            'database.default.username' => $this->request->getPost('db_username'),
-            'database.default.password' => $this->request->getPost('db_password'),
+            'database.default.hostname' => $validData['db_hostname'],
+            'database.default.database' => $validData['db_name'],
+            'database.default.username' => $validData['db_username'],
+            'database.default.password' => $validData['db_password'],
             'database.default.DBPrefix' => $this->request->getPost('db_prefix'),
         ]);
 
@@ -233,8 +237,10 @@ class InstallController extends Controller
                 ->with('errors', $this->validator->getErrors());
         }
 
+        $validData = $this->validator->getValidated();
+
         self::writeEnv([
-            'cache.handler' => $this->request->getPost('cache_handler'),
+            'cache.handler' => $validData['cache_handler'],
         ]);
 
         return redirect()->back();
@@ -279,6 +285,8 @@ class InstallController extends Controller
     {
         // validate user password
         $rules = [
+            'username' => 'required',
+            'email'    => 'required',
             'password' => 'required|strong_password',
         ];
 
@@ -290,11 +298,13 @@ class InstallController extends Controller
                 ->with('errors', $userModel->errors());
         }
 
+        $validData = $this->validator->getValidated();
+
         // Save the user
         $user = new User([
-            'username' => $this->request->getPost('username'),
-            'email'    => $this->request->getPost('email'),
-            'password' => $this->request->getPost('password'),
+            'username' => $validData['username'],
+            'email'    => $validData['email'],
+            'password' => $validData['password'],
             'is_owner' => true,
         ]);
 

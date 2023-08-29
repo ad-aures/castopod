@@ -70,7 +70,9 @@ class LockController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $token = (string) $this->request->getPost('token');
+        $validData = $this->validator->getValidated();
+
+        $token = $validData['token'];
 
         // attempt unlocking the podcast with the token
         if (! $this->premiumPodcasts->unlock($this->podcast->handle, $token)) {
@@ -83,7 +85,8 @@ class LockController extends BaseController
         $redirectURL = session('redirect_url') ?? site_url('/');
         unset($_SESSION['redirect_url']);
 
-        return redirect()->to($redirectURL)
+        return redirect()
+            ->to($redirectURL)
             ->withCookies()
             ->with('message', lang('PremiumPodcasts.messages.unlockSuccess'));
     }

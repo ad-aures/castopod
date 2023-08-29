@@ -334,13 +334,15 @@ class ActorController extends Controller
                 ->with('errors', $this->validator->getErrors());
         }
 
+        $validData = $this->validator->getValidated();
+
         helper('text');
 
         // get webfinger data from actor
         // parse actor id to get actor and domain
         // check if actor and domain exist
 
-        $handle = $this->request->getPost('handle');
+        $handle = $validData['handle'];
         $parts = split_handle($handle);
 
         try {

@@ -78,10 +78,12 @@ class EpisodePersonController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
+        $validData = $this->validator->getValidated();
+
         (new PersonModel())->addEpisodePersons(
             $this->podcast->id,
             $this->episode->id,
-            $this->request->getPost('persons'),
+            $validData['persons'],
             $this->request->getPost('roles') ?? [],
         );
 

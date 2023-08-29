@@ -650,12 +650,14 @@ class PodcastController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
+        $validData = $this->validator->getValidated();
+
         $db = db_connect();
         $db->transStart();
 
-        $publishMethod = $this->request->getPost('publication_method');
+        $publishMethod = $validData['publication_method'];
         if ($publishMethod === 'schedule') {
-            $scheduledPublicationDate = $this->request->getPost('scheduled_publication_date');
+            $scheduledPublicationDate = $validData['scheduled_publication_date'];
             if ($scheduledPublicationDate) {
                 $this->podcast->published_at = Time::createFromFormat(
                     'Y-m-d H:i',
@@ -783,12 +785,14 @@ class PodcastController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
+        $validData = $this->validator->getValidated();
+
         $db = db_connect();
         $db->transStart();
 
-        $publishMethod = $this->request->getPost('publication_method');
+        $publishMethod = $validData['publication_method'];
         if ($publishMethod === 'schedule') {
-            $scheduledPublicationDate = $this->request->getPost('scheduled_publication_date');
+            $scheduledPublicationDate = $validData['scheduled_publication_date'];
             if ($scheduledPublicationDate) {
                 $this->podcast->published_at = Time::createFromFormat(
                     'Y-m-d H:i',

@@ -77,7 +77,9 @@ class SubscriptionController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        if (($subscriptionLink = $this->request->getPost('subscription_link')) === '') {
+        $validData = $this->validator->getValidated();
+
+        if (($subscriptionLink = $validData['subscription_link']) === '') {
             service('settings')
                 ->forget('Subscription.link', 'podcast:' . $this->podcast->id);
 

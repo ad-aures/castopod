@@ -125,7 +125,9 @@ class PostController extends FediversePostController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $message = $this->request->getPost('message');
+        $validData = $this->validator->getValidated();
+
+        $message = $validData['message'];
 
         $newPost = new CastopodPost([
             'actor_id'     => interact_as_actor_id(),
@@ -134,7 +136,7 @@ class PostController extends FediversePostController
         ]);
 
         // get episode if episodeUrl has been set
-        $episodeUri = $this->request->getPost('episode_url');
+        $episodeUri = $validData['episode_url'];
         if (
             $episodeUri &&
             ($params = extract_params_from_episode_uri(new URI($episodeUri))) &&
@@ -173,10 +175,12 @@ class PostController extends FediversePostController
                 ->with('errors', $this->validator->getErrors());
         }
 
+        $validData = $this->validator->getValidated();
+
         $newPost = new CastopodPost([
             'actor_id'       => interact_as_actor_id(),
             'in_reply_to_id' => $this->post->id,
-            'message'        => $this->request->getPost('message'),
+            'message'        => $validData['message'],
             'published_at'   => Time::now(),
             'created_by'     => user_id(),
         ]);
@@ -224,7 +228,9 @@ class PostController extends FediversePostController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $action = $this->request->getPost('action');
+        $validData = $this->validator->getValidated();
+
+        $action = $validData['action'];
         return match ($action) {
             'favourite' => $this->attemptFavourite(),
             'reblog'    => $this->attemptReblog(),

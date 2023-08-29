@@ -175,9 +175,11 @@ class EpisodeController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
+        $validData = $this->validator->getValidated();
+
         if ((new EpisodeModel())
             ->where([
-                'slug'       => $this->request->getPost('slug'),
+                'slug'       => $validData['slug'],
                 'podcast_id' => $this->podcast->id,
             ])
             ->first()) {
@@ -310,8 +312,10 @@ class EpisodeController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
+        $validData = $this->validator->getValidated();
+
         $this->episode->title = $this->request->getPost('title');
-        $this->episode->slug = $this->request->getPost('slug');
+        $this->episode->slug = $validData['slug'];
         $this->episode->description_markdown = $this->request->getPost('description');
         $this->episode->location = $this->request->getPost('location_name') === '' ? null : new Location(
             $this->request->getPost('location_name')
@@ -745,7 +749,9 @@ class EpisodeController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $newPublicationDate = $this->request->getPost('new_publication_date');
+        $validData = $this->validator->getValidated();
+
+        $newPublicationDate = $validData['new_publication_date'];
 
         $newPublicationDate = Time::createFromFormat(
             'Y-m-d H:i',
@@ -994,12 +1000,12 @@ class EpisodeController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $message = $this->request->getPost('message');
+        $validData = $this->validator->getValidated();
 
         $newComment = new EpisodeComment([
             'actor_id'   => interact_as_actor_id(),
             'episode_id' => $this->episode->id,
-            'message'    => $message,
+            'message'    => $validData['message'],
             'created_at' => new Time('now'),
             'created_by' => user_id(),
         ]);
@@ -1031,12 +1037,12 @@ class EpisodeController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $message = $this->request->getPost('message');
+        $validData = $this->validator->getValidated();
 
         $newReply = new EpisodeComment([
             'actor_id'       => interact_as_actor_id(),
             'episode_id'     => $this->episode->id,
-            'message'        => $message,
+            'message'        => $validData['message'],
             'in_reply_to_id' => $commentId,
             'created_at'     => new Time('now'),
             'created_by'     => user_id(),

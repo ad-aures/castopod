@@ -123,9 +123,11 @@ class PostController extends Controller
                 ->with('errors', $this->validator->getErrors());
         }
 
+        $validData = $this->validator->getValidated();
+
         $newPost = new Post([
-            'actor_id'     => $this->request->getPost('actor_id'),
-            'message'      => $this->request->getPost('message'),
+            'actor_id'     => $validData['actor_id'],
+            'message'      => $validData['message'],
             'published_at' => Time::now(),
         ]);
 
@@ -155,8 +157,10 @@ class PostController extends Controller
                 ->with('errors', $this->validator->getErrors());
         }
 
+        $validData = $this->validator->getValidated();
+
         $actor = model('ActorModel', false)
-            ->getActorById($this->request->getPost('actor_id'));
+            ->getActorById($validData['actor_id']);
 
         model('FavouriteModel', false)
             ->toggleFavourite($actor, $this->post->id);
@@ -177,8 +181,10 @@ class PostController extends Controller
                 ->with('errors', $this->validator->getErrors());
         }
 
+        $validData = $this->validator->getValidated();
+
         $actor = model('ActorModel', false)
-            ->getActorById($this->request->getPost('actor_id'));
+            ->getActorById($validData['actor_id']);
 
         model('PostModel', false)
             ->toggleReblog($actor, $this->post);
@@ -200,10 +206,12 @@ class PostController extends Controller
                 ->with('errors', $this->validator->getErrors());
         }
 
+        $validData = $this->validator->getValidated();
+
         $newReplyPost = new Post([
-            'actor_id'       => $this->request->getPost('actor_id'),
+            'actor_id'       => $validData['actor_id'],
             'in_reply_to_id' => $this->post->id,
-            'message'        => $this->request->getPost('message'),
+            'message'        => $validData['message'],
             'published_at'   => Time::now(),
         ]);
 
@@ -232,13 +240,15 @@ class PostController extends Controller
                 ->with('errors', $this->validator->getErrors());
         }
 
+        $validData = $this->validator->getValidated();
+
         helper('text');
 
         // get webfinger data from actor
         // parse actor id to get actor and domain
         // check if actor and domain exist
         if (
-            ! ($parts = split_handle($this->request->getPost('handle'))) ||
+            ! ($parts = split_handle($validData['handle'])) ||
             ! ($data = get_webfinger_data($parts['username'], $parts['domain']))
         ) {
             return redirect()

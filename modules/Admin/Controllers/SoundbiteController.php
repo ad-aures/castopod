@@ -114,10 +114,12 @@ class SoundbiteController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
+        $validData = $this->validator->getValidated();
+
         $newSoundbite = new Soundbite([
-            'title'      => $this->request->getPost('title'),
-            'start_time' => (float) $this->request->getPost('start_time'),
-            'duration'   => (float) $this->request->getPost('duration'),
+            'title'      => $validData['title'],
+            'start_time' => (float) $validData['start_time'],
+            'duration'   => (float) $validData['duration'],
             'type'       => 'audio',
             'status'     => '',
             'podcast_id' => $this->podcast->id,

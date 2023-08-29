@@ -43,12 +43,14 @@ class MyAccountController extends BaseController
                 ->with('errors', $userModel->errors());
         }
 
+        $validData = $this->validator->getValidated();
+
         // check credentials with the old password if logged in without magic link
         $credentials = [
             'email' => auth()
                 ->user()
                 ->email,
-            'password' => $this->request->getPost('password'),
+            'password' => $validData['password'],
         ];
 
         $validCreds = auth()
@@ -62,7 +64,7 @@ class MyAccountController extends BaseController
         // set new password to user
         auth()
             ->user()
-            ->password = $this->request->getPost('new_password');
+            ->password = $validData['new_password'];
 
         if (! $userModel->update(auth()->user()->id, auth()->user())) {
             return redirect()

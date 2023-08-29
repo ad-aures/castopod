@@ -65,9 +65,11 @@ class PodcastPersonController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
+        $validData = $this->validator->getValidated();
+
         (new PersonModel())->addPodcastPersons(
             $this->podcast->id,
-            $this->request->getPost('persons'),
+            $validData['persons'],
             $this->request->getPost('roles') ?? [],
         );
 

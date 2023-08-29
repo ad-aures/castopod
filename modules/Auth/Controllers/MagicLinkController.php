@@ -53,10 +53,12 @@ class MagicLinkController extends ShieldMagicLinkController
                 ->with('errors', $userModel->errors());
         }
 
+        $validData = $this->validator->getValidated();
+
         // set new password to user
         auth()
             ->user()
-            ->password = $this->request->getPost('new_password');
+            ->password = $validData['new_password'];
 
         if (! $userModel->update(auth()->user()->id, auth()->user())) {
             return redirect()

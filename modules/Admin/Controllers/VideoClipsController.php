@@ -157,7 +157,9 @@ class VideoClipsController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        $themeName = $this->request->getPost('theme');
+        $validData = $this->validator->getValidated();
+
+        $themeName = $validData['theme'];
         $themeColors = config(MediaClipper::class)
             ->themes[$themeName];
         $theme = [
@@ -166,11 +168,11 @@ class VideoClipsController extends BaseController
         ];
 
         $videoClip = new VideoClip([
-            'title'      => $this->request->getPost('title'),
-            'start_time' => (float) $this->request->getPost('start_time'),
-            'duration'   => (float) $this->request->getPost('duration'),
+            'title'      => $validData['title'],
+            'start_time' => (float) $validData['start_time'],
+            'duration'   => (float) $validData['duration'],
             'theme'      => $theme,
-            'format'     => $this->request->getPost('format'),
+            'format'     => $validData['format'],
             'type'       => 'video',
             'status'     => 'queued',
             'podcast_id' => $this->podcast->id,

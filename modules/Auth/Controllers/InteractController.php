@@ -27,9 +27,11 @@ class InteractController extends Controller
                 ->with('errors', service('validation')->getErrors());
         }
 
+        $validData = $this->validator->getValidated();
+
         helper('auth');
 
-        set_interact_as_actor((int) $this->request->getPost('actor_id'));
+        set_interact_as_actor((int) $validData['actor_id']);
 
         return redirect()->back();
     }
