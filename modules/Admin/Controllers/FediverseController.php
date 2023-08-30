@@ -10,11 +10,13 @@ declare(strict_types=1);
 
 namespace Modules\Admin\Controllers;
 
+use CodeIgniter\HTTP\RedirectResponse;
+
 class FediverseController extends BaseController
 {
-    public function dashboard(): string
+    public function dashboard(): RedirectResponse
     {
-        return view('fediverse/dashboard');
+        return redirect()->route('fediverse-blocked-actors');
     }
 
     public function blockedActors(): string
