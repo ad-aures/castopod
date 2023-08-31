@@ -18,7 +18,7 @@
     "adaures/ipcat-php": "^v1.0.0",
     "adaures/podcast-persons-taxonomy": "^v1.0.1",
     "phpseclib/phpseclib": "~2.0.44",
-    "michalsn/codeigniter4-uuid": "dev-develop",
+    "michalsn/codeigniter4-uuid": "v1.0.2",
     "codeigniter4/settings": "v2.1.2",
     "chrisjean/php-ico": "^1.0.4",
     "melbahja/seo": "^v2.1.1",
