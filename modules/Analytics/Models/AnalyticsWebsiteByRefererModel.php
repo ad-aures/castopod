@@ -73,7 +73,7 @@ class AnalyticsWebsiteByRefererModel extends Model
             ! ($found = cache("{$podcastId}_analytics_website_by_domain_weekly"))
         ) {
             $oneWeekAgo = date('Y-m-d', strtotime('-1 week'));
-            $found = $this->select("SUBSTRING_INDEX(domain, '.', -2) as labels")
+            $found = $this->select('domain as labels')
                 ->selectSum('hits', 'values')
                 ->where([
                     'podcast_id' => $podcastId,
@@ -100,7 +100,7 @@ class AnalyticsWebsiteByRefererModel extends Model
             ! ($found = cache("{$podcastId}_analytics_website_by_domain_yearly"))
         ) {
             $oneYearAgo = date('Y-m-d', strtotime('-1 year'));
-            $found = $this->select("SUBSTRING_INDEX(domain, '.', -2) as labels")
+            $found = $this->select('domain as labels')
                 ->selectSum('hits', 'values')
                 ->where([
                     'podcast_id' => $podcastId,
