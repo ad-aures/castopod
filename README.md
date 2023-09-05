@@ -15,16 +15,11 @@
 Castopod is a free and open-source podcast hosting solution made for podcasters
 who want engage and interact with their audience.
 
-> **Status**
->
-> Castopod is currently in **beta** but already quite stable and used by
-> podcasters around the world!
-
 ## Getting started
 
-To get started with Castopod, you may
-[check out the documentation](https://docs.castopod.org/), everything should be
-there!
+Castopod comes pre-packaged with all the required static assets and
+dependencies, you may download and install it by checking out the
+[getting started page](https://castopod.org/getting-started/)!
 
 ## Security issues and vulnerabilities
 
