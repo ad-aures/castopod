@@ -7,11 +7,11 @@
   "license": "AGPL-3.0-or-later",
   "require": {
     "php": "^8.1",
-    "codeigniter4/framework": "v4.4.0",
+    "codeigniter4/framework": "v4.4.1",
     "james-heinrich/getid3": "^2.0.0-beta5",
     "whichbrowser/parser": "^v2.1.7",
     "geoip2/geoip2": "v2.13.0",
-    "league/commonmark": "^2.4.0",
+    "league/commonmark": "^2.4.1",
     "vlucas/phpdotenv": "v5.5.0",
     "league/html-to-markdown": "5.1.1",
     "opawg/user-agents-php": "^v1.0",
@@ -23,21 +23,21 @@
     "chrisjean/php-ico": "^1.0.4",
     "melbahja/seo": "^v2.1.1",
     "codeigniter4/shield": "v1.0.0-beta.6",
-    "aws/aws-sdk-php": "^3.279.7",
+    "aws/aws-sdk-php": "^3.281.3",
     "mpratt/embera": "^2.0.34",
     "codeigniter4/tasks": "dev-develop",
     "yassinedoghri/podcast-feed": "dev-main"
   },
   "require-dev": {
     "captainhook/captainhook": "^5.16.4",
-    "codeigniter/phpstan-codeigniter": "^1.0",
+    "codeigniter/phpstan-codeigniter": "^1.0.1",
     "mikey179/vfsstream": "^v1.6.11",
-    "phpstan/extension-installer": "^1.3",
-    "phpstan/phpstan": "^1.10.32",
-    "phpunit/phpunit": "^10.3.2",
-    "rector/rector": "^0.18.0",
+    "phpstan/extension-installer": "^1.3.1",
+    "phpstan/phpstan": "^1.10.33",
+    "phpunit/phpunit": "^10.3.3",
+    "rector/rector": "^0.18.2",
     "symplify/coding-standard": "^12.0.3",
-    "symplify/easy-coding-standard": "^12.0.7"
+    "symplify/easy-coding-standard": "^12.0.8"
   },
   "autoload": {
     "exclude-from-classmap": [

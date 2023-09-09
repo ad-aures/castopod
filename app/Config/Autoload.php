@@ -16,6 +16,8 @@ use CodeIgniter\Config\AutoloadConfig;
  *
  * NOTE: If you use an identical key in $psr4 or $classmap, then
  * the values in this file will overwrite the framework's values.
+ *
+ * @immutable
  */
 class Autoload extends AutoloadConfig
 {

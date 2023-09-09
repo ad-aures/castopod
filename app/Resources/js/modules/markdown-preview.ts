@@ -49,8 +49,6 @@ export class MarkdownPreview extends LitElement {
 
     return marked(this.escapeHtml(this._textarea.value), {
       renderer: renderer,
-      headerIds: false,
-      mangle: false,
     });
   }
 
