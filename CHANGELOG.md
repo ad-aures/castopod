@@ -1,3 +1,29 @@
+## [1.6.1](https://code.castopod.org/adaures/castopod/compare/v1.6.0...v1.6.1) (2023-09-09)
+
+### Bug Fixes
+
+- **admin:** redirect root fediverse route to fediverse-blocked-actors
+  ([ba5324e](https://code.castopod.org/adaures/castopod/commit/ba5324ea1942a3939f186e974d29fb393c54b253))
+- **analytics:** show full referrer domain in web pages visits reports
+  ([6be38e9](https://code.castopod.org/adaures/castopod/commit/6be38e9fda3d1436d81686e1a3a5e5b173e390a0)),
+  closes [#367](https://code.castopod.org/adaures/castopod/issues/367)
+- **auth:** overwrite Shield's PermissionFilter
+  ([c6e8000](https://code.castopod.org/adaures/castopod/commit/c6e8000bab54f4a32068578f750f4cf9d91bad89))
+- **auth:** update shield from v1.0.0-beta.3 to v1.0.0-beta.6
+  ([23842df](https://code.castopod.org/adaures/castopod/commit/23842df03ae28e416390e2436442b8e7c8340333))
+- **platforms:** add missing tiktok to social platforms seed
+  ([8dfdaf3](https://code.castopod.org/adaures/castopod/commit/8dfdaf321566050e9c53683e70864871eb55d618))
+- remove fediverse prefix to prevent migration error + load routes during
+  podcast import
+  ([7ff1dbe](https://code.castopod.org/adaures/castopod/commit/7ff1dbe9030768074b2fe7c7f570bfb9e7336f62))
+- **routes:** overwrite RouteCollection to include all routes + update js and
+  php dependencies
+  ([b4f1b91](https://code.castopod.org/adaures/castopod/commit/b4f1b916bfec53f071e8d0d900081c6d74486e53))
+- update Router to include latest CI changes with alternate-content logic
+  ([ae57601](https://code.castopod.org/adaures/castopod/commit/ae57601c838a7aa9469bae8038ac1c30d8c9a51e))
+- use podcast-activity named route instead of not existing actor route
+  ([3c35718](https://code.castopod.org/adaures/castopod/commit/3c357183ca51545787fcfc801b4a5829d9cd8ad6))
+
 # [1.6.0](https://code.castopod.org/adaures/castopod/compare/v1.5.2...v1.6.0) (2023-08-28)
 
 ### Bug Fixes
