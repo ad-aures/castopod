@@ -586,18 +586,18 @@ class PlatformSeeder extends Seeder
                 'submit_url' => 'https://slack.com/get-started#/create',
             ],
             [
+                'slug'       => 'tiktok',
+                'type'       => 'social',
+                'label'      => 'Tiktok',
+                'home_url'   => 'https://www.tiktok.com/',
+                'submit_url' => 'https://www.tiktok.com/signup',
+            ],
+            [
                 'slug'       => 'twitch',
                 'type'       => 'social',
                 'label'      => 'Twitch',
                 'home_url'   => 'https://www.twitch.tv/',
                 'submit_url' => 'https://www.twitch.tv/signup',
-            ],
-            [
-                'slug'       => 'x',
-                'type'       => 'social',
-                'label'      => 'X',
-                'home_url'   => 'https://x.com/',
-                'submit_url' => 'https://x.com/i/flow/signup',
             ],
             [
                 'slug'       => 'writefreely',
@@ -612,6 +612,13 @@ class PlatformSeeder extends Seeder
                 'label'      => 'YouTube',
                 'home_url'   => 'https://www.youtube.com/',
                 'submit_url' => 'https://creatoracademy.youtube.com/page/home',
+            ],
+            [
+                'slug'       => 'x',
+                'type'       => 'social',
+                'label'      => 'X',
+                'home_url'   => 'https://x.com/',
+                'submit_url' => 'https://x.com/i/flow/signup',
             ],
         ];
 
