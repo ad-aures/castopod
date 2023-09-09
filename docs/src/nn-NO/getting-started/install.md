@@ -20,15 +20,15 @@ Viss du helst vil bruka Docker, kan du hoppa over dette og gå rett til
 
 ## Krav
 
-- PHP v8.1 only
+- Berre PHP v8.1
 - MySQL versjon 5.7 eller nyare, eller MariaDB versjon 10.2 eller nyare
 - Støtte for HTTPS
 - Ei [ntp-synkronisert klokke](https://wiki.debian.org/NTP) for å stadfesta
   innkomande førespurnader frå allheimen
 
-### PHP v8.1 only
+### Berre PHP v8.1
 
-PHP version 8.1 is required, with the following extensions installed:
+PHP versjon 8.1 med desse utvidingane krevst:
 
 - [intl](https://php.net/manual/en/intl.requirements.php)
 - [libcurl](https://php.net/manual/en/curl.requirements.php)
@@ -92,22 +92,22 @@ filmklypp. Desse utvidingane må vera installerte:
    vevtenaren din, om du ikkje allereie har gjort det.
    - ⚠️ Set dokumentrota til vevtenaren til undermappa `public/` i
      `castopod`-mappa.
-4. Add **cron tasks** on your web server for various background processes
-   (replace the paths accordingly):
+4. Lag **cron-oppgåver** på vevtenaren din for ulike bakgrunnsprosessar (byt ut
+   stiane så dei passar til oppsettet ditt):
 
    ```bash
-      * * * * * /path/to/php /path/to/castopod/spark tasks:run >> /dev/null 2>&1
+      * * * * * /sti/til/php /sti/til/castopod/spark tasks:run >> /dev/null 2>&1
    ```
 
-   **Note** - If you do not add this cron task, the following Castopod features
-   will not work:
+   **Hugs** - Viss du ikkje legg til denne cron-oppgåva, vil ikkje dei fylgjande
+   Castopod-funksjonane verka:
 
-   - Importing a podcast from an existing RSS feed
-   - Broadcasting social activities to your followers in the fediverse
-   - Broadcasting episodes to open hubs using
+   - Å importera ein podkast frå ei eksisterande RSS-kjelde
+   - Å kringkasta sosiale aktivitetar til fylgjarane dine på allheimen
+   - Å kringkasta episodane dine til opne nettverk med
      [WebSub](https://en.wikipedia.org/wiki/WebSub)
-   - Generating video clips -
-     [requires FFmpeg](#optional-ffmpeg-v418-or-higher-for-video-clips)
+   - Å laga filmklypp -
+     [krev FFmpeg](#optional-ffmpeg-v418-or-higher-for-video-clips)
 
 ### (Tilrådd) Autoinstallering
 
@@ -118,46 +118,46 @@ filmklypp. Desse utvidingane må vera installerte:
 
 ::: info Notat
 
-Installasjonsskriptet lagar ei`.env`-fil i rotmappa til pakka. If you cannot go
-through the install wizard, you can create and edit the `.env` file manually
-based on the `.env.example` file.
+Installasjonsskriptet lagar ei`.env`-fil i rotmappa til pakka. Viss du ikkje kan
+gå gjennom den rettleidde installeringa, kan du laga og redigera ei `.env`-fil
+manuelt basert på `.env.example`-fila.
 
 :::
 
-### Email/SMTP setup
+### Epost/SMTP-oppsett
 
-Email configuration is required for some features to work properly (eg.
-retrieving your forgotten password, sending instructions to premium subscribers,
-…)
+Epostoppsett er naudsynt for at nokre av funksjonane skal verka skikkeleg (td.
+epostar for å nullstilla passord, senda rettleiingar til abonnentar oa.)
 
-You may add your email configuration in your instance's `.env` like so:
+Du kan skriva inn epostoppsettet for nettstaden din i `.env`-fila slik som
+dette:
 
 ```ini
 # […]
 
-email.fromEmail="your_email_address"
-email.SMTPHost="your_smtp_host"
-email.SMTPUser="your_smtp_user"
-email.SMTPPass="your_smtp_password"
+email.fromEmail="epostadressa_di"
+email.SMTPHost="smtp-tenaren_din"
+email.SMTPUser="smtp-brukaren_din"
+email.SMTPPass="passordet_ditt"
 ```
 
-#### Email config options
+#### Val for epostoppsett
 
-| Variable name    | Type                 | Default      |
-| ---------------- | -------------------- | ------------ |
-| **`fromEmail`**  | string               | `undefined`  |
-| **`fromName`**   | string               | `"Castopod"` |
-| **`SMTPHost`**   | string               | `undefined`  |
-| **`SMTPUser`**   | string               | `undefined`  |
-| **`SMTPPass`**   | string               | `undefined`  |
-| **`SMTPPort`**   | number               | `25`         |
-| **`SMTPCrypto`** | [`"tls"` or `"ssl"`] | `"tls"`      |
+| Variabelnamn     | Type                    | Standardval  |
+| ---------------- | ----------------------- | ------------ |
+| **`fromEmail`**  | streng                  | `udefinert`  |
+| **`fromName`**   | streng                  | `"Castopod"` |
+| **`SMTPHost`**   | streng                  | `udefinert`  |
+| **`SMTPUser`**   | streng                  | `udefinert`  |
+| **`SMTPPass`**   | streng                  | `udefinert`  |
+| **`SMTPPort`**   | tal                     | `25`         |
+| **`SMTPCrypto`** | [`"tls"` eller `"ssl"`] | `"tls"`      |
 
-### Media storage
+### Lagring av media
 
-By default, files are saved to the `public/media` folder using the file system.
-If you need to relocate the `media` folder to a different location, you can
-specify it in your `.env` file as shown below:
+Mediefiler blir lagra i mappa `public/media` i filsystemet som standard. Viss du
+må flytta mappa `media` til ein annan stad, kan du skriva det inn i `.env`-fila
+som vist under:
 
 ```ini
 # […]
@@ -166,29 +166,29 @@ media.root="media"
 media.storage="/mnt/storage"
 ```
 
-In this example, the files will be saved to the /mnt/storage/media folder. Make
-sure to also update your web server configuration to reflect this change.
+I dette dømet blir filene lagra i mappa /mnt/storage/media Pass på at du
+oppdaterer vevtenaroppsettet med denne endringa.
 
 ### S3
 
-If you prefer storing your media files on an S3 compatible storage, you may
-specify it in your `.env`:
+Viss du helst vil lagra mediefilene dine på ei S3-kompatibel lagringseining, kan
+du skriva det inn i `.env`-fila di:
 
 ```ini
 # […]
 
 media.fileManager="s3"
-media.s3.endpoint="your_s3_host"
-media.s3.key="your_s3_key"
-media.s3.secret="your_s3_secret"
-media.s3.region="your_s3_region"
+media.s3.endpoint="s3_verten_din"
+media.s3.key="s3_nykjelen_din"
+media.s3.secret="s3_løyndomen_din"
+media.s3.region="s3_regionen_din"
 ```
 
-#### S3 config options
+#### Oppsettsval for S3
 
-| Variable name       | Type   | Default     |
+| Variabelnamn        | Type   | Standardval |
 | ------------------- | ------ | ----------- |
-| **`endpoint`**      | string | `undefined` |
+| **`endpoint`**      | streng | `udefinert` |
 | **`nykjel`**        | tekst  | `udefinert` |
 | **`løyndom`**       | tekst  | `udefinert` |
 | **`region`**        | tekst  | `udefinert` |

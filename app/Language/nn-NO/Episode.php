@@ -30,4 +30,16 @@ return [
     }',
     'all_podcast_episodes' => 'Alle podkast-episodane',
     'back_to_podcast' => 'Gå tilbake til podkasten',
+    'preview' => [
+        'title' => 'Førehandsvising',
+        'not_published' => 'Ikkje lagt ut',
+        'text' => '{publication_status, select,
+            published {Episoden er ikkje lagt ut enno.}
+            scheduled {Episoden er planlagt lagt ut på {publication_date}.}
+            with_podcast {Denne episoden blir lagt ut samstundes som podkasten.}
+            other {Denne episoden er ikkje lagt ut enno.}
+        }',
+        'publish' => 'Legg ut',
+        'publish_edit' => 'Rediger publiseringa',
+    ],
 ];

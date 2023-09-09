@@ -14,7 +14,7 @@ return [
     'podcast-view' => 'Heim',
     'podcast-edit' => 'Rediger podkasten',
     'podcast-persons-manage' => 'Handter personar',
-    'podcast-imports' => 'Podcast imports',
+    'podcast-imports' => 'Podkast-importar',
     'episodes' => 'Episodar',
     'episode-list' => 'Alle episodane',
     'episode-create' => 'Ny episode',

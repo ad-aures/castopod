@@ -13,57 +13,57 @@ siste versjonen for å få nye funksjonar, ✨, feilrettingar 🐛 og betre ytin
 0. ⚠️ Før du oppdaterer, rår me sterkt til at du tek ein tryggingskopi av filene
    og databasen til Castopod.
 
-   - cf.
-     [Should I make a backup before updating?](#should-i-make-a-backup-before-updating)
+   - Les
+     [bør eg ta ein tryggingskopi før eg oppdaterer?](#should-i-make-a-backup-before-updating)
 
-1. Go to the
-   [releases page](https://code.castopod.org/adaures/castopod/-/releases) and
-   see if your instance is up to date with the latest Castopod version
+1. Gå til
+   [utgjevingssida](https://code.castopod.org/adaures/castopod/-/releases) og
+   sjå om nettstaden din er oppdatert til den siste utgåva av Castopod
 
-   - cf.
-     [Where can I find my Castopod version?](#where-can-i-find-my-castopod-version)
+   - Les
+     [Kvar finn eg Castopod-versjonen min?](#where-can-i-find-my-castopod-version)
 
-2. Download the latest release package named `Castopod Package`, you may choose
-   between the `zip` or `tar.gz` archives
+2. Last ned den siste utgåva som heiter `Castopod Package`, du kan velja mellom
+   `zip`- eller `tar.gz`-arkiv
 
-   - ⚠️ Make sure you download the Castopod Package and **NOT** the Source Code
-   - Note that you can also download the latest package from
+   - ⚠️ Pass på at du lastar ned Castopod-pakka, og **IKKJE** kjeldekoden
+   - Hugs at du kan lasta ned den nyaste programpakka frå
      [castopod.org](https://castopod.org/)
 
-3. On your server:
+3. Gjer dette på tenaren din:
 
-   - Remove all files except `.env` and `public/media`
-   - Copy the new files from the downloaded package into your server
+   - Slett alle filene utanom `.env` og `public/media`
+   - Kopier dei nye filene frå den nedlasta programpakka over til tenaren din
 
-     ::: info Note
+     ::: Hugs
 
-     You may need to reset files permissions as during the install process.
-     Check [Security Concerns](./security.md).
+     Det kan henda du må nullstilla filtilgangane til det dei var under
+     installasjonsprosessen. Les [tryggingsspørsmåla](./security.md).
 
      :::
 
-4. Update your database schema from your `Castopod Admin` > `About` page or by
-   running:
+4. Oppdater databaseskjemaet ditt på `Castopod admin` > `Om`-sida, eller ved å
+   køyra:
 
    ```bash
    php spark castopod:database-update
    ```
 
-5. Clear your cache from your `Castopod Admin` > `Settings` > `general` >
-   `Housekeeping`
-6. ✨ Enjoy your fresh instance, you're all done!
+5. Tøm mellomlageret på `Castopod admin` > `Innstillingar` > `generelt` >
+   `Opprydding`
+6. ✨ No er du ferdig og kan bruka den flotte nye nettstaden din!
 
-::: info Note
+::: Hugs
 
-Releases may come with additional update instructions (see
-[releases page](https://code.castopod.org/adaures/castopod/-/releases)).
+Det hender at ugjevingar har sine eigne oppdateringsinstruksar (sjå
+[utgjevingssida](https://code.castopod.org/adaures/castopod/-/releases)).
 
-- cf.
-  [I haven't updated my instance in a long time… What should I do?](#i-havent-updated-my-instance-in-a-long-time-what-should-i-do)
+- sjå
+  [Eg har ikkje oppdatert nettstaden min på lenge… Kva bør eg gjera?](#i-havent-updated-my-instance-in-a-long-time-what-should-i-do)
 
 :::
 
-## Fully Automated updates
+## Heilautomatiske oppdateringar
 
 > Kjem snart... 👀
 
@@ -71,23 +71,20 @@ Releases may come with additional update instructions (see
 
 ### Kvar finn eg Castopod-versjonsnummeret?
 
-Go to your Castopod admin panel, the version is displayed on the bottom left
-corner.
+Gå til styringspanelet for Castopod. Versjonsnummeret står nede i venstre
+hjørna.
 
-Alternatively, you can find the version in the `app > Config > Constants.php`
-file.
+Eventuelt kan du finna versjonsnummeret i `app > Oppsett > Constants.php`-fila.
 
 ### Eg har ikkje oppdatert på lenge… Kva skal eg gjera?
 
-No problem! Just get the latest release as described above. Only, when going
-through the release instructions (4), perform them sequentially, from the oldest
-to the newest.
+Ingen problem! Berre få tak i siste utgåva som skildra over. Hugs berre å utføra
+utgjevingsinstruksjonane (4) i rekkjefylgje frå eldst til nyast.
 
 > Du bør truleg tryggingskopiera nettstaden din, avhengig av kor lenge sidan det
 > er du oppdaterte Castopod.
 
-For example, if you're on `v1.0.0-alpha.42` and would like to upgrade to
-`v1.0.0-beta.1`:
+Viss du til dømes er på `v1.0.0-alpha.42` og vil oppgradera til `v1.0.0-beta.1`:
 
 0. (stekt tilrådd) Ta ein tryggingskopi av filene og databasen din.
 
@@ -100,7 +97,7 @@ For example, if you're on `v1.0.0-alpha.42` and would like to upgrade to
 
 ### Bør eg tryggingskopiera før eg oppdaterer?
 
-We advise you do, so you don't lose everything if anything goes wrong!
+Gjer det, slik at du ikkje mistar alt viss noko går gale!
 
-More generally, we advise you make regular backups of your Castopod files and
-database to prevent you from losing it all…
+Generelt rår me til at du tek tryggingskopi av Castopod-filene og databasen din
+slik at du ikkje mistar alt…

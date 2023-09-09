@@ -22,6 +22,7 @@ return [
     'all_podcast_episodes' => 'Alle podkast-episodane',
     'back_to_podcast' => 'Gå tilbake til podkasten',
     'edit' => 'Rediger',
+    'preview' => 'Førehandsvising',
     'publish' => 'Legg ut',
     'publish_edit' => 'Rediger publiseringa',
     'publish_date_edit' => 'Rediger publiseringsdatoen',
@@ -81,12 +82,12 @@ return [
             other {media}
         } for episoden.',
         'deleteFileError' => 'Greidde ikkje sletta {type, select,
-            transcript {transkripsjonen}
+            transcript {transkripsjons}
             chapters {kapittel}
-            image {omslag}
+            image {omslags}
             audio {lyd}
             other {media}
-        } i fila {file_path}. Du kan fjerna det manuelt.',
+        }fila {file_key}. Du kan fjerna ho manuelt.',
         'sameSlugError' => 'Ei episode med denne kortadressa finst allereie.',
     ],
     'form' => [
@@ -210,5 +211,15 @@ return [
         'dark-transparent' => 'Mørk gjennomsiktig',
         'light' => 'Lys',
         'light-transparent' => 'Lys gjennomsiktig',
+    ],
+    'publication_status_banner' => [
+        'draft_mode' => 'kladdemodus',
+        'text' => '{publication_status, select,
+            published {Episoden er ikkje lagt ut enno.}
+            scheduled {Episoden er planlagt lagt ut på {publication_date}.}
+            with_podcast {Denne episoden blir lagt ut samstundes som podkasten.}
+            other {Denne episoden er ikkje lagt ut enno.}
+        }',
+        'preview' => 'Førehandsvising',
     ],
 ];

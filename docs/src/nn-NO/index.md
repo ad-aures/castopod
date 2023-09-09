@@ -23,8 +23,8 @@ systemkrav.
 - 🌱 &nbsp;Fri og open (AGPL v3-lisens)
 - 🔐 &nbsp;Legg vekt på at du eig dine eigne data: innhaldet, publikum og
   analysedata høyrer deg til, og&nbsp;berre&nbsp;deg
-- 🪄 &nbsp;Podcasting 2.0 features: GUID, locked, transcripts, funding,
-  chapters, location, persons, soundbites, …
+- 🪄 &nbsp;Podkasting 2.0-funksjonar: GUID, låsing, transkripsjonar,
+  finansiering, kapittel, plassering, personar, lydbetar, …
 - 💬 &nbsp;Innebygd sosialt nettverk:
   - 🚀 &nbsp;Castopod er ein del av fødiverset, som er eit desentralisert
     sosialt nettverk
@@ -45,7 +45,7 @@ systemkrav.
   - 🔗 &nbsp;Donasjonslenker
   - 📲 &nbsp;lytt-for-å-klikka-annonsar
   - 🤝 &nbsp;value4value / WebMonetization
-  - 💎 &nbsp;Premium podcasts
+  - 💎 &nbsp;Betalte podkastar
 - 📡 &nbsp;Kringkast episodane dine kvar som helst med RSS:
   - 📱 &nbsp;På alle indeksar og appar: Podcast Index, Apple Podcasts, Spotify,
     Google Podcasts, Deezer, Podcast Addict, Podfriend, …
@@ -54,91 +54,93 @@ systemkrav.
 - 📤 &nbsp;Flytt podkasten din bort frå Castopod
 - 🔀 &nbsp;For fleire: Ver vertskap for så mange podkastar du vil
 - 👥 &nbsp;Fleirbrukar: legg til bidragsytarar og lag roller for dei
-- 🌎 &nbsp;i18n support: translated in English, French, Polish, German,
-  Brazilian Portuguese & Spanish… with
-  [more to come](https://translate.castopod.org)!
+- 🌎 &nbsp;i18n-støtte: Omsett til nynorsk, engelsk, fransk, polsk, tysk,
+  brasiliansk portugisisk & spansk… med
+  [fleire språk på veg](https://translate.castopod.org)!
 
 ## Kvifor Castopod?
 
-The podcasting ecosystem is decentralized by nature: you can create your podcast
-as an RSS file, publish it on the web and have it shared everywhere online.
+Podkasting-økosystemet er desentralt av natur: Du kan laga podkasten din som ei
+RSS-fil, leggja han ut på nettet, og få delt han overalt.
 
-It is in fact one of the only media to have stayed this way for a long time.
+Det er faktisk det einaste mediet som har vore slik i lang tid.
 
-As usages are evolving, more and more people are getting into podcasts: whether
-it is creators finding new ways to share their ideas, or listeners in the search
-for better content.
+Ettersom bruken av podkastar utviklar seg, er det fleire som startar med
+podkasting; anten det er produsentar som leitar etter nye måtar å dela ideane
+sine på, eller det er lyttarar som leitar etter betre podkastar å høyra på.
 
-With podcasting becoming more widely used, some companies are trying to shift it
-towards a more controlled and centralized medium.
+Når podkasting no har vorte meir populært, er det fleire firma som prøver å
+gjera det til eit kontrollert og sentralisert medium.
 
-Castopod was created in an effort to provide an open and sustainable alternative
-to hosting your podcasts, promoting decentralization to ensure that podcasters
-creativity can express itself.
+Castopod vart laga som ein freistnad på å gje eit ope og framhaldande alternativ
+til å leggja ut podkastane dine, med vekt på desentralisering slik at
+podkastarar kan uttrykkja seg utan å binda seg til ei bestemt løysing.
 
-This project is pushed by the open-source community, and specifically by the
-[Fediverse](https://fediverse.party/en/fediverse/) and
-[Podcasting 2.0](https://podcastindex.org/) movements.
+Prosjektet er støtta av brukarmiljøa bak open kjeldekode, særleg
+[Allheimen](https://tanketom.no/teknologi/mastodon-og-the-fediverse) og
+[Podcasting 2.0](https://podcastindex.org/)-rørslene.
 
 ## Samanlikning med andre løysingar
 
-We believe that a solution is not necessarily right for everyone, it highly
-depends on your needs. So, here are comparisons with other tools to help you to
-gauge whether Castopod is the right fit for&nbsp;you.
+Me trur at ingen løysingar er perfekt for alle, det kjem an på kva du treng.
+Difor får du her samanlikningar med andre verktøy, slik at du kan finna ut om
+Castopod passar for&nbsp;deg.
 
 ### Castopod og Wordpress
 
-Castopod is often referred to as "the Wordpress for podcasts" because of the
-similarities between the two. In some ways this is true. And actually, Castopod
-was greatly inspired by the Wordpress ecosystem, seeing the ease of adoption
-from the community and the number of websites running&nbsp;it.
+Castopod blir ofte kalla "Wordpress for podkastar" fordi det er ein del
+likskapar mellm dei to. Det er delvis sant. Faktum er at Castopod har henta
+mykje inspirasjon frå Wordpress-økosystemet. Me såg kor lett Wordpress var å ta
+i bruk, og kor mange nettstader og nettsamfunn som bruker&nbsp;det.
 
-Just like Wordpress, Castopod is free & open source, built using PHP with a
-MySQL database and is packaged in a way that you can easily install on most web
-servers.
+Til liks med Wordpress er Castopod gratis og open programvare, laga med PHP og
+ein MySQL-database, og pakka saman på ein slik måte at du lett kan installera
+det på dei fleste vevtentarar.
 
-Wordpress is a great way to create your website and extend it with plugins to
-get what you want. It is a full fledged CMS that helps you get any type of
-website online.
+Worpress er ein flott måte å laga din eigen nettstad på, samt utvida han med
+tillegg slik at han gjer det du ynskjer. Det er eit komplett
+innhaldsstyringssystem for å laga kva som helst type nettstad.
 
-On the other hand, Castopod is meant to address the podcasters needs
-specifically, focusing on podcasting, and nothing else. You don't need any
-plugin to get you started on your podcasting&nbsp;journey.
+Castopod er derimot meint som ei løysing for dei som lagar podkastar, og legg
+difor vekt på podkasting og ingenting anna. Du treng ingen programtillegg for å
+starta på den vedunderlege podkastreisa&nbsp;di.
 
-This allows optimizing the processes specific to podcasting: ranging from the
-creation of your podcasts and the publication of new episodes all the way to
-broadcasting, marketing and analytics.
+På denne måten kan me laga program som passar spesielt til podkasting, alt frå å
+laga podkastar til å publisera nye episodar til å kringkasta, marknadsføra og
+analysera dei.
 
-Finally, depending on your needs, Wordpress and Castopod can even live side by
-side as they share the same requirements!
+Til slutt: Wordpress og Castopod kan leva side om side på nettstaden din om du
+treng det, sidan dei har same systemkrava!
 
 ### Castopod og Funkwhale
 
-Funkwhale is a self-hosted, modern free and open-source music server. Just as
-Castopod, Funkwhale is on the fediverse, a decentralized social network allowing
-interoperability between the two.
+Funkwhale er ein musikktenar du kan køyra sjølv på din eigen vevtenar. Akkurat
+som Castopod er Funkwhale ein del av allheimen, som er eit sosialt nettverk
+spreidd over mange nettstader som kan samhandla med kvarandre.
 
-Funkwhale was initially built around music. And later on, as the project
-evolved, the ability to host podcasts was introduced.
+Funkwhale vart fyrst laga for musikk. Seinare, etter kvart som prosjektet
+utvikla seg, vart det mogleg å leggja ut podkastar òg.
 
-Unlike Funkwhale, Castopod has been designed and built around podcasting
-exclusively. This allows easier implementation for features related to the
-podcasting ecosystem, such as the podcasting 2.0 features (transcripts,
-chapters, locations, persons, …).
+Til skilnad frå Funkwhale er Castopod utforma og utvikla berre for podkastar.
+Det tyder at det er lettare å ta i bruk funksjonar tilknytt podkast-økosystemet,
+slik som podkasting 2.0-funksjonar (transkripsjonar, kapittel, plasseringar,
+personmerking …).
 
-So, you should probably use Funkwhale if you want to host your music, and use
-Castopod if you want to host your podcasts.
+Det tyder at du truleg bør bruka Funkwhale om du vil ha ein stad til musikken
+din, og Castopod dersom du vil ha ein stad til podkastane dine.
 
 ### Castopod og andre podkastvertar
 
-There are many solutions for you to host your podcasts, some of which are really
-great and [a lot of them](https://podcastindex.org/apps) are jumping into the
-Podcasting 2.0 wagon just like Castopod!
+Det er mange løysingar for deg som vil ha ein eigen nettstad til podkastar.
+Nokre av dei er verkeleg flotte, og
+[mange av dei](https://podcastindex.org/apps) hoppar på podkastin 2.0-toget,
+nett som Castopod!
 
-Each of these solutions differ from one another, you may compare with the
-[list of features](#features).
+Kvar av desse løysingane er ulike, og du kan
+[samanlikna kva funksjonar dei har](#features).
 
-That being said, there are two main differences with other podcasting solutions:
+Når det er sagt, er det to hovudskilnader mellom Castopod og andre
+podkastløysingar:
 
 - Du kan køyra Castopod på di eiga tenarmaskin, og det er den einaste løysinga
   som gjev deg full kontroll over det du lagar. Og fordi Castopod er open
@@ -150,25 +152,25 @@ That being said, there are two main differences with other podcasting solutions:
 
 ## Bidra til Castopod
 
-Love Castopod and would like to help? Take a look at the following documentation
-to get you&nbsp;started.
+Likar du Castopod og kunne tenkja deg å hjelpa til? Les denne dokumentasjonen
+for å koma i&nbsp;gang.
 
 ### Ordensreglar
 
-Castopod has adopted a Code of Conduct that we expect project participants to
-adhere to. Please read the
-[CODE_OF_CONDUCT manual](https://code.castopod.org/adaures/castopod/-/blob/beta/CODE_OF_CONDUCT.md)
-so that you can understand what actions will and will not be&nbsp;tolerated.
+Castopod har laga retningsliner for åtferd som me ventar at prosjektdeltakarar
+held seg til. Les gjerne
+[CODE_OF_CONDUCT-retninglinene](https://code.castopod.org/adaures/castopod/-/blob/beta/CODE_OF_CONDUCT.md)
+så du veit kva slags åtferd me godtek og&nbsp;ikkje.
 
 ### Korleis bidra
 
-Read our [contributing guide](./contributing/guidelines.md) to learn about our
-development process, how to propose bugfixes and improvements, and how to build
-and test your changes to Castopod.
+Les gjerne [korleis du bidreg](./contributing/guidelines.md) for å læra korleis
+me utviklar Castopod, korleis me føreslær rettingar og forbetringar, og korleis
+me byggjer og prøver ut endringar i programmet.
 
-## Contributors ✨
+## Bidragsytarar ✨
 
-Thanks goes to these wonderful people
+Mange takk til dei flotte folka på
 ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
@@ -177,9 +179,9 @@ Thanks goes to these wonderful people
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/yassinedoghri"><img src="https://code.castopod.org/uploads/-/system/user/avatar/3/avatar.png?s=100" width="100px;" alt="Yassine Doghri"/><br /><sub><b>Yassine Doghri</b></sub></a><br /><a href="https://code.castopod.org/adaures/castopod/commits/master" title="Code">💻</a> <a href="https://code.castopod.org/adaures/castopod/issues?author_username=yassinedoghri" title="Bug reports">🐛</a> <a href="https://code.castopod.org/adaures/castopod/commits/master" title="Documentation">📖</a> <a href="https://code.castopod.org/adaures/castopod/merge_requests?scope=all&state=all&approver_usernames[]=yassinedoghri" title="Reviewed Pull Requests">👀</a> <a href="#maintenance-yassinedoghri" title="Maintenance">🚧</a> <a href="#content-yassinedoghri" title="Content">🖋</a> <a href="#design-yassinedoghri" title="Design">🎨</a> <a href="#a11y-yassinedoghri" title="Accessibility">️️️️♿️</a> <a href="https://translate.castopod.org" title="Translation">🌍</a> <a href="#question-yassinedoghri" title="Answering Questions">💬</a> <a href="#mentoring-yassinedoghri" title="Mentoring">🧑‍🏫</a> <a href="#infra-yassinedoghri" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#ideas-yassinedoghri" title="Ideas, Planning, & Feedback">🤔</a> <a href="#projectManagement-yassinedoghri" title="Project Management">📆</a> <a href="https://blog.castopod.org/author/yassinedoghri/" title="Blogposts">📝</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://code.castopod.org/benjamin"><img src="https://code.castopod.org/uploads/-/system/user/avatar/2/avatar.png?s=100" width="100px;" alt="Benjamin Bellamy"/><br /><sub><b>Benjamin Bellamy</b></sub></a><br /><a href="https://code.castopod.org/adaures/castopod/commits/master" title="Code">💻</a> <a href="https://code.castopod.org/adaures/castopod/issues?author_username=benjamin" title="Bug reports">🐛</a> <a href="https://code.castopod.org/adaures/castopod/merge_requests?scope=all&state=all&approver_usernames[]=benjamin" title="Reviewed Pull Requests">👀</a> <a href="#content-benjamin" title="Content">🖋</a> <a href="https://translate.castopod.org" title="Translation">🌍</a> <a href="#question-benjamin" title="Answering Questions">💬</a> <a href="#infra-benjamin" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#ideas-benjamin" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://blog.castopod.org/author/benjamin-bellamy/" title="Blogposts">📝</a> <a href="#projectManagement-benjamin" title="Project Management">📆</a> <a href="#talk-benjamin" title="Talks">📢</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/ola-hn"><img src="https://castopod.org/assets/images/castopod-avatar.jpg?s=100" width="100px;" alt="Ola Hneini"/><br /><sub><b>Ola Hneini</b></sub></a><br /><a href="https://code.castopod.org/adaures/castopod/commits/master" title="Code">💻</a> <a href="https://code.castopod.org/adaures/castopod/merge_requests?scope=all&state=all&approver_usernames[]=ola" title="Reviewed Pull Requests">👀</a> <a href="https://code.castopod.org/adaures/castopod/commits/master" title="Documentation">📖</a> <a href="#maintenance-ola" title="Maintenance">🚧</a> <a href="#question-ola" title="Answering Questions">💬</a> <a href="#ideas-ola" title="Ideas, Planning, & Feedback">🤔</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/yassinedoghri"><img src="https://code.castopod.org/uploads/-/system/user/avatar/3/avatar.png?s=100" width="100px;" alt="Yassine Doghri"/><br /><sub><b>Yassine Doghri</b></sub></a><br /><a href="https://code.castopod.org/adaures/castopod/commits/master" title="Kode">💻</a> <a href="https://code.castopod.org/adaures/castopod/issues?author_username=yassinedoghri" title="Feilrapportar">🐛</a> <a href="https://code.castopod.org/adaures/castopod/commits/master" title="Dokumentasjon">📖</a> <a href="https://code.castopod.org/adaures/castopod/merge_requests?scope=all&state=all&approver_usernames[]=yassinedoghri" title="Sjekka fletteførespurnader">👀</a> <a href="#maintenance-yassinedoghri" title="Vedlikehald">🚧</a> <a href="#content-yassinedoghri" title="Innhald">🖋</a> <a href="#design-yassinedoghri" title="Design">🎨</a> <a href="#a11y-yassinedoghri" title="Tilgjenge">️️️️♿️</a> <a href="https://translate.castopod.org" title="Omsetjing">🌍</a> <a href="#question-yassinedoghri" title="Svara på spørsmål">💬</a> <a href="#mentoring-yassinedoghri" title="Opplæring">🧑‍🏫</a> <a href="#infra-yassinedoghri" title="Infrastruktur (nettvertar, bygging osb.)">🚇</a> <a href="#ideas-yassinedoghri" title="Idear, planlegging og tilbakemeldingar">🤔</a> <a href="#projectManagement-yassinedoghri" title="Prosjektstyring">📆</a> <a href="https://blog.castopod.org/author/yassinedoghri/" title="Blogginnlegg">📝</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://code.castopod.org/benjamin"><img src="https://code.castopod.org/uploads/-/system/user/avatar/2/avatar.png?s=100" width="100px;" alt="Benjamin Bellamy"/><br /><sub><b>Benjamin Bellamy</b></sub></a><br /><a href="https://code.castopod.org/adaures/castopod/commits/master" title="Kode">💻</a> <a href="https://code.castopod.org/adaures/castopod/issues?author_username=benjamin" title="Feilrapportar">🐛</a> <a href="https://code.castopod.org/adaures/castopod/merge_requests?scope=all&state=all&approver_usernames[]=benjamin" title="Såg gjennom bidrag">👀</a> <a href="#content-benjamin" title="Innhald">🖋</a> <a href="https://translate.castopod.org" title="Omsetjing">🌍</a> <a href="#question-benjamin" title="Answering Questions">💬</a> <a href="#infra-benjamin" title="Infrastruktur (nettvertar, byggjeverkty osb.)">🚇</a> <a href="#ideas-benjamin" title="Idear, planlegging og tilbakemeldingar">🤔</a> <a href="https://blog.castopod.org/author/benjamin-bellamy/" title="Blogginnlegg">📝</a> <a href="#projectManagement-benjamin" title="Prosjektstyring">📆</a> <a href="#talk-benjamin" title="Føredrag">📢</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/ola-hn"><img src="https://castopod.org/assets/images/castopod-avatar.jpg?s=100" width="100px;" alt="Ola Hneini"/><br /><sub><b>Ola Hneini</b></sub></a><br /><a href="https://code.castopod.org/adaures/castopod/commits/master" title="Kode">💻</a> <a href="https://code.castopod.org/adaures/castopod/merge_requests?scope=all&state=all&approver_usernames[]=ola" title="Sett gjennom bidrag">👀</a> <a href="https://code.castopod.org/adaures/castopod/commits/master" title="Dokumentasjon">📖</a> <a href="#maintenance-ola" title="Vedlikehald">🚧</a> <a href="#question-ola" title="Svara på spørsmål">💬</a> <a href="#ideas-ola" title="Idear, planlegging og tilbakemelding">🤔</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://mamot.fr/@rdelaage"><img src="https://castopod.org/assets/images/castopod-avatar.jpg?s=100" width="100px;" alt="Romain de Laage"/><br /><sub><b>Romain de Laage</b></sub></a><br /><a href="https://code.castopod.org/adaures/castopod/commits/master" title="Code">💻</a> <a href="#infra-rdelaage" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://code.castopod.org/adaures/castopod/commits/master" title="Documentation">📖</a> <a href="https://translate.castopod.org" title="Translation">🌍</a> <a href="#ideas-rdelaage" title="Ideas, Planning, & Feedback">🤔</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://twitter.com/lyonelbernard"><img src="https://castopod.org/assets/images/castopod-avatar.jpg?s=100" width="100px;" alt="Lyonel Bernard"/><br /><sub><b>Lyonel Bernard</b></sub></a><br /><a href="https://code.castopod.org/adaures/castopod/issues?author_username=Lyonel" title="Bug reports">🐛</a> <a href="#question-Lyonel" title="Answering Questions">💬</a> <a href="#audio-Lyonel" title="Audio">🔊</a> <a href="#ideas-Lyonel" title="Ideas, Planning, & Feedback">🤔</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://www.crypticchameleon.com/"><img src="https://secure.gravatar.com/avatar/7c2a721b52d0763673a600e8f01bd745?s=80&d=identicon?s=100" width="100px;" alt="Christopher Lagonick-Weitzel"/><br /><sub><b>Christopher Lagonick-Weitzel</b></sub></a><br /><a href="https://code.castopod.org/adaures/castopod/issues?author_username=ctlw83" title="Bug reports">🐛</a> <a href="#question-ctlw83" title="Answering Questions">💬</a> <a href="#audio-ctlw83" title="Audio">🔊</a> <a href="#ideas-ctlw83" title="Ideas, Planning, & Feedback">🤔</a></td>
@@ -256,37 +258,36 @@ specification. Contributions of any kind welcome!
 
 ## Contact
 
-You may reach us for help or ask any question you have on:
+Du kan spørja om hjelp eller kva som helst andre spørsmål på:
 
 - [Discord](https://castopod.org/discord) (for å prata direkte med utviklarane
   og brukarmiljøet)
 - [Feilmeldinga](https://code.castopod.org/adaures/castopod/-/issues) (for å
   føreslå nye funksjonar og melda feil)
 
-Alternatively, you can follow us on social media platforms to get news about
-Castopod:
+Alternativt kan du fylgja oss på sosiale media for å få nytt om Castopod:
 
 - [podlibre.social](https://podlibre.social/@Castopod) (Mastodon-nettstad)
 - [Twitter](https://twitter.com/castopod)
 - [LinkedIn](https://linkedin.com/company/castopod)
 - [Facebook](https://www.facebook.com/castopod)
 
-## Sponsors
+## Sponsorar
 
-The ongoing development of Castopod is made possible with the support of its
-backers. If you'd like to help, please consider
-[sponsoring Castopod's development](https://opencollective.com/castopod/contribute).
+Utviklinga av Castopod er mogleg på grunn av bidrag frå sponsorar og
+bidragsytarar. Viss du vil hjelpa til, bed me deg vurdera å
+[sponsa utviklinga av Castopod](https://opencollective.com/castopod/contribute).
 
 <div class="flex flex-wrap gap-x-16 gap-y-8">
   <a href="https://adaures.com/" target="_blank" rel="noopener noreferrer"><img src="/images/sponsors/adaures.svg" alt="Ad Aures Logo" class="h-16" /></a>
   <a href="https://nlnet.nl/project/Castopod/" target="_blank" rel="noopener noreferrer"><img src="/images/sponsors/nlnet.svg" alt="NLnet Logo" class="h-16" /></a>
 </div>
 
-## License
+## Lisens
 
-[GNU Affero General Public License v3.0](https://choosealicense.com/licenses/agpl-3.0/)
+[GNU Affero General Public-lisensen v3.0](https://choosealicense.com/licenses/agpl-3.0/)
 
-Copyright © 2020-present, [Ad Aures](https://adaures.com/).
+Copyright © 2020-d.d., [Ad Aures](https://adaures.com/).
 https://img.shields.io/gitlab/v/release/2?color=brightgreen&gitlab_url=https%3A%2F%2Fcode.castopod.org%2F&include_prereleases&label=release
 https://img.shields.io/github/license/ad-aures/castopod?color=blue
 https://img.shields.io/badge/contributions-welcome-brightgreen.svg

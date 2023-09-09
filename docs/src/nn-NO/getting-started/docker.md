@@ -1,35 +1,35 @@
 ---
-title: Official Docker images
+title: Offisielle Docker-bilete
 sidebarDepth: 3
 ---
 
-# Official Docker images
+# Offisielle Docker-bilete
 
-Castopod pushes 3 Docker images to the Docker Hub during its automated build
-process:
+Castopod plasserer 3 Docker-bilete på Docker Hub som del av den automatiserte
+byggjeprosessen:
 
-- [**`castopod/castopod`**](https://hub.docker.com/r/castopod/castopod): an all
-  in one castopod image using nginx unit
-- [**`castopod/app`**](https://hub.docker.com/r/castopod/app): the app bundle
-  with all of Castopod dependencies
-- [**`castopod/web-server`**](https://hub.docker.com/r/castopod/web-server): an
-  Nginx configuration for Castopod
+- [**`castopod/castopod`**](https://hub.docker.com/r/castopod/castopod): alt i
+  eitt-løysing med ei nginx-eining
+- [**`castopod/app`**](https://hub.docker.com/r/castopod/app): app-pakka med alt
+  Castopod avheng av
+- [**`castopod/web-server`**](https://hub.docker.com/r/castopod/web-server):eit
+  nginx-oppsett for Castopod
 
-Additionally, Castopod requires a MySQL-compatible database. A Redis database
-can be added as a cache handler.
+I tillegg krev Castopod ein MySQL-kompatibel database. Du kan leggja til ein
+Redis-database for å handtera mellomlagring.
 
-## Supported tags
+## Støtta merkelappar
 
-- `develop` [unstable], latest development branch build
-- `beta` [stable], latest beta version build
-- `latest` [stable], latest version build
-- `1.x.x` [stable], specific version build (since `1.0.0`)
+- `develop` [unstable], det nyaste utviklingsbygget
+- `beta` [stable], det nyaste betaversjon-bygget
+- `latest` [stable], det nyaste versjonsbygget
+- `1.x.x` [stable], bygg av ein spesivikk versjon (sidan `1.0.0`)
 
-## Example usage
+## Døme på bruk
 
-1.  Install [docker](https://docs.docker.com/get-docker/) and
+1.  Installer [docker](https://docs.docker.com/get-docker/) og
     [docker-compose](https://docs.docker.com/compose/install/)
-2.  Create a `docker-compose.yml` file with the following:
+2.  Lag ei `docker-compose.yml`-fil som inneheld dette:
 
     ```yml
     version: "3.7"
@@ -87,35 +87,36 @@ can be added as a cache handler.
       castopod-db:
     ```
 
-    You have to adapt some variables to your needs (e.g. `CP_BASEURL`,
-    `MYSQL_ROOT_PASSWORD`, `MYSQL_PASSWORD` and `CP_ANALYTICS_SALT`).
+    Du må tilpassa nokre av variablane til din bruk (td. `CP_BASEURL`,
+    `MYSQL_ROOT_PASSWORD`, `MYSQL_PASSWORD` og `CP_ANALYTICS_SALT`).
 
-3.  Setup a reverse proxy for TLS (SSL/HTTPS)
+3.  Set opp ein revers-mellomlagertenar for TLS (SSL/HTTPS)
 
-    TLS is mandatory for ActivityPub to work. This job can easily be handled by
-    a reverse proxy, for example with [Caddy](https://caddyserver.com/):
+    Du treng TLS for at ActivityPub skal verka. Dette kan du lett handtera med
+    ein revers-mellomtenar, til dømes [Caddy](https://caddyserver.com/):
 
     ```
     #castopod
-    castopod.example.com {
+    castopod.eksempel.com {
         reverse_proxy localhost:8000
     }
     ```
 
-4.  Run `docker-compose up -d`, wait for it to initialize and head on to
-    `https://castopod.example.com/cp-install` to finish setting up Castopod!
+4.  Køyr `docker-compose up -d`, vent på at han skal starta og gå til
+    `https://castopod.eksempel.com/cp-install` for å gjera ferdig
+    Castopod-oppsettet!
 
-5.  You're all set, start podcasting! 🎙️🚀
+5.  Då er du klar og kan starta å podkasta! 🎙️🚀
 
-## Environment Variables
+## Systemvariablar
 
-- **castopod/castopod** and **castopod/app**
+- **castopod/castopod** og **castopod/app**
 
-  | Variable name                         | Type (`default`)        | Default          |
+  | Variabelnamn                          | Type (`standard`)       | Standardval      |
   | ------------------------------------- | ----------------------- | ---------------- |
-  | **`CP_BASEURL`**                      | string                  | `undefined`      |
-  | **`CP_MEDIA_BASEURL`**                | ?string                 | `CP_BASEURL`     |
-  | **`CP_ADMIN_GATEWAY`**                | ?string                 | `"cp-admin"`     |
+  | **`CP_BASEURL`**                      | streng                  | `udefinert`      |
+  | **`CP_MEDIA_BASEURL`**                | ?streng                 | `CP_BASEURL`     |
+  | **`CP_ADMIN_GATEWAY`**                | ?streng                 | `"cp-admin"`     |
   | **`CP_AUTH_GATEWAY`**                 | ?string                 | `"cp-auth"`      |
   | **`CP_ANALYTICS_SALT`**               | string                  | `undefined`      |
   | **`CP_DATABASE_HOSTNAME`**            | ?string                 | `"mariadb"`      |
@@ -133,26 +134,26 @@ can be added as a cache handler.
   | **`CP_EMAIL_SMTP_USERNAME`**          | ?string                 | `"localhost"`    |
   | **`CP_EMAIL_SMTP_PASSWORD`**          | ?string                 | `null`           |
   | **`CP_EMAIL_SMTP_PORT`**              | ?number                 | `25`             |
-  | **`CP_EMAIL_SMTP_CRYPTO`**            | [`"tls"` or `"ssl"`]    | `"tls"`          |
-  | **`CP_ENABLE_2FA`**                   | ?boolean                | `undefined`      |
-  | **`CP_MEDIA_FILE_MANAGER`**           | ?string                 | `undefined`      |
-  | **`CP_MEDIA_S3_ENDPOINT`**            | ?string                 | `undefined`      |
-  | **`CP_MEDIA_S3_KEY`**                 | ?string                 | `undefined`      |
-  | **`CP_MEDIA_S3_SECRET`**              | ?string                 | `undefined`      |
-  | **`CP_MEDIA_S3_REGION`**              | ?string                 | `undefined`      |
-  | **`CP_MEDIA_S3_BUCKET`**              | ?string                 | `undefined`      |
-  | **`CP_MEDIA_S3_PROTOCOL`**            | ?number                 | `undefined`      |
-  | **`CP_MEDIA_S3_PATH_STYLE_ENDPOINT`** | ?boolean                | `undefined`      |
-  | **`CP_MEDIA_S3_KEY_PREFIX`**          | ?string                 | `undefined`      |
-  | **`CP_DISABLE_HTTPS`**                | ?[`0` or `1`]           | `undefined`      |
-  | **`CP_MAX_BODY_SIZE`**                | ?number (with suffix)   | `512M`           |
-  | **`CP_PHP_MEMORY_LIMIT`**             | ?number (with suffix)   | `512M`           |
-  | **`CP_TIMEOUT`**                      | ?number                 | `900`            |
+  | **`CP_EMAIL_SMTP_CRYPTO`**            | [`"tls"` eller `"ssl"`] | `"tls"`          |
+  | **`CP_ENABLE_2FA`**                   | ?boolsk                 | `udefinert`      |
+  | **`CP_MEDIA_FILE_MANAGER`**           | ?streng                 | `udefinert`      |
+  | **`CP_MEDIA_S3_ENDPOINT`**            | ?streng                 | `udefinert`      |
+  | **`CP_MEDIA_S3_KEY`**                 | ?streng                 | `udefinert`      |
+  | **`CP_MEDIA_S3_SECRET`**              | ?streng                 | `udefinert`      |
+  | **`CP_MEDIA_S3_REGION`**              | ?streng                 | `udefinert`      |
+  | **`CP_MEDIA_S3_BUCKET`**              | ?streng                 | `udefinert`      |
+  | **`CP_MEDIA_S3_PROTOCOL`**            | ?tal                    | `udefinert`      |
+  | **`CP_MEDIA_S3_PATH_STYLE_ENDPOINT`** | ?boolsk                 | `udefinert`      |
+  | **`CP_MEDIA_S3_KEY_PREFIX`**          | ?streng                 | `udefinert`      |
+  | **`CP_DISABLE_HTTPS`**                | ?[`0` eller `1`]        | `udefinert`      |
+  | **`CP_MAX_BODY_SIZE`**                | ?tal (med suffiks)      | `512M`           |
+  | **`CP_PHP_MEMORY_LIMIT`**             | ?tal (med suffiks)      | `512M`           |
+  | **`CP_TIMEOUT`**                      | ?tal                    | `900`            |
 
 - **castopod/web-server**
 
-  | Variable name          | Type                  | Default |
-  | ---------------------- | --------------------- | ------- |
-  | **`CP_APP_HOSTNAME`**  | ?string               | `"app"` |
-  | **`CP_MAX_BODY_SIZE`** | ?number (with suffix) | `512M`  |
-  | **`CP_TIMEOUT`**       | ?number               | `900`   |
+  | Variabelnamn           | Type                  | Standardval |
+  | ---------------------- | --------------------- | ----------- |
+  | **`CP_APP_HOSTNAME`**  | ?string               | `"app"`     |
+  | **`CP_MAX_BODY_SIZE`** | ?number (with suffix) | `512M`      |
+  | **`CP_TIMEOUT`**       | ?number               | `900`       |

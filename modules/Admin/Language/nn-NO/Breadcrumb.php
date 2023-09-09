@@ -38,7 +38,7 @@ return [
     'users' => 'brukarar',
     'my-account' => 'kontoen min',
     'change-password' => 'endre passord',
-    'imports' => 'imports',
+    'imports' => 'importar',
     'platforms' => 'plattformer',
     'social' => 'sosiale nettverk',
     'funding' => 'finansiering',
