@@ -11,7 +11,7 @@ class AddFullTextSearchIndexes extends BaseMigration
         $prefix = $this->db->getPrefix();
 
         $createQuery = <<<SQL
-            ALTER TABLE {$prefix}episodes DROP INDEX IF EXISTS title;
+            ALTER TABLE {$prefix}episodes DROP INDEX title;
         SQL;
 
         $this->db->query($createQuery);
@@ -37,14 +37,14 @@ class AddFullTextSearchIndexes extends BaseMigration
 
         $createQuery = <<<SQL
             ALTER TABLE {$prefix}episodes
-            DROP INDEX IF EXISTS  episodes_search;
+            DROP INDEX  episodes_search;
         SQL;
 
         $this->db->query($createQuery);
 
         $createQuery = <<<SQL
             ALTER TABLE {$prefix}podcasts
-            DROP INDEX IF EXISTS  podcasts_search;
+            DROP INDEX  podcasts_search;
         SQL;
 
         $this->db->query($createQuery);
