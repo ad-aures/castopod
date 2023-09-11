@@ -1,3 +1,11 @@
+## [1.6.2](https://code.castopod.org/adaures/castopod/compare/v1.6.1...v1.6.2) (2023-09-11)
+
+### Bug Fixes
+
+- **migrations:** remove if exists modifier for drop index
+  ([82013c9](https://code.castopod.org/adaures/castopod/commit/82013c9cde901c54fdb3a833890aa693e8542627)),
+  closes [#382](https://code.castopod.org/adaures/castopod/issues/382)
+
 ## [1.6.1](https://code.castopod.org/adaures/castopod/compare/v1.6.0...v1.6.1) (2023-09-09)
 
 ### Bug Fixes
