@@ -228,11 +228,11 @@ $routes->group('@(:podcastHandle)', static function ($routes): void {
             'alternate-content' => [
                 'application/activity+json' => [
                     'namespace'         => 'Modules\Fediverse\Controllers',
-                    'controller-method' => 'PostController/$2',
+                    'controller-method' => 'PostController::index/$2',
                 ],
                 'application/ld+json; profile="https://www.w3.org/ns/activitystreams' => [
-                    'namespace'         => 'Modules\Fediverse\Controllers',
-                    'controller-method' => 'PostController/$2',
+                    'namespace'         => 'Modules/Fediverse/Controllers',
+                    'controller-method' => 'PostController::index\$2',
                 ],
             ],
             'filter' => 'allow-cors',
