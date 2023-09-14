@@ -1,3 +1,11 @@
+## [1.6.3](https://code.castopod.org/adaures/castopod/compare/v1.6.2...v1.6.3) (2023-09-14)
+
+### Bug Fixes
+
+- **fediverse:** add `index` to post controller-method to access post's jsonld
+  contents
+  ([35142d8](https://code.castopod.org/adaures/castopod/commit/35142d8e565e828a977ba2b4de77c1b47a633beb))
+
 ## [1.6.2](https://code.castopod.org/adaures/castopod/compare/v1.6.1...v1.6.2) (2023-09-11)
 
 ### Bug Fixes
