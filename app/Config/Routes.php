@@ -231,7 +231,7 @@ $routes->group('@(:podcastHandle)', static function ($routes): void {
                     'controller-method' => 'PostController::index/$2',
                 ],
                 'application/ld+json; profile="https://www.w3.org/ns/activitystreams' => [
-                    'namespace'         => 'Modules/Fediverse/Controllers',
+                    'namespace'         => 'Modules\Fediverse\Controllers',
                     'controller-method' => 'PostController::index\$2',
                 ],
             ],
