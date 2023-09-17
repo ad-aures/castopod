@@ -24,7 +24,6 @@ trait AnalyticsTrait
         set_user_session_entry_page();
 
         $session = Services::session();
-        $session->start();
 
         if (! $session->get('denyListIp')) {
             $db = db_connect();

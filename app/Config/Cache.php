@@ -55,11 +55,11 @@ class Cache extends BaseConfig
      * Whether to take the URL query string into consideration when generating
      * output cache files. Valid options are:
      *
-     *    false      = Disabled
-     *    true       = Enabled, take all query parameters into account.
-     *                 Please be aware that this may result in numerous cache
-     *                 files generated for the same page over and over again.
-     *    array('q') = Enabled, but only take into account the specified list
+     *    false = Disabled
+     *    true  = Enabled, take all query parameters into account.
+     *            Please be aware that this may result in numerous cache
+     *            files generated for the same page over and over again.
+     *    ['q'] = Enabled, but only take into account the specified list
      *                 of query parameters.
      *
      * @var boolean|string[]
@@ -97,6 +97,7 @@ class Cache extends BaseConfig
      * A string of reserved characters that will not be allowed in keys or tags.
      * Strings that violate this restriction will cause handlers to throw.
      * Default: {}()/\@:
+     *
      * Note: The default set is required for PSR-6 compliance.
      */
     public string $reservedCharacters = '{}()/\@:';

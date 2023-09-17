@@ -56,7 +56,6 @@ if (! function_exists('set_user_session_deny_list_ip')) {
     function set_user_session_deny_list_ip(): void
     {
         $session = Services::session();
-        $session->start();
 
         if (! $session->has('denyListIp')) {
             $session->set('denyListIp', IpDb::find(client_ip()) !== null);
@@ -71,7 +70,6 @@ if (! function_exists('set_user_session_location')) {
     function set_user_session_location(): void
     {
         $session = Services::session();
-        $session->start();
 
         $location = [
             'countryCode' => 'N/A',
@@ -112,7 +110,6 @@ if (! function_exists('set_user_session_player')) {
     function set_user_session_player(): void
     {
         $session = Services::session();
-        $session->start();
 
         if (! $session->has('player')) {
             $playerFound = null;
@@ -155,7 +152,6 @@ if (! function_exists('set_user_session_browser')) {
     function set_user_session_browser(): void
     {
         $session = Services::session();
-        $session->start();
 
         if (! $session->has('browser')) {
             $browserName = '- Other -';
@@ -182,7 +178,6 @@ if (! function_exists('set_user_session_referer')) {
     function set_user_session_referer(): void
     {
         $session = Services::session();
-        $session->start();
 
         $newreferer = isset($_SERVER['HTTP_REFERER'])
             ? $_SERVER['HTTP_REFERER']
@@ -205,7 +200,6 @@ if (! function_exists('set_user_session_entry_page')) {
     function set_user_session_entry_page(): void
     {
         $session = Services::session();
-        $session->start();
 
         $entryPage = $_SERVER['REQUEST_URI'];
         if (! $session->has('entryPage')) {
@@ -245,7 +239,6 @@ if (! function_exists('podcast_hit')) {
         ?int $subscriptionId,
     ): void {
         $session = Services::session();
-        $session->start();
 
         $clientIp = client_ip();
 

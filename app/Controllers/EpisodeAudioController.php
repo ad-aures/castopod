@@ -133,7 +133,6 @@ class EpisodeAudioController extends Controller
         }
 
         $session = Services::session();
-        $session->start();
 
         $serviceName = '';
         if ($this->request->getGet('_from')) {

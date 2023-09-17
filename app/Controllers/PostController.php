@@ -249,28 +249,17 @@ class PostController extends FediversePostController
             $this->registerPodcastWebpageHit($this->podcast->id);
         }
 
-        $cacheName = implode(
-            '_',
-            array_filter(['page', "post#{$this->post->id}", "remote_{$action}", service('request') ->getLocale()]),
-        );
+        $data = [
+            'metatags' => get_remote_actions_metatags($this->post, $action),
+            'podcast'  => $this->podcast,
+            'actor'    => $this->actor,
+            'post'     => $this->post,
+            'action'   => $action,
+        ];
 
-        if (! ($cachedView = cache($cacheName))) {
-            $data = [
-                'metatags' => get_remote_actions_metatags($this->post, $action),
-                'podcast'  => $this->podcast,
-                'actor'    => $this->actor,
-                'post'     => $this->post,
-                'action'   => $action,
-            ];
+        helper('form');
 
-            helper('form');
-
-            return view('post/remote_action', $data, [
-                'cache'      => DECADE,
-                'cache_name' => $cacheName,
-            ]);
-        }
-
-        return (string) $cachedView;
+        // NO VIEW CACHING: form has a CSRF token which should change on each request
+        return view('post/remote_action', $data);
     }
 }
