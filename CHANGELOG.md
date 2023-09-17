@@ -1,3 +1,13 @@
+## [1.6.4](https://code.castopod.org/adaures/castopod/compare/v1.6.3...v1.6.4) (2023-09-17)
+
+### Bug Fixes
+
+- **fediverse:** do not cache remote action form + fix typo on post routes for
+  passing post uuid
+  ([4ecb42f](https://code.castopod.org/adaures/castopod/commit/4ecb42f7c82eb8d41d27c7b9705b3278ea04ab79))
+- **fediverse:** update post controller namespace in routes
+  ([3189f12](https://code.castopod.org/adaures/castopod/commit/3189f122067dc47d6de93c3185aca66d7df95e1a))
+
 ## [1.6.3](https://code.castopod.org/adaures/castopod/compare/v1.6.2...v1.6.3) (2023-09-14)
 
 ### Bug Fixes
