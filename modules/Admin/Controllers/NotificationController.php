@@ -41,7 +41,7 @@ class NotificationController extends BaseController
                     ->where([
                         'id' => $params[1],
                     ])
-                    ->first())
+                    ->first()) instanceof Notification
             ) {
                 throw PageNotFoundException::forPageNotFound();
             }

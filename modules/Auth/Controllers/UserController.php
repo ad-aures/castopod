@@ -30,7 +30,7 @@ class UserController extends BaseController
             return $this->{$method}();
         }
 
-        if ($this->user = (new UserModel())->find($params[0])) {
+        if (($this->user = (new UserModel())->find($params[0])) instanceof User) {
             return $this->{$method}();
         }
 

@@ -235,7 +235,7 @@ class ActorController extends Controller
                                 ->first();
                         }
 
-                        if ($reblogPost !== null) {
+                        if ($reblogPost instanceof \App\Entities\Post) {
                             model('PostModel', false)
                                 ->undoReblog($reblogPost, false);
 

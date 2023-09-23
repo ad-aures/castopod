@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use Rector\CodingStyle\Rector\ClassMethod\UnSpreadOperatorRector;
 use Rector\CodingStyle\Rector\Encapsed\EncapsedStringsToSprintfRector;
 use Rector\CodingStyle\Rector\Stmt\NewlineAfterStatementRector;
 use Rector\CodingStyle\Rector\String_\SymplifyQuoteEscapeRector;
@@ -49,7 +48,6 @@ return static function (RectorConfig $rectorConfig): void {
         // skip rules from used sets
         ChangeOrIfContinueToMultiContinueRector::class,
         EncapsedStringsToSprintfRector::class,
-        UnSpreadOperatorRector::class,
         RemoveExtraParametersRector::class,
         UnwrapFutureCompatibleIfPhpVersionRector::class,
 

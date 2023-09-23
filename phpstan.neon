@@ -40,10 +40,5 @@ parameters:
             - Michalsn\Uuid\Config\Services
             - Modules\PremiumPodcasts\Config\Services
             - Modules\Media\Config\Services
-    dynamicConstantNames:
-        - APP_NAMESPACE
-        - CI_DEBUG
-        - ENVIRONMENT
-        - SODIUM_LIBRARY_VERSION
     ignoreErrors:
         - '#^Call to an undefined method CodeIgniter\\Cache\\CacheInterface\:\:deleteMatching\(\)#'

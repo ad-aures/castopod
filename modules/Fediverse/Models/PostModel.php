@@ -580,7 +580,7 @@ class PostModel extends UuidModel
                 'reblog_of_id' => $this->uuid
                     ->fromString($post->id)
                     ->getBytes(),
-            ])->first())
+            ])->first()) instanceof Post
         ) {
             $this->reblog($actor, $post);
         } else {

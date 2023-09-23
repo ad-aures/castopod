@@ -25,7 +25,7 @@ class PageController extends BaseController
             return $this->{$method}();
         }
 
-        if ($this->page = (new PageModel())->find($params[0])) {
+        if (($this->page = (new PageModel())->find($params[0])) instanceof Page) {
             return $this->{$method}();
         }
 

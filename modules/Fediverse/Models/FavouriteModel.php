@@ -169,7 +169,7 @@ class FavouriteModel extends UuidModel
                 'post_id'  => service('uuid')
                     ->fromString($post->id)
                     ->getBytes(),
-            ])->first()
+            ])->first() instanceof Favourite
         ) {
             $this->removeFavourite($actor, $post);
         } else {

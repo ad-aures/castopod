@@ -716,7 +716,7 @@ class PodcastController extends BaseController
             $post = (new PostModel())->where('episode_id', $episode->id)
                 ->first();
 
-            if ($post !== null) {
+            if ($post instanceof Post) {
                 $post->published_at = $episode->published_at;
                 $postModel = new PostModel();
                 if (! $postModel->update($post->id, $post)) {
@@ -819,7 +819,7 @@ class PodcastController extends BaseController
 
         $newPostMessage = $this->request->getPost('message');
 
-        if ($post !== null) {
+        if ($post instanceof Post) {
             if ($newPostMessage !== '') {
                 // edit post if post exists and message is not empty
                 $post->message = $newPostMessage;
@@ -884,7 +884,7 @@ class PodcastController extends BaseController
             $post = (new PostModel())->where('episode_id', $episode->id)
                 ->first();
 
-            if ($post !== null) {
+            if ($post instanceof Post) {
                 $post->published_at = $episode->published_at;
                 $postModel = new PostModel();
                 if (! $postModel->update($post->id, $post)) {
@@ -927,7 +927,7 @@ class PodcastController extends BaseController
                 'episode_id' => null,
             ])
             ->first();
-        if ($post !== null) {
+        if ($post instanceof Post) {
             $postModel->removePost($post);
         }
 

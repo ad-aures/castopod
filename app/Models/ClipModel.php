@@ -91,11 +91,10 @@ class ClipModel extends Model
         if (! ($found = cache($cacheName))) {
             $clip = $this->find($videoClipId);
 
-            if ($clip === null) {
+            if (! $clip instanceof BaseClip) {
                 return null;
             }
 
-            // @phpstan-ignore-next-line
             $found = new VideoClip($clip->toArray());
 
             cache()
@@ -123,6 +122,7 @@ class ClipModel extends Model
             $found[$key] = new VideoClip($videoClip->toArray());
         }
 
+        // @phpstan-ignore-next-line
         return $found;
     }
 
@@ -185,11 +185,10 @@ class ClipModel extends Model
         if (! ($found = cache($cacheName))) {
             $clip = $this->find($soundbiteId);
 
-            if ($clip === null) {
+            if (! $clip instanceof BaseClip) {
                 return null;
             }
 
-            // @phpstan-ignore-next-line
             $found = new Soundbite($clip->toArray());
 
             cache()

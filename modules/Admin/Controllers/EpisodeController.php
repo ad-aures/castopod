@@ -50,7 +50,7 @@ class EpisodeController extends BaseController
                         'id'         => $params[1],
                         'podcast_id' => $params[0],
                     ])
-                    ->first())
+                    ->first()) instanceof Episode
             ) {
                 throw PageNotFoundException::forPageNotFound();
             }
@@ -182,7 +182,7 @@ class EpisodeController extends BaseController
                 'slug'       => $validData['slug'],
                 'podcast_id' => $this->podcast->id,
             ])
-            ->first()) {
+            ->first() instanceof Episode) {
             return redirect()
                 ->back()
                 ->withInput()

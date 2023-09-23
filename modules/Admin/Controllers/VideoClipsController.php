@@ -46,7 +46,7 @@ class VideoClipsController extends BaseController
                         'id'         => $params[1],
                         'podcast_id' => $params[0],
                     ])
-                    ->first())
+                    ->first()) instanceof Episode
             ) {
                 throw PageNotFoundException::forPageNotFound();
             }

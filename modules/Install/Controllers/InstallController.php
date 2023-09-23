@@ -121,7 +121,7 @@ class InstallController extends Controller
 
             // Check if instance owner has been created, meaning install was completed
             if ($db->tableExists('users') && (new UserModel())->where('is_owner', true)
-                ->first() !== null
+                ->first() instanceof User
             ) {
                 // if so, show a 404 page
                 throw PageNotFoundException::forPageNotFound();

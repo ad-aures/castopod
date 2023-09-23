@@ -162,7 +162,7 @@ class LikeModel extends UuidModel
                 'comment_id' => service('uuid')
                     ->fromString($comment->id)
                     ->getBytes(),
-            ])->first()
+            ])->first() instanceof Like
         ) {
             $this->removeLike($actor, $comment);
         } else {
