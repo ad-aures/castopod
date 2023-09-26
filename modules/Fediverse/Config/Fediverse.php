@@ -10,9 +10,9 @@ declare(strict_types=1);
 
 namespace Modules\Fediverse\Config;
 
+use App\Libraries\NoteObject;
 use CodeIgniter\Config\BaseConfig;
 use Modules\Fediverse\Objects\ActorObject;
-use Modules\Fediverse\Objects\NoteObject;
 
 class Fediverse extends BaseConfig
 {
@@ -23,6 +23,7 @@ class Fediverse extends BaseConfig
      */
     public string $actorObject = ActorObject::class;
 
+    // FIXME: hotfix applied to have episodes show up in posts
     public string $noteObject = NoteObject::class;
 
     /**
