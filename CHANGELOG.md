@@ -1,3 +1,10 @@
+## [1.6.5](https://code.castopod.org/adaures/castopod/compare/v1.6.4...v1.6.5) (2023-09-26)
+
+### Bug Fixes
+
+- **fediverse:** use NoteObject including episode link in content (hotfix)
+  ([ffa530e](https://code.castopod.org/adaures/castopod/commit/ffa530e187ff6488648a7cf749ca0173765a5d87))
+
 ## [1.6.4](https://code.castopod.org/adaures/castopod/compare/v1.6.3...v1.6.4) (2023-09-17)
 
 ### Bug Fixes
