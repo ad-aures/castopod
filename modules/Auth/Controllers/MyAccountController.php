@@ -35,12 +35,11 @@ class MyAccountController extends BaseController
             'new_password' => 'required|strong_password|differs[password]',
         ];
 
-        $userModel = new UserModel();
         if (! $this->validate($rules)) {
             return redirect()
                 ->back()
                 ->withInput()
-                ->with('errors', $userModel->errors());
+                ->with('errors', $this->validator->getErrors());
         }
 
         $validData = $this->validator->getValidated();
@@ -66,6 +65,7 @@ class MyAccountController extends BaseController
             ->user()
             ->password = $validData['new_password'];
 
+        $userModel = new UserModel();
         if (! $userModel->update(auth()->user()->id, auth()->user())) {
             return redirect()
                 ->back()

@@ -19,6 +19,7 @@
     name="email"
     label="<?= lang('Install.form.email') ?>"
     type="email"
+    autocomplete="username"
     required="true" />
 
 <Forms.Field

@@ -24,7 +24,7 @@ class InteractController extends Controller
             return redirect()
                 ->back()
                 ->withInput()
-                ->with('errors', service('validation')->getErrors());
+                ->with('errors', $this->validator->getErrors());
         }
 
         $validData = $this->validator->getValidated();

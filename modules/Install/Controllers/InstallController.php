@@ -290,12 +290,11 @@ class InstallController extends Controller
             'password' => 'required|strong_password',
         ];
 
-        $userModel = new UserModel();
         if (! $this->validate($rules)) {
             return redirect()
                 ->back()
                 ->withInput()
-                ->with('errors', $userModel->errors());
+                ->with('errors', $this->validator->getErrors());
         }
 
         $validData = $this->validator->getValidated();
@@ -308,6 +307,7 @@ class InstallController extends Controller
             'is_owner' => true,
         ]);
 
+        $userModel = new UserModel();
         try {
             $userModel->save($user);
         } catch (ValidationException) {

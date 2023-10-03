@@ -20,7 +20,7 @@ use Modules\Auth\Config\Auth;
         required="true"
         type="email"
         inputmode="email"
-        autocomplete="email"
+        autocomplete="username"
         autofocus="autofocus"
     />
 
