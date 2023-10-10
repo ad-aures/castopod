@@ -34,7 +34,7 @@ return [
     'settings' => 'Confirgurações',
     'settings-general' => 'Geral',
     'settings-theme' => 'Tema',
-    'about' => 'Sobre',
+    'admin-about' => 'Sobre',
     'account' => [
         'my-account' => 'Minha conta',
         'change-password' => 'Alterar senha',

@@ -34,7 +34,7 @@ return [
     'settings' => 'Nastavenia',
     'settings-general' => 'Všeobecné',
     'settings-theme' => 'Vzhľad',
-    'about' => 'O',
+    'admin-about' => 'O',
     'account' => [
         'my-account' => 'Môj účet',
         'change-password' => 'Zmeniť heslo',

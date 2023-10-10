@@ -34,7 +34,7 @@ return [
     'settings' => 'Podešavanja',
     'settings-general' => 'Opšte',
     'settings-theme' => 'Tema',
-    'about' => 'Osnovni podaci',
+    'admin-about' => 'Osnovni podaci',
     'account' => [
         'my-account' => 'Moj nalog',
         'change-password' => 'Promenite lozinku',

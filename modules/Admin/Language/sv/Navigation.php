@@ -34,7 +34,7 @@ return [
     'settings' => 'Inställningar',
     'settings-general' => 'Allmänt',
     'settings-theme' => 'Tema',
-    'about' => 'Om',
+    'admin-about' => 'Om',
     'account' => [
         'my-account' => 'Mitt konto',
         'change-password' => 'Ändra lösenord',

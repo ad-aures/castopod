@@ -1,6 +1,5 @@
 /* eslint-disable */
 const defaultTheme = require("tailwindcss/defaultTheme");
-const { nodeModuleNameResolver } = require("typescript");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -13,6 +12,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      content: {
+        chevronRightIcon:
+          "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23ffffff' viewBox='0 0 24 24'%3E%3Cpath d='M13.17 12 8.22 7.05l1.42-1.41L16 12l-6.36 6.36-1.42-1.41L13.17 12Z'/%3E%3C/svg%3E%0A\")",
+      },
       fontFamily: {
         sans: ["Inter", ...defaultTheme.fontFamily.sans],
         display: ["Kumbh Sans", ...defaultTheme.fontFamily.sans],
@@ -37,6 +40,8 @@ module.exports = {
         base: "hsl(var(--color-background-base) / <alpha-value>)",
         elevated: "hsl(var(--color-background-elevated) / <alpha-value>)",
         navigation: "hsl(var(--color-background-navigation) / <alpha-value>)",
+        "navigation-active":
+          "hsl(var(--color-background-navigation-active) / <alpha-value>)",
         backdrop: "hsl(var(--color-background-backdrop) / <alpha-value>)",
         header: "hsl(var(--color-background-header) / <alpha-value>)",
         accent: {

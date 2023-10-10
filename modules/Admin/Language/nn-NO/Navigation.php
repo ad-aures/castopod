@@ -34,7 +34,7 @@ return [
     'settings' => 'Innstillingar',
     'settings-general' => 'Generelt',
     'settings-theme' => 'Bunad',
-    'about' => 'Om',
+    'admin-about' => 'Om',
     'account' => [
         'my-account' => 'Kontoen min',
         'change-password' => 'Endre passord',

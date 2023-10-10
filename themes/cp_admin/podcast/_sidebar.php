@@ -6,12 +6,16 @@ $podcastNavigation = [
         'items' => ['podcast-view', 'podcast-edit', 'podcast-persons-manage', 'podcast-imports'],
     ],
     'episodes' => [
-        'icon'  => 'play-circle',
-        'items' => ['episode-list', 'episode-create'],
+        'icon'        => 'play-circle',
+        'items'       => ['episode-list', 'episode-create'],
+        'add-cta'     => 'episode-create',
+        'count'       => $podcast->getEpisodesCount(),
+        'count-route' => 'episode-list',
     ],
     'premium' => [
-        'icon'  => 'exchange-dollar',
-        'items' => ['subscription-list', 'subscription-add'],
+        'icon'    => 'exchange-dollar',
+        'add-cta' => 'subscription-create',
+        'items'   => ['subscription-list', 'subscription-create'],
     ],
     'analytics' => [
         'icon'  => 'line-chart',
@@ -26,8 +30,11 @@ $podcastNavigation = [
         ],
     ],
     'contributors' => [
-        'icon'  => 'group',
-        'items' => ['contributor-list', 'contributor-add'],
+        'icon'        => 'group',
+        'items'       => ['contributor-list', 'contributor-add'],
+        'add-cta'     => 'contributor-add',
+        'count'       => count($podcast->contributors),
+        'count-route' => 'contributor-list',
     ],
     'platforms' => [
         'icon'  => 'link',
@@ -37,10 +44,6 @@ $podcastNavigation = [
             'platforms-funding',
         ],
     ],
-];
-
-$counts = [
-    'episode-list' => $podcast->getEpisodesCount(),
 ];
 
 ?>
@@ -68,30 +71,9 @@ $counts = [
         </a>
     </div>
 </div>
-<nav class="flex flex-col flex-1 py-4 overflow-y-auto gap-y-4">
-    <?php foreach ($podcastNavigation as $section => $data): ?>
-    <div>
-        <button class="inline-flex items-center w-full px-4 py-1 font-semibold focus:ring-accent" type="button">
-            <?= icon($data['icon'], 'opacity-60 text-2xl mr-4') . lang('PodcastNavigation.' . $section) ?>
-        </button>
-        <ul class="flex flex-col">
-            <?php foreach ($data['items'] as $item): ?>
-                <?php $isActive = url_is(route_to($item, $podcast->id));
-                $itemLabel = lang('PodcastNavigation.' . $item);
-                if (array_key_exists($item, $counts)) {
-                    $itemLabel .= ' (' . $counts[$item] . ')';
-                }
-                ?>
-            <li class="inline-flex">
-                <a class="w-full py-1 pl-14 pr-2 text-sm hover:opacity-100 focus:ring-inset focus:ring-accent <?= $isActive
-                    ? 'font-semibold opacity-100 inline-flex items-center'
-                    : 'opacity-75' ?>" href="<?= route_to(
-                        $item,
-                        $podcast->id,
-                    ) ?>"><?= ($isActive ? icon('chevron-right', 'mr-2') : '') . $itemLabel ?></a>
-            </li>
-            <?php endforeach; ?>
-        </ul>
-    </div>
-    <?php endforeach; ?>
-</nav>
+
+<?= view('_partials/_nav_menu', [
+            'navigation' => $podcastNavigation,
+            'langKey'    => 'PodcastNavigation',
+            'podcastId'  => $podcast->id,
+        ]) ?>

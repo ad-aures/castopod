@@ -1,60 +1,59 @@
 <?php declare(strict_types=1);
 
+use App\Models\PageModel;
+use App\Models\PersonModel;
+use App\Models\PodcastModel;
+use Modules\Auth\Models\UserModel;
+
 $navigation = [
     'dashboard' => [
         'icon'  => 'dashboard',
         'items' => ['admin'],
     ],
     'podcasts' => [
-        'icon'  => 'mic',
-        'items' => ['podcast-list', 'podcast-create', 'all-podcast-imports', 'podcast-imports-add'],
+        'icon'        => 'mic',
+        'items'       => ['podcast-list', 'podcast-create', 'all-podcast-imports', 'podcast-imports-add'],
+        'add-cta'     => 'podcast-create',
+        'count-route' => 'podcast-list',
     ],
     'persons' => [
-        'icon'  => 'folder-user',
-        'items' => ['person-list', 'person-create'],
+        'icon'        => 'folder-user',
+        'items'       => ['person-list', 'person-create'],
+        'add-cta'     => 'person-create',
+        'count'       => (new PersonModel())->countAllResults(),
+        'count-route' => 'person-list',
     ],
     'fediverse' => [
-        'icon'  => 'star-smile',
+        'icon'  => 'rocket-tilted',
         'items' => ['fediverse-blocked-actors', 'fediverse-blocked-domains'],
     ],
     'users' => [
-        'icon'  => 'group',
-        'items' => ['user-list', 'user-create'],
+        'icon'        => 'group',
+        'items'       => ['user-list', 'user-create'],
+        'add-cta'     => 'user-create',
+        'count'       => (new UserModel())->countAllResults(),
+        'count-route' => 'user-list',
     ],
     'pages' => [
-        'icon'  => 'pages',
-        'items' => ['page-list', 'page-create'],
-
+        'icon'        => 'pages',
+        'items'       => ['page-list', 'page-create'],
+        'add-cta'     => 'page-create',
+        'count'       => (new PageModel())->countAllResults(),
+        'count-route' => 'page-list',
     ],
     'settings' => [
         'icon'  => 'settings',
-        'items' => ['settings-general', 'settings-theme'],
+        'items' => ['settings-general', 'settings-theme', 'admin-about'],
     ],
-]; ?>
+];
 
-<nav class="flex flex-col flex-1 py-4 overflow-y-auto gap-y-4">
-    <?php foreach ($navigation as $section => $data): ?>
-    <div>
-        <button class="inline-flex items-center w-full px-4 py-1 font-semibold focus:ring-accent" type="button">
-            <?= icon($data['icon'], 'opacity-60 text-2xl mr-4') ?>
-            <?= lang('Navigation.' . $section) ?>
-        </button>
-        <ul class="flex flex-col">
-            <?php foreach ($data['items'] as $item): ?>
-                <?php $isActive = url_is(route_to($item)); ?>
-            <li class="inline-flex">
-                <a class="w-full py-1 pl-14 pr-2 text-sm hover:opacity-100 focus:ring-inset focus:ring-accent<?= $isActive
-                    ? ' font-semibold opacity-100 inline-flex items-center'
-                    : ' opacity-75' ?>" href="<?= route_to($item) ?>"><?= ($isActive ? icon('chevron-right', 'mr-2') : '') . lang(
-                        'Navigation.' . $item,
-                    ) ?></a>
-            </li>
-            <?php endforeach; ?>
-        </ul>
-    </div>
-    <?php endforeach; ?>
-    <a class="inline-flex items-center w-full px-4 py-1 font-semibold focus:ring-accent" href="<?= route_to('admin-about') ?>">
-        <?= icon('information', 'opacity-60 text-2xl mr-4') ?>
-        <?= lang('Navigation.about') ?>
-    </a>
-</nav>
+if (auth()->user()->can('podcasts.view')) {
+    $navigation['podcasts']['count'] = (new PodcastModel())->countAllResults();
+} else {
+    $navigation['podcasts']['count'] = count(get_user_podcasts(auth()->user()));
+} ?>
+
+<?= view('_partials/_nav_menu', [
+    'navigation' => $navigation,
+    'langKey'    => 'Navigation',
+]) ?>

@@ -34,7 +34,7 @@ return [
     'settings' => 'Axustes',
     'settings-general' => 'Xeral',
     'settings-theme' => 'Decorado',
-    'about' => 'Acerca de',
+    'admin-about' => 'Acerca de',
     'account' => [
         'my-account' => 'A miña conta',
         'change-password' => 'Cambiar contrasinal',
