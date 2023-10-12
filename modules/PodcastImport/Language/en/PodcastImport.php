@@ -48,6 +48,12 @@ return [
             'delete' => 'Delete',
         ],
     ],
+    'syncForm' => [
+        'title' => 'Synchronize feeds',
+        'feed_url' => 'Feed URL',
+        'feed_url_hint' => 'The feed URL you want to synchronize with the current podcast.',
+        'submit' => 'Add to queue',
+    ],
     'messages' => [
         'canceled' => 'Import task has been successfully canceled!',
         'notRunning' => 'Cannot cancel Import Task as it is not running.',
@@ -55,7 +61,6 @@ return [
         'retried' => 'Import task has been queued, it will be retried shortly!',
         'deleted' => 'Import task has been successfully deleted!',
         'importTaskQueued' => 'An new task has been queued, import will start shortly!',
-        'podcastNotImported' => 'Podcast cannot be synched as it was not imported.',
         'syncTaskQueued' => 'A new import task has been queued, synchronization will start shortly!',
     ],
 ];

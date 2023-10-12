@@ -165,7 +165,7 @@ $routes->group(
                     ]);
                     $routes->post(
                         '/',
-                        'PodcastPersonController::attemptAdd/$1',
+                        'PodcastPersonController::attemptCreate/$1',
                         [
                             'filter' => 'permission:podcast#.manage-persons',
                         ],
@@ -461,7 +461,7 @@ $routes->group(
                             ]);
                             $routes->post(
                                 '/',
-                                'EpisodePersonController::attemptAdd/$1/$2',
+                                'EpisodePersonController::attemptCreate/$1/$2',
                                 [
                                     'filter' => 'permission:podcast#.episodes.manage-persons',
                                 ],

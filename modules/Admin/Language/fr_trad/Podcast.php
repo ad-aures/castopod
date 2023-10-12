@@ -47,8 +47,6 @@ return [
             one {# episode was}
             other {# episodes were}
         } added to the podcast!',
-        'podcastFeedUpToDate' => 'Podcast is already up to date.',
-        'podcastNotImported' => 'Podcast could not be updated as it was not imported.',
         'publishError' => 'This podcast is either already published or scheduled for publication.',
         'publishEditError' => 'This podcast is not scheduled for publication.',
         'publishCancelSuccess' => 'Podcast publication successfully cancelled!',

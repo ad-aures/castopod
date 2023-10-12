@@ -104,22 +104,45 @@ class PodcastImportController extends BaseController
             ->with('message', lang('PodcastImport.messages.importTaskQueued'));
     }
 
-    public function syncImport(int $podcastId): RedirectResponse
+    public function syncImport(int $podcastId): string
     {
         if (! ($podcast = (new PodcastModel())->getPodcastById($podcastId)) instanceof Podcast) {
             throw PageNotFoundException::forPageNotFound();
         }
 
-        if ($podcast->imported_feed_url === null) {
+        helper('form');
+
+        replace_breadcrumb_params([
+            0 => $podcast->at_handle,
+        ]);
+        return view('import/podcast_sync', [
+            'podcast' => $podcast,
+        ]);
+    }
+
+    public function syncImportAttempt(int $podcastId): RedirectResponse
+    {
+        if (! ($podcast = (new PodcastModel())->getPodcastById($podcastId)) instanceof Podcast) {
+            throw PageNotFoundException::forPageNotFound();
+        }
+
+        $rules = [
+            'feed_url' => 'valid_url_strict',
+        ];
+
+        if (! $this->validate($rules)) {
             return redirect()
                 ->back()
-                ->with('error', lang('PodcastImport.messages.podcastNotImported'));
+                ->withInput()
+                ->with('errors', $this->validator->getErrors());
         }
+
+        $validData = $this->validator->getValidated();
 
         // create update task in podcastImport
         $importTask = new PodcastImportTask([
             'handle'     => $podcast->handle,
-            'feed_url'   => $podcast->imported_feed_url,
+            'feed_url'   => $validData['feed_url'],
             'language'   => $podcast->language_code,
             'category'   => $podcast->category_id,
             'status'     => TaskStatus::Queued,

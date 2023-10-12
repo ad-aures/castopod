@@ -28,7 +28,7 @@ return [
     'podcast-analytics-time-periods' => 'Périodes',
     'premium' => 'Premium',
     'subscription-list' => 'Tous les abonnements',
-    'subscription-add' => 'Ajouter un abonnement',
+    'subscription-create' => 'Ajouter un abonnement',
     'contributors' => 'Contributeurs',
     'contributor-list' => 'Tous les contributeurs',
     'contributor-add' => 'Ajouter un contributeur',

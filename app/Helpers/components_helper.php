@@ -136,7 +136,7 @@ if (! function_exists('publication_pill')) {
             $customClass .
             '">' .
             $label .
-            ($publicationStatus === 'with_podcast' ? '<Icon glyph="warning" class="flex-shrink-0 ml-1 text-lg" />' : '') .
+            ($publicationStatus === 'with_podcast' ? '<Icon glyph="error-warning" class="flex-shrink-0 ml-1 text-lg" />' : '') .
             '</span>';
     }
 }

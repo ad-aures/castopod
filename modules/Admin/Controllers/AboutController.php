@@ -26,7 +26,7 @@ class AboutController extends BaseController
             'languages'   => implode(', ', config(App::class)->supportedLocales),
         ];
 
-        return view('about', [
+        return view('settings/about', [
             'info' => $instanceInfo,
         ]);
     }

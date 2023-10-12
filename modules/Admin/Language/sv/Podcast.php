@@ -26,8 +26,6 @@ return [
     'latest_episodes' => 'Senaste avsnitt',
     'see_all_episodes' => 'Se alla avsnitt',
     'draft' => 'Utkast',
-    'sync_feed' => 'Synchronize feed',
-    'sync_feed_hint' => 'Import this podcast\'s latest episodes',
     'messages' => [
         'createSuccess' => 'Podcast har skapats!',
         'editSuccess' => 'Podcasten har uppdaterats!',

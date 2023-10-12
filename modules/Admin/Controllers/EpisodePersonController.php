@@ -65,7 +65,7 @@ class EpisodePersonController extends BaseController
         return view('episode/persons', $data);
     }
 
-    public function attemptAdd(): RedirectResponse
+    public function attemptCreate(): RedirectResponse
     {
         $rules = [
             'persons' => 'required',

@@ -26,6 +26,7 @@ class Field extends FormComponent
         $labelAttributes = [
             'for'        => $this->id,
             'isOptional' => $this->required ? 'false' : 'true',
+            'class'      => '-mb-1',
         ];
         if ($this->hint) {
             $labelAttributes['hint'] = $this->hint;
@@ -40,16 +41,16 @@ class Field extends FormComponent
         unset($fieldComponentAttributes['helper']);
         unset($fieldComponentAttributes['hint']);
 
-        $fieldComponentAttributes['class'] = 'mb-1';
-
         $element = __NAMESPACE__ . '\\' . $this->as;
         $fieldElement = new $element($fieldComponentAttributes);
 
         return <<<HTML
             <div class="flex flex-col {$this->class}">
                 <Forms.Label {$labelAttributes}>{$this->label}</Forms.Label>
-                {$fieldElement->render()}
                 {$helperText}
+                <div class="w-full mt-1">
+                    {$fieldElement->render()}
+                </div>
             </div>
         HTML;
     }

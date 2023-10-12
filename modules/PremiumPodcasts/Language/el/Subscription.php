@@ -34,7 +34,7 @@ return [
         'email' => 'Email',
         'expiration_date' => 'Ημερομηνία λήξης',
         'expiration_date_hint' => 'The date and time at which the subscription expires. Leave empty for an unlimited subscription.',
-        'submit_add' => 'Add subscription',
+        'submit_create' => 'Create subscription',
         'submit_edit' => 'Edit subscription',
     ],
     'form_link_add' => [

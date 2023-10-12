@@ -26,8 +26,6 @@ return [
     'latest_episodes' => 'Najnovije epizode',
     'see_all_episodes' => 'Prikaži sve epizode',
     'draft' => 'Nacrt',
-    'sync_feed' => 'Synchronize feed',
-    'sync_feed_hint' => 'Import this podcast\'s latest episodes',
     'messages' => [
         'createSuccess' => 'Podkast uspešno kreiran!',
         'editSuccess' => 'Podkast je uspešno ažuriran!',

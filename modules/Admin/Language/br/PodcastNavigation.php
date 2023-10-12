@@ -28,7 +28,7 @@ return [
     'podcast-analytics-time-periods' => 'Mareoù ar selaou',
     'premium' => 'Premium',
     'subscription-list' => 'All subscriptions',
-    'subscription-add' => 'Add subscription',
+    'subscription-create' => 'Add subscription',
     'contributors' => 'Perzhidi, perzhiadezed',
     'contributor-list' => 'An holl berzhidi ha perzhiadezed',
     'contributor-add' => 'Ouzhpennañ ur perzhiad pe ur berzhiadez',

@@ -55,7 +55,6 @@ return [
         'retried' => 'Import task has been queued, it will be retried shortly!',
         'deleted' => 'Import task has been successfully deleted!',
         'importTaskQueued' => 'An new task has been queued, import will start shortly!',
-        'podcastNotImported' => 'Podcast cannot be synched as it was not imported.',
         'syncTaskQueued' => 'A new import task has been queued, synchronization will start shortly!',
     ],
 ];

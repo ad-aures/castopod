@@ -11,7 +11,7 @@
 
 <?= $this->section('content') ?>
 
-<form method="POST" action="<?= route_to('subscription-add', $podcast->id) ?>" class="flex flex-col max-w-sm gap-y-4">
+<form method="POST" action="<?= route_to('subscription-create', $podcast->id) ?>" class="flex flex-col max-w-sm gap-y-4">
 <?= csrf_field() ?>
 <input type="hidden" name="client_timezone" value="UTC" />
 
@@ -28,7 +28,7 @@
     hint="<?= lang('Subscription.form.expiration_date_hint') ?>"
 />
 
-<Button type="submit" class="self-end" variant="primary"><?= lang('Subscription.form.submit_add') ?></Button>
+<Button type="submit" class="self-end" variant="primary"><?= lang('Subscription.form.submit_create') ?></Button>
 
 </form>
 

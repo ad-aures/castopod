@@ -76,7 +76,7 @@ class ContributorController extends BaseController
         return view('contributor/view', $data);
     }
 
-    public function add(): string
+    public function create(): string
     {
         helper('form');
 
@@ -110,10 +110,10 @@ class ContributorController extends BaseController
         replace_breadcrumb_params([
             0 => $this->podcast->at_handle,
         ]);
-        return view('contributor/add', $data);
+        return view('contributor/create', $data);
     }
 
-    public function attemptAdd(): RedirectResponse
+    public function attemptCreate(): RedirectResponse
     {
         $user = (new UserModel())->find((int) $this->request->getPost('user'));
 

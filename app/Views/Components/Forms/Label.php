@@ -21,10 +21,10 @@ class Label extends Component
 
     public function render(): string
     {
-        $labelClass = 'text-sm ' . $this->attributes['class'];
+        $labelClass = 'text-sm font-semibold ' . $this->attributes['class'];
         unset($this->attributes['class']);
 
-        $optionalText = $this->isOptional ? '<small class="ml-1 lowercase">(' .
+        $optionalText = $this->isOptional ? '<small class="ml-1 font-normal lowercase">(' .
         lang('Common.optional') .
         ')</small>' : '';
         $hint = $this->hint === null ? '' : hint_tooltip($this->hint, 'ml-1');

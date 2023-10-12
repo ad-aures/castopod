@@ -26,8 +26,6 @@ return [
     'latest_episodes' => 'Últimos episodios',
     'see_all_episodes' => 'Ver tódolos episodios',
     'draft' => 'Borrador',
-    'sync_feed' => 'Synchronize feed',
-    'sync_feed_hint' => 'Import this podcast\'s latest episodes',
     'messages' => [
         'createSuccess' => 'Podcast creado correctamente!',
         'editSuccess' => 'Episodio actualizado correctamente!',

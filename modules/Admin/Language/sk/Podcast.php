@@ -26,8 +26,6 @@ return [
     'latest_episodes' => 'Posledné časti',
     'see_all_episodes' => 'Pozrieť všetky časti',
     'draft' => 'Koncept',
-    'sync_feed' => 'Synchronize feed',
-    'sync_feed_hint' => 'Import this podcast\'s latest episodes',
     'messages' => [
         'createSuccess' => 'Podcast úspešne vytvorený!',
         'editSuccess' => 'Podcast has been successfully updated!',

@@ -28,7 +28,7 @@ return [
     'podcast-analytics-time-periods' => 'Χρονικές περίοδοι',
     'premium' => 'Premium',
     'subscription-list' => 'Όλες οι συνδρομές',
-    'subscription-add' => 'Προσθέστε συνδρομή',
+    'subscription-create' => 'Προσθέστε συνδρομή',
     'contributors' => 'Συντελεστές',
     'contributor-list' => 'Όλοι οι συντελεστές',
     'contributor-add' => 'Προσθήκη συντελεστή',

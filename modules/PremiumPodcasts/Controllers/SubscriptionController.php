@@ -116,7 +116,7 @@ class SubscriptionController extends BaseController
         return view('subscription/view', $data);
     }
 
-    public function add(): string
+    public function create(): string
     {
         helper('form');
 
@@ -127,10 +127,10 @@ class SubscriptionController extends BaseController
         replace_breadcrumb_params([
             0 => $this->podcast->at_handle,
         ]);
-        return view('subscription/add', $data);
+        return view('subscription/create', $data);
     }
 
-    public function attemptAdd(): RedirectResponse
+    public function attemptCreate(): RedirectResponse
     {
         helper('text');
 

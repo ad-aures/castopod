@@ -60,7 +60,7 @@ $routes->group('', [
         ]);
     });
     // Post
-    $routes->post('posts/new', 'PostController::attemptCreate/$1', [
+    $routes->post('posts/create', 'PostController::attemptCreate/$1', [
         'as' => 'post-attempt-create',
     ]);
     $routes->get('posts/(:uuid)', 'PostController::index/$1', [

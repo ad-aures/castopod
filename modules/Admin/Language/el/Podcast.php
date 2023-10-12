@@ -26,8 +26,6 @@ return [
     'latest_episodes' => 'Τελευταία επεισόδια',
     'see_all_episodes' => 'Δείτε όλα τα επεισόδια',
     'draft' => 'Πρόχειρο',
-    'sync_feed' => 'Synchronize feed',
-    'sync_feed_hint' => 'Import this podcast\'s latest episodes',
     'messages' => [
         'createSuccess' => 'Το επεισόδιο δημιουργήθηκε με επιτυχία!',
         'editSuccess' => 'Το Podcast ενημερώθηκε με επιτυχία!',

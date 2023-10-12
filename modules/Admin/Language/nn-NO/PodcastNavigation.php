@@ -28,7 +28,7 @@ return [
     'podcast-analytics-time-periods' => 'Tidsperiodar',
     'premium' => 'Premium',
     'subscription-list' => 'Alle abonnement',
-    'subscription-add' => 'Legg til abonnement',
+    'subscription-create' => 'Legg til abonnement',
     'contributors' => 'Bidragsytarar',
     'contributor-list' => 'Alle bidragsytarane',
     'contributor-add' => 'Legg til bidragsytar',

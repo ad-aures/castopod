@@ -24,13 +24,13 @@ $routes->group(
                 'as'     => 'subscription-list',
                 'filter' => 'permission:podcast#.manage-subscriptions',
             ]);
-            $routes->get('add', 'SubscriptionController::add/$1', [
-                'as'     => 'subscription-add',
+            $routes->get('new', 'SubscriptionController::create/$1', [
+                'as'     => 'subscription-create',
                 'filter' => 'permission:podcast#.manage-subscriptions',
             ]);
             $routes->post(
-                'add',
-                'SubscriptionController::attemptAdd/$1',
+                'new',
+                'SubscriptionController::attemptCreate/$1',
                 [
                     'filter' => 'permission:podcast#.manage-subscriptions',
                 ],

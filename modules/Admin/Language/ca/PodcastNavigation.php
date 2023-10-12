@@ -28,7 +28,7 @@ return [
     'podcast-analytics-time-periods' => 'Períodes de temps',
     'premium' => 'Prèmium',
     'subscription-list' => 'Totes les subscripcions',
-    'subscription-add' => 'Afegiu una subscripció',
+    'subscription-create' => 'Afegiu una subscripció',
     'contributors' => 'Col·laboradors',
     'contributor-list' => 'Tots els col·laboradors',
     'contributor-add' => 'Afegir un col·laborador',

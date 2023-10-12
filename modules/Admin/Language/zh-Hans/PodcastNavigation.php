@@ -28,7 +28,7 @@ return [
     'podcast-analytics-time-periods' => '时间段',
     'premium' => '高级版',
     'subscription-list' => '所有订阅',
-    'subscription-add' => '添加订阅',
+    'subscription-create' => '添加订阅',
     'contributors' => '贡献者',
     'contributor-list' => '所有贡献者',
     'contributor-add' => '添加贡献者',

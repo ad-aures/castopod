@@ -26,8 +26,6 @@ return [
     'latest_episodes' => 'Darrers episodis',
     'see_all_episodes' => 'Veure tots els episodis',
     'draft' => 'Esborrany',
-    'sync_feed' => 'Synchronize feed',
-    'sync_feed_hint' => 'Import this podcast\'s latest episodes',
     'messages' => [
         'createSuccess' => 'Podcast creat correctament.',
         'editSuccess' => 'El podcast s´ha actualitzat correctament.',

@@ -52,7 +52,7 @@ class PodcastPersonController extends BaseController
         return view('podcast/persons', $data);
     }
 
-    public function attemptAdd(): RedirectResponse
+    public function attemptCreate(): RedirectResponse
     {
         $rules = [
             'persons' => 'required',

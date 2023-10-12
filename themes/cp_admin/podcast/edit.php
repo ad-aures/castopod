@@ -50,16 +50,8 @@
     accept=".jpg,.jpeg,.png" />
 
 <Forms.Field
-    name="banner"
-    label="<?= lang('Podcast.form.banner') ?>"
-    helper="<?= lang('Podcast.form.banner_size_hint') ?>"
-    type="file"
-    accept=".jpg,.jpeg,.png" />
-
-<Forms.Field
     name="title"
     label="<?= lang('Podcast.form.title') ?>"
-    helper="<?= $podcast->link ?>"
     value="<?= esc($podcast->title) ?>"
     required="true" />
 
@@ -86,6 +78,26 @@
             isChecked="<?= $podcast->type === 'serial' ? 'true' : 'false' ?>" ><?= lang('Podcast.form.type.serial') ?></Forms.RadioButton>
     </div>
 </fieldset>
+
+</Forms.Section>
+
+<Forms.Section
+    title="<?= lang('Podcast.form.fediverse_section_title') ?>" >
+
+<div class="flex flex-col">
+    <Forms.Label for="handle"><?= lang('Podcast.form.handle') ?></Forms.Label>
+    <div class="relative">
+        <Icon glyph="at" class="absolute inset-0 h-full text-xl opacity-40 left-3" />
+        <Forms.Input name="handle" value="<?= $podcast->handle ?>" class="w-full pl-8" required="true" readonly="true" />
+    </div>
+</div>
+
+<Forms.Field
+    name="banner"
+    label="<?= lang('Podcast.form.banner') ?>"
+    helper="<?= lang('Podcast.form.banner_size_hint') ?>"
+    type="file"
+    accept=".jpg,.jpeg,.png" />
 
 </Forms.Section>
 
@@ -235,26 +247,14 @@
     hint="<?= lang('Podcast.form.custom_rss_hint') ?>"
     content="<?= esc($podcast->custom_rss_string) ?>" />
 
-<Forms.Field
+    <Forms.Field
     name="new_feed_url"
     type="url"
     label="<?= lang('Podcast.form.new_feed_url') ?>"
     hint="<?= lang('Podcast.form.new_feed_url_hint') ?>"
     value="<?= esc($podcast->new_feed_url) ?>"
-/>
+    />
 
-<?php if ($podcast->imported_feed_url !== null): ?>
-    <div class="flex flex-col">
-        <Forms.Label for="old_feed_url"><?= lang('Podcast.form.old_feed_url') ?></Forms.Label>
-        <Forms.Input name="old_feed_url" readonly="true" value="<?= esc($podcast->imported_feed_url) ?>" />
-    </div>
-    <Button variant="primary" class="self-end" uri="<?= route_to('podcast-imports-sync', $podcast->id) ?>" iconLeft="refresh" data-tooltip="bottom" title="<?= lang('Podcast.sync_feed_hint') ?>"><?= lang('Podcast.sync_feed') ?></Button>
-<?php endif ?>  
-    
-</Forms.Section>
-
-<Forms.Section
-    title="<?= lang('Podcast.form.status_section_title') ?>" >
     <Forms.Toggler class="mb-2" name="lock" value="yes" checked="<?= $podcast->is_locked ? 'true' : 'false' ?>" hint="<?= lang('Podcast.form.lock_hint') ?>">
         <?= lang('Podcast.form.lock') ?>
     </Forms.Toggler>

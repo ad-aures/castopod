@@ -28,7 +28,7 @@ return [
     'podcast-analytics-time-periods' => 'Tidsperioder',
     'premium' => 'Premium',
     'subscription-list' => 'Alla prenumerationer',
-    'subscription-add' => 'Lägg till en prenumeration',
+    'subscription-create' => 'Lägg till en prenumeration',
     'contributors' => 'Bidragsgivare',
     'contributor-list' => 'Alla bidragsgivare',
     'contributor-add' => 'Lägg till bidragsgivare',

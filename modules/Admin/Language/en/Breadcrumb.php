@@ -39,6 +39,7 @@ return [
     'my-account' => 'my account',
     'change-password' => 'change password',
     'imports' => 'imports',
+    'sync-feeds' => 'synchronize feeds',
     'platforms' => 'platforms',
     'social' => 'social networks',
     'funding' => 'funding',

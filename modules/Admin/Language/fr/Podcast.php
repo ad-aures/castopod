@@ -26,8 +26,6 @@ return [
     'latest_episodes' => 'Derniers épisodes',
     'see_all_episodes' => 'Voir tous les épisodes',
     'draft' => 'Brouillon',
-    'sync_feed' => 'Synchronize feed',
-    'sync_feed_hint' => 'Import this podcast\'s latest episodes',
     'messages' => [
         'createSuccess' => 'Le podcast a été créé avec succès !',
         'editSuccess' => 'Le podcast a bien été mis à jour !',

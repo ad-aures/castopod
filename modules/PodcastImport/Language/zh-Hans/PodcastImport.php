@@ -55,7 +55,6 @@ return [
         'retried' => '导入任务已排队，稍后将重试！',
         'deleted' => '导入任务已成功删除！',
         'importTaskQueued' => '新任务已排队，导入即将开始！',
-        'podcastNotImported' => '播客无法同步，因为未导入。',
         'syncTaskQueued' => '新的导入任务已排队，即将开始同步！',
     ],
 ];

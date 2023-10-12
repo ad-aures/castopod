@@ -90,7 +90,7 @@ $routes->group(
             ]);
             $routes->post(
                 'add',
-                'ContributorController::attemptAdd/$1',
+                'ContributorController::attemptCreate/$1',
                 [
                     'filter' => 'permission:podcast#.manage-contributors',
                 ],

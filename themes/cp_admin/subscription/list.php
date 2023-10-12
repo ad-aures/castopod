@@ -9,7 +9,7 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
-<Button uri="<?= route_to('subscription-add', $podcast->id) ?>" variant="primary" iconLeft="add"><?= lang('Subscription.add') ?></Button>
+<Button uri="<?= route_to('subscription-create', $podcast->id) ?>" variant="primary" iconLeft="add"><?= lang('Subscription.add') ?></Button>
 <?= $this->endSection() ?>
 
 

@@ -3,7 +3,7 @@
 $podcastNavigation = [
     'dashboard' => [
         'icon'  => 'dashboard',
-        'items' => ['podcast-view', 'podcast-edit', 'podcast-persons-manage', 'podcast-imports'],
+        'items' => ['podcast-view', 'podcast-edit', 'podcast-persons-manage', 'podcast-imports', 'podcast-imports-sync'],
     ],
     'episodes' => [
         'icon'        => 'play-circle',

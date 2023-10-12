@@ -26,8 +26,6 @@ return [
     'latest_episodes' => 'Rannoù diwezhañ',
     'see_all_episodes' => 'Gwelet an holl rannoù',
     'draft' => 'Brouilhed',
-    'sync_feed' => 'Synchronize feed',
-    'sync_feed_hint' => 'Import this podcast\'s latest episodes',
     'messages' => [
         'createSuccess' => 'Krouet eo bet ar podkast gant berzh!',
         'editSuccess' => 'Hizivaet eo bet ar podkast gant berzh!',

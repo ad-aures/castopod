@@ -38,7 +38,11 @@ $routes->group(
                 'as'     => 'podcast-imports',
                 'filter' => 'permission:podcast#.manage-import',
             ]);
-            $routes->get('sync-feed', 'PodcastImportController::syncImport/$1', [
+            $routes->get('sync-feeds', 'PodcastImportController::syncImport/$1', [
+                'as'     => 'podcast-imports-sync',
+                'filter' => 'permission:podcast#.manage-import',
+            ]);
+            $routes->post('sync-feeds', 'PodcastImportController::syncImportAttempt/$1', [
                 'as'     => 'podcast-imports-sync',
                 'filter' => 'permission:podcast#.manage-import',
             ]);
