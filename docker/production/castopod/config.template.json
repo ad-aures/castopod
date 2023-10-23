@@ -6,8 +6,29 @@
   },
   "routes": [
     {
+      "match": {
+        "uri": "~^.+\\.(css|js|jpg|jpeg|gif|png|ico|gz|svg|svgz|ttf|otf|woff|woff2|eot|mp4|ogg|ogv|webm|webp|zip|swf|map)$"
+      },
       "action": {
         "share": "/var/www/castopod/public$uri",
+        "response_headers": {
+          "X-Content-Type-Options": "nosniff",
+          "Access-Control-Allow-Origin": "*",
+          "Cache-Control": "max-age=604800"
+        },
+        "fallback": {
+          "pass": "applications/castopod"
+        }
+      }
+    },
+    {
+      "action": {
+        "share": "/var/www/castopod/public$uri",
+        "response_headers": {
+          "X-Frame-Options": "sameorigin",
+          "X-Content-Type-Options": "nosniff",
+          "Access-Control-Allow-Origin": "*"
+        },
         "fallback": {
           "pass": "applications/castopod"
         }
