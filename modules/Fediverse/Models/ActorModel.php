@@ -12,6 +12,7 @@ namespace Modules\Fediverse\Models;
 
 use CodeIgniter\Events\Events;
 use CodeIgniter\Model;
+use Config\Database;
 use Modules\Fediverse\Config\Fediverse;
 use Modules\Fediverse\Entities\Actor;
 
@@ -226,7 +227,10 @@ class ActorModel extends Model
         if (! ($found = cache($cacheName))) {
             $tablePrefix = config(Database::class)
                 ->default['DBPrefix'];
-            $result = $this->select('COUNT(DISTINCT `cp_fediverse_actors`.`id`) as `total_active_actors`', false)
+            $result = $this->select(
+                'COUNT(DISTINCT `' . $tablePrefix . 'fediverse_actors`.`id`) as `total_active_actors`',
+                false
+            )
                 ->join(
                     $tablePrefix . 'fediverse_posts',
                     $tablePrefix . 'fediverse_actors.id = ' . $tablePrefix . 'fediverse_posts.actor_id',
@@ -237,7 +241,7 @@ class ActorModel extends Model
                     $tablePrefix . 'fediverse_actors.id = ' . $tablePrefix . 'fediverse_favourites.actor_id',
                     'left outer'
                 )
-                ->where($tablePrefix . 'actors.domain', get_current_domain())
+                ->where($tablePrefix . 'fediverse_actors.domain', get_current_domain())
                 ->groupStart()
                 ->where(
                     "`{$tablePrefix}fediverse_posts`.`created_at` >= UTC_TIMESTAMP() - INTERVAL {$lastNumberOfMonths} month",
