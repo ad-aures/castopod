@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Entities\Person;
 use App\Entities\Podcast;
+use Cocur\Slugify\Slugify;
 use Config\App;
 use Config\Images;
 use Modules\Media\Entities\Image;
@@ -42,105 +43,8 @@ if (! function_exists('slugify')) {
             $text = substr($text, 0, strrpos(substr($text, 0, $maxLength), ' '));
         }
 
-        // replace non letter or digits by -
-        $text = preg_replace('~[^\pL\d]+~u', '-', $text);
-
-        $unwanted = [
-            'Š' => 'S',
-            'š' => 's',
-            'Đ' => 'Dj',
-            'đ' => 'dj',
-            'Ž' => 'Z',
-            'ž' => 'z',
-            'Č' => 'C',
-            'č' => 'c',
-            'Ć' => 'C',
-            'ć' => 'c',
-            'À' => 'A',
-            'Á' => 'A',
-            'Â' => 'A',
-            'Ã' => 'A',
-            'Ä' => 'A',
-            'Å' => 'A',
-            'Æ' => 'AE',
-            'Ç' => 'C',
-            'È' => 'E',
-            'É' => 'E',
-            'Ê' => 'E',
-            'Ë' => 'E',
-            'Ì' => 'I',
-            'Í' => 'I',
-            'Î' => 'I',
-            'Ï' => 'I',
-            'Ñ' => 'N',
-            'Ò' => 'O',
-            'Ó' => 'O',
-            'Ô' => 'O',
-            'Õ' => 'O',
-            'Ö' => 'O',
-            'Ø' => 'O',
-            'Œ' => 'OE',
-            'Ù' => 'U',
-            'Ú' => 'U',
-            'Û' => 'U',
-            'Ü' => 'U',
-            'Ý' => 'Y',
-            'Þ' => 'B',
-            'ß' => 'Ss',
-            'à' => 'a',
-            'á' => 'a',
-            'â' => 'a',
-            'ã' => 'a',
-            'ä' => 'a',
-            'å' => 'a',
-            'æ' => 'ae',
-            'ç' => 'c',
-            'è' => 'e',
-            'é' => 'e',
-            'ê' => 'e',
-            'ë' => 'e',
-            'ì' => 'i',
-            'í' => 'i',
-            'î' => 'i',
-            'ï' => 'i',
-            'ð' => 'o',
-            'ñ' => 'n',
-            'ò' => 'o',
-            'ó' => 'o',
-            'ô' => 'o',
-            'õ' => 'o',
-            'ö' => 'o',
-            'ø' => 'o',
-            'œ' => 'OE',
-            'ù' => 'u',
-            'ú' => 'u',
-            'û' => 'u',
-            'ý' => 'y',
-            'þ' => 'b',
-            'ÿ' => 'y',
-            'Ŕ' => 'R',
-            'ŕ' => 'r',
-            '/' => '-',
-            ' ' => '-',
-        ];
-        $text = strtr($text, $unwanted);
-
-        // transliterate
-        $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
-
-        // remove unwanted characters
-        $text = preg_replace('~[^\-\w]+~', '', $text);
-
-        // trim
-        $text = trim($text, '-');
-
-        // remove duplicate -
-        $text = preg_replace('~-+~', '-', $text);
-
-        // lowercase
-        $text = strtolower($text);
-
-        return $text;
+        $slugify = new Slugify();
+        return $slugify->slugify($text);
     }
 }
 
