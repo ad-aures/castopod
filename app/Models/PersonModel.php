@@ -280,8 +280,8 @@ class PersonModel extends Model
     /**
      * Add persons to podcast
      *
-     * @param array<string> $personIds
-     * @param array<string, string> $roles
+     * @param int[] $personIds
+     * @param string[] $roles
      *
      * @return bool|int Number of rows inserted or FALSE on failure
      */
@@ -300,9 +300,12 @@ class PersonModel extends Model
         $data = [];
         foreach ($personIds as $personId) {
             if ($roles === []) {
+                // add to default group (cast) and role (host), see https://podcastindex.org/namespace/1.0#person
                 $data[] = [
-                    'podcast_id' => $podcastId,
-                    'person_id'  => $personId,
+                    'podcast_id'   => $podcastId,
+                    'person_id'    => $personId,
+                    'person_group' => 'cast',
+                    'person_role'  => 'host',
                 ];
             }
 
@@ -347,16 +350,12 @@ class PersonModel extends Model
      * Add persons to episode
      *
      * @param int[] $personIds
-     * @param string[] $groupsRoles
+     * @param string[] $roles
      *
      * @return bool|int Number of rows inserted or FALSE on failure
      */
-    public function addEpisodePersons(
-        int $podcastId,
-        int $episodeId,
-        array $personIds,
-        array $groupsRoles
-    ): bool | int {
+    public function addEpisodePersons(int $podcastId, int $episodeId, array $personIds, array $roles): bool | int
+    {
         if ($personIds !== []) {
             cache()
                 ->delete("podcast#{$podcastId}_episode#{$episodeId}_persons");
@@ -366,22 +365,24 @@ class PersonModel extends Model
 
             $data = [];
             foreach ($personIds as $personId) {
-                if ($groupsRoles !== []) {
-                    foreach ($groupsRoles as $groupRole) {
-                        $groupRole = explode(',', $groupRole);
-                        $data[] = [
-                            'podcast_id'   => $podcastId,
-                            'episode_id'   => $episodeId,
-                            'person_id'    => $personId,
-                            'person_group' => $groupRole[0],
-                            'person_role'  => $groupRole[1],
-                        ];
-                    }
-                } else {
+                if ($roles === []) {
                     $data[] = [
-                        'podcast_id' => $podcastId,
-                        'episode_id' => $episodeId,
-                        'person_id'  => $personId,
+                        'podcast_id'   => $podcastId,
+                        'episode_id'   => $episodeId,
+                        'person_id'    => $personId,
+                        'person_group' => 'cast',
+                        'person_role'  => 'host',
+                    ];
+                }
+
+                foreach ($roles as $role) {
+                    $groupRole = explode(',', $role);
+                    $data[] = [
+                        'podcast_id'   => $podcastId,
+                        'episode_id'   => $episodeId,
+                        'person_id'    => $personId,
+                        'person_group' => $groupRole[0],
+                        'person_role'  => $groupRole[1],
                     ];
                 }
             }

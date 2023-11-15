@@ -31,7 +31,7 @@
         options="<?= esc(json_encode($personOptions)) ?>"
         selected="<?= esc(json_encode(old('persons', []))) ?>"
         required="true" />
-    
+
     <Forms.Field
         as="MultiSelect"
         id="roles"
@@ -40,7 +40,7 @@
         hint="<?= lang('Person.podcast_form.roles_hint') ?>"
         options="<?= esc(json_encode($taxonomyOptions)) ?>"
         selected="<?= esc(json_encode(old('roles', []))) ?>"
-        required="true" />
+    />
 
     <Button variant="primary" class="self-end" type="submit"><?= lang('Person.podcast_form.submit_add') ?></Button>
 

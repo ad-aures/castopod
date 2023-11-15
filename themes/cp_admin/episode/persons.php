@@ -41,7 +41,6 @@
         hint="<?= lang('Person.episode_form.roles_hint') ?>"
         options="<?= esc(json_encode($taxonomyOptions)) ?>"
         selected="<?= esc(json_encode(old('roles', []))) ?>"
-        required="true"
     />
 
     <Button variant="primary" type="submit" class="self-end"><?= lang('Person.episode_form.submit_add') ?></Button>
