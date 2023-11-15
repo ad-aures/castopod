@@ -47,8 +47,8 @@ data_table(
                     $premiumBadge = '<Icon glyph="exchange-dollar" class="absolute left-0 w-8 pl-2 text-2xl rounded-r-full rounded-tl-lg top-2 text-accent-contrast bg-accent-base" />';
                 }
 
-                return '<div class="flex">' .
-                    '<div class="relative flex-shrink-0 mr-2">' .
+                return '<div class="flex gap-x-2">' .
+                    '<div class="relative flex-shrink-0">' .
                         '<time class="absolute px-1 text-xs font-semibold text-white rounded bottom-2 right-2 bg-black/50" datetime="PT' . round($episode->audio->duration, 3) . 'S">' .
                             format_duration(
                                 (int) $episode->audio->duration,
@@ -62,7 +62,7 @@ data_table(
                         $podcast->id,
                         $episode->id,
                     ) . '">' .
-                    '<h2 class="inline-flex items-baseline w-full font-semibold leading-none gap-x-1 group">' .
+                    '<h2 class="inline-flex items-baseline w-full font-semibold gap-x-1 group">' .
                     episode_numbering(
                         $episode->number,
                         $episode->season_number,
@@ -71,7 +71,7 @@ data_table(
                     ) .
                     '<span class="mr-1 truncate group-hover:underline">' . esc($episode->title) . '</span>' .
                     '</h2>' .
-                    '<p class="max-w-sm text-xs text-skin-muted line-clamp-2">' . $episode->description . '</p>' .
+                    '<p class="text-xs whitespace-pre-wrap w-80 text-skin-muted line-clamp-2">' . $episode->description . '</p>' .
                     '</a>' .
                     '</div>';
             },
