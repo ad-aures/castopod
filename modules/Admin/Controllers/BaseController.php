@@ -37,7 +37,7 @@ abstract class BaseController extends Controller
         ResponseInterface $response,
         LoggerInterface $logger
     ): void {
-        $this->helpers = array_merge($this->helpers, ['auth', 'breadcrumb', 'svg', 'components', 'misc']);
+        $this->helpers = [...$this->helpers, 'auth', 'breadcrumb', 'svg', 'components', 'misc'];
 
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);

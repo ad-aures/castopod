@@ -64,7 +64,7 @@ class EpisodeAudioController extends Controller
         set_user_session_location();
         set_user_session_player();
 
-        $this->analyticsConfig = config(Analytics::class);
+        $this->analyticsConfig = config('Analytics');
     }
 
     public function _remap(string $method, string ...$params): mixed

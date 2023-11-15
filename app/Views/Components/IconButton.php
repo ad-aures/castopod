@@ -22,7 +22,7 @@ class IconButton extends Button
             'large' => 'text-2xl',
         ];
 
-        $allAttributes = array_merge($attributes, $iconButtonAttributes);
+        $allAttributes = [...$attributes, ...$iconButtonAttributes];
 
         parent::__construct($allAttributes);
 

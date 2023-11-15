@@ -32,7 +32,7 @@ class Select extends FormComponent
         unset($this->attributes['name']);
         unset($this->attributes['options']);
         unset($this->attributes['selected']);
-        $extra = array_merge($this->attributes, $defaultAttributes);
+        $extra = [...$this->attributes, ...$defaultAttributes];
 
         return form_dropdown($this->name, $this->options, old($this->name, $this->selected !== '' ? [$this->selected] : []), $extra);
     }

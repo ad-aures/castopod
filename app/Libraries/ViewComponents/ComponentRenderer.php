@@ -16,7 +16,7 @@ class ComponentRenderer
 
     public function __construct()
     {
-        $this->config = config(ViewComponents::class);
+        $this->config = config('ViewComponents');
     }
 
     public function render(string $output): string

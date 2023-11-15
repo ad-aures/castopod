@@ -25,7 +25,7 @@ class Component implements ComponentInterface
         helper('viewcomponents');
 
         // overwrite default attributes if set
-        $this->attributes = array_merge($this->attributes, $attributes);
+        $this->attributes = [...$this->attributes, ...$attributes];
 
         if ($attributes !== []) {
             $this->hydrate($attributes);

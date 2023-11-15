@@ -32,7 +32,7 @@ class Theme
 
     public function __construct()
     {
-        $this->config = config(Themes::class);
+        $this->config = config('Themes');
     }
 
     /**
@@ -85,7 +85,7 @@ class Theme
     {
         $themes = [];
 
-        $config = config(Themes::class);
+        $config = config('Themes');
 
         foreach ($config->themes as $name => $folder) {
             $themes[] = [

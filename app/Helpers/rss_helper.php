@@ -52,7 +52,7 @@ if (! function_exists('get_rss_feed')) {
         $atomLink->addAttribute('type', 'application/rss+xml');
 
         // websub: add links to hubs defined in config
-        $websubHubs = config(WebSub::class)
+        $websubHubs = config('WebSub')
             ->hubs;
         foreach ($websubHubs as $websubHub) {
             $atomLinkHub = $channel->addChild('link', null, $atomNamespace);

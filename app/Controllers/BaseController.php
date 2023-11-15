@@ -59,13 +59,13 @@ abstract class BaseController extends Controller
         ResponseInterface $response,
         LoggerInterface $logger
     ): void {
-        $this->helpers = array_merge($this->helpers, ['auth', 'svg', 'components', 'misc', 'seo', 'premium_podcasts']);
+        $this->helpers = [...$this->helpers, 'auth', 'svg', 'components', 'misc', 'seo', 'premium_podcasts'];
 
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
 
         Theme::setTheme('app');
 
-        $this->helpers = array_merge($this->helpers, ['setting']);
+        $this->helpers = [...$this->helpers, 'setting'];
     }
 }

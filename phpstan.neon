@@ -29,6 +29,8 @@ parameters:
             - Modules\PodcastImport\Config\
             - Modules\PremiumPodcasts\Config\
             - Modules\WebSub\Config\
+            - ViewThemes\Config\
+            - Vite\Config\
         additionalModelNamespaces:
             - Modules\Analytics\Models\
             - Modules\Auth\Models\
@@ -40,5 +42,6 @@ parameters:
             - Michalsn\Uuid\Config\Services
             - Modules\PremiumPodcasts\Config\Services
             - Modules\Media\Config\Services
+            - CodeIgniter\Shield\Config\Services
     ignoreErrors:
         - '#^Call to an undefined method CodeIgniter\\Cache\\CacheInterface\:\:deleteMatching\(\)#'

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Vite;
 
 use ErrorException;
-use Vite\Config\Vite as ViteConfig;
 
 class Vite
 {
@@ -21,7 +20,7 @@ class Vite
 
     public function asset(string $path, string $type): string
     {
-        if (config(ViteConfig::class)->environment !== 'production') {
+        if (config('Vite')->environment !== 'production') {
             return $this->loadDev($path, $type);
         }
 
@@ -30,10 +29,7 @@ class Vite
 
     private function loadDev(string $path, string $type): string
     {
-        return $this->getHtmlTag(
-            config(ViteConfig::class)->baseUrl . config(ViteConfig::class)->assetsRoot . "/{$path}",
-            $type
-        );
+        return $this->getHtmlTag(config('Vite') ->baseUrl . config('Vite')->assetsRoot . "/{$path}", $type);
     }
 
     private function loadProd(string $path, string $type): string
@@ -41,8 +37,8 @@ class Vite
         if ($this->manifestData === null) {
             $cacheName = 'vite-manifest';
             if (! ($cachedManifest = cache($cacheName))) {
-                $manifestPath = config(ViteConfig::class)
-                    ->assetsRoot . '/' . config(ViteConfig::class)
+                $manifestPath = config('Vite')
+                    ->assetsRoot . '/' . config('Vite')
                     ->manifestFile;
                 try {
                     if (($manifestContents = file_get_contents($manifestPath)) !== false) {
@@ -66,7 +62,7 @@ class Vite
             // import css dependencies if any
             if (array_key_exists('css', $manifestElement)) {
                 foreach ($manifestElement['css'] as $cssFile) {
-                    $html .= $this->getHtmlTag('/' . config(ViteConfig::class)->assetsRoot . '/' . $cssFile, 'css');
+                    $html .= $this->getHtmlTag('/' . config('Vite')->assetsRoot . '/' . $cssFile, 'css');
                 }
             }
 
@@ -78,26 +74,21 @@ class Vite
                         if (array_key_exists('css', $this->manifestData[$importPath])) {
                             foreach ($this->manifestData[$importPath]['css'] as $cssFile) {
                                 $html .= $this->getHtmlTag(
-                                    '/' . config(ViteConfig::class)->assetsRoot . '/' . $cssFile,
+                                    '/' . config('Vite')->assetsRoot . '/' . $cssFile,
                                     'css'
                                 );
                             }
                         }
 
                         $html .= $this->getHtmlTag(
-                            '/' . config(
-                                ViteConfig::class
-                            )->assetsRoot . '/' . $this->manifestData[$importPath]['file'],
+                            '/' . config('Vite')->assetsRoot . '/' . $this->manifestData[$importPath]['file'],
                             'js'
                         );
                     }
                 }
             }
 
-            $html .= $this->getHtmlTag(
-                '/' . config(ViteConfig::class)->assetsRoot . '/' . $manifestElement['file'],
-                $type
-            );
+            $html .= $this->getHtmlTag('/' . config('Vite')->assetsRoot . '/' . $manifestElement['file'], $type);
         }
 
         return $html;

@@ -20,7 +20,6 @@ use CodeIgniter\I18n\Time;
 use Michalsn\Uuid\UuidModel;
 use Modules\Fediverse\Activities\CreateActivity;
 use Modules\Fediverse\Activities\DeleteActivity;
-use Modules\Fediverse\Models\ActivityModel;
 use Modules\Fediverse\Objects\TombstoneObject;
 
 class EpisodeCommentModel extends UuidModel
@@ -111,7 +110,7 @@ class EpisodeCommentModel extends UuidModel
                 ->set('actor', $comment->actor->uri)
                 ->set('object', new CommentObject($comment));
 
-            $activityId = model(ActivityModel::class, false)
+            $activityId = model('ActivityModel', false)
                 ->newActivity(
                     'Create',
                     $comment->actor_id,
@@ -124,7 +123,7 @@ class EpisodeCommentModel extends UuidModel
 
             $createActivity->set('id', url_to('activity', esc($comment->actor->username), $activityId));
 
-            model(ActivityModel::class, false)
+            model('ActivityModel', false)
                 ->update($activityId, [
                     'payload' => $createActivity->toJSON(),
                 ]);
@@ -154,7 +153,7 @@ class EpisodeCommentModel extends UuidModel
                 ->set('actor', $comment->actor->uri)
                 ->set('object', $tombstoneObject);
 
-            $activityId = model(ActivityModel::class, false)
+            $activityId = model('ActivityModel', false)
                 ->newActivity(
                     'Delete',
                     $comment->actor_id,
@@ -167,7 +166,7 @@ class EpisodeCommentModel extends UuidModel
 
             $deleteActivity->set('id', url_to('activity', esc($comment->actor->username), $activityId));
 
-            model(ActivityModel::class, false)
+            model('ActivityModel', false)
                 ->update($activityId, [
                     'payload' => $deleteActivity->toJSON(),
                 ]);
@@ -177,7 +176,7 @@ class EpisodeCommentModel extends UuidModel
             ->delete($comment->id);
 
         if ($comment->in_reply_to_id === null) {
-            model(EpisodeModel::class, false)->builder()
+            model('EpisodeModel', false)->builder()
                 ->where('id', $comment->episode_id)
                 ->decrement('comments_count');
         } else {
@@ -294,9 +293,9 @@ class EpisodeCommentModel extends UuidModel
         $data['data']['id'] = $uuid4->toString();
 
         if (! isset($data['data']['uri'])) {
-            $actor = model(ActorModel::class, false)
+            $actor = model('ActorModel', false)
                 ->getActorById((int) $data['data']['actor_id']);
-            $episode = model(EpisodeModel::class, false)
+            $episode = model('EpisodeModel', false)
                 ->find((int) $data['data']['episode_id']);
 
             if (! $episode instanceof Episode) {

@@ -622,7 +622,7 @@ class PlatformSeeder extends Seeder
             ],
         ];
 
-        $data = array_merge($podcastingData, $fundingData, $socialData);
+        $data = [...$podcastingData, ...$fundingData, ...$socialData];
         $this->db
             ->table('platforms')
             ->ignore(true)

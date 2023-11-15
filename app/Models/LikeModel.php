@@ -17,7 +17,6 @@ use Modules\Fediverse\Activities\LikeActivity;
 use Modules\Fediverse\Activities\UndoActivity;
 use Modules\Fediverse\Entities\Activity;
 use Modules\Fediverse\Entities\Actor;
-use Modules\Fediverse\Models\ActivityModel;
 
 class LikeModel extends UuidModel
 {
@@ -66,7 +65,7 @@ class LikeModel extends UuidModel
             $likeActivity->set('actor', $actor->uri)
                 ->set('object', $comment->uri);
 
-            $activityId = model(ActivityModel::class)
+            $activityId = model('ActivityModel')
                 ->newActivity(
                     'Like',
                     $actor->id,
@@ -79,7 +78,7 @@ class LikeModel extends UuidModel
 
             $likeActivity->set('id', url_to('activity', esc($actor->username), $activityId));
 
-            model(ActivityModel::class)
+            model('ActivityModel')
                 ->update($activityId, [
                     'payload' => $likeActivity->toJSON(),
                 ]);
@@ -107,7 +106,7 @@ class LikeModel extends UuidModel
         if ($registerActivity) {
             $undoActivity = new UndoActivity();
             // FIXME: get like activity associated with the deleted like
-            $activity = model(ActivityModel::class)
+            $activity = model('ActivityModel')
                 ->where([
                     'type'     => 'Like',
                     'actor_id' => $actor->id,
@@ -129,7 +128,7 @@ class LikeModel extends UuidModel
                 ->set('actor', $actor->uri)
                 ->set('object', $likeActivity);
 
-            $activityId = model(ActivityModel::class)
+            $activityId = model('ActivityModel')
                 ->newActivity(
                     'Undo',
                     $actor->id,
@@ -142,7 +141,7 @@ class LikeModel extends UuidModel
 
             $undoActivity->set('id', url_to('activity', esc($actor->username), $activityId));
 
-            model(ActivityModel::class)
+            model('ActivityModel')
                 ->update($activityId, [
                     'payload' => $undoActivity->toJSON(),
                 ]);
