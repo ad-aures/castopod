@@ -123,6 +123,23 @@ based on the `.env.example` file.
 
 :::
 
+### Using CLI
+
+1. Create a `.env` file in the package root based on the `.env.example` file.
+2. Initialize the database using:
+
+   ```sh
+   php spark install:init-database
+   ```
+
+3. Create the superadmin user using:
+
+   ```sh
+   php spark install:create-superadmin
+   ```
+
+4. Head on to your admin gateway to start podcasting!
+
 ### Email/SMTP setup
 
 Email configuration is required for some features to work properly (eg.
