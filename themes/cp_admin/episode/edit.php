@@ -274,9 +274,9 @@
     content="<?= esc($episode->custom_rss_string) ?>"
 />
 
-</Forms.Section>
-
 <Forms.Toggler id="block" name="block" value="yes" checked="<?= $episode->is_blocked ? 'true' : 'false' ?>" hint="<?= lang('Episode.form.block_hint') ?>"><?= lang('Episode.form.block') ?></Forms.Toggler>
+
+</Forms.Section>
 
 </form>
 

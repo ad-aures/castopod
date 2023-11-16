@@ -198,15 +198,6 @@ class PodcastController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        if (
-            ($partnerId = $this->request->getPost('partner_id')) === '' ||
-            ($partnerLinkUrl = $this->request->getPost('partner_link_url')) === '' ||
-            ($partnerImageUrl = $this->request->getPost('partner_image_url')) === '') {
-            $partnerId = null;
-            $partnerLinkUrl = null;
-            $partnerImageUrl = null;
-        }
-
         $db = db_connect();
         $db->transStart();
 
@@ -231,13 +222,7 @@ class PodcastController extends BaseController
             'location'    => $this->request->getPost('location_name') === '' ? null : new Location(
                 $this->request->getPost('location_name')
             ),
-            'payment_pointer' => $this->request->getPost(
-                'payment_pointer'
-            ) === '' ? null : $this->request->getPost('payment_pointer'),
             'custom_rss_string'     => $this->request->getPost('custom_rss'),
-            'partner_id'            => $partnerId,
-            'partner_link_url'      => $partnerLinkUrl,
-            'partner_image_url'     => $partnerImageUrl,
             'is_blocked'            => $this->request->getPost('block') === 'yes',
             'is_completed'          => $this->request->getPost('complete') === 'yes',
             'is_locked'             => $this->request->getPost('lock') === 'yes',
@@ -311,15 +296,6 @@ class PodcastController extends BaseController
                 ->with('errors', $this->validator->getErrors());
         }
 
-        if (
-            ($partnerId = $this->request->getPost('partner_id')) === '' ||
-            ($partnerLinkUrl = $this->request->getPost('partner_link_url')) === '' ||
-            ($partnerImageUrl = $this->request->getPost('partner_image_url')) === '') {
-            $partnerId = null;
-            $partnerLinkUrl = null;
-            $partnerImageUrl = null;
-        }
-
         $this->podcast->updated_by = (int) user_id();
 
         $this->podcast->title = $this->request->getPost('title');
@@ -341,16 +317,11 @@ class PodcastController extends BaseController
         $this->podcast->location = $this->request->getPost('location_name') === '' ? null : new Location(
             $this->request->getPost('location_name')
         );
-        $this->podcast->payment_pointer = $this->request->getPost(
-            'payment_pointer'
-        ) === '' ? null : $this->request->getPost('payment_pointer');
         $this->podcast->custom_rss_string = $this->request->getPost('custom_rss');
         $this->podcast->new_feed_url = $this->request->getPost('new_feed_url') === '' ? null : $this->request->getPost(
             'new_feed_url'
         );
-        $this->podcast->partner_id = $partnerId;
-        $this->podcast->partner_link_url = $partnerLinkUrl;
-        $this->podcast->partner_image_url = $partnerImageUrl;
+
         $this->podcast->is_blocked = $this->request->getPost('block') === 'yes';
         $this->podcast->is_completed =
             $this->request->getPost('complete') === 'yes';
@@ -390,6 +361,53 @@ class PodcastController extends BaseController
         $db->transComplete();
 
         return redirect()->route('podcast-edit', [$this->podcast->id])->with(
+            'message',
+            lang('Podcast.messages.editSuccess')
+        );
+    }
+
+    public function monetizationOther(): string
+    {
+        helper('form');
+
+        $data = [
+            'podcast' => $this->podcast,
+        ];
+
+        replace_breadcrumb_params([
+            0 => $this->podcast->at_handle,
+        ]);
+        return view('podcast/monetization_other', $data);
+    }
+
+    public function monetizationOtherAction(): RedirectResponse
+    {
+        if (
+            ($partnerId = $this->request->getPost('partner_id')) === '' ||
+            ($partnerLinkUrl = $this->request->getPost('partner_link_url')) === '' ||
+            ($partnerImageUrl = $this->request->getPost('partner_image_url')) === '') {
+            $partnerId = null;
+            $partnerLinkUrl = null;
+            $partnerImageUrl = null;
+        }
+
+        $this->podcast->payment_pointer = $this->request->getPost(
+            'payment_pointer'
+        ) === '' ? null : $this->request->getPost('payment_pointer');
+
+        $this->podcast->partner_id = $partnerId;
+        $this->podcast->partner_link_url = $partnerLinkUrl;
+        $this->podcast->partner_image_url = $partnerImageUrl;
+
+        $podcastModel = new PodcastModel();
+        if (! $podcastModel->update($this->podcast->id, $this->podcast)) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $podcastModel->errors());
+        }
+
+        return redirect()->route('podcast-monetization-other', [$this->podcast->id])->with(
             'message',
             lang('Podcast.messages.editSuccess')
         );

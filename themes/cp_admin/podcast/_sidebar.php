@@ -12,11 +12,6 @@ $podcastNavigation = [
         'count'       => $podcast->getEpisodesCount(),
         'count-route' => 'episode-list',
     ],
-    'premium' => [
-        'icon'    => 'exchange-dollar',
-        'add-cta' => 'subscription-create',
-        'items'   => ['subscription-list', 'subscription-create'],
-    ],
     'analytics' => [
         'icon'  => 'line-chart',
         'items' => [
@@ -29,20 +24,29 @@ $podcastNavigation = [
             'podcast-analytics-webpages',
         ],
     ],
+    'broadcast' => [
+        'icon'  => 'broadcast',
+        'items' => [
+            'platforms-podcasting',
+            'platforms-social',
+        ],
+    ],
+    'monetization' => [
+        'icon'    => 'money-dollar-circle',
+        'add-cta' => 'subscription-create',
+        'items'   => [
+            'subscription-list',
+            'subscription-create',
+            'platforms-funding',
+            'podcast-monetization-other',
+        ],
+    ],
     'contributors' => [
         'icon'        => 'group',
         'items'       => ['contributor-list', 'contributor-add'],
         'add-cta'     => 'contributor-add',
         'count'       => count($podcast->contributors),
         'count-route' => 'contributor-list',
-    ],
-    'platforms' => [
-        'icon'  => 'link',
-        'items' => [
-            'platforms-podcasting',
-            'platforms-social',
-            'platforms-funding',
-        ],
     ],
 ];
 

@@ -84,7 +84,7 @@ $routes->group(
                 'as'     => 'contributor-list',
                 'filter' => 'permission:podcast#.manage-contributors',
             ]);
-            $routes->get('add', 'ContributorController::add/$1', [
+            $routes->get('add', 'ContributorController::create/$1', [
                 'as'     => 'contributor-add',
                 'filter' => 'permission:podcast#.manage-contributors',
             ]);

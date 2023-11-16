@@ -216,9 +216,10 @@
     hint="<?= lang('Episode.form.custom_rss_hint') ?>"
 />
 
+<Forms.Toggler name="block" value="yes" checked="false" hint="<?= lang('Episode.form.block_hint') ?>"><?= lang('Episode.form.block') ?></Forms.Toggler>
+
 </Forms.Section>
 
-<Forms.Toggler name="block" value="yes" checked="false" hint="<?= lang('Episode.form.block_hint') ?>"><?= lang('Episode.form.block') ?></Forms.Toggler>
 
 <Button class="self-end" variant="primary" type="submit"><?= lang('Episode.form.submit_create') ?></Button>
 

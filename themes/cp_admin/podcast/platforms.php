@@ -12,6 +12,10 @@
 <Button form="platforms-form" variant="primary" type="submit" class="self-end"><?= lang('Platforms.submit') ?></Button>
 <?= $this->endSection() ?>
 
+<?= $this->section('subtitle') ?>
+<p class="max-w-xl text-skin-muted">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quod ex corporis sed et tenetur, doloremque nihil autem odio! Similique nemo in est magnam aspernatur temporibus a architecto quod cupiditate vitae!</p>
+<?= $this->endSection() ?>
+
 <?= $this->section('content') ?>
 
 <form id="platforms-form" action="<?= route_to('platforms-save', $podcast->id, $platformType) ?>" method="POST" class="flex flex-col max-w-md">

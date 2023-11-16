@@ -179,6 +179,14 @@ $routes->group(
                         ],
                     );
                 });
+                $routes->get('monetization-other', 'PodcastController::monetizationOther/$1', [
+                    'as'     => 'podcast-monetization-other',
+                    'filter' => 'permission:podcast#.edit',
+                ]);
+                $routes->post('monetization-other', 'PodcastController::monetizationOtherAction/$1', [
+                    'as'     => 'podcast-monetization-other',
+                    'filter' => 'permission:podcast#.edit',
+                ]);
                 $routes->group('analytics', static function ($routes): void {
                     $routes->get('/', 'PodcastController::viewAnalytics/$1', [
                         'as'     => 'podcast-analytics',

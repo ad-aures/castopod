@@ -32,8 +32,8 @@ $isEpisodeArea = isset($podcast) && isset($episode);
     <?= $this->include('_partials/_nav_header') ?>
     <?= $this->include('_partials/_nav_aside') ?>
     <main class="relative max-w-full col-start-1 row-start-2 col-span-full md:col-start-2 md:col-span-1">
-        <header class="z-40 flex items-center px-4 border-b bg-elevated md:px-12 sticky-header-outer border-subtle">
-            <div class="flex flex-col justify-end w-full -mt-4 sticky-header-inner">
+        <header class="z-40 flex flex-col items-start justify-center px-4 border-b bg-elevated md:px-12 sticky-header-outer border-subtle">
+            <div class="flex flex-col justify-end w-full -mt-4 sticky-header-inner bg-elevated">
                 <?= render_breadcrumb('text-xs items-center flex') ?>
                 <div class="flex justify-between py-1">
                     <div class="flex flex-wrap items-center truncate">
@@ -42,14 +42,15 @@ $isEpisodeArea = isset($podcast) && isset($episode);
                             <IconButton uri="<?= route_to('subscription-list', $podcast->id) ?>" glyph="exchange-dollar" variant="secondary" size="large" class="p-0 mr-2 border-0"><?= ($isEpisodeArea && $episode->is_premium) ? lang('PremiumPodcasts.episode_is_premium') : lang('PremiumPodcasts.podcast_is_premium') ?></IconButton>
                             <Heading tagName="h1" size="large" class="truncate"><?= $this->renderSection('pageTitle') ?></Heading>
                         </div>
-                        <?php else: ?>
+                    <?php else: ?>
                             <Heading tagName="h1" size="large" class="truncate"><?= $this->renderSection('pageTitle') ?></Heading>
-                        <?php endif; ?>
+                    <?php endif; ?>
                         <?= $this->renderSection('headerLeft') ?>
                     </div>
                     <div class="flex items-center flex-shrink-0 gap-x-2"><?= $this->renderSection('headerRight') ?></div>
                 </div>
             </div>
+            <?= $this->renderSection('subtitle') ?>
         </header>
         <?php if ($isPodcastArea): ?>
             <?php if (service('settings')->get('Import.current') === $podcast->handle): ?>
