@@ -12,7 +12,6 @@ namespace Modules\Fediverse\Models;
 
 use CodeIgniter\Events\Events;
 use CodeIgniter\Model;
-use Config\Database;
 use Modules\Fediverse\Config\Fediverse;
 use Modules\Fediverse\Entities\Actor;
 
@@ -283,9 +282,8 @@ class ActorModel extends Model
 
     public function resetPostsCount(): int | false
     {
-        $actorsFollowersCount = $this->db->table($tablePrefix . 'fediverse_posts')->select(
-            'actor_id as id, COUNT(*) as `posts_count`'
-        )
+        $actorsFollowersCount = $this->db->table('fediverse_posts')
+            ->select('actor_id as id, COUNT(*) as `posts_count`')
             ->where([
                 'in_reply_to_id' => null,
             ])
