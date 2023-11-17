@@ -4,7 +4,7 @@
     "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
     "This file is @generated automatically"
   ],
-  "content-hash": "b662d02c852a6a8deffc302daf7c9c75",
+  "content-hash": "00ed57ba2f95cbc550bd85d115e316f3",
   "packages": [
     {
       "name": "adaures/ipcat-php",
@@ -120,16 +120,16 @@
     },
     {
       "name": "aws/aws-sdk-php",
-      "version": "3.286.1",
+      "version": "3.286.3",
       "source": {
         "type": "git",
         "url": "https://github.com/aws/aws-sdk-php.git",
-        "reference": "f3276ecb6e5202452d4b64237e6dc1bc9d350ae6"
+        "reference": "29079a62c6a30ac594b50285494b4dec279b4648"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/f3276ecb6e5202452d4b64237e6dc1bc9d350ae6",
-        "reference": "f3276ecb6e5202452d4b64237e6dc1bc9d350ae6",
+        "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/29079a62c6a30ac594b50285494b4dec279b4648",
+        "reference": "29079a62c6a30ac594b50285494b4dec279b4648",
         "shasum": ""
       },
       "require": {
@@ -205,9 +205,9 @@
       "support": {
         "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
         "issues": "https://github.com/aws/aws-sdk-php/issues",
-        "source": "https://github.com/aws/aws-sdk-php/tree/3.286.1"
+        "source": "https://github.com/aws/aws-sdk-php/tree/3.286.3"
       },
-      "time": "2023-11-14T19:09:59+00:00"
+      "time": "2023-11-16T19:12:53+00:00"
     },
     {
       "name": "brick/math",
@@ -564,12 +564,12 @@
       "source": {
         "type": "git",
         "url": "https://github.com/codeigniter4/tasks.git",
-        "reference": "eef3ec66b9dfa2e9124aad26c1cb1eb761982f9f"
+        "reference": "79444480fe1f7497fc65c5529e21bc4c689aa25a"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/codeigniter4/tasks/zipball/eef3ec66b9dfa2e9124aad26c1cb1eb761982f9f",
-        "reference": "eef3ec66b9dfa2e9124aad26c1cb1eb761982f9f",
+        "url": "https://api.github.com/repos/codeigniter4/tasks/zipball/79444480fe1f7497fc65c5529e21bc4c689aa25a",
+        "reference": "79444480fe1f7497fc65c5529e21bc4c689aa25a",
         "shasum": ""
       },
       "require": {
@@ -638,7 +638,7 @@
         "source": "https://github.com/codeigniter4/tasks/tree/develop",
         "issues": "https://github.com/codeigniter4/tasks/issues"
       },
-      "time": "2023-11-15T12:11:54+00:00"
+      "time": "2023-11-17T06:19:42+00:00"
     },
     {
       "name": "composer/ca-bundle",
@@ -2758,7 +2758,7 @@
     },
     {
       "name": "symfony/deprecation-contracts",
-      "version": "v3.3.0",
+      "version": "v3.4.0",
       "source": {
         "type": "git",
         "url": "https://github.com/symfony/deprecation-contracts.git",
@@ -2801,7 +2801,7 @@
       "description": "A generic function and convention to trigger deprecation notices",
       "homepage": "https://symfony.com",
       "support": {
-        "source": "https://github.com/symfony/deprecation-contracts/tree/v3.3.0"
+        "source": "https://github.com/symfony/deprecation-contracts/tree/v3.4.0"
       },
       "funding": [
         {
@@ -3039,31 +3039,31 @@
     },
     {
       "name": "vlucas/phpdotenv",
-      "version": "v5.5.0",
+      "version": "v5.6.0",
       "source": {
         "type": "git",
         "url": "https://github.com/vlucas/phpdotenv.git",
-        "reference": "1a7ea2afc49c3ee6d87061f5a233e3a035d0eae7"
+        "reference": "2cf9fb6054c2bb1d59d1f3817706ecdb9d2934c4"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/1a7ea2afc49c3ee6d87061f5a233e3a035d0eae7",
-        "reference": "1a7ea2afc49c3ee6d87061f5a233e3a035d0eae7",
+        "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/2cf9fb6054c2bb1d59d1f3817706ecdb9d2934c4",
+        "reference": "2cf9fb6054c2bb1d59d1f3817706ecdb9d2934c4",
         "shasum": ""
       },
       "require": {
         "ext-pcre": "*",
-        "graham-campbell/result-type": "^1.0.2",
-        "php": "^7.1.3 || ^8.0",
-        "phpoption/phpoption": "^1.8",
-        "symfony/polyfill-ctype": "^1.23",
-        "symfony/polyfill-mbstring": "^1.23.1",
-        "symfony/polyfill-php80": "^1.23.1"
+        "graham-campbell/result-type": "^1.1.2",
+        "php": "^7.2.5 || ^8.0",
+        "phpoption/phpoption": "^1.9.2",
+        "symfony/polyfill-ctype": "^1.24",
+        "symfony/polyfill-mbstring": "^1.24",
+        "symfony/polyfill-php80": "^1.24"
       },
       "require-dev": {
-        "bamarni/composer-bin-plugin": "^1.4.1",
+        "bamarni/composer-bin-plugin": "^1.8.2",
         "ext-filter": "*",
-        "phpunit/phpunit": "^7.5.20 || ^8.5.30 || ^9.5.25"
+        "phpunit/phpunit": "^8.5.34 || ^9.6.13 || ^10.4.2"
       },
       "suggest": {
         "ext-filter": "Required to use the boolean validator."
@@ -3075,7 +3075,7 @@
           "forward-command": true
         },
         "branch-alias": {
-          "dev-master": "5.5-dev"
+          "dev-master": "5.6-dev"
         }
       },
       "autoload": {
@@ -3101,7 +3101,7 @@
       "keywords": ["dotenv", "env", "environment"],
       "support": {
         "issues": "https://github.com/vlucas/phpdotenv/issues",
-        "source": "https://github.com/vlucas/phpdotenv/tree/v5.5.0"
+        "source": "https://github.com/vlucas/phpdotenv/tree/v5.6.0"
       },
       "funding": [
         {
@@ -3113,7 +3113,7 @@
           "type": "tidelift"
         }
       ],
-      "time": "2022-10-16T01:01:54+00:00"
+      "time": "2023-11-12T22:43:29+00:00"
     },
     {
       "name": "whichbrowser/parser",
@@ -4430,16 +4430,16 @@
     },
     {
       "name": "rector/rector",
-      "version": "0.18.8",
+      "version": "0.18.10",
       "source": {
         "type": "git",
         "url": "https://github.com/rectorphp/rector.git",
-        "reference": "374bab157a41f6849556edc53125f856eb6c1c8c"
+        "reference": "f36bc0a707fd8af301df5108740ce41f9db8eded"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/rectorphp/rector/zipball/374bab157a41f6849556edc53125f856eb6c1c8c",
-        "reference": "374bab157a41f6849556edc53125f856eb6c1c8c",
+        "url": "https://api.github.com/repos/rectorphp/rector/zipball/f36bc0a707fd8af301df5108740ce41f9db8eded",
+        "reference": "f36bc0a707fd8af301df5108740ce41f9db8eded",
         "shasum": ""
       },
       "require": {
@@ -4463,7 +4463,7 @@
       "keywords": ["automation", "dev", "migration", "refactoring"],
       "support": {
         "issues": "https://github.com/rectorphp/rector/issues",
-        "source": "https://github.com/rectorphp/rector/tree/0.18.8"
+        "source": "https://github.com/rectorphp/rector/tree/0.18.10"
       },
       "funding": [
         {
@@ -4471,7 +4471,7 @@
           "type": "github"
         }
       ],
-      "time": "2023-11-14T15:30:19+00:00"
+      "time": "2023-11-16T19:42:21+00:00"
     },
     {
       "name": "sebastian/cli-parser",
@@ -5631,7 +5631,7 @@
     },
     {
       "name": "symfony/event-dispatcher-contracts",
-      "version": "v3.3.0",
+      "version": "v3.4.0",
       "source": {
         "type": "git",
         "url": "https://github.com/symfony/event-dispatcher-contracts.git",
@@ -5685,7 +5685,7 @@
         "standards"
       ],
       "support": {
-        "source": "https://github.com/symfony/event-dispatcher-contracts/tree/v3.3.0"
+        "source": "https://github.com/symfony/event-dispatcher-contracts/tree/v3.4.0"
       },
       "funding": [
         {
@@ -6163,16 +6163,16 @@
     },
     {
       "name": "symfony/service-contracts",
-      "version": "v3.3.0",
+      "version": "v3.4.0",
       "source": {
         "type": "git",
         "url": "https://github.com/symfony/service-contracts.git",
-        "reference": "40da9cc13ec349d9e4966ce18b5fbcd724ab10a4"
+        "reference": "b3313c2dbffaf71c8de2934e2ea56ed2291a3838"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/symfony/service-contracts/zipball/40da9cc13ec349d9e4966ce18b5fbcd724ab10a4",
-        "reference": "40da9cc13ec349d9e4966ce18b5fbcd724ab10a4",
+        "url": "https://api.github.com/repos/symfony/service-contracts/zipball/b3313c2dbffaf71c8de2934e2ea56ed2291a3838",
+        "reference": "b3313c2dbffaf71c8de2934e2ea56ed2291a3838",
         "shasum": ""
       },
       "require": {
@@ -6221,7 +6221,7 @@
         "standards"
       ],
       "support": {
-        "source": "https://github.com/symfony/service-contracts/tree/v3.3.0"
+        "source": "https://github.com/symfony/service-contracts/tree/v3.4.0"
       },
       "funding": [
         {
@@ -6237,7 +6237,7 @@
           "type": "tidelift"
         }
       ],
-      "time": "2023-05-23T14:45:45+00:00"
+      "time": "2023-07-30T20:28:31+00:00"
     },
     {
       "name": "symfony/stopwatch",

@@ -85,7 +85,7 @@
     title="<?= lang('Podcast.form.fediverse_section_title') ?>" >
 
 <div class="flex flex-col">
-    <Forms.Label for="handle"><?= lang('Podcast.form.handle') ?></Forms.Label>
+    <Forms.Label for="handle" hint="<?= lang('Podcast.form.handle_hint') ?>"><?= lang('Podcast.form.handle') ?></Forms.Label>
     <div class="relative">
         <Icon glyph="at" class="absolute inset-0 h-full text-xl opacity-40 left-3" />
         <Forms.Input name="handle" value="<?= $podcast->handle ?>" class="w-full pl-8" required="true" readonly="true" />

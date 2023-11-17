@@ -14,7 +14,7 @@ class Vite extends BaseConfig
 
     public string $assetsRoot = 'assets';
 
-    public string $manifestFile = 'manifest.json';
+    public string $manifestFile = '.vite/manifest.json';
 
     public string $manifestCSSFile = 'manifest-css.json';
 }

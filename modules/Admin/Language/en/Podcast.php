@@ -22,6 +22,7 @@ return [
     'delete' => 'Delete podcast',
     'see_episodes' => 'See episodes',
     'see_contributors' => 'See contributors',
+    'monetization_other' => 'Other monetization',
     'go_to_page' => 'Go to page',
     'latest_episodes' => 'Latest episodes',
     'see_all_episodes' => 'See all episodes',

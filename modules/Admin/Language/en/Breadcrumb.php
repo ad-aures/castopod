@@ -43,6 +43,7 @@ return [
     'platforms' => 'platforms',
     'social' => 'social networks',
     'funding' => 'funding',
+    'monetization-other' => 'other monetization',
     'analytics' => 'analytics',
     'locations' => 'locations',
     'webpages' => 'web pages',

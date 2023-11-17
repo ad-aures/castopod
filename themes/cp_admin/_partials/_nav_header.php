@@ -20,7 +20,7 @@ $userPodcasts = get_podcasts_user_can_interact_with(auth()->user()); ?>
         </a>
     </div>
     <div class="inline-flex items-center h-full ml-auto">
-        <button type="button" class="relative h-full px-2 focus:ring-accent focus:ring-inset" id="notifications-dropdown" data-dropdown="button" data-dropdown-target="notifications-dropdown-menu" aria-haspopup="true" aria-expanded="false">
+        <button type="button" class="relative h-full px-2 focus:ring-accent focus:ring-inset" id="notifications-dropdown" data-dropdown="button" data-dropdown-target="notifications-dropdown-menu" aria-haspopup="true" aria-expanded="false" title="<?= lang('Notifications.title') ?>" data-tooltip="bottom">
             <?= icon('notification', 'text-2xl opacity-80') ?>
             <?php if (($actorIdsWithUnreadNotifications = get_actor_ids_with_unread_notifications(auth()->user())) !== []): ?>
                 <span class="absolute top-2 right-2 w-2.5 h-2.5 bg-red-500 rounded-full border border-navigation-bg"></span>
@@ -68,7 +68,7 @@ if ($userPodcasts !== []) {
     ];
 }
 ?>
-        <DropdownMenu id="notifications-dropdown-menu" labelledby="notifications-dropdown" items="<?= esc(json_encode($items)) ?>" placement="bottom"/>
+        <DropdownMenu id="notifications-dropdown-menu" labelledby="notifications-dropdown" items="<?= esc(json_encode($items)) ?>" placement="bottom-end"/>
 
         <button
             type="button"

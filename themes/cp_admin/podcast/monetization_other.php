@@ -5,7 +5,7 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('pageTitle') ?>
-<?= lang('Podcast.all_podcasts') ?>
+<?= lang('Podcast.monetization_other') ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>

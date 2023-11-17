@@ -76,13 +76,6 @@ class PlatformSeeder extends Seeder
                 'submit_url' => 'https://castro.fm/support/link-to-your-podcast-in-castro',
             ],
             [
-                'slug'       => 'chartable',
-                'type'       => 'podcasting',
-                'label'      => 'Chartable',
-                'home_url'   => 'https://chartable.com/',
-                'submit_url' => 'https://chartable.com/podcasts/submit',
-            ],
-            [
                 'slug'       => 'deezer',
                 'type'       => 'podcasting',
                 'label'      => 'Deezer',
@@ -390,13 +383,6 @@ class PlatformSeeder extends Seeder
                 'home_url'   => 'https://www.tsacdop.app/',
                 'submit_url' => '',
             ],
-            [
-                'slug'       => 'zion',
-                'type'       => 'podcasting',
-                'label'      => 'Zion',
-                'home_url'   => 'https://zion.fyi/',
-                'submit_url' => 'https://guide.zion.fyi/zion/getting-started',
-            ],
         ];
 
         $fundingData = [
@@ -611,7 +597,7 @@ class PlatformSeeder extends Seeder
                 'type'       => 'social',
                 'label'      => 'YouTube',
                 'home_url'   => 'https://www.youtube.com/',
-                'submit_url' => 'https://creatoracademy.youtube.com/page/home',
+                'submit_url' => 'https://studio.youtube.com/',
             ],
             [
                 'slug'       => 'x',

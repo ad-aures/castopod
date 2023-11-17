@@ -86,7 +86,7 @@ class UserController extends BaseController
      */
     public function attemptCreate(): RedirectResponse
     {
-        helper('text');
+        helper(['text', 'email']);
 
         $db = db_connect();
         $db->transStart();
