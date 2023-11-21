@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 return [
     'go_to_page' => 'Go to podcast page',
+    'rss_feed' => 'RSS feed',
     'dashboard' => 'Podcast dashboard',
     'podcast-view' => 'Home',
     'podcast-edit' => 'Edit podcast',
