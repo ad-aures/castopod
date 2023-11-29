@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Modules\Auth\Config;
 
-use CodeIgniter\Shield\Authentication\Authentication;
 use Config\Services as BaseService;
 use Modules\Auth\Auth;
 use Modules\Auth\Config\Auth as AuthConfig;
@@ -23,6 +22,6 @@ class Services extends BaseService
 
         $config = config(AuthConfig::class);
 
-        return new Auth(new Authentication($config));
+        return new Auth($config);
     }
 }

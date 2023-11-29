@@ -44,9 +44,12 @@ class Auth extends ShieldAuth
      * @var array<string, string>
      */
     public array $redirects = [
-        'register' => '/',
-        'login'    => '/',
-        'logout'   => 'login',
+        'register'          => '/',
+        'login'             => '/',
+        'logout'            => 'login',
+        'force_reset'       => '/',
+        'permission_denied' => '/',
+        'group_denied'      => '/',
     ];
 
     /**
@@ -124,9 +127,12 @@ class Auth extends ShieldAuth
             ->gateway;
 
         $this->redirects = [
-            'register' => $adminGateway,
-            'login'    => $adminGateway,
-            'logout'   => $adminGateway,
+            'register'          => $adminGateway,
+            'login'             => $adminGateway,
+            'logout'            => $adminGateway,
+            'force_reset'       => $adminGateway,
+            'permission_denied' => $adminGateway,
+            'group_denied'      => $adminGateway,
         ];
 
         // FIXME: enable2FA config can only be updated in the .env

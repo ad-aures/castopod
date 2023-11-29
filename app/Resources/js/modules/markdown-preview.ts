@@ -47,6 +47,8 @@ export class MarkdownPreview extends LitElement {
       return link.replace("<a", "<a target='_blank' rel='noopener noreferrer'");
     };
 
+    // @ts-expect-error no extension is setting async: true, this always is to be expected as string
+    // see https://github.com/markedjs/marked/pull/3103
     return marked(this.escapeHtml(this._textarea.value), {
       renderer: renderer,
     });
