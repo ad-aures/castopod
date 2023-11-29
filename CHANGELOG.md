@@ -1,3 +1,51 @@
+# [1.7.0](https://code.castopod.org/adaures/castopod/compare/v1.6.5...v1.7.0) (11/29/2023)
+
+### Bug Fixes
+
+- **admin-ux:** hide navigation submenus in details panel for easier scanning
+  ([b047a3c](https://code.castopod.org/adaures/castopod/commit/b047a3c6707114d04c276758f2e543eef90d72f5))
+- **admin:** remove episode title truncation + display description in two lines
+  in episode list
+  ([f4ffa30](https://code.castopod.org/adaures/castopod/commit/f4ffa30ec4341f43e22b1f983781ad04c956aa25)),
+  closes [#386](https://code.castopod.org/adaures/castopod/issues/386)
+- **auth:** display error messages from validator
+  ([5a834c0](https://code.castopod.org/adaures/castopod/commit/5a834c0f8957fc016e73325a3c3ff05e524d0755))
+- **housekeeping:** remove unnecessary $tablePrefix variable when resetting post
+  count
+  ([97d793f](https://code.castopod.org/adaures/castopod/commit/97d793f55e7eb3b049980e5081950baa2bb1b881)),
+  closes [#383](https://code.castopod.org/adaures/castopod/issues/383)
+- **import:** handle bad values for location attributes
+  ([642981f](https://code.castopod.org/adaures/castopod/commit/642981fd358ccf118d3d7a957fb6be7933c016ac))
+- **import:** use cocur/slugify library to handle non latin text
+  ([4ca7f9c](https://code.castopod.org/adaures/castopod/commit/4ca7f9ccae1e352bf26a3b6db4de73bac7b84382))
+- move monetization outside of podcast form + add broadcast section to podcast
+  menu
+  ([dff8516](https://code.castopod.org/adaures/castopod/commit/dff85168b32a6df77425ef51865588ebcd8b8ba9))
+- **nodeinfo2:** import database config + use dynamic table prefix for active
+  local actors query
+  ([6a7ef01](https://code.castopod.org/adaures/castopod/commit/6a7ef0109a6e52144ca687b979ffe56fba66165b))
+- **persons:** set roles field as optional + set `Cast > Host` as default value
+  ([02132dc](https://code.castopod.org/adaures/castopod/commit/02132dc46640807e2bc4cfc406c911fa097f36fe)),
+  closes [#347](https://code.castopod.org/adaures/castopod/issues/347)
+- **platforms:** make platforms' websites and submit urls more prominent
+  ([61cf8fa](https://code.castopod.org/adaures/castopod/commit/61cf8fa3e2435ee2a9bdd8e711b8d69d4ca4ec4c))
+- **podcast-form:** move fediverse section below author section
+  ([1861d67](https://code.castopod.org/adaures/castopod/commit/1861d67971e2cc0c20ace091f037f6436437a50d))
+- reorder podcast form fields + extract sync feeds to its own form
+  ([2d52fa1](https://code.castopod.org/adaures/castopod/commit/2d52fa1046faf1b8d81304e35fc24a7874315e6e))
+
+### Features
+
+- **admin:** add rss feed link to podcast side navigation
+  ([18e2633](https://code.castopod.org/adaures/castopod/commit/18e2633a49dbbeb57a685f129a2ab158397de61e))
+- **icons:** update new Deezer logo
+  ([f2d5b27](https://code.castopod.org/adaures/castopod/commit/f2d5b272ac385a978d7e173121faafe03d7a7200))
+- **install:** init database and create superadmin using CLI
+  ([02d4ba6](https://code.castopod.org/adaures/castopod/commit/02d4ba69ac007ebd1eccab428a98b54051aaf70c)),
+  closes [#380](https://code.castopod.org/adaures/castopod/issues/380)
+- **ux:** add episode description to episode cards
+  ([5f8d413](https://code.castopod.org/adaures/castopod/commit/5f8d413b84b236077a75934da9409f37d34cb4a5))
+
 ## [1.6.5](https://code.castopod.org/adaures/castopod/compare/v1.6.4...v1.6.5) (2023-09-26)
 
 ### Bug Fixes
