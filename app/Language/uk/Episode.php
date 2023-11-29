@@ -34,4 +34,16 @@ return [
     }',
     'all_podcast_episodes' => 'Всі серії подкастів',
     'back_to_podcast' => 'Повернутися до подкасту',
+    'preview' => [
+        'title' => 'Переглянути',
+        'not_published' => 'Не опубліковано',
+        'text' => '{publication_status, select,
+            published {Цей епізод ще не опублікований.}
+            scheduled {Цей епізод запланований на публікацію {publication_date}.}
+            with_podcast {Цей епізод буде опублікований одночасно з подкастом.}
+            other {Цей епізод ще не опублікований.}
+        }',
+        'publish' => 'Опублікувати',
+        'publish_edit' => 'Редагувати публікацію',
+    ],
 ];

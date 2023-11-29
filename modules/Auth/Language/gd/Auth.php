@@ -85,7 +85,6 @@ return [
     // missing keys
     'code' => 'An còd 6-àireamhach agad',
 
-    'notEnoughPrivilege' => 'Chan fhoghainn an cead agad gus an duilleag sin inntrigeadh.',
     'set_password' => 'Suidhich am facal-faire agad',
 
     // Welcome email

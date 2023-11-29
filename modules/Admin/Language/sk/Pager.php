@@ -9,7 +9,7 @@ declare(strict_types=1);
  */
 
 return [
-    'pageNavigation' => 'Page navigation',
+    'pageNavigation' => 'Navigácia stránky',
     'first' => 'Prvá',
     'previous' => 'Predošlá',
     'next' => 'Ďalšia',

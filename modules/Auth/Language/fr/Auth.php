@@ -85,7 +85,6 @@ return [
     // missing keys
     'code' => 'Votre code à 6 chiffres',
 
-    'notEnoughPrivilege' => 'Vous n\'avez pas les autorisations pour accéder à cette page.',
     'set_password' => 'Choisis ton mot de passe',
 
     // Welcome email

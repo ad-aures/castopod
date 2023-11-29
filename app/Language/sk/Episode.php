@@ -34,4 +34,16 @@ return [
     }',
     'all_podcast_episodes' => 'Všetky epizódy podcastu',
     'back_to_podcast' => 'Späť na podcast',
+    'preview' => [
+        'title' => 'Náhľad',
+        'not_published' => 'Nezverejnená',
+        'text' => '{publication_status, select,
+            published {This episode is not yet published.}
+            scheduled {This episode is scheduled for publication on {publication_date}.}
+            with_podcast {This episode will be published at the same time as the podcast.}
+            other {This episode is not yet published.}
+        }',
+        'publish' => 'Zverejniť',
+        'publish_edit' => 'Edit publication',
+    ],
 ];

@@ -19,14 +19,14 @@ Castopod 的安装非常简单。 你能在大多数兼容的 PHP-MySQL 的服�
 
 ## 要求
 
-- 仅 PHP v8.1
+- PHP v8.1 or higher
 - MySQL 5.7 或更高版本与 MariaDB 10.2 或更高版本
 - HTTPS 支持
 - 用于验证的 [NTP 同步时钟](https://wiki.debian.org/NTP) 传入请求
 
-### 仅 PHP v8.1
+### PHP v8.1 or higher
 
-需要 PHP 8.1，并安装以下扩展：
+PHP version 8.1 or higher is required, with the following extensions installed:
 
 - [intl](https://php.net/manual/en/intl.requirements.php)
 - [libcurl](https://php.net/manual/en/curl.requirements.php)
@@ -112,6 +112,23 @@ Castopod 仅适用于受支持的 MySQL 5.7 或更高版本的兼容数据库。
 那么可以基于 `.env.example` 文件手动创建和编辑 `.env` 文件。
 
 :::
+
+### Using CLI
+
+1. Create a `.env` file in the package root based on the `.env.example` file.
+2. Initialize the database using:
+
+   ```sh
+   php spark install:init-database
+   ```
+
+3. Create the superadmin user using:
+
+   ```sh
+   php spark install:create-superadmin
+   ```
+
+4. Head on to your admin gateway to start podcasting!
 
 ### 邮箱/SMTP 设置
 

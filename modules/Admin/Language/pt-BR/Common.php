@@ -40,6 +40,7 @@ return [
         ],
         'upload_file' => 'Enviar um arquivo',
         'remote_url' => 'URL remota',
+        'save' => 'Save',
     ],
     'play_episode_button' => [
         'play' => 'Reproduzir',

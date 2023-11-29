@@ -85,7 +85,6 @@ return [
     // missing keys
     'code' => 'Código de 6 díxitos',
 
-    'notEnoughPrivilege' => 'Non tes permisos suficientes para acceder a esa páxina.',
     'set_password' => 'Establece un contrasinal',
 
     // Welcome email

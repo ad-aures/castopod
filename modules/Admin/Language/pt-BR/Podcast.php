@@ -22,12 +22,11 @@ return [
     'delete' => 'Excluir podcast',
     'see_episodes' => 'Ver episódios',
     'see_contributors' => 'Ver contribuidores',
+    'monetization_other' => 'Other monetization',
     'go_to_page' => 'Ir para a página',
     'latest_episodes' => 'Últimos episódios',
     'see_all_episodes' => 'Ver todos os episódios',
     'draft' => 'Rascunho',
-    'sync_feed' => 'Sincronizar o feed',
-    'sync_feed_hint' => 'Importar os últimos episódios deste podcast',
     'messages' => [
         'createSuccess' => 'Podcast criado com sucesso!',
         'editSuccess' => 'Podcast foi atualizado com sucesso!',
@@ -59,6 +58,8 @@ return [
     'form' => [
         'identity_section_title' => 'Identidade do podcast',
         'identity_section_subtitle' => 'Esses campos permitem que você seja notado.',
+        'fediverse_section_title' => 'Fediverse identity',
+
         'cover' => 'Capa do podcast',
         'cover_size_hint' => 'A capa deve ser quadrada e ter pelo menos 1400px de largura e altura.',
         'banner' => 'Banner do podcast',
@@ -134,7 +135,6 @@ return [
         'partner_id_hint' => 'Seu próprio ID de parceiro',
         'partner_link_url_hint' => 'O endereço genérico de link do parceiro',
         'partner_image_url_hint' => 'O endereço genérico da imagem de parceiro',
-        'status_section_title' => 'Status',
         'block' => 'O podcast deve ser ocultado dos catálogos públicos',
         'block_hint' =>
             'O status do podcast: ativar isso impede que o podcast inteiro apareça em Apple Podcasts, Google Podcasts e qualquer aplicativo de terceiros que extraia programas desses diretórios. (Não garantido)',

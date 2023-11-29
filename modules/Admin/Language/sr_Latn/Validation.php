@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 return [
     'min_dims' =>
-        '{field} is either not an image, or it is not wide or tall enough.',
+        '{field} ili nije slika ili nije dovoljne dužine/visine.',
     'is_image_ratio' =>
-        '{field} is either not an image or not of the right ratio.',
+        '{field} ili nije slike ili nije u pravom odnosu veličina.',
 ];

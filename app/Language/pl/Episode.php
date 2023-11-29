@@ -32,4 +32,16 @@ return [
     }',
     'all_podcast_episodes' => 'Wszystkie odcinki podcastu',
     'back_to_podcast' => 'Wróć do podkastu',
+    'preview' => [
+        'title' => 'Podgląd',
+        'not_published' => 'Nieopublikowany',
+        'text' => '{publication_status, select,
+            published {Ten odcinek nie jest jeszcze opublikowany.}
+            scheduled {Ten odcinek jest zaplanowany do publikacji {publication_date}.}
+            with_podcast {Ten odcinek zostanie opublikowany w tym samym czasie co podcast.}
+            other {Ten odcinek nie jest jeszcze opublikowany.}
+        }',
+        'publish' => 'Opublikuj',
+        'publish_edit' => 'Edytuj publikację',
+    ],
 ];

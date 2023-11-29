@@ -48,6 +48,12 @@ return [
             'delete' => 'حذف',
         ],
     ],
+    'syncForm' => [
+        'title' => 'Synchronize feeds',
+        'feed_url' => 'Feed URL',
+        'feed_url_hint' => 'The feed URL you want to synchronize with the current podcast.',
+        'submit' => 'Add to queue',
+    ],
     'messages' => [
         'canceled' => 'وظیفهٔ درون‌ریزی با موفّقیت لغو شد!',
         'notRunning' => 'نمی‌توان وظیفهٔ درون‌ریزی را لغو کرد؛ چرا که در حال اجرا نیست.',

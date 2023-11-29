@@ -11,12 +11,12 @@ declare(strict_types=1);
 return [
     'feed' => 'RSS-Feed',
     'season' => 'Staffel {seasonNumber}',
-    'list_of_episodes_year' => '({episodeCount}) Folgen in {year}',
+    'list_of_episodes_year' => '({episodeCount}) Episoden in {year}',
     'list_of_episodes_season' =>
-        'Staffel {seasonNumber} Folgen ({episodeCount})',
-    'no_episode' => 'Keine Folge gefunden',
+        'Staffel {seasonNumber} Episode ({episodeCount})',
+    'no_episode' => 'Keine Episode gefunden!',
     'follow' => 'Folgen',
-    'followTitle' => 'Folge {actorDisplayName} im Fediversum',
+    'followTitle' => 'Folge {actorDisplayName} im Fediversum!',
     'followers' => '{numberOfFollowers, plural,
         one {# Follower}
         other {# Follower}
@@ -28,7 +28,7 @@ return [
     'links' => 'Links',
     'activity' => 'Aktivitäten',
     'episodes' => 'Episoden',
-    'episodes_title' => 'Folgen von {podcastTitle}',
+    'episodes_title' => 'Episoden von {podcastTitle}',
     'about' => 'Über',
     'stats' => [
         'title' => 'Statistiken',
@@ -51,4 +51,5 @@ return [
         other {# Personen}
     }',
     'persons_list' => 'Mitwirkende',
+    'castopod_website' => 'Castopod (website)',
 ];

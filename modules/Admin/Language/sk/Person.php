@@ -29,7 +29,7 @@ return [
         'full_name_hint' => 'This is the full name or alias of the person.',
         'unique_name' => 'Unikátne meno',
         'unique_name_hint' => 'Použité pre URL odkazy',
-        'information_url' => 'Information URL',
+        'information_url' => 'Informačná URL adresa',
         'information_url_hint' =>
             'Url to a relevant resource of information about the person, such as a homepage or third-party profile platform.',
         'submit_create' => 'Vytvoriť osobnosť',

@@ -9,9 +9,22 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => 'Plataformas',
+    'title' => [
+        'podcasting' => 'Podcasting platforms',
+        'social' => 'Social networks',
+        'funding' => 'Funding links',
+    ],
+    'website' => 'Website',
     'home_url' => 'Ir para o site {platformName}',
+    'register' => 'Register',
     'submit_url' => 'Enviar seu podcast para {platformName}',
+    'your_link' => 'Your link',
+    'your_id' => [
+        'podcasting' => 'Your ID',
+        'social' => 'Your ID',
+        'funding' => 'Your CTA',
+    ],
+    'your_cta' => 'Your call to action',
     'visible' => 'Mostrar na página inicial do podcast?',
     'on_embed' => 'Mostrar no player incorporável?',
     'remove' => 'Remover {platformName}',

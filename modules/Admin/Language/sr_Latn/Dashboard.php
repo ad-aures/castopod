@@ -9,20 +9,20 @@ declare(strict_types=1);
  */
 
 return [
-    'home' => 'Admin dashboard',
-    'welcome_message' => 'Welcome to the admin area!',
+    'home' => 'Kontrolna tabla za administratora',
+    'welcome_message' => 'Dobrodošli u deo za administratore!',
     'podcasts' => [
-        'title' => 'Podcasts',
-        'not_found' => 'No published podcast',
-        'last_published' => 'Last published on {lastPublicationDate}',
+        'title' => 'Podkasti',
+        'not_found' => 'Nemate objavljen podkast',
+        'last_published' => 'Poslednja objava {lastPublicationDate}',
     ],
     'episodes' => [
-        'title' => 'Episodes',
-        'not_found' => 'No published episode',
-        'last_published' => 'Last published on {lastPublicationDate}',
+        'title' => 'Epizode',
+        'not_found' => 'Nemate objavljene epizode',
+        'last_published' => 'Poslednja objava {lastPublicationDate}',
     ],
     'storage' => [
-        'title' => 'Storage',
-        'subtitle' => '{totalUploaded} out of {totalStorage}',
+        'title' => 'Prostor',
+        'subtitle' => '{totalUploaded} od {totalStorage}',
     ],
 ];

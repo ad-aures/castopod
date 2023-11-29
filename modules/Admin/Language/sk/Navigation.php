@@ -18,7 +18,7 @@ return [
     'podcast-list' => 'Všetky podcasty',
     'podcast-create' => 'Nový podcast',
     'all-podcast-imports' => 'All Podcast imports',
-    'podcast-imports-add' => 'Import a podcast',
+    'podcast-imports-add' => 'Importovať podcast',
     'persons' => 'Osobnosti',
     'person-list' => 'Všetky osobnosti',
     'person-create' => 'Nová osobnosť',

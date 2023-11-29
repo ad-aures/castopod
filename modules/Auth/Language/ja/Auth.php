@@ -85,7 +85,6 @@ return [
     // missing keys
     'code' => 'Your 6-digit code',
 
-    'notEnoughPrivilege' => 'You do not have sufficient permissions to access that page.',
     'set_password' => 'Set your password',
 
     // Welcome email

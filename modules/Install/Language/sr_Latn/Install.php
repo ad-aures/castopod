@@ -9,54 +9,54 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => 'Castopod installer',
-    'manual_config' => 'Manual configuration',
+    'title' => 'Instalator Castopoda',
+    'manual_config' => 'Ručna konfiguracija',
     'manual_config_subtitle' =>
-        'Create a `.env` file with your settings and refresh the page to continue installation.',
+        'Napravite `.env` datoteku sa vašim podešavanjima i osvežite stranicu da bi ste nastavili instalaciju.',
     'form' => [
-        'instance_config' => 'Instance configuration',
-        'hostname' => 'Hostname',
-        'media_base_url' => 'Media base URL',
+        'instance_config' => 'Konfiguracija instance',
+        'hostname' => 'Ime domaćina',
+        'media_base_url' => 'URL medijske baze',
         'media_base_url_hint' =>
-            'If you use a CDN and/or an external analytics service, you may set them here.',
-        'admin_gateway' => 'Admin gateway',
+            'Ako koristite CDN i/ili eksternu uslugu za analitiku, možete ih postaviti ovde.',
+        'admin_gateway' => 'Administratorski izlaz',
         'admin_gateway_hint' =>
-            'The route to access the admin area (eg. https://example.com/cp-admin). It is set by default as cp-admin, we recommend you change it for security reasons.',
-        'auth_gateway' => 'Auth gateway',
+            'Ruta za pristup kontrolnoj tabli administratora (eg. https://example.com/cp-admin).Podrazumevano je podešena na cp-admin, preporučujemo da je promenite iz sigurnosnih razloga.',
+        'auth_gateway' => 'Auth izlaz',
         'auth_gateway_hint' =>
-            'The route to access the authentication pages (eg. https://example.com/cp-auth). It is set by default as cp-auth, we recommend you change it for security reasons.',
-        'database_config' => 'Database configuration',
+            'Ruta za pristup stranicama za potvrdu identiteta (eg. https://example.com/cp-auth).Podrazumevano je podešena na cp-auth, preporučujemo da je promenite iz sigurnosnih razloga.',
+        'database_config' => 'Konfiguracija baze podataka',
         'database_config_hint' =>
-            'Castopod needs to connect to your MySQL (or MariaDB) database. If you do not have these required info, please contact your server administrator.',
-        'db_hostname' => 'Database hostname',
-        'db_name' => 'Database name',
-        'db_username' => 'Database username',
-        'db_password' => 'Database password',
-        'db_prefix' => 'Database prefix',
+            'Castopod mora da se poveže za vašom MySQL (ili MariaDB) bazom. Ukoliko ne posedujete potrebne informacije, molimo vas kontaktirajte administratora vašeg servera.',
+        'db_hostname' => 'Ime hosta baze podataka',
+        'db_name' => 'Ime baze podataka',
+        'db_username' => 'Korisničko ime baze podataka',
+        'db_password' => 'Lozinka baze podataka',
+        'db_prefix' => 'Prefiks baze',
         'db_prefix_hint' =>
-            "The prefix of the Castopod table names, leave as is if you don't know what it means.",
-        'cache_config' => 'Cache configuration',
+            "Prefiks imena tabela Castopod-a, ne diraj ako ne znaš šta znači.",
+        'cache_config' => 'Konfiguracija keša',
         'cache_config_hint' =>
-            'Choose your preferred cache handler. Leave it as the default value if you have no clue what it means.',
-        'cache_handler' => 'Cache handler',
+            'Izaberite željeni obrađivač keša. Ostavite je kao podrazumevanu vrednost ako nemate pojma šta to znači.',
+        'cache_handler' => 'Obrađivač keša',
         'cacheHandlerOptions' => [
-            'file' => 'File',
+            'file' => 'Datoteka',
             'redis' => 'Redis',
             'predis' => 'Predis',
         ],
-        'next' => 'Next',
-        'submit' => 'Finish install',
-        'create_superadmin' => 'Create your Super Admin account',
-        'email' => 'Email',
-        'username' => 'Username',
-        'password' => 'Password',
+        'next' => 'Sledeće',
+        'submit' => 'Završi instalaciju',
+        'create_superadmin' => 'Kreiraj svoj nalog super administratora',
+        'email' => 'E-pošta',
+        'username' => 'Korisničko ime',
+        'password' => 'Lozinka',
     ],
     'messages' => [
         'createSuperAdminSuccess' =>
-            'Your superadmin account has been created successfully. Login to start podcasting!',
+            'Vaš nalog superadmina je uspešno kreiran. Prijavite se da biste započeli podkasting!',
         'databaseConnectError' =>
-            'Castopod could not connect to your database. Edit your database configuration and try again.',
+            'Castopod nije mogao da se poveže sa vašom bazom podataka. Uredite konfiguraciju baze podataka i pokušajte ponovo.',
         'writeError' =>
-            "Couldn't create/write the `.env` file. You must create it manually by following the `.env.example` file template in the Castopod package.",
+            "Nije moguće kreirati/upisati datoteku `.env`. Morate je kreirati ručno prateći šablon datoteke `.env.example` u Castopod-ovom paketu.",
     ],
 ];

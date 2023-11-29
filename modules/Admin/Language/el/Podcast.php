@@ -22,6 +22,7 @@ return [
     'delete' => 'Διαγραφή podcast',
     'see_episodes' => 'Δείτε επεισόδια',
     'see_contributors' => 'Βλέπε συντελεστές',
+    'monetization_other' => 'Other monetization',
     'go_to_page' => 'Μετάβαση στη σελίδα',
     'latest_episodes' => 'Τελευταία επεισόδια',
     'see_all_episodes' => 'Δείτε όλα τα επεισόδια',
@@ -57,6 +58,8 @@ return [
     'form' => [
         'identity_section_title' => 'Αναγνωριστικό Podcast',
         'identity_section_subtitle' => 'Αυτά τα πεδία σας επιτρέπουν να ξεχωρίσει το podcast σας.',
+        'fediverse_section_title' => 'Fediverse identity',
+
         'cover' => 'Εξώφυλο podcast',
         'cover_size_hint' => 'Το εξώφυλλο πρέπει να είναι τουλάχιστον 1400px πλάτος και ύψος.',
         'banner' => 'Banner podcast',
@@ -132,7 +135,6 @@ return [
         'partner_id_hint' => 'Your own partner ID',
         'partner_link_url_hint' => 'The generic partner link address',
         'partner_image_url_hint' => 'The generic partner image address',
-        'status_section_title' => 'Status',
         'block' => 'Podcast should be hidden from public catalogues',
         'block_hint' =>
             'The podcast show or hide status: toggling this on prevents the entire podcast from appearing in Apple Podcasts, Google Podcasts, and any third party apps that pull shows from these directories. (Not guaranteed)',

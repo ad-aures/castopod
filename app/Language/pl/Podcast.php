@@ -28,7 +28,7 @@ return [
         other {# osób}
     }',
     'links' => 'Links',
-    'activity' => 'Aktywność',
+    'activity' => 'Wpisy',
     'episodes' => 'Odcinki',
     'episodes_title' => 'Odcinki {podcastTitle}',
     'about' => 'Informacje',
@@ -56,4 +56,5 @@ return [
         other {# osób}
     }',
     'persons_list' => 'Osoby',
+    'castopod_website' => 'Castopod (website)',
 ];

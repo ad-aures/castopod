@@ -22,6 +22,7 @@ return [
     'all_podcast_episodes' => '所有播客剧集',
     'back_to_podcast' => '返回播客',
     'edit' => '编辑',
+    'preview' => 'Preview',
     'publish' => '发布',
     'publish_edit' => '编辑发布',
     'publish_date_edit' => '编辑发布日期',
@@ -80,13 +81,13 @@ return [
             audio {音频}
             other {媒体}
         }',
-        'deleteFileError' => '无法删除 {type, select,
-            transcript {字幕}
-            chapters {章节}
-            image {封面}
-            audio {音频}
-            other {媒体}
-        } 文件 {file_path}。您可以手动将其从磁盘删除。',
+        'deleteFileError' => 'Failed to delete {type, select,
+            transcript {transcript}
+            chapters {chapters}
+            image {cover}
+            audio {audio}
+            other {media}
+        } file {file_key}. You may manually remove it from your disk.',
         'sameSlugError' => '选中的剧集已存在。',
     ],
     'form' => [
@@ -210,5 +211,15 @@ return [
         'dark-transparent' => '暗色透明',
         'light' => '亮色',
         'light-transparent' => '亮色透明',
+    ],
+    'publication_status_banner' => [
+        'draft_mode' => 'draft mode',
+        'text' => '{publication_status, select,
+            published {This episode is not yet published.}
+            scheduled {This episode is scheduled for publication on {publication_date}.}
+            with_podcast {This episode will be published at the same time as the podcast.}
+            other {This episode is not yet published.}
+        }',
+        'preview' => 'Preview',
     ],
 ];

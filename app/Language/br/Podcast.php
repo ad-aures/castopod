@@ -131,4 +131,5 @@ return [
         82 {# zen}
     }',
     'persons_list' => 'Emellerien·ezed',
+    'castopod_website' => 'Castopod (website)',
 ];

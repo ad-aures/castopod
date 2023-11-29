@@ -9,9 +9,22 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => 'Platforme',
+    'title' => [
+        'podcasting' => 'Podkasting platforme',
+        'social' => 'Društvene mreže',
+        'funding' => 'Podrška',
+    ],
+    'website' => 'Veb stranica',
     'home_url' => 'Idi na {platformName} stranicu',
+    'register' => 'Rеgistrujte sе',
     'submit_url' => 'Dodaj svoj podkast na {platformName}',
+    'your_link' => 'Vaš link',
+    'your_id' => [
+        'podcasting' => 'Tvoj ID',
+        'social' => 'Tvoj ID',
+        'funding' => 'Tvoj PNA',
+    ],
+    'your_cta' => 'Tvoj poziv na akciju',
     'visible' => 'Prikaži na naslovnoj strani podkasta?',
     'on_embed' => 'Prikaži na embedovanom plejeru?',
     'remove' => 'Ukloni {platformName}',

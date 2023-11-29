@@ -1,87 +1,87 @@
 ---
-title: Authentication & Authorization
+title: Verifikacija i Odobravanje
 sidebarDepth: 3
 ---
 
-# Authentication & Authorization
+# Verifikacija i Odobravanje
 
-Castopod handles authentication and authorization using `codeigniter/shield`
-coupled with custom rules. Roles and permissions are defined at two levels:
+Castopod upravlja verifikacijom i odobravanjem koristeći `codeigniter/shield` u
+paru sa prilagođenim pravilima. Uloge i dozvole su definisane na dva nivoa:
 
-1. [instance wide](#1-instance-wide-roles-and-permissions)
-2. [per podcast](#2-per-podcast-roles-and-permissions)
+1. [po nalogu](#1-instance-wide-roles-and-permissions)
+2. [po podkastu](#2-per-podcast-roles-and-permissions)
 
-## 1. Instance wide roles and permissions
+## 1. Uloge i dozvole po nalogu
 
-### Instance roles
+### Uloge po nalogu
 
 <!-- AUTH-INSTANCE-ROLES-LIST:START - Do not remove or modify this section -->
 
-| role        | description                         | permissions                                                                                |
-| ----------- | ----------------------------------- | ------------------------------------------------------------------------------------------ |
-| Super admin | Has complete control over Castopod. | admin.\*, podcasts.\*, users.manage, persons.manage, pages.manage, fediverse.manage-blocks |
-| Manager     | Manages Castopod's content.         | podcasts.create, podcasts.import, persons.manage, pages.manage                             |
-| Podcaster   | General users of Castopod.          | admin.access                                                                               |
+| uloga               | opis                                         | dozvola                                                                                    |
+| ------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Super administrator | Ima kompletnu kontrolu nad Castopod nalogom. | admin.\*, podcasts.\*, users.manage, persons.manage, pages.manage, fediverse.manage-blocks |
+| Menadžer            | Upravlja sadržajem na Castopod-u.            | podcasts.create, podcasts.import, persons.manage, pages.manage                             |
+| Podkaster           | Opšti korisnici Castopod-a.                  | admin.access                                                                               |
 
 <!-- AUTH-INSTANCE-ROLES-LIST:END -->
 
-### Instance permissions
+### Dozvole po nalogu
 
 <!-- AUTH-INSTANCE-PERMISSIONS-LIST:START - Do not remove or modify this section -->
 
-| permission              | description                                                        |
-| ----------------------- | ------------------------------------------------------------------ |
-| admin.access            | Can access the Castopod admin area.                                |
-| admin.settings          | Can access the Castopod settings.                                  |
-| users.manage            | Can manage Castopod users.                                         |
-| persons.manage          | Can manage persons.                                                |
-| pages.manage            | Can manage pages.                                                  |
-| podcasts.view           | Can view all podcasts.                                             |
-| podcasts.create         | Can create new podcasts.                                           |
-| podcasts.import         | Can import podcasts.                                               |
-| fediverse.manage-blocks | Can block fediverse actors/domains from interacting with Castopod. |
+| dozvola                 | opis                                                            |
+| ----------------------- | --------------------------------------------------------------- |
+| admin.access            | Može pristupiti administratorskom delu Castopod-a.              |
+| admin.settings          | Može pristupiti podešavanjima Castopod-a.                       |
+| users.manage            | Može upravljati korisnicima Castopod-a.                         |
+| persons.manage          | Može upravljati osobama.                                        |
+| pages.manage            | Može upravljati stranicama.                                     |
+| podcasts.view           | Može videti sve podkaste.                                       |
+| podcasts.create         | Može napraviti nove podkaste.                                   |
+| podcasts.import         | Može uvesti nove podkaste.                                      |
+| fediverse.manage-blocks | Može blokirati interakciju Castopoda i fediverse naloga/domena. |
 
 <!-- AUTH-INSTANCE-PERMISSIONS-LIST:END -->
 
-## 2. Per podcast roles and permissions
+## 2. Uloge i dozvole po podkastu
 
-### Per podcast roles
+### Uloge po podkastu
 
 <!-- AUTH-PODCAST-ROLES-LIST:START - Do not remove or modify this section -->
 
-| role   | description                                               | permissions                                                                                                                                                                                                                                                                                 |
-| ------ | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Admin  | Has complete control of podcast #{id}.                    | \*                                                                                                                                                                                                                                                                                          |
-| Editor | Manages content and publications of podcast #{id}.        | view, edit, manage-import, manage-persons, manage-platforms, manage-publications, manage-notifications, interact-as, episodes.view, episodes.create, episodes.edit, episodes.delete, episodes.manage-persons, episodes.manage-clips, episodes.manage-publications, episodes.manage-comments |
-| Author | Manages content of podcast #{id} but cannot publish them. | view, manage-persons, episodes.view, episodes.create, episodes.edit, episodes.manage-persons, episodes.manage-clips                                                                                                                                                                         |
-| Guest  | General contributor of the podcast #{id}.                 | view, episodes.view                                                                                                                                                                                                                                                                         |
+| uloga         | opis                                                        | dozvola                                                                                                                                                                                                                                                                                     |
+| ------------- | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Administrator | Ima kompletnu kontrolu nad podkastom #{id}.                 | \*                                                                                                                                                                                                                                                                                          |
+| Urednik       | Upravlja sadržajem i objavama podkasta #{id}.               | view, edit, manage-import, manage-persons, manage-platforms, manage-publications, manage-notifications, interact-as, episodes.view, episodes.create, episodes.edit, episodes.delete, episodes.manage-persons, episodes.manage-clips, episodes.manage-publications, episodes.manage-comments |
+| Autor         | Upravlja sadržajem podkasta #{id} ali ne može da ga objavi. | view, manage-persons, episodes.view, episodes.create, episodes.edit, episodes.manage-persons, episodes.manage-clips                                                                                                                                                                         |
+| Gost          | Saradnik na podkastu #{id}.                                 | view, episodes.view                                                                                                                                                                                                                                                                         |
 
 <!-- AUTH-PODCAST-ROLES-LIST:END -->
 
-### Per podcast permissions
+### Dozvole po podkastu
 
 <!-- AUTH-PODCAST-PERMISSIONS-LIST:START - Do not remove or modify this section -->
 
-| permission                   | description                                                              |
-| ---------------------------- | ------------------------------------------------------------------------ |
-| view                         | Can view dashboard and analytics of podcast #{id}.                       |
-| edit                         | Can edit podcast #{id}.                                                  |
-| delete                       | Can delete podcast #{id}.                                                |
-| manage-import                | Can synchronize imported podcast #{id}.                                  |
-| manage-persons               | Can manage subscriptions of podcast #{id}.                               |
-| manage-subscriptions         | Can manage subscriptions of podcast #{id}.                               |
-| manage-contributors          | Can manage contributors of podcast #{id}.                                |
-| manage-platforms             | Can set/remove platform links of podcast #{id}.                          |
-| manage-publications          | Can publish podcast #{id}.                                               |
-| manage-notifications         | Can view and mark notifications as read for podcast #{id}.               |
-| interact-as                  | Can interact as the podcast #{id} to favourite, share or reply to posts. |
-| episodes.view                | Can view dashboard and analytics of podcast #{id}.                       |
-| episodes.create              | Can create episodes for podcast #{id}.                                   |
-| episodes.edit                | Can edit podcast #{id}.                                                  |
-| episodes.delete              | Can delete podcast #{id}.                                                |
-| episodes.manage-persons      | Can manage subscriptions of podcast #{id}.                               |
-| episodes.manage-clips        | Can manage video clips or soundbites of podcast #{id}.                   |
-| episodes.manage-publications | Can publish podcast #{id}.                                               |
-| episodes.manage-comments     | Can create/remove episode comments of podcast #{id}.                     |
+| dozvola                      | opis                                                                                   |
+| ---------------------------- | -------------------------------------------------------------------------------------- |
+| view                         | Može videti upravljačku tablu i analitiku podkasta #{id}.                              |
+| edit                         | Može uređivati podkast #{id}.                                                          |
+| delete                       | Može obrisati podkast #{id}.                                                           |
+| manage-import                | Može upravljati uvozom podkasta #{id}.                                                 |
+| manage-persons               | Može upravljati osobama na podkastu #{id}.                                             |
+| manage-subscriptions         | Može upravljati pretplatama na podkast #{id}.                                          |
+| manage-contributors          | Može upravljati saradnicima na podkastu #{id}.                                         |
+| manage-platforms             | Može ubaciti/izbaciti veze ka platformama podkasta #{id}.                              |
+| manage-publications          | Može objaviti podkast #{id}.                                                           |
+| manage-notifications         | Može videti obaveštenja i označiti ih kao pročitana za podkast #{id}.                  |
+| interact-as                  | Može da komunicira kao podkast #{id} i deli, odgovara na i stavlja u omiljene postove. |
+| episodes.view                | Može videti upravljačku tablu i analitiku podkasta #{id}.                              |
+| episodes.create              | Može napraviti epizodu podkasta #{id}.                                                 |
+| episodes.edit                | Može uređivati epizodu podkasta #{id}.                                                 |
+| episodes.delete              | Može obrisati epizodu podkasta #{id}.                                                  |
+| episodes.manage-persons      | Može upravljati pretplatama na podkast #{id}.                                          |
+| episodes.manage-clips        | Može upravljati video klipovima i zvučnim isečcima podkasta #{id}.                     |
+| episodes.manage-publications | Može objaviti podkast #{id}.                                                           |
+| episodes.manage-comments     | Može dodati/obrisati komentar na epizodi podkasta #{id}.                               |
 
 <!-- AUTH-PODCAST-PERMISSIONS-LIST:END -->

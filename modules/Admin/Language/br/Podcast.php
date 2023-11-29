@@ -22,6 +22,7 @@ return [
     'delete' => 'Dilemel ar podkast',
     'see_episodes' => 'Gwelet ar rannoù',
     'see_contributors' => 'Gwelet ar berzhidi, ar perzhiadezed',
+    'monetization_other' => 'Other monetization',
     'go_to_page' => 'Gwelet ar bajenn',
     'latest_episodes' => 'Rannoù diwezhañ',
     'see_all_episodes' => 'Gwelet an holl rannoù',
@@ -60,6 +61,8 @@ return [
     'form' => [
         'identity_section_title' => 'Titouroù diwar-benn ar podkast',
         'identity_section_subtitle' => 'Ar maeziennoù a laka ac\'hanoc\'h da vezañ remerket.',
+        'fediverse_section_title' => 'Fediverse identity',
+
         'cover' => 'Golo ar podkast',
         'cover_size_hint' => 'Ar golo a rankfe bezañ ur c\'harrez ha 1400px e vent da nebeutañ.',
         'banner' => 'Giton ar podkast',
@@ -135,7 +138,6 @@ return [
         'partner_id_hint' => 'Hoc’h ID deoc\'h-c\'hwi e ti ar c\'heveler',
         'partner_link_url_hint' => 'Chomlec\'h generek an ereoù gant ar c\'heveler',
         'partner_image_url_hint' => 'Chomlec\'h generek ar skeudennoù gant ar c\'heveler',
-        'status_section_title' => 'Statud',
         'block' => 'Ar podkast a rankfe bezañ kuzhet diouzh ar rolladoù publik',
         'block_hint' =>
             'Diskouez pe kuzhat ar podkast: trec\'haoliñ an afell-mañ a viro ar podkast a-bezh ouzh bezañ diskouezet war Apple Podcasts, Google Podcasts pe savennoù all hag a implij ar renabloù-se. (N\'eus gwarant ebet)',

@@ -34,4 +34,16 @@ return [
     }',
     'all_podcast_episodes' => 'Все выпуски подкаста',
     'back_to_podcast' => 'Вернуться к подкасту',
+    'preview' => [
+        'title' => 'Предпросмотр',
+        'not_published' => 'Не опубликовано',
+        'text' => '{publication_status, select,
+            published {Этот эпизод еще не опубликован.}
+            scheduled {Этот эпизод запланирован на {publication_date}.}
+            with_podcast {Этот эпизод будет опубликован одновременно с подкастом.}
+            other {Этот эпизод еще не опубликован.}
+        }',
+        'publish' => 'Опубликовать',
+        'publish_edit' => 'Редактировать публикацию',
+    ],
 ];

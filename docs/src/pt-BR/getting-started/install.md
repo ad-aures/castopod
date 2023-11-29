@@ -20,15 +20,15 @@ Se você prefere usar o Docker, você pode pular isso e ir direto para a
 
 ## Requisitos
 
-- Somente PHP v8.1
+- PHP v8.1 or higher
 - MySQL versão 5.7 ou superior ou MariaDB versão 10.2 ou superior
 - Suporte a HTTPS
 - An [ntp-synced clock](https://wiki.debian.org/NTP) to validate federation's
   incoming requests
 
-### Somento PHP v8.1
+### PHP v8.1 or higher
 
-PHP version 8.1 is required, with the following extensions installed:
+PHP version 8.1 or higher is required, with the following extensions installed:
 
 - [intl](https://php.net/manual/en/intl.requirements.php)
 - [libcurl](https://php.net/manual/en/curl.requirements.php)
@@ -125,6 +125,23 @@ go through the install wizard, you can create and edit the `.env` file manually
 based on the `.env.example` file.
 
 :::
+
+### Using CLI
+
+1. Create a `.env` file in the package root based on the `.env.example` file.
+2. Initialize the database using:
+
+   ```sh
+   php spark install:init-database
+   ```
+
+3. Create the superadmin user using:
+
+   ```sh
+   php spark install:create-superadmin
+   ```
+
+4. Head on to your admin gateway to start podcasting!
 
 ### Email/SMTP setup
 

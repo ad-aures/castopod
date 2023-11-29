@@ -22,6 +22,7 @@ return [
     'all_podcast_episodes' => 'Alle Podcast-Episoden',
     'back_to_podcast' => 'Zurück zum Podcast',
     'edit' => 'Bearbeiten',
+    'preview' => 'Vorschau',
     'publish' => 'Veröffentllichen',
     'publish_edit' => 'Veröffentlichung bearbeiten',
     'publish_date_edit' => 'Veröffentlichungsdatum bearbeiten',
@@ -86,7 +87,7 @@ return [
             image {Cover}
             audio {Audio}
             other {Medien}
-        }-Datei {file_path}. Sie können es manuell von der Festplatte entfernen.',
+        }-Datei {file_key}. Sie können es manuell von der Festplatte entfernen.',
         'sameSlugError' => 'Eine Folge mit dem ausgewählten Slug existiert bereits.',
     ],
     'form' => [
@@ -210,5 +211,15 @@ return [
         'dark-transparent' => 'Dunkel (transparent)',
         'light' => 'Hell',
         'light-transparent' => 'Hell (transparent)',
+    ],
+    'publication_status_banner' => [
+        'draft_mode' => 'Entwurfsmodus',
+        'text' => '{publication_status, select,
+            published {Diese Episode ist noch nicht veröffentlicht.}
+            scheduled {Diese Episode ist für die Veröffentlichung geplant am {publication_date}.}
+            with_podcast {Diese Episode wird zur gleichen Zeit wie der Podcast veröffentlicht.}
+            other {Diese Episode ist noch nicht veröffentlicht.}
+        }',
+        'preview' => 'Vorschau',
     ],
 ];

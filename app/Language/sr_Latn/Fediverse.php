@@ -9,7 +9,7 @@ declare(strict_types=1);
  */
 
 return [
-    'your_handle' => 'Your handle',
+    'your_handle' => 'Tvoj nadimak',
     'your_handle_hint' => 'Unesite @username@domain koji želite da koristite.',
     'follow' => [
         'label' => 'Prati',

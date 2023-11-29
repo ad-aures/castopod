@@ -40,6 +40,7 @@ return [
         ],
         'upload_file' => 'Ladda upp en fil',
         'remote_url' => 'Fjärr URL',
+        'save' => 'Save',
     ],
     'play_episode_button' => [
         'play' => 'Spela',

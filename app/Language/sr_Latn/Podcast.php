@@ -25,7 +25,7 @@ return [
         few {# objave}
         other {# objava}
     }',
-    'links' => 'Links',
+    'links' => 'Linkovi',
     'activity' => 'Aktivnost',
     'episodes' => 'Epizode',
     'episodes_title' => 'Epizode {podcastTitle}',
@@ -51,4 +51,5 @@ return [
         other {# osobe}
     }',
     'persons_list' => 'Ličnosti',
+    'castopod_website' => 'Castopod (veb stranica)',
 ];

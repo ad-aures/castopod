@@ -18,10 +18,10 @@ return [
         'submit_reply' => 'Відповісти',
     ],
     'likes' => '{numberOfLikes, plural,
-        one {# лайк}
-        few {# подобається}
-        many {# подобається}
-        other {# подобається}
+        one {# вподобайка}
+        few {# вподобань}
+        many {# вподобань}
+        other {# вподобань}
     }',
     'replies' => '{numberOfReplies, plural,
         one {# коментар}

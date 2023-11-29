@@ -48,6 +48,12 @@ return [
             'delete' => '删除',
         ],
     ],
+    'syncForm' => [
+        'title' => 'Synchronize feeds',
+        'feed_url' => 'Feed URL',
+        'feed_url_hint' => 'The feed URL you want to synchronize with the current podcast.',
+        'submit' => 'Add to queue',
+    ],
     'messages' => [
         'canceled' => '导入任务已成功取消！',
         'notRunning' => '无法取消导入任务，因为它未运行。',

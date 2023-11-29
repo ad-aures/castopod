@@ -22,12 +22,11 @@ return [
     'delete' => '删除播客',
     'see_episodes' => '查看剧集',
     'see_contributors' => '查看贡献者',
+    'monetization_other' => 'Other monetization',
     'go_to_page' => '转到页面',
     'latest_episodes' => '最新剧集',
     'see_all_episodes' => '查看所有剧集',
     'draft' => '草稿',
-    'sync_feed' => '同步摘要',
-    'sync_feed_hint' => '导入此播客的最新剧集',
     'messages' => [
         'createSuccess' => '播客创建成功！',
         'editSuccess' => '播客已更新！',
@@ -59,6 +58,8 @@ return [
     'form' => [
         'identity_section_title' => '播客标识',
         'identity_section_subtitle' => '这些字段可能让你脱颖而出。',
+        'fediverse_section_title' => 'Fediverse identity',
+
         'cover' => '播客封面',
         'cover_size_hint' => '封面必须是方形，而且至少 1400 px 宽度和高度。',
         'banner' => '播客横幅',
@@ -134,7 +135,6 @@ return [
         'partner_id_hint' => '你自己的合作伙伴 ID',
         'partner_link_url_hint' => '通用合作伙伴链接地址',
         'partner_image_url_hint' => '通用合作伙伴图片地址',
-        'status_section_title' => '状态',
         'block' => '播客应该在公共目录中隐藏',
         'block_hint' =>
             '播客显示或隐藏状态：打开此选项可防止整个播客出现在 Apple 播客、Google 播客以及从此目录中提取剧集的任何第三方应用程序中。（不保证）',

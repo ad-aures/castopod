@@ -29,7 +29,7 @@ return [
         many {# príspevkov}
         other {# príspevkov}
     }',
-    'links' => 'Links',
+    'links' => 'Odkazy',
     'activity' => 'Aktivita',
     'episodes' => 'Časti',
     'episodes_title' => 'Časti {podcastTitle}',
@@ -61,4 +61,5 @@ return [
         other {# osobností}
     }',
     'persons_list' => 'Osobnosti',
+    'castopod_website' => 'Castopod (website)',
 ];

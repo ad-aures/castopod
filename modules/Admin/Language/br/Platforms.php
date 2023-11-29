@@ -9,9 +9,22 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => 'Savennoù',
+    'title' => [
+        'podcasting' => 'Podcasting platforms',
+        'social' => 'Social networks',
+        'funding' => 'Funding links',
+    ],
+    'website' => 'Website',
     'home_url' => 'Mont da lec\'hienn {platformName}',
+    'register' => 'Register',
     'submit_url' => 'Kasit ho podkast war {platformName}',
+    'your_link' => 'Your link',
+    'your_id' => [
+        'podcasting' => 'Your ID',
+        'social' => 'Your ID',
+        'funding' => 'Your CTA',
+    ],
+    'your_cta' => 'Your call to action',
     'visible' => 'Diskouez e pajenn ar podkast?',
     'on_embed' => 'Diskouez el lenner enkorfet?',
     'remove' => 'Dilemel {platformName}',

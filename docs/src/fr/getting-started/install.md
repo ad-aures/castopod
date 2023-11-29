@@ -20,15 +20,15 @@ directement à la [documentation Docker](./docker.md) pour Castopod.
 
 ## Prérequis
 
-- PHP v8.1 only
+- PHP v8.1 or higher
 - MySQL version 5.7 ou supérieure ou MariaDB version 10.2 ou supérieure
 - Prise en charge HTTPS
 - An [ntp-synced clock](https://wiki.debian.org/NTP) to validate federation's
   incoming requests
 
-### PHP v8.1 only
+### PHP v8.1 or higher
 
-PHP version 8.1 is required, with the following extensions installed:
+PHP version 8.1 or higher is required, with the following extensions installed:
 
 - [intl](https://www.php.net/manual/fr/intl.requirements.php)
 - [libcurl](https://www.php.net/manual/fr/curl.requirements.php)
@@ -127,6 +127,23 @@ ne pouvez pas passer par l'assistant d'installation, vous pouvez créer et édit
 le fichier `.env` manuellement en vous appuyant sur le fichier `.env.example`.
 
 :::
+
+### Using CLI
+
+1. Create a `.env` file in the package root based on the `.env.example` file.
+2. Initialize the database using:
+
+   ```sh
+   php spark install:init-database
+   ```
+
+3. Create the superadmin user using:
+
+   ```sh
+   php spark install:create-superadmin
+   ```
+
+4. Head on to your admin gateway to start podcasting!
 
 ### Email/SMTP setup
 

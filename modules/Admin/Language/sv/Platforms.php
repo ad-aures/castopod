@@ -9,9 +9,22 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => 'Plattformar',
+    'title' => [
+        'podcasting' => 'Podcasting platforms',
+        'social' => 'Social networks',
+        'funding' => 'Funding links',
+    ],
+    'website' => 'Website',
     'home_url' => 'Gå till {platformName} webbplats',
+    'register' => 'Register',
     'submit_url' => 'Skicka din podcast den {platformName}',
+    'your_link' => 'Your link',
+    'your_id' => [
+        'podcasting' => 'Your ID',
+        'social' => 'Your ID',
+        'funding' => 'Your CTA',
+    ],
+    'your_cta' => 'Your call to action',
     'visible' => 'Visa på podcastens hemsida?',
     'on_embed' => 'Visa på inbäddbar spelare?',
     'remove' => 'Ta bort {platformName}',

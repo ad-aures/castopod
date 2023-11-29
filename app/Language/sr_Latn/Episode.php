@@ -30,4 +30,16 @@ return [
     }',
     'all_podcast_episodes' => 'Sve epizode podkasta',
     'back_to_podcast' => 'Nazad na podkast',
+    'preview' => [
+        'title' => 'Pregled',
+        'not_published' => 'Neobjavljeno',
+        'text' => '{publication_status, select,
+            published {Ova epizoda još uvek nije objavljena.}
+            scheduled {Ova epizoda je zakazana za {publication_date}.}
+            with_podcast {Ova epizoda će biti objavljena kad i podkast.}
+            other {Ova epizoda još uvek nije objavljena.}
+        }',
+        'publish' => 'Objavi',
+        'publish_edit' => 'Uredi objavu',
+    ],
 ];

@@ -22,6 +22,7 @@ return [
     'all_podcast_episodes' => 'كافة حلقات البودكاست',
     'back_to_podcast' => 'العودة إلى البودكاست',
     'edit' => 'تعديل',
+    'preview' => 'Preview',
     'publish' => 'نشر',
     'publish_edit' => 'تعديل المنشور',
     'publish_date_edit' => 'Edit publication date',
@@ -86,7 +87,7 @@ return [
             image {cover}
             audio {audio}
             other {media}
-        } file {file_path}. You may manually remove it from your disk.',
+        } file {file_key}. You may manually remove it from your disk.',
         'sameSlugError' => 'An episode with the chosen slug already exists.',
     ],
     'form' => [
@@ -210,5 +211,15 @@ return [
         'dark-transparent' => 'داكن شفاف',
         'light' => 'Light',
         'light-transparent' => 'Light transparent',
+    ],
+    'publication_status_banner' => [
+        'draft_mode' => 'draft mode',
+        'text' => '{publication_status, select,
+            published {This episode is not yet published.}
+            scheduled {This episode is scheduled for publication on {publication_date}.}
+            with_podcast {This episode will be published at the same time as the podcast.}
+            other {This episode is not yet published.}
+        }',
+        'preview' => 'Preview',
     ],
 ];

@@ -20,15 +20,15 @@ Viss du helst vil bruka Docker, kan du hoppa over dette og gå rett til
 
 ## Krav
 
-- Berre PHP v8.1
+- PHP v8.1 eller nyare
 - MySQL versjon 5.7 eller nyare, eller MariaDB versjon 10.2 eller nyare
 - Støtte for HTTPS
 - Ei [ntp-synkronisert klokke](https://wiki.debian.org/NTP) for å stadfesta
   innkomande førespurnader frå allheimen
 
-### Berre PHP v8.1
+### PHP v8.1 eller nyare
 
-PHP versjon 8.1 med desse utvidingane krevst:
+Du treng PHP versjon 8.1 eller nyare, og mde desse tillegga:
 
 - [intl](https://php.net/manual/en/intl.requirements.php)
 - [libcurl](https://php.net/manual/en/curl.requirements.php)
@@ -123,6 +123,23 @@ gå gjennom den rettleidde installeringa, kan du laga og redigera ei `.env`-fil
 manuelt basert på `.env.example`-fila.
 
 :::
+
+### Using CLI
+
+1. Create a `.env` file in the package root based on the `.env.example` file.
+2. Initialize the database using:
+
+   ```sh
+   php spark install:init-database
+   ```
+
+3. Create the superadmin user using:
+
+   ```sh
+   php spark install:create-superadmin
+   ```
+
+4. Head on to your admin gateway to start podcasting!
 
 ### Epost/SMTP-oppsett
 

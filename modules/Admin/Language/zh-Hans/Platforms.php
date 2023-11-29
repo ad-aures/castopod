@@ -9,9 +9,22 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => '平台',
+    'title' => [
+        'podcasting' => 'Podcasting platforms',
+        'social' => 'Social networks',
+        'funding' => 'Funding links',
+    ],
+    'website' => 'Website',
     'home_url' => '转至 {platformName} 网站',
+    'register' => 'Register',
     'submit_url' => '在 {platformName} 上提交你的播客',
+    'your_link' => 'Your link',
+    'your_id' => [
+        'podcasting' => 'Your ID',
+        'social' => 'Your ID',
+        'funding' => 'Your CTA',
+    ],
+    'your_cta' => 'Your call to action',
     'visible' => '在播客主页上显示？',
     'on_embed' => '在嵌入式播放器上显示？',
     'remove' => '移除 {platformName}',

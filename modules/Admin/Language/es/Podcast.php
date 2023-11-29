@@ -22,6 +22,7 @@ return [
     'delete' => 'Eliminar podcast',
     'see_episodes' => 'Ver episodios',
     'see_contributors' => 'Ver colaboradores',
+    'monetization_other' => 'Other monetization',
     'go_to_page' => 'Ir a la página',
     'latest_episodes' => 'Últimos Episodios',
     'see_all_episodes' => 'Mostrar todos los episodios',
@@ -57,6 +58,8 @@ return [
     'form' => [
         'identity_section_title' => 'Identidad de Podcast',
         'identity_section_subtitle' => 'Estos campos le permiten recibir un aviso.',
+        'fediverse_section_title' => 'Fediverse identity',
+
         'cover' => 'Portada de Podcast',
         'cover_size_hint' => 'La portada debe ser cuadrada y con al menos 1400 px de ancho y alto.',
         'banner' => 'Cartel del Podcast',
@@ -132,7 +135,6 @@ return [
         'partner_id_hint' => 'Su propio ID de socio',
         'partner_link_url_hint' => 'La dirección genérica de enlace de socio',
         'partner_image_url_hint' => 'La dirección de imagen genérica del socio',
-        'status_section_title' => 'Estado',
         'block' => 'El podcast debe ocultarse a los catálogos públicos',
         'block_hint' =>
             'El estado de visibilidad del podcast: al activar esto se impide que este podcast al completo aparezca en Apple Podcasts, Google Podcasts y cualquier aplicación de terceros que extraiga episodios de estos directorios. (no está garantizado al 100%)',

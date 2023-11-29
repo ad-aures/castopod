@@ -22,6 +22,7 @@ return [
     'delete' => 'Supprimer le podcast',
     'see_episodes' => 'Voir les épisodes',
     'see_contributors' => 'Voir les contributeurs',
+    'monetization_other' => 'Other monetization',
     'go_to_page' => 'Aller à la page',
     'latest_episodes' => 'Derniers épisodes',
     'see_all_episodes' => 'Voir tous les épisodes',
@@ -57,6 +58,8 @@ return [
     'form' => [
         'identity_section_title' => 'Informations sur le Podcast',
         'identity_section_subtitle' => 'Ces champs vous permettent de vous faire remarquer.',
+        'fediverse_section_title' => 'Fediverse identity',
+
         'cover' => 'Couverture du podcast',
         'cover_size_hint' => 'La couverture du podcast doit être carrée, avec au minimum 1400px de largeur et de hauteur.',
         'banner' => 'Bannière du podcast',
@@ -132,7 +135,6 @@ return [
         'partner_id_hint' => 'Votre identifiant personnel partenaire',
         'partner_link_url_hint' => 'L’adresse générique des liens partenaire',
         'partner_image_url_hint' => 'L’adresse générique des images partenaire',
-        'status_section_title' => 'Statut',
         'block' => 'L\'épisode doit être masqué dans les catalogues publics',
         'block_hint' =>
             'Le statut d\'affichage ou de masquage du podcast : activer cette option empêche l\'intégralité du podcast d\'apparaître dans les podcasts Apple, Google Podcasts et toutes les applications tierces qui extraient des émissions de ces répertoires. (Pas garantie)',

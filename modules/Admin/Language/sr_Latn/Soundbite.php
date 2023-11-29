@@ -10,22 +10,22 @@ declare(strict_types=1);
 
 return [
     'list' => [
-        'title' => 'Soundbites',
-        'soundbite' => 'Soundbite',
+        'title' => 'Zvučni isečci',
+        'soundbite' => 'Zvučni isečak',
     ],
     'messages' => [
-        'createSuccess' => 'Soundbite has been successfully created!',
-        'deleteSuccess' => 'Soundbite has been successfully removed!',
+        'createSuccess' => 'Zvučni isečak je uspešno kreiran!',
+        'deleteSuccess' => 'Zvučni isečak je uspešno uklonjen!',
     ],
     'form' => [
-        'title' => 'New soundbite',
-        'soundbite_title' => 'Soundbite title',
-        'start_time' => 'Start at',
-        'duration' => 'Duration',
-        'submit' => 'Create soundbite',
+        'title' => 'Novi zvučni isečak',
+        'soundbite_title' => 'Naziv zvučnog isečka',
+        'start_time' => 'Počni na',
+        'duration' => 'Trajanje',
+        'submit' => 'Napravi zvučni isečak',
     ],
-    'play' => 'Play soundbite',
-    'stop' => 'Stop soundbite',
-    'create' => 'New soundbite',
-    'delete' => 'Delete soundbite',
+    'play' => 'Reprodukuj zvučni isečak',
+    'stop' => 'Zaustavi zvučni isečak',
+    'create' => 'Novi zvučni isečak',
+    'delete' => 'Obriši zvučni isečak',
 ];

@@ -22,6 +22,7 @@ return [
     'all_podcast_episodes' => 'Todos os episódios de podcast',
     'back_to_podcast' => 'Voltar para o podcast',
     'edit' => 'Editar',
+    'preview' => 'Preview',
     'publish' => 'Publicar',
     'publish_edit' => 'Editar publicação',
     'publish_date_edit' => 'Editar data de publicação',
@@ -80,13 +81,13 @@ return [
             audio {áudio}
             other {mídia}
         }.',
-        'deleteFileError' => 'Falha ao excluir o arquivo de {type, select,
-            transcript {transcrição}
-            chapters {capítulos}
-            image {capa}
-            audio {áudio}
-            other {mídia}
-        } {file_path}. Você pode removê-lo manualmente do seu disco.',
+        'deleteFileError' => 'Failed to delete {type, select,
+            transcript {transcript}
+            chapters {chapters}
+            image {cover}
+            audio {audio}
+            other {media}
+        } file {file_key}. You may manually remove it from your disk.',
         'sameSlugError' => 'Um episódio com o slug escolhido já existe.',
     ],
     'form' => [
@@ -210,5 +211,15 @@ return [
         'dark-transparent' => 'Escuro translúcido',
         'light' => 'Claro',
         'light-transparent' => 'Claro translúcido',
+    ],
+    'publication_status_banner' => [
+        'draft_mode' => 'draft mode',
+        'text' => '{publication_status, select,
+            published {This episode is not yet published.}
+            scheduled {This episode is scheduled for publication on {publication_date}.}
+            with_podcast {This episode will be published at the same time as the podcast.}
+            other {This episode is not yet published.}
+        }',
+        'preview' => 'Preview',
     ],
 ];

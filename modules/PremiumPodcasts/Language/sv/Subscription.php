@@ -34,7 +34,7 @@ return [
         'email' => 'Epost',
         'expiration_date' => 'Utgångsdatum',
         'expiration_date_hint' => 'Datum och tid då prenumerationen går ut. Lämna tomt för ett obegränsat abonnemang.',
-        'submit_add' => 'Lägg till en prenumeration',
+        'submit_create' => 'Create subscription',
         'submit_edit' => 'Ändra prenumeration',
     ],
     'form_link_add' => [

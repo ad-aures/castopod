@@ -1,56 +1,57 @@
 ---
-title: Installation
+title: Instalacija
 sidebarDepth: 3
 ---
 
-# How to install Castopod?
+# Kako Instalirati Castopod?
 
-Castopod was thought-out to be easy to install. Whether using dedicated or
-shared hosting, you can install it on most PHP-MySQL compatible web servers.
+Zamišljeno je da Castopod bude jednostavan za instalaciju. Bilo da se koristi
+namenski ili deljeni hosting, možete ga instalirati na većinu PHP-MySQL
+kompatibilnih veb servera.
 
-::: tip Note
+::: savet Napomena
 
-We've released official Docker images for Castopod!
+Objavili smo zvanične Docker slike za Castopod!
 
-If you prefer using Docker, you may skip this and go straight to the
-[docker documentation](./docker.md) for Castopod.
+Ako više volite da koristite Docker, možete ovo preskočiti i preći direktno na
+[docker dokumentaciju](./docker.md) za Castopod.
 
 :::
 
-## Requirements
+## Uslovi
 
-- PHP v8.1 only
-- MySQL version 5.7 or higher or MariaDB version 10.2 or higher
-- HTTPS support
-- An [ntp-synced clock](https://wiki.debian.org/NTP) to validate federation's
-  incoming requests
+- PHP v8.1 ili novija verzija
+- MySQL verzija 5.7 ili novija ili MariaDB verzija 10.2 ili novija
+- HTTPS podrška
+- [ntp-sinhronizovani sat](https://viki.debian.org/NTP) za potvrdu dolaznih
+  zahteva federacije
 
-### PHP v8.1 only
+### PHP v8.1 ili kasnija verzija
 
-PHP version 8.1 is required, with the following extensions installed:
+Potrebna je PHP verzija 8.1 ili novija, sa instaliranim sledećim ekstenzijama:
 
 - [intl](https://php.net/manual/en/intl.requirements.php)
 - [libcurl](https://php.net/manual/en/curl.requirements.php)
 - [mbstring](https://php.net/manual/en/mbstring.installation.php)
-- [gd](https://www.php.net/manual/en/image.installation.php) with **JPEG**,
-  **PNG** and **WEBP** libraries.
+- [gd](https://www.php.net/manual/en/image.installation.php) sa **JPEG**,
+  **PNG** i **WEBP** bibliotekama.
 - [exif](https://www.php.net/manual/en/exif.installation.php)
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+Pored toga, uverite se da su sledeće ekstenzije omogućene u vašem PHP-u:
 
-- json (enabled by default - don't turn it off)
-- xml (enabled by default - don't turn it off)
+- json (podrazumevano omogućeno - ne isključujte ga)
+- xml (podrazumevano omogućeno - ne isključujte ga)
 - [mysqlnd](https://php.net/manual/en/mysqlnd.install.php)
 
-### MySQL compatible database
+### MySQL kompatibilne baze podataka
 
-> We recommend using [MariaDB](https://mariadb.org).
+> Preporučujemo korišćenje [MariaDB](https://mariadb.org).
 
-::: warning Warning
+::: upozorenje Upozorenje
 
-Castopod only works with supported MySQL 5.7 or higher compatible databases. It
-will break with the previous MySQL v5.6 for example as its end of life was on
-February 5, 2021.
+Castopod radi samo sa podržanim MySQL 5.7 ili novijim kompatibilnim bazama
+podataka. Kvari se na MySQL v5.6 na primer, jer je njen životni vek istekao 5.
+februara 2021.
 
 :::
 
@@ -122,6 +123,23 @@ through the install wizard, you can create and edit the `.env` file manually
 based on the `.env.example` file.
 
 :::
+
+### Using CLI
+
+1. Create a `.env` file in the package root based on the `.env.example` file.
+2. Initialize the database using:
+
+   ```sh
+   php spark install:init-database
+   ```
+
+3. Create the superadmin user using:
+
+   ```sh
+   php spark install:create-superadmin
+   ```
+
+4. Head on to your admin gateway to start podcasting!
 
 ### Email/SMTP setup
 

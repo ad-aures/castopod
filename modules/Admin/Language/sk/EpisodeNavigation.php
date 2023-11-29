@@ -16,8 +16,8 @@ return [
     'episode-persons-manage' => 'Spravovať osobnosti',
     'embed-add' => 'Vnorený prehrávač',
     'clips' => 'Klipy',
-    'video-clips-list' => 'Video clips',
-    'video-clips-create' => 'New video clip',
+    'video-clips-list' => 'Video klipy',
+    'video-clips-create' => 'Nový video klip',
     'soundbites-list' => 'Soundbites',
     'soundbites-create' => 'Nová zvučka',
 ];

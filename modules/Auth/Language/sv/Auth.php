@@ -85,7 +85,6 @@ return [
     // missing keys
     'code' => 'Din 6-siffriga kod',
 
-    'notEnoughPrivilege' => 'Du har inte tillräcklig behörighet att komma åt sidan.',
     'set_password' => 'Välj ett lösenord',
 
     // Welcome email

@@ -9,39 +9,39 @@ declare(strict_types=1);
  */
 
 return [
-    'podcast_contributors' => 'Podcast contributors',
-    'view' => "{username}'s contribution to {podcastTitle}",
-    'add' => 'Add contributor',
-    'add_contributor' => 'Add a contributor for {0}',
-    'edit_role' => 'Update role for {0}',
-    'edit' => 'Edit',
-    'remove' => 'Remove',
+    'podcast_contributors' => 'Saradnici podkasta',
+    'view' => "{username} doprinos {podcastTitle}",
+    'add' => 'Dodaj saradnika',
+    'add_contributor' => 'Dodaj saradnike za {0}',
+    'edit_role' => 'Uredi ulogu za {0}',
+    'edit' => 'Izmeni',
+    'remove' => 'Ukloni',
     'list' => [
-        'username' => 'Username',
-        'role' => 'Role',
+        'username' => 'Korisničko ime',
+        'role' => 'Uloga',
     ],
     'form' => [
-        'user' => 'User',
-        'user_placeholder' => 'Select a user…',
-        'role' => 'Role',
-        'role_placeholder' => 'Select its role…',
-        'submit_add' => 'Add contributor',
-        'submit_edit' => 'Update role',
+        'user' => 'Korisnik',
+        'user_placeholder' => 'Izaberi korisnika…',
+        'role' => 'Uloga',
+        'role_placeholder' => 'Dodaj ulogu…',
+        'submit_add' => 'Dodaj saradnika',
+        'submit_edit' => 'Ažuriraj ulogu',
     ],
     'delete_form' => [
-        'title' => 'Remove {contributor}',
+        'title' => 'Ukloni {contributor}',
         'disclaimer' =>
-            'You are about to remove {contributor} from contributors. They will not be able to access "{podcastTitle}" anymore.',
-        'understand' => 'I understand, I want to remove {contributor} from "{podcastTitle}"',
-        'submit' => 'Remove',
+            'Obrisaćete {contributor} iz saradnika. Oni neće moći više da pristupe "{podcastTitle}".',
+        'understand' => 'Razumem, želim da uklonim {contributor} iz "{podcastTitle}"',
+        'submit' => 'Ukloni',
     ],
     'messages' => [
-        'editSuccess' => 'Role successfully changed!',
-        'editOwnerError' => "You can't edit the podcast owner!",
-        'removeOwnerError' => "You can't remove the podcast owner!",
+        'editSuccess' => 'Uloga uspešno promenjena!',
+        'editOwnerError' => "Ne možete urediti vlasnika podkasta!",
+        'removeOwnerError' => "Ne možete ukloniti vlasnika podkasta!",
         'removeSuccess' =>
-            'You have successfully removed {username} from {podcastTitle}',
+            'Uspešno ste uklonili {username} iz {podcastTitle}',
         'alreadyAddedError' =>
-            "The contributor you're trying to add has already been added!",
+            "Saradnik kojeg pokušavate dodati je već dodat!",
     ],
 ];

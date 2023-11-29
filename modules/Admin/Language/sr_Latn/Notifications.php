@@ -9,11 +9,11 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => 'Notifications',
-    'reply' => '{actor_username} replied to your post',
-    'favourite' => '{actor_username} favourited your post',
-    'reblog' => '{actor_username} shared your post',
-    'follow' => '{actor_username} started following you',
-    'no_notifications' => 'No notifications',
-    'mark_all_as_read' => 'Mark all as read',
+    'title' => 'Obaveštenja',
+    'reply' => '{actor_username} odgovara na tvoju objavu',
+    'favourite' => '{actor_username} dodaje tvoju objavu u omiljene',
+    'reblog' => '{actor_username} deli tvoju objavu',
+    'follow' => '{actor_username} vas sada prati',
+    'no_notifications' => 'Nema obaveštenja',
+    'mark_all_as_read' => 'Označi svе kao pročitano',
 ];

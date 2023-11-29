@@ -9,10 +9,10 @@ declare(strict_types=1);
  */
 
 return [
-    'info' => 'My account info',
-    'changePassword' => 'Change my password',
+    'info' => 'Infromacije o mom nalogu',
+    'changePassword' => 'Promeni moju lozinku',
     'messages' => [
-        'wrongPasswordError' => "You've entered the wrong password, try again.",
-        'passwordChangeSuccess' => 'Password has been successfully changed!',
+        'wrongPasswordError' => "Uneli ste pogrešnu lozinku, probajte ponovo.",
+        'passwordChangeSuccess' => 'Lozinka je uspešno promenjena!',
     ],
 ];

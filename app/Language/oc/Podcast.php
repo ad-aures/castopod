@@ -51,4 +51,5 @@ return [
         other {# persons}
     }',
     'persons_list' => 'Persons',
+    'castopod_website' => 'Castopod (website)',
 ];

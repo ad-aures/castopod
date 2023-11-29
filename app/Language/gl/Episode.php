@@ -30,4 +30,16 @@ return [
     }',
     'all_podcast_episodes' => 'Tódolos episodios do podcast',
     'back_to_podcast' => 'Volver ao podcast',
+    'preview' => [
+        'title' => 'Vista previa',
+        'not_published' => 'Sen publicar',
+        'text' => '{publication_status, select,
+            published {This episode is not yet published.}
+            scheduled {This episode is scheduled for publication on {publication_date}.}
+            with_podcast {This episode will be published at the same time as the podcast.}
+            other {This episode is not yet published.}
+        }',
+        'publish' => 'Publicar',
+        'publish_edit' => 'Editar publicación',
+    ],
 ];

@@ -22,6 +22,7 @@ return [
     'delete' => 'Suprimir el podcast',
     'see_episodes' => 'Veure els episodis',
     'see_contributors' => 'Veure els col·laboradors',
+    'monetization_other' => 'Other monetization',
     'go_to_page' => 'Anar a la pàgina ',
     'latest_episodes' => 'Darrers episodis',
     'see_all_episodes' => 'Veure tots els episodis',
@@ -57,6 +58,8 @@ return [
     'form' => [
         'identity_section_title' => 'Identitat del podcast',
         'identity_section_subtitle' => 'Aquests camps permeten fer-se notar.',
+        'fediverse_section_title' => 'Fediverse identity',
+
         'cover' => 'Portada del podcast',
         'cover_size_hint' => 'La portada ha de ser quadrada i com a mínim de 1400 px d\'amplada i alçada.',
         'banner' => 'Bàner del podcast',
@@ -132,7 +135,6 @@ return [
         'partner_id_hint' => 'El vostre propi ID de soci',
         'partner_link_url_hint' => 'L\'adreça genèrica de l\'enllaç del soci',
         'partner_image_url_hint' => 'L\'adreça genèrica de la imatge del soci',
-        'status_section_title' => 'Estat',
         'block' => 'El podcast s\'ha d\'amagar als catàlegs públics',
         'block_hint' =>
             'L\'estat de visibilitat del podcast: activar aquesta opció evita que el podcast aparegui a Apple Podcasts, Google Podcasts i qualsevol aplicació de tercers que extreu programes d\'aquests directoris. (No garantit)',

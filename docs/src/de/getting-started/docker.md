@@ -1,5 +1,5 @@
 ---
-title: Official Docker images
+title: Offizielle Docker Images
 sidebarDepth: 3
 ---
 
@@ -112,7 +112,7 @@ kann als Cache-Handler hinzugefügt werden.
 
 ## Umgebungsvariablen
 
-- **castopod/castopod** and **castopod/app**
+- **castopod/castopod** und **castopod/app**
 
   | Variablennamen                        | Typ (`Standard`)        | Standardwert      |
   | ------------------------------------- | ----------------------- | ----------------- |

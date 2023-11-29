@@ -34,7 +34,7 @@ return [
         'email' => 'Post-d',
         'expiration_date' => 'Ceann-là crìochnachaidh',
         'expiration_date_hint' => 'An ceann-là ’s àm a dh’fhalbhas an ùine air an fho-sgrìobhadh. Fàg bàn e airson fo-sgrìobhadh gun chrìoch.',
-        'submit_add' => 'Cuir fo-sgrìobhadh ris',
+        'submit_create' => 'Create subscription',
         'submit_edit' => 'Deasaich am fo-sgrìobhadh',
     ],
     'form_link_add' => [

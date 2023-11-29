@@ -29,15 +29,15 @@ return [
         'submit_edit' => 'Oppdater rolla',
     ],
     'delete_form' => [
-        'title' => 'Remove {contributor}',
+        'title' => 'Fjern {contributor}',
         'disclaimer' =>
-            'You are about to remove {contributor} from contributors. They will not be able to access "{podcastTitle}" anymore.',
-        'understand' => 'I understand, I want to remove {contributor} from "{podcastTitle}"',
-        'submit' => 'Remove',
+            'Du er i ferd med å fjerna {contributor} som bidragsytar. Dei vil mista tilgangen til "{podcastTitle}".',
+        'understand' => 'Eg forstår, og vil fjerna {contributor} frå "{podcastTitle}"',
+        'submit' => 'Fjern',
     ],
     'messages' => [
-        'editSuccess' => 'Role successfully changed!',
-        'editOwnerError' => "You can't edit the podcast owner!",
+        'editSuccess' => 'Rolle endra!',
+        'editOwnerError' => "Du kan ikkje endra podkast-eigaren.",
         'removeOwnerError' => "Du kan ikkje fjerna podkast-eigaren!",
         'removeSuccess' =>
             'Du har fjerna {username} frå {podcastTitle}',

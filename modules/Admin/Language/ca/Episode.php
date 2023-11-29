@@ -22,6 +22,7 @@ return [
     'all_podcast_episodes' => 'Tots els episodis del podcast',
     'back_to_podcast' => 'Tornar al podcast',
     'edit' => 'Editar',
+    'preview' => 'Preview',
     'publish' => 'Publicar',
     'publish_edit' => 'Editar la publicació',
     'publish_date_edit' => 'Edita la data de publicació',
@@ -80,13 +81,13 @@ return [
             audio {l\'àudio}
             other {el material}
         } de l\'episodi.',
-        'deleteFileError' => 'No s\'ha pogut esborrar el fitxer {file_path} {type, select,
-            transcript {de la transcripció}
-            chapters {dels episodis}
-            image {de la portada}
-            audio {de l\'àudio}
-            other {del material}
-        }. Podeu esborrar-los manualment del disc.',
+        'deleteFileError' => 'Failed to delete {type, select,
+            transcript {transcript}
+            chapters {chapters}
+            image {cover}
+            audio {audio}
+            other {media}
+        } file {file_key}. You may manually remove it from your disk.',
         'sameSlugError' => 'Ja existeix un episodi amb aquest àlies.',
     ],
     'form' => [
@@ -210,5 +211,15 @@ return [
         'dark-transparent' => 'Fosc i transparent',
         'light' => 'Clar',
         'light-transparent' => 'Clar i transparent',
+    ],
+    'publication_status_banner' => [
+        'draft_mode' => 'draft mode',
+        'text' => '{publication_status, select,
+            published {This episode is not yet published.}
+            scheduled {This episode is scheduled for publication on {publication_date}.}
+            with_podcast {This episode will be published at the same time as the podcast.}
+            other {This episode is not yet published.}
+        }',
+        'preview' => 'Preview',
     ],
 ];

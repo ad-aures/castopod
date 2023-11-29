@@ -40,6 +40,7 @@ return [
         ],
         'upload_file' => 'Uskargit ur restr',
         'remote_url' => 'URL a-bell',
+        'save' => 'Save',
     ],
     'play_episode_button' => [
         'play' => 'Lenn',

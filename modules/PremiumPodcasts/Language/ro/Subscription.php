@@ -34,7 +34,7 @@ return [
         'email' => 'E-mail',
         'expiration_date' => 'Data expirării',
         'expiration_date_hint' => 'Data și ora la care expiră abonamentul. Lăsați gol pentru un abonament nelimitat.',
-        'submit_add' => 'Adaugă abonament',
+        'submit_create' => 'Create subscription',
         'submit_edit' => 'Editare abonament',
     ],
     'form_link_add' => [

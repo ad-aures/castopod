@@ -34,7 +34,7 @@ return [
         'email' => 'Correo electrónico',
         'expiration_date' => 'Fecha de expiración',
         'expiration_date_hint' => 'La fecha y hora en que caduca la suscripción. Dejar en blanco para una suscripción ilimitada.',
-        'submit_add' => 'Añadir suscripción',
+        'submit_create' => 'Create subscription',
         'submit_edit' => 'Editar la suscripción',
     ],
     'form_link_add' => [

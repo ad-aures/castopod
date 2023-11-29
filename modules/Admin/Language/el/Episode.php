@@ -22,6 +22,7 @@ return [
     'all_podcast_episodes' => 'Όλα τα επεισόδια του podcast',
     'back_to_podcast' => 'Μετάβαση πίσω στο podcast',
     'edit' => 'Επεξεργασία',
+    'preview' => 'Preview',
     'publish' => 'Δημοσίευση',
     'publish_edit' => 'Επεξεργασία δημοσίευσης',
     'publish_date_edit' => 'Επεξεργασία ημερομηνίας δημοσίευσης',
@@ -80,13 +81,13 @@ return [
             audio {ήχος}
             other {πολυμέσα}
         }.',
-        'deleteFileError' => 'Αποτυχία διαγραφής {type, select,
+        'deleteFileError' => 'Failed to delete {type, select,
             transcript {transcript}
-            chapters {κεφάλαια}
-            image {καλύψτε}
-            audio {ήχος}
-            other {πολυμέσα}
-        } αρχείο {file_path}. Μπορείτε να το αφαιρέσετε χειροκίνητα από το δίσκο σας.',
+            chapters {chapters}
+            image {cover}
+            audio {audio}
+            other {media}
+        } file {file_key}. You may manually remove it from your disk.',
         'sameSlugError' => 'Ένα επεισόδιο με το επιλεγμένο slug υπάρχει ήδη.',
     ],
     'form' => [
@@ -210,5 +211,15 @@ return [
         'dark-transparent' => 'Σκούρο διαφανές',
         'light' => 'Ανοιχτόχρωμο',
         'light-transparent' => 'Ανοιχτό διαφανές',
+    ],
+    'publication_status_banner' => [
+        'draft_mode' => 'draft mode',
+        'text' => '{publication_status, select,
+            published {This episode is not yet published.}
+            scheduled {This episode is scheduled for publication on {publication_date}.}
+            with_podcast {This episode will be published at the same time as the podcast.}
+            other {This episode is not yet published.}
+        }',
+        'preview' => 'Preview',
     ],
 ];

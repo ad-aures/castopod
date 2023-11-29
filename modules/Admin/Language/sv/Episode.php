@@ -22,6 +22,7 @@ return [
     'all_podcast_episodes' => 'Alla podcast avsnitt',
     'back_to_podcast' => 'Gå tillbaka till podcasten',
     'edit' => 'Redigera',
+    'preview' => 'Preview',
     'publish' => 'Publicera',
     'publish_edit' => 'Redigera publikation',
     'publish_date_edit' => 'Redigera publiceringsdatum',
@@ -80,13 +81,13 @@ return [
             audio {ljud}
             other {media}
         }.',
-        'deleteFileError' => 'Det gick inte att ta bort {type, select,
+        'deleteFileError' => 'Failed to delete {type, select,
             transcript {transcript}
-            chapters {kapitel}
-            image {omslag}
-            audio {ljud}
+            chapters {chapters}
+            image {cover}
+            audio {audio}
             other {media}
-        } fil {file_path}. Du kan manuellt ta bort den från disken.',
+        } file {file_key}. You may manually remove it from your disk.',
         'sameSlugError' => 'Ett avsnitt med den valda slug finns redan.',
     ],
     'form' => [
@@ -210,5 +211,15 @@ return [
         'dark-transparent' => 'Mörk transparent',
         'light' => 'Ljust',
         'light-transparent' => 'Ljus transparent',
+    ],
+    'publication_status_banner' => [
+        'draft_mode' => 'draft mode',
+        'text' => '{publication_status, select,
+            published {This episode is not yet published.}
+            scheduled {This episode is scheduled for publication on {publication_date}.}
+            with_podcast {This episode will be published at the same time as the podcast.}
+            other {This episode is not yet published.}
+        }',
+        'preview' => 'Preview',
     ],
 ];

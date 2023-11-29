@@ -85,7 +85,6 @@ return [
     // missing keys
     'code' => 'Ihr 6-stelliger Code',
 
-    'notEnoughPrivilege' => 'Sie haben keine ausreichenden Berechtigungen, um auf diese Seite zuzugreifen.',
     'set_password' => 'Legen Sie Ihr Passwort fest',
 
     // Welcome email

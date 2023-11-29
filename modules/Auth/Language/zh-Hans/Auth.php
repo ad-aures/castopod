@@ -85,7 +85,6 @@ return [
     // missing keys
     'code' => '你的6位验证码',
 
-    'notEnoughPrivilege' => '你没有足够的权限访问该页面。',
     'set_password' => '设置你的密码',
 
     // Welcome email

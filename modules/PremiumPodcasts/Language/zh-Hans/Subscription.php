@@ -34,7 +34,7 @@ return [
         'email' => '邮箱',
         'expiration_date' => '到期日',
         'expiration_date_hint' => '订阅到期的日期和时间。 留空时没有订阅限制。',
-        'submit_add' => '添加订阅',
+        'submit_create' => 'Create subscription',
         'submit_edit' => '编辑订阅',
     ],
     'form_link_add' => [

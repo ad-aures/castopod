@@ -9,9 +9,22 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => 'Platformy',
+    'title' => [
+        'podcasting' => 'Podcasting platforms',
+        'social' => 'Social networks',
+        'funding' => 'Funding links',
+    ],
+    'website' => 'Website',
     'home_url' => 'Prejsť na stránku {platformName}',
+    'register' => 'Register',
     'submit_url' => 'Uverejniť podcast na platforme {platformName}',
+    'your_link' => 'Your link',
+    'your_id' => [
+        'podcasting' => 'Your ID',
+        'social' => 'Your ID',
+        'funding' => 'Your CTA',
+    ],
+    'your_cta' => 'Your call to action',
     'visible' => 'Zobraziť na úvodnej stránke podcastu?',
     'on_embed' => 'Zobraziť na vnorenom prehrávači?',
     'remove' => 'Remove {platformName}',

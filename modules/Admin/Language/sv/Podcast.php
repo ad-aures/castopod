@@ -22,6 +22,7 @@ return [
     'delete' => 'Ta bort podcast',
     'see_episodes' => 'Se avsnitt',
     'see_contributors' => 'Se bidragsgivare',
+    'monetization_other' => 'Other monetization',
     'go_to_page' => 'Gå till sida',
     'latest_episodes' => 'Senaste avsnitt',
     'see_all_episodes' => 'Se alla avsnitt',
@@ -57,6 +58,8 @@ return [
     'form' => [
         'identity_section_title' => 'Podcast identitet',
         'identity_section_subtitle' => 'Dessa fält gör att du kan bli uppmärksammad.',
+        'fediverse_section_title' => 'Fediverse identity',
+
         'cover' => 'Podcast omslag',
         'cover_size_hint' => 'Omslaget måste vara fyrkantigt och minst 1400px brett och högt.',
         'banner' => 'Podcast banner',
@@ -132,7 +135,6 @@ return [
         'partner_id_hint' => 'Din egen partner ID',
         'partner_link_url_hint' => 'Den generiska partnerns länkadress',
         'partner_image_url_hint' => 'Den generiska partnerns bildadress',
-        'status_section_title' => 'Status',
         'block' => 'Podcast bör döljas från offentliga kataloger',
         'block_hint' =>
             'Podcasten visar eller dölj status: att växla på detta hindrar hela podcasten från att visas i Apple Podcasts, Google Podcasts, och alla tredjepartsappar som drar program från dessa kataloger. (Inte garanterat)',

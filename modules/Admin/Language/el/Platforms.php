@@ -9,9 +9,22 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => 'Πλατφόρμες',
+    'title' => [
+        'podcasting' => 'Podcasting platforms',
+        'social' => 'Social networks',
+        'funding' => 'Funding links',
+    ],
+    'website' => 'Website',
     'home_url' => 'Μεταβείτε στην ιστοσελίδα {platformName}',
+    'register' => 'Register',
     'submit_url' => 'Υποβάλετε το podcast σας στην πλατφόρμα {platformName}',
+    'your_link' => 'Your link',
+    'your_id' => [
+        'podcasting' => 'Your ID',
+        'social' => 'Your ID',
+        'funding' => 'Your CTA',
+    ],
+    'your_cta' => 'Your call to action',
     'visible' => 'Εμφάνιση στην αρχική σελίδα του podcast;',
     'on_embed' => 'Εμφάνιση σε ενσωματωμένο player;',
     'remove' => 'Κατάργηση {platformName}',

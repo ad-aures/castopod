@@ -22,6 +22,7 @@ return [
     'all_podcast_episodes' => 'Tódolos episodios do podcast',
     'back_to_podcast' => 'Volver ao podcast',
     'edit' => 'Editar',
+    'preview' => 'Vista previa',
     'publish' => 'Publicar',
     'publish_edit' => 'Editar publicación',
     'publish_date_edit' => 'Editar data de publicación',
@@ -55,7 +56,7 @@ return [
         }',
         'episode' => 'Episodio',
         'visibility' => 'Visibilidade',
-        'downloads' => 'Downloads',
+        'downloads' => 'Descargas',
         'comments' => 'Comentarios',
         'actions' => 'Accións',
     ],
@@ -81,12 +82,12 @@ return [
             other {do multimedia}
         } do episodio.',
         'deleteFileError' => 'Fallou a eliminación do ficheiro {type, select,
-            transcript {da transcrición}
-            chapters {dos capítulos}
-            image {da imaxe}
-            audio {do audio}
-            other {do multimedia}
-        } {file_path}. Deberías eliminala manualmente do disco.',
+            transcript {transcript}
+            chapters {chapters}
+            image {cover}
+            audio {audio}
+            other {media}
+        } {file_key}. Deberías eliminalo a man do disco.',
         'sameSlugError' => 'Xa existe un episodio co id de url elexido.',
     ],
     'form' => [
@@ -210,5 +211,15 @@ return [
         'dark-transparent' => 'Escuro transparente',
         'light' => 'Claro',
         'light-transparent' => 'Claro transparente',
+    ],
+    'publication_status_banner' => [
+        'draft_mode' => 'modo borrador',
+        'text' => '{publication_status, select,
+            published {This episode is not yet published.}
+            scheduled {This episode is scheduled for publication on {publication_date}.}
+            with_podcast {This episode will be published at the same time as the podcast.}
+            other {This episode is not yet published.}
+        }',
+        'preview' => 'Vista previa',
     ],
 ];

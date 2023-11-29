@@ -22,12 +22,11 @@ return [
     'delete' => 'حذف پادکست',
     'see_episodes' => 'دیدن قسمت‌ّا',
     'see_contributors' => 'دیدن مشارکت‌کنندگان',
+    'monetization_other' => 'Other monetization',
     'go_to_page' => 'رفتن به صفحه',
     'latest_episodes' => 'جدیدترین قسمت‌ها',
     'see_all_episodes' => 'دیدن تمامی قسمت‌ها',
     'draft' => 'پیش‌نویس',
-    'sync_feed' => 'خوراک هم‌گام شده',
-    'sync_feed_hint' => 'Import this podcast\'s latest episodes',
     'messages' => [
         'createSuccess' => 'Podcast successfully created!',
         'editSuccess' => 'Podcast has been successfully updated!',
@@ -59,6 +58,8 @@ return [
     'form' => [
         'identity_section_title' => 'هویت پادکست',
         'identity_section_subtitle' => 'These fields allow you to get noticed.',
+        'fediverse_section_title' => 'Fediverse identity',
+
         'cover' => 'جلد پادکست',
         'cover_size_hint' => 'جلد باید مربّعی بوده و کمینه ۱۴۰۰ پیکسل پنها و بلندا داشته باشد.',
         'banner' => 'بیرق پادکست',
@@ -134,7 +135,6 @@ return [
         'partner_id_hint' => 'Your own partner ID',
         'partner_link_url_hint' => 'The generic partner link address',
         'partner_image_url_hint' => 'The generic partner image address',
-        'status_section_title' => 'Status',
         'block' => 'Podcast should be hidden from public catalogues',
         'block_hint' =>
             'The podcast show or hide status: toggling this on prevents the entire podcast from appearing in Apple Podcasts, Google Podcasts, and any third party apps that pull shows from these directories. (Not guaranteed)',

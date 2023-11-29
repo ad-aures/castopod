@@ -22,23 +22,24 @@ mit einem sehr kleinen Fußabdruck.
 - 🌱 Kostenlos & Open-Source (AGPL v3 Lizenz)
 - 🔐 &nbsp;Fokussiert auf die Datensouveränität: Ihre Inhalte, Ihr Publikum und
   Analysen gehören zu Ihnen, und&nbsp;nur Ihnen&nbsp;
-- 🪄 &nbsp;Podcasting 2.0 features: GUID, locked, transcripts, funding,
-  chapters, location, persons, soundbites, …
-- 💬 &nbsp;Built-in social network:
-  - 🚀 &nbsp;Castopod is part of the Fediverse, a decentralized social network
-  - ❤️ &nbsp;Create posts, share, favourite, and comment on episodes
-- 📈 &nbsp;Built-in analytics:
-  - ⚖️ &nbsp;GDPR / CCPA / LGPD compliant
-  - 🪙 &nbsp;Standard IABv2 audience measurement
-  - 🏡 &nbsp;On-premises analytics, no third party involved
-- 📢 &nbsp;Built-in marketing tools:
-  - ✅ &nbsp;SEO ready (open-graph meta-tags, JSON-LD, …)
-  - 📱 &nbsp;PWA: install as a standalone app
-  - 🎨 &nbsp;Customizable theme colors
-  - 🎬 &nbsp;Generate ready-to-share Video clips from episodes
-  - 🔉 &nbsp;Generate soundbites
-  - ▶️ &nbsp;Embeddable player, embed your episodes on any website
-- 💸 &nbsp;Monetization:
+- 🪄 &nbsp;Podcasting 2.0 Features: GUID, gesperrt, Transkripte, Finanzierung,
+  Kapitel, Standort, Personen, Soundbites, …
+- 💬 &nbsp;Integriertes soziales Netzwerk:
+  - 🚀 &nbsp;Castopod ist Teil des Fediversums, einem dezentralen sozialen
+    Netzwerk
+  - ❤️ &nbsp;Erstelle Beiträge, teile, favorisiere und kommentiere Episoden
+- 📈 &nbsp;Integrierte Analyse:
+  - ⚖️ &nbsp;GDPR / CCPA / LGPD konform
+  - 🪙 &nbsp;Standard IABv2 Zuschauermessung
+  - 🏡 &nbsp;On-premises Analytik, kein Dritter beteiligt
+- 📢 &nbsp;Integrierte Marketing-Tools:
+  - ✅ &nbsp;SEO bereit (open-graph Meta-Tags, JSON-LD, …)
+  - 📱 &nbsp;PWA: als eigenständige App installieren
+  - 🎨 &nbsp;Anpassbare Theme-Farben
+  - 🎬 &nbsp;Generiere Videoclips aus Episoden fertig zum Teilen
+  - 🔉 &nbsp;Soundbites erstellen
+  - ▶️ &nbsp;Embeddable Player, binde deine Episoden auf jeder Webseite ein
+- 💸 &nbsp;Monetarisierung:
   - 🔗 &nbsp;Funding links
   - 📲 &nbsp;listen-to-click ads
   - 🤝 &nbsp;value4value / WebMonetization

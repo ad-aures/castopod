@@ -9,9 +9,22 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => 'بن‌سازه‌ها',
+    'title' => [
+        'podcasting' => 'Podcasting platforms',
+        'social' => 'Social networks',
+        'funding' => 'Funding links',
+    ],
+    'website' => 'Website',
     'home_url' => 'رفتن به پایگاه وب {platformName}',
+    'register' => 'Register',
     'submit_url' => 'ثبت پادکستتان روی {platformName}',
+    'your_link' => 'Your link',
+    'your_id' => [
+        'podcasting' => 'Your ID',
+        'social' => 'Your ID',
+        'funding' => 'Your CTA',
+    ],
+    'your_cta' => 'Your call to action',
     'visible' => 'نمایش در صفحهٔ خانگی پادکست؟',
     'on_embed' => 'نمایش در پخش‌کنندهٔ تعبیه شده؟',
     'remove' => 'برداشتن {platformName}',

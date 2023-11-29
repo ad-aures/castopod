@@ -40,6 +40,7 @@ return [
         ],
         'upload_file' => 'Otpremite datoteku',
         'remote_url' => 'Daljinski URL',
+        'save' => 'Sačuvaj',
     ],
     'play_episode_button' => [
         'play' => 'Pusti',

@@ -34,7 +34,7 @@ return [
         'email' => 'Email',
         'expiration_date' => 'Data ważności',
         'expiration_date_hint' => 'Data i godzina wygaśnięcia subskrypcji. Pozostaw puste dla nieograniczonej subskrypcji.',
-        'submit_add' => 'Dodaj subskrypcję',
+        'submit_create' => 'Create subscription',
         'submit_edit' => 'Edytuj subskrypcję',
     ],
     'form_link_add' => [

@@ -22,12 +22,11 @@ return [
     'delete' => 'Slett podkasten',
     'see_episodes' => 'Sjå episodane',
     'see_contributors' => 'Sjå bidragsytarane',
+    'monetization_other' => 'Other monetization',
     'go_to_page' => 'Gå til side',
     'latest_episodes' => 'Dei nyaste episodane',
     'see_all_episodes' => 'Sjå alle episodane',
     'draft' => 'Kladd',
-    'sync_feed' => 'Synkroniser straumen',
-    'sync_feed_hint' => 'Importer dei nyaste episodane til denne podkasten',
     'messages' => [
         'createSuccess' => 'Podkasten er oppretta!',
         'editSuccess' => 'Podkasten er oppdatert!',
@@ -59,6 +58,8 @@ return [
     'form' => [
         'identity_section_title' => 'Podkastidentitet',
         'identity_section_subtitle' => 'Desse felta gjer at du blir lagt merke til.',
+        'fediverse_section_title' => 'Fediverse identity',
+
         'cover' => 'Podkastomslag',
         'cover_size_hint' => 'Omslaget må vera kvadratisk, og minst 1400pkt breitt og høgt.',
         'banner' => 'Podkastbanner',
@@ -134,7 +135,6 @@ return [
         'partner_id_hint' => 'Din eigen partnar-ID',
         'partner_link_url_hint' => 'Lenkeadressa til den generelle partnaren',
         'partner_image_url_hint' => 'Biletadressa til den generelle partnaren',
-        'status_section_title' => 'Status',
         'block' => 'Podkasten skal gøymast frå offentlege katalogar',
         'block_hint' =>
             'Vis- eller gøym- status for podkasten: Dersom du skrur på dette, hindrar det heile podkasten frå å syna i Apple podcasts, Google podcasts og andre tredjeparts-appar som hentar podkastar frå desse (men ingen garanti)',

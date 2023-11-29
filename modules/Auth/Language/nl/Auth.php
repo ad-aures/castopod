@@ -85,7 +85,6 @@ return [
     // missing keys
     'code' => 'Jouw 6-cijferige code',
 
-    'notEnoughPrivilege' => 'U heeft niet voldoende rechten om deze pagina te openen.',
     'set_password' => 'Stel je wachtwoord in',
 
     // Welcome email

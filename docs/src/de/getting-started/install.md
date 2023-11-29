@@ -20,15 +20,16 @@ direkt zur [Docker-Dokumentation](./docker.md) für Castopod gehen.
 
 ## Voraussetzungen
 
-- PHP v8.1 only
+- PHP v8.1 oder höher
 - MySQL Version 5.7 oder höher oder MariaDB Version 10.2 oder höher
 - HTTPS-Unterstützung
 - Eine [ntp-synchronisierte Uhr](https://wiki.debian.org/NTP) um die eingehenden
   Anfragen zu überprüfen
 
-### PHP v8.1 only
+### PHP v8.1 oder höher
 
-PHP version 8.1 is required, with the following extensions installed:
+PHP Version 8.1 oder höher ist erforderlich, mit folgenden Erweiterungen
+installiert:
 
 - [intl](https://php.net/manual/en/intl.requirements.php)
 - [libcurl](https://php.net/manual/en/curl.requirements.php)
@@ -85,54 +86,72 @@ nicht installiert: %s:
 
 ### Voraussetzungen
 
-0. Get a Web Server with [requirements](#requirements) installed
-1. Create a MySQL database for Castopod with a user having access and
-   modification privileges (for more info, see
-   [MySQL compatible database](#mysql-compatible-database)).
-2. Activate HTTPS on your domain with an _SSL certificate_.
-3. Download and unzip the latest [Castopod Package](https://castopod.org/) onto
-   the web server if you haven’t already.
-   - ⚠️ Set the web server document root to the `public/` sub-folder within the
-     `castopod` folder.
-4. Add **cron tasks** on your web server for various background processes
-   (replace the paths accordingly):
+0. Treib einen Webserver mit den [Voraussetzungen](#requirements) auf
+1. Erstellen Sie eine MySQL-Datenbank für Castopod mit einem Benutzer mit
+   Zugriffsrechten und Modifikationsberechtigungen (für weitere Infos, Siehe
+   [MySQL kompatible Datenbank](#mysql-compatible-database)).
+2. Aktivieren Sie HTTPS auf Ihrer Domain mit einem _SSL Zertifikat_.
+3. Lade und entpacke das letzte [Castopod Packet](https://castopod.org/) auf den
+   Webserver, wenn nicht schon geschehen.
+   - ⚠️ Setzte das Webserver Document root auf das `public/` Unterverzeichnis
+     innerhalb des `castopod` Ordners.
+4. Füge **cron tasks** auf deinem Webserver hinzu für verschiedene
+   Hintergrundprozesse (ersetze die Pfade entsprechend):
 
    ```bash
       * * * * * /path/to/php /path/to/castopod/spark tasks:run >> /dev/null 2>&1
    ```
 
-   **Note** - If you do not add this cron task, the following Castopod features
-   will not work:
+   **Hinweis** - Wenn Sie diese Cron-Aufgabe nicht hinzufügen, funktionieren die
+   folgenden Castopod-Funktionen nicht:
 
-   - Importing a podcast from an existing RSS feed
-   - Broadcasting social activities to your followers in the fediverse
-   - Broadcasting episodes to open hubs using
-     [WebSub](https://en.wikipedia.org/wiki/WebSub)
-   - Generating video clips -
-     [requires FFmpeg](#optional-ffmpeg-v418-or-higher-for-video-clips)
+   - Einen Podcast aus einem vorhandenen RSS-Feed importieren
+   - Sende soziale Aktivitäten an deine Follower im Fediversum
+   - Übertragungen von Episoden zu open hubs mit
+     [WebSub-](https://en.wikipedia.org/wiki/WebSub)
+   - Generieren von Videoclips -
+     [benötigt FFmpeg](#optional-ffmpeg-v418-or-higher-for-video-clips)
 
-### (recommended) Install Wizard
+### (empfohlen) Installations-Assistent
 
-1. Run the Castopod install script by going to the install wizard page
-   (`https://your_domain_name.com/cp-install`) in your favorite web browser.
-2. Follow the instructions on your screen.
-3. Start podcasting!
+1. Führen Sie das Castopod Installationsskript aus, indem Sie auf die
+   Installations-Seite (`https://your_domain_name.com/cp-install`) in Ihrem
+   bevorzugten Webbrowser gehen.
+2. Folge der Anleitung auf dem Bildschirm.
+3. Podcasting starten!
 
 ::: info Note
 
-The install script writes a `.env` file in the package root. If you cannot go
-through the install wizard, you can create and edit the `.env` file manually
-based on the `.env.example` file.
+Das Installationsskript schreibt eine `.env` Datei im Paket-Root. Wenn Sie nicht
+durch den Installations-Assistenten kommen, können Sie die `.env` Datei manuell
+erstellen und bearbeiten basierend auf der `.env.example` Datei.
 
 :::
 
-### Email/SMTP setup
+### Using CLI
 
-Email configuration is required for some features to work properly (eg.
-retrieving your forgotten password, sending instructions to premium subscribers,
-…)
+1. Create a `.env` file in the package root based on the `.env.example` file.
+2. Initialize the database using:
 
-You may add your email configuration in your instance's `.env` like so:
+   ```sh
+   php spark install:init-database
+   ```
+
+3. Create the superadmin user using:
+
+   ```sh
+   php spark install:create-superadmin
+   ```
+
+4. Head on to your admin gateway to start podcasting!
+
+### Email/SMTP Setup
+
+E-Mail-Konfiguration ist erforderlich, damit einige Funktionen ordnungsgemäß
+funktionieren (zB. das Abrufen Ihres vergessenen Passworts, das Senden von
+Anweisungen an Premium-Abonnenten, …)
+
+Sie können Ihre E-Mail-Konfiguration in `.env` Ihrer Instanz einfügen:
 
 ```ini
 # […]
@@ -145,23 +164,23 @@ email.SMTPUser="your_smtp_user"
 email.SMTPPass="your_smtp_password"
 ```
 
-#### Email config options
+#### E-Mail-Konfigurationsoptionen
 
-| Variable name    | Type                 | Default      |
-| ---------------- | -------------------- | ------------ |
-| **`fromEmail`**  | string               | `undefined`  |
-| **`fromName`**   | string               | `"Castopod"` |
-| **`SMTPHost`**   | string               | `undefined`  |
-| **`SMTPUser`**   | string               | `undefined`  |
-| **`SMTPPass`**   | string               | `undefined`  |
-| **`SMTPPort`**   | number               | `25`         |
-| **`SMTPCrypto`** | [`"tls"` or `"ssl"`] | `"tls"`      |
+| Variablennamen   | Typ                  | Voreinstellung |
+| ---------------- | -------------------- | -------------- |
+| **`fromEmail`**  | string               | `undefined`    |
+| **`fromName`**   | string               | `"Castopod"`   |
+| **`SMTPHost`**   | string               | `undefined`    |
+| **`SMTPUser`**   | string               | `undefined`    |
+| **`SMTPPass`**   | string               | `undefined`    |
+| **`SMTPPort`**   | number               | `25`           |
+| **`SMTPCrypto`** | [`"tls"` or `"ssl"`] | `"tls"`        |
 
 ### Media storage
 
-By default, files are saved to the `public/media` folder using the file system.
-If you need to relocate the `media` folder to a different location, you can
-specify it in your `.env` file as shown below:
+Standardmäßig werden Dateien im Ordner `public/media` über das Dateisystem
+gespeichert. Wenn Sie den Ordner `media` an einen anderen Ort verlegen müssen,
+können Sie es in Ihrer `.env` Datei angeben wie unten gezeigt:
 
 ```ini
 # […]
@@ -170,13 +189,14 @@ media.root="media"
 media.storage="/mnt/storage"
 ```
 
-In this example, the files will be saved to the /mnt/storage/media folder. Make
-sure to also update your web server configuration to reflect this change.
+In diesem Beispiel werden die Dateien im Ordner /mnt/storage/media gespeichert.
+Stellen Sie sicher, dass Sie auch Ihre Webserver-Konfiguration aktualisieren, um
+diese Änderung wiederzugeben.
 
 ### S3
 
-If you prefer storing your media files on an S3 compatible storage, you may
-specify it in your `.env`:
+Wenn Sie Ihre Mediendateien lieber auf einem S3-kompatiblen Speicher speichern
+möchten, können Sie dies in Ihrer `.env` spezifizieren:
 
 ```ini
 # […]
@@ -188,34 +208,34 @@ media.s3.secret="your_s3_secret"
 media.s3.region="your_s3_region"
 ```
 
-#### S3 config options
+#### S3 Konfigurationsoptionen
 
-| Variable name           | Type    | Default     |
-| ----------------------- | ------- | ----------- |
-| **`endpoint`**          | string  | `undefined` |
-| **`key`**               | string  | `undefined` |
-| **`secret`**            | string  | `undefined` |
-| **`region`**            | string  | `undefined` |
-| **`bucket`**            | string  | `castopod`  |
-| **`protocol`**          | number  | `undefined` |
-| **`pathStyleEndpoint`** | boolean | `false`     |
-| **`keyPrefix`**         | string  | `undefined` |
+| Variablennamen          | Typ     | Voreinstellung |
+| ----------------------- | ------- | -------------- |
+| **`endpoint`**          | string  | `undefined`    |
+| **`key`**               | string  | `undefined`    |
+| **`secret`**            | string  | `undefined`    |
+| **`region`**            | string  | `undefined`    |
+| **`bucket`**            | string  | `castopod`     |
+| **`protocol`**          | number  | `undefined`    |
+| **`pathStyleEndpoint`** | boolean | `false`        |
+| **`keyPrefix`**         | string  | `undefined`    |
 
-## Community packages
+## Community-Pakete
 
-If you don't want to bother with installing Castopod manually, you may use one
-of the packages created and maintained by the open-source community.
+Wenn Sie Castopod nicht manuell installieren wollen, können Sie eines der von
+der Open-Source-Community erstellten und betreuten Pakete verwenden.
 
-### Install with YunoHost
+### Installieren mit YunoHost
 
-[YunoHost](https://yunohost.org/) is a distribution based on Debian GNU/Linux
-made up of free and open-source software packages. It manages the hardships of
-self-hosting for you.
+[YunoHost](https://yunohost.org/) ist eine auf Debian GNU/Linux basierende
+Distribution, die aus freien und Open-Source-Software-Paketen besteht. Es
+kümmert sich um den Aufwand von self-hosting für dich.
 
 <div class="flex flex-wrap items-center gap-4">
 
 <a href="https://install-app.yunohost.org/?app=castopod" target="_blank" rel="noopener noreferrer">
-   <img src="https://install-app.yunohost.org/install-with-yunohost.svg" alt="Install Castopod with YunoHost" class="align-middle" />
+   <img src="https://install-app.yunohost.org/install-with-yunohost.svg" alt="Installiere Castopod mit YunoHost" class="align-middle" />
 </a>
 
 <a href="https://github.com/YunoHost-Apps/castopod_ynh" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-4 py-[.3rem] mx-auto font-semibold text-center text-black rounded-md gap-x-1 border-2 border-solid border-[#333] hover:no-underline hover:bg-gray-100"><svg

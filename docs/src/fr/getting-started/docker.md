@@ -8,12 +8,12 @@ sidebarDepth: 3
 Castopod envoie 3 images Docker au Hub Docker pendant son processus de
 construction automatisée :
 
-- [**`castopod/castopod`**](https://hub.docker.com/r/castopod/castopod): an all
-  in one castopod image using nginx unit
-- [**`castopod/app`**](https://hub.docker.com/r/castopod/app): the app bundle
-  with all of Castopod dependencies
-- [**`castopod/web-server`**](https://hub.docker.com/r/castopod/web-server): an
-  Nginx configuration for Castopod
+- [**`castopod/castopod`**](https://hub.docker.com/r/castopod/castopod): une
+  image castopod tout-en-un sous nginx unit
+- [**`castopod/app`**](https://hub.docker.com/r/castopod/app): le paquet
+  d'applications avec toutes les dépendances de Castopod
+- [**`castopod/web-server`**](https://hub.docker.com/r/castopod/web-server): une
+  configuration Nginx pour Castopod
 
 De plus, Castopod nécessite une base de données compatible avec MySQL. Une base
 de données Redis peut être ajoutée en tant que gestionnaire de cache.
@@ -32,31 +32,31 @@ de données Redis peut être ajoutée en tant que gestionnaire de cache.
 2.  Créez un fichier `docker-compose.yml` avec les éléments suivants :
 
     ```yml
-    version: "3.7"
+    version: "3.
 
-    services:
+    services :
       app:
         image: castopod/castopod:latest
         container_name: "castopod-app"
         volumes:
           - castopod-media:/var/www/castopod/public/media
-        environment:
+        environnement:
           MYSQL_DATABASE: castopod
           MYSQL_USER: castopod
           MYSQL_PASSWORD: changeme
-          CP_BASEURL: "https://castopod.example.com"
-          CP_ANALYTICS_SALT: changeme
+          CP_BASEURL: "https://castopod. xample. om"
+          CP_ANALYTICS_SALT : changer
           CP_CACHE_HANDLER: redis
           CP_REDIS_HOST: redis
-        networks:
+        réseaux :
           - castopod-app
           - castopod-db
-        ports:
+        ports :
           - 8000:8000
-        restart: unless-stopped
+        redémarrage :
 
       mariadb:
-        image: mariadb:10.5
+        image: mariadb:10.
         container_name: "castopod-mariadb"
         networks:
           - castopod-db
@@ -66,15 +66,15 @@ de données Redis peut être ajoutée en tant que gestionnaire de cache.
           MYSQL_ROOT_PASSWORD: changeme
           MYSQL_DATABASE: castopod
           MYSQL_USER: castopod
-          MYSQL_PASSWORD: changeme
+          MYSQL_PASSWORD: changez
         restart: unless-stopped
 
       redis:
-        image: redis:7.0-alpine
+        image: redis:redis:7. -alpine
         container_name: "castopod-redis"
         volumes:
           - castopod-cache:/data
-        networks:
+        réseaux:
           - castopod-app
 
     volumes:

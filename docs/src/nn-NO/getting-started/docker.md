@@ -112,48 +112,48 @@ Redis-database for å handtera mellomlagring.
 
 - **castopod/castopod** og **castopod/app**
 
-  | Variabelnamn                          | Type (`standard`)       | Standardval      |
-  | ------------------------------------- | ----------------------- | ---------------- |
-  | **`CP_BASEURL`**                      | streng                  | `udefinert`      |
-  | **`CP_MEDIA_BASEURL`**                | ?streng                 | `CP_BASEURL`     |
-  | **`CP_ADMIN_GATEWAY`**                | ?streng                 | `"cp-admin"`     |
-  | **`CP_AUTH_GATEWAY`**                 | ?string                 | `"cp-auth"`      |
-  | **`CP_ANALYTICS_SALT`**               | string                  | `undefined`      |
-  | **`CP_DATABASE_HOSTNAME`**            | ?string                 | `"mariadb"`      |
-  | **`CP_DATABASE_NAME`**                | ?string                 | `MYSQL_DATABASE` |
-  | **`CP_DATABASE_USERNAME`**            | ?string                 | `MYSQL_USER`     |
-  | **`CP_DATABASE_PASSWORD`**            | ?string                 | `MYSQL_PASSWORD` |
-  | **`CP_DATABASE_PREFIX`**              | ?string                 | `"cp_"`          |
-  | **`CP_CACHE_HANDLER`**                | [`"file"` or `"redis"`] | `"file"`         |
-  | **`CP_REDIS_HOST`**                   | ?string                 | `"localhost"`    |
-  | **`CP_REDIS_PASSWORD`**               | ?string                 | `null`           |
-  | **`CP_REDIS_PORT`**                   | ?number                 | `6379`           |
-  | **`CP_REDIS_DATABASE`**               | ?number                 | `0`              |
-  | **`CP_EMAIL_SMTP_HOST`**              | ?string                 | `undefined`      |
-  | **`CP_EMAIL_FROM`**                   | ?string                 | `undefined`      |
-  | **`CP_EMAIL_SMTP_USERNAME`**          | ?string                 | `"localhost"`    |
-  | **`CP_EMAIL_SMTP_PASSWORD`**          | ?string                 | `null`           |
-  | **`CP_EMAIL_SMTP_PORT`**              | ?number                 | `25`             |
-  | **`CP_EMAIL_SMTP_CRYPTO`**            | [`"tls"` eller `"ssl"`] | `"tls"`          |
-  | **`CP_ENABLE_2FA`**                   | ?boolsk                 | `udefinert`      |
-  | **`CP_MEDIA_FILE_MANAGER`**           | ?streng                 | `udefinert`      |
-  | **`CP_MEDIA_S3_ENDPOINT`**            | ?streng                 | `udefinert`      |
-  | **`CP_MEDIA_S3_KEY`**                 | ?streng                 | `udefinert`      |
-  | **`CP_MEDIA_S3_SECRET`**              | ?streng                 | `udefinert`      |
-  | **`CP_MEDIA_S3_REGION`**              | ?streng                 | `udefinert`      |
-  | **`CP_MEDIA_S3_BUCKET`**              | ?streng                 | `udefinert`      |
-  | **`CP_MEDIA_S3_PROTOCOL`**            | ?tal                    | `udefinert`      |
-  | **`CP_MEDIA_S3_PATH_STYLE_ENDPOINT`** | ?boolsk                 | `udefinert`      |
-  | **`CP_MEDIA_S3_KEY_PREFIX`**          | ?streng                 | `udefinert`      |
-  | **`CP_DISABLE_HTTPS`**                | ?[`0` eller `1`]        | `udefinert`      |
-  | **`CP_MAX_BODY_SIZE`**                | ?tal (med suffiks)      | `512M`           |
-  | **`CP_PHP_MEMORY_LIMIT`**             | ?tal (med suffiks)      | `512M`           |
-  | **`CP_TIMEOUT`**                      | ?tal                    | `900`            |
+  | Variabelnamn                          | Type (`standard`)          | Standardval      |
+  | ------------------------------------- | -------------------------- | ---------------- |
+  | **`CP_BASEURL`**                      | streng                     | `udefinert`      |
+  | **`CP_MEDIA_BASEURL`**                | ?streng                    | `CP_BASEURL`     |
+  | **`CP_ADMIN_GATEWAY`**                | ?streng                    | `"cp-admin"`     |
+  | **`CP_AUTH_GATEWAY`**                 | ?streng                    | `"cp-auth"`      |
+  | **`CP_ANALYTICS_SALT`**               | streng                     | `udefinert`      |
+  | **`CP_DATABASE_HOSTNAME`**            | ?streng                    | `"mariadb"`      |
+  | **`CP_DATABASE_NAME`**                | ?streng                    | `MYSQL_DATABASE` |
+  | **`CP_DATABASE_USERNAME`**            | ?streng                    | `MYSQL_USER`     |
+  | **`CP_DATABASE_PASSWORD`**            | ?streng                    | `MYSQL_PASSORD`  |
+  | **`CP_DATABASE_PREFIX`**              | ?streng                    | `"cp_"`          |
+  | **`CP_CACHE_HANDLER`**                | [`"file"` eller `"redis"`] | `"file"`         |
+  | **`CP_REDIS_HOST`**                   | ?streng                    | `"localhost"`    |
+  | **`CP_REDIS_PASSORD`**                | ?streng                    | `tom`            |
+  | **`CP_REDIS_PORT`**                   | ?tal                       | `6379`           |
+  | **`CP_REDIS_DATABASE`**               | ?tal                       | `0`              |
+  | **`CP_EMAIL_SMTP_HOST`**              | ?streng                    | `udefinert`      |
+  | **`CP_EMAIL_FROM`**                   | ?streng                    | `udefinert`      |
+  | **`CP_EMAIL_SMTP_USERNAME`**          | ?streng                    | `"localhost"`    |
+  | **`CP_EMAIL_SMTP_PASSWORD`**          | ?streng                    | `null`           |
+  | **`CP_EMAIL_SMTP_PORT`**              | ?tal                       | `25`             |
+  | **`CP_EMAIL_SMTP_CRYPTO`**            | [`"tls"` eller `"ssl"`]    | `"tls"`          |
+  | **`CP_ENABLE_2FA`**                   | ?boolsk                    | `udefinert`      |
+  | **`CP_MEDIA_FILE_MANAGER`**           | ?streng                    | `udefinert`      |
+  | **`CP_MEDIA_S3_ENDPOINT`**            | ?streng                    | `udefinert`      |
+  | **`CP_MEDIA_S3_KEY`**                 | ?streng                    | `udefinert`      |
+  | **`CP_MEDIA_S3_SECRET`**              | ?streng                    | `udefinert`      |
+  | **`CP_MEDIA_S3_REGION`**              | ?streng                    | `udefinert`      |
+  | **`CP_MEDIA_S3_BUCKET`**              | ?streng                    | `udefinert`      |
+  | **`CP_MEDIA_S3_PROTOCOL`**            | ?tal                       | `udefinert`      |
+  | **`CP_MEDIA_S3_PATH_STYLE_ENDPOINT`** | ?boolsk                    | `udefinert`      |
+  | **`CP_MEDIA_S3_KEY_PREFIX`**          | ?streng                    | `udefinert`      |
+  | **`CP_DISABLE_HTTPS`**                | ?[`0` eller `1`]           | `udefinert`      |
+  | **`CP_MAX_BODY_SIZE`**                | ?tal (med suffiks)         | `512M`           |
+  | **`CP_PHP_MEMORY_LIMIT`**             | ?tal (med suffiks)         | `512M`           |
+  | **`CP_TIMEOUT`**                      | ?tal                       | `900`            |
 
 - **castopod/web-server**
 
-  | Variabelnamn           | Type                  | Standardval |
-  | ---------------------- | --------------------- | ----------- |
-  | **`CP_APP_HOSTNAME`**  | ?string               | `"app"`     |
-  | **`CP_MAX_BODY_SIZE`** | ?number (with suffix) | `512M`      |
-  | **`CP_TIMEOUT`**       | ?number               | `900`       |
+  | Variabelnamn           | Type               | Standardval |
+  | ---------------------- | ------------------ | ----------- |
+  | **`CP_APP_HOSTNAME`**  | ?streng            | `"app"`     |
+  | **`CP_MAX_BODY_SIZE`** | ?tal (med suffiks) | `512M`      |
+  | **`CP_TIMEOUT`**       | ?tal               | `900`       |

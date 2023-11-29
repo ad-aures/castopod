@@ -9,9 +9,9 @@ declare(strict_types=1);
  */
 
 return [
-    'season' => 'Season {seasonNumber}',
+    'season' => 'Sezona {seasonNumber}',
     'season_abbr' => 'S{seasonNumber}',
-    'number' => 'Episode {episodeNumber}',
+    'number' => 'Epizoda {episodeNumber}',
     'number_abbr' => 'Ep. {episodeNumber}',
     'season_episode' => 'Sezona {seasonNumber} epizoda {episodeNumber}',
     'season_episode_abbr' => 'S{seasonNumber}:E{episodeNumber}',
@@ -22,6 +22,7 @@ return [
     'all_podcast_episodes' => 'Sve epizode podkasta',
     'back_to_podcast' => 'Nazad na podkast',
     'edit' => 'Izmeni',
+    'preview' => 'Pregled',
     'publish' => 'Objavi',
     'publish_edit' => 'Uredi objavu',
     'publish_date_edit' => 'Uredi datum objave',
@@ -55,7 +56,7 @@ return [
         }',
         'episode' => 'Epizoda',
         'visibility' => 'Vidljivost',
-        'downloads' => 'Downloads',
+        'downloads' => 'Preuzimanja',
         'comments' => 'Komentari',
         'actions' => 'Akcije',
     ],
@@ -86,7 +87,7 @@ return [
             image {omota}
             audio {zvuka}
             other {medija}
-        } datoteke {file_path}. Možete je ukloniti ručno sa diska.',
+        } datoteke {file_key}. Možete je ukloniti ručno sa vašeg diska.',
         'sameSlugError' => 'Odabrano URL ime (slug) epizode već postoji.',
     ],
     'form' => [
@@ -156,7 +157,7 @@ return [
         'custom_rss_hint' => 'Ovo će biti ubačeno u ❬item❭ tag.',
         'block' => 'Epizoda treba biti sakriivena u javnim katalozima',
         'block_hint' =>
-            'The episode show or hide status: toggling this on prevents the episode from appearing in Apple Podcasts, Google Podcasts, and any third party apps that pull shows from these directories. (Not guaranteed)',
+            'Prikazan ili sakriven status epizode: ukoliko uključite ovu opciju onemogućavate prikazivanje vaše epizode na paltformama za slušanje podkasta kao što su Apple Podcasts, Google Podcasts i sličnim direktorijima. (Nije zagarantovano)',
         'submit_create' => 'Kreiraj epizodu',
         'submit_edit' => 'Sačuvaj epizodu',
     ],
@@ -210,5 +211,15 @@ return [
         'dark-transparent' => 'Tamna providna',
         'light' => 'Svetla',
         'light-transparent' => 'Svetla providna',
+    ],
+    'publication_status_banner' => [
+        'draft_mode' => 'režim nacrta',
+        'text' => '{publication_status, select,
+            published {Ova epizoda još uvek nije objavljena.}
+            scheduled {Ova epizoda je zakazana za {publication_date}.}
+            with_podcast {Ova epizoda će biti objavljena kad i podkast.}
+            other {Ova epizoda još uvek nije objavljena.}
+        }',
+        'preview' => 'Pregled',
     ],
 ];

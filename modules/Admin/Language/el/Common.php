@@ -40,6 +40,7 @@ return [
         ],
         'upload_file' => 'Μεταφορτώστε ένα αρχείο',
         'remote_url' => 'Απομακρυσμένη διεύθυνση URL',
+        'save' => 'Save',
     ],
     'play_episode_button' => [
         'play' => 'Αναπαραγωγή',

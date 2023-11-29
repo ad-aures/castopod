@@ -40,6 +40,7 @@ return [
         ],
         'upload_file' => 'Eine Datei hochladen',
         'remote_url' => 'Externe URL',
+        'save' => 'Save',
     ],
     'play_episode_button' => [
         'play' => 'Abspielen',

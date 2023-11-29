@@ -22,6 +22,7 @@ return [
     'delete' => 'Delete podcast',
     'see_episodes' => 'See episodes',
     'see_contributors' => 'See contributors',
+    'monetization_other' => 'Other monetization',
     'go_to_page' => 'الانتقال إلى الصفحة',
     'latest_episodes' => 'أحدث الحلقات',
     'see_all_episodes' => 'See all episodes',
@@ -57,6 +58,8 @@ return [
     'form' => [
         'identity_section_title' => 'Podcast identity',
         'identity_section_subtitle' => 'These fields allow you to get noticed.',
+        'fediverse_section_title' => 'Fediverse identity',
+
         'cover' => 'Podcast cover',
         'cover_size_hint' => 'Cover must be squared and at least 1400px wide and tall.',
         'banner' => 'Podcast banner',
@@ -132,7 +135,6 @@ return [
         'partner_id_hint' => 'Your own partner ID',
         'partner_link_url_hint' => 'The generic partner link address',
         'partner_image_url_hint' => 'The generic partner image address',
-        'status_section_title' => 'Status',
         'block' => 'Podcast should be hidden from public catalogues',
         'block_hint' =>
             'The podcast show or hide status: toggling this on prevents the entire podcast from appearing in Apple Podcasts, Google Podcasts, and any third party apps that pull shows from these directories. (Not guaranteed)',

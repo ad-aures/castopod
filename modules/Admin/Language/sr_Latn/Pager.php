@@ -16,6 +16,6 @@ return [
     'last' => 'Poslednja',
     'older' => 'Starije',
     'newer' => 'Novije',
-    'invalidTemplate' => '{0} is not a valid Pager template.',
-    'invalidPaginationGroup' => '{0} is not a valid Pagination group.',
+    'invalidTemplate' => '{0} nije važeći šablon za stranice.',
+    'invalidPaginationGroup' => '{0} nije važeći šablon za grupu paginacija.',
 ];

@@ -32,4 +32,16 @@ return [
     }',
     'all_podcast_episodes' => 'Toate episoadele podcastului',
     'back_to_podcast' => 'Înapoi la podcast',
+    'preview' => [
+        'title' => 'Preview',
+        'not_published' => 'Not published',
+        'text' => '{publication_status, select,
+            published {This episode is not yet published.}
+            scheduled {This episode is scheduled for publication on {publication_date}.}
+            with_podcast {This episode will be published at the same time as the podcast.}
+            other {This episode is not yet published.}
+        }',
+        'publish' => 'Publish',
+        'publish_edit' => 'Edit publication',
+    ],
 ];

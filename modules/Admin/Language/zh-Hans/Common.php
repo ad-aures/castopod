@@ -40,6 +40,7 @@ return [
         ],
         'upload_file' => '上传文件',
         'remote_url' => '远程网址',
+        'save' => 'Save',
     ],
     'play_episode_button' => [
         'play' => '播放',

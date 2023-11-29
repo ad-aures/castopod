@@ -40,6 +40,7 @@ return [
         ],
         'upload_file' => 'Nahrať súbor',
         'remote_url' => 'Vzdialená adresa URL',
+        'save' => 'Save',
     ],
     'play_episode_button' => [
         'play' => 'Prehrať',

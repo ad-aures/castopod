@@ -13,7 +13,7 @@ return [
     'no_podcast' => 'Kein Podcast gefunden!',
     'create' => 'Podcast erstellen',
     'import' => 'Podcast importieren',
-    'all_imports' => 'Podcast imports',
+    'all_imports' => 'Podcast-Importe',
     'new_episode' => 'Neue Folge',
     'view' => 'Podcast ansehen',
     'edit' => 'Podcast bearbeiten',
@@ -22,6 +22,7 @@ return [
     'delete' => 'Podcast löschen',
     'see_episodes' => 'Episoden ansehen',
     'see_contributors' => 'Mitwirkende anzeigen',
+    'monetization_other' => 'Other monetization',
     'go_to_page' => 'Gehe zur Seite',
     'latest_episodes' => 'Neueste Folgen',
     'see_all_episodes' => 'Alle Folgen anzeigen',
@@ -57,6 +58,8 @@ return [
     'form' => [
         'identity_section_title' => 'Podcast-Identität',
         'identity_section_subtitle' => 'Diese Felder erlauben es dir, Aufmerksamkeit zu bekommen.',
+        'fediverse_section_title' => 'Fediverse identity',
+
         'cover' => 'Podcast-Cover',
         'cover_size_hint' => 'Das Cover muss quadratisch und mindestens 1400px breit und hoch sein.',
         'banner' => 'Podcast-Banner',
@@ -132,7 +135,6 @@ return [
         'partner_id_hint' => 'Ihre eigene Partner-ID',
         'partner_link_url_hint' => 'Die generische Partnerlink-Adresse',
         'partner_image_url_hint' => 'Die generische Partnerbild-Adresse',
-        'status_section_title' => 'Status',
         'block' => 'Podcast soll vor öffentlichen Katalogen versteckt werden',
         'block_hint' =>
             'Der Podcast zeigt oder versteckt den Status: Beim Einschalten dieser Option wird verhindert, dass der Podcast in Apple Podcasts, Google Podcasts und alle Apps von Drittanbietern, die Inhalte aus diesen Verzeichnissen ziehen, erscheint. (Ohne Garantie!)',

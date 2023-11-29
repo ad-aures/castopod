@@ -85,7 +85,6 @@ return [
     // missing keys
     'code' => 'El teu codi de 6 dígits',
 
-    'notEnoughPrivilege' => 'No teniu prou permisos per accedir a aquesta pàgina.',
     'set_password' => 'Estableix la teva contrasenya',
 
     // Welcome email

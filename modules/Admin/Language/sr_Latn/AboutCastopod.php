@@ -9,14 +9,14 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => 'About Castopod',
-    'host_name' => 'Host name',
-    'version' => 'Castopod version',
-    'php_version' => 'PHP version',
-    'os' => 'Operating System',
-    'languages' => 'Languages',
-    'update_database' => 'Update database',
+    'title' => 'O Castopod-u',
+    'host_name' => 'Naziv hosta',
+    'version' => 'Verzija Castopod-a',
+    'php_version' => 'PHP verzija',
+    'os' => 'Operativni Sistem',
+    'languages' => 'Jezici',
+    'update_database' => 'Ažuriraj baze podataka',
     'messages' => [
-        'databaseUpdateSuccess' => 'Database is up to date!',
+        'databaseUpdateSuccess' => 'Baza podataka je ažurirana!',
     ],
 ];

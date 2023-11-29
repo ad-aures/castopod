@@ -22,6 +22,7 @@ return [
     'delete' => 'Eliminar podcast',
     'see_episodes' => 'Ver episodios',
     'see_contributors' => 'Ver colaboradoras',
+    'monetization_other' => 'Other monetization',
     'go_to_page' => 'Ir á páxina',
     'latest_episodes' => 'Últimos episodios',
     'see_all_episodes' => 'Ver tódolos episodios',
@@ -57,6 +58,8 @@ return [
     'form' => [
         'identity_section_title' => 'Identidade do podcast',
         'identity_section_subtitle' => 'Estes campos permítenche recibir notificacións.',
+        'fediverse_section_title' => 'Fediverse identity',
+
         'cover' => 'Portada do podcast',
         'cover_size_hint' => 'A portada ten que ser cadrada e como mínimo de 1400px de alto e ancho.',
         'banner' => 'Cabeceira do podcast',
@@ -132,7 +135,6 @@ return [
         'partner_id_hint' => 'Your own partner ID',
         'partner_link_url_hint' => 'The generic partner link address',
         'partner_image_url_hint' => 'The generic partner image address',
-        'status_section_title' => 'Status',
         'block' => 'Podcast should be hidden from public catalogues',
         'block_hint' =>
             'The podcast show or hide status: toggling this on prevents the entire podcast from appearing in Apple Podcasts, Google Podcasts, and any third party apps that pull shows from these directories. (Not guaranteed)',

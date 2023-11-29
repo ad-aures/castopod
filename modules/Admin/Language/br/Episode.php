@@ -23,6 +23,7 @@ return [
     'all_podcast_episodes' => 'Holl rannoù ar podkast',
     'back_to_podcast' => 'Mont d\'ar podkast en-dro',
     'edit' => 'Kemmañ',
+    'preview' => 'Preview',
     'publish' => 'Embann',
     'publish_edit' => 'Kemmañ an embannadur',
     'publish_date_edit' => 'Edit publication date',
@@ -82,13 +83,13 @@ return [
             audio {aodio}
             other {media}
         } ar rann.',
-        'deleteFileError' => 'C\'hwitadenn war dilemel restr {type, select,
-            transcript {an treuzskrivadur}
-            chapters {ar chabistroù}
-            image {ar golo}
-            audio {an aodio}
-            other {ar media}
-        } ({file_path}). Gallout a rit lemel kuit ar restr-mañ diouzh ar gantenn dre zorn.',
+        'deleteFileError' => 'Failed to delete {type, select,
+            transcript {transcript}
+            chapters {chapters}
+            image {cover}
+            audio {audio}
+            other {media}
+        } file {file_key}. You may manually remove it from your disk.',
         'sameSlugError' => 'Bez ez eus eus ur rann gant ar berradur-mañ (slug) dija.',
     ],
     'form' => [
@@ -212,5 +213,15 @@ return [
         'dark-transparent' => 'Teñval treuzwelus',
         'light' => 'Sklaer',
         'light-transparent' => 'Sklaer treuzwelus',
+    ],
+    'publication_status_banner' => [
+        'draft_mode' => 'draft mode',
+        'text' => '{publication_status, select,
+            published {This episode is not yet published.}
+            scheduled {This episode is scheduled for publication on {publication_date}.}
+            with_podcast {This episode will be published at the same time as the podcast.}
+            other {This episode is not yet published.}
+        }',
+        'preview' => 'Preview',
     ],
 ];

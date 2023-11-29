@@ -24,6 +24,7 @@ return [
     'all_podcast_episodes' => 'Všetky epizódy podcastu',
     'back_to_podcast' => 'Späť na podcast',
     'edit' => 'Upraviť',
+    'preview' => 'Náhľad',
     'publish' => 'Zverejniť',
     'publish_edit' => 'Upraviť zverejnenie',
     'publish_date_edit' => 'Upraviť dátum zverejnenia',
@@ -84,13 +85,13 @@ return [
             audio {zvuk}
             other {médiá}
         }.',
-        'deleteFileError' => 'Nepodarilo sa vymazať {type, select,
-            transcript {prepis}
-            chapters {kapitoly}
-            image {obrázok}
-            audio {zvuk}
-            other {médiá}
-        } súbor {file_path}. Môžete ho z disku odstrániť ručne.',
+        'deleteFileError' => 'Failed to delete {type, select,
+            transcript {transcript}
+            chapters {chapters}
+            image {cover}
+            audio {audio}
+            other {media}
+        } file {file_key}. You may manually remove it from your disk.',
         'sameSlugError' => 'Epizóda s takýmto trvalým odkazom už existuje.',
     ],
     'form' => [
@@ -214,5 +215,15 @@ return [
         'dark-transparent' => 'Tmavý priehľadný',
         'light' => 'Svetlý',
         'light-transparent' => 'Svetlý priehľadný',
+    ],
+    'publication_status_banner' => [
+        'draft_mode' => 'konceptový režim',
+        'text' => '{publication_status, select,
+            published {This episode is not yet published.}
+            scheduled {This episode is scheduled for publication on {publication_date}.}
+            with_podcast {This episode will be published at the same time as the podcast.}
+            other {This episode is not yet published.}
+        }',
+        'preview' => 'Náhľad',
     ],
 ];

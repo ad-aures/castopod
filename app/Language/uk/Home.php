@@ -9,12 +9,12 @@ declare(strict_types=1);
  */
 
 return [
-    'all_podcasts' => 'All podcasts',
-    'sort_by' => 'Sort by',
+    'all_podcasts' => 'Усі подкасти',
+    'sort_by' => 'Сортувати за',
     'sort_options' => [
-        'activity' => 'Recent activity',
-        'created_desc' => 'Newest first',
-        'created_asc' => 'Oldest first',
+        'activity' => 'Попередня активність',
+        'created_desc' => 'Спочатку нові',
+        'created_asc' => 'Спочатку старі',
     ],
-    'no_podcast' => 'No podcast found',
+    'no_podcast' => 'Подкастів не знайдено',
 ];

@@ -40,6 +40,7 @@ return [
         ],
         'upload_file' => 'Upload a file',
         'remote_url' => 'Remote URL',
+        'save' => 'Save',
     ],
     'play_episode_button' => [
         'play' => 'Play',

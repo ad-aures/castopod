@@ -46,4 +46,5 @@ return [
         other {# نفر}
     }',
     'persons_list' => 'نفر',
+    'castopod_website' => 'Castopod (website)',
 ];
