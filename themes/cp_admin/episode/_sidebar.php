@@ -6,9 +6,11 @@ $episodeNavigation = [
         'items' => ['episode-view', 'episode-edit', 'episode-persons-manage', 'embed-add'],
     ],
     'clips' => [
-        'icon'    => 'clapperboard',
-        'items'   => ['video-clips-list', 'video-clips-create', 'soundbites-list', 'soundbites-create'],
-        'add-cta' => 'video-clips-create',
+        'icon'        => 'clapperboard',
+        'items'       => ['video-clips-list', 'video-clips-create', 'soundbites-list', 'soundbites-create'],
+        'count'       => $episode->getClipCount(),
+        'count-route' => 'video-clips-list',
+        'add-cta'     => 'video-clips-create',
     ],
 ]; ?>
 

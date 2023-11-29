@@ -173,6 +173,16 @@ class ClipModel extends Model
         ]);
     }
 
+    public function getClipCount(int $podcastId, int $episodeId): int
+    {
+        return $this
+            ->where([
+                'podcast_id' => $podcastId,
+                'episode_id' => $episodeId,
+            ])
+            ->countAllResults();
+    }
+
     public function clearVideoClipCache(int $clipId): void
     {
         cache()

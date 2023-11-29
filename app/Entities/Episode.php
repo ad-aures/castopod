@@ -688,4 +688,16 @@ class Episode extends Entity
 
         return url_to('episode-preview', (string) $this->preview_id);
     }
+
+    /**
+     * Returns the episode's clip count
+     */
+    public function getClipCount(): int|string
+    {
+        if ($this->id === null) {
+            throw new RuntimeException('Episode must be created before getting number of video clips.');
+        }
+
+        return (new ClipModel())->getClipCount($this->podcast_id, $this->id);
+    }
 }

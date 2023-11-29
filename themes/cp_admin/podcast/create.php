@@ -56,27 +56,6 @@
             isChecked="false" ><?= lang('Podcast.form.type.serial') ?></Forms.RadioButton>
     </div>
 </fieldset>
-
-</Forms.Section>
-
-<Forms.Section
-    title="<?= lang('Podcast.form.fediverse_section_title') ?>"
-    subtitle="<?= lang('Podcast.form.fediverse_section_subtitle') ?>" >
-    
-    <div class="flex flex-col">
-        <Forms.Label for="handle" hint="<?= lang('Podcast.form.handle_hint') ?>"><?= lang('Podcast.form.handle') ?></Forms.Label>
-        <div class="relative">
-            <Icon glyph="at" class="absolute inset-0 h-full text-xl opacity-40 left-3" />
-            <Forms.Input name="handle" class="w-full pl-8" required="true" />
-        </div>
-    </div>
-
-    <Forms.Field
-        name="banner"
-        label="<?= lang('Podcast.form.banner') ?>"
-        helper="<?= lang('Podcast.form.banner_size_hint') ?>"
-        type="file"
-        accept=".jpg,.jpeg,.png" />
 </Forms.Section>
 
 <Forms.Section
@@ -151,6 +130,25 @@
     name="copyright"
     label="<?= lang('Podcast.form.copyright') ?>" />
 
+</Forms.Section>
+
+<Forms.Section
+    title="<?= lang('Podcast.form.fediverse_section_title') ?>" >
+    
+    <div class="flex flex-col">
+        <Forms.Label for="handle" hint="<?= lang('Podcast.form.handle_hint') ?>"><?= lang('Podcast.form.handle') ?></Forms.Label>
+        <div class="relative">
+            <Icon glyph="at" class="absolute inset-0 h-full text-xl opacity-40 left-3" />
+            <Forms.Input name="handle" class="w-full pl-8" required="true" />
+        </div>
+    </div>
+
+    <Forms.Field
+        name="banner"
+        label="<?= lang('Podcast.form.banner') ?>"
+        helper="<?= lang('Podcast.form.banner_size_hint') ?>"
+        type="file"
+        accept=".jpg,.jpeg,.png" />
 </Forms.Section>
 
 <Forms.Section title="<?= lang('Podcast.form.premium') ?>">
