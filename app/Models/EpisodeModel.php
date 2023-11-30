@@ -386,6 +386,7 @@ class EpisodeModel extends UuidModel
             ->select('fediverse_posts.episode_id as episode_id, COUNT(*) as `comments_count`')
             ->join('fediverse_posts as fp', 'fediverse_posts.id = fp.in_reply_to_id')
             ->where('fediverse_posts.in_reply_to_id', null)
+            ->where('fediverse_posts.episode_id IS NOT', null)
             ->groupBy('fediverse_posts.episode_id')
             ->getCompiledSelect();
 
