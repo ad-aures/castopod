@@ -101,10 +101,69 @@
             <?php endif; ?>
         </div>
     </main>
+
+    <button class="fixed bottom-10 right-4 p-2 bg-gray-800 hover:bg-gray-700 transition-colors duration-300 text-white rounded-full" onclick="toggleSurvey()">
+        Donnez votre avis
+    </button>
+
     <footer class="container flex justify-between px-2 py-4 mx-auto text-sm text-right border-t border-subtle">
         <?= render_page_links() ?>
         <small><?= lang('Common.powered_by', [
             'castopod' => '<a class="inline-flex font-semibold hover:underline focus:ring-accent" href="https://castopod.org/" target="_blank" rel="noreferrer noopener">Castopod' . icon('castopod', 'ml-1 text-lg', 'social') . '</a>',
         ], null, false) ?></small>
     </footer>
+
+    <!-- Ajout de la div avec l'id "survey" -->
+    <div id="survey" class="fixed bottom-8 right-2 w-auto bg-white border border-gray-300 p-4 rounded-lg transition-opacity duration-300" style="opacity: 0; display: none;">
+        <button class="absolute top-4 right-4 p-2 bg-gray-800 rounded-full hover:bg-gray-700 transition-colors duration-300 text-white" onclick="toggleSurvey()">
+            <?= icon('close', 'text-xl') ?>
+        </button>
+        <p class="text-center font-bold p-4">Test</p>
+        <form action="" method="POST" enctype='multipart/form-data' class="flex flex-col w-full max-w-xl p-4 gap-y-8">
+            <?= csrf_field() ?>
+            <section>
+
+                <div class="flex flex-row justify-between">
+                    <label for="content_quality" class="inline-block text-left"><?= lang('Home.survey.content_quality') ?></label>
+                    <div class="inline-block text-right">
+                        <?php for ($i = 1; $i <= 5; $i++): ?>
+                            <input type="radio" name="content_quality" id="content_quality<?= $i ?>" value="<?= $i ?>" required class="align-middle">
+                            <label for="content_quality<?= $i ?>" class="align-middle"><?= $i ?></label>
+                        <?php endfor; ?>
+                    </div>
+                </div>
+
+                <div class="flex flex-row justify-between">
+                    <label for="audio_quality" class="inline-block text-left"><?= lang('Home.survey.audio_quality') ?></label>
+                    <div class="inline-block text-right">
+                        <?php for ($i = 1; $i <= 5; $i++): ?>
+                            <input type="radio" name="audio_quality" id="audio_quality<?= $i ?>" value="<?= $i ?>" required class="align-middle">
+                            <label for="audio_quality<?= $i ?>" class="align-middle"><?= $i ?></label>
+                        <?php endfor; ?>
+                    </div>
+                </div>
+
+            </section>
+
+            <button type="submit" class="px-4 py-2 font-bold text-white border rounded-lg bg-emerald-700 hover:bg-emerald-600 transition-all duration-500">
+                <?= lang('Home.survey.button') ?></button>
+        </form>
+    </div>
+
+    <script>
+        function toggleSurvey() {
+            const surveyDiv = document.getElementById('survey');
+            if (surveyDiv.style.display === 'none') {
+                surveyDiv.style.display = 'block';
+                setTimeout(() => {
+                    surveyDiv.style.opacity = '1';
+                }, 10);
+            } else {
+                surveyDiv.style.opacity = '0';
+                setTimeout(() => {
+                    surveyDiv.style.display = 'none';
+                }, 300);
+            }
+        }
+    </script>
 </body>

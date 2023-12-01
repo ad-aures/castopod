@@ -47,6 +47,7 @@ $RECYCLE.BIN/
 .env
 .vagrant
 Vagrantfile
+.package-lock.json
 
 #-------------------------
 # Temporary Files
