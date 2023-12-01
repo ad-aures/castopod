@@ -1,3 +1,11 @@
+## [1.7.1](https://code.castopod.org/adaures/castopod/compare/v1.7.0...v1.7.1) (12/1/2023)
+
+### Bug Fixes
+
+- **housekeeping:** add where clause to check episode_id is not null on reset
+  comments count
+  ([119742c](https://code.castopod.org/adaures/castopod/commit/119742cdbb2c2f7f847692fb76f6ff1dbb2e25b6))
+
 # [1.7.0](https://code.castopod.org/adaures/castopod/compare/v1.6.5...v1.7.0) (11/29/2023)
 
 ### Bug Fixes
