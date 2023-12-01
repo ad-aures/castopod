@@ -102,8 +102,8 @@
         </div>
     </main>
 
-    <button class="fixed bottom-10 right-4 p-2 bg-gray-800 hover:bg-gray-700 transition-colors duration-300 text-white rounded-full" onclick="toggleSurvey()">
-        Donnez votre avis
+    <button class="fixed bottom-9 right-4 px-4 py-1 bg-gray-800 hover:bg-gray-700 transition-colors duration-300 text-white rounded-full" onclick="toggleSurvey()">
+    <?= lang('Home.survey.button') ?>
     </button>
 
     <footer class="container flex justify-between px-2 py-4 mx-auto text-sm text-right border-t border-subtle">
@@ -113,41 +113,67 @@
         ], null, false) ?></small>
     </footer>
 
-    <!-- Ajout de la div avec l'id "survey" -->
+    
     <div id="survey" class="fixed bottom-8 right-2 w-auto bg-white border border-gray-300 p-4 rounded-lg transition-opacity duration-300" style="opacity: 0; display: none;">
         <button class="absolute top-4 right-4 p-2 bg-gray-800 rounded-full hover:bg-gray-700 transition-colors duration-300 text-white" onclick="toggleSurvey()">
             <?= icon('close', 'text-xl') ?>
         </button>
-        <p class="text-center font-bold p-4">Test</p>
+        <p class="text-center font-bold p-2"><?= lang('Home.survey.title') ?></p>
         <form action="" method="POST" enctype='multipart/form-data' class="flex flex-col w-full max-w-xl p-4 gap-y-8">
-            <?= csrf_field() ?>
-            <section>
+                <?= csrf_field() ?>
+                <section>
 
-                <div class="flex flex-row justify-between">
+                    <label for="ease_of_use" class="inline-block text-left"><?= lang('Home.survey.ease_of_use') ?></label>
+                    <div class="w-full inline-block text-center"> <!-- Ajout de la classe text-center -->
+                        <?php for ($i = 1; $i <= 5; $i++): ?>
+                            <input type="radio" name="ease_of_use" id="ease_of_use<?= $i ?>" value="<?= $i ?>" required class="align-middle">
+                            <label for="ease_of_use<?= $i ?>" class="align-middle"><?= $i ?></label>
+                        <?php endfor; ?>
+                    </div>
+                    <br> <!-- Ajout d'un espace -->
+
                     <label for="content_quality" class="inline-block text-left"><?= lang('Home.survey.content_quality') ?></label>
-                    <div class="inline-block text-right">
+                    <div class="w-full inline-block text-center"> <!-- Ajout de la classe text-center -->
                         <?php for ($i = 1; $i <= 5; $i++): ?>
                             <input type="radio" name="content_quality" id="content_quality<?= $i ?>" value="<?= $i ?>" required class="align-middle">
                             <label for="content_quality<?= $i ?>" class="align-middle"><?= $i ?></label>
                         <?php endfor; ?>
                     </div>
-                </div>
+                    <br> <!-- Ajout d'un espace -->
 
-                <div class="flex flex-row justify-between">
                     <label for="audio_quality" class="inline-block text-left"><?= lang('Home.survey.audio_quality') ?></label>
-                    <div class="inline-block text-right">
+                    <div class="w-full inline-block text-center"> <!-- Ajout de la classe text-center -->
                         <?php for ($i = 1; $i <= 5; $i++): ?>
                             <input type="radio" name="audio_quality" id="audio_quality<?= $i ?>" value="<?= $i ?>" required class="align-middle">
                             <label for="audio_quality<?= $i ?>" class="align-middle"><?= $i ?></label>
                         <?php endfor; ?>
                     </div>
-                </div>
+                    <br> <!-- Ajout d'un espace -->
 
-            </section>
+                    <label for="variety_of_content" class="inline-block text-left"><?= lang('Home.survey.variety_of_content') ?></label>
+                    <div class="w-full inline-block text-center"> <!-- Ajout de la classe text-center -->
+                        <?php for ($i = 1; $i <= 5; $i++): ?>
+                            <input type="radio" name="variety_of_content" id="variety_of_content<?= $i ?>" value="<?= $i ?>" required class="align-middle">
+                            <label for="variety_of_content<?= $i ?>" class="align-middle"><?= $i ?></label>
+                        <?php endfor; ?>
+                    </div>
+                    <br> <!-- Ajout d'un espace -->
 
-            <button type="submit" class="px-4 py-2 font-bold text-white border rounded-lg bg-emerald-700 hover:bg-emerald-600 transition-all duration-500">
-                <?= lang('Home.survey.button') ?></button>
-        </form>
+                    <label for="recommendation_likelihood" class="inline-block text-left"><?= lang('Home.survey.recommendation_likelihood') ?></label>
+                    <div class="w-full inline-block text-center"> <!-- Ajout de la classe text-center -->
+                        <?php for ($i = 1; $i <= 5; $i++): ?>
+                            <input type="radio" name="recommendation_likelihood" id="recommendation_likelihood<?= $i ?>" value="<?= $i ?>" required class="align-middle">
+                            <label for="recommendation_likelihood<?= $i ?>" class="align-middle"><?= $i ?></label>
+                        <?php endfor; ?>
+                    </div>
+                    <br> <!-- Ajout d'un espace -->
+
+                </section>
+
+                <button type="submit" class="px-4 py-2 font-bold text-white border rounded-lg bg-emerald-700 hover:bg-emerald-600 transition-all duration-500">
+                    <?= lang('Home.survey.validate') ?></button>
+            </form>
+
     </div>
 
     <script>
