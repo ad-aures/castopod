@@ -164,7 +164,7 @@ class EpisodeController extends BaseController
             'chapters_file'   => 'ext_in[chapters,json]|permit_empty',
         ];
 
-        if ($this->podcast->type === 'serial') {
+        if ($this->podcast->type === 'serial' && $this->request->getPost('type') === 'full') {
             $rules['episode_number'] = 'required';
         }
 
@@ -301,7 +301,7 @@ class EpisodeController extends BaseController
             'chapters_file'   => 'ext_in[chapters_file,json]|permit_empty',
         ];
 
-        if ($this->podcast->type === 'serial') {
+        if ($this->podcast->type === 'serial' && $this->request->getPost('type') === 'full') {
             $rules['episode_number'] = 'required';
         }
 
