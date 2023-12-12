@@ -1,3 +1,11 @@
+## [1.7.2](https://code.castopod.org/adaures/castopod/compare/v1.7.1...v1.7.2) (12/12/2023)
+
+### Bug Fixes
+
+- **episode-form:** render episode number optional when episode type is trailer
+  or bonus
+  ([694328f](https://code.castopod.org/adaures/castopod/commit/694328f10865b2fcd6436122de46866dae81f945))
+
 ## [1.7.1](https://code.castopod.org/adaures/castopod/compare/v1.7.0...v1.7.1) (12/1/2023)
 
 ### Bug Fixes
