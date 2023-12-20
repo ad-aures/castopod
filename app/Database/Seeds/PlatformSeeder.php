@@ -383,6 +383,13 @@ class PlatformSeeder extends Seeder
                 'home_url'   => 'https://www.tsacdop.app/',
                 'submit_url' => '',
             ],
+            [
+                'slug'       => 'youtube-music',
+                'type'       => 'podcasting',
+                'label'      => 'YouTube Music',
+                'home_url'   => 'https://www.youtube.com/creators/podcasts/',
+                'submit_url' => 'https://studio.youtube.com/channel/content/podcasts',
+            ],
         ];
 
         $fundingData = [
@@ -572,9 +579,16 @@ class PlatformSeeder extends Seeder
                 'submit_url' => 'https://slack.com/get-started#/create',
             ],
             [
+                'slug'       => 'threads',
+                'type'       => 'social',
+                'label'      => 'Threads',
+                'home_url'   => 'https://www.threads.net/',
+                'submit_url' => 'https://www.threads.net/login',
+            ],
+            [
                 'slug'       => 'tiktok',
                 'type'       => 'social',
-                'label'      => 'Tiktok',
+                'label'      => 'TikTok',
                 'home_url'   => 'https://www.tiktok.com/',
                 'submit_url' => 'https://www.tiktok.com/signup',
             ],
