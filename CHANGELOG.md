@@ -1,3 +1,12 @@
+## [1.7.3](https://code.castopod.org/adaures/castopod/compare/v1.7.2...v1.7.3) (12/21/2023)
+
+### Bug Fixes
+
+- **analytics:** upgrade opawg's user-agents-php to user-agents-v2-php
+  ([8cd7886](https://code.castopod.org/adaures/castopod/commit/8cd78866762e26aa63c224dace6c247e0e9dc068))
+- **platforms:** add Threads and YouTube Music
+  ([9264a2d](https://code.castopod.org/adaures/castopod/commit/9264a2d74cc95278c9d84c99ef914fdbcaf8a97f))
+
 ## [1.7.2](https://code.castopod.org/adaures/castopod/compare/v1.7.1...v1.7.2) (12/12/2023)
 
 ### Bug Fixes
