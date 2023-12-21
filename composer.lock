@@ -4,7 +4,7 @@
     "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
     "This file is @generated automatically"
   ],
-  "content-hash": "52c31397606207e9d7f5f459c9ee9c8e",
+  "content-hash": "2127030d8f3ed9c557e03a6ea20f11e2",
   "packages": [
     {
       "name": "adaures/ipcat-php",
@@ -4053,23 +4053,23 @@
     },
     {
       "name": "phpunit/php-code-coverage",
-      "version": "10.1.10",
+      "version": "10.1.11",
       "source": {
         "type": "git",
         "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-        "reference": "599109c8ca6bae97b23482d557d2874c25a65e59"
+        "reference": "78c3b7625965c2513ee96569a4dbb62601784145"
       },
       "dist": {
         "type": "zip",
-        "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/599109c8ca6bae97b23482d557d2874c25a65e59",
-        "reference": "599109c8ca6bae97b23482d557d2874c25a65e59",
+        "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/78c3b7625965c2513ee96569a4dbb62601784145",
+        "reference": "78c3b7625965c2513ee96569a4dbb62601784145",
         "shasum": ""
       },
       "require": {
         "ext-dom": "*",
         "ext-libxml": "*",
         "ext-xmlwriter": "*",
-        "nikic/php-parser": "^4.15",
+        "nikic/php-parser": "^4.18 || ^5.0",
         "php": ">=8.1",
         "phpunit/php-file-iterator": "^4.0",
         "phpunit/php-text-template": "^3.0",
@@ -4111,7 +4111,7 @@
       "support": {
         "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
         "security": "https://github.com/sebastianbergmann/php-code-coverage/security/policy",
-        "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/10.1.10"
+        "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/10.1.11"
       },
       "funding": [
         {
@@ -4119,7 +4119,7 @@
           "type": "github"
         }
       ],
-      "time": "2023-12-11T06:28:43+00:00"
+      "time": "2023-12-21T15:38:30+00:00"
     },
     {
       "name": "phpunit/php-file-iterator",

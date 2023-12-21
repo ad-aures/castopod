@@ -11,14 +11,14 @@ declare(strict_types=1);
 return [
     'title' => [
         'podcasting' => 'Podcasting platforms',
-        'social' => 'Social networks',
+        'social' => 'Sociálne siete',
         'funding' => 'Funding links',
     ],
-    'website' => 'Website',
+    'website' => 'Webová stránka',
     'home_url' => 'Prejsť na stránku {platformName}',
-    'register' => 'Register',
+    'register' => 'Registrovať',
     'submit_url' => 'Uverejniť podcast na platforme {platformName}',
-    'your_link' => 'Your link',
+    'your_link' => 'Váš odkaz',
     'your_id' => [
         'podcasting' => 'Your ID',
         'social' => 'Your ID',

@@ -9,39 +9,39 @@ declare(strict_types=1);
  */
 
 return [
-    'podcast_contributors' => 'Podcast contributors',
-    'view' => "{username}'s contribution to {podcastTitle}",
-    'add' => 'Add contributor',
-    'add_contributor' => 'Add a contributor for {0}',
-    'edit_role' => 'Update role for {0}',
-    'edit' => 'Edit',
-    'remove' => 'Remove',
+    'podcast_contributors' => 'Podcast bidragsydere',
+    'view' => "{username}s bidrag til {podcastTitle}",
+    'add' => 'Tilføj bidragyder',
+    'add_contributor' => 'Tilføj bidragyder til {0}',
+    'edit_role' => 'Opdatér rolle for {0}',
+    'edit' => 'Redigér',
+    'remove' => 'Fjern',
     'list' => [
-        'username' => 'Username',
-        'role' => 'Role',
+        'username' => 'Brugernavn',
+        'role' => 'Rolle',
     ],
     'form' => [
-        'user' => 'User',
-        'user_placeholder' => 'Select a user…',
-        'role' => 'Role',
-        'role_placeholder' => 'Select its role…',
-        'submit_add' => 'Add contributor',
-        'submit_edit' => 'Update role',
+        'user' => 'Bruger',
+        'user_placeholder' => 'Vælg en bruger…',
+        'role' => 'Rolle',
+        'role_placeholder' => 'Vælg dens rolle…',
+        'submit_add' => 'Tilføj bidragyder',
+        'submit_edit' => 'Opdatér rolle',
     ],
     'delete_form' => [
-        'title' => 'Remove {contributor}',
+        'title' => 'Fjern {contributor}',
         'disclaimer' =>
-            'You are about to remove {contributor} from contributors. They will not be able to access "{podcastTitle}" anymore.',
-        'understand' => 'I understand, I want to remove {contributor} from "{podcastTitle}"',
-        'submit' => 'Remove',
+            'Du er ved at fjerne {contributor} fra bidragydere. De vil ikke længere kunne få adgang til "{podcastTitle}".',
+        'understand' => 'Jeg forstår, jeg vil fjerne {contributor} fra "{podcastTitle}"',
+        'submit' => 'Fjern',
     ],
     'messages' => [
-        'editSuccess' => 'Role successfully changed!',
-        'editOwnerError' => "You can't edit the podcast owner!",
-        'removeOwnerError' => "You can't remove the podcast owner!",
+        'editSuccess' => 'Rolle ændret!',
+        'editOwnerError' => "Du kan ikke redigere podcast-ejeren!",
+        'removeOwnerError' => "Du kan ikke fjerne podcast-ejeren!",
         'removeSuccess' =>
-            'You have successfully removed {username} from {podcastTitle}',
+            'Du har fjernet {username} fra {podcastTitle}',
         'alreadyAddedError' =>
-            "The contributor you're trying to add has already been added!",
+            "Den bidragsyder, du forsøger at tilføje, er allerede blevet tilføjet!",
     ],
 ];

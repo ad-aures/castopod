@@ -1,5 +1,5 @@
 ---
-title: Installation
+title: Inštalácia
 sidebarDepth: 3
 ---
 
@@ -25,7 +25,7 @@ If you prefer using Docker, you may skip this and go straight to the
 - An [ntp-synced clock](https://wiki.debian.org/NTP) to validate federation's
   incoming requests
 
-### PHP v8.1 or higher
+### PHP v8.1, alebo vyššia
 
 PHP version 8.1 or higher is required, with the following extensions installed:
 
@@ -113,7 +113,7 @@ want to generate Video Clips. The following extensions must be installed:
 1. Run the Castopod install script by going to the install wizard page
    (`https://your_domain_name.com/cp-install`) in your favorite web browser.
 2. Follow the instructions on your screen.
-3. Start podcasting!
+3. Začať podcastovať!
 
 ::: info Note
 

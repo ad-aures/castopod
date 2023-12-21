@@ -9,14 +9,14 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => 'About Castopod',
-    'host_name' => 'Host name',
+    'title' => 'Om Castopod',
+    'host_name' => 'Værtsnavn',
     'version' => 'Castopod version',
     'php_version' => 'PHP version',
-    'os' => 'Operating System',
-    'languages' => 'Languages',
-    'update_database' => 'Update database',
+    'os' => 'Operativsystem',
+    'languages' => 'Sprog',
+    'update_database' => 'Opdater databasen',
     'messages' => [
-        'databaseUpdateSuccess' => 'Database is up to date!',
+        'databaseUpdateSuccess' => 'Databasen er opdateret!',
     ],
 ];

@@ -10,8 +10,8 @@ declare(strict_types=1);
 
 return [
     'list' => [
-        'title' => 'Soundbites',
-        'soundbite' => 'Soundbite',
+        'title' => 'Zvukové ukážky',
+        'soundbite' => 'Zvuková ukážka',
     ],
     'messages' => [
         'createSuccess' => 'Soundbite has been successfully created!',
@@ -19,13 +19,13 @@ return [
     ],
     'form' => [
         'title' => 'New soundbite',
-        'soundbite_title' => 'Soundbite title',
-        'start_time' => 'Start at',
-        'duration' => 'Duration',
-        'submit' => 'Create soundbite',
+        'soundbite_title' => 'Názov zvukovej ukážky',
+        'start_time' => 'Začiatok na',
+        'duration' => 'Trvanie',
+        'submit' => 'Vytvoriť zvukovú ukážku',
     ],
     'play' => 'Play soundbite',
     'stop' => 'Stop soundbite',
     'create' => 'New soundbite',
-    'delete' => 'Delete soundbite',
+    'delete' => 'Vymazať zvukovú ukážku',
 ];

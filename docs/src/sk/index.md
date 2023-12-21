@@ -55,7 +55,7 @@ small footprint.
   Brazilian Portuguese & Spanish… with
   [more to come](https://translate.castopod.org)!
 
-## Motivation
+## Motivácia
 
 The podcasting ecosystem is decentralized by nature: you can create your podcast
 as an RSS file, publish it on the web and have it shared everywhere online.
@@ -159,7 +159,7 @@ so that you can understand what actions will and will not be&nbsp;tolerated.
 
 ### Contributing guide
 
-Read our [contributing guide](./contributing/guidelines.md) to learn about our
+Read our [contributing guide](../contributing/guidelines.md) to learn about our
 development process, how to propose bugfixes and improvements, and how to build
 and test your changes to Castopod.
 

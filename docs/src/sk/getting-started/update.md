@@ -1,9 +1,9 @@
 ---
-title: Update
+title: Aktualizácia
 sidebarDepth: 3
 ---
 
-# How to update Castopod?
+# Ako aktualizovať Castopod?
 
 After installing Castopod, you may want to update your instance to the latest
 version in order to enjoy the latest features ✨, bug fixes 🐛 and performance

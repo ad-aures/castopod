@@ -1,35 +1,35 @@
 ---
-title: Official Docker images
+title: Zvanične Docker slike
 sidebarDepth: 3
 ---
 
-# Official Docker images
+# Zvanične Docker slike
 
-Castopod pushes 3 Docker images to the Docker Hub during its automated build
-process:
+Castopod gura 3 Docker slike u Docker Hub tokom njegovog automatizovanog procesa
+izrade:
 
-- [**`castopod/castopod`**](https://hub.docker.com/r/castopod/castopod): an all
-  in one castopod image using nginx unit
-- [**`castopod/app`**](https://hub.docker.com/r/castopod/app): the app bundle
-  with all of Castopod dependencies
-- [**`castopod/web-server`**](https://hub.docker.com/r/castopod/web-server): an
-  Nginx configuration for Castopod
+- [**`castopod/castopod`**](https://hub.docker.com/r/castopod/castopod): sve u
+  jednoj castopod slici koristeći ngink jedinicu
+- [**`castopod/app`**](https://hub.docker.com/r/castopod/app): paket aplikacija
+  sa svim Castopod zavisnostima
+- [**`castopod/web-server`**](https://hub.docker.com/r/castopod/web-server):
+  Nginx konfiguracija za Castopod
 
-Additionally, Castopod requires a MySQL-compatible database. A Redis database
-can be added as a cache handler.
+Pored toga, Castopod zahteva MySQL kompatibilnu bazu podataka. Redis baza
+podataka može se dodati kao obrađivač keša.
 
-## Supported tags
+## Podržani tagovi
 
-- `develop` [unstable], latest development branch build
-- `beta` [stable], latest beta version build
-- `latest` [stable], latest version build
-- `1.x.x` [stable], specific version build (since `1.0.0`)
+- `develop` [nestabilno], najnoviji razvojni ogranak
+- `beta` [stabilno], poslednja beta verzija
+- `latest` [stabilno], poslednja verzija
+- `1.x.x` [stabilno], specifična verzija (od `1.0.0`)
 
-## Example usage
+## Primer upotrebe
 
-1.  Install [docker](https://docs.docker.com/get-docker/) and
+1.  Instalirajte [docker](https://docs.docker.com/get-docker/) i
     [docker-compose](https://docs.docker.com/compose/install/)
-2.  Create a `docker-compose.yml` file with the following:
+2.  Napravite `docker-compose.yml` datoteku sa sledećim:
 
     ```yml
     version: "3.7"
@@ -87,13 +87,13 @@ can be added as a cache handler.
       castopod-db:
     ```
 
-    You have to adapt some variables to your needs (e.g. `CP_BASEURL`,
+    Morate prilagoditi neke varijable svojim potrebama (npr. `CP_BASEURL`,
     `MYSQL_ROOT_PASSWORD`, `MYSQL_PASSWORD` and `CP_ANALYTICS_SALT`).
 
-3.  Setup a reverse proxy for TLS (SSL/HTTPS)
+3.  Podesite obrnuti proksi za TLS (SSL/HTTPS)
 
-    TLS is mandatory for ActivityPub to work. This job can easily be handled by
-    a reverse proxy, for example with [Caddy](https://caddyserver.com/):
+    TLS je obavezan da bu ActivityPub radio. Ovaj posao se lako može obaviti
+    obrnutim proksijem, na primer sa [Caddy-ijem](https://caddyserver.com/):
 
     ```
     #castopod
@@ -102,57 +102,58 @@ can be added as a cache handler.
     }
     ```
 
-4.  Run `docker-compose up -d`, wait for it to initialize and head on to
-    `https://castopod.example.com/cp-install` to finish setting up Castopod!
+4.  Pokrenite `docker-compose up -d`, sačekajte da se pokrene i idite na
+    `https://castopod.example.com/cp-install` da biste završili instalaciju
+    Castopod-a!
 
-5.  You're all set, start podcasting! 🎙️🚀
+5.  Sve je spremno, započnite sa podkastingom! 🎙️🚀
 
-## Environment Variables
+## Promenljive okruženja
 
-- **castopod/castopod** and **castopod/app**
+- **castopod/castopod** i **castopod/app**
 
-  | Variable name                         | Type (`default`)        | Default          |
-  | ------------------------------------- | ----------------------- | ---------------- |
-  | **`CP_BASEURL`**                      | string                  | `undefined`      |
-  | **`CP_MEDIA_BASEURL`**                | ?string                 | `CP_BASEURL`     |
-  | **`CP_ADMIN_GATEWAY`**                | ?string                 | `"cp-admin"`     |
-  | **`CP_AUTH_GATEWAY`**                 | ?string                 | `"cp-auth"`      |
-  | **`CP_ANALYTICS_SALT`**               | string                  | `undefined`      |
-  | **`CP_DATABASE_HOSTNAME`**            | ?string                 | `"mariadb"`      |
-  | **`CP_DATABASE_NAME`**                | ?string                 | `MYSQL_DATABASE` |
-  | **`CP_DATABASE_USERNAME`**            | ?string                 | `MYSQL_USER`     |
-  | **`CP_DATABASE_PASSWORD`**            | ?string                 | `MYSQL_PASSWORD` |
-  | **`CP_DATABASE_PREFIX`**              | ?string                 | `"cp_"`          |
-  | **`CP_CACHE_HANDLER`**                | [`"file"` or `"redis"`] | `"file"`         |
-  | **`CP_REDIS_HOST`**                   | ?string                 | `"localhost"`    |
-  | **`CP_REDIS_PASSWORD`**               | ?string                 | `null`           |
-  | **`CP_REDIS_PORT`**                   | ?number                 | `6379`           |
-  | **`CP_REDIS_DATABASE`**               | ?number                 | `0`              |
-  | **`CP_EMAIL_SMTP_HOST`**              | ?string                 | `undefined`      |
-  | **`CP_EMAIL_FROM`**                   | ?string                 | `undefined`      |
-  | **`CP_EMAIL_SMTP_USERNAME`**          | ?string                 | `"localhost"`    |
-  | **`CP_EMAIL_SMTP_PASSWORD`**          | ?string                 | `null`           |
-  | **`CP_EMAIL_SMTP_PORT`**              | ?number                 | `25`             |
-  | **`CP_EMAIL_SMTP_CRYPTO`**            | [`"tls"` or `"ssl"`]    | `"tls"`          |
-  | **`CP_ENABLE_2FA`**                   | ?boolean                | `undefined`      |
-  | **`CP_MEDIA_FILE_MANAGER`**           | ?string                 | `undefined`      |
-  | **`CP_MEDIA_S3_ENDPOINT`**            | ?string                 | `undefined`      |
-  | **`CP_MEDIA_S3_KEY`**                 | ?string                 | `undefined`      |
-  | **`CP_MEDIA_S3_SECRET`**              | ?string                 | `undefined`      |
-  | **`CP_MEDIA_S3_REGION`**              | ?string                 | `undefined`      |
-  | **`CP_MEDIA_S3_BUCKET`**              | ?string                 | `undefined`      |
-  | **`CP_MEDIA_S3_PROTOCOL`**            | ?number                 | `undefined`      |
-  | **`CP_MEDIA_S3_PATH_STYLE_ENDPOINT`** | ?boolean                | `undefined`      |
-  | **`CP_MEDIA_S3_KEY_PREFIX`**          | ?string                 | `undefined`      |
-  | **`CP_DISABLE_HTTPS`**                | ?[`0` or `1`]           | `undefined`      |
-  | **`CP_MAX_BODY_SIZE`**                | ?number (with suffix)   | `512M`           |
-  | **`CP_PHP_MEMORY_LIMIT`**             | ?number (with suffix)   | `512M`           |
-  | **`CP_TIMEOUT`**                      | ?number                 | `900`            |
+  | Naziv promenljive                     | Vrsta (`uobičajeno`)         | Podrazumevano    |
+  | ------------------------------------- | ---------------------------- | ---------------- |
+  | **`CP_BASEURL`**                      | string                       | `nedefinisano`   |
+  | **`CP_MEDIA_BASEURL`**                | ?string                      | `CP_BASEURL`     |
+  | **`CP_ADMIN_GATEWAY`**                | ?string                      | `"cp-admin"`     |
+  | **`CP_AUTH_GATEWAY`**                 | ?string                      | `"cp-auth"`      |
+  | **`CP_ANALYTICS_SALT`**               | string                       | `nedefinisano`   |
+  | **`CP_DATABASE_HOSTNAME`**            | ?string                      | `"mariadb"`      |
+  | **`CP_DATABASE_NAME`**                | ?string                      | `MYSQL_DATABASE` |
+  | **`CP_DATABASE_USERNAME`**            | ?string                      | `MYSQL_USER`     |
+  | **`CP_DATABASE_PASSWORD`**            | ?string                      | `MYSQL_PASSWORD` |
+  | **`CP_DATABASE_PREFIX`**              | ?string                      | `"cp_"`          |
+  | **`CP_CACHE_HANDLER`**                | [`"datoteka"` ili `"redis"`] | `"file"`         |
+  | **`CP_REDIS_HOST`**                   | ?string                      | `"localhost"`    |
+  | **`CP_REDIS_PASSWORD`**               | ?string                      | `null`           |
+  | **`CP_REDIS_PORT`**                   | ?number                      | `6379`           |
+  | **`CP_REDIS_DATABASE`**               | ?number                      | `0`              |
+  | **`CP_EMAIL_SMTP_HOST`**              | ?string                      | `nedefinisano`   |
+  | **`CP_EMAIL_FROM`**                   | ?string                      | `nedefinisano`   |
+  | **`CP_EMAIL_SMTP_USERNAME`**          | ?string                      | `"localhost"`    |
+  | **`CP_EMAIL_SMTP_PASSWORD`**          | ?string                      | `null`           |
+  | **`CP_EMAIL_SMTP_PORT`**              | ?number                      | `25`             |
+  | **`CP_EMAIL_SMTP_CRYPTO`**            | [`"tls"` ili `"ssl"`]        | `"tls"`          |
+  | **`CP_ENABLE_2FA`**                   | ?boolean                     | `nedefinisano`   |
+  | **`CP_MEDIA_FILE_MANAGER`**           | ?string                      | `nedefinisano`   |
+  | **`CP_MEDIA_S3_ENDPOINT`**            | ?string                      | `nedefinisano`   |
+  | **`CP_MEDIA_S3_KEY`**                 | ?string                      | `nedefinisano`   |
+  | **`CP_MEDIA_S3_SECRET`**              | ?string                      | `nedefinisano`   |
+  | **`CP_MEDIA_S3_REGION`**              | ?string                      | `nedefinisano`   |
+  | **`CP_MEDIA_S3_BUCKET`**              | ?string                      | `nedefinisano`   |
+  | **`CP_MEDIA_S3_PROTOCOL`**            | ?number                      | `nedefinisano`   |
+  | **`CP_MEDIA_S3_PATH_STYLE_ENDPOINT`** | ?boolean                     | `nedefinisano`   |
+  | **`CP_MEDIA_S3_KEY_PREFIX`**          | ?string                      | `nedefinisano`   |
+  | **`CP_DISABLE_HTTPS`**                | ?[`0` ili `1`]               | `nedefinisano`   |
+  | **`CP_MAX_BODY_SIZE`**                | ?number (sa sufiksom)        | `512M`           |
+  | **`CP_PHP_MEMORY_LIMIT`**             | ?number (sa sufiksom)        | `512M`           |
+  | **`CP_TIMEOUT`**                      | ?number                      | `900`            |
 
-- **castopod/web-server**
+- **castopod/veb server**
 
-  | Variable name          | Type                  | Default |
-  | ---------------------- | --------------------- | ------- |
-  | **`CP_APP_HOSTNAME`**  | ?string               | `"app"` |
-  | **`CP_MAX_BODY_SIZE`** | ?number (with suffix) | `512M`  |
-  | **`CP_TIMEOUT`**       | ?number               | `900`   |
+  | Naziv promenljive      | Vrsta                 | Podrazumevano |
+  | ---------------------- | --------------------- | ------------- |
+  | **`CP_APP_HOSTNAME`**  | ?string               | `"app"`       |
+  | **`CP_MAX_BODY_SIZE`** | ?number (sa sufiksom) | `512M`        |
+  | **`CP_TIMEOUT`**       | ?number               | `900`         |

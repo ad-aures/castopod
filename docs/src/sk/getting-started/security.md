@@ -1,5 +1,5 @@
 ---
-title: Security
+title: Zabezpečenie
 ---
 
 # Security concerns

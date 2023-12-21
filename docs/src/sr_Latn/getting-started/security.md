@@ -1,23 +1,24 @@
 ---
-title: Security
+title: Bezbednost
 ---
 
-# Security concerns
+# Bezbednosni interesi
 
-Castopod is built on top of [CodeIgniter4](https://codeigniter.com/), a PHP
-framework that encourages
-[good security practices](https://codeigniter.com/user_guide/concepts/security.html).
+Castopod je napravljen na [CodeIgniter4](https://codeigniter.com/), PHP okviru
+koji podstiče
+[dobre bezbednosne prakse](https://codeigniter.com/user_guide/concepts/security.html).
 
-To maximize your instance's safety and prevent any malicious attack, we
-recommend you update all your Castopod files permissions after installation or
-updates (to avoid any prior permission error):
+Da biste maksimalno povećali bezbednost vaše instance i sprečili bilo kakav
+zlonamerni napad, mi preporučujemo da ažurirate sve dozvole Castopod datoteka
+nakon instalacije ili ažuriranja (da biste izbegli bilo kakvu grešku prethodne
+dozvole):
 
-- `writable/` folder must be **readable** and **writable**.
-- `public/media/` folder must be **readable** and **writable**.
-- any other file must be set to **readonly**.
+- `writable/` direktorijum mora biti **readable** i **writable**.
+- `public/media/` direktorijum mora biti **readable** i **writable**.
+- bilo koja druga datoteka mora biti podešena na **readonly**.
 
-For instance, if you are using Apache or NGINX with Ubuntu you may do the
-following:
+Na primer, ukoliko koristite Apache ili NGINX sa Ubuntu-om možete uraditi
+sledeće:
 
 ```bash
 sudo chown -R root:root /path/to/castopod

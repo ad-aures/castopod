@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 return [
     'go_to_page' => 'Idite na stranu podkasta',
-    'rss_feed' => 'RSS feed',
+    'rss_feed' => 'RSS izvor',
     'dashboard' => 'Kontrolna strana podkasta',
     'podcast-view' => 'Početna stranica',
     'podcast-edit' => 'Uredi podkast',

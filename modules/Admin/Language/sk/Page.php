@@ -24,7 +24,7 @@ return [
         'submit_edit' => 'Uložiť',
     ],
     'messages' => [
-        'createSuccess' => 'The page “{pageTitle}” was created successfully!',
-        'editSuccess' => 'The page was successfully updated!',
+        'createSuccess' => 'Stránka “{pageTitle}” bola úspešne vytvorená!',
+        'editSuccess' => 'Stránka bola úspešne aktualizovaná!',
     ],
 ];

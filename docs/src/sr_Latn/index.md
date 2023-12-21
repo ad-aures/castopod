@@ -2,171 +2,173 @@
 sidebarDepth: 2
 ---
 
-# Welcome 👋
+# Dobrodošli 👋
 
 [![release-badge]][release]&nbsp;[![license-badge]][license]&nbsp;[![contributions-badge]][contributions]&nbsp;[![semantic-release-badge]][semantic-release]&nbsp;[![crowdin-badge]][crowdin]&nbsp;[![discord-badge]][discord]&nbsp;[![stars-badge]][stars]
 
-Castopod is a free & open-source hosting platform made for podcasters who want
-engage and interact with their audience.
+Castopod je besplatna platforma otvorenog koda napravljena za podkastere koji
+žele interakciju sa svojom publikom.
 
-Castopod is easy to install and was built on top of
-[CodeIgniter4](https://codeigniter.com/), a powerful PHP framework with a very
-small footprint.
+Castopod se lako instalira i napravljen je na
+[CodeIgniter4](https://codeigniter.com/), moćnom PHP okviru sa jako malim
+otiskom (footprint).
 
 <div class="flex items-center">
-  <a href="/getting-started/install" class="inline-flex items-center px-4 py-2 mx-auto font-semibold text-center text-white rounded-full shadow gap-x-1 bg-pine-500 hover:no-underline hover:bg-pine-600">Install<svg viewBox="0 0 24 24" width="1em" height="1em" class="text-xl text-pine-200"><path fill="currentColor" d="m16.172 11-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg></a>
+  <a href="/getting-started/install" class="inline-flex items-center px-4 py-2 mx-auto font-semibold text-center text-white rounded-full shadow gap-x-1 bg-pine-500 hover:no-underline hover:bg-pine-600">Instaliraj<svg viewBox="0 0 24 24" width="1em" height="1em" class="text-xl text-pine-200"><path fill="currentColor" d="m16.172 11-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg></a>
 </div>
 
-## Features
+## Funkcionalnosti
 
-- 🌱 &nbsp;Free & open-source (AGPL v3 License)
-- 🔐 &nbsp;Focused on data sovereignty: your content, audience, and analytics
-  belong to you, and&nbsp;you&nbsp;only
-- 🪄 &nbsp;Podcasting 2.0 features: GUID, locked, transcripts, funding,
-  chapters, location, persons, soundbites, …
-- 💬 &nbsp;Built-in social network:
-  - 🚀 &nbsp;Castopod is part of the Fediverse, a decentralized social network
-  - ❤️ &nbsp;Create posts, share, favourite, and comment on episodes
-- 📈 &nbsp;Built-in analytics:
-  - ⚖️ &nbsp;GDPR / CCPA / LGPD compliant
-  - 🪙 &nbsp;Standard IABv2 audience measurement
-  - 🏡 &nbsp;On-premises analytics, no third party involved
-- 📢 &nbsp;Built-in marketing tools:
-  - ✅ &nbsp;SEO ready (open-graph meta-tags, JSON-LD, …)
-  - 📱 &nbsp;PWA: install as a standalone app
-  - 🎨 &nbsp;Customizable theme colors
-  - 🎬 &nbsp;Generate ready-to-share Video clips from episodes
-  - 🔉 &nbsp;Generate soundbites
-  - ▶️ &nbsp;Embeddable player, embed your episodes on any website
-- 💸 &nbsp;Monetization:
-  - 🔗 &nbsp;Funding links
-  - 📲 &nbsp;listen-to-click ads
-  - 🤝 &nbsp;value4value / WebMonetization
-  - 💎 &nbsp;Premium podcasts
-- 📡 &nbsp;Publish your episodes everywhere with RSS:
-  - 📱 &nbsp;On all indexes and apps: Podcast Index, Apple Podcasts, Spotify,
-    Google Podcasts, Deezer, Podcast Addict, Podfriend, …
-  - ⚡ &nbsp;Broadcast your episodes instantly with WebSub
-- 📥 &nbsp;Podcast import: move your existing podcast into Castopod
-- 📤 &nbsp;Move your podcast out of Castopod
-- 🔀 &nbsp;Multi-tenant: host as many podcasts as you want
-- 👥 &nbsp;Multi-user: add contributors and set roles
-- 🌎 &nbsp;i18n support: translated in English, French, Polish, German,
-  Brazilian Portuguese & Spanish… with
-  [more to come](https://translate.castopod.org)!
+- 🌱 Besplatan i otvorenog koda (AGPL v3 License)
+- 🔐 Fokusiran an suverenitet podataka: vaš sadržaj, publika i analitika pripada
+  vama i samo vama
+- 🪄 &nbsp;Podkasting 2.0 funkcionalnosti: GUID, zaključan, transkripti,
+  podrška, poglavlja, lokacija, posobe, zvučni isečci, …
+- 💬 &nbsp;Ugrađena društvena mreža:
+  - 🚀 &nbsp;Castopod je deo Fediversa, decentralizovane društvene mreže
+  - ❤️ &nbsp;Napravite objave, delite, dodajte u omiljene i komentarišite
+    epizode
+- 📈 &nbsp;Ugrađena analitika:
+  - ⚖️ &nbsp;U skladu sa GDPR / CCPA / LGPD
+  - 🪙 &nbsp;Merenje publike putem IABv2 standarda
+  - 🏡 &nbsp;Analitika na licu mesta, bez uključenosti trećih strana
+- 📢 &nbsp;Ugrađeni marketinški alati:
+  - ✅ &nbsp;SEO spremno (open-graph meta-tags, JSON-LD, …)
+  - 📱 &nbsp;PWA: instalirajte kao samostojeću aplikaciju
+  - 🎨 &nbsp;Prilagodljive boje teme
+  - 🎬 &nbsp;Napravite video isečke iz epizoda koji su spremni za deljenje
+  - 🔉 &nbsp;Napravite audio isečke
+  - ▶️ &nbsp;Plejer koji možete koristiti na svom sajtu (embed)
+- 💸 &nbsp;Monetizacija:
+  - 🔗 &nbsp;Linkovi za podršku publike
+  - 📲 &nbsp;Slušaj i klikni reklame
+  - 🤝 &nbsp;value4value / Veb Monetizacija
+  - 💎 &nbsp;Premijum podkasti
+- 📡 &nbsp;Objavite svoje epizode svugde uz RSS:
+  - 📱 &nbsp;Na svim agregatorima i aplikacijama: Podcast Index, Apple Podcasts,
+    Spotify, Google Podcasts, Deezer, Podcast Addict, Podfriend, …
+  - ⚡ &nbsp;Emitujte svoje epizode instant uz WebSub
+- 📥 &nbsp;Uvoz podkasta: prebacite svoj postojeći podkast na Castopod
+- 📤 &nbsp;Prebacite svoj podkast sa Castopod-a
+- 🔀 &nbsp;Mreža: hostujte koliko god želite podkasta
+- 👥 &nbsp;Više korisnika: dodajte saradnike i odredite njihove uloge
+- 🌎 &nbsp;i18n podrška: prevedeno na engleski, francuski, poljski, nemački,
+  brazilski portugalski, španski…
+  [još jezika uskoro](https://translate.castopod.org)!
 
-## Motivation
+## Motivacija
 
-The podcasting ecosystem is decentralized by nature: you can create your podcast
-as an RSS file, publish it on the web and have it shared everywhere online.
+Ekosistem podcasta je po prirodi decentralizovan: možete kreirati svoj podkast
+kao RSS datoteku, objavite je na vebu i deliti svuda na mreži.
 
-It is in fact one of the only media to have stayed this way for a long time.
+To je zapravo jedan od retkih medija koji je ostao decentralizovan ovako dugo.
 
-As usages are evolving, more and more people are getting into podcasts: whether
-it is creators finding new ways to share their ideas, or listeners in the search
-for better content.
+Kako se upotreba razvija, sve više ljudi ulazi u podkaste: ili kao kreatori koji
+pronalaze nove načine da podele svoje ideje ili kao slušaoci u potrazi za boljim
+sadržajem.
 
-With podcasting becoming more widely used, some companies are trying to shift it
-towards a more controlled and centralized medium.
+Kako podkasting postaje sve više korišćen, neke kompanije pokušavaju da ga
+promene ka kontrolisanijem i centralizovanijem mediju.
 
-Castopod was created in an effort to provide an open and sustainable alternative
-to hosting your podcasts, promoting decentralization to ensure that podcasters
-creativity can express itself.
+Castopod je stvoren u nastojanju da pruži otvorenu i održivu alternativu za
+hostovanje vaših podkasta, promovišući decentralizaciju kako bi se osiguralo da
+podkasterska kreativnost može da se izrazi.
 
-This project is pushed by the open-source community, and specifically by the
-[Fediverse](https://fediverse.party/en/fediverse/) and
-[Podcasting 2.0](https://podcastindex.org/) movements.
+Ovaj projekat gura zajednica otvorenog koda, ponajviše
+[Fedivers](https://fediverse.party/en/fediverse/) i
+[Podcasting 2.0](https://podcastindex.org/) pokreti.
 
-## Comparison with other solutions
+## Poređenje sa drugim rešenjima
 
-We believe that a solution is not necessarily right for everyone, it highly
-depends on your needs. So, here are comparisons with other tools to help you to
-gauge whether Castopod is the right fit for&nbsp;you.
+Verujemo da jedno rešenje nije dobro za sve, već da sve zavisi od vaših potreba.
+Tako da evo poređenja sa drugim alatima kako bi ste mogli da procenite da li je
+Castopod prava stvar za vas.
 
-### Castopod vs Wordpress
+### Castopod protiv Wordpress-a
 
-Castopod is often referred to as "the Wordpress for podcasts" because of the
-similarities between the two. In some ways this is true. And actually, Castopod
-was greatly inspired by the Wordpress ecosystem, seeing the ease of adoption
-from the community and the number of websites running&nbsp;it.
+Castopod je često nazivan "Wordpress-om za podkaste" zbog sličnosti koje deli sa
+ovom ploatformom. U neku ruku ovo je tačno. I zapravo, Castopod bio je u velikoj
+meri inspirisan Wordpress ekosistemom, videvši lakoću usvajanja od zajednice i
+broja veb lokacija koje rade na njemu.
 
-Just like Wordpress, Castopod is free & open source, built using PHP with a
-MySQL database and is packaged in a way that you can easily install on most web
-servers.
+Isto kao i Wordpress, Castopod je besplatan i otvorenog koda, napravljen
+koristeći PHP i MySQL baze podataka i spakovan na način koji vam omogućava
+jednostavnu instalaciju na većini veb servera.
 
-Wordpress is a great way to create your website and extend it with plugins to
-get what you want. It is a full fledged CMS that helps you get any type of
-website online.
+Wordpress je odličan način na napravite veb stranicu i upotpunite je dodatcima
+kako bi dobili ono što želite. To je potpuno razvijen CMS koji vam pomaže da
+dobijete bilo koju vrstu veb stranica na mreži.
 
-On the other hand, Castopod is meant to address the podcasters needs
-specifically, focusing on podcasting, and nothing else. You don't need any
-plugin to get you started on your podcasting&nbsp;journey.
+S druge strane, Castopod treba da odgovori na posebne potrebe podkastera,
+fokusirajući se na podkasting, i ništa drugo. Nisu vam potrebni nikakvi dodatci
+kako bi ste krenuli na svoje podkastersko putovanje.
 
-This allows optimizing the processes specific to podcasting: ranging from the
-creation of your podcasts and the publication of new episodes all the way to
-broadcasting, marketing and analytics.
+Ovo omogućava optimizaciju procesa specifičnih za podcasting: u rasponu od
+kreiranja vaših podkasta i objavljivanja novih epizoda sve do emitovanja,
+marketinga i analitike.
 
-Finally, depending on your needs, Wordpress and Castopod can even live side by
-side as they share the same requirements!
+Konačno, u zavisnosti od vaših potreba, Wordpress i Castopod mogu čak i da
+funkcionišu zajedno jer dele iste zahteve!
 
-### Castopod vs Funkwhale
+### Castopod protiv Funkwhale-a
 
-Funkwhale is a self-hosted, modern free and open-source music server. Just as
-Castopod, Funkwhale is on the fediverse, a decentralized social network allowing
-interoperability between the two.
+Funkwhale je moderan besplatni muzički server otvorenog koda koji se samostalno
+hostuje. Kao i Castopod, Funkwhale je deo Fedivers-a, decentralizovane društvene
+mreže što omogućava kompatibilnost između njih.
 
-Funkwhale was initially built around music. And later on, as the project
-evolved, the ability to host podcasts was introduced.
+Funkwhale je u početku napravljen oko muzike. Kasnije, kako je projekat
+napredovao, dodata je opcija hostovanja podkasta.
 
-Unlike Funkwhale, Castopod has been designed and built around podcasting
-exclusively. This allows easier implementation for features related to the
-podcasting ecosystem, such as the podcasting 2.0 features (transcripts,
-chapters, locations, persons, …).
+Za razliku od Funkwhale-a, Castopod je dizajniran i napravljen isključivo oko
+podkasta. Ovo omogućava lakšu implementaciju funkcionalnosti koje se odnose na
+podkast ekosistem, kao što su podkasting 2.0 alati (transkripti, poglavlja,
+lokacije, osobe, ...).
 
-So, you should probably use Funkwhale if you want to host your music, and use
-Castopod if you want to host your podcasts.
+Tako da bi ste verovatno trebali da koristite Funkwhale ukoliko želite da
+hostujete svoju muziku a Castopod ukoliko želite da hostujete svoje podkaste.
 
-### Castopod vs other podcast hosts
+### Castopod protiv drugih podkast hosting-a
 
-There are many solutions for you to host your podcasts, some of which are really
-great and [a lot of them](https://podcastindex.org/apps) are jumping into the
-Podcasting 2.0 wagon just like Castopod!
+Postoji mnogo različitih rešenja za hostovanje vaših podkasta, neka od njih su
+stvarno fantastična i [ dosta njih](https://podcastindex.org/apps) se
+priključuje Podcasting 2.0 trendu, isto kao i Castopod!
 
-Each of these solutions differ from one another, you may compare with the
-[list of features](#features).
+Svako od ovih rešenja se razlikuje jedno od drugog, možete ih uporediti sa
+[listom funkcionalnosti](#features).
 
-That being said, there are two main differences with other podcasting solutions:
+Imajući to u vidu, postoje dve glavne razlike u odnosu na druga rešenja za
+podkasting:
 
-- Castopod can be self-hosted and is the only solution that allows you to keep
-  full control over what you produce. Also, as it is open-source, you can even
-  customize it as you wish.
+- Castopod može biti samostalno hostovan i jedino je rešenje koje vam omogućava
+  da zadržite punu kontrolu nad onim što proizvodite. Takođe, pošto je otvorenog
+  koda, možete ga čak prilagoditi kako želite.
 
-- Castopod is the only solution that currently integrates both a decentralized
-  social network with ActivityPub as well as many of the podcasting 2.0
-  features, hoping to bridge the gap between the two.
+- Castopod je jedino rešenje koje trenutno uklapa decentralizovanu društvenu
+  mrežu sa ActivityPub-om kao i mnoge funkcionalnosti podkasting-a 2.0, nadajući
+  se da će ih tako približiti.
 
-## Contributing
+## Doprinos
 
-Love Castopod and would like to help? Take a look at the following documentation
-to get you&nbsp;started.
+Volite Catsopod i voleli bi ste da pomognete? Pogledajte dokumentaciju koja
+sledi kako bi ste počeli.
 
-### Code of conduct
+### Kodeks ponašanja
 
-Castopod has adopted a Code of Conduct that we expect project participants to
-adhere to. Please read the
-[CODE_OF_CONDUCT manual](https://code.castopod.org/adaures/castopod/-/blob/beta/CODE_OF_CONDUCT.md)
-so that you can understand what actions will and will not be&nbsp;tolerated.
+Castopod je usvojio Kodeks ponašanja kojeg očekujemo da se učesnici u projektu
+pridržavaju. Molimo da pročitate
+[Uputstvo Kodeksa ponašanja](https://code.castopod.org/adaures/castopod/-/blob/beta/CODE_OF_CONDUCT.md)
+kako bi ste razumeli šta hoće a šta neće biti tolerisano.
 
-### Contributing guide
+### Vodič za doprinos
 
-Read our [contributing guide](./contributing/guidelines.md) to learn about our
-development process, how to propose bugfixes and improvements, and how to build
-and test your changes to Castopod.
+Pročitajte naše [uputstvo za doprinos](../contributing/guidelines.md) kako bi
+ste bolje razumeli naš proces razvoja, kako da predložite popravke bagova i
+unapređenja i kako da napravite i testirate svoje promene na Castopod-u.
 
-## Contributors ✨
+## Saradnici ✨
 
-Thanks goes to these wonderful people
-([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+Veliko hvala ovim divnim ljudima
+([ključ emotikona](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -211,7 +213,7 @@ Thanks goes to these wonderful people
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://crowdin.com/profile/glottis0q"><img src="https://crowdin-static.downloads.crowdin.com/avatar/15209934/large/8b17ef6a7399f0b82a8198f87c224195.png?s=100" width="100px;" alt="glottis0q"/><br /><sub><b>glottis0q</b></sub></a><br /><a href="https://translate.castopod.org" title="Translation">🌍</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://mstdn.fr/@ButterflyOfFire"><img src="https://static.mstdn.fr/static/accounts/avatars/000/065/901/original/5908e93ad5447f15.png?s=100" width="100px;" alt="ButterflyOfFire"/><br /><sub><b>ButterflyOfFire</b></sub></a><br /><a href="https://translate.castopod.org" title="Translation">🌍</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://crowdin.com/profile/glottis0q"><img src="https://crowdin-static.downloads.crowdin.com/avatar/15209934/large/8b17ef6a7399f0b82a8198f87c224195.png?s=100" width="100px;" alt="glottis0q"/><br /><sub><b>glottis0q</b></sub></a><br /><a href="https://translate.castopod.org" title="Translation">🌍</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/lil5"><img src="https://avatars.githubusercontent.com/u/17646836?v=4?s=100" width="100px;" alt="Lucian I. Last"/><br /><sub><b>Lucian I. Last</b></sub></a><br /><a href="https://translate.castopod.org" title="Translation">🌍</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://crowdin.com/profile/luuzviir"><img src="https://crowdin-static.downloads.crowdin.com/avatar/13166188/large/d03ab0abc7ce354b210d836955cd3805_default.png?s=100" width="100px;" alt="LuuzViir"/><br /><sub><b>LuuzViir</b></sub></a><br /><a href="https://translate.castopod.org" title="Translation">🌍</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://crowdin.com/profile/cthtc"><img src="https://crowdin-static.downloads.crowdin.com/avatar/15211502/large/ed0651060cb8474a9519b5168bd377c1_default.png?s=100" width="100px;" alt="CTHTC"/><br /><sub><b>CTHTC</b></sub></a><br /><a href="https://translate.castopod.org" title="Translation">🌍</a></td>
@@ -247,43 +249,43 @@ Thanks goes to these wonderful people
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-This project follows the
-[all-contributors](https://github.com/all-contributors/all-contributors)
-specification. Contributions of any kind welcome!
+Ovaj projekat prati specifikaciju
+[svih saradnika](https://github.com/all-contributors/all-contributors).
+Doprinosi bilo koje vrste su dobrodošli!
 
-## Contact
+## Kontakt
 
-You may reach us for help or ask any question you have on:
+Možete nas kontaktirati za pomoć ili postaviti bilo koje pitanje koje imate na:
 
-- [Discord](https://castopod.org/discord) (for direct interaction with
-  developers and the community)
-- [Issue tracker](https://code.castopod.org/adaures/castopod/-/issues) (for
-  feature requests & bug reports)
+- [Discord-u](https://castopod.org/discord) (za direktnu interakciju sa
+  programerima i zajednicom)
+- [Listi pitanja](https://code.castopod.org/adaures/castopod/-/issues) (za
+  zahteve za funkcionalnostima i prijavu bagova)
 
-Alternatively, you can follow us on social media platforms to get news about
-Castopod:
+Takođe, možete nas pratiti na društvenim mrežama kako bi ste dobili najnovije
+vesti o Castopod-u:
 
-- [podlibre.social](https://podlibre.social/@Castopod) (Mastodon instance)
+- [podlibre.social](https://podlibre.social/@Castopod) (instanca Mastodon-a)
 - [Twitter](https://twitter.com/castopod)
 - [LinkedIn](https://linkedin.com/company/castopod)
 - [Facebook](https://www.facebook.com/castopod)
 
-## Sponsors
+## Sponzori
 
-The ongoing development of Castopod is made possible with the support of its
-backers. If you'd like to help, please consider
-[sponsoring Castopod's development](https://opencollective.com/castopod/contribute).
+Tekući razvoj Castopod-a je omogućen uz podršku vas koji nas podržavate. Ukoliko
+želite da pomognete, razmislite o
+[sponzorisanju razvoja Castopod-a](https://opencollective.com/castopod/contribute).
 
 <div class="flex flex-wrap gap-x-16 gap-y-8">
   <a href="https://adaures.com/" target="_blank" rel="noopener noreferrer"><img src="/images/sponsors/adaures.svg" alt="Ad Aures Logo" class="h-16" /></a>
   <a href="https://nlnet.nl/project/Castopod/" target="_blank" rel="noopener noreferrer"><img src="/images/sponsors/nlnet.svg" alt="NLnet Logo" class="h-16" /></a>
 </div>
 
-## License
+## Licenca
 
 [GNU Affero General Public License v3.0](https://choosealicense.com/licenses/agpl-3.0/)
 
-Copyright © 2020-present, [Ad Aures](https://adaures.com/).
+Autorska prava © 2020-danas, [Ad Aures](https://adaures.com/).
 https://img.shields.io/gitlab/v/release/2?color=brightgreen&gitlab_url=https%3A%2F%2Fcode.castopod.org%2F&include_prereleases&label=release
 https://img.shields.io/github/license/ad-aures/castopod?color=blue
 https://img.shields.io/badge/contributions-welcome-brightgreen.svg

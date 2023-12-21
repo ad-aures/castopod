@@ -9,11 +9,11 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => 'General settings',
+    'title' => 'Všeobecné nastavenia',
     'instance' => [
-        'title' => 'Instance',
-        'site_icon' => 'Site icon',
-        'site_icon_delete' => 'Delete site icon',
+        'title' => 'Inštancia',
+        'site_icon' => 'Ikona stránky',
+        'site_icon_delete' => 'Odstrániť ikonu stránky',
         'site_icon_hint' => 'Site icons are what you see on your browser tabs, bookmarks bar, and when you add a website as a shortcut on mobile devices.',
         'site_icon_helper' => 'Icon must be squared and at least 512px wide and tall.',
         'site_name' => 'Site name',
@@ -43,7 +43,7 @@ return [
         'runSuccess' => 'Housekeeping has been run successfully!',
     ],
     'theme' => [
-        'title' => 'Theme',
+        'title' => 'Vzhľad',
         'accent_section_title' => 'Accent color',
         'accent_section_subtitle' => 'Choose the color to determine the look and feel of all public pages.',
         'pine' => 'Pine',
@@ -52,7 +52,7 @@ return [
         'lake' => 'Lake',
         'jacaranda' => 'Jacaranda',
         'onyx' => 'Onyx',
-        'submit' => 'Save',
+        'submit' => 'Uložiť',
         'setInstanceThemeSuccess' => 'Theme has been updated successfully!',
     ],
 ];

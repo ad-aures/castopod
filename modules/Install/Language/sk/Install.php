@@ -29,10 +29,10 @@ return [
         'database_config_hint' =>
             'Castopod needs to connect to your MySQL (or MariaDB) database. If you do not have these required info, please contact your server administrator.',
         'db_hostname' => 'Database hostname',
-        'db_name' => 'Database name',
-        'db_username' => 'Database username',
-        'db_password' => 'Database password',
-        'db_prefix' => 'Database prefix',
+        'db_name' => 'Názov databázy',
+        'db_username' => 'Prihlasovacie meno do databázy',
+        'db_password' => 'Heslo k databáze',
+        'db_prefix' => 'Prefix databázy',
         'db_prefix_hint' =>
             "The prefix of the Castopod table names, leave as is if you don't know what it means.",
         'cache_config' => 'Cache configuration',
@@ -44,18 +44,18 @@ return [
             'redis' => 'Redis',
             'predis' => 'Predis',
         ],
-        'next' => 'Next',
-        'submit' => 'Finish install',
+        'next' => 'Ďalej',
+        'submit' => 'Dokončiť inštaláciu',
         'create_superadmin' => 'Create your superadmin account',
         'email' => 'Email',
-        'username' => 'Username',
-        'password' => 'Password',
+        'username' => 'Používateľské meno',
+        'password' => 'Heslo',
     ],
     'messages' => [
         'createSuperAdminSuccess' =>
             'Your superadmin account has been created successfully. Login to start podcasting!',
         'databaseConnectError' =>
-            'Castopod could not connect to your database. Edit your database configuration and try again.',
+            'Castopod sa nemohol pripojiť k vašej databáze. Upravte konfiguráciu svojej databázy a skúste to znovu.',
         'writeError' =>
             "Couldn't create/write the `.env` file. You must create it manually by following the `.env.example` file template in the Castopod package.",
     ],
