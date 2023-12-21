@@ -13,7 +13,7 @@ declare(strict_types=1);
 namespace Modules\Analytics\Entities;
 
 use CodeIgniter\Entity\Entity;
-use Opawg\UserAgentsPhp\UserAgentsRSS;
+use Opawg\UserAgentsV2Php\UserAgentsRSS;
 
 /**
  * @property int $podcast_id

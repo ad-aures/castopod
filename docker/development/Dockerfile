@@ -15,7 +15,7 @@ WORKDIR /castopod
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 # Install server requirements
-RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
     && apt-get update \
     && apt-get install --yes --no-install-recommends nodejs \
     # gnupg to sign commits with gpg

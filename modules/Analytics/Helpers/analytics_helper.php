@@ -12,7 +12,7 @@ use AdAures\Ipcat\IpDb;
 use Config\Services;
 use GeoIp2\Database\Reader;
 use Modules\Analytics\Config\Analytics;
-use Opawg\UserAgentsPhp\UserAgents;
+use Opawg\UserAgentsV2Php\UserAgents;
 use WhichBrowser\Parser;
 
 if (! function_exists('base64_url_encode')) {

@@ -20,7 +20,7 @@ use CodeIgniter\HTTP\ResponseInterface;
 use Exception;
 use Modules\PremiumPodcasts\Entities\Subscription;
 use Modules\PremiumPodcasts\Models\SubscriptionModel;
-use Opawg\UserAgentsPhp\UserAgentsRSS;
+use Opawg\UserAgentsV2Php\UserAgentsRSS;
 
 class FeedController extends Controller
 {
