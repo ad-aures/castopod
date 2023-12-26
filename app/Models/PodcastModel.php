@@ -502,7 +502,10 @@ class PodcastModel extends Model
      */
     protected function setPodcastGUID(array $data): array
     {
-        if (! array_key_exists('guid', $data['data']) || $data['data']['guid'] === null) {
+        if (! array_key_exists(
+            'guid',
+            $data['data']
+        ) || $data['data']['guid'] === null || $data['data']['guid'] === '') {
             $uuid = service('uuid');
             $feedUrl = url_to('podcast-rss-feed', $data['data']['handle']);
             // 'ead4c236-bf58-58c6-a2c6-a6b28d128cb6' is the uuid of the podcast namespace
