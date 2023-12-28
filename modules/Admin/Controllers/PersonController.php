@@ -14,6 +14,7 @@ use App\Entities\Person;
 use App\Models\PersonModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
+use Modules\Media\Models\MediaModel;
 
 class PersonController extends BaseController
 {
@@ -151,6 +152,11 @@ class PersonController extends BaseController
 
     public function delete(): RedirectResponse
     {
+        if ($this->person->avatar_id !== null) {
+            // delete avatar to prevent collision if recreating person
+            (new MediaModel())->deleteMedia($this->person->avatar);
+        }
+
         (new PersonModel())->delete($this->person->id);
 
         return redirect()->route('person-list')
