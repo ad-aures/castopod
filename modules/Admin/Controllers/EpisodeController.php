@@ -157,7 +157,8 @@ class EpisodeController extends BaseController
     public function attemptCreate(): RedirectResponse
     {
         $rules = [
-            'slug'            => 'max_length[128]',
+            'title'           => 'required',
+            'slug'            => 'required|max_length[128]',
             'audio_file'      => 'uploaded[audio_file]|ext_in[audio_file,mp3,m4a]',
             'cover'           => 'is_image[cover]|ext_in[cover,jpg,jpeg,png]|min_dims[cover,1400,1400]|is_image_ratio[cover,1,1]',
             'transcript_file' => 'ext_in[transcript,srt]|permit_empty',
@@ -243,6 +244,7 @@ class EpisodeController extends BaseController
 
         $episodeModel = new EpisodeModel();
         if (! ($newEpisodeId = $episodeModel->insert($newEpisode, true))) {
+            dd($episodeModel->errors());
             $db->transRollback();
             return redirect()
                 ->back()
@@ -294,7 +296,8 @@ class EpisodeController extends BaseController
     public function attemptEdit(): RedirectResponse
     {
         $rules = [
-            'slug'            => 'max_length[128]',
+            'title'           => 'required',
+            'slug'            => 'required|max_length[128]',
             'audio_file'      => 'uploaded[audio_file]|ext_in[audio_file,mp3,m4a]|permit_empty',
             'cover'           => 'is_image[cover]|ext_in[cover,jpg,jpeg,png]|min_dims[cover,1400,1400]|is_image_ratio[cover,1,1]',
             'transcript_file' => 'ext_in[transcript_file,txt,html,srt,json]|permit_empty',
