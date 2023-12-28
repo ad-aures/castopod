@@ -530,6 +530,13 @@ class PlatformSeeder extends Seeder
                 'submit_url' => 'https://joinmastodon.org/communities',
             ],
             [
+                'slug'       => 'matrix',
+                'type'       => 'social',
+                'label'      => 'Matrix',
+                'home_url'   => 'https://matrix.org/',
+                'submit_url' => 'https://matrix.org/try-matrix/',
+            ],
+            [
                 'slug'       => 'misskey',
                 'type'       => 'social',
                 'label'      => 'Misskey',
