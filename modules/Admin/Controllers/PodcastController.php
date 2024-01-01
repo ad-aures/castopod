@@ -214,12 +214,13 @@ class PodcastController extends BaseController
             'parental_advisory'    => $this->request->getPost('parental_advisory') !== 'undefined'
                     ? $this->request->getPost('parental_advisory')
                     : null,
-            'owner_name'  => $this->request->getPost('owner_name'),
-            'owner_email' => $this->request->getPost('owner_email'),
-            'publisher'   => $this->request->getPost('publisher'),
-            'type'        => $this->request->getPost('type'),
-            'copyright'   => $this->request->getPost('copyright'),
-            'location'    => $this->request->getPost('location_name') === '' ? null : new Location(
+            'owner_name'                       => $this->request->getPost('owner_name'),
+            'owner_email'                      => $this->request->getPost('owner_email'),
+            'is_owner_email_removed_from_feed' => $this->request->getPost('is_owner_email_removed_from_feed') === 'yes',
+            'publisher'                        => $this->request->getPost('publisher'),
+            'type'                             => $this->request->getPost('type'),
+            'copyright'                        => $this->request->getPost('copyright'),
+            'location'                         => $this->request->getPost('location_name') === '' ? null : new Location(
                 $this->request->getPost('location_name')
             ),
             'custom_rss_string'     => $this->request->getPost('custom_rss'),

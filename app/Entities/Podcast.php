@@ -62,6 +62,7 @@ use RuntimeException;
  * @property string|null $publisher
  * @property string $owner_name
  * @property string $owner_email
+ * @property bool $is_owner_email_removed_from_feed
  * @property string $type
  * @property string|null $copyright
  * @property string|null $episode_description_footer_markdown
@@ -191,6 +192,7 @@ class Podcast extends Entity
         'publisher'                           => '?string',
         'owner_name'                          => 'string',
         'owner_email'                         => 'string',
+        'is_owner_email_removed_from_feed'    => 'boolean',
         'type'                                => 'string',
         'copyright'                           => '?string',
         'episode_description_footer_markdown' => '?string',

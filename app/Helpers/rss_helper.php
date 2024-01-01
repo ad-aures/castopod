@@ -101,9 +101,15 @@ if (! function_exists('get_rss_feed')) {
             $recipientElement->addAttribute('split', '100');
         }
 
-        $channel
-            ->addChild('locked', $podcast->is_locked ? 'yes' : 'no', $podcastNamespace)
-            ->addAttribute('owner', $podcast->owner_email);
+        if ($podcast->is_owner_email_removed_from_feed) {
+            $channel
+                ->addChild('locked', $podcast->is_locked ? 'yes' : 'no', $podcastNamespace);
+        } else {
+            $channel
+                ->addChild('locked', $podcast->is_locked ? 'yes' : 'no', $podcastNamespace)
+                ->addAttribute('owner', $podcast->owner_email);
+        }
+
         if ($podcast->imported_feed_url !== null) {
             $channel->addChild('previousUrl', $podcast->imported_feed_url, $podcastNamespace);
         }
@@ -249,7 +255,9 @@ if (! function_exists('get_rss_feed')) {
 
         $owner->addChild('name', $podcast->owner_name, $itunesNamespace, false);
 
-        $owner->addChild('email', $podcast->owner_email, $itunesNamespace);
+        if (! $podcast->is_owner_email_removed_from_feed) {
+            $owner->addChild('email', $podcast->owner_email, $itunesNamespace);
+        }
 
         $channel->addChild('type', $podcast->type, $itunesNamespace);
         $podcast->copyright &&

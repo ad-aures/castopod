@@ -48,6 +48,7 @@ class PodcastModel extends Model
         'parental_advisory',
         'owner_name',
         'owner_email',
+        'is_owner_email_removed_from_feed',
         'publisher',
         'type',
         'copyright',
