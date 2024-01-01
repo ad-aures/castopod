@@ -41,8 +41,7 @@ class Autoload extends AutoloadConfig
      *       'App'	       => APPPATH
      *   ];
      *
-     * @var array<string, array<int, string>|string>
-     * @phpstan-var array<string, string|list<string>>
+     * @var array<string, list<string>|string>
      */
     public $psr4 = [
         APP_NAMESPACE             => APPPATH,
@@ -100,8 +99,7 @@ class Autoload extends AutoloadConfig
      *	 	   '/path/to/my/file.php',
      *    ];
      *
-     * @var string[]
-     * @phpstan-var list<string>
+     * @var list<string>
      */
     public $files = [APPPATH . 'Libraries/ViewComponents/Helpers/view_components_helper.php'];
 
@@ -114,8 +112,7 @@ class Autoload extends AutoloadConfig
      *       'form',
      *   ];
      *
-     * @var string[]
-     * @phpstan-var list<string>
+     * @var list<string>
      */
     public $helpers = ['auth', 'setting'];
 }

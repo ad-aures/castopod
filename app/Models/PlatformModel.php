@@ -84,7 +84,7 @@ class PlatformModel extends Model
         string $label,
         string $homeUrl,
         string $submitUrl = null
-    ): int | false {
+    ): bool {
         $data = [
             'slug'       => $slug,
             'type'       => $type,

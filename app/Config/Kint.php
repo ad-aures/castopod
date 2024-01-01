@@ -5,7 +5,10 @@ declare(strict_types=1);
 namespace Config;
 
 use CodeIgniter\Config\BaseConfig;
+use Kint\Parser\ConstructablePluginInterface;
 use Kint\Renderer\AbstractRenderer;
+use Kint\Renderer\Rich\TabPluginInterface;
+use Kint\Renderer\Rich\ValuePluginInterface;
 
 /**
  * --------------------------------------------------------------------------
@@ -26,9 +29,9 @@ class Kint extends BaseConfig
     */
 
     /**
-     * @var string[]
+     * @var list<class-string<ConstructablePluginInterface>|ConstructablePluginInterface>|null
      */
-    public array $plugins = [];
+    public ?array $plugins = [];
 
     public int $maxDepth = 6;
 
@@ -49,14 +52,14 @@ class Kint extends BaseConfig
     public int $richSort = AbstractRenderer::SORT_FULL;
 
     /**
-     * @var string[]
+     * @var array<string, class-string<ValuePluginInterface>>|null
      */
-    public array $richObjectPlugins = [];
+    public ?array $richObjectPlugins = [];
 
     /**
-     * @var string[]
+     * @var array<string, class-string<TabPluginInterface>>|null
      */
-    public array $richTabPlugins = [];
+    public ?array $richTabPlugins = [];
 
     /*
     |--------------------------------------------------------------------------

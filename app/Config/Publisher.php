@@ -19,7 +19,7 @@ class Publisher extends BasePublisher
      * to directories not in this list will result in a PublisherException. Files that do no fit the pattern will cause
      * copy/merge to fail.
      *
-     * @var array<string,string>
+     * @var array<string, string>
      */
     public $restrictions = [
         ROOTPATH => '*',

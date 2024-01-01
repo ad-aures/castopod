@@ -47,6 +47,29 @@ $errorId = uniqid('error', true);
 		<?php endif; ?>
 	</div>
 
+	<div class="container">
+        <?php
+        $last = $exception;
+
+while ($prevException = $last->getPrevious()) {
+    $last = $prevException;
+    ?>
+
+    <pre>
+    Caused by:
+    <?= esc(get_class($prevException)), esc($prevException->getCode() ? ' #' . $prevException->getCode() : '') ?>
+
+    <?= nl2br(esc($prevException->getMessage())) ?>
+    <a href="https://www.duckduckgo.com/?q=<?= urlencode(get_class($prevException) . ' ' . preg_replace('#\'.*\'|".*"#Us', '', $prevException->getMessage())) ?>"
+       rel="noreferrer" target="_blank">search &rarr;</a>
+    <?= esc(clean_path($prevException->getFile()) . ':' . $prevException->getLine()) ?>
+    </pre>
+
+        <?php
+}
+?>
+    </div>
+
 	<?php if (defined('SHOW_DEBUG_BACKTRACE') && SHOW_DEBUG_BACKTRACE) : ?>
 	<div class="container">
 
@@ -72,11 +95,11 @@ $errorId = uniqid('error', true);
 							<!-- Trace info -->
 							<?php if (isset($row['file']) && is_file($row['file'])) : ?>
 								<?php
-                                if (isset($row['function']) && in_array($row['function'], ['include', 'include_once', 'require', 'require_once'], true)) {
-                                    echo esc($row['function'] . ' ' . clean_path($row['file']));
-                                } else {
-                                    echo esc(clean_path($row['file']) . ' : ' . $row['line']);
-                                }
+                        if (isset($row['function']) && in_array($row['function'], ['include', 'include_once', 'require', 'require_once'], true)) {
+                            echo esc($row['function'] . ' ' . clean_path($row['file']));
+                        } else {
+                            echo esc(clean_path($row['file']) . ' : ' . $row['line']);
+                        }
 				    ?>
 							<?php else : ?>
 								{PHP internal code}
