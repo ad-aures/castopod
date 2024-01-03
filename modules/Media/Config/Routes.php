@@ -12,6 +12,11 @@ use CodeIgniter\Router\RouteCollection;
 
 /** @var RouteCollection $routes */
 
+$routes->head('static/(:any)', 'MediaController::serve/$1', [
+    'as'        => 'media-serve',
+    'namespace' => 'Modules\Media\Controllers',
+    'filter'    => 'allow-cors',
+]);
 $routes->get('static/(:any)', 'MediaController::serve/$1', [
     'as'        => 'media-serve',
     'namespace' => 'Modules\Media\Controllers',
