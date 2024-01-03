@@ -1,3 +1,10 @@
+## [1.7.4](https://code.castopod.org/adaures/castopod/compare/v1.7.3...v1.7.4) (1/3/2024)
+
+### Bug Fixes
+
+- **media:** add missing HEAD route for static assets served with S3
+  ([b61a32c](https://code.castopod.org/adaures/castopod/commit/b61a32c8a9b10e129666804d533487430ce7432c))
+
 ## [1.7.3](https://code.castopod.org/adaures/castopod/compare/v1.7.2...v1.7.3) (12/21/2023)
 
 ### Bug Fixes
