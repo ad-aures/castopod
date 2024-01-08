@@ -2,12 +2,23 @@
 
 $podcastNavigation = [
     'dashboard' => [
-        'icon'  => 'dashboard',
-        'items' => ['podcast-view', 'podcast-edit', 'podcast-persons-manage', 'podcast-imports', 'podcast-imports-sync'],
+        'icon'              => 'dashboard',
+        'items'             => ['podcast-view', 'podcast-edit', 'podcast-persons-manage', 'podcast-imports', 'podcast-imports-sync'],
+        'items-permissions' => [
+            'podcast-view'           => 'view',
+            'podcast-edit'           => 'edit',
+            'podcast-persons-manage' => 'manage-persons',
+            'podcast-imports'        => 'manage-import',
+            'podcast-imports-sync'   => 'manage-import',
+        ],
     ],
     'episodes' => [
-        'icon'        => 'play-circle',
-        'items'       => ['episode-list', 'episode-create'],
+        'icon'              => 'play-circle',
+        'items'             => ['episode-list', 'episode-create'],
+        'items-permissions' => [
+            'episode-list'   => 'episodes.view',
+            'episode-create' => 'episodes.create',
+        ],
         'add-cta'     => 'episode-create',
         'count'       => $podcast->getEpisodesCount(),
         'count-route' => 'episode-list',
@@ -23,12 +34,25 @@ $podcastNavigation = [
             'podcast-analytics-time-periods',
             'podcast-analytics-webpages',
         ],
+        'items-permissions' => [
+            'podcast-analytics'                  => 'view',
+            'podcast-analytics-unique-listeners' => 'view',
+            'podcast-analytics-listening-time'   => 'view',
+            'podcast-analytics-players'          => 'view',
+            'podcast-analytics-locations'        => 'view',
+            'podcast-analytics-time-periods'     => 'view',
+            'podcast-analytics-webpages'         => 'view',
+        ],
     ],
     'broadcast' => [
         'icon'  => 'broadcast',
         'items' => [
             'platforms-podcasting',
             'platforms-social',
+        ],
+        'items-permissions' => [
+            'platforms-podcasting' => 'manage-platforms',
+            'platforms-social'     => 'manage-platforms',
         ],
     ],
     'monetization' => [
@@ -39,10 +63,20 @@ $podcastNavigation = [
             'platforms-funding',
             'podcast-monetization-other',
         ],
+        'items-permissions' => [
+            'subscription-list'          => 'manage-subscriptions',
+            'subscription-create'        => 'manage-subscriptions',
+            'platforms-funding'          => 'manage-platforms',
+            'podcast-monetization-other' => 'edit',
+        ],
     ],
     'contributors' => [
-        'icon'        => 'group',
-        'items'       => ['contributor-list', 'contributor-add'],
+        'icon'              => 'group',
+        'items'             => ['contributor-list', 'contributor-add'],
+        'items-permissions' => [
+            'contributor-list' => 'manage-contributors',
+            'contributor-add'  => 'manage-contributors',
+        ],
         'add-cta'     => 'contributor-add',
         'count'       => count($podcast->contributors),
         'count-route' => 'contributor-list',

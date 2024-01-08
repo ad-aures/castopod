@@ -27,11 +27,22 @@
         <ul class="flex flex-col pb-4">
             <?php foreach ($data['items'] as $item):
                 $isActive = $item === $activeItem;
+
+                $isAllowed = true;
+                if (array_key_exists('items-permissions', $data) && array_key_exists($item, $data['items-permissions'])) {
+                    if (isset($podcastId)) {
+                        $isAllowed = can_podcast(auth()->user(), $podcastId, $data['items-permissions'][$item]);
+                    } else {
+                        $isAllowed = auth()->user()->can($data['items-permissions'][$item]);
+                    }
+                }
                 ?>
             <li class="inline-flex">
-                <a class="relative w-full py-3 pl-14 pr-2 text-sm hover:opacity-100 before:content-chevronRightIcon before:absolute before:-ml-5 before:opacity-0 before:w-5 before:h-5 hover:bg-navigation-active focus:ring-inset focus:ring-accent<?= $isActive
+                <a class="relative w-full py-3 pl-14 pr-2 text-sm hover:opacity-100 before:absolute before:opacity-0 before:w-5 before:h-5 hover:bg-navigation-active focus:ring-inset focus:ring-accent<?= $isActive
                         ? ' before:opacity-100 font-semibold inline-flex items-center'
-                        : ' hover:before:opacity-60 focus:before:opacity-60' ?>" href="<?= route_to($item, $podcastId ?? null, $episodeId ?? null) ?>"><?= lang(
+                        : ' hover:before:opacity-60 focus:before:opacity-60' ?><?= $isAllowed
+                        ? ' before:content-chevronRightIcon before:-ml-5'
+                        : ' before:content-prohibitedIcon before:-ml-6 before:opacity-60 pointer-events-none' ?>" href="<?= route_to($item, $podcastId ?? null, $episodeId ?? null) ?>"><?= lang(
                             $langKey . '.' . $item,
                         ) ?></a>
             </li>

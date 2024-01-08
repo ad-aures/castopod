@@ -2,12 +2,24 @@
 
 $episodeNavigation = [
     'dashboard' => [
-        'icon'  => 'dashboard',
-        'items' => ['episode-view', 'episode-edit', 'episode-persons-manage', 'embed-add'],
+        'icon'              => 'dashboard',
+        'items'             => ['episode-view', 'episode-edit', 'episode-persons-manage', 'embed-add'],
+        'items-permissions' => [
+            'episode-view'           => 'episodes.view',
+            'episode-edit'           => 'episodes.edit',
+            'episode-persons-manage' => 'episodes.manage-persons',
+            'embed-add'              => 'episodes.edit',
+        ],
     ],
     'clips' => [
-        'icon'        => 'clapperboard',
-        'items'       => ['video-clips-list', 'video-clips-create', 'soundbites-list', 'soundbites-create'],
+        'icon'              => 'clapperboard',
+        'items'             => ['video-clips-list', 'video-clips-create', 'soundbites-list', 'soundbites-create'],
+        'items-permissions' => [
+            'video-clips-list'   => 'episodes.manage-clips',
+            'video-clips-create' => 'episodes.manage-clips',
+            'soundbites-list'    => 'episodes.manage-clips',
+            'soundbites-create'  => 'episodes.manage-clips',
+        ],
         'count'       => $episode->getClipCount(),
         'count-route' => 'video-clips-list',
         'add-cta'     => 'video-clips-create',
