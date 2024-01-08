@@ -38,7 +38,8 @@ class PersonController extends BaseController
     public function index(): string
     {
         $data = [
-            'persons' => (new PersonModel())->findAll(),
+            'persons' => (new PersonModel())->orderBy('full_name')
+                ->findAll(),
         ];
 
         return view('person/list', $data);
