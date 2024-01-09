@@ -38,13 +38,17 @@
                 }
                 ?>
             <li class="inline-flex">
-                <a class="relative w-full py-3 pl-14 pr-2 text-sm hover:opacity-100 before:absolute before:opacity-0 before:w-5 before:h-5 hover:bg-navigation-active focus:ring-inset focus:ring-accent<?= $isActive
+                <?php if ($isAllowed): ?> 
+                    <a class="relative w-full py-3 pl-14 pr-2 text-sm hover:opacity-100 before:content-chevronRightIcon before:absolute before:-ml-5 before:opacity-0 before:w-5 before:h-5 hover:bg-navigation-active focus:ring-inset focus:ring-accent<?= $isActive
                         ? ' before:opacity-100 font-semibold inline-flex items-center'
-                        : ' hover:before:opacity-60 focus:before:opacity-60' ?><?= $isAllowed
-                        ? ' before:content-chevronRightIcon before:-ml-5'
-                        : ' before:content-prohibitedIcon before:-ml-6 before:opacity-60 pointer-events-none' ?>" href="<?= route_to($item, $podcastId ?? null, $episodeId ?? null) ?>"><?= lang(
+                        : ' hover:before:opacity-60 focus:before:opacity-60' ?>" href="<?= route_to($item, $podcastId ?? null, $episodeId ?? null) ?>"><?= lang(
                             $langKey . '.' . $item,
                         ) ?></a>
+                <?php else: ?>
+                    <span data-tooltip="right" title="<?= lang('Navigation.not-authorized') ?>" class="relative w-full py-3 pr-2 text-sm cursor-not-allowed before:inset-y-0 before:my-auto pl-14 hover:opacity-100 before:absolute before:content-prohibitedIcon before:-ml-5 before:opacity-60 before:w-4 before:h-4 hover:bg-navigation-active focus:ring-inset focus:ring-accent"><?= lang(
+                        $langKey . '.' . $item,
+                    ) ?></span>
+                <?php endif; ?>
             </li>
             <?php endforeach; ?>
         </ul>
