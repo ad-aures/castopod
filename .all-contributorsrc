@@ -136,6 +136,20 @@
       ]
     },
     {
+      "login": "3wen",
+      "name": "Ewen",
+      "avatar_url": "https://mastodon.fedi.bzh/system/accounts/avatars/000/000/002/original/6f387690a504ae46.jpg",
+      "profile": "https://mastodon.fedi.bzh/@ewen",
+      "contributions": [
+        {
+          "type": "translation",
+          "url": "https://translate.castopod.org"
+        },
+        "ideas",
+        "code"
+      ]
+    },
+    {
       "login": "Behel",
       "name": "Bastien Luneteau",
       "avatar_url": "https://secure.gravatar.com/avatar/ad63ee8ef8e3db8253d21e5012d2724f?s=80&d=identicon",
@@ -328,19 +342,6 @@
           "type": "translation",
           "url": "https://translate.castopod.org"
         }
-      ]
-    },
-    {
-      "login": "3wen",
-      "name": "Ewen",
-      "avatar_url": "https://mastodon.fedi.bzh/system/accounts/avatars/000/000/002/original/6f387690a504ae46.jpg",
-      "profile": "https://mastodon.fedi.bzh/@ewen",
-      "contributions": [
-        {
-          "type": "translation",
-          "url": "https://translate.castopod.org"
-        },
-        "ideas"
       ]
     },
     {
