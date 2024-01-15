@@ -98,6 +98,11 @@ class CreateSuperadmin extends BaseCommand
         $user = new User($data);
         $userModel->save($user);
 
+        $user = $userModel->findById($userModel->getInsertID());
+
+        // set newly created user as most powerful instance group (superadmin)
+        $user->addGroup(setting('AuthGroups.mostPowerfulGroup'));
+
         $this->write('Super admin "' . $username . '" created', 'green');
     }
 
