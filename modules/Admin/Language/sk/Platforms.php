@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 return [
     'title' => [
-        'podcasting' => 'Podcasting platforms',
+        'podcasting' => 'Podcastové platformy',
         'social' => 'Sociálne siete',
         'funding' => 'Funding links',
     ],

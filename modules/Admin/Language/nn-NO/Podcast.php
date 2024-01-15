@@ -99,6 +99,8 @@ return [
         'owner_email' => 'Epost til eigaren',
         'owner_email_hint' =>
             'Blir brukt av dei fleste plattformer til å stadfesta eigarskapen til podkasten. Synleg i den offentlege RSS-straumen.',
+        'is_owner_email_removed_from_feed' => 'Remove the owner email from the public RSS feed',
+        'is_owner_email_removed_from_feed_hint' => 'You may need to temporarily unhide the email so that a directory can verify your podcast ownership.',
         'publisher' => 'Utgjevar',
         'publisher_hint' =>
             'Gruppa som er ansvarleg for serien. Det er vanlegvis morselskapet eller nettverket til ein podkast. Dette feltet er stundom merka med «forfattar».',

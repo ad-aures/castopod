@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 return [
     'messages' => [
-        'actorNotFound' => 'N\'eo ket bet kavet ar gont-se!',
+        'actorNotFound' => 'N\'eo ket bet kavet ar gont-se !',
         'blockActorSuccess' => 'Stanket eo bet {actor}!',
         'unblockActorSuccess' => 'Distanket eo bet an implijer·ez!',
         'blockDomainSuccess' => 'Stanket eo bet {domain}!',

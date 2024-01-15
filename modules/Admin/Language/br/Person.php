@@ -11,7 +11,7 @@ declare(strict_types=1);
 return [
     'persons' => 'Emellerien·ezed',
     'all_persons' => 'An holl emellerien·ezed',
-    'no_person' => 'Emeller·ez ebet!',
+    'no_person' => 'Emeller·ez ebet !',
     'create' => 'Krouiñ un emeller·ez',
     'view' => 'Gwelet an emeller·ez',
     'edit' => 'Kemmañ an emeller·ez',

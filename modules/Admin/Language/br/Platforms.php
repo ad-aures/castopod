@@ -10,18 +10,18 @@ declare(strict_types=1);
 
 return [
     'title' => [
-        'podcasting' => 'Podcasting platforms',
-        'social' => 'Social networks',
-        'funding' => 'Funding links',
+        'podcasting' => 'Savennoù podkastoù',
+        'social' => 'Rouedadoù sokial',
+        'funding' => 'Liammoù arc\'hantaouiñ',
     ],
-    'website' => 'Website',
+    'website' => 'Lec\'hienn',
     'home_url' => 'Mont da lec\'hienn {platformName}',
-    'register' => 'Register',
+    'register' => 'Enskrivañ',
     'submit_url' => 'Kasit ho podkast war {platformName}',
-    'your_link' => 'Your link',
+    'your_link' => 'Ho liamm',
     'your_id' => [
-        'podcasting' => 'Your ID',
-        'social' => 'Your ID',
+        'podcasting' => 'Hoc’h anaout (ID)',
+        'social' => 'Hoc’h anaout (ID)',
         'funding' => 'Your CTA',
     ],
     'your_cta' => 'Your call to action',

@@ -99,6 +99,8 @@ return [
         'owner_email' => 'Owner email',
         'owner_email_hint' =>
             'Will be used by most platforms to verify the podcast ownership. Visible in the public RSS feed.',
+        'is_owner_email_removed_from_feed' => 'Remove the owner email from the public RSS feed',
+        'is_owner_email_removed_from_feed_hint' => 'You may need to temporarily unhide the email so that a directory can verify your podcast ownership.',
         'publisher' => 'Publisher',
         'publisher_hint' =>
             'The group responsible for creating the show. Often refers to the parent company or network of a podcast. This field is sometimes labeled as ’Author’.',

@@ -22,7 +22,7 @@ return [
     'imported_feed_url_hint' => 'The feed must be in xml or rss format.',
     'new_podcast_section_title' => 'The new podcast',
     'lock_import' =>
-        'This feed is protected. You cannot import it. If you are the owner, unlock it on the origin platform.',
+        'Gwarezet eo ar wazh-mañ. Ne c\'hallit ket enporzhiañ anezhi. Ma\'z oc\'h ar perc\'henn·erez, dibrennit anezhi war ar savenn orin.',
     'submit' => 'Add import to queue',
     'queue' => [
         'status' => [
@@ -49,7 +49,7 @@ return [
         ],
     ],
     'syncForm' => [
-        'title' => 'Synchronize feeds',
+        'title' => 'Sinkronekaat ar gwazhoù',
         'feed_url' => 'Feed URL',
         'feed_url_hint' => 'The feed URL you want to synchronize with the current podcast.',
         'submit' => 'Add to queue',

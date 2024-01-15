@@ -99,6 +99,8 @@ return [
         'owner_email' => '所有者邮箱',
         'owner_email_hint' =>
             '大多数平台将使用它来验证播客的所有权。 在公开 RSS 摘要中可见。',
+        'is_owner_email_removed_from_feed' => 'Remove the owner email from the public RSS feed',
+        'is_owner_email_removed_from_feed_hint' => 'You may need to temporarily unhide the email so that a directory can verify your podcast ownership.',
         'publisher' => '发布者',
         'publisher_hint' =>
             '负责制作节目的小组。 通常指播客的母公司或网络。 有时会被标记为“作者”。',

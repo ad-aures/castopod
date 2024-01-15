@@ -23,10 +23,10 @@ return [
     'all_podcast_episodes' => 'Holl rannoù ar podkast',
     'back_to_podcast' => 'Mont d\'ar podkast en-dro',
     'edit' => 'Kemmañ',
-    'preview' => 'Preview',
+    'preview' => 'Rakwel',
     'publish' => 'Embann',
     'publish_edit' => 'Kemmañ an embannadur',
-    'publish_date_edit' => 'Edit publication date',
+    'publish_date_edit' => 'Kemmañ deiziad an embannadur',
     'unpublish' => 'Diembannañ',
     'publish_error' => 'Embannet eo bet ar rann dija.',
     'publish_edit_error' => 'Embannet eo bet ar rann dija.',
@@ -58,7 +58,7 @@ return [
     }',
         'episode' => 'Rann',
         'visibility' => 'Gwelusted',
-        'downloads' => 'Downloads',
+        'downloads' => 'Pellgargadennoù',
         'comments' => 'Evezhiadennoù',
         'actions' => 'Obererezhioù',
     ],
@@ -66,8 +66,8 @@ return [
         'createSuccess' => 'Krouet eo bet ar rann gant berzh!',
         'editSuccess' => 'Hizivaet eo bet ar rann gant berzh!',
         'publishSuccess' => '{publication_status, select,
-            published {Embannet eo bet ar rann gant berzh!}
-            scheduled {Raktreset eo bet embannadur ar rann gant berzh!}
+            published {Embannet eo bet ar rann gant berzh !}
+            scheduled {Raktreset eo bet embannadur ar rann gant berzh !}
             with_podcast {Ar rann-mañ a vo embannet war un dro gant ar podkast.}
             other {N\'eo ket bet embannet ar rann-mañ.}
         }',
@@ -167,7 +167,7 @@ return [
         'back_to_episode_dashboard' => 'Distreiñ da daolenn-stur ar rann',
         'post' => 'Ho kemennadenn vrudañ',
         'post_hint' =>
-            "Skrivit ur gemennadenn evit brudañ embannadur ho rann. Skignet e vo ar gemennadenn-se d'an holl re a heuilh ac'hanoc'h war ar c'hevrebed (fediverse) ha lakaet e vo war well war pajenn ho podkast.",
+            "Skrivit ur gemennadenn evit brudañ embannadur ho rann. Skignet e vo ar gemennadenn-se d'an holl re a heuilh ac'hanoc'h war ar Fediverse ha lakaet e vo war well war pajenn ho podkast.",
         'message_placeholder' => 'Skrivit ho kemennadenn…',
         'publication_date' => 'Deiziad embannadur',
         'publication_method' => [
@@ -180,20 +180,20 @@ return [
         'scheduled_publication_date_hint' =>
             'Gallout a rit steuñviñ embannadur ar rann en ur steuñviñ embannadur ar rann en dazont. Dleout a ra ar vaezienn bezañ er furmad YYYY-MM-DD HH:mm',
         'submit' => 'Embann',
-        'submit_edit' => 'Kemmañ an embannadur',
+        'submit_edit' => 'Kemmañ an embann',
         'cancel_publication' => 'Nullañ an embannadur',
         'message_warning' => 'N\'ho peus ket skrivet ur gemennadenn evit brudañ ho rann!',
         'message_warning_hint' => 'Ouzhpennañ ur gemennadenn a lakay muioc\'h a dud er jeu, ha diwar se e vo gwelet muioc\'h ho rann.',
         'message_warning_submit' => 'Embann memestra',
     ],
     'publish_date_edit_form' => [
-        'new_publication_date' => 'New publication date',
-        'new_publication_date_hint' => 'Must be set to a past date.',
-        'submit' => 'Edit publication date',
+        'new_publication_date' => 'Deiziad embannadur nevez',
+        'new_publication_date_hint' => 'An dra-se a rank bezañ un deiziad tremenet.',
+        'submit' => 'Kemmañ deiziad an embann',
     ],
     'unpublish_form' => [
         'disclaimer' =>
-            "Diembann ar rann a zilamo an holl gemennadennoù liammet outi ha skarzhet e vo eus lanv RSS ar podkast.",
+            "Diembann ar rann a zilamo an holl gemennadennoù liammet outi ha skarzhet e vo eus gwazh RSS ar podkast.",
         'understand' => 'Komprennet eo, diembann ar rann a fell din',
         'submit' => 'Diembann',
     ],
@@ -215,13 +215,13 @@ return [
         'light-transparent' => 'Sklaer treuzwelus',
     ],
     'publication_status_banner' => [
-        'draft_mode' => 'draft mode',
+        'draft_mode' => 'mod brouilhed',
         'text' => '{publication_status, select,
-            published {This episode is not yet published.}
-            scheduled {This episode is scheduled for publication on {publication_date}.}
-            with_podcast {This episode will be published at the same time as the podcast.}
-            other {This episode is not yet published.}
+            published {N\'eo ket bet embannet ar rann-mañ c\'hoazh.}
+            scheduled {Raktreset eo an embann a-benn an/ar {publication_date}.}
+            with_podcast {Ar rann-mañ a vo embannet war un dro gant ar podkast.}
+            other {N\'eo ket bet embannet ar rann-mañ c\'hoazh.}
         }',
-        'preview' => 'Preview',
+        'preview' => 'Rakwel',
     ],
 ];

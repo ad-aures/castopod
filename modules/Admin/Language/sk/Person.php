@@ -24,7 +24,7 @@ return [
     'form' => [
         'avatar' => 'Avatar',
         'avatar_size_hint' =>
-            'Avatar must be squared and at least 400px wide and tall.',
+            'Obrázok musí byť štvorcový a minimálne 400px široký a vysoký.',
         'full_name' => 'Celé meno',
         'full_name_hint' => 'This is the full name or alias of the person.',
         'unique_name' => 'Unikátne meno',

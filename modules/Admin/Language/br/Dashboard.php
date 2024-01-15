@@ -13,12 +13,12 @@ return [
     'welcome_message' => 'Welcome to the admin area!',
     'podcasts' => [
         'title' => 'Podcasts',
-        'not_found' => 'No published podcast',
+        'not_found' => 'Podkast embannet ebet',
         'last_published' => 'Last published on {lastPublicationDate}',
     ],
     'episodes' => [
         'title' => 'Episodes',
-        'not_found' => 'No published episode',
+        'not_found' => 'Rann embannet ebet',
         'last_published' => 'Last published on {lastPublicationDate}',
     ],
     'storage' => [

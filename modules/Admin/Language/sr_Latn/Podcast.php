@@ -99,6 +99,8 @@ return [
         'owner_email' => 'Elektronska pošta vlasnika',
         'owner_email_hint' =>
             'Koristiće se na većini platforma kako bi se utvrdilo vlasništvo nad podkastom. Vidljivo javno u RSS feed-u.',
+        'is_owner_email_removed_from_feed' => 'Remove the owner email from the public RSS feed',
+        'is_owner_email_removed_from_feed_hint' => 'You may need to temporarily unhide the email so that a directory can verify your podcast ownership.',
         'publisher' => 'Izdavač',
         'publisher_hint' =>
             'Grupa odgovorna za stvaranje ove emisije. Često se misli na vlasničku kompaniju ili mrežu kojoj pripada podkast. Ovo polje se nekada naziva i \'Autor".',

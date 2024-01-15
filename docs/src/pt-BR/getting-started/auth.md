@@ -3,15 +3,16 @@ title: Authentication & Authorization
 sidebarDepth: 3
 ---
 
-# Authentication & Authorization
+# Autenticação & Autorização
 
-Castopod handles authentication and authorization using `codeigniter/shield`
-coupled with custom rules. Roles and permissions are defined at two levels:
+Castopod lida com autenticação e autorização usando `codeigniter/shield`
+juntamente com regras personalizadas. Papéis e permissões são definidos em dois
+níveis:
 
-1. [instance wide](#1-instance-wide-roles-and-permissions)
-2. [per podcast](#2-per-podcast-roles-and-permissions)
+1. [toda instância](#1-instance-wide-roles-and-permissions)
+2. [por podcast](#2-per-podcast-roles-and-permissions)
 
-## 1. Instance wide roles and permissions
+## Papéis e permissões para toda a instância
 
 ### Instance roles
 

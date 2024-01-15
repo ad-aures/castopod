@@ -40,15 +40,15 @@ return [
     'all_podcast_episodes' => 'Holl rannoù ar podkast',
     'back_to_podcast' => 'Mont d\'ar podkast en-dro',
     'preview' => [
-        'title' => 'Preview',
-        'not_published' => 'Not published',
+        'title' => 'Rakwel',
+        'not_published' => 'Diembann',
         'text' => '{publication_status, select,
-            published {This episode is not yet published.}
-            scheduled {This episode is scheduled for publication on {publication_date}.}
-            with_podcast {This episode will be published at the same time as the podcast.}
-            other {This episode is not yet published.}
+            published {N\'eo ket bet embannet ar rann-mañ c\'hoazh.}
+            scheduled {Raktreset eo an embann a-benn an/ar {publication_date}.}
+            with_podcast {Ar rann-mañ a vo embannet war un dro gant ar podkast.}
+            other {N\'eo ket bet embannet ar rann-mañ c\'hoazh.}
         }',
-        'publish' => 'Publish',
-        'publish_edit' => 'Edit publication',
+        'publish' => 'Embann',
+        'publish_edit' => 'Kemmañ an embannadur',
     ],
 ];

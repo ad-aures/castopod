@@ -17,7 +17,7 @@ return [
     'podcasts' => 'Podcasty',
     'podcast-list' => 'Všetky podcasty',
     'podcast-create' => 'Nový podcast',
-    'all-podcast-imports' => 'All Podcast imports',
+    'all-podcast-imports' => 'Všetky nahrané podcasty',
     'podcast-imports-add' => 'Importovať podcast',
     'persons' => 'Osobnosti',
     'person-list' => 'Všetky osobnosti',
@@ -34,7 +34,7 @@ return [
     'settings' => 'Nastavenia',
     'settings-general' => 'Všeobecné',
     'settings-theme' => 'Vzhľad',
-    'admin-about' => 'O',
+    'admin-about' => 'About',
     'account' => [
         'my-account' => 'Môj účet',
         'change-password' => 'Zmeniť heslo',

@@ -38,12 +38,12 @@ return [
         'title' => 'Náhľad',
         'not_published' => 'Nezverejnená',
         'text' => '{publication_status, select,
-            published {This episode is not yet published.}
-            scheduled {This episode is scheduled for publication on {publication_date}.}
-            with_podcast {This episode will be published at the same time as the podcast.}
-            other {This episode is not yet published.}
+            published {Táto epizóda ešte nieje zverejnená.}
+            scheduled {Táto epizóda je naplánovaná na zverejnenie {publication_date}.}
+            with_podcast {Táto epizóda bude zverejnená zarovno s podcastom.}
+            other {Táto epizóda ešte nieje zverejnená.}
         }',
         'publish' => 'Zverejniť',
-        'publish_edit' => 'Edit publication',
+        'publish_edit' => 'Upraviť zverejnené',
     ],
 ];

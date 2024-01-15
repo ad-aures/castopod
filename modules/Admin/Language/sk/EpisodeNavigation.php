@@ -18,6 +18,6 @@ return [
     'clips' => 'Klipy',
     'video-clips-list' => 'Video klipy',
     'video-clips-create' => 'Nový video klip',
-    'soundbites-list' => 'Soundbites',
+    'soundbites-list' => 'Zvukové ukážky',
     'soundbites-create' => 'Nová zvučka',
 ];

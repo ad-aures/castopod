@@ -31,15 +31,15 @@ return [
     'all_podcast_episodes' => 'Todos os episódios de podcast',
     'back_to_podcast' => 'Voltar para o podcast',
     'preview' => [
-        'title' => 'Preview',
-        'not_published' => 'Not published',
+        'title' => 'Pré-visualizar',
+        'not_published' => 'Não publicado',
         'text' => '{publication_status, select,
-            published {This episode is not yet published.}
-            scheduled {This episode is scheduled for publication on {publication_date}.}
-            with_podcast {This episode will be published at the same time as the podcast.}
-            other {This episode is not yet published.}
+            published {Esse episódio ainda não foi publicado.}
+            scheduled {Esse episódio está agendado para publicação em {publication_date}.}
+            with_podcast {Esse episódio será publicado ao mesmo tempo que o podcast. .}
+            other {Esse episódio ainda não foi publicado.}
         }',
-        'publish' => 'Publish',
-        'publish_edit' => 'Edit publication',
+        'publish' => 'Publicar',
+        'publish_edit' => 'Editar Publicação',
     ],
 ];

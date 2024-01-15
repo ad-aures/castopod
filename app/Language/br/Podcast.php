@@ -9,7 +9,7 @@ declare(strict_types=1);
  */
 
 return [
-    'feed' => 'Lanv RSS ar podkast',
+    'feed' => 'Gwazh RSS ar podkast',
     'season' => 'Koulzad {seasonNumber}',
     'list_of_episodes_year' => 'Rannoù {year} ({episodeCount})',
     'list_of_episodes_season' =>
@@ -61,7 +61,7 @@ return [
         84 {# c\'hemennadenn}
         89 {# c\'hemennadenn}
     }',
-    'links' => 'Links',
+    'links' => 'Liammoù',
     'activity' => 'Oberiantiz',
     'episodes' => 'Rannoù',
     'episodes_title' => 'Rannoù {podcastTitle}',
@@ -131,5 +131,5 @@ return [
         82 {# zen}
     }',
     'persons_list' => 'Emellerien·ezed',
-    'castopod_website' => 'Castopod (website)',
+    'castopod_website' => 'Castopod (lec\'hienn)',
 ];

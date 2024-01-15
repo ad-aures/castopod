@@ -38,7 +38,7 @@ small footprint.
   - 🎬 &nbsp;Generate ready-to-share Video clips from episodes
   - 🔉 &nbsp;Generate soundbites
   - ▶️ &nbsp;Embeddable player, embed your episodes on any website
-- 💸 &nbsp;Monetization:
+- 💸 &nbsp;Arc'hantaouiñ :
   - 🔗 &nbsp;Funding links
   - 📲 &nbsp;listen-to-click ads
   - 🤝 &nbsp;value4value / WebMonetization

@@ -99,6 +99,8 @@ return [
         'owner_email' => 'Email ιδιοκτήτη',
         'owner_email_hint' =>
             'Θα χρησιμοποιηθεί από τις περισσότερες πλατφόρμες για να επαληθεύσει την ιδιοκτησία του podcast. Ορατό στη δημόσια τροφοδοσία RSS.',
+        'is_owner_email_removed_from_feed' => 'Remove the owner email from the public RSS feed',
+        'is_owner_email_removed_from_feed_hint' => 'You may need to temporarily unhide the email so that a directory can verify your podcast ownership.',
         'publisher' => 'Εκδότης',
         'publisher_hint' =>
             'Η ομάδα που είναι υπεύθυνη για τη δημιουργία της παράστασης. Συχνά αναφέρεται στη μητρική εταιρεία ή στο δίκτυο ενός podcast. Αυτό το πεδίο μερικές φορές χαρακτηρίζεται ως \'Συγγραφέας\'.',

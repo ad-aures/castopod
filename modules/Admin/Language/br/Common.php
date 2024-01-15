@@ -14,7 +14,7 @@ return [
     'cancel' => 'Nullañ',
     'optional' => 'Diret',
     'more' => 'Muioc\'h',
-    'no_data' => 'Roadenn ebet kavet!',
+    'no_data' => 'Roadenn ebet kavet !',
     'close' => 'Serriñ',
     'edit' => 'Kemmañ',
     'copy' => 'Eilañ',
@@ -40,7 +40,7 @@ return [
         ],
         'upload_file' => 'Uskargit ur restr',
         'remote_url' => 'URL a-bell',
-        'save' => 'Save',
+        'save' => 'Enrollañ',
     ],
     'play_episode_button' => [
         'play' => 'Lenn',

@@ -99,6 +99,8 @@ return [
         'owner_email' => 'Ägarens e-post',
         'owner_email_hint' =>
             'Kommer att användas av de flesta plattformar för att verifiera podcast-ägandet. Synlig i det offentliga RSS-flödet.',
+        'is_owner_email_removed_from_feed' => 'Remove the owner email from the public RSS feed',
+        'is_owner_email_removed_from_feed_hint' => 'You may need to temporarily unhide the email so that a directory can verify your podcast ownership.',
         'publisher' => 'Utgivare',
         'publisher_hint' =>
             'Gruppen som ansvarar för att skapa showen. Ofta hänvisar man till moderbolaget eller nätverket av en podcast. Detta fält är ibland märkt som "Författare".',

@@ -48,7 +48,7 @@ return [
         'banSuccess' => '{username} has been banned.',
         'unbanSuccess' => '{username} has been unbanned.',
         'editOwnerError' =>
-            '{username} is the instance owner, you cannot edit its roles.',
+            '{username} eo perc\'henn·erez an istañs. Ne c\'hallit ket kemmañ e rolloù…',
         'banSuperAdminError' =>
             '{username} is a superadmin, one does not simply ban a superadmin…',
         'deleteOwnerError' =>
