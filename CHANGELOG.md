@@ -1,3 +1,35 @@
+# [1.8.0](https://code.castopod.org/adaures/castopod/compare/v1.7.4...v1.8.0) (1/15/2024)
+
+### Bug Fixes
+
+- **episode-form:** add required validation rules for title and slug
+  ([30a3473](https://code.castopod.org/adaures/castopod/commit/30a34738635bf4f4a4c6b2a7174f7e439f0dfc6e)),
+  closes [#420](https://code.castopod.org/adaures/castopod/issues/420)
+- **import:** check for empty string when generating podcast guid for feeds not
+  including one
+  ([ac5336f](https://code.castopod.org/adaures/castopod/commit/ac5336fbc5fb8038de541dd06938a8beb2e8d733))
+- **install:** add created superadmin to most powerful group in instance, ie.
+  superadmin
+  ([2ed511f](https://code.castopod.org/adaures/castopod/commit/2ed511f8a0005dc06eda5afd6b1d13beee1eb9dd))
+- **persons:** delete person avatar when deleting a person
+  ([c1ec98c](https://code.castopod.org/adaures/castopod/commit/c1ec98c95656844712011ff30b84c397b78da311)),
+  closes [#419](https://code.castopod.org/adaures/castopod/issues/419)
+- **platforms:** add matrix.org as a social platform
+  ([9178c3f](https://code.castopod.org/adaures/castopod/commit/9178c3f3afa16e104d25ae159728e90a3bbd57c3)),
+  closes [#421](https://code.castopod.org/adaures/castopod/issues/421)
+
+### Features
+
+- **admin:** add tooltip for not authorized routes
+  ([f7f9baf](https://code.castopod.org/adaures/castopod/commit/f7f9bafc3e56621fab2569d9d76baafe0a2e940d))
+- **admin:** emphasize unprivileged items in sidebar with "prohibited" icon
+  ([0bd7dde](https://code.castopod.org/adaures/castopod/commit/0bd7ddea58adf502121b83e5c09317e20912fb4e))
+- allow hiding owner's email in public RSS feed
+  ([222e02a](https://code.castopod.org/adaures/castopod/commit/222e02a2af9ecb8b8768a63d3054f4c3ef54e991))
+- **persons:** order persons by full_name ASC for easier list scanning
+  ([68a599f](https://code.castopod.org/adaures/castopod/commit/68a599fee08c71763b9336e14b1c0d9e28c4449b)),
+  closes [#418](https://code.castopod.org/adaures/castopod/issues/418)
+
 ## [1.7.4](https://code.castopod.org/adaures/castopod/compare/v1.7.3...v1.7.4) (1/3/2024)
 
 ### Bug Fixes
