@@ -1,3 +1,10 @@
+## [1.8.1](https://code.castopod.org/adaures/castopod/compare/v1.8.0...v1.8.1) (1/16/2024)
+
+### Bug Fixes
+
+- **models:** set updatedField as empty string when not used
+  ([164f4d3](https://code.castopod.org/adaures/castopod/commit/164f4d3be74ec8d371fb40d7fe730f7b2940ca05))
+
 # [1.8.0](https://code.castopod.org/adaures/castopod/compare/v1.7.4...v1.8.0) (1/15/2024)
 
 ### Bug Fixes
