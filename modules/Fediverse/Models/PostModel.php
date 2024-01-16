@@ -74,7 +74,7 @@ class PostModel extends UuidModel
      */
     protected $useTimestamps = true;
 
-    protected $updatedField;
+    protected $updatedField = '';
 
     /**
      * @var array<string, string>

@@ -45,7 +45,7 @@ class LikeModel extends UuidModel
      */
     protected $useTimestamps = true;
 
-    protected $updatedField;
+    protected $updatedField = '';
 
     public function addLike(Actor $actor, EpisodeComment $comment, bool $registerActivity = true): void
     {

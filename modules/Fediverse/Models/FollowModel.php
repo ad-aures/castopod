@@ -41,7 +41,7 @@ class FollowModel extends Model
      */
     protected $useTimestamps = true;
 
-    protected $updatedField;
+    protected $updatedField = '';
 
     /**
      * @param Actor $actor Actor that is following

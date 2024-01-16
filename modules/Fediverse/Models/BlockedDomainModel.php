@@ -48,7 +48,7 @@ class BlockedDomainModel extends Model
      */
     protected $useTimestamps = true;
 
-    protected $updatedField;
+    protected $updatedField = '';
 
     /**
      * Retrieves instance or podcast domain blocks depending on whether or not $podcastId param is set.

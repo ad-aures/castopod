@@ -73,7 +73,7 @@ class ActivityModel extends UuidModel
      */
     protected $useTimestamps = true;
 
-    protected $updatedField;
+    protected $updatedField = '';
 
     public function getActivityById(string $activityId): ?Activity
     {

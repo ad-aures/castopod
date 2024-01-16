@@ -45,7 +45,7 @@ class FavouriteModel extends UuidModel
      */
     protected $useTimestamps = true;
 
-    protected $updatedField;
+    protected $updatedField = '';
 
     public function addFavourite(Actor $actor, Post $post, bool $registerActivity = true): void
     {

@@ -244,7 +244,6 @@ class EpisodeController extends BaseController
 
         $episodeModel = new EpisodeModel();
         if (! ($newEpisodeId = $episodeModel->insert($newEpisode, true))) {
-            dd($episodeModel->errors());
             $db->transRollback();
             return redirect()
                 ->back()
