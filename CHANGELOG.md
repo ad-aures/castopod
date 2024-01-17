@@ -1,3 +1,11 @@
+## [1.8.2](https://code.castopod.org/adaures/castopod/compare/v1.8.1...v1.8.2) (1/17/2024)
+
+### Bug Fixes
+
+- **transcript:** add condition when concatenating sub text to prevent second
+  line duplication
+  ([6cbfec0](https://code.castopod.org/adaures/castopod/commit/6cbfec0d7d9bf85c8014d379026648857ea13373))
+
 ## [1.8.1](https://code.castopod.org/adaures/castopod/compare/v1.8.0...v1.8.1) (1/16/2024)
 
 ### Bug Fixes
