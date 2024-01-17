@@ -78,13 +78,10 @@ class TranscriptParser
                         $sub->text = trim($subText);
                         $subText = '';
                         $state = SRT_STATE_SUBNUMBER;
-
                         $subs[] = $sub;
+                    } elseif ($subText !== '') {
+                        $subText .= PHP_EOL . $line;
                     } else {
-                        if ($subText !== '') {
-                            $subText .= PHP_EOL . $line;
-                        }
-
                         $subText .= $line;
                     }
 
