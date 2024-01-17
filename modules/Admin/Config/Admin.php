@@ -20,5 +20,5 @@ class Admin extends BaseConfig
      * Number of maximum ffmpeg processes to spawn in parallel when generating video clips. Processes are instance wide,
      * meaning that they are shared across all podcasts and episodes.
      */
-    public int $videoClipWorkers = 2;
+    public int $videoClipWorkers = 1;
 }
