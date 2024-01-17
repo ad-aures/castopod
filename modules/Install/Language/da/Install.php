@@ -9,16 +9,16 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => 'Castopod installer',
-    'manual_config' => 'Manual configuration',
+    'title' => 'Castopod installationsprogram',
+    'manual_config' => 'Manuel konfiguration',
     'manual_config_subtitle' =>
-        'Create a `.env` file with your settings and refresh the page to continue installation.',
+        'Opret en `.env` fil med dine indstillinger og opdater siden for at fortsætte installationen.',
     'form' => [
-        'instance_config' => 'Instance configuration',
+        'instance_config' => 'Instanskonfiguration',
         'hostname' => 'Hostname',
-        'media_base_url' => 'Media base URL',
+        'media_base_url' => 'Medie base URL',
         'media_base_url_hint' =>
-            'If you use a CDN and/or an external analytics service, you may set them here.',
+            'Hvis du bruger en CDN og/eller en ekstern analysetjeneste, kan du indstille dem her.',
         'admin_gateway' => 'Admin gateway',
         'admin_gateway_hint' =>
             'The route to access the admin area (eg. https://example.com/cp-admin). It is set by default as cp-admin, we recommend you change it for security reasons.',
@@ -27,12 +27,12 @@ return [
             'The route to access the authentication pages (eg. https://example.com/cp-auth). It is set by default as cp-auth, we recommend you change it for security reasons.',
         'database_config' => 'Database configuration',
         'database_config_hint' =>
-            'Castopod needs to connect to your MySQL (or MariaDB) database. If you do not have these required info, please contact your server administrator.',
-        'db_hostname' => 'Database hostname',
-        'db_name' => 'Database name',
-        'db_username' => 'Database username',
-        'db_password' => 'Database password',
-        'db_prefix' => 'Database prefix',
+            'Castopod skal oprette forbindelse til din MySQL (eller MariaDB) database. Hvis du ikke har disse nødvendige oplysninger, bedes du kontakte din serveradministrator.',
+        'db_hostname' => 'Database host navn',
+        'db_name' => 'Databasenavn',
+        'db_username' => 'Database brugernavn',
+        'db_password' => 'Database adgangskode',
+        'db_prefix' => 'Database præfiks',
         'db_prefix_hint' =>
             "The prefix of the Castopod table names, leave as is if you don't know what it means.",
         'cache_config' => 'Cache configuration',
@@ -44,19 +44,19 @@ return [
             'redis' => 'Redis',
             'predis' => 'Predis',
         ],
-        'next' => 'Next',
-        'submit' => 'Finish install',
-        'create_superadmin' => 'Create your Super Admin account',
+        'next' => 'Næste',
+        'submit' => 'Afslut installation',
+        'create_superadmin' => 'Opret din Super Admin konto',
         'email' => 'Email',
-        'username' => 'Username',
-        'password' => 'Password',
+        'username' => 'Brugernavn',
+        'password' => 'Adgangskode',
     ],
     'messages' => [
         'createSuperAdminSuccess' =>
-            'Your superadmin account has been created successfully. Login to start podcasting!',
+            'Din superadmin konto er blevet oprettet. Log ind for at starte podcasting!',
         'databaseConnectError' =>
-            'Castopod could not connect to your database. Edit your database configuration and try again.',
+            'Castopod kunne ikke oprette forbindelse til din database. Rediger din database konfiguration og prøv igen.',
         'writeError' =>
-            "Couldn't create/write the `.env` file. You must create it manually by following the `.env.example` file template in the Castopod package.",
+            "Kunne ikke oprette/skrive `.env` filen. Du skal oprette den manuelt ved at følge `.env.example` filskabelon i Castopod-pakken.",
     ],
 ];
