@@ -85,35 +85,46 @@ $podcastNavigation = [
 
 ?>
 
-<div class="relative flex items-stretch px-2 py-2 border-b border-navigation">
-    <?php if ($podcast->is_premium): ?>
-        <Icon glyph="exchange-dollar" class="absolute pl-1 text-xl rounded-r-full rounded-tl-lg left-4 top-4 text-accent-contrast bg-accent-base" />
-    <?php endif; ?>
-    <img
-    src="<?= $podcast->cover->thumbnail_url ?>"
-    alt="<?= esc($podcast->title) ?>"
-    class="object-cover w-20 h-20 rounded aspect-square"
-    loading="lazy"
-    />
-    <div class="flex flex-col items-start flex-1 w-48 px-2">
-        <span class="w-full font-semibold truncate" title="<?= esc($podcast->title) ?>"><?= esc($podcast->title) ?></span>
-        <a href="<?= route_to(
-            'podcast-activity',
-            esc($podcast->handle),
-        ) ?>" class="inline-flex items-center text-sm hover:underline focus:ring-accent"
-        data-tooltip="bottom" title="<?= lang(
-            'PodcastNavigation.go_to_page',
-        ) ?>">@<?= esc($podcast->handle) ?>
-        <?= icon('external-link', 'ml-1 opacity-60') ?>
-        </a>
-        <a href="<?= $podcast->feed_url ?>" class="inline-flex items-center mt-auto text-xs gap-x-1 focus:ring-accent group hover:underline" target="_blank" rel="noopener noreferrer">
-            <?= icon('rss', 'text-xl text-orange-400 inline-flex items-center justify-center rounded') . lang('PodcastNavigation.rss_feed') . icon('external-link', 'text-sm opacity-60') ?>
-        </a>
+<div class="flex gap-2 px-2 py-2 border-b border-navigation">
+    <div class="relative">
+        <?php if ($podcast->is_premium): ?>
+            <Icon glyph="exchange-dollar" class="absolute left-0 pl-1 text-xl rounded-r-full rounded-tl-lg top-2 text-accent-contrast bg-accent-base" />
+        <?php endif; ?>
+        <img
+        src="<?= $podcast->cover->thumbnail_url ?>"
+        alt="<?= esc($podcast->title) ?>"
+        class="object-cover w-20 h-20 rounded aspect-square"
+        loading="lazy"
+        />
+    </div>
+    <div class="flex flex-col gap-4">
+        <div class="flex flex-col items-start flex-1 w-48">
+            <span class="w-full font-semibold truncate" title="<?= esc($podcast->title) ?>"><?= esc($podcast->title) ?></span>
+            <a href="<?= route_to(
+                'podcast-activity',
+                esc($podcast->handle),
+            ) ?>" class="inline-flex items-center text-sm hover:underline focus:ring-accent"
+            data-tooltip="bottom" title="<?= lang(
+                'PodcastNavigation.go_to_page',
+            ) ?>">@<?= esc($podcast->handle) ?>
+            <?= icon('external-link', 'ml-1 opacity-60') ?>
+            </a>
+        </div>
+        <div class="flex flex-col items-start gap-1">
+            <a href="<?= $podcast->feed_url ?>" class="inline-flex items-center text-xs gap-x-1 focus:ring-accent group hover:underline" target="_blank" rel="noopener noreferrer" data-tooltip="bottom" title="<?= lang('PodcastNavigation.rss_feed') ?>">
+                <?= icon('rss', 'text-xl text-orange-400 inline-flex items-center justify-center rounded') . 'RSS Feed' . icon('external-link', 'text-sm opacity-60') ?>
+            </a>
+            <?php if ($podcast->is_op3_enabled): ?>
+            <a href="<?= $podcast->op3_url ?>" class="inline-flex items-center text-xs gap-x-1 focus:ring-accent group hover:underline" data-tooltip="bottom" target="_blank" rel="noopener noreferrer" title="<?= lang('Podcast.form.op3_link') ?>">
+                <?= icon('line-chart', 'text-xl text-white inline-flex items-center justify-center rounded') . 'OP3' . icon('external-link', 'text-sm opacity-60') ?>
+            </a>
+            <?php endif; ?>
+        </div>
     </div>
 </div>
 
 <?= view('_partials/_nav_menu', [
-            'navigation' => $podcastNavigation,
-            'langKey'    => 'PodcastNavigation',
-            'podcastId'  => $podcast->id,
-        ]) ?>
+                'navigation' => $podcastNavigation,
+                'langKey'    => 'PodcastNavigation',
+                'podcastId'  => $podcast->id,
+            ]) ?>

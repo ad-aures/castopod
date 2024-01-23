@@ -78,6 +78,8 @@ use RuntimeException;
  * @property string|null $location_osm
  * @property string|null $payment_pointer
  * @property array|null $custom_rss
+ * @property bool $is_op3_enabled
+ * @property string $op3_url
  * @property string $custom_rss_string
  * @property bool $is_published_on_hubs
  * @property string|null $partner_id
@@ -687,5 +689,15 @@ class Podcast extends Entity
     {
         // podcast is premium if at least one of its episodes is set as premium
         return (new EpisodeModel())->doesPodcastHavePremiumEpisodes($this->id);
+    }
+
+    public function getIsOp3Enabled(): bool
+    {
+        return service('settings')->get('Analytics.enableOP3', 'podcast:' . $this->id);
+    }
+
+    public function getOp3Url(): string
+    {
+        return 'https://op3.dev/show/' . $this->guid;
     }
 }
