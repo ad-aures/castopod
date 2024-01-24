@@ -25,8 +25,8 @@
 <Forms.Field
     as="DatetimePicker"
     name="new_publication_date"
-    label="<?= lang('Episode.publish_date_edit_form.new_publication_date') ?>"
-    hint="<?= lang('Episode.publish_date_edit_form.new_publication_date_hint') ?>"
+    label="<?= esc(lang('Episode.publish_date_edit_form.new_publication_date')) ?>"
+    hint="<?= esc(lang('Episode.publish_date_edit_form.new_publication_date_hint')) ?>"
     value="<?= $episode->published_at ?>"
     required="true"
 />

@@ -48,8 +48,8 @@
 
             <Forms.Field
                 name="handle"
-                label="<?= lang('Fediverse.your_handle') ?>"
-                hint="<?= lang('Fediverse.your_handle_hint') ?>"
+                label="<?= esc(lang('Fediverse.your_handle')) ?>"
+                hint="<?= esc(lang('Fediverse.your_handle_hint')) ?>"
                 required="true" />
 
             <Button variant="primary" type="submit" class="self-end" iconRight="send-plane"><?= lang('Fediverse.' . $action . '.submit') ?></Button>

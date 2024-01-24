@@ -71,7 +71,7 @@
             </div>
             <fieldset>
                 <Forms.Field
-                    label="<?= lang('Platforms.your_link') ?>"
+                    label="<?= esc(lang('Platforms.your_link')) ?>"
                     class="w-full mt-4"
                     id="<?= esc($platform->slug) . '_link_url' ?>"
                     name="<?= 'platforms[' . esc($platform->slug) . '][url]' ?>"
@@ -79,7 +79,7 @@
                     type="url"
                     placeholder="https://…" />
                 <Forms.Field
-                    label="<?= lang("Platforms.your_id.{$platform->type}") ?>"
+                    label="<?= esc(lang("Platforms.your_id.{$platform->type}")) ?>"
                     class="w-full mt-2"
                     id="<?= esc($platform->slug) . '_account_id' ?>"
                     name="<?= 'platforms[' . esc($platform->slug) . '][account_id]' ?>"

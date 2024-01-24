@@ -17,7 +17,7 @@
 <Forms.Field
     as="Select"
     name="role"
-    label="<?= lang('Contributor.form.role') ?>"
+    label="<?= esc(lang('Contributor.form.role')) ?>"
     options="<?= esc(json_encode($roleOptions)) ?>"
     selected="<?= $contributorGroup ?>"
     placeholder="<?= lang('Contributor.form.role_placeholder') ?>"

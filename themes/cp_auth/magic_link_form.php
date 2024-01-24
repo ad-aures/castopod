@@ -15,7 +15,7 @@ use Modules\Auth\Config\Auth;
 
     <Forms.Field
         name="email"
-        label="<?= lang('Auth.email') ?>"
+        label="<?= esc(lang('Auth.email')) ?>"
         required="true"
         inputmode="email"
         autocomplete="email"

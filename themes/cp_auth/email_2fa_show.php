@@ -16,8 +16,8 @@ use Modules\Auth\Config\Auth;
 
     <Forms.Field
         name="email"
-        label="<?= lang('Auth.email') ?>"
-        helper="<?= lang('Auth.confirmEmailAddress') ?>"
+        label="<?= esc(lang('Auth.email')) ?>"
+        helper="<?= esc(lang('Auth.confirmEmailAddress')) ?>"
         required="true"
         type="email"
         inputmode="email"

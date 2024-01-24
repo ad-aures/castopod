@@ -13,8 +13,8 @@
     <?= csrf_field() ?>
     <Forms.Field
         name="feed_url"
-        label="<?= lang('PodcastImport.syncForm.feed_url') ?>"
-        hint="<?= lang('PodcastImport.syncForm.feed_url_hint') ?>"
+        label="<?= esc(lang('PodcastImport.syncForm.feed_url')) ?>"
+        hint="<?= esc(lang('PodcastImport.syncForm.feed_url_hint')) ?>"
         required="true"
         value="<?= $podcast->imported_feed_url ?? '' ?>"
     />

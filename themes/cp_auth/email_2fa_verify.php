@@ -15,8 +15,8 @@ use Modules\Auth\Config\Auth;
 
     <Forms.Field
         name="token"
-        label="<?= lang('Auth.code') ?>"
-        helper="<?= lang('Auth.emailConfirmCode') ?>"
+        label="<?= esc(lang('Auth.code')) ?>"
+        helper="<?= esc(lang('Auth.emailConfirmCode')) ?>"
         pattern="[0-9]*"
         placeholder="000000"
         required="true"

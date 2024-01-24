@@ -25,27 +25,27 @@ use Config\Database;
 
 <Forms.Field
     name="db_hostname"
-    label="<?= lang('Install.form.db_hostname') ?>"
+    label="<?= esc(lang('Install.form.db_hostname')) ?>"
     value="<?= config(Database::class)->default['hostname'] ?>"
     required="true"
 />
 
 <Forms.Field
     name="db_name"
-    label="<?= lang('Install.form.db_name') ?>"
+    label="<?= esc(lang('Install.form.db_name')) ?>"
     value="<?= config(Database::class)->default['database'] ?>"
     required="true" />
 
 <Forms.Field
     name="db_username"
-    label="<?= lang('Install.form.db_username') ?>"
+    label="<?= esc(lang('Install.form.db_username')) ?>"
     value="<?= config(Database::class)->default['username'] ?>"
     required="true"
     autocomplete="off" />
 
 <Forms.Field
     name="db_password"
-    label="<?= lang('Install.form.db_password') ?>"
+    label="<?= esc(lang('Install.form.db_password')) ?>"
     value="<?= config(Database::class)->default['password'] ?>"
     type="password"
     required="true"
@@ -53,8 +53,8 @@ use Config\Database;
 
 <Forms.Field
     name="db_prefix"
-    label="<?= lang('Install.form.db_prefix') ?>"
-    hint="<?= lang('Install.form.db_prefix_hint') ?>"
+    label="<?= esc(lang('Install.form.db_prefix')) ?>"
+    hint="<?= esc(lang('Install.form.db_prefix_hint')) ?>"
     value="<?= config(Database::class)->default['DBPrefix'] ?>" />
 
 <Button variant="primary" type="submit" class="self-end" iconRight="arrow-right"><?= lang('Install.form.next') ?></Button>

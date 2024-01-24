@@ -16,7 +16,7 @@
 
     <Forms.Field
         name="title"
-        label="<?= lang('Soundbite.form.soundbite_title') ?>"
+        label="<?= esc(lang('Soundbite.form.soundbite_title')) ?>"
         required="true"
         class="max-w-sm"
     />

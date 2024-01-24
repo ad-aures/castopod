@@ -21,8 +21,8 @@
         class="w-full"
         type="url"
         name="subscription_link"
-        label="<?= lang('Subscription.form_link_add.link') ?>"
-        hint="<?= lang('Subscription.form_link_add.link_hint') ?>"
+        label="<?= esc(lang('Subscription.form_link_add.link')) ?>"
+        hint="<?= esc(lang('Subscription.form_link_add.link_hint')) ?>"
         placeholder="https://…"
         value="<?= service('settings')
         ->get('Subscription.link', 'podcast:' . $podcast->id) ?>" />

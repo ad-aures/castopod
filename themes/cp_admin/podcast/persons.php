@@ -26,8 +26,8 @@
         as="MultiSelect"
         id="persons"
         name="persons[]"
-        label="<?= lang('Person.podcast_form.persons') ?>"
-        hint="<?= lang('Person.podcast_form.persons_hint') ?>"
+        label="<?= esc(lang('Person.podcast_form.persons')) ?>"
+        hint="<?= esc(lang('Person.podcast_form.persons_hint')) ?>"
         options="<?= esc(json_encode($personOptions)) ?>"
         selected="<?= esc(json_encode(old('persons', []))) ?>"
         required="true" />
@@ -36,8 +36,8 @@
         as="MultiSelect"
         id="roles"
         name="roles[]"
-        label="<?= lang('Person.podcast_form.roles') ?>"
-        hint="<?= lang('Person.podcast_form.roles_hint') ?>"
+        label="<?= esc(lang('Person.podcast_form.roles')) ?>"
+        hint="<?= esc(lang('Person.podcast_form.roles_hint')) ?>"
         options="<?= esc(json_encode($taxonomyOptions)) ?>"
         selected="<?= esc(json_encode(old('roles', []))) ?>"
     />

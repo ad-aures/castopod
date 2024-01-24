@@ -15,12 +15,12 @@
     <?= csrf_field() ?>
     <Forms.Field
         name="password"
-        label="<?= lang('User.form.password') ?>"
+        label="<?= esc(lang('User.form.password')) ?>"
         required="true"
         type="password" />
     <Forms.Field
         name="new_password"
-        label="<?= lang('User.form.new_password') ?>"
+        label="<?= esc(lang('User.form.new_password')) ?>"
         required="true"
         type="password"
         autocomplete="new-password" />

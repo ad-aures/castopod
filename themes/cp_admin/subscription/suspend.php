@@ -20,7 +20,7 @@
 <Forms.Field
     as="Textarea"
     name="reason"
-    label="<?= lang('Subscription.suspend_form.reason') ?>"
+    label="<?= esc(lang('Subscription.suspend_form.reason')) ?>"
     placeholder="<?= lang('Subscription.suspend_form.reason_placeholder') ?>"
     rows="4"
     class="mt-4"

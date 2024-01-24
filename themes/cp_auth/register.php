@@ -18,14 +18,14 @@ use Modules\Auth\Config\Auth;
 
 <Forms.Field
     name="username"
-    label="<?= lang('Auth.username') ?>"
+    label="<?= esc(lang('Auth.username')) ?>"
     autocomplete="username"
     inputmode="text"
     required="true" />
 
 <Forms.Field
     name="email"
-    label="<?= lang('Auth.email') ?>"
+    label="<?= esc(lang('Auth.email')) ?>"
     type="email"
     inputmode="email"
     autocomplete="email"
@@ -33,7 +33,7 @@ use Modules\Auth\Config\Auth;
 
 <Forms.Field
     name="password"
-    label="<?= lang('Auth.password') ?>"
+    label="<?= esc(lang('Auth.password')) ?>"
     type="password"
     required="true"
     inputmode="text"
@@ -41,7 +41,7 @@ use Modules\Auth\Config\Auth;
 
 <Forms.Field
     name="password_confirm"
-    label="<?= lang('Auth.passwordConfirm') ?>"
+    label="<?= esc(lang('Auth.passwordConfirm')) ?>"
     type="password"
     required="true"
     inputmode="text"

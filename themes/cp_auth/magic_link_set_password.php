@@ -18,7 +18,7 @@ use Modules\Auth\Config\Auth;
 
 <Forms.Field
     name="new_password"
-    label="<?= lang('Auth.password') ?>"
+    label="<?= esc(lang('Auth.password')) ?>"
     type="password"
     required="true"
     inputmode="text"

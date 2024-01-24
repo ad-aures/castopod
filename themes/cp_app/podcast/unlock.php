@@ -50,7 +50,7 @@
                 class="self-stretch mt-4 text-left"
                 name="token"
                 type="password"
-                label="<?= lang('PremiumPodcasts.unlock_form.token') ?>"
+                label="<?= esc(lang('PremiumPodcasts.unlock_form.token')) ?>"
                 hint="<?= lang('PremiumPodcasts.unlock_form.token_hint', [
                     'podcastTitle' => esc($podcast->title),
                 ]) ?>"

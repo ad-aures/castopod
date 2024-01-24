@@ -19,7 +19,7 @@
 <Forms.Field
     as="Select"
     name="cache_handler"
-    label="<?= lang('Install.form.cache_handler') ?>"
+    label="<?= esc(lang('Install.form.cache_handler')) ?>"
     options="<?= esc(json_encode([
             'file'   => lang('Install.form.cacheHandlerOptions.file'),
             'redis'  => lang('Install.form.cacheHandlerOptions.redis'),

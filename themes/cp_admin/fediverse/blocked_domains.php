@@ -14,7 +14,10 @@
 <form action="<?= route_to('fediverse-attempt-block-domain') ?>" method="POST" class="flex flex-col max-w-md">
     <?= csrf_field() ?>
 
-    <Forms.Field name="domain" label="<?= lang('Fediverse.block_lists_form.domain') ?>" required="true" />
+    <Forms.Field
+        name="domain"
+        label="<?= esc(lang('Fediverse.block_lists_form.domain')) ?>"
+        required="true" />
     <Button variant="primary" type="submit" class="self-end"><?= lang('Fediverse.block_lists_form.submit') ?></Button>
 </form>
 

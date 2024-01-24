@@ -61,8 +61,8 @@
             <Forms.Field
                 as="DatetimePicker"
                 name="scheduled_publication_date"
-                label="<?= lang('Podcast.publish_form.scheduled_publication_date') ?>"
-                hint="<?= lang('Podcast.publish_form.scheduled_publication_date_hint') ?>"
+                label="<?= esc(lang('Podcast.publish_form.scheduled_publication_date')) ?>"
+                hint="<?= esc(lang('Podcast.publish_form.scheduled_publication_date_hint')) ?>"
                 value="<?= $podcast->published_at ?>"
             />
         </div>

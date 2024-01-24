@@ -16,7 +16,7 @@
 
 <Forms.Field
     name="title"
-    label="<?= lang('Page.form.title') ?>"
+    label="<?= esc(lang('Page.form.title')) ?>"
     required="true"
     data-slugify="title"
     value="<?= esc($page->title) ?>"
@@ -34,7 +34,7 @@
 <Forms.Field
     as="MarkdownEditor"
     name="content"
-    label="<?= lang('Page.form.content') ?>"
+    label="<?= esc(lang('Page.form.content')) ?>"
     value="<?= esc($page->content_markdown) ?>"
     required="true"
     rows="20" />

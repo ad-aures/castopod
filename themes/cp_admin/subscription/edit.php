@@ -27,8 +27,8 @@
 <Forms.Field
     as="DatetimePicker"
     name="expiration_date"
-    label="<?= lang('Subscription.form.expiration_date') ?>"
-    hint="<?= lang('Subscription.form.expiration_date_hint') ?>"
+    label="<?= esc(lang('Subscription.form.expiration_date')) ?>"
+    hint="<?= esc(lang('Subscription.form.expiration_date_hint')) ?>"
     value="<?= $subscription->expires_at ?>"
 />
 

@@ -44,21 +44,21 @@
 
 <Forms.Field
     name="cover"
-    label="<?= lang('Podcast.form.cover') ?>"
-    helper="<?= lang('Podcast.form.cover_size_hint') ?>"
+    label="<?= esc(lang('Podcast.form.cover')) ?>"
+    helper="<?= esc(lang('Podcast.form.cover_size_hint')) ?>"
     type="file"
     accept=".jpg,.jpeg,.png" />
 
 <Forms.Field
     name="title"
-    label="<?= lang('Podcast.form.title') ?>"
+    label="<?= esc(lang('Podcast.form.title')) ?>"
     value="<?= esc($podcast->title) ?>"
     required="true" />
 
 <Forms.Field
     as="MarkdownEditor"
     name="description"
-    label="<?= lang('Podcast.form.description') ?>"
+    label="<?= esc(lang('Podcast.form.description')) ?>"
     value="<?= esc($podcast->description_markdown) ?>"
     required="true"
     disallowList="header,quote" />
@@ -69,12 +69,12 @@
         <Forms.RadioButton
             value="episodic"
             name="type"
-            hint="<?= lang('Podcast.form.type.episodic_hint') ?>"
+            hint="<?= esc(lang('Podcast.form.type.episodic_hint')) ?>"
             isChecked="<?= $podcast->type === 'episodic' ? 'true' : 'false' ?>" ><?= lang('Podcast.form.type.episodic') ?></Forms.RadioButton>
         <Forms.RadioButton
             value="serial"
             name="type"
-            hint="<?= lang('Podcast.form.type.serial_hint') ?>"
+            hint="<?= esc(lang('Podcast.form.type.serial_hint')) ?>"
             isChecked="<?= $podcast->type === 'serial' ? 'true' : 'false' ?>" ><?= lang('Podcast.form.type.serial') ?></Forms.RadioButton>
     </div>
 </fieldset>
@@ -87,7 +87,7 @@
     <Forms.Field
         as="Select"
         name="language"
-        label="<?= lang('Podcast.form.language') ?>"
+        label="<?= esc(lang('Podcast.form.language')) ?>"
         selected="<?= $podcast->language_code ?>"
         options="<?= esc(json_encode($languageOptions)) ?>"
         required="true" />
@@ -95,7 +95,7 @@
     <Forms.Field
         as="Select"
         name="category"
-        label="<?= lang('Podcast.form.category') ?>"
+        label="<?= esc(lang('Podcast.form.category')) ?>"
         selected="<?= $podcast->category_id ?>"
         options="<?= esc(json_encode($categoryOptions)) ?>"
         required="true" />
@@ -103,7 +103,7 @@
     <Forms.Field
         as="MultiSelect"
         name="other_categories[]"
-        label="<?= lang('Podcast.form.other_categories') ?>"
+        label="<?= esc(lang('Podcast.form.other_categories')) ?>"
         data-max-item-count="2"
         selected="<?= esc(json_encode($podcast->other_categories_ids)) ?>"
         options="<?= esc(json_encode($categoryOptions)) ?>" />
@@ -134,31 +134,31 @@
 
 <Forms.Field
     name="owner_name"
-    label="<?= lang('Podcast.form.owner_name') ?>"
+    label="<?= esc(lang('Podcast.form.owner_name')) ?>"
     value="<?= esc($podcast->owner_name) ?>"
-    hint="<?= lang('Podcast.form.owner_name_hint') ?>"
+    hint="<?= esc(lang('Podcast.form.owner_name_hint')) ?>"
     required="true" />
 
 <Forms.Field
     name="owner_email"
     type="email"
-    label="<?= lang('Podcast.form.owner_email') ?>"
+    label="<?= esc(lang('Podcast.form.owner_email')) ?>"
     value="<?= esc($podcast->owner_email) ?>"
-    hint="<?= lang('Podcast.form.owner_email_hint') ?>"
+    hint="<?= esc(lang('Podcast.form.owner_email_hint')) ?>"
     required="true" />
 
-<Forms.Toggler class="mt-2" name="is_owner_email_removed_from_feed" value="yes" checked="<?= $podcast->is_owner_email_removed_from_feed ? 'true' : 'false' ?>" hint="<?= lang('Podcast.form.is_owner_email_removed_from_feed_hint') ?>">
+<Forms.Toggler class="mt-2" name="is_owner_email_removed_from_feed" value="yes" checked="<?= $podcast->is_owner_email_removed_from_feed ? 'true' : 'false' ?>" hint="<?= esc(lang('Podcast.form.is_owner_email_removed_from_feed_hint')) ?>">
     <?= lang('Podcast.form.is_owner_email_removed_from_feed') ?></Forms.Toggler>
 
 <Forms.Field
     name="publisher"
-    label="<?= lang('Podcast.form.publisher') ?>"
+    label="<?= esc(lang('Podcast.form.publisher')) ?>"
     value="<?= esc($podcast->publisher) ?>"
-    hint="<?= lang('Podcast.form.publisher_hint') ?>" />
+    hint="<?= esc(lang('Podcast.form.publisher_hint')) ?>" />
 
 <Forms.Field
     name="copyright"
-    label="<?= lang('Podcast.form.copyright') ?>"
+    label="<?= esc(lang('Podcast.form.copyright')) ?>"
     value="<?= esc($podcast->copyright) ?>" />
 
 </Forms.Section>
@@ -167,7 +167,7 @@
     title="<?= lang('Podcast.form.fediverse_section_title') ?>" >
 
 <div class="flex flex-col">
-    <Forms.Label for="handle" hint="<?= lang('Podcast.form.handle_hint') ?>"><?= lang('Podcast.form.handle') ?></Forms.Label>
+    <Forms.Label for="handle" hint="<?= esc(lang('Podcast.form.handle_hint')) ?>"><?= lang('Podcast.form.handle') ?></Forms.Label>
     <div class="relative">
         <Icon glyph="at" class="absolute inset-0 h-full text-xl opacity-40 left-3" />
         <Forms.Input name="handle" value="<?= $podcast->handle ?>" class="w-full pl-8" required="true" readonly="true" />
@@ -176,15 +176,15 @@
 
 <Forms.Field
     name="banner"
-    label="<?= lang('Podcast.form.banner') ?>"
-    helper="<?= lang('Podcast.form.banner_size_hint') ?>"
+    label="<?= esc(lang('Podcast.form.banner')) ?>"
+    helper="<?= esc(lang('Podcast.form.banner_size_hint')) ?>"
     type="file"
     accept=".jpg,.jpeg,.png" />
 
 </Forms.Section>
 
 <Forms.Section title="<?= lang('Podcast.form.premium') ?>">
-    <Forms.Toggler class="mt-2" name="premium_by_default" value="yes" checked="<?= $podcast->is_premium_by_default ? 'true' : 'false' ?>" hint="<?= lang('Podcast.form.premium_by_default_hint') ?>">
+    <Forms.Toggler class="mt-2" name="premium_by_default" value="yes" checked="<?= $podcast->is_premium_by_default ? 'true' : 'false' ?>" hint="<?= esc(lang('Podcast.form.premium_by_default_hint')) ?>">
         <?= lang('Podcast.form.premium_by_default') ?></Forms.Toggler>
 </Forms.Section>
 
@@ -194,7 +194,7 @@
 
     <a href="https://op3.dev" target="_blank" rel="noopener noreferrer" class="inline-flex self-start text-xs font-semibold underline gap-x-1 text-skin-muted hover:no-underline focus:ring-accent"><Icon glyph="link" class="text-sm"/>op3.dev</a>
     <Forms.Toggler name="enable_op3" value="yes" checked="<?= service('settings')
-            ->get('Analytics.enableOP3', 'podcast:' . $podcast->id) ? 'true' : 'false' ?>" hint="<?= lang('Podcast.form.op3_enable_hint') ?>"><?= lang('Podcast.form.op3_enable') ?></Forms.Toggler>
+            ->get('Analytics.enableOP3', 'podcast:' . $podcast->id) ? 'true' : 'false' ?>" hint="<?= esc(lang('Podcast.form.op3_enable_hint')) ?>"><?= lang('Podcast.form.op3_enable') ?></Forms.Toggler>
 </Forms.Section>
 
 <Forms.Section
@@ -203,9 +203,9 @@
 
 <Forms.Field
     name="location_name"
-    label="<?= lang('Podcast.form.location_name') ?>"
+    label="<?= esc(lang('Podcast.form.location_name')) ?>"
     value="<?= esc($podcast->location_name) ?>"
-    hint="<?= lang('Podcast.form.location_name_hint') ?>" />
+    hint="<?= esc(lang('Podcast.form.location_name_hint')) ?>" />
 
 </Forms.Section>
 
@@ -216,22 +216,22 @@
 <Forms.Field
     as="XMLEditor"
     name="custom_rss"
-    label="<?= lang('Podcast.form.custom_rss') ?>"
-    hint="<?= lang('Podcast.form.custom_rss_hint') ?>"
+    label="<?= esc(lang('Podcast.form.custom_rss')) ?>"
+    hint="<?= esc(lang('Podcast.form.custom_rss_hint')) ?>"
     content="<?= esc($podcast->custom_rss_string) ?>" />
 
     <Forms.Field
     name="new_feed_url"
     type="url"
-    label="<?= lang('Podcast.form.new_feed_url') ?>"
-    hint="<?= lang('Podcast.form.new_feed_url_hint') ?>"
+    label="<?= esc(lang('Podcast.form.new_feed_url')) ?>"
+    hint="<?= esc(lang('Podcast.form.new_feed_url_hint')) ?>"
     value="<?= esc($podcast->new_feed_url) ?>"
     />
 
-    <Forms.Toggler class="mb-2" name="lock" value="yes" checked="<?= $podcast->is_locked ? 'true' : 'false' ?>" hint="<?= lang('Podcast.form.lock_hint') ?>">
+    <Forms.Toggler class="mb-2" name="lock" value="yes" checked="<?= $podcast->is_locked ? 'true' : 'false' ?>" hint="<?= esc(lang('Podcast.form.lock_hint')) ?>">
         <?= lang('Podcast.form.lock') ?>
     </Forms.Toggler>
-    <Forms.Toggler class="mb-2" name="block" value="yes" checked="<?= $podcast->is_blocked ? 'true' : 'false'  ?>" hint="<?= lang('Podcast.form.block_hint') ?>">
+    <Forms.Toggler class="mb-2" name="block" value="yes" checked="<?= $podcast->is_blocked ? 'true' : 'false'  ?>" hint="<?= esc(lang('Podcast.form.block_hint')) ?>">
         <?= lang('Podcast.form.block') ?>
     </Forms.Toggler>
     <Forms.Toggler name="complete" value="yes" checked="<?= $podcast->is_completed ? 'true' : 'false' ?>">

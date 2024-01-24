@@ -21,7 +21,7 @@
 <Forms.Field
     as="Select"
     name="role"
-    label="<?= lang('User.form.role') ?>"
+    label="<?= esc(lang('User.form.role')) ?>"
     options="<?= esc(json_encode($roleOptions)) ?>"
     selected="<?= esc(get_instance_group($user)) ?>"
     required="true" />

@@ -12,19 +12,19 @@
 
 <Forms.Field
     name="username"
-    label="<?= lang('Install.form.username') ?>"
+    label="<?= esc(lang('Install.form.username')) ?>"
     required="true" />
 
 <Forms.Field
     name="email"
-    label="<?= lang('Install.form.email') ?>"
+    label="<?= esc(lang('Install.form.email')) ?>"
     type="email"
     autocomplete="username"
     required="true" />
 
 <Forms.Field
     name="password"
-    label="<?= lang('Install.form.password') ?>"
+    label="<?= esc(lang('Install.form.password')) ?>"
     type="password"
     required="true"
     autocomplete="new-password" />

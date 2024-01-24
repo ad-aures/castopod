@@ -36,7 +36,7 @@ use Modules\MediaClipper\Config\MediaClipper;
     <Forms.Section title="<?= lang('VideoClip.form.params_section_title') ?>" >
         <Forms.Field
             name="title"
-            label="<?= lang('VideoClip.form.clip_title') ?>"
+            label="<?= esc(lang('VideoClip.form.clip_title')) ?>"
             required="true"
         />
         <fieldset class="flex flex-wrap gap-x-1 gap-y-2">
@@ -46,17 +46,17 @@ use Modules\MediaClipper\Config\MediaClipper;
                 name="format"
                 isChecked="true"
                 required="true"
-                hint="<?= lang('VideoClip.form.format.landscape_hint') ?>"><?= lang('VideoClip.format.landscape') ?></Forms.RadioButton>
+                hint="<?= esc(lang('VideoClip.form.format.landscape_hint')) ?>"><?= lang('VideoClip.format.landscape') ?></Forms.RadioButton>
             <Forms.RadioButton
                 value="portrait"
                 name="format"
                 required="true"
-                hint="<?= lang('VideoClip.form.format.portrait_hint') ?>"><?= lang('VideoClip.format.portrait') ?></Forms.RadioButton>
+                hint="<?= esc(lang('VideoClip.form.format.portrait_hint')) ?>"><?= lang('VideoClip.format.portrait') ?></Forms.RadioButton>
             <Forms.RadioButton
                 value="squared"
                 name="format"
                 required="true"
-                hint="<?= lang('VideoClip.form.format.squared_hint') ?>"><?= lang('VideoClip.format.squared') ?></Forms.RadioButton>
+                hint="<?= esc(lang('VideoClip.form.format.squared_hint')) ?>"><?= lang('VideoClip.format.squared') ?></Forms.RadioButton>
         </fieldset>
         <fieldset>
             <legend><?= lang('VideoClip.form.theme') ?></legend>

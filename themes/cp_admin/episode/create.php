@@ -19,9 +19,9 @@
 
 <Forms.Field
     name="audio_file"
-    label="<?= lang('Episode.form.audio_file') ?>"
-    hint="<?= lang('Episode.form.audio_file_hint') ?>"
-    helper="<?= lang('Common.size_limit', [formatBytes(file_upload_max_size(), true)]) ?>"
+    label="<?= esc(lang('Episode.form.audio_file')) ?>"
+    hint="<?= esc(lang('Episode.form.audio_file_hint')) ?>"
+    helper="<?= esc(lang('Common.size_limit', [formatBytes(file_upload_max_size(), true)])) ?>"
     type="file"
     accept=".mp3,.m4a"
     required="true"
@@ -30,16 +30,16 @@
 
 <Forms.Field
     name="cover"
-    label="<?= lang('Episode.form.cover') ?>"
-    hint="<?= lang('Episode.form.cover_hint') ?>"
-    helper="<?= lang('Episode.form.cover_size_hint') ?>"
+    label="<?= esc(lang('Episode.form.cover')) ?>"
+    hint="<?= esc(lang('Episode.form.cover_hint')) ?>"
+    helper="<?= esc(lang('Episode.form.cover_size_hint')) ?>"
     type="file"
     accept=".jpg,.jpeg,.png" />
 
 <Forms.Field
     name="title"
-    label="<?= lang('Episode.form.title') ?>"
-    hint="<?= lang('Episode.form.title_hint') ?>"
+    label="<?= esc(lang('Episode.form.title')) ?>"
+    hint="<?= esc(lang('Episode.form.title_hint')) ?>"
     required="true"
     data-slugify="title" />
 
@@ -55,14 +55,14 @@
     <Forms.Field
         class="flex-1 w-full"
         name="season_number"
-        label="<?= lang('Episode.form.season_number') ?>"
+        label="<?= esc(lang('Episode.form.season_number')) ?>"
         type="number"
         value="<?= $currentSeasonNumber ?>"
     />
     <Forms.Field
         class="flex-1 w-full"
         name="episode_number"
-        label="<?= lang('Episode.form.episode_number') ?>"
+        label="<?= esc(lang('Episode.form.episode_number')) ?>"
         type="number"
         value="<?= $nextEpisodeNumber ?>"
         required="<?= $podcast->type === 'serial' ? 'true' : 'false' ?>"
@@ -74,17 +74,17 @@
 <Forms.RadioButton
     value="full"
     name="type"
-    hint="<?= lang('Episode.form.type.full_hint') ?>"
+    hint="<?= esc(lang('Episode.form.type.full_hint')) ?>"
     isChecked="true" ><?= lang('Episode.form.type.full') ?></Forms.RadioButton>
 <Forms.RadioButton
     value="trailer"
     name="type"
-    hint="<?= lang('Episode.form.type.trailer_hint') ?>"
+    hint="<?= esc(lang('Episode.form.type.trailer_hint')) ?>"
     isChecked="false" ><?= lang('Episode.form.type.trailer') ?></Forms.RadioButton>    
 <Forms.RadioButton
     value="bonus"
     name="type"
-    hint="<?= lang('Episode.form.type.bonus_hint') ?>"
+    hint="<?= esc(lang('Episode.form.type.bonus_hint')) ?>"
     isChecked="false" ><?= lang('Episode.form.type.bonus') ?></Forms.RadioButton>
 </fieldset>
 
@@ -119,15 +119,15 @@
 <Forms.Field
     as="MarkdownEditor"
     name="description"
-    label="<?= lang('Episode.form.description') ?>"
+    label="<?= esc(lang('Episode.form.description')) ?>"
     required="true"
     disallowList="header,quote" />
 
 <Forms.Field
     as="MarkdownEditor"
     name="description_footer"
-    label="<?= lang('Episode.form.description_footer') ?>"
-    hint="<?= lang('Episode.form.description_footer_hint') ?>"
+    label="<?= esc(lang('Episode.form.description_footer')) ?>"
+    hint="<?= esc(lang('Episode.form.description_footer_hint')) ?>"
     value="<?= esc($podcast->episode_description_footer_markdown) ?? '' ?>"
     disallowList="header,quote" />
 
@@ -144,8 +144,8 @@
 >
 <Forms.Field
     name="location_name"
-    label="<?= lang('Episode.form.location_name') ?>"
-    hint="<?= lang('Episode.form.location_name_hint') ?>" />
+    label="<?= esc(lang('Episode.form.location_name')) ?>"
+    hint="<?= esc(lang('Episode.form.location_name_hint')) ?>" />
 </Forms.Section>
 
 <Forms.Section
@@ -212,11 +212,11 @@
 <Forms.Field 
     as="XMLEditor"
     name="custom_rss"
-    label="<?= lang('Episode.form.custom_rss') ?>"
-    hint="<?= lang('Episode.form.custom_rss_hint') ?>"
+    label="<?= esc(lang('Episode.form.custom_rss')) ?>"
+    hint="<?= esc(lang('Episode.form.custom_rss_hint')) ?>"
 />
 
-<Forms.Toggler name="block" value="yes" checked="false" hint="<?= lang('Episode.form.block_hint') ?>"><?= lang('Episode.form.block') ?></Forms.Toggler>
+<Forms.Toggler name="block" value="yes" checked="false" hint="<?= esc(lang('Episode.form.block_hint')) ?>"><?= lang('Episode.form.block') ?></Forms.Toggler>
 
 </Forms.Section>
 

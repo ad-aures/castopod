@@ -25,7 +25,7 @@ use Config\App;
 
     <Forms.Field
         name="site_name"
-        label="<?= lang('Settings.instance.site_name') ?>"
+        label="<?= esc(lang('Settings.instance.site_name')) ?>"
         value="<?= esc(service('settings')
     ->get('App.siteName')) ?>"
         required="true" />
@@ -33,7 +33,7 @@ use Config\App;
     <Forms.Field
         as="Textarea"
         name="site_description"
-        label="<?= lang('Settings.instance.site_description') ?>"
+        label="<?= esc(lang('Settings.instance.site_description')) ?>"
         value="<?= esc(service('settings')
     ->get('App.siteDescription')) ?>"
         required="true"
@@ -43,9 +43,9 @@ use Config\App;
         <Forms.Field
             name="site_icon"
             type="file"
-            label="<?= lang('Settings.instance.site_icon') ?>"
-            hint="<?= lang('Settings.instance.site_icon_hint') ?>"
-            helper="<?= lang('Settings.instance.site_icon_helper') ?>"
+            label="<?= esc(lang('Settings.instance.site_icon')) ?>"
+            hint="<?= esc(lang('Settings.instance.site_icon_hint')) ?>"
+            helper="<?= esc(lang('Settings.instance.site_icon_helper')) ?>"
             accept=".png,.jpeg,.jpg"
             class="flex-1"
             />
@@ -83,9 +83,9 @@ use Config\App;
     title="<?= lang('Settings.housekeeping.title') ?>"
     subtitle="<?= lang('Settings.housekeeping.subtitle') ?>" >
 
-    <Forms.Toggler name="reset_counts" value="yes" size="small" checked="false" hint="<?= lang('Settings.housekeeping.reset_counts_helper') ?>"><?= lang('Settings.housekeeping.reset_counts') ?></Forms.Toggler>
-    <Forms.Toggler name="rename_episodes_files" value="yes" size="small" checked="false" hint="<?= lang('Settings.housekeeping.rename_episodes_files_hint') ?>"><?= lang('Settings.housekeeping.rename_episodes_files') ?></Forms.Toggler>
-    <Forms.Toggler name="clear_cache" value="yes" size="small" checked="false" hint="<?= lang('Settings.housekeeping.clear_cache_helper') ?>"><?= lang('Settings.housekeeping.clear_cache') ?></Forms.Toggler>
+    <Forms.Toggler name="reset_counts" value="yes" size="small" checked="false" hint="<?= esc(lang('Settings.housekeeping.reset_counts_helper')) ?>"><?= lang('Settings.housekeeping.reset_counts') ?></Forms.Toggler>
+    <Forms.Toggler name="rename_episodes_files" value="yes" size="small" checked="false" hint="<?= esc(lang('Settings.housekeeping.rename_episodes_files_hint')) ?>"><?= lang('Settings.housekeeping.rename_episodes_files') ?></Forms.Toggler>
+    <Forms.Toggler name="clear_cache" value="yes" size="small" checked="false" hint="<?= esc(lang('Settings.housekeeping.clear_cache_helper')) ?>"><?= lang('Settings.housekeeping.clear_cache') ?></Forms.Toggler>
 
     <Button variant="primary" type="submit" iconLeft="home-gear"><?= lang('Settings.housekeeping.run') ?></Button>
 

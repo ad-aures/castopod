@@ -17,7 +17,7 @@
 <Forms.Field
     as="Select"
     name="user"
-    label="<?= lang('Contributor.form.user') ?>"
+    label="<?= esc(lang('Contributor.form.user')) ?>"
     options="<?= esc(json_encode($contributorOptions)) ?>"
     placeholder="<?= lang('Contributor.form.user_placeholder') ?>"
     required="true" />
@@ -25,7 +25,7 @@
 <Forms.Field
     as="Select"
     name="role"
-    label="<?= lang('Contributor.form.role') ?>"
+    label="<?= esc(lang('Contributor.form.role')) ?>"
     options="<?= esc(json_encode($roleOptions)) ?>"
     placeholder="<?= lang('Contributor.form.role_placeholder') ?>"
     selected="<?= setting('AuthGroups.defaultPodcastGroup') ?>"

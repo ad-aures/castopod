@@ -18,7 +18,7 @@ use Modules\Auth\Config\Auth;
     <!-- Code -->
     <Forms.Field
         name="token"
-        label="<?= lang('Auth.token') ?>"
+        label="<?= esc(lang('Auth.token')) ?>"
         required="true"
         inputmode="numeric"
         pattern="[0-9]*"

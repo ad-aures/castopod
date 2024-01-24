@@ -16,7 +16,7 @@
 
 <Forms.Field
     name="title"
-    label="<?= lang('Page.form.title') ?>"
+    label="<?= esc(lang('Page.form.title')) ?>"
     required="true"
     data-slugify="title"
     class="max-w-sm" />
@@ -32,7 +32,7 @@
 <Forms.Field
     as="MarkdownEditor"
     name="content"
-    label="<?= lang('Page.form.content') ?>"
+    label="<?= esc(lang('Page.form.content')) ?>"
     required="true"
     rows="20" />
 

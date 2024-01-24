@@ -16,7 +16,7 @@ use Modules\Auth\Config\Auth;
 
     <Forms.Field
         name="email"
-        label="<?= lang('Auth.email') ?>"
+        label="<?= esc(lang('Auth.email')) ?>"
         required="true"
         type="email"
         inputmode="email"
@@ -26,7 +26,7 @@ use Modules\Auth\Config\Auth;
 
     <Forms.Field
         name="password"
-        label="<?= lang('Auth.password') ?>"
+        label="<?= esc(lang('Auth.password')) ?>"
         type="password"
         inputmode="text"
         autocomplete="current-password"

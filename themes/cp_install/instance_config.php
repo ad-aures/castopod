@@ -20,26 +20,26 @@ use Modules\Install\Config\Install;
 
 <Forms.Field
     name="hostname"
-    label="<?= lang('Install.form.hostname') ?>"
+    label="<?= esc(lang('Install.form.hostname')) ?>"
     value="<?= host_url() === null ? config(App::class)->baseURL : host_url() ?>"
     required="true" />
 
 <Forms.Field
     name="media_base_url"
-    label="<?= lang('Install.form.media_base_url') ?>"
-    hint="<?= lang('Install.form.media_base_url_hint') ?>" />
+    label="<?= esc(lang('Install.form.media_base_url')) ?>"
+    hint="<?= esc(lang('Install.form.media_base_url_hint')) ?>" />
 
 <Forms.Field
     name="admin_gateway"
-    label="<?= lang('Install.form.admin_gateway') ?>"
-    hint="<?= lang('Install.form.admin_gateway_hint') ?>"
+    label="<?= esc(lang('Install.form.admin_gateway')) ?>"
+    hint="<?= esc(lang('Install.form.admin_gateway_hint')) ?>"
     value="<?= config(Admin::class)->gateway ?>"
     required="true" />
 
 <Forms.Field
     name="auth_gateway"
-    label="<?= lang('Install.form.auth_gateway') ?>"
-    hint="<?= lang('Install.form.auth_gateway_hint') ?>"
+    label="<?= esc(lang('Install.form.auth_gateway')) ?>"
+    hint="<?= esc(lang('Install.form.auth_gateway_hint')) ?>"
     value="<?= config(Auth::class)->gateway ?>"
     required="true" />
 
