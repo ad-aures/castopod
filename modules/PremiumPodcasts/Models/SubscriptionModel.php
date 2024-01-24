@@ -57,6 +57,11 @@ class SubscriptionModel extends Model
     /**
      * @var string[]
      */
+    protected $afterInsert = ['clearCache'];
+
+    /**
+     * @var string[]
+     */
     protected $afterUpdate = ['clearCache'];
 
     /**
