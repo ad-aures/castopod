@@ -324,10 +324,8 @@ class EpisodeModel extends UuidModel
     {
         $result = $this->builder()
             ->selectMax('season_number', 'current_season_number')
-            ->where([
-                'podcast_id'          => $podcastId,
-                'published_at IS NOT' => null,
-            ])
+            ->where('podcast_id', $podcastId)
+            ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
             ->get()
             ->getResultArray();
 
@@ -339,10 +337,11 @@ class EpisodeModel extends UuidModel
         $result = $this->builder()
             ->selectMax('number', 'next_episode_number')
             ->where([
-                'podcast_id'          => $podcastId,
-                'season_number'       => $seasonNumber,
-                'published_at IS NOT' => null,
-            ])->get()
+                'podcast_id'    => $podcastId,
+                'season_number' => $seasonNumber,
+            ])
+            ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
+            ->get()
             ->getResultArray();
 
         return (int) $result[0]['next_episode_number'] + 1;
@@ -357,10 +356,9 @@ class EpisodeModel extends UuidModel
             ->select(
                 'COUNT(DISTINCT season_number) as number_of_seasons, COUNT(*) as number_of_episodes, MIN(published_at) as first_published_at'
             )
-            ->where([
-                'podcast_id'          => $podcastId,
-                'published_at IS NOT' => null,
-            ])->get()
+            ->where('podcast_id', $podcastId)
+            ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
+            ->get()
             ->getResultArray();
 
         $stats = [

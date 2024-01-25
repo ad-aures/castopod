@@ -245,9 +245,8 @@ class PodcastModel extends Model
                 ->builder()
                 ->select('YEAR(published_at) as year, count(*) as number_of_episodes')
                 ->where([
-                    'podcast_id'          => $podcastId,
-                    'season_number'       => null,
-                    'published_at IS NOT' => null,
+                    'podcast_id'    => $podcastId,
+                    'season_number' => null,
                 ])
                 ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
                 ->groupBy('year')
@@ -284,7 +283,6 @@ class PodcastModel extends Model
                 ->where([
                     'podcast_id'           => $podcastId,
                     'season_number is not' => null,
-                    'published_at IS NOT'  => null,
                 ])
                 ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
                 ->groupBy('season_number')
