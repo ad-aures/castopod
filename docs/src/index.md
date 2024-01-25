@@ -238,6 +238,7 @@ Thanks goes to these wonderful people
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/KrzysztofDomanczyk"><img src="https://avatars.githubusercontent.com/u/75178474?v=4?s=100" width="100px;" alt="KrzysztofDomanczyk"/><br /><sub><b>KrzysztofDomanczyk</b></sub></a><br /><a href="https://code.castopod.org/adaures/castopod/commits/master" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://code.castopod.org/NeoluxConsulting"><img src="https://secure.gravatar.com/avatar/6e745565356330c1e29a85d52bffdaa1?s=80&d=identicon?s=100" width="100px;" alt="Guy Martin"/><br /><sub><b>Guy Martin</b></sub></a><br /><a href="https://code.castopod.org/adaures/castopod/issues?author_username=NeoluxConsulting" title="Bug reports">🐛</a> <a href="https://code.castopod.org/adaures/castopod/commits/master" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>

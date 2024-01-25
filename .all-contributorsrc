@@ -613,6 +613,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "NeoluxConsulting",
+      "name": "Guy Martin",
+      "avatar_url": "https://secure.gravatar.com/avatar/6e745565356330c1e29a85d52bffdaa1?s=80&d=identicon",
+      "profile": "https://code.castopod.org/NeoluxConsulting",
+      "contributions": [
+        "bug",
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
