@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Modules\Media\FileManagers;
 
 use CodeIgniter\Files\File;
-use CodeIgniter\HTTP\Response;
 use Exception;
 use Modules\Media\Config\Media as MediaConfig;
 
@@ -129,11 +128,6 @@ class FS implements FileManagerInterface
         helper('media');
 
         return is_really_writable($this->media_path_absolute());
-    }
-
-    public function serve(string $key): Response
-    {
-        return redirect()->to($this->getUrl($key));
     }
 
     /**

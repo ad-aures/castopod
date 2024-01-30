@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Modules\Media\FileManagers;
 
 use CodeIgniter\Files\File;
-use CodeIgniter\HTTP\Response;
 
 interface FileManagerInterface
 {
@@ -28,6 +27,4 @@ interface FileManagerInterface
     public function deleteAll(string $prefix, string $pattern = '*'): bool;
 
     public function isHealthy(): bool;
-
-    public function serve(string $key): Response;
 }
