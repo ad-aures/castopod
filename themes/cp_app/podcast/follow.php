@@ -36,14 +36,15 @@
         <h1 class="w-full pt-8 pb-32 text-lg font-semibold text-center text-white bg-header"><?= lang(
             'Fediverse.follow.subtitle',
         ) ?></h1>
-        <div class="flex flex-col w-full max-w-xs -mt-24 overflow-hidden shadow bg-elevated rounded-xl">
+        <div class="flex flex-col w-full -mt-24 overflow-hidden shadow max-w-fit bg-elevated rounded-xl">
             <img src="<?= get_podcast_banner_url($actor->podcast, 'small') ?>" alt="" class="w-full aspect-[3/1] bg-header" loading="lazy" />
             <div class="flex px-4 py-2">
                 <img src="<?= $actor->avatar_image_url ?>" alt="<?= esc($actor->display_name) ?>"
                     class="w-16 h-16 mr-4 -mt-8 rounded-full ring-2 ring-background-elevated aspect-square" loading="lazy" />
                 <div class="flex flex-col">
                     <p class="font-semibold"><?= esc($actor->display_name) ?></p>
-                    <p class="text-sm text-skin-muted">@<?= esc($actor->username) ?></p>
+                    <p class="text-sm text-skin-muted">
+<span title="@<?= esc($actor->username) ?>@<?= esc($actor->domain) ?>" data-tooltip="bottom">@<?= esc($actor->username) ?>@<?= esc($actor->domain) ?></span></p>
                 </div>
             </div>
         </div>
@@ -53,7 +54,6 @@
         <form action="<?= route_to('attempt-follow', esc($actor->username)) ?>" method="POST" class="flex flex-col gap-y-2">
             <?= csrf_field() ?>
             <?= view('_message_block') ?>
-
             <Forms.Field
                 name="handle"
                 label="<?= esc(lang('Fediverse.your_handle')) ?>"
