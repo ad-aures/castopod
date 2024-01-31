@@ -1,3 +1,28 @@
+# [1.9.0](https://code.castopod.org/adaures/castopod/compare/v1.8.2...v1.9.0) (1/31/2024)
+
+### Bug Fixes
+
+- **i18n:** escape language strings in form fields to prevent them from
+  disappearing
+  ([3cb5ffd](https://code.castopod.org/adaures/castopod/commit/3cb5ffd25b9604a83cd12935e641dab7c88fba47)),
+  closes [#412](https://code.castopod.org/adaures/castopod/issues/412)
+- **podcast-about:** update stats query to discard scheduled episodes from
+  episodes number
+  ([67c037c](https://code.castopod.org/adaures/castopod/commit/67c037c9eb1e15c6945eaf74ec0ff30b33f4b704))
+- **premium-subs:** clear subscription list cache after insert
+  ([2accb0f](https://code.castopod.org/adaures/castopod/commit/2accb0f7652330b29c3adb85a2e1b0d5d83f1389)),
+  closes [#430](https://code.castopod.org/adaures/castopod/issues/430)
+- **s3:** remove proxy, set objects acl to public-read, and serve files using
+  their public urls
+  ([6a77a9d](https://code.castopod.org/adaures/castopod/commit/6a77a9d2f29c849775a3d1bcbd819f73f21d9aa6))
+
+### Features
+
+- add actor domain to handle in follow page
+  ([de099ac](https://code.castopod.org/adaures/castopod/commit/de099ac64300b8edb86e387fde89c0a3e9472f46))
+- **admin:** add podcast's OP3 analytics dashboard link
+  ([5f3752b](https://code.castopod.org/adaures/castopod/commit/5f3752b4430f6f2d5f9e5f6a7a003bc4d2f9d487))
+
 ## [1.8.2](https://code.castopod.org/adaures/castopod/compare/v1.8.1...v1.8.2) (1/17/2024)
 
 ### Bug Fixes
