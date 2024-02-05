@@ -9,9 +9,9 @@ declare(strict_types=1);
  */
 
 return [
-    'back_to_home' => 'Back to home',
+    'back_to_home' => 'Tornar a l’acuèlh',
     'map' => [
-        'title' => 'Map',
-        'description' => 'Discover podcast episodes on {siteName} that are placed on a map! Travel through the map and listen to episodes that talk about specific locations.',
+        'title' => 'Mapa',
+        'description' => 'Descobrissètz d’episòdis de podcast plaçats sus una mapa amb {siteName} ! Viatjatz sus una mapa del monde e escotatz d’episòdis mencionant de lòcs especifics.',
     ],
 ];

@@ -116,6 +116,7 @@ return [
         'premium_by_default' => 'Epizode ​​se podrazumevano moraju podesiti kao premijum',
         'premium_by_default_hint' => 'Epizode ​​podkasta će podrazumevano biti označene kao premijum. I dalje možete izabrati da neke epizode, trejlere ili bonuse postavite kao javne.',
         'op3' => 'Otvoreni Podkast Prefiks Projekat (OP3)',
+        'op3_link' => 'Visit your OP3 dashboard (external link)',
         'op3_hint' => 'Vrednujte svoje analitičke podatke pomoću OP3, otvorenog koda i pouzdane analitičke usluge treće strane. Delite, potvrdite i uporedite svoje analitičke podatke sa otvorenim podkast ekosistemom.',
         'op3_enable' => 'Omogućite OP3 analitičku uslugu',
         'op3_enable_hint' => 'Iz bezbednosnih razloga, analitika premijum epizoda se neće deliti sa OP3.',

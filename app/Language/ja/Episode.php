@@ -9,29 +9,29 @@ declare(strict_types=1);
  */
 
 return [
-    'season' => 'Season {seasonNumber}',
+    'season' => 'シーズン {seasonNumber}',
     'season_abbr' => 'S{seasonNumber}',
-    'number' => 'Episode {episodeNumber}',
+    'number' => 'エピソード {episodeNumber}',
     'number_abbr' => 'Ep. {episodeNumber}',
-    'season_episode' => 'Season {seasonNumber} episode {episodeNumber}',
+    'season_episode' => 'シーズン {seasonNumber} エピソード {episodeNumber}',
     'season_episode_abbr' => 'S{seasonNumber}:E{episodeNumber}',
     'persons' => '{personsCount, plural,
         one {# person}
         other {# persons}
     }',
     'persons_list' => 'Persons',
-    'back_to_episodes' => 'Back to episodes of {podcast}',
-    'comments' => 'Comments',
-    'activity' => 'Activity',
+    'back_to_episodes' => '{podcast} のエピソードに戻る',
+    'comments' => 'コメント',
+    'activity' => 'アクティビティ',
     'description' => 'Episode description',
     'number_of_comments' => '{numberOfComments, plural,
         one {# comment}
         other {# comments}
     }',
     'all_podcast_episodes' => 'All podcast episodes',
-    'back_to_podcast' => 'Go back to podcast',
+    'back_to_podcast' => 'ポッドキャストへ戻る',
     'preview' => [
-        'title' => 'Preview',
+        'title' => 'プレビュー',
         'not_published' => 'Not published',
         'text' => '{publication_status, select,
             published {This episode is not yet published.}
@@ -39,7 +39,7 @@ return [
             with_podcast {This episode will be published at the same time as the podcast.}
             other {This episode is not yet published.}
         }',
-        'publish' => 'Publish',
+        'publish' => '公開する',
         'publish_edit' => 'Edit publication',
     ],
 ];

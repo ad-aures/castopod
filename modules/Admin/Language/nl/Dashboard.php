@@ -9,20 +9,20 @@ declare(strict_types=1);
  */
 
 return [
-    'home' => 'Admin dashboard',
-    'welcome_message' => 'Welcome to the admin area!',
+    'home' => 'Beheerdersdashboard',
+    'welcome_message' => 'Welkom bij de beheeromgeving!',
     'podcasts' => [
         'title' => 'Podcasts',
         'not_found' => 'No published podcast',
-        'last_published' => 'Last published on {lastPublicationDate}',
+        'last_published' => 'Laatst gepubliceerd op {lastPublicationDate}',
     ],
     'episodes' => [
-        'title' => 'Episodes',
+        'title' => 'Afleveringen',
         'not_found' => 'No published episode',
-        'last_published' => 'Last published on {lastPublicationDate}',
+        'last_published' => 'Laatst gepubliceerd op {lastPublicationDate}',
     ],
     'storage' => [
-        'title' => 'Storage',
-        'subtitle' => '{totalUploaded} out of {totalStorage}',
+        'title' => 'Opslagruimte',
+        'subtitle' => '{totalUploaded} van {totalStorage}',
     ],
 ];

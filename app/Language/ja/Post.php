@@ -18,8 +18,8 @@ return [
         'episode_message_placeholder' => 'Write a message for the episode…',
         'episode_url_placeholder' => 'Episode URL',
         'reply_to_placeholder' => 'Reply to @{actorUsername}',
-        'submit' => 'Send',
-        'submit_reply' => 'Reply',
+        'submit' => '送信',
+        'submit_reply' => '返信する',
     ],
     'favourites' => '{numberOfFavourites, plural,
         one {# favourite}
@@ -36,5 +36,5 @@ return [
     'expand' => 'Expand post',
     'block_actor' => 'Block user @{actorUsername}',
     'block_domain' => 'Block domain @{actorDomain}',
-    'delete' => 'Delete post',
+    'delete' => '投稿を削除',
 ];

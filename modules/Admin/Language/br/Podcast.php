@@ -119,6 +119,7 @@ return [
         'premium_by_default' => 'Ar rannoù a zo evit ar re bremium dre ziouer',
         'premium_by_default_hint' => 'Rannoù ar podkast a vo merket Premium dre ziouer. Gallout a rit lakaat rannoù zo evel publik.',
         'op3' => 'Open Podcast Prefix Project (OP3)',
+        'op3_link' => 'Visit your OP3 dashboard (external link)',
         'op3_hint' => 'Value your analytics data with OP3, an open-source and trusted third party analytics service. Share, validate and compare your analytics data with the open podcasting ecosystem.',
         'op3_enable' => 'Enable OP3 analytics service',
         'op3_enable_hint' => 'For security reasons, premium episodes\' analytics data will not be shared with OP3.',

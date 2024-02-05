@@ -9,7 +9,7 @@ declare(strict_types=1);
  */
 
 return [
-    'manual_config' => 'Manual configuration',
+    'manual_config' => 'Configuracion manuala',
     'manual_config_subtitle' =>
         'Create a `.env` file with your settings and refresh the page to continue installation.',
     'form' => [
@@ -39,12 +39,12 @@ return [
             'Choose your preferred cache handler. Leave it as the default value if you have no clue what it means.',
         'cache_handler' => 'Cache handler',
         'cacheHandlerOptions' => [
-            'file' => 'File',
+            'file' => 'Fichièr',
             'redis' => 'Redis',
             'predis' => 'Predis',
         ],
-        'next' => 'Next',
-        'submit' => 'Finish install',
+        'next' => 'Seguent',
+        'submit' => 'Acabar l’installacion',
         'create_superadmin' => 'Create your superadmin account',
         'email' => 'Email',
         'username' => 'Username',

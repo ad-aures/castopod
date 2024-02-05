@@ -9,12 +9,12 @@ declare(strict_types=1);
  */
 
 return [
-    'all_podcasts' => 'All podcasts',
-    'sort_by' => 'Sort by',
+    'all_podcasts' => 'すべてのポッドキャスト',
+    'sort_by' => '並べ替え',
     'sort_options' => [
-        'activity' => 'Recent activity',
-        'created_desc' => 'Newest first',
-        'created_asc' => 'Oldest first',
+        'activity' => '最近のアクティビティ',
+        'created_desc' => '新しい順',
+        'created_asc' => '古い順',
     ],
-    'no_podcast' => 'No podcast found',
+    'no_podcast' => 'ポッドキャストが見つかりません',
 ];

@@ -116,6 +116,7 @@ return [
         'premium_by_default' => 'Episodane må ha premium som standardval',
         'premium_by_default_hint' => 'Podkastepisodane vil få premium som standardmerking. Du kan likevel ha nokre episodar, trailerar eller bonusar som offentlege.',
         'op3' => 'Open Podcast Prefix-prosjekt (OP3)',
+        'op3_link' => 'Visit your OP3 dashboard (external link)',
         'op3_hint' => 'Verdiset analysedataa dine med OP3, som er ein tredjeparts analyseteneste med open kjeldekode. Del, stadfest og samanlikne analysedataa dine med det opne podkast-økosystemet.',
         'op3_enable' => 'Bruk OP3-analysetenesta',
         'op3_enable_hint' => 'Av tryggleiksgrunnar deler me ikkje analysedata for premium-episodar med OP3.',

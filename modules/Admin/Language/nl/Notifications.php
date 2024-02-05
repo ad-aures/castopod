@@ -9,11 +9,11 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => 'Notifications',
-    'reply' => '{actor_username} replied to your post',
+    'title' => 'Meldingen',
+    'reply' => '{actor_username} heeft op uw bericht gereageerd',
     'favourite' => '{actor_username} favourited your post',
-    'reblog' => '{actor_username} shared your post',
-    'follow' => '{actor_username} started following you',
-    'no_notifications' => 'No notifications',
-    'mark_all_as_read' => 'Mark all as read',
+    'reblog' => '{actor_username} heeft je bericht gedeeld',
+    'follow' => '{actor_username} volgt je nu',
+    'no_notifications' => 'Geen meldingen',
+    'mark_all_as_read' => 'Alles als gelezen markeren',
 ];

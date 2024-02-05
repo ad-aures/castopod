@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 return [
     'go_to_page' => 'Ísť na stránku podcastu',
-    'rss_feed' => 'RSS feed',
+    'rss_feed' => 'RSS kanál',
     'dashboard' => 'Podcast dashboard',
     'podcast-view' => 'Úvod',
     'podcast-edit' => 'Upraviť podcast',
@@ -25,7 +25,7 @@ return [
     'podcast-analytics-webpages' => 'Web pages visits',
     'podcast-analytics-locations' => 'Locations',
     'podcast-analytics-unique-listeners' => 'Unique listeners',
-    'podcast-analytics-players' => 'Players',
+    'podcast-analytics-players' => 'Prehrávače',
     'podcast-analytics-listening-time' => 'Čas počúvania',
     'podcast-analytics-time-periods' => 'Časové úseky',
     'monetization' => 'Monetization',
@@ -34,7 +34,7 @@ return [
     'contributors' => 'Prispievatelia',
     'contributor-list' => 'Všetci prispievatelia',
     'contributor-add' => 'Pridať prispievateľa',
-    'broadcast' => 'Broadcast',
+    'broadcast' => 'Vysielanie',
     'platforms-podcasting' => 'Podcastové aplikácie',
     'platforms-social' => 'Sociálne siete',
     'platforms-funding' => 'Funding links',

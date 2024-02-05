@@ -9,37 +9,37 @@ declare(strict_types=1);
  */
 
 return [
-    'season' => 'Season {seasonNumber}',
+    'season' => 'Sason {seasonNumber}',
     'season_abbr' => 'S{seasonNumber}',
-    'number' => 'Episode {episodeNumber}',
+    'number' => 'Episòdi {episodeNumber}',
     'number_abbr' => 'Ep. {episodeNumber}',
-    'season_episode' => 'Season {seasonNumber} episode {episodeNumber}',
+    'season_episode' => 'Sason {seasonNumber} episòdi {episodeNumber}',
     'season_episode_abbr' => 'S{seasonNumber}:E{episodeNumber}',
     'persons' => '{personsCount, plural,
-        one {# person}
-        other {# persons}
+        one {# persona}
+        other {# personas}
     }',
-    'persons_list' => 'Persons',
-    'back_to_episodes' => 'Back to episodes of {podcast}',
-    'comments' => 'Comments',
-    'activity' => 'Activity',
-    'description' => 'Episode description',
+    'persons_list' => 'Personas',
+    'back_to_episodes' => 'Tornar als episòdis de {podcast}',
+    'comments' => 'Comentaris',
+    'activity' => 'Activitat',
+    'description' => 'Descripcion de l’episòdi',
     'number_of_comments' => '{numberOfComments, plural,
-        one {# comment}
-        other {# comments}
+        one {# comentari}
+        other {# comentaris}
     }',
-    'all_podcast_episodes' => 'All podcast episodes',
-    'back_to_podcast' => 'Go back to podcast',
+    'all_podcast_episodes' => 'Totes los episòdis del podcast',
+    'back_to_podcast' => 'Tornar al podcast',
     'preview' => [
-        'title' => 'Preview',
-        'not_published' => 'Not published',
+        'title' => 'Apercebut',
+        'not_published' => 'Non publicat',
         'text' => '{publication_status, select,
-            published {This episode is not yet published.}
-            scheduled {This episode is scheduled for publication on {publication_date}.}
-            with_podcast {This episode will be published at the same time as the podcast.}
-            other {This episode is not yet published.}
+            published {Aqueste episòdi es pas encara publicat.}
+            scheduled {Aqueste episòdi es planificat per publicacion lo {publication_date}.}
+            with_podcast {Aqueste episòdi serà publicat al moment de la publicacion del podcast.}
+            other {Aqueste episòdi es pas encara publicat.}
         }',
-        'publish' => 'Publish',
-        'publish_edit' => 'Edit publication',
+        'publish' => 'Publicar',
+        'publish_edit' => 'Modificar la publicacion',
     ],
 ];

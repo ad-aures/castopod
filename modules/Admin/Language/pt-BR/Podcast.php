@@ -116,6 +116,7 @@ return [
         'premium_by_default' => 'Episódios devem ser definidos como premium por padrão',
         'premium_by_default_hint' => 'Podcast episodes will be marked as premium by default. You can still choose to set some episodes, trailers or bonuses as public.',
         'op3' => 'Open Podcast Prefix Project (OP3)',
+        'op3_link' => 'Visit your OP3 dashboard (external link)',
         'op3_hint' => 'Value your analytics data with OP3, an open-source and trusted third party analytics service. Share, validate and compare your analytics data with the open podcasting ecosystem.',
         'op3_enable' => 'Ativar serviço de análise OP3',
         'op3_enable_hint' => 'Por razões de segurança, os dados de análise dos episódios premium não serão compartilhados com o OP3.',

@@ -25,7 +25,7 @@ return [
         one {# post}
         other {# posts}
     }',
-    'links' => 'Links',
+    'links' => 'Link',
     'activity' => 'Attività',
     'episodes' => 'Episodi',
     'episodes_title' => 'Episodi di {podcastTitle}',
@@ -51,5 +51,5 @@ return [
         other {# persons}
     }',
     'persons_list' => 'Persone',
-    'castopod_website' => 'Castopod (website)',
+    'castopod_website' => 'Castopod (sito web)',
 ];

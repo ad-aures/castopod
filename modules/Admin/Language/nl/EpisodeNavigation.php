@@ -11,13 +11,13 @@ declare(strict_types=1);
 return [
     'go_to_page' => 'View episode page',
     'dashboard' => 'Episode dashboard',
-    'episode-view' => 'Home',
-    'episode-edit' => 'Edit episode',
-    'episode-persons-manage' => 'Manage persons',
+    'episode-view' => 'Hoofdpagina',
+    'episode-edit' => 'Aflevering bewerken',
+    'episode-persons-manage' => 'Personen beheren',
     'embed-add' => 'Embeddable player',
     'clips' => 'Clips',
-    'video-clips-list' => 'Video clips',
-    'video-clips-create' => 'New video clip',
+    'video-clips-list' => 'Videoclips',
+    'video-clips-create' => 'Nieuwe videoclip',
     'soundbites-list' => 'Soundbites',
     'soundbites-create' => 'New soundbite',
 ];

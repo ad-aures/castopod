@@ -116,6 +116,7 @@ return [
         'premium_by_default' => 'Episoden müssen standardmäßig als Premium festgelegt werden',
         'premium_by_default_hint' => 'Podcast-Episoden werden standardmäßig als Premium markiert. Sie können dennoch einzelne Episoden, Trailer oder Boni als öffentlich festlegen.',
         'op3' => 'Open Podcast Prefix Project (OP3)',
+        'op3_link' => 'Visit your OP3 dashboard (external link)',
         'op3_hint' => 'Werten Sie Ihre Analysedaten mit OP3 auf, einem quelloffenen und vertrauenswürdigen Analysedienst eines Drittanbieters. Teilen, validieren und vergleichen Sie Ihre Analysedaten in dem offenen Podcast-Ökosystem.',
         'op3_enable' => 'OP3-Analysedienst aktivieren',
         'op3_enable_hint' => 'Aus Sicherheitsgründen werden die Analysedaten von Premium-Episoden nicht mit OP3 geteilt.',

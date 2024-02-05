@@ -10,23 +10,23 @@ declare(strict_types=1);
 
 return [
     'messages' => [
-        'actorNotFound' => 'The account could not be found!',
-        'blockActorSuccess' => '{actor} has been blocked!',
+        'actorNotFound' => 'Het account werd niet gevonden!',
+        'blockActorSuccess' => '{actor} is geblokkeerd!',
         'unblockActorSuccess' => 'Actor has been unblocked!',
-        'blockDomainSuccess' => '{domain} has been blocked!',
-        'unblockDomainSuccess' => '{domain} has been unblocked!',
+        'blockDomainSuccess' => '{domain} is geblokkeerd!',
+        'unblockDomainSuccess' => '{domain} is gedeblokkeerd!',
     ],
-    'blocked_actors' => 'Blocked accounts',
-    'blocked_domains' => 'Blocked domains',
+    'blocked_actors' => 'Geblokkeerde accounts',
+    'blocked_domains' => 'Geblokkeerde domeinen',
     'block_lists_form' => [
         'handle' => 'Account handle',
         'handle_hint' => 'Input @username@domain account.',
-        'domain' => 'Domain name',
+        'domain' => 'Domeinnaam',
         'submit' => 'Block!',
     ],
     'list' => [
         'actor' => 'Account',
-        'domain' => 'Domain name',
-        'unblock' => 'Unblock',
+        'domain' => 'Domeinnaam',
+        'unblock' => 'Deblokkeren',
     ],
 ];

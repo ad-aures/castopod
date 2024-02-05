@@ -9,7 +9,7 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => 'General settings',
+    'title' => 'Algemene instellingen',
     'instance' => [
         'title' => 'Instance',
         'site_icon' => 'Site icon',
@@ -18,18 +18,18 @@ return [
         'site_icon_helper' => 'Icon must be squared and at least 512px wide and tall.',
         'site_name' => 'Site name',
         'site_description' => 'Site description',
-        'submit' => 'Save',
+        'submit' => 'Opslaan',
         'editSuccess' => 'Instance has been updated successfully!',
         'deleteIconSuccess' => 'Site icon has been remove successfully!',
     ],
     'images' => [
-        'title' => 'Images',
+        'title' => 'Afbeeldingen',
         'subtitle' => 'Here you can regenerate all images based on the originals that were uploaded. To be used if you find that some images are missing. This task may take a while.',
-        'regenerate' => 'Regenerate images',
+        'regenerate' => 'Afbeeldingen regenereren',
         'regenerationSuccess' => 'All images have been regenerated successfully!',
     ],
     'housekeeping' => [
-        'title' => 'Housekeeping',
+        'title' => 'Huishouden',
         'subtitle' => 'Runs various housekeeping tasks. Use this feature if you ever encounter issues with media files or data integrity. These tasks may take a while.',
         'reset_counts' => 'Reset counts',
         'reset_counts_helper' => 'This option will recalculate and reset all data counts (number of followers, posts, comments, …).',
@@ -43,16 +43,16 @@ return [
         'runSuccess' => 'Housekeeping has been run successfully!',
     ],
     'theme' => [
-        'title' => 'Theme',
-        'accent_section_title' => 'Accent color',
-        'accent_section_subtitle' => 'Choose the color to determine the look and feel of all public pages.',
-        'pine' => 'Pine',
+        'title' => 'Thema',
+        'accent_section_title' => 'Accentkleur',
+        'accent_section_subtitle' => 'Kies de kleur om het uiterlijk van alle openbare pagina\'s te bepalen.',
+        'pine' => 'Den',
         'crimson' => 'Crimson',
         'amber' => 'Amber',
-        'lake' => 'Lake',
+        'lake' => 'Meer',
         'jacaranda' => 'Jacaranda',
         'onyx' => 'Onyx',
-        'submit' => 'Save',
-        'setInstanceThemeSuccess' => 'Theme has been updated successfully!',
+        'submit' => 'Opslaan',
+        'setInstanceThemeSuccess' => 'Thema is succesvol bijgewerkt!',
     ],
 ];

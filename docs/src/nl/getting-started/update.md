@@ -1,5 +1,5 @@
 ---
-title: Update
+title: Bijwerken
 sidebarDepth: 3
 ---
 
@@ -64,13 +64,13 @@ Releases may come with additional update instructions (see
 
 :::
 
-## Fully Automated updates
+## Volledig geautomatiseerde updates
 
-> Coming soon... 👀
+> Binnenkort beschikbaar... 👀
 
-## Frequently asked questions (FAQ)
+## Veelgestelde vragen (FAQ)
 
-### Where can I find my Castopod version?
+### Waar kan ik mijn Castopod versie vinden?
 
 Go to your Castopod admin panel, the version is displayed on the bottom left
 corner.
@@ -80,9 +80,9 @@ file.
 
 ### I haven't updated my instance in a long time… What should I do?
 
-No problem! Just get the latest release as described above. Only, when going
-through the release instructions (4), perform them sequentially, from the oldest
-to the newest.
+Geen probleem! Krijg gewoon de laatste versie zoals hierboven beschreven. Only,
+when going through the release instructions (4), perform them sequentially, from
+the oldest to the newest.
 
 > You may want to backup your instance depending on how long you haven't updated
 > Castopod.
@@ -99,9 +99,9 @@ For example, if you're on `v1.0.0-alpha.42` and would like to upgrade to
    newest) starting with `v1.0.0-alpha.43`, `v1.0.0-alpha.44`,
    `v1.0.0-alpha.45`, …, `v1.0.0-beta.1`.
 
-3. ✨ Enjoy your fresh instance, you're all done!
+3. ✨ Geniet van je nieuwe instantie, je bent helemaal klaar!
 
-### Should I make a backup before updating?
+### Moet ik een back-up maken voordat ik update?
 
 We advise you do, so you don't lose everything if anything goes wrong!
 

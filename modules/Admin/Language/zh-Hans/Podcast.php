@@ -116,6 +116,7 @@ return [
         'premium_by_default' => '剧集必须默认设置为付费会员订阅。',
         'premium_by_default_hint' => '默认情况下，播客剧集将被标记为高级。 你仍然可以选择将某些剧集、预告片等设置为公开。',
         'op3' => '打开播客前缀项目 (OP3)',
+        'op3_link' => 'Visit your OP3 dashboard (external link)',
         'op3_hint' => '使用 OP3（一项开源且值得信赖的第三方分析服务）来评估您的分析数据。 与开源播客生态系统共享、验证和比较您的分析数据。',
         'op3_enable' => '启用 OP3 分析服务',
         'op3_enable_hint' => '出于安全原因，高级剧集的分析数据将不会与 OP3 共享。',

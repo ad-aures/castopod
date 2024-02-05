@@ -116,6 +116,7 @@ return [
         'premium_by_default' => 'Els episodis s\'han d\'establir com a prèmium de manera predeterminada',
         'premium_by_default_hint' => 'Els episodis de pòdcast es marcaran com a prèmium de manera predeterminada. Encara podreu escollir configurar alguns episodis, tràilers o bonificacions com a públics.',
         'op3' => 'Projecte obert de prefix de pòdcast (OP3)',
+        'op3_link' => 'Visit your OP3 dashboard (external link)',
         'op3_hint' => 'Valoreu les vostres dades estadístiques amb OP3, un servei d\'anàlisi de tercers de codi obert i de confiança. Compartiu, valideu i compareu les vostres dades d\'anàlisi amb l\'ecosistema de podcasting obert.',
         'op3_enable' => 'Habilita el servei d\'estadístiques OP3',
         'op3_enable_hint' => 'Per motius de seguretat, les dades d\'anàlisi dels episodis prèmium no es compartiran amb OP3.',

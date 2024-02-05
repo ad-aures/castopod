@@ -9,26 +9,26 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => "{actorDisplayName}'s comment for {episodeTitle}",
-    'back_to_comments' => 'Back to comments',
+    'title' => "Lo comentari de {actorDisplayName} per {episodeTitle}",
+    'back_to_comments' => 'Tornar als comentaris',
     'form' => [
-        'episode_message_placeholder' => 'Write a comment…',
-        'reply_to_placeholder' => 'Reply to @{actorUsername}',
-        'submit' => 'Send',
-        'submit_reply' => 'Reply',
+        'episode_message_placeholder' => 'Escriure un comentari…',
+        'reply_to_placeholder' => 'Respondre @{actorUsername}',
+        'submit' => 'Enviar',
+        'submit_reply' => 'Respondre',
     ],
     'likes' => '{numberOfLikes, plural,
-        one {# like}
-        other {# likes}
+        one {# m\'agrada}
+        other {# m\'agrada}
     }',
     'replies' => '{numberOfReplies, plural,
-        one {# reply}
-        other {# replies}
+        one {# responsa}
+        other {# responsas}
     }',
-    'like' => 'Like',
-    'reply' => 'Reply',
-    'view_replies' => 'View replies ({numberOfReplies})',
-    'block_actor' => 'Block user @{actorUsername}',
-    'block_domain' => 'Block domain @{actorDomain}',
-    'delete' => 'Delete comment',
+    'like' => 'M\'agrada',
+    'reply' => 'Respondre',
+    'view_replies' => 'Veire las responsas ({numberOfReplies})',
+    'block_actor' => 'Blocar l’utilizaire @{actorUsername}',
+    'block_domain' => 'Blocar lo domeni @{actorDomain}',
+    'delete' => 'Suprimir lo comentari',
 ];

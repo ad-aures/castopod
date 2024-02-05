@@ -31,15 +31,15 @@ return [
     'all_podcast_episodes' => 'Alle podcast afleveringen',
     'back_to_podcast' => 'Terug naar podcast',
     'preview' => [
-        'title' => 'Preview',
-        'not_published' => 'Not published',
+        'title' => 'Voorbeeld',
+        'not_published' => 'Niet gepubliceerd',
         'text' => '{publication_status, select,
-            published {This episode is not yet published.}
-            scheduled {This episode is scheduled for publication on {publication_date}.}
-            with_podcast {This episode will be published at the same time as the podcast.}
-            other {This episode is not yet published.}
+            published {Deze aflevering is nog niet gepubliceerd.}
+            scheduled {Deze aflevering is gepland voor publicatie op {publication_date}}
+            with_podcast {Deze aflevering zal op hetzelfde moment als de podcast worden gepubliceerd}
+            other {Deze aflevering is nog niet gepubliceerd.}
         }',
-        'publish' => 'Publish',
-        'publish_edit' => 'Edit publication',
+        'publish' => 'Publiceer',
+        'publish_edit' => 'Publicatie bewerken',
     ],
 ];

@@ -9,47 +9,47 @@ declare(strict_types=1);
  */
 
 return [
-    'feed' => 'RSS Podcast feed',
-    'season' => 'Season {seasonNumber}',
-    'list_of_episodes_year' => '{year} episodes ({episodeCount})',
+    'feed' => 'Flux RSS del podcast',
+    'season' => 'Sason {seasonNumber}',
+    'list_of_episodes_year' => '{year} episòdis ({episodeCount})',
     'list_of_episodes_season' =>
-        'Season {seasonNumber} episodes ({episodeCount})',
-    'no_episode' => 'No episode found!',
-    'follow' => 'Follow',
-    'followTitle' => 'Follow {actorDisplayName} on the fediverse!',
+        'Sason {seasonNumber} episòdis ({episodeCount})',
+    'no_episode' => 'Cap d’episòdi pas trobat !',
+    'follow' => 'Seguir',
+    'followTitle' => 'Seguissètz {actorDisplayName} pell fedivèrs !',
     'followers' => '{numberOfFollowers, plural,
-        one {# follower}
-        other {# followers}
+        one {# abonat}
+        other {# abonats}
     }',
     'posts' => '{numberOfPosts, plural,
-        one {# post}
-        other {# posts}
+        one {# publicacion}
+        other {# publicacions}
     }',
-    'links' => 'Links',
-    'activity' => 'Activity',
-    'episodes' => 'Episodes',
-    'episodes_title' => 'Episodes of {podcastTitle}',
-    'about' => 'About',
+    'links' => 'Ligams',
+    'activity' => 'Activitat',
+    'episodes' => 'Episòdis',
+    'episodes_title' => 'Episòdi de {podcastTitle}',
+    'about' => 'A prepaus',
     'stats' => [
-        'title' => 'Stats',
+        'title' => 'Estatisticas',
         'number_of_seasons' => '{0, plural,
-            one {# season}
-            other {# seasons}
+            one {# sason}
+            other {# sasons}
         }',
         'number_of_episodes' => '{0, plural,
-            one {# episode}
-            other {# episodes}
+            one {# episòdi}
+            other {# episòdis}
         }',
-        'first_published_at' => 'First episode published on {0, date, medium}',
+        'first_published_at' => 'Primièr episòdi publicat lo {0, date, medium}',
     ],
-    'sponsor' => 'Sponsor',
-    'funding_links' => 'Funding links for {podcastTitle}',
-    'find_on' => 'Find {podcastTitle} on',
-    'listen_on' => 'Listen on',
+    'sponsor' => 'Sosténer',
+    'funding_links' => 'Ligams de finançament per {podcastTitle}',
+    'find_on' => 'Trobatz {podcastTitle} sus',
+    'listen_on' => 'Escotar sus',
     'persons' => '{personsCount, plural,
-        one {# person}
-        other {# persons}
+        one {# persona}
+        other {# personas}
     }',
-    'persons_list' => 'Persons',
+    'persons_list' => 'Personas',
     'castopod_website' => 'Castopod (website)',
 ];

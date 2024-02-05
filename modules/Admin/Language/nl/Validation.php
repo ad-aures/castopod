@@ -12,5 +12,5 @@ return [
     'min_dims' =>
         '{field} is either not an image, or it is not wide or tall enough.',
     'is_image_ratio' =>
-        '{field} is either not an image or not of the right ratio.',
+        '{field} is geen afbeelding of niet van de juiste verhouding.',
 ];

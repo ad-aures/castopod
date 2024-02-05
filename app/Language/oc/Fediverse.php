@@ -9,29 +9,29 @@ declare(strict_types=1);
  */
 
 return [
-    'your_handle' => 'Your handle',
-    'your_handle_hint' => 'Enter the @username@domain you want to act from.',
+    'your_handle' => 'Vòstre escais-nom',
+    'your_handle_hint' => 'Picatz lo @escais@domeni amb qui volètz interagir.',
     'follow' => [
-        'label' => 'Follow',
-        'title' => 'Follow {actorDisplayName}',
-        'subtitle' => 'You are going to follow:',
-        'accountNotFound' => 'The account could not be found.',
-        'remoteFollowNotAllowed' => 'Seems like the account server does not allow remote follows…',
-        'submit' => 'Proceed to follow',
+        'label' => 'Seguir',
+        'title' => 'Seguir {actorDisplayName}',
+        'subtitle' => 'Sètz a mand de seguir :',
+        'accountNotFound' => 'Impossible de trobar lo compte.',
+        'remoteFollowNotAllowed' => 'Sembla que lo servidor del compte permet pas lo seguiment a distància…',
+        'submit' => 'Contunhar',
     ],
     'favourite' => [
-        'title' => "Favourite {actorDisplayName}'s post",
-        'subtitle' => 'You are going to favourite:',
-        'submit' => 'Proceed to favourite',
+        'title' => "Metre en favorit la publicacion de {actorDisplayName}",
+        'subtitle' => 'Sètz a mand de metre en favorit :',
+        'submit' => 'Contunhar',
     ],
     'reblog' => [
-        'title' => "Share {actorDisplayName}'s post",
-        'subtitle' => 'You are going to share:',
-        'submit' => 'Proceed to share',
+        'title' => "Partejar la publicacion de {actorDisplayName}",
+        'subtitle' => 'Sètz a mand de partejar :',
+        'submit' => 'Contunhar',
     ],
     'reply' => [
-        'title' => "Reply to {actorDisplayName}'s post",
-        'subtitle' => 'You are going to reply to:',
-        'submit' => 'Proceed to reply',
+        'title' => "Respondre a la publicacion de {actorDisplayName}",
+        'subtitle' => 'Sètz a mand de respondre a :',
+        'submit' => 'Contunhar',
     ],
 ];

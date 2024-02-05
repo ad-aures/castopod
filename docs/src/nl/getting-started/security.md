@@ -1,8 +1,8 @@
 ---
-title: Security
+title: Beveiliging
 ---
 
-# Security concerns
+# Veiligheidszorgen
 
 Castopod is built on top of [CodeIgniter4](https://codeigniter.com/), a PHP
 framework that encourages

@@ -9,12 +9,12 @@ declare(strict_types=1);
  */
 
 return [
-    'manual_config' => 'Manual configuration',
+    'manual_config' => 'Handmatige configuratie',
     'manual_config_subtitle' =>
         'Create a `.env` file with your settings and refresh the page to continue installation.',
     'form' => [
         'instance_config' => 'Instance configuration',
-        'hostname' => 'Hostname',
+        'hostname' => 'Hostnaam',
         'media_base_url' => 'Media base URL',
         'media_base_url_hint' =>
             'If you use a CDN and/or an external analytics service, you may set them here.',
@@ -28,7 +28,7 @@ return [
         'database_config_hint' =>
             'Castopod needs to connect to your MySQL (or MariaDB) database. If you do not have these required info, please contact your server administrator.',
         'db_hostname' => 'Database hostname',
-        'db_name' => 'Database name',
+        'db_name' => 'Databasenaam',
         'db_username' => 'Database username',
         'db_password' => 'Database password',
         'db_prefix' => 'Database prefix',
@@ -39,16 +39,16 @@ return [
             'Choose your preferred cache handler. Leave it as the default value if you have no clue what it means.',
         'cache_handler' => 'Cache handler',
         'cacheHandlerOptions' => [
-            'file' => 'File',
+            'file' => 'Bestand',
             'redis' => 'Redis',
             'predis' => 'Predis',
         ],
-        'next' => 'Next',
-        'submit' => 'Finish install',
+        'next' => 'Volgende',
+        'submit' => 'Installatie voltooien',
         'create_superadmin' => 'Create your superadmin account',
-        'email' => 'Email',
-        'username' => 'Username',
-        'password' => 'Password',
+        'email' => 'E-mail',
+        'username' => 'Gebruikersnaam',
+        'password' => 'Wachtwoord',
     ],
     'messages' => [
         'createSuperAdminSuccess' =>

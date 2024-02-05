@@ -9,13 +9,13 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => "{actorDisplayName}'s comment for {episodeTitle}",
-    'back_to_comments' => 'Back to comments',
+    'title' => "{actorDisplayName} の {episodeTitle} へのコメント",
+    'back_to_comments' => 'コメントに戻る',
     'form' => [
-        'episode_message_placeholder' => 'Write a comment…',
-        'reply_to_placeholder' => 'Reply to @{actorUsername}',
-        'submit' => 'Send',
-        'submit_reply' => 'Reply',
+        'episode_message_placeholder' => 'コメントを書く...',
+        'reply_to_placeholder' => '@{actorUsername} に返信',
+        'submit' => '送信',
+        'submit_reply' => '返信する',
     ],
     'likes' => '{numberOfLikes, plural,
         one {# like}
@@ -25,10 +25,10 @@ return [
         one {# reply}
         other {# replies}
     }',
-    'like' => 'Like',
-    'reply' => 'Reply',
+    'like' => 'いいね',
+    'reply' => '返信する',
     'view_replies' => 'View replies ({numberOfReplies})',
     'block_actor' => 'Block user @{actorUsername}',
     'block_domain' => 'Block domain @{actorDomain}',
-    'delete' => 'Delete comment',
+    'delete' => 'コメントを削除する',
 ];

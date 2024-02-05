@@ -34,7 +34,7 @@ return [
         'email' => 'E-mail',
         'expiration_date' => 'Vervaldatum',
         'expiration_date_hint' => 'De datum en tijd waarop het abonnement verloopt. Laat leeg voor een onbeperkt abonnement.',
-        'submit_create' => 'Create subscription',
+        'submit_create' => 'Abonnement aanmaken',
         'submit_edit' => 'Bewerk abonnement',
     ],
     'form_link_add' => [

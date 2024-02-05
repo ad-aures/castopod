@@ -20,8 +20,8 @@ return [
     'form' => [
         'title' => 'New soundbite',
         'soundbite_title' => 'Soundbite title',
-        'start_time' => 'Start at',
-        'duration' => 'Duration',
+        'start_time' => 'Begintijd',
+        'duration' => 'Duur',
         'submit' => 'Create soundbite',
     ],
     'play' => 'Play soundbite',

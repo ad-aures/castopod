@@ -116,6 +116,7 @@ return [
         'premium_by_default' => 'Avsnitt måste anges som premium som standard',
         'premium_by_default_hint' => 'Podcast avsnitt kommer att markeras som premium som standard. Du kan fortfarande välja att ställa in några avsnitt, trailers eller bonusar som offentliga.',
         'op3' => 'Open Podcast Prefix Project (OP3)',
+        'op3_link' => 'Visit your OP3 dashboard (external link)',
         'op3_hint' => 'Value your analytics data with OP3, an open-source and trusted third party analytics service. Share, validate and compare your analytics data with the open podcasting ecosystem.',
         'op3_enable' => 'Enable OP3 analytics service',
         'op3_enable_hint' => 'For security reasons, premium episodes\' analytics data will not be shared with OP3.',
