@@ -219,6 +219,7 @@ class PodcastController extends BaseController
             'is_owner_email_removed_from_feed' => $this->request->getPost('is_owner_email_removed_from_feed') === 'yes',
             'publisher'                        => $this->request->getPost('publisher'),
             'type'                             => $this->request->getPost('type'),
+            'medium'                           => $this->request->getPost('medium'),
             'copyright'                        => $this->request->getPost('copyright'),
             'location'                         => $this->request->getPost('location_name') === '' ? null : new Location(
                 $this->request->getPost('location_name')
@@ -314,6 +315,7 @@ class PodcastController extends BaseController
         $this->podcast->owner_name = $this->request->getPost('owner_name');
         $this->podcast->owner_email = $this->request->getPost('owner_email');
         $this->podcast->type = $this->request->getPost('type');
+        $this->podcast->medium = $this->request->getPost('medium');
         $this->podcast->copyright = $this->request->getPost('copyright');
         $this->podcast->location = $this->request->getPost('location_name') === '' ? null : new Location(
             $this->request->getPost('location_name')

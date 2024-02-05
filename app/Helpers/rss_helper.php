@@ -74,6 +74,8 @@ if (! function_exists('get_rss_feed')) {
         $channel->addChild('title', $podcast->title, null, false);
         $channel->addChildWithCDATA('description', $podcast->description_html);
 
+        $channel->addChild('medium', $podcast->medium, $podcastNamespace);
+
         $itunesImage = $channel->addChild('image', null, $itunesNamespace);
 
         $itunesImage->addAttribute('href', $podcast->cover->feed_url);

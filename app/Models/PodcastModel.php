@@ -51,6 +51,7 @@ class PodcastModel extends Model
         'is_owner_email_removed_from_feed',
         'publisher',
         'type',
+        'medium',
         'copyright',
         'imported_feed_url',
         'new_feed_url',

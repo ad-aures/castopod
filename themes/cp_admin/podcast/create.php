@@ -56,6 +56,26 @@
             isChecked="false" ><?= lang('Podcast.form.type.serial') ?></Forms.RadioButton>
     </div>
 </fieldset>
+<fieldset>
+    <legend><?= lang('Podcast.form.medium.label') ?></legend>
+    <div class="flex gap-2">
+        <Forms.RadioButton
+            value="podcast"
+            name="medium"
+            hint="<?= esc(lang('Podcast.form.medium.podcast_hint')) ?>"
+            isChecked="true" ><?= lang('Podcast.form.medium.podcast') ?></Forms.RadioButton>
+        <Forms.RadioButton
+            value="music"
+            name="medium"
+            hint="<?= esc(lang('Podcast.form.medium.music_hint')) ?>"
+            isChecked="false" ><?= lang('Podcast.form.medium.music') ?></Forms.RadioButton>
+        <Forms.RadioButton
+            value="audiobook"
+            name="medium"
+            hint="<?= esc(lang('Podcast.form.medium.audiobook_hint')) ?>"
+            isChecked="false" ><?= lang('Podcast.form.medium.audiobook') ?></Forms.RadioButton>
+    </div>
+</fieldset>
 </Forms.Section>
 
 <Forms.Section
