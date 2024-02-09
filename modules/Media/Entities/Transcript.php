@@ -76,16 +76,25 @@ class Transcript extends BaseMedia
 
     private function saveJsonTranscript(): void
     {
-        $srtContent = file_get_contents($this->file->getRealPath());
+        $transcriptContent = file_get_contents($this->file->getRealPath());
 
         $transcriptParser = new TranscriptParser();
 
-        if ($srtContent === false) {
+        if ($transcriptContent === false) {
             throw new Exception('Could not read transcript file at ' . $this->file->getRealPath());
         }
 
-        $transcriptJson = $transcriptParser->loadString($srtContent)
-            ->parseSrt();
+        $transcript_format = $this->file->getExtension();
+        switch ($transcript_format) {
+            case 'vtt':
+                $transcriptJson = $transcriptParser->loadString($transcriptContent)
+                    ->parseVtt();
+                break;
+            case 'srt':
+            default:
+                $transcriptJson = $transcriptParser->loadString($transcriptContent)
+                    ->parseSrt();
+        }
 
         $tempFilePath = WRITEPATH . 'uploads/' . $this->file->getRandomName();
         file_put_contents($tempFilePath, $transcriptJson);

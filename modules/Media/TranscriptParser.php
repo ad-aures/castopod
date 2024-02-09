@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Generates and renders a breadcrumb based on the current url segments
+ * Converts a SRT or VTT file to JSON
  *
  * @copyright  2022 Ad Aures
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -107,9 +107,114 @@ class TranscriptParser
         return $jsonString;
     }
 
+    public function parseVtt(): string
+    {
+        if (! defined('VTT_STATE_HEADER')) {
+            define('VTT_STATE_HEADER', 0);
+        }
+
+        if (! defined('VTT_STATE_BLANK')) {
+            define('VTT_STATE_BLANK', 1);
+        }
+
+        if (! defined('VTT_STATE_TIME')) {
+            define('VTT_STATE_TIME', 2);
+        }
+
+        if (! defined('VTT_STATE_TEXT')) {
+            define('VTT_STATE_TEXT', 3);
+        }
+
+        $subs = [];
+        $state = VTT_STATE_HEADER;
+        $subNum = 0;
+        $subText = '';
+        $subTime = '';
+
+        $lines = explode(PHP_EOL, $this->transcriptContent);
+        // add a newline as last item, if it isn't already a newline
+        if ($lines[array_key_last($lines)] !== '') {
+            $lines[] = PHP_EOL;
+        }
+
+        foreach ($lines as $line) {
+            switch ($state) {
+                case VTT_STATE_HEADER:
+                    $state = VTT_STATE_BLANK;
+                    break;
+
+                case VTT_STATE_BLANK:
+                    $state = VTT_STATE_TIME;
+                    break;
+
+                case VTT_STATE_TIME:
+                    $subTime = trim($line);
+                    $state = VTT_STATE_TEXT;
+                    break;
+
+                case VTT_STATE_TEXT:
+                    if (trim($line) === '') {
+                        $sub = new stdClass();
+                        $sub->number = $subNum;
+                        [$startTime, $endTime] = explode(' --> ', $subTime);
+                        $sub->startTime = $this->getSecondsFromVTTTimeString($startTime);
+                        $sub->endTime = $this->getSecondsFromVTTTimeString($endTime);
+                        $sub->text = trim($subText);
+                        if ($subSpeaker !== '') {
+                            $sub->speaker = trim((string) $subSpeaker);
+                        }
+
+                        $subText = '';
+                        $state = VTT_STATE_TIME;
+                        $subs[] = $sub;
+                        ++$subNum;
+                    } elseif ($subText !== '') {
+                        $subText .= PHP_EOL . $line;
+                    } else {
+                        /** VTT includes a lot of information on the spoken line
+                         * An example may look like this:
+                         * <v.loud.top John>So this is it
+                         * We need to break this down into it's components, namely:
+                         * 1. The actual words for the caption
+                         * 2. Who is speaking
+                         * 3. Any styling cues encoded in the VTT (which we dump)
+                         * More information: https://www.w3.org/TR/webvtt1/
+                         */
+                        $vtt_speaker_pattern = '/^<.*>/';
+                        $removethese = ['<', '>'];
+                        preg_match($vtt_speaker_pattern, $line, $matches);
+                        if (isset($matches[0])) {
+                            $subVoiceCue = explode(' ', str_replace($removethese, '', $matches[0]));
+                            $subSpeaker = $subVoiceCue[1];
+                        } else {
+                            $subSpeaker = '';
+                        }
+
+                        $subText .= preg_replace($vtt_speaker_pattern, '', $line);
+                    }
+
+                    break;
+            }
+        }
+
+        $jsonString = json_encode($subs, JSON_PRETTY_PRINT);
+
+        if (! $jsonString) {
+            throw new Exception('Failed to parse VTT to JSON.');
+        }
+
+        return $jsonString;
+    }
+
     private function getSecondsFromTimeString(string $timeString): float
     {
         $timeString = explode(',', $timeString);
+        return (strtotime($timeString[0]) - strtotime('TODAY')) + (float) "0.{$timeString[1]}";
+    }
+
+    private function getSecondsFromVTTTimeString(string $timeString): float
+    {
+        $timeString = explode('.', $timeString);
         return (strtotime($timeString[0]) - strtotime('TODAY')) + (float) "0.{$timeString[1]}";
     }
 }

@@ -197,7 +197,7 @@
                 </div>
             <?php endif; ?>
             <Forms.Label class="sr-only" for="transcript_file" isOptional="true"><?= lang('Episode.form.transcript_file') ?></Forms.Label>
-            <Forms.Input class="w-full" name="transcript_file" type="file" accept=".txt,.html,.srt,.json" />
+            <Forms.Input class="w-full" name="transcript_file" type="file" accept=".srt,.vtt" />
         </section>
         <section id="transcript-file-remote-url" class="tab-panel">
             <Forms.Label class="sr-only" for="transcript_remote_url" isOptional="true"><?= lang('Episode.form.transcript_remote_url') ?></Forms.Label>
