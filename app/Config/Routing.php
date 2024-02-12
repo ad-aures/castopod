@@ -28,7 +28,6 @@ class Routing extends BaseRouting
         ROOTPATH . 'modules/Auth/Config/Routes.php',
         ROOTPATH . 'modules/Fediverse/Config/Routes.php',
         ROOTPATH . 'modules/Install/Config/Routes.php',
-        ROOTPATH . 'modules/Media/Config/Routes.php',
         ROOTPATH . 'modules/PodcastImport/Config/Routes.php',
         ROOTPATH . 'modules/PremiumPodcasts/Config/Routes.php',
     ];
