@@ -21,6 +21,7 @@ use App\Models\PostModel;
 use CodeIgniter\Entity\Entity;
 use CodeIgniter\Files\File;
 use CodeIgniter\HTTP\Files\UploadedFile;
+use CodeIgniter\HTTP\URI;
 use CodeIgniter\I18n\Time;
 use Config\Images;
 use Exception;
@@ -30,6 +31,7 @@ use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
 use League\CommonMark\Extension\DisallowedRawHtml\DisallowedRawHtmlExtension;
 use League\CommonMark\Extension\SmartPunct\SmartPunctExtension;
 use League\CommonMark\MarkdownConverter;
+use Modules\Analytics\OP3;
 use Modules\Media\Entities\Audio;
 use Modules\Media\Entities\Chapters;
 use Modules\Media\Entities\Image;
@@ -344,7 +346,26 @@ class Episode extends Entity
 
     public function getAudioUrl(): string
     {
-        return url_to('episode-audio', $this->getPodcast()->handle, $this->slug, $this->getAudio()->file_extension);
+        $audioURL = url_to(
+            'episode-audio',
+            $this->getPodcast()
+->handle,
+            $this->slug,
+            $this->getAudio()
+->file_extension
+        );
+
+        // Wrap episode url with OP3 if episode is public and OP3 is enabled on this podcast
+        if (! $this->is_premium && service('settings')->get(
+            'Analytics.enableOP3',
+            'podcast:' . $this->podcast_id
+        )) {
+            $op3 = new OP3(config('Analytics')->OP3);
+
+            return $op3->wrap($audioURL, $this);
+        }
+
+        return $audioURL;
     }
 
     public function getAudioWebUrl(): string

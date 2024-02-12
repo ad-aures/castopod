@@ -20,6 +20,7 @@ use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
+use CodeIgniter\HTTP\URI;
 use Config\Services;
 use Modules\Analytics\Config\Analytics;
 use Modules\PremiumPodcasts\Entities\Subscription;
@@ -166,6 +167,18 @@ class EpisodeAudioController extends Controller
             $subscription instanceof Subscription ? $subscription->id : null
         );
 
-        return redirect()->to($this->analyticsConfig->getAudioUrl($this->episode, $this->request->getGet()));
+        $audioFileURI = new URI(service('file_manager')->getUrl($this->episode->audio->file_key));
+
+        $queryParams = [];
+        foreach ($this->request->getGet() as $key => $value) {
+            // do not include token in query params
+            if ($key !== 'token') {
+                $queryParams[$key] = $value;
+            }
+        }
+
+        $audioFileURI->setQueryArray($queryParams);
+
+        return redirect()->to((string) $audioFileURI);
     }
 }

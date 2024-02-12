@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace Modules\Analytics;
 
 use App\Entities\Episode;
-use CodeIgniter\HTTP\URI;
 
 class OP3
 {
@@ -25,11 +24,11 @@ class OP3
         $this->host = rtrim($config['host'], '/');
     }
 
-    public function wrap(URI $audioURI, Episode $episode): string
+    public function wrap(string $audioURL, Episode $episode): string
     {
-        // remove scheme from audioURI
-        $audioURI->setScheme('');
+        // remove scheme from audioURI if https
+        $audioURIWithoutHTTPS = preg_replace('(^https://)', '', $audioURL);
 
-        return $this->host . '/e,pg=' . $episode->podcast->guid . '/' . $audioURI;
+        return $this->host . '/e,pg=' . $episode->podcast->guid . '/' . $audioURIWithoutHTTPS;
     }
 }
