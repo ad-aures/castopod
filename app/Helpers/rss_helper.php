@@ -338,6 +338,12 @@ if (! function_exists('get_rss_feed')) {
                 $item->addChild('season', (string) $episode->season_number, $itunesNamespace);
             $item->addChild('episodeType', $episode->type, $itunesNamespace);
 
+            // add podcast namespace tags for season and episode
+            $episode->season_number &&
+                $item->addChild('season', (string) $episode->season_number, $podcastNamespace);
+            $episode->number &&
+                $item->addChild('episode', (string) $episode->number, $podcastNamespace);
+
             // add link to episode comments as podcast-activity format
             $comments = $item->addChild('comments', null, $podcastNamespace);
             $comments->addAttribute('uri', url_to('episode-comments', $podcast->handle, $episode->slug));
