@@ -101,7 +101,7 @@ class Location extends Entity
             ],
         );
 
-        $places = json_decode($response->getBody(), false, 512, JSON_THROW_ON_ERROR);
+        $places = json_decode((string) $response->getBody(), false, 512, JSON_THROW_ON_ERROR);
 
         if ($places === []) {
             return $this;

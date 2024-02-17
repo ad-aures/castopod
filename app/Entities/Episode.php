@@ -546,7 +546,7 @@ class Episode extends Entity
     {
         if ($this->description === null) {
             $this->description = trim(
-                preg_replace('~\s+~', ' ', strip_tags((string) $this->attributes['description_html'])),
+                (string) preg_replace('~\s+~', ' ', strip_tags((string) $this->attributes['description_html'])),
             );
         }
 
@@ -670,7 +670,7 @@ class Episode extends Entity
     public function getPartnerLink(?string $serviceSlug = null): string
     {
         $partnerLink =
-            rtrim($this->getPodcast()->partner_link_url, '/') .
+            rtrim((string) $this->getPodcast()->partner_link_url, '/') .
             '?pid=' .
             $this->getPodcast()
                 ->partner_id .
@@ -686,7 +686,7 @@ class Episode extends Entity
 
     public function getPartnerImageUrl(string $serviceSlug = null): string
     {
-        return rtrim($this->getPodcast()->partner_image_url, '/') .
+        return rtrim((string) $this->getPodcast()->partner_image_url, '/') .
             '?pid=' .
             $this->getPodcast()
                 ->partner_id .

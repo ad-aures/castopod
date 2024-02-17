@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use App\Entities\Actor;
-
 use App\Entities\Episode;
 use App\Entities\EpisodeComment;
 use App\Entities\Page;

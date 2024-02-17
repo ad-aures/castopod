@@ -6,8 +6,8 @@ sidebarDepth: 2
 
 [![release-badge]][release]&nbsp;[![license-badge]][license]&nbsp;[![contributions-badge]][contributions]&nbsp;[![semantic-release-badge]][semantic-release]&nbsp;[![crowdin-badge]][crowdin]&nbsp;[![discord-badge]][discord]&nbsp;[![stars-badge]][stars]
 
-Castopod 是一个免费的开源播客托管平台，为那些想要和听众接触与互动的播客们制作的
-。
+Castopod 是一个免费的开源播客托管平台，为那些想要和听众接触与互动的播客们制作
+的。
 
 Castopod 易于安装，并使用 [CodeIgniter4](https://codeigniter.com/) 构建， 这是一
 个强大的 PHP 框架，并且占用极小。
@@ -59,8 +59,8 @@ Castopod 易于安装，并使用 [CodeIgniter4](https://codeigniter.com/) 构�
 
 事实上，它是唯一长期保持这种状态的媒体之一。
 
-随着习惯的发展，越来越多的人开始接触播客：允许创作者寻找新的方式来分享他们的想法
-，或是让听众获得更好的内容。
+随着习惯的发展，越来越多的人开始接触播客：允许创作者寻找新的方式来分享他们的想
+法，或是让听众获得更好的内容。
 
 随着播客的使用越来越广泛，一些公司正试图控制播客与集中化。
 
@@ -93,13 +93,13 @@ CMS，可以帮助你在线访问任何类型的网站。
 
 还拥有对播客的独特优化：从播客的创建和新剧集的发布一直到广播，营销和分析。
 
-最后，根据你的需要，Wordpress 和 Castopod 甚至可以共存，因为他们有相同的配置环境
-！
+最后，根据你的需要，Wordpress 和 Castopod 甚至可以共存，因为他们有相同的配置环
+境！
 
 ### Castopod 对比 Funkwhale
 
-Funkwhale 是一个自托管、现代界面、免费开源的音乐服务器。 就像 Castopod 一样
-，Funkwhale 也位于联邦宇宙中，这是一个去中心化的社交网络，允许两者的互联。
+Funkwhale 是一个自托管、现代界面、免费开源的音乐服务器。 就像 Castopod 一
+样，Funkwhale 也位于联邦宇宙中，这是一个去中心化的社交网络，允许两者的互联。
 
 Funkwhale 最初是围绕音乐制作的。 后来，随着项目的发展，引入了托管播客的能力。
 

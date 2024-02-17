@@ -15,7 +15,6 @@ use Modules\Media\Entities\Image;
  * @link       https://castopod.org/
  */
 
-
 if (! function_exists('get_browser_language')) {
     /**
      * Gets the browser default language using the request header key `HTTP_ACCEPT_LANGUAGE`. Returns Castopod's default
@@ -82,7 +81,6 @@ if (! function_exists('format_duration')) {
     }
 }
 
-
 if (! function_exists('format_duration_symbol')) {
     /**
      * Formats duration in seconds to an hh(h) mm(min) ss(s) string. Doesn't show leading zeros if any.
@@ -130,7 +128,6 @@ if (! function_exists('generate_random_salt')) {
 }
 
 //--------------------------------------------------------------------
-
 
 if (! function_exists('file_upload_max_size')) {
     /**
@@ -192,7 +189,6 @@ if (! function_exists('format_bytes')) {
     }
 }
 
-
 if (! function_exists('get_site_icon_url')) {
     function get_site_icon_url(string $size): string
     {
@@ -204,7 +200,6 @@ if (! function_exists('get_site_icon_url')) {
         return service('file_manager')->getUrl(service('settings')->get('App.siteIcon')[$size]);
     }
 }
-
 
 if (! function_exists('get_podcast_banner')) {
     function get_podcast_banner_url(Podcast $podcast, string $size): string

@@ -82,7 +82,7 @@ class ActivityRequest
         $date = Time::now('GMT')->format('D, d M Y H:i:s T');
         $digest = 'SHA-256=' . base64_encode($this->getBodyDigest());
         $contentType = $this->options['headers']['Content-Type'];
-        $contentLength = (string) strlen($this->request->getBody());
+        $contentLength = (string) strlen((string) $this->request->getBody());
         $userAgent = 'Castopod/' . CP_VERSION . '; +' . base_url('', 'https');
 
         $plainText = "(request-target): post {$path}\nhost: {$host}\ndate: {$date}\ndigest: {$digest}\ncontent-type: {$contentType}\ncontent-length: {$contentLength}\nuser-agent: {$userAgent}";
@@ -112,6 +112,6 @@ class ActivityRequest
 
     protected function getBodyDigest(): string
     {
-        return hash('sha256', $this->request->getBody(), true);
+        return hash('sha256', (string) $this->request->getBody(), true);
     }
 }

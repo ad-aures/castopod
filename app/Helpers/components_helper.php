@@ -467,7 +467,6 @@ if (! function_exists('local_date')) {
     }
 }
 
-
 // ------------------------------------------------------------------------
 
 if (! function_exists('explicit_badge')) {
@@ -485,7 +484,6 @@ if (! function_exists('explicit_badge')) {
 }
 
 // ------------------------------------------------------------------------
-
 
 if (! function_exists('category_label')) {
     function category_label(Category $category): string

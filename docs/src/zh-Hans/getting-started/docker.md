@@ -14,8 +14,8 @@ Castopod 在其自动构建期间会将 3 个 Docker 映像推送到 Docker Hub 
 - [**`castopod/web-server`**](https://hub.docker.com/r/castopod/web-server)：Castopod
   的 Nginx 配置
 
-此外，Castopod 需要一个与 MySQL 兼容的数据库。 Redis 数据库 可以添加为缓存处理器
-。
+此外，Castopod 需要一个与 MySQL 兼容的数据库。 Redis 数据库 可以添加为缓存处理
+器。
 
 ## 目前支持的标签
 

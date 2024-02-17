@@ -10,7 +10,6 @@ declare(strict_types=1);
 use App\Entities\Category;
 use App\Entities\Location;
 use App\Entities\Podcast;
-
 use App\Libraries\SimpleRSSElement;
 use CodeIgniter\I18n\Time;
 use Config\Mimes;
@@ -164,15 +163,15 @@ if (! function_exists('get_rss_feed')) {
                 $socialSignUpelement->addAttribute('priority', '1');
                 $socialSignUpelement->addAttribute(
                     'homeUrl',
-                    parse_url($socialPlatform->link_url, PHP_URL_SCHEME) . '://' . parse_url(
-                        $socialPlatform->link_url,
+                    parse_url((string) $socialPlatform->link_url, PHP_URL_SCHEME) . '://' . parse_url(
+                        (string) $socialPlatform->link_url,
                         PHP_URL_HOST
                     ) . '/public'
                 );
                 $socialSignUpelement->addAttribute(
                     'signUpUrl',
-                    parse_url($socialPlatform->link_url, PHP_URL_SCHEME) . '://' . parse_url(
-                        $socialPlatform->link_url,
+                    parse_url((string) $socialPlatform->link_url, PHP_URL_SCHEME) . '://' . parse_url(
+                        (string) $socialPlatform->link_url,
                         PHP_URL_HOST
                     ) . '/auth/sign_up'
                 );
@@ -184,15 +183,15 @@ if (! function_exists('get_rss_feed')) {
                 $castopodSocialSignUpelement->addAttribute('priority', '1');
                 $castopodSocialSignUpelement->addAttribute(
                     'homeUrl',
-                    parse_url($socialPlatform->link_url, PHP_URL_SCHEME) . '://' . parse_url(
-                        $socialPlatform->link_url,
+                    parse_url((string) $socialPlatform->link_url, PHP_URL_SCHEME) . '://' . parse_url(
+                        (string) $socialPlatform->link_url,
                         PHP_URL_HOST
                     ) . '/public'
                 );
                 $castopodSocialSignUpelement->addAttribute(
                     'signUpUrl',
-                    parse_url($socialPlatform->link_url, PHP_URL_SCHEME) . '://' . parse_url(
-                        $socialPlatform->link_url,
+                    parse_url((string) $socialPlatform->link_url, PHP_URL_SCHEME) . '://' . parse_url(
+                        (string) $socialPlatform->link_url,
                         PHP_URL_HOST
                     ) . '/auth/sign_up'
                 );

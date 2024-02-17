@@ -104,7 +104,8 @@ export class PlaySoundbite extends LitElement {
 
     button:focus {
       outline: none;
-      box-shadow: 0 0 0 2px hsl(var(--color-background-base)),
+      box-shadow:
+        0 0 0 2px hsl(var(--color-background-base)),
         0 0 0 4px hsl(var(--color-accent-base));
     }
 
@@ -163,31 +164,31 @@ export class PlaySoundbite extends LitElement {
             ></path>
           </svg>`
         : this._isPlaying
-        ? html`<svg
-            class="animate-spin"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            width="1em"
-            height="1em"
-          >
-            <g>
+          ? html`<svg
+              class="animate-spin"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              width="1em"
+              height="1em"
+            >
+              <g>
+                <path fill="none" d="M0 0h24v24H0z" />
+                <path
+                  d="M13 9.17A3 3 0 1 0 15 12V2.458c4.057 1.274 7 5.064 7 9.542 0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2c.337 0 .671.017 1 .05v7.12z"
+                />
+              </g>
+            </svg>`
+          : html`<svg
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              width="1em"
+              height="1em"
+            >
               <path fill="none" d="M0 0h24v24H0z" />
               <path
-                d="M13 9.17A3 3 0 1 0 15 12V2.458c4.057 1.274 7 5.064 7 9.542 0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2c.337 0 .671.017 1 .05v7.12z"
+                d="M7.752 5.439l10.508 6.13a.5.5 0 0 1 0 .863l-10.508 6.13A.5.5 0 0 1 7 18.128V5.871a.5.5 0 0 1 .752-.432z"
               />
-            </g>
-          </svg>`
-        : html`<svg
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            width="1em"
-            height="1em"
-          >
-            <path fill="none" d="M0 0h24v24H0z" />
-            <path
-              d="M7.752 5.439l10.508 6.13a.5.5 0 0 1 0 .863l-10.508 6.13A.5.5 0 0 1 7 18.128V5.871a.5.5 0 0 1 .752-.432z"
-            />
-          </svg>`}
+            </svg>`}
     </button>`;
   }
 }

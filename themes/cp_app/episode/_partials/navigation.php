@@ -38,7 +38,6 @@ if ($episode->publication_status === 'published') {
     ];
 }
 
-
 ?>
 <nav class="sticky z-40 flex col-start-2 pt-4 shadow bg-elevated md:px-8 gap-x-2 md:gap-x-4 -top-4 rounded-conditional-b-xl">
     <?php foreach ($navigationItems as $item): ?>

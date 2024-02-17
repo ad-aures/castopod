@@ -4,7 +4,9 @@
   position: relative;
   width: 12.5em;
   height: 5.25em;
-  font: 1em/1 arial, sans-serif;
+  font:
+    1em/1 arial,
+    sans-serif;
 }
 
 [type="range"] {

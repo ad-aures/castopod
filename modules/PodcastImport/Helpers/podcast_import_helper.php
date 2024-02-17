@@ -11,7 +11,6 @@ use Modules\PodcastImport\Entities\TaskStatus;
  * @link       https://castopod.org/
  */
 
-
 if (! function_exists('get_import_tasks')) {
     /**
      * @return PodcastImportTask[]

@@ -16,7 +16,6 @@ use App\Entities\Episode;
 use App\Entities\Podcast;
 use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
-
 use CodeIgniter\Database\Seeder;
 use Exception;
 

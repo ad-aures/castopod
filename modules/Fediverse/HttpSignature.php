@@ -73,7 +73,7 @@ class HttpSignature
         }
 
         // compute body digest and compare with header digest
-        $bodyDigest = hash('sha256', $this->request->getBody(), true);
+        $bodyDigest = hash('sha256', (string) $this->request->getBody(), true);
         $digest = 'SHA-256=' . base64_encode($bodyDigest);
         if ($digest !== $digestHeader->getValue()) {
             throw new Exception('Request digest is incorrect.');
@@ -99,7 +99,7 @@ class HttpSignature
         // Fetch the public key linked from keyId
         $actorRequest = new ActivityRequest($keyId);
         $actorResponse = $actorRequest->get();
-        $actor = json_decode($actorResponse->getBody(), false, 512, JSON_THROW_ON_ERROR);
+        $actor = json_decode((string) $actorResponse->getBody(), false, 512, JSON_THROW_ON_ERROR);
 
         $publicKeyPem = (string) $actor->publicKey->publicKeyPem;
 

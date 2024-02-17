@@ -66,7 +66,7 @@ class Router extends CodeIgniterRouter
                     }, (string) (is_array($handler) ? key($handler) : $handler));
 
                     throw new RedirectException(
-                        preg_replace('#^' . $routeKey . '$#u', $redirectTo, $uri),
+                        preg_replace('#^' . $routeKey . '$#u', (string) $redirectTo, $uri),
                         $this->collection->getRedirectCode($routeKey)
                     );
                 }

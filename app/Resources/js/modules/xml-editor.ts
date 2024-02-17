@@ -97,7 +97,8 @@ export class XMLEditor extends LitElement {
     }
     .cm-editor.cm-focused {
       outline: 2px solid transparent;
-      box-shadow: 0 0 0 2px hsl(var(--color-background-elevated)),
+      box-shadow:
+        0 0 0 2px hsl(var(--color-background-elevated)),
         0 0 0 calc(4px) hsl(var(--color-accent-base));
     }
     .cm-gutters {

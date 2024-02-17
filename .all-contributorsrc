@@ -3,10 +3,7 @@
   "projectOwner": "adaures",
   "repoType": "gitlab",
   "repoHost": "https://code.castopod.org",
-  "files": [
-    "README.md",
-    "docs/src/index.md"
-  ],
+  "files": ["README.md", "docs/src/index.md"],
   "imageSize": 100,
   "commit": false,
   "contributorsPerLine": 7,
@@ -100,24 +97,14 @@
       "name": "Lyonel Bernard",
       "avatar_url": "https://castopod.org/assets/images/castopod-avatar.jpg",
       "profile": "https://twitter.com/lyonelbernard",
-      "contributions": [
-        "bug",
-        "question",
-        "audio",
-        "ideas"
-      ]
+      "contributions": ["bug", "question", "audio", "ideas"]
     },
     {
       "login": "ctlw83",
       "name": "Christopher Lagonick-Weitzel",
       "avatar_url": "https://secure.gravatar.com/avatar/7c2a721b52d0763673a600e8f01bd745?s=80&d=identicon",
       "profile": "https://www.crypticchameleon.com/",
-      "contributions": [
-        "bug",
-        "question",
-        "audio",
-        "ideas"
-      ]
+      "contributions": ["bug", "question", "audio", "ideas"]
     },
     {
       "login": "ernestoacostame",
@@ -154,19 +141,14 @@
       "name": "Bastien Luneteau",
       "avatar_url": "https://secure.gravatar.com/avatar/ad63ee8ef8e3db8253d21e5012d2724f?s=80&d=identicon",
       "profile": "https://code.castopod.org/Behel",
-      "contributions": [
-        "code",
-        "bug"
-      ]
+      "contributions": ["code", "bug"]
     },
     {
       "login": "cecillie",
       "name": "Cécile Ricordeau",
       "avatar_url": "https://castopod.org/assets/images/castopod-avatar.jpg",
       "profile": "https://www.cecillie.fr/",
-      "contributions": [
-        "design"
-      ]
+      "contributions": ["design"]
     },
     {
       "login": "PatrykMis",
@@ -185,48 +167,35 @@
       "name": "Marcin Lewandowski",
       "avatar_url": "https://secure.gravatar.com/avatar/eed8337939641eac5ad0b570bd6acf96?s=80&d=identicon",
       "profile": "https://code.castopod.org/mspanc",
-      "contributions": [
-        "bug",
-        "ideas"
-      ]
+      "contributions": ["bug", "ideas"]
     },
     {
       "login": "SJanik",
       "name": "Sebastian Janik",
       "avatar_url": "https://castopod.org/assets/images/castopod-avatar.jpg",
       "profile": "https://code.castopod.org/SJanik",
-      "contributions": [
-        "code"
-      ]
+      "contributions": ["code"]
     },
     {
       "login": "patryk",
       "name": "Patryk Karczmarczyk",
       "avatar_url": "https://castopod.org/assets/images/castopod-avatar.jpg",
       "profile": "https://code.castopod.org/patryk",
-      "contributions": [
-        "code"
-      ]
+      "contributions": ["code"]
     },
     {
       "login": "ddenis",
       "name": "denis d",
       "avatar_url": "https://castopod.org/assets/images/castopod-avatar.jpg",
       "profile": "https://code.castopod.org/ddenis",
-      "contributions": [
-        "bug",
-        "ideas"
-      ]
+      "contributions": ["bug", "ideas"]
     },
     {
       "login": "douglaskastle",
       "name": "Douglas Kastle",
       "avatar_url": "https://secure.gravatar.com/avatar/b7e652ba4b6bcd440afa069e7f7bc9e6?s=80&d=identicon",
       "profile": "https://code.castopod.org/douglaskastle",
-      "contributions": [
-        "bug",
-        "ideas"
-      ]
+      "contributions": ["bug", "ideas"]
     },
     {
       "login": "cExplorer",
@@ -246,66 +215,49 @@
       "name": "ImaCrea",
       "avatar_url": "https://castopod.org/assets/images/castopod-avatar.jpg",
       "profile": "https://code.castopod.org/imacrea",
-      "contributions": [
-        "bug",
-        "ideas"
-      ]
+      "contributions": ["bug", "ideas"]
     },
     {
       "login": "jonas",
       "name": "Jonas S",
       "avatar_url": "https://castopod.org/assets/images/castopod-avatar.jpg",
       "profile": "https://code.castopod.org/jonas",
-      "contributions": [
-        "code"
-      ]
+      "contributions": ["code"]
     },
     {
       "login": "yannL",
       "name": "LEFEBVRE Yann",
       "avatar_url": "https://secure.gravatar.com/avatar/9c46600ce566ec6d526370d8e104b1c8?s=80&d=identicon",
       "profile": "https://code.castopod.org/yannL",
-      "contributions": [
-        "bug"
-      ]
+      "contributions": ["bug"]
     },
     {
       "login": "spaetz",
       "name": "Sebastian Späth",
       "avatar_url": "https://secure.gravatar.com/avatar/278e1af65e82993efd0ba7bbbacf6435?s=80&d=identicon",
       "profile": "https://code.castopod.org/spaetz",
-      "contributions": [
-        "bug",
-        "ideas"
-      ]
+      "contributions": ["bug", "ideas"]
     },
     {
       "login": "rocky",
       "name": "rocky III",
       "avatar_url": "https://castopod.org/assets/images/castopod-avatar.jpg",
       "profile": "https://code.castopod.org/rocky",
-      "contributions": [
-        "bug"
-      ]
+      "contributions": ["bug"]
     },
     {
       "login": "Regenpfeifer",
       "name": "Hermann Josef Eckl",
       "avatar_url": "https://code.castopod.org/uploads/-/system/user/avatar/103/avatar.png",
       "profile": "https://code.castopod.org/Regenpfeifer",
-      "contributions": [
-        "bug"
-      ]
+      "contributions": ["bug"]
     },
     {
       "login": "cyrilledel",
       "name": "Delhaye Cyrille",
       "avatar_url": "https://castopod.org/assets/images/castopod-avatar.jpg",
       "profile": "https://code.castopod.org/cyrilledel",
-      "contributions": [
-        "bug",
-        "ideas"
-      ]
+      "contributions": ["bug", "ideas"]
     },
     {
       "login": "otetranome",
@@ -493,9 +445,7 @@
       "name": "Dimitri Regnier",
       "avatar_url": "https://castopod.org/assets/images/castopod-avatar.jpg",
       "profile": "https://dimitriregnier.net/",
-      "contributions": [
-        "ideas"
-      ]
+      "contributions": ["ideas"]
     },
     {
       "login": "irithys",
@@ -610,19 +560,14 @@
       "name": "KrzysztofDomanczyk",
       "avatar_url": "https://avatars.githubusercontent.com/u/75178474?v=4",
       "profile": "https://github.com/KrzysztofDomanczyk",
-      "contributions": [
-        "code"
-      ]
+      "contributions": ["code"]
     },
     {
       "login": "NeoluxConsulting",
       "name": "Guy Martin",
       "avatar_url": "https://secure.gravatar.com/avatar/6e745565356330c1e29a85d52bffdaa1?s=80&d=identicon",
       "profile": "https://code.castopod.org/NeoluxConsulting",
-      "contributions": [
-        "bug",
-        "code"
-      ]
+      "contributions": ["bug", "code"]
     }
   ],
   "commitConvention": "none"

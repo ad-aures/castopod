@@ -206,7 +206,8 @@ export class PlayEpisodeButton extends LitElement {
 
     button:focus {
       outline: none;
-      box-shadow: 0 0 0 2px hsl(var(--color-background-base)),
+      box-shadow:
+        0 0 0 2px hsl(var(--color-background-base)),
         0 0 0 4px hsl(var(--color-accent-base));
     }
 

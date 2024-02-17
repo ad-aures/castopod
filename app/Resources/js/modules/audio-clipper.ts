@@ -685,7 +685,9 @@ export class AudioClipper extends LitElement {
       padding: 0.5rem 0.5rem 0.25rem 0.5rem;
       justify-content: space-between;
       background-color: hsl(var(--color-background-elevated));
-      box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+      box-shadow:
+        0 1px 3px 0 rgb(0 0 0 / 0.1),
+        0 1px 2px -1px rgb(0 0 0 / 0.1);
       border-radius: 0 0 0.75rem 0.75rem;
       flex-wrap: wrap;
       gap: 0.5rem;
@@ -718,7 +720,9 @@ export class AudioClipper extends LitElement {
       border-radius: 9999px;
       border: none;
       padding: 0.25rem 0.5rem;
-      box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+      box-shadow:
+        0 1px 3px 0 rgb(0 0 0 / 0.1),
+        0 1px 2px -1px rgb(0 0 0 / 0.1);
     }
 
     .toolbar button:hover {
@@ -732,9 +736,13 @@ export class AudioClipper extends LitElement {
         var(--tw-ring-offset-width) var(--tw-ring-offset-color);
       --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
         calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-      box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow),
+      box-shadow:
+        var(--tw-ring-offset-shadow),
+        var(--tw-ring-shadow),
         0 0 rgba(0, 0, 0, 0);
-      box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow),
+      box-shadow:
+        var(--tw-ring-offset-shadow),
+        var(--tw-ring-shadow),
         0 0 rgba(0, 0, 0, 0);
       box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow),
         var(--tw-shadow, 0 0 rgba(0, 0, 0, 0));
@@ -746,10 +754,27 @@ export class AudioClipper extends LitElement {
 
     .toolbar__trim-controls button {
       font-weight: 600;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI,
-        Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, BlinkMacSystemFont,
-        "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
-        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        Segoe UI,
+        Roboto,
+        Ubuntu,
+        Cantarell,
+        Noto Sans,
+        sans-serif,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        "Helvetica Neue",
+        Arial,
+        "Noto Sans",
+        sans-serif,
+        "Apple Color Emoji",
+        "Segoe UI Emoji",
+        "Segoe UI Symbol",
         "Noto Color Emoji";
     }
 
@@ -871,28 +896,28 @@ export class AudioClipper extends LitElement {
                   ></path>
                 </svg>`
               : this._isPlaying
-              ? html`<svg
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  width="1em"
-                  height="1em"
-                >
-                  <g>
+                ? html`<svg
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    width="1em"
+                    height="1em"
+                  >
+                    <g>
+                      <path fill="none" d="M0 0h24v24H0z" />
+                      <path d="M6 5h2v14H6V5zm10 0h2v14h-2V5z" />
+                    </g>
+                  </svg>`
+                : html` <svg
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    width="1em"
+                    height="1em"
+                  >
                     <path fill="none" d="M0 0h24v24H0z" />
-                    <path d="M6 5h2v14H6V5zm10 0h2v14h-2V5z" />
-                  </g>
-                </svg>`
-              : html` <svg
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  width="1em"
-                  height="1em"
-                >
-                  <path fill="none" d="M0 0h24v24H0z" />
-                  <path
-                    d="M7.752 5.439l10.508 6.13a.5.5 0 0 1 0 .863l-10.508 6.13A.5.5 0 0 1 7 18.128V5.871a.5.5 0 0 1 .752-.432z"
-                  />
-                </svg>`}
+                    <path
+                      d="M7.752 5.439l10.508 6.13a.5.5 0 0 1 0 .863l-10.508 6.13A.5.5 0 0 1 7 18.128V5.871a.5.5 0 0 1 .752-.432z"
+                    />
+                  </svg>`}
           </button>
           <div class="volume">
             <svg

@@ -34,7 +34,7 @@ if (! function_exists('get_webfinger_data')) {
         $webfingerRequest = new ActivityRequest((string) $webfingerUri);
         $webfingerResponse = $webfingerRequest->get();
 
-        return json_decode($webfingerResponse->getBody(), false, 512, JSON_THROW_ON_ERROR);
+        return json_decode((string) $webfingerResponse->getBody(), false, 512, JSON_THROW_ON_ERROR);
     }
 }
 
@@ -271,7 +271,7 @@ if (! function_exists('create_actor_from_uri')) {
     {
         $activityRequest = new ActivityRequest($actorUri);
         $actorResponse = $activityRequest->get();
-        $actorPayload = json_decode($actorResponse->getBody(), false, 512, JSON_THROW_ON_ERROR);
+        $actorPayload = json_decode((string) $actorResponse->getBody(), false, 512, JSON_THROW_ON_ERROR);
 
         $newActor = new Actor();
         $newActor->uri = $actorUri;
@@ -404,7 +404,7 @@ if (! function_exists('linkify')) {
                             ) .
                             '>';
                     },
-                    $text,
+                    (string) $text,
                 ),
                 'handle' => preg_replace_callback(
                     '~(?<!\w)@(?<username>\w++)(?:@(?<domain>(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]))?~',
@@ -460,7 +460,7 @@ if (! function_exists('linkify')) {
                                 '>';
                         }
                     },
-                    $text,
+                    (string) $text,
                 ),
                 default => preg_replace_callback(
                     '~' .
@@ -481,7 +481,7 @@ if (! function_exists('linkify')) {
                             ) .
                             '>';
                     },
-                    $text,
+                    (string) $text,
                 ),
             };
         }
@@ -492,7 +492,7 @@ if (! function_exists('linkify')) {
             static function (array $match) use (&$links): string {
                 return $links[$match[1] - 1];
             },
-            $text,
+            (string) $text,
         );
     }
 }

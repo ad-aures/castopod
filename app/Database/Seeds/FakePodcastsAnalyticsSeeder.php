@@ -19,7 +19,6 @@ use App\Models\PodcastModel;
 use CodeIgniter\Database\Seeder;
 use Exception;
 use GeoIp2\Database\Reader;
-
 use GeoIp2\Exception\AddressNotFoundException;
 
 class FakePodcastsAnalyticsSeeder extends Seeder
