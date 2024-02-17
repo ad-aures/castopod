@@ -12,6 +12,11 @@ if ($episode->publication_status === 'published') {
             'label'     => lang('Episode.activity'),
             'labelInfo' => $episode->posts_count,
         ],
+        [
+            'uri'       => route_to('episode-chapters', esc($podcast->handle), esc($episode->slug)),
+            'label'     => lang('Episode.chapters'),
+            'labelInfo' => $episode->chapters === null ? 0 : $episode->chapters->chapter_count,
+        ],
     ];
 } else {
     $navigationItems = [
@@ -25,8 +30,15 @@ if ($episode->publication_status === 'published') {
             'label'     => lang('Episode.activity'),
             'labelInfo' => $episode->posts_count,
         ],
+        [
+            'uri'       => route_to('episode-preview-chapters', $episode->preview_id),
+            'label'     => lang('Episode.chapters'),
+            'labelInfo' => $episode->chapters === null ? 0 : $episode->chapters->chapter_count,
+        ],
     ];
 }
+
+
 ?>
 <nav class="sticky z-40 flex col-start-2 pt-4 shadow bg-elevated md:px-8 gap-x-2 md:gap-x-4 -top-4 rounded-conditional-b-xl">
     <?php foreach ($navigationItems as $item): ?>

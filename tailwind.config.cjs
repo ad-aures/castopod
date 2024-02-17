@@ -41,6 +41,7 @@ module.exports = {
       backgroundColor: {
         base: "hsl(var(--color-background-base) / <alpha-value>)",
         elevated: "hsl(var(--color-background-elevated) / <alpha-value>)",
+        subtle: "hsl(var(--color-border-subtle) / <alpha-value>)",
         navigation: "hsl(var(--color-background-navigation) / <alpha-value>)",
         "navigation-active":
           "hsl(var(--color-background-navigation-active) / <alpha-value>)",

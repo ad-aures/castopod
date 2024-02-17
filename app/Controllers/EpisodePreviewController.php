@@ -63,4 +63,12 @@ class EpisodePreviewController extends BaseController
             'episode' => $this->episode,
         ]);
     }
+
+    public function chapters(): RedirectResponse | string
+    {
+        return view('episode/preview-chapters', [
+            'podcast' => $this->episode->podcast,
+            'episode' => $this->episode,
+        ]);
+    }
 }

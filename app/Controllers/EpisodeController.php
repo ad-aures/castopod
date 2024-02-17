@@ -27,6 +27,7 @@ use Config\Services;
 use Modules\Analytics\AnalyticsTrait;
 use Modules\Fediverse\Objects\OrderedCollectionObject;
 use Modules\Fediverse\Objects\OrderedCollectionPage;
+use Modules\Media\FileManagers\FileManagerInterface;
 use SimpleXMLElement;
 
 class EpisodeController extends BaseController
@@ -156,6 +157,67 @@ class EpisodeController extends BaseController
 
             // The page cache is set to a decade so it is deleted manually upon podcast update
             return view('episode/activity', $data, [
+                'cache' => $secondsToNextUnpublishedEpisode
+                    ? $secondsToNextUnpublishedEpisode
+                    : DECADE,
+                'cache_name' => $cacheName,
+            ]);
+        }
+
+        return $cachedView;
+    }
+
+    public function chapters(): String
+    {
+        // Prevent analytics hit when authenticated
+        if (! auth()->loggedIn()) {
+            $this->registerPodcastWebpageHit($this->episode->podcast_id);
+        }
+
+        $cacheName = implode(
+            '_',
+            array_filter([
+                'page',
+                "podcast#{$this->podcast->id}",
+                "episode#{$this->episode->id}",
+                'chapters',
+                service('request')
+                    ->getLocale(),
+                is_unlocked($this->podcast->handle) ? 'unlocked' : null,
+                auth()
+                    ->loggedIn() ? 'authenticated' : null,
+            ]),
+        );
+
+        if (! ($cachedView = cache($cacheName))) {
+            // get chapters from json file
+            $data = [
+                'metatags' => get_episode_metatags($this->episode),
+                'podcast'  => $this->podcast,
+                'episode'  => $this->episode,
+            ];
+
+            if (isset($this->episode->chapters->file_key)) {
+                /** @var FileManagerInterface $fileManager */
+                $fileManager = service('file_manager');
+                $episodeChaptersJsonString = (string) $fileManager->getFileContents($this->episode->chapters->file_key);
+
+                $chapters = json_decode($episodeChaptersJsonString, true);
+                $data['chapters'] = $chapters;
+            }
+
+            $secondsToNextUnpublishedEpisode = (new EpisodeModel())->getSecondsToNextUnpublishedEpisode(
+                $this->podcast->id,
+            );
+
+            if (auth()->loggedIn()) {
+                helper('form');
+
+                return view('episode/chapters', $data);
+            }
+
+            // The page cache is set to a decade so it is deleted manually upon podcast update
+            return view('episode/chapters', $data, [
                 'cache' => $secondsToNextUnpublishedEpisode
                     ? $secondsToNextUnpublishedEpisode
                     : DECADE,

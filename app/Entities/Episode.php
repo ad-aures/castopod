@@ -21,7 +21,6 @@ use App\Models\PostModel;
 use CodeIgniter\Entity\Entity;
 use CodeIgniter\Files\File;
 use CodeIgniter\HTTP\Files\UploadedFile;
-use CodeIgniter\HTTP\URI;
 use CodeIgniter\I18n\Time;
 use Config\Images;
 use Exception;

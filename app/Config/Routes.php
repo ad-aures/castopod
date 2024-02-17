@@ -125,6 +125,9 @@ $routes->group('@(:podcastHandle)', static function ($routes): void {
         $routes->get('activity', 'EpisodeController::activity/$1/$2', [
             'as' => 'episode-activity',
         ]);
+        $routes->get('chapters', 'EpisodeController::chapters/$1/$2', [
+            'as' => 'episode-chapters',
+        ]);
         $routes->options('comments', 'ActivityPubController::preflight');
         $routes->get('comments', 'EpisodeController::comments/$1/$2', [
             'as'                        => 'episode-comments',
@@ -196,9 +199,11 @@ $routes->get('/audio/@(:podcastHandle)/(:slug).(:alphanum)', 'EpisodeAudioContro
 $routes->get('/p/(:uuid)', 'EpisodePreviewController::index/$1', [
     'as' => 'episode-preview',
 ]);
-
 $routes->get('/p/(:uuid)/activity', 'EpisodePreviewController::activity/$1', [
     'as' => 'episode-preview-activity',
+]);
+$routes->get('/p/(:uuid)/chapters', 'EpisodePreviewController::chapters/$1', [
+    'as' => 'episode-preview-chapters',
 ]);
 
 // Other pages
