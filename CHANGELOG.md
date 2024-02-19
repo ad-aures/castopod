@@ -1,3 +1,30 @@
+# [1.10.0](https://code.castopod.org/adaures/castopod/compare/v1.9.0...v1.10.0) (2/19/2024)
+
+### Bug Fixes
+
+- **op3:** move op3 prefix to enclosure url instead of audio proxy
+  ([d580369](https://code.castopod.org/adaures/castopod/commit/d5803692357952d82d54efd8d3aa71de3a1c9571))
+- **podcast-import:** rollback transaction before exception is thrown
+  ([419bb04](https://code.castopod.org/adaures/castopod/commit/419bb04716088586b87b2c8f24a954ca8cfd6c76)),
+  closes [#429](https://code.castopod.org/adaures/castopod/issues/429)
+  [#319](https://code.castopod.org/adaures/castopod/issues/319)
+  [#443](https://code.castopod.org/adaures/castopod/issues/443)
+  [#438](https://code.castopod.org/adaures/castopod/issues/438)
+
+### Features
+
+- add podcast:season and podcast:episode tags to rss feed
+  ([98c6658](https://code.castopod.org/adaures/castopod/commit/98c6658840eedd55bd6d8042f8a69c342b87cd71))
+- add support for podcasting 2.0 "medium" tag with podcast, music and audiobook
+  ([630e788](https://code.castopod.org/adaures/castopod/commit/630e788f0e1ddfe5de229bd415a8e15361efa746)),
+  closes [#439](https://code.castopod.org/adaures/castopod/issues/439)
+- display chapters in episode's public page
+  ([87cc437](https://code.castopod.org/adaures/castopod/commit/87cc437e1ead5486ed46ca37e2055aaf5c9445c1)),
+  closes [#423](https://code.castopod.org/adaures/castopod/issues/423)
+- support VTT transcript file format in addition to SRT
+  ([7071b4b](https://code.castopod.org/adaures/castopod/commit/7071b4b6f48cb9a2f766064f3a5c23f92b293718)),
+  closes [#433](https://code.castopod.org/adaures/castopod/issues/433)
+
 # [1.9.0](https://code.castopod.org/adaures/castopod/compare/v1.8.2...v1.9.0) (1/31/2024)
 
 ### Bug Fixes
