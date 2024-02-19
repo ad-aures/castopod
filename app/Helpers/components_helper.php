@@ -28,7 +28,7 @@ if (! function_exists('hint_tooltip')) {
     {
         $tooltip =
             '<span data-tooltip="bottom" tabindex="0" title="' .
-            $hintText .
+            esc($hintText) .
             '" class="inline-block align-middle opacity-75 focus:ring-accent';
 
         if ($class !== '') {

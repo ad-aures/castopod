@@ -100,9 +100,9 @@ class PodcastImport extends BaseCommand
         // FIXME: getting named routes doesn't work from v4.3 anymore, so loading all routes before importing
         Services::routes()->loadRoutes();
 
-        $this->init();
-
         try {
+            $this->init();
+
             CLI::write('All good! Feed was parsed successfully!');
 
             CLI::write(
@@ -173,7 +173,7 @@ class PodcastImport extends BaseCommand
             $this->error($exception->getMessage());
             log_message(
                 'critical',
-                'Error when importing ' . $this->importTask->feed_url . PHP_EOL . $exception->getTraceAsString()
+                'Error when importing ' . $this->importTask?->feed_url . PHP_EOL . $exception->getMessage() . PHP_EOL . $exception->getTraceAsString()
             );
         }
     }
@@ -196,9 +196,6 @@ class PodcastImport extends BaseCommand
 
     private function importPodcast(): Podcast
     {
-        $db = db_connect();
-        $db->transStart();
-
         $location = null;
         if ($this->podcastFeed->channel->podcast_location->getValue() !== null) {
             $location = new Location(
@@ -213,13 +210,28 @@ class PodcastImport extends BaseCommand
         }
 
         if (($coverUrl = $this->getCoverUrl($this->podcastFeed->channel)) === null) {
-            throw new Exception('Missing podcast cover. Please include an <itunes:image> tag');
+            throw new Exception('Missing podcast cover. Please include an <itunes:image> tag.');
+        }
+
+        if (($ownerName = $this->podcastFeed->channel->itunes_owner->itunes_name->getValue() === null)) {
+            throw new Exception(
+                'Missing podcast owner name. Please include an <itunes:name> tag inside the <itunes:owner> tag.'
+            );
+        }
+
+        if (($ownerEmail = $this->podcastFeed->channel->itunes_owner->itunes_email->getValue() === null)) {
+            throw new Exception(
+                'Missing podcast owner email. Please include an <itunes:email> tag inside the <itunes:owner> tag.'
+            );
         }
 
         $parentalAdvisory = null;
         if ($this->podcastFeed->channel->itunes_explicit->getValue() !== null) {
             $parentalAdvisory = $this->podcastFeed->channel->itunes_explicit->getValue() ? 'explicit' : 'clean';
         }
+
+        $db = db_connect();
+        $db->transStart();
 
         $htmlConverter = new HtmlConverter();
         $podcast = new Podcast([
@@ -237,8 +249,8 @@ class PodcastImport extends BaseCommand
             'language_code'        => $this->importTask->language,
             'category_id'          => $this->importTask->category,
             'parental_advisory'    => $parentalAdvisory,
-            'owner_name'           => $this->podcastFeed->channel->itunes_owner->itunes_name->getValue(),
-            'owner_email'          => $this->podcastFeed->channel->itunes_owner->itunes_email->getValue(),
+            'owner_name'           => $ownerName,
+            'owner_email'          => $ownerEmail,
             'publisher'            => $this->podcastFeed->channel->itunes_author->getValue(),
             'type'                 => $this->podcastFeed->channel->itunes_type->getValue(),
             'copyright'            => $this->podcastFeed->channel->copyright->getValue(),
@@ -446,6 +458,7 @@ class PodcastImport extends BaseCommand
             }
 
             if (($showNotes = $this->getShowNotes($item)) === null) {
+                $db->transRollback();
                 throw new Exception('Missing item show notes. Please include a <description> tag to item ' . $key);
             }
 

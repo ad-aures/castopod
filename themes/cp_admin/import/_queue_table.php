@@ -38,7 +38,7 @@ use Modules\PodcastImport\Entities\TaskStatus;
                     'passed'   => '',
                 ];
 
-                $errorHint = $importTask->status === TaskStatus::Failed ? hint_tooltip($importTask->error, 'ml-1') : '';
+                $errorHint = $importTask->status === TaskStatus::Failed ? hint_tooltip(esc($importTask->error), 'ml-1') : '';
 
                 return '<div class="flex items-center"><Pill variant="' . $pillVariantMap[$importTask->status->value] . '" icon="' . $pillIconMap[$importTask->status->value] . '" iconClass="' . $pillIconClassMap[$importTask->status->value] . '" hint="' . lang('PodcastImport.queue.status.' . $importTask->status->value . '_hint') . '">' . lang('PodcastImport.queue.status.' . $importTask->status->value) . '</Pill>' . $errorHint . '</div>';
             },
