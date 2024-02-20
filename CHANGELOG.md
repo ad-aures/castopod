@@ -1,3 +1,11 @@
+## [1.10.2](https://code.castopod.org/adaures/castopod/compare/v1.10.1...v1.10.2) (2/20/2024)
+
+### Bug Fixes
+
+- **podcast-import:** move closing parenthasis when checking for owner name and
+  email existence
+  ([cec7815](https://code.castopod.org/adaures/castopod/commit/cec78155f94a222edcf7964c0a2f3a3e0f46a98d))
+
 ## [1.10.1](https://code.castopod.org/adaures/castopod/compare/v1.10.0...v1.10.1) (2/20/2024)
 
 ### Bug Fixes
