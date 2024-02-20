@@ -213,13 +213,13 @@ class PodcastImport extends BaseCommand
             throw new Exception('Missing podcast cover. Please include an <itunes:image> tag.');
         }
 
-        if (($ownerName = $this->podcastFeed->channel->itunes_owner->itunes_name->getValue() === null)) {
+        if (($ownerName = $this->podcastFeed->channel->itunes_owner->itunes_name->getValue()) === null) {
             throw new Exception(
                 'Missing podcast owner name. Please include an <itunes:name> tag inside the <itunes:owner> tag.'
             );
         }
 
-        if (($ownerEmail = $this->podcastFeed->channel->itunes_owner->itunes_email->getValue() === null)) {
+        if (($ownerEmail = $this->podcastFeed->channel->itunes_owner->itunes_email->getValue()) === null) {
             throw new Exception(
                 'Missing podcast owner email. Please include an <itunes:email> tag inside the <itunes:owner> tag.'
             );
