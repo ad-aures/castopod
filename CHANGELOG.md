@@ -1,3 +1,11 @@
+## [1.10.1](https://code.castopod.org/adaures/castopod/compare/v1.10.0...v1.10.1) (2/20/2024)
+
+### Bug Fixes
+
+- **fediverse:** use config name to get Fediverse config properties instead of
+  hardcoded class string
+  ([5fd0980](https://code.castopod.org/adaures/castopod/commit/5fd0980ff7101d45051a2daa3f635694f85609d7))
+
 # [1.10.0](https://code.castopod.org/adaures/castopod/compare/v1.9.0...v1.10.0) (2/19/2024)
 
 ### Bug Fixes
