@@ -79,7 +79,7 @@ lint-js:
 tests:
   stage: quality
   services:
-    - mariadb
+    - mariadb:10.2
   variables:
     MYSQL_ROOT_PASSWORD: "R00Tp4ssW0RD"
     MYSQL_DATABASE: "test"
