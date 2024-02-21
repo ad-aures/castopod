@@ -491,6 +491,7 @@ class PodcastImport extends BaseCommand
                 'type'                 => $item->itunes_episodeType->getValue(),
                 'is_blocked'           => $item->itunes_block->getValue(),
                 'location'             => $location,
+                'is_premium'           => $this->podcast->is_premium_by_default,
                 'published_at'         => $item->pubDate->getValue(),
             ]);
 
