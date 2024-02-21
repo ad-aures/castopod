@@ -1,3 +1,13 @@
+## [1.10.3](https://code.castopod.org/adaures/castopod/compare/v1.10.2...v1.10.3) (2/21/2024)
+
+### Bug Fixes
+
+- **chapters:** use episode cover when chapter img is an empty string
+  ([a343de4](https://code.castopod.org/adaures/castopod/commit/a343de4cf6ba38561b8fe675fa9c38d9f0ecfec7)),
+  closes [#444](https://code.castopod.org/adaures/castopod/issues/444)
+- **import:** set episodes as premium if podcast is set as premium by default
+  ([dfd66be](https://code.castopod.org/adaures/castopod/commit/dfd66beebfcca1670b0a9d389e8e3f8d2d08d2f2))
+
 ## [1.10.2](https://code.castopod.org/adaures/castopod/compare/v1.10.1...v1.10.2) (2/20/2024)
 
 ### Bug Fixes
