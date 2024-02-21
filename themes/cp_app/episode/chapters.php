@@ -14,7 +14,7 @@
             echo view('episode/_partials/chapter', [
                 'title'         => array_key_exists('title', $chapter) ? $chapter['title'] : '',
                 'startTime'     => format_duration($chapter['startTime']),
-                'chapterImgUrl' => array_key_exists('img', $chapter) ? $chapter['img'] : $episode->cover->thumbnail_url,
+                'chapterImgUrl' => array_key_exists('img', $chapter) && $chapter['img'] !== '' ? $chapter['img'] : $episode->cover->thumbnail_url,
                 'chapterUrl'    => array_key_exists('url', $chapter) ? $chapter['url'] : '',
             ]);
         } ?>
