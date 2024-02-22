@@ -22,6 +22,7 @@ return [
     'back_to_episodes' => 'بازگشت به قسمت‌های {podcast}',
     'comments' => 'دیدگاه‌ها',
     'activity' => 'فعّالیت',
+    'chapters' => 'Chapters',
     'description' => 'شرح قسمت',
     'number_of_comments' => '{numberOfComments, plural,
         other {# نظر}
@@ -40,4 +41,5 @@ return [
         'publish' => 'Publish',
         'publish_edit' => 'Edit publication',
     ],
+    'no_chapters' => 'No chapters are available for this episode.',
 ];

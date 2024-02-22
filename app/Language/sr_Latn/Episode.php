@@ -23,6 +23,7 @@ return [
     'back_to_episodes' => 'Nazad na epizode {podcast}',
     'comments' => 'Komentari',
     'activity' => 'Aktivnosti',
+    'chapters' => 'Chapters',
     'description' => 'Opis epizode',
     'number_of_comments' => '{numberOfComments, plural,
         one {# komentar}
@@ -42,4 +43,5 @@ return [
         'publish' => 'Objavi',
         'publish_edit' => 'Uredi objavu',
     ],
+    'no_chapters' => 'No chapters are available for this episode.',
 ];

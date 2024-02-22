@@ -25,6 +25,7 @@ return [
     'back_to_episodes' => 'Повернутись до серій {podcast}',
     'comments' => 'Коментарі',
     'activity' => 'Активність',
+    'chapters' => 'Chapters',
     'description' => 'Опис Серії',
     'number_of_comments' => '{numberOfComments, plural,
         one {# коментар}
@@ -46,4 +47,5 @@ return [
         'publish' => 'Опублікувати',
         'publish_edit' => 'Редагувати публікацію',
     ],
+    'no_chapters' => 'No chapters are available for this episode.',
 ];

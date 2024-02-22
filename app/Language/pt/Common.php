@@ -9,15 +9,15 @@ declare(strict_types=1);
  */
 
 return [
-    'yes' => 'Yes',
-    'no' => 'No',
-    'cancel' => 'Cancel',
-    'optional' => 'Optional',
-    'close' => 'Close',
-    'home' => 'Home',
-    'explicit' => 'Explicit',
-    'powered_by' => 'Powered by {castopod}',
-    'go_back' => 'Go back',
+    'yes' => 'Sim',
+    'no' => 'Não',
+    'cancel' => 'Cancelar',
+    'optional' => 'Opcional',
+    'close' => 'Fechar',
+    'home' => 'Início',
+    'explicit' => 'Explícito',
+    'powered_by' => 'Distribuído por {castopod}',
+    'go_back' => 'Voltar',
     'play_episode_button' => [
         'play' => 'Play',
         'playing' => 'Playing',

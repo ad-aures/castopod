@@ -22,7 +22,7 @@ return [
     'all_podcast_episodes' => 'Tous les épisodes du podcast',
     'back_to_podcast' => 'Revenir au podcast',
     'edit' => 'Modifier',
-    'preview' => 'Preview',
+    'preview' => 'Prévisualisation',
     'publish' => 'Publier',
     'publish_edit' => 'Modifier la publication',
     'publish_date_edit' => 'Définir la date de publication',
@@ -56,7 +56,7 @@ return [
         }',
         'episode' => 'Épisode',
         'visibility' => 'Visibilité',
-        'downloads' => 'Downloads',
+        'downloads' => 'Téléchargements',
         'comments' => 'Commentaires',
         'actions' => 'Actions',
     ],
@@ -81,13 +81,13 @@ return [
             audio {audio}
             other {média}
         }.',
-        'deleteFileError' => 'Failed to delete {type, select,
-            transcript {transcript}
-            chapters {chapters}
-            image {cover}
+        'deleteFileError' => 'Impossible de supprimer le fichier {type, select,
+            transcript {de transcription}
+            chapters {de chapitres}
+            image {d’image de couverture}
             audio {audio}
             other {media}
-        } file {file_key}. You may manually remove it from your disk.',
+        } {file_key}. Vous pouvez le supprimer manuellement de votre disque.',
         'sameSlugError' => 'Il existe déjà un épisode avec le slug choisi.',
     ],
     'form' => [
@@ -139,9 +139,9 @@ return [
         'location_name' => 'Nom ou adresse du lieu',
         'location_name_hint' => 'Ce lieu peut être réel ou fictif',
         'transcript' => 'Transcription (sous-titrage)',
-        'transcript_hint' => 'Seulement les .srt sont autorisés',
+        'transcript_hint' => 'Seuls les .srt ou .vtt sont autorisés.',
         'transcript_download' => 'Télécharger le transcript',
-        'transcript_file' => 'Fichier de transcription (.srt)',
+        'transcript_file' => 'Fichier de transcription (.srt ou .vtt)',
         'transcript_remote_url' => 'URL distante pour le fichier de transcription',
         'transcript_file_delete' => 'Supprimer le fichier de transcription',
         'chapters' => 'Chapitrage',
@@ -213,13 +213,13 @@ return [
         'light-transparent' => 'Clair transparent',
     ],
     'publication_status_banner' => [
-        'draft_mode' => 'draft mode',
+        'draft_mode' => 'mode brouillon',
         'text' => '{publication_status, select,
-            published {This episode is not yet published.}
-            scheduled {This episode is scheduled for publication on {publication_date}.}
-            with_podcast {This episode will be published at the same time as the podcast.}
-            other {This episode is not yet published.}
+            published {Cet épisode n’est pas encore publié.}
+            scheduled {Cet épisode est programmé pour le {publication_date}.}
+            with_podcast {Cet épisode va être publié au même moment que le podcast.}
+            other {Cet épisode n’est pas encore publié.}
         }',
-        'preview' => 'Preview',
+        'preview' => 'Prévisualisation',
     ],
 ];

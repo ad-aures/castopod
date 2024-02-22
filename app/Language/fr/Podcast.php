@@ -25,7 +25,7 @@ return [
         one {# publication}
         other {# publications}
     }',
-    'links' => 'Links',
+    'links' => 'Liens',
     'activity' => 'Activité',
     'episodes' => 'Épisodes',
     'episodes_title' => 'Épisodes de {podcastTitle}',
@@ -51,5 +51,5 @@ return [
         other {# intervenant·e·s}
     }',
     'persons_list' => 'Intervenant·e·s',
-    'castopod_website' => 'Castopod (website)',
+    'castopod_website' => 'Castopod (site web)',
 ];

@@ -34,7 +34,7 @@ return [
         'email' => 'Adresse e-mail',
         'expiration_date' => 'Date d\'expiration',
         'expiration_date_hint' => 'La date et l\'heure à laquelle l\'abonnement expire. Laissez vide pour un abonnement illimité.',
-        'submit_create' => 'Create subscription',
+        'submit_create' => 'Créer un abonnement',
         'submit_edit' => 'Modifier l\'inscription',
     ],
     'form_link_add' => [

@@ -25,6 +25,7 @@ return [
     'back_to_episodes' => 'Späť k epizódam {podcast}',
     'comments' => 'Komentáre',
     'activity' => 'Aktivita',
+    'chapters' => 'Chapters',
     'description' => 'Popis epizódy',
     'number_of_comments' => '{numberOfComments, plural,
         one {# komentár}
@@ -46,4 +47,5 @@ return [
         'publish' => 'Zverejniť',
         'publish_edit' => 'Upraviť zverejnené',
     ],
+    'no_chapters' => 'No chapters are available for this episode.',
 ];

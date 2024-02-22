@@ -23,6 +23,7 @@ return [
     'back_to_episodes' => 'Tilbage til episoderne af {podcast}',
     'comments' => 'Kommentarer',
     'activity' => 'Aktivitet',
+    'chapters' => 'Chapters',
     'description' => 'Episodebeskrivelse',
     'number_of_comments' => '{numberOfComments, plural,
         one {# kommentar}
@@ -42,4 +43,5 @@ return [
         'publish' => 'Publish',
         'publish_edit' => 'Edit publication',
     ],
+    'no_chapters' => 'No chapters are available for this episode.',
 ];

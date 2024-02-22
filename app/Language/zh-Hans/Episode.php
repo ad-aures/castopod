@@ -23,6 +23,7 @@ return [
     'back_to_episodes' => '回到剧集 {podcast} 中',
     'comments' => '评论',
     'activity' => '活动',
+    'chapters' => 'Chapters',
     'description' => '剧集描述',
     'number_of_comments' => '{numberOfComments, plural,
         other {# 评论}
@@ -42,4 +43,5 @@ return [
         'publish' => 'Publish',
         'publish_edit' => 'Edit publication',
     ],
+    'no_chapters' => 'No chapters are available for this episode.',
 ];

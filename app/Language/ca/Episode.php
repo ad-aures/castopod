@@ -23,6 +23,7 @@ return [
     'back_to_episodes' => 'Tornar als episodis de {podcast}',
     'comments' => 'Comentaris',
     'activity' => 'Activitat',
+    'chapters' => 'Chapters',
     'description' => 'Descripció de l\'episodi',
     'number_of_comments' => '{numberOfComments, plural,
         one {# comentari}
@@ -42,4 +43,5 @@ return [
         'publish' => 'Publish',
         'publish_edit' => 'Edit publication',
     ],
+    'no_chapters' => 'No chapters are available for this episode.',
 ];

@@ -37,5 +37,5 @@ return [
     'podcast_by_bandwidth' => 'Bande passante quotidienne consommée (en Mo)',
     'total_storage_by_month' => 'Stockage mensuel (en Mo)',
     'total_bandwidth_by_month' => 'Bande passante mensuelle utilisée (en Mo)',
-    'total_bandwidth_by_month_limit' => 'Limited to {totalBandwidth} per month',
+    'total_bandwidth_by_month_limit' => 'Limité à {totalBandwidth} par mois',
 ];

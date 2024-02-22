@@ -23,6 +23,7 @@ return [
     'back_to_episodes' => 'Retour aux épisodes de {podcast}',
     'comments' => 'Commentaires',
     'activity' => 'Activité',
+    'chapters' => 'Chapitres',
     'description' => 'Description de l’épisode',
     'number_of_comments' => '{numberOfComments, plural,
         one {# commentaire}
@@ -31,15 +32,16 @@ return [
     'all_podcast_episodes' => 'Tous les épisodes du podcast',
     'back_to_podcast' => 'Revenir au podcast',
     'preview' => [
-        'title' => 'Preview',
-        'not_published' => 'Not published',
+        'title' => 'Prévisualisation',
+        'not_published' => 'Non publié',
         'text' => '{publication_status, select,
-            published {This episode is not yet published.}
-            scheduled {This episode is scheduled for publication on {publication_date}.}
-            with_podcast {This episode will be published at the same time as the podcast.}
-            other {This episode is not yet published.}
+            published {Cet épisode n’est pas encore publié.}
+            scheduled {Cet épisode est programmé pour le {publication_date}.}
+            with_podcast {Cet épisode va être publié au même moment que le podcast.}
+            other {Cet épisode n’est pas encore publié.}
         }',
-        'publish' => 'Publish',
-        'publish_edit' => 'Edit publication',
+        'publish' => 'Publier',
+        'publish_edit' => 'Modifier la publication',
     ],
+    'no_chapters' => 'Aucun chapitre n’est disponible pour cet épisode.',
 ];

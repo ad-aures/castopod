@@ -22,6 +22,7 @@ return [
     'back_to_episodes' => 'Kembali ke episode-episode pada {podcast}',
     'comments' => 'Komentar',
     'activity' => 'Aktivitas',
+    'chapters' => 'Chapters',
     'description' => 'Keterangan episode',
     'number_of_comments' => '{numberOfComments, plural,
         other {# komentar}
@@ -40,4 +41,5 @@ return [
         'publish' => 'Publish',
         'publish_edit' => 'Edit publication',
     ],
+    'no_chapters' => 'No chapters are available for this episode.',
 ];

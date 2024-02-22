@@ -13,7 +13,7 @@ return [
     'no_podcast' => 'Aucun podcast trouvé !',
     'create' => 'Créer un podcast',
     'import' => 'Importer un podcast',
-    'all_imports' => 'Podcast imports',
+    'all_imports' => 'Imports de podcasts',
     'new_episode' => 'Créer un épisode',
     'view' => 'Voir le podcast',
     'edit' => 'Modifier le podcast',
@@ -22,7 +22,7 @@ return [
     'delete' => 'Supprimer le podcast',
     'see_episodes' => 'Voir les épisodes',
     'see_contributors' => 'Voir les contributeurs',
-    'monetization_other' => 'Other monetization',
+    'monetization_other' => 'Autres monétisations',
     'go_to_page' => 'Aller à la page',
     'latest_episodes' => 'Derniers épisodes',
     'see_all_episodes' => 'Voir tous les épisodes',
@@ -58,7 +58,7 @@ return [
     'form' => [
         'identity_section_title' => 'Informations sur le Podcast',
         'identity_section_subtitle' => 'Ces champs vous permettent de vous faire remarquer.',
-        'fediverse_section_title' => 'Fediverse identity',
+        'fediverse_section_title' => 'Identité dans le Fédivers',
 
         'cover' => 'Couverture du podcast',
         'cover_size_hint' => 'La couverture du podcast doit être carrée, avec au minimum 1400px de largeur et de hauteur.',
@@ -74,7 +74,17 @@ return [
             'episodic' => 'Épisodique',
             'episodic_hint' => 'Si les épisodes sont destinés à être consommés sans ordre spécifique. Les épisodes les plus récents seront présentés en premier.',
             'serial' => 'Série',
-            'serial_hint' => 'Si les épisodes sont destinés à être consommés dans un ordre séquentiel bien défini. Les épisodes les plus anciens seront présentés en premier.',
+            'serial_hint' => 'Si les épisodes sont destinés à êtres lus dans un ordre séquentiel. Les épisodes seront présentés dans l’ordre de numérotation.',
+        ],
+        'medium' => [
+            'label' => 'Médium',
+            'hint' => 'Médium tel que représenté par la balise podcast:medium dans le flux RSS. Changer ceci peut changer la façon dont les lecteurs présentent votre flux.',
+            'podcast' => 'Podcast',
+            'podcast_hint' => 'Décrit un flux pour une émission de podcast.',
+            'music' => 'Musique',
+            'music_hint' => 'A feed of music organized into an "album" with each item a song within the album.',
+            'audiobook' => 'Livre audio',
+            'audiobook_hint' => 'Specific types of audio with one item per feed, or where items represent chapters within the book.',
         ],
         'description' => 'Description',
         'classification_section_title' => 'Classification',
@@ -99,8 +109,8 @@ return [
         'owner_email' => 'E-mail du/de la propriétaire',
         'owner_email_hint' =>
             'Utilisé par la plupart des plateformes pour vérifier la propriété du podcast. Visible dans le flux RSS public.',
-        'is_owner_email_removed_from_feed' => 'Remove the owner email from the public RSS feed',
-        'is_owner_email_removed_from_feed_hint' => 'You may need to temporarily unhide the email so that a directory can verify your podcast ownership.',
+        'is_owner_email_removed_from_feed' => 'Retirer l\'email du propriétaire du flux RSS publique',
+        'is_owner_email_removed_from_feed_hint' => 'Il se peut que vous deviez temporairement exposer l’email pour qu\'un index puisse valider la propriété de votre podcast.',
         'publisher' => 'Éditeur / Éditrice',
         'publisher_hint' =>
             'Le groupe responsable de la création du podcast. Fait souvent référence à la société mère ou au réseau d’un podcast. Ce champ est parfois appelé « Auteur ».',
@@ -116,7 +126,7 @@ return [
         'premium_by_default' => 'Les épisodes doivent être définis comme premium par défaut',
         'premium_by_default_hint' => 'Les épisodes de Podcast seront marqués comme premium par défaut. Vous pouvez toujours choisir de définir certains épisodes, bandes-annonces ou bonus comme publics.',
         'op3' => 'Open Podcast Prefix Project (OP3)',
-        'op3_link' => 'Visit your OP3 dashboard (external link)',
+        'op3_link' => 'Visitez votre tableau de bord OP3 (lien externe)',
         'op3_hint' => 'Valorisez vos données d\'analyse avec OP3, un service d\'analyse tiers open source et de confiance. Partagez, validez et comparez vos données analytiques avec l\'écosystème de podcasting ouvert.',
         'op3_enable' => 'Activer le service d\'analyse OP3',
         'op3_enable_hint' => 'Pour des raisons de sécurité, les données d\'analyse des épisodes premium ne seront pas partagées avec OP3.',
@@ -301,12 +311,12 @@ return [
     'no_episode' => 'Aucun épisode trouvé !',
     'follow' => 'Suivre',
     'followers' => '{numberOfFollowers, plural,
-        one {# follower}
-        other {# followers}
+        one {# abonné·e}
+        other {# abonné·e·s}
     }',
     'posts' => '{numberOfPosts, plural,
-        one {# post}
-        other {# posts}
+        one {# publication}
+        other {# publications}
     }',
     'activity' => 'Activité',
     'episodes' => 'Épisodes',

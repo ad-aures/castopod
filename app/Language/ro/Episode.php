@@ -24,6 +24,7 @@ return [
     'back_to_episodes' => 'Înapoi la episoadele {podcast}',
     'comments' => 'Comentarii',
     'activity' => 'Activitate',
+    'chapters' => 'Chapters',
     'description' => 'Descrierea episodului',
     'number_of_comments' => '{numberOfComments, plural,
         one {# răspuns}
@@ -44,4 +45,5 @@ return [
         'publish' => 'Publish',
         'publish_edit' => 'Edit publication',
     ],
+    'no_chapters' => 'No chapters are available for this episode.',
 ];
