@@ -14,6 +14,7 @@ use App\Entities\Episode;
 use App\Models\EpisodeModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
+use Modules\Media\FileManagers\FileManagerInterface;
 
 class EpisodePreviewController extends BaseController
 {
@@ -66,9 +67,21 @@ class EpisodePreviewController extends BaseController
 
     public function chapters(): RedirectResponse | string
     {
-        return view('episode/preview-chapters', [
+        $data = [
             'podcast' => $this->episode->podcast,
             'episode' => $this->episode,
-        ]);
+        ];
+
+        if (isset($this->episode->chapters->file_key)) {
+            /** @var FileManagerInterface $fileManager */
+            $fileManager = service('file_manager');
+            $episodeChaptersJsonString = (string) $fileManager->getFileContents($this->episode->chapters->file_key);
+
+            $chapters = json_decode($episodeChaptersJsonString, true);
+            $data['chapters'] = $chapters;
+        }
+
+        helper('form');
+        return view('episode/preview-chapters', $data);
     }
 }
