@@ -31,7 +31,7 @@ return [
     'back_to_episodes' => 'Mont da rannoù {podcast}',
     'comments' => 'Evezhiadennoù',
     'activity' => 'Oberiantiz',
-    'chapters' => 'Chapters',
+    'chapters' => 'Chabistroù',
     'description' => 'Deskrivadur ar rann',
     'number_of_comments' => '{numberOfComments, plural,
         0 {evezhiadenn ebet}
@@ -52,5 +52,5 @@ return [
         'publish' => 'Embann',
         'publish_edit' => 'Kemmañ an embannadur',
     ],
-    'no_chapters' => 'No chapters are available for this episode.',
+    'no_chapters' => 'N\'eus chabistr ebet evit ar rann.',
 ];

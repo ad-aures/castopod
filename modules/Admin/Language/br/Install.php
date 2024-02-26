@@ -11,7 +11,7 @@ declare(strict_types=1);
 return [
     'manual_config' => 'Kefluniañ dre zorn',
     'manual_config_subtitle' =>
-        'Krouit ur restr `.env` gant hoc’h arventennoù ha hizivait ar bajenn evit kenderc\'hel gant ar staliañ.',
+        'Krouit ur restr `.env` gant hoc’h arventennoù ha nevesait ar bajenn evit kenderc\'hel gant ar staliañ.',
     'form' => [
         'instance_config' => 'Arventennoù an istañs',
         'hostname' => 'Anv an ostiz',

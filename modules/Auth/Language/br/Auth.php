@@ -11,7 +11,7 @@ declare(strict_types=1);
 return [
     'instance_groups' => [
         'owner' => [
-            'title' => 'Instance Owner',
+            'title' => 'Perc\'henn·ez an istañs',
             'description' => 'The Castopod owner.',
         ],
         'superadmin' => [
@@ -23,7 +23,7 @@ return [
             'description' => 'Manages Castopod\'s content.',
         ],
         'podcaster' => [
-            'title' => 'Podcaster',
+            'title' => 'Podkaster',
             'description' => 'General users of Castopod.',
         ],
     ],
@@ -35,7 +35,7 @@ return [
         'pages.manage' => 'Can manage pages.',
         'podcasts.view' => 'Can view all podcasts.',
         'podcasts.create' => 'Can create new podcasts.',
-        'podcasts.import' => 'Can import podcasts.',
+        'podcasts.import' => 'Gallout a ra enporzhiañ podkastoù.',
         'fediverse.manage-blocks' => 'Can block fediverse actors/domains from interacting with Castopod.',
     ],
     'podcast_groups' => [
@@ -44,19 +44,19 @@ return [
             'description' => 'The podcast owner.',
         ],
         'admin' => [
-            'title' => 'Admin',
+            'title' => 'Merour·ez',
             'description' => 'Has complete control of podcast #{id}.',
         ],
         'editor' => [
-            'title' => 'Editor',
+            'title' => 'Embanner',
             'description' => 'Manages content and publications of podcast #{id}.',
         ],
         'author' => [
-            'title' => 'Author',
+            'title' => 'Aozer·ez',
             'description' => 'Manages content of podcast #{id} but cannot publish them.',
         ],
         'guest' => [
-            'title' => 'Guest',
+            'title' => 'Kouviad·ez',
             'description' => 'General contributor of the podcast #{id}.',
         ],
     ],

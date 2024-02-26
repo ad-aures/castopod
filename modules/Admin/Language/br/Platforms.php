@@ -22,15 +22,15 @@ return [
     'your_id' => [
         'podcasting' => 'Hoc’h anaout (ID)',
         'social' => 'Hoc’h anaout (ID)',
-        'funding' => 'Your CTA',
+        'funding' => 'Ho CTA',
     ],
-    'your_cta' => 'Your call to action',
+    'your_cta' => 'Ho kalv da ober',
     'visible' => 'Diskouez e pajenn ar podkast?',
     'on_embed' => 'Diskouez el lenner enkorfet?',
     'remove' => 'Dilemel {platformName}',
     'submit' => 'Enrollañ',
     'messages' => [
-        'updateSuccess' => 'Hizivaet eo bet ereoù ar savennoù gant berzh!',
+        'updateSuccess' => 'Nevesaet eo bet ereoù ar savennoù gant berzh!',
         'removeLinkSuccess' => 'Dilamet eo bet ere ar savenn.',
         'removeLinkError' =>
             'N\'eo ket bet dilamet ere ar savenn. Klaskit en-dro.',

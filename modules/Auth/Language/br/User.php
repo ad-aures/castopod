@@ -10,15 +10,15 @@ declare(strict_types=1);
 
 return [
     'edit_role' => "Edit {username}'s role",
-    'ban' => 'Ban',
-    'unban' => 'Unban',
+    'ban' => 'Stankañ',
+    'unban' => 'Distankañ',
     'delete' => 'Dilemel',
     'create' => 'Krouiñ un implijer·ez',
     'view' => "Titouroù diwar-benn {username}",
     'all_users' => 'An holl implijerien·ezed',
     'list' => [
         'user' => 'Implijer·ez',
-        'role' => 'Role',
+        'role' => 'Roll',
         'banned' => 'Banned?',
     ],
     'form' => [
@@ -26,7 +26,7 @@ return [
         'username' => 'Anv implijer·ez',
         'password' => 'Ger-tremen',
         'new_password' => 'Ger-tremen nevez',
-        'role' => 'Role',
+        'role' => 'Roll',
         'roles' => 'Rolloù',
         'permissions' => 'Aotreoù',
         'submit_create' => 'Krouiñ an implijer·ez',
@@ -38,7 +38,7 @@ return [
         'disclaimer' =>
             "You are about to delete {user} permanently. They will not be able to access the admin area anymore.",
         'understand' => 'I understand, I want to delete {user} permanently',
-        'submit' => 'Delete',
+        'submit' => 'Dilemel',
     ],
     'messages' => [
         'createSuccess' =>

@@ -13,7 +13,7 @@ return [
     'view' => "Perzh {username} e {podcastTitle}",
     'add' => 'Ouzhpennañ ur perzhiad pe ur berzhiadez',
     'add_contributor' => 'Ouzhpennañ ur perzhiad pe ur berzhiadez da {0}',
-    'edit_role' => 'Hizivaat roll {0}',
+    'edit_role' => 'Nevesaat roll {0}',
     'edit' => 'Kemmañ',
     'remove' => 'Lemel',
     'list' => [
@@ -26,14 +26,14 @@ return [
         'role' => 'Roll',
         'role_placeholder' => 'Dibabit e·he roll…',
         'submit_add' => 'Ouzhpennañ ur perzhiad pe ur berzhiadez',
-        'submit_edit' => 'Hizivaat ar roll',
+        'submit_edit' => 'Nevesaat ar roll',
     ],
     'delete_form' => [
-        'title' => 'Remove {contributor}',
+        'title' => 'Dilemel {contributor}',
         'disclaimer' =>
             'You are about to remove {contributor} from contributors. They will not be able to access "{podcastTitle}" anymore.',
         'understand' => 'I understand, I want to remove {contributor} from "{podcastTitle}"',
-        'submit' => 'Remove',
+        'submit' => 'Lemel',
     ],
     'messages' => [
         'editSuccess' => 'Role successfully changed!',

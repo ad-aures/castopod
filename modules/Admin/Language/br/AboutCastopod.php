@@ -9,14 +9,14 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => 'About Castopod',
-    'host_name' => 'Host name',
-    'version' => 'Castopod version',
-    'php_version' => 'PHP version',
-    'os' => 'Operating System',
-    'languages' => 'Languages',
-    'update_database' => 'Update database',
+    'title' => 'Diwar-benn Castopod',
+    'host_name' => 'Anv an ostiz',
+    'version' => 'Stumm Castopod',
+    'php_version' => 'Stumm PHP',
+    'os' => 'Sistem oberiañ',
+    'languages' => 'Yezhoù',
+    'update_database' => 'Nevesaat an diaz roadennoù',
     'messages' => [
-        'databaseUpdateSuccess' => 'Database is up to date!',
+        'databaseUpdateSuccess' => 'Nevesaet eo an diaz roadennoù!',
     ],
 ];

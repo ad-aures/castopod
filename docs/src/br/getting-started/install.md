@@ -58,7 +58,7 @@ You will need the server hostname, database name, username and password to
 complete the installation process. If you do not have these, please contact your
 server administrator.
 
-#### Privileges
+#### Brientoù
 
 User must have at least these privileges on the database for Castopod to work:
 `CREATE`, `ALTER`, `DELETE`, `EXECUTE`, `INDEX`, `INSERT`, `SELECT`, `UPDATE`,
@@ -113,7 +113,7 @@ want to generate Video Clips. The following extensions must be installed:
 1. Run the Castopod install script by going to the install wizard page
    (`https://your_domain_name.com/cp-install`) in your favorite web browser.
 2. Follow the instructions on your screen.
-3. Start podcasting!
+3. Kregiñ da bodkastiñ!
 
 ::: info Note
 
@@ -140,7 +140,7 @@ based on the `.env.example` file.
 
 4. Head on to your admin gateway to start podcasting!
 
-### Email/SMTP setup
+### Arventenniñ ar posteloù/SMTP
 
 Email configuration is required for some features to work properly (eg.
 retrieving your forgotten password, sending instructions to premium subscribers,
@@ -159,7 +159,7 @@ email.SMTPPass="your_smtp_password"
 
 #### Email config options
 
-| Variable name    | Type                 | Default      |
+| Variable name    | Doare                | Dre ziouer   |
 | ---------------- | -------------------- | ------------ |
 | **`fromEmail`**  | string               | `undefined`  |
 | **`fromName`**   | string               | `"Castopod"` |
@@ -200,9 +200,9 @@ media.s3.secret="your_s3_secret"
 media.s3.region="your_s3_region"
 ```
 
-#### S3 config options
+#### Arventennoù S3
 
-| Variable name           | Type    | Default     |
+| Variable name           | Doare   | Dre ziouer  |
 | ----------------------- | ------- | ----------- |
 | **`endpoint`**          | string  | `undefined` |
 | **`key`**               | string  | `undefined` |
@@ -218,7 +218,7 @@ media.s3.region="your_s3_region"
 If you don't want to bother with installing Castopod manually, you may use one
 of the packages created and maintained by the open-source community.
 
-### Install with YunoHost
+### Staliañ dre YunoHost
 
 [YunoHost](https://yunohost.org/) is a distribution based on Debian GNU/Linux
 made up of free and open-source software packages. It manages the hardships of

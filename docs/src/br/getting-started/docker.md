@@ -111,7 +111,7 @@ can be added as a cache handler.
 
 - **castopod/castopod** and **castopod/app**
 
-  | Variable name                         | Type (`default`)        | Default          |
+  | Variable name                         | Type (`default`)        | Dre ziouer       |
   | ------------------------------------- | ----------------------- | ---------------- |
   | **`CP_BASEURL`**                      | string                  | `undefined`      |
   | **`CP_MEDIA_BASEURL`**                | ?string                 | `CP_BASEURL`     |
@@ -151,7 +151,7 @@ can be added as a cache handler.
 
 - **castopod/web-server**
 
-  | Variable name          | Type                  | Default |
+  | Variable name          | Doare                 | Default |
   | ---------------------- | --------------------- | ------- |
   | **`CP_APP_HOSTNAME`**  | ?string               | `"app"` |
   | **`CP_MAX_BODY_SIZE`** | ?number (with suffix) | `512M`  |

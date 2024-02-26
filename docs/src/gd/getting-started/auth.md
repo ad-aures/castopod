@@ -17,11 +17,11 @@ coupled with custom rules. Roles and permissions are defined at two levels:
 
 <!-- AUTH-INSTANCE-ROLES-LIST:START - Do not remove or modify this section -->
 
-| role        | description                         | permissions                                                                                |
-| ----------- | ----------------------------------- | ------------------------------------------------------------------------------------------ |
-| Super admin | Has complete control over Castopod. | admin.\*, podcasts.\*, users.manage, persons.manage, pages.manage, fediverse.manage-blocks |
-| Manager     | Manages Castopod's content.         | podcasts.create, podcasts.import, persons.manage, pages.manage                             |
-| Podcaster   | General users of Castopod.          | admin.access                                                                               |
+| role            | description                             | permissions                                                                                |
+| --------------- | --------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Sàr-rianaire    | Smachd gu lèir air Castopod.            | admin.\*, podcasts.\*, users.manage, persons.manage, pages.manage, fediverse.manage-blocks |
+| Manaidsear      | Stiùireadh susbaint Chastopod.          | podcasts.create, podcasts.import, persons.manage, pages.manage                             |
+| Pod-chraoladair | Luchd-cleachdaidh coitcheann Chastopod. | admin.access                                                                               |
 
 <!-- AUTH-INSTANCE-ROLES-LIST:END -->
 
@@ -29,17 +29,17 @@ coupled with custom rules. Roles and permissions are defined at two levels:
 
 <!-- AUTH-INSTANCE-PERMISSIONS-LIST:START - Do not remove or modify this section -->
 
-| permission              | description                                                        |
-| ----------------------- | ------------------------------------------------------------------ |
-| admin.access            | Can access the Castopod admin area.                                |
-| admin.settings          | Can access the Castopod settings.                                  |
-| users.manage            | Can manage Castopod users.                                         |
-| persons.manage          | Can manage persons.                                                |
-| pages.manage            | Can manage pages.                                                  |
-| podcasts.view           | Can view all podcasts.                                             |
-| podcasts.create         | Can create new podcasts.                                           |
-| podcasts.import         | Can import podcasts.                                               |
-| fediverse.manage-blocks | Can block fediverse actors/domains from interacting with Castopod. |
+| permission              | description                                                                                   |
+| ----------------------- | --------------------------------------------------------------------------------------------- |
+| admin.access            | ’S urrainn dhaibh raon rianachd Chastopod inntrigeadh.                                        |
+| admin.settings          | ’S urrainn dhaibh roghainnean Chastopod inntrigeadh.                                          |
+| users.manage            | ’S urrainn dhaibh luchdc-leachdaidh Chastopod a stiùireadh.                                   |
+| persons.manage          | ’S urrainn dhaibh daoine a stiùireadh.                                                        |
+| pages.manage            | ’S urrainn dhaibh duilleagan a stiùireadh.                                                    |
+| podcasts.view           | Chì iad a h-uile pod-chraoladh.                                                               |
+| podcasts.create         | ’S urrainn dhaibh pod-chraolaidhean ùra a chruthachadh.                                       |
+| podcasts.import         | ’S urrainn dhaibh pod-chraolaidhean ion-phortadh.                                             |
+| fediverse.manage-blocks | ’S urrainn dhaibh actairean/àrainnean a cho-shaoghail a bhacadh o eadar-ghabhail le Castopod. |
 
 <!-- AUTH-INSTANCE-PERMISSIONS-LIST:END -->
 
@@ -49,12 +49,12 @@ coupled with custom rules. Roles and permissions are defined at two levels:
 
 <!-- AUTH-PODCAST-ROLES-LIST:START - Do not remove or modify this section -->
 
-| role   | description                                               | permissions                                                                                                                                                                                                                                                                                 |
-| ------ | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Admin  | Has complete control of podcast #{id}.                    | \*                                                                                                                                                                                                                                                                                          |
-| Editor | Manages content and publications of podcast #{id}.        | view, edit, manage-import, manage-persons, manage-platforms, manage-publications, manage-notifications, interact-as, episodes.view, episodes.create, episodes.edit, episodes.delete, episodes.manage-persons, episodes.manage-clips, episodes.manage-publications, episodes.manage-comments |
-| Author | Manages content of podcast #{id} but cannot publish them. | view, manage-persons, episodes.view, episodes.create, episodes.edit, episodes.manage-persons, episodes.manage-clips                                                                                                                                                                         |
-| Guest  | General contributor of the podcast #{id}.                 | view, episodes.view                                                                                                                                                                                                                                                                         |
+| role      | description                                                                    | permissions                                                                                                                                                                                                                                                                                 |
+| --------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Rianaire  | Smachd gu lèir air air a’ phod-chraoladh #{id}.                                | \*                                                                                                                                                                                                                                                                                          |
+| Deasaiche | A’ stiùireadh susbaint is foillseachaidhean a’ phod-chraoladh #{id}.           | view, edit, manage-import, manage-persons, manage-platforms, manage-publications, manage-notifications, interact-as, episodes.view, episodes.create, episodes.edit, episodes.delete, episodes.manage-persons, episodes.manage-clips, episodes.manage-publications, episodes.manage-comments |
+| Ùghdar    | A’ stiùireadh susbaint a’ phod-chraolaidh #{id} ach gun chomas foillseachaidh. | view, manage-persons, episodes.view, episodes.create, episodes.edit, episodes.manage-persons, episodes.manage-clips                                                                                                                                                                         |
+| Aoigh     | Neach-cuideachaidh a’ phod-chraolaidh #{id}.                                   | view, episodes.view                                                                                                                                                                                                                                                                         |
 
 <!-- AUTH-PODCAST-ROLES-LIST:END -->
 
@@ -62,26 +62,26 @@ coupled with custom rules. Roles and permissions are defined at two levels:
 
 <!-- AUTH-PODCAST-PERMISSIONS-LIST:START - Do not remove or modify this section -->
 
-| permission                   | description                                                              |
-| ---------------------------- | ------------------------------------------------------------------------ |
-| view                         | Can view dashboard and analytics of podcast #{id}.                       |
-| edit                         | Can edit podcast #{id}.                                                  |
-| delete                       | Can delete podcast #{id}.                                                |
-| manage-import                | Can synchronize imported podcast #{id}.                                  |
-| manage-persons               | Can manage subscriptions of podcast #{id}.                               |
-| manage-subscriptions         | Can manage subscriptions of podcast #{id}.                               |
-| manage-contributors          | Can manage contributors of podcast #{id}.                                |
-| manage-platforms             | Can set/remove platform links of podcast #{id}.                          |
-| manage-publications          | Can publish podcast #{id}.                                               |
-| manage-notifications         | Can view and mark notifications as read for podcast #{id}.               |
-| interact-as                  | Can interact as the podcast #{id} to favourite, share or reply to posts. |
-| episodes.view                | Can view dashboard and analytics of podcast #{id}.                       |
-| episodes.create              | Can create episodes for podcast #{id}.                                   |
-| episodes.edit                | Can edit podcast #{id}.                                                  |
-| episodes.delete              | Can delete podcast #{id}.                                                |
-| episodes.manage-persons      | Can manage subscriptions of podcast #{id}.                               |
-| episodes.manage-clips        | Can manage video clips or soundbites of podcast #{id}.                   |
-| episodes.manage-publications | Can publish podcast #{id}.                                               |
-| episodes.manage-comments     | Can create/remove episode comments of podcast #{id}.                     |
+| permission                   | description                                                                                                                |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| view                         | Cead an deas-bhòrd agus anailiseachd a’ phod-chraolaidh #{id} a shealltainn.                                               |
+| edit                         | ’S urrainn dhaibh am pod-chraoladh #{id} a dheasachadh.                                                                    |
+| delete                       | ’S urrainn dhaibh am pod-chraoladh #{id} a sguabadh às.                                                                    |
+| manage-import                | ’S urrainn dhaibh am pod-chraoladh #{id} air ion-phortadh a shioncronachadh.                                               |
+| manage-persons               | ’S urrainn dhaibh na fo-sgrìobhaidhean air a’ phod-chraoladh #{id} a stiùireadh.                                           |
+| manage-subscriptions         | ’S urrainn dhaibh na fo-sgrìobhaidhean air a’ phod-chraoladh #{id} a stiùireadh.                                           |
+| manage-contributors          | ’S urrainn dhaibh an luchd-cuideachaidh aig a’ phod-chraoladh #{id} a stiùireadh.                                          |
+| manage-platforms             | ’S urrainn dhaibh ceanglaichean-ùrlair a’ phod-chraolaidh #{id} a shuidheachadh/a thoirt air falbh.                        |
+| manage-publications          | ’S urrainn dhaibh am pod-chraoladh #{id} fhoillseachadh.                                                                   |
+| manage-notifications         | Chì iad brathan a’ phod-chraolaidh #{id} agus ’s urrainn dhaibh comharra a chur gun deach an leughadh.                     |
+| interact-as                  | ’S urrainn dhaibh eadar-ghabhail ’na phod-chraoladh #{id} airson annsachdan, co-roinneadh is freagairtean do phostaichean. |
+| episodes.view                | Cead an deas-bhòrd agus anailiseachd a’ phod-chraolaidh #{id} a shealltainn.                                               |
+| episodes.create              | ’S urrainn dhaibh eapasodan a chruthachadh dhan phod-chraoladh #{id}.                                                      |
+| episodes.edit                | ’S urrainn dhaibh am pod-chraoladh #{id} a dheasachadh.                                                                    |
+| episodes.delete              | ’S urrainn dhaibh am pod-chraoladh #{id} a sguabadh às.                                                                    |
+| episodes.manage-persons      | ’S urrainn dhaibh na fo-sgrìobhaidhean air a’ phod-chraoladh #{id} a stiùireadh.                                           |
+| episodes.manage-clips        | ’S urrainn dhaibh cliopaichean video no blasan-fuaime aig a’ phod-chraoladh #{id} a stiùireadh.                            |
+| episodes.manage-publications | ’S urrainn dhaibh am pod-chraoladh #{id} fhoillseachadh.                                                                   |
+| episodes.manage-comments     | ’S urrainn dhaibh beachdan air eapasod a’ phod-chraolaidh #{id} a chruthachadh/a thoirt air falbh.                         |
 
 <!-- AUTH-PODCAST-PERMISSIONS-LIST:END -->

@@ -31,9 +31,9 @@ return [
     'publish_error' => 'Embannet eo bet ar rann dija.',
     'publish_edit_error' => 'Embannet eo bet ar rann dija.',
     'publish_cancel_error' => 'Embannet eo bet ar rann dija.',
-    'publish_date_edit_error' => 'Episode has not been published yet, you cannot edit its publication date.',
-    'publish_date_edit_future_error' => 'Episode\'s publication date can only be set to a past date! If you would like to reschedule it, unpublish it first.',
-    'publish_date_edit_success' => 'Episode\'s publication date has been updated successfully!',
+    'publish_date_edit_error' => 'N\'eo ket bet embannet ar podkast c\'hoazh, ne c\'hallit ket kemmañ an deiziad an embann.',
+    'publish_date_edit_future_error' => 'Rankout a ra deiziad embannadur ar rann bezañ en amzer dremenet! M\'ho peus c\'hoant da steuñviñ an embannadur en amzer da zont e rankit diembann ar rann da gentañ.',
+    'publish_date_edit_success' => 'Cheñchet eo bet deiziad embannadur ar rann gant berzh!',
     'unpublish_error' => 'N\'eo ket bet embannet ar rann.',
     'delete' => 'Dilemel',
     'go_to_page' => 'Gwelet ar bajenn',
@@ -64,7 +64,7 @@ return [
     ],
     'messages' => [
         'createSuccess' => 'Krouet eo bet ar rann gant berzh!',
-        'editSuccess' => 'Hizivaet eo bet ar rann gant berzh!',
+        'editSuccess' => 'Nevesaet eo bet ar rann gant berzh!',
         'publishSuccess' => '{publication_status, select,
             published {Embannet eo bet ar rann gant berzh !}
             scheduled {Raktreset eo bet embannadur ar rann gant berzh !}
@@ -83,13 +83,13 @@ return [
             audio {aodio}
             other {media}
         } ar rann.',
-        'deleteFileError' => 'Failed to delete {type, select,
-            transcript {transcript}
-            chapters {chapters}
-            image {cover}
-            audio {audio}
-            other {media}
-        } file {file_key}. You may manually remove it from your disk.',
+        'deleteFileError' => 'C\'hwitadenn war dilemel restr {type, select,
+            transcript {an treuzskrivadur}
+            chapters {ar chabistroù}
+            image {ar golo}
+            audio {an aodio}
+            other {ar media}
+        } {file_key}. Gallout a rit lemel kuit ar restr-mañ diouzh ar gantenn dre zorn.',
         'sameSlugError' => 'Bez ez eus eus ur rann gant ar berradur-mañ (slug) dija.',
     ],
     'form' => [
@@ -118,7 +118,7 @@ return [
             'bonus_hint' => 'Danvez ouzhpenn ar podkast (da skouer, titouroù diwar-benn kostezioù pe atersadennoù gant an aktourien·ezed), pe bruderezh kroaziet evit ur podkast all',
         ],
         'premium_title' => 'Premium',
-        'premium' => 'Episode must be accessible to premium subscribers only',
+        'premium' => 'Ne vo gwelet ar rann nemet gant koumananterien·ezed Premium',
         'parental_advisory' => [
             'label' => 'Kemenn evit ar gerent',
             'hint' => 'Hag ar rann-mañ a zo danvez ha ne zlefe ket gwelet gant bugale?',
@@ -141,9 +141,9 @@ return [
         'location_name' => 'Anv pe chomlec\'h al lec\'h',
         'location_name_hint' => 'Al lec\'h-mañ a c\'hell bezañ unan gwir pe unan faltaziet',
         'transcript' => 'Treuzskrivadur (istitloù)',
-        'transcript_hint' => 'Only .srt or .vtt are allowed.',
+        'transcript_hint' => 'Aotreet e vez nemet .srt pe .vtt.',
         'transcript_download' => 'Pellgargañ an treuzskrivadur',
-        'transcript_file' => 'Transcript file (.srt or .vtt)',
+        'transcript_file' => 'Restr an treuzskrivadur (.srt pe .vtt)',
         'transcript_remote_url' => 'URL a-bell evit restr an treuzskrivadur',
         'transcript_file_delete' => 'Dilemel restr an treuzskrivadur',
         'chapters' => 'Chabistroù',
@@ -199,7 +199,7 @@ return [
     ],
     'delete_form' => [
         'disclaimer' =>
-            "Gant ar rann e vo dilamet an holl restroù media, evezhiadennoù, tennadoù video ha son liammet outi.",
+            "Gant ar rann e vo dilamet an holl restroù media, evezhiadennoù, klipoù video ha son liammet outi.",
         'understand' => 'Komprennet eo, dilemel ar rann a fell din',
         'submit' => 'Dilemel',
     ],

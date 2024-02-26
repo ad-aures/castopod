@@ -9,20 +9,20 @@ declare(strict_types=1);
  */
 
 return [
-    'home' => 'Admin dashboard',
-    'welcome_message' => 'Welcome to the admin area!',
+    'home' => 'Taolenn-stur',
+    'welcome_message' => 'Degemer mat en daolenn-stur!',
     'podcasts' => [
-        'title' => 'Podcasts',
+        'title' => 'Podkastoù',
         'not_found' => 'Podkast embannet ebet',
-        'last_published' => 'Last published on {lastPublicationDate}',
+        'last_published' => 'Embannet da ziwezhañ d\'an/ar {lastPublicationDate}',
     ],
     'episodes' => [
-        'title' => 'Episodes',
+        'title' => 'Rannoù',
         'not_found' => 'Rann embannet ebet',
-        'last_published' => 'Last published on {lastPublicationDate}',
+        'last_published' => 'Embannet da ziwezhañ d\'an/ar {lastPublicationDate}',
     ],
     'storage' => [
-        'title' => 'Storage',
-        'subtitle' => '{totalUploaded} out of {totalStorage}',
+        'title' => 'Stokañ',
+        'subtitle' => '{totalUploaded} war {totalStorage}',
     ],
 ];

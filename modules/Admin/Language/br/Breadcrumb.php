@@ -52,8 +52,8 @@ return [
     'listening-time' => 'padelezh ar selaou',
     'time-periods' => 'mareoù ar selaou',
     'soundbites' => 'tennadoù son',
-    'video-clips' => 'tennadoù video',
+    'video-clips' => 'klipoù video',
     'embed' => 'lenner enkorfet',
     'notifications' => 'kemennoù',
-    'suspend' => 'astalañ',
+    'suspend' => 'ehanañ',
 ];

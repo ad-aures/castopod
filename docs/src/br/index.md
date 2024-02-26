@@ -2,7 +2,7 @@
 sidebarDepth: 2
 ---
 
-# Welcome 👋
+# Donemat 👋
 
 [![release-badge]][release]&nbsp;[![license-badge]][license]&nbsp;[![contributions-badge]][contributions]&nbsp;[![semantic-release-badge]][semantic-release]&nbsp;[![crowdin-badge]][crowdin]&nbsp;[![discord-badge]][discord]&nbsp;[![stars-badge]][stars]
 
@@ -14,7 +14,7 @@ Castopod is easy to install and was built on top of
 small footprint.
 
 <div class="flex items-center">
-  <a href="/getting-started/install" class="inline-flex items-center px-4 py-2 mx-auto font-semibold text-center text-white rounded-full shadow gap-x-1 bg-pine-500 hover:no-underline hover:bg-pine-600">Install<svg viewBox="0 0 24 24" width="1em" height="1em" class="text-xl text-pine-200"><path fill="currentColor" d="m16.172 11-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg></a>
+  <a href="/getting-started/install" class="inline-flex items-center px-4 py-2 mx-auto font-semibold text-center text-white rounded-full shadow gap-x-1 bg-pine-500 hover:no-underline hover:bg-pine-600">Staliañ<svg viewBox="0 0 24 24" width="1em" height="1em" class="text-xl text-pine-200"><path fill="currentColor" d="m16.172 11-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path></svg></a>
 </div>
 
 ## Features
@@ -55,7 +55,7 @@ small footprint.
   Brazilian Portuguese & Spanish… with
   [more to come](https://translate.castopod.org)!
 
-## Motivation
+## Perak Castopod ?
 
 The podcasting ecosystem is decentralized by nature: you can create your podcast
 as an RSS file, publish it on the web and have it shared everywhere online.
@@ -150,7 +150,7 @@ That being said, there are two main differences with other podcasting solutions:
 Love Castopod and would like to help? Take a look at the following documentation
 to get you&nbsp;started.
 
-### Code of conduct
+### Kod an dereadegezh
 
 Castopod has adopted a Code of Conduct that we expect project participants to
 adhere to. Please read the
@@ -252,7 +252,7 @@ This project follows the
 [all-contributors](https://github.com/all-contributors/all-contributors)
 specification. Contributions of any kind welcome!
 
-## Contact
+## Darempred
 
 You may reach us for help or ask any question you have on:
 
@@ -280,7 +280,7 @@ backers. If you'd like to help, please consider
   <a href="https://nlnet.nl/project/Castopod/" target="_blank" rel="noopener noreferrer"><img src="/images/sponsors/nlnet.svg" alt="NLnet Logo" class="h-16" /></a>
 </div>
 
-## License
+## Aotre
 
 [GNU Affero General Public License v3.0](https://choosealicense.com/licenses/agpl-3.0/)
 

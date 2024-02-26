@@ -25,6 +25,6 @@ return [
     ],
     'messages' => [
         'createSuccess' => 'Krouet eo bet ar bajenn "{pageTitle}" gant berzh!',
-        'editSuccess' => 'Hizivaet eo bet ar bajenn gant berzh!',
+        'editSuccess' => 'Nevesaet eo bet ar bajenn gant berzh!',
     ],
 ];

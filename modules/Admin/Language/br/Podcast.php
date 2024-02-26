@@ -13,7 +13,7 @@ return [
     'no_podcast' => 'N\'eo bet kavet podkast ebet!',
     'create' => 'Krouiñ ur podkast',
     'import' => 'Enporzhiañ ur podkast',
-    'all_imports' => 'Ar podkastoù enporzhet',
+    'all_imports' => 'Ar podkastoù enporzhiet',
     'new_episode' => 'Rann nevez',
     'view' => 'Gwelet ar podkast',
     'edit' => 'Kemmañ ar podkast',
@@ -29,8 +29,8 @@ return [
     'draft' => 'Brouilhed',
     'messages' => [
         'createSuccess' => 'Krouet eo bet ar podkast gant berzh!',
-        'editSuccess' => 'Hizivaet eo bet ar podkast gant berzh!',
-        'importSuccess' => 'Enporzhet eo bet ar podkast gant berzh!',
+        'editSuccess' => 'Nevesaet eo bet ar podkast gant berzh!',
+        'importSuccess' => 'Enporzhiet eo bet ar podkast gant berzh!',
         'deleteSuccess' => 'Dilamet eo bet ar podkast @{podcast_handle} gant berzh!',
         'deletePodcastMediaError' => 'C\'hwitadenn war dilemel {type, select,
             cover {golo}
@@ -45,7 +45,7 @@ return [
             other {media}
         } ar rann {episode_slug}.',
         'deletePodcastMediaFolderError' => 'C\'hwitadenn war dilemel teuliad ar mediaioù {folder_path}. Gallout a rit lemel an teuliad-mañ diouzh ar gantenn dre zorn.',
-        'podcastFeedUpdateSuccess' => 'Hizivadenn: {number_of_new_episodes, plural,
+        'podcastFeedUpdateSuccess' => 'Nevesadenn: {number_of_new_episodes, plural,
             one {# rann}
             two {# rann}
             few {# rann}
@@ -77,17 +77,17 @@ return [
             'episodic' => 'Bep ur mare',
             'episodic_hint' => 'M\'eo ar rannoù da vezañ selaouet hep urzh resis. Ar rannoù nevesoc’h a vo kinniget da gentañ.',
             'serial' => 'Heuliad',
-            'serial_hint' => 'If episodes are intended to be consumed in sequential order. Episodes will be presented in numeric order.',
+            'serial_hint' => 'M\'eo ar rannoù da vezañ selaouet gant un urzh resis. Ar rannoù a vo kinniget hervez urzh an niverennoù.',
         ],
         'medium' => [
             'label' => 'Medium',
-            'hint' => 'Medium as represented by podcast:medium tag in RSS. Changing this may change how players present your feed.',
-            'podcast' => 'Podcast',
-            'podcast_hint' => 'Describes a feed for a podcast show.',
-            'music' => 'Music',
-            'music_hint' => 'A feed of music organized into an "album" with each item a song within the album.',
-            'audiobook' => 'Audiobook',
-            'audiobook_hint' => 'Specific types of audio with one item per feed, or where items represent chapters within the book.',
+            'hint' => 'Ar medium evel ma vez kinniget gant ar valizenn RSS podcast:medium. Cheñch an dra-se a c\'hell cheñch an doare ma vo kinniget ho kwazh gant al lennerien.',
+            'podcast' => 'Podkast',
+            'podcast_hint' => 'Evit deskrivañ gwazh ur podkast.',
+            'music' => 'Sonerezh',
+            'music_hint' => 'Ur wazh gant sonerezh aozet e-barzh un "album". Pep item zo un ton en album.',
+            'audiobook' => 'Levr klevet',
+            'audiobook_hint' => 'Ur seurt aodio dibar gant un item dre wazh, peotramant pa glot an itemoù gant chabistroù al levr.',
         ],
         'description' => 'Deskrivadur',
         'classification_section_title' => 'Rummatadur',
@@ -112,8 +112,8 @@ return [
         'owner_email' => 'Chomlec\'h postel ar perc\'henn',
         'owner_email_hint' =>
             'Implijet e vo gant an darn vrasañ eus ar savennoù evit gwiriañ perc\'hentiezh ar podkast. War ar wazh RSS publik e vo.',
-        'is_owner_email_removed_from_feed' => 'Remove the owner email from the public RSS feed',
-        'is_owner_email_removed_from_feed_hint' => 'You may need to temporarily unhide the email so that a directory can verify your podcast ownership.',
+        'is_owner_email_removed_from_feed' => 'Lemel chomlec\'h postel ar perc\'henn diouzh ar wazh RSS publik',
+        'is_owner_email_removed_from_feed_hint' => 'Rankout a rafec\'h lakaat ar chomlec\'h war wel adarre, evit ur mare, evit ma vefe gouest ur meneger da wiriañ oc\'h ar perc\'henn.',
         'publisher' => 'Embanner·ez',
         'publisher_hint' =>
             'Ar strollad kiriek eus sevel ar podkast. Alies eo embregerezh pe rouedad ar podkast. A-wechoù e vez anvet ar vaezienn-mañ "Aozer·ez".',
@@ -129,10 +129,10 @@ return [
         'premium_by_default' => 'Ar rannoù a zo evit ar re bremium dre ziouer',
         'premium_by_default_hint' => 'Rannoù ar podkast a vo merket Premium dre ziouer. Gallout a rit lakaat rannoù zo evel publik.',
         'op3' => 'Open Podcast Prefix Project (OP3)',
-        'op3_link' => 'Visit your OP3 dashboard (external link)',
+        'op3_link' => 'Mont da welet ho taolenn-stur OP3 (liamm diavaez)',
         'op3_hint' => 'Value your analytics data with OP3, an open-source and trusted third party analytics service. Share, validate and compare your analytics data with the open podcasting ecosystem.',
-        'op3_enable' => 'Enable OP3 analytics service',
-        'op3_enable_hint' => 'For security reasons, premium episodes\' analytics data will not be shared with OP3.',
+        'op3_enable' => 'Gweredekaat ar servij dielfennañ OP3',
+        'op3_enable_hint' => 'Evit abegoù surentez ne vo ket rannet roadennoù ar rannoù Premium gant OP3.',
         'payment_pointer' => 'Chomlec\'h paeañ (Payment Poienter) evit Web Monetization',
         'payment_pointer_hint' =>
             'Ar chomlec\'h ma vo dastumet an arc\'hant ganeoc\'h a-drugarez da Web Monetization',
@@ -268,42 +268,42 @@ return [
         'volleyball' => 'Volleyball',
         'wilderness' => 'Natur',
         'wrestling' => 'Gouren',
-        'after_shows' => 'After Shows',
-        'film_history' => 'Film History',
-        'film_interviews' => 'Film Interviews',
-        'film_reviews' => 'Film Reviews',
-        'tv_reviews' => 'TV Reviews',
+        'after_shows' => 'Goude abadenn',
+        'film_history' => 'Istor ar sinema',
+        'film_interviews' => 'Atersadennoù er sinema',
+        'film_reviews' => 'Barnadennoù filmoù',
+        'tv_reviews' => 'Barnadennoù tele',
     ],
     'publish_form' => [
-        'back_to_podcast_dashboard' => 'Back to podcast dashboard',
-        'post' => 'Your announcement post',
+        'back_to_podcast_dashboard' => 'Distreiñ da daolenn-stur ar podkast',
+        'post' => 'Ho kemennadenn vrudañ',
         'post_hint' =>
-            "Write a message to announce the publication of your podcast. The message will be featured in your podcast's homepage.",
-        'message_placeholder' => 'Write your message…',
+            "Skrivit ur gemennadenn evit kemenn embannadur ho podkast. War bajenn degemer ho podkast e vo diskouezet ar gemennadenn.",
+        'message_placeholder' => 'Skrivit ho kemennadenn…',
         'submit' => 'Embann',
         'publication_date' => 'Deiziad an embann',
         'publication_method' => [
             'now' => 'Bremañ',
-            'schedule' => 'Schedule',
+            'schedule' => 'Steuñviñ',
         ],
-        'scheduled_publication_date' => 'Scheduled publication date',
+        'scheduled_publication_date' => 'Deiziad embannadur steuñvet',
         'scheduled_publication_date_hint' =>
-            'You can schedule the podcast release by setting a future publication date. This field must be formatted as YYYY-MM-DD HH:mm',
-        'submit_edit' => 'Edit publication',
+            'Gallout a rit steuñviñ embannadur ar podkast en ur choaz un deiziad evit an embannadur. Dleout a ra ar vaezienn bezañ er furmad YYYY-MM-DD HH:mm',
+        'submit_edit' => 'Kemmañ an embannadur',
         'cancel_publication' => 'Nullañ an embann',
-        'message_warning' => 'You did not write a message for your announcement post!',
-        'message_warning_hint' => 'Having a message increases social engagement, resulting in a better visibility for your podcast.',
-        'message_warning_submit' => 'Publish anyway',
+        'message_warning' => 'N\'ho peus ket skrivet ur gemennadenn evit brudañ ho rann !',
+        'message_warning_hint' => 'Ouzhpennañ ur gemennadenn a lakay muioc\'h a dud er jeu, ha diwar se e vo gwelet muioc\'h ho podkast.',
+        'message_warning_submit' => 'Embann memestra',
     ],
     'publication_status_banner' => [
-        'draft_mode' => 'draft mode',
-        'not_published' => 'This podcast is not yet published.',
-        'scheduled' => 'This podcast is scheduled for publication on {publication_date}.',
+        'draft_mode' => 'mod brouilhed',
+        'not_published' => 'N\'eo ket embannet ar podkast-mañ c\'hoazh.',
+        'scheduled' => 'Ar podkast-mañ a vo embannet d\'an/d\'ar {publication_date}.',
     ],
     'delete_form' => [
         'disclaimer' =>
-            "Deleting the podcast will delete all episodes, media files, posts and analytics associated with it. This action is irreversible, you will not be able to retrieve them afterwards.",
-        'understand' => 'I understand, I want the podcast to be permanently deleted',
+            "Pa vo dilamet ar podkast e vo dilamet an holl rannoù, restroù media, kemennadennoù ha stadegoù liammet outañ. Ur wech dilamet, ne c'hell bezañ adtapet an traoù.",
+        'understand' => 'Kompren a ran, c\'hoant am eus da zilemel ar podkast da vat',
         'submit' => 'Dilemel',
     ],
     'by' => 'Gant {publisher}',
@@ -314,17 +314,18 @@ return [
     'no_episode' => 'N\'eus bet kavet rann ebet !',
     'follow' => 'Heuliañ',
     'followers' => '{numberOfFollowers, plural,
-        one {# follower}
-        other {# followers}
+        one {# heulier·ez}
+        two {# heulier·ez}
+        other {# heulier·ez}
     }',
     'posts' => '{numberOfPosts, plural,
         one {# post}
         other {# posts}
     }',
-    'activity' => 'Activity',
+    'activity' => 'Oberiantiz',
     'episodes' => 'Rannoù',
-    'sponsor' => 'Sponsor',
-    'funding_links' => 'Funding links for {podcastTitle}',
+    'sponsor' => 'Harpit ac\'hanomp',
+    'funding_links' => 'Ereoù evit arc\'hantaouiñ {podcastTitle}',
     'find_on' => 'Kavit {podcastTitle} war',
     'listen_on' => 'Selaouit war',
 ];

@@ -13,7 +13,7 @@ coupled with custom rules. Roles and permissions are defined at two levels:
 
 ## 1. Instance wide roles and permissions
 
-### Instance roles
+### Rolloù an istañs
 
 <!-- AUTH-INSTANCE-ROLES-LIST:START - Do not remove or modify this section -->
 
@@ -21,11 +21,11 @@ coupled with custom rules. Roles and permissions are defined at two levels:
 | ----------- | ----------------------------------- | ------------------------------------------------------------------------------------------ |
 | Super admin | Has complete control over Castopod. | admin.\*, podcasts.\*, users.manage, persons.manage, pages.manage, fediverse.manage-blocks |
 | Manager     | Manages Castopod's content.         | podcasts.create, podcasts.import, persons.manage, pages.manage                             |
-| Podcaster   | General users of Castopod.          | admin.access                                                                               |
+| Podkaster   | General users of Castopod.          | admin.access                                                                               |
 
 <!-- AUTH-INSTANCE-ROLES-LIST:END -->
 
-### Instance permissions
+### Aotreoù war an istañs
 
 <!-- AUTH-INSTANCE-PERMISSIONS-LIST:START - Do not remove or modify this section -->
 
@@ -38,7 +38,7 @@ coupled with custom rules. Roles and permissions are defined at two levels:
 | pages.manage            | Can manage pages.                                                  |
 | podcasts.view           | Can view all podcasts.                                             |
 | podcasts.create         | Can create new podcasts.                                           |
-| podcasts.import         | Can import podcasts.                                               |
+| podcasts.import         | Gallout a ra enporzhiañ podkastoù.                                 |
 | fediverse.manage-blocks | Can block fediverse actors/domains from interacting with Castopod. |
 
 <!-- AUTH-INSTANCE-PERMISSIONS-LIST:END -->
@@ -49,12 +49,12 @@ coupled with custom rules. Roles and permissions are defined at two levels:
 
 <!-- AUTH-PODCAST-ROLES-LIST:START - Do not remove or modify this section -->
 
-| role   | description                                               | permissions                                                                                                                                                                                                                                                                                 |
-| ------ | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Admin  | Has complete control of podcast #{id}.                    | \*                                                                                                                                                                                                                                                                                          |
-| Editor | Manages content and publications of podcast #{id}.        | view, edit, manage-import, manage-persons, manage-platforms, manage-publications, manage-notifications, interact-as, episodes.view, episodes.create, episodes.edit, episodes.delete, episodes.manage-persons, episodes.manage-clips, episodes.manage-publications, episodes.manage-comments |
-| Author | Manages content of podcast #{id} but cannot publish them. | view, manage-persons, episodes.view, episodes.create, episodes.edit, episodes.manage-persons, episodes.manage-clips                                                                                                                                                                         |
-| Guest  | General contributor of the podcast #{id}.                 | view, episodes.view                                                                                                                                                                                                                                                                         |
+| role       | description                                               | permissions                                                                                                                                                                                                                                                                                 |
+| ---------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Merour·ez  | Has complete control of podcast #{id}.                    | \*                                                                                                                                                                                                                                                                                          |
+| Embanner   | Manages content and publications of podcast #{id}.        | view, edit, manage-import, manage-persons, manage-platforms, manage-publications, manage-notifications, interact-as, episodes.view, episodes.create, episodes.edit, episodes.delete, episodes.manage-persons, episodes.manage-clips, episodes.manage-publications, episodes.manage-comments |
+| Aozer·ez   | Manages content of podcast #{id} but cannot publish them. | view, manage-persons, episodes.view, episodes.create, episodes.edit, episodes.manage-persons, episodes.manage-clips                                                                                                                                                                         |
+| Kouviad·ez | General contributor of the podcast #{id}.                 | view, episodes.view                                                                                                                                                                                                                                                                         |
 
 <!-- AUTH-PODCAST-ROLES-LIST:END -->
 

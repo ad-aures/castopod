@@ -18,7 +18,7 @@ return [
     'delete' => 'Dilemel an emeller·ez',
     'messages' => [
         'createSuccess' => 'Krouet eo bet an emeller·ez gant berzh!',
-        'editSuccess' => 'Hizivaet eo bet an emeller·ez gant berzh!',
+        'editSuccess' => 'Nevesaet eo bet an emeller·ez gant berzh!',
         'deleteSuccess' => 'Tennet eo bet an emeller·ez!',
     ],
     'form' => [

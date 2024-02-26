@@ -62,7 +62,7 @@ return [
         89 {# c\'hemennadenn}
     }',
     'links' => 'Liammoù',
-    'activity' => 'Oberiantiz',
+    'activity' => 'Obererezh',
     'episodes' => 'Rannoù',
     'episodes_title' => 'Rannoù {podcastTitle}',
     'about' => 'A-zivout',

@@ -9,11 +9,11 @@ declare(strict_types=1);
  */
 
 return [
-    'title' => 'Notifications',
-    'reply' => '{actor_username} replied to your post',
-    'favourite' => '{actor_username} favourited your post',
-    'reblog' => '{actor_username} shared your post',
-    'follow' => '{actor_username} started following you',
-    'no_notifications' => 'No notifications',
-    'mark_all_as_read' => 'Mark all as read',
+    'title' => 'Kemennoù',
+    'reply' => 'Respontet eo bet d\'ho kemennadenn gant {actor_username}',
+    'favourite' => 'Ouzhpennet eo bet ho kemennadenn d\'h·e re garetañ gant {actor_username}',
+    'reblog' => 'Rannet eo bet ho kemennadenn gant {actor_username}',
+    'follow' => 'Krog eo {actor_username} da heuliañ ac\'hanoc\'h',
+    'no_notifications' => 'Kemenn ebet',
+    'mark_all_as_read' => 'Merkañ pep tra evel lennet',
 ];

@@ -17,11 +17,11 @@ med nokre eigne reglar. Roller og løyve er definerte på to nivå:
 
 <!-- AUTH-INSTANCE-ROLES-LIST:START - Do not remove or modify this section -->
 
-| rolle       | skildring                        | løyve                                                                                      |
+| role        | description                      | permissions                                                                                |
 | ----------- | -------------------------------- | ------------------------------------------------------------------------------------------ |
 | Superstyrar | Har full kontroll over Castopod. | admin.\*, podcasts.\*, users.manage, persons.manage, pages.manage, fediverse.manage-blocks |
 | Leiar       | Styrer innhaldet på Castopod.    | podcasts.create, podcasts.import, persons.manage, pages.manage                             |
-| Podkastar   | Vanlege Castopod-brukarar.       | admin.tilgang                                                                              |
+| Podkastar   | Vanlege Castopod-brukarar.       | admin.access                                                                               |
 
 <!-- AUTH-INSTANCE-ROLES-LIST:END -->
 
@@ -29,7 +29,7 @@ med nokre eigne reglar. Roller og løyve er definerte på to nivå:
 
 <!-- AUTH-INSTANCE-PERMISSIONS-LIST:START - Do not remove or modify this section -->
 
-| løyve                   | skildring                                                              |
+| permission              | description                                                            |
 | ----------------------- | ---------------------------------------------------------------------- |
 | admin.access            | Kan bruka styringspanelet for Castopod.                                |
 | admin.settings          | Kan få tilgang til innstillingane for Castopod.                        |
@@ -49,7 +49,7 @@ med nokre eigne reglar. Roller og løyve er definerte på to nivå:
 
 <!-- AUTH-PODCAST-ROLES-LIST:START - Do not remove or modify this section -->
 
-| rolle         | skildring                                                        | løyve                                                                                                                                                                                                                                                                                       |
+| role          | description                                                      | permissions                                                                                                                                                                                                                                                                                 |
 | ------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Administrator | Har full kontroll over podkasten #{id}.                          | \*                                                                                                                                                                                                                                                                                          |
 | Redaktør      | Styrer innhald og publisering for podkasten #{id}.               | view, edit, manage-import, manage-persons, manage-platforms, manage-publications, manage-notifications, interact-as, episodes.view, episodes.create, episodes.edit, episodes.delete, episodes.manage-persons, episodes.manage-clips, episodes.manage-publications, episodes.manage-comments |
@@ -62,7 +62,7 @@ med nokre eigne reglar. Roller og løyve er definerte på to nivå:
 
 <!-- AUTH-PODCAST-PERMISSIONS-LIST:START - Do not remove or modify this section -->
 
-| løyve                        | description                                                        |
+| permission                   | description                                                        |
 | ---------------------------- | ------------------------------------------------------------------ |
 | view                         | Kan sjå styringspanelet og analysedata for podkasten #{id}.        |
 | edit                         | Kan redigera podkasten #{id}.                                      |

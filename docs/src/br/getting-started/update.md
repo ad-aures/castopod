@@ -31,7 +31,7 @@ improvements ⚡.
    - Note that you can also download the latest package from
      [castopod.org](https://castopod.org/)
 
-3. On your server:
+3. War ho servijer:
 
    - Remove all files except `.env` and `public/media`
    - Copy the new files from the downloaded package into your server
@@ -66,7 +66,7 @@ Releases may come with additional update instructions (see
 
 ## Fully Automated updates
 
-> Coming soon... 👀
+> A-benn nebeut… 👀
 
 ## Frequently asked questions (FAQ)
 
@@ -80,7 +80,7 @@ file.
 
 ### [I haven't updated my instance in a long time… What should I do?](#i-havent-updated-my-instance-in-a-long-time-what-should-i-do)
 
-No problem! Just get the latest release as described above. Only, when going
+Kudenn ebet! Just get the latest release as described above. Only, when going
 through the release instructions (4), perform them sequentially, from the oldest
 to the newest.
 
