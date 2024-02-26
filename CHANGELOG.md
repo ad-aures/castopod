@@ -1,3 +1,11 @@
+## [1.10.4](https://code.castopod.org/adaures/castopod/compare/v1.10.3...v1.10.4) (2/26/2024)
+
+### Bug Fixes
+
+- display chapters in episode preview page
+  ([797516a](https://code.castopod.org/adaures/castopod/commit/797516a2ec7d88704412a5cca50421e8eef38eec)),
+  closes [#445](https://code.castopod.org/adaures/castopod/issues/445)
+
 ## [1.10.3](https://code.castopod.org/adaures/castopod/compare/v1.10.2...v1.10.3) (2/21/2024)
 
 ### Bug Fixes
