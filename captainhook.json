@@ -18,7 +18,7 @@
     "enabled": true,
     "actions": [
       {
-        "action": "composer test -- --no-coverage",
+        "action": "composer test",
         "options": [],
         "conditions": []
       },

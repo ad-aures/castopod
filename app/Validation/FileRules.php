@@ -95,4 +95,43 @@ class FileRules extends ValidationFileRules
     }
 
     //--------------------------------------------------------------------
+
+    /**
+     * Checks that an uploaded json file's content is valid
+     */
+    public function is_json(string $blank = null, string $params = ''): bool
+    {
+        // Grab the file name off the top of the $params
+        // after we split it.
+        $params = explode(',', $params);
+        $name = array_shift($params);
+
+        if (! ($files = $this->request->getFileMultiple($name))) {
+            $files = [$this->request->getFile($name)];
+        }
+
+        foreach ($files as $file) {
+            if ($file === null) {
+                return false;
+            }
+
+            if ($file->getError() === UPLOAD_ERR_NO_FILE) {
+                return true;
+            }
+
+            $content = file_get_contents($file->getTempName());
+
+            if ($content === false) {
+                return false;
+            }
+
+            json_decode($content);
+
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

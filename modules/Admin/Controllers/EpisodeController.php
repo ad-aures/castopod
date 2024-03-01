@@ -161,8 +161,8 @@ class EpisodeController extends BaseController
             'slug'            => 'required|max_length[128]',
             'audio_file'      => 'uploaded[audio_file]|ext_in[audio_file,mp3,m4a]',
             'cover'           => 'is_image[cover]|ext_in[cover,jpg,jpeg,png]|min_dims[cover,1400,1400]|is_image_ratio[cover,1,1]',
-            'transcript_file' => 'ext_in[transcript,srt]|permit_empty',
-            'chapters_file'   => 'ext_in[chapters,json]|permit_empty',
+            'transcript_file' => 'ext_in[transcript_file,srt,vtt]',
+            'chapters_file'   => 'ext_in[chapters_file,json]|is_json[chapters_file]',
         ];
 
         if ($this->podcast->type === 'serial' && $this->request->getPost('type') === 'full') {
@@ -297,10 +297,10 @@ class EpisodeController extends BaseController
         $rules = [
             'title'           => 'required',
             'slug'            => 'required|max_length[128]',
-            'audio_file'      => 'uploaded[audio_file]|ext_in[audio_file,mp3,m4a]|permit_empty',
+            'audio_file'      => 'ext_in[audio_file,mp3,m4a]',
             'cover'           => 'is_image[cover]|ext_in[cover,jpg,jpeg,png]|min_dims[cover,1400,1400]|is_image_ratio[cover,1,1]',
-            'transcript_file' => 'ext_in[transcript_file,txt,html,srt,json]|permit_empty',
-            'chapters_file'   => 'ext_in[chapters_file,json]|permit_empty',
+            'transcript_file' => 'ext_in[transcript_file,srt,vtt]',
+            'chapters_file'   => 'ext_in[chapters_file,json]|is_json[chapters_file]',
         ];
 
         if ($this->podcast->type === 'serial' && $this->request->getPost('type') === 'full') {

@@ -218,7 +218,6 @@ class EpisodeModel extends UuidModel
         /** @var LazyUuidFromString $uuid */
         $uuid = $this->uuid->{$this->uuidVersion}();
 
-        // @phpstan-ignore-next-line
         if (! $this->update($episodeId, [
             'preview_id' => $uuid,
         ])) {
