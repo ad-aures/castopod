@@ -162,9 +162,6 @@ documentation:
   trigger:
     include: docs/.gitlab-ci.yml
     strategy: depend
-  only:
-    changes:
-      - docs/**/*
 
 docker:
   stage: build

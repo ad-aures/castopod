@@ -34,7 +34,7 @@ to help you kickstart your contribution.
 
    ```ini
    CI_ENVIRONMENT="development"
-   # If set to development, you must run `npm run dev` to start the static assets server
+   # If set to development, you must run `pnpm run dev` to start the static assets server
    vite.environment="development"
 
    # By default, this is set to true in the app config.
@@ -106,7 +106,7 @@ required services will be loaded automagically! 🪄
 
    ```bash
    # run Vite dev server
-   npm run dev
+   pnpm run dev
    ```
 
    If there is any issue with the php server not running, you can restart them
@@ -129,8 +129,8 @@ required services will be loaded automagically! 🪄
    # Composer is installed
    composer -V
 
-   # npm is installed
-   npm -v
+   # pnpm is installed
+   pnpm -v
 
    # git is installed
    git version
@@ -148,7 +148,12 @@ more insights.
 
 To see your changes, go to:
 
-- `http://localhost:8080/` for the Castopod app
+- `http://localhost:8080/` for the Castopod website
+- `http://localhost:8080/cp-admin` for the Castopod admin:
+
+  - email: **admin@castopod.local**
+  - password: **castopod**
+
 - `http://localhost:8888/` for the phpmyadmin interface:
 
   - username: **castopod**
@@ -197,8 +202,8 @@ You do not wish to use the VSCode devcontainer? No problem!
    # use Composer
    docker-compose run --rm app composer -V
 
-   # use npm
-   docker-compose run --rm app npm -v
+   # use pnpm
+   docker-compose run --rm app pnpm -v
 
    # use git
    docker-compose run --rm app git version
@@ -226,18 +231,18 @@ You do not wish to use the VSCode devcontainer? No problem!
 
    :::
 
-2. Install javascript dependencies with [npm](https://www.npmjs.com/)
+2. Install javascript dependencies with [pnpm](https://pnpm.io/)
 
    ```bash
-   npm install
+   pnpm install
    ```
 
    ::: info Note
 
-   The javascript dependencies aren't included in the repository. Npm will check
-   the `package.json` and `package.lock` files to download the packages with the
-   right versions. The dependencies will live under the `node_module` folder.
-   For more info, check out the [NPM documentation](https://docs.npmjs.com/).
+   The javascript dependencies aren't included in the repository. Pnpm will
+   check the `package.json` and `pnpm-lock.yaml` files to download the packages
+   with the right versions. The dependencies will live under the `node_module`
+   folder. For more info, check out the [PNPM documentation](https://pnpm.io/).
 
    :::
 
@@ -245,11 +250,11 @@ You do not wish to use the VSCode devcontainer? No problem!
 
    ```bash
    # build all static assets at once
-   npm run build:static
+   pnpm run build:static
 
    # build specific assets
-   npm run build:icons
-   npm run build:svg
+   pnpm run build:icons
+   pnpm run build:svg
    ```
 
    ::: info Note
@@ -286,7 +291,7 @@ You may skip this section if you go through the install wizard (go to
 
    ```bash
    # Populates all required data
-   php spark db:seed AppSeeder
+   php spark db:seed DevSeeder
    ```
 
    You may choose to add data separately:
@@ -301,17 +306,11 @@ You may skip this section if you go through the install wizard (go to
    # Populates all podcasts platforms
    php spark db:seed PlatformSeeder
 
-   # Populates all Authentication data (roles definition…)
-   php spark db:seed AuthSeeder
+   # Adds a superadmin with [admin@castopod.local / castopod] credentials
+   php spark db:seed PlatformSeeder
    ```
 
 3. (optionnal) Populate the database with test data:
-
-   - Populate test data (login: admin / password: AGUehL3P)
-
-   ```bash
-   php spark db:seed TestSeeder
-   ```
 
    - Populate with fake podcast analytics:
 
@@ -324,11 +323,6 @@ You may skip this section if you go through the install wizard (go to
    ```bash
    php spark db:seed FakeWebsiteAnalyticsSeeder
    ```
-
-   TestSeeder will add an active superadmin user with the following credentials:
-
-   - username: **admin**
-   - password: **AGUehL3P**
 
 ### Useful docker / docker-compose commands
 
@@ -385,13 +379,6 @@ Check [docker](https://docs.docker.com/engine/reference/commandline/docker/) and
 more insights.
 
 ## Known issues
-
-### Allocation failed - JavaScript heap out of memory
-
-This happens when running `npm install`.
-
-👉 By default, docker might not have access to enough RAM. Allocate more memory
-and run `npm install` again.
 
 ### (Linux) Files created inside container are attributed to root locally
 

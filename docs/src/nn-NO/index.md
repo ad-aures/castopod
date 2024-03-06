@@ -164,7 +164,7 @@ så du veit kva slags åtferd me godtek og&nbsp;ikkje.
 
 ### Korleis bidra
 
-Les gjerne [korleis du bidreg](./contributing/guidelines.md) for å læra korleis
+Les gjerne [korleis du bidreg](../contributing/guidelines.md) for å læra korleis
 me utviklar Castopod, korleis me føreslær rettingar og forbetringar, og korleis
 me byggjer og prøver ut endringar i programmet.
 

@@ -160,7 +160,7 @@ so that you can understand what actions will and will not be&nbsp;tolerated.
 
 ### Guia de contribuição
 
-Read our [contributing guide](./contributing/guidelines.md) to learn about our
+Read our [contributing guide](../contributing/guidelines.md) to learn about our
 development process, how to propose bugfixes and improvements, and how to build
 and test your changes to Castopod.
 

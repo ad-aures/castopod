@@ -189,7 +189,7 @@ class FakeSinglePodcastApiSeeder extends Seeder
     public function run(): void
     {
         $this->call(AppSeeder::class);
-        $this->call(TestSeeder::class);
+        $this->call(DevSeeder::class);
         $this->db->table('media')
             ->insert(self::cover());
         $this->db->table('media')
