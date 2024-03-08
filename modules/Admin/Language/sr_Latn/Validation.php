@@ -13,4 +13,5 @@ return [
         '{field} ili nije slika ili nije dovoljne dužine/visine.',
     'is_image_ratio' =>
         '{field} ili nije slike ili nije u pravom odnosu veličina.',
+    'is_json' => '{field} contains invalid JSON.',
 ];

@@ -23,7 +23,7 @@ return [
     'persons' => 'Emellerien·ezed',
     'person-list' => 'An holl emellerien·ezed',
     'person-create' => 'Krouiñ un emeller·ez',
-    'fediverse' => 'Kevrebed',
+    'fediverse' => 'Fediverse',
     'fediverse-blocked-actors' => 'Implijerien·ezed stanket',
     'fediverse-blocked-domains' => 'Domanioù stanket',
     'users' => 'Implijerien·ezed',

@@ -124,22 +124,22 @@ manuelt basert på `.env.example`-fila.
 
 :::
 
-### Using CLI
+### Med kommandolina
 
-1. Create a `.env` file in the package root based on the `.env.example` file.
-2. Initialize the database using:
+1. Lag ei `.env`-fil i rotmappa til pakka, basert på `.env.example`-fila.
+2. Gjer klar databasen ved hjelp av:
 
    ```sh
    php spark install:init-database
    ```
 
-3. Create the superadmin user using:
+3. Lag superadmin-brukaren med:
 
    ```sh
    php spark install:create-superadmin
    ```
 
-4. Head on to your admin gateway to start podcasting!
+4. Gå til styringspanelet for å byrja med podkasting!
 
 ### Epost/SMTP-oppsett
 

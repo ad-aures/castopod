@@ -13,12 +13,12 @@ return [
     'welcome_message' => 'Welkom bij de beheeromgeving!',
     'podcasts' => [
         'title' => 'Podcasts',
-        'not_found' => 'No published podcast',
+        'not_found' => 'Geen gepubliceerde podcast',
         'last_published' => 'Laatst gepubliceerd op {lastPublicationDate}',
     ],
     'episodes' => [
         'title' => 'Afleveringen',
-        'not_found' => 'No published episode',
+        'not_found' => 'Geen gepubliceerde aflevering',
         'last_published' => 'Laatst gepubliceerd op {lastPublicationDate}',
     ],
     'storage' => [

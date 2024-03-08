@@ -34,7 +34,7 @@ return [
     'contributors' => 'Perzhidi, perzhiadezed',
     'contributor-list' => 'An holl berzhidi ha perzhiadezed',
     'contributor-add' => 'Ouzhpennañ ur perzhiad pe ur berzhiadez',
-    'broadcast' => 'Broadcast',
+    'broadcast' => 'Skignañ',
     'platforms-podcasting' => 'Arloadoù podkastoù',
     'platforms-social' => 'Rouedadoù sokial',
     'platforms-funding' => 'Liammoù arc\'hantaouiñ',

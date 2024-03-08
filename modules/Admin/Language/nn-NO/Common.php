@@ -40,7 +40,7 @@ return [
         ],
         'upload_file' => 'Last opp ei fil',
         'remote_url' => 'Ekstern URL-adresse',
-        'save' => 'Save',
+        'save' => 'Lagre',
     ],
     'play_episode_button' => [
         'play' => 'Spel',

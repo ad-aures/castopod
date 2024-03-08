@@ -12,7 +12,7 @@ return [
     'messages' => [
         'actorNotFound' => 'Het account werd niet gevonden!',
         'blockActorSuccess' => '{actor} is geblokkeerd!',
-        'unblockActorSuccess' => 'Actor has been unblocked!',
+        'unblockActorSuccess' => 'Acteur is gedeblokkeerd!',
         'blockDomainSuccess' => '{domain} is geblokkeerd!',
         'unblockDomainSuccess' => '{domain} is gedeblokkeerd!',
     ],

@@ -31,13 +31,13 @@ return [
     'delete_form' => [
         'title' => 'Dilemel {contributor}',
         'disclaimer' =>
-            'You are about to remove {contributor} from contributors. They will not be able to access "{podcastTitle}" anymore.',
-        'understand' => 'I understand, I want to remove {contributor} from "{podcastTitle}"',
+            'Emaoc\'h o vont da lemel {contributor} eus ar berzhidi/perzhiadezed. Ne c\'hallo ket gwelet "{podcastTitle}" ken.',
+        'understand' => 'Komprenet em eus. Fellout a ra din lemel {contributor} eus "{podcastTitle}"',
         'submit' => 'Lemel',
     ],
     'messages' => [
-        'editSuccess' => 'Role successfully changed!',
-        'editOwnerError' => "You can't edit the podcast owner!",
+        'editSuccess' => 'Cheñchet eo bet ar roll gant berzh!',
+        'editOwnerError' => "Ne c'hellit ket kemmañ perc'henn·ez ar podkast!",
         'removeOwnerError' => "Ne c'hellit ket lemel perc'henn ar podkast!",
         'removeSuccess' =>
             'Lamet ho peus {username} diouzh {podcastTitle} gant berzh',

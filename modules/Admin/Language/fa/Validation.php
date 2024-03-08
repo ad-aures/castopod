@@ -13,4 +13,5 @@ return [
         '{field} تصویر نبوده یا پنها و بلندایش کافی نیست.',
     'is_image_ratio' =>
         '{field} تصویر نبوده یا ابعادش درست نیست.',
+    'is_json' => '{field} contains invalid JSON.',
 ];

@@ -27,9 +27,9 @@ return [
             'Avatar must be squared and at least 400px wide and tall.',
         'full_name' => 'Volledige naam',
         'full_name_hint' => 'Dit is de volledige naam of alias van de persoon.',
-        'unique_name' => 'Unique name',
-        'unique_name_hint' => 'Used for URLs',
-        'information_url' => 'Information URL',
+        'unique_name' => 'Unieke naam',
+        'unique_name_hint' => 'Gebruikt voor URLs',
+        'information_url' => 'Informatie URL',
         'information_url_hint' =>
             'Url to a relevant resource of information about the person, such as a homepage or third-party profile platform.',
         'submit_create' => 'Persoon aanmaken',

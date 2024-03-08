@@ -49,10 +49,10 @@ return [
         ],
     ],
     'syncForm' => [
-        'title' => 'Synchronize feeds',
-        'feed_url' => 'Feed URL',
-        'feed_url_hint' => 'The feed URL you want to synchronize with the current podcast.',
-        'submit' => 'Add to queue',
+        'title' => 'Synkroniser straumar',
+        'feed_url' => 'URL til straumen',
+        'feed_url_hint' => 'URL til straumen du vil synkronisera med denne podkasten.',
+        'submit' => 'Legg til i køen',
     ],
     'messages' => [
         'canceled' => 'Importen vart avbroten.',

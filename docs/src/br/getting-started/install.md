@@ -159,7 +159,7 @@ email.SMTPPass="your_smtp_password"
 
 #### Email config options
 
-| Variable name    | Doare                | Dre ziouer   |
+| Anv ar varienne  | Doare                | Dre ziouer   |
 | ---------------- | -------------------- | ------------ |
 | **`fromEmail`**  | string               | `undefined`  |
 | **`fromName`**   | string               | `"Castopod"` |
@@ -202,7 +202,7 @@ media.s3.region="your_s3_region"
 
 #### Arventennoù S3
 
-| Variable name           | Doare   | Dre ziouer  |
+| Anv ar varienn          | Doare   | Dre ziouer  |
 | ----------------------- | ------- | ----------- |
 | **`endpoint`**          | string  | `undefined` |
 | **`key`**               | string  | `undefined` |

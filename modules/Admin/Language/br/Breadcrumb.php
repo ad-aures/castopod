@@ -32,7 +32,7 @@ return [
     'unpublish' => 'diembannañ',
     'delete' => 'dilemel',
     'remove' => 'lemel',
-    'fediverse' => 'kevrebed',
+    'fediverse' => 'fediverse',
     'blocked-actors' => 'aktourien·ezed stanket',
     'blocked-domains' => 'domanioù stanket',
     'users' => 'implijerien·ezed',

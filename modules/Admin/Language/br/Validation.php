@@ -13,4 +13,5 @@ return [
         '{field} n\'eo ket ur skeudenn, peotrament n\'eo ket ledan a-walc\'h pe uhel a-walc\'h.',
     'is_image_ratio' =>
         '{field} n\'eo ket ur skeudenn, peotrament n\'eo ket mat ar ratio.',
+    'is_json' => 'JSON direizh a zo e-barzh {field}.',
 ];

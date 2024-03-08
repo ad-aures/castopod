@@ -39,7 +39,7 @@ return [
     'my-account' => 'mijn account',
     'change-password' => 'wachtwoord wijzigen',
     'imports' => 'imports',
-    'sync-feeds' => 'synchronize feeds',
+    'sync-feeds' => 'feeds synchroniseren',
     'platforms' => 'platformen',
     'social' => 'sociale netwerken',
     'funding' => 'financiering',

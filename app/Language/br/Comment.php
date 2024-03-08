@@ -19,18 +19,16 @@ return [
     ],
     'likes' => '{numberOfLikes, plural,
         one {# muiañ-karet}
-        2 {# vuiañ-karet}
-        22 {# vuiañ-karet}
-        32 {# vuiañ-karet}
-        42 {# vuiañ-karet}
-        52 {# vuiañ-karet}
-        62 {# vuiañ-karet}
-        82 {# vuiañ-karet}
+        two {# vuiañ-karet}
+        few {# muiañ-karet}
+        many {# muiañ-karet}
         other {# muiañ-karet}
     }',
     'replies' => '{numberOfReplies, plural,
-        0 {respont ebet}
         one {# respont}
+        two {# respont}
+        few {# respont}
+        many {# respont}
         other {# respont}
     }',
     'like' => 'Muiañ-karet',

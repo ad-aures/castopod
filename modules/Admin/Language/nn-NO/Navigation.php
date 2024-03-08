@@ -12,6 +12,7 @@ return [
     'toggle_sidebar' => 'Vis/gøym sidepanelet',
     'go_to_website' => 'Gå til nettsida',
     'go_to_admin' => 'Gå til styringspanelet',
+    'not-authorized' => 'Ikkje godkjent',
     'dashboard' => 'Styringspanel',
     'admin' => 'Heim',
     'podcasts' => 'Podkastar',

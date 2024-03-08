@@ -34,7 +34,7 @@ return [
         'email' => 'Epost',
         'expiration_date' => 'Gyldig til',
         'expiration_date_hint' => 'Datoen og tidspunket abonnementet stoppar. La det stå tomt viss abonnementet skal gå utan sluttdato.',
-        'submit_create' => 'Create subscription',
+        'submit_create' => 'Opprett abonnement',
         'submit_edit' => 'Rediger abonnementet',
     ],
     'form_link_add' => [

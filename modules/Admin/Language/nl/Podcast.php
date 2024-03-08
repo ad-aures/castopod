@@ -26,7 +26,7 @@ return [
     'go_to_page' => 'Ga naar pagina',
     'latest_episodes' => 'Laatste afleveringen',
     'see_all_episodes' => 'Toon alle afleveringen',
-    'draft' => 'Draft',
+    'draft' => 'Concept',
     'messages' => [
         'createSuccess' => 'Podcast succesvol aangemaakt!',
         'editSuccess' => 'Podcast is succesvol bijgewerkt!',

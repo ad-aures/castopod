@@ -13,4 +13,5 @@ return [
         '{field} is either not an image, or it is not wide or tall enough.',
     'is_image_ratio' =>
         '{field} is geen afbeelding of niet van de juiste verhouding.',
+    'is_json' => '{field} contains invalid JSON.',
 ];

@@ -106,14 +106,14 @@ return [
         ],
         'author_section_title' => 'Aozer·ez',
         'author_section_subtitle' => 'Piv zo o verañ ar podkast?',
-        'owner_name' => 'Anv ar perc\'henn',
+        'owner_name' => 'Anv ar perc\'henn·ez',
         'owner_name_hint' =>
             'Evit a sell ouzh ar mererezh. War ar wazh RSS publik e vo.',
-        'owner_email' => 'Chomlec\'h postel ar perc\'henn',
+        'owner_email' => 'Chomlec\'h postel ar perc\'henn·ez',
         'owner_email_hint' =>
             'Implijet e vo gant an darn vrasañ eus ar savennoù evit gwiriañ perc\'hentiezh ar podkast. War ar wazh RSS publik e vo.',
-        'is_owner_email_removed_from_feed' => 'Lemel chomlec\'h postel ar perc\'henn diouzh ar wazh RSS publik',
-        'is_owner_email_removed_from_feed_hint' => 'Rankout a rafec\'h lakaat ar chomlec\'h war wel adarre, evit ur mare, evit ma vefe gouest ur meneger da wiriañ oc\'h ar perc\'henn.',
+        'is_owner_email_removed_from_feed' => 'Lemel chomlec\'h postel ar perc\'henn·ez diouzh ar wazh RSS publik',
+        'is_owner_email_removed_from_feed_hint' => 'Rankout a rafec\'h lakaat ar chomlec\'h war wel adarre, evit ur mare, evit ma vefe gouest ur meneger da wiriañ oc\'h ar perc\'henn·ez.',
         'publisher' => 'Embanner·ez',
         'publisher_hint' =>
             'Ar strollad kiriek eus sevel ar podkast. Alies eo embregerezh pe rouedad ar podkast. A-wechoù e vez anvet ar vaezienn-mañ "Aozer·ez".',
@@ -130,7 +130,7 @@ return [
         'premium_by_default_hint' => 'Rannoù ar podkast a vo merket Premium dre ziouer. Gallout a rit lakaat rannoù zo evel publik.',
         'op3' => 'Open Podcast Prefix Project (OP3)',
         'op3_link' => 'Mont da welet ho taolenn-stur OP3 (liamm diavaez)',
-        'op3_hint' => 'Value your analytics data with OP3, an open-source and trusted third party analytics service. Share, validate and compare your analytics data with the open podcasting ecosystem.',
+        'op3_hint' => 'Talvoudekait ho roadennoù gant OP3, zo ur servij open source diavaez evit dielfennañ ar muzulioù heklev. Rannit, kadarnait ha lakait ho roadennoù keñver-ha-keñver gant re ekosistem ar podkastoù digor.',
         'op3_enable' => 'Gweredekaat ar servij dielfennañ OP3',
         'op3_enable_hint' => 'Evit abegoù surentez ne vo ket rannet roadennoù ar rannoù Premium gant OP3.',
         'payment_pointer' => 'Chomlec\'h paeañ (Payment Poienter) evit Web Monetization',
@@ -319,8 +319,11 @@ return [
         other {# heulier·ez}
     }',
     'posts' => '{numberOfPosts, plural,
-        one {# post}
-        other {# posts}
+        one {# gemennadenn}
+        two {# gemennadenn}
+        few {# c\'hemennadenn}
+        many {a gemennadennoù}
+        other {# kemennadenn}
     }',
     'activity' => 'Oberiantiz',
     'episodes' => 'Rannoù',

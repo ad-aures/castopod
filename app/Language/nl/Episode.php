@@ -23,7 +23,7 @@ return [
     'back_to_episodes' => 'Terug naar de afleveringen van {podcast}',
     'comments' => 'Reacties',
     'activity' => 'Activiteiten',
-    'chapters' => 'Chapters',
+    'chapters' => 'Hoofdstukken',
     'description' => 'Omschrijving aflevering',
     'number_of_comments' => '{numberOfComments, plural,
         one {# reactie}
@@ -43,5 +43,5 @@ return [
         'publish' => 'Publiceer',
         'publish_edit' => 'Publicatie bewerken',
     ],
-    'no_chapters' => 'No chapters are available for this episode.',
+    'no_chapters' => 'Voor deze aflevering zijn geen hoofdstukken beschikbaar.',
 ];

@@ -12,7 +12,7 @@ return [
     'toggle_sidebar' => 'Zijbalk tonen/verbergen',
     'go_to_website' => 'Ga naar website',
     'go_to_admin' => 'Go to admin',
-    'not-authorized' => 'Not authorized',
+    'not-authorized' => 'Niet geautoriseerd',
     'dashboard' => 'Dashboard',
     'admin' => 'Hoofdpagina',
     'podcasts' => 'Podcasts',

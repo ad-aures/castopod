@@ -13,4 +13,5 @@ return [
         '{field} er anten ikkje eit bilete, eller er ikkje breitt og høgt nok.',
     'is_image_ratio' =>
         '{field} er anten ikkje eit bilete, eller har feil forhold mellom høgd og breidd.',
+    'is_json' => '{field} inneheld ugyldig JSON.',
 ];

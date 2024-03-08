@@ -9,7 +9,7 @@ declare(strict_types=1);
  */
 
 return [
-    'edit_role' => "Edit {username}'s role",
+    'edit_role' => "Kemmañ roll {username}",
     'ban' => 'Stankañ',
     'unban' => 'Distankañ',
     'delete' => 'Dilemel',
@@ -19,7 +19,7 @@ return [
     'list' => [
         'user' => 'Implijer·ez',
         'role' => 'Roll',
-        'banned' => 'Banned?',
+        'banned' => 'Stanket?',
     ],
     'form' => [
         'email' => 'Postel',
@@ -34,27 +34,27 @@ return [
         'submit_password_change' => 'Kemm!',
     ],
     'delete_form' => [
-        'title' => 'Delete {user}',
+        'title' => 'Dilemel {user}',
         'disclaimer' =>
-            "You are about to delete {user} permanently. They will not be able to access the admin area anymore.",
-        'understand' => 'I understand, I want to delete {user} permanently',
+            "Emaoc'h o vont da lemel {user} da vat. Ne c'hallo ket gwelet an daolenn-stur ken.",
+        'understand' => 'Komprenet em eus. Fellout a ra din lemel {user} da vat',
         'submit' => 'Dilemel',
     ],
     'messages' => [
         'createSuccess' =>
             'User created successfully! {username} will be prompted with a password reset upon first authentication.',
         'roleEditSuccess' =>
-            "{username}'s roles have been successfully updated.",
-        'banSuccess' => '{username} has been banned.',
-        'unbanSuccess' => '{username} has been unbanned.',
+            "Rolloù {username} zo bet nevesaet gant berzh.",
+        'banSuccess' => 'Stanket eo bet {username}.',
+        'unbanSuccess' => 'Distanket eo bet {username}.',
         'editOwnerError' =>
-            '{username} eo perc\'henn·erez an istañs. Ne c\'hallit ket kemmañ e rolloù…',
+            '{username} eo perc\'henn·ez an istañs. Ne c\'hallit ket kemmañ e rolloù…',
         'banSuperAdminError' =>
-            '{username} is a superadmin, one does not simply ban a superadmin…',
+            'Dreistmerour·ez eo {username}, n\'haller ket stankañ un dreistmerour·ez ken aes-se…',
         'deleteOwnerError' =>
-            '{username} is the instance owner, one does not simply delete the owner…',
+            '{username} eo perc\'henn·ez an istañs. N\'haller ket lemel ar perc\'henn·ez ken aes-se…',
         'deleteSuperAdminError' =>
-            '{username} is a superadmin, one does not simply delete a superadmin…',
+            'Dreistmerour·ez eo {username}, n\'haller ket lemel un dreistmerour·ez ken aes-se…',
         'deleteSuccess' => 'Dilamet eo bet {username}.',
     ],
 ];

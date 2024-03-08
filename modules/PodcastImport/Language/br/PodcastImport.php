@@ -22,7 +22,7 @@ return [
     'imported_feed_url_hint' => 'Rankout a ra ar wazh bezañ er furmad xml pe rss.',
     'new_podcast_section_title' => 'Ar podkast nevez',
     'lock_import' =>
-        'Gwarezet eo ar wazh-mañ. Ne c\'hallit ket enporzhiañ anezhi. Ma\'z oc\'h ar perc\'henn·erez, dibrennit anezhi war ar savenn orin.',
+        'Gwarezet eo ar wazh-mañ. Ne c\'hallit ket enporzhiañ anezhi. Ma\'z oc\'h ar perc\'henn·ez, dibrennit anezhi war ar savenn orin.',
     'submit' => 'Ouzhpennañ an enporzh d\'al lost',
     'queue' => [
         'status' => [

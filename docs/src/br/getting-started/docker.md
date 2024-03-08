@@ -87,8 +87,9 @@ can be added as a cache handler.
       castopod-db:
     ```
 
-    You have to adapt some variables to your needs (e.g. `CP_BASEURL`,
-    `MYSQL_ROOT_PASSWORD`, `MYSQL_PASSWORD` and `CP_ANALYTICS_SALT`).
+    Rankout a rit azasaat un nebeud variennoù hervez hoc'h ezhommoù (da skouer
+    `CP_BASEURL`, `MYSQL_ROOT_PASSWORD`, `MYSQL_PASSWORD` ha
+    `CP_ANALYTICS_SALT`).
 
 3.  Setup a reverse proxy for TLS (SSL/HTTPS)
 
@@ -107,11 +108,11 @@ can be added as a cache handler.
 
 5.  You're all set, start podcasting! 🎙️🚀
 
-## Environment Variables
+## Variennoù endro
 
 - **castopod/castopod** and **castopod/app**
 
-  | Variable name                         | Type (`default`)        | Dre ziouer       |
+  | Anv ar varienn                        | Type (`default`)        | Dre ziouer       |
   | ------------------------------------- | ----------------------- | ---------------- |
   | **`CP_BASEURL`**                      | string                  | `undefined`      |
   | **`CP_MEDIA_BASEURL`**                | ?string                 | `CP_BASEURL`     |
@@ -151,7 +152,7 @@ can be added as a cache handler.
 
 - **castopod/web-server**
 
-  | Variable name          | Doare                 | Default |
+  | Anv ar varienn         | Doare                 | Default |
   | ---------------------- | --------------------- | ------- |
   | **`CP_APP_HOSTNAME`**  | ?string               | `"app"` |
   | **`CP_MAX_BODY_SIZE`** | ?number (with suffix) | `512M`  |
