@@ -488,6 +488,13 @@ class PlatformSeeder extends Seeder
 
         $socialData = [
             [
+                'slug'       => 'bluesky',
+                'type'       => 'social',
+                'label'      => 'Bluesky',
+                'home_url'   => 'https://bsky.app/',
+                'submit_url' => 'https://bsky.app/',
+            ],
+            [
                 'slug'       => 'discord',
                 'type'       => 'social',
                 'label'      => 'Discord',
