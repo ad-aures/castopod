@@ -27,7 +27,7 @@ return [
         'database_config' => 'Nastavenie databázy',
         'database_config_hint' =>
             'Castopod needs to connect to your MySQL (or MariaDB) database. If you do not have these required info, please contact your server administrator.',
-        'db_hostname' => 'Database hostname',
+        'db_hostname' => 'Server databázy',
         'db_name' => 'Názov databázy',
         'db_username' => 'Prihlasovacie meno do databázy',
         'db_password' => 'Heslo databázy',

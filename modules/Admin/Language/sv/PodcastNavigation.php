@@ -30,7 +30,7 @@ return [
     'podcast-analytics-time-periods' => 'Tidsperioder',
     'monetization' => 'Monetization',
     'subscription-list' => 'Alla prenumerationer',
-    'subscription-create' => 'Lägg till en prenumeration',
+    'subscription-create' => 'Add subscription',
     'contributors' => 'Bidragsgivare',
     'contributor-list' => 'Alla bidragsgivare',
     'contributor-add' => 'Lägg till bidragsgivare',

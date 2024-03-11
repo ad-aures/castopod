@@ -12,6 +12,7 @@ return [
     'toggle_sidebar' => 'Εναλλαγή πλαϊνής μπάρας',
     'go_to_website' => 'Μεταβείτε στον ιστότοπο',
     'go_to_admin' => 'Μεταβείτε στον πίνακα διαχείρισης',
+    'not-authorized' => 'Not authorized',
     'dashboard' => 'Πίνακας εργαλείων',
     'admin' => 'Αρχική σελίδα',
     'podcasts' => 'Podcasts',

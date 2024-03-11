@@ -12,6 +12,7 @@ return [
     'toggle_sidebar' => 'Ocultar/mostrar barra lateral',
     'go_to_website' => 'Anar al lloc web',
     'go_to_admin' => 'Anar al panell de control',
+    'not-authorized' => 'Not authorized',
     'dashboard' => 'Panell de control',
     'admin' => 'Inici',
     'podcasts' => 'Podcasts',

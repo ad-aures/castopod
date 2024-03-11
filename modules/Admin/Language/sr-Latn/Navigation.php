@@ -12,6 +12,7 @@ return [
     'toggle_sidebar' => 'Uključite bočnu traku',
     'go_to_website' => 'Idi na sajt',
     'go_to_admin' => 'Idi na administratora',
+    'not-authorized' => 'Not authorized',
     'dashboard' => 'Kontrolna tabla',
     'admin' => 'Početna',
     'podcasts' => 'Podkasti',

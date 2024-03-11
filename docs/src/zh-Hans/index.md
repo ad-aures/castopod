@@ -257,7 +257,7 @@ Castopod 的发展离不开赞助商的支持。 如果你想要帮助我们，�
 
 [GNU Affero General Public License v3.0](https://choosealicense.com/licenses/agpl-3.0/)
 
-版权 ©️ 2020 至今, [Audes](https://adaures.com/)。
+版权 ©️ 2020至今, [Audes](https://adaures.com/)。
 https://img.shields.io/gitlab/v/release/2?color=brightgreen&gitlab_url=https%3A%2F%2Fcode.castopod.org%2F&include_prereleases&label=release
 https://img.shields.io/github/license/ad-aures/castopod?color=blue
 https://img.shields.io/badge/contributions-welcome-brightgreen.svg

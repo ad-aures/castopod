@@ -15,7 +15,7 @@ return [
         'episode_message_placeholder' => 'Write a comment…',
         'reply_to_placeholder' => 'Reply to @{actorUsername}',
         'submit' => 'Send',
-        'submit_reply' => 'Reply',
+        'submit_reply' => 'Жауап беру',
     ],
     'likes' => '{numberOfLikes, plural,
         one {# like}

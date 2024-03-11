@@ -30,7 +30,7 @@ return [
     'podcast-analytics-time-periods' => 'Período de tempo',
     'monetization' => 'Monetization',
     'subscription-list' => 'Todas as subscricións',
-    'subscription-create' => 'Engadir unha subscrición',
+    'subscription-create' => 'Add subscription',
     'contributors' => 'Contribúen',
     'contributor-list' => 'Todas as contribucións',
     'contributor-add' => 'Engadir colaboración',

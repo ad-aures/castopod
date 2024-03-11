@@ -12,6 +12,7 @@ return [
     'toggle_sidebar' => 'Prepnúť postranný panel',
     'go_to_website' => 'Prejsť na webstránku',
     'go_to_admin' => 'Spravovať',
+    'not-authorized' => 'Neautorizovaný',
     'dashboard' => 'Nástenka',
     'admin' => 'Úvod',
     'podcasts' => 'Podcasty',

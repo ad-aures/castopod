@@ -12,6 +12,7 @@ return [
     'toggle_sidebar' => 'Activar barra lateral',
     'go_to_website' => 'Ir ao sitio web',
     'go_to_admin' => 'Ir á administración',
+    'not-authorized' => 'Not authorized',
     'dashboard' => 'Taboleiro',
     'admin' => 'Inicio',
     'podcasts' => 'Podcasts',

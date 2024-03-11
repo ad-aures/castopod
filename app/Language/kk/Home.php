@@ -9,7 +9,7 @@ declare(strict_types=1);
  */
 
 return [
-    'all_podcasts' => 'All podcasts',
+    'all_podcasts' => 'Барлық подкастар',
     'sort_by' => 'Sort by',
     'sort_options' => [
         'activity' => 'Recent activity',

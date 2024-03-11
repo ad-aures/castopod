@@ -30,7 +30,7 @@ return [
     'podcast-analytics-time-periods' => 'Χρονικές περίοδοι',
     'monetization' => 'Monetization',
     'subscription-list' => 'Όλες οι συνδρομές',
-    'subscription-create' => 'Προσθέστε συνδρομή',
+    'subscription-create' => 'Add subscription',
     'contributors' => 'Συντελεστές',
     'contributor-list' => 'Όλοι οι συντελεστές',
     'contributor-add' => 'Προσθήκη συντελεστή',

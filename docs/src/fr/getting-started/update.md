@@ -61,8 +61,7 @@ Les versions peuvent être accompagnées d'instructions de mise à jour
 supplémentaires (cf. la
 [page des notes de versions](https://code.castopod.org/adaures/castopod/-/releases)).
 
-- cf.
-  [Je n'ai pas mis à jour mon instance depuis longtemps… Que devrais-je faire ?](#je-nai-pas-mis-à-jour-mon-instance-depuis-longtemps-que-devrais-je-faire)
+- Je n'ai pas mis à jour mon instance depuis longtemps… Que devrais-je faire ?
 
 :::
 
@@ -80,7 +79,7 @@ bas à gauche.
 Vous pouvez également trouver la version dans l'application
 `> Configuration > Constantes.php` dossier.
 
-### Je n'ai pas mis à jour mon instance depuis longtemps… Que devrais-je faire ?
+### [Je n'ai pas mis à jour mon instance depuis longtemps… Que devrais-je faire ?](#i-havent-updated-my-instance-in-a-long-time-what-should-i-do)
 
 Pas de problème ! Il suffit d'obtenir la dernière version comme décrit
 ci-dessus. Lorsque vous exécutez les instructions de mise à jour (4), lancez-les

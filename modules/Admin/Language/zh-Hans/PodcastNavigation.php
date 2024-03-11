@@ -30,7 +30,7 @@ return [
     'podcast-analytics-time-periods' => '时间段',
     'monetization' => 'Monetization',
     'subscription-list' => '所有订阅',
-    'subscription-create' => '添加订阅',
+    'subscription-create' => 'Add subscription',
     'contributors' => '贡献者',
     'contributor-list' => '所有贡献者',
     'contributor-add' => '添加贡献者',

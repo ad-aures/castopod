@@ -12,6 +12,7 @@ return [
     'toggle_sidebar' => 'Seitenleiste ein/aus',
     'go_to_website' => 'Gehe zur Webseite',
     'go_to_admin' => 'Gehe zu Admin',
+    'not-authorized' => 'Not authorized',
     'dashboard' => 'Übersicht',
     'admin' => 'Startseite',
     'podcasts' => 'Podcasts',
@@ -34,7 +35,7 @@ return [
     'settings' => 'Einstellungen',
     'settings-general' => 'Allgemein',
     'settings-theme' => 'Erscheinungsbild',
-    'admin-about' => 'Über',
+    'admin-about' => 'About',
     'account' => [
         'my-account' => 'Mein Konto',
         'change-password' => 'Passwort ändern',

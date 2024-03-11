@@ -17,7 +17,7 @@ coupled with custom rules. Roles and permissions are defined at two levels:
 
 <!-- AUTH-INSTANCE-ROLES-LIST:START - Do not remove or modify this section -->
 
-| role        | description                         | permissions                                                                                |
+| roll        | description                         | permissions                                                                                |
 | ----------- | ----------------------------------- | ------------------------------------------------------------------------------------------ |
 | Super admin | Has complete control over Castopod. | admin.\*, podcasts.\*, users.manage, persons.manage, pages.manage, fediverse.manage-blocks |
 | Manager     | Manages Castopod's content.         | podcasts.create, podcasts.import, persons.manage, pages.manage                             |
@@ -29,7 +29,7 @@ coupled with custom rules. Roles and permissions are defined at two levels:
 
 <!-- AUTH-INSTANCE-PERMISSIONS-LIST:START - Do not remove or modify this section -->
 
-| permission              | description                                                        |
+| aotre                   | description                                                        |
 | ----------------------- | ------------------------------------------------------------------ |
 | admin.access            | Can access the Castopod admin area.                                |
 | admin.settings          | Can access the Castopod settings.                                  |
@@ -49,7 +49,7 @@ coupled with custom rules. Roles and permissions are defined at two levels:
 
 <!-- AUTH-PODCAST-ROLES-LIST:START - Do not remove or modify this section -->
 
-| role       | description                                               | permissions                                                                                                                                                                                                                                                                                 |
+| roll       | description                                               | permissions                                                                                                                                                                                                                                                                                 |
 | ---------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Merour·ez  | Has complete control of podcast #{id}.                    | \*                                                                                                                                                                                                                                                                                          |
 | Embanner   | Manages content and publications of podcast #{id}.        | view, edit, manage-import, manage-persons, manage-platforms, manage-publications, manage-notifications, interact-as, episodes.view, episodes.create, episodes.edit, episodes.delete, episodes.manage-persons, episodes.manage-clips, episodes.manage-publications, episodes.manage-comments |
@@ -62,7 +62,7 @@ coupled with custom rules. Roles and permissions are defined at two levels:
 
 <!-- AUTH-PODCAST-PERMISSIONS-LIST:START - Do not remove or modify this section -->
 
-| permission                   | description                                                              |
+| aotre                        | description                                                              |
 | ---------------------------- | ------------------------------------------------------------------------ |
 | view                         | Can view dashboard and analytics of podcast #{id}.                       |
 | edit                         | Can edit podcast #{id}.                                                  |

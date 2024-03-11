@@ -61,8 +61,7 @@ Las versiones pueden venir con instrucciones de actualización adicionales (véa
 la página de
 [lanzamientos](https://code.castopod.org/adaures/castopod/-/releases)).
 
-- cf.
-  [No he actualizado mi instancia en mucho tiempo… ¿Qué debo hacer?](#no-he-actualizado-mi-instancia-en-mucho-tiempo-¿qué-debo-hacer)
+- cf. No he actualizado mi instancia en mucho tiempo… ¿Qué debo hacer?
 
 :::
 

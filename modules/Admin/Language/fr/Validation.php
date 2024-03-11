@@ -13,5 +13,5 @@ return [
         '{field} n’est pas une image ou n’a pas la taille minimale requise.',
     'is_image_ratio' =>
         '{field} n’est pas une image ou n’est pas au bon format.',
-    'is_json' => '{field} contains invalid JSON.',
+    'is_json' => '{field} contient un JSON non valide.',
 ];

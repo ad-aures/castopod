@@ -53,7 +53,7 @@ sidebarDepth: 3
 [发布页面](https://code.castopod.org/adaures/castopod/-/releases))。
 
 - cf.
-  [我很长时间没有更新我的实例… 我该怎么办？](#我很长时间没有更新我的实例-我该怎么办)
+  [我很长时间没有更新我的实例… 我该怎么办？ 我该怎么办？](#我很长时间没有更新我的实例-我该怎么办-我该怎么办)
 
 :::
 
@@ -69,7 +69,7 @@ sidebarDepth: 3
 
 或者，你可以在 `应用程序 > 配置 > Constants.php` 文件中找到版本号。
 
-### 我很长时间没有更新我的实例… 我该怎么办？
+### 我很长时间没有更新我的实例… 我该怎么办？ 我该怎么办？
 
 没问题！ 只需如上所述获取最新版本。 No problem! Just get the latest release as
 described above. Only, when going through the release instructions (4), perform

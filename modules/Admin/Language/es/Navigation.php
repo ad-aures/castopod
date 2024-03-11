@@ -12,6 +12,7 @@ return [
     'toggle_sidebar' => 'Ocultar/mostrar barra lateral',
     'go_to_website' => 'Ir al sitio web',
     'go_to_admin' => 'Ir al panel de administración',
+    'not-authorized' => 'Not authorized',
     'dashboard' => 'Panel de control',
     'admin' => 'Inicio',
     'podcasts' => 'Podcasts',
@@ -34,7 +35,7 @@ return [
     'settings' => 'Configuración',
     'settings-general' => 'General',
     'settings-theme' => 'Tema',
-    'admin-about' => 'Acerca de',
+    'admin-about' => 'About',
     'account' => [
         'my-account' => 'Mi cuenta',
         'change-password' => 'Cambiar contraseña',

@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 return [
     'info' => 'My account info',
-    'changePassword' => 'Change my password',
+    'changePassword' => 'Ändra mitt lösenord',
     'messages' => [
         'wrongPasswordError' => "You've entered the wrong password, try again.",
         'passwordChangeSuccess' => 'Password has been successfully changed!',

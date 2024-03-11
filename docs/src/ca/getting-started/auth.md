@@ -17,11 +17,11 @@ coupled with custom rules. Roles and permissions are defined at two levels:
 
 <!-- AUTH-INSTANCE-ROLES-LIST:START - Do not remove or modify this section -->
 
-| role                | description                          | permissions                                                                                |
-| ------------------- | ------------------------------------ | ------------------------------------------------------------------------------------------ |
-| Super administrador | Té control complet sobre Castopod.   | admin.\*, podcasts.\*, users.manage, persons.manage, pages.manage, fediverse.manage-blocks |
-| Administrador       | Administra el contingut de Castopod. | podcasts.create, podcasts.import, persons.manage, pages.manage                             |
-| Podcaster           | Usos generals de Castopod.           | admin.access                                                                               |
+| role        | description                         | permissions                                                                                |
+| ----------- | ----------------------------------- | ------------------------------------------------------------------------------------------ |
+| Super admin | Has complete control over Castopod. | admin.\*, podcasts.\*, users.manage, persons.manage, pages.manage, fediverse.manage-blocks |
+| Manager     | Manages Castopod's content.         | podcasts.create, podcasts.import, persons.manage, pages.manage                             |
+| Podcaster   | General users of Castopod.          | admin.access                                                                               |
 
 <!-- AUTH-INSTANCE-ROLES-LIST:END -->
 
@@ -29,17 +29,17 @@ coupled with custom rules. Roles and permissions are defined at two levels:
 
 <!-- AUTH-INSTANCE-PERMISSIONS-LIST:START - Do not remove or modify this section -->
 
-| permission              | description                                                          |
-| ----------------------- | -------------------------------------------------------------------- |
-| admin.access            | Pot accedir a l'àrea d'administració de Castopod.                    |
-| admin.settings          | Pot accedir a la configuració de Castopod.                           |
-| users.manage            | Pot administrar els usuaris de Castopod.                             |
-| persons.manage          | Pot administrar persones.                                            |
-| pages.manage            | Pot administrar pàgines.                                             |
-| podcasts.view           | Pot veure els pòdcasts.                                              |
-| podcasts.create         | Pot crear nous pòdcasts.                                             |
-| podcasts.import         | Pot importar pòdcasts.                                               |
-| fediverse.manage-blocks | Pot evitar que actors/dominis del fedivers interactuen amb Castopod. |
+| permission              | description                                                        |
+| ----------------------- | ------------------------------------------------------------------ |
+| admin.access            | Can access the Castopod admin area.                                |
+| admin.settings          | Can access the Castopod settings.                                  |
+| users.manage            | Can manage Castopod users.                                         |
+| persons.manage          | Can manage persons.                                                |
+| pages.manage            | Can manage pages.                                                  |
+| podcasts.view           | Can view all podcasts.                                             |
+| podcasts.create         | Can create new podcasts.                                           |
+| podcasts.import         | Can import podcasts.                                               |
+| fediverse.manage-blocks | Can block fediverse actors/domains from interacting with Castopod. |
 
 <!-- AUTH-INSTANCE-PERMISSIONS-LIST:END -->
 
@@ -49,12 +49,12 @@ coupled with custom rules. Roles and permissions are defined at two levels:
 
 <!-- AUTH-PODCAST-ROLES-LIST:START - Do not remove or modify this section -->
 
-| role          | description                                                        | permissions                                                                                                                                                                                                                                                                                 |
-| ------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Administrador | Té control complet del pòdcast #{id}.                              | \*                                                                                                                                                                                                                                                                                          |
-| Editor        | Administra els continguts i la publicació del pòdcast #{id}.       | view, edit, manage-import, manage-persons, manage-platforms, manage-publications, manage-notifications, interact-as, episodes.view, episodes.create, episodes.edit, episodes.delete, episodes.manage-persons, episodes.manage-clips, episodes.manage-publications, episodes.manage-comments |
-| Autor         | Administra el contingut del podcast #{id} però no el pot publicar. | view, manage-persons, episodes.view, episodes.create, episodes.edit, episodes.manage-persons, episodes.manage-clips                                                                                                                                                                         |
-| Convidat      | Col·laborador general del podcast #{id}.                           | view, episodes.view                                                                                                                                                                                                                                                                         |
+| role   | description                                               | permissions                                                                                                                                                                                                                                                                                 |
+| ------ | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Admin  | Has complete control of podcast #{id}.                    | \*                                                                                                                                                                                                                                                                                          |
+| Editor | Manages content and publications of podcast #{id}.        | view, edit, manage-import, manage-persons, manage-platforms, manage-publications, manage-notifications, interact-as, episodes.view, episodes.create, episodes.edit, episodes.delete, episodes.manage-persons, episodes.manage-clips, episodes.manage-publications, episodes.manage-comments |
+| Author | Manages content of podcast #{id} but cannot publish them. | view, manage-persons, episodes.view, episodes.create, episodes.edit, episodes.manage-persons, episodes.manage-clips                                                                                                                                                                         |
+| Guest  | General contributor of the podcast #{id}.                 | view, episodes.view                                                                                                                                                                                                                                                                         |
 
 <!-- AUTH-PODCAST-ROLES-LIST:END -->
 
@@ -62,26 +62,26 @@ coupled with custom rules. Roles and permissions are defined at two levels:
 
 <!-- AUTH-PODCAST-PERMISSIONS-LIST:START - Do not remove or modify this section -->
 
-| permission                   | description                                                                                                          |
-| ---------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| view                         | Pot veure el tauler i les estadístiques del podcast #{id}.                                                           |
-| edit                         | Pot editar el podcast #{id}.                                                                                         |
-| delete                       | Pot suprimir el podcast #{id}.                                                                                       |
-| manage-import                | Pot sincronitzar el podcast importat #{id}.                                                                          |
-| manage-persons               | Pot gestionar les subscripcions del podcast #{id}.                                                                   |
-| manage-subscriptions         | Pot gestionar les subscripcions del podcast #{id}.                                                                   |
-| manage-contributors          | Pot gestionar els col·laboradors del podcast #{id}.                                                                  |
-| manage-platforms             | Pot establir/eliminar enllaços de plataforma del podcast #{id}.                                                      |
-| manage-publications          | Pot publicar el podcast #{id}.                                                                                       |
-| manage-notifications         | Pot veure i marcar les notificacions com a llegides per al podcast #{id}.                                            |
-| interact-as                  | Pot interactuar en nom del podcast #{id} per marcar les publicacions com a preferides, compartir-les o respondre-hi. |
-| episodes.view                | Pot veure el tauler i les estadístiques del podcast #{id}.                                                           |
-| episodes.create              | Pot crear episodis per al podcast #{id}.                                                                             |
-| episodes.edit                | Pot editar el podcast #{id}.                                                                                         |
-| episodes.delete              | Pot suprimir el podcast #{id}.                                                                                       |
-| episodes.manage-persons      | Pot gestionar les subscripcions del podcast #{id}.                                                                   |
-| episodes.manage-clips        | Pot gestionar clips de vídeo o fragments de so del pòdcast #{id}.                                                    |
-| episodes.manage-publications | Pot publicar el podcast #{id}.                                                                                       |
-| episodes.manage-comments     | Pot crear/eliminar comentaris d'episodi del pòdcast #{id}.                                                           |
+| permission                   | description                                                              |
+| ---------------------------- | ------------------------------------------------------------------------ |
+| view                         | Can view dashboard and analytics of podcast #{id}.                       |
+| edit                         | Can edit podcast #{id}.                                                  |
+| delete                       | Can delete podcast #{id}.                                                |
+| manage-import                | Can synchronize imported podcast #{id}.                                  |
+| manage-persons               | Can manage subscriptions of podcast #{id}.                               |
+| manage-subscriptions         | Can manage subscriptions of podcast #{id}.                               |
+| manage-contributors          | Can manage contributors of podcast #{id}.                                |
+| manage-platforms             | Can set/remove platform links of podcast #{id}.                          |
+| manage-publications          | Can publish podcast #{id}.                                               |
+| manage-notifications         | Can view and mark notifications as read for podcast #{id}.               |
+| interact-as                  | Can interact as the podcast #{id} to favourite, share or reply to posts. |
+| episodes.view                | Can view dashboard and analytics of podcast #{id}.                       |
+| episodes.create              | Can create episodes for podcast #{id}.                                   |
+| episodes.edit                | Can edit podcast #{id}.                                                  |
+| episodes.delete              | Can delete podcast #{id}.                                                |
+| episodes.manage-persons      | Can manage subscriptions of podcast #{id}.                               |
+| episodes.manage-clips        | Can manage video clips or soundbites of podcast #{id}.                   |
+| episodes.manage-publications | Can publish podcast #{id}.                                               |
+| episodes.manage-comments     | Can create/remove episode comments of podcast #{id}.                     |
 
 <!-- AUTH-PODCAST-PERMISSIONS-LIST:END -->

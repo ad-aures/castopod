@@ -12,6 +12,7 @@ return [
     'toggle_sidebar' => 'Toggle sidebar',
     'go_to_website' => 'الانتقال إلى موقع الويب',
     'go_to_admin' => 'Go to admin',
+    'not-authorized' => 'Not authorized',
     'dashboard' => 'لوحة التحكم',
     'admin' => 'الرئيسية',
     'podcasts' => 'البودكاستات',

@@ -12,6 +12,7 @@ return [
     'toggle_sidebar' => '切换侧边栏',
     'go_to_website' => '访问网站',
     'go_to_admin' => '登录到管理员',
+    'not-authorized' => 'Not authorized',
     'dashboard' => '控制面板',
     'admin' => '主页',
     'podcasts' => '播客',
@@ -34,7 +35,7 @@ return [
     'settings' => '设置',
     'settings-general' => '通用',
     'settings-theme' => '主题',
-    'admin-about' => '关于',
+    'admin-about' => 'About',
     'account' => [
         'my-account' => '我的帐户',
         'change-password' => '修改密码',

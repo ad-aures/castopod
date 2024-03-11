@@ -17,11 +17,11 @@ coupled with custom rules. Roles and permissions are defined at two levels:
 
 <!-- AUTH-INSTANCE-ROLES-LIST:START - Do not remove or modify this section -->
 
-| role        | description                         | permissions                                                                                |
-| ----------- | ----------------------------------- | ------------------------------------------------------------------------------------------ |
-| Super admin | Has complete control over Castopod. | admin.\*, podcasts.\*, users.manage, persons.manage, pages.manage, fediverse.manage-blocks |
-| Manager     | Manages Castopod's content.         | podcasts.create, podcasts.import, persons.manage, pages.manage                             |
-| Podcaster   | General users of Castopod.          | admin.access                                                                               |
+| role       | description                         | permissions                                                                                |
+| ---------- | ----------------------------------- | ------------------------------------------------------------------------------------------ |
+| Суперадмін | Has complete control over Castopod. | admin.\*, podcasts.\*, users.manage, persons.manage, pages.manage, fediverse.manage-blocks |
+| Менеджер   | Manages Castopod's content.         | podcasts.create, podcasts.import, persons.manage, pages.manage                             |
+| Підкастер  | General users of Castopod.          | admin.access                                                                               |
 
 <!-- AUTH-INSTANCE-ROLES-LIST:END -->
 
@@ -29,7 +29,7 @@ coupled with custom rules. Roles and permissions are defined at two levels:
 
 <!-- AUTH-INSTANCE-PERMISSIONS-LIST:START - Do not remove or modify this section -->
 
-| permission              | description                                                        |
+| permission              | Опис                                                               |
 | ----------------------- | ------------------------------------------------------------------ |
 | admin.access            | Can access the Castopod admin area.                                |
 | admin.settings          | Can access the Castopod settings.                                  |

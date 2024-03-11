@@ -12,6 +12,7 @@ return [
     'toggle_sidebar' => 'Przełącz pasek boczny',
     'go_to_website' => 'Idź do strony internetowej',
     'go_to_admin' => 'Idź do administracji',
+    'not-authorized' => 'Not authorized',
     'dashboard' => 'Pulpit',
     'admin' => 'Początek',
     'podcasts' => 'Podcasty',
@@ -34,7 +35,7 @@ return [
     'settings' => 'Ustawienia',
     'settings-general' => 'Ogólne',
     'settings-theme' => 'Motyw',
-    'admin-about' => 'Informacje',
+    'admin-about' => 'About',
     'account' => [
         'my-account' => 'Moje konto',
         'change-password' => 'Zmień hasło',

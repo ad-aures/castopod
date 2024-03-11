@@ -12,6 +12,7 @@ return [
     'toggle_sidebar' => 'Växla sidofält',
     'go_to_website' => 'Gå till webbsidan',
     'go_to_admin' => 'Gå till admin',
+    'not-authorized' => 'Not authorized',
     'dashboard' => 'Översiktspanel',
     'admin' => 'Hem',
     'podcasts' => 'Podcasts',

@@ -12,6 +12,7 @@ return [
     'toggle_sidebar' => 'Toggle sidebar',
     'go_to_website' => 'Go to website',
     'go_to_admin' => 'Go to admin',
+    'not-authorized' => 'Not authorized',
     'dashboard' => 'Dashboard',
     'admin' => 'Home',
     'podcasts' => 'Podcasts',
