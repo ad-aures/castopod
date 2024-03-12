@@ -1,3 +1,12 @@
+## [1.10.5](https://code.castopod.org/adaures/castopod/compare/v1.10.4...v1.10.5) (3/12/2024)
+
+### Bug Fixes
+
+- **file-uploads:** validate chapters json content + remove permit_empty rule to
+  uploaded files
+  ([6289c42](https://code.castopod.org/adaures/castopod/commit/6289c42b1189f074c7e4e4cd9fbfd73bf26625c9)),
+  closes [#445](https://code.castopod.org/adaures/castopod/issues/445)
+
 ## [1.10.4](https://code.castopod.org/adaures/castopod/compare/v1.10.3...v1.10.4) (2/26/2024)
 
 ### Bug Fixes
