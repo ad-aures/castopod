@@ -1,10 +1,84 @@
 version: "3"
+
 services:
   app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
     volumes:
-      # Mounts the project folder to '/workspace'. While this file is in .devcontainer,
-      # mounts are relative to the first file in the list, which is a level up.
-      - .:/castopod:cached
+      - ../..:/workspaces:cached
+    environment:
+      CI_ENVIRONMENT: development
+      vite_environment: development
+      app_forceGlobalSecureRequests: false
+      app_baseURL: http://localhost:8080/
+      media_baseURL: http://localhost:8080/
+      admin_gateway: cp-admin
+      auth_gateway: cp-auth
+      analytics_salt: dev_analytics_salt
+      database_default_hostname: mariadb
+      database_default_database: castopod
+      database_default_username: castopod
+      database_default_password: castopod
+      database_default_DBPrefix: cp_
+      restapi_enabled: true
+      email_fromEmail: hello@castopod.local
+      email_SMTPCrypto: ""
+      email_SMTPHost: mailpit
+      email_SMTPUser: castopod
+      email_SMTPPass: castopod
+      email_SMTPPort: 1025
+    depends_on:
+      - redis
+      - mariadb
 
-    # Overrides default command so things don't shut down after the process ends.
-    command: /bin/sh -c "while sleep 1000; do :; done"
+  redis:
+    image: redis:alpine
+    volumes:
+      - redis:/data
+
+  mariadb:
+    image: mariadb:10.2
+    volumes:
+      - ./initdb:/docker-entrypoint-initdb.d
+      - mariadb:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: castopod
+      MYSQL_USER: castopod
+      MYSQL_PASSWORD: castopod
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    environment:
+      PMA_HOST: mariadb
+      PMA_PORT: 3306
+      UPLOAD_LIMIT: 300M
+    ports:
+      - 8888:80
+    volumes:
+      - phpmyadmin:/sessions
+    depends_on:
+      - mariadb
+
+  mailpit:
+    image: axllent/mailpit
+    restart: always
+    volumes:
+      - mailpit:/data
+    ports:
+      - 8025:8025
+      - 1025:1025
+    environment:
+      MP_MAX_MESSAGES: 5000
+      MP_DATA_FILE: /data/mailpit.db
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
+
+volumes:
+  redis:
+  mariadb:
+  phpmyadmin:
+  mailpit:

@@ -1,13 +1,13 @@
 // For format details, see https://aka.ms/vscode-remote/devcontainer.json or this file's README at:
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.117.1/containers/docker-existing-dockerfile
 {
-  "name": "Castopod dev",
-  "dockerComposeFile": ["../docker-compose.yml", "./docker-compose.yml"],
+  "name": "castopod.local",
+  "dockerComposeFile": ["./docker-compose.yml"],
   "service": "app",
-  "workspaceFolder": "/castopod",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
   "postCreateCommand": "composer install && pnpm install && pnpm run build:static && php spark migrate --all && php spark db:seed DevSeeder",
-  "postStartCommand": "crontab ./crontab && cron && php spark serve --host 0.0.0.0",
-  "postAttachCommand": "crontab ./crontab && service cron reload",
+  "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder} && crontab .devcontainer/crontab && cron && php spark serve --host 0.0.0.0",
+  "postAttachCommand": "crontab .devcontainer/crontab && service cron reload",
   "shutdownAction": "stopCompose",
   "features": {
     "ghcr.io/devcontainers/features/git:1": {},
