@@ -11,6 +11,7 @@ use App\Entities\Category;
 use App\Entities\Location;
 use App\Entities\Podcast;
 use App\Libraries\SimpleRSSElement;
+use App\Models\PodcastModel;
 use CodeIgniter\I18n\Time;
 use Config\Mimes;
 use Modules\Media\Entities\Chapters;
@@ -68,6 +69,16 @@ if (! function_exists('get_rss_feed')) {
         $channel->addChild('lastBuildDate', (new Time('now'))->format(DATE_RFC1123));
         $channel->addChild('generator', 'Castopod - https://castopod.org/');
         $channel->addChild('docs', 'https://cyber.harvard.edu/rss/rss.html');
+
+        if ($podcast->guid === '') {
+            // FIXME: guid shouldn't be empty here as it should be filled upon Podcast creation
+            $uuid = service('uuid');
+            // 'ead4c236-bf58-58c6-a2c6-a6b28d128cb6' is the uuid of the podcast namespace
+            $podcast->guid = $uuid->uuid5('ead4c236-bf58-58c6-a2c6-a6b28d128cb6', $podcast->feed_url)
+                ->toString();
+
+            (new PodcastModel())->save($podcast);
+        }
 
         $channel->addChild('guid', $podcast->guid, $podcastNamespace);
         $channel->addChild('title', $podcast->title, null, false);

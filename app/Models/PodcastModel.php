@@ -351,7 +351,7 @@ class PodcastModel extends Model
      */
     public function clearCache(array $data): array
     {
-        $podcast = (new self())->getPodcastById(is_array($data['id']) ? $data['id'][0] : $data['id']);
+        $podcast = (new self())->getPodcastById((int) (is_array($data['id']) ? $data['id'][0] : $data['id']));
 
         // delete cache for users' podcasts
         cache()
@@ -443,7 +443,7 @@ class PodcastModel extends Model
      */
     protected function setActorAvatar(array $data): array
     {
-        $podcast = (new self())->getPodcastById(is_array($data['id']) ? $data['id'][0] : $data['id']);
+        $podcast = (new self())->getPodcastById((int) (is_array($data['id']) ? $data['id'][0] : $data['id']));
 
         if ($podcast instanceof Podcast) {
             $podcastActor = (new ActorModel())->find($podcast->actor_id);
@@ -468,7 +468,7 @@ class PodcastModel extends Model
      */
     protected function updatePodcastActor(array $data): array
     {
-        $podcast = (new self())->getPodcastById(is_array($data['id']) ? $data['id'][0] : $data['id']);
+        $podcast = (new self())->getPodcastById((int) (is_array($data['id']) ? $data['id'][0] : $data['id']));
 
         if ($podcast instanceof Podcast) {
             $actorModel = new ActorModel();
