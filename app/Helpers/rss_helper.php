@@ -348,6 +348,21 @@ if (! function_exists('get_rss_feed')) {
                 $item->addChild('season', (string) $episode->season_number, $itunesNamespace);
             $item->addChild('episodeType', $episode->type, $itunesNamespace);
 
+            // If episode is of type trailer, add podcast:trailer tag on channel level
+            if ($episode->type == 'trailer') {
+                $trailer = $channel->addChild('trailer', $episode->title, $podcastNamespace);
+                $trailer->addAttribute('pubdate', $episode->published_at->format(DATE_RFC2822));
+                $trailer->addAttribute(
+                    'url',
+                    $episode->audio_url . ($enclosureParams === '' ? '' : '?' . $enclosureParams),
+                );
+                $trailer->addAttribute('length', (string) $episode->audio->file_size);
+                $trailer->addAttribute('type', $episode->audio->file_mimetype);
+                if ($episode->season_number !== null) {
+                    $trailer->addAttribute('season', (string) $episode->season_number);
+                }
+            }
+
             // add podcast namespace tags for season and episode
             $episode->season_number &&
                 $item->addChild('season', (string) $episode->season_number, $podcastNamespace);
