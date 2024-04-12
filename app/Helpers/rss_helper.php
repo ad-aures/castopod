@@ -17,7 +17,6 @@ use Config\Mimes;
 use Modules\Media\Entities\Chapters;
 use Modules\Media\Entities\Transcript;
 use Modules\PremiumPodcasts\Entities\Subscription;
-use Modules\WebSub\Config\WebSub;
 
 if (! function_exists('get_rss_feed')) {
     /**
@@ -274,7 +273,7 @@ if (! function_exists('get_rss_feed')) {
         $channel->addChild('type', $podcast->type, $itunesNamespace);
         $podcast->copyright &&
             $channel->addChild('copyright', $podcast->copyright);
-        if ($podcast->is_blocked) {
+        if ($podcast->is_blocked || $subscription instanceof Subscription) {
             $channel->addChild('block', 'Yes', $itunesNamespace);
         }
 
