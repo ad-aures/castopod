@@ -593,6 +593,13 @@ class PlatformSeeder extends Seeder
                 'submit_url' => 'https://slack.com/get-started#/create',
             ],
             [
+                'slug'       => 'telegram',
+                'type'       => 'social',
+                'label'      => 'Telegram',
+                'home_url'   => 'https://www.telegram.org/',
+                'submit_url' => '',
+            ],
+            [
                 'slug'       => 'threads',
                 'type'       => 'social',
                 'label'      => 'Threads',
