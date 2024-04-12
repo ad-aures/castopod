@@ -272,6 +272,13 @@ class PlatformSeeder extends Seeder
                 'submit_url' => '',
             ],
             [
+                'slug'       => 'episodes-fm',
+                'type'       => 'podcasting',
+                'label'      => 'Episodes.fm',
+                'home_url'   => 'https://episodes.fm/',
+                'submit_url' => 'https://podcastindex.org/add',
+            ],
+            [
                 'slug'       => 'escapepod',
                 'type'       => 'podcasting',
                 'label'      => 'Escapepod',
@@ -375,6 +382,13 @@ class PlatformSeeder extends Seeder
                 'label'      => 'Sphinx',
                 'home_url'   => 'https://sphinx.chat/',
                 'submit_url' => '',
+            ],
+            [
+                'slug'       => 'truefans',
+                'type'       => 'podcasting',
+                'label'      => 'Truefans',
+                'home_url'   => 'https://truefans.fm/',
+                'submit_url' => 'https://podcastindex.org/add',
             ],
             [
                 'slug'       => 'tsacdop',
