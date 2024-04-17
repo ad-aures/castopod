@@ -27,6 +27,7 @@ return [
     'comments' => 'Evezhiadennoù',
     'activity' => 'Oberiantiz',
     'chapters' => 'Chabistroù',
+    'transcript' => 'Transcript',
     'description' => 'Deskrivadur ar rann',
     'number_of_comments' => '{numberOfComments, plural,
         one {# evezhiadenn}
@@ -50,4 +51,6 @@ return [
         'publish_edit' => 'Kemmañ an embannadur',
     ],
     'no_chapters' => 'N\'eus chabistr ebet evit ar rann.',
+    'download_transcript' => 'Download transcript ({extension})',
+    'no_transcript' => 'No transcript available for this episode.',
 ];

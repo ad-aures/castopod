@@ -26,6 +26,7 @@ return [
     'comments' => 'Коментарі',
     'activity' => 'Активність',
     'chapters' => 'Chapters',
+    'transcript' => 'Transcript',
     'description' => 'Опис Серії',
     'number_of_comments' => '{numberOfComments, plural,
         one {# коментар}
@@ -48,4 +49,6 @@ return [
         'publish_edit' => 'Редагувати публікацію',
     ],
     'no_chapters' => 'No chapters are available for this episode.',
+    'download_transcript' => 'Download transcript ({extension})',
+    'no_transcript' => 'No transcript available for this episode.',
 ];

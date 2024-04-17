@@ -74,7 +74,7 @@ return [
             'episodic' => 'Episódico',
             'episodic_hint' => 'Se os episódios são destinados a serem consumidos sem qualquer ordem específica. Os episódios mais recentes serão apresentados primeiro.',
             'serial' => 'Serial',
-            'serial_hint' => 'If episodes are intended to be consumed in sequential order. Episodes will be presented in numeric order.',
+            'serial_hint' => 'Se a intenção é que os episódios sejam consumidos em uma ordem sequencial. Episódios vão ser apresentados em uma ordem numérica.',
         ],
         'medium' => [
             'label' => 'Medium',

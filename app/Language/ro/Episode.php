@@ -25,6 +25,7 @@ return [
     'comments' => 'Comentarii',
     'activity' => 'Activitate',
     'chapters' => 'Chapters',
+    'transcript' => 'Transcript',
     'description' => 'Descrierea episodului',
     'number_of_comments' => '{numberOfComments, plural,
         one {# răspuns}
@@ -46,4 +47,6 @@ return [
         'publish_edit' => 'Edit publication',
     ],
     'no_chapters' => 'No chapters are available for this episode.',
+    'download_transcript' => 'Download transcript ({extension})',
+    'no_transcript' => 'No transcript available for this episode.',
 ];

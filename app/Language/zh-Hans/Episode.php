@@ -24,6 +24,7 @@ return [
     'comments' => '评论',
     'activity' => '活动',
     'chapters' => 'Chapters',
+    'transcript' => 'Transcript',
     'description' => '剧集描述',
     'number_of_comments' => '{numberOfComments, plural,
         other {# 评论}
@@ -44,4 +45,6 @@ return [
         'publish_edit' => 'Edit publication',
     ],
     'no_chapters' => 'No chapters are available for this episode.',
+    'download_transcript' => 'Download transcript ({extension})',
+    'no_transcript' => 'No transcript available for this episode.',
 ];

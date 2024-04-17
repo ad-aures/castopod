@@ -10,8 +10,8 @@ process:
 
 - [**`castopod/castopod`**](https://hub.docker.com/r/castopod/castopod): an all
   in one castopod image using nginx unit
-- [**`castopod/app`**](https://hub.docker.com/r/castopod/app): el paquet
-  incloent Castopod i totes les dependències
+- [** code>castopod/app</code>**](https://hub.docker.com/r/castopod/app): el
+  paquet incloent Castopod i totes les dependències
 - [**`castopod/web-server`**](https://hub.docker.com/r/castopod/web-server): una
   configuració de Nginx per a Castopod
 
@@ -48,6 +48,7 @@ una base de dades Redis com a gestor de memòria cau.
           CP_ANALYTICS_SALT: changeme
           CP_CACHE_HANDLER: redis
           CP_REDIS_HOST: redis
+          CP_REDIS_PASSWORD: changeme
         networks:
           - castopod-app
           - castopod-db
@@ -72,6 +73,7 @@ una base de dades Redis com a gestor de memòria cau.
       redis:
         image: redis:7.0-alpine
         container_name: "castopod-redis"
+        command: --requirepass changeme
         volumes:
           - castopod-cache:/data
         networks:

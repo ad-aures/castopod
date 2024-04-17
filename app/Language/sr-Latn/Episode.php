@@ -24,6 +24,7 @@ return [
     'comments' => 'Komentari',
     'activity' => 'Aktivnosti',
     'chapters' => 'Chapters',
+    'transcript' => 'Transcript',
     'description' => 'Opis epizode',
     'number_of_comments' => '{numberOfComments, plural,
         one {# komentar}
@@ -44,4 +45,6 @@ return [
         'publish_edit' => 'Uredi objavu',
     ],
     'no_chapters' => 'No chapters are available for this episode.',
+    'download_transcript' => 'Download transcript ({extension})',
+    'no_transcript' => 'No transcript available for this episode.',
 ];

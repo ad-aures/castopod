@@ -9,29 +9,27 @@ declare(strict_types=1);
  */
 
 return [
-    'feed' => 'RSS Podcast feed',
-    'season' => 'Season {seasonNumber}',
-    'list_of_episodes_year' => '{year} episodes ({episodeCount})',
+    'feed' => 'RSS PodCastフィード',
+    'season' => 'シーズン {seasonNumber}',
+    'list_of_episodes_year' => '{year} エピソード ({episodeCount})',
     'list_of_episodes_season' =>
-        'Season {seasonNumber} episodes ({episodeCount})',
-    'no_episode' => 'No episode found!',
-    'follow' => 'Follow',
-    'followTitle' => 'Follow {actorDisplayName} on the fediverse!',
+        'シーズン {seasonNumber} エピソード（{episodeCount}）',
+    'no_episode' => 'エピソードが見つかりませんでした',
+    'follow' => 'フォロー',
+    'followTitle' => 'Fediverseで {actorDisplayName} をフォロー！',
     'followers' => '{numberOfFollowers, plural,
-        one {# follower}
-        other {# followers}
+        other {# 人のフォロワー}
     }',
     'posts' => '{numberOfPosts, plural,
-        one {# post}
-        other {# posts}
+        other {#件の投稿}
     }',
-    'links' => 'Links',
-    'activity' => 'Activity',
-    'episodes' => 'Episodes',
-    'episodes_title' => 'Episodes of {podcastTitle}',
-    'about' => 'About',
+    'links' => 'リンク',
+    'activity' => 'アクティビティー',
+    'episodes' => 'エピソード',
+    'episodes_title' => '{podcastTitle} のエピソード',
+    'about' => '概要',
     'stats' => [
-        'title' => 'Stats',
+        'title' => '統計',
         'number_of_seasons' => '{0, plural,
             one {# season}
             other {# seasons}

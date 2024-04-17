@@ -32,57 +32,59 @@ Redis-database for å handtera mellomlagring.
 2.  Lag ei `docker-compose.yml`-fil som inneheld dette:
 
     ```yml
-    version: "3.7"
+    versjon: "3.7"
 
-    services:
+    tenester:
       app:
-        image: castopod/castopod:latest
-        container_name: "castopod-app"
-        volumes:
+        bilete: castopod/castopod:latest
+        container_namn: "castopod-app"
+        lagringsvolum:
           - castopod-media:/var/www/castopod/public/media
-        environment:
+        miljø:
           MYSQL_DATABASE: castopod
           MYSQL_USER: castopod
-          MYSQL_PASSWORD: changeme
-          CP_BASEURL: "https://castopod.example.com"
-          CP_ANALYTICS_SALT: changeme
+          MYSQL_PASSWORD: endremeg
+          CP_BASEURL: "https://castopod.domene.no"
+          CP_ANALYTICS_SALT: endremeg
           CP_CACHE_HANDLER: redis
           CP_REDIS_HOST: redis
-        networks:
+          CP_REDIS_PASSWORD: endremeg
+        nettverk:
           - castopod-app
           - castopod-db
-        ports:
+        portar:
           - 8000:8000
         restart: unless-stopped
 
       mariadb:
-        image: mariadb:10.5
-        container_name: "castopod-mariadb"
-        networks:
+        bilete: mariadb:10.5
+        container_namn: "castopod-mariadb"
+        nettverk:
           - castopod-db
-        volumes:
+        lagringsvolum:
           - castopod-db:/var/lib/mysql
-        environment:
-          MYSQL_ROOT_PASSWORD: changeme
+        miljø:
+          MYSQL_ROOT_PASSWORD: endremeg
           MYSQL_DATABASE: castopod
           MYSQL_USER: castopod
-          MYSQL_PASSWORD: changeme
+          MYSQL_PASSWORD: endremeg
         restart: unless-stopped
 
       redis:
-        image: redis:7.0-alpine
-        container_name: "castopod-redis"
-        volumes:
+        bilete: redis:7.0-alpine
+        container_namn: "castopod-redis"
+        kommando: --requirepass changeme
+        lagringsvolum:
           - castopod-cache:/data
-        networks:
+        nettverk:
           - castopod-app
 
-    volumes:
+    lagringsvolum:
       castopod-media:
       castopod-db:
       castopod-cache:
 
-    networks:
+    nettverk:
       castopod-app:
       castopod-db:
     ```

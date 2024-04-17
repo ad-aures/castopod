@@ -24,6 +24,7 @@ return [
     'comments' => 'Comentários',
     'activity' => 'Atividade',
     'chapters' => 'Chapters',
+    'transcript' => 'Transcript',
     'description' => 'Descrição do episódio',
     'number_of_comments' => '{numberOfComments, plural,
         one {# comentário}
@@ -44,4 +45,6 @@ return [
         'publish_edit' => 'Editar Publicação',
     ],
     'no_chapters' => 'No chapters are available for this episode.',
+    'download_transcript' => 'Download transcript ({extension})',
+    'no_transcript' => 'No transcript available for this episode.',
 ];

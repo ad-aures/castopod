@@ -47,6 +47,7 @@ Castopod 在其自动构建期间会将 3 个 Docker 映像推送到 Docker Hub 
           CP_ANALYTICS_SALT: changeme
           CP_CACHE_HANDLER: redis
           CP_REDIS_HOST: redis
+          CP_REDIS_PASSWORD: changeme
         networks:
           - castopod-app
           - castopod-db
@@ -71,6 +72,7 @@ Castopod 在其自动构建期间会将 3 个 Docker 映像推送到 Docker Hub 
       redis:
         image: redis:7.0-alpine
         container_name: "castopod-redis"
+        command: --requirepass changeme
         volumes:
           - castopod-cache:/data
         networks:

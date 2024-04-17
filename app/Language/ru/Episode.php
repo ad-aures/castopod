@@ -26,6 +26,7 @@ return [
     'comments' => 'Комментарии',
     'activity' => 'Активность',
     'chapters' => 'Chapters',
+    'transcript' => 'Transcript',
     'description' => 'Описание серии',
     'number_of_comments' => '{numberOfComments, plural,
         one {# комментарий}
@@ -48,4 +49,6 @@ return [
         'publish_edit' => 'Редактировать публикацию',
     ],
     'no_chapters' => 'No chapters are available for this episode.',
+    'download_transcript' => 'Download transcript ({extension})',
+    'no_transcript' => 'No transcript available for this episode.',
 ];

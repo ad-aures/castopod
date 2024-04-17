@@ -27,8 +27,8 @@ return [
     }',
     'like' => 'いいね',
     'reply' => '返信する',
-    'view_replies' => 'View replies ({numberOfReplies})',
-    'block_actor' => 'Block user @{actorUsername}',
-    'block_domain' => 'Block domain @{actorDomain}',
+    'view_replies' => '返信を見る ({numberOfReplies})',
+    'block_actor' => 'ユーザー @{actorUsername} をブロック',
+    'block_domain' => 'ドメイン @{actorDomain} をブロック',
     'delete' => 'コメントを削除する',
 ];

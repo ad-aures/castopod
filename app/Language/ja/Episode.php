@@ -10,38 +10,40 @@ declare(strict_types=1);
 
 return [
     'season' => 'シーズン {seasonNumber}',
-    'season_abbr' => 'S{seasonNumber}',
+    'season_abbr' => 'シーズン {seasonNumber}',
     'number' => 'エピソード {episodeNumber}',
-    'number_abbr' => 'Ep. {episodeNumber}',
+    'number_abbr' => 'エピソード {episodeNumber}',
     'season_episode' => 'シーズン {seasonNumber} エピソード {episodeNumber}',
-    'season_episode_abbr' => 'S{seasonNumber}:E{episodeNumber}',
+    'season_episode_abbr' => 'シーズン{seasonNumber}エピソード{episodeNumber}',
     'persons' => '{personsCount, plural,
-        one {# person}
-        other {# persons}
+        other {# 人}
     }',
-    'persons_list' => 'Persons',
+    'persons_list' => '人物',
     'back_to_episodes' => '{podcast} のエピソードに戻る',
     'comments' => 'コメント',
     'activity' => 'アクティビティ',
-    'chapters' => 'Chapters',
-    'description' => 'Episode description',
+    'chapters' => '章',
+    'transcript' => 'Transcript',
+    'description' => 'エピソードの詳細',
     'number_of_comments' => '{numberOfComments, plural,
         one {# comment}
         other {# comments}
     }',
-    'all_podcast_episodes' => 'All podcast episodes',
+    'all_podcast_episodes' => 'すべての Podcast エピソード',
     'back_to_podcast' => 'ポッドキャストへ戻る',
     'preview' => [
         'title' => 'プレビュー',
-        'not_published' => 'Not published',
+        'not_published' => '未公開',
         'text' => '{publication_status, select,
-            published {This episode is not yet published.}
-            scheduled {This episode is scheduled for publication on {publication_date}.}
-            with_podcast {This episode will be published at the same time as the podcast.}
-            other {This episode is not yet published.}
+            published {このエピソードはまだ公開されていません}
+            scheduled {このエピソードは {publication_date} に公開される予定です}
+            with_podcast {このエピソードはPodCastと同時に公開されます}
+            other {このエピソードはまだ公開されていません。}
         }',
         'publish' => '公開する',
-        'publish_edit' => 'Edit publication',
+        'publish_edit' => '出版物を編集',
     ],
     'no_chapters' => 'No chapters are available for this episode.',
+    'download_transcript' => 'Download transcript ({extension})',
+    'no_transcript' => 'No transcript available for this episode.',
 ];

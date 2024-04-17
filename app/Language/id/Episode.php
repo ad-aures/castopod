@@ -23,6 +23,7 @@ return [
     'comments' => 'Komentar',
     'activity' => 'Aktivitas',
     'chapters' => 'Chapters',
+    'transcript' => 'Transcript',
     'description' => 'Keterangan episode',
     'number_of_comments' => '{numberOfComments, plural,
         other {# komentar}
@@ -42,4 +43,6 @@ return [
         'publish_edit' => 'Edit publication',
     ],
     'no_chapters' => 'No chapters are available for this episode.',
+    'download_transcript' => 'Download transcript ({extension})',
+    'no_transcript' => 'No transcript available for this episode.',
 ];

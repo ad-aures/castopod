@@ -48,6 +48,7 @@ También se puede añadir una base de datos Redis como gestor de caché.
           CP_ANALYTICS_SALT: changeme
           CP_CACHE_HANDLER: redis
           CP_REDIS_HOST: redis
+          CP_REDIS_PASSWORD: changeme
         networks:
           - castopod-app
           - castopod-db
@@ -72,6 +73,7 @@ También se puede añadir una base de datos Redis como gestor de caché.
       redis:
         image: redis:7.0-alpine
         container_name: "castopod-redis"
+        command: --requirepass changeme
         volumes:
           - castopod-cache:/data
         networks:

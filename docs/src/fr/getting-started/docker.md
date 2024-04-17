@@ -32,31 +32,32 @@ de données Redis peut être ajoutée en tant que gestionnaire de cache.
 2.  Créez un fichier `docker-compose.yml` avec les éléments suivants :
 
     ```yml
-    version: "3.
+    version: "3.7"
 
-    services :
+    services:
       app:
         image: castopod/castopod:latest
         container_name: "castopod-app"
         volumes:
           - castopod-media:/var/www/castopod/public/media
-        environnement:
+        environment:
           MYSQL_DATABASE: castopod
           MYSQL_USER: castopod
           MYSQL_PASSWORD: changeme
-          CP_BASEURL: "https://castopod. xample. om"
-          CP_ANALYTICS_SALT : changer
+          CP_BASEURL: "https://castopod.example.com"
+          CP_ANALYTICS_SALT: changeme
           CP_CACHE_HANDLER: redis
           CP_REDIS_HOST: redis
-        réseaux :
+          CP_REDIS_PASSWORD: changeme
+        networks:
           - castopod-app
           - castopod-db
-        ports :
+        ports:
           - 8000:8000
-        redémarrage :
+        restart: unless-stopped
 
       mariadb:
-        image: mariadb:10.
+        image: mariadb:10.5
         container_name: "castopod-mariadb"
         networks:
           - castopod-db
@@ -66,15 +67,16 @@ de données Redis peut être ajoutée en tant que gestionnaire de cache.
           MYSQL_ROOT_PASSWORD: changeme
           MYSQL_DATABASE: castopod
           MYSQL_USER: castopod
-          MYSQL_PASSWORD: changez
+          MYSQL_PASSWORD: changeme
         restart: unless-stopped
 
       redis:
-        image: redis:redis:7. -alpine
+        image: redis:7.0-alpine
         container_name: "castopod-redis"
+        command: --requirepass changeme
         volumes:
           - castopod-cache:/data
-        réseaux:
+        networks:
           - castopod-app
 
     volumes:

@@ -34,7 +34,7 @@ return [
         'email' => 'E-Mail',
         'expiration_date' => 'Ablaufdatum',
         'expiration_date_hint' => 'Das Datum und die Uhrzeit, zu der das Abonnement abläuft. Leer lassen für ein unbegrenztes Abonnement.',
-        'submit_create' => 'Create subscription',
+        'submit_create' => 'Abonnement einrichten',
         'submit_edit' => 'Abonnement bearbeiten',
     ],
     'form_link_add' => [

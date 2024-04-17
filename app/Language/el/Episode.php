@@ -24,6 +24,7 @@ return [
     'comments' => 'Σχόλια',
     'activity' => 'Δραστηριότητα',
     'chapters' => 'Chapters',
+    'transcript' => 'Transcript',
     'description' => 'Περιγραφή επεισοδίου',
     'number_of_comments' => '{numberOfComments, plural,
         one {# σχόλιο}
@@ -44,4 +45,6 @@ return [
         'publish_edit' => 'Edit publication',
     ],
     'no_chapters' => 'No chapters are available for this episode.',
+    'download_transcript' => 'Download transcript ({extension})',
+    'no_transcript' => 'No transcript available for this episode.',
 ];
