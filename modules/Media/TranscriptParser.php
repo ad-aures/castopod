@@ -144,6 +144,7 @@ class TranscriptParser
                     break;
 
                 case VTT_STATE_BLANK:
+                    $speakercount = 0;
                     $state = VTT_STATE_TIME;
                     break;
 
@@ -154,20 +155,8 @@ class TranscriptParser
 
                 case VTT_STATE_TEXT:
                     if (trim($line) === '') {
-                        $sub = new stdClass();
-                        $sub->number = $subNum;
-                        [$startTime, $endTime] = explode(' --> ', $subTime);
-                        $sub->startTime = $this->getSecondsFromVTTTimeString($startTime);
-                        $sub->endTime = $this->getSecondsFromVTTTimeString($endTime);
-                        $sub->text = trim($subText);
-                        if ($subSpeaker !== '') {
-                            $sub->speaker = trim((string) $subSpeaker);
-                        }
-
-                        $subText = '';
                         $state = VTT_STATE_TIME;
-                        $subs[] = $sub;
-                        ++$subNum;
+                        //$subs[] = $sub;
                     } elseif ($subText !== '') {
                         $subText .= PHP_EOL . $line;
                     } else {
@@ -179,18 +168,36 @@ class TranscriptParser
                          * 2. Who is speaking
                          * 3. Any styling cues encoded in the VTT (which we dump)
                          * More information: https://www.w3.org/TR/webvtt1/
-                         */
-                        $vtt_speaker_pattern = '/^<.*>/';
-                        $removethese = ['<', '>'];
+                         *
+                         * If there is more than one speaker in a cue, we also need
+                         * to handle this, to repeat the start and end times for
+                         * the second cue.
+                         * */
+
+                        $vtt_speaker_pattern = '/^<.*>/U';
+                        $removethese = ['</v>', '<', '>'];
                         preg_match($vtt_speaker_pattern, $line, $matches);
                         if (isset($matches[0])) {
-                            $subVoiceCue = explode(' ', str_replace($removethese, '', $matches[0]));
-                            $subSpeaker = $subVoiceCue[1];
+                            $subVoiceCue = str_replace($removethese, '', $matches[0]);
+                            $subSpeaker = substr($subVoiceCue, strpos($subVoiceCue, ' '));
                         } else {
                             $subSpeaker = '';
                         }
 
                         $subText .= preg_replace($vtt_speaker_pattern, '', $line);
+                        $sub = new stdClass();
+                        $sub->number = $subNum;
+                        [$startTime, $endTime] = explode(' --> ', $subTime);
+                        $sub->startTime = $this->getSecondsFromVTTTimeString($startTime);
+                        $sub->endTime = $this->getSecondsFromVTTTimeString($endTime);
+                        $sub->text = trim($subText);
+                        if ($subSpeaker !== '') {
+                            $sub->speaker = trim($subSpeaker);
+                        }
+
+                        $subText = '';
+                        $subs[] = $sub;
+                        ++$subNum;
                     }
 
                     break;
@@ -215,6 +222,11 @@ class TranscriptParser
     private function getSecondsFromVTTTimeString(string $timeString): float
     {
         $timeString = explode('.', $timeString);
+        if (substr_count($timeString[0], ':') === 1) {
+            // add hours if only MM:SS.mmm format
+            $timeString[0] = '00:' . $timeString[0];
+        }
+
         return (strtotime($timeString[0]) - strtotime('TODAY')) + (float) "0.{$timeString[1]}";
     }
 }

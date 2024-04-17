@@ -17,6 +17,11 @@ if ($episode->publication_status === 'published') {
             'label'     => lang('Episode.chapters'),
             'labelInfo' => $episode->chapters === null ? 0 : $episode->chapters->chapter_count,
         ],
+        [
+            'uri'       => route_to('episode-transcript', esc($podcast->handle), esc($episode->slug)),
+            'label'     => lang('Episode.transcript'),
+            'labelInfo' => $episode->transcript === null ? '&ndash;' : '✓',
+        ],
     ];
 } else {
     $navigationItems = [
@@ -34,6 +39,11 @@ if ($episode->publication_status === 'published') {
             'uri'       => route_to('episode-preview-chapters', $episode->preview_id),
             'label'     => lang('Episode.chapters'),
             'labelInfo' => $episode->chapters === null ? 0 : $episode->chapters->chapter_count,
+        ],
+        [
+            'uri'       => route_to('episode-preview-transcript', $episode->preview_id),
+            'label'     => lang('Episode.transcript'),
+            'labelInfo' => $episode->transcript === null ? '&ndash;' : '✓',
         ],
     ];
 }

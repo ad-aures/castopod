@@ -167,7 +167,7 @@ class EpisodeController extends BaseController
         return $cachedView;
     }
 
-    public function chapters(): String
+    public function chapters(): string
     {
         // Prevent analytics hit when authenticated
         if (! auth()->loggedIn()) {
@@ -218,6 +218,72 @@ class EpisodeController extends BaseController
 
             // The page cache is set to a decade so it is deleted manually upon podcast update
             return view('episode/chapters', $data, [
+                'cache' => $secondsToNextUnpublishedEpisode
+                    ? $secondsToNextUnpublishedEpisode
+                    : DECADE,
+                'cache_name' => $cacheName,
+            ]);
+        }
+
+        return $cachedView;
+    }
+
+    public function transcript(): string
+    {
+        // Prevent analytics hit when authenticated
+        if (! auth()->loggedIn()) {
+            $this->registerPodcastWebpageHit($this->episode->podcast_id);
+        }
+
+        $cacheName = implode(
+            '_',
+            array_filter([
+                'page',
+                "podcast#{$this->podcast->id}",
+                "episode#{$this->episode->id}",
+                'transcript',
+                service('request')
+                    ->getLocale(),
+                is_unlocked($this->podcast->handle) ? 'unlocked' : null,
+                auth()
+                    ->loggedIn() ? 'authenticated' : null,
+            ]),
+        );
+
+        if (! ($cachedView = cache($cacheName))) {
+            // get transcript from json file
+            $data = [
+                'metatags' => get_episode_metatags($this->episode),
+                'podcast'  => $this->podcast,
+                'episode'  => $this->episode,
+            ];
+
+            if ($this->episode->transcript !== null) {
+                $data['transcript'] = $this->episode->transcript;
+
+                if ($this->episode->transcript->json_key !== null) {
+                    /** @var FileManagerInterface $fileManager */
+                    $fileManager = service('file_manager');
+                    $transcriptJsonString = (string) $fileManager->getFileContents(
+                        $this->episode->transcript->json_key
+                    );
+
+                    $data['captions'] = json_decode($transcriptJsonString, true);
+                }
+            }
+
+            $secondsToNextUnpublishedEpisode = (new EpisodeModel())->getSecondsToNextUnpublishedEpisode(
+                $this->podcast->id,
+            );
+
+            if (auth()->loggedIn()) {
+                helper('form');
+
+                return view('episode/transcript', $data);
+            }
+
+            // The page cache is set to a decade so it is deleted manually upon podcast update
+            return view('episode/transcript', $data, [
                 'cache' => $secondsToNextUnpublishedEpisode
                     ? $secondsToNextUnpublishedEpisode
                     : DECADE,
