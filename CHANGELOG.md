@@ -1,3 +1,27 @@
+# [1.11.0](https://code.castopod.org/adaures/castopod/compare/v1.10.5...v1.11.0) (4/17/2024)
+
+### Bug Fixes
+
+- **premium:** set itunes:block on premium feeds to prevent indexing
+  ([88851b0](https://code.castopod.org/adaures/castopod/commit/88851b022663d575a816f0e2f33f0353767dd52d))
+- **rss:** generate podcast guid if empty
+  ([a5aef2a](https://code.castopod.org/adaures/castopod/commit/a5aef2a63e464632f3941649d455672835989e6c)),
+  closes [#450](https://code.castopod.org/adaures/castopod/issues/450)
+
+### Features
+
+- add trailer tags to rss if trailer episodes are present
+  ([80fdd9c](https://code.castopod.org/adaures/castopod/commit/80fdd9cfb4a95feac6ed0000435a013fc83e6892))
+- add transcript display to episode page
+  ([4d141fc](https://code.castopod.org/adaures/castopod/commit/4d141fceae56fa9e666b42c32a830ff9c68989db)),
+  closes [#411](https://code.castopod.org/adaures/castopod/issues/411)
+- **platforms:** add telegram to socials
+  ([004f804](https://code.castopod.org/adaures/castopod/commit/004f804045cd8e884361bb4318109fbdd7afc9a8))
+- **platforms:** add truefans.fm and episodes.fm
+  ([d046ecc](https://code.castopod.org/adaures/castopod/commit/d046ecc52f6ccd41d09f6de48e00d2c61d25d7f0)),
+  closes [#458](https://code.castopod.org/adaures/castopod/issues/458)
+  [#459](https://code.castopod.org/adaures/castopod/issues/459)
+
 ## [1.10.5](https://code.castopod.org/adaures/castopod/compare/v1.10.4...v1.10.5) (3/12/2024)
 
 ### Bug Fixes
