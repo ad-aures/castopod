@@ -491,6 +491,13 @@ class PlatformSeeder extends Seeder
                 'home_url'   => 'https://www.ulule.com/',
                 'submit_url' => 'https://www.ulule.com/projects/create/#/',
             ],
+            [
+                'slug'       => 'donorbox',
+                'type'       => 'funding',
+                'label'      => 'Donorbox',
+                'home_url'   => 'https://donorbox.org/',
+                'submit_url' => 'https://donorbox.org/orgs/new',
+            ],
         ];
 
         $socialData = [
