@@ -223,13 +223,6 @@ class PlatformSeeder extends Seeder
                 'submit_url' => 'https://www.spreaker.com/cms/shows/rss-import',
             ],
             [
-                'slug'       => 'stitcher',
-                'type'       => 'podcasting',
-                'label'      => 'Stitcher',
-                'home_url'   => 'https://www.stitcher.com/',
-                'submit_url' => 'https://partners.stitcher.com/join',
-            ],
-            [
                 'slug'       => 'tunein',
                 'type'       => 'podcasting',
                 'label'      => 'TuneIn',
