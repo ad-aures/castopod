@@ -61,6 +61,7 @@ class PodcastModel extends Model
         'location_name',
         'location_geo',
         'location_osm',
+        'verify_txt',
         'payment_pointer',
         'custom_rss',
         'is_published_on_hubs',

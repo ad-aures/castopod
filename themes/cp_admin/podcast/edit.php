@@ -239,25 +239,36 @@
     name="custom_rss"
     label="<?= esc(lang('Podcast.form.custom_rss')) ?>"
     hint="<?= esc(lang('Podcast.form.custom_rss_hint')) ?>"
-    content="<?= esc($podcast->custom_rss_string) ?>" />
+    content="<?= esc($podcast->custom_rss_string) ?>"
+    rows="8" />
 
-    <Forms.Field
-    name="new_feed_url"
-    type="url"
-    label="<?= esc(lang('Podcast.form.new_feed_url')) ?>"
-    hint="<?= esc(lang('Podcast.form.new_feed_url_hint')) ?>"
-    value="<?= esc($podcast->new_feed_url) ?>"
-    />
+<Forms.Field
+    as="Textarea"
+    name="verify_txt"
+    label="<?= esc(lang('Podcast.form.verify_txt')) ?>"
+    hint="<?= esc(lang('Podcast.form.verify_txt_hint')) ?>"
+    helper="<?= esc(lang('Podcast.form.verify_txt_helper')) ?>"
+    value="<?= esc($podcast->verify_txt) ?>"
+    rows="5" />
 
-    <Forms.Toggler class="mb-2" name="lock" value="yes" checked="<?= $podcast->is_locked ? 'true' : 'false' ?>" hint="<?= esc(lang('Podcast.form.lock_hint')) ?>">
-        <?= lang('Podcast.form.lock') ?>
-    </Forms.Toggler>
-    <Forms.Toggler class="mb-2" name="block" value="yes" checked="<?= $podcast->is_blocked ? 'true' : 'false'  ?>" hint="<?= esc(lang('Podcast.form.block_hint')) ?>">
-        <?= lang('Podcast.form.block') ?>
-    </Forms.Toggler>
-    <Forms.Toggler name="complete" value="yes" checked="<?= $podcast->is_completed ? 'true' : 'false' ?>">
-        <?= lang('Podcast.form.complete') ?>
-    </Forms.Toggler>
+<Forms.Field
+name="new_feed_url"
+type="url"
+label="<?= esc(lang('Podcast.form.new_feed_url')) ?>"
+hint="<?= esc(lang('Podcast.form.new_feed_url_hint')) ?>"
+value="<?= esc($podcast->new_feed_url) ?>"
+/>
+
+<Forms.Toggler class="mb-2" name="lock" value="yes" checked="<?= $podcast->is_locked ? 'true' : 'false' ?>" hint="<?= esc(lang('Podcast.form.lock_hint')) ?>">
+    <?= lang('Podcast.form.lock') ?>
+</Forms.Toggler>
+<Forms.Toggler class="mb-2" name="block" value="yes" checked="<?= $podcast->is_blocked ? 'true' : 'false'  ?>" hint="<?= esc(lang('Podcast.form.block_hint')) ?>">
+    <?= lang('Podcast.form.block') ?>
+</Forms.Toggler>
+<Forms.Toggler name="complete" value="yes" checked="<?= $podcast->is_completed ? 'true' : 'false' ?>">
+    <?= lang('Podcast.form.complete') ?>
+</Forms.Toggler>
+
 </Forms.Section>
 
 </div>

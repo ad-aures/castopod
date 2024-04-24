@@ -205,7 +205,16 @@
     as="XMLEditor"
     name="custom_rss"
     label="<?= esc(lang('Podcast.form.custom_rss')) ?>"
-    hint="<?= esc(lang('Podcast.form.custom_rss_hint')) ?>" />
+    hint="<?= esc(lang('Podcast.form.custom_rss_hint')) ?>"
+    rows="8" />
+
+<Forms.Field
+    as="Textarea"
+    name="verify_txt"
+    label="<?= esc(lang('Podcast.form.verify_txt')) ?>"
+    hint="<?= esc(lang('Podcast.form.verify_txt_hint')) ?>"
+    helper="<?= esc(lang('Podcast.form.verify_txt_helper')) ?>"
+    rows="5" />
 
 <Forms.Toggler class="mb-2" name="lock" value="yes" checked="true" hint="<?= esc(lang('Podcast.form.lock_hint')) ?>">
     <?= lang('Podcast.form.lock') ?>

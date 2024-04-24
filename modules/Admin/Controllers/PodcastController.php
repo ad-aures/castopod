@@ -224,6 +224,7 @@ class PodcastController extends BaseController
             'location'                         => $this->request->getPost('location_name') === '' ? null : new Location(
                 $this->request->getPost('location_name')
             ),
+            'verify_txt'            => $this->request->getPost('verify_txt'),
             'custom_rss_string'     => $this->request->getPost('custom_rss'),
             'is_blocked'            => $this->request->getPost('block') === 'yes',
             'is_completed'          => $this->request->getPost('complete') === 'yes',
@@ -319,6 +320,9 @@ class PodcastController extends BaseController
         $this->podcast->copyright = $this->request->getPost('copyright');
         $this->podcast->location = $this->request->getPost('location_name') === '' ? null : new Location(
             $this->request->getPost('location_name')
+        );
+        $this->podcast->verify_txt = $this->request->getPost('verify_txt') === '' ? null : $this->request->getPost(
+            'verify_txt'
         );
         $this->podcast->custom_rss_string = $this->request->getPost('custom_rss');
         $this->podcast->new_feed_url = $this->request->getPost('new_feed_url') === '' ? null : $this->request->getPost(

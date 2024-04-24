@@ -121,6 +121,12 @@ if (! function_exists('get_rss_feed')) {
                 ->addAttribute('owner', $podcast->owner_email);
         }
 
+        if ($podcast->verify_txt !== null) {
+            $channel
+                ->addChild('txt', $podcast->verify_txt, $podcastNamespace)
+                ->addAttribute('purpose', 'verify');
+        }
+
         if ($podcast->imported_feed_url !== null) {
             $channel->addChild('previousUrl', $podcast->imported_feed_url, $podcastNamespace);
         }
