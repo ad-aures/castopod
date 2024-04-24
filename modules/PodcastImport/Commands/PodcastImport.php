@@ -8,11 +8,9 @@ use AdAures\PodcastPersonsTaxonomy\ReversedTaxonomy;
 use App\Entities\Episode;
 use App\Entities\Location;
 use App\Entities\Person;
-use App\Entities\Platform;
 use App\Entities\Podcast;
 use App\Models\EpisodeModel;
 use App\Models\PersonModel;
-use App\Models\PlatformModel;
 use App\Models\PodcastModel;
 use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
@@ -23,6 +21,8 @@ use Exception;
 use League\HTMLToMarkdown\HtmlConverter;
 use Modules\Auth\Config\AuthGroups;
 use Modules\Auth\Models\UserModel;
+use Modules\Platforms\Models\PlatformModel;
+use Modules\Platforms\Platforms;
 use Modules\PodcastImport\Entities\PodcastImportTask;
 use Modules\PodcastImport\Entities\TaskStatus;
 use PodcastFeed\PodcastFeed;
@@ -392,27 +392,32 @@ class PodcastImport extends BaseCommand
             ],
         ];
 
+        $platforms = new Platforms();
         $platformModel = new PlatformModel();
         foreach ($platformTypes as $platformType) {
-            $podcastsPlatformsData = [];
+            $platformsData = [];
             $currPlatformStep = 1; // for progress
             CLI::write($platformType['name'] . ' - ' . $platformType['count'] . ' elements');
             foreach ($platformType['elements'] as $platform) {
                 CLI::showProgress($currPlatformStep++, $platformType['count']);
-                $platformLabel = $platform->getAttribute('platform');
-                $platformSlug = slugify((string) $platformLabel);
-                if ($platformModel->getPlatform($platformSlug) instanceof Platform) {
-                    $podcastsPlatformsData[] = [
-                        'platform_slug' => $platformSlug,
-                        'podcast_id'    => $this->podcast->id,
-                        'link_url'      => $platform->getAttribute($platformType['account_url_key']),
-                        'account_id'    => $platform->getAttribute($platformType['account_id_key']),
-                        'is_visible'    => false,
-                    ];
+                $platformSlug = $platform->getAttribute('platform');
+                $platformData = $platforms->findPlatformBySlug($platformType['name'], $platformSlug);
+
+                if ($platformData === null) {
+                    continue;
                 }
+
+                $platformsData[] = [
+                    'podcast_id' => $this->podcast->id,
+                    'type'       => $platformType['name'],
+                    'slug'       => $platformSlug,
+                    'link_url'   => $platform->getAttribute($platformType['account_url_key']),
+                    'account_id' => $platform->getAttribute($platformType['account_id_key']),
+                    'is_visible' => false,
+                ];
             }
 
-            $platformModel->savePodcastPlatforms($this->podcast->id, $platformType['name'], $podcastsPlatformsData);
+            $platformModel->savePlatforms($this->podcast->id, $platformType['name'], $platformsData);
             CLI::showProgress(false);
         }
     }

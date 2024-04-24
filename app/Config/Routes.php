@@ -15,7 +15,6 @@ use CodeIgniter\Router\RouteCollection;
 $routes->addPlaceholder('podcastHandle', '[a-zA-Z0-9\_]{1,32}');
 $routes->addPlaceholder('slug', '[a-zA-Z0-9\-]{1,128}');
 $routes->addPlaceholder('base64', '[A-Za-z0-9\.\_]+\-{0,2}');
-$routes->addPlaceholder('platformType', '\bpodcasting|\bsocial|\bfunding');
 $routes->addPlaceholder('postAction', '\bfavourite|\breblog|\breply');
 $routes->addPlaceholder('embedTheme', '\blight|\bdark|\blight-transparent|\bdark-transparent');
 $routes->addPlaceholder(

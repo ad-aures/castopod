@@ -20,6 +20,5 @@ class AppSeeder extends Seeder
     {
         $this->call('CategorySeeder');
         $this->call('LanguageSeeder');
-        $this->call('PlatformSeeder');
     }
 }

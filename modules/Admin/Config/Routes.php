@@ -511,48 +511,6 @@ $routes->group(
                         });
                     });
                 });
-                $routes->group('platforms', static function ($routes): void {
-                    $routes->get(
-                        '/',
-                        'PodcastPlatformController::platforms/$1/podcasting',
-                        [
-                            'as'     => 'platforms-podcasting',
-                            'filter' => 'permission:podcast#.manage-platforms',
-                        ],
-                    );
-                    $routes->get(
-                        'social',
-                        'PodcastPlatformController::platforms/$1/social',
-                        [
-                            'as'     => 'platforms-social',
-                            'filter' => 'permission:podcast#.manage-platforms',
-                        ],
-                    );
-                    $routes->get(
-                        'funding',
-                        'PodcastPlatformController::platforms/$1/funding',
-                        [
-                            'as'     => 'platforms-funding',
-                            'filter' => 'permission:podcast#.manage-platforms',
-                        ],
-                    );
-                    $routes->post(
-                        'save/(:platformType)',
-                        'PodcastPlatformController::attemptPlatformsUpdate/$1/$2',
-                        [
-                            'as'     => 'platforms-save',
-                            'filter' => 'permission:podcast#.manage-platforms',
-                        ],
-                    );
-                    $routes->get(
-                        '(:slug)/podcast-platform-remove',
-                        'PodcastPlatformController::removePodcastPlatform/$1/$2',
-                        [
-                            'as'     => 'podcast-platform-remove',
-                            'filter' => 'permission:podcast#.manage-platforms',
-                        ],
-                    );
-                });
                 // Podcast notifications
                 $routes->group('notifications', static function ($routes): void {
                     $routes->get('/', 'NotificationController::list/$1', [

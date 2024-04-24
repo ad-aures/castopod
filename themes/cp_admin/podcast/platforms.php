@@ -14,8 +14,9 @@
 
 <?= $this->section('content') ?>
 
-<form id="platforms-form" action="<?= route_to('platforms-save', $podcast->id, $platformType) ?>" method="POST" class="flex flex-col max-w-md gap-y-8">
+<form id="platforms-form" action="<?= route_to('platforms-save', $podcast->id, $platformType) ?>" method="POST" class="grid w-full gap-4 lg:gap-8 grid-cols-platforms">
 <?= csrf_field() ?>
+
 
 <?php foreach ($platforms as $platform): ?>
 
@@ -24,7 +25,8 @@
         route_to(
             'podcast-platform-remove',
             $podcast->id,
-            esc($platform->slug),
+            $platform->type,
+            $platform->slug,
         ),
         icon('delete-bin', 'mx-auto'),
         [
@@ -36,7 +38,7 @@
         ],
     )
         : '' ?>
-    <div class="flex items-center gap-x-4">
+    <div class="flex items-center gap-x-2">
         <?= icon(
             esc($platform->slug),
             'text-skin-muted text-4xl',
@@ -45,29 +47,15 @@
         <h2 class="text-xl font-semibold"><?= $platform->label ?></h2>
     </div>
     <div class="flex flex-col flex-1 mt-4">
-            <div class="inline-flex ml-12 gap-x-2">
-                <?= anchor($platform->home_url, icon('external-link', 'mx-auto') . lang('Platforms.website'), [
-                    'class'        => 'gap-x-1 flex-shrink-0 inline-flex items-center justify-center font-semibold shadow-xs rounded-full focus:ring-accent px-2 py-1 text-sm border-2 border-accent-base text-accent-base bg-white hover:border-accent-hover hover:text-accent-hover',
-                    'target'       => '_blank',
-                    'rel'          => 'noopener noreferrer',
-                    'data-tooltip' => 'bottom',
-                    'title'        => lang('Platforms.home_url', [
+            <div class="inline-flex ml-8 -mt-6 gap-x-1">
+                <Button uri="<?= $platform->home_url ?>" variant="link" size="small" target="_blank" rel="noopener noreferrer" title="<?= lang('Platforms.home_url', [
+                    'platformName' => $platform->label,
+                ]) ?>" data-tooltip="bottom"><?= lang('Platforms.website') ?></Button>
+                <?php if ($platform->submit_url !== null): ?>
+                    <Button uri="<?= $platform->submit_url ?>" variant="link" size="small" target="_blank" rel="noopener noreferrer" title="<?= lang('Platforms.submit_url', [
                         'platformName' => $platform->label,
-                    ]),
-                ]) ?>
-                <?= $platform->submit_url ? anchor(
-                    $platform->submit_url,
-                    icon('add') . lang('Platforms.register'),
-                    [
-                        'class'        => 'gap-x-1 flex-shrink-0 inline-flex items-center justify-center font-semibold shadow-xs rounded-full focus:ring-accent px-2 py-1 text-sm border-2 border-accent-base text-accent-base bg-white hover:border-accent-hover hover:text-accent-hover',
-                        'target'       => '_blank',
-                        'rel'          => 'noopener noreferrer',
-                        'data-tooltip' => 'bottom',
-                        'title'        => lang('Platforms.submit_url', [
-                            'platformName' => $platform->label,
-                        ]),
-                    ]
-                ) : '' ?>
+                    ]) ?>" data-tooltip="bottom"><?= lang('Platforms.register') ?></Button>
+                <?php endif; ?>
             </div>
             <fieldset>
                 <Forms.Field

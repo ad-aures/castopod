@@ -20,7 +20,6 @@ class DevSeeder extends Seeder
     {
         $this->call('CategorySeeder');
         $this->call('LanguageSeeder');
-        $this->call('PlatformSeeder');
         $this->call('DevSuperadminSeeder');
     }
 }

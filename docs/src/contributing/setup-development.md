@@ -303,11 +303,8 @@ You may skip this section if you go through the install wizard (go to
    # Populates all Languages
    php spark db:seed LanguageSeeder
 
-   # Populates all podcasts platforms
-   php spark db:seed PlatformSeeder
-
    # Adds a superadmin with [admin@castopod.local / castopod] credentials
-   php spark db:seed PlatformSeeder
+   php spark db:seed DevSuperadminSeeder
    ```
 
 3. (optionnal) Populate the database with test data:

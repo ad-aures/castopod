@@ -8,18 +8,19 @@ declare(strict_types=1);
  * @link       https://castopod.org/
  */
 
-namespace Modules\Admin\Controllers;
+namespace Modules\Platforms\Controllers;
 
 use App\Entities\Podcast;
-use App\Models\PlatformModel;
 use App\Models\PodcastModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
 use Config\Services;
+use Modules\Admin\Controllers\BaseController;
+use Modules\Platforms\Models\PlatformModel;
 
-class PodcastPlatformController extends BaseController
+class PlatformController extends BaseController
 {
-    protected ?Podcast $podcast;
+    protected Podcast $podcast;
 
     public function _remap(string $method, string ...$params): mixed
     {
@@ -28,18 +29,20 @@ class PodcastPlatformController extends BaseController
         }
 
         if (
-            ($this->podcast = (new PodcastModel())->getPodcastById((int) $params[0])) instanceof Podcast
+            ! ($podcast = (new PodcastModel())->getPodcastById((int) $params[0])) instanceof Podcast
         ) {
-            unset($params[0]);
-            return $this->{$method}(...$params);
+            throw PageNotFoundException::forPageNotFound();
         }
 
-        throw PageNotFoundException::forPageNotFound();
+        $this->podcast = $podcast;
+
+        unset($params[0]);
+        return $this->{$method}(...$params);
     }
 
     public function index(): string
     {
-        return view('podcast/platforms\dashboard');
+        return view('podcast/platforms/dashboard');
     }
 
     public function platforms(string $platformType): string
@@ -49,7 +52,7 @@ class PodcastPlatformController extends BaseController
         $data = [
             'podcast'      => $this->podcast,
             'platformType' => $platformType,
-            'platforms'    => (new PlatformModel())->getPlatformsWithLinks($this->podcast->id, $platformType),
+            'platforms'    => (new PlatformModel())->getPlatformsWithData($this->podcast->id, $platformType),
         ];
 
         replace_breadcrumb_params([
@@ -64,8 +67,7 @@ class PodcastPlatformController extends BaseController
         $platformModel = new PlatformModel();
         $validation = Services::validation();
 
-        $podcastsPlatformsData = [];
-
+        $platformsData = [];
         foreach (
             $this->request->getPost('platforms')
             as $platformSlug => $podcastPlatform
@@ -80,30 +82,27 @@ class PodcastPlatformController extends BaseController
             }
 
             $podcastPlatformAccountId = trim((string) $podcastPlatform['account_id']);
-            $podcastsPlatformsData[] = [
-                'platform_slug' => $platformSlug,
-                'podcast_id'    => $this->podcast->id,
-                'link_url'      => $podcastPlatformUrl,
-                'account_id'    => $podcastPlatformAccountId === '' ? null : $podcastPlatformAccountId,
-                'is_visible'    => array_key_exists('visible', $podcastPlatform) &&
+            $platformsData[] = [
+                'podcast_id' => $this->podcast->id,
+                'type'       => $platformType,
+                'slug'       => $platformSlug,
+                'link_url'   => $podcastPlatformUrl,
+                'account_id' => $podcastPlatformAccountId === '' ? null : $podcastPlatformAccountId,
+                'is_visible' => array_key_exists('visible', $podcastPlatform) &&
                     $podcastPlatform['visible'] === 'yes',
-                'is_on_embed' => array_key_exists(
-                    'on_embed',
-                    $podcastPlatform
-                ) && $podcastPlatform['on_embed'] === 'yes',
             ];
         }
 
-        $platformModel->savePodcastPlatforms($this->podcast->id, $platformType, $podcastsPlatformsData);
+        $platformModel->savePlatforms($this->podcast->id, $platformType, $platformsData);
 
         return redirect()
             ->back()
             ->with('message', lang('Platforms.messages.updateSuccess'));
     }
 
-    public function removePodcastPlatform(string $platformSlug): RedirectResponse
+    public function removePlatform(string $platformType, string $platformSlug): RedirectResponse
     {
-        (new PlatformModel())->removePodcastPlatform($this->podcast->id, $platformSlug);
+        (new PlatformModel())->removePlatform($this->podcast->id, $platformType, $platformSlug);
 
         return redirect()
             ->back()

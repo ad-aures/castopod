@@ -117,6 +117,7 @@ module.exports = {
         cards: "repeat(auto-fill, minmax(14rem, 1fr))",
         latestEpisodes: "repeat(5, 1fr)",
         colorButtons: "repeat(auto-fill, minmax(4rem, 1fr))",
+        platforms: "repeat(auto-fill, minmax(18rem, 1fr))",
       },
       gridTemplateRows: {
         admin: "40px 1fr",

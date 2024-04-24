@@ -55,6 +55,7 @@ class Autoload extends AutoloadConfig
         'Modules\Install'         => ROOTPATH . 'modules/Install/',
         'Modules\Media'           => ROOTPATH . 'modules/Media/',
         'Modules\MediaClipper'    => ROOTPATH . 'modules/MediaClipper/',
+        'Modules\Platforms'       => ROOTPATH . 'modules/Platforms/',
         'Modules\PodcastImport'   => ROOTPATH . 'modules/PodcastImport/',
         'Modules\PremiumPodcasts' => ROOTPATH . 'modules/PremiumPodcasts/',
         'Modules\Update'          => ROOTPATH . 'modules/Update/',
