@@ -4,7 +4,9 @@
             <?= format_duration((int) $episode->audio->duration) ?>
         </time>
         <?php if ($episode->is_premium): ?>
-            <Icon glyph="exchange-dollar" class="absolute left-0 w-8 pl-2 text-2xl rounded-r-full rounded-tl-lg top-2 text-accent-contrast bg-accent-base" />
+            <?= icon('exchange-dollar-fill', [
+                'class' => 'absolute left-0 w-8 pl-2 text-2xl rounded-r-full rounded-tl-lg top-2 text-accent-contrast bg-accent-base',
+            ]) ?>
         <?php endif; ?>
         <img
             src="<?= $episode->cover->thumbnail_url ?>"
@@ -19,7 +21,9 @@
     </div>
     <?php if ($episode->is_premium && ! is_unlocked($episode->podcast->handle)): ?>
         <a href="<?= route_to('episode', $episode->podcast->handle, $episode->slug) ?>" class="p-3 mr-4 rounded-full bg-brand bg-accent-base text-accent-contrast hover:bg-accent-hover focus:ring-accent" title="<?= lang('PremiumPodcasts.unlock_episode') ?>" data-tooltip="bottom">
-            <Icon glyph="lock" class="text-xl" />
+            <?= icon('lock-fill', [
+                'class' => 'text-xl',
+            ]) ?>
         </a>
     <?php else: ?>
         <play-episode-button

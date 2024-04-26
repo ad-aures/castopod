@@ -21,12 +21,12 @@ use Modules\PodcastImport\Entities\TaskStatus;
                 ];
 
                 $pillIconMap = [
-                    'queued'   => 'timer',
-                    'pending'  => 'pause',
-                    'running'  => 'loader',
-                    'canceled' => 'forbid',
-                    'failed'   => 'close',
-                    'passed'   => 'check',
+                    'queued'   => 'timer-fill', // @icon('timer-fill')
+                    'pending'  => 'pause-fill', // @icon('pause-fill')
+                    'running'  => 'loader-fill', // @icon('loader-fill')
+                    'canceled' => 'forbid-fill', // @icon('forbid-fill')
+                    'failed'   => 'close-fill', // @icon('close-fill')
+                    'passed'   => 'check-fill', // @icon('check-fill')
                 ];
 
                 $pillIconClassMap = [
@@ -48,7 +48,7 @@ use Modules\PodcastImport\Entities\TaskStatus;
             'cell'   => function (PodcastImportTask $importTask) {
                 return <<<HTML
                     <div class="flex flex-col">
-                        <a href="{$importTask->feed_url}" class="flex items-center underline hover:no-underline" target="_blank" rel="noopener noreferrer">{$importTask->feed_url}<Icon glyph="external-link" class="ml-1"/></a>
+                        <a href="{$importTask->feed_url}" class="flex items-center underline hover:no-underline" target="_blank" rel="noopener noreferrer">{$importTask->feed_url}<?= icon('external-link-fill', ['class' => 'ml-1']) ?></a>
                         <span class="text-sm text-gray-600">@{$importTask->handle}</span>
                     </div>
                 HTML;
@@ -61,11 +61,17 @@ use Modules\PodcastImport\Entities\TaskStatus;
                 if ($importTask->started_at !== null) {
                     if ($importTask->ended_at !== null) {
                         $duration = '<div class="flex flex-col text-xs gap-y-1">' .
-                        '<div class="inline-flex items-center font-mono gap-x-1"><Icon glyph="timer" class="text-sm text-gray-400" />' . format_duration((int) $importTask->getDuration(), true) . '</div>' .
-                        '<div class="inline-flex items-center gap-x-1"><Icon glyph="calendar" class="text-sm text-gray-400" />' . relative_time($importTask->ended_at) . '</div>' .
+                        '<div class="inline-flex items-center font-mono gap-x-1">' . icon('timer-fill', [
+                            'class' => 'text-sm text-gray-400',
+                        ]) . format_duration((int) $importTask->getDuration(), true) . '</div>' .
+                        '<div class="inline-flex items-center gap-x-1">' . icon('calendar-fill', [
+                            'class' => 'text-sm text-gray-400',
+                        ]) . relative_time($importTask->ended_at) . '</div>' .
                         '</div>';
                     } else {
-                        $duration = '<div class="inline-flex items-center font-mono text-xs gap-x-1"><Icon glyph="timer" class="text-sm text-gray-400" />' . format_duration(($importTask->started_at->difference(Time::now()))->getSeconds(), true) . '</div>';
+                        $duration = '<div class="inline-flex items-center font-mono text-xs gap-x-1">' . icon('timer-fill', [
+                            'class' => 'text-sm text-gray-400',
+                        ]) . format_duration(($importTask->started_at->difference(Time::now()))->getSeconds(), true) . '</div>';
                     }
                 }
 
@@ -126,7 +132,7 @@ use Modules\PodcastImport\Entities\TaskStatus;
 
                 return '<div class="inline-flex items-center gap-x-2">' .
                 '<button id="more-dropdown-' . $importTask->id . '" type="button" class="inline-flex items-center p-1 rounded-full focus:ring-accent" data-dropdown="button" data-dropdown-target="more-dropdown-' . $importTask->id . '-menu" aria-haspopup="true" aria-expanded="false">' .
-                        icon('more') .
+                        icon('more-2-fill') .
                         '</button>' .
                         '<DropdownMenu id="more-dropdown-' . $importTask->id . '-menu" labelledby="more-dropdown-' . $importTask->id . '" offsetY="-24" items="' . esc(json_encode($menuItems)) . '" />' .
                     '</div>';

@@ -58,14 +58,16 @@
         </div>
         <div class="z-10 inline-flex items-center self-end mt-2 mr-2 sm:mb-4 sm:mr-4 gap-x-2">
             <?php if (in_array(true, array_column($podcast->fundingPlatforms, 'is_visible'), true)): ?>
-                <button class="inline-flex items-center px-4 text-xs font-semibold leading-8 tracking-wider text-red-600 uppercase bg-white rounded-full shadow hover:text-red-500 focus:ring-accent" data-toggle="funding-links" data-toggle-class="hidden"><Icon glyph="heart" class="mr-2 text-sm"></Icon><?= lang('Podcast.sponsor') ?></button>
+                <button class="inline-flex items-center px-4 text-xs font-semibold leading-8 tracking-wider text-red-600 uppercase bg-white rounded-full shadow hover:text-red-500 focus:ring-accent" data-toggle="funding-links" data-toggle-class="hidden"><?= icon('heart-fill', [
+                    'class' => 'mr-2 text-sm',
+                ]) ?><?= lang('Podcast.sponsor') ?></button>
             <?php endif; ?>
             <?= anchor_popup(
                 route_to('follow', esc($podcast->handle)),
-                icon(
-                    'social/castopod',
-                    'mr-2 text-xl text-black/75 group-hover:text-black',
-                ) . lang('Podcast.follow'),
+                icon('social:castopod', [
+                    'class' => 'mr-2 text-xl text-black/75 group-hover:text-black',
+                ]) .
+                lang('Podcast.follow'),
                 [
                     'width'  => 420,
                     'height' => 620,

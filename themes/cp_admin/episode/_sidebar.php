@@ -2,7 +2,7 @@
 
 $episodeNavigation = [
     'dashboard' => [
-        'icon'              => 'dashboard',
+        'icon'              => 'dashboard-fill', // @icon('dashboard-fill')
         'items'             => ['episode-view', 'episode-edit', 'episode-persons-manage', 'embed-add'],
         'items-permissions' => [
             'episode-view'           => 'episodes.view',
@@ -12,7 +12,7 @@ $episodeNavigation = [
         ],
     ],
     'clips' => [
-        'icon'              => 'clapperboard',
+        'icon'              => 'clapperboard-fill', // @icon('clapperboard-fill')
         'items'             => ['video-clips-list', 'video-clips-create', 'soundbites-list', 'soundbites-create'],
         'items-permissions' => [
             'video-clips-list'   => 'episodes.manage-clips',
@@ -27,7 +27,9 @@ $episodeNavigation = [
 ]; ?>
 
 <a href="<?= route_to('podcast-view', $podcast->id) ?>" class="flex items-center px-4 py-2 focus:ring-inset focus:ring-accent">
-    <?= icon('arrow-left', 'mr-2') ?>
+    <?= icon('arrow-left-line', [
+        'class' => 'mr-2',
+    ]) ?>
     <img
     src="<?= $podcast->cover->tiny_url ?>"
     alt="<?= esc($podcast->title) ?>"
@@ -38,7 +40,9 @@ $episodeNavigation = [
 </a>
 <div class="relative flex items-center px-4 py-2 border-y border-navigation">
     <?php if ($episode->is_premium): ?>
-        <Icon glyph="exchange-dollar" class="absolute pl-1 text-xl rounded-r-full rounded-tl-lg left-4 top-4 text-accent-contrast bg-accent-base" />
+        <?= icon('exchange-dollar-fill', [
+            'class' => 'absolute pl-1 text-xl rounded-r-full rounded-tl-lg left-4 top-4 text-accent-contrast bg-accent-base',
+        ]) ?>
     <?php endif; ?>
     <img
     src="<?= $episode->cover->thumbnail_url ?>"
@@ -55,14 +59,16 @@ $episodeNavigation = [
         ) ?>" class="inline-flex items-center text-xs hover:underline focus:ring-accent"><?= lang(
             'EpisodeNavigation.go_to_page',
         ) ?>
-        <?= icon('external-link', 'ml-1 opacity-60') ?>
+        <?= icon('external-link-fill', [
+            'class' => 'ml-1 opacity-60',
+        ]) ?>
         </a>
     </div>
 </div>
 
 <?= view('_partials/_nav_menu', [
-            'navigation' => $episodeNavigation,
-            'langKey'    => 'EpisodeNavigation',
-            'podcastId'  => $podcast->id,
-            'episodeId'  => $episode->id,
-        ]) ?>
+    'navigation' => $episodeNavigation,
+    'langKey'    => 'EpisodeNavigation',
+    'podcastId'  => $podcast->id,
+    'episodeId'  => $episode->id,
+]) ?>

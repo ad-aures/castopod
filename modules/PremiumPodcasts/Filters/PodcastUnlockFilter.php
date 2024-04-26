@@ -19,7 +19,7 @@ class PodcastUnlockFilter implements FilterInterface
      *
      * @param string[]|null $arguments
      *
-     * @return mixed
+     * @return RequestInterface|ResponseInterface|string|void
      */
     public function before(RequestInterface $request, $arguments = null)
     {

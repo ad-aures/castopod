@@ -6,7 +6,9 @@
             $platform->type,
             $platform->slug,
         ),
-        icon('delete-bin', 'mx-auto'),
+        icon('delete-bin-fill', [
+            'class' => 'mx-auto',
+        ]),
         [
             'class'        => 'absolute right-0 top-0 -mt-4 -mr-4 p-2 border-red-700 border-2 bg-red-100 rounded-full text-red-700 hover:text-red-900',
             'data-tooltip' => 'bottom',
@@ -18,9 +20,10 @@
         : '' ?>
     <div class="flex items-center gap-x-2">
         <?= icon(
-            esc($platform->slug),
-            'text-skin-muted text-4xl',
-            $platform->type
+            sprintf('%s:%s', $platform->type, $platform->slug),
+            [
+                'class' => 'text-skin-muted text-4xl',
+            ],
         ) ?>
         <h2 class="text-xl font-semibold"><?= $platform->label ?></h2>
     </div>

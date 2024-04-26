@@ -32,7 +32,8 @@ if ($post->in_reply_to_id): ?>
                             'actorUsername' => esc($post->actor->username),
                         ]) ?>"
                         rows="1" />
-                    <Button variant="primary" size="small" type="submit" name="action" value="reply" class="self-end" iconRight="send-plane"><?= lang('Post.form.submit_reply') ?></Button>
+                    <?php // @icon('send-plane-2-fill')?>
+                    <Button variant="primary" size="small" type="submit" name="action" value="reply" class="self-end" iconRight="send-plane-2-fill"><?= lang('Post.form.submit_reply') ?></Button>
                 </div>
             </form>
         <?php else: ?>

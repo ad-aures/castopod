@@ -1,7 +1,9 @@
 <article class="relative z-10 w-full shadow bg-elevated rounded-conditional-2xl">
     <p class="inline-flex px-6 pt-4 text-xs text-skin-muted"><?= icon(
-        'repeat',
-        'text-lg mr-2 opacity-40',
+        'repeat-fill',
+        [
+            'class' => 'text-lg mr-2 opacity-40',
+        ],
     ) . lang('Post.actor_shared', [
         'actor' => esc($post->actor->display_name),
     ]) ?></p>

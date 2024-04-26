@@ -12,7 +12,9 @@
 
 <?= anchor(
     route_to('podcast-view', $podcast->id),
-    icon('arrow-left', 'mr-2 text-lg') . lang('Podcast.publish_form.back_to_podcast_dashboard'),
+    icon('arrow-left-line', [
+        'class' => 'mr-2 text-lg',
+    ]) . lang('Podcast.publish_form.back_to_podcast_dashboard'),
     [
         'class' => 'inline-flex items-center font-semibold mr-4 text-sm focus:ring-accent',
     ],
@@ -40,9 +42,15 @@
         <Forms.Textarea name="message" placeholder="<?= lang('Podcast.publish_form.message_placeholder') ?>" autofocus="" rows="2" />
     </div>
     <footer class="flex justify-around px-6 py-3">
-        <span class="inline-flex items-center"><Icon glyph="chat" class="mr-1 text-xl opacity-40" />0</span>
-        <span class="inline-flex items-center"><Icon glyph="repeat" class="mr-1 text-xl opacity-40" />0</span>
-        <span class="inline-flex items-center"><Icon glyph="heart" class="mr-1 text-xl opacity-40" />0</span>
+        <span class="inline-flex items-center"><?= icon('chat-4-fill', [
+            'class' => 'mr-1 text-xl opacity-40',
+        ]) ?>0</span>
+        <span class="inline-flex items-center"><?= icon('repeat-fill', [
+            'class' => 'mr-1 text-xl opacity-40',
+        ]) ?>0</span>
+        <span class="inline-flex items-center"><?= icon('heart-fill', [
+            'class' => 'mr-1 text-xl opacity-40',
+        ]) ?>0</span>
     </footer>
 </div>
 
@@ -68,7 +76,7 @@
     </div>
 </fieldset>
 
-<Alert id="publish-warning" variant="warning" glyph="alert" class="hidden mt-2" title="<?= lang('Podcast.publish_form.message_warning') ?>"><?= lang('Podcast.publish_form.message_warning_hint') ?></Alert>
+<Alert id="publish-warning" variant="warning" class="hidden mt-2" title="<?= lang('Podcast.publish_form.message_warning') ?>"><?= lang('Podcast.publish_form.message_warning_hint') ?></Alert>
 
 <div class="flex items-center justify-between w-full mt-4">
     <Button uri="<?= route_to('podcast-publish-cancel', $podcast->id) ?>" variant="danger"><?= lang('Podcast.publish_form.cancel_publication') ?></Button>

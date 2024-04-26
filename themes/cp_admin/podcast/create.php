@@ -161,7 +161,9 @@
     <div class="flex flex-col">
         <Forms.Label for="handle" hint="<?= esc(lang('Podcast.form.handle_hint')) ?>"><?= lang('Podcast.form.handle') ?></Forms.Label>
         <div class="relative">
-            <Icon glyph="at" class="absolute inset-0 h-full text-xl opacity-40 left-3" />
+            <?= icon('at-line', [
+                'class' => 'absolute inset-0 h-full text-xl opacity-40 left-3',
+            ]) ?>
             <Forms.Input name="handle" class="w-full pl-8" required="true" />
         </div>
     </div>
@@ -183,7 +185,9 @@
     title="<?= lang('Podcast.form.op3') ?>"
     subtitle="<?= lang('Podcast.form.op3_hint') ?>">
 
-    <a href="https://op3.dev" target="_blank" rel="noopener noreferrer" class="inline-flex self-start text-xs font-semibold underline gap-x-1 text-skin-muted hover:no-underline focus:ring-accent"><Icon glyph="link" class="text-sm"/>op3.dev</a>
+    <a href="https://op3.dev" target="_blank" rel="noopener noreferrer" class="inline-flex self-start text-xs font-semibold underline gap-x-1 text-skin-muted hover:no-underline focus:ring-accent"><?= icon('link', [
+        'class' => 'text-sm',
+    ]) ?>op3.dev</a>
     <Forms.Toggler name="enable_op3" value="yes" checked="false" hint="<?= esc(lang('Podcast.form.op3_enable_hint')) ?>"><?= lang('Podcast.form.op3_enable') ?></Forms.Toggler>
 </Forms.Section>
 

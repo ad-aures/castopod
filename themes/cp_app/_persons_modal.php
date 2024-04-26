@@ -12,7 +12,7 @@
             data-toggle="persons-list"
             data-toggle-class="hidden"
             aria-label="<?= lang('Common.close') ?>"
-            class="self-start p-1 text-2xl"><?= icon('close') ?></button>
+            class="self-start p-1 text-2xl"><?= icon('close-fill') ?></button>
         </div>
         <div class="flex flex-col items-start p-4 gap-y-4">
             <?php foreach ($persons as $person): ?>

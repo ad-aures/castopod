@@ -25,8 +25,10 @@ class MarkdownEditor extends FormComponent
 
         $textarea = form_textarea($this->attributes, old($this->name, $this->value));
         $markdownIcon = icon(
-            'markdown',
-            'mr-1 text-lg opacity-40'
+            'markdown-fill',
+            [
+                'class' => 'mr-1 text-lg opacity-40',
+            ]
         );
         $translations = [
             'write'   => lang('Common.forms.editor.write'),
@@ -61,15 +63,10 @@ class MarkdownEditor extends FormComponent
                 [
                     'name' => 'ordered-list',
                     'tag'  => 'md-ordered-list ',
-                    'icon' => icon('list-ordered'),
+                    'icon' => icon('list-ordered-2'),
                 ],
             ],
             [
-                [
-                    'name' => 'quote',
-                    'tag'  => 'md-quote',
-                    'icon' => icon('quote'),
-                ],
                 [
                     'name' => 'link',
                     'tag'  => 'md-link',
@@ -78,7 +75,7 @@ class MarkdownEditor extends FormComponent
                 [
                     'name' => 'image',
                     'tag'  => 'md-image',
-                    'icon' => icon('image-add'),
+                    'icon' => icon('image-add-fill'),
                 ],
             ],
         ];

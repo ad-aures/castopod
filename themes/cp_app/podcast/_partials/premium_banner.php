@@ -17,12 +17,17 @@ if ($podcast->is_premium): ?>
                     size="small"
                     uri="<?= $isUnlocked ? route_to('premium-podcast-lock', $podcast->handle) : route_to('premium-podcast-unlock', $podcast->handle) ?>"
                 >
-                    <Icon glyph="<?= $shownIcon ?>" class="text-sm group-focus:hidden group-hover:hidden" />
-                    <Icon glyph="<?= $hiddenIcon ?>" class="hidden text-sm group-focus:block group-hover:block" />
+                    <?= icon($shownIcon, [
+                        'class' => 'text-sm group-focus:hidden group-hover:hidden',
+                    ]) ?>
+                    <?= icon($hiddenIcon, [
+                        'class' => 'hidden text-sm group-focus:block group-hover:block',
+                    ]) ?>
                     <?= $isUnlocked ? lang('PremiumPodcasts.lock') : lang('PremiumPodcasts.unlock') ?>
                 </Button>
+                <?php // @icon('external-link-fill')?>
                 <Button
-                    iconLeft="external-link"
+                    iconLeft="external-link-fill"
                     target="_blank"
                     rel="noopener noreferrer"
                     variant="secondary"
@@ -37,8 +42,12 @@ if ($podcast->is_premium): ?>
                 size="small"
                 uri="<?= $isUnlocked ? route_to('premium-podcast-lock', $podcast->handle) : route_to('premium-podcast-unlock', $podcast->handle) ?>"
             >
-                <Icon glyph="<?= $shownIcon ?>" class="text-sm group-focus:hidden group-hover:hidden" />
-                <Icon glyph="<?= $hiddenIcon ?>" class="hidden text-sm group-focus:block group-hover:block" />
+                <?= icon($shownIcon, [
+                    'class' => 'text-sm group-focus:hidden group-hover:hidden',
+                ]) ?>
+                <?= icon($hiddenIcon, [
+                    'class' => 'hidden text-sm group-focus:block group-hover:block',
+                ]) ?>
                 <?= $isUnlocked ? lang('PremiumPodcasts.lock') : lang('PremiumPodcasts.unlock') ?>
             </Button>
         <?php endif; ?>

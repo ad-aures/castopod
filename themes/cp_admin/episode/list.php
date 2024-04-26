@@ -9,7 +9,8 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
-<Button uri="<?= route_to('episode-create', $podcast->id) ?>" variant="primary" iconLeft="add"><?= lang('Episode.create') ?></Button>
+<?php // @icon('add-fill')?>
+<Button uri="<?= route_to('episode-create', $podcast->id) ?>" variant="primary" iconLeft="add-fill"><?= lang('Episode.create') ?></Button>
 <?= $this->endSection() ?>
 
 
@@ -29,10 +30,14 @@
         <div class="relative">
             <Forms.Input name="q" placeholder="<?= lang('Episode.list.search.placeholder') ?>" value="<?= esc($query) ?>" class="<?= $query ? 'pr-8' : '' ?>" />
             <?php if ($query): ?>
-                <a href="<?= route_to('episode-list', $podcast->id) ?>" class="absolute inset-y-0 right-0 inline-flex items-center justify-center px-2 opacity-75 focus:ring-accent hover:opacity-100 focus:opacity-100" title="<?= lang('Episode.list.search.clear') ?>" data-tooltip="bottom"><?= icon('close', 'text-lg') ?></a>
+                <a href="<?= route_to('episode-list', $podcast->id) ?>" class="absolute inset-y-0 right-0 inline-flex items-center justify-center px-2 opacity-75 focus:ring-accent hover:opacity-100 focus:opacity-100" title="<?= lang('Episode.list.search.clear') ?>" data-tooltip="bottom"><?= icon('close-fill', [
+                    'class' => 'text-lg',
+                ]) ?></a>
             <?php endif; ?>
         </div>
-        <Button type="submit" variant="secondary" class="px-3 ml-2 rounded-lg shadow-md" title="<?= lang('Episode.list.search.submit') ?>" data-tooltip="bottom" isSquared="true"><?= icon('search', 'text-xl') ?></Button>
+        <Button type="submit" variant="secondary" class="px-3 ml-2 rounded-lg shadow-md" title="<?= lang('Episode.list.search.submit') ?>" data-tooltip="bottom" isSquared="true"><?= icon('search-fill', [
+            'class' => 'text-xl',
+        ]) ?></Button>
     </form>
 </div>
 
@@ -44,7 +49,9 @@ data_table(
             'cell'   => function ($episode, $podcast) {
                 $premiumBadge = '';
                 if ($episode->is_premium) {
-                    $premiumBadge = '<Icon glyph="exchange-dollar" class="absolute left-0 w-8 pl-2 text-2xl rounded-r-full rounded-tl-lg top-2 text-accent-contrast bg-accent-base" />';
+                    $premiumBadge = icon('exchange-dollar-fill', [
+                        'class' => 'absolute left-0 w-8 pl-2 text-2xl rounded-r-full rounded-tl-lg top-2 text-accent-contrast bg-accent-base',
+                    ]);
                 }
 
                 return '<div class="flex gap-x-2">' .
@@ -145,7 +152,7 @@ data_table(
                     ];
                 } else {
                     $label = lang('Episode.delete');
-                    $icon = icon('forbid');
+                    $icon = icon('forbid-fill');
                     $title = lang('Episode.messages.unpublishBeforeDeleteTip');
                     $items[] = [
                         'type'    => 'html',
@@ -155,7 +162,7 @@ data_table(
                     ];
                 }
                 return '<button id="more-dropdown-' . $episode->id . '" type="button" class="inline-flex items-center p-1 rounded-full focus:ring-accent" data-dropdown="button" data-dropdown-target="more-dropdown-' . $episode->id . '-menu" aria-haspopup="true" aria-expanded="false">' .
-                    icon('more') .
+                    icon('more-2-fill') .
                     '</button>' .
                     '<DropdownMenu id="more-dropdown-' . $episode->id . '-menu" labelledby="more-dropdown-' . $episode->id . '" offsetY="-24" items="' . esc(json_encode($items)) . '" />';
             },

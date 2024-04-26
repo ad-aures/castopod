@@ -39,7 +39,7 @@ $isEpisodeArea = isset($podcast) && isset($episode);
                     <div class="flex flex-wrap items-center truncate">
                     <?php if (($isEpisodeArea && $episode->is_premium) || ($isPodcastArea && $podcast->is_premium)): ?>
                         <div class="inline-flex items-center">
-                            <IconButton uri="<?= route_to('subscription-list', $podcast->id) ?>" glyph="exchange-dollar" variant="secondary" size="large" class="p-0 mr-2 border-0"><?= ($isEpisodeArea && $episode->is_premium) ? lang('PremiumPodcasts.episode_is_premium') : lang('PremiumPodcasts.podcast_is_premium') ?></IconButton>
+                            <IconButton uri="<?= route_to('subscription-list', $podcast->id) ?>" glyph="exchange-dollar-fill" variant="secondary" size="large" class="p-0 mr-2 border-0"><?= ($isEpisodeArea && $episode->is_premium) ? lang('PremiumPodcasts.episode_is_premium') : lang('PremiumPodcasts.podcast_is_premium') ?></IconButton>
                             <Heading tagName="h1" size="large" class="truncate"><?= $this->renderSection('pageTitle') ?></Heading>
                         </div>
                     <?php else: ?>
@@ -56,7 +56,9 @@ $isEpisodeArea = isset($podcast) && isset($episode);
             <?php if (service('settings')->get('Import.current') === $podcast->handle): ?>
                 <div class="flex items-center px-12 py-2 border-b bg-stripes-warning border-subtle" role="alert">
                     <p class="flex items-center text-gray-900">
-                        <span class="inline-flex items-center gap-1 text-xs font-semibold tracking-wide uppercase"><Icon glyph="download" class="text-base text-yellow-900"/><?= lang('PodcastImport.banner.disclaimer') ?></span>
+                        <span class="inline-flex items-center gap-1 text-xs font-semibold tracking-wide uppercase"><?= icon('import-fill', [
+                            'class' => 'text-base text-yellow-900',
+                        ]) . lang('PodcastImport.banner.disclaimer') ?></span>
                         <span class="ml-3 text-sm"><?= lang('PodcastImport.banner.text', [
                             'podcastTitle' => $podcast->title,
                         ]) ?></span>

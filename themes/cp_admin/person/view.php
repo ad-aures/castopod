@@ -10,7 +10,8 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
-<Button uri="<?= route_to('person-edit', $person->id) ?>" variant="secondary" iconLeft="edit"><?= lang('Person.edit') ?></Button>
+<?php // @icon('pencil-fill')?>
+<Button uri="<?= route_to('person-edit', $person->id) ?>" variant="secondary" iconLeft="pencil-fill"><?= lang('Person.edit') ?></Button>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>

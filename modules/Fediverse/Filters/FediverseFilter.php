@@ -22,7 +22,7 @@ class FediverseFilter implements FilterInterface
      * etc.
      *
      * @param string[]|null                         $params
-     * @return void|mixed
+     * @return RequestInterface|ResponseInterface|string|void
      */
     public function before(RequestInterface $request, $params = null)
     {

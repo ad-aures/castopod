@@ -31,7 +31,9 @@ class Pill extends Component
             'warning' => 'text-yellow-900 bg-yellow-100 border-yellow-300',
         ];
 
-        $icon = $this->icon ? icon($this->icon, $this->iconClass) : '';
+        $icon = $this->icon ? icon($this->icon, [
+            'class' => $this->iconClass,
+        ]) : '';
         $hint = $this->hint ? 'data-tooltip="bottom" title="' . $this->hint . '"' : '';
 
         return <<<HTML

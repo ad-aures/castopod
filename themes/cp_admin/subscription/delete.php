@@ -13,7 +13,7 @@
 <form action="<?= route_to('subscription-delete', $podcast->id, $subscription->id) ?>" method="POST" class="flex flex-col w-full max-w-xl mx-auto">
 <?= csrf_field() ?>
 
-<Alert variant="danger" glyph="alert" class="font-semibold"><?= lang('Subscription.delete_form.disclaimer', [
+<Alert variant="danger" class="font-semibold"><?= lang('Subscription.delete_form.disclaimer', [
     'subscriber' => $subscription->email,
 ]) ?></Alert>
 

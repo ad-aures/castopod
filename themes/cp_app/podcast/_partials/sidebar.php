@@ -2,7 +2,9 @@
 <aside id="podcast-sidebar" data-sidebar-toggler="sidebar" data-toggle-class="hidden" data-hide-class="hidden" class="z-20 hidden h-full col-span-1 col-start-2 row-start-1 p-4 py-6 shadow-2xl md:shadow-none md:block bg-base">
     <div class="sticky z-10 bg-base top-12">
         <a href="<?= $podcast->feed_url ?>" class="inline-flex items-center mb-6 text-sm font-semibold focus:ring-accent text-skin-muted hover:text-skin-base group" target="_blank" rel="noopener noreferrer">
-            <?= icon('rss', ' mr-2 bg-orange-500 text-xl text-white group-hover:bg-orange-700 p-1 w-6 h-6 inline-flex items-center justify-center rounded-lg') . lang('Podcast.feed') ?>
+            <?= icon('rss-fill', [
+                'class' => ' mr-2 bg-orange-500 text-xl text-white group-hover:bg-orange-700 p-1 w-6 h-6 inline-flex items-center justify-center rounded-lg',
+            ]) . lang('Podcast.feed') ?>
         </a>
         <?php if (
             in_array(true, array_column($podcast->socialPlatforms, 'is_visible'), true)
@@ -15,11 +17,7 @@
             <?php if ($socialPlatform->is_visible): ?>
                 <?= anchor(
                     esc($socialPlatform->link_url),
-                    icon(
-                        esc($socialPlatform->slug),
-                        '',
-                        $socialPlatform->type
-                    ),
+                    icon($socialPlatform->type . ':' . $socialPlatform->slug),
                     [
                         'class'        => 'text-2xl text-skin-muted hover:text-skin-base w-8 h-8 items-center inline-flex justify-center',
                         'target'       => '_blank',
@@ -42,11 +40,7 @@
                 <?php if ($podcastingPlatform->is_visible): ?>
                     <?= anchor(
                         esc($podcastingPlatform->link_url),
-                        icon(
-                            esc($podcastingPlatform->slug),
-                            '',
-                            $podcastingPlatform->type
-                        ),
+                        icon(sprintf('%s:%s', $podcastingPlatform->type, $podcastingPlatform->slug)),
                         [
                             'class'        => 'text-2xl text-skin-muted hover:text-skin-base w-8 h-8 items-center inline-flex justify-center',
                             'target'       => '_blank',
@@ -64,7 +58,9 @@
             <div class="flex flex-col">
                 <p><?= esc($podcast->copyright) ?></p>
                 <p><?= lang('Common.powered_by', [
-                                'castopod' => '<a class="inline-flex font-semibold text-skin-muted hover:underline focus:ring-accent" href="https://castopod.org" target="_blank" rel="noreferrer noopener">Castopod' . icon('castopod', 'ml-1 text-lg', 'social') . '</a>',
+                                'castopod' => '<a class="inline-flex font-semibold text-skin-muted hover:underline focus:ring-accent" href="https://castopod.org" target="_blank" rel="noreferrer noopener">Castopod' . icon('social:castopod', [
+                                    'class' => 'ml-1 text-lg',
+                                ]) . '</a>',
                             ], null, false) ?></p>
             </div>
         </footer>

@@ -15,7 +15,7 @@ class DatetimePicker extends FormComponent
         $clearLabel = lang(
             'Episode.publish_form.scheduled_publication_date_clear',
         );
-        $closeIcon = icon('close');
+        $closeIcon = icon('close-fill');
 
         return <<<HTML
             <div class="flex border-3 rounded-lg border-contrast focus-within:ring-accent {$this->class}" data-picker="datetime">

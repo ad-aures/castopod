@@ -9,7 +9,8 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
-<Button uri="<?= route_to('subscription-create', $podcast->id) ?>" variant="primary" iconLeft="add"><?= lang('Subscription.add') ?></Button>
+<?php // @icon('add-fill')?>
+<Button uri="<?= route_to('subscription-create', $podcast->id) ?>" variant="primary" iconLeft="add-fill"><?= lang('Subscription.add') ?></Button>
 <?= $this->endSection() ?>
 
 
@@ -116,7 +117,7 @@
                 array_splice($items, 3, 0, $suspendAction);
 
                 return '<button id="more-dropdown-' . $subscription->id . '" type="button" class="inline-flex items-center p-1 rounded-full focus:ring-accent" data-dropdown="button" data-dropdown-target="more-dropdown-' . $subscription->id . '-menu" aria-haspopup="true" aria-expanded="false">' .
-                    icon('more') .
+                    icon('more-2-fill') .
                     '</button>' .
                     '<DropdownMenu id="more-dropdown-' . $subscription->id . '-menu" labelledby="more-dropdown-' . $subscription->id . '" offsetY="-24" items="' . esc(json_encode($items)) . '" />';
             },

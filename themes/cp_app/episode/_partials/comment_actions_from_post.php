@@ -7,13 +7,17 @@
             [
                 'numberOfLikes' => $comment->likes_count,
             ],
-        ) ?>"><?= icon('heart', 'text-xl mr-1 text-gray-400 group-hover:text-red-600') . $comment->likes_count ?></button>
+        ) ?>"><?= icon('heart-fill', [
+            'class' => 'text-xl mr-1 text-gray-400 group-hover:text-red-600',
+        ]) . $comment->likes_count ?></button>
             <Button uri="<?= route_to('post', esc($podcast->handle), $comment->id) ?>" size="small"><?= lang('Comment.reply') ?></Button>
         </form>
         <?php if ($comment->replies_count): ?>
             <?= anchor(
                 route_to('post', esc($podcast->handle), $comment->id),
-                icon('caret-down', 'text-xl mr-1') . lang('Comment.view_replies', [
+                icon('arrow-drop-down-fill', [
+                    'class' => 'text-xl mr-1',
+                ]) . lang('Comment.view_replies', [
                     'numberOfReplies' => $comment->replies_count,
                 ]),
                 [
@@ -24,7 +28,9 @@
     <?php else: ?>
         <?= anchor_popup(
             route_to('post-remote-action', esc($podcast->handle), $comment->id, 'favourite'),
-            icon('heart', 'text-xl mr-1 opacity-40') . $comment->likes_count,
+            icon('heart-fill', [
+                'class' => 'text-xl mr-1 opacity-40',
+            ]) . $comment->likes_count,
             [
                 'class'  => 'inline-flex items-center hover:underline',
                 'width'  => 420,
@@ -37,7 +43,9 @@
         <?php if ($comment->replies_count): ?>
             <?= anchor(
                 route_to('post', esc($podcast->handle), $comment->id),
-                icon('caret-down', 'text-xl mr-1') . lang('Comment.view_replies', [
+                icon('arrow-drop-down-fill', [
+                    'class' => 'text-xl mr-1',
+                ]) . lang('Comment.view_replies', [
                     'numberOfReplies' => $comment->replies_count,
                 ]),
                 [

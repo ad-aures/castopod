@@ -49,21 +49,22 @@
             </a>
             <div class="z-10 flex flex-wrap items-center justify-center gap-2 p-2 mt-6 shadow-xl rounded-conditional-full bg-accent-base shadow-accent/20">
                 <?php if (in_array(true, array_column($podcast->fundingPlatforms, 'is_visible'), true)): ?>
-                    <button class="inline-flex items-center px-4 text-xs font-semibold leading-8 tracking-wider text-red-600 uppercase bg-white rounded-full shadow hover:text-red-500 focus:ring-accent" data-toggle="funding-links" data-toggle-class="hidden"><Icon glyph="heart" class="mr-2 text-sm"></Icon><?= lang('Podcast.sponsor') ?></button>
+                    <button class="inline-flex items-center px-4 text-xs font-semibold leading-8 tracking-wider text-red-600 uppercase bg-white rounded-full shadow hover:text-red-500 focus:ring-accent" data-toggle="funding-links" data-toggle-class="hidden"><?= icon('heart-fill', [
+                        'class' => 'mr-2 text-sm',
+                    ]) ?><?= lang('Podcast.sponsor') ?></button>
                 <?php endif; ?>
                 <?= anchor_popup(
                     route_to('follow', esc($podcast->handle)),
-                    icon(
-                        'social/castopod',
-                        'mr-2 text-xl text-black/75 group-hover:text-black',
-                    ) . lang('Podcast.follow'),
+                    icon('social:castopod', [
+                        'class' => 'mr-2 text-xl text-black/75 group-hover:text-black',
+                    ]) . lang('Podcast.follow'),
                     [
                         'width'  => 420,
                         'height' => 620,
                         'class'  => 'group inline-flex items-center px-4 text-xs tracking-wider font-semibold text-black uppercase rounded-full leading-8 shadow focus:ring-accent bg-white',
                     ],
                 ) ?>
-                <a href="<?= $podcast->feed_url ?>" title="<?= lang('Podcast.feed') ?>" data-tooltip="bottom" class="flex items-center justify-center w-8 h-8 p-1 text-xl text-orange-500 rounded-full shadow bg-elevated focus:ring-accent" target="_blank" rel="noopener noreferrer"><?= icon('rss') ?></a>
+                <a href="<?= $podcast->feed_url ?>" title="<?= lang('Podcast.feed') ?>" data-tooltip="bottom" class="flex items-center justify-center w-8 h-8 p-1 text-xl text-orange-500 rounded-full shadow bg-elevated focus:ring-accent" target="_blank" rel="noopener noreferrer"><?= icon('rss-fill') ?></a>
             </div>
         </div>
     </header>
@@ -72,7 +73,9 @@
             class="inline-flex items-center justify-center flex-shrink-0 px-3 py-2 text-sm font-semibold leading-5 bg-white border-2 rounded-full shadow-xs gap-x-2 focus:ring-accent border-accent-base text-accent-base hover:border-accent-hover hover:text-accent-hover"
             href="<?= $podcast->link ?>"
             target="_blank"
-            rel="noopener noreferrer"><?= icon('castopod', 'text-xl mr-auto', 'podcasting') ?><span class="mr-auto -ml-8"><?= lang('Podcast.castopod_website') ?></span>
+            rel="noopener noreferrer"><?= icon('podcasting:castopod', [
+                'class' => 'text-xl mr-auto',
+            ]) ?><span class="mr-auto -ml-8"><?= lang('Podcast.castopod_website') ?></span>
         </a>
         <?php foreach ($podcast->podcastingPlatforms as $podcastingPlatform): ?>
             <?php if ($podcastingPlatform->is_visible && $podcastingPlatform->slug !== 'castopod'): ?>
@@ -80,7 +83,9 @@
                 class="inline-flex items-center justify-center flex-shrink-0 px-3 py-2 text-sm font-semibold leading-5 bg-white border-2 rounded-full shadow-xs gap-x-2 focus:ring-accent border-accent-base text-accent-base hover:border-accent-hover hover:text-accent-hover"
                 href="<?= $podcastingPlatform->link_url ?>"
                 target="_blank"
-                rel="noopener noreferrer"><?= icon($podcastingPlatform->slug, 'text-xl mr-auto', $podcastingPlatform->type) ?><span class="mr-auto -ml-8"><?= $podcastingPlatform->label ?></span>
+                rel="noopener noreferrer"><?= icon($podcastingPlatform->type . ':' . $podcastingPlatform->slug, [
+                'class' => 'text-xl mr-auto',
+                ]) ?><span class="mr-auto -ml-8"><?= $podcastingPlatform->label ?></span>
             </a>
             <?php endif; ?>
         <?php endforeach; ?>
@@ -90,11 +95,7 @@
         <?php if ($socialPlatform->is_visible): ?>
                 <?= anchor(
                     esc($socialPlatform->link_url),
-                    icon(
-                        esc($socialPlatform->slug),
-                        '',
-                        $socialPlatform->type
-                    ),
+                    icon($socialPlatform->type . ':' . $socialPlatform->slug),
                     [
                         'class'        => 'focus:ring-accent rounded-full text-4xl text-skin-muted hover:text-skin-base w-8 h-8 items-center inline-flex justify-center',
                         'target'       => '_blank',

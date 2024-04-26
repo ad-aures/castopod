@@ -23,10 +23,12 @@ class DashboardCard extends Component
 
     public function render(): string
     {
-        $glyph = icon($this->glyph, 'flex-shrink-0 bg-base rounded-full w-8 h-8 p-2 text-accent-base');
+        $glyph = icon($this->glyph, [
+            'class' => 'flex-shrink-0 bg-base rounded-full w-8 h-8 p-2 text-accent-base',
+        ]);
 
         if ($this->href !== null && $this->href !== '') {
-            $chevronRight = icon('chevron-right');
+            $chevronRight = icon('arrow-right-s-fill');
             $viewLang = lang('Common.view');
             return <<<HTML
                 <a href="{$this->href}" class="flex items-center justify-between w-full gap-4 p-4 lg:max-w-sm lg:flex-col xl:flex-row bg-elevated focus:ring-accent rounded-xl border-3 border-subtle group">

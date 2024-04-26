@@ -13,7 +13,7 @@
 <form action="<?= route_to('subscription-suspend', $podcast->id, $subscription->id) ?>" method="POST" class="flex flex-col w-full max-w-xl mx-auto">
 <?= csrf_field() ?>
 
-<Alert variant="warning" glyph="alert" class="font-semibold"><?= lang('Subscription.suspend_form.disclaimer', [
+<Alert variant="warning" class="font-semibold"><?= lang('Subscription.suspend_form.disclaimer', [
     'email' => $subscription->email,
 ]) ?></Alert>
 
@@ -28,7 +28,8 @@
 
 <div class="flex items-center self-end mt-4 gap-x-2">
     <Button uri="<?= route_to('subscription-list', $podcast->id) ?>"><?= lang('Common.cancel') ?></Button>
-    <Button type="submit" variant="warning" iconLeft="pause"><?= lang('Subscription.suspend_form.submit') ?></Button>
+    <?php // @icon('pause-fill')?>
+    <Button type="submit" variant="warning" iconLeft="pause-fill"><?= lang('Subscription.suspend_form.submit') ?></Button>
 </div>
 
 </form>

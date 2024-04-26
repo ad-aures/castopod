@@ -86,17 +86,15 @@ class Button extends Component
         }
 
         if ($this->iconLeft !== '') {
-            $this->slot = (new Icon([
-                'glyph' => $this->iconLeft,
+            $this->slot = icon($this->iconLeft, [
                 'class' => 'opacity-75 ' . $iconSize[$this->size],
-            ]))->render() . $this->slot;
+            ]) . $this->slot;
         }
 
         if ($this->iconRight !== '') {
-            $this->slot .= (new Icon([
-                'glyph' => $this->iconRight,
+            $this->slot .= icon($this->iconRight, [
                 'class' => 'opacity-75 ' . $iconSize[$this->size],
-            ]))->render();
+            ]);
         }
 
         unset($this->attributes['slot']);

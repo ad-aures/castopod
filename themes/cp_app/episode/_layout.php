@@ -46,7 +46,9 @@
         <a href="<?= route_to('podcast-episodes', esc($podcast->handle)) ?>" class="flex items-center h-full min-w-0 px-2 gap-x-2 focus:ring-accent focus:ring-inset" title="<?= lang('Episode.back_to_episodes', [
             'podcast' => esc($podcast->title),
         ]) ?>">
-            <?= icon('arrow-left', 'text-lg flex-shrink-0') ?>
+            <?= icon('arrow-left-line', [
+                'class' => 'text-lg flex-shrink-0',
+            ]) ?>
             <div class="flex items-center min-w-0 gap-x-2">
                 <img class="w-8 h-8 rounded-full" src="<?= $episode->podcast->cover->tiny_url ?>" alt="<?= esc($episode->podcast->title) ?>" loading="lazy" />
                 <div class="flex flex-col overflow-hidden">
@@ -59,13 +61,15 @@
         </a>
         <div class="inline-flex items-center self-end h-full px-2 gap-x-2">
             <?php if (in_array(true, array_column($podcast->fundingPlatforms, 'is_visible'), true)): ?>
-                <button class="p-2 text-red-600 bg-white rounded-full shadow hover:text-red-500 focus:ring-accent" data-toggle="funding-links" data-toggle-class="hidden" title="<?= lang('Podcast.sponsor') ?>"><Icon glyph="heart"></Icon></button>
+                <button class="p-2 text-red-600 bg-white rounded-full shadow hover:text-red-500 focus:ring-accent" data-toggle="funding-links" data-toggle-class="hidden" title="<?= lang('Podcast.sponsor') ?>"><?= icon('heart-fill') ?></button>
             <?php endif; ?>
             <?= anchor_popup(
                 route_to('follow', esc($podcast->handle)),
                 icon(
-                    'social/castopod',
-                    'mr-2 text-xl text-black/75 group-hover:text-black',
+                    'social:castopod',
+                    [
+                        'class' => 'mr-2 text-xl text-black/75 group-hover:text-black',
+                    ],
                 ) . lang('Podcast.follow'),
                 [
                     'width'  => 420,
@@ -82,7 +86,9 @@
             <div class="relative flex-shrink-0">
                 <?= explicit_badge($episode->parental_advisory === 'explicit', 'rounded absolute left-0 bottom-0 ml-2 mb-2 bg-black/75 text-accent-contrast') ?>
                 <?php if ($episode->is_premium): ?>
-                    <Icon glyph="exchange-dollar" class="absolute left-0 w-8 pl-2 text-2xl rounded-r-full rounded-tl-lg top-2 text-accent-contrast bg-accent-base" />
+                    <?= icon('exchange-dollar-fill', [
+                'class' => 'absolute left-0 w-8 pl-2 text-2xl rounded-r-full rounded-tl-lg top-2 text-accent-contrast bg-accent-base',
+            ]) ?>
                 <?php endif; ?>
                 <img src="<?= $episode->cover->medium_url ?>" alt="<?= esc($episode->title) ?>" class="flex-shrink-0 rounded-md shadow-xl h-36 aspect-square" loading="lazy" />
             </div>

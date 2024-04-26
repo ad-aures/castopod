@@ -2,7 +2,7 @@
 
 $podcastNavigation = [
     'dashboard' => [
-        'icon'              => 'dashboard',
+        'icon'              => 'dashboard-fill', // @icon('dashboard-fill')
         'items'             => ['podcast-view', 'podcast-edit', 'podcast-persons-manage', 'podcast-imports', 'podcast-imports-sync'],
         'items-permissions' => [
             'podcast-view'           => 'view',
@@ -13,7 +13,7 @@ $podcastNavigation = [
         ],
     ],
     'episodes' => [
-        'icon'              => 'play-circle',
+        'icon'              => 'play-circle-fill', // @icon('play-circle-fill')
         'items'             => ['episode-list', 'episode-create'],
         'items-permissions' => [
             'episode-list'   => 'episodes.view',
@@ -24,7 +24,7 @@ $podcastNavigation = [
         'count-route' => 'episode-list',
     ],
     'analytics' => [
-        'icon'  => 'line-chart',
+        'icon'  => 'line-chart-fill', // @icon('line-chart-fill')
         'items' => [
             'podcast-analytics',
             'podcast-analytics-unique-listeners',
@@ -45,7 +45,7 @@ $podcastNavigation = [
         ],
     ],
     'broadcast' => [
-        'icon'  => 'broadcast',
+        'icon'  => 'broadcast-fill', // @icon('broadcast-fill')
         'items' => [
             'platforms-podcasting',
             'platforms-social',
@@ -56,7 +56,7 @@ $podcastNavigation = [
         ],
     ],
     'monetization' => [
-        'icon'  => 'money-dollar-circle',
+        'icon'  => 'money-dollar-circle-fill', // @icon('money-dollar-circle-fill')
         'items' => [
             'subscription-list',
             'subscription-create',
@@ -71,7 +71,7 @@ $podcastNavigation = [
         ],
     ],
     'contributors' => [
-        'icon'              => 'group',
+        'icon'              => 'group-fill', // @icon('group-fill')
         'items'             => ['contributor-list', 'contributor-add'],
         'items-permissions' => [
             'contributor-list' => 'manage-contributors',
@@ -88,7 +88,9 @@ $podcastNavigation = [
 <div class="flex gap-2 px-2 py-2 border-b border-navigation">
     <div class="relative">
         <?php if ($podcast->is_premium): ?>
-            <Icon glyph="exchange-dollar" class="absolute left-0 pl-1 text-xl rounded-r-full rounded-tl-lg top-2 text-accent-contrast bg-accent-base" />
+            <?= icon('exchange-dollar-fill', [
+                'class' => 'absolute left-0 pl-1 text-xl rounded-r-full rounded-tl-lg top-2 text-accent-contrast bg-accent-base',
+            ]) ?>
         <?php endif; ?>
         <img
         src="<?= $podcast->cover->thumbnail_url ?>"
@@ -107,16 +109,26 @@ $podcastNavigation = [
             data-tooltip="bottom" title="<?= lang(
                 'PodcastNavigation.go_to_page',
             ) ?>">@<?= esc($podcast->handle) ?>
-            <?= icon('external-link', 'ml-1 opacity-60') ?>
+            <?= icon('external-link-fill', [
+                'class' => 'ml-1 opacity-60',
+            ]) ?>
             </a>
         </div>
         <div class="flex flex-col items-start gap-1">
             <a href="<?= $podcast->feed_url ?>" class="inline-flex items-center text-xs gap-x-1 focus:ring-accent group hover:underline" target="_blank" rel="noopener noreferrer" data-tooltip="bottom" title="<?= lang('PodcastNavigation.rss_feed') ?>">
-                <?= icon('rss', 'text-xl text-orange-400 inline-flex items-center justify-center rounded') . 'RSS Feed' . icon('external-link', 'text-sm opacity-60') ?>
+                <?= icon('rss-fill', [
+                    'class' => 'text-xl text-orange-400 inline-flex items-center justify-center rounded',
+                ]) . 'RSS Feed' . icon('external-link-fill', [
+                    'class' => 'text-sm opacity-60',
+                ]) ?>
             </a>
             <?php if ($podcast->is_op3_enabled): ?>
             <a href="<?= $podcast->op3_url ?>" class="inline-flex items-center text-xs gap-x-1 focus:ring-accent group hover:underline" data-tooltip="bottom" target="_blank" rel="noopener noreferrer" title="<?= lang('Podcast.form.op3_link') ?>">
-                <?= icon('line-chart', 'text-xl text-white inline-flex items-center justify-center rounded') . 'OP3' . icon('external-link', 'text-sm opacity-60') ?>
+                <?= icon('line-chart-fill', [
+                    'class' => 'text-xl text-white inline-flex items-center justify-center rounded',
+                ]) . 'OP3' . icon('external-link-fill', [
+                    'class' => 'text-sm opacity-60',
+                ]) ?>
             </a>
             <?php endif; ?>
         </div>
@@ -124,7 +136,7 @@ $podcastNavigation = [
 </div>
 
 <?= view('_partials/_nav_menu', [
-                'navigation' => $podcastNavigation,
-                'langKey'    => 'PodcastNavigation',
-                'podcastId'  => $podcast->id,
-            ]) ?>
+    'navigation' => $podcastNavigation,
+    'langKey'    => 'PodcastNavigation',
+    'podcastId'  => $podcast->id,
+]) ?>

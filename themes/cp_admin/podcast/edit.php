@@ -23,7 +23,7 @@
 
 <div class="z-40 flex flex-col w-full max-w-xs overflow-hidden shadow-sm xl:sticky bg-elevated border-3 border-subtle top-24 rounded-xl">
     <?php if ($podcast->banner_id !== null): ?>
-        <a href="<?= route_to('podcast-banner-delete', $podcast->id) ?>" class="absolute p-1 text-red-700 bg-red-100 border-2 rounded-full hover:text-red-900 border-contrast focus:ring-accent top-2 right-2" title="<?= lang('Podcast.form.banner_delete') ?>" data-tooltip="bottom"><?= icon('delete-bin') ?></a>
+        <a href="<?= route_to('podcast-banner-delete', $podcast->id) ?>" class="absolute p-1 text-red-700 bg-red-100 border-2 rounded-full hover:text-red-900 border-contrast focus:ring-accent top-2 right-2" title="<?= lang('Podcast.form.banner_delete') ?>" data-tooltip="bottom"><?= icon('delete-bin-fill') ?></a>
     <?php endif; ?>
     <img src="<?= get_podcast_banner_url($podcast, 'small') ?>" alt="" class="w-full aspect-[3/1] bg-header" loading="lazy" />
     <div class="flex px-4 py-2">
@@ -190,7 +190,9 @@
 <div class="flex flex-col">
     <Forms.Label for="handle" hint="<?= esc(lang('Podcast.form.handle_hint')) ?>"><?= lang('Podcast.form.handle') ?></Forms.Label>
     <div class="relative">
-        <Icon glyph="at" class="absolute inset-0 h-full text-xl opacity-40 left-3" />
+        <?= icon('at-line', [
+            'class' => 'absolute inset-0 h-full text-xl opacity-40 left-3',
+        ]) ?>
         <Forms.Input name="handle" value="<?= $podcast->handle ?>" class="w-full pl-8" required="true" readonly="true" />
     </div>
 </div>
@@ -213,7 +215,9 @@
     title="<?= lang('Podcast.form.op3') ?>"
     subtitle="<?= lang('Podcast.form.op3_hint') ?>">
 
-    <a href="https://op3.dev" target="_blank" rel="noopener noreferrer" class="inline-flex self-start text-xs font-semibold underline gap-x-1 text-skin-muted hover:no-underline focus:ring-accent"><Icon glyph="link" class="text-sm"/>op3.dev</a>
+    <a href="https://op3.dev" target="_blank" rel="noopener noreferrer" class="inline-flex self-start text-xs font-semibold underline gap-x-1 text-skin-muted hover:no-underline focus:ring-accent"><?= icon('link', [
+        'class' => 'text-sm',
+    ]) ?>op3.dev</a>
     <Forms.Toggler name="enable_op3" value="yes" checked="<?= service('settings')
             ->get('Analytics.enableOP3', 'podcast:' . $podcast->id) ? 'true' : 'false' ?>" hint="<?= esc(lang('Podcast.form.op3_enable_hint')) ?>"><?= lang('Podcast.form.op3_enable') ?></Forms.Toggler>
 </Forms.Section>
@@ -274,7 +278,7 @@ value="<?= esc($podcast->new_feed_url) ?>"
 </div>
 
 </form>
-
-<Button class="mt-8" variant="danger" uri="<?= route_to('podcast-delete', $podcast->id) ?>" iconLeft="delete-bin"><?= lang('Podcast.delete') ?></Button>
+<?php // @icon('delete-bin-fill')?>
+<Button class="mt-8" variant="danger" uri="<?= route_to('podcast-delete', $podcast->id) ?>" iconLeft="delete-bin-fill"><?= lang('Podcast.delete') ?></Button>
 
 <?= $this->endSection() ?>

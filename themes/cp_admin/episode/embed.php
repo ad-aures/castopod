@@ -36,12 +36,14 @@ $embedHeight = config(Embed::class)->height;
 
 <div class="flex items-center mt-8 gap-x-2">
     <Forms.Textarea readonly="true" class="w-full max-w-xl" name="iframe" rows="2" value="<?= esc("<iframe width=\"100%\" height=\"{$embedHeight}\" frameborder=\"0\" scrolling=\"no\" style=\"width: 100%; height: {$embedHeight}px; overflow: hidden;\" src=\"{$episode->embed_url}\"></iframe>") ?>" />
-    <IconButton glyph="file-copy" data-type="clipboard-copy" data-clipboard-target="iframe"><?= lang('Episode.embed.clipboard_iframe') ?></IconButton>
+    <?php // @icon('file-copy-fill')?>
+    <IconButton glyph="file-copy-fill" data-type="clipboard-copy" data-clipboard-target="iframe"><?= lang('Episode.embed.clipboard_iframe') ?></IconButton>
 </div>
 
 <div class="flex items-center mt-4 gap-x-2">
     <Forms.Input readonly="true" class="w-full max-w-xl" name="url" value="<?= esc($episode->embed_url) ?>" />
-    <IconButton glyph="file-copy" data-type="clipboard-copy" data-clipboard-target="url"><?= lang('Episode.embed.clipboard_url') ?></IconButton>
+    <?php // @icon('file-copy-fill')?>
+    <IconButton glyph="file-copy-fill" data-type="clipboard-copy" data-clipboard-target="url"><?= lang('Episode.embed.clipboard_url') ?></IconButton>
 </div>
 
 <?= $this->endSection() ?>

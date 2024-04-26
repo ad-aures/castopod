@@ -9,8 +9,12 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
-<Button uri="<?= route_to('podcast-imports-add') ?>" variant="secondary" iconLeft="download"><?= lang('Podcast.import') ?></Button>
-<Button uri="<?= route_to('podcast-create') ?>" variant="primary" iconLeft="add"><?= lang('Podcast.create') ?></Button>
+<?php
+// @icon('import-fill')
+// @icon('add-fill')
+?>
+<Button uri="<?= route_to('podcast-imports-add') ?>" variant="secondary" iconLeft="import-fill"><?= lang('Podcast.import') ?></Button>
+<Button uri="<?= route_to('podcast-create') ?>" variant="primary" iconLeft="add-fill"><?= lang('Podcast.create') ?></Button>
 <?= $this->endSection() ?>
 
 

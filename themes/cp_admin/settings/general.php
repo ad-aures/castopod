@@ -51,7 +51,7 @@ use Config\App;
             />
         <?php if (config(App::class)->siteIcon['ico'] !== service('settings')->get('App.siteIcon')['ico']): ?>
         <div class="relative ml-2">
-            <a href="<?= route_to('settings-instance-delete-icon') ?>" class="absolute p-1 text-red-700 bg-red-100 border-2 rounded-full hover:text-red-900 border-contrast -top-3 -right-3 focus:ring-accent" title="<?= lang('Settings.instance.site_icon_delete') ?>" data-tooltip="top"><?= icon('delete-bin') ?></a>
+            <a href="<?= route_to('settings-instance-delete-icon') ?>" class="absolute p-1 text-red-700 bg-red-100 border-2 rounded-full hover:text-red-900 border-contrast -top-3 -right-3 focus:ring-accent" title="<?= lang('Settings.instance.site_icon_delete') ?>" data-tooltip="top"><?= icon('delete-bin-fill') ?></a>
             <img src="<?= get_site_icon_url('64') ?>" alt="<?= esc(service('settings')->get('App.siteName')) ?> Favicon" class="w-10 h-10 aspect-square" loading="lazy" />
         </div>
         <?php endif; ?>
@@ -69,8 +69,8 @@ use Config\App;
 <Forms.Section
     title="<?= lang('Settings.images.title') ?>"
     subtitle="<?= lang('Settings.images.subtitle') ?>">
-
-    <Button variant="primary" type="submit" iconLeft="refresh"><?= lang('Settings.images.regenerate') ?></Button>
+    <?php // @icon('refresh-fill')?>
+    <Button variant="primary" type="submit" iconLeft="refresh-fill"><?= lang('Settings.images.regenerate') ?></Button>
 
 </Forms.Section>
 
@@ -86,8 +86,8 @@ use Config\App;
     <Forms.Toggler name="reset_counts" value="yes" size="small" checked="false" hint="<?= esc(lang('Settings.housekeeping.reset_counts_helper')) ?>"><?= lang('Settings.housekeeping.reset_counts') ?></Forms.Toggler>
     <Forms.Toggler name="rename_episodes_files" value="yes" size="small" checked="false" hint="<?= esc(lang('Settings.housekeeping.rename_episodes_files_hint')) ?>"><?= lang('Settings.housekeeping.rename_episodes_files') ?></Forms.Toggler>
     <Forms.Toggler name="clear_cache" value="yes" size="small" checked="false" hint="<?= esc(lang('Settings.housekeeping.clear_cache_helper')) ?>"><?= lang('Settings.housekeeping.clear_cache') ?></Forms.Toggler>
-
-    <Button variant="primary" type="submit" iconLeft="home-gear"><?= lang('Settings.housekeeping.run') ?></Button>
+    <?php // @icon('home-gear-fill')?>
+    <Button variant="primary" type="submit" iconLeft="home-gear-fill"><?= lang('Settings.housekeeping.run') ?></Button>
 
 </Forms.Section>
 

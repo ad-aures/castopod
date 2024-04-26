@@ -5,7 +5,9 @@
             <span class="px-1 text-sm font-semibold rounded bg-subtle"><?= $startTime ?></span><?= $title ?>
         </div>
         <?php if ($chapterUrl !== ''): ?>
-            <a class="inline-flex items-baseline mt-1 text-sm underline text-skin-muted hover:no-underline" href='<?= $chapterUrl ?>' target='_blank' rel="noopener noreferrer"><?= $chapterUrl ?><?= icon('external-link', 'sm:ml-1 sm:text-base sm:opacity-60') ?></a>
+            <a class="inline-flex items-baseline mt-1 text-sm underline text-skin-muted hover:no-underline" href='<?= $chapterUrl ?>' target='_blank' rel="noopener noreferrer"><?= $chapterUrl ?><?= icon('external-link-fill', [
+                'class' => 'sm:ml-1 sm:text-base sm:opacity-60',
+            ]) ?></a>
         <?php endif; ?>
     </div>
 </article>

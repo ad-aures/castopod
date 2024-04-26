@@ -70,11 +70,19 @@
                                 <span class="absolute bottom-0 w-6 h-6 rounded-full -right-2.5 flex justify-center items-center <?= $backgroundColor ?> group-hover:bg-white">
                                     <?php
                                         $icon = match ($notification->type) {
-                                            'reply'  => icon('chat', 'text-sky-500 text-base'),
-                                            'like'   => icon('heart', 'text-rose-500 text-base'),
-                                            'share'  => icon('repeat', 'text-green-500 text-base'),
-                                            'follow' => icon('user-follow', 'text-violet-500 text-base'),
-                                            default  => '',
+                                            'reply' => icon('chat-4-fill', [
+                                                'class' => 'text-sky-500 text-base',
+                                            ]),
+                                            'like' => icon('heart-fill', [
+                                                'class' => 'text-rose-500 text-base',
+                                            ]),
+                                            'share' => icon('repeat-fill', [
+                                                'class' => 'text-green-500 text-base',
+                                            ]),
+                                            'follow' => icon('user-follow-fill', [
+                                                'class' => 'text-violet-500 text-base',
+                                            ]),
+                                            default => '',
                                         };
                 ?>
                                     <?= $icon ?>

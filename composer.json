@@ -27,6 +27,7 @@
     "phpseclib/phpseclib": "~2.0.47",
     "vlucas/phpdotenv": "v5.6.0",
     "whichbrowser/parser": "^v2.1.8",
+    "yassinedoghri/codeigniter-icons": "dev-develop",
     "yassinedoghri/podcast-feed": "dev-main"
   },
   "require-dev": {
@@ -62,13 +63,15 @@
     "style": "vendor/bin/ecs check --ansi",
     "style:fix": "vendor/bin/ecs check --fix --ansi",
     "generate:auth-docs": "php spark auth:generate-docs",
+    "php-icons": "vendor/bin/php-icons scan",
     "post-install-cmd": [
       "@php vendor/opawg/user-agents-v2-php/src/UserAgentsGenerate.php > vendor/opawg/user-agents-v2-php/src/UserAgents.php",
       "@php vendor/opawg/user-agents-v2-php/src/UserAgentsRSSGenerate.php > vendor/opawg/user-agents-v2-php/src/UserAgentsRSS.php",
       "@php vendor/adaures/ipcat-php/src/IpDbGenerate.php > vendor/adaures/ipcat-php/src/IpDb.php",
       "@php vendor/adaures/podcast-persons-taxonomy/src/TaxonomyGenerate.php https://raw.githubusercontent.com/Podcastindex-org/podcast-namespace/main/taxonomy-en.json > modules/Admin/Language/en/PersonsTaxonomy.php",
       "@php vendor/adaures/podcast-persons-taxonomy/src/TaxonomyGenerate.php https://raw.githubusercontent.com/Podcastindex-org/podcast-namespace/main/taxonomy-fr.json > modules/Admin/Language/fr/PersonsTaxonomy.php",
-      "@php vendor/adaures/podcast-persons-taxonomy/src/ReversedTaxonomyGenerate.php https://raw.githubusercontent.com/Podcastindex-org/podcast-namespace/main/taxonomy-en.json > vendor/adaures/podcast-persons-taxonomy/src/ReversedTaxonomy.php"
+      "@php vendor/adaures/podcast-persons-taxonomy/src/ReversedTaxonomyGenerate.php https://raw.githubusercontent.com/Podcastindex-org/podcast-namespace/main/taxonomy-en.json > vendor/adaures/podcast-persons-taxonomy/src/ReversedTaxonomy.php",
+      "vendor/bin/php-icons init && vendor/bin/php-icons scan"
     ],
     "post-update-cmd": [
       "@composer dump-autoload",
@@ -77,13 +80,15 @@
       "@php vendor/adaures/ipcat-php/src/IpDbGenerate.php > vendor/adaures/ipcat-php/src/IpDb.php",
       "@php vendor/adaures/podcast-persons-taxonomy/src/TaxonomyGenerate.php https://raw.githubusercontent.com/Podcastindex-org/podcast-namespace/main/taxonomy-en.json > modules/Admin/Language/en/PersonsTaxonomy.php",
       "@php vendor/adaures/podcast-persons-taxonomy/src/TaxonomyGenerate.php https://raw.githubusercontent.com/Podcastindex-org/podcast-namespace/main/taxonomy-fr.json > modules/Admin/Language/fr/PersonsTaxonomy.php",
-      "@php vendor/adaures/podcast-persons-taxonomy/src/ReversedTaxonomyGenerate.php https://raw.githubusercontent.com/Podcastindex-org/podcast-namespace/main/taxonomy-en.json > vendor/adaures/podcast-persons-taxonomy/src/ReversedTaxonomy.php"
+      "@php vendor/adaures/podcast-persons-taxonomy/src/ReversedTaxonomyGenerate.php https://raw.githubusercontent.com/Podcastindex-org/podcast-namespace/main/taxonomy-en.json > vendor/adaures/podcast-persons-taxonomy/src/ReversedTaxonomy.php",
+      "vendor/bin/php-icons init && vendor/bin/php-icons scan"
     ]
   },
   "support": {
     "source": "https://code.castopod.org/adaures/castopod.git",
     "discord": "https://castopod.org/discord"
   },
+  "minimum-stability": "dev",
   "prefer-stable": true,
   "config": {
     "optimize-autoloader": true,

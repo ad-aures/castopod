@@ -15,7 +15,8 @@
 
 <Forms.Section
     title="<?= lang('PodcastImport.old_podcast_section_title') ?>">
-<Alert glyph="scales" variant="info" title="<?= lang('PodcastImport.old_podcast_legal_disclaimer_title') ?>"><?= lang('PodcastImport.old_podcast_legal_disclaimer') ?></Alert>
+<?php // @icon('scales-3-fill')?>
+<Alert glyph="scales-3-fill" variant="info" title="<?= lang('PodcastImport.old_podcast_legal_disclaimer_title') ?>"><?= lang('PodcastImport.old_podcast_legal_disclaimer') ?></Alert>
 <Forms.Field
     name="imported_feed_url"
     label="<?= esc(lang('PodcastImport.imported_feed_url')) ?>"
@@ -32,7 +33,9 @@
 <div class="flex flex-col">
     <Forms.Label for="handle" hint="<?= esc(lang('Podcast.form.handle_hint')) ?>"><?= lang('Podcast.form.handle') ?></Forms.Label>
     <div class="relative">
-        <Icon glyph="at" class="absolute inset-0 h-full text-xl opacity-40 left-3" />
+        <?= icon('at-line', [
+            'class' => 'absolute inset-0 h-full text-xl opacity-40 left-3',
+        ]) ?>
         <Forms.Input name="handle" class="w-full pl-8" required="true" />
     </div>
 </div>

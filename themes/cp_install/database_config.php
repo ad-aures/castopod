@@ -56,8 +56,8 @@ use Config\Database;
     label="<?= esc(lang('Install.form.db_prefix')) ?>"
     hint="<?= esc(lang('Install.form.db_prefix_hint')) ?>"
     value="<?= config(Database::class)->default['DBPrefix'] ?>" />
-
-<Button variant="primary" type="submit" class="self-end" iconRight="arrow-right"><?= lang('Install.form.next') ?></Button>
+<?php // @icon('arrow-right-fill')?>
+<Button variant="primary" type="submit" class="self-end" iconRight="arrow-right-fill"><?= lang('Install.form.next') ?></Button>
 
 </form>
 

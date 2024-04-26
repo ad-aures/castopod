@@ -18,9 +18,10 @@
 
 <?= $this->section('headerRight') ?>
 <?php if ($episode->publication_status === 'published'): ?>
+<?php // @icon('history-fill')?>
 <IconButton
     uri="<?= route_to('episode-publish_date_edit', $podcast->id, $episode->id) ?>"
-    glyph="history"
+    glyph="history-fill"
     variant="secondary"
     glyphClass="text-xl"
 ><?= lang('Episode.publish_date_edit') ?></IconButton>

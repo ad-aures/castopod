@@ -28,8 +28,8 @@
     type="password"
     required="true"
     autocomplete="new-password" />
-
-<Button variant="primary" type="submit" class="self-end" iconLeft="check"><?= lang('Install.form.submit') ?></Button>
+<?php // @icon('check-fill')?>
+<Button variant="primary" type="submit" class="self-end" iconLeft="check-fill"><?= lang('Install.form.submit') ?></Button>
 
 </form>
 

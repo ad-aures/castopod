@@ -42,8 +42,8 @@ use Modules\Install\Config\Install;
     hint="<?= esc(lang('Install.form.auth_gateway_hint')) ?>"
     value="<?= config(Auth::class)->gateway ?>"
     required="true" />
-
-<Button class="self-end" variant="primary" type="submit" iconRight="arrow-right"><?= lang('Install.form.next') ?></Button>
+<?php // @icon('arrow-right-fill')?>
+<Button class="self-end" variant="primary" type="submit" iconRight="arrow-right-fill"><?= lang('Install.form.next') ?></Button>
 </form>
 
 <?= $this->endSection() ?>

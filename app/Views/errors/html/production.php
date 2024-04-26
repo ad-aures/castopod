@@ -29,8 +29,12 @@
 			<p class="font-mono"><?= nl2br(esc($exception->getMessage())) ?><br/><span class="pl-4">at <span class="select-all bg-elevated"><?= nl2br(esc($exception->getFile())) ?>:<?= esc($exception->getLine()) ?></span></span></p>
 			<p id="error-stack-trace" class="hidden"><?= nl2br(esc($exception)) ?></p>
 			<clipboard-copy for="error-stack-trace" class="items-center self-end px-3 py-1 mt-2 font-semibold leading-8 transition-all rounded-full shadow group text-accent-contrast hover:bg-accent-hover bg-accent-base focus:ring-accent">
-				<span class="inline-flex items-center copy-base"><?= icon('file-copy', 'mr-2') ?>Copy stack trace</span>
-				<span class="items-center hidden copy-success"><?= icon('check', 'mr-2') ?>Copied</span>
+				<span class="inline-flex items-center copy-base"><?= icon('file-copy-fill', [
+				    'class' => 'mr-2',
+				]) ?>Copy stack trace</span>
+				<span class="items-center hidden copy-success"><?= icon('check-fill', [
+				    'class' => 'mr-2',
+				]) ?>Copied</span>
 			</clipboard-copy>
 		</div>
 	</div>

@@ -29,6 +29,7 @@
         ->asset('js/app.ts', 'js') ?>
 </head>
 
+
 <body class="flex flex-col min-h-screen mx-auto bg-base theme-<?= service('settings')
         ->get('App.theme') ?>">
     <?php if (auth()->loggedIn()): ?>
@@ -50,7 +51,9 @@
             <Heading tagName="h2" class="inline-block"><?= lang('Home.all_podcasts') ?> (<?= count(
                 $podcasts,
             ) ?>)</Heading>
-            <button class="inline-flex items-center px-2 py-1 text-sm font-semibold focus:ring-accent" id="sortby-dropdown" data-dropdown="button" data-dropdown-target="sortby-dropdown-menu" aria-haspopup="true" aria-expanded="false"><?= icon('sort', 'mr-1 text-xl opacity-50') . lang('Home.sort_by') ?></button>
+            <button class="inline-flex items-center px-2 py-1 text-sm font-semibold focus:ring-accent" id="sortby-dropdown" data-dropdown="button" data-dropdown-target="sortby-dropdown-menu" aria-haspopup="true" aria-expanded="false"><?= icon('material-symbols:sort', [
+                'class' => 'mr-1 text-xl opacity-50',
+            ]) . lang('Home.sort_by') ?></button>
             <DropdownMenu id="sortby-dropdown-menu" labelledby="sortby-dropdown" items="<?= esc(json_encode([
                 [
                     'type'  => 'link',
@@ -81,7 +84,9 @@
                             <div class="w-full h-full overflow-hidden bg-header">
                                 <?php if ($podcast->is_premium): ?>
                                     <div class="absolute top-0 left-0 z-10 inline-flex items-center mt-2 gap-x-2">
-                                        <Icon glyph="exchange-dollar" class="w-8 pl-2 text-2xl rounded-r-full rounded-tl-lg text-accent-contrast bg-accent-base" />
+                                        <?= icon('exchange-dollar-fill', [
+                                            'class' => 'w-8 pl-2 text-2xl rounded-r-full rounded-tl-lg text-accent-contrast bg-accent-base',
+                                        ]) ?>
                                         <?= explicit_badge($podcast->parental_advisory === 'explicit', 'rounded bg-black/75') ?>
                                     </div>
                                 <?php else: ?>
@@ -104,7 +109,9 @@
     <footer class="container flex justify-between px-2 py-4 mx-auto text-sm text-right border-t border-subtle">
         <?= render_page_links() ?>
         <small><?= lang('Common.powered_by', [
-            'castopod' => '<a class="inline-flex font-semibold hover:underline focus:ring-accent" href="https://castopod.org/" target="_blank" rel="noreferrer noopener">Castopod' . icon('castopod', 'ml-1 text-lg', 'social') . '</a>',
+            'castopod' => '<a class="inline-flex font-semibold hover:underline focus:ring-accent" href="https://castopod.org/" target="_blank" rel="noreferrer noopener">Castopod' . icon('social:castopod', [
+                'class' => 'ml-1 text-lg',
+            ]) . '</a>',
         ], null, false) ?></small>
     </footer>
 </body>

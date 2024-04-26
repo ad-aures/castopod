@@ -6,7 +6,9 @@ if (can_user_interact()): ?>
             <?= csrf_field() ?>
             <?= anchor(
                 route_to('post', esc($podcast->handle), $reply->id),
-                icon('chat', 'text-lg mr-1 opacity-40') . $reply->replies_count,
+                icon('chat-4-fill', [
+                    'class' => 'text-lg mr-1 opacity-40',
+                ]) . $reply->replies_count,
                 [
                     'class' => 'inline-flex items-center hover:underline text-sm',
                     'title' => lang('Post.replies', [
@@ -19,17 +21,20 @@ if (can_user_interact()): ?>
                 [
                     'numberOfReblogs' => $reply->reblogs_count,
                 ],
-            ) ?>"><?= icon('repeat', 'text-lg mr-1 opacity-40') . $reply->reblogs_count ?></button>
+            ) ?>"><?= icon('repeat-fill', [
+                'class' => 'text-lg mr-1 opacity-40',
+            ]) . $reply->reblogs_count ?></button>
                 <button type="submit" name="action" value="favourite" class="inline-flex items-center text-sm hover:underline" title="<?= lang(
                     'Post.favourites',
                     [
                         'numberOfFavourites' => $reply->favourites_count,
                     ],
-                ) ?>"><?= icon('heart', 'text-lg mr-1 opacity-40') . $reply->favourites_count ?></button>
-                <button id="<?= $reply->id . '-more-dropdown' ?>" type="button" class="text-xl text-skin-muted focus:ring-accent" data-dropdown="button" data-dropdown-target="<?= $reply->id . '-more-dropdown-menu' ?>" aria-label="<?= lang('Common.more') ?>" aria-haspopup="true" aria-expanded="false"><?= icon('more') ?></button>
+                ) ?>"><?= icon('heart-fill', [
+                    'class' => 'text-lg mr-1 opacity-40',
+                ]) . $reply->favourites_count ?></button>
+                <button id="<?= $reply->id . '-more-dropdown' ?>" type="button" class="text-xl text-skin-muted focus:ring-accent" data-dropdown="button" data-dropdown-target="<?= $reply->id . '-more-dropdown-menu' ?>" aria-label="<?= lang('Common.more') ?>" aria-haspopup="true" aria-expanded="false"><?= icon('more-2-fill') ?></button>
         </form>
-        <nav id="<?= $reply->id . '-more-dropdown-menu' ?>" class="flex flex-col py-2 text-sm rounded-lg shadow border-3 border-subtle bg-elevated" aria-labelledby="<?= $reply->id .
-        '-more-dropdown' ?>" data-dropdown="menu" data-dropdown-placement="bottom">
+        <nav id="<?= $reply->id . '-more-dropdown-menu' ?>" class="flex flex-col py-2 text-sm rounded-lg shadow border-3 border-subtle bg-elevated" aria-labelledby="<?= $reply->id . '-more-dropdown' ?>" data-dropdown="menu" data-dropdown-placement="bottom">
             <?= anchor(
                 route_to('post', esc($podcast->handle), $reply->id),
                 lang('Post.expand'),
@@ -83,7 +88,9 @@ if (can_user_interact()): ?>
     <footer class="flex gap-x-6">
         <?= anchor(
             route_to('post', esc($podcast->handle), $reply->id),
-            icon('chat', 'text-lg mr-1 opacity-40') . $reply->replies_count,
+            icon('chat-4-fill', [
+                'class' => 'text-lg mr-1 opacity-40',
+            ]) . $reply->replies_count,
             [
                 'class' => 'inline-flex items-center hover:underline text-sm',
                 'title' => lang('Post.replies', [
@@ -93,7 +100,9 @@ if (can_user_interact()): ?>
         ) ?>
         <?= anchor_popup(
             route_to('post-remote-action', esc($podcast->handle), $reply->id, 'reblog'),
-            icon('repeat', 'text-lg mr-1 opacity-40') . $reply->reblogs_count,
+            icon('repeat-fill', [
+                'class' => 'text-lg mr-1 opacity-40',
+            ]) . $reply->reblogs_count,
             [
                 'class'  => 'inline-flex items-center hover:underline text-sm',
                 'width'  => 420,
@@ -105,7 +114,9 @@ if (can_user_interact()): ?>
         ) ?>
         <?= anchor_popup(
             route_to('post-remote-action', esc($podcast->handle), $reply->id, 'favourite'),
-            icon('heart', 'text-lg mr-1 opacity-40') . $reply->favourites_count,
+            icon('heart-fill', [
+                'class' => 'text-lg mr-1 opacity-40',
+            ]) . $reply->favourites_count,
             [
                 'class'  => 'inline-flex items-center hover:underline text-sm',
                 'width'  => 420,

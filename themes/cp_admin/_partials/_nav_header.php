@@ -5,23 +5,29 @@ $userPodcasts = get_podcasts_user_can_interact_with(auth()->user()); ?>
 <header class="sticky top-0 z-[60] flex items-center h-10 text-white border-b col-span-full bg-navigation border-navigation">
     <button type="button"
         data-sidebar-toggler="toggler"
-        class="h-full pr-1 text-xl md:hidden focus:ring-accent focus:ring-inset" aria-label="<?= lang('Navigation.toggle_sidebar') ?>"><?= icon('menu') ?></button>
+        class="h-full pr-1 text-xl md:hidden focus:ring-accent focus:ring-inset" aria-label="<?= lang('Navigation.toggle_sidebar') ?>"><?= icon('menu-2-fill') ?></button>
     <div class="inline-flex items-center h-full">
         <a href="<?= route_to(
             'admin',
         ) ?>" class="inline-flex items-center h-full px-2 border-r border-navigation focus:ring-inset focus:ring-accent">
-            <?= (isset($podcast) ? icon('arrow-left', 'mr-2') : '') . svg('castopod-logo-base', 'h-6') ?>
+            <?= (isset($podcast) ? icon('arrow-left-line', [
+                        'class' => 'mr-2',
+                    ]) : '') . svg('castopod-logo-base', 'h-6') ?>
         </a>
         <a href="<?= route_to(
             'home',
         ) ?>" class="inline-flex items-center h-full px-2 text-sm font-semibold sm:px-6 hover:underline focus:ring-inset focus:ring-accent" title="<?= lang('Navigation.go_to_website') ?>">
                 <span class="hidden sm:block"><?= lang('Navigation.go_to_website') ?></span>
-                <?= icon('external-link', 'sm:ml-1 text-xl sm:text-base sm:opacity-60') ?>
+                <?= icon('external-link-fill', [
+        'class' => 'sm:ml-1 text-xl sm:text-base sm:opacity-60',
+                ]) ?>
         </a>
     </div>
     <div class="inline-flex items-center h-full ml-auto">
         <button type="button" class="relative h-full px-2 focus:ring-accent focus:ring-inset" id="notifications-dropdown" data-dropdown="button" data-dropdown-target="notifications-dropdown-menu" aria-haspopup="true" aria-expanded="false" title="<?= lang('Notifications.title') ?>" data-tooltip="bottom">
-            <?= icon('notification', 'text-2xl opacity-80') ?>
+            <?= icon('notification-2-fill', [
+                'class' => 'text-2xl opacity-80',
+            ]) ?>
             <?php if (($actorIdsWithUnreadNotifications = get_actor_ids_with_unread_notifications(auth()->user())) !== []): ?>
                 <span class="absolute top-2 right-2 w-2.5 h-2.5 bg-red-500 rounded-full border border-navigation-bg"></span>
             <?php endif ?>
@@ -78,16 +84,22 @@ if ($userPodcasts !== []) {
             data-dropdown-target="my-account-dropdown-menu"
             aria-haspopup="true"
             aria-expanded="false"><div class="relative mr-1">
-                <?= icon('account-circle', 'text-3xl opacity-60') ?>
+                <?= icon('account-circle-fill', [
+                    'class' => 'text-3xl opacity-60',
+                ]) ?>
                 <?= $userPodcasts === [] ? '' : '<img src="' . interact_as_actor()->avatar_image_url . '" class="absolute bottom-0 w-4 h-4 border rounded-full -right-1 border-navigation-bg" loading="lazy" />' ?>
             </div>
             <span class="hidden sm:block"><?= esc(auth()->user()->username) ?></span>
-            <?= icon('caret-down', 'ml-auto text-2xl') ?></button>
+            <?= icon('arrow-drop-down-fill', [
+                'class' => 'ml-auto text-2xl',
+            ]) ?></button>
     </div>
     <?php
 $interactButtons = '';
 foreach ($userPodcasts as $userPodcast) {
-    $checkMark = interact_as_actor_id() === $userPodcast->actor_id ? icon('check', 'ml-2 bg-accent-base text-accent-contrast rounded-full') : '';
+    $checkMark = interact_as_actor_id() === $userPodcast->actor_id ? icon('check-fill', [
+        'class' => 'ml-2 bg-accent-base text-accent-contrast rounded-full',
+    ]) : '';
     $userPodcastTitle = esc($userPodcast->title);
 
     $interactButtons .= <<<HTML

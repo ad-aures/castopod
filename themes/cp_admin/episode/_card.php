@@ -6,7 +6,9 @@
         </div>
         <?php if ($episode->is_premium): ?>
             <div class="absolute top-0 left-0 inline-flex mt-2 gap-x-2">
-                <Icon glyph="exchange-dollar" class="w-8 pl-2 text-2xl rounded-r-full rounded-tl-lg text-accent-contrast bg-accent-base" />
+                <?= icon('exchange-dollar-fill', [
+                    'class' => 'w-8 pl-2 text-2xl rounded-r-full rounded-tl-lg text-accent-contrast bg-accent-base',
+                ]) ?>
                 <?= publication_pill($episode->published_at, $episode->publication_status, 'text-sm'); ?>
             </div>
         <?php else: ?>
@@ -17,7 +19,7 @@
             <span class="font-semibold leading-tight line-clamp-2"><?= esc($episode->title) ?></span>
         </div>
     </a>
-    <button class="absolute top-0 right-0 z-10 p-2 mt-2 mr-2 text-white transition -translate-y-12 rounded-full opacity-0 focus:ring-accent focus:opacity-100 focus:-translate-y-0 group-hover:translate-y-0 bg-black/50 group-hover:opacity-100" id="more-dropdown-<?= $episode->id ?>" data-dropdown="button" data-dropdown-target="more-dropdown-<?= $episode->id ?>-menu" aria-haspopup="true" aria-expanded="false" title="<?= lang('Common.more') ?>"><?= icon('more') ?></button>
+    <button class="absolute top-0 right-0 z-10 p-2 mt-2 mr-2 text-white transition -translate-y-12 rounded-full opacity-0 focus:ring-accent focus:opacity-100 focus:-translate-y-0 group-hover:translate-y-0 bg-black/50 group-hover:opacity-100" id="more-dropdown-<?= $episode->id ?>" data-dropdown="button" data-dropdown-target="more-dropdown-<?= $episode->id ?>-menu" aria-haspopup="true" aria-expanded="false" title="<?= lang('Common.more') ?>"><?= icon('more-2-fill') ?></button>
     <?php $items = [
         [
             'type'  => 'link',
@@ -62,7 +64,9 @@ if ($episode->published_at === null) {
     ];
 } else {
     $label = lang('Episode.delete');
-    $icon = icon('forbid', 'mr-2');
+    $icon = icon('forbid-fill', [
+        'class' => 'mr-2',
+    ]);
     $title = lang('Episode.messages.unpublishBeforeDeleteTip');
     $items[] = [
         'type'    => 'html',

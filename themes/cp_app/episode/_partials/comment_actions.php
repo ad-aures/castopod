@@ -7,13 +7,17 @@
                 [
                     'numberOfLikes' => $comment->likes_count,
                 ],
-            ) ?>"><?= icon('heart', 'text-xl mr-1 text-gray-400 group-hover:text-red-600') . $comment->likes_count ?></button>
+            ) ?>"><?= icon('heart-fill', [
+                'class' => 'text-xl mr-1 text-gray-400 group-hover:text-red-600',
+            ]) . $comment->likes_count ?></button>
             <Button uri="<?= route_to('episode-comment', esc($comment->episode->podcast->handle), esc($comment->episode->slug), $comment->id) ?>" size="small"><?= lang('Comment.reply') ?></Button>
         </form>
         <?php if ($comment->replies_count): ?>
             <?= anchor(
                 route_to('episode-comment', esc($comment->episode->podcast->handle), esc($comment->episode->slug), $comment->id),
-                icon('caret-down', 'text-xl mr-1') . lang('Comment.view_replies', [
+                icon('arrow-drop-down-fill', [
+                    'class' => 'text-xl mr-1',
+                ]) . lang('Comment.view_replies', [
                     'numberOfReplies' => $comment->replies_count,
                 ]),
                 [
@@ -27,11 +31,15 @@
             [
                 'numberOfLikes' => $comment->likes_count,
             ],
-        ) ?>"><?= icon('heart', 'text-xl mr-1 text-skin-muted') . $comment->likes_count ?></button>
+        ) ?>"><?= icon('heart-fill', [
+            'class' => 'text-xl mr-1 text-skin-muted',
+        ]) . $comment->likes_count ?></button>
         <?php if ($comment->replies_count): ?>
             <?= anchor(
                 route_to('episode-comment', esc($comment->episode->podcast->handle), esc($comment->episode->slug), $comment->id),
-                icon('caret-down', 'text-xl mr-1') . lang('Comment.view_replies', [
+                icon('arrow-drop-down-fill', [
+                    'class' => 'text-xl mr-1',
+                ]) . lang('Comment.view_replies', [
                     'numberOfReplies' => $comment->replies_count,
                 ]),
                 [

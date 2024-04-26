@@ -9,7 +9,8 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
-<Button uri="<?= route_to('person-create') ?>" variant="primary" iconLeft="add"><?= lang('Person.create') ?></Button>
+<?php // @icon('add-fill')?>
+<Button uri="<?= route_to('person-create') ?>" variant="primary" iconLeft="add-fill"><?= lang('Person.create') ?></Button>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>

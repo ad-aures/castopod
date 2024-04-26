@@ -14,7 +14,7 @@
     "build": "tsc && vite build",
     "serve": "vite preview",
     "build:static": "pnpm run build:icons && pnpm run build:svg",
-    "build:icons": "svgo -f app/Resources/icons -o public/assets/icons -r --config=./.svgo.icons.cjs",
+    "build:icons": "svgo -f app/Resources/icons -o app/Resources/icons -r --config=./.svgo.icons.cjs",
     "build:svg": "svgo -f app/Resources/images -o public/assets/images -r --config=./.svgo.cjs",
     "lint": "eslint --ext js,ts app/Resources",
     "lint:fix": "eslint --ext js,ts app/Resources --fix",

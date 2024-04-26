@@ -6,7 +6,9 @@
             $podcast->id,
         ) ?>" class="inline-flex items-center text-sm underline hover:no-underline focus:ring-accent">
             <?= lang('Podcast.see_all_episodes') ?>
-            <?= icon('chevron-right', 'ml-2') ?>
+            <?= icon('arrow-right-s-fill', [
+                        'class' => 'ml-2',
+                    ]) ?>
         </a>
     </header>
     <?php if ($episodes): ?>

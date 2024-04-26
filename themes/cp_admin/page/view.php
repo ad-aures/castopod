@@ -9,7 +9,8 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
-<Button variant="primary" uri="<?= route_to('page-edit', $page->id) ?>" iconLeft="add"><?= lang('Page.edit') ?></Button>
+<?php // @icon('add-fill')?>
+<Button variant="primary" uri="<?= route_to('page-edit', $page->id) ?>" iconLeft="add-fill"><?= lang('Page.edit') ?></Button>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>

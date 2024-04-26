@@ -12,7 +12,9 @@
 
 <?= anchor(
     route_to('episode-view', $podcast->id, $episode->id),
-    icon('arrow-left', 'mr-2 text-lg') . lang('Episode.publish_form.back_to_episode_dashboard'),
+    icon('arrow-left-line', [
+        'class' => 'mr-2 text-lg',
+    ]) . lang('Episode.publish_form.back_to_episode_dashboard'),
     [
         'class' => 'inline-flex items-center font-semibold mr-4 text-sm',
     ],

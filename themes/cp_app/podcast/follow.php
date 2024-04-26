@@ -60,14 +60,17 @@
                 hint="<?= esc(lang('Fediverse.your_handle_hint')) ?>"
                 required="true"
             />
-            <Button variant="primary" type="submit" class="self-end" iconRight="send-plane"><?= lang('Fediverse.follow.submit') ?></Button>
+            <?php // @icon('send-plane-2-fill')?>
+            <Button variant="primary" type="submit" class="self-end" iconRight="send-plane-2-fill"><?= lang('Fediverse.follow.submit') ?></Button>
         </form>
     </main>
 
     <footer
         class="flex-col w-full px-2 py-4 mt-auto text-xs text-center border-t text-skin-muted border-subtle">
         <?= lang('Common.powered_by', [
-            'castopod' => '<a class="inline-flex font-semibold hover:underline focus:ring-accent" href="https://castopod.org" target="_blank" rel="noreferrer noopener">Castopod' . icon('castopod', 'ml-1 text-lg', 'social') . '</a>',
+            'castopod' => '<a class="inline-flex font-semibold hover:underline focus:ring-accent" href="https://castopod.org" target="_blank" rel="noreferrer noopener">Castopod' . icon('social:castopod', [
+                'class' => 'ml-1 text-lg',
+            ]) . '</a>',
         ], null, false) ?>
     </footer>
 </body>

@@ -35,7 +35,7 @@ if (! function_exists('hint_tooltip')) {
             $tooltip .= ' ' . $class;
         }
 
-        return $tooltip . '">' . icon('question') . '</span>';
+        return $tooltip . '">' . icon('question-fill') . '</span>';
     }
 }
 
@@ -156,20 +156,20 @@ if (! function_exists('publication_button')) {
                 $label = lang('Episode.publish');
                 $route = route_to('episode-publish', $podcastId, $episodeId);
                 $variant = 'primary';
-                $iconLeft = 'upload-cloud';
+                $iconLeft = 'upload-cloud-fill'; // @icon('upload-cloud-fill')
                 break;
             case 'with_podcast':
             case 'scheduled':
                 $label = lang('Episode.publish_edit');
                 $route = route_to('episode-publish_edit', $podcastId, $episodeId);
                 $variant = 'warning';
-                $iconLeft = 'upload-cloud';
+                $iconLeft = 'upload-cloud-fill'; // @icon('upload-cloud-fill')
                 break;
             case 'published':
                 $label = lang('Episode.unpublish');
                 $route = route_to('episode-unpublish', $podcastId, $episodeId);
                 $variant = 'danger';
-                $iconLeft = 'cloud-off';
+                $iconLeft = 'cloud-off-fill'; // @icon('cloud-off-fill')
                 break;
             default:
                 $label = '';
@@ -350,7 +350,9 @@ if (! function_exists('location_link')) {
 
         return anchor(
             $location->url,
-            icon('map-pin', 'mr-2 flex-shrink-0') . '<span class="truncate">' . esc($location->name) . '</span>',
+            icon('map-pin-2-fill', [
+                'class' => 'mr-2 flex-shrink-0',
+            ]) . '<span class="truncate">' . esc($location->name) . '</span>',
             [
                 'class' => 'w-full overflow-hidden inline-flex items-baseline hover:underline focus:ring-accent' .
                     ($class === '' ? '' : " {$class}"),

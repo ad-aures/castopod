@@ -24,7 +24,7 @@
     <div class="flex flex-col items-start flex-1 min-w-0 px-4 pt-4 h-28">
         <a href="https://castopod.org/" class="absolute top-0 right-0 mt-1 mr-2 text-2xl text-pine-500 hover:opacity-75" title="<?= lang('Common.powered_by', [
             'castopod' => 'Castopod',
-        ]) ?>" target="_blank" rel="noopener noreferrer"><?= icon('castopod', '', 'podcasting') ?></a>
+        ]) ?>" target="_blank" rel="noopener noreferrer"><?= icon('podcasting:castopod') ?></a>
         <div class="flex gap-x-2">
             <?= episode_numbering($episode->number, $episode->season_number, 'text-xs font-semibold !no-underline border px-1 border-gray-500', true) ?>
             <a href="<?= route_to('podcast-activity', esc($podcast->handle)) ?>" style="color: <?= $themeData['text'] ?>;" class="text-xs truncate opacity-75 hover:opacity-100" target="_blank" rel="noopener noreferrer"><?= esc($podcast->title) ?></a>
@@ -33,7 +33,8 @@
             <h1 class="font-semibold leading-tight opacity-100 line-clamp-2 hover:opacity-75"><?= esc($episode->title) ?></h1>
         </a>
         <?php if ($episode->is_premium && ! is_unlocked($podcast->handle)): ?>
-            <Button variant="primary" class="mt-auto mb-2" iconLeft="lock" uri="<?= $episode->link ?>" target="_blank" rel="noopener noreferrer"><?= lang('PremiumPodcasts.unlock') ?></Button>
+            <?php // @icon('lock-fill')?>
+            <Button variant="primary" class="mt-auto mb-2" iconLeft="lock-fill" uri="<?= $episode->link ?>" target="_blank" rel="noopener noreferrer"><?= lang('PremiumPodcasts.unlock') ?></Button>
         <?php else: ?>
         <vm-player
                 id="castopod-vm-player"

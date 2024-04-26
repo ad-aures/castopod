@@ -73,7 +73,8 @@ use Modules\MediaClipper\Config\MediaClipper;
             </div>
         </fieldset>
     </Forms.Section>
-    <Button variant="primary" type="submit" iconRight="arrow-right" class="self-end"><?= lang('VideoClip.form.submit') ?></Button>
+    <?php // @icon('arrow-right-fill')?>
+    <Button variant="primary" type="submit" iconRight="arrow-right-fill" class="self-end"><?= lang('VideoClip.form.submit') ?></Button>
 </div>
 </form>
 

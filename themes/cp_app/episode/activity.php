@@ -17,7 +17,8 @@
                 placeholder="<?= lang('Post.form.episode_message_placeholder') ?>"
                 required="true"
                 rows="2" />
-            <Button variant="primary" size="small" type="submit" class="self-end" iconRight="send-plane"><?= lang('Post.form.submit') ?></Button>
+            <?php // @icon('send-plane-2-fill')?>
+            <Button variant="primary" size="small" type="submit" class="self-end" iconRight="send-plane-2-fill"><?= lang('Post.form.submit') ?></Button>
         </div>
     </form>
     <hr class="my-4 border-subtle">

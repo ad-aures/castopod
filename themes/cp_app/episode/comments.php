@@ -16,7 +16,8 @@
                 required="true"
                 placeholder="<?= lang('Comment.form.episode_message_placeholder') ?>"
                 rows="2" />
-            <Button class="self-end" variant="primary" size="small" type="submit" iconRight="send-plane"><?= lang('Comment.form.submit') ?></Button>
+            <?php // @icon('send-plane-2-fill')?>
+            <Button class="self-end" variant="primary" size="small" type="submit" iconRight="send-plane-2-fill"><?= lang('Comment.form.submit') ?></Button>
         </div>
     </form>
 <?php endif; ?>

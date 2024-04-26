@@ -17,7 +17,7 @@
 <form action="<?= route_to('user-delete', $user->id) ?>" method="POST" class="flex flex-col w-full max-w-xl mx-auto">
 <?= csrf_field() ?>
 
-<Alert variant="danger" glyph="alert" class="font-semibold"><?= lang('User.delete_form.disclaimer', [
+<Alert variant="danger" class="font-semibold"><?= lang('User.delete_form.disclaimer', [
     'user' => $user->username,
 ]) ?></Alert>
 

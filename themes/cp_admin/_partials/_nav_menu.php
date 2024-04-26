@@ -12,7 +12,9 @@
     <details <?= $isSectionActive ? 'open="open"' : '' ?> class="<?= $isSectionActive ? 'bg-navigation-active' : '' ?> [&[open]>summary::after]:rotate-90">
         <summary class="inline-flex items-center w-full px-4 py-2 font-semibold focus:ring-accent focus:ring-inset after:w-5 after:h-5 after:transition-transform after:content-chevronRightIcon after:ml-2 after:opacity-60 after:text-white">
             <div class="inline-flex items-center mr-auto">
-            <?= icon($data['icon'], 'opacity-60 text-2xl mr-4') ?>
+            <?= icon($data['icon'], [
+                'class' => 'opacity-60 text-2xl mr-4',
+            ]) ?>
             <?= lang($langKey . '.' . $section) ?>
             <?php if (array_key_exists('count', $data)): ?>
                 <a href="<?= route_to($data['count-route'], $podcastId ?? null, $episodeId ?? null) ?>" class="px-2 ml-2 text-xs font-normal rounded-full focus:ring-accent <?= $isSectionActive ? 'bg-navigation' : 'bg-navigation-active' ?>"><?= $data['count'] ?></a>
@@ -20,7 +22,7 @@
             </div>
             <?php if(array_key_exists('add-cta', $data)): ?>
                 <a href="<?= route_to($data['add-cta'], $podcastId ?? null, $episodeId ?? null)  ?>" class="p-2 rounded-full shadow bg-accent-base focus:ring-accent" title="<?= lang($langKey . '.' . $data['add-cta']) ?>" data-tooltip="bottom">
-                    <?= icon('add') ?>
+                    <?= icon('add-fill') ?>
                 </a>
             <?php endif; ?>
         </summary>

@@ -29,7 +29,9 @@
                         [
                             'numberOfLikes' => $comment->likes_count,
                         ],
-                    ) ?>"><?= icon('heart', 'text-xl mr-1 text-gray-400 group-hover:text-red-600') . lang(
+                    ) ?>"><?= icon('heart-fill', [
+                        'class' => 'text-xl mr-1 text-gray-400 group-hover:text-red-600',
+                    ]) . lang(
                         'Comment.likes',
                         [
                             'numberOfLikes' => $comment->likes_count,
@@ -42,7 +44,9 @@
                         [
                             'numberOfLikes' => $comment->likes_count,
                         ],
-                    ) ?>"><?= icon('heart', 'text-xl mr-1 text-skin-muted') . lang(
+                    ) ?>"><?= icon('heart-fill', [
+                        'class' => 'text-xl mr-1 text-skin-muted',
+                    ]) . lang(
                         'Comment.likes',
                         [
                             'numberOfLikes' => $comment->likes_count,

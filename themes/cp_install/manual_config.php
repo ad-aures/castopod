@@ -6,7 +6,9 @@
     'Install.manual_config',
 ) ?></h1>
 <div class="inline-flex items-baseline max-w-2xl px-4 py-2 mb-4 font-semibold text-red-900 bg-red-200 border border-red-700">
-<?= icon('alert', 'mr-2 flex-shrink-0') . lang('Install.messages.writeError') ?>
+<?= icon('alert-fill', [
+    'class' => 'mr-2 flex-shrink-0',
+]) . lang('Install.messages.writeError') ?>
 </div>
 <p class="mb-4 font-semibold text-skin-muted"><?= lang(
     'Install.manual_config_subtitle',

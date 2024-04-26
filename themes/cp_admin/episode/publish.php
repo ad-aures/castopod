@@ -12,7 +12,9 @@
 
 <?= anchor(
     route_to('episode-view', $podcast->id, $episode->id),
-    icon('arrow-left', 'mr-2 text-lg') . lang('Episode.publish_form.back_to_episode_dashboard'),
+    icon('arrow-left-line', [
+        'class' => 'mr-2 text-lg',
+    ]) . lang('Episode.publish_form.back_to_episode_dashboard'),
     [
         'class' => 'inline-flex items-center font-semibold mr-4 text-sm focus:ring-accent',
     ],
@@ -63,9 +65,15 @@
         </div>
     </div>
     <footer class="flex justify-around px-6 py-3">
-        <span class="inline-flex items-center"><Icon glyph="chat" class="mr-1 text-xl opacity-40" />0</span>
-        <span class="inline-flex items-center"><Icon glyph="repeat" class="mr-1 text-xl opacity-40" />0</span>
-        <span class="inline-flex items-center"><Icon glyph="heart" class="mr-1 text-xl opacity-40" />0</span>
+        <span class="inline-flex items-center"><?= icon('chat-4-fill', [
+                            'class' => 'mr-1 text-xl opacity-40',
+                        ]) ?>0</span>
+        <span class="inline-flex items-center"><?= icon('repeat-fill', [
+                            'class' => 'mr-1 text-xl opacity-40',
+                        ]) ?>0</span>
+        <span class="inline-flex items-center"><?= icon('heart-fill', [
+                            'class' => 'mr-1 text-xl opacity-40',
+                        ]) ?>0</span>
     </footer>
 </div>
 
@@ -93,7 +101,7 @@
     </fieldset>
 <?php endif ?>
     
-<Alert id="publish-warning" variant="warning" glyph="alert" class="hidden mt-2" title="<?= lang('Episode.publish_form.message_warning') ?>"><?= lang('Episode.publish_form.message_warning_hint') ?></Alert>
+<Alert id="publish-warning" variant="warning" class="hidden mt-2" title="<?= lang('Episode.publish_form.message_warning') ?>"><?= lang('Episode.publish_form.message_warning_hint') ?></Alert>
 
 <div class="flex items-center justify-between w-full mt-4">
     <Button uri="<?= route_to('episode-publish-cancel', $podcast->id, $episode->id) ?>" variant="danger"><?= lang('Episode.publish_form.cancel_publication') ?></Button>
