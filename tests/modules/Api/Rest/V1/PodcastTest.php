@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace modules\Api\Rest\V1;
 
 use App\Database\Seeds\FakeSinglePodcastApiSeeder;
+use CodeIgniter\Database\Seeder;
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\DatabaseTestTrait;
 use CodeIgniter\Test\FeatureTestTrait;
@@ -31,9 +32,9 @@ class PodcastTest extends CIUnitTestCase
     protected $namespace;
 
     /**
-     * @var string
+     * @var class-string<Seeder>|list<class-string<Seeder>>
      */
-    protected $seed = 'FakeSinglePodcastApiSeeder';
+    protected $seed = FakeSinglePodcastApiSeeder::class;
 
     /**
      * @var string

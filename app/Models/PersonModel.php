@@ -26,7 +26,7 @@ class PersonModel extends Model
     protected $primaryKey = 'id';
 
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $allowedFields = [
         'id',
@@ -64,19 +64,19 @@ class PersonModel extends Model
     ];
 
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $afterInsert = ['clearCache'];
 
     /**
      * clear cache before update if by any chance, the person name changes, so will the person link
      *
-     * @var string[]
+     * @var list<string>
      */
     protected $beforeUpdate = ['clearCache'];
 
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $beforeDelete = ['clearCache'];
 

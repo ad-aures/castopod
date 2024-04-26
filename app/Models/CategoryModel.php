@@ -26,7 +26,7 @@ class CategoryModel extends Model
     protected $primaryKey = 'id';
 
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $allowedFields = ['parent_id', 'code', 'apple_category', 'google_category'];
 

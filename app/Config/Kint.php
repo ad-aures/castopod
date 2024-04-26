@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Config;
 
-use CodeIgniter\Config\BaseConfig;
 use Kint\Parser\ConstructablePluginInterface;
 use Kint\Renderer\AbstractRenderer;
 use Kint\Renderer\Rich\TabPluginInterface;
@@ -20,7 +19,7 @@ use Kint\Renderer\Rich\ValuePluginInterface;
  *
  * @see https://kint-php.github.io/kint/ for details on these settings.
  */
-class Kint extends BaseConfig
+class Kint
 {
     /*
     |--------------------------------------------------------------------------

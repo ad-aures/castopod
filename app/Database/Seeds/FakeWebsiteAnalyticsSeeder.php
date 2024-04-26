@@ -216,23 +216,23 @@ class FakeWebsiteAnalyticsSeeder extends Seeder
 
                 for (
                     $lineNumber = 0;
-                    $lineNumber < rand(1, $probability1);
+                    $lineNumber < random_int(1, $probability1);
                     ++$lineNumber
                 ) {
                     $probability2 = (int) floor(exp(6 - $age / 20)) + 10;
 
                     $domain =
-                        $this->domains[rand(0, count($this->domains) - 1)];
+                        $this->domains[random_int(0, count($this->domains) - 1)];
                     $keyword =
                         $this->keywords[
-                            rand(0, count($this->keywords) - 1)
+                            random_int(0, count($this->keywords) - 1)
                         ];
                     $browser =
                         $this->browsers[
-                            rand(0, count($this->browsers) - 1)
+                            random_int(0, count($this->browsers) - 1)
                         ];
 
-                    $hits = rand(0, $probability2);
+                    $hits = random_int(0, $probability2);
 
                     $websiteByBrowser[] = [
                         'podcast_id' => $podcast->id,

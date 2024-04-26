@@ -17,7 +17,7 @@ use CodeIgniter\HTTP\RedirectResponse;
 
 class PageController extends BaseController
 {
-    protected ?Page $page;
+    protected ?Page $page = null;
 
     public function _remap(string $method, string ...$params): mixed
     {

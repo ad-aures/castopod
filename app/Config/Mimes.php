@@ -22,7 +22,7 @@ class Mimes
     /**
      * Map of extensions to mime types.
      *
-     * @var array<string, string|string[]>
+     * @var array<string, list<string>|string>
      */
     public static $mimes = [
         'hqx' => [

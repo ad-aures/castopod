@@ -85,14 +85,10 @@ if (! function_exists('set_user_session_location')) {
                 $city = $cityReader->city(client_ip());
 
                 $location = [
-                    'countryCode' => $city->country->isoCode === null
-                        ? 'N/A'
-                        : $city->country->isoCode,
-                    'regionCode' => $city->subdivisions[0]->isoCode === null
-                        ? 'N/A'
-                        : $city->subdivisions[0]->isoCode,
-                    'latitude'  => round($city->location->latitude, 3),
-                    'longitude' => round($city->location->longitude, 3),
+                    'countryCode' => $city->country->isoCode ?? 'N/A',
+                    'regionCode'  => $city->subdivisions[0]->isoCode ?? 'N/A',
+                    'latitude'    => round($city->location->latitude, 3),
+                    'longitude'   => round($city->location->longitude, 3),
                 ];
                 // If things go wrong the show must go on and the user must be able to download the file
             } catch (Exception) {
@@ -179,9 +175,7 @@ if (! function_exists('set_user_session_referer')) {
     {
         $session = Services::session();
 
-        $newreferer = isset($_SERVER['HTTP_REFERER'])
-            ? $_SERVER['HTTP_REFERER']
-            : '- Direct -';
+        $newreferer = $_SERVER['HTTP_REFERER'] ?? '- Direct -';
         $newreferer =
             parse_url((string) $newreferer, PHP_URL_HOST) ===
             parse_url(current_url(false), PHP_URL_HOST)
@@ -250,9 +244,7 @@ if (! function_exists('podcast_hit')) {
             }
 
             //We get the HTTP header field `Range`:
-            $httpRange = isset($_SERVER['HTTP_RANGE'])
-                ? $_SERVER['HTTP_RANGE']
-                : null;
+            $httpRange = $_SERVER['HTTP_RANGE'] ?? null;
 
             $salt = config(Analytics::class)
                 ->salt;

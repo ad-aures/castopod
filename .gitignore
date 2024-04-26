@@ -132,7 +132,6 @@ tmp/
 
 /results/
 /phpunit*.xml
-/.phpunit.*.cache
 
 # js package manager
 yarn.lock

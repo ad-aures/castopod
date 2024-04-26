@@ -42,7 +42,7 @@ class Alert extends Component
             $this->variant = 'default';
         }
 
-        $glyph = icon(($this->glyph === null ? $variants[$this->variant]['glyph'] : $this->glyph), 'flex-shrink-0 mr-2 text-lg');
+        $glyph = icon(($this->glyph ?? $variants[$this->variant]['glyph']), 'flex-shrink-0 mr-2 text-lg');
         $title = $this->title === null ? '' : '<div class="font-semibold">' . $this->title . '</div>';
         $class = 'inline-flex w-full p-2 text-sm border rounded ' . $variants[$this->variant]['class'] . ' ' . $this->class;
 

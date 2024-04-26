@@ -22,7 +22,7 @@ use Modules\Auth\Models\UserModel;
 
 class UserController extends BaseController
 {
-    protected ?User $user;
+    protected ?User $user = null;
 
     public function _remap(string $method, string ...$params): mixed
     {

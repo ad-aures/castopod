@@ -260,12 +260,7 @@ if (! function_exists('get_rss_feed')) {
             $itunesNamespace,
         );
 
-        $channel->addChild(
-            'author',
-            $podcast->publisher ? $podcast->publisher : $podcast->owner_name,
-            $itunesNamespace,
-            false
-        );
+        $channel->addChild('author', $podcast->publisher ?: $podcast->owner_name, $itunesNamespace, false);
         $channel->addChild('link', $podcast->link);
 
         $owner = $channel->addChild('owner', null, $itunesNamespace);
@@ -354,7 +349,7 @@ if (! function_exists('get_rss_feed')) {
             $item->addChild('episodeType', $episode->type, $itunesNamespace);
 
             // If episode is of type trailer, add podcast:trailer tag on channel level
-            if ($episode->type == 'trailer') {
+            if ($episode->type === 'trailer') {
                 $trailer = $channel->addChild('trailer', $episode->title, $podcastNamespace);
                 $trailer->addAttribute('pubdate', $episode->published_at->format(DATE_RFC2822));
                 $trailer->addAttribute(

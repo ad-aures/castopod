@@ -8,8 +8,6 @@ use CodeIgniter\Controller;
 use CodeIgniter\HTTP\RedirectResponse;
 
 /**
- * Class ActionController
- *
  * A generic controller to handle Authentication Actions.
  */
 class InteractController extends Controller

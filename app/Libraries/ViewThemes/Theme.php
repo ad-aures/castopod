@@ -19,7 +19,7 @@ class Theme
     protected static $defaultTheme = 'app';
 
     /**
-     * @var string
+     * @var ?string
      */
     protected static $currentTheme;
 
@@ -71,9 +71,7 @@ class Theme
      */
     public static function current(): string
     {
-        return static::$currentTheme !== null
-            ? static::$currentTheme
-            : static::$defaultTheme;
+        return static::$currentTheme ?? static::$defaultTheme;
     }
 
     /**

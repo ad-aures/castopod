@@ -11,8 +11,6 @@ use Psr\Log\LoggerInterface;
 use ViewThemes\Theme;
 
 /**
- * Class ActionController
- *
  * A generic controller to handle Authentication Actions.
  */
 class ActionController extends ShieldActionController

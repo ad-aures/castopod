@@ -102,9 +102,10 @@ if (! function_exists('add_podcast_group')) {
 if (! function_exists('get_instance_group')) {
     function get_instance_group(User $user): ?string
     {
-        $instanceGroups = array_filter($user->getGroups() ?? [], static function ($group): bool {
-            return ! str_starts_with($group, 'podcast#');
-        });
+        $instanceGroups = array_filter(
+            $user->getGroups() ?? [],
+            static fn ($group): bool => ! str_starts_with((string) $group, 'podcast#')
+        );
 
         if ($instanceGroups === []) {
             return null;
@@ -138,9 +139,10 @@ if (! function_exists('set_instance_group')) {
 if (! function_exists('get_podcast_group')) {
     function get_podcast_group(User $user, int $podcastId, bool $removePrefix = true): ?string
     {
-        $podcastGroups = array_filter($user->getGroups() ?? [], static function ($group) use ($podcastId): bool {
-            return str_starts_with($group, "podcast#{$podcastId}-");
-        });
+        $podcastGroups = array_filter(
+            $user->getGroups() ?? [],
+            static fn ($group): bool => str_starts_with((string) $group, "podcast#{$podcastId}-")
+        );
 
         if ($podcastGroups === []) {
             return null;
@@ -180,9 +182,10 @@ if (! function_exists('get_podcast_groups')) {
      */
     function get_user_podcast_ids(User $user): array
     {
-        $podcastGroups = array_filter($user->getGroups() ?? [], static function ($group): bool {
-            return str_starts_with($group, 'podcast#');
-        });
+        $podcastGroups = array_filter(
+            $user->getGroups() ?? [],
+            static fn ($group): bool => str_starts_with((string) $group, 'podcast#')
+        );
 
         $userPodcastIds = [];
         // extract all podcast ids from groups

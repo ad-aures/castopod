@@ -31,7 +31,7 @@ class LikeModel extends UuidModel
     protected $uuidFields = ['comment_id'];
 
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $allowedFields = ['actor_id', 'comment_id'];
 

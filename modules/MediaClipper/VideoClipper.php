@@ -543,9 +543,9 @@ class VideoClipper
 
         # find unique color
         do {
-            $r = rand(0, 255);
-            $g = rand(0, 255);
-            $b = rand(0, 255);
+            $r = random_int(0, 255);
+            $g = random_int(0, 255);
+            $b = random_int(0, 255);
         } while (imagecolorexact($src, $r, $g, $b) < 0);
 
         $ns = $s * $q;

@@ -38,7 +38,7 @@ class Logger extends BaseConfig
      * For a live site you'll usually enable Critical or higher (3) to be logged otherwise
      * your log files will fill up very fast.
      *
-     * @var int|int[]
+     * @var int|list<int>
      */
     public int | array $threshold = (ENVIRONMENT === 'production') ? 4 : 9;
 
@@ -75,7 +75,7 @@ class Logger extends BaseConfig
      * Handlers are executed in the order defined in this array, starting with
      * the handler on top and continuing down.
      *
-     * @var array<string, mixed>
+     * @var array<class-string, array<string, int|list<string>|string>>
      */
     public array $handlers = [
         /*

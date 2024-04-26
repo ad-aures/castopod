@@ -11,8 +11,6 @@ use Psr\Log\LoggerInterface;
 use ViewThemes\Theme;
 
 /**
- * Class RegisterController
- *
  * Handles displaying registration form, and handling actual registration flow.
  */
 class RegisterController extends ShieldRegisterController

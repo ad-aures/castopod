@@ -160,9 +160,7 @@ class InstallController extends Controller
 
         if (! $this->validate($rules)) {
             return redirect()
-                ->to(
-                    (host_url() === null ? config(App::class) ->baseURL : host_url()) . config(Install::class)->gateway
-                )
+                ->to((host_url() ?? config(App::class) ->baseURL) . config(Install::class)->gateway)
                 ->withInput()
                 ->with('errors', $this->validator->getErrors());
         }

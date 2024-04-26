@@ -12,7 +12,7 @@ services:
     environment:
       CI_ENVIRONMENT: development
       vite_environment: development
-      app_forceGlobalSecureRequests: false
+      app_forceGlobalSecureRequests: 0 #false
       app_baseURL: http://localhost:8080/
       media_baseURL: http://localhost:8080/
       admin_gateway: cp-admin
@@ -23,7 +23,7 @@ services:
       database_default_username: castopod
       database_default_password: castopod
       database_default_DBPrefix: cp_
-      restapi_enabled: true
+      restapi_enabled: 1 #true
       email_fromEmail: hello@castopod.local
       email_SMTPCrypto: ""
       email_SMTPHost: mailpit

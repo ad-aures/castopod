@@ -175,12 +175,10 @@ if (! function_exists('create_preview_card_from_url')) {
 
                 // Check that, at least, the url and title are set
                 $newPreviewCard = new PreviewCard([
-                    'url'         => $mediaUrl,
-                    'title'       => $media['title'] ?? '',
-                    'description' => $media['description'] ?? '',
-                    'type'        => isset($typeMapping[$media['type']])
-                        ? $typeMapping[$media['type']]
-                        : 'link',
+                    'url'           => $mediaUrl,
+                    'title'         => $media['title'] ?? '',
+                    'description'   => $media['description'] ?? '',
+                    'type'          => $typeMapping[$media['type']] ?? 'link',
                     'author_name'   => $media['author_name'] ?? null,
                     'author_url'    => $media['author_url'] ?? null,
                     'provider_name' => $media['provider_name'] ?? '',

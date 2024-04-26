@@ -22,7 +22,7 @@ class ContributorController extends BaseController
 {
     protected Podcast $podcast;
 
-    protected ?User $contributor;
+    protected ?User $contributor = null;
 
     public function _remap(string $method, string ...$params): mixed
     {

@@ -26,7 +26,7 @@ class LanguageModel extends Model
     protected $primaryKey = 'id';
 
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $allowedFields = ['code', 'native_name'];
 

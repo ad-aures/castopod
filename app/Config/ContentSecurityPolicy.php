@@ -35,28 +35,28 @@ class ContentSecurityPolicy extends BaseConfig
     /**
      * Will default to self if not overridden
      *
-     * @var string|string[]|null
+     * @var list<string>|string|null
      */
     public string | array | null $defaultSrc = null;
 
     /**
      * Lists allowed scripts' URLs.
      *
-     * @var string|string[]
+     * @var list<string>|string
      */
     public string | array $scriptSrc = 'self';
 
     /**
      * Lists allowed stylesheets' URLs.
      *
-     * @var string|string[]
+     * @var list<string>|string
      */
     public string | array $styleSrc = 'self';
 
     /**
      * Defines the origins from which images can be loaded.
      *
-     * @var string|string[]
+     * @var list<string>|string
      */
     public string | array $imageSrc = 'self';
 
@@ -65,35 +65,35 @@ class ContentSecurityPolicy extends BaseConfig
      *
      * Will default to self if not overridden
      *
-     * @var string|string[]|null
+     * @var list<string>|string|null
      */
     public string | array | null $baseURI = null;
 
     /**
      * Lists the URLs for workers and embedded frame contents
      *
-     * @var string|string[]
+     * @var list<string>|string
      */
     public string | array $childSrc = 'self';
 
     /**
      * Limits the origins that you can connect to (via XHR, WebSockets, and EventSource).
      *
-     * @var string|string[]
+     * @var list<string>|string
      */
     public string | array $connectSrc = 'self';
 
     /**
      * Specifies the origins that can serve web fonts.
      *
-     * @var string|string[]
+     * @var list<string>|string
      */
     public string | array $fontSrc;
 
     /**
      * Lists valid endpoints for submission from `<form>` tags.
      *
-     * @var string|string[]
+     * @var list<string>|string
      */
     public string | array $formAction = 'self';
 
@@ -102,47 +102,47 @@ class ContentSecurityPolicy extends BaseConfig
      * `<embed>`, and `<applet>` tags. This directive can't be used in `<meta>` tags and applies only to non-HTML
      * resources.
      *
-     * @var string|string[]|null
+     * @var list<string>|string|null
      */
     public string | array | null $frameAncestors = null;
 
     /**
      * The frame-src directive restricts the URLs which may be loaded into nested browsing contexts.
      *
-     * @var string[]|string|null
+     * @var list<string>|string|null
      */
     public string | array | null $frameSrc = null;
 
     /**
      * Restricts the origins allowed to deliver video and audio.
      *
-     * @var string|string[]|null
+     * @var list<string>|string|null
      */
     public string | array | null $mediaSrc = null;
 
     /**
      * Allows control over Flash and other plugins.
      *
-     * @var string|string[]
+     * @var list<string>|string
      */
     public string | array $objectSrc = 'self';
 
     /**
-     * @var string|string[]|null
+     * @var list<string>|string|null
      */
     public string | array | null $manifestSrc = null;
 
     /**
      * Limits the kinds of plugins a page may invoke.
      *
-     * @var string|string[]|null
+     * @var list<string>|string|null
      */
     public string | array | null $pluginTypes = null;
 
     /**
      * List of actions allowed.
      *
-     * @var string|string[]|null
+     * @var list<string>|string|null
      */
     public string | array | null $sandbox = null;
 

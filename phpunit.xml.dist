@@ -1,6 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="vendor/codeigniter4/framework/system/Test/bootstrap.php" backupGlobals="false" colors="true" stopOnError="false" stopOnFailure="false" stopOnIncomplete="false" stopOnSkipped="false" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.2/phpunit.xsd" cacheDirectory=".phpunit.cache">
-  <coverage includeUncoveredFiles="true">
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd"
+    bootstrap="vendor/codeigniter4/framework/system/Test/bootstrap.php"
+    backupGlobals="false"
+    beStrictAboutOutputDuringTests="true"
+    colors="true"
+    columns="max"
+    failOnRisky="true"
+    failOnWarning="true"
+    cacheDirectory="build/.phpunit.cache">
+    <coverage
+        includeUncoveredFiles="true"
+        pathCoverage="false"
+        ignoreDeprecatedCodeUnits="true"
+        disableCodeCoverageIgnore="true">
     <report>
       <clover outputFile="build/logs/clover.xml"/>
       <html outputDirectory="build/logs/html"/>
@@ -18,6 +31,15 @@
     <testdoxText outputFile="build/logs/testdox.txt"/>
     <junit outputFile="build/logs/logfile.xml"/>
   </logging>
+  <source>
+    <include>
+        <directory suffix=".php">./app</directory>
+    </include>
+    <exclude>
+        <directory suffix=".php">./app/Views</directory>
+        <file>./app/Config/Routes.php</file>
+    </exclude>
+  </source>
   <php>
     <server name="app.baseURL" value="http://example.com/"/>
     <!-- Directory containing phpunit.xml -->
@@ -35,13 +57,4 @@
     <env name="database.tests.DBPrefix" value="tests_"/>
     <env name="restapi.enabled" value="true"/>
   </php>
-  <source>
-    <include>
-      <directory suffix=".php">./app</directory>
-    </include>
-    <exclude>
-      <directory suffix=".php">./app/Views</directory>
-      <file>./app/Config/Routes.php</file>
-    </exclude>
-  </source>
 </phpunit>

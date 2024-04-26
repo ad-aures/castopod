@@ -52,9 +52,9 @@ class PodcastImport extends BaseCommand
 
         $importQueue = get_import_tasks();
 
-        $currentImport = current(array_filter($importQueue, static function ($task): bool {
-            return $task->status === TaskStatus::Running;
-        }));
+        $currentImport = current(
+            array_filter($importQueue, static fn ($task): bool => $task->status === TaskStatus::Running)
+        );
 
         if ($currentImport instanceof PodcastImportTask) {
             $currentImport->syncWithProcess();
@@ -68,9 +68,7 @@ class PodcastImport extends BaseCommand
         }
 
         // Get the next queued import
-        $queuedImports = array_filter($importQueue, static function ($task): bool {
-            return $task->status === TaskStatus::Queued;
-        });
+        $queuedImports = array_filter($importQueue, static fn ($task): bool => $task->status === TaskStatus::Queued);
         $nextImport = end($queuedImports);
 
         if (! $nextImport instanceof PodcastImportTask) {
@@ -527,9 +525,7 @@ class PodcastImport extends BaseCommand
             ->get()
             ->getResultArray();
 
-        return array_map(static function (array $element) {
-            return $element['guid'];
-        }, $result);
+        return array_map(static fn (array $element) => $element['guid'], $result);
     }
 
     /**

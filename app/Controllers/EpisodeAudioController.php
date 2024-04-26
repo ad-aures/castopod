@@ -40,7 +40,7 @@ class EpisodeAudioController extends Controller
      * An array of helpers to be loaded automatically upon class instantiation. These helpers will be available to all
      * other controllers that extend Analytics.
      *
-     * @var string[]
+     * @var list<string>
      */
     protected $helpers = ['analytics'];
 

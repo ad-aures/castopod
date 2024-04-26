@@ -65,7 +65,7 @@ class EpisodeController extends Controller
             return $this->failNotFound('Episode not found');
         }
 
-        return $this->respond($this->mapEpisode($episode));
+        return $this->respond(static::mapEpisode($episode));
     }
 
     protected static function mapEpisode(Episode $episode): Episode

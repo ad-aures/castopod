@@ -164,7 +164,7 @@ if (! function_exists('parse_size')) {
         $size = (float) preg_replace('~[^0-9\.]~', '', $size); // Remove the non-numeric characters from the size.
         if ($unit !== '') {
             // Find the position of the unit in the ordered string which is the power of magnitude to multiply a kilobyte by.
-            return round($size * pow(1024, (float) stripos('bkmgtpezy', $unit[0])));
+            return round($size * 1024 ** ((float) stripos('bkmgtpezy', $unit[0])));
         }
 
         return round($size);
@@ -183,7 +183,7 @@ if (! function_exists('format_bytes')) {
         $pow = floor(($bytes ? log($bytes) : 0) / log($is_binary ? 1024 : 1000));
         $pow = min($pow, count($units) - 1);
 
-        $bytes /= pow($is_binary ? 1024 : 1000, $pow);
+        $bytes /= ($is_binary ? 1024 : 1000) ** $pow;
 
         return round($bytes, $precision) . $units[$pow];
     }

@@ -62,7 +62,7 @@ class EpisodeModel extends UuidModel
     protected $table = 'episodes';
 
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $allowedFields = [
         'id',
@@ -127,17 +127,17 @@ class EpisodeModel extends UuidModel
     ];
 
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $afterInsert = ['writeEnclosureMetadata', 'clearCache'];
 
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $afterUpdate = ['clearCache', 'writeEnclosureMetadata'];
 
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $beforeDelete = ['clearCache'];
 
@@ -272,13 +272,7 @@ class EpisodeModel extends UuidModel
             $secondsToNextUnpublishedEpisode = $this->getSecondsToNextUnpublishedEpisode($podcastId);
 
             cache()
-                ->save(
-                    $cacheName,
-                    $found,
-                    $secondsToNextUnpublishedEpisode
-                    ? $secondsToNextUnpublishedEpisode
-                    : DECADE,
-                );
+                ->save($cacheName, $found, $secondsToNextUnpublishedEpisode ?: DECADE);
         }
 
         return $found;

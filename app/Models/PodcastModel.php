@@ -30,7 +30,7 @@ class PodcastModel extends Model
     protected $primaryKey = 'id';
 
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $allowedFields = [
         'id',
@@ -104,29 +104,29 @@ class PodcastModel extends Model
     ];
 
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $beforeInsert = ['setPodcastGUID', 'createPodcastActor'];
 
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $afterInsert = ['setActorAvatar'];
 
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $afterUpdate = ['updatePodcastActor'];
 
     /**
      * clear cache before update if by any chance, the podcast name changes, so will the podcast link
      *
-     * @var string[]
+     * @var list<string>
      */
     protected $beforeUpdate = ['clearCache'];
 
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $beforeDelete = ['clearCache'];
 
@@ -259,13 +259,7 @@ class PodcastModel extends Model
             $secondsToNextUnpublishedEpisode = $episodeModel->getSecondsToNextUnpublishedEpisode($podcastId);
 
             cache()
-                ->save(
-                    $cacheName,
-                    $found,
-                    $secondsToNextUnpublishedEpisode
-                    ? $secondsToNextUnpublishedEpisode
-                    : DECADE,
-                );
+                ->save($cacheName, $found, $secondsToNextUnpublishedEpisode ?: DECADE);
         }
 
         return $found;
@@ -295,13 +289,7 @@ class PodcastModel extends Model
             $secondsToNextUnpublishedEpisode = $episodeModel->getSecondsToNextUnpublishedEpisode($podcastId);
 
             cache()
-                ->save(
-                    $cacheName,
-                    $found,
-                    $secondsToNextUnpublishedEpisode
-                    ? $secondsToNextUnpublishedEpisode
-                    : DECADE,
-                );
+                ->save($cacheName, $found, $secondsToNextUnpublishedEpisode ?: DECADE);
         }
 
         return $found;
@@ -335,11 +323,7 @@ class PodcastModel extends Model
             $secondsToNextUnpublishedEpisode = (new EpisodeModel())->getSecondsToNextUnpublishedEpisode($podcastId);
 
             cache()
-                ->save(
-                    $cacheName,
-                    $defaultQuery,
-                    $secondsToNextUnpublishedEpisode ? $secondsToNextUnpublishedEpisode : DECADE
-                );
+                ->save($cacheName, $defaultQuery, $secondsToNextUnpublishedEpisode ?: DECADE);
         }
 
         return $defaultQuery;

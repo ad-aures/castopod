@@ -134,7 +134,7 @@ class PostModel extends UuidModel
             $secondsToNextUnpublishedPost = $this->getSecondsToNextUnpublishedPosts($actorId);
 
             cache()
-                ->save($cacheName, $found, $secondsToNextUnpublishedPost ? $secondsToNextUnpublishedPost : DECADE);
+                ->save($cacheName, $found, $secondsToNextUnpublishedPost ?: DECADE);
         }
 
         return $found;

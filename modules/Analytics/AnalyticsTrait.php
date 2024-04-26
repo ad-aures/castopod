@@ -30,9 +30,7 @@ trait AnalyticsTrait
 
             $referer = $session->get('referer');
             $domain =
-                parse_url((string) $referer, PHP_URL_HOST) === null
-                    ? '- Direct -'
-                    : parse_url((string) $referer, PHP_URL_HOST);
+                parse_url((string) $referer, PHP_URL_HOST) ?? '- Direct -';
             parse_str((string) parse_url((string) $referer, PHP_URL_QUERY), $queries);
             $keywords = $queries['q'] ?? null;
 

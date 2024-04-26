@@ -85,16 +85,12 @@ class Transcript extends BaseMedia
         }
 
         $transcript_format = $this->file->getExtension();
-        switch ($transcript_format) {
-            case 'vtt':
-                $transcriptJson = $transcriptParser->loadString($transcriptContent)
-                    ->parseVtt();
-                break;
-            case 'srt':
-            default:
-                $transcriptJson = $transcriptParser->loadString($transcriptContent)
-                    ->parseSrt();
-        }
+        $transcriptJson = match ($transcript_format) {
+            'vtt' => $transcriptParser->loadString($transcriptContent)
+                ->parseVtt(),
+            default => $transcriptParser->loadString($transcriptContent)
+                ->parseSrt(),
+        };
 
         $tempFilePath = WRITEPATH . 'uploads/' . $this->file->getRandomName();
         file_put_contents($tempFilePath, $transcriptJson);

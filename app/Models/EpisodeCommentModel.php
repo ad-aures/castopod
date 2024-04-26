@@ -40,7 +40,7 @@ class EpisodeCommentModel extends UuidModel
     protected $uuidFields = ['id', 'in_reply_to_id'];
 
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $allowedFields = [
         'id',
@@ -57,7 +57,7 @@ class EpisodeCommentModel extends UuidModel
     ];
 
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $beforeInsert = ['setCommentId'];
 

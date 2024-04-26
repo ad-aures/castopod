@@ -7,8 +7,6 @@ namespace ViewComponents;
 use CodeIgniter\View\ViewDecoratorInterface;
 
 /**
- * Class Decorator
- *
  * Enables rendering of View Components into the views.
  *
  * Borrowed and adapted from https://github.com/lonnieezell/Bonfire2/

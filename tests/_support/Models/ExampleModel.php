@@ -29,7 +29,7 @@ class ExampleModel extends Model
     protected $useSoftDeletes = false;
 
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $allowedFields = ['name', 'uid', 'class', 'icon', 'summary'];
 
@@ -39,12 +39,12 @@ class ExampleModel extends Model
     protected $useTimestamps = true;
 
     /**
-     * @var mixed[]
+     * @var array<string, array<string, array<string, string>|string>|string>|string
      */
     protected $validationRules = [];
 
     /**
-     * @var mixed[]
+     * @var array<string, array<string, string>>
      */
     protected $validationMessages = [];
 

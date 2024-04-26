@@ -106,9 +106,7 @@ class EpisodeController extends BaseController
 
             // The page cache is set to a decade so it is deleted manually upon podcast update
             return view('episode/comments', $data, [
-                'cache' => $secondsToNextUnpublishedEpisode
-                ? $secondsToNextUnpublishedEpisode
-                : DECADE,
+                'cache'      => $secondsToNextUnpublishedEpisode ?: DECADE,
                 'cache_name' => $cacheName,
             ]);
         }
@@ -157,9 +155,7 @@ class EpisodeController extends BaseController
 
             // The page cache is set to a decade so it is deleted manually upon podcast update
             return view('episode/activity', $data, [
-                'cache' => $secondsToNextUnpublishedEpisode
-                    ? $secondsToNextUnpublishedEpisode
-                    : DECADE,
+                'cache'      => $secondsToNextUnpublishedEpisode ?: DECADE,
                 'cache_name' => $cacheName,
             ]);
         }
@@ -218,9 +214,7 @@ class EpisodeController extends BaseController
 
             // The page cache is set to a decade so it is deleted manually upon podcast update
             return view('episode/chapters', $data, [
-                'cache' => $secondsToNextUnpublishedEpisode
-                    ? $secondsToNextUnpublishedEpisode
-                    : DECADE,
+                'cache'      => $secondsToNextUnpublishedEpisode ?: DECADE,
                 'cache_name' => $cacheName,
             ]);
         }
@@ -284,9 +278,7 @@ class EpisodeController extends BaseController
 
             // The page cache is set to a decade so it is deleted manually upon podcast update
             return view('episode/transcript', $data, [
-                'cache' => $secondsToNextUnpublishedEpisode
-                    ? $secondsToNextUnpublishedEpisode
-                    : DECADE,
+                'cache'      => $secondsToNextUnpublishedEpisode ?: DECADE,
                 'cache_name' => $cacheName,
             ]);
         }
@@ -339,9 +331,7 @@ class EpisodeController extends BaseController
 
             // The page cache is set to a decade so it is deleted manually upon podcast update
             return view('embed', $data, [
-                'cache' => $secondsToNextUnpublishedEpisode
-                    ? $secondsToNextUnpublishedEpisode
-                    : DECADE,
+                'cache'      => $secondsToNextUnpublishedEpisode ?: DECADE,
                 'cache_name' => $cacheName,
             ]);
         }
@@ -420,11 +410,9 @@ class EpisodeController extends BaseController
          * get comments: aggregated replies from posts referring to the episode
          */
         $episodeComments = model(PostModel::class)
-            ->whereIn('in_reply_to_id', function (BaseBuilder $builder): BaseBuilder {
-                return $builder->select('id')
-                    ->from('fediverse_posts')
-                    ->where('episode_id', $this->episode->id);
-            })
+            ->whereIn('in_reply_to_id', fn (BaseBuilder $builder): BaseBuilder => $builder->select('id')
+                ->from('fediverse_posts')
+                ->where('episode_id', $this->episode->id))
             ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
             ->orderBy('published_at', 'ASC');
 

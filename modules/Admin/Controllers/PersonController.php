@@ -18,7 +18,7 @@ use Modules\Media\Models\MediaModel;
 
 class PersonController extends BaseController
 {
-    protected ?Person $person;
+    protected ?Person $person = null;
 
     public function _remap(string $method, string ...$params): mixed
     {

@@ -42,9 +42,7 @@ abstract class AbstractObject
         }
 
         // removes all NULL, FALSE and Empty Strings but leaves 0 (zero) values
-        return array_filter($array, static function ($value): bool {
-            return $value !== null && $value !== false && $value !== '';
-        });
+        return array_filter($array, static fn ($value): bool => $value !== null && $value !== false && $value !== '');
     }
 
     public function toJSON(): string

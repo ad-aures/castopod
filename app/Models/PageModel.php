@@ -26,7 +26,7 @@ class PageModel extends Model
     protected $primaryKey = 'id';
 
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $allowedFields = ['id', 'title', 'slug', 'content_markdown', 'content_html'];
 
@@ -55,19 +55,19 @@ class PageModel extends Model
     ];
 
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $afterInsert = ['clearCache'];
 
     /**
      * Before update because slug or title might change
      *
-     * @var string[]
+     * @var list<string>
      */
     protected $beforeUpdate = ['clearCache'];
 
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $beforeDelete = ['clearCache'];
 

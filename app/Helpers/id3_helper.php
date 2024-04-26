@@ -42,24 +42,16 @@ if (! function_exists('write_audio_file_tags')) {
 
         // populate data array
         $TagData = [
-            'title'  => [esc($episode->title)],
-            'artist' => [
-                $episode->podcast->publisher === null
-                    ? esc($episode->podcast->owner_name)
-                    : $episode->podcast->publisher,
-            ],
+            'title'             => [esc($episode->title)],
+            'artist'            => [$episode->podcast->publisher ?? esc($episode->podcast->owner_name)],
             'album'             => [esc($episode->podcast->title)],
             'year'              => [$episode->published_at instanceof Time ? $episode->published_at->format('Y') : ''],
             'genre'             => ['Podcast'],
             'comment'           => [$episode->description],
             'track_number'      => [(string) $episode->number],
             'copyright_message' => [$episode->podcast->copyright],
-            'publisher'         => [
-                $episode->podcast->publisher === null
-                    ? esc($episode->podcast->owner_name)
-                    : $episode->podcast->publisher,
-            ],
-            'encoded_by' => ['Castopod'],
+            'publisher'         => [$episode->podcast->publisher ?? esc($episode->podcast->owner_name)],
+            'encoded_by'        => ['Castopod'],
 
             // TODO: find a way to add the remaining tags for podcasts as the library doesn't seem to allow it
             // 'website' => [$podcast_url],

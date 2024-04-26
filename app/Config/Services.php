@@ -37,8 +37,8 @@ class Services extends BaseService
             return static::getSharedInstance('router', $routes, $request);
         }
 
-        $routes = $routes ?? static::routes();
-        $request = $request ?? static::request();
+        $routes ??= static::routes();
+        $request ??= static::request();
 
         return new Router($routes, $request);
     }
@@ -53,7 +53,7 @@ class Services extends BaseService
             return static::getSharedInstance('negotiator', $request);
         }
 
-        $request = $request ?? static::request();
+        $request ??= static::request();
 
         return new Negotiate($request);
     }

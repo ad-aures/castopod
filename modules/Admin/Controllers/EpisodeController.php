@@ -326,12 +326,8 @@ class EpisodeController extends BaseController
             $this->request->getPost('parental_advisory') !== 'undefined'
                 ? $this->request->getPost('parental_advisory')
                 : null;
-        $this->episode->number = $this->request->getPost('episode_number')
-            ? $this->request->getPost('episode_number')
-            : null;
-        $this->episode->season_number = $this->request->getPost('season_number')
-            ? $this->request->getPost('season_number')
-            : null;
+        $this->episode->number = $this->request->getPost('episode_number') ?: null;
+        $this->episode->season_number = $this->request->getPost('season_number') ?: null;
         $this->episode->type = $this->request->getPost('type');
         $this->episode->is_blocked = $this->request->getPost('block') === 'yes';
         $this->episode->custom_rss_string = $this->request->getPost('custom_rss');

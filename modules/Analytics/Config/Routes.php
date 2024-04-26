@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use CodeIgniter\Router\RouteCollection;
 use Modules\Analytics\Config\Analytics;
 
 /**

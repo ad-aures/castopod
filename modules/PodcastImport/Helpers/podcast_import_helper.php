@@ -26,11 +26,10 @@ if (! function_exists('get_import_tasks')) {
         }
 
         if ($podcastHandle !== null) {
-            $podcastImportsQueue = array_filter($podcastImportsQueue, static function ($importTask) use (
-                $podcastHandle
-            ): bool {
-                return $importTask->handle === $podcastHandle;
-            });
+            $podcastImportsQueue = array_filter(
+                $podcastImportsQueue,
+                static fn ($importTask): bool => $importTask->handle === $podcastHandle
+            );
         }
 
         usort($podcastImportsQueue, static function (PodcastImportTask $a, PodcastImportTask $b): int {

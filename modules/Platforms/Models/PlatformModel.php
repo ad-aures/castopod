@@ -66,7 +66,7 @@ class PlatformModel extends Model
             }
 
             foreach ($platformsData as $slug => $platform) {
-                if (! in_array($slug, $knownSlugs)) {
+                if (! in_array($slug, $knownSlugs, true)) {
                     $found[] = new Platform([
                         'podcast_id' => $podcastId,
                         'slug'       => $slug,

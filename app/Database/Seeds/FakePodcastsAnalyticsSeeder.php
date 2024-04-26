@@ -77,34 +77,32 @@ class FakePodcastsAnalyticsSeeder extends Seeder
 
                 for (
                     $lineNumber = 0;
-                    $lineNumber < rand(1, (int) $probability1);
+                    $lineNumber < random_int(1, (int) $probability1);
                     ++$lineNumber
                 ) {
                     $probability2 = floor(exp(6 - $age / 20)) + 10;
 
                     $player =
                         $jsonUserAgents[
-                            rand(1, count($jsonUserAgents) - 1)
+                            random_int(1, count($jsonUserAgents) - 1)
                         ];
                     $service =
                         $jsonRSSUserAgents[
-                            rand(1, count($jsonRSSUserAgents) - 1)
+                            random_int(1, count($jsonRSSUserAgents) - 1)
                         ]['slug'];
-                    $app = isset($player['app']) ? $player['app'] : '';
-                    $device = isset($player['device'])
-                        ? $player['device']
-                        : '';
-                    $os = isset($player['os']) ? $player['os'] : '';
-                    $isBot = isset($player['bot']) ? $player['bot'] : 0;
+                    $app = $player['app'] ?? '';
+                    $device = $player['device'] ?? '';
+                    $os = $player['os'] ?? '';
+                    $isBot = $player['bot'] ?? 0;
 
                     $fakeIp =
-                        rand(0, 255) .
+                        random_int(0, 255) .
                         '.' .
-                        rand(0, 255) .
+                        random_int(0, 255) .
                         '.' .
-                        rand(0, 255) .
+                        random_int(0, 255) .
                         '.' .
-                        rand(0, 255);
+                        random_int(0, 255);
 
                     $cityReader = new Reader(WRITEPATH . 'uploads/GeoLite2-City/GeoLite2-City.mmdb');
 
@@ -115,9 +113,7 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                     try {
                         $city = $cityReader->city($fakeIp);
 
-                        $countryCode = $city->country->isoCode === null
-                            ? 'N/A'
-                            : $city->country->isoCode;
+                        $countryCode = $city->country->isoCode ?? 'N/A';
 
                         $regionCode = $city->subdivisions === []
                             ? 'N/A'
@@ -128,20 +124,20 @@ class FakePodcastsAnalyticsSeeder extends Seeder
                         //Bad luck, bad IP, nothing to do.
                     }
 
-                    $hits = rand(0, (int) $probability2);
+                    $hits = random_int(0, (int) $probability2);
 
                     $analyticsPodcasts[] = [
                         'podcast_id'       => $podcast->id,
                         'date'             => date('Y-m-d', $date),
-                        'duration'         => rand(60, 3600),
-                        'bandwidth'        => rand(1000000, 10000000),
+                        'duration'         => random_int(60, 3600),
+                        'bandwidth'        => random_int(1000000, 10000000),
                         'hits'             => $hits,
                         'unique_listeners' => $hits,
                     ];
                     $analyticsPodcastsByHour[] = [
                         'podcast_id' => $podcast->id,
                         'date'       => date('Y-m-d', $date),
-                        'hour'       => rand(0, 23),
+                        'hour'       => random_int(0, 23),
                         'hits'       => $hits,
                     ];
                     $analyticsPodcastsByCountry[] = [

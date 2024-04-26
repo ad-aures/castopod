@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Rector\CodeQuality\Rector\ClassMethod\ExplicitReturnNullRector;
 use Rector\CodingStyle\Rector\Encapsed\EncapsedStringsToSprintfRector;
 use Rector\CodingStyle\Rector\Stmt\NewlineAfterStatementRector;
 use Rector\CodingStyle\Rector\String_\SymplifyQuoteEscapeRector;
@@ -12,31 +13,22 @@ use Rector\EarlyReturn\Rector\If_\ChangeAndIfToEarlyReturnRector;
 use Rector\EarlyReturn\Rector\If_\ChangeOrIfContinueToMultiContinueRector;
 use Rector\Php55\Rector\String_\StringClassNameToClassConstantRector;
 use Rector\Php71\Rector\FuncCall\RemoveExtraParametersRector;
-use Rector\Set\ValueObject\SetList;
 use Rector\ValueObject\PhpVersion;
 
-return static function (RectorConfig $rectorConfig): void {
-    $rectorConfig->paths([__DIR__ . '/app', __DIR__ . '/modules', __DIR__ . '/tests', __DIR__ . '/public']);
-
-    // do you need to include constants, class aliases or custom autoloader? files listed will be executed
-    $rectorConfig->bootstrapFiles([__DIR__ . '/vendor/codeigniter4/framework/system/Test/bootstrap.php']);
-
-    // Define what rule sets will be applied
-    $rectorConfig->sets([
-        SetList::PHP_81,
-        SetList::TYPE_DECLARATION,
-        SetList::CODE_QUALITY,
-        SetList::CODING_STYLE,
-        SetList::EARLY_RETURN,
-        SetList::DEAD_CODE,
-    ]);
-
-    // auto import fully qualified class names
-    $rectorConfig->importNames();
-
-    $rectorConfig->phpVersion(PhpVersion::PHP_81);
-
-    $rectorConfig->skip([
+return RectorConfig::configure()
+    ->withPaths([__DIR__ . '/app', __DIR__ . '/modules', __DIR__ . '/tests', __DIR__ . '/public'])
+    ->withBootstrapFiles([__DIR__ . '/vendor/codeigniter4/framework/system/Test/bootstrap.php'])
+    ->withPhpVersion(PhpVersion::PHP_81)
+    ->withPhpSets(php81: true)
+    ->withPreparedSets(
+        typeDeclarations: true,
+        codeQuality: true,
+        codingStyle: true,
+        earlyReturn: true,
+        deadCode: true,
+    )
+    ->withImportNames(true, true, true, true)
+    ->withSkip([
         // .mp3 files were somehow processed by rector, so skip all media files
         __DIR__ . '/public/media/*',
 
@@ -50,6 +42,7 @@ return static function (RectorConfig $rectorConfig): void {
         EncapsedStringsToSprintfRector::class,
         RemoveExtraParametersRector::class,
         UnwrapFutureCompatibleIfPhpVersionRector::class,
+        ExplicitReturnNullRector::class,
 
         // skip rule in specific directory
         StringClassNameToClassConstantRector::class => [
@@ -65,9 +58,5 @@ return static function (RectorConfig $rectorConfig): void {
         ],
 
         ChangeAndIfToEarlyReturnRector::class => [__DIR__ . '/modules/Install/Controllers/InstallController.php'],
-    ]);
-
-    // Path to phpstan with extensions, that PHPStan in Rector uses to determine types
-    $rectorConfig->phpstanConfig(__DIR__ . '/phpstan.neon');
-    $rectorConfig->phpstanConfigs(['vendor/codeigniter/phpstan-codeigniter/extension.neon']);
-};
+    ])
+    ->withPHPStanConfigs([__DIR__ . '/phpstan.neon', 'vendor/codeigniter/phpstan-codeigniter/extension.neon']);

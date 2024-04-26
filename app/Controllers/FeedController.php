@@ -79,13 +79,7 @@ class FeedController extends Controller
             );
 
             cache()
-                ->save(
-                    $cacheName,
-                    $found,
-                    $secondsToNextUnpublishedEpisode
-                    ? $secondsToNextUnpublishedEpisode
-                    : DECADE,
-                );
+                ->save($cacheName, $found, $secondsToNextUnpublishedEpisode ?: DECADE);
         }
 
         return $this->response->setXML($found);
