@@ -22,7 +22,6 @@ use League\HTMLToMarkdown\HtmlConverter;
 use Modules\Auth\Config\AuthGroups;
 use Modules\Auth\Models\UserModel;
 use Modules\Platforms\Models\PlatformModel;
-use Modules\Platforms\Platforms;
 use Modules\PodcastImport\Entities\PodcastImportTask;
 use Modules\PodcastImport\Entities\TaskStatus;
 use PodcastFeed\PodcastFeed;
@@ -390,7 +389,7 @@ class PodcastImport extends BaseCommand
             ],
         ];
 
-        $platforms = new Platforms();
+        $platforms = service('platforms');
         $platformModel = new PlatformModel();
         foreach ($platformTypes as $platformType) {
             $platformsData = [];

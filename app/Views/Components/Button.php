@@ -39,7 +39,6 @@ class Button extends Component
             'warning'   => 'shadow-sm text-black bg-yellow-500 hover:bg-yellow-600',
             'info'      => 'shadow-sm text-white bg-blue-500 hover:bg-blue-600',
             'disabled'  => 'shadow-sm text-black bg-gray-300 cursor-not-allowed',
-            'link'      => 'text-accent-base bg-transparent underline hover:no-underline',
         ];
 
         $sizeClass = [

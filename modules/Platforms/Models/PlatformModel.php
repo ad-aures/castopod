@@ -14,7 +14,6 @@ namespace Modules\Platforms\Models;
 
 use CodeIgniter\Model;
 use Modules\Platforms\Entities\Platform;
-use Modules\Platforms\Platforms;
 
 class PlatformModel extends Model
 {
@@ -55,7 +54,7 @@ class PlatformModel extends Model
     {
         $cacheName = "podcast#{$podcastId}_platforms_{$platformType}_withData";
         if (! ($found = cache($cacheName))) {
-            $platforms = new Platforms();
+            $platforms = service('platforms');
 
             $found = $this->getPlatforms($podcastId, $platformType);
             $platformsData = $platforms->getPlatformsByType($platformType);
@@ -95,7 +94,7 @@ class PlatformModel extends Model
     {
         $cacheName = "podcast#{$podcastId}_platforms_{$platformType}";
         if (! ($found = cache($cacheName))) {
-            $platforms = new Platforms();
+            $platforms = service('platforms');
 
             /** @var Platform[] $found */
             $found = $this
@@ -134,7 +133,7 @@ class PlatformModel extends Model
     {
         $this->clearCache($podcastId);
 
-        $platforms = new Platforms();
+        $platforms = service('platforms');
 
         $platformsData = $platforms->getPlatformsByType($platformType);
 

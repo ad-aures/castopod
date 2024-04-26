@@ -39,9 +39,10 @@ parameters:
             - Modules\PremiumPodcasts\Models\
         additionalServices:
             - CodeIgniter\Settings\Config\Services
+            - CodeIgniter\Shield\Config\Services
             - Michalsn\Uuid\Config\Services
             - Modules\PremiumPodcasts\Config\Services
             - Modules\Media\Config\Services
-            - CodeIgniter\Shield\Config\Services
+            - Modules\Platforms\Config\Services
     ignoreErrors:
         - '#^Call to an undefined method CodeIgniter\\Cache\\CacheInterface\:\:deleteMatching\(\)#'
