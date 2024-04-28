@@ -38,7 +38,7 @@ class Subscription extends Entity
     protected ?Podcast $podcast = null;
 
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $dates = ['expires_at', 'created_at', 'updated_at'];
 

@@ -8,6 +8,9 @@ use Modules\Api\Rest\V1\Filters\ApiFilter;
 
 class Registrar
 {
+    /**
+     * @return array<string, mixed>
+     */
     public static function Filters(): array
     {
         return [

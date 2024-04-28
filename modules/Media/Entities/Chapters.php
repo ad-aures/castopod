@@ -32,7 +32,11 @@ class Chapters extends BaseMedia
     {
         parent::setFile($file);
 
-        $metadata = lstat((string) $file) ?? [];
+        $metadata = lstat((string) $file);
+
+        if (! $metadata) {
+            $metadata = [];
+        }
 
         helper('filesystem');
 

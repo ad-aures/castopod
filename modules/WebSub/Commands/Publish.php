@@ -9,7 +9,6 @@ use App\Models\PodcastModel;
 use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\HTTP\CURLRequest;
 use Exception;
-use Modules\WebSub\Config\WebSub;
 
 class Publish extends BaseCommand
 {
@@ -56,7 +55,7 @@ class Publish extends BaseCommand
             ],
         ];
 
-        $hubUrls = config(WebSub::class)
+        $hubUrls = config('WebSub')
             ->hubs;
 
         foreach ($podcasts as $podcast) {
@@ -78,7 +77,7 @@ class Publish extends BaseCommand
 
             // set podcast feed as having been pushed onto hubs
             (new PodcastModel())->update($podcast->id, [
-                'is_published_on_hubs' => true,
+                'is_published_on_hubs' => 1,
             ]);
 
             // set newly published episodes as pushed onto hubs

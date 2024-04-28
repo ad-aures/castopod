@@ -31,7 +31,7 @@ class FavouriteModel extends UuidModel
     protected $uuidFields = ['post_id'];
 
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $allowedFields = ['actor_id', 'post_id'];
 
@@ -57,6 +57,7 @@ class FavouriteModel extends UuidModel
         ]);
 
         model('PostModel', false)
+            ->builder()
             ->where('id', service('uuid') ->fromString($post->id) ->getBytes())
             ->increment('favourites_count');
 
@@ -97,6 +98,7 @@ class FavouriteModel extends UuidModel
         $this->db->transStart();
 
         model('PostModel', false)
+            ->builder()
             ->where('id', service('uuid') ->fromString($post->id) ->getBytes())
             ->decrement('favourites_count');
 

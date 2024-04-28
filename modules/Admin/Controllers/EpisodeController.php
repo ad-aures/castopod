@@ -855,7 +855,7 @@ class EpisodeController extends BaseController
 
         // set podcast is_published_on_hubs to false to trigger websub push
         (new PodcastModel())->update($this->episode->podcast->id, [
-            'is_published_on_hubs' => false,
+            'is_published_on_hubs' => 0,
         ]);
 
         $db->transComplete();

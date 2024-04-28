@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Modules\Auth\Config;
 
 use CodeIgniter\Router\RouteCollection;
-use Modules\Admin\Config\Admin;
 
 /**
  * @var RouteCollection $routes
@@ -16,7 +15,7 @@ service('auth')
 
 // Admin routes for users and podcast contributors
 $routes->group(
-    config(Admin::class)
+    config('Admin')
         ->gateway,
     [
         'namespace' => 'Modules\Auth\Controllers',

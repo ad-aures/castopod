@@ -65,7 +65,7 @@ class Post extends UuidEntity
     protected $uuids = ['id', 'in_reply_to_id', 'reblog_of_id'];
 
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $dates = ['published_at', 'created_at'];
 

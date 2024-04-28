@@ -11,7 +11,6 @@ declare(strict_types=1);
 use AdAures\Ipcat\IpDb;
 use Config\Services;
 use GeoIp2\Database\Reader;
-use Modules\Analytics\Config\Analytics;
 use Opawg\UserAgentsV2Php\UserAgents;
 use WhichBrowser\Parser;
 
@@ -41,11 +40,12 @@ if (! function_exists('client_ip')) {
      */
     function client_ip(): string
     {
-        if (! empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            return $_SERVER['HTTP_X_FORWARDED_FOR'];
+        $superglobals = service('superglobals');
+        if (! empty($superglobals->server('HTTP_X_FORWARDED_FOR'))) {
+            return $superglobals->server('HTTP_X_FORWARDED_FOR');
         }
 
-        return $_SERVER['REMOTE_ADDR'];
+        return $superglobals->server('REMOTE_ADDR');
     }
 }
 
@@ -109,7 +109,8 @@ if (! function_exists('set_user_session_player')) {
 
         if (! $session->has('player')) {
             $playerFound = null;
-            $userAgent = $_SERVER['HTTP_USER_AGENT'];
+            $userAgent = service('superglobals')
+                ->server('HTTP_USER_AGENT');
 
             try {
                 $playerFound = UserAgents::find($userAgent);
@@ -175,7 +176,8 @@ if (! function_exists('set_user_session_referer')) {
     {
         $session = Services::session();
 
-        $newreferer = $_SERVER['HTTP_REFERER'] ?? '- Direct -';
+        $newreferer = service('superglobals')
+            ->server('HTTP_REFERER') ?? '- Direct -';
         $newreferer =
             parse_url((string) $newreferer, PHP_URL_HOST) ===
             parse_url(current_url(false), PHP_URL_HOST)
@@ -195,7 +197,8 @@ if (! function_exists('set_user_session_entry_page')) {
     {
         $session = Services::session();
 
-        $entryPage = $_SERVER['REQUEST_URI'];
+        $entryPage = service('superglobals')
+            ->server('REQUEST_URI');
         if (! $session->has('entryPage')) {
             $session->set('entryPage', $entryPage);
         }
@@ -243,10 +246,11 @@ if (! function_exists('podcast_hit')) {
                 $session->get('player')['bot'] = true;
             }
 
+            $superglobals = service('superglobals');
             //We get the HTTP header field `Range`:
-            $httpRange = $_SERVER['HTTP_RANGE'] ?? null;
+            $httpRange = $superglobals->server('HTTP_RANGE') ?? null;
 
-            $salt = config(Analytics::class)
+            $salt = config('Analytics')
                 ->salt;
             // We create a sha1 hash for this Salt+Current_Date+IP_Address+User_Agent+Episode_ID (used to count only once multiple episode downloads):
             $episodeListenerHashId =
@@ -254,11 +258,14 @@ if (! function_exists('podcast_hit')) {
                 sha1(
                     $salt . '_' . date(
                         'Y-m-d'
-                    ) . '_' . $clientIp . '_' . $_SERVER['HTTP_USER_AGENT'] . '_' . $episodeId
+                    ) . '_' . $clientIp . '_' . $superglobals->server('HTTP_USER_AGENT') . '_' . $episodeId
                 );
             // The cache expires at midnight:
             $secondsToMidnight = strtotime('tomorrow') - time();
+
+            /** @var int|null $downloadedBytes */
             $downloadedBytes = cache($episodeListenerHashId);
+
             if ($downloadedBytes === null) {
                 // If it was never downloaded that means that zero bytes were downloaded:
                 $downloadedBytes = 0;
@@ -301,13 +308,16 @@ if (! function_exists('podcast_hit')) {
                         sha1(
                             $salt . '_' . date(
                                 'Y-m-d'
-                            ) . '_' . $clientIp . '_' . $_SERVER['HTTP_USER_AGENT'] . '_' . $podcastId
+                            ) . '_' . $clientIp . '_' . $superglobals->server('HTTP_USER_AGENT') . '_' . $podcastId
                         );
                     $newListener = 1;
+
                     // Has this listener already downloaded an episode today:
+                    /** @var int|null $downloadsByUser */
                     $downloadsByUser = cache($podcastListenerHashId);
+
                     // We add one download
-                    if ($downloadsByUser) {
+                    if ($downloadsByUser === null) {
                         $newListener = 0;
                         ++$downloadsByUser;
                     } else {

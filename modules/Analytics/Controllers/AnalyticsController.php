@@ -31,11 +31,13 @@ class AnalyticsController extends Controller
         }
 
         if (! is_numeric($params[0])) {
+            // @phpstan-ignore-next-line
             $this->analyticsModel = model('Analytics' . $params[0] . 'Model');
             $this->methodName = 'getData' . $params[1];
             return $this->{$method}();
         }
 
+        // @phpstan-ignore-next-line
         $this->analyticsModel = model('Analytics' . $params[1] . 'Model');
         $this->methodName = 'getData' . (count($params) >= 3 ? $params[2] : '');
 

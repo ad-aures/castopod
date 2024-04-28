@@ -41,7 +41,7 @@ class NotificationModel extends UuidModel
     protected $uuidFields = ['post_id', 'activity_id'];
 
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $allowedFields = [
         'actor_id',

@@ -6,7 +6,6 @@ namespace Modules\Media\Config;
 
 use CodeIgniter\Config\BaseService;
 use Exception;
-use Modules\Media\Config\Media as MediaConfig;
 use Modules\Media\FileManagers\FileManagerInterface;
 
 /**
@@ -27,7 +26,7 @@ class Services extends BaseService
             return self::getSharedInstance('file_manager');
         }
 
-        $config = config(MediaConfig::class);
+        $config = config('Media');
         $fileManagerClass = $config->fileManagers[$config->fileManager];
 
         $fileManager = new $fileManagerClass($config);

@@ -31,6 +31,8 @@ class AuthToken extends ShieldAuthToken
      * The name of Header that the Authorization token should be found.
      * According to the specs, this should be `Authorization`, but rare
      * circumstances might need a different header.
+     *
+     * @var array<string, string>
      */
     public array $authenticatorHeader = [
         'tokens' => 'Authorization',

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Modules\Fediverse\Commands;
 
 use CodeIgniter\CLI\BaseCommand;
-use Modules\Fediverse\Models\ActivityModel;
 
 class Broadcast extends BaseCommand
 {
@@ -20,7 +19,7 @@ class Broadcast extends BaseCommand
         helper('fediverse');
 
         // retrieve scheduled activities from database
-        $scheduledActivities = model(ActivityModel::class, false)
+        $scheduledActivities = model('ActivityModel', false)
             ->getScheduledActivities();
 
         // Send activity to all followers
@@ -43,7 +42,7 @@ class Broadcast extends BaseCommand
             }
 
             // set activity post to delivered
-            model(ActivityModel::class, false)
+            model('ActivityModel', false)
                 ->update($scheduledActivity->id, [
                     'status' => 'delivered',
                 ]);

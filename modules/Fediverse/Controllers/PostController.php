@@ -14,7 +14,6 @@ use CodeIgniter\Controller;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RedirectResponse;
-use CodeIgniter\HTTP\Response;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\I18n\Time;
 use Modules\Fediverse\Config\Fediverse;
@@ -32,7 +31,7 @@ class PostController extends Controller
     protected $request;
 
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $helpers = ['fediverse'];
 
@@ -45,7 +44,7 @@ class PostController extends Controller
 
     public function __construct()
     {
-        $this->config = config(Fediverse::class);
+        $this->config = config('Fediverse');
     }
 
     public function _remap(string $method, string ...$params): mixed
@@ -65,7 +64,7 @@ class PostController extends Controller
         return $this->{$method}(...$params);
     }
 
-    public function index(): Response
+    public function index(): ResponseInterface
     {
         $noteObjectClass = $this->config->noteObject;
         $noteObject = new $noteObjectClass($this->post);
@@ -75,7 +74,7 @@ class PostController extends Controller
             ->setBody($noteObject->toJSON());
     }
 
-    public function replies(): Response
+    public function replies(): ResponseInterface
     {
         /**
          * get post replies
@@ -167,7 +166,7 @@ class PostController extends Controller
             ->getActorById($validData['actor_id']);
 
         model('FavouriteModel', false)
-            ->toggleFavourite($actor, $this->post->id);
+            ->toggleFavourite($actor, $this->post);
 
         return redirect()->back();
     }

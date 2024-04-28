@@ -17,7 +17,7 @@ use Exception;
 class BlockController extends Controller
 {
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $helpers = ['fediverse'];
 

@@ -73,7 +73,7 @@ class PlatformController extends BaseController
             as $platformSlug => $podcastPlatform
         ) {
             $podcastPlatformUrl = trim((string) $podcastPlatform['url']);
-            if ($podcastPlatformUrl === null) {
+            if ($podcastPlatformUrl === '') {
                 continue;
             }
 

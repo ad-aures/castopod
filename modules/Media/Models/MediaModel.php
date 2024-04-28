@@ -48,7 +48,7 @@ class MediaModel extends Model
     protected $createdField = 'uploaded_at';
 
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $allowedFields = [
         'id',
@@ -66,12 +66,12 @@ class MediaModel extends Model
     /**
      * clear cache before update if by any chance, the podcast name changes, so will the podcast link
      *
-     * @var string[]
+     * @var list<string>
      */
     protected $beforeUpdate = ['clearCache'];
 
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $beforeDelete = ['clearCache'];
 

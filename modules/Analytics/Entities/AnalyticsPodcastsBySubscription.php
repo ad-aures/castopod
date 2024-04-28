@@ -24,7 +24,7 @@ use CodeIgniter\Entity\Entity;
 class AnalyticsPodcastsBySubscription extends Entity
 {
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $dates = ['date', 'created_at', 'updated_at'];
 

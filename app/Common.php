@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use Config\View;
 use ViewThemes\Theme;
 
 /**
@@ -37,7 +36,8 @@ if (! function_exists('view')) {
         /** @var CodeIgniter\View\View $renderer */
         $renderer = single_service('renderer', $path);
 
-        $saveData = config(View::class)->saveData;
+        $saveData = config('View')
+->saveData;
 
         if (array_key_exists('saveData', $options)) {
             $saveData = (bool) $options['saveData'];

@@ -9,7 +9,7 @@
     "php": "^8.1",
     "adaures/ipcat-php": "^v1.0.0",
     "adaures/podcast-persons-taxonomy": "^v1.0.1",
-    "aws/aws-sdk-php": "^3.305.3",
+    "aws/aws-sdk-php": "^3.305.4",
     "chrisjean/php-ico": "^1.0.4",
     "cocur/slugify": "^v4.5.1",
     "codeigniter4/framework": "v4.5.1",

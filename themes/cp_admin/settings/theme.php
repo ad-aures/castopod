@@ -1,7 +1,5 @@
 <?php declare(strict_types=1);
 
-use Config\Colors;
-
 ?>
 
 <?= $this->extend('_layout') ?>
@@ -23,7 +21,7 @@ use Config\Colors;
     subtitle="<?= lang('Settings.theme.accent_section_subtitle') ?>">
 
 <div class="grid gap-4 grid-cols-colorButtons">
-    <?php foreach (config(Colors::class)->themes as $themeName => $color): ?>
+    <?php foreach (config('Colors')->themes as $themeName => $color): ?>
         <Forms.ColorRadioButton
         class="theme-<?= $themeName ?> mx-auto"
         value="<?= esc($themeName) ?>"

@@ -68,7 +68,7 @@ class WebFinger
             throw new Exception('Could not find actor');
         }
 
-        $this->aliases = [$actor->id];
+        $this->aliases = [$actor->uri];
         $this->links = [
             [
                 'rel'  => 'self',

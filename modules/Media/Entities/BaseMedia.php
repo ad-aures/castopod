@@ -36,7 +36,7 @@ class BaseMedia extends Entity
     protected File $file;
 
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $dates = ['uploaded_at', 'updated_at'];
 

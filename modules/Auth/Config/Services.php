@@ -6,7 +6,6 @@ namespace Modules\Auth\Config;
 
 use Config\Services as BaseService;
 use Modules\Auth\Auth;
-use Modules\Auth\Config\Auth as AuthConfig;
 
 class Services extends BaseService
 {
@@ -20,7 +19,7 @@ class Services extends BaseService
             return self::getSharedInstance('auth');
         }
 
-        $config = config(AuthConfig::class);
+        $config = config('Auth');
 
         return new Auth($config);
     }

@@ -5,7 +5,6 @@ declare(strict_types=1);
 use App\Entities\Person;
 use App\Entities\Podcast;
 use Cocur\Slugify\Slugify;
-use Config\App;
 use Config\Images;
 use Modules\Media\Entities\Image;
 
@@ -25,7 +24,7 @@ if (! function_exists('get_browser_language')) {
     function get_browser_language(?string $httpAcceptLanguage = null): string
     {
         if ($httpAcceptLanguage === null) {
-            return config(App::class)->defaultLocale;
+            return config('App')->defaultLocale;
         }
 
         $langs = explode(',', $httpAcceptLanguage);
@@ -192,7 +191,7 @@ if (! function_exists('format_bytes')) {
 if (! function_exists('get_site_icon_url')) {
     function get_site_icon_url(string $size): string
     {
-        if (config(App::class)->siteIcon['ico'] === service('settings')->get('App.siteIcon')['ico']) {
+        if (config('App')->siteIcon['ico'] === service('settings')->get('App.siteIcon')['ico']) {
             // return default site icon url
             return base_url(service('settings')->get('App.siteIcon')[$size]);
         }
@@ -205,12 +204,12 @@ if (! function_exists('get_podcast_banner')) {
     function get_podcast_banner_url(Podcast $podcast, string $size): string
     {
         if (! $podcast->banner instanceof Image) {
-            $defaultBanner = config(Images::class)
+            $defaultBanner = config('Images')
                 ->podcastBannerDefaultPaths[service('settings')->get('App.theme')] ?? config(
                     Images::class
                 )->podcastBannerDefaultPaths['default'];
 
-            $sizes = config(Images::class)
+            $sizes = config('Images')
 ->podcastBannerSizes;
 
             $sizeConfig = $sizes[$size];
@@ -231,7 +230,7 @@ if (! function_exists('get_podcast_banner_mimetype')) {
     function get_podcast_banner_mimetype(Podcast $podcast, string $size): string
     {
         if (! $podcast->banner instanceof Image) {
-            $sizes = config(Images::class)
+            $sizes = config('Images')
 ->podcastBannerSizes;
 
             $sizeConfig = $sizes[$size];
@@ -252,10 +251,10 @@ if (! function_exists('get_avatar_url')) {
     function get_avatar_url(Person $person, string $size): string
     {
         if (! $person->avatar instanceof Image) {
-            $defaultAvatarPath = config(Images::class)
+            $defaultAvatarPath = config('Images')
 ->avatarDefaultPath;
 
-            $sizes = config(Images::class)
+            $sizes = config('Images')
 ->personAvatarSizes;
 
             $sizeConfig = $sizes[$size];

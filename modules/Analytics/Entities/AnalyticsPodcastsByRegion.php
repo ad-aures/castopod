@@ -28,7 +28,7 @@ use CodeIgniter\Entity\Entity;
 class AnalyticsPodcastsByRegion extends Entity
 {
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $dates = ['date', 'created_at', 'updated_at'];
 

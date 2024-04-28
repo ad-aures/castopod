@@ -6,13 +6,13 @@ namespace Modules\Api\Rest\V1\Controllers;
 
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\Controller;
-use CodeIgniter\HTTP\Response;
+use CodeIgniter\HTTP\ResponseInterface;
 
 class ExceptionController extends Controller
 {
     use ResponseTrait;
 
-    public function notFound(): Response
+    public function notFound(): ResponseInterface
     {
         return $this->failNotFound('Podcast not found');
     }

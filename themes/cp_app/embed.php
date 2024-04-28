@@ -45,11 +45,13 @@
                 style="--vm-player-box-shadow:0; --vm-player-theme: hsl(var(--color-accent-base)); --vm-control-focus-color: hsl(var(--color-accent-contrast)); --vm-control-spacing: 4px; --vm-menu-item-focus-bg: hsl(var(--color-background-highlight)); --vm-control-icon-size: 24px; <?= str_ends_with($theme, 'transparent') ? '--vm-controls-bg: transparent;' : '' ?>"
             >
             <vm-audio preload="none">
-                <?php $source = auth()->loggedIn() ? $episode->audio_url : $episode->audio_url .
-                    (isset($_SERVER['HTTP_REFERER'])
-                        ? '?_from=' .
-                            parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST)
-                        : '') ?>
+                <?php
+                $superglobals = service('superglobals');
+            $source = auth()->loggedIn() ? $episode->audio_url : $episode->audio_url .
+                ($superglobals->server('HTTP_REFERER') === null
+                    ? '?_from=' .
+                        parse_url($superglobals->server('HTTP_REFERER'), PHP_URL_HOST)
+                    : '') ?>
                 <source src="<?= $source ?>" type="<?= $episode->audio->file_mimetype ?>" />
             </vm-audio>
             <vm-ui>

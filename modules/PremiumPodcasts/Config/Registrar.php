@@ -8,6 +8,9 @@ use Modules\PremiumPodcasts\Filters\PodcastUnlockFilter;
 
 class Registrar
 {
+    /**
+     * @return array<string, mixed>
+     */
     public static function Filters(): array
     {
         return [

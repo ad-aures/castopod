@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-use Modules\Admin\Config\Admin;
-
 /**
  * @copyright  2020 Ad Aures
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -12,7 +10,7 @@ use Modules\Admin\Config\Admin;
 
 return [
     'label' => 'навигационная цепочка',
-    config(Admin::class)
+    config('Admin')
         ->gateway => 'Главная',
     'podcasts' => 'подкасты',
     'episodes' => 'выпуски',

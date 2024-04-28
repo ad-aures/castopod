@@ -17,7 +17,6 @@ use Modules\Fediverse\ActivityRequest;
 use Modules\Fediverse\Core\ObjectType;
 use Modules\Fediverse\Entities\Actor;
 use Modules\Fediverse\Entities\PreviewCard;
-use Modules\Fediverse\Models\ActivityModel;
 
 if (! function_exists('get_webfinger_data')) {
     /**
@@ -79,7 +78,7 @@ if (! function_exists('accept_follow')) {
         $db = db_connect();
         $db->transStart();
 
-        $activityModel = model(ActivityModel::class, false);
+        $activityModel = model('ActivityModel', false);
         $activityId = $activityModel->newActivity(
             'Accept',
             $actor->id,
@@ -488,7 +487,7 @@ if (! function_exists('linkify')) {
         return preg_replace_callback(
             '~<(\d+)>~',
             static function (array $match) use (&$links): string {
-                return $links[$match[1] - 1];
+                return $links[(int) $match[1] - 1];
             },
             (string) $text,
         );

@@ -4,6 +4,7 @@ parameters:
     checkGenericClassInNonGenericObjectType: false
     paths:
         - app
+        - modules
         - tests
     bootstrapFiles:
         - vendor/codeigniter4/framework/system/Test/bootstrap.php
@@ -37,12 +38,13 @@ parameters:
             - Modules\Fediverse\Models\
             - Modules\Media\Models\
             - Modules\PremiumPodcasts\Models\
+            - CodeIgniter\Shield\Models\
         additionalServices:
             - CodeIgniter\Settings\Config\Services
             - CodeIgniter\Shield\Config\Services
             - Michalsn\Uuid\Config\Services
-            - Modules\PremiumPodcasts\Config\Services
             - Modules\Media\Config\Services
             - Modules\Platforms\Config\Services
+            - Modules\PremiumPodcasts\Config\Services
     ignoreErrors:
         - '#^Call to an undefined method CodeIgniter\\Cache\\CacheInterface\:\:deleteMatching\(\)#'

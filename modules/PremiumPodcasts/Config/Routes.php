@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Modules\PremiumPodcasts\Config;
 
 use CodeIgniter\Router\RouteCollection;
-use Modules\Admin\Config\Admin;
 
 /** @var RouteCollection $routes */
 
@@ -13,7 +12,7 @@ $routes->addPlaceholder('podcastHandle', '[a-zA-Z0-9\_]{1,32}');
 
 // Admin routes for subscriptions
 $routes->group(
-    config(Admin::class)
+    config('Admin')
         ->gateway,
     [
         'namespace' => 'Modules\PremiumPodcasts\Controllers',

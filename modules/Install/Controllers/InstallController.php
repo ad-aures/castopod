@@ -17,13 +17,12 @@ use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Shield\Entities\User;
-use Config\App;
+use CodeIgniter\Shield\Exceptions\ValidationException as ShieldValidationException;
 use Config\Database;
 use Config\Services;
 use Dotenv\Dotenv;
 use Dotenv\Exception\ValidationException;
 use Modules\Auth\Models\UserModel;
-use Modules\Install\Config\Install;
 use Psr\Log\LoggerInterface;
 use Throwable;
 use ViewThemes\Theme;
@@ -31,7 +30,7 @@ use ViewThemes\Theme;
 class InstallController extends Controller
 {
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $helpers = ['form', 'components', 'svg', 'misc', 'setting'];
 
@@ -160,7 +159,7 @@ class InstallController extends Controller
 
         if (! $this->validate($rules)) {
             return redirect()
-                ->to((host_url() ?? config(App::class) ->baseURL) . config(Install::class)->gateway)
+                ->to((host_url() ?? config('App') ->baseURL) . config('Install')->gateway)
                 ->withInput()
                 ->with('errors', $this->validator->getErrors());
         }
@@ -180,7 +179,7 @@ class InstallController extends Controller
         helper('text');
 
         // redirect to full install url with new baseUrl input
-        return redirect()->to(reduce_double_slashes($baseUrl . '/' . config(Install::class)->gateway));
+        return redirect()->to(reduce_double_slashes($baseUrl . '/' . config('Install')->gateway));
     }
 
     public function databaseConfig(): string
@@ -308,7 +307,7 @@ class InstallController extends Controller
         $userModel = new UserModel();
         try {
             $userModel->save($user);
-        } catch (ValidationException) {
+        } catch (ShieldValidationException) {
             return redirect()->back()
                 ->withInput()
                 ->with('errors', $userModel->errors());

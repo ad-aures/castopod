@@ -8,6 +8,9 @@ use Modules\Fediverse\Filters\FediverseFilter;
 
 class Registrar
 {
+    /**
+     * @return array<string, mixed>
+     */
     public static function Filters(): array
     {
         return [

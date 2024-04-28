@@ -18,7 +18,7 @@ class ActorController extends FediverseActorController
     use AnalyticsTrait;
 
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $helpers = ['svg', 'components', 'misc', 'seo'];
 

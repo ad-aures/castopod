@@ -11,8 +11,8 @@ declare(strict_types=1);
 namespace Modules\Auth\Controllers;
 
 use CodeIgniter\HTTP\RedirectResponse;
+use CodeIgniter\Shield\Entities\User;
 use Modules\Admin\Controllers\BaseController;
-use Modules\Auth\Models\UserModel;
 
 class MyAccountController extends BaseController
 {
@@ -60,17 +60,16 @@ class MyAccountController extends BaseController
                 ->with('error', lang('MyAccount.messages.wrongPasswordError'));
         }
 
-        // set new password to user
-        auth()
-            ->user()
-            ->password = $validData['new_password'];
+        $user = auth()
+            ->user();
 
-        $userModel = new UserModel();
-        if (! $userModel->update(auth()->user()->id, auth()->user())) {
-            return redirect()
-                ->back()
-                ->withInput()
-                ->with('errors', $userModel->errors());
+        if ($user instanceof User) {
+            // set new password to user
+            $user->password = $validData['new_password'];
+
+            $userModel = auth()
+                ->getProvider();
+            $userModel->save($user);
         }
 
         // Success!

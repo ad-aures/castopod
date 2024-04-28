@@ -30,7 +30,7 @@ use Opawg\UserAgentsV2Php\UserAgentsRSS;
 class AnalyticsPodcastsByService extends Entity
 {
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $dates = ['date', 'created_at', 'updated_at'];
 

@@ -46,9 +46,12 @@ use Modules\PodcastImport\Entities\TaskStatus;
         [
             'header' => lang('PodcastImport.queue.feed'),
             'cell'   => function (PodcastImportTask $importTask) {
+                $externalLink = icon('external-link-fill', [
+                    'class' => 'ml-1',
+                ]);
                 return <<<HTML
                     <div class="flex flex-col">
-                        <a href="{$importTask->feed_url}" class="flex items-center underline hover:no-underline" target="_blank" rel="noopener noreferrer">{$importTask->feed_url}<?= icon('external-link-fill', ['class' => 'ml-1']) ?></a>
+                        <a href="{$importTask->feed_url}" class="flex items-center underline hover:no-underline" target="_blank" rel="noopener noreferrer">{$importTask->feed_url}{$externalLink}</a>
                         <span class="text-sm text-gray-600">@{$importTask->handle}</span>
                     </div>
                 HTML;

@@ -37,7 +37,7 @@ class PostController extends FediversePostController
     protected $post;
 
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $helpers = ['auth', 'fediverse', 'svg', 'components', 'misc', 'seo', 'premium_podcasts'];
 

@@ -22,7 +22,6 @@ use CodeIgniter\Entity\Entity;
 use CodeIgniter\Files\File;
 use CodeIgniter\HTTP\Files\UploadedFile;
 use CodeIgniter\I18n\Time;
-use Config\Images;
 use Exception;
 use League\CommonMark\Environment\Environment;
 use League\CommonMark\Extension\Autolink\AutolinkExtension;
@@ -201,7 +200,7 @@ class Episode extends Entity
         } else {
             $cover = new Image([
                 'file_key' => 'podcasts/' . $this->getPodcast()->handle . '/' . $this->attributes['slug'] . '.' . $file->getExtension(),
-                'sizes'    => config(Images::class)
+                'sizes'    => config('Images')
 ->podcastCoverSizes,
                 'uploaded_by' => $this->attributes['updated_by'],
                 'updated_by'  => $this->attributes['updated_by'],

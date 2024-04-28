@@ -8,7 +8,7 @@ use App\Entities\Podcast;
 use App\Models\PodcastModel;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\Controller;
-use CodeIgniter\HTTP\Response;
+use CodeIgniter\HTTP\ResponseInterface;
 use Modules\Api\Rest\V1\Config\Services;
 
 class PodcastController extends Controller
@@ -20,7 +20,7 @@ class PodcastController extends Controller
         Services::restApiExceptions()->initialize();
     }
 
-    public function list(): Response
+    public function list(): ResponseInterface
     {
         $data = (new PodcastModel())->findAll();
         array_map(static function ($podcast): void {
@@ -29,13 +29,14 @@ class PodcastController extends Controller
         return $this->respond($data);
     }
 
-    public function view(int $id): Response
+    public function view(int $id): ResponseInterface
     {
         $podcast = (new PodcastModel())->getPodcastById($id);
         if (! $podcast instanceof Podcast) {
             return $this->failNotFound('Podcast not found');
         }
 
+        // @phpstan-ignore-next-line
         return $this->respond(self::mapPodcast($podcast));
     }
 
@@ -50,7 +51,7 @@ class PodcastController extends Controller
         $categories = [$podcast->getCategory(), ...$podcast->getOtherCategories()];
 
         foreach ($categories as $category) {
-            $category->translated = lang('Podcast.category_options.' . $category->code, [], null, false);
+            $category->translated = lang('Podcast.category_options.' . $category->code);
         }
 
         $podcast->categories = $categories;

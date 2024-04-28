@@ -15,7 +15,7 @@ namespace Modules\Analytics\Models;
 use CodeIgniter\Model;
 use Modules\Analytics\Entities\AnalyticsUnknownUserAgent;
 
-class AnalyticsUnknownUserAgentModel extends Model
+class AnalyticsUnknownUserAgentsModel extends Model
 {
     /**
      * @var string

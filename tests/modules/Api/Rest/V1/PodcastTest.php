@@ -9,7 +9,6 @@ use CodeIgniter\Database\Seeder;
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\DatabaseTestTrait;
 use CodeIgniter\Test\FeatureTestTrait;
-use Modules\Api\Rest\V1\Config\RestApi;
 
 class PodcastTest extends CIUnitTestCase
 {
@@ -54,7 +53,7 @@ class PodcastTest extends CIUnitTestCase
         $this->podcast = FakeSinglePodcastApiSeeder::podcast();
         $this->podcast['created_at'] = [];
         $this->podcast['updated_at'] = [];
-        $this->podcastApiUrl = config(RestApi::class)
+        $this->podcastApiUrl = config('RestApi')
             ->gateway;
     }
 

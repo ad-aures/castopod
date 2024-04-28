@@ -15,7 +15,6 @@ use Exception;
 use GdImage;
 use Modules\Media\Entities\Transcript;
 use Modules\Media\FileManagers\FileManagerInterface;
-use Modules\MediaClipper\Config\MediaClipper;
 
 /**
  * TODO: refactor this by splitting process modules into different classes (image generation, subtitles clip, video
@@ -81,9 +80,9 @@ class VideoClipper
     ) {
         $this->duration = $end - $start;
         $this->episodeNumbering = $this->episodeNumbering($this->episode->number, $this->episode->season_number);
-        $this->dimensions = config(MediaClipper::class)
+        $this->dimensions = config('MediaClipper')
             ->formats[$format];
-        $this->colors = config(MediaClipper::class)
+        $this->colors = config('MediaClipper')
             ->themes[$theme];
 
         /** @var FileManagerInterface $fileManager */
@@ -239,7 +238,7 @@ class VideoClipper
             ) . ":text='%{pts\:gmtime\:{$this->start}\:%H\\\\\\\\\\:%M\\\\\\\\\\:%S\}':x={$this->dimensions['timestamp']['x']}:y={$this->dimensions['timestamp']['y']}:fontsize={$this->dimensions['timestamp']['fontsize']}:fontcolor=0x{$this->colors['timestampText']}:box=1:boxcolor=0x{$this->colors['timestampBg']}:boxborderw={$this->dimensions['timestamp']['padding']}[v3]",
             "color=c=0x{$this->colors['progressbar']}:s={$this->dimensions['width']}x{$this->dimensions['progressbar']['height']}[progressbar]",
             "[v3][progressbar]overlay=-w+(w/{$this->duration})*t:0:shortest=1:format=rgb,subtitles={$this->subtitlesClipOutput}:fontsdir=" . config(
-                MediaClipper::class
+                'MediaClipper'
             )->fontsFolder . ":force_style='Fontname=" . self::FONTS['subtitles'] . ",Alignment=5,Fontsize={$this->dimensions['subtitles']['fontsize']},PrimaryColour=&H{$this->colors['subtitles']}&,BorderStyle=1,Outline=0,Shadow=0,MarginL={$this->dimensions['subtitles']['marginL']},MarginR={$this->dimensions['subtitles']['marginR']},MarginV={$this->dimensions['subtitles']['marginV']}'[outv]",
             "[6:v]scale={$this->dimensions['watermark']['width']}:{$this->dimensions['watermark']['height']}[watermark]",
             "color=0x{$this->colors['watermarkBg']}:{$this->dimensions['watermark']['width']}x{$this->dimensions['watermark']['height']}[over]",
@@ -248,7 +247,7 @@ class VideoClipper
             '[watermarked]scale=w=-1:h=-1:out_color_matrix=bt709[outfinal]',
         ];
 
-        $watermark = config(MediaClipper::class)
+        $watermark = config('MediaClipper')
             ->watermark;
 
         $videoClipCmd = [
@@ -403,7 +402,7 @@ class VideoClipper
         );
 
         // Add quotes for subtitles
-        $quotes = imagecreatefrompng(config(MediaClipper::class)->quotesImage);
+        $quotes = imagecreatefrompng(config('MediaClipper')->quotesImage);
 
         if (! $quotes) {
             return false;
@@ -481,7 +480,7 @@ class VideoClipper
 
     private function getFont(string $name): string
     {
-        return config(MediaClipper::class)->fontsFolder . self::FONTS[$name];
+        return config('MediaClipper')->fontsFolder . self::FONTS[$name];
     }
 
     private function generateBackground(int $width, int $height): ?GdImage

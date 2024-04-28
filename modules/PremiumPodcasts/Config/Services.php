@@ -20,7 +20,7 @@ class Services extends BaseService
 
         $premiumPodcasts = new PremiumPodcasts();
 
-        $subscriptionModel ??= model(SubscriptionModel::class);
+        $subscriptionModel ??= model('SubscriptionModel');
 
         return $premiumPodcasts
             ->setSubscriptionModel($subscriptionModel);

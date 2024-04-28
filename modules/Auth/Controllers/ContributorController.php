@@ -115,6 +115,7 @@ class ContributorController extends BaseController
 
     public function attemptCreate(): RedirectResponse
     {
+        /** @var User $user */
         $user = (new UserModel())->find((int) $this->request->getPost('user'));
 
         if (get_podcast_group($user, $this->podcast->id)) {

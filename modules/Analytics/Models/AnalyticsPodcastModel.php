@@ -12,7 +12,6 @@ declare(strict_types=1);
 
 namespace Modules\Analytics\Models;
 
-use App\Entities\Media\BaseMedia;
 use CodeIgniter\Model;
 use Modules\Analytics\Entities\AnalyticsPodcasts;
 use Modules\Media\Models\MediaModel;
@@ -263,7 +262,7 @@ class AnalyticsPodcastModel extends Model
     /**
      * Get total storage
      *
-     * @return BaseMedia[]
+     * @return AnalyticsPodcasts[]
      */
     public function getDataTotalStorageByMonth(): array
     {

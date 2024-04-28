@@ -9,7 +9,6 @@ declare(strict_types=1);
  */
 
 use App\Models\PageModel;
-use Config\App;
 
 if (! function_exists('render_page_links')) {
     /**
@@ -42,8 +41,8 @@ if (! function_exists('render_page_links')) {
         }
 
         // if set in .env, add legal notice link at the end of page links
-        if (config(App::class)->legalNoticeURL !== null) {
-            $links .= anchor(config(App::class)->legalNoticeURL, lang('Common.legal_notice'), [
+        if (config('App')->legalNoticeURL !== null) {
+            $links .= anchor(config('App')->legalNoticeURL, lang('Common.legal_notice'), [
                 'class'  => 'px-2 py-1 underline hover:no-underline focus:ring-accent',
                 'target' => '_blank',
                 'rel'    => 'noopener noreferrer',

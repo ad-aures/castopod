@@ -142,9 +142,10 @@ class HttpSignature
         $strings[] = sprintf(
             '(request-target): %s %s%s',
             $this->request->getMethod(),
-            '/' . $this->request->uri->getPath(),
-            $this->request->uri->getQuery() !== ''
-                ? '?' . $this->request->uri->getQuery()
+            '/' . $this->request->getUri()->getPath(),
+            $this->request->getUri()
+                ->getQuery() !== ''
+                ? '?' . $this->request->getUri()->getQuery()
                 : '',
         );
 

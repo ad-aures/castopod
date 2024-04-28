@@ -12,7 +12,6 @@ namespace App\Controllers;
 
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\Response;
-use Config\Colors;
 
 class ColorsController extends Controller
 {
@@ -29,7 +28,7 @@ class ColorsController extends Controller
         if (
             ! ($colorsCssBody = cache($cacheName))
         ) {
-            $colorThemes = config(Colors::class)
+            $colorThemes = config('Colors')
                 ->themes;
 
             $colorsCssBody = '';

@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace Modules\Admin\Controllers;
 
 use CodeIgniter\HTTP\RedirectResponse;
-use Config\App;
 use Config\Services;
 
 class AboutController extends BaseController
@@ -23,7 +22,7 @@ class AboutController extends BaseController
             'version'     => CP_VERSION,
             'php_version' => PHP_VERSION,
             'os'          => PHP_OS,
-            'languages'   => implode(', ', config(App::class)->supportedLocales),
+            'languages'   => implode(', ', config('App')->supportedLocales),
         ];
 
         return view('settings/about', [

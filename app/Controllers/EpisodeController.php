@@ -16,13 +16,11 @@ use App\Libraries\NoteObject;
 use App\Libraries\PodcastEpisode;
 use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
-use App\Models\PostModel;
 use CodeIgniter\Database\BaseBuilder;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\Response;
 use CodeIgniter\HTTP\ResponseInterface;
 use Config\Embed;
-use Config\Images;
 use Config\Services;
 use Modules\Analytics\AnalyticsTrait;
 use Modules\Fediverse\Objects\OrderedCollectionObject;
@@ -351,15 +349,15 @@ class EpisodeController extends BaseController
             'author_url'    => $this->podcast->link,
             'html'          => '<iframe src="' .
                 $this->episode->embed_url .
-                '" width="100%" height="' . config(Embed::class)->height . '" frameborder="0" scrolling="no"></iframe>',
-            'width' => config(Embed::class)
+                '" width="100%" height="' . config('Embed')->height . '" frameborder="0" scrolling="no"></iframe>',
+            'width' => config('Embed')
                 ->width,
-            'height' => config(Embed::class)
+            'height' => config('Embed')
                 ->height,
             'thumbnail_url'   => $this->episode->cover->og_url,
-            'thumbnail_width' => config(Images::class)
+            'thumbnail_width' => config('Images')
                 ->podcastCoverSizes['og']['width'],
-            'thumbnail_height' => config(Images::class)
+            'thumbnail_height' => config('Images')
                 ->podcastCoverSizes['og']['height'],
         ]);
     }
@@ -376,8 +374,8 @@ class EpisodeController extends BaseController
         $oembed->addChild('author_name', $this->podcast->title);
         $oembed->addChild('author_url', $this->podcast->link);
         $oembed->addChild('thumbnail', $this->episode->cover->og_url);
-        $oembed->addChild('thumbnail_width', (string) config(Images::class)->podcastCoverSizes['og']['width']);
-        $oembed->addChild('thumbnail_height', (string) config(Images::class)->podcastCoverSizes['og']['height']);
+        $oembed->addChild('thumbnail_width', (string) config('Images')->podcastCoverSizes['og']['width']);
+        $oembed->addChild('thumbnail_height', (string) config('Images')->podcastCoverSizes['og']['height']);
         $oembed->addChild(
             'html',
             htmlspecialchars(
@@ -388,8 +386,8 @@ class EpisodeController extends BaseController
                     )->height . '" frameborder="0" scrolling="no"></iframe>',
             ),
         );
-        $oembed->addChild('width', (string) config(Embed::class)->width);
-        $oembed->addChild('height', (string) config(Embed::class)->height);
+        $oembed->addChild('width', (string) config('Embed')->width);
+        $oembed->addChild('height', (string) config('Embed')->height);
 
         // @phpstan-ignore-next-line
         return $this->response->setXML($oembed);
@@ -409,7 +407,7 @@ class EpisodeController extends BaseController
         /**
          * get comments: aggregated replies from posts referring to the episode
          */
-        $episodeComments = model(PostModel::class)
+        $episodeComments = model('PostModel')
             ->whereIn('in_reply_to_id', fn (BaseBuilder $builder): BaseBuilder => $builder->select('id')
                 ->from('fediverse_posts')
                 ->where('episode_id', $this->episode->id))

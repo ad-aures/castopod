@@ -32,7 +32,6 @@ use Modules\Analytics\Models\AnalyticsPodcastModel;
 use Modules\Analytics\Models\AnalyticsWebsiteByBrowserModel;
 use Modules\Analytics\Models\AnalyticsWebsiteByEntryPageModel;
 use Modules\Analytics\Models\AnalyticsWebsiteByRefererModel;
-use Modules\Auth\Config\AuthGroups;
 use Modules\Media\Entities\Image;
 use Modules\Media\FileManagers\FileManagerInterface;
 use Modules\Media\Models\MediaModel;
@@ -244,7 +243,7 @@ class PodcastController extends BaseController
 
         // generate podcast roles and permissions
         // before setting current user as podcast admin
-        config(AuthGroups::class)
+        config('AuthGroups')
             ->generatePodcastAuthorizations($newPodcastId);
         add_podcast_group(auth()->user(), (int) $newPodcastId, setting('AuthGroups.mostPowerfulPodcastGroup'));
 

@@ -200,7 +200,7 @@ class AuthGroups extends ShieldAuthGroups
     /**
      * Fill groups, permissions and matrix based on
      */
-    public function __construct($locale = null)
+    public function __construct()
     {
         parent::__construct();
 
@@ -228,7 +228,7 @@ class AuthGroups extends ShieldAuthGroups
          */
         $podcasts = (new PodcastModel())->findAll();
         foreach ($podcasts as $podcast) {
-            $this->generatePodcastAuthorizations($podcast->id, $locale);
+            $this->generatePodcastAuthorizations($podcast->id);
         }
     }
 

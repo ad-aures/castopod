@@ -5,15 +5,14 @@ declare(strict_types=1);
 namespace Modules\PremiumPodcasts\Config;
 
 use CodeIgniter\Router\RouteCollection;
-use Modules\Admin\Config\Admin;
-
-$routes->addPlaceholder('platformType', '\bpodcasting|\bsocial|\bfunding');
 
 /** @var RouteCollection $routes */
 
+$routes->addPlaceholder('platformType', '\bpodcasting|\bsocial|\bfunding');
+
 // Admin routes for subscriptions
 $routes->group(
-    config(Admin::class)
+    config('Admin')
         ->gateway,
     [
         'namespace' => 'Modules\Platforms\Controllers',

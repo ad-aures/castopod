@@ -8,6 +8,9 @@ use CodeIgniter\Shield\Config\AuthRoutes as ShieldAuthRoutes;
 
 class AuthRoutes extends ShieldAuthRoutes
 {
+    /**
+     * @var array<string, array<array<string>>>
+     */
     public array $routes = [
         'register' => [
             ['get', 'register', 'RegisterController::registerView', 'register'],

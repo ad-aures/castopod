@@ -16,7 +16,6 @@ use CodeIgniter\I18n\Time;
 use CodeIgniter\Shield\Authentication\Authenticators\Session;
 use CodeIgniter\Shield\Entities\User;
 use CodeIgniter\Shield\Exceptions\ValidationException;
-use CodeIgniter\Shield\Models\UserIdentityModel;
 use Modules\Admin\Controllers\BaseController;
 use Modules\Auth\Models\UserModel;
 
@@ -115,8 +114,7 @@ class UserController extends BaseController
 
         // **** SEND WELCOME LINK FOR FIRST LOGIN ****
 
-        /** @var UserIdentityModel $identityModel */
-        $identityModel = model(UserIdentityModel::class);
+        $identityModel = model('UserIdentityModel');
 
         // Delete any previous magic-link identities
         $identityModel->deleteIdentitiesByType($user, Session::ID_TYPE_MAGIC_LINK);
@@ -137,7 +135,7 @@ class UserController extends BaseController
         $email->setTo($user->email);
         $email->setSubject(lang('Auth.welcomeSubject', [
             'siteName' => setting('App.siteName'),
-        ], null, false));
+        ]));
         $email->setMessage(view(setting('Auth.views')['welcome-email'], [
             'token' => $token,
         ], [

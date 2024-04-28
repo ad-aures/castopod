@@ -41,7 +41,7 @@ class Activity extends UuidEntity
     protected $uuids = ['id', 'post_id'];
 
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $dates = ['scheduled_at', 'created_at'];
 

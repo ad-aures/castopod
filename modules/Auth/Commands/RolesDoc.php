@@ -44,7 +44,12 @@ class RolesDoc extends BaseCommand
     {
         // loop over all files in path
         $defaultFile = glob(ROOTPATH . 'docs/src/getting-started/auth.md');
-        $localizedFiles = glob(ROOTPATH . 'docs/src/**/getting-started/auth.md') ?? [];
+        $localizedFiles = glob(ROOTPATH . 'docs/src/**/getting-started/auth.md');
+
+        if (! $localizedFiles) {
+            $localizedFiles = [];
+        }
+
         $files = array_merge($defaultFile, $localizedFiles);
         CLI::write(implode(', ', $files));
 
@@ -74,7 +79,7 @@ class RolesDoc extends BaseCommand
         }
     }
 
-    protected function handleInstanceRoles($authGroups, string $fileContents, string $pattern): string
+    protected function handleInstanceRoles(AuthGroups $authGroups, string $fileContents, string $pattern): string
     {
         $instanceMatrix = $authGroups->matrix;
         return $this->renderCommentBlock(
@@ -88,7 +93,7 @@ class RolesDoc extends BaseCommand
         );
     }
 
-    protected function handleInstancePermissions($authGroups, string $fileContents, string $pattern): string
+    protected function handleInstancePermissions(AuthGroups $authGroups, string $fileContents, string $pattern): string
     {
         return $this->renderCommentBlock(
             $fileContents,
@@ -101,7 +106,7 @@ class RolesDoc extends BaseCommand
         );
     }
 
-    protected function handlePodcastRoles($authGroups, string $fileContents, string $pattern): string
+    protected function handlePodcastRoles(AuthGroups $authGroups, string $fileContents, string $pattern): string
     {
         $podcastMatrix = $authGroups->podcastMatrix;
         return $this->renderCommentBlock(
@@ -115,7 +120,7 @@ class RolesDoc extends BaseCommand
         );
     }
 
-    protected function handlePodcastPermissions($authGroups, string $fileContents, string $pattern): string
+    protected function handlePodcastPermissions(AuthGroups $authGroups, string $fileContents, string $pattern): string
     {
         return $this->renderCommentBlock(
             $fileContents,
@@ -128,6 +133,10 @@ class RolesDoc extends BaseCommand
         );
     }
 
+    /**
+     * @param array<string> $tableHeading
+     * @param array<string, string>|array<string, array<string, string>> $data
+     */
     private function renderCommentBlock(
         string $fileContents,
         string $pattern,
@@ -171,13 +180,9 @@ class RolesDoc extends BaseCommand
         return $newFileContents;
     }
 
-    private function detectLocaleFromPath($fileKey): string
+    private function detectLocaleFromPath(string $fileKey): string
     {
-        preg_match(
-            '~docs\/src\/(?:([a-z]{2}(?:-[A-Za-z]{2,})?)\/)getting-started\/auth\.md~',
-            (string) $fileKey,
-            $match
-        );
+        preg_match('~docs\/src\/(?:([a-z]{2}(?:-[A-Za-z]{2,})?)\/)getting-started\/auth\.md~', $fileKey, $match);
 
         if ($match === []) {
             return 'en';

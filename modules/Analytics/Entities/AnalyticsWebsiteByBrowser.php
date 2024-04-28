@@ -25,7 +25,7 @@ use CodeIgniter\Entity\Entity;
 class AnalyticsWebsiteByBrowser extends Entity
 {
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $dates = ['date', 'created_at', 'updated_at'];
 

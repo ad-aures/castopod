@@ -20,7 +20,6 @@ use CodeIgniter\Files\File;
 use CodeIgniter\HTTP\Files\UploadedFile;
 use CodeIgniter\I18n\Time;
 use CodeIgniter\Shield\Entities\User;
-use Config\Images;
 use Exception;
 use League\CommonMark\Environment\Environment;
 use League\CommonMark\Extension\Autolink\AutolinkExtension;
@@ -255,7 +254,7 @@ class Podcast extends Entity
         } else {
             $cover = new Image([
                 'file_key' => 'podcasts/' . $this->attributes['handle'] . '/cover.' . $file->getExtension(),
-                'sizes'    => config(Images::class)
+                'sizes'    => config('Images')
 ->podcastCoverSizes,
                 'uploaded_by' => $this->attributes['updated_by'],
                 'updated_by'  => $this->attributes['updated_by'],
@@ -298,7 +297,7 @@ class Podcast extends Entity
         } else {
             $banner = new Image([
                 'file_key' => 'podcasts/' . $this->attributes['handle'] . '/banner.' . $file->getExtension(),
-                'sizes'    => config(Images::class)
+                'sizes'    => config('Images')
 ->podcastBannerSizes,
                 'uploaded_by' => $this->attributes['updated_by'],
                 'updated_by'  => $this->attributes['updated_by'],

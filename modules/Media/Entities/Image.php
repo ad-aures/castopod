@@ -12,6 +12,7 @@ namespace Modules\Media\Entities;
 
 use CodeIgniter\Files\File;
 use Config\Services;
+use GdImage;
 
 /**
  * @property array $sizes
@@ -137,6 +138,7 @@ class Image extends BaseMedia
                 ->withFile($this->attributes['file']->getRealPath())
                 ->resize($size['width'], $size['height']);
 
+            /** @var GdImage $resizedImageResource */
             $resizedImageResource = $resizedImage->getResource();
 
             // set resolution to 72 by 72 for all sizes

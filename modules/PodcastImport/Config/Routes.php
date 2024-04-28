@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace Modules\PodcastImport\Config;
 
 use CodeIgniter\Router\RouteCollection;
-use Modules\Admin\Config\Admin;
 
 /** @var RouteCollection $routes */
 
 // Admin routes for imports
 $routes->group(
-    config(Admin::class)
+    config('Admin')
         ->gateway,
     [
         'namespace' => 'Modules\PodcastImport\Controllers',

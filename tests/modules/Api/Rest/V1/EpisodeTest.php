@@ -9,7 +9,6 @@ use CodeIgniter\Database\Seeder;
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\DatabaseTestTrait;
 use CodeIgniter\Test\FeatureTestTrait;
-use Modules\Api\Rest\V1\Config\RestApi;
 
 class EpisodeTest extends CIUnitTestCase
 {
@@ -56,7 +55,7 @@ class EpisodeTest extends CIUnitTestCase
 
         $this->episode['created_at'] = [];
         $this->episode['updated_at'] = [];
-        $this->apiUrl = config(RestApi::class)
+        $this->apiUrl = config('RestApi')
             ->gateway;
     }
 

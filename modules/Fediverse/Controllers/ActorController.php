@@ -26,7 +26,7 @@ use Modules\Fediverse\Objects\OrderedCollectionPage;
 class ActorController extends Controller
 {
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $helpers = ['fediverse'];
 
@@ -36,7 +36,7 @@ class ActorController extends Controller
 
     public function __construct()
     {
-        $this->config = config(Fediverse::class);
+        $this->config = config('Fediverse');
     }
 
     public function _remap(string $method, string ...$params): mixed
@@ -89,7 +89,6 @@ class ActorController extends Controller
             );
 
         // switch/case on activity type
-        /** @phpstan-ignore-next-line */
         switch ($payload->type) {
             case 'Create':
                 if ($payload->object->type === 'Note') {
@@ -192,7 +191,6 @@ class ActorController extends Controller
                     ->setJSON([]);
             case 'Undo':
                 // switch/case on the type of activity to undo
-                /** @phpstan-ignore-next-line */
                 switch ($payload->object->type) {
                     case 'Follow':
                         // revert side-effect by removing follow from database

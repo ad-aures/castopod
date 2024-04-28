@@ -12,7 +12,6 @@ namespace Modules\Fediverse\Controllers;
 
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\ResponseInterface;
-use Modules\Auth\Config\Auth;
 
 class NodeInfo2Controller extends Controller
 {
@@ -36,7 +35,7 @@ class NodeInfo2Controller extends Controller
                 'version'  => CP_VERSION,
             ],
             'protocols'         => ['activitypub'],
-            'openRegistrations' => config(Auth::class)
+            'openRegistrations' => config('Auth')
                 ->allowRegistration,
             'usage' => [
                 'users' => [

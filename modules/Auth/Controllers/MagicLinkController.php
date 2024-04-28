@@ -8,8 +8,7 @@ use CodeIgniter\HTTP\RedirectResponse;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Shield\Controllers\MagicLinkController as ShieldMagicLinkController;
-use Modules\Auth\Config\Auth;
-use Modules\Auth\Models\UserModel;
+use CodeIgniter\Shield\Entities\User;
 use Psr\Log\LoggerInterface;
 use ViewThemes\Theme;
 
@@ -33,7 +32,7 @@ class MagicLinkController extends ShieldMagicLinkController
     public function setPasswordView(): string | RedirectResponse
     {
         if (! session('magicLogin')) {
-            return redirect()->to(config(Auth::class)->loginRedirect());
+            return redirect()->to(config('Auth')->loginRedirect());
         }
 
         return view(setting('Auth.views')['magic-link-set-password']);
@@ -54,17 +53,16 @@ class MagicLinkController extends ShieldMagicLinkController
 
         $validData = $this->validator->getValidated();
 
-        // set new password to user
-        auth()
-            ->user()
-            ->password = $validData['new_password'];
+        $user = auth()
+            ->user();
 
-        $userModel = new UserModel();
-        if (! $userModel->update(auth()->user()->id, auth()->user())) {
-            return redirect()
-                ->back()
-                ->withInput()
-                ->with('errors', $userModel->errors());
+        if ($user instanceof User) {
+            // set new password to user
+            $user->password = $validData['new_password'];
+
+            $userModel = auth()
+                ->getProvider();
+            $userModel->save($user);
         }
 
         // remove magic login session to reinstate normal check
@@ -73,7 +71,7 @@ class MagicLinkController extends ShieldMagicLinkController
         }
 
         // Success!
-        return redirect()->to(config(Auth::class)->loginRedirect())
+        return redirect()->to(config('Auth')->loginRedirect())
             ->with('message', lang('MyAccount.messages.passwordChangeSuccess'));
     }
 }

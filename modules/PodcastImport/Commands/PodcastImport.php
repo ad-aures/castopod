@@ -19,7 +19,6 @@ use CodeIgniter\Shield\Entities\User;
 use Config\Services;
 use Exception;
 use League\HTMLToMarkdown\HtmlConverter;
-use Modules\Auth\Config\AuthGroups;
 use Modules\Auth\Models\UserModel;
 use Modules\Platforms\Models\PlatformModel;
 use Modules\PodcastImport\Entities\PodcastImportTask;
@@ -266,7 +265,7 @@ class PodcastImport extends BaseCommand
 
         // set current user as podcast admin
         // 1. create new group
-        config(AuthGroups::class)
+        config('AuthGroups')
             ->generatePodcastAuthorizations($podcast->id);
         add_podcast_group($this->user, $podcast->id, 'admin');
 
@@ -332,21 +331,17 @@ class PodcastImport extends BaseCommand
             $personGroup = $person->getAttribute('group');
             $personRole = $person->getAttribute('role');
 
-            $isTaxonomyFound = false;
+            // set default group and role if taxonomy is not found
+            $personGroupSlug = 'cast';
+            $personRoleSlug = 'host';
+
             if (array_key_exists(strtolower((string) $personGroup), ReversedTaxonomy::$taxonomy)) {
                 $personGroup = ReversedTaxonomy::$taxonomy[strtolower((string) $personGroup)];
                 $personGroupSlug = $personGroup['slug'];
 
                 if (array_key_exists(strtolower((string) $personRole), $personGroup['roles'])) {
                     $personRoleSlug = $personGroup['roles'][strtolower((string) $personRole)]['slug'];
-                    $isTaxonomyFound = true;
                 }
-            }
-
-            if (! $isTaxonomyFound) {
-                // taxonomy was not found, set default group and role
-                $personGroupSlug = 'cast';
-                $personRoleSlug = 'host';
             }
 
             $podcastPersonModel = new PersonModel();
@@ -410,7 +405,7 @@ class PodcastImport extends BaseCommand
                     'slug'       => $platformSlug,
                     'link_url'   => $platform->getAttribute($platformType['account_url_key']),
                     'account_id' => $platform->getAttribute($platformType['account_id_key']),
-                    'is_visible' => false,
+                    'is_visible' => 0,
                 ];
             }
 
@@ -556,21 +551,17 @@ class PodcastImport extends BaseCommand
             $personGroup = $person->getAttribute('group');
             $personRole = $person->getAttribute('role');
 
-            $isTaxonomyFound = false;
+            // set default group and role if taxonomy is not found
+            $personGroupSlug = 'cast';
+            $personRoleSlug = 'host';
+
             if (array_key_exists(strtolower((string) $personGroup), ReversedTaxonomy::$taxonomy)) {
                 $personGroup = ReversedTaxonomy::$taxonomy[strtolower((string) $personGroup)];
                 $personGroupSlug = $personGroup['slug'];
 
                 if (array_key_exists(strtolower((string) $personRole), $personGroup['roles'])) {
                     $personRoleSlug = $personGroup['roles'][strtolower((string) $personRole)]['slug'];
-                    $isTaxonomyFound = true;
                 }
-            }
-
-            if (! $isTaxonomyFound) {
-                // taxonomy was not found, set default group and role
-                $personGroupSlug = 'cast';
-                $personRoleSlug = 'host';
             }
 
             $episodePersonModel = new PersonModel();

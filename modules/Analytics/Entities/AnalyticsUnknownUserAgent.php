@@ -24,7 +24,7 @@ use CodeIgniter\Entity\Entity;
 class AnalyticsUnknownUserAgent extends Entity
 {
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $dates = ['created_at', 'updated_at'];
 

@@ -21,7 +21,7 @@ class ApiFilter implements FilterInterface
     public function before(RequestInterface $request, $arguments = null)
     {
         /** @var RestApi $restApiConfig */
-        $restApiConfig = config(RestApi::class);
+        $restApiConfig = config('RestApi');
 
         if (! $restApiConfig->enabled) {
             throw PageNotFoundException::forPageNotFound();

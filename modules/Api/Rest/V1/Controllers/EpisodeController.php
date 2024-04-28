@@ -8,8 +8,7 @@ use App\Entities\Episode;
 use App\Models\EpisodeModel;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\Controller;
-use CodeIgniter\HTTP\Response;
-use Modules\Api\Rest\V1\Config\RestApi;
+use CodeIgniter\HTTP\ResponseInterface;
 use Modules\Api\Rest\V1\Config\Services;
 
 class EpisodeController extends Controller
@@ -21,7 +20,7 @@ class EpisodeController extends Controller
         Services::restApiExceptions()->initialize();
     }
 
-    public function list(): Response
+    public function list(): ResponseInterface
     {
         $query = $this->request->getGet('query');
         $order = $this->request->getGet('order') ?? 'newest';
@@ -46,7 +45,7 @@ class EpisodeController extends Controller
         }
 
         $data = $builder->findAll(
-            (int) ($this->request->getGet('limit') ?? config(RestApi::class)->limit),
+            (int) ($this->request->getGet('limit') ?? config('RestApi')->limit),
             (int) $this->request->getGet('offset')
         );
 
@@ -57,7 +56,7 @@ class EpisodeController extends Controller
         return $this->respond($data);
     }
 
-    public function view(int $id): Response
+    public function view(int $id): ResponseInterface
     {
         $episode = (new EpisodeModel())->getEpisodeById($id);
 
@@ -65,6 +64,7 @@ class EpisodeController extends Controller
             return $this->failNotFound('Episode not found');
         }
 
+        // @phpstan-ignore-next-line
         return $this->respond(static::mapEpisode($episode));
     }
 

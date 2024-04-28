@@ -127,7 +127,6 @@ class CreateSuperadmin extends BaseCommand
             unset($passwordRules[$key]);
         }
 
-        /** @var Auth $config */
         $config = config('Auth');
 
         // Add `min_length`

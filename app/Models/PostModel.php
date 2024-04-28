@@ -21,7 +21,7 @@ class PostModel extends FediversePostModel
     protected $returnType = Post::class;
 
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $allowedFields = [
         'id',

@@ -13,7 +13,6 @@ namespace Modules\Admin\Controllers;
 use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
 use CodeIgniter\I18n\Time;
-use Config\App;
 use Modules\Media\Models\MediaModel;
 
 class DashboardController extends BaseController
@@ -51,7 +50,7 @@ class DashboardController extends BaseController
             ->get()
             ->getResultArray()[0];
 
-        $appStorageLimit = config(App::class)
+        $appStorageLimit = config('App')
             ->storageLimit;
         if ($appStorageLimit === null || $appStorageLimit < 0) {
             $storageLimitBytes = disk_total_space('./');
@@ -71,7 +70,7 @@ class DashboardController extends BaseController
                 ->id;
         }
 
-        $bandwidthLimit = config(App::class)
+        $bandwidthLimit = config('App')
             ->bandwidthLimit;
 
         $data = [

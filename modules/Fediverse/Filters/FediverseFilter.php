@@ -44,6 +44,7 @@ class FediverseFilter implements FilterInterface
         }
 
         if (in_array('verify-blocks', $params, true)) {
+            // @phpstan-ignore-next-line
             $payload = $request->getJSON();
 
             $actorUri = $payload->actor;

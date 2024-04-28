@@ -28,7 +28,7 @@ class PlatformModel extends Model
     protected $primaryKey = 'id';
 
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $allowedFields = ['podcast_id', 'type', 'slug', 'link_url', 'account_id', 'is_visible'];
 
@@ -127,6 +127,8 @@ class PlatformModel extends Model
     }
 
     /**
+     * @param array<array<string, string|int>> $data
+     *
      * @return int|false Number of rows inserted or FALSE on failure
      */
     public function savePlatforms(int $podcastId, string $platformType, array $data): int | false

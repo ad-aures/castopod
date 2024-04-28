@@ -6,8 +6,9 @@ namespace Modules\Auth\Config;
 
 use CodeIgniter\Shield\Authentication\Actions\ActionInterface;
 use CodeIgniter\Shield\Authentication\Actions\Email2FA;
+use CodeIgniter\Shield\Authentication\AuthenticatorInterface;
 use CodeIgniter\Shield\Config\Auth as ShieldAuth;
-use Modules\Admin\Config\Admin;
+use CodeIgniter\Shield\Entities\User;
 use Modules\Auth\Models\UserModel;
 
 class Auth extends ShieldAuth
@@ -123,7 +124,7 @@ class Auth extends ShieldAuth
     {
         parent::__construct();
 
-        $adminGateway = config(Admin::class)
+        $adminGateway = config('Admin')
             ->gateway;
 
         $this->redirects = [
@@ -155,14 +156,16 @@ class Auth extends ShieldAuth
 
         // activate user upon magic-link login as it is done via email
         if (! auth()->user()->active) {
-            /** @var Session $authenticator */
+            /** @var AuthenticatorInterface $authenticator */
             $authenticator = auth('session')
                 ->getAuthenticator();
 
             $user = $authenticator->getUser();
 
-            // Set the user active now
-            $user->activate();
+            if ($user instanceof User) {
+                // Set the user active now
+                $user->activate();
+            }
         }
 
         // prompt user to change their password

@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Modules\Fediverse\Entities;
 
+use CodeIgniter\I18n\Time;
 use Michalsn\Uuid\UuidEntity;
 use Modules\Fediverse\Models\ActorModel;
 use Modules\Fediverse\Models\PostModel;
@@ -46,7 +47,7 @@ class Notification extends UuidEntity
     protected $uuids = ['post_id', 'activity_id'];
 
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $dates = ['read_at', 'created_at', 'updated_at'];
 

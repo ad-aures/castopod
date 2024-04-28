@@ -20,7 +20,6 @@ use Modules\Fediverse\Activities\AnnounceActivity;
 use Modules\Fediverse\Activities\CreateActivity;
 use Modules\Fediverse\Activities\DeleteActivity;
 use Modules\Fediverse\Activities\UndoActivity;
-use Modules\Fediverse\Config\Fediverse;
 use Modules\Fediverse\Entities\Actor;
 use Modules\Fediverse\Entities\Post;
 use Modules\Fediverse\Objects\TombstoneObject;
@@ -43,7 +42,7 @@ class PostModel extends UuidModel
     protected $uuidFields = ['id', 'in_reply_to_id', 'reblog_of_id'];
 
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $allowedFields = [
         'id',
@@ -85,7 +84,7 @@ class PostModel extends UuidModel
     ];
 
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $beforeInsert = ['setPostId'];
 
@@ -98,7 +97,7 @@ class PostModel extends UuidModel
     {
         $hashedPostUri = md5($postUri);
         $cacheName =
-            config(Fediverse::class)
+            config('Fediverse')
                 ->cachePrefix . "post-{$hashedPostUri}";
         if (! ($found = cache($cacheName))) {
             $found = $this->where('uri', $postUri)
@@ -119,7 +118,7 @@ class PostModel extends UuidModel
     public function getActorPublishedPosts(int $actorId): array
     {
         $cacheName =
-            config(Fediverse::class)
+            config('Fediverse')
                 ->cachePrefix .
             "actor#{$actorId}_published_posts";
         if (! ($found = cache($cacheName))) {
@@ -146,7 +145,8 @@ class PostModel extends UuidModel
      */
     public function getSecondsToNextUnpublishedPosts(int $actorId): int | false
     {
-        $result = $this->select('TIMESTAMPDIFF(SECOND, UTC_TIMESTAMP(), `published_at`) as timestamp_diff')
+        $result = $this->builder()
+            ->select('TIMESTAMPDIFF(SECOND, UTC_TIMESTAMP(), `published_at`) as timestamp_diff')
             ->where([
                 'actor_id' => $actorId,
             ])
@@ -168,7 +168,7 @@ class PostModel extends UuidModel
     public function getPostReplies(string $postId, bool $withBlocked = false): array
     {
         $cacheName =
-            config(Fediverse::class)
+            config('Fediverse')
                 ->cachePrefix .
             "post#{$postId}_replies" .
             ($withBlocked ? '_withBlocked' : '');
@@ -200,7 +200,7 @@ class PostModel extends UuidModel
     public function getPostReblogs(string $postId): array
     {
         $cacheName =
-            config(Fediverse::class)
+            config('Fediverse')
                 ->cachePrefix . "post#{$postId}_reblogs";
 
         if (! ($found = cache($cacheName))) {
@@ -265,6 +265,7 @@ class PostModel extends UuidModel
         if ($post->in_reply_to_id === null) {
             // post is not a reply
             model('ActorModel', false)
+                ->builder()
                 ->where('id', $post->actor_id)
                 ->increment('posts_count');
 
@@ -277,7 +278,7 @@ class PostModel extends UuidModel
             $post->uri = url_to('post', esc($post->actor->username), $newPostId);
 
             $createActivity = new CreateActivity();
-            $noteObjectClass = config(Fediverse::class)
+            $noteObjectClass = config('Fediverse')
                 ->noteObject;
             $createActivity
                 ->set('actor', $post->actor->uri)
@@ -402,6 +403,7 @@ class PostModel extends UuidModel
 
         if ($post->in_reply_to_id === null && $post->reblog_of_id === null) {
             model('ActorModel', false)
+                ->builder()
                 ->where('id', $post->actor_id)
                 ->decrement('posts_count');
 
@@ -409,6 +411,7 @@ class PostModel extends UuidModel
         } elseif ($post->in_reply_to_id !== null) {
             // Post to remove is a reply
             model('PostModel', false)
+                ->builder()
                 ->where('id', $this->uuid->fromString($post->in_reply_to_id) ->getBytes())
                 ->decrement('replies_count');
 
@@ -439,6 +442,7 @@ class PostModel extends UuidModel
         $postId = $this->addPost($reply, $createPreviewCard, $registerActivity);
 
         model('PostModel', false)
+            ->builder()
             ->where('id', $this->uuid->fromString($reply->in_reply_to_id) ->getBytes())
             ->increment('replies_count');
 
@@ -471,10 +475,12 @@ class PostModel extends UuidModel
         $reblogId = $this->insert($reblog);
 
         model('ActorModel', false)
+            ->builder()
             ->where('id', $actor->id)
             ->increment('posts_count');
 
         model('PostModel', false)
+            ->builder()
             ->where('id', $this->uuid->fromString($post->id)->getBytes())
             ->increment('reblogs_count');
 
@@ -514,10 +520,12 @@ class PostModel extends UuidModel
         $this->db->transStart();
 
         model('ActorModel', false)
+            ->builder()
             ->where('id', $reblogPost->actor_id)
             ->decrement('posts_count');
 
         model('PostModel', false)
+            ->builder()
             ->where('id', $this->uuid->fromString($reblogPost->reblog_of_id) ->getBytes())
             ->decrement('reblogs_count');
 
@@ -592,10 +600,11 @@ class PostModel extends UuidModel
     {
         helper('fediverse');
 
-        $cacheName = config(Fediverse::class)
+        $cacheName = config('Fediverse')
             ->cachePrefix . 'blocked_actors';
         if (! ($found = cache($cacheName))) {
-            $result = $this->select('COUNT(*) as total_local_posts')
+            $result = $this->builder()
+                ->select('COUNT(*) as total_local_posts')
                 ->join('fediverse_actors', 'fediverse_actors.id = fediverse_posts.actor_id')
                 ->where('fediverse_actors.domain', get_current_domain())
                 ->where('`published_at` <= UTC_TIMESTAMP()', null, false)
@@ -629,7 +638,8 @@ class PostModel extends UuidModel
 
     public function resetReblogsCount(): int | false
     {
-        $postsReblogsCount = $this->select('fediverse_posts.id, COUNT(*) as `replies_count`')
+        $postsReblogsCount = $this->builder()
+            ->select('fediverse_posts.id, COUNT(*) as `replies_count`')
             ->join('fediverse_posts as p2', 'fediverse_posts.id = p2.reblog_of_id')
             ->groupBy('fediverse_posts.id')
             ->get()
@@ -645,7 +655,8 @@ class PostModel extends UuidModel
 
     public function resetRepliesCount(): int | false
     {
-        $postsRepliesCount = $this->select('fediverse_posts.id, COUNT(*) as `replies_count`')
+        $postsRepliesCount = $this->builder()
+            ->select('fediverse_posts.id, COUNT(*) as `replies_count`')
             ->join('fediverse_posts as p2', 'fediverse_posts.id = p2.in_reply_to_id')
             ->groupBy('fediverse_posts.id')
             ->get()
@@ -661,7 +672,7 @@ class PostModel extends UuidModel
 
     public function clearCache(Post $post): void
     {
-        $cachePrefix = config(Fediverse::class)
+        $cachePrefix = config('Fediverse')
             ->cachePrefix;
 
         $hashedPostUri = md5($post->uri);

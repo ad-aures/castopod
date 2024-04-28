@@ -10,7 +10,7 @@ use CodeIgniter\Router\RouteCollection;
 
 // Install Wizard routes
 $routes->group(
-    config(Install::class)
+    config('Install')
         ->gateway,
     [
         'namespace' => 'Modules\Install\Controllers',

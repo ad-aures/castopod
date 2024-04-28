@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-use Modules\Admin\Config\Admin;
-
 /**
  * @copyright  2020 Ad Aures
  * @license    https://www.gnu.org/licenses/agpl-3.0.en.html AGPL3
@@ -12,7 +10,7 @@ use Modules\Admin\Config\Admin;
 
 return [
     'label' => '面包屑导航',
-    config(Admin::class)
+    config('Admin')
         ->gateway => '主页',
     'podcasts' => '播客',
     'episodes' => '剧集',

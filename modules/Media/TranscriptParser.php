@@ -156,7 +156,7 @@ class TranscriptParser
                 case VTT_STATE_TEXT:
                     if (trim($line) === '') {
                         $state = VTT_STATE_TIME;
-                        //$subs[] = $sub;
+                        // @phpstan-ignore-next-line
                     } elseif ($subText !== '') {
                         $subText .= PHP_EOL . $line;
                     } else {

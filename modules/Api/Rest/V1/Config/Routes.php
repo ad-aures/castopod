@@ -9,7 +9,7 @@ use CodeIgniter\Router\RouteCollection;
 /** @var RouteCollection $routes */
 
 $routes->group(
-    config(RestApi::class)
+    config('RestApi')
         ->gateway . 'podcasts',
     [
         'namespace' => 'Modules\Api\Rest\V1\Controllers',
@@ -23,7 +23,7 @@ $routes->group(
 );
 
 $routes->group(
-    config(RestApi::class)
+    config('RestApi')
         ->gateway . 'episodes',
     [
         'namespace' => 'Modules\Api\Rest\V1\Controllers',

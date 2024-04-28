@@ -27,7 +27,7 @@ class FollowModel extends Model
     protected $table = 'fediverse_follows';
 
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $allowedFields = ['actor_id', 'target_actor_id'];
 
@@ -59,6 +59,7 @@ class FollowModel extends Model
 
             // increment followers_count for target actor
             model('ActorModel', false)
+                ->builder()
                 ->where('id', $targetActor->id)
                 ->increment('followers_count');
 
@@ -114,6 +115,7 @@ class FollowModel extends Model
 
         // decrement followers_count for target actor
         model('ActorModel', false)
+            ->builder()
             ->where('id', $targetActor->id)
             ->decrement('followers_count');
 

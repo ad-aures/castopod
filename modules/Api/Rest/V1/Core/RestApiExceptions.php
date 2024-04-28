@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Modules\Api\Rest\V1\Core;
 
+use CodeIgniter\Debug\Exceptions;
 use Throwable;
 
-class Exceptions extends \CodeIgniter\Debug\Exceptions
+class RestApiExceptions extends Exceptions
 {
     protected function render(Throwable $exception, int $statusCode): void
     {

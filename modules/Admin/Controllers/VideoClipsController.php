@@ -18,10 +18,8 @@ use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
-use Config\Colors;
 use Modules\Media\Entities\Transcript;
 use Modules\Media\Models\MediaModel;
-use Modules\MediaClipper\Config\MediaClipper;
 
 class VideoClipsController extends BaseController
 {
@@ -91,7 +89,7 @@ class VideoClipsController extends BaseController
         return view('episode/video_clips_list', $data);
     }
 
-    public function view($videoClipId): string
+    public function view(string $videoClipId): string
     {
         $videoClip = (new ClipModel())->getVideoClipById((int) $videoClipId);
 
@@ -146,8 +144,8 @@ class VideoClipsController extends BaseController
             'title'      => 'required',
             'start_time' => 'required|greater_than_equal_to[0]',
             'duration'   => 'required|greater_than[0]',
-            'format'     => 'required|in_list[' . implode(',', array_keys(config(MediaClipper::class)->formats)) . ']',
-            'theme'      => 'required|in_list[' . implode(',', array_keys(config(Colors::class)->themes)) . ']',
+            'format'     => 'required|in_list[' . implode(',', array_keys(config('MediaClipper')->formats)) . ']',
+            'theme'      => 'required|in_list[' . implode(',', array_keys(config('Colors')->themes)) . ']',
         ];
 
         if (! $this->validate($rules)) {
@@ -160,7 +158,7 @@ class VideoClipsController extends BaseController
         $validData = $this->validator->getValidated();
 
         $themeName = $validData['theme'];
-        $themeColors = config(MediaClipper::class)
+        $themeColors = config('MediaClipper')
             ->themes[$themeName];
         $theme = [
             'name'    => $themeName,

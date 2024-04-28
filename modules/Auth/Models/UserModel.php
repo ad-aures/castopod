@@ -16,7 +16,7 @@ use CodeIgniter\Shield\Models\UserModel as ShieldUserModel;
 class UserModel extends ShieldUserModel
 {
     /**
-     * @var string[]
+     * @var list<string>
      */
     protected $allowedFields = [
         'username',

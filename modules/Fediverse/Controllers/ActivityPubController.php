@@ -11,11 +11,11 @@ declare(strict_types=1);
 namespace Modules\Fediverse\Controllers;
 
 use CodeIgniter\Controller;
-use CodeIgniter\HTTP\Response;
+use CodeIgniter\HTTP\ResponseInterface;
 
 class ActivityPubController extends Controller
 {
-    public function preflight(): Response
+    public function preflight(): ResponseInterface
     {
         return $this->response->setHeader('Access-Control-Allow-Origin', '*') // for allowing any domain, insecure
             ->setHeader('Access-Control-Allow-Headers', '*') // for allowing any headers, insecure

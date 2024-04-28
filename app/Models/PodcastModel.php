@@ -14,7 +14,6 @@ use App\Entities\Actor;
 use App\Entities\Podcast;
 use CodeIgniter\HTTP\URI;
 use CodeIgniter\Model;
-use Config\Fediverse;
 use phpseclib\Crypt\RSA;
 
 class PodcastModel extends Model
@@ -349,7 +348,7 @@ class PodcastModel extends Model
 
             // delete all cache for podcast actor
             cache()
-                ->deleteMatching(config(Fediverse::class) ->cachePrefix . "actor#{$podcast->actor_id}*");
+                ->deleteMatching(config('Fediverse') ->cachePrefix . "actor#{$podcast->actor_id}*");
 
             // delete model requests cache, includes feed / query / episode lists, etc.
             cache()

@@ -24,7 +24,7 @@ abstract class AbstractObject
     }
 
     /**
-     * @return array<string, string|int|bool|array>
+     * @return array<string, mixed>
      */
     public function toArray(): array
     {
