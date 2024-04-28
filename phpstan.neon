@@ -27,6 +27,7 @@ parameters:
             - Modules\Install\Config\
             - Modules\Media\Config\
             - Modules\MediaClipper\Config\
+            - Modules\Plugins\Config\
             - Modules\PodcastImport\Config\
             - Modules\PremiumPodcasts\Config\
             - Modules\WebSub\Config\
@@ -45,6 +46,7 @@ parameters:
             - Michalsn\Uuid\Config\Services
             - Modules\Media\Config\Services
             - Modules\Platforms\Config\Services
+            - Modules\Plugins\Config\Services
             - Modules\PremiumPodcasts\Config\Services
     ignoreErrors:
         - '#^Call to an undefined method CodeIgniter\\Cache\\CacheInterface\:\:deleteMatching\(\)#'
