@@ -15,6 +15,7 @@ return ECSConfig::configure()
     ->withPaths([
         __DIR__ . '/app',
         __DIR__ . '/modules',
+        __DIR__ . '/plugins',
         __DIR__ . '/themes',
         __DIR__ . '/tests',
         __DIR__ . '/public',

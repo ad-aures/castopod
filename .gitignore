@@ -187,3 +187,7 @@ data
 castopod/
 castopod-*.zip
 castopod-*.tar.gz
+
+# Plugins
+plugins/*
+!plugins/.gitkeep
