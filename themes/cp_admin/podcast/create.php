@@ -141,7 +141,7 @@
     hint="<?= esc(lang('Podcast.form.owner_email_hint')) ?>"
     required="true" />
 
-<Forms.Toggler class="mt-2" name="is_owner_email_removed_from_feed" value="yes" checked="false" hint="<?= esc(lang('Podcast.form.is_owner_email_removed_from_feed_hint')) ?>">
+<Forms.Toggler class="mt-2" name="is_owner_email_removed_from_feed" value="yes" checked="true" hint="<?= esc(lang('Podcast.form.is_owner_email_removed_from_feed_hint')) ?>">
     <?= lang('Podcast.form.is_owner_email_removed_from_feed') ?></Forms.Toggler>
 
 <Forms.Field
