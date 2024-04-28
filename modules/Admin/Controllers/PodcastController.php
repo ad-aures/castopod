@@ -315,6 +315,9 @@ class PodcastController extends BaseController
         $this->podcast->publisher = $this->request->getPost('publisher');
         $this->podcast->owner_name = $this->request->getPost('owner_name');
         $this->podcast->owner_email = $this->request->getPost('owner_email');
+        $this->podcast->is_owner_email_removed_from_feed = $this->request->getPost(
+            'is_owner_email_removed_from_feed'
+        ) === 'yes';
         $this->podcast->type = $this->request->getPost('type');
         $this->podcast->medium = $this->request->getPost('medium');
         $this->podcast->copyright = $this->request->getPost('copyright');
