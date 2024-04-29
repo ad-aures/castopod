@@ -31,6 +31,8 @@ if (! function_exists('get_rss_feed')) {
         Subscription $subscription = null,
         string $token = null
     ): string {
+        $plugins = service('plugins');
+
         $episodes = $podcast->episodes;
 
         $itunesNamespace = 'http://www.itunes.com/dtds/podcast-1.0.dtd';
@@ -68,6 +70,8 @@ if (! function_exists('get_rss_feed')) {
         $channel->addChild('lastBuildDate', (new Time('now'))->format(DATE_RFC1123));
         $channel->addChild('generator', 'Castopod - https://castopod.org/');
         $channel->addChild('docs', 'https://cyber.harvard.edu/rss/rss.html');
+
+        $plugins->runHook('setChannelTag', [$podcast, $channel]);
 
         if ($podcast->guid === '') {
             // FIXME: guid shouldn't be empty here as it should be filled upon Podcast creation
