@@ -9,18 +9,54 @@ class Plugins
     /**
      * @var array<PluginInterface>
      */
-    protected array $installed = [];
+    protected static array $plugins = [];
 
-    public function registerPlugin(PluginInterface $plugin): void
+    public function __construct()
     {
-        $this->installed[] = $plugin;
+        $this->registerPlugins();
     }
 
     /**
      * @return array<PluginInterface>
      */
-    public function getInstalled(): array
+    public function getPlugins(): array
     {
-        return $this->installed;
+        return $this->plugins;
+    }
+
+    /**
+     * @param array<mixed> $parameters
+     */
+    public function runHook(string $name, array $parameters): void
+    {
+        dd(static::$plugins);
+        // only run active plugins' hooks
+        foreach (static::$plugins as $plugin) {
+            $plugin->{$name}(...$parameters);
+        }
+    }
+
+    protected function registerPlugins(): void
+    {
+        $locator = service('locator');
+        $pluginsFiles = $locator->search('HelloWorld/Plugin.php');
+
+        // dd($pluginsFiles);
+
+        foreach ($pluginsFiles as $file) {
+            $className = $locator->findQualifiedNameFromPath($file);
+
+            dd($file);
+            if ($className === false) {
+                continue;
+            }
+
+            $plugin = new $className();
+            if (! $plugin instanceof PluginInterface) {
+                continue;
+            }
+
+            static::$plugins[] = $plugin;
+        }
     }
 }
