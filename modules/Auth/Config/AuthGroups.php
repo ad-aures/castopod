@@ -107,6 +107,7 @@ class AuthGroups extends ShieldAuthGroups
     public array $instanceBasePermissions = [
         'admin.access',
         'admin.settings',
+        'plugins.manage',
         'users.manage',
         'persons.manage',
         'pages.manage',
@@ -122,6 +123,7 @@ class AuthGroups extends ShieldAuthGroups
     public array $instanceMatrix = [
         'superadmin' => [
             'admin.*',
+            'plugins.*',
             'podcasts.*',
             'users.manage',
             'persons.manage',

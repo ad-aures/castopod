@@ -21,6 +21,15 @@ $navigation = [
         'add-cta'     => 'podcast-create',
         'count-route' => 'podcast-list',
     ],
+    'plugins' => [
+        'icon'              => 'puzzle-fill', // @icon('puzzle-fill')
+        'items'             => ['plugins-installed'],
+        'items-permissions' => [
+            'plugins-installed' => 'plugins.manage',
+        ],
+        'count'       => service('plugins')->getInstalledCount(),
+        'count-route' => 'plugins-installed',
+    ],
     'persons' => [
         'icon'              => 'folder-user-fill', // @icon('folder-user-fill')
         'items'             => ['person-list', 'person-create'],

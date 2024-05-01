@@ -12,9 +12,19 @@ $routes->group(
         'namespace' => 'Modules\Plugins\Controllers',
     ],
     static function ($routes): void {
-        $routes->get('plugins', 'PluginsController', [
-            'as'     => 'plugins',
-            'filter' => 'permission:podcasts.import',
-        ]);
+        $routes->group('plugins', static function ($routes): void {
+            $routes->get('/', 'PluginsController::installed', [
+                'as'     => 'plugins-installed',
+                'filter' => 'permission:plugins.manage',
+            ]);
+            $routes->post('activate/(:segment)', 'PluginsController::activate/$1', [
+                'as'     => 'plugins-activate',
+                'filter' => 'permission:plugins.manage',
+            ]);
+            $routes->post('deactivate/(:segment)', 'PluginsController::deactivate/$1', [
+                'as'     => 'plugins-deactivate',
+                'filter' => 'permission:plugins.manage',
+            ]);
+        });
     }
 );

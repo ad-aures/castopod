@@ -16,6 +16,7 @@ use CodeIgniter\I18n\Time;
 use Config\Mimes;
 use Modules\Media\Entities\Chapters;
 use Modules\Media\Entities\Transcript;
+use Modules\Plugins\Plugins;
 use Modules\PremiumPodcasts\Entities\Subscription;
 
 if (! function_exists('get_rss_feed')) {
@@ -31,6 +32,7 @@ if (! function_exists('get_rss_feed')) {
         Subscription $subscription = null,
         string $token = null
     ): string {
+        /** @var Plugins $plugins */
         $plugins = service('plugins');
 
         $episodes = $podcast->episodes;
@@ -70,8 +72,6 @@ if (! function_exists('get_rss_feed')) {
         $channel->addChild('lastBuildDate', (new Time('now'))->format(DATE_RFC1123));
         $channel->addChild('generator', 'Castopod - https://castopod.org/');
         $channel->addChild('docs', 'https://cyber.harvard.edu/rss/rss.html');
-
-        $plugins->runHook('setChannelTag', [$podcast, $channel]);
 
         if ($podcast->guid === '') {
             // FIXME: guid shouldn't be empty here as it should be filled upon Podcast creation
@@ -297,6 +297,9 @@ if (! function_exists('get_rss_feed')) {
             ], $channel);
         }
 
+        // run plugins hook at the end
+        $plugins->setChannelTag($podcast, $channel);
+
         foreach ($episodes as $episode) {
             if ($episode->is_premium && ! $subscription instanceof Subscription) {
                 continue;
@@ -456,6 +459,8 @@ if (! function_exists('get_rss_feed')) {
                     'elements' => $episode->custom_rss,
                 ], $item);
             }
+
+            $plugins->setItemTag($episode, $item);
         }
 
         return $rss->asXML();
