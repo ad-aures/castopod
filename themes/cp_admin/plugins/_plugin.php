@@ -8,6 +8,10 @@
         <a href="<?= $plugin->website ?>" class="inline-flex items-center text-sm font-semibold underline hover:no-underline gap-x-1" target="_blank" rel="noopener noreferrer"><?= icon('link', [
             'class' => 'text-gray-500',
         ]) . lang('Plugins.website') ?></a>
+        <?php if ($plugin->options['settings'] !== []): ?>
+            <?php // @icon('equalizer-fill')?>
+            <IconButton uri="<?= route_to('plugins-settings', $plugin->getKey()) ?>" glyph="equalizer-fill">Settings</IconButton>
+        <?php endif; ?>
         <?php if($plugin->isActive()): ?>
             <form class="flex justify-end" method="POST" action="<?= route_to('plugins-deactivate', $plugin->getKey()) ?>">
                 <?= csrf_field() ?>
