@@ -10,7 +10,9 @@ use App\Libraries\SimpleRSSElement;
 
 interface PluginInterface
 {
-    public function setChannelTag(Podcast $podcast, SimpleRSSElement $channel): void;
+    public function channelTag(Podcast $podcast, SimpleRSSElement $channel): void;
 
-    public function setItemTag(Episode $episode, SimpleRSSElement $item): void;
+    public function itemTag(Episode $episode, SimpleRSSElement $item): void;
+
+    public function siteHead(): void;
 }

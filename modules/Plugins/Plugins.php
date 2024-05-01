@@ -9,8 +9,9 @@ use App\Entities\Podcast;
 use App\Libraries\SimpleRSSElement;
 
 /**
- * @method void setChannelTag(Podcast $podcast, SimpleRSSElement $channel)
- * @method void setItemTag(Episode $episode, SimpleRSSElement $item)
+ * @method void channelTag(Podcast $podcast, SimpleRSSElement $channel)
+ * @method void itemTag(Episode $episode, SimpleRSSElement $item)
+ * @method string siteHead()
  */
 class Plugins
 {
@@ -19,7 +20,7 @@ class Plugins
     /**
      * @var list<string>
      */
-    protected const HOOKS = ['setChannelTag', 'setItemTag'];
+    protected const HOOKS = ['channelTag', 'itemTag', 'siteHead'];
 
     /**
      * @var array<BasePlugin>
