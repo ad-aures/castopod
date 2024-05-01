@@ -20,7 +20,9 @@ use RuntimeException;
  * @property string $license
  * @property string $compatible
  * @property string[] $keywords
+ * @property string[] $hooks
  * @property string $iconSrc
+ * @property array{settings:array{key:string,name:string,description:string}[],podcast:array{key:string,name:string,description:string}[],episode:array{key:string,name:string,description:string}[]} $options
  */
 abstract class BasePlugin implements PluginInterface
 {
@@ -74,6 +76,11 @@ abstract class BasePlugin implements PluginInterface
     final public function isActive(): bool
     {
         return $this->active;
+    }
+
+    final public function isHookDeclared(string $name): bool
+    {
+        return in_array($name, $this->hooks, true);
     }
 
     final public function getKey(): string
@@ -138,6 +145,31 @@ abstract class BasePlugin implements PluginInterface
             throw new RuntimeException('manifest.json is not a valid JSON', 1);
         }
 
+        $validation = service('validation');
+
+        if (array_key_exists('options', $manifest)) {
+            $optionRules = [
+                'key'         => 'required|alpha_numeric',
+                'name'        => 'required|max_length[32]',
+                'description' => 'permit_empty|max_length[128]',
+            ];
+            $defaultOption = [
+                'key'         => '',
+                'name'        => '',
+                'description' => '',
+            ];
+            $validation->setRules($optionRules);
+            foreach ($manifest['options'] as $key => $options) {
+                foreach ($options as $key2 => $option) {
+                    $manifest['options'][$key][$key2] = array_merge($defaultOption, $option);
+
+                    if (! $validation->run($manifest['options'][$key][$key2])) {
+                        dd($this->key, $manifest['options'][$key][$key2], $validation->getErrors());
+                    }
+                }
+            }
+        }
+
         $rules = [
             'name'         => 'required|max_length[32]',
             'version'      => 'required|regex_match[/^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/]',
@@ -145,22 +177,39 @@ abstract class BasePlugin implements PluginInterface
             'description'  => 'max_length[128]',
             'releaseDate'  => 'valid_date[Y-m-d]',
             'license'      => 'in_list[MIT]',
-            'author.name'  => 'max_length[32]',
-            'author.email' => 'valid_email',
-            'author.url'   => 'valid_url_strict',
+            'author.name'  => 'permit_empty|max_length[32]',
+            'author.email' => 'permit_empty|valid_email',
+            'author.url'   => 'permit_empty|valid_url_strict',
             'website'      => 'valid_url_strict',
-            'keywords.*'   => 'in_list[seo,podcasting20,analytics]',
+            'keywords.*'   => 'permit_empty|in_list[seo,podcasting20,analytics]',
+            'hooks.*'      => 'permit_empty|in_list[' . implode(',', Plugins::HOOKS) . ']',
+            'options'      => 'permit_empty',
         ];
-
-        $validation = service('validation');
 
         $validation->setRules($rules);
 
         if (! $validation->run($manifest)) {
-            dd($validation->getErrors());
+            dd($this->key, $manifest, $validation->getErrors());
         }
 
-        return $validation->getValidated();
+        $defaultAttributes = [
+            'description' => '',
+            'releaseDate' => '',
+            'license'     => '',
+            'author'      => [],
+            'website'     => '',
+            'hooks'       => [],
+            'keywords'    => [],
+            'options'     => [
+                'settings' => [],
+                'podcast'  => [],
+                'episode'  => [],
+            ],
+        ];
+
+        $validated = $validation->getValidated();
+
+        return array_merge_recursive_distinct($defaultAttributes, $validated);
     }
 
     private function loadIcon(string $path): string

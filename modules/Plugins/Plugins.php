@@ -15,12 +15,12 @@ use App\Libraries\SimpleRSSElement;
  */
 class Plugins
 {
-    protected const API_VERSION = '1.0';
+    public const API_VERSION = '1.0';
 
     /**
      * @var list<string>
      */
-    protected const HOOKS = ['channelTag', 'itemTag', 'siteHead'];
+    public const HOOKS = ['channelTag', 'itemTag', 'siteHead'];
 
     /**
      * @var array<BasePlugin>
@@ -57,6 +57,17 @@ class Plugins
         return array_slice(static::$plugins, (($page - 1) * $perPage), $perPage);
     }
 
+    public function getPlugin(string $key): ?BasePlugin
+    {
+        foreach (static::$plugins as $plugin) {
+            if ($plugin->getKey() === $key) {
+                return $plugin;
+            }
+        }
+
+        return null;
+    }
+
     /**
      * @param value-of<static::HOOKS> $name
      * @param array<mixed> $arguments
@@ -65,9 +76,15 @@ class Plugins
     {
         foreach (static::$plugins as $plugin) {
             // only run hook on active plugins
-            if ($plugin->isActive()) {
-                $plugin->{$name}(...$arguments);
+            if (! $plugin->isActive()) {
+                continue;
             }
+
+            if (! $plugin->isHookDeclared($name)) {
+                continue;
+            }
+
+            $plugin->{$name}(...$arguments);
         }
     }
 
@@ -81,6 +98,11 @@ class Plugins
         set_plugin_option($pluginKey, 'active', false);
     }
 
+    public function setOption(string $pluginKey, string $name, string $value): void
+    {
+        set_plugin_option($pluginKey, $name, $value);
+    }
+
     public function getInstalledCount(): int
     {
         return static::$installedCount;
@@ -89,7 +111,8 @@ class Plugins
     protected function registerPlugins(): void
     {
         // search for plugins in plugins folder
-        $pluginsFiles = glob(ROOTPATH . '/plugins/**/Plugin.php', GLOB_NOSORT);
+        // TODO: only get directories? Should be organized as author/repo?
+        $pluginsFiles = glob(ROOTPATH . '/plugins/**/Plugin.php');
 
         if (! $pluginsFiles) {
             return;

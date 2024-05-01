@@ -17,6 +17,14 @@ $routes->group(
                 'as'     => 'plugins-installed',
                 'filter' => 'permission:plugins.manage',
             ]);
+            $routes->get('(:segment)', 'PluginsController::settings/$1', [
+                'as'     => 'plugins-settings',
+                'filter' => 'permission:plugins.manage',
+            ]);
+            $routes->post('(:segment)', 'PluginsController::settingsAction/$1', [
+                'as'     => 'plugins-settings-action',
+                'filter' => 'permission:plugins.manage',
+            ]);
             $routes->post('activate/(:segment)', 'PluginsController::activate/$1', [
                 'as'     => 'plugins-activate',
                 'filter' => 'permission:plugins.manage',
