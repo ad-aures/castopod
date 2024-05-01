@@ -298,7 +298,7 @@ if (! function_exists('get_rss_feed')) {
         }
 
         // run plugins hook at the end
-        $plugins->setChannelTag($podcast, $channel);
+        $plugins->channelTag($podcast, $channel);
 
         foreach ($episodes as $episode) {
             if ($episode->is_premium && ! $subscription instanceof Subscription) {
@@ -460,7 +460,7 @@ if (! function_exists('get_rss_feed')) {
                 ], $item);
             }
 
-            $plugins->setItemTag($episode, $item);
+            $plugins->itemTag($episode, $item);
         }
 
         return $rss->asXML();
