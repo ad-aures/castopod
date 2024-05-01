@@ -55,7 +55,6 @@ class Autoload extends AutoloadConfig
         'Modules\PremiumPodcasts' => ROOTPATH . 'modules/PremiumPodcasts/',
         'Modules\Update'          => ROOTPATH . 'modules/Update/',
         'Modules\WebSub'          => ROOTPATH . 'modules/WebSub/',
-        'Plugins'                 => ROOTPATH . 'plugins',
         'Themes'                  => ROOTPATH . 'themes',
         'ViewComponents'          => APPPATH . 'Libraries/ViewComponents/',
         'ViewThemes'              => APPPATH . 'Libraries/ViewThemes/',
@@ -111,4 +110,20 @@ class Autoload extends AutoloadConfig
      * @var list<string>
      */
     public $helpers = ['auth', 'setting', 'icons'];
+
+    public function __construct()
+    {
+        // load plugins namespaces
+        $pluginsPaths = glob(ROOTPATH . '/plugins/*', GLOB_ONLYDIR);
+
+        if (! $pluginsPaths) {
+            $pluginsPaths = [];
+        }
+
+        foreach ($pluginsPaths as $pluginPath) {
+            $this->psr4[sprintf('Plugins\%s', basename($pluginPath))] = $pluginPath;
+        }
+
+        parent::__construct();
+    }
 }

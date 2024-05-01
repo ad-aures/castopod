@@ -20,6 +20,8 @@ return [
     'podcast-create' => 'New podcast',
     'all-podcast-imports' => 'All Podcast imports',
     'podcast-imports-add' => 'Import a podcast',
+    'plugins' => 'Plugins',
+    'plugins-installed' => 'Installed',
     'persons' => 'Persons',
     'person-list' => 'All persons',
     'person-create' => 'New person',

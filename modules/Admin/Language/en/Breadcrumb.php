@@ -23,6 +23,7 @@ return [
     'add' => 'add',
     'new' => 'new',
     'edit' => 'edit',
+    'plugins' => 'plugins',
     'persons' => 'persons',
     'publish' => 'publish',
     'publish-edit' => 'edit publication',
