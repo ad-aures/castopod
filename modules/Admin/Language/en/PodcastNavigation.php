@@ -20,6 +20,7 @@ return [
     'episodes' => 'Episodes',
     'episode-list' => 'All episodes',
     'episode-create' => 'New episode',
+    'plugins' => 'Plugins',
     'analytics' => 'Analytics',
     'podcast-analytics' => 'Audience overview',
     'podcast-analytics-webpages' => 'Web pages visits',

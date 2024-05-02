@@ -20,4 +20,5 @@ return [
     'video-clips-create' => 'New video clip',
     'soundbites-list' => 'Soundbites',
     'soundbites-create' => 'New soundbite',
+    'plugins' => 'Plugins',
 ];

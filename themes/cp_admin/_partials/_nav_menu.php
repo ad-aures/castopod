@@ -1,9 +1,14 @@
 <nav class="flex flex-col flex-1 py-4 overflow-y-auto">
     <?php foreach ($navigation as $section => $data):
+        if ($data['items'] === []) {
+            continue;
+        }
+
         $isSectionActive = false;
         $activeItem = '';
         foreach ($data['items'] as $item) {
-            if (url_is(route_to($item, $podcastId ?? null, $episodeId ?? null))) {
+            $href = str_starts_with($item, '/') ? $item : route_to($item, $podcastId ?? null, $episodeId ?? null);
+            if (url_is($href)) {
                 $activeItem = $item;
                 $isSectionActive = true;
             }
@@ -27,8 +32,10 @@
             <?php endif; ?>
         </summary>
         <ul class="flex flex-col pb-4">
-            <?php foreach ($data['items'] as $item):
+            <?php foreach ($data['items'] as $key => $item):
                 $isActive = $item === $activeItem;
+                $label = array_key_exists('items-labels', $data) ? $data['items-labels'][$key] : lang($langKey . '.' . $item);
+                $href = str_starts_with($item, '/') ? $item : route_to($item, $podcastId ?? null, $episodeId ?? null);
 
                 $isAllowed = true;
                 if (array_key_exists('items-permissions', $data) && array_key_exists($item, $data['items-permissions'])) {
@@ -43,13 +50,9 @@
                 <?php if ($isAllowed): ?> 
                     <a class="relative w-full py-3 pl-14 pr-2 text-sm hover:opacity-100 before:content-chevronRightIcon before:absolute before:-ml-5 before:opacity-0 before:w-5 before:h-5 hover:bg-navigation-active focus:ring-inset focus:ring-accent<?= $isActive
                         ? ' before:opacity-100 font-semibold inline-flex items-center'
-                        : ' hover:before:opacity-60 focus:before:opacity-60' ?>" href="<?= route_to($item, $podcastId ?? null, $episodeId ?? null) ?>"><?= lang(
-                            $langKey . '.' . $item,
-                        ) ?></a>
+                        : ' hover:before:opacity-60 focus:before:opacity-60' ?>" href="<?= $href ?>"><?= $label ?></a>
                 <?php else: ?>
-                    <span data-tooltip="right" title="<?= lang('Navigation.not-authorized') ?>" class="relative w-full py-3 pr-2 text-sm cursor-not-allowed before:inset-y-0 before:my-auto pl-14 hover:opacity-100 before:absolute before:content-prohibitedIcon before:-ml-5 before:opacity-60 before:w-4 before:h-4 hover:bg-navigation-active focus:ring-inset focus:ring-accent"><?= lang(
-                        $langKey . '.' . $item,
-                    ) ?></span>
+                    <span data-tooltip="right" title="<?= lang('Navigation.not-authorized') ?>" class="relative w-full py-3 pr-2 text-sm cursor-not-allowed before:inset-y-0 before:my-auto pl-14 hover:opacity-100 before:absolute before:content-prohibitedIcon before:-ml-5 before:opacity-60 before:w-4 before:h-4 hover:bg-navigation-active focus:ring-inset focus:ring-accent"><?= $label ?></span>
                 <?php endif; ?>
             </li>
             <?php endforeach; ?>

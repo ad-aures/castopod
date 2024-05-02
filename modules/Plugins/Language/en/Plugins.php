@@ -9,14 +9,18 @@ declare(strict_types=1);
  */
 
 return [
-    "installed" => "Installed plugins ({count})",
-    "website" => "Website",
-    "activate" => "Activate",
-    "deactivate" => "Deactivate",
-    "keywords" => [
+    'installed' => 'Installed plugins ({count})',
+    'website' => 'Website',
+    'settings' => '{pluginName} settings',
+    'activate' => 'Activate',
+    'deactivate' => 'Deactivate',
+    'keywords' => [
         'podcasting20' => 'Podcasting 2.0',
         'seo' => 'SEO',
         'analytics' => 'Analytics',
         'accessibility' => 'Accessibility',
+    ],
+    'messages' => [
+        'saveSettingsSuccess' => '{pluginName} settings were successfully saved!',
     ],
 ];

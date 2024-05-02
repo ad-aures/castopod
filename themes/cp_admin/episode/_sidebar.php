@@ -24,7 +24,22 @@ $episodeNavigation = [
         'count-route' => 'video-clips-list',
         'add-cta'     => 'video-clips-create',
     ],
-]; ?>
+    'plugins' => [
+        'icon'              => 'puzzle-fill', // @icon('puzzle-fill')
+        'items'             => [],
+        'items-labels'      => [],
+        'items-permissions' => [],
+    ],
+];
+
+foreach (plugins()->getPluginsWithEpisodeSettings() as $plugin) {
+    $route = route_to('plugins-episode-settings', $podcast->id, $episode->id, $plugin->getKey());
+    $episodeNavigation['plugins']['items'][] = $route;
+    $episodeNavigation['plugins']['items-labels'][] = $plugin->getName();
+    $episodeNavigation['plugins']['items-permissions'][$route] = 'episodes.edit';
+}
+
+?>
 
 <a href="<?= route_to('podcast-view', $podcast->id) ?>" class="flex items-center px-4 py-2 focus:ring-inset focus:ring-accent">
     <?= icon('arrow-left-line', [

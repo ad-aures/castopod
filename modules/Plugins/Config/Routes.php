@@ -13,25 +13,45 @@ $routes->group(
     ],
     static function ($routes): void {
         $routes->group('plugins', static function ($routes): void {
-            $routes->get('/', 'PluginsController::installed', [
+            $routes->get('/', 'PluginController::installed', [
                 'as'     => 'plugins-installed',
                 'filter' => 'permission:plugins.manage',
             ]);
-            $routes->get('(:segment)', 'PluginsController::settings/$1', [
-                'as'     => 'plugins-settings',
+            $routes->get('(:segment)', 'PluginController::generalSettings/$1', [
+                'as'     => 'plugins-general-settings',
                 'filter' => 'permission:plugins.manage',
             ]);
-            $routes->post('(:segment)', 'PluginsController::settingsAction/$1', [
-                'as'     => 'plugins-settings-action',
+            $routes->post('(:segment)', 'PluginController::generalSettingsAction/$1', [
+                'as'     => 'plugins-general-settings-action',
                 'filter' => 'permission:plugins.manage',
             ]);
-            $routes->post('activate/(:segment)', 'PluginsController::activate/$1', [
+            $routes->post('activate/(:segment)', 'PluginController::activate/$1', [
                 'as'     => 'plugins-activate',
                 'filter' => 'permission:plugins.manage',
             ]);
-            $routes->post('deactivate/(:segment)', 'PluginsController::deactivate/$1', [
+            $routes->post('deactivate/(:segment)', 'PluginController::deactivate/$1', [
                 'as'     => 'plugins-deactivate',
                 'filter' => 'permission:plugins.manage',
+            ]);
+        });
+        $routes->group('podcasts/(:num)/plugins', static function ($routes): void {
+            $routes->get('(:segment)', 'PluginController::podcastSettings/$1/$2', [
+                'as'     => 'plugins-podcast-settings',
+                'filter' => 'permission:podcast#.edit',
+            ]);
+            $routes->post('(:segment)', 'PluginController::podcastSettingsAction/$1/$2', [
+                'as'     => 'plugins-podcast-settings-action',
+                'filter' => 'permission:podcast#.edit',
+            ]);
+        });
+        $routes->group('podcasts/(:num)/episodes/(:num)/plugins', static function ($routes): void {
+            $routes->get('(:segment)', 'PluginController::episodeSettings/$1/$2/$3', [
+                'as'     => 'plugins-episode-settings',
+                'filter' => 'permission:podcast#.edit',
+            ]);
+            $routes->post('(:segment)', 'PluginController::episodeSettingsAction/$1/$2/$3', [
+                'as'     => 'plugins-episode-settings-action',
+                'filter' => 'permission:podcast#.edit',
             ]);
         });
     }
