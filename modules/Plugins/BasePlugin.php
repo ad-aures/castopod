@@ -22,7 +22,7 @@ use RuntimeException;
  * @property string[] $keywords
  * @property string[] $hooks
  * @property string $iconSrc
- * @property array{settings:array{key:string,name:string,description:string}[],podcast:array{key:string,name:string,description:string}[],episode:array{key:string,name:string,description:string}[]} $options
+ * @property array{general:array{key:string,name:string,description:string}[],podcast:array{key:string,name:string,description:string}[],episode:array{key:string,name:string,description:string}[]} $settings
  */
 abstract class BasePlugin implements PluginInterface
 {
@@ -147,24 +147,24 @@ abstract class BasePlugin implements PluginInterface
 
         $validation = service('validation');
 
-        if (array_key_exists('options', $manifest)) {
-            $optionRules = [
+        if (array_key_exists('settings', $manifest)) {
+            $fieldRules = [
                 'key'         => 'required|alpha_numeric',
                 'name'        => 'required|max_length[32]',
                 'description' => 'permit_empty|max_length[128]',
             ];
-            $defaultOption = [
+            $defaultField = [
                 'key'         => '',
                 'name'        => '',
                 'description' => '',
             ];
-            $validation->setRules($optionRules);
-            foreach ($manifest['options'] as $key => $options) {
-                foreach ($options as $key2 => $option) {
-                    $manifest['options'][$key][$key2] = array_merge($defaultOption, $option);
+            $validation->setRules($fieldRules);
+            foreach ($manifest['settings'] as $key => $settings) {
+                foreach ($settings as $key2 => $fields) {
+                    $manifest['settings'][$key][$key2] = array_merge($defaultField, $fields);
 
-                    if (! $validation->run($manifest['options'][$key][$key2])) {
-                        dd($this->key, $manifest['options'][$key][$key2], $validation->getErrors());
+                    if (! $validation->run($manifest['settings'][$key][$key2])) {
+                        dd($this->key, $manifest['settings'][$key][$key2], $validation->getErrors());
                     }
                 }
             }
@@ -183,7 +183,7 @@ abstract class BasePlugin implements PluginInterface
             'website'      => 'valid_url_strict',
             'keywords.*'   => 'permit_empty|in_list[seo,podcasting20,analytics]',
             'hooks.*'      => 'permit_empty|in_list[' . implode(',', Plugins::HOOKS) . ']',
-            'options'      => 'permit_empty',
+            'settings'     => 'permit_empty',
         ];
 
         $validation->setRules($rules);
@@ -200,10 +200,10 @@ abstract class BasePlugin implements PluginInterface
             'website'     => '',
             'hooks'       => [],
             'keywords'    => [],
-            'options'     => [
-                'settings' => [],
-                'podcast'  => [],
-                'episode'  => [],
+            'settings'    => [
+                'general' => [],
+                'podcast' => [],
+                'episode' => [],
             ],
         ];
 

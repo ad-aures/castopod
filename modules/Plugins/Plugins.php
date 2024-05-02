@@ -57,6 +57,48 @@ class Plugins
         return array_slice(static::$plugins, (($page - 1) * $perPage), $perPage);
     }
 
+    /**
+     * @return array<BasePlugin>
+     */
+    public function getPluginsWithPodcastSettings(): array
+    {
+        $pluginsWithPodcastSettings = [];
+        foreach (static::$plugins as $plugin) {
+            if (! $plugin->isActive()) {
+                continue;
+            }
+
+            if ($plugin->settings['podcast'] === []) {
+                continue;
+            }
+
+            $pluginsWithPodcastSettings[] = $plugin;
+        }
+
+        return $pluginsWithPodcastSettings;
+    }
+
+    /**
+     * @return array<BasePlugin>
+     */
+    public function getPluginsWithEpisodeSettings(): array
+    {
+        $pluginsWithEpisodeSettings = [];
+        foreach (static::$plugins as $plugin) {
+            if (! $plugin->isActive()) {
+                continue;
+            }
+
+            if ($plugin->settings['episode'] === []) {
+                continue;
+            }
+
+            $pluginsWithEpisodeSettings[] = $plugin;
+        }
+
+        return $pluginsWithEpisodeSettings;
+    }
+
     public function getPlugin(string $key): ?BasePlugin
     {
         foreach (static::$plugins as $plugin) {
@@ -98,9 +140,12 @@ class Plugins
         set_plugin_option($pluginKey, 'active', false);
     }
 
-    public function setOption(string $pluginKey, string $name, string $value): void
+    /**
+     * @param ?array{'podcast'|'episode',int} $additionalContext
+     */
+    public function setOption(string $pluginKey, string $name, mixed $value, array $additionalContext = null): void
     {
-        set_plugin_option($pluginKey, $name, $value);
+        set_plugin_option($pluginKey, $name, $value, $additionalContext);
     }
 
     public function getInstalledCount(): int

@@ -23,6 +23,12 @@ $podcastNavigation = [
         'count'       => $podcast->getEpisodesCount(),
         'count-route' => 'episode-list',
     ],
+    'plugins' => [
+        'icon'              => 'puzzle-fill', // @icon('puzzle-fill')
+        'items'             => [],
+        'items-labels'      => [],
+        'items-permissions' => [],
+    ],
     'analytics' => [
         'icon'  => 'line-chart-fill', // @icon('line-chart-fill')
         'items' => [
@@ -82,6 +88,13 @@ $podcastNavigation = [
         'count-route' => 'contributor-list',
     ],
 ];
+
+foreach (plugins()->getPluginsWithPodcastSettings() as $plugin) {
+    $route = route_to('plugins-podcast-settings', $podcast->id, $plugin->getKey());
+    $podcastNavigation['plugins']['items'][] = $route;
+    $podcastNavigation['plugins']['items-labels'][] = $plugin->getName();
+    $podcastNavigation['plugins']['items-permissions'][$route] = 'edit';
+}
 
 ?>
 
