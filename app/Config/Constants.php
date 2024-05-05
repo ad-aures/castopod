@@ -38,6 +38,9 @@ defined('APP_NAMESPACE') || define('APP_NAMESPACE', 'App');
 defined('PLUGINS_PATH') ||
     define('PLUGINS_PATH', ROOTPATH . 'plugins' . DIRECTORY_SEPARATOR);
 
+defined('PLUGINS_KEY_PATTERN') ||
+    define('PLUGINS_KEY_PATTERN', '[a-z0-9]([_.-]?[a-z0-9]+)*\/[a-z0-9]([_.-]?[a-z0-9]+)*');
+
 /*
  | --------------------------------------------------------------------------
  | Composer Path

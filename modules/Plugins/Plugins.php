@@ -28,6 +28,11 @@ class Plugins
      */
     protected static array $plugins = [];
 
+    /**
+     * @var array<string,BasePlugin[]>
+     */
+    protected static array $pluginsByVendor = [];
+
     protected static int $installedCount = 0;
 
     public function __construct()
@@ -100,15 +105,33 @@ class Plugins
         return $pluginsWithEpisodeSettings;
     }
 
-    public function getPlugin(string $key): ?BasePlugin
+    /**
+     * @return array<BasePlugin>
+     */
+    public function getVendorPlugins(string $vendor): array
     {
-        foreach (static::$plugins as $plugin) {
-            if ($plugin->getKey() === $key) {
+        return static::$pluginsByVendor[$vendor] ?? [];
+    }
+
+    public function getPlugin(string $vendor, string $package): ?BasePlugin
+    {
+        foreach ($this->getVendorPlugins($vendor) as $plugin) {
+            if ($plugin->getKey() === $vendor . '/' . $package) {
                 return $plugin;
             }
         }
 
         return null;
+    }
+
+    public function getPluginByKey(string $key): ?BasePlugin
+    {
+        if (! str_contains('/', $key)) {
+            return null;
+        }
+
+        $keyArray = explode('/', $key);
+        return $this->getPlugin($keyArray[0], $keyArray[1]);
     }
 
     /**
@@ -131,22 +154,22 @@ class Plugins
         }
     }
 
-    public function activate(string $pluginKey): void
+    public function activate(BasePlugin $plugin): void
     {
-        set_plugin_option($pluginKey, 'active', true);
+        set_plugin_option($plugin->getKey(), 'active', true);
     }
 
-    public function deactivate(string $pluginKey): void
+    public function deactivate(BasePlugin $plugin): void
     {
-        set_plugin_option($pluginKey, 'active', false);
+        set_plugin_option($plugin->getKey(), 'active', false);
     }
 
     /**
      * @param ?array{'podcast'|'episode',int} $additionalContext
      */
-    public function setOption(string $pluginKey, string $name, mixed $value, array $additionalContext = null): void
+    public function setOption(BasePlugin $plugin, string $name, mixed $value, array $additionalContext = null): void
     {
-        set_plugin_option($pluginKey, $name, $value, $additionalContext);
+        set_plugin_option($plugin->getKey(), $name, $value, $additionalContext);
     }
 
     public function getInstalledCount(): int
@@ -154,7 +177,7 @@ class Plugins
         return static::$installedCount;
     }
 
-    public function uninstall(string $pluginKey): bool
+    public function uninstall(BasePlugin $plugin): bool
     {
         // remove all settings data
         $db = Database::connect();
@@ -162,7 +185,7 @@ class Plugins
 
         $db->transStart();
         $builder->where('class', self::class);
-        $builder->like('context', sprintf('plugin:%s', $pluginKey . '%'));
+        $builder->like('context', sprintf('plugin:%s', $plugin->getKey() . '%'));
 
         if (! $builder->delete()) {
             $db->transRollback();
@@ -170,7 +193,7 @@ class Plugins
         }
 
         // delete plugin folder from PLUGINS_PATH
-        $pluginFolder = PLUGINS_PATH . $pluginKey;
+        $pluginFolder = PLUGINS_PATH . $plugin->getKey();
         $rmdirResult = $this->rrmdir($pluginFolder);
 
         $transResult = $db->transCommit();
@@ -181,27 +204,36 @@ class Plugins
     protected function registerPlugins(): void
     {
         // search for plugins in plugins folder
-        // TODO: only get directories? Should be organized as author/repo?
-        $pluginsFiles = glob(PLUGINS_PATH . '**/Plugin.php');
+        $pluginsDirectories = glob(PLUGINS_PATH . '*/*', GLOB_ONLYDIR);
 
-        if (! $pluginsFiles) {
+        if ($pluginsDirectories === false || $pluginsDirectories === []) {
             return;
         }
 
         $locator = service('locator');
-        foreach ($pluginsFiles as $file) {
-            $className = $locator->findQualifiedNameFromPath($file);
+        foreach ($pluginsDirectories as $pluginDirectory) {
+            $vendor = basename(dirname($pluginDirectory));
+            $package = basename($pluginDirectory);
+
+            if (preg_match('~' . PLUGINS_KEY_PATTERN . '~', $vendor . '/' . $package) === false) {
+                continue;
+            }
+
+            $pluginFile = $pluginDirectory . DIRECTORY_SEPARATOR . 'Plugin.php';
+
+            $className = $locator->findQualifiedNameFromPath($pluginFile);
 
             if ($className === false) {
                 continue;
             }
 
-            $plugin = new $className(basename(dirname($file)), $file);
+            $plugin = new $className($vendor, $package, $pluginDirectory);
             if (! $plugin instanceof BasePlugin) {
                 continue;
             }
 
             static::$plugins[] = $plugin;
+            static::$pluginsByVendor[$vendor][] = $plugin;
             ++static::$installedCount;
         }
     }

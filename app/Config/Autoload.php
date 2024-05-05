@@ -114,14 +114,28 @@ class Autoload extends AutoloadConfig
     public function __construct()
     {
         // load plugins namespaces
-        $pluginsPaths = glob(PLUGINS_PATH . '*', GLOB_ONLYDIR | GLOB_NOSORT);
+        $pluginsPaths = glob(PLUGINS_PATH . '*/*', GLOB_ONLYDIR | GLOB_NOSORT);
 
         if (! $pluginsPaths) {
             $pluginsPaths = [];
         }
 
         foreach ($pluginsPaths as $pluginPath) {
-            $this->psr4[sprintf('Plugins\%s', basename($pluginPath))] = $pluginPath;
+            $vendor = basename(dirname($pluginPath));
+            $package = basename($pluginPath);
+
+            // validate plugin pattern
+            if (preg_match('~' . PLUGINS_KEY_PATTERN . '~', $vendor . '/' . $package) === false) {
+                continue;
+            }
+
+            $pluginNamespace = 'Plugins\\' . str_replace(
+                ' ',
+                '',
+                ucwords(str_replace(['-', '_', '.'], ' ', $vendor . '\\' . $package))
+            );
+
+            $this->psr4[$pluginNamespace] = $pluginPath;
         }
 
         parent::__construct();

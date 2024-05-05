@@ -6,6 +6,7 @@ namespace Modules\Plugins\Commands;
 
 use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
+use Modules\Plugins\Plugins;
 
 class UninstallPlugin extends BaseCommand
 {
@@ -51,18 +52,20 @@ class UninstallPlugin extends BaseCommand
      */
     public function run(array $pluginKeys): int
     {
-        $validation = service('validation');
+        /** @var Plugins $plugins */
+        $plugins = service('plugins');
 
         /** @var list<string> $errors */
         $errors = [];
         foreach ($pluginKeys as $pluginKey) {
-            // TODO: change validation of pluginKey
-            if (! $validation->check($pluginKey, 'required')) {
-                $errors = [...$errors, ...$validation->getErrors()];
+            $plugin = $plugins->getPluginByKey($pluginKey);
+
+            if ($plugin === null) {
+                $errors[] = sprintf('Plugin %s was not found.', $pluginKey);
                 continue;
             }
 
-            if (! service('plugins')->uninstall($pluginKey)) {
+            if (! $plugins->uninstall($plugin)) {
                 $errors[] = sprintf('Something happened when removing %s', $pluginKey);
             }
         }
