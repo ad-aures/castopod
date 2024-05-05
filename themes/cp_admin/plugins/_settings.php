@@ -2,9 +2,11 @@
 <?= csrf_field() ?>
 <?php foreach ($plugin->settings[$type] as $field): ?>
 <Forms.Field
-    name="<?= $field['key'] ?>"
-    label="<?= $field['name'] ?>"
-    hint="<?= $field['description'] ?>"
+    name="<?= esc($field['key']) ?>"
+    label="<?= esc($field['label']) ?>"
+    hint="<?= esc($field['hint']) ?>"
+    helper="<?= esc($field['helper']) ?>"
+    required="<?= $field['optional'] === 'true' ? 'false' : 'true' ?>"
     value="<?= get_plugin_option($plugin->getKey(), $field['key'], $context) ?>"
 />
 <?php endforeach; ?>

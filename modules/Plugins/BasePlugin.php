@@ -53,7 +53,7 @@ abstract class BasePlugin implements PluginInterface
      */
     public function __set(string $name, array|string $value): void
     {
-        $this->{$name} = $name === 'releaseDate' ? Time::createFromFormat('Y-m-d', $value) : $value;
+        $this->{$name} = $value;
     }
 
     public function init(): void
@@ -161,14 +161,17 @@ abstract class BasePlugin implements PluginInterface
 
         if (array_key_exists('settings', $manifest)) {
             $fieldRules = [
-                'key'         => 'required|alpha_numeric',
-                'name'        => 'required|max_length[32]',
-                'description' => 'permit_empty|max_length[128]',
+                'key'    => 'required|alpha_numeric',
+                'label'  => 'required|max_length[32]',
+                'hint'   => 'permit_empty|max_length[128]',
+                'helper' => 'permit_empty|max_length[128]',
             ];
             $defaultField = [
-                'key'         => '',
-                'name'        => '',
-                'description' => '',
+                'key'      => '',
+                'label'    => '',
+                'hint'     => '',
+                'helper'   => '',
+                'optional' => false,
             ];
             $validation->setRules($fieldRules);
             foreach ($manifest['settings'] as $key => $settings) {
@@ -185,14 +188,12 @@ abstract class BasePlugin implements PluginInterface
         $rules = [
             'name'         => 'required|max_length[32]',
             'version'      => 'required|regex_match[/^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/]',
-            'compatible'   => 'required|in_list[1.0]',
             'description'  => 'max_length[128]',
-            'releaseDate'  => 'valid_date[Y-m-d]',
             'license'      => 'in_list[MIT]',
             'author.name'  => 'permit_empty|max_length[32]',
             'author.email' => 'permit_empty|valid_email',
             'author.url'   => 'permit_empty|valid_url_strict',
-            'website'      => 'valid_url_strict',
+            'homepage'     => 'valid_url_strict',
             'keywords.*'   => 'permit_empty|in_list[seo,podcasting20,analytics]',
             'hooks.*'      => 'permit_empty|in_list[' . implode(',', Plugins::HOOKS) . ']',
             'settings'     => 'permit_empty',
@@ -206,10 +207,9 @@ abstract class BasePlugin implements PluginInterface
 
         $defaultAttributes = [
             'description' => '',
-            'releaseDate' => '',
             'license'     => '',
             'author'      => [],
-            'website'     => '',
+            'homepage'    => '',
             'hooks'       => [],
             'keywords'    => [],
             'settings'    => [
