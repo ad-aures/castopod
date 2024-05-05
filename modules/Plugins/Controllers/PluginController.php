@@ -35,12 +35,25 @@ class PluginController extends BaseController
         ]);
     }
 
-    public function generalSettings(string $pluginKey): string
+    public function vendor(string $vendor): string
     {
         /** @var Plugins $plugins */
         $plugins = service('plugins');
 
-        $plugin = $plugins->getPlugin($pluginKey);
+        $vendorPlugins = $plugins->getVendorPlugins($vendor);
+        return view('plugins/installed', [
+            'total'       => count($vendorPlugins),
+            'plugins'     => $vendorPlugins,
+            'pager_links' => '',
+        ]);
+    }
+
+    public function generalSettings(string $vendor, string $package): string
+    {
+        /** @var Plugins $plugins */
+        $plugins = service('plugins');
+
+        $plugin = $plugins->getPlugin($vendor, $package);
 
         if ($plugin === null) {
             throw PageNotFoundException::forPageNotFound();
@@ -52,12 +65,12 @@ class PluginController extends BaseController
         ]);
     }
 
-    public function generalSettingsAction(string $pluginKey): RedirectResponse
+    public function generalSettingsAction(string $vendor, string $package): RedirectResponse
     {
         /** @var Plugins $plugins */
         $plugins = service('plugins');
 
-        $plugin = $plugins->getPlugin($pluginKey);
+        $plugin = $plugins->getPlugin($vendor, $package);
 
         if ($plugin === null) {
             throw PageNotFoundException::forPageNotFound();
@@ -66,7 +79,7 @@ class PluginController extends BaseController
         foreach ($plugin->settings['general'] as $option) {
             $optionKey = $option['key'];
             $optionValue = $this->request->getPost($optionKey);
-            $plugins->setOption($pluginKey, $optionKey, $optionValue);
+            $plugins->setOption($plugin, $optionKey, $optionValue);
         }
 
         return redirect()->back()
@@ -75,7 +88,7 @@ class PluginController extends BaseController
             ]));
     }
 
-    public function podcastSettings(string $podcastId, string $pluginKey): string
+    public function podcastSettings(string $podcastId, string $vendor, string $package): string
     {
         $podcast = (new PodcastModel())->getPodcastById((int) $podcastId);
 
@@ -86,7 +99,7 @@ class PluginController extends BaseController
         /** @var Plugins $plugins */
         $plugins = service('plugins');
 
-        $plugin = $plugins->getPlugin($pluginKey);
+        $plugin = $plugins->getPlugin($vendor, $package);
 
         if ($plugin === null) {
             throw PageNotFoundException::forPageNotFound();
@@ -102,12 +115,12 @@ class PluginController extends BaseController
         ]);
     }
 
-    public function podcastSettingsAction(string $podcastId, string $pluginKey): RedirectResponse
+    public function podcastSettingsAction(string $podcastId, string $vendor, string $package): RedirectResponse
     {
         /** @var Plugins $plugins */
         $plugins = service('plugins');
 
-        $plugin = $plugins->getPlugin($pluginKey);
+        $plugin = $plugins->getPlugin($vendor, $package);
 
         if ($plugin === null) {
             throw PageNotFoundException::forPageNotFound();
@@ -116,7 +129,7 @@ class PluginController extends BaseController
         foreach ($plugin->settings['podcast'] as $setting) {
             $settingKey = $setting['key'];
             $settingValue = $this->request->getPost($settingKey);
-            $plugins->setOption($pluginKey, $settingKey, $settingValue, ['podcast', (int) $podcastId]);
+            $plugins->setOption($plugin, $settingKey, $settingValue, ['podcast', (int) $podcastId]);
         }
 
         return redirect()->back()
@@ -125,7 +138,7 @@ class PluginController extends BaseController
             ]));
     }
 
-    public function episodeSettings(string $podcastId, string $episodeId, string $pluginKey): string
+    public function episodeSettings(string $podcastId, string $episodeId, string $vendor, string $package): string
     {
         $episode = (new EpisodeModel())->getEpisodeById((int) $episodeId);
 
@@ -136,7 +149,7 @@ class PluginController extends BaseController
         /** @var Plugins $plugins */
         $plugins = service('plugins');
 
-        $plugin = $plugins->getPlugin($pluginKey);
+        $plugin = $plugins->getPlugin($vendor, $package);
 
         if ($plugin === null) {
             throw PageNotFoundException::forPageNotFound();
@@ -154,12 +167,16 @@ class PluginController extends BaseController
         ]);
     }
 
-    public function episodeSettingsAction(string $podcastId, string $episodeId, string $pluginKey): RedirectResponse
-    {
+    public function episodeSettingsAction(
+        string $podcastId,
+        string $episodeId,
+        string $vendor,
+        string $package
+    ): RedirectResponse {
         /** @var Plugins $plugins */
         $plugins = service('plugins');
 
-        $plugin = $plugins->getPlugin($pluginKey);
+        $plugin = $plugins->getPlugin($vendor, $package);
 
         if ($plugin === null) {
             throw PageNotFoundException::forPageNotFound();
@@ -168,7 +185,7 @@ class PluginController extends BaseController
         foreach ($plugin->settings['episode'] as $setting) {
             $settingKey = $setting['key'];
             $settingValue = $this->request->getPost($settingKey);
-            $plugins->setOption($pluginKey, $settingKey, $settingValue, ['episode', (int) $episodeId]);
+            $plugins->setOption($plugin, $settingKey, $settingValue, ['episode', (int) $episodeId]);
         }
 
         return redirect()->back()
@@ -177,23 +194,50 @@ class PluginController extends BaseController
             ]));
     }
 
-    public function activate(string $pluginKey): RedirectResponse
+    public function activate(string $vendor, string $package): RedirectResponse
     {
-        service('plugins')->activate($pluginKey);
+        /** @var Plugins $plugins */
+        $plugins = service('plugins');
+
+        $plugin = $plugins->getPlugin($vendor, $package);
+
+        if ($plugin === null) {
+            throw PageNotFoundException::forPageNotFound();
+        }
+
+        $plugins->activate($plugin);
 
         return redirect()->back();
     }
 
-    public function deactivate(string $pluginKey): RedirectResponse
+    public function deactivate(string $vendor, string $package): RedirectResponse
     {
-        service('plugins')->deactivate($pluginKey);
+        /** @var Plugins $plugins */
+        $plugins = service('plugins');
+
+        $plugin = $plugins->getPlugin($vendor, $package);
+
+        if ($plugin === null) {
+            throw PageNotFoundException::forPageNotFound();
+        }
+
+        $plugins->deactivate($plugin);
 
         return redirect()->back();
     }
 
-    public function uninstall(string $pluginKey): RedirectResponse
+    public function uninstall(string $vendor, string $package): RedirectResponse
     {
-        service('plugins')->uninstall($pluginKey);
+        /** @var Plugins $plugins */
+        $plugins = service('plugins');
+
+        $plugin = $plugins->getPlugin($vendor, $package);
+
+        if ($plugin === null) {
+            throw PageNotFoundException::forPageNotFound();
+        }
+
+        $plugins->uninstall($plugin);
 
         return redirect()->back();
     }

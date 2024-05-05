@@ -11,6 +11,7 @@ use CodeIgniter\I18n\Time;
 use RuntimeException;
 
 /**
+ * @property string $key
  * @property string $name
  * @property string $description
  * @property string $version
@@ -29,12 +30,13 @@ abstract class BasePlugin implements PluginInterface
     protected bool $active;
 
     public function __construct(
-        protected string $key,
-        protected string $filePath
+        protected string $vendor,
+        protected string $package,
+        protected string $directory
     ) {
-        $pluginDirectory = dirname($filePath);
+        $this->key = sprintf('%s/%s', $vendor, $package);
 
-        $manifest = $this->loadManifest($pluginDirectory . '/manifest.json');
+        $manifest = $this->loadManifest($directory . '/manifest.json');
 
         foreach ($manifest as $key => $value) {
             $this->{$key} = $value;
@@ -43,7 +45,7 @@ abstract class BasePlugin implements PluginInterface
         // check that plugin is active
         $this->active = get_plugin_option($this->key, 'active') ?? false;
 
-        $this->iconSrc = $this->loadIcon($pluginDirectory . '/icon.svg');
+        $this->iconSrc = $this->loadIcon($directory . '/icon.svg');
     }
 
     /**
@@ -86,6 +88,16 @@ abstract class BasePlugin implements PluginInterface
     final public function getKey(): string
     {
         return $this->key;
+    }
+
+    final public function getVendor(): string
+    {
+        return $this->vendor;
+    }
+
+    final public function getPackage(): string
+    {
+        return $this->package;
     }
 
     final public function getName(): string
