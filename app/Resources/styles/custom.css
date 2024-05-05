@@ -5,15 +5,6 @@
     }
   }
 
-  .ring-accent {
-    @apply outline-none ring-2 ring-offset-2;
-
-    /* FIXME: why doesn't ring-accent-base work? */
-    --tw-ring-opacity: 1;
-    --tw-ring-color: hsl(var(--color-accent-base) / var(--tw-ring-opacity));
-    --tw-ring-offset-color: hsl(var(--color-background-base));
-  }
-
   .rounded-conditional-b-xl {
     border-bottom-right-radius: max(
       0px,

@@ -14,6 +14,7 @@ return [
     'settings' => '{pluginName} settings',
     'activate' => 'Activate',
     'deactivate' => 'Deactivate',
+    'uninstall' => 'Uninstall',
     'keywords' => [
         'podcasting20' => 'Podcasting 2.0',
         'seo' => 'SEO',

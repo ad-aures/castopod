@@ -25,12 +25,17 @@ $routes->group(
                 'as'     => 'plugins-general-settings-action',
                 'filter' => 'permission:plugins.manage',
             ]);
-            $routes->post('activate/(:segment)', 'PluginController::activate/$1', [
+            $routes->post('(:segment)/activate', 'PluginController::activate/$1', [
                 'as'     => 'plugins-activate',
                 'filter' => 'permission:plugins.manage',
             ]);
-            $routes->post('deactivate/(:segment)', 'PluginController::deactivate/$1', [
+            $routes->post('(:segment)/deactivate', 'PluginController::deactivate/$1', [
                 'as'     => 'plugins-deactivate',
+                'filter' => 'permission:plugins.manage',
+            ]);
+            // TODO: change to delete
+            $routes->get('(:segment)/uninstall', 'PluginController::uninstall/$1', [
+                'as'     => 'plugins-uninstall',
                 'filter' => 'permission:plugins.manage',
             ]);
         });

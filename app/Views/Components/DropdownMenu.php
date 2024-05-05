@@ -37,7 +37,7 @@ class DropdownMenu extends Component
             switch ($item['type']) {
                 case 'link':
                     $menuItems .= anchor($item['uri'], $item['title'], [
-                        'class' => 'px-4 py-1 hover:bg-highlight focus:ring-accent focus:ring-inset' . (array_key_exists('class', $item) ? ' ' . $item['class'] : ''),
+                        'class' => 'inline-flex gap-x-1 items-center px-4 py-1 hover:bg-highlight focus:ring-accent focus:ring-inset' . (array_key_exists('class', $item) ? ' ' . $item['class'] : ''),
                     ]);
                     break;
                 case 'html':
