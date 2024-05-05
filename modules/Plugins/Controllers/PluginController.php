@@ -190,4 +190,11 @@ class PluginController extends BaseController
 
         return redirect()->back();
     }
+
+    public function uninstall(string $pluginKey): RedirectResponse
+    {
+        service('plugins')->uninstall($pluginKey);
+
+        return redirect()->back();
+    }
 }

@@ -29,6 +29,16 @@ defined('CP_VERSION') || define('CP_VERSION', '1.11.0');
 defined('APP_NAMESPACE') || define('APP_NAMESPACE', 'App');
 
 /*
+ | --------------------------------------------------------------------
+ | Plugins Path
+ | --------------------------------------------------------------------
+ |
+ | This defines the folder in which plugins will live.
+ */
+defined('PLUGINS_PATH') ||
+    define('PLUGINS_PATH', ROOTPATH . 'plugins' . DIRECTORY_SEPARATOR);
+
+/*
  | --------------------------------------------------------------------------
  | Composer Path
  | --------------------------------------------------------------------------

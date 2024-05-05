@@ -114,7 +114,7 @@ class Autoload extends AutoloadConfig
     public function __construct()
     {
         // load plugins namespaces
-        $pluginsPaths = glob(ROOTPATH . '/plugins/*', GLOB_ONLYDIR | GLOB_NOSORT);
+        $pluginsPaths = glob(PLUGINS_PATH . '*', GLOB_ONLYDIR | GLOB_NOSORT);
 
         if (! $pluginsPaths) {
             $pluginsPaths = [];

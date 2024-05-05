@@ -7,6 +7,7 @@ namespace Modules\Plugins;
 use App\Entities\Episode;
 use App\Entities\Podcast;
 use App\Libraries\SimpleRSSElement;
+use Config\Database;
 
 /**
  * @method void channelTag(Podcast $podcast, SimpleRSSElement $channel)
@@ -153,11 +154,35 @@ class Plugins
         return static::$installedCount;
     }
 
+    public function uninstall(string $pluginKey): bool
+    {
+        // remove all settings data
+        $db = Database::connect();
+        $builder = $db->table('settings');
+
+        $db->transStart();
+        $builder->where('class', self::class);
+        $builder->like('context', sprintf('plugin:%s', $pluginKey . '%'));
+
+        if (! $builder->delete()) {
+            $db->transRollback();
+            return false;
+        }
+
+        // delete plugin folder from PLUGINS_PATH
+        $pluginFolder = PLUGINS_PATH . $pluginKey;
+        $rmdirResult = $this->rrmdir($pluginFolder);
+
+        $transResult = $db->transCommit();
+
+        return $rmdirResult && $transResult;
+    }
+
     protected function registerPlugins(): void
     {
         // search for plugins in plugins folder
         // TODO: only get directories? Should be organized as author/repo?
-        $pluginsFiles = glob(ROOTPATH . '/plugins/**/Plugin.php');
+        $pluginsFiles = glob(PLUGINS_PATH . '**/Plugin.php');
 
         if (! $pluginsFiles) {
             return;
@@ -179,5 +204,39 @@ class Plugins
             static::$plugins[] = $plugin;
             ++static::$installedCount;
         }
+    }
+
+    /**
+     * Adapted from https://stackoverflow.com/a/3338133
+     */
+    private function rrmdir(string $dir): bool
+    {
+        if (! is_dir($dir)) {
+            return false;
+        }
+
+        $objects = scandir($dir);
+
+        if (! $objects) {
+            return false;
+        }
+
+        foreach ($objects as $object) {
+            if ($object === '.') {
+                continue;
+            }
+
+            if ($object === '..') {
+                continue;
+            }
+
+            if (is_dir($dir . DIRECTORY_SEPARATOR . $object) && ! is_link($dir . '/' . $object)) {
+                $this->rrmdir($dir . DIRECTORY_SEPARATOR . $object);
+            } else {
+                unlink($dir . DIRECTORY_SEPARATOR . $object);
+            }
+        }
+
+        return rmdir($dir);
     }
 }

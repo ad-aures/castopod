@@ -14,17 +14,28 @@
         <a href="<?= $plugin->website ?>" class="inline-flex items-center text-sm font-semibold underline hover:no-underline gap-x-1" target="_blank" rel="noopener noreferrer"><?= icon('link', [
             'class' => 'text-gray-500',
         ]) . lang('Plugins.website') ?></a>
-        
-        <?php if($plugin->isActive()): ?>
-            <form class="flex justify-end" method="POST" action="<?= route_to('plugins-deactivate', $plugin->getKey()) ?>">
-                <?= csrf_field() ?>
-                <Button type="submit" variant="danger" size="small"><?= lang('Plugins.deactivate') ?></Button>
-            </form>
-        <?php else: ?>
-            <form class="flex justify-end" method="POST" action="<?= route_to('plugins-activate', $plugin->getKey()) ?>">
-                <?= csrf_field() ?>
-                <Button type="submit" variant="secondary" size="small"><?= lang('Plugins.activate') ?></Button>
-            </form>
-        <?php endif; ?>
+        <div class="flex gap-x-2">
+            <?php if($plugin->isActive()): ?>
+                <form class="flex justify-end" method="POST" action="<?= route_to('plugins-deactivate', $plugin->getKey()) ?>">
+                    <?= csrf_field() ?>
+                    <Button type="submit" variant="danger" size="small"><?= lang('Plugins.deactivate') ?></Button>
+                </form>
+            <?php else: ?>
+                <form class="flex justify-end" method="POST" action="<?= route_to('plugins-activate', $plugin->getKey()) ?>">
+                    <?= csrf_field() ?>
+                    <Button type="submit" variant="secondary" size="small"><?= lang('Plugins.activate') ?></Button>
+                </form>
+            <?php endif; ?>
+            <button class="p-2 rounded-full" id="more-dropdown-<?= $plugin->getKey() ?>" data-dropdown="button" data-dropdown-target="more-dropdown-<?= $plugin->getKey() ?>-menu" aria-haspopup="true" aria-expanded="false" title="<?= lang('Common.more') ?>"><?= icon('more-2-fill') ?></button>
+            <?php $items = [[
+                'type'  => 'link',
+                'title' => icon('delete-bin-fill', [
+                    'class' => 'text-gray-500',
+                ]) . lang('Plugins.uninstall'),
+                'uri'   => route_to('plugins-uninstall', $plugin->getKey()),
+                'class' => 'font-semibold text-red-600',
+            ]]; ?>
+            <DropdownMenu id="more-dropdown-<?= $plugin->getKey() ?>-menu" labelledby="more-dropdown-<?= $plugin->getKey() ?>" placement="top-end" offsetY="-32" items="<?= esc(json_encode($items)) ?>" />
+        </div>
     </footer>
 </article>
