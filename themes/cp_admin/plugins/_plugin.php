@@ -12,7 +12,7 @@
         <p class="mt-2 text-gray-600"><?= $plugin->getDescription() ?></p>
     </div>
     <footer class="flex items-center justify-between mt-4">
-        <a href="<?= $plugin->website ?>" class="inline-flex items-center text-sm font-semibold underline hover:no-underline gap-x-1" target="_blank" rel="noopener noreferrer"><?= icon('link', [
+        <a href="<?= $plugin->homepage ?>" class="inline-flex items-center text-sm font-semibold underline hover:no-underline gap-x-1" target="_blank" rel="noopener noreferrer"><?= icon('link', [
             'class' => 'text-gray-500',
         ]) . lang('Plugins.website') ?></a>
         <div class="flex gap-x-2">

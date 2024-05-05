@@ -30,7 +30,13 @@
           "spark": "php",
           "env": "dotenv",
           ".rsync-filter": "diff"
-        }
+        },
+        "json.schemas": [
+          {
+            "fileMatch": ["plugins/**/manifest.json"],
+            "url": "/workspaces/castopod/modules/Plugins/manifest.schema.json"
+          }
+        ]
       },
       "extensions": [
         "astro-build.astro-vscode",

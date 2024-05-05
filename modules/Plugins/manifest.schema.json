@@ -1,0 +1,191 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "/schemas/manifest.json",
+  "title": "JSON schema for Castopod Plugins's manifest.json files",
+  "description": "The Castopod plugin manifest defines both metadata and behavior of a plugin",
+  "type": "object",
+  "properties": {
+    "name": {
+      "description": "The plugin name, including 'vendor-name/' prefix",
+      "type": "string",
+      "pattern": "^[a-z0-9]([_.-]?[a-z0-9]+)*/[a-z0-9]([_.-]?[a-z0-9]+)*$",
+      "examples": ["acme/hello-world"]
+    },
+    "version": {
+      "description": "The plugin's semantic version. See https://semver.org/",
+      "type": "string",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$",
+      "examples": ["1.0.0"]
+    },
+    "description": {
+      "description": "This helps people discover your plugin as it's listed in repositories",
+      "type": "string"
+    },
+    "author": {
+      "$ref": "#/$defs/person"
+    },
+    "authors": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/person"
+      }
+    },
+    "homepage": {
+      "description": "The URL to the plugin homepage",
+      "type": "string",
+      "format": "uri"
+    },
+    "license": {
+      "description": "You should specify a license for your plugin so that people know how they are permitted to use it, and any restrictions you're placing on it.",
+      "default": "UNLICENSED",
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "enum": [
+            "AGPL-3.0-only",
+            "AGPL-3.0-or-later",
+            "Apache-2.0",
+            "BSL-1.0",
+            "GPL-3.0-only",
+            "GPL-3.0-or-later",
+            "LGPL-3.0-only",
+            "LGPL-3.0-or-later",
+            "MIT",
+            "MPL-2.0",
+            "Unlicense",
+            "UNLICENSED"
+          ]
+        }
+      ]
+    },
+    "private": {
+      "type": "boolean",
+      "description": "If set to true, then repositories should refuse to publish it."
+    },
+    "keywords": {
+      "description": "This helps people discover your plugin as it's listed in repositories",
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "enum": [
+              "accessibility",
+              "analytics",
+              "monetization",
+              "podcasting2",
+              "privacy",
+              "seo"
+            ]
+          }
+        ]
+      },
+      "uniqueItems": true
+    },
+    "hooks": {
+      "description": "The hooks used by the plugin.",
+      "type": "array",
+      "items": {
+        "enum": ["channelTag", "itemTag", "siteHead"]
+      },
+      "uniqueItems": true
+    },
+    "settings": {
+      "type": "object",
+      "properties": {
+        "general": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/settings-field"
+          }
+        },
+        "podcast": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/settings-field"
+          }
+        },
+        "episode": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/settings-field"
+          }
+        }
+      }
+    },
+    "files": {
+      "description": "List of files to include in your plugin package. If you include a folder in the array, all files inside it will also be included.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "repository": {
+      "description": "Specify the place where your plugin code lives. This is helpful for people who want to contribute.",
+      "type": ["object", "string"],
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "directory": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "required": ["name", "version"],
+  "additionalProperties": false,
+  "$defs": {
+    "person": {
+      "description": "A person who has been involved in creating or maintaining this plugin.",
+      "type": ["object", "string"],
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "settings-field": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": ["text", "email", "url", "markdown", "number", "switch"],
+          "default": "text"
+        },
+        "key": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "hint": {
+          "type": "string"
+        },
+        "helper": {
+          "type": "string"
+        },
+        "optional": {
+          "type": "boolean"
+        }
+      },
+      "required": ["key", "label"],
+      "additionalProperties": false
+    }
+  }
+}
