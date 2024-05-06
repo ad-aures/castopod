@@ -16,7 +16,7 @@ use CodeIgniter\I18n\Time;
 use Config\Mimes;
 use Modules\Media\Entities\Chapters;
 use Modules\Media\Entities\Transcript;
-use Modules\Plugins\Plugins;
+use Modules\Plugins\Core\Plugins;
 use Modules\PremiumPodcasts\Entities\Subscription;
 
 if (! function_exists('get_rss_feed')) {

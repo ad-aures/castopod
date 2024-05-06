@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Modules\Plugins\Config;
 
 use CodeIgniter\Config\BaseService;
-use Modules\Plugins\Plugins;
+use Modules\Plugins\Core\Plugins;
 
 class Services extends BaseService
 {

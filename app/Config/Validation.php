@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Config;
 
 use App\Validation\FileRules as AppFileRules;
+use App\Validation\OtherRules;
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Validation\StrictRules\CreditCardRules;
 use CodeIgniter\Validation\StrictRules\FileRules;
@@ -24,6 +25,7 @@ class Validation extends BaseConfig
         FileRules::class,
         CreditCardRules::class,
         AppFileRules::class,
+        OtherRules::class,
     ];
 
     /**

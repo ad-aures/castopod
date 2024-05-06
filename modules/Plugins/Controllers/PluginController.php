@@ -11,7 +11,7 @@ use App\Models\PodcastModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
 use Modules\Admin\Controllers\BaseController;
-use Modules\Plugins\Plugins;
+use Modules\Plugins\Core\Plugins;
 
 class PluginController extends BaseController
 {
@@ -76,10 +76,9 @@ class PluginController extends BaseController
             throw PageNotFoundException::forPageNotFound();
         }
 
-        foreach ($plugin->settings['general'] as $option) {
-            $optionKey = $option['key'];
-            $optionValue = $this->request->getPost($optionKey);
-            $plugins->setOption($plugin, $optionKey, $optionValue);
+        foreach ($plugin->getSettingsFields('general') as $field) {
+            $optionValue = $this->request->getPost($field->key);
+            $plugins->setOption($plugin, $field->key, $optionValue);
         }
 
         return redirect()->back()
@@ -126,10 +125,9 @@ class PluginController extends BaseController
             throw PageNotFoundException::forPageNotFound();
         }
 
-        foreach ($plugin->settings['podcast'] as $setting) {
-            $settingKey = $setting['key'];
-            $settingValue = $this->request->getPost($settingKey);
-            $plugins->setOption($plugin, $settingKey, $settingValue, ['podcast', (int) $podcastId]);
+        foreach ($plugin->getSettingsFields('podcast') as $field) {
+            $settingValue = $this->request->getPost($field->key);
+            $plugins->setOption($plugin, $field->key, $settingValue, ['podcast', (int) $podcastId]);
         }
 
         return redirect()->back()
@@ -182,10 +180,9 @@ class PluginController extends BaseController
             throw PageNotFoundException::forPageNotFound();
         }
 
-        foreach ($plugin->settings['episode'] as $setting) {
-            $settingKey = $setting['key'];
-            $settingValue = $this->request->getPost($settingKey);
-            $plugins->setOption($plugin, $settingKey, $settingValue, ['episode', (int) $episodeId]);
+        foreach ($plugin->getSettingsFields('episode') as $field) {
+            $settingValue = $this->request->getPost($field->key);
+            $plugins->setOption($plugin, $field->key, $settingValue, ['episode', (int) $episodeId]);
         }
 
         return redirect()->back()

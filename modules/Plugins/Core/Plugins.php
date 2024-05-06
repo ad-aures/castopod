@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Modules\Plugins;
+namespace Modules\Plugins\Core;
 
 use App\Entities\Episode;
 use App\Entities\Podcast;
@@ -74,7 +74,7 @@ class Plugins
                 continue;
             }
 
-            if ($plugin->settings['podcast'] === []) {
+            if ($plugin->getSettingsFields('podcast') === []) {
                 continue;
             }
 
@@ -95,7 +95,7 @@ class Plugins
                 continue;
             }
 
-            if ($plugin->settings['episode'] === []) {
+            if ($plugin->getSettingsFields('episode') === []) {
                 continue;
             }
 
