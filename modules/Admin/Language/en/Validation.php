@@ -14,4 +14,6 @@ return [
     'is_image_ratio' =>
         '{field} is either not an image or not of the right ratio.',
     'is_json' => '{field} contains invalid JSON.',
+    'is_boolean' => 'The {field} field must be a boolean (true or false).',
+    'is_list' => 'The {field} field must be an array.',
 ];

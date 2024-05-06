@@ -6,7 +6,7 @@ namespace Modules\Plugins\Commands;
 
 use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
-use Modules\Plugins\Plugins;
+use Modules\Plugins\Core\Plugins;
 
 class UninstallPlugin extends BaseCommand
 {
