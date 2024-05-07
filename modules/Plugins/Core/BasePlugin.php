@@ -8,6 +8,14 @@ use App\Entities\Episode;
 use App\Entities\Podcast;
 use App\Libraries\SimpleRSSElement;
 use CodeIgniter\HTTP\URI;
+use League\CommonMark\Environment\Environment;
+use League\CommonMark\Event\DocumentParsedEvent;
+use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
+use League\CommonMark\Extension\GithubFlavoredMarkdownExtension;
+use League\CommonMark\Extension\SmartPunct\SmartPunctExtension;
+use League\CommonMark\MarkdownConverter;
+use Modules\Plugins\ExternalImageProcessor;
+use Modules\Plugins\ExternalLinkProcessor;
 use Modules\Plugins\Manifest\Manifest;
 use Modules\Plugins\Manifest\Settings;
 use Modules\Plugins\Manifest\SettingsField;
@@ -26,6 +34,8 @@ abstract class BasePlugin implements PluginInterface
     protected bool $active;
 
     protected Manifest $manifest;
+
+    protected string $readmeHTML;
 
     public function __construct(
         protected string $vendor,
@@ -55,6 +65,8 @@ abstract class BasePlugin implements PluginInterface
         $this->active = get_plugin_option($this->key, 'active') ?? false;
 
         $this->iconSrc = $this->loadIcon($directory . '/icon.svg');
+
+        $this->readmeHTML = $this->loadReadme($directory . '/README.md');
     }
 
     /**
@@ -182,6 +194,11 @@ abstract class BasePlugin implements PluginInterface
         return $description;
     }
 
+    final public function getReadmeHTML(): string
+    {
+        return $this->readmeHTML;
+    }
+
     final protected function getOption(string $option): mixed
     {
         return get_plugin_option($this->key, $option);
@@ -207,5 +224,39 @@ abstract class BasePlugin implements PluginInterface
             [' ', "'", "'", '='],
             $encodedIcon
         );
+    }
+
+    private function loadReadme(string $path): ?string
+    {
+        // TODO: cache readme
+        $readmeMD = @file_get_contents($path);
+
+        if (! $readmeMD) {
+            return null;
+        }
+
+        $environment = new Environment([
+            'html_input'         => 'escape',
+            'allow_unsafe_links' => false,
+            'host'               => 'hello',
+        ]);
+        $environment->addExtension(new CommonMarkCoreExtension());
+
+        $environment->addExtension(new GithubFlavoredMarkdownExtension());
+        $environment->addExtension(new SmartPunctExtension());
+
+        $environment->addEventListener(
+            DocumentParsedEvent::class,
+            [new ExternalLinkProcessor($environment), 'onDocumentParsed']
+        );
+        $environment->addEventListener(
+            DocumentParsedEvent::class,
+            [new ExternalImageProcessor($environment), 'onDocumentParsed']
+        );
+
+        $converter = new MarkdownConverter($environment);
+
+        return $converter->convert($readmeMD)
+            ->getContent();
     }
 }

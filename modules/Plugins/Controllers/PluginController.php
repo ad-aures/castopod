@@ -48,6 +48,22 @@ class PluginController extends BaseController
         ]);
     }
 
+    public function view(string $vendor, string $package): string
+    {
+        /** @var Plugins $plugins */
+        $plugins = service('plugins');
+
+        $plugin = $plugins->getPlugin($vendor, $package);
+
+        if ($plugin === null) {
+            throw PageNotFoundException::forPageNotFound();
+        }
+
+        return view('plugins/view', [
+            'plugin' => $plugin,
+        ]);
+    }
+
     public function generalSettings(string $vendor, string $package): string
     {
         /** @var Plugins $plugins */
