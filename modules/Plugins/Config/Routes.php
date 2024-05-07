@@ -25,11 +25,15 @@ $routes->group(
                 'filter' => 'permission:plugins.manage',
             ]);
             $routes->group('(:pluginKey)', static function ($routes): void {
-                $routes->get('/', 'PluginController::generalSettings/$1/$2', [
+                $routes->get('/', 'PluginController::view/$1/$2', [
+                    'as'     => 'plugins-view',
+                    'filter' => 'permission:plugins.manage',
+                ]);
+                $routes->get('settings', 'PluginController::generalSettings/$1/$2', [
                     'as'     => 'plugins-general-settings',
                     'filter' => 'permission:plugins.manage',
                 ]);
-                $routes->post('/', 'PluginController::generalSettingsAction/$1/$2', [
+                $routes->post('settings', 'PluginController::generalSettingsAction/$1/$2', [
                     'as'     => 'plugins-general-settings-action',
                     'filter' => 'permission:plugins.manage',
                 ]);
