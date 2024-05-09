@@ -4,45 +4,48 @@ declare(strict_types=1);
 
 namespace App\Views\Components\Forms;
 
+use App\Views\Components\Hint;
+
 class Toggler extends FormComponent
 {
+    protected array $props = ['size', 'hint', 'isChecked'];
+
+    protected array $casts = [
+        'isChecked' => 'boolean',
+    ];
+
     /**
      * @var 'base'|'small
      */
     protected string $size = 'base';
 
-    protected string $label = '';
-
     protected string $hint = '';
 
-    protected bool $checked = false;
-
-    public function setChecked(string $value): void
-    {
-        $this->checked = $value === 'true';
-    }
+    protected bool $isChecked = false;
 
     public function render(): string
     {
-        unset($this->attributes['checked']);
-
-        $wrapperClass = $this->class;
-        unset($this->attributes['class']);
-
-        $sizeClass = [
-            'base'  => 'form-switch-slider',
+        $sizeClass = match ($this->size) {
             'small' => 'form-switch-slider form-switch-slider--small',
-        ];
+            default => 'form-switch-slider',
+        };
 
-        $this->attributes['class'] = 'form-switch';
+        $this->mergeClass('relative justify-between inline-flex items-center gap-x-2');
 
-        $checkbox = form_checkbox($this->attributes, $this->value, old($this->name) === 'yes' ? true : $this->checked);
-        $hint = $this->hint === '' ? '' : hint_tooltip($this->hint, 'ml-1');
+        $checkbox = form_checkbox([
+            'class' => 'form-switch',
+        ], 'yes', old($this->name) === 'yes' ? true : $this->isChecked);
+
+        $hint = $this->hint === '' ? '' : (new Hint([
+            'class' => 'ml-1',
+            'slot'  => $this->hint,
+        ]))->render();
+
         return <<<HTML
-            <label class="relative inline-flex items-center {$wrapperClass}">
+            <label {$this->getStringifiedAttributes()}>
+                <span class="">{$this->slot}{$hint}</span>
                 {$checkbox}
-                <span class="{$sizeClass[$this->size]}"></span>
-                <span class="ml-2">{$this->slot}{$hint}</span>
+                <span class="{$sizeClass}"></span>
             </label>
         HTML;
     }

@@ -10,7 +10,7 @@
 
 <?= $this->section('headerRight') ?>
 <?php // @icon('add-fill')?>
-<Button variant="primary" uri="<?= route_to('page-edit', $page->id) ?>" iconLeft="add-fill"><?= lang('Page.edit') ?></Button>
+<x-Button variant="primary" uri="<?= route_to('page-edit', $page->id) ?>" iconLeft="add-fill"><?= lang('Page.edit') ?></x-Button>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>

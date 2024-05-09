@@ -40,11 +40,11 @@
     <header class="py-8 border-b bg-elevated border-subtle">
         <div class="container flex flex-col items-start px-2 py-4 mx-auto">
             <a href="<?= route_to('home') ?>"
-            class="inline-flex items-center mb-2 text-sm focus:ring-accent"><?= icon(
+            class="inline-flex items-center mb-2 text-sm"><?= icon(
                 'arrow-left-line',
                 'mr-2',
             ) . lang('Page.back_to_home') ?></a>
-            <Heading tagName="h1" size="large"><?= esc($page->title) ?></Heading>
+            <x-Heading tagName="h1" size="large"><?= esc($page->title) ?></x-Heading>
         </div>
     </header>
     <main class="container flex-1 px-4 py-6 mx-auto">
@@ -53,7 +53,7 @@
     <footer class="container flex justify-between px-2 py-4 mx-auto text-sm text-right border-t border-subtle">
         <?= render_page_links() ?>
         <small><?= lang('Common.powered_by', [
-                'castopod' => '<a class="underline hover:no-underline focus:ring-accent" href="https://castopod.org/" target="_blank" rel="noreferrer noopener">Castopod</a>',
+                'castopod' => '<a class="underline hover:no-underline" href="https://castopod.org/" target="_blank" rel="noreferrer noopener">Castopod</a>',
             ], null, false) ?></small>
     </footer>
 </body>

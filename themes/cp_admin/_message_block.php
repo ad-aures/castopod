@@ -1,33 +1,33 @@
 <?php declare(strict_types=1);
 
 if (session()->has('message')): ?>
-    <Alert variant="success" class="mb-4"><?= esc(session('message')) ?></Alert>
+    <x-Alert variant="success" class="mb-4"><?= esc(session('message')) ?></x-Alert>
 <?php endif; ?>
 
 <?php if (session()->has('error')): ?>
-    <Alert variant="danger" class="mb-4"><?= esc(session('error')) ?></Alert>
+    <x-Alert variant="danger" class="mb-4"><?= esc(session('error')) ?></x-Alert>
 <?php endif; ?>
 
 <?php if (session()->has('errors')): ?>
-    <Alert variant="danger" class="mb-4">
+    <x-Alert variant="danger" class="mb-4">
         <ul>
             <?php foreach (session('errors') as $error): ?>
                 <li><?= esc($error) ?></li>
             <?php endforeach; ?>
         </ul>
-    </Alert>
+    </x-Alert>
 <?php endif; ?>
 
 <?php if (session()->has('warning')): ?>
-    <Alert variant="warning" class="mb-4"><?= esc(session('warning')) ?></Alert>
+    <x-Alert variant="warning" class="mb-4"><?= esc(session('warning')) ?></x-Alert>
 <?php endif; ?>
 
 <?php if (session()->has('warnings')): ?>
-    <Alert variant="warning" class="mb-4">
+    <x-Alert variant="warning" class="mb-4">
         <ul>
             <?php foreach (session('warnings') as $warning): ?>
                 <li><?= esc($warning) ?></li>
             <?php endforeach; ?>
         </ul>
-    </Alert>
+    </x-Alert>
 <?php endif; ?>

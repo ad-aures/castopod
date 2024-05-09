@@ -13,18 +13,18 @@
 
 <form action="<?= route_to('change-password') ?>" method="POST" class="flex flex-col max-w-sm gap-y-4">
     <?= csrf_field() ?>
-    <Forms.Field
+    <x-Forms.Field
         name="password"
         label="<?= esc(lang('User.form.password')) ?>"
-        required="true"
+        isRequired="true"
         type="password" />
-    <Forms.Field
+    <x-Forms.Field
         name="new_password"
         label="<?= esc(lang('User.form.new_password')) ?>"
-        required="true"
+        isRequired="true"
         type="password"
         autocomplete="new-password" />
-    <Button variant="primary" class="self-end" type="submit"><?= lang('User.form.submit_password_change') ?></Button>
+    <x-Button variant="primary" class="self-end" type="submit"><?= lang('User.form.submit_password_change') ?></x-Button>
 </form>
 
 <?= $this->endSection() ?>

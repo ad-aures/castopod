@@ -6,6 +6,8 @@ namespace App\Views\Components\Forms;
 
 class XMLEditor extends FormComponent
 {
+    protected array $props = ['content'];
+
     /**
      * @var array<string, string>
      */

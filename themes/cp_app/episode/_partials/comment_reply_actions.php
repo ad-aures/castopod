@@ -11,7 +11,7 @@
             ) ?>"><?= icon('heart-fill', [
                 'class' => 'text-lg mr-1 text-gray-400 group-hover:text-red-600',
             ]) . $reply->likes_count ?></button>
-            <Button uri="<?= route_to('episode-comment', esc($reply->episode->podcast->handle), esc($reply->episode->slug), $reply->id) ?>" size="small"><?= lang('Comment.reply') ?></Button>
+            <x-Button uri="<?= route_to('episode-comment', esc($reply->episode->podcast->handle), esc($reply->episode->slug), $reply->id) ?>" size="small"><?= lang('Comment.reply') ?></x-Button>
         </form>
     <?php else: ?>
         <button type="submit" name="action" class="inline-flex items-center opacity-50 cursor-not-allowed" disabled="disabled" title="<?= lang(

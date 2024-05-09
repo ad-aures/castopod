@@ -17,6 +17,8 @@ use League\CommonMark\MarkdownConverter;
 use Modules\Plugins\ExternalImageProcessor;
 use Modules\Plugins\ExternalLinkProcessor;
 use Modules\Plugins\Manifest\Manifest;
+use Modules\Plugins\Manifest\Person;
+use Modules\Plugins\Manifest\Repository;
 use Modules\Plugins\Manifest\Settings;
 use Modules\Plugins\Manifest\SettingsField;
 use RuntimeException;
@@ -35,7 +37,7 @@ abstract class BasePlugin implements PluginInterface
 
     protected Manifest $manifest;
 
-    protected string $readmeHTML;
+    protected ?string $readmeHTML;
 
     public function __construct(
         protected string $vendor,
@@ -121,6 +123,27 @@ abstract class BasePlugin implements PluginInterface
         return $this->manifest->homepage;
     }
 
+    final public function getRepository(): ?Repository
+    {
+        return $this->manifest->repository;
+    }
+
+    /**
+     * @return list<string>
+     */
+    final public function getKeywords(): array
+    {
+        return $this->manifest->keywords;
+    }
+
+    /**
+     * @return Person[]
+     */
+    final public function getAuthors(): array
+    {
+        return $this->manifest->authors;
+    }
+
     final public function getIconSrc(): string
     {
         return $this->iconSrc;
@@ -194,9 +217,14 @@ abstract class BasePlugin implements PluginInterface
         return $description;
     }
 
-    final public function getReadmeHTML(): string
+    final public function getReadmeHTML(): ?string
     {
         return $this->readmeHTML;
+    }
+
+    final public function getLicense(): string
+    {
+        return $this->manifest->license ?? 'UNLICENSED';
     }
 
     final protected function getOption(string $option): mixed
@@ -238,7 +266,7 @@ abstract class BasePlugin implements PluginInterface
         $environment = new Environment([
             'html_input'         => 'escape',
             'allow_unsafe_links' => false,
-            'host'               => 'hello',
+            'host'               => (new URI(base_url()))->getHost(),
         ]);
         $environment->addExtension(new CommonMarkCoreExtension());
 
@@ -247,11 +275,15 @@ abstract class BasePlugin implements PluginInterface
 
         $environment->addEventListener(
             DocumentParsedEvent::class,
-            [new ExternalLinkProcessor($environment), 'onDocumentParsed']
+            static function (DocumentParsedEvent $event): void {
+                (new ExternalLinkProcessor())->onDocumentParsed($event);
+            }
         );
         $environment->addEventListener(
             DocumentParsedEvent::class,
-            [new ExternalImageProcessor($environment), 'onDocumentParsed']
+            static function (DocumentParsedEvent $event): void {
+                (new ExternalImageProcessor())->onDocumentParsed($event);
+            }
         );
 
         $converter = new MarkdownConverter($environment);

@@ -9,17 +9,25 @@ use ViewComponents\Component;
 
 class DropdownMenu extends Component
 {
-    public string $id = '';
+    protected array $props = ['id', 'labelledby', 'placement', 'offsetX', 'offsetY', 'items'];
 
-    public string $labelledby;
+    protected array $casts = [
+        'offsetX' => 'number',
+        'offsetY' => 'number',
+        'items'   => 'array',
+    ];
 
-    public string $placement = 'bottom-end';
+    protected string $id;
 
-    public string $offsetX = '0';
+    protected string $labelledby;
 
-    public string $offsetY = '0';
+    protected string $placement = 'bottom-end';
 
-    public array $items = [];
+    protected int $offsetX = 0;
+
+    protected int $offsetY = 0;
+
+    protected array $items = [];
 
     public function setItems(string $value): void
     {
@@ -37,7 +45,7 @@ class DropdownMenu extends Component
             switch ($item['type']) {
                 case 'link':
                     $menuItems .= anchor($item['uri'], $item['title'], [
-                        'class' => 'inline-flex gap-x-1 items-center px-4 py-1 hover:bg-highlight focus:ring-accent focus:ring-inset' . (array_key_exists('class', $item) ? ' ' . $item['class'] : ''),
+                        'class' => 'inline-flex gap-x-1 items-center px-4 py-1 hover:bg-highlight' . (array_key_exists('class', $item) ? ' ' . $item['class'] : ''),
                     ]);
                     break;
                 case 'html':
@@ -51,14 +59,16 @@ class DropdownMenu extends Component
             }
         }
 
+        $this->mergeClass('absolute flex flex-col py-2 rounded-lg z-60 whitespace-nowrap text-skin-base border-contrast bg-elevated border-3');
+        $this->attributes['id'] = $this->id;
+        $this->attributes['aria-labelledby'] = $this->labelledby;
+        $this->attributes['data-dropdown'] = 'menu';
+        $this->attributes['data-dropdown-placement'] = $this->placement;
+        $this->attributes['data-dropdown-offset-x'] = $this->offsetX;
+        $this->attributes['data-dropdown-offset-y'] = $this->offsetY;
+
         return <<<HTML
-            <nav id="{$this->id}"
-                class="absolute flex flex-col py-2 rounded-lg z-60 whitespace-nowrap text-skin-base border-contrast bg-elevated border-3"
-                aria-labelledby="{$this->labelledby}"
-                data-dropdown="menu"
-                data-dropdown-placement="{$this->placement}"
-                data-dropdown-offset-x="{$this->offsetX}"
-                data-dropdown-offset-y="{$this->offsetY}">{$menuItems}</nav>
+            <nav {$this->getStringifiedAttributes()}>{$menuItems}</nav>
         HTML;
     }
 }

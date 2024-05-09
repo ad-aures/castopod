@@ -11,13 +11,13 @@
             ->avatar_image_url ?>" alt="<?= esc(interact_as_actor()
             ->display_name) ?>" class="w-10 h-10 rounded-full aspect-square" loading="lazy" />
         <div class="flex flex-col flex-1 min-w-0 gap-y-2">
-            <Forms.Textarea
+            <x-Forms.Textarea
                 name="message"
-                required="true"
+                isRequired="true"
                 placeholder="<?= lang('Comment.form.episode_message_placeholder') ?>"
                 rows="2" />
             <?php // @icon('send-plane-2-fill')?>
-            <Button class="self-end" variant="primary" size="small" type="submit" iconRight="send-plane-2-fill"><?= lang('Comment.form.submit') ?></Button>
+            <x-Button class="self-end" variant="primary" size="small" type="submit" iconRight="send-plane-2-fill"><?= lang('Comment.form.submit') ?></x-Button>
         </div>
     </form>
 <?php endif; ?>

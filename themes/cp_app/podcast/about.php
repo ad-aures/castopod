@@ -17,7 +17,7 @@
 
     <div class="flex items-center mt-4 gap-x-8">
         <?php if ($podcast->persons !== []): ?>
-            <button class="flex items-center flex-shrink-0 text-xs font-semibold gap-x-2 hover:underline focus:ring-accent" data-toggle="persons-list" data-toggle-class="hidden">
+            <button class="flex items-center flex-shrink-0 text-xs font-semibold gap-x-2 hover:underline" data-toggle="persons-list" data-toggle-class="hidden">
                 <span class="inline-flex flex-row-reverse">
                     <?php $i = 0; ?>
                     <?php foreach ($podcast->persons as $person): ?>

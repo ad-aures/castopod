@@ -13,11 +13,11 @@
 <form action="<?= route_to('subscription-suspend', $podcast->id, $subscription->id) ?>" method="POST" class="flex flex-col w-full max-w-xl mx-auto">
 <?= csrf_field() ?>
 
-<Alert variant="warning" class="font-semibold"><?= lang('Subscription.suspend_form.disclaimer', [
+<x-Alert variant="warning" class="font-semibold"><?= lang('Subscription.suspend_form.disclaimer', [
     'email' => $subscription->email,
-]) ?></Alert>
+]) ?></x-Alert>
 
-<Forms.Field
+<x-Forms.Field
     as="Textarea"
     name="reason"
     label="<?= esc(lang('Subscription.suspend_form.reason')) ?>"
@@ -27,9 +27,9 @@
 />
 
 <div class="flex items-center self-end mt-4 gap-x-2">
-    <Button uri="<?= route_to('subscription-list', $podcast->id) ?>"><?= lang('Common.cancel') ?></Button>
+    <x-Button uri="<?= route_to('subscription-list', $podcast->id) ?>"><?= lang('Common.cancel') ?></x-Button>
     <?php // @icon('pause-fill')?>
-    <Button type="submit" variant="warning" iconLeft="pause-fill"><?= lang('Subscription.suspend_form.submit') ?></Button>
+    <x-Button type="submit" variant="warning" iconLeft="pause-fill"><?= lang('Subscription.suspend_form.submit') ?></x-Button>
 </div>
 
 </form>

@@ -14,38 +14,38 @@
 <form action="<?= url_to('register') ?>" method="POST" class="flex flex-col w-full gap-y-4">
 <?= csrf_field() ?>
 
-<Forms.Field
+<x-Forms.Field
     name="username"
     label="<?= esc(lang('Auth.username')) ?>"
     autocomplete="username"
     inputmode="text"
-    required="true" />
+    isRequired="true" />
 
-<Forms.Field
+<x-Forms.Field
     name="email"
     label="<?= esc(lang('Auth.email')) ?>"
     type="email"
     inputmode="email"
     autocomplete="email"
-    required="true" />
+    isRequired="true" />
 
-<Forms.Field
+<x-Forms.Field
     name="password"
     label="<?= esc(lang('Auth.password')) ?>"
     type="password"
-    required="true"
+    isRequired="true"
     inputmode="text"
     autocomplete="new-password" />
 
-<Forms.Field
+<x-Forms.Field
     name="password_confirm"
     label="<?= esc(lang('Auth.passwordConfirm')) ?>"
     type="password"
-    required="true"
+    isRequired="true"
     inputmode="text"
     autocomplete="new-password" />
 
-<Button variant="primary" type="submit" class="self-end"><?= lang('Auth.register') ?></Button>
+<x-Button variant="primary" type="submit" class="self-end"><?= lang('Auth.register') ?></x-Button>
 
 </form>
 

@@ -41,6 +41,9 @@ class PluginController extends BaseController
         $plugins = service('plugins');
 
         $vendorPlugins = $plugins->getVendorPlugins($vendor);
+        replace_breadcrumb_params([
+            $vendor => $vendor,
+        ]);
         return view('plugins/installed', [
             'total'       => count($vendorPlugins),
             'plugins'     => $vendorPlugins,
@@ -59,6 +62,10 @@ class PluginController extends BaseController
             throw PageNotFoundException::forPageNotFound();
         }
 
+        replace_breadcrumb_params([
+            $vendor  => $vendor,
+            $package => $package,
+        ]);
         return view('plugins/view', [
             'plugin' => $plugin,
         ]);
@@ -76,6 +83,10 @@ class PluginController extends BaseController
         }
 
         helper('form');
+        replace_breadcrumb_params([
+            $vendor  => $vendor,
+            $package => $package,
+        ]);
         return view('plugins/settings_general', [
             'plugin' => $plugin,
         ]);
@@ -122,7 +133,9 @@ class PluginController extends BaseController
 
         helper('form');
         replace_breadcrumb_params([
-            0 => $podcast->handle,
+            0        => $podcast->handle,
+            $vendor  => $vendor,
+            $package => $package,
         ]);
         return view('plugins/settings_podcast', [
             'podcast' => $podcast,
@@ -171,8 +184,10 @@ class PluginController extends BaseController
 
         helper('form');
         replace_breadcrumb_params([
-            0 => $episode->podcast->handle,
-            1 => $episode->title,
+            0        => $episode->podcast->handle,
+            1        => $episode->title,
+            $vendor  => $vendor,
+            $package => $package,
         ]);
         return view('plugins/settings_episode', [
             'podcast' => $episode->podcast,

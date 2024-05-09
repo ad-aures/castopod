@@ -13,15 +13,15 @@
 <form action="<?= route_to('subscription-delete', $podcast->id, $subscription->id) ?>" method="POST" class="flex flex-col w-full max-w-xl mx-auto">
 <?= csrf_field() ?>
 
-<Alert variant="danger" class="font-semibold"><?= lang('Subscription.delete_form.disclaimer', [
+<x-Alert variant="danger" class="font-semibold"><?= lang('Subscription.delete_form.disclaimer', [
     'subscriber' => $subscription->email,
-]) ?></Alert>
+]) ?></x-Alert>
 
-<Forms.Checkbox class="mt-2" name="understand" required="true" isChecked="false"><?= lang('Subscription.delete_form.understand') ?></Forms.Checkbox>
+<x-Forms.Checkbox class="mt-2" name="understand" isRequired="true" isChecked="false"><?= lang('Subscription.delete_form.understand') ?></x-Forms.Checkbox>
 
 <div class="flex items-center self-end mt-4 gap-x-2">
-    <Button uri="<?= route_to('subscription-list', $podcast->id) ?>"><?= lang('Common.cancel') ?></Button>
-    <Button type="submit" variant="danger"><?= lang('Subscription.delete_form.submit') ?></Button>
+    <x-Button uri="<?= route_to('subscription-list', $podcast->id) ?>"><?= lang('Common.cancel') ?></x-Button>
+    <x-Button type="submit" variant="danger"><?= lang('Subscription.delete_form.submit') ?></x-Button>
 </div>
 
 </form>

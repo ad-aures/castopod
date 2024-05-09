@@ -92,7 +92,7 @@ $podcastNavigation = [
 foreach (plugins()->getPluginsWithPodcastSettings() as $plugin) {
     $route = route_to('plugins-podcast-settings', $podcast->id, $plugin->getKey());
     $podcastNavigation['plugins']['items'][] = $route;
-    $podcastNavigation['plugins']['items-labels'][] = $plugin->getName();
+    $podcastNavigation['plugins']['items-labels'][$route] = $plugin->getName();
     $podcastNavigation['plugins']['items-permissions'][$route] = 'edit';
 }
 
@@ -118,7 +118,7 @@ foreach (plugins()->getPluginsWithPodcastSettings() as $plugin) {
             <a href="<?= route_to(
                 'podcast-activity',
                 esc($podcast->handle),
-            ) ?>" class="inline-flex items-center text-sm hover:underline focus:ring-accent"
+            ) ?>" class="inline-flex items-center text-sm hover:underline"
             data-tooltip="bottom" title="<?= lang(
                 'PodcastNavigation.go_to_page',
             ) ?>">@<?= esc($podcast->handle) ?>
@@ -128,7 +128,7 @@ foreach (plugins()->getPluginsWithPodcastSettings() as $plugin) {
             </a>
         </div>
         <div class="flex flex-col items-start gap-1">
-            <a href="<?= $podcast->feed_url ?>" class="inline-flex items-center text-xs gap-x-1 focus:ring-accent group hover:underline" target="_blank" rel="noopener noreferrer" data-tooltip="bottom" title="<?= lang('PodcastNavigation.rss_feed') ?>">
+            <a href="<?= $podcast->feed_url ?>" class="inline-flex items-center text-xs gap-x-1 group hover:underline" target="_blank" rel="noopener noreferrer" data-tooltip="bottom" title="<?= lang('PodcastNavigation.rss_feed') ?>">
                 <?= icon('rss-fill', [
                     'class' => 'text-xl text-orange-400 inline-flex items-center justify-center rounded',
                 ]) . 'RSS Feed' . icon('external-link-fill', [
@@ -136,7 +136,7 @@ foreach (plugins()->getPluginsWithPodcastSettings() as $plugin) {
                 ]) ?>
             </a>
             <?php if ($podcast->is_op3_enabled): ?>
-            <a href="<?= $podcast->op3_url ?>" class="inline-flex items-center text-xs gap-x-1 focus:ring-accent group hover:underline" data-tooltip="bottom" target="_blank" rel="noopener noreferrer" title="<?= lang('Podcast.form.op3_link') ?>">
+            <a href="<?= $podcast->op3_url ?>" class="inline-flex items-center text-xs gap-x-1 group hover:underline" data-tooltip="bottom" target="_blank" rel="noopener noreferrer" title="<?= lang('Podcast.form.op3_link') ?>">
                 <?= icon('line-chart-fill', [
                     'class' => 'text-xl text-white inline-flex items-center justify-center rounded',
                 ]) . 'OP3' . icon('external-link-fill', [

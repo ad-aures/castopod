@@ -11,7 +11,7 @@
 
 <?= $this->section('headerRight') ?>
 <?php // @icon('pencil-fill')?>
-<Button uri="<?= route_to('person-edit', $person->id) ?>" variant="secondary" iconLeft="pencil-fill"><?= lang('Person.edit') ?></Button>
+<x-Button uri="<?= route_to('person-edit', $person->id) ?>" variant="secondary" iconLeft="pencil-fill"><?= lang('Person.edit') ?></x-Button>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>

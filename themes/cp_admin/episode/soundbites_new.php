@@ -14,10 +14,10 @@
 <form id="soundbites-form" action="<?= route_to('episode-soundbites-edit', $podcast->id, $episode->id) ?>" method="POST" class="flex flex-col">
 <?= csrf_field() ?>
 
-    <Forms.Field
+    <x-Forms.Field
         name="title"
         label="<?= esc(lang('Soundbite.form.soundbite_title')) ?>"
-        required="true"
+        isRequired="true"
         class="max-w-sm"
     />
     <audio-clipper start-time="<?= old('start_time', 0) ?>" audio-duration="<?= $episode->audio->duration ?>" duration="<?= old('duration', $episode->audio->duration >= 60 ? 60 : $episode->audio->duration) ?>" min-duration="10" volume=".5" height="50" trim-start-label="<?= lang('VideoClip.form.trim_start') ?>" trim-end-label="<?= lang('VideoClip.form.trim_end') ?>" class="mt-8">
@@ -29,7 +29,7 @@
     </audio-clipper>
 
     <?php // @icon('arrow-right-fill')?>
-    <Button variant="primary" type="submit" class="self-end mt-4" iconRight="arrow-right-fill"><?= lang('Soundbite.form.submit') ?></Button>
+    <x-Button variant="primary" type="submit" class="self-end mt-4" iconRight="arrow-right-fill"><?= lang('Soundbite.form.submit') ?></x-Button>
 
 </form>
 

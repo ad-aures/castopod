@@ -8,9 +8,15 @@ use ViewComponents\Component;
 
 class Alert extends Component
 {
-    protected ?string $glyph = null;
+    protected array $props = ['glyph', 'title'];
 
-    protected ?string $title = null;
+    protected string $glyph = '';
+
+    protected ?string $title = '';
+
+    protected array $attributes = [
+        'role' => 'alert',
+    ];
 
     /**
      * @var 'default'|'success'|'danger'|'warning'
@@ -19,7 +25,7 @@ class Alert extends Component
 
     public function render(): string
     {
-        $variants = [
+        $variantData = match ($this->variant) {
             'success' => [
                 'class' => 'text-pine-900 bg-pine-100 border-pine-300',
                 'glyph' => 'check-fill', // @icon('check-fill')
@@ -32,30 +38,21 @@ class Alert extends Component
                 'class' => 'text-yellow-900 bg-yellow-100 border-yellow-300',
                 'glyph' => 'alert-fill', // @icon('alert-fill')
             ],
-            'default' => [
+            default => [
                 'class' => 'text-blue-900 bg-blue-100 border-blue-300',
                 'glyph' => 'error-warning-fill', // @icon('error-warning-fill')
             ],
-        ];
+        };
 
-        if (! array_key_exists($this->variant, $variants)) {
-            $this->variant = 'default';
-        }
-
-        $glyph = icon(($this->glyph ?? $variants[$this->variant]['glyph']), [
+        $glyph = icon(($this->glyph === '' ? $variantData['glyph'] : $this->glyph), [
             'class' => 'flex-shrink-0 mr-2 text-lg',
         ]);
-        $title = $this->title === null ? '' : '<div class="font-semibold">' . $this->title . '</div>';
-        $class = 'inline-flex w-full p-2 text-sm border rounded ' . $variants[$this->variant]['class'] . ' ' . $this->class;
-
-        unset($this->attributes['slot']);
-        unset($this->attributes['variant']);
-        unset($this->attributes['class']);
-        unset($this->attributes['glyph']);
-        $attributes = stringify_attributes($this->attributes);
+        $title = $this->title === '' ? '' : '<div class="font-semibold">' . $this->title . '</div>';
+        $this->mergeClass('inline-flex w-full p-2 text-sm border rounded ');
+        $this->mergeClass($variantData['class']);
 
         return <<<HTML
-            <div class="{$class}" role="alert" {$attributes}>{$glyph}<div>{$title}<p>{$this->slot}</p></div></div>
+            <div {$this->getStringifiedAttributes()}>{$glyph}<div>{$title}<p>{$this->slot}</p></div></div>
         HTML;
     }
 }

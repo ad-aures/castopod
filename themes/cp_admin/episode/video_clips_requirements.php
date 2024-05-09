@@ -12,9 +12,9 @@
 
 <div class="flex flex-col gap-6">
 <div class="flex flex-col items-start">
-    <Heading class="flex items-center gap-x-2"><?= icon('alert-fill', [
+    <x-Heading class="flex items-center gap-x-2"><?= icon('alert-fill', [
         'class' => 'flex-shrink-0 text-xl text-orange-600',
-    ]) ?><?= lang('VideoClip.requirements.title') ?></Heading>
+    ]) ?><?= lang('VideoClip.requirements.title') ?></x-Heading>
     <p class="max-w-sm font-semibold text-gray-500"><?= lang('VideoClip.requirements.missing') ?></p>
     <div class="flex flex-col mt-4">
     <?php foreach ($checks as $requirement => $value): ?>

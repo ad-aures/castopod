@@ -14,11 +14,11 @@
 <form action="<?= route_to('fediverse-attempt-block-domain') ?>" method="POST" class="flex flex-col max-w-md">
     <?= csrf_field() ?>
 
-    <Forms.Field
+    <x-Forms.Field
         name="domain"
         label="<?= esc(lang('Fediverse.block_lists_form.domain')) ?>"
-        required="true" />
-    <Button variant="primary" type="submit" class="self-end"><?= lang('Fediverse.block_lists_form.submit') ?></Button>
+        isRequired="true" />
+    <x-Button variant="primary" type="submit" class="self-end"><?= lang('Fediverse.block_lists_form.submit') ?></x-Button>
 </form>
 
 <?= data_table(
@@ -39,7 +39,7 @@
                     esc($blockedDomain->name) .
                     '" />' .
                     csrf_field() .
-                    '<Button uri="' . route_to('fediverse-unblock-domain', esc($blockedDomain->name)) . '" variant="info" size="small" type="submit">' . lang('Fediverse.list.unblock') . '</Button>' .
+                    '<x-Button uri="' . route_to('fediverse-unblock-domain', esc($blockedDomain->name)) . '" variant="info" size="small" type="submit">' . lang('Fediverse.list.unblock') . '</x-Button>' .
                     '</form>';
             },
         ],

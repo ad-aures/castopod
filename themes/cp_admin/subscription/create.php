@@ -15,20 +15,20 @@
 <?= csrf_field() ?>
 <input type="hidden" name="client_timezone" value="UTC" />
 
-<Forms.Field
+<x-Forms.Field
     name="email"
     type="email"
     label="<?= esc(lang('Subscription.form.email')) ?>"
-    required="true" />
+    isRequired="true" />
 
-<Forms.Field
+<x-Forms.Field
     as="DatetimePicker"
     name="expiration_date"
     label="<?= esc(lang('Subscription.form.expiration_date')) ?>"
     hint="<?= esc(lang('Subscription.form.expiration_date_hint')) ?>"
 />
 
-<Button type="submit" class="self-end" variant="primary"><?= lang('Subscription.form.submit_create') ?></Button>
+<x-Button type="submit" class="self-end" variant="primary"><?= lang('Subscription.form.submit_create') ?></x-Button>
 
 </form>
 

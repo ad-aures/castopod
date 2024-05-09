@@ -23,7 +23,7 @@
         </div>
     </header>
     <?php if (substr_count($post->message, "\n") >= 3 || strlen($post->message) > 250): ?>
-        <ReadMore id="<?= $index ?>" class="px-6 mb-4 post-content"><?= $post->message_html ?></ReadMore>
+        <x-ReadMore id="<?= $index ?>" class="px-6 mb-4 post-content"><?= $post->message_html ?></x-ReadMore>
     <?php else: ?>
         <div class="px-6 mb-4 post-content"><?= $post->message_html ?></div>
     <?php endif; ?>

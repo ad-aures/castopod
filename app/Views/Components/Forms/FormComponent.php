@@ -6,52 +6,60 @@ namespace App\Views\Components\Forms;
 
 use ViewComponents\Component;
 
-class FormComponent extends Component
+abstract class FormComponent extends Component
 {
-    protected ?string $id = null;
+    protected array $props = [
+        'id',
+        'name',
+        'value',
+        'isRequired',
+        'isReadonly',
+    ];
 
-    protected string $name = '';
+    protected array $casts = [
+        'isRequired' => 'boolean',
+        'isReadonly' => 'boolean',
+    ];
+
+    protected string $id;
+
+    protected string $name;
 
     protected string $value = '';
 
-    protected bool $required = false;
+    protected bool $isRequired = false;
 
-    protected bool $readonly = false;
+    protected bool $isReadonly = false;
 
     /**
      * @param array<string, string> $attributes
      */
     public function __construct(array $attributes)
     {
+        $parentVars = get_class_vars(self::class);
+        $this->casts = [...$parentVars['casts'], ...$this->casts];
+        $this->props = [...$parentVars['props'], $this->props];
+
         parent::__construct($attributes);
 
-        if ($this->id === null) {
+        if (! isset($this->id)) {
             $this->id = $this->name;
-            $this->attributes['id'] = $this->id;
+        }
+
+        $this->attributes['id'] = $this->id;
+        $this->attributes['name'] = $this->name;
+
+        if ($this->isRequired) {
+            $this->attributes['required'] = 'required';
+        }
+
+        if ($this->isReadonly) {
+            $this->attributes['readonly'] = 'readonly';
         }
     }
 
     public function setValue(string $value): void
     {
         $this->value = htmlspecialchars_decode($value, ENT_QUOTES);
-    }
-
-    public function setRequired(string $value): void
-    {
-        $this->required = $value === 'true';
-        unset($this->attributes['required']);
-        if ($this->required) {
-            $this->attributes['required'] = 'required';
-        }
-    }
-
-    public function setReadonly(string $value): void
-    {
-        $this->readonly = $value === 'true';
-        if ($this->readonly) {
-            $this->attributes['readonly'] = 'readonly';
-        } else {
-            unset($this->attributes['readonly']);
-        }
     }
 }

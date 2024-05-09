@@ -15,9 +15,9 @@ class Textarea extends FormComponent
 
     public function render(): string
     {
-        unset($this->attributes['value']);
+        $this->mergeClass('bg-elevated w-full rounded-lg border-3 border-contrast focus:border-contrast focus-within:ring-accent');
 
-        $this->attributes['class'] = 'bg-elevated w-full focus:border-contrast focus:ring-accent rounded-lg border-3 border-contrast ' . $this->class;
+        $this->attributes['id'] = $this->id;
 
         $textarea = form_textarea(
             $this->attributes,

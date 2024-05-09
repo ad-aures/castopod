@@ -11,17 +11,17 @@
 <form actions="<?= url_to('magic-link') ?>" method="POST" class="flex flex-col w-full gap-y-4">
     <?= csrf_field() ?>
 
-    <Forms.Field
+    <x-Forms.Field
         name="email"
         label="<?= esc(lang('Auth.email')) ?>"
-        required="true"
+        isRequired="true"
         inputmode="email"
         autocomplete="email"
         autofocus="autofocus"
         value="<?= old('email', auth()->user()->email ?? null) ?>"
     />
 
-    <Button variant="primary" type="submit" class="self-end"><?= lang('Auth.send') ?></Button>
+    <x-Button variant="primary" type="submit" class="self-end"><?= lang('Auth.send') ?></x-Button>
 </form>
 
 <?= $this->endSection() ?>

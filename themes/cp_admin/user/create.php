@@ -14,26 +14,26 @@
 <form action="<?= route_to('user-create') ?>" method="POST" class="flex flex-col max-w-sm gap-y-4">
 <?= csrf_field() ?>
 
-<Forms.Field
+<x-Forms.Field
     name="username"
     label="<?= esc(lang('User.form.username')) ?>"
-    required="true" />
+    isRequired="true" />
 
-<Forms.Field
+<x-Forms.Field
     name="email"
     type="email"
     label="<?= esc(lang('User.form.email')) ?>"
-    required="true" />
+    isRequired="true" />
 
-<Forms.Field
+<x-Forms.Field
     as="Select"
     name="role"
     label="<?= esc(lang('User.form.role')) ?>"
     options="<?= esc(json_encode($roleOptions)) ?>"
     selected="<?= setting('AuthGroups.defaultGroup') ?>"
-    required="true" />
+    isRequired="true" />
 
-<Button variant="primary" type="submit" class="self-end"><?= lang('User.form.submit_create') ?></Button>
+<x-Button variant="primary" type="submit" class="self-end"><?= lang('User.form.submit_create') ?></x-Button>
 
 </form>
 

@@ -12,30 +12,30 @@
 <form actions="<?= url_to('login') ?>" method="POST" class="flex flex-col w-full gap-y-4">
     <?= csrf_field() ?>
 
-    <Forms.Field
+    <x-Forms.Field
         name="email"
         label="<?= esc(lang('Auth.email')) ?>"
-        required="true"
+        isRequired="true"
         type="email"
         inputmode="email"
         autocomplete="username"
         autofocus="autofocus"
     />
 
-    <Forms.Field
+    <x-Forms.Field
         name="password"
         label="<?= esc(lang('Auth.password')) ?>"
         type="password"
         inputmode="text"
         autocomplete="current-password"
-        required="true" />
+        isRequired="true" />
 
     <!-- Remember me -->
     <?php if (setting('Auth.sessionConfig')['allowRemembering']): ?>
-        <Forms.Toggler name="remember" value="yes" checked="<?= old('remember') ?>" size="small"><?= lang('Auth.rememberMe') ?></Forms.Toggler>
+        <x-Forms.Toggler name="remember" isChecked="<?= old('remember') ?>" size="small"><?= lang('Auth.rememberMe') ?></x-Forms.Toggler>
     <?php endif; ?>
 
-    <Button variant="primary" type="submit" class="self-end"><?= lang('Auth.login') ?></Button>
+    <x-Button variant="primary" type="submit" class="self-end"><?= lang('Auth.login') ?></x-Button>
 </form>
 
 <?= $this->endSection() ?>

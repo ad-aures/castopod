@@ -6,7 +6,9 @@ namespace App\Views\Components;
 
 class IconButton extends Button
 {
-    public string $glyph = '';
+    public string $glyph;
+
+    protected array $props = ['glyph'];
 
     public function __construct(array $attributes)
     {
@@ -16,18 +18,18 @@ class IconButton extends Button
             'data-tooltip' => 'bottom',
         ];
 
-        $glyphSize = [
-            'small' => 'text-sm',
-            'base'  => 'text-lg',
-            'large' => 'text-2xl',
-        ];
-
         $allAttributes = [...$attributes, ...$iconButtonAttributes];
 
         parent::__construct($allAttributes);
 
+        $glyphSizeClass = match ($this->size) {
+            'small' => 'text-sm',
+            'large' => 'text-2xl',
+            default => 'text-lg',
+        };
+
         $this->slot = icon($this->glyph, [
-            'class' => $glyphSize[$this->size],
+            'class' => $glyphSizeClass,
         ]);
     }
 }

@@ -35,13 +35,13 @@ $episodeNavigation = [
 foreach (plugins()->getPluginsWithEpisodeSettings() as $plugin) {
     $route = route_to('plugins-episode-settings', $podcast->id, $episode->id, $plugin->getKey());
     $episodeNavigation['plugins']['items'][] = $route;
-    $episodeNavigation['plugins']['items-labels'][] = $plugin->getName();
+    $episodeNavigation['plugins']['items-labels'][$route] = $plugin->getName();
     $episodeNavigation['plugins']['items-permissions'][$route] = 'episodes.edit';
 }
 
 ?>
 
-<a href="<?= route_to('podcast-view', $podcast->id) ?>" class="flex items-center px-4 py-2 focus:ring-inset focus:ring-accent">
+<a href="<?= route_to('podcast-view', $podcast->id) ?>" class="flex items-center px-4 py-2">
     <?= icon('arrow-left-line', [
         'class' => 'mr-2',
     ]) ?>
@@ -71,7 +71,7 @@ foreach (plugins()->getPluginsWithEpisodeSettings() as $plugin) {
             'episode',
             esc($podcast->handle),
             esc($episode->slug),
-        ) ?>" class="inline-flex items-center text-xs hover:underline focus:ring-accent"><?= lang(
+        ) ?>" class="inline-flex items-center text-xs hover:underline"><?= lang(
             'EpisodeNavigation.go_to_page',
         ) ?>
         <?= icon('external-link-fill', [

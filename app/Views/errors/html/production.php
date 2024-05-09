@@ -28,7 +28,7 @@
 			<h2 class="font-mono font-semibold"><?= esc($title), esc($exception->getCode() ? ' #' . $exception->getCode() : '') ?></h2>
 			<p class="font-mono"><?= nl2br(esc($exception->getMessage())) ?><br/><span class="pl-4">at <span class="select-all bg-elevated"><?= nl2br(esc($exception->getFile())) ?>:<?= esc($exception->getLine()) ?></span></span></p>
 			<p id="error-stack-trace" class="hidden"><?= nl2br(esc($exception)) ?></p>
-			<clipboard-copy for="error-stack-trace" class="items-center self-end px-3 py-1 mt-2 font-semibold leading-8 transition-all rounded-full shadow group text-accent-contrast hover:bg-accent-hover bg-accent-base focus:ring-accent">
+			<clipboard-copy for="error-stack-trace" class="items-center self-end px-3 py-1 mt-2 font-semibold leading-8 transition-all rounded-full shadow group text-accent-contrast hover:bg-accent-hover bg-accent-base">
 				<span class="inline-flex items-center copy-base"><?= icon('file-copy-fill', [
 				    'class' => 'mr-2',
 				]) ?>Copy stack trace</span>
@@ -41,11 +41,11 @@
 	<div class="flex flex-col justify-center w-full gap-6 py-12 border-t-2 md:flex-row border-subtle">
 		<div class="w-full max-w-md mx-auto md:mx-0">
 			<h2 class="text-xl font-semibold font-display">Found a bug?</h2>
-			<p>You can help get it fixed by <a href="https://castopod.org/new-issue_bug" target="_blank" rel="noopener noreferrer" class="underline decoration-3 hover:no-underline focus:ring-accent decoration-accent">creating an issue on the Castopod issue tracker</a>. Please check that the issue does not already exist beforehand.</p>
+			<p>You can help get it fixed by <a href="https://castopod.org/new-issue_bug" target="_blank" rel="noopener noreferrer" class="underline decoration-3 hover:no-underline decoration-accent">creating an issue on the Castopod issue tracker</a>. Please check that the issue does not already exist beforehand.</p>
 		</div>	
 		<div class="w-full max-w-md mx-auto md:mx-0">
 			<h2 class="text-xl font-semibold font-display">Not sure what's happening?</h2>
-			<p>You can ask for help in the <a href="https://castopod.org/chat" target="_blank" rel="noopener noreferrer" class="underline decoration-2 hover:no-underline focus:ring-accent decoration-accent">Castopod community chat</a>!</p>
+			<p>You can ask for help in the <a href="https://castopod.org/chat" target="_blank" rel="noopener noreferrer" class="underline decoration-2 hover:no-underline decoration-accent">Castopod community chat</a>!</p>
 		</div>
 	</div>
 	<?php else: ?>

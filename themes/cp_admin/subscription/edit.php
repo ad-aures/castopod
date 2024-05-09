@@ -24,7 +24,7 @@
     </dd>
 </div>
 
-<Forms.Field
+<x-Forms.Field
     as="DatetimePicker"
     name="expiration_date"
     label="<?= esc(lang('Subscription.form.expiration_date')) ?>"
@@ -32,7 +32,7 @@
     value="<?= $subscription->expires_at ?>"
 />
 
-<Button type="submit" class="self-end" variant="primary"><?= lang('Subscription.form.submit_edit') ?></Button>
+<x-Button type="submit" class="self-end" variant="primary"><?= lang('Subscription.form.submit_edit') ?></x-Button>
 
 </form>
 

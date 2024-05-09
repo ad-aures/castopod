@@ -34,7 +34,7 @@
         </a>
         <?php if ($episode->is_premium && ! is_unlocked($podcast->handle)): ?>
             <?php // @icon('lock-fill')?>
-            <Button variant="primary" class="mt-auto mb-2" iconLeft="lock-fill" uri="<?= $episode->link ?>" target="_blank" rel="noopener noreferrer"><?= lang('PremiumPodcasts.unlock') ?></Button>
+            <x-Button variant="primary" class="mt-auto mb-2" iconLeft="lock-fill" uri="<?= $episode->link ?>" target="_blank" rel="noopener noreferrer"><?= lang('PremiumPodcasts.unlock') ?></x-Button>
         <?php else: ?>
         <vm-player
                 id="castopod-vm-player"

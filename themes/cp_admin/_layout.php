@@ -36,15 +36,15 @@ $isEpisodeArea = isset($podcast) && isset($episode);
             <div class="flex flex-col justify-end w-full -mt-4 sticky-header-inner bg-elevated">
                 <?= render_breadcrumb('text-xs items-center flex') ?>
                 <div class="flex justify-between py-1">
-                    <div class="flex flex-wrap items-center truncate">
+                    <div class="flex flex-wrap items-center truncate gap-x-2">
                     <?php if (($isEpisodeArea && $episode->is_premium) || ($isPodcastArea && $podcast->is_premium)): ?>
                         <div class="inline-flex items-center">
                             <?php // @icon('exchange-dollar-fill')?>
-                            <IconButton uri="<?= route_to('subscription-list', $podcast->id) ?>" glyph="exchange-dollar-fill" variant="secondary" size="large" class="p-0 mr-2 border-0"><?= ($isEpisodeArea && $episode->is_premium) ? lang('PremiumPodcasts.episode_is_premium') : lang('PremiumPodcasts.podcast_is_premium') ?></IconButton>
-                            <Heading tagName="h1" size="large" class="truncate"><?= $this->renderSection('pageTitle') ?></Heading>
+                            <x-IconButton uri="<?= route_to('subscription-list', $podcast->id) ?>" glyph="exchange-dollar-fill" variant="secondary" size="large" class="p-0 mr-2 border-0"><?= ($isEpisodeArea && $episode->is_premium) ? lang('PremiumPodcasts.episode_is_premium') : lang('PremiumPodcasts.podcast_is_premium') ?></x-IconButton>
+                            <x-Heading tagName="h1" size="large" class="truncate"><?= $this->renderSection('pageTitle') ?></x-Heading>
                         </div>
                     <?php else: ?>
-                            <Heading tagName="h1" size="large" class="truncate"><?= $this->renderSection('pageTitle') ?></Heading>
+                            <x-Heading tagName="h1" size="large" class="truncate"><?= $this->renderSection('pageTitle') ?></x-Heading>
                     <?php endif; ?>
                         <?= $this->renderSection('headerLeft') ?>
                     </div>

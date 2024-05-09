@@ -32,7 +32,7 @@ abstract class ManifestObject
 
     public function __get(string $name): mixed
     {
-        if (isset($this->{$name})) {
+        if (property_exists($this, $name)) {
             return $this->{$name};
         }
 

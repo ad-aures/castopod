@@ -31,48 +31,48 @@
 </div>
 
 <div class="flex flex-col items-end w-full max-w-xl xl:max-w-sm 2xl:max-w-xl gap-y-4">
-    <Forms.Section title="<?= lang('VideoClip.form.params_section_title') ?>" >
-        <Forms.Field
+    <x-Forms.Section title="<?= lang('VideoClip.form.params_section_title') ?>" >
+        <x-Forms.Field
             name="title"
             label="<?= esc(lang('VideoClip.form.clip_title')) ?>"
-            required="true"
+            isRequired="true"
         />
         <fieldset class="flex flex-wrap gap-x-1 gap-y-2">
             <legend><?= lang('VideoClip.form.format.label') ?></legend>
-            <Forms.RadioButton
+            <x-Forms.RadioButton
                 value="landscape"
                 name="format"
                 isChecked="true"
-                required="true"
-                hint="<?= esc(lang('VideoClip.form.format.landscape_hint')) ?>"><?= lang('VideoClip.format.landscape') ?></Forms.RadioButton>
-            <Forms.RadioButton
+                isRequired="true"
+                hint="<?= esc(lang('VideoClip.form.format.landscape_hint')) ?>"><?= lang('VideoClip.format.landscape') ?></x-Forms.RadioButton>
+            <x-Forms.RadioButton
                 value="portrait"
                 name="format"
-                required="true"
-                hint="<?= esc(lang('VideoClip.form.format.portrait_hint')) ?>"><?= lang('VideoClip.format.portrait') ?></Forms.RadioButton>
-            <Forms.RadioButton
+                isRequired="true"
+                hint="<?= esc(lang('VideoClip.form.format.portrait_hint')) ?>"><?= lang('VideoClip.format.portrait') ?></x-Forms.RadioButton>
+            <x-Forms.RadioButton
                 value="squared"
                 name="format"
-                required="true"
-                hint="<?= esc(lang('VideoClip.form.format.squared_hint')) ?>"><?= lang('VideoClip.format.squared') ?></Forms.RadioButton>
+                isRequired="true"
+                hint="<?= esc(lang('VideoClip.form.format.squared_hint')) ?>"><?= lang('VideoClip.format.squared') ?></x-Forms.RadioButton>
         </fieldset>
         <fieldset>
             <legend><?= lang('VideoClip.form.theme') ?></legend>
             <div class="grid gap-x-4 gap-y-2 grid-cols-colorButtons">
                 <?php foreach (config('MediaClipper')->themes as $themeName => $colors): ?>
-                    <Forms.ColorRadioButton
+                    <x-Forms.ColorRadioButton
                     class="mx-auto"
                     value="<?= esc($themeName) ?>"
                     name="theme"
-                    required="true"
+                    isRequired="true"
                     isChecked="<?= $themeName === 'pine' ? 'true' : 'false' ?>"
-                    style="--color-accent-base: <?= $colors['preview']?>; --color-background-preview: <?= $colors['preview-background'] ?>"><?= lang('Settings.theme.' . $themeName) ?></Forms.ColorRadioButton>
+                    style="--color-accent-base: <?= $colors['preview']?>; --color-background-preview: <?= $colors['preview-background'] ?>"><?= lang('Settings.theme.' . $themeName) ?></x-Forms.ColorRadioButton>
                 <?php endforeach; ?>
             </div>
         </fieldset>
-    </Forms.Section>
+    </x-Forms.Section>
     <?php // @icon('arrow-right-fill')?>
-    <Button variant="primary" type="submit" iconRight="arrow-right-fill" class="self-end"><?= lang('VideoClip.form.submit') ?></Button>
+    <x-Button variant="primary" type="submit" iconRight="arrow-right-fill" class="self-end"><?= lang('VideoClip.form.submit') ?></x-Button>
 </div>
 </form>
 

@@ -14,15 +14,15 @@
 <form action="<?= url_to('magic-link-set-password') ?>" method="POST" class="flex flex-col w-full gap-y-4">
 <?= csrf_field() ?>
 
-<Forms.Field
+<x-Forms.Field
     name="new_password"
     label="<?= esc(lang('Auth.password')) ?>"
     type="password"
-    required="true"
+    isRequired="true"
     inputmode="text"
     autocomplete="new-password" />
 
-<Button variant="primary" type="submit" class="self-end"><?= lang('Auth.set_password') ?></Button>
+<x-Button variant="primary" type="submit" class="self-end"><?= lang('Auth.set_password') ?></x-Button>
 
 </form>
 

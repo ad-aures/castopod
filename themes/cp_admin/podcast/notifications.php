@@ -9,7 +9,7 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
-<Button uri="<?= route_to('notification-mark-all-as-read', $podcast->id) ?>" variant="primary"><?= lang('Notifications.mark_all_as_read') ?></Button>
+<x-Button uri="<?= route_to('notification-mark-all-as-read', $podcast->id) ?>" variant="primary"><?= lang('Notifications.mark_all_as_read') ?></x-Button>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>

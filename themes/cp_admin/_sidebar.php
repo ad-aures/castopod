@@ -22,12 +22,15 @@ $navigation = [
         'count-route' => 'podcast-list',
     ],
     'plugins' => [
-        'icon'              => 'puzzle-fill', // @icon('puzzle-fill')
-        'items'             => ['plugins-installed'],
+        'icon'         => 'puzzle-fill', // @icon('puzzle-fill')
+        'items'        => ['plugins-installed'],
+        'items-labels' => [
+            'plugins-installed' => lang('Navigation.plugins-installed') . ' (' . service('plugins')->getInstalledCount() . ')',
+        ],
         'items-permissions' => [
             'plugins-installed' => 'plugins.manage',
         ],
-        'count'       => service('plugins')->getInstalledCount(),
+        'count'       => service('plugins')->getActiveCount(),
         'count-route' => 'plugins-installed',
     ],
     'persons' => [
@@ -82,11 +85,19 @@ $navigation = [
     ],
 ];
 
+foreach (plugins()->getActivePlugins() as $plugin) {
+    $route = route_to('plugins-view', $plugin->getKey());
+    $navigation['plugins']['items'][] = $route;
+    $navigation['plugins']['items-labels'][$route] = $plugin->getName();
+    $navigation['plugins']['items-permissions'][$route] = 'plugins.manage';
+}
+
 if (auth()->user()->can('podcasts.view')) {
     $navigation['podcasts']['count'] = (new PodcastModel())->countAllResults();
 } else {
     $navigation['podcasts']['count'] = count(get_user_podcasts(auth()->user()));
 } ?>
+
 
 <?= view('_partials/_nav_menu', [
     'navigation' => $navigation,
