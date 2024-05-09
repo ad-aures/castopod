@@ -4,19 +4,18 @@ declare(strict_types=1);
 
 namespace App\Views\Components\Forms;
 
-class Helper extends FormComponent
+use ViewComponents\Component;
+
+class Helper extends Component
 {
-    /**
-     * @var 'default'|'error'
-     */
-    protected string $type = 'default';
+    // TODO: add type with error and show errors inline
 
     public function render(): string
     {
-        $class = 'text-skin-muted';
+        $this->mergeClass('text-skin-muted');
 
         return <<<HTML
-            <small id="{$this->id}" class="{$class} {$this->class}">{$this->slot}</small>
+            <small {$this->getStringifiedAttributes()}>{$this->slot}</small>
         HTML;
     }
 }

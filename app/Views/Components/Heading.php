@@ -8,6 +8,8 @@ use ViewComponents\Component;
 
 class Heading extends Component
 {
+    protected array $props = ['tagName', 'size'];
+
     protected string $tagName = 'div';
 
     /**
@@ -17,16 +19,17 @@ class Heading extends Component
 
     public function render(): string
     {
-        $sizeClasses = [
+        $sizeClass = match ($this->size) {
             'small' => 'tracking-wide text-base',
-            'base'  => 'text-xl',
             'large' => 'text-3xl',
-        ];
+            default => 'text-xl',
+        };
 
-        $class = $this->class . ' relative z-10 font-bold text-heading-foreground font-display before:w-full before:absolute before:h-1/2 before:left-0 before:bottom-0 before:rounded-full before:bg-heading-background before:z-[-10] ' . $sizeClasses[$this->size];
+        $this->mergeClass('relative z-10 font-bold text-heading-foreground font-display before:w-full before:absolute before:h-1/2 before:left-0 before:bottom-0 before:rounded-full before:bg-heading-background before:z-[-10]');
+        $this->mergeClass($sizeClass);
 
         return <<<HTML
-            <{$this->tagName} class="{$class}">{$this->slot}</{$this->tagName}>
+            <{$this->tagName} {$this->getStringifiedAttributes()}>{$this->slot}</{$this->tagName}>
         HTML;
     }
 }

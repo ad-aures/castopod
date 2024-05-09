@@ -12,19 +12,19 @@
 <?= publication_pill(
     $episode->published_at,
     $episode->publication_status,
-    'text-sm ml-2 align-middle',
+    'text-sm align-middle',
 ) ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
 <?php if ($episode->publication_status === 'published'): ?>
 <?php // @icon('history-fill')?>
-<IconButton
+<x-IconButton
     uri="<?= route_to('episode-publish_date_edit', $podcast->id, $episode->id) ?>"
     glyph="history-fill"
     variant="secondary"
     glyphClass="text-xl"
-><?= lang('Episode.publish_date_edit') ?></IconButton>
+><?= lang('Episode.publish_date_edit') ?></x-IconButton>
 <?php endif; ?>
 <?= publication_button(
     $podcast->id,
@@ -41,7 +41,7 @@
 </div>
 
 <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
-    <Charts.XY title="<?= lang('Charts.episode_by_day') ?>" dataUrl="<?= route_to(
+    <x-Charts.XY title="<?= lang('Charts.episode_by_day') ?>" dataUrl="<?= route_to(
         'analytics-filtered-data',
         $podcast->id,
         'PodcastByEpisode',
@@ -49,7 +49,7 @@
         $episode->id,
     ) ?>"/>
 
-    <Charts.XY title="<?= lang('Charts.episode_by_month') ?>" dataUrl="<?= route_to(
+    <x-Charts.XY title="<?= lang('Charts.episode_by_month') ?>" dataUrl="<?= route_to(
         'analytics-filtered-data',
         $podcast->id,
         'PodcastByEpisode',

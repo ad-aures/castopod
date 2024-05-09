@@ -30,20 +30,20 @@
     <div class="flex flex-col flex-1 mt-4">
             <div class="inline-flex ml-8 -mt-6 gap-x-1">
                 <a
-                href="<?= $platform->home_url ?>" class="px-3 py-1 text-xs font-semibold leading-6 underline rounded-full focus:ring-accent text-accent-base hover:no-underline"
+                href="<?= $platform->home_url ?>" class="px-3 py-1 text-xs font-semibold leading-6 underline rounded-full text-accent-base hover:no-underline"
                 target="_blank" rel="noopener noreferrer" title="<?= lang('Platforms.home_url', [
                     'platformName' => $platform->label,
                 ]) ?>" data-tooltip="bottom"><?= lang('Platforms.website') ?></a>
                 <?php if ($platform->submit_url !== null): ?>
                     <a
-                    href="<?= $platform->submit_url ?>" class="px-3 py-1 text-xs font-semibold leading-6 underline rounded-full focus:ring-accent text-accent-base hover:no-underline"
+                    href="<?= $platform->submit_url ?>" class="px-3 py-1 text-xs font-semibold leading-6 underline rounded-full text-accent-base hover:no-underline"
                     target="_blank" rel="noopener noreferrer" title="<?= lang('Platforms.submit_url', [
                         'platformName' => $platform->label,
                     ]) ?>" data-tooltip="bottom"><?= lang('Platforms.register') ?></a>
                 <?php endif; ?>
             </div>
             <fieldset>
-                <Forms.Field
+                <x-Forms.Field
                     label="<?= esc(lang('Platforms.your_link')) ?>"
                     class="w-full mt-4"
                     id="<?= esc($platform->slug) . '_link_url' ?>"
@@ -51,14 +51,14 @@
                     value="<?= esc($platform->link_url) ?>"
                     type="url"
                     placeholder="https://…" />
-                <Forms.Field
+                <x-Forms.Field
                     label="<?= esc(lang("Platforms.your_id.{$platform->type}")) ?>"
                     class="w-full mt-2"
                     id="<?= esc($platform->slug) . '_account_id' ?>"
                     name="<?= 'platforms[' . esc($platform->slug) . '][account_id]' ?>"
                     value="<?= esc($platform->account_id) ?>"
                     placeholder="<?= lang("Platforms.description.{$platform->type}") ?>" />
-                <Forms.Toggler size="small" class="mt-4 text-sm" id="<?= esc($platform->slug) . '_visible' ?>" name="<?= 'platforms[' . esc($platform->slug) . '][visible]'?>" value="yes" checked="<?= old(esc($platform->slug) . '_visible', $platform->is_visible ? 'true' : 'false') ?>"><?= lang('Platforms.visible') ?></Forms.Toggler>
+                <x-Forms.Toggler size="small" class="mt-4 text-sm" id="<?= esc($platform->slug) . '_visible' ?>" name="<?= 'platforms[' . esc($platform->slug) . '][visible]'?>" isChecked="<?= old(esc($platform->slug) . '_visible', $platform->is_visible ? 'true' : 'false') ?>"><?= lang('Platforms.visible') ?></x-Forms.Toggler>
         </fieldset>
     </div>
 </article>

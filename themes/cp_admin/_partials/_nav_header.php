@@ -5,18 +5,18 @@ $userPodcasts = get_podcasts_user_can_interact_with(auth()->user()); ?>
 <header class="sticky top-0 z-[60] flex items-center h-10 text-white border-b col-span-full bg-navigation border-navigation">
     <button type="button"
         data-sidebar-toggler="toggler"
-        class="h-full pr-1 text-xl md:hidden focus:ring-accent focus:ring-inset" aria-label="<?= lang('Navigation.toggle_sidebar') ?>"><?= icon('menu-2-fill') ?></button>
+        class="h-full pr-1 text-xl md:hidden" aria-label="<?= lang('Navigation.toggle_sidebar') ?>"><?= icon('menu-2-fill') ?></button>
     <div class="inline-flex items-center h-full">
         <a href="<?= route_to(
             'admin',
-        ) ?>" class="inline-flex items-center h-full px-2 border-r border-navigation focus:ring-inset focus:ring-accent">
+        ) ?>" class="inline-flex items-center h-full px-2 border-r border-navigation">
             <?= (isset($podcast) ? icon('arrow-left-line', [
                         'class' => 'mr-2',
                     ]) : '') . svg('castopod-logo-base', 'h-6') ?>
         </a>
         <a href="<?= route_to(
             'home',
-        ) ?>" class="inline-flex items-center h-full px-2 text-sm font-semibold sm:px-6 hover:underline focus:ring-inset focus:ring-accent" title="<?= lang('Navigation.go_to_website') ?>">
+        ) ?>" class="inline-flex items-center h-full px-2 text-sm font-semibold sm:px-6 hover:underline" title="<?= lang('Navigation.go_to_website') ?>">
                 <span class="hidden sm:block"><?= lang('Navigation.go_to_website') ?></span>
                 <?= icon('external-link-fill', [
         'class' => 'sm:ml-1 text-xl sm:text-base sm:opacity-60',
@@ -24,7 +24,7 @@ $userPodcasts = get_podcasts_user_can_interact_with(auth()->user()); ?>
         </a>
     </div>
     <div class="inline-flex items-center h-full ml-auto">
-        <button type="button" class="relative h-full px-2 focus:ring-accent focus:ring-inset" id="notifications-dropdown" data-dropdown="button" data-dropdown-target="notifications-dropdown-menu" aria-haspopup="true" aria-expanded="false" title="<?= lang('Notifications.title') ?>" data-tooltip="bottom">
+        <button type="button" class="relative h-full px-2" id="notifications-dropdown" data-dropdown="button" data-dropdown-target="notifications-dropdown-menu" aria-haspopup="true" aria-expanded="false" title="<?= lang('Notifications.title') ?>" data-tooltip="bottom">
             <?= icon('notification-2-fill', [
                 'class' => 'text-2xl opacity-80',
             ]) ?>
@@ -74,11 +74,11 @@ if ($userPodcasts !== []) {
     ];
 }
 ?>
-        <DropdownMenu id="notifications-dropdown-menu" labelledby="notifications-dropdown" items="<?= esc(json_encode($items)) ?>" placement="bottom-end"/>
+        <x-DropdownMenu id="notifications-dropdown-menu" labelledby="notifications-dropdown" items="<?= esc(json_encode($items)) ?>" placement="bottom-end"/>
 
         <button
             type="button"
-            class="inline-flex items-center h-full px-3 text-sm font-semibold focus:ring-inset focus:ring-accent gap-x-2"
+            class="inline-flex items-center h-full px-3 text-sm font-semibold gap-x-2"
             id="my-account-dropdown"
             data-dropdown="button"
             data-dropdown-target="my-account-dropdown-menu"
@@ -154,5 +154,5 @@ if ($userPodcasts !== []) {
     ], $menuItems);
 }
 ?>
-    <DropdownMenu id="my-account-dropdown-menu" labelledby="my-account-dropdown" items="<?= esc(json_encode($menuItems)) ?>" />
+    <x-DropdownMenu id="my-account-dropdown-menu" labelledby="my-account-dropdown" items="<?= esc(json_encode($menuItems)) ?>" />
 </header>

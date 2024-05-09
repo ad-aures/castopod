@@ -38,9 +38,9 @@ use Modules\PodcastImport\Entities\TaskStatus;
                     'passed'   => '',
                 ];
 
-                $errorHint = $importTask->status === TaskStatus::Failed ? hint_tooltip(esc($importTask->error), 'ml-1') : '';
+                $errorHint = $importTask->status === TaskStatus::Failed ? '<x-Hint class="ml-1">' . esc($importTask->error) . '</x-Hint>' : '';
 
-                return '<div class="flex items-center"><Pill variant="' . $pillVariantMap[$importTask->status->value] . '" icon="' . $pillIconMap[$importTask->status->value] . '" iconClass="' . $pillIconClassMap[$importTask->status->value] . '" hint="' . lang('PodcastImport.queue.status.' . $importTask->status->value . '_hint') . '">' . lang('PodcastImport.queue.status.' . $importTask->status->value) . '</Pill>' . $errorHint . '</div>';
+                return '<div class="flex items-center"><x-Pill variant="' . $pillVariantMap[$importTask->status->value] . '" icon="' . $pillIconMap[$importTask->status->value] . '" iconClass="' . $pillIconClassMap[$importTask->status->value] . '" hint="' . lang('PodcastImport.queue.status.' . $importTask->status->value . '_hint') . '">' . lang('PodcastImport.queue.status.' . $importTask->status->value) . '</x-Pill>' . $errorHint . '</div>';
             },
         ],
         [
@@ -86,10 +86,10 @@ use Modules\PodcastImport\Entities\TaskStatus;
             'cell'   => function (PodcastImportTask $importTask) {
                 if ($importTask->episodes_count) {
                     $progressPercentage = (int) ($importTask->getProgress() * 100) . '%';
-                    $moreInfoHelper = hint_tooltip(lang('PodcastImport.queue.imported_episodes_hint', [
+                    $moreInfoHelper = '<x-Hint class="ml-1">' . lang('PodcastImport.queue.imported_episodes_hint', [
                         'newlyImportedCount'   => $importTask->episodes_newly_imported,
                         'alreadyImportedCount' => $importTask->episodes_already_imported,
-                    ]), 'ml-1');
+                    ]) . '</x-Hint>';
                     return <<<HTML
                     <div class="flex flex-col">
                         <span>{$progressPercentage}</span>
@@ -134,10 +134,10 @@ use Modules\PodcastImport\Entities\TaskStatus;
                 }
 
                 return '<div class="inline-flex items-center gap-x-2">' .
-                '<button id="more-dropdown-' . $importTask->id . '" type="button" class="inline-flex items-center p-1 rounded-full focus:ring-accent" data-dropdown="button" data-dropdown-target="more-dropdown-' . $importTask->id . '-menu" aria-haspopup="true" aria-expanded="false">' .
+                '<button id="more-dropdown-' . $importTask->id . '" type="button" class="inline-flex items-center p-1 rounded-full" data-dropdown="button" data-dropdown-target="more-dropdown-' . $importTask->id . '-menu" aria-haspopup="true" aria-expanded="false">' .
                         icon('more-2-fill') .
                         '</button>' .
-                        '<DropdownMenu id="more-dropdown-' . $importTask->id . '-menu" labelledby="more-dropdown-' . $importTask->id . '" offsetY="-24" items="' . esc(json_encode($menuItems)) . '" />' .
+                        '<x-DropdownMenu id="more-dropdown-' . $importTask->id . '-menu" labelledby="more-dropdown-' . $importTask->id . '" offsetY="-24" items="' . esc(json_encode($menuItems)) . '" />' .
                     '</div>';
             },
         ],

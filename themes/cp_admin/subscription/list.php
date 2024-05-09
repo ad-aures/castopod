@@ -10,7 +10,7 @@
 
 <?= $this->section('headerRight') ?>
 <?php // @icon('add-fill')?>
-<Button uri="<?= route_to('subscription-create', $podcast->id) ?>" variant="primary" iconLeft="add-fill"><?= lang('Subscription.add') ?></Button>
+<x-Button uri="<?= route_to('subscription-create', $podcast->id) ?>" variant="primary" iconLeft="add-fill"><?= lang('Subscription.add') ?></x-Button>
 <?= $this->endSection() ?>
 
 
@@ -18,7 +18,7 @@
 
 <form method="POST" action="<?= route_to('subscription-link-save', $podcast->id) ?>" class="flex flex-col items-start max-w-sm gap-y-1">
     <?= csrf_field() ?>
-    <Forms.Field
+    <x-Forms.Field
         class="w-full"
         type="url"
         name="subscription_link"
@@ -27,7 +27,7 @@
         placeholder="https://…"
         value="<?= service('settings')
         ->get('Subscription.link', 'podcast:' . $podcast->id) ?>" />
-    <Button variant="primary" type="submit"><?= lang('Subscription.form_link_add.submit') ?></Button>
+    <x-Button variant="primary" type="submit"><?= lang('Subscription.form_link_add.submit') ?></x-Button>
 </form>
 
 <hr class="my-6 border-subtle">
@@ -67,7 +67,7 @@
                     'expired'   => 'default',
                 ];
 
-                return '<Pill variant="' . $statusMapping[$subscription->status] . '" class="lowercase">' . lang('Subscription.status.' . $subscription->status) . '</Pill>';
+                return '<x-Pill variant="' . $statusMapping[$subscription->status] . '" class="lowercase">' . lang('Subscription.status.' . $subscription->status) . '</x-Pill>';
             },
         ],
         [
@@ -116,10 +116,10 @@
 
                 array_splice($items, 3, 0, $suspendAction);
 
-                return '<button id="more-dropdown-' . $subscription->id . '" type="button" class="inline-flex items-center p-1 rounded-full focus:ring-accent" data-dropdown="button" data-dropdown-target="more-dropdown-' . $subscription->id . '-menu" aria-haspopup="true" aria-expanded="false">' .
+                return '<button id="more-dropdown-' . $subscription->id . '" type="button" class="inline-flex items-center p-1 rounded-full" data-dropdown="button" data-dropdown-target="more-dropdown-' . $subscription->id . '-menu" aria-haspopup="true" aria-expanded="false">' .
                     icon('more-2-fill') .
                     '</button>' .
-                    '<DropdownMenu id="more-dropdown-' . $subscription->id . '-menu" labelledby="more-dropdown-' . $subscription->id . '" offsetY="-24" items="' . esc(json_encode($items)) . '" />';
+                    '<x-DropdownMenu id="more-dropdown-' . $subscription->id . '-menu" labelledby="more-dropdown-' . $subscription->id . '" offsetY="-24" items="' . esc(json_encode($items)) . '" />';
             },
         ],
     ],

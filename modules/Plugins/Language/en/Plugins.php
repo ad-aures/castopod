@@ -9,11 +9,19 @@ declare(strict_types=1);
  */
 
 return [
-    'installed' => 'Installed plugins ({count})',
+    'installed' => 'Plugins installed',
+    'about' => 'About',
     'website' => 'Website',
-    'settings' => '{pluginName} settings',
+    'repository' => 'Code repository',
+    'authors' => 'Authors',
+    'author_email' => 'Email {authorName}',
+    'author_homepage' => '{authorName} homepage',
+    'settings' => 'Settings',
+    'view' => 'View',
     'activate' => 'Activate',
     'deactivate' => 'Deactivate',
+    'active' => 'Active',
+    'inactive' => 'Inactive',
     'uninstall' => 'Uninstall',
     'keywords' => [
         'podcasting20' => 'Podcasting 2.0',

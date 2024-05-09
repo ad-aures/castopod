@@ -12,7 +12,7 @@
 
 <form action="<?= route_to('update') ?>" method="POST">
     <?= csrf_field() ?>
-    <button type="submit" name="action" value="database" class="inline-flex items-center px-4 py-2 text-lg font-semibold transition-colors rounded-full shadow group gap-x-2 bg-elevated hover:border-accent-hover focus:ring-accent border-3 border-subtle">
+    <button type="submit" name="action" value="database" class="inline-flex items-center px-4 py-2 text-lg font-semibold transition-colors rounded-full shadow group gap-x-2 bg-elevated hover:border-accent-hover border-3 border-subtle">
         <div class="relative">
             <?= icon('database-2-fill', [
                 'class' => 'text-4xl text-accent-base',

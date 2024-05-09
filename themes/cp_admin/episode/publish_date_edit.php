@@ -24,16 +24,16 @@
 <?= csrf_field() ?>
 <input type="hidden" name="client_timezone" value="UTC" />
 
-<Forms.Field
+<x-Forms.Field
     as="DatetimePicker"
     name="new_publication_date"
     label="<?= esc(lang('Episode.publish_date_edit_form.new_publication_date')) ?>"
     hint="<?= esc(lang('Episode.publish_date_edit_form.new_publication_date_hint')) ?>"
     value="<?= $episode->published_at ?>"
-    required="true"
+    isRequired="true"
 />
 
-<Button variant="primary" type="submit" class="mt-4"><?= lang('Episode.publish_date_edit_form.submit') ?></Button>
+<x-Button variant="primary" type="submit" class="mt-4"><?= lang('Episode.publish_date_edit_form.submit') ?></x-Button>
 
 </form>
 

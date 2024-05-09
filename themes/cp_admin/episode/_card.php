@@ -19,7 +19,7 @@
             <span class="font-semibold leading-tight line-clamp-2"><?= esc($episode->title) ?></span>
         </div>
     </a>
-    <button class="absolute top-0 right-0 z-10 p-2 mt-2 mr-2 text-white transition -translate-y-12 rounded-full opacity-0 focus:ring-accent focus:opacity-100 focus:-translate-y-0 group-hover:translate-y-0 bg-black/50 group-hover:opacity-100" id="more-dropdown-<?= $episode->id ?>" data-dropdown="button" data-dropdown-target="more-dropdown-<?= $episode->id ?>-menu" aria-haspopup="true" aria-expanded="false" title="<?= lang('Common.more') ?>"><?= icon('more-2-fill') ?></button>
+    <button class="absolute top-0 right-0 z-10 p-2 mt-2 mr-2 text-white transition -translate-y-12 rounded-full opacity-0 focus:opacity-100 focus:-translate-y-0 group-hover:translate-y-0 bg-black/50 group-hover:opacity-100" id="more-dropdown-<?= $episode->id ?>" data-dropdown="button" data-dropdown-target="more-dropdown-<?= $episode->id ?>-menu" aria-haspopup="true" aria-expanded="false" title="<?= lang('Common.more') ?>"><?= icon('more-2-fill') ?></button>
     <?php $items = [
         [
             'type'  => 'link',
@@ -75,5 +75,5 @@ if ($episode->published_at === null) {
                 HTML),
     ];
 } ?>
-    <DropdownMenu id="more-dropdown-<?= $episode->id ?>-menu" labelledby="more-dropdown-<?= $episode->id ?>" offsetY="-32" items="<?= esc(json_encode($items)) ?>" />
+    <x-DropdownMenu id="more-dropdown-<?= $episode->id ?>-menu" labelledby="more-dropdown-<?= $episode->id ?>" offsetY="-32" items="<?= esc(json_encode($items)) ?>" />
 </article>

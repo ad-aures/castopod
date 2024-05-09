@@ -24,16 +24,16 @@ if ($post->in_reply_to_id): ?>
                     ->avatar_image_url ?>" alt="<?= esc(interact_as_actor()
                     ->display_name) ?>" class="w-10 h-10 rounded-full aspect-square" loading="lazy" />
                 <div class="flex flex-col flex-1">
-                    <Forms.Textarea
+                    <x-Forms.Textarea
                         name="message"
                         class="w-full mb-4"
-                        required="true"
+                        isRequired="true"
                         placeholder="<?= lang('Post.form.reply_to_placeholder', [
                             'actorUsername' => esc($post->actor->username),
                         ]) ?>"
                         rows="1" />
                     <?php // @icon('send-plane-2-fill')?>
-                    <Button variant="primary" size="small" type="submit" name="action" value="reply" class="self-end" iconRight="send-plane-2-fill"><?= lang('Post.form.submit_reply') ?></Button>
+                    <x-Button variant="primary" size="small" type="submit" name="action" value="reply" class="self-end" iconRight="send-plane-2-fill"><?= lang('Post.form.submit_reply') ?></x-Button>
                 </div>
             </form>
         <?php else: ?>

@@ -21,9 +21,6 @@
       "description": "This helps people discover your plugin as it's listed in repositories",
       "type": "string"
     },
-    "author": {
-      "$ref": "#/$defs/person"
-    },
     "authors": {
       "type": "array",
       "items": {

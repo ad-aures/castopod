@@ -1,7 +1,7 @@
 <form method="POST" action="<?= $action ?>" class="flex flex-col max-w-sm gap-4" >
 <?= csrf_field() ?>
 <?php foreach ($plugin->getSettingsFields($type) as $field): ?>
-<Forms.Field
+<x-Forms.Field
     name="<?= esc($field->key) ?>"
     label="<?= esc($field->label) ?>"
     hint="<?= esc($field->hint) ?>"
@@ -10,5 +10,5 @@
     value="<?= get_plugin_option($plugin->getKey(), $field->key, $context) ?>"
 />
 <?php endforeach; ?>
-<Button class="self-end mt-4" variant="primary" type="submit"><?= lang('Common.forms.save') ?></Button>
+<x-Button class="self-end mt-4" variant="primary" type="submit"><?= lang('Common.forms.save') ?></x-Button>
 </form>

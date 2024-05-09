@@ -49,7 +49,7 @@
             </a>
             <div class="z-10 flex flex-wrap items-center justify-center gap-2 p-2 mt-6 shadow-xl rounded-conditional-full bg-accent-base shadow-accent/20">
                 <?php if (in_array(true, array_column($podcast->fundingPlatforms, 'is_visible'), true)): ?>
-                    <button class="inline-flex items-center px-4 text-xs font-semibold leading-8 tracking-wider text-red-600 uppercase bg-white rounded-full shadow hover:text-red-500 focus:ring-accent" data-toggle="funding-links" data-toggle-class="hidden"><?= icon('heart-fill', [
+                    <button class="inline-flex items-center px-4 text-xs font-semibold leading-8 tracking-wider text-red-600 uppercase bg-white rounded-full shadow hover:text-red-500" data-toggle="funding-links" data-toggle-class="hidden"><?= icon('heart-fill', [
                         'class' => 'mr-2 text-sm',
                     ]) ?><?= lang('Podcast.sponsor') ?></button>
                 <?php endif; ?>
@@ -61,16 +61,16 @@
                     [
                         'width'  => 420,
                         'height' => 620,
-                        'class'  => 'group inline-flex items-center px-4 text-xs tracking-wider font-semibold text-black uppercase rounded-full leading-8 shadow focus:ring-accent bg-white',
+                        'class'  => 'group inline-flex items-center px-4 text-xs tracking-wider font-semibold text-black uppercase rounded-full leading-8 shadow bg-white',
                     ],
                 ) ?>
-                <a href="<?= $podcast->feed_url ?>" title="<?= lang('Podcast.feed') ?>" data-tooltip="bottom" class="flex items-center justify-center w-8 h-8 p-1 text-xl text-orange-500 rounded-full shadow bg-elevated focus:ring-accent" target="_blank" rel="noopener noreferrer"><?= icon('rss-fill') ?></a>
+                <a href="<?= $podcast->feed_url ?>" title="<?= lang('Podcast.feed') ?>" data-tooltip="bottom" class="flex items-center justify-center w-8 h-8 p-1 text-xl text-orange-500 rounded-full shadow bg-elevated" target="_blank" rel="noopener noreferrer"><?= icon('rss-fill') ?></a>
             </div>
         </div>
     </header>
     <main class="grid w-full max-w-2xl gap-4 px-4 py-6 mx-auto sm:grid-cols-2">
         <a 
-            class="inline-flex items-center justify-center flex-shrink-0 px-3 py-2 text-sm font-semibold leading-5 bg-white border-2 rounded-full shadow-xs gap-x-2 focus:ring-accent border-accent-base text-accent-base hover:border-accent-hover hover:text-accent-hover"
+            class="inline-flex items-center justify-center flex-shrink-0 px-3 py-2 text-sm font-semibold leading-5 bg-white border-2 rounded-full shadow-xs gap-x-2 border-accent-base text-accent-base hover:border-accent-hover hover:text-accent-hover"
             href="<?= $podcast->link ?>"
             target="_blank"
             rel="noopener noreferrer"><?= icon('podcasting:castopod', [
@@ -80,7 +80,7 @@
         <?php foreach ($podcast->podcastingPlatforms as $podcastingPlatform): ?>
             <?php if ($podcastingPlatform->is_visible && $podcastingPlatform->slug !== 'castopod'): ?>
                 <a 
-                class="inline-flex items-center justify-center flex-shrink-0 px-3 py-2 text-sm font-semibold leading-5 bg-white border-2 rounded-full shadow-xs gap-x-2 focus:ring-accent border-accent-base text-accent-base hover:border-accent-hover hover:text-accent-hover"
+                class="inline-flex items-center justify-center flex-shrink-0 px-3 py-2 text-sm font-semibold leading-5 bg-white border-2 rounded-full shadow-xs gap-x-2 border-accent-base text-accent-base hover:border-accent-hover hover:text-accent-hover"
                 href="<?= $podcastingPlatform->link_url ?>"
                 target="_blank"
                 rel="noopener noreferrer"><?= icon($podcastingPlatform->type . ':' . $podcastingPlatform->slug, [

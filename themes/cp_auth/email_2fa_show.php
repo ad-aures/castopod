@@ -12,18 +12,18 @@
 <form action="<?= url_to('auth-action-handle') ?>" method="POST" class="flex flex-col w-full gap-y-4">
     <?= csrf_field() ?>
 
-    <Forms.Field
+    <x-Forms.Field
         name="email"
         label="<?= esc(lang('Auth.email')) ?>"
         helper="<?= esc(lang('Auth.confirmEmailAddress')) ?>"
-        required="true"
+        isRequired="true"
         type="email"
         inputmode="email"
         autocomplete="email"
         value="<?= $user->email ?>"
     />
 
-    <Button variant="primary" type="submit" class="self-end"><?= lang('Auth.send') ?></Button>
+    <x-Button variant="primary" type="submit" class="self-end"><?= lang('Auth.send') ?></x-Button>
 </form>
 
 

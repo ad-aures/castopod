@@ -32,7 +32,7 @@ if (can_user_interact()): ?>
                 ) ?>"><?= icon('heart-fill', [
                     'class' => 'text-lg mr-1 opacity-40',
                 ]) . $reply->favourites_count ?></button>
-                <button id="<?= $reply->id . '-more-dropdown' ?>" type="button" class="text-xl text-skin-muted focus:ring-accent" data-dropdown="button" data-dropdown-target="<?= $reply->id . '-more-dropdown-menu' ?>" aria-label="<?= lang('Common.more') ?>" aria-haspopup="true" aria-expanded="false"><?= icon('more-2-fill') ?></button>
+                <button id="<?= $reply->id . '-more-dropdown' ?>" type="button" class="text-xl text-skin-muted" data-dropdown="button" data-dropdown-target="<?= $reply->id . '-more-dropdown-menu' ?>" aria-label="<?= lang('Common.more') ?>" aria-haspopup="true" aria-expanded="false"><?= icon('more-2-fill') ?></button>
         </form>
         <nav id="<?= $reply->id . '-more-dropdown-menu' ?>" class="flex flex-col py-2 text-sm rounded-lg shadow border-3 border-subtle bg-elevated" aria-labelledby="<?= $reply->id . '-more-dropdown' ?>" data-dropdown="menu" data-dropdown-placement="bottom">
             <?= anchor(

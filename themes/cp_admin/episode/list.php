@@ -10,7 +10,7 @@
 
 <?= $this->section('headerRight') ?>
 <?php // @icon('add-fill')?>
-<Button uri="<?= route_to('episode-create', $podcast->id) ?>" variant="primary" iconLeft="add-fill"><?= lang('Episode.create') ?></Button>
+<x-Button uri="<?= route_to('episode-create', $podcast->id) ?>" variant="primary" iconLeft="add-fill"><?= lang('Episode.create') ?></x-Button>
 <?= $this->endSection() ?>
 
 
@@ -28,16 +28,16 @@
     </p>
     <form class="relative flex">
         <div class="relative">
-            <Forms.Input name="q" placeholder="<?= lang('Episode.list.search.placeholder') ?>" value="<?= esc($query) ?>" class="<?= $query ? 'pr-8' : '' ?>" />
+            <x-Forms.Input name="q" placeholder="<?= lang('Episode.list.search.placeholder') ?>" value="<?= esc($query) ?>" class="<?= $query ? 'pr-8' : '' ?>" />
             <?php if ($query): ?>
-                <a href="<?= route_to('episode-list', $podcast->id) ?>" class="absolute inset-y-0 right-0 inline-flex items-center justify-center px-2 opacity-75 focus:ring-accent hover:opacity-100 focus:opacity-100" title="<?= lang('Episode.list.search.clear') ?>" data-tooltip="bottom"><?= icon('close-fill', [
+                <a href="<?= route_to('episode-list', $podcast->id) ?>" class="absolute inset-y-0 right-0 inline-flex items-center justify-center px-2 opacity-75 hover:opacity-100 focus:opacity-100" title="<?= lang('Episode.list.search.clear') ?>" data-tooltip="bottom"><?= icon('close-fill', [
                     'class' => 'text-lg',
                 ]) ?></a>
             <?php endif; ?>
         </div>
-        <Button type="submit" variant="secondary" class="px-3 ml-2 rounded-lg shadow-md" title="<?= lang('Episode.list.search.submit') ?>" data-tooltip="bottom" isSquared="true"><?= icon('search-fill', [
+        <x-Button type="submit" variant="secondary" class="px-3 ml-2 rounded-lg shadow-md" title="<?= lang('Episode.list.search.submit') ?>" data-tooltip="bottom" isSquared="true"><?= icon('search-fill', [
             'class' => 'text-xl',
-        ]) ?></Button>
+        ]) ?></x-Button>
     </form>
 </div>
 
@@ -161,10 +161,10 @@ data_table(
                     HTML),
                     ];
                 }
-                return '<button id="more-dropdown-' . $episode->id . '" type="button" class="inline-flex items-center p-1 rounded-full focus:ring-accent" data-dropdown="button" data-dropdown-target="more-dropdown-' . $episode->id . '-menu" aria-haspopup="true" aria-expanded="false">' .
+                return '<button id="more-dropdown-' . $episode->id . '" type="button" class="inline-flex items-center p-1 rounded-full" data-dropdown="button" data-dropdown-target="more-dropdown-' . $episode->id . '-menu" aria-haspopup="true" aria-expanded="false">' .
                     icon('more-2-fill') .
                     '</button>' .
-                    '<DropdownMenu id="more-dropdown-' . $episode->id . '-menu" labelledby="more-dropdown-' . $episode->id . '" offsetY="-24" items="' . esc(json_encode($items)) . '" />';
+                    '<x-DropdownMenu id="more-dropdown-' . $episode->id . '-menu" labelledby="more-dropdown-' . $episode->id . '" offsetY="-24" items="' . esc(json_encode($items)) . '" />';
             },
         ],
     ],

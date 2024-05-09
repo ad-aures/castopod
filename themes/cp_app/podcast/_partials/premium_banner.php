@@ -11,7 +11,7 @@ if ($podcast->is_premium): ?>
         <p class="inline-flex items-center text-sm md:pl-4 gap-x-2"><?= $isUnlocked ? lang('PremiumPodcasts.banner_lock') : lang('PremiumPodcasts.banner_unlock') ?></p>
         <?php if ($subscriptionLink = service('settings')->get('Subscription.link', 'podcast:' . $podcast->id)): ?>
             <div class="flex items-center self-end gap-x-2">
-                <Button
+                <x-Button
                     variant="primary"
                     class="group"
                     size="small"
@@ -24,19 +24,19 @@ if ($podcast->is_premium): ?>
                         'class' => 'hidden text-sm group-focus:block group-hover:block',
                     ]) ?>
                     <?= $isUnlocked ? lang('PremiumPodcasts.lock') : lang('PremiumPodcasts.unlock') ?>
-                </Button>
+                </x-Button>
                 <?php // @icon('external-link-fill')?>
-                <Button
+                <x-Button
                     iconLeft="external-link-fill"
                     target="_blank"
                     rel="noopener noreferrer"
                     variant="secondary"
                     size="small"
                     class="tracking-wider uppercase"
-                    uri="<?= $subscriptionLink ?>"><?= lang('PremiumPodcasts.subscribe') ?></Button>
+                    uri="<?= $subscriptionLink ?>"><?= lang('PremiumPodcasts.subscribe') ?></x-Button>
             </div>
         <?php else: ?>
-            <Button
+            <x-Button
                 variant="primary"
                 class="self-end group"
                 size="small"
@@ -49,7 +49,7 @@ if ($podcast->is_premium): ?>
                     'class' => 'hidden text-sm group-focus:block group-hover:block',
                 ]) ?>
                 <?= $isUnlocked ? lang('PremiumPodcasts.lock') : lang('PremiumPodcasts.unlock') ?>
-            </Button>
+            </x-Button>
         <?php endif; ?>
     </div>
 <?php endif; ?>

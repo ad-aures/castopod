@@ -14,10 +14,10 @@
     <?= csrf_field() ?>
 
     <!-- Code -->
-    <Forms.Field
+    <x-Forms.Field
         name="token"
         label="<?= esc(lang('Auth.token')) ?>"
-        required="true"
+        isRequired="true"
         inputmode="numeric"
         pattern="[0-9]*"
         autocomplete="one-time-code"
@@ -25,7 +25,7 @@
         placeholder="000000"
     />
 
-    <Button variant="primary" type="submit" class="self-end"><?= lang('Auth.send') ?></Button>
+    <x-Button variant="primary" type="submit" class="self-end"><?= lang('Auth.send') ?></x-Button>
 </form>
 
 <?= $this->endSection() ?>

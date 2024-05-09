@@ -139,6 +139,9 @@ module.exports = {
                 textDecoration: "none",
               },
             },
+            input: {
+              margin: 0,
+            },
           },
         },
         sm: {

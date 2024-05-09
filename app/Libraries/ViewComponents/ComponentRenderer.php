@@ -43,38 +43,38 @@ class ComponentRenderer
     private function renderSelfClosingTags(string $output): string
     {
         // Pattern borrowed and adapted from Laravel's ComponentTagCompiler
-        // Should match any Component tags <Component />
+        // Should match any Component tags <x-Component />
         $pattern = "/
             <
-                \s*
-                (?<name>[A-Z][A-Za-z0-9\.]*?)
-                \s*
+                \\s*
+                x[-\\:](?<name>[\\w\\-\\:\\.]*)
+                \\s*
                 (?<attributes>
                     (?:
-                        \s+
+                        \\s+
                         (?:
                             (?:
-                                \{\{\s*\\\$attributes(?:[^}]+?)?\s*\}\}
+                                \\{\\{\\s*\\\$attributes(?:[^}]+?)?\\s*\\}\\}
                             )
                             |
                             (?:
-                                [\w\-:.@]+
+                                [\\w\\-:.@]+
                                 (
                                     =
                                     (?:
                                         \\\"[^\\\"]*\\\"
                                         |
-                                        \'[^\']*\'
+                                        \\'[^\\']*\\'
                                         |
-                                        [^\'\\\"=<>]+
+                                        [^\\'\\\"=<>]+
                                     )
                                 )?
                             )
                         )
                     )*
-                    \s*
+                    \\s*
                 )
-            \/>
+            \\/>
         /x";
 
         /*
@@ -96,8 +96,9 @@ class ComponentRenderer
 
     private function renderPairedTags(string $output): string
     {
-        $pattern = '/<\s*(?<name>[A-Z][A-Za-z0-9\.]*?)(?<attributes>(\s*[\w\-]+\s*=\s*(\'[^\']*\'|\"[^\"]*\"))+\s*)>(?<slot>.*)<\/\s*\1\s*>/uUsm';
-        ini_set('pcre.backtrack_limit', '-1');
+        // ini_set('pcre.backtrack_limit', '-1');
+        $pattern = '/<\s*x[-\:](?<name>[\w\-\:\.]*?)(?<attributes>(\s*[\w\-]+\s*=\s*(\'[^\']*\'|\"[^\"]*\"))+\s*)>(?<slot>.*)<\/\s*x-\1\s*>/uiUsm';
+
         /*
             $matches[0] = full tags matched and all of its content
             $matches[name] = pascal cased tag name
@@ -166,8 +167,6 @@ class ComponentRenderer
                 (?<value>
                     (
                         \"[^\"]+\"
-                        |
-                        \'[^\']+\'
                         |
                         \\\'[^\\\']+\\\'
                         |

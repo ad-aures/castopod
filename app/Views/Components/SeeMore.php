@@ -12,11 +12,15 @@ class SeeMore extends Component
     {
         $seeMoreLabel = lang('Common.see_more');
         $seeLessLabel = lang('Common.see_less');
+
+        $this->mergeClass('see-more');
+        $this->attributes['styles'] = '--content-height: 10rem';
+
         return <<<HTML
-            <div class="see-more" style="--content-height: 10rem">
+            <div {$this->getStringifiedAttributes()}>
                 <input id="see-more-checkbox" type="checkbox" class="see-more__checkbox" aria-hidden="true">
-                <div class="mb-2 see-more__content {$this->class}"><div class="see-more_content-fade"></div>{$this->slot}</div>
-                <label for="see-more-checkbox" class="see-more__label" data-see-more="{$seeMoreLabel}" data-see-less="{$seeLessLabel}" aria-hidden="true"></label>
+                <div class="see-more__content"><div class="see-more_content-fade"></div>{$this->slot}</div>
+                <label for="see-more-checkbox" class="mt-2 see-more__label" data-see-more="{$seeMoreLabel}" data-see-less="{$seeLessLabel}" aria-hidden="true"></label>
             </div>
         HTML;
     }

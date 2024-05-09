@@ -20,7 +20,7 @@
         <a href="<?= $episode->link ?>" class="flex items-baseline font-semibold line-clamp-2" title="<?= esc($episode->title) ?>"><?= esc($episode->title) ?></a>
     </div>
     <?php if ($episode->is_premium && ! is_unlocked($episode->podcast->handle)): ?>
-        <a href="<?= route_to('episode', $episode->podcast->handle, $episode->slug) ?>" class="p-3 mr-4 rounded-full bg-brand bg-accent-base text-accent-contrast hover:bg-accent-hover focus:ring-accent" title="<?= lang('PremiumPodcasts.unlock_episode') ?>" data-tooltip="bottom">
+        <a href="<?= route_to('episode', $episode->podcast->handle, $episode->slug) ?>" class="p-3 mr-4 rounded-full bg-brand bg-accent-base text-accent-contrast hover:bg-accent-hover" title="<?= lang('PremiumPodcasts.unlock_episode') ?>" data-tooltip="bottom">
             <?= icon('lock-fill', [
                 'class' => 'text-xl',
             ]) ?>

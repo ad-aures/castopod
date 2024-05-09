@@ -46,7 +46,7 @@
     <?php endif; ?>
 
     <nav class="flex items-center justify-between h-10 col-start-2 text-white bg-header">
-        <a href="<?= route_to('podcast-episodes', esc($podcast->handle)) ?>" class="flex items-center h-full min-w-0 px-2 gap-x-2 focus:ring-accent focus:ring-inset" title="<?= lang('Episode.back_to_episodes', [
+        <a href="<?= route_to('podcast-episodes', esc($podcast->handle)) ?>" class="flex items-center h-full min-w-0 px-2 gap-x-2" title="<?= lang('Episode.back_to_episodes', [
             'podcast' => esc($podcast->title),
         ]) ?>">
             <?= icon('arrow-left-line', [
@@ -64,7 +64,7 @@
         </a>
         <div class="inline-flex items-center self-end h-full px-2 gap-x-2">
             <?php if (in_array(true, array_column($podcast->fundingPlatforms, 'is_visible'), true)): ?>
-                <button class="p-2 text-red-600 bg-white rounded-full shadow hover:text-red-500 focus:ring-accent" data-toggle="funding-links" data-toggle-class="hidden" title="<?= lang('Podcast.sponsor') ?>"><?= icon('heart-fill') ?></button>
+                <button class="p-2 text-red-600 bg-white rounded-full shadow hover:text-red-500" data-toggle="funding-links" data-toggle-class="hidden" title="<?= lang('Podcast.sponsor') ?>"><?= icon('heart-fill') ?></button>
             <?php endif; ?>
             <?= anchor_popup(
                 route_to('follow', esc($podcast->handle)),
@@ -77,7 +77,7 @@
                 [
                     'width'  => 420,
                     'height' => 620,
-                    'class'  => 'group inline-flex items-center px-3 leading-8 text-xs tracking-wider font-semibold text-black uppercase rounded-full shadow focus:ring-accent bg-white',
+                    'class'  => 'group inline-flex items-center px-3 leading-8 text-xs tracking-wider font-semibold text-black uppercase rounded-full shadow bg-white',
                 ],
             ) ?>
         </div>
@@ -100,7 +100,7 @@
                 <h1 class="inline-flex items-baseline max-w-lg mt-2 text-2xl font-bold sm:leading-none sm:text-3xl font-display line-clamp-2" title="<?= esc($episode->title) ?>"><?= esc($episode->title) ?></h1>
                 <div class="flex items-center w-full mt-4 gap-x-8">
                 <?php if ($episode->persons !== []): ?>
-                    <button class="flex items-center flex-shrink-0 text-xs font-semibold gap-x-2 hover:underline focus:ring-accent" data-toggle="persons-list" data-toggle-class="hidden">
+                    <button class="flex items-center flex-shrink-0 text-xs font-semibold gap-x-2 hover:underline" data-toggle="persons-list" data-toggle-class="hidden">
                         <span class="inline-flex flex-row-reverse">
                             <?php $i = 0; ?>
                             <?php foreach ($episode->persons as $person): ?>
@@ -148,7 +148,7 @@
     <div class="col-start-2 px-8 py-4 text-white bg-header">
         <h2 class="text-xs font-bold tracking-wider uppercase whitespace-pre-line font-display"><?= lang('Episode.description') ?></h2>
         <?php if (substr_count($episode->description_markdown, "\n") > 6 || strlen($episode->description) > 500): ?>
-            <SeeMore class="max-w-xl prose-sm text-white"><?= $episode->getDescriptionHtml('-+Website+-') ?></SeeMore>
+            <x-SeeMore class="max-w-xl prose-sm text-white"><?= $episode->getDescriptionHtml('-+Website+-') ?></x-SeeMore>
         <?php else: ?>
             <div class="max-w-xl prose-sm text-white"><?= $episode->getDescriptionHtml('-+Website+-') ?></div>
         <?php endif; ?>
@@ -171,20 +171,20 @@
         <?php if (auth()->loggedIn()): ?>
             <?php if (in_array($episode->publication_status, ['scheduled', 'with_podcast'], true)): ?>
                 <?php // @icon('upload-cloud-fill')?>
-                <Button
+                <x-Button
                     iconLeft="upload-cloud-fill"
                     variant="primary"
                     size="small"
                     class="ml-auto"
-                    uri="<?= route_to('episode-publish_edit', $episode->podcast_id, $episode->id) ?>"><?= lang('Episode.preview.publish_edit') ?></Button>
+                    uri="<?= route_to('episode-publish_edit', $episode->podcast_id, $episode->id) ?>"><?= lang('Episode.preview.publish_edit') ?></x-Button>
             <?php else: ?>
                 <?php // @icon('upload-cloud-fill')?>
-                <Button
+                <x-Button
                     iconLeft="upload-cloud-fill"
                     variant="secondary"
                     size="small"
                     class="ml-auto"
-                    uri="<?= route_to('episode-publish', $episode->podcast_id, $episode->id) ?>"><?= lang('Episode.preview.publish') ?></Button>
+                    uri="<?= route_to('episode-publish', $episode->podcast_id, $episode->id) ?>"><?= lang('Episode.preview.publish') ?></x-Button>
             <?php endif; ?>
         <?php endif; ?>
     </div>

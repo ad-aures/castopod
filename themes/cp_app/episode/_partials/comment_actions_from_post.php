@@ -10,7 +10,7 @@
         ) ?>"><?= icon('heart-fill', [
             'class' => 'text-xl mr-1 text-gray-400 group-hover:text-red-600',
         ]) . $comment->likes_count ?></button>
-            <Button uri="<?= route_to('post', esc($podcast->handle), $comment->id) ?>" size="small"><?= lang('Comment.reply') ?></Button>
+            <x-Button uri="<?= route_to('post', esc($podcast->handle), $comment->id) ?>" size="small"><?= lang('Comment.reply') ?></x-Button>
         </form>
         <?php if ($comment->replies_count): ?>
             <?= anchor(

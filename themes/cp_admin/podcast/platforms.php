@@ -9,7 +9,7 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('headerRight') ?>
-<Button form="platforms-form" variant="primary" type="submit" class="self-end"><?= lang('Platforms.submit') ?></Button>
+<x-Button form="platforms-form" variant="primary" type="submit" class="self-end"><?= lang('Platforms.submit') ?></x-Button>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>

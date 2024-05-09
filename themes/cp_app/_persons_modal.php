@@ -21,7 +21,7 @@
                     <div class="flex flex-col">
                         <h4 class="text-sm font-semibold">
                             <?php if ($person->information_url): ?>
-                                <a href="<?= esc($person->information_url) ?>" class="hover:underline focus:ring-accent" target="_blank" rel="noopener noreferrer"><?= esc($person->full_name) ?></a>
+                                <a href="<?= esc($person->information_url) ?>" class="hover:underline" target="_blank" rel="noopener noreferrer"><?= esc($person->full_name) ?></a>
                             <?php else: ?>
                                 <?= esc($person->full_name) ?>
                             <?php endif; ?>

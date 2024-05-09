@@ -4,16 +4,19 @@ declare(strict_types=1);
 
 namespace App\Views\Components\Forms;
 
+use App\Views\Components\Hint;
+
 class RadioButton extends FormComponent
 {
+    protected array $props = ['isChecked', 'hint'];
+
+    protected array $casts = [
+        'isChecked' => 'boolean',
+    ];
+
     protected bool $isChecked = false;
 
-    protected ?string $hint = null;
-
-    public function setIsChecked(string $value): void
-    {
-        $this->isChecked = $value === 'true';
-    }
+    protected string $hint = '';
 
     public function render(): string
     {
@@ -23,7 +26,7 @@ class RadioButton extends FormComponent
             'class' => 'form-radio-btn bg-elevated',
         ];
 
-        if ($this->required) {
+        if ($this->isRequired) {
             $data['required'] = 'required';
         }
 
@@ -33,10 +36,13 @@ class RadioButton extends FormComponent
             old($this->name) ? old($this->name) === $this->value : $this->isChecked,
         );
 
-        $hint = $this->hint ? hint_tooltip($this->hint, 'ml-1 text-base') : '';
+        $hint = $this->hint === '' ? '' : (new Hint([
+            'class' => 'ml-1 text-base',
+            'slot'  => $this->hint,
+        ]))->render();
 
         return <<<HTML
-            <div class="{$this->class}">
+            <div {$this->getStringifiedAttributes()}">
                 {$radioInput}
                 <label for="{$this->value}">{$this->slot}{$hint}</label>
             </div>

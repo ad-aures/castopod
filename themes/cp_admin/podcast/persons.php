@@ -10,7 +10,7 @@
 
 <?= $this->section('headerRight') ?>
 <?php // @icon('add-fill')?>
-<Button uri="<?= route_to('person-create') ?>" variant="primary" iconLeft="add-fill"><?= lang('Person.create') ?></Button>
+<x-Button uri="<?= route_to('person-create') ?>" variant="primary" iconLeft="add-fill"><?= lang('Person.create') ?></x-Button>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -18,12 +18,12 @@
 <form action="<?= route_to('podcast-persons-manage', $podcast->id) ?>" method="POST" class="max-w-xl">
     <?= csrf_field() ?>
 
-    <Forms.Section
+    <x-Forms.Section
         title="<?= lang('Person.podcast_form.add_section_title') ?>"
         subtitle="<?= lang('Person.podcast_form.add_section_subtitle') ?>"
     >
 
-    <Forms.Field
+    <x-Forms.Field
         as="MultiSelect"
         id="persons"
         name="persons[]"
@@ -31,9 +31,9 @@
         hint="<?= esc(lang('Person.podcast_form.persons_hint')) ?>"
         options="<?= esc(json_encode($personOptions)) ?>"
         selected="<?= esc(json_encode(old('persons', []))) ?>"
-        required="true" />
+        isRequired="true" />
 
-    <Forms.Field
+    <x-Forms.Field
         as="MultiSelect"
         id="roles"
         name="roles[]"
@@ -43,9 +43,9 @@
         selected="<?= esc(json_encode(old('roles', []))) ?>"
     />
 
-    <Button variant="primary" class="self-end" type="submit"><?= lang('Person.podcast_form.submit_add') ?></Button>
+    <x-Button variant="primary" class="self-end" type="submit"><?= lang('Person.podcast_form.submit_add') ?></x-Button>
 
-    </Forms.Section>
+    </x-Forms.Section>
 </form>
 
 <?= data_table(
@@ -85,7 +85,7 @@
             'header' => lang('Common.actions'),
             'cell'   => function ($person): string {
                 // @icon('delete-bin-fill')
-                return '<Button uri="' . route_to('podcast-person-remove', $person->podcast_id, $person->id) . '" variant="danger" size="small" iconLeft="delete-bin-fill">' . lang('Person.podcast_form.remove') . '</Button>';
+                return '<x-Button uri="' . route_to('podcast-person-remove', $person->podcast_id, $person->id) . '" variant="danger" size="small" iconLeft="delete-bin-fill">' . lang('Person.podcast_form.remove') . '</x-Button>';
             },
         ],
     ],

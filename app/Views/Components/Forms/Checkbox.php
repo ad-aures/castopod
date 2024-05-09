@@ -4,35 +4,41 @@ declare(strict_types=1);
 
 namespace App\Views\Components\Forms;
 
+use App\Views\Components\Hint;
+
 class Checkbox extends FormComponent
 {
-    protected ?string $hint = null;
+    protected array $props = ['hint', 'isChecked'];
+
+    protected array $casts = [
+        'isChecked' => 'boolean',
+    ];
+
+    protected string $hint = '';
 
     protected bool $isChecked = false;
 
-    public function setIsChecked(string $value): void
-    {
-        $this->isChecked = $value === 'true';
-    }
-
     public function render(): string
     {
-        $attributes = [
-            'id'    => $this->value,
-            'name'  => $this->name,
-            'class' => 'form-checkbox bg-elevated text-accent-base border-contrast border-3 focus:ring-accent w-6 h-6',
-        ];
-
         $checkboxInput = form_checkbox(
-            $attributes,
+            [
+                'id'    => $this->value,
+                'name'  => $this->name,
+                'class' => 'form-checkbox bg-elevated text-accent-base border-contrast border-3 w-6 h-6',
+            ],
             'yes',
             old($this->name) ? old($this->name) === $this->value : $this->isChecked,
         );
 
-        $hint = $this->hint === null ? '' : hint_tooltip($this->hint, 'ml-1');
+        $hint = $this->hint === '' ? '' : (new Hint([
+            'class' => 'ml-1',
+            'slot'  => $this->hint,
+        ]))->render();
+
+        $this->mergeClass('inline-flex items-center');
 
         return <<<HTML
-            <label class="inline-flex items-center {$this->class}">{$checkboxInput}<span class="ml-2">{$this->slot}{$hint}</span></label>
+            <label {$this->getStringifiedAttributes()}>{$checkboxInput}<span class="ml-2">{$this->slot}{$hint}</span></label>
         HTML;
     }
 }

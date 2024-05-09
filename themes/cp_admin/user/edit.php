@@ -18,15 +18,15 @@
 <form action="<?= route_to('user-edit', $user->id) ?>" method="POST" class="flex flex-col max-w-sm">
 <?= csrf_field() ?>
 
-<Forms.Field
+<x-Forms.Field
     as="Select"
     name="role"
     label="<?= esc(lang('User.form.role')) ?>"
     options="<?= esc(json_encode($roleOptions)) ?>"
     selected="<?= esc(get_instance_group($user)) ?>"
-    required="true" />
+    isRequired="true" />
 
-<Button variant="primary" type="submit" class="self-end mt-4"><?= lang('User.form.submit_edit') ?></Button>
+<x-Button variant="primary" type="submit" class="self-end mt-4"><?= lang('User.form.submit_edit') ?></x-Button>
 
 </form>
 

@@ -18,7 +18,7 @@
             <?php endif; ?>
         </h1>
         <?php if ($activeQuery): ?>
-            <button id="episode-lists-dropdown" type="button" class="inline-flex items-center px-2 py-1 text-sm font-semibold focus:ring-accent" data-dropdown="button" data-dropdown-target="episode-lists-dropdown-menu" aria-label="<?= lang('Common.more') ?>" aria-haspopup="true" aria-expanded="false">
+            <button id="episode-lists-dropdown" type="button" class="inline-flex items-center px-2 py-1 text-sm font-semibold" data-dropdown="button" data-dropdown-target="episode-lists-dropdown-menu" aria-label="<?= lang('Common.more') ?>" aria-haspopup="true" aria-expanded="false">
                 <?= $activeQuery['label'] . icon('arrow-drop-down-fill', [
                     'class' => 'ml-2 text-xl',
                 ]) ?>

@@ -29,9 +29,9 @@ class SettingsField extends ManifestObject
 
     protected string $label;
 
-    protected ?string $hint = '';
+    protected string $hint = '';
 
-    protected ?string $helper = '';
+    protected string $helper = '';
 
     protected bool $optional = false;
 }

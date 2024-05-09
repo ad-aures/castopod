@@ -12,7 +12,7 @@ use Exception;
  * @property ?string $email
  * @property ?URI $url
  */
-class Author extends ManifestObject
+class Person extends ManifestObject
 {
     protected const VALIDATION_RULES = [
         'name'  => 'required',

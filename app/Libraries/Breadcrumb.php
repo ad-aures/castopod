@@ -32,12 +32,18 @@ class Breadcrumb
         $uri = '';
         foreach (current_url(true)->getSegments() as $segment) {
             $uri .= '/' . $segment;
-            $this->links[] = [
+            $link = [
                 'text' => is_numeric($segment)
                     ? $segment
                     : lang('Breadcrumb.' . $segment),
                 'href' => base_url($uri),
             ];
+
+            if (is_numeric($segment)) {
+                $this->links[] = $link;
+            } else {
+                $this->links[$segment] = $link;
+            }
         }
     }
 
@@ -46,20 +52,19 @@ class Breadcrumb
      *
      * Given a breadcrumb with numeric params, this function replaces them with the values provided in $newParams
      *
-     * Example with `Home / podcasts / 1 / episodes / 1`
+     * Example with `Home / podcasts / 1 / episodes / 1 / foo`
      *
-     * $newParams = [ 0 => 'foo', 1 => 'bar' ] replaceParams($newParams);
+     * $newParams = [ 0 => 'bar', 1 => 'baz', 'foo' => 'I Pity The Foo' ] replaceParams($newParams);
      *
-     * The breadcrumb is now `Home / podcasts / foo / episodes / bar`
+     * The breadcrumb is now `Home / podcasts / foo / episodes / bar / I Pity The Foo`
      *
      * @param string[] $newParams
      */
     public function replaceParams(array $newParams): void
     {
-        foreach ($this->links as $key => $link) {
-            if (is_numeric($link['text'])) {
-                $this->links[$key]['text'] = $newParams[0];
-                array_shift($newParams);
+        foreach ($newParams as $key => $newValue) {
+            if (array_key_exists($key, $this->links)) {
+                $this->links[$key]['text'] = $newValue;
             }
         }
     }

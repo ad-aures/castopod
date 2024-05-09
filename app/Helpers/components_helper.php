@@ -16,31 +16,6 @@ use CodeIgniter\View\Table;
 
 // ------------------------------------------------------------------------
 
-if (! function_exists('hint_tooltip')) {
-    /**
-     * Hint component
-     *
-     * Used to produce tooltip with a question mark icon for hint texts
-     *
-     * @param string $hintText The hint text
-     */
-    function hint_tooltip(string $hintText = '', string $class = ''): string
-    {
-        $tooltip =
-            '<span data-tooltip="bottom" tabindex="0" title="' .
-            esc($hintText) .
-            '" class="inline-block align-middle opacity-75 focus:ring-accent';
-
-        if ($class !== '') {
-            $tooltip .= ' ' . $class;
-        }
-
-        return $tooltip . '">' . icon('question-fill') . '</span>';
-    }
-}
-
-// ------------------------------------------------------------------------
-
 if (! function_exists('data_table')) {
     /**
      * Data table component
@@ -113,12 +88,12 @@ if (! function_exists('publication_pill')) {
      */
     function publication_pill(?Time $publicationDate, string $publicationStatus, string $customClass = ''): string
     {
-        $class = match ($publicationStatus) {
-            'published'     => 'text-pine-500 border-pine-500 bg-pine-50',
-            'scheduled'     => 'text-red-600 border-red-600 bg-red-50',
-            'with_podcast'  => 'text-blue-600 border-blue-600 bg-blue-50',
-            'not_published' => 'text-gray-600 border-gray-600 bg-gray-50',
-            default         => 'text-gray-600 border-gray-600 bg-gray-50',
+        $variant = match ($publicationStatus) {
+            'published'     => 'success',
+            'scheduled'     => 'warning',
+            'with_podcast'  => 'info',
+            'not_published' => 'default',
+            default         => 'default',
         };
 
         $title = match ($publicationStatus) {
@@ -130,16 +105,12 @@ if (! function_exists('publication_pill')) {
 
         $label = lang('Episode.publication_status.' . $publicationStatus);
 
-        return '<span ' . ($title === '' ? '' : 'title="' . $title . '"') . ' class="flex items-center px-1 font-semibold border rounded w-max ' .
-            $class .
-            ' ' .
-            $customClass .
-            '">' .
-            $label .
-            ($publicationStatus === 'with_podcast' ? icon('error-warning-fill', [
+        // @icon('error-warning-fill')
+        return '<x-Pill ' . ($title === '' ? '' : 'title="' . $title . '"') . ' variant="' . $variant . '" class="' . $customClass .
+            '">' . $label . ($publicationStatus === 'with_podcast' ? icon('error-warning-fill', [
                 'class' => 'flex-shrink-0 ml-1 text-lg',
             ]) : '') .
-            '</span>';
+            '</x-Pill>';
     }
 }
 
@@ -182,7 +153,7 @@ if (! function_exists('publication_button')) {
         }
 
         return <<<HTML
-            <Button variant="{$variant}" uri="{$route}" iconLeft="{$iconLeft}" >{$label}</Button>
+            <x-Button variant="{$variant}" uri="{$route}" iconLeft="{$iconLeft}" >{$label}</x-Button>
         HTML;
     }
 }
@@ -356,7 +327,7 @@ if (! function_exists('location_link')) {
                 'class' => 'mr-2 flex-shrink-0',
             ]) . '<span class="truncate">' . esc($location->name) . '</span>',
             [
-                'class' => 'w-full overflow-hidden inline-flex items-baseline hover:underline focus:ring-accent' .
+                'class' => 'w-full overflow-hidden inline-flex items-baseline hover:underline' .
                     ($class === '' ? '' : " {$class}"),
                 'target' => '_blank',
                 'rel'    => 'noreferrer noopener',

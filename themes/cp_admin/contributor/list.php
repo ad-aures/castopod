@@ -10,7 +10,7 @@
 
 <?= $this->section('headerRight') ?>
 <?php // @icon('add-fill')?>
-<Button uri="<?= route_to('contributor-add', $podcast->id) ?>" variant="primary" iconLeft="add-fill"><?= lang('Contributor.add') ?></Button>
+<x-Button uri="<?= route_to('contributor-add', $podcast->id) ?>" variant="primary" iconLeft="add-fill"><?= lang('Contributor.add') ?></x-Button>
 <?= $this->endSection() ?>
 
 
@@ -30,7 +30,7 @@
                 $role = get_group_info(get_podcast_group($contributor, $podcast->id), $podcast->id)['title'];
 
                 if ($podcast->created_by === $contributor->id) {
-                    $role = '<div class="inline-flex items-center"><span class="mr-2 focus:ring-accent" tabindex="0" data-tooltip="bottom" title="' . lang('Auth.podcast_groups.owner.title') . '">' . icon('shield-user-fill') . '</span>' . $role . '</div>';
+                    $role = '<div class="inline-flex items-center"><span class="mr-2" tabindex="0" data-tooltip="bottom" title="' . lang('Auth.podcast_groups.owner.title') . '">' . icon('shield-user-fill') . '</span>' . $role . '</div>';
                 }
 
                 return $role;
@@ -41,8 +41,8 @@
             'cell'   => function ($contributor, $podcast) {
                 // @icon('pencil-fill')
                 // @icon('delete-bin-fill')
-                return '<Button uri="' . route_to('contributor-edit', $podcast->id, $contributor->id) . '" variant="secondary" iconLeft="pencil-fill" size="small">' . lang('Contributor.edit') . '</Button>' .
-                '<Button uri="' . route_to('contributor-remove', $podcast->id, $contributor->id) . '" variant="danger" iconLeft="delete-bin-fill" size="small">' . lang('Contributor.remove') . '</Button>';
+                return '<x-Button uri="' . route_to('contributor-edit', $podcast->id, $contributor->id) . '" variant="secondary" iconLeft="pencil-fill" size="small">' . lang('Contributor.edit') . '</x-Button>' .
+                '<x-Button uri="' . route_to('contributor-remove', $podcast->id, $contributor->id) . '" variant="danger" iconLeft="delete-bin-fill" size="small">' . lang('Contributor.remove') . '</x-Button>';
             },
         ],
     ],

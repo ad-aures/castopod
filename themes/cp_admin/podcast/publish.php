@@ -16,7 +16,7 @@
         'class' => 'mr-2 text-lg',
     ]) . lang('Podcast.publish_form.back_to_podcast_dashboard'),
     [
-        'class' => 'inline-flex items-center font-semibold mr-4 text-sm focus:ring-accent',
+        'class' => 'inline-flex items-center font-semibold mr-4 text-sm',
     ],
 ) ?>
 
@@ -39,7 +39,7 @@
         </div>
     </div>
     <div class="px-4 mb-2">
-        <Forms.Textarea name="message" placeholder="<?= lang('Podcast.publish_form.message_placeholder') ?>" autofocus="" rows="2" />
+        <x-Forms.Textarea name="message" placeholder="<?= lang('Podcast.publish_form.message_placeholder') ?>" autofocus="" rows="2" />
     </div>
     <footer class="flex justify-around px-6 py-3">
         <span class="inline-flex items-center"><?= icon('chat-4-fill', [
@@ -58,14 +58,14 @@
     <legend class="text-lg font-semibold"><?= lang(
         'Podcast.publish_form.publication_date',
     ) ?></legend>
-    <Forms.Radio value="now" name="publication_method" isChecked="<?= old('publication_method') ? old('publish') === 'now' : true ?>"><?= lang('Podcast.publish_form.publication_method.now') ?></Forms.Radio>
+    <x-Forms.Radio value="now" name="publication_method" isChecked="<?= old('publication_method') ? old('publish') === 'now' : true ?>"><?= lang('Podcast.publish_form.publication_method.now') ?></x-Forms.Radio>
     <div class="inline-flex flex-wrap items-center radio-toggler">
         <input
-            class="w-6 h-6 border-contrast text-accent-base border-3 focus:ring-accent"
+            class="w-6 h-6 border-contrast text-accent-base border-3"
             type="radio" id="schedule" name="publication_method" value="schedule" <?= old('publication_method') && old('publication_method') === 'schedule' ? 'checked' : '' ?> />
-        <Label for="schedule" class="pl-2 leading-8"><?= lang('Podcast.publish_form.publication_method.schedule') ?></label>
+        <x-Label for="schedule" class="pl-2 leading-8"><?= lang('Podcast.publish_form.publication_method.schedule') ?></label>
         <div class="w-full mt-2 radio-toggler-element">
-            <Forms.Field
+            <x-Forms.Field
                 as="DatetimePicker"
                 name="scheduled_publication_date"
                 label="<?= esc(lang('Podcast.publish_form.scheduled_publication_date')) ?>"
@@ -76,11 +76,11 @@
     </div>
 </fieldset>
 
-<Alert id="publish-warning" variant="warning" class="hidden mt-2" title="<?= lang('Podcast.publish_form.message_warning') ?>"><?= lang('Podcast.publish_form.message_warning_hint') ?></Alert>
+<x-Alert id="publish-warning" variant="warning" class="hidden mt-2" title="<?= lang('Podcast.publish_form.message_warning') ?>"><?= lang('Podcast.publish_form.message_warning_hint') ?></x-Alert>
 
 <div class="flex items-center justify-between w-full mt-4">
-    <Button uri="<?= route_to('podcast-publish-cancel', $podcast->id) ?>" variant="danger"><?= lang('Podcast.publish_form.cancel_publication') ?></Button>
-    <Button variant="primary" type="submit" data-btn-text-warning="<?= lang('Podcast.publish_form.message_warning_submit') ?>" data-btn-text="<?= lang('Podcast.publish_form.submit') ?>"><?= lang('Podcast.publish_form.submit') ?></Button>
+    <x-Button uri="<?= route_to('podcast-publish-cancel', $podcast->id) ?>" variant="danger"><?= lang('Podcast.publish_form.cancel_publication') ?></x-Button>
+    <x-Button variant="primary" type="submit" data-btn-text-warning="<?= lang('Podcast.publish_form.message_warning_submit') ?>" data-btn-text="<?= lang('Podcast.publish_form.submit') ?>"><?= lang('Podcast.publish_form.submit') ?></x-Button>
 </div>
 
 </form>

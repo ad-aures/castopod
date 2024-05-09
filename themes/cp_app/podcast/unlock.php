@@ -43,12 +43,12 @@
             <?= icon('lock-fill', [
                 'class' => 'p-4 text-6xl rounded-full bg-base text-accent-base',
             ]) ?>
-            <Heading tagName="h1" size="large" class="mt-2"><?= lang('PremiumPodcasts.unlock_form.title') ?></Heading>
+            <x-Heading tagName="h1" size="large" class="mt-2"><?= lang('PremiumPodcasts.unlock_form.title') ?></x-Heading>
             <p class="max-w-sm text-skin-muted"><?= lang('PremiumPodcasts.unlock_form.subtitle', [
                 'podcastTitle' => esc($podcast->title),
             ]) ?></p>
             <?= view('_message_block') ?>
-            <Forms.Field
+            <x-Forms.Field
                 class="self-stretch mt-4 text-left"
                 name="token"
                 type="password"
@@ -56,10 +56,10 @@
                 hint="<?= lang('PremiumPodcasts.unlock_form.token_hint', [
                     'podcastTitle' => esc($podcast->title),
                 ]) ?>"
-                required="true"
+                isRequired="true"
             />
             <?php // @icon('lock-unlock-fill')?>
-            <Button type="submit" variant="primary" iconLeft="lock-unlock-fill" class="self-center mt-2"><?= lang('PremiumPodcasts.unlock_form.submit') ?></Button>
+            <x-Button type="submit" variant="primary" iconLeft="lock-unlock-fill" class="self-center mt-2"><?= lang('PremiumPodcasts.unlock_form.submit') ?></x-Button>
             <?php if ($subscriptionLink = service('settings')
                 ->get('Subscription.link', 'podcast:' . $podcast->id)): ?>
                 <p class="max-w-xs mt-4 text-xs">
@@ -88,7 +88,7 @@
         </div>
         <div class="inline-flex items-center self-end mt-2 mr-2 sm:mb-4 sm:mr-4 gap-x-2">
             <?php if (in_array(true, array_column($podcast->fundingPlatforms, 'is_visible'), true)): ?>
-                <button class="p-2 text-red-600 bg-white rounded-full shadow hover:text-red-500 focus:ring-accent" data-toggle="funding-links" data-toggle-class="hidden" data-tooltip="bottom" title="<?= lang('Podcast.sponsor') ?>"><?= icon('heart-fill') ?></button>
+                <button class="p-2 text-red-600 bg-white rounded-full shadow hover:text-red-500" data-toggle="funding-links" data-toggle-class="hidden" data-tooltip="bottom" title="<?= lang('Podcast.sponsor') ?>"><?= icon('heart-fill') ?></button>
             <?php endif; ?>
         </div>
     </header>

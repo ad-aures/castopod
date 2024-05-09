@@ -39,8 +39,8 @@
             <p class="text-sm transition duration-150 opacity-0 group-focus:opacity-100 group-hover:opacity-100">@<?= esc($podcast->handle) ?></p>
         </div>
     </a>
-    <button class="absolute top-0 right-0 z-10 p-2 mt-2 mr-2 text-white transition -translate-y-12 rounded-full opacity-0 focus:ring-accent focus:opacity-100 focus:-translate-y-0 group-hover:translate-y-0 bg-black/50 group-hover:opacity-100" id="more-dropdown-<?= $podcast->id ?>" data-dropdown="button" data-dropdown-target="more-dropdown-<?= $podcast->id ?>-menu" aria-haspopup="true" aria-expanded="false" title="<?= lang('Common.more') ?>"><?= icon('more-2-fill') ?></button>
-    <DropdownMenu id="more-dropdown-<?= $podcast->id ?>-menu" labelledby="more-dropdown-<?= $podcast->id ?>" offsetY="-32" items="<?= esc(json_encode([
+    <button class="absolute top-0 right-0 z-10 p-2 mt-2 mr-2 text-white transition -translate-y-12 rounded-full opacity-0 focus:opacity-100 focus:-translate-y-0 group-hover:translate-y-0 bg-black/50 group-hover:opacity-100" id="more-dropdown-<?= $podcast->id ?>" data-dropdown="button" data-dropdown-target="more-dropdown-<?= $podcast->id ?>-menu" aria-haspopup="true" aria-expanded="false" title="<?= lang('Common.more') ?>"><?= icon('more-2-fill') ?></button>
+    <x-DropdownMenu id="more-dropdown-<?= $podcast->id ?>-menu" labelledby="more-dropdown-<?= $podcast->id ?>" offsetY="-32" items="<?= esc(json_encode([
         [
             'type'  => 'link',
             'title' => lang('Podcast.view'),

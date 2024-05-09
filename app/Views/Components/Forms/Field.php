@@ -4,49 +4,76 @@ declare(strict_types=1);
 
 namespace App\Views\Components\Forms;
 
-class Field extends FormComponent
+use ViewComponents\Component;
+
+class Field extends Component
 {
+    protected array $props = [
+        'name',
+        'label',
+        'isRequired',
+        'isReadonly',
+        'as',
+        'helper',
+        'hint',
+    ];
+
+    protected array $casts = [
+        'isRequired' => 'boolean',
+        'isReadonly' => 'boolean',
+    ];
+
+    protected string $name;
+
+    protected string $label;
+
+    protected bool $isRequired = false;
+
+    protected bool $isReadonly = false;
+
     protected string $as = 'Input';
 
-    protected string $label = '';
+    protected string $helper = '';
 
-    protected ?string $helper = null;
-
-    protected ?string $hint = null;
+    protected string $hint = '';
 
     public function render(): string
     {
         $helperText = '';
-        if ($this->helper !== null) {
-            $helperId = $this->id . 'Help';
-            $helperText = '<Forms.Helper id="' . $helperId . '">' . $this->helper . '</Forms.Helper>';
+        if ($this->helper !== '') {
+            $helperId = $this->name . 'Help';
+            $helperText = (new Helper([
+                'id'   => $helperId,
+                'slot' => $this->helper,
+            ]))->render();
             $this->attributes['aria-describedby'] = $helperId;
         }
 
         $labelAttributes = [
-            'for'        => $this->id,
-            'isOptional' => $this->required ? 'false' : 'true',
+            'for'        => $this->name,
+            'isOptional' => $this->isRequired ? 'false' : 'true',
             'class'      => '-mb-1',
+            'slot'       => $this->label,
         ];
-        if ($this->hint) {
+        if ($this->hint !== '') {
             $labelAttributes['hint'] = $this->hint;
         }
-        $labelAttributes = stringify_attributes($labelAttributes);
+        $label = new Label($labelAttributes);
 
-        // remove field specific attributes to inject the rest to Form Component
-        $fieldComponentAttributes = $this->attributes;
-        unset($fieldComponentAttributes['as']);
-        unset($fieldComponentAttributes['label']);
-        unset($fieldComponentAttributes['class']);
-        unset($fieldComponentAttributes['helper']);
-        unset($fieldComponentAttributes['hint']);
+        $this->mergeClass('flex flex-col');
+        $fieldClass = $this->attributes['class'];
 
+        unset($this->attributes['class']);
+
+        $this->attributes['name'] = $this->name;
+        $this->attributes['isRequired'] = $this->isRequired ? 'true' : 'false';
+        $this->attributes['isReadonly'] = $this->isReadonly ? 'true' : 'false';
         $element = __NAMESPACE__ . '\\' . $this->as;
-        $fieldElement = new $element($fieldComponentAttributes);
+        $fieldElement = new $element($this->attributes);
 
         return <<<HTML
-            <div class="flex flex-col {$this->class}">
-                <Forms.Label {$labelAttributes}>{$this->label}</Forms.Label>
+            <div class="{$fieldClass}">
+                {$label->render()}
                 {$helperText}
                 <div class="w-full mt-1">
                     {$fieldElement->render()}

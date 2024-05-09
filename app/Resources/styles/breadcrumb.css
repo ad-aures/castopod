@@ -15,10 +15,6 @@
   &:hover {
     @apply underline;
   }
-
-  &:focus {
-    @apply ring-accent;
-  }
 }
 
 .breadcrumb-item.active {

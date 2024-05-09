@@ -8,10 +8,20 @@ use ViewComponents\Component;
 
 class Button extends Component
 {
+    protected array $props = ['uri', 'variant', 'size', 'iconLeft', 'iconRight', 'isSquared', 'isExternal'];
+
+    protected array $casts = [
+        'isSquared'  => 'boolean',
+        'isExternal' => 'boolean',
+    ];
+
     protected string $uri = '';
 
     protected string $variant = 'default';
 
+    /**
+     * @var 'small'|'base'|'large'
+     */
     protected string $size = 'base';
 
     protected string $iconLeft = '';
@@ -20,65 +30,54 @@ class Button extends Component
 
     protected bool $isSquared = false;
 
-    public function setIsSquared(string $value): void
-    {
-        $this->isSquared = $value === 'true';
-    }
+    protected bool $isExternal = false;
 
     public function render(): string
     {
-        $baseClass =
-            'gap-x-2 flex-shrink-0 inline-flex items-center justify-center font-semibold rounded-full';
+        $this->mergeClass('gap-x-2 flex-shrink-0 inline-flex items-center justify-center font-semibold rounded-full');
 
-        $variantClass = [
-            'default'   => 'shadow-sm text-black bg-gray-300 hover:bg-gray-400',
+        $variantClass = match ($this->variant) {
             'primary'   => 'shadow-sm text-accent-contrast bg-accent-base hover:bg-accent-hover',
             'secondary' => 'shadow-sm ring-2 ring-accent ring-inset text-accent-base bg-white hover:border-accent-hover hover:text-accent-hover',
-            'success'   => 'shadow-sm text-white bg-pine-500 hover:bg-pine-800',
-            'danger'    => 'shadow-sm text-white bg-red-600 hover:bg-red-700',
-            'warning'   => 'shadow-sm text-black bg-yellow-500 hover:bg-yellow-600',
-            'info'      => 'shadow-sm text-white bg-blue-500 hover:bg-blue-600',
+            'success'   => 'shadow-sm ring-2 ring-pine-700 ring-inset text-pine-700 hover:ring-pine-800 hover:text-pine-800',
+            'danger'    => 'shadow-sm ring-2 ring-red-700 ring-inset text-red-700 hover:ring-red-800 hover:text-red-800',
+            'warning'   => 'shadow-sm ring-2 ring-yellow-700 ring-inset text-yellow-700 hover:ring-yellow-800 hover:text-yellow-800',
+            'info'      => 'shadow-sm ring-2 ring-blue-700 ring-inset text-blue-700 hover:ring-blue-800 hover:text-blue-800',
             'disabled'  => 'shadow-sm text-black bg-gray-300 cursor-not-allowed',
-        ];
+            default     => 'shadow-sm text-black bg-gray-100 hover:bg-gray-300',
+        };
 
-        $sizeClass = [
+        $sizeClass = match ($this->size) {
             'small' => 'text-xs leading-6',
-            'base'  => 'text-sm leading-5',
             'large' => 'text-base leading-6',
-        ];
+            default => 'text-sm leading-5',
+        };
 
-        $iconSize = [
+        $iconSizeClass = match ($this->size) {
             'small' => 'text-sm',
-            'base'  => 'text-lg',
             'large' => 'text-2xl',
-        ];
+            default => 'text-lg',
+        };
 
-        $basePaddings = [
+        $basePaddings = match ($this->size) {
             'small' => 'px-3 py-1',
-            'base'  => 'px-3 py-2',
             'large' => 'px-4 py-2',
-        ];
+            default => 'px-3 py-2',
+        };
 
-        $squaredPaddings = [
+        $squaredPaddings = match ($this->size) {
             'small' => 'p-1',
-            'base'  => 'p-2',
             'large' => 'p-3',
-        ];
+            default => 'p-2',
+        };
 
-        $buttonClass =
-            $baseClass .
-            ' ' .
-            ($this->isSquared
-                ? $squaredPaddings[$this->size]
-                : $basePaddings[$this->size]) .
-            ' ' .
-            $sizeClass[$this->size] .
-            ' ' .
-            $variantClass[$this->variant];
+        $this->mergeClass($variantClass);
+        $this->mergeClass($sizeClass);
 
-        if (array_key_exists('class', $this->attributes)) {
-            $buttonClass .= ' ' . $this->attributes['class'];
-            unset($this->attributes['class']);
+        if ($this->isSquared) {
+            $this->mergeClass($squaredPaddings);
+        } else {
+            $this->mergeClass($basePaddings);
         }
 
         if ($this->iconLeft !== '' || $this->iconRight !== '') {
@@ -87,41 +86,30 @@ class Button extends Component
 
         if ($this->iconLeft !== '') {
             $this->slot = icon($this->iconLeft, [
-                'class' => 'opacity-75 ' . $iconSize[$this->size],
+                'class' => 'opacity-75 ' . $iconSizeClass,
             ]) . $this->slot;
         }
 
         if ($this->iconRight !== '') {
             $this->slot .= icon($this->iconRight, [
-                'class' => 'opacity-75 ' . $iconSize[$this->size],
+                'class' => 'opacity-75 ' . $iconSizeClass,
             ]);
         }
 
-        unset($this->attributes['slot']);
-        unset($this->attributes['variant']);
-        unset($this->attributes['size']);
-        unset($this->attributes['iconLeft']);
-        unset($this->attributes['iconRight']);
-        unset($this->attributes['isSquared']);
-        unset($this->attributes['uri']);
-        unset($this->attributes['label']);
-
         if ($this->uri !== '') {
             $tagName = 'a';
-            $defaultButtonAttributes = [
-                'href' => $this->uri,
-            ];
+            $this->attributes['href'] = $this->uri;
+            if ($this->isExternal) {
+                $this->attributes['target'] = '_blank';
+                $this->attributes['rel'] = 'noopener noreferrer';
+            }
         } else {
             $tagName = 'button';
-            $defaultButtonAttributes = [
-                'type' => 'button',
-            ];
+            $this->attributes['type'] ??= 'button';
         }
 
-        $attributes = stringify_attributes(array_merge($defaultButtonAttributes, $this->attributes));
-
         return <<<HTML
-            <{$tagName} class="{$buttonClass}" {$attributes}>{$this->slot}</{$tagName}>
+            <{$tagName} {$this->getStringifiedAttributes()}>{$this->slot}</{$tagName}>
         HTML;
     }
 }

@@ -35,6 +35,8 @@ class Plugins
 
     protected static int $installedCount = 0;
 
+    protected static int $activeCount = 0;
+
     public function __construct()
     {
         helper('plugins');
@@ -61,6 +63,21 @@ class Plugins
     public function getPlugins(int $page, int $perPage): array
     {
         return array_slice(static::$plugins, (($page - 1) * $perPage), $perPage);
+    }
+
+    /**
+     * @return array<BasePlugin>
+     */
+    public function getActivePlugins(): array
+    {
+        $activePlugins = [];
+        foreach (static::$plugins as $plugin) {
+            if ($plugin->isActive()) {
+                $activePlugins[] = $plugin;
+            }
+        }
+
+        return $activePlugins;
     }
 
     /**
@@ -177,6 +194,11 @@ class Plugins
         return static::$installedCount;
     }
 
+    public function getActiveCount(): int
+    {
+        return static::$activeCount;
+    }
+
     public function uninstall(BasePlugin $plugin): bool
     {
         // remove all settings data
@@ -235,6 +257,10 @@ class Plugins
             static::$plugins[] = $plugin;
             static::$pluginsByVendor[$vendor][] = $plugin;
             ++static::$installedCount;
+
+            if ($plugin->isActive()) {
+                ++static::$activeCount;
+            }
         }
     }
 

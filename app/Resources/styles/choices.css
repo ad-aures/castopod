@@ -9,10 +9,6 @@
     font-size: 16px;
   }
 
-  .choices:focus {
-    outline: none;
-  }
-
   .choices:last-child {
     margin-bottom: 0;
   }
@@ -325,10 +321,6 @@
     background-repeat: no-repeat;
     background-position: center;
     cursor: pointer;
-  }
-
-  .choices__button:focus {
-    outline: none;
   }
 
   .choices__input {

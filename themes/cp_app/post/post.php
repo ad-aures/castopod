@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 <nav class="py-2">
     <a href="<?= route_to('podcast-activity', esc($podcast->handle)) ?>"
-    class="inline-flex items-center px-4 py-2 text-sm focus:ring-accent"><?= icon(
+    class="inline-flex items-center px-4 py-2 text-sm"><?= icon(
         'arrow-left-line',
         [
             'class' => 'mr-2 text-lg',

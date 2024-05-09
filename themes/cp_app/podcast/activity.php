@@ -12,17 +12,17 @@
         ->display_name) ?>" class="w-10 h-10 rounded-full aspect-square" loading="lazy" />
     <div class="flex flex-col flex-1 min-w-0 gap-y-2">
         <?= view('_message_block') ?>
-        <Forms.Textarea
+        <x-Forms.Textarea
             name="message"
-            required="true"
+            isRequired="true"
             placeholder="<?= lang('Post.form.message_placeholder') ?>"
             rows="2" />
-        <Forms.Input
+        <x-Forms.Input
             name="episode_url"
             type="url"
             placeholder="<?= lang('Post.form.episode_url_placeholder') . ' (' . lang('Common.optional') . ')' ?>" />
         <?php // @icon('send-plane-2-fill')?>
-        <Button variant="primary" size="small" type="submit" class="self-end" iconRight="send-plane-2-fill"><?= lang('Post.form.submit') ?></Button>
+        <x-Button variant="primary" size="small" type="submit" class="self-end" iconRight="send-plane-2-fill"><?= lang('Post.form.submit') ?></x-Button>
     </div>
 </form>
 <hr class="my-4 border-subtle">

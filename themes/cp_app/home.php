@@ -48,13 +48,13 @@
     </header>
     <main class="container flex-1 px-4 py-10 mx-auto">
         <div class="flex flex-wrap items-center justify-between py-2 border-b border-subtle gap-x-4">
-            <Heading tagName="h2" class="inline-block"><?= lang('Home.all_podcasts') ?> (<?= count(
+            <x-Heading tagName="h2" class="inline-block"><?= lang('Home.all_podcasts') ?> (<?= count(
                 $podcasts,
-            ) ?>)</Heading>
-            <button class="inline-flex items-center px-2 py-1 text-sm font-semibold focus:ring-accent" id="sortby-dropdown" data-dropdown="button" data-dropdown-target="sortby-dropdown-menu" aria-haspopup="true" aria-expanded="false"><?= icon('material-symbols:sort', [
+            ) ?>)</x-Heading>
+            <button class="inline-flex items-center px-2 py-1 text-sm font-semibold" id="sortby-dropdown" data-dropdown="button" data-dropdown-target="sortby-dropdown-menu" aria-haspopup="true" aria-expanded="false"><?= icon('material-symbols:sort', [
                 'class' => 'mr-1 text-xl opacity-50',
             ]) . lang('Home.sort_by') ?></button>
-            <DropdownMenu id="sortby-dropdown-menu" labelledby="sortby-dropdown" items="<?= esc(json_encode([
+            <x-DropdownMenu id="sortby-dropdown-menu" labelledby="sortby-dropdown" items="<?= esc(json_encode([
                 [
                     'type'  => 'link',
                     'title' => ($sortBy === 'activity' ? '✓ ' : '') . lang('Home.sort_options.activity'),
@@ -78,7 +78,7 @@
         <div class="grid gap-4 mt-4 grid-cols-cards">
             <?php if ($podcasts): ?>
                 <?php foreach ($podcasts as $podcast): ?>
-                    <a href="<?= $podcast->link ?>" class="relative w-full h-full overflow-hidden transition shadow focus:ring-accent rounded-xl hover:shadow-xl focus:shadow-xl group border-3 <?= $podcast->is_premium ? 'border-accent-base' : 'border-subtle' ?>">
+                    <a href="<?= $podcast->link ?>" class="relative w-full h-full overflow-hidden transition shadow rounded-xl hover:shadow-xl focus:shadow-xl group border-3 <?= $podcast->is_premium ? 'border-accent-base' : 'border-subtle' ?>">
                         <article class="text-white">
                             <div class="absolute bottom-0 left-0 z-10 w-full h-full backdrop-gradient mix-blend-multiply"></div>
                             <div class="w-full h-full overflow-hidden bg-header">
@@ -109,7 +109,7 @@
     <footer class="container flex justify-between px-2 py-4 mx-auto text-sm text-right border-t border-subtle">
         <?= render_page_links() ?>
         <small><?= lang('Common.powered_by', [
-            'castopod' => '<a class="inline-flex font-semibold hover:underline focus:ring-accent" href="https://castopod.org/" target="_blank" rel="noreferrer noopener">Castopod' . icon('social:castopod', [
+            'castopod' => '<a class="inline-flex font-semibold hover:underline" href="https://castopod.org/" target="_blank" rel="noreferrer noopener">Castopod' . icon('social:castopod', [
                 'class' => 'ml-1 text-lg',
             ]) . '</a>',
         ], null, false) ?></small>

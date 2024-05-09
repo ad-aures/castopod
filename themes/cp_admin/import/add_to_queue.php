@@ -13,51 +13,51 @@
 <form action="<?= route_to('import') ?>" method="POST" enctype='multipart/form-data' class="flex flex-col w-full max-w-xl gap-y-8">
 <?= csrf_field() ?>
 
-<Forms.Section
+<x-Forms.Section
     title="<?= lang('PodcastImport.old_podcast_section_title') ?>">
 <?php // @icon('scales-3-fill')?>
-<Alert glyph="scales-3-fill" variant="info" title="<?= lang('PodcastImport.old_podcast_legal_disclaimer_title') ?>"><?= lang('PodcastImport.old_podcast_legal_disclaimer') ?></Alert>
-<Forms.Field
+<x-Alert glyph="scales-3-fill" variant="info" title="<?= lang('PodcastImport.old_podcast_legal_disclaimer_title') ?>"><?= lang('PodcastImport.old_podcast_legal_disclaimer') ?></x-Alert>
+<x-Forms.Field
     name="imported_feed_url"
     label="<?= esc(lang('PodcastImport.imported_feed_url')) ?>"
     hint="<?= esc(lang('PodcastImport.imported_feed_url_hint')) ?>"
     placeholder="https://…"
     type="url"
-    required="true" />
-</Forms.Section>
+    isRequired="true" />
+</x-Forms.Section>
 
 
-<Forms.Section
+<x-Forms.Section
     title="<?= lang('PodcastImport.new_podcast_section_title') ?>" >
 
 <div class="flex flex-col">
-    <Forms.Label for="handle" hint="<?= esc(lang('Podcast.form.handle_hint')) ?>"><?= lang('Podcast.form.handle') ?></Forms.Label>
+    <x-Forms.Label for="handle" hint="<?= esc(lang('Podcast.form.handle_hint')) ?>"><?= lang('Podcast.form.handle') ?></x-Forms.Label>
     <div class="relative">
         <?= icon('at-line', [
             'class' => 'absolute inset-0 h-full text-xl opacity-40 left-3',
         ]) ?>
-        <Forms.Input name="handle" class="w-full pl-8" required="true" />
+        <x-Forms.Input name="handle" class="w-full pl-8" isRequired="true" />
     </div>
 </div>
 
-<Forms.Field
+<x-Forms.Field
     as="Select"
     name="language"
     label="<?= esc(lang('Podcast.form.language')) ?>"
     selected="<?= $browserLang ?>"
-    required="true"
+    isRequired="true"
     options="<?= esc(json_encode($languageOptions)) ?>" />
 
-<Forms.Field
+<x-Forms.Field
     as="Select"
     name="category"
     label="<?= esc(lang('Podcast.form.category')) ?>"
-    required="true"
+    isRequired="true"
     options="<?= esc(json_encode($categoryOptions)) ?>" />
 
-</Forms.Section>
+</x-Forms.Section>
 
-<Button variant="primary" type="submit" class="self-end"><?= lang('PodcastImport.submit') ?></Button>
+<x-Button variant="primary" type="submit" class="self-end"><?= lang('PodcastImport.submit') ?></x-Button>
 
 </form>
 

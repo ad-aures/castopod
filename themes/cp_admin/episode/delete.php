@@ -13,13 +13,13 @@
 <form action="<?= route_to('episode-delete', $podcast->id, $episode->id) ?>" method="POST" class="flex flex-col w-full max-w-xl mx-auto">
 <?= csrf_field() ?>
 
-<Alert variant="danger" class="font-semibold"><?= lang('Episode.delete_form.disclaimer') ?></Alert>
+<x-Alert variant="danger" class="font-semibold"><?= lang('Episode.delete_form.disclaimer') ?></x-Alert>
 
-<Forms.Checkbox class="mt-2" name="understand" required="true" isChecked="false"><?= lang('Episode.delete_form.understand') ?></Forms.Checkbox>
+<x-Forms.Checkbox class="mt-2" name="understand" isRequired="true" isChecked="false"><?= lang('Episode.delete_form.understand') ?></x-Forms.Checkbox>
 
 <div class="self-end mt-4">
-    <Button uri="<?= route_to('episode-view', $podcast->id, $episode->id) ?>"><?= lang('Common.cancel') ?></Button>
-    <Button type="submit" variant="danger"><?= lang('Episode.delete_form.submit') ?></Button>
+    <x-Button uri="<?= route_to('episode-view', $podcast->id, $episode->id) ?>"><?= lang('Common.cancel') ?></x-Button>
+    <x-Button type="submit" variant="danger"><?= lang('Episode.delete_form.submit') ?></x-Button>
 </div>
 
 </form>

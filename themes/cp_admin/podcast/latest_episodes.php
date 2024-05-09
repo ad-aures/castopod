@@ -1,10 +1,10 @@
 <section class="flex flex-col">
     <header class="flex justify-between">
-        <Heading tagName="h2"><?= lang('Podcast.latest_episodes') ?></Heading>
+        <x-Heading tagName="h2"><?= lang('Podcast.latest_episodes') ?></x-Heading>
         <a href="<?= route_to(
             'episode-list',
             $podcast->id,
-        ) ?>" class="inline-flex items-center text-sm underline hover:no-underline focus:ring-accent">
+        ) ?>" class="inline-flex items-center text-sm underline hover:no-underline">
             <?= lang('Podcast.see_all_episodes') ?>
             <?= icon('arrow-right-s-fill', [
                         'class' => 'ml-2',
