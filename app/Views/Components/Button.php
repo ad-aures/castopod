@@ -34,17 +34,16 @@ class Button extends Component
 
     public function render(): string
     {
-        $this->mergeClass('gap-x-2 flex-shrink-0 inline-flex items-center justify-center font-semibold rounded-full');
+        $this->mergeClass('shadow gap-x-2 flex-shrink-0 inline-flex items-center justify-center font-semibold rounded-full');
 
         $variantClass = match ($this->variant) {
-            'primary'   => 'shadow-sm text-accent-contrast bg-accent-base hover:bg-accent-hover',
-            'secondary' => 'shadow-sm ring-2 ring-accent ring-inset text-accent-base bg-white hover:border-accent-hover hover:text-accent-hover',
-            'success'   => 'shadow-sm ring-2 ring-pine-700 ring-inset text-pine-700 hover:ring-pine-800 hover:text-pine-800',
-            'danger'    => 'shadow-sm ring-2 ring-red-700 ring-inset text-red-700 hover:ring-red-800 hover:text-red-800',
-            'warning'   => 'shadow-sm ring-2 ring-yellow-700 ring-inset text-yellow-700 hover:ring-yellow-800 hover:text-yellow-800',
-            'info'      => 'shadow-sm ring-2 ring-blue-700 ring-inset text-blue-700 hover:ring-blue-800 hover:text-blue-800',
-            'disabled'  => 'shadow-sm text-black bg-gray-300 cursor-not-allowed',
-            default     => 'shadow-sm text-black bg-gray-100 hover:bg-gray-300',
+            'primary'   => 'text-accent-contrast bg-accent-base hover:bg-accent-hover',
+            'secondary' => 'ring-2 ring-accent-base ring-inset text-accent-base bg-white hover:border-accent-hover hover:text-accent-hover hover:ring-accent-hover',
+            'danger'    => 'bg-red-50 ring-2 ring-red-700 ring-inset text-red-700 hover:ring-red-800 hover:text-red-800',
+            'warning'   => 'bg-yellow-50 ring-2 ring-yellow-700 ring-inset text-yellow-700 hover:ring-yellow-800 hover:text-yellow-800',
+            'info'      => 'bg-blue-50 ring-2 ring-blue-700 ring-inset text-blue-700 hover:ring-blue-800 hover:text-blue-800',
+            'disabled'  => 'text-black bg-gray-300 cursor-not-allowed',
+            default     => 'text-black bg-gray-50 hover:bg-gray-200',
         };
 
         $sizeClass = match ($this->size) {

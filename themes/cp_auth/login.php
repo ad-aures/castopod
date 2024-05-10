@@ -32,7 +32,7 @@
 
     <!-- Remember me -->
     <?php if (setting('Auth.sessionConfig')['allowRemembering']): ?>
-        <x-Forms.Toggler name="remember" isChecked="<?= old('remember') ?>" size="small"><?= lang('Auth.rememberMe') ?></x-Forms.Toggler>
+        <x-Forms.Checkbox name="remember" isChecked="<?= old('remember') ?>" size="small"><?= lang('Auth.rememberMe') ?></x-Forms.Checkbox>
     <?php endif; ?>
 
     <x-Button variant="primary" type="submit" class="self-end"><?= lang('Auth.login') ?></x-Button>

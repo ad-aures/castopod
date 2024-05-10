@@ -76,7 +76,10 @@ module.exports = {
         },
       },
       colors: {
-        accent: "hsl(var(--color-accent-base) / <alpha-value>)",
+        accent: {
+          base: "hsl(var(--color-accent-base) / <alpha-value>)",
+          hover: "hsl(var(--color-accent-hover) / <alpha-value>)",
+        },
         background: {
           header: "hsl(var(--color-background-header) / <alpha-value>)",
           base: "hsl(var(--color-background-base) / <alpha-value>)",
