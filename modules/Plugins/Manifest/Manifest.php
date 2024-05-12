@@ -39,9 +39,6 @@ class Manifest extends ManifestObject
         'repository'  => 'permit_empty|is_list',
     ];
 
-    /**
-     * @var array<string,array{string}|string>
-     */
     protected const CASTS = [
         'authors'    => [Person::class],
         'homepage'   => URI::class,

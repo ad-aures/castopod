@@ -10,7 +10,10 @@ use App\Models\EpisodeModel;
 use App\Models\PodcastModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
+use CodeIgniter\HTTP\URI;
+use CodeIgniter\I18n\Time;
 use Modules\Admin\Controllers\BaseController;
+use Modules\Plugins\Core\Markdown;
 use Modules\Plugins\Core\Plugins;
 
 class PluginController extends BaseController
@@ -103,9 +106,41 @@ class PluginController extends BaseController
             throw PageNotFoundException::forPageNotFound();
         }
 
+        // construct validation rules first
+        $rules = [];
         foreach ($plugin->getSettingsFields('general') as $field) {
-            $optionValue = $this->request->getPost($field->key);
-            $plugins->setOption($plugin, $field->key, $optionValue);
+            $typeRules = $plugins::FIELDS_VALIDATIONS[$field->type];
+            if (! in_array('permit_empty', $typeRules, true) && ! $field->optional) {
+                $typeRules[] = 'required';
+            }
+
+            $rules[$field->key] = $typeRules;
+        }
+
+        if (! $this->validate($rules)) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('errors', $this->validator->getErrors());
+        }
+
+        $validatedData = $this->validator->getValidated();
+
+        foreach ($plugin->getSettingsFields('general') as $field) {
+            $value = $validatedData[$field->key] ?? null;
+            $fieldValue = match ($plugins::FIELDS_CASTS[$field->type] ?? 'text') {
+                'bool'     => $value === 'yes',
+                'int'      => (int) $value,
+                'uri'      => new URI($value),
+                'datetime' => Time::createFromFormat(
+                    'Y-m-d H:i',
+                    $value,
+                    $this->request->getPost('client_timezone')
+                )->setTimezone(app_timezone()),
+                'markdown' => new Markdown($value),
+                default    => $value === '' ? null : $value,
+            };
+            $plugins->setOption($plugin, $field->key, $fieldValue);
         }
 
         return redirect()->back()

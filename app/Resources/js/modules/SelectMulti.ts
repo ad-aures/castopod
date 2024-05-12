@@ -1,6 +1,6 @@
 import Choices from "choices.js";
 
-const MultiSelect = (): void => {
+const SelectMulti = (): void => {
   // Pass single element
   const multiSelects: NodeListOf<HTMLSelectElement> =
     document.querySelectorAll("select[multiple]");
@@ -49,4 +49,4 @@ const MultiSelect = (): void => {
   }
 };
 
-export default MultiSelect;
+export default SelectMulti;

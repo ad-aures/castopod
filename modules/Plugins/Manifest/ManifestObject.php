@@ -39,6 +39,11 @@ abstract class ManifestObject
         throw new Exception('Undefined object property ' . static::class . '::' . $name);
     }
 
+    public function __isset(string $property): bool
+    {
+        return property_exists($this, $property);
+    }
+
     public function load(): void
     {
         /** @var Validation $validation */

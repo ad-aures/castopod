@@ -26,7 +26,7 @@
         class="theme-<?= $themeName ?> mx-auto"
         value="<?= esc($themeName) ?>"
         name="theme"
-        isChecked="<?= $themeName === service('settings')
+        isSelected="<?= $themeName === service('settings')
         ->get('App.theme') ? 'true' : 'false' ?>" ><?= lang('Settings.theme.' . $themeName) ?></x-Forms.ColorRadioButton>
     <?php endforeach; ?>
 </div>

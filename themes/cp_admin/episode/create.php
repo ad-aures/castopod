@@ -69,42 +69,49 @@
     />
 </div>
 
-<fieldset class="flex gap-1">
-<legend><?= lang('Episode.form.type.label') ?></legend>
-<x-Forms.RadioButton
-    value="full"
+<x-Forms.RadioGroup
+    label="<?= lang('Episode.form.type.label') ?>"
     name="type"
-    hint="<?= esc(lang('Episode.form.type.full_hint')) ?>"
-    isChecked="true" ><?= lang('Episode.form.type.full') ?></x-Forms.RadioButton>
-<x-Forms.RadioButton
-    value="trailer"
-    name="type"
-    hint="<?= esc(lang('Episode.form.type.trailer_hint')) ?>"
-    isChecked="false" ><?= lang('Episode.form.type.trailer') ?></x-Forms.RadioButton>    
-<x-Forms.RadioButton
-    value="bonus"
-    name="type"
-    hint="<?= esc(lang('Episode.form.type.bonus_hint')) ?>"
-    isChecked="false" ><?= lang('Episode.form.type.bonus') ?></x-Forms.RadioButton>
-</fieldset>
+    options="<?= esc(json_encode([
+        [
+            'label' => lang('Episode.form.type.full'),
+            'value' => 'full',
+            'hint'  => lang('Episode.form.type.full_hint'),
+        ],
+        [
+            'label' => lang('Episode.form.type.trailer'),
+            'value' => 'trailer',
+            'hint'  => lang('Episode.form.type.trailer_hint'),
+        ],
+        [
+            'label' => lang('Episode.form.type.bonus'),
+            'value' => 'bonus',
+            'hint'  => lang('Episode.form.type.bonus_hint'),
+        ],
+    ])) ?>"
+    isRequired="true"
+/>
 
-<fieldset class="flex gap-1">
-<legend><?= lang('Episode.form.parental_advisory.label') ?><x-Hint class="ml-1"><?= lang('Episode.form.parental_advisory.hint') ?></x-Hint></legend>
-<x-Forms.RadioButton
-    value="undefined"
+<x-Forms.RadioGroup
+    label="<?= lang('Episode.form.parental_advisory.label') ?>"
+    hint="<?= lang('Episode.form.parental_advisory.hint') ?>"
     name="parental_advisory"
-    isChecked="true" ><?= lang('Episode.form.parental_advisory.undefined') ?></x-Forms.RadioButton>
-<x-Forms.RadioButton
-    value="clean"
-    name="parental_advisory"
-    isChecked="false" ><?= lang('Episode.form.parental_advisory.clean') ?></x-Forms.RadioButton>    
-<x-Forms.RadioButton
-    value="explicit"
-    name="parental_advisory"
-    isChecked="false" ><?= lang('Episode.form.parental_advisory.explicit') ?></x-Forms.RadioButton>
-</fieldset>
-
-
+    options="<?= esc(json_encode([
+        [
+            'label' => lang('Episode.form.parental_advisory.undefined'),
+            'value' => 'undefined',
+        ],
+        [
+            'label' => lang('Episode.form.parental_advisory.clean'),
+            'value' => 'clean',
+        ],
+        [
+            'label' => lang('Episode.form.parental_advisory.explicit'),
+            'value' => 'explicit',
+        ],
+    ])) ?>"
+    isRequired="true"
+/>
 
 </x-Forms.Section>
 

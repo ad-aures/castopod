@@ -34,6 +34,8 @@ class Label extends Component
             'slot'  => $this->hint,
         ]))->render();
 
+        $this->attributes['for'] = $this->for;
+
         return <<<HTML
             <label {$this->getStringifiedAttributes()}>{$this->slot}{$optionalText}{$hint}</label>
         HTML;

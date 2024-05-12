@@ -14,27 +14,23 @@ class Toggler extends FormComponent
         'isChecked' => 'boolean',
     ];
 
-    /**
-     * @var 'base'|'small
-     */
-    protected string $size = 'base';
-
     protected string $hint = '';
 
     protected bool $isChecked = false;
 
     public function render(): string
     {
-        $sizeClass = match ($this->size) {
-            'small' => 'form-switch-slider form-switch-slider--small',
-            default => 'form-switch-slider',
-        };
-
         $this->mergeClass('relative justify-between inline-flex items-center gap-x-2');
 
-        $checkbox = form_checkbox([
-            'class' => 'form-switch',
-        ], 'yes', old($this->name) === 'yes' ? true : $this->isChecked);
+        $checkbox = form_checkbox(
+            [
+                'id'    => $this->id,
+                'name'  => $this->name,
+                'class' => 'form-switch',
+            ],
+            'yes',
+            old($this->name) ? old($this->name) === 'yes' : $this->isChecked
+        );
 
         $hint = $this->hint === '' ? '' : (new Hint([
             'class' => 'ml-1',
@@ -43,9 +39,9 @@ class Toggler extends FormComponent
 
         return <<<HTML
             <label {$this->getStringifiedAttributes()}>
-                <span class="">{$this->slot}{$hint}</span>
+                <span>{$this->slot}{$hint}</span>
                 {$checkbox}
-                <span class="{$sizeClass}"></span>
+                <span class="form-switch-slider"></span>
             </label>
         HTML;
     }

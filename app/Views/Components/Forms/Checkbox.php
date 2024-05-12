@@ -22,12 +22,12 @@ class Checkbox extends FormComponent
     {
         $checkboxInput = form_checkbox(
             [
-                'id'    => $this->value,
+                'id'    => $this->id,
                 'name'  => $this->name,
                 'class' => 'form-checkbox bg-elevated text-accent-base border-contrast border-3 w-6 h-6',
             ],
             'yes',
-            old($this->name) ? old($this->name) === $this->value : $this->isChecked,
+            old($this->name) ? old($this->name) === 'yes' : $this->isChecked,
         );
 
         $hint = $this->hint === '' ? '' : (new Hint([

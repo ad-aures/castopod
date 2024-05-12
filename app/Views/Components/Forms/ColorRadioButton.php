@@ -6,13 +6,13 @@ namespace App\Views\Components\Forms;
 
 class ColorRadioButton extends FormComponent
 {
-    protected array $props = ['isChecked'];
+    protected array $props = ['isSelected'];
 
     protected array $casts = [
-        'isChecked' => 'boolean',
+        'isSelected' => 'boolean',
     ];
 
-    protected bool $isChecked = false;
+    protected bool $isSelected = false;
 
     public function render(): string
     {
@@ -29,7 +29,7 @@ class ColorRadioButton extends FormComponent
         $radioInput = form_radio(
             $data,
             $this->value,
-            old($this->name) ? old($this->name) === $this->value : $this->isChecked,
+            old($this->name) ? old($this->name) === $this->value : $this->isSelected,
         );
 
         return <<<HTML

@@ -42,7 +42,7 @@
             <x-Forms.RadioButton
                 value="landscape"
                 name="format"
-                isChecked="true"
+                isSelected="true"
                 isRequired="true"
                 hint="<?= esc(lang('VideoClip.form.format.landscape_hint')) ?>"><?= lang('VideoClip.format.landscape') ?></x-Forms.RadioButton>
             <x-Forms.RadioButton
@@ -65,7 +65,7 @@
                     value="<?= esc($themeName) ?>"
                     name="theme"
                     isRequired="true"
-                    isChecked="<?= $themeName === 'pine' ? 'true' : 'false' ?>"
+                    isSelected="<?= $themeName === 'pine' ? 'true' : 'false' ?>"
                     style="--color-accent-base: <?= $colors['preview']?>; --color-background-preview: <?= $colors['preview-background'] ?>"><?= lang('Settings.theme.' . $themeName) ?></x-Forms.ColorRadioButton>
                 <?php endforeach; ?>
             </div>

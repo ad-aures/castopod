@@ -16,11 +16,11 @@ use League\CommonMark\Extension\SmartPunct\SmartPunctExtension;
 use League\CommonMark\MarkdownConverter;
 use Modules\Plugins\ExternalImageProcessor;
 use Modules\Plugins\ExternalLinkProcessor;
+use Modules\Plugins\Manifest\Field;
 use Modules\Plugins\Manifest\Manifest;
 use Modules\Plugins\Manifest\Person;
 use Modules\Plugins\Manifest\Repository;
 use Modules\Plugins\Manifest\Settings;
-use Modules\Plugins\Manifest\SettingsField;
 use RuntimeException;
 
 /**
@@ -163,7 +163,7 @@ abstract class BasePlugin implements PluginInterface
     }
 
     /**
-     * @return SettingsField[]
+     * @return Field[]
      */
     final public function getSettingsFields(string $type): array
     {

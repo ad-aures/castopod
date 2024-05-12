@@ -65,12 +65,17 @@ class CategoryModel extends Model
             $options = array_reduce(
                 $categories,
                 static function (array $result, Category $category): array {
-                    $result[$category->id] = '';
+                    $label = '';
                     if ($category->parent instanceof Category) {
-                        $result[$category->id] = lang('Podcast.category_options.' . $category->parent->code) . ' › ';
+                        $label = lang('Podcast.category_options.' . $category->parent->code) . ' › ';
                     }
 
-                    $result[$category->id] .= lang('Podcast.category_options.' . $category->code);
+                    $label .= lang('Podcast.category_options.' . $category->code);
+
+                    $result[] = [
+                        'value' => $category->id,
+                        'label' => $label,
+                    ];
                     return $result;
                 },
                 [],
