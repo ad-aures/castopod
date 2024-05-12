@@ -56,7 +56,10 @@ class LanguageModel extends Model
             $options = array_reduce(
                 $languages,
                 static function (array $result, Language $language): array {
-                    $result[$language->code] = $language->native_name;
+                    $result[] = [
+                        'value' => $language->code,
+                        'label' => $language->native_name,
+                    ];
                     return $result;
                 },
                 [],

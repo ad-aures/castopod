@@ -29,6 +29,6 @@ class Input extends FormComponent
         $this->attributes['type'] = $this->type;
         $this->attributes['value'] = $this->value;
 
-        return form_input($this->attributes, old($this->name, $this->value));
+        return form_input($this->attributes, old($this->name, (string) $this->value));
     }
 }

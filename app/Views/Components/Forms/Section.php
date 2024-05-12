@@ -18,7 +18,7 @@ class Section extends Component
     {
         $subtitle = $this->subtitle === '' ? '' : '<p class="text-sm text-skin-muted">' . $this->subtitle . '</p>';
 
-        $this->mergeClass('w-full p-8 bg-elevated border-3 flex flex-col items-start border-subtle rounded-xl');
+        $this->mergeClass('w-full p-4 sm:p-6 md:p-8 bg-elevated border-3 flex flex-col items-start border-subtle rounded-xl');
 
         return <<<HTML
             <fieldset {$this->getStringifiedAttributes()}>

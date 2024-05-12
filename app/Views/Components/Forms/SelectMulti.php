@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace App\Views\Components\Forms;
 
-class Select extends FormComponent
+class SelectMulti extends FormComponent
 {
     protected array $props = ['options', 'defaultValue'];
 
     protected array $casts = [
-        'options' => 'array',
+        'value'        => 'array',
+        'options'      => 'array',
+        'defaultValue' => 'array',
     ];
 
     /**
@@ -17,12 +19,17 @@ class Select extends FormComponent
      */
     protected array $options = [];
 
-    protected string $defaultValue = '';
+    /**
+     * @var list<string>
+     */
+    protected array $defaultValue = [];
 
     public function render(): string
     {
-        $this->mergeClass('w-full focus:border-contrast border-3 rounded-lg bg-elevated border-contrast');
+        $this->mergeClass('w-full bg-elevated border-3 border-contrast rounded-lg relative');
+
         $defaultAttributes = [
+            'multiple'             => 'multiple',
             'data-select-text'     => lang('Common.forms.multiSelect.selectText'),
             'data-loading-text'    => lang('Common.forms.multiSelect.loadingText'),
             'data-no-results-text' => lang('Common.forms.multiSelect.noResultsText'),
@@ -34,10 +41,10 @@ class Select extends FormComponent
         $options = '';
         $selected = $this->value ?? $this->defaultValue;
         foreach ($this->options as $option) {
-            $options .= '<option value="' . $option['value'] . '"' . ($option['value'] === $selected ? ' selected' : '') . '>' . $option['label'] . '</option>';
+            $options .= '<option value="' . $option['value'] . '"' . (in_array($option['value'], $selected, true) ? ' selected' : '') . '>' . $option['label'] . '</option>';
         }
 
-        $this->attributes['name'] = $this->name;
+        $this->attributes['name'] = $this->name . '[]';
 
         return <<<HTML
         <select {$this->getStringifiedAttributes()}>{$options}</select>

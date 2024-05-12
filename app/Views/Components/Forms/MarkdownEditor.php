@@ -28,7 +28,7 @@ class MarkdownEditor extends FormComponent
 
         $textarea = form_textarea(
             $this->attributes,
-            old($this->name, $this->value)
+            old($this->name, (string) $this->value)
         );
         $markdownIcon = icon('markdown-fill', [
             'class' => 'mr-1 text-lg opacity-40',

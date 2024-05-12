@@ -25,7 +25,10 @@
   }
 
   .choices [hidden] {
-    display: none !important;
+    position: absolute;
+    opacity: 0;
+    z-index: -9999;
+    pointer-events: none;
   }
 
   .choices[data-type*="select-one"] {

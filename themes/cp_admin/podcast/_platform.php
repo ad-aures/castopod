@@ -42,7 +42,7 @@
                     ]) ?>" data-tooltip="bottom"><?= lang('Platforms.register') ?></a>
                 <?php endif; ?>
             </div>
-            <fieldset>
+            <fieldset class="flex flex-col">
                 <x-Forms.Field
                     label="<?= esc(lang('Platforms.your_link')) ?>"
                     class="w-full mt-4"

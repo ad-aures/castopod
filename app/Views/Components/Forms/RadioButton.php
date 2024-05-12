@@ -11,10 +11,10 @@ class RadioButton extends FormComponent
     protected array $props = ['isChecked', 'hint'];
 
     protected array $casts = [
-        'isChecked' => 'boolean',
+        'isSelected' => 'boolean',
     ];
 
-    protected bool $isChecked = false;
+    protected bool $isSelected = false;
 
     protected string $hint = '';
 
@@ -33,7 +33,7 @@ class RadioButton extends FormComponent
         $radioInput = form_radio(
             $data,
             $this->value,
-            old($this->name) ? old($this->name) === $this->value : $this->isChecked,
+            old($this->name) ? old($this->name) === $this->value : $this->isSelected,
         );
 
         $hint = $this->hint === '' ? '' : (new Hint([

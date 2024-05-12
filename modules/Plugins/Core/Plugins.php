@@ -23,6 +23,30 @@ class Plugins
      */
     public const HOOKS = ['channelTag', 'itemTag', 'siteHead'];
 
+    public const FIELDS_VALIDATIONS = [
+        'checkbox'        => ['permit_empty'],
+        'datetime'        => ['valid_date[Y-m-d H:i]'],
+        'email'           => ['valid_email'],
+        'markdown'        => ['string'],
+        'number'          => ['integer'],
+        'radio-group'     => ['string'],
+        'select'          => ['string'],
+        'select-multiple' => ['permit_empty', 'is_list'],
+        'text'            => ['string'],
+        'textarea'        => ['string'],
+        'toggler'         => ['permit_empty'],
+        'url'             => ['valid_url_strict'],
+    ];
+
+    public const FIELDS_CASTS = [
+        'checkbox' => 'bool',
+        'datetime' => 'datetime',
+        'number'   => 'int',
+        'toggler'  => 'bool',
+        'url'      => 'uri',
+        'markdown' => 'markdown',
+    ];
+
     /**
      * @var array<BasePlugin>
      */

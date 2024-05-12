@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Modules\Plugins\Manifest;
 
 /**
- * @property SettingsField[] $general
- * @property SettingsField[] $podcast
- * @property SettingsField[] $episode
+ * @property Field[] $general
+ * @property Field[] $podcast
+ * @property Field[] $episode
  */
 class Settings extends ManifestObject
 {
@@ -21,23 +21,23 @@ class Settings extends ManifestObject
      * @var array<string,array{string}|string>
      */
     protected const CASTS = [
-        'general' => [SettingsField::class],
-        'podcast' => [SettingsField::class],
-        'episode' => [SettingsField::class],
+        'general' => [Field::class],
+        'podcast' => [Field::class],
+        'episode' => [Field::class],
     ];
 
     /**
-     * @var SettingsField[]
+     * @var Field[]
      */
     protected array $general = [];
 
     /**
-     * @var SettingsField[]
+     * @var Field[]
      */
     protected array $podcast = [];
 
     /**
-     * @var SettingsField[]
+     * @var Field[]
      */
     protected array $episode = [];
 }

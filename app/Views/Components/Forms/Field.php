@@ -66,8 +66,8 @@ class Field extends Component
         unset($this->attributes['class']);
 
         $this->attributes['name'] = $this->name;
-        $this->attributes['isRequired'] = $this->isRequired ? 'true' : 'false';
-        $this->attributes['isReadonly'] = $this->isReadonly ? 'true' : 'false';
+        $this->attributes['isRequired'] = var_export($this->isRequired, true);
+        $this->attributes['isReadonly'] = var_export($this->isReadonly, true);
         $element = __NAMESPACE__ . '\\' . $this->as;
         $fieldElement = new $element($this->attributes);
 
@@ -75,7 +75,7 @@ class Field extends Component
             <div class="{$fieldClass}">
                 {$label->render()}
                 {$helperText}
-                <div class="w-full mt-1">
+                <div class="relative w-full mt-1">
                     {$fieldElement->render()}
                 </div>
             </div>

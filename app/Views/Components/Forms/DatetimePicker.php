@@ -13,6 +13,7 @@ class DatetimePicker extends FormComponent
     public function render(): string
     {
         $dateInput = form_input([
+            'name'       => $this->name,
             'class'      => 'rounded-l-lg border-0 border-rounded-r-none flex-1 focus:ring-0',
             'data-input' => '',
         ], old($this->name, $this->value));

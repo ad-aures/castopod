@@ -24,7 +24,7 @@
     >
 
     <x-Forms.Field
-        as="MultiSelect"
+        as="SelectMulti"
         id="persons"
         name="persons[]"
         label="<?= esc(lang('Person.episode_form.persons')) ?>"
@@ -35,7 +35,7 @@
     />
 
     <x-Forms.Field
-        as="MultiSelect"
+        as="SelectMulti"
         id="roles"
         name="roles[]"
         label="<?= esc(lang('Person.episode_form.roles')) ?>"

@@ -97,20 +97,26 @@
         "general": {
           "type": "array",
           "items": {
-            "$ref": "#/$defs/settings-field"
-          }
+            "$ref": "#/$defs/field"
+          },
+          "minItems": 1,
+          "uniqueItems": true
         },
         "podcast": {
           "type": "array",
           "items": {
-            "$ref": "#/$defs/settings-field"
-          }
+            "$ref": "#/$defs/field"
+          },
+          "minItems": 1,
+          "uniqueItems": true
         },
         "episode": {
           "type": "array",
           "items": {
-            "$ref": "#/$defs/settings-field"
-          }
+            "$ref": "#/$defs/field"
+          },
+          "minItems": 1,
+          "uniqueItems": true
         }
       }
     },
@@ -158,15 +164,48 @@
         }
       }
     },
-    "settings-field": {
+    "section": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/field"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "field": {
       "type": "object",
       "properties": {
         "type": {
-          "enum": ["text", "email", "url", "markdown", "number", "switch"],
+          "enum": [
+            "checkbox",
+            "datetime",
+            "email",
+            "markdown",
+            "number",
+            "radio-group",
+            "select-multiple",
+            "select",
+            "text",
+            "textarea",
+            "toggler",
+            "url"
+          ],
           "default": "text"
         },
         "key": {
-          "type": "string"
+          "type": "string",
+          "pattern": "^[A-Za-z]+[\\w\\-\\:\\.]*$"
         },
         "label": {
           "type": "string"
@@ -179,10 +218,56 @@
         },
         "optional": {
           "type": "boolean"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/option"
+          },
+          "minItems": 1,
+          "uniqueItems": true
         }
       },
       "required": ["key", "label"],
+      "additionalProperties": false,
+      "allOf": [
+        { "$ref": "#/$defs/field-multiple-implies-options-is-required" }
+      ]
+    },
+    "option": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "hint": {
+          "type": "string"
+        }
+      },
+      "required": ["label", "value"],
       "additionalProperties": false
+    },
+    "field-multiple-implies-options-is-required": {
+      "anyOf": [
+        {
+          "not": {
+            "properties": {
+              "type": {
+                "anyOf": [
+                  { "const": "radio-group" },
+                  { "const": "select" },
+                  { "const": "select-multiple" }
+                ]
+              }
+            },
+            "required": ["type"]
+          }
+        },
+        { "required": ["options"] }
+      ]
     }
   }
 }

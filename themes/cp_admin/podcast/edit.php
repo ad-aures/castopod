@@ -64,41 +64,48 @@
     isRequired="true"
     disallowList="header,quote" />
 
-<fieldset>
-    <legend><?= lang('Podcast.form.type.label') ?></legend>
-    <div class="flex gap-2">
-        <x-Forms.RadioButton
-            value="episodic"
-            name="type"
-            hint="<?= esc(lang('Podcast.form.type.episodic_hint')) ?>"
-            isChecked="<?= $podcast->type === 'episodic' ? 'true' : 'false' ?>" ><?= lang('Podcast.form.type.episodic') ?></x-Forms.RadioButton>
-        <x-Forms.RadioButton
-            value="serial"
-            name="type"
-            hint="<?= esc(lang('Podcast.form.type.serial_hint')) ?>"
-            isChecked="<?= $podcast->type === 'serial' ? 'true' : 'false' ?>" ><?= lang('Podcast.form.type.serial') ?></x-Forms.RadioButton>
-    </div>
-</fieldset>
-<fieldset>
-    <legend><?= lang('Podcast.form.medium.label') ?><x-Hint class="ml-1"><?= lang('Podcast.form.medium.hint') ?></x-Hint></legend>
-    <div class="flex gap-2">
-        <x-Forms.RadioButton
-            value="podcast"
-            name="medium"
-            hint="<?= esc(lang('Podcast.form.medium.podcast_hint')) ?>"
-            isChecked="<?= $podcast->medium === 'podcast' ? 'true' : 'false' ?>" ><?= lang('Podcast.form.medium.podcast') ?></x-Forms.RadioButton>
-        <x-Forms.RadioButton
-            value="music"
-            name="medium"
-            hint="<?= esc(lang('Podcast.form.medium.music_hint')) ?>"
-            isChecked="<?= $podcast->medium === 'music' ? 'true' : 'false' ?>" ><?= lang('Podcast.form.medium.music') ?></x-Forms.RadioButton>
-        <x-Forms.RadioButton
-            value="audiobook"
-            name="medium"
-            hint="<?= esc(lang('Podcast.form.medium.audiobook_hint')) ?>"
-            isChecked="<?= $podcast->medium === 'audiobook' ? 'true' : 'false' ?>" ><?= lang('Podcast.form.medium.audiobook') ?></x-Forms.RadioButton>
-    </div>
-</fieldset>
+    <x-Forms.RadioGroup
+    label="<?= lang('Podcast.form.type.label') ?>"
+    name="type"
+    value="<?= $podcast->type ?>"
+    options="<?= esc(json_encode([
+        [
+            'label' => lang('Podcast.form.type.episodic'),
+            'value' => 'episodic',
+            'hint'  => lang('Podcast.form.type.episodic_hint'),
+        ],
+        [
+            'label' => lang('Podcast.form.type.serial'),
+            'value' => 'serial',
+            'hint'  => lang('Podcast.form.type.serial_hint'),
+        ],
+    ])) ?>"
+    isRequired="true"
+/>
+
+<x-Forms.RadioGroup
+    label="<?= lang('Podcast.form.medium.label') ?>"
+    name="medium"
+    value="<?= $podcast->medium ?>"
+    options="<?= esc(json_encode([
+        [
+            'label' => lang('Podcast.form.medium.podcast'),
+            'value' => 'podcast',
+            'hint'  => lang('Podcast.form.medium.podcast_hint'),
+        ],
+        [
+            'label' => lang('Podcast.form.medium.music'),
+            'value' => 'music',
+            'hint'  => lang('Podcast.form.medium.music_hint'),
+        ],
+        [
+            'label' => lang('Podcast.form.medium.audiobook'),
+            'value' => 'audiobook',
+            'hint'  => lang('Podcast.form.medium.audiobook_hint'),
+        ],
+    ])) ?>"
+    isRequired="true"
+/>
 </x-Forms.Section>
 
 <x-Forms.Section
@@ -109,7 +116,7 @@
         as="Select"
         name="language"
         label="<?= esc(lang('Podcast.form.language')) ?>"
-        selected="<?= $podcast->language_code ?>"
+        value="<?= $podcast->language_code ?>"
         options="<?= esc(json_encode($languageOptions)) ?>"
         isRequired="true" />
 
@@ -117,35 +124,39 @@
         as="Select"
         name="category"
         label="<?= esc(lang('Podcast.form.category')) ?>"
-        selected="<?= $podcast->category_id ?>"
+        value="<?= $podcast->category_id ?>"
         options="<?= esc(json_encode($categoryOptions)) ?>"
         isRequired="true" />
     
     <x-Forms.Field
-        as="MultiSelect"
+        as="SelectMulti"
         name="other_categories[]"
         label="<?= esc(lang('Podcast.form.other_categories')) ?>"
         data-max-item-count="2"
-        selected="<?= esc(json_encode($podcast->other_categories_ids)) ?>"
+        value="<?= esc(json_encode($podcast->other_categories_ids)) ?>"
         options="<?= esc(json_encode($categoryOptions)) ?>" />
 
-    <fieldset class="mb-4">
-        <legend><?= lang('Podcast.form.parental_advisory.label') ?><x-Hint class="ml-1"><?= lang('Podcast.form.parental_advisory.hint') ?></x-Hint></legend>
-        <div class="flex gap-2">
-            <x-Forms.RadioButton
-                value="undefined"
-                name="parental_advisory"
-                isChecked="<?= $podcast->parental_advisory === null ? 'true' : 'false' ?>" ><?= lang('Podcast.form.parental_advisory.undefined') ?></x-Forms.RadioButton>
-            <x-Forms.RadioButton
-                value="clean"
-                name="parental_advisory"
-                isChecked="<?= $podcast->parental_advisory === 'clean' ? 'true' : 'false' ?>" ><?= lang('Podcast.form.parental_advisory.clean') ?></x-Forms.RadioButton>
-            <x-Forms.RadioButton
-                value="explicit"
-                name="parental_advisory"
-                isChecked="<?= $podcast->parental_advisory === 'explicit' ? 'true' : 'false' ?>" ><?= lang('Podcast.form.parental_advisory.explicit') ?></x-Forms.RadioButton>
-        </div>
-    </fieldset>
+    <x-Forms.RadioGroup
+        label="<?= lang('Podcast.form.parental_advisory.label') ?>"
+        hint="<?= lang('Podcast.form.parental_advisory.hint') ?>"
+        name="parental_advisory"
+        value="<?= $podcast->parental_advisory ?>"
+        options="<?= esc(json_encode([
+            [
+                'label' => lang('Podcast.form.parental_advisory.undefined'),
+                'value' => 'undefined',
+            ],
+            [
+                'label' => lang('Podcast.form.parental_advisory.clean'),
+                'value' => 'clean',
+            ],
+            [
+                'label' => lang('Podcast.form.parental_advisory.explicit'),
+                'value' => 'explicit',
+            ],
+        ])) ?>"
+        isRequired="true"
+    />
 </x-Forms.Section>
 
 <x-Forms.Section
