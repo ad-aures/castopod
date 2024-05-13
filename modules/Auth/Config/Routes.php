@@ -81,38 +81,38 @@ $routes->group(
         $routes->group('podcasts/(:num)/contributors', static function ($routes): void {
             $routes->get('/', 'ContributorController::list/$1', [
                 'as'     => 'contributor-list',
-                'filter' => 'permission:podcast#.manage-contributors',
+                'filter' => 'permission:podcast$1.manage-contributors',
             ]);
             $routes->get('add', 'ContributorController::create/$1', [
                 'as'     => 'contributor-add',
-                'filter' => 'permission:podcast#.manage-contributors',
+                'filter' => 'permission:podcast$1.manage-contributors',
             ]);
             $routes->post(
                 'add',
                 'ContributorController::attemptCreate/$1',
                 [
-                    'filter' => 'permission:podcast#.manage-contributors',
+                    'filter' => 'permission:podcast$1.manage-contributors',
                 ],
             );
             // Contributor
             $routes->group('(:num)', static function ($routes): void {
                 $routes->get('/', 'ContributorController::view/$1/$2', [
                     'as'     => 'contributor-view',
-                    'filter' => 'permission:podcast#.manage-contributors',
+                    'filter' => 'permission:podcast$1.manage-contributors',
                 ]);
                 $routes->get(
                     'edit',
                     'ContributorController::edit/$1/$2',
                     [
                         'as'     => 'contributor-edit',
-                        'filter' => 'permission:podcast#.manage-contributors',
+                        'filter' => 'permission:podcast$1.manage-contributors',
                     ],
                 );
                 $routes->post(
                     'edit',
                     'ContributorController::attemptEdit/$1/$2',
                     [
-                        'filter' => 'permission:podcast#.manage-contributors',
+                        'filter' => 'permission:podcast$1.manage-contributors',
                     ],
                 );
                 $routes->get(
@@ -120,14 +120,14 @@ $routes->group(
                     'ContributorController::remove/$1/$2',
                     [
                         'as'     => 'contributor-remove',
-                        'filter' => 'permission:podcast#.manage-contributors',
+                        'filter' => 'permission:podcast$1.manage-contributors',
                     ],
                 );
                 $routes->post(
                     'remove',
                     'ContributorController::attemptRemove/$1/$2',
                     [
-                        'filter' => 'permission:podcast#.manage-contributors',
+                        'filter' => 'permission:podcast$1.manage-contributors',
                     ],
                 );
             });

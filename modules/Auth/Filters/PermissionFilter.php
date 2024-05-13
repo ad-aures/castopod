@@ -58,23 +58,37 @@ class PermissionFilter implements FilterInterface
 
         foreach ($arguments as $permission) {
             // is permission specific to a podcast?
-            if (str_contains($permission, '#')) {
+            if (str_contains($permission, '$')) {
                 $router = Services::router();
                 $routerParams = $router->params();
 
+                if (! preg_match('/\$(\d+)\./', $permission, $match)) {
+                    throw new RuntimeException(sprintf(
+                        'Could not get podcast identifier from permission %s',
+                        $permission
+                    ), 1);
+                }
+
+                $paramKey = ((int) $match[1]) - 1;
+                if (! array_key_exists($paramKey, $routerParams)) {
+                    throw new RuntimeException(sprintf('Router param does not exist at key %s', $match[1]), 1);
+                }
+
+                $podcastParam = $routerParams[$paramKey];
+
                 // get podcast id
                 $podcastId = null;
-                if (is_numeric($routerParams[0])) {
-                    $podcastId = (int) $routerParams[0];
+                if (is_numeric($podcastParam)) {
+                    $podcastId = (int) $podcastParam;
                 } else {
-                    $podcast = (new PodcastModel())->getPodcastByHandle($routerParams[0]);
+                    $podcast = (new PodcastModel())->getPodcastByHandle($podcastParam);
                     if ($podcast instanceof Podcast) {
                         $podcastId = $podcast->id;
                     }
                 }
 
                 if ($podcastId !== null) {
-                    $permission = str_replace('#', '#' . $podcastId, $permission);
+                    $permission = str_replace('$' . $match[1], '#' . $podcastId, $permission);
                 }
             }
 

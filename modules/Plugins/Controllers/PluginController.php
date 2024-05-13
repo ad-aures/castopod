@@ -74,8 +74,12 @@ class PluginController extends BaseController
         ]);
     }
 
-    public function generalSettings(string $vendor, string $package): string
-    {
+    public function settings(
+        string $vendor,
+        string $package,
+        string $podcastId = null,
+        string $episodeId = null
+    ): string {
         /** @var Plugins $plugins */
         $plugins = service('plugins');
 
@@ -85,18 +89,56 @@ class PluginController extends BaseController
             throw PageNotFoundException::forPageNotFound();
         }
 
-        helper('form');
-        replace_breadcrumb_params([
+        $type = 'general';
+        $context = null;
+        $breadcrumbReplacements = [
             $vendor  => $vendor,
             $package => $package,
-        ]);
-        return view('plugins/settings_general', [
+        ];
+        $data = [
             'plugin' => $plugin,
-        ]);
+        ];
+
+        if ($podcastId !== null) {
+            $podcast = (new PodcastModel())->getPodcastById((int) $podcastId);
+
+            if (! $podcast instanceof Podcast) {
+                throw PageNotFoundException::forPageNotFound();
+            }
+
+            $type = 'podcast';
+            $context = ['podcast', (int) $podcastId];
+            $breadcrumbReplacements[0] = $podcast->handle;
+            $data['podcast'] = $podcast;
+        }
+
+        if ($episodeId !== null) {
+            $episode = (new EpisodeModel())->getEpisodeById((int) $episodeId);
+
+            if (! $episode instanceof Episode) {
+                throw PageNotFoundException::forPageNotFound();
+            }
+
+            $type = 'episode';
+            $context = ['episode', (int) $episodeId];
+            $breadcrumbReplacements[1] = $episode->title;
+            $data['episode'] = $episode;
+        }
+
+        $data['type'] = $type;
+        $data['context'] = $context;
+
+        helper('form');
+        replace_breadcrumb_params($breadcrumbReplacements);
+        return view('plugins/settings', $data);
     }
 
-    public function generalSettingsAction(string $vendor, string $package): RedirectResponse
-    {
+    public function settingsAction(
+        string $vendor,
+        string $package,
+        string $podcastId = null,
+        string $episodeId = null
+    ): RedirectResponse {
         /** @var Plugins $plugins */
         $plugins = service('plugins');
 
@@ -104,11 +146,23 @@ class PluginController extends BaseController
 
         if ($plugin === null) {
             throw PageNotFoundException::forPageNotFound();
+        }
+
+        $type = 'general';
+        $context = null;
+        if ($podcastId !== null) {
+            $type = 'podcast';
+            $context = ['podcast', (int) $podcastId];
+        }
+
+        if ($episodeId !== null) {
+            $type = 'episode';
+            $context = ['episode', (int) $episodeId];
         }
 
         // construct validation rules first
         $rules = [];
-        foreach ($plugin->getSettingsFields('general') as $field) {
+        foreach ($plugin->getSettingsFields($type) as $field) {
             $typeRules = $plugins::FIELDS_VALIDATIONS[$field->type];
             if (! in_array('permit_empty', $typeRules, true) && ! $field->optional) {
                 $typeRules[] = 'required';
@@ -140,115 +194,7 @@ class PluginController extends BaseController
                 'markdown' => new Markdown($value),
                 default    => $value === '' ? null : $value,
             };
-            $plugins->setOption($plugin, $field->key, $fieldValue);
-        }
-
-        return redirect()->back()
-            ->with('message', lang('Plugins.messages.saveSettingsSuccess', [
-                'pluginName' => $plugin->getName(),
-            ]));
-    }
-
-    public function podcastSettings(string $podcastId, string $vendor, string $package): string
-    {
-        $podcast = (new PodcastModel())->getPodcastById((int) $podcastId);
-
-        if (! $podcast instanceof Podcast) {
-            throw PageNotFoundException::forPageNotFound();
-        }
-
-        /** @var Plugins $plugins */
-        $plugins = service('plugins');
-
-        $plugin = $plugins->getPlugin($vendor, $package);
-
-        if ($plugin === null) {
-            throw PageNotFoundException::forPageNotFound();
-        }
-
-        helper('form');
-        replace_breadcrumb_params([
-            0        => $podcast->handle,
-            $vendor  => $vendor,
-            $package => $package,
-        ]);
-        return view('plugins/settings_podcast', [
-            'podcast' => $podcast,
-            'plugin'  => $plugin,
-        ]);
-    }
-
-    public function podcastSettingsAction(string $podcastId, string $vendor, string $package): RedirectResponse
-    {
-        /** @var Plugins $plugins */
-        $plugins = service('plugins');
-
-        $plugin = $plugins->getPlugin($vendor, $package);
-
-        if ($plugin === null) {
-            throw PageNotFoundException::forPageNotFound();
-        }
-
-        foreach ($plugin->getSettingsFields('podcast') as $field) {
-            $settingValue = $this->request->getPost($field->key);
-            $plugins->setOption($plugin, $field->key, $settingValue, ['podcast', (int) $podcastId]);
-        }
-
-        return redirect()->back()
-            ->with('message', lang('Plugins.messages.saveSettingsSuccess', [
-                'pluginName' => $plugin->getName(),
-            ]));
-    }
-
-    public function episodeSettings(string $podcastId, string $episodeId, string $vendor, string $package): string
-    {
-        $episode = (new EpisodeModel())->getEpisodeById((int) $episodeId);
-
-        if (! $episode instanceof Episode) {
-            throw PageNotFoundException::forPageNotFound();
-        }
-
-        /** @var Plugins $plugins */
-        $plugins = service('plugins');
-
-        $plugin = $plugins->getPlugin($vendor, $package);
-
-        if ($plugin === null) {
-            throw PageNotFoundException::forPageNotFound();
-        }
-
-        helper('form');
-        replace_breadcrumb_params([
-            0        => $episode->podcast->handle,
-            1        => $episode->title,
-            $vendor  => $vendor,
-            $package => $package,
-        ]);
-        return view('plugins/settings_episode', [
-            'podcast' => $episode->podcast,
-            'episode' => $episode,
-            'plugin'  => $plugin,
-        ]);
-    }
-
-    public function episodeSettingsAction(
-        string $podcastId,
-        string $episodeId,
-        string $vendor,
-        string $package
-    ): RedirectResponse {
-        /** @var Plugins $plugins */
-        $plugins = service('plugins');
-
-        $plugin = $plugins->getPlugin($vendor, $package);
-
-        if ($plugin === null) {
-            throw PageNotFoundException::forPageNotFound();
-        }
-
-        foreach ($plugin->getSettingsFields('episode') as $field) {
-            $settingValue = $this->request->getPost($field->key);
-            $plugins->setOption($plugin, $field->key, $settingValue, ['episode', (int) $episodeId]);
+            $plugins->setOption($plugin, $field->key, $fieldValue, $context);
         }
 
         return redirect()->back()

@@ -58,7 +58,7 @@ class Breadcrumb
      *
      * The breadcrumb is now `Home / podcasts / foo / episodes / bar / I Pity The Foo`
      *
-     * @param string[] $newParams
+     * @param array<string|int,string> $newParams
      */
     public function replaceParams(array $newParams): void
     {

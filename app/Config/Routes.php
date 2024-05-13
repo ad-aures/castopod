@@ -231,7 +231,7 @@ $routes->get('/pages/(:slug)', 'PageController::index/$1', [
 $routes->group('@(:podcastHandle)', static function ($routes): void {
     $routes->post('posts/new', 'PostController::attemptCreate/$1', [
         'as'     => 'post-attempt-create',
-        'filter' => 'permission:podcast#.manage-publications',
+        'filter' => 'permission:podcast$1.manage-publications',
     ]);
     // Post
     $routes->group('posts/(:uuid)', static function ($routes): void {
@@ -268,7 +268,7 @@ $routes->group('@(:podcastHandle)', static function ($routes): void {
         // Actions
         $routes->post('action', 'PostController::attemptAction/$1/$2', [
             'as'     => 'post-attempt-action',
-            'filter' => 'permission:podcast#.interact-as',
+            'filter' => 'permission:podcast$1.interact-as',
         ]);
         $routes->post(
             'block-actor',
@@ -288,7 +288,7 @@ $routes->group('@(:podcastHandle)', static function ($routes): void {
         );
         $routes->post('delete', 'PostController::attemptDelete/$1/$2', [
             'as'     => 'post-attempt-delete',
-            'filter' => 'permission:podcast#.manage-publications',
+            'filter' => 'permission:podcast$1.manage-publications',
         ]);
         $routes->get(
             'remote/(:postAction)',
