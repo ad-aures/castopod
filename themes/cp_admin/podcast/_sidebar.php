@@ -90,7 +90,7 @@ $podcastNavigation = [
 ];
 
 foreach (plugins()->getPluginsWithPodcastSettings() as $plugin) {
-    $route = route_to('plugins-podcast-settings', $podcast->id, $plugin->getKey());
+    $route = route_to('plugins-settings-podcast', $plugin->getVendor(), $plugin->getPackage(), $podcast->id);
     $podcastNavigation['plugins']['items'][] = $route;
     $podcastNavigation['plugins']['items-labels'][$route] = $plugin->getName();
     $podcastNavigation['plugins']['items-permissions'][$route] = 'edit';

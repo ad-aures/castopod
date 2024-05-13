@@ -18,12 +18,12 @@
 
 <?= $this->section('headerRight') ?>
 <?php if($plugin->isActive()): ?>
-    <form class="flex justify-end" method="POST" action="<?= route_to('plugins-deactivate', $plugin->getKey()) ?>">
+    <form class="flex justify-end" method="POST" action="<?= route_to('plugins-deactivate', $plugin->getVendor(), $plugin->getPackage()) ?>">
         <?= csrf_field() ?>
         <x-Button type="submit" variant="danger"><?= lang('Plugins.deactivate') ?></x-Button>
     </form>
 <?php else: ?>
-    <form class="flex justify-end" method="POST" action="<?= route_to('plugins-activate', $plugin->getKey()) ?>">
+    <form class="flex justify-end" method="POST" action="<?= route_to('plugins-activate', $plugin->getVendor(), $plugin->getPackage()) ?>">
         <?= csrf_field() ?>
         <x-Button type="submit" variant="secondary"><?= lang('Plugins.activate') ?></x-Button>
     </form>
@@ -31,8 +31,8 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-<div class="flex flex-col items-start justify-center gap-8 mx-auto lg:flex-row-reverse">
-    <aside class="w-full pb-8 border-b lg:sticky lg:max-w-xs top-28 border-subtle lg:border-none">
+<div class="flex flex-col items-start justify-center gap-8 mx-auto xl:flex-row-reverse">
+    <aside class="w-full pb-8 border-b xl:sticky xl:max-w-xs top-28 border-subtle xl:border-none">
         <h2 class="mb-2 text-2xl font-bold font-display"><?= lang('Plugins.about') ?></h2>
         <p><?= $plugin->getDescription() ?></p>
         <a href="<?= $plugin->getHomepage() ?>" class="inline-flex items-center mt-2 font-semibold hover:underline gap-x-2"><?= icon('link') . $plugin->getHomepage() ?></a>

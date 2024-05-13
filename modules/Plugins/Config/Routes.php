@@ -5,8 +5,6 @@ declare(strict_types=1);
 use CodeIgniter\Router\RouteCollection;
 
 /** @var RouteCollection $routes */
-$routes->addPlaceholder('pluginVendor', '[a-z0-9]([_.-]?[a-z0-9]+)*');
-$routes->addPlaceholder('pluginKey', PLUGINS_KEY_PATTERN);
 
 $routes->group(
     config('Admin')
@@ -20,22 +18,38 @@ $routes->group(
                 'as'     => 'plugins-installed',
                 'filter' => 'permission:plugins.manage',
             ]);
-            $routes->get('(:pluginVendor)', 'PluginController::vendor/$1', [
+            $routes->get('(:segment)', 'PluginController::vendor/$1', [
                 'as'     => 'plugins-vendor',
                 'filter' => 'permission:plugins.manage',
             ]);
-            $routes->group('(:pluginKey)', static function ($routes): void {
+            $routes->group('(:segment)/(:segment)', static function ($routes): void {
                 $routes->get('/', 'PluginController::view/$1/$2', [
                     'as'     => 'plugins-view',
                     'filter' => 'permission:plugins.manage',
                 ]);
-                $routes->get('settings', 'PluginController::generalSettings/$1/$2', [
-                    'as'     => 'plugins-general-settings',
+                $routes->get('settings', 'PluginController::settings/$1/$2', [
+                    'as'     => 'plugins-settings-general',
                     'filter' => 'permission:plugins.manage',
                 ]);
-                $routes->post('settings', 'PluginController::generalSettingsAction/$1/$2', [
-                    'as'     => 'plugins-general-settings-action',
+                $routes->post('settings', 'PluginController::settingsAction/$1/$2', [
+                    'as'     => 'plugins-settings-general-action',
                     'filter' => 'permission:plugins.manage',
+                ]);
+                $routes->get('(:num)', 'PluginController::settings/$1/$2/$3', [
+                    'as'     => 'plugins-settings-podcast',
+                    'filter' => 'permission:podcast$3.edit',
+                ]);
+                $routes->post('(:num)', 'PluginController::settingsAction/$1/$2/$3', [
+                    'as'     => 'plugins-settings-podcast-action',
+                    'filter' => 'permission:podcast$3.edit',
+                ]);
+                $routes->get('(:num)/(:num)', 'PluginController::settings/$1/$2/$3/$4', [
+                    'as'     => 'plugins-settings-episode',
+                    'filter' => 'permission:podcast$3.episodes.edit',
+                ]);
+                $routes->post('(:num)/(:num)', 'PluginController::settingsAction/$1/$2/$3/$4', [
+                    'as'     => 'plugins-settings-episode-action',
+                    'filter' => 'permission:podcast$3.episodes.edit',
                 ]);
                 $routes->post('activate', 'PluginController::activate/$1/$2', [
                     'as'     => 'plugins-activate',
@@ -51,26 +65,6 @@ $routes->group(
                     'filter' => 'permission:plugins.manage',
                 ]);
             });
-        });
-        $routes->group('podcasts/(:num)/plugins', static function ($routes): void {
-            $routes->get('(:pluginKey)', 'PluginController::podcastSettings/$1/$2/$3', [
-                'as'     => 'plugins-podcast-settings',
-                'filter' => 'permission:podcast#.edit',
-            ]);
-            $routes->post('(:pluginKey)', 'PluginController::podcastSettingsAction/$1/$2/$3', [
-                'as'     => 'plugins-podcast-settings-action',
-                'filter' => 'permission:podcast#.edit',
-            ]);
-        });
-        $routes->group('podcasts/(:num)/episodes/(:num)/plugins', static function ($routes): void {
-            $routes->get('(:pluginKey)', 'PluginController::episodeSettings/$1/$2/$3/$4', [
-                'as'     => 'plugins-episode-settings',
-                'filter' => 'permission:podcast#.edit',
-            ]);
-            $routes->post('(:pluginKey)', 'PluginController::episodeSettingsAction/$1/$2/$3/$4', [
-                'as'     => 'plugins-episode-settings-action',
-                'filter' => 'permission:podcast#.edit',
-            ]);
         });
     }
 );

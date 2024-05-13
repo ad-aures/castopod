@@ -24,7 +24,7 @@ $routes->group(
                 'PlatformController::platforms/$1/podcasting',
                 [
                     'as'     => 'platforms-podcasting',
-                    'filter' => 'permission:podcast#.manage-platforms',
+                    'filter' => 'permission:podcast$1.manage-platforms',
                 ],
             );
             $routes->get(
@@ -32,7 +32,7 @@ $routes->group(
                 'PlatformController::platforms/$1/social',
                 [
                     'as'     => 'platforms-social',
-                    'filter' => 'permission:podcast#.manage-platforms',
+                    'filter' => 'permission:podcast$1.manage-platforms',
                 ],
             );
             $routes->get(
@@ -40,7 +40,7 @@ $routes->group(
                 'PlatformController::platforms/$1/funding',
                 [
                     'as'     => 'platforms-funding',
-                    'filter' => 'permission:podcast#.manage-platforms',
+                    'filter' => 'permission:podcast$1.manage-platforms',
                 ],
             );
             $routes->post(
@@ -48,7 +48,7 @@ $routes->group(
                 'PlatformController::attemptPlatformsUpdate/$1/$2',
                 [
                     'as'     => 'platforms-save',
-                    'filter' => 'permission:podcast#.manage-platforms',
+                    'filter' => 'permission:podcast$1.manage-platforms',
                 ],
             );
             $routes->get(
@@ -56,7 +56,7 @@ $routes->group(
                 'PlatformController::removePlatform/$1/$2/$3',
                 [
                     'as'     => 'podcast-platform-remove',
-                    'filter' => 'permission:podcast#.manage-platforms',
+                    'filter' => 'permission:podcast$1.manage-platforms',
                 ],
             );
         });

@@ -26,7 +26,7 @@ if (! function_exists('render_breadcrumb')) {
 
 if (! function_exists('replace_breadcrumb_params')) {
     /**
-     * @param string[] $newParams
+     * @param array<string|int,string> $newParams
      */
     function replace_breadcrumb_params(array $newParams): void
     {

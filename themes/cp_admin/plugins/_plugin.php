@@ -8,12 +8,12 @@
     </div>
     <img class="rounded-full min-w-16 max-w-16 aspect-square" src="<?= $plugin->getIconSrc() ?>">
     <div class="flex flex-col items-start mt-2">
-        <h2 class="flex items-center text-xl font-bold font-display gap-x-2"><a href="<?= route_to('plugins-view', $plugin->getKey()) ?>" class="hover:underline decoration-accent"><?= $plugin->getName() ?></a></h2>
+        <h2 class="flex items-center text-xl font-bold font-display gap-x-2"><a href="<?= route_to('plugins-view', $plugin->getVendor(), $plugin->getPackage()) ?>" class="hover:underline decoration-accent"><?= $plugin->getName() ?></a></h2>
         <p class="inline-flex font-mono text-xs">
             <span class="inline-flex tracking-wide bg-gray-100">
                 <a href="<?= route_to('plugins-vendor', $plugin->getVendor()) ?>" class="underline underline-offset-2 decoration-2 decoration-dotted hover:decoration-solid decoration-accent"><?= $plugin->getVendor() ?></a>
                 <span>/</span>
-                <a class="underline underline-offset-2 decoration-2 decoration-dotted hover:decoration-solid decoration-accent" href="<?= route_to('plugins-view', $plugin->getKey()) ?>"><?= $plugin->getPackage() ?></a></span>
+                <a class="underline underline-offset-2 decoration-2 decoration-dotted hover:decoration-solid decoration-accent" href="<?= route_to('plugins-view', $plugin->getVendor(), $plugin->getPackage()) ?>"><?= $plugin->getPackage() ?></a></span>
             <span class="mx-1">•</span><span class="px-1 font-mono text-xs"><?= $plugin->getVersion() ?></span>
         </p>
         <p class="mt-2 text-gray-600"><?= $plugin->getDescription() ?></p>
@@ -31,26 +31,26 @@
         </div>
         <div class="flex gap-x-2">
         <?php if($plugin->isActive()): ?>
-            <form class="flex justify-end" method="POST" action="<?= route_to('plugins-deactivate', $plugin->getKey()) ?>">
+            <form class="flex justify-end" method="POST" action="<?= route_to('plugins-deactivate', $plugin->getVendor(), $plugin->getPackage()) ?>">
                 <?= csrf_field() ?>
                 <x-Button type="submit" variant="danger" size="small"><?= lang('Plugins.deactivate') ?></x-Button>
             </form>
         <?php else: ?>
-            <form class="flex flex-col items-end justify-end gap-2" method="POST" action="<?= route_to('plugins-activate', $plugin->getKey()) ?>">
+            <form class="flex flex-col items-end justify-end gap-2" method="POST" action="<?= route_to('plugins-activate', $plugin->getVendor(), $plugin->getPackage()) ?>">
                 <?= csrf_field() ?>
                 <x-Button type="submit" variant="secondary" size="small"><?= lang('Plugins.activate') ?></x-Button>
             </form>
         <?php endif; ?>
             <?php if ($plugin->getSettings() !== []): ?>
                 <?php // @icon('equalizer-fill')?>
-                <x-IconButton uri="<?= route_to('plugins-general-settings', $plugin->getKey()) ?>" glyph="equalizer-fill"><?= lang('Plugins.settings') ?></x-IconButton>
+                <x-IconButton uri="<?= route_to('plugins-general-settings', $plugin->getVendor(), $plugin->getPackage()) ?>" glyph="equalizer-fill"><?= lang('Plugins.settings') ?></x-IconButton>
             <?php endif; ?>
             <button class="p-2 rounded-full" id="more-dropdown-<?= $plugin->getKey() ?>" data-dropdown="button" data-dropdown-target="more-dropdown-<?= $plugin->getKey() ?>-menu" aria-haspopup="true" aria-expanded="false" title="<?= lang('Common.more') ?>"><?= icon('more-2-fill') ?></button>
             <?php $items = [
                 [
                     'type'  => 'link',
                     'title' => lang('Plugins.view'),
-                    'uri'   => route_to('plugins-view', $plugin->getKey()),
+                    'uri'   => route_to('plugins-view', $plugin->getVendor(), $plugin->getPackage()),
                 ],
                 [
                     'type' => 'separator',
@@ -60,7 +60,7 @@
                     'title' => icon('delete-bin-fill', [
                         'class' => 'text-gray-500',
                     ]) . lang('Plugins.uninstall'),
-                    'uri'   => route_to('plugins-uninstall', $plugin->getKey()),
+                    'uri'   => route_to('plugins-uninstall', $plugin->getVendor(), $plugin->getPackage()),
                     'class' => 'font-semibold text-red-600',
                 ],
             ]; ?>

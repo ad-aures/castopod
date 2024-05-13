@@ -21,35 +21,35 @@ $routes->group(
         $routes->group('podcasts/(:num)/subscriptions', static function ($routes): void {
             $routes->get('/', 'SubscriptionController::list/$1', [
                 'as'     => 'subscription-list',
-                'filter' => 'permission:podcast#.manage-subscriptions',
+                'filter' => 'permission:podcast$1.manage-subscriptions',
             ]);
             $routes->get('new', 'SubscriptionController::create/$1', [
                 'as'     => 'subscription-create',
-                'filter' => 'permission:podcast#.manage-subscriptions',
+                'filter' => 'permission:podcast$1.manage-subscriptions',
             ]);
             $routes->post(
                 'new',
                 'SubscriptionController::attemptCreate/$1',
                 [
-                    'filter' => 'permission:podcast#.manage-subscriptions',
+                    'filter' => 'permission:podcast$1.manage-subscriptions',
                 ],
             );
             $routes->post('save-link', 'SubscriptionController::attemptLinkSave/$1', [
                 'as'     => 'subscription-link-save',
-                'filter' => 'permission:podcast#.manage-subscriptions',
+                'filter' => 'permission:podcast$1.manage-subscriptions',
             ]);
             // Subscription
             $routes->group('(:num)', static function ($routes): void {
                 $routes->get('/', 'SubscriptionController::view/$1/$2', [
                     'as'     => 'subscription-view',
-                    'filter' => 'permission:podcast#.manage-subscriptions',
+                    'filter' => 'permission:podcast$1.manage-subscriptions',
                 ]);
                 $routes->get(
                     'edit',
                     'SubscriptionController::edit/$1/$2',
                     [
                         'as'     => 'subscription-edit',
-                        'filter' => 'permission:podcast#.manage-subscriptions',
+                        'filter' => 'permission:podcast$1.manage-subscriptions',
                     ],
                 );
                 $routes->post(
@@ -57,7 +57,7 @@ $routes->group(
                     'SubscriptionController::attemptEdit/$1/$2',
                     [
                         'as'     => 'subscription-edit',
-                        'filter' => 'permission:podcast#.manage-subscriptions',
+                        'filter' => 'permission:podcast$1.manage-subscriptions',
                     ],
                 );
                 $routes->get(
@@ -65,7 +65,7 @@ $routes->group(
                     'SubscriptionController::regenerateToken/$1/$2',
                     [
                         'as'     => 'subscription-regenerate-token',
-                        'filter' => 'permission:podcast#.manage-subscriptions',
+                        'filter' => 'permission:podcast$1.manage-subscriptions',
                     ]
                 );
                 $routes->get(
@@ -73,14 +73,14 @@ $routes->group(
                     'SubscriptionController::suspend/$1/$2',
                     [
                         'as'     => 'subscription-suspend',
-                        'filter' => 'permission:podcast#.manage-subscriptions',
+                        'filter' => 'permission:podcast$1.manage-subscriptions',
                     ],
                 );
                 $routes->post(
                     'suspend',
                     'SubscriptionController::attemptSuspend/$1/$2',
                     [
-                        'filter' => 'permission:podcast#.manage-subscriptions',
+                        'filter' => 'permission:podcast$1.manage-subscriptions',
                     ],
                 );
                 $routes->get(
@@ -88,7 +88,7 @@ $routes->group(
                     'SubscriptionController::resume/$1/$2',
                     [
                         'as'     => 'subscription-resume',
-                        'filter' => 'permission:podcast#.manage-subscriptions',
+                        'filter' => 'permission:podcast$1.manage-subscriptions',
                     ],
                 );
                 $routes->get(
@@ -96,14 +96,14 @@ $routes->group(
                     'SubscriptionController::delete/$1/$2',
                     [
                         'as'     => 'subscription-delete',
-                        'filter' => 'permission:podcast#.manage-subscriptions',
+                        'filter' => 'permission:podcast$1.manage-subscriptions',
                     ],
                 );
                 $routes->post(
                     'delete',
                     'SubscriptionController::attemptDelete/$1/$2',
                     [
-                        'filter' => 'permission:podcast#.manage-subscriptions',
+                        'filter' => 'permission:podcast$1.manage-subscriptions',
                     ],
                 );
             });

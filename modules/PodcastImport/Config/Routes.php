@@ -35,15 +35,15 @@ $routes->group(
         $routes->group('podcasts/(:num)', static function ($routes): void {
             $routes->get('imports', 'PodcastImportController::podcastList/$1', [
                 'as'     => 'podcast-imports',
-                'filter' => 'permission:podcast#.manage-import',
+                'filter' => 'permission:podcast$1.manage-import',
             ]);
             $routes->get('sync-feeds', 'PodcastImportController::syncImport/$1', [
                 'as'     => 'podcast-imports-sync',
-                'filter' => 'permission:podcast#.manage-import',
+                'filter' => 'permission:podcast$1.manage-import',
             ]);
             $routes->post('sync-feeds', 'PodcastImportController::syncImportAttempt/$1', [
                 'as'     => 'podcast-imports-sync',
-                'filter' => 'permission:podcast#.manage-import',
+                'filter' => 'permission:podcast$1.manage-import',
             ]);
         });
     }
